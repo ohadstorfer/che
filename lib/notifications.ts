@@ -123,6 +123,40 @@ export async function disableAllSubscriptions(userId: string): Promise<void> {
     .eq("user_id", userId);
 }
 
+export async function ensureSubscribed(args: {
+  userId: string;
+  reminderTime: string;
+}): Promise<{ ok: true } | { ok: false; reason: string }> {
+  if (isWeb()) {
+    return await subscribeWebPush({
+      userId: args.userId,
+      reminderTime: args.reminderTime,
+      notificationsEnabled: true,
+    });
+  }
+  const res = await registerPushSubscription({
+    userId: args.userId,
+    reminderTime: args.reminderTime,
+    notificationsEnabled: true,
+  });
+  if (res.ok) return { ok: true };
+  return { ok: false, reason: res.reason };
+}
+
+export async function isSubscriptionActive(userId: string): Promise<boolean> {
+  const { data } = await supabase
+    .from("push_subscriptions")
+    .select("id")
+    .eq("user_id", userId)
+    .eq("notifications_enabled", true)
+    .limit(1);
+  if (!data || data.length === 0) return false;
+  if (isWeb() && typeof Notification !== "undefined") {
+    return Notification.permission === "granted";
+  }
+  return true;
+}
+
 export type WebPushResult =
   | { ok: true }
   | { ok: false; reason: string };

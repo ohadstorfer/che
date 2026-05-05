@@ -2,8 +2,6 @@ import { useState } from "react";
 import { View, type ViewStyle } from "react-native";
 import { useRouter } from "expo-router";
 import {
-  Bell,
-  Clock,
   User,
   Trash2,
   RotateCcw,
@@ -22,18 +20,9 @@ import {
   ListRow,
   MateLink,
   Screen,
-  Switch,
   Text,
   UnderlineInput,
 } from "@/components/ui";
-import {
-  isNative,
-  isWeb,
-  registerPushSubscription,
-  subscribeWebPush,
-  unsubscribeWebPush,
-  updateSubscription,
-} from "@/lib/notifications";
 
 type ConfirmState = {
   title: string;
@@ -55,9 +44,7 @@ export default function SettingsScreen() {
   const signOutAndReset = useStore((s) => s.signOutAndReset);
   const sessions = useStore((s) => s.sessions);
 
-  const [time, setTime] = useState(settings.reminderTime);
   const [name, setName] = useState(settings.displayName);
-  const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [confirm, setConfirm] = useState<ConfirmState>(null);
 
@@ -66,71 +53,6 @@ export default function SettingsScreen() {
   const goBack = () => {
     if (router.canGoBack()) router.back();
     else router.replace("/home");
-  };
-
-  const onToggleNotifications = async (next: boolean) => {
-    setBusy(true);
-    setMsg(null);
-    try {
-      const merged = await setSettings({ notificationsEnabled: next });
-      if (next) {
-        if (isNative()) {
-          if (!userId) {
-            await setSettings({ notificationsEnabled: false });
-            setMsg(authError ? `No se pudo iniciar sesión: ${authError}` : "No hay sesión iniciada");
-            return;
-          }
-          const res = await registerPushSubscription({
-            userId,
-            reminderTime: merged.reminderTime,
-            notificationsEnabled: true,
-          });
-          if (!res.ok) {
-            await setSettings({ notificationsEnabled: false });
-            setMsg(`No se pudo activar: ${res.reason}`);
-          } else {
-            setMsg("Notificaciones activadas");
-          }
-        } else if (isWeb()) {
-          if (!userId) {
-            await setSettings({ notificationsEnabled: false });
-            setMsg(authError ? `No se pudo iniciar sesión: ${authError}` : "No hay sesión iniciada");
-            return;
-          }
-          const res = await subscribeWebPush({
-            userId,
-            reminderTime: merged.reminderTime,
-            notificationsEnabled: true,
-          });
-          if (!res.ok) {
-            await setSettings({ notificationsEnabled: false });
-            setMsg(res.reason);
-          } else {
-            setMsg("Notificaciones activadas");
-          }
-        }
-      } else {
-        if (isNative() && userId) {
-          await updateSubscription({ userId, notificationsEnabled: false });
-        }
-        if (isWeb() && userId) await unsubscribeWebPush(userId);
-        setMsg("Recordatorios desactivados");
-      }
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const onSaveTime = async () => {
-    if (!/^\d{2}:\d{2}$/.test(time)) {
-      setMsg("Formato inválido (usá HH:MM)");
-      return;
-    }
-    const merged = await setSettings({ reminderTime: time });
-    if (settings.notificationsEnabled && userId) {
-      await updateSubscription({ userId, reminderTime: merged.reminderTime });
-    }
-    setMsg("Horario guardado");
   };
 
   return (
@@ -233,57 +155,6 @@ export default function SettingsScreen() {
             />
           </View>
         </View>
-
-        {/* Reminders */}
-        <ListGroup
-          header="recordatorios"
-          footer={
-            isWeb()
-              ? "En iPhone, agregá la app a tu pantalla de inicio (Compartir → Agregar a inicio) antes de activar."
-              : "Push real vía Supabase + Expo Push."
-          }
-        >
-          <ListRow
-            title="Notificación diaria"
-            subtitle="Recordatorio para mantener tu racha"
-            leadingIcon={<Bell size={18} color={theme.colors.greenSoft} strokeWidth={2} />}
-            trailing={
-              <Switch
-                value={settings.notificationsEnabled}
-                onValueChange={onToggleNotifications}
-                disabled={busy}
-              />
-            }
-          />
-          <View style={{ paddingVertical: 12, gap: theme.spacing.sm }}>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing.sm }}>
-              <Clock size={18} color={theme.colors.greenSoft} strokeWidth={2} />
-              <Text variant="body" color="ink">
-                hora del recordatorio
-              </Text>
-            </View>
-            <View style={{ flexDirection: "row", gap: theme.spacing.sm, alignItems: "flex-end" }}>
-              <View style={{ flex: 1 }}>
-                <UnderlineInput
-                  value={time}
-                  onChangeText={setTime}
-                  variant="body"
-                  color="ink"
-                  placeholder="19:00"
-                  maxLength={5}
-                  keyboardType="numbers-and-punctuation"
-                />
-              </View>
-              <Button
-                label="guardar"
-                variant="tertiary"
-                size="compact"
-                fullWidth={false}
-                onPress={onSaveTime}
-              />
-            </View>
-          </View>
-        </ListGroup>
 
         {msg ? (
           <Text variant="caption1" color="inkSoft">

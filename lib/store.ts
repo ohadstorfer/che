@@ -26,8 +26,8 @@ import type {
 } from "@/types/exercise";
 
 const defaultSettings: Settings = {
-  reminderTime: "19:00",
-  notificationsEnabled: false,
+  reminderTime: "08:00",
+  notificationsEnabled: true,
   displayName: "",
 };
 

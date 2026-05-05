@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -7,7 +7,7 @@ import {
   type ViewStyle,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { ArrowUp, Settings as SettingsIcon } from "lucide-react-native";
+import { ArrowUp, Bell, Settings as SettingsIcon } from "lucide-react-native";
 import { useStore } from "@/lib/store";
 import { generateExercises } from "@/lib/claude";
 import { useTheme } from "@/lib/theme";
@@ -22,6 +22,13 @@ import {
   Text,
   Wordmark,
 } from "@/components/ui";
+import {
+  ensureSubscribed,
+  isIos,
+  isStandalone,
+  isSubscriptionActive,
+  isWeb,
+} from "@/lib/notifications";
 import type { GenerateResponse } from "@/types/exercise";
 
 type Length = "corto" | "standard";
@@ -45,16 +52,59 @@ function sliceToCount(data: GenerateResponse, count: number): GenerateResponse {
   return { ...data, sections };
 }
 
+type NotifState =
+  | { kind: "loading" }
+  | { kind: "needs-install" }
+  | { kind: "needs-activate" }
+  | { kind: "active" }
+  | { kind: "error"; reason: string };
+
 export default function HomeScreen() {
   const router = useRouter();
   const theme = useTheme();
   const saveSession = useStore((s) => s.saveSession);
   const streak = useStore((s) => s.streak);
+  const userId = useStore((s) => s.userId);
+  const settings = useStore((s) => s.settings);
   const [text, setText] = useState("");
   const [length, setLength] = useState<Length>("standard");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notif, setNotif] = useState<NotifState>({ kind: "loading" });
+  const [activating, setActivating] = useState(false);
   const inputRef = useRef<TextInput>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      if (!userId) {
+        if (!cancelled) setNotif({ kind: "loading" });
+        return;
+      }
+      if (isWeb() && isIos() && !isStandalone()) {
+        if (!cancelled) setNotif({ kind: "needs-install" });
+        return;
+      }
+      const active = await isSubscriptionActive(userId);
+      if (cancelled) return;
+      setNotif({ kind: active ? "active" : "needs-activate" });
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  const onActivate = async () => {
+    if (!userId || activating) return;
+    setActivating(true);
+    const res = await ensureSubscribed({
+      userId,
+      reminderTime: settings.reminderTime,
+    });
+    setActivating(false);
+    if (res.ok) setNotif({ kind: "active" });
+    else setNotif({ kind: "error", reason: res.reason });
+  };
 
   const submitTopic = async (topic: string) => {
     const value = topic.trim();
@@ -116,6 +166,48 @@ export default function HomeScreen() {
               />
             </View>
           </View>
+
+          {/* Notification activation banner */}
+          {notif.kind === "needs-install" || notif.kind === "needs-activate" || notif.kind === "error" ? (
+            <Pressable
+              onPress={notif.kind === "needs-activate" || notif.kind === "error" ? onActivate : undefined}
+              feedback={notif.kind === "needs-activate" ? "scale" : "none"}
+              haptic={notif.kind === "needs-activate" ? "impactLight" : undefined}
+              style={{
+                marginTop: 16,
+                borderWidth: 1,
+                borderColor: theme.colors.greenLine,
+                borderRadius: 14,
+                backgroundColor: theme.colors.bone,
+                paddingVertical: 12,
+                paddingHorizontal: 14,
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 12,
+                opacity: activating ? 0.6 : 1,
+              }}
+            >
+              <Bell size={18} color={theme.colors.greenSoft} strokeWidth={2} />
+              <View style={{ flex: 1 }}>
+                <Text variant="footnote" weight="semibold" color="green">
+                  {notif.kind === "needs-install"
+                    ? "agregá la app a tu pantalla de inicio"
+                    : notif.kind === "error"
+                      ? "no se pudo activar — tocá para reintentar"
+                      : activating
+                        ? "activando..."
+                        : "activá las notificaciones"}
+                </Text>
+                <Text variant="caption1" color="inkSoft">
+                  {notif.kind === "needs-install"
+                    ? "Compartir → Agregar a inicio. Después abrila desde el ícono."
+                    : notif.kind === "error"
+                      ? notif.reason
+                      : "Recordatorios cada 30 min desde las 8 a.m."}
+                </Text>
+              </View>
+            </Pressable>
+          ) : null}
 
           {/* Greeting block */}
           <View style={{ marginTop: 72 }}>
