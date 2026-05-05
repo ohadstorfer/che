@@ -1,0 +1,17 @@
+project_id = "qbzjaseetusewxnfgpes"
+
+[auth]
+enabled = true
+site_url = "che://"
+additional_redirect_urls = ["http://localhost:8081", "http://localhost:19006"]
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false
+
+[functions.generate-exercises]
+verify_jwt = false
+
+[functions.send-reminder]
+verify_jwt = false
