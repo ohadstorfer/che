@@ -9,6 +9,7 @@ import {
   RotateCcw,
   LogOut,
   Mail,
+  BookOpen,
 } from "lucide-react-native";
 import { useStore } from "@/lib/store";
 import { useTheme } from "@/lib/theme";
@@ -26,11 +27,11 @@ import {
   UnderlineInput,
 } from "@/components/ui";
 import {
-  clearLocalWebReminder,
   isNative,
   isWeb,
   registerPushSubscription,
-  scheduleLocalWebReminder,
+  subscribeWebPush,
+  unsubscribeWebPush,
   updateSubscription,
 } from "@/lib/notifications";
 
@@ -52,6 +53,7 @@ export default function SettingsScreen() {
   const resetStreak = useStore((s) => s.resetStreak);
   const clearAll = useStore((s) => s.clearAll);
   const signOutAndReset = useStore((s) => s.signOutAndReset);
+  const sessions = useStore((s) => s.sessions);
 
   const [time, setTime] = useState(settings.reminderTime);
   const [name, setName] = useState(settings.displayName);
@@ -90,19 +92,28 @@ export default function SettingsScreen() {
             setMsg("Notificaciones activadas");
           }
         } else if (isWeb()) {
-          const ok = await scheduleLocalWebReminder(merged.reminderTime);
-          if (!ok) {
+          if (!userId) {
             await setSettings({ notificationsEnabled: false });
-            setMsg("Permiso denegado o navegador no soportado");
+            setMsg(authError ? `No se pudo iniciar sesión: ${authError}` : "No hay sesión iniciada");
+            return;
+          }
+          const res = await subscribeWebPush({
+            userId,
+            reminderTime: merged.reminderTime,
+            notificationsEnabled: true,
+          });
+          if (!res.ok) {
+            await setSettings({ notificationsEnabled: false });
+            setMsg(res.reason);
           } else {
-            setMsg("Recordatorio web local activado. Para push real, instalá la app nativa.");
+            setMsg("Notificaciones activadas");
           }
         }
       } else {
         if (isNative() && userId) {
           await updateSubscription({ userId, notificationsEnabled: false });
         }
-        if (isWeb()) clearLocalWebReminder();
+        if (isWeb() && userId) await unsubscribeWebPush(userId);
         setMsg("Recordatorios desactivados");
       }
     } finally {
@@ -116,12 +127,8 @@ export default function SettingsScreen() {
       return;
     }
     const merged = await setSettings({ reminderTime: time });
-    if (settings.notificationsEnabled) {
-      if (isNative() && userId) {
-        await updateSubscription({ userId, reminderTime: merged.reminderTime });
-      } else if (isWeb()) {
-        await scheduleLocalWebReminder(merged.reminderTime);
-      }
+    if (settings.notificationsEnabled && userId) {
+      await updateSubscription({ userId, reminderTime: merged.reminderTime });
     }
     setMsg("Horario guardado");
   };
@@ -151,6 +158,20 @@ export default function SettingsScreen() {
 
         {authError ? (
           <Banner tone="error" title="Sesión Supabase" message={authError} />
+        ) : null}
+
+        {/* Mis ejercicios */}
+        {sessions.length > 0 ? (
+          <ListGroup header="ejercicios">
+            <ListRow
+              title="mis ejercicios"
+              subtitle={`${sessions.length} ${sessions.length === 1 ? "sesión" : "sesiones"} guardadas`}
+              leadingIcon={<BookOpen size={18} color={theme.colors.greenSoft} strokeWidth={2} />}
+              showChevron
+              onPress={() => router.push("/sessions")}
+              isLast
+            />
+          </ListGroup>
         ) : null}
 
         {/* Account */}
@@ -218,7 +239,7 @@ export default function SettingsScreen() {
           header="recordatorios"
           footer={
             isWeb()
-              ? "En web el aviso es local: solo funciona con la pestaña abierta. Para push real, instalá la app nativa."
+              ? "En iPhone, agregá la app a tu pantalla de inicio (Compartir → Agregar a inicio) antes de activar."
               : "Push real vía Supabase + Expo Push."
           }
         >

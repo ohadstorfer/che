@@ -123,41 +123,110 @@ export async function disableAllSubscriptions(userId: string): Promise<void> {
     .eq("user_id", userId);
 }
 
-export async function scheduleLocalWebReminder(time: string): Promise<boolean> {
-  if (!isWeb() || typeof window === "undefined") return false;
-  if (typeof Notification === "undefined") return false;
+export type WebPushResult =
+  | { ok: true }
+  | { ok: false; reason: string };
+
+export async function subscribeWebPush(args: {
+  userId: string;
+  reminderTime: string;
+  notificationsEnabled: boolean;
+}): Promise<WebPushResult> {
+  if (!isWeb() || typeof window === "undefined") {
+    return { ok: false, reason: "no-web" };
+  }
+  if (typeof Notification === "undefined" || !("serviceWorker" in navigator) || !("PushManager" in window)) {
+    return { ok: false, reason: "Tu navegador no soporta notificaciones push" };
+  }
+  if (isIos() && !isStandalone()) {
+    return {
+      ok: false,
+      reason: "Agregá la app a tu pantalla de inicio (Compartir → Agregar a inicio) y volvé a intentar.",
+    };
+  }
+
   const perm = await Notification.requestPermission();
-  if (perm !== "granted") return false;
-  const handle = (window as unknown as { __cheReminder?: number }).__cheReminder;
-  if (handle) window.clearTimeout(handle);
-  const next = nextOccurrence(time);
-  const ms = next.getTime() - Date.now();
-  const id = window.setTimeout(() => {
-    new Notification("Che", {
-      body: "Hora de practicar tu español 💪",
-      icon: "/icon-192.png",
+  if (perm !== "granted") return { ok: false, reason: "Permiso denegado" };
+
+  const reg = await navigator.serviceWorker.register("/sw.js");
+  await navigator.serviceWorker.ready;
+
+  const { data: keyData, error: keyErr } = await supabase.functions.invoke<{ publicKey: string }>(
+    "vapid-public",
+    { method: "GET" },
+  );
+  if (keyErr || !keyData?.publicKey) {
+    return { ok: false, reason: "no se pudo obtener VAPID public key" };
+  }
+  const publicKey = keyData.publicKey;
+
+  let sub = await reg.pushManager.getSubscription();
+  if (!sub) {
+    sub = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(publicKey),
     });
-    scheduleLocalWebReminder(time);
-  }, ms);
-  (window as unknown as { __cheReminder?: number }).__cheReminder = id;
-  return true;
+  }
+
+  const json = sub.toJSON() as { endpoint?: string; keys?: { p256dh?: string; auth?: string } };
+  if (!json.endpoint || !json.keys?.p256dh || !json.keys?.auth) {
+    return { ok: false, reason: "subscription incompleta" };
+  }
+
+  const tz = resolveTz();
+  const { error } = await supabase.from("push_subscriptions").upsert(
+    {
+      user_id: args.userId,
+      expo_push_token: null,
+      platform: "web",
+      web_push_endpoint: json.endpoint,
+      web_push_p256dh: json.keys.p256dh,
+      web_push_auth: json.keys.auth,
+      reminder_time: args.reminderTime,
+      timezone: tz,
+      notifications_enabled: args.notificationsEnabled,
+    },
+    { onConflict: "web_push_endpoint" },
+  );
+  if (error) return { ok: false, reason: error.message };
+  return { ok: true };
 }
 
-export function clearLocalWebReminder(): void {
-  if (!isWeb() || typeof window === "undefined") return;
-  const handle = (window as unknown as { __cheReminder?: number }).__cheReminder;
-  if (handle) {
-    window.clearTimeout(handle);
-    (window as unknown as { __cheReminder?: number }).__cheReminder = undefined;
+export async function unsubscribeWebPush(userId: string): Promise<void> {
+  await supabase
+    .from("push_subscriptions")
+    .update({ notifications_enabled: false })
+    .eq("user_id", userId)
+    .not("web_push_endpoint", "is", null);
+  if (typeof navigator !== "undefined" && "serviceWorker" in navigator) {
+    const reg = await navigator.serviceWorker.getRegistration();
+    const sub = await reg?.pushManager.getSubscription();
+    if (sub) await sub.unsubscribe();
   }
 }
 
-function nextOccurrence(time: string): Date {
-  const [h, m] = time.split(":").map((n) => parseInt(n, 10));
-  const d = new Date();
-  d.setHours(Number.isFinite(h) ? h : 19, Number.isFinite(m) ? m : 0, 0, 0);
-  if (d.getTime() <= Date.now()) d.setDate(d.getDate() + 1);
-  return d;
+export function isIos(): boolean {
+  if (typeof navigator === "undefined") return false;
+  return /iPad|iPhone|iPod/.test(navigator.userAgent);
+}
+
+export function isStandalone(): boolean {
+  if (typeof window === "undefined") return false;
+  const navAny = window.navigator as unknown as { standalone?: boolean };
+  return (
+    navAny.standalone === true ||
+    (typeof window.matchMedia === "function" &&
+      window.matchMedia("(display-mode: standalone)").matches)
+  );
+}
+
+function urlBase64ToUint8Array(base64: string): Uint8Array {
+  const padding = "=".repeat((4 - (base64.length % 4)) % 4);
+  const b64 = (base64 + padding).replace(/-/g, "+").replace(/_/g, "/");
+  const raw = atob(b64);
+  const out = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
+  return out;
 }
 
 function resolveTz(): string {

@@ -11,7 +11,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#FAF7F2"
+      "backgroundColor": "#F1EEE6"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -25,7 +25,7 @@
       "package": "com.che.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#FAF7F2"
+        "backgroundColor": "#F1EEE6"
       }
     },
     "web": {
@@ -34,8 +34,8 @@
       "favicon": "./assets/icon.png",
       "name": "Che — Aprendé español",
       "shortName": "Che",
-      "themeColor": "#2E5A88",
-      "backgroundColor": "#FAF7F2",
+      "themeColor": "#3E5641",
+      "backgroundColor": "#F1EEE6",
       "display": "standalone",
       "orientation": "portrait"
     },
@@ -45,7 +45,7 @@
         "expo-notifications",
         {
           "icon": "./assets/icon.png",
-          "color": "#2E5A88"
+          "color": "#3E5641"
         }
       ]
     ],

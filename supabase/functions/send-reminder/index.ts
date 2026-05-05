@@ -1,22 +1,28 @@
 // Edge function: POST /functions/v1/send-reminder
 // Triggered by pg_cron every 15 minutes (see migrations/20260427000002_cron.sql).
 // Sends a recurring nudge every ~30 minutes from the user's reminder_time
-// until they complete today's class (streaks.last_practice_date == today).
-// Verifies a CRON_SECRET; pushes via the Expo Push Service.
+// (no earlier than 08:00 local) until they complete today's class
+// (streaks.last_practice_date == today). Two delivery channels:
+// - Expo Push (native iOS/Android via Expo)
+// - Web Push (PWA, including iOS 16.4+ home-screen)
 
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import webpush from "npm:web-push@3.6.7";
 import { json } from "../_shared/cors.ts";
 
 type PushSub = {
   id: string;
   user_id: string;
-  expo_push_token: string;
+  expo_push_token: string | null;
   platform: "ios" | "android" | "web";
   reminder_time: string;
   timezone: string;
   notifications_enabled: boolean;
   last_sent_at: string | null;
   last_text_index: number;
+  web_push_endpoint: string | null;
+  web_push_p256dh: string | null;
+  web_push_auth: string | null;
 };
 
 type Streak = {
@@ -34,8 +40,11 @@ type ExpoMessage = {
   channelId?: string;
 };
 
+type Pick = { sub: PushSub; nextIdx: number; body: string };
+
 const EXPO_PUSH_URL = "https://exp.host/--/api/v2/push/send";
 const MIN_GAP_MINUTES = 25;
+const EARLIEST_LOCAL = "08:00";
 const BATCH_SIZE = 100;
 
 const MESSAGES = [
@@ -49,15 +58,14 @@ const MESSAGES = [
   "Sumá un día más a tu racha 📈",
 ];
 
-Deno.serve(async (req) => {
-  const cronSecret = Deno.env.get("CRON_SECRET");
-  if (cronSecret) {
-    const auth = req.headers.get("authorization") || "";
-    if (auth !== `Bearer ${cronSecret}`) {
-      return json({ error: "unauthorized" }, { status: 401 });
-    }
-  }
+const VAPID_PUBLIC = Deno.env.get("VAPID_PUBLIC_KEY") ?? "";
+const VAPID_PRIVATE = Deno.env.get("VAPID_PRIVATE_KEY") ?? "";
+const VAPID_SUBJECT = Deno.env.get("VAPID_SUBJECT") ?? "";
+if (VAPID_PUBLIC && VAPID_PRIVATE && VAPID_SUBJECT) {
+  webpush.setVapidDetails(VAPID_SUBJECT, VAPID_PUBLIC, VAPID_PRIVATE);
+}
 
+Deno.serve(async (req) => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const serviceRole = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   if (!supabaseUrl || !serviceRole) {
@@ -68,10 +76,18 @@ Deno.serve(async (req) => {
     auth: { persistSession: false },
   });
 
+  const { data: cronSecret } = await supabase.rpc("get_cron_secret");
+  if (typeof cronSecret === "string" && cronSecret.length > 0) {
+    const auth = req.headers.get("authorization") || "";
+    if (auth !== `Bearer ${cronSecret}`) {
+      return json({ error: "unauthorized" }, { status: 401 });
+    }
+  }
+
   const { data: subs, error: subsErr } = await supabase
     .from("push_subscriptions")
     .select(
-      "id,user_id,expo_push_token,platform,reminder_time,timezone,notifications_enabled,last_sent_at,last_text_index",
+      "id,user_id,expo_push_token,platform,reminder_time,timezone,notifications_enabled,last_sent_at,last_text_index,web_push_endpoint,web_push_p256dh,web_push_auth",
     )
     .eq("notifications_enabled", true);
 
@@ -101,7 +117,8 @@ Deno.serve(async (req) => {
     const streak = streakByUser.get(s.user_id);
     if (streak?.last_practice_date === todayLocal) continue;
     const localNow = localTimeInTz(s.timezone, now);
-    if (localNow < s.reminder_time) continue;
+    const earliest = s.reminder_time > EARLIEST_LOCAL ? s.reminder_time : EARLIEST_LOCAL;
+    if (localNow < earliest) continue;
     if (s.last_sent_at) {
       const gapMs = now.getTime() - new Date(s.last_sent_at).getTime();
       if (gapMs < MIN_GAP_MINUTES * 60_000) continue;
@@ -113,80 +130,117 @@ Deno.serve(async (req) => {
     return json({ ok: true, sent: 0, total: candidates.length });
   }
 
-  const picks = due.map((s) => {
+  const picks: Pick[] = due.map((s) => {
     const nextIdx = (s.last_text_index + 1) % MESSAGES.length;
     return { sub: s, nextIdx, body: pickBody(nextIdx, streakByUser.get(s.user_id)) };
   });
 
-  const messages: ExpoMessage[] = picks.map((p) => ({
-    to: p.sub.expo_push_token,
-    title: "Che",
-    body: p.body,
-    sound: "default",
-    channelId: "default",
-    data: { url: "che://" },
-  }));
+  const expoPicks = picks.filter((p) => p.sub.expo_push_token);
+  const webPicks = picks.filter((p) => p.sub.web_push_endpoint);
 
-  let sentCount = 0;
-  const invalidTokens: string[] = [];
-  const sentTokens = new Set<string>();
+  const sentSubIds = new Set<string>();
+  const expiredSubIds: string[] = [];
 
-  for (let i = 0; i < messages.length; i += BATCH_SIZE) {
-    const batch = messages.slice(i, i + BATCH_SIZE);
-    const res = await fetch(EXPO_PUSH_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Accept-Encoding": "gzip, deflate",
-      },
-      body: JSON.stringify(batch),
-    });
-    if (!res.ok) continue;
-    const payload = (await res.json()) as {
-      data?: Array<
-        { status: "ok" | "error"; id?: string; details?: { error?: string } }
-      >;
-    };
-    const tickets = payload.data ?? [];
-    tickets.forEach((t, idx) => {
-      const token = batch[idx].to;
-      if (t.status === "ok") {
-        sentCount++;
-        sentTokens.add(token);
-      } else if (
-        t.details?.error === "DeviceNotRegistered" ||
-        t.details?.error === "InvalidCredentials"
-      ) {
-        invalidTokens.push(token);
-      }
-    });
-  }
-
-  if (sentCount > 0) {
-    const sentAt = now.toISOString();
-    for (const p of picks) {
-      if (!sentTokens.has(p.sub.expo_push_token)) continue;
-      await supabase
-        .from("push_subscriptions")
-        .update({ last_sent_at: sentAt, last_text_index: p.nextIdx })
-        .eq("id", p.sub.id);
+  // ----- Expo Push -----
+  if (expoPicks.length > 0) {
+    const messages: ExpoMessage[] = expoPicks.map((p) => ({
+      to: p.sub.expo_push_token!,
+      title: "Che",
+      body: p.body,
+      sound: "default",
+      channelId: "default",
+      data: { url: "che://" },
+    }));
+    for (let i = 0; i < messages.length; i += BATCH_SIZE) {
+      const batch = messages.slice(i, i + BATCH_SIZE);
+      const batchPicks = expoPicks.slice(i, i + BATCH_SIZE);
+      const res = await fetch(EXPO_PUSH_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Accept-Encoding": "gzip, deflate",
+        },
+        body: JSON.stringify(batch),
+      });
+      if (!res.ok) continue;
+      const payload = (await res.json()) as {
+        data?: Array<
+          { status: "ok" | "error"; id?: string; details?: { error?: string } }
+        >;
+      };
+      const tickets = payload.data ?? [];
+      tickets.forEach((t, idx) => {
+        const subId = batchPicks[idx].sub.id;
+        if (t.status === "ok") {
+          sentSubIds.add(subId);
+        } else if (
+          t.details?.error === "DeviceNotRegistered" ||
+          t.details?.error === "InvalidCredentials"
+        ) {
+          expiredSubIds.push(subId);
+        }
+      });
     }
   }
 
-  if (invalidTokens.length > 0) {
-    await supabase
-      .from("push_subscriptions")
-      .delete()
-      .in("expo_push_token", invalidTokens);
+  // ----- Web Push -----
+  if (webPicks.length > 0 && VAPID_PUBLIC && VAPID_PRIVATE) {
+    await Promise.all(
+      webPicks.map(async (p) => {
+        const payload = JSON.stringify({
+          title: "Che",
+          body: p.body,
+          icon: "/icon-192.png",
+          data: { url: "/" },
+          tag: "che-reminder",
+        });
+        try {
+          await webpush.sendNotification(
+            {
+              endpoint: p.sub.web_push_endpoint!,
+              keys: { p256dh: p.sub.web_push_p256dh!, auth: p.sub.web_push_auth! },
+            },
+            payload,
+            { TTL: 60 * 60 },
+          );
+          sentSubIds.add(p.sub.id);
+        } catch (e) {
+          const code = (e as { statusCode?: number }).statusCode;
+          if (code === 404 || code === 410) {
+            expiredSubIds.push(p.sub.id);
+          }
+        }
+      }),
+    );
+  }
+
+  if (sentSubIds.size > 0) {
+    const sentAt = now.toISOString();
+    await Promise.all(
+      picks
+        .filter((p) => sentSubIds.has(p.sub.id))
+        .map((p) =>
+          supabase
+            .from("push_subscriptions")
+            .update({ last_sent_at: sentAt, last_text_index: p.nextIdx })
+            .eq("id", p.sub.id)
+        ),
+    );
+  }
+
+  if (expiredSubIds.length > 0) {
+    await supabase.from("push_subscriptions").delete().in("id", expiredSubIds);
   }
 
   return json({
     ok: true,
-    sent: sentCount,
-    pruned: invalidTokens.length,
+    sent: sentSubIds.size,
+    pruned: expiredSubIds.length,
     candidates: candidates.length,
     due: due.length,
+    expo: expoPicks.length,
+    web: webPicks.length,
   });
 });
 

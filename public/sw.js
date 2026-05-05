@@ -1,6 +1,4 @@
-/* Che — minimal service worker for PWA installability.
-   No web push: real push notifications go through native (Expo Push).
-   Web fallback uses local Notification API directly from the page. */
+/* Che — service worker for PWA + Web Push (iOS 16.4+ / Android / desktop). */
 
 const CACHE = "che-shell-v1";
 
@@ -21,8 +19,28 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+self.addEventListener("push", (event) => {
+  let payload = {};
+  try {
+    payload = event.data ? event.data.json() : {};
+  } catch (_e) {
+    payload = { title: "Che", body: event.data ? event.data.text() : "" };
+  }
+  const title = payload.title || "Che";
+  const options = {
+    body: payload.body || "",
+    icon: payload.icon || "/icon-192.png",
+    badge: payload.badge || "/icon-192.png",
+    data: payload.data || { url: "/" },
+    tag: payload.tag || "che-reminder",
+    renotify: true,
+  };
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || "/";
   event.waitUntil(
     (async () => {
       const all = await self.clients.matchAll({
@@ -32,7 +50,7 @@ self.addEventListener("notificationclick", (event) => {
       for (const client of all) {
         if ("focus" in client) return client.focus();
       }
-      if (self.clients.openWindow) return self.clients.openWindow("/");
+      if (self.clients.openWindow) return self.clients.openWindow(target);
     })()
   );
 });

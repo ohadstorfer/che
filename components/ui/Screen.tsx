@@ -22,7 +22,7 @@ export function Screen({
   background = "primary",
   padded = true,
   topInset = true,
-  bottomInset = true,
+  bottomInset = false,
   scrollViewProps,
 }: Props) {
   const theme = useTheme();

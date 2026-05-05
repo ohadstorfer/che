@@ -17,7 +17,6 @@ import {
   Banner,
   Eyebrow,
   IconButton,
-  MateLink,
   Pressable,
   Screen,
   Text,
@@ -51,7 +50,6 @@ export default function HomeScreen() {
   const theme = useTheme();
   const saveSession = useStore((s) => s.saveSession);
   const streak = useStore((s) => s.streak);
-  const sessions = useStore((s) => s.sessions);
   const [text, setText] = useState("");
   const [length, setLength] = useState<Length>("standard");
   const [loading, setLoading] = useState(false);
@@ -149,7 +147,7 @@ export default function HomeScreen() {
 
           {/* Theme card */}
           <View style={{ marginTop: 40 }}>
-            <Eyebrow color="greenSoft">tema</Eyebrow>
+            
             <View
               style={{
                 marginTop: 14,
@@ -237,16 +235,6 @@ export default function HomeScreen() {
           ) : null}
 
           <View style={{ flex: 1 }} />
-
-          {/* Mis ejercicios access */}
-          {sessions.length > 0 ? (
-            <View style={{ alignItems: "center", marginBottom: 20 }}>
-              <MateLink
-                label={`mis ejercicios · ${sessions.length}`}
-                onPress={() => router.push("/sessions")}
-              />
-            </View>
-          ) : null}
 
           <Text
             variant="footnote"
