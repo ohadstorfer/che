@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { Stack, usePathname, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
+import * as SystemUI from "expo-system-ui";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useStore } from "@/lib/store";
@@ -11,6 +12,7 @@ import { getTheme } from "@/lib/theme";
 import { SplashView } from "@/components/ui";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
+SystemUI.setBackgroundColorAsync("#F1EEE6").catch(() => {});
 
 export default function RootLayout() {
   const hydrate = useStore((s) => s.hydrate);
@@ -46,7 +48,7 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: theme.colors.background }}>
-      <SafeAreaProvider>
+      <SafeAreaProvider style={{ flex: 1, backgroundColor: theme.colors.background }}>
         <StatusBar style="dark" />
         <Stack
           screenOptions={{
