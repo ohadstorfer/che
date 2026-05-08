@@ -26,7 +26,7 @@ self.addEventListener("push", (event) => {
   } catch (_e) {
     payload = { title: "Che", body: event.data ? event.data.text() : "" };
   }
-  const title = payload.title || "Che";
+  const title = typeof payload.title === "string" ? payload.title : "";
   const options = {
     body: payload.body || "",
     icon: payload.icon || "/icon-192.png",

@@ -13,6 +13,8 @@ import { generateExercises } from "@/lib/claude";
 import { useTheme } from "@/lib/theme";
 import { greeting } from "@/lib/greeting";
 import { StreakBadge } from "@/components/StreakBadge";
+import { StreakCelebration } from "@/components/StreakCelebration"; // TEMP — borrar
+import { GeneratingOverlay } from "@/components/GeneratingOverlay";
 import {
   Banner,
   Eyebrow,
@@ -59,6 +61,9 @@ type NotifState =
   | { kind: "active" }
   | { kind: "error"; reason: string };
 
+// TEMP — togglear a `true` para previsualizar la pantalla de racha
+const SHOW_STREAK_PREVIEW = false;
+
 export default function HomeScreen() {
   const router = useRouter();
   const theme = useTheme();
@@ -72,6 +77,7 @@ export default function HomeScreen() {
   const [error, setError] = useState<string | null>(null);
   const [notif, setNotif] = useState<NotifState>({ kind: "loading" });
   const [activating, setActivating] = useState(false);
+  const [showStreakPreview, setShowStreakPreview] = useState(false); // TEMP — borrar
   const inputRef = useRef<TextInput>(null);
 
   useEffect(() => {
@@ -328,6 +334,29 @@ export default function HomeScreen() {
 
           <View style={{ flex: 1 }} />
 
+          {/* TEMP — botón para previsualizar StreakCelebration (controlado por SHOW_STREAK_PREVIEW) */}
+          {SHOW_STREAK_PREVIEW ? (
+            <Pressable
+              onPress={() => setShowStreakPreview(true)}
+              feedback="scale"
+              haptic="impactLight"
+              style={{
+                alignSelf: "center",
+                marginBottom: 12,
+                paddingVertical: 8,
+                paddingHorizontal: 14,
+                borderRadius: 999,
+                borderWidth: 1,
+                borderColor: theme.colors.terra,
+                backgroundColor: "transparent",
+              }}
+            >
+              <Text variant="caption1" weight="semibold" color="terra">
+                debug · ver pantalla de racha
+              </Text>
+            </Pressable>
+          ) : null}
+
           <Text
             variant="footnote"
             color="inkFaint"
@@ -337,6 +366,29 @@ export default function HomeScreen() {
           </Text>
         </View>
       </KeyboardAvoidingView>
+      {loading ? <GeneratingOverlay /> : null}
+      {/* TEMP — overlay del preview (controlado por SHOW_STREAK_PREVIEW) */}
+      {SHOW_STREAK_PREVIEW && showStreakPreview ? (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: theme.colors.bone,
+          }}
+        >
+          <Screen background="primary" padded={false} bottomInset={false}>
+            <StreakCelebration
+              key={String(showStreakPreview)}
+              oldStreak={2}
+              newStreak={3}
+              onClose={() => setShowStreakPreview(false)}
+            />
+          </Screen>
+        </View>
+      ) : null}
     </Screen>
   );
 }

@@ -13,6 +13,8 @@ export type Exercise = {
   prompt: string;
   correct_answer: string;
   acceptable_answers: string[];
+  correct_answers?: string[];
+  acceptable_answers_per_blank?: string[][];
   explanation: string;
   english_idiomatic: string;
   hebrew_idiomatic: string;

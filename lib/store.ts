@@ -95,11 +95,6 @@ export const useStore = create<StoreState>((set, get) => ({
       authError = "supabase-not-configured";
     }
     const userId = user?.id ?? null;
-    set({ userId, user, authError });
-
-    if (userId) {
-      await pullRemote(set, get);
-    }
 
     if (!authSubscribed) {
       authSubscribed = true;
@@ -112,7 +107,13 @@ export const useStore = create<StoreState>((set, get) => ({
       });
     }
 
-    set({ hydrated: true });
+    set({ userId, user, authError, hydrated: true });
+
+    if (userId) {
+      void pullRemote(set, get).catch((e) =>
+        console.warn("[che] pullRemote bg:", e),
+      );
+    }
   },
 
   saveSession: async (prompt, data) => {

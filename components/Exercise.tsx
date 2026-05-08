@@ -33,36 +33,93 @@ function fireHaptic(kind: "success" | "error") {
   } catch {}
 }
 
+function getCorrectAnswers(exercise: ExerciseType, blankCount: number): string[] {
+  if (exercise.correct_answers && exercise.correct_answers.length > 0) {
+    return exercise.correct_answers;
+  }
+  if (blankCount <= 1) return [exercise.correct_answer];
+  // Defensive fallback: same answer for every blank (legacy data with 2+ blanks).
+  return Array(blankCount).fill(exercise.correct_answer);
+}
+
+function getAcceptableForBlank(
+  exercise: ExerciseType,
+  blankIdx: number,
+  blankCount: number,
+): string[] {
+  const perBlank = exercise.acceptable_answers_per_blank;
+  if (perBlank && perBlank[blankIdx]) return perBlank[blankIdx];
+  if (blankCount <= 1) return exercise.acceptable_answers ?? [];
+  return [];
+}
+
 export function ExerciseCard({ exercise, index, total, onNext }: Props) {
   const theme = useTheme();
-  const [value, setValue] = useState("");
+  const promptParts = useMemo(() => splitOnBlanks(exercise.prompt), [exercise.prompt]);
+  const blankCount = useMemo(
+    () => promptParts.filter((p) => p === null).length,
+    [promptParts],
+  );
+  const hasBlank = blankCount > 0;
+
+  const [values, setValues] = useState<string[]>(() =>
+    Array(Math.max(blankCount, 1)).fill(""),
+  );
   const [phase, setPhase] = useState<Phase>("answering");
   const [showEnglish, setShowEnglish] = useState(false);
   const [showHebrew, setShowHebrew] = useState(false);
-  const inputRef = useRef<TextInput>(null);
+  const externalInputRef = useRef<TextInput>(null);
+  const blankInputRefs = useRef<(TextInput | null)[]>([]);
 
   const shake = useSharedValue(0);
 
   useEffect(() => {
-    setValue("");
+    setValues(Array(Math.max(blankCount, 1)).fill(""));
     setPhase("answering");
     setShowEnglish(false);
     setShowHebrew(false);
     shake.value = 0;
-    const t = setTimeout(() => inputRef.current?.focus(), 100);
+    const t = setTimeout(() => {
+      if (hasBlank) {
+        blankInputRefs.current[0]?.focus();
+      } else {
+        externalInputRef.current?.focus();
+      }
+    }, 100);
     return () => clearTimeout(t);
-  }, [exercise.id, shake]);
+  }, [exercise.id, blankCount, hasBlank, shake]);
 
-  const promptParts = useMemo(() => splitOnBlanks(exercise.prompt), [exercise.prompt]);
-  const hasBlank = promptParts.includes(null);
+  const correctAnswers = useMemo(
+    () => getCorrectAnswers(exercise, blankCount),
+    [exercise, blankCount],
+  );
 
   const verify = (revealed = false) => {
     if (revealed) {
       setPhase("revealed");
       return;
     }
-    const ok = isAnswerCorrect(value, exercise.correct_answer, exercise.acceptable_answers);
-    if (ok) {
+    let allOk = true;
+    if (hasBlank) {
+      for (let i = 0; i < blankCount; i++) {
+        const ok = isAnswerCorrect(
+          values[i] ?? "",
+          correctAnswers[i] ?? "",
+          getAcceptableForBlank(exercise, i, blankCount),
+        );
+        if (!ok) {
+          allOk = false;
+          break;
+        }
+      }
+    } else {
+      allOk = isAnswerCorrect(
+        values[0] ?? "",
+        exercise.correct_answer,
+        exercise.acceptable_answers,
+      );
+    }
+    if (allOk) {
       setPhase("correct");
       fireHaptic("success");
     } else {
@@ -87,58 +144,66 @@ export function ExerciseCard({ exercise, index, total, onNext }: Props) {
   const isAnswered = phase !== "answering";
   const isCorrect = phase === "correct";
 
-  // Blank fill state — green by default, green when correct, terra otherwise.
   const blankColor = isAnswered
     ? isCorrect
       ? theme.colors.green
       : theme.colors.terra
     : theme.colors.green;
 
-  const blankText = isAnswered
-    ? phase === "revealed"
-      ? exercise.correct_answer
-      : value || "—"
-    : value || " ";
+  const canSubmit = hasBlank
+    ? values.slice(0, blankCount).every((v) => v.trim().length > 0)
+    : (values[0] ?? "").trim().length > 0;
+
+  const correctAnswerDisplay = hasBlank
+    ? correctAnswers.join(" / ")
+    : exercise.correct_answer;
+
+  const setBlankValue = (i: number, v: string) => {
+    setValues((prev) => {
+      const next = prev.slice();
+      next[i] = v;
+      if (next.length < blankCount) {
+        for (let k = next.length; k < blankCount; k++) next[k] = "";
+      }
+      return next;
+    });
+  };
+
+  const onBlankSubmit = (i: number) => {
+    if (i + 1 < blankCount) {
+      blankInputRefs.current[i + 1]?.focus();
+    } else if (canSubmit) {
+      verify(false);
+    }
+  };
 
   return (
     <Animated.View style={[{ flex: 1 }, cardAnimatedStyle]}>
       {/* Content section — packed (related items stay close) */}
       <View style={{ gap: theme.spacing.md + 4 }}>
-        <Text variant="body" color="ink" style={{ fontSize: 19, lineHeight: 28 }}>
-          {hasBlank
-            ? promptParts.map((part, i) =>
-                part === null ? (
-                  <Text
-                    key={i}
-                    style={{
-                      fontSize: 19,
-                      lineHeight: 28,
-                      fontWeight: "600",
-                      color: blankColor,
-                      borderBottomWidth: 1.5,
-                      borderBottomColor: blankColor,
-                      minWidth: 96,
-                      textAlign: "center",
-                      paddingHorizontal: 6,
-                      fontFamily: theme.fontFamily,
-                    }}
-                  >
-                    {`  ${blankText}  `}
-                  </Text>
-                ) : (
-                  <Text key={i} style={{ fontSize: 19, lineHeight: 28 }}>
-                    {part}
-                  </Text>
-                ),
-              )
-            : exercise.prompt}
-        </Text>
+        {hasBlank ? (
+          <PromptWithBlanks
+            parts={promptParts}
+            values={values}
+            setValue={setBlankValue}
+            blankColor={blankColor}
+            isAnswered={isAnswered}
+            phase={phase}
+            correctAnswers={correctAnswers}
+            inputRefs={blankInputRefs}
+            onSubmitBlank={onBlankSubmit}
+          />
+        ) : (
+          <Text variant="body" color="ink" style={{ fontSize: 19, lineHeight: 28 }}>
+            {exercise.prompt}
+          </Text>
+        )}
 
-        {!isAnswered ? (
+        {!isAnswered && !hasBlank ? (
           <UnderlineInput
-            ref={inputRef}
-            value={value}
-            onChangeText={setValue}
+            ref={externalInputRef}
+            value={values[0] ?? ""}
+            onChangeText={(v) => setBlankValue(0, v)}
             variant="callout"
             weight="medium"
             color="green"
@@ -147,7 +212,7 @@ export function ExerciseCard({ exercise, index, total, onNext }: Props) {
             autoCapitalize="none"
             multiline={exercise.type === "free_production"}
             onSubmitEditing={() => {
-              if (value.trim()) verify(false);
+              if ((values[0] ?? "").trim()) verify(false);
             }}
           />
         ) : null}
@@ -159,15 +224,15 @@ export function ExerciseCard({ exercise, index, total, onNext }: Props) {
                 <>
                   Justo.{" "}
                   <Text variant="headline" weight="bold" color="green">
-                    {exercise.correct_answer}
+                    {correctAnswerDisplay}
                   </Text>{" "}
-                  es la forma.
+                  {hasBlank && blankCount > 1 ? "son las formas." : "es la forma."}
                 </>
               ) : (
                 <>
                   La respuesta era{" "}
                   <Text variant="headline" weight="bold" color="terra">
-                    {exercise.correct_answer}
+                    {correctAnswerDisplay}
                   </Text>
                   .
                 </>
@@ -178,9 +243,9 @@ export function ExerciseCard({ exercise, index, total, onNext }: Props) {
                 {exercise.explanation}
               </Text>
             ) : null}
-            {!isCorrect && phase !== "revealed" ? (
+            {!isCorrect && phase !== "revealed" && !hasBlank ? (
               <Text variant="footnote" color="inkFaint">
-                Tu respuesta: {value.trim() || "—"}
+                Tu respuesta: {(values[0] ?? "").trim() || "—"}
               </Text>
             ) : null}
           </View>
@@ -224,7 +289,7 @@ export function ExerciseCard({ exercise, index, total, onNext }: Props) {
             <Button
               label="Comprobar"
               onPress={() => verify(false)}
-              disabled={!value.trim()}
+              disabled={!canSubmit}
             />
             <View style={{ alignSelf: "center" }}>
               <MateLink
@@ -238,6 +303,141 @@ export function ExerciseCard({ exercise, index, total, onNext }: Props) {
         )}
       </View>
     </Animated.View>
+  );
+}
+
+type PromptWithBlanksProps = {
+  parts: (string | null)[];
+  values: string[];
+  setValue: (i: number, v: string) => void;
+  blankColor: string;
+  isAnswered: boolean;
+  phase: Phase;
+  correctAnswers: string[];
+  inputRefs: React.MutableRefObject<(TextInput | null)[]>;
+  onSubmitBlank: (i: number) => void;
+};
+
+function PromptWithBlanks({
+  parts,
+  values,
+  setValue,
+  blankColor,
+  isAnswered,
+  phase,
+  correctAnswers,
+  inputRefs,
+  onSubmitBlank,
+}: PromptWithBlanksProps) {
+  const theme = useTheme();
+  const tokens: { kind: "text"; text: string }[] | { kind: "blank"; idx: number }[] = [];
+  let blankIdx = 0;
+  const flat: ({ kind: "text"; text: string } | { kind: "blank"; idx: number })[] = [];
+  for (const p of parts) {
+    if (p === null) {
+      flat.push({ kind: "blank", idx: blankIdx });
+      blankIdx++;
+    } else {
+      // Split text into word tokens so flexWrap works at word boundaries.
+      const words = p.split(/(\s+)/).filter((w) => w.length > 0);
+      for (const w of words) flat.push({ kind: "text", text: w });
+    }
+  }
+
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "flex-end",
+      }}
+    >
+      {flat.map((tok, i) => {
+        if (tok.kind === "text") {
+          const isWhitespace = /^\s+$/.test(tok.text);
+          if (isWhitespace) {
+            return (
+              <Text
+                key={i}
+                variant="body"
+                color="ink"
+                style={{ fontSize: 19, lineHeight: 32 }}
+              >
+                {" "}
+              </Text>
+            );
+          }
+          return (
+            <Text
+              key={i}
+              variant="body"
+              color="ink"
+              style={{ fontSize: 19, lineHeight: 32 }}
+            >
+              {tok.text}
+            </Text>
+          );
+        }
+        const i_ = tok.idx;
+        const value = values[i_] ?? "";
+        const showCorrect = phase === "revealed";
+        const display = showCorrect ? correctAnswers[i_] ?? "" : value;
+        return (
+          <View
+            key={i}
+            style={{
+              minWidth: 88,
+              borderBottomWidth: 1.5,
+              borderBottomColor: blankColor,
+              marginHorizontal: 3,
+              paddingHorizontal: 4,
+              justifyContent: "flex-end",
+            }}
+          >
+            {isAnswered ? (
+              <Text
+                variant="body"
+                style={{
+                  fontSize: 19,
+                  lineHeight: 32,
+                  fontWeight: "600",
+                  color: blankColor,
+                  textAlign: "center",
+                }}
+              >
+                {display || "—"}
+              </Text>
+            ) : (
+              <TextInput
+                ref={(el) => {
+                  inputRefs.current[i_] = el;
+                }}
+                value={value}
+                onChangeText={(v) => setValue(i_, v)}
+                onSubmitEditing={() => onSubmitBlank(i_)}
+                returnKeyType={i_ + 1 < correctAnswers.length ? "next" : "go"}
+                blurOnSubmit={i_ + 1 >= correctAnswers.length}
+                autoCorrect={false}
+                autoCapitalize="none"
+                style={[
+                  {
+                    fontSize: 19,
+                    lineHeight: 28,
+                    fontWeight: "600",
+                    color: blankColor,
+                    fontFamily: theme.fontFamily,
+                    textAlign: "center",
+                    padding: 0,
+                    minWidth: 80,
+                  },
+                  Platform.OS === "web" ? ({ outlineStyle: "none" } as never) : null,
+                ]}
+              />
+            )}
+          </View>
+        );
+      })}
+    </View>
   );
 }
 

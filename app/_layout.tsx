@@ -1,11 +1,16 @@
 import "../global.css";
 import { useEffect } from "react";
+import { View } from "react-native";
 import { Stack, usePathname, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import * as SplashScreen from "expo-splash-screen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useStore } from "@/lib/store";
 import { getTheme } from "@/lib/theme";
+import { SplashView } from "@/components/ui";
+
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
   const hydrate = useStore((s) => s.hydrate);
@@ -20,6 +25,12 @@ export default function RootLayout() {
   }, [hydrate]);
 
   useEffect(() => {
+    if (hydrated) {
+      SplashScreen.hideAsync().catch(() => {});
+    }
+  }, [hydrated]);
+
+  useEffect(() => {
     if (!hydrated) return;
     const onWelcome = pathname === "/";
     if (!userId && !onWelcome) {
@@ -28,6 +39,10 @@ export default function RootLayout() {
       router.replace("/home");
     }
   }, [hydrated, userId, pathname, router]);
+
+  const onWelcome = pathname === "/";
+  const needsRedirect = hydrated && Boolean(userId) && onWelcome;
+  const showSplash = !hydrated || needsRedirect;
 
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: theme.colors.background }}>
@@ -51,6 +66,20 @@ export default function RootLayout() {
             }}
           />
         </Stack>
+        {showSplash ? (
+          <View
+            pointerEvents="auto"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+            }}
+          >
+            <SplashView />
+          </View>
+        ) : null}
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

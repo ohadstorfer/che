@@ -51,12 +51,9 @@ const TOOL_INPUT_SCHEMA = {
                 id: { type: "string" },
                 type: {
                   type: "string",
-                  enum: [
-                    "fill_blank",
-                    "transform",
-                    "identify_type",
-                    "free_production",
-                  ],
+                  enum: ["fill_blank"],
+                  description:
+                    "Solo se permite fill_blank. El usuario completa huecos en oraciones existentes — nunca escribe oraciones desde cero ni reescribe.",
                 },
                 section_title: { type: "string" },
                 section_description: { type: "string" },
@@ -66,6 +63,18 @@ const TOOL_INPUT_SCHEMA = {
                 acceptable_answers: {
                   type: "array",
                   items: { type: "string" },
+                },
+                correct_answers: {
+                  type: "array",
+                  items: { type: "string" },
+                  description:
+                    "Para fill_blank con 2+ huecos: respuestas en orden, una por hueco. Para 1 hueco, omitir o mandar [correct_answer].",
+                },
+                acceptable_answers_per_blank: {
+                  type: "array",
+                  items: { type: "array", items: { type: "string" } },
+                  description:
+                    "Variantes aceptables por hueco, en el mismo orden que correct_answers. Opcional.",
                 },
                 explanation: { type: "string" },
                 english_idiomatic: { type: "string" },

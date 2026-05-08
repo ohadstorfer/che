@@ -13,6 +13,8 @@ export type Exercise = {
   prompt: string;
   correct_answer: string;
   acceptable_answers: string[];
+  correct_answers?: string[];
+  acceptable_answers_per_blank?: string[][];
   explanation: string;
   english_idiomatic: string;
   hebrew_idiomatic: string;
@@ -75,7 +77,14 @@ function normalizeExercise(
   if (!raw || typeof raw !== "object") return null;
   const r = raw as Record<string, unknown>;
   const prompt = typeof r.prompt === "string" ? r.prompt : "";
-  const correct = typeof r.correct_answer === "string" ? r.correct_answer : "";
+  const correctAnswersRaw = Array.isArray(r.correct_answers)
+    ? r.correct_answers.filter((x: unknown): x is string => typeof x === "string")
+    : null;
+  const correct = typeof r.correct_answer === "string" && r.correct_answer
+    ? r.correct_answer
+    : correctAnswersRaw && correctAnswersRaw.length > 0
+    ? correctAnswersRaw[0]
+    : "";
   if (!prompt || !correct) return null;
 
   const allowed = new Set([
@@ -111,6 +120,17 @@ function normalizeExercise(
         typeof x === "string"
       )
       : [],
+    correct_answers: correctAnswersRaw && correctAnswersRaw.length > 0
+      ? correctAnswersRaw
+      : undefined,
+    acceptable_answers_per_blank: Array.isArray(r.acceptable_answers_per_blank)
+      ? r.acceptable_answers_per_blank
+        .map((arr: unknown) =>
+          Array.isArray(arr)
+            ? arr.filter((x: unknown): x is string => typeof x === "string")
+            : []
+        )
+      : undefined,
     explanation: typeof r.explanation === "string" ? r.explanation : "",
     english_idiomatic: typeof r.english_idiomatic === "string"
       ? r.english_idiomatic

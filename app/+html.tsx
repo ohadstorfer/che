@@ -11,7 +11,7 @@ export default function Root({ children }: PropsWithChildren) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
         />
-        <meta name="theme-color" content="#FFFFFF" />
+        <meta name="theme-color" content="#F1EEE6" />
         <meta name="application-name" content="Che" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -26,7 +26,7 @@ export default function Root({ children }: PropsWithChildren) {
           dangerouslySetInnerHTML={{
             __html: `
               :root { color-scheme: light; }
-              html, body { background-color: #FFFFFF; }
+              html, body { background-color: #F1EEE6; }
               body {
                 font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
                 -webkit-font-smoothing: antialiased;

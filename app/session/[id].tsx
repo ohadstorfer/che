@@ -4,6 +4,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useStore } from "@/lib/store";
 import { useTheme } from "@/lib/theme";
 import { ExerciseCard } from "@/components/Exercise";
+import { StreakCelebration } from "@/components/StreakCelebration";
 import {
   Button,
   ConfirmDialog,
@@ -113,6 +114,20 @@ export default function SessionScreen() {
   }
 
   if (done) {
+    if (recorded?.isFirstToday && recorded.bumped) {
+      const newStreak = streak.currentStreak;
+      const oldStreak = Math.max(0, newStreak - 1);
+      return (
+        <Screen background="primary" padded={false} scroll={false}>
+          <StreakCelebration
+            oldStreak={oldStreak}
+            newStreak={newStreak}
+            onClose={goToSessions}
+          />
+        </Screen>
+      );
+    }
+
     const pct = Math.round((correctCount / total) * 100);
     return (
       <Screen background="primary" padded={false} scroll={false}>
@@ -127,17 +142,6 @@ export default function SessionScreen() {
             <Text variant="subhead" color="inkSoft">
               {pct}% de respuestas correctas.
             </Text>
-            {recorded?.isFirstToday && recorded.bumped ? (
-              <Text variant="subhead" color="inkSoft" style={{ marginTop: theme.spacing.sm }}>
-                Llevás{" "}
-                <Text variant="subhead" color="green" weight="semibold">
-                  {streak.currentStreak === 1
-                    ? "un día"
-                    : `${streak.currentStreak} días`}
-                </Text>{" "}
-                seguidos.
-              </Text>
-            ) : null}
           </View>
 
           <View style={{ flex: 1 }} />
