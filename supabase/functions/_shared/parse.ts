@@ -15,6 +15,7 @@ export type Exercise = {
   acceptable_answers: string[];
   correct_answers?: string[];
   acceptable_answers_per_blank?: string[][];
+  usage_example?: string;
   explanation: string;
   english_idiomatic: string;
   hebrew_idiomatic: string;
@@ -130,6 +131,9 @@ function normalizeExercise(
             ? arr.filter((x: unknown): x is string => typeof x === "string")
             : []
         )
+      : undefined,
+    usage_example: typeof r.usage_example === "string" && r.usage_example
+      ? r.usage_example
       : undefined,
     explanation: typeof r.explanation === "string" ? r.explanation : "",
     english_idiomatic: typeof r.english_idiomatic === "string"

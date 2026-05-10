@@ -11,7 +11,7 @@ import * as Haptics from "expo-haptics";
 import type { Exercise as ExerciseType } from "@/types/exercise";
 import { containsHebrew, isAnswerCorrect } from "@/lib/answer";
 import { useTheme } from "@/lib/theme";
-import { Button, MateLink, Text, UnderlineInput } from "@/components/ui";
+import { Button, ExampleTip, MateLink, Text, UnderlineInput } from "@/components/ui";
 
 type Props = {
   exercise: ExerciseType;
@@ -68,6 +68,7 @@ export function ExerciseCard({ exercise, index, total, onNext }: Props) {
   const [phase, setPhase] = useState<Phase>("answering");
   const [showEnglish, setShowEnglish] = useState(false);
   const [showHebrew, setShowHebrew] = useState(false);
+  const [showExample, setShowExample] = useState(false);
   const externalInputRef = useRef<TextInput>(null);
   const blankInputRefs = useRef<(TextInput | null)[]>([]);
 
@@ -78,6 +79,7 @@ export function ExerciseCard({ exercise, index, total, onNext }: Props) {
     setPhase("answering");
     setShowEnglish(false);
     setShowHebrew(false);
+    setShowExample(false);
     shake.value = 0;
     const t = setTimeout(() => {
       if (hasBlank) {
@@ -264,6 +266,12 @@ export function ExerciseCard({ exercise, index, total, onNext }: Props) {
                 onPress={() => setShowHebrew((s) => !s)}
               />
             ) : null}
+            {exercise.usage_example ? (
+              <MateLink
+                label="ver ejemplo"
+                onPress={() => setShowExample(true)}
+              />
+            ) : null}
           </View>
 
           {showEnglish && exercise.english_idiomatic ? (
@@ -302,6 +310,13 @@ export function ExerciseCard({ exercise, index, total, onNext }: Props) {
           <Button label={index + 1 === total ? "Terminar" : "Continuar"} onPress={next} />
         )}
       </View>
+
+      <ExampleTip
+        visible={showExample}
+        instruction={exercise.instruction}
+        example={exercise.usage_example ?? ""}
+        onClose={() => setShowExample(false)}
+      />
     </Animated.View>
   );
 }

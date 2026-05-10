@@ -15,6 +15,7 @@ export type Exercise = {
   acceptable_answers: string[];
   correct_answers?: string[];
   acceptable_answers_per_blank?: string[][];
+  usage_example?: string;
   explanation: string;
   english_idiomatic: string;
   hebrew_idiomatic: string;

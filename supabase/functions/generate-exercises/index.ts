@@ -43,6 +43,7 @@ const TOOL_INPUT_SCHEMA = {
                 "prompt",
                 "correct_answer",
                 "acceptable_answers",
+                "usage_example",
                 "explanation",
                 "english_idiomatic",
                 "hebrew_idiomatic",
@@ -75,6 +76,11 @@ const TOOL_INPUT_SCHEMA = {
                   items: { type: "array", items: { type: "string" } },
                   description:
                     "Variantes aceptables por hueco, en el mismo orden que correct_answers. Opcional.",
+                },
+                usage_example: {
+                  type: "string",
+                  description:
+                    "Una oración rioplatense que use la misma regla con OTRO verbo/sujeto. Sin huecos, sin spoilear correct_answer.",
                 },
                 explanation: { type: "string" },
                 english_idiomatic: { type: "string" },

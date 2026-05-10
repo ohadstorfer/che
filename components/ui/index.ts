@@ -17,6 +17,7 @@ export { IconButton } from "./IconButton";
 export { Banner } from "./Banner";
 export { Switch } from "./Switch";
 export { ConfirmDialog } from "./ConfirmDialog";
+export { ExampleTip } from "./ExampleTip";
 export { Wordmark } from "./Wordmark";
 export { SplashView } from "./SplashView";
 export { Eyebrow } from "./Eyebrow";

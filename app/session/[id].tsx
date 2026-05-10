@@ -48,6 +48,7 @@ export default function SessionScreen() {
   const [correctCount, setCorrectCount] = useState(0);
   const [done, setDone] = useState(false);
   const [recorded, setRecorded] = useState<{ isFirstToday: boolean; bumped: boolean } | null>(null);
+  const [showCelebration, setShowCelebration] = useState(false);
   const [exitOpen, setExitOpen] = useState(false);
   const recordedRef = useRef(false);
 
@@ -114,7 +115,7 @@ export default function SessionScreen() {
   }
 
   if (done) {
-    if (recorded?.isFirstToday && recorded.bumped) {
+    if (showCelebration) {
       const newStreak = streak.currentStreak;
       const oldStreak = Math.max(0, newStreak - 1);
       return (
@@ -122,49 +123,61 @@ export default function SessionScreen() {
           <StreakCelebration
             oldStreak={oldStreak}
             newStreak={newStreak}
-            onClose={goToSessions}
+            onClose={() => router.replace("/home")}
           />
         </Screen>
       );
     }
 
     const pct = Math.round((correctCount / total) * 100);
+    const willCelebrateStreak = !!(recorded?.isFirstToday && recorded.bumped);
+    const onContinue = () => {
+      if (willCelebrateStreak) setShowCelebration(true);
+      else router.replace("/home");
+    };
+
     return (
       <Screen background="primary" padded={false} scroll={false}>
         <ContainerPad>
           <BackRow onBack={goToSessions} />
 
-          <View style={{ marginTop: 40, gap: theme.spacing.sm }}>
-            <Eyebrow color="greenSoft">ronda completada</Eyebrow>
-            <Text variant="largeTitle" color="green">
-              {correctCount} / {total}
-            </Text>
-            <Text variant="subhead" color="inkSoft">
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <View
+              style={{
+                width: 220,
+                height: 220,
+                borderRadius: 110,
+                borderWidth: 14,
+                borderColor: theme.colors.green,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Text
+                variant="largeTitle"
+                color="green"
+                weight="bold"
+                style={{ fontSize: 44, lineHeight: 48 }}
+              >
+                {correctCount}/{total}
+              </Text>
+              <Text variant="title3" color="green" style={{ marginTop: 4 }}>
+                {pct}%
+              </Text>
+            </View>
+
+            <Text variant="subhead" color="inkSoft" style={{ marginTop: 28 }}>
               {pct}% de respuestas correctas.
             </Text>
           </View>
 
-          <View style={{ flex: 1 }} />
-
-          <View style={{ gap: theme.spacing.sm + 4 }}>
-            <Button label="ver mis ejercicios" onPress={goToSessions} />
-            <Button
-              label="repetir"
-              variant="tertiary"
-              onPress={() => {
-                setIdx(0);
-                setCorrectCount(0);
-                setDone(false);
-                setRecorded(null);
-                recordedRef.current = false;
-              }}
-            />
-            <Button
-              label="crear otro"
-              variant="tertiary"
-              onPress={() => router.replace("/home")}
-            />
-          </View>
+          <Button label="Daleeee" onPress={onContinue} />
         </ContainerPad>
       </Screen>
     );

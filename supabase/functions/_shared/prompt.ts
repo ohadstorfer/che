@@ -16,6 +16,7 @@ CONTENIDO:
 - "prompt": una sola oración corta. Sin floritura.
 - "explanation": 1 oración (máx 2). Brevísima, sin redundancia.
 - "acceptable_answers": 0-3 variantes (con/sin tildes, sinónimos válidos). Vacío si no hay variantes.
+- "usage_example": UNA oración corta en español rioplatense (voseo) que use la MISMA regla gramatical que el ejercicio (mismo tiempo verbal, misma estructura) pero con OTRO verbo y/u OTRO sujeto. Una sola oración, completa, sin huecos, sin paréntesis con infinitivo. ESTÁ PROHIBIDO repetir el verbo del ejercicio. ESTÁ PROHIBIDO incluir la respuesta correcta. Es un "así se usa esto en otro contexto" para orientar sin spoilear. Ej: si el ejercicio es "no ____ (ir) al parque" (correct: vayas), un buen example sería "ojalá hoy no llueva." — misma regla (subjuntivo presente con negación), otro verbo, sin spoiler.
 
 ESPAÑOL ARGENTINO (aplica a TODOS los campos en español):
 
