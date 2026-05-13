@@ -37,6 +37,8 @@ HEBREO (hebrew_idiomatic): UNA oración en alfabeto hebreo (no transliteración)
 
 PEDIDO AMBIGUO: si el pedido es vago, elegí vos un tema útil (subjuntivo, condicional, pretéritos…) y generá. Nunca pidas aclaraciones.`;
 
-export function userPrompt(input: string): string {
-  return `Pedido: ${input}`;
+export function userPrompt(input: string, count: number): string {
+  return `Pedido: ${input}
+
+Generá EXACTAMENTE ${count} ejercicios en total, repartidos en 1-3 secciones (4-6 ejercicios por sección). La suma de exercises de todas las secciones tiene que dar ${count}.`;
 }

@@ -37,7 +37,7 @@ type Length = "corto" | "standard";
 
 const LENGTH_COUNT: Record<Length, number> = {
   corto: 6,
-  standard: 12,
+  standard: 10,
 };
 
 function sliceToCount(data: GenerateResponse, count: number): GenerateResponse {
@@ -118,8 +118,9 @@ export default function HomeScreen() {
     setLoading(true);
     setError(null);
     try {
-      const data = await generateExercises(value);
-      const sliced = sliceToCount(data, LENGTH_COUNT[length]);
+      const count = LENGTH_COUNT[length];
+      const data = await generateExercises(value, count);
+      const sliced = sliceToCount(data, count);
       const record = await saveSession(value, sliced);
       router.replace(`/session/${record.id}`);
     } catch (e) {
@@ -288,14 +289,14 @@ export default function HomeScreen() {
               >
                 <View style={{ flexDirection: "row", gap: 8 }}>
                   <LengthPill
-                    label="corto"
-                    selected={length === "corto"}
-                    onPress={() => setLength("corto")}
-                  />
-                  <LengthPill
                     label="standard"
                     selected={length === "standard"}
                     onPress={() => setLength("standard")}
+                  />
+                  <LengthPill
+                    label="corto"
+                    selected={length === "corto"}
+                    onPress={() => setLength("corto")}
                   />
                 </View>
 

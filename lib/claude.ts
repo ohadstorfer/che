@@ -4,11 +4,12 @@ import type { GenerateResponse } from "@/types/exercise";
 type ErrorBody = { error?: string; raw?: string };
 
 export async function generateExercises(
-  prompt: string
+  prompt: string,
+  count: number,
 ): Promise<GenerateResponse> {
   const { data, error } = await supabase.functions.invoke<GenerateResponse>(
     "generate-exercises",
-    { body: { prompt } }
+    { body: { prompt, count } }
   );
 
   if (error) {

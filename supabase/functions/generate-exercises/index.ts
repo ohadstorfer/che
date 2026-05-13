@@ -128,7 +128,7 @@ Deno.serve(async (req) => {
     );
   }
 
-  let body: { prompt?: unknown };
+  let body: { prompt?: unknown; count?: unknown };
   try {
     body = await req.json();
   } catch {
@@ -142,6 +142,9 @@ Deno.serve(async (req) => {
   if (prompt.length > 4000) {
     return json({ error: "El prompt es demasiado largo" }, { status: 400 });
   }
+
+  const rawCount = typeof body.count === "number" ? body.count : 10;
+  const count = Math.max(4, Math.min(18, Math.round(rawCount)));
 
   const client = new Anthropic({ apiKey });
 
@@ -161,7 +164,7 @@ Deno.serve(async (req) => {
           cache_control: { type: "ephemeral" },
         },
       ],
-      messages: [{ role: "user", content: userPrompt(prompt) }],
+      messages: [{ role: "user", content: userPrompt(prompt, count) }],
       tools: [
         {
           name: TOOL_NAME,
