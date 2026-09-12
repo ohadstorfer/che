@@ -1,0 +1,163 @@
+# ---------------------------------------------------------------------------
+# Demo content — units 1 and 2, written by hand so the lesson runtime has real
+# material to play before the generation pipeline exists (Phase 3).
+#
+# UNREVIEWED. These sentences have not been read by a native speaker. They are
+# here to exercise the app, not to ship. scripts/course/build-demo.mjs checks
+# every one against the outline — vocabulary taught by then, no tuteo, no
+# regional words, register — and fails the build if any doesn't pass.
+#
+# Slots, per lesson, in order:
+#   {teach: <form>}                 introduce a form ("argentina/adj" when a
+#                                   surface is ambiguous)
+#   {drill: <sentence>, mode: ...}  one screen of that sentence
+#   {match}                         a matching block of words taught so far
+#   {tip: <index>}                  the unit's tip, by position in the outline
+#   {review: <n>}                   n screens of due words from earlier units
+# ---------------------------------------------------------------------------
+
+hola-che:
+  sentences:
+    hola_che: {es: "Hola, che.", en: "Hey there.", target: che}
+    chau_che: {es: "Chau, che.", en: "Bye!", en_alt: ["See you."], target: chau}
+    dale_chau: {es: "Dale, chau.", en: "OK, bye.", target: dale}
+    bien_gracias: {es: "Bien, gracias.", en: "Fine, thanks.", target: gracias}
+    soy_sofi: {es: "Soy Sofi.", en: "I'm Sofi.", target: soy}
+    vos_sos_juan: {es: "¿Vos sos Juan?", en: "Are you Juan?", target: sos}
+    si_soy_juan: {es: "Sí, soy Juan.", en: "Yes, I'm Juan.", target: sí}
+    no_yo_soy: {es: "No, yo soy Lucía.", en: "No, I'm Lucía.", target: yo, difficulty: 2}
+    sos_vos: {es: "¿Sos vos, Martín?", en: "Is that you, Martín?", target: vos, difficulty: 2}
+    que_tal: {es: "¿Qué tal?", en: "How's it going?", target: qué tal}
+    todo_bien: {es: "¿Todo bien?", en: "All good?", target: todo bien}
+    todo_bien_vos: {es: "Todo bien, ¿y vos?", en: "All good, and you?", target: todo bien, difficulty: 2}
+    mal_che: {es: "Mal, che.", en: "Not great, man.", target: mal}
+    bueno_chau: {es: "Bueno, chau.", en: "Well, bye.", target: bueno}
+    me_llamo: {es: "Me llamo Martín.", en: "My name is Martín.", target: llamo}
+    como_te_llamas: {es: "¿Cómo te llamás?", en: "What's your name?", target: llamás, difficulty: 2}
+    mucho_gusto: {es: "Mucho gusto, Lucía.", en: "Nice to meet you, Lucía.", target: mucho gusto}
+    yo_me_llamo: {es: "Yo me llamo Sofi, ¿y vos?", en: "My name is Sofi, and yours?", target: llamo, difficulty: 3}
+  lessons:
+    1:
+      - {tip: 1}
+      - {teach: hola}
+      - {teach: che}
+      - {drill: hola_che, mode: sentence_meaning}
+      - {teach: chau}
+      - {drill: chau_che, mode: sentence_build}
+      - {teach: dale}
+      - {drill: dale_chau, mode: sentence_meaning}
+      - {teach: bien}
+      - {teach: gracias}
+      - {drill: bien_gracias, mode: sentence_build}
+    2:
+      - {tip: 0}
+      - {teach: yo}
+      - {teach: soy}
+      - {drill: soy_sofi, mode: sentence_meaning}
+      - {teach: vos}
+      - {teach: sos}
+      - {drill: vos_sos_juan, mode: sentence_meaning}
+      - {teach: sí}
+      - {drill: si_soy_juan, mode: sentence_build}
+      - {teach: "no"}
+      - {drill: no_yo_soy, mode: sentence_gap}
+      - {match}
+    3:
+      - {teach: qué tal}
+      - {drill: que_tal, mode: sentence_meaning}
+      - {teach: todo bien}
+      - {drill: todo_bien, mode: sentence_build}
+      - {drill: todo_bien_vos, mode: sentence_meaning}
+      - {teach: mal}
+      - {drill: mal_che, mode: sentence_build}
+      - {teach: bueno}
+      - {drill: bueno_chau, mode: sentence_gap}
+      - {match}
+    4:
+      - {teach: llamo}
+      - {drill: me_llamo, mode: sentence_meaning}
+      - {teach: cómo}
+      - {teach: qué}
+      - {teach: llamás}
+      - {drill: como_te_llamas, mode: sentence_meaning}
+      - {teach: mucho gusto}
+      - {drill: mucho_gusto, mode: sentence_build}
+      - {drill: yo_me_llamo, mode: sentence_gap}
+      - {drill: como_te_llamas, mode: sentence_build}
+    5:
+      - {match}
+      - {drill: todo_bien_vos, mode: sentence_build}
+      - {drill: vos_sos_juan, mode: sentence_gap}
+      - {drill: mucho_gusto, mode: sentence_gap}
+      - {match}
+      - {drill: sos_vos, mode: sentence_build}
+      - {drill: hola_che, mode: sentence_listen}
+      - {drill: yo_me_llamo, mode: sentence_build}
+
+de-donde-sos:
+  sentences:
+    de_donde_sos: {es: "¿De dónde sos?", en: "Where are you from?", target: dónde}
+    y_vos_de_donde: {es: "¿Y vos de dónde sos?", en: "And where are you from?", target: dónde, difficulty: 2}
+    ella_es_arg: {es: "Ella es argentina.", en: "She's Argentinian.", target: argentina/adj}
+    el_es_arg: {es: "Él es argentino.", en: "He's Argentinian.", target: él}
+    juan_es_de: {es: "Juan es de Montevideo.", en: "Juan is from Montevideo.", target: es}
+    el_uruguayo: {es: "Él es uruguayo.", en: "He's Uruguayan.", target: uruguayo}
+    si_uruguaya: {es: "Sí, es uruguaya.", en: "Yes, she's Uruguayan.", target: uruguaya}
+    ella_de_uy: {es: "¿Ella es de Uruguay?", en: "Is she from Uruguay?", target: ella}
+    no_chileno: {es: "No, soy chileno.", en: "No, I'm Chilean.", target: chileno}
+    sofi_portena: {es: "Sofi es porteña.", en: "Sofi is from Buenos Aires.", target: porteña}
+    soy_de_aca: {es: "Soy de acá.", en: "I'm from here.", target: acá}
+    lucia_tambien: {es: "Lucía también es de acá.", en: "Lucía is from here too.", target: también, difficulty: 2}
+    cordoba_pero: {es: "Martín es de Córdoba, pero yo soy de Rosario.", en: "Martín is from Córdoba, but I'm from Rosario.", target: pero, difficulty: 3}
+    yo_ingles: {es: "Yo soy inglés, ¿y vos?", en: "I'm English, and you?", target: inglés, difficulty: 2}
+    sos_arg: {es: "¿Sos argentino?", en: "Are you Argentinian?", target: argentino}
+  lessons:
+    1:
+      - {tip: 0}
+      - {review: 2}
+      - {teach: dónde}
+      - {drill: de_donde_sos, mode: sentence_meaning}
+      - {drill: y_vos_de_donde, mode: sentence_gap}
+      - {teach: es}
+      - {drill: juan_es_de, mode: sentence_meaning}
+      - {drill: de_donde_sos, mode: sentence_build}
+    2:
+      - {teach: ella}
+      - {teach: argentina/adj}
+      - {drill: ella_es_arg, mode: sentence_meaning}
+      - {teach: él}
+      - {teach: argentino}
+      - {drill: el_es_arg, mode: sentence_build}
+      - {drill: juan_es_de, mode: sentence_gap}
+      - {match}
+    3:
+      - {review: 2}
+      - {teach: uruguayo}
+      - {drill: el_uruguayo, mode: sentence_meaning}
+      - {teach: uruguaya}
+      - {drill: si_uruguaya, mode: sentence_build}
+      - {drill: ella_de_uy, mode: sentence_gap}
+      - {teach: chileno}
+      - {teach: chilena}
+      - {drill: no_chileno, mode: sentence_build}
+      - {teach: porteño}
+      - {teach: porteña}
+      - {drill: sofi_portena, mode: sentence_meaning}
+    4:
+      - {teach: acá}
+      - {drill: soy_de_aca, mode: sentence_meaning}
+      - {teach: también}
+      - {drill: lucia_tambien, mode: sentence_build}
+      - {teach: pero}
+      - {drill: cordoba_pero, mode: sentence_meaning}
+      - {teach: inglés}
+      - {teach: inglesa}
+      - {drill: yo_ingles, mode: sentence_build}
+      - {drill: sos_arg, mode: sentence_gap}
+    5:
+      - {review: 3}
+      - {match}
+      - {drill: y_vos_de_donde, mode: sentence_build}
+      - {drill: lucia_tambien, mode: sentence_gap}
+      - {drill: cordoba_pero, mode: sentence_build}
+      - {drill: si_uruguaya, mode: sentence_gap}

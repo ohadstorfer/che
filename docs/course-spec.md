@@ -2,7 +2,7 @@
 
 A Duolingo-shaped course in rioplatense Spanish for English speakers. This document is the design for the course schema, the content pipeline, the runtime that plays a lesson, and the admin dashboard a native reviewer works in — plus the phased plan to build it. It is the source of truth for the work; the published page is generated from it.
 
-Status: **draft for review** · branch `duolingo-ui` · 2026-09-12
+Status: **in progress** — Phases 0 (machine side), 1 and 2 built · branch `duolingo-ui` · updated 2026-09-13
 
 ---
 
@@ -237,13 +237,17 @@ create table lesson_progress (
 
 **Views and RPCs**
 
-- `current_lesson(user)` — first lesson, in `(section, unit, lesson)` ordinal order, with no `lesson_progress` row. That is the coin the learner can tap.
-- `finish_lesson(p_lesson_id, p_local_date, p_score)` — inserts `lesson_progress`, calls the existing `finish_daily_session`, returns the streak. Replaces the `lessons`-log insert in `practice.tsx`.
-- `available_forms(unit_ordinal)` — forms whose unit ordinal ≤ the given one. Used by the linter, the generator and the lesson builder.
+- **Current lesson** — the first lesson, in `(section, unit, lesson)` ordinal order, with no `lesson_progress` row. *As built:* computed client-side (`currentIndex` in `src/lib/course.ts`), since the path loads the whole curriculum anyway; no RPC.
+- `finish_lesson(p_local_date, p_lesson_id?, p_score?)` — *as built:* one call for every finished round. Records `lesson_progress` (keeping the best score) when a lesson id is given; completes today's `daily_sessions` row; credits the day on the first round, or trades in a banked run on a comeback day's second round. Returns `(current_streak, previous_streak, recoverable_streak)`. Practice rounds call it without a lesson id, so they credit the day too, as on Duolingo.
+- `available_forms(unit_ordinal, section_id)` — forms whose unit ordinal ≤ the given one. Used by the linter, the generator and the lesson builder.
+- `form_entries` — a `security_invoker` view of forms with their lemma's gloss and their unit's ordinal folded in; the app reads forms through it.
+
+*As built:* `supabase/migrations/20260913000001_course_schema.sql`, tested by `npm run db:test` against real Postgres (PGlite) — RLS, the role guard, the tokens→`sentence_forms` trigger and every streak path. **Not yet applied** to the live project.
 
 **RLS**
 
-- Curriculum, lexicon, content: `select` for authenticated where `status = 'published'`; reviewers and admins see everything and may `insert`/`update`. No `delete` from the client — retire instead.
+- Curriculum, lexicon, content: `select` for authenticated where `status = 'published'`; reviewers and admins see everything and may `insert`/`update`. No `delete` from the client — retire instead. (`lesson_slots` is the exception: staff may delete, since reordering rewrites them.)
+- `profiles.role`: a trigger makes every new profile a student and rejects any role change not made by the service role — a learner cannot promote themselves.
 - `content_reviews`, `content_revisions`: insert by reviewers/admins; select same.
 - Per-user tables: owner only, as today.
 
@@ -268,7 +272,7 @@ create table lesson_progress (
 
 ### 3.2 Finishing
 
-`practice.tsx` calls `finish_lesson` instead of inserting a `lessons` row. Streak, daily session and celebrations behave exactly as now. The next lesson becomes `current_lesson`.
+`practice.tsx` calls `finish_lesson` instead of inserting a `lessons` row. Streak, daily session and celebrations behave as before. The next lesson becomes the current one. The frozen-streak gate now applies to any round, lesson or practice.
 
 ### 3.3 The path
 
@@ -344,7 +348,9 @@ Renames are mechanical and done once, in Phase 1:
 | `insert into lessons` at finish | `rpc('finish_lesson')` | |
 | `sentences.level` | `sentences.difficulty` | same semantics, same ladder |
 
-**Coexistence with Che's live database.** The live project has `profiles` (pk `user_id`, no role), `streaks` (`last_practice_date`), `push_subscriptions` (Expo tokens), `sessions` (old AI-generated sets), `partner_links`, `notification_events`. Decision for Phase 1: a fresh schema for the new app; a one-off migration copies the two existing users' `profiles`/`streaks` rows into the new shapes; `partner_links`, `push_subscriptions` and `notification_events` are kept untouched; `sessions` is exported to JSON and dropped; the `generate-exercises` edge function is retired. The engine's `push.ts` (web-push keys) versus Che's Expo-token model is a **separate track** (§8) and does not block the course.
+**Coexistence with Che's live database.** The live project has `profiles` (pk `user_id`, no role), `streaks` (`last_practice_date`), `push_subscriptions` (Expo tokens), `sessions` (old AI-generated sets), `partner_links`, `notification_events` — and the deployed app on `main`, plus the `send-reminder` cron, read `streaks.last_practice_date` today.
+
+*As built — changed from the original plan:* the migration is **purely additive**. Nothing is renamed, copied or dropped. `profiles` gains `role` and `timezone`; `streaks` gains `recoverable_streak`; the new RPC writes the same `last_practice_date` the old `bump_streak` does. So the old app keeps working, and the reminder cron keeps reading the truth for the new one. `sessions` and `generate-exercises` stay until the old app is retired. The engine's `push.ts` (web-push keys) versus Che's Expo-token model is still a **separate track** (§8) and does not block the course.
 
 ---
 
@@ -352,20 +358,24 @@ Renames are mechanical and done once, in Phase 1:
 
 Phases are sequential; each has a definition of done. No dates — the pacing depends on native-reviewer availability, which is the real bottleneck.
 
-### Phase 0 — Outline and style spec
+### Phase 0 — Outline and style spec · *machine side done; native sign-off pending*
 
 - **Do:** Finalise Appendix A (section-1 outline: 20 units, grammar, forms) and Appendix B (rioplatense style spec) with a native reader. Encode the outline as `docs/course/section-1.yaml` including the lemma/form list per unit.
 - **Done when:** a native has read both appendices and signed off; the YAML validates; every PCIC A1 inventory item in scope maps to a unit.
+- **Built:** `docs/course/section-1.yaml` — 20 units, 310 lemmas, 502 forms, 98 lessons, tips, and a sample sentence per unit that must be sayable with what's been taught. `npm run course:validate` checks it (tuteo, vos tags, regionalisms, register, samples); `npm run course:test` holds the rejection cases. Shared tooling in `scripts/course/lib/`. Not yet read by a native.
 
-### Phase 1 — Schema and engine rename
+### Phase 1 — Schema and engine rename · *done, not applied to the live DB*
 
 - **Do:** Migration with §2's tables, RPCs and RLS on Che's project (plus the one-off user-row copy). Apply §6's renames across `src/`. Update `lib/demo.ts` to serve the new tables with unit 1 from the outline. `types/db.ts` regenerated.
 - **Done when:** `tsc` is clean; the app runs on fixtures showing a real unit 1 on the path; `npm run db:push` applies cleanly to a fresh project.
+- **Built:** the additive migration (§6) with `npm run db:test`; the rename across `src/` (`Card`→`Form`, `translit` dropped, Spanish-first rendering); `add.tsx` and `card/[id].tsx` removed (authoring moves to the dashboard); Palabras rewritten as the learner's words and sentences met. `npm run course:demo` builds the outline plus hand-written units 1–2 into `src/lib/demo-course.json`, checked by the same gate generated content will pass; `src/lib/demo.ts` serves it through a stateful stand-in client. `types/db.ts` is not regenerated — that needs the migration applied.
 
-### Phase 2 — Lesson runtime
+### Phase 2 — Lesson runtime · *done on fixtures*
 
 - **Do:** `buildLesson` with all five slot kinds and preview mode; `tip` screen; `home.tsx` reads the curriculum and bands units; `finish_lesson`; Practice entry.
 - **Done when:** with hand-written slots for unit 1 lesson 1, a learner can tap the coin, play the lesson, finish, see the streak fire, and the next coin becomes current — on fixtures and against the DB.
+- **Built:** `buildLesson` / `resolveSlots` in `src/lib/lesson.ts`; the tip screen; the path draws every lesson with a banner per unit and a Practice button with a due badge. Verified in the browser on fixtures: unit 2 lesson 1 plays its tip, two interleaved review screens of unit-1 words, intros, drills and a tile build; finishing records progress, fires the streak 5→6, advances the path, and drops Practice's due count. *Against the DB:* not yet — it depends on the migration being applied.
+- **Found while building:** the first word of a sentence gave itself away by its capital among lowercase options and tiles (fixed); introducing a word through a sentence the next slot reads for meaning spent the same screen twice (intros now skip sentences the lesson reads for meaning); a Spanish blank needs its opening `¿` as well as its closing `?` (fixed).
 
 ### Phase 3 — Authoring scripts
 
@@ -406,30 +416,32 @@ Phases are sequential; each has a definition of done. No dates — the pacing de
 
 ## Appendix A — Section 1 outline (proposal)
 
-Twenty units, ~12–18 new forms each, 5 lessons per unit (4 lessons + 1 review; unit 20 is the section checkpoint). Voseo from the first sentence. PCIC A1 coverage noted per unit. **This is the artifact to argue with** — everything downstream is generated against it.
+Twenty units, ~12–18 new forms each, 5 lessons per unit (4 lessons + 1 review; unit 20 is a 3-lesson checkpoint). Voseo from the first sentence. PCIC A1 coverage noted per unit. **This is the artifact to argue with** — everything downstream is generated against it.
+
+The full lexicon per unit lives in `docs/course/section-1.yaml`. Encoding it moved a few things so that every sample is sayable with what has been taught by then: `mi` into unit 3, `cerca / lejos` into unit 6, and new samples for units 4, 10 and 20.
 
 | # | Unit | Grammar focus | Vocabulary | Sample target |
 |---|---|---|---|---|
 | 1 | Hola, che | `ser` 1sg/2sg-vos (`soy`, `sos`); `me llamo` / `te llamás`; `vos`, `yo` | greetings, `che`, `chau`, `dale`, `bien`, `todo bien` | *¿Todo bien, che? — Todo bien, ¿y vos?* |
 | 2 | ¿De dónde sos? | `ser` 3sg; `de`; gender of nationality adjectives | countries, nationalities, `argentino/a`, `de acá` | *Soy de Buenos Aires. ¿Y vos de dónde sos?* |
-| 3 | ¿Cuántos años tenés? | `tener` 1sg/2sg-vos/3sg; numbers 0–20 | age, `años`, `hermano/a` | *Tengo veinte años y mi hermana tiene diecisiete.* |
-| 4 | La familia | possessives `mi/tu/su`; plural `-s/-es`; `tener` pl | family, `viejos` (informal), `novio/a` | *Mis viejos viven en Rosario.* |
+| 3 | ¿Cuántos años tenés? | `tener` 1sg/2sg-vos/3sg; numbers 0–20; `mi` | age, `años`, `hermano/a` | *Tengo veinte años y mi hermana tiene diecisiete.* |
+| 4 | La familia | possessives `tu/su`, `mis`; plural `-s/-es`; `tener`, `ser` pl | family, `viejos` (informal), `novio/a` | *Mis viejos son de Rosario.* |
 | 5 | Mate y facturas | `gustar` (`me gusta`, `te gusta`, `le gusta`); definite articles | mate, `facturas`, `medialunas`, `milanesa`, `café con leche`, `tomar` | *¿Te gusta el mate amargo o dulce?* |
-| 6 | El bondi | `estar` 1sg/2sg-vos/3sg; `hay`; `¿dónde?` | `bondi`, `subte`, `parada`, `kiosco`, `cuadra`, `esquina` | *La parada del bondi está en la esquina.* |
+| 6 | El bondi | `estar` 1sg/2sg-vos/3sg; `hay`; `del`/`al` | `bondi`, `subte`, `parada`, `kiosco`, `cuadra`, `esquina`, `cerca / lejos` | *La parada del bondi está en la esquina.* |
 | 7 | ¿Qué hacés? | regular `-ar` present (`-o, -ás, -a, -amos, -an`) | `laburar`, `estudiar`, `tomar`, `hablar`, `caminar` | *Laburo en el centro y estudio a la noche.* |
 | 8 | Comés, vivís | regular `-er` / `-ir` present (`-és`, `-ís`) | `comer`, `vivir`, `leer`, `escribir`, `aprender` | *¿Vivís solo o con tu familia?* |
 | 9 | La hora | `¿qué hora es?`; `a las…`; `y media / y cuarto`; numbers 20–100 | days, `mañana / tarde / noche`, `temprano`, `tarde` | *Nos vemos a las siete y media.* |
-| 10 | Querés, podés, vas | `querer`, `poder`, `ir` (present, all persons taught so far); `ir a` + place | `salir`, `boliche`, `plaza`, `casa de` | *¿Querés ir a la plaza o preferís quedarte?* |
+| 10 | Querés, podés, vas | `querer`, `poder`, `ir` (present, all persons taught so far); `ir a` + place | `salir`, `boliche`, `plaza`, `cine` | *¿Querés ir a la plaza o al boliche?* |
 | 11 | Dale, vení | affirmative `vos` imperative (`mirá`, `vení`, `escuchá`, `hablá`, `decime`, `andá`) | `dale`, `esperá`, `pasá`, `sentate`, `fijate` | *Vení, sentate, tomamos unos mates.* |
 | 12 | Ropa y colores | adjective agreement (gender + number); `ser` for description | colours, `remera`, `zapatillas`, `campera`, `lindo/a`, `re` | *Esa campera es re linda.* |
-| 13 | El barrio | prepositions of place; `hay` vs `está`; `cerca / lejos` | `verdulería`, `panadería`, `farmacia`, `al lado de`, `enfrente` | *Hay una panadería al lado de la farmacia.* |
+| 13 | El barrio | prepositions of place; `al lado de`, `enfrente`, `entre` | `verdulería`, `panadería`, `farmacia`, `al lado de`, `enfrente` | *Hay una panadería al lado de la farmacia.* |
 | 14 | ¿Cuánto sale? | `¿cuánto sale?`, `cuesta`; numbers 100–1000; `plata`, `mangos` | shopping, `caro / barato`, `efectivo`, `tarjeta` | *¿Cuánto sale el café? — Mil quinientos mangos.* |
 | 15 | La rutina | reflexives (`me levanto`, `te levantás`, `se acuesta`); `antes / después de` | routine verbs, `bañarse`, `desayunar`, `finde` | *Los sábados me levanto tarde.* |
 | 16 | ¿Qué te gusta hacer? | `gustar / encantar` + infinitive; `también / tampoco` | hobbies, `fútbol`, `la cancha`, `juntarse`, `mirar una serie` | *Me encanta ir a la cancha los domingos.* |
 | 17 | Clima | `hace calor / frío`; `está nublado`; `llueve`; seasons (southern) | weather, `paraguas`, `verano en enero` | *Hace un calor bárbaro hoy.* |
 | 18 | Ahora | `estar` + gerund; `ahora`, `todavía`, `ya` | `estoy laburando`, `esperando`, `llegando` | *Estoy llegando, esperame.* |
 | 19 | Planes | `ir a` + infinitive; `mañana`, `el finde`, `la semana que viene` | plans, `asado`, `juntada`, `quedar en` | *El finde vamos a hacer un asado.* |
-| 20 | Repaso · checkpoint | no new grammar; register note on `boludo`, `quilombo`; culture: `che`, mate etiquette | mixed review | — |
+| 20 | Repaso · checkpoint | no new grammar; register note on `boludo`, `quilombo`; culture: `che`, mate etiquette | `posta`, `copado`, `pibe`, `laburo` | *Posta, este barrio es re copado.* |
 
 PCIC A1 items deliberately **out** of section 1: past tenses, `ser/estar` full contrast, object pronouns beyond `me/te`, comparatives. They open section 2.
 

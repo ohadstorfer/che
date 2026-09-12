@@ -1,0 +1,301 @@
+import { glueSeen, pickIntroSentence, pickReviewSentences, rungFor } from './sentences';
+import {
+  type LearnerData,
+  type SessionData,
+  type SessionItem,
+  drillable,
+  itemsForForm,
+  loadLearner,
+  matchingBlock,
+  modeForRung,
+  sentenceItem,
+} from './session';
+import { supabase } from './supabase';
+import type { ExerciseMode, Form, FormState, Lesson, LessonSlot, Sentence, Tip, Unit } from './types';
+
+// ---------------------------------------------------------------------------
+// Playing a lesson.
+//
+// A lesson is an ordered list of authored slots. Every slot but one resolves
+// the same way for every learner — that is what lets a reviewer approve a
+// lesson as a thing that exists. The exception is `review`: it pulls in words
+// from earlier units that are due for *this* learner, carried by sentences
+// from those units, so every lesson also quietly holds back forgetting.
+//
+// The result is the same SessionData the practice round produces, so the
+// practice screen plays both without knowing which it has.
+// ---------------------------------------------------------------------------
+
+/**
+ * What a `tip` item carries as its form. A tip drills no word, but every item
+ * in the queue is keyed and grouped by one, so it gets this stand-in — which
+ * the practice screen never grades, logs or introduces.
+ */
+export const TIP_FORM: Form = {
+  id: 'tip',
+  lemma_id: '',
+  lemma: '',
+  pos: 'tip',
+  form: '',
+  gloss_en: '',
+  features: {},
+  unit_id: '',
+  unit_ordinal: 0,
+  is_glue: true,
+  register: 'neutral',
+  audio_path: null,
+};
+
+export interface BuildLessonOptions {
+  /**
+   * The rendering a reviewer approves: review slots become placeholder cards
+   * instead of pulling this learner's due words, so the lesson looks the same
+   * whoever opens it.
+   */
+  canonical?: boolean;
+}
+
+export interface LessonData extends SessionData {
+  lesson: Lesson;
+  unit: Unit;
+}
+
+const SENTENCE_MODES: ExerciseMode[] = [
+  'sentence_intro',
+  'sentence_meaning',
+  'sentence_gap',
+  'sentence_build',
+  'sentence_listen',
+];
+
+export async function buildLesson(
+  userId: string,
+  lessonId: string,
+  { canonical = false }: BuildLessonOptions = {},
+): Promise<LessonData> {
+  const [{ data: lesson }, { data: slotRows }, data] = await Promise.all([
+    supabase.from('lessons').select('*').eq('id', lessonId).single(),
+    supabase.from('lesson_slots').select('*').eq('lesson_id', lessonId).order('ordinal', { ascending: true }),
+    loadLearner(userId),
+  ]);
+  if (!lesson) throw new Error(`lesson ${lessonId} not found`);
+  const [{ data: unit }, { data: tipRows }] = await Promise.all([
+    supabase.from('units').select('*').eq('id', (lesson as Lesson).unit_id).single(),
+    supabase.from('tips').select('*').eq('unit_id', (lesson as Lesson).unit_id),
+  ]);
+  if (!unit) throw new Error(`unit for lesson ${lessonId} not found`);
+
+  return {
+    ...resolveSlots(data, unit as Unit, (slotRows ?? []) as LessonSlot[], (tipRows ?? []) as Tip[], canonical),
+    lesson: lesson as Lesson,
+    unit: unit as Unit,
+  };
+}
+
+/** The slot resolution itself, apart from any loading — pure given its inputs. */
+export function resolveSlots(
+  data: LearnerData,
+  unit: Unit,
+  slots: LessonSlot[],
+  tips: Tip[],
+  canonical: boolean,
+  now = new Date(),
+): SessionData {
+  const nowIso = now.toISOString();
+  const tipById = new Map(tips.map((t) => [t.id, t]));
+  const sentenceById = new Map(data.sentences.map((s) => [s.id, s]));
+  const unitOf = (s: Sentence) => data.formById.get(s.target_form_id)?.unit_ordinal ?? Infinity;
+  const inReach = data.sentences.filter((s) => unitOf(s) <= unit.ordinal);
+  const seen = glueSeen(data.sentences);
+
+  // Forms she can be assumed to know at each point of the lesson: everything
+  // with a state, plus whatever this lesson has introduced so far.
+  const introduced = new Set<string>();
+  const known = () => new Set([...data.stateByForm.keys(), ...introduced]);
+
+  // Distractors may come from anything she has met or is about to, and from
+  // earlier units — never from the rest of this unit, which she hasn't seen yet.
+  const deck = data.forms.filter(
+    (f) =>
+      drillable(f) &&
+      (f.unit_ordinal < unit.ordinal ||
+        data.stateByForm.has(f.id) ||
+        slots.some((s) => s.kind === 'teach' && s.form_id === f.id)),
+  );
+
+  // Sentences this lesson reads for meaning anyway. Introducing a word through
+  // one of them would be the same screen twice — the intro *is* a meaning
+  // screen. A later gap or tile build of the sentence is different work, and
+  // meeting the word in it first is exactly right.
+  const readHere = new Set(
+    slots.flatMap((s) =>
+      s.kind === 'drill' && s.sentence_id && (!s.mode || s.mode === 'sentence_meaning' || s.mode === 'sentence_intro')
+        ? [s.sentence_id]
+        : [],
+    ),
+  );
+
+  const items: SessionItem[] = [];
+  const tipItem = (tip: Tip): SessionItem => ({
+    form: TIP_FORM,
+    state: null,
+    mode: 'tip',
+    direction: 'es_to_en',
+    tip,
+  });
+
+  for (const slot of slots) {
+    switch (slot.kind) {
+      case 'teach': {
+        const form = slot.form_id ? data.formById.get(slot.form_id) : undefined;
+        if (!form) break;
+        const state = data.stateByForm.get(form.id) ?? null;
+        if (state || introduced.has(form.id)) {
+          // Met before (a replay, or taught twice): straight to a question.
+          const first = itemsForForm(form, state, deck)[0];
+          if (first) items.push(first);
+          break;
+        }
+        // A brand-new word: met inside a sentence written for it when one is
+        // there to carry it, otherwise on the plain intro screen the practice
+        // queue adds in front of its first question. Either way, one easy
+        // question after, so meeting a word is followed by using it.
+        const unitSentences = inReach.filter((s) => s.unit_id === unit.id && !readHere.has(s.id));
+        const intro = pickIntroSentence(form, unitSentences, known());
+        if (intro) items.push(sentenceItem(data, intro, 'sentence_intro', form, form));
+        const first = itemsForForm(form, null, deck)[0];
+        if (first) items.push(first);
+        introduced.add(form.id);
+        break;
+      }
+
+      case 'drill': {
+        const sentence = slot.sentence_id ? sentenceById.get(slot.sentence_id) : undefined;
+        const target = sentence ? data.formById.get(sentence.target_form_id) : undefined;
+        if (!sentence || !target) break;
+        let mode: ExerciseMode =
+          slot.mode && SENTENCE_MODES.includes(slot.mode) ? slot.mode : modeForRung(rungFor(sentence, seen), sentence);
+        // A pinned listening screen with no recording yet falls back to the
+        // same build by sight rather than to a silent exercise.
+        if (mode === 'sentence_listen' && !sentence.audio_path) mode = 'sentence_build';
+        const introduces = mode === 'sentence_intro' && !known().has(target.id) ? target : undefined;
+        if (mode === 'sentence_intro' && !introduces) mode = 'sentence_meaning';
+        items.push(sentenceItem(data, sentence, mode, target, introduces));
+        if (introduces) introduced.add(target.id);
+        break;
+      }
+
+      case 'match': {
+        const k = known();
+        const taughtHere = data.forms.filter((f) => drillable(f) && f.unit_id === unit.id && k.has(f.id));
+        const block = matchingBlock(taughtHere);
+        if (block) items.push(block);
+        break;
+      }
+
+      case 'tip': {
+        const tip = slot.tip_id ? tipById.get(slot.tip_id) : undefined;
+        if (tip) items.push(tipItem(tip));
+        break;
+      }
+
+      case 'review': {
+        const count = slot.review_count ?? 0;
+        if (count <= 0) break;
+        if (canonical) {
+          items.push(
+            tipItem({
+              id: `review-${slot.id}`,
+              unit_id: unit.id,
+              title_en: `Review × ${count}`,
+              body_md:
+                'Words from earlier units that are due for this learner appear here — ' +
+                'different for everyone, so not part of what gets reviewed.',
+            }),
+          );
+          break;
+        }
+        items.push(...reviewItems(data, unit, count, deck, seen, nowIso));
+        break;
+      }
+    }
+  }
+
+  // What SM-2 may move: words new to her, and words that are due. Everything
+  // else a sentence carries along is drilled and logged but keeps its schedule —
+  // practising a word early should never push its due date around.
+  const scheduled = new Set<string>();
+  for (const item of items) {
+    if (item.mode === 'tip' || item.filler) continue;
+    for (const f of item.group ?? [item.form]) {
+      const st = data.stateByForm.get(f.id);
+      if (!st || (st.due_at && st.due_at <= nowIso)) scheduled.add(f.id);
+    }
+  }
+
+  return { items, allForms: deck, sentences: inReach, scheduledFormIds: [...scheduled] };
+}
+
+/**
+ * A review slot: `count` screens of words from earlier units that are due,
+ * through sentences from those units where one can carry them, on their own
+ * where not. When nothing is due, it tops up with the earlier words closest to
+ * falling due — as filler, so their schedules stay put.
+ */
+function reviewItems(
+  data: LearnerData,
+  unit: Unit,
+  count: number,
+  deck: Form[],
+  seen: Map<string, number>,
+  nowIso: string,
+): SessionItem[] {
+  const earlier: { state: FormState; form: Form }[] = [];
+  for (const state of data.states) {
+    const form = data.formById.get(state.form_id);
+    if (form && drillable(form) && form.unit_ordinal < unit.ordinal) earlier.push({ state, form });
+  }
+  earlier.sort((a, b) => (a.state.due_at ?? '').localeCompare(b.state.due_at ?? ''));
+  if (earlier.length === 0) return [];
+
+  const due = earlier.filter((x) => x.state.due_at && x.state.due_at <= nowIso);
+  const dueIds = new Set(due.map((x) => x.form.id));
+  const knownIds = new Set(data.stateByForm.keys());
+  const earlierSentences = data.sentences.filter(
+    (s) => (data.formById.get(s.target_form_id)?.unit_ordinal ?? Infinity) < unit.ordinal,
+  );
+
+  const out: SessionItem[] = [];
+  const covered = new Set<string>();
+  for (const sentence of pickReviewSentences(dueIds, earlierSentences, knownIds, count, seen, count, { pad: false })) {
+    const target =
+      (dueIds.has(sentence.target_form_id) ? data.formById.get(sentence.target_form_id) : undefined) ??
+      sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && dueIds.has(f.id));
+    if (!target) continue;
+    // Same rule as the practice round: the gap tests its word, tiles test every
+    // word, and reading for meaning tests nothing hard enough to count.
+    const mode = modeForRung(rungFor(sentence, seen), sentence);
+    if (mode === 'sentence_gap') covered.add(target.id);
+    else if (mode !== 'sentence_meaning') for (const id of sentence.form_ids) covered.add(id);
+    out.push({ ...sentenceItem(data, sentence, mode, target), review: true });
+  }
+
+  // Due words no sentence took: one production screen each — recognition alone
+  // proves little about a word she was starting to forget.
+  for (const { form, state } of due) {
+    if (out.length >= count) break;
+    if (covered.has(form.id)) continue;
+    const angles = itemsForForm(form, state, deck);
+    const production = angles.find((i) => ['word_build', 'typing', 'listen_build'].includes(i.mode)) ?? angles[0];
+    if (production) out.push({ ...production, review: true });
+  }
+
+  for (const { form, state } of earlier) {
+    if (out.length >= count) break;
+    if (dueIds.has(form.id)) continue;
+    const first = itemsForForm(form, state, deck)[0];
+    if (first) out.push({ ...first, review: true, filler: true });
+  }
+
+  return out.slice(0, count);
+}

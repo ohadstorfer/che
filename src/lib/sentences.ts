@@ -1,15 +1,14 @@
 import { supabase } from './supabase';
-import type { Card, Sentence, SentenceToken } from './types';
+import type { Form, Sentence, SentenceToken } from './types';
 
 // ---------------------------------------------------------------------------
-// Generated sentences — the context her words get reviewed through.
+// Sentences — the context forms get drilled through.
 //
-// The session decides *which* cards to drill (SM-2, in session.ts); this
-// module decides which sentence, if any, can carry that drill: a new word is
-// met inside a sentence written for it, and due words are reviewed inside the
-// sentence that covers the most of them. Everything else here is the small
-// mechanics those exercises need — options, tiles, and working out which word
-// she got wrong when a sentence comes out wrong.
+// What gets drilled is decided elsewhere (the lesson's slots in lesson.ts, SM-2
+// in session.ts); this module decides which sentence can carry a drill and at
+// which rung, and holds the small mechanics the sentence exercises need —
+// options, tiles, and working out which word she got wrong when a sentence
+// comes out wrong.
 // ---------------------------------------------------------------------------
 
 function shuffle<T>(arr: T[]): T[] {
@@ -29,35 +28,84 @@ const norm = (s: string) =>
     .replace(/\p{Diacritic}/gu, '')
     .replace(/[^\p{L}\p{N}]/gu, '');
 
-/** A token's translit without the punctuation it carries ("leejól?" → "leejól"). */
-export const tokenWord = (t: SentenceToken) => t.translit.replace(/^[¿¡]+|[.,!?¿¡;:…]+$/g, '');
+const LEAD = /^[¿¡"“«(]+/u;
+const TAIL = /[.,!?;:…"”»)]+$/u;
 
-/** The punctuation after a token's word, to keep next to a blank ("?"). */
-export const tokenTail = (t: SentenceToken) => t.translit.slice(tokenWord(t).length);
+/** Punctuation before a token's word — Spanish opens questions: "¿". */
+export const tokenHead = (t: SentenceToken) => t.surface.match(LEAD)?.[0] ?? '';
 
-/** Where a card's word sits in the sentence; -1 if it is not there. */
-export const tokenIndexOf = (s: Sentence, cardId: string) =>
-  s.tokens.findIndex((t) => t.card_ids?.includes(cardId));
+/** Punctuation after a token's word, to keep next to a blank: "?". */
+export const tokenTail = (t: SentenceToken) => t.surface.match(TAIL)?.[0] ?? '';
 
-export async function loadSentences(userId: string): Promise<Sentence[]> {
+/** A token's word without its punctuation: "¿Tenés" → "Tenés". */
+export const tokenWord = (t: SentenceToken) =>
+  t.surface.slice(tokenHead(t).length, t.surface.length - tokenTail(t).length);
+
+/**
+ * A word as it should appear out of its sentence. The first word of a sentence
+ * is capitalised in place, and a capital on one option or tile — when every
+ * other one is lowercase — gives the answer away. Names keep their capital:
+ * they're capitalised everywhere.
+ */
+export const outOfSentence = (t: SentenceToken, index: number) => {
+  const word = tokenWord(t);
+  const isName = t.form_ids.length === 0 && !t.glue;
+  return index === 0 && !isName ? word.charAt(0).toLocaleLowerCase('es') + word.slice(1) : word;
+};
+
+/** Where a form sits in the sentence; -1 if it is not there. */
+export const tokenIndexOf = (s: Sentence, formId: string) =>
+  s.tokens.findIndex((t) => t.form_ids.includes(formId));
+
+interface SentenceRow {
+  id: string;
+  unit_id: string;
+  es: string;
+  en: string;
+  en_alt: string[] | null;
+  audio_path: string | null;
+  target_form_id: string;
+  difficulty: number;
+  tokens: { surface: string; form_ids: string[] }[];
+}
+
+/**
+ * Every published sentence with her record for it. `forms` is the lexicon the
+ * session already holds — it is what tells a content word from a glue word
+ * from a name, which the stored tokens don't say.
+ */
+export async function loadSentences(userId: string, forms: Form[]): Promise<Sentence[]> {
   const [{ data: rows }, { data: states }] = await Promise.all([
-    supabase.from('sentences').select('*, sentence_cards(card_id)').is('retired_at', null),
+    supabase.from('sentences').select('*').eq('status', 'published'),
     supabase.from('sentence_states').select('*').eq('user_id', userId),
   ]);
+  const formById = new Map(forms.map((f) => [f.id, f]));
   const shownBy = new Map((states ?? []).map((s) => [s.sentence_id as string, s]));
-  return (rows ?? []).map((r) => {
+
+  return ((rows ?? []) as SentenceRow[]).map((r) => {
+    const tokens: SentenceToken[] = r.tokens.map((t) => {
+      const content: string[] = [];
+      let glue: string | undefined;
+      for (const id of t.form_ids) {
+        const f = formById.get(id);
+        if (!f || f.pos === 'propn') continue;
+        if (f.is_glue) glue = id;
+        else content.push(id);
+      }
+      return { surface: t.surface, form_ids: content, ...(glue ? { glue } : {}) };
+    });
     const st = shownBy.get(r.id);
     return {
       id: r.id,
-      hebrew: r.hebrew,
-      translit: r.translit,
-      spanish: r.spanish,
-      english: r.english,
+      unit_id: r.unit_id,
+      es: r.es,
+      en: r.en,
+      en_alt: r.en_alt ?? [],
       audio_path: r.audio_path,
-      target_card_id: r.target_card_id,
-      level: r.level,
-      tokens: r.tokens as SentenceToken[],
-      card_ids: ((r.sentence_cards ?? []) as { card_id: string }[]).map((sc) => sc.card_id),
+      target_form_id: r.target_form_id,
+      difficulty: r.difficulty,
+      tokens,
+      form_ids: [...new Set(tokens.flatMap((t) => t.form_ids))],
       shown: st
         ? { shown_count: st.shown_count, correct_count: st.correct_count, last_shown_at: st.last_shown_at }
         : null,
@@ -91,36 +139,36 @@ const byFreshness = (a: Sentence, b: Sentence) =>
 /** The freshest of a list; ties at random. */
 const freshest = (list: Sentence[]): Sentence | null => shuffle(list).sort(byFreshness)[0] ?? null;
 
-// A sentence can carry a word only if she knows every other word in it. That
-// is what the generator promised, but a card can be deleted after the fact, so
-// it is checked again here rather than trusted.
-const carriedBy = (s: Sentence, known: Set<string>, except?: string) =>
-  s.card_ids.every((id) => id === except || known.has(id));
+// A sentence can carry a word only if she knows every other word in it. The
+// linter promised that when the sentence was approved, but a lesson can be
+// reordered after the fact, so it is checked again here rather than trusted.
+export const carriedBy = (s: Sentence, known: Set<string>, except?: string) =>
+  s.form_ids.every((id) => id === except || known.has(id));
 
-/** The sentence a new word is met in, if one was written for it. */
-export function pickIntroSentence(card: Card, sentences: Sentence[], known: Set<string>) {
+/** The sentence a new form is met in, if one was written for it. */
+export function pickIntroSentence(form: Form, sentences: Sentence[], known: Set<string>) {
   return freshest(
-    sentences.filter((s) => s.target_card_id === card.id && carriedBy(s, known, card.id)),
+    sentences.filter((s) => s.target_form_id === form.id && carriedBy(s, known, form.id)),
   );
 }
 
 // ---------------------------------------------------------------------------
-// The ladder (2026-09-12, after her first week with sentences felt too hard).
+// The ladder.
 //
-// Sentences enter a class a few screens at a time, and three things climb with
-// her own results rather than by the calendar:
-//   1. how many sentence screens a class holds (the cap);
+// Three things climb with her own results rather than by the calendar:
+//   1. how many sentence screens a practice round holds (the cap);
 //   2. which exercise a sentence gets — meaning, then gap, then tiles;
 //   3. which sentences qualify — settled words, short ones first, and glue
 //      words only once she has seen them enough.
+// A lesson slot can pin its exercise instead; the ladder decides the rest.
 // ---------------------------------------------------------------------------
 
-/** Sentence screens per class to start with, and the most it ever grows to. */
+/** Sentence screens per round to start with, and the most it ever grows to. */
 export const SENTENCE_CAP_MIN = 2;
 export const SENTENCE_CAP_MAX = 8;
 /** Passed sentence screens per extra screen of cap. */
 export const SENTENCE_CAP_STEP = 10;
-/** Failed sentence screens in one class that cost a screen of cap next day. */
+/** Failed sentence screens in one day that cost a screen of cap the next. */
 export const SENTENCE_FAILS_TO_DROP = 2;
 /** Below this cap a new word is met on the plain intro screen; from here on,
  *  inside a sentence written for it (which then counts against the cap). */
@@ -133,7 +181,7 @@ export const RUNG_BUILD_AT = 2;
 
 const passesOf = (s: Sentence) => s.shown?.correct_count ?? 0;
 
-/** Sentence screens a class may hold today, from everything she has passed so
+/** Sentence screens a round may hold today, from everything she has passed so
  *  far and how yesterday went. Never below one: a bad day shrinks the dose, it
  *  doesn't cancel it. */
 export function sentenceCap(sentences: Sentence[], failedYesterday: number): number {
@@ -179,9 +227,8 @@ const difficulty = (s: Sentence, seen: Map<string, number>) =>
 // never drill the same word. What "best" means depends on where she is on the
 // ladder: on the low rungs the easiest sentence wins (short, no locked glue),
 // and only then the one covering more; once the cap has grown, coverage comes
-// first — a class of eight screens can afford to be efficient. Ties go to the
-// fresher sentence, and one shown in the last few days sits the session out
-// (SENTENCE_REST_DAYS).
+// first. Ties go to the fresher sentence, and one shown in the last few days
+// sits the round out (SENTENCE_REST_DAYS).
 export function pickReviewSentences(
   dueIds: Set<string>,
   sentences: Sentence[],
@@ -189,8 +236,9 @@ export function pickReviewSentences(
   max: number,
   seen: Map<string, number>,
   cap: number,
+  { pad = true }: { pad?: boolean } = {},
 ): Sentence[] {
-  const pool = sentences.filter((s) => carriedBy(s, eligible) && rested(s));
+  const pool = sentences.filter((s) => s.form_ids.length > 0 && carriedBy(s, eligible) && rested(s));
   const remaining = new Set(dueIds);
   const easyFirst = cap < INTRO_IN_SENTENCE_MIN_CAP;
   const out: Sentence[] = [];
@@ -199,7 +247,7 @@ export function pickReviewSentences(
     let bestCount = 0;
     for (const s of shuffle(pool)) {
       if (out.includes(s)) continue;
-      const count = s.card_ids.filter((id) => remaining.has(id)).length;
+      const count = s.form_ids.filter((id) => remaining.has(id)).length;
       if (count === 0) continue;
       if (!best) {
         best = s;
@@ -216,14 +264,14 @@ export function pickReviewSentences(
     }
     if (!best) break;
     out.push(best);
-    for (const id of best.card_ids) remaining.delete(id);
+    for (const id of best.form_ids) remaining.delete(id);
   }
   // The cap is a dose, not a ceiling: on a day when no due word has a settled
-  // sentence (her settled words are exactly the ones not falling due), the
-  // class still gets its few sentences — the easiest, freshest ones. Their
-  // words weren't asked for today, so the session drills and logs them without
-  // touching their schedule, the way it treats any filler.
-  if (out.length < max) {
+  // sentence, a practice round still gets its few sentences — the easiest,
+  // freshest ones. Their words weren't asked for today, so the round drills and
+  // logs them without touching their schedule, the way it treats any filler.
+  // A lesson's review slot asks for exactly its due words, so it opts out.
+  if (pad && out.length < max) {
     const spare = shuffle(pool.filter((s) => !out.includes(s))).sort(
       (a, b) => difficulty(a, seen) - difficulty(b, seen) || byFreshness(a, b),
     );
@@ -236,39 +284,45 @@ export type Option = { id: string; label: string };
 
 /** Meanings to choose between: this sentence's, and two other sentences'. */
 export function meaningOptions(sentence: Sentence, all: Sentence[]): Option[] {
-  const others = shuffle(all.filter((s) => s.id !== sentence.id && s.spanish !== sentence.spanish));
+  const others = shuffle(all.filter((s) => s.id !== sentence.id && s.en !== sentence.en));
   const distinct = new Map<string, Sentence>();
   for (const s of others) {
-    if (!distinct.has(s.spanish)) distinct.set(s.spanish, s);
+    if (!distinct.has(s.en)) distinct.set(s.en, s);
     if (distinct.size === 2) break;
   }
-  return shuffle([sentence, ...distinct.values()]).map((s) => ({ id: s.id, label: s.spanish }));
+  return shuffle([sentence, ...distinct.values()]).map((s) => ({ id: s.id, label: s.en }));
 }
 
-/** Words to fill the gap with: the right one (as it appears in the sentence —
- *  prefix and all) and three single-word cards she knows. `target` is the card
- *  the gap tests — a due word in the sentence, not necessarily the one the
- *  sentence was written for. */
-export function gapOptions(sentence: Sentence, target: Card, allCards: Card[]): Option[] {
+/** Words to fill the gap with: the right one, as it appears in the sentence,
+ *  and three single-word forms she knows. `target` is the form the gap tests —
+ *  a due word in the sentence, not necessarily the one it was written for. */
+export function gapOptions(sentence: Sentence, target: Form, allForms: Form[]): Option[] {
   const index = tokenIndexOf(sentence, target.id);
-  const answer = index >= 0 ? tokenWord(sentence.tokens[index]) : target.translit;
+  const answer = index >= 0 ? outOfSentence(sentence.tokens[index], index) : target.form;
   const decoys = shuffle(
-    allCards.filter(
-      (c) =>
-        c.id !== target.id && !c.translit.trim().includes(' ') && norm(c.translit) !== norm(answer),
+    allForms.filter(
+      (f) =>
+        f.id !== target.id &&
+        !f.is_glue &&
+        f.pos !== 'propn' &&
+        !f.form.includes(' ') &&
+        norm(f.form) !== norm(answer),
     ),
   );
+  // A decoy of the same part of speech is a real question; "casa" in a verb's
+  // gap is a giveaway.
+  decoys.sort((a, b) => Number(b.pos === target.pos) - Number(a.pos === target.pos));
   const seen = new Set<string>();
-  const picked: Card[] = [];
-  for (const c of decoys) {
-    if (seen.has(norm(c.translit))) continue;
-    seen.add(norm(c.translit));
-    picked.push(c);
+  const picked: Form[] = [];
+  for (const f of decoys) {
+    if (seen.has(norm(f.form))) continue;
+    seen.add(norm(f.form));
+    picked.push(f);
     if (picked.length === 3) break;
   }
   return shuffle([
     { id: target.id, label: answer },
-    ...picked.map((c) => ({ id: c.id, label: c.translit })),
+    ...picked.map((f) => ({ id: f.id, label: f.form })),
   ]);
 }
 
@@ -276,29 +330,27 @@ export function gapOptions(sentence: Sentence, target: Card, allCards: Card[]): 
 const DECOYS = 4;
 
 /** Word tiles for rebuilding the sentence, with a few of her other words mixed in. */
-export function sentenceTiles(sentence: Sentence, allCards: Card[]) {
-  const answer = sentence.tokens.map(tokenWord);
+export function sentenceTiles(sentence: Sentence, allForms: Form[]) {
+  const answer = sentence.tokens.map(outOfSentence);
   const taken = new Set(answer.map(norm));
   const spare = new Map<string, string>();
-  for (const c of allCards) {
-    for (const w of c.translit.trim().split(/\s+/)) {
-      const word = w.replace(/[.,!?¿¡;:]+$/g, '');
-      const key = norm(word);
-      if (key && !taken.has(key) && !spare.has(key)) spare.set(key, word);
-    }
+  for (const f of shuffle(allForms)) {
+    if (f.pos === 'propn') continue;
+    const key = norm(f.form);
+    if (key && !taken.has(key) && !spare.has(key)) spare.set(key, f.form);
   }
-  const decoys = shuffle([...spare.values()]).slice(
+  const decoys = [...spare.values()].slice(
     0,
     Math.min(DECOYS, Math.max(2, Math.ceil(answer.length / 2))),
   );
   return { answer, tiles: shuffle([...answer, ...decoys]) };
 }
 
-// Which cards a wrong build actually missed. Her tiles are matched to the
+// Which forms a wrong build actually missed. Her tiles are matched to the
 // sentence's words as a subsequence, so a skipped word or a stray decoy only
-// blames the word it displaced — not everything after it. Glue words have no
-// card to blame; if nothing else was wrong, the target takes it.
-export function missedCards(sentence: Sentence, placed: string[]): string[] {
+// blames the word it displaced — not everything after it. Glue words and names
+// have no form to blame; if nothing else was wrong, the target takes it.
+export function missedForms(sentence: Sentence, placed: string[]): string[] {
   const wrong = new Set<string>();
   let j = 0;
   for (const t of sentence.tokens) {
@@ -311,17 +363,17 @@ export function missedCards(sentence: Sentence, placed: string[]): string[] {
       }
     }
     if (found >= 0) j = found + 1;
-    else for (const id of t.card_ids ?? []) wrong.add(id);
+    else for (const id of t.form_ids) wrong.add(id);
   }
-  if (wrong.size === 0) wrong.add(sentence.target_card_id);
+  if (wrong.size === 0) wrong.add(sentence.target_form_id);
   return [...wrong];
 }
 
 /** Bookkeeping for one sentence screen, fire-and-forget: `shown_count` is
  *  screens, `correct_count` screens passed — the numbers the ladder climbs on
  *  (sentenceCap, rungFor, glueSeen). Mutates `sentence.shown` too, so anything
- *  picked later in this session sees the new numbers rather than the ones
- *  loaded at the start. */
+ *  picked later in this round sees the new numbers rather than the ones loaded
+ *  at the start. */
 export function recordShown(userId: string, sentence: Sentence, correct: boolean) {
   const next = {
     shown_count: (sentence.shown?.shown_count ?? 0) + 1,

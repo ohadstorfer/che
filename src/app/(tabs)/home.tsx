@@ -1,7 +1,7 @@
 import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { router, useFocusEffect } from 'expo-router';
-import { type ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { Fragment, type ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   AccessibilityInfo,
   Animated,
@@ -19,34 +19,33 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { localDateStr, WEEKDAY_INITIALS, weekDates } from '@/lib/dates';
+import { type Course, currentIndex, loadCourse, loadProgress, type PathLesson } from '@/lib/course';
 import { enablePush, getPushStatus, type PushStatus } from '@/lib/push';
-import { getPendingCounts } from '@/lib/session';
+import { getPracticeCounts } from '@/lib/session';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { streakStatus, type StreakStatus } from '@/lib/streak';
 import { supabase } from '@/lib/supabase';
 import { colors, frost, path, radius, shadow } from '@/lib/theme';
-import type { Profile, Streak } from '@/lib/types';
+import type { Streak } from '@/lib/types';
 
 interface HomeData {
+  course: Course;
+  /** Her step on the road: the first lesson she hasn't finished. */
+  current: number;
   streak: Streak | null;
+  /** Words due for review right now — the Practice button's badge. */
   due: number;
-  newAvailable: number;
-  doneToday: boolean;
-  /** Cards she has already met — the pool an extra round can draw from. */
-  reviewable: number;
-  /** Every lesson she has ever finished — one step of the path each. */
-  lessons: number;
-  studentName: string;
-  lastPractice: string | null;
+  /** Words she has met at all; Practice only exists once there are some. */
+  known: number;
   /** Which days of this week she has already completed, as YYYY-MM-DD. */
   weekDone: string[];
 }
 
 // ---------------------------------------------------------------------------
 // The path — a Duolingo-style trail of "coin" buttons winding down the screen.
-// One node per finished lesson, then the current step (the only tappable one,
-// it just starts a lesson), then a few locked nodes so the road visibly
-// continues. No repeating, no jumping.
+// One coin per lesson of the course, in order: the ones she has finished, the
+// current step (the only tappable one), and the rest of the road locked ahead
+// of her. Each unit opens with a banner naming what it teaches.
 //
 // A node's whole look — size, colour, icon, ring — is derived from one number,
 // its phase: 0 locked, 1 current, 2 done. That is what makes finishing a lesson
@@ -76,7 +75,12 @@ const STEP_GAP = 28;
 const STEP_PITCH = BOX + STEP_GAP;
 /** Breathing room before the first node. */
 const PATH_TOP = 24;
-const stepY = (i: number) => PATH_TOP + i * STEP_PITCH;
+/** A unit's banner is a fixed-height row too, so it folds into the arithmetic. */
+const BANNER_H = 76;
+const BANNER_GAP = 26;
+const BANNER_PITCH = BANNER_H + BANNER_GAP;
+/** Where step `i` sits, given how many unit banners stand above it. */
+const stepY = (i: number, bannersAbove: number) => PATH_TOP + bannersAbove * BANNER_PITCH + i * STEP_PITCH;
 
 const EASE_OUT = Easing.bezier(0.23, 1, 0.32, 1);
 const EASE_IN_OUT = Easing.bezier(0.77, 0, 0.175, 1);
@@ -89,15 +93,9 @@ const BREATHE_MS = 1300;
 /** Horizontal S-curve: one full wave every 8 steps. */
 const swing = (i: number) => Math.round(Math.sin((i * Math.PI) / 4) * 78);
 // A step's icon is its own, whatever phase it is in: locked it is a grey hint
-// of what's coming, and it lights up when she gets there. FontAwesome5's
-// Judaica set (solid only) beats the generic book/headset/dumbbell icons here:
-// the road she is walking should look like the language she is learning.
-// `hanukiah` is deliberately left out — next to `menorah` at 26px the two are
-// the same grey blob.
-//
-// The star is Material's rather than FontAwesome's: FA draws the same
-// interlaced hexagram with bands so thick the triangles almost close up, and
-// against the airier ornaments around it the coin read as a blot.
+// of what's coming, and it lights up when she gets there. Marks of the place
+// beat generic book/headset/dumbbell icons: the road she is walking should look
+// like where the language is spoken.
 //
 // Six marks of the place the language comes from, cycling down the road so no
 // two neighbouring steps wear the same one. Solid weights only: at 27pt an
@@ -205,11 +203,14 @@ function PathStep({
   index,
   phase,
   reduced,
+  label,
   onPress,
 }: {
   index: number;
   phase: Phase;
   reduced: boolean;
+  /** What the coin is, for screen readers: "Lesson 2 · Hola, che". */
+  label: string;
   onPress?: () => void;
 }) {
   // A step mounts wherever it already is and only moves when the path moves
@@ -358,15 +359,56 @@ function PathStep({
           <Pressable
             onPress={onPress}
             accessibilityRole="button"
-            accessibilityLabel="Empezar la lección"
+            accessibilityLabel={`Empezar: ${label}`}
             hitSlop={8}
             style={styles.nodeBox}>
             {({ pressed }) => coin(pressed)}
           </Pressable>
         ) : (
-          <View style={styles.nodeBox}>{coin(false)}</View>
+          <View
+            style={styles.nodeBox}
+            accessible
+            accessibilityLabel={`${label}: ${phase === 2 ? 'completada' : 'bloqueada'}`}>
+            {coin(false)}
+          </View>
         )}
       </View>
+    </View>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// UnitBanner — the row that opens each unit on the road: which unit, what it's
+// called, and the one line of what it teaches. The unit she is in wears the
+// primary; finished ones keep a tick; the ones ahead stay quiet and locked.
+// A fixed height, like every row on the road, so scrolling to a step stays
+// arithmetic.
+// ---------------------------------------------------------------------------
+type UnitState = 'done' | 'current' | 'locked';
+
+function UnitBanner({ lesson, state }: { lesson: PathLesson; state: UnitState }) {
+  const current = state === 'current';
+  const { unit } = lesson;
+  return (
+    <View
+      style={[styles.banner, current && styles.bannerCurrent, state === 'locked' && styles.bannerLocked]}
+      accessible
+      accessibilityRole="header"
+      accessibilityLabel={`Unidad ${unit.ordinal}: ${unit.title_en}. ${unit.summary_en}`}>
+      <View style={styles.bannerText}>
+        <Text style={[styles.bannerEyebrow, current && styles.onPrimaryMuted]}>UNIDAD {unit.ordinal}</Text>
+        <Text style={[styles.bannerTitle, current && styles.onPrimary]} numberOfLines={1}>
+          {unit.title_en}
+        </Text>
+        <Text style={[styles.bannerSummary, current && styles.onPrimaryMuted]} numberOfLines={1}>
+          {unit.summary_en}
+        </Text>
+      </View>
+      {state === 'done' ? (
+        <Ionicons name="checkmark-circle" size={26} color={colors.primary} />
+      ) : state === 'locked' ? (
+        <Ionicons name="lock-closed" size={17} color={colors.faint} />
+      ) : null}
     </View>
   );
 }
@@ -379,12 +421,10 @@ function PathStep({
 // ---------------------------------------------------------------------------
 function PushPrompt({
   userId,
-  isStudent,
   status,
   onStatus,
 }: {
   userId: string;
-  isStudent: boolean;
   status: PushStatus;
   onStatus: (s: PushStatus) => void;
 }) {
@@ -415,14 +455,12 @@ function PushPrompt({
         <Text style={styles.mutedText}>
           {Platform.OS === 'web'
             ? 'Las notificaciones están bloqueadas. Activalas en la configuración del navegador.'
-            : 'Las notificaciones están bloqueadas. Activalas en Ajustes → Moribreo → Notificaciones.'}
+            : 'Las notificaciones están bloqueadas. Activalas en Ajustes → Che → Notificaciones.'}
         </Text>
       ) : (
         <>
           <Text style={styles.mutedText}>
-            {isStudent
-              ? 'Te recordamos la lección desde las 8 de la mañana, cada 3 horas, hasta que la termines.'
-              : 'Te avisamos cuando tu alumno complete su lección, y si se saltea un día.'}
+            Te recordamos la lección de hoy hasta que la termines.
           </Text>
           <Button
             title="Activar notificaciones"
@@ -596,16 +634,13 @@ function DayCell({
 }
 
 // ---------------------------------------------------------------------------
-// HomeHeader — her face, her name, her streak. It holds its place while the
+// HomeHeader — the mascot, her name, her streak. It holds its place while the
 // road scrolls past underneath, so the one line that says who this is for is
 // never more than a glance away.
-//
-// The photo is the student's, so the teacher's dashboard doesn't wear it: a
-// face next to "Hola, Ohad" would be claiming to be him.
 // ---------------------------------------------------------------------------
 function HomeHeader({
   name,
-  isStudent,
+  isStaff,
   status,
   week,
   weekDone,
@@ -616,7 +651,8 @@ function HomeHeader({
   onLogout,
 }: {
   name: string;
-  isStudent: boolean;
+  /** Reviewers and admins get a sign-out button; learners never need one. */
+  isStaff: boolean;
   /** Null until the real streak has loaded. */
   status: StreakStatus | null;
   /** This week's seven local dates, Monday first. */
@@ -635,16 +671,14 @@ function HomeHeader({
   return (
     <View style={[styles.header, { paddingTop: 14 + topInset }]}>
       <View style={styles.headerTop}>
-        {isStudent ? (
-          <Image
-            source={require('@/assets/images/mora-avatar.png')}
-            style={styles.avatar}
-            contentFit="cover"
-            accessible={false}
-          />
-        ) : null}
+        <Image
+          source={require('@/assets/images/mora-avatar.png')}
+          style={styles.avatar}
+          contentFit="cover"
+          accessible={false}
+        />
         <Text style={styles.hello} numberOfLines={1}>
-          {isStudent ? `Hola, ${name}!` : `Hola, ${name}`}
+          {name ? `Hola, ${name}!` : 'Hola!'}
         </Text>
         {/* A ghost until the count is real — "0 días" flashing into "1 día" is
             worse than a chip that arrives a moment late. A frozen run turns
@@ -672,10 +706,10 @@ function HomeHeader({
             </View>
           )
         )}
-        {/* The last thing Perfil was still needed for — and only on the teacher's
-            side. Mora stays signed in on her phone forever; the only thing a
-            sign-out button could do for her is lock her out by accident. */}
-        {isStudent ? null : (
+        {/* Only for staff. A learner stays signed in on her phone forever; the
+            only thing a sign-out button could do for her is lock her out by
+            accident. */}
+        {!isStaff ? null : (
           <Pressable
             onPress={onLogout}
             accessibilityRole="button"
@@ -707,9 +741,6 @@ function HomeHeader({
   );
 }
 
-/** Locked steps rendered below the current one, extended as she scrolls. */
-const LOCKED_CHUNK = 12;
-
 /** Null while her step is on screen; otherwise the way back to it. */
 type JumpDirection = 'up' | 'down' | null;
 /** How far past the edge the step has to go before the way back is offered. */
@@ -727,6 +758,7 @@ const JUMP_MARGIN = 60;
 // move to show when she wasn't watching.
 // ---------------------------------------------------------------------------
 interface Shown {
+  /** Lessons finished in path order — which is also the index of her step. */
   lessons: number;
   weekDone: string[];
   streak: StreakStatus | null;
@@ -796,8 +828,13 @@ export default function Home() {
   }, []);
 
   const scrollRef = useRef<ScrollView>(null);
-  // The road ahead grows as she approaches its end, so it never bottoms out.
-  const [lockedAhead, setLockedAhead] = useState(LOCKED_CHUNK);
+  /** Which unit each step is in — what `yOf` needs to count the banners above it. */
+  const unitIndexOf = useRef<number[]>([]);
+  const yOf = useCallback((i: number) => {
+    const units = unitIndexOf.current;
+    if (units.length === 0) return stepY(i, 0);
+    return stepY(i, (units[Math.min(i, units.length - 1)] ?? 0) + 1);
+  }, []);
   /** Where the path starts inside the scroll content, and how tall the window is. */
   const pathTop = useRef(0);
   /** The path's own DOM node (web) — measured before first paint. */
@@ -820,80 +857,31 @@ export default function Home() {
 
   const load = useCallback(async () => {
     if (!profile) return;
-    // The teacher's dashboard shows the student's progress.
-    let student: Profile | null = profile;
-    if (profile.role === 'teacher') {
-      const { data: rows } = await supabase.from('profiles').select('*').eq('role', 'student');
-      student = (rows?.[0] as Profile) ?? null;
-    }
-
-    const today = localDateStr();
     const week = weekDates();
-    const [counts, streakRes, sessionRes, lastRes, doneCountRes, lessonRes, weekRes] =
-      await Promise.all([
-        student
-          ? getPendingCounts(student.id)
-          : Promise.resolve({ due: 0, newAvailable: 0, total: 0, reviewable: 0 }),
-        student
-          ? supabase.from('streaks').select('*').eq('user_id', student.id).maybeSingle()
-          : Promise.resolve({ data: null }),
-        student
-          ? supabase
-              .from('daily_sessions')
-              .select('completed_at')
-              .eq('user_id', student.id)
-              .eq('session_date', today)
-              .maybeSingle()
-          : Promise.resolve({ data: null }),
-        student
-          ? supabase
-              .from('review_logs')
-              .select('reviewed_at')
-              .eq('user_id', student.id)
-              .order('reviewed_at', { ascending: false })
-              .limit(1)
-          : Promise.resolve({ data: null }),
-        student
-          ? supabase
-              .from('daily_sessions')
-              .select('session_date', { count: 'exact', head: true })
-              .eq('user_id', student.id)
-              .not('completed_at', 'is', null)
-          : Promise.resolve({ count: 0 }),
-        student
-          ? supabase
-              .from('lessons')
-              .select('id', { count: 'exact', head: true })
-              .eq('user_id', student.id)
-          : Promise.resolve({ count: 0, error: null }),
-        // This week's completed days, for the strip in the header. Read off
-        // `daily_sessions` rather than derived from the streak: a week with a
-        // hole in it still has to show the days on either side of the hole.
-        student
-          ? supabase
-              .from('daily_sessions')
-              .select('session_date')
-              .eq('user_id', student.id)
-              .gte('session_date', week[0])
-              .lte('session_date', week[6])
-              .not('completed_at', 'is', null)
-          : Promise.resolve({ data: [] }),
-      ]);
+    const [course, done, counts, streakRes, weekRes] = await Promise.all([
+      loadCourse(),
+      loadProgress(profile.id),
+      getPracticeCounts(profile.id),
+      supabase.from('streaks').select('*').eq('user_id', profile.id).maybeSingle(),
+      // This week's completed days, for the strip in the header. Read off
+      // `daily_sessions` rather than derived from the streak: a week with a
+      // hole in it still has to show the days on either side of the hole.
+      supabase
+        .from('daily_sessions')
+        .select('session_date')
+        .eq('user_id', profile.id)
+        .gte('session_date', week[0])
+        .lte('session_date', week[6])
+        .not('completed_at', 'is', null),
+    ]);
 
+    unitIndexOf.current = course.path.map((l) => l.unitIndex);
     setData({
+      course,
+      current: currentIndex(course.path, done),
       streak: (streakRes.data as Streak) ?? null,
       due: counts.due,
-      newAvailable: counts.newAvailable,
-      doneToday: !!sessionRes.data?.completed_at,
-      reviewable: counts.reviewable,
-      // Before migration 0005 there is no `lessons` table, and a HEAD request
-      // for a missing one comes back with no body — which postgrest-js reports
-      // as a null count and, because there is nothing to parse, no error at
-      // all. So the count itself is the signal: a number means the table
-      // answered, null means fall back to one step per completed day.
-      lessons: lessonRes.count ?? doneCountRes.count ?? 0,
-      studentName: student?.display_name ?? '',
-      lastPractice: lastRes.data?.[0]?.reviewed_at ?? null,
+      known: counts.known,
       weekDone: (weekRes.data ?? []).map((r: { session_date: string }) => r.session_date),
     });
   }, [profile]);
@@ -937,7 +925,7 @@ export default function Home() {
 
   const scrollToStep = useCallback(
     (i: number, animated: boolean, ms = SCROLL_MS) => {
-      const y = Math.max(pathTop.current + stepY(i) - viewport.current * 0.42, 0);
+      const y = Math.max(pathTop.current + yOf(i) - viewport.current * 0.42, 0);
       const node = scrollNode();
       if (gliding.current != null) {
         cancelAnimationFrame(gliding.current);
@@ -970,7 +958,7 @@ export default function Home() {
       };
       gliding.current = requestAnimationFrame(frame);
     },
-    [scrollNode],
+    [scrollNode, yOf],
   );
 
   // ------------------------------------------------------------------
@@ -1021,7 +1009,7 @@ export default function Home() {
   useEffect(() => {
     if (!data) return;
     const next: Shown = {
-      lessons: data.lessons,
+      lessons: data.current,
       weekDone: data.weekDone,
       streak: streakStatus(data.streak, localDateStr()),
     };
@@ -1061,34 +1049,31 @@ export default function Home() {
       pathEl.getBoundingClientRect().top - contentEl.getBoundingClientRect().top;
     placed.current = true;
     placedAt.current = Date.now();
-    scrollEl.scrollTop = Math.max(
-      pathTop.current + stepY(shown.lessons) - viewport.current * 0.42,
-      0,
-    );
+    scrollEl.scrollTop = Math.max(pathTop.current + yOf(shown.lessons) - viewport.current * 0.42, 0);
     if (pendingAdvance.current) requestAnimationFrame(advance);
-  }, [shown, pushStatus, advance, scrollNode]);
+  }, [shown, pushStatus, advance, scrollNode, yOf]);
 
   if (!profile) return null;
-  const isStudent = profile.role === 'student';
-  const pending = (data?.due ?? 0) + (data?.newAvailable ?? 0);
+  const isStaff = profile.role !== 'student';
   // Re-derived on every render rather than held in state: the screen reloads on
   // focus, so a phone left open past midnight comes back to the right week.
   const todayDate = localDateStr();
   const thisWeek = weekDates();
 
   // ------------------------------------------------------------------
-  // Path layout. One done node per finished lesson, then the step a tap
-  // would practice right now — today's scheduled session, or an extra round
-  // once today is already done. Either way finishing it moves her on.
+  // Path layout. Every lesson of the course is a coin; the road is drawn from
+  // what is *shown*, which lags the data by the length of the advance — that
+  // lag is the animation.
   // ------------------------------------------------------------------
-  const canPractice = data != null && (pending > 0 || data.reviewable > 0);
-  const noCardsYet = data != null && pending === 0 && data.reviewable === 0;
-
-  // The road is drawn from what is *shown*, which lags the data by the length
-  // of the advance — that lag is the animation.
+  const path = data?.course.path ?? [];
+  const noCourse = data != null && path.length === 0;
   const current = shown?.lessons ?? 0;
-  const steps = current + 1 + lockedAhead;
   const phaseOf = (i: number): Phase => (i < current ? 2 : i === current ? 1 : 0);
+  const unitStateOf = (lesson: PathLesson): UnitState => {
+    const unitLessons = path.filter((l) => l.unit_id === lesson.unit_id);
+    const last = unitLessons[unitLessons.length - 1]?.index ?? lesson.index;
+    return current > last ? 'done' : current >= lesson.index ? 'current' : 'locked';
+  };
 
   // Land with the step in view, path history above it — on her old step if a
   // move is about to play, so she sees it happen rather than arriving after it.
@@ -1115,14 +1100,7 @@ export default function Home() {
     }
   };
 
-  // What makes a round "extra" is that today is already credited — not that
-  // there is nothing scheduled left. Those come apart on any day where nothing
-  // happens to fall due: routing by `pending` sent the first lesson of the day
-  // in as an extra round, so the day was never credited, the streak never
-  // moved, and `last_completed_date` stayed old enough to reset the streak on
-  // the next day that did count. `doneToday` is the flag that actually answers
-  // the question, read straight off today's `daily_sessions` row.
-  const startLesson = () => router.push(data?.doneToday ? '/practice?free=1' : '/practice');
+  const startLesson = (lesson: PathLesson) => router.push(`/practice?lesson=${lesson.id}`);
 
   const logout = async () => {
     await supabase.auth.signOut();
@@ -1137,7 +1115,7 @@ export default function Home() {
           the page colour showing through a padded band. */}
       <HomeHeader
         name={profile.display_name}
-        isStudent={isStudent}
+        isStaff={isStaff}
         status={shown?.streak ?? null}
         week={thisWeek}
         weekDone={shown?.weekDone ?? null}
@@ -1157,14 +1135,9 @@ export default function Home() {
           place();
         }}
         onScroll={({ nativeEvent: e }) => {
-          // Extend the road well before she reaches the bottom, so the scroll
-          // never hits a hard stop and the path reads as endless.
-          const remaining = e.contentSize.height - e.contentOffset.y - e.layoutMeasurement.height;
-          if (remaining < 600) setLockedAhead((n) => n + LOCKED_CHUNK);
-
           // Wandering up the road she has walked, or down the one she hasn't,
           // offers a way back to the step that is actually hers.
-          const node = pathTop.current + stepY(current) + BOX / 2;
+          const node = pathTop.current + yOf(current) + BOX / 2;
           const top = e.contentOffset.y;
           const bottom = top + e.layoutMeasurement.height;
           const next = node < top + JUMP_MARGIN ? 'up' : node > bottom - JUMP_MARGIN ? 'down' : null;
@@ -1177,7 +1150,6 @@ export default function Home() {
         {pushStatus ? (
           <PushPrompt
             userId={profile.id}
-            isStudent={isStudent}
             status={pushStatus}
             onStatus={(s) => {
               lastPushStatus = s;
@@ -1186,75 +1158,84 @@ export default function Home() {
           />
         ) : null}
 
-        {isStudent ? (
-          shown == null || pushStatus == null ? (
-            // The road's place, held by a sun instead of a spinner: white on
-            // the bone, present but barely, until the real path stands here.
-            <View key="loading" style={styles.pathLoading}>
-              <Pulse reduced={reduced} style={styles.pathLoadingStar}>
-                <MaterialCommunityIcons name="white-balance-sunny" size={124} color={colors.card} />
-              </Pulse>
-            </View>
-          ) : noCardsYet ? (
-            <Panel key="empty">
-              <Text style={styles.mutedText}>
-                Todavía no hay palabras para practicar. Pedile algunas a Ohad!
-              </Text>
-            </Panel>
-          ) : (
-            // Keyed so React can never recycle the loading view's DOM node
-            // into this one: react-native-web only wires onLayout's
-            // ResizeObserver when a node mounts, so a recycled node keeps the
-            // handler but never gets observed — onLayout goes silent, pathTop
-            // stays unmeasured, and the road opens at the top instead of on
-            // her step.
-            <View
-              key="path"
-              ref={pathRef}
-              style={styles.path}
-              onLayout={(e) => {
-                pathTop.current = e.nativeEvent.layout.y;
-                place();
-              }}>
-              {Array.from({ length: steps }, (_, i) => (
-                <PathStep
-                  key={`${epoch}:${i}`}
-                  index={i}
-                  phase={phaseOf(i)}
-                  reduced={reduced}
-                  onPress={i === current && canPractice ? startLesson : undefined}
-                />
-              ))}
-            </View>
-          )
-        ) : (
-          <Panel style={{ gap: 10 }}>
-            <Text style={styles.sectionTitle}>{data?.studentName || 'Estudiante'}</Text>
-            <Text style={styles.mutedText}>
-              {data == null
-                ? 'Cargando…'
-                : data.doneToday
-                  ? 'Ya completó la sesión de hoy ✅'
-                  : pending > 0
-                    ? `Tiene ${pending} tarjeta${pending === 1 ? '' : 's'} pendiente${pending === 1 ? '' : 's'} hoy.`
-                    : 'Sin tarjetas pendientes hoy.'}
-            </Text>
-            {data?.lastPractice ? (
-              <Text style={styles.mutedText}>
-                Última práctica: {new Date(data.lastPractice).toLocaleDateString('es-AR')}
-              </Text>
-            ) : null}
+        {shown == null || pushStatus == null ? (
+          // The road's place, held by a sun instead of a spinner: white on the
+          // bone, present but barely, until the real path stands here.
+          <View key="loading" style={styles.pathLoading}>
+            <Pulse reduced={reduced} style={styles.pathLoadingStar}>
+              <MaterialCommunityIcons name="white-balance-sunny" size={124} color={colors.card} />
+            </Pulse>
+          </View>
+        ) : noCourse ? (
+          <Panel key="empty">
+            <Text style={styles.mutedText}>Todavía no hay lecciones publicadas.</Text>
           </Panel>
+        ) : (
+          // Keyed so React can never recycle the loading view's DOM node into
+          // this one: react-native-web only wires onLayout's ResizeObserver when
+          // a node mounts, so a recycled node keeps the handler but never gets
+          // observed — onLayout goes silent, pathTop stays unmeasured, and the
+          // road opens at the top instead of on her step.
+          <View
+            key="path"
+            ref={pathRef}
+            style={styles.path}
+            onLayout={(e) => {
+              pathTop.current = e.nativeEvent.layout.y;
+              place();
+            }}>
+            {path.map((lesson) => (
+              <Fragment key={`${epoch}:${lesson.id}`}>
+                {lesson.opensUnit ? <UnitBanner lesson={lesson} state={unitStateOf(lesson)} /> : null}
+                <PathStep
+                  index={lesson.index}
+                  phase={phaseOf(lesson.index)}
+                  reduced={reduced}
+                  label={`${lesson.title_en} · ${lesson.unit.title_en}`}
+                  onPress={lesson.index === current ? () => startLesson(lesson) : undefined}
+                />
+              </Fragment>
+            ))}
+          </View>
         )}
       </ScrollView>
 
-      {isStudent && !noCardsYet ? (
-        <JumpButton
-          direction={jump}
-          reduced={reduced}
-          onPress={() => scrollToStep(current, !reduced)}
-        />
+      {!noCourse && (data?.known ?? 0) > 0 ? (
+        <PracticeButton due={data?.due ?? 0} onPress={() => router.push('/practice')} />
       ) : null}
+      {!noCourse ? (
+        <JumpButton direction={jump} reduced={reduced} onPress={() => scrollToStep(current, !reduced)} />
+      ) : null}
+    </View>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// PracticeButton — the way into a round of pure review, apart from the road.
+// Lessons move her forward; this holds on to what she already has. The badge
+// is how many words are due, so the button says why it's worth pressing.
+// ---------------------------------------------------------------------------
+function PracticeButton({ due, onPress }: { due: number; onPress: () => void }) {
+  return (
+    <View style={styles.practiceSlot} pointerEvents="box-none">
+      <Pressable
+        onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel={due > 0 ? `Practicar: ${due} para repasar` : 'Practicar'}
+        hitSlop={8}
+        style={({ pressed }) => [
+          styles.practice,
+          { transform: [{ scale: pressed ? 0.94 : 1 }] },
+          webTransition,
+        ]}>
+        <MaterialCommunityIcons name="dumbbell" size={20} color={colors.primary} />
+        <Text style={styles.practiceText}>Practicar</Text>
+        {due > 0 ? (
+          <View style={styles.practiceBadge}>
+            <Text style={styles.practiceBadgeText}>{due > 99 ? '99+' : due}</Text>
+          </View>
+        ) : null}
+      </Pressable>
     </View>
   );
 }
@@ -1442,6 +1423,57 @@ const styles = StyleSheet.create({
   },
   sectionTitle: { fontSize: 17, fontWeight: '700', color: colors.ink },
   mutedText: { fontSize: 15, color: colors.muted, lineHeight: 21 },
+
+  // Unit banners -------------------------------------------------------------
+  banner: {
+    height: BANNER_H,
+    marginBottom: BANNER_GAP,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingHorizontal: 16,
+    borderRadius: radius.lg,
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
+    overflow: 'hidden',
+    ...shadow.card,
+  },
+  bannerCurrent: { backgroundColor: colors.primary, borderColor: colors.primaryDark },
+  bannerLocked: { backgroundColor: colors.bg, shadowOpacity: 0, elevation: 0 },
+  bannerText: { flex: 1, gap: 1 },
+  bannerEyebrow: { fontSize: 11, lineHeight: 14, fontWeight: '700', letterSpacing: 1.2, color: colors.faint },
+  bannerTitle: { fontSize: 18, lineHeight: 23, fontWeight: '700', color: colors.ink, letterSpacing: -0.2 },
+  bannerSummary: { fontSize: 13, lineHeight: 17, color: colors.muted },
+  onPrimary: { color: colors.onPrimary },
+  onPrimaryMuted: { color: colors.onPrimary, opacity: 0.78 },
+
+  // Practice ---------------------------------------------------------------
+  practiceSlot: { position: 'absolute', left: 18, bottom: 18 },
+  practice: {
+    height: 46,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    paddingLeft: 14,
+    paddingRight: 16,
+    borderRadius: radius.pill,
+    backgroundColor: colors.card,
+    borderWidth: 1.5,
+    borderColor: colors.border,
+    ...shadow.card,
+  },
+  practiceText: { fontSize: 15, fontWeight: '700', color: colors.primaryDark },
+  practiceBadge: {
+    minWidth: 22,
+    height: 22,
+    paddingHorizontal: 6,
+    borderRadius: radius.pill,
+    backgroundColor: colors.accent,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  practiceBadgeText: { fontSize: 12, fontWeight: '800', color: colors.onPrimary, fontVariant: ['tabular-nums'] },
 
   // Path -------------------------------------------------------------------
   path: {

@@ -1,97 +1,72 @@
 import { addDays, localDateStr } from './dates';
-import {
-  INTRO_IN_SENTENCE_MIN_CAP,
-  glueSeen,
-  loadSentences,
-  pickIntroSentence,
-  pickReviewSentences,
-  rungFor,
-  sentenceCap,
-} from './sentences';
+import { glueSeen, loadSentences, pickReviewSentences, rungFor, sentenceCap } from './sentences';
 import { supabase } from './supabase';
-import type { Card, CardState, ExerciseMode, Sentence } from './types';
+import type { ExerciseMode, Form, FormState, Sentence, Tip } from './types';
 
 export interface SessionItem {
-  card: Card;
-  state: CardState | null; // null → the card is brand new for this user
+  form: Form;
+  state: FormState | null; // null → the form is brand new for this learner
   mode: ExerciseMode;
-  direction: 'translit_to_spanish' | 'spanish_to_translit';
-  /** Extra cards this exercise needs (matching pairs, the words of a sentence). */
-  group?: Card[];
+  /** es_to_en shows the Spanish and asks for the meaning; en_to_es the reverse. */
+  direction: 'es_to_en' | 'en_to_es';
+  /** Extra forms this exercise needs (matching pairs, the words of a sentence). */
+  group?: Form[];
   /** SM-2 states for `group`, so words drilled only through a sentence can
    *  still be graded. */
-  groupStates?: CardState[];
+  groupStates?: FormState[];
   /** Set on sentence exercises: the sentence being shown. */
   sentence?: Sentence;
-  /** Set on the exercise a new word is met in — the intro screen it replaces. */
-  introduces?: Card;
-  /** Padding on a thin day: drilled, logged, but never scheduled (see
-   *  MIN_SESSION_ITEMS). */
+  /** Set on the exercise a new form is met in — the intro screen it replaces. */
+  introduces?: Form;
+  /** Drilled and logged, but never scheduled: padding, or a word a sentence
+   *  dragged along that SM-2 didn't ask for. */
   filler?: boolean;
+  /** Set on `tip` items. */
+  tip?: Tip;
+  /** Came from an earlier unit through a lesson's review slot. */
+  review?: boolean;
 }
 
 export interface SessionData {
   items: SessionItem[];
-  allCards: Card[];
-  /** Every active sentence — the intro exercise draws wrong meanings from them. */
+  /** The forms distractors and tiles are drawn from. */
+  allForms: Form[];
+  /** Every sentence in reach — the meaning exercise draws wrong answers from them. */
   sentences: Sentence[];
-  /** Cards SM-2 asked for today (new or due). Anything else a sentence drags in
-   *  is drilled and logged, but its schedule is left alone. */
-  scheduledCardIds: string[];
+  /** Forms SM-2 asked for in this round (new or due). Anything else a sentence
+   *  drags in is drilled and logged, but its schedule is left alone. */
+  scheduledFormIds: string[];
 }
 
-// How many words she meets for the first time in a day. Fixed, not a setting:
-// the pace is the app's opinion, and a dial she can raise is a dial that turns
-// a ten-minute habit into a forty-minute chore on the day she feels keen.
-export const NEW_CARDS_PER_DAY = 5;
-
-/** A card whose transliteration has spaces is a sentence, not a word. */
-export const isPhrase = (translit: string) => translit.trim().includes(' ');
+/** A form whose text has a space is a phrase, drilled like a sentence. */
+export const isPhrase = (text: string) => text.trim().includes(' ');
 
 export const wordsOf = (text: string) => text.trim().split(/\s+/).filter(Boolean);
 
-/** Cards in a matching block. */
+/** Forms in a matching block. */
 export const MATCH_SIZE = 4;
 
-// A card whose interval has reached this many days has settled: it can be
-// asked to type the word, and earns a third angle so reviews stay varied. Not
-// the same bar as the sentence generator's "mature" (21 days), which decides
-// when a word's other forms may appear — that one is about grammar, this one
-// about which exercises are fair.
+// A form whose interval has reached this many days has settled: it can be
+// asked to type the word, and earns a third angle so reviews stay varied.
 export const SETTLED_DAYS = 7;
-const settled = (state: CardState | null) => (state?.interval_days ?? 0) >= SETTLED_DAYS;
+const settled = (state: FormState | null) => (state?.interval_days ?? 0) >= SETTLED_DAYS;
 
-// Hard ceiling on the screens a session plans — intros and the matching block
-// included. (Re-asks of missed cards can still run past it; a mistake earning
-// another look is not the session getting longer, it's the session working.)
-// At her pace — about six seconds a screen — that is two to three minutes.
+// Hard ceiling on the screens a round plans — the matching block included.
+// (Re-asks of missed words can still run past it; a mistake earning another
+// look is not the round getting longer, it's the round working.)
 export const MAX_SESSION_ITEMS = 18;
 
-// Floor on the same count. Some days almost nothing falls due and the daily
-// allowance of new words is already spent, which used to hand her a class of
-// three screens — technically the right amount of study, but it doesn't feel
-// like a class. The gap is padded with words she has already met, closest to
-// falling due first, flagged `filler`: they get drilled and logged, and their
-// SM-2 schedule is left alone, because practising a card early should never
-// push its real due date around.
+// Floor on the same count. A practice round on a quiet day is padded up to it
+// with words she has already met, closest to falling due first, flagged
+// `filler`: drilled and logged, SM-2 left alone, because practising a word
+// early should never push its real due date around.
 export const MIN_SESSION_ITEMS = 8;
 
-/** Cards considered when padding a thin day — a head to shuffle, so two quiet
+/** Forms considered when padding a thin round — a head to shuffle, so two quiet
  *  days in a row don't serve the same padding. */
 const FILLER_POOL = 12;
 
-/** Screens a set of exercise groups will spend, at `extra` per group — 1 for
- *  new cards, whose intro screen is added by the practice queue. A new word
- *  met inside a sentence carries its intro in the group already. */
-const screens = (groups: SessionItem[][], extra: number) =>
-  groups.reduce(
-    (n, g) => n + g.length + (g[0]?.mode === 'sentence_intro' ? 0 : extra),
-    0,
-  );
-
-/** A group cut down to `n` angles — keeping the sentence intro on top of them. */
-const trim = (g: SessionItem[], n: number) =>
-  g[0]?.mode === 'sentence_intro' ? g.slice(0, n + 1) : g.slice(0, n);
+const screens = (groups: SessionItem[][]) => groups.reduce((n, g) => n + g.length, 0);
 
 const PRODUCTION: ExerciseMode[] = ['typing', 'word_build', 'listen_build'];
 
@@ -102,7 +77,7 @@ const productionOnly = (g: SessionItem[]) => {
   return item ? [item] : [];
 };
 
-function shuffle<T>(arr: T[]): T[] {
+export function shuffle<T>(arr: T[]): T[] {
   const out = [...arr];
   for (let i = out.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -112,102 +87,132 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 // ---------------------------------------------------------------------------
-// Exercise selection
-//
-// Every exercise is auto-graded — nothing asks her to rate herself. A card is
-// drilled from several angles in one session, so four words still make a real
-// lesson instead of four taps.
+// What a round is built from
 // ---------------------------------------------------------------------------
-function exercisesFor(card: Card, state: CardState | null, deck: Card[]): ExerciseMode[] {
-  return isPhrase(card.translit)
-    ? sentenceExercises(card, state, deck)
-    : wordExercises(card, state, deck.length);
+
+export interface LearnerData {
+  forms: Form[];
+  formById: Map<string, Form>;
+  states: FormState[];
+  stateByForm: Map<string, FormState>;
+  sentences: Sentence[];
 }
 
-function wordExercises(card: Card, state: CardState | null, totalCards: number): ExerciseMode[] {
-  const enoughForChoices = totalCards >= MATCH_SIZE;
+/** The published lexicon, her SM-2 states and every published sentence. */
+export async function loadLearner(userId: string): Promise<LearnerData> {
+  const [{ data: formRows }, { data: stateRows }] = await Promise.all([
+    supabase.from('form_entries').select('*').eq('status', 'published'),
+    supabase.from('form_states').select('*').eq('user_id', userId),
+  ]);
+  const forms = (formRows ?? []) as Form[];
+  const states = (stateRows ?? []) as FormState[];
+  const sentences = await loadSentences(userId, forms);
+  return {
+    forms,
+    formById: new Map(forms.map((f) => [f.id, f])),
+    states,
+    stateByForm: new Map(states.map((s) => [s.form_id, s])),
+    sentences,
+  };
+}
+
+/** Whether a form is something she drills: not a function word, not a name. */
+export const drillable = (f: Form) => !f.is_glue && f.pos !== 'propn';
+
+/** Forms distractors may come from: drillable ones taught by `unitOrdinal`. */
+export const deckUpTo = (data: LearnerData, unitOrdinal: number) =>
+  data.forms.filter((f) => drillable(f) && f.unit_ordinal <= unitOrdinal);
+
+/** The furthest unit she has met a word from — the edge of her deck. */
+export const reachedUnit = (data: LearnerData) =>
+  Math.max(0, ...data.states.map((s) => data.formById.get(s.form_id)?.unit_ordinal ?? 0));
+
+// ---------------------------------------------------------------------------
+// Exercise selection
+//
+// Every exercise is auto-graded — nothing asks her to rate herself. A form is
+// drilled from several angles, so four words still make a real round instead
+// of four taps.
+// ---------------------------------------------------------------------------
+export function exercisesFor(form: Form, state: FormState | null, deck: Form[]): ExerciseMode[] {
+  return isPhrase(form.form) ? phraseExercises(form, state, deck) : wordExercises(form, state, deck.length);
+}
+
+function wordExercises(form: Form, state: FormState | null, deckSize: number): ExerciseMode[] {
+  const enoughForChoices = deckSize >= MATCH_SIZE;
   const mature = settled(state);
 
   // Recognition first, then production — easiest to hardest.
   const recognition: ExerciseMode[] = [];
   if (enoughForChoices) recognition.push('multiple_choice');
   recognition.push('true_false');
-  if (card.audio_path && enoughForChoices) recognition.push('listen');
+  if (form.audio_path && enoughForChoices) recognition.push('listen');
 
   const production: ExerciseMode[] = ['word_build'];
-  // Typing is the strictest test: single words only, and only once the card
-  // has properly settled — matching what he asked for. It is also the only
-  // exercise that can earn "fácil" (practice.tsx).
+  // Typing is the strictest test, and only fair once the word has settled. It
+  // is also the only exercise that can earn "fácil" (practice.tsx).
   if (mature) production.push('typing');
 
-  const picked: ExerciseMode[] = [
-    shuffle(recognition)[0],
-    shuffle(production)[0],
-  ];
+  const picked: ExerciseMode[] = [shuffle(recognition)[0], shuffle(production)[0]];
 
-  // Settled cards earn a third angle so review sessions stay varied.
+  // Settled words earn a third angle so review rounds stay varied.
   if (mature && recognition.length > 1) {
     const extra = shuffle(recognition.filter((m) => m !== picked[0]))[0];
     if (extra) picked.push(extra);
   }
-
   return picked.filter(Boolean);
 }
 
-// A sentence is drilled the way Duolingo drills one: understand it, then
-// rebuild it. Multiple choice only works once there are other sentences to
-// serve as plausible wrong meanings — a sentence next to three single words
-// gives the answer away.
-function sentenceExercises(card: Card, state: CardState | null, deck: Card[]): ExerciseMode[] {
-  const sentences = deck.filter((c) => isPhrase(c.translit)).length;
+// A set phrase is drilled the way a sentence is: understand it, then rebuild
+// it. Multiple choice only works once there are other phrases to serve as
+// plausible wrong meanings — a phrase next to three single words gives the
+// answer away.
+function phraseExercises(form: Form, state: FormState | null, deck: Form[]): ExerciseMode[] {
+  const phrases = deck.filter((f) => isPhrase(f.form)).length;
   const mature = settled(state);
 
   const recognition: ExerciseMode[] = [];
-  if (sentences >= SENTENCE_CHOICES) recognition.push('multiple_choice');
-  if (card.audio_path && sentences >= SENTENCE_CHOICES) recognition.push('listen');
+  if (phrases >= SENTENCE_CHOICES) recognition.push('multiple_choice');
+  if (form.audio_path && phrases >= SENTENCE_CHOICES) recognition.push('listen');
 
   const picked: ExerciseMode[] = [];
   if (recognition.length) picked.push(shuffle(recognition)[0]);
-  // Assembling the sentence from tiles is the heart of it — always included.
   picked.push('word_build');
-  // Transcribing what she hears is the hardest angle, so it waits until she
-  // has met the sentence at least once.
-  if (card.audio_path && state) picked.push('listen_build');
+  if (form.audio_path && state) picked.push('listen_build');
   else if (mature && recognition.length > 1) {
     const extra = shuffle(recognition.filter((m) => m !== picked[0]))[0];
     if (extra) picked.push(extra);
   }
-
   return picked;
 }
 
-function pickDirection(card: Card, mode: ExerciseMode, seen: boolean): SessionItem['direction'] {
-  // Listening always resolves to meaning; transcription always produces Hebrew.
-  if (mode === 'listen') return 'translit_to_spanish';
-  if (mode === 'listen_build' || mode === 'typing') return 'spanish_to_translit';
+export function pickDirection(form: Form, mode: ExerciseMode, seen: boolean): SessionItem['direction'] {
+  // Listening always resolves to meaning; transcription always produces Spanish.
+  if (mode === 'listen') return 'es_to_en';
+  if (mode === 'listen_build' || mode === 'typing') return 'en_to_es';
   if (mode === 'word_build') {
-    // Sentences she has already met get built in both directions; a first
-    // meeting, and every single word, always produces Hebrew. Building the
-    // Spanish side needs a Spanish side worth building — a one-word
-    // translation would break into letters instead of words.
-    if (!isPhrase(card.translit) || !isPhrase(card.spanish) || !seen) return 'spanish_to_translit';
-    return Math.random() < 0.4 ? 'translit_to_spanish' : 'spanish_to_translit';
+    // Phrases she has already met get built in both directions; a first
+    // meeting, and every single word, always produces Spanish. Building the
+    // English side needs an English side worth building — a one-word gloss
+    // would break into letters instead of words.
+    if (!isPhrase(form.form) || !isPhrase(form.gloss_en) || !seen) return 'en_to_es';
+    return Math.random() < 0.4 ? 'es_to_en' : 'en_to_es';
   }
-  return Math.random() < 0.5 ? 'translit_to_spanish' : 'spanish_to_translit';
+  return Math.random() < 0.5 ? 'es_to_en' : 'en_to_es';
 }
 
-function itemsForCard(card: Card, state: CardState | null, deck: Card[]): SessionItem[] {
-  return exercisesFor(card, state, deck).map((mode) => ({
-    card,
+export function itemsForForm(form: Form, state: FormState | null, deck: Form[]): SessionItem[] {
+  return exercisesFor(form, state, deck).map((mode) => ({
+    form,
     state,
     mode,
-    direction: pickDirection(card, mode, state !== null),
+    direction: pickDirection(form, mode, state !== null),
   }));
 }
 
-// Interleave each card's exercises so the same word never appears twice in a
-// row: round 1 takes every card's first exercise, round 2 the second, and so on.
-function interleave(groups: SessionItem[][]): SessionItem[] {
+// Interleave each form's exercises so the same word never appears twice in a
+// row: round 1 takes every form's first exercise, round 2 the second, and so on.
+export function interleave(groups: SessionItem[][]): SessionItem[] {
   const out: SessionItem[] = [];
   const depth = Math.max(0, ...groups.map((g) => g.length));
   for (let round = 0; round < depth; round++) {
@@ -218,56 +223,78 @@ function interleave(groups: SessionItem[][]): SessionItem[] {
   return out;
 }
 
-// A matching block: one screen that drills four cards at once. Inserted when
-// there are enough cards, as a warm-up before the individual exercises.
-// Sentences are left out — eight of them on one screen is a wall of text.
-function matchingBlock(cards: Card[]): SessionItem | null {
-  const words = cards.filter((c) => !isPhrase(c.translit));
-  if (words.length < MATCH_SIZE) return null;
-  const group = shuffle(words).slice(0, MATCH_SIZE);
+// A matching block: one screen that drills four forms at once. Phrases are left
+// out — eight of them on one screen is a wall of text.
+export function matchingBlock(forms: Form[]): SessionItem | null {
+  const words = forms.filter((f) => !isPhrase(f.form));
+  // Two forms with the same meaning would make the pairing ambiguous.
+  const distinct = new Map<string, Form>();
+  for (const f of shuffle(words)) if (!distinct.has(f.gloss_en)) distinct.set(f.gloss_en, f);
+  if (distinct.size < MATCH_SIZE) return null;
+  const group = [...distinct.values()].slice(0, MATCH_SIZE);
+  return { form: group[0], state: null, mode: 'matching', direction: 'es_to_en', group };
+}
+
+/** A sentence exercise drills every form inside the sentence — `group`, the
+ *  same way a matching block drills its four — keyed on the word it is for. */
+export function sentenceItem(
+  data: LearnerData,
+  sentence: Sentence,
+  mode: ExerciseMode,
+  target: Form,
+  introduces?: Form,
+): SessionItem {
+  const group: Form[] = [];
+  const groupStates: FormState[] = [];
+  for (const id of sentence.form_ids) {
+    const form = data.formById.get(id);
+    if (!form) continue;
+    group.push(form);
+    const state = data.stateByForm.get(id);
+    if (state) groupStates.push(state);
+  }
+  if (!group.some((f) => f.id === target.id)) group.push(target);
   return {
-    card: group[0],
-    state: null,
-    mode: 'matching',
-    direction: 'translit_to_spanish',
+    form: target,
+    state: data.stateByForm.get(target.id) ?? null,
+    mode,
+    direction: 'en_to_es',
+    sentence,
     group,
+    groupStates,
+    introduces,
   };
 }
 
-export async function getPendingCounts(userId: string) {
-  const today = localDateStr();
-  const nowIso = new Date().toISOString();
-
-  const [{ data: states }, { data: cards }] = await Promise.all([
-    supabase.from('card_states').select('card_id, due_at, introduced_on').eq('user_id', userId),
-    supabase.from('cards').select('id').order('created_at', { ascending: true }),
-  ]);
-
-  const seen = new Set((states ?? []).map((s) => s.card_id));
-  const due = (states ?? []).filter((s) => s.due_at && s.due_at <= nowIso).length;
-  const introducedToday = (states ?? []).filter((s) => s.introduced_on === today).length;
-  const unseen = (cards ?? []).filter((c) => !seen.has(c.id)).length;
-  const newAvailable = Math.min(Math.max(NEW_CARDS_PER_DAY - introducedToday, 0), unseen);
-
-  // `reviewable` is everything she has already met — the pool free practice
-  // draws from once the scheduled work for the day is finished.
-  return { due, newAvailable, total: due + newAvailable, reviewable: seen.size };
+/** The exercise a sentence gets at a rung. */
+export function modeForRung(rung: ReturnType<typeof rungFor>, sentence: Sentence): ExerciseMode {
+  if (rung === 'meaning') return 'sentence_meaning';
+  if (rung === 'gap') return 'sentence_gap';
+  return sentence.audio_path && Math.random() < 0.5 ? 'sentence_listen' : 'sentence_build';
 }
 
-// Builds today's queue: new cards first (oldest uploads first, capped by the
-// daily allowance), then everything due, ordered by due date. Each card
-// contributes several exercises, interleaved. Where a generated sentence can
-// carry the work, it does — a few screens a class, growing with her results
-// (the ladder in sentences.ts): due words are reviewed inside a sentence, and
-// once the cap is high enough, a new word is met inside one written for it.
-export async function buildSession(userId: string): Promise<SessionData> {
-  const today = localDateStr();
+/** For home: whether there is anything to practise, and how much is due. */
+export async function getPracticeCounts(userId: string) {
   const nowIso = new Date().toISOString();
+  const { data: states } = await supabase
+    .from('form_states')
+    .select('form_id, due_at')
+    .eq('user_id', userId);
+  const due = (states ?? []).filter((s) => s.due_at && s.due_at <= nowIso).length;
+  return { due, known: (states ?? []).length };
+}
 
-  const [{ data: cards }, { data: states }, sentences, { data: yesterday }] = await Promise.all([
-    supabase.from('cards').select('*').order('created_at', { ascending: true }),
-    supabase.from('card_states').select('*').eq('user_id', userId),
-    loadSentences(userId),
+// ---------------------------------------------------------------------------
+// The practice round — the Practice button on the path.
+//
+// Everything due, reviewed through sentences where one can carry it (at the
+// rung the sentence has earned), the rest on their own; then padded with words
+// she has met if the day is thin. No new words: those only arrive in lessons.
+// ---------------------------------------------------------------------------
+export async function buildSession(userId: string): Promise<SessionData> {
+  const nowIso = new Date().toISOString();
+  const [data, { data: yesterday }] = await Promise.all([
+    loadLearner(userId),
     supabase
       .from('daily_sessions')
       .select('sentence_fails')
@@ -276,264 +303,149 @@ export async function buildSession(userId: string): Promise<SessionData> {
       .maybeSingle(),
   ]);
 
-  const allCards = (cards ?? []) as Card[];
-  const stateByCard = new Map((states ?? []).map((s) => [s.card_id, s as CardState]));
-  const known = new Set(stateByCard.keys());
+  const deck = deckUpTo(data, reachedUnit(data));
+  const inDeck = new Set(deck.map((f) => f.id));
+  const known = data.states.filter((s) => inDeck.has(s.form_id));
   // Words a sentence may lean on: settled ones, not merely met. A sentence made
   // of words she is still shaky on is two problems at once.
-  const settled = new Set(
-    [...stateByCard.values()].filter((s) => s.interval_days >= SETTLED_DAYS).map((s) => s.card_id),
-  );
-  const cardById = new Map(allCards.map((c) => [c.id, c]));
+  const settledIds = new Set(known.filter((s) => s.interval_days >= SETTLED_DAYS).map((s) => s.form_id));
 
-  // Where she is on the sentence ladder today (see sentences.ts).
-  const cap = sentenceCap(sentences, yesterday?.sentence_fails ?? 0);
-  const seen = glueSeen(sentences);
+  const cap = sentenceCap(data.sentences, yesterday?.sentence_fails ?? 0);
+  const seen = glueSeen(data.sentences);
 
-  const introducedToday = (states ?? []).filter((s) => s.introduced_on === today).length;
-  const allowance = Math.max(NEW_CARDS_PER_DAY - introducedToday, 0);
-  const newCards = allCards.filter((c) => !stateByCard.has(c.id)).slice(0, allowance);
-
-  const dueStates = ((states ?? []) as CardState[])
+  const due = known
     .filter((s) => s.due_at && s.due_at <= nowIso)
-    .sort((a, b) => (a.due_at! < b.due_at! ? -1 : 1));
-  const dueCards = dueStates.flatMap((s) => {
-    const card = cardById.get(s.card_id);
-    return card ? [{ card, state: s }] : [];
-  });
+    .sort((a, b) => (a.due_at! < b.due_at! ? -1 : 1))
+    .map((state) => ({ form: data.formById.get(state.form_id)!, state }));
+  const dueIds = new Set(due.map((d) => d.form.id));
 
-  // A sentence exercise drills every card inside the sentence — `group`, the
-  // same way a matching block drills its four — keyed on the word it is for.
-  const sentenceItem = (
-    sentence: Sentence,
-    mode: ExerciseMode,
-    target: Card,
-    introduces?: Card,
-  ): SessionItem => {
-    const group: Card[] = [];
-    const groupStates: CardState[] = [];
-    for (const id of new Set(sentence.card_ids)) {
-      const card = cardById.get(id);
-      if (!card) continue;
-      group.push(card);
-      const state = stateByCard.get(id);
-      if (state) groupStates.push(state);
-    }
-    if (!group.some((c) => c.id === target.id)) group.push(target);
-    return {
-      card: target,
-      state: stateByCard.get(target.id) ?? null,
-      mode,
-      direction: 'spanish_to_translit',
-      sentence,
-      group,
-      groupStates,
-      introduces,
-    };
-  };
-
-  // New words: the plain intro screen while the ladder is low. Once the cap has
-  // grown, a new word is met inside a sentence written for it (the sentence
-  // exercise stands in for the intro screen) — and that screen counts against
-  // the cap, so the rest of the class's sentences make room for it.
-  let introsUsed = 0;
-  let newGroups = newCards.map((card) => {
-    const own = itemsForCard(card, null, allCards);
-    if (cap < INTRO_IN_SENTENCE_MIN_CAP || introsUsed >= cap) return own;
-    const intro = pickIntroSentence(card, sentences, known);
-    if (!intro) return own;
-    introsUsed += 1;
-    return [sentenceItem(intro, 'sentence_intro', card, card), ...own];
-  });
-
-  // Due words are reviewed through sentences where possible, one screen each,
-  // at the rung the sentence has earned. What a screen actually tests is what
-  // its words skip their own exercises for: the gap tests its blanked word, the
-  // tiles test every word; reading a sentence for its meaning tests nothing
-  // hard enough to stand in for a review, so those words are drilled on their
-  // own as well.
-  const dueIds = new Set(dueCards.map((d) => d.card.id));
-  const reviewSentences = pickReviewSentences(
-    dueIds,
-    sentences,
-    settled,
-    Math.max(0, cap - introsUsed),
-    seen,
-    cap,
-  );
+  // Due words are reviewed through sentences where possible, one screen each.
+  // What a screen actually tests is what its words skip their own exercises
+  // for: the gap tests its blanked word, the tiles test every word; reading a
+  // sentence for its meaning tests nothing hard enough to stand in for a
+  // review, so those words are drilled on their own as well.
   const covered = new Set<string>();
-  let sentenceGroups = reviewSentences.flatMap((sentence) => {
-    const target = cardById.get(sentence.target_card_id);
-    if (!target) return [];
-    // The gap tests a word that is actually due today — the sentence's own
-    // target if it is, otherwise one of the due words it was picked to cover.
-    // Blanking the target regardless once quizzed a word three weeks from due
-    // while the due one sat in plain sight.
-    const gapCard =
-      dueIds.has(target.id)
+  let sentenceGroups = pickReviewSentences(dueIds, data.sentences, settledIds, cap, seen, cap).flatMap(
+    (sentence) => {
+      const target = data.formById.get(sentence.target_form_id);
+      if (!target) return [];
+      // The gap tests a word that is actually due — the sentence's own target if
+      // it is, otherwise one of the due words it was picked to cover.
+      const gapForm = dueIds.has(target.id)
         ? target
-        : (sentence.card_ids.map((id) => cardById.get(id)).find((c) => c && dueIds.has(c.id)) ?? target);
-    const rung = rungFor(sentence, seen);
-    let mode: ExerciseMode;
-    if (rung === 'meaning') {
-      mode = 'sentence_meaning';
-    } else if (rung === 'gap') {
-      mode = 'sentence_gap';
-      covered.add(gapCard.id);
-    } else {
-      mode = sentence.audio_path && Math.random() < 0.5 ? 'sentence_listen' : 'sentence_build';
-      for (const id of sentence.card_ids) covered.add(id);
-    }
-    return [[sentenceItem(sentence, mode, gapCard)]];
-  });
-  let dueGroups = dueCards
-    .filter(({ card }) => !covered.has(card.id))
-    .map(({ card, state }) => itemsForCard(card, state, allCards));
+        : (sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && dueIds.has(f.id)) ?? target);
+      const mode = modeForRung(rungFor(sentence, seen), sentence);
+      if (mode === 'sentence_gap') covered.add(gapForm.id);
+      if (mode === 'sentence_build' || mode === 'sentence_listen') for (const id of sentence.form_ids) covered.add(id);
+      return [[sentenceItem(data, sentence, mode, gapForm)]];
+    },
+  );
+  let dueGroups = due
+    .filter(({ form }) => !covered.has(form.id))
+    .map(({ form, state }) => itemsForForm(form, state, deck));
 
-  // Fit the day under MAX_SESSION_ITEMS, gentlest valve first: every card
-  // loses its third angle, then the newest new words wait for their turn, then
-  // due cards drop to a single angle — the production one, since recognition
-  // alone proves little — and only then do due cards slip to tomorrow. Reviews
-  // win because a due card left for tomorrow is a word she is starting to
-  // forget, while a new word left for tomorrow is just a word she meets
-  // tomorrow. (The order used to be the other way round: after a big import it
-  // would have served nothing but new words for weeks, with every review pushed
-  // back.) The single-angle valve is what lets a backlog — a week away — clear
-  // in days rather than weeks: an Anki review is one screen too. Sentences go
-  // last of all — one screen of one can carry several reviews.
+  // Fit the round under MAX_SESSION_ITEMS, gentlest valve first: every word
+  // loses its third angle, then drops to a single production angle, and only
+  // then do due words slip to tomorrow. Sentences go last — one screen of one
+  // can carry several reviews.
   const fillerGroups: SessionItem[][] = [];
-  const total = () =>
-    screens(newGroups, 1) +
-    screens(sentenceGroups, 0) +
-    screens(dueGroups, 0) +
-    screens(fillerGroups, 0);
-  if (total() > MAX_SESSION_ITEMS) {
-    newGroups = newGroups.map((g) => trim(g, 2));
-    dueGroups = dueGroups.map((g) => g.slice(0, 2));
-  }
-  while (total() > MAX_SESSION_ITEMS && newGroups.length) newGroups.pop();
+  const total = () => screens(sentenceGroups) + screens(dueGroups) + screens(fillerGroups);
+  if (total() > MAX_SESSION_ITEMS) dueGroups = dueGroups.map((g) => g.slice(0, 2));
   if (total() > MAX_SESSION_ITEMS) dueGroups = dueGroups.map(productionOnly);
   while (total() > MAX_SESSION_ITEMS && dueGroups.length) dueGroups.pop();
   while (total() > MAX_SESSION_ITEMS && sentenceGroups.length) sentenceGroups.pop();
 
-  // And lift a thin day up to MIN_SESSION_ITEMS with words she has already
-  // met — two angles each, nearest to falling due first. Two screens per card
-  // keeps the top-up from overshooting the ceiling.
+  // Lift a thin round up to MIN_SESSION_ITEMS with words she has already met.
   if (total() < MIN_SESSION_ITEMS) {
-    const scheduled = new Set([
-      ...newCards.map((c) => c.id),
-      ...dueCards.map((d) => d.card.id),
-    ]);
     const pool = shuffle(
-      ((states ?? []) as CardState[])
-        .filter((s) => !scheduled.has(s.card_id) && cardById.has(s.card_id))
+      known
+        .filter((s) => !dueIds.has(s.form_id))
         .sort((a, b) => (a.due_at ?? '').localeCompare(b.due_at ?? ''))
         .slice(0, FILLER_POOL),
     );
     for (const state of pool) {
       if (total() >= MIN_SESSION_ITEMS) break;
-      const group = itemsForCard(cardById.get(state.card_id)!, state, allCards)
+      const group = itemsForForm(data.formById.get(state.form_id)!, state, deck)
         .slice(0, 2)
         .map((item) => ({ ...item, filler: true }));
       if (group.length) fillerGroups.push(group);
     }
   }
 
-  const items: SessionItem[] = [
-    ...interleave(newGroups),
-    ...interleave([...sentenceGroups, ...dueGroups, ...fillerGroups]),
-  ];
+  const items = interleave([...sentenceGroups, ...dueGroups, ...fillerGroups]);
 
-  // A matching warm-up in the middle keeps longer sessions from feeling samey
-  // — when the ceiling has a screen to spare for it.
-  const drilled = [
-    ...newGroups.map((g) => g[0].card),
-    ...sentenceGroups.map((g) => g[0].card),
-    ...dueGroups.map((g) => g[0].card),
-    ...fillerGroups.map((g) => g[0].card),
-  ];
-  const block = matchingBlock(drilled);
+  // A matching warm-up in the middle keeps longer rounds from feeling samey.
+  const block = matchingBlock([...sentenceGroups, ...dueGroups, ...fillerGroups].map((g) => g[0].form));
   if (block && items.length >= 6 && total() < MAX_SESSION_ITEMS) {
     items.splice(Math.floor(items.length / 2), 0, block);
   }
 
   return {
     items,
-    allCards,
-    sentences,
-    scheduledCardIds: [...newCards.map((c) => c.id), ...dueCards.map((d) => d.card.id)],
+    allForms: deck,
+    sentences: data.sentences,
+    scheduledFormIds: due.map((d) => d.form.id),
   };
 }
 
-/** How many cards a round of free practice serves up. */
+/** How many words a round of free practice serves up. */
 export const FREE_SESSION_SIZE = 6;
 
-// Free practice: an extra round she can take as often as she likes, on top of
-// the scheduled session. It draws from cards she has already been introduced
-// to, favouring the ones due soonest, and deliberately writes nothing back to
-// `card_states` — re-drilling a card should never drag its real SM-2 schedule
-// around, or a keen day would empty the next week. Words only, for now: the
-// sentences belong to the scheduled session.
-export async function buildFreeSession(
-  userId: string,
-  limit = FREE_SESSION_SIZE,
-): Promise<SessionData> {
-  const [{ data: cards }, { data: states }] = await Promise.all([
-    supabase.from('cards').select('*'),
-    supabase.from('card_states').select('*').eq('user_id', userId),
-  ]);
+// Free practice: an extra round from words she has already met, favouring the
+// ones due soonest, that writes nothing back to SM-2 — re-drilling a word should
+// never drag its real schedule around, or a keen day would empty the next week.
+export async function buildFreeSession(userId: string, limit = FREE_SESSION_SIZE): Promise<SessionData> {
+  const data = await loadLearner(userId);
+  const deck = deckUpTo(data, reachedUnit(data));
+  const inDeck = new Set(deck.map((f) => f.id));
 
-  const allCards = (cards ?? []) as Card[];
-  const cardById = new Map(allCards.map((c) => [c.id, c]));
-
-  // Soonest-due first, then take a random slice of that head so consecutive
-  // rounds aren't identical.
   const pool = shuffle(
-    ((states ?? []) as CardState[])
-      .filter((s) => cardById.has(s.card_id))
+    data.states
+      .filter((s) => inDeck.has(s.form_id))
       .sort((a, b) => (a.due_at ?? '').localeCompare(b.due_at ?? ''))
-      .slice(0, Math.max(limit * 2, limit)),
+      .slice(0, limit * 2),
   ).slice(0, limit);
 
-  // The same ceiling as the daily session. No intros here — every card in the
-  // pool has been met before — so groups cost only their own screens.
-  let groups = pool.map((state) => itemsForCard(cardById.get(state.card_id)!, state, allCards));
-  if (screens(groups, 0) > MAX_SESSION_ITEMS) groups = groups.map((g) => g.slice(0, 2));
-  while (screens(groups, 0) > MAX_SESSION_ITEMS && groups.length) groups.pop();
+  let groups = pool.map((state) => itemsForForm(data.formById.get(state.form_id)!, state, deck));
+  if (screens(groups) > MAX_SESSION_ITEMS) groups = groups.map((g) => g.slice(0, 2));
+  while (screens(groups) > MAX_SESSION_ITEMS && groups.length) groups.pop();
 
   const items = interleave(groups);
-
-  const block = matchingBlock(groups.map((g) => g[0].card));
+  const block = matchingBlock(groups.map((g) => g[0].form));
   if (block && items.length >= 6 && items.length < MAX_SESSION_ITEMS) {
     items.splice(Math.floor(items.length / 2), 0, block);
   }
-
-  return { items, allCards, sentences: [], scheduledCardIds: [] };
+  return { items, allForms: deck, sentences: [], scheduledFormIds: [] };
 }
 
-/** Options shown for a sentence — three reads better than four at that length. */
+/** Options shown for a phrase — three reads better than four at that length. */
 export const SENTENCE_CHOICES = 3;
 
-// Distractors for multiple choice, drawn from cards of the same kind: a
-// sentence competes against other sentences, a word against other words.
-// Mixing the two would let her answer on shape alone.
-export function pickOptions(correct: Card, allCards: Card[], field: 'spanish' | 'translit') {
-  const count = isPhrase(correct.translit) ? SENTENCE_CHOICES : MATCH_SIZE;
-  const sameKind = allCards.filter(
-    (c) => isPhrase(c.translit) === isPhrase(correct.translit),
-  );
-  const pool = sameKind.length >= count ? sameKind : allCards;
-  const others = shuffle(pool.filter((c) => c.id !== correct.id && c[field] !== correct[field]));
-  return shuffle([correct, ...others.slice(0, count - 1)]);
+// Distractors for multiple choice, drawn from forms of the same kind: a phrase
+// competes against other phrases, a word against other words — and a word
+// against words of its own part of speech where there are enough. Mixing kinds
+// would let her answer on shape alone.
+export function pickOptions(correct: Form, allForms: Form[], field: 'gloss_en' | 'form') {
+  const count = isPhrase(correct.form) ? SENTENCE_CHOICES : MATCH_SIZE;
+  const sameShape = allForms.filter((f) => isPhrase(f.form) === isPhrase(correct.form));
+  const samePos = sameShape.filter((f) => f.pos === correct.pos);
+  const pool = samePos.length >= count ? samePos : sameShape.length >= count ? sameShape : allForms;
+  const seen = new Set([correct[field]]);
+  const others: Form[] = [];
+  for (const f of shuffle(pool)) {
+    if (f.id === correct.id || seen.has(f[field])) continue;
+    seen.add(f[field]);
+    others.push(f);
+    if (others.length === count - 1) break;
+  }
+  return shuffle([correct, ...others]);
 }
 
 /** A plausible wrong meaning for the true/false exercise. */
-export function pickImposter(correct: Card, allCards: Card[]): Card | null {
-  const sameKind = allCards.filter(
-    (c) => isPhrase(c.translit) === isPhrase(correct.translit),
-  );
-  const pool = sameKind.length > 1 ? sameKind : allCards;
-  const others = pool.filter((c) => c.id !== correct.id && c.spanish !== correct.spanish);
+export function pickImposter(correct: Form, allForms: Form[]): Form | null {
+  const sameShape = allForms.filter((f) => isPhrase(f.form) === isPhrase(correct.form));
+  const pool = sameShape.length > 1 ? sameShape : allForms;
+  const others = pool.filter((f) => f.id !== correct.id && f.gloss_en !== correct.gloss_en);
   return others.length ? shuffle(others)[0] : null;
 }
 
@@ -544,52 +456,45 @@ const bare = (s: string) =>
     .replace(/\p{Diacritic}/gu, '')
     .replace(/[^\p{L}\p{N}]/gu, '');
 
-// Spare words for a sentence's tile bank, borrowed from the rest of the deck.
+// Spare words for a phrase's tile bank, borrowed from the rest of the deck.
 // Without them the exercise is just "use every tile you can see".
-export function wordPool(correct: Card, allCards: Card[], field: 'spanish' | 'translit'): string[] {
+export function wordPool(correct: Form, allForms: Form[], field: 'gloss_en' | 'form'): string[] {
   const taken = new Set(wordsOf(correct[field]).map(bare));
   const out = new Map<string, string>();
-  for (const c of allCards) {
-    if (c.id === correct.id) continue;
-    for (const word of wordsOf(c[field])) {
+  for (const f of allForms) {
+    if (f.id === correct.id) continue;
+    for (const word of wordsOf(f[field])) {
       const key = bare(word);
       if (!key || taken.has(key) || out.has(key)) continue;
-      out.set(key, word.replace(/[.,!?¿¡;:]+$/g, ''));
+      out.set(key, word.replace(/[.,!?¿¡;:()]+/g, ''));
     }
   }
   return [...out.values()].filter(Boolean);
 }
 
-/** How many spare tiles a sentence's bank carries beyond the answer. */
+/** How many spare tiles a phrase's bank carries beyond the answer. */
 const SENTENCE_DECOYS = 4;
 
-// Tiles for the building exercises: a sentence breaks into its words, a single
+// Tiles for the building exercises: a phrase breaks into its words, a single
 // word into its letters. Decoys are mixed in either way.
-export function buildTiles(
-  target: string,
-  distractors: string[] = [],
-): { answer: string[]; tiles: string[] } {
+export function buildTiles(target: string, distractors: string[] = []): { answer: string[]; tiles: string[] } {
   const clean = target.trim();
 
   if (isPhrase(clean)) {
     const answer = wordsOf(clean);
-    const decoys = shuffle(distractors).slice(
-      0,
-      Math.min(SENTENCE_DECOYS, Math.max(2, Math.ceil(answer.length / 2))),
-    );
+    const decoys = shuffle(distractors).slice(0, Math.min(SENTENCE_DECOYS, Math.max(2, Math.ceil(answer.length / 2))));
     return { answer, tiles: shuffle([...answer, ...decoys]) };
   }
 
   const answer = clean.split('');
   const decoys = new Set<string>();
-  const alphabet = 'abdefghiklmnoprstuvyz'.split('');
+  const alphabet = 'abcdefghijlmnopqrstuvyzñ'.split('');
   const wanted = Math.min(3, Math.max(2, Math.floor(answer.length / 2)));
   // A short word can run out of unused letters — cap the attempts, not the loop.
   for (let tries = 0; decoys.size < wanted && tries < 60; tries++) {
     const c = alphabet[Math.floor(Math.random() * alphabet.length)];
     if (!answer.includes(c)) decoys.add(c);
   }
-
   return { answer, tiles: shuffle([...answer, ...decoys]) };
 }
 
@@ -607,7 +512,6 @@ export function typedAnswerMatches(input: string, expected: string): boolean {
   if (!a) return false;
   if (a === b) return true;
   if (Math.abs(a.length - b.length) > 1) return false;
-  // edit distance ≤ 1
   let i = 0;
   let j = 0;
   let edits = 0;

@@ -56,8 +56,8 @@ export default function Login() {
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
           <View style={styles.hero}>
             <MoraFace size={116} />
-            <Text style={styles.title}>Moribreo</Text>
-            <Text style={styles.subtitle}>Un poquito de hebreo cada día</Text>
+            <Text style={styles.title}>Che</Text>
+            <Text style={styles.subtitle}>Un poquito de argentino cada día</Text>
           </View>
 
           <View style={styles.form}>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   safe: { flex: 1 },
   container: { flexGrow: 1, justifyContent: 'center', padding: 24, maxWidth: 440, width: '100%', alignSelf: 'center' },
   hero: { alignItems: 'center', marginBottom: 36, gap: 8 },
-  // Inherits what the Hebrew greeting used to carry: big, rose, bold.
+  // The wordmark: big, in the primary, bold.
   title: { fontSize: 34, color: colors.primary, fontWeight: '700', marginTop: 10 },
   subtitle: { ...type.body, color: colors.muted },
   form: { gap: 16 },

@@ -1,11 +1,11 @@
 import { addDays, addMinutes } from './dates';
-import type { CardState, Rating } from './types';
+import type { FormState, Rating } from './types';
 
 const DAY_MS = 86_400_000;
 
 // SM-2 (Anki-flavored). Ratings: 0 otra vez, 1 difícil, 2 bien, 3 fácil.
 // Nothing asks her to rate herself — practice.tsx derives the rating from a
-// session's answers (flawless → bien; a passed typing exercise → fácil; one
+// round's answers (flawless → bien; a passed typing exercise → fácil; one
 // slip → difícil; two → otra vez).
 //  - "Otra vez" resets repetitions, counts a lapse, and comes back in 10 min.
 //  - First successful review → 1 day (4 days on "fácil"), second → 6 days,
@@ -19,7 +19,7 @@ const DAY_MS = 86_400_000;
 //  - Intervals get a little fuzz, so words learned the same day drift apart
 //    instead of falling due together forever.
 export function schedule(
-  state: Pick<CardState, 'state' | 'ease_factor' | 'interval_days' | 'repetitions' | 'lapses'> & {
+  state: Pick<FormState, 'state' | 'ease_factor' | 'interval_days' | 'repetitions' | 'lapses'> & {
     due_at?: string | null;
   },
   rating: Rating,
@@ -70,7 +70,7 @@ export function schedule(
 /** Days since the card was last scheduled, when it is answered before it falls
  *  due; null when it is on time (or still in learning). */
 function elapsedIfEarly(
-  state: { state: CardState['state']; interval_days: number; due_at?: string | null },
+  state: { state: FormState['state']; interval_days: number; due_at?: string | null },
   now: Date,
 ): number | null {
   if (state.state !== 'review' || !state.due_at || state.interval_days < 1) return null;

@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 
+import { buildContent } from '../lib/content.mjs';
 import { ids, uuid5 } from '../lib/ids.mjs';
 import { checkSentence, loadOutline } from '../lib/outline.mjs';
 import { buildIndex, tokenize } from '../lib/tokenize.mjs';
@@ -96,4 +97,46 @@ test('tokenizer keeps punctuation on tokens and merges set phrases', () => {
   assert.deepEqual(tokenize('Bien, gracias.', idx).map((t) => t.forms.length), [1, 1]);
   // accents are significant: "tenes" is not "tenés"
   assert.equal(tokenize('tenes', buildIndex([{ id: 'x', form: 'tenés' }]))[0].forms.length, 0);
+});
+
+// --- content (sentences + lesson slots) -----------------------------------
+
+test('the demo fixture builds clean', async () => {
+  const { readFileSync } = await import('node:fs');
+  const { parse } = await import('yaml');
+  const { outline } = loadOutline();
+  const fixture = parse(readFileSync(new URL('../fixtures/demo.yaml', import.meta.url), 'utf8'));
+  const { errors } = buildContent(outline, fixture);
+  assert.deepEqual(errors, []);
+});
+
+test('rejects a drill that uses a word before its teach slot', () => {
+  const { outline } = loadOutline();
+  const { errors } = buildContent(outline, {
+    'hola-che': {
+      sentences: { s: { es: 'Hola, che.', en: 'Hey there.', target: 'che' } },
+      lessons: { 1: [{ drill: 's' }, { teach: 'hola' }, { teach: 'che' }] },
+    },
+  });
+  assert.ok(errors.some((e) => e.includes('before it is taught')), errors.join('\n'));
+});
+
+test("rejects a sentence whose target isn't one of its unit's forms", () => {
+  const { outline } = loadOutline();
+  const { errors } = buildContent(outline, {
+    'de-donde-sos': { sentences: { s: { es: 'Soy de acá.', en: "I'm from here.", target: 'soy' } } },
+  });
+  assert.ok(errors.some((e) => e.includes('is not a form unit 2 introduces')), errors.join('\n'));
+});
+
+test('rejects an ambiguous form reference and accepts the disambiguated one', () => {
+  const { outline } = loadOutline();
+  const bad = buildContent(outline, {
+    'de-donde-sos': { sentences: { s: { es: 'Ella es argentina.', en: "She's Argentinian.", target: 'argentina' } } },
+  });
+  assert.ok(bad.errors.some((e) => e.includes('ambiguous')), bad.errors.join('\n'));
+  const good = buildContent(outline, {
+    'de-donde-sos': { sentences: { s: { es: 'Ella es argentina.', en: "She's Argentinian.", target: 'argentina/adj' } } },
+  });
+  assert.deepEqual(good.errors, []);
 });

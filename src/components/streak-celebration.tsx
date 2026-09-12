@@ -316,7 +316,7 @@ export function StreakCelebration({
       {/* One door out: the map is where another round is offered, and going
           back to it is what shows her the step she just earned. */}
       <Animated.View style={[styles.actions, { opacity: actionsOpacity }]}>
-        <Button title="Yala!" onPress={onDone} />
+        <Button title="Dale!" onPress={onDone} />
       </Animated.View>
     </View>
   );

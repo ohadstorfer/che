@@ -141,7 +141,7 @@ const SILENCE =
 let unlocked = false;
 
 // The silent switch on the side of an iPhone mutes web audio outright, at any
-// volume — which for an app whose whole point is hearing Hebrew said out loud
+// volume — which for an app whose whole point is hearing Spanish said out loud
 // means it looks broken rather than muted. Declaring the page as `playback`
 // puts it in the same category as a podcast or a video: it keeps sounding with
 // the switch on. `play-and-record` is the same promise plus the microphone,
@@ -203,7 +203,7 @@ if (hasDom) {
 
 const CLIP_LIMIT = 48; // decoded and ready in memory — a whole lesson fits
 const STORE_LIMIT = 300; // kept on disk between visits
-const STORE = 'mora-audio-v1';
+const STORE = 'che-audio-v1';
 
 /** A same-origin key for a clip, so the store is addressed by the path the card
  *  holds rather than by a storage URL that may move. */

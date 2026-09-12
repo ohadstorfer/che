@@ -12,7 +12,7 @@ export default function Root({ children }: PropsWithChildren) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no"
         />
-        <title>Moribreo</title>
+        <title>Che</title>
         <link rel="manifest" href="/manifest.json" />
         {/* On iOS up to 18 (and Android), this is the colour of the strip iOS
             reserves above the app under the `default` status bar style,
@@ -42,7 +42,7 @@ export default function Root({ children }: PropsWithChildren) {
             from the page's scheme. The app is light only; saying so keeps
             them dark. */}
         <meta name="color-scheme" content="light" />
-        <meta name="apple-mobile-web-app-title" content="Moribreo" />
+        <meta name="apple-mobile-web-app-title" content="Che" />
         <link rel="icon" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <ScrollViewStyleReset />

@@ -1,127 +1,119 @@
 // ---------------------------------------------------------------------------
 // Demo backend
 //
-// The UI was lifted from a working app with its own Supabase schema (cards,
-// card_states, lessons, daily_sessions…). Che's database does not have those
-// tables, and building them is the next step, not this one — so every screen
-// reads from the fixtures below instead, through a stand-in client that speaks
-// just enough of supabase-js to answer the queries the screens actually make.
+// The app runs against this until the course is in the database: the full
+// section-1 outline plus hand-written content for units 1–2 (built into
+// demo-course.json by `npm run course:demo`), and a learner who has finished
+// unit 1 and is standing on unit 2's first lesson, with a few unit-1 words due
+// — so the path, a lesson, its review slot and the Practice button all have
+// something real to show.
 //
-// To go live: flip DEMO to false in lib/supabase.ts. Nothing else refers to
-// this file, so it deletes cleanly once the real schema exists.
+// The stand-in client speaks just enough of supabase-js for the queries the
+// app makes, and it keeps what the app writes for as long as the page is open:
+// finishing a lesson really moves the path on and really moves the streak. A
+// reload starts over.
 //
-// NOTE ON FIELD NAMES: a card's fields are still `hebrew` / `translit` /
-// `spanish` — the shape this UI was written against. The content below is
-// Argentine, so the screens read correctly, but the columns are misnamed for
-// Che and want renaming as part of the schema work. `translit` in particular
-// has no Spanish analogue and needs a decision: drop it, or repurpose it as a
-// pronunciation or literal-meaning line.
+// Flip DEMO in lib/supabase.ts to go live. Nothing else imports this file.
 // ---------------------------------------------------------------------------
 
 import type { Session } from '@supabase/supabase-js';
 
-const STUDENT = 'demo-student-0000-0000-0000-000000000000';
+import course from './demo-course.json';
+
+type Row = Record<string, unknown>;
+
+const STUDENT = 'd0000000-0000-4000-8000-000000000001';
 
 /** Days back from today, as YYYY-MM-DD in local time. */
 function day(offset: number): string {
   const d = new Date();
   d.setDate(d.getDate() - offset);
-  const m = `${d.getMonth() + 1}`.padStart(2, '0');
-  const day = `${d.getDate()}`.padStart(2, '0');
-  return `${d.getFullYear()}-${m}-${day}`;
+  return `${d.getFullYear()}-${`${d.getMonth() + 1}`.padStart(2, '0')}-${`${d.getDate()}`.padStart(2, '0')}`;
 }
 
-/** Hours back from now, as an ISO timestamp. */
-function hoursAgo(h: number): string {
-  return new Date(Date.now() - h * 3600_000).toISOString();
+const hoursFromNow = (h: number) => new Date(Date.now() + h * 3_600_000).toISOString();
+
+function uuid(): string {
+  const hex = () => Math.floor(Math.random() * 16).toString(16);
+  const s = Array.from({ length: 32 }, hex).join('');
+  return `${s.slice(0, 8)}-${s.slice(8, 12)}-4${s.slice(13, 16)}-8${s.slice(17, 20)}-${s.slice(20)}`;
 }
 
-const CARDS = [
-  { hebrew: 'che', translit: 'che', spanish: 'hey / mate (getting someone’s attention)' },
-  { hebrew: 'boludo', translit: 'bo-lu-do', spanish: 'dude (affectionate among friends)' },
-  { hebrew: 'quilombo', translit: 'ki-lom-bo', spanish: 'a mess, chaos' },
-  { hebrew: 'laburo', translit: 'la-bu-ro', spanish: 'work, job' },
-  { hebrew: 'posta', translit: 'pos-ta', spanish: 'for real, the truth' },
-  { hebrew: 'copado', translit: 'co-pa-do', spanish: 'cool, great' },
-  { hebrew: 'mango', translit: 'man-go', spanish: 'a peso, money' },
-  { hebrew: 'bondi', translit: 'bon-di', spanish: 'the bus' },
-  { hebrew: 'pibe', translit: 'pi-be', spanish: 'kid, young guy' },
-  { hebrew: 'ni en pedo', translit: 'ni en pe-do', spanish: 'no way, not a chance' },
-  { hebrew: 'dale', translit: 'da-le', spanish: 'go on / ok then' },
-  { hebrew: 're', translit: 're', spanish: 'very (re copado = very cool)' },
-].map((c, i) => ({
-  id: `card-${i + 1}`,
-  ...c,
-  english: null,
-  audio_path: null,
-  created_by: STUDENT,
-  created_at: hoursAgo(500 - i * 10),
-}));
+// --- the learner -----------------------------------------------------------
 
-// Eight words already met: four of them due for review now, four scheduled
-// ahead. That gives the home screen a non-zero "due" count and practice a
-// real queue, while leaving four words still unseen so "new" is non-zero too.
-const CARD_STATES = CARDS.slice(0, 8).map((c, i) => ({
-  id: `state-${i + 1}`,
-  card_id: c.id,
-  user_id: STUDENT,
-  state: i < 4 ? 'review' : 'learning',
-  ease_factor: 2.5,
-  interval_days: i < 4 ? 4 : 1,
-  repetitions: i < 4 ? 3 : 1,
-  lapses: 0,
-  due_at: i < 4 ? hoursAgo(5) : new Date(Date.now() + 86_400_000).toISOString(),
-  introduced_on: day(10 - i),
-}));
+function learner() {
+  const unit1 = course.units.find((u) => u.ordinal === 1)!;
+  const unit1Lessons = course.lessons.filter((l) => l.unit_id === unit1.id);
+  const words = course.form_entries.filter((f) => f.unit_id === unit1.id && !f.is_glue && f.pos !== 'propn');
 
-// Seven finished classes → seven coins behind the current step on the path,
-// which is enough for the road to curve and for two figures to appear.
-const LESSONS = Array.from({ length: 7 }, (_, i) => ({
-  id: `lesson-${i + 1}`,
-  user_id: STUDENT,
-  completed_at: `${day(7 - i)}T18:00:00.000Z`,
-}));
-
-// A five-day run ending yesterday, with today still open: the week strip shows
-// filled days behind an empty ring, and the streak chip reads "alive".
-const DAILY_SESSIONS = [1, 2, 3, 4, 5].map((d) => ({
-  user_id: STUDENT,
-  session_date: day(d),
-  completed_at: `${day(d)}T18:00:00.000Z`,
-}));
-
-export const tables: Record<string, Record<string, unknown>[]> = {
-  profiles: [
-    {
-      id: STUDENT,
-      role: 'student',
-      display_name: 'Ohad',
-      timezone: 'America/Argentina/Buenos_Aires',
-    },
-  ],
-  streaks: [
-    {
+  // Met over the last week and a half; four of them due right now — enough for
+  // the review slot at the top of unit 2 to have something to pull, and for the
+  // Practice button to wear a badge. The rest are spread out so the words list
+  // shows every strength.
+  const form_states = words.map((f, i) => {
+    const due = i % 5 === 0;
+    const interval = [1, 3, 6, 12, 25][i % 5];
+    return {
+      id: uuid(),
+      form_id: f.id,
       user_id: STUDENT,
-      current_streak: 5,
-      longest_streak: 9,
-      last_completed_date: day(1),
-      recoverable_streak: 0,
-    },
-  ],
-  cards: CARDS,
-  card_states: CARD_STATES,
-  lessons: LESSONS,
-  daily_sessions: DAILY_SESSIONS,
-  review_logs: [{ user_id: STUDENT, reviewed_at: hoursAgo(20) }],
-  // Empty on purpose: generated sentences are a content pipeline, not UI. With
-  // none, practice builds its queue out of cards alone, which still exercises
-  // every exercise frame the path leads into.
-  sentences: [],
-  sentence_states: [],
-  push_subscriptions: [],
+      state: interval > 3 ? 'review' : 'learning',
+      ease_factor: 2.5,
+      interval_days: interval,
+      repetitions: Math.min(4, 1 + (i % 4)),
+      lapses: 0,
+      due_at: due ? hoursFromNow(-3) : hoursFromNow(24 * (1 + (i % 6))),
+      introduced_on: day(10 - Math.floor(i / 3)),
+    };
+  });
+
+  // Unit 1's sentences she has seen: passed once or twice, so the ladder gives
+  // them different rungs when they come back.
+  const unit1Sentences = course.sentences.filter((s) => s.unit_id === unit1.id);
+  const sentence_states = unit1Sentences.map((s, i) => ({
+    sentence_id: s.id,
+    user_id: STUDENT,
+    shown_count: 1 + (i % 3),
+    correct_count: i % 3,
+    last_shown_at: `${day(4 + (i % 4))}T19:00:00.000Z`,
+  }));
+
+  return {
+    profiles: [
+      { user_id: STUDENT, display_name: 'Ohad', role: 'student', timezone: 'America/Argentina/Buenos_Aires' },
+    ],
+    // A five-day run ending yesterday: today is still open, so finishing a
+    // lesson grows it to six and the celebration plays.
+    streaks: [
+      { user_id: STUDENT, current_streak: 5, longest_streak: 9, last_practice_date: day(1), recoverable_streak: 0 },
+    ],
+    daily_sessions: [1, 2, 3, 4, 5].map((d) => ({
+      user_id: STUDENT,
+      session_date: day(d),
+      total_cards: 12,
+      completed_cards: 12,
+      sentence_screens: 3,
+      sentence_fails: 0,
+      completed_at: `${day(d)}T19:30:00.000Z`,
+    })),
+    lesson_progress: unit1Lessons.map((l, i) => ({
+      user_id: STUDENT,
+      lesson_id: l.id,
+      completed_at: `${day(5 - i)}T19:30:00.000Z`,
+      score: 80 + (i % 3) * 5,
+    })),
+    form_states,
+    sentence_states,
+    review_logs: [] as Row[],
+    push_subscriptions: [] as Row[],
+  };
+}
+
+const tables: Record<string, Row[]> = {
+  ...(course as unknown as Record<string, Row[]>),
+  ...learner(),
 };
 
-/** A session shaped like the real one, so nothing has to log in to see the UI. */
 export const demoSession = {
   access_token: 'demo',
   refresh_token: 'demo',
@@ -135,176 +127,289 @@ export const demoSession = {
     email: 'demo@che.app',
     app_metadata: {},
     user_metadata: {},
-    created_at: hoursAgo(5000),
+    created_at: hoursFromNow(-5000),
   },
 } as unknown as Session;
 
-// --- the stand-in client ---------------------------------------------------
+// --- queries ---------------------------------------------------------------
 
-type Row = Record<string, unknown>;
 type Filter = (row: Row) => boolean;
+type Result = { data: unknown; error: null; count: number };
 
-function get(row: Row, column: string): unknown {
-  return row[column];
+/** Filters shared by reads and by the writes that target existing rows. */
+class Filters {
+  protected filters: Filter[] = [];
+
+  eq(column: string, value: unknown) {
+    this.filters.push((r) => r[column] === value);
+    return this;
+  }
+  neq(column: string, value: unknown) {
+    this.filters.push((r) => r[column] !== value);
+    return this;
+  }
+  is(column: string, value: unknown) {
+    this.filters.push((r) => (r[column] ?? null) === value);
+    return this;
+  }
+  /** Only `.not(col, 'is', null)` is used, so that is all this honours. */
+  not(column: string, _op: string, value: unknown) {
+    this.filters.push((r) => (r[column] ?? null) !== value);
+    return this;
+  }
+  in(column: string, values: unknown[]) {
+    this.filters.push((r) => values.includes(r[column]));
+    return this;
+  }
+  gte(column: string, value: string | number) {
+    this.filters.push((r) => (r[column] as string | number) >= value);
+    return this;
+  }
+  lte(column: string, value: string | number) {
+    this.filters.push((r) => (r[column] as string | number) <= value);
+    return this;
+  }
+
+  protected matches(row: Row) {
+    return this.filters.every((f) => f(row));
+  }
 }
 
-/**
- * A query builder that collects filters and resolves to `{ data, error }` when
- * awaited — the same handful of methods the screens chain, and no more. Rows
- * are returned as copies so a screen can never mutate the fixtures.
- */
-class Query implements PromiseLike<{ data: unknown; error: null; count: number }> {
-  private filters: Filter[] = [];
+class Query extends Filters implements PromiseLike<Result> {
   private sort: { column: string; ascending: boolean } | null = null;
   private cap: number | null = null;
-  private mode: 'many' | 'maybeSingle' | 'single' = 'many';
+  private mode: 'many' | 'one' = 'many';
   private headOnly = false;
 
-  constructor(private readonly table: string) {}
+  constructor(private readonly table: string) {
+    super();
+  }
 
   select(_columns?: string, opts?: { count?: string; head?: boolean }) {
     if (opts?.head) this.headOnly = true;
     return this;
   }
-
-  eq(column: string, value: unknown) {
-    this.filters.push((r) => get(r, column) === value);
-    return this;
-  }
-
-  neq(column: string, value: unknown) {
-    this.filters.push((r) => get(r, column) !== value);
-    return this;
-  }
-
-  is(column: string, value: unknown) {
-    this.filters.push((r) => (get(r, column) ?? null) === value);
-    return this;
-  }
-
-  /** Only `.not(col, 'is', null)` is used, so that is all this honours. */
-  not(column: string, _op: string, value: unknown) {
-    this.filters.push((r) => (get(r, column) ?? null) !== value);
-    return this;
-  }
-
-  in(column: string, values: unknown[]) {
-    this.filters.push((r) => values.includes(get(r, column)));
-    return this;
-  }
-
-  gte(column: string, value: string | number) {
-    this.filters.push((r) => (get(r, column) as string | number) >= value);
-    return this;
-  }
-
-  lte(column: string, value: string | number) {
-    this.filters.push((r) => (get(r, column) as string | number) <= value);
-    return this;
-  }
-
   order(column: string, opts?: { ascending?: boolean }) {
     this.sort = { column, ascending: opts?.ascending ?? true };
     return this;
   }
-
   limit(n: number) {
     this.cap = n;
     return this;
   }
-
   maybeSingle() {
-    this.mode = 'maybeSingle';
+    this.mode = 'one';
     return this;
   }
-
   single() {
-    this.mode = 'single';
+    this.mode = 'one';
     return this;
   }
 
-  private rows(): Row[] {
-    let rows = (tables[this.table] ?? []).filter((r) => this.filters.every((f) => f(r)));
+  then<R1 = Result, R2 = never>(
+    onfulfilled?: ((v: Result) => R1 | PromiseLike<R1>) | null,
+    onrejected?: ((reason: unknown) => R2 | PromiseLike<R2>) | null,
+  ): PromiseLike<R1 | R2> {
+    let rows = (tables[this.table] ?? []).filter((r) => this.matches(r));
     if (this.sort) {
       const { column, ascending } = this.sort;
       rows = [...rows].sort((a, b) => {
-        const x = get(a, column) as string | number;
-        const y = get(b, column) as string | number;
-        if (x === y) return 0;
-        return (x > y ? 1 : -1) * (ascending ? 1 : -1);
+        const x = a[column] as string | number;
+        const y = b[column] as string | number;
+        return x === y ? 0 : (x > y ? 1 : -1) * (ascending ? 1 : -1);
       });
     }
     if (this.cap != null) rows = rows.slice(0, this.cap);
-    return rows.map((r) => ({ ...r }));
+    // Copies, so nothing on screen can reach in and edit the store.
+    const copies = rows.map((r) => structuredCloneSafe(r));
+    const data = this.headOnly ? null : this.mode === 'one' ? (copies[0] ?? null) : copies;
+    return Promise.resolve({ data, error: null, count: rows.length }).then(onfulfilled, onrejected);
+  }
+}
+
+const structuredCloneSafe = <T,>(v: T): T => JSON.parse(JSON.stringify(v));
+
+/** The columns that identify a row when an upsert names none. */
+const KEYS: Record<string, string[]> = {
+  form_states: ['form_id', 'user_id'],
+  sentence_states: ['sentence_id', 'user_id'],
+  daily_sessions: ['user_id', 'session_date'],
+  lesson_progress: ['user_id', 'lesson_id'],
+  profiles: ['user_id'],
+  streaks: ['user_id'],
+};
+
+/** Tables whose rows carry a generated `id`. */
+const HAS_ID = new Set(['form_states', 'review_logs', 'push_subscriptions']);
+
+/**
+ * Column defaults, as the migration declares them. The app inserts partial
+ * rows and relies on Postgres to fill the rest — a new form state arrives with
+ * no ease or interval — so the stand-in has to do the same, or SM-2 schedules
+ * from undefined.
+ */
+const DEFAULTS: Record<string, () => Row> = {
+  form_states: () => ({
+    state: 'new',
+    ease_factor: 2.5,
+    interval_days: 0,
+    repetitions: 0,
+    lapses: 0,
+    due_at: null,
+    introduced_on: day(0),
+    updated_at: new Date().toISOString(),
+  }),
+  sentence_states: () => ({ shown_count: 0, correct_count: 0, last_shown_at: null }),
+  daily_sessions: () => ({ total_cards: 0, completed_cards: 0, sentence_screens: 0, sentence_fails: 0, completed_at: null }),
+  review_logs: () => ({ reviewed_at: new Date().toISOString() }),
+  lesson_progress: () => ({ completed_at: new Date().toISOString(), score: null }),
+};
+
+class Mutation extends Filters implements PromiseLike<Result> {
+  private wantsRows = false;
+  private one = false;
+
+  constructor(
+    private readonly table: string,
+    private readonly op: 'insert' | 'upsert' | 'update' | 'delete',
+    private readonly payload?: Row | Row[],
+    private readonly onConflict?: string,
+  ) {
+    super();
   }
 
-  then<R1 = { data: unknown; error: null; count: number }, R2 = never>(
-    onfulfilled?: ((v: { data: unknown; error: null; count: number }) => R1 | PromiseLike<R1>) | null,
+  select() {
+    this.wantsRows = true;
+    return this;
+  }
+  single() {
+    this.one = true;
+    return this;
+  }
+  maybeSingle() {
+    this.one = true;
+    return this;
+  }
+
+  private run(): Row[] {
+    const store = (tables[this.table] ??= []);
+    const incoming = Array.isArray(this.payload) ? this.payload : this.payload ? [this.payload] : [];
+    const touched: Row[] = [];
+
+    if (this.op === 'insert' || this.op === 'upsert') {
+      const keys = this.onConflict?.split(',').map((k) => k.trim()) ?? KEYS[this.table] ?? ['id'];
+      for (const row of incoming) {
+        const existing =
+          this.op === 'upsert' ? store.find((r) => keys.every((k) => r[k] === row[k])) : undefined;
+        if (existing) {
+          Object.assign(existing, row);
+          touched.push(existing);
+        } else {
+          const fresh = {
+            ...(HAS_ID.has(this.table) && !row.id ? { id: uuid() } : {}),
+            ...DEFAULTS[this.table]?.(),
+            ...row,
+          };
+          store.push(fresh);
+          touched.push(fresh);
+        }
+      }
+    } else if (this.op === 'update') {
+      for (const r of store) {
+        if (this.matches(r)) {
+          Object.assign(r, this.payload);
+          touched.push(r);
+        }
+      }
+    } else {
+      tables[this.table] = store.filter((r) => !this.matches(r));
+    }
+    return touched;
+  }
+
+  then<R1 = Result, R2 = never>(
+    onfulfilled?: ((v: Result) => R1 | PromiseLike<R1>) | null,
     onrejected?: ((reason: unknown) => R2 | PromiseLike<R2>) | null,
   ): PromiseLike<R1 | R2> {
-    const rows = this.rows();
-    const data =
-      this.headOnly ? null : this.mode === 'many' ? rows : (rows[0] ?? null);
-    return Promise.resolve({ data, error: null, count: rows.length }).then(
-      onfulfilled,
-      onrejected,
-    );
+    const rows = this.run().map((r) => structuredCloneSafe(r));
+    const data = !this.wantsRows ? null : this.one ? (rows[0] ?? null) : rows;
+    return Promise.resolve({ data, error: null, count: rows.length }).then(onfulfilled, onrejected);
   }
 }
 
-/** Writes are accepted and dropped: the fixtures are read-only by design. */
-function writeNoop(table: string, rows?: Row | Row[]) {
-  const result = Promise.resolve({ data: rows ?? null, error: null, count: 0 });
-  const chain = {
-    eq: () => chain,
-    in: () => chain,
-    select: () => chain,
-    maybeSingle: () => result,
-    single: () => result,
-    then: result.then.bind(result),
+// --- rpc -------------------------------------------------------------------
+
+/** finish_lesson, as the migration writes it (see its comments for the rules). */
+function finishLesson(args: { p_local_date: string; p_lesson_id?: string | null; p_score?: number | null }) {
+  const today = args.p_local_date;
+  if (args.p_lesson_id) {
+    const progress = tables.lesson_progress;
+    const had = progress.find((r) => r.lesson_id === args.p_lesson_id && r.user_id === STUDENT);
+    if (had) Object.assign(had, { completed_at: new Date().toISOString(), score: Math.max(Number(had.score ?? 0), args.p_score ?? 0) });
+    else progress.push({ user_id: STUDENT, lesson_id: args.p_lesson_id, completed_at: new Date().toISOString(), score: args.p_score ?? null });
+  }
+
+  const days = tables.daily_sessions;
+  const session = days.find((r) => r.user_id === STUDENT && r.session_date === today);
+  if (session) session.completed_at ??= new Date().toISOString();
+  else days.push({ user_id: STUDENT, session_date: today, total_cards: 0, completed_cards: 0, sentence_screens: 0, sentence_fails: 0, completed_at: new Date().toISOString() });
+
+  const streak = tables.streaks.find((r) => r.user_id === STUDENT) as {
+    current_streak: number;
+    longest_streak: number;
+    last_practice_date: string | null;
+    recoverable_streak: number;
   };
-  if (__DEV__) console.log(`[demo] write to "${table}" ignored — fixtures are read-only`);
-  return chain as unknown as ReturnType<typeof Promise.resolve> & typeof chain;
+  const previous = streak.current_streak;
+  const yesterday = (() => {
+    const [y, m, d] = today.split('-').map(Number);
+    const t = new Date(y, m - 1, d - 1);
+    return `${t.getFullYear()}-${`${t.getMonth() + 1}`.padStart(2, '0')}-${`${t.getDate()}`.padStart(2, '0')}`;
+  })();
+
+  if (streak.last_practice_date !== today) {
+    if (streak.last_practice_date === yesterday) {
+      streak.current_streak += 1;
+      streak.recoverable_streak = 0;
+    } else {
+      streak.recoverable_streak = streak.last_practice_date ? streak.current_streak : 0;
+      streak.current_streak = 1;
+    }
+  } else if (streak.recoverable_streak > 0) {
+    streak.current_streak += streak.recoverable_streak;
+    streak.recoverable_streak = 0;
+  }
+  streak.longest_streak = Math.max(streak.longest_streak, streak.current_streak);
+  streak.last_practice_date = today;
+
+  return [{ current_streak: streak.current_streak, previous_streak: previous, recoverable_streak: streak.recoverable_streak }];
 }
+
+// --- the client ------------------------------------------------------------
 
 export const demoClient = {
   from(table: string) {
     return {
-      select: (columns?: string, opts?: { count?: string; head?: boolean }) =>
-        new Query(table).select(columns, opts),
-      insert: (rows: Row | Row[]) => writeNoop(table, rows),
-      update: (rows: Row) => writeNoop(table, rows),
-      upsert: (rows: Row | Row[]) => writeNoop(table, rows),
-      delete: () => writeNoop(table),
+      select: (columns?: string, opts?: { count?: string; head?: boolean }) => new Query(table).select(columns, opts),
+      insert: (rows: Row | Row[]) => new Mutation(table, 'insert', rows),
+      upsert: (rows: Row | Row[], opts?: { onConflict?: string }) => new Mutation(table, 'upsert', rows, opts?.onConflict),
+      update: (patch: Row) => new Mutation(table, 'update', patch),
+      delete: () => new Mutation(table, 'delete'),
     };
   },
 
-  /**
-   * The two RPCs the finish screen calls. `finish_daily_session` reports the
-   * streak one higher than the fixture, so completing a class in the demo
-   * animates the celebration rather than landing on a flat number.
-   */
-  rpc(name: string, _args?: Record<string, unknown>) {
-    const streak = (tables.streaks[0]?.current_streak as number) ?? 0;
-    const data =
-      name === 'finish_daily_session'
-        ? [{ current_streak: streak + 1 }]
-        : name === 'recover_streak'
-          ? []
-          : [];
-    return Promise.resolve({ data, error: null });
+  rpc(name: string, args: Record<string, unknown> = {}) {
+    if (name === 'finish_lesson') {
+      return Promise.resolve({ data: finishLesson(args as Parameters<typeof finishLesson>[0]), error: null });
+    }
+    return Promise.resolve({ data: null, error: { message: `demo: no rpc "${name}"` } });
   },
 
   auth: {
     getSession: async () => ({ data: { session: demoSession }, error: null }),
-    signInWithPassword: async () => ({
-      data: { session: demoSession, user: demoSession.user },
-      error: null,
-    }),
+    signInWithPassword: async () => ({ data: { session: demoSession, user: demoSession.user }, error: null }),
     signOut: async () => ({ error: null }),
-    onAuthStateChange: () => ({
-      data: { subscription: { unsubscribe: () => {} } },
-    }),
+    onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
   },
 
   storage: {

@@ -1,9 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
-import { router, useFocusEffect } from 'expo-router';
+import { useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AccessibilityInfo,
-  ActivityIndicator,
   Animated,
   Easing,
   FlatList,
@@ -16,145 +15,118 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Button, ScreenTitle } from '@/components/ui';
-import {
-  type ActiveRecording,
-  canRecord,
-  playAudio,
-  startRecording,
-  uploadAudio,
-} from '@/lib/audio';
-import { isPhrase } from '@/lib/session';
+import { ScreenTitle } from '@/components/ui';
+import { playAudio } from '@/lib/audio';
+import { useAuth } from '@/lib/auth';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { supabase } from '@/lib/supabase';
-import { colors, press, radius, shadow } from '@/lib/theme';
-import type { Card, Sentence } from '@/lib/types';
+import { colors, radius, shadow } from '@/lib/theme';
+import type { Form, FormState } from '@/lib/types';
+
+// ---------------------------------------------------------------------------
+// Palabras — everything she has met so far, and nothing she hasn't.
+//
+// The course decides what exists; this screen is the other side of it: the
+// words the path has actually given her, with how settled each one is, and the
+// sentences she has been shown. Writing and recording the course happens in
+// the dashboard, not here.
+// ---------------------------------------------------------------------------
 
 type Tab = 'words' | 'sentences';
-/** What the list needs of a generated sentence. */
-type SentenceRow = Pick<Sentence, 'id' | 'hebrew' | 'translit' | 'spanish' | 'audio_path'>;
+
+interface WordRow {
+  form: Form;
+  state: FormState;
+}
+
+interface SentenceRow {
+  id: string;
+  es: string;
+  en: string;
+  audio_path: string | null;
+}
+
+/** How settled a word is, in three steps a glance can read. */
+function strength(state: FormState): { label: string; tone: 'new' | 'growing' | 'strong' } {
+  if (state.interval_days >= 21) return { label: 'firme', tone: 'strong' };
+  if (state.interval_days >= 4) return { label: 'creciendo', tone: 'growing' };
+  return { label: 'nueva', tone: 'new' };
+}
 
 export default function Words() {
   // The tabs' opaque `sceneStyle` (see (tabs)/_layout) covers the root
-  // gradient, so this screen's actual background is flat `colors.bg` — the
-  // claim has to match that, not the gradient the scene no longer shows.
+  // gradient, so this screen's actual background is flat `colors.bg`.
   useStatusBarColor(colors.bg);
+  const { profile } = useAuth();
   // `null` until the first fetch lands. An empty array would be a lie the
-  // screen tells for as long as the round trip takes — "todavía no hay
-  // palabras", with a button to add the first one, over a deck that is full.
-  const [cards, setCards] = useState<Card[] | null>(null);
-  // Generated sentences live in their own tab: mixed in by date they would
-  // bury the words under the week's batch. They are also where Ohad records —
-  // the generator writes text only, so every sentence starts out silent.
+  // screen tells for as long as the round trip takes.
+  const [words, setWords] = useState<WordRow[] | null>(null);
   const [sentences, setSentences] = useState<SentenceRow[] | null>(null);
   const [tab, setTab] = useState<Tab>('words');
-  const [onlyMissing, setOnlyMissing] = useState(false);
   const [search, setSearch] = useState('');
 
   useFocusEffect(
     useCallback(() => {
+      if (!profile) return;
+      Promise.all([
+        supabase.from('form_states').select('*').eq('user_id', profile.id),
+        supabase.from('form_entries').select('*').eq('status', 'published'),
+      ]).then(([{ data: states }, { data: forms }]) => {
+        const formById = new Map(((forms ?? []) as Form[]).map((f) => [f.id, f]));
+        const rows = ((states ?? []) as FormState[]).flatMap((state) => {
+          const form = formById.get(state.form_id);
+          return form ? [{ form, state }] : [];
+        });
+        // In the order the course taught them — the newest words at the top.
+        rows.sort(
+          (a, b) =>
+            b.form.unit_ordinal - a.form.unit_ordinal ||
+            b.state.introduced_on.localeCompare(a.state.introduced_on) ||
+            a.form.form.localeCompare(b.form.form, 'es'),
+        );
+        setWords(rows);
+      });
       supabase
-        .from('cards')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .then(({ data }) => setCards((data as Card[]) ?? []));
-      // Oldest first: the batch is written in the order she will meet the
-      // words, so recording top to bottom records what she needs soonest.
-      supabase
-        .from('sentences')
-        .select('id, hebrew, translit, spanish, audio_path')
-        .is('retired_at', null)
-        .order('created_at', { ascending: true })
-        .then(({ data }) => setSentences((data as SentenceRow[]) ?? []));
-    }, []),
+        .from('sentence_states')
+        .select('sentence_id, last_shown_at')
+        .eq('user_id', profile.id)
+        .then(async ({ data: shown }) => {
+          const ids = (shown ?? []).map((r: { sentence_id: string }) => r.sentence_id);
+          if (ids.length === 0) return setSentences([]);
+          const { data } = await supabase.from('sentences').select('id, es, en, audio_path').in('id', ids);
+          const lastShown = new Map((shown ?? []).map((r: { sentence_id: string; last_shown_at: string | null }) => [r.sentence_id, r.last_shown_at ?? '']));
+          setSentences(
+            ((data ?? []) as SentenceRow[]).sort((a, b) =>
+              (lastShown.get(b.id) ?? '').localeCompare(lastShown.get(a.id) ?? ''),
+            ),
+          );
+        });
+    }, [profile]),
   );
 
-  const q = search.trim().toLowerCase();
-  const filteredCards = useMemo(() => {
-    if (!cards) return [];
-    if (!q) return cards;
-    return cards.filter(
-      (c) =>
-        c.translit.toLowerCase().includes(q) ||
-        c.spanish.toLowerCase().includes(q) ||
-        c.hebrew.includes(q) ||
-        (c.english ?? '').toLowerCase().includes(q),
-    );
-  }, [cards, q]);
-
-  const missing = useMemo(() => (sentences ?? []).filter((s) => !s.audio_path).length, [sentences]);
-  const filteredSentences = useMemo(() => {
-    if (!sentences) return [];
-    return sentences.filter(
-      (s) =>
-        (!onlyMissing || !s.audio_path) &&
-        (!q ||
-          s.translit.toLowerCase().includes(q) ||
-          s.spanish.toLowerCase().includes(q) ||
-          s.hebrew.includes(q)),
-    );
-  }, [sentences, q, onlyMissing]);
-
-  // ---- Recording, one sentence at a time -----------------------------------
-  const [recordingId, setRecordingId] = useState<string | null>(null);
-  const [savingId, setSavingId] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const activeRec = useRef<ActiveRecording | null>(null);
-
-  // Leaving the screen mid-take drops it rather than leaving the mic open.
-  useEffect(() => () => activeRec.current?.cancel(), []);
-
-  const toggleRecord = async (s: SentenceRow) => {
-    setError(null);
-    if (recordingId === s.id) {
-      const rec = activeRec.current;
-      activeRec.current = null;
-      setRecordingId(null);
-      if (!rec) return;
-      setSavingId(s.id);
-      try {
-        const { blob, mime } = await rec.stop();
-        const path = await uploadAudio(s.id, blob, mime, 'sentences');
-        const { error: err } = await supabase
-          .from('sentences')
-          .update({ audio_path: path })
-          .eq('id', s.id);
-        if (err) throw err;
-        setSentences((prev) =>
-          prev ? prev.map((x) => (x.id === s.id ? { ...x, audio_path: path } : x)) : prev,
-        );
-      } catch (err) {
-        console.warn('[words] sentence audio failed', err);
-        setError('No se pudo guardar el audio.');
-      } finally {
-        setSavingId(null);
-      }
-      return;
-    }
-    if (recordingId) return; // another take is running — its stop button is the way out
-    try {
-      activeRec.current = await startRecording();
-      setRecordingId(s.id);
-    } catch {
-      setError('No se pudo acceder al micrófono.');
-    }
-  };
+  const q = search.trim().toLocaleLowerCase('es');
+  const filteredWords = useMemo(
+    () =>
+      (words ?? []).filter(
+        ({ form }) =>
+          !q || form.form.toLocaleLowerCase('es').includes(q) || form.gloss_en.toLowerCase().includes(q),
+      ),
+    [words, q],
+  );
+  const filteredSentences = useMemo(
+    () =>
+      (sentences ?? []).filter(
+        (s) => !q || s.es.toLocaleLowerCase('es').includes(q) || s.en.toLowerCase().includes(q),
+      ),
+    [sentences, q],
+  );
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.container}>
         <View style={styles.titleRow}>
           <ScreenTitle>Palabras</ScreenTitle>
-          <Pressable
-            onPress={() => router.push('/add')}
-            accessibilityLabel="Agregar palabra"
-            style={({ pressed }) => [
-              styles.addButton,
-              { transform: [{ scale: pressed ? press.scale : 1 }] },
-            ]}>
-            <Ionicons name="add" size={20} color={colors.onPrimary} />
-            <Text style={styles.addButtonText}>Agregar</Text>
-          </Pressable>
+          {words ? <Text style={styles.count}>{words.length}</Text> : null}
         </View>
 
         <View style={styles.segment}>
@@ -168,13 +140,8 @@ export default function Words() {
                 { transform: [{ scale: pressed ? 0.98 : 1 }] },
               ]}>
               <Text style={[styles.segmentText, tab === t && styles.segmentTextActive]}>
-                {t === 'words' ? 'Palabras' : 'Oraciones'}
+                {t === 'words' ? 'Palabras' : 'Frases'}
               </Text>
-              {t === 'sentences' && missing > 0 ? (
-                <View style={styles.segmentBadge}>
-                  <Text style={styles.segmentBadgeText}>{missing}</Text>
-                </View>
-              ) : null}
             </Pressable>
           ))}
         </View>
@@ -188,59 +155,46 @@ export default function Words() {
         />
 
         {tab === 'words' ? (
-          cards == null ? (
+          words == null ? (
             <WordsSkeleton />
           ) : (
             <FlatList
-              data={filteredCards}
-              keyExtractor={(c) => c.id}
+              data={filteredWords}
+              keyExtractor={(r) => r.form.id}
               contentContainerStyle={{ gap: 10, paddingBottom: 24 }}
               ListEmptyComponent={
-                cards.length === 0 ? (
-                  <View style={styles.emptyWrap}>
-                    <Text style={[styles.empty, { marginTop: 0 }]}>Todavía no hay palabras.</Text>
-                    <Button title="+ Agregar la primera" onPress={() => router.push('/add')} />
-                  </View>
-                ) : (
-                  <Text style={styles.empty}>Sin resultados.</Text>
-                )
+                <Text style={styles.empty}>
+                  {words.length === 0
+                    ? 'Todavía no aprendiste ninguna palabra. Empezá la primera lección del camino.'
+                    : 'Sin resultados.'}
+                </Text>
               }
-              renderItem={({ item }) => (
-                <Pressable
-                  onPress={() => router.push(`/card/${item.id}`)}
-                  style={({ pressed }) => [
-                    styles.row,
-                    { transform: [{ scale: pressed ? 0.985 : 1 }] },
-                  ]}>
-                  <View style={{ flex: 1, gap: 2 }}>
-                    <View style={styles.rowTop}>
-                      <Text style={styles.translit} numberOfLines={2}>
-                        {item.translit}
+              renderItem={({ item: { form, state } }) => {
+                const s = strength(state);
+                return (
+                  <View style={styles.row}>
+                    <View style={{ flex: 1, gap: 2 }}>
+                      <View style={styles.rowTop}>
+                        <Text style={styles.es} numberOfLines={2}>
+                          {form.form}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.strength,
+                            s.tone === 'strong' && styles.strengthStrong,
+                            s.tone === 'growing' && styles.strengthGrowing,
+                          ]}>
+                          {s.label}
+                        </Text>
+                      </View>
+                      <Text style={styles.en} numberOfLines={2}>
+                        {form.gloss_en}
                       </Text>
-                      {isPhrase(item.translit) ? (
-                        <Text style={styles.kindTag}>frase</Text>
-                      ) : (
-                        <Text style={styles.hebrew}>{item.hebrew}</Text>
-                      )}
                     </View>
-                    <Text style={styles.spanish} numberOfLines={2}>
-                      {item.spanish}
-                    </Text>
+                    {form.audio_path ? <PlayButton path={form.audio_path} /> : null}
                   </View>
-                  {item.audio_path ? (
-                    <Pressable
-                      onPress={() => playAudio(item.audio_path!)}
-                      hitSlop={8}
-                      style={({ pressed }) => [
-                        styles.playButton,
-                        { transform: [{ scale: pressed ? 0.9 : 1 }] },
-                      ]}>
-                      <Ionicons name="volume-high" size={18} color={colors.primary} />
-                    </Pressable>
-                  ) : null}
-                  <Ionicons name="chevron-forward" size={18} color={colors.faint} />
-                </Pressable>
-              )}
+                );
+              }}
             />
           )
         ) : sentences == null ? (
@@ -250,98 +204,36 @@ export default function Words() {
             data={filteredSentences}
             keyExtractor={(s) => s.id}
             contentContainerStyle={{ gap: 10, paddingBottom: 24 }}
-            ListHeaderComponent={
-              <View style={{ gap: 10 }}>
-                {missing > 0 ? (
-                  <Pressable
-                    onPress={() => setOnlyMissing((v) => !v)}
-                    style={({ pressed }) => [
-                      styles.chip,
-                      onlyMissing && styles.chipOn,
-                      { transform: [{ scale: pressed ? 0.97 : 1 }] },
-                    ]}>
-                    <Ionicons
-                      name="mic-off"
-                      size={14}
-                      color={onlyMissing ? colors.onPrimary : colors.primaryDark}
-                    />
-                    <Text style={[styles.chipText, onlyMissing && { color: colors.onPrimary }]}>
-                      Sin audio · {missing}
-                    </Text>
-                  </Pressable>
-                ) : null}
-                {!canRecord && missing > 0 ? (
-                  <Text style={styles.hint}>Las oraciones se graban desde el navegador.</Text>
-                ) : null}
-                {error ? <Text style={styles.error}>{error}</Text> : null}
-              </View>
-            }
             ListEmptyComponent={
               <Text style={styles.empty}>
-                {sentences.length === 0 ? 'Todavía no hay oraciones.' : 'Sin resultados.'}
+                {sentences.length === 0 ? 'Las frases que veas en las lecciones aparecen acá.' : 'Sin resultados.'}
               </Text>
             }
-            renderItem={({ item }) => {
-              const recording = recordingId === item.id;
-              const saving = savingId === item.id;
-              return (
-                <View style={[styles.row, recording && styles.rowRecording]}>
-                  <View style={{ flex: 1, gap: 2 }}>
-                    <Text style={styles.translit} numberOfLines={2}>
-                      {item.translit}
-                    </Text>
-                    <Text style={styles.sentenceHebrew} numberOfLines={2}>
-                      {item.hebrew}
-                    </Text>
-                    <Text
-                      style={[styles.spanish, recording && { color: colors.danger }]}
-                      numberOfLines={2}>
-                      {recording ? 'Grabando… tocá para parar' : item.spanish}
-                    </Text>
-                  </View>
-                  {item.audio_path && !recording ? (
-                    <Pressable
-                      onPress={() => playAudio(item.audio_path!)}
-                      hitSlop={8}
-                      style={({ pressed }) => [
-                        styles.playButton,
-                        { transform: [{ scale: pressed ? 0.9 : 1 }] },
-                      ]}>
-                      <Ionicons name="volume-high" size={18} color={colors.primary} />
-                    </Pressable>
-                  ) : null}
-                  {canRecord ? (
-                    <Pressable
-                      onPress={() => toggleRecord(item)}
-                      disabled={saving || (!!recordingId && !recording)}
-                      hitSlop={8}
-                      accessibilityLabel={recording ? 'Parar' : 'Grabar'}
-                      style={({ pressed }) => [
-                        styles.micButton,
-                        recording && styles.micButtonOn,
-                        !!recordingId && !recording && { opacity: 0.4 },
-                        { transform: [{ scale: pressed ? 0.9 : 1 }] },
-                      ]}>
-                      {saving ? (
-                        <ActivityIndicator size="small" color={colors.danger} />
-                      ) : (
-                        <Ionicons
-                          name={recording ? 'stop' : 'mic'}
-                          size={18}
-                          color={recording ? colors.onPrimary : colors.danger}
-                        />
-                      )}
-                    </Pressable>
-                  ) : !item.audio_path ? (
-                    <Text style={styles.missingTag}>sin audio</Text>
-                  ) : null}
+            renderItem={({ item }) => (
+              <View style={styles.row}>
+                <View style={{ flex: 1, gap: 2 }}>
+                  <Text style={styles.es}>{item.es}</Text>
+                  <Text style={styles.en}>{item.en}</Text>
                 </View>
-              );
-            }}
+                {item.audio_path ? <PlayButton path={item.audio_path} /> : null}
+              </View>
+            )}
           />
         )}
       </View>
     </SafeAreaView>
+  );
+}
+
+function PlayButton({ path }: { path: string }) {
+  return (
+    <Pressable
+      onPress={() => playAudio(path)}
+      hitSlop={8}
+      accessibilityLabel="Escuchar"
+      style={({ pressed }) => [styles.playButton, { transform: [{ scale: pressed ? 0.9 : 1 }] }]}>
+      <Ionicons name="volume-high" size={18} color={colors.primary} />
+    </Pressable>
   );
 }
 
@@ -372,10 +264,7 @@ function WordsSkeleton() {
     return () => loop?.stop();
   }, [pulse]);
 
-  const opacity = pulse.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.5, 1],
-  });
+  const opacity = pulse.interpolate({ inputRange: [0, 1], outputRange: [0.5, 1] });
 
   return (
     <View style={{ gap: 10 }} accessibilityLabel="Cargando palabras">
@@ -403,25 +292,8 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
-  titleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: 12,
-  },
-  addButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    backgroundColor: colors.primary,
-    borderRadius: radius.pill,
-    paddingLeft: 10,
-    paddingRight: 14,
-    paddingVertical: 9,
-    ...shadow.card,
-  },
-  addButtonText: { fontSize: 15, fontWeight: '700', color: colors.onPrimary },
-  // Same segmented control as /add's Palabra · Frase.
+  titleRow: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between', gap: 12 },
+  count: { fontSize: 15, fontWeight: '700', color: colors.muted, fontVariant: ['tabular-nums'] },
   segment: {
     flexDirection: 'row',
     gap: 4,
@@ -441,16 +313,6 @@ const styles = StyleSheet.create({
   segmentItemActive: { backgroundColor: colors.card },
   segmentText: { fontSize: 15, fontWeight: '600', color: colors.muted },
   segmentTextActive: { color: colors.primaryDark },
-  // How many sentences still have no voice — the number he is working down.
-  segmentBadge: {
-    backgroundColor: colors.danger,
-    borderRadius: radius.pill,
-    minWidth: 20,
-    paddingHorizontal: 6,
-    paddingVertical: 1,
-    alignItems: 'center',
-  },
-  segmentBadgeText: { fontSize: 12, fontWeight: '700', color: colors.onPrimary },
   search: {
     backgroundColor: colors.card,
     borderWidth: 1,
@@ -461,20 +323,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.ink,
   },
-  chip: {
-    alignSelf: 'flex-start',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    backgroundColor: colors.primarySoft,
-    borderRadius: radius.pill,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-  },
-  chipOn: { backgroundColor: colors.primary },
-  chipText: { fontSize: 13, fontWeight: '700', color: colors.primaryDark },
-  hint: { fontSize: 13, color: colors.faint },
-  error: { fontSize: 13, color: colors.danger },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -487,60 +335,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     ...shadow.card,
   },
-  rowRecording: { borderColor: colors.danger },
   rowTop: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  translit: {
-    fontSize: 17,
-    fontWeight: '700',
-    color: colors.ink,
-    flexShrink: 1,
-  },
-  kindTag: {
+  es: { fontSize: 17, fontWeight: '700', color: colors.ink, flexShrink: 1 },
+  en: { fontSize: 14, color: colors.muted },
+  strength: {
     fontSize: 11,
     fontWeight: '700',
-    color: colors.primaryDark,
-    backgroundColor: colors.primarySoft,
+    color: colors.muted,
+    backgroundColor: colors.bg,
     borderRadius: radius.pill,
     paddingHorizontal: 8,
     paddingVertical: 2,
     overflow: 'hidden',
   },
-  missingTag: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: colors.dangerInk,
-    backgroundColor: colors.dangerSoft,
-    borderRadius: radius.pill,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    overflow: 'hidden',
-  },
-  hebrew: { fontSize: 15, color: colors.muted },
-  // Stated alignment keeps the right-to-left line under its transliteration
-  // instead of parked at the far edge of the row.
-  sentenceHebrew: { fontSize: 15, color: colors.muted, textAlign: 'left' },
-  spanish: { fontSize: 14, color: colors.muted },
-  playButton: {
-    backgroundColor: colors.primarySoft,
-    borderRadius: 99,
-    padding: 8,
-  },
-  micButton: {
-    backgroundColor: colors.dangerSoft,
-    borderRadius: 99,
-    width: 34,
-    height: 34,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  micButtonOn: { backgroundColor: colors.danger },
+  strengthGrowing: { color: colors.primaryDark, backgroundColor: colors.primarySoft },
+  strengthStrong: { color: colors.onPrimary, backgroundColor: colors.primary },
+  playButton: { backgroundColor: colors.primarySoft, borderRadius: 99, padding: 8 },
   bone: { height: 15, borderRadius: 7, backgroundColor: colors.border },
   boneSmall: { height: 11, borderRadius: 5 },
-  emptyWrap: { marginTop: 32, gap: 16, alignItems: 'stretch' },
-  empty: {
-    textAlign: 'center',
-    color: colors.faint,
-    fontSize: 15,
-    marginTop: 32,
-  },
+  empty: { textAlign: 'center', color: colors.faint, fontSize: 15, marginTop: 32, lineHeight: 21 },
 });

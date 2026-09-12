@@ -5,15 +5,15 @@ import type { Streak } from '@/lib/types';
 // What the streak row means today.
 //
 // The row itself is written lazily — nothing touches it on the day she skips —
-// so its meaning depends on how old `last_completed_date` is:
+// so its meaning depends on how old `last_practice_date` is:
 //
 //   alive       practised today or yesterday; the count is simply true.
 //   frozen      the run outlived its last practice day. The row still holds
 //               the old count (nothing has reset it yet), which is exactly the
 //               number the header shows struck through.
-//   recovering  she came back and finished the daily class: the old run sits
-//               banked in `recoverable_streak` until midnight, and one more
-//               class buys it back (recover_streak in migration 0007).
+//   recovering  she came back and finished a round: the old run sits banked
+//               in `recoverable_streak` until midnight, and one more round buys
+//               it back (finish_lesson in the course schema migration).
 //   none        nothing to say — no run, and no run to mourn.
 // ---------------------------------------------------------------------------
 export type StreakStatus =
@@ -23,11 +23,11 @@ export type StreakStatus =
   | { kind: 'recovering'; lost: number; days: number };
 
 export function streakStatus(streak: Streak | null, today = localDateStr()): StreakStatus {
-  if (!streak || !streak.last_completed_date) return { kind: 'none' };
-  const last = streak.last_completed_date;
+  if (!streak || !streak.last_practice_date) return { kind: 'none' };
+  const last = streak.last_practice_date;
 
   if (last === today) {
-    // `?? 0` so a client running ahead of migration 0007 degrades to 'alive'.
+    // `?? 0` so a row from before the course schema degrades to 'alive'.
     const banked = streak.recoverable_streak ?? 0;
     return banked > 0
       ? { kind: 'recovering', lost: banked, days: streak.current_streak }
