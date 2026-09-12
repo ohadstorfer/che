@@ -226,6 +226,29 @@ export async function subscribeWebPush(args: {
   return { ok: true };
 }
 
+export async function getMyPartnerId(userId: string): Promise<string | null> {
+  const { data, error } = await supabase
+    .from("partner_links")
+    .select("partner_id")
+    .eq("user_id", userId)
+    .limit(1)
+    .maybeSingle();
+  if (error || !data) return null;
+  return data.partner_id;
+}
+
+export async function syncPartnerReminder(args: {
+  reminderTime: string;
+  enabled: boolean;
+}): Promise<{ ok: true; touched: number } | { ok: false; reason: string }> {
+  const { data, error } = await supabase.rpc("sync_partner_reminder", {
+    p_reminder_time: args.reminderTime,
+    p_enabled: args.enabled,
+  });
+  if (error) return { ok: false, reason: error.message };
+  return { ok: true, touched: data ?? 0 };
+}
+
 export async function unsubscribeWebPush(userId: string): Promise<void> {
   await supabase
     .from("push_subscriptions")

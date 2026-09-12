@@ -17,6 +17,7 @@ import { StreakCelebration } from "@/components/StreakCelebration"; // TEMP — 
 import { GeneratingOverlay } from "@/components/GeneratingOverlay";
 import {
   Banner,
+  ConfirmDialog,
   Eyebrow,
   IconButton,
   Pressable,
@@ -26,10 +27,12 @@ import {
 } from "@/components/ui";
 import {
   ensureSubscribed,
+  getMyPartnerId,
   isIos,
   isStandalone,
   isSubscriptionActive,
   isWeb,
+  syncPartnerReminder,
 } from "@/lib/notifications";
 import type { GenerateResponse } from "@/types/exercise";
 
@@ -77,6 +80,10 @@ export default function HomeScreen() {
   const [error, setError] = useState<string | null>(null);
   const [notif, setNotif] = useState<NotifState>({ kind: "loading" });
   const [activating, setActivating] = useState(false);
+  const [partnerId, setPartnerId] = useState<string | null>(null);
+  const [shareAsk, setShareAsk] = useState(false);
+  const [shareMsg, setShareMsg] = useState<string | null>(null);
+  const [sharing, setSharing] = useState(false);
   const [showStreakPreview, setShowStreakPreview] = useState(false); // TEMP — borrar
   const inputRef = useRef<TextInput>(null);
 
@@ -84,16 +91,23 @@ export default function HomeScreen() {
     let cancelled = false;
     (async () => {
       if (!userId) {
-        if (!cancelled) setNotif({ kind: "loading" });
+        if (!cancelled) {
+          setNotif({ kind: "loading" });
+          setPartnerId(null);
+        }
         return;
       }
       if (isWeb() && isIos() && !isStandalone()) {
         if (!cancelled) setNotif({ kind: "needs-install" });
         return;
       }
-      const active = await isSubscriptionActive(userId);
+      const [active, partner] = await Promise.all([
+        isSubscriptionActive(userId),
+        getMyPartnerId(userId),
+      ]);
       if (cancelled) return;
       setNotif({ kind: active ? "active" : "needs-activate" });
+      setPartnerId(partner);
     })();
     return () => {
       cancelled = true;
@@ -108,8 +122,32 @@ export default function HomeScreen() {
       reminderTime: settings.reminderTime,
     });
     setActivating(false);
-    if (res.ok) setNotif({ kind: "active" });
-    else setNotif({ kind: "error", reason: res.reason });
+    if (res.ok) {
+      setNotif({ kind: "active" });
+      if (partnerId) setShareAsk(true);
+    } else {
+      setNotif({ kind: "error", reason: res.reason });
+    }
+  };
+
+  const onConfirmShare = async () => {
+    if (sharing) return;
+    setSharing(true);
+    const res = await syncPartnerReminder({
+      reminderTime: settings.reminderTime,
+      enabled: true,
+    });
+    setSharing(false);
+    setShareAsk(false);
+    if (!res.ok) {
+      setShareMsg(`no se pudo compartir: ${res.reason}`);
+      return;
+    }
+    setShareMsg(
+      res.touched > 0
+        ? "recordatorio activado en la cuenta de tu compañero"
+        : "tu compañero todavía no activó las notificaciones en ningún dispositivo",
+    );
   };
 
   const submitTopic = async (topic: string) => {
@@ -213,6 +251,16 @@ export default function HomeScreen() {
                       : "Recordatorios cada 30 min desde las 8 a.m."}
                 </Text>
               </View>
+            </Pressable>
+          ) : null}
+
+          {shareMsg ? (
+            <Pressable
+              onPress={() => setShareMsg(null)}
+              feedback="opacity"
+              style={{ marginTop: 12 }}
+            >
+              <Banner tone="info" message={shareMsg} />
             </Pressable>
           ) : null}
 
@@ -390,6 +438,16 @@ export default function HomeScreen() {
           </Screen>
         </View>
       ) : null}
+
+      <ConfirmDialog
+        visible={shareAsk}
+        title="Compartir recordatorio"
+        message="¿Querés activar también este recordatorio en la cuenta de tu compañero?"
+        confirmLabel={sharing ? "Compartiendo..." : "Sí, compartir"}
+        cancelLabel="Ahora no"
+        onConfirm={() => void onConfirmShare()}
+        onCancel={() => setShareAsk(false)}
+      />
     </Screen>
   );
 }

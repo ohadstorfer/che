@@ -77,6 +77,21 @@ export interface Database {
         };
         Relationships: [];
       };
+      partner_links: {
+        Row: {
+          user_id: string;
+          partner_id: string;
+          created_at: string;
+        };
+        Insert: {
+          user_id: string;
+          partner_id: string;
+        };
+        Update: {
+          partner_id?: string;
+        };
+        Relationships: [];
+      };
       push_subscriptions: {
         Row: {
           id: string;
@@ -118,6 +133,10 @@ export interface Database {
           last_practice_date: string | null;
           updated_at: string;
         };
+      };
+      sync_partner_reminder: {
+        Args: { p_reminder_time: string; p_enabled: boolean };
+        Returns: number;
       };
     };
     Views: Record<string, never>;
