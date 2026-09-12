@@ -2,22 +2,19 @@
   "expo": {
     "name": "Che",
     "slug": "che",
-    "scheme": "che",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon.png",
+    "scheme": "che",
     "userInterfaceStyle": "light",
     "backgroundColor": "#F1EEE6",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#F1EEE6"
-    },
-    "assetBundlePatterns": ["**/*"],
+    "primaryColor": "#3E5641",
     "ios": {
-      "supportsTablet": true,
       "bundleIdentifier": "com.che.app",
+      "supportsTablet": false,
+      "config": {
+        "usesNonExemptEncryption": false
+      },
       "infoPlist": {
         "UIBackgroundModes": ["remote-notification"]
       }
@@ -25,41 +22,50 @@
     "android": {
       "package": "com.che.app",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#F1EEE6"
-      }
+        "backgroundColor": "#F1EEE6",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
+      ]
     },
     "web": {
-      "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/icon.png",
-      "name": "Che — Aprendé español",
-      "shortName": "Che",
-      "themeColor": "#3E5641",
-      "backgroundColor": "#F1EEE6",
-      "display": "standalone",
-      "orientation": "portrait"
+      "favicon": "./assets/images/favicon.png",
+      "themeColor": "#F1EEE6",
+      "backgroundColor": "#F1EEE6"
     },
     "plugins": [
       "expo-router",
       [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F1EEE6",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 180
+        }
+      ],
+      "expo-audio",
+      [
         "expo-notifications",
         {
-          "icon": "./assets/icon.png",
-          "color": "#3E5641"
+          "color": "#3E5641",
+          "defaultChannel": "default"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
-      "tsconfigPaths": true
+      "reactCompiler": true
     },
     "extra": {
-      "EXPO_PUBLIC_SUPABASE_URL": "https://qbzjaseetusewxnfgpes.supabase.co",
-      "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_kZLZNdpaZznMoXjqaMgjmQ_3SeAAmAC",
-      "eas": {
-        "projectId": ""
-      }
+      "router": {}
     }
   }
 }
