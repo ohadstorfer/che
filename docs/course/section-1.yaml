@@ -1,0 +1,1377 @@
+# ---------------------------------------------------------------------------
+# Che — Section 1 outline
+#
+# The curriculum everything downstream is generated against: which units exist,
+# in what order, what grammar each one teaches, and every form it introduces.
+# A form that appears nowhere in this file does not exist in the course, and a
+# sentence may only use forms introduced in its own unit or an earlier one.
+#
+# Status: DRAFT — not yet reviewed by a native speaker (Phase 0).
+#
+# Validate:  npm run course:validate
+#
+# Conventions
+#   words:     one entry per lemma the unit introduces or extends. A lemma is
+#              defined (pos, en) the first time it appears; later units list
+#              only the new forms.
+#   forms:     omitted → the lemma itself is the only form.
+#   f:         grammatical features, dot-separated:
+#                person/number  1sg 2sg 3sg 1pl 3pl
+#                tense/mood     pres ind imp
+#                non-finite     inf ger
+#                               vos (voseo form) · clitic (pronoun attached)
+#                nominal        m f sg pl
+#   register:  neutral (default) · informal · lunfardo. A unit may only use
+#              lemmas up to its register_max in sentences.
+#   glue:      function words (articles, prepositions, clitics). They are
+#              taught, but not drilled on their own or scheduled by SRS.
+#   propn:     proper nouns. Free in sentences, never drilled.
+#   sample:    one sentence the unit must be able to say, checked against the
+#              forms available by then.
+# ---------------------------------------------------------------------------
+
+section:
+  id: 1
+  slug: first-words
+  title: First words
+  cefr: A1.1
+
+units:
+  # ==========================================================================
+  - ordinal: 1
+    slug: hola-che
+    title: Hola, che
+    summary: Say hi, say who you are, ask how someone is
+    grammar: [saludos, pron.sujeto.yo, pron.sujeto.vos, ser.pres.1sg, ser.pres.2sg.vos, llamarse.pres.1sg, llamarse.pres.2sg.vos]
+    register_max: informal
+    sample: {es: "¿Todo bien, che? Todo bien, ¿y vos?", en: "All good? All good, and you?"}
+    tips:
+      - title: Vos, not tú
+        body: >-
+          In Argentina the everyday word for "you" is **vos**, and it has its
+          own verb forms: *vos sos* (you are), *vos te llamás* (your name is).
+          You'll hear *tú* in other countries. This course never uses it.
+      - title: Che
+        body: >-
+          **Che** is how people in Buenos Aires get someone's attention — like
+          "hey" or "mate". It's friendly, never rude.
+    words:
+      - {lemma: hola, pos: interj, en: "hi, hello"}
+      - {lemma: chau, pos: interj, en: "bye"}
+      - {lemma: che, pos: interj, en: "hey (to get attention)", register: informal}
+      - {lemma: dale, pos: interj, en: "OK, sure, go ahead", register: informal}
+      - {lemma: bueno, pos: interj, en: "well, OK"}
+      - {lemma: gracias, pos: interj, en: "thanks, thank you"}
+      - {lemma: sí, pos: adv, en: "yes"}
+      - {lemma: "no", pos: adv, en: "no, not"}
+      - {lemma: bien, pos: adv, en: "well, fine, good"}
+      - {lemma: mal, pos: adv, en: "badly, not well"}
+      - {lemma: todo bien, pos: phrase, en: "all good"}
+      - {lemma: qué tal, pos: phrase, en: "how's it going"}
+      - {lemma: mucho gusto, pos: phrase, en: "nice to meet you"}
+      - {lemma: cómo, pos: adv, en: "how"}
+      - {lemma: qué, pos: pron, en: "what"}
+      - {lemma: yo, pos: pron, en: "I"}
+      - {lemma: vos, pos: pron, en: "you (informal)"}
+      - {lemma: y, pos: conj, en: "and", glue: true}
+      - {lemma: me, pos: pron, en: "me, myself", glue: true}
+      - {lemma: te, pos: pron, en: "you, yourself", glue: true}
+      - lemma: ser
+        pos: verb
+        en: "to be"
+        forms:
+          - {form: soy, en: "I am", f: 1sg.pres.ind}
+          - {form: sos, en: "you are", f: 2sg.pres.ind.vos}
+      - lemma: llamarse
+        pos: verb
+        en: "to be called"
+        forms:
+          - {form: llamo, en: "(my name) is, I'm called", f: 1sg.pres.ind}
+          - {form: llamás, en: "(your name) is, you're called", f: 2sg.pres.ind.vos}
+      - {lemma: Sofi, pos: propn, en: "Sofi"}
+      - {lemma: Juan, pos: propn, en: "Juan"}
+      - {lemma: Martín, pos: propn, en: "Martín"}
+      - {lemma: Lucía, pos: propn, en: "Lucía"}
+
+  # ==========================================================================
+  - ordinal: 2
+    slug: de-donde-sos
+    title: ¿De dónde sos?
+    summary: Where you're from, and who else is
+    grammar: [ser.pres.3sg, ser.de.origen, adj.nacionalidad.genero, pron.sujeto.el-ella]
+    register_max: informal
+    sample: {es: "Soy de Buenos Aires. ¿Y vos de dónde sos?", en: "I'm from Buenos Aires. And where are you from?"}
+    tips:
+      - title: Ser de
+        body: >-
+          To say where someone is from, use **ser de**: *Soy de Rosario.*
+          Nationalities change with gender: *argentino* for a man,
+          *argentina* for a woman.
+    words:
+      - lemma: ser
+        pos: verb
+        forms:
+          - {form: es, en: "is (he/she is)", f: 3sg.pres.ind}
+      - {lemma: de, pos: prep, en: "from, of", glue: true}
+      - {lemma: dónde, pos: adv, en: "where"}
+      - {lemma: acá, pos: adv, en: "here"}
+      - {lemma: también, pos: adv, en: "also, too"}
+      - {lemma: pero, pos: conj, en: "but"}
+      - {lemma: él, pos: pron, en: "he"}
+      - {lemma: ella, pos: pron, en: "she"}
+      - lemma: argentino
+        pos: adj
+        en: "Argentinian"
+        forms:
+          - {form: argentino, f: m.sg}
+          - {form: argentina, f: f.sg}
+      - lemma: uruguayo
+        pos: adj
+        en: "Uruguayan"
+        forms:
+          - {form: uruguayo, f: m.sg}
+          - {form: uruguaya, f: f.sg}
+      - lemma: chileno
+        pos: adj
+        en: "Chilean"
+        forms:
+          - {form: chileno, f: m.sg}
+          - {form: chilena, f: f.sg}
+      - lemma: inglés
+        pos: adj
+        en: "English"
+        forms:
+          - {form: inglés, f: m.sg}
+          - {form: inglesa, f: f.sg}
+      - lemma: porteño
+        pos: adj
+        en: "from Buenos Aires"
+        forms:
+          - {form: porteño, f: m.sg}
+          - {form: porteña, f: f.sg}
+      - {lemma: Argentina, pos: propn, en: "Argentina"}
+      - {lemma: Uruguay, pos: propn, en: "Uruguay"}
+      - {lemma: Buenos Aires, pos: propn, en: "Buenos Aires"}
+      - {lemma: Rosario, pos: propn, en: "Rosario"}
+      - {lemma: Córdoba, pos: propn, en: "Córdoba"}
+      - {lemma: Montevideo, pos: propn, en: "Montevideo"}
+
+  # ==========================================================================
+  - ordinal: 3
+    slug: cuantos-anos-tenes
+    title: ¿Cuántos años tenés?
+    summary: Numbers to twenty, age, brothers and sisters
+    grammar: [tener.pres.1sg, tener.pres.2sg.vos, tener.pres.3sg, numeros.0-20, articulo.indefinido, posesivo.mi]
+    register_max: informal
+    sample: {es: "Tengo veinte años y mi hermana tiene diecisiete.", en: "I'm twenty and my sister is seventeen."}
+    tips:
+      - title: You have your age
+        body: >-
+          Spanish says you *have* years: **Tengo veinte años** — I'm twenty.
+          *Tenés* is the vos form, *tiene* is for him or her.
+    words:
+      - lemma: tener
+        pos: verb
+        en: "to have"
+        forms:
+          - {form: tengo, en: "I have", f: 1sg.pres.ind}
+          - {form: tenés, en: "you have", f: 2sg.pres.ind.vos}
+          - {form: tiene, en: "has (he/she has)", f: 3sg.pres.ind}
+      - lemma: cuánto
+        pos: adj
+        en: "how many, how much"
+        forms:
+          - {form: cuántos, f: m.pl}
+          - {form: cuántas, f: f.pl}
+      - lemma: año
+        pos: noun
+        en: "year"
+        forms:
+          - {form: año, f: m.sg}
+          - {form: años, en: "years", f: m.pl}
+      - lemma: hermano
+        pos: noun
+        en: "brother"
+        forms:
+          - {form: hermano, f: m.sg}
+          - {form: hermana, en: "sister", f: f.sg}
+      - lemma: mi
+        pos: det
+        en: "my"
+        glue: true
+        forms:
+          - {form: mi, f: sg}
+      - lemma: un
+        pos: det
+        en: "a, an"
+        glue: true
+        forms:
+          - {form: un, f: m.sg}
+          - {form: una, f: f.sg}
+      - {lemma: cero, pos: num, en: "zero"}
+      - {lemma: uno, pos: num, en: "one"}
+      - {lemma: dos, pos: num, en: "two"}
+      - {lemma: tres, pos: num, en: "three"}
+      - {lemma: cuatro, pos: num, en: "four"}
+      - {lemma: cinco, pos: num, en: "five"}
+      - {lemma: seis, pos: num, en: "six"}
+      - {lemma: siete, pos: num, en: "seven"}
+      - {lemma: ocho, pos: num, en: "eight"}
+      - {lemma: nueve, pos: num, en: "nine"}
+      - {lemma: diez, pos: num, en: "ten"}
+      - {lemma: once, pos: num, en: "eleven"}
+      - {lemma: doce, pos: num, en: "twelve"}
+      - {lemma: trece, pos: num, en: "thirteen"}
+      - {lemma: catorce, pos: num, en: "fourteen"}
+      - {lemma: quince, pos: num, en: "fifteen"}
+      - {lemma: dieciséis, pos: num, en: "sixteen"}
+      - {lemma: diecisiete, pos: num, en: "seventeen"}
+      - {lemma: dieciocho, pos: num, en: "eighteen"}
+      - {lemma: diecinueve, pos: num, en: "nineteen"}
+      - {lemma: veinte, pos: num, en: "twenty"}
+
+  # ==========================================================================
+  - ordinal: 4
+    slug: la-familia
+    title: La familia
+    summary: Family, plurals, and whose is whose
+    grammar: [posesivos.tu-su, plural.-s-es, tener.pres.1pl-3pl, ser.pres.1pl-3pl, pron.sujeto.plural]
+    register_max: informal
+    sample: {es: "Mis viejos son de Rosario.", en: "My parents are from Rosario."}
+    tips:
+      - title: Mis viejos
+        body: >-
+          **Mis viejos** — literally "my old ones" — is how Argentines say *my
+          parents*. It's affectionate. Plurals add **-s** after a vowel
+          (*hermanos*) and **-es** after a consonant.
+      - title: Ustedes
+        body: >-
+          For more than one person, Argentina uses **ustedes** with the same
+          verb form as *ellos*: *ustedes son*, *ellos son*.
+    words:
+      - lemma: mi
+        pos: det
+        forms:
+          - {form: mis, en: "my (plural)", f: pl}
+      - lemma: tu
+        pos: det
+        en: "your"
+        glue: true
+        forms:
+          - {form: tu, f: sg}
+          - {form: tus, f: pl}
+      - lemma: su
+        pos: det
+        en: "his, her, their"
+        glue: true
+        forms:
+          - {form: su, f: sg}
+          - {form: sus, f: pl}
+      - lemma: tener
+        pos: verb
+        forms:
+          - {form: tenemos, en: "we have", f: 1pl.pres.ind}
+          - {form: tienen, en: "they have, you (pl.) have", f: 3pl.pres.ind}
+      - lemma: ser
+        pos: verb
+        forms:
+          - {form: somos, en: "we are", f: 1pl.pres.ind}
+          - {form: son, en: "they are, you (pl.) are", f: 3pl.pres.ind}
+      - lemma: nosotros
+        pos: pron
+        en: "we"
+        forms:
+          - {form: nosotros, f: m.pl}
+          - {form: nosotras, f: f.pl}
+      - {lemma: ustedes, pos: pron, en: "you (plural)"}
+      - lemma: ellos
+        pos: pron
+        en: "they"
+        forms:
+          - {form: ellos, f: m.pl}
+          - {form: ellas, f: f.pl}
+      - lemma: hermano
+        pos: noun
+        forms:
+          - {form: hermanos, en: "brothers, siblings", f: m.pl}
+          - {form: hermanas, en: "sisters", f: f.pl}
+      - {lemma: familia, pos: noun, en: "family"}
+      - {lemma: papá, pos: noun, en: "dad"}
+      - {lemma: mamá, pos: noun, en: "mom"}
+      - lemma: viejo
+        pos: noun
+        en: "old man"
+        register: informal
+        forms:
+          - {form: viejo, en: "dad (informal)", f: m.sg}
+          - {form: vieja, en: "mom (informal)", f: f.sg}
+          - {form: viejos, en: "parents (informal)", f: m.pl}
+      - lemma: hijo
+        pos: noun
+        en: "son"
+        forms:
+          - {form: hijo, f: m.sg}
+          - {form: hija, en: "daughter", f: f.sg}
+          - {form: hijos, en: "children, sons", f: m.pl}
+      - lemma: abuelo
+        pos: noun
+        en: "grandfather"
+        forms:
+          - {form: abuelo, f: m.sg}
+          - {form: abuela, en: "grandmother", f: f.sg}
+          - {form: abuelos, en: "grandparents", f: m.pl}
+      - lemma: novio
+        pos: noun
+        en: "boyfriend"
+        forms:
+          - {form: novio, f: m.sg}
+          - {form: novia, en: "girlfriend", f: f.sg}
+      - {lemma: perro, pos: noun, en: "dog"}
+
+  # ==========================================================================
+  - ordinal: 5
+    slug: mate-y-facturas
+    title: Mate y facturas
+    summary: What you like to eat and drink
+    grammar: [gustar.me-te-le, articulo.definido, conj.o]
+    register_max: informal
+    sample: {es: "¿Te gusta el mate amargo o dulce?", en: "Do you like your mate bitter or sweet?"}
+    tips:
+      - title: Gustar works backwards
+        body: >-
+          **Me gusta el mate** means "mate pleases me". The verb matches the
+          thing you like: *me gusta el café*, but *me gustan las facturas*.
+      - title: Facturas
+        body: >-
+          **Facturas** are the pastries you buy by the dozen at the bakery —
+          *medialunas* are the best known. Nothing to do with bills.
+    words:
+      - lemma: gustar
+        pos: verb
+        en: "to please, to like"
+        forms:
+          - {form: gusta, en: "likes (one thing)", f: 3sg.pres.ind}
+          - {form: gustan, en: "likes (several things)", f: 3pl.pres.ind}
+      - {lemma: le, pos: pron, en: "(to) him, her", glue: true}
+      - {lemma: a, pos: prep, en: "to, at", glue: true}
+      - {lemma: mí, pos: pron, en: "me (after a preposition)", glue: true}
+      - lemma: el
+        pos: det
+        en: "the"
+        glue: true
+        forms:
+          - {form: el, f: m.sg}
+          - {form: la, f: f.sg}
+          - {form: los, f: m.pl}
+          - {form: las, f: f.pl}
+      - {lemma: o, pos: conj, en: "or", glue: true}
+      - {lemma: con, pos: prep, en: "with", glue: true}
+      - {lemma: mate, pos: noun, en: "mate (the drink)"}
+      - lemma: factura
+        pos: noun
+        en: "pastry"
+        forms:
+          - {form: factura, f: f.sg}
+          - {form: facturas, en: "pastries", f: f.pl}
+      - lemma: medialuna
+        pos: noun
+        en: "croissant"
+        forms:
+          - {form: medialuna, f: f.sg}
+          - {form: medialunas, en: "croissants", f: f.pl}
+      - {lemma: milanesa, pos: noun, en: "breaded cutlet"}
+      - {lemma: café, pos: noun, en: "coffee"}
+      - {lemma: leche, pos: noun, en: "milk"}
+      - {lemma: agua, pos: noun, en: "water"}
+      - lemma: amargo
+        pos: adj
+        en: "bitter"
+        forms:
+          - {form: amargo, f: m.sg}
+          - {form: amarga, f: f.sg}
+      - {lemma: dulce, pos: adj, en: "sweet"}
+      - lemma: rico
+        pos: adj
+        en: "tasty, delicious"
+        forms:
+          - {form: rico, f: m.sg}
+          - {form: rica, f: f.sg}
+      - lemma: tomar
+        pos: verb
+        en: "to drink, to have"
+        forms:
+          - {form: tomar, f: inf}
+      - {lemma: mucho, pos: adv, en: "a lot"}
+      - {lemma: nada, pos: pron, en: "nothing, (not) at all"}
+
+  # ==========================================================================
+  - ordinal: 6
+    slug: el-bondi
+    title: El bondi
+    summary: Getting around, and where things are
+    grammar: [estar.pres.1sg-3sg, estar.ubicacion, hay, contraccion.del-al]
+    register_max: informal
+    sample: {es: "La parada del bondi está en la esquina.", en: "The bus stop is on the corner."}
+    tips:
+      - title: Hay or está
+        body: >-
+          **Hay** introduces something: *Hay un kiosco* — there's a kiosk.
+          **Está** says where something you already know about is: *El kiosco
+          está en la esquina.*
+      - title: Del and al
+        body: >-
+          *de + el* always becomes **del**, and *a + el* becomes **al**:
+          *la parada del bondi*, *voy al centro*.
+    words:
+      - lemma: estar
+        pos: verb
+        en: "to be (location, state)"
+        forms:
+          - {form: estoy, en: "I am", f: 1sg.pres.ind}
+          - {form: estás, en: "you are", f: 2sg.pres.ind.vos}
+          - {form: está, en: "is (he/she/it is)", f: 3sg.pres.ind}
+      - lemma: haber
+        pos: verb
+        en: "there to be"
+        forms:
+          - {form: hay, en: "there is, there are", f: 3sg.pres.ind}
+      - {lemma: en, pos: prep, en: "in, on, at", glue: true}
+      - {lemma: del, pos: det, en: "of the", glue: true}
+      - {lemma: al, pos: det, en: "to the", glue: true}
+      - {lemma: bondi, pos: noun, en: "bus", register: informal}
+      - {lemma: colectivo, pos: noun, en: "bus"}
+      - {lemma: subte, pos: noun, en: "subway, metro"}
+      - {lemma: parada, pos: noun, en: "stop (bus stop)"}
+      - {lemma: kiosco, pos: noun, en: "kiosk, corner shop"}
+      - lemma: cuadra
+        pos: noun
+        en: "block (street)"
+        forms:
+          - {form: cuadra, f: f.sg}
+          - {form: cuadras, en: "blocks", f: f.pl}
+      - {lemma: esquina, pos: noun, en: "corner"}
+      - {lemma: calle, pos: noun, en: "street"}
+      - {lemma: cerca, pos: adv, en: "near, close"}
+      - {lemma: lejos, pos: adv, en: "far"}
+      - {lemma: allá, pos: adv, en: "over there"}
+      - {lemma: ahí, pos: adv, en: "there"}
+
+  # ==========================================================================
+  - ordinal: 7
+    slug: que-haces
+    title: ¿Qué hacés?
+    summary: Work, study, and what you do all day
+    grammar: [verbos.-ar.pres, hacer.pres.1sg-3sg, a-la-noche]
+    register_max: informal
+    sample: {es: "Laburo en el centro y estudio a la noche.", en: "I work downtown and study at night."}
+    tips:
+      - title: -ar verbs with vos
+        body: >-
+          Regular **-ar** verbs: *laburo, laburás, labura, laburamos, laburan*.
+          The vos form stresses the last syllable and carries an accent:
+          *hablás*, *estudiás*.
+      - title: Laburar
+        body: >-
+          **Laburar** is the everyday Argentine word for *to work* — from the
+          Italian *lavorare*. *Trabajar* is understood everywhere and fine too.
+    words:
+      - lemma: laburar
+        pos: verb
+        en: "to work"
+        register: informal
+        forms:
+          - {form: laburo, en: "I work", f: 1sg.pres.ind}
+          - {form: laburás, en: "you work", f: 2sg.pres.ind.vos}
+          - {form: labura, en: "works (he/she works)", f: 3sg.pres.ind}
+          - {form: laburamos, en: "we work", f: 1pl.pres.ind}
+          - {form: laburan, en: "they work", f: 3pl.pres.ind}
+      - lemma: trabajar
+        pos: verb
+        en: "to work"
+        forms:
+          - {form: trabajo, en: "I work", f: 1sg.pres.ind}
+          - {form: trabajás, en: "you work", f: 2sg.pres.ind.vos}
+          - {form: trabaja, en: "works (he/she works)", f: 3sg.pres.ind}
+      - lemma: estudiar
+        pos: verb
+        en: "to study"
+        forms:
+          - {form: estudio, en: "I study", f: 1sg.pres.ind}
+          - {form: estudiás, en: "you study", f: 2sg.pres.ind.vos}
+          - {form: estudia, en: "studies (he/she studies)", f: 3sg.pres.ind}
+          - {form: estudiamos, en: "we study", f: 1pl.pres.ind}
+          - {form: estudian, en: "they study", f: 3pl.pres.ind}
+      - lemma: tomar
+        pos: verb
+        forms:
+          - {form: tomo, en: "I drink", f: 1sg.pres.ind}
+          - {form: tomás, en: "you drink", f: 2sg.pres.ind.vos}
+          - {form: toma, en: "drinks (he/she drinks)", f: 3sg.pres.ind}
+          - {form: tomamos, en: "we drink", f: 1pl.pres.ind}
+          - {form: toman, en: "they drink", f: 3pl.pres.ind}
+      - lemma: hablar
+        pos: verb
+        en: "to speak, to talk"
+        forms:
+          - {form: hablo, en: "I speak", f: 1sg.pres.ind}
+          - {form: hablás, en: "you speak", f: 2sg.pres.ind.vos}
+          - {form: habla, en: "speaks (he/she speaks)", f: 3sg.pres.ind}
+          - {form: hablamos, en: "we speak", f: 1pl.pres.ind}
+          - {form: hablan, en: "they speak", f: 3pl.pres.ind}
+      - lemma: caminar
+        pos: verb
+        en: "to walk"
+        forms:
+          - {form: camino, en: "I walk", f: 1sg.pres.ind}
+          - {form: caminás, en: "you walk", f: 2sg.pres.ind.vos}
+          - {form: camina, en: "walks (he/she walks)", f: 3sg.pres.ind}
+      - lemma: hacer
+        pos: verb
+        en: "to do, to make"
+        forms:
+          - {form: hago, en: "I do", f: 1sg.pres.ind}
+          - {form: hacés, en: "you do", f: 2sg.pres.ind.vos}
+          - {form: hace, en: "does (he/she does)", f: 3sg.pres.ind}
+      - {lemma: centro, pos: noun, en: "downtown, city centre"}
+      - {lemma: noche, pos: noun, en: "night"}
+      - {lemma: castellano, pos: noun, en: "Spanish (the language)"}
+      - {lemma: inglés, pos: noun, en: "English (the language)"}
+      - {lemma: siempre, pos: adv, en: "always"}
+      - {lemma: nunca, pos: adv, en: "never"}
+      - {lemma: poco, pos: adv, en: "a little"}
+
+  # ==========================================================================
+  - ordinal: 8
+    slug: comes-vivis
+    title: Comés, vivís
+    summary: Eating, living, reading and writing
+    grammar: [verbos.-er.pres, verbos.-ir.pres]
+    register_max: informal
+    sample: {es: "¿Vivís solo o con tu familia?", en: "Do you live alone or with your family?"}
+    tips:
+      - title: -er and -ir verbs with vos
+        body: >-
+          Vos keeps the vowel of the infinitive and stresses it: *comer* →
+          **comés**, *vivir* → **vivís**, *leer* → **leés**.
+    words:
+      - lemma: comer
+        pos: verb
+        en: "to eat"
+        forms:
+          - {form: como, en: "I eat", f: 1sg.pres.ind}
+          - {form: comés, en: "you eat", f: 2sg.pres.ind.vos}
+          - {form: come, en: "eats (he/she eats)", f: 3sg.pres.ind}
+          - {form: comemos, en: "we eat", f: 1pl.pres.ind}
+          - {form: comen, en: "they eat", f: 3pl.pres.ind}
+      - lemma: vivir
+        pos: verb
+        en: "to live"
+        forms:
+          - {form: vivo, en: "I live", f: 1sg.pres.ind}
+          - {form: vivís, en: "you live", f: 2sg.pres.ind.vos}
+          - {form: vive, en: "lives (he/she lives)", f: 3sg.pres.ind}
+          - {form: vivimos, en: "we live", f: 1pl.pres.ind}
+          - {form: viven, en: "they live", f: 3pl.pres.ind}
+      - lemma: leer
+        pos: verb
+        en: "to read"
+        forms:
+          - {form: leo, en: "I read", f: 1sg.pres.ind}
+          - {form: leés, en: "you read", f: 2sg.pres.ind.vos}
+          - {form: lee, en: "reads (he/she reads)", f: 3sg.pres.ind}
+      - lemma: escribir
+        pos: verb
+        en: "to write"
+        forms:
+          - {form: escribo, en: "I write", f: 1sg.pres.ind}
+          - {form: escribís, en: "you write", f: 2sg.pres.ind.vos}
+          - {form: escribe, en: "writes (he/she writes)", f: 3sg.pres.ind}
+      - lemma: aprender
+        pos: verb
+        en: "to learn"
+        forms:
+          - {form: aprendo, en: "I learn", f: 1sg.pres.ind}
+          - {form: aprendés, en: "you learn", f: 2sg.pres.ind.vos}
+          - {form: aprende, en: "learns (he/she learns)", f: 3sg.pres.ind}
+          - {form: aprendemos, en: "we learn", f: 1pl.pres.ind}
+      - lemma: solo
+        pos: adj
+        en: "alone"
+        forms:
+          - {form: solo, f: m.sg}
+          - {form: sola, f: f.sg}
+      - {lemma: casa, pos: noun, en: "house, home"}
+      - {lemma: departamento, pos: noun, en: "apartment"}
+      - {lemma: libro, pos: noun, en: "book"}
+      - {lemma: mensaje, pos: noun, en: "message"}
+      - {lemma: carne, pos: noun, en: "meat"}
+
+  # ==========================================================================
+  - ordinal: 9
+    slug: la-hora
+    title: La hora
+    summary: Telling the time, days, numbers to a hundred
+    grammar: [hora.es-la-son-las, hora.y-media-y-cuarto, numeros.21-100, dias.semana]
+    register_max: informal
+    sample: {es: "Nos vemos a las siete y media.", en: "See you at half past seven."}
+    tips:
+      - title: Telling the time
+        body: >-
+          *Es la una* (one o'clock), but *son las dos*, *son las siete*. Add
+          **y media** for half past and **y cuarto** for quarter past.
+          *A la noche* means at night.
+    words:
+      - lemma: hora
+        pos: noun
+        en: "hour, time"
+        forms:
+          - {form: hora, f: f.sg}
+          - {form: horas, en: "hours", f: f.pl}
+      - {lemma: media, pos: adj, en: "half (past)"}
+      - {lemma: cuarto, pos: noun, en: "quarter (past)"}
+      - {lemma: nos, pos: pron, en: "us, each other", glue: true}
+      - lemma: ver
+        pos: verb
+        en: "to see"
+        forms:
+          - {form: vemos, en: "we see", f: 1pl.pres.ind}
+      - lemma: día
+        pos: noun
+        en: "day"
+        forms:
+          - {form: día, f: m.sg}
+          - {form: días, en: "days", f: m.pl}
+      - {lemma: semana, pos: noun, en: "week"}
+      - {lemma: hoy, pos: adv, en: "today"}
+      - {lemma: mañana, pos: noun, en: "morning"}
+      - {lemma: mañana, pos: adv, en: "tomorrow"}
+      - {lemma: tarde, pos: noun, en: "afternoon, evening"}
+      - {lemma: tarde, pos: adv, en: "late"}
+      - {lemma: temprano, pos: adv, en: "early"}
+      - {lemma: lunes, pos: noun, en: "Monday"}
+      - {lemma: martes, pos: noun, en: "Tuesday"}
+      - {lemma: miércoles, pos: noun, en: "Wednesday"}
+      - {lemma: jueves, pos: noun, en: "Thursday"}
+      - {lemma: viernes, pos: noun, en: "Friday"}
+      - {lemma: sábado, pos: noun, en: "Saturday"}
+      - {lemma: domingo, pos: noun, en: "Sunday"}
+      - {lemma: veintiuno, pos: num, en: "twenty-one"}
+      - {lemma: veintidós, pos: num, en: "twenty-two"}
+      - {lemma: veintitrés, pos: num, en: "twenty-three"}
+      - {lemma: veinticuatro, pos: num, en: "twenty-four"}
+      - {lemma: veinticinco, pos: num, en: "twenty-five"}
+      - {lemma: treinta, pos: num, en: "thirty"}
+      - {lemma: cuarenta, pos: num, en: "forty"}
+      - {lemma: cincuenta, pos: num, en: "fifty"}
+      - {lemma: sesenta, pos: num, en: "sixty"}
+      - {lemma: setenta, pos: num, en: "seventy"}
+      - {lemma: ochenta, pos: num, en: "eighty"}
+      - {lemma: noventa, pos: num, en: "ninety"}
+      - {lemma: cien, pos: num, en: "a hundred"}
+
+  # ==========================================================================
+  - ordinal: 10
+    slug: queres-podes-vas
+    title: Querés, podés, vas
+    summary: Wanting, being able to, and going out
+    grammar: [querer.pres, poder.pres, ir.pres, ir-a.lugar, salir.pres]
+    register_max: informal
+    sample: {es: "¿Querés ir a la plaza o al boliche?", en: "Do you want to go to the park or to the club?"}
+    tips:
+      - title: No stem change with vos
+        body: >-
+          *Querer* and *poder* change their stem in most forms (*quiero*,
+          *puede*) — but not with vos: **querés**, **podés**. *Ir* is fully
+          irregular: *voy, vas, va, vamos, van*.
+    words:
+      - lemma: querer
+        pos: verb
+        en: "to want"
+        forms:
+          - {form: quiero, en: "I want", f: 1sg.pres.ind}
+          - {form: querés, en: "you want", f: 2sg.pres.ind.vos}
+          - {form: quiere, en: "wants (he/she wants)", f: 3sg.pres.ind}
+          - {form: queremos, en: "we want", f: 1pl.pres.ind}
+          - {form: quieren, en: "they want", f: 3pl.pres.ind}
+      - lemma: poder
+        pos: verb
+        en: "to be able to, can"
+        forms:
+          - {form: puedo, en: "I can", f: 1sg.pres.ind}
+          - {form: podés, en: "you can", f: 2sg.pres.ind.vos}
+          - {form: puede, en: "can (he/she can)", f: 3sg.pres.ind}
+          - {form: podemos, en: "we can", f: 1pl.pres.ind}
+          - {form: pueden, en: "they can", f: 3pl.pres.ind}
+      - lemma: ir
+        pos: verb
+        en: "to go"
+        forms:
+          - {form: ir, f: inf}
+          - {form: voy, en: "I go, I'm going", f: 1sg.pres.ind}
+          - {form: vas, en: "you go, you're going", f: 2sg.pres.ind.vos}
+          - {form: va, en: "goes (he/she goes)", f: 3sg.pres.ind}
+          - {form: vamos, en: "we go, let's go", f: 1pl.pres.ind}
+          - {form: van, en: "they go", f: 3pl.pres.ind}
+      - lemma: salir
+        pos: verb
+        en: "to go out, to leave"
+        forms:
+          - {form: salir, f: inf}
+          - {form: salgo, en: "I go out", f: 1sg.pres.ind}
+          - {form: salís, en: "you go out", f: 2sg.pres.ind.vos}
+          - {form: sale, en: "goes out (he/she goes out)", f: 3sg.pres.ind}
+          - {form: salimos, en: "we go out", f: 1pl.pres.ind}
+      - {lemma: boliche, pos: noun, en: "nightclub"}
+      - {lemma: plaza, pos: noun, en: "square, park"}
+      - {lemma: cine, pos: noun, en: "cinema, the movies"}
+      - {lemma: adónde, pos: adv, en: "where (to)"}
+      - {lemma: conmigo, pos: pron, en: "with me", glue: true}
+
+  # ==========================================================================
+  - ordinal: 11
+    slug: dale-veni
+    title: Dale, vení
+    summary: Telling a friend what to do
+    grammar: [imperativo.vos.afirmativo, enclitico.me-te]
+    register_max: informal
+    sample: {es: "Vení, sentate, tomamos unos mates.", en: "Come on, sit down, let's have some mate."}
+    tips:
+      - title: Vos commands
+        body: >-
+          Drop the final *-r* and stress the last vowel: *mirar* → **mirá**,
+          *venir* → **vení**. Pronouns stick to the end: **sentate**,
+          **decime**, **esperame**.
+    words:
+      - lemma: mirar
+        pos: verb
+        en: "to look, to watch"
+        forms:
+          - {form: mirá, en: "look", f: 2sg.imp.vos}
+      - lemma: venir
+        pos: verb
+        en: "to come"
+        forms:
+          - {form: vení, en: "come", f: 2sg.imp.vos}
+      - lemma: escuchar
+        pos: verb
+        en: "to listen"
+        forms:
+          - {form: escuchá, en: "listen", f: 2sg.imp.vos}
+      - lemma: hablar
+        pos: verb
+        forms:
+          - {form: hablá, en: "speak, talk", f: 2sg.imp.vos}
+      - lemma: decir
+        pos: verb
+        en: "to say, to tell"
+        forms:
+          - {form: decime, en: "tell me", f: 2sg.imp.vos.clitic}
+      - lemma: andar
+        pos: verb
+        en: "to go, to walk"
+        forms:
+          - {form: andá, en: "go", f: 2sg.imp.vos}
+      - lemma: esperar
+        pos: verb
+        en: "to wait"
+        forms:
+          - {form: esperá, en: "wait", f: 2sg.imp.vos}
+          - {form: esperame, en: "wait for me", f: 2sg.imp.vos.clitic}
+      - lemma: pasar
+        pos: verb
+        en: "to pass, to come in"
+        forms:
+          - {form: pasá, en: "come in", f: 2sg.imp.vos}
+      - lemma: sentarse
+        pos: verb
+        en: "to sit down"
+        forms:
+          - {form: sentate, en: "sit down", f: 2sg.imp.vos.clitic}
+      - lemma: fijarse
+        pos: verb
+        en: "to check, to notice"
+        forms:
+          - {form: fijate, en: "check, look", f: 2sg.imp.vos.clitic}
+      - lemma: tomar
+        pos: verb
+        forms:
+          - {form: tomá, en: "here, take this", f: 2sg.imp.vos}
+      - lemma: mate
+        pos: noun
+        forms:
+          - {form: mates, en: "mates (rounds of mate)", f: m.pl}
+      - lemma: un
+        pos: det
+        forms:
+          - {form: unos, en: "some", f: m.pl}
+          - {form: unas, en: "some", f: f.pl}
+      - {lemma: por favor, pos: phrase, en: "please"}
+      - {lemma: momento, pos: noun, en: "moment"}
+
+  # ==========================================================================
+  - ordinal: 12
+    slug: ropa-y-colores
+    title: Ropa y colores
+    summary: Clothes, colours, and saying what's nice
+    grammar: [adj.concordancia, ser.descripcion, demostrativos.este-ese, re.intensificador]
+    register_max: informal
+    sample: {es: "Esa campera es re linda.", en: "That jacket is really nice."}
+    tips:
+      - title: Agreement, and re
+        body: >-
+          Adjectives match their noun: *remera linda*, *zapatillas lindas*.
+          **Re** in front of an adjective means *really*: *re lindo*. And
+          **chico** means *small*.
+    words:
+      - lemma: rojo
+        pos: adj
+        en: "red"
+        forms:
+          - {form: rojo, f: m.sg}
+          - {form: roja, f: f.sg}
+          - {form: rojos, f: m.pl}
+          - {form: rojas, f: f.pl}
+      - lemma: azul
+        pos: adj
+        en: "blue"
+        forms:
+          - {form: azul, f: sg}
+          - {form: azules, f: pl}
+      - lemma: verde
+        pos: adj
+        en: "green"
+        forms:
+          - {form: verde, f: sg}
+          - {form: verdes, f: pl}
+      - lemma: negro
+        pos: adj
+        en: "black"
+        forms:
+          - {form: negro, f: m.sg}
+          - {form: negra, f: f.sg}
+          - {form: negros, f: m.pl}
+          - {form: negras, f: f.pl}
+      - lemma: blanco
+        pos: adj
+        en: "white"
+        forms:
+          - {form: blanco, f: m.sg}
+          - {form: blanca, f: f.sg}
+          - {form: blancos, f: m.pl}
+          - {form: blancas, f: f.pl}
+      - lemma: remera
+        pos: noun
+        en: "T-shirt"
+        forms:
+          - {form: remera, f: f.sg}
+          - {form: remeras, en: "T-shirts", f: f.pl}
+      - lemma: zapatilla
+        pos: noun
+        en: "sneaker"
+        forms:
+          - {form: zapatilla, f: f.sg}
+          - {form: zapatillas, en: "sneakers", f: f.pl}
+      - {lemma: campera, pos: noun, en: "jacket"}
+      - lemma: pantalón
+        pos: noun
+        en: "trousers"
+        forms:
+          - {form: pantalón, f: m.sg}
+          - {form: pantalones, f: m.pl}
+      - lemma: lindo
+        pos: adj
+        en: "nice, pretty"
+        forms:
+          - {form: lindo, f: m.sg}
+          - {form: linda, f: f.sg}
+          - {form: lindos, f: m.pl}
+          - {form: lindas, f: f.pl}
+      - lemma: feo
+        pos: adj
+        en: "ugly"
+        forms:
+          - {form: feo, f: m.sg}
+          - {form: fea, f: f.sg}
+      - lemma: grande
+        pos: adj
+        en: "big"
+        forms:
+          - {form: grande, f: sg}
+          - {form: grandes, f: pl}
+      - lemma: chico
+        pos: adj
+        en: "small"
+        forms:
+          - {form: chico, f: m.sg}
+          - {form: chica, f: f.sg}
+          - {form: chicos, f: m.pl}
+      - lemma: nuevo
+        pos: adj
+        en: "new"
+        forms:
+          - {form: nuevo, f: m.sg}
+          - {form: nueva, f: f.sg}
+      - lemma: este
+        pos: det
+        en: "this"
+        forms:
+          - {form: este, f: m.sg}
+          - {form: esta, f: f.sg}
+          - {form: estos, en: "these", f: m.pl}
+          - {form: estas, en: "these", f: f.pl}
+      - lemma: ese
+        pos: det
+        en: "that"
+        forms:
+          - {form: ese, f: m.sg}
+          - {form: esa, f: f.sg}
+          - {form: esos, en: "those", f: m.pl}
+          - {form: esas, en: "those", f: f.pl}
+      - {lemma: re, pos: adv, en: "really, very", register: informal}
+      - {lemma: muy, pos: adv, en: "very"}
+
+  # ==========================================================================
+  - ordinal: 13
+    slug: el-barrio
+    title: El barrio
+    summary: Shops in the neighbourhood and where they are
+    grammar: [preposiciones.lugar, al-lado-de, enfrente-de, entre]
+    register_max: informal
+    sample: {es: "Hay una panadería al lado de la farmacia.", en: "There's a bakery next to the pharmacy."}
+    tips:
+      - title: Where things are
+        body: >-
+          **al lado de** (next to), **enfrente de** (across from), **entre**
+          (between). Remember *de + el* = *del*: *al lado del kiosco*.
+    words:
+      - {lemma: barrio, pos: noun, en: "neighbourhood"}
+      - {lemma: verdulería, pos: noun, en: "greengrocer's"}
+      - {lemma: panadería, pos: noun, en: "bakery"}
+      - {lemma: farmacia, pos: noun, en: "pharmacy"}
+      - {lemma: supermercado, pos: noun, en: "supermarket"}
+      - {lemma: súper, pos: noun, en: "supermarket (short)", register: informal}
+      - {lemma: escuela, pos: noun, en: "school"}
+      - {lemma: banco, pos: noun, en: "bank"}
+      - {lemma: lado, pos: noun, en: "side"}
+      - {lemma: enfrente, pos: adv, en: "across the street, opposite"}
+      - {lemma: entre, pos: prep, en: "between", glue: true}
+      - {lemma: atrás, pos: adv, en: "behind"}
+      - {lemma: adelante, pos: adv, en: "in front, ahead"}
+      - lemma: otro
+        pos: det
+        en: "another, other"
+        forms:
+          - {form: otro, f: m.sg}
+          - {form: otra, f: f.sg}
+      - lemma: mucho
+        pos: det
+        en: "a lot of, many"
+        forms:
+          - {form: muchos, f: m.pl}
+          - {form: muchas, f: f.pl}
+
+  # ==========================================================================
+  - ordinal: 14
+    slug: cuanto-sale
+    title: ¿Cuánto sale?
+    summary: Prices, paying, and numbers to a thousand
+    grammar: [cuanto-sale, costar.pres.3, numeros.100-1000]
+    register_max: informal
+    sample: {es: "¿Cuánto sale el café? Mil quinientos mangos.", en: "How much is the coffee? Fifteen hundred pesos."}
+    tips:
+      - title: ¿Cuánto sale?
+        body: >-
+          **¿Cuánto sale?** is the everyday Argentine way to ask a price —
+          *¿cuánto cuesta?* works too. **Mangos** is slang for pesos.
+    words:
+      - lemma: cuánto
+        pos: adj
+        forms:
+          - {form: cuánto, en: "how much", f: m.sg}
+      - lemma: costar
+        pos: verb
+        en: "to cost"
+        forms:
+          - {form: cuesta, en: "costs", f: 3sg.pres.ind}
+          - {form: cuestan, en: "cost (several things)", f: 3pl.pres.ind}
+      - lemma: pagar
+        pos: verb
+        en: "to pay"
+        forms:
+          - {form: pago, en: "I pay", f: 1sg.pres.ind}
+          - {form: pagás, en: "you pay", f: 2sg.pres.ind.vos}
+          - {form: paga, en: "pays (he/she pays)", f: 3sg.pres.ind}
+      - lemma: comprar
+        pos: verb
+        en: "to buy"
+        forms:
+          - {form: compro, en: "I buy", f: 1sg.pres.ind}
+          - {form: comprás, en: "you buy", f: 2sg.pres.ind.vos}
+          - {form: compra, en: "buys (he/she buys)", f: 3sg.pres.ind}
+      - {lemma: plata, pos: noun, en: "money"}
+      - lemma: mango
+        pos: noun
+        en: "peso, buck"
+        register: informal
+        forms:
+          - {form: mango, f: m.sg}
+          - {form: mangos, en: "pesos, bucks", f: m.pl}
+      - lemma: peso
+        pos: noun
+        en: "peso"
+        forms:
+          - {form: peso, f: m.sg}
+          - {form: pesos, f: m.pl}
+      - lemma: caro
+        pos: adj
+        en: "expensive"
+        forms:
+          - {form: caro, f: m.sg}
+          - {form: cara, f: f.sg}
+      - lemma: barato
+        pos: adj
+        en: "cheap"
+        forms:
+          - {form: barato, f: m.sg}
+          - {form: barata, f: f.sg}
+      - {lemma: efectivo, pos: noun, en: "cash"}
+      - {lemma: tarjeta, pos: noun, en: "card"}
+      - {lemma: ciento, pos: num, en: "hundred (in 101–199)"}
+      - {lemma: doscientos, pos: num, en: "two hundred"}
+      - {lemma: trescientos, pos: num, en: "three hundred"}
+      - {lemma: cuatrocientos, pos: num, en: "four hundred"}
+      - {lemma: quinientos, pos: num, en: "five hundred"}
+      - {lemma: seiscientos, pos: num, en: "six hundred"}
+      - {lemma: setecientos, pos: num, en: "seven hundred"}
+      - {lemma: ochocientos, pos: num, en: "eight hundred"}
+      - {lemma: novecientos, pos: num, en: "nine hundred"}
+      - {lemma: mil, pos: num, en: "a thousand"}
+
+  # ==========================================================================
+  - ordinal: 15
+    slug: la-rutina
+    title: La rutina
+    summary: Your day, from getting up to going to bed
+    grammar: [reflexivos.pres, antes-despues, los-sabados]
+    register_max: informal
+    sample: {es: "Los sábados me levanto tarde.", en: "On Saturdays I get up late."}
+    tips:
+      - title: Reflexive verbs
+        body: >-
+          *Me levanto, te levantás, se levanta* — the pronoun comes before the
+          verb and matches the person. **Los sábados** means *on Saturdays*.
+    words:
+      - {lemma: se, pos: pron, en: "himself, herself, themselves", glue: true}
+      - lemma: levantarse
+        pos: verb
+        en: "to get up"
+        forms:
+          - {form: levanto, en: "(I) get up", f: 1sg.pres.ind}
+          - {form: levantás, en: "(you) get up", f: 2sg.pres.ind.vos}
+          - {form: levanta, en: "(he/she) gets up", f: 3sg.pres.ind}
+          - {form: levantamos, en: "(we) get up", f: 1pl.pres.ind}
+      - lemma: acostarse
+        pos: verb
+        en: "to go to bed"
+        forms:
+          - {form: acuesto, en: "(I) go to bed", f: 1sg.pres.ind}
+          - {form: acostás, en: "(you) go to bed", f: 2sg.pres.ind.vos}
+          - {form: acuesta, en: "(he/she) goes to bed", f: 3sg.pres.ind}
+      - lemma: bañarse
+        pos: verb
+        en: "to shower, to bathe"
+        forms:
+          - {form: baño, en: "(I) shower", f: 1sg.pres.ind}
+          - {form: bañás, en: "(you) shower", f: 2sg.pres.ind.vos}
+      - lemma: desayunar
+        pos: verb
+        en: "to have breakfast"
+        forms:
+          - {form: desayuno, en: "I have breakfast", f: 1sg.pres.ind}
+          - {form: desayunás, en: "you have breakfast", f: 2sg.pres.ind.vos}
+      - lemma: almorzar
+        pos: verb
+        en: "to have lunch"
+        forms:
+          - {form: almuerzo, en: "I have lunch", f: 1sg.pres.ind}
+          - {form: almorzás, en: "you have lunch", f: 2sg.pres.ind.vos}
+      - lemma: cenar
+        pos: verb
+        en: "to have dinner"
+        forms:
+          - {form: ceno, en: "I have dinner", f: 1sg.pres.ind}
+          - {form: cenás, en: "you have dinner", f: 2sg.pres.ind.vos}
+      - {lemma: antes, pos: adv, en: "before"}
+      - {lemma: después, pos: adv, en: "after, afterwards"}
+      - {lemma: finde, pos: noun, en: "weekend", register: informal}
+      - lemma: sábado
+        pos: noun
+        forms:
+          - {form: sábados, en: "Saturdays", f: m.pl}
+      - lemma: domingo
+        pos: noun
+        forms:
+          - {form: domingos, en: "Sundays", f: m.pl}
+      - lemma: todo
+        pos: det
+        en: "every, all"
+        forms:
+          - {form: todos, f: m.pl}
+          - {form: todas, f: f.pl}
+
+  # ==========================================================================
+  - ordinal: 16
+    slug: que-te-gusta-hacer
+    title: ¿Qué te gusta hacer?
+    summary: Free time, football, and friends
+    grammar: [gustar.infinitivo, encantar, tambien-tampoco]
+    register_max: informal
+    sample: {es: "Me encanta ir a la cancha los domingos.", en: "I love going to the stadium on Sundays."}
+    tips:
+      - title: Also and neither
+        body: >-
+          Agreeing with something positive: **A mí también.** Agreeing with
+          something negative: **A mí tampoco.**
+    words:
+      - lemma: encantar
+        pos: verb
+        en: "to love (something)"
+        forms:
+          - {form: encanta, en: "loves (one thing)", f: 3sg.pres.ind}
+          - {form: encantan, en: "loves (several things)", f: 3pl.pres.ind}
+      - {lemma: tampoco, pos: adv, en: "neither, not either"}
+      - {lemma: fútbol, pos: noun, en: "football, soccer"}
+      - {lemma: cancha, pos: noun, en: "pitch, stadium"}
+      - lemma: amigo
+        pos: noun
+        en: "friend"
+        forms:
+          - {form: amigo, f: m.sg}
+          - {form: amiga, f: f.sg}
+          - {form: amigos, en: "friends", f: m.pl}
+          - {form: amigas, en: "friends", f: f.pl}
+      - lemma: juntarse
+        pos: verb
+        en: "to get together"
+        forms:
+          - {form: juntamos, en: "(we) get together", f: 1pl.pres.ind}
+      - lemma: mirar
+        pos: verb
+        forms:
+          - {form: mirar, f: inf}
+      - lemma: jugar
+        pos: verb
+        en: "to play"
+        forms:
+          - {form: jugar, f: inf}
+          - {form: juego, en: "I play", f: 1sg.pres.ind}
+          - {form: jugás, en: "you play", f: 2sg.pres.ind.vos}
+      - lemma: bailar
+        pos: verb
+        en: "to dance"
+        forms:
+          - {form: bailar, f: inf}
+          - {form: bailo, en: "I dance", f: 1sg.pres.ind}
+      - lemma: cocinar
+        pos: verb
+        en: "to cook"
+        forms:
+          - {form: cocinar, f: inf}
+          - {form: cocino, en: "I cook", f: 1sg.pres.ind}
+      - lemma: leer
+        pos: verb
+        forms:
+          - {form: leer, f: inf}
+      - lemma: hacer
+        pos: verb
+        forms:
+          - {form: hacer, f: inf}
+      - {lemma: serie, pos: noun, en: "series, TV show"}
+      - {lemma: película, pos: noun, en: "film, movie"}
+      - {lemma: música, pos: noun, en: "music"}
+
+  # ==========================================================================
+  - ordinal: 17
+    slug: clima
+    title: Clima
+    summary: Heat, cold, rain, and southern seasons
+    grammar: [hace-calor-frio, esta-nublado, llueve, estaciones]
+    register_max: informal
+    sample: {es: "Hace un calor bárbaro hoy.", en: "It's really hot today."}
+    tips:
+      - title: Weather with hacer
+        body: >-
+          **Hace calor**, **hace frío** — it's hot, it's cold. Seasons are
+          flipped: *el verano* runs from December to February.
+    words:
+      - {lemma: calor, pos: noun, en: "heat"}
+      - {lemma: frío, pos: noun, en: "cold"}
+      - {lemma: sol, pos: noun, en: "sun"}
+      - {lemma: viento, pos: noun, en: "wind"}
+      - {lemma: lluvia, pos: noun, en: "rain"}
+      - {lemma: nublado, pos: adj, en: "cloudy"}
+      - lemma: llover
+        pos: verb
+        en: "to rain"
+        forms:
+          - {form: llueve, en: "it's raining, it rains", f: 3sg.pres.ind}
+      - {lemma: verano, pos: noun, en: "summer"}
+      - {lemma: invierno, pos: noun, en: "winter"}
+      - {lemma: otoño, pos: noun, en: "autumn"}
+      - {lemma: primavera, pos: noun, en: "spring"}
+      - {lemma: enero, pos: noun, en: "January"}
+      - {lemma: julio, pos: noun, en: "July"}
+      - {lemma: paraguas, pos: noun, en: "umbrella"}
+      - {lemma: bárbaro, pos: adj, en: "great, tremendous", register: informal}
+
+  # ==========================================================================
+  - ordinal: 18
+    slug: ahora
+    title: Ahora
+    summary: What's happening right now
+    grammar: [estar.gerundio, ahora-todavia-ya]
+    register_max: informal
+    sample: {es: "Estoy llegando, esperame.", en: "I'm almost there, wait for me."}
+    tips:
+      - title: Right now
+        body: >-
+          **Estoy laburando** — I'm working (right now). In Argentina,
+          *estoy llegando* can mean you're still ten minutes away.
+    words:
+      - lemma: estar
+        pos: verb
+        forms:
+          - {form: estamos, en: "we are", f: 1pl.pres.ind}
+          - {form: están, en: "they are", f: 3pl.pres.ind}
+      - lemma: llegar
+        pos: verb
+        en: "to arrive"
+        forms:
+          - {form: llego, en: "I arrive", f: 1sg.pres.ind}
+          - {form: llegás, en: "you arrive", f: 2sg.pres.ind.vos}
+          - {form: llega, en: "arrives (he/she arrives)", f: 3sg.pres.ind}
+          - {form: llegando, en: "arriving", f: ger}
+      - lemma: laburar
+        pos: verb
+        forms:
+          - {form: laburando, en: "working", f: ger}
+      - lemma: esperar
+        pos: verb
+        forms:
+          - {form: esperando, en: "waiting", f: ger}
+      - lemma: comer
+        pos: verb
+        forms:
+          - {form: comiendo, en: "eating", f: ger}
+      - lemma: estudiar
+        pos: verb
+        forms:
+          - {form: estudiando, en: "studying", f: ger}
+      - lemma: mirar
+        pos: verb
+        forms:
+          - {form: mirando, en: "watching", f: ger}
+      - lemma: hacer
+        pos: verb
+        forms:
+          - {form: haciendo, en: "doing, making", f: ger}
+      - lemma: tomar
+        pos: verb
+        forms:
+          - {form: tomando, en: "drinking", f: ger}
+      - {lemma: ahora, pos: adv, en: "now"}
+      - {lemma: todavía, pos: adv, en: "still, yet"}
+      - {lemma: ya, pos: adv, en: "already, right away"}
+      - {lemma: casi, pos: adv, en: "almost"}
+
+  # ==========================================================================
+  - ordinal: 19
+    slug: planes
+    title: Planes
+    summary: Plans for the weekend and next week
+    grammar: [ir-a.infinitivo, la-semana-que-viene, quedar-en]
+    register_max: informal
+    sample: {es: "El finde vamos a hacer un asado.", en: "This weekend we're having a barbecue."}
+    tips:
+      - title: Going to
+        body: >-
+          **Ir a** + infinitive talks about plans: *Vamos a hacer un asado.*
+          **La semana que viene** is *next week*.
+    words:
+      - {lemma: que, pos: conj, en: "that, which", glue: true}
+      - lemma: venir
+        pos: verb
+        forms:
+          - {form: vengo, en: "I come", f: 1sg.pres.ind}
+          - {form: venís, en: "you come", f: 2sg.pres.ind.vos}
+          - {form: viene, en: "comes (he/she comes)", f: 3sg.pres.ind}
+      - lemma: quedar
+        pos: verb
+        en: "to arrange, to agree"
+        forms:
+          - {form: quedamos, en: "we agreed, we're meeting", f: 1pl.pres.ind}
+      - lemma: invitar
+        pos: verb
+        en: "to invite"
+        forms:
+          - {form: invitar, f: inf}
+          - {form: invito, en: "I invite", f: 1sg.pres.ind}
+      - lemma: traer
+        pos: verb
+        en: "to bring"
+        forms:
+          - {form: traer, f: inf}
+          - {form: traigo, en: "I bring", f: 1sg.pres.ind}
+          - {form: traés, en: "you bring", f: 2sg.pres.ind.vos}
+      - {lemma: asado, pos: noun, en: "barbecue"}
+      - {lemma: juntada, pos: noun, en: "get-together", register: informal}
+      - {lemma: vino, pos: noun, en: "wine"}
+      - {lemma: ensalada, pos: noun, en: "salad"}
+      - lemma: próximo
+        pos: adj
+        en: "next"
+        forms:
+          - {form: próximo, f: m.sg}
+          - {form: próxima, f: f.sg}
+
+  # ==========================================================================
+  - ordinal: 20
+    slug: repaso
+    title: Repaso
+    summary: Checkpoint — everything in section one
+    grammar: [repaso, registro.informal]
+    register_max: informal
+    lessons: 3
+    sample: {es: "Posta, este barrio es re copado.", en: "Honestly, this neighbourhood is really cool."}
+    tips:
+      - title: Boludo and quilombo
+        body: >-
+          **Boludo** is common between close friends and an insult to anyone
+          else — understand it, don't use it yet. **Quilombo** means a mess;
+          it's informal, not rude, but keep it out of formal settings.
+      - title: Sharing mate
+        body: >-
+          Mate goes around the circle and always comes back to whoever is
+          serving it. Saying **gracias** means *I'm done* — only say it when you
+          don't want another round.
+    words:
+      - {lemma: posta, pos: adv, en: "for real, honestly", register: informal}
+      - lemma: copado
+        pos: adj
+        en: "cool, great"
+        register: informal
+        forms:
+          - {form: copado, f: m.sg}
+          - {form: copada, f: f.sg}
+      - lemma: pibe
+        pos: noun
+        en: "guy, kid"
+        register: informal
+        forms:
+          - {form: pibe, f: m.sg}
+          - {form: piba, en: "girl", f: f.sg}
+          - {form: pibes, en: "guys, kids", f: m.pl}
+      - {lemma: laburo, pos: noun, en: "job, work", register: informal}
+      - {lemma: viste, pos: interj, en: "you know?, see?", register: informal}
+      - {lemma: quilombo, pos: noun, en: "mess, chaos", register: lunfardo}
+      - {lemma: boludo, pos: noun, en: "dude (between friends only)", register: lunfardo}
