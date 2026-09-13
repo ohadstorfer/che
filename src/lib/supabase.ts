@@ -6,11 +6,13 @@ import { Platform } from 'react-native';
 import { demoClient } from './demo';
 
 /**
- * The UI runs against fixtures while the schema for Che's course is still being
- * designed — see lib/demo.ts. Flip this to false once the tables this UI asks
- * for exist in the project, and the real client below takes over unchanged.
+ * The app talks to the real project. `EXPO_PUBLIC_DEMO=1` swaps in the fixture
+ * backend instead (lib/demo.ts) — a learner mid-course with no network, no
+ * account and nothing written anywhere, for working on the UI:
+ *
+ *   EXPO_PUBLIC_DEMO=1 npm run web
  */
-const DEMO = true;
+const DEMO = process.env.EXPO_PUBLIC_DEMO === '1';
 
 const url = process.env.EXPO_PUBLIC_SUPABASE_URL ?? 'https://placeholder.supabase.co';
 const anonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? 'placeholder';

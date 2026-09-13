@@ -20,7 +20,13 @@ import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { localDateStr, WEEKDAY_INITIALS, weekDates } from '@/lib/dates';
 import { type Course, currentIndex, loadCourse, loadProgress, type PathLesson } from '@/lib/course';
-import { enablePush, getPushStatus, type PushStatus } from '@/lib/push';
+import {
+  enablePartnerReminders,
+  enablePush,
+  getPartnerId,
+  getPushStatus,
+  type PushStatus,
+} from '@/lib/push';
 import { getPracticeCounts } from '@/lib/session';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { streakStatus, type StreakStatus } from '@/lib/streak';
@@ -429,18 +435,70 @@ function PushPrompt({
   onStatus: (s: PushStatus) => void;
 }) {
   const [busy, setBusy] = useState(false);
-  if (status === 'enabled' || status === 'unsupported') return null;
+  const [error, setError] = useState<string | null>(null);
+  /** Set right after her own reminders switch on, when she has a linked partner. */
+  const [partner, setPartner] = useState<'ask' | 'sharing' | { result: string } | null>(null);
 
   const enable = async () => {
     setBusy(true);
+    setError(null);
     try {
-      onStatus(await enablePush(userId));
-    } catch {
-      onStatus('off');
+      const next = await enablePush(userId);
+      // Asked here, while she's already thinking about reminders — not as a
+      // standing banner. The prompt stays on screen for it even though her own
+      // status has just become enabled.
+      if (next === 'enabled' && (await getPartnerId(userId))) setPartner('ask');
+      onStatus(next);
+    } catch (e) {
+      // A failure used to fall through as "off", which looks exactly like a tap
+      // that did nothing. Say what went wrong; the button stays to try again.
+      setError(e instanceof Error ? e.message : 'No se pudieron activar las notificaciones.');
     } finally {
       setBusy(false);
     }
   };
+
+  const sharePartner = async () => {
+    setPartner('sharing');
+    try {
+      const devices = await enablePartnerReminders();
+      setPartner({
+        result:
+          devices > 0
+            ? 'Listo: también le llegan recordatorios a tu compañero.'
+            : 'Tu compañero todavía no activó las notificaciones en ningún dispositivo.',
+      });
+    } catch (e) {
+      setPartner({ result: e instanceof Error ? e.message : 'No se pudo activar.' });
+    }
+  };
+
+  if (partner) {
+    return (
+      <Panel style={{ gap: 10 }}>
+        <Text style={styles.sectionTitle}>Notificaciones activadas</Text>
+        {typeof partner === 'object' ? (
+          <>
+            <Text style={styles.mutedText}>{partner.result}</Text>
+            <Button title="Cerrar" variant="ghost" onPress={() => setPartner(null)} />
+          </>
+        ) : (
+          <>
+            <Text style={styles.mutedText}>¿Le activamos los recordatorios también a tu compañero?</Text>
+            <Button
+              title="Activar los suyos"
+              variant="secondary"
+              onPress={sharePartner}
+              loading={partner === 'sharing'}
+            />
+            <Button title="Ahora no" variant="ghost" onPress={() => setPartner(null)} />
+          </>
+        )}
+      </Panel>
+    );
+  }
+
+  if (status === 'enabled' || status === 'unsupported') return null;
 
   return (
     <Panel style={{ gap: 10 }}>
@@ -460,10 +518,11 @@ function PushPrompt({
       ) : (
         <>
           <Text style={styles.mutedText}>
-            Te recordamos la lección de hoy hasta que la termines.
+            Un recordatorio cada media hora desde las 8, hasta que termines la lección del día.
           </Text>
+          {error ? <Text style={styles.errorText}>{error}</Text> : null}
           <Button
-            title="Activar notificaciones"
+            title={error ? 'Reintentar' : 'Activar notificaciones'}
             variant="secondary"
             onPress={enable}
             loading={busy}
@@ -1423,6 +1482,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: { fontSize: 17, fontWeight: '700', color: colors.ink },
   mutedText: { fontSize: 15, color: colors.muted, lineHeight: 21 },
+  errorText: { fontSize: 14, color: colors.dangerInk, lineHeight: 20 },
 
   // Unit banners -------------------------------------------------------------
   banner: {

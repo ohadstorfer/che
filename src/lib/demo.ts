@@ -13,7 +13,7 @@
 // finishing a lesson really moves the path on and really moves the streak. A
 // reload starts over.
 //
-// Flip DEMO in lib/supabase.ts to go live. Nothing else imports this file.
+// Opt in with EXPO_PUBLIC_DEMO=1 (see lib/supabase.ts). Nothing else imports this file.
 // ---------------------------------------------------------------------------
 
 import type { Session } from '@supabase/supabase-js';

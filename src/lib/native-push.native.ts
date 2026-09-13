@@ -1,5 +1,6 @@
-// Native push, iOS and Android: an Expo push token instead of a Web Push
-// subscription. The edge function tells the two apart by `kind`.
+// Native push, iOS and Android: an Expo push token on `push_subscriptions`
+// instead of a Web Push subscription. `send-reminder` sends to whichever
+// channel a row carries.
 //
 // Metro picks this file on native and native-push.ts on web, so
 // expo-notifications is never bundled for the browser.
@@ -9,10 +10,9 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 import { supabase } from './supabase';
-import type { PushStatus } from './push';
+import { deviceTimezone, REMINDER_TIME, type PushStatus } from './push';
 
-// A notification arriving while the app is open still shows as a banner —
-// "Mora completó su sesión" is worth seeing even mid-lesson.
+// A reminder arriving while the app is open still shows as a banner.
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowBanner: true,
@@ -46,10 +46,10 @@ export async function getNativePushStatus(): Promise<PushStatus> {
     const t = await token();
     const { data } = await supabase
       .from('push_subscriptions')
-      .select('id')
-      .eq('endpoint', t)
+      .select('notifications_enabled')
+      .eq('expo_push_token', t)
       .maybeSingle();
-    return data ? 'enabled' : 'off';
+    return data?.notifications_enabled ? 'enabled' : 'off';
   } catch {
     return 'off';
   }
@@ -61,9 +61,17 @@ export async function enableNativePush(userId: string): Promise<PushStatus> {
   if (status === 'denied') return 'denied';
   if (status !== 'granted') return 'off';
   const t = await token();
-  const { error } = await supabase
-    .from('push_subscriptions')
-    .upsert({ user_id: userId, endpoint: t, kind: 'expo' }, { onConflict: 'endpoint' });
+  const { error } = await supabase.from('push_subscriptions').upsert(
+    {
+      user_id: userId,
+      platform: Platform.OS === 'ios' ? 'ios' : 'android',
+      expo_push_token: t,
+      reminder_time: REMINDER_TIME,
+      timezone: deviceTimezone(),
+      notifications_enabled: true,
+    },
+    { onConflict: 'expo_push_token' },
+  );
   if (error) throw error;
   return 'enabled';
 }

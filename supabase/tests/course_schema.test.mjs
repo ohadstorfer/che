@@ -167,3 +167,146 @@ assert.deepEqual(r.rows.map((x) => x.form), ['sos', 'soy']);
 ok('available_forms');
 
 console.log('\nall migration checks passed');
+
+// --- the seed ------------------------------------------------------------------
+// A fresh database: schema + the generated section-1 seed, applied twice.
+{
+  const seedDb = new PGlite();
+  await seedDb.exec(`
+    create role anon nologin; create role authenticated nologin; create role service_role nologin bypassrls;
+    create schema auth; create table auth.users (id uuid primary key);
+    create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('test.uid', true), '')::uuid $$;
+    create function auth.role() returns text language sql stable as $$ select 'authenticated' $$;
+    create schema storage;
+    create table storage.buckets (id text primary key, name text, public boolean);
+    create table storage.objects (id uuid primary key default gen_random_uuid(), bucket_id text, name text);
+  `);
+  await seedDb.exec(readFileSync(`${MIG}/20260427000001_init.sql`, 'utf8').replace(/create extension[^;]*;/i, ''));
+  await seedDb.exec(readFileSync(`${MIG}/20260913000001_course_schema.sql`, 'utf8'));
+  const seed = readFileSync(`${MIG}/20260913000002_seed_section_1.sql`, 'utf8');
+  await seedDb.exec(seed);
+  ok('seed applies');
+
+  const counts = async () =>
+    (await seedDb.query(`
+      select
+        (select count(*)::int from units) as units,
+        (select count(*)::int from lessons) as lessons,
+        (select count(*)::int from forms) as forms,
+        (select count(*)::int from sentences) as sentences,
+        (select count(*)::int from sentence_forms) as sentence_forms,
+        (select count(*)::int from lesson_slots) as slots`)).rows[0];
+  const first = await counts();
+  await seedDb.exec(seed);
+  assert.deepEqual(await counts(), first);
+  assert.ok(first.sentence_forms > first.sentences, 'trigger filled sentence_forms');
+  ok(`seed is idempotent (${first.units} units, ${first.forms} forms, ${first.sentences} sentences, ${first.slots} slots)`);
+
+  // Every slot points at content that exists, of the kind the slot needs.
+  const orphans = await seedDb.query(`
+    select count(*)::int as n from lesson_slots s
+    left join forms f on f.id = s.form_id
+    left join sentences x on x.id = s.sentence_id
+    left join tips t on t.id = s.tip_id
+    where (s.kind = 'teach' and f.id is null) or (s.kind = 'drill' and x.id is null) or (s.kind = 'tip' and t.id is null)`);
+  assert.equal(orphans.rows[0].n, 0);
+  ok('every slot resolves');
+
+  await seedDb.exec(`
+    grant select, insert, update on all tables in schema public to authenticated;
+    grant execute on all functions in schema public to authenticated;
+    insert into auth.users values ('33333333-3333-4333-8333-333333333333');
+    set role authenticated; select set_config('test.uid', '33333333-3333-4333-8333-333333333333', false);
+  `);
+  const seen = (await seedDb.query(`
+    select
+      (select count(*)::int from units) as units,
+      (select count(*)::int from lessons) as lessons,
+      (select count(*)::int from form_entries) as forms,
+      (select count(*)::int from lesson_slots) as slots`)).rows[0];
+  assert.deepEqual(seen, { units: 2, lessons: 10, forms: 52, slots: 95 });
+  ok('a student sees units 1–2 only: 10 lessons, 52 forms, 95 slots');
+  await seedDb.exec(`reset role;`);
+  console.log('\nall seed checks passed');
+}
+
+// --- notifications: what the app writes to push_subscriptions ----------------
+// Che's real subscription table (init + recurring reminders + web push + the
+// unique endpoint + partner links), exercised with exactly the upserts
+// src/lib/push.ts and native-push.native.ts send.
+{
+  const pushDb = new PGlite();
+  await pushDb.exec(`
+    create role anon nologin; create role authenticated nologin; create role service_role nologin bypassrls;
+    create schema auth; create table auth.users (id uuid primary key);
+    create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('test.uid', true), '')::uuid $$;
+    create function auth.role() returns text language sql stable as $$ select 'authenticated' $$;
+  `);
+  await pushDb.exec(readFileSync(`${MIG}/20260427000001_init.sql`, 'utf8').replace(/create extension[^;]*;/i, ''));
+  for (const f of [
+    '20260504000001_recurring_reminders.sql',
+    '20260505000002_web_push.sql',
+    '20260505000003_web_endpoint_unique_constraint.sql',
+    '20260514000001_partner_reminders.sql',
+  ]) {
+    await pushDb.exec(readFileSync(`${MIG}/${f}`, 'utf8'));
+  }
+  const me = '44444444-4444-4444-8444-444444444444';
+  const partner = '55555555-5555-4555-8555-555555555555';
+  await pushDb.exec(`
+    insert into auth.users values ('${me}'), ('${partner}');
+    insert into partner_links values ('${me}', '${partner}', now()), ('${partner}', '${me}', now());
+    grant select, insert, update, delete on all tables in schema public to authenticated;
+    grant execute on all functions in schema public to authenticated;
+  `);
+  ok("Che's push migrations apply");
+
+  const asUser = async (uid, sql) => {
+    await pushDb.exec(`set role authenticated; select set_config('test.uid', '${uid}', false);`);
+    try {
+      return await pushDb.query(sql);
+    } finally {
+      await pushDb.exec(`reset role;`);
+    }
+  };
+
+  // Web: the upsert push.ts sends (PostgREST onConflict=web_push_endpoint).
+  const webUpsert = (uid, enabled = true) => `
+    insert into push_subscriptions
+      (user_id, platform, expo_push_token, web_push_endpoint, web_push_p256dh, web_push_auth, reminder_time, timezone, notifications_enabled)
+    values ('${uid}', 'web', null, 'https://push.example/abc', 'p256', 'auth', '08:00', 'America/Argentina/Buenos_Aires', ${enabled})
+    on conflict (web_push_endpoint) do update set
+      user_id = excluded.user_id, platform = excluded.platform, expo_push_token = excluded.expo_push_token,
+      web_push_p256dh = excluded.web_push_p256dh, web_push_auth = excluded.web_push_auth,
+      reminder_time = excluded.reminder_time, timezone = excluded.timezone, notifications_enabled = excluded.notifications_enabled`;
+  await asUser(partner, webUpsert(partner, false));
+  await asUser(partner, webUpsert(partner, false)); // re-enabling the same device is an update, not a duplicate
+  let r = await pushDb.query(`select count(*)::int as n from push_subscriptions where web_push_endpoint is not null`);
+  assert.equal(r.rows[0].n, 1);
+  ok('web subscription upsert passes the one-channel check and re-subscribing updates in place');
+
+  // Native: the upsert native-push.native.ts sends (onConflict=expo_push_token).
+  await asUser(me, `
+    insert into push_subscriptions (user_id, platform, expo_push_token, reminder_time, timezone, notifications_enabled)
+    values ('${me}', 'ios', 'ExponentPushToken[xyz]', '08:00', 'America/Argentina/Buenos_Aires', true)
+    on conflict (expo_push_token) do update set notifications_enabled = excluded.notifications_enabled`);
+  ok('native subscription upsert passes');
+
+  // The status read push.ts makes, as the owner.
+  r = await asUser(partner, `select notifications_enabled from push_subscriptions where web_push_endpoint = 'https://push.example/abc'`);
+  assert.equal(r.rows[0].notifications_enabled, false);
+
+  // Partner flow: I switch on my partner's reminders.
+  r = await asUser(me, `select partner_id from partner_links where user_id = '${me}'`);
+  assert.equal(r.rows[0].partner_id, partner);
+  r = await asUser(me, `select sync_partner_reminder('08:00', true) as touched`);
+  assert.equal(r.rows[0].touched, 1);
+  r = await pushDb.query(`select notifications_enabled from push_subscriptions where user_id = '${partner}'`);
+  assert.equal(r.rows[0].notifications_enabled, true);
+  ok("partner lookup and sync_partner_reminder switch on the partner's device");
+
+  // And nobody else's.
+  r = await asUser(me, `select count(*)::int as n from push_subscriptions where user_id not in ('${me}', '${partner}')`);
+  assert.equal(r.rows[0].n, 0);
+  console.log('\nall notification checks passed');
+}

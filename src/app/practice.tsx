@@ -29,7 +29,6 @@ import { playAudio, preloadAudio, stopAudio, type AudioFailure } from '@/lib/aud
 import { useAuth } from '@/lib/auth';
 import { localDateStr } from '@/lib/dates';
 import { goBack } from '@/lib/nav';
-import { notifyEvent } from '@/lib/push';
 import { buildLesson } from '@/lib/lesson';
 import {
   buildFreeSession,
@@ -71,11 +70,6 @@ const formsOf = (item: QueueItem): Form[] => item.group ?? [item.form];
  *  does a tip, which asks nothing. */
 const graded = (item: QueueItem) =>
   !item.isIntro && item.mode !== 'sentence_intro' && item.mode !== 'tip';
-
-/** Lapses at which a word is reported as a leech (and again at every multiple).
- *  Anki's default is 8; four is enough when someone can actually rewrite the
- *  sentences that teach it. */
-const LEECH_LAPSES = 4;
 
 export default function Practice() {
   // The gradient is inverted — pale at the top edge — so the strip above
@@ -332,7 +326,6 @@ export default function Practice() {
     const row = (data as { current_streak: number; previous_streak: number; recoverable_streak: number }[] | null)?.[0];
     const streak = row?.current_streak ?? 0;
     const previous = row?.previous_streak ?? 0;
-    if (streak !== previous) notifyEvent('session_completed', { streak });
     // Did this round start a comeback? With a run still banked, the screen
     // after this one has one job — sending her into the second round — and
     // celebrating a streak of 1 would read as the 13 being gone.
@@ -404,12 +397,8 @@ export default function Practice() {
 
     // A word that keeps lapsing is a leech (Anki's word). She can't fix a
     // leech by seeing it more; whoever writes the course can, by rewriting the
-    // sentences that teach it — so it gets reported, at the threshold and every
-    // few lapses after.
-    if (rating === 0 && next.lapses > 0 && next.lapses % LEECH_LAPSES === 0) {
-      const form = allForms.find((c) => c.id === formId);
-      if (form) notifyEvent('leech', { word: form.form, lapses: next.lapses });
-    }
+    // sentences that teach it. `lapses` on form_states is where the dashboard
+    // finds them.
   };
 
   // Every exercise reports here: which forms it drilled, and which were missed.

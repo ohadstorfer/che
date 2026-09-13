@@ -55,7 +55,8 @@
     "course:validate": "node scripts/course/validate-outline.mjs",
     "course:test": "node --test \"scripts/course/test/*.test.mjs\"",
     "db:test": "node supabase/tests/course_schema.test.mjs",
-    "course:demo": "node scripts/course/build-demo.mjs"
+    "course:demo": "node scripts/course/build-demo.mjs",
+    "course:seed": "node scripts/course/build-seed.mjs"
   },
   "private": true
 }
