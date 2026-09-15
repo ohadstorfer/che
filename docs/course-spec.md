@@ -72,6 +72,8 @@ A **sentence** is the atom of authored content. It belongs to a unit, targets on
 
 - `es` — the Spanish, as written (šeísmo is pronunciation; spelling is standard)
 - `en` — the primary English translation, plus `en_alt[]` accepted alternatives
+- `es_alt[]` — other Spanish accepted when the sentence is built from its English (as built, 2026-09-15). English underdetermines Spanish, so a build that accepts only `es` marks right answers wrong. The content build fills it: the author's alternatives (other word orders) plus generated ones (`scripts/course/lib/accept.mjs`) — a subject pronoun dropped before its verb or added at the start of its clause (`él`/`ella` only when the English says he/she), an optional `che`, and the other gender of an adjective when only "I"/"you" are in the sentence and the English has no gender cue. Stored, so the reviewer sees and prunes exactly what the app accepts. Transcribing audio accepts only `es`.
+- `loose[]` (authoring only) — words the English translates idiomatically ("¿Cómo te llamás?" → "What's your name?")
 - `tokens` — the sentence split into surfaces, each pointing at the form(s) it is: `[{surface:"¿Tenés", form_ids:[…]}, {surface:"mate?", form_ids:[…]}]`
 - `kind` — `word` · `phrase` · `sentence` · `dialogue`
 - `difficulty` 1–4 (the ladder's rung ceiling), `status`, `source`, `audio_path`
@@ -83,6 +85,13 @@ A sentence is legal iff every token resolves to a form available in its unit. Th
 Nothing here is new: `sentences.ts` and `session.ts` already turn a sentence plus tokens into `sentence_meaning`, `sentence_gap`, `sentence_build`, `sentence_listen`, tiles, distractors and miss-detection; word modes (`flashcard`, `multiple_choice`, `listen`, `typing`, `word_build`, `matching`, `true_false`) already derive from a form and its neighbours. The lesson runtime is a **second producer** of the `SessionData` shape `practice.tsx` consumes — `buildSession` stays as the Practice-hub producer.
 
 One small addition: a `tip` exercise mode with a plain note screen.
+
+**Answer rules (as built, 2026-09-15 — `src/lib/answers.ts`, tested in `scripts/course/test/answers.test.mjs`).** Two invariants across every exercise:
+
+1. *Anything that answers the prompt is accepted.* Sentence builds match any of `es` + `es_alt`, word for word. A word typed or built from its English also accepts forms of the same lemma glossed identically (argentino/argentina for "Argentinian").
+2. *Nothing that would be a right answer is offered as a wrong one.* Two forms "share a meaning" when their glosses share a comma-separated sense (bien "well, fine, good" / bueno "well, OK"). No gap option, tile, multiple-choice option, true/false imposter or matching pair shares a meaning with the answer or with each other; no gap option turns the sentence into an `es_alt`; no meaning option is a sentence saying the same thing in synonyms ("Dale, chau." / "Bueno, chau.").
+
+Forgiveness: tiles can't be mistyped, so builds are exact. Typing forgives one edit only in words of ≥ 5 letters, and never when the typed text is itself a course word (soy/sos, es/él). A wrong build blames only the words missing from the closest accepted answer. Set phrases split into word tiles, and a phrase's gap is answered among phrases. When a build is right but not `es`, the feedback shows `es` too.
 
 ---
 
@@ -493,5 +502,8 @@ Each rule is a pure function `(sentence, ctx) → Finding | null`, unit-tested w
 | `orthography` | only Spanish letters and accents; accents match the lexicon form exactly | fail |
 | `dupes` | normalised `es` unique across the course; near-duplicates (edit distance ≤ 2 on ≥ 5 words) flagged | fail / flag |
 | `en.sane` | `en` non-empty, contains no Spanish tokens, differs from every `en_alt` | fail |
+| `en.covers` | every token that isn't optional, glue or a name has a gloss word (stems, contractions opened) in `en`, unless listed in `loose` — *built* | fail |
+| `es_alt.legal` | every authored `es_alt` passes the same vocabulary / voseo / regional / register checks as `es` — *built* | fail |
+| `gloss.overlap` | two drillable forms of different lemmas share a gloss sense — *built*, in `course:validate` | flag |
 | `dialogue.shape` | `kind = dialogue` has 2–4 lines, alternating speakers | fail |
 | `quota` | per unit: each new form has ≥ 1 intro and ≥ 3 drills approved | flag (unit-level) |

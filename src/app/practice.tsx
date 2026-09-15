@@ -29,30 +29,28 @@ import { playAudio, preloadAudio, stopAudio, type AudioFailure } from '@/lib/aud
 import { useAuth } from '@/lib/auth';
 import { localDateStr } from '@/lib/dates';
 import { goBack } from '@/lib/nav';
-import { buildLesson } from '@/lib/lesson';
 import {
-  buildFreeSession,
-  buildSession,
-  buildTiles,
-  isPhrase,
-  pickImposter,
-  pickOptions,
-  type SessionItem,
-  typedAnswerMatches,
-  wordPool,
-} from '@/lib/session';
-import {
+  builtAnswerMatches,
   gapOptions,
+  isCanonical,
+  isPhrase,
   meaningOptions,
   missedForms,
-  recordShown,
+  type Option,
+  pickImposter,
+  pickOptions,
+  sameAnswer,
+  sentenceAnswerMatches,
   sentenceTiles,
-  tokenIndexOf,
   tokenHead,
+  tokenIndexOf,
   tokenTail,
   tokenWord,
-  type Option,
-} from '@/lib/sentences';
+  typedAnswerMatches,
+} from '@/lib/answers';
+import { buildLesson } from '@/lib/lesson';
+import { buildFreeSession, buildSession, buildTiles, type SessionItem, wordPool } from '@/lib/session';
+import { recordShown } from '@/lib/sentences';
 import { schedule } from '@/lib/srs';
 import { streakStatus } from '@/lib/streak';
 import { supabase } from '@/lib/supabase';
@@ -676,7 +674,9 @@ function Exercise({
       return <Matching item={item} onAnswered={onAnswered} />;
     case 'sentence_intro':
     case 'sentence_meaning':
-      return <SentenceIntro item={item} allSentences={allSentences} onAnswered={onAnswered} />;
+      return (
+        <SentenceIntro item={item} allSentences={allSentences} allForms={allForms} onAnswered={onAnswered} />
+      );
     case 'sentence_gap':
       return <SentenceGap item={item} allForms={allForms} onAnswered={onAnswered} />;
     case 'sentence_build':
@@ -692,7 +692,7 @@ function Exercise({
     case 'listen_build':
       return <ListenBuild item={item} allForms={allForms} onAnswer={single} />;
     case 'typing':
-      return <Typing item={item} onAnswer={single} />;
+      return <Typing item={item} allForms={allForms} onAnswer={single} />;
     default:
       return <MultipleChoice item={item} allForms={allForms} onAnswer={single} />;
   }
@@ -1444,7 +1444,18 @@ function WordBuild({
       prompt={prompt}
       verdict={verdict}
       canCheck={used.length > 0}
-      onCheck={() => setVerdict({ correct: typedAnswerMatches(joined, target), answer: target })}
+      onCheck={() =>
+        setVerdict({
+          // Tiles can't be mistyped: the letters or words are right or they aren't.
+          // Building Spanish, the other gender of the same word counts too.
+          correct: builtAnswerMatches(
+            joined,
+            target,
+            toSpanish ? sameAnswer(form, allForms).map((f) => f.form) : [],
+          ),
+          answer: target,
+        })
+      }
       onContinue={() => onAnswer(!!verdict?.correct)}>
       <PromptBlock form={form} side={toSpanish ? 'en' : 'es'} />
       <TileBuilder
@@ -1488,7 +1499,7 @@ function ListenBuild({
       canCheck={used.length > 0}
       onCheck={() =>
         setVerdict({
-          correct: typedAnswerMatches(joined, form.form),
+          correct: builtAnswerMatches(joined, form.form),
           answer: `${form.form} — ${form.gloss_en}`,
         })
       }
@@ -1505,13 +1516,21 @@ function ListenBuild({
   );
 }
 
-function Typing({ item, onAnswer }: { item: QueueItem; onAnswer: (correct: boolean) => void }) {
+function Typing({
+  item,
+  allForms,
+  onAnswer,
+}: {
+  item: QueueItem;
+  allForms: Form[];
+  onAnswer: (correct: boolean) => void;
+}) {
   const { form } = item;
   const [input, setInput] = useState('');
   const [verdict, setVerdict] = useState<Verdict>(null);
 
   const check = () =>
-    setVerdict({ correct: typedAnswerMatches(input, form.form), answer: form.form });
+    setVerdict({ correct: typedAnswerMatches(input, form, allForms), answer: form.form });
 
   return (
     <ExerciseFrame
@@ -1757,15 +1776,17 @@ function SentenceLine({
 function SentenceIntro({
   item,
   allSentences,
+  allForms,
   onAnswered,
 }: {
   item: QueueItem;
   allSentences: Sentence[];
+  allForms: Form[];
   onAnswered: (wrongFormIds: string[]) => void;
 }) {
   const sentence = item.sentence!;
   const word = item.introduces;
-  const [options] = useState(() => meaningOptions(sentence, allSentences));
+  const [options] = useState(() => meaningOptions(sentence, allSentences, allForms));
   const [chosen, setChosen] = useState<string | null>(null);
   const [peeked, setPeeked] = useState(false);
   const [verdict, setVerdict] = useState<Verdict>(null);
@@ -1889,7 +1910,7 @@ function SentenceBuild({
   byEar?: boolean;
 }) {
   const sentence = item.sentence!;
-  const [{ tiles, answer }] = useState(() => sentenceTiles(sentence, allForms));
+  const [{ tiles }] = useState(() => sentenceTiles(sentence, allForms));
   const [used, setUsed] = useState<number[]>([]);
   const [verdict, setVerdict] = useState<Verdict>(null);
 
@@ -1902,11 +1923,13 @@ function SentenceBuild({
       canCheck={used.length > 0}
       onCheck={() =>
         setVerdict({
-          correct: typedAnswerMatches(placed.join(' '), answer.join(' ')),
+          correct: sentenceAnswerMatches(placed, sentence, { byEar }),
           answer: `${sentence.es} — ${sentence.en}`,
+          // Right, but not the sentence as written: show that one too.
+          also: isCanonical(placed, sentence) ? undefined : sentence.es,
         })
       }
-      onContinue={() => onAnswered(verdict?.correct ? [] : missedForms(sentence, placed))}>
+      onContinue={() => onAnswered(verdict?.correct ? [] : missedForms(sentence, placed, allForms))}>
       {byEar && sentence.audio_path ? (
         <AudioPad path={sentence.audio_path} />
       ) : (

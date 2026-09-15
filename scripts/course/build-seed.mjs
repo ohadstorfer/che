@@ -82,8 +82,8 @@ const sql = [
   upsert(
     'sentences',
     rows.sentences,
-    ['id', 'unit_id', 'es', 'en', 'en_alt', 'tokens', 'target_form_id', 'kind', 'difficulty', 'source', 'attribution', 'audio_path', 'status'],
-    { en_alt: textArray, tokens: jsonb },
+    ['id', 'unit_id', 'es', 'en', 'en_alt', 'es_alt', 'tokens', 'target_form_id', 'kind', 'difficulty', 'source', 'attribution', 'audio_path', 'status'],
+    { en_alt: textArray, es_alt: textArray, tokens: jsonb },
   ),
   upsert('lesson_slots', rows.lesson_slots, ['id', 'lesson_id', 'ordinal', 'kind', 'form_id', 'sentence_id', 'tip_id', 'mode', 'review_count']),
 ].join('\n');

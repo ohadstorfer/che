@@ -171,6 +171,8 @@ export interface Sentence {
   es: string;
   en: string;
   en_alt: string[];
+  /** Other Spanish accepted when the sentence is built from its English. */
+  es_alt: string[];
   audio_path: string | null;
   /** The form this sentence exists to teach or drill. */
   target_form_id: string;

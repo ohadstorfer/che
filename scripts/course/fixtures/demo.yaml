@@ -14,11 +14,20 @@
 #   {match}                         a matching block of words taught so far
 #   {tip: <index>}                  the unit's tip, by position in the outline
 #   {review: <n>}                   n screens of due words from earlier units
+#
+# Sentence fields beyond es/en/target:
+#   es_alt   other Spanish a learner building the sentence may give. Dropped
+#            subject pronouns, an added one, a left-out "che" and the other
+#            gender (where the English doesn't say) are added automatically —
+#            list only what the rules can't see, like another word order.
+#   loose    words the English translates idiomatically rather than word for
+#            word ("¿Cómo te llamás?" → "What's your name?"); without it the
+#            build fails when a word has nothing in the English.
 # ---------------------------------------------------------------------------
 
 hola-che:
   sentences:
-    hola_che: {es: "Hola, che.", en: "Hey there.", target: che}
+    hola_che: {es: "Hola, che.", en: "Hi there.", en_alt: ["Hey there."], target: che}
     chau_che: {es: "Chau, che.", en: "Bye!", en_alt: ["See you."], target: chau}
     dale_chau: {es: "Dale, chau.", en: "OK, bye.", target: dale}
     bien_gracias: {es: "Bien, gracias.", en: "Fine, thanks.", target: gracias}
@@ -33,7 +42,7 @@ hola-che:
     mal_che: {es: "Mal, che.", en: "Not great, man.", target: mal}
     bueno_chau: {es: "Bueno, chau.", en: "Well, bye.", target: bueno}
     me_llamo: {es: "Me llamo Martín.", en: "My name is Martín.", target: llamo}
-    como_te_llamas: {es: "¿Cómo te llamás?", en: "What's your name?", target: llamás, difficulty: 2}
+    como_te_llamas: {es: "¿Cómo te llamás?", en: "What's your name?", target: llamás, difficulty: 2, loose: [cómo]}
     mucho_gusto: {es: "Mucho gusto, Lucía.", en: "Nice to meet you, Lucía.", target: mucho gusto}
     yo_me_llamo: {es: "Yo me llamo Sofi, ¿y vos?", en: "My name is Sofi, and yours?", target: llamo, difficulty: 3}
   lessons:
@@ -96,8 +105,8 @@ hola-che:
 
 de-donde-sos:
   sentences:
-    de_donde_sos: {es: "¿De dónde sos?", en: "Where are you from?", target: dónde}
-    y_vos_de_donde: {es: "¿Y vos de dónde sos?", en: "And where are you from?", target: dónde, difficulty: 2}
+    de_donde_sos: {es: "¿De dónde sos?", en: "Where are you from?", es_alt: ["¿De dónde sos vos?"], target: dónde}
+    y_vos_de_donde: {es: "¿Y vos de dónde sos?", en: "And where are you from?", es_alt: ["¿Y de dónde sos vos?", "¿Y de dónde sos?"], target: dónde, difficulty: 2}
     ella_es_arg: {es: "Ella es argentina.", en: "She's Argentinian.", target: argentina/adj}
     el_es_arg: {es: "Él es argentino.", en: "He's Argentinian.", target: él}
     juan_es_de: {es: "Juan es de Montevideo.", en: "Juan is from Montevideo.", target: es}
@@ -107,7 +116,7 @@ de-donde-sos:
     no_chileno: {es: "No, soy chileno.", en: "No, I'm Chilean.", target: chileno}
     sofi_portena: {es: "Sofi es porteña.", en: "Sofi is from Buenos Aires.", target: porteña}
     soy_de_aca: {es: "Soy de acá.", en: "I'm from here.", target: acá}
-    lucia_tambien: {es: "Lucía también es de acá.", en: "Lucía is from here too.", target: también, difficulty: 2}
+    lucia_tambien: {es: "Lucía también es de acá.", en: "Lucía is from here too.", es_alt: ["Lucía es de acá también."], target: también, difficulty: 2}
     cordoba_pero: {es: "Martín es de Córdoba, pero yo soy de Rosario.", en: "Martín is from Córdoba, but I'm from Rosario.", target: pero, difficulty: 3}
     yo_ingles: {es: "Yo soy inglés, ¿y vos?", en: "I'm English, and you?", target: inglés, difficulty: 2}
     sos_arg: {es: "¿Sos argentino?", en: "Are you Argentinian?", target: argentino}

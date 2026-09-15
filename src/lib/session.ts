@@ -1,3 +1,4 @@
+import { MATCH_SIZE, SENTENCE_CHOICES, isPhrase, matchable, norm, sharesMeaning, shuffle, wordsOf } from './answers';
 import { addDays, localDateStr } from './dates';
 import { glueSeen, loadSentences, pickReviewSentences, rungFor, sentenceCap } from './sentences';
 import { supabase } from './supabase';
@@ -38,14 +39,6 @@ export interface SessionData {
   scheduledFormIds: string[];
 }
 
-/** A form whose text has a space is a phrase, drilled like a sentence. */
-export const isPhrase = (text: string) => text.trim().includes(' ');
-
-export const wordsOf = (text: string) => text.trim().split(/\s+/).filter(Boolean);
-
-/** Forms in a matching block. */
-export const MATCH_SIZE = 4;
-
 // A form whose interval has reached this many days has settled: it can be
 // asked to type the word, and earns a third angle so reviews stay varied.
 export const SETTLED_DAYS = 7;
@@ -76,15 +69,6 @@ const productionOnly = (g: SessionItem[]) => {
   const item = g.find((i) => PRODUCTION.includes(i.mode)) ?? g[0];
   return item ? [item] : [];
 };
-
-export function shuffle<T>(arr: T[]): T[] {
-  const out = [...arr];
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [out[i], out[j]] = [out[j], out[i]];
-  }
-  return out;
-}
 
 // ---------------------------------------------------------------------------
 // What a round is built from
@@ -224,14 +208,11 @@ export function interleave(groups: SessionItem[][]): SessionItem[] {
 }
 
 // A matching block: one screen that drills four forms at once. Phrases are left
-// out — eight of them on one screen is a wall of text.
+// out — eight of them on one screen is a wall of text — and so is any word that
+// could pair with another's meaning.
 export function matchingBlock(forms: Form[]): SessionItem | null {
-  const words = forms.filter((f) => !isPhrase(f.form));
-  // Two forms with the same meaning would make the pairing ambiguous.
-  const distinct = new Map<string, Form>();
-  for (const f of shuffle(words)) if (!distinct.has(f.gloss_en)) distinct.set(f.gloss_en, f);
-  if (distinct.size < MATCH_SIZE) return null;
-  const group = [...distinct.values()].slice(0, MATCH_SIZE);
+  const group = matchable(forms);
+  if (group.length < MATCH_SIZE) return null;
   return { form: group[0], state: null, mode: 'matching', direction: 'es_to_en', group };
 }
 
@@ -418,53 +399,17 @@ export async function buildFreeSession(userId: string, limit = FREE_SESSION_SIZE
   return { items, allForms: deck, sentences: [], scheduledFormIds: [] };
 }
 
-/** Options shown for a phrase — three reads better than four at that length. */
-export const SENTENCE_CHOICES = 3;
-
-// Distractors for multiple choice, drawn from forms of the same kind: a phrase
-// competes against other phrases, a word against other words — and a word
-// against words of its own part of speech where there are enough. Mixing kinds
-// would let her answer on shape alone.
-export function pickOptions(correct: Form, allForms: Form[], field: 'gloss_en' | 'form') {
-  const count = isPhrase(correct.form) ? SENTENCE_CHOICES : MATCH_SIZE;
-  const sameShape = allForms.filter((f) => isPhrase(f.form) === isPhrase(correct.form));
-  const samePos = sameShape.filter((f) => f.pos === correct.pos);
-  const pool = samePos.length >= count ? samePos : sameShape.length >= count ? sameShape : allForms;
-  const seen = new Set([correct[field]]);
-  const others: Form[] = [];
-  for (const f of shuffle(pool)) {
-    if (f.id === correct.id || seen.has(f[field])) continue;
-    seen.add(f[field]);
-    others.push(f);
-    if (others.length === count - 1) break;
-  }
-  return shuffle([correct, ...others]);
-}
-
-/** A plausible wrong meaning for the true/false exercise. */
-export function pickImposter(correct: Form, allForms: Form[]): Form | null {
-  const sameShape = allForms.filter((f) => isPhrase(f.form) === isPhrase(correct.form));
-  const pool = sameShape.length > 1 ? sameShape : allForms;
-  const others = pool.filter((f) => f.id !== correct.id && f.gloss_en !== correct.gloss_en);
-  return others.length ? shuffle(others)[0] : null;
-}
-
-const bare = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-    .replace(/[^\p{L}\p{N}]/gu, '');
-
 // Spare words for a phrase's tile bank, borrowed from the rest of the deck.
-// Without them the exercise is just "use every tile you can see".
+// Without them the exercise is just "use every tile you can see". Not from a
+// form that shares the phrase's meaning, whose words could build a second
+// right answer.
 export function wordPool(correct: Form, allForms: Form[], field: 'gloss_en' | 'form'): string[] {
-  const taken = new Set(wordsOf(correct[field]).map(bare));
+  const taken = new Set(wordsOf(correct[field]).map(norm));
   const out = new Map<string, string>();
   for (const f of allForms) {
-    if (f.id === correct.id) continue;
+    if (f.id === correct.id || sharesMeaning(f, correct)) continue;
     for (const word of wordsOf(f[field])) {
-      const key = bare(word);
+      const key = norm(word);
       if (!key || taken.has(key) || out.has(key)) continue;
       out.set(key, word.replace(/[.,!?¿¡;:()]+/g, ''));
     }
@@ -496,38 +441,4 @@ export function buildTiles(target: string, distractors: string[] = []): { answer
     if (!answer.includes(c)) decoys.add(c);
   }
   return { answer, tiles: shuffle([...answer, ...decoys]) };
-}
-
-// Forgiving comparison for typed answers: case-, accent- and punctuation-
-// insensitive, and one typo (edit distance 1) is still accepted.
-export function typedAnswerMatches(input: string, expected: string): boolean {
-  const norm = (s: string) =>
-    s
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/\p{Diacritic}/gu, '')
-      .replace(/[^a-z0-9]/g, '');
-  const a = norm(input);
-  const b = norm(expected);
-  if (!a) return false;
-  if (a === b) return true;
-  if (Math.abs(a.length - b.length) > 1) return false;
-  let i = 0;
-  let j = 0;
-  let edits = 0;
-  while (i < a.length && j < b.length) {
-    if (a[i] === b[j]) {
-      i++;
-      j++;
-      continue;
-    }
-    if (++edits > 1) return false;
-    if (a.length > b.length) i++;
-    else if (b.length > a.length) j++;
-    else {
-      i++;
-      j++;
-    }
-  }
-  return edits + (a.length - i) + (b.length - j) <= 1;
 }

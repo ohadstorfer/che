@@ -102,6 +102,29 @@ export const REGIONAL = new Map([
   ['conducir', 'manejar'],
 ]);
 
+/**
+ * Words an answer may leave out without being wrong: a vocative "che" adds
+ * colour, not meaning, and English has nothing to prompt it with.
+ */
+export const OPTIONAL_LEMMAS = new Set(['che']);
+
+/** Subject pronouns — Spanish drops them whenever the verb already says who. */
+export const SUBJECT_PRONOUNS = new Map([
+  ['yo', { person: 1, number: 'sg' }],
+  ['vos', { person: 2, number: 'sg' }],
+  ['él', { person: 3, number: 'sg' }],
+  ['ella', { person: 3, number: 'sg' }],
+  ['usted', { person: 3, number: 'sg' }],
+  ['nosotros', { person: 1, number: 'pl' }],
+  ['nosotras', { person: 1, number: 'pl' }],
+  ['ellos', { person: 3, number: 'pl' }],
+  ['ellas', { person: 3, number: 'pl' }],
+  ['ustedes', { person: 3, number: 'pl' }],
+]);
+
+/** Object pronouns that sit between a subject and its verb: "yo *me* llamo". */
+export const CLITIC_LEMMAS = new Set(['me', 'te', 'se', 'nos', 'lo', 'la', 'le', 'los', 'las', 'les']);
+
 /** Lowercase, keep accents: `Tenés` and `tenés` match, `tenes` does not. */
 export const fold = (s) => s.toLocaleLowerCase('es');
 

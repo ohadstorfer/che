@@ -183,9 +183,13 @@ console.log('\nall migration checks passed');
   `);
   await seedDb.exec(readFileSync(`${MIG}/20260427000001_init.sql`, 'utf8').replace(/create extension[^;]*;/i, ''));
   await seedDb.exec(readFileSync(`${MIG}/20260913000001_course_schema.sql`, 'utf8'));
-  const seed = readFileSync(`${MIG}/20260913000002_seed_section_1.sql`, 'utf8');
+  await seedDb.exec(readFileSync(`${MIG}/20260913000002_seed_section_1.sql`, 'utf8'));
+  ok('first seed applies');
+  // Production got the first seed before es_alt existed; the re-seed lands on top.
+  await seedDb.exec(readFileSync(`${MIG}/20260915000001_sentence_es_alt.sql`, 'utf8'));
+  const seed = readFileSync(`${MIG}/20260915000002_seed_section_1_accepted_answers.sql`, 'utf8');
   await seedDb.exec(seed);
-  ok('seed applies');
+  ok('es_alt column + re-seed apply over the first seed');
 
   const counts = async () =>
     (await seedDb.query(`
@@ -211,6 +215,12 @@ console.log('\nall migration checks passed');
     where (s.kind = 'teach' and f.id is null) or (s.kind = 'drill' and x.id is null) or (s.kind = 'tip' and t.id is null)`);
   assert.equal(orphans.rows[0].n, 0);
   ok('every slot resolves');
+
+  const alt = await seedDb.query(`select es_alt from sentences where es = '¿Vos sos Juan?'`);
+  assert.deepEqual(alt.rows[0].es_alt, ['¿Sos Juan?']);
+  const stale = await seedDb.query(`select count(*)::int as n from sentences where en = 'Hey there.'`);
+  assert.equal(stale.rows[0].n, 0, 'the re-seed updated sentences in place');
+  ok('accepted answers are seeded, sentences updated in place');
 
   await seedDb.exec(`
     grant select, insert, update on all tables in schema public to authenticated;

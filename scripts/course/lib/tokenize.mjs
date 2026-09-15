@@ -12,7 +12,8 @@ import { fold } from './rules.mjs';
 const LEAD = /^[¿¡"“«(\-—]+/u;
 const TAIL = /[.,!?;:…"”»)\-—]+$/u;
 
-function split(piece) {
+/** A word with its punctuation apart: "¿Tenés" → { lead: "¿", core: "Tenés", tail: "" }. */
+export function split(piece) {
   const lead = piece.match(LEAD)?.[0] ?? '';
   const rest = piece.slice(lead.length);
   const tail = rest.match(TAIL)?.[0] ?? '';

@@ -199,7 +199,42 @@ export function loadOutline(path = OUTLINE_PATH) {
     for (const p of problems) errors.push(`unit ${unit.ordinal} sample "${unit.sample.es}": ${p}`);
   }
 
+  // Two words sharing a meaning can't be told apart from the English. The app
+  // keeps them out of each other's options, but where it isn't a true synonym
+  // pair (bondi/colectivo) a sharper gloss makes a better question.
+  for (const { a, b, shared } of meaningOverlaps(outline)) {
+    warnings.push(`"${a.form}" (unit ${a.unit_ordinal}) and "${b.form}" (unit ${b.unit_ordinal}) share the meaning "${shared.join(', ')}"`);
+  }
+
   return { outline, errors, warnings };
+}
+
+/**
+ * A gloss's senses: "well, fine, good" → ["well", "fine", "good"]. The app
+ * splits them the same way (src/lib/answers.ts) to decide which words may be
+ * offered as wrong answers for each other.
+ */
+export const senses = (gloss) =>
+  String(gloss ?? '')
+    .split(/[,;]/)
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+
+/** Pairs of drillable forms, from different lemmas, whose glosses share a sense. */
+export function meaningOverlaps(outline) {
+  const lemmaById = new Map(outline.lemmas.map((l) => [l.id, l]));
+  const forms = outline.forms
+    .filter((f) => !f.is_glue && f.pos !== 'propn')
+    .map((f) => ({ form: f, senses: senses(f.gloss_en ?? lemmaById.get(f.lemma_id)?.gloss_en) }));
+  const out = [];
+  for (let i = 0; i < forms.length; i++) {
+    for (let j = i + 1; j < forms.length; j++) {
+      if (forms[i].form.lemma_id === forms[j].form.lemma_id) continue;
+      const shared = forms[i].senses.filter((s) => forms[j].senses.includes(s));
+      if (shared.length) out.push({ a: forms[i].form, b: forms[j].form, shared });
+    }
+  }
+  return out;
 }
 
 /** Forms a sentence in `unit` may use: its own and every earlier unit's. */

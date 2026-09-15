@@ -3,14 +3,18 @@
 // now and the seed / import scripts later, so hand-written and generated
 // content pass through exactly the same gate.
 
+import { generateVariants, uncoveredTokens } from './accept.mjs';
 import { ids } from './ids.mjs';
 import { checkSentence, availableForms } from './outline.mjs';
-import { fold } from './rules.mjs';
+import { bare, fold } from './rules.mjs';
 import { buildIndex, tokenize } from './tokenize.mjs';
 
 const SENTENCE_MODES = ['sentence_intro', 'sentence_meaning', 'sentence_gap', 'sentence_build', 'sentence_listen'];
 
 const drillable = (f) => !f.is_glue && f.pos !== 'propn';
+
+/** Two answers are the same answer when their words are: "¿Sos Juan?" = "sos juan". */
+const answerKey = (es) => bare(es).split(/\s+/).filter(Boolean).join(' ');
 
 /** Resolve "tenés" or "argentina/adj" to one of a unit's own forms. */
 function resolveFormRef(outline, unit, ref, where, errors) {
@@ -38,6 +42,7 @@ export function buildContent(outline, content, { source = 'human', status = 'dra
   const sentences = [];
   const slots = [];
   const unitBySlug = new Map(outline.units.map((u) => [u.slug, u]));
+  const lemmaById = new Map(outline.lemmas.map((l) => [l.id, l]));
 
   // Everything taught before a unit, for the lesson-order check below.
   const taughtBefore = (unit) =>
@@ -56,17 +61,49 @@ export function buildContent(outline, content, { source = 'human', status = 'dra
       const where = `${slug} · sentence ${key}`;
       for (const problem of checkSentence(outline, unit, s.es)) errors.push(`${where} "${s.es}": ${problem}`);
       const target = resolveFormRef(outline, unit, s.target, `${where} target`, errors);
-      const tokens = tokenize(s.es, index).map((t) => ({ surface: t.surface, form_ids: t.forms.map((f) => f.id) }));
+      // A form without a gloss of its own means what its lemma means.
+      const resolved = tokenize(s.es, index).map((t) => ({
+        ...t,
+        forms: t.forms.map((f) => ({ ...f, gloss_en: f.gloss_en ?? lemmaById.get(f.lemma_id)?.gloss_en })),
+      }));
+      const tokens = resolved.map((t) => ({ surface: t.surface, form_ids: t.forms.map((f) => f.id) }));
       if (target && !tokens.some((t) => t.form_ids.includes(target.id))) {
         errors.push(`${where}: target "${s.target}" does not appear in "${s.es}"`);
       }
       if (!s.en) errors.push(`${where}: missing "en"`);
+
+      // The English has to ask for every word the Spanish needs, or building
+      // the Spanish from it is a guess.
+      for (const t of uncoveredTokens(resolved, s.en ?? '', s.loose ?? [])) {
+        errors.push(
+          `${where}: the English "${s.en}" has nothing for "${t.core}" — a learner building the Spanish ` +
+            `can't know it belongs. Fix the English, or list it under loose: if the translation is idiomatic.`,
+        );
+      }
+
+      // Accepted answers: the author's, checked like the sentence itself, then
+      // the ones the rules generate.
+      const authored = [];
+      for (const alt of s.es_alt ?? []) {
+        const problems = checkSentence(outline, unit, alt);
+        for (const problem of problems) errors.push(`${where} es_alt "${alt}": ${problem}`);
+        if (!problems.length) authored.push(alt);
+      }
+      const esAlt = [];
+      const taken = new Set([answerKey(s.es)]);
+      for (const alt of [...authored, ...generateVariants(resolved, s.en ?? '', outline)]) {
+        const k = answerKey(alt);
+        if (taken.has(k)) continue;
+        taken.add(k);
+        esAlt.push(alt);
+      }
       const row = {
         id: ids.sentence(slug, s.es),
         unit_id: unit.id,
         es: s.es,
         en: s.en ?? '',
         en_alt: s.en_alt ?? [],
+        es_alt: esAlt,
         tokens,
         target_form_id: target?.id ?? null,
         kind: s.kind ?? (tokens.length > 1 ? 'sentence' : 'word'),

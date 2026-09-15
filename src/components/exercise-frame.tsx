@@ -15,8 +15,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/ui';
 import { colors, press, radius, shadow } from '@/lib/theme';
 
-/** Set once an exercise has been checked; `answer` is shown when she missed it. */
-export type Verdict = { correct: boolean; answer?: string } | null;
+/** Set once an exercise has been checked; `answer` is shown when she missed it,
+ *  `also` when she got it right another way than the one written. */
+export type Verdict = { correct: boolean; answer?: string; also?: string } | null;
 
 // ---------------------------------------------------------------------------
 // ExerciseFrame — the shape every exercise shares: a question at the top, the
@@ -138,6 +139,13 @@ function FeedbackBar({
           {good ? 'Correcto!' : 'Casi!'}
         </Text>
       </View>
+
+      {good && verdict.also ? (
+        <View style={{ gap: 2 }}>
+          <Text style={[styles.feedbackLabel, { color: tint }]}>También se dice:</Text>
+          <Text style={[styles.feedbackAnswer, { color: tint }]}>{verdict.also}</Text>
+        </View>
+      ) : null}
 
       {!good && verdict.answer ? (
         <View style={{ gap: 2 }}>

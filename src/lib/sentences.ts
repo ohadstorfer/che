@@ -1,3 +1,4 @@
+import { shuffle } from './answers';
 import { supabase } from './supabase';
 import type { Form, Sentence, SentenceToken } from './types';
 
@@ -6,56 +7,9 @@ import type { Form, Sentence, SentenceToken } from './types';
 //
 // What gets drilled is decided elsewhere (the lesson's slots in lesson.ts, SM-2
 // in session.ts); this module decides which sentence can carry a drill and at
-// which rung, and holds the small mechanics the sentence exercises need —
-// options, tiles, and working out which word she got wrong when a sentence
-// comes out wrong.
+// which rung, and keeps the record of each showing. What an exercise offers
+// and accepts is answers.ts.
 // ---------------------------------------------------------------------------
-
-function shuffle<T>(arr: T[]): T[] {
-  const out = [...arr];
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [out[i], out[j]] = [out[j], out[i]];
-  }
-  return out;
-}
-
-/** Case-, accent- and punctuation-insensitive key for comparing words. */
-const norm = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-    .replace(/[^\p{L}\p{N}]/gu, '');
-
-const LEAD = /^[¿¡"“«(]+/u;
-const TAIL = /[.,!?;:…"”»)]+$/u;
-
-/** Punctuation before a token's word — Spanish opens questions: "¿". */
-export const tokenHead = (t: SentenceToken) => t.surface.match(LEAD)?.[0] ?? '';
-
-/** Punctuation after a token's word, to keep next to a blank: "?". */
-export const tokenTail = (t: SentenceToken) => t.surface.match(TAIL)?.[0] ?? '';
-
-/** A token's word without its punctuation: "¿Tenés" → "Tenés". */
-export const tokenWord = (t: SentenceToken) =>
-  t.surface.slice(tokenHead(t).length, t.surface.length - tokenTail(t).length);
-
-/**
- * A word as it should appear out of its sentence. The first word of a sentence
- * is capitalised in place, and a capital on one option or tile — when every
- * other one is lowercase — gives the answer away. Names keep their capital:
- * they're capitalised everywhere.
- */
-export const outOfSentence = (t: SentenceToken, index: number) => {
-  const word = tokenWord(t);
-  const isName = t.form_ids.length === 0 && !t.glue;
-  return index === 0 && !isName ? word.charAt(0).toLocaleLowerCase('es') + word.slice(1) : word;
-};
-
-/** Where a form sits in the sentence; -1 if it is not there. */
-export const tokenIndexOf = (s: Sentence, formId: string) =>
-  s.tokens.findIndex((t) => t.form_ids.includes(formId));
 
 interface SentenceRow {
   id: string;
@@ -63,6 +17,7 @@ interface SentenceRow {
   es: string;
   en: string;
   en_alt: string[] | null;
+  es_alt: string[] | null;
   audio_path: string | null;
   target_form_id: string;
   difficulty: number;
@@ -101,6 +56,7 @@ export async function loadSentences(userId: string, forms: Form[]): Promise<Sent
       es: r.es,
       en: r.en,
       en_alt: r.en_alt ?? [],
+      es_alt: r.es_alt ?? [],
       audio_path: r.audio_path,
       target_form_id: r.target_form_id,
       difficulty: r.difficulty,
@@ -278,95 +234,6 @@ export function pickReviewSentences(
     out.push(...spare.slice(0, max - out.length));
   }
   return out;
-}
-
-export type Option = { id: string; label: string };
-
-/** Meanings to choose between: this sentence's, and two other sentences'. */
-export function meaningOptions(sentence: Sentence, all: Sentence[]): Option[] {
-  const others = shuffle(all.filter((s) => s.id !== sentence.id && s.en !== sentence.en));
-  const distinct = new Map<string, Sentence>();
-  for (const s of others) {
-    if (!distinct.has(s.en)) distinct.set(s.en, s);
-    if (distinct.size === 2) break;
-  }
-  return shuffle([sentence, ...distinct.values()]).map((s) => ({ id: s.id, label: s.en }));
-}
-
-/** Words to fill the gap with: the right one, as it appears in the sentence,
- *  and three single-word forms she knows. `target` is the form the gap tests —
- *  a due word in the sentence, not necessarily the one it was written for. */
-export function gapOptions(sentence: Sentence, target: Form, allForms: Form[]): Option[] {
-  const index = tokenIndexOf(sentence, target.id);
-  const answer = index >= 0 ? outOfSentence(sentence.tokens[index], index) : target.form;
-  const decoys = shuffle(
-    allForms.filter(
-      (f) =>
-        f.id !== target.id &&
-        !f.is_glue &&
-        f.pos !== 'propn' &&
-        !f.form.includes(' ') &&
-        norm(f.form) !== norm(answer),
-    ),
-  );
-  // A decoy of the same part of speech is a real question; "casa" in a verb's
-  // gap is a giveaway.
-  decoys.sort((a, b) => Number(b.pos === target.pos) - Number(a.pos === target.pos));
-  const seen = new Set<string>();
-  const picked: Form[] = [];
-  for (const f of decoys) {
-    if (seen.has(norm(f.form))) continue;
-    seen.add(norm(f.form));
-    picked.push(f);
-    if (picked.length === 3) break;
-  }
-  return shuffle([
-    { id: target.id, label: answer },
-    ...picked.map((f) => ({ id: f.id, label: f.form })),
-  ]);
-}
-
-/** How many spare tiles a sentence's bank carries beyond the answer. */
-const DECOYS = 4;
-
-/** Word tiles for rebuilding the sentence, with a few of her other words mixed in. */
-export function sentenceTiles(sentence: Sentence, allForms: Form[]) {
-  const answer = sentence.tokens.map(outOfSentence);
-  const taken = new Set(answer.map(norm));
-  const spare = new Map<string, string>();
-  for (const f of shuffle(allForms)) {
-    if (f.pos === 'propn') continue;
-    const key = norm(f.form);
-    if (key && !taken.has(key) && !spare.has(key)) spare.set(key, f.form);
-  }
-  const decoys = [...spare.values()].slice(
-    0,
-    Math.min(DECOYS, Math.max(2, Math.ceil(answer.length / 2))),
-  );
-  return { answer, tiles: shuffle([...answer, ...decoys]) };
-}
-
-// Which forms a wrong build actually missed. Her tiles are matched to the
-// sentence's words as a subsequence, so a skipped word or a stray decoy only
-// blames the word it displaced — not everything after it. Glue words and names
-// have no form to blame; if nothing else was wrong, the target takes it.
-export function missedForms(sentence: Sentence, placed: string[]): string[] {
-  const wrong = new Set<string>();
-  let j = 0;
-  for (const t of sentence.tokens) {
-    const key = norm(tokenWord(t));
-    let found = -1;
-    for (let k = j; k < placed.length; k++) {
-      if (norm(placed[k]) === key) {
-        found = k;
-        break;
-      }
-    }
-    if (found >= 0) j = found + 1;
-    else for (const id of t.form_ids) wrong.add(id);
-  }
-  if (wrong.size === 0) wrong.add(sentence.target_form_id);
-  return [...wrong];
 }
 
 /** Bookkeeping for one sentence screen, fire-and-forget: `shown_count` is
