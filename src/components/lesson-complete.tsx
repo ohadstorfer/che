@@ -66,16 +66,16 @@ export function LessonComplete({
         <Image source={CLIP} style={styles.clip} contentFit="contain" accessible={false} />
       </Animated.View>
 
-      <Animated.Text style={[styles.title, title]}>Lección completa!</Animated.Text>
+      <Animated.Text style={[styles.title, title]}>Lesson complete!</Animated.Text>
 
       {streak ? (
         <Animated.Text style={[styles.streak, line]}>
-          🔥 Racha: {streak} {streak === 1 ? 'día' : 'días'}
+          🔥 {streak} day{streak === 1 ? '' : 's'} in a row
         </Animated.Text>
       ) : null}
 
       <Animated.View style={[styles.actions, action]}>
-        <Button title="Dale!" onPress={onNext} />
+        <Button title="Keep going" onPress={onNext} />
       </Animated.View>
     </View>
   );

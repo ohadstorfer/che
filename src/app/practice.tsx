@@ -507,7 +507,7 @@ export default function Practice() {
           <SafeAreaView style={styles.safe}>
             <View style={styles.doneWrap}>
               <View style={styles.gatePanel}>
-                <Text style={styles.gateTitle}>Ya casi!</Text>
+                <Text style={styles.gateTitle}>Almost!</Text>
                 <Image
                   source={require('@/assets/videos/frozen-pitas.webp')}
                   style={styles.gateClip}
@@ -515,13 +515,13 @@ export default function Practice() {
                   accessible={false}
                 />
                 <Text style={styles.gateBody}>
-                  Una clase más y recuperás tu racha de {lost} días.
+                  One more lesson and you get your {lost} day streak back.
                 </Text>
                 <Button
-                  title="Una clase más!"
+                  title="One more lesson"
                   onPress={() => router.replace('/practice?again=1')}
                 />
-                <Button title="Al inicio" variant="ghost" onPress={() => router.replace('/home')} />
+                <Button title="Back home" variant="ghost" onPress={() => router.replace('/home')} />
               </View>
             </View>
           </SafeAreaView>
@@ -563,7 +563,7 @@ export default function Practice() {
         <View style={styles.doneWrap}>
           <View style={styles.gatePanel}>
             <Text style={styles.gateTitle}>
-              {gate.oneMore ? 'Ya casi!' : 'Se te congeló la racha!'}
+              {gate.oneMore ? 'Almost!' : 'Your streak is frozen!'}
             </Text>
             <Image
               source={require('@/assets/videos/frozen-pitas.webp')}
@@ -572,14 +572,14 @@ export default function Practice() {
               accessible={false}
             />
             {gate.oneMore ? null : (
-              <Text style={styles.gateSub}>Tu racha de {gate.lost} días se congeló</Text>
+              <Text style={styles.gateSub}>Your {gate.lost} day streak is on ice</Text>
             )}
             <Text style={styles.gateBody}>
               {gate.oneMore
-                ? `Una clase más y recuperás tu racha de ${gate.lost} días.`
-                : 'Para recuperarla, tenés que hacer dos clases seguidas hoy.'}
+                ? `One more lesson and you get your ${gate.lost} day streak back.`
+                : 'To get it back, finish two lessons in a row today.'}
             </Text>
-            <Button title="Vamos!" onPress={() => setGate(null)} />
+            <Button title="Let's go" onPress={() => setGate(null)} />
           </View>
         </View>
       </SafeAreaView>
@@ -604,9 +604,9 @@ export default function Practice() {
       <SafeAreaView style={styles.safe}>
         <View style={styles.doneWrap}>
           <Text style={styles.doneEmoji}>😌</Text>
-          <Text style={styles.doneTitle}>No hay nada para practicar ahora</Text>
-          <Text style={styles.doneHint}>Hacé una lección del camino y volvé.</Text>
-          <Button title="Volver al inicio" onPress={() => router.replace('/home')} />
+          <Text style={styles.doneTitle}>Nothing to practise right now</Text>
+          <Text style={styles.doneHint}>Take a lesson on the path and come back.</Text>
+          <Button title="Back home" onPress={() => router.replace('/home')} />
         </View>
       </SafeAreaView>
     );
@@ -713,10 +713,10 @@ function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
   const phrase = isPhrase(form.form);
   return (
     <ExerciseFrame
-      prompt={phrase ? '✨ Frase nueva' : '✨ Palabra nueva'}
+      prompt={phrase ? '✨ New phrase' : '✨ New word'}
       verdict={null}
       canCheck
-      checkLabel="Entendido!"
+      checkLabel="Got it"
       onCheck={onDone}
       onContinue={onDone}>
       <Panel style={styles.bigCard}>
@@ -742,7 +742,7 @@ function TipCard({ tip, onDone }: { tip: Tip; onDone: () => void }) {
       prompt={`💡 ${tip.title_en}`}
       verdict={null}
       canCheck
-      checkLabel="Entendido!"
+      checkLabel="Got it"
       onCheck={onDone}
       onContinue={onDone}>
       <Panel style={styles.tip}>
@@ -800,10 +800,10 @@ function useClip(path: string | null) {
 }
 
 const AUDIO_PROBLEM: Record<AudioFailure, string> = {
-  blocked: 'Tocá para escuchar',
-  offline: 'Sin conexión',
-  missing: 'No se encontró el audio',
-  failed: 'No se pudo reproducir',
+  blocked: 'Tap to listen',
+  offline: 'No connection',
+  missing: 'Audio not found',
+  failed: "Couldn't play it",
 };
 
 // An expanding ring, looping while the clip sounds. A Reanimated CSS animation,
@@ -840,7 +840,7 @@ function PlayButton({ path, big }: { path: string; big?: boolean }) {
     <View style={styles.playWrap}>
       <Pressable
         onPress={play}
-        accessibilityLabel={playing ? 'Sonando' : problem ? AUDIO_PROBLEM[problem] : 'Escuchar'}
+        accessibilityLabel={playing ? 'Playing' : problem ? AUDIO_PROBLEM[problem] : 'Listen'}
         style={({ pressed }) => [
           styles.playButton,
           big && styles.playButtonBig,
@@ -997,11 +997,11 @@ function MultipleChoice({
   const phrase = isPhrase(form.form);
   const prompt = askSpanish
     ? phrase
-      ? '¿Qué significa esta frase?'
-      : '¿Qué significa?'
+      ? 'What does this phrase mean?'
+      : 'What does it mean?'
     : phrase
-      ? '¿Cómo se dice esta frase en argentino?'
-      : '¿Cómo se dice en argentino?';
+      ? 'How do you say this phrase in Argentine Spanish?'
+      : 'How do you say it in Argentine Spanish?';
 
   return (
     <ExerciseFrame
@@ -1040,7 +1040,7 @@ function Listen({
 
   return (
     <ExerciseFrame
-      prompt="¿Qué significa lo que escuchás?"
+      prompt="What does what you hear mean?"
       verdict={verdict}
       canCheck={!!chosen}
       onCheck={() =>
@@ -1089,7 +1089,7 @@ function AudioPad({ path }: { path: string }) {
         />
       </View>
       <Text style={[styles.audioPadHint, problem && styles.audioProblem]}>
-        {problem ? AUDIO_PROBLEM[problem] : playing ? 'Sonando…' : 'Tocá para escuchar'}
+        {problem ? AUDIO_PROBLEM[problem] : playing ? 'Playing…' : 'Tap to listen'}
       </Text>
     </Pressable>
   );
@@ -1120,7 +1120,7 @@ function TrueFalse({
 
   return (
     <ExerciseFrame
-      prompt={item.isRetry ? '🔁 ¿Significa esto?' : '¿Significa esto?'}
+      prompt={item.isRetry ? '🔁 Does it mean this?' : 'Does it mean this?'}
       verdict={verdict}
       canCheck={picked !== null}
       onCheck={() =>
@@ -1140,7 +1140,7 @@ function TrueFalse({
       <View style={styles.ratingRow}>
         {[
           { label: 'No', value: false, icon: 'close' as const, tone: colors.danger },
-          { label: 'Sí', value: true, icon: 'checkmark' as const, tone: colors.success },
+          { label: 'Yes', value: true, icon: 'checkmark' as const, tone: colors.success },
         ].map((opt) => (
           <Pressable
             key={opt.label}
@@ -1353,7 +1353,7 @@ function TileBuilder({
         ) : null}
         <View style={styles.answerTiles}>
           {used.length === 0 && !ruled ? (
-            <Text style={styles.answerPlaceholder}>tocá las fichas…</Text>
+            <Text style={styles.answerPlaceholder}>tap the tiles…</Text>
           ) : null}
           {used.map((tileIndex, position) => {
             const key = `a${position}`;
@@ -1435,9 +1435,9 @@ function WordBuild({
   const joined = used.map((i) => tiles[i]).join(phrase ? ' ' : '');
   const prompt = phrase
     ? toSpanish
-      ? 'Traducí esta frase'
-      : '¿Qué significa esta frase?'
-    : 'Armá la palabra en argentino';
+      ? 'Translate this phrase'
+      : 'What does this phrase mean?'
+    : 'Build the word in Spanish';
 
   return (
     <ExerciseFrame
@@ -1494,7 +1494,7 @@ function ListenBuild({
 
   return (
     <ExerciseFrame
-      prompt="¿Qué dice el audio?"
+      prompt="What does the audio say?"
       verdict={verdict}
       canCheck={used.length > 0}
       onCheck={() =>
@@ -1534,7 +1534,7 @@ function Typing({
 
   return (
     <ExerciseFrame
-      prompt="Escribí cómo se dice en argentino"
+      prompt="Type it in Argentine Spanish"
       verdict={verdict}
       canCheck={!!input.trim()}
       onCheck={check}
@@ -1546,7 +1546,7 @@ function Typing({
         autoCapitalize="none"
         autoCorrect={false}
         autoFocus
-        placeholder="tu respuesta…"
+        placeholder="your answer…"
         placeholderTextColor={colors.faint}
         editable={verdict === null}
         onSubmitEditing={check}
@@ -1620,9 +1620,9 @@ function Matching({
 
   return (
     <ExerciseFrame
-      prompt="Uní cada palabra con su significado"
+      prompt="Match each word to its meaning"
       verdict={verdict}
-      note={`${matched.size} de ${group.length} unidos`}
+      note={`${matched.size} of ${group.length} matched`}
       onContinue={() => onAnswered([...missed])}>
       <View style={styles.matchGrid}>
         <View style={styles.matchColumn}>
@@ -1792,10 +1792,10 @@ function SentenceIntro({
   const [verdict, setVerdict] = useState<Verdict>(null);
 
   const prompt = word
-    ? '✨ Palabra nueva: ¿qué dice la frase?'
+    ? '✨ New word: what does the sentence say?'
     : item.isRetry
-      ? '🔁 ¿Qué dice la frase?'
-      : '¿Qué dice la frase?';
+      ? '🔁 What does the sentence say?'
+      : 'What does the sentence say?';
 
   return (
     <ExerciseFrame
@@ -1825,7 +1825,7 @@ function SentenceIntro({
           </View>
         </Panel>
       ) : (
-        <Text style={styles.peekHint}>Tocá la palabra marcada para ver qué significa</Text>
+        <Text style={styles.peekHint}>Tap the marked word to see what it means</Text>
       )}
 
       <Choices
@@ -1864,7 +1864,7 @@ function SentenceGap({
 
   return (
     <ExerciseFrame
-      prompt={item.isRetry ? '🔁 Completá la frase' : 'Completá la frase'}
+      prompt={item.isRetry ? '🔁 Complete the sentence' : 'Complete the sentence'}
       verdict={verdict}
       canCheck={!!chosen}
       onCheck={() =>
@@ -1918,7 +1918,7 @@ function SentenceBuild({
 
   return (
     <ExerciseFrame
-      prompt={byEar ? '¿Qué dice el audio?' : 'Traducí esta frase'}
+      prompt={byEar ? 'What does the audio say?' : 'Translate this sentence'}
       verdict={verdict}
       canCheck={used.length > 0}
       onCheck={() =>

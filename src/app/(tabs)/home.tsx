@@ -32,7 +32,7 @@ import { useStatusBarColor } from '@/lib/status-bar-color';
 import { streakStatus, type StreakStatus } from '@/lib/streak';
 import { supabase } from '@/lib/supabase';
 import { colors, frost, path, radius, shadow } from '@/lib/theme';
-import type { Streak } from '@/lib/types';
+import type { Section, Streak } from '@/lib/types';
 
 interface HomeData {
   course: Course;
@@ -85,8 +85,13 @@ const PATH_TOP = 24;
 const BANNER_H = 76;
 const BANNER_GAP = 26;
 const BANNER_PITCH = BANNER_H + BANNER_GAP;
-/** Where step `i` sits, given how many unit banners stand above it. */
-const stepY = (i: number, bannersAbove: number) => PATH_TOP + bannersAbove * BANNER_PITCH + i * STEP_PITCH;
+/** So is the header that opens a section. */
+const SECTION_H = 48;
+const SECTION_GAP = 22;
+const SECTION_PITCH = SECTION_H + SECTION_GAP;
+/** Where step `i` sits, given the banners and section headers standing above it. */
+const stepY = (i: number, bannersAbove: number, sectionsAbove: number) =>
+  PATH_TOP + bannersAbove * BANNER_PITCH + sectionsAbove * SECTION_PITCH + i * STEP_PITCH;
 
 const EASE_OUT = Easing.bezier(0.23, 1, 0.32, 1);
 const EASE_IN_OUT = Easing.bezier(0.77, 0, 0.175, 1);
@@ -365,7 +370,7 @@ function PathStep({
           <Pressable
             onPress={onPress}
             accessibilityRole="button"
-            accessibilityLabel={`Empezar: ${label}`}
+            accessibilityLabel={`Start: ${label}`}
             hitSlop={8}
             style={styles.nodeBox}>
             {({ pressed }) => coin(pressed)}
@@ -374,11 +379,39 @@ function PathStep({
           <View
             style={styles.nodeBox}
             accessible
-            accessibilityLabel={`${label}: ${phase === 2 ? 'completada' : 'bloqueada'}`}>
+            accessibilityLabel={`${label}: ${phase === 2 ? 'done' : 'locked'}`}>
             {coin(false)}
           </View>
         )}
       </View>
+    </View>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// SectionHeader — the road is banded into sections, so the learner can see
+// where one stretch of the course ends and the next begins. It says less than
+// a unit banner on purpose: the unit is what she is walking through now, the
+// section is only where she is on the map.
+// ---------------------------------------------------------------------------
+function SectionHeader({ section }: { section: Section }) {
+  return (
+    <View
+      style={styles.sectionHeader}
+      accessible
+      accessibilityRole="header"
+      accessibilityLabel={`Section ${section.ordinal}: ${section.title_en}, level ${section.cefr}`}>
+      <View style={styles.sectionRule} />
+      <View style={styles.sectionLabel}>
+        <Text style={styles.sectionEyebrow}>SECTION {section.ordinal}</Text>
+        <Text style={styles.sectionName} numberOfLines={1}>
+          {section.title_en}
+        </Text>
+      </View>
+      <View style={styles.cefrChip}>
+        <Text style={styles.cefrText}>{section.cefr}</Text>
+      </View>
+      <View style={styles.sectionRule} />
     </View>
   );
 }
@@ -400,9 +433,9 @@ function UnitBanner({ lesson, state }: { lesson: PathLesson; state: UnitState })
       style={[styles.banner, current && styles.bannerCurrent, state === 'locked' && styles.bannerLocked]}
       accessible
       accessibilityRole="header"
-      accessibilityLabel={`Unidad ${unit.ordinal}: ${unit.title_en}. ${unit.summary_en}`}>
+      accessibilityLabel={`Unit ${unit.ordinal}: ${unit.title_en}. ${unit.summary_en}`}>
       <View style={styles.bannerText}>
-        <Text style={[styles.bannerEyebrow, current && styles.onPrimaryMuted]}>UNIDAD {unit.ordinal}</Text>
+        <Text style={[styles.bannerEyebrow, current && styles.onPrimaryMuted]}>UNIT {unit.ordinal}</Text>
         <Text style={[styles.bannerTitle, current && styles.onPrimary]} numberOfLines={1}>
           {unit.title_en}
         </Text>
@@ -465,8 +498,8 @@ function PushPrompt({
       setPartner({
         result:
           devices > 0
-            ? 'Listo: también le llegan recordatorios a tu compañero.'
-            : 'Tu compañero todavía no activó las notificaciones en ningún dispositivo.',
+            ? 'Done — your partner gets reminders too.'
+            : "Your partner hasn't switched on notifications on any device yet.",
       });
     } catch (e) {
       setPartner({ result: e instanceof Error ? e.message : 'No se pudo activar.' });
@@ -476,22 +509,22 @@ function PushPrompt({
   if (partner) {
     return (
       <Panel style={{ gap: 10 }}>
-        <Text style={styles.sectionTitle}>Notificaciones activadas</Text>
+        <Text style={styles.sectionTitle}>Notifications are on</Text>
         {typeof partner === 'object' ? (
           <>
             <Text style={styles.mutedText}>{partner.result}</Text>
-            <Button title="Cerrar" variant="ghost" onPress={() => setPartner(null)} />
+            <Button title="Close" variant="ghost" onPress={() => setPartner(null)} />
           </>
         ) : (
           <>
-            <Text style={styles.mutedText}>¿Le activamos los recordatorios también a tu compañero?</Text>
+            <Text style={styles.mutedText}>Switch reminders on for your partner too?</Text>
             <Button
-              title="Activar los suyos"
+              title="Switch theirs on"
               variant="secondary"
               onPress={sharePartner}
               loading={partner === 'sharing'}
             />
-            <Button title="Ahora no" variant="ghost" onPress={() => setPartner(null)} />
+            <Button title="Not now" variant="ghost" onPress={() => setPartner(null)} />
           </>
         )}
       </Panel>
@@ -502,27 +535,27 @@ function PushPrompt({
 
   return (
     <Panel style={{ gap: 10 }}>
-      <Text style={styles.sectionTitle}>Notificaciones</Text>
+      <Text style={styles.sectionTitle}>Notifications</Text>
       {status === 'needs_install' ? (
         <Text style={styles.mutedText}>
-          Para recibir recordatorios en iPhone, primero agregá la app a tu pantalla de inicio: en
-          Safari tocá <Text style={{ fontWeight: '700' }}>Compartir</Text> →{' '}
-          <Text style={{ fontWeight: '700' }}>Agregar a inicio</Text>, y abrila desde ahí.
+          To get reminders on an iPhone, add the app to your home screen first: in Safari tap{' '}
+          <Text style={{ fontWeight: '700' }}>Share</Text> →{' '}
+          <Text style={{ fontWeight: '700' }}>Add to Home Screen</Text>, then open it from there.
         </Text>
       ) : status === 'denied' ? (
         <Text style={styles.mutedText}>
           {Platform.OS === 'web'
-            ? 'Las notificaciones están bloqueadas. Activalas en la configuración del navegador.'
-            : 'Las notificaciones están bloqueadas. Activalas en Ajustes → Che → Notificaciones.'}
+            ? 'Notifications are blocked. Switch them on in your browser settings.'
+            : 'Notifications are blocked. Switch them on in Settings → Che → Notifications.'}
         </Text>
       ) : (
         <>
           <Text style={styles.mutedText}>
-            Un recordatorio cada media hora desde las 8, hasta que termines la lección del día.
+            A reminder every half hour from 8am, until you finish the day's lesson.
           </Text>
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
           <Button
-            title={error ? 'Reintentar' : 'Activar notificaciones'}
+            title={error ? 'Try again' : 'Turn on notifications'}
             variant="secondary"
             onPress={enable}
             loading={busy}
@@ -595,7 +628,7 @@ function WeekStripSkeleton({ reduced }: { reduced: boolean }) {
 // ice the chip wears when the run itself is frozen — and days still ahead
 // stay quiet.
 // ---------------------------------------------------------------------------
-const DAY_NAMES = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 /** The circle's diameter. Small enough that seven of them fit a narrow phone. */
 const DAY_SIZE = 30;
@@ -614,7 +647,7 @@ function WeekStrip({
   reduced: boolean;
 }) {
   return (
-    <View style={styles.week} accessibilityRole="summary" accessibilityLabel="Racha de la semana">
+    <View style={styles.week} accessibilityRole="summary" accessibilityLabel="This week's streak">
       {week.map((date, i) => (
         <DayCell
           key={date}
@@ -737,7 +770,7 @@ function HomeHeader({
           accessible={false}
         />
         <Text style={styles.hello} numberOfLines={1}>
-          {name ? `Hola, ${name}!` : 'Hola!'}
+          {name ? `Hi, ${name}!` : 'Hi!'}
         </Text>
         {/* A ghost until the count is real — "0 días" flashing into "1 día" is
             worse than a chip that arrives a moment late. A frozen run turns
@@ -752,7 +785,7 @@ function HomeHeader({
               <Text style={styles.chipTextFrozen} numberOfLines={1}>
                 <Text style={styles.chipLost}>{status.lost}</Text>
                 {'  '}
-                {status.kind === 'recovering' ? status.days : 0} días de racha
+                {status.kind === 'recovering' ? status.days : 0} day streak
               </Text>
             </View>
           ) : (
@@ -760,7 +793,7 @@ function HomeHeader({
               <Text style={styles.chipFlame}>🔥</Text>
               <Text style={styles.chipText} numberOfLines={1}>
                 {status.kind === 'alive' ? status.days : 0}{' '}
-                {status.kind === 'alive' && status.days === 1 ? 'día' : 'días'} de racha
+                {status.kind === 'alive' && status.days === 1 ? 'day' : 'days'} streak
               </Text>
             </View>
           )
@@ -772,7 +805,7 @@ function HomeHeader({
           <Pressable
             onPress={onLogout}
             accessibilityRole="button"
-            accessibilityLabel="Cerrar sesión"
+            accessibilityLabel="Sign out"
             hitSlop={8}
             style={({ pressed }) => [
               styles.logout,
@@ -887,12 +920,14 @@ export default function Home() {
   }, []);
 
   const scrollRef = useRef<ScrollView>(null);
-  /** Which unit each step is in — what `yOf` needs to count the banners above it. */
+  /** Which unit and section each step is in — what `yOf` counts above it. */
   const unitIndexOf = useRef<number[]>([]);
+  const sectionIndexOf = useRef<number[]>([]);
   const yOf = useCallback((i: number) => {
     const units = unitIndexOf.current;
-    if (units.length === 0) return stepY(i, 0);
-    return stepY(i, (units[Math.min(i, units.length - 1)] ?? 0) + 1);
+    if (units.length === 0) return stepY(i, 0, 0);
+    const at = Math.min(i, units.length - 1);
+    return stepY(i, (units[at] ?? 0) + 1, (sectionIndexOf.current[at] ?? 0) + 1);
   }, []);
   /** Where the path starts inside the scroll content, and how tall the window is. */
   const pathTop = useRef(0);
@@ -935,6 +970,7 @@ export default function Home() {
     ]);
 
     unitIndexOf.current = course.path.map((l) => l.unitIndex);
+    sectionIndexOf.current = course.path.map((l) => l.sectionIndex);
     setData({
       course,
       current: currentIndex(course.path, done),
@@ -1227,7 +1263,7 @@ export default function Home() {
           </View>
         ) : noCourse ? (
           <Panel key="empty">
-            <Text style={styles.mutedText}>Todavía no hay lecciones publicadas.</Text>
+            <Text style={styles.mutedText}>No lessons published yet.</Text>
           </Panel>
         ) : (
           // Keyed so React can never recycle the loading view's DOM node into
@@ -1245,6 +1281,7 @@ export default function Home() {
             }}>
             {path.map((lesson) => (
               <Fragment key={`${epoch}:${lesson.id}`}>
+                {lesson.opensSection ? <SectionHeader section={lesson.section} /> : null}
                 {lesson.opensUnit ? <UnitBanner lesson={lesson} state={unitStateOf(lesson)} /> : null}
                 <PathStep
                   index={lesson.index}
@@ -1280,7 +1317,7 @@ function PracticeButton({ due, onPress }: { due: number; onPress: () => void }) 
       <Pressable
         onPress={onPress}
         accessibilityRole="button"
-        accessibilityLabel={due > 0 ? `Practicar: ${due} para repasar` : 'Practicar'}
+        accessibilityLabel={due > 0 ? `Practice: ${due} to review` : 'Practice'}
         hitSlop={8}
         style={({ pressed }) => [
           styles.practice,
@@ -1288,7 +1325,7 @@ function PracticeButton({ due, onPress }: { due: number; onPress: () => void }) 
           webTransition,
         ]}>
         <MaterialCommunityIcons name="dumbbell" size={20} color={colors.primary} />
-        <Text style={styles.practiceText}>Practicar</Text>
+        <Text style={styles.practiceText}>Practice</Text>
         {due > 0 ? (
           <View style={styles.practiceBadge}>
             <Text style={styles.practiceBadgeText}>{due > 99 ? '99+' : due}</Text>
@@ -1348,7 +1385,7 @@ function JumpButton({
       <Pressable
         onPress={onPress}
         accessibilityRole="button"
-        accessibilityLabel="Volver a tu lección"
+        accessibilityLabel="Back to your lesson"
         hitSlop={10}
         style={({ pressed }) => [
           styles.jump,
@@ -1485,6 +1522,33 @@ const styles = StyleSheet.create({
   errorText: { fontSize: 14, color: colors.dangerInk, lineHeight: 20 },
 
   // Unit banners -------------------------------------------------------------
+  sectionHeader: {
+    height: SECTION_H,
+    marginBottom: SECTION_GAP,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  // A hairline that runs to the label, so the band reads as a divider in the
+  // road rather than another card competing with the unit banner under it.
+  sectionRule: { flex: 1, height: 1, backgroundColor: colors.border },
+  sectionLabel: { alignItems: 'center', gap: 1, flexShrink: 1 },
+  sectionEyebrow: {
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 1.2,
+    color: colors.faint,
+  },
+  sectionName: { fontSize: 14, fontWeight: '700', color: colors.muted },
+  cefrChip: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: radius.sm,
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  cefrText: { fontSize: 11, fontWeight: '700', color: colors.muted, letterSpacing: 0.4 },
   banner: {
     height: BANNER_H,
     marginBottom: BANNER_GAP,

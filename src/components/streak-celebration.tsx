@@ -217,11 +217,9 @@ export function StreakCelebration({
   return (
     <View style={styles.wrap}>
       <View style={styles.intro}>
-        <Text style={styles.headline}>Sumaste</Text>
-        <Text style={styles.headlineAccent}>otro día.</Text>
-        <Text style={styles.subhead}>
-          Llevás más tiempo del que pensás. Ya es una costumbre.
-        </Text>
+        <Text style={styles.headline}>That's</Text>
+        <Text style={styles.headlineAccent}>another day.</Text>
+        <Text style={styles.subhead}>You've kept this up longer than you think. It's a habit now.</Text>
       </View>
 
       <Animated.View

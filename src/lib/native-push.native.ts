@@ -32,7 +32,7 @@ async function token(): Promise<string> {
     });
   }
   const projectId: string | undefined = Constants.expoConfig?.extra?.eas?.projectId;
-  if (!projectId) throw new Error('Falta extra.eas.projectId en app.json');
+  if (!projectId) throw new Error('extra.eas.projectId is missing from app.json');
   return (await Notifications.getExpoPushTokenAsync({ projectId })).data;
 }
 

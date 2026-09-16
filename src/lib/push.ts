@@ -85,7 +85,7 @@ async function vapidPublicKey(): Promise<string> {
   const { data, error } = await supabase.functions.invoke<{ publicKey: string }>('vapid-public', {
     method: 'GET',
   });
-  if (error || !data?.publicKey) throw new Error('No se pudo obtener la clave de notificaciones.');
+  if (error || !data?.publicKey) throw new Error("Couldn't fetch the notification key.");
   return data.publicKey;
 }
 

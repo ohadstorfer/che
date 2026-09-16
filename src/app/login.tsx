@@ -19,7 +19,7 @@ import { colors, type } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
 // Login — email and password, the accounts Che already has. One form for both
-// ways in: "Entrar" is the default, and creating an account is the same two
+// ways in: signing in is the default, and creating an account is the same two
 // fields with the other button, so nobody has to find a second screen.
 // ---------------------------------------------------------------------------
 
@@ -27,11 +27,11 @@ type Mode = 'signin' | 'signup';
 
 /** Supabase's messages are English and technical; these are the ones people hit. */
 function explain(message: string): string {
-  if (/invalid login credentials/i.test(message)) return 'Email o contraseña incorrectos.';
-  if (/already registered|already exists/i.test(message)) return 'Ya hay una cuenta con ese email. Probá entrar.';
-  if (/email not confirmed/i.test(message)) return 'Confirmá tu email desde el mensaje que te mandamos y volvé.';
-  if (/password should be at least/i.test(message)) return 'La contraseña tiene que tener al menos 6 caracteres.';
-  if (/network|fetch/i.test(message)) return 'Sin conexión. Probá de nuevo.';
+  if (/invalid login credentials/i.test(message)) return 'Wrong email or password.';
+  if (/already registered|already exists/i.test(message)) return 'That email already has an account. Try signing in.';
+  if (/email not confirmed/i.test(message)) return 'Confirm your email from the message we sent, then come back.';
+  if (/password should be at least/i.test(message)) return 'The password needs at least 6 characters.';
+  if (/network|fetch/i.test(message)) return 'No connection. Try again.';
   return message;
 }
 
@@ -60,7 +60,7 @@ export default function Login() {
     setBusy(false);
     if (err) return setError(explain(err.message));
     // A project that confirms emails creates the account without a session.
-    if (!data.session) return setNotice('Te mandamos un email para confirmar la cuenta. Después, entrá.');
+    if (!data.session) return setNotice('We sent you an email to confirm the account. Then sign in.');
     router.replace('/home');
   };
 
@@ -71,7 +71,7 @@ export default function Login() {
           <View style={styles.hero}>
             <MoraFace size={116} />
             <Text style={styles.title}>Che</Text>
-            <Text style={styles.subtitle}>Un poquito de argentino cada día</Text>
+            <Text style={styles.subtitle}>A little Argentine Spanish every day</Text>
           </View>
 
           <View style={styles.form}>
@@ -92,7 +92,7 @@ export default function Login() {
             />
             <Field
               ref={passwordRef}
-              label="Contraseña"
+              label="Password"
               value={password}
               onChangeText={(t) => {
                 setPassword(t);
@@ -109,7 +109,7 @@ export default function Login() {
             {error ? <Text style={styles.error}>{error}</Text> : null}
             {notice ? <Text style={styles.notice}>{notice}</Text> : null}
             <Button
-              title={mode === 'signin' ? 'Entrar' : 'Crear cuenta'}
+              title={mode === 'signin' ? 'Sign in' : 'Create account'}
               onPress={submit}
               loading={busy}
               disabled={!valid}
@@ -123,8 +123,8 @@ export default function Login() {
               hitSlop={8}
               style={styles.switch}>
               <Text style={styles.switchText}>
-                {mode === 'signin' ? '¿No tenés cuenta? ' : '¿Ya tenés cuenta? '}
-                <Text style={styles.switchLink}>{mode === 'signin' ? 'Creala' : 'Entrá'}</Text>
+                {mode === 'signin' ? "Don't have an account? " : 'Already have an account? '}
+                <Text style={styles.switchLink}>{mode === 'signin' ? 'Create one' : 'Sign in'}</Text>
               </Text>
             </Pressable>
           </View>

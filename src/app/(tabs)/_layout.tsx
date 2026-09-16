@@ -30,7 +30,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Inicio',
+          title: 'Home',
           // Outline while resting, filled once selected — the weight change is
           // what separates the active tab, not just a hue swap.
           tabBarIcon: ({ focused, color, size }) => (
@@ -41,7 +41,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="words"
         options={{
-          title: 'Palabras',
+          title: 'Words',
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'albums' : 'albums-outline'} color={color} size={size} />
           ),

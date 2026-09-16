@@ -24,7 +24,7 @@ import { colors, radius, shadow } from '@/lib/theme';
 import type { Form, FormState } from '@/lib/types';
 
 // ---------------------------------------------------------------------------
-// Palabras — everything she has met so far, and nothing she hasn't.
+// Words — everything she has met so far, and nothing she hasn't.
 //
 // The course decides what exists; this screen is the other side of it: the
 // words the path has actually given her, with how settled each one is, and the
@@ -48,9 +48,9 @@ interface SentenceRow {
 
 /** How settled a word is, in three steps a glance can read. */
 function strength(state: FormState): { label: string; tone: 'new' | 'growing' | 'strong' } {
-  if (state.interval_days >= 21) return { label: 'firme', tone: 'strong' };
-  if (state.interval_days >= 4) return { label: 'creciendo', tone: 'growing' };
-  return { label: 'nueva', tone: 'new' };
+  if (state.interval_days >= 21) return { label: 'solid', tone: 'strong' };
+  if (state.interval_days >= 4) return { label: 'growing', tone: 'growing' };
+  return { label: 'new', tone: 'new' };
 }
 
 export default function Words() {
@@ -125,7 +125,7 @@ export default function Words() {
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.container}>
         <View style={styles.titleRow}>
-          <ScreenTitle>Palabras</ScreenTitle>
+          <ScreenTitle>Words</ScreenTitle>
           {words ? <Text style={styles.count}>{words.length}</Text> : null}
         </View>
 
@@ -140,7 +140,7 @@ export default function Words() {
                 { transform: [{ scale: pressed ? 0.98 : 1 }] },
               ]}>
               <Text style={[styles.segmentText, tab === t && styles.segmentTextActive]}>
-                {t === 'words' ? 'Palabras' : 'Frases'}
+                {t === 'words' ? 'Words' : 'Sentences'}
               </Text>
             </Pressable>
           ))}
@@ -149,7 +149,7 @@ export default function Words() {
         <TextInput
           value={search}
           onChangeText={setSearch}
-          placeholder="Buscar…"
+          placeholder="Search…"
           placeholderTextColor={colors.faint}
           style={styles.search}
         />
@@ -165,8 +165,8 @@ export default function Words() {
               ListEmptyComponent={
                 <Text style={styles.empty}>
                   {words.length === 0
-                    ? 'Todavía no aprendiste ninguna palabra. Empezá la primera lección del camino.'
-                    : 'Sin resultados.'}
+                    ? "You haven't learned any words yet. Start the first lesson on the path."
+                    : 'Nothing matches.'}
                 </Text>
               }
               renderItem={({ item: { form, state } }) => {
@@ -206,7 +206,9 @@ export default function Words() {
             contentContainerStyle={{ gap: 10, paddingBottom: 24 }}
             ListEmptyComponent={
               <Text style={styles.empty}>
-                {sentences.length === 0 ? 'Las frases que veas en las lecciones aparecen acá.' : 'Sin resultados.'}
+                {sentences.length === 0
+                  ? 'Sentences you meet in lessons show up here.'
+                  : 'Nothing matches.'}
               </Text>
             }
             renderItem={({ item }) => (

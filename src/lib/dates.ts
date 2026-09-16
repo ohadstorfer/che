@@ -30,4 +30,4 @@ export function weekDates(d = new Date()): string[] {
 }
 
 /** Initials of the Spanish weekdays, Monday first — the strip's labels. */
-export const WEEKDAY_INITIALS = ['L', 'M', 'M', 'J', 'V', 'S', 'D'] as const;
+export const WEEKDAY_INITIALS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'] as const;

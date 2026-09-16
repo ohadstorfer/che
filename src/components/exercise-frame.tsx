@@ -33,7 +33,7 @@ export function ExerciseFrame({
   onCheck,
   onContinue,
   note,
-  checkLabel = 'Comprobar',
+  checkLabel = 'Check',
 }: {
   prompt: string;
   children: React.ReactNode;
@@ -79,7 +79,7 @@ export function ExerciseFrame({
 
 // ---------------------------------------------------------------------------
 // FeedbackBar — slides up from the bottom edge it will be dismissed towards,
-// so the motion and the "Continuar" tap point at the same place. It waits for
+// so the motion and the "Continue" tap point at the same place. It waits for
 // its own height before moving, which is why it starts invisible.
 // ---------------------------------------------------------------------------
 function FeedbackBar({
@@ -136,20 +136,20 @@ function FeedbackBar({
           <Ionicons name={good ? 'checkmark' : 'close'} size={18} color={colors.onPrimary} />
         </View>
         <Text style={[styles.feedbackTitle, { color: tint }]}>
-          {good ? 'Correcto!' : 'Casi!'}
+          {good ? 'Correct!' : 'Almost!'}
         </Text>
       </View>
 
       {good && verdict.also ? (
         <View style={{ gap: 2 }}>
-          <Text style={[styles.feedbackLabel, { color: tint }]}>También se dice:</Text>
+          <Text style={[styles.feedbackLabel, { color: tint }]}>Also correct:</Text>
           <Text style={[styles.feedbackAnswer, { color: tint }]}>{verdict.also}</Text>
         </View>
       ) : null}
 
       {!good && verdict.answer ? (
         <View style={{ gap: 2 }}>
-          <Text style={[styles.feedbackLabel, { color: tint }]}>Respuesta correcta:</Text>
+          <Text style={[styles.feedbackLabel, { color: tint }]}>Correct answer:</Text>
           <Text style={[styles.feedbackAnswer, { color: tint }]}>{verdict.answer}</Text>
         </View>
       ) : null}
@@ -168,7 +168,7 @@ function FeedbackBar({
               } as object)
             : null,
         ]}>
-        <Text style={styles.feedbackButtonText}>{good ? 'Continuar' : 'Entendido'}</Text>
+        <Text style={styles.feedbackButtonText}>{good ? 'Continue' : 'Got it'}</Text>
       </Pressable>
     </Animated.View>
   );

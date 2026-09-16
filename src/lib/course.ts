@@ -13,12 +13,17 @@ import type { Lesson, Section, Tip, Unit } from './types';
 
 export interface PathLesson extends Lesson {
   unit: Unit;
+  section: Section;
   /** Position on the whole road, 0-based. */
   index: number;
   /** Which unit of the road this lesson is in, 0-based — the banner count above it. */
   unitIndex: number;
+  /** How many section headers stand above it, its own included. */
+  sectionIndex: number;
   /** First lesson of its unit: the unit's banner is drawn just above it. */
   opensUnit: boolean;
+  /** First lesson of its section: the section's header is drawn above that. */
+  opensSection: boolean;
 }
 
 export interface Course {
@@ -58,16 +63,30 @@ export function assemble(sections: Section[], units: Unit[], lessons: Lesson[], 
     lessonsByUnit.get(l.unit_id)!.push(l);
   }
 
+  const sectionById = new Map(sections.map((s) => [s.id, s]));
   const path: PathLesson[] = [];
   const visibleUnits: Unit[] = [];
+  const visibleSections: Section[] = [];
   for (const unit of orderedUnits) {
     const own = (lessonsByUnit.get(unit.id) ?? []).sort((a, b) => a.ordinal - b.ordinal);
     // A unit with no published lessons has nothing to walk; leave it off the road.
     if (own.length === 0) continue;
+    const section = sectionById.get(unit.section_id)!;
+    const opensSection = visibleSections.at(-1)?.id !== section.id;
+    if (opensSection) visibleSections.push(section);
     const unitIndex = visibleUnits.length;
     visibleUnits.push(unit);
     own.forEach((lesson, k) =>
-      path.push({ ...lesson, unit, index: path.length, unitIndex, opensUnit: k === 0 }),
+      path.push({
+        ...lesson,
+        unit,
+        section,
+        index: path.length,
+        unitIndex,
+        sectionIndex: visibleSections.length - 1,
+        opensUnit: k === 0,
+        opensSection: opensSection && k === 0,
+      }),
     );
   }
 
