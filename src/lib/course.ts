@@ -99,10 +99,29 @@ export function assemble(sections: Section[], units: Unit[], lessons: Lesson[], 
   return { sections, units: visibleUnits, path, tipsByUnit };
 }
 
-/** Lesson ids she has finished. */
+/** Lesson ids she has finished — for a unit check, passed (learning-engine-spec
+ *  §3): a check finished below the pass score keeps the path waiting on it. */
 export async function loadProgress(userId: string): Promise<Set<string>> {
-  const { data } = await supabase.from('lesson_progress').select('lesson_id').eq('user_id', userId);
-  return new Set((data ?? []).map((r: { lesson_id: string }) => r.lesson_id));
+  const { data } = await supabase.from('lesson_progress').select('lesson_id, passed').eq('user_id', userId);
+  return new Set(
+    ((data ?? []) as { lesson_id: string; passed?: boolean | null }[])
+      .filter((r) => r.passed !== false)
+      .map((r) => r.lesson_id),
+  );
+}
+
+/** Attempts at lessons she has tried but not passed — the unit checks still
+ *  waiting on her, by lesson id. */
+export async function loadCheckAttempts(userId: string): Promise<Map<string, number>> {
+  const { data } = await supabase
+    .from('lesson_progress')
+    .select('lesson_id, passed, attempts')
+    .eq('user_id', userId);
+  return new Map(
+    ((data ?? []) as { lesson_id: string; passed?: boolean | null; attempts?: number }[])
+      .filter((r) => r.passed === false)
+      .map((r) => [r.lesson_id, r.attempts ?? 1]),
+  );
 }
 
 /** Where she stands: the first lesson on the road she hasn't finished.

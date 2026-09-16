@@ -1,4 +1,13 @@
-import { glueSeen, pickIntroSentence, pickReviewSentences, rungFor } from './sentences';
+import {
+  DEFAULT_LADDER,
+  type Ladder,
+  atLeast,
+  glueSeen,
+  hasLockedGlue,
+  pickIntroSentence,
+  pickReviewSentences,
+  rungFor,
+} from './sentences';
 import {
   type LearnerData,
   type SessionData,
@@ -103,6 +112,7 @@ export function resolveSlots(
   now = new Date(),
 ): SessionData {
   const nowIso = now.toISOString();
+  const ladder = data.ladder ?? DEFAULT_LADDER;
   const tipById = new Map(tips.map((t) => [t.id, t]));
   const sentenceById = new Map(data.sentences.map((s) => [s.id, s]));
   const unitOf = (s: Sentence) => data.formById.get(s.target_form_id)?.unit_order ?? Infinity;
@@ -153,7 +163,7 @@ export function resolveSlots(
         const state = data.stateByForm.get(form.id) ?? null;
         if (state || introduced.has(form.id)) {
           // Met before (a replay, or taught twice): straight to a question.
-          const first = itemsForForm(form, state, deck)[0];
+          const first = itemsForForm(form, state, deck, ladder)[0];
           if (first) items.push(first);
           break;
         }
@@ -164,7 +174,7 @@ export function resolveSlots(
         const unitSentences = inReach.filter((s) => s.unit_id === unit.id && !readHere.has(s.id));
         const intro = pickIntroSentence(form, unitSentences, known());
         if (intro) items.push(sentenceItem(data, intro, 'sentence_intro', form, form));
-        const first = itemsForForm(form, null, deck)[0];
+        const first = itemsForForm(form, null, deck, ladder)[0];
         if (first) items.push(first);
         introduced.add(form.id);
         break;
@@ -175,7 +185,7 @@ export function resolveSlots(
         const target = sentence ? data.formById.get(sentence.target_form_id) : undefined;
         if (!sentence || !target) break;
         let mode: ExerciseMode =
-          slot.mode && SENTENCE_MODES.includes(slot.mode) ? slot.mode : modeForRung(rungFor(sentence, seen), sentence);
+          slot.mode && SENTENCE_MODES.includes(slot.mode) ? slot.mode : modeForRung(rungFor(sentence, seen, ladder), sentence);
         // A pinned listening screen with no recording yet falls back to the
         // same build by sight rather than to a silent exercise.
         if (mode === 'sentence_listen' && !sentence.audio_path) mode = 'sentence_build';
@@ -216,7 +226,28 @@ export function resolveSlots(
           );
           break;
         }
-        items.push(...reviewItems(data, unit, count, deck, seen, nowIso));
+        items.push(...reviewItems(data, unit, count, deck, seen, nowIso, ladder));
+        break;
+      }
+
+      case 'recap': {
+        const count = slot.review_count ?? 0;
+        if (count <= 0) break;
+        const scope = slot.scope ?? 'unit';
+        if (canonical) {
+          items.push(
+            tipItem({
+              id: `recap-${slot.id}`,
+              unit_id: unit.id,
+              title_en: `Recap × ${count}`,
+              body_md:
+                `The weakest words of this ${scope} for this learner, at least half of them to produce — ` +
+                'different for everyone, so not part of what gets reviewed.',
+            }),
+          );
+          break;
+        }
+        items.push(...recapItems(data, unit, scope, count, deck, seen, nowIso, ladder));
         break;
       }
     }
@@ -234,7 +265,7 @@ export function resolveSlots(
     }
   }
 
-  return { items, allForms: deck, sentences: inReach, scheduledFormIds: [...scheduled] };
+  return { items, allForms: deck, sentences: inReach, scheduledFormIds: [...scheduled], ladder };
 }
 
 /**
@@ -250,6 +281,7 @@ function reviewItems(
   deck: Form[],
   seen: Map<string, number>,
   nowIso: string,
+  ladder: Ladder = DEFAULT_LADDER,
 ): SessionItem[] {
   const earlier: { state: FormState; form: Form }[] = [];
   for (const state of data.states) {
@@ -268,14 +300,14 @@ function reviewItems(
 
   const out: SessionItem[] = [];
   const covered = new Set<string>();
-  for (const sentence of pickReviewSentences(dueIds, earlierSentences, knownIds, count, seen, count, { pad: false })) {
+  for (const sentence of pickReviewSentences(dueIds, earlierSentences, knownIds, count, seen, count, { pad: false, ladder })) {
     const target =
       (dueIds.has(sentence.target_form_id) ? data.formById.get(sentence.target_form_id) : undefined) ??
       sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && dueIds.has(f.id));
     if (!target) continue;
     // Same rule as the practice round: the gap tests its word, tiles test every
     // word, and reading for meaning tests nothing hard enough to count.
-    const mode = modeForRung(rungFor(sentence, seen), sentence);
+    const mode = modeForRung(rungFor(sentence, seen, ladder), sentence);
     if (mode === 'sentence_gap') covered.add(target.id);
     else if (mode !== 'sentence_meaning') for (const id of sentence.form_ids) covered.add(id);
     out.push({ ...sentenceItem(data, sentence, mode, target), review: true });
@@ -286,17 +318,113 @@ function reviewItems(
   for (const { form, state } of due) {
     if (out.length >= count) break;
     if (covered.has(form.id)) continue;
-    const angles = itemsForForm(form, state, deck);
-    const production = angles.find((i) => ['word_build', 'typing', 'listen_build'].includes(i.mode)) ?? angles[0];
+    const angles = itemsForForm(form, state, deck, ladder);
+    const production = angles.find((i) => PRODUCTION.includes(i.mode)) ?? angles[0];
     if (production) out.push({ ...production, review: true });
   }
 
   for (const { form, state } of earlier) {
     if (out.length >= count) break;
     if (dueIds.has(form.id)) continue;
-    const first = itemsForForm(form, state, deck)[0];
+    const first = itemsForForm(form, state, deck, ladder)[0];
     if (first) out.push({ ...first, review: true, filler: true });
   }
 
   return out.slice(0, count);
+}
+
+const PRODUCTION: ExerciseMode[] = ['word_build', 'typing', 'listen_build', 'sentence_build', 'sentence_listen'];
+
+/**
+ * A recap slot — the body of a unit check (learning-engine-spec §3.2): `count`
+ * screens over the weakest forms of the unit (or of its whole section) that she
+ * has met. Weakest is most lapses, then lowest ease, then shortest interval.
+ * Each form is asked once; a sentence carries forms where one can, at no lower
+ * rung than the gap — a check doesn't ask for meaning only — and at least half
+ * the screens make her produce Spanish. Due forms are scheduled as ever; the
+ * rest are filler, which a miss still lapses.
+ */
+export function recapItems(
+  data: LearnerData,
+  unit: Unit,
+  scope: 'unit' | 'section',
+  count: number,
+  deck: Form[],
+  seen: Map<string, number>,
+  nowIso: string,
+  ladder: Ladder = DEFAULT_LADDER,
+): SessionItem[] {
+  const inScope = (f: Form) =>
+    scope === 'unit'
+      ? f.unit_id === unit.id
+      : (f.section_id == null || f.section_id === unit.section_id) && f.unit_order <= unit.course_order;
+
+  const weak: { form: Form; state: FormState }[] = [];
+  for (const state of data.states) {
+    const form = data.formById.get(state.form_id);
+    if (form && drillable(form) && inScope(form)) weak.push({ form, state });
+  }
+  weak.sort(
+    (a, b) =>
+      b.state.lapses - a.state.lapses ||
+      a.state.ease_factor - b.state.ease_factor ||
+      a.state.interval_days - b.state.interval_days,
+  );
+  const chosen = weak.slice(0, count);
+  if (chosen.length === 0) return [];
+  const chosenIds = new Set(chosen.map((x) => x.form.id));
+  const isDue = (st: FormState) => !!st.due_at && st.due_at <= nowIso;
+
+  const knownIds = new Set(data.stateByForm.keys());
+  // Sentences written for the scope itself — not a later unit's sentence that
+  // happens to use only these words.
+  const unitOrderOf = new Map(data.forms.map((f) => [f.unit_id, f.unit_order]));
+  const scopeSentences = data.sentences.filter((s) => {
+    const target = data.formById.get(s.target_form_id);
+    if (!target || !inScope(target)) return false;
+    return scope === 'unit' ? s.unit_id === unit.id : (unitOrderOf.get(s.unit_id) ?? Infinity) <= unit.course_order;
+  });
+
+  const out: SessionItem[] = [];
+  const used = new Set<string>();
+  const carriers = pickReviewSentences(chosenIds, scopeSentences, knownIds, Math.ceil(count / 2), seen, count, {
+    pad: false,
+    ladder,
+  });
+  for (const sentence of carriers) {
+    const target =
+      (chosenIds.has(sentence.target_form_id) && !used.has(sentence.target_form_id)
+        ? data.formById.get(sentence.target_form_id)
+        : undefined) ??
+      sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && chosenIds.has(f.id) && !used.has(f.id));
+    if (!target) continue;
+    const mode = modeForRung(atLeast(rungFor(sentence, seen, ladder), 'gap'), sentence);
+    const tests = mode === 'sentence_gap' ? [target.id] : sentence.form_ids.filter((id) => chosenIds.has(id));
+    if (tests.some((id) => used.has(id))) continue;
+    for (const id of tests) used.add(id);
+    out.push({ ...sentenceItem(data, sentence, mode, target), review: true });
+    if (out.length >= count) break;
+  }
+
+  for (const { form, state } of chosen) {
+    if (out.length >= count) break;
+    if (used.has(form.id)) continue;
+    const angles = itemsForForm(form, state, deck, ladder);
+    const item = angles.find((i) => PRODUCTION.includes(i.mode)) ?? angles[0];
+    if (!item) continue;
+    used.add(form.id);
+    out.push({ ...item, review: true, ...(isDue(state) ? {} : { filler: true }) });
+  }
+
+  // At least half of it production: gaps without locked glue become builds.
+  const wanted = Math.ceil(out.length / 2);
+  let production = out.filter((i) => PRODUCTION.includes(i.mode)).length;
+  for (const item of out) {
+    if (production >= wanted) break;
+    if (item.mode === 'sentence_gap' && item.sentence && !hasLockedGlue(item.sentence, seen, ladder)) {
+      item.mode = 'sentence_build';
+      production += 1;
+    }
+  }
+  return out;
 }

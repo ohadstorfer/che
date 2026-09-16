@@ -15,6 +15,19 @@
 #   {match}                         a matching block of words taught so far
 #   {tip: <index>}                  the unit's tip, by position in the outline
 #   {review: <n>}                   n screens of due words from earlier units
+#   {recap: <n>, scope: unit}       the unit check: n screens over the unit's
+#                                   weakest words (scope: section for a checkpoint)
+#
+# Per unit, besides sentences and lessons:
+#   stories     lessons of dialogue lines, played before the unit check. A line
+#               is {speaker, es, en} or {speaker, sentence: <key>}, with an
+#               optional question: {type: meaning} · {type: build} ·
+#               {type: gap, form: <form>} · {type: choice, prompt_en, options_en, correct}
+#   key_phrases up to five sentence keys for the unit's guidebook
+#
+# Lesson shape (docs/learning-engine-spec.md §5): 4–6 new forms per lesson (3 in
+# a unit's first), a sentence build in each, every new form drilled three times,
+# and a last lesson that is the unit check.
 #
 # Sentence fields beyond es/en/target:
 #   es_alt   other Spanish a learner building the sentence may give. Dropped
@@ -30,15 +43,19 @@ un-cafe-por-favor:
   sentences:
     cafe_por_favor: {es: "Un café, por favor.", en: "A coffee, please.", target: por favor}
     un_mate: {es: "Un mate, por favor.", en: "A mate, please.", target: mate}
+    cafe_gracias: {es: "Un café, gracias.", en: "A coffee, thanks.", target: gracias}
     cafe_y_medialuna: {es: "Un café y una medialuna.", en: "A coffee and a croissant.", target: café}
     una_medialuna: {es: "Una medialuna, por favor.", en: "A croissant, please.", target: medialuna}
     una_factura: {es: "Una factura, por favor.", en: "A pastry, please.", target: factura}
     un_cortado: {es: "Un cortado, por favor.", en: "A cortado, please.", target: cortado}
     cortado_o_cafe: {es: "¿Un cortado o un café?", en: "A cortado or a coffee?", target: cortado}
     agua_por_favor: {es: "Agua, por favor.", en: "Water, please.", target: agua}
+    agua_gracias: {es: "Agua, gracias.", en: "Water, thanks.", target: agua}
     jugo_o_agua: {es: "¿Jugo o agua?", en: "Juice or water?", target: jugo}
+    jugo_por_favor: {es: "Un jugo, por favor.", en: "A juice, please.", target: jugo}
     mate_o_cafe: {es: "¿Mate o café?", en: "Mate or coffee?", target: mate}
     cafe_y_factura: {es: "Un café y una factura.", en: "A coffee and a pastry.", target: factura, difficulty: 2}
+  key_phrases: [cafe_por_favor, cafe_y_medialuna, agua_gracias, jugo_o_agua]
   lessons:
     1:
       - {tip: 0}
@@ -46,52 +63,59 @@ un-cafe-por-favor:
       - {teach: por favor}
       - {drill: cafe_por_favor, mode: sentence_meaning}
       - {teach: mate}
-      - {drill: un_mate, mode: sentence_build}
+      - {drill: un_mate, mode: sentence_meaning}
       - {teach: gracias}
+      - {drill: cafe_gracias, mode: sentence_meaning}
+      - {teach: cortado}
+      - {drill: un_cortado, mode: sentence_meaning}
+      - {drill: mate_o_cafe, mode: sentence_build}
+      - {drill: cortado_o_cafe, mode: sentence_build}
+      - {match}
     2:
       - {tip: 1}
       - {teach: medialuna}
       - {drill: una_medialuna, mode: sentence_meaning}
-      - {drill: cafe_y_medialuna, mode: sentence_build}
       - {teach: factura}
       - {drill: una_factura, mode: sentence_meaning}
-      - {match}
-    3:
-      - {teach: cortado}
-      - {drill: un_cortado, mode: sentence_meaning}
-      - {drill: cortado_o_cafe, mode: sentence_build}
+      - {drill: cafe_y_medialuna, mode: sentence_build}
       - {teach: agua}
       - {drill: agua_por_favor, mode: sentence_meaning}
-      - {match}
-    4:
+      - {drill: agua_gracias, mode: sentence_gap}
       - {teach: jugo}
       - {drill: jugo_o_agua, mode: sentence_meaning}
-      - {drill: mate_o_cafe, mode: sentence_build}
-      - {drill: cafe_por_favor, mode: sentence_gap}
+      - {drill: cafe_y_factura, mode: sentence_build}
+      - {drill: jugo_por_favor, mode: sentence_build}
       - {match}
-    5:
-      - {drill: cafe_y_factura, mode: sentence_meaning}
-      - {drill: una_factura, mode: sentence_build}
-      - {drill: un_cortado, mode: sentence_gap}
-      - {match}
-      - {drill: cafe_y_medialuna, mode: sentence_gap}
+    3:
+      - {recap: 6, scope: unit}
+      - {drill: cortado_o_cafe, mode: sentence_build}
       - {drill: jugo_o_agua, mode: sentence_build}
+      - {drill: una_factura, mode: sentence_build}
 
 hola-che:
   sentences:
     hola_che: {es: "Hola, che.", en: "Hi there.", en_alt: ["Hey there."], target: che}
     chau_che: {es: "Chau, che.", en: "Bye!", en_alt: ["See you."], target: chau}
     dale_chau: {es: "Dale, chau.", en: "OK, bye.", target: dale}
-    bien_gracias: {es: "Bien, gracias.", en: "Fine, thanks.", target: bien}
+    bueno_chau: {es: "Bueno, chau.", en: "Well, bye.", target: bueno}
+    bueno_dale: {es: "Bueno, dale.", en: "Well, OK.", target: bueno}
+    dale_gracias: {es: "Dale, gracias.", en: "OK, thanks.", target: dale}
     soy_sofi: {es: "Soy Sofi.", en: "I'm Sofi.", target: soy}
     hola_soy_sofi: {es: "Hola, soy Sofi.", en: "Hi, I'm Sofi.", target: hola}
     yo_soy_martin: {es: "Yo soy Martín.", en: "I am Martín.", target: yo}
+    yo_sofi: {es: "¿Yo? Soy Sofi.", en: "Me? I'm Sofi.", target: yo}
     si_soy_juan: {es: "Sí, soy Juan.", en: "Yes, I'm Juan.", target: sí}
+    si_dale: {es: "Sí, dale.", en: "Yes, OK.", target: sí}
     no_soy_lucia: {es: "No, soy Lucía.", en: "No, I'm Lucía.", target: "no"}
-    que_tal: {es: "¿Qué tal?", en: "How's it going?", target: qué tal}
-    todo_bien: {es: "¿Todo bien?", en: "All good?", target: todo bien}
+    no_gracias: {es: "No, gracias.", en: "No, thanks.", target: "no"}
+    bien_gracias: {es: "Bien, gracias.", en: "Fine, thanks.", target: bien}
+    bien_che: {es: "Bien, che.", en: "Fine, man.", target: bien}
     mal_che: {es: "Mal, che.", en: "Not great, man.", target: mal}
-    bueno_chau: {es: "Bueno, chau.", en: "Well, bye.", target: bueno}
+    que_tal: {es: "¿Qué tal?", en: "How's it going?", target: qué tal}
+    hola_que_tal: {es: "Hola, ¿qué tal?", en: "Hi, how's it going?", target: qué tal}
+    todo_bien: {es: "¿Todo bien?", en: "All good?", target: todo bien}
+    todo_bien_gracias: {es: "Todo bien, gracias.", en: "All good, thanks.", target: todo bien}
+  key_phrases: [hola_que_tal, todo_bien_gracias, si_dale, bueno_chau]
   lessons:
     1:
       - {tip: 0}
@@ -99,40 +123,70 @@ hola-che:
       - {teach: che}
       - {drill: hola_che, mode: sentence_meaning}
       - {teach: chau}
-      - {drill: chau_che, mode: sentence_build}
+      - {drill: chau_che, mode: sentence_meaning}
       - {teach: dale}
       - {drill: dale_chau, mode: sentence_meaning}
+      - {teach: bueno}
+      - {drill: bueno_chau, mode: sentence_meaning}
+      - {drill: bueno_dale, mode: sentence_gap}
+      - {drill: hola_che, mode: sentence_build}
+      - {drill: dale_gracias, mode: sentence_build}
+      - {match}
     2:
       - {tip: 1}
       - {teach: soy}
       - {drill: soy_sofi, mode: sentence_meaning}
       - {drill: hola_soy_sofi, mode: sentence_build}
       - {teach: yo}
-      - {drill: yo_soy_martin, mode: sentence_gap}
+      - {drill: yo_soy_martin, mode: sentence_meaning}
+      - {drill: yo_sofi, mode: sentence_gap}
+      - {teach: sí}
+      - {drill: si_soy_juan, mode: sentence_meaning}
+      - {drill: si_dale, mode: sentence_gap}
+      - {teach: "no"}
+      - {drill: no_soy_lucia, mode: sentence_meaning}
+      - {drill: no_gracias, mode: sentence_build}
       - {review: 2}
       - {match}
     3:
       - {teach: bien}
-      - {drill: bien_gracias, mode: sentence_build}
-      - {teach: sí}
-      - {drill: si_soy_juan, mode: sentence_meaning}
-      - {teach: "no"}
-      - {drill: no_soy_lucia, mode: sentence_build}
+      - {drill: bien_gracias, mode: sentence_meaning}
+      - {drill: bien_che, mode: sentence_gap}
+      - {teach: mal}
+      - {drill: mal_che, mode: sentence_meaning}
+      - {teach: qué tal}
+      - {drill: que_tal, mode: sentence_meaning}
+      - {drill: hola_que_tal, mode: sentence_build}
+      - {teach: todo bien}
+      - {drill: todo_bien, mode: sentence_meaning}
+      - {drill: todo_bien_gracias, mode: sentence_build}
+      - {drill: mal_che, mode: sentence_build}
       - {review: 2}
       - {match}
     4:
-      - {teach: qué tal}
-      - {drill: que_tal, mode: sentence_meaning}
-      - {teach: todo bien}
-      - {drill: todo_bien, mode: sentence_build}
-      - {teach: mal}
-      - {drill: mal_che, mode: sentence_meaning}
-      - {review: 2}
-    5:
-      - {teach: bueno}
-      - {drill: bueno_chau, mode: sentence_meaning}
-      - {match}
-      - {drill: hola_che, mode: sentence_gap}
-      - {drill: chau_che, mode: sentence_gap}
-      - {review: 3}
-      - {drill: soy_sofi, mode: sentence_build}
+      - {recap: 8, scope: unit}
+      - {drill: hola_que_tal, mode: sentence_build}
+      - {drill: no_gracias, mode: sentence_build}
+      - {drill: yo_soy_martin, mode: sentence_build}
+  stories:
+    en-el-bar:
+      title: "At the café"
+      lines:
+        - {speaker: Martín, es: "Hola, Sofi.", en: "Hi, Sofi."}
+        - {speaker: Sofi, es: "Hola, che. ¿Qué tal?", en: "Hi there. How's it going?"}
+        - {speaker: Martín, sentence: todo_bien_gracias, question: {type: meaning}}
+        - {speaker: Sofi, es: "¿Un café?", en: "A coffee?"}
+        - {speaker: Martín, es: "No, un mate, por favor.", en: "No, a mate, please.", question: {type: build}}
+        - {speaker: Sofi, es: "Dale. Un mate y un café.", en: "OK. A mate and a coffee."}
+        - {speaker: Martín, es: "¿Y una medialuna?", en: "And a croissant?", question: {type: gap, form: medialuna}}
+        - {speaker: Sofi, sentence: si_dale}
+        - {speaker: Martín, es: "Gracias, Sofi.", en: "Thanks, Sofi."}
+        - speaker: Sofi
+          es: "Bueno, chau, che."
+          en: "Well, bye."
+          loose: [che]
+          question:
+            type: choice
+            prompt_en: "What does Martín order?"
+            options_en: ["A coffee", "A mate and a croissant", "A juice"]
+            correct: 1

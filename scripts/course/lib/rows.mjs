@@ -22,13 +22,15 @@ export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE } 
   if (outlineErrors.length) throw new Error(`outline:\n${outlineErrors.join('\n')}`);
 
   const content = parse(readFileSync(fixture, 'utf8'));
-  const { sentences, slots, errors, warnings } = buildContent(outline, content, { source: 'human' });
+  const { sentences, slots, stories, phrases, errors, warnings } = buildContent(outline, content, { source: 'human' });
   if (errors.length) throw new Error(`content:\n${errors.join('\n')}`);
 
   const status = (order) => (order <= publishThrough ? 'published' : 'draft');
   const unitOrderById = new Map(outline.units.map((u) => [u.id, u.course_order]));
   const lemmaById = new Map(outline.lemmas.map((l) => [l.id, l]));
   const lessonUnit = new Map(outline.units.flatMap((u) => u.lessons.map((l) => [l.id, u.course_order])));
+  for (const l of stories.lessons) lessonUnit.set(l.id, unitOrderById.get(l.unit_id));
+  const unitOrderOf = (unitId) => unitOrderById.get(unitId);
 
   const rows = {
     // A section is published once any of its units is.
@@ -39,7 +41,13 @@ export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE } 
         : 'draft',
     })),
     units: outline.units.map(({ sample, lessons, tips, ...u }) => ({ ...u, status: status(u.course_order) })),
-    lessons: outline.units.flatMap((u) => u.lessons.map((l) => ({ ...l, status: status(u.course_order) }))),
+    // A story sits before its unit's check, which moves down a place for it.
+    lessons: [
+      ...outline.units.flatMap((u) =>
+        u.lessons.map((l) => ({ ...l, ordinal: stories.ordinals.get(l.id) ?? l.ordinal, status: status(u.course_order) })),
+      ),
+      ...stories.lessons.map((l) => ({ ...l, status: status(unitOrderOf(l.unit_id)) })),
+    ],
     tips: outline.units.flatMap((u) => u.tips.map((t) => ({ ...t, status: status(u.course_order) }))),
     lemmas: outline.lemmas.map(({ unit_order, ...l }) => ({ ...l, status: status(unit_order) })),
     forms: outline.forms.map((f) => ({
@@ -55,6 +63,8 @@ export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE } 
     sentences: sentences.map((s) => ({ ...s, status: status(unitOrderById.get(s.unit_id)) })),
     // Slots only exist for lessons with authored content; they follow their lesson.
     lesson_slots: slots.filter((s) => lessonUnit.get(s.lesson_id) <= publishThrough),
+    story_lines: stories.lines.filter((l) => lessonUnit.get(l.lesson_id) <= publishThrough),
+    unit_phrases: phrases.filter((p) => unitOrderOf(p.unit_id) <= publishThrough),
   };
 
   // The view the app reads, precomputed for the demo backend.

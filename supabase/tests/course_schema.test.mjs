@@ -10,6 +10,14 @@ import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
 const MIG = new URL('../migrations', import.meta.url).pathname;
+// docs/learning-engine-spec.md — telemetry, unit check, placement, stories, answers.
+const ENGINE = [
+  '20260917000001_engine_telemetry.sql',
+  '20260917000002_unit_check.sql',
+  '20260917000003_placement.sql',
+  '20260917000004_stories_guidebook.sql',
+  '20260917000005_answers_and_quality.sql',
+];
 const db = new PGlite();
 
 const ok = (m) => console.log('  ✔', m);
@@ -39,6 +47,9 @@ await db.exec(readFileSync(`${MIG}/20260913000001_course_schema.sql`, 'utf8'));
 await db.exec(readFileSync(`${MIG}/20260915000001_sentence_es_alt.sql`, 'utf8'));
 await db.exec(readFileSync(`${MIG}/20260916000001_sections_and_lesson_kinds.sql`, 'utf8'));
 ok('course schema migrations apply');
+await db.exec(readFileSync(`${MIG}/20260505000004_notification_events.sql`, 'utf8'));
+for (const f of ENGINE) await db.exec(readFileSync(`${MIG}/${f}`, 'utf8'));
+ok('learning engine migrations apply');
 await db.exec(`
   grant select, insert, update, delete on all tables in schema public to authenticated;
   grant usage, select on all sequences in schema public to authenticated;
@@ -120,10 +131,10 @@ await as(student, async () => {
   // finish_lesson: first ever round
   const d = (s) => `'${s}'::date`;
   let f = await db.query(`select * from finish_lesson(${d('2026-09-10')}, 'bbbbbbbb-0000-4000-8000-000000000001', 80::smallint)`);
-  assert.deepEqual(f.rows[0], { current_streak: 1, previous_streak: 0, recoverable_streak: 0 });
+  assert.deepEqual(f.rows[0], { current_streak: 1, previous_streak: 0, recoverable_streak: 0, passed: true, attempts: 1 });
   // second round same day: no change
   f = await db.query(`select * from finish_lesson(${d('2026-09-10')})`);
-  assert.deepEqual(f.rows[0], { current_streak: 1, previous_streak: 1, recoverable_streak: 0 });
+  assert.deepEqual(f.rows[0], { current_streak: 1, previous_streak: 1, recoverable_streak: 0, passed: true, attempts: null });
   // next day grows
   f = await db.query(`select * from finish_lesson(${d('2026-09-11')})`);
   assert.equal(f.rows[0].current_streak, 2);
@@ -133,10 +144,10 @@ await as(student, async () => {
 
   // miss two days → banked
   f = await db.query(`select * from finish_lesson(${d('2026-09-15')})`);
-  assert.deepEqual(f.rows[0], { current_streak: 1, previous_streak: 3, recoverable_streak: 3 });
+  assert.deepEqual(f.rows[0], { current_streak: 1, previous_streak: 3, recoverable_streak: 3, passed: true, attempts: null });
   // second round of the comeback day → recovered
   f = await db.query(`select * from finish_lesson(${d('2026-09-15')})`);
-  assert.deepEqual(f.rows[0], { current_streak: 4, previous_streak: 1, recoverable_streak: 0 });
+  assert.deepEqual(f.rows[0], { current_streak: 4, previous_streak: 1, recoverable_streak: 0, passed: true, attempts: null });
   ok('comeback day banks the run and a second round buys it back');
 
   const p = await db.query(`select score from lesson_progress`);
@@ -163,6 +174,95 @@ await as(reviewer, async () => {
   assert.equal(other.rows[0].n, 0);
   ok("reviewer cannot read a learner's progress");
 });
+
+// --- learning engine ------------------------------------------------------------
+{
+  const u1 = 'aaaaaaaa-0000-4000-8000-000000000001';
+  const check = 'bbbbbbbb-0000-4000-8000-000000000002';
+  const round = (n) => `ffffffff-0000-4000-8000-00000000000${n}`;
+  await db.exec(`
+    insert into lessons (id, unit_id, ordinal, title_en, kind, status) values ('${check}', '${u1}', 2, 'Review', 'review', 'published');
+    insert into lesson_slots (lesson_id, ordinal, kind, review_count, scope) values ('${check}', 1, 'recap', 8, 'unit');
+  `);
+  await assert.rejects(db.exec(`insert into lesson_slots (lesson_id, ordinal, kind, review_count) values ('${check}', 2, 'recap', 8)`));
+  ok('a recap slot needs a scope');
+
+  await as(student, async () => {
+    await db.exec(`insert into rounds (id, user_id, kind, lesson_id, local_date, planned_items) values ('${round(1)}', '${student}', 'unit_check', '${check}', '2026-09-16', 10)`);
+    await assert.rejects(db.exec(`insert into rounds (id, user_id, kind, local_date) values ('${round(9)}', '${reviewer}', 'practice', '2026-09-16')`));
+    ok("rounds: a learner writes her own and no one else's");
+
+    let f = await db.query(`select passed, attempts from finish_lesson('2026-09-16', '${check}', 60::smallint, '${round(1)}', 10::smallint, 4::smallint, 3::smallint)`);
+    assert.deepEqual(f.rows[0], { passed: false, attempts: 1 });
+    const stamped = await db.query(`select score, answered, first_try_wrong, retries, finished_at is not null as done from rounds where id = '${round(1)}'`);
+    assert.deepEqual(stamped.rows[0], { score: 60, answered: 10, first_try_wrong: 4, retries: 3, done: true });
+    ok('finish_lesson stamps the round; a unit check below 80 is not passed');
+
+    f = await db.query(`select passed, attempts from finish_lesson('2026-09-16', '${check}', 70::smallint)`);
+    assert.deepEqual(f.rows[0], { passed: false, attempts: 2 });
+    f = await db.query(`select passed, attempts from finish_lesson('2026-09-16', '${check}', 50::smallint)`);
+    assert.deepEqual(f.rows[0], { passed: true, attempts: 3 });
+    let lp = await db.query(`select passed_by, score from lesson_progress where lesson_id = '${check}'`);
+    assert.deepEqual(lp.rows[0], { passed_by: 'attempts', score: 70 });
+    f = await db.query(`select passed from finish_lesson('2026-09-16', '${check}', 10::smallint)`);
+    assert.equal(f.rows[0].passed, true);
+    ok('the third attempt passes whatever the score, and a pass never un-passes');
+
+    await db.exec(`
+      insert into srs_commits (user_id, form_id, round_id, seen, wrong, rating, scheduled)
+      values ('${student}', 'dddddddd-0000-4000-8000-000000000001', '${round(1)}', 2, 0, 2, true)`);
+    ok('srs_commits: a learner logs her own decisions');
+
+    await db.exec(`
+      insert into answer_reports (user_id, sentence_id, mode, answer, answer_key)
+      values ('${student}', 'eeeeeeee-0000-4000-8000-000000000001', 'sentence_build', 'Sos Juan?', 'sos juan')`);
+    await assert.rejects(db.exec(`
+      insert into answer_reports (user_id, sentence_id, mode, answer, answer_key)
+      values ('${student}', 'eeeeeeee-0000-4000-8000-000000000001', 'sentence_build', 'sos Juan', 'sos juan')`));
+    await assert.rejects(db.exec(`
+      insert into answer_reports (user_id, sentence_id, mode, answer, answer_key, status)
+      values ('${student}', 'eeeeeeee-0000-4000-8000-000000000001', 'sentence_build', 'x', 'x', 'accepted')`));
+    ok('answer_reports: one report per answer, and a learner cannot resolve her own');
+
+    const stats = await db.query(`select * from staff_round_stats()`);
+    assert.equal(stats.rows.length, 0);
+    ok('staff reports return nothing to a learner');
+  });
+
+  await as(reviewer, async () => {
+    const stats = await db.query(`select kind, finished from staff_round_stats('2000-01-01')`);
+    assert.deepEqual(stats.rows, [{ kind: 'unit_check', finished: 1 }]);
+    const reports = await db.query(`select answer_key, reports::int from staff_open_reports()`);
+    assert.deepEqual(reports.rows, [{ answer_key: 'sos juan', reports: 1 }]);
+    const rates = await db.query(`select learners::int, by_attempts::int from staff_unit_check_rates()`);
+    assert.deepEqual(rates.rows, [{ learners: 1, by_attempts: 1 }]);
+    ok('staff see aggregate rounds, open reports and unit-check rates');
+  });
+
+  // Placement: a fresh learner skips unit 1.
+  const placed = '66666666-6666-4666-8666-666666666666';
+  await db.exec(`
+    insert into auth.users values ('${placed}');
+    insert into profiles (user_id, display_name) values ('${placed}', 'P');
+    update units set status = 'published', course_order = 2 where id = 'aaaaaaaa-0000-4000-8000-000000000002';
+  `);
+  await as(placed, async () => {
+    await db.exec(`insert into form_states (form_id, user_id, state, interval_days) values ('dddddddd-0000-4000-8000-000000000002', '${placed}', 'review', 30)`);
+    const r = await db.query(`select * from apply_placement(null, 2::smallint, array['dddddddd-0000-4000-8000-000000000001']::uuid[], '{}')`);
+    assert.deepEqual(r.rows[0], { lessons_skipped: 2, forms_scheduled: 1 });
+    const states = await db.query(`select form_id, state, interval_days, coalesce(due_at > now() + interval '2 days', false) as later from form_states order by form_id`);
+    assert.deepEqual(states.rows, [
+      { form_id: 'dddddddd-0000-4000-8000-000000000001', state: 'review', interval_days: 7, later: true },
+      { form_id: 'dddddddd-0000-4000-8000-000000000002', state: 'review', interval_days: 30, later: false },
+    ]);
+    const lp = await db.query(`select count(*)::int as n from lesson_progress where passed_by = 'placement' and passed`);
+    assert.equal(lp.rows[0].n, 2);
+    const prof = await db.query(`select placed_through from profiles where user_id = '${placed}'`);
+    assert.equal(prof.rows[0].placed_through, 1);
+    ok('apply_placement: skipped lessons passed, new states spread out, existing states untouched');
+  });
+  console.log('\nall learning engine checks passed');
+}
 
 r = await db.query(`select form from available_forms(1::smallint) order by form`);
 assert.deepEqual(r.rows.map((x) => x.form), ['sos', 'soy']);
@@ -254,6 +354,35 @@ console.log('\nall migration checks passed');
   assert.equal(liveSentences.rows[0].n, 24);
   ok('accepted answers seeded; sentences the re-slice broke are retired');
 
+  // The learning engine: its schema, then units 1–2 re-cut into lessons of
+  // 4–6 new words, a unit check each, and a story before unit 2's check.
+  await seedDb.exec(readFileSync(`${MIG}/20260505000004_notification_events.sql`, 'utf8'));
+  for (const f of ENGINE) await seedDb.exec(readFileSync(`${MIG}/${f}`, 'utf8'));
+  const engineSeed = readFileSync(`${MIG}/20260917000006_seed_engine_content.sql`, 'utf8');
+  await seedDb.exec(engineSeed);
+  const recut = await counts();
+  await seedDb.exec(engineSeed);
+  assert.deepEqual(await counts(), recut);
+  const shape = (await seedDb.query(`
+    select u.slug, l.ordinal, l.kind, l.status
+    from lessons l join units u on u.id = l.unit_id
+    where u.slug in ('un-cafe-por-favor', 'hola-che') and l.status <> 'retired'
+    order by u.course_order, l.ordinal`)).rows;
+  assert.deepEqual(
+    shape.map((r) => `${r.slug}:${r.ordinal}:${r.kind}`),
+    [
+      'un-cafe-por-favor:1:lesson', 'un-cafe-por-favor:2:lesson', 'un-cafe-por-favor:3:review',
+      'hola-che:1:lesson', 'hola-che:2:lesson', 'hola-che:3:lesson', 'hola-che:4:story', 'hola-che:5:review',
+    ],
+  );
+  const story = (await seedDb.query(`select count(*)::int as n, count(question)::int as q from story_lines`)).rows[0];
+  assert.deepEqual(story, { n: 10, q: 4 });
+  const phrases = (await seedDb.query(`select count(*)::int as n from unit_phrases`)).rows[0];
+  assert.equal(phrases.n, 8);
+  const recaps = (await seedDb.query(`select count(*)::int as n from lesson_slots where kind = 'recap'`)).rows[0];
+  assert.equal(recaps.n, 2);
+  ok('engine seed: units 1–2 re-cut with unit checks, a story and key phrases; idempotent');
+
   await seedDb.exec(`
     grant select, insert, update on all tables in schema public to authenticated;
     grant execute on all functions in schema public to authenticated;
@@ -265,9 +394,10 @@ console.log('\nall migration checks passed');
       (select count(*)::int from units) as units,
       (select count(*)::int from lessons) as lessons,
       (select count(*)::int from form_entries) as forms,
-      (select count(*)::int from lesson_slots) as slots`)).rows[0];
-  assert.deepEqual(seen, { units: 2, lessons: 10, forms: 30, slots: 69 });
-  ok('a student sees units 1–2 only: 10 lessons, 30 forms, 69 slots');
+      (select count(*)::int from lesson_slots) as slots,
+      (select count(*)::int from story_lines) as story_lines`)).rows[0];
+  assert.deepEqual(seen, { units: 2, lessons: 8, forms: 30, slots: 78, story_lines: 10 });
+  ok('a student sees units 1–2 only: 8 lessons, 30 forms, 78 slots, one story');
   await seedDb.exec(`reset role;`);
   console.log('\nall seed checks passed');
 }

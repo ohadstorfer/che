@@ -88,3 +88,21 @@ function fuzz(days: number): number {
   const spread = Math.max(1, Math.round(days * pct));
   return days + Math.floor(Math.random() * (2 * spread + 1)) - spread;
 }
+
+/** Whether new forms start with a morphology-based ease (learning-engine-spec
+ *  §11.1). Off until the offline evaluation can say whether it helps. */
+export const EASE_PRIOR = process.env.EXPO_PUBLIC_EASE_PRIOR === '1';
+
+/**
+ * The ease a new form starts with. Half-life regression on Duolingo's data
+ * found gerunds, participles and irregular forms decay faster than the rest,
+ * so with the prior on they start a little lower and grow more slowly.
+ */
+export function initialEase(
+  form: { features?: { verb_form?: string; mood?: string; irregular?: boolean } },
+  prior = EASE_PRIOR,
+): number {
+  if (!prior) return 2.5;
+  const f = form.features ?? {};
+  return f.verb_form === 'ger' || f.mood === 'imp' || f.irregular ? 2.3 : 2.5;
+}

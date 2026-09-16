@@ -12,6 +12,7 @@
 import { writeFileSync } from 'node:fs';
 
 import { buildRows } from './lib/rows.mjs';
+import { jsonb, q, textArray, upsert } from './lib/sql.mjs';
 
 const out = process.argv[2];
 if (!out) {
@@ -19,28 +20,6 @@ if (!out) {
   process.exit(1);
 }
 const PUBLISH_THROUGH = 2;
-
-const q = (v) => {
-  if (v === null || v === undefined) return 'null';
-  if (typeof v === 'number') return String(v);
-  if (typeof v === 'boolean') return v ? 'true' : 'false';
-  return `'${String(v).replace(/'/g, "''")}'`;
-};
-const jsonb = (v) => `${q(JSON.stringify(v))}::jsonb`;
-const textArray = (a) => (a.length ? `array[${a.map(q).join(', ')}]::text[]` : `'{}'::text[]`);
-
-/** One multi-row upsert. `cast` maps a column to its SQL literal writer. */
-function upsert(table, rows, columns, cast = {}, conflict = 'id') {
-  if (rows.length === 0) return '';
-  const values = rows
-    .map((r) => `  (${columns.map((c) => (cast[c] ? cast[c](r[c]) : q(r[c]))).join(', ')})`)
-    .join(',\n');
-  const updates = columns
-    .filter((c) => c !== conflict)
-    .map((c) => `${c} = excluded.${c}`)
-    .join(', ');
-  return `insert into public.${table} (${columns.join(', ')}) values\n${values}\non conflict (${conflict}) do update set ${updates};\n`;
-}
 
 /**
  * Content the outline dropped — a unit that was re-sliced away, and everything
@@ -58,6 +37,13 @@ function retire({ units, lessons, tips, lemmas, forms, sentences }) {
   return `-- Anything the outline no longer has.
 update public.units set status = 'retired' where id not in (${list(units)});
 update public.lessons set status = 'retired' where id not in (${list(lessons)});
+-- Lessons left parked (no longer in the outline) get ordinals far past any
+-- real one, unique within their unit, so the next run can park them again.
+with parked as (
+  select id, row_number() over (partition by unit_id order by id) as n
+  from public.lessons where ordinal <= 0
+)
+update public.lessons l set ordinal = 20000 + parked.n from parked where l.id = parked.id;
 update public.tips set status = 'retired' where id not in (${list(tips)});
 update public.lemmas set status = 'retired' where id not in (${list(lemmas)});
 update public.forms set status = 'retired' where id not in (${list(forms)});
@@ -115,6 +101,10 @@ const sql = [
 -- moves would collide with whatever now sits in its place. Park both numbers
 -- first; the upsert below sets every one back.
 update public.units set ordinal = ordinal + 1000, course_order = course_order + 1000;
+-- Lessons likewise: a story slotted in before a unit's check moves the check
+-- down a place, into the ordinal the story is about to take. They are parked
+-- below zero; whatever the upsert doesn't bring back is renumbered at the end.
+update public.lessons set ordinal = -ordinal where ordinal > 0;
 `,
   upsert('sections', rows.sections, ['id', 'ordinal', 'slug', 'title_en', 'cefr', 'status']),
   upsert(
@@ -143,7 +133,22 @@ update public.units set ordinal = ordinal + 1000, course_order = course_order + 
         .map(q)
         .join(', ')});\n`
     : '',
-  upsert('lesson_slots', rows.lesson_slots, ['id', 'lesson_id', 'ordinal', 'kind', 'form_id', 'sentence_id', 'tip_id', 'mode', 'review_count']),
+  upsert('lesson_slots', rows.lesson_slots, ['id', 'lesson_id', 'ordinal', 'kind', 'form_id', 'sentence_id', 'tip_id', 'mode', 'review_count', 'scope']),
+  // Story lines and key phrases are rewritten whole, like slots.
+  rows.story_lines.length
+    ? `delete from public.story_lines where lesson_id in (${[...new Set(rows.story_lines.map((l) => l.lesson_id))]
+        .map(q)
+        .join(', ')});\n`
+    : '',
+  upsert('story_lines', rows.story_lines, ['id', 'lesson_id', 'ordinal', 'speaker', 'sentence_id', 'question'], {
+    question: (v) => (v == null ? 'null' : jsonb(v)),
+  }),
+  rows.unit_phrases.length
+    ? `delete from public.unit_phrases where unit_id in (${[...new Set(rows.unit_phrases.map((p) => p.unit_id))]
+        .map(q)
+        .join(', ')});\n`
+    : '',
+  upsert('unit_phrases', rows.unit_phrases, ['unit_id', 'ordinal', 'sentence_id'], {}, 'unit_id, ordinal'),
   retire(rows),
 ].join('\n');
 

@@ -80,7 +80,14 @@ function learner() {
 
   return {
     profiles: [
-      { user_id: STUDENT, display_name: 'Ohad', role: 'student', timezone: 'America/Argentina/Buenos_Aires' },
+      {
+        user_id: STUDENT,
+        display_name: 'Ohad',
+        // EXPO_PUBLIC_DEMO_ROLE=admin opens the dashboard on the fixtures.
+        role: process.env.EXPO_PUBLIC_DEMO_ROLE === 'admin' ? 'admin' : 'student',
+        timezone: 'America/Argentina/Buenos_Aires',
+        placed_through: 0,
+      },
     ],
     // A five-day run ending yesterday: today is still open, so finishing a
     // lesson grows it to six and the celebration plays.
@@ -101,7 +108,31 @@ function learner() {
       lesson_id: l.id,
       completed_at: `${day(5 - i)}T19:30:00.000Z`,
       score: 80 + (i % 3) * 5,
+      attempts: 1,
+      passed: true,
+      passed_by: l.kind === 'review' ? 'score' : null,
     })),
+    // Her last rounds, for the ladder offset: steady, so the defaults hold.
+    rounds: [1, 2, 3, 4].map((d) => ({
+      id: uuid(),
+      user_id: STUDENT,
+      kind: 'lesson',
+      lesson_id: null,
+      local_date: day(d),
+      started_at: `${day(d)}T19:10:00.000Z`,
+      finished_at: `${day(d)}T19:30:00.000Z`,
+      planned_items: 14,
+      answered: 14,
+      first_try_wrong: 2,
+      retries: 2,
+      score: 86,
+      ladder_offset: 0,
+      promoted: 0,
+    })),
+    srs_commits: [] as Row[],
+    answer_reports: [] as Row[],
+    content_reviews: [] as Row[],
+    content_revisions: [] as Row[],
     form_states,
     sentence_states,
     review_logs: [] as Row[],
@@ -113,6 +144,10 @@ const tables: Record<string, Row[]> = {
   ...(course as unknown as Record<string, Row[]>),
   ...learner(),
 };
+// The dashboard reads forms and lemmas as tables; the fixtures only carry the
+// view, which has every column those pages look at.
+tables.forms = tables.form_entries;
+tables.lemmas = [];
 
 export const demoSession = {
   access_token: 'demo',
@@ -240,7 +275,7 @@ const KEYS: Record<string, string[]> = {
 };
 
 /** Tables whose rows carry a generated `id`. */
-const HAS_ID = new Set(['form_states', 'review_logs', 'push_subscriptions']);
+const HAS_ID = new Set(['form_states', 'review_logs', 'push_subscriptions', 'answer_reports', 'srs_commits', 'lesson_slots', 'content_reviews', 'content_revisions']);
 
 /**
  * Column defaults, as the migration declares them. The app inserts partial
@@ -262,7 +297,12 @@ const DEFAULTS: Record<string, () => Row> = {
   sentence_states: () => ({ shown_count: 0, correct_count: 0, last_shown_at: null }),
   daily_sessions: () => ({ total_cards: 0, completed_cards: 0, sentence_screens: 0, sentence_fails: 0, completed_at: null }),
   review_logs: () => ({ reviewed_at: new Date().toISOString() }),
-  lesson_progress: () => ({ completed_at: new Date().toISOString(), score: null }),
+  lesson_progress: () => ({ completed_at: new Date().toISOString(), score: null, attempts: 1, passed: true, passed_by: null }),
+  srs_commits: () => ({ created_at: new Date().toISOString() }),
+  content_reviews: () => ({ created_at: new Date().toISOString() }),
+  content_revisions: () => ({ created_at: new Date().toISOString() }),
+  answer_reports: () => ({ status: 'open', created_at: new Date().toISOString() }),
+  rounds: () => ({ started_at: new Date().toISOString(), finished_at: null, answered: 0, first_try_wrong: 0, retries: 0, score: null, promoted: 0 }),
 };
 
 class Mutation extends Filters implements PromiseLike<Result> {
@@ -339,14 +379,62 @@ class Mutation extends Filters implements PromiseLike<Result> {
 
 // --- rpc -------------------------------------------------------------------
 
-/** finish_lesson, as the migration writes it (see its comments for the rules). */
-function finishLesson(args: { p_local_date: string; p_lesson_id?: string | null; p_score?: number | null }) {
+/** finish_lesson, as the migrations write it (see their comments for the rules). */
+function finishLesson(args: {
+  p_local_date: string;
+  p_lesson_id?: string | null;
+  p_score?: number | null;
+  p_round_id?: string | null;
+  p_answered?: number | null;
+  p_first_try_wrong?: number | null;
+  p_retries?: number | null;
+}) {
   const today = args.p_local_date;
+  let passed = true;
+  let attempts: number | null = null;
   if (args.p_lesson_id) {
+    const lesson = (tables.lessons ?? []).find((l) => l.id === args.p_lesson_id);
+    const check = lesson?.kind === 'review' || lesson?.kind === 'checkpoint';
+    const score = args.p_score ?? 0;
     const progress = tables.lesson_progress;
     const had = progress.find((r) => r.lesson_id === args.p_lesson_id && r.user_id === STUDENT);
-    if (had) Object.assign(had, { completed_at: new Date().toISOString(), score: Math.max(Number(had.score ?? 0), args.p_score ?? 0) });
-    else progress.push({ user_id: STUDENT, lesson_id: args.p_lesson_id, completed_at: new Date().toISOString(), score: args.p_score ?? null });
+    if (had) {
+      const tries = Number(had.attempts ?? 1) + 1;
+      const nowPassed = !!had.passed || !check || score >= 80 || tries >= 3;
+      Object.assign(had, {
+        completed_at: new Date().toISOString(),
+        score: Math.max(Number(had.score ?? 0), score),
+        attempts: tries,
+        passed_by: had.passed ? had.passed_by : !check ? null : score >= 80 ? 'score' : tries >= 3 ? 'attempts' : null,
+        passed: nowPassed,
+      });
+      passed = nowPassed;
+      attempts = tries;
+    } else {
+      passed = !check || score >= 80;
+      attempts = 1;
+      progress.push({
+        user_id: STUDENT,
+        lesson_id: args.p_lesson_id,
+        completed_at: new Date().toISOString(),
+        score: args.p_score ?? null,
+        attempts: 1,
+        passed,
+        passed_by: check && passed ? 'score' : null,
+      });
+    }
+  }
+  if (args.p_round_id) {
+    const round = (tables.rounds ?? []).find((r) => r.id === args.p_round_id);
+    if (round) {
+      Object.assign(round, {
+        finished_at: new Date().toISOString(),
+        score: args.p_score ?? null,
+        answered: args.p_answered ?? round.answered,
+        first_try_wrong: args.p_first_try_wrong ?? round.first_try_wrong,
+        retries: args.p_retries ?? round.retries,
+      });
+    }
   }
 
   const days = tables.daily_sessions;
@@ -382,7 +470,70 @@ function finishLesson(args: { p_local_date: string; p_lesson_id?: string | null;
   streak.longest_streak = Math.max(streak.longest_streak, streak.current_streak);
   streak.last_practice_date = today;
 
-  return [{ current_streak: streak.current_streak, previous_streak: previous, recoverable_streak: streak.recoverable_streak }];
+  return [
+    {
+      current_streak: streak.current_streak,
+      previous_streak: previous,
+      recoverable_streak: streak.recoverable_streak,
+      passed,
+      attempts,
+    },
+  ];
+}
+
+/** apply_placement, as the migration writes it. */
+function applyPlacement(args: {
+  p_round_id?: string | null;
+  p_through_order: number;
+  p_passed_form_ids?: string[];
+  p_failed_form_ids?: string[];
+}) {
+  const through = args.p_through_order;
+  const unitOrder = new Map((tables.units ?? []).map((u) => [u.id as string, Number(u.course_order)]));
+  let skipped = 0;
+  for (const l of tables.lessons ?? []) {
+    if ((unitOrder.get(l.unit_id as string) ?? Infinity) >= through) continue;
+    if (tables.lesson_progress.some((p) => p.lesson_id === l.id && p.user_id === STUDENT)) continue;
+    tables.lesson_progress.push({
+      user_id: STUDENT,
+      lesson_id: l.id,
+      completed_at: new Date().toISOString(),
+      score: null,
+      attempts: 0,
+      passed: true,
+      passed_by: 'placement',
+    });
+    skipped += 1;
+  }
+  const passed = new Set(args.p_passed_form_ids ?? []);
+  const failed = new Set(args.p_failed_form_ids ?? []);
+  const spread = (id: string, from: number, span: number) =>
+    from + ([...id].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) % span);
+  let scheduled = 0;
+  for (const f of tables.form_entries ?? []) {
+    if (f.is_glue || f.pos === 'propn' || Number(f.unit_order) >= through) continue;
+    if (tables.form_states.some((st) => st.form_id === f.id && st.user_id === STUDENT)) continue;
+    const id = f.id as string;
+    const miss = failed.has(id);
+    const days = miss ? 0 : passed.has(id) ? spread(id, 3, 8) : spread(id, 1, 7);
+    tables.form_states.push({
+      id: uuid(),
+      form_id: id,
+      user_id: STUDENT,
+      state: miss ? 'learning' : 'review',
+      ease_factor: 2.5,
+      interval_days: miss ? 0 : passed.has(id) ? 7 : 3,
+      repetitions: 1,
+      lapses: 0,
+      due_at: hoursFromNow(24 * days),
+      introduced_on: day(0),
+      updated_at: new Date().toISOString(),
+    });
+    scheduled += 1;
+  }
+  const profile = tables.profiles.find((p) => p.user_id === STUDENT);
+  if (profile) profile.placed_through = Math.max(Number(profile.placed_through ?? 0), through - 1);
+  return [{ lessons_skipped: skipped, forms_scheduled: scheduled }];
 }
 
 // --- the client ------------------------------------------------------------
@@ -401,6 +552,20 @@ export const demoClient = {
   rpc(name: string, args: Record<string, unknown> = {}) {
     if (name === 'finish_lesson') {
       return Promise.resolve({ data: finishLesson(args as Parameters<typeof finishLesson>[0]), error: null });
+    }
+    if (name === 'staff_open_reports') {
+      const groups = new Map<string, Row & { reports: number }>();
+      for (const r of (tables.answer_reports ?? []).filter((x) => x.status === 'open')) {
+        const k = `${r.sentence_id ?? ''}|${r.form_id ?? ''}|${r.answer_key}`;
+        const g = groups.get(k) ?? { sentence_id: r.sentence_id ?? null, form_id: r.form_id ?? null, answer_key: r.answer_key, answer: r.answer, reports: 0, first_at: r.created_at };
+        g.reports += 1;
+        groups.set(k, g);
+      }
+      return Promise.resolve({ data: [...groups.values()].sort((a, b) => b.reports - a.reports), error: null });
+    }
+    if (name.startsWith('staff_')) return Promise.resolve({ data: [], error: null });
+    if (name === 'apply_placement') {
+      return Promise.resolve({ data: applyPlacement(args as Parameters<typeof applyPlacement>[0]), error: null });
     }
     return Promise.resolve({ data: null, error: { message: `demo: no rpc "${name}"` } });
   },
@@ -421,6 +586,20 @@ export const demoClient = {
   },
 
   functions: {
-    invoke: async () => ({ data: null, error: null }),
+    // "Why?" with no model behind it: the difference between her answer and the
+    // sentence, said plainly — enough to see the panel work.
+    invoke: async (name: string, opts?: { body?: Record<string, unknown> }) => {
+      if (name !== 'explain-answer') return { data: null, error: null };
+      const body = opts?.body ?? {};
+      const sentence = (tables.sentences ?? []).find((x) => x.id === body.sentence_id);
+      const form = (tables.form_entries ?? []).find((x) => x.id === body.form_id);
+      const expected = (sentence?.es ?? form?.form ?? '') as string;
+      return {
+        data: {
+          explanation: `The answer is *${expected}*. You wrote *${String(body.answer ?? '')}*. (Demo — the real explanation comes from the course model.)`,
+        },
+        error: null,
+      };
+    },
   },
 };

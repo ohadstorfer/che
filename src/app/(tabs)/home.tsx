@@ -16,10 +16,12 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { Guidebook } from '@/components/guidebook';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { localDateStr, WEEKDAY_INITIALS, weekDates } from '@/lib/dates';
-import { type Course, currentIndex, loadCourse, loadProgress, type PathLesson } from '@/lib/course';
+import { type Course, currentIndex, loadCheckAttempts, loadCourse, loadProgress, type PathLesson } from '@/lib/course';
+import { maxUnitsInTest } from '@/lib/placement';
 import {
   enablePartnerReminders,
   enablePush,
@@ -27,12 +29,12 @@ import {
   getPushStatus,
   type PushStatus,
 } from '@/lib/push';
-import { getPracticeCounts } from '@/lib/session';
+import { getMistakeCount, getPracticeCounts } from '@/lib/session';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { streakStatus, type StreakStatus } from '@/lib/streak';
 import { supabase } from '@/lib/supabase';
 import { colors, frost, path, radius, shadow } from '@/lib/theme';
-import type { Section, Streak } from '@/lib/types';
+import type { LessonKind, Section, Streak, Unit } from '@/lib/types';
 
 interface HomeData {
   course: Course;
@@ -45,6 +47,10 @@ interface HomeData {
   known: number;
   /** Which days of this week she has already completed, as YYYY-MM-DD. */
   weekDone: string[];
+  /** Words she has missed lately and not got right since — the Mistakes entry. */
+  mistakes: number;
+  /** Unit checks tried and not yet passed, by lesson id: attempts so far. */
+  checkAttempts: Map<string, number>;
 }
 
 // ---------------------------------------------------------------------------
@@ -120,7 +126,14 @@ const STEP_ICONS = [
   { set: 'fa5', name: 'drumstick-bite' },                 // el asado
 ] as const;
 
-type StepIcon = (typeof STEP_ICONS)[number];
+type StepIcon = (typeof STEP_ICONS)[number] | { set: 'mdi' | 'fa5'; name: string; size?: number };
+
+/** A lesson that isn't new material wears what it is, not the next ornament. */
+const KIND_ICONS: Partial<Record<LessonKind, StepIcon>> = {
+  story: { set: 'mdi', name: 'book-open-page-variant', size: 30 },
+  review: { set: 'fa5', name: 'trophy' },
+  checkpoint: { set: 'fa5', name: 'trophy' },
+};
 
 /** One size for every phase — the coin's own scale is what makes hers bigger. */
 const ICON_SIZE = 27;
@@ -131,7 +144,7 @@ const ICON_SIZE = 27;
 function StepGlyph({ icon, color }: { icon: StepIcon; color: string }) {
   const size = 'size' in icon ? icon.size : ICON_SIZE;
   return icon.set === 'mdi' ? (
-    <MaterialCommunityIcons name={icon.name} size={size} color={color} />
+    <MaterialCommunityIcons name={icon.name as never} size={size} color={color} />
   ) : (
     <FontAwesome5 name={icon.name} size={size} color={color} solid />
   );
@@ -215,6 +228,8 @@ function PathStep({
   phase,
   reduced,
   label,
+  kind,
+  attempts,
   onPress,
 }: {
   index: number;
@@ -222,6 +237,9 @@ function PathStep({
   reduced: boolean;
   /** What the coin is, for screen readers: "Lesson 2 · Hola, che". */
   label: string;
+  kind: LessonKind;
+  /** A unit check tried and not passed yet: attempts so far, out of three. */
+  attempts?: number;
   onPress?: () => void;
 }) {
   // A step mounts wherever it already is and only moves when the path moves
@@ -231,7 +249,7 @@ function PathStep({
   const start = useRef(phase).current;
   const p = useRef(new Animated.Value(start)).current;
   const mounted = useRef(false);
-  const stepIcon = STEP_ICONS[index % STEP_ICONS.length];
+  const stepIcon: StepIcon = KIND_ICONS[kind] ?? STEP_ICONS[index % STEP_ICONS.length];
   // The ring around the current step is the only "tap here" left on the path,
   // so it breathes: out and faint, back in and solid, forever until she does.
   const breath = useRef(new Animated.Value(0)).current;
@@ -341,6 +359,12 @@ function PathStep({
           <StepGlyph icon={stepIcon} color={colors.onPrimary} />
         </Animated.View>
       </Animated.View>
+      {attempts ? (
+        // Pinned to the coin's corner, outside the row's arithmetic.
+        <View style={styles.attempts} pointerEvents="none">
+          <Text style={styles.attemptsText}>{attempts}/3</Text>
+        </View>
+      ) : null}
     </Animated.View>
   );
 
@@ -394,7 +418,7 @@ function PathStep({
 // a unit banner on purpose: the unit is what she is walking through now, the
 // section is only where she is on the map.
 // ---------------------------------------------------------------------------
-function SectionHeader({ section }: { section: Section }) {
+function SectionHeader({ section, onJump }: { section: Section; onJump?: () => void }) {
   return (
     <View
       style={styles.sectionHeader}
@@ -411,6 +435,17 @@ function SectionHeader({ section }: { section: Section }) {
       <View style={styles.cefrChip}>
         <Text style={styles.cefrText}>{section.cefr}</Text>
       </View>
+      {onJump ? (
+        <Pressable
+          onPress={onJump}
+          accessibilityRole="button"
+          accessibilityLabel={`Jump to section ${section.ordinal}`}
+          hitSlop={8}
+          style={({ pressed }) => [styles.jumpChip, { transform: [{ scale: pressed ? 0.95 : 1 }] }, webTransition]}>
+          <Ionicons name="play-skip-forward" size={12} color={colors.primaryDark} />
+          <Text style={styles.jumpChipText}>Jump here</Text>
+        </Pressable>
+      ) : null}
       <View style={styles.sectionRule} />
     </View>
   );
@@ -425,14 +460,21 @@ function SectionHeader({ section }: { section: Section }) {
 // ---------------------------------------------------------------------------
 type UnitState = 'done' | 'current' | 'locked';
 
-function UnitBanner({ lesson, state }: { lesson: PathLesson; state: UnitState }) {
+function UnitBanner({ lesson, state, onPress }: { lesson: PathLesson; state: UnitState; onPress: () => void }) {
   const current = state === 'current';
   const { unit } = lesson;
   return (
-    <View
-      style={[styles.banner, current && styles.bannerCurrent, state === 'locked' && styles.bannerLocked]}
-      accessible
-      accessibilityRole="header"
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [
+        styles.banner,
+        current && styles.bannerCurrent,
+        state === 'locked' && styles.bannerLocked,
+        { transform: [{ scale: pressed ? 0.98 : 1 }] },
+        webTransition,
+      ]}
+      accessibilityRole="button"
+      accessibilityHint="Opens the unit guidebook"
       accessibilityLabel={`Unit ${unit.ordinal}: ${unit.title_en}. ${unit.summary_en}`}>
       <View style={styles.bannerText}>
         <Text style={[styles.bannerEyebrow, current && styles.onPrimaryMuted]}>UNIT {unit.ordinal}</Text>
@@ -447,8 +489,10 @@ function UnitBanner({ lesson, state }: { lesson: PathLesson; state: UnitState })
         <Ionicons name="checkmark-circle" size={26} color={colors.primary} />
       ) : state === 'locked' ? (
         <Ionicons name="lock-closed" size={17} color={colors.faint} />
-      ) : null}
-    </View>
+      ) : (
+        <Ionicons name="book-outline" size={20} color={colors.onPrimary} style={{ opacity: 0.85 }} />
+      )}
+    </Pressable>
   );
 }
 
@@ -803,6 +847,20 @@ function HomeHeader({
             accident. */}
         {!isStaff ? null : (
           <Pressable
+            onPress={() => router.push('/admin')}
+            accessibilityRole="button"
+            accessibilityLabel="Course dashboard"
+            hitSlop={8}
+            style={({ pressed }) => [
+              styles.logout,
+              { transform: [{ scale: pressed ? 0.92 : 1 }] },
+              webTransition,
+            ]}>
+            <Ionicons name="construct-outline" size={19} color={colors.muted} />
+          </Pressable>
+        )}
+        {!isStaff ? null : (
+          <Pressable
             onPress={onLogout}
             accessibilityRole="button"
             accessibilityLabel="Sign out"
@@ -948,11 +1006,13 @@ export default function Home() {
   // scroll handler only re-renders on the crossing, not on every frame.
   const [jump, setJump] = useState<JumpDirection>(null);
   const jumpRef = useRef<JumpDirection>(null);
+  /** The unit whose guidebook is open. */
+  const [guide, setGuide] = useState<Unit | null>(null);
 
   const load = useCallback(async () => {
     if (!profile) return;
     const week = weekDates();
-    const [course, done, counts, streakRes, weekRes] = await Promise.all([
+    const [course, done, counts, streakRes, weekRes, mistakes, checkAttempts] = await Promise.all([
       loadCourse(),
       loadProgress(profile.id),
       getPracticeCounts(profile.id),
@@ -967,6 +1027,8 @@ export default function Home() {
         .gte('session_date', week[0])
         .lte('session_date', week[6])
         .not('completed_at', 'is', null),
+      getMistakeCount(profile.id),
+      loadCheckAttempts(profile.id),
     ]);
 
     unitIndexOf.current = course.path.map((l) => l.unitIndex);
@@ -978,6 +1040,8 @@ export default function Home() {
       due: counts.due,
       known: counts.known,
       weekDone: (weekRes.data ?? []).map((r: { session_date: string }) => r.session_date),
+      mistakes,
+      checkAttempts,
     });
   }, [profile]);
 
@@ -1195,7 +1259,34 @@ export default function Home() {
     }
   };
 
-  const startLesson = (lesson: PathLesson) => router.push(`/practice?lesson=${lesson.id}`);
+  const startLesson = (lesson: PathLesson) =>
+    lesson.kind === 'story'
+      ? router.push(`/story?lesson=${lesson.id}`)
+      : router.push(`/practice?lesson=${lesson.id}`);
+
+  // Jumping ahead (learning-engine-spec §7): a unit or section still ahead can
+  // be tested into, as long as the test stays one sitting long.
+  const units = data?.course.units ?? [];
+  const hereUnit = path[Math.min(current, Math.max(path.length - 1, 0))]?.unit;
+  const jumpSpan = (target: Unit) =>
+    hereUnit && current < path.length
+      ? units.filter((u) => u.course_order >= hereUnit.course_order && u.course_order < target.course_order).length
+      : 0;
+  const canJumpTo = (target: Unit) => {
+    const span = jumpSpan(target);
+    return span > 0 && span <= maxUnitsInTest();
+  };
+  const jumpTo = (target: Unit) => {
+    setGuide(null);
+    router.push(`/practice?test=jump&to=${target.id}`);
+  };
+  const guideJump = (() => {
+    if (!guide || !hereUnit || guide.course_order <= hereUnit.course_order) return null;
+    // Too far for one test: offer the start of its section instead, if that fits.
+    const sectionStart = units.find((u) => u.section_id === guide.section_id);
+    const target = canJumpTo(guide) ? guide : sectionStart && canJumpTo(sectionStart) ? sectionStart : null;
+    return target ? { units: jumpSpan(target), onPress: () => jumpTo(target) } : null;
+  })();
 
   const logout = async () => {
     await supabase.auth.signOut();
@@ -1253,6 +1344,16 @@ export default function Home() {
           />
         ) : null}
 
+        {data && data.current === 0 && data.known === 0 && !noCourse ? (
+          <Panel style={styles.placement}>
+            <Text style={styles.sectionTitle}>Already know some Spanish?</Text>
+            <Text style={styles.mutedText}>
+              A short test finds where you should start, so you don&apos;t sit through what you know.
+            </Text>
+            <Button title="Take the placement test" variant="secondary" onPress={() => router.push('/practice?test=placement')} />
+          </Panel>
+        ) : null}
+
         {shown == null || pushStatus == null ? (
           // The road's place, held by a sun instead of a spinner: white on the
           // bone, present but barely, until the real path stands here.
@@ -1281,12 +1382,21 @@ export default function Home() {
             }}>
             {path.map((lesson) => (
               <Fragment key={`${epoch}:${lesson.id}`}>
-                {lesson.opensSection ? <SectionHeader section={lesson.section} /> : null}
-                {lesson.opensUnit ? <UnitBanner lesson={lesson} state={unitStateOf(lesson)} /> : null}
+                {lesson.opensSection ? (
+                  <SectionHeader
+                    section={lesson.section}
+                    onJump={lesson.index > current && canJumpTo(lesson.unit) ? () => jumpTo(lesson.unit) : undefined}
+                  />
+                ) : null}
+                {lesson.opensUnit ? (
+                  <UnitBanner lesson={lesson} state={unitStateOf(lesson)} onPress={() => setGuide(lesson.unit)} />
+                ) : null}
                 <PathStep
                   index={lesson.index}
                   phase={phaseOf(lesson.index)}
                   reduced={reduced}
+                  kind={lesson.kind}
+                  attempts={data?.checkAttempts.get(lesson.id)}
                   label={`${lesson.title_en} · ${lesson.unit.title_en}`}
                   onPress={lesson.index === current ? () => startLesson(lesson) : undefined}
                 />
@@ -1297,8 +1407,19 @@ export default function Home() {
       </ScrollView>
 
       {!noCourse && (data?.known ?? 0) > 0 ? (
-        <PracticeButton due={data?.due ?? 0} onPress={() => router.push('/practice')} />
+        <PracticeButton
+          due={data?.due ?? 0}
+          mistakes={data?.mistakes ?? 0}
+          onPress={() => router.push('/practice')}
+          onMistakes={() => router.push('/practice?mode=mistakes')}
+        />
       ) : null}
+      <Guidebook
+        unit={guide}
+        tips={guide ? (data?.course.tipsByUnit.get(guide.id) ?? []) : []}
+        onClose={() => setGuide(null)}
+        jump={guideJump}
+      />
       {!noCourse ? (
         <JumpButton direction={jump} reduced={reduced} onPress={() => scrollToStep(current, !reduced)} />
       ) : null}
@@ -1311,9 +1432,36 @@ export default function Home() {
 // Lessons move her forward; this holds on to what she already has. The badge
 // is how many words are due, so the button says why it's worth pressing.
 // ---------------------------------------------------------------------------
-function PracticeButton({ due, onPress }: { due: number; onPress: () => void }) {
+function PracticeButton({
+  due,
+  mistakes,
+  onPress,
+  onMistakes,
+}: {
+  due: number;
+  mistakes: number;
+  onPress: () => void;
+  onMistakes: () => void;
+}) {
   return (
     <View style={styles.practiceSlot} pointerEvents="box-none">
+      {mistakes > 0 ? (
+        <Pressable
+          onPress={onMistakes}
+          accessibilityRole="button"
+          accessibilityLabel={`Mistakes: ${mistakes} to go over`}
+          hitSlop={8}
+          style={({ pressed }) => [
+            styles.practice,
+            styles.mistakes,
+            { transform: [{ scale: pressed ? 0.94 : 1 }] },
+            webTransition,
+          ]}>
+          <Ionicons name="refresh" size={18} color={colors.accent} />
+          <Text style={[styles.practiceText, { color: colors.accent }]}>Mistakes</Text>
+          <Text style={styles.mistakesCount}>{mistakes > 99 ? '99+' : mistakes}</Text>
+        </Pressable>
+      ) : null}
       <Pressable
         onPress={onPress}
         accessibilityRole="button"
@@ -1573,7 +1721,30 @@ const styles = StyleSheet.create({
   onPrimaryMuted: { color: colors.onPrimary, opacity: 0.78 },
 
   // Practice ---------------------------------------------------------------
-  practiceSlot: { position: 'absolute', left: 18, bottom: 18 },
+  practiceSlot: { position: 'absolute', left: 18, bottom: 18, gap: 10, alignItems: 'flex-start' },
+  mistakes: { height: 40, paddingLeft: 12, paddingRight: 14, gap: 6 },
+  mistakesCount: { fontSize: 13, fontWeight: '800', color: colors.accent, fontVariant: ['tabular-nums'] },
+  placement: { gap: 10 },
+  jumpChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    paddingHorizontal: 9,
+    paddingVertical: 4,
+    borderRadius: radius.pill,
+    backgroundColor: colors.primarySoft,
+  },
+  jumpChipText: { fontSize: 11, fontWeight: '700', color: colors.primaryDark, letterSpacing: 0.2 },
+  attempts: {
+    position: 'absolute',
+    right: 0,
+    top: 2,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: radius.pill,
+    backgroundColor: colors.accent,
+  },
+  attemptsText: { fontSize: 11, fontWeight: '800', color: colors.onPrimary, fontVariant: ['tabular-nums'] },
   practice: {
     height: 46,
     flexDirection: 'row',

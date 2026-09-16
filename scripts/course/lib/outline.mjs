@@ -32,7 +32,12 @@ export const SECTION_PATHS = [1, 2, 3].map(
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 /** A unit summary sits on one line of the path banner. */
 const SUMMARY_MAX = 52;
-const DEFAULT_LESSONS = 5;
+/** New forms a teaching lesson holds (learning-engine-spec §5.1). */
+export const FORMS_PER_LESSON = 5;
+
+/** Teaching lessons for a unit introducing `forms` drillable forms, plus the
+ *  review lesson that is the unit's check. */
+export const lessonCountFor = (forms) => Math.max(2, Math.ceil(forms / FORMS_PER_LESSON)) + 1;
 
 /**
  * @param paths  one section file, or the whole course in order.
@@ -93,7 +98,6 @@ export function loadOutline(paths = SECTION_PATHS) {
       if (!Array.isArray(u.tips) || u.tips.length === 0) errors.push(`${where}: needs at least one tip`);
 
       const unitId = ids.unit(u.slug);
-      const lessonCount = u.lessons ?? DEFAULT_LESSONS;
       const checkpoint = u.ordinal === (doc.units ?? []).length;
       courseOrder += 1;
       const unit = {
@@ -108,18 +112,7 @@ export function loadOutline(paths = SECTION_PATHS) {
         register_max: registerMax,
         status: 'draft',
         sample: u.sample ?? null,
-        lessons: Array.from({ length: lessonCount }, (_, k) => {
-          const ordinal = k + 1;
-          const kind = checkpoint ? 'checkpoint' : ordinal === lessonCount && lessonCount > 1 ? 'review' : 'lesson';
-          return {
-            id: ids.lesson(u.slug, ordinal),
-            unit_id: unitId,
-            ordinal,
-            title_en: kind === 'review' ? 'Review' : kind === 'checkpoint' ? `Checkpoint ${ordinal}` : `Lesson ${ordinal}`,
-            kind,
-            status: 'draft',
-          };
-        }),
+        lessons: [],
         tips: (u.tips ?? []).map((t, k) => {
           if (!t.title || !t.body) errors.push(`${where}: tip ${k + 1} needs a title and a body`);
           return { id: ids.tip(u.slug, k), unit_id: unitId, title_en: t.title, body_md: String(t.body ?? '').trim(), status: 'draft' };
@@ -207,6 +200,22 @@ export function loadOutline(paths = SECTION_PATHS) {
             status: 'draft',
           });
         }
+      });
+
+      // The lessons follow from how much the unit teaches, unless it says.
+      const drillableHere = forms.filter((f) => f.unit_id === unitId && !f.is_glue && f.pos !== 'propn').length;
+      const lessonCount = u.lessons ?? lessonCountFor(drillableHere);
+      unit.lessons = Array.from({ length: lessonCount }, (_, k) => {
+        const ordinal = k + 1;
+        const kind = checkpoint ? 'checkpoint' : ordinal === lessonCount && lessonCount > 1 ? 'review' : 'lesson';
+        return {
+          id: ids.lesson(u.slug, ordinal),
+          unit_id: unitId,
+          ordinal,
+          title_en: kind === 'review' ? 'Unit check' : kind === 'checkpoint' ? `Checkpoint ${ordinal}` : `Lesson ${ordinal}`,
+          kind,
+          status: 'draft',
+        };
       });
   });
   });

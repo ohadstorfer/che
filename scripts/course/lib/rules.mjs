@@ -29,6 +29,7 @@ export const FEATURE_TAGS = {
   f: { gender: 'f' },
   sg: { number: 'sg' },
   pl: { number: 'pl' },
+  irregular: { irregular: true },
 };
 
 export function parseFeatures(f) {

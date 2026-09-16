@@ -32,4 +32,5 @@ export const ids = {
   form: (lemma, pos, form) => uuid5(`form:${lemmaKey(lemma, pos)}:${form}`),
   sentence: (unitSlug, es) => uuid5(`sentence:${unitSlug}:${es.trim()}`),
   slot: (lessonId, ordinal) => uuid5(`slot:${lessonId}:${ordinal}`),
+  story: (unitSlug, key) => uuid5(`story:${unitSlug}:${key}`),
 };

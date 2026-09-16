@@ -13,6 +13,7 @@ import {
   pickOptions,
   sentenceAnswerMatches,
   sentenceTiles,
+  gradeTyped,
   typedAnswerMatches,
 } from '../../../src/lib/answers.ts';
 import { buildContent } from '../lib/content.mjs';
@@ -175,4 +176,27 @@ test('meaning options never include another way of saying it', () => {
     assert.ok(!labels.includes('Well, bye.'), labels.join(' | '));
     assert.equal(labels.length, 3);
   }
+});
+
+test('ñ is a letter: a missing tilde is a slip in a long word and another word in a short one', () => {
+  const f = (form, gloss = 'x') => ({ id: form, lemma_id: form, pos: 'noun', form, gloss_en: gloss, is_glue: false });
+  const año = f('año', 'year');
+  const compañero = f('compañero', 'classmate');
+  const lex = [año, compañero, f('mano', 'hand')];
+  assert.deepEqual(gradeTyped('ano', año, lex), { correct: false, expected: 'año' });
+  assert.deepEqual(gradeTyped('companero', compañero, lex), { correct: true, note: 'enye', expected: 'compañero' });
+  assert.deepEqual(gradeTyped('compañero', compañero, lex), { correct: true, expected: 'compañero' });
+  assert.equal(gradeTyped('mano', año, lex).correct, false, 'a course word is never a slip');
+});
+
+test('accents are accepted and pointed out; typos too', () => {
+  assert.deepEqual(gradeTyped('tambien', byForm('también'), forms), { correct: true, note: 'accent', expected: 'también' });
+  assert.deepEqual(gradeTyped('También', byForm('también'), forms), { correct: true, expected: 'también' });
+  assert.equal(gradeTyped('uruguyo', byForm('uruguayo'), forms).note, 'typo');
+  assert.deepEqual(gradeTyped('sos', byForm('soy'), forms), { correct: false, expected: 'soy' });
+});
+
+test('a form accepts its alternative spellings', () => {
+  const okay = { ...byForm('también'), alt: ['tambien nomas'] };
+  assert.equal(gradeTyped('tambien nomas', okay, forms).correct, true);
 });

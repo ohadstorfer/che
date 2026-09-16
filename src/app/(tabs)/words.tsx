@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AccessibilityInfo,
@@ -18,6 +18,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScreenTitle } from '@/components/ui';
 import { playAudio } from '@/lib/audio';
 import { useAuth } from '@/lib/auth';
+import { CONCEPT_LABELS, type ConceptScore, conceptScores, weakestConcept } from '@/lib/concepts';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { supabase } from '@/lib/supabase';
 import { colors, radius, shadow } from '@/lib/theme';
@@ -64,6 +65,8 @@ export default function Words() {
   const [sentences, setSentences] = useState<SentenceRow[] | null>(null);
   const [tab, setTab] = useState<Tab>('words');
   const [search, setSearch] = useState('');
+  /** The grammar concept her recent answers say needs work, if any. */
+  const [weak, setWeak] = useState<ConceptScore | null>(null);
 
   useFocusEffect(
     useCallback(() => {
@@ -85,6 +88,19 @@ export default function Words() {
             a.form.form.localeCompare(b.form.form, 'es'),
         );
         setWords(rows);
+        // Accuracy per concept over the last month of first tries (§12).
+        supabase
+          .from('review_logs')
+          .select('form_id, correct, is_retry, reviewed_at')
+          .eq('user_id', profile.id)
+          .gte('reviewed_at', new Date(Date.now() - 30 * 86_400_000).toISOString())
+          .then(({ data: logs }) => {
+            const scores = conceptScores(
+              (logs ?? []) as { form_id: string; correct: boolean | null; is_retry?: boolean }[],
+              formById,
+            );
+            setWeak(weakestConcept(scores));
+          });
       });
       supabase
         .from('sentence_states')
@@ -145,6 +161,22 @@ export default function Words() {
             </Pressable>
           ))}
         </View>
+
+        {weak && tab === 'words' ? (
+          <Pressable
+            onPress={() => router.push(`/practice?mode=concept&concept=${encodeURIComponent(weak.concept)}`)}
+            accessibilityRole="button"
+            style={({ pressed }) => [styles.needsWork, { transform: [{ scale: pressed ? 0.98 : 1 }] }]}>
+            <Ionicons name="fitness-outline" size={18} color={colors.accent} />
+            <View style={{ flex: 1 }}>
+              <Text style={styles.needsWorkTitle}>Needs work: {CONCEPT_LABELS[weak.concept] ?? weak.concept}</Text>
+              <Text style={styles.needsWorkSub}>
+                {Math.round(weak.accuracy * 100)}% right lately — practise just these
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.accent} />
+          </Pressable>
+        ) : null}
 
         <TextInput
           value={search}
@@ -356,4 +388,15 @@ const styles = StyleSheet.create({
   bone: { height: 15, borderRadius: 7, backgroundColor: colors.border },
   boneSmall: { height: 11, borderRadius: 5 },
   empty: { textAlign: 'center', color: colors.faint, fontSize: 15, marginTop: 32, lineHeight: 21 },
+  needsWork: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    borderRadius: radius.md,
+    backgroundColor: colors.accentSoft,
+  },
+  needsWorkTitle: { fontSize: 15, fontWeight: '700', color: colors.accent },
+  needsWorkSub: { fontSize: 13, color: colors.muted },
 });

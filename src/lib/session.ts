@@ -1,6 +1,20 @@
 import { MATCH_SIZE, SENTENCE_CHOICES, isPhrase, matchable, norm, sharesMeaning, shuffle, wordsOf } from './answers';
+import { conceptScores, conceptsOf, weakestConcept } from './concepts';
 import { addDays, localDateStr } from './dates';
-import { glueSeen, loadSentences, pickReviewSentences, rungFor, sentenceCap } from './sentences';
+import {
+  DEFAULT_LADDER,
+  type Ladder,
+  OFFSET_WINDOW,
+  atLeast,
+  glueSeen,
+  hasLockedGlue,
+  ladderFor,
+  ladderOffset,
+  loadSentences,
+  pickReviewSentences,
+  rungFor,
+  sentenceCap,
+} from './sentences';
 import { supabase } from './supabase';
 import type { ExerciseMode, Form, FormState, Sentence, Tip } from './types';
 
@@ -26,6 +40,11 @@ export interface SessionItem {
   tip?: Tip;
   /** Came from an earlier unit through a lesson's review slot. */
   review?: boolean;
+  /** Made one step harder mid-round, after a run of right answers (§4.1). */
+  promoted?: boolean;
+  /** A placement or jump test question: which unit it samples. No intro
+   *  screen, no re-ask. */
+  placementUnit?: string;
 }
 
 export interface SessionData {
@@ -37,12 +56,16 @@ export interface SessionData {
   /** Forms SM-2 asked for in this round (new or due). Anything else a sentence
    *  drags in is drilled and logged, but its schedule is left alone. */
   scheduledFormIds: string[];
+  /** The ladder the round was built with. */
+  ladder?: Ladder;
 }
 
 // A form whose interval has reached this many days has settled: it can be
-// asked to type the word, and earns a third angle so reviews stay varied.
-export const SETTLED_DAYS = 7;
-const settled = (state: FormState | null) => (state?.interval_days ?? 0) >= SETTLED_DAYS;
+// asked to type the word, and earns a third angle so reviews stay varied. The
+// learner's ladder can move it (sentences.ts, Ladder.settledDays).
+export const SETTLED_DAYS = DEFAULT_LADDER.settledDays;
+const settled = (state: FormState | null, ladder: Ladder = DEFAULT_LADDER) =>
+  (state?.interval_days ?? 0) >= ladder.settledDays;
 
 // Hard ceiling on the screens a round plans — the matching block included.
 // (Re-asks of missed words can still run past it; a mistake earning another
@@ -80,23 +103,40 @@ export interface LearnerData {
   states: FormState[];
   stateByForm: Map<string, FormState>;
   sentences: Sentence[];
+  /** The ladder her rounds are built with. Absent means the defaults. */
+  ladder?: Ladder;
 }
 
-/** The published lexicon, her SM-2 states and every published sentence. */
+/** The published lexicon, her SM-2 states, every published sentence, and the
+ *  ladder her recent rounds and any placement have earned her. */
 export async function loadLearner(userId: string): Promise<LearnerData> {
-  const [{ data: formRows }, { data: stateRows }] = await Promise.all([
+  const [{ data: formRows }, { data: stateRows }, { data: roundRows }, { data: profile }] = await Promise.all([
     supabase.from('form_entries').select('*').eq('status', 'published'),
     supabase.from('form_states').select('*').eq('user_id', userId),
+    supabase
+      .from('rounds')
+      .select('score, finished_at')
+      .eq('user_id', userId)
+      .not('finished_at', 'is', null)
+      .order('finished_at', { ascending: false })
+      .limit(OFFSET_WINDOW),
+    supabase.from('profiles').select('placed_through').eq('user_id', userId).maybeSingle(),
   ]);
   const forms = (formRows ?? []) as Form[];
   const states = (stateRows ?? []) as FormState[];
   const sentences = await loadSentences(userId, forms);
+  const scores = ((roundRows ?? []) as { score: number | null }[]).flatMap((r) => (r.score == null ? [] : [r.score]));
+  const ladder = ladderFor(ladderOffset(scores), {
+    placedThrough: (profile as { placed_through?: number } | null)?.placed_through ?? 0,
+    glue: forms.filter((f) => f.is_glue),
+  });
   return {
     forms,
     formById: new Map(forms.map((f) => [f.id, f])),
     states,
     stateByForm: new Map(states.map((s) => [s.form_id, s])),
     sentences,
+    ladder,
   };
 }
 
@@ -118,13 +158,20 @@ export const reachedUnit = (data: LearnerData) =>
 // drilled from several angles, so four words still make a real round instead
 // of four taps.
 // ---------------------------------------------------------------------------
-export function exercisesFor(form: Form, state: FormState | null, deck: Form[]): ExerciseMode[] {
-  return isPhrase(form.form) ? phraseExercises(form, state, deck) : wordExercises(form, state, deck.length);
+export function exercisesFor(
+  form: Form,
+  state: FormState | null,
+  deck: Form[],
+  ladder: Ladder = DEFAULT_LADDER,
+): ExerciseMode[] {
+  return isPhrase(form.form)
+    ? phraseExercises(form, state, deck, ladder)
+    : wordExercises(form, state, deck.length, ladder);
 }
 
-function wordExercises(form: Form, state: FormState | null, deckSize: number): ExerciseMode[] {
+function wordExercises(form: Form, state: FormState | null, deckSize: number, ladder: Ladder): ExerciseMode[] {
   const enoughForChoices = deckSize >= MATCH_SIZE;
-  const mature = settled(state);
+  const mature = settled(state, ladder);
 
   // Recognition first, then production — easiest to hardest.
   const recognition: ExerciseMode[] = [];
@@ -151,9 +198,9 @@ function wordExercises(form: Form, state: FormState | null, deckSize: number): E
 // it. Multiple choice only works once there are other phrases to serve as
 // plausible wrong meanings — a phrase next to three single words gives the
 // answer away.
-function phraseExercises(form: Form, state: FormState | null, deck: Form[]): ExerciseMode[] {
+function phraseExercises(form: Form, state: FormState | null, deck: Form[], ladder: Ladder): ExerciseMode[] {
   const phrases = deck.filter((f) => isPhrase(f.form)).length;
-  const mature = settled(state);
+  const mature = settled(state, ladder);
 
   const recognition: ExerciseMode[] = [];
   if (phrases >= SENTENCE_CHOICES) recognition.push('multiple_choice');
@@ -185,8 +232,13 @@ export function pickDirection(form: Form, mode: ExerciseMode, seen: boolean): Se
   return Math.random() < 0.5 ? 'es_to_en' : 'en_to_es';
 }
 
-export function itemsForForm(form: Form, state: FormState | null, deck: Form[]): SessionItem[] {
-  return exercisesFor(form, state, deck).map((mode) => ({
+export function itemsForForm(
+  form: Form,
+  state: FormState | null,
+  deck: Form[],
+  ladder: Ladder = DEFAULT_LADDER,
+): SessionItem[] {
+  return exercisesFor(form, state, deck, ladder).map((mode) => ({
     form,
     state,
     mode,
@@ -274,7 +326,7 @@ export async function getPracticeCounts(userId: string) {
 // ---------------------------------------------------------------------------
 export async function buildSession(userId: string): Promise<SessionData> {
   const nowIso = new Date().toISOString();
-  const [data, { data: yesterday }] = await Promise.all([
+  const [data, { data: yesterday }, { data: recentLogs }] = await Promise.all([
     loadLearner(userId),
     supabase
       .from('daily_sessions')
@@ -282,16 +334,22 @@ export async function buildSession(userId: string): Promise<SessionData> {
       .eq('user_id', userId)
       .eq('session_date', localDateStr(addDays(new Date(), -1)))
       .maybeSingle(),
+    supabase
+      .from('review_logs')
+      .select('form_id, correct, is_retry')
+      .eq('user_id', userId)
+      .gte('reviewed_at', addDays(new Date(), -30).toISOString()),
   ]);
 
+  const ladder = data.ladder ?? DEFAULT_LADDER;
   const deck = deckUpTo(data, reachedUnit(data));
   const inDeck = new Set(deck.map((f) => f.id));
   const known = data.states.filter((s) => inDeck.has(s.form_id));
   // Words a sentence may lean on: settled ones, not merely met. A sentence made
   // of words she is still shaky on is two problems at once.
-  const settledIds = new Set(known.filter((s) => s.interval_days >= SETTLED_DAYS).map((s) => s.form_id));
+  const settledIds = new Set(known.filter((s) => s.interval_days >= ladder.settledDays).map((s) => s.form_id));
 
-  const cap = sentenceCap(data.sentences, yesterday?.sentence_fails ?? 0);
+  const cap = sentenceCap(data.sentences, yesterday?.sentence_fails ?? 0, ladder);
   const seen = glueSeen(data.sentences);
 
   const due = known
@@ -306,7 +364,7 @@ export async function buildSession(userId: string): Promise<SessionData> {
   // sentence for its meaning tests nothing hard enough to stand in for a
   // review, so those words are drilled on their own as well.
   const covered = new Set<string>();
-  let sentenceGroups = pickReviewSentences(dueIds, data.sentences, settledIds, cap, seen, cap).flatMap(
+  let sentenceGroups = pickReviewSentences(dueIds, data.sentences, settledIds, cap, seen, cap, { ladder }).flatMap(
     (sentence) => {
       const target = data.formById.get(sentence.target_form_id);
       if (!target) return [];
@@ -315,7 +373,7 @@ export async function buildSession(userId: string): Promise<SessionData> {
       const gapForm = dueIds.has(target.id)
         ? target
         : (sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && dueIds.has(f.id)) ?? target);
-      const mode = modeForRung(rungFor(sentence, seen), sentence);
+      const mode = modeForRung(rungFor(sentence, seen, ladder), sentence);
       if (mode === 'sentence_gap') covered.add(gapForm.id);
       if (mode === 'sentence_build' || mode === 'sentence_listen') for (const id of sentence.form_ids) covered.add(id);
       return [[sentenceItem(data, sentence, mode, gapForm)]];
@@ -323,7 +381,7 @@ export async function buildSession(userId: string): Promise<SessionData> {
   );
   let dueGroups = due
     .filter(({ form }) => !covered.has(form.id))
-    .map(({ form, state }) => itemsForForm(form, state, deck));
+    .map(({ form, state }) => itemsForForm(form, state, deck, ladder));
 
   // Fit the round under MAX_SESSION_ITEMS, gentlest valve first: every word
   // loses its third angle, then drops to a single production angle, and only
@@ -338,15 +396,27 @@ export async function buildSession(userId: string): Promise<SessionData> {
 
   // Lift a thin round up to MIN_SESSION_ITEMS with words she has already met.
   if (total() < MIN_SESSION_ITEMS) {
-    const pool = shuffle(
-      known
-        .filter((s) => !dueIds.has(s.form_id))
-        .sort((a, b) => (a.due_at ?? '').localeCompare(b.due_at ?? ''))
-        .slice(0, FILLER_POOL),
+    // Padding leans towards the grammar concept she is weakest on (§12).
+    const weak = weakestConcept(
+      conceptScores((recentLogs ?? []) as { form_id: string; correct: boolean | null; is_retry?: boolean }[], data.formById),
     );
+    const inWeak = (formId: string) => {
+      const form = data.formById.get(formId);
+      return !!weak && !!form && conceptsOf(form).includes(weak.concept);
+    };
+    const candidates = known.filter((s) => !dueIds.has(s.form_id));
+    const pool = [
+      ...shuffle(candidates.filter((s) => inWeak(s.form_id))).slice(0, FILLER_POOL / 2),
+      ...shuffle(
+        candidates
+          .filter((s) => !inWeak(s.form_id))
+          .sort((a, b) => (a.due_at ?? '').localeCompare(b.due_at ?? ''))
+          .slice(0, FILLER_POOL),
+      ),
+    ];
     for (const state of pool) {
       if (total() >= MIN_SESSION_ITEMS) break;
-      const group = itemsForForm(data.formById.get(state.form_id)!, state, deck)
+      const group = itemsForForm(data.formById.get(state.form_id)!, state, deck, ladder)
         .slice(0, 2)
         .map((item) => ({ ...item, filler: true }));
       if (group.length) fillerGroups.push(group);
@@ -366,6 +436,7 @@ export async function buildSession(userId: string): Promise<SessionData> {
     allForms: deck,
     sentences: data.sentences,
     scheduledFormIds: due.map((d) => d.form.id),
+    ladder,
   };
 }
 
@@ -375,10 +446,16 @@ export const FREE_SESSION_SIZE = 6;
 // Free practice: an extra round from words she has already met, favouring the
 // ones due soonest, that writes nothing back to SM-2 — re-drilling a word should
 // never drag its real schedule around, or a keen day would empty the next week.
-export async function buildFreeSession(userId: string, limit = FREE_SESSION_SIZE): Promise<SessionData> {
+export async function buildFreeSession(
+  userId: string,
+  limit = FREE_SESSION_SIZE,
+  /** Only forms that pass — e.g. those of one grammar concept. */
+  only?: (form: Form) => boolean,
+): Promise<SessionData> {
   const data = await loadLearner(userId);
+  const ladder = data.ladder ?? DEFAULT_LADDER;
   const deck = deckUpTo(data, reachedUnit(data));
-  const inDeck = new Set(deck.map((f) => f.id));
+  const inDeck = new Set(deck.filter((f) => !only || only(f)).map((f) => f.id));
 
   const pool = shuffle(
     data.states
@@ -387,7 +464,7 @@ export async function buildFreeSession(userId: string, limit = FREE_SESSION_SIZE
       .slice(0, limit * 2),
   ).slice(0, limit);
 
-  let groups = pool.map((state) => itemsForForm(data.formById.get(state.form_id)!, state, deck));
+  let groups = pool.map((state) => itemsForForm(data.formById.get(state.form_id)!, state, deck, ladder));
   if (screens(groups) > MAX_SESSION_ITEMS) groups = groups.map((g) => g.slice(0, 2));
   while (screens(groups) > MAX_SESSION_ITEMS && groups.length) groups.pop();
 
@@ -396,7 +473,7 @@ export async function buildFreeSession(userId: string, limit = FREE_SESSION_SIZE
   if (block && items.length >= 6 && items.length < MAX_SESSION_ITEMS) {
     items.splice(Math.floor(items.length / 2), 0, block);
   }
-  return { items, allForms: deck, sentences: [], scheduledFormIds: [] };
+  return { items, allForms: deck, sentences: [], scheduledFormIds: [], ladder };
 }
 
 // Spare words for a phrase's tile bank, borrowed from the rest of the deck.
@@ -441,4 +518,162 @@ export function buildTiles(target: string, distractors: string[] = []): { answer
     if (!answer.includes(c)) decoys.add(c);
   }
   return { answer, tiles: shuffle([...answer, ...decoys]) };
+}
+
+// ---------------------------------------------------------------------------
+// The adaptive tail (learning-engine-spec §4.1).
+//
+// After a run of right first answers at the start of a round, what is left of
+// it is made one step harder: a sentence read for meaning becomes a gap, a gap
+// becomes tiles, tiles become listening; a word recognised becomes a word
+// built, a word built becomes a word typed. Introductions, tips, matching,
+// re-asks and anything already at the top step stay as they are.
+// ---------------------------------------------------------------------------
+
+type Promotable = SessionItem & { isIntro?: boolean; isRetry?: boolean };
+
+/** The step above an item, or null when it has none or mustn't move. */
+export function promotedMode(
+  item: Promotable,
+  seen: Map<string, number>,
+  ladder: Ladder = DEFAULT_LADDER,
+): ExerciseMode | null {
+  if (item.isIntro || item.isRetry || item.introduces || item.placementUnit) return null;
+  switch (item.mode) {
+    case 'sentence_meaning':
+      return item.sentence && item.sentence.tokens.some((t) => t.form_ids.includes(item.form.id))
+        ? 'sentence_gap'
+        : null;
+    case 'sentence_gap':
+      return item.sentence && !hasLockedGlue(item.sentence, seen, ladder) ? 'sentence_build' : null;
+    case 'sentence_build':
+      return item.sentence?.audio_path ? 'sentence_listen' : null;
+    case 'multiple_choice':
+    case 'true_false':
+    case 'listen':
+      return 'word_build';
+    case 'word_build':
+      return !isPhrase(item.form.form) && item.state ? 'typing' : null;
+    default:
+      return null;
+  }
+}
+
+/** Promotes every item from `from` on that has a step above it. Returns the
+ *  new queue and how many items moved. */
+export function promoteTail<T extends Promotable>(
+  queue: T[],
+  from: number,
+  seen: Map<string, number>,
+  ladder: Ladder = DEFAULT_LADDER,
+): { queue: T[]; promoted: number } {
+  let promoted = 0;
+  const next = queue.map((item, i) => {
+    if (i < from) return item;
+    const mode = promotedMode(item, seen, ladder);
+    if (!mode) return item;
+    promoted += 1;
+    const direction: SessionItem['direction'] =
+      mode === 'word_build' || mode === 'typing' ? 'en_to_es' : item.direction;
+    return { ...item, mode, direction, promoted: true };
+  });
+  return { queue: next, promoted };
+}
+
+/** Whether a round has earned its tail: the first `ladder.tailAfter` graded
+ *  first attempts all right. */
+export const earnedTail = (firstTries: boolean[], ladder: Ladder = DEFAULT_LADDER) =>
+  ladder.tailAfter != null && firstTries.length === ladder.tailAfter && firstTries.every(Boolean);
+
+// ---------------------------------------------------------------------------
+// Mistakes (learning-engine-spec §11.3): the words she has missed lately and
+// not yet got right since — up to ten, most recent miss first, each asked once
+// in a production angle, through a sentence where one carries it.
+// ---------------------------------------------------------------------------
+
+export const MISTAKES_DAYS = 14;
+export const MISTAKES_SIZE = 10;
+
+export interface CommitRow {
+  form_id: string;
+  rating: number;
+  created_at: string;
+}
+
+/** Forms whose latest commit in the window was a miss (rating ≤ 1), most
+ *  recent first. */
+export function mistakeFormIds(commits: CommitRow[], now = new Date()): string[] {
+  const since = now.getTime() - MISTAKES_DAYS * 86_400_000;
+  const latest = new Map<string, CommitRow>();
+  for (const c of commits) {
+    if (new Date(c.created_at).getTime() < since) continue;
+    const had = latest.get(c.form_id);
+    if (!had || had.created_at < c.created_at) latest.set(c.form_id, c);
+  }
+  return [...latest.values()]
+    .filter((c) => c.rating <= 1)
+    .sort((a, b) => b.created_at.localeCompare(a.created_at))
+    .map((c) => c.form_id);
+}
+
+export async function getMistakeCount(userId: string) {
+  const { data } = await supabase
+    .from('srs_commits')
+    .select('form_id, rating, created_at')
+    .eq('user_id', userId)
+    .gte('created_at', new Date(Date.now() - MISTAKES_DAYS * 86_400_000).toISOString());
+  return mistakeFormIds((data ?? []) as CommitRow[]).length;
+}
+
+export async function buildMistakesSession(userId: string): Promise<SessionData> {
+  const nowIso = new Date().toISOString();
+  const [data, { data: commits }] = await Promise.all([
+    loadLearner(userId),
+    supabase
+      .from('srs_commits')
+      .select('form_id, rating, created_at')
+      .eq('user_id', userId)
+      .gte('created_at', new Date(Date.now() - MISTAKES_DAYS * 86_400_000).toISOString()),
+  ]);
+  const ladder = data.ladder ?? DEFAULT_LADDER;
+  const deck = deckUpTo(data, reachedUnit(data));
+  const ids = mistakeFormIds((commits ?? []) as CommitRow[])
+    .filter((id) => data.stateByForm.has(id) && data.formById.has(id))
+    .slice(0, MISTAKES_SIZE);
+  const wanted = new Set(ids);
+  const seen = glueSeen(data.sentences);
+  const known = new Set(data.stateByForm.keys());
+  const isDue = (id: string) => {
+    const due = data.stateByForm.get(id)?.due_at;
+    return !!due && due <= nowIso;
+  };
+
+  const items: SessionItem[] = [];
+  const covered = new Set<string>();
+  for (const sentence of pickReviewSentences(wanted, data.sentences, known, Math.ceil(ids.length / 2), seen, ids.length, {
+    pad: false,
+    ladder,
+  })) {
+    const target = sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && wanted.has(f.id) && !covered.has(f.id));
+    if (!target) continue;
+    const mode = modeForRung(atLeast(rungFor(sentence, seen, ladder), 'gap'), sentence);
+    if (mode === 'sentence_gap') covered.add(target.id);
+    else for (const id of sentence.form_ids) if (wanted.has(id)) covered.add(id);
+    items.push(sentenceItem(data, sentence, mode, target));
+  }
+  for (const id of ids) {
+    if (covered.has(id)) continue;
+    const form = data.formById.get(id)!;
+    const state = data.stateByForm.get(id)!;
+    const angles = itemsForForm(form, state, deck, ladder);
+    const item = angles.find((i) => PRODUCTION.includes(i.mode)) ?? angles[0];
+    if (item) items.push(isDue(id) ? item : { ...item, filler: true });
+  }
+  return {
+    items,
+    allForms: deck,
+    sentences: data.sentences,
+    scheduledFormIds: ids.filter(isDue),
+    ladder,
+  };
 }

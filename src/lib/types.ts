@@ -36,7 +36,7 @@ export interface Unit {
   status: ContentStatus;
 }
 
-export type LessonKind = 'lesson' | 'review' | 'checkpoint';
+export type LessonKind = 'lesson' | 'practice' | 'story' | 'listening' | 'review' | 'checkpoint';
 
 export interface Lesson {
   id: string;
@@ -54,7 +54,7 @@ export interface Tip {
   body_md: string;
 }
 
-export type SlotKind = 'teach' | 'drill' | 'match' | 'tip' | 'review';
+export type SlotKind = 'teach' | 'drill' | 'match' | 'tip' | 'review' | 'recap';
 
 export interface LessonSlot {
   id: string;
@@ -66,6 +66,8 @@ export interface LessonSlot {
   tip_id: string | null;
   mode: ExerciseMode | null;
   review_count: number | null;
+  /** recap: the unit's forms, or its whole section's. */
+  scope?: 'unit' | 'section' | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -81,6 +83,8 @@ export interface FormFeatures {
   voseo?: boolean;
   clitic?: boolean;
   gender?: 'm' | 'f';
+  /** An irregular form: decays faster, so it can start with a lower ease. */
+  irregular?: boolean;
 }
 
 /**
@@ -99,6 +103,7 @@ export interface Form {
   gloss_en: string;
   features: FormFeatures;
   unit_id: string;
+  section_id?: number;
   /** Its unit's place in its section, for display. */
   unit_ordinal: number;
   /** Its unit's place in the whole course: a form is available from here on. */
@@ -106,6 +111,8 @@ export interface Form {
   is_glue: boolean;
   register: string;
   audio_path: string | null;
+  /** Other spellings accepted when the form is typed on its own. */
+  alt?: string[];
 }
 
 export type FormStateName = 'new' | 'learning' | 'review';
@@ -174,6 +181,8 @@ export interface SentenceToken {
 export interface Sentence {
   id: string;
   unit_id: string;
+  /** The place in the course of the unit its target form is taught in. */
+  unit_order?: number;
   es: string;
   en: string;
   en_alt: string[];

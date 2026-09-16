@@ -25,13 +25,33 @@ export function shuffle<T>(arr: T[]): T[] {
   return out;
 }
 
-/** Case-, accent- and punctuation-insensitive key for comparing words. */
+/** Stands in for ñ while accents are folded, so it survives as its own letter. */
+const ENYE = '\u0001';
+
+/**
+ * Case-, accent- and punctuation-insensitive key for comparing words. ñ is a
+ * letter of its own, not an n with an accent: "año" and "ano" are different
+ * words, and folding them together once accepted one for the other.
+ */
 export const norm = (s: string) =>
   s
+    .normalize('NFC')
     .toLowerCase()
+    .replace(/ñ/g, ENYE)
     .normalize('NFD')
     .replace(/\p{Diacritic}/gu, '')
+    .replace(new RegExp(ENYE, 'g'), 'ñ')
     .replace(/[^\p{L}\p{N}]/gu, '');
+
+/** Like `norm`, but accents count: "tenes" ≠ "tenés". */
+export const normStrict = (s: string) =>
+  s
+    .normalize('NFC')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]/gu, '');
+
+/** Like `norm`, with ñ folded to n as well — only to recognise a missing tilde. */
+const normNoEnye = (s: string) => norm(s).replace(/ñ/g, 'n');
 
 /** A form whose text has a space is a phrase. */
 export const isPhrase = (text: string) => text.trim().includes(' ');
@@ -157,18 +177,52 @@ function oneEdit(a: string, b: string) {
 /** Below this many letters one edit is another word, not a typo: soy/sos, es/él. */
 const TYPO_MIN_LENGTH = 5;
 
+/** What a typed answer earned: right or wrong, and whether it was right with a
+ *  slip worth pointing out. `expected` is the accepted spelling it matched. */
+export type Note = 'accent' | 'typo' | 'enye';
+export interface Graded {
+  correct: boolean;
+  note?: Note;
+  expected: string;
+}
+
 /**
- * A typed word. Case, accents and punctuation don't count. One typo is
- * forgiven in a word long enough to have one — unless what she typed is itself
- * a word of the course, which makes it a wrong word, not a slip.
+ * A typed word. Case and punctuation don't count. What she is taught to spell
+ * does, gently:
+ *   - a missing or wrong accent is accepted, with a note ("tenés");
+ *   - a missing ñ is accepted with a note in a word long enough to be a slip,
+ *     and wrong in a short one, where it is another word (año / ano);
+ *   - one other typo is forgiven in a word of five letters or more.
+ * Never when what she typed is itself a word of the course — that is a wrong
+ * word, not a slip.
  */
+export function gradeTyped(input: string, form: Form, allForms: Form[]): Graded {
+  const accepted = sameAnswer(form, allForms).flatMap((f) => [f.form, ...(f.alt ?? [])]);
+  const fallback = { correct: false, expected: form.form } as const;
+  if (!norm(input)) return fallback;
+
+  const exact = accepted.find((a) => normStrict(a) === normStrict(input));
+  if (exact) return { correct: true, expected: exact };
+
+  const accent = accepted.find((a) => norm(a) === norm(input));
+  if (accent) return { correct: true, note: 'accent', expected: accent };
+
+  const isCourseWord = allForms.some((f) => norm(f.form) === norm(input));
+
+  const enye = accepted.find((a) => norm(a).includes('ñ') && normNoEnye(a) === normNoEnye(input));
+  if (enye) {
+    if (isCourseWord || norm(enye).length < TYPO_MIN_LENGTH) return { correct: false, expected: enye };
+    return { correct: true, note: 'enye', expected: enye };
+  }
+
+  if (isCourseWord) return fallback;
+  const typo = accepted.find((a) => norm(a).length >= TYPO_MIN_LENGTH && oneEdit(norm(input), norm(a)));
+  return typo ? { correct: true, note: 'typo', expected: typo } : fallback;
+}
+
+/** Whether a typed word is accepted at all — `gradeTyped` without the notes. */
 export function typedAnswerMatches(input: string, form: Form, allForms: Form[]) {
-  const got = norm(input);
-  if (!got) return false;
-  const accepted = sameAnswer(form, allForms).map((f) => norm(f.form));
-  if (accepted.includes(got)) return true;
-  if (allForms.some((f) => norm(f.form) === got)) return false;
-  return accepted.some((want) => want.length >= TYPO_MIN_LENGTH && oneEdit(got, want));
+  return gradeTyped(input, form, allForms).correct;
 }
 
 /**

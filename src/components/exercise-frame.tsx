@@ -16,8 +16,9 @@ import { Button } from '@/components/ui';
 import { colors, press, radius, shadow } from '@/lib/theme';
 
 /** Set once an exercise has been checked; `answer` is shown when she missed it,
- *  `also` when she got it right another way than the one written. */
-export type Verdict = { correct: boolean; answer?: string; also?: string } | null;
+ *  `also` when she got it right another way than the one written, `note` when
+ *  she got it right with a slip worth pointing out (an accent, a typo). */
+export type Verdict = { correct: boolean; answer?: string; also?: string; note?: string } | null;
 
 // ---------------------------------------------------------------------------
 // ExerciseFrame — the shape every exercise shares: a question at the top, the
@@ -34,6 +35,8 @@ export function ExerciseFrame({
   onContinue,
   note,
   checkLabel = 'Check',
+  badge,
+  actions,
 }: {
   prompt: string;
   children: React.ReactNode;
@@ -44,6 +47,10 @@ export function ExerciseFrame({
   /** Shown in place of the check button by exercises that grade as she goes. */
   note?: string;
   checkLabel?: string;
+  /** A small label above the question — "Harder". */
+  badge?: string;
+  /** Extra controls in the result panel, under the answer (report, why). */
+  actions?: React.ReactNode;
 }) {
   // The screen leaves its bottom edge alone so this bar can own it: a panel
   // that stops short of the edge reads as a card that failed to land. The inset
@@ -57,13 +64,19 @@ export function ExerciseFrame({
         contentContainerStyle={styles.body}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
+        {badge ? (
+          <View style={styles.badge}>
+            <Ionicons name="trending-up" size={13} color={colors.accent} />
+            <Text style={styles.badgeText}>{badge}</Text>
+          </View>
+        ) : null}
         <Text style={styles.prompt}>{prompt}</Text>
         <View style={styles.rule} />
         {children}
       </ScrollView>
 
       {verdict ? (
-        <FeedbackBar verdict={verdict} onContinue={onContinue} bottom={bottom} />
+        <FeedbackBar verdict={verdict} onContinue={onContinue} bottom={bottom} actions={actions} />
       ) : (
         <View style={[styles.footer, { paddingBottom: 20 + bottom }]}>
           {note ? (
@@ -86,9 +99,11 @@ function FeedbackBar({
   verdict,
   onContinue,
   bottom,
+  actions,
 }: {
   verdict: NonNullable<Verdict>;
   onContinue: () => void;
+  actions?: React.ReactNode;
   /** The home indicator's share of the screen, added under the button. */
   bottom: number;
 }) {
@@ -147,12 +162,18 @@ function FeedbackBar({
         </View>
       ) : null}
 
+      {good && verdict.note ? (
+        <Text style={[styles.feedbackNote]}>{verdict.note}</Text>
+      ) : null}
+
       {!good && verdict.answer ? (
         <View style={{ gap: 2 }}>
           <Text style={[styles.feedbackLabel, { color: tint }]}>Correct answer:</Text>
           <Text style={[styles.feedbackAnswer, { color: tint }]}>{verdict.answer}</Text>
         </View>
       ) : null}
+
+      {actions}
 
       <Pressable
         onPress={onContinue}
@@ -181,6 +202,19 @@ const styles = StyleSheet.create({
   rule: { height: 1, backgroundColor: colors.border, marginTop: -6 },
   footer: { padding: 20, paddingTop: 12, gap: 10 },
   note: { fontSize: 15, color: colors.muted, textAlign: 'center', paddingVertical: 16 },
+  badge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    gap: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: radius.pill,
+    backgroundColor: colors.accentSoft,
+    marginBottom: -8,
+  },
+  badgeText: { fontSize: 12, fontWeight: '700', letterSpacing: 0.4, color: colors.accent, textTransform: 'uppercase' },
+  feedbackNote: { fontSize: 15, lineHeight: 21, fontWeight: '600', color: colors.accent },
 
   feedback: {
     padding: 20,

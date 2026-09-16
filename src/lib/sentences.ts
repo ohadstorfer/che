@@ -11,7 +11,7 @@ import type { Form, Sentence, SentenceToken } from './types';
 // and accepts is answers.ts.
 // ---------------------------------------------------------------------------
 
-interface SentenceRow {
+export interface SentenceRow {
   id: string;
   unit_id: string;
   es: string;
@@ -36,37 +36,45 @@ export async function loadSentences(userId: string, forms: Form[]): Promise<Sent
   ]);
   const formById = new Map(forms.map((f) => [f.id, f]));
   const shownBy = new Map((states ?? []).map((s) => [s.sentence_id as string, s]));
+  return ((rows ?? []) as SentenceRow[]).map((r) => toSentence(r, formById, shownBy.get(r.id)));
+}
 
-  return ((rows ?? []) as SentenceRow[]).map((r) => {
-    const tokens: SentenceToken[] = r.tokens.map((t) => {
-      const content: string[] = [];
-      let glue: string | undefined;
-      for (const id of t.form_ids) {
-        const f = formById.get(id);
-        if (!f || f.pos === 'propn') continue;
-        if (f.is_glue) glue = id;
-        else content.push(id);
-      }
-      return { surface: t.surface, form_ids: content, ...(glue ? { glue } : {}) };
-    });
-    const st = shownBy.get(r.id);
-    return {
-      id: r.id,
-      unit_id: r.unit_id,
-      es: r.es,
-      en: r.en,
-      en_alt: r.en_alt ?? [],
-      es_alt: r.es_alt ?? [],
-      audio_path: r.audio_path,
-      target_form_id: r.target_form_id,
-      difficulty: r.difficulty,
-      tokens,
-      form_ids: [...new Set(tokens.flatMap((t) => t.form_ids))],
-      shown: st
-        ? { shown_count: st.shown_count, correct_count: st.correct_count, last_shown_at: st.last_shown_at }
-        : null,
-    };
+/** A stored sentence as the app uses it: tokens split into content forms
+ *  (drilled), glue (in view, never graded) and names (dropped), plus her record
+ *  for it. Pure, so tests can build sentences from the content build. */
+export function toSentence(
+  r: SentenceRow,
+  formById: Map<string, Form>,
+  st?: { shown_count: number; correct_count: number; last_shown_at: string | null } | null,
+): Sentence {
+  const tokens: SentenceToken[] = r.tokens.map((t) => {
+    const content: string[] = [];
+    let glue: string | undefined;
+    for (const id of t.form_ids) {
+      const f = formById.get(id);
+      if (!f || f.pos === 'propn') continue;
+      if (f.is_glue) glue = id;
+      else content.push(id);
+    }
+    return { surface: t.surface, form_ids: content, ...(glue ? { glue } : {}) };
   });
+  return {
+    id: r.id,
+    unit_id: r.unit_id,
+    unit_order: formById.get(r.target_form_id)?.unit_order ?? 0,
+    es: r.es,
+    en: r.en,
+    en_alt: r.en_alt ?? [],
+    es_alt: r.es_alt ?? [],
+    audio_path: r.audio_path,
+    target_form_id: r.target_form_id,
+    difficulty: r.difficulty,
+    tokens,
+    form_ids: [...new Set(tokens.flatMap((t) => t.form_ids))],
+    shown: st
+      ? { shown_count: st.shown_count, correct_count: st.correct_count, last_shown_at: st.last_shown_at }
+      : null,
+  };
 }
 
 const lastShown = (s: Sentence) => s.shown?.last_shown_at ?? '';
@@ -119,6 +127,76 @@ export function pickIntroSentence(form: Form, sentences: Sentence[], known: Set<
 // A lesson slot can pin its exercise instead; the ladder decides the rest.
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// The ladder's settings for one learner.
+//
+// The constants below are the defaults. What a round is actually built with
+// shifts with how her recent rounds went (the offset: learning-engine-spec
+// §4.2) and with what a placement test let her skip (§7.4), so every function
+// that climbs the ladder takes a `Ladder` rather than reading the constants.
+// ---------------------------------------------------------------------------
+export type LadderOffset = -1 | 0 | 1;
+
+export interface Ladder {
+  offset: LadderOffset;
+  /** Passes of a sentence before it moves from meaning to the gap. */
+  rungGapAt: number;
+  /** Passes before it moves on to tiles. */
+  rungBuildAt: number;
+  /** Interval, in days, at which a word has settled (session.ts). */
+  settledDays: number;
+  /** Added to the day's sentence cap. */
+  capShift: number;
+  /** All-correct first tries that promote the rest of a round; null = never. */
+  tailAfter: number | null;
+  /** course_order of the last unit a placement test skipped; 0 = none. */
+  placedThrough: number;
+  /** Glue forms unlocked by that skip, whatever their pass count. */
+  unlockedGlue: Set<string>;
+}
+
+export const DEFAULT_LADDER: Ladder = {
+  offset: 0,
+  rungGapAt: 1,
+  rungBuildAt: 2,
+  settledDays: 7,
+  capShift: 0,
+  tailAfter: 6,
+  placedThrough: 0,
+  unlockedGlue: new Set(),
+};
+
+/** Finished rounds the offset looks back over. */
+export const OFFSET_WINDOW = 5;
+
+/** The offset from her last finished rounds' scores: all but flawless → a step
+ *  harder, struggling → a step easier. Too few rounds to say → no change. */
+export function ladderOffset(recentScores: number[]): LadderOffset {
+  const scores = recentScores.filter((n) => Number.isFinite(n)).slice(0, OFFSET_WINDOW);
+  if (scores.length < 3) return 0;
+  const mean = scores.reduce((a, b) => a + b, 0) / scores.length;
+  if (mean >= 95) return 1;
+  if (mean <= 75) return -1;
+  return 0;
+}
+
+export function ladderFor(
+  offset: LadderOffset,
+  { placedThrough = 0, glue = [] }: { placedThrough?: number; glue?: { id: string; unit_order: number }[] } = {},
+): Ladder {
+  const byOffset = {
+    [-1]: { rungGapAt: 1, rungBuildAt: 3, settledDays: 10, capShift: -1, tailAfter: null },
+    [0]: { rungGapAt: 1, rungBuildAt: 2, settledDays: 7, capShift: 0, tailAfter: 6 },
+    [1]: { rungGapAt: 0, rungBuildAt: 1, settledDays: 5, capShift: 1, tailAfter: 4 },
+  }[offset];
+  return {
+    offset,
+    ...byOffset,
+    placedThrough,
+    unlockedGlue: new Set(placedThrough > 0 ? glue.filter((g) => g.unit_order <= placedThrough).map((g) => g.id) : []),
+  };
+}
+
 /** Sentence screens per round to start with, and the most it ever grows to. */
 export const SENTENCE_CAP_MIN = 2;
 export const SENTENCE_CAP_MAX = 8;
@@ -140,11 +218,13 @@ const passesOf = (s: Sentence) => s.shown?.correct_count ?? 0;
 /** Sentence screens a round may hold today, from everything she has passed so
  *  far and how yesterday went. Never below one: a bad day shrinks the dose, it
  *  doesn't cancel it. */
-export function sentenceCap(sentences: Sentence[], failedYesterday: number): number {
+export function sentenceCap(sentences: Sentence[], failedYesterday: number, ladder: Ladder = DEFAULT_LADDER): number {
   const passed = sentences.reduce((n, s) => n + passesOf(s), 0);
-  let cap = Math.min(SENTENCE_CAP_MAX, SENTENCE_CAP_MIN + Math.floor(passed / SENTENCE_CAP_STEP));
+  // A learner placed past the start has shown she reads sentences already.
+  const start = ladder.placedThrough > 0 ? INTRO_IN_SENTENCE_MIN_CAP : SENTENCE_CAP_MIN;
+  let cap = Math.min(SENTENCE_CAP_MAX, start + Math.floor(passed / SENTENCE_CAP_STEP));
   if (failedYesterday >= SENTENCE_FAILS_TO_DROP) cap -= 1;
-  return Math.max(1, cap);
+  return Math.max(1, Math.min(SENTENCE_CAP_MAX, cap + ladder.capShift));
 }
 
 /** How many passed screens each glue word has been in view for. */
@@ -160,23 +240,33 @@ export function glueSeen(sentences: Sentence[]): Map<string, number> {
 /** Whether the sentence carries a glue word she has not seen enough yet. Such a
  *  sentence is still read and gap-filled — the glue is in plain view there —
  *  but not rebuilt from tiles, where she would have to produce it. */
-export const hasLockedGlue = (s: Sentence, seen: Map<string, number>) =>
-  s.tokens.some((t) => t.glue && (seen.get(t.glue) ?? 0) < GLUE_UNLOCK_PASSES);
+export const hasLockedGlue = (s: Sentence, seen: Map<string, number>, ladder: Ladder = DEFAULT_LADDER) =>
+  s.tokens.some(
+    (t) => t.glue && !ladder.unlockedGlue.has(t.glue) && (seen.get(t.glue) ?? 0) < GLUE_UNLOCK_PASSES,
+  );
 
 export type Rung = 'meaning' | 'gap' | 'build';
 
 /** The exercise a sentence has earned: meaning until passed once, the gap until
  *  passed twice, tiles after that — unless a glue word holds it at the gap. */
-export function rungFor(s: Sentence, seen: Map<string, number>): Rung {
+export function rungFor(s: Sentence, seen: Map<string, number>, ladder: Ladder = DEFAULT_LADDER): Rung {
   const passes = passesOf(s);
-  if (passes < RUNG_GAP_AT) return 'meaning';
-  if (passes < RUNG_BUILD_AT || hasLockedGlue(s, seen)) return 'gap';
+  // A sentence from a unit placement let her skip starts at the gap: she has
+  // shown she can read that far, and has no passes to show for it.
+  const skipped = ladder.placedThrough > 0 && (s.unit_order ?? Infinity) <= ladder.placedThrough;
+  if (passes < ladder.rungGapAt && !skipped) return 'meaning';
+  if (passes < ladder.rungBuildAt || hasLockedGlue(s, seen, ladder)) return 'gap';
   return 'build';
 }
 
+/** Rungs from easiest to hardest, for "at least" comparisons. */
+export const RUNGS: Rung[] = ['meaning', 'gap', 'build'];
+export const atLeast = (rung: Rung, floor: Rung): Rung =>
+  RUNGS.indexOf(rung) >= RUNGS.indexOf(floor) ? rung : floor;
+
 /** Lower is easier: length, plus a step for glue she doesn't own yet. */
-const difficulty = (s: Sentence, seen: Map<string, number>) =>
-  s.tokens.length + (hasLockedGlue(s, seen) ? 2 : 0);
+const difficulty = (s: Sentence, seen: Map<string, number>, ladder: Ladder = DEFAULT_LADDER) =>
+  s.tokens.length + (hasLockedGlue(s, seen, ladder) ? 2 : 0);
 
 // Greedy cover under the cap. Each round picks one sentence covering at least
 // one due word still uncovered, and its words leave the pool, so two sentences
@@ -192,7 +282,7 @@ export function pickReviewSentences(
   max: number,
   seen: Map<string, number>,
   cap: number,
-  { pad = true }: { pad?: boolean } = {},
+  { pad = true, ladder = DEFAULT_LADDER }: { pad?: boolean; ladder?: Ladder } = {},
 ): Sentence[] {
   const pool = sentences.filter((s) => s.form_ids.length > 0 && carriedBy(s, eligible) && rested(s));
   const remaining = new Set(dueIds);
@@ -211,8 +301,8 @@ export function pickReviewSentences(
         continue;
       }
       const cmp = easyFirst
-        ? difficulty(s, seen) - difficulty(best, seen) || bestCount - count || byFreshness(s, best)
-        : bestCount - count || difficulty(s, seen) - difficulty(best, seen) || byFreshness(s, best);
+        ? difficulty(s, seen, ladder) - difficulty(best, seen, ladder) || bestCount - count || byFreshness(s, best)
+        : bestCount - count || difficulty(s, seen, ladder) - difficulty(best, seen, ladder) || byFreshness(s, best);
       if (cmp < 0) {
         best = s;
         bestCount = count;
@@ -229,7 +319,7 @@ export function pickReviewSentences(
   // A lesson's review slot asks for exactly its due words, so it opts out.
   if (pad && out.length < max) {
     const spare = shuffle(pool.filter((s) => !out.includes(s))).sort(
-      (a, b) => difficulty(a, seen) - difficulty(b, seen) || byFreshness(a, b),
+      (a, b) => difficulty(a, seen, ladder) - difficulty(b, seen, ladder) || byFreshness(a, b),
     );
     out.push(...spare.slice(0, max - out.length));
   }

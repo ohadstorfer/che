@@ -31,10 +31,13 @@ const data = {
   form_entries: formEntries,
   sentences: rows.sentences,
   lesson_slots: rows.lesson_slots,
+  story_lines: rows.story_lines,
+  unit_phrases: rows.unit_phrases,
 };
 
 writeFileSync(OUT, JSON.stringify(data));
 console.log(
   `wrote src/lib/demo-course.json: ${data.units.length} units, ${data.lessons.length} lessons, ` +
-    `${data.form_entries.length} forms, ${data.sentences.length} sentences, ${data.lesson_slots.length} slots`,
+    `${data.form_entries.length} forms, ${data.sentences.length} sentences, ${data.lesson_slots.length} slots, ` +
+    `${data.story_lines.length} story lines, ${data.unit_phrases.length} key phrases`,
 );
