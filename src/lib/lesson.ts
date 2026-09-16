@@ -41,6 +41,7 @@ export const TIP_FORM: Form = {
   features: {},
   unit_id: '',
   unit_ordinal: 0,
+  unit_order: 0,
   is_glue: true,
   register: 'neutral',
   audio_path: null,
@@ -104,8 +105,8 @@ export function resolveSlots(
   const nowIso = now.toISOString();
   const tipById = new Map(tips.map((t) => [t.id, t]));
   const sentenceById = new Map(data.sentences.map((s) => [s.id, s]));
-  const unitOf = (s: Sentence) => data.formById.get(s.target_form_id)?.unit_ordinal ?? Infinity;
-  const inReach = data.sentences.filter((s) => unitOf(s) <= unit.ordinal);
+  const unitOf = (s: Sentence) => data.formById.get(s.target_form_id)?.unit_order ?? Infinity;
+  const inReach = data.sentences.filter((s) => unitOf(s) <= unit.course_order);
   const seen = glueSeen(data.sentences);
 
   // Forms she can be assumed to know at each point of the lesson: everything
@@ -118,7 +119,7 @@ export function resolveSlots(
   const deck = data.forms.filter(
     (f) =>
       drillable(f) &&
-      (f.unit_ordinal < unit.ordinal ||
+      (f.unit_order < unit.course_order ||
         data.stateByForm.has(f.id) ||
         slots.some((s) => s.kind === 'teach' && s.form_id === f.id)),
   );
@@ -253,7 +254,7 @@ function reviewItems(
   const earlier: { state: FormState; form: Form }[] = [];
   for (const state of data.states) {
     const form = data.formById.get(state.form_id);
-    if (form && drillable(form) && form.unit_ordinal < unit.ordinal) earlier.push({ state, form });
+    if (form && drillable(form) && form.unit_order < unit.course_order) earlier.push({ state, form });
   }
   earlier.sort((a, b) => (a.state.due_at ?? '').localeCompare(b.state.due_at ?? ''));
   if (earlier.length === 0) return [];
@@ -262,7 +263,7 @@ function reviewItems(
   const dueIds = new Set(due.map((x) => x.form.id));
   const knownIds = new Set(data.stateByForm.keys());
   const earlierSentences = data.sentences.filter(
-    (s) => (data.formById.get(s.target_form_id)?.unit_ordinal ?? Infinity) < unit.ordinal,
+    (s) => (data.formById.get(s.target_form_id)?.unit_order ?? Infinity) < unit.course_order,
   );
 
   const out: SessionItem[] = [];

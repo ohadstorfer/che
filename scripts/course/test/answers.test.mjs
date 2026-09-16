@@ -1,8 +1,7 @@
-// The app's answer rules (src/lib/answers.ts), against the real demo content.
-// Every case here is a learner being marked wrong for a right answer, or right
-// for a wrong one, before these rules existed.
+// The app's answer rules (src/lib/answers.ts), on sentences built from the real
+// outline. Every case here is a learner being marked wrong for a right answer,
+// or right for a wrong one, before these rules existed.
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 
 import {
@@ -16,31 +15,88 @@ import {
   sentenceTiles,
   typedAnswerMatches,
 } from '../../../src/lib/answers.ts';
+import { buildContent } from '../lib/content.mjs';
+import { loadOutline } from '../lib/outline.mjs';
+import { buildRows } from '../lib/rows.mjs';
 
-const course = JSON.parse(readFileSync(new URL('../../../src/lib/demo-course.json', import.meta.url), 'utf8'));
-const forms = course.form_entries.filter((f) => f.unit_ordinal <= 2 && !f.is_glue && f.pos !== 'propn');
-const byForm = (text, pos) => forms.find((f) => f.form === text && (!pos || f.pos === pos));
-const formById = new Map(course.form_entries.map((f) => [f.id, f]));
-// The app's shape: glue and names out of form_ids (sentences.ts loadSentences).
-const sentences = course.sentences.map((s) => {
-  const tokens = s.tokens.map((t) => {
-    const content = t.form_ids.filter((id) => {
+const { outline } = loadOutline();
+const { formEntries } = buildRows();
+
+/** The lexicon a learner holds at the end of unit 7 — the deck exercises draw on. */
+const forms = formEntries.filter((f) => f.unit_order <= 7 && !f.is_glue && f.pos !== 'propn');
+const byForm = (text) => forms.find((f) => f.form === text);
+const formById = new Map(formEntries.map((f) => [f.id, f]));
+
+// Sentences across the units these rules are about: an optional "che", subject
+// pronouns, adjectives that have a gender, set phrases, and two ways to say
+// the same thing.
+const CONTENT = {
+  'un-cafe-por-favor': {
+    sentences: {
+      cafe: { es: 'Un café, por favor.', en: 'A coffee, please.', target: 'por favor' },
+      mate: { es: 'Un mate, por favor.', en: 'A mate, please.', target: 'mate' },
+    },
+  },
+  'hola-che': {
+    sentences: {
+      chau_che: { es: 'Chau, che.', en: 'Bye!', target: 'chau' },
+      que_tal: { es: '¿Qué tal?', en: "How's it going?", target: 'qué tal' },
+      dale_chau: { es: 'Dale, chau.', en: 'OK, bye.', target: 'dale' },
+      bueno_chau: { es: 'Bueno, chau.', en: 'Well, bye.', target: 'bueno' },
+      soy_sofi: { es: 'Soy Sofi.', en: "I'm Sofi.", target: 'soy' },
+    },
+  },
+  'de-donde-sos': {
+    sentences: {
+      de_donde: { es: '¿De dónde sos?', en: 'Where are you from?', es_alt: ['¿De dónde sos vos?'], target: 'dónde' },
+      soy_de_aca: { es: 'Soy de acá.', en: "I'm from here.", target: 'acá' },
+    },
+  },
+  'vos-y-sos': {
+    sentences: {
+      vos_sos_juan: { es: '¿Vos sos Juan?', en: 'Are you Juan?', target: 'sos' },
+    },
+  },
+  'el-y-ella': {
+    sentences: {
+      ella_es_de_aca: { es: 'Ella es de acá.', en: 'She is from here.', target: 'ella' },
+    },
+  },
+  'argentino-argentina': {
+    sentences: {
+      sos_argentino: { es: '¿Sos argentino?', en: 'Are you Argentinian?', target: 'argentino' },
+      el_uruguayo: { es: 'Él es uruguayo.', en: "He's Uruguayan.", target: 'uruguayo' },
+      si_uruguaya: { es: 'Sí, es uruguaya.', en: "Yes, she's Uruguayan.", target: 'uruguaya' },
+    },
+  },
+};
+
+const built = buildContent(outline, CONTENT);
+assert.deepEqual(built.errors, [], built.errors.join('\n'));
+
+/** The shape loadSentences hands the app: glue and names out of `form_ids`. */
+const sentences = built.sentences.map((s) => {
+  const tokens = s.tokens.map((t) => ({
+    surface: t.surface,
+    form_ids: t.form_ids.filter((id) => {
       const f = formById.get(id);
       return f && !f.is_glue && f.pos !== 'propn';
-    });
-    return { surface: t.surface, form_ids: content };
-  });
+    }),
+  }));
   return { ...s, tokens, form_ids: [...new Set(tokens.flatMap((t) => t.form_ids))], shown: null };
 });
-const sentence = (es) => sentences.find((s) => s.es === es);
+const sentence = (es) => {
+  const hit = sentences.find((s) => s.es === es);
+  if (!hit) throw new Error(`no sentence "${es}" in the test content`);
+  return hit;
+};
 const words = (text) => text.split(' ');
 
 test('a sentence build accepts what the English allows', () => {
   assert.ok(sentenceAnswerMatches(['chau'], sentence('Chau, che.')), '"che" is optional');
   assert.ok(sentenceAnswerMatches(words('sos Juan'), sentence('¿Vos sos Juan?')), 'pronoun dropped');
-  assert.ok(sentenceAnswerMatches(words('yo soy Sofi'), sentence('Soy Sofi.')), 'pronoun added');
-  assert.ok(sentenceAnswerMatches(words('no soy chilena'), sentence('No, soy chileno.')), 'other gender');
-  assert.ok(sentenceAnswerMatches(words('soy inglesa y vos'), sentence('Yo soy inglés, ¿y vos?')));
+  assert.ok(sentenceAnswerMatches(words('yo soy de acá'), sentence('Soy de acá.')), 'pronoun added');
+  assert.ok(sentenceAnswerMatches(words('sos argentina'), sentence('¿Sos argentino?')), 'other gender');
   assert.ok(sentenceAnswerMatches(words('sí ella es uruguaya'), sentence('Sí, es uruguaya.')));
   assert.ok(sentenceAnswerMatches(words('de dónde sos vos'), sentence('¿De dónde sos?')), 'authored word order');
   assert.ok(sentenceAnswerMatches(words('qué tal'), sentence('¿Qué tal?')));
@@ -55,14 +111,13 @@ test('a sentence build rejects real mistakes, however small', () => {
 });
 
 test('transcribing audio accepts only what was said', () => {
-  assert.ok(sentenceAnswerMatches(words('hola che'), sentence('Hola, che.'), { byEar: true }));
-  assert.ok(!sentenceAnswerMatches(['hola'], sentence('Hola, che.'), { byEar: true }));
+  assert.ok(sentenceAnswerMatches(words('chau che'), sentence('Chau, che.'), { byEar: true }));
+  assert.ok(!sentenceAnswerMatches(['chau'], sentence('Chau, che.'), { byEar: true }));
 });
 
 test('typing forgives typos, not other words', () => {
-  const soy = byForm('soy');
-  assert.ok(typedAnswerMatches('soy', soy, forms));
-  assert.ok(!typedAnswerMatches('sos', soy, forms), 'sos is a word, not a typo');
+  assert.ok(typedAnswerMatches('soy', byForm('soy'), forms));
+  assert.ok(!typedAnswerMatches('sos', byForm('soy'), forms), 'sos is a word, not a typo');
   assert.ok(!typedAnswerMatches('es', byForm('él'), forms));
   assert.ok(!typedAnswerMatches('y', byForm('yo'), forms), 'too short to have a typo');
   assert.ok(typedAnswerMatches('uruguyo', byForm('uruguayo'), forms), 'a typo in a long word');
@@ -72,7 +127,7 @@ test('typing forgives typos, not other words', () => {
 
 test('a wrong build blames the words she missed, not ones she could leave out', () => {
   assert.deepEqual(missedForms(sentence('¿Vos sos Juan?'), words('soy Juan'), forms), [byForm('sos').id]);
-  assert.deepEqual(missedForms(sentence('No, soy chileno.'), words('no soy uruguayo'), forms), [byForm('chileno').id]);
+  assert.deepEqual(missedForms(sentence('Él es uruguayo.'), words('él es argentino'), forms), [byForm('uruguayo').id]);
 });
 
 test('no gap option is also a right answer', () => {
@@ -84,9 +139,9 @@ test('no gap option is also a right answer', () => {
 });
 
 test('a phrase gap is answered among phrases', () => {
-  const s = sentence('Mucho gusto, Lucía.');
+  const s = sentence('Un café, por favor.');
   for (let i = 0; i < 20; i++) {
-    const options = gapOptions(s, byForm('mucho gusto'), forms);
+    const options = gapOptions(s, byForm('por favor'), forms);
     assert.ok(options.every((o) => o.label.includes(' ')), options.map((o) => o.label).join(', '));
   }
 });

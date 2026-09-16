@@ -36,7 +36,9 @@ await db.exec(`
 await db.exec(readFileSync(`${MIG}/20260427000001_init.sql`, 'utf8').replace(/create extension[^;]*;/i, ''));
 ok('che init migration applies');
 await db.exec(readFileSync(`${MIG}/20260913000001_course_schema.sql`, 'utf8'));
-ok('course schema migration applies');
+await db.exec(readFileSync(`${MIG}/20260915000001_sentence_es_alt.sql`, 'utf8'));
+await db.exec(readFileSync(`${MIG}/20260916000001_sections_and_lesson_kinds.sql`, 'utf8'));
+ok('course schema migrations apply');
 await db.exec(`
   grant select, insert, update, delete on all tables in schema public to authenticated;
   grant usage, select on all sequences in schema public to authenticated;
@@ -52,9 +54,9 @@ await db.exec(`
   update profiles set role = 'reviewer' where user_id = '${reviewer}';
 
   insert into sections (id, ordinal, slug, title_en, cefr, status) values (1, 1, 's1', 'First words', 'A1.1', 'published');
-  insert into units (id, section_id, ordinal, slug, title_en, summary_en, status)
-    values ('aaaaaaaa-0000-4000-8000-000000000001', 1, 1, 'u1', 'Hola, che', 'Say hi', 'published'),
-           ('aaaaaaaa-0000-4000-8000-000000000002', 1, 2, 'u2', 'Draft unit', 'Not yet', 'draft');
+  insert into units (id, section_id, ordinal, course_order, slug, title_en, summary_en, status)
+    values ('aaaaaaaa-0000-4000-8000-000000000001', 1, 1, 1, 'u1', 'Hola, che', 'Say hi', 'published'),
+           ('aaaaaaaa-0000-4000-8000-000000000002', 1, 2, 2, 'u2', 'Draft unit', 'Not yet', 'draft');
   insert into lessons (id, unit_id, ordinal, title_en, status)
     values ('bbbbbbbb-0000-4000-8000-000000000001', 'aaaaaaaa-0000-4000-8000-000000000001', 1, 'Lesson 1', 'published');
   insert into lemmas (id, lemma, pos, gloss_en, status)
@@ -108,7 +110,7 @@ await as(student, async () => {
   await assert.rejects(db.exec(`update profiles set role = 'admin' where user_id = '${student}'`), /admin/);
   ok('student cannot promote themselves');
 
-  await assert.rejects(db.exec(`insert into units (section_id, ordinal, slug, title_en, summary_en) values (1, 9, 'x', 'x', 'x')`));
+  await assert.rejects(db.exec(`insert into units (section_id, ordinal, course_order, slug, title_en, summary_en) values (1, 9, 9, 'x', 'x', 'x')`));
   ok('student cannot write content');
 
   const slots = await db.query(`select kind from lesson_slots`);
@@ -190,13 +192,33 @@ console.log('\nall migration checks passed');
   await seedDb.exec(readFileSync(`${MIG}/20260915000002_seed_section_1_accepted_answers.sql`, 'utf8'));
   ok('es_alt column + re-seed apply over the first seed');
   // Four units inserted mid-section: every later unit moves to a taken ordinal.
-  const seed = readFileSync(`${MIG}/20260915000003_seed_section_1_24_units.sql`, 'utf8');
-  await seedDb.exec(seed);
+  await seedDb.exec(readFileSync(`${MIG}/20260915000003_seed_section_1_24_units.sql`, 'utf8'));
   const order = (await seedDb.query(`select ordinal, slug from units order by ordinal`)).rows;
   assert.equal(order.length, 24);
   assert.deepEqual(order.slice(5, 8).map((u) => u.slug), ['me-traes-un-cafe', 'el-bondi', 'como-estas']);
   assert.equal(order[23].slug, 'repaso');
   ok('24-unit re-seed reorders units over the 20-unit seed');
+
+  // The re-slice: one section of 24 units becomes three of ten, and the units
+  // it dropped are retired rather than deleted.
+  await seedDb.exec(readFileSync(`${MIG}/20260916000001_sections_and_lesson_kinds.sql`, 'utf8'));
+  const seed = readFileSync(`${MIG}/20260916000002_seed_three_sections.sql`, 'utf8');
+  await seedDb.exec(seed);
+  const live = (await seedDb.query(`
+    select s.ordinal as section, u.ordinal, u.course_order, u.slug
+    from units u join sections s on s.id = u.section_id
+    where u.status <> 'retired' order by u.course_order`)).rows;
+  assert.equal(live.length, 30);
+  assert.deepEqual(live[0], { section: 1, ordinal: 1, course_order: 1, slug: 'un-cafe-por-favor' });
+  assert.deepEqual(live[10], { section: 2, ordinal: 1, course_order: 11, slug: 'la-gente' });
+  assert.deepEqual(live[29], { section: 3, ordinal: 10, course_order: 30, slug: 'ahora-y-planes' });
+  const retired = (await seedDb.query(`select slug from units where status = 'retired' order by slug`)).rows;
+  assert.deepEqual(retired.map((u) => u.slug), ['ahora', 'el-bondi', 'planes', 'repaso']);
+  const orphanForms = await seedDb.query(`
+    select count(*)::int as n from forms f join units u on u.id = f.unit_id
+    where u.status = 'retired' and f.status <> 'retired'`);
+  assert.equal(orphanForms.rows[0].n, 0);
+  ok('re-slice: 30 live units across 3 sections, 4 old units retired with their words');
 
   const counts = async () =>
     (await seedDb.query(`
@@ -223,11 +245,14 @@ console.log('\nall migration checks passed');
   assert.equal(orphans.rows[0].n, 0);
   ok('every slot resolves');
 
-  const alt = await seedDb.query(`select es_alt from sentences where es = '¿Vos sos Juan?'`);
-  assert.deepEqual(alt.rows[0].es_alt, ['¿Sos Juan?']);
-  const stale = await seedDb.query(`select count(*)::int as n from sentences where en = 'Hey there.'`);
-  assert.equal(stale.rows[0].n, 0, 'the re-seed updated sentences in place');
-  ok('accepted answers are seeded, sentences updated in place');
+  const alt = await seedDb.query(`select es_alt from sentences where es = 'Soy Sofi.'`);
+  assert.deepEqual(alt.rows[0].es_alt, ['Yo soy Sofi.']);
+  const stale = await seedDb.query(`
+    select count(*)::int as n from sentences where es = '¿Vos sos Juan?' and status <> 'retired'`);
+  assert.equal(stale.rows[0].n, 0, 'a sentence whose words moved to a later unit is retired');
+  const liveSentences = await seedDb.query(`select count(*)::int as n from sentences where status <> 'retired'`);
+  assert.equal(liveSentences.rows[0].n, 24);
+  ok('accepted answers seeded; sentences the re-slice broke are retired');
 
   await seedDb.exec(`
     grant select, insert, update on all tables in schema public to authenticated;
@@ -241,8 +266,8 @@ console.log('\nall migration checks passed');
       (select count(*)::int from lessons) as lessons,
       (select count(*)::int from form_entries) as forms,
       (select count(*)::int from lesson_slots) as slots`)).rows[0];
-  assert.deepEqual(seen, { units: 2, lessons: 10, forms: 52, slots: 95 });
-  ok('a student sees units 1–2 only: 10 lessons, 52 forms, 95 slots');
+  assert.deepEqual(seen, { units: 2, lessons: 10, forms: 30, slots: 69 });
+  ok('a student sees units 1–2 only: 10 lessons, 30 forms, 69 slots');
   await seedDb.exec(`reset role;`);
   console.log('\nall seed checks passed');
 }

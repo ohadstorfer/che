@@ -71,10 +71,10 @@ test('rejects a sample that uses a word taught later', () => {
 
 test('rejects a word above the unit register', () => {
   const { outline } = loadOutline();
-  const unit1 = outline.units[0];
-  // quilombo is lunfardo and exists (the checkpoint unit), but unit 1 allows up to informal
-  const late = { ...unit1, ordinal: outline.units.length, register_max: 'informal' };
-  const problems = checkSentence(outline, late, 'Qué quilombo.');
+  // quilombo is lunfardo and exists (the last unit teaches it), but every unit
+  // of the course allows up to informal.
+  const last = { ...outline.units.at(-1), register_max: 'informal' };
+  const problems = checkSentence(outline, last, 'Qué quilombo.');
   assert.ok(problems.some((p) => p.includes('lunfardo')), problems.join('\n'));
 });
 
@@ -124,19 +124,21 @@ test('rejects a drill that uses a word before its teach slot', () => {
 test("rejects a sentence whose target isn't one of its unit's forms", () => {
   const { outline } = loadOutline();
   const { errors } = buildContent(outline, {
+    // "soy" is taught two units earlier; this unit introduces "acá".
     'de-donde-sos': { sentences: { s: { es: 'Soy de acá.', en: "I'm from here.", target: 'soy' } } },
   });
-  assert.ok(errors.some((e) => e.includes('is not a form unit 2 introduces')), errors.join('\n'));
+  assert.ok(errors.some((e) => e.includes('is not a form unit de-donde-sos introduces')), errors.join('\n'));
 });
 
 test('rejects an ambiguous form reference and accepts the disambiguated one', () => {
   const { outline } = loadOutline();
+  // "mañana" is both the morning and tomorrow, and one unit teaches both.
   const bad = buildContent(outline, {
-    'de-donde-sos': { sentences: { s: { es: 'Ella es argentina.', en: "She's Argentinian.", target: 'argentina' } } },
+    'la-hora': { sentences: { s: { es: 'Mañana.', en: 'Tomorrow.', target: 'mañana' } } },
   });
   assert.ok(bad.errors.some((e) => e.includes('ambiguous')), bad.errors.join('\n'));
   const good = buildContent(outline, {
-    'de-donde-sos': { sentences: { s: { es: 'Ella es argentina.', en: "She's Argentinian.", target: 'argentina/adj' } } },
+    'la-hora': { sentences: { s: { es: 'Mañana.', en: 'Tomorrow.', target: 'mañana/adv' } } },
   });
   assert.deepEqual(good.errors, []);
 });

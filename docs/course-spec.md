@@ -115,7 +115,8 @@ create table sections (
 create table units (
   id            uuid primary key default gen_random_uuid(),
   section_id    smallint not null references sections,
-  ordinal       smallint not null,
+  ordinal       smallint not null,           -- place in its section: "Section 2, Unit 3"
+  course_order  smallint not null unique,    -- place in the whole course; what "taught by now" is measured on
   slug          text not null unique,
   title_en      text not null,
   summary_en    text not null,                -- one line, shown on the path
@@ -125,7 +126,7 @@ create table units (
   unique (section_id, ordinal)
 );
 
-create table lessons (
+create table lessons (              -- kind: lesson | practice | story | listening | review | checkpoint
   id        uuid primary key default gen_random_uuid(),
   unit_id   uuid not null references units on delete cascade,
   ordinal   smallint not null,
@@ -299,7 +300,7 @@ Scripts live in `scripts/course/`, run locally, write to the DB. Every stage is 
 
 | Stage | Script | Reads | Writes | Status after |
 |---|---|---|---|---|
-| Outline | `seed-outline.mjs` | `docs/course/section-1.yaml` (Appendix A, human-authored) | `sections`, `units`, `lessons` (empty), `tips`, `lemmas`, `forms` | `draft` |
+| Outline | `seed-outline.mjs` | `docs/course/section-*.yaml` (Appendix A, human-authored) | `sections`, `units`, `lessons` (empty), `tips`, `lemmas`, `forms` | `draft` |
 | Draft | `generate-unit.mjs <unit>` | unit's grammar focus + new forms; `available_forms`; style spec (Appendix B); quotas | `sentences` | `draft` |
 | Lint | `lint.mjs <unit>` | sentences | `content_reviews (stage=lint)`; fixes tokens where unambiguous | `linted` or back to `draft` with flags |
 | AI review | `ai-review.mjs <unit>` | linted sentences | `content_reviews (stage=ai)` with issue + proposed rewrite | `ai_reviewed` |
@@ -371,7 +372,7 @@ Phases are sequential; each has a definition of done. No dates — the pacing de
 
 - **Do:** Finalise Appendix A (section-1 outline: 24 units, grammar, forms) and Appendix B (rioplatense style spec) with a native reader. Encode the outline as `docs/course/section-1.yaml` including the lemma/form list per unit.
 - **Done when:** a native has read both appendices and signed off; the YAML validates; every PCIC A1 inventory item in scope maps to a unit.
-- **Built:** `docs/course/section-1.yaml` — 24 units, 364 lemmas, 589 forms, 118 lessons, tips, and a sample sentence per unit that must be sayable with what's been taught. `npm run course:validate` checks it (tuteo, vos tags, regionalisms, register, samples); `npm run course:test` holds the rejection cases. Shared tooling in `scripts/course/lib/`. Not yet read by a native.
+- **Built:** `docs/course/section-1.yaml`, `section-2.yaml`, `section-3.yaml` — 30 units across three sections, 364 lemmas, 589 forms, 150 lessons, tips, and a sample sentence per unit that must be sayable with what's been taught. `npm run course:validate` checks it (tuteo, vos tags, regionalisms, register, samples); `npm run course:test` holds the rejection cases. Shared tooling in `scripts/course/lib/`. Not yet read by a native.
 
 ### Phase 1 — Schema and engine rename · *done, not applied to the live DB*
 
@@ -423,13 +424,27 @@ Phases are sequential; each has a definition of done. No dates — the pacing de
 
 ---
 
-## Appendix A — Section 1 outline (proposal)
+## Appendix A — The A1 outline (proposal)
 
-Twenty-four units, ~12–18 new forms each, 5 lessons per unit (4 lessons + 1 review; unit 24 is a 3-lesson checkpoint). Voseo from the first sentence. PCIC A1 coverage noted per unit. **This is the artifact to argue with** — everything downstream is generated against it.
+Three sections of ten units, 5 lessons per unit, ~12–25 new forms each. Voseo from the first sentence. **This is the artifact to argue with** — everything downstream is generated against it. The full lexicon per unit lives in `docs/course/section-1.yaml`, `section-2.yaml` and `section-3.yaml`.
 
-The full lexicon per unit lives in `docs/course/section-1.yaml`. Encoding it moved a few things so that every sample is sayable with what has been taught by then: `mi` into unit 3, `cerca / lejos` into El bondi, and new samples for La familia, Querés podés vas and Repaso.
+*Changed 2026-09-15:* compared against Duolingo's course structure, four topics it teaches in A1 were missing and were added where Duolingo places them, as far as the grammar order allows — ordering, emotions, school and work, home.
 
-*Changed 2026-09-15:* compared against Duolingo's course structure, four topics it teaches in A1 were missing and were added where Duolingo places them, as far as the grammar order allows — ordering (6), emotions (8), school and work (10), home (12). Words they need moved earlier with them: `quiero`/`querés`, `traés` and `por favor` into 6; `estamos`/`están` into 8; `que` and `laburo` into 10.
+*Re-sliced 2026-09-16,* after reading Duolingo's own section 1 unit by unit (`docs/research/duolingo-spanish-section-1.md`). What changed and why:
+
+- **Three sections instead of one.** Their A1 is three sections of ten units; ours was one run of 24. A unit now carries two numbers — its place in its section, which the path shows, and its place in the course, which every "taught by now" check uses.
+- **One grammar point per unit early on.** Duolingo's first units teach one thing each and introduce a verb one person at a time. Our old unit 1 taught seven things at once; it is now four units (greetings and `soy`; `vos` and `sos`; `me llamo` / `te llamás`; `ser de`). `es` and `él/ella` get their own unit, and so does the gender of nationality adjectives.
+- **A transaction first.** Their unit 1 is ordering at a café with a fixed phrase and no verb forms at all. Ours is now `Un café, por favor` — food and drink words, `y` / `o`, `un` / `una` as glue. Greetings move to unit 2.
+- **Units are named for what the learner can do,** in English, with the Argentine phrase as the subtitle: "Order at a café" / *Un café, por favor*.
+- **Room for the lesson mix.** `lessons.kind` now also allows `practice`, `story` and `listening`, for the units to hold once those exist. Today every lesson is still `lesson` or `review`.
+
+| Section | Units |
+|---|---|
+| 1 · A1.1 | Order at a café · Greet people · Talk to someone as vos · Ask someone's name · Say where you're from · Talk about someone else · Say what people are · Introduce your family · Say your age · Buy at the kiosco |
+| 2 · A1.2 | Talk about more than one person · Say where something is · Say what there is around you · Say how you feel · Talk about what you do · Say what you like · Ask for what you want · Study and work · Eat, live, read and write · Show someone your place |
+| 3 · A1.3 | Tell the time · Find your way around the barrio · Say what you want to do · Tell a friend what to do · Describe clothes and colours · Ask what it costs · Talk about your routine · Talk about your free time · Talk about the weather · Say what's happening and what's next |
+
+The table below is the grammar and vocabulary of the 24 units this was sliced from; the section files are now the source of truth for which unit teaches what.
 
 | # | Unit | Grammar focus | Vocabulary | Sample target |
 |---|---|---|---|---|

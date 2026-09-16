@@ -103,13 +103,13 @@ export async function loadLearner(userId: string): Promise<LearnerData> {
 /** Whether a form is something she drills: not a function word, not a name. */
 export const drillable = (f: Form) => !f.is_glue && f.pos !== 'propn';
 
-/** Forms distractors may come from: drillable ones taught by `unitOrdinal`. */
-export const deckUpTo = (data: LearnerData, unitOrdinal: number) =>
-  data.forms.filter((f) => drillable(f) && f.unit_ordinal <= unitOrdinal);
+/** Forms distractors may come from: drillable ones taught by `courseOrder`. */
+export const deckUpTo = (data: LearnerData, courseOrder: number) =>
+  data.forms.filter((f) => drillable(f) && f.unit_order <= courseOrder);
 
 /** The furthest unit she has met a word from — the edge of her deck. */
 export const reachedUnit = (data: LearnerData) =>
-  Math.max(0, ...data.states.map((s) => data.formById.get(s.form_id)?.unit_ordinal ?? 0));
+  Math.max(0, ...data.states.map((s) => data.formById.get(s.form_id)?.unit_order ?? 0));
 
 // ---------------------------------------------------------------------------
 // Exercise selection

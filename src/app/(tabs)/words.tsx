@@ -80,7 +80,7 @@ export default function Words() {
         // In the order the course taught them — the newest words at the top.
         rows.sort(
           (a, b) =>
-            b.form.unit_ordinal - a.form.unit_ordinal ||
+            b.form.unit_order - a.form.unit_order ||
             b.state.introduced_on.localeCompare(a.state.introduced_on) ||
             a.form.form.localeCompare(b.form.form, 'es'),
         );

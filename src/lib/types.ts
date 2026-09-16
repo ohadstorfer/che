@@ -24,7 +24,10 @@ export interface Section {
 export interface Unit {
   id: string;
   section_id: number;
+  /** Place in its own section — what the path shows ("Section 2, Unit 3"). */
   ordinal: number;
+  /** Place in the whole course, which is what "taught by now" is measured on. */
+  course_order: number;
   slug: string;
   title_en: string;
   summary_en: string;
@@ -96,7 +99,10 @@ export interface Form {
   gloss_en: string;
   features: FormFeatures;
   unit_id: string;
+  /** Its unit's place in its section, for display. */
   unit_ordinal: number;
+  /** Its unit's place in the whole course: a form is available from here on. */
+  unit_order: number;
   is_glue: boolean;
   register: string;
   audio_path: string | null;
