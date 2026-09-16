@@ -20,12 +20,12 @@ const answerKey = (es) => bare(es).split(/\s+/).filter(Boolean).join(' ');
 function resolveFormRef(outline, unit, ref, where, errors) {
   const [surface, pos] = String(ref).split('/');
   const hits = outline.forms.filter(
-    (f) => f.unit_ordinal === unit.ordinal && fold(f.form) === fold(surface) && (!pos || f.pos === pos),
+    (f) => f.unit_order === unit.course_order && fold(f.form) === fold(surface) && (!pos || f.pos === pos),
   );
   if (hits.length === 1) return hits[0];
   errors.push(
     hits.length === 0
-      ? `${where}: "${ref}" is not a form unit ${unit.ordinal} introduces`
+      ? `${where}: "${ref}" is not a form unit ${unit.slug} introduces`
       : `${where}: "${ref}" is ambiguous (${hits.map((h) => h.pos).join(', ')}) — write it as "${surface}/<pos>"`,
   );
   return null;
@@ -46,7 +46,7 @@ export function buildContent(outline, content, { source = 'human', status = 'dra
 
   // Everything taught before a unit, for the lesson-order check below.
   const taughtBefore = (unit) =>
-    new Set(outline.forms.filter((f) => f.unit_ordinal < unit.ordinal && drillable(f)).map((f) => f.id));
+    new Set(outline.forms.filter((f) => f.unit_order < unit.course_order && drillable(f)).map((f) => f.id));
 
   for (const [slug, block] of Object.entries(content)) {
     const unit = unitBySlug.get(slug);
@@ -54,7 +54,7 @@ export function buildContent(outline, content, { source = 'human', status = 'dra
       errors.push(`unit "${slug}" is not in the outline`);
       continue;
     }
-    const index = buildIndex(availableForms(outline, unit.ordinal));
+    const index = buildIndex(availableForms(outline, unit.course_order));
     const sentenceByKey = new Map();
 
     for (const [key, s] of Object.entries(block.sentences ?? {})) {

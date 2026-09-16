@@ -72,8 +72,8 @@ test('rejects a sample that uses a word taught later', () => {
 test('rejects a word above the unit register', () => {
   const { outline } = loadOutline();
   const unit1 = outline.units[0];
-  // quilombo is lunfardo and exists (unit 20), but unit 1 allows up to informal
-  const late = { ...unit1, ordinal: 20, register_max: 'informal' };
+  // quilombo is lunfardo and exists (the checkpoint unit), but unit 1 allows up to informal
+  const late = { ...unit1, ordinal: outline.units.length, register_max: 'informal' };
   const problems = checkSentence(outline, late, 'Qué quilombo.');
   assert.ok(problems.some((p) => p.includes('lunfardo')), problems.join('\n'));
 });

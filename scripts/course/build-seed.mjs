@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Writes the course into a migration: the section-1 outline, with units 1–2
-// (the ones that have lessons written) published and units 3–20 as drafts.
+// (the ones that have lessons written) published and the rest as drafts.
 //
 //   npm run course:seed -- supabase/migrations/<timestamp>_seed_section_1.sql
 //
@@ -59,11 +59,16 @@ const sql = [
 -- Do not edit by hand; regenerate.
 --
 -- Units 1–${PUBLISH_THROUGH} are published: they have lessons written. Their sentences are
--- hand-written and NOT yet reviewed by a native speaker. Units ${PUBLISH_THROUGH + 1}–20 go in as
+-- hand-written and NOT yet reviewed by a native speaker. Units ${PUBLISH_THROUGH + 1}–${rows.units.length} go in as
 -- drafts — outline, words and tips — for the pipeline to fill.
 --
 -- Idempotent: every row is an upsert on its deterministic id.
 -- ---------------------------------------------------------------------------
+
+-- Units are unique by (section, ordinal), so a unit inserted mid-section would
+-- collide with the one it displaces. Park the ordinals first; the upsert below
+-- sets every one back.
+update public.units set ordinal = ordinal + 1000 where section_id = ${rows.sections[0].id};
 `,
   upsert('sections', rows.sections, ['id', 'ordinal', 'slug', 'title_en', 'cefr', 'status']),
   upsert(

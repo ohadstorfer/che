@@ -187,9 +187,16 @@ console.log('\nall migration checks passed');
   ok('first seed applies');
   // Production got the first seed before es_alt existed; the re-seed lands on top.
   await seedDb.exec(readFileSync(`${MIG}/20260915000001_sentence_es_alt.sql`, 'utf8'));
-  const seed = readFileSync(`${MIG}/20260915000002_seed_section_1_accepted_answers.sql`, 'utf8');
-  await seedDb.exec(seed);
+  await seedDb.exec(readFileSync(`${MIG}/20260915000002_seed_section_1_accepted_answers.sql`, 'utf8'));
   ok('es_alt column + re-seed apply over the first seed');
+  // Four units inserted mid-section: every later unit moves to a taken ordinal.
+  const seed = readFileSync(`${MIG}/20260915000003_seed_section_1_24_units.sql`, 'utf8');
+  await seedDb.exec(seed);
+  const order = (await seedDb.query(`select ordinal, slug from units order by ordinal`)).rows;
+  assert.equal(order.length, 24);
+  assert.deepEqual(order.slice(5, 8).map((u) => u.slug), ['me-traes-un-cafe', 'el-bondi', 'como-estas']);
+  assert.equal(order[23].slug, 'repaso');
+  ok('24-unit re-seed reorders units over the 20-unit seed');
 
   const counts = async () =>
     (await seedDb.query(`

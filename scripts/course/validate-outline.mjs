@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Validates docs/course/section-1.yaml and prints what each unit introduces.
+// Validates the course outline (docs/course/section-*.yaml) and prints what
+// each unit introduces.
 //
 //   npm run course:validate
 //
@@ -10,11 +11,13 @@ import { loadOutline } from './lib/outline.mjs';
 const { outline, errors, warnings } = loadOutline();
 
 if (outline) {
+  const sectionOf = new Map(outline.sections.map((s) => [s.id, s]));
   const rows = outline.units.map((u) => {
-    const own = outline.forms.filter((f) => f.unit_ordinal === u.ordinal);
+    const own = outline.forms.filter((f) => f.unit_order === u.course_order);
     const drillable = own.filter((f) => !f.is_glue && f.pos !== 'propn');
-    const lemmas = outline.lemmas.filter((l) => l.unit_ordinal === u.ordinal).length;
+    const lemmas = outline.lemmas.filter((l) => l.unit_order === u.course_order).length;
     return {
+      section: sectionOf.get(u.section_id)?.ordinal ?? '?',
       unit: String(u.ordinal).padStart(2),
       title: u.title_en,
       lemmas,
@@ -28,7 +31,7 @@ if (outline) {
   console.table(rows);
   const cumulative = outline.forms.filter((f) => !f.is_glue && f.pos !== 'propn').length;
   console.log(
-    `section ${outline.section.id} · ${outline.units.length} units · ${outline.lemmas.length} lemmas · ` +
+    `${outline.sections.length} sections · ${outline.units.length} units · ${outline.lemmas.length} lemmas · ` +
       `${outline.forms.length} forms (${cumulative} drillable) · ` +
       `${outline.units.reduce((n, u) => n + u.lessons.length, 0)} lessons`,
   );

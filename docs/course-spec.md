@@ -14,8 +14,8 @@ Everything below follows from these. They were settled in conversation and are n
 |---|---|
 | Path node | An authored lesson. The path *is* the curriculum. |
 | Learner | English speakers. UI in English (translation sweep is its own step). |
-| v1 scope | One section, end to end: ~20 units, ~100 lessons, ~1000 sentences. |
-| Syllabus | PCIC A1 inventory as a coverage checklist; we author the order, Argentine-first. |
+| v1 scope | One section, end to end: 24 units, ~120 lessons, ~1000 sentences. |
+| Syllabus | PCIC A1 inventory as a coverage checklist; topic order follows Duolingo's Spanish course (`docs/course/duolingo-structure.md` — structure only, no content), Argentine-first. |
 | Content model | Duolingo's: author *sentences*, derive *exercises* mechanically. The derivation engine already exists. |
 | Daily loop | Lessons interleave authored content with due material from earlier units, from day one. |
 | SRS | Survives (SM-2 per form), feeding the interleave and a separate Practice entry. |
@@ -369,9 +369,9 @@ Phases are sequential; each has a definition of done. No dates — the pacing de
 
 ### Phase 0 — Outline and style spec · *machine side done; native sign-off pending*
 
-- **Do:** Finalise Appendix A (section-1 outline: 20 units, grammar, forms) and Appendix B (rioplatense style spec) with a native reader. Encode the outline as `docs/course/section-1.yaml` including the lemma/form list per unit.
+- **Do:** Finalise Appendix A (section-1 outline: 24 units, grammar, forms) and Appendix B (rioplatense style spec) with a native reader. Encode the outline as `docs/course/section-1.yaml` including the lemma/form list per unit.
 - **Done when:** a native has read both appendices and signed off; the YAML validates; every PCIC A1 inventory item in scope maps to a unit.
-- **Built:** `docs/course/section-1.yaml` — 20 units, 310 lemmas, 502 forms, 98 lessons, tips, and a sample sentence per unit that must be sayable with what's been taught. `npm run course:validate` checks it (tuteo, vos tags, regionalisms, register, samples); `npm run course:test` holds the rejection cases. Shared tooling in `scripts/course/lib/`. Not yet read by a native.
+- **Built:** `docs/course/section-1.yaml` — 24 units, 364 lemmas, 589 forms, 118 lessons, tips, and a sample sentence per unit that must be sayable with what's been taught. `npm run course:validate` checks it (tuteo, vos tags, regionalisms, register, samples); `npm run course:test` holds the rejection cases. Shared tooling in `scripts/course/lib/`. Not yet read by a native.
 
 ### Phase 1 — Schema and engine rename · *done, not applied to the live DB*
 
@@ -403,7 +403,7 @@ Phases are sequential; each has a definition of done. No dates — the pacing de
 
 ### Phase 6 — Scale to the section
 
-- **Do:** units 4–20 through the same loop; the English UI sweep; the TTS listening test and, on a decision, the audio job (`tts.mjs` filling `audio_path` for every published form and sentence); final snapshot.
+- **Do:** units 4–24 through the same loop; the English UI sweep; the TTS listening test and, on a decision, the audio job (`tts.mjs` filling `audio_path` for every published form and sentence); final snapshot.
 - **Done when:** section 1 is published with audio, the UI is English, and a new learner can go from the first coin to the checkpoint.
 
 **Parallel tracks** (do not block the phases): notifications reconciliation; figures and mascot art (a 7-line edit once sources exist); mascot rename.
@@ -425,9 +425,11 @@ Phases are sequential; each has a definition of done. No dates — the pacing de
 
 ## Appendix A — Section 1 outline (proposal)
 
-Twenty units, ~12–18 new forms each, 5 lessons per unit (4 lessons + 1 review; unit 20 is a 3-lesson checkpoint). Voseo from the first sentence. PCIC A1 coverage noted per unit. **This is the artifact to argue with** — everything downstream is generated against it.
+Twenty-four units, ~12–18 new forms each, 5 lessons per unit (4 lessons + 1 review; unit 24 is a 3-lesson checkpoint). Voseo from the first sentence. PCIC A1 coverage noted per unit. **This is the artifact to argue with** — everything downstream is generated against it.
 
-The full lexicon per unit lives in `docs/course/section-1.yaml`. Encoding it moved a few things so that every sample is sayable with what has been taught by then: `mi` into unit 3, `cerca / lejos` into unit 6, and new samples for units 4, 10 and 20.
+The full lexicon per unit lives in `docs/course/section-1.yaml`. Encoding it moved a few things so that every sample is sayable with what has been taught by then: `mi` into unit 3, `cerca / lejos` into El bondi, and new samples for La familia, Querés podés vas and Repaso.
+
+*Changed 2026-09-15:* compared against Duolingo's course structure, four topics it teaches in A1 were missing and were added where Duolingo places them, as far as the grammar order allows — ordering (6), emotions (8), school and work (10), home (12). Words they need moved earlier with them: `quiero`/`querés`, `traés` and `por favor` into 6; `estamos`/`están` into 8; `que` and `laburo` into 10.
 
 | # | Unit | Grammar focus | Vocabulary | Sample target |
 |---|---|---|---|---|
@@ -436,21 +438,25 @@ The full lexicon per unit lives in `docs/course/section-1.yaml`. Encoding it mov
 | 3 | ¿Cuántos años tenés? | `tener` 1sg/2sg-vos/3sg; numbers 0–20; `mi` | age, `años`, `hermano/a` | *Tengo veinte años y mi hermana tiene diecisiete.* |
 | 4 | La familia | possessives `tu/su`, `mis`; plural `-s/-es`; `tener`, `ser` pl | family, `viejos` (informal), `novio/a` | *Mis viejos son de Rosario.* |
 | 5 | Mate y facturas | `gustar` (`me gusta`, `te gusta`, `le gusta`); definite articles | mate, `facturas`, `medialunas`, `milanesa`, `café con leche`, `tomar` | *¿Te gusta el mate amargo o dulce?* |
-| 6 | El bondi | `estar` 1sg/2sg-vos/3sg; `hay`; `del`/`al` | `bondi`, `subte`, `parada`, `kiosco`, `cuadra`, `esquina`, `cerca / lejos` | *La parada del bondi está en la esquina.* |
-| 7 | ¿Qué hacés? | regular `-ar` present (`-o, -ás, -a, -amos, -an`) | `laburar`, `estudiar`, `tomar`, `hablar`, `caminar` | *Laburo en el centro y estudio a la noche.* |
-| 8 | Comés, vivís | regular `-er` / `-ir` present (`-és`, `-ís`) | `comer`, `vivir`, `leer`, `escribir`, `aprender` | *¿Vivís solo o con tu familia?* |
-| 9 | La hora | `¿qué hora es?`; `a las…`; `y media / y cuarto`; numbers 20–100 | days, `mañana / tarde / noche`, `temprano`, `tarde` | *Nos vemos a las siete y media.* |
-| 10 | Querés, podés, vas | `querer`, `poder`, `ir` (present, all persons taught so far); `ir a` + place | `salir`, `boliche`, `plaza`, `cine` | *¿Querés ir a la plaza o al boliche?* |
-| 11 | Dale, vení | affirmative `vos` imperative (`mirá`, `vení`, `escuchá`, `hablá`, `decime`, `andá`) | `dale`, `esperá`, `pasá`, `sentate`, `fijate` | *Vení, sentate, tomamos unos mates.* |
-| 12 | Ropa y colores | adjective agreement (gender + number); `ser` for description | colours, `remera`, `zapatillas`, `campera`, `lindo/a`, `re` | *Esa campera es re linda.* |
-| 13 | El barrio | prepositions of place; `al lado de`, `enfrente`, `entre` | `verdulería`, `panadería`, `farmacia`, `al lado de`, `enfrente` | *Hay una panadería al lado de la farmacia.* |
-| 14 | ¿Cuánto sale? | `¿cuánto sale?`, `cuesta`; numbers 100–1000; `plata`, `mangos` | shopping, `caro / barato`, `efectivo`, `tarjeta` | *¿Cuánto sale el café? — Mil quinientos mangos.* |
-| 15 | La rutina | reflexives (`me levanto`, `te levantás`, `se acuesta`); `antes / después de` | routine verbs, `bañarse`, `desayunar`, `finde` | *Los sábados me levanto tarde.* |
-| 16 | ¿Qué te gusta hacer? | `gustar / encantar` + infinitive; `también / tampoco` | hobbies, `fútbol`, `la cancha`, `juntarse`, `mirar una serie` | *Me encanta ir a la cancha los domingos.* |
-| 17 | Clima | `hace calor / frío`; `está nublado`; `llueve`; seasons (southern) | weather, `paraguas`, `verano en enero` | *Hace un calor bárbaro hoy.* |
-| 18 | Ahora | `estar` + gerund; `ahora`, `todavía`, `ya` | `estoy laburando`, `esperando`, `llegando` | *Estoy llegando, esperame.* |
-| 19 | Planes | `ir a` + infinitive; `mañana`, `el finde`, `la semana que viene` | plans, `asado`, `juntada`, `quedar en` | *El finde vamos a hacer un asado.* |
-| 20 | Repaso · checkpoint | no new grammar; register note on `boludo`, `quilombo`; culture: `che`, mate etiquette | `posta`, `copado`, `pibe`, `laburo` | *Posta, este barrio es re copado.* |
+| 6 | ¿Me traés un café? | `querer` 1sg/2sg-vos for ordering; `¿me traés…?`; `para`, `sin` | `mozo/a`, `la cuenta`, `cortado`, `empanada`, `tostado`, `jugo`, `por favor` | *Hola, ¿me traés un cortado y dos medialunas, por favor?* |
+| 7 | El bondi | `estar` 1sg/2sg-vos/3sg; `hay`; `del`/`al` | `bondi`, `subte`, `parada`, `kiosco`, `cuadra`, `esquina`, `cerca / lejos` | *La parada del bondi está en la esquina.* |
+| 8 | ¿Cómo estás? | `estar` + state adjectives (gender); `estar` 1pl/3pl; `porque`; `medio` as softener | `cansado/a`, `contento/a`, `nervioso/a`, `enojado/a`, `ocupado/a`, `triste`, `feliz`, `tranqui`, `más o menos` | *¿Cómo estás? Medio cansada, pero bien.* |
+| 9 | ¿Qué hacés? | regular `-ar` present (`-o, -ás, -a, -amos, -an`) | `laburar`, `estudiar`, `tomar`, `hablar`, `caminar` | *Laburo en el centro y estudio a la noche.* |
+| 10 | Facu y laburo | `tener que` + infinitive; `ser` + profession without article | `facu`, `clase`, `examen`, `materia`, `profesor/a`, `compañero/a`, `jefe/a`, `oficina`, `laburo` | *Tengo que estudiar para un examen.* |
+| 11 | Comés, vivís | regular `-er` / `-ir` present (`-és`, `-ís`) | `comer`, `vivir`, `leer`, `escribir`, `aprender` | *¿Vivís solo o con tu familia?* |
+| 12 | Mi casa | `hay` / `tener` for rooms; `alquilar` | `depto`, `pieza`, `ambientes`, `cocina`, `baño`, `living`, `balcón`, `heladera`, `sillón` | *Alquilo un depto con dos piezas y un balcón.* |
+| 13 | La hora | `¿qué hora es?`; `a las…`; `y media / y cuarto`; numbers 20–100 | days, `mañana / tarde / noche`, `temprano`, `tarde` | *Nos vemos a las siete y media.* |
+| 14 | Querés, podés, vas | `querer`, `poder`, `ir` (present, all persons taught so far); `ir a` + place | `salir`, `boliche`, `plaza`, `cine` | *¿Querés ir a la plaza o al boliche?* |
+| 15 | Dale, vení | affirmative `vos` imperative (`mirá`, `vení`, `escuchá`, `hablá`, `decime`, `andá`) | `dale`, `esperá`, `pasá`, `sentate`, `fijate` | *Vení, sentate, tomamos unos mates.* |
+| 16 | Ropa y colores | adjective agreement (gender + number); `ser` for description | colours, `remera`, `zapatillas`, `campera`, `lindo/a`, `re` | *Esa campera es re linda.* |
+| 17 | El barrio | prepositions of place; `al lado de`, `enfrente`, `entre` | `verdulería`, `panadería`, `farmacia`, `al lado de`, `enfrente` | *Hay una panadería al lado de la farmacia.* |
+| 18 | ¿Cuánto sale? | `¿cuánto sale?`, `cuesta`; numbers 100–1000; `plata`, `mangos` | shopping, `caro / barato`, `efectivo`, `tarjeta` | *¿Cuánto sale el café? — Mil quinientos mangos.* |
+| 19 | La rutina | reflexives (`me levanto`, `te levantás`, `se acuesta`); `antes / después de` | routine verbs, `bañarse`, `desayunar`, `finde` | *Los sábados me levanto tarde.* |
+| 20 | ¿Qué te gusta hacer? | `gustar / encantar` + infinitive; `también / tampoco` | hobbies, `fútbol`, `la cancha`, `juntarse`, `mirar una serie` | *Me encanta ir a la cancha los domingos.* |
+| 21 | Clima | `hace calor / frío`; `está nublado`; `llueve`; seasons (southern) | weather, `paraguas`, `verano en enero` | *Hace un calor bárbaro hoy.* |
+| 22 | Ahora | `estar` + gerund; `ahora`, `todavía`, `ya` | `estoy laburando`, `esperando`, `llegando` | *Estoy llegando, esperame.* |
+| 23 | Planes | `ir a` + infinitive; `mañana`, `el finde`, `la semana que viene` | plans, `asado`, `juntada`, `quedar en` | *El finde vamos a hacer un asado.* |
+| 24 | Repaso · checkpoint | no new grammar; register note on `boludo`, `quilombo`; culture: `che`, mate etiquette | `posta`, `copado`, `pibe`, `laburo` | *Posta, este barrio es re copado.* |
 
 PCIC A1 items deliberately **out** of section 1: past tenses, `ser/estar` full contrast, object pronouns beyond `me/te`, comparatives. They open section 2.
 
@@ -470,7 +476,7 @@ Given to the generator verbatim and enforced by the linter where it can be.
 
 **Register**
 - `che`, `dale`, `re`, `bárbaro` from unit 1 — they are neutral-informal, not slang.
-- `boludo/a` only in unit 20's register note, flagged `informal`, with the warning that it is affectionate among friends and an insult otherwise. Never in a drill sentence.
+- `boludo/a` only in the checkpoint unit's register note, flagged `informal`, with the warning that it is affectionate among friends and an insult otherwise. Never in a drill sentence.
 - No vulgar register in section 1.
 
 **Spelling and punctuation**

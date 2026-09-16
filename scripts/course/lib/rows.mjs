@@ -11,9 +11,10 @@ import { loadOutline } from './outline.mjs';
 export const DEMO_FIXTURE = new URL('../fixtures/demo.yaml', import.meta.url);
 
 /**
- * @param publishThrough  units up to this ordinal (and their lessons, tips,
- *                        lemmas, forms, sentences) are published; the rest are
- *                        drafts. Infinity publishes everything.
+ * @param publishThrough  units up to this place in the course (course_order,
+ *                        counted across sections) and their lessons, tips,
+ *                        lemmas, forms and sentences are published; the rest
+ *                        are drafts. Infinity publishes everything.
  * @returns {{ rows, warnings }}  throws with every error if anything fails.
  */
 export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE } = {}) {
@@ -24,17 +25,23 @@ export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE } 
   const { sentences, slots, errors, warnings } = buildContent(outline, content, { source: 'human' });
   if (errors.length) throw new Error(`content:\n${errors.join('\n')}`);
 
-  const status = (ordinal) => (ordinal <= publishThrough ? 'published' : 'draft');
-  const unitOrdinalById = new Map(outline.units.map((u) => [u.id, u.ordinal]));
+  const status = (order) => (order <= publishThrough ? 'published' : 'draft');
+  const unitOrderById = new Map(outline.units.map((u) => [u.id, u.course_order]));
   const lemmaById = new Map(outline.lemmas.map((l) => [l.id, l]));
-  const lessonUnit = new Map(outline.units.flatMap((u) => u.lessons.map((l) => [l.id, u.ordinal])));
+  const lessonUnit = new Map(outline.units.flatMap((u) => u.lessons.map((l) => [l.id, u.course_order])));
 
   const rows = {
-    sections: [{ ...outline.section, status: 'published' }],
-    units: outline.units.map(({ sample, lessons, tips, ...u }) => ({ ...u, status: status(u.ordinal) })),
-    lessons: outline.units.flatMap((u) => u.lessons.map((l) => ({ ...l, status: status(u.ordinal) }))),
-    tips: outline.units.flatMap((u) => u.tips.map((t) => ({ ...t, status: status(u.ordinal) }))),
-    lemmas: outline.lemmas.map(({ unit_ordinal, ...l }) => ({ ...l, status: status(unit_ordinal) })),
+    // A section is published once any of its units is.
+    sections: outline.sections.map((s) => ({
+      ...s,
+      status: outline.units.some((u) => u.section_id === s.id && u.course_order <= publishThrough)
+        ? 'published'
+        : 'draft',
+    })),
+    units: outline.units.map(({ sample, lessons, tips, ...u }) => ({ ...u, status: status(u.course_order) })),
+    lessons: outline.units.flatMap((u) => u.lessons.map((l) => ({ ...l, status: status(u.course_order) }))),
+    tips: outline.units.flatMap((u) => u.tips.map((t) => ({ ...t, status: status(u.course_order) }))),
+    lemmas: outline.lemmas.map(({ unit_order, ...l }) => ({ ...l, status: status(unit_order) })),
     forms: outline.forms.map((f) => ({
       id: f.id,
       lemma_id: f.lemma_id,
@@ -43,30 +50,35 @@ export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE } 
       gloss_en: f.gloss_en,
       unit_id: f.unit_id,
       audio_path: null,
-      status: status(f.unit_ordinal),
+      status: status(f.unit_order),
     })),
-    sentences: sentences.map((s) => ({ ...s, status: status(unitOrdinalById.get(s.unit_id)) })),
+    sentences: sentences.map((s) => ({ ...s, status: status(unitOrderById.get(s.unit_id)) })),
     // Slots only exist for lessons with authored content; they follow their lesson.
     lesson_slots: slots.filter((s) => lessonUnit.get(s.lesson_id) <= publishThrough),
   };
 
   // The view the app reads, precomputed for the demo backend.
-  const formEntries = outline.forms.map((f) => ({
-    id: f.id,
-    lemma_id: f.lemma_id,
-    lemma: f.lemma,
-    pos: f.pos,
-    form: f.form,
-    gloss_en: f.gloss_en ?? lemmaById.get(f.lemma_id).gloss_en,
-    features: f.features,
-    unit_id: f.unit_id,
-    unit_ordinal: f.unit_ordinal,
-    section_id: outline.section.id,
-    is_glue: f.is_glue,
-    register: f.register,
-    audio_path: null,
-    status: status(f.unit_ordinal),
-  }));
+  const unitById = new Map(outline.units.map((u) => [u.id, u]));
+  const formEntries = outline.forms.map((f) => {
+    const unit = unitById.get(f.unit_id);
+    return {
+      id: f.id,
+      lemma_id: f.lemma_id,
+      lemma: f.lemma,
+      pos: f.pos,
+      form: f.form,
+      gloss_en: f.gloss_en ?? lemmaById.get(f.lemma_id).gloss_en,
+      features: f.features,
+      unit_id: f.unit_id,
+      unit_ordinal: unit.ordinal,
+      unit_order: f.unit_order,
+      section_id: unit.section_id,
+      is_glue: f.is_glue,
+      register: f.register,
+      audio_path: null,
+      status: status(f.unit_order),
+    };
+  });
 
   return { rows, formEntries, warnings };
 }
