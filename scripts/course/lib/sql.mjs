@@ -29,3 +29,12 @@ export const SENTENCE_COLUMNS = [
   'source', 'attribution', 'audio_path', 'status',
 ];
 export const SENTENCE_CAST = { en_alt: textArray, es_alt: textArray, tokens: jsonb };
+
+/** One multi-row insert that leaves every row already there as it is. */
+export function insertNew(table, rows, columns, cast = {}) {
+  if (rows.length === 0) return '';
+  const values = rows
+    .map((r) => `  (${columns.map((c) => (cast[c] ? cast[c](r[c]) : q(r[c]))).join(', ')})`)
+    .join(',\n');
+  return `insert into public.${table} (${columns.join(', ')}) values\n${values}\non conflict do nothing;\n`;
+}

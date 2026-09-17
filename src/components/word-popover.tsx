@@ -73,12 +73,15 @@ export function measureAnchor(node: unknown, cb: (a: Anchor | null) => void) {
 export function WordPopover({
   form,
   anchor,
+  gloss,
   onClose,
   audio,
 }: {
   /** The word to explain; null closes the popover. */
   form: Form | null;
   anchor: Anchor | null;
+  /** What the word means in the sentence it was tapped in. */
+  gloss?: string;
   onClose: () => void;
   /** Rendered next to the Spanish when the word has a clip — passed in so this
    *  component stays free of the audio player and its hooks. */
@@ -95,7 +98,7 @@ export function WordPopover({
   // dropped with a console warning and the bubble simply appears. A shared
   // value behaves the same on both platforms.
   const progress = useSharedValue(0);
-  const last = useRef<{ form: Form; anchor: Anchor } | null>(null);
+  const last = useRef<{ form: Form; anchor: Anchor; gloss?: string } | null>(null);
 
   const open = !!form && !!anchor;
   useEffect(() => {
@@ -129,11 +132,11 @@ export function WordPopover({
 
   // The word and its place are held through the exit: `form` is already null
   // by then, and a bubble that empties before it fades reads as a glitch.
-  if (form && anchor) last.current = { form, anchor };
+  if (form && anchor) last.current = { form, anchor, gloss };
   const held = last.current;
   if (!mounted || !held) return null;
 
-  const { form: shown, anchor: at } = held;
+  const { form: shown, anchor: at, gloss: inContext } = held;
   const centre = at.x + at.width / 2;
   const left = Math.min(Math.max(centre - WIDTH / 2, MARGIN), Math.max(MARGIN, screen.width - WIDTH - MARGIN));
   // Above the word by default — that is where her eye already is. Below only
@@ -154,10 +157,14 @@ export function WordPopover({
   // read as coming out of the word rather than landing on top of it.
   const origin: Array<string | number> = [tailLeft, below ? 0 : '100%', 0];
 
+  // What the word means here, in the sentence she is reading: `bien` in "bien
+  // hecho" is "well", not the dictionary's "well, fine, good". Only a sentence
+  // that hasn't been glossed yet falls back to the dictionary list.
+  //
   // A loanword glosses as itself — mate, empanada, peso. Printing the word
   // again under the word teaches nothing, so the repeat is dropped and what is
   // left is the note, or the plain fact that English borrowed it whole.
-  const meanings = senses(shown.gloss_en).filter((m) => norm(m) !== norm(shown.form));
+  const meanings = (inContext ? [inContext] : senses(shown.gloss_en)).filter((m) => norm(m) !== norm(shown.form));
   const borrowed = !meanings.length && !shown.gloss_note_en;
 
   return (

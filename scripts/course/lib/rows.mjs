@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 import { parse } from 'yaml';
 
 import { buildContent } from './content.mjs';
-import { loadOutline } from './outline.mjs';
+import { SECTION_PATHS, loadOutline } from './outline.mjs';
 
 export const DEMO_FIXTURE = new URL('../fixtures/demo.yaml', import.meta.url);
 
@@ -17,8 +17,8 @@ export const DEMO_FIXTURE = new URL('../fixtures/demo.yaml', import.meta.url);
  *                        are drafts. Infinity publishes everything.
  * @returns {{ rows, warnings }}  throws with every error if anything fails.
  */
-export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE } = {}) {
-  const { outline, errors: outlineErrors } = loadOutline();
+export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE, paths = SECTION_PATHS } = {}) {
+  const { outline, errors: outlineErrors } = loadOutline(paths);
   if (outlineErrors.length) throw new Error(`outline:\n${outlineErrors.join('\n')}`);
 
   const content = parse(readFileSync(fixture, 'utf8'));
@@ -58,6 +58,7 @@ export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE } 
       gloss_en: f.gloss_en,
       gloss_note_en: f.gloss_note_en,
       unit_id: f.unit_id,
+      position: f.position,
       audio_path: null,
       status: status(f.unit_order),
     })),
@@ -92,5 +93,5 @@ export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE } 
     };
   });
 
-  return { rows, formEntries, warnings };
+  return { rows, formEntries, outline, warnings };
 }

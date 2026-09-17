@@ -1,14 +1,16 @@
 // What the pipeline scripts share: the outline for a unit, its rows in the
 // database, and the writes — sentences upserted by id, review rows appended.
+//
+// The outline comes from the database, not the YAML: words fixed or added in
+// the admin are what every script sees (docs/superplan-admin-palabras.md §7.2).
 import { queryLinked } from './db.mjs';
-import { loadOutline } from './outline.mjs';
 import { SENTENCE_CAST, SENTENCE_COLUMNS, jsonb, q, upsert } from './sql.mjs';
+import { loadOutlineFromDb } from './vocabulary.mjs';
 
 export function unitFromArgs(argv = process.argv.slice(2)) {
   const slug = argv.find((a) => !a.startsWith('--'));
   const flags = new Set(argv.filter((a) => a.startsWith('--')));
-  const { outline, errors } = loadOutline();
-  if (errors.length) throw new Error(`outline:\n${errors.join('\n')}`);
+  const outline = loadOutlineFromDb();
   const unit = outline.units.find((u) => u.slug === slug);
   if (!unit) {
     throw new Error(`usage: <unit-slug> — one of:\n${outline.units.map((u) => `  ${u.slug}`).join('\n')}`);

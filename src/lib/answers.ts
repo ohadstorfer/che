@@ -99,21 +99,59 @@ export const tokenIndexOf = (s: Sentence, formId: string) => s.tokens.findIndex(
 // Meaning
 // ---------------------------------------------------------------------------
 
-type Glossed = Pick<Form, 'id' | 'form' | 'gloss_en'>;
+type Glossed = Pick<Form, 'id' | 'form' | 'gloss_en'> & Partial<Pick<Form, 'meaning_en' | 'meanings_en'>>;
 
-/** A gloss's senses: "well, fine, good" → ["well", "fine", "good"]. Split the
- *  same way as the outline validator's overlap warning (outline.mjs). */
-export const senses = (gloss: string) =>
+/** How two meanings are compared: "Well done" and "well done" are one meaning. */
+export const senseKey = (s: string) => s.trim().toLowerCase();
+
+/** A gloss's senses as written: "OK, sure, go ahead" → ["OK", "sure", "go ahead"]. */
+export const glossSenses = (gloss: string) =>
   gloss
     .split(/[,;]/)
-    .map((s) => s.trim().toLowerCase())
+    .map((s) => s.trim())
     .filter(Boolean);
+
+/** A gloss's senses as compared: "well, fine, good" → ["well", "fine", "good"].
+ *  Split the same way as the outline validator's overlap warning (outline.mjs). */
+export const senses = (gloss: string) => glossSenses(gloss).map(senseKey);
+
+/**
+ * The one meaning a screen shows for a form. A gloss lists every sense the word
+ * has; a prompt that prints them all ("thanks, thank you") reads as a riddle, and
+ * one that prints the wrong one ("fine done") teaches the wrong thing. So the
+ * meaning comes from where she has met the word (meanings.ts), and only a word
+ * no sentence has glossed yet falls back to its gloss's first sense.
+ */
+export const meaningOf = (f: Glossed) => f.meaning_en ?? glossSenses(f.gloss_en)[0] ?? f.gloss_en;
+
+/** Every English a form answers to: its gloss's senses and its sentences'. */
+export const sensesOf = (f: Glossed) => [
+  ...new Set([
+    ...senses(f.gloss_en),
+    ...(f.meanings_en ?? []).map(senseKey),
+    ...(f.meaning_en ? [senseKey(f.meaning_en)] : []),
+  ]),
+];
+
+/** What a form shows on the side of an option or tile: its Spanish, or its meaning. */
+export const labelOf = (f: Glossed, field: 'gloss_en' | 'form') => (field === 'form' ? f.form : meaningOf(f));
+
+/**
+ * A word whose English is the word itself — mate, cortado, empanada. No
+ * exercise that goes between the two sides can test one: the prompt prints the
+ * answer, whichever way round it runs. They are drilled by sound and inside
+ * their sentences instead (session.ts, exercisesFor).
+ */
+export const selfGlossed = (f: Glossed) => norm(meaningOf(f)) === norm(f.form);
 
 /** Whether two different forms could both answer the same English: they share
  *  a sense ("bien" and "bueno" are both "well"), or are spelt the same. */
-export const sharesMeaning = (a: Glossed, b: Glossed) =>
-  a.id !== b.id &&
-  (norm(a.form) === norm(b.form) || senses(a.gloss_en).some((s) => senses(b.gloss_en).includes(s)));
+export const sharesMeaning = (a: Glossed, b: Glossed) => {
+  if (a.id === b.id) return false;
+  if (norm(a.form) === norm(b.form)) return true;
+  const theirs = sensesOf(b);
+  return sensesOf(a).some((s) => theirs.includes(s));
+};
 
 /** Forms that answer a form's English as well as it does: itself, and any form
  *  of the same lemma glossed identically ("argentina" for "Argentinian"). */
@@ -178,8 +216,9 @@ function oneEdit(a: string, b: string) {
 const TYPO_MIN_LENGTH = 5;
 
 /** What a typed answer earned: right or wrong, and whether it was right with a
- *  slip worth pointing out. `expected` is the accepted spelling it matched. */
-export type Note = 'accent' | 'typo' | 'enye';
+ *  slip worth pointing out. `expected` is the accepted spelling it matched — or,
+ *  for a synonym, the word the exercise was drilling. */
+export type Note = 'accent' | 'typo' | 'enye' | 'synonym';
 export interface Graded {
   correct: boolean;
   note?: Note;
@@ -195,9 +234,94 @@ export interface Graded {
  *   - one other typo is forgiven in a word of five letters or more.
  * Never when what she typed is itself a word of the course — that is a wrong
  * word, not a slip.
+ *
+ * And more than the word as written is right:
+ *   - the words Spanish may put with it (`companions`): "yo soy" for "I am",
+ *     "una medialuna" for "croissant";
+ *   - the answers stored for the meaning the prompt showed (`accepts`, from
+ *     `course:answers`): "buenas" for "hi";
+ *   - another word that means what the prompt showed: asked for "well",
+ *     `bueno` answers it as truly as `bien` does. It is accepted, with a note
+ *     naming the word being drilled.
  */
-export function gradeTyped(input: string, form: Form, allForms: Form[]): Graded {
-  const accepted = sameAnswer(form, allForms).flatMap((f) => [f.form, ...(f.alt ?? [])]);
+export function gradeTyped(input: string, form: Form, allForms: Form[], meaning = meaningOf(form)): Graded {
+  const direct = gradeWord(input, form, allForms, meaning);
+  if (direct.correct) return direct;
+  const words = input.trim().split(/\s+/);
+  for (const lead of companions(form, meaning)) {
+    if (words.length <= lead.length || !lead.every((w, i) => norm(words[i]) === norm(w))) continue;
+    const rest = gradeWord(words.slice(lead.length).join(' '), form, allForms, meaning);
+    if (rest.correct) return rest;
+  }
+  return direct;
+}
+
+/** Subject pronouns by person and number, voseo — there is no `tú` to accept. */
+const PRONOUNS: Record<string, string[]> = {
+  '1sg': ['yo'],
+  '2sg': ['vos'],
+  '3sg': ['él', 'ella', 'usted'],
+  '1pl': ['nosotros', 'nosotras'],
+  '3pl': ['ellos', 'ellas', 'ustedes'],
+};
+
+/** The clitic a pronominal verb takes: "(yo) me llamo", "(vos) te sentás". */
+const CLITICS: Record<string, string> = { '1sg': 'me', '2sg': 'te', '3sg': 'se', '1pl': 'nos', '3pl': 'se' };
+
+const ARTICLES: Record<string, string[]> = {
+  'm.sg': ['el', 'un'],
+  'f.sg': ['la', 'una'],
+  'm.pl': ['los', 'unos'],
+  'f.pl': ['las', 'unas'],
+};
+
+/**
+ * Word sequences Spanish may put before a form typed on its own, and still be
+ * the same answer. English can't ask for a word without them — "I am" has its
+ * pronoun, "croissant" wants an article in a sentence — so a learner who types
+ * them has answered right.
+ *   - A conjugated verb takes its subject pronoun, and a pronominal verb its
+ *     clitic: "yo soy", "me llamo", "yo me llamo". Which third person the
+ *     pronoun is follows the English: "he/she is" takes él or ella, not
+ *     usted; "you (pl.) are" takes ustedes. Not an imperative: nobody says
+ *     "vos sentate".
+ *   - A noun takes the article that agrees with it: "la medialuna", "un café"
+ *     once `café` has a gender. Not a feminine noun that starts with a or ha,
+ *     which may take `el` (el agua) — its stored answers cover it.
+ */
+export function companions(form: Pick<Form, 'form' | 'pos' | 'lemma' | 'features'>, meaning: string): string[][] {
+  const f = form.features ?? {};
+  if (form.pos === 'verb' && f.person && f.number && f.mood !== 'imp' && !f.verb_form) {
+    const key = `${f.person}${f.number}`;
+    const english = senseKey(meaning).split(/[^a-z]+/);
+    const says = (w: string) => english.includes(w);
+    const pronouns = (PRONOUNS[key] ?? []).filter((p) => {
+      if (f.person !== 3) return true;
+      const you = says('you');
+      if (p === 'usted' || p === 'ustedes') return you;
+      if (p === 'él') return says('he') || (!says('she') && !you);
+      if (p === 'ella') return says('she') || (!says('he') && !you);
+      return says('they') || !you; // ellos, ellas
+    });
+    const clitic = form.lemma.endsWith('se') ? CLITICS[key] : undefined;
+    return [
+      ...pronouns.map((p) => [p]),
+      ...(clitic ? [[clitic], ...pronouns.map((p) => [p, clitic])] : []),
+    ];
+  }
+  if (form.pos === 'noun' && f.gender && f.number) {
+    if (f.gender === 'f' && /^h?a/.test(norm(form.form))) return [];
+    return (ARTICLES[`${f.gender}.${f.number}`] ?? []).map((a) => [a]);
+  }
+  return [];
+}
+
+/** `gradeTyped` for the word alone, without the words that may come with it. */
+function gradeWord(input: string, form: Form, allForms: Form[], meaning: string): Graded {
+  const answers = sameAnswer(form, allForms);
+  const asked = senseKey(meaning);
+  const stored = (form.accepts ?? []).filter((a) => senseKey(a.meaning) === asked).map((a) => a.answer);
+  const accepted = [...answers.flatMap((f) => [f.form, ...(f.alt ?? [])]), ...stored];
   const fallback = { correct: false, expected: form.form } as const;
   if (!norm(input)) return fallback;
 
@@ -206,6 +330,14 @@ export function gradeTyped(input: string, form: Form, allForms: Form[]): Graded 
 
   const accent = accepted.find((a) => norm(a) === norm(input));
   if (accent) return { correct: true, note: 'accent', expected: accent };
+
+  const synonym = allForms.find(
+    (f) =>
+      !answers.some((a) => a.id === f.id) &&
+      [f.form, ...(f.alt ?? [])].some((a) => norm(a) === norm(input)) &&
+      sensesOf(f).includes(asked),
+  );
+  if (synonym) return { correct: true, note: 'synonym', expected: form.form };
 
   const isCourseWord = allForms.some((f) => norm(f.form) === norm(input));
 
@@ -221,8 +353,8 @@ export function gradeTyped(input: string, form: Form, allForms: Form[]): Graded 
 }
 
 /** Whether a typed word is accepted at all — `gradeTyped` without the notes. */
-export function typedAnswerMatches(input: string, form: Form, allForms: Form[]) {
-  return gradeTyped(input, form, allForms).correct;
+export function typedAnswerMatches(input: string, form: Form, allForms: Form[], meaning?: string) {
+  return gradeTyped(input, form, allForms, meaning).correct;
 }
 
 /**
@@ -393,7 +525,9 @@ export function pickOptions(correct: Form, allForms: Form[], field: 'gloss_en' |
   const pool = samePos.length >= count ? samePos : sameShape.length >= count ? sameShape : usable;
   const chosen: Form[] = [correct];
   for (const f of shuffle(pool)) {
-    if (chosen.some((c) => c.id === f.id || c[field] === f[field] || sharesMeaning(c, f))) continue;
+    if (chosen.some((c) => c.id === f.id || norm(labelOf(c, field)) === norm(labelOf(f, field)) || sharesMeaning(c, f))) {
+      continue;
+    }
     chosen.push(f);
     if (chosen.length === count) break;
   }
@@ -414,7 +548,7 @@ export function pickImposter(correct: Form, allForms: Form[]): Form | null {
  *  tests nothing. Those words are still drilled everywhere else. */
 export function matchable(forms: Form[], size = MATCH_SIZE): Form[] {
   const out: Form[] = [];
-  for (const f of shuffle(forms.filter((x) => !isPhrase(x.form) && norm(x.gloss_en) !== norm(x.form)))) {
+  for (const f of shuffle(forms.filter((x) => !isPhrase(x.form) && !selfGlossed(x)))) {
     if (out.some((o) => sharesMeaning(o, f))) continue;
     out.push(f);
     if (out.length === size) break;

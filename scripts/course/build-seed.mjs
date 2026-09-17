@@ -1,75 +1,32 @@
 #!/usr/bin/env node
-// Writes the course into a migration: the whole outline, with the units that
-// have lessons written published and the rest as drafts.
+// Loads new content from the YAML outline into a migration. The database is the
+// source of truth (docs/superplan-admin-palabras.md §7.2): what already exists
+// is edited in the admin, and this only ADDS — a new section file, a new unit,
+// a new word. Nothing existing is changed or retired.
 //
-//   npm run course:seed -- supabase/migrations/<timestamp>_seed_course.sql
+//   npm run course:seed -- supabase/migrations/<timestamp>_seed_<what>.sql
+//   npm run course:seed -- --dry-run
 //
-// Every statement is an upsert on the content's deterministic id, so applying
-// it twice changes nothing. It is how the course first gets into the database;
-// after that the database is the source of truth and edits go through the
-// dashboard, not through this file.
-
+// It reads the linked database to know what is already there, and prints what
+// it adds, what it skips and where the YAML and the database differ. Differences
+// are a warning, not an error: after any edit in the admin they are expected.
 import { writeFileSync } from 'node:fs';
 
+import { queryLinked } from './lib/db.mjs';
 import { buildRows } from './lib/rows.mjs';
-import { jsonb, q, textArray, upsert } from './lib/sql.mjs';
+import { describeDiff, planSeed } from './lib/seed.mjs';
+import { insertNew, jsonb, textArray } from './lib/sql.mjs';
+import { loadCourseRows } from './lib/vocabulary.mjs';
 
-const out = process.argv[2];
-if (!out) {
-  console.error('usage: node scripts/course/build-seed.mjs <output.sql>');
+const args = process.argv.slice(2);
+const out = args.find((a) => !a.startsWith('--'));
+const dryRun = args.includes('--dry-run');
+if (!out && !dryRun) {
+  console.error('usage: npm run course:seed -- <output.sql> | --dry-run');
   process.exit(1);
 }
+/** Units up to here were published when the course first went in. */
 const PUBLISH_THROUGH = 2;
-
-/**
- * Content the outline dropped — a unit that was re-sliced away, and everything
- * hanging off it. Retired, not deleted: form_states and lesson_progress point
- * at these rows.
- *
- * Sentences are not listed here, because a reviewer writes them in the
- * dashboard and the seed must not wipe their work. What retires a sentence is
- * the curriculum: its unit is gone, or re-slicing moved one of its words to a
- * later unit, so a learner would meet the sentence before the word.
- */
-function retire({ units, lessons, tips, lemmas, forms, sentences }) {
-  const list = (rows) => rows.map((r) => q(r.id)).join(', ');
-  const seeded = list(sentences);
-  return `-- Anything the outline no longer has.
-update public.units set status = 'retired' where id not in (${list(units)});
-update public.lessons set status = 'retired' where id not in (${list(lessons)});
--- Lessons left parked (no longer in the outline) get ordinals far past any
--- real one, unique within their unit, so the next run can park them again.
-with parked as (
-  select id, row_number() over (partition by unit_id order by id) as n
-  from public.lessons where ordinal <= 0
-)
-update public.lessons l set ordinal = 20000 + parked.n from parked where l.id = parked.id;
-update public.tips set status = 'retired' where id not in (${list(tips)});
-update public.lemmas set status = 'retired' where id not in (${list(lemmas)});
-update public.forms set status = 'retired' where id not in (${list(forms)});
-update public.sentences x set status = 'retired'
-where x.status <> 'retired' and (
-  -- its unit is gone
-  (select u.status from public.units u where u.id = x.unit_id) = 'retired'
-  -- it is live while its unit is not
-  or (x.status = 'published' and (select u.status from public.units u where u.id = x.unit_id) <> 'published')
-  -- re-slicing moved one of its words to a later unit than its own
-  or exists (
-    select 1
-    from public.sentence_forms sf
-    join public.forms f on f.id = sf.form_id
-    join public.units fu on fu.id = f.unit_id
-    join public.units xu on xu.id = x.unit_id
-    where sf.sentence_id = x.id and fu.course_order > xu.course_order
-  )
-  -- another sentence written here already accepts it as an answer
-  or exists (
-    select 1 from public.sentences y
-    where y.id <> x.id and y.id in (${seeded}) and x.es = any(y.es_alt)
-  )
-);
-`;
-}
 
 let built;
 try {
@@ -78,84 +35,77 @@ try {
   console.error(err.message);
   process.exit(1);
 }
-const { rows, warnings } = built;
-for (const w of warnings) console.warn(`warn  ${w}`);
+for (const w of built.warnings) console.warn(`warn  ${w}`);
+
+const [keys] = queryLinked(`
+  select json_build_object(
+    'sentences',    (select coalesce(json_agg(json_build_object('id', id)), '[]') from public.sentences),
+    'lesson_slots', (select coalesce(json_agg(json_build_object('lesson_id', lesson_id, 'ordinal', ordinal)), '[]') from public.lesson_slots),
+    'story_lines',  (select coalesce(json_agg(json_build_object('lesson_id', lesson_id, 'ordinal', ordinal)), '[]') from public.story_lines),
+    'unit_phrases', (select coalesce(json_agg(json_build_object('unit_id', unit_id, 'ordinal', ordinal)), '[]') from public.unit_phrases)
+  ) as keys`);
+const parse = (v) => (typeof v === 'string' ? JSON.parse(v) : v);
+const db = { ...loadCourseRows(), ...parse(keys.keys) };
+
+const { insert, skipped, diff } = planSeed(built, db);
+
+const count = Object.entries(insert).filter(([, rows]) => rows.length);
+console.log(count.length ? `\nAdds: ${count.map(([t, rows]) => `${rows.length} ${t}`).join(', ')}` : '\nNothing new to add.');
+for (const u of insert.units) console.log(`  + unit ${u.slug}`);
+for (const f of insert.forms.slice(0, 40)) console.log(`  + ${f.form}`);
+if (insert.forms.length > 40) console.log(`  + … ${insert.forms.length - 40} more words`);
+if (skipped.length) console.log(`\nSkipped:\n${skipped.map((s) => `  ${s}`).join('\n')}`);
+const differences = describeDiff(diff);
+if (differences.length) {
+  console.log(`\nThe YAML differs from the database in ${differences.length} place(s). The database wins; edit these in /admin/words:`);
+  for (const d of differences) console.log(`  ${d}`);
+}
+if (diff.missing.length) console.log(`\n${diff.missing.length} row(s) exist only in the database (added in the admin).`);
+
+if (dryRun) {
+  console.log('\n--dry-run: nothing written.');
+  process.exit(0);
+}
+if (!count.length) {
+  console.log('\nNo migration written.');
+  process.exit(0);
+}
 
 const sql = [
   `-- ---------------------------------------------------------------------------
--- Seed: the course outline — generated by scripts/course/build-seed.mjs from
--- docs/course/section-*.yaml and scripts/course/fixtures/demo.yaml.
--- Do not edit by hand; regenerate.
+-- Seed: new content from docs/course/section-*.yaml (and the demo fixture),
+-- generated by scripts/course/build-seed.mjs. Do not edit by hand; regenerate.
 --
--- The first ${PUBLISH_THROUGH} units of the course are published: they have lessons written.
--- Their sentences are hand-written and NOT yet reviewed by a native speaker.
--- The rest (${rows.units.length - PUBLISH_THROUGH} units) go in as drafts — outline, words and tips — for the
--- pipeline to fill.
---
--- Idempotent: every row is an upsert on its deterministic id. Content that the
--- outline no longer has is retired at the end, never deleted: a learner's
--- progress points at it.
+-- Adds only. Every insert leaves an existing row as it is: the database is the
+-- source of truth, and what exists is edited in the admin.
 -- ---------------------------------------------------------------------------
-
--- Units are unique by (section, ordinal) and by course_order, so a unit that
--- moves would collide with whatever now sits in its place. Park both numbers
--- first; the upsert below sets every one back.
-update public.units set ordinal = ordinal + 1000, course_order = course_order + 1000;
--- Lessons likewise: a story slotted in before a unit's check moves the check
--- down a place, into the ordinal the story is about to take. They are parked
--- below zero; whatever the upsert doesn't bring back is renumbered at the end.
-update public.lessons set ordinal = -ordinal where ordinal > 0;
 `,
-  upsert('sections', rows.sections, ['id', 'ordinal', 'slug', 'title_en', 'cefr', 'status']),
-  upsert(
+  insertNew('sections', insert.sections, ['id', 'ordinal', 'slug', 'title_en', 'cefr', 'status']),
+  insertNew(
     'units',
-    rows.units,
+    insert.units,
     ['id', 'section_id', 'ordinal', 'course_order', 'slug', 'title_en', 'summary_en', 'grammar_focus', 'register_max', 'status'],
     { grammar_focus: textArray },
   ),
-  upsert('lessons', rows.lessons, ['id', 'unit_id', 'ordinal', 'title_en', 'kind', 'status']),
-  upsert('tips', rows.tips, ['id', 'unit_id', 'title_en', 'body_md', 'status']),
-  upsert('lemmas', rows.lemmas, ['id', 'lemma', 'pos', 'gloss_en', 'gloss_note_en', 'register', 'is_glue', 'notes_en', 'status']),
-  upsert('forms', rows.forms, ['id', 'lemma_id', 'form', 'features', 'gloss_en', 'gloss_note_en', 'unit_id', 'audio_path', 'status'], {
+  insertNew('lessons', insert.lessons, ['id', 'unit_id', 'ordinal', 'title_en', 'kind', 'status']),
+  insertNew('tips', insert.tips, ['id', 'unit_id', 'title_en', 'body_md', 'status']),
+  insertNew('lemmas', insert.lemmas, ['id', 'lemma', 'pos', 'gloss_en', 'gloss_note_en', 'register', 'is_glue', 'notes_en', 'status']),
+  insertNew('forms', insert.forms, ['id', 'lemma_id', 'form', 'features', 'gloss_en', 'gloss_note_en', 'unit_id', 'position', 'audio_path', 'status'], {
     features: jsonb,
   }),
   // sentence_forms follows by trigger.
-  upsert(
+  insertNew(
     'sentences',
-    rows.sentences,
+    insert.sentences,
     ['id', 'unit_id', 'es', 'en', 'en_alt', 'es_alt', 'tokens', 'target_form_id', 'kind', 'difficulty', 'source', 'attribution', 'audio_path', 'status'],
     { en_alt: textArray, es_alt: textArray, tokens: jsonb },
   ),
-  // A re-authored lesson can have fewer slots than before; clear its old ones
-  // rather than leave a tail of screens nobody wrote.
-  rows.lesson_slots.length
-    ? `delete from public.lesson_slots where lesson_id in (${[...new Set(rows.lesson_slots.map((s) => s.lesson_id))]
-        .map(q)
-        .join(', ')});\n`
-    : '',
-  upsert('lesson_slots', rows.lesson_slots, ['id', 'lesson_id', 'ordinal', 'kind', 'form_id', 'sentence_id', 'tip_id', 'mode', 'review_count', 'scope']),
-  // Story lines and key phrases are rewritten whole, like slots.
-  rows.story_lines.length
-    ? `delete from public.story_lines where lesson_id in (${[...new Set(rows.story_lines.map((l) => l.lesson_id))]
-        .map(q)
-        .join(', ')});\n`
-    : '',
-  upsert('story_lines', rows.story_lines, ['id', 'lesson_id', 'ordinal', 'speaker', 'sentence_id', 'question'], {
+  insertNew('lesson_slots', insert.lesson_slots, ['id', 'lesson_id', 'ordinal', 'kind', 'form_id', 'sentence_id', 'tip_id', 'mode', 'review_count', 'scope']),
+  insertNew('story_lines', insert.story_lines, ['id', 'lesson_id', 'ordinal', 'speaker', 'sentence_id', 'question'], {
     question: (v) => (v == null ? 'null' : jsonb(v)),
   }),
-  rows.unit_phrases.length
-    ? `delete from public.unit_phrases where unit_id in (${[...new Set(rows.unit_phrases.map((p) => p.unit_id))]
-        .map(q)
-        .join(', ')});\n`
-    : '',
-  upsert('unit_phrases', rows.unit_phrases, ['unit_id', 'ordinal', 'sentence_id'], {}, 'unit_id, ordinal'),
-  retire(rows),
+  insertNew('unit_phrases', insert.unit_phrases, ['unit_id', 'ordinal', 'sentence_id']),
 ].join('\n');
 
 writeFileSync(out, sql);
-const published = (list) => list.filter((r) => r.status === 'published').length;
-console.log(
-  `wrote ${out}: ${rows.units.length} units (${published(rows.units)} published), ` +
-    `${rows.lessons.length} lessons (${published(rows.lessons)}), ${rows.forms.length} forms (${published(rows.forms)}), ` +
-    `${rows.sentences.length} sentences, ${rows.lesson_slots.length} slots`,
-);
+console.log(`\nwrote ${out}. Apply it with npm run db:push.`);

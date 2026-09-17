@@ -3,7 +3,7 @@ import { test } from 'node:test';
 
 import { recapItems } from '../../../src/lib/lesson.ts';
 import { glueSeen } from '../../../src/lib/sentences.ts';
-import { earnedTail, mistakeFormIds, promoteTail, promotedMode } from '../../../src/lib/session.ts';
+import { earnedTail, exercisesFor, mistakeFormIds, promoteTail, promotedMode } from '../../../src/lib/session.ts';
 import { ladderFor } from '../../../src/lib/sentences.ts';
 import { conceptScores, conceptsOf, weakestConcept } from '../../../src/lib/concepts.ts';
 import { forms, formById, formOf, iso, learner, state, unitBySlug } from './fixture.mjs';
@@ -85,4 +85,23 @@ test('concepts come from features; weak ones need enough tries', () => {
   assert.equal(weakestConcept(scores)?.concept, scores[0].concept);
   assert.ok(scores[0].accuracy < 0.8);
   assert.equal(conceptScores(logs.slice(0, 5), formById).length, 0);
+});
+
+test('a word that is its own English is never asked to be translated', () => {
+  const cortado = formOf('cortado');
+  const deck = forms.filter((f) => !f.is_glue && f.pos !== 'propn');
+  const st = state(cortado);
+  // "Build the word in Spanish: cortado" prints its own answer, and so does
+  // every choice screen. With no recording there is nothing left to ask.
+  for (let i = 0; i < 40; i++) assert.deepEqual(exercisesFor(cortado, st, deck), []);
+  assert.deepEqual(
+    exercisesFor({ ...cortado, audio_path: 'a.mp3' }, st, deck),
+    ['listen', 'listen_build'],
+    'given a recording, it is heard and spelt',
+  );
+  // And the tail never promotes one into a translation either.
+  assert.equal(promotedMode({ form: cortado, state: st, mode: 'true_false' }, new Map()), null);
+  assert.equal(promotedMode({ form: cortado, state: st, mode: 'word_build' }, new Map()), null);
+  // A word with a translation of its own is untouched.
+  assert.equal(promotedMode({ form: formOf('café'), state: st, mode: 'true_false' }, new Map()), 'word_build');
 });

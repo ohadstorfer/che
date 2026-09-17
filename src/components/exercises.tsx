@@ -34,6 +34,8 @@ import {
   tokenTail,
   tokenWord,
   gradeTyped,
+  labelOf,
+  meaningOf,
   type Note,
 } from '@/lib/answers';
 import type { AnswerExtra, QueueItem } from '@/lib/round';
@@ -94,6 +96,7 @@ const NOTE_TEXT: Record<Note, (expected: string) => string> = {
   accent: (w) => `Watch the accent: ${w}`,
   enye: (w) => `It's ñ: ${w}`,
   typo: (w) => `Typo — ${w}`,
+  synonym: (w) => `That works too. This one was ${w}`,
 };
 
 /**
@@ -239,7 +242,7 @@ function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
       <Panel style={styles.bigCard}>
         <Text style={phrase ? styles.esPhraseHero : styles.esHero}>{form.form}</Text>
         <View style={styles.divider} />
-        <Text style={phrase ? styles.enPhrase : styles.enBig}>{form.gloss_en}</Text>
+        <Text style={phrase ? styles.enPhrase : styles.enBig}>{meaningOf(form)}</Text>
         {/* The aside lives here, where the word is being taught — it explains
             what the gloss can only name ("mate" → the drink). */}
         {form.gloss_note_en ? <Text style={styles.glossNote}>{form.gloss_note_en}</Text> : null}
@@ -437,7 +440,7 @@ function PromptBlock({ form, side }: { form: Form; side: 'es' | 'en' }) {
           {side === 'es' ? (
             <Text style={phrase ? styles.bubblePhrase : styles.bubbleWord}>{form.form}</Text>
           ) : (
-            <Text style={phrase ? styles.bubblePhraseEn : styles.bubbleEn}>{form.gloss_en}</Text>
+            <Text style={phrase ? styles.bubblePhraseEn : styles.bubbleEn}>{meaningOf(form)}</Text>
           )}
         </View>
       </View>
@@ -509,7 +512,7 @@ function MultipleChoice({
   // may legitimately re-run, and a reshuffle mid-answer would grade her
   // against options she never saw.
   const [options] = useState(() =>
-    pickOptions(form, allForms, answerField).map((c) => ({ id: c.id, label: c[answerField] })),
+    pickOptions(form, allForms, answerField).map((c) => ({ id: c.id, label: labelOf(c, answerField) })),
   );
   const [chosen, setChosen] = useState<string | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
@@ -531,7 +534,7 @@ function MultipleChoice({
       onCheck={() =>
         setVerdict({
           correct: chosen === form.id,
-          answer: form[answerField],
+          answer: labelOf(form, answerField),
           about: form.gloss_note_en ?? undefined,
         })
       }
@@ -559,7 +562,7 @@ function Listen({
 }) {
   const { form } = item;
   const [options] = useState(() =>
-    pickOptions(form, allForms, 'gloss_en').map((c) => ({ id: c.id, label: c.gloss_en })),
+    pickOptions(form, allForms, 'gloss_en').map((c) => ({ id: c.id, label: meaningOf(c) })),
   );
   const [chosen, setChosen] = useState<string | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
@@ -572,7 +575,7 @@ function Listen({
       onCheck={() =>
         setVerdict({
           correct: chosen === form.id,
-          answer: `${form.form} — ${form.gloss_en}`,
+          answer: `${form.form} — ${meaningOf(form)}`,
           about: form.gloss_note_en ?? undefined,
         })
       }
@@ -644,8 +647,8 @@ function TrueFalse({
   // Half the time we show the real meaning, half an imposter's.
   const [{ shown, isTrue }] = useState(() => {
     const imposter = pickImposter(form, allForms);
-    if (!imposter || Math.random() < 0.5) return { shown: form.gloss_en, isTrue: true };
-    return { shown: imposter.gloss_en, isTrue: false };
+    if (!imposter || Math.random() < 0.5) return { shown: meaningOf(form), isTrue: true };
+    return { shown: meaningOf(imposter), isTrue: false };
   });
 
   return (
@@ -656,7 +659,7 @@ function TrueFalse({
       onCheck={() =>
         setVerdict({
           correct: picked === isTrue,
-          answer: isTrue ? undefined : `«${form.form}» es «${form.gloss_en}»`,
+          answer: isTrue ? undefined : `«${form.form}» es «${meaningOf(form)}»`,
           about: form.gloss_note_en ?? undefined,
         })
       }
@@ -957,7 +960,7 @@ function WordBuild({
   const phrase = isPhrase(form.form);
   const toSpanish = item.direction === 'en_to_es';
   const field = toSpanish ? 'form' : 'gloss_en';
-  const target = form[field];
+  const target = labelOf(form, field);
 
   const [{ tiles }] = useState(() => buildTiles(target, wordPool(form, allForms, field)));
   const [used, setUsed] = useState<number[]>([]);
@@ -1033,7 +1036,7 @@ function ListenBuild({
       onCheck={() =>
         setVerdict({
           correct: builtAnswerMatches(joined, form.form),
-          answer: `${form.form} — ${form.gloss_en}`,
+          answer: `${form.form} — ${meaningOf(form)}`,
           about: form.gloss_note_en ?? undefined,
         })
       }
@@ -1152,7 +1155,7 @@ function Matching({
           // one place in this exercise where a note can't give anything away.
           answer: group
             .filter((c) => missed.has(c.id))
-            .map((c) => `${c.form} = ${c.gloss_en}${c.gloss_note_en ? ` (${c.gloss_note_en})` : ''}`)
+            .map((c) => `${c.form} = ${meaningOf(c)}${c.gloss_note_en ? ` (${c.gloss_note_en})` : ''}`)
             .join('\n'),
         });
       }
@@ -1222,7 +1225,7 @@ function Matching({
                 <Text
                   style={[styles.matchText, isMatched && { color: colors.success }]}
                   numberOfLines={2}>
-                  {c.gloss_en}
+                  {meaningOf(c)}
                 </Text>
               </Pressable>
             );
@@ -1249,9 +1252,10 @@ export function SentenceLine({
   /** Form id of the word to mark as new. */
   mark?: string;
   /** Tapping a word asks for its meaning, with where the word sits on screen
-   *  so the answer can be anchored to it. Omitted where a meaning would hand
-   *  over the answer — building a sentence from tiles, or transcribing one. */
-  onWord?: (formId: string, anchor: Anchor) => void;
+   *  so the answer can be anchored to it, and what it means in this sentence.
+   *  Omitted where a meaning would hand over the answer — building a sentence
+   *  from tiles, or transcribing one. */
+  onWord?: (formId: string, anchor: Anchor, gloss?: string) => void;
   /** Which words answer to a tap. Defaults to all of them; a screen that must
    *  hold one word back — the one under test — says so here. */
   tappable?: (formId: string) => boolean;
@@ -1262,7 +1266,7 @@ export function SentenceLine({
   // rewraps, which fires no layout event, so a remembered rect goes stale.
   const nodes = useRef<Record<number, unknown>>({});
   const tapWord = (i: number, formId: string) =>
-    measureAnchor(nodes.current[i], (a) => a && onWord?.(formId, a));
+    measureAnchor(nodes.current[i], (a) => a && onWord?.(formId, a, sentence.tokens[i]?.gloss));
   const canTap = (id: string) => !!onWord && (tappable?.(id) ?? true);
 
   return (
@@ -1370,25 +1374,29 @@ function lookupWith(lexicon: Map<string, Form> | undefined, allForms: Form[]) {
  * up still costs what it always did.
  */
 export function useWordPopover(lookup: (id: string) => Form | undefined) {
-  const [showing, setShowing] = useState<{ form: Form; anchor: Anchor } | null>(null);
+  const [showing, setShowing] = useState<Showing | null>(null);
   const [peeked, setPeeked] = useState<string[]>([]);
 
-  const open = (id: string, anchor: Anchor) => {
+  const open = (id: string, anchor: Anchor, gloss?: string) => {
     const form = lookup(id);
     if (!form) return;
-    setShowing({ form, anchor });
+    setShowing({ form, anchor, gloss });
     setPeeked((p) => (p.includes(id) ? p : [...p, id]));
   };
 
   return { showing, peeked, open, close: () => setShowing(null) };
 }
 
+/** A tapped word, where it sits, and what it means in its sentence. */
+type Showing = { form: Form; anchor: Anchor; gloss?: string };
+
 /** The popover itself, wired to the app's audio player. */
-export function WordBubble({ state, onClose }: { state: { form: Form; anchor: Anchor } | null; onClose: () => void }) {
+export function WordBubble({ state, onClose }: { state: Showing | null; onClose: () => void }) {
   return (
     <WordPopover
       form={state?.form ?? null}
       anchor={state?.anchor ?? null}
+      gloss={state?.gloss}
       onClose={onClose}
       audio={(path) => <PlayButton path={path} />}
     />

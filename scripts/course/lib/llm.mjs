@@ -73,6 +73,53 @@ export const draftSentences = ({ system, user }) =>
     usage: r.usage,
   }));
 
+const Glosses = z.object({
+  sentences: z.array(
+    z.object({
+      id: z.string(),
+      tokens: z.array(
+        z.object({
+          i: z.number().int().describe('the token number'),
+          en: z.string().describe('the words of the English translation that translate the token in this sentence'),
+        }),
+      ),
+    }),
+  ),
+});
+
+const WordAnswers = z.object({
+  forms: z.array(
+    z.object({
+      id: z.string(),
+      answers: z.array(z.object({ meaning: z.string(), answer: z.string() })),
+    }),
+  ),
+});
+
+const SentenceAlternatives = z.object({
+  sentences: z.array(z.object({ id: z.string(), alternatives: z.array(z.string()) })),
+});
+
+/** Other right answers for words and sentences (lib/alternatives.mjs). Judging what a teacher accepts is careful reading. */
+export const proposeWordAnswers = ({ system, user }) =>
+  call({ model: JUDGE_MODEL, effort: JUDGE_EFFORT, system, user, schema: WordAnswers }).then((r) => ({
+    forms: r.output.forms,
+    usage: r.usage,
+  }));
+
+export const proposeSentenceAlternatives = ({ system, user }) =>
+  call({ model: JUDGE_MODEL, effort: JUDGE_EFFORT, system, user, schema: SentenceAlternatives }).then((r) => ({
+    sentences: r.output.sentences,
+    usage: r.usage,
+  }));
+
+/** Aligns sentence tokens with their English (lib/gloss.mjs). Careful reading, like the judge. */
+export const glossSentences = ({ system, user }) =>
+  call({ model: JUDGE_MODEL, effort: JUDGE_EFFORT, system, user, schema: Glosses }).then((r) => ({
+    sentences: r.output.sentences,
+    usage: r.usage,
+  }));
+
 export const judgeSentences = ({ system, user }) =>
   call({ model: JUDGE_MODEL, effort: JUDGE_EFFORT, system, user, schema: Scores }).then((r) => ({
     scores: r.output.scores,

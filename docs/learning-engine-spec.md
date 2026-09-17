@@ -392,6 +392,7 @@ Everything else:
 - **Other comparisons:** `builtAnswerMatches`, `sentenceAnswerMatches` and `missedForms` use the new `norm`, which keeps ñ. Tiles are exact anyway.
 - **Verdict UI** (`src/components/exercise-frame.tsx`): a correct answer with a note gets an amber sub-line. **Accent:** "Watch the accent: *tenés*". **ñ:** "It's *ñ*: *compañero*". **Typo:** "Typo — *medialuna*".
 - **Grading:** a noted answer is correct for SM-2 and the score. `note` is logged (§1).
+- **Synonym (as built, 2026-09-18):** a fourth note. The prompt shows one meaning of the word (course-spec §1.3, `tokens[].gloss`); a course word that also means it (`bien` typed for "well" when `bueno` was asked) is correct with `note: 'synonym'` — "That works too. This one was *bueno*". Migration `20260918000003_synonym_note.sql` widens the `review_logs.note` check.
 - **Tests** in `scripts/course/test/answers.test.mjs`:
   - año/ano rejected
   - compañero/companero noted

@@ -24,7 +24,8 @@ const webPress =
 const NAV = [
   { href: '/admin', label: 'Units', icon: 'layers-outline' },
   { href: '/admin/reports', label: 'Reports', icon: 'flag-outline' },
-  { href: '/admin/lexicon', label: 'Lexicon', icon: 'book-outline' },
+  { href: '/admin/words', label: 'Words', icon: 'book-outline' },
+  { href: '/admin/answers', label: 'Answers', icon: 'checkmark-done-outline' },
   { href: '/admin/engine', label: 'Engine', icon: 'pulse-outline' },
 ] as const;
 

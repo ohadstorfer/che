@@ -100,8 +100,16 @@ export interface Form {
   /** The Spanish, as written: `tenés`, `Buenos Aires`, `todo bien`. */
   form: string;
   /** English meaning — the form's own gloss, or its lemma's. Short enough to
-   *  sit on an answer tile, and never containing the Spanish it glosses. */
+   *  sit on an answer tile, and never containing the Spanish it glosses. A
+   *  dictionary entry ("well, fine, good"): screens that show one meaning use
+   *  `meaningOf` instead. */
   gloss_en: string;
+  /** What the word means where she has met it — the one meaning a prompt, an
+   *  option or a tile shows. Worked out from its sentences each time her data
+   *  loads (meanings.ts), so it follows the content rather than being authored. */
+  meaning_en?: string;
+  /** Every meaning its sentences give it ("fine", "well"), most familiar first. */
+  meanings_en?: string[];
   /** The aside that explains the word rather than translating it — "the drink"
    *  for mate. Shown where the word is taught or revealed, never where it is
    *  asked: on a tile or an option it would hand over the answer. */
@@ -118,6 +126,9 @@ export interface Form {
   audio_path: string | null;
   /** Other spellings accepted when the form is typed on its own. */
   alt?: string[];
+  /** Other answers accepted when the form is typed for one of its meanings
+   *  ("buenas" for "hi"), from the `form_answers` table. */
+  accepts?: { meaning: string; answer: string }[];
 }
 
 export type FormStateName = 'new' | 'learning' | 'review';
@@ -178,6 +189,10 @@ export interface SentenceToken {
   form_ids: string[];
   /** The glue form this token is, if it is one (`de`, `el`, `me`). */
   glue?: string;
+  /** What the token means in this sentence: the words of the sentence's English
+   *  that translate it ("well done" for `bien hecho`). Absent where the English
+   *  has nothing for it (`che`), or before `course:gloss` has run. */
+  gloss?: string;
 }
 
 // An authored sentence. Not a form: it has no SM-2 state of its own — it is a

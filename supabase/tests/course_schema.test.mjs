@@ -17,6 +17,10 @@ const ENGINE = [
   '20260917000003_placement.sql',
   '20260917000004_stories_guidebook.sql',
   '20260917000005_answers_and_quality.sql',
+  '20260918000003_synonym_note.sql',
+  '20260918000004_form_answers.sql',
+  '20260918000005_admin_words.sql',
+  '20260918000006_form_positions.sql',
 ];
 const db = new PGlite();
 
@@ -81,8 +85,20 @@ await db.exec(`
       'dddddddd-0000-4000-8000-000000000001', 'published');
   insert into lesson_slots (lesson_id, ordinal, kind, sentence_id)
     values ('bbbbbbbb-0000-4000-8000-000000000001', 1, 'drill', 'eeeeeeee-0000-4000-8000-000000000001');
+  insert into form_answers (form_id, meaning, answer, status)
+    values ('dddddddd-0000-4000-8000-000000000001', 'you are', 'vos sos', 'published'),
+           ('dddddddd-0000-4000-8000-000000000001', 'you are', 'sos vos', 'retired');
 `);
 ok('seed rows insert (incl. lesson slot check constraint)');
+
+// A typed answer can be right as a synonym, and that note is logged.
+await db.exec(`insert into review_logs (user_id, form_id, rating, mode, note)
+  values ('${student}', 'dddddddd-0000-4000-8000-000000000001', 2, 'typing', 'synonym')`);
+await assert.rejects(
+  db.exec(`insert into review_logs (user_id, form_id, rating, mode, note)
+    values ('${student}', 'dddddddd-0000-4000-8000-000000000001', 2, 'typing', 'guess')`),
+);
+ok('review_logs takes the synonym note and no made-up one');
 
 // sentence_forms trigger
 let r = await db.query(`select form_id, is_target from sentence_forms`);
@@ -123,6 +139,13 @@ await as(student, async () => {
 
   await assert.rejects(db.exec(`insert into units (section_id, ordinal, course_order, slug, title_en, summary_en) values (1, 9, 9, 'x', 'x', 'x')`));
   ok('student cannot write content');
+
+  const answers = await db.query(`select answer from form_answers`);
+  assert.deepEqual(answers.rows.map((a) => a.answer), ['vos sos']);
+  await assert.rejects(
+    db.exec(`insert into form_answers (form_id, meaning, answer) values ('dddddddd-0000-4000-8000-000000000001', 'you are', 'x')`),
+  );
+  ok('student reads published form answers and cannot add one');
 
   const slots = await db.query(`select kind from lesson_slots`);
   assert.equal(slots.rows.length, 1);
@@ -173,6 +196,30 @@ await as(reviewer, async () => {
   const other = await db.query(`select count(*)::int as n from form_states`);
   assert.equal(other.rows[0].n, 0);
   ok("reviewer cannot read a learner's progress");
+
+  // Words and sentences edited in the admin (docs/superplan-admin-palabras.md §6).
+  await db.exec(`update sentences set status = 'draft', problems = array['"croissant" isn''t in the course lexicon'] where id = 'eeeeeeee-0000-4000-8000-000000000001'`);
+  const paused = await db.query(`select status, problems from sentences where id = 'eeeeeeee-0000-4000-8000-000000000001'`);
+  assert.deepEqual(paused.rows[0], { status: 'draft', problems: [`"croissant" isn't in the course lexicon`] });
+  await db.exec(`update sentences set status = 'published', problems = '{}' where id = 'eeeeeeee-0000-4000-8000-000000000001'`);
+  ok('reviewer pauses a sentence with its reasons, and puts it back');
+  const added = await db.query(`insert into lemmas (lemma, pos, gloss_en, source) values ('pileta', 'noun', 'swimming pool', 'dashboard') returning id, source`);
+  await db.exec(`insert into forms (lemma_id, form, unit_id, source, position) values ('${added.rows[0].id}', 'pileta', 'aaaaaaaa-0000-4000-8000-000000000002', 'dashboard', 3)`);
+  await assert.rejects(db.exec(`update forms set source = 'yaml' where form = 'pileta'`));
+  const sources = await db.query(`select form, source, position from forms order by form`);
+  assert.deepEqual(sources.rows, [
+    { form: 'pileta', source: 'dashboard', position: 3 },
+    { form: 'sos', source: 'outline', position: 0 },
+    { form: 'soy', source: 'outline', position: 0 },
+  ]);
+  ok('reviewer adds a word from the dashboard; outline words say where they came from');
+  const batch = '99999999-0000-4000-8000-000000000001';
+  await db.exec(`insert into content_revisions (table_name, row_id, before, after, edited_by, batch_id) values
+    ('forms', 'dddddddd-0000-4000-8000-000000000001', '{"form":"sos"}', '{"form":"sós"}', '${reviewer}', '${batch}'),
+    ('sentences', 'eeeeeeee-0000-4000-8000-000000000001', '{"es":"¿Vos sos Juan?"}', '{"es":"¿Vos sós Juan?"}', '${reviewer}', '${batch}')`);
+  const inBatch = await db.query(`select count(*)::int as n from content_revisions where batch_id = '${batch}'`);
+  assert.equal(inBatch.rows[0].n, 2);
+  ok('revisions of one operation share a batch');
 });
 
 // --- learning engine ------------------------------------------------------------

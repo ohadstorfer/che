@@ -21,7 +21,7 @@ export interface SentenceRow {
   audio_path: string | null;
   target_form_id: string;
   difficulty: number;
-  tokens: { surface: string; form_ids: string[] }[];
+  tokens: { surface: string; form_ids: string[]; gloss?: string }[];
 }
 
 /**
@@ -56,7 +56,7 @@ export function toSentence(
       if (f.is_glue) glue = id;
       else content.push(id);
     }
-    return { surface: t.surface, form_ids: content, ...(glue ? { glue } : {}) };
+    return { surface: t.surface, form_ids: content, ...(glue ? { glue } : {}), ...(t.gloss ? { gloss: t.gloss } : {}) };
   });
   return {
     id: r.id,

@@ -1,0 +1,29 @@
+[
+ {
+  "cefr": "A1.1",
+  "id": 1,
+  "ordinal": 1,
+  "slug": "first-words",
+  "status": "published",
+  "title_en": "First words",
+  "updated_at": "2026-09-17 11:50:41.747624+00"
+ },
+ {
+  "cefr": "A1.2",
+  "id": 2,
+  "ordinal": 2,
+  "slug": "everyday-things",
+  "status": "draft",
+  "title_en": "Everyday things",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "cefr": "A1.3",
+  "id": 3,
+  "ordinal": 3,
+  "slug": "out-and-about",
+  "status": "draft",
+  "title_en": "Out and about",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ }
+]

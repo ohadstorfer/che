@@ -124,6 +124,6 @@ if (flags.has('--dry-run')) {
 }
 const { kept, dropped } = saveCandidates({ selected, rejected, known, model: MODEL, status: 'published' });
 console.log(`\nwrote ${kept} published sentences and ${dropped} discarded candidates`);
-execFileSync('node', [new URL('./build-lessons.mjs', import.meta.url).pathname, unit.slug], { stdio: 'inherit' });
+execFileSync('node', ['--disable-warning=MODULE_TYPELESS_PACKAGE_JSON', '--import', new URL('../test/register.mjs', import.meta.url).pathname, new URL('./build-lessons.mjs', import.meta.url).pathname, unit.slug], { stdio: 'inherit' });
 publishUnit(unit.id);
 console.log(`${unit.slug} is published.`);

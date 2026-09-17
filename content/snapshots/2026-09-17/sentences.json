@@ -1,0 +1,3985 @@
+[
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Juan is from Montevideo.",
+  "en_alt": [],
+  "es": "Juan es de Montevideo.",
+  "es_alt": [],
+  "id": "09c4675a-9114-5d64-b58e-aff893af0f8c",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "b20bba62-c9b9-5803-9cdf-93d9b550a550",
+  "tokens": [
+   {
+    "form_ids": [
+     "a0c76088-db09-545c-9b35-a28ec314414d"
+    ],
+    "surface": "Juan"
+   },
+   {
+    "form_ids": [
+     "b20bba62-c9b9-5803-9cdf-93d9b550a550"
+    ],
+    "surface": "es"
+   },
+   {
+    "form_ids": [
+     "4692b8ee-7359-5686-855f-b800ded6906f"
+    ],
+    "surface": "de"
+   },
+   {
+    "form_ids": [
+     "4f49942c-d565-5658-bbc9-b43d4c665c34"
+    ],
+    "surface": "Montevideo."
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "No, thanks.",
+  "en_alt": [],
+  "es": "No, gracias.",
+  "es_alt": [],
+  "id": "0c6e3148-d3fe-541b-9a21-517bfd8b7412",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "0de01ef6-29bb-557a-a7e2-f6c1110d951b",
+  "tokens": [
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "gloss": "no",
+    "surface": "No,"
+   },
+   {
+    "form_ids": [
+     "9c78c990-e652-5b9f-a449-4cdda2a3937b"
+    ],
+    "gloss": "thanks",
+    "surface": "gracias."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A mate, please.",
+  "en_alt": [],
+  "es": "Un mate, por favor.",
+  "es_alt": [],
+  "id": "0e567778-2c0e-5982-a4e4-1a15168170f8",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "7f2c9cd3-5c26-5e2a-8aaa-bf21e54e92b7",
+  "tokens": [
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "Un"
+   },
+   {
+    "form_ids": [
+     "7f2c9cd3-5c26-5e2a-8aaa-bf21e54e92b7"
+    ],
+    "gloss": "mate",
+    "surface": "mate,"
+   },
+   {
+    "form_ids": [
+     "466fd20d-f35f-5500-81e9-413001d92ce6"
+    ],
+    "gloss": "please",
+    "surface": "por favor."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Bye!",
+  "en_alt": [
+   "See you."
+  ],
+  "es": "Chau, che.",
+  "es_alt": [
+   "Chau."
+  ],
+  "id": "1200d3ac-b8e0-57f1-b522-e34ab06a3703",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "16df9c18-3edc-5405-8f9e-b7d5c3ec1103",
+  "tokens": [
+   {
+    "form_ids": [
+     "16df9c18-3edc-5405-8f9e-b7d5c3ec1103"
+    ],
+    "gloss": "bye",
+    "surface": "Chau,"
+   },
+   {
+    "form_ids": [
+     "91232a84-b055-5e03-8ed2-651c79f5b376"
+    ],
+    "surface": "che."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Is that you, Sofi?",
+  "en_alt": [
+   "Is it you, Sofi?"
+  ],
+  "es": "¿Sos vos, Sofi?",
+  "es_alt": [],
+  "id": "128d64e8-226d-5920-a1d9-12a7e7f0dacb",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "¿Sos"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos,"
+   },
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "surface": "Sofi?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Juice or water?",
+  "en_alt": [],
+  "es": "¿Jugo o agua?",
+  "es_alt": [],
+  "id": "18305ab2-cc06-5021-9a3a-e36ec73128c5",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "6c053054-70c4-56ce-9300-fe4fa796b45a",
+  "tokens": [
+   {
+    "form_ids": [
+     "6c053054-70c4-56ce-9300-fe4fa796b45a"
+    ],
+    "gloss": "juice",
+    "surface": "¿Jugo"
+   },
+   {
+    "form_ids": [
+     "14804e3f-6f0e-51a1-b7ec-b7ff9af2b23c"
+    ],
+    "gloss": "or",
+    "surface": "o"
+   },
+   {
+    "form_ids": [
+     "876e8095-f2c5-5c38-866e-9ac138d52b87"
+    ],
+    "gloss": "water",
+    "surface": "agua?"
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "I'm English, and you?",
+  "en_alt": [],
+  "es": "Yo soy inglés, ¿y vos?",
+  "es_alt": [
+   "Yo soy inglesa, ¿y vos?",
+   "Soy inglés, ¿y vos?",
+   "Soy inglesa, ¿y vos?"
+  ],
+  "id": "1d7625a5-8fbd-5e62-a5bc-3be6afc55eb3",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "2858e0f5-cbe7-5f46-9285-9286306b449d",
+  "tokens": [
+   {
+    "form_ids": [
+     "0bfd7395-526c-589d-8619-1794b0f8fc11"
+    ],
+    "surface": "Yo"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "2858e0f5-cbe7-5f46-9285-9286306b449d"
+    ],
+    "surface": "inglés,"
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "surface": "¿y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos?"
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "A cortado for me. And you?",
+  "en_alt": [
+   "I'll have a cortado. What about you?"
+  ],
+  "es": "Yo, un cortado. ¿Y vos?",
+  "es_alt": [],
+  "id": "2102ff7f-d50f-5738-b5d4-f2d63fb6fba5",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "0bfd7395-526c-589d-8619-1794b0f8fc11"
+    ],
+    "surface": "Yo,"
+   },
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "surface": "un"
+   },
+   {
+    "form_ids": [
+     "495df4cb-c037-5679-aa48-1c6b79f02ad6"
+    ],
+    "surface": "cortado."
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "surface": "¿Y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "And a medialuna?",
+  "en_alt": [],
+  "es": "¿Y una medialuna?",
+  "es_alt": [],
+  "id": "2170e308-edf7-52a4-9a35-a2a1f2b7a54e",
+  "kind": "dialogue",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "61df6d82-e066-542f-b158-5524f130294e",
+  "tokens": [
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "gloss": "and",
+    "surface": "¿Y"
+   },
+   {
+    "form_ids": [
+     "deb6b73d-0a96-5cdb-bc6f-dfa02f562b0d"
+    ],
+    "gloss": "a",
+    "surface": "una"
+   },
+   {
+    "form_ids": [
+     "61df6d82-e066-542f-b158-5524f130294e"
+    ],
+    "gloss": "medialuna",
+    "surface": "medialuna?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 18:33:22.217749+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "All good, and you?",
+  "en_alt": [
+   "All good, you?"
+  ],
+  "es": "Todo bien, ¿y vos?",
+  "es_alt": [],
+  "id": "24063ddd-2343-5755-9fcb-e1dca4884d70",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "published",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "d108cd6e-fae2-5ab6-bfeb-054b01041ee6"
+    ],
+    "gloss": "all good",
+    "surface": "Todo bien,"
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "gloss": "and",
+    "surface": "¿y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "gloss": "you",
+    "surface": "vos?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 3,
+  "en": "My name is Sofi, and yours?",
+  "en_alt": [],
+  "es": "Yo me llamo Sofi, ¿y vos?",
+  "es_alt": [
+   "Me llamo Sofi, ¿y vos?"
+  ],
+  "id": "2504f0f2-dce1-5413-8dd2-c0b29d235ad9",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "dba200c4-cad2-5945-b978-2f4b6b067c85",
+  "tokens": [
+   {
+    "form_ids": [
+     "0bfd7395-526c-589d-8619-1794b0f8fc11"
+    ],
+    "surface": "Yo"
+   },
+   {
+    "form_ids": [
+     "be20724b-3be1-5bcc-801e-f13718511443"
+    ],
+    "surface": "me"
+   },
+   {
+    "form_ids": [
+     "dba200c4-cad2-5945-b978-2f4b6b067c85"
+    ],
+    "surface": "llamo"
+   },
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "surface": "Sofi,"
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "surface": "¿y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "I'm Juan. Are you Facu?",
+  "en_alt": [],
+  "es": "Yo soy Juan. ¿Vos sos Facu?",
+  "es_alt": [
+   "Yo soy Juan. ¿sos facu?",
+   "Soy Juan. ¿vos sos facu?",
+   "Soy Juan. ¿sos facu?"
+  ],
+  "id": "26288719-69a2-50c8-90ba-2d81cdf4b167",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "0bfd7395-526c-589d-8619-1794b0f8fc11"
+    ],
+    "surface": "Yo"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "a0c76088-db09-545c-9b35-a28ec314414d"
+    ],
+    "surface": "Juan."
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "¿Vos"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "sos"
+   },
+   {
+    "form_ids": [],
+    "surface": "Facu?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "OK, bye.",
+  "en_alt": [],
+  "es": "Dale, chau.",
+  "es_alt": [],
+  "id": "28f9f0e1-99db-5d49-93ad-f165d9b6a56c",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "1ba6168d-09bd-509b-bbc8-765e8806ba16",
+  "tokens": [
+   {
+    "form_ids": [
+     "1ba6168d-09bd-509b-bbc8-765e8806ba16"
+    ],
+    "gloss": "OK",
+    "surface": "Dale,"
+   },
+   {
+    "form_ids": [
+     "16df9c18-3edc-5405-8f9e-b7d5c3ec1103"
+    ],
+    "gloss": "bye",
+    "surface": "chau."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "OK. A mate and a coffee.",
+  "en_alt": [],
+  "es": "Dale. Un mate y un café.",
+  "es_alt": [
+   "Dale. Un café y un mate."
+  ],
+  "id": "2b4cb00e-91f2-5e77-a5da-5fc72fe819a7",
+  "kind": "dialogue",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "1ba6168d-09bd-509b-bbc8-765e8806ba16",
+  "tokens": [
+   {
+    "form_ids": [
+     "1ba6168d-09bd-509b-bbc8-765e8806ba16"
+    ],
+    "gloss": "OK",
+    "surface": "Dale."
+   },
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "Un"
+   },
+   {
+    "form_ids": [
+     "7f2c9cd3-5c26-5e2a-8aaa-bf21e54e92b7"
+    ],
+    "gloss": "mate",
+    "surface": "mate"
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "gloss": "and",
+    "surface": "y"
+   },
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "un"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "gloss": "coffee",
+    "surface": "café."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:16:02.404573+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Mate or coffee?",
+  "en_alt": [],
+  "es": "¿Mate o café?",
+  "es_alt": [],
+  "id": "33c065a1-982a-5d5d-8f09-ab0132e85cea",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "7f2c9cd3-5c26-5e2a-8aaa-bf21e54e92b7",
+  "tokens": [
+   {
+    "form_ids": [
+     "7f2c9cd3-5c26-5e2a-8aaa-bf21e54e92b7"
+    ],
+    "gloss": "mate",
+    "surface": "¿Mate"
+   },
+   {
+    "form_ids": [
+     "14804e3f-6f0e-51a1-b7ec-b7ff9af2b23c"
+    ],
+    "gloss": "or",
+    "surface": "o"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "gloss": "coffee",
+    "surface": "café?"
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Fine, man.",
+  "en_alt": [],
+  "es": "Bien, che.",
+  "es_alt": [
+   "Bien."
+  ],
+  "id": "3e21464d-fdbf-5521-9886-581c8cb336c2",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "840881cd-bdb9-5631-9fa8-5c191bbb9a92",
+  "tokens": [
+   {
+    "form_ids": [
+     "840881cd-bdb9-5631-9fa8-5c191bbb9a92"
+    ],
+    "gloss": "fine",
+    "surface": "Bien,"
+   },
+   {
+    "form_ids": [
+     "91232a84-b055-5e03-8ed2-651c79f5b376"
+    ],
+    "gloss": "man",
+    "surface": "che."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "I'm Sofi. And you?",
+  "en_alt": [
+   "I'm Sofi. What about you?"
+  ],
+  "es": "Soy Sofi. ¿Y vos?",
+  "es_alt": [
+   "Yo soy Sofi. ¿y vos?"
+  ],
+  "id": "43f81dec-8ef0-5efb-b7a2-c8d2cf877bd4",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "published",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "gloss": "I'm",
+    "surface": "Soy"
+   },
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "gloss": "Sofi",
+    "surface": "Sofi."
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "gloss": "and",
+    "surface": "¿Y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "gloss": "you",
+    "surface": "vos?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "Lucía is from here too.",
+  "en_alt": [],
+  "es": "Lucía también es de acá.",
+  "es_alt": [
+   "Lucía es de acá también."
+  ],
+  "id": "465f2449-040b-5d1a-9302-0d2b2fa0b03d",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "11d6bc98-8db6-5ccc-831b-26325ce7b390",
+  "tokens": [
+   {
+    "form_ids": [
+     "ef9adde3-0a4b-5455-bfad-0d70b236e93f"
+    ],
+    "surface": "Lucía"
+   },
+   {
+    "form_ids": [
+     "11d6bc98-8db6-5ccc-831b-26325ce7b390"
+    ],
+    "surface": "también"
+   },
+   {
+    "form_ids": [
+     "b20bba62-c9b9-5803-9cdf-93d9b550a550"
+    ],
+    "surface": "es"
+   },
+   {
+    "form_ids": [
+     "4692b8ee-7359-5686-855f-b800ded6906f"
+    ],
+    "surface": "de"
+   },
+   {
+    "form_ids": [
+     "e29831ef-42b2-51ea-8e38-e365e3311ab1"
+    ],
+    "surface": "acá."
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "How's it going?",
+  "en_alt": [],
+  "es": "¿Qué tal?",
+  "es_alt": [],
+  "id": "46cabb7e-ce14-58f5-8051-8fff7ab05c76",
+  "kind": "word",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "5843c164-0b5c-5ff7-b794-8a82954c3444",
+  "tokens": [
+   {
+    "form_ids": [
+     "5843c164-0b5c-5ff7-b794-8a82954c3444"
+    ],
+    "gloss": "how's it going",
+    "surface": "¿Qué tal?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A coffee, please.",
+  "en_alt": [],
+  "es": "Un café, por favor.",
+  "es_alt": [],
+  "id": "4a3f9040-54f6-5480-b4d6-8fb3c1a01958",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "466fd20d-f35f-5500-81e9-413001d92ce6",
+  "tokens": [
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "Un"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "gloss": "coffee",
+    "surface": "café,"
+   },
+   {
+    "form_ids": [
+     "466fd20d-f35f-5500-81e9-413001d92ce6"
+    ],
+    "gloss": "please",
+    "surface": "por favor."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "What's your name?",
+  "en_alt": [],
+  "es": "¿Cómo te llamás?",
+  "es_alt": [],
+  "id": "4b291d7d-988d-5c7c-bb68-577d4c4214c2",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "07eef1c0-c5a0-5a72-aa80-d263eac024b1",
+  "tokens": [
+   {
+    "form_ids": [
+     "af3a59da-b961-5310-80f6-95b5b4c531bd"
+    ],
+    "surface": "¿Cómo"
+   },
+   {
+    "form_ids": [
+     "4b91dc24-7e24-55ea-aea0-9f5e2f9deb6c"
+    ],
+    "surface": "te"
+   },
+   {
+    "form_ids": [
+     "07eef1c0-c5a0-5a72-aa80-d263eac024b1"
+    ],
+    "surface": "llamás?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "All good, and you?",
+  "en_alt": [],
+  "es": "Todo bien, ¿y vos?",
+  "es_alt": [],
+  "id": "51bb7807-9e92-5670-a0cd-4a19866ce916",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "d108cd6e-fae2-5ab6-bfeb-054b01041ee6",
+  "tokens": [
+   {
+    "form_ids": [
+     "d108cd6e-fae2-5ab6-bfeb-054b01041ee6"
+    ],
+    "surface": "Todo bien,"
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "surface": "¿y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "And you? Coffee?",
+  "en_alt": [
+   "What about you? Coffee?"
+  ],
+  "es": "¿Y vos? ¿Café?",
+  "es_alt": [],
+  "id": "552f2a5e-9f42-5075-b645-cbd83689e4ba",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "surface": "¿Y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos?"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "surface": "¿Café?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Well, bye.",
+  "en_alt": [],
+  "es": "Bueno, chau, che.",
+  "es_alt": [
+   "Bueno, chau.",
+   "Bueno, che, chau."
+  ],
+  "id": "56148f3a-9f02-5fb6-9f08-40dcdfcf8530",
+  "kind": "dialogue",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "770fb250-ae00-510b-8a63-ea9277702843",
+  "tokens": [
+   {
+    "form_ids": [
+     "770fb250-ae00-510b-8a63-ea9277702843"
+    ],
+    "gloss": "well",
+    "surface": "Bueno,"
+   },
+   {
+    "form_ids": [
+     "16df9c18-3edc-5405-8f9e-b7d5c3ec1103"
+    ],
+    "gloss": "bye",
+    "surface": "chau,"
+   },
+   {
+    "form_ids": [
+     "91232a84-b055-5e03-8ed2-651c79f5b376"
+    ],
+    "surface": "che."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:16:02.404573+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "Is that you, Martín?",
+  "en_alt": [],
+  "es": "¿Sos vos, Martín?",
+  "es_alt": [],
+  "id": "5827c930-038e-5074-9b65-03929387b8bb",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "¿Sos"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos,"
+   },
+   {
+    "form_ids": [
+     "4b3d9c85-07c4-572b-9723-8de6a728af94"
+    ],
+    "surface": "Martín?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "No, I'm Chilean.",
+  "en_alt": [],
+  "es": "No, soy chileno.",
+  "es_alt": [
+   "No, soy chilena.",
+   "No, yo soy chileno.",
+   "No, yo soy chilena."
+  ],
+  "id": "5dc5045c-00b6-5896-a7f9-1f97a79ce666",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "128433fc-9520-5ef8-9d70-b1606ecbc7a6",
+  "tokens": [
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "surface": "No,"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "128433fc-9520-5ef8-9d70-b1606ecbc7a6"
+    ],
+    "surface": "chileno."
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A coffee?",
+  "en_alt": [],
+  "es": "¿Un café?",
+  "es_alt": [],
+  "id": "5f874aad-e37f-582c-bda1-1fe6ceaace21",
+  "kind": "dialogue",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "c7bf2819-57df-5873-99e0-553951291a4f",
+  "tokens": [
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "¿Un"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "gloss": "coffee",
+    "surface": "café?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A medialuna, please.",
+  "en_alt": [],
+  "es": "Una medialuna, por favor.",
+  "es_alt": [
+   "Por favor, una medialuna."
+  ],
+  "id": "61851b7c-842e-53dd-8381-611648d3a8e2",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "61df6d82-e066-542f-b158-5524f130294e",
+  "tokens": [
+   {
+    "form_ids": [
+     "deb6b73d-0a96-5cdb-bc6f-dfa02f562b0d"
+    ],
+    "gloss": "a",
+    "surface": "Una"
+   },
+   {
+    "form_ids": [
+     "61df6d82-e066-542f-b158-5524f130294e"
+    ],
+    "gloss": "medialuna",
+    "surface": "medialuna,"
+   },
+   {
+    "form_ids": [
+     "466fd20d-f35f-5500-81e9-413001d92ce6"
+    ],
+    "gloss": "please",
+    "surface": "por favor."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 19:15:05.349975+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "She's Argentinian.",
+  "en_alt": [],
+  "es": "Ella es argentina.",
+  "es_alt": [
+   "Es argentina."
+  ],
+  "id": "61996c42-c726-5409-ae32-85cc1e9de198",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "7900d614-daad-51b8-aa97-59ebab456c83",
+  "tokens": [
+   {
+    "form_ids": [
+     "518a5447-75e4-57f2-9893-095cb810838c"
+    ],
+    "surface": "Ella"
+   },
+   {
+    "form_ids": [
+     "b20bba62-c9b9-5803-9cdf-93d9b550a550"
+    ],
+    "surface": "es"
+   },
+   {
+    "form_ids": [
+     "7900d614-daad-51b8-aa97-59ebab456c83",
+     "0c00510d-8f05-52b1-9a49-559b017e4fba"
+    ],
+    "surface": "argentina."
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Yes, she's Uruguayan.",
+  "en_alt": [],
+  "es": "Sí, es uruguaya.",
+  "es_alt": [
+   "Sí, ella es uruguaya."
+  ],
+  "id": "626a61e5-71b5-5bd0-a66f-854000dfd214",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "9b65175f-37bc-5153-830f-26c3af0c3c2b",
+  "tokens": [
+   {
+    "form_ids": [
+     "191fd126-be91-54fb-8848-9f3aa180ca5d"
+    ],
+    "surface": "Sí,"
+   },
+   {
+    "form_ids": [
+     "b20bba62-c9b9-5803-9cdf-93d9b550a550"
+    ],
+    "surface": "es"
+   },
+   {
+    "form_ids": [
+     "9b65175f-37bc-5153-830f-26c3af0c3c2b"
+    ],
+    "surface": "uruguaya."
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A cortado, please.",
+  "en_alt": [],
+  "es": "Un cortado, por favor.",
+  "es_alt": [],
+  "id": "65f0c0c8-b787-5abe-84f4-d7a2824bd0d9",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "495df4cb-c037-5679-aa48-1c6b79f02ad6",
+  "tokens": [
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "Un"
+   },
+   {
+    "form_ids": [
+     "495df4cb-c037-5679-aa48-1c6b79f02ad6"
+    ],
+    "gloss": "cortado",
+    "surface": "cortado,"
+   },
+   {
+    "form_ids": [
+     "466fd20d-f35f-5500-81e9-413001d92ce6"
+    ],
+    "gloss": "please",
+    "surface": "por favor."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "It's you!",
+  "en_alt": [],
+  "es": "¡Sos vos!",
+  "es_alt": [],
+  "id": "6fa16fb7-c3cb-59e8-bcff-a86a9525c3ad",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "published",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "gloss": "it's",
+    "surface": "¡Sos"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "gloss": "you",
+    "surface": "vos!"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Hi, are you Martín?",
+  "en_alt": [],
+  "es": "Hola, ¿sos Martín?",
+  "es_alt": [
+   "Hola, ¿vos sos Martín?"
+  ],
+  "id": "70eb456b-b0de-5389-8997-9fcbd04519ff",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "6273f090-0e32-5a87-b927-58303502ea3b"
+    ],
+    "surface": "Hola,"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "¿sos"
+   },
+   {
+    "form_ids": [
+     "4b3d9c85-07c4-572b-9723-8de6a728af94"
+    ],
+    "surface": "Martín?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "A coffee and a pastry.",
+  "en_alt": [],
+  "es": "Un café y una factura.",
+  "es_alt": [
+   "Una factura y un café."
+  ],
+  "id": "73f50b68-3420-55f1-9b74-fd065cfd3f1f",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "f7f00e16-2413-5933-a64c-f96d2249ec2a",
+  "tokens": [
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "Un"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "gloss": "coffee",
+    "surface": "café"
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "gloss": "and",
+    "surface": "y"
+   },
+   {
+    "form_ids": [
+     "deb6b73d-0a96-5cdb-bc6f-dfa02f562b0d"
+    ],
+    "gloss": "a",
+    "surface": "una"
+   },
+   {
+    "form_ids": [
+     "f7f00e16-2413-5933-a64c-f96d2249ec2a"
+    ],
+    "gloss": "pastry",
+    "surface": "factura."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:16:02.404573+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Thanks, Sofi.",
+  "en_alt": [],
+  "es": "Gracias, Sofi.",
+  "es_alt": [],
+  "id": "7678a167-fa6b-5939-993c-0c839c7d5321",
+  "kind": "dialogue",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "9c78c990-e652-5b9f-a449-4cdda2a3937b",
+  "tokens": [
+   {
+    "form_ids": [
+     "9c78c990-e652-5b9f-a449-4cdda2a3937b"
+    ],
+    "gloss": "thanks",
+    "surface": "Gracias,"
+   },
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "gloss": "Sofi",
+    "surface": "Sofi."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 3,
+  "en": "Hi, I'm Martín. Are you Lucía?",
+  "en_alt": [],
+  "es": "Hola, soy Martín. ¿Vos sos Lucía?",
+  "es_alt": [
+   "Hola, soy Martín. ¿sos Lucía?",
+   "Hola, yo soy Martín. ¿vos sos Lucía?",
+   "Hola, yo soy Martín. ¿sos Lucía?"
+  ],
+  "id": "78bddeb7-2688-5bbc-b862-009637a0e85f",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "published",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "6273f090-0e32-5a87-b927-58303502ea3b"
+    ],
+    "gloss": "hi",
+    "surface": "Hola,"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "gloss": "I'm",
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "4b3d9c85-07c4-572b-9723-8de6a728af94"
+    ],
+    "gloss": "Martín",
+    "surface": "Martín."
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "gloss": "you",
+    "surface": "¿Vos"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "gloss": "are",
+    "surface": "sos"
+   },
+   {
+    "form_ids": [
+     "ef9adde3-0a4b-5455-bfad-0d70b236e93f"
+    ],
+    "gloss": "Lucía",
+    "surface": "Lucía?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 3,
+  "en": "Mate or coffee? Mate for me. And you?",
+  "en_alt": [
+   "Mate or coffee? I'll have mate. What about you?"
+  ],
+  "es": "¿Mate o café? Yo, mate. ¿Y vos?",
+  "es_alt": [],
+  "id": "7b83224f-1aeb-5d2c-ad94-ac98bb7c80ff",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "7f2c9cd3-5c26-5e2a-8aaa-bf21e54e92b7"
+    ],
+    "surface": "¿Mate"
+   },
+   {
+    "form_ids": [
+     "14804e3f-6f0e-51a1-b7ec-b7ff9af2b23c"
+    ],
+    "surface": "o"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "surface": "café?"
+   },
+   {
+    "form_ids": [
+     "0bfd7395-526c-589d-8619-1794b0f8fc11"
+    ],
+    "surface": "Yo,"
+   },
+   {
+    "form_ids": [
+     "7f2c9cd3-5c26-5e2a-8aaa-bf21e54e92b7"
+    ],
+    "surface": "mate."
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "surface": "¿Y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Are you Juan?",
+  "en_alt": [],
+  "es": "¿Vos sos Juan?",
+  "es_alt": [
+   "¿Sos Juan?"
+  ],
+  "id": "7dc0ad97-59be-51cc-b49c-809ba4da4536",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "¿Vos"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "sos"
+   },
+   {
+    "form_ids": [
+     "a0c76088-db09-545c-9b35-a28ec314414d"
+    ],
+    "surface": "Juan?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A coffee, thanks.",
+  "en_alt": [],
+  "es": "Un café, gracias.",
+  "es_alt": [],
+  "id": "7eaca11b-3ca1-5dce-bbea-c3b90825dc99",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "9c78c990-e652-5b9f-a449-4cdda2a3937b",
+  "tokens": [
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "Un"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "gloss": "coffee",
+    "surface": "café,"
+   },
+   {
+    "form_ids": [
+     "9c78c990-e652-5b9f-a449-4cdda2a3937b"
+    ],
+    "gloss": "thanks",
+    "surface": "gracias."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 3,
+  "en": "Hey, is that you? Hi! All good?",
+  "en_alt": [
+   "Hey, is it you? Hi! How's it going?"
+  ],
+  "es": "Che, ¿sos vos? ¡Hola! ¿Todo bien?",
+  "es_alt": [
+   "¿Sos vos? ¡hola! ¿todo bien?"
+  ],
+  "id": "7ef1023c-bfc0-5cbb-80e8-f69d73c8d2e6",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "published",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "91232a84-b055-5e03-8ed2-651c79f5b376"
+    ],
+    "gloss": "hey",
+    "surface": "Che,"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "gloss": "is",
+    "surface": "¿sos"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "gloss": "you",
+    "surface": "vos?"
+   },
+   {
+    "form_ids": [
+     "6273f090-0e32-5a87-b927-58303502ea3b"
+    ],
+    "gloss": "hi",
+    "surface": "¡Hola!"
+   },
+   {
+    "form_ids": [
+     "d108cd6e-fae2-5ab6-bfeb-054b01041ee6"
+    ],
+    "gloss": "all good",
+    "surface": "¿Todo bien?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Hi, Sofi.",
+  "en_alt": [],
+  "es": "Hola, Sofi.",
+  "es_alt": [],
+  "id": "7fffc189-8cc8-5e94-8e20-164fe102a505",
+  "kind": "dialogue",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "6273f090-0e32-5a87-b927-58303502ea3b",
+  "tokens": [
+   {
+    "form_ids": [
+     "6273f090-0e32-5a87-b927-58303502ea3b"
+    ],
+    "gloss": "hi",
+    "surface": "Hola,"
+   },
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "gloss": "Sofi",
+    "surface": "Sofi."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Me? I'm Sofi.",
+  "en_alt": [],
+  "es": "¿Yo? Soy Sofi.",
+  "es_alt": [
+   "¿Soy Sofi."
+  ],
+  "id": "82aae391-c42e-5040-986f-698c6261d414",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "0bfd7395-526c-589d-8619-1794b0f8fc11",
+  "tokens": [
+   {
+    "form_ids": [
+     "0bfd7395-526c-589d-8619-1794b0f8fc11"
+    ],
+    "gloss": "me",
+    "surface": "¿Yo?"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "gloss": "I'm",
+    "surface": "Soy"
+   },
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "gloss": "Sofi",
+    "surface": "Sofi."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "Hey, are you Caro?",
+  "en_alt": [],
+  "es": "Che, ¿vos sos Caro?",
+  "es_alt": [
+   "Che, ¿sos caro?",
+   "¿Vos sos caro?",
+   "¿Sos caro?"
+  ],
+  "id": "86834200-cbe6-52f3-af51-e42d1d337545",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "91232a84-b055-5e03-8ed2-651c79f5b376"
+    ],
+    "surface": "Che,"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "¿vos"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "sos"
+   },
+   {
+    "form_ids": [],
+    "surface": "Caro?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Yes, OK.",
+  "en_alt": [],
+  "es": "Sí, dale.",
+  "es_alt": [],
+  "id": "876908ac-68f3-5c35-a71a-f07d5aca0f87",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "191fd126-be91-54fb-8848-9f3aa180ca5d",
+  "tokens": [
+   {
+    "form_ids": [
+     "191fd126-be91-54fb-8848-9f3aa180ca5d"
+    ],
+    "gloss": "yes",
+    "surface": "Sí,"
+   },
+   {
+    "form_ids": [
+     "1ba6168d-09bd-509b-bbc8-765e8806ba16"
+    ],
+    "gloss": "OK",
+    "surface": "dale."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Sofi is from Buenos Aires.",
+  "en_alt": [],
+  "es": "Sofi es porteña.",
+  "es_alt": [],
+  "id": "891194eb-b879-5a4c-9ea7-d310825f44c3",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "fe0d8a48-dfb8-5e58-8d7e-b7bb99e8b135",
+  "tokens": [
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "surface": "Sofi"
+   },
+   {
+    "form_ids": [
+     "b20bba62-c9b9-5803-9cdf-93d9b550a550"
+    ],
+    "surface": "es"
+   },
+   {
+    "form_ids": [
+     "fe0d8a48-dfb8-5e58-8d7e-b7bb99e8b135"
+    ],
+    "surface": "porteña."
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Hi, I'm Sofi.",
+  "en_alt": [],
+  "es": "Hola, soy Sofi.",
+  "es_alt": [
+   "Hola, yo soy Sofi."
+  ],
+  "id": "89fc950e-cc5e-5d26-905b-b2358f5db1da",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "6273f090-0e32-5a87-b927-58303502ea3b",
+  "tokens": [
+   {
+    "form_ids": [
+     "6273f090-0e32-5a87-b927-58303502ea3b"
+    ],
+    "gloss": "hi",
+    "surface": "Hola,"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "gloss": "I'm",
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "gloss": "Sofi",
+    "surface": "Sofi."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "Are you Sofi or Lucía?",
+  "en_alt": [],
+  "es": "¿Vos sos Sofi o Lucía?",
+  "es_alt": [
+   "¿Sos Sofi o Lucía?"
+  ],
+  "id": "8b5004a5-6f14-56a5-ac45-3708a35a9dd9",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "¿Vos"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "sos"
+   },
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "surface": "Sofi"
+   },
+   {
+    "form_ids": [
+     "14804e3f-6f0e-51a1-b7ec-b7ff9af2b23c"
+    ],
+    "surface": "o"
+   },
+   {
+    "form_ids": [
+     "ef9adde3-0a4b-5455-bfad-0d70b236e93f"
+    ],
+    "surface": "Lucía?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A pastry, please.",
+  "en_alt": [],
+  "es": "Una factura, por favor.",
+  "es_alt": [],
+  "id": "8bf5a3ec-58e1-5812-b25c-abc88ca2fcf6",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "f7f00e16-2413-5933-a64c-f96d2249ec2a",
+  "tokens": [
+   {
+    "form_ids": [
+     "deb6b73d-0a96-5cdb-bc6f-dfa02f562b0d"
+    ],
+    "gloss": "a",
+    "surface": "Una"
+   },
+   {
+    "form_ids": [
+     "f7f00e16-2413-5933-a64c-f96d2249ec2a"
+    ],
+    "gloss": "pastry",
+    "surface": "factura,"
+   },
+   {
+    "form_ids": [
+     "466fd20d-f35f-5500-81e9-413001d92ce6"
+    ],
+    "gloss": "please",
+    "surface": "por favor."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Are you Juan?",
+  "en_alt": [],
+  "es": "¿Sos Juan?",
+  "es_alt": [
+   "¿Vos sos Juan?"
+  ],
+  "id": "8d0813da-48bc-5756-b6f5-17076f32ce3e",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "published",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "gloss": "are you",
+    "surface": "¿Sos"
+   },
+   {
+    "form_ids": [
+     "a0c76088-db09-545c-9b35-a28ec314414d"
+    ],
+    "gloss": "Juan",
+    "surface": "Juan?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Water, thanks.",
+  "en_alt": [],
+  "es": "Agua, gracias.",
+  "es_alt": [],
+  "id": "9658ab2d-c22c-57cd-be2c-a8c3e5e7aef0",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "876e8095-f2c5-5c38-866e-9ac138d52b87",
+  "tokens": [
+   {
+    "form_ids": [
+     "876e8095-f2c5-5c38-866e-9ac138d52b87"
+    ],
+    "gloss": "water",
+    "surface": "Agua,"
+   },
+   {
+    "form_ids": [
+     "9c78c990-e652-5b9f-a449-4cdda2a3937b"
+    ],
+    "gloss": "thanks",
+    "surface": "gracias."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Where are you from?",
+  "en_alt": [],
+  "es": "¿De dónde sos?",
+  "es_alt": [
+   "¿De dónde sos vos?"
+  ],
+  "id": "96f7c645-0f3d-5460-98fd-e6a9c6bc6082",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "dd18dfbc-edbf-5233-b5af-5ee76fb0409b",
+  "tokens": [
+   {
+    "form_ids": [
+     "4692b8ee-7359-5686-855f-b800ded6906f"
+    ],
+    "surface": "¿De"
+   },
+   {
+    "form_ids": [
+     "dd18dfbc-edbf-5233-b5af-5ee76fb0409b"
+    ],
+    "surface": "dónde"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "sos?"
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "He's Uruguayan.",
+  "en_alt": [],
+  "es": "Él es uruguayo.",
+  "es_alt": [
+   "Es uruguayo."
+  ],
+  "id": "98ac60e1-d3ef-59e0-a7a0-83c216d210ef",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "a7a5b297-ed91-501c-ab09-7fe4ae5978b1",
+  "tokens": [
+   {
+    "form_ids": [
+     "965e27ee-4373-5358-9d14-ef0dccd42643"
+    ],
+    "surface": "Él"
+   },
+   {
+    "form_ids": [
+     "b20bba62-c9b9-5803-9cdf-93d9b550a550"
+    ],
+    "surface": "es"
+   },
+   {
+    "form_ids": [
+     "a7a5b297-ed91-501c-ab09-7fe4ae5978b1"
+    ],
+    "surface": "uruguayo."
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A coffee. And you?",
+  "en_alt": [
+   "A coffee. What about you?"
+  ],
+  "es": "Un café. ¿Y vos?",
+  "es_alt": [],
+  "id": "9ba0fff3-0d8c-5864-b0f5-b983936d4dcf",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "surface": "Un"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "surface": "café."
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "surface": "¿Y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Well, OK.",
+  "en_alt": [],
+  "es": "Bueno, dale.",
+  "es_alt": [],
+  "id": "9cb199b6-96fa-5c86-8a5f-94a0d61b3d36",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "770fb250-ae00-510b-8a63-ea9277702843",
+  "tokens": [
+   {
+    "form_ids": [
+     "770fb250-ae00-510b-8a63-ea9277702843"
+    ],
+    "gloss": "well",
+    "surface": "Bueno,"
+   },
+   {
+    "form_ids": [
+     "1ba6168d-09bd-509b-bbc8-765e8806ba16"
+    ],
+    "gloss": "OK",
+    "surface": "dale."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Well, bye.",
+  "en_alt": [],
+  "es": "Bueno, chau.",
+  "es_alt": [],
+  "id": "9f6c924d-0a4e-5329-923c-69d11fc1b5f4",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "770fb250-ae00-510b-8a63-ea9277702843",
+  "tokens": [
+   {
+    "form_ids": [
+     "770fb250-ae00-510b-8a63-ea9277702843"
+    ],
+    "surface": "Bueno,"
+   },
+   {
+    "form_ids": [
+     "16df9c18-3edc-5405-8f9e-b7d5c3ec1103"
+    ],
+    "surface": "chau."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "You're Lucía, right?",
+  "en_alt": [
+   "You're Lucía, aren't you?"
+  ],
+  "es": "Sos Lucía, ¿no?",
+  "es_alt": [
+   "Vos sos Lucía, ¿no?"
+  ],
+  "id": "9f805a22-599a-5b0f-ace5-5667cb18f3b9",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "published",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "gloss": "you're",
+    "surface": "Sos"
+   },
+   {
+    "form_ids": [
+     "ef9adde3-0a4b-5455-bfad-0d70b236e93f"
+    ],
+    "gloss": "Lucía",
+    "surface": "Lucía,"
+   },
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "gloss": "right",
+    "surface": "¿no?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "No, you're Juan.",
+  "en_alt": [],
+  "es": "No, vos sos Juan.",
+  "es_alt": [
+   "No, sos Juan."
+  ],
+  "id": "a1f4b50b-087f-5869-8f3e-8cd88cdc4196",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "surface": "No,"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "sos"
+   },
+   {
+    "form_ids": [
+     "a0c76088-db09-545c-9b35-a28ec314414d"
+    ],
+    "surface": "Juan."
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "No, a mate, please.",
+  "en_alt": [],
+  "es": "No, un mate, por favor.",
+  "es_alt": [],
+  "id": "a25a4d70-dcb3-5613-8331-7675efd12000",
+  "kind": "dialogue",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "0de01ef6-29bb-557a-a7e2-f6c1110d951b",
+  "tokens": [
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "gloss": "no",
+    "surface": "No,"
+   },
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "un"
+   },
+   {
+    "form_ids": [
+     "7f2c9cd3-5c26-5e2a-8aaa-bf21e54e92b7"
+    ],
+    "gloss": "mate",
+    "surface": "mate,"
+   },
+   {
+    "form_ids": [
+     "466fd20d-f35f-5500-81e9-413001d92ce6"
+    ],
+    "gloss": "please",
+    "surface": "por favor."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 3,
+  "en": "Martín is from Córdoba, but I'm from Rosario.",
+  "en_alt": [],
+  "es": "Martín es de Córdoba, pero yo soy de Rosario.",
+  "es_alt": [
+   "Martín es de Córdoba, pero soy de Rosario."
+  ],
+  "id": "a49c0adb-258d-5a65-951d-a84801c4ef20",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "7a3a1f0b-eccf-5a02-b28f-90ca90d6a023",
+  "tokens": [
+   {
+    "form_ids": [
+     "4b3d9c85-07c4-572b-9723-8de6a728af94"
+    ],
+    "surface": "Martín"
+   },
+   {
+    "form_ids": [
+     "b20bba62-c9b9-5803-9cdf-93d9b550a550"
+    ],
+    "surface": "es"
+   },
+   {
+    "form_ids": [
+     "4692b8ee-7359-5686-855f-b800ded6906f"
+    ],
+    "surface": "de"
+   },
+   {
+    "form_ids": [
+     "035c8c5e-994f-5e2f-9ac1-c30f88cd8e52"
+    ],
+    "surface": "Córdoba,"
+   },
+   {
+    "form_ids": [
+     "7a3a1f0b-eccf-5a02-b28f-90ca90d6a023"
+    ],
+    "surface": "pero"
+   },
+   {
+    "form_ids": [
+     "0bfd7395-526c-589d-8619-1794b0f8fc11"
+    ],
+    "surface": "yo"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "4692b8ee-7359-5686-855f-b800ded6906f"
+    ],
+    "surface": "de"
+   },
+   {
+    "form_ids": [
+     "756de00b-715c-5df4-9996-8073a262f45f"
+    ],
+    "surface": "Rosario."
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Not great, man.",
+  "en_alt": [],
+  "es": "Mal, che.",
+  "es_alt": [
+   "Mal."
+  ],
+  "id": "a9c3cb1f-b601-5f47-8b9f-70d603afb8e7",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "7a86d9e6-cbda-5898-b35b-384407438914",
+  "tokens": [
+   {
+    "form_ids": [
+     "7a86d9e6-cbda-5898-b35b-384407438914"
+    ],
+    "gloss": "not great",
+    "surface": "Mal,"
+   },
+   {
+    "form_ids": [
+     "91232a84-b055-5e03-8ed2-651c79f5b376"
+    ],
+    "gloss": "man",
+    "surface": "che."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "So, is it you or not?",
+  "en_alt": [
+   "Well, is that you or not?"
+  ],
+  "es": "Bueno, ¿sos vos o no?",
+  "es_alt": [],
+  "id": "a9c41b68-50b7-501b-9998-541f5644b793",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "770fb250-ae00-510b-8a63-ea9277702843"
+    ],
+    "surface": "Bueno,"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "¿sos"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos"
+   },
+   {
+    "form_ids": [
+     "14804e3f-6f0e-51a1-b7ec-b7ff9af2b23c"
+    ],
+    "surface": "o"
+   },
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "surface": "no?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "I'm from here.",
+  "en_alt": [],
+  "es": "Soy de acá.",
+  "es_alt": [
+   "Yo soy de acá."
+  ],
+  "id": "aff809ab-eafa-51e8-b07f-c28024c826d7",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "e29831ef-42b2-51ea-8e38-e365e3311ab1",
+  "tokens": [
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "surface": "Soy"
+   },
+   {
+    "form_ids": [
+     "4692b8ee-7359-5686-855f-b800ded6906f"
+    ],
+    "surface": "de"
+   },
+   {
+    "form_ids": [
+     "e29831ef-42b2-51ea-8e38-e365e3311ab1"
+    ],
+    "surface": "acá."
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "I'm Sofi.",
+  "en_alt": [],
+  "es": "Soy Sofi.",
+  "es_alt": [
+   "Yo soy Sofi."
+  ],
+  "id": "b65498d1-369d-5baa-b6be-70c018304d80",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "7bad7209-3158-537f-98a7-d94d162d56e9",
+  "tokens": [
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "gloss": "I'm",
+    "surface": "Soy"
+   },
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "gloss": "Sofi",
+    "surface": "Sofi."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Hi there. How's it going?",
+  "en_alt": [],
+  "es": "Hola, che. ¿Qué tal?",
+  "es_alt": [
+   "Hola. ¿qué tal?",
+   "Hola. ¿Qué tal, che?"
+  ],
+  "id": "b9f297da-4c6b-5b25-9f8d-755f5a5f8f5e",
+  "kind": "dialogue",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "6273f090-0e32-5a87-b927-58303502ea3b",
+  "tokens": [
+   {
+    "form_ids": [
+     "6273f090-0e32-5a87-b927-58303502ea3b"
+    ],
+    "gloss": "hi",
+    "surface": "Hola,"
+   },
+   {
+    "form_ids": [
+     "91232a84-b055-5e03-8ed2-651c79f5b376"
+    ],
+    "surface": "che."
+   },
+   {
+    "form_ids": [
+     "5843c164-0b5c-5ff7-b794-8a82954c3444"
+    ],
+    "gloss": "how's it going",
+    "surface": "¿Qué tal?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:16:02.404573+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "No, I'm Lucía.",
+  "en_alt": [],
+  "es": "No, yo soy Lucía.",
+  "es_alt": [
+   "No, soy Lucía."
+  ],
+  "id": "ba0b787d-226f-54a7-b38c-e7c1411c9647",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "0bfd7395-526c-589d-8619-1794b0f8fc11",
+  "tokens": [
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "surface": "No,"
+   },
+   {
+    "form_ids": [
+     "0bfd7395-526c-589d-8619-1794b0f8fc11"
+    ],
+    "surface": "yo"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "ef9adde3-0a4b-5455-bfad-0d70b236e93f"
+    ],
+    "surface": "Lucía."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Fine, thanks. And you?",
+  "en_alt": [
+   "Good, thanks. You?"
+  ],
+  "es": "Bien, gracias. ¿Y vos?",
+  "es_alt": [],
+  "id": "ba7a835e-1df7-52de-9fb1-4284eea0d29f",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "published",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "840881cd-bdb9-5631-9fa8-5c191bbb9a92"
+    ],
+    "gloss": "fine",
+    "surface": "Bien,"
+   },
+   {
+    "form_ids": [
+     "9c78c990-e652-5b9f-a449-4cdda2a3937b"
+    ],
+    "gloss": "thanks",
+    "surface": "gracias."
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "gloss": "and",
+    "surface": "¿Y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "gloss": "you",
+    "surface": "vos?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "No, I'm Lucía.",
+  "en_alt": [],
+  "es": "No, soy Lucía.",
+  "es_alt": [
+   "No, yo soy Lucía."
+  ],
+  "id": "be45b7fe-3a53-5445-932b-d237855acd67",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "0de01ef6-29bb-557a-a7e2-f6c1110d951b",
+  "tokens": [
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "gloss": "no",
+    "surface": "No,"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "gloss": "I'm",
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "ef9adde3-0a4b-5455-bfad-0d70b236e93f"
+    ],
+    "gloss": "Lucía",
+    "surface": "Lucía."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "My name is Martín.",
+  "en_alt": [],
+  "es": "Me llamo Martín.",
+  "es_alt": [
+   "Yo me llamo Martín."
+  ],
+  "id": "c10427b3-5ad5-5a15-9957-e23fa9c04d53",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "dba200c4-cad2-5945-b978-2f4b6b067c85",
+  "tokens": [
+   {
+    "form_ids": [
+     "be20724b-3be1-5bcc-801e-f13718511443"
+    ],
+    "surface": "Me"
+   },
+   {
+    "form_ids": [
+     "dba200c4-cad2-5945-b978-2f4b6b067c85"
+    ],
+    "surface": "llamo"
+   },
+   {
+    "form_ids": [
+     "4b3d9c85-07c4-572b-9723-8de6a728af94"
+    ],
+    "surface": "Martín."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "OK, thanks.",
+  "en_alt": [],
+  "es": "Dale, gracias.",
+  "es_alt": [],
+  "id": "c61fdedd-3e12-5770-a2d6-3168f752dbe3",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "1ba6168d-09bd-509b-bbc8-765e8806ba16",
+  "tokens": [
+   {
+    "form_ids": [
+     "1ba6168d-09bd-509b-bbc8-765e8806ba16"
+    ],
+    "gloss": "OK",
+    "surface": "Dale,"
+   },
+   {
+    "form_ids": [
+     "9c78c990-e652-5b9f-a449-4cdda2a3937b"
+    ],
+    "gloss": "thanks",
+    "surface": "gracias."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A juice, please.",
+  "en_alt": [],
+  "es": "Un jugo, por favor.",
+  "es_alt": [],
+  "id": "caad848f-8898-509c-aeb0-983da017173c",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "6c053054-70c4-56ce-9300-fe4fa796b45a",
+  "tokens": [
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "Un"
+   },
+   {
+    "form_ids": [
+     "6c053054-70c4-56ce-9300-fe4fa796b45a"
+    ],
+    "gloss": "juice",
+    "surface": "jugo,"
+   },
+   {
+    "form_ids": [
+     "466fd20d-f35f-5500-81e9-413001d92ce6"
+    ],
+    "gloss": "please",
+    "surface": "por favor."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Hi there.",
+  "en_alt": [
+   "Hey there."
+  ],
+  "es": "Hola, che.",
+  "es_alt": [
+   "Hola."
+  ],
+  "id": "cb631b53-b406-564e-8043-846a65e211a4",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "91232a84-b055-5e03-8ed2-651c79f5b376",
+  "tokens": [
+   {
+    "form_ids": [
+     "6273f090-0e32-5a87-b927-58303502ea3b"
+    ],
+    "gloss": "hi",
+    "surface": "Hola,"
+   },
+   {
+    "form_ids": [
+     "91232a84-b055-5e03-8ed2-651c79f5b376"
+    ],
+    "surface": "che."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A coffee and a medialuna.",
+  "en_alt": [],
+  "es": "Un café y una medialuna.",
+  "es_alt": [
+   "Una medialuna y un café."
+  ],
+  "id": "cce5a9c3-893f-5bc9-9e45-5fbfcc3dea72",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "c7bf2819-57df-5873-99e0-553951291a4f",
+  "tokens": [
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "Un"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "gloss": "coffee",
+    "surface": "café"
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "gloss": "and",
+    "surface": "y"
+   },
+   {
+    "form_ids": [
+     "deb6b73d-0a96-5cdb-bc6f-dfa02f562b0d"
+    ],
+    "gloss": "a",
+    "surface": "una"
+   },
+   {
+    "form_ids": [
+     "61df6d82-e066-542f-b158-5524f130294e"
+    ],
+    "gloss": "medialuna",
+    "surface": "medialuna."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 18:33:22.217749+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Nice to meet you, Lucía.",
+  "en_alt": [],
+  "es": "Mucho gusto, Lucía.",
+  "es_alt": [],
+  "id": "cd0a9545-1b57-5528-9367-35f75d2cc41b",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "bab9ff2f-3c80-557a-8a52-c8d02efd2e85",
+  "tokens": [
+   {
+    "form_ids": [
+     "bab9ff2f-3c80-557a-8a52-c8d02efd2e85"
+    ],
+    "surface": "Mucho gusto,"
+   },
+   {
+    "form_ids": [
+     "ef9adde3-0a4b-5455-bfad-0d70b236e93f"
+    ],
+    "surface": "Lucía."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 3,
+  "en": "Not great. And you? All good?",
+  "en_alt": [
+   "Not well, man. You? Everything OK?"
+  ],
+  "es": "Mal, che. ¿Y vos? ¿Todo bien?",
+  "es_alt": [
+   "Mal. ¿y vos? ¿todo bien?"
+  ],
+  "id": "cf47f145-d1f4-5ec5-af50-fa66060810c4",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "7a86d9e6-cbda-5898-b35b-384407438914"
+    ],
+    "surface": "Mal,"
+   },
+   {
+    "form_ids": [
+     "91232a84-b055-5e03-8ed2-651c79f5b376"
+    ],
+    "surface": "che."
+   },
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "surface": "¿Y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos?"
+   },
+   {
+    "form_ids": [
+     "d108cd6e-fae2-5ab6-bfeb-054b01041ee6"
+    ],
+    "surface": "¿Todo bien?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "A cortado or a coffee?",
+  "en_alt": [],
+  "es": "¿Un cortado o un café?",
+  "es_alt": [],
+  "id": "d32c47c0-4b3f-53d1-ae34-6208e2328360",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "495df4cb-c037-5679-aa48-1c6b79f02ad6",
+  "tokens": [
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "¿Un"
+   },
+   {
+    "form_ids": [
+     "495df4cb-c037-5679-aa48-1c6b79f02ad6"
+    ],
+    "gloss": "cortado",
+    "surface": "cortado"
+   },
+   {
+    "form_ids": [
+     "14804e3f-6f0e-51a1-b7ec-b7ff9af2b23c"
+    ],
+    "gloss": "or",
+    "surface": "o"
+   },
+   {
+    "form_ids": [
+     "060197a5-9154-5a14-ac6d-8a8ffa3e9f6b"
+    ],
+    "gloss": "a",
+    "surface": "un"
+   },
+   {
+    "form_ids": [
+     "c7bf2819-57df-5873-99e0-553951291a4f"
+    ],
+    "gloss": "coffee",
+    "surface": "café?"
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Yes, I'm Juan.",
+  "en_alt": [],
+  "es": "Sí, soy Juan.",
+  "es_alt": [
+   "Sí, yo soy Juan."
+  ],
+  "id": "d49a0542-5858-5645-b250-79e5e9130d98",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "191fd126-be91-54fb-8848-9f3aa180ca5d",
+  "tokens": [
+   {
+    "form_ids": [
+     "191fd126-be91-54fb-8848-9f3aa180ca5d"
+    ],
+    "gloss": "yes",
+    "surface": "Sí,"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "gloss": "I'm",
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "a0c76088-db09-545c-9b35-a28ec314414d"
+    ],
+    "gloss": "Juan",
+    "surface": "Juan."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "I am Martín.",
+  "en_alt": [],
+  "es": "Yo soy Martín.",
+  "es_alt": [
+   "Soy Martín."
+  ],
+  "id": "da58266e-6714-5777-9a62-32a024ad3739",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "0bfd7395-526c-589d-8619-1794b0f8fc11",
+  "tokens": [
+   {
+    "form_ids": [
+     "0bfd7395-526c-589d-8619-1794b0f8fc11"
+    ],
+    "gloss": "I",
+    "surface": "Yo"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "gloss": "am",
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "4b3d9c85-07c4-572b-9723-8de6a728af94"
+    ],
+    "gloss": "Martín",
+    "surface": "Martín."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "All good, thanks.",
+  "en_alt": [],
+  "es": "Todo bien, gracias.",
+  "es_alt": [
+   "Gracias, todo bien."
+  ],
+  "id": "dbb2097d-75a4-5950-9f54-cd8365fd1d95",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "d108cd6e-fae2-5ab6-bfeb-054b01041ee6",
+  "tokens": [
+   {
+    "form_ids": [
+     "d108cd6e-fae2-5ab6-bfeb-054b01041ee6"
+    ],
+    "gloss": "all good",
+    "surface": "Todo bien,"
+   },
+   {
+    "form_ids": [
+     "9c78c990-e652-5b9f-a449-4cdda2a3937b"
+    ],
+    "gloss": "thanks",
+    "surface": "gracias."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:16:02.404573+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 14:12:09.020025+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Hi, how's it going?",
+  "en_alt": [],
+  "es": "Hola, ¿qué tal?",
+  "es_alt": [],
+  "id": "dceaca61-60b4-5bec-8d6c-3b213260d739",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "5843c164-0b5c-5ff7-b794-8a82954c3444",
+  "tokens": [
+   {
+    "form_ids": [
+     "6273f090-0e32-5a87-b927-58303502ea3b"
+    ],
+    "gloss": "hi",
+    "surface": "Hola,"
+   },
+   {
+    "form_ids": [
+     "5843c164-0b5c-5ff7-b794-8a82954c3444"
+    ],
+    "gloss": "how's it going",
+    "surface": "¿qué tal?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "And you, Juan?",
+  "en_alt": [
+   "What about you, Juan?"
+  ],
+  "es": "¿Y vos, Juan?",
+  "es_alt": [],
+  "id": "de2801c8-bd92-5ef3-ba39-ce8f6c7e6ff1",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "surface": "¿Y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos,"
+   },
+   {
+    "form_ids": [
+     "a0c76088-db09-545c-9b35-a28ec314414d"
+    ],
+    "surface": "Juan?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-16 12:03:04.072778+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Water, please.",
+  "en_alt": [],
+  "es": "Agua, por favor.",
+  "es_alt": [],
+  "id": "e29ca65d-44e5-5f3a-a227-eb979beefc08",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "876e8095-f2c5-5c38-866e-9ac138d52b87",
+  "tokens": [
+   {
+    "form_ids": [
+     "876e8095-f2c5-5c38-866e-9ac138d52b87"
+    ],
+    "gloss": "water",
+    "surface": "Agua,"
+   },
+   {
+    "form_ids": [
+     "466fd20d-f35f-5500-81e9-413001d92ce6"
+    ],
+    "gloss": "please",
+    "surface": "por favor."
+   }
+  ],
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 2,
+  "en": "And where are you from?",
+  "en_alt": [],
+  "es": "¿Y vos de dónde sos?",
+  "es_alt": [
+   "¿Y de dónde sos vos?",
+   "¿Y de dónde sos?"
+  ],
+  "id": "e5715684-dfa4-5636-814d-dde7f2540b2b",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "dd18dfbc-edbf-5233-b5af-5ee76fb0409b",
+  "tokens": [
+   {
+    "form_ids": [
+     "f8d95e85-1f78-5547-b970-1ce34d4f9883"
+    ],
+    "surface": "¿Y"
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "vos"
+   },
+   {
+    "form_ids": [
+     "4692b8ee-7359-5686-855f-b800ded6906f"
+    ],
+    "surface": "de"
+   },
+   {
+    "form_ids": [
+     "dd18dfbc-edbf-5233-b5af-5ee76fb0409b"
+    ],
+    "surface": "dónde"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "sos?"
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 3,
+  "en": "Are you Sofi? Hi, I'm Martín.",
+  "en_alt": [],
+  "es": "¿Sos Sofi? Hola, soy Martín.",
+  "es_alt": [
+   "¿Sos Sofi? hola, yo soy Martín.",
+   "¿Vos sos Sofi? hola, soy Martín.",
+   "¿Vos sos Sofi? hola, yo soy Martín."
+  ],
+  "id": "ecbbc977-b0a2-5646-9faf-989539e79e58",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "¿Sos"
+   },
+   {
+    "form_ids": [
+     "e987c76e-fff4-5bb1-8495-2897a6baa97d"
+    ],
+    "surface": "Sofi?"
+   },
+   {
+    "form_ids": [
+     "6273f090-0e32-5a87-b927-58303502ea3b"
+    ],
+    "surface": "Hola,"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "4b3d9c85-07c4-572b-9723-8de6a728af94"
+    ],
+    "surface": "Martín."
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "All good?",
+  "en_alt": [],
+  "es": "¿Todo bien?",
+  "es_alt": [],
+  "id": "ed0f87aa-2319-5eb0-ab49-0e293d44ecfa",
+  "kind": "word",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "d108cd6e-fae2-5ab6-bfeb-054b01041ee6",
+  "tokens": [
+   {
+    "form_ids": [
+     "d108cd6e-fae2-5ab6-bfeb-054b01041ee6"
+    ],
+    "gloss": "all good",
+    "surface": "¿Todo bien?"
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:15:18.103759+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 3,
+  "en": "No, I'm not Juan. Are you Juan?",
+  "en_alt": [],
+  "es": "No, no soy Juan. ¿Vos sos Juan?",
+  "es_alt": [
+   "No, no soy Juan. ¿sos Juan?"
+  ],
+  "id": "f5d0b2c9-ee51-5302-bd6b-23f96033ed76",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "a40b6376-6354-58aa-972a-651fa54cc725",
+  "tokens": [
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "surface": "No,"
+   },
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "surface": "no"
+   },
+   {
+    "form_ids": [
+     "7bad7209-3158-537f-98a7-d94d162d56e9"
+    ],
+    "surface": "soy"
+   },
+   {
+    "form_ids": [
+     "a0c76088-db09-545c-9b35-a28ec314414d"
+    ],
+    "surface": "Juan."
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "¿Vos"
+   },
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "sos"
+   },
+   {
+    "form_ids": [
+     "a0c76088-db09-545c-9b35-a28ec314414d"
+    ],
+    "surface": "Juan?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "He's Argentinian.",
+  "en_alt": [],
+  "es": "Él es argentino.",
+  "es_alt": [
+   "Es argentino."
+  ],
+  "id": "f7c1528b-c806-5dae-82a5-65a230066675",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "965e27ee-4373-5358-9d14-ef0dccd42643",
+  "tokens": [
+   {
+    "form_ids": [
+     "965e27ee-4373-5358-9d14-ef0dccd42643"
+    ],
+    "surface": "Él"
+   },
+   {
+    "form_ids": [
+     "b20bba62-c9b9-5803-9cdf-93d9b550a550"
+    ],
+    "surface": "es"
+   },
+   {
+    "form_ids": [
+     "f576722e-63ea-5600-9cf9-bfb6f27e255e"
+    ],
+    "surface": "argentino."
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-17 11:49:54.692259+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Not me. You?",
+  "en_alt": [
+   "Not me. What about you?"
+  ],
+  "es": "Yo no. ¿Vos?",
+  "es_alt": [],
+  "id": "f91c8cd1-bfc0-5951-9107-03b010608637",
+  "kind": "sentence",
+  "problems": [],
+  "source": "ai",
+  "status": "retired",
+  "target_form_id": "97dde827-60cb-586f-ab2a-0b18dd4f9cfb",
+  "tokens": [
+   {
+    "form_ids": [
+     "0bfd7395-526c-589d-8619-1794b0f8fc11"
+    ],
+    "surface": "Yo"
+   },
+   {
+    "form_ids": [
+     "0de01ef6-29bb-557a-a7e2-f6c1110d951b"
+    ],
+    "surface": "no."
+   },
+   {
+    "form_ids": [
+     "97dde827-60cb-586f-ab2a-0b18dd4f9cfb"
+    ],
+    "surface": "¿Vos?"
+   }
+  ],
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:49:54.692259+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Is she from Uruguay?",
+  "en_alt": [],
+  "es": "¿Ella es de Uruguay?",
+  "es_alt": [
+   "¿Es de Uruguay?"
+  ],
+  "id": "fa16ff52-bade-5407-ac0c-46d66639bd73",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "518a5447-75e4-57f2-9893-095cb810838c",
+  "tokens": [
+   {
+    "form_ids": [
+     "518a5447-75e4-57f2-9893-095cb810838c"
+    ],
+    "surface": "¿Ella"
+   },
+   {
+    "form_ids": [
+     "b20bba62-c9b9-5803-9cdf-93d9b550a550"
+    ],
+    "surface": "es"
+   },
+   {
+    "form_ids": [
+     "4692b8ee-7359-5686-855f-b800ded6906f"
+    ],
+    "surface": "de"
+   },
+   {
+    "form_ids": [
+     "2bfe7fd9-afaa-5943-8d7b-080a2abaf4d5"
+    ],
+    "surface": "Uruguay?"
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Fine, thanks.",
+  "en_alt": [],
+  "es": "Bien, gracias.",
+  "es_alt": [
+   "Gracias, bien."
+  ],
+  "id": "fbb8cc42-e32f-5587-b826-a38993545087",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "published",
+  "target_form_id": "840881cd-bdb9-5631-9fa8-5c191bbb9a92",
+  "tokens": [
+   {
+    "form_ids": [
+     "840881cd-bdb9-5631-9fa8-5c191bbb9a92"
+    ],
+    "gloss": "fine",
+    "surface": "Bien,"
+   },
+   {
+    "form_ids": [
+     "9c78c990-e652-5b9f-a449-4cdda2a3937b"
+    ],
+    "gloss": "thanks",
+    "surface": "gracias."
+   }
+  ],
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 13:16:02.404573+00"
+ },
+ {
+  "attribution": null,
+  "audio_path": null,
+  "created_at": "2026-09-13 06:41:25.328523+00",
+  "created_by": null,
+  "difficulty": 1,
+  "en": "Are you Argentinian?",
+  "en_alt": [],
+  "es": "¿Sos argentino?",
+  "es_alt": [
+   "¿Sos argentina?",
+   "¿Vos sos argentino?",
+   "¿Vos sos argentina?"
+  ],
+  "id": "fe5fa087-5d64-5d56-9b17-7b65423014c3",
+  "kind": "sentence",
+  "problems": [],
+  "source": "human",
+  "status": "retired",
+  "target_form_id": "f576722e-63ea-5600-9cf9-bfb6f27e255e",
+  "tokens": [
+   {
+    "form_ids": [
+     "a40b6376-6354-58aa-972a-651fa54cc725"
+    ],
+    "surface": "¿Sos"
+   },
+   {
+    "form_ids": [
+     "f576722e-63ea-5600-9cf9-bfb6f27e255e"
+    ],
+    "surface": "argentino?"
+   }
+  ],
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-16 12:03:04.072778+00"
+ }
+]

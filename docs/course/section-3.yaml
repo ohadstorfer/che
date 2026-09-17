@@ -1,3 +1,8 @@
+# ===========================================================================
+# ALREADY IN THE DATABASE. Do not edit what exists here: edit it in
+# /admin/words. New units can still be added (npm run course:seed), and a new
+# section goes in a new file (section-N.yaml). docs/superplan-admin-palabras.md §7.2
+# ===========================================================================
 # ---------------------------------------------------------------------------
 # Che — Section 1 outline
 #

@@ -1,4 +1,4 @@
-import { isPhrase, shuffle } from './answers';
+import { isPhrase, selfGlossed, shuffle } from './answers';
 import { type LearnerData, type SessionData, type SessionItem, deckUpTo, drillable, loadLearner, sentenceItem } from './session';
 import type { Form, Sentence, Unit } from './types';
 
@@ -40,7 +40,11 @@ const targetOf = (data: LearnerData, s: Sentence) => data.formById.get(s.target_
 export function unitQuestions(data: LearnerData, unit: Unit, count: number, deck: Form[]): SessionItem[] {
   const tag = (item: SessionItem): SessionItem => ({ ...item, placementUnit: unit.id, filler: true });
   const sentences = unitSentences(data, unit);
-  const words = shuffle(data.forms.filter((f) => f.unit_id === unit.id && drillable(f) && !isPhrase(f.form)));
+  // A word that is its own English — mate, cortado — is never sampled: typing
+  // or building it from a prompt that already spells it tests nothing.
+  const words = shuffle(
+    data.forms.filter((f) => f.unit_id === unit.id && drillable(f) && !isPhrase(f.form) && !selfGlossed(f)),
+  );
   const verb = words.find((f) => f.pos === 'verb') ?? words[0];
   const out: SessionItem[] = [];
   const usedSentences = new Set<string>();

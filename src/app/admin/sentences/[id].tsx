@@ -72,6 +72,7 @@ export default function AdminSentence() {
 
   const save = async () => {
     const esChanged = draft.es.trim() !== row.es;
+    const enChanged = draft.en.trim() !== row.en;
     const next = await staffUpdate<SentenceRow>('sentences', row.id, {
       es: draft.es.trim(),
       en: draft.en.trim(),
@@ -79,6 +80,9 @@ export default function AdminSentence() {
       es_alt: unlines(draft.es_alt),
       // New Spanish means new tokens: back through the linter first.
       ...(esChanged ? { status: 'draft' } : {}),
+      // Each token's gloss is words of the old English. Dropped, the sentence
+      // is unglossed again, and `course:gloss` aligns it with the new one.
+      ...(enChanged && !esChanged ? { tokens: row.tokens.map(({ gloss: _old, ...t }) => t) } : {}),
     });
     setRow(next);
     setMessage(esChanged ? 'Saved. The Spanish changed, so it is a draft again — run the linter to re-tokenize it.' : 'Saved.');
@@ -133,6 +137,8 @@ export default function AdminSentence() {
                     <Text style={styles.tokenForms}>
                       {missing ? 'unresolved' : resolved.map((f) => `${f.lemma} · ${f.pos}${f.is_glue ? ' · glue' : ''}`).join(' / ')}
                     </Text>
+                    {/* What a learner sees when she taps the word here. */}
+                    {t.gloss ? <Text style={styles.tokenForms}>“{t.gloss}”</Text> : null}
                   </View>
                 );
               })}

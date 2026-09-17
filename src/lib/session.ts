@@ -1,6 +1,19 @@
-import { MATCH_SIZE, SENTENCE_CHOICES, isPhrase, matchable, norm, sharesMeaning, shuffle, wordsOf } from './answers';
+import {
+  MATCH_SIZE,
+  SENTENCE_CHOICES,
+  isPhrase,
+  labelOf,
+  matchable,
+  meaningOf,
+  norm,
+  selfGlossed,
+  sharesMeaning,
+  shuffle,
+  wordsOf,
+} from './answers';
 import { conceptScores, conceptsOf, weakestConcept } from './concepts';
 import { addDays, localDateStr } from './dates';
+import { withMeanings } from './meanings';
 import {
   DEFAULT_LADDER,
   type Ladder,
@@ -114,7 +127,7 @@ export interface LearnerData {
 /** The published lexicon, her SM-2 states, every published sentence, and the
  *  ladder her recent rounds and any placement have earned her. */
 export async function loadLearner(userId: string): Promise<LearnerData> {
-  const [{ data: formRows }, { data: stateRows }, { data: roundRows }, { data: profile }] = await Promise.all([
+  const [{ data: formRows }, { data: stateRows }, { data: roundRows }, { data: profile }, { data: answerRows }] = await Promise.all([
     supabase.from('form_entries').select('*').eq('status', 'published'),
     supabase.from('form_states').select('*').eq('user_id', userId),
     supabase
@@ -125,10 +138,21 @@ export async function loadLearner(userId: string): Promise<LearnerData> {
       .order('finished_at', { ascending: false })
       .limit(OFFSET_WINDOW),
     supabase.from('profiles').select('placed_through').eq('user_id', userId).maybeSingle(),
+    supabase.from('form_answers').select('form_id, meaning, answer').eq('status', 'published'),
   ]);
-  const forms = (formRows ?? []) as Form[];
+  // The answers stored for each word's meanings (course:answers), next to the word.
+  const accepts = new Map<string, { meaning: string; answer: string }[]>();
+  for (const a of (answerRows ?? []) as { form_id: string; meaning: string; answer: string }[]) {
+    accepts.set(a.form_id, [...(accepts.get(a.form_id) ?? []), { meaning: a.meaning, answer: a.answer }]);
+  }
+  const lexicon = ((formRows ?? []) as Form[]).map((f) => (accepts.has(f.id) ? { ...f, accepts: accepts.get(f.id) } : f));
   const states = (stateRows ?? []) as FormState[];
-  const sentences = await loadSentences(userId, forms);
+  const sentences = await loadSentences(userId, lexicon);
+  // What each word means comes from its sentences and how she has met them, so
+  // it is worked out here, where both are to hand, every time her data loads.
+  const orderOf = new Map(lexicon.map((f) => [f.id, f.unit_order]));
+  const reached = Math.max(0, ...states.map((s) => orderOf.get(s.form_id) ?? 0));
+  const forms = withMeanings(lexicon, sentences, reached);
   const scores = ((roundRows ?? []) as { score: number | null }[]).flatMap((r) => (r.score == null ? [] : [r.score]));
   const ladder = ladderFor(ladderOffset(scores), {
     placedThrough: (profile as { placed_through?: number } | null)?.placed_through ?? 0,
@@ -168,9 +192,24 @@ export function exercisesFor(
   deck: Form[],
   ladder: Ladder = DEFAULT_LADDER,
 ): ExerciseMode[] {
+  // A word that is its own English — mate, cortado, empanada — gets none of the
+  // exercises that cross between the two sides: "Build the word in Spanish:
+  // cortado" hands over the answer, and so does every choice screen. What is
+  // left to test is its sound and its spelling, and its sentences carry the
+  // rest, so a word with no recording yet simply waits there.
+  if (selfGlossed(form)) return loanwordExercises(form, deck.length);
   return isPhrase(form.form)
     ? phraseExercises(form, state, deck, ladder)
     : wordExercises(form, state, deck.length, ladder);
+}
+
+/** All a word that means itself can be asked: hear it, then spell it. */
+function loanwordExercises(form: Form, deckSize: number): ExerciseMode[] {
+  if (!form.audio_path) return [];
+  const modes: ExerciseMode[] = [];
+  if (deckSize >= MATCH_SIZE) modes.push('listen');
+  modes.push('listen_build');
+  return modes;
 }
 
 function wordExercises(form: Form, state: FormState | null, deckSize: number, ladder: Ladder): ExerciseMode[] {
@@ -230,7 +269,7 @@ export function pickDirection(form: Form, mode: ExerciseMode, seen: boolean): Se
     // meeting, and every single word, always produces Spanish. Building the
     // English side needs an English side worth building — a one-word gloss
     // would break into letters instead of words.
-    if (!isPhrase(form.form) || !isPhrase(form.gloss_en) || !seen) return 'en_to_es';
+    if (!isPhrase(form.form) || !isPhrase(meaningOf(form)) || !seen) return 'en_to_es';
     return Math.random() < 0.4 ? 'es_to_en' : 'en_to_es';
   }
   return Math.random() < 0.5 ? 'es_to_en' : 'en_to_es';
@@ -380,7 +419,10 @@ export async function buildSession(userId: string): Promise<SessionData> {
   );
   let dueGroups = due
     .filter(({ form }) => !covered.has(form.id))
-    .map(({ form, state }) => itemsForForm(form, state, deck, ladder));
+    .map(({ form, state }) => itemsForForm(form, state, deck, ladder))
+    // A word with no exercise of its own — a silent loanword — is left to its
+    // sentences rather than shown as an empty group.
+    .filter((g) => g.length);
 
   // Fit the round under MAX_SESSION_ITEMS, gentlest valve first: every word
   // loses its third angle, then drops to a single production angle, and only
@@ -464,7 +506,9 @@ export async function buildFreeSession(
       .slice(0, limit * 2),
   ).slice(0, limit);
 
-  let groups = pool.map((state) => itemsForForm(data.formById.get(state.form_id)!, state, deck, ladder));
+  let groups = pool
+    .map((state) => itemsForForm(data.formById.get(state.form_id)!, state, deck, ladder))
+    .filter((g) => g.length);
   if (screens(groups) > MAX_SESSION_ITEMS) groups = groups.map((g) => g.slice(0, 2));
   while (screens(groups) > MAX_SESSION_ITEMS && groups.length) groups.pop();
 
@@ -481,11 +525,11 @@ export async function buildFreeSession(
 // form that shares the phrase's meaning, whose words could build a second
 // right answer.
 export function wordPool(correct: Form, allForms: Form[], field: 'gloss_en' | 'form'): string[] {
-  const taken = new Set(wordsOf(correct[field]).map(norm));
+  const taken = new Set(wordsOf(labelOf(correct, field)).map(norm));
   const out = new Map<string, string>();
   for (const f of allForms) {
     if (f.id === correct.id || sharesMeaning(f, correct)) continue;
-    for (const word of wordsOf(f[field])) {
+    for (const word of wordsOf(labelOf(f, field))) {
       const key = norm(word);
       if (!key || taken.has(key) || out.has(key)) continue;
       out.set(key, word.replace(/[.,!?¿¡;:()]+/g, ''));
@@ -551,9 +595,10 @@ export function promotedMode(
     case 'multiple_choice':
     case 'true_false':
     case 'listen':
-      return 'word_build';
+      // A word that means itself has no harder step: building it is reading it.
+      return selfGlossed(item.form) ? null : 'word_build';
     case 'word_build':
-      return !isPhrase(item.form.form) && item.state ? 'typing' : null;
+      return !isPhrase(item.form.form) && item.state && !selfGlossed(item.form) ? 'typing' : null;
     default:
       return null;
   }

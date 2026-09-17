@@ -9,25 +9,24 @@
 // whole course, which is what "no word before it is taught" is measured on: a
 // form carries the course_order of the unit that introduces it.
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { parse } from 'yaml';
 
+import { checkFormEntry, checkSentence, glossRepeats, meaningOverlaps } from '../../../src/lib/course-rules/check.ts';
 import { ids, lemmaKey } from './ids.mjs';
-import {
-  POS,
-  REGIONAL,
-  REGISTERS,
-  TUTEO,
-  TUTEO_AMBIGUOUS,
-  fold,
-  parseFeatures,
-  registerRank,
-} from './rules.mjs';
-import { buildIndex, tokenize } from './tokenize.mjs';
+import { POS, REGISTERS, parseFeatures } from './rules.mjs';
 
-export const SECTION_PATHS = [1, 2, 3].map(
-  (n) => new URL(`../../../docs/course/section-${n}.yaml`, import.meta.url),
-);
+// The checks themselves take a vocabulary — this outline, or the database's
+// (lib/vocabulary.mjs) — and are shared with the admin.
+export { availableForms, checkSentence, meaningOverlaps, senses } from '../../../src/lib/course-rules/check.ts';
+
+const COURSE_DIR = new URL('../../../docs/course/', import.meta.url);
+/** Every section file, in order: a new section is a new section-N.yaml. */
+export const SECTION_PATHS = readdirSync(COURSE_DIR)
+  .map((name) => name.match(/^section-(\d+)\.yaml$/))
+  .filter(Boolean)
+  .sort((a, b) => Number(a[1]) - Number(b[1]))
+  .map((m) => new URL(m[0], COURSE_DIR));
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 /** A unit summary sits on one line of the path banner. */
@@ -176,15 +175,7 @@ export function loadOutline(paths = SECTION_PATHS) {
             errors.push(`${fWhere}: ${err.message}`);
           }
 
-          const folded = fold(surface);
-          if (TUTEO.has(folded)) errors.push(`${fWhere}: "${surface}" is a tuteo form — use the vos form`);
-          if (TUTEO_AMBIGUOUS.has(folded) && features.mood === 'imp' && features.person === 2 && !features.voseo) {
-            errors.push(`${fWhere}: second-person imperative without "vos" — the vos imperative stresses the last vowel`);
-          }
-          if (features.person === 2 && features.number === 'sg' && w.pos === 'verb' && !features.voseo) {
-            errors.push(`${fWhere}: second-person singular verb form must be tagged "vos"`);
-          }
-          if (REGIONAL.has(folded)) errors.push(`${fWhere}: "${surface}" is not rioplatense — use "${REGIONAL.get(folded)}"`);
+          for (const problem of checkFormEntry({ form: surface, pos: w.pos, features })) errors.push(`${fWhere}: ${problem}`);
 
           forms.push({
             id: ids.form(lemma, w.pos, surface),
@@ -197,6 +188,8 @@ export function loadOutline(paths = SECTION_PATHS) {
             gloss_note_en: e.note ?? null,
             unit_id: unitId,
             unit_order: courseOrder,
+            // Its place among the words its unit teaches: the order lessons take them in.
+            position: forms.filter((f) => f.unit_id === unitId).length + 1,
             is_glue: row.is_glue,
             register: row.register,
             audio_path: null,
@@ -241,21 +234,9 @@ export function loadOutline(paths = SECTION_PATHS) {
   }
 
   // A gloss that spells out the Spanish word and then explains it — "mate (the
-  // drink)" — hands over the answer: the English tile in a matching block
-  // contains the very word it is meant to be paired with. The explanation
-  // belongs in "note", which answer-facing screens don't show. A gloss that is
-  // the word itself ("mate" → "mate") is fine: a loanword has no other English.
-  {
-    const lemmaById = new Map(outline.lemmas.map((l) => [l.id, l]));
-    for (const f of outline.forms) {
-      if (f.is_glue || f.pos === 'propn') continue;
-      const gloss = f.gloss_en ?? lemmaById.get(f.lemma_id)?.gloss_en ?? '';
-      const word = fold(f.form);
-      if (!word || fold(gloss) === word) continue;
-      if (senses(gloss).some((s) => fold(s) !== word && new RegExp(`\\b${word}\\b`).test(fold(s)))) {
-        warnings.push(`"${f.form}" (unit ${f.unit_order}): gloss "${gloss}" repeats the Spanish word — move the explanation to "note"`);
-      }
-    }
+  // drink)" — hands over the answer. The explanation belongs in "note".
+  for (const f of glossRepeats(outline)) {
+    warnings.push(`"${f.form}" (unit ${f.unit_order}): gloss repeats the Spanish word — move the explanation to "note"`);
   }
 
   // Two words sharing a meaning can't be told apart from the English. The app
@@ -268,63 +249,3 @@ export function loadOutline(paths = SECTION_PATHS) {
   return { outline, errors, warnings };
 }
 
-/**
- * A gloss's senses: "well, fine, good" → ["well", "fine", "good"]. The app
- * splits them the same way (src/lib/answers.ts) to decide which words may be
- * offered as wrong answers for each other.
- */
-export const senses = (gloss) =>
-  String(gloss ?? '')
-    .split(/[,;]/)
-    .map((s) => s.trim().toLowerCase())
-    .filter(Boolean);
-
-/** Pairs of drillable forms, from different lemmas, whose glosses share a sense. */
-export function meaningOverlaps(outline) {
-  const lemmaById = new Map(outline.lemmas.map((l) => [l.id, l]));
-  const forms = outline.forms
-    .filter((f) => !f.is_glue && f.pos !== 'propn')
-    .map((f) => ({ form: f, senses: senses(f.gloss_en ?? lemmaById.get(f.lemma_id)?.gloss_en) }));
-  const out = [];
-  for (let i = 0; i < forms.length; i++) {
-    for (let j = i + 1; j < forms.length; j++) {
-      if (forms[i].form.lemma_id === forms[j].form.lemma_id) continue;
-      const shared = forms[i].senses.filter((s) => forms[j].senses.includes(s));
-      if (shared.length) out.push({ a: forms[i].form, b: forms[j].form, shared });
-    }
-  }
-  return out;
-}
-
-/** Forms a sentence in a unit may use: its own and every earlier unit's. */
-export function availableForms(outline, courseOrder) {
-  return outline.forms.filter((f) => f.unit_order <= courseOrder);
-}
-
-/**
- * The mechanical checks one sentence has to pass against the outline. Returns
- * human-readable problems; empty means it passes. (The full linter in Phase 3
- * builds on this.)
- */
-export function checkSentence(outline, unit, es) {
-  const problems = [];
-  const available = availableForms(outline, unit.course_order);
-  const tokens = tokenize(es, buildIndex(available));
-  const everything = buildIndex(outline.forms);
-  for (const t of tokens) {
-    const folded = fold(t.core);
-    if (TUTEO.has(folded)) problems.push(`"${t.core}" is tuteo`);
-    else if (REGIONAL.has(folded)) problems.push(`"${t.core}" is not rioplatense — use "${REGIONAL.get(folded)}"`);
-    else if (t.forms.length === 0) {
-      const later = tokenize(t.core, everything)[0]?.forms ?? [];
-      problems.push(
-        later.length
-          ? `"${t.core}" isn't taught until unit ${Math.min(...later.map((f) => f.unit_order))}`
-          : `"${t.core}" isn't in the course lexicon`,
-      );
-    } else if (t.forms.every((f) => registerRank(f.register) > registerRank(unit.register_max))) {
-      problems.push(`"${t.core}" is ${t.forms[0].register}; this unit allows up to ${unit.register_max}`);
-    }
-  }
-  return problems;
-}

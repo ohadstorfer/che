@@ -1,14 +1,35 @@
 #!/usr/bin/env node
-// Validates the course outline (docs/course/section-*.yaml) and prints what
-// each unit introduces.
+// Checks the course's vocabulary and prints what each unit introduces.
 //
-//   npm run course:validate
+//   npm run course:validate            the database — the source of truth
+//   npm run course:validate -- --yaml  docs/course/section-*.yaml, before
+//                                      course:seed loads a new unit from it
 //
 // Exits non-zero on any error, so it can gate the seed script and CI.
 
+import { checkFormEntry, glossRepeats, meaningOverlaps } from '../../src/lib/course-rules/check.ts';
 import { loadOutline } from './lib/outline.mjs';
+import { loadOutlineFromDb } from './lib/vocabulary.mjs';
 
-const { outline, errors, warnings } = loadOutline();
+const fromYaml = process.argv.includes('--yaml');
+let outline;
+let errors = [];
+let warnings = [];
+if (fromYaml) {
+  ({ outline, errors, warnings } = loadOutline());
+} else {
+  // The file checks that concern words, run over what the database holds now.
+  outline = loadOutlineFromDb();
+  for (const f of outline.forms) {
+    for (const p of checkFormEntry(f)) errors.push(`unit ${f.unit_order} · ${f.lemma} · ${f.form}: ${p}`);
+  }
+  for (const f of glossRepeats(outline)) {
+    warnings.push(`"${f.form}" (unit ${f.unit_order}): gloss repeats the Spanish word — move the explanation to the note`);
+  }
+  for (const { a, b, shared } of meaningOverlaps(outline)) {
+    warnings.push(`"${a.form}" (unit ${a.unit_order}) and "${b.form}" (unit ${b.unit_order}) share the meaning "${shared.join(', ')}"`);
+  }
+}
 
 if (outline) {
   const sectionOf = new Map(outline.sections.map((s) => [s.id, s]));
@@ -31,7 +52,7 @@ if (outline) {
   console.table(rows);
   const cumulative = outline.forms.filter((f) => !f.is_glue && f.pos !== 'propn').length;
   console.log(
-    `${outline.sections.length} sections · ${outline.units.length} units · ${outline.lemmas.length} lemmas · ` +
+    `${fromYaml ? 'YAML' : 'database'}: ${outline.sections.length} sections · ${outline.units.length} units · ${outline.lemmas.length} lemmas · ` +
       `${outline.forms.length} forms (${cumulative} drillable) · ` +
       `${outline.units.reduce((n, u) => n + u.lessons.length, 0)} lessons`,
   );
