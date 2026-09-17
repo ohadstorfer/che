@@ -102,6 +102,7 @@ export async function buildTest(userId: string, units: Unit[]): Promise<SessionD
   return {
     items,
     allForms: last ? deckUpTo(data, last.course_order) : [],
+    lexicon: data.formById,
     sentences: data.sentences,
     scheduledFormIds: [],
   };

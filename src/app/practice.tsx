@@ -81,6 +81,7 @@ export default function Practice() {
 
   const [queue, setQueue] = useState<QueueItem[] | null>(null);
   const [allForms, setAllForms] = useState<Form[]>([]);
+  const [lexicon, setLexicon] = useState<Map<string, Form>>(() => new Map());
   const [allSentences, setAllSentences] = useState<Sentence[]>([]);
   const [index, setIndex] = useState(0);
   const [kind, setKind] = useState<RoundKind>('practice');
@@ -182,6 +183,7 @@ export default function Practice() {
       setPlan(p ?? null);
       setQueue(q);
       setAllForms(data.allForms);
+      setLexicon(data.lexicon);
       setAllSentences(data.sentences);
     });
     return () => {
@@ -523,6 +525,7 @@ export default function Practice() {
             item={current}
             allForms={allForms}
             allSentences={allSentences}
+            lexicon={lexicon}
             hints={(kind !== 'lesson' && kind !== 'placement') || !!current.review}
             onIntroDone={() => onIntroDone(current)}
             onAnswered={(wrongIds, extra) => void onAnswered(current, wrongIds, extra)}

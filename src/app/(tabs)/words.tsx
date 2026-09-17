@@ -125,7 +125,11 @@ export default function Words() {
     () =>
       (words ?? []).filter(
         ({ form }) =>
-          !q || form.form.toLocaleLowerCase('es').includes(q) || form.gloss_en.toLowerCase().includes(q),
+          !q ||
+          form.form.toLocaleLowerCase('es').includes(q) ||
+          form.gloss_en.toLowerCase().includes(q) ||
+          // "the drink" should find mate, the same as its gloss does.
+          (form.gloss_note_en?.toLowerCase().includes(q) ?? false),
       ),
     [words, q],
   );
@@ -222,6 +226,11 @@ export default function Words() {
                       <Text style={styles.en} numberOfLines={2}>
                         {form.gloss_en}
                       </Text>
+                      {form.gloss_note_en ? (
+                        <Text style={styles.enNote} numberOfLines={2}>
+                          {form.gloss_note_en}
+                        </Text>
+                      ) : null}
                     </View>
                     {form.audio_path ? <PlayButton path={form.audio_path} /> : null}
                   </View>
@@ -372,6 +381,7 @@ const styles = StyleSheet.create({
   rowTop: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   es: { fontSize: 17, fontWeight: '700', color: colors.ink, flexShrink: 1 },
   en: { fontSize: 14, color: colors.muted },
+  enNote: { fontSize: 12, color: colors.muted, opacity: 0.75, fontStyle: 'italic' },
   strength: {
     fontSize: 11,
     fontWeight: '700',

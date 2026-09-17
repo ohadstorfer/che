@@ -17,8 +17,17 @@ import { colors, press, radius, shadow } from '@/lib/theme';
 
 /** Set once an exercise has been checked; `answer` is shown when she missed it,
  *  `also` when she got it right another way than the one written, `note` when
- *  she got it right with a slip worth pointing out (an accent, a typo). */
-export type Verdict = { correct: boolean; answer?: string; also?: string; note?: string } | null;
+ *  she got it right with a slip worth pointing out (an accent, a typo), and
+ *  `about` — the word's own aside, "the drink" for mate — either way: the
+ *  reveal is where that explanation belongs, since it can no longer give the
+ *  answer away. */
+export type Verdict = {
+  correct: boolean;
+  answer?: string;
+  also?: string;
+  note?: string;
+  about?: string;
+} | null;
 
 // ---------------------------------------------------------------------------
 // ExerciseFrame — the shape every exercise shares: a question at the top, the
@@ -172,6 +181,8 @@ function FeedbackBar({
           <Text style={[styles.feedbackAnswer, { color: tint }]}>{verdict.answer}</Text>
         </View>
       ) : null}
+
+      {verdict.about ? <Text style={styles.feedbackNote}>{verdict.about}</Text> : null}
 
       {actions}
 

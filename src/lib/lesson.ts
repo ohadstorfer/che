@@ -47,6 +47,7 @@ export const TIP_FORM: Form = {
   pos: 'tip',
   form: '',
   gloss_en: '',
+  gloss_note_en: null,
   features: {},
   unit_id: '',
   unit_ordinal: 0,
@@ -265,7 +266,7 @@ export function resolveSlots(
     }
   }
 
-  return { items, allForms: deck, sentences: inReach, scheduledFormIds: [...scheduled], ladder };
+  return { items, allForms: deck, lexicon: data.formById, sentences: inReach, scheduledFormIds: [...scheduled], ladder };
 }
 
 /**

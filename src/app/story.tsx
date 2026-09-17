@@ -6,7 +6,7 @@ import { useReducedMotion } from 'react-native-reanimated';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ExerciseFrame, type Verdict } from '@/components/exercise-frame';
-import { Choices, Exercise, PlayButton, SentenceLine } from '@/components/exercises';
+import { Choices, Exercise, PlayButton, SentenceLine, WordBubble, useWordPopover } from '@/components/exercises';
 import { LessonComplete } from '@/components/lesson-complete';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
@@ -78,7 +78,7 @@ export default function Story() {
   /** The line whose question is on screen, if any. */
   const [asking, setAsking] = useState<Line | null>(null);
   const [answered, setAnswered] = useState<Set<string>>(new Set());
-  const [peek, setPeek] = useState<Form | null>(null);
+  const words = useWordPopover((id) => formById.current.get(id));
   const [finished, setFinished] = useState<FinishResult | null>(null);
   const [celebrating, setCelebrating] = useState(false);
   const scroller = useRef<ScrollView>(null);
@@ -162,7 +162,7 @@ export default function Story() {
       setFinished(await round.finish());
       return;
     }
-    setPeek(null);
+    words.close();
     setShown((n) => Math.min(lines.length, n + 1));
     requestAnimationFrame(() => scroller.current?.scrollToEnd({ animated: !reduced }));
   };
@@ -204,7 +204,6 @@ export default function Story() {
         {lines.slice(0, shown).map((line) => {
           const right = speakers.indexOf(line.speaker) === 1;
           const narrator = line.speaker === 'narrator';
-          const peekable = new Set(line.sentence.form_ids);
           return (
             <Enter
               key={line.id}
@@ -214,25 +213,17 @@ export default function Story() {
               <Panel style={[styles.bubble, right && styles.bubbleRight]}>
                 <View style={styles.bubbleRow}>
                   {line.sentence.audio_path ? <PlayButton path={line.sentence.audio_path} /> : null}
-                  <SentenceLine
-                    sentence={line.sentence}
-                    peekable={peekable}
-                    onPeek={(id) => setPeek(formById.current.get(id) ?? null)}
-                  />
+                  <SentenceLine sentence={line.sentence} onWord={words.open} />
                 </View>
               </Panel>
             </Enter>
           );
         })}
-        {peek ? (
-          <Panel style={styles.peek}>
-            <Text style={styles.peekEs}>{peek.form}</Text>
-            <Text style={styles.peekEn}>{peek.gloss_en}</Text>
-          </Panel>
-        ) : shown === 1 ? (
+        {shown === 1 && !words.peeked.length ? (
           <Text style={styles.hint}>Tap any word to see what it means</Text>
         ) : null}
       </ScrollView>
+      <WordBubble state={words.showing} onClose={words.close} />
       <View style={[styles.footer, { paddingBottom: 20 + bottom }]}>
         <Button title={pending ? 'Answer' : done ? 'Finish' : 'Continue'} onPress={() => void next()} />
       </View>
@@ -352,9 +343,6 @@ const styles = StyleSheet.create({
   bubble: { paddingVertical: 12, paddingHorizontal: 14, borderRadius: radius.lg },
   bubbleRight: { backgroundColor: colors.primarySoft, borderColor: 'transparent' },
   bubbleRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  peek: { alignSelf: 'stretch', paddingVertical: 12, paddingHorizontal: 16, gap: 2 },
-  peekEs: { fontSize: 20, fontWeight: '700', color: colors.ink },
-  peekEn: { fontSize: 16, fontWeight: '600', color: colors.primaryDark },
   hint: { fontSize: 14, color: colors.faint, textAlign: 'center', marginTop: 8 },
   footer: { padding: 20, paddingTop: 12, maxWidth: 560, width: '100%', alignSelf: 'center' },
 });

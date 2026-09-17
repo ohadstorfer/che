@@ -139,6 +139,7 @@ export function loadOutline(paths = SECTION_PATHS) {
             lemma,
             pos: w.pos,
             gloss_en: w.en ?? '',
+            gloss_note_en: w.note ?? null,
             register,
             is_glue: w.glue === true,
             notes_en: w.notes ?? null,
@@ -148,6 +149,7 @@ export function loadOutline(paths = SECTION_PATHS) {
           lemmas.set(key, row);
         } else {
           if (w.en && w.en !== row.gloss_en) warnings.push(`${wWhere}: "en" redefined (was "${row.gloss_en}") — ignored`);
+          if (w.note && w.note !== row.gloss_note_en) warnings.push(`${wWhere}: "note" redefined (was "${row.gloss_note_en}") — ignored`);
           if (w.register && w.register !== row.register) errors.push(`${wWhere}: register changes from ${row.register} to ${w.register}`);
           if (w.glue != null && (w.glue === true) !== row.is_glue) errors.push(`${wWhere}: glue flag changes between units`);
         }
@@ -192,6 +194,7 @@ export function loadOutline(paths = SECTION_PATHS) {
             form: surface,
             features,
             gloss_en: e.en ?? null,
+            gloss_note_en: e.note ?? null,
             unit_id: unitId,
             unit_order: courseOrder,
             is_glue: row.is_glue,
@@ -235,6 +238,24 @@ export function loadOutline(paths = SECTION_PATHS) {
     }
     const problems = checkSentence(outline, unit, unit.sample.es);
     for (const p of problems) errors.push(`unit ${unit.course_order} sample "${unit.sample.es}": ${p}`);
+  }
+
+  // A gloss that spells out the Spanish word and then explains it — "mate (the
+  // drink)" — hands over the answer: the English tile in a matching block
+  // contains the very word it is meant to be paired with. The explanation
+  // belongs in "note", which answer-facing screens don't show. A gloss that is
+  // the word itself ("mate" → "mate") is fine: a loanword has no other English.
+  {
+    const lemmaById = new Map(outline.lemmas.map((l) => [l.id, l]));
+    for (const f of outline.forms) {
+      if (f.is_glue || f.pos === 'propn') continue;
+      const gloss = f.gloss_en ?? lemmaById.get(f.lemma_id)?.gloss_en ?? '';
+      const word = fold(f.form);
+      if (!word || fold(gloss) === word) continue;
+      if (senses(gloss).some((s) => fold(s) !== word && new RegExp(`\\b${word}\\b`).test(fold(s)))) {
+        warnings.push(`"${f.form}" (unit ${f.unit_order}): gloss "${gloss}" repeats the Spanish word — move the explanation to "note"`);
+      }
+    }
   }
 
   // Two words sharing a meaning can't be told apart from the English. The app

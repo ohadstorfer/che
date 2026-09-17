@@ -115,8 +115,8 @@ update public.lessons set ordinal = -ordinal where ordinal > 0;
   ),
   upsert('lessons', rows.lessons, ['id', 'unit_id', 'ordinal', 'title_en', 'kind', 'status']),
   upsert('tips', rows.tips, ['id', 'unit_id', 'title_en', 'body_md', 'status']),
-  upsert('lemmas', rows.lemmas, ['id', 'lemma', 'pos', 'gloss_en', 'register', 'is_glue', 'notes_en', 'status']),
-  upsert('forms', rows.forms, ['id', 'lemma_id', 'form', 'features', 'gloss_en', 'unit_id', 'audio_path', 'status'], {
+  upsert('lemmas', rows.lemmas, ['id', 'lemma', 'pos', 'gloss_en', 'gloss_note_en', 'register', 'is_glue', 'notes_en', 'status']),
+  upsert('forms', rows.forms, ['id', 'lemma_id', 'form', 'features', 'gloss_en', 'gloss_note_en', 'unit_id', 'audio_path', 'status'], {
     features: jsonb,
   }),
   // sentence_forms follows by trigger.

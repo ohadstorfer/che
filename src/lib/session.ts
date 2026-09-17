@@ -51,6 +51,10 @@ export interface SessionData {
   items: SessionItem[];
   /** The forms distractors and tiles are drawn from. */
   allForms: Form[];
+  /** Every form she has met, keyed by id — the deck minus nothing. A word
+   *  tapped in a sentence can be a function word or a form this round is not
+   *  drilling, and neither of those is in the deck. */
+  lexicon: Map<string, Form>;
   /** Every sentence in reach — the meaning exercise draws wrong answers from them. */
   sentences: Sentence[];
   /** Forms SM-2 asked for in this round (new or due). Anything else a sentence
@@ -306,15 +310,10 @@ export function modeForRung(rung: ReturnType<typeof rungFor>, sentence: Sentence
   return sentence.audio_path && Math.random() < 0.5 ? 'sentence_listen' : 'sentence_build';
 }
 
-/** For home: whether there is anything to practise, and how much is due. */
+/** For home: how many words she has met at all. */
 export async function getPracticeCounts(userId: string) {
-  const nowIso = new Date().toISOString();
-  const { data: states } = await supabase
-    .from('form_states')
-    .select('form_id, due_at')
-    .eq('user_id', userId);
-  const due = (states ?? []).filter((s) => s.due_at && s.due_at <= nowIso).length;
-  return { due, known: (states ?? []).length };
+  const { data: states } = await supabase.from('form_states').select('form_id').eq('user_id', userId);
+  return { known: (states ?? []).length };
 }
 
 // ---------------------------------------------------------------------------
@@ -434,6 +433,7 @@ export async function buildSession(userId: string): Promise<SessionData> {
   return {
     items,
     allForms: deck,
+    lexicon: data.formById,
     sentences: data.sentences,
     scheduledFormIds: due.map((d) => d.form.id),
     ladder,
@@ -473,7 +473,7 @@ export async function buildFreeSession(
   if (block && items.length >= 6 && items.length < MAX_SESSION_ITEMS) {
     items.splice(Math.floor(items.length / 2), 0, block);
   }
-  return { items, allForms: deck, sentences: [], scheduledFormIds: [], ladder };
+  return { items, allForms: deck, lexicon: data.formById, sentences: [], scheduledFormIds: [], ladder };
 }
 
 // Spare words for a phrase's tile bank, borrowed from the rest of the deck.
@@ -672,6 +672,7 @@ export async function buildMistakesSession(userId: string): Promise<SessionData>
   return {
     items,
     allForms: deck,
+    lexicon: data.formById,
     sentences: data.sentences,
     scheduledFormIds: ids.filter(isDue),
     ladder,

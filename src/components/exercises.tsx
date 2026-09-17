@@ -14,6 +14,7 @@ import { scheduleOnRN } from 'react-native-worklets';
 import { ExerciseFrame, type Verdict } from '@/components/exercise-frame';
 import { WrongAnswerActions } from '@/components/wrong-answer-actions';
 import { Panel } from '@/components/ui';
+import { type Anchor, WordPopover, measureAnchor } from '@/components/word-popover';
 import { playAudio, stopAudio, type AudioFailure } from '@/lib/audio';
 import {
   builtAnswerMatches,
@@ -96,22 +97,17 @@ const NOTE_TEXT: Record<Note, (expected: string) => string> = {
 };
 
 /**
- * Words of a sentence she may tap for their meaning while reviewing: ones not
- * yet settled, or from units well behind her. Never the word under test.
+ * Whether the words of a sentence may be tapped for their meaning (§6.4).
+ * Every word can be — function words included, since `de` and `el` are exactly
+ * where a beginner stalls — but not on a lesson's new material, and not in a
+ * placement test, where the whole point is to find out what she already knows.
+ *
+ * What a tap costs is decided separately, in `round.ts`: an id reported as
+ * hinted only counts against her if it is one of the forms this item grades,
+ * so looking up a function word is free.
  */
-function hintableForms(item: QueueItem, allForms: Form[], hints: boolean): Set<string> {
-  if (!hints || !item.sentence || item.introduces || item.placementUnit) return new Set();
-  const edge = Math.max(0, ...allForms.map((f) => f.unit_order));
-  const stateOf = new Map((item.groupStates ?? []).map((st) => [st.form_id, st]));
-  const byId = new Map(allForms.map((f) => [f.id, f]));
-  return new Set(
-    item.sentence.form_ids.filter((id) => {
-      if (id === item.form.id) return false;
-      const st = stateOf.get(id);
-      const unit = byId.get(id)?.unit_order ?? edge;
-      return (st ? st.interval_days < SETTLED_DAYS : true) || unit <= edge - 3;
-    }),
-  );
+function canTapWords(item: QueueItem, hints: boolean) {
+  return hints && !!item.sentence && !item.introduces && !item.placementUnit;
 }
 
 export function Exercise({
@@ -121,6 +117,7 @@ export function Exercise({
   onIntroDone,
   onAnswered,
   hints,
+  lexicon,
 }: {
   item: QueueItem;
   allForms: Form[];
@@ -130,6 +127,9 @@ export function Exercise({
   /** Whether words of a sentence may be tapped for their meaning (§6.4):
    *  review screens, practice and recaps — not a lesson's new material. */
   hints?: boolean;
+  /** The whole lexicon, not just the deck. A tapped word can be a function
+   *  word or a form she is not drilling, and neither is in `allForms`. */
+  lexicon?: Map<string, Form>;
 }) {
   return (
     <ItemContext.Provider value={item}>
@@ -140,6 +140,7 @@ export function Exercise({
         onIntroDone={onIntroDone}
         onAnswered={onAnswered}
         hints={!!hints}
+        lexicon={lexicon}
       />
     </ItemContext.Provider>
   );
@@ -152,6 +153,7 @@ function ExerciseBody({
   onIntroDone,
   onAnswered,
   hints,
+  lexicon,
 }: {
   item: QueueItem;
   allForms: Form[];
@@ -159,9 +161,10 @@ function ExerciseBody({
   onIntroDone: () => void;
   onAnswered: Answered;
   hints: boolean;
+  lexicon?: Map<string, Form>;
 }) {
   const { form } = item;
-  const peekable = hintableForms(item, allForms, hints);
+  const canTap = canTapWords(item, hints);
 
   if (item.isIntro) return <Intro form={form} onDone={onIntroDone} />;
   if (item.mode === 'tip' && item.tip) return <TipCard tip={item.tip} onDone={() => onAnswered([])} />;
@@ -179,11 +182,20 @@ function ExerciseBody({
           allSentences={allSentences}
           allForms={allForms}
           onAnswered={onAnswered}
-          peekable={peekable}
+          canTap={canTap}
+          lexicon={lexicon}
         />
       );
     case 'sentence_gap':
-      return <SentenceGap item={item} allForms={allForms} onAnswered={onAnswered} peekable={peekable} />;
+      return (
+        <SentenceGap
+          item={item}
+          allForms={allForms}
+          onAnswered={onAnswered}
+          canTap={canTap}
+          lexicon={lexicon}
+        />
+      );
     case 'sentence_build':
       return <SentenceBuild item={item} allForms={allForms} onAnswered={onAnswered} />;
     case 'sentence_listen':
@@ -228,6 +240,9 @@ function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
         <Text style={phrase ? styles.esPhraseHero : styles.esHero}>{form.form}</Text>
         <View style={styles.divider} />
         <Text style={phrase ? styles.enPhrase : styles.enBig}>{form.gloss_en}</Text>
+        {/* The aside lives here, where the word is being taught — it explains
+            what the gloss can only name ("mate" → the drink). */}
+        {form.gloss_note_en ? <Text style={styles.glossNote}>{form.gloss_note_en}</Text> : null}
         {form.audio_path ? <PlayButton path={form.audio_path} big /> : null}
       </Panel>
     </Frame>
@@ -513,7 +528,13 @@ function MultipleChoice({
       prompt={item.isRetry ? `🔁 ${prompt}` : prompt}
       verdict={verdict}
       canCheck={!!chosen}
-      onCheck={() => setVerdict({ correct: chosen === form.id, answer: form[answerField] })}
+      onCheck={() =>
+        setVerdict({
+          correct: chosen === form.id,
+          answer: form[answerField],
+          about: form.gloss_note_en ?? undefined,
+        })
+      }
       onContinue={() => onAnswer(!!verdict?.correct)}>
       <PromptBlock form={form} side={askSpanish ? 'es' : 'en'} />
       <Choices
@@ -549,7 +570,11 @@ function Listen({
       verdict={verdict}
       canCheck={!!chosen}
       onCheck={() =>
-        setVerdict({ correct: chosen === form.id, answer: `${form.form} — ${form.gloss_en}` })
+        setVerdict({
+          correct: chosen === form.id,
+          answer: `${form.form} — ${form.gloss_en}`,
+          about: form.gloss_note_en ?? undefined,
+        })
       }
       onContinue={() => onAnswer(!!verdict?.correct)}>
       <AudioPad path={form.audio_path!} />
@@ -632,6 +657,7 @@ function TrueFalse({
         setVerdict({
           correct: picked === isTrue,
           answer: isTrue ? undefined : `«${form.form}» es «${form.gloss_en}»`,
+          about: form.gloss_note_en ?? undefined,
         })
       }
       onContinue={() => onAnswer(!!verdict?.correct)}>
@@ -959,6 +985,7 @@ function WordBuild({
             toSpanish ? sameAnswer(form, allForms).map((f) => f.form) : [],
           ),
           answer: target,
+          about: form.gloss_note_en ?? undefined,
         })
       }
       answer={joined}
@@ -1007,6 +1034,7 @@ function ListenBuild({
         setVerdict({
           correct: builtAnswerMatches(joined, form.form),
           answer: `${form.form} — ${form.gloss_en}`,
+          about: form.gloss_note_en ?? undefined,
         })
       }
       onContinue={() => onAnswer(!!verdict?.correct, verdict?.correct ? {} : { answer: joined })}>
@@ -1120,9 +1148,11 @@ function Matching({
         const wrong = [...missed];
         setVerdict({
           correct: wrong.length === 0,
+          // The pairs she got wrong, each with its aside — the reveal is the
+          // one place in this exercise where a note can't give anything away.
           answer: group
             .filter((c) => missed.has(c.id))
-            .map((c) => `${c.form} = ${c.gloss_en}`)
+            .map((c) => `${c.form} = ${c.gloss_en}${c.gloss_note_en ? ` (${c.gloss_note_en})` : ''}`)
             .join('\n'),
         });
       }
@@ -1211,21 +1241,30 @@ function Matching({
 export function SentenceLine({
   sentence,
   mark,
-  onTapMark,
   blank,
-  peekable,
-  onPeek,
+  onWord,
+  tappable,
 }: {
   sentence: Sentence;
   /** Form id of the word to mark as new. */
   mark?: string;
-  onTapMark?: () => void;
-  /** Forms she may tap for their meaning, underlined dotted. */
-  peekable?: Set<string>;
-  onPeek?: (formId: string) => void;
+  /** Tapping a word asks for its meaning, with where the word sits on screen
+   *  so the answer can be anchored to it. Omitted where a meaning would hand
+   *  over the answer — building a sentence from tiles, or transcribing one. */
+  onWord?: (formId: string, anchor: Anchor) => void;
+  /** Which words answer to a tap. Defaults to all of them; a screen that must
+   *  hold one word back — the one under test — says so here. */
+  tappable?: (formId: string) => boolean;
   /** Token to replace with a blank, and what she has put in it so far. */
   blank?: { index: number; filled?: string; tone?: 'right' | 'wrong' };
 }) {
+  // Measured on tap, never cached: a word only reflows when the sentence
+  // rewraps, which fires no layout event, so a remembered rect goes stale.
+  const nodes = useRef<Record<number, unknown>>({});
+  const tapWord = (i: number, formId: string) =>
+    measureAnchor(nodes.current[i], (a) => a && onWord?.(formId, a));
+  const canTap = (id: string) => !!onWord && (tappable?.(id) ?? true);
+
   return (
     <View style={styles.bubbleText}>
       <View style={styles.tokenRow}>
@@ -1262,11 +1301,17 @@ export function SentenceLine({
               </View>
             );
           }
+          // The new word wears its own highlight, but opens the same bubble as
+          // every other word — one way to ask what something means, not two.
           if (mark && t.form_ids?.includes(mark)) {
             return (
               <Pressable
                 key={i}
-                onPress={onTapMark}
+                ref={(n) => {
+                  nodes.current[i] = n;
+                }}
+                onPress={() => tapWord(i, mark)}
+                disabled={!canTap(mark)}
                 hitSlop={6}
                 style={({ pressed }) => [
                   styles.tokenNew,
@@ -1277,12 +1322,20 @@ export function SentenceLine({
               </Pressable>
             );
           }
-          const peek = peekable && onPeek ? t.form_ids.find((id) => peekable.has(id)) : undefined;
-          if (peek) {
+          // Every word she can be told about is tappable, function words
+          // included — `de` and `el` are exactly the ones a beginner stalls
+          // on. Only proper nouns are left plain: a name has no translation
+          // to show, and underlining one would promise an answer that isn't
+          // there.
+          const id = t.form_ids[0] ?? t.glue;
+          if (id && canTap(id)) {
             return (
               <Pressable
                 key={i}
-                onPress={() => onPeek!(peek)}
+                ref={(n) => {
+                  nodes.current[i] = n;
+                }}
+                onPress={() => tapWord(i, id)}
                 hitSlop={6}
                 accessibilityHint="Shows what this word means"
                 style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.96 : 1 }] }, webPress]}>
@@ -1301,27 +1354,45 @@ export function SentenceLine({
   );
 }
 
-/** The meaning of a word she tapped, under the sentence. */
-function PeekPanel({ form }: { form: Form }) {
-  return (
-    <Panel style={styles.peek}>
-      <View style={styles.peekRow}>
-        {form.audio_path ? <PlayButton path={form.audio_path} /> : null}
-        <View style={styles.bubbleText}>
-          <Text style={styles.peekEs}>{form.form}</Text>
-          <Text style={styles.peekEn}>{form.gloss_en}</Text>
-        </View>
-      </View>
-    </Panel>
-  );
+/**
+ * Resolves a tapped word. The deck is only what she is drilling: a function
+ * word, or a form from a unit she is not being tested on, is in the lexicon
+ * and nowhere else — so the lexicon is asked first and the deck is the
+ * fallback for the screens that have no lexicon to hand.
+ */
+function lookupWith(lexicon: Map<string, Form> | undefined, allForms: Form[]) {
+  return (id: string) => lexicon?.get(id) ?? allForms.find((f) => f.id === id);
 }
 
-/** Words peeked at, and the one showing. */
-function usePeeks(allForms: Form[]) {
+/**
+ * The word a tap opened, where it sits on screen, and every word opened so far
+ * — the last of which is what the round is told about, so that looking a word
+ * up still costs what it always did.
+ */
+export function useWordPopover(lookup: (id: string) => Form | undefined) {
+  const [showing, setShowing] = useState<{ form: Form; anchor: Anchor } | null>(null);
   const [peeked, setPeeked] = useState<string[]>([]);
-  const showing = peeked.length ? allForms.find((f) => f.id === peeked[peeked.length - 1]) : undefined;
-  const peek = (id: string) => setPeeked((p) => (p.includes(id) ? [...p.filter((x) => x !== id), id] : [...p, id]));
-  return { peeked, showing, peek };
+
+  const open = (id: string, anchor: Anchor) => {
+    const form = lookup(id);
+    if (!form) return;
+    setShowing({ form, anchor });
+    setPeeked((p) => (p.includes(id) ? p : [...p, id]));
+  };
+
+  return { showing, peeked, open, close: () => setShowing(null) };
+}
+
+/** The popover itself, wired to the app's audio player. */
+export function WordBubble({ state, onClose }: { state: { form: Form; anchor: Anchor } | null; onClose: () => void }) {
+  return (
+    <WordPopover
+      form={state?.form ?? null}
+      anchor={state?.anchor ?? null}
+      onClose={onClose}
+      audio={(path) => <PlayButton path={path} />}
+    />
+  );
 }
 
 // Read the sentence, pick its meaning. Two uses: the first rung of the ladder
@@ -1336,21 +1407,27 @@ function SentenceIntro({
   allSentences,
   allForms,
   onAnswered,
-  peekable,
+  canTap,
+  lexicon,
 }: {
   item: QueueItem;
   allSentences: Sentence[];
   allForms: Form[];
   onAnswered: Answered;
-  peekable: Set<string>;
+  canTap: boolean;
+  lexicon?: Map<string, Form>;
 }) {
   const sentence = item.sentence!;
   const word = item.introduces;
-  const peeks = usePeeks(allForms);
+  const words = useWordPopover(lookupWith(lexicon, allForms));
   const [options] = useState(() => meaningOptions(sentence, allSentences, allForms));
   const [chosen, setChosen] = useState<string | null>(null);
-  const [peeked, setPeeked] = useState(false);
   const [verdict, setVerdict] = useState<Verdict>(null);
+
+  // On a screen that introduces a word, only that word answers to a tap — the
+  // rest is material she is meant to already have. Otherwise every word does,
+  // except the one whose meaning is the answer.
+  const tappable = word ? (id: string) => id === word.id : (id: string) => id !== item.form.id;
 
   const prompt = word
     ? '✨ New word: what does the sentence say?'
@@ -1365,34 +1442,22 @@ function SentenceIntro({
       canCheck={!!chosen}
       onCheck={() => setVerdict({ correct: chosen === sentence.id, answer: sentence.en })}
       onContinue={() =>
-        onAnswered(verdict?.correct ? [] : [(word ?? item.form).id], { hinted: peeks.peeked })
+        onAnswered(verdict?.correct ? [] : [(word ?? item.form).id], { hinted: words.peeked })
       }>
       <SpeechBubble>
         <View style={styles.bubbleRow}>
           <SentenceLine
             sentence={sentence}
             mark={word?.id}
-            onTapMark={word ? () => setPeeked(true) : undefined}
-            peekable={peekable}
-            onPeek={peeks.peek}
+            onWord={word || canTap ? words.open : undefined}
+            tappable={tappable}
           />
         </View>
       </SpeechBubble>
-      {!word && peeks.showing ? <PeekPanel form={peeks.showing} /> : null}
-
-      {!word ? null : peeked ? (
-        <Panel style={styles.peek}>
-          <View style={styles.peekRow}>
-            {word.audio_path ? <PlayButton path={word.audio_path} /> : null}
-            <View style={styles.bubbleText}>
-              <Text style={styles.peekEs}>{word.form}</Text>
-              <Text style={styles.peekEn}>{word.gloss_en}</Text>
-            </View>
-          </View>
-        </Panel>
-      ) : (
+      <WordBubble state={words.showing} onClose={words.close} />
+      {word && !words.peeked.length ? (
         <Text style={styles.peekHint}>Tap the marked word to see what it means</Text>
-      )}
+      ) : null}
 
       <Choices
         options={options}
@@ -1413,16 +1478,18 @@ function SentenceGap({
   item,
   allForms,
   onAnswered,
-  peekable,
+  canTap,
+  lexicon,
 }: {
   item: QueueItem;
   allForms: Form[];
   onAnswered: Answered;
-  peekable: Set<string>;
+  canTap: boolean;
+  lexicon?: Map<string, Form>;
 }) {
   const sentence = item.sentence!;
   const target = item.form;
-  const peeks = usePeeks(allForms);
+  const words = useWordPopover(lookupWith(lexicon, allForms));
   const [index] = useState(() => tokenIndexOf(sentence, target.id));
   const [options] = useState(() => gapOptions(sentence, target, allForms));
   const [chosen, setChosen] = useState<string | null>(null);
@@ -1439,13 +1506,12 @@ function SentenceGap({
       onCheck={() =>
         setVerdict({ correct: chosen === target.id, answer: `${answer} — ${sentence.en}` })
       }
-      onContinue={() => onAnswered(verdict?.correct ? [] : [target.id], { hinted: peeks.peeked })}>
+      onContinue={() => onAnswered(verdict?.correct ? [] : [target.id], { hinted: words.peeked })}>
       <SpeechBubble>
         <View style={styles.bubbleRow}>
           <SentenceLine
             sentence={sentence}
-            peekable={peekable}
-            onPeek={peeks.peek}
+            onWord={canTap ? words.open : undefined}
             blank={{
               index,
               filled,
@@ -1454,7 +1520,7 @@ function SentenceGap({
           />
         </View>
       </SpeechBubble>
-      {peeks.showing ? <PeekPanel form={peeks.showing} /> : null}
+      <WordBubble state={words.showing} onClose={words.close} />
       <Text style={styles.gapEn}>{sentence.en}</Text>
       <Choices
         options={options}
@@ -1634,10 +1700,9 @@ const styles = StyleSheet.create({
   gapWrong: { borderBottomColor: colors.danger },
   gapText: { fontSize: 22, lineHeight: 30, fontWeight: '700', color: colors.primaryDark },
   gapEn: { fontSize: 18, lineHeight: 26, color: colors.muted, textAlign: 'center' },
-  peek: { paddingVertical: 14, paddingHorizontal: 16 },
-  peekRow: { flexDirection: 'row', alignItems: 'center', gap: 14 },
-  peekEs: { fontSize: 26, fontWeight: '700', color: colors.ink, letterSpacing: -0.3 },
-  peekEn: { fontSize: 18, fontWeight: '700', color: colors.primaryDark },
+  // The aside sits a step down from the gloss it explains: lighter, smaller,
+  // and never bold — it is context, not the thing being learnt.
+  glossNote: { fontSize: 14, color: colors.muted, lineHeight: 19 },
   peekHint: { fontSize: 14, color: colors.faint, textAlign: 'center' },
 
   playWrap: { alignItems: 'center', gap: 6 },

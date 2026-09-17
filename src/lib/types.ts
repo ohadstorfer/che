@@ -99,8 +99,13 @@ export interface Form {
   pos: string;
   /** The Spanish, as written: `tenés`, `Buenos Aires`, `todo bien`. */
   form: string;
-  /** English meaning — the form's own gloss, or its lemma's. */
+  /** English meaning — the form's own gloss, or its lemma's. Short enough to
+   *  sit on an answer tile, and never containing the Spanish it glosses. */
   gloss_en: string;
+  /** The aside that explains the word rather than translating it — "the drink"
+   *  for mate. Shown where the word is taught or revealed, never where it is
+   *  asked: on a tile or an option it would hand over the answer. */
+  gloss_note_en: string | null;
   features: FormFeatures;
   unit_id: string;
   section_id?: number;

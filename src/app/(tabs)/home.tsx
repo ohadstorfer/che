@@ -41,9 +41,7 @@ interface HomeData {
   /** Her step on the road: the first lesson she hasn't finished. */
   current: number;
   streak: Streak | null;
-  /** Words due for review right now — the Practice button's badge. */
-  due: number;
-  /** Words she has met at all; Practice only exists once there are some. */
+  /** Words she has met at all; the road's first step is only "start" until one. */
   known: number;
   /** Which days of this week she has already completed, as YYYY-MM-DD. */
   weekDone: string[];
@@ -1037,7 +1035,6 @@ export default function Home() {
       course,
       current: currentIndex(course.path, done),
       streak: (streakRes.data as Streak) ?? null,
-      due: counts.due,
       known: counts.known,
       weekDone: (weekRes.data ?? []).map((r: { session_date: string }) => r.session_date),
       mistakes,
@@ -1406,12 +1403,10 @@ export default function Home() {
         )}
       </ScrollView>
 
-      {!noCourse && (data?.known ?? 0) > 0 ? (
-        <PracticeButton
-          due={data?.due ?? 0}
+      {!noCourse && (data?.mistakes ?? 0) > 0 ? (
+        <MistakesButton
           mistakes={data?.mistakes ?? 0}
-          onPress={() => router.push('/practice')}
-          onMistakes={() => router.push('/practice?mode=mistakes')}
+          onPress={() => router.push('/practice?mode=mistakes')}
         />
       ) : null}
       <Guidebook
@@ -1428,57 +1423,26 @@ export default function Home() {
 }
 
 // ---------------------------------------------------------------------------
-// PracticeButton — the way into a round of pure review, apart from the road.
-// Lessons move her forward; this holds on to what she already has. The badge
-// is how many words are due, so the button says why it's worth pressing.
+// MistakesButton — the way back to what she got wrong. It only appears when
+// there is something to go over, so the road is clear the rest of the time.
 // ---------------------------------------------------------------------------
-function PracticeButton({
-  due,
-  mistakes,
-  onPress,
-  onMistakes,
-}: {
-  due: number;
-  mistakes: number;
-  onPress: () => void;
-  onMistakes: () => void;
-}) {
+function MistakesButton({ mistakes, onPress }: { mistakes: number; onPress: () => void }) {
   return (
     <View style={styles.practiceSlot} pointerEvents="box-none">
-      {mistakes > 0 ? (
-        <Pressable
-          onPress={onMistakes}
-          accessibilityRole="button"
-          accessibilityLabel={`Mistakes: ${mistakes} to go over`}
-          hitSlop={8}
-          style={({ pressed }) => [
-            styles.practice,
-            styles.mistakes,
-            { transform: [{ scale: pressed ? 0.94 : 1 }] },
-            webTransition,
-          ]}>
-          <Ionicons name="refresh" size={18} color={colors.accent} />
-          <Text style={[styles.practiceText, { color: colors.accent }]}>Mistakes</Text>
-          <Text style={styles.mistakesCount}>{mistakes > 99 ? '99+' : mistakes}</Text>
-        </Pressable>
-      ) : null}
       <Pressable
         onPress={onPress}
         accessibilityRole="button"
-        accessibilityLabel={due > 0 ? `Practice: ${due} to review` : 'Practice'}
+        accessibilityLabel={`Mistakes: ${mistakes} to go over`}
         hitSlop={8}
         style={({ pressed }) => [
           styles.practice,
+          styles.mistakes,
           { transform: [{ scale: pressed ? 0.94 : 1 }] },
           webTransition,
         ]}>
-        <MaterialCommunityIcons name="dumbbell" size={20} color={colors.primary} />
-        <Text style={styles.practiceText}>Practice</Text>
-        {due > 0 ? (
-          <View style={styles.practiceBadge}>
-            <Text style={styles.practiceBadgeText}>{due > 99 ? '99+' : due}</Text>
-          </View>
-        ) : null}
+        <Ionicons name="refresh" size={18} color={colors.accent} />
+        <Text style={[styles.practiceText, { color: colors.accent }]}>Mistakes</Text>
+        <Text style={styles.mistakesCount}>{mistakes > 99 ? '99+' : mistakes}</Text>
       </Pressable>
     </View>
   );
@@ -1759,16 +1723,6 @@ const styles = StyleSheet.create({
     ...shadow.card,
   },
   practiceText: { fontSize: 15, fontWeight: '700', color: colors.primaryDark },
-  practiceBadge: {
-    minWidth: 22,
-    height: 22,
-    paddingHorizontal: 6,
-    borderRadius: radius.pill,
-    backgroundColor: colors.accent,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  practiceBadgeText: { fontSize: 12, fontWeight: '800', color: colors.onPrimary, fontVariant: ['tabular-nums'] },
 
   // Path -------------------------------------------------------------------
   path: {

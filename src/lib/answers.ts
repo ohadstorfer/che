@@ -408,10 +408,13 @@ export function pickImposter(correct: Form, allForms: Form[]): Form | null {
   return others.length ? shuffle(others)[0] : null;
 }
 
-/** Forms for a matching block: no two that could pair with each other's meaning. */
+/** Forms for a matching block: no two that could pair with each other's meaning.
+ *  A loanword glossed as itself — mate, cortado — is left out too: its two tiles
+ *  read the same on both sides, so the pair falls out for free and the screen
+ *  tests nothing. Those words are still drilled everywhere else. */
 export function matchable(forms: Form[], size = MATCH_SIZE): Form[] {
   const out: Form[] = [];
-  for (const f of shuffle(forms.filter((x) => !isPhrase(x.form)))) {
+  for (const f of shuffle(forms.filter((x) => !isPhrase(x.form) && norm(x.gloss_en) !== norm(x.form)))) {
     if (out.some((o) => sharesMeaning(o, f))) continue;
     out.push(f);
     if (out.length === size) break;
