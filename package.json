@@ -65,6 +65,7 @@
     "course:demo": "node scripts/course/build-demo.mjs",
     "course:seed": "node scripts/course/build-seed.mjs",
     "course:generate": "node scripts/course/generate-unit.mjs",
+    "course:agent": "node scripts/course/agent-unit.mjs",
     "course:lint": "node scripts/course/lint.mjs",
     "course:review": "node scripts/course/ai-review.mjs",
     "course:lessons": "node scripts/course/build-lessons.mjs",

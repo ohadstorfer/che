@@ -15,3 +15,5 @@ android/
 
 expo-env.d.ts
 # @end expo-cli
+# Scratch work of the agent content pipeline (npm run course:agent)
+.course-work/

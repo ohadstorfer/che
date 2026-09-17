@@ -21,8 +21,8 @@ import {
   styleSpec,
   targetsFor,
 } from './lib/generate.mjs';
-import { sentencesOfUnits, unitFromArgs, writeReviews, writeSentences } from './lib/pipeline.mjs';
-import { GENERATOR_MODEL, JUDGE_MODEL } from './config.mjs';
+import { saveCandidates, sentencesOfUnits, unitFromArgs } from './lib/pipeline.mjs';
+import { GENERATOR_MODEL } from './config.mjs';
 
 let ctx;
 try {
@@ -89,26 +89,5 @@ if (dryRun) {
   process.exit(0);
 }
 
-const selectedIds = new Set(selected.map((s) => s.row.id));
-const takenIds = new Set(known.map((s) => s.id));
-const keep = selected.filter((s) => !takenIds.has(s.row.id)).map((s) => ({ ...s.row, status: 'ai_reviewed' }));
-const drop = rejected
-  .filter((r) => r.row && !selectedIds.has(r.row.id) && !takenIds.has(r.row.id))
-  .filter((r, i, all) => all.findIndex((x) => x.row.id === r.row.id) === i)
-  .map((r) => ({ ...r.row, status: 'retired' }));
-writeSentences([...keep, ...drop]);
-writeReviews([
-  ...selected.filter((s) => !takenIds.has(s.row.id)).flatMap((s) => [
-    { row_id: s.row.id, stage: 'lint', verdict: s.flags.length ? 'flag' : 'pass', notes: { flags: s.flags, prompt_hash: s.hash, model: GENERATOR_MODEL, role: s.candidate.role } },
-    { row_id: s.row.id, stage: 'ai', verdict: 'pass', notes: { scores: s.score, model: JUDGE_MODEL } },
-  ]),
-  ...rejected
-    .filter((r) => r.row && drop.some((d) => d.id === r.row.id))
-    .map((r) => ({
-      row_id: r.row.id,
-      stage: r.problems.length ? 'lint' : 'ai',
-      verdict: 'fail',
-      notes: { reason: r.reason, problems: r.problems, scores: r.score ?? null, prompt_hash: r.hash, model: GENERATOR_MODEL },
-    })),
-]);
-console.log(`\nwrote ${keep.length} sentences for review and ${drop.length} discarded candidates. Next: review them in the dashboard.`);
+const { kept, dropped } = saveCandidates({ selected, rejected, known, model: GENERATOR_MODEL, status: 'ai_reviewed' });
+console.log(`\nwrote ${kept} sentences for review and ${dropped} discarded candidates. Next: review them in the dashboard.`);
