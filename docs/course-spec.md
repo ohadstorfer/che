@@ -24,7 +24,7 @@ Everything below follows from these. They were settled in conversation and are n
 | Source of truth | The database. A script snapshots the whole course to versioned JSON in the repo. |
 | Dashboard | Role-gated routes inside the same Expo app. |
 | Lexicon | Lemma + explicit taught forms. `tenés` is a row; `tienes` never exists. |
-| Audio | Schema carries it; TTS vendor decided later by a listening test (Azure `es-AR` vs ElevenLabs). |
+| Audio | ElevenLabs, two rioplatense voices alternating half and half: Malena (female) and Tomás (male). Every clip records *who* said it, not just where it is — the app will put a figure to the voice. A single-word clip is synthesised with Spanish either side of it (`previous_text`/`next_text`, never spoken): a bare word carries no language, and the model read "mate" as the English one. **A sentence that says who is speaking is read by a voice of that gender** — "Soy Martín" is never Malena. The test is the token right after a first-person verb (`soy`, `estoy`, `me llamo`) and the `features.gender` it carries, so a name, an adjective ("Soy argentina") or a noun all cast the line; merely naming someone ("Gracias, Sofi") does not. The free lines then go to whichever voice has said least, so the forced ones are absorbed rather than skewing the split. `speakerGender`/`assignVoices` in `scripts/course/lib/tts.mjs`, tested in `scripts/course/test/voices.test.mjs`; a clip whose stored voice contradicts the rule is re-recorded by the next `course:tts` run without `--force`. |
 
 ---
 
@@ -76,7 +76,7 @@ A **sentence** is the atom of authored content. It belongs to a unit, targets on
 - `loose[]` (authoring only) — words the English translates idiomatically ("¿Cómo te llamás?" → "What's your name?")
 - `tokens` — the sentence split into surfaces, each pointing at the form(s) it is: `[{surface:"¿Tenés", form_ids:[…]}, {surface:"mate?", form_ids:[…]}]`. Each token also carries `gloss`: the words of `en` that translate it in this sentence (`bien` in "¡Bien hecho!" = "Well done!" → "well"; a phrase token gets the whole expression). Filled by `npm run course:gloss` (as built, 2026-09-18 — `scripts/course/lib/gloss.mjs`): a model aligns the tokens, and a gloss is stored only if it is whole words of `en`. The app reads a word's meaning off its sentences (`src/lib/meanings.ts`) instead of printing `gloss_en`, which is a dictionary entry ("well, fine, good"): the tap popover shows the token's gloss, and every screen that shows one meaning shows the one she has met, passing over a meaning another word in reach also has. A typed answer that is another word with the meaning shown is accepted with a `synonym` note. Editing `en` in the dashboard drops the glosses, so the next `course:gloss` run re-aligns the sentence.
 - `kind` — `word` · `phrase` · `sentence` · `dialogue`
-- `difficulty` 1–4 (the ladder's rung ceiling), `status`, `source`, `audio_path`
+- `difficulty` 1–4 — an authoring band (words and clauses, Appendix C), not a runtime gate: what a learner is asked to rebuild from tiles is decided by her own ceiling (`Ladder.buildTiles`), not by this number — `status`, `source`, `audio_path`, `voice_id` (who says the clip — the two travel together, so a sentence never claims a speaker for a recording it no longer has)
 
 A sentence is legal iff every token resolves to a form available in its unit. That is checkable by machine, and it is the property that makes exercise derivation safe.
 
@@ -161,6 +161,19 @@ create table lemmas (
   unique (lemma, pos)
 );
 
+-- The speakers the course is recorded in. A clip points at one of these, so the
+-- app can put the right figure beside a line rather than guess from a filename.
+create table voices (
+  id          text primary key,              -- 'malena', 'tomas'
+  name        text not null,
+  gender      text not null check (gender in ('female','male')),
+  accent      text not null default 'rioplatense',
+  provider    text not null default 'elevenlabs',
+  provider_id text not null,                 -- the vendor's voice id
+  model       text not null default 'eleven_multilingual_v2',
+  status      content_status not null default 'published'
+);
+
 create table forms (
   id        uuid primary key default gen_random_uuid(),
   lemma_id  uuid not null references lemmas on delete cascade,
@@ -169,6 +182,7 @@ create table forms (
   gloss_en  text,                             -- overrides lemma gloss when the form needs it ('you have')
   unit_id   uuid not null references units,   -- the unit that teaches this form
   audio_path text,
+  voice_id  text references voices,          -- who says it
   status    content_status not null default 'draft',
   unique (lemma_id, form)
 );
@@ -189,6 +203,7 @@ create table sentences (
   source         text not null default 'ai' check (source in ('ai','human','tatoeba')),
   attribution    text,                        -- required when source = 'tatoeba'
   audio_path     text,
+  voice_id       text references voices,     -- who says it
   status         content_status not null default 'draft',
   created_by     uuid references profiles,
   created_at     timestamptz not null default now(),
@@ -282,6 +297,13 @@ create table lesson_progress (
 3. Return `{ items, allCards: forms, sentences, scheduledCardIds }`. Grading, SM-2 updates and re-asks are untouched.
 
 **Preview mode** (`buildLesson(..., { canonical: true })`) renders `review` slots as placeholder items. The dashboard and the reviewer use this.
+
+**How much a build may ask for** (as built, 2026-09-18 — `sentences.ts`). Reading a sentence and rebuilding it from tiles are different jobs: the tiles carry no punctuation, so nothing marks where one clause ends, and every extra tile multiplies the orders she has to rule out. So the build has a ceiling of its own, and it is **not** the sentence's `difficulty`, which is an authoring band.
+
+- `Ladder.buildTiles` — tiles she may be asked to order at once. It starts at 4 and grows by one per ten passed sentence screens up to 14 (the top of the word band, so nothing is permanently out of reach), and the ladder's offset moves it a tile either way with everything else.
+- `BUILD_CLAUSE_MAX = 2` — clauses she is ever asked to order from tiles, at any rung. Two short ones are an exchange she can hear; three, with nothing between them, is a shuffle.
+- Over either ceiling, `buildableClause` picks the clause holding the word being drilled, and the build asks for **that clause only**, with the rest of the sentence written out around it (`SessionItem.clause`, `clauseOf` in `answers.ts`, `ClauseContext` in `exercises.tsx`). It wears no "Harder" badge: it is the step taken *instead* of the full build.
+- A sentence over the ceiling with no clause small enough to stand in — one long clause — stays at `sentence_gap`, where the words are in view and only one has to be produced. It is not promoted out of it, and `sentence_listen` is skipped: the audio says the whole sentence, which is the part she was spared.
 
 ### 3.2 Finishing
 
@@ -407,8 +429,17 @@ Phases are sequential; each has a definition of done. No dates — the pacing de
 
 ### Phase 6 — Scale to the section
 
-- **Do:** units 4–24 through the same loop; the English UI sweep; the TTS listening test and, on a decision, the audio job (`tts.mjs` filling `audio_path` for every published form and sentence); final snapshot.
+- **Do:** units 4–24 through the same loop; the English UI sweep; the audio job — `npm run course:tts -- <unit-slug>` fills `audio_path` and `voice_id` for every published form and sentence; final snapshot.
 - **Done when:** section 1 is published with audio, the UI is English, and a new learner can go from the first coin to the checkpoint.
+- **State (2026-09-18):** section 1 — units 1–10 — is published and glossed. Audio covers units 1–6; units 7–10 are recorded-pending (~344 clips), stopped before they ran at the author's word.
+
+  Four things the loop taught, all now in the scripts rather than in someone's memory:
+  - A word can be introduced by a unit and never said in it. Proper nouns are never generation targets, so unit 5 taught six places and its first draft used two. The generation prompt now names a unit's non-target new words and asks for them; `course:agent -- publish` reports any that are still never said — counting the unit's whole published set, not just the run's, so a pass that fills one gap does not report every other word as missing.
+  - A word can be introduced where nothing can use it. `qué` sat in unit 4, which has no verb for it to question, so every sentence it could carry was a bare "¿Qué?" asking for a repeat — curt in Buenos Aires, where "¿Cómo?" does that job. It moved to unit 15, the unit named for the question it could not ask (migrations `20260918000009`, `20260918000010`). The same thing happened to `cuántas` in unit 9, whose only plural noun is the masculine `años`: it moved to unit 10 and its four feminine plurals (`20260918000011`, `20260918000012`). A lemma may now straddle two units — the unit belongs to the form, not the lemma.
+  - The generator's list of free names was a lie. It offered "Facu, Caro", but `facu` is taught in unit 18 and `caro` in unit 26, and the tokenizer does not care about the capital letter, so every sentence built on either name died in the check as a word from a far-off unit — about a fifth of some batches. The cast is now read off the lexicon: a person is a proper noun the outline gave a gender to, which is exactly what distinguishes Sofi from Rosario. With that fixed, one unit-9 batch went from 11 of 48 passing to 48 of 48.
+  - A gloss can be the problem. Every sentence the writer built on `kiosco` was rejected, all for the English: "kiosk" makes an English speaker picture a newsstand. It joined `cortado`, `mate` and `medialuna` as a word the course keeps and explains in a note (`20260918000013`).
+
+  **A targeted second pass**: when one word comes out short, re-run `prompts`, replace the batches you do not want with `{"sentences":[]}`, and write only the one batch that matters. The unit's existing sentences are already in `existing`, so nothing duplicates.
 
 **Parallel tracks** (do not block the phases): notifications reconciliation; figures and mascot art (a 7-line edit once sources exist); mascot rename.
 
@@ -418,7 +449,11 @@ Phases are sequential; each has a definition of done. No dates — the pacing de
 
 | Item | State | Owner |
 |---|---|---|
-| TTS vendor | Listening test: 8 diagnostic sentences (šeísmo, voseo imperatives, final-s) through Azure `es-AR` and two ElevenLabs rioplatense voices, blind | you + a native |
+| TTS vendor | **Decided: ElevenLabs**, Malena + Tomás (`voices`, migration `20260918000007`). Account on Basic; units 1–6 recorded, 143 clips, 604 credits for units 4–6 | you |
+| Units 7–10 audio | **Not recorded.** 344 clips, roughly 3,500 credits at the rate units 4–6 ran at — which is itself the correction to the old "~2,400 characters for all of section 1" estimate, low by more than an order of magnitude. `npm run course:tts -- <slug>` for `argentino-argentina`, `la-familia`, `cuantos-anos-tenes`, `en-el-kiosco` when you want them | you |
+| One silent line in unit 3 | "Che, ¿sos vos? ¿Todo bien?" was edited (it used to chain three greetings and failed `clause.count`), so its recording no longer said it and went with the text. `npm run course:tts -- vos-y-sos` records the one clip; until then unit 3 is 7 of 8 | you |
+| `Argentina` never said | Unit 5 teaches it and no sentence uses it. Not a generation failure: in Buenos Aires you name the city or the barrio, not the country, so the judge rejects "Soy de Argentina" as textbook. Either keep it as a word to recognise or drop it from the unit | you |
+| Voice sign-off | Once recording is possible: unit 1 through both voices, listened to by a native for šeísmo, voseo imperatives and final-s before the rest of the section is recorded | you + a native |
 | English UI | Deferred to Phase 6; all strings are in `src/` and rioplatense today | — |
 | Notifications | Engine expects web-push keys; Che has Expo tokens + partner reminders. Reconcile after Phase 2 | — |
 | Art | Figures and mascot still mora's; `scripts/cutout-figure.py` ready for sources | you |
@@ -512,6 +547,8 @@ Given to the generator verbatim and enforced by the linter where it can be.
 
 Each rule is a pure function `(sentence, ctx) → Finding | null`, unit-tested with at least one sentence it must reject. `fail` blocks progress; `flag` is shown to the reviewer.
 
+`course:lint` runs them over a unit's **drafts**, so a rule written after a sentence was approved would never reach it. The shape rules therefore also run as a whole-course sweep in `npm run course:validate`, over every sentence the database holds that isn't retired — which is how the three-clause chain already published in unit 3 surfaced.
+
 | Rule | Checks | Severity |
 |---|---|---|
 | `tokens.resolve` | every token has ≥ 1 `form_id`, each existing and `status ≠ retired` | fail |
@@ -521,7 +558,8 @@ Each rule is a pure function `(sentence, ctx) → Finding | null`, unit-tested w
 | `voseo.no_tuteo` | denylist of tuteo-only surfaces: `tú, ti, contigo, tienes, eres, puedes, quieres, vienes, haces, dices, sabes, ven, di, haz, sal, ten, pon, sé, vosotros, os, vuestro…` | fail |
 | `lexicon.regional` | denylist from Appendix B's right-hand column | fail |
 | `register.max` | no lemma with register above `units.register_max` | fail |
-| `length.band` | words ≤ 4 / 7 / 10 / 14 for difficulty 1 / 2 / 3 / 4 | flag |
+| `length.band` | words ≤ 4 / 7 / 10 / 14 for difficulty 1 / 2 / 3 / 4 — *built*, in `checkShape` | flag |
+| `clause.count` | sentences-in-one ≤ 2 / 2 / 2 / 3 for difficulty 1 / 2 / 3 / 4. A word count alone rewards chaining: "Che, ¿sos vos? ¡Hola! ¿Todo bien?" is six words and passes the band, and is three greetings a beginner has to order with the punctuation stripped off. An exchange — a question and its answer — is two and stays legal. *Built*, in `checkShape` | fail |
 | `punct.spanish` | `¿`/`¡` paired; no `?` without `¿` | fail |
 | `orthography` | only Spanish letters and accents; accents match the lexicon form exactly | fail |
 | `dupes` | normalised `es` unique across the course; near-duplicates (edit distance ≤ 2 on ≥ 5 words) flagged | fail / flag |

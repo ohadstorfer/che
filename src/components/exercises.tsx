@@ -1,12 +1,22 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   Easing,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
+  withSpring,
   withTiming,
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
@@ -16,8 +26,10 @@ import { WrongAnswerActions } from '@/components/wrong-answer-actions';
 import { Panel } from '@/components/ui';
 import { type Anchor, WordPopover, measureAnchor } from '@/components/word-popover';
 import { playAudio, stopAudio, type AudioFailure } from '@/lib/audio';
+import { clausesOf } from '@/lib/course-rules/shape';
 import {
   builtAnswerMatches,
+  clauseOf,
   gapOptions,
   isCanonical,
   isPhrase,
@@ -64,6 +76,9 @@ type Single = (correct: boolean, extra?: AnswerExtra) => void;
 /** The label a harder exercise wears (learning-engine-spec §6.5). */
 function badgeFor(item: QueueItem): string | undefined {
   if (item.isIntro || item.isRetry || item.placementUnit) return undefined;
+  // Building one clause is the step the ladder takes *instead* of the full
+  // build, because the full build was too much. It never wears the badge.
+  if (item.clause != null) return undefined;
   if (item.promoted || item.mode === 'typing') return 'Harder';
   if ((item.mode === 'sentence_build' || item.mode === 'sentence_listen') && item.sentence) {
     // Only while the rung is new to her: the first builds of a sentence.
@@ -228,6 +243,10 @@ const webPress =
         transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
       } as object)
     : null;
+
+// A tile is dragged, not scrolled: without this the browser claims the touch
+// for the page and the tile never moves. The rest of the screen still scrolls.
+const dragTouch = Platform.OS === 'web' ? ({ touchAction: 'none' } as object) : null;
 
 function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
   const phrase = isPhrase(form.form);
@@ -723,12 +742,25 @@ const TILE_ROW = 58;
 // the screen rather than entering it.
 const FLY_MS = 220;
 const EASE_MOVE = Easing.bezier(0.77, 0, 0.175, 1);
+const EASE_OUT = Easing.bezier(0.23, 1, 0.32, 1);
+
+// Dragging. A tap is still the fast way to lay a tile down, but the order it
+// lands in is hers to fix: pick a tile up and the rest open a place for it.
+/** How far the finger travels before a press becomes a drag. Under this, taps
+ *  still work everywhere, including on a tile she only meant to prod. */
+const DRAG_SLOP = 8;
+/** How far below the line a tile has to be carried before it counts as taken
+ *  off it — without the margin it would flicker in and out on the edge. */
+const DRAG_OUT = 14;
+const LIFT_MS = 120;
 
 type Rect = { x: number; y: number; width: number; height: number };
 /** A tile in mid-air. `hide` is the slot it stands in for while it flies. */
 type Flight = { id: number; text: string; from: Rect; to: Rect; hide: string };
 /** A tile dropped onto the line that does not yet know where it landed. */
 type Pending = { text: string; from: Rect; slot: string };
+/** The tile under her finger, and where it was picked up from. */
+type Drag = { tile: number; origin: Rect };
 
 /**
  * Where `node` sits inside `root`, in layout coordinates. The offset chain is
@@ -802,11 +834,40 @@ export function TileBuilder({
 }) {
   const reduced = useReducedMotion();
   const rootRef = useRef<View>(null);
-  // Bank tiles are keyed `b<index>`, tiles on the line `a<position>`.
+  // Bank tiles are keyed `b<tile>`, tiles on the line `t<tile>`, and the line
+  // itself `area` — the drop zone a tile has to stay inside to count. Keyed by
+  // the tile rather than by its position, because a tile being dragged has to
+  // survive the reorder it is causing: keyed by position, React would tear the
+  // slot down and rebuild it, and the gesture would go with it.
   const nodes = useRef<Record<string, View | null>>({});
   const flightId = useRef(0);
   const [pending, setPending] = useState<Pending | null>(null);
   const [flight, setFlight] = useState<Flight | null>(null);
+
+  // Drag state lives twice over: in React, because the slot it came from has to
+  // render as a gap, and in shared values, because the finger has to be
+  // followed on the UI thread whatever React is doing.
+  const [drag, setDrag] = useState<Drag | null>(null);
+  const dragRef = useRef<Drag | null>(null);
+  dragRef.current = drag;
+  const usedRef = useRef(used);
+  usedRef.current = used;
+  /** True from the moment a press turns into a drag until the tile lands, so
+   *  the press underneath it never also fires. */
+  const dragged = useRef(false);
+  /** Which drag this is. A tile picked up while the last one is still settling
+   *  must not be cleared away by that one finishing. */
+  const seq = useRef(0);
+  const dx = useSharedValue(0);
+  const dy = useSharedValue(0);
+  const lift = useSharedValue(0);
+  const originSV = useSharedValue<Rect | null>(null);
+  /** Where every slot on the line currently sits, for the worklet to aim at. */
+  const slotsSV = useSharedValue<(Rect | null)[]>([]);
+  const areaBottomSV = useSharedValue(0);
+  /** The slot the finger was last over, so a crossing costs one render and a
+   *  hundred frames inside the same slot cost none. */
+  const overSV = useSharedValue(-2);
 
   // Measured at the moment of the tap rather than cached: on web a tile that
   // only reflows never fires onLayout, so anything remembered from mount is
@@ -833,7 +894,7 @@ export function TileBuilder({
 
   const add = (i: number) => {
     const next = [...used, i];
-    const slot = `a${used.length}`;
+    const slot = `t${i}`;
     if (reduced || pending) return setUsed(next);
     // Measured before the state change, and committed together with it, so the
     // slot is already hidden on the frame it first appears.
@@ -866,7 +927,7 @@ export function TileBuilder({
     const i = used[position];
     const next = used.filter((_, p) => p !== position);
     if (reduced) return setUsed(next);
-    rectOf(`a${position}`, (from) =>
+    rectOf(`t${i}`, (from) =>
       rectOf(`b${i}`, (to) => {
         setUsed(next);
         if (from && to) {
@@ -876,9 +937,178 @@ export function TileBuilder({
     );
   };
 
+  // Dragging ----------------------------------------------------------------
+  // Re-measured rather than remembered: every reorder moves every slot after
+  // it, and on web a tile that only reflows never reports a layout.
+  const syncSlots = () => {
+    const count = usedRef.current.length;
+    const out: (Rect | null)[] = new Array(count).fill(null);
+    for (let p = 0; p < count; p++) rectOf(`t${usedRef.current[p]}`, (r) => (out[p] = r));
+    slotsSV.set(out);
+    rectOf('area', (r) => areaBottomSV.set(r ? r.y + r.height : 0));
+  };
+
+  // Slots move under the finger as the tiles part for it, so the aim is only
+  // as good as the last measurement.
+  useEffect(() => {
+    if (drag) syncSlots();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [used, drag]);
+
+  /** Picked up. A tile taken from the bank joins the line immediately — the
+   *  same thing a tap would have done — and from there it is being reordered
+   *  like any other, so there is only ever one drag to reason about. */
+  const grab = (i: number, fromBank: number) => {
+    const position = usedRef.current.indexOf(i);
+    // A tile already on the line is not the bank's to pick up again.
+    if (fromBank && position >= 0) return;
+    dragged.current = true;
+    seq.current += 1;
+    rectOf(position < 0 ? `b${i}` : `t${i}`, (origin) => {
+      if (!origin) return;
+      originSV.set(origin);
+      dragRef.current = { tile: i, origin };
+      setDrag({ tile: i, origin });
+      syncSlots();
+      if (position < 0) setUsed([...usedRef.current, i]);
+      lift.set(reduced ? 1 : withTiming(1, { duration: LIFT_MS, easing: EASE_OUT }));
+    });
+  };
+
+  /** Dropped into slot `to`, or back into the bank when `to` is -1. Called only
+   *  as the finger crosses out of one slot and into the next. */
+  const moveTo = (i: number, to: number) => {
+    const prev = usedRef.current;
+    const next = prev.filter((x) => x !== i);
+    // The slot she is over is measured on the line as it stands now, so the
+    // tile simply takes that index: whatever was there slides along.
+    if (to >= 0) next.splice(Math.min(to, next.length), 0, i);
+    if (next.length === prev.length && next.every((x, p) => x === prev[p])) return;
+    setUsed(next);
+  };
+
+  /** Let go. The tile keeps travelling to wherever it ended up rather than
+   *  snapping there, so the place it landed is never in doubt. */
+  const land = (i: number, vx: number, vy: number) => {
+    const d = dragRef.current;
+    const mine = seq.current;
+    const stale = () => seq.current !== mine;
+    // Only the React state is cleared, never the offsets: the tile is standing
+    // exactly on its slot by now, and zeroing them here would flick it back to
+    // where it was picked up for the one frame before it disappears. The next
+    // drag resets them on the way up instead.
+    const done = () => {
+      if (stale()) return;
+      dragged.current = false;
+      dragRef.current = null;
+      originSV.set(null);
+      overSV.set(-2);
+      setDrag(null);
+    };
+    if (!d) return done();
+    // One frame for the last reorder to lay itself out before it is measured.
+    requestAnimationFrame(() => {
+      if (stale()) return;
+      const position = usedRef.current.indexOf(i);
+      rectOf(position >= 0 ? `t${i}` : `b${i}`, (to) => {
+        if (!to || reduced) return done();
+        const settle = { duration: 320, dampingRatio: 0.85 };
+        lift.set(withTiming(0, { duration: 160, easing: EASE_OUT }));
+        dy.set(withSpring(to.y - d.origin.y, { ...settle, velocity: vy }));
+        dx.set(
+          withSpring(to.x - d.origin.x, { ...settle, velocity: vx }, () => {
+            'worklet';
+            scheduleOnRN(done);
+          }),
+        );
+      });
+    });
+  };
+
+  // The worklets below are handed one stable function, not this render's
+  // closures: a reorder mid-drag would otherwise rebuild every gesture and
+  // re-attach the handler the finger is currently holding.
+  const api = useRef({ grab, moveTo, land });
+  api.current = { grab, moveTo, land };
+  const call = useCallback((name: 'grab' | 'moveTo' | 'land', ...args: number[]) => {
+    (api.current[name] as (...a: number[]) => void)(...args);
+  }, []);
+
+  const gestures = useMemo(() => {
+    // Two detectors are mounted per tile — its place in the bank and its place
+    // on the line — and a gesture belongs to exactly one of them.
+    const pan = (i: number, fromBank: number) =>
+      Gesture.Pan()
+        .enabled(!locked)
+        .minDistance(DRAG_SLOP)
+        .onStart(() => {
+          'worklet';
+          dx.set(0);
+          dy.set(0);
+          lift.set(0);
+          overSV.set(-2);
+          scheduleOnRN(call, 'grab', i, fromBank);
+        })
+        .onUpdate((e) => {
+          'worklet';
+          dx.set(e.translationX);
+          dy.set(e.translationY);
+          const origin = originSV.get();
+          if (!origin) return;
+          const cx = origin.x + e.translationX + origin.width / 2;
+          const cy = origin.y + e.translationY + origin.height / 2;
+          // Rows first, then position along the row: on a wrapped line the row
+          // she is over matters far more than the horizontal distance does.
+          let over = -1;
+          const floor = areaBottomSV.get();
+          if (floor <= 0 || cy < floor + DRAG_OUT) {
+            const slots = slotsSV.get();
+            let best = Infinity;
+            for (let p = 0; p < slots.length; p++) {
+              const r = slots[p];
+              if (!r) continue;
+              const d =
+                Math.abs(cy - (r.y + r.height / 2)) * 3 + Math.abs(cx - (r.x + r.width / 2));
+              if (d < best) {
+                best = d;
+                over = p;
+              }
+            }
+            if (over < 0) over = 0;
+          }
+          if (over !== overSV.get()) {
+            overSV.set(over);
+            scheduleOnRN(call, 'moveTo', i, over);
+          }
+        })
+        .onFinalize((e) => {
+          'worklet';
+          scheduleOnRN(call, 'land', i, e.velocityX ?? 0, e.velocityY ?? 0);
+        });
+    return {
+      line: tiles.map((_, i) => pan(i, 0)),
+      bank: tiles.map((_, i) => pan(i, 1)),
+    };
+    // Rebuilt only when the bank itself changes or the round is graded — never
+    // on a reorder, so the handler under her finger stays the same one.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tiles.length, locked]);
+
+  const ghost = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: dx.get() },
+      { translateY: dy.get() },
+      // Lifted off the page, barely — enough to read as held rather than as
+      // grown, and it takes its letter with it.
+      { scale: 1 + 0.08 * lift.get() },
+    ],
+  }));
+
   return (
     <View ref={rootRef} style={{ gap: 18 }}>
-      <View style={[styles.answerArea, ruled ? styles.answerAreaRuled : styles.answerAreaBoxed]}>
+      <View
+        ref={hold('area')}
+        style={[styles.answerArea, ruled ? styles.answerAreaRuled : styles.answerAreaBoxed]}>
         {ruled ? (
           <>
             <View style={[styles.answerRule, { top: TILE_ROW }]} />
@@ -890,24 +1120,31 @@ export function TileBuilder({
             <Text style={styles.answerPlaceholder}>tap the tiles…</Text>
           ) : null}
           {used.map((tileIndex, position) => {
-            const key = `a${position}`;
-            // While its word is in the air the slot holds the space, empty.
-            const flying = pending?.slot === key || flight?.hide === key;
+            const key = `t${tileIndex}`;
+            // While its word is in the air — thrown by a tap, or carried by a
+            // finger — the slot holds the space, empty.
+            const flying =
+              pending?.slot === key || flight?.hide === key || drag?.tile === tileIndex;
             return (
-              <Pressable
-                key={`${tileIndex}-${position}`}
-                ref={hold(key)}
-                disabled={locked || flying}
-                onLayout={landed(key)}
-                onPress={() => remove(position)}
-                style={({ pressed }) => [
-                  styles.tile,
-                  flying && styles.tileInFlight,
-                  { transform: [{ scale: pressed && !locked ? 0.94 : 1 }] },
-                  webPress,
-                ]}>
-                <Text style={[styles.tileText, flying && { opacity: 0 }]}>{tiles[tileIndex]}</Text>
-              </Pressable>
+              <GestureDetector key={tileIndex} gesture={gestures.line[tileIndex]}>
+                <Pressable
+                  ref={hold(key)}
+                  disabled={locked || pending?.slot === key || flight?.hide === key}
+                  onLayout={landed(key)}
+                  onPress={() => {
+                    if (dragged.current) return;
+                    remove(position);
+                  }}
+                  style={({ pressed }) => [
+                    styles.tile,
+                    flying && styles.tileInFlight,
+                    { transform: [{ scale: pressed && !locked && !drag ? 0.94 : 1 }] },
+                    webPress,
+                    dragTouch,
+                  ]}>
+                  <Text style={[styles.tileText, flying && { opacity: 0 }]}>{tiles[tileIndex]}</Text>
+                </Pressable>
+              </GestureDetector>
             );
           })}
         </View>
@@ -917,21 +1154,26 @@ export function TileBuilder({
         {tiles.map((tile, i) => {
           // A word on its way home has already left the line, but its place in
           // the bank stays greyed until it has actually landed there.
-          const gone = used.includes(i) || flight?.hide === `b${i}`;
+          const gone = used.includes(i) || flight?.hide === `b${i}` || drag?.tile === i;
           return (
-            <Pressable
-              key={i}
-              ref={hold(`b${i}`)}
-              disabled={gone || locked}
-              onPress={() => add(i)}
-              style={({ pressed }) => [
-                styles.tile,
-                gone && styles.tileTaken,
-                { transform: [{ scale: pressed && !gone ? 0.94 : 1 }] },
-                webPress,
-              ]}>
-              <Text style={[styles.tileText, gone && { opacity: 0 }]}>{tile}</Text>
-            </Pressable>
+            <GestureDetector key={i} gesture={gestures.bank[i]}>
+              <Pressable
+                ref={hold(`b${i}`)}
+                disabled={gone || locked}
+                onPress={() => {
+                  if (dragged.current) return;
+                  add(i);
+                }}
+                style={({ pressed }) => [
+                  styles.tile,
+                  gone && styles.tileTaken,
+                  { transform: [{ scale: pressed && !gone ? 0.94 : 1 }] },
+                  webPress,
+                  dragTouch,
+                ]}>
+                <Text style={[styles.tileText, gone && { opacity: 0 }]}>{tile}</Text>
+              </Pressable>
+            </GestureDetector>
           );
         })}
       </View>
@@ -942,6 +1184,27 @@ export function TileBuilder({
           flight={flight}
           onDone={() => setFlight((f) => (f?.id === flight.id ? null : f))}
         />
+      ) : null}
+
+      {/* The tile under her finger. It is the only thing that does not reflow:
+          everything else opens and closes around where it is pointing. */}
+      {drag ? (
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            styles.tile,
+            styles.tileFlying,
+            styles.tileHeld,
+            {
+              left: drag.origin.x,
+              top: drag.origin.y,
+              width: drag.origin.width,
+              height: drag.origin.height,
+            },
+            ghost,
+          ]}>
+          <Text style={styles.tileText}>{tiles[drag.tile]}</Text>
+        </Animated.View>
       ) : null}
     </View>
   );
@@ -1138,6 +1401,12 @@ function Matching({
 
   const pickLeft = (id: string) => {
     if (matched.has(id) || verdict) return;
+    // The left column is the Spanish, so a tap there is a chance to hear the
+    // word — the right column is its English and stays silent, the same rule
+    // PromptBlock follows. Nothing is given away: the word is already legible,
+    // and what is being asked is which meaning it goes with.
+    const audio = group.find((f) => f.id === id)?.audio_path;
+    if (audio) playAudio(audio);
     setSelected(selected === id ? null : id);
   };
 
@@ -1454,6 +1723,10 @@ function SentenceIntro({
       }>
       <SpeechBubble>
         <View style={styles.bubbleRow}>
+          {/* The Spanish is already on screen and the answer is its English, so
+              hearing it gives nothing away — it binds the sound to the spelling,
+              which is the whole reason the sentence is read rather than shown. */}
+          {sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
           <SentenceLine
             sentence={sentence}
             mark={word?.id}
@@ -1517,6 +1790,10 @@ function SentenceGap({
       onContinue={() => onAnswered(verdict?.correct ? [] : [target.id], { hinted: words.peeked })}>
       <SpeechBubble>
         <View style={styles.bubbleRow}>
+          {/* Not before she answers — the recording says the missing word. Once
+              the verdict is in it gives nothing away and is worth the most:
+              she hears the sentence whole, with the word she just chose in it. */}
+          {verdict && sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
           <SentenceLine
             sentence={sentence}
             onWord={canTap ? words.open : undefined}
@@ -1556,7 +1833,12 @@ function SentenceBuild({
   byEar?: boolean;
 }) {
   const sentence = item.sentence!;
-  const [{ tiles }] = useState(() => sentenceTiles(sentence, allForms));
+  // A sentence too long to rebuild whole asks for one of its clauses, with the
+  // rest of it written out above. Everything below works on `asked` — the
+  // clause, or the whole sentence when there is no clause to single out — so
+  // the tiles, the marking and the blame all narrow together.
+  const asked = item.clause != null ? clauseOf(sentence, item.clause) : sentence;
+  const [{ tiles }] = useState(() => sentenceTiles(asked, allForms));
   const [used, setUsed] = useState<number[]>([]);
   const [verdict, setVerdict] = useState<Verdict>(null);
 
@@ -1564,20 +1846,22 @@ function SentenceBuild({
 
   return (
     <Frame
-      prompt={byEar ? 'What does the audio say?' : 'Translate this sentence'}
+      prompt={
+        byEar ? 'What does the audio say?' : item.clause != null ? 'Say the missing part' : 'Translate this sentence'
+      }
       verdict={verdict}
       canCheck={used.length > 0}
       onCheck={() =>
         setVerdict({
-          correct: sentenceAnswerMatches(placed, sentence, { byEar }),
+          correct: sentenceAnswerMatches(placed, asked, { byEar }),
           answer: `${sentence.es} — ${sentence.en}`,
           // Right, but not the sentence as written: show that one too.
-          also: isCanonical(placed, sentence) ? undefined : sentence.es,
+          also: isCanonical(placed, asked) ? undefined : asked.es,
         })
       }
       answer={placed.join(' ')}
       onContinue={() =>
-        onAnswered(verdict?.correct ? [] : missedForms(sentence, placed, allForms), {
+        onAnswered(verdict?.correct ? [] : missedForms(asked, placed, allForms), {
           answer: placed.join(' '),
         })
       }>
@@ -1592,13 +1876,49 @@ function SentenceBuild({
           </View>
         </SpeechBubble>
       )}
+      {item.clause != null ? <ClauseContext es={sentence.es} clause={item.clause} /> : null}
       <TileBuilder tiles={tiles} used={used} setUsed={setUsed} locked={verdict !== null} ruled />
     </Frame>
   );
 }
 
+/**
+ * The sentence around the clause she is building: the other clauses as written
+ * Spanish, and a rule where hers goes. It is the half of the sentence she is not
+ * being asked for, which is the whole point — six tiles in no marked order was
+ * the exercise this replaces.
+ */
+function ClauseContext({ es, clause }: { es: string; clause: number }) {
+  return (
+    <View style={styles.clauseLine}>
+      {clausesOf(es).map((part, i) =>
+        i === clause ? (
+          <View key={i} style={styles.clauseSlot} />
+        ) : (
+          <Text key={i} style={styles.clauseWritten}>
+            {part}
+          </Text>
+        ),
+      )}
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   bigCard: { alignItems: 'center', gap: 10, paddingVertical: 26 },
+
+  // The sentence around a clause build: what is already written sits in the
+  // ink of a finished sentence, and the part she owes is an empty rule of the
+  // same height, so the line reads as one sentence with a hole in it.
+  clauseLine: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 8 },
+  clauseWritten: { fontSize: 20, lineHeight: 30, color: colors.ink, fontWeight: '700' },
+  clauseSlot: {
+    width: 72,
+    height: 2,
+    borderRadius: 1,
+    backgroundColor: colors.border,
+    marginBottom: 6,
+  },
   // The Spanish leads — it is the form she is being tested on — and the meaning
   // sits under a rule, in the primary's deep tone.
   esHero: {
@@ -1814,6 +2134,16 @@ const styles = StyleSheet.create({
   // reflows mid-flight, but it reads as a gap rather than as a tile.
   tileInFlight: { backgroundColor: 'transparent', borderColor: 'transparent', shadowOpacity: 0, elevation: 0 },
   tileFlying: { position: 'absolute', zIndex: 10 },
+  // Held: off the page rather than on it, so it reads as picked up and not as
+  // one more tile sitting in the row.
+  tileHeld: {
+    zIndex: 20,
+    borderColor: colors.primary,
+    shadowOpacity: 0.22,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 8,
+  },
   tileTaken: {
     backgroundColor: colors.border,
     borderColor: colors.border,

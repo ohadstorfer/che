@@ -90,14 +90,14 @@ const sql = [
   insertNew('lessons', insert.lessons, ['id', 'unit_id', 'ordinal', 'title_en', 'kind', 'status']),
   insertNew('tips', insert.tips, ['id', 'unit_id', 'title_en', 'body_md', 'status']),
   insertNew('lemmas', insert.lemmas, ['id', 'lemma', 'pos', 'gloss_en', 'gloss_note_en', 'register', 'is_glue', 'notes_en', 'status']),
-  insertNew('forms', insert.forms, ['id', 'lemma_id', 'form', 'features', 'gloss_en', 'gloss_note_en', 'unit_id', 'position', 'audio_path', 'status'], {
+  insertNew('forms', insert.forms, ['id', 'lemma_id', 'form', 'features', 'gloss_en', 'gloss_note_en', 'unit_id', 'position', 'audio_path', 'voice_id', 'status'], {
     features: jsonb,
   }),
   // sentence_forms follows by trigger.
   insertNew(
     'sentences',
     insert.sentences,
-    ['id', 'unit_id', 'es', 'en', 'en_alt', 'es_alt', 'tokens', 'target_form_id', 'kind', 'difficulty', 'source', 'attribution', 'audio_path', 'status'],
+    ['id', 'unit_id', 'es', 'en', 'en_alt', 'es_alt', 'tokens', 'target_form_id', 'kind', 'difficulty', 'source', 'attribution', 'audio_path', 'voice_id', 'status'],
     { en_alt: textArray, es_alt: textArray, tokens: jsonb },
   ),
   insertNew('lesson_slots', insert.lesson_slots, ['id', 'lesson_id', 'ordinal', 'kind', 'form_id', 'sentence_id', 'tip_id', 'mode', 'review_count', 'scope']),

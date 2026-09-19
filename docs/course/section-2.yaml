@@ -485,6 +485,11 @@ units:
           - form: "camina"
             en: "walks (he/she walks)"
             f: "3sg.pres.ind"
+      # The unit's own question. Held back from unit 4, where "qué" had no verb
+      # to attach to; here it finally has one.
+      - lemma: "qué"
+        pos: "pron"
+        en: "what"
       - lemma: "hacer"
         pos: "verb"
         en: "to do, to make"

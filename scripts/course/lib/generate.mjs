@@ -42,10 +42,24 @@ export function generationPrompt({ outline, unit, targets, examples, existing, s
   const lemmaById = new Map(outline.lemmas.map((l) => [l.id, l]));
   const available = outline.forms.filter((f) => f.unit_order <= unit.course_order);
   const newHere = new Set(outline.forms.filter((f) => f.unit_id === unit.id).map((f) => f.id));
+  // New words this unit teaches that no target will ever carry: proper nouns,
+  // and glue that is not a target in its own right.
+  const passengers = outline.forms.filter(
+    (f) => f.unit_id === unit.id && !drillable(f) && !targets.some((t) => t.id === f.id),
+  );
+  // The course's cast, read off the lexicon rather than listed by hand. A
+  // person's name is a proper noun the outline gave a gender to; the places got
+  // none on purpose (migration 20260918000008), which is what tells them apart.
+  //
+  // This used to be a fixed line offering "Facu, Caro" as well. It was a lie the
+  // writers believed: "facu" is taught in unit 18 and "caro" in unit 26, the
+  // tokenizer does not care about the capital letter, and every sentence built
+  // on either name died in the check as a word from a unit far away.
+  const cast = available.filter((f) => f.pos === 'propn' && f.features?.gender).map((f) => f.form);
   const system = [
     'You write practice sentences for Che, a course in Argentine (rioplatense) Spanish for English speakers.',
     'Every sentence must be something a person in Buenos Aires would actually say this week, built only from the words listed as available. A word that is not listed does not exist for you — not even a common one, not another form of a listed verb.',
-    'Names of people are free: Sofi, Martín, Juan, Lucía, Facu, Caro.',
+    cast.length ? `The people this course knows, free to use: ${cast.join(', ')}. No other name exists.` : '',
     '',
     style,
   ].join('\n');
@@ -65,11 +79,23 @@ export function generationPrompt({ outline, unit, targets, examples, existing, s
     'Write, for each target word below:',
     `- ${QUOTA.intro * OVERGENERATE} "intro" sentences: at most 6 words, difficulty 1–2, where the word's meaning is obvious from context;`,
     `- ${QUOTA.drill * OVERGENERATE} "drill" sentences across difficulty 1–3 (1: ≤ 4 words, 2: ≤ 7, 3: ≤ 10), varied in shape: statements, questions, answers.`,
+    'Write one sentence, not a chain of them. A second sentence is allowed only when the two are a real exchange — a question and its answer, "Soy Sofi. ¿Y vos?" — never a run of greetings ("Che, ¿sos vos? ¡Hola! ¿Todo bien?" is three sentences and is rejected). Three is never allowed below difficulty 4.',
+    'Length is the whole sentence, every clause counted. Reaching a word count by stringing short pieces together makes the drill harder, not longer: a learner rebuilding it from tiles gets no punctuation to tell her where one piece ends.',
     'Each sentence must contain its target word exactly as written. Give the natural English an English speaker would say, and list any other natural English translations.',
     'Spell with every accent and with opening ¿ and ¡.',
     '',
     'Target words:',
     ...targets.map((f) => `- ${f.form} (${f.pos}, "${f.gloss_en ?? lemmaById.get(f.lemma_id)?.gloss_en ?? ''}")`),
+    // A unit's proper nouns are never targets — nobody drills "Montevideo" as
+    // vocabulary — so without this they are taught and then never said. Unit 5
+    // introduced six places and its first draft used two of them.
+    ...(passengers.length
+      ? [
+          '',
+          `This unit also introduces ${passengers.length === 1 ? 'a word' : 'words'} that nothing drills: ${passengers.map((f) => f.form).join(', ')}.`,
+          'Spread them across the sentences above so each one is said at least once. They ride along in sentences aimed at the target words; do not write a sentence whose point is one of them.',
+        ]
+      : []),
   ]
     .filter((l, i, all) => !(l === '' && all[i - 1] === ''))
     .join('\n');
@@ -111,9 +137,10 @@ export function checkCandidates({ outline, unit, candidates, existingEs = [] }) 
       { source: 'ai', status: 'draft' },
     );
     problems.push(...built.errors.map((e) => e.replace(/^[^:]*: /, '')));
+    // The word band and the clause ceiling are checked inside buildContent now,
+    // where hand-written content meets them too, so they arrive as problems.
     const words = c.es.split(/\s+/).filter(Boolean).length;
-    const band = { 1: 4, 2: 7, 3: 10, 4: 14 }[c.difficulty] ?? 14;
-    const flags = words > band ? [`length.band — ${words} words at difficulty ${c.difficulty}`] : [];
+    const flags = [];
     if (c.role === 'intro' && words > 6) flags.push('intro longer than 6 words');
     const row = built.sentences[0] ?? null;
     if (!problems.length) taken.add(fold(c.es));

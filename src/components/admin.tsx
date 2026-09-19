@@ -3,6 +3,7 @@ import { router, usePathname } from 'expo-router';
 import { Platform, Pressable, ScrollView, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { playAudio } from '@/lib/audio';
 import { colors, press, radius } from '@/lib/theme';
 import type { ContentStatus } from '@/lib/types';
 
@@ -169,6 +170,28 @@ export function SmallButton({
 
 export function Muted({ children }: { children: React.ReactNode }) {
   return <Text style={styles.muted}>{children}</Text>;
+}
+
+/**
+ * Hear a clip, and see who said it.
+ *
+ * Deliberately not the exercise `PlayButton`: that one plays itself the moment
+ * it appears, which is right in a lesson and wrong here — opening a word would
+ * make noise before the reviewer asked for any. This one only ever plays on a
+ * press.
+ *
+ * The voice is shown by its id rather than a prettied-up name. A reviewer
+ * comparing two clips needs the value that is actually in the row.
+ */
+export function Listen({ path, voice }: { path: string | null; voice?: string | null }) {
+  if (!path) return <Muted>no audio</Muted>;
+  return (
+    <SmallButton
+      label={voice ? `Listen · ${voice}` : 'Listen'}
+      icon="volume-high-outline"
+      onPress={() => playAudio(path)}
+    />
+  );
 }
 
 export function Code({ children }: { children: string }) {

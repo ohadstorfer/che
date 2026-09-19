@@ -1,4 +1,5 @@
 import { shuffle } from './answers';
+import { clauseOfSurface, wordsIn } from './course-rules/shape';
 import { supabase } from './supabase';
 import type { Form, Sentence, SentenceToken } from './types';
 
@@ -19,6 +20,7 @@ export interface SentenceRow {
   en_alt: string[] | null;
   es_alt: string[] | null;
   audio_path: string | null;
+  voice_id: string | null;
   target_form_id: string;
   difficulty: number;
   tokens: { surface: string; form_ids: string[]; gloss?: string }[];
@@ -67,6 +69,7 @@ export function toSentence(
     en_alt: r.en_alt ?? [],
     es_alt: r.es_alt ?? [],
     audio_path: r.audio_path,
+    voice_id: r.voice_id ?? null,
     target_form_id: r.target_form_id,
     difficulty: r.difficulty,
     tokens,
@@ -147,6 +150,8 @@ export interface Ladder {
   settledDays: number;
   /** Added to the day's sentence cap. */
   capShift: number;
+  /** Tiles a build may ask her to order at once. */
+  buildTiles: number;
   /** All-correct first tries that promote the rest of a round; null = never. */
   tailAfter: number | null;
   /** course_order of the last unit a placement test skipped; 0 = none. */
@@ -155,12 +160,48 @@ export interface Ladder {
   unlockedGlue: Set<string>;
 }
 
+// ---------------------------------------------------------------------------
+// How much a build may ask for.
+//
+// Tiles carry no punctuation, so rebuilding a sentence from them is a different
+// job from reading it: nothing marks where one clause ends and the next starts,
+// and every extra tile multiplies the orders she has to rule out. A six-tile,
+// three-clause greeting chain passed every check the course had — the word band
+// called it a fair difficulty-3 drill — and landed in unit 3.
+//
+// So the build has a ceiling of its own, and it is not the sentence's
+// `difficulty`, which is an authoring hint. It grows with what she has already
+// rebuilt, the same signal the sentence cap uses, and a bad run of rounds pulls
+// it back a tile with everything else. Above the ceiling a sentence is built one
+// clause at a time (session.ts), or, when it is one clause already, held at the
+// gap — where the words are in view and only one has to be produced.
+// ---------------------------------------------------------------------------
+
+/** Tiles a build starts out asking for, and the most it ever asks for — the top
+ *  of the course's own word band, so the ceiling paces her rather than putting
+ *  any sentence permanently out of reach. */
+export const BUILD_TILES_MIN = 4;
+export const BUILD_TILES_MAX = 14;
+/** Passed sentence screens per extra tile. */
+export const BUILD_TILES_STEP = 10;
+/** Clauses she is ever asked to order from tiles, at any rung. Two short ones
+ *  are an exchange she can hear — "Soy Sofi. ¿Y vos?" — and stay buildable;
+ *  three, with nothing between them, is a shuffle. */
+export const BUILD_CLAUSE_MAX = 2;
+
+export const buildTileCeiling = (passed: number, offset: LadderOffset = 0) =>
+  Math.max(
+    BUILD_TILES_MIN,
+    Math.min(BUILD_TILES_MAX, BUILD_TILES_MIN + Math.floor(Math.max(0, passed) / BUILD_TILES_STEP) + offset),
+  );
+
 export const DEFAULT_LADDER: Ladder = {
   offset: 0,
   rungGapAt: 1,
   rungBuildAt: 2,
   settledDays: 7,
   capShift: 0,
+  buildTiles: BUILD_TILES_MIN,
   tailAfter: 6,
   placedThrough: 0,
   unlockedGlue: new Set(),
@@ -182,7 +223,11 @@ export function ladderOffset(recentScores: number[]): LadderOffset {
 
 export function ladderFor(
   offset: LadderOffset,
-  { placedThrough = 0, glue = [] }: { placedThrough?: number; glue?: { id: string; unit_order: number }[] } = {},
+  {
+    placedThrough = 0,
+    glue = [],
+    passed = 0,
+  }: { placedThrough?: number; glue?: { id: string; unit_order: number }[]; passed?: number } = {},
 ): Ladder {
   const byOffset = {
     [-1]: { rungGapAt: 1, rungBuildAt: 3, settledDays: 10, capShift: -1, tailAfter: null },
@@ -192,6 +237,7 @@ export function ladderFor(
   return {
     offset,
     ...byOffset,
+    buildTiles: buildTileCeiling(passed, offset),
     placedThrough,
     unlockedGlue: new Set(placedThrough > 0 ? glue.filter((g) => g.unit_order <= placedThrough).map((g) => g.id) : []),
   };
@@ -215,11 +261,15 @@ export const RUNG_BUILD_AT = 2;
 
 const passesOf = (s: Sentence) => s.shown?.correct_count ?? 0;
 
+/** Sentence screens she has passed, ever — what the day's dose and the build's
+ *  tile ceiling both grow with. */
+export const passedScreens = (sentences: Sentence[]) => sentences.reduce((n, s) => n + passesOf(s), 0);
+
 /** Sentence screens a round may hold today, from everything she has passed so
  *  far and how yesterday went. Never below one: a bad day shrinks the dose, it
  *  doesn't cancel it. */
 export function sentenceCap(sentences: Sentence[], failedYesterday: number, ladder: Ladder = DEFAULT_LADDER): number {
-  const passed = sentences.reduce((n, s) => n + passesOf(s), 0);
+  const passed = passedScreens(sentences);
   // A learner placed past the start has shown she reads sentences already.
   const start = ladder.placedThrough > 0 ? INTRO_IN_SENTENCE_MIN_CAP : SENTENCE_CAP_MIN;
   let cap = Math.min(SENTENCE_CAP_MAX, start + Math.floor(passed / SENTENCE_CAP_STEP));
@@ -245,10 +295,58 @@ export const hasLockedGlue = (s: Sentence, seen: Map<string, number>, ladder: La
     (t) => t.glue && !ladder.unlockedGlue.has(t.glue) && (seen.get(t.glue) ?? 0) < GLUE_UNLOCK_PASSES,
   );
 
+/** Which clause each of a sentence's tokens sits in. A phrase token holds more
+ *  than one word but never more than one clause, so its surface counts once. */
+export const clausesOfSentence = (s: Pick<Sentence, 'tokens'>) => clauseOfSurface(s.tokens.map((t) => t.surface));
+
+/** How many sentences a sentence really is. */
+export const clauseCountOf = (s: Pick<Sentence, 'tokens'>) => Math.max(1, (clausesOfSentence(s).at(-1) ?? 0) + 1);
+
+/** Tiles a build of the whole sentence would put on the table — the words, not
+ *  the tokens: a phrase token like "¿Todo bien?" is two tiles, not one. */
+export const buildTilesOf = (s: Pick<Sentence, 'tokens'>) =>
+  s.tokens.reduce((n, t) => n + wordsIn(t.surface).length, 0);
+
+/** Whether rebuilding the whole sentence from tiles is more than she is up to:
+ *  too many tiles for where she is, or more clauses than anyone builds. */
+export const tooLongToBuild = (s: Pick<Sentence, 'tokens'>, ladder: Ladder = DEFAULT_LADDER) =>
+  buildTilesOf(s) > ladder.buildTiles || clauseCountOf(s) > BUILD_CLAUSE_MAX;
+
+/** The tiles a build of one clause would put on the table. */
+export const clauseTileCount = (s: Pick<Sentence, 'tokens'>, clause: number) => {
+  const of = clausesOfSentence(s);
+  return s.tokens.reduce((n, t, i) => (of[i] === clause ? n + wordsIn(t.surface).length : n), 0);
+};
+
+/**
+ * The clause a build should ask for when the whole sentence is too long: the
+ * one holding the word the screen is drilling, as long as that clause is itself
+ * inside the ceiling. Null when there is no such clause — a one-clause sentence
+ * over the ceiling has nothing smaller to offer, and stays at the gap.
+ */
+export function buildableClause(
+  s: Pick<Sentence, 'tokens'>,
+  formId: string | null | undefined,
+  ladder: Ladder = DEFAULT_LADDER,
+): number | null {
+  if (clauseCountOf(s) < 2) return null;
+  const of = clausesOfSentence(s);
+  const at = formId ? s.tokens.findIndex((t) => t.form_ids.includes(formId)) : -1;
+  const wanted = at >= 0 ? of[at] : -1;
+  const fits = (c: number) => clauseTileCount(s, c) > 0 && clauseTileCount(s, c) <= ladder.buildTiles;
+  if (wanted >= 0 && fits(wanted)) return wanted;
+  // The target's clause is itself too long — the longest one that does fit is
+  // still worth building, and it is where most of the sentence is.
+  const all = [...new Set(of)].filter(fits);
+  return all.length ? all.reduce((a, b) => (clauseTileCount(s, b) > clauseTileCount(s, a) ? b : a)) : null;
+}
+
 export type Rung = 'meaning' | 'gap' | 'build';
 
 /** The exercise a sentence has earned: meaning until passed once, the gap until
- *  passed twice, tiles after that — unless a glue word holds it at the gap. */
+ *  passed twice, tiles after that — unless a glue word holds it at the gap, or
+ *  it is too long to rebuild and has no clause small enough to stand in for it
+ *  (`buildableClause`, which the build screen then asks for instead). */
 export function rungFor(s: Sentence, seen: Map<string, number>, ladder: Ladder = DEFAULT_LADDER): Rung {
   const passes = passesOf(s);
   // A sentence from a unit placement let her skip starts at the gap: she has
@@ -256,6 +354,7 @@ export function rungFor(s: Sentence, seen: Map<string, number>, ladder: Ladder =
   const skipped = ladder.placedThrough > 0 && (s.unit_order ?? Infinity) <= ladder.placedThrough;
   if (passes < ladder.rungGapAt && !skipped) return 'meaning';
   if (passes < ladder.rungBuildAt || hasLockedGlue(s, seen, ladder)) return 'gap';
+  if (tooLongToBuild(s, ladder) && buildableClause(s, s.target_form_id, ladder) === null) return 'gap';
   return 'build';
 }
 
@@ -264,9 +363,11 @@ export const RUNGS: Rung[] = ['meaning', 'gap', 'build'];
 export const atLeast = (rung: Rung, floor: Rung): Rung =>
   RUNGS.indexOf(rung) >= RUNGS.indexOf(floor) ? rung : floor;
 
-/** Lower is easier: length, plus a step for glue she doesn't own yet. */
+/** Lower is easier: length, plus a step for glue she doesn't own yet and one
+ *  per extra clause — a sentence in three pieces is harder than its token count
+ *  lets on, which is how the long ones reached beginners in the first place. */
 const difficulty = (s: Sentence, seen: Map<string, number>, ladder: Ladder = DEFAULT_LADDER) =>
-  s.tokens.length + (hasLockedGlue(s, seen, ladder) ? 2 : 0);
+  s.tokens.length + (hasLockedGlue(s, seen, ladder) ? 2 : 0) + (clauseCountOf(s) - 1);
 
 // Greedy cover under the cap. Each round picks one sentence covering at least
 // one due word still uncovered, and its words leave the pool, so two sentences

@@ -31,8 +31,13 @@ export const SECTION_PATHS = readdirSync(COURSE_DIR)
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 /** A unit summary sits on one line of the path banner. */
 const SUMMARY_MAX = 52;
-/** New forms a teaching lesson holds (learning-engine-spec §5.1). */
-export const FORMS_PER_LESSON = 5;
+/**
+ * New forms a teaching lesson holds (learning-engine-spec §5.1). Three, because
+ * a form costs three screens on the ramp (teach · meaning · gap) and a lesson
+ * runs 12–16 of them (`LESSON_ITEMS` in lessons.mjs): at five the lesson is
+ * twenty-odd screens and stops being one sitting.
+ */
+export const FORMS_PER_LESSON = 3;
 
 /** Teaching lessons for a unit introducing `forms` drillable forms, plus the
  *  review lesson that is the unit's check. */

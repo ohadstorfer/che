@@ -9,6 +9,7 @@ import { buildContent } from '../lib/content.mjs';
 import { ids, uuid5 } from '../lib/ids.mjs';
 import { checkSentence, loadOutline } from '../lib/outline.mjs';
 import { buildIndex, tokenize } from '../lib/tokenize.mjs';
+import { checkShape, clauseCount, clauseOfSurface, clausesOf } from '../../../src/lib/course-rules/shape.ts';
 
 const dir = mkdtempSync(join(tmpdir(), 'che-outline-'));
 function outlineFrom(yaml) {
@@ -76,6 +77,31 @@ test('rejects a word above the unit register', () => {
   const last = { ...outline.units.at(-1), register_max: 'informal' };
   const problems = checkSentence(outline, last, 'Qué quilombo.');
   assert.ok(problems.some((p) => p.includes('lunfardo')), problems.join('\n'));
+});
+
+test('a chain of sentences is rejected, an exchange of two is not', () => {
+  // Three greetings in a trench coat: six words, so the word band passes it,
+  // and six tiles in no marked order once the punctuation comes off.
+  const chain = checkShape('Che, ¿sos vos? ¡Hola! ¿Todo bien?', 3);
+  assert.equal(clauseCount('Che, ¿sos vos? ¡Hola! ¿Todo bien?'), 3);
+  assert.ok(chain.problems.some((p) => p.startsWith('clause.count')), chain.problems.join('\n'));
+  assert.deepEqual(chain.warnings, []);
+
+  // A question and its answer is how people speak, and stays legal.
+  assert.deepEqual(checkShape('Soy Sofi. ¿Y vos?', 2).problems, []);
+  // Three clauses are the reserve of the longest sentences.
+  assert.deepEqual(checkShape('Che, ¿sos vos? ¡Hola! ¿Todo bien?', 4).problems, []);
+  // Over the band is a warning on a sentence worth keeping, never a failure.
+  const long = checkShape('Un café y una medialuna.', 1);
+  assert.deepEqual(long.problems, []);
+  assert.ok(long.warnings.some((w) => w.startsWith('length.band')), long.warnings.join('\n'));
+});
+
+test('clauses are cut after the word that closes them', () => {
+  assert.deepEqual(clausesOf('Che, ¿sos vos? ¡Hola! ¿Todo bien?'), ['Che, ¿sos vos?', '¡Hola!', '¿Todo bien?']);
+  // No final stop, and a comma, still make one clause.
+  assert.deepEqual(clausesOf('Todo bien, che'), ['Todo bien, che']);
+  assert.deepEqual(clauseOfSurface(['Che,', '¿sos', 'vos?', '¡Hola!', '¿Todo bien?']), [0, 0, 0, 1, 2]);
 });
 
 test('tokenizer keeps punctuation on tokens and merges set phrases', () => {

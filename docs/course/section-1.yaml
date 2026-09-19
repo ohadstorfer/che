@@ -251,9 +251,10 @@ units:
       - lemma: "cómo"
         pos: "adv"
         en: "how"
-      - lemma: "qué"
-        pos: "pron"
-        en: "what"
+      # "qué" lives in unit 15 ("¿Qué hacés?"), not here: at this point the
+      # course has no verb for it to question, so every sentence it can appear
+      # in is a bare "¿Qué?" asking for a repeat — which is curt in Buenos
+      # Aires. "¿Cómo?", taught just above, is the neutral way to ask that.
       - lemma: "mucho gusto"
         pos: "phrase"
         en: "nice to meet you"
@@ -516,8 +517,11 @@ units:
         forms:
           - form: "cuántos"
             f: "m.pl"
-          - form: "cuántas"
-            f: "f.pl"
+          # "cuántas" waits for unit 10. Here the only plural noun is "años",
+          # which is masculine, so the feminine form would agree with nothing
+          # and every sentence built on it is elliptical — the judge threw all
+          # twelve out. Unit 10 brings empanadas, facturas, medialunas and
+          # hermanas, and "¿Cuántas empanadas?" is that unit's own question.
       - lemma: "año"
         pos: "noun"
         en: "year"
@@ -624,9 +628,22 @@ units:
             f: "sg"
           - form: "tus"
             f: "pl"
+      # Not "kiosk": the judge threw out all twelve sentences that said it,
+      # because an English speaker hears a newsstand or a mall stand. It joins
+      # cortado, mate and medialuna as a word the course keeps and explains.
       - lemma: "kiosco"
         pos: "noun"
-        en: "kiosk, corner shop"
+        en: "kiosco"
+        note: "the corner shop that sells drinks, sweets and bus cards, often through a window onto the street"
+      # The feminine half of "cuánto", held back from unit 9 (see there): it
+      # needs a feminine plural noun to agree with, and this unit is full of
+      # them.
+      - lemma: "cuánto"
+        pos: "adj"
+        en: "how many, how much"
+        forms:
+          - form: "cuántas"
+            f: "f.pl"
       - lemma: "empanada"
         pos: "noun"
         en: "empanada"

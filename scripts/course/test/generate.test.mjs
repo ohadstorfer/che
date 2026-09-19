@@ -5,8 +5,10 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { checkCandidates, generationPrompt, selectCandidates, styleSpec, targetsFor } from '../lib/generate.mjs';
-import { planLessons } from '../lib/lessons.mjs';
+import { FORMS_PER_LESSON, LESSON_ITEMS, planLessons } from '../lib/lessons.mjs';
 import { loadOutline } from '../lib/outline.mjs';
+
+const RAMP = ['sentence_meaning', 'sentence_gap', 'sentence_build'];
 
 const { outline } = loadOutline();
 const unit = outline.units.find((u) => u.slug === 'hola-che');
@@ -84,4 +86,96 @@ test('the lesson plan teaches every word, ramps meaning → gap → tiles, and e
     assert.ok(own.some((s) => s.mode === 'sentence_build'), 'a build in every lesson');
   }
   assert.deepEqual(warnings, []);
+});
+
+/** Screens a slot stands for: one, unless it stands for several. */
+const screensOf = (own) => own.reduce((n, s) => n + (s.kind === 'review' || s.kind === 'recap' ? (s.review_count ?? 0) : 1), 0);
+
+/** A unit with `count` sentences per word, optionally recorded. */
+const unitSentences = (unit, forms, { per = 3, audio = false } = {}) => {
+  const content = forms.filter((f) => f.unit_id === unit.id && !f.is_glue && f.pos !== 'propn');
+  const earlier = forms.filter((f) => f.unit_order < unit.course_order && !f.is_glue && f.pos !== 'propn');
+  const filler = (i, w) => (earlier.length ? [{ form_ids: [earlier[(i + w) % earlier.length].id] }] : []);
+  return content.flatMap((f, i) =>
+    Array.from({ length: per }, (_, k) => ({
+      id: `${f.id}-${k}`,
+      target_form_id: f.id,
+      difficulty: (k % 4) + 1,
+      audio_path: audio ? `audio/${f.id}-${k}.mp3` : null,
+      tokens: [{ form_ids: [f.id] }, ...Array.from({ length: k }, (_, w) => filler(i, w)).flat()],
+    })),
+  );
+};
+
+test('every lesson runs one sitting — never over 16 screens, and under 12 only when it says why', () => {
+  for (const unit of outline.units.slice(0, 12)) {
+    const sentences = unitSentences(unit, outline.forms, { per: 6 });
+    const { slots, warnings } = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips });
+    const byLesson = new Map();
+    for (const s of slots) byLesson.set(s.lesson_id, [...(byLesson.get(s.lesson_id) ?? []), s]);
+    for (const [id, own] of byLesson) {
+      const screens = screensOf(own);
+      const lesson = unit.lessons.find((l) => l.id === id);
+      const where = `${unit.slug} lesson ${lesson.ordinal}`;
+      assert.ok(screens <= LESSON_ITEMS.max, `${where}: ${screens} screens, over ${LESSON_ITEMS.max}`);
+      if (screens < LESSON_ITEMS.min) {
+        assert.ok(warnings.some((w) => w.startsWith(`${where}:`)), `${where}: ${screens} screens and no warning`);
+      }
+      // However crowded the unit, no lesson teaches more than its share.
+      const teach = own.filter((s) => s.kind === 'teach').length;
+      if (lesson.kind === 'lesson') assert.ok(teach <= FORMS_PER_LESSON + 2, `${where}: ${teach} new words`);
+    }
+  }
+});
+
+test('a thin unit is filled by taking its own sentences a rung higher, not by running short', () => {
+  const unit = outline.units.find((u) => u.course_order > 1);
+  const sentences = unitSentences(unit, outline.forms, { per: 2 });
+  const { slots } = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips });
+  const teachingIds = new Set(unit.lessons.filter((l) => l.kind === 'lesson' || l.kind === 'checkpoint').map((l) => l.id));
+  for (const id of teachingIds) {
+    const own = slots.filter((s) => s.lesson_id === id);
+    if (!own.length) continue;
+    assert.ok(screensOf(own) >= LESSON_ITEMS.min, `${screensOf(own)} screens`);
+    // A sentence repeated inside the lesson always climbs: meaning, then gap, then tiles.
+    const seen = new Map();
+    for (const s of own.filter((x) => x.kind === 'drill' && RAMP.includes(x.mode))) {
+      if (seen.has(s.sentence_id)) assert.ok(RAMP.indexOf(s.mode) > seen.get(s.sentence_id), 'a repeat is a rung up');
+      seen.set(s.sentence_id, RAMP.indexOf(s.mode));
+    }
+  }
+});
+
+test('a unit too thin to fill a lesson says so instead of shipping a short one', () => {
+  const unit = outline.units.find((u) => u.course_order > 1);
+  const sentences = unitSentences(unit, outline.forms, { per: 1 });
+  const { warnings } = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips });
+  assert.ok(warnings.some((w) => /screens, wants/.test(w)), warnings.join('; '));
+});
+
+test('a lesson listens only to what it has already shown, and only where there is a recording', () => {
+  const unit = outline.units.find((u) => u.course_order > 1);
+  const forms = outline.forms;
+  for (const audio of [false, true]) {
+    const sentences = unitSentences(unit, forms, { per: 4, audio });
+    const { slots } = planLessons({ unit, forms, sentences, tips: unit.tips });
+    const listens = slots.filter((s) => s.mode === 'sentence_listen');
+    if (!audio) {
+      assert.equal(listens.length, 0, 'no recordings, no listening screens');
+      continue;
+    }
+    assert.ok(listens.length > 0, 'recordings are heard');
+    for (const l of listens) {
+      const own = slots.filter((s) => s.lesson_id === l.lesson_id);
+      const before = own.slice(0, own.indexOf(l));
+      assert.ok(
+        before.some((s) => s.sentence_id === l.sentence_id && s.mode !== 'sentence_listen'),
+        'the sentence was read before it was heard',
+      );
+      assert.ok(sentences.find((s) => s.id === l.sentence_id).audio_path, 'only a recorded sentence');
+    }
+    for (const id of new Set(listens.map((l) => l.lesson_id))) {
+      assert.ok(listens.filter((l) => l.lesson_id === id).length <= 2, 'at most two a lesson');
+    }
+  }
 });

@@ -6,7 +6,7 @@
 //
 //   npm run course:lessons -- <unit-slug> [--dry-run]
 import { queryLinked } from './lib/db.mjs';
-import { planLessons } from './lib/lessons.mjs';
+import { FORMS_PER_LESSON, LESSON_ITEMS, planLessons } from './lib/lessons.mjs';
 import { sentencesOfUnits, unitFromArgs } from './lib/pipeline.mjs';
 import { q, upsert } from './lib/sql.mjs';
 
@@ -26,15 +26,23 @@ if (!slots.length) {
 }
 
 // The linters look at the proposal the way they look at hand-written lessons.
+// Length is counted in screens, not slots: a review slot stands for several.
 const lint = [];
 const byLesson = new Map();
 for (const s of slots) byLesson.set(s.lesson_id, [...(byLesson.get(s.lesson_id) ?? []), s]);
+const screensOf = (own) => own.reduce((n, s) => n + (s.kind === 'review' || s.kind === 'recap' ? (s.review_count ?? 0) : 1), 0);
 for (const l of unit.lessons) {
   const own = byLesson.get(l.id) ?? [];
   const teach = own.filter((s) => s.kind === 'teach').length;
-  const min = l.ordinal === 1 ? 3 : 4;
-  if (l.kind === 'lesson' && own.length && (teach < min || teach > 6)) lint.push(`lesson ${l.ordinal}: lesson.density — ${teach} new forms (want ${min}–6)`);
-  console.log(`lesson ${l.ordinal} (${l.kind}): ${own.map((s) => s.kind + (s.mode ? `:${s.mode.replace('sentence_', '')}` : '')).join(' · ') || '—'}`);
+  const screens = screensOf(own);
+  if (l.kind === 'lesson' && own.length && teach > FORMS_PER_LESSON) {
+    lint.push(`lesson ${l.ordinal}: lesson.density — ${teach} new forms (the ceiling is ${FORMS_PER_LESSON})`);
+  }
+  if (own.length && (screens < LESSON_ITEMS.min || screens > LESSON_ITEMS.max)) {
+    lint.push(`lesson ${l.ordinal}: lesson.length — ${screens} screens (want ${LESSON_ITEMS.min}–${LESSON_ITEMS.max})`);
+  }
+  const body = own.map((s) => s.kind + (s.mode ? `:${s.mode.replace('sentence_', '')}` : '')).join(' · ') || '—';
+  console.log(`lesson ${l.ordinal} (${l.kind}, ${screens} screens): ${body}`);
 }
 for (const w of [...warnings, ...lint]) console.warn(`warn  ${w}`);
 

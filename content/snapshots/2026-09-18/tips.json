@@ -1,0 +1,426 @@
+[
+ {
+  "body_md": "**Boludo** is common between close friends and an insult to anyone else — understand it, don't use it yet. **Quilombo** means a mess; it's informal, not rude, but keep it out of formal settings.",
+  "id": "01e1a3a8-575e-5121-9fc4-7dd8f47262c1",
+  "status": "draft",
+  "title_en": "Boludo and quilombo",
+  "unit_id": "5df117af-d5e0-5b71-8caa-6806c47bdff1",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "*de + el* always becomes **del**, and *a + el* becomes **al**: *la parada del bondi*, *voy al centro*.",
+  "id": "023d7655-6ede-5117-a717-f98e585b037c",
+  "status": "draft",
+  "title_en": "Del and al",
+  "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "To say who you are, use **soy**: *Soy Sofi.* One word carries \"I am\" — Spanish has no separate word for \"I\" here.",
+  "id": "03c07d66-92a9-54f3-842f-c123a1a62c76",
+  "status": "published",
+  "title_en": "Soy",
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "For more than one person, Argentina uses **ustedes** with the same verb form as *ellos*: *ustedes son*, *ellos son*.",
+  "id": "040623f8-7ca5-5206-8e5c-f178b0d6fbe4",
+  "status": "draft",
+  "title_en": "Ustedes",
+  "unit_id": "3cc8b1a1-6314-5a4f-be82-b713ea584203",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Facturas** are the pastries you buy by the dozen at the bakery — *medialunas* are the best known. Nothing to do with bills.",
+  "id": "0926cfc4-35c9-5520-acc8-b848dc41bdff",
+  "status": "retired",
+  "title_en": "Facturas",
+  "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "Adjectives match their noun: *remera linda*, *zapatillas lindas*. **Re** in front of an adjective means *really*: *re lindo*. And **chico** means *small*.",
+  "id": "14ab3922-a0da-5828-9009-788ce80ae5c3",
+  "status": "draft",
+  "title_en": "Agreement, and re",
+  "unit_id": "13fec277-30b8-5bdb-9718-e682351abfd9",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "*Me levanto, te levantás, se levanta* — the pronoun comes before the verb and matches the person. **Los sábados** means *on Saturdays*.",
+  "id": "178244a5-d8b8-5e7d-a608-d9d95498e537",
+  "status": "draft",
+  "title_en": "Reflexive verbs",
+  "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "The shortest way to order anything: name it and add **por favor**. *Un café, por favor.* *Una medialuna, por favor.* No verb needed.",
+  "id": "18ab5904-7009-5924-be6f-98b6d24ecd73",
+  "status": "published",
+  "title_en": "Un café, por favor",
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Bondi** is the everyday word for the city bus; *colectivo* is the neutral one. The **subte** is the Buenos Aires underground.",
+  "id": "1de88b30-f9bf-5d0a-bcf4-7480ca1d4cc7",
+  "status": "draft",
+  "title_en": "El bondi",
+  "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "Flats are sized in **ambientes** — rooms, not counting the kitchen and bathroom. *Un dos ambientes* has a living room and one bedroom.",
+  "id": "1e446ee3-53a4-5181-a51e-2885d09b86c2",
+  "status": "draft",
+  "title_en": "Dos ambientes",
+  "unit_id": "c7cbf578-23ab-5875-9a1c-8104be80ad3e",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "Use **estar** for how you are right now: *estoy cansado*, *¿estás nerviosa?* The adjective matches the person: *cansado* for a man, *cansada* for a woman.",
+  "id": "23158cf0-d54a-5955-b50d-bd27fbb6c514",
+  "status": "draft",
+  "title_en": "Estar for how you feel",
+  "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Facu** is short for *facultad* — university. For jobs, Spanish drops the article: **Soy profesora**, not *soy una profesora*.",
+  "id": "2375ef12-8a94-5b13-ba9c-dfbfe8356608",
+  "status": "draft",
+  "title_en": "Facu, and jobs without \"a\"",
+  "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "The verb already says who: *soy* is only ever \"I am\", *sos* only \"you are\". So **Soy de acá** and *Yo soy de acá* are both right, and the short one is what people say.",
+  "id": "2716df1c-2df3-5169-b0dc-9fd53d8444b4",
+  "status": "published",
+  "title_en": "You can drop the pronoun",
+  "unit_id": "481ae401-6c6e-53d7-9683-853d0cbed672",
+  "updated_at": "2026-09-18 12:13:13.419253+00"
+ },
+ {
+  "body_md": "Spanish says you *have* years: **Tengo veinte años** — I'm twenty. *Tenés* is the vos form, *tiene* is for him or her.",
+  "id": "273647e4-003f-5e11-a1ef-b6c77da3280a",
+  "status": "published",
+  "title_en": "You have your age",
+  "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
+  "updated_at": "2026-09-18 13:32:13.366839+00"
+ },
+ {
+  "body_md": "**Boludo** is common between close friends and an insult to anyone else — understand it, don't use it yet. **Quilombo** means a mess; it's informal, not rude, but keep it out of formal settings.",
+  "id": "33995968-a41a-5cea-9fd0-967121c245b7",
+  "status": "retired",
+  "title_en": "Boludo and quilombo",
+  "unit_id": "185a79c4-daa4-5354-840f-37d36d8a27eb",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "Spanish says you *call yourself*: **me llamo Sofi** — my name is Sofi. Asking someone else: **¿cómo te llamás?**",
+  "id": "48324a75-b349-562d-93c8-7f6374678d29",
+  "status": "published",
+  "title_en": "Me llamo, te llamás",
+  "unit_id": "d35a777a-0a33-5ede-8fb9-39d0107d41f6",
+  "updated_at": "2026-09-18 11:58:56.529834+00"
+ },
+ {
+  "body_md": "**Ir a** + infinitive talks about plans: *Vamos a hacer un asado.* **La semana que viene** is *next week*.",
+  "id": "54719e83-d9d7-5d73-98e3-8ba760627cc8",
+  "status": "draft",
+  "title_en": "Going to",
+  "unit_id": "5df117af-d5e0-5b71-8caa-6806c47bdff1",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "Mate goes around the circle and always comes back to whoever is serving it. Saying **gracias** means *I'm done* — only say it when you don't want another round.",
+  "id": "592c7d6c-7823-5de7-b40b-777b83fe7257",
+  "status": "retired",
+  "title_en": "Sharing mate",
+  "unit_id": "185a79c4-daa4-5354-840f-37d36d8a27eb",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "In Argentina the waiter is **el mozo** (or *la moza*). When you're done, ask for **la cuenta**. A **cortado** is an espresso with a dash of milk.",
+  "id": "5accb3e5-9f5d-571b-b159-856ad4feb161",
+  "status": "draft",
+  "title_en": "El mozo",
+  "unit_id": "a2eec2e1-5a4c-5372-a1e8-7ac3076576e6",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "Someone from the city of Buenos Aires is **porteño** or **porteña** — from *puerto*, the port. People from the rest of the country are not.",
+  "id": "5ee9b5a6-665f-5a3d-95f7-59b3e29898c9",
+  "status": "published",
+  "title_en": "Porteño",
+  "unit_id": "70dda450-3825-5ea7-88fd-296775bc426c",
+  "updated_at": "2026-09-18 13:16:05.586045+00"
+ },
+ {
+  "body_md": "*Querer* and *poder* change their stem in most forms (*quiero*, *puede*) — but not with vos: **querés**, **podés**. *Ir* is fully irregular: *voy, vas, va, vamos, van*.",
+  "id": "60a0e23a-105b-5cb4-9050-8c72b6869833",
+  "status": "draft",
+  "title_en": "No stem change with vos",
+  "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "Vos keeps the vowel of the infinitive and stresses it: *comer* → **comés**, *vivir* → **vivís**, *leer* → **leés**.",
+  "id": "64263c49-9bbb-598d-b1cd-cbef6fb9640b",
+  "status": "draft",
+  "title_en": "-er and -ir verbs with vos",
+  "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "The easy way to order is to ask the waiter to bring it: **¿Me traés un café?** — literally \"do you bring me a coffee?\". *Quiero un café* works too. Add **por favor**.",
+  "id": "6c6949b3-904f-59fe-8a19-085c5f916515",
+  "status": "draft",
+  "title_en": "¿Me traés…?",
+  "unit_id": "a2eec2e1-5a4c-5372-a1e8-7ac3076576e6",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Estoy laburando** — I'm working (right now). In Argentina, *estoy llegando* can mean you're still ten minutes away.",
+  "id": "6d9e0781-e5f4-5a23-9b82-dfb38c1f8d81",
+  "status": "retired",
+  "title_en": "Right now",
+  "unit_id": "79976171-5e4a-5208-ae57-761427a58f39",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "*de + el* always becomes **del**, and *a + el* becomes **al**: *la parada del bondi*, *voy al centro*.",
+  "id": "73a403e3-8c8a-5126-9037-fa0c23bd10b2",
+  "status": "retired",
+  "title_en": "Del and al",
+  "unit_id": "28520fe0-1a64-5b4a-810c-da5dfe7ae28c",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Facturas** are the pastries you buy by the dozen at the bakery — *medialunas* are the best known. Nothing to do with bills.",
+  "id": "7d00df14-5cdf-59b1-9f3d-dc74b8626908",
+  "status": "published",
+  "title_en": "Facturas",
+  "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "A **kiosco** is the corner shop that sells drinks, sweets and bus cards, often through a window onto the street. Many never close.",
+  "id": "81f0edea-517c-5fc8-a10c-abf8f72ba4fa",
+  "status": "published",
+  "title_en": "El kiosco",
+  "unit_id": "f1fa7454-72a3-546d-8f72-4aab149bbbbe",
+  "updated_at": "2026-09-18 14:14:36.377978+00"
+ },
+ {
+  "body_md": "Add **-s** after a vowel (*medialuna → medialunas*) and **-es** after a consonant. The word for \"a\" disappears: *una empanada*, but *dos empanadas*.",
+  "id": "82c92152-1296-5058-b7e1-6deb2183513e",
+  "status": "published",
+  "title_en": "More than one",
+  "unit_id": "f1fa7454-72a3-546d-8f72-4aab149bbbbe",
+  "updated_at": "2026-09-18 14:14:36.377978+00"
+ },
+ {
+  "body_md": "One form covers both: **él es** and **ella es**. It also works for a name: *Juan es de Rosario.*",
+  "id": "83c8a556-cf91-503a-a643-c7ce326fcbab",
+  "status": "published",
+  "title_en": "Es",
+  "unit_id": "481ae401-6c6e-53d7-9683-853d0cbed672",
+  "updated_at": "2026-09-18 12:13:13.419253+00"
+ },
+ {
+  "body_md": "**Che** is how people in Buenos Aires get someone's attention — like \"hey\" or \"mate\". It's friendly, never rude.",
+  "id": "8b938cde-ecea-5e1b-bd22-3219656dc110",
+  "status": "published",
+  "title_en": "Che",
+  "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Ir a** + infinitive talks about plans: *Vamos a hacer un asado.* **La semana que viene** is *next week*.",
+  "id": "8bf89cd6-0d85-5ff0-8b2f-53dfb2eb61d1",
+  "status": "retired",
+  "title_en": "Going to",
+  "unit_id": "7698a287-39c7-5d5e-8c48-7068f3d1927f",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "*Es la una* (one o'clock), but *son las dos*, *son las siete*. Add **y media** for half past and **y cuarto** for quarter past. *A la noche* means at night.",
+  "id": "97b6abce-e595-58cb-a895-30319da57ada",
+  "status": "draft",
+  "title_en": "Telling the time",
+  "unit_id": "61a56ded-546a-5ad6-a8ac-310375bed4ac",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "Regular **-ar** verbs: *laburo, laburás, labura, laburamos, laburan*. The vos form stresses the last syllable and carries an accent: *hablás*, *estudiás*.",
+  "id": "9b8de7a7-8ce6-5500-a8ab-a7d35c9c940e",
+  "status": "draft",
+  "title_en": "-ar verbs with vos",
+  "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Hay** introduces something: *Hay un kiosco* — there's a kiosco. **Está** says where something you already know about is: *El kiosco está en la esquina.*",
+  "id": "a428b131-df79-589d-a5f0-80eaf97eb38f",
+  "status": "draft",
+  "title_en": "Hay or está",
+  "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Hay** introduces something: *Hay un kiosco* — there's a kiosk. **Está** says where something you already know about is: *El kiosco está en la esquina.*",
+  "id": "a659140e-fb28-5706-958c-24901e2b056d",
+  "status": "retired",
+  "title_en": "Hay or está",
+  "unit_id": "28520fe0-1a64-5b4a-810c-da5dfe7ae28c",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "Use **estar** for where someone or something is: *¿Dónde estás?* *El kiosco está acá.* It is a different verb from *ser*, which says what something is.",
+  "id": "ac35e5d9-477d-5c6b-8ab2-e9b20516f7f6",
+  "status": "draft",
+  "title_en": "Estar for where things are",
+  "unit_id": "71481540-7f7c-5939-9d96-ee76d80128b9",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Medio** in front of an adjective softens it — *estoy medio cansado*, I'm kind of tired. It never changes: *medio cansada* too.",
+  "id": "bdbf4ab9-d5f6-592a-8ac8-00a6005e0f02",
+  "status": "draft",
+  "title_en": "Medio",
+  "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "Agreeing with something positive: **A mí también.** Agreeing with something negative: **A mí tampoco.**",
+  "id": "c95952cc-4578-5bd2-a762-e45f3792a19a",
+  "status": "draft",
+  "title_en": "Also and neither",
+  "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Hace calor**, **hace frío** — it's hot, it's cold. Seasons are flipped: *el verano* runs from December to February.",
+  "id": "d48b1ff9-881c-5010-bbf2-fd3a16bc7729",
+  "status": "draft",
+  "title_en": "Weather with hacer",
+  "unit_id": "2c5ceb94-a924-5797-9279-29476c698177",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Tener que** + infinitive says what you have to do: *Tengo que laburar*, *¿tenés que estudiar?*",
+  "id": "d562d75d-012b-5f9d-95e6-ea87c0d54197",
+  "status": "draft",
+  "title_en": "Tener que",
+  "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Estoy laburando** — I'm working (right now). In Argentina, *estoy llegando* can mean you're still ten minutes away.",
+  "id": "d5a4acc0-9d64-5970-8f68-5d4ed9936d96",
+  "status": "draft",
+  "title_en": "Right now",
+  "unit_id": "5df117af-d5e0-5b71-8caa-6806c47bdff1",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "In Argentina the everyday word for \"you\" is **vos**, and it has its own verb forms: *vos sos* (you are). You'll hear *tú* in other countries. This course never uses it.",
+  "id": "d6547b7a-4812-57d4-9cbd-00e7db9fd94f",
+  "status": "published",
+  "title_en": "Vos, not tú",
+  "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "updated_at": "2026-09-17 11:50:41.747624+00"
+ },
+ {
+  "body_md": "To say where someone is from, put **de** after the verb: *Soy de Rosario.* *¿De dónde sos?*",
+  "id": "d7750d49-3d52-53be-8430-e5de05c8a3bc",
+  "status": "published",
+  "title_en": "Ser de",
+  "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "updated_at": "2026-09-18 12:08:20.477971+00"
+ },
+ {
+  "body_md": "Drop the final *-r* and stress the last vowel: *mirar* → **mirá**, *venir* → **vení**. Pronouns stick to the end: **sentate**, **decime**, **esperame**.",
+  "id": "d9d31823-d8d6-55a0-8dec-8d39548ee263",
+  "status": "draft",
+  "title_en": "Vos commands",
+  "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Me gusta el mate** means \"mate pleases me\". The verb matches the thing you like: *me gusta el café*, but *me gustan las facturas*.",
+  "id": "dee7197c-bac0-54b1-aad6-dd4fd838f50a",
+  "status": "draft",
+  "title_en": "Gustar works backwards",
+  "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "The word for \"the\" matches its noun: **el** kiosco, **la** esquina, **los** kioscos, **las** esquinas.",
+  "id": "e70098bf-8ca4-58e1-95ea-97fbd9aba81f",
+  "status": "draft",
+  "title_en": "El, la, los, las",
+  "unit_id": "71481540-7f7c-5939-9d96-ee76d80128b9",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**al lado de** (next to), **enfrente de** (across from), **entre** (between). Remember *de + el* = *del*: *al lado del kiosco*.",
+  "id": "e9b5fcfc-ba53-5a53-b7c5-cfbebadbf0e4",
+  "status": "draft",
+  "title_en": "Where things are",
+  "unit_id": "be613042-6935-5185-bf3a-fa4dc33eca15",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**Laburar** is the everyday Argentine word for *to work* — from the Italian *lavorare*. *Trabajar* is understood everywhere and fine too.",
+  "id": "f037e9d0-eab0-5582-a090-a30cc0c7bd0f",
+  "status": "draft",
+  "title_en": "Laburar",
+  "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "These words change with the person: **argentino** for a man, **argentina** for a woman. Same for *uruguayo / uruguaya*, *chileno / chilena*.",
+  "id": "f62f34aa-e166-53b8-a8ce-cb48487e0e8c",
+  "status": "published",
+  "title_en": "Argentino or argentina",
+  "unit_id": "70dda450-3825-5ea7-88fd-296775bc426c",
+  "updated_at": "2026-09-18 13:16:05.586045+00"
+ },
+ {
+  "body_md": "**Mi viejo** and **mi vieja** — literally \"my old one\" — are affectionate Argentine words for *my dad* and *my mum*.",
+  "id": "f64b190f-60eb-5b5b-8017-03d0b27f48d1",
+  "status": "published",
+  "title_en": "Mis viejos",
+  "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
+  "updated_at": "2026-09-18 13:23:35.932625+00"
+ },
+ {
+  "body_md": "A word ending in **-o** is usually masculine and takes *un*: *un hermano*. One ending in **-a** is usually feminine and takes *una*: *una hermana*.",
+  "id": "f99e22db-f796-5bbb-a161-afec37a68bc3",
+  "status": "published",
+  "title_en": "Words are masculine or feminine",
+  "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
+  "updated_at": "2026-09-18 13:23:35.932625+00"
+ },
+ {
+  "body_md": "Argentines say **depto** for an apartment, **pieza** for a bedroom and **el living** for the living room. The fridge is **la heladera**.",
+  "id": "f9a1e455-91a4-5b1f-89f4-59d39156345f",
+  "status": "draft",
+  "title_en": "Depto, pieza, living",
+  "unit_id": "c7cbf578-23ab-5875-9a1c-8104be80ad3e",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "body_md": "**¿Cuánto sale?** is the everyday Argentine way to ask a price — *¿cuánto cuesta?* works too. **Mangos** is slang for pesos.",
+  "id": "fe95866f-3747-5f76-84e6-70b1453b221c",
+  "status": "draft",
+  "title_en": "¿Cuánto sale?",
+  "unit_id": "d8cb78a0-5a7d-5c09-9f7f-9e905e0d2e59",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ }
+]

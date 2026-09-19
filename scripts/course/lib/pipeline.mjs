@@ -20,7 +20,7 @@ export function unitFromArgs(argv = process.argv.slice(2)) {
 
 export const sentencesOfUnits = (unitIds, statuses) =>
   queryLinked(
-    `select id, unit_id, es, en, en_alt, es_alt, tokens, target_form_id, kind, difficulty, source, status
+    `select id, unit_id, es, en, en_alt, es_alt, tokens, target_form_id, kind, difficulty, source, status, audio_path
      from public.sentences where unit_id in (${unitIds.map(q).join(', ')})
      ${statuses ? `and status in (${statuses.map(q).join(', ')})` : ''}`,
   );

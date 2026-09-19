@@ -55,6 +55,7 @@ export interface WordSentence {
   difficulty: number;
   source: string;
   audio_path: string | null;
+  voice_id: string | null;
   status: ContentStatus;
   problems: string[];
 }
@@ -349,7 +350,10 @@ export function planSentence(data: WordsData, sentence: WordSentence | null, edi
     kind: sentence?.kind ?? (review.tokens.length > 1 ? 'sentence' : 'word'),
     difficulty: sentence?.difficulty ?? 1,
     source: sentence?.source ?? 'human',
+    // Edit the Spanish and the recording no longer says it — the speaker goes
+    // with it, so the row never claims a voice for a clip that isn't there.
     audio_path: esChanged ? null : (sentence?.audio_path ?? null),
+    voice_id: esChanged ? null : (sentence?.voice_id ?? null),
     status,
     problems,
   };

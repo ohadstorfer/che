@@ -8,7 +8,10 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 
 import { queryLinked } from './lib/db.mjs';
 
+// `voices` comes before the tables that point at it, so a restore can write
+// the rows in this order and never reference a speaker that isn't there yet.
 export const SNAPSHOT_TABLES = [
+  'voices',
   'sections', 'units', 'lessons', 'tips', 'lemmas', 'forms', 'sentences', 'lesson_slots', 'story_lines', 'unit_phrases',
 ];
 const date = new Date().toISOString().slice(0, 10);

@@ -19,14 +19,17 @@ import {
   type Ladder,
   OFFSET_WINDOW,
   atLeast,
+  buildableClause,
   glueSeen,
   hasLockedGlue,
   ladderFor,
   ladderOffset,
+  passedScreens,
   loadSentences,
   pickReviewSentences,
   rungFor,
   sentenceCap,
+  tooLongToBuild,
 } from './sentences';
 import { supabase } from './supabase';
 import type { ExerciseMode, Form, FormState, Sentence, Tip } from './types';
@@ -44,6 +47,9 @@ export interface SessionItem {
   groupStates?: FormState[];
   /** Set on sentence exercises: the sentence being shown. */
   sentence?: Sentence;
+  /** Set on a build too long to ask for whole: the one clause she rebuilds, by
+   *  index. The rest of the sentence is shown around it, already written. */
+  clause?: number;
   /** Set on the exercise a new form is met in — the intro screen it replaces. */
   introduces?: Form;
   /** Drilled and logged, but never scheduled: padding, or a word a sentence
@@ -157,6 +163,7 @@ export async function loadLearner(userId: string): Promise<LearnerData> {
   const ladder = ladderFor(ladderOffset(scores), {
     placedThrough: (profile as { placed_through?: number } | null)?.placed_through ?? 0,
     glue: forms.filter((f) => f.is_glue),
+    passed: passedScreens(sentences),
   });
   return {
     forms,
@@ -330,12 +337,21 @@ export function sentenceItem(
     if (state) groupStates.push(state);
   }
   if (!group.some((f) => f.id === target.id)) group.push(target);
+  // A build of a sentence too long to ask for whole becomes a build of the one
+  // clause the drilled word is in, with the rest shown around it. Every route to
+  // a sentence screen comes through here, so the decision is made once.
+  const ladder = data.ladder ?? DEFAULT_LADDER;
+  const clause =
+    mode === 'sentence_build' && tooLongToBuild(sentence, ladder)
+      ? (buildableClause(sentence, target.id, ladder) ?? undefined)
+      : undefined;
   return {
     form: target,
     state: data.stateByForm.get(target.id) ?? null,
     mode,
     direction: 'en_to_es',
     sentence,
+    clause,
     group,
     groupStates,
     introduces,
@@ -343,9 +359,17 @@ export function sentenceItem(
 }
 
 /** The exercise a sentence gets at a rung. */
-export function modeForRung(rung: ReturnType<typeof rungFor>, sentence: Sentence): ExerciseMode {
+export function modeForRung(
+  rung: ReturnType<typeof rungFor>,
+  sentence: Sentence,
+  ladder: Ladder = DEFAULT_LADDER,
+): ExerciseMode {
   if (rung === 'meaning') return 'sentence_meaning';
   if (rung === 'gap') return 'sentence_gap';
+  // Listening asks for the whole sentence at once, so it can't frame a build of
+  // one clause: a sentence that long is rebuilt on the page, with the rest of it
+  // in view.
+  if (tooLongToBuild(sentence, ladder)) return 'sentence_build';
   return sentence.audio_path && Math.random() < 0.5 ? 'sentence_listen' : 'sentence_build';
 }
 
@@ -411,7 +435,7 @@ export async function buildSession(userId: string): Promise<SessionData> {
       const gapForm = dueIds.has(target.id)
         ? target
         : (sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && dueIds.has(f.id)) ?? target);
-      const mode = modeForRung(rungFor(sentence, seen, ladder), sentence);
+      const mode = modeForRung(rungFor(sentence, seen, ladder), sentence, ladder);
       if (mode === 'sentence_gap') covered.add(gapForm.id);
       if (mode === 'sentence_build' || mode === 'sentence_listen') for (const id of sentence.form_ids) covered.add(id);
       return [[sentenceItem(data, sentence, mode, gapForm)]];
@@ -589,8 +613,17 @@ export function promotedMode(
         ? 'sentence_gap'
         : null;
     case 'sentence_gap':
-      return item.sentence && !hasLockedGlue(item.sentence, seen, ladder) ? 'sentence_build' : null;
+      if (!item.sentence || hasLockedGlue(item.sentence, seen, ladder)) return null;
+      // A sentence too long to rebuild is promoted only if one of its clauses
+      // can stand in for it; otherwise the gap is already the right step.
+      if (tooLongToBuild(item.sentence, ladder) && buildableClause(item.sentence, item.form.id, ladder) === null) {
+        return null;
+      }
+      return 'sentence_build';
     case 'sentence_build':
+      // A build of one clause has nowhere above it: the audio says the whole
+      // sentence, which is the step she was spared.
+      if (item.clause != null) return null;
       return item.sentence?.audio_path ? 'sentence_listen' : null;
     case 'multiple_choice':
     case 'true_false':
@@ -620,7 +653,12 @@ export function promoteTail<T extends Promotable>(
     promoted += 1;
     const direction: SessionItem['direction'] =
       mode === 'word_build' || mode === 'typing' ? 'en_to_es' : item.direction;
-    return { ...item, mode, direction, promoted: true };
+    // Promoting into a build inherits the same clause ceiling a planned one gets.
+    const clause =
+      mode === 'sentence_build' && item.sentence && tooLongToBuild(item.sentence, ladder)
+        ? (buildableClause(item.sentence, item.form.id, ladder) ?? undefined)
+        : undefined;
+    return { ...item, mode, direction, clause, promoted: true };
   });
   return { queue: next, promoted };
 }
@@ -701,7 +739,7 @@ export async function buildMistakesSession(userId: string): Promise<SessionData>
   })) {
     const target = sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && wanted.has(f.id) && !covered.has(f.id));
     if (!target) continue;
-    const mode = modeForRung(atLeast(rungFor(sentence, seen, ladder), 'gap'), sentence);
+    const mode = modeForRung(atLeast(rungFor(sentence, seen, ladder), 'gap'), sentence, ladder);
     if (mode === 'sentence_gap') covered.add(target.id);
     else for (const id of sentence.form_ids) if (wanted.has(id)) covered.add(id);
     items.push(sentenceItem(data, sentence, mode, target));

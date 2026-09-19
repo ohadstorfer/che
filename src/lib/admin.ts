@@ -183,6 +183,7 @@ export interface SentenceRow {
   difficulty: number;
   source: string;
   audio_path: string | null;
+  voice_id: string | null;
   status: ContentStatus;
 }
 

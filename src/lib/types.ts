@@ -124,6 +124,9 @@ export interface Form {
   is_glue: boolean;
   register: string;
   audio_path: string | null;
+  /** Who says `audio_path` — a row of `voices`. Null where there is no
+   *  recording. What decides which figure may speak the line on screen. */
+  voice_id: string | null;
   /** Other spellings accepted when the form is typed on its own. */
   alt?: string[];
   /** Other answers accepted when the form is typed for one of its meanings
@@ -209,6 +212,8 @@ export interface Sentence {
   /** Other Spanish accepted when the sentence is built from its English. */
   es_alt: string[];
   audio_path: string | null;
+  /** Who says `audio_path` — a row of `voices`. */
+  voice_id: string | null;
   /** The form this sentence exists to teach or drill. */
   target_form_id: string;
   difficulty: number;

@@ -60,6 +60,7 @@ export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE, p
       unit_id: f.unit_id,
       position: f.position,
       audio_path: null,
+      voice_id: null,
       status: status(f.unit_order),
     })),
     sentences: sentences.map((s) => ({ ...s, status: status(unitOrderById.get(s.unit_id)) })),
@@ -89,6 +90,7 @@ export function buildRows({ publishThrough = Infinity, fixture = DEMO_FIXTURE, p
       is_glue: f.is_glue,
       register: f.register,
       audio_path: null,
+      voice_id: null,
       status: status(f.unit_order),
     };
   });

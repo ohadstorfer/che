@@ -2,13 +2,21 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import {
+  BUILD_TILES_MAX,
+  BUILD_TILES_MIN,
   DEFAULT_LADDER,
+  buildTileCeiling,
+  buildTilesOf,
+  buildableClause,
+  clauseCountOf,
   hasLockedGlue,
   ladderFor,
   ladderOffset,
   rungFor,
   sentenceCap,
+  tooLongToBuild,
 } from '../../../src/lib/sentences.ts';
+import { clauseOf } from '../../../src/lib/answers.ts';
 import { exercisesFor } from '../../../src/lib/session.ts';
 import { initialEase } from '../../../src/lib/srs.ts';
 import { forms, formOf, learner, state, unitBySlug } from './fixture.mjs';
@@ -64,4 +72,73 @@ test('the ease prior only lowers gerunds, imperatives and irregulars, and only w
   assert.equal(initialEase({ features: { person: 1 } }, true), 2.5);
   assert.equal(initialEase({ features: { verb_form: 'ger' } }, false), 2.5);
   assert.ok(unitBySlug('hola-che'));
+});
+
+// --- how much a build may ask for ------------------------------------------
+
+/** A sentence with the tokens spelled out, past the rung where tiles begin. */
+const built = (es) => ({
+  id: 'x',
+  unit_id: 'u',
+  unit_order: 1,
+  es,
+  en: '',
+  en_alt: [],
+  es_alt: [],
+  audio_path: null,
+  voice_id: null,
+  target_form_id: 'f0',
+  difficulty: 3,
+  tokens: es.split(/\s+/).map((surface, i) => ({ surface, form_ids: [`f${i}`] })),
+  form_ids: es.split(/\s+/).map((_, i) => `f${i}`),
+  shown: { shown_count: 9, correct_count: 9, last_shown_at: null },
+});
+
+test('the tile ceiling grows with what she has already rebuilt', () => {
+  assert.equal(buildTileCeiling(0), BUILD_TILES_MIN);
+  assert.equal(buildTileCeiling(20), BUILD_TILES_MIN + 2);
+  assert.equal(buildTileCeiling(20, 1), BUILD_TILES_MIN + 3, 'a good run adds a tile');
+  assert.equal(buildTileCeiling(20, -1), BUILD_TILES_MIN + 1, 'a bad one takes it away');
+  assert.equal(buildTileCeiling(9999), BUILD_TILES_MAX, 'and it stops somewhere');
+});
+
+test('a sentence in three pieces is never rebuilt whole, however far along she is', () => {
+  const chain = built('Che, ¿sos vos? ¡Hola! ¿Todo bien?');
+  const far = ladderFor(0, { passed: 9999 });
+  assert.equal(buildTilesOf(chain), 6);
+  assert.equal(clauseCountOf(chain), 3);
+  assert.ok(!tooLongToBuild(built('¿Sos vos?'), far));
+  assert.ok(tooLongToBuild(chain, far), 'six tiles are within the ceiling; three clauses never are');
+});
+
+test('over the ceiling, the build asks for the clause the drilled word is in', () => {
+  const chain = built('Che, ¿sos vos? ¡Hola! ¿Todo bien?');
+  const start = ladderFor(0, { passed: 0 });
+  // "vos" is the third token, so the first clause — "Che, ¿sos vos?".
+  assert.equal(buildableClause(chain, 'f2', start), 0);
+  assert.equal(buildableClause(chain, 'f3', start), 1, 'and "¡Hola!" is the second');
+  assert.equal(rungFor(chain, new Map(), start), 'build', 'a clause it can ask for keeps it on tiles');
+});
+
+test('a long sentence with nothing smaller to ask for stays at the gap', () => {
+  const long = built('Yo soy de Buenos Aires y ella no es de acá');
+  const start = ladderFor(0, { passed: 0 });
+  assert.equal(clauseCountOf(long), 1);
+  assert.ok(tooLongToBuild(long, start));
+  assert.equal(buildableClause(long, 'f0', start), null);
+  assert.equal(rungFor(long, new Map(), start), 'gap');
+  // Far enough along, the whole thing is hers to build.
+  assert.equal(rungFor(long, new Map(), ladderFor(0, { passed: 9999 })), 'build');
+});
+
+test('a clause narrows the sentence it is cut from', () => {
+  const chain = built('Che, ¿sos vos? ¡Hola! ¿Todo bien?');
+  const first = clauseOf(chain, 0);
+  assert.equal(first.es, 'Che, ¿sos vos?');
+  assert.deepEqual(first.tokens.map((t) => t.surface), ['Che,', '¿sos', 'vos?']);
+  assert.deepEqual(first.form_ids, ['f0', 'f1', 'f2']);
+  assert.equal(clauseOf(chain, 2).es, '¿Todo bien?');
+  // An alternative that cuts the same way lends its matching piece.
+  const alt = { ...chain, es_alt: ['Che, ¿vos sos? ¡Hola! ¿Todo bien?', '¿Sos vos?'] };
+  assert.deepEqual(clauseOf(alt, 0).es_alt, ['Che, ¿vos sos?']);
 });

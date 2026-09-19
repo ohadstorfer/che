@@ -4,7 +4,7 @@
 // they are. Asks for --yes, since it overwrites whatever reviewers changed since.
 //
 //   npm run course:restore -- <date> --yes
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 
 import { queryLinked } from './lib/db.mjs';
 import { jsonb, textArray, upsert } from './lib/sql.mjs';
@@ -15,6 +15,8 @@ if (!date || !process.argv.includes('--yes')) {
   process.exit(1);
 }
 const ORDER = [
+  // Speakers first: forms and sentences reference them.
+  ['voices', 'id'],
   ['sections', 'id'], ['units', 'id'], ['lessons', 'id'], ['tips', 'id'], ['lemmas', 'id'], ['forms', 'id'],
   ['sentences', 'id'], ['lesson_slots', 'id'], ['story_lines', 'id'], ['unit_phrases', 'unit_id, ordinal'],
 ];
@@ -24,7 +26,14 @@ const SKIP = new Set(['updated_at', 'created_at']);
 
 let sql = 'update public.units set ordinal = ordinal + 1000, course_order = course_order + 1000;\nupdate public.lessons set ordinal = -ordinal where ordinal > 0;\n';
 for (const [table, conflict] of ORDER) {
-  const rows = JSON.parse(readFileSync(new URL(`../../content/snapshots/${date}/${table}.json`, import.meta.url), 'utf8'));
+  // A snapshot taken before a table existed simply has no file for it; the
+  // rest of the restore is still good.
+  const file = new URL(`../../content/snapshots/${date}/${table}.json`, import.meta.url);
+  if (!existsSync(file)) {
+    console.log(`${table.padEnd(14)} — not in this snapshot`);
+    continue;
+  }
+  const rows = JSON.parse(readFileSync(file, 'utf8'));
   if (!rows.length) continue;
   const columns = Object.keys(rows[0]).filter((c) => !SKIP.has(c));
   const cast = Object.fromEntries(columns.flatMap((c) => (ARRAYS.has(c) ? [[c, textArray]] : JSON_COLS.has(c) ? [[c, (v) => (v == null ? 'null' : jsonb(v))]] : [])));

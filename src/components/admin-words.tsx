@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { Muted, RowLink, Section, SmallButton, StatusPill, adminStyles } from '@/components/admin';
+import { Listen, Muted, RowLink, Section, SmallButton, StatusPill, adminStyles } from '@/components/admin';
 import { Exercise } from '@/components/exercises';
 import { lastBatchFor, undoBatch } from '@/lib/admin';
 import {
@@ -489,7 +489,9 @@ export function WordDetail({ data, formId, onChanged }: { data: WordsData; formI
             onPress={saveMeaning}
           />
         </View>
-        <Muted>Audio: {form.audio_path ? 'recorded' : 'no audio'}</Muted>
+        <View style={adminStyles.wrap}>
+          <Listen path={form.audio_path} voice={form.voice_id} />
+        </View>
       </Section>
 
       <Section title="Grammar">
@@ -766,6 +768,14 @@ function SentenceEditor({
   return (
     <View style={styles.editor}>
       <Field label="Spanish" value={draft.es} onChange={(es) => setDraft({ ...draft, es })} />
+      {sentence ? (
+        <View style={adminStyles.wrap}>
+          <Listen path={sentence.audio_path} voice={sentence.voice_id} />
+          {/* The clip says the sentence as saved. Saving an edited Spanish drops
+              it (planSentence), so this is the last chance to hear the old one. */}
+          {sentence.audio_path && textChanged ? <Muted>of the saved text</Muted> : null}
+        </View>
+      ) : null}
       <Field label="English" value={draft.en} onChange={(en) => setDraft({ ...draft, en })} />
       <Field label="Other English (one per line)" value={draft.en_alt} onChange={(en_alt) => setDraft({ ...draft, en_alt })} multiline />
       <Field label="Other Spanish (one per line; the rules add pronoun and che variants)" value={draft.es_alt} onChange={(es_alt) => setDraft({ ...draft, es_alt })} multiline />

@@ -8,7 +8,9 @@
 // Exits non-zero on any error, so it can gate the seed script and CI.
 
 import { checkFormEntry, glossRepeats, meaningOverlaps } from '../../src/lib/course-rules/check.ts';
+import { checkShape } from '../../src/lib/course-rules/shape.ts';
 import { loadOutline } from './lib/outline.mjs';
+import { sentencesOfUnits } from './lib/pipeline.mjs';
 import { loadOutlineFromDb } from './lib/vocabulary.mjs';
 
 const fromYaml = process.argv.includes('--yaml');
@@ -28,6 +30,19 @@ if (fromYaml) {
   }
   for (const { a, b, shared } of meaningOverlaps(outline)) {
     warnings.push(`"${a.form}" (unit ${a.unit_order}) and "${b.form}" (unit ${b.unit_order}) share the meaning "${shared.join(', ')}"`);
+  }
+  // The shape rules over everything already live. `course:lint` only ever sees
+  // drafts, so without this sweep a sentence approved before a rule existed
+  // would never meet it — which is exactly how a three-clause greeting chain sat
+  // in unit 3.
+  const unitOf = new Map(outline.units.map((u) => [u.id, u]));
+  for (const row of sentencesOfUnits([...unitOf.keys()])) {
+    if (row.status === 'retired') continue;
+    const unit = unitOf.get(row.unit_id);
+    const where = `unit ${unit?.ordinal ?? '?'} ${unit?.slug ?? ''} · ${row.status} · "${row.es}"`;
+    const shape = checkShape(row.es, row.difficulty ?? 1);
+    for (const p of shape.problems) errors.push(`${where}: ${p}`);
+    for (const w of shape.warnings) warnings.push(`${where}: ${w}`);
   }
 }
 

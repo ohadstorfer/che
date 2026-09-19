@@ -7,6 +7,7 @@ import { generateVariants, uncoveredTokens } from './accept.mjs';
 import { ids } from './ids.mjs';
 import { checkSentence, availableForms } from './outline.mjs';
 import { bare, fold } from './rules.mjs';
+import { checkShape } from '../../../src/lib/course-rules/shape.ts';
 import { buildIndex, tokenize } from './tokenize.mjs';
 
 const SENTENCE_MODES = ['sentence_intro', 'sentence_meaning', 'sentence_gap', 'sentence_build', 'sentence_listen'];
@@ -64,6 +65,11 @@ export function buildContent(outline, content, { source = 'human', status = 'dra
 
     const addSentence = (key, s, where, { kind, autoTarget = false } = {}) => {
       for (const problem of checkSentence(outline, unit, s.es)) errors.push(`${where} "${s.es}": ${problem}`);
+      // How long it is, and how many sentences it really is — both read off the
+      // difficulty the author claimed, so they live apart from checkSentence.
+      const shape = checkShape(s.es, s.difficulty ?? 1);
+      for (const problem of shape.problems) errors.push(`${where} "${s.es}": ${problem}`);
+      for (const warning of shape.warnings) warnings.push(`${where} "${s.es}": ${warning}`);
       // A story line needn't name its target: the newest drillable word in it is.
       const target =
         s.target || !autoTarget
@@ -123,6 +129,7 @@ export function buildContent(outline, content, { source = 'human', status = 'dra
         source,
         attribution: null,
         audio_path: null,
+        voice_id: null,
         status,
       };
       if (sentences.some((x) => x.id === row.id)) {

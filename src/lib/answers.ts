@@ -1,3 +1,4 @@
+import { clauseOfSurface, clausesOf } from './course-rules/shape';
 import type { Form, Sentence, SentenceToken } from './types';
 
 // ---------------------------------------------------------------------------
@@ -165,6 +166,33 @@ export const sameAnswer = (form: Form, allForms: Form[]) => [
 // ---------------------------------------------------------------------------
 // Checking answers
 // ---------------------------------------------------------------------------
+
+/**
+ * The sentence narrowed to one of its clauses — its tokens, its Spanish and the
+ * accepted answers that survive the cut — so everything that lays out, marks and
+ * blames a sentence build can work on a clause without knowing it is one.
+ *
+ * An `es_alt` only contributes if it breaks into the same number of clauses; one
+ * that doesn't is an alternative to a differently shaped sentence, and its
+ * pieces don't line up with these.
+ */
+export function clauseOf(sentence: Sentence, clause: number): Sentence {
+  const of = clauseOfSurface(sentence.tokens.map((t) => t.surface));
+  const tokens = sentence.tokens.filter((_, i) => of[i] === clause);
+  const parts = clausesOf(sentence.es);
+  const es_alt = sentence.es_alt.flatMap((alt) => {
+    const altParts = clausesOf(alt);
+    return altParts.length === parts.length && altParts[clause] ? [altParts[clause]] : [];
+  });
+  const ids = new Set(tokens.flatMap((t) => t.form_ids));
+  return {
+    ...sentence,
+    es: parts[clause] ?? tokens.map((t) => t.surface).join(' '),
+    es_alt,
+    tokens,
+    form_ids: sentence.form_ids.filter((id) => ids.has(id)),
+  };
+}
 
 /** Every Spanish answer a sentence accepts, as words. Transcribing audio
  *  accepts only what was said. */

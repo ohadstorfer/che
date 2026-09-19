@@ -109,10 +109,25 @@ const scores = new Map(readJson('scores.json').scores.map((s) => [s.id, s]));
 const { selected, rejected } = selectCandidates(checked, scores);
 console.log(`selected ${selected.length}, rejected ${rejected.length}`);
 for (const s of selected) console.log(`  ✔ [${s.target.form}] ${s.candidate.es} = ${s.candidate.en}`);
+// Both tallies below count what the unit *will have*, not what this run added.
+// A run that fills one gap — the empty batches trick — otherwise reports every
+// other word as missing, and a warning that cries wolf is one you learn to skip.
+const standing = known.filter((s) => ['approved', 'published'].includes(s.status) && s.unit_id === unit.id);
 const count = new Map(targets.map((t) => [t.form, 0]));
-for (const s of selected) count.set(s.target.form, count.get(s.target.form) + 1);
+const bump = (id) => {
+  const form = targets.find((t) => t.id === id);
+  if (form) count.set(form.form, count.get(form.form) + 1);
+};
+for (const s of selected) bump(s.target.id);
+for (const s of standing) bump(s.target_form_id);
 const short = [...count].filter(([, k]) => k < 4);
 if (short.length) console.log(`  short of 4 sentences: ${short.map(([f, k]) => `${f} (${k})`).join(', ')}`);
+// A word can be introduced by a unit and then never said in it — proper nouns
+// especially, since nothing drills them. The prompt asks the writer to work
+// them in; this is what checks that it did.
+const spoken = new Set([...selected.map((s) => s.row), ...standing].flatMap((s) => (s.tokens ?? []).flatMap((t) => t.form_ids)));
+const unsaid = outline.forms.filter((f) => f.unit_id === unit.id && !spoken.has(f.id));
+if (unsaid.length) console.log(`  introduced but never said: ${unsaid.map((f) => f.form).join(', ')}`);
 const reasons = new Map();
 for (const r of rejected) reasons.set(r.reason, (reasons.get(r.reason) ?? 0) + 1);
 for (const [reason, k] of reasons) console.log(`  ✖ ${k} ${reason}`);

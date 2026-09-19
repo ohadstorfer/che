@@ -2,11 +2,13 @@ import {
   DEFAULT_LADDER,
   type Ladder,
   atLeast,
+  buildableClause,
   glueSeen,
   hasLockedGlue,
   pickIntroSentence,
   pickReviewSentences,
   rungFor,
+  tooLongToBuild,
 } from './sentences';
 import {
   type LearnerData,
@@ -55,6 +57,7 @@ export const TIP_FORM: Form = {
   is_glue: true,
   register: 'neutral',
   audio_path: null,
+  voice_id: null,
 };
 
 export interface BuildLessonOptions {
@@ -186,7 +189,7 @@ export function resolveSlots(
         const target = sentence ? data.formById.get(sentence.target_form_id) : undefined;
         if (!sentence || !target) break;
         let mode: ExerciseMode =
-          slot.mode && SENTENCE_MODES.includes(slot.mode) ? slot.mode : modeForRung(rungFor(sentence, seen, ladder), sentence);
+          slot.mode && SENTENCE_MODES.includes(slot.mode) ? slot.mode : modeForRung(rungFor(sentence, seen, ladder), sentence, ladder);
         // A pinned listening screen with no recording yet falls back to the
         // same build by sight rather than to a silent exercise.
         if (mode === 'sentence_listen' && !sentence.audio_path) mode = 'sentence_build';
@@ -308,7 +311,7 @@ function reviewItems(
     if (!target) continue;
     // Same rule as the practice round: the gap tests its word, tiles test every
     // word, and reading for meaning tests nothing hard enough to count.
-    const mode = modeForRung(rungFor(sentence, seen, ladder), sentence);
+    const mode = modeForRung(rungFor(sentence, seen, ladder), sentence, ladder);
     if (mode === 'sentence_gap') covered.add(target.id);
     else if (mode !== 'sentence_meaning') for (const id of sentence.form_ids) covered.add(id);
     out.push({ ...sentenceItem(data, sentence, mode, target), review: true });
@@ -399,7 +402,7 @@ export function recapItems(
         : undefined) ??
       sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && chosenIds.has(f.id) && !used.has(f.id));
     if (!target) continue;
-    const mode = modeForRung(atLeast(rungFor(sentence, seen, ladder), 'gap'), sentence);
+    const mode = modeForRung(atLeast(rungFor(sentence, seen, ladder), 'gap'), sentence, ladder);
     const tests = mode === 'sentence_gap' ? [target.id] : sentence.form_ids.filter((id) => chosenIds.has(id));
     if (tests.some((id) => used.has(id))) continue;
     for (const id of tests) used.add(id);
@@ -423,7 +426,14 @@ export function recapItems(
   for (const item of out) {
     if (production >= wanted) break;
     if (item.mode === 'sentence_gap' && item.sentence && !hasLockedGlue(item.sentence, seen, ladder)) {
+      const clause = tooLongToBuild(item.sentence, ladder)
+        ? buildableClause(item.sentence, item.form.id, ladder)
+        : null;
+      // Nothing small enough to build: this one stays a gap and the next item
+      // makes up the production quota.
+      if (tooLongToBuild(item.sentence, ladder) && clause === null) continue;
       item.mode = 'sentence_build';
+      if (clause !== null) item.clause = clause;
       production += 1;
     }
   }

@@ -26,7 +26,9 @@ export function upsert(table, rows, columns, cast = {}, conflict = 'id') {
 
 export const SENTENCE_COLUMNS = [
   'id', 'unit_id', 'es', 'en', 'en_alt', 'es_alt', 'tokens', 'target_form_id', 'kind', 'difficulty',
-  'source', 'attribution', 'audio_path', 'status',
+  // voice_id travels with audio_path so a regenerated sentence loses its
+  // speaker along with its recording, never one without the other.
+  'source', 'attribution', 'audio_path', 'voice_id', 'status',
 ];
 export const SENTENCE_CAST = { en_alt: textArray, es_alt: textArray, tokens: jsonb };
 

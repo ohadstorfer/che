@@ -1,6 +1,7 @@
 import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import { useEffect } from 'react';
 import { Platform, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { ScreenBackground } from '@/components/ui';
 import { AuthProvider } from '@/lib/auth';
@@ -37,22 +38,26 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <AuthProvider>
-      {/* The icon's gradient is painted once, edge to edge, and every screen
-          sits on it transparently — so it never seams at the status bar and
-          never re-renders on navigation. */}
-      <View style={{ flex: 1, backgroundColor: colors.bg }}>
-        <ScreenBackground />
-        <ThemeProvider value={navigationTheme}>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-              contentStyle: { backgroundColor: 'transparent' },
-            }}>
-            <Stack.Screen name="practice" options={{ gestureEnabled: false }} />
-          </Stack>
-        </ThemeProvider>
-      </View>
-    </AuthProvider>
+    // Gestures — the tiles she drags into order — do nothing at all, and say
+    // nothing about why, unless this sits above everything that uses them.
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <AuthProvider>
+        {/* The icon's gradient is painted once, edge to edge, and every screen
+            sits on it transparently — so it never seams at the status bar and
+            never re-renders on navigation. */}
+        <View style={{ flex: 1, backgroundColor: colors.bg }}>
+          <ScreenBackground />
+          <ThemeProvider value={navigationTheme}>
+            <Stack
+              screenOptions={{
+                headerShown: false,
+                contentStyle: { backgroundColor: 'transparent' },
+              }}>
+              <Stack.Screen name="practice" options={{ gestureEnabled: false }} />
+            </Stack>
+          </ThemeProvider>
+        </View>
+      </AuthProvider>
+    </GestureHandlerRootView>
   );
 }
