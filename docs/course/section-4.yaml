@@ -123,7 +123,7 @@ units:
         en: "last night"
       - lemma: "pasado"
         pos: "adj"
-        en: "last (week, year)"
+        en: "last"
         forms:
           - form: "pasado"
             f: "m.sg"
@@ -273,7 +273,7 @@ units:
             en: "you were (somewhere)"
             f: "2sg.pret.ind.vos.irregular"
           - form: "estuvo"
-            en: "was (somewhere, he/she was)"
+            en: "was (somewhere)"
             f: "3sg.pret.ind.irregular"
       - lemma: "tener"
         pos: "verb"

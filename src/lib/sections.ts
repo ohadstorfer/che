@@ -9,4 +9,5 @@ export const SECTION_CAN_DO: Record<string, string> = {
   'everyday-things': 'Puedo hablar de mi gente, de mi casa y de lo que hago todos los días.',
   'out-and-about': 'Puedo moverme por el barrio, comprar ropa y armar planes con amigos.',
   'what-happened': 'Puedo contar qué hice el finde, decir qué me duele y organizar un viaje.',
+  'when-i-was-a-kid': 'Puedo contar cómo era mi vida de chico, pedir en un restaurante y armar planes.',
 };

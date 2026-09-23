@@ -78,8 +78,9 @@ export interface FormFeatures {
   person?: 1 | 2 | 3;
   number?: 'sg' | 'pl';
   /** Present, or the simple past (pretérito: hablé, comiste) — the past
-   *  Buenos Aires uses for anything finished, where Spain says "he hablado". */
-  tense?: 'pres' | 'pret';
+   *  Buenos Aires uses for anything finished, where Spain says "he hablado" — or the imperfect
+   *  (era, jugábamos), for what was going on and what used to happen. */
+  tense?: 'pres' | 'pret' | 'impf';
   mood?: 'ind' | 'imp';
   verb_form?: 'inf' | 'ger';
   voseo?: boolean;

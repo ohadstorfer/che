@@ -23,6 +23,7 @@ export const FEATURE_TAGS: Record<string, FormFeatures> = {
   '3pl': { person: 3, number: 'pl' },
   pres: { tense: 'pres' },
   pret: { tense: 'pret' },
+  impf: { tense: 'impf' },
   ind: { mood: 'ind' },
   imp: { mood: 'imp' },
   inf: { verb_form: 'inf' },
