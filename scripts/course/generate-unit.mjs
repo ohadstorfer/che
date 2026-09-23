@@ -16,6 +16,7 @@ import {
   checkCandidates,
   generationPrompt,
   judgePrompt,
+  keptInSpanish,
   promptHash,
   selectCandidates,
   styleSpec,
@@ -68,7 +69,7 @@ const passing = checked.map((c, i) => ({ c, i })).filter(({ c }) => c.ok);
 for (let i = 0; i < passing.length; i += 30) {
   const chunk = passing.slice(i, i + 30);
   const { scores: s, usage: u } = await judgeSentences(
-    judgePrompt({ unit, style, items: chunk.map(({ c, i: idx }) => ({ id: idx, es: c.candidate.es, en: c.candidate.en })) }),
+    judgePrompt({ unit, style, kept: keptInSpanish(outline), items: chunk.map(({ c, i: idx }) => ({ id: idx, es: c.candidate.es, en: c.candidate.en })) }),
   );
   usage.input += u.input_tokens;
   usage.output += u.output_tokens;

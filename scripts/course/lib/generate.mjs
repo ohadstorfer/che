@@ -195,7 +195,16 @@ export const RUBRIC = [
   'rewrite: a better version if any answer above is below 4 or no, else empty',
 ];
 
-export function judgePrompt({ unit, style, items }) {
+/**
+ * Words the course leaves in Spanish in its English — `kiosco`, `mate`,
+ * `cortado`: the lemma's gloss is the word itself and a note explains it.
+ * A judge that doesn't know marks every English line with "kiosco" unnatural,
+ * and a unit's articles went unsaid because every sentence with them did.
+ */
+export const keptInSpanish = (outline) =>
+  outline.lemmas.filter((l) => !l.is_glue && l.pos !== 'propn' && fold(l.gloss_en ?? '') === fold(l.lemma)).map((l) => l.lemma);
+
+export function judgePrompt({ unit, style, items, kept = [] }) {
   const system = [
     'You review practice sentences for a course in Argentine (rioplatense) Spanish, as a demanding native editor.',
     'You never approve anything; you score and flag. Be strict about naturalness: textbook Spanish that nobody in Buenos Aires would say scores low even when it is correct.',
@@ -208,6 +217,9 @@ export function judgePrompt({ unit, style, items }) {
     'Score each sentence on:',
     ...RUBRIC.map((r) => `- ${r}`),
     '',
+    ...(kept.length
+      ? [`These words stay in Spanish in the English on purpose — the course explains them in a note, and "kiosco" is not a mistake for "kiosk": ${kept.join(', ')}. Don't mark the English down for them.`, '']
+      : []),
     'Sentences:',
     ...items.map((it) => `${it.id}. ${it.es} = ${it.en}`),
   ].join('\n');

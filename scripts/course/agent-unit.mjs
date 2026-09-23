@@ -19,7 +19,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
-import { FORMS_PER_REQUEST, checkCandidates, generationPrompt, judgePrompt, promptHash, selectCandidates, styleSpec, targetsFor } from './lib/generate.mjs';
+import { FORMS_PER_REQUEST, checkCandidates, generationPrompt, judgePrompt, keptInSpanish, promptHash, selectCandidates, styleSpec, targetsFor } from './lib/generate.mjs';
 import { publishUnit, saveCandidates, sentencesOfUnits, unitFromArgs } from './lib/pipeline.mjs';
 
 const MODEL = 'claude-code-agent';
@@ -99,7 +99,7 @@ if (stage === 'check') {
   for (const [p, k] of [...why].sort((a, b) => b[1] - a[1]).slice(0, 15)) console.log(`  ${k}× ${p}`);
   // The judge sees only the sentences that passed, never the writer's prompt.
   const items = passing.map(({ c, i }) => ({ id: i, es: c.candidate.es, en: c.candidate.en }));
-  writeFileSync(file('judge.prompt.md'), asFile(judgePrompt({ unit, style, items }), JUDGE_SCHEMA));
+  writeFileSync(file('judge.prompt.md'), asFile(judgePrompt({ unit, style, items, kept: keptInSpanish(outline) }), JUDGE_SCHEMA));
   console.log('\nJudge agent task:');
   console.log(`  Read ${file('judge.prompt.md')} in full and score every sentence strictly, as a demanding porteño editor. Read no other file in that folder. Write the JSON to ${file('scores.json')} and check it parses.`);
   process.exit(0);
