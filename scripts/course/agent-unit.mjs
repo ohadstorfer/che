@@ -97,6 +97,10 @@ if (stage === 'check') {
     why.set(key, (why.get(key) ?? 0) + 1);
   }
   for (const [p, k] of [...why].sort((a, b) => b[1] - a[1]).slice(0, 15)) console.log(`  ${k}× ${p}`);
+  // Which candidate failed and why, for the writer fixing them.
+  const failing = checked.filter((c) => !c.ok).map((c) => `${c.candidate.es} = ${c.candidate.en}\n  ${c.problems.join('\n  ')}`);
+  writeFileSync(file('failures.txt'), failing.join('\n') + (failing.length ? '\n' : ''));
+  if (failing.length) console.log(`  each one, with its reasons: ${file('failures.txt')}`);
   // The judge sees only the sentences that passed, never the writer's prompt.
   const items = passing.map(({ c, i }) => ({ id: i, es: c.candidate.es, en: c.candidate.en }));
   writeFileSync(file('judge.prompt.md'), asFile(judgePrompt({ unit, style, items, kept: keptInSpanish(outline) }), JUDGE_SCHEMA));
