@@ -152,7 +152,10 @@ export function boundCandidates(
 
   const out: { form: VocabForm; seen: number; after: string }[] = [];
   for (const form of vocabulary.forms) {
-    if (form.bound || !drillable(form)) continue;
+    // Only a verb takes a clitic. `la`, `los` and `las` are articles too, and a
+    // noun the course only ever says with its article — "la cuenta", "los
+    // domingos" — is a noun, not half of a chunk.
+    if (form.bound || !drillable(form) || form.pos !== 'verb') continue;
     const company = before.get(form.id) ?? [];
     if (company.length < minSeen) continue;
     const [first] = company;

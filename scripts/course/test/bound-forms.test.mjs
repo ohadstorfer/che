@@ -75,6 +75,13 @@ test('a word that merely likes a neighbour is left alone', () => {
   assert.deepEqual(boundCandidates(outline, sentences), []);
 });
 
+test('a noun the course only says with its article is not bound', () => {
+  // "la" is an article as well as a clitic: "la cuenta" is a noun with its
+  // article, not a chunk, however many sentences say it that way.
+  const sentences = [{ es: 'La cuenta, por favor.' }, { es: '¿Me traés la cuenta?' }, { es: 'Mozo, la cuenta.' }, { es: 'Gracias, la cuenta.' }];
+  assert.deepEqual(boundCandidates(outline, sentences), []);
+});
+
 test('two sentences prove nothing', () => {
   assert.deepEqual(boundCandidates(beforeTheFix, [{ es: 'Me llamo Sofi.' }, { es: 'Me llamo Juan.' }]), []);
 });
