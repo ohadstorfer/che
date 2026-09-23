@@ -28,6 +28,7 @@ export const FEATURE_TAGS: Record<string, FormFeatures> = {
   cond: { tense: 'cond' },
   ind: { mood: 'ind' },
   imp: { mood: 'imp' },
+  subj: { mood: 'subj' },
   inf: { verb_form: 'inf' },
   ger: { verb_form: 'ger' },
   vos: { voseo: true },

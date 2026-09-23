@@ -81,7 +81,7 @@ export interface FormFeatures {
    *  Buenos Aires uses for anything finished, where Spain says "he hablado" — or the imperfect
    *  (era, jugábamos), for what was going on and what used to happen. */
   tense?: 'pres' | 'pret' | 'impf' | 'fut' | 'cond';
-  mood?: 'ind' | 'imp';
+  mood?: 'ind' | 'imp' | 'subj';
   verb_form?: 'inf' | 'ger';
   voseo?: boolean;
   clitic?: boolean;

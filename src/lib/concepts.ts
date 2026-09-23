@@ -20,6 +20,7 @@ export const CONCEPT_LABELS: Record<string, string> = {
   'verbo.imperfecto': 'the imperfect (was doing, used to do)',
   'verbo.futuro': 'the future (and guessing: ¿dónde estará?)',
   'verbo.condicional': 'would, could (the conditional)',
+  'verbo.subjuntivo': 'the subjunctive (que vengas, ojalá)',
   'verbo.gerundio': 'the -ando / -iendo form',
   'verbo.infinitivo': 'infinitives',
   ser: 'ser',
@@ -34,7 +35,8 @@ export function conceptsOf(form: Pick<Form, 'lemma' | 'pos' | 'features'>): stri
   const f = form.features ?? {};
   const out: string[] = [];
   if (form.pos === 'verb') {
-    if (f.mood === 'imp' && f.voseo) out.push('verbo.imperativo.vos');
+    if (f.mood === 'subj') out.push('verbo.subjuntivo');
+    else if (f.mood === 'imp' && f.voseo) out.push('verbo.imperativo.vos');
     else if (f.verb_form === 'ger') out.push('verbo.gerundio');
     else if (f.verb_form === 'inf') out.push('verbo.infinitivo');
     else if (f.tense === 'impf') out.push('verbo.imperfecto');

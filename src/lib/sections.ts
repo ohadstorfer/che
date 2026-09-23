@@ -10,5 +10,6 @@ export const SECTION_CAN_DO: Record<string, string> = {
   'out-and-about': 'Puedo moverme por el barrio, comprar ropa y armar planes con amigos.',
   'what-happened': 'Puedo contar qué hice el finde, decir qué me duele y organizar un viaje.',
   'plans-and-favours': 'Puedo pedir favores, arreglarme con el celu y agradecer como un porteño.',
+  'wishes-and-advice': 'Puedo desearte suerte, dar consejos y opinar sin quedar mal.',
   'when-i-was-a-kid': 'Puedo contar cómo era mi vida de chico, pedir en un restaurante y armar planes.',
 };

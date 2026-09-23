@@ -291,7 +291,7 @@ const FEATURE_CHOICES = {
   gender: ['', 'm', 'f'],
   number: ['', 'sg', 'pl'],
   person: ['', '1', '2', '3'],
-  mood: ['', 'ind', 'imp'],
+  mood: ['', 'ind', 'imp', 'subj'],
   verb_form: ['', 'inf', 'ger'],
   tense: ['', 'pres', 'pret', 'impf', 'fut', 'cond'],
 } as const;
