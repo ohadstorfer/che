@@ -77,7 +77,9 @@ export interface LessonSlot {
 export interface FormFeatures {
   person?: 1 | 2 | 3;
   number?: 'sg' | 'pl';
-  tense?: 'pres';
+  /** Present, or the simple past (pretérito: hablé, comiste) — the past
+   *  Buenos Aires uses for anything finished, where Spain says "he hablado". */
+  tense?: 'pres' | 'pret';
   mood?: 'ind' | 'imp';
   verb_form?: 'inf' | 'ger';
   voseo?: boolean;

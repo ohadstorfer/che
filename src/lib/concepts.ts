@@ -15,6 +15,8 @@ export const CONCEPT_LABELS: Record<string, string> = {
   'verbo.presente.3': 'present tense with él, ella, usted',
   'verbo.presente.plural': 'present tense in the plural',
   'verbo.imperativo.vos': 'commands with vos',
+  'verbo.preterito.vos': 'past tense with vos',
+  'verbo.preterito': 'past tense',
   'verbo.gerundio': 'the -ando / -iendo form',
   'verbo.infinitivo': 'infinitives',
   ser: 'ser',
@@ -32,6 +34,7 @@ export function conceptsOf(form: Pick<Form, 'lemma' | 'pos' | 'features'>): stri
     if (f.mood === 'imp' && f.voseo) out.push('verbo.imperativo.vos');
     else if (f.verb_form === 'ger') out.push('verbo.gerundio');
     else if (f.verb_form === 'inf') out.push('verbo.infinitivo');
+    else if (f.tense === 'pret') out.push(f.person === 2 && f.voseo ? 'verbo.preterito.vos' : 'verbo.preterito');
     else if (f.tense === 'pres') {
       if (f.number === 'pl') out.push('verbo.presente.plural');
       else if (f.person === 2 && f.voseo) out.push('verbo.presente.vos');

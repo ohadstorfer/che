@@ -23,6 +23,17 @@ export function checkPhrases(es: string) {
 }
 
 /**
+ * The compound past — "he comido", "¿has visto?" — is Spain's everyday past.
+ * Buenos Aires says "comí", "¿viste?" for anything finished, today included
+ * (Appendix B), so the course never writes it.
+ */
+const COMPOUND_PAST = /(^|[^\p{L}])(he|has|ha|hemos|han)\s+(\p{L}+(ado|ido|to|cho|sto))(?!\p{L})/iu;
+export function compoundPast(es: string) {
+  const m = COMPOUND_PAST.exec(es);
+  return m ? [`"${m[2]} ${m[3]}" is the compound past — Buenos Aires uses the simple past ("comí", "¿viste?")`] : [];
+}
+
+/**
  * `che` opens what you say. It is "hey", not the English "man": *Che, mal.*,
  * not *Mal, che.* Straight after a bare greeting is the one exception, because
  * "Hola, che." is a single gesture rather than a tag on the end of a sentence.
@@ -87,7 +98,7 @@ export function checkSentence(vocabulary: Vocabulary, unit: VocabUnit, es: strin
       );
     }
   }
-  problems.push(...checkPhrases(es), ...chePlacement(es));
+  problems.push(...checkPhrases(es), ...chePlacement(es), ...compoundPast(es));
   return problems;
 }
 

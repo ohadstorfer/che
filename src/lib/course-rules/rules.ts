@@ -22,6 +22,7 @@ export const FEATURE_TAGS: Record<string, FormFeatures> = {
   '2pl': { person: 2, number: 'pl' },
   '3pl': { person: 3, number: 'pl' },
   pres: { tense: 'pres' },
+  pret: { tense: 'pret' },
   ind: { mood: 'ind' },
   imp: { mood: 'imp' },
   inf: { verb_form: 'inf' },
@@ -62,6 +63,9 @@ export const TUTEO = new Set([
   'haz', 'ten', 'pon', 'siéntate', 'fíjate', 'dime', 'espérame', 'escúchame', 'mírame',
   // vosotros verbs
   'sois', 'tenéis', 'queréis', 'podéis', 'vais', 'habláis', 'coméis', 'estáis', 'hacéis',
+  // vosotros past
+  'fuisteis', 'tuvisteis', 'hicisteis', 'estuvisteis', 'hablasteis', 'comisteis', 'dijisteis',
+  'visteis', 'llegasteis', 'salisteis', 'vinisteis', 'comprasteis', 'pagasteis', 'habéis',
 ]);
 
 /**

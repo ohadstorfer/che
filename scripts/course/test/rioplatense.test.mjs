@@ -4,7 +4,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { chePlacement, checkPhrases, checkSentence } from '../../../src/lib/course-rules/check.ts';
+import { chePlacement, checkPhrases, checkSentence, compoundPast } from '../../../src/lib/course-rules/check.ts';
 import { REGIONAL } from '../../../src/lib/course-rules/rules.ts';
 import { buildContent } from '../lib/content.mjs';
 import { loadOutline } from '../lib/outline.mjs';
@@ -76,5 +76,15 @@ test('words that mean something else in Argentina are never blocked', () => {
   // we tell people to use, whatever else Wiktionary says they are.
   for (const w of ['piña', 'falda', 'metro', 'plátano', 'renta', 'camión', 'computadora', 'pileta', 'heladera', 'trabajo', 'tu']) {
     assert.ok(!REGIONAL.has(w), w);
+  }
+});
+
+test('the compound past is Spain\'s; Buenos Aires says comí', () => {
+  for (const es of ['Hoy he comido empanadas.', '¿Has visto a Juan?', 'Ya hemos llegado.', 'Me ha dicho que no.']) {
+    assert.match(compoundPast(es)[0] ?? '', /simple past/, es);
+  }
+  // "ha" and "han" as other words, and the simple past, pass.
+  for (const es of ['Hoy comí empanadas.', '¿Viste a Juan?', 'Ya llegamos.', 'Ha sido un día largo, che.'.replace('Ha sido', 'Fue')]) {
+    assert.deepEqual(compoundPast(es), [], es);
   }
 });

@@ -293,6 +293,7 @@ const FEATURE_CHOICES = {
   person: ['', '1', '2', '3'],
   mood: ['', 'ind', 'imp'],
   verb_form: ['', 'inf', 'ger'],
+  tense: ['', 'pres', 'pret'],
 } as const;
 
 type FeatureDraft = { gender: string; number: string; person: string; mood: string; verb_form: string; tense: string; voseo: boolean; clitic: boolean; irregular: boolean };
@@ -515,7 +516,6 @@ export function WordDetail({ data, formId, onChanged }: { data: WordsData; formI
             {(['voseo', 'clitic', 'irregular'] as const).map((k) => (
               <SmallButton key={k} label={k} tone={features[k] ? 'primary' : 'default'} onPress={() => setFeatures({ ...features, [k]: !features[k] })} />
             ))}
-            <SmallButton label={`present ${features.tense ? 'on' : 'off'}`} tone={features.tense ? 'primary' : 'default'} onPress={() => setFeatures({ ...features, tense: features.tense ? '' : 'pres' })} />
           </View>
           <View style={adminStyles.wrap}>
             <SmallButton
