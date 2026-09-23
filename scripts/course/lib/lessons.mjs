@@ -127,13 +127,14 @@ export function planLessons({ unit, forms, sentences, tips }) {
     const gapped = [];
     for (const form of chunks[li]) {
       if (taught.has(form.id)) continue;
-      // A word whose only sentences lean on another new word of this lesson
-      // gets that word taught just before it.
+      // A word whose only sentences lean on another new word of this unit
+      // gets that word taught just before it — pulled forward from a later
+      // lesson if it has to be, or "hablo" never meets "castellano" in time.
       if (!bySize.some((s) => s.target_form_id === form.id && contentOf(s).every((id) => id === form.id || taught.has(id)))) {
         const helper = bySize.find(
           (s) =>
             s.target_form_id === form.id &&
-            contentOf(s).every((id) => id === form.id || taught.has(id) || chunks[li].some((f) => f.id === id)),
+            contentOf(s).every((id) => id === form.id || taught.has(id) || unitForms.some((f) => f.id === id)),
         );
         for (const id of helper ? contentOf(helper) : []) {
           if (id === form.id || taught.has(id)) continue;
