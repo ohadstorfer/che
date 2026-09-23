@@ -1,0 +1,698 @@
+# ---------------------------------------------------------------------------
+# Che — Section 6 outline: "Plans and favours" (A2.3)
+#
+# The last stretch of A2: getting things done with other people. Asking a
+# favour (¿me pasás la sal? ¿podrías…?), saying what has to be done (hay que,
+# no hace falta), the verdulería by the kilo, the phone that dies at the worst
+# moment, lending and giving back, a new job, going out with someone, the
+# future the way Buenos Aires really uses it — to guess (¿dónde estará?) — and
+# the doctor. The checkpoint is thanking and owing: te debo una.
+#
+# Plan: docs/course/roadmap.md §Section 6. New feature tags: `fut`, `cond`.
+# Validate:  npm run course:validate -- --yaml
+# ---------------------------------------------------------------------------
+
+section:
+  id: 6
+  slug: "plans-and-favours"
+  title: "Plans and favours"
+  cefr: "A2.3"
+units:
+  - ordinal: 1
+    slug: "me-haces-un-favor"
+    title: "Ask for a favour"
+    summary: "¿Me hacés un favor?"
+    grammar:
+      - "pedidos.me-pasas"
+      - "condicional.podrias"
+    register_max: "informal"
+    sample:
+      es: "¿Me pasás la sal?"
+      en: "Can you pass me the salt?"
+    tips:
+      - title: "Asking with the present"
+        body: "A porteño asks with a plain question in the present: **¿me pasás la sal?**, **¿me ayudás?**
+          — the *can you* is in the tone. **¿Podrías…?** is the extra-polite version."
+      - title: "Ayudame"
+        body: "With a vos command the pronoun joins the end: **ayudame**, **alcanzame** — *help me*, *hand
+          me*."
+    words:
+      - lemma: "favor"
+        pos: "noun"
+        en: "favour"
+      - lemma: "pasar"
+        pos: "verb"
+        forms:
+          - form: "pasás"
+            en: "you pass"
+            f: "2sg.pres.ind.vos"
+          - form: "pasame"
+            en: "pass me"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "alcanzar"
+        pos: "verb"
+        en: "to hand, to reach"
+        forms:
+          - form: "alcanzás"
+            en: "you hand"
+            f: "2sg.pres.ind.vos"
+          - form: "alcanzame"
+            en: "hand me"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "ayudar"
+        pos: "verb"
+        en: "to help"
+        forms:
+          - form: "ayudo"
+            en: "I help"
+            f: "1sg.pres.ind"
+          - form: "ayudás"
+            en: "you help"
+            f: "2sg.pres.ind.vos"
+          - form: "ayudame"
+            en: "help me"
+            f: "2sg.imp.vos.clitic"
+          - form: "ayudar"
+            f: "inf"
+      - lemma: "poder"
+        pos: "verb"
+        forms:
+          - form: "podrías"
+            en: "could you"
+            f: "2sg.cond.ind.vos"
+      - lemma: "sal"
+        pos: "noun"
+        en: "salt"
+      - lemma: "pan"
+        pos: "noun"
+        en: "bread"
+      - lemma: "obvio"
+        pos: "adv"
+        en: "of course"
+
+  - ordinal: 2
+    slug: "hay-que"
+    title: "Say what has to be done"
+    summary: "Hay que ir temprano"
+    grammar:
+      - "obligacion.hay-que"
+      - "necesitar"
+      - "no-hace-falta"
+    register_max: "informal"
+    sample:
+      es: "Hay que llegar temprano."
+      en: "You have to get there early."
+    tips:
+      - title: "Tengo que, hay que"
+        body: "**Tengo que laburar** is *I have to work*; **hay que** is the same for everyone: **hay que
+          sacar la basura** — *the rubbish has to go out*."
+      - title: "No hace falta"
+        body: "**No hace falta** — *there's no need*. **Conviene** is the advice: **conviene ir
+          temprano** — *it's best to go early*."
+    words:
+      - lemma: "hay que"
+        pos: "phrase"
+        en: "you have to, one has to"
+      - lemma: "no hace falta"
+        pos: "phrase"
+        en: "there's no need"
+      - lemma: "convenir"
+        pos: "verb"
+        en: "to be best, to suit"
+        forms:
+          - form: "conviene"
+            en: "it's best to"
+            f: "3sg.pres.ind.irregular"
+      - lemma: "necesitar"
+        pos: "verb"
+        en: "to need"
+        forms:
+          - form: "necesito"
+            en: "I need"
+            f: "1sg.pres.ind"
+          - form: "necesitás"
+            en: "you need"
+            f: "2sg.pres.ind.vos"
+          - form: "necesita"
+            en: "needs (he/she needs)"
+            f: "3sg.pres.ind"
+      - lemma: "tener"
+        pos: "verb"
+        forms:
+          - form: "tenemos que"
+            en: "we have to"
+            f: "1pl.pres.ind"
+      - lemma: "llegar"
+        pos: "verb"
+        forms:
+          - form: "llegar"
+            f: "inf"
+      - lemma: "urgente"
+        pos: "adj"
+        en: "urgent"
+      - lemma: "trámite"
+        pos: "noun"
+        en: "paperwork, errand"
+
+  - ordinal: 3
+    slug: "en-la-verduleria"
+    title: "Shop for fruit and veg"
+    summary: "Un kilo de tomates"
+    grammar:
+      - "cantidades.kilo-docena"
+      - "precio.cuanto-esta"
+    register_max: "informal"
+    sample:
+      es: "Dame un kilo de tomates, por favor."
+      en: "Give me a kilo of tomatoes, please."
+    tips:
+      - title: "¿A cuánto está?"
+        body: "At the verdulería the price moves, so it's **¿a cuánto está el kilo?** — *how much is it
+          a kilo today?* You buy **un kilo**, **medio kilo** or **una docena**."
+      - title: "Dame"
+        body: "Nobody says *quisiera*: **dame un kilo de papas** — *give me a kilo of potatoes* — is
+          polite enough with a *por favor*."
+    words:
+      - lemma: "kilo"
+        pos: "noun"
+        en: "kilo"
+      - lemma: "medio kilo"
+        pos: "phrase"
+        en: "half a kilo"
+      - lemma: "docena"
+        pos: "noun"
+        en: "dozen"
+      - lemma: "tomate"
+        pos: "noun"
+        en: "tomato"
+        forms:
+          - form: "tomate"
+            f: "m.sg"
+          - form: "tomates"
+            en: "tomatoes"
+            f: "m.pl"
+      - lemma: "papa"
+        pos: "noun"
+        en: "potato"
+        forms:
+          - form: "papa"
+            f: "f.sg"
+          - form: "papas"
+            en: "potatoes"
+            f: "f.pl"
+      - lemma: "cebolla"
+        pos: "noun"
+        en: "onion"
+        forms:
+          - form: "cebolla"
+            f: "f.sg"
+          - form: "cebollas"
+            en: "onions"
+            f: "f.pl"
+      - lemma: "manzana"
+        pos: "noun"
+        en: "apple"
+        forms:
+          - form: "manzana"
+            f: "f.sg"
+          - form: "manzanas"
+            en: "apples"
+            f: "f.pl"
+      - lemma: "banana"
+        pos: "noun"
+        en: "banana"
+        forms:
+          - form: "banana"
+            f: "f.sg"
+          - form: "bananas"
+            en: "bananas"
+            f: "f.pl"
+      - lemma: "huevo"
+        pos: "noun"
+        en: "egg"
+        forms:
+          - form: "huevos"
+            en: "eggs"
+            f: "m.pl"
+      - lemma: "queso"
+        pos: "noun"
+        en: "cheese"
+      - lemma: "fresco"
+        pos: "adj"
+        en: "fresh"
+        forms:
+          - form: "fresco"
+            f: "m.sg"
+          - form: "frescos"
+            f: "m.pl"
+      - lemma: "verdulero"
+        pos: "noun"
+        en: "greengrocer"
+
+  - ordinal: 4
+    slug: "el-celu"
+    title: "Deal with your phone"
+    summary: "Me quedé sin batería"
+    grammar:
+      - "tecnologia"
+      - "se-corto"
+    register_max: "informal"
+    sample:
+      es: "Me quedé sin batería, te llamo después."
+      en: "My battery died, I'll call you later."
+    tips:
+      - title: "El celu"
+        body: "The phone is **el celu** (short for *celular*). **Me quedé sin batería** — *my battery
+          died*; **se cortó** — *it cut out*; **mandame la ubicación** — *send me your location*."
+      - title: "La SUBE"
+        body: "The card for the bus and the subte is **la SUBE**, and you **cargás** it at a kiosco — the
+          same verb as charging a phone."
+    words:
+      - lemma: "celu"
+        pos: "noun"
+        en: "phone, mobile"
+        register: "informal"
+      - lemma: "celular"
+        pos: "noun"
+        en: "mobile phone"
+      - lemma: "batería"
+        pos: "noun"
+        en: "battery"
+      - lemma: "cargador"
+        pos: "noun"
+        en: "charger"
+      - lemma: "cargar"
+        pos: "verb"
+        en: "to charge, to top up"
+        forms:
+          - form: "cargo"
+            en: "I charge, I top up"
+            f: "1sg.pres.ind"
+          - form: "cargás"
+            en: "you charge, you top up"
+            f: "2sg.pres.ind.vos"
+          - form: "cargar"
+            f: "inf"
+      - lemma: "quedarse"
+        pos: "verb"
+        en: "to be left, to stay"
+        forms:
+          - form: "me quedé"
+            en: "I was left, I stayed"
+            f: "1sg.pret.ind.clitic"
+          - form: "te quedaste"
+            en: "you were left, you stayed"
+            f: "2sg.pret.ind.vos.clitic"
+          - form: "quedé"
+            f: "1sg.pret.ind"
+            bound: true
+          - form: "quedaste"
+            f: "2sg.pret.ind.vos"
+            bound: true
+      - lemma: "cortarse"
+        pos: "verb"
+        en: "to cut out"
+        forms:
+          - form: "se cortó"
+            en: "it cut out"
+            f: "3sg.pret.ind.clitic"
+          - form: "cortó"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "ubicación"
+        pos: "noun"
+        en: "location"
+      - lemma: "contraseña"
+        pos: "noun"
+        en: "password"
+      - lemma: "llamada"
+        pos: "noun"
+        en: "call"
+      - lemma: "SUBE"
+        pos: "propn"
+        en: "SUBE (transport card)"
+
+  - ordinal: 5
+    slug: "te-lo-devuelvo"
+    title: "Lend, borrow and give back"
+    summary: "Mañana te lo devuelvo"
+    grammar:
+      - "pronombres.dobles"
+      - "devolver-dejar"
+    register_max: "informal"
+    sample:
+      es: "Mañana te lo devuelvo."
+      en: "I'll give it back to you tomorrow."
+    tips:
+      - title: "Te lo, se lo"
+        body: "Two pronouns go person first, thing second: **te lo devuelvo** — *I'll give it back to
+          you*. *Le lo* never happens: it turns into **se lo**."
+      - title: "Dejar"
+        body: "**Dejame las llaves** — *leave me the keys*; **te dejo** — *I'll leave you (to it)*, the
+          porteño way of hanging up."
+    words:
+      - lemma: "devolver"
+        pos: "verb"
+        en: "to give back"
+        forms:
+          - form: "devuelvo"
+            en: "I give back"
+            f: "1sg.pres.ind.irregular"
+          - form: "devolvés"
+            en: "you give back"
+            f: "2sg.pres.ind.vos"
+          - form: "devolveme"
+            en: "give me back"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "dejar"
+        pos: "verb"
+        en: "to leave, to let"
+        forms:
+          - form: "dejo"
+            en: "I leave"
+            f: "1sg.pres.ind"
+          - form: "dejás"
+            en: "you leave"
+            f: "2sg.pres.ind.vos"
+          - form: "dejame"
+            en: "leave me, let me"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "traer"
+        pos: "verb"
+        forms:
+          - form: "traeme"
+            en: "bring me"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "regalar"
+        pos: "verb"
+        en: "to give (as a present)"
+        forms:
+          - form: "regalé"
+            en: "I gave (as a present)"
+            f: "1sg.pret.ind"
+          - form: "regalaste"
+            en: "you gave (as a present)"
+            f: "2sg.pret.ind.vos"
+      - lemma: "llave"
+        pos: "noun"
+        en: "key"
+        forms:
+          - form: "llave"
+            f: "f.sg"
+          - form: "llaves"
+            en: "keys"
+            f: "f.pl"
+      - lemma: "cargador"
+        pos: "noun"
+        forms:
+          - form: "cargadores"
+            en: "chargers"
+            f: "m.pl"
+
+  - ordinal: 6
+    slug: "laburo-nuevo"
+    title: "Talk about a new job"
+    summary: "Conseguí laburo"
+    grammar:
+      - "trabajo.entrevista-sueldo"
+      - "conseguir"
+    register_max: "informal"
+    sample:
+      es: "Conseguí laburo en una empresa del centro."
+      en: "I got a job at a company downtown."
+    tips:
+      - title: "Conseguir"
+        body: "**Conseguí laburo** — *I got a job*. *Conseguir* is the porteño verb for getting anything
+          that took effort: a *turno*, a table, a flat."
+      - title: "Home office"
+        body: "Working from home is **hacer home office**, in English, and said the Spanish way."
+    words:
+      - lemma: "conseguir"
+        pos: "verb"
+        en: "to get, to manage to get"
+        forms:
+          - form: "conseguí"
+            en: "I landed, I managed to get"
+            f: "1sg.pret.ind"
+          - form: "conseguiste"
+            en: "you landed, you managed to get"
+            f: "2sg.pret.ind.vos"
+      - lemma: "renunciar"
+        pos: "verb"
+        en: "to quit, to resign"
+        forms:
+          - form: "renuncié"
+            en: "I quit"
+            f: "1sg.pret.ind"
+          - form: "renunciaste"
+            en: "you quit"
+            f: "2sg.pret.ind.vos"
+      - lemma: "empresa"
+        pos: "noun"
+        en: "company, firm"
+      - lemma: "entrevista"
+        pos: "noun"
+        en: "interview"
+      - lemma: "sueldo"
+        pos: "noun"
+        en: "salary, pay"
+      - lemma: "horario"
+        pos: "noun"
+        en: "schedule"
+      - lemma: "home office"
+        pos: "phrase"
+        en: "working from home"
+      - lemma: "equipo"
+        pos: "noun"
+        en: "team"
+
+  - ordinal: 7
+    slug: "salir-con-alguien"
+    title: "Talk about going out with someone"
+    summary: "Estoy saliendo con alguien"
+    grammar:
+      - "relaciones"
+      - "alguien-nadie"
+      - "reciprocos.nos-peleamos"
+    register_max: "informal"
+    sample:
+      es: "Estoy saliendo con alguien del laburo."
+      en: "I'm seeing someone from work."
+    tips:
+      - title: "Salir con"
+        body: "**Estoy saliendo con alguien** — *I'm seeing someone*. When it ends, porteños **cortan**:
+          **cortamos** — *we broke up*."
+      - title: "Alguien, nadie"
+        body: "**Alguien** is *someone*, **nadie** is *nobody* — and Spanish keeps the *no* as well: **no
+          vino nadie**."
+    words:
+      - lemma: "salir"
+        pos: "verb"
+        forms:
+          - form: "saliendo"
+            en: "going out, seeing"
+            f: "ger"
+      - lemma: "alguien"
+        pos: "pron"
+        en: "someone, anyone"
+      - lemma: "nadie"
+        pos: "pron"
+        en: "nobody"
+      - lemma: "pelearse"
+        pos: "verb"
+        en: "to fight, to argue"
+        forms:
+          - form: "nos peleamos"
+            en: "we argued, we fell out"
+            f: "1pl.pret.ind.clitic"
+          - form: "se pelearon"
+            en: "they fell out"
+            f: "3pl.pret.ind.clitic"
+          - form: "peleamos"
+            f: "1pl.pret.ind"
+            bound: true
+          - form: "pelearon"
+            f: "3pl.pret.ind"
+            bound: true
+      - lemma: "cortar"
+        pos: "verb"
+        en: "to break up"
+        forms:
+          - form: "cortamos"
+            en: "we broke up"
+            f: "1pl.pret.ind"
+      - lemma: "pareja"
+        pos: "noun"
+        en: "partner, couple"
+      - lemma: "enamorado"
+        pos: "adj"
+        en: "in love"
+        forms:
+          - form: "enamorado"
+            f: "m.sg"
+          - form: "enamorada"
+            f: "f.sg"
+      - lemma: "cita"
+        pos: "noun"
+        en: "date"
+
+  - ordinal: 8
+    slug: "donde-estara"
+    title: "Guess and wonder"
+    summary: "¿Dónde estará?"
+    grammar:
+      - "futuro.conjetura"
+      - "futuro.ser-estar-tener"
+    register_max: "informal"
+    sample:
+      es: "¿Dónde estará Juan? Estará en el laburo."
+      en: "Where can Juan be? He's probably at work."
+    tips:
+      - title: "The future that guesses"
+        body: "For plans porteños say *voy a*. The future tense is for **guessing**: **¿dónde estará?** —
+          *where can he be?*; **estará en el laburo** — *he's probably at work*."
+      - title: "Será"
+        body: "**¿Qué hora será?** — *I wonder what time it is*. **Será** on its own shrugs: *could be*."
+    words:
+      - lemma: "estar"
+        pos: "verb"
+        forms:
+          - form: "estará"
+            en: "will be, is probably"
+            f: "3sg.fut.ind"
+      - lemma: "ser"
+        pos: "verb"
+        forms:
+          - form: "será"
+            en: "will be, can be"
+            f: "3sg.fut.ind.irregular"
+      - lemma: "tener"
+        pos: "verb"
+        forms:
+          - form: "tendrá"
+            en: "will have, probably has"
+            f: "3sg.fut.ind.irregular"
+      - lemma: "haber"
+        pos: "verb"
+        forms:
+          - form: "habrá"
+            en: "there will be, there's probably"
+            f: "3sg.fut.ind.irregular"
+      - lemma: "capaz"
+        pos: "adv"
+        en: "maybe"
+      - lemma: "quizás"
+        pos: "adv"
+        en: "perhaps"
+      - lemma: "seguro que"
+        pos: "phrase"
+        en: "I bet, surely"
+
+  - ordinal: 9
+    slug: "me-siento-mal"
+    title: "See the doctor"
+    summary: "Me siento mal"
+    grammar:
+      - "sentirse"
+      - "salud.receta-obra-social"
+    register_max: "informal"
+    sample:
+      es: "Me siento mal, tengo tos y fiebre."
+      en: "I feel ill, I've got a cough and a temperature."
+    tips:
+      - title: "Me siento"
+        body: "**Me siento mal** — *I feel ill*; **¿cómo te sentís?** — *how do you feel?* On its own,
+          **lo siento** is *I'm sorry*."
+      - title: "La obra social"
+        body: "Your health insurance is your **obra social**; the doctor writes a **receta** and you take
+          the **pastillas** **cada ocho horas**."
+    words:
+      - lemma: "sentirse"
+        pos: "verb"
+        en: "to feel"
+        forms:
+          - form: "me siento"
+            en: "I feel"
+            f: "1sg.pres.ind.clitic.irregular"
+          - form: "te sentís"
+            en: "you feel"
+            f: "2sg.pres.ind.vos.clitic"
+          - form: "siento"
+            f: "1sg.pres.ind.irregular"
+            bound: true
+          - form: "sentís"
+            f: "2sg.pres.ind.vos"
+            bound: true
+      - lemma: "lo siento"
+        pos: "phrase"
+        en: "I'm sorry"
+      - lemma: "tos"
+        pos: "noun"
+        en: "cough"
+      - lemma: "receta"
+        pos: "noun"
+        en: "prescription"
+      - lemma: "pastilla"
+        pos: "noun"
+        en: "pill, tablet"
+        forms:
+          - form: "pastilla"
+            f: "f.sg"
+          - form: "pastillas"
+            en: "pills"
+            f: "f.pl"
+      - lemma: "obra social"
+        pos: "phrase"
+        en: "health insurance"
+      - lemma: "análisis"
+        pos: "noun"
+        en: "tests (medical)"
+      - lemma: "mejorarse"
+        pos: "verb"
+        en: "to get better"
+        forms:
+          - form: "mejorate"
+            en: "get well soon"
+            f: "2sg.imp.vos.clitic"
+
+  - ordinal: 10
+    slug: "te-debo-una"
+    title: "Thank someone properly"
+    summary: "Te debo una"
+    grammar:
+      - "agradecer"
+      - "repaso.a2"
+    register_max: "informal"
+    sample:
+      es: "Mil gracias, te debo una."
+      en: "Thanks a million, I owe you one."
+    tips:
+      - title: "Te debo una"
+        body: "**Te debo una** — *I owe you one*. The answer is **de nada**, or, more porteño, **no pasa
+          nada**."
+      - title: "Un montón"
+        body: "**Gracias por todo**, **mil gracias**, **gracias un montón** — the thanks gets bigger, the
+          grammar doesn't change."
+    words:
+      - lemma: "deber"
+        pos: "verb"
+        en: "to owe"
+        forms:
+          - form: "debo"
+            en: "I owe"
+            f: "1sg.pres.ind"
+      - lemma: "de nada"
+        pos: "phrase"
+        en: "you're welcome"
+      - lemma: "no pasa nada"
+        pos: "phrase"
+        en: "no worries, it's fine"
+      - lemma: "un montón"
+        pos: "phrase"
+        en: "loads, heaps"
+      - lemma: "mil gracias"
+        pos: "phrase"
+        en: "thanks a million"
+      - lemma: "por todo"
+        pos: "phrase"
+        en: "for everything"

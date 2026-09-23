@@ -293,7 +293,7 @@ const FEATURE_CHOICES = {
   person: ['', '1', '2', '3'],
   mood: ['', 'ind', 'imp'],
   verb_form: ['', 'inf', 'ger'],
-  tense: ['', 'pres', 'pret', 'impf'],
+  tense: ['', 'pres', 'pret', 'impf', 'fut', 'cond'],
 } as const;
 
 type FeatureDraft = { gender: string; number: string; person: string; mood: string; verb_form: string; tense: string; voseo: boolean; clitic: boolean; irregular: boolean };
