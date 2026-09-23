@@ -750,3 +750,7 @@ units:
       - lemma: "qué épocas"
         pos: "phrase"
         en: "those were the days"
+      - lemma: "por"
+        pos: "prep"
+        en: "for, through, by"
+        glue: true
