@@ -88,3 +88,9 @@ test('the compound past is Spain\'s; Buenos Aires says comí', () => {
     assert.deepEqual(compoundPast(es), [], es);
   }
 });
+
+test('parts of the day take "a": a la noche, not por la noche', () => {
+  assert.match(checkPhrases('Salimos por la noche.')[0] ?? '', /a la noche/);
+  assert.match(checkPhrases('Por la mañana tomo mate.')[0] ?? '', /a la mañana/);
+  assert.deepEqual(checkPhrases('A la noche salimos.'), []);
+});

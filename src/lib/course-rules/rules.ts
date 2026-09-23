@@ -100,7 +100,14 @@ export const REGIONAL = new Map(Object.entries(REGIONAL_WORDS));
  * Spanish, so no token is wrong on its own — the phrase is. Matched over the
  * whole sentence, accents and punctuation folded away.
  */
-export const REGIONAL_PHRASES = new Map([['qué tal', 'qué onda / todo bien'], ...REGIONAL_PHRASE_LIST]);
+export const REGIONAL_PHRASES = new Map([
+  ['qué tal', 'qué onda / todo bien'],
+  // Parts of the day take "a" in Buenos Aires: a la mañana, a la noche.
+  ['por la mañana', 'a la mañana'],
+  ['por la tarde', 'a la tarde'],
+  ['por la noche', 'a la noche'],
+  ...REGIONAL_PHRASE_LIST,
+]);
 
 /**
  * Words an answer may leave out without being wrong: a vocative "che" adds
