@@ -46,6 +46,19 @@ export interface AnswerExtra {
 export const MAX_RETRIES = 2;
 
 /**
+ * Whether this exercise made her spell this form out — what earns "fácil", the
+ * rating that stretches an interval furthest.
+ *
+ * Typing a word on its own counts, and so does typing it into a sentence's
+ * blank: the sentence hands her the grammar around the word, not the word, and
+ * the letters still have to come from her. A typed gap credits every form of
+ * its sentence, though, and she only typed one of them — the rest were read,
+ * which is not the same thing and does not earn the same rating.
+ */
+export const typedHere = (item: QueueItem, form: Form) =>
+  item.mode === 'typing' || (item.mode === 'sentence_gap_typed' && form.id === item.form.id);
+
+/**
  * A brand-new word gets an intro screen right before its first exercise, so she
  * always meets it before being asked anything about it — unless a sentence
  * exercise is doing the introducing, in which case that is the meeting. A test
@@ -299,7 +312,7 @@ export function useRound(userId: string | undefined) {
       return;
     }
 
-    // Flawless is "bien"; "fácil" is reserved for a passed typing exercise. One
+    // Flawless is "bien"; "fácil" is for a word she spelt out herself. One
     // slip is "difícil"; two or more resets the form. A peek at its meaning
     // caps it at "difícil".
     let rating: Rating = unscheduled ? 0 : wrongs === 0 ? (tally.typed ? 3 : 2) : wrongs === 1 ? 1 : 0;
@@ -404,7 +417,7 @@ export function useRound(userId: string | undefined) {
           if (item.promoted) tally.promotedWrongs += 1;
           else tally.wrongs += 1;
           missedForms.current.set(form.id, form);
-        } else if (item.mode === 'typing') tally.typed = true;
+        } else if (typedHere(item, form)) tally.typed = true;
         if (hinted.has(form.id)) tally.hinted = true;
         results.current.set(form.id, tally);
       }

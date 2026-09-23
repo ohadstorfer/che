@@ -70,6 +70,7 @@ export function outlineFromRows(rows) {
         unit_order: unitById.get(f.unit_id).course_order,
         position: f.position,
         is_glue: lemma.is_glue,
+        bound: f.bound === true,
         register: lemma.register,
         audio_path: f.audio_path ?? null,
         status: f.status,
@@ -128,7 +129,7 @@ const FIELDS = {
   lessons: ['kind'],
   tips: ['title_en', 'body_md'],
   lemmas: ['lemma', 'pos', 'gloss_en', 'gloss_note_en', 'register', 'is_glue', 'notes_en'],
-  forms: ['lemma_id', 'form', 'features', 'gloss_en', 'gloss_note_en', 'unit_id', 'position'],
+  forms: ['lemma_id', 'form', 'features', 'gloss_en', 'gloss_note_en', 'unit_id', 'position', 'bound'],
 };
 
 /**

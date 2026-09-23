@@ -129,11 +129,11 @@ test('8. a missing opening ¿ or ¡ pauses it', () => {
 test('9. a word too informal for the unit pauses it', () => {
   const strict = structuredClone({ ...data, asked: undefined });
   strict.asked = new Map();
-  const unit = strict.units.find((u) => u.id === sentence(strict, 'Bien, che.').unit_id);
+  const unit = strict.units.find((u) => u.id === sentence(strict, 'Chau, che.').unit_id);
   unit.register_max = 'neutral';
-  const plan = planSentence(strict, sentence(strict, 'Bien, che.'), { es: 'Bien, che.' });
+  const plan = planSentence(strict, sentence(strict, 'Chau, che.'), { es: 'Chau, che.' });
   assert.ok(plan.problems.some((p) => p.includes('"che" is informal; this unit allows up to neutral')), plan.problems.join('\n'));
-  assert.deepEqual(planSentence(strict, { ...sentence(strict, 'Bien, che.'), ...plan.row }, { es: 'Bien.', en: 'Fine.' }).problems, []);
+  assert.deepEqual(planSentence(strict, { ...sentence(strict, 'Chau, che.'), ...plan.row }, { es: 'Chau.', en: 'Bye!' }).problems, []);
 });
 
 test('an untouched sentence writes nothing', () => {
@@ -182,10 +182,13 @@ test('alternatives that no longer fit are dropped for confirmation, and the rule
 });
 
 test('another Spanish with tuteo is refused; one that can\'t be built is only a warning', () => {
-  const plan = edit(data, 'Soy Sofi.', { es_alt: ['Yo soy Sofi.', 'Tú eres Sofi.', 'Sofi soy.', 'Soy Sofi, che.'] });
+  // "Soy Sofi, che." is refused twice over: `che` never trails the sentence.
+  const plan = edit(data, 'Soy Sofi.', { es_alt: ['Yo soy Sofi.', 'Tú eres Sofi.', 'Sofi soy.', 'Soy Sofi, che.', 'Che, soy Sofi.'] });
   assert.ok(plan.altProblems.some((p) => p.includes('Tú eres Sofi.')));
-  assert.ok(plan.altWarnings.some((p) => p.includes('Soy Sofi, che.')));
-  assert.deepEqual(plan.row.es_alt, ['Yo soy Sofi.', 'Sofi soy.', 'Soy Sofi, che.']);
+  assert.ok(plan.altProblems.some((p) => p.includes('Soy Sofi, che.') && p.includes('goes in front')));
+  // In front it is legal Spanish; the English just never asks for it.
+  assert.ok(plan.altWarnings.some((p) => p.includes('Che, soy Sofi.')));
+  assert.deepEqual(plan.row.es_alt, ['Yo soy Sofi.', 'Sofi soy.', 'Che, soy Sofi.']);
 });
 
 // ---------------------------------------------------------------------------

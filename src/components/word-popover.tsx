@@ -22,7 +22,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { norm, senses } from '@/lib/answers';
+import { popoverMeanings } from '@/lib/meanings';
 import { colors, radius, shadow } from '@/lib/theme';
 import type { Form } from '@/lib/types';
 
@@ -157,14 +157,8 @@ export function WordPopover({
   // read as coming out of the word rather than landing on top of it.
   const origin: Array<string | number> = [tailLeft, below ? 0 : '100%', 0];
 
-  // What the word means here, in the sentence she is reading: `bien` in "bien
-  // hecho" is "well", not the dictionary's "well, fine, good". Only a sentence
-  // that hasn't been glossed yet falls back to the dictionary list.
-  //
-  // A loanword glosses as itself — mate, empanada, peso. Printing the word
-  // again under the word teaches nothing, so the repeat is dropped and what is
-  // left is the note, or the plain fact that English borrowed it whole.
-  const meanings = (inContext ? [inContext] : senses(shown.gloss_en)).filter((m) => norm(m) !== norm(shown.form));
+  // What to list, and why (popoverMeanings, meanings.ts).
+  const meanings = popoverMeanings(shown, inContext);
   const borrowed = !meanings.length && !shown.gloss_note_en;
 
   return (
@@ -182,7 +176,10 @@ export function WordPopover({
               senses run together on one line read as one long phrase. */}
           {meanings.map((m, i) => (
             <View key={i} style={styles.row}>
-              <Text style={styles.en}>{m}</Text>
+              <Text style={styles.en}>{m.text}</Text>
+              {/* Only ever on the first row, and only when a second one is
+                  about to say what the word means on its own. */}
+              {m.here ? <Text style={styles.here}>here</Text> : null}
             </View>
           ))}
           {borrowed ? <Text style={styles.note}>the same in English</Text> : null}
@@ -221,8 +218,19 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   es: { fontSize: 17, fontWeight: '700', color: colors.ink },
-  row: { paddingHorizontal: 14, paddingVertical: 9, borderTopWidth: 1, borderTopColor: colors.border },
-  en: { fontSize: 16, fontWeight: '600', color: colors.primaryDark },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    gap: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 9,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+  },
+  en: { flexShrink: 1, fontSize: 16, fontWeight: '600', color: colors.primaryDark },
+  // Quiet enough to read as a label on the meaning rather than a second meaning.
+  here: { fontSize: 12, fontWeight: '600', color: colors.muted },
   note: { fontSize: 13, color: colors.muted, lineHeight: 18, paddingHorizontal: 14, paddingVertical: 8 },
   // A rotated square reads as a tail without needing an SVG; the bubble's own
   // border is faked by the two sides of it that stay visible.

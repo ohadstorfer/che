@@ -126,8 +126,9 @@ units:
       en: "Hi there. All good."
     tips:
       - title: "Che"
-        body: "**Che** is how people in Buenos Aires get someone's attention — like \"hey\" or \"mate\".
-          It's friendly, never rude."
+        body: "**Che** is how people in Buenos Aires get someone's attention — like \"hey\". It goes in
+          front, where \"hey\" goes: *Che, ¿todo bien?* Only a greeting comes before it — *Hola, che.*
+          It is never the English \"man\" on the end. It's friendly, never rude."
       - title: "Soy"
         body: "To say who you are, use **soy**: *Soy Sofi.* One word carries \"I am\" — Spanish has no
           separate word for \"I\" here."
@@ -155,7 +156,7 @@ units:
         en: "well, fine, good"
       - lemma: "mal"
         pos: "adv"
-        en: "badly, not well"
+        en: "bad, badly"
       - lemma: "sí"
         pos: "adv"
         en: "yes"
@@ -165,9 +166,14 @@ units:
       - lemma: "todo bien"
         pos: "phrase"
         en: "all good"
-      - lemma: "qué tal"
+        note: "also the question: ¿Todo bien?"
+      # "qué tal" was retired here: it is Spanish from Spain in a porteño's
+      # mouth. The greeting is "¿Qué onda?", and "¿Todo bien?" asks as well as
+      # answers. Retiring happens in the admin; the YAML only adds (§7.2).
+      - lemma: "qué onda"
         pos: "phrase"
-        en: "how's it going"
+        en: "what's up"
+        register: "informal"
       - lemma: "yo"
         pos: "pron"
         en: "I"
@@ -242,12 +248,26 @@ units:
         pos: "verb"
         en: "to be called"
         forms:
+          # What the learner meets is the chunk. "llamo" is never said without
+          # "me" in front of it — nineteen sentences in the course contain it
+          # and every one says "me llamo" — so a card for the bare form asks a
+          # question with no answer, and its English can only be written by
+          # smuggling the missing word into a parenthesis: "(my name) is".
+          # The two bare forms stay below, marked `bound`: sentences still
+          # resolve through them and the dictionary still has the conjugation,
+          # but nothing drills them. docs/course-spec.md §1.5.
+          - form: "me llamo"
+            en: "my name is"
+            f: "1sg.pres.ind.clitic"
+          - form: "te llamás"
+            en: "your name is"
+            f: "2sg.pres.ind.vos.clitic"
           - form: "llamo"
-            en: "(my name) is, I'm called"
             f: "1sg.pres.ind"
+            bound: true
           - form: "llamás"
-            en: "(your name) is, you're called"
             f: "2sg.pres.ind.vos"
+            bound: true
       - lemma: "cómo"
         pos: "adv"
         en: "how"

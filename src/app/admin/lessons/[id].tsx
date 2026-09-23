@@ -14,7 +14,17 @@ import type { Lesson, LessonSlot, SlotKind } from '@/lib/types';
 // slots as placeholders — without recording anything.
 // ---------------------------------------------------------------------------
 
-const DRILL_MODES = ['', 'sentence_intro', 'sentence_meaning', 'sentence_gap', 'sentence_build', 'sentence_listen'];
+const DRILL_MODES = [
+  '',
+  'sentence_intro',
+  'sentence_meaning',
+  'sentence_meaning_tiles',
+  'sentence_gap',
+  'sentence_gap_tiles',
+  'sentence_gap_typed',
+  'sentence_build',
+  'sentence_listen',
+];
 const KINDS: SlotKind[] = ['teach', 'drill', 'match', 'tip', 'review', 'recap'];
 
 export default function AdminLesson() {

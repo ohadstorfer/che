@@ -7,10 +7,20 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
+import { parse } from 'yaml';
+
 import { buildContent } from './content.mjs';
+import { drillable } from './outline.mjs';
 import { fold } from './rules.mjs';
 
-const drillable = (f) => !f.is_glue && f.pos !== 'propn';
+
+/** "a", "a or b", "a, b or c" — a list that reads like a sentence. */
+const list = (xs, join = 'or') =>
+  xs.length < 3 ? xs.join(` ${join} `) : `${xs.slice(0, -1).join(', ')} ${join} ${xs[xs.length - 1]}`;
+
+/** The longer form a bound one lives inside: `levanto` → `me levanto`. */
+const chunkFor = (outline, bound) =>
+  outline.forms.find((f) => f.lemma_id === bound.lemma_id && f.id !== bound.id && f.form.endsWith(` ${bound.form}`));
 
 /** Candidates asked for per sentence the unit needs (§13.2). */
 export const OVERGENERATE = 3;
@@ -21,12 +31,22 @@ export const FORMS_PER_REQUEST = 4;
 /** A candidate needs at least this on every judge score to be selected. */
 export const MIN_SCORE = 4;
 
-/** Appendix B of the course spec — the rioplatense style spec — verbatim. */
-export function styleSpec(specPath = new URL('../../../docs/course-spec.md', import.meta.url)) {
+/**
+ * Appendix B of the course spec — the rioplatense style spec — verbatim, and
+ * the whole regional word list after it, so the model writes `pileta` the
+ * first time instead of learning it from the linter.
+ */
+export function styleSpec(
+  specPath = new URL('../../../docs/course-spec.md', import.meta.url),
+  wordsPath = new URL('../../../docs/course/regional-words.yaml', import.meta.url),
+) {
   const text = readFileSync(specPath, 'utf8');
   const start = text.indexOf('## Appendix B');
   const end = text.indexOf('## Appendix C');
-  return start >= 0 ? text.slice(start, end > start ? end : undefined).trim() : '';
+  if (start < 0) return '';
+  const { words } = parse(readFileSync(wordsPath, 'utf8'));
+  const pairs = words.map((w) => `${w.es} → ${w.ar}`).join(' · ');
+  return `${text.slice(start, end > start ? end : undefined).trim()}\n\n**Never use (any form) → say instead:** ${pairs}`;
 }
 
 export const promptHash = (text) => createHash('sha256').update(text).digest('hex').slice(0, 16);
@@ -43,10 +63,16 @@ export function generationPrompt({ outline, unit, targets, examples, existing, s
   const available = outline.forms.filter((f) => f.unit_order <= unit.course_order);
   const newHere = new Set(outline.forms.filter((f) => f.unit_id === unit.id).map((f) => f.id));
   // New words this unit teaches that no target will ever carry: proper nouns,
-  // and glue that is not a target in its own right.
+  // and glue that is not a target in its own right. A bound form is not one of
+  // these — it rides inside the chunk that targets it, and asking for it to be
+  // "said at least once" is asking for the very sentence the rule forbids.
   const passengers = outline.forms.filter(
-    (f) => f.unit_id === unit.id && !drillable(f) && !targets.some((t) => t.id === f.id),
+    (f) => f.unit_id === unit.id && !drillable(f) && !f.bound && !targets.some((t) => t.id === f.id),
   );
+  // Forms the unit teaches only inside a longer one. The vocabulary list shows
+  // them, so without this the model writes "Llamo Sofi" and loses the sentence
+  // in the check (docs/course-spec.md §1.5).
+  const bound = outline.forms.filter((f) => f.unit_id === unit.id && f.bound);
   // The course's cast, read off the lexicon rather than listed by hand. A
   // person's name is a proper noun the outline gave a gender to; the places got
   // none on purpose (migration 20260918000008), which is what tells them apart.
@@ -89,6 +115,13 @@ export function generationPrompt({ outline, unit, targets, examples, existing, s
     // A unit's proper nouns are never targets — nobody drills "Montevideo" as
     // vocabulary — so without this they are taught and then never said. Unit 5
     // introduced six places and its first draft used two of them.
+    ...(bound.length
+      ? [
+          '',
+          `Never write ${list(bound.map((f) => `"${f.form}"`))} on ${bound.length === 1 ? 'its' : 'their'} own.`,
+          `${bound.length === 1 ? 'It is' : 'Each is'} only ever said inside the longer form above that ends in it — ${list(bound.slice(0, 3).map((f) => `"${chunkFor(outline, f)?.form ?? f.form}"`))}${bound.length > 3 ? ', and so on' : ''}. A sentence with the bare form in it is rejected.`,
+        ]
+      : []),
     ...(passengers.length
       ? [
           '',

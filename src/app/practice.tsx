@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Exercise } from '@/components/exercises';
@@ -18,6 +18,7 @@ import { conceptsOf } from '@/lib/concepts';
 import { currentIndex, loadCourse, loadProgress } from '@/lib/course';
 import { buildLesson } from '@/lib/lesson';
 import { goBack } from '@/lib/nav';
+import { DEFAULT_LADDER, type Ladder } from '@/lib/sentences';
 import { type TestMode, type TestOutcome, buildTest, maxUnitsInTest, shouldStop, testOutcome } from '@/lib/placement';
 import {
   type AnswerExtra,
@@ -31,7 +32,7 @@ import {
 import { type SessionData, buildFreeSession, buildMistakesSession, buildSession } from '@/lib/session';
 import { streakStatus } from '@/lib/streak';
 import { supabase } from '@/lib/supabase';
-import { colors, radius } from '@/lib/theme';
+import { colors, press, radius } from '@/lib/theme';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import type { Form, Sentence, Streak, Unit } from '@/lib/types';
 
@@ -83,6 +84,7 @@ export default function Practice() {
   const [allForms, setAllForms] = useState<Form[]>([]);
   const [lexicon, setLexicon] = useState<Map<string, Form>>(() => new Map());
   const [allSentences, setAllSentences] = useState<Sentence[]>([]);
+  const [ladder, setLadder] = useState<Ladder>(DEFAULT_LADDER);
   const [index, setIndex] = useState(0);
   const [kind, setKind] = useState<RoundKind>('practice');
   const [plan, setPlan] = useState<TestPlan | null>(null);
@@ -185,6 +187,7 @@ export default function Practice() {
       setAllForms(data.allForms);
       setLexicon(data.lexicon);
       setAllSentences(data.sentences);
+      setLadder(data.ladder ?? DEFAULT_LADDER);
     });
     return () => {
       cancelled = true;
@@ -328,6 +331,27 @@ export default function Practice() {
     // A placement test stops as soon as she has reached her level.
     if (plan?.mode === 'placement' && shouldStop(round.testAnswers.current)) return void finish();
     advance(next);
+  };
+
+  // -------------------------------------------------------------------------
+  // Staff: answer the exercise on screen without answering it. Two buttons —
+  // right and wrong — each grade the item the way the exercise itself would
+  // (nothing is invented; a wrong press simply marks every form the item
+  // drills as missed) and move on. It is how a reviewer walks a lesson end to
+  // end, and how a wrong-answer path gets looked at without having to think of
+  // a wrong answer. Only staff ever see it.
+  // -------------------------------------------------------------------------
+  const simulating = useRef(false);
+  const simulate = async (correct: boolean) => {
+    const item = queue?.[index];
+    if (!item || simulating.current) return;
+    simulating.current = true;
+    try {
+      if (item.isIntro) await onIntroDone(item);
+      else await onAnswered(item, correct ? [] : formsOf(item).map((f) => f.id));
+    } finally {
+      simulating.current = false;
+    }
   };
 
   const actions = useMemo<AnswerActions | null>(
@@ -517,6 +541,7 @@ export default function Practice() {
         </Text>
       </View>
       {title ? <Text style={styles.kicker}>{title}</Text> : null}
+      {profile.role !== 'student' ? <SimulateBar onSimulate={(c) => void simulate(c)} /> : null}
 
       {current && (
         <AnswerActionsContext.Provider value={kind === 'placement' ? null : actions}>
@@ -526,6 +551,7 @@ export default function Practice() {
             allForms={allForms}
             allSentences={allSentences}
             lexicon={lexicon}
+            ladder={ladder}
             hints={(kind !== 'lesson' && kind !== 'placement') || !!current.review}
             onIntroDone={() => onIntroDone(current)}
             onAnswered={(wrongIds, extra) => void onAnswered(current, wrongIds, extra)}
@@ -535,6 +561,74 @@ export default function Practice() {
     </SafeAreaView>
   );
 }
+
+// ---------------------------------------------------------------------------
+// The staff shortcut through a round: grade this exercise right or wrong and
+// go on. Deliberately plain and a little out of the way — it is scaffolding
+// for reviewers, not part of the lesson.
+// ---------------------------------------------------------------------------
+function SimulateBar({ onSimulate }: { onSimulate: (correct: boolean) => void }) {
+  return (
+    <View style={styles.simBar}>
+      <Text style={styles.simLabel}>Simulate</Text>
+      <SimButton
+        label="Correct"
+        icon="checkmark"
+        tint={colors.success}
+        background={colors.successSoft}
+        onPress={() => onSimulate(true)}
+      />
+      <SimButton
+        label="Wrong"
+        icon="close"
+        tint={colors.dangerInk}
+        background={colors.dangerSoft}
+        onPress={() => onSimulate(false)}
+      />
+    </View>
+  );
+}
+
+function SimButton({
+  label,
+  icon,
+  tint,
+  background,
+  onPress,
+}: {
+  label: string;
+  icon: 'checkmark' | 'close';
+  tint: string;
+  background: string;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`Simulate a ${label.toLowerCase()} answer`}
+      hitSlop={6}
+      style={({ pressed }) => [
+        styles.simButton,
+        { backgroundColor: background, transform: [{ scale: pressed ? press.scale : 1 }] },
+        simTransition,
+      ]}>
+      <Ionicons name={icon} size={14} color={tint} />
+      <Text style={[styles.simButtonText, { color: tint }]}>{label}</Text>
+    </Pressable>
+  );
+}
+
+// On web the press scale eases instead of snapping, as it does on every other
+// button in the app.
+const simTransition =
+  Platform.OS === 'web'
+    ? ({
+        transitionProperty: 'transform',
+        transitionDuration: `${press.duration}ms`,
+        transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+      } as object)
+    : null;
 
 // ---------------------------------------------------------------------------
 // A unit check she didn't pass: how close she was, the words that tripped her,
@@ -649,6 +743,36 @@ const styles = StyleSheet.create({
   },
 
   doneWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 24 },
+
+  // The staff simulate bar ---------------------------------------------------
+  simBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    maxWidth: 560,
+    width: '100%',
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    marginBottom: -4,
+  },
+  simLabel: {
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+    color: colors.faint,
+    marginRight: 2,
+  },
+  simButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    paddingVertical: 6,
+    paddingHorizontal: 11,
+    borderRadius: radius.pill,
+  },
+  simButtonText: { fontSize: 13, fontWeight: '700' },
 
   // The frozen-streak gate, and the unit-check and test results ---------------
   gatePanel: { alignItems: 'stretch', gap: 12, maxWidth: 400, width: '100%' },

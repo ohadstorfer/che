@@ -146,6 +146,13 @@ export interface Ladder {
   rungGapAt: number;
   /** Passes before it moves on to tiles. */
   rungBuildAt: number;
+  /** Passes before a sentence still held at the gap is filled from tiles
+   *  rather than four choices, and then typed. Sentences that move on to the
+   *  build never reach these; the ones that stay — too long to rebuild, or
+   *  carrying glue she doesn't own — are exactly the ones that would otherwise
+   *  ask the same screen forever. */
+  gapTilesAt: number;
+  gapTypedAt: number;
   /** Interval, in days, at which a word has settled (session.ts). */
   settledDays: number;
   /** Added to the day's sentence cap. */
@@ -199,6 +206,8 @@ export const DEFAULT_LADDER: Ladder = {
   offset: 0,
   rungGapAt: 1,
   rungBuildAt: 2,
+  gapTilesAt: 4,
+  gapTypedAt: 6,
   settledDays: 7,
   capShift: 0,
   buildTiles: BUILD_TILES_MIN,
@@ -230,9 +239,9 @@ export function ladderFor(
   }: { placedThrough?: number; glue?: { id: string; unit_order: number }[]; passed?: number } = {},
 ): Ladder {
   const byOffset = {
-    [-1]: { rungGapAt: 1, rungBuildAt: 3, settledDays: 10, capShift: -1, tailAfter: null },
-    [0]: { rungGapAt: 1, rungBuildAt: 2, settledDays: 7, capShift: 0, tailAfter: 6 },
-    [1]: { rungGapAt: 0, rungBuildAt: 1, settledDays: 5, capShift: 1, tailAfter: 4 },
+    [-1]: { rungGapAt: 1, rungBuildAt: 3, gapTilesAt: 5, gapTypedAt: 8, settledDays: 10, capShift: -1, tailAfter: null },
+    [0]: { rungGapAt: 1, rungBuildAt: 2, gapTilesAt: 4, gapTypedAt: 6, settledDays: 7, capShift: 0, tailAfter: 6 },
+    [1]: { rungGapAt: 0, rungBuildAt: 1, gapTilesAt: 2, gapTypedAt: 4, settledDays: 5, capShift: 1, tailAfter: 4 },
   }[offset];
   return {
     offset,
@@ -260,6 +269,9 @@ export const RUNG_GAP_AT = 1;
 export const RUNG_BUILD_AT = 2;
 
 const passesOf = (s: Sentence) => s.shown?.correct_count ?? 0;
+
+/** How often she has passed a sentence — what the gap's flavour grows with. */
+export const passesOfSentence = passesOf;
 
 /** Sentence screens she has passed, ever — what the day's dose and the build's
  *  tile ceiling both grow with. */

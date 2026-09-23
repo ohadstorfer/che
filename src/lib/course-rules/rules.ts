@@ -5,6 +5,7 @@
 // the scripts.
 
 import type { FormFeatures } from '../types';
+import { REGIONAL_PHRASE_LIST, REGIONAL_WORDS } from './regional-words';
 
 /** Registers in increasing order of informality. */
 export const REGISTERS = ['neutral', 'informal', 'lunfardo', 'vulgar'];
@@ -76,40 +77,37 @@ export const TUTEO_AMBIGUOUS = new Set([
 
 /**
  * Regional words the course never uses, with the rioplatense word to use
- * instead (Appendix B). Keys are lowercase surfaces. Only words that mean
- * nothing else in Argentina belong here: `camión` is a truck, `metro` a metre,
- * `vale` is *vale la pena* — rejecting those would reject real Argentine.
+ * instead (Appendix B). Keys are lowercase surfaces — every inflected form, so
+ * `piscinas` and `enfadé` are caught too. Edited in
+ * docs/course/regional-words.yaml and built by `npm run course:regional`.
+ * Only words that mean nothing else in Argentina belong there: `camión` is a
+ * truck, `metro` a metre, `piña` a punch — rejecting those would reject real
+ * Argentine.
  */
-export const REGIONAL = new Map([
-  ['coche', 'auto'], ['coches', 'autos'],
-  ['autobús', 'colectivo / bondi'],
-  ['móvil', 'celular'],
-  ['ordenador', 'computadora'],
-  ['curro', 'laburo'], ['currar', 'laburar'], ['chamba', 'laburo'], ['chambear', 'laburar'],
-  ['chaval', 'pibe'], ['chavala', 'piba'], ['chavo', 'pibe'], ['chava', 'piba'],
-  ['camiseta', 'remera'], ['playera', 'remera'],
-  ['deportivas', 'zapatillas'],
-  ['chaqueta', 'campera'], ['chamarra', 'campera'],
-  ['bonito', 'lindo'], ['bonita', 'linda'],
-  ['guay', 'copado / bárbaro'], ['chido', 'copado / bárbaro'],
-  ['discoteca', 'boliche'],
-  ['bollería', 'facturas'],
-  ['fresa', 'frutilla'], ['fresas', 'frutillas'],
-  ['aguacate', 'palta'],
-  ['piña', 'ananá'],
-  ['elote', 'choclo'],
-  ['aquí', 'acá'], ['allí', 'allá'],
-  ['zumo', 'jugo'],
-  ['patatas', 'papas'], ['patata', 'papa'],
-  ['gafas', 'anteojos'],
-  ['conducir', 'manejar'],
-]);
+export const REGIONAL = new Map(Object.entries(REGIONAL_WORDS));
+
+/**
+ * Set phrases the course never uses, with what a porteño says instead. Same
+ * idea as REGIONAL, one level up: `qué tal` is every word of it ordinary
+ * Spanish, so no token is wrong on its own — the phrase is. Matched over the
+ * whole sentence, accents and punctuation folded away.
+ */
+export const REGIONAL_PHRASES = new Map([['qué tal', 'qué onda / todo bien'], ...REGIONAL_PHRASE_LIST]);
 
 /**
  * Words an answer may leave out without being wrong: a vocative "che" adds
  * colour, not meaning, and English has nothing to prompt it with.
  */
 export const OPTIONAL_LEMMAS = new Set(['che']);
+
+/**
+ * Where `che` may stand. It opens what you say — it is "hey", not the English
+ * "man" you tack on the end: *Che, ¿todo bien?*, never *¿Todo bien?, che*. The
+ * one place it isn't first is straight after a bare greeting, where the two are
+ * one breath: *Hola, che.* / *Chau, che.* Anything further in ("Bien, che.",
+ * "Bueno, chau, che.") reads as the English tag and is wrong.
+ */
+export const CHE_GREETINGS = new Set(['hola', 'chau', 'buenas', 'buen día', 'buenos días', 'buenas tardes', 'buenas noches']);
 
 /** Subject pronouns — Spanish drops them whenever the verb already says who. */
 export const SUBJECT_PRONOUNS = new Map<string, { person: number; number: 'sg' | 'pl' }>([

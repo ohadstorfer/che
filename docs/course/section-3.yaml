@@ -802,45 +802,78 @@ units:
         pos: "pron"
         en: "himself, herself, themselves"
         glue: true
+      # A pronominal verb is taught as the chunk, never as the bare stem: a
+      # card for "levanto" would have to say "(I) get up" and the parenthesis
+      # is the half the Spanish word does not carry. docs/course-spec.md §1.5.
       - lemma: "levantarse"
         pos: "verb"
         en: "to get up"
         forms:
+          - form: "me levanto"
+            en: "I get up"
+            f: "1sg.pres.ind.clitic"
+          - form: "te levantás"
+            en: "you get up"
+            f: "2sg.pres.ind.vos.clitic"
+          - form: "se levanta"
+            en: "he gets up, she gets up"
+            f: "3sg.pres.ind.clitic"
+          - form: "nos levantamos"
+            en: "we get up"
+            f: "1pl.pres.ind.clitic"
           - form: "levanto"
-            en: "(I) get up"
             f: "1sg.pres.ind"
+            bound: true
           - form: "levantás"
-            en: "(you) get up"
             f: "2sg.pres.ind.vos"
+            bound: true
           - form: "levanta"
-            en: "(he/she) gets up"
             f: "3sg.pres.ind"
+            bound: true
           - form: "levantamos"
-            en: "(we) get up"
             f: "1pl.pres.ind"
+            bound: true
       - lemma: "acostarse"
         pos: "verb"
         en: "to go to bed"
         forms:
+          - form: "me acuesto"
+            en: "I go to bed"
+            f: "1sg.pres.ind.clitic"
+          - form: "te acostás"
+            en: "you go to bed"
+            f: "2sg.pres.ind.vos.clitic"
+          - form: "se acuesta"
+            en: "he goes to bed, she goes to bed"
+            f: "3sg.pres.ind.clitic"
           - form: "acuesto"
-            en: "(I) go to bed"
             f: "1sg.pres.ind"
+            bound: true
           - form: "acostás"
-            en: "(you) go to bed"
             f: "2sg.pres.ind.vos"
+            bound: true
           - form: "acuesta"
-            en: "(he/she) goes to bed"
             f: "3sg.pres.ind"
+            bound: true
+      # Teaching the chunk also settles a collision: "baño" on its own is the
+      # bathroom, and the course had two cards for the same string saying
+      # different things.
       - lemma: "bañarse"
         pos: "verb"
         en: "to shower, to bathe"
         forms:
+          - form: "me baño"
+            en: "I shower"
+            f: "1sg.pres.ind.clitic"
+          - form: "te bañás"
+            en: "you shower"
+            f: "2sg.pres.ind.vos.clitic"
           - form: "baño"
-            en: "(I) shower"
             f: "1sg.pres.ind"
+            bound: true
           - form: "bañás"
-            en: "(you) shower"
             f: "2sg.pres.ind.vos"
+            bound: true
       - lemma: "desayunar"
         pos: "verb"
         en: "to have breakfast"
@@ -955,9 +988,12 @@ units:
         pos: "verb"
         en: "to get together"
         forms:
+          - form: "nos juntamos"
+            en: "we get together"
+            f: "1pl.pres.ind.clitic"
           - form: "juntamos"
-            en: "(we) get together"
             f: "1pl.pres.ind"
+            bound: true
       - lemma: "mirar"
         pos: "verb"
         forms:

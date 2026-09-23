@@ -11,10 +11,12 @@ import {
   tooLongToBuild,
 } from './sentences';
 import {
+  GAP_MODES,
   type LearnerData,
   type SessionData,
   type SessionItem,
   drillable,
+  gapMode,
   itemsForForm,
   loadLearner,
   matchingBlock,
@@ -144,7 +146,9 @@ export function resolveSlots(
   // meeting the word in it first is exactly right.
   const readHere = new Set(
     slots.flatMap((s) =>
-      s.kind === 'drill' && s.sentence_id && (!s.mode || s.mode === 'sentence_meaning' || s.mode === 'sentence_intro')
+      s.kind === 'drill' &&
+      s.sentence_id &&
+      (!s.mode || MEANING_MODES.includes(s.mode) || s.mode === 'sentence_intro')
         ? [s.sentence_id]
         : [],
     ),
@@ -195,6 +199,8 @@ export function resolveSlots(
         if (mode === 'sentence_listen' && !sentence.audio_path) mode = 'sentence_build';
         const introduces = mode === 'sentence_intro' && !known().has(target.id) ? target : undefined;
         if (mode === 'sentence_intro' && !introduces) mode = 'sentence_meaning';
+        // A gap authored on a slot still hardens with the sentence's passes.
+        if (mode === 'sentence_gap') mode = gapMode(sentence, ladder);
         items.push(sentenceItem(data, sentence, mode, target, introduces));
         if (introduces) introduced.add(target.id);
         break;
@@ -312,8 +318,8 @@ function reviewItems(
     // Same rule as the practice round: the gap tests its word, tiles test every
     // word, and reading for meaning tests nothing hard enough to count.
     const mode = modeForRung(rungFor(sentence, seen, ladder), sentence, ladder);
-    if (mode === 'sentence_gap') covered.add(target.id);
-    else if (mode !== 'sentence_meaning') for (const id of sentence.form_ids) covered.add(id);
+    if (GAP_MODES.includes(mode)) covered.add(target.id);
+    else if (!MEANING_MODES.includes(mode)) for (const id of sentence.form_ids) covered.add(id);
     out.push({ ...sentenceItem(data, sentence, mode, target), review: true });
   }
 
@@ -337,7 +343,20 @@ function reviewItems(
   return out.slice(0, count);
 }
 
-const PRODUCTION: ExerciseMode[] = ['word_build', 'typing', 'listen_build', 'sentence_build', 'sentence_listen'];
+const PRODUCTION: ExerciseMode[] = [
+  'word_build',
+  'typing',
+  'listen_build',
+  'sentence_build',
+  'sentence_listen',
+  'sentence_gap_typed',
+];
+
+/** Reading screens: they ask for a meaning, not for Spanish. */
+const MEANING_MODES: ExerciseMode[] = ['sentence_meaning', 'sentence_meaning_tiles'];
+
+/** The gaps a recap may turn into a build to make its production quota. */
+const UPGRADABLE_GAPS: ExerciseMode[] = ['sentence_gap', 'sentence_gap_tiles'];
 
 /**
  * A recap slot — the body of a unit check (learning-engine-spec §3.2): `count`
@@ -403,7 +422,7 @@ export function recapItems(
       sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && chosenIds.has(f.id) && !used.has(f.id));
     if (!target) continue;
     const mode = modeForRung(atLeast(rungFor(sentence, seen, ladder), 'gap'), sentence, ladder);
-    const tests = mode === 'sentence_gap' ? [target.id] : sentence.form_ids.filter((id) => chosenIds.has(id));
+    const tests = GAP_MODES.includes(mode) ? [target.id] : sentence.form_ids.filter((id) => chosenIds.has(id));
     if (tests.some((id) => used.has(id))) continue;
     for (const id of tests) used.add(id);
     out.push({ ...sentenceItem(data, sentence, mode, target), review: true });
@@ -425,7 +444,9 @@ export function recapItems(
   let production = out.filter((i) => PRODUCTION.includes(i.mode)).length;
   for (const item of out) {
     if (production >= wanted) break;
-    if (item.mode === 'sentence_gap' && item.sentence && !hasLockedGlue(item.sentence, seen, ladder)) {
+    // A typed gap is already a production screen — it is counted above, and
+    // rewriting it into a build would spend the quota twice.
+    if (UPGRADABLE_GAPS.includes(item.mode) && item.sentence && !hasLockedGlue(item.sentence, seen, ladder)) {
       const clause = tooLongToBuild(item.sentence, ladder)
         ? buildableClause(item.sentence, item.form.id, ladder)
         : null;

@@ -1,0 +1,386 @@
+section:
+  slug: "mate"
+  title: "Mate"
+  emoji: "🧉"
+  summary: "The drink that runs the country"
+
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "que-es-el-mate"
+    title: "What is mate?"
+    summary: "A bitter herb, a gourd and a whole lot of history"
+    pages:
+      - type: info
+        title: "Not a drink. A ritual."
+        emoji: "🧉"
+        body: "**Mate** is hot water poured over **yerba mate**, the dried, ground leaves of a holly tree that grows in the northeast. You sip it through a metal straw from a small cup that's *also* called a **mate**. Then you refill it and pass it to the next person. That's the whole trick, and Argentines do it all day long."
+        fun_fact: "Since 2013, a national law officially names mate Argentina's *infusión nacional*."
+
+      - type: true_false
+        statement: "In Argentina, the word \"mate\" can mean both the drink and the cup you drink it from."
+        answer: true
+        explain: "Exactly. \"Pasame el mate\" can mean the cup, the drink, or both. Context does the rest."
+
+      - type: info
+        title: "The Guaraní got there first"
+        emoji: "🌿"
+        body: "Long before the Spanish showed up, the **Guaraní** people of what is now Paraguay, northeast Argentina and southern Brazil were drinking the leaf. In Guaraní the plant is **ka'a** and the drink is **ka'ay**, roughly \"yerba water\". So when you drink mate, you're joining a tradition that is centuries older than Argentina itself."
+
+      - type: info
+        title: "Jesuits, plantations, and a name"
+        emoji: "⛪"
+        body: "In the 1600s, **Jesuit** missions in Guaraní lands figured out how to *grow* yerba on plantations instead of harvesting it wild. For a while people even called it \"Jesuit tea\". The word **mate** itself is usually traced to Quechua **mati**, meaning gourd, the cup that holds it. Today yerba is grown mainly in **Misiones** and **Corrientes**."
+        fun_fact: "November 30 is the Día Nacional del Mate, the birthday of Andrés \"Andresito\" Guacurarí, a Guaraní leader who governed Misiones."
+
+      - type: choice
+        prompt: "Which people first drank yerba mate?"
+        options: ["The Spanish colonists", "The Guaraní", "The Incas", "Italian immigrants"]
+        correct: 1
+        explain: "The Guaraní. The Spanish and the Jesuits came later and turned it into a big business."
+
+      - type: match
+        prompt: "Match the word to where it comes from"
+        pairs:
+          - ["ka'a", "Guaraní: the yerba plant"]
+          - ["mati", "Quechua: gourd"]
+          - ["Misiones", "Province where most yerba grows"]
+          - ["30 de noviembre", "Día Nacional del Mate"]
+
+      - type: choice
+        scenario: "You're new in Buenos Aires. A coworker says: \"¿Tomás mate?\""
+        prompt: "What are they asking?"
+        options: ["If you eat meat", "If you drink mate, and probably offering you one", "If you're tired"]
+        correct: 1
+        explain: "Mate uses **tomar** (to drink), not *beber*. And the question is usually an invitation. Say **dale** and you're in."
+
+      - type: true_false
+        statement: "Yerba mate is a kind of green tea from China."
+        answer: false
+        explain: "Totally different plant. Yerba mate (*Ilex paraguariensis*) is a South American holly. It does have caffeine, which is why half the country runs on it."
+
+    vocabulary:
+      - es: "mate"
+        en: "mate (the drink, and the cup)"
+        example: { es: "¿Tomás mate?", en: "Do you drink mate?" }
+      - es: "yerba"
+        en: "the dried yerba mate leaves"
+      - es: "tomar mate"
+        en: "to drink mate"
+        note: "Argentines say tomar, not beber."
+      - es: "infusión"
+        en: "infusion, herbal drink"
+      - es: "calabaza"
+        en: "gourd"
+      - es: "dale"
+        en: "sure, OK, go ahead"
+        example: { es: "—¿Querés un mate? —Dale.", en: "—Want a mate? —Sure." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "los-chiches"
+    title: "The gear"
+    summary: "Mate, bombilla, termo, yerba: your starter kit"
+    pages:
+      - type: info
+        title: "The mate (the cup)"
+        emoji: "🥥"
+        body: "The classic one is a dried **calabaza** (gourd). There are also wooden ones, glass, ceramic, steel, and the chunky leather-wrapped **mate camionero**, the \"trucker's mate\". A new gourd has to be **curado** (cured) first: you fill it with wet yerba and leave it a day or so, so it doesn't taste funky or crack."
+
+      - type: info
+        title: "The bombilla"
+        emoji: "🥄"
+        body: "The **bombilla** is a metal straw with a filter at the bottom, so you drink the water and not the leaves. Usually steel or alpaca (a nickel-silver alloy), sometimes fancy silver. It goes in once and stays put. It is not a spoon, and it is definitely not a stirring stick."
+
+      - type: true_false
+        statement: "If the mate is getting clogged, it's fine to stir the yerba with the bombilla."
+        answer: false
+        explain: "Moving the bombilla wrecks the setup and clogs it more. If it's blocked, tell the cebador. It's their mate, their problem."
+
+      - type: info
+        title: "The termo and the yerba"
+        emoji: "🫖"
+        body: "The **termo** (thermos) keeps water hot for hours, which is why you see people carrying one under their arm in the park. At home it's the **pava** (kettle). **Yerba** comes in 500 g or 1 kg packs, **con palo** (with stems, milder) or **sin palo** (just leaves, stronger). Everyone swears by their brand, and people can get *very* loyal about it."
+
+      - type: match
+        prompt: "Match the gear to what it does"
+        pairs:
+          - ["bombilla", "metal straw with a filter"]
+          - ["termo", "keeps the water hot"]
+          - ["pava", "kettle"]
+          - ["calabaza", "gourd used as a cup"]
+          - ["yerba", "the dried leaves"]
+
+      - type: choice
+        scenario: "At the supermarket you see \"yerba con palo\" and \"yerba sin palo\"."
+        prompt: "What's the difference?"
+        options: ["Organic vs. regular", "With stems (milder) vs. only leaves (stronger)", "Sweet vs. bitter"]
+        correct: 1
+        explain: "**Palo** means stick or stem. Stems make it milder and slower to wash out. **Sin palo** hits harder."
+
+      - type: gap
+        prompt: "Your friend is about to pour water from the stove. What do you ask for?"
+        text: "Pasame la ___, que el agua ya está."
+        options: ["pava", "bombilla", "yerba"]
+        correct: 0
+        translation: "Pass me the kettle, the water's ready."
+        explain: "The **pava** is the kettle. No, you don't use it to drink."
+
+      - type: true_false
+        statement: "You should wash a brand-new gourd with soap and use it right away."
+        answer: false
+        explain: "New gourds get **curados** (cured) with wet yerba first. Soap and gourds don't mix."
+
+    vocabulary:
+      - es: "bombilla"
+        en: "metal straw with a filter"
+        example: { es: "No muevas la bombilla.", en: "Don't move the straw." }
+        note: "Never stir with it."
+      - es: "termo"
+        en: "thermos"
+      - es: "pava"
+        en: "kettle"
+      - es: "con palo"
+        en: "with stems (yerba)"
+      - es: "sin palo"
+        en: "without stems (yerba)"
+      - es: "curar el mate"
+        en: "to cure a new gourd"
+      - es: "mate camionero"
+        en: "big leather-wrapped mate"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "cebar"
+    title: "How to cebar"
+    summary: "Making mate, step by step, without embarrassing yourself"
+    pages:
+      - type: info
+        title: "Cebar: the verb that matters"
+        emoji: "🫗"
+        body: "**Cebar** means to prepare and serve mate: pour the water, hand it over, get it back, repeat. The person doing it is the **cebador** (or **cebadora**). It's a small job with big status. A good cebador is appreciated; a bad one hears about it, lovingly, all afternoon."
+
+      - type: info
+        title: "The montañita"
+        emoji: "⛰️"
+        body: "Fill the mate about ¾ with yerba. Cover the mouth with your hand, flip it, shake, and tilt it so the yerba slides to one side. That slope is the **montañita** (little mountain). You pour into the low side and keep the top dry, so the mate keeps its flavor longer."
+
+      - type: order
+        prompt: "Prepare a mate, step by step"
+        items:
+          - "Fill the mate about ¾ with yerba"
+          - "Cover it, flip it, shake it"
+          - "Tilt it to make the montañita"
+          - "Wet the low side with a bit of warm water"
+          - "Put in the bombilla on the wet side"
+          - "Pour hot water, not boiling, next to the bombilla"
+        explain: "The warm water first lets the yerba swell before the hot water hits it. The bombilla goes in once and stays there."
+
+      - type: info
+        title: "Hot, but never boiling"
+        emoji: "🌡️"
+        body: "The golden rule: the water should be hot, around **70 to 80 °C**, and never boiling. Boiling water **quema la yerba** (burns the yerba) and makes it bitter and harsh. Old-school trick: turn off the pava when it starts to hum, right before the bubbles come."
+        fun_fact: "Many electric kettles in Argentina have a \"mate\" setting for exactly this."
+
+      - type: choice
+        scenario: "The pava is bubbling hard, full boil. Your friend is waiting with the mate ready."
+        prompt: "What do you do?"
+        options: ["Pour it, hotter is better", "Let it cool down a bit first", "Add ice to the mate"]
+        correct: 1
+        explain: "Boiling water burns the yerba. You'll hear \"¡lo quemaste!\" and you'll deserve it."
+
+      - type: info
+        title: "Who drinks the first one?"
+        emoji: "🥇"
+        body: "The first mate is often bitter, a bit foamy, and full of dust, so the **cebador** usually drinks it, or spits it out. It's a small sacrifice, not a privilege. After a lot of rounds the flavor fades and the mate is **lavado** (washed out). Then the cebador changes the yerba, or adds a little on the side."
+
+      - type: true_false
+        statement: "The cebador gives the first mate to the most important guest, as an honor."
+        answer: false
+        explain: "Usually the opposite: the first one is the harsh one, so the cebador takes the hit. There is even a saying: **el primero es para el zonzo** (the first one is for the fool)."
+
+      - type: gap
+        prompt: "The mate has lost all its flavor. What do you say?"
+        text: "Che, este mate está ___."
+        options: ["lavado", "quemado", "curado"]
+        correct: 0
+        translation: "Hey, this mate is washed out."
+        explain: "**Lavado** means it's lost its flavor. Time for fresh yerba."
+
+    vocabulary:
+      - es: "cebar"
+        en: "to prepare and serve mate"
+        example: { es: "¿Quién ceba?", en: "Who's serving?" }
+      - es: "cebador"
+        en: "the person serving mate"
+      - es: "montañita"
+        en: "the slope of yerba in the mate"
+      - es: "lavado"
+        en: "washed out, flavorless (mate)"
+      - es: "quemar la yerba"
+        en: "to burn the yerba (with boiling water)"
+      - es: "agua caliente"
+        en: "hot water"
+      - es: "hervir"
+        en: "to boil"
+        example: { es: "No dejes hervir el agua.", en: "Don't let the water boil." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-ronda"
+    title: "The rules of the ronda"
+    summary: "Mate etiquette, so nobody gives you the look"
+    pages:
+      - type: info
+        title: "The ronda"
+        emoji: "🔄"
+        body: "When people share mate, there's one mate, one bombilla, and one **ronda** (round). The **cebador** fills it and hands it to one person. That person drinks *all* of it until it gurgles, and hands it back to the cebador. Not to their neighbor. Back. Then the cebador fills it for the next one, always in the same order."
+
+      - type: choice
+        scenario: "You just finished your mate. The person next to you is looking at it hopefully."
+        prompt: "Who do you give it to?"
+        options: ["The person next to you", "Back to the cebador", "Whoever looks thirstiest"]
+        correct: 1
+        explain: "Always back to the **cebador**. They refill it and pass it on. The mate never skips the cebador."
+
+      - type: choice
+        scenario: "Someone hands you a mate and the montañita looks kinda off, the bombilla a bit crooked."
+        prompt: "Should you fix it?"
+        options: ["Yes, help out", "No, only the cebador touches it"]
+        correct: 1
+        explain: "Hands off. Fixing someone's mate is like rearranging their kitchen while they cook. Just drink it."
+
+      - type: info
+        title: "Gracias means \"I'm out\""
+        emoji: "🙅"
+        body: "This one catches every foreigner. In a ronda, saying **gracias** when you hand the mate back doesn't mean \"thanks\", it means \"thanks, **I'm done**\". Say it after your first mate and you won't get another. Want to keep going? Just hand it back, maybe with a smile or a \"¡qué rico!\"."
+
+      - type: true_false
+        statement: "If you want more mate, you should say \"gracias\" every time it's handed to you, to be polite."
+        answer: false
+        explain: "Classic trap. **Gracias** = I'm done. Say it only when you want out of the ronda."
+
+      - type: info
+        title: "It's not a microphone"
+        emoji: "🎤"
+        body: "Don't hold the mate while you tell a long story. The whole ronda is waiting, and the water is getting cold. Someone will say **\"¡No es un micrófono!\"** and everyone will laugh at you, kindly. Drink it all, hand it back. And don't complain that it's too hot or too bitter: you're a guest in someone else's mate."
+
+      - type: gap
+        prompt: "Your friend is talking and holding the mate forever. What do you say?"
+        text: "Dale, que no es un ___."
+        options: ["micrófono", "termo", "regalo"]
+        correct: 0
+        translation: "Come on, it's not a microphone."
+        explain: "The classic line for someone who hogs the mate."
+
+      - type: choice
+        scenario: "You're at a friend's place. You've had four mates and you've had enough."
+        prompt: "What's the smoothest way out?"
+        options: ["Just stop drinking and hold it", "Hand it back and say \"gracias\"", "Pass it to the next person"]
+        correct: 1
+        explain: "**Gracias** as you hand it back, and the cebador skips you from then on. Easy."
+
+      - type: order
+        prompt: "One turn in the ronda, in order"
+        items:
+          - "The cebador fills the mate"
+          - "They hand it to you, bombilla facing you"
+          - "You drink it all, until it gurgles"
+          - "You hand it back to the cebador"
+          - "The cebador fills it for the next person"
+
+      - type: true_false
+        statement: "Wiping the bombilla before you drink from it is normal and polite."
+        answer: false
+        explain: "Sharing the bombilla is the whole point, and wiping it can come off as a bit of an insult. If you're sick or don't want to share, just say **no, gracias** from the start. That's totally fine."
+
+    vocabulary:
+      - es: "ronda"
+        en: "round (of mate)"
+      - es: "gracias"
+        en: "thanks (in a ronda: I'm done)"
+        note: "Only say it when you want out."
+      - es: "pasar el mate"
+        en: "to pass the mate"
+      - es: "no es un micrófono"
+        en: "it's not a microphone (hurry up)"
+      - es: "¡qué rico!"
+        en: "so good!"
+      - es: "no, gracias"
+        en: "no, thanks"
+        example: { es: "—¿Un mate? —No, gracias.", en: "—A mate? —No, thanks." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "mate-de-todos-los-dias"
+    title: "Mate every day"
+    summary: "Sweet or bitter, cold or cooked, everywhere you go"
+    pages:
+      - type: info
+        title: "Amargo or dulce?"
+        emoji: "🍯"
+        body: "Most people drink it **amargo** (bitter, no sugar). **Mate dulce** has sugar or sweetener added, more common in some provinces and families. It's a friendly rivalry, not a war. Some purists will tease you, though. People also add **yuyos** (herbs) like peperina or burrito, or a bit of orange peel."
+
+      - type: choice
+        scenario: "The cebador asks: \"¿Amargo o dulce?\""
+        prompt: "What are they asking?"
+        options: ["Hot or cold?", "Without or with sugar?", "Strong or weak?"]
+        correct: 1
+        explain: "**Amargo** is no sugar, **dulce** is with sugar. Both answers are OK, but amargo gets you more street cred."
+
+      - type: info
+        title: "Mate cocido"
+        emoji: "☕"
+        body: "**Mate cocido** is the lazy (and cozy) version: yerba in a tea bag, or boiled and strained, served in a regular cup. Often with milk and sugar. It's the drink of school breakfasts, afternoon **merienda**, and cold winter mornings. No bombilla, no ronda, no rules."
+
+      - type: info
+        title: "Tereré: the cold one"
+        emoji: "🧊"
+        body: "**Tereré** is mate with cold water or juice, often with ice and herbs. It's huge in **Paraguay**, where UNESCO listed it as cultural heritage in 2020, and in hot provinces like Corrientes, Misiones, Chaco and Formosa. In Buenos Aires you'll see it on summer days, but the hot mate never really takes a vacation."
+
+      - type: match
+        prompt: "Match the drink to what it is"
+        pairs:
+          - ["mate amargo", "no sugar"]
+          - ["mate dulce", "with sugar"]
+          - ["mate cocido", "yerba in a cup, like tea"]
+          - ["tereré", "mate with cold water"]
+
+      - type: info
+        title: "Where? Everywhere."
+        emoji: "🌳"
+        body: "In the office, at university, on a road trip (the co-pilot serves), in the park, at the beach. You'll see people walking with the termo under their arm. **Matear** means to drink mate, and **una matera** is the bag to carry the kit. Uruguayans drink even more per person than Argentines, which they will happily remind you."
+
+      - type: true_false
+        statement: "Tereré is mostly linked to Paraguay and the hot northeast of Argentina."
+        answer: true
+        explain: "Right. In Paraguay it's practically sacred, and in Corrientes or Misiones summer, hot mate can feel like a punishment."
+
+      - type: choice
+        scenario: "You're on a road trip. The driver says: \"Cebame uno.\""
+        prompt: "What do you do?"
+        options: ["Pass them the termo", "Prepare a mate and hand it to them", "Put on some music"]
+        correct: 1
+        explain: "The co-pilot is the cebador. Keep them coming, and don't burn the driver."
+
+      - type: gap
+        prompt: "Inviting a friend over for mate"
+        text: "¿Venís a ___ a casa?"
+        options: ["matear", "cebador", "tereré"]
+        correct: 0
+        translation: "Want to come over for mate?"
+        explain: "**Matear** = to drink mate, usually together. It's a whole social plan."
+
+    vocabulary:
+      - es: "amargo"
+        en: "bitter, no sugar"
+      - es: "dulce"
+        en: "sweet, with sugar"
+      - es: "mate cocido"
+        en: "mate made like tea, in a cup"
+      - es: "tereré"
+        en: "cold mate"
+      - es: "matear"
+        en: "to drink mate (together)"
+        example: { es: "¿Mateamos en la plaza?", en: "Shall we have mate in the park?" }
+      - es: "yuyos"
+        en: "herbs added to mate"
+      - es: "merienda"
+        en: "afternoon snack"
+      - es: "matera"
+        en: "bag for carrying the mate kit"

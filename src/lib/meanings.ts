@@ -10,7 +10,7 @@ import type { Form, Sentence } from './types';
 // "I'm fine". So the meaning a screen shows is not authored. Every sentence
 // token carries what it means in that sentence (`course:gloss` aligns it with
 // the English), and a word's meanings are whatever its sentences say, ranked
-// by how she has met them. A new sentence can add a meaning ("not great" for
+// by how she has met them. A new sentence can add a meaning ("pretty bad" for
 // `mal`); nobody has to remember to write it down. The dictionary gloss only
 // vets them: a rendering that shares no word with it ("there" for the `che` of
 // "Hi there") stays in its sentence.
@@ -99,8 +99,8 @@ const englishWords = (text: string) =>
  * "¡Sos vos!" is "It's you!" — right for the sentence, but "there" is not what
  * `che` means, and a prompt asking for "it's" wants `es`, not `sos`. So a
  * meaning leaves its sentence only when it shares a word with the word's
- * dictionary gloss: "you're" and "are you" for `sos` ("you are"), "not great"
- * for `mal` ("badly, not well"). The rest still show where they belong — in
+ * dictionary gloss: "you're" and "are you" for `sos` ("you are"), "pretty bad"
+ * for `mal` ("bad, badly"). The rest still show where they belong — in
  * the popover of their own sentence.
  */
 export function standsAlone(meaning: string, gloss: string) {
@@ -114,6 +114,48 @@ export function closeness(meaning: string, gloss: string) {
   const words = englishWords(meaning).join(' ');
   if (glossSenses(gloss).some((s) => englishWords(s).join(' ') === words)) return 2;
   return standsAlone(meaning, gloss) ? 1 : 0;
+}
+
+/** A row of the word popover: what it says, and whether it is only true here. */
+export interface MeaningRow {
+  text: string;
+  /** True on the sentence's own rendering, when a dictionary row follows it. */
+  here?: boolean;
+}
+
+/**
+ * What the popover lists for a word, given what it means in the sentence she
+ * tapped it in.
+ *
+ * Normally that rendering is the whole answer: `bien` in "bien hecho" is
+ * "well", and printing the dictionary's "well, fine, good" under her finger
+ * would be the riddle this file exists to avoid.
+ *
+ * But a translation renders a sentence, not each word, and some renderings are
+ * not what the word means at all: `cómo` is "what's" in every sentence the
+ * course has ("¿Cómo te llamás?" → "What's your name?"), `che` is "there" in
+ * "Hi there". `standsAlone` already knows — it is what keeps those out of
+ * `meanings_en`, which is why the drill two screens later asks for "how" off
+ * the dictionary instead. A popover that shows only "what's" therefore teaches
+ * one thing and tests another. So when the rendering can't stand for the word,
+ * the word's own meaning comes with it, and the rendering is marked as
+ * belonging to this sentence.
+ *
+ * A loanword glosses as itself — mate, empanada, peso. Printing the word again
+ * under the word teaches nothing, so the repeat is dropped; the caller is left
+ * with the note, or the plain fact that English borrowed it whole.
+ */
+export function popoverMeanings(form: { form: string; gloss_en: string }, inContext?: string): MeaningRow[] {
+  const itself = (text: string) => norm(text) === norm(form.form);
+  const dictionary = glossSenses(form.gloss_en).filter((t) => !itself(t));
+  const here = inContext?.trim() && !itself(inContext) ? inContext.trim() : null;
+  if (!here) return dictionary.map((text) => ({ text }));
+  const rest = dictionary.filter((t) => senseKey(t) !== senseKey(here));
+  // A rendering that is one of the senses word for word is the word's meaning,
+  // whatever `standsAlone` makes of it: it compares content words, and `un`
+  // ("a, an") rendered "a" has none on either side.
+  if (rest.length < dictionary.length || standsAlone(here, form.gloss_en)) return [{ text: here }];
+  return rest.length ? [{ text: here, here: true }, ...rest.map((text) => ({ text }))] : [{ text: here }];
 }
 
 /**

@@ -66,6 +66,8 @@ Two levels, because voseo is a property of *forms*, not words:
 
 Function words (`el`, `de`, `y`, `vos`) are ordinary lemmas flagged `is_glue`, so the sentence ladder's glue-unlock rule keeps working.
 
+A form may be **more than one word**: a set phrase (`por favor`), a place name (`Buenos Aires`), or the chunk a pronominal verb is actually said in (`me llamo`). The tokenizer takes the longest form it can, so the chunk is one token — one thing to tap, one thing to blank, one thing the lesson counts as drilled. §1.5 says when a chunk has to exist.
+
 ### 1.3 Raw content
 
 A **sentence** is the atom of authored content. It belongs to a unit, targets one form (the thing it exists to teach or drill), and carries:
@@ -95,6 +97,38 @@ One small addition: a `tip` exercise mode with a plain note screen.
 More than one right answer for a typed word (as built, 2026-09-18). *Rules* (`companions` in `answers.ts`): a conjugated verb may come with the subject pronoun that agrees with it, and a pronominal verb with its clitic ("yo soy", "yo me llamo"; third person as the English names it: "he/she is" takes él or ella, not usted; never an imperative); a noun with a recorded gender with the article that agrees ("una medialuna"; not a feminine noun starting with a/ha, which may take el). *Stored* (`form_answers`, migration `20260918000004`): what doesn't follow from the grammar ("buenas" for hola, "hi"), keyed by the meaning the prompt shows, drafted by `npm run course:answers`, checked against the tuteo and regional denylists, never another course word with another meaning, never something the app already accepts; retired from `/admin/answers`. The same run proposes other tile orders for sentences and adds the ones buildable from the sentence's own tiles to `es_alt`. Each ask is logged in `content_reviews` (`notes.kind` = `answers` / `alternatives`), so a later run only asks about new meanings and changed sentences.
 
 Forgiveness: tiles can't be mistyped, so builds are exact. Typing forgives one edit only in words of ≥ 5 letters, and never when the typed text is itself a course word (soy/sos, es/él). A wrong build blames only the words missing from the closest accepted answer. Set phrases split into word tiles, and a phrase's gap is answered among phrases. When a build is right but not `es`, the feedback shows `es` too.
+
+### 1.5 What may be drilled — bound forms (as built, 2026-09-20)
+
+A form gets a card of its own only if it can stand on its own. Three kinds of form cannot, and `drillable()` in `src/lib/course-rules/vocabulary.ts` is the single place that says so — the app, the admin, the linter, the generator and the lesson planner all read that one function, so a form barred there is barred everywhere:
+
+| | | |
+|---|---|---|
+| **glue** | `de`, `el`, `me` | taught inside sentences, never asked about alone |
+| **propn** | `Montevideo` | nobody learns a place name as vocabulary |
+| **bound** | `llamo` | it has no meaning without `me`, so a card for it asks a question with no answer |
+
+**The failure it fixes.** Unit 4 shipped a card reading **«llamo / name is»**. `llamo` is not a word a learner will ever meet: nineteen sentences in the course contain it — four of them still live, the rest retired — and every one of the nineteen says *me llamo*. `llamás` is the same in twenty-three. The gloss could only be written by smuggling the missing word into a parenthesis — `"(my name) is, I'm called"` — and the exercise prints the first sense with the parenthesis read as decoration. Half a Spanish word against half an English phrase, with nothing in between anybody could know. The learner's only move is to memorise the app's habit.
+
+The second cost was worse. The one idea unit 4 teaches is *the little word changes with the person*. `llamo` and `llamás` were two forms with two glosses and two SRS schedules, so no exercise ever put the two beside each other. The lesson was the only thing not drilled.
+
+**The rule: when a form is bound, the chunk is the form.** `me llamo` and `te llamás` are forms of `llamarse` like any other, and because they have a space in them they are drilled the way a set phrase is (`phraseExercises`) — recognised, then **built from tiles**, which is the exercise that finally asks which little word goes in front. This is what Duolingo does and has always done: their unit 1 teaches *"I want … please"* as one block, not `quiero` (`docs/research/duolingo-spanish-section-1.md`), and a paradigm arrives one person at a time rather than as a table.
+
+The bare form **stays in the lexicon**, marked `forms.bound`. It is what its sentences' tokens still resolve through, it keeps the conjugation in the dictionary, and nothing that points at it has to move. It is simply never a card, an option, a tile, a distractor, a matching pair or a schedule of its own. Nothing is deleted; it disappears from the exercises.
+
+**Three gates keep it from coming back:**
+
+1. *The outline can say it.* A form entry takes `bound: true`, and the chunk is listed as an ordinary form with a `clitic` feature.
+2. *The linter forbids the bare form in a sentence.* The tokenizer takes the longest form it can, so a bound form resolving as a token of its own means the chunk is not there: `checkSentence` rejects it and names what to say instead. The generator is told the same thing in its prompt, so it does not waste candidates on it.
+3. *The validator finds the ones nobody marked.* `boundCandidates` (`course-rules/check.ts`) reads every live sentence and flags a drillable form the course has **never once** let stand alone, where the word in front is always the same clitic. `npm run course:validate` fails on it. The test is deliberately blunt so a word that merely likes a neighbour — *todo bien* — is not swept up with it.
+
+**What it caught.** `llamo` and `llamás` in unit 4 (published), and ten more still in draft in section 3's routine unit: `levantarse` ×4, `acostarse` ×3, `bañarse` ×2, `juntarse` ×1. Teaching `me baño` also settles a collision — `baño` alone is the bathroom, and the course had two cards for the one string saying different things.
+
+Migration `20260920000001_bound_forms.sql` carries all of it: the column, the `form_entries` view, the twelve chunks, the twelve `bound` flags, the ten live sentences re-tokenized so the chunk is one token, and unit 4's two teach slots repointed. Each sentence update is guarded on its own `es`, so a row edited in the admin since is skipped rather than overwritten. Applied 2026-09-20. What still follows it: `npm run course:gloss` (the merged tokens deliberately carry no gloss — a gloss is only ever stored when it is whole words of the English, and "your name" is not how the old two split), then `npm run course:tts` for the chunks' recordings. The bare forms keep their old clips, which say the bare word and are no longer played anywhere.
+
+**What this rule is not.** A parenthesis in a gloss is not by itself the problem. `es "is (he/she is)"` and `tiene "has (he/she has)"` are fine: the parenthesis there says *which* "is", and `es` really does mean "is" on its own. The tell is whether removing the parenthetical leaves a true statement about the Spanish word.
+
+**Still open:** `gustar` and `encantar` (`gusta "likes (one thing)"`) fail a different way — `gusta`'s subject is the thing, not the person, so the gloss is not incomplete but backwards, and the unit's own tip says the opposite of its cards. And a sentence can fail this way too: *Tengo cinco.* is paired with "I'm five", which the Spanish only means with `años` in it. Neither is fixed here.
 
 ---
 
@@ -180,6 +214,7 @@ create table forms (
   form      text not null,                    -- 'tenés'
   features  jsonb not null default '{}',      -- {person:2, number:'sg', tense:'pres', mood:'ind', voseo:true}
   gloss_en  text,                             -- overrides lemma gloss when the form needs it ('you have')
+  bound     boolean not null default false,   -- never said alone: 'llamo', only inside 'me llamo' (§1.5)
   unit_id   uuid not null references units,   -- the unit that teaches this form
   audio_path text,
   voice_id  text references voices,          -- who says it
@@ -525,10 +560,13 @@ Given to the generator verbatim and enforced by the linter where it can be.
 - Simple past over compound for finished events: *hoy comí*, not *hoy he comido* (section 2, but the rule is fixed now).
 - `acá / allá` over `aquí / allí`.
 
-**Lexicon** — prefer left, never right: `auto` / coche · `colectivo, bondi` / autobús, camión · `subte` / metro · `celular` / móvil · `computadora` / ordenador · `plata` / dinero (ok but rarer) · `laburo, laburar` / curro, chamba · `pibe, piba` / chaval, chavo · `remera` / camiseta, playera · `zapatillas` / tenis, deportivas · `campera` / chaqueta · `lindo` / bonito · `chau` / adiós · `bárbaro, re` / guay, chido · `finde` / fin de semana (ok) · `boliche` / discoteca · `facturas` / bollería · `frutilla` / fresa · `palta` / aguacate · `ananá` / piña · `choclo` / elote.
+**Lexicon** — prefer left, never right: `auto` / coche · `colectivo, bondi` / autobús, camión · `subte` / metro · `celular` / móvil · `computadora` / ordenador · `plata` / dinero (ok but rarer) · `laburo, laburar` / curro, chamba · `pibe, piba` / chaval, chavo · `remera` / camiseta, playera · `zapatillas` / tenis, deportivas · `campera` / chaqueta · `lindo` / bonito · `chau` / adiós · `bárbaro, re` / guay, chido · `finde` / fin de semana (ok) · `boliche` / discoteca · `facturas` / bollería · `frutilla` / fresa · `palta` / aguacate · `ananá` / piña · `choclo` / elote · `qué onda, todo bien, cómo andás` / qué tal (Spain's greeting; a porteño doesn't say it). `¿Todo bien?` asks as well as answers.
+
+The full list — about 200 words and every form of each (`piscina` / pileta, `nevera` / heladera, `grifo` / canilla, `enfadarse` / enojarse, `echar de menos` / extrañar …) — lives in `docs/course/regional-words.yaml`. It was mined from Wiktionary's Argentina / Río de la Plata tags and reviewed by hand, and it is appended to this spec wherever the spec goes to a model. After editing it, run `npm run course:regional`.
 
 **Register**
 - `che`, `dale`, `re`, `bárbaro` from unit 1 — they are neutral-informal, not slang.
+- `che` goes in **front**, where English puts "hey": *Che, ¿todo bien?*, *Che, mal.* It is not the English "man" you tack on the end — *Mal, che.* and *Bueno, chau, che.* are wrong. The one thing that may come before it is a bare greeting: *Hola, che.*, *Chau, che.* This holds in `es_alt` too.
 - `boludo/a` only in the checkpoint unit's register note, flagged `informal`, with the warning that it is affectionate among friends and an insult otherwise. Never in a drill sentence.
 - No vulgar register in section 1.
 
@@ -556,7 +594,9 @@ Each rule is a pure function `(sentence, ctx) → Finding | null`, unit-tested w
 | `vocab.available` | every form's unit ordinal ≤ the sentence's unit ordinal | fail |
 | `target.present` | `target_form_id` appears in tokens | fail |
 | `voseo.no_tuteo` | denylist of tuteo-only surfaces: `tú, ti, contigo, tienes, eres, puedes, quieres, vienes, haces, dices, sabes, ven, di, haz, sal, ten, pon, sé, vosotros, os, vuestro…` | fail |
-| `lexicon.regional` | denylist from Appendix B's right-hand column | fail |
+| `lexicon.regional` | denylist from Appendix B's right-hand column — every inflected form of every word in `docs/course/regional-words.yaml`, built by `npm run course:regional` | fail |
+| `lexicon.phrases` | set phrases from another Spanish, matched over the whole sentence — no token is wrong on its own, the phrase is (`qué tal`) — *built*, `REGIONAL_PHRASES` | fail |
+| `che.placement` | `che` first in its clause, or straight after a bare greeting (`Hola, che.`); never the English "man" on the end — *built*, `chePlacement` | fail |
 | `register.max` | no lemma with register above `units.register_max` | fail |
 | `length.band` | words ≤ 4 / 7 / 10 / 14 for difficulty 1 / 2 / 3 / 4 — *built*, in `checkShape` | flag |
 | `clause.count` | sentences-in-one ≤ 2 / 2 / 2 / 3 for difficulty 1 / 2 / 3 / 4. A word count alone rewards chaining: "Che, ¿sos vos? ¡Hola! ¿Todo bien?" is six words and passes the band, and is three greetings a beginner has to order with the punctuation stripped off. An exchange — a question and its answer — is two and stays legal. *Built*, in `checkShape` | fail |

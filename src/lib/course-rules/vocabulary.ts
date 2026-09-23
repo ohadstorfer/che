@@ -19,6 +19,14 @@ export interface VocabForm {
   unit_order: number;
   is_glue: boolean;
   register: string;
+  /**
+   * A form that never stands on its own: it exists only inside a longer form —
+   * `llamo` only ever inside `me llamo`. It stays in the lexicon so its
+   * sentences still resolve and the dictionary still has the conjugation, but
+   * it is never drilled, because there is nothing about it a learner could
+   * know. The chunk is drilled instead.
+   */
+  bound?: boolean;
 }
 
 export interface VocabLemma {
@@ -37,4 +45,17 @@ export interface VocabUnit {
   register_max: string;
 }
 
-export const drillable = (f: Pick<VocabForm, 'is_glue' | 'pos'>) => !f.is_glue && f.pos !== 'propn';
+/**
+ * Whether a form may be asked about on its own — a card, a tile, an option, a
+ * distractor, an SRS schedule of its own. Three kinds of form may not:
+ *
+ *   glue     `de`, `el`, `me` — taught inside sentences, never drilled alone
+ *   propn    `Montevideo` — nobody learns a place name as vocabulary
+ *   bound    `llamo` — it has no meaning without `me`, so a card for it asks
+ *            a question with no answer (docs/course-spec.md §1.5)
+ *
+ * Every producer of exercises and every linter reads this one function, so a
+ * form barred here is barred everywhere.
+ */
+export const drillable = (f: Pick<VocabForm, 'is_glue' | 'pos' | 'bound'>) =>
+  !f.is_glue && f.pos !== 'propn' && !f.bound;

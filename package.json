@@ -69,12 +69,15 @@
     "course:gloss": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/gloss-sentences.mjs",
     "course:answers": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/answer-alternatives.mjs",
     "course:lint": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/lint.mjs",
+    "course:regional": "node scripts/course/regional-words.mjs",
     "course:review": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/ai-review.mjs",
     "course:tts": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/tts.mjs",
     "course:lessons": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/build-lessons.mjs",
     "course:parity": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/check-parity.mjs",
     "course:snapshot": "node scripts/course/export-snapshot.mjs",
-    "course:restore": "node scripts/course/import-snapshot.mjs"
+    "course:restore": "node scripts/course/import-snapshot.mjs",
+    "culture:validate": "node scripts/culture/validate.mjs",
+    "culture:build": "node scripts/culture/build.mjs"
   },
   "private": true
 }

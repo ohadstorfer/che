@@ -81,16 +81,25 @@ export const tokenTail = (t: SentenceToken) => t.surface.match(TAIL)?.[0] ?? '';
 export const tokenWord = (t: SentenceToken) =>
   t.surface.slice(tokenHead(t).length, t.surface.length - tokenTail(t).length);
 
+/** Punctuation that ends a sentence, so the next word starts one. */
+const ENDS_SENTENCE = /[.!?…]["”»)]*$/u;
+
+/** Whether the token at `index` opens a sentence: the first one, or any after
+ *  a full stop — "Che, ¿cómo te llamás? Yo soy Sofi." opens two. */
+export const startsSentence = (tokens: SentenceToken[], index: number) =>
+  index === 0 || ENDS_SENTENCE.test(tokens[index - 1]?.surface ?? '');
+
 /**
- * A word as it should appear out of its sentence. The first word of a sentence
+ * A word as it should appear out of its sentence. A word that opens a sentence
  * is capitalised in place, and a capital on one option or tile — when every
  * other one is lowercase — gives the answer away. Names keep their capital:
  * they're capitalised everywhere.
  */
-export const outOfSentence = (t: SentenceToken, index: number) => {
+export const outOfSentence = (tokens: SentenceToken[], index: number) => {
+  const t = tokens[index];
   const word = tokenWord(t);
   const isName = t.form_ids.length === 0 && !t.glue;
-  return index === 0 && !isName ? word.charAt(0).toLocaleLowerCase('es') + word.slice(1) : word;
+  return startsSentence(tokens, index) && !isName ? word.charAt(0).toLocaleLowerCase('es') + word.slice(1) : word;
 };
 
 /** Where a form sits in the sentence; -1 if it is not there. */
@@ -196,20 +205,26 @@ export function clauseOf(sentence: Sentence, clause: number): Sentence {
 
 /** Every Spanish answer a sentence accepts, as words. Transcribing audio
  *  accepts only what was said. */
-export const acceptedAnswers = (s: Sentence, { byEar = false }: { byEar?: boolean } = {}) =>
-  (byEar ? [s.es] : [s.es, ...s.es_alt]).map(answerWords);
+export const acceptedAnswers = (
+  s: Sentence,
+  { byEar = false, side = 'es' }: { byEar?: boolean; side?: 'es' | 'en' } = {},
+) => (side === 'en' ? [s.en, ...s.en_alt] : byEar ? [s.es] : [s.es, ...s.es_alt]).map(answerWords);
 
 /** A sentence rebuilt from tiles. Tiles are whole words, so there is no typo
  *  to forgive: the words match an accepted answer or they don't. */
-export function sentenceAnswerMatches(placed: string[], sentence: Sentence, opts: { byEar?: boolean } = {}) {
+export function sentenceAnswerMatches(
+  placed: string[],
+  sentence: Sentence,
+  opts: { byEar?: boolean; side?: 'es' | 'en' } = {},
+) {
   const got = placed.flatMap(answerWords);
   return acceptedAnswers(sentence, opts).some((answer) => sameWords(got, answer));
 }
 
 /** Whether a rebuilt answer is the written sentence itself, rather than one of
  *  its alternatives — when it isn't, the feedback shows the written one too. */
-export const isCanonical = (placed: string[], sentence: Sentence) =>
-  sameWords(placed.flatMap(answerWords), answerWords(sentence.es));
+export const isCanonical = (placed: string[], sentence: Sentence, side: 'es' | 'en' = 'es') =>
+  sameWords(placed.flatMap(answerWords), answerWords(side === 'en' ? sentence.en : sentence.es));
 
 /** A word or phrase rebuilt from tiles — letters or words, exactly. */
 export function builtAnswerMatches(built: string, target: string, alternatives: string[] = []) {
@@ -272,6 +287,19 @@ export interface Graded {
  *     `bueno` answers it as truly as `bien` does. It is accepted, with a note
  *     naming the word being drilled.
  */
+/**
+ * A word typed into a sentence's blank. Accents, ñ and one typo are forgiven
+ * the way they are anywhere else, and nothing else is: not the companions a
+ * bare prompt allows ("yo soy" cannot fill a gap the sentence already wrote
+ * "yo" before), and not the synonyms and other genders a meaning prompt
+ * accepts. The four-choice and tile versions of this screen already refuse
+ * both (`gapOptions` drops anything that shares the answer's meaning or would
+ * make the sentence read as written); typing it should not be the one way in.
+ */
+export function gradeGap(input: string, form: Form, allForms: Form[]): Graded {
+  return gradeWord(input, form, allForms, meaningOf(form), { only: true });
+}
+
 export function gradeTyped(input: string, form: Form, allForms: Form[], meaning = meaningOf(form)): Graded {
   const direct = gradeWord(input, form, allForms, meaning);
   if (direct.correct) return direct;
@@ -344,11 +372,26 @@ export function companions(form: Pick<Form, 'form' | 'pos' | 'lemma' | 'features
   return [];
 }
 
-/** `gradeTyped` for the word alone, without the words that may come with it. */
-function gradeWord(input: string, form: Form, allForms: Form[], meaning: string): Graded {
-  const answers = sameAnswer(form, allForms);
+/**
+ * `gradeTyped` for the word alone, without the words that may come with it.
+ *
+ * `only` narrows it to this one spelling of this one word. A prompt asking for
+ * a meaning has several right answers — another word of the same sense, the
+ * other gender, an answer stored for that sense — but a blank in a sentence
+ * has one: the word that makes the sentence say what it says. "Bien, chau." is
+ * not "Bueno, chau.", and a feminine adjective in a masculine slot is the
+ * mistake the screen exists to catch.
+ */
+function gradeWord(
+  input: string,
+  form: Form,
+  allForms: Form[],
+  meaning: string,
+  { only = false }: { only?: boolean } = {},
+): Graded {
+  const answers = only ? [form] : sameAnswer(form, allForms);
   const asked = senseKey(meaning);
-  const stored = (form.accepts ?? []).filter((a) => senseKey(a.meaning) === asked).map((a) => a.answer);
+  const stored = only ? [] : (form.accepts ?? []).filter((a) => senseKey(a.meaning) === asked).map((a) => a.answer);
   const accepted = [...answers.flatMap((f) => [f.form, ...(f.alt ?? [])]), ...stored];
   const fallback = { correct: false, expected: form.form } as const;
   if (!norm(input)) return fallback;
@@ -359,12 +402,14 @@ function gradeWord(input: string, form: Form, allForms: Form[], meaning: string)
   const accent = accepted.find((a) => norm(a) === norm(input));
   if (accent) return { correct: true, note: 'accent', expected: accent };
 
-  const synonym = allForms.find(
-    (f) =>
-      !answers.some((a) => a.id === f.id) &&
-      [f.form, ...(f.alt ?? [])].some((a) => norm(a) === norm(input)) &&
-      sensesOf(f).includes(asked),
-  );
+  const synonym = only
+    ? undefined
+    : allForms.find(
+        (f) =>
+          !answers.some((a) => a.id === f.id) &&
+          [f.form, ...(f.alt ?? [])].some((a) => norm(a) === norm(input)) &&
+          sensesOf(f).includes(asked),
+      );
   if (synonym) return { correct: true, note: 'synonym', expected: form.form };
 
   const isCourseWord = allForms.some((f) => norm(f.form) === norm(input));
@@ -392,7 +437,18 @@ export function typedAnswerMatches(input: string, form: Form, allForms: Form[], 
  * after it, and not a pronoun she was allowed to leave out. Glue words and
  * names have no form to blame; if nothing else was wrong, the target takes it.
  */
-export function missedForms(sentence: Sentence, placed: string[], allForms: Form[]): string[] {
+export function missedForms(
+  sentence: Sentence,
+  placed: string[],
+  allForms: Form[],
+  { side = 'es', drilled }: { side?: 'es' | 'en'; drilled?: string } = {},
+): string[] {
+  // English tiles carry no form to blame, so the blame goes where the screen
+  // was aimed: the word this round is drilling, which is not always the word
+  // the sentence was written for (buildSession re-aims a sentence at a word
+  // that is actually due). Blaming the authored target instead would pass the
+  // word she just missed and lapse one she never saw.
+  if (side === 'en') return [drilled ?? sentence.target_form_id];
   const blame = new Map<string, string[]>();
   for (const t of sentence.tokens) {
     for (const w of answerWords(tokenWord(t))) if (!blame.has(w)) blame.set(w, t.form_ids);
@@ -477,9 +533,9 @@ export function meaningOptions(sentence: Sentence, all: Sentence[], allForms: Fo
  * sentence another accepted answer. `target` is the form the gap tests — a due
  * word in the sentence, not necessarily the one it was written for.
  */
-export function gapOptions(sentence: Sentence, target: Form, allForms: Form[]): Option[] {
+export function gapOptions(sentence: Sentence, target: Form, allForms: Form[], count = 4): Option[] {
   const index = tokenIndexOf(sentence, target.id);
-  const answer = index >= 0 ? outOfSentence(sentence.tokens[index], index) : target.form;
+  const answer = index >= 0 ? outOfSentence(sentence.tokens, index) : target.form;
   const size = wordsOf(answer).length;
   const accepted = acceptedAnswers(sentence);
 
@@ -502,8 +558,11 @@ export function gapOptions(sentence: Sentence, target: Form, allForms: Form[]): 
   const rank = (f: Form) => Number(wordsOf(f.form).length === size) * 2 + Number(f.pos === target.pos);
   const decoys = shuffle(usable).sort((a, b) => rank(b) - rank(a));
   const sameShape = decoys.filter((f) => wordsOf(f.form).length === size);
-  // Fall back to other shapes only when there are too few to make a question.
-  const pool = sameShape.length >= 2 ? sameShape : decoys;
+  // Same shape first — a two-word option among one-word ones is the answer in
+  // plain sight — but a bank asked for eight and given five is barely a bank,
+  // so other shapes top it up rather than being refused outright.
+  const pool =
+    sameShape.length >= count - 1 ? sameShape : [...sameShape, ...decoys.filter((f) => !sameShape.includes(f))];
 
   const seen = new Set<string>();
   const picked: Form[] = [];
@@ -511,7 +570,7 @@ export function gapOptions(sentence: Sentence, target: Form, allForms: Form[]): 
     if (seen.has(norm(f.form))) continue;
     seen.add(norm(f.form));
     picked.push(f);
-    if (picked.length === 3) break;
+    if (picked.length === count - 1) break;
   }
   return shuffle([{ id: target.id, label: answer }, ...picked.map((f) => ({ id: f.id, label: f.form }))]);
 }
@@ -519,19 +578,55 @@ export function gapOptions(sentence: Sentence, target: Form, allForms: Form[]): 
 /** How many spare tiles a bank carries beyond the answer. */
 const DECOYS = 4;
 
+/** Punctuation a tile never carries: the Spanish side gets clean surfaces from
+ *  its tokens, and the English has to be cleaned the same way or its commas
+ *  would spell out the word order. */
+const TILE_PUNCT = /[.,!?¿¡;:()"“”«»]/gu;
+
+/**
+ * The English of a sentence, as tiles. Punctuation comes off, and a word that
+ * opens a sentence loses its capital for the same reason it does in Spanish
+ * (`outOfSentence`): one capital in a row of lowercase tiles is the answer.
+ * English "I" keeps its own, and so does a name — which the sentence already
+ * marks, as a token carrying no form and no glue.
+ */
+function englishTiles(sentence: Sentence): string[] {
+  const names = new Set(
+    sentence.tokens.filter((t) => t.form_ids.length === 0 && !t.glue).flatMap((t) => wordsOf(tokenWord(t))),
+  );
+  const raw = wordsOf(sentence.en);
+  return raw.flatMap((w, i) => {
+    const words = wordsOf(w.replace(TILE_PUNCT, ' '));
+    const opens = i === 0 || ENDS_SENTENCE.test(raw[i - 1]);
+    const [first, ...rest] = words;
+    if (!first || !opens || /^I($|['’])/.test(first) || names.has(first)) return words;
+    return [first.charAt(0).toLocaleLowerCase('en') + first.slice(1), ...rest];
+  });
+}
+
 /**
  * Word tiles for rebuilding the sentence — a set phrase broken into its words,
- * so "¿Qué tal?" is two tiles, not one — with a few of her other words mixed
+ * so "¿Qué onda?" is two tiles, not one — with a few of her other words mixed
  * in. A spare tile never shares a meaning with a word of the sentence: "bueno"
  * next to "Dale, chau." would be a second right answer.
  */
-export function sentenceTiles(sentence: Sentence, allForms: Form[]) {
-  const answer = sentence.tokens.flatMap((t, i) => wordsOf(outOfSentence(t, i)));
+export function sentenceTiles(sentence: Sentence, allForms: Form[], side: 'es' | 'en' = 'es') {
+  // The English side has no tokens to break up and no forms of its own: its
+  // tiles are its words, and its spares are other words of English the course
+  // has glossed, which is the only pool there is.
+  const answer = side === 'en' ? englishTiles(sentence) : sentence.tokens.flatMap((_, i) => wordsOf(outOfSentence(sentence.tokens, i)));
   const taken = new Set(answer.map(norm));
   const own = formsIn(sentence, new Map(allForms.map((f) => [f.id, f])));
   const spare = new Map<string, string>();
   for (const f of shuffle(allForms)) {
     if (f.pos === 'propn' || isPhrase(f.form) || own.some((o) => sharesMeaning(o, f))) continue;
+    if (side === 'en') {
+      for (const w of wordsOf(meaningOf(f).replace(TILE_PUNCT, ' '))) {
+        const key = norm(w);
+        if (key && !taken.has(key) && !spare.has(key)) spare.set(key, w.toLocaleLowerCase('en'));
+      }
+      continue;
+    }
     const key = norm(f.form);
     if (key && !taken.has(key) && !spare.has(key)) spare.set(key, f.form);
   }

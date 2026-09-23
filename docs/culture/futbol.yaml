@@ -1,0 +1,444 @@
+section:
+  slug: "futbol"
+  title: "Fútbol"
+  emoji: "⚽"
+  summary: "Not a sport here. A religion with a fixture list."
+
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "de-que-cuadro-sos"
+    title: "¿De qué cuadro sos?"
+    summary: "The five big clubs, the Superclásico and the question you can't dodge"
+    pages:
+      - type: info
+        title: "The question"
+        emoji: "🤝"
+        body: "Meet someone new in Buenos Aires and within ten minutes you'll hear: **¿De qué cuadro sos?** — *Which team are you?* A **cuadro** is a club. It's not small talk: your club is inherited from your dad, your grandpa, your barrio. People change jobs, partners, even countries. Changing clubs? Never. **Cambiar de cuadro** is basically treason."
+        fun_fact: "Plenty of babies are signed up as club members (**socios**) days after being born."
+
+      - type: info
+        title: "Los cinco grandes"
+        emoji: "🏟️"
+        body: "Five clubs are called **los cinco grandes** — *the big five*: **Boca Juniors**, **River Plate**, **Independiente**, **Racing Club** and **San Lorenzo**. They have the most fans and, historically, the most titles. Everyone else is a *chico* (small club) — though say that to a fan of Vélez or Estudiantes and you'll get a long lecture."
+
+      - type: match
+        prompt: "Match the club to its nickname"
+        pairs:
+          - ["Boca Juniors", "el Xeneize"]
+          - ["River Plate", "el Millonario"]
+          - ["Racing Club", "la Academia"]
+          - ["Independiente", "el Rojo"]
+          - ["San Lorenzo", "el Ciclón"]
+        explain: "**Xeneize** means *Genoese*: Boca was founded in 1905 by Italian immigrants' kids in La Boca. River got **Millonario** for spending big on players in the 1930s."
+
+      - type: info
+        title: "El Superclásico"
+        emoji: "🔵"
+        body: "**Boca vs River** is the **Superclásico** — the biggest rivalry in the country. A **clásico** is any derby; this one gets the *super*. Boca plays at **La Bombonera** (*the chocolate box*) in La Boca. River plays at **El Monumental** in Núñez. Funny detail: River was also born in La Boca, in 1901, and moved north later. Neighbors first, enemies forever."
+        fun_fact: "In 2018 they met in the Copa Libertadores final, and the second leg ended up being played in Madrid. River won."
+
+      - type: info
+        title: "Insults with pride"
+        emoji: "🐔"
+        body: "Rivals give each other nasty nicknames, and fans end up wearing them proudly. River fans call Boca fans **bosteros** (from **bosta**, *manure* — the story goes it was a dig at the smell by the Riachuelo). Boca fans call River fans **gallinas** (*chickens*, as in cowards), a name that stuck after River blew the 1966 Libertadores final against Peñarol. San Lorenzo fans are **cuervos** (*crows*), after the priest who founded the club."
+
+      - type: true_false
+        statement: "If a River fan calls you a \"bostero\", they think you support Boca."
+        answer: true
+        explain: "Exactly. And if you *do* support Boca, the correct reply is a proud smile. Being **bostero** is a badge of honor for them."
+
+      - type: info
+        title: "Avellaneda: two stadiums, one block"
+        emoji: "😈"
+        body: "Just south of the city, in **Avellaneda**, live **Racing** (light blue and white) and **Independiente** (red). Their stadiums are only a few hundred meters apart — you can see one from the other. That's the **clásico de Avellaneda**. Independiente fans are the **Diablos Rojos**, *Red Devils*. Imagine sharing a street with the one team you hate most."
+
+      - type: choice
+        scenario: "You're staying in La Boca and a friend lends you a red-and-white River shirt because it's cold. You're about to walk to the kiosk next to the Bombonera on match day."
+        prompt: "What do you do?"
+        options:
+          - "Wear it, it's just a shirt"
+          - "Change or cover it up"
+          - "Wear it, but say you're a tourist"
+        correct: 1
+        explain: "Never wear the rival's colors in the wrong barrio, especially on match day. Best case: jokes and dirty looks. Worst case: you really don't want to find out."
+
+      - type: choice
+        scenario: "A taxi driver asks: \"¿De qué cuadro sos?\" You don't follow football at all."
+        prompt: "What's the smoothest answer?"
+        options:
+          - "\"Football is boring.\""
+          - "\"No sé, ¿vos de cuál sos?\""
+          - "Pick the rival of whatever sticker is on his dashboard"
+        correct: 1
+        explain: "Turning the question back is gold: he'll happily talk for the whole ride. Saying football is boring is legal, but it's a conversation killer."
+
+      - type: gap
+        prompt: "Ask your new friend which team they support"
+        text: "¿De qué ___ sos?"
+        options: ["cuadro", "cuadra", "equipo de"]
+        correct: 0
+        translation: "Which team are you (a fan of)?"
+        explain: "**Cuadro** is the everyday word for club. **Cuadra** is a city block — useful, but not here."
+    vocabulary:
+      - es: "cuadro"
+        en: "club, team (colloquial)"
+        example: { es: "¿De qué cuadro sos?", en: "Which team do you support?" }
+      - es: "los cinco grandes"
+        en: "the big five clubs"
+        note: "Boca, River, Independiente, Racing, San Lorenzo."
+      - es: "clásico"
+        en: "derby, match between rivals"
+      - es: "Superclásico"
+        en: "Boca vs River"
+      - es: "bostero"
+        en: "Boca fan (rivals' insult, worn with pride)"
+      - es: "gallina"
+        en: "River fan (literally \"chicken\")"
+        note: "Don't say it to a River fan unless you're friends."
+      - es: "cancha"
+        en: "stadium, pitch"
+        example: { es: "¿Vamos a la cancha el domingo?", en: "Shall we go to the match on Sunday?" }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-hinchada"
+    title: "La hinchada"
+    summary: "Chants, drums and the mysterious thing called aguante"
+    pages:
+      - type: info
+        title: "Hincha, not fan"
+        emoji: "📣"
+        body: "A fan is a **hincha**, and all the fans together are **la hinchada**. The story goes that the word comes from a man in Montevideo who inflated (**hinchar**) the balls and shouted so hard he became famous. Whatever the origin: a hincha doesn't *watch* a match. A hincha *plays* it from the stands."
+        fun_fact: "**Hinchar** also means to annoy. \"No me hinchés\" = \"Stop bugging me.\""
+
+      - type: info
+        title: "Cantitos and the bombo"
+        emoji: "🥁"
+        body: "The stands never go quiet. The hinchada sings **cantitos** (*chants*) for ninety minutes, often to the tune of old rock or cumbia songs, with lyrics that mix love for the club and creative insults for the rival. Keeping the beat is the **bombo**, a big bass drum. Add **trapos** (*banners*) and paper rain, and you've got the show."
+
+      - type: true_false
+        statement: "In an Argentine stadium, fans sit quietly and clap after good plays."
+        answer: false
+        explain: "Sitting? Quietly? In the **popular** (standing terraces) people jump, sing and push for the whole match. Clapping politely is for tennis."
+
+      - type: info
+        title: "El aguante"
+        emoji: "💪"
+        body: "**Aguante** comes from **aguantar**, *to endure*. For a hincha it means loyalty that survives everything: rain, losses, even relegation. \"**¡Aguante Racing!**\" = *Long live Racing!* You also hear it outside football: \"**¡Aguante el asado!**\" The team can be losing 3–0 and the hinchada still sings — that's aguante."
+
+      - type: gap
+        prompt: "Cheer for your team, rioplatense style"
+        text: "¡___ Boca!"
+        options: ["Aguante", "Aguanta", "Viva el"]
+        correct: 0
+        translation: "Long live Boca! / Come on Boca!"
+        explain: "**¡Aguante…!** + anything you love. It works for clubs, bands and even foods."
+
+      - type: info
+        title: "The dark side: barras bravas"
+        emoji: "⚠️"
+        body: "Every big club has a **barra brava** (or just **la barra**): the organized hardcore group that leads the chants and carries the drums. Many are also tangled up in violence and shady business — resale, parking, politics. After years of deaths, visiting fans were banned from most matches in 2013. Pilot tests to bring them back only began in 2025."
+
+      - type: choice
+        scenario: "At the stadium, a guy from the barra walks past and tells your section to stand up and sing."
+        prompt: "What's the smart move?"
+        options:
+          - "Explain that you paid for your seat"
+          - "Stand up and at least pretend to sing"
+          - "Film him for Instagram"
+        correct: 1
+        explain: "You're a guest in their church. Stand, clap, hum along. Arguing with the barra is never a good plan."
+
+      - type: match
+        prompt: "Match the word to the thing"
+        pairs:
+          - ["bombo", "bass drum"]
+          - ["trapo", "banner"]
+          - ["cantito", "chant"]
+          - ["popular", "standing terrace"]
+        explain: "**Trapo** literally means *rag*. For the barras, losing your trapo to a rival is the ultimate humiliation."
+
+      - type: true_false
+        statement: "If your team gets relegated, a real hincha with aguante stops going to the stadium."
+        answer: false
+        explain: "The opposite! When River went down in 2011, its fans filled stadiums in the second division. Aguante is exactly for the bad times."
+    vocabulary:
+      - es: "hincha"
+        en: "fan, supporter"
+      - es: "hinchada"
+        en: "the fans, the crowd"
+      - es: "cantito"
+        en: "stadium chant"
+      - es: "bombo"
+        en: "bass drum"
+      - es: "aguante"
+        en: "loyal support, endurance"
+        example: { es: "¡Aguante Independiente!", en: "Come on Independiente!" }
+      - es: "barra brava"
+        en: "hardcore organized fan group"
+        note: "Often just \"la barra\"."
+      - es: "trapo"
+        en: "banner (literally \"rag\")"
+      - es: "hinchar"
+        en: "to annoy, to bug"
+        example: { es: "No me hinchés.", en: "Stop bugging me." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-diez"
+    title: "1978, 1986 and the Diez"
+    summary: "The first two World Cups and a guy called Diego"
+    pages:
+      - type: info
+        title: "La Selección"
+        emoji: "🇦🇷"
+        body: "When Argentina plays, the whole country stops. The national team is **la Selección**, or **la Albiceleste** (*the white and sky-blue*). Club rivalries freeze for ninety minutes — a bostero and a gallina hug when Argentina scores. The team has won three World Cups: **1978**, **1986** and **2022**."
+
+      - type: info
+        title: "1978: a cup with a shadow"
+        emoji: "🏆"
+        body: "Argentina hosted and won in **1978**, beating the Netherlands 3–1 after extra time at El Monumental, with two goals from **Mario Kempes**. But the country was under a military dictatorship that used the cup as propaganda while people were disappearing. Many Argentines still feel torn about it. Some results, like the 6–0 over Peru, remain the subject of suspicion that was never proven."
+
+      - type: true_false
+        statement: "Everyone in Argentina celebrates the 1978 World Cup without mixed feelings."
+        answer: false
+        explain: "The players are respected, but the dictatorship context makes 1978 a sore, debated topic. Tread gently."
+
+      - type: info
+        title: "Diego"
+        emoji: "🔟"
+        body: "**Diego Armando Maradona** grew up poor in Villa Fiorito and became the greatest idol the country has ever had. He wore the **10**, so he's **el Diez** — or simply **el Diego**. He captained Argentina to the **1986** title in Mexico. Some people even joke about the *Iglesia Maradoniana*, a fan \"church\" with its own Christmas on his birthday, October 30."
+
+      - type: info
+        title: "Mexico 1986 vs England"
+        emoji: "✋"
+        body: "Quarter-final, June 22, 1986, four years after the Falklands/**Malvinas** war. Minute 51: Diego punches the ball into the net and the referee allows it. He later called it **la Mano de Dios** — *the Hand of God*. Four minutes later he dribbles past half the English team from his own half and scores **el Gol del Siglo**, *the Goal of the Century*. Argentina won 2–1."
+        fun_fact: "Radio commentator Víctor Hugo Morales screamed \"¡Barrilete cósmico!\" — *cosmic kite* — and it became legend."
+
+      - type: order
+        prompt: "Put Argentina vs England, 1986, in order"
+        items:
+          - "The first half ends 0–0"
+          - "Maradona scores with his hand"
+          - "Maradona dribbles past five players and the keeper"
+          - "England pulls one back"
+          - "Argentina wins 2–1"
+        explain: "The Hand of God and the Goal of the Century were only four minutes apart. Gary Lineker scored England's goal near the end."
+
+      - type: choice
+        scenario: "An English friend at an asado says: \"Maradona cheated, that's it.\" Everyone goes quiet."
+        prompt: "How do most Argentines see the Mano de Dios?"
+        options:
+          - "A shameful moment they'd rather forget"
+          - "A cheeky bit of viveza, with a lot of history behind it"
+          - "Something that never happened"
+        correct: 1
+        explain: "For many it's **viveza criolla** (street-smart cunning) and a symbolic revenge after Malvinas. Plenty of people also admit it was a handball. Expect a passionate debate, not agreement."
+
+      - type: gap
+        prompt: "What's the famous handball called?"
+        text: "La ___ de Dios"
+        options: ["Mano", "Mana", "Pie"]
+        correct: 0
+        translation: "The Hand of God"
+        explain: "**Mano** is feminine even though it ends in -o: *la mano*."
+
+      - type: true_false
+        statement: "Argentina won the 1986 final against West Germany."
+        answer: true
+        explain: "3–2 in the Azteca stadium. Jorge Burruchaga scored the winner after a pass from — who else — Diego."
+    vocabulary:
+      - es: "la Selección"
+        en: "the national team"
+      - es: "la Albiceleste"
+        en: "Argentina's team (white and sky-blue)"
+      - es: "el Diez"
+        en: "the number 10; Maradona"
+      - es: "la Mano de Dios"
+        en: "the Hand of God (1986 handball goal)"
+      - es: "el Gol del Siglo"
+        en: "the Goal of the Century"
+      - es: "Mundial"
+        en: "World Cup"
+        example: { es: "Ganamos el Mundial del 86.", en: "We won the '86 World Cup." }
+      - es: "viveza criolla"
+        en: "street-smart cunning"
+        note: "Admired and criticized in equal measure."
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "messi-y-qatar"
+    title: "Messi and Qatar"
+    summary: "Heartbreak in Brazil, glory in Qatar"
+    pages:
+      - type: info
+        title: "The quiet kid from Rosario"
+        emoji: "🐐"
+        body: "**Lionel Messi** was born in **Rosario** in 1987 and left for Barcelona at 13. For years some Argentines grumbled that he didn't sing the anthem and only shone in Spain. He's a **Newell's** fan, by the way, and nicknamed **la Pulga** (*the flea*) for being small. That grumbling is now very, very dead."
+
+      - type: info
+        title: "2014: so close"
+        emoji: "💔"
+        body: "The **2014** final in Rio's Maracanã: Argentina vs Germany, 0–0 into extra time. In minute 113, **Mario Götze** scored. Germany 1–0. Messi was named best player of the tournament and looked at the trophy he couldn't touch. Then came two lost Copa América finals, in 2015 and 2016. After 2016, Messi briefly retired from the Selección."
+
+      - type: true_false
+        statement: "Argentina lost the 2014 World Cup final to Brazil."
+        answer: false
+        explain: "It was **Germany**, 1–0, played in Brazil. Losing in Brazil's own stadium, to anyone, stung extra."
+
+      - type: info
+        title: "Qatar 2022"
+        emoji: "🏆"
+        body: "December 18, 2022. The final against France was madness: Argentina 2–0, then Mbappé scores twice in two minutes, Messi makes it 3–2 in extra time, Mbappé again: 3–3. Penalties. **Dibu Martínez**, the **arquero** (*goalkeeper*), saves one, and **Gonzalo Montiel** scores the last. Messi finally lifts the cup. Argentina's third star."
+        fun_fact: "The celebration in Buenos Aires drew millions of people — the Obelisco disappeared under a sea of shirts."
+
+      - type: order
+        prompt: "Put the Qatar 2022 final in order"
+        items:
+          - "Argentina leads 2–0"
+          - "Mbappé ties it 2–2"
+          - "Messi scores in extra time: 3–2"
+          - "Mbappé ties it again: 3–3"
+          - "Montiel scores the winning penalty"
+        explain: "4–2 on penalties. Many Argentines say they didn't breathe for about three hours."
+
+      - type: info
+        title: "Muchachos"
+        emoji: "🎶"
+        body: "The soundtrack of Qatar was a cantito: **\"Muchachos, ahora nos volvimos a ilusionar\"** — *Guys, now we've got our hopes up again*. Fans wrote it to the tune of a song by the band La Mosca. It name-checks Malvinas, Diego and Leo. Sing it at any party and the whole room joins in."
+
+      - type: choice
+        scenario: "It's a Selección match day and your Argentine friend has worn the same unwashed socks for every game since the tournament started."
+        prompt: "What's going on?"
+        options:
+          - "He forgot to do laundry"
+          - "It's a cábala — a lucky ritual"
+          - "It's a traditional costume"
+        correct: 1
+        explain: "A **cábala** is a superstitious ritual. Same seat, same socks, same mate. If the team wins, you do NOT change anything."
+
+      - type: match
+        prompt: "Match the hero to the moment"
+        pairs:
+          - ["Kempes", "two goals in the 1978 final"]
+          - ["Burruchaga", "winning goal in the 1986 final"]
+          - ["Götze", "broke Argentine hearts in 2014"]
+          - ["Montiel", "last penalty in Qatar 2022"]
+        explain: "Four finals, four names every Argentine knows — including the German one, sadly."
+
+      - type: gap
+        prompt: "Your friend is scared to change his lucky socks. He says:"
+        text: "No las lavo, es ___."
+        options: ["cábala", "mufa", "caño"]
+        correct: 0
+        translation: "I'm not washing them, it's a lucky ritual."
+        explain: "**Mufa** is bad luck (or the person who brings it) — the exact opposite."
+    vocabulary:
+      - es: "la Pulga"
+        en: "the Flea (Messi's nickname)"
+      - es: "arquero"
+        en: "goalkeeper"
+        example: { es: "El Dibu es el mejor arquero.", en: "Dibu is the best goalkeeper." }
+      - es: "penal"
+        en: "penalty kick"
+        note: "Plural: penales. \"Ir a penales\" = go to a shootout."
+      - es: "cábala"
+        en: "lucky ritual, superstition"
+      - es: "mufa"
+        en: "bad luck; a jinx (person)"
+        example: { es: "No mires, sos mufa.", en: "Don't watch, you're a jinx." }
+      - es: "ilusionarse"
+        en: "to get your hopes up"
+      - es: "final"
+        en: "final (match)"
+        note: "La final = the final match. El final = the ending."
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "hablar-de-futbol"
+    title: "Talk like a hincha"
+    summary: "Golazos, gambetas, caños and the Sunday picado"
+    pages:
+      - type: info
+        title: "Potrero and picado"
+        emoji: "🌱"
+        body: "Argentines say their football was born in the **potrero** — a dirt lot where kids play with a ball, a couple of stones as goalposts and zero rules. A casual game with friends is a **picado**. \"¿Armamos un picado?\" = *Shall we get a game together?* Today it's usually **fútbol 5** on synthetic grass, then beers."
+        fun_fact: "Calling a player \"**de potrero**\" is a big compliment: street-smart, creative, fearless."
+
+      - type: info
+        title: "Gambeta and caño"
+        emoji: "🪄"
+        body: "A **gambeta** is a dribble, the twisty, dancing kind Maradona and Messi made famous. A **caño** is a nutmeg: the ball between the defender's legs. Getting a caño in a picado means your friends will remind you for weeks. And a **golazo** is a stunning goal. The **-azo** ending makes anything bigger: **golazo**, **partidazo**."
+
+      - type: match
+        prompt: "Match the word to its meaning"
+        pairs:
+          - ["gambeta", "dribble"]
+          - ["caño", "nutmeg"]
+          - ["golazo", "amazing goal"]
+          - ["picado", "casual pickup game"]
+          - ["potrero", "dirt lot where kids play"]
+
+      - type: choice
+        scenario: "In a picado, you slip the ball between the legs of your friend Nacho and run past him. Everyone screams."
+        prompt: "What did you just do?"
+        options: ["Un caño", "Una gambeta de arquero", "Un penal"]
+        correct: 0
+        explain: "**¡Caño!** Nacho will now be teased until the next picado. Maybe longer."
+
+      - type: info
+        title: "El DT and the arquero"
+        emoji: "📋"
+        body: "The coach is **el DT** (*de-té*), short for **director técnico**. Every Argentine is secretly a DT: they all know who should play. The goalkeeper is **el arquero** (from **arco**, *goal*). And the defender who kicks everything out? A **hachero** — an *axe man*."
+
+      - type: true_false
+        statement: "In Argentina, \"el DT\" is the team's doctor."
+        answer: false
+        explain: "**DT** = **director técnico**, the coach. Lionel Scaloni, the DT who won Qatar, gave his name to the team's nickname: **la Scaloneta**."
+
+      - type: info
+        title: "Hacer la previa"
+        emoji: "🍻"
+        body: "Before any big match you **hacer la previa**: meet up earlier to eat, drink, sing and get in the mood. The previa can last longer than the match itself. After the game, win or lose, there's analysis at the bar until late. Watching football alone? Suspicious behavior."
+
+      - type: gap
+        prompt: "Invite your friends to meet up before the Superclásico"
+        text: "¿Hacemos la ___ en casa?"
+        options: ["previa", "picada", "cancha"]
+        correct: 0
+        translation: "Shall we do the pre-match hangout at my place?"
+        explain: "Careful: a **picada** is a snack board of cheese and salami — very welcome at the previa, but not the same word."
+
+      - type: order
+        prompt: "A perfect Superclásico Sunday, in order"
+        items:
+          - "Hacer la previa with friends"
+          - "Walk to the cancha singing"
+          - "Suffer for ninety minutes"
+          - "Celebrate a golazo"
+          - "Analyze every play at the bar"
+
+      - type: choice
+        scenario: "Your team lost 4–0. Your Argentine friend's phone keeps buzzing with memes from rival fans."
+        prompt: "What's the local tradition here?"
+        options:
+          - "Mute everyone and disappear until Monday"
+          - "Take the gastada, then return it when your team wins"
+          - "Report them to the police"
+        correct: 1
+        explain: "A **gastada** is the teasing after a loss. You take it, you keep a list, and you pay it back with interest."
+    vocabulary:
+      - es: "golazo"
+        en: "amazing goal"
+      - es: "gambeta"
+        en: "dribble"
+      - es: "caño"
+        en: "nutmeg (ball between the legs)"
+      - es: "picado"
+        en: "casual pickup game"
+        example: { es: "¿Armamos un picado?", en: "Shall we get a game together?" }
+      - es: "potrero"
+        en: "dirt lot where kids play football"
+      - es: "DT"
+        en: "coach (director técnico)"
+      - es: "hacer la previa"
+        en: "to hang out before an event"
+        example: { es: "Hacemos la previa en lo de Juan.", en: "We're meeting at Juan's place first." }
+      - es: "gastada"
+        en: "teasing (after a loss)"

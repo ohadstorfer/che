@@ -41,7 +41,7 @@ const CONTENT = {
   'hola-che': {
     sentences: {
       chau_che: { es: 'Chau, che.', en: 'Bye!', target: 'chau' },
-      que_tal: { es: '¿Qué tal?', en: "How's it going?", target: 'qué tal' },
+      que_onda: { es: '¿Qué onda?', en: "What's up?", target: 'qué onda' },
       dale_chau: { es: 'Dale, chau.', en: 'OK, bye.', target: 'dale' },
       bueno_chau: { es: 'Bueno, chau.', en: 'Well, bye.', target: 'bueno' },
       soy_sofi: { es: 'Soy Sofi.', en: "I'm Sofi.", target: 'soy' },
@@ -100,7 +100,7 @@ test('a sentence build accepts what the English allows', () => {
   assert.ok(sentenceAnswerMatches(words('sos argentina'), sentence('¿Sos argentino?')), 'other gender');
   assert.ok(sentenceAnswerMatches(words('sí ella es uruguaya'), sentence('Sí, es uruguaya.')));
   assert.ok(sentenceAnswerMatches(words('de dónde sos vos'), sentence('¿De dónde sos?')), 'authored word order');
-  assert.ok(sentenceAnswerMatches(words('qué tal'), sentence('¿Qué tal?')));
+  assert.ok(sentenceAnswerMatches(words('qué onda'), sentence('¿Qué onda?')));
 });
 
 test('a sentence build rejects real mistakes, however small', () => {
@@ -148,7 +148,7 @@ test('a phrase gap is answered among phrases', () => {
 });
 
 test('set phrases break into word tiles; no spare tile is a synonym', () => {
-  assert.deepEqual(sentenceTiles(sentence('¿Qué tal?'), forms).answer, ['qué', 'tal']);
+  assert.deepEqual(sentenceTiles(sentence('¿Qué onda?'), forms).answer, ['qué', 'onda']);
   for (let i = 0; i < 50; i++) {
     const { tiles } = sentenceTiles(sentence('Dale, chau.'), forms);
     assert.ok(!tiles.includes('bueno'), tiles.join(', '));

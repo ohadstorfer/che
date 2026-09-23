@@ -25,7 +25,14 @@ import type { ExerciseMode, Form } from '@/lib/types';
 // it in each exercise.
 // ---------------------------------------------------------------------------
 
-const PREVIEW_MODES: ExerciseMode[] = ['sentence_meaning', 'sentence_gap', 'sentence_build'];
+const PREVIEW_MODES: ExerciseMode[] = [
+  'sentence_meaning',
+  'sentence_meaning_tiles',
+  'sentence_gap',
+  'sentence_gap_tiles',
+  'sentence_gap_typed',
+  'sentence_build',
+];
 const lines = (a: string[]) => a.join('\n');
 const unlines = (s: string) =>
   s

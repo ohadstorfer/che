@@ -3,9 +3,8 @@
 // forms spread over its teaching lessons, each one taught, met in a sentence
 // for its meaning, then drilled harder — and a last lesson that is the unit
 // check. Pure; the reviewer reorders the proposal in the dashboard.
-import { FORMS_PER_LESSON } from './outline.mjs';
+import { FORMS_PER_LESSON, drillable } from './outline.mjs';
 
-const drillable = (f) => !f.is_glue && f.pos !== 'propn';
 
 /** Words per build step: meaning first, then a gap, tiles last (§5.2 ramp). */
 const words = (s) => s.tokens.length;

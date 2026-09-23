@@ -122,6 +122,11 @@ export interface Form {
   /** Its unit's place in the whole course: a form is available from here on. */
   unit_order: number;
   is_glue: boolean;
+  /** A form that never stands on its own — `llamo`, which only ever appears
+   *  inside `me llamo`. It keeps its place in sentences and in the dictionary
+   *  and gets no exercise of its own; the chunk is what is drilled.
+   *  `course-rules/vocabulary.ts` · docs/course-spec.md §1.5. */
+  bound?: boolean;
   register: string;
   audio_path: string | null;
   /** Who says `audio_path` — a row of `voices`. Null where there is no
@@ -167,8 +172,18 @@ export type ExerciseMode =
   /** A sentence she knows every word of: read it, pick its meaning. The first
    *  rung of the ladder, before the gap and the tiles. */
   | 'sentence_meaning'
+  /** The same rung, asked properly: read the Spanish and put its English
+   *  together from tiles, rather than picking it out of four. */
+  | 'sentence_meaning_tiles'
   /** The sentence with its target word blanked out: pick the word. */
   | 'sentence_gap'
+  /** The same blank, filled from a bank of word tiles instead of four
+   *  choices — the step above the gap for a sentence that stays at it. */
+  | 'sentence_gap_tiles'
+  /** The same blank again, typed. The top of the gap, and the one production
+   *  screen a word can be given before it has settled enough to be typed on
+   *  its own: the sentence around it carries everything else. */
+  | 'sentence_gap_typed'
   /** Rebuild the sentence from word tiles, given its English. */
   | 'sentence_build'
   /** Rebuild the sentence from word tiles, given only its audio. */

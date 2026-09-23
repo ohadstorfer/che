@@ -9,6 +9,7 @@ import {
   selfGlossed,
   sharesMeaning,
   shuffle,
+  tokenIndexOf,
   wordsOf,
 } from './answers';
 import { conceptScores, conceptsOf, weakestConcept } from './concepts';
@@ -25,6 +26,7 @@ import {
   ladderFor,
   ladderOffset,
   passedScreens,
+  passesOfSentence,
   loadSentences,
   pickReviewSentences,
   rungFor,
@@ -107,7 +109,10 @@ const FILLER_POOL = 12;
 
 const screens = (groups: SessionItem[][]) => groups.reduce((n, g) => n + g.length, 0);
 
-const PRODUCTION: ExerciseMode[] = ['typing', 'word_build', 'listen_build'];
+const PRODUCTION: ExerciseMode[] = ['typing', 'word_build', 'listen_build', 'sentence_gap_typed'];
+
+/** The three flavours of the gap — all of them test the blanked word. */
+export const GAP_MODES: ExerciseMode[] = ['sentence_gap', 'sentence_gap_tiles', 'sentence_gap_typed'];
 
 /** A group cut down to its one production angle (the first exercise if it
  *  somehow has none). */
@@ -115,6 +120,11 @@ const productionOnly = (g: SessionItem[]) => {
   const item = g.find((i) => PRODUCTION.includes(i.mode)) ?? g[0];
   return item ? [item] : [];
 };
+
+/** A group cut to two angles. It drops the middle one, not the last: a group
+ *  is ordered easiest to hardest, so the production angle is the one at the
+ *  end and the one worth keeping. */
+const twoAngles = (g: SessionItem[]) => (g.length <= 2 ? g : [g[0], g[g.length - 1]]);
 
 // ---------------------------------------------------------------------------
 // What a round is built from
@@ -176,7 +186,9 @@ export async function loadLearner(userId: string): Promise<LearnerData> {
 }
 
 /** Whether a form is something she drills: not a function word, not a name. */
-export const drillable = (f: Form) => !f.is_glue && f.pos !== 'propn';
+/** Mirrors `course-rules/vocabulary.ts`, over the runtime's own Form shape:
+ *  glue, proper nouns and bound forms are never asked about on their own. */
+export const drillable = (f: Form) => !f.is_glue && f.pos !== 'propn' && !f.bound;
 
 /** Forms distractors may come from: drillable ones taught by `courseOrder`. */
 export const deckUpTo = (data: LearnerData, courseOrder: number) =>
@@ -205,6 +217,12 @@ export function exercisesFor(
   // left to test is its sound and its spelling, and its sentences carry the
   // rest, so a word with no recording yet simply waits there.
   if (selfGlossed(form)) return loanwordExercises(form, deck.length);
+  // A bound form — `llamo`, which is never said without `me` — has nothing a
+  // learner could be asked. Its gloss only reads as English because it smuggles
+  // the missing word in ("(my name) is"), and a card strips the parenthesis
+  // back off. It is met inside its sentences, and the chunk that contains it is
+  // a form of its own, drilled like any other phrase (docs/course-spec.md §1.5).
+  if (form.bound) return [];
   return isPhrase(form.form)
     ? phraseExercises(form, state, deck, ladder)
     : wordExercises(form, state, deck.length, ladder);
@@ -230,17 +248,26 @@ function wordExercises(form: Form, state: FormState | null, deckSize: number, la
   if (form.audio_path && enoughForChoices) recognition.push('listen');
 
   const production: ExerciseMode[] = ['word_build'];
+  // A word with a recording can be spelt from its sound instead of its English.
+  // It was always offered to set phrases; there is no reason a single word
+  // should be the one thing production never varies on. Not on a first
+  // meeting, though — the same rule phrases follow: spelling a word from its
+  // sound the moment she meets it is a memory test, not a spelling one.
+  if (form.audio_path && state) production.push('listen_build');
   // Typing is the strictest test, and only fair once the word has settled. It
   // is also the only exercise that can earn "fácil" (practice.tsx).
   if (mature) production.push('typing');
 
-  const picked: ExerciseMode[] = [shuffle(recognition)[0], shuffle(production)[0]];
+  const picked: ExerciseMode[] = [shuffle(recognition)[0]];
 
-  // Settled words earn a third angle so review rounds stay varied.
+  // Settled words earn a third angle so review rounds stay varied. It goes
+  // between the two, not after them: a word's last exercise is the one the
+  // round is judged on, and that should be the hardest it can manage.
   if (mature && recognition.length > 1) {
     const extra = shuffle(recognition.filter((m) => m !== picked[0]))[0];
     if (extra) picked.push(extra);
   }
+  picked.push(shuffle(production)[0]);
   return picked.filter(Boolean);
 }
 
@@ -258,12 +285,15 @@ function phraseExercises(form: Form, state: FormState | null, deck: Form[], ladd
 
   const picked: ExerciseMode[] = [];
   if (recognition.length) picked.push(shuffle(recognition)[0]);
-  picked.push('word_build');
-  if (form.audio_path && state) picked.push('listen_build');
-  else if (mature && recognition.length > 1) {
+  const heard = !!form.audio_path && !!state;
+  // The third angle again sits before the production one, so the phrase is
+  // last asked for whole.
+  if (!heard && mature && recognition.length > 1) {
     const extra = shuffle(recognition.filter((m) => m !== picked[0]))[0];
     if (extra) picked.push(extra);
   }
+  picked.push('word_build');
+  if (heard) picked.push('listen_build');
   return picked;
 }
 
@@ -296,17 +326,140 @@ export function itemsForForm(
   }));
 }
 
-// Interleave each form's exercises so the same word never appears twice in a
-// row: round 1 takes every form's first exercise, round 2 the second, and so on.
+// ---------------------------------------------------------------------------
+// The order a round is dealt in.
+//
+// Every screen has a tier — how much it asks her to produce, not what it is
+// about. Three of them, because two was a lie: building "café" from letter
+// tiles with the English in front of her is not the same job as typing it from
+// nothing, and lumping them together is what put four hardest-screens in a row
+// at the end of a round.
+//
+//   0  recognise   tap one of the answers already on screen
+//   1  assemble    put it together from pieces she can see
+//   2  produce     write it, or rebuild a whole sentence
+//
+// The round is dealt tier by tier, the tiers overlapping by BLEND so the easy
+// screens do not stop dead and the hard ones start, and then a repair pass
+// breaks up whatever runs of one mode are left inside a tier. Recognising and
+// assembling run into each other; producing is mixed among itself. What
+// survives is the trend, not the wall.
+// ---------------------------------------------------------------------------
+
+/** How much a screen asks her to produce. Not the same question as
+ *  `PRODUCTION`, which asks whether a screen makes her come up with Spanish —
+ *  a sentence rebuilt from tiles does, and is still only tier 1 to sit
+ *  through. */
+const TIER: Partial<Record<ExerciseMode, 0 | 1 | 2>> = {
+  // 0 — everything she needs is on screen; she picks.
+  tip: 0,
+  flashcard: 0,
+  sentence_intro: 0,
+  matching: 0,
+  multiple_choice: 0,
+  true_false: 0,
+  listen: 0,
+  sentence_meaning: 0,
+  // 1 — she assembles, from tiles or a bank, with the pieces in view.
+  sentence_meaning_tiles: 1,
+  sentence_gap: 1,
+  sentence_gap_tiles: 1,
+  word_build: 1,
+  listen_build: 1,
+  // 2 — nothing to lean on: free text, or a whole sentence from nothing.
+  sentence_gap_typed: 2,
+  sentence_build: 2,
+  sentence_listen: 2,
+  typing: 2,
+};
+
+export const tierOf = (mode: ExerciseMode): 0 | 1 | 2 => TIER[mode] ?? 1;
+
+/** How far a tier bleeds into the next: 0 deals them as blocks, 1 gives up on
+ *  order altogether. */
+const BLEND = 0.45;
+
+/**
+ * Deals the round. A word's own exercises keep their order — it is built
+ * easiest first — and no word is ever asked twice in a row.
+ */
 export function interleave(groups: SessionItem[][]): SessionItem[] {
-  const out: SessionItem[] = [];
-  const depth = Math.max(0, ...groups.map((g) => g.length));
-  for (let round = 0; round < depth; round++) {
-    for (const group of groups) {
-      if (group[round]) out.push(group[round]);
+  const width = Math.max(1, groups.length);
+  const dealt: Dealt[] = [];
+  groups.forEach((group, g) => {
+    // A word's screens go one slot apart at the least, whatever their tiers:
+    // two screens of one word landing in the same slot would deal them side by
+    // side. The slot never drops below the tier, so nothing is dealt earlier
+    // than it has earned — a second screen of the same tier simply waits.
+    let slot = -1;
+    group.forEach((item, rank) => {
+      slot = Math.max(tierOf(item.mode), slot + 1);
+      dealt.push({ item, g, rank, at: slot * width * (1 - BLEND) + g });
+    });
+  });
+  return declump(dealt.sort((a, b) => a.at - b.at));
+}
+
+interface Dealt {
+  item: SessionItem;
+  /** Which group the exercise came from, and where in it: a word's own
+   *  exercises are ordered easiest first, and must stay that way. */
+  g: number;
+  rank: number;
+  at: number;
+}
+
+/** How far a de-clumping swap may reach — small, so nothing travels far enough
+ *  to undo the ramp — and how many times the repair runs. */
+const DECLUMP_WINDOW = 3;
+const DECLUMP_PASSES = 4;
+
+/**
+ * Breaks up runs of one kind: an exercise repeating the mode before it trades
+ * places with a nearby one that doesn't.
+ *
+ * A swap reaches at most DECLUMP_WINDOW screens, so nothing travels far enough
+ * to undo the ramp, and it is kept only if both exercises land legally — no
+ * word beside itself, and no word asked to produce before it has recognised.
+ * Swaps are not held inside a tier: a run of four listen_builds at the end of
+ * a round is exactly what this exists to fix, and the only screens near enough
+ * to trade with are the ones on either side of the tier line.
+ *
+ * One pass is greedy and can leave a run it created behind it, so it repeats
+ * until a pass changes nothing, or DECLUMP_PASSES have run.
+ */
+function declump(dealt: Dealt[]): SessionItem[] {
+  const legal = (i: number) => {
+    const here = dealt[i];
+    if (i > 0 && dealt[i - 1].item.form.id === here.item.form.id) return false;
+    if (i < dealt.length - 1 && dealt[i + 1].item.form.id === here.item.form.id) return false;
+    return dealt.every((other, k) => k === i || other.g !== here.g || (k < i) === (other.rank < here.rank));
+  };
+  const swap = (i: number, j: number) => {
+    [dealt[i], dealt[j]] = [dealt[j], dealt[i]];
+  };
+  for (let pass = 0; pass < DECLUMP_PASSES; pass++) {
+    let moved = false;
+    for (let i = 1; i < dealt.length; i++) {
+      if (dealt[i].item.mode !== dealt[i - 1].item.mode) continue;
+      // Forward first, which keeps the ramp; then backward, because a run at
+      // the very end of a round has nothing ahead of it to trade with.
+      const reach = [];
+      for (let j = i + 1; j <= Math.min(i + DECLUMP_WINDOW, dealt.length - 1); j++) reach.push(j);
+      for (let j = i - 2; j >= Math.max(0, i - DECLUMP_WINDOW); j--) reach.push(j);
+      for (const j of reach) {
+        if (dealt[j].item.mode === dealt[i - 1].item.mode) continue;
+        swap(i, j);
+        if (legal(i) && legal(j)) {
+          moved = true;
+          break;
+        }
+        swap(i, j);
+      }
     }
+    if (!moved) break;
   }
-  return out;
+  return dealt.map((d) => d.item);
 }
 
 // A matching block: one screen that drills four forms at once. Phrases are left
@@ -359,13 +512,32 @@ export function sentenceItem(
 }
 
 /** The exercise a sentence gets at a rung. */
+/**
+ * Which of the three gaps a sentence has earned. A sentence on its way up the
+ * ladder only ever sees the first: it passes the gap once or twice and moves
+ * on to the build. The ones that stay — too long to rebuild, or holding glue
+ * she doesn't own yet — harden instead of repeating: four choices, then a bank
+ * of tiles, then typed.
+ */
+export function gapMode(sentence: Sentence, ladder: Ladder = DEFAULT_LADDER): ExerciseMode {
+  const passes = passesOfSentence(sentence);
+  if (passes >= ladder.gapTypedAt) return 'sentence_gap_typed';
+  if (passes >= ladder.gapTilesAt) return 'sentence_gap_tiles';
+  return 'sentence_gap';
+}
+
 export function modeForRung(
   rung: ReturnType<typeof rungFor>,
   sentence: Sentence,
   ladder: Ladder = DEFAULT_LADDER,
 ): ExerciseMode {
-  if (rung === 'meaning') return 'sentence_meaning';
-  if (rung === 'gap') return 'sentence_gap';
+  // Picking the English out of four is the guessiest screen in the course.
+  // Half the time the same rung asks her to put that English together instead,
+  // which tests the same reading much harder for no extra content.
+  if (rung === 'meaning') {
+    return wordsOf(sentence.en).length >= 3 && Math.random() < 0.5 ? 'sentence_meaning_tiles' : 'sentence_meaning';
+  }
+  if (rung === 'gap') return gapMode(sentence, ladder);
   // Listening asks for the whole sentence at once, so it can't frame a build of
   // one clause: a sentence that long is rebuilt on the page, with the rest of it
   // in view.
@@ -436,14 +608,15 @@ export async function buildSession(userId: string): Promise<SessionData> {
         ? target
         : (sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && dueIds.has(f.id)) ?? target);
       const mode = modeForRung(rungFor(sentence, seen, ladder), sentence, ladder);
-      if (mode === 'sentence_gap') covered.add(gapForm.id);
+      if (GAP_MODES.includes(mode)) covered.add(gapForm.id);
       if (mode === 'sentence_build' || mode === 'sentence_listen') for (const id of sentence.form_ids) covered.add(id);
       return [[sentenceItem(data, sentence, mode, gapForm)]];
     },
   );
+  const onTheTable = new Set(sentenceGroups.flatMap((g) => g.map((i) => i.sentence!.id)));
   let dueGroups = due
     .filter(({ form }) => !covered.has(form.id))
-    .map(({ form, state }) => itemsForForm(form, state, deck, ladder))
+    .map(({ form, state }) => typedGap(itemsForForm(form, state, deck, ladder), form, data, onTheTable, seen, ladder))
     // A word with no exercise of its own — a silent loanword — is left to its
     // sentences rather than shown as an empty group.
     .filter((g) => g.length);
@@ -454,7 +627,7 @@ export async function buildSession(userId: string): Promise<SessionData> {
   // can carry several reviews.
   const fillerGroups: SessionItem[][] = [];
   const total = () => screens(sentenceGroups) + screens(dueGroups) + screens(fillerGroups);
-  if (total() > MAX_SESSION_ITEMS) dueGroups = dueGroups.map((g) => g.slice(0, 2));
+  if (total() > MAX_SESSION_ITEMS) dueGroups = dueGroups.map(twoAngles);
   if (total() > MAX_SESSION_ITEMS) dueGroups = dueGroups.map(productionOnly);
   while (total() > MAX_SESSION_ITEMS && dueGroups.length) dueGroups.pop();
   while (total() > MAX_SESSION_ITEMS && sentenceGroups.length) sentenceGroups.pop();
@@ -481,9 +654,10 @@ export async function buildSession(userId: string): Promise<SessionData> {
     ];
     for (const state of pool) {
       if (total() >= MIN_SESSION_ITEMS) break;
-      const group = itemsForForm(data.formById.get(state.form_id)!, state, deck, ladder)
-        .slice(0, 2)
-        .map((item) => ({ ...item, filler: true }));
+      const group = twoAngles(itemsForForm(data.formById.get(state.form_id)!, state, deck, ladder)).map((item) => ({
+        ...item,
+        filler: true,
+      }));
       if (group.length) fillerGroups.push(group);
     }
   }
@@ -505,6 +679,71 @@ export async function buildSession(userId: string): Promise<SessionData> {
     ladder,
   };
 }
+
+/** How often a word's production screen becomes a typed gap, when it can. */
+const TYPED_GAP_SHARE = 0.5;
+
+/** Words that must be left around the blank for the sentence to be carrying
+ *  anything. Below this, "¿Un ___?" is bare typing wearing a sentence. */
+const GAP_SCAFFOLD_MIN = 3;
+
+/**
+ * Swaps a word's production screen for the same word typed into a sentence.
+ *
+ * Producing a word on its own is one exercise — build it from letter tiles —
+ * until it has settled enough to be typed, so a round of new words asks the
+ * same screen of every one of them. A sentence fixes that: the word is blanked
+ * out of a sentence she has already passed, and she types it with the rest of
+ * the sentence in view. That scaffolding is the whole reason typing is fair
+ * this early, so the screen is only offered when the scaffolding is really
+ * there:
+ *
+ *   - she has passed the sentence at least once, counted directly rather than
+ *     through `rungFor`, whose "past the meaning rung" is vacuously true on
+ *     the fast ladder (`rungGapAt` is 0 there) and for any unit a placement
+ *     let her skip;
+ *   - at least `GAP_SCAFFOLD_MIN` words are left standing around the blank;
+ *   - the word is not its own English, or the sentence's translation under the
+ *     blank spells out the answer (see `loanwordExercises`);
+ *   - the sentence is not already on the round's table;
+ *   - and the word has been recognised on an earlier screen in its own group,
+ *     so a typed gap is never the first thing a round asks.
+ */
+export function typedGap(
+  group: SessionItem[],
+  form: Form,
+  data: LearnerData,
+  onTheTable: Set<string>,
+  seen: Map<string, number>,
+  ladder: Ladder,
+): SessionItem[] {
+  const at = group.findIndex((i) => PRODUCTION.includes(i.mode));
+  if (at < 1 || selfGlossed(form) || Math.random() >= TYPED_GAP_SHARE) return group;
+  // Never over plain typing. A typed gap sits between assembling a word and
+  // spelling it from nothing: swapping it in for a screen she would have
+  // assembled is a step up, and swapping it in for typing is a step down.
+  // (Both earn "fácil" now — round.ts, `typedHere` — so this is about what the
+  // screen asks of her, not what it pays.)
+  if (group[at].mode === 'typing') return group;
+  const sentence = data.sentences
+    .filter(
+      (s) =>
+        !onTheTable.has(s.id) &&
+        passesOfSentence(s) >= 1 &&
+        s.form_ids.includes(form.id) &&
+        tokenIndexOf(s, form.id) >= 0 &&
+        scaffoldOf(s, form) >= GAP_SCAFFOLD_MIN &&
+        !hasLockedGlue(s, seen, ladder),
+    )
+    .sort((a, b) => a.tokens.length - b.tokens.length)[0];
+  if (!sentence) return group;
+  onTheTable.add(sentence.id);
+  return group.map((item, i) => (i === at ? sentenceItem(data, sentence, 'sentence_gap_typed', form) : item));
+}
+
+/** Words left standing when a form is blanked out of a sentence. */
+const scaffoldOf = (s: Sentence, form: Form) =>
+  s.tokens.reduce((n, t) => n + (t.form_ids.includes(form.id) ? 0 : wordsOf(t.surface).length), 0);
 
 /** How many words a round of free practice serves up. */
 export const FREE_SESSION_SIZE = 6;
@@ -533,7 +772,7 @@ export async function buildFreeSession(
   let groups = pool
     .map((state) => itemsForForm(data.formById.get(state.form_id)!, state, deck, ladder))
     .filter((g) => g.length);
-  if (screens(groups) > MAX_SESSION_ITEMS) groups = groups.map((g) => g.slice(0, 2));
+  if (screens(groups) > MAX_SESSION_ITEMS) groups = groups.map(twoAngles);
   while (screens(groups) > MAX_SESSION_ITEMS && groups.length) groups.pop();
 
   const items = interleave(groups);
@@ -609,10 +848,13 @@ export function promotedMode(
   if (item.isIntro || item.isRetry || item.introduces || item.placementUnit) return null;
   switch (item.mode) {
     case 'sentence_meaning':
+    case 'sentence_meaning_tiles':
       return item.sentence && item.sentence.tokens.some((t) => t.form_ids.includes(item.form.id))
         ? 'sentence_gap'
         : null;
     case 'sentence_gap':
+    case 'sentence_gap_tiles':
+    case 'sentence_gap_typed':
       if (!item.sentence || hasLockedGlue(item.sentence, seen, ladder)) return null;
       // A sentence too long to rebuild is promoted only if one of its clauses
       // can stand in for it; otherwise the gap is already the right step.
@@ -740,7 +982,7 @@ export async function buildMistakesSession(userId: string): Promise<SessionData>
     const target = sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && wanted.has(f.id) && !covered.has(f.id));
     if (!target) continue;
     const mode = modeForRung(atLeast(rungFor(sentence, seen, ladder), 'gap'), sentence, ladder);
-    if (mode === 'sentence_gap') covered.add(target.id);
+    if (GAP_MODES.includes(mode)) covered.add(target.id);
     else for (const id of sentence.form_ids) if (wanted.has(id)) covered.add(id);
     items.push(sentenceItem(data, sentence, mode, target));
   }

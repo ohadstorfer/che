@@ -1,0 +1,472 @@
+section:
+  slug: "historia-nacimiento"
+  title: "Historia: el nacimiento de un país"
+  emoji: "🇦🇷"
+  summary: "From the first peoples to the tango: how Argentina came to be, up to 1930"
+
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "antes-de-buenos-aires"
+    title: "Before Buenos Aires"
+    summary: "The first peoples, and a city that had to be founded twice"
+    pages:
+      - type: info
+        title: "They were here first"
+        emoji: "🌎"
+        body: "Long before any Spaniard showed up, this land was full of peoples: the **guaraníes** in the humid northeast, the **diaguitas** farming the valleys of the northwest, the **mapuches** in the south by the Andes, the **tehuelches** across Patagonia, and the **querandíes**, hunters of the pampa right where Buenos Aires stands today. Argentines call them **pueblos originarios** (original peoples)."
+        fun_fact: "Iguazú comes from Guaraní and means roughly 'big water'. Fair enough."
+
+      - type: match
+        prompt: "Match each people to where they lived"
+        pairs:
+          - ["guaraníes", "the humid northeast, near Iguazú"]
+          - ["diaguitas", "the valleys of the northwest"]
+          - ["querandíes", "the pampa around Buenos Aires"]
+          - ["tehuelches", "the plains of Patagonia"]
+        explain: "And the mapuches lived on both sides of the Andes, in the south. The map was never empty."
+
+      - type: info
+        title: "Words that stayed"
+        emoji: "🌽"
+        body: "You speak native languages every day here without noticing. From **quechua** (the Andean language of the Inca world): **cancha** (field, court), **choclo** (corn on the cob), **palta** (avocado) and even **mate** — the word first meant the gourd. From **guaraní**: **ñandú** (the local ostrich-like bird) and **yaguareté** (jaguar). So when you ask for a **tostado con palta**, say thanks to the Andes."
+
+      - type: choice
+        scenario: "At a parrilla, your friend asks if you want a **choclo** on the grill."
+        prompt: "What are they offering you?"
+        options: ["A corn on the cob", "A blood sausage", "An avocado", "A glass of wine"]
+        correct: 0
+        explain: "**Choclo** is corn on the cob, a word from quechua. The avocado is **palta** — also quechua, and never 'aguacate' here."
+
+      - type: info
+        title: "Buenos Aires, take one"
+        emoji: "⛵"
+        body: "In **1536** the Spaniard **Pedro de Mendoza** founded a settlement on the Río de la Plata and named it after the Virgin of the good winds: **Santa María del Buen Ayre**. It went badly. Hunger, disease and fights with the **querandíes** crushed it, and by **1541** the survivors had abandoned it. Many sailed up the river to Asunción, in today's Paraguay."
+
+      - type: info
+        title: "Take two"
+        emoji: "🏗️"
+        body: "In **1580**, **Juan de Garay** came down from Asunción and founded the city again — this time for good. That's why porteños talk about **la primera fundación** and **la segunda fundación**. For two centuries it stayed a small, muddy port, more famous for smuggling than for anything else. The real money was in the silver mines of **Potosí**, far up in today's Bolivia."
+        fun_fact: "**Porteño** literally means 'from the port' — that's what people from Buenos Aires are called."
+
+      - type: order
+        prompt: "Put these in order"
+        items:
+          - "Pueblos originarios live across the land for thousands of years"
+          - "Pedro de Mendoza founds Buenos Aires (1536)"
+          - "The first Buenos Aires is abandoned (1541)"
+          - "Juan de Garay founds it again (1580)"
+
+      - type: true_false
+        statement: "Buenos Aires has survived without interruption since its very first founding."
+        answer: false
+        explain: "The first one (1536) was abandoned in 1541. The city that lasted is Garay's, from 1580."
+
+      - type: gap
+        prompt: "Your friend is from Buenos Aires. How do they describe themselves?"
+        text: "Soy ___."
+        options: ["porteño", "mapuche", "tehuelche"]
+        correct: 0
+        translation: "I'm from Buenos Aires."
+        explain: "**Porteño** — from the port. You'll hear it a hundred times a day."
+
+    vocabulary:
+      - es: "pueblos originarios"
+        en: "indigenous peoples (lit. original peoples)"
+        example: { es: "Los pueblos originarios vivían acá mucho antes.", en: "Indigenous peoples lived here long before." }
+      - es: "porteño"
+        en: "person from Buenos Aires"
+        example: { es: "¿Sos porteño?", en: "Are you from Buenos Aires?" }
+      - es: "fundación"
+        en: "founding"
+      - es: "choclo"
+        en: "corn on the cob"
+      - es: "palta"
+        en: "avocado"
+        example: { es: "Un tostado con palta, por favor.", en: "A toasted sandwich with avocado, please." }
+      - es: "cancha"
+        en: "field, court (sports)"
+      - es: "ñandú"
+        en: "rhea, a large flightless bird"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "virreinato-e-invasiones"
+    title: "A viceroyalty and two British invasions"
+    summary: "How a sleepy port became a capital, and threw out the British twice"
+    pages:
+      - type: info
+        title: "The Virreinato"
+        emoji: "👑"
+        body: "In **1776** the Spanish crown created the **Virreinato del Río de la Plata** (Viceroyalty of the River Plate), with Buenos Aires as its capital. It covered today's Argentina, Uruguay, Paraguay and Bolivia. Overnight the smuggling port became the boss, run by a **virrey** (viceroy) who answered to the king in Spain."
+
+      - type: choice
+        prompt: "Which of these countries was NOT part of the Virreinato del Río de la Plata?"
+        options: ["Chile", "Uruguay", "Paraguay", "Bolivia"]
+        correct: 0
+        explain: "Chile was a separate Spanish territory. The Virreinato covered Argentina, Uruguay, Paraguay and Bolivia."
+
+      - type: info
+        title: "The Cabildo"
+        emoji: "🏛️"
+        body: "Every Spanish colonial city had a **cabildo**: the town council, and the building where it met. The one in Buenos Aires is still standing on **Plaza de Mayo**, white, with arches and a little tower. You can visit it — it's a museum now. Look closely: it's shorter than it used to be."
+        fun_fact: "It lost three arches in 1889 to open Avenida de Mayo, and three more in 1931. From eleven arches to five."
+
+      - type: info
+        title: "The British are coming"
+        emoji: "🇬🇧"
+        body: "In **1806** a British force under **William Beresford** took Buenos Aires. The viceroy ran away to Córdoba — not his finest hour. Locals organized under **Santiago de Liniers** and kicked the British out that August: the **Reconquista**. In **1807** the British came back, bigger, with **John Whitelocke**. Porteños fought street by street, and won again: the **Defensa**."
+
+      - type: info
+        title: "Hot water from the rooftops"
+        emoji: "🔥"
+        body: "The story every Argentine kid learns: during the Defensa, neighbors threw boiling water and oil from the flat rooftops onto the British soldiers. Some of it is legend polished over time, but the street fighting was very real. And the lesson stuck: porteños had beaten an empire without Spain's help. Why keep obeying a viceroy?"
+
+      - type: true_false
+        statement: "When the British took Buenos Aires in 1806, the viceroy led the defense of the city."
+        answer: false
+        explain: "Viceroy Sobremonte fled to Córdoba with the treasury. The locals, led by Liniers, did the fighting."
+
+      - type: choice
+        scenario: "Walking downtown, you pass a street called **Reconquista**. Later, in San Telmo, you walk down **Defensa**."
+        prompt: "What do those street names remember?"
+        options: ["The victories against the British invasions", "Two famous tango songs", "Battles against Brazil", "Two football clubs"]
+        correct: 0
+        explain: "**Reconquista** (1806) and **Defensa** (1807): the two times porteños beat the British. Buenos Aires names its streets after its history."
+
+      - type: order
+        prompt: "Put these in order"
+        items:
+          - "Juan de Garay founds Buenos Aires"
+          - "Spain creates the Virreinato del Río de la Plata"
+          - "The British take Buenos Aires and are expelled (Reconquista)"
+          - "The British return and lose again (Defensa)"
+
+    vocabulary:
+      - es: "virreinato"
+        en: "viceroyalty"
+      - es: "virrey"
+        en: "viceroy"
+      - es: "cabildo"
+        en: "colonial town council (and its building)"
+        example: { es: "Vamos a visitar el Cabildo.", en: "Let's visit the Cabildo." }
+      - es: "invasiones inglesas"
+        en: "the British invasions (1806–1807)"
+      - es: "reconquista"
+        en: "reconquest, taking back"
+      - es: "defensa"
+        en: "defense"
+      - es: "techo"
+        en: "roof"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "mayo-y-julio"
+    title: "May and July: the big dates"
+    summary: "The Revolución de Mayo in 1810 and independence in 1816"
+    pages:
+      - type: info
+        title: "Spain in trouble"
+        emoji: "⚔️"
+        body: "In 1808 Napoleon invaded Spain and locked up its king. In **May 1810**, news arrived in Buenos Aires that Spain had almost completely fallen. Big question: if there's no king, who's in charge here? On **22 May** the city held a **cabildo abierto** — an open town meeting of leading neighbors — and voted to remove the viceroy."
+
+      - type: info
+        title: "25 de mayo de 1810"
+        emoji: "🌤️"
+        body: "On **25 May 1810** a new local government took over: the **Primera Junta** (First Board), led by **Cornelio Saavedra**. It still ruled in the name of the Spanish king, at least on paper, so it wasn't independence yet. But it was the first government chosen here, by people from here. This is the **Revolución de Mayo**, and it's why the main square is called **Plaza de Mayo**."
+        fun_fact: "The classic school drawing shows the crowd with umbrellas. Historians say umbrellas were rare back then — it's probably a myth."
+
+      - type: choice
+        scenario: "It's the 25th of May and your friend offers you **locro** (a thick corn-and-meat stew) and **pastelitos** (fried pastries with quince)."
+        prompt: "What are you celebrating?"
+        options: ["The Revolución de Mayo, 1810", "Independence Day", "The founding of Buenos Aires", "The end of the British invasions"]
+        correct: 0
+        explain: "The 25th of May is the Revolución de Mayo. Locro and pastelitos are the patriotic menu — you'll see them again on the 9th of July."
+
+      - type: info
+        title: "9 de julio de 1816"
+        emoji: "📜"
+        body: "Six years of war later, delegates from the provinces met in a house in **San Miguel de Tucumán**, in the northwest. On **9 July 1816** the **Congreso de Tucumán** declared independence from Spain and from any foreign power. The country called itself the **Provincias Unidas en Sud América**. The house is now the **Casa Histórica**, a museum."
+
+      - type: true_false
+        statement: "Argentina declared its independence in Buenos Aires, on the 25th of May."
+        answer: false
+        explain: "Independence was declared in Tucumán, on 9 July 1816. The 25th of May (1810) is the revolution that started the process."
+
+      - type: match
+        prompt: "Match the date to what happened"
+        pairs:
+          - ["22 de mayo de 1810", "Cabildo abierto votes out the viceroy"]
+          - ["25 de mayo de 1810", "The Primera Junta takes power"]
+          - ["9 de julio de 1816", "Independence declared in Tucumán"]
+
+      - type: info
+        title: "Walk the calendar"
+        emoji: "🗺️"
+        body: "Buenos Aires is a history book you can walk. **Avenida de Mayo** runs from the Casa Rosada to the Congress. **Avenida 9 de Julio**, the huge one with the Obelisco, is named after independence day. Both dates are **feriados** (public holidays), and almost every town in the country has a street called 25 de Mayo and another called 9 de Julio."
+
+      - type: gap
+        prompt: "You're in a taxi and want the widest avenue in town. You say:"
+        text: "Vamos a la avenida ___ de Julio, por favor."
+        options: ["9", "25", "20"]
+        correct: 0
+        translation: "Let's go to 9 de Julio Avenue, please."
+        explain: "**9 de Julio**: independence day, and the avenue with the Obelisco."
+
+      - type: order
+        prompt: "Put these in order"
+        items:
+          - "Napoleon invades Spain"
+          - "Cabildo abierto in Buenos Aires"
+          - "The Primera Junta takes power"
+          - "The Congreso de Tucumán declares independence"
+
+    vocabulary:
+      - es: "cabildo abierto"
+        en: "open town meeting"
+      - es: "Primera Junta"
+        en: "First Board, the first local government (1810)"
+      - es: "revolución"
+        en: "revolution"
+      - es: "independencia"
+        en: "independence"
+        example: { es: "El 9 de julio se festeja la independencia.", en: "Independence is celebrated on the 9th of July." }
+      - es: "feriado"
+        en: "public holiday"
+        example: { es: "Mañana es feriado, ¿querés hacer algo?", en: "Tomorrow is a holiday, do you want to do something?" }
+      - es: "locro"
+        en: "thick stew of corn, beans and meat"
+      - es: "pastelitos"
+        en: "fried pastries filled with quince or sweet potato jam"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "san-martin-y-belgrano"
+    title: "San Martín, Belgrano and the flag"
+    summary: "The general who crossed the Andes and the man who made the flag"
+    pages:
+      - type: info
+        title: "Belgrano's flag"
+        emoji: "🏳️"
+        body: "**Manuel Belgrano** was a lawyer and economist who ended up a general in the independence wars. On **27 February 1812**, by the Paraná river in **Rosario**, he raised a light blue and white flag for the first time. Buenos Aires wasn't thrilled — it was a bit too independent for 1812. Today Rosario has a giant **Monumento a la Bandera**."
+
+      - type: info
+        title: "Why light blue and white?"
+        emoji: "☁️"
+        body: "Kids learn the colors come from the sky and its clouds. Some historians argue they come from the colors of the Spanish royal house of Borbón instead. Nobody can prove either one. Before the flag came the **escarapela**, a light blue and white rosette people pin on their chest on patriotic days. The **sol de mayo** (May sun) in the middle came later."
+        fun_fact: "The 18th of May is Día de la Escarapela. Watch for the rosettes on kids' school uniforms."
+
+      - type: true_false
+        statement: "Belgrano died a rich and famous man, and that's why his day is a holiday."
+        answer: false
+        explain: "He died poor, in Buenos Aires, on 20 June 1820. That date is now Día de la Bandera (Flag Day), a holiday."
+
+      - type: info
+        title: "San Martín crosses the Andes"
+        emoji: "🏔️"
+        body: "**José de San Martín**, born in **Yapeyú** (Corrientes) and trained as a soldier in Spain, had a bold plan: beat Spain in Peru by going through Chile. From **Mendoza** he built the **Ejército de los Andes** and in **1817** crossed the mountains — thousands of men, mules and horses over passes more than 4,000 meters high. He won at **Chacabuco** and helped free Chile, then Peru."
+
+      - type: choice
+        scenario: "You're in the Catedral Metropolitana, next to Plaza de Mayo, and see soldiers in old blue uniforms guarding a tomb."
+        prompt: "Whose tomb is it?"
+        options: ["San Martín's", "Belgrano's", "Juan de Garay's", "The last viceroy's"]
+        correct: 0
+        explain: "San Martín's mausoleum, guarded by the **Granaderos**, the cavalry regiment he founded. He died in France in 1850; his remains came home in 1880."
+
+      - type: match
+        prompt: "Match the hero to the fact"
+        pairs:
+          - ["Belgrano", "raised the first flag in Rosario"]
+          - ["San Martín", "crossed the Andes with an army"]
+          - ["Liniers", "led the fight against the British in 1806"]
+          - ["Saavedra", "led the Primera Junta"]
+
+      - type: gap
+        prompt: "Argentines call San Martín the father of the nation:"
+        text: "Es el Padre de la ___."
+        options: ["Patria", "Bandera", "Junta"]
+        correct: 0
+        translation: "He's the Father of the Homeland."
+        explain: "**Padre de la Patria**. His day is 17 August, the anniversary of his death — another feriado."
+
+      - type: order
+        prompt: "Put these in order"
+        items:
+          - "Revolución de Mayo"
+          - "Belgrano raises the flag in Rosario"
+          - "Independence declared in Tucumán"
+          - "San Martín crosses the Andes"
+
+    vocabulary:
+      - es: "bandera"
+        en: "flag"
+        example: { es: "El 20 de junio es el Día de la Bandera.", en: "The 20th of June is Flag Day." }
+      - es: "celeste"
+        en: "light blue"
+        example: { es: "La bandera es celeste y blanca.", en: "The flag is light blue and white." }
+      - es: "escarapela"
+        en: "light blue and white rosette worn on patriotic days"
+      - es: "cordillera"
+        en: "mountain range (the Andes)"
+      - es: "ejército"
+        en: "army"
+      - es: "prócer"
+        en: "founding hero of the nation"
+        note: "San Martín and Belgrano are próceres."
+      - es: "Patria"
+        en: "homeland, nation"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "unitarios-federales-y-gauchos"
+    title: "Unitarios, federales and gauchos"
+    summary: "Decades of civil war, Rosas, and the horsemen of the pampa"
+    pages:
+      - type: info
+        title: "Independent... and now what?"
+        emoji: "🥊"
+        body: "Winning independence was the easy part. Then came decades of civil wars between two camps. The **unitarios** wanted one strong central government run from Buenos Aires. The **federales** wanted the provinces to rule themselves. Behind it all: who keeps the money from the port of Buenos Aires? The provinces had a pretty good guess."
+
+      - type: match
+        prompt: "Match the word to its meaning"
+        pairs:
+          - ["unitarios", "wanted a strong central government in Buenos Aires"]
+          - ["federales", "wanted the provinces to govern themselves"]
+          - ["caudillo", "a regional strongman with his own followers"]
+
+      - type: info
+        title: "Rosas"
+        emoji: "🔴"
+        body: "**Juan Manuel de Rosas**, a rich landowner and a federal, governed Buenos Aires from 1829 to 1832 and again from 1835 to **1852**, with near-total power. Red was the federal color, and wearing it was all but required. His police, the **Mazorca**, terrorized opponents. He also defied the British and French fleets. He fell at the battle of **Caseros**, in 1852."
+
+      - type: info
+        title: "Hero or tyrant?"
+        emoji: "⚖️"
+        body: "Argentines still argue about Rosas. For the liberals who came after him, like **Sarmiento**, he was a bloody tyrant. For the **revisionistas** (historians who rethought him in the 20th century), he defended national sovereignty against foreign powers. Both sides have a point, and both have their sources. Don't bring it up at an asado unless you have time."
+        fun_fact: "The 20 November holiday, Día de la Soberanía Nacional, remembers a battle fought under Rosas against the Anglo-French fleet in 1845."
+
+      - type: info
+        title: "The gaucho"
+        emoji: "🐎"
+        body: "Out on the pampa lived the **gauchos**: expert horsemen, often of mixed Spanish and native roots, who worked with cattle. Knife, **boleadoras** (throwing weights borrowed from native hunters), poncho, mate and guitar. Governments treated them as vagrants and forced many into the army. Only later did they become national symbols."
+
+      - type: choice
+        scenario: "At a bookstore, your friend points at a book and says: 'Everyone had to read this at school. It's about a gaucho forced into the army on the frontier.'"
+        prompt: "Which book is it?"
+        options: ["Martín Fierro", "Don Quijote", "Rayuela", "Facundo"]
+        correct: 0
+        explain: "**El gaucho Martín Fierro**, a poem by **José Hernández** (1872, with a second part in 1879). *Facundo*, by Sarmiento, is also a classic — but it's about a caudillo, not Fierro."
+
+      - type: true_false
+        statement: "The Día de la Tradición (10 November) is celebrated on José Hernández's birthday."
+        answer: true
+        explain: "Hernández was born on 10 November 1834. That day celebrates gaucho culture: horses, folk music, empanadas."
+
+      - type: gap
+        prompt: "The most quoted advice from Martín Fierro: brothers must stick together."
+        text: "Los hermanos sean ___."
+        options: ["unidos", "federales", "gauchos"]
+        correct: 0
+        translation: "Brothers, be united."
+        explain: "'Los hermanos sean unidos, porque esa es la ley primera.' Argentines quote it to this day."
+
+    vocabulary:
+      - es: "unitario"
+        en: "supporter of central government (19th century)"
+      - es: "federal"
+        en: "supporter of provincial self-rule (19th century)"
+      - es: "caudillo"
+        en: "regional strongman"
+      - es: "gaucho"
+        en: "horseman of the pampa"
+        example: { es: "Martín Fierro es un gaucho.", en: "Martín Fierro is a gaucho." }
+      - es: "pampa"
+        en: "the vast grassy plains"
+      - es: "boleadoras"
+        en: "throwing weights joined by cords, for hunting"
+      - es: "tradición"
+        en: "tradition"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "desierto-e-inmigrantes"
+    title: "The frontier and the boats"
+    summary: "The Campaña del Desierto, the immigration wave, conventillos, lunfardo and tango"
+    pages:
+      - type: info
+        title: "A country on paper"
+        emoji: "📘"
+        body: "After Rosas fell, a **Constitución** was written in **1853** (Buenos Aires joined a few years later). The new leaders had a plan: bring in European immigrants, railways and investment, and grab the land still held by the native peoples. The motto came from the thinker **Alberdi**: **gobernar es poblar**, to govern is to populate."
+
+      - type: info
+        title: "The Campaña del Desierto"
+        emoji: "⚠️"
+        body: "Between **1878** and **1885**, the army led by **Julio Argentino Roca** took the pampa and Patagonia from the **mapuche**, **ranquel**, **tehuelche** and other peoples. Official history called it the 'desert', but it was not empty. Thousands were killed; thousands more were taken prisoner, families were split up, and many were forced to work on farms or as servants. The land went to a few big owners."
+
+      - type: info
+        title: "Still debated"
+        emoji: "🗣️"
+        body: "For a long time schools taught it as a heroic conquest, and Roca was on the 100-peso bill. Today many historians and indigenous communities call it a **genocidio** (genocide); others reject that word and frame it as a war over territory. The debate is alive: Roca's statues get painted and argued over, and many prefer to say **Conquista del Desierto** in quotes, or not at all."
+
+      - type: true_false
+        statement: "The 'desert' conquered in the Campaña del Desierto was an empty land."
+        answer: false
+        explain: "It was home to mapuche, ranquel, tehuelche and other peoples. 'Desierto' was the word the state used to justify taking it."
+
+      - type: info
+        title: "The boats arrive"
+        emoji: "🚢"
+        body: "From the 1870s to 1930, millions of Europeans arrived, mostly **italianos** and **españoles**. In the 1914 census about **30%** of the country was foreign-born — in Buenos Aires, around half. Porteños still call any Spaniard a **gallego**, since so many came from Galicia. That's why the Italian influence is everywhere: pizza, **fainá**, **ñoquis** on the 29th, and talking with your hands."
+        fun_fact: "The old Hotel de Inmigrantes, where newcomers slept their first nights, is now a museum in Retiro."
+
+      - type: info
+        title: "Life in the conventillo"
+        emoji: "🏚️"
+        body: "Many newcomers crammed into **conventillos**: old houses split into single rooms, one family per room, one shared patio and bathroom for dozens. Crowded, loud, mixed: Italians, Spaniards, Jews, Arabs and locals, all together. In **1907** the tenants went on a famous rent strike. La Boca's colorful **Caminito** is a tourist version of that world."
+
+      - type: info
+        title: "Lunfardo and tango"
+        emoji: "💃"
+        body: "From that mix came **lunfardo**, the slang of Buenos Aires, full of Italian: **laburo** (job, from *lavoro*), **morfar** (to eat), **birra** (beer), **fiaca** (laziness). And in the outskirts of Buenos Aires and Montevideo, in the late 1800s, came **tango**, mixing habanera, **milonga** and African-rooted **candombe**. It started in humble places before it conquered Paris and the salons."
+
+      - type: choice
+        scenario: "Your friend groans on Monday morning: 'Uf, qué fiaca ir al laburo.'"
+        prompt: "What do they mean?"
+        options: ["They're too lazy to go to work", "They want to eat a big lunch", "They're going to a tango class", "They lost their job"]
+        correct: 0
+        explain: "**Fiaca** is laziness, **laburo** is work — both from Italian, both pure lunfardo."
+
+      - type: match
+        prompt: "Match the lunfardo word to its meaning"
+        pairs:
+          - ["laburo", "job, work"]
+          - ["morfar", "to eat"]
+          - ["birra", "beer"]
+          - ["fiaca", "laziness"]
+        explain: "Italian roots all over: *lavoro*, *birra*, *fiacca*."
+
+      - type: order
+        prompt: "Put these in order"
+        items:
+          - "Rosas falls at Caseros"
+          - "The Constitución is written"
+          - "The Campaña del Desierto begins"
+          - "The census shows about 30% of the country was born abroad"
+
+    vocabulary:
+      - es: "inmigrante"
+        en: "immigrant"
+        example: { es: "Mi bisabuelo era un inmigrante italiano.", en: "My great-grandfather was an Italian immigrant." }
+      - es: "conventillo"
+        en: "tenement house, one family per room"
+      - es: "gallego"
+        en: "a Galician; in Argentina, any Spaniard"
+        note: "Colloquial, usually affectionate."
+      - es: "lunfardo"
+        en: "the slang of Buenos Aires"
+      - es: "laburo"
+        en: "job, work (lunfardo)"
+        example: { es: "Me voy al laburo.", en: "I'm off to work." }
+      - es: "morfar"
+        en: "to eat (lunfardo)"
+      - es: "fiaca"
+        en: "laziness"
+        example: { es: "Qué fiaca, no quiero salir.", en: "I feel so lazy, I don't want to go out." }
+      - es: "birra"
+        en: "beer"
+      - es: "genocidio"
+        en: "genocide"

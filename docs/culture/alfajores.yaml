@@ -1,0 +1,345 @@
+section:
+  slug: "alfajores"
+  title: "Alfajores y dulces"
+  emoji: "🍪"
+  summary: "Dulce de leche, kioscos and the snack that runs on sugar"
+
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "que-es-un-alfajor"
+    title: "What is an alfajor?"
+    summary: "Two cookies, dulce de leche in the middle, and a thousand years of history"
+    pages:
+      - type: info
+        title: "The national snack"
+        emoji: "🍪"
+        body: "An **alfajor** is two soft cookies (**tapas**, literally 'lids') glued together with **dulce de leche**, usually dipped in chocolate. That's it. That's the whole religion. We eat them at the office, on the bus, after football, at 2am. If an Argentine offers you half their alfajor, that's basically friendship."
+        fun_fact: "Industry estimates say Argentines eat around six million alfajores a day. Nobody has counted properly — we were busy eating."
+
+      - type: info
+        title: "Not born here, though"
+        emoji: "🕌"
+        body: "Plot twist: the alfajor isn't Argentine by birth. The word comes from Andalusian Arabic — most sources trace it to **al-hasú**, 'the filling'. In Muslim Spain (al-Ándalus) it was a honey, almond and spice sweet. It's still made in Andalucía today. The Spanish brought the name to the Americas, and here it turned into cookies plus dulce de leche."
+        fun_fact: "The exact Arabic root is debated — some say al-fasur, some al-hasú. Everyone agrees it's Arabic."
+
+      - type: true_false
+        statement: "The alfajor was invented in Buenos Aires."
+        answer: false
+        explain: "The name and the idea come from al-Ándalus, Muslim Spain. Argentina just made it its own — and, humbly, perfected it."
+
+      - type: info
+        title: "The family tree"
+        emoji: "🌳"
+        body: "Each region has its own. **Alfajor de maicena**: crumbly cornstarch cookies, dulce de leche, edges rolled in **coco rallado** (grated coconut) — the homemade one your abuela makes. **Marplatense**: chocolate-coated, from Mar del Plata, the classic kiosco one. **Santafesino**: crunchy layers with a white sugar glaze. **Cordobés**: soft, glazed, often filled with fruit jam."
+
+      - type: match
+        prompt: "Match the alfajor to what makes it special"
+        pairs:
+          - ["de maicena", "edges rolled in grated coconut"]
+          - ["santafesino", "crunchy layers, white sugar glaze"]
+          - ["cordobés", "soft and filled with fruit jam"]
+          - ["marplatense", "dipped in chocolate, the kiosco classic"]
+
+      - type: info
+        title: "More is more"
+        emoji: "🏗️"
+        body: "Then there's the **triple**: three tapas, two layers of dulce de leche. More alfajor per alfajor. And the **alfajor de fruta**, filled with **membrillo** (quince paste) or other jams instead of dulce de leche — the cordobés tradition. The **simple** is the regular two-tapa one. When you ask for one at a kiosco, you'll hear: '¿Simple o triple?'"
+
+      - type: choice
+        scenario: "You had a long day, skipped lunch, and you're at a kiosco with exactly enough coins for one alfajor."
+        prompt: "What do you ask for?"
+        options: ["Un alfajor simple", "Un alfajor triple", "Un alfajor sin tapas"]
+        correct: 1
+        explain: "Triple. Three tapas, double dulce de leche. It's lunch now. Nobody will judge you."
+
+      - type: gap
+        prompt: "Your abuela's homemade alfajores have coconut on the sides. What are they?"
+        text: "Alfajores de ___"
+        options: ["maicena", "fruta", "Córdoba"]
+        correct: 0
+        translation: "Cornstarch alfajores"
+        explain: "**Maicena** is cornstarch. The cookies crumble in your hand and the coconut ends up everywhere. Worth it."
+
+      - type: order
+        prompt: "Build an alfajor de maicena"
+        items:
+          - "Bake two cornstarch tapas"
+          - "Spread dulce de leche on one"
+          - "Put the other tapa on top"
+          - "Roll the edges in grated coconut"
+        explain: "Four steps. Abuela does it in two seconds and without a recipe."
+
+    vocabulary:
+      - es: "alfajor"
+        en: "two cookies sandwiched with filling"
+        example: { es: "¿Me das un alfajor?", en: "Can I have an alfajor?" }
+      - es: "tapa"
+        en: "each cookie of an alfajor (lit. 'lid')"
+      - es: "maicena"
+        en: "cornstarch"
+        example: { es: "Mi abuela hace alfajores de maicena.", en: "My grandma makes cornstarch alfajores." }
+      - es: "coco rallado"
+        en: "grated coconut"
+      - es: "triple"
+        en: "alfajor with three cookies"
+        example: { es: "Dame un triple, por favor.", en: "Give me a triple, please." }
+      - es: "membrillo"
+        en: "quince paste"
+      - es: "relleno"
+        en: "filling"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "marcas-y-kioscos"
+    title: "Brands, kioscos and the eternal debate"
+    summary: "Havanna or Jorgito? Pick a side at the kiosco on the corner"
+    pages:
+      - type: info
+        title: "The kiosco"
+        emoji: "🏪"
+        body: "Every block has one. A **kiosco** is a tiny shop — sometimes just a window — selling candy, drinks, cigarettes, phone credit and, above all, alfajores. Many stay open late; some never close (look for the **24 hs** sign). The bigger ones are **maxikioscos**. The person behind the counter is the **kiosquero**, and they know your order."
+        fun_fact: "The **ventanita** kiosco is literally a window in someone's house. Knock, ask, pay, done."
+
+      - type: choice
+        scenario: "It's 1am, you're walking home from a party and you desperately want something sweet."
+        prompt: "Where do you go?"
+        options: ["Wait until the supermarket opens", "The kiosco on the corner", "A bakery"]
+        correct: 1
+        explain: "The kiosco. Late hours are its whole personality. Look for the light on and the '24 hs' sign."
+
+      - type: info
+        title: "The heavyweights"
+        emoji: "🥊"
+        body: "**Havanna**: born in Mar del Plata in 1947, the fancy one you bring as a gift. **Jorgito** (1960): the working-class hero. **Guaymallén** (1945): cheap, humble, legendary — 'el alfajor de la familia'. **Fantoche**: famous for its triple. Then there's **Capitán del Espacio**, a cult classic; **Cachafaz**, premium and named after a tango dancer; and the big-company ones, **Terrabusi** and **Milka**."
+
+      - type: true_false
+        statement: "Havanna is from Mar del Plata, the beach city."
+        answer: true
+        explain: "Founded in 1947 in Mar del Plata. Coming back from the coast without a box of Havanna is borderline illegal."
+
+      - type: choice
+        scenario: "You're visiting your Argentine partner's family for the first time and you pass through Mar del Plata on the way."
+        prompt: "What do you bring?"
+        options: ["A box of Havanna", "One Guaymallén, split six ways", "Nothing, they have food"]
+        correct: 0
+        explain: "A box of Havanna is the classic regalo. Guaymallén is beloved, but it's a coins-in-your-pocket snack, not a meet-the-parents gift."
+
+      - type: info
+        title: "The debate that never ends"
+        emoji: "🔥"
+        body: "Ask a table of Argentines 'which is the best alfajor?' and clear your afternoon. Some swear by Havanna. Others say Havanna is overpriced and the real deal is a Jorgito or a **Guaymallén blanco** (the white sugar-glazed one). There is no right answer. Well — there is, it's yours, and everyone else is wrong."
+        fun_fact: "For about two decades, Jorgito and Fantoche kept an unwritten pact: Jorgito ruled Buenos Aires, Fantoche the rest of the country. So the story goes, at least."
+
+      - type: match
+        prompt: "Match the brand to its reputation"
+        pairs:
+          - ["Havanna", "the fancy gift from Mar del Plata"]
+          - ["Guaymallén", "cheap, humble, 'de la familia'"]
+          - ["Fantoche", "famous for the triple"]
+          - ["Cachafaz", "premium, named after a tango dancer"]
+
+      - type: info
+        title: "The World Cup of alfajores"
+        emoji: "🏆"
+        body: "Yes, it exists. The **Campeonato Mundial del Alfajor** started in Buenos Aires in 2022. Hundreds of alfajores, a blind tasting, a serious jury of pastry chefs. Most winners are small artisan makers, not the big brands. In 2026 the top prize went to El Rodeo, from Catamarca: fig filling, walnuts and a glaze with coconut."
+        fun_fact: "Argentina hosting a 'world' championship for its own snack and winning it every year is peak Argentina."
+
+      - type: gap
+        prompt: "At the kiosco, you want two alfajores. Ask for them."
+        text: "¿Me ___ dos alfajores?"
+        options: ["das", "dais", "da"]
+        correct: 0
+        translation: "Can you give me two alfajores?"
+        explain: "**¿Me das…?** with **vos** is the natural, friendly way. 'Dais' is from Spain — not here, ever."
+
+    vocabulary:
+      - es: "kiosco"
+        en: "corner shop for candy, drinks and snacks"
+        example: { es: "Voy al kiosco, ¿querés algo?", en: "I'm going to the kiosco, want anything?" }
+      - es: "kiosquero"
+        en: "person who runs the kiosco"
+      - es: "maxikiosco"
+        en: "big kiosco"
+      - es: "24 hs"
+        en: "open 24 hours"
+        note: "Read 'veinticuatro horas'."
+      - es: "alfajor blanco"
+        en: "alfajor with a white sugar glaze"
+      - es: "regalo"
+        en: "gift"
+        example: { es: "Te traje Havanna de regalo.", en: "I brought you Havanna as a gift." }
+      - es: "¿Me das…?"
+        en: "Can I have…? / Can you give me…?"
+        example: { es: "¿Me das un Jorgito?", en: "Can I have a Jorgito?" }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "dulce-de-leche"
+    title: "Dulce de leche and friends"
+    summary: "The spread on everything, and the sweets it hangs out with"
+    pages:
+      - type: info
+        title: "The brown gold"
+        emoji: "🍯"
+        body: "**Dulce de leche** is milk and sugar cooked slowly for hours until it turns thick, brown and caramel-y. We put it on toast, in cakes, in alfajores, on a spoon straight from the jar at midnight. It's not 'caramel'. Don't call it caramel. An Argentine will correct you, gently, for twenty minutes."
+
+      - type: info
+        title: "The legend"
+        emoji: "📜"
+        body: "The story goes like this: 1829, the ranch La Caledonia in Cañuelas. Rosas and his enemy Lavalle meet to sign a truce. A maid is heating milk with sugar for Rosas's mate, gets distracted by the drama, forgets the pot — and finds it turned into dulce de leche. Cute story. Almost certainly a legend: Uruguay, Chile, France and others claim it too."
+
+      - type: true_false
+        statement: "Historians agree dulce de leche was invented in Argentina in 1829."
+        answer: false
+        explain: "The Cañuelas story is a legend. Similar milk sweets existed elsewhere, and Uruguay in particular will fight you on this. Just enjoy it."
+
+      - type: info
+        title: "Clásico vs repostero"
+        emoji: "🥄"
+        body: "At the supermarket you'll see two kinds. **Clásico** (or **familiar**) is soft and spreadable — for toast and the spoon. **Repostero** is thicker and firmer, made for baking: it holds its shape inside alfajores and cakes without dripping everywhere. **Repostería** means pastry-making, hence the name."
+
+      - type: choice
+        scenario: "You're making alfajores and the filling keeps oozing out the sides."
+        prompt: "What did you buy wrong?"
+        options: ["You used clásico — you needed repostero", "You used repostero — you needed clásico", "Too much coconut"]
+        correct: 0
+        explain: "Repostero is firmer and stays put. Clásico is for the tostada and the spoon."
+
+      - type: info
+        title: "The supporting cast"
+        emoji: "🎂"
+        body: "**Chocotorta**: Chocolinas cookies dipped in milk, layered with dulce de leche mixed with cream cheese. No oven, every birthday. **Pastafrola**: a tart with a lattice top, filled with membrillo or **batata** (sweet potato) jam. **Mantecol**: a peanut nougat bar people get weirdly emotional about. **Bon o Bon**: a little chocolate bonbon with peanut cream, a kiosco staple."
+
+      - type: match
+        prompt: "Match the sweet to what it is"
+        pairs:
+          - ["chocotorta", "no-bake cake of chocolate cookies"]
+          - ["pastafrola", "lattice tart with quince or sweet potato jam"]
+          - ["Mantecol", "peanut nougat bar"]
+          - ["Bon o Bon", "chocolate bonbon with peanut cream"]
+
+      - type: order
+        prompt: "Make a chocotorta"
+        items:
+          - "Mix dulce de leche with cream cheese"
+          - "Dip Chocolinas cookies in milk"
+          - "Layer cookies and cream, again and again"
+          - "Put it in the fridge for a few hours"
+        explain: "No oven needed. That's why every Argentine kid's birthday has one."
+
+      - type: gap
+        prompt: "Your friend asks what you want on your toast."
+        text: "Con dulce de ___, obvio."
+        options: ["leche", "azúcar", "caramelo"]
+        correct: 0
+        translation: "With dulce de leche, obviously."
+        explain: "**Obvio** is how we say 'obviously' — and for the toast, it's obvio."
+
+    vocabulary:
+      - es: "dulce de leche"
+        en: "milk caramel spread"
+        example: { es: "Le pongo dulce de leche a todo.", en: "I put dulce de leche on everything." }
+      - es: "repostero"
+        en: "firm, for baking (dulce de leche)"
+      - es: "clásico"
+        en: "soft and spreadable (dulce de leche)"
+      - es: "tostada"
+        en: "slice of toast"
+      - es: "chocotorta"
+        en: "no-bake chocolate cookie and dulce de leche cake"
+      - es: "pastafrola"
+        en: "lattice jam tart"
+      - es: "batata"
+        en: "sweet potato"
+      - es: "obvio"
+        en: "obviously"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "facturas"
+    title: "Facturas: anarchy at the bakery"
+    summary: "Medialunas, bolas de fraile and the rebel bakers who named them"
+    pages:
+      - type: info
+        title: "What are facturas?"
+        emoji: "🥐"
+        body: "**Facturas** are the pastries you buy at the **panadería** (bakery), usually by the **docena** (dozen) in a paper bag. They're the official partner of mate. Afternoon at a friend's place? Someone shows up with a dozen facturas. It's the law. (Yes, 'factura' also means invoice. Context helps.)"
+
+      - type: choice
+        scenario: "Your friend texts: 'Venite a tomar mate a las 5.'"
+        prompt: "What do you bring?"
+        options: ["A bottle of wine", "A dozen facturas", "Nothing, just vibes"]
+        correct: 1
+        explain: "Facturas. Mate at 5pm plus a dozen facturas is the most Argentine afternoon there is. Wine is for the asado."
+
+      - type: info
+        title: "Manteca or grasa?"
+        emoji: "🥐"
+        body: "The queen is the **medialuna** ('half-moon', a small croissant). Two kinds: **de manteca** (butter) — sweeter, glazed, curved; and **de grasa** (beef fat) — drier, a little salty, usually straight. You order them by name: 'media docena de manteca'. Debating which is better is another national sport."
+
+      - type: true_false
+        statement: "A medialuna de grasa is the sweet, glazed one made with butter."
+        answer: false
+        explain: "That's the **de manteca**. **Grasa** means fat — beef fat — and those are saltier and less sweet."
+
+      - type: info
+        title: "Rebel bakers"
+        emoji: "✊"
+        body: "In 1887 Buenos Aires bakers, many of them Italian and Spanish anarchists, founded their first union. The story goes that they named pastries to mock the powers of the day: the **vigilante** (police) is long like a cop's baton; **bolas de fraile** ('friar's balls') and **suspiros de monja** ('nun's sighs') poke the Church; **cañoncitos** ('little cannons') and **bombas** the army."
+        fun_fact: "Historians debate how much of this is documented, but it's the story every baker will tell you."
+
+      - type: match
+        prompt: "Match the factura to who it teases"
+        pairs:
+          - ["vigilante", "the police"]
+          - ["bola de fraile", "the Church (friars)"]
+          - ["cañoncito", "the army"]
+          - ["suspiro de monja", "the Church (nuns)"]
+
+      - type: info
+        title: "Order like a local"
+        emoji: "🛍️"
+        body: "At the panadería you ask for a mix: 'Una docena surtida' — a dozen assorted. Or you pick: 'Seis medialunas y seis facturas'. **Bolas de fraile** are fried dough balls filled with dulce de leche or pastry cream. **Cañoncitos** are puff pastry tubes filled with dulce de leche. Fight for the last one."
+
+      - type: gap
+        prompt: "You want twelve mixed facturas. Ask the baker."
+        text: "Una docena ___, por favor."
+        options: ["surtida", "de grasa", "de fraile"]
+        correct: 0
+        translation: "An assorted dozen, please."
+        explain: "**Surtida** = assorted. The baker picks a bit of everything, and you look like you've lived here for years."
+
+      - type: order
+        prompt: "The perfect afternoon, in order"
+        items:
+          - "Stop at the panadería"
+          - "Buy a docena surtida"
+          - "Arrive at your friend's place"
+          - "Someone starts cebando mate"
+          - "Everyone fights over the last cañoncito"
+
+      - type: choice
+        scenario: "At the table, only one factura is left. Your friend says 'dale, comela vos'."
+        prompt: "What's going on?"
+        options: ["They're offering you the last one", "They're telling you to leave", "They want you to pay"]
+        correct: 0
+        explain: "**Dale, comela vos** = 'Go on, you eat it.' The last factura is a sacred and delicate thing. Accept gracefully."
+
+    vocabulary:
+      - es: "facturas"
+        en: "sweet pastries from the bakery"
+        example: { es: "Llevo facturas para el mate.", en: "I'll bring pastries for the mate." }
+      - es: "panadería"
+        en: "bakery"
+      - es: "docena"
+        en: "dozen"
+        example: { es: "Una docena surtida, por favor.", en: "An assorted dozen, please." }
+      - es: "medialuna"
+        en: "small croissant"
+      - es: "de manteca"
+        en: "made with butter (sweet)"
+      - es: "de grasa"
+        en: "made with beef fat (salty)"
+      - es: "vigilante"
+        en: "long pastry (lit. 'cop')"
+      - es: "bola de fraile"
+        en: "filled fried dough ball (lit. 'friar's ball')"
+      - es: "surtido"
+        en: "assorted"

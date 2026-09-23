@@ -134,6 +134,10 @@ function Problems({ items, tone = 'danger' }: { items: string[]; tone?: 'danger'
   );
 }
 
+/** The longer forms a bound word lives inside: `llamo` → «me llamo». */
+const chunksFor = (data: WordsData, form: AdminForm) =>
+  data.forms.filter((f) => f.lemma_id === form.lemma_id && f.id !== form.id && f.form.endsWith(` ${form.form}`));
+
 function StateBadge({ s }: { s: WordSentence }) {
   const state = sentenceState(s);
   const label = state === 'live' ? 'live' : state === 'paused' ? 'paused' : s.status.replace('_', ' ');
@@ -446,6 +450,14 @@ export function WordDetail({ data, formId, onChanged }: { data: WordsData; formI
             Unit {unit?.course_order ?? '?'} · {lesson ? `Lesson ${lesson.ordinal}` : 'no lesson'} · {form.pos} · {featureText(form.features)} ·{' '}
             {form.register} · from {form.source === 'dashboard' ? 'the admin' : 'the outline'}
           </Muted>
+          {/* Why this word has no exercises and no answers to review, said where
+              a reviewer will be looking when they wonder. */}
+          {form.bound ? (
+            <Muted>
+              Never drilled: only ever said inside{' '}
+              {chunksFor(data, form).map((c) => `«${c.form}»`).join(' and ') || 'a longer word'}.
+            </Muted>
+          ) : null}
         </View>
         <View style={adminStyles.wrap}>
           <StatusPill status={form.status} />
@@ -832,8 +844,15 @@ function SentenceEditor({
 // Exercise preview: what a learner gets for this word, with the data as saved
 // ---------------------------------------------------------------------------
 
-const WORD_MODES: ExerciseMode[] = ['typing', 'multiple_choice', 'word_build'];
-const SENTENCE_MODES: ExerciseMode[] = ['sentence_meaning', 'sentence_gap', 'sentence_build'];
+const WORD_MODES: ExerciseMode[] = ['typing', 'multiple_choice', 'word_build', 'listen_build'];
+const SENTENCE_MODES: ExerciseMode[] = [
+  'sentence_meaning',
+  'sentence_meaning_tiles',
+  'sentence_gap',
+  'sentence_gap_tiles',
+  'sentence_gap_typed',
+  'sentence_build',
+];
 
 export function ExercisePreview({ data, form }: { data: WordsData; form: AdminForm }) {
   const deck = useMemo(() => deckOf(data), [data]);

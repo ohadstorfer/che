@@ -1,0 +1,4634 @@
+{
+ "sections": [
+  {
+   "slug": "mate",
+   "title": "Mate",
+   "emoji": "🧉",
+   "summary": "The drink that runs the country",
+   "classes": [
+    {
+     "slug": "que-es-el-mate",
+     "title": "What is mate?",
+     "summary": "A bitter herb, a gourd and a whole lot of history",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Not a drink. A ritual.",
+       "emoji": "🧉",
+       "body": "**Mate** is hot water poured over **yerba mate**, the dried, ground leaves of a holly tree that grows in the northeast. You sip it through a metal straw from a small cup that's *also* called a **mate**. Then you refill it and pass it to the next person. That's the whole trick, and Argentines do it all day long.",
+       "fun_fact": "Since 2013, a national law officially names mate Argentina's *infusión nacional*."
+      },
+      {
+       "type": "true_false",
+       "statement": "In Argentina, the word \"mate\" can mean both the drink and the cup you drink it from.",
+       "answer": true,
+       "explain": "Exactly. \"Pasame el mate\" can mean the cup, the drink, or both. Context does the rest."
+      },
+      {
+       "type": "info",
+       "title": "The Guaraní got there first",
+       "emoji": "🌿",
+       "body": "Long before the Spanish showed up, the **Guaraní** people of what is now Paraguay, northeast Argentina and southern Brazil were drinking the leaf. In Guaraní the plant is **ka'a** and the drink is **ka'ay**, roughly \"yerba water\". So when you drink mate, you're joining a tradition that is centuries older than Argentina itself."
+      },
+      {
+       "type": "info",
+       "title": "Jesuits, plantations, and a name",
+       "emoji": "⛪",
+       "body": "In the 1600s, **Jesuit** missions in Guaraní lands figured out how to *grow* yerba on plantations instead of harvesting it wild. For a while people even called it \"Jesuit tea\". The word **mate** itself is usually traced to Quechua **mati**, meaning gourd, the cup that holds it. Today yerba is grown mainly in **Misiones** and **Corrientes**.",
+       "fun_fact": "November 30 is the Día Nacional del Mate, the birthday of Andrés \"Andresito\" Guacurarí, a Guaraní leader who governed Misiones."
+      },
+      {
+       "type": "choice",
+       "prompt": "Which people first drank yerba mate?",
+       "options": [
+        "The Spanish colonists",
+        "The Guaraní",
+        "The Incas",
+        "Italian immigrants"
+       ],
+       "correct": 1,
+       "explain": "The Guaraní. The Spanish and the Jesuits came later and turned it into a big business."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the word to where it comes from",
+       "pairs": [
+        [
+         "ka'a",
+         "Guaraní: the yerba plant"
+        ],
+        [
+         "mati",
+         "Quechua: gourd"
+        ],
+        [
+         "Misiones",
+         "Province where most yerba grows"
+        ],
+        [
+         "30 de noviembre",
+         "Día Nacional del Mate"
+        ]
+       ]
+      },
+      {
+       "type": "choice",
+       "scenario": "You're new in Buenos Aires. A coworker says: \"¿Tomás mate?\"",
+       "prompt": "What are they asking?",
+       "options": [
+        "If you eat meat",
+        "If you drink mate, and probably offering you one",
+        "If you're tired"
+       ],
+       "correct": 1,
+       "explain": "Mate uses **tomar** (to drink), not *beber*. And the question is usually an invitation. Say **dale** and you're in."
+      },
+      {
+       "type": "true_false",
+       "statement": "Yerba mate is a kind of green tea from China.",
+       "answer": false,
+       "explain": "Totally different plant. Yerba mate (*Ilex paraguariensis*) is a South American holly. It does have caffeine, which is why half the country runs on it."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "mate",
+       "en": "mate (the drink, and the cup)",
+       "example": {
+        "es": "¿Tomás mate?",
+        "en": "Do you drink mate?"
+       }
+      },
+      {
+       "es": "yerba",
+       "en": "the dried yerba mate leaves"
+      },
+      {
+       "es": "tomar mate",
+       "en": "to drink mate",
+       "note": "Argentines say tomar, not beber."
+      },
+      {
+       "es": "infusión",
+       "en": "infusion, herbal drink"
+      },
+      {
+       "es": "calabaza",
+       "en": "gourd"
+      },
+      {
+       "es": "dale",
+       "en": "sure, OK, go ahead",
+       "example": {
+        "es": "—¿Querés un mate? —Dale.",
+        "en": "—Want a mate? —Sure."
+       }
+      }
+     ]
+    },
+    {
+     "slug": "los-chiches",
+     "title": "The gear",
+     "summary": "Mate, bombilla, termo, yerba: your starter kit",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The mate (the cup)",
+       "emoji": "🥥",
+       "body": "The classic one is a dried **calabaza** (gourd). There are also wooden ones, glass, ceramic, steel, and the chunky leather-wrapped **mate camionero**, the \"trucker's mate\". A new gourd has to be **curado** (cured) first: you fill it with wet yerba and leave it a day or so, so it doesn't taste funky or crack."
+      },
+      {
+       "type": "info",
+       "title": "The bombilla",
+       "emoji": "🥄",
+       "body": "The **bombilla** is a metal straw with a filter at the bottom, so you drink the water and not the leaves. Usually steel or alpaca (a nickel-silver alloy), sometimes fancy silver. It goes in once and stays put. It is not a spoon, and it is definitely not a stirring stick."
+      },
+      {
+       "type": "true_false",
+       "statement": "If the mate is getting clogged, it's fine to stir the yerba with the bombilla.",
+       "answer": false,
+       "explain": "Moving the bombilla wrecks the setup and clogs it more. If it's blocked, tell the cebador. It's their mate, their problem."
+      },
+      {
+       "type": "info",
+       "title": "The termo and the yerba",
+       "emoji": "🫖",
+       "body": "The **termo** (thermos) keeps water hot for hours, which is why you see people carrying one under their arm in the park. At home it's the **pava** (kettle). **Yerba** comes in 500 g or 1 kg packs, **con palo** (with stems, milder) or **sin palo** (just leaves, stronger). Everyone swears by their brand, and people can get *very* loyal about it."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the gear to what it does",
+       "pairs": [
+        [
+         "bombilla",
+         "metal straw with a filter"
+        ],
+        [
+         "termo",
+         "keeps the water hot"
+        ],
+        [
+         "pava",
+         "kettle"
+        ],
+        [
+         "calabaza",
+         "gourd used as a cup"
+        ],
+        [
+         "yerba",
+         "the dried leaves"
+        ]
+       ]
+      },
+      {
+       "type": "choice",
+       "scenario": "At the supermarket you see \"yerba con palo\" and \"yerba sin palo\".",
+       "prompt": "What's the difference?",
+       "options": [
+        "Organic vs. regular",
+        "With stems (milder) vs. only leaves (stronger)",
+        "Sweet vs. bitter"
+       ],
+       "correct": 1,
+       "explain": "**Palo** means stick or stem. Stems make it milder and slower to wash out. **Sin palo** hits harder."
+      },
+      {
+       "type": "gap",
+       "prompt": "Your friend is about to pour water from the stove. What do you ask for?",
+       "text": "Pasame la ___, que el agua ya está.",
+       "options": [
+        "pava",
+        "bombilla",
+        "yerba"
+       ],
+       "correct": 0,
+       "translation": "Pass me the kettle, the water's ready.",
+       "explain": "The **pava** is the kettle. No, you don't use it to drink."
+      },
+      {
+       "type": "true_false",
+       "statement": "You should wash a brand-new gourd with soap and use it right away.",
+       "answer": false,
+       "explain": "New gourds get **curados** (cured) with wet yerba first. Soap and gourds don't mix."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "bombilla",
+       "en": "metal straw with a filter",
+       "example": {
+        "es": "No muevas la bombilla.",
+        "en": "Don't move the straw."
+       },
+       "note": "Never stir with it."
+      },
+      {
+       "es": "termo",
+       "en": "thermos"
+      },
+      {
+       "es": "pava",
+       "en": "kettle"
+      },
+      {
+       "es": "con palo",
+       "en": "with stems (yerba)"
+      },
+      {
+       "es": "sin palo",
+       "en": "without stems (yerba)"
+      },
+      {
+       "es": "curar el mate",
+       "en": "to cure a new gourd"
+      },
+      {
+       "es": "mate camionero",
+       "en": "big leather-wrapped mate"
+      }
+     ]
+    },
+    {
+     "slug": "cebar",
+     "title": "How to cebar",
+     "summary": "Making mate, step by step, without embarrassing yourself",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Cebar: the verb that matters",
+       "emoji": "🫗",
+       "body": "**Cebar** means to prepare and serve mate: pour the water, hand it over, get it back, repeat. The person doing it is the **cebador** (or **cebadora**). It's a small job with big status. A good cebador is appreciated; a bad one hears about it, lovingly, all afternoon."
+      },
+      {
+       "type": "info",
+       "title": "The montañita",
+       "emoji": "⛰️",
+       "body": "Fill the mate about ¾ with yerba. Cover the mouth with your hand, flip it, shake, and tilt it so the yerba slides to one side. That slope is the **montañita** (little mountain). You pour into the low side and keep the top dry, so the mate keeps its flavor longer."
+      },
+      {
+       "type": "order",
+       "prompt": "Prepare a mate, step by step",
+       "items": [
+        "Fill the mate about ¾ with yerba",
+        "Cover it, flip it, shake it",
+        "Tilt it to make the montañita",
+        "Wet the low side with a bit of warm water",
+        "Put in the bombilla on the wet side",
+        "Pour hot water, not boiling, next to the bombilla"
+       ],
+       "explain": "The warm water first lets the yerba swell before the hot water hits it. The bombilla goes in once and stays there."
+      },
+      {
+       "type": "info",
+       "title": "Hot, but never boiling",
+       "emoji": "🌡️",
+       "body": "The golden rule: the water should be hot, around **70 to 80 °C**, and never boiling. Boiling water **quema la yerba** (burns the yerba) and makes it bitter and harsh. Old-school trick: turn off the pava when it starts to hum, right before the bubbles come.",
+       "fun_fact": "Many electric kettles in Argentina have a \"mate\" setting for exactly this."
+      },
+      {
+       "type": "choice",
+       "scenario": "The pava is bubbling hard, full boil. Your friend is waiting with the mate ready.",
+       "prompt": "What do you do?",
+       "options": [
+        "Pour it, hotter is better",
+        "Let it cool down a bit first",
+        "Add ice to the mate"
+       ],
+       "correct": 1,
+       "explain": "Boiling water burns the yerba. You'll hear \"¡lo quemaste!\" and you'll deserve it."
+      },
+      {
+       "type": "info",
+       "title": "Who drinks the first one?",
+       "emoji": "🥇",
+       "body": "The first mate is often bitter, a bit foamy, and full of dust, so the **cebador** usually drinks it, or spits it out. It's a small sacrifice, not a privilege. After a lot of rounds the flavor fades and the mate is **lavado** (washed out). Then the cebador changes the yerba, or adds a little on the side."
+      },
+      {
+       "type": "true_false",
+       "statement": "The cebador gives the first mate to the most important guest, as an honor.",
+       "answer": false,
+       "explain": "Usually the opposite: the first one is the harsh one, so the cebador takes the hit. There is even a saying: **el primero es para el zonzo** (the first one is for the fool)."
+      },
+      {
+       "type": "gap",
+       "prompt": "The mate has lost all its flavor. What do you say?",
+       "text": "Che, este mate está ___.",
+       "options": [
+        "lavado",
+        "quemado",
+        "curado"
+       ],
+       "correct": 0,
+       "translation": "Hey, this mate is washed out.",
+       "explain": "**Lavado** means it's lost its flavor. Time for fresh yerba."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "cebar",
+       "en": "to prepare and serve mate",
+       "example": {
+        "es": "¿Quién ceba?",
+        "en": "Who's serving?"
+       }
+      },
+      {
+       "es": "cebador",
+       "en": "the person serving mate"
+      },
+      {
+       "es": "montañita",
+       "en": "the slope of yerba in the mate"
+      },
+      {
+       "es": "lavado",
+       "en": "washed out, flavorless (mate)"
+      },
+      {
+       "es": "quemar la yerba",
+       "en": "to burn the yerba (with boiling water)"
+      },
+      {
+       "es": "agua caliente",
+       "en": "hot water"
+      },
+      {
+       "es": "hervir",
+       "en": "to boil",
+       "example": {
+        "es": "No dejes hervir el agua.",
+        "en": "Don't let the water boil."
+       }
+      }
+     ]
+    },
+    {
+     "slug": "la-ronda",
+     "title": "The rules of the ronda",
+     "summary": "Mate etiquette, so nobody gives you the look",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The ronda",
+       "emoji": "🔄",
+       "body": "When people share mate, there's one mate, one bombilla, and one **ronda** (round). The **cebador** fills it and hands it to one person. That person drinks *all* of it until it gurgles, and hands it back to the cebador. Not to their neighbor. Back. Then the cebador fills it for the next one, always in the same order."
+      },
+      {
+       "type": "choice",
+       "scenario": "You just finished your mate. The person next to you is looking at it hopefully.",
+       "prompt": "Who do you give it to?",
+       "options": [
+        "The person next to you",
+        "Back to the cebador",
+        "Whoever looks thirstiest"
+       ],
+       "correct": 1,
+       "explain": "Always back to the **cebador**. They refill it and pass it on. The mate never skips the cebador."
+      },
+      {
+       "type": "choice",
+       "scenario": "Someone hands you a mate and the montañita looks kinda off, the bombilla a bit crooked.",
+       "prompt": "Should you fix it?",
+       "options": [
+        "Yes, help out",
+        "No, only the cebador touches it"
+       ],
+       "correct": 1,
+       "explain": "Hands off. Fixing someone's mate is like rearranging their kitchen while they cook. Just drink it."
+      },
+      {
+       "type": "info",
+       "title": "Gracias means \"I'm out\"",
+       "emoji": "🙅",
+       "body": "This one catches every foreigner. In a ronda, saying **gracias** when you hand the mate back doesn't mean \"thanks\", it means \"thanks, **I'm done**\". Say it after your first mate and you won't get another. Want to keep going? Just hand it back, maybe with a smile or a \"¡qué rico!\"."
+      },
+      {
+       "type": "true_false",
+       "statement": "If you want more mate, you should say \"gracias\" every time it's handed to you, to be polite.",
+       "answer": false,
+       "explain": "Classic trap. **Gracias** = I'm done. Say it only when you want out of the ronda."
+      },
+      {
+       "type": "info",
+       "title": "It's not a microphone",
+       "emoji": "🎤",
+       "body": "Don't hold the mate while you tell a long story. The whole ronda is waiting, and the water is getting cold. Someone will say **\"¡No es un micrófono!\"** and everyone will laugh at you, kindly. Drink it all, hand it back. And don't complain that it's too hot or too bitter: you're a guest in someone else's mate."
+      },
+      {
+       "type": "gap",
+       "prompt": "Your friend is talking and holding the mate forever. What do you say?",
+       "text": "Dale, que no es un ___.",
+       "options": [
+        "micrófono",
+        "termo",
+        "regalo"
+       ],
+       "correct": 0,
+       "translation": "Come on, it's not a microphone.",
+       "explain": "The classic line for someone who hogs the mate."
+      },
+      {
+       "type": "choice",
+       "scenario": "You're at a friend's place. You've had four mates and you've had enough.",
+       "prompt": "What's the smoothest way out?",
+       "options": [
+        "Just stop drinking and hold it",
+        "Hand it back and say \"gracias\"",
+        "Pass it to the next person"
+       ],
+       "correct": 1,
+       "explain": "**Gracias** as you hand it back, and the cebador skips you from then on. Easy."
+      },
+      {
+       "type": "order",
+       "prompt": "One turn in the ronda, in order",
+       "items": [
+        "The cebador fills the mate",
+        "They hand it to you, bombilla facing you",
+        "You drink it all, until it gurgles",
+        "You hand it back to the cebador",
+        "The cebador fills it for the next person"
+       ]
+      },
+      {
+       "type": "true_false",
+       "statement": "Wiping the bombilla before you drink from it is normal and polite.",
+       "answer": false,
+       "explain": "Sharing the bombilla is the whole point, and wiping it can come off as a bit of an insult. If you're sick or don't want to share, just say **no, gracias** from the start. That's totally fine."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "ronda",
+       "en": "round (of mate)"
+      },
+      {
+       "es": "gracias",
+       "en": "thanks (in a ronda: I'm done)",
+       "note": "Only say it when you want out."
+      },
+      {
+       "es": "pasar el mate",
+       "en": "to pass the mate"
+      },
+      {
+       "es": "no es un micrófono",
+       "en": "it's not a microphone (hurry up)"
+      },
+      {
+       "es": "¡qué rico!",
+       "en": "so good!"
+      },
+      {
+       "es": "no, gracias",
+       "en": "no, thanks",
+       "example": {
+        "es": "—¿Un mate? —No, gracias.",
+        "en": "—A mate? —No, thanks."
+       }
+      }
+     ]
+    },
+    {
+     "slug": "mate-de-todos-los-dias",
+     "title": "Mate every day",
+     "summary": "Sweet or bitter, cold or cooked, everywhere you go",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Amargo or dulce?",
+       "emoji": "🍯",
+       "body": "Most people drink it **amargo** (bitter, no sugar). **Mate dulce** has sugar or sweetener added, more common in some provinces and families. It's a friendly rivalry, not a war. Some purists will tease you, though. People also add **yuyos** (herbs) like peperina or burrito, or a bit of orange peel."
+      },
+      {
+       "type": "choice",
+       "scenario": "The cebador asks: \"¿Amargo o dulce?\"",
+       "prompt": "What are they asking?",
+       "options": [
+        "Hot or cold?",
+        "Without or with sugar?",
+        "Strong or weak?"
+       ],
+       "correct": 1,
+       "explain": "**Amargo** is no sugar, **dulce** is with sugar. Both answers are OK, but amargo gets you more street cred."
+      },
+      {
+       "type": "info",
+       "title": "Mate cocido",
+       "emoji": "☕",
+       "body": "**Mate cocido** is the lazy (and cozy) version: yerba in a tea bag, or boiled and strained, served in a regular cup. Often with milk and sugar. It's the drink of school breakfasts, afternoon **merienda**, and cold winter mornings. No bombilla, no ronda, no rules."
+      },
+      {
+       "type": "info",
+       "title": "Tereré: the cold one",
+       "emoji": "🧊",
+       "body": "**Tereré** is mate with cold water or juice, often with ice and herbs. It's huge in **Paraguay**, where UNESCO listed it as cultural heritage in 2020, and in hot provinces like Corrientes, Misiones, Chaco and Formosa. In Buenos Aires you'll see it on summer days, but the hot mate never really takes a vacation."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the drink to what it is",
+       "pairs": [
+        [
+         "mate amargo",
+         "no sugar"
+        ],
+        [
+         "mate dulce",
+         "with sugar"
+        ],
+        [
+         "mate cocido",
+         "yerba in a cup, like tea"
+        ],
+        [
+         "tereré",
+         "mate with cold water"
+        ]
+       ]
+      },
+      {
+       "type": "info",
+       "title": "Where? Everywhere.",
+       "emoji": "🌳",
+       "body": "In the office, at university, on a road trip (the co-pilot serves), in the park, at the beach. You'll see people walking with the termo under their arm. **Matear** means to drink mate, and **una matera** is the bag to carry the kit. Uruguayans drink even more per person than Argentines, which they will happily remind you."
+      },
+      {
+       "type": "true_false",
+       "statement": "Tereré is mostly linked to Paraguay and the hot northeast of Argentina.",
+       "answer": true,
+       "explain": "Right. In Paraguay it's practically sacred, and in Corrientes or Misiones summer, hot mate can feel like a punishment."
+      },
+      {
+       "type": "choice",
+       "scenario": "You're on a road trip. The driver says: \"Cebame uno.\"",
+       "prompt": "What do you do?",
+       "options": [
+        "Pass them the termo",
+        "Prepare a mate and hand it to them",
+        "Put on some music"
+       ],
+       "correct": 1,
+       "explain": "The co-pilot is the cebador. Keep them coming, and don't burn the driver."
+      },
+      {
+       "type": "gap",
+       "prompt": "Inviting a friend over for mate",
+       "text": "¿Venís a ___ a casa?",
+       "options": [
+        "matear",
+        "cebador",
+        "tereré"
+       ],
+       "correct": 0,
+       "translation": "Want to come over for mate?",
+       "explain": "**Matear** = to drink mate, usually together. It's a whole social plan."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "amargo",
+       "en": "bitter, no sugar"
+      },
+      {
+       "es": "dulce",
+       "en": "sweet, with sugar"
+      },
+      {
+       "es": "mate cocido",
+       "en": "mate made like tea, in a cup"
+      },
+      {
+       "es": "tereré",
+       "en": "cold mate"
+      },
+      {
+       "es": "matear",
+       "en": "to drink mate (together)",
+       "example": {
+        "es": "¿Mateamos en la plaza?",
+        "en": "Shall we have mate in the park?"
+       }
+      },
+      {
+       "es": "yuyos",
+       "en": "herbs added to mate"
+      },
+      {
+       "es": "merienda",
+       "en": "afternoon snack"
+      },
+      {
+       "es": "matera",
+       "en": "bag for carrying the mate kit"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "asado",
+   "title": "Asado",
+   "emoji": "🥩",
+   "summary": "Fire, meat and a whole Sunday with your people",
+   "classes": [
+    {
+     "slug": "el-ritual",
+     "title": "More than a barbecue",
+     "summary": "Why an asado is a whole afternoon, not a meal",
+     "pages": [
+      {
+       "type": "info",
+       "title": "It's not just meat",
+       "emoji": "🔥",
+       "body": "An **asado** is grilled meat, sure. But mostly it's an excuse to spend hours together. Sunday lunch with the family, Friday night with friends, a birthday, a work thing — you name it, there's an asado. When someone says **¿hacemos un asado?** (shall we do an asado?), they're really asking: *wanna hang out all day?*",
+       "fun_fact": "Argentines also say **asado** for a specific cut: the ribs. Context tells you which one."
+      },
+      {
+       "type": "info",
+       "title": "Clear your schedule",
+       "emoji": "⏳",
+       "body": "Nobody does a quick asado. Someone lights the fire late morning, the meat cooks slowly, you eat around two, and then comes the **sobremesa** — sitting at the table long after the food is gone, talking, joking, arguing about football. Getting up at five is totally normal. Leaving right after eating? A bit rude."
+      },
+      {
+       "type": "true_false",
+       "statement": "At an asado, it's normal to eat and head home half an hour later.",
+       "answer": false,
+       "explain": "The **sobremesa** is half the point. Leaving right after the food looks like you only came to eat."
+      },
+      {
+       "type": "info",
+       "title": "The asador",
+       "emoji": "👨‍🍳",
+       "body": "Every asado has one **asador**: the person in charge of the fire and the meat. Traditionally it's the dad, the uncle, the friend who \"knows\". It's a role with a lot of pride attached. People hang out next to the grill with a drink to keep the asador company — the grill is where the party starts."
+      },
+      {
+       "type": "choice",
+       "scenario": "Everyone's finished eating. The meat was great. Someone at the table raises their glass and shouts something.",
+       "prompt": "What do they probably shout?",
+       "options": [
+        "¡Un aplauso para el asador!",
+        "¡La cuenta, por favor!",
+        "¡Buen provecho a todos!"
+       ],
+       "correct": 0,
+       "explain": "**¡Un aplauso para el asador!** — a round of applause for the grill master. Everyone claps. It's a must, even when the meat was a bit dry."
+      },
+      {
+       "type": "gap",
+       "prompt": "Complete the classic toast",
+       "text": "¡Un aplauso para el ___!",
+       "options": [
+        "asador",
+        "mozo",
+        "chef"
+       ],
+       "correct": 0,
+       "translation": "A round of applause for the grill master!",
+       "explain": "Always **asador**. **Mozo** is a waiter, and nobody calls the uncle at the grill a *chef*."
+      },
+      {
+       "type": "choice",
+       "scenario": "Your Argentine coworker texts you on Thursday: \"¿Hacemos un asado el domingo?\"",
+       "prompt": "What should you plan for?",
+       "options": [
+        "A quick lunch, back home by 2",
+        "Most of the afternoon",
+        "A dinner at a steakhouse"
+       ],
+       "correct": 1,
+       "explain": "An invitation to an asado is an invitation to the whole afternoon, at someone's house. Bring good vibes and no plans for later."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the word to its meaning",
+       "pairs": [
+        [
+         "asado",
+         "grilled-meat gathering"
+        ],
+        [
+         "asador",
+         "the person grilling"
+        ],
+        [
+         "sobremesa",
+         "chatting at the table after eating"
+        ],
+        [
+         "aplauso",
+         "applause"
+        ]
+       ]
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "asado",
+       "en": "barbecue; the gathering around it",
+       "example": {
+        "es": "¿Hacemos un asado el domingo?",
+        "en": "Shall we do an asado on Sunday?"
+       }
+      },
+      {
+       "es": "asador",
+       "en": "grill master",
+       "example": {
+        "es": "¡Un aplauso para el asador!",
+        "en": "A round of applause for the grill master!"
+       }
+      },
+      {
+       "es": "sobremesa",
+       "en": "long chat at the table after the meal"
+      },
+      {
+       "es": "aplauso",
+       "en": "applause"
+      },
+      {
+       "es": "hacer un asado",
+       "en": "to have a barbecue",
+       "example": {
+        "es": "Mañana hacemos un asado en casa.",
+        "en": "Tomorrow we're having an asado at home."
+       }
+      },
+      {
+       "es": "domingo",
+       "en": "Sunday"
+      }
+     ]
+    },
+    {
+     "slug": "el-fuego",
+     "title": "Playing with fire",
+     "summary": "Parrilla, fogón, leña, carbón — and hands off",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Parrilla or fogón?",
+       "emoji": "🔥",
+       "body": "The **parrilla** is the grill: an iron grate over the embers, often built into the backyard in brick. The **fogón** is an open fire on the ground — think countryside, camping, or a whole lamb on an iron cross leaning over the flames, called **asado a la cruz**. City asados are almost always on a parrilla.",
+       "fun_fact": "Many Buenos Aires apartments have a small parrilla on the balcony or rooftop. Priorities."
+      },
+      {
+       "type": "info",
+       "title": "Embers, not flames",
+       "emoji": "🪵",
+       "body": "Here's the secret: you don't cook over flames. You cook over **brasas** (embers). The asador burns wood or charcoal on the side, then shovels the glowing embers under the grill, little by little. Slow heat, lots of patience. If you see flames licking the meat, something went wrong."
+      },
+      {
+       "type": "true_false",
+       "statement": "A good asado is cooked over big, tall flames so it's done fast.",
+       "answer": false,
+       "explain": "It's cooked slowly over **brasas** (embers). Flames burn the outside and leave the inside raw."
+      },
+      {
+       "type": "info",
+       "title": "Leña vs carbón",
+       "emoji": "⚖️",
+       "body": "**Leña** is firewood — hardwoods like quebracho or algarrobo. It takes longer but many swear it gives better flavor. **Carbón** (charcoal) lights faster and is easier, so it's what most people use in the city. Which is better? Ask two Argentines and you'll get three opinions. It's a real, ongoing debate."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the fire words",
+       "pairs": [
+        [
+         "parrilla",
+         "grill"
+        ],
+        [
+         "fogón",
+         "open fire on the ground"
+        ],
+        [
+         "brasas",
+         "embers"
+        ],
+        [
+         "leña",
+         "firewood"
+        ],
+        [
+         "carbón",
+         "charcoal"
+        ]
+       ]
+      },
+      {
+       "type": "choice",
+       "scenario": "You're keeping the asador company. The fire looks a bit weak and there's a pile of wood right next to you.",
+       "prompt": "What do you do?",
+       "options": [
+        "Throw a couple of logs on to help",
+        "Poke the embers around a bit",
+        "Nothing — the fire belongs to the asador"
+       ],
+       "correct": 2,
+       "explain": "Hands off. Only the asador touches the fire and the meat. If you want to help, ask **¿te ayudo en algo?** (can I help with anything?) and do what they say."
+      },
+      {
+       "type": "gap",
+       "prompt": "Offer your help the right way",
+       "text": "¿Te ___ en algo?",
+       "options": [
+        "ayudo",
+        "ayudás",
+        "ayudamos"
+       ],
+       "correct": 0,
+       "translation": "Can I help you with anything?",
+       "explain": "**¿Te ayudo en algo?** — polite, friendly, and it leaves the asador in charge."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "parrilla",
+       "en": "grill",
+       "note": "Also a restaurant that serves grilled meat."
+      },
+      {
+       "es": "fogón",
+       "en": "open fire, campfire"
+      },
+      {
+       "es": "brasas",
+       "en": "embers",
+       "example": {
+        "es": "Poné más brasas debajo del vacío.",
+        "en": "Put more embers under the flank."
+       }
+      },
+      {
+       "es": "leña",
+       "en": "firewood"
+      },
+      {
+       "es": "carbón",
+       "en": "charcoal"
+      },
+      {
+       "es": "asado a la cruz",
+       "en": "whole animal roasted on an iron cross by the fire"
+      },
+      {
+       "es": "¿te ayudo en algo?",
+       "en": "can I help with anything?"
+      }
+     ]
+    },
+    {
+     "slug": "el-orden",
+     "title": "What comes off the grill, and when",
+     "summary": "Picada, achuras, then the big cuts",
+     "pages": [
+      {
+       "type": "info",
+       "title": "First, the picada",
+       "emoji": "🧀",
+       "body": "While the fire does its thing, there's a **picada**: a board with cheese, salami, olives, bread, maybe peanuts. It keeps everyone alive for the first couple of hours. Don't fill up on it, though — you've got a long way to go."
+      },
+      {
+       "type": "info",
+       "title": "Then, the achuras",
+       "emoji": "🌭",
+       "body": "Next come the **achuras** (offal) and sausages: **chorizo** (pork sausage), **morcilla** (blood sausage), **chinchulines** (crispy small intestines), **mollejas** (sweetbreads) and **riñones** (kidneys). They come off in waves, often cut up on a board and passed around. Try the mollejas with lemon. Thank me later.",
+       "fun_fact": "Technically chorizo and morcilla are sausages, not offal, but at the grill everyone lumps them in with the achuras."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the achura to what it is",
+       "pairs": [
+        [
+         "chorizo",
+         "pork sausage"
+        ],
+        [
+         "morcilla",
+         "blood sausage"
+        ],
+        [
+         "chinchulines",
+         "small intestines"
+        ],
+        [
+         "mollejas",
+         "sweetbreads"
+        ],
+        [
+         "riñones",
+         "kidneys"
+        ]
+       ]
+      },
+      {
+       "type": "info",
+       "title": "Finally, the cuts",
+       "emoji": "🥩",
+       "body": "Then the main event, the **cortes** (cuts): **asado de tira** (short ribs cut across the bone), **vacío** (flank), **entraña** (skirt steak, juicy and loved), **matambre** (a thin cut between the skin and the ribs). The asador decides the order. Your job is to eat and say **¡qué rico!** (so good!)."
+      },
+      {
+       "type": "order",
+       "prompt": "Put a classic asado in order",
+       "items": [
+        "Picada while the fire gets going",
+        "Chorizo, morcilla and achuras",
+        "Vacío, entraña and asado de tira",
+        "Aplauso para el asador",
+        "Sobremesa"
+       ],
+       "explain": "Every family does it a bit differently, but it goes: snacks, sausages and achuras, the big cuts, the applause, and then hours of chatting."
+      },
+      {
+       "type": "choice",
+       "scenario": "Someone passes you a board with little golden, crispy spirals. They say: \"Probá los chinchulines.\"",
+       "prompt": "What are you about to eat?",
+       "options": [
+        "Fried onions",
+        "Grilled small intestines",
+        "Pork rinds"
+       ],
+       "correct": 1,
+       "explain": "**Chinchulines** are beef small intestines, grilled until crispy. Sounds scary, tastes amazing. Saying **no, gracias** is fine too."
+      },
+      {
+       "type": "info",
+       "title": "How do you like it?",
+       "emoji": "🌡️",
+       "body": "The asador might ask how you want your meat. **Jugoso** means juicy, pink inside. **A punto** is medium. **Cocido** is well done. Most Argentines like it a punto or a bit jugoso. Asking for it very rare? You'll get a raised eyebrow."
+      },
+      {
+       "type": "gap",
+       "prompt": "Ask for your meat medium",
+       "text": "Para mí, a ___, por favor.",
+       "options": [
+        "punto",
+        "fuego",
+        "gusto"
+       ],
+       "correct": 0,
+       "translation": "Medium for me, please.",
+       "explain": "**A punto** = medium. **Jugoso** if you want it pinker, **cocido** if you want it well done."
+      },
+      {
+       "type": "true_false",
+       "statement": "Vacío and entraña are types of achuras.",
+       "answer": false,
+       "explain": "They're **cortes** (cuts of beef). Achuras are the offal: chinchulines, mollejas, riñones… plus the sausages."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "picada",
+       "en": "snack board (cheese, salami…)"
+      },
+      {
+       "es": "achuras",
+       "en": "offal",
+       "example": {
+        "es": "Primero salen las achuras.",
+        "en": "The offal comes off first."
+       }
+      },
+      {
+       "es": "morcilla",
+       "en": "blood sausage"
+      },
+      {
+       "es": "chinchulines",
+       "en": "grilled small intestines"
+      },
+      {
+       "es": "mollejas",
+       "en": "sweetbreads"
+      },
+      {
+       "es": "vacío",
+       "en": "flank"
+      },
+      {
+       "es": "entraña",
+       "en": "skirt steak"
+      },
+      {
+       "es": "a punto",
+       "en": "medium (meat)",
+       "example": {
+        "es": "Para mí, a punto, por favor.",
+        "en": "Medium for me, please."
+       }
+      },
+      {
+       "es": "¡qué rico!",
+       "en": "so good!"
+      }
+     ]
+    },
+    {
+     "slug": "chori-y-salsas",
+     "title": "Choripán, provoleta and the sauces",
+     "summary": "The sandwich, the grilled cheese and what goes on top",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The choripán",
+       "emoji": "🥖",
+       "body": "**Choripán** = **chorizo** + **pan** (bread). A grilled sausage, split open in a crusty roll. That's it, and it's perfect. It's the first thing out at many asados, and it's also street food: outside football stadiums, at protests, on the Costanera. Everyone calls it **chori**."
+      },
+      {
+       "type": "gap",
+       "prompt": "What's a choripán made of?",
+       "text": "Un choripán es un chorizo en ___.",
+       "options": [
+        "pan",
+        "plato",
+        "pizza"
+       ],
+       "correct": 0,
+       "translation": "A choripán is a chorizo in bread.",
+       "explain": "**Chori** + **pan**. The name is the recipe."
+      },
+      {
+       "type": "info",
+       "title": "The provoleta",
+       "emoji": "🧀",
+       "body": "**Provoleta** is a thick round of provolone-style cheese grilled until crispy outside and melty inside, with oregano and chili flakes on top. It's usually credited to Natalio Alba, an Italian immigrant, in the mid-20th century. Eat it hot and fast, straight from the little pan."
+      },
+      {
+       "type": "info",
+       "title": "Chimichurri and salsa criolla",
+       "emoji": "🌿",
+       "body": "Two sauces rule. **Chimichurri**: parsley, oregano, garlic, chili flakes, vinegar and oil. **Salsa criolla**: chopped tomato, onion and bell pepper in vinegar and oil. Both go on the choripán and the meat. Where does the name chimichurri come from? Nobody knows for sure — Basque, Italian, even an Irishman called \"Jimmy\"… all unproven."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the thing to what's in it",
+       "pairs": [
+        [
+         "choripán",
+         "sausage in a bread roll"
+        ],
+        [
+         "provoleta",
+         "grilled cheese round"
+        ],
+        [
+         "chimichurri",
+         "parsley, garlic, vinegar, oil"
+        ],
+        [
+         "salsa criolla",
+         "tomato, onion, bell pepper"
+        ]
+       ]
+      },
+      {
+       "type": "true_false",
+       "statement": "Historians agree that chimichurri was named after an Irishman called Jimmy McCurry.",
+       "answer": false,
+       "explain": "It's one popular story, but it's not proven. Others point to a Basque word or to Italian sauces. The origin is still disputed."
+      },
+      {
+       "type": "choice",
+       "scenario": "You're at a football match in Buenos Aires. Outside the stadium, smoke everywhere and people lining up at a street grill.",
+       "prompt": "What are they most likely selling?",
+       "options": [
+        "Choripanes",
+        "Provoletas",
+        "Entrañas on a plate"
+       ],
+       "correct": 0,
+       "explain": "The **chori** is the king of street food at stadiums. Cheap, fast, and you eat it standing up with chimichurri dripping everywhere."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "choripán",
+       "en": "grilled sausage sandwich",
+       "note": "Short: chori.",
+       "example": {
+        "es": "¿Te hago un chori?",
+        "en": "Shall I make you a chori?"
+       }
+      },
+      {
+       "es": "chorizo",
+       "en": "pork (and beef) sausage"
+      },
+      {
+       "es": "pan",
+       "en": "bread"
+      },
+      {
+       "es": "provoleta",
+       "en": "grilled provolone-style cheese"
+      },
+      {
+       "es": "chimichurri",
+       "en": "herb, garlic and vinegar sauce"
+      },
+      {
+       "es": "salsa criolla",
+       "en": "tomato, onion and pepper relish"
+      }
+     ]
+    },
+    {
+     "slug": "sos-invitado",
+     "title": "You're invited — now what?",
+     "summary": "What to bring and how not to annoy the asador",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Never show up empty-handed",
+       "emoji": "🍷",
+       "body": "The host usually buys the meat. You bring something else: **vino** (wine, often a Malbec), **bebida** (drinks: soda, beer, fernet), **postre** (dessert — ice cream is a classic), or **hielo** (ice, and someone always forgets it). Just ask: **¿qué llevo?** (what should I bring?).",
+       "fun_fact": "With friends, it's common to split the cost of the meat. That's called **hacer una vaquita** — literally \"making a little cow\"."
+      },
+      {
+       "type": "choice",
+       "scenario": "Your friend's family invited you to their Sunday asado. You ask what to bring and they say \"nada, vení\" (nothing, just come).",
+       "prompt": "What do you actually do?",
+       "options": [
+        "Show up with nothing — they said so",
+        "Bring wine or dessert anyway",
+        "Bring a kilo of steak for yourself"
+       ],
+       "correct": 1,
+       "explain": "\"**Nada, vení**\" is being polite. A bottle of wine or some dessert is always welcome. Bringing your own meat can look like you don't trust the host."
+      },
+      {
+       "type": "gap",
+       "prompt": "Ask what you should bring",
+       "text": "¿Qué ___ para el asado?",
+       "options": [
+        "llevo",
+        "traés",
+        "comés"
+       ],
+       "correct": 0,
+       "translation": "What should I bring to the asado?",
+       "explain": "**¿Qué llevo?** — the classic question. Argentines use **llevar** (take) from the guest's point of view."
+      },
+      {
+       "type": "info",
+       "title": "The golden rule",
+       "emoji": "🤐",
+       "body": "Don't tell the asador how to cook. Not \"it needs more heat\", not \"I'd flip that now\", not \"in my country we…\". The grill is their territory. Keep them company, bring them a glass of wine, laugh at their jokes. Criticizing the asado is almost a personal insult."
+      },
+      {
+       "type": "choice",
+       "scenario": "You think the vacío has been on too long. The asador turns and asks: \"¿Todo bien?\"",
+       "prompt": "Best answer?",
+       "options": [
+        "\"I think it's burning, you should take it off\"",
+        "\"¡Todo bien! Huele bárbaro.\"",
+        "Grab the tongs and take it off yourself"
+       ],
+       "correct": 1,
+       "explain": "**Huele bárbaro** = it smells amazing. Trust the asador — and never grab the tongs. The meat and the fire are theirs."
+      },
+      {
+       "type": "true_false",
+       "statement": "Offering to help clear the table or wash up after the asado is a nice gesture.",
+       "answer": true,
+       "explain": "The asador cooked, so others often clean up. Offering to help with the dishes always earns points."
+      },
+      {
+       "type": "order",
+       "prompt": "A perfect guest's afternoon",
+       "items": [
+        "Ask ¿qué llevo?",
+        "Arrive with wine and ice",
+        "Keep the asador company at the grill",
+        "Eat everything and say ¡qué rico!",
+        "Aplauso para el asador",
+        "Stay for the sobremesa"
+       ],
+       "explain": "Nail these and you'll be invited back next Sunday."
+      },
+      {
+       "type": "match",
+       "prompt": "Match what you bring",
+       "pairs": [
+        [
+         "vino",
+         "wine"
+        ],
+        [
+         "bebida",
+         "drinks"
+        ],
+        [
+         "postre",
+         "dessert"
+        ],
+        [
+         "hielo",
+         "ice"
+        ]
+       ]
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "vino",
+       "en": "wine"
+      },
+      {
+       "es": "bebida",
+       "en": "drinks"
+      },
+      {
+       "es": "postre",
+       "en": "dessert"
+      },
+      {
+       "es": "hielo",
+       "en": "ice",
+       "example": {
+        "es": "¿Alguien trajo hielo?",
+        "en": "Did anyone bring ice?"
+       }
+      },
+      {
+       "es": "¿qué llevo?",
+       "en": "what should I bring?",
+       "example": {
+        "es": "¿Qué llevo el domingo?",
+        "en": "What should I bring on Sunday?"
+       }
+      },
+      {
+       "es": "hacer una vaquita",
+       "en": "to chip in money"
+      },
+      {
+       "es": "bárbaro",
+       "en": "great, amazing",
+       "example": {
+        "es": "¡Huele bárbaro!",
+        "en": "It smells amazing!"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "futbol",
+   "title": "Fútbol",
+   "emoji": "⚽",
+   "summary": "Not a sport here. A religion with a fixture list.",
+   "classes": [
+    {
+     "slug": "de-que-cuadro-sos",
+     "title": "¿De qué cuadro sos?",
+     "summary": "The five big clubs, the Superclásico and the question you can't dodge",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The question",
+       "emoji": "🤝",
+       "body": "Meet someone new in Buenos Aires and within ten minutes you'll hear: **¿De qué cuadro sos?** — *Which team are you?* A **cuadro** is a club. It's not small talk: your club is inherited from your dad, your grandpa, your barrio. People change jobs, partners, even countries. Changing clubs? Never. **Cambiar de cuadro** is basically treason.",
+       "fun_fact": "Plenty of babies are signed up as club members (**socios**) days after being born."
+      },
+      {
+       "type": "info",
+       "title": "Los cinco grandes",
+       "emoji": "🏟️",
+       "body": "Five clubs are called **los cinco grandes** — *the big five*: **Boca Juniors**, **River Plate**, **Independiente**, **Racing Club** and **San Lorenzo**. They have the most fans and, historically, the most titles. Everyone else is a *chico* (small club) — though say that to a fan of Vélez or Estudiantes and you'll get a long lecture."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the club to its nickname",
+       "pairs": [
+        [
+         "Boca Juniors",
+         "el Xeneize"
+        ],
+        [
+         "River Plate",
+         "el Millonario"
+        ],
+        [
+         "Racing Club",
+         "la Academia"
+        ],
+        [
+         "Independiente",
+         "el Rojo"
+        ],
+        [
+         "San Lorenzo",
+         "el Ciclón"
+        ]
+       ],
+       "explain": "**Xeneize** means *Genoese*: Boca was founded in 1905 by Italian immigrants' kids in La Boca. River got **Millonario** for spending big on players in the 1930s."
+      },
+      {
+       "type": "info",
+       "title": "El Superclásico",
+       "emoji": "🔵",
+       "body": "**Boca vs River** is the **Superclásico** — the biggest rivalry in the country. A **clásico** is any derby; this one gets the *super*. Boca plays at **La Bombonera** (*the chocolate box*) in La Boca. River plays at **El Monumental** in Núñez. Funny detail: River was also born in La Boca, in 1901, and moved north later. Neighbors first, enemies forever.",
+       "fun_fact": "In 2018 they met in the Copa Libertadores final, and the second leg ended up being played in Madrid. River won."
+      },
+      {
+       "type": "info",
+       "title": "Insults with pride",
+       "emoji": "🐔",
+       "body": "Rivals give each other nasty nicknames, and fans end up wearing them proudly. River fans call Boca fans **bosteros** (from **bosta**, *manure* — the story goes it was a dig at the smell by the Riachuelo). Boca fans call River fans **gallinas** (*chickens*, as in cowards), a name that stuck after River blew the 1966 Libertadores final against Peñarol. San Lorenzo fans are **cuervos** (*crows*), after the priest who founded the club."
+      },
+      {
+       "type": "true_false",
+       "statement": "If a River fan calls you a \"bostero\", they think you support Boca.",
+       "answer": true,
+       "explain": "Exactly. And if you *do* support Boca, the correct reply is a proud smile. Being **bostero** is a badge of honor for them."
+      },
+      {
+       "type": "info",
+       "title": "Avellaneda: two stadiums, one block",
+       "emoji": "😈",
+       "body": "Just south of the city, in **Avellaneda**, live **Racing** (light blue and white) and **Independiente** (red). Their stadiums are only a few hundred meters apart — you can see one from the other. That's the **clásico de Avellaneda**. Independiente fans are the **Diablos Rojos**, *Red Devils*. Imagine sharing a street with the one team you hate most."
+      },
+      {
+       "type": "choice",
+       "scenario": "You're staying in La Boca and a friend lends you a red-and-white River shirt because it's cold. You're about to walk to the kiosk next to the Bombonera on match day.",
+       "prompt": "What do you do?",
+       "options": [
+        "Wear it, it's just a shirt",
+        "Change or cover it up",
+        "Wear it, but say you're a tourist"
+       ],
+       "correct": 1,
+       "explain": "Never wear the rival's colors in the wrong barrio, especially on match day. Best case: jokes and dirty looks. Worst case: you really don't want to find out."
+      },
+      {
+       "type": "choice",
+       "scenario": "A taxi driver asks: \"¿De qué cuadro sos?\" You don't follow football at all.",
+       "prompt": "What's the smoothest answer?",
+       "options": [
+        "\"Football is boring.\"",
+        "\"No sé, ¿vos de cuál sos?\"",
+        "Pick the rival of whatever sticker is on his dashboard"
+       ],
+       "correct": 1,
+       "explain": "Turning the question back is gold: he'll happily talk for the whole ride. Saying football is boring is legal, but it's a conversation killer."
+      },
+      {
+       "type": "gap",
+       "prompt": "Ask your new friend which team they support",
+       "text": "¿De qué ___ sos?",
+       "options": [
+        "cuadro",
+        "cuadra",
+        "equipo de"
+       ],
+       "correct": 0,
+       "translation": "Which team are you (a fan of)?",
+       "explain": "**Cuadro** is the everyday word for club. **Cuadra** is a city block — useful, but not here."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "cuadro",
+       "en": "club, team (colloquial)",
+       "example": {
+        "es": "¿De qué cuadro sos?",
+        "en": "Which team do you support?"
+       }
+      },
+      {
+       "es": "los cinco grandes",
+       "en": "the big five clubs",
+       "note": "Boca, River, Independiente, Racing, San Lorenzo."
+      },
+      {
+       "es": "clásico",
+       "en": "derby, match between rivals"
+      },
+      {
+       "es": "Superclásico",
+       "en": "Boca vs River"
+      },
+      {
+       "es": "bostero",
+       "en": "Boca fan (rivals' insult, worn with pride)"
+      },
+      {
+       "es": "gallina",
+       "en": "River fan (literally \"chicken\")",
+       "note": "Don't say it to a River fan unless you're friends."
+      },
+      {
+       "es": "cancha",
+       "en": "stadium, pitch",
+       "example": {
+        "es": "¿Vamos a la cancha el domingo?",
+        "en": "Shall we go to the match on Sunday?"
+       }
+      }
+     ]
+    },
+    {
+     "slug": "la-hinchada",
+     "title": "La hinchada",
+     "summary": "Chants, drums and the mysterious thing called aguante",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Hincha, not fan",
+       "emoji": "📣",
+       "body": "A fan is a **hincha**, and all the fans together are **la hinchada**. The story goes that the word comes from a man in Montevideo who inflated (**hinchar**) the balls and shouted so hard he became famous. Whatever the origin: a hincha doesn't *watch* a match. A hincha *plays* it from the stands.",
+       "fun_fact": "**Hinchar** also means to annoy. \"No me hinchés\" = \"Stop bugging me.\""
+      },
+      {
+       "type": "info",
+       "title": "Cantitos and the bombo",
+       "emoji": "🥁",
+       "body": "The stands never go quiet. The hinchada sings **cantitos** (*chants*) for ninety minutes, often to the tune of old rock or cumbia songs, with lyrics that mix love for the club and creative insults for the rival. Keeping the beat is the **bombo**, a big bass drum. Add **trapos** (*banners*) and paper rain, and you've got the show."
+      },
+      {
+       "type": "true_false",
+       "statement": "In an Argentine stadium, fans sit quietly and clap after good plays.",
+       "answer": false,
+       "explain": "Sitting? Quietly? In the **popular** (standing terraces) people jump, sing and push for the whole match. Clapping politely is for tennis."
+      },
+      {
+       "type": "info",
+       "title": "El aguante",
+       "emoji": "💪",
+       "body": "**Aguante** comes from **aguantar**, *to endure*. For a hincha it means loyalty that survives everything: rain, losses, even relegation. \"**¡Aguante Racing!**\" = *Long live Racing!* You also hear it outside football: \"**¡Aguante el asado!**\" The team can be losing 3–0 and the hinchada still sings — that's aguante."
+      },
+      {
+       "type": "gap",
+       "prompt": "Cheer for your team, rioplatense style",
+       "text": "¡___ Boca!",
+       "options": [
+        "Aguante",
+        "Aguanta",
+        "Viva el"
+       ],
+       "correct": 0,
+       "translation": "Long live Boca! / Come on Boca!",
+       "explain": "**¡Aguante…!** + anything you love. It works for clubs, bands and even foods."
+      },
+      {
+       "type": "info",
+       "title": "The dark side: barras bravas",
+       "emoji": "⚠️",
+       "body": "Every big club has a **barra brava** (or just **la barra**): the organized hardcore group that leads the chants and carries the drums. Many are also tangled up in violence and shady business — resale, parking, politics. After years of deaths, visiting fans were banned from most matches in 2013. Pilot tests to bring them back only began in 2025."
+      },
+      {
+       "type": "choice",
+       "scenario": "At the stadium, a guy from the barra walks past and tells your section to stand up and sing.",
+       "prompt": "What's the smart move?",
+       "options": [
+        "Explain that you paid for your seat",
+        "Stand up and at least pretend to sing",
+        "Film him for Instagram"
+       ],
+       "correct": 1,
+       "explain": "You're a guest in their church. Stand, clap, hum along. Arguing with the barra is never a good plan."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the word to the thing",
+       "pairs": [
+        [
+         "bombo",
+         "bass drum"
+        ],
+        [
+         "trapo",
+         "banner"
+        ],
+        [
+         "cantito",
+         "chant"
+        ],
+        [
+         "popular",
+         "standing terrace"
+        ]
+       ],
+       "explain": "**Trapo** literally means *rag*. For the barras, losing your trapo to a rival is the ultimate humiliation."
+      },
+      {
+       "type": "true_false",
+       "statement": "If your team gets relegated, a real hincha with aguante stops going to the stadium.",
+       "answer": false,
+       "explain": "The opposite! When River went down in 2011, its fans filled stadiums in the second division. Aguante is exactly for the bad times."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "hincha",
+       "en": "fan, supporter"
+      },
+      {
+       "es": "hinchada",
+       "en": "the fans, the crowd"
+      },
+      {
+       "es": "cantito",
+       "en": "stadium chant"
+      },
+      {
+       "es": "bombo",
+       "en": "bass drum"
+      },
+      {
+       "es": "aguante",
+       "en": "loyal support, endurance",
+       "example": {
+        "es": "¡Aguante Independiente!",
+        "en": "Come on Independiente!"
+       }
+      },
+      {
+       "es": "barra brava",
+       "en": "hardcore organized fan group",
+       "note": "Often just \"la barra\"."
+      },
+      {
+       "es": "trapo",
+       "en": "banner (literally \"rag\")"
+      },
+      {
+       "es": "hinchar",
+       "en": "to annoy, to bug",
+       "example": {
+        "es": "No me hinchés.",
+        "en": "Stop bugging me."
+       }
+      }
+     ]
+    },
+    {
+     "slug": "el-diez",
+     "title": "1978, 1986 and the Diez",
+     "summary": "The first two World Cups and a guy called Diego",
+     "pages": [
+      {
+       "type": "info",
+       "title": "La Selección",
+       "emoji": "🇦🇷",
+       "body": "When Argentina plays, the whole country stops. The national team is **la Selección**, or **la Albiceleste** (*the white and sky-blue*). Club rivalries freeze for ninety minutes — a bostero and a gallina hug when Argentina scores. The team has won three World Cups: **1978**, **1986** and **2022**."
+      },
+      {
+       "type": "info",
+       "title": "1978: a cup with a shadow",
+       "emoji": "🏆",
+       "body": "Argentina hosted and won in **1978**, beating the Netherlands 3–1 after extra time at El Monumental, with two goals from **Mario Kempes**. But the country was under a military dictatorship that used the cup as propaganda while people were disappearing. Many Argentines still feel torn about it. Some results, like the 6–0 over Peru, remain the subject of suspicion that was never proven."
+      },
+      {
+       "type": "true_false",
+       "statement": "Everyone in Argentina celebrates the 1978 World Cup without mixed feelings.",
+       "answer": false,
+       "explain": "The players are respected, but the dictatorship context makes 1978 a sore, debated topic. Tread gently."
+      },
+      {
+       "type": "info",
+       "title": "Diego",
+       "emoji": "🔟",
+       "body": "**Diego Armando Maradona** grew up poor in Villa Fiorito and became the greatest idol the country has ever had. He wore the **10**, so he's **el Diez** — or simply **el Diego**. He captained Argentina to the **1986** title in Mexico. Some people even joke about the *Iglesia Maradoniana*, a fan \"church\" with its own Christmas on his birthday, October 30."
+      },
+      {
+       "type": "info",
+       "title": "Mexico 1986 vs England",
+       "emoji": "✋",
+       "body": "Quarter-final, June 22, 1986, four years after the Falklands/**Malvinas** war. Minute 51: Diego punches the ball into the net and the referee allows it. He later called it **la Mano de Dios** — *the Hand of God*. Four minutes later he dribbles past half the English team from his own half and scores **el Gol del Siglo**, *the Goal of the Century*. Argentina won 2–1.",
+       "fun_fact": "Radio commentator Víctor Hugo Morales screamed \"¡Barrilete cósmico!\" — *cosmic kite* — and it became legend."
+      },
+      {
+       "type": "order",
+       "prompt": "Put Argentina vs England, 1986, in order",
+       "items": [
+        "The first half ends 0–0",
+        "Maradona scores with his hand",
+        "Maradona dribbles past five players and the keeper",
+        "England pulls one back",
+        "Argentina wins 2–1"
+       ],
+       "explain": "The Hand of God and the Goal of the Century were only four minutes apart. Gary Lineker scored England's goal near the end."
+      },
+      {
+       "type": "choice",
+       "scenario": "An English friend at an asado says: \"Maradona cheated, that's it.\" Everyone goes quiet.",
+       "prompt": "How do most Argentines see the Mano de Dios?",
+       "options": [
+        "A shameful moment they'd rather forget",
+        "A cheeky bit of viveza, with a lot of history behind it",
+        "Something that never happened"
+       ],
+       "correct": 1,
+       "explain": "For many it's **viveza criolla** (street-smart cunning) and a symbolic revenge after Malvinas. Plenty of people also admit it was a handball. Expect a passionate debate, not agreement."
+      },
+      {
+       "type": "gap",
+       "prompt": "What's the famous handball called?",
+       "text": "La ___ de Dios",
+       "options": [
+        "Mano",
+        "Mana",
+        "Pie"
+       ],
+       "correct": 0,
+       "translation": "The Hand of God",
+       "explain": "**Mano** is feminine even though it ends in -o: *la mano*."
+      },
+      {
+       "type": "true_false",
+       "statement": "Argentina won the 1986 final against West Germany.",
+       "answer": true,
+       "explain": "3–2 in the Azteca stadium. Jorge Burruchaga scored the winner after a pass from — who else — Diego."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "la Selección",
+       "en": "the national team"
+      },
+      {
+       "es": "la Albiceleste",
+       "en": "Argentina's team (white and sky-blue)"
+      },
+      {
+       "es": "el Diez",
+       "en": "the number 10; Maradona"
+      },
+      {
+       "es": "la Mano de Dios",
+       "en": "the Hand of God (1986 handball goal)"
+      },
+      {
+       "es": "el Gol del Siglo",
+       "en": "the Goal of the Century"
+      },
+      {
+       "es": "Mundial",
+       "en": "World Cup",
+       "example": {
+        "es": "Ganamos el Mundial del 86.",
+        "en": "We won the '86 World Cup."
+       }
+      },
+      {
+       "es": "viveza criolla",
+       "en": "street-smart cunning",
+       "note": "Admired and criticized in equal measure."
+      }
+     ]
+    },
+    {
+     "slug": "messi-y-qatar",
+     "title": "Messi and Qatar",
+     "summary": "Heartbreak in Brazil, glory in Qatar",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The quiet kid from Rosario",
+       "emoji": "🐐",
+       "body": "**Lionel Messi** was born in **Rosario** in 1987 and left for Barcelona at 13. For years some Argentines grumbled that he didn't sing the anthem and only shone in Spain. He's a **Newell's** fan, by the way, and nicknamed **la Pulga** (*the flea*) for being small. That grumbling is now very, very dead."
+      },
+      {
+       "type": "info",
+       "title": "2014: so close",
+       "emoji": "💔",
+       "body": "The **2014** final in Rio's Maracanã: Argentina vs Germany, 0–0 into extra time. In minute 113, **Mario Götze** scored. Germany 1–0. Messi was named best player of the tournament and looked at the trophy he couldn't touch. Then came two lost Copa América finals, in 2015 and 2016. After 2016, Messi briefly retired from the Selección."
+      },
+      {
+       "type": "true_false",
+       "statement": "Argentina lost the 2014 World Cup final to Brazil.",
+       "answer": false,
+       "explain": "It was **Germany**, 1–0, played in Brazil. Losing in Brazil's own stadium, to anyone, stung extra."
+      },
+      {
+       "type": "info",
+       "title": "Qatar 2022",
+       "emoji": "🏆",
+       "body": "December 18, 2022. The final against France was madness: Argentina 2–0, then Mbappé scores twice in two minutes, Messi makes it 3–2 in extra time, Mbappé again: 3–3. Penalties. **Dibu Martínez**, the **arquero** (*goalkeeper*), saves one, and **Gonzalo Montiel** scores the last. Messi finally lifts the cup. Argentina's third star.",
+       "fun_fact": "The celebration in Buenos Aires drew millions of people — the Obelisco disappeared under a sea of shirts."
+      },
+      {
+       "type": "order",
+       "prompt": "Put the Qatar 2022 final in order",
+       "items": [
+        "Argentina leads 2–0",
+        "Mbappé ties it 2–2",
+        "Messi scores in extra time: 3–2",
+        "Mbappé ties it again: 3–3",
+        "Montiel scores the winning penalty"
+       ],
+       "explain": "4–2 on penalties. Many Argentines say they didn't breathe for about three hours."
+      },
+      {
+       "type": "info",
+       "title": "Muchachos",
+       "emoji": "🎶",
+       "body": "The soundtrack of Qatar was a cantito: **\"Muchachos, ahora nos volvimos a ilusionar\"** — *Guys, now we've got our hopes up again*. Fans wrote it to the tune of a song by the band La Mosca. It name-checks Malvinas, Diego and Leo. Sing it at any party and the whole room joins in."
+      },
+      {
+       "type": "choice",
+       "scenario": "It's a Selección match day and your Argentine friend has worn the same unwashed socks for every game since the tournament started.",
+       "prompt": "What's going on?",
+       "options": [
+        "He forgot to do laundry",
+        "It's a cábala — a lucky ritual",
+        "It's a traditional costume"
+       ],
+       "correct": 1,
+       "explain": "A **cábala** is a superstitious ritual. Same seat, same socks, same mate. If the team wins, you do NOT change anything."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the hero to the moment",
+       "pairs": [
+        [
+         "Kempes",
+         "two goals in the 1978 final"
+        ],
+        [
+         "Burruchaga",
+         "winning goal in the 1986 final"
+        ],
+        [
+         "Götze",
+         "broke Argentine hearts in 2014"
+        ],
+        [
+         "Montiel",
+         "last penalty in Qatar 2022"
+        ]
+       ],
+       "explain": "Four finals, four names every Argentine knows — including the German one, sadly."
+      },
+      {
+       "type": "gap",
+       "prompt": "Your friend is scared to change his lucky socks. He says:",
+       "text": "No las lavo, es ___.",
+       "options": [
+        "cábala",
+        "mufa",
+        "caño"
+       ],
+       "correct": 0,
+       "translation": "I'm not washing them, it's a lucky ritual.",
+       "explain": "**Mufa** is bad luck (or the person who brings it) — the exact opposite."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "la Pulga",
+       "en": "the Flea (Messi's nickname)"
+      },
+      {
+       "es": "arquero",
+       "en": "goalkeeper",
+       "example": {
+        "es": "El Dibu es el mejor arquero.",
+        "en": "Dibu is the best goalkeeper."
+       }
+      },
+      {
+       "es": "penal",
+       "en": "penalty kick",
+       "note": "Plural: penales. \"Ir a penales\" = go to a shootout."
+      },
+      {
+       "es": "cábala",
+       "en": "lucky ritual, superstition"
+      },
+      {
+       "es": "mufa",
+       "en": "bad luck; a jinx (person)",
+       "example": {
+        "es": "No mires, sos mufa.",
+        "en": "Don't watch, you're a jinx."
+       }
+      },
+      {
+       "es": "ilusionarse",
+       "en": "to get your hopes up"
+      },
+      {
+       "es": "final",
+       "en": "final (match)",
+       "note": "La final = the final match. El final = the ending."
+      }
+     ]
+    },
+    {
+     "slug": "hablar-de-futbol",
+     "title": "Talk like a hincha",
+     "summary": "Golazos, gambetas, caños and the Sunday picado",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Potrero and picado",
+       "emoji": "🌱",
+       "body": "Argentines say their football was born in the **potrero** — a dirt lot where kids play with a ball, a couple of stones as goalposts and zero rules. A casual game with friends is a **picado**. \"¿Armamos un picado?\" = *Shall we get a game together?* Today it's usually **fútbol 5** on synthetic grass, then beers.",
+       "fun_fact": "Calling a player \"**de potrero**\" is a big compliment: street-smart, creative, fearless."
+      },
+      {
+       "type": "info",
+       "title": "Gambeta and caño",
+       "emoji": "🪄",
+       "body": "A **gambeta** is a dribble, the twisty, dancing kind Maradona and Messi made famous. A **caño** is a nutmeg: the ball between the defender's legs. Getting a caño in a picado means your friends will remind you for weeks. And a **golazo** is a stunning goal. The **-azo** ending makes anything bigger: **golazo**, **partidazo**."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the word to its meaning",
+       "pairs": [
+        [
+         "gambeta",
+         "dribble"
+        ],
+        [
+         "caño",
+         "nutmeg"
+        ],
+        [
+         "golazo",
+         "amazing goal"
+        ],
+        [
+         "picado",
+         "casual pickup game"
+        ],
+        [
+         "potrero",
+         "dirt lot where kids play"
+        ]
+       ]
+      },
+      {
+       "type": "choice",
+       "scenario": "In a picado, you slip the ball between the legs of your friend Nacho and run past him. Everyone screams.",
+       "prompt": "What did you just do?",
+       "options": [
+        "Un caño",
+        "Una gambeta de arquero",
+        "Un penal"
+       ],
+       "correct": 0,
+       "explain": "**¡Caño!** Nacho will now be teased until the next picado. Maybe longer."
+      },
+      {
+       "type": "info",
+       "title": "El DT and the arquero",
+       "emoji": "📋",
+       "body": "The coach is **el DT** (*de-té*), short for **director técnico**. Every Argentine is secretly a DT: they all know who should play. The goalkeeper is **el arquero** (from **arco**, *goal*). And the defender who kicks everything out? A **hachero** — an *axe man*."
+      },
+      {
+       "type": "true_false",
+       "statement": "In Argentina, \"el DT\" is the team's doctor.",
+       "answer": false,
+       "explain": "**DT** = **director técnico**, the coach. Lionel Scaloni, the DT who won Qatar, gave his name to the team's nickname: **la Scaloneta**."
+      },
+      {
+       "type": "info",
+       "title": "Hacer la previa",
+       "emoji": "🍻",
+       "body": "Before any big match you **hacer la previa**: meet up earlier to eat, drink, sing and get in the mood. The previa can last longer than the match itself. After the game, win or lose, there's analysis at the bar until late. Watching football alone? Suspicious behavior."
+      },
+      {
+       "type": "gap",
+       "prompt": "Invite your friends to meet up before the Superclásico",
+       "text": "¿Hacemos la ___ en casa?",
+       "options": [
+        "previa",
+        "picada",
+        "cancha"
+       ],
+       "correct": 0,
+       "translation": "Shall we do the pre-match hangout at my place?",
+       "explain": "Careful: a **picada** is a snack board of cheese and salami — very welcome at the previa, but not the same word."
+      },
+      {
+       "type": "order",
+       "prompt": "A perfect Superclásico Sunday, in order",
+       "items": [
+        "Hacer la previa with friends",
+        "Walk to the cancha singing",
+        "Suffer for ninety minutes",
+        "Celebrate a golazo",
+        "Analyze every play at the bar"
+       ]
+      },
+      {
+       "type": "choice",
+       "scenario": "Your team lost 4–0. Your Argentine friend's phone keeps buzzing with memes from rival fans.",
+       "prompt": "What's the local tradition here?",
+       "options": [
+        "Mute everyone and disappear until Monday",
+        "Take the gastada, then return it when your team wins",
+        "Report them to the police"
+       ],
+       "correct": 1,
+       "explain": "A **gastada** is the teasing after a loss. You take it, you keep a list, and you pay it back with interest."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "golazo",
+       "en": "amazing goal"
+      },
+      {
+       "es": "gambeta",
+       "en": "dribble"
+      },
+      {
+       "es": "caño",
+       "en": "nutmeg (ball between the legs)"
+      },
+      {
+       "es": "picado",
+       "en": "casual pickup game",
+       "example": {
+        "es": "¿Armamos un picado?",
+        "en": "Shall we get a game together?"
+       }
+      },
+      {
+       "es": "potrero",
+       "en": "dirt lot where kids play football"
+      },
+      {
+       "es": "DT",
+       "en": "coach (director técnico)"
+      },
+      {
+       "es": "hacer la previa",
+       "en": "to hang out before an event",
+       "example": {
+        "es": "Hacemos la previa en lo de Juan.",
+        "en": "We're meeting at Juan's place first."
+       }
+      },
+      {
+       "es": "gastada",
+       "en": "teasing (after a loss)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "alfajores",
+   "title": "Alfajores y dulces",
+   "emoji": "🍪",
+   "summary": "Dulce de leche, kioscos and the snack that runs on sugar",
+   "classes": [
+    {
+     "slug": "que-es-un-alfajor",
+     "title": "What is an alfajor?",
+     "summary": "Two cookies, dulce de leche in the middle, and a thousand years of history",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The national snack",
+       "emoji": "🍪",
+       "body": "An **alfajor** is two soft cookies (**tapas**, literally 'lids') glued together with **dulce de leche**, usually dipped in chocolate. That's it. That's the whole religion. We eat them at the office, on the bus, after football, at 2am. If an Argentine offers you half their alfajor, that's basically friendship.",
+       "fun_fact": "Industry estimates say Argentines eat around six million alfajores a day. Nobody has counted properly — we were busy eating."
+      },
+      {
+       "type": "info",
+       "title": "Not born here, though",
+       "emoji": "🕌",
+       "body": "Plot twist: the alfajor isn't Argentine by birth. The word comes from Andalusian Arabic — most sources trace it to **al-hasú**, 'the filling'. In Muslim Spain (al-Ándalus) it was a honey, almond and spice sweet. It's still made in Andalucía today. The Spanish brought the name to the Americas, and here it turned into cookies plus dulce de leche.",
+       "fun_fact": "The exact Arabic root is debated — some say al-fasur, some al-hasú. Everyone agrees it's Arabic."
+      },
+      {
+       "type": "true_false",
+       "statement": "The alfajor was invented in Buenos Aires.",
+       "answer": false,
+       "explain": "The name and the idea come from al-Ándalus, Muslim Spain. Argentina just made it its own — and, humbly, perfected it."
+      },
+      {
+       "type": "info",
+       "title": "The family tree",
+       "emoji": "🌳",
+       "body": "Each region has its own. **Alfajor de maicena**: crumbly cornstarch cookies, dulce de leche, edges rolled in **coco rallado** (grated coconut) — the homemade one your abuela makes. **Marplatense**: chocolate-coated, from Mar del Plata, the classic kiosco one. **Santafesino**: crunchy layers with a white sugar glaze. **Cordobés**: soft, glazed, often filled with fruit jam."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the alfajor to what makes it special",
+       "pairs": [
+        [
+         "de maicena",
+         "edges rolled in grated coconut"
+        ],
+        [
+         "santafesino",
+         "crunchy layers, white sugar glaze"
+        ],
+        [
+         "cordobés",
+         "soft and filled with fruit jam"
+        ],
+        [
+         "marplatense",
+         "dipped in chocolate, the kiosco classic"
+        ]
+       ]
+      },
+      {
+       "type": "info",
+       "title": "More is more",
+       "emoji": "🏗️",
+       "body": "Then there's the **triple**: three tapas, two layers of dulce de leche. More alfajor per alfajor. And the **alfajor de fruta**, filled with **membrillo** (quince paste) or other jams instead of dulce de leche — the cordobés tradition. The **simple** is the regular two-tapa one. When you ask for one at a kiosco, you'll hear: '¿Simple o triple?'"
+      },
+      {
+       "type": "choice",
+       "scenario": "You had a long day, skipped lunch, and you're at a kiosco with exactly enough coins for one alfajor.",
+       "prompt": "What do you ask for?",
+       "options": [
+        "Un alfajor simple",
+        "Un alfajor triple",
+        "Un alfajor sin tapas"
+       ],
+       "correct": 1,
+       "explain": "Triple. Three tapas, double dulce de leche. It's lunch now. Nobody will judge you."
+      },
+      {
+       "type": "gap",
+       "prompt": "Your abuela's homemade alfajores have coconut on the sides. What are they?",
+       "text": "Alfajores de ___",
+       "options": [
+        "maicena",
+        "fruta",
+        "Córdoba"
+       ],
+       "correct": 0,
+       "translation": "Cornstarch alfajores",
+       "explain": "**Maicena** is cornstarch. The cookies crumble in your hand and the coconut ends up everywhere. Worth it."
+      },
+      {
+       "type": "order",
+       "prompt": "Build an alfajor de maicena",
+       "items": [
+        "Bake two cornstarch tapas",
+        "Spread dulce de leche on one",
+        "Put the other tapa on top",
+        "Roll the edges in grated coconut"
+       ],
+       "explain": "Four steps. Abuela does it in two seconds and without a recipe."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "alfajor",
+       "en": "two cookies sandwiched with filling",
+       "example": {
+        "es": "¿Me das un alfajor?",
+        "en": "Can I have an alfajor?"
+       }
+      },
+      {
+       "es": "tapa",
+       "en": "each cookie of an alfajor (lit. 'lid')"
+      },
+      {
+       "es": "maicena",
+       "en": "cornstarch",
+       "example": {
+        "es": "Mi abuela hace alfajores de maicena.",
+        "en": "My grandma makes cornstarch alfajores."
+       }
+      },
+      {
+       "es": "coco rallado",
+       "en": "grated coconut"
+      },
+      {
+       "es": "triple",
+       "en": "alfajor with three cookies",
+       "example": {
+        "es": "Dame un triple, por favor.",
+        "en": "Give me a triple, please."
+       }
+      },
+      {
+       "es": "membrillo",
+       "en": "quince paste"
+      },
+      {
+       "es": "relleno",
+       "en": "filling"
+      }
+     ]
+    },
+    {
+     "slug": "marcas-y-kioscos",
+     "title": "Brands, kioscos and the eternal debate",
+     "summary": "Havanna or Jorgito? Pick a side at the kiosco on the corner",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The kiosco",
+       "emoji": "🏪",
+       "body": "Every block has one. A **kiosco** is a tiny shop — sometimes just a window — selling candy, drinks, cigarettes, phone credit and, above all, alfajores. Many stay open late; some never close (look for the **24 hs** sign). The bigger ones are **maxikioscos**. The person behind the counter is the **kiosquero**, and they know your order.",
+       "fun_fact": "The **ventanita** kiosco is literally a window in someone's house. Knock, ask, pay, done."
+      },
+      {
+       "type": "choice",
+       "scenario": "It's 1am, you're walking home from a party and you desperately want something sweet.",
+       "prompt": "Where do you go?",
+       "options": [
+        "Wait until the supermarket opens",
+        "The kiosco on the corner",
+        "A bakery"
+       ],
+       "correct": 1,
+       "explain": "The kiosco. Late hours are its whole personality. Look for the light on and the '24 hs' sign."
+      },
+      {
+       "type": "info",
+       "title": "The heavyweights",
+       "emoji": "🥊",
+       "body": "**Havanna**: born in Mar del Plata in 1947, the fancy one you bring as a gift. **Jorgito** (1960): the working-class hero. **Guaymallén** (1945): cheap, humble, legendary — 'el alfajor de la familia'. **Fantoche**: famous for its triple. Then there's **Capitán del Espacio**, a cult classic; **Cachafaz**, premium and named after a tango dancer; and the big-company ones, **Terrabusi** and **Milka**."
+      },
+      {
+       "type": "true_false",
+       "statement": "Havanna is from Mar del Plata, the beach city.",
+       "answer": true,
+       "explain": "Founded in 1947 in Mar del Plata. Coming back from the coast without a box of Havanna is borderline illegal."
+      },
+      {
+       "type": "choice",
+       "scenario": "You're visiting your Argentine partner's family for the first time and you pass through Mar del Plata on the way.",
+       "prompt": "What do you bring?",
+       "options": [
+        "A box of Havanna",
+        "One Guaymallén, split six ways",
+        "Nothing, they have food"
+       ],
+       "correct": 0,
+       "explain": "A box of Havanna is the classic regalo. Guaymallén is beloved, but it's a coins-in-your-pocket snack, not a meet-the-parents gift."
+      },
+      {
+       "type": "info",
+       "title": "The debate that never ends",
+       "emoji": "🔥",
+       "body": "Ask a table of Argentines 'which is the best alfajor?' and clear your afternoon. Some swear by Havanna. Others say Havanna is overpriced and the real deal is a Jorgito or a **Guaymallén blanco** (the white sugar-glazed one). There is no right answer. Well — there is, it's yours, and everyone else is wrong.",
+       "fun_fact": "For about two decades, Jorgito and Fantoche kept an unwritten pact: Jorgito ruled Buenos Aires, Fantoche the rest of the country. So the story goes, at least."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the brand to its reputation",
+       "pairs": [
+        [
+         "Havanna",
+         "the fancy gift from Mar del Plata"
+        ],
+        [
+         "Guaymallén",
+         "cheap, humble, 'de la familia'"
+        ],
+        [
+         "Fantoche",
+         "famous for the triple"
+        ],
+        [
+         "Cachafaz",
+         "premium, named after a tango dancer"
+        ]
+       ]
+      },
+      {
+       "type": "info",
+       "title": "The World Cup of alfajores",
+       "emoji": "🏆",
+       "body": "Yes, it exists. The **Campeonato Mundial del Alfajor** started in Buenos Aires in 2022. Hundreds of alfajores, a blind tasting, a serious jury of pastry chefs. Most winners are small artisan makers, not the big brands. In 2026 the top prize went to El Rodeo, from Catamarca: fig filling, walnuts and a glaze with coconut.",
+       "fun_fact": "Argentina hosting a 'world' championship for its own snack and winning it every year is peak Argentina."
+      },
+      {
+       "type": "gap",
+       "prompt": "At the kiosco, you want two alfajores. Ask for them.",
+       "text": "¿Me ___ dos alfajores?",
+       "options": [
+        "das",
+        "dais",
+        "da"
+       ],
+       "correct": 0,
+       "translation": "Can you give me two alfajores?",
+       "explain": "**¿Me das…?** with **vos** is the natural, friendly way. 'Dais' is from Spain — not here, ever."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "kiosco",
+       "en": "corner shop for candy, drinks and snacks",
+       "example": {
+        "es": "Voy al kiosco, ¿querés algo?",
+        "en": "I'm going to the kiosco, want anything?"
+       }
+      },
+      {
+       "es": "kiosquero",
+       "en": "person who runs the kiosco"
+      },
+      {
+       "es": "maxikiosco",
+       "en": "big kiosco"
+      },
+      {
+       "es": "24 hs",
+       "en": "open 24 hours",
+       "note": "Read 'veinticuatro horas'."
+      },
+      {
+       "es": "alfajor blanco",
+       "en": "alfajor with a white sugar glaze"
+      },
+      {
+       "es": "regalo",
+       "en": "gift",
+       "example": {
+        "es": "Te traje Havanna de regalo.",
+        "en": "I brought you Havanna as a gift."
+       }
+      },
+      {
+       "es": "¿Me das…?",
+       "en": "Can I have…? / Can you give me…?",
+       "example": {
+        "es": "¿Me das un Jorgito?",
+        "en": "Can I have a Jorgito?"
+       }
+      }
+     ]
+    },
+    {
+     "slug": "dulce-de-leche",
+     "title": "Dulce de leche and friends",
+     "summary": "The spread on everything, and the sweets it hangs out with",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The brown gold",
+       "emoji": "🍯",
+       "body": "**Dulce de leche** is milk and sugar cooked slowly for hours until it turns thick, brown and caramel-y. We put it on toast, in cakes, in alfajores, on a spoon straight from the jar at midnight. It's not 'caramel'. Don't call it caramel. An Argentine will correct you, gently, for twenty minutes."
+      },
+      {
+       "type": "info",
+       "title": "The legend",
+       "emoji": "📜",
+       "body": "The story goes like this: 1829, the ranch La Caledonia in Cañuelas. Rosas and his enemy Lavalle meet to sign a truce. A maid is heating milk with sugar for Rosas's mate, gets distracted by the drama, forgets the pot — and finds it turned into dulce de leche. Cute story. Almost certainly a legend: Uruguay, Chile, France and others claim it too."
+      },
+      {
+       "type": "true_false",
+       "statement": "Historians agree dulce de leche was invented in Argentina in 1829.",
+       "answer": false,
+       "explain": "The Cañuelas story is a legend. Similar milk sweets existed elsewhere, and Uruguay in particular will fight you on this. Just enjoy it."
+      },
+      {
+       "type": "info",
+       "title": "Clásico vs repostero",
+       "emoji": "🥄",
+       "body": "At the supermarket you'll see two kinds. **Clásico** (or **familiar**) is soft and spreadable — for toast and the spoon. **Repostero** is thicker and firmer, made for baking: it holds its shape inside alfajores and cakes without dripping everywhere. **Repostería** means pastry-making, hence the name."
+      },
+      {
+       "type": "choice",
+       "scenario": "You're making alfajores and the filling keeps oozing out the sides.",
+       "prompt": "What did you buy wrong?",
+       "options": [
+        "You used clásico — you needed repostero",
+        "You used repostero — you needed clásico",
+        "Too much coconut"
+       ],
+       "correct": 0,
+       "explain": "Repostero is firmer and stays put. Clásico is for the tostada and the spoon."
+      },
+      {
+       "type": "info",
+       "title": "The supporting cast",
+       "emoji": "🎂",
+       "body": "**Chocotorta**: Chocolinas cookies dipped in milk, layered with dulce de leche mixed with cream cheese. No oven, every birthday. **Pastafrola**: a tart with a lattice top, filled with membrillo or **batata** (sweet potato) jam. **Mantecol**: a peanut nougat bar people get weirdly emotional about. **Bon o Bon**: a little chocolate bonbon with peanut cream, a kiosco staple."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the sweet to what it is",
+       "pairs": [
+        [
+         "chocotorta",
+         "no-bake cake of chocolate cookies"
+        ],
+        [
+         "pastafrola",
+         "lattice tart with quince or sweet potato jam"
+        ],
+        [
+         "Mantecol",
+         "peanut nougat bar"
+        ],
+        [
+         "Bon o Bon",
+         "chocolate bonbon with peanut cream"
+        ]
+       ]
+      },
+      {
+       "type": "order",
+       "prompt": "Make a chocotorta",
+       "items": [
+        "Mix dulce de leche with cream cheese",
+        "Dip Chocolinas cookies in milk",
+        "Layer cookies and cream, again and again",
+        "Put it in the fridge for a few hours"
+       ],
+       "explain": "No oven needed. That's why every Argentine kid's birthday has one."
+      },
+      {
+       "type": "gap",
+       "prompt": "Your friend asks what you want on your toast.",
+       "text": "Con dulce de ___, obvio.",
+       "options": [
+        "leche",
+        "azúcar",
+        "caramelo"
+       ],
+       "correct": 0,
+       "translation": "With dulce de leche, obviously.",
+       "explain": "**Obvio** is how we say 'obviously' — and for the toast, it's obvio."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "dulce de leche",
+       "en": "milk caramel spread",
+       "example": {
+        "es": "Le pongo dulce de leche a todo.",
+        "en": "I put dulce de leche on everything."
+       }
+      },
+      {
+       "es": "repostero",
+       "en": "firm, for baking (dulce de leche)"
+      },
+      {
+       "es": "clásico",
+       "en": "soft and spreadable (dulce de leche)"
+      },
+      {
+       "es": "tostada",
+       "en": "slice of toast"
+      },
+      {
+       "es": "chocotorta",
+       "en": "no-bake chocolate cookie and dulce de leche cake"
+      },
+      {
+       "es": "pastafrola",
+       "en": "lattice jam tart"
+      },
+      {
+       "es": "batata",
+       "en": "sweet potato"
+      },
+      {
+       "es": "obvio",
+       "en": "obviously"
+      }
+     ]
+    },
+    {
+     "slug": "facturas",
+     "title": "Facturas: anarchy at the bakery",
+     "summary": "Medialunas, bolas de fraile and the rebel bakers who named them",
+     "pages": [
+      {
+       "type": "info",
+       "title": "What are facturas?",
+       "emoji": "🥐",
+       "body": "**Facturas** are the pastries you buy at the **panadería** (bakery), usually by the **docena** (dozen) in a paper bag. They're the official partner of mate. Afternoon at a friend's place? Someone shows up with a dozen facturas. It's the law. (Yes, 'factura' also means invoice. Context helps.)"
+      },
+      {
+       "type": "choice",
+       "scenario": "Your friend texts: 'Venite a tomar mate a las 5.'",
+       "prompt": "What do you bring?",
+       "options": [
+        "A bottle of wine",
+        "A dozen facturas",
+        "Nothing, just vibes"
+       ],
+       "correct": 1,
+       "explain": "Facturas. Mate at 5pm plus a dozen facturas is the most Argentine afternoon there is. Wine is for the asado."
+      },
+      {
+       "type": "info",
+       "title": "Manteca or grasa?",
+       "emoji": "🥐",
+       "body": "The queen is the **medialuna** ('half-moon', a small croissant). Two kinds: **de manteca** (butter) — sweeter, glazed, curved; and **de grasa** (beef fat) — drier, a little salty, usually straight. You order them by name: 'media docena de manteca'. Debating which is better is another national sport."
+      },
+      {
+       "type": "true_false",
+       "statement": "A medialuna de grasa is the sweet, glazed one made with butter.",
+       "answer": false,
+       "explain": "That's the **de manteca**. **Grasa** means fat — beef fat — and those are saltier and less sweet."
+      },
+      {
+       "type": "info",
+       "title": "Rebel bakers",
+       "emoji": "✊",
+       "body": "In 1887 Buenos Aires bakers, many of them Italian and Spanish anarchists, founded their first union. The story goes that they named pastries to mock the powers of the day: the **vigilante** (police) is long like a cop's baton; **bolas de fraile** ('friar's balls') and **suspiros de monja** ('nun's sighs') poke the Church; **cañoncitos** ('little cannons') and **bombas** the army.",
+       "fun_fact": "Historians debate how much of this is documented, but it's the story every baker will tell you."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the factura to who it teases",
+       "pairs": [
+        [
+         "vigilante",
+         "the police"
+        ],
+        [
+         "bola de fraile",
+         "the Church (friars)"
+        ],
+        [
+         "cañoncito",
+         "the army"
+        ],
+        [
+         "suspiro de monja",
+         "the Church (nuns)"
+        ]
+       ]
+      },
+      {
+       "type": "info",
+       "title": "Order like a local",
+       "emoji": "🛍️",
+       "body": "At the panadería you ask for a mix: 'Una docena surtida' — a dozen assorted. Or you pick: 'Seis medialunas y seis facturas'. **Bolas de fraile** are fried dough balls filled with dulce de leche or pastry cream. **Cañoncitos** are puff pastry tubes filled with dulce de leche. Fight for the last one."
+      },
+      {
+       "type": "gap",
+       "prompt": "You want twelve mixed facturas. Ask the baker.",
+       "text": "Una docena ___, por favor.",
+       "options": [
+        "surtida",
+        "de grasa",
+        "de fraile"
+       ],
+       "correct": 0,
+       "translation": "An assorted dozen, please.",
+       "explain": "**Surtida** = assorted. The baker picks a bit of everything, and you look like you've lived here for years."
+      },
+      {
+       "type": "order",
+       "prompt": "The perfect afternoon, in order",
+       "items": [
+        "Stop at the panadería",
+        "Buy a docena surtida",
+        "Arrive at your friend's place",
+        "Someone starts cebando mate",
+        "Everyone fights over the last cañoncito"
+       ]
+      },
+      {
+       "type": "choice",
+       "scenario": "At the table, only one factura is left. Your friend says 'dale, comela vos'.",
+       "prompt": "What's going on?",
+       "options": [
+        "They're offering you the last one",
+        "They're telling you to leave",
+        "They want you to pay"
+       ],
+       "correct": 0,
+       "explain": "**Dale, comela vos** = 'Go on, you eat it.' The last factura is a sacred and delicate thing. Accept gracefully."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "facturas",
+       "en": "sweet pastries from the bakery",
+       "example": {
+        "es": "Llevo facturas para el mate.",
+        "en": "I'll bring pastries for the mate."
+       }
+      },
+      {
+       "es": "panadería",
+       "en": "bakery"
+      },
+      {
+       "es": "docena",
+       "en": "dozen",
+       "example": {
+        "es": "Una docena surtida, por favor.",
+        "en": "An assorted dozen, please."
+       }
+      },
+      {
+       "es": "medialuna",
+       "en": "small croissant"
+      },
+      {
+       "es": "de manteca",
+       "en": "made with butter (sweet)"
+      },
+      {
+       "es": "de grasa",
+       "en": "made with beef fat (salty)"
+      },
+      {
+       "es": "vigilante",
+       "en": "long pastry (lit. 'cop')"
+      },
+      {
+       "es": "bola de fraile",
+       "en": "filled fried dough ball (lit. 'friar's ball')"
+      },
+      {
+       "es": "surtido",
+       "en": "assorted"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "puteadas",
+   "title": "Puteadas",
+   "emoji": "🤬",
+   "summary": "Argentine swearing: what it means, and when to keep your mouth shut",
+   "classes": [
+    {
+     "slug": "boludo",
+     "title": "Boludo, the word that does everything",
+     "summary": "Greeting, insult, punctuation: one word, many jobs",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Welcome to the puteadas",
+       "emoji": "🧉",
+       "body": "Grab a mate. In Argentina a **puteada** is a swear or an insult, and **putear** is to swear at someone (or at the universe). Argentines swear a lot, and often with love. This section teaches you to *understand* them, and, more importantly, when *not* to use them.",
+       "fun_fact": "You'll hear more swearing in a Buenos Aires café than in most bars back home."
+      },
+      {
+       "type": "info",
+       "title": "Boludo",
+       "emoji": "🤷",
+       "body": "**Boludo** (**boluda** for a woman) literally means 'big-balled', i.e. an idiot. But between friends it softened into 'dude' or 'mate'. **¿Qué hacés, boludo?** is just 'What's up, man?'. Same word, said slowly with a stare, is still an insult: 'you idiot'. Tone and relationship decide everything.",
+       "fun_fact": "Some porteños use it so often it's basically a comma: 'Fui al súper, boludo, y no había nada, boludo.'"
+      },
+      {
+       "type": "choice",
+       "scenario": "Your friend Nico sees you at the bar, grins and shouts: '¡Boludo! ¿Qué hacés acá?'",
+       "prompt": "Is Nico insulting you?",
+       "options": [
+        "Yes, that was rude",
+        "No, he's happy to see you",
+        "He's calling a waiter"
+       ],
+       "correct": 1,
+       "explain": "Warm tone plus a friend = **boludo** means 'dude'. He's just surprised to see you there."
+      },
+      {
+       "type": "choice",
+       "scenario": "Your brand-new boss, on your first day, says: 'Che, boludo, pasame eso.'",
+       "prompt": "What's going on?",
+       "options": [
+        "He's insulting you, quit now",
+        "He's being overly casual: odd, but probably not an insult",
+        "It's the formal way to talk at work"
+       ],
+       "correct": 1,
+       "explain": "Probably not an insult: some people use **boludo** with anyone. But it's very casual for a boss, and it's never the 'formal' option. Don't say it back until you know him well."
+      },
+      {
+       "type": "info",
+       "title": "Pelotudo: the upgrade",
+       "emoji": "⚽",
+       "body": "**Pelotudo** comes from **pelotas** (balls, again) and means 'idiot' too, but stronger. It's rarely affectionate. **¡Qué pelotudo!** = 'What an idiot!'. A silly or trivial thing is a **boludez** or **pelotudez**: 'Es una boludez' = 'It's nothing / it's a dumb little thing'."
+      },
+      {
+       "type": "true_false",
+       "statement": "Pelotudo is the friendly, softer version of boludo.",
+       "answer": false,
+       "explain": "It's the other way around. **Boludo** can be friendly; **pelotudo** almost always stings."
+      },
+      {
+       "type": "gap",
+       "prompt": "Your friend apologizes for spilling a bit of mate. How do you say 'Don't worry, it's nothing'?",
+       "text": "Tranqui, es una ___.",
+       "options": [
+        "boludez",
+        "boluda",
+        "pelotudo"
+       ],
+       "correct": 0,
+       "translation": "Relax, it's nothing.",
+       "explain": "**Boludez** = a trivial thing. Friendly and harmless."
+      },
+      {
+       "type": "choice",
+       "scenario": "A stranger bumps into you on the subte and you say '¡Boludo!' with a frown.",
+       "prompt": "How will he hear it?",
+       "options": [
+        "As 'hey, buddy!'",
+        "As 'you idiot!'",
+        "He won't understand"
+       ],
+       "correct": 1,
+       "explain": "No friendship, angry tone: it's an insult. The word didn't change; the context did."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "boludo",
+       "en": "dude (with friends) / idiot (in anger)",
+       "example": {
+        "es": "¿Qué hacés, boludo?",
+        "en": "What's up, dude?"
+       }
+      },
+      {
+       "es": "boluda",
+       "en": "the feminine of boludo",
+       "example": {
+        "es": "¡Boluda, no sabés lo que pasó!",
+        "en": "Girl, you won't believe what happened!"
+       }
+      },
+      {
+       "es": "pelotudo",
+       "en": "idiot (stronger, rarely friendly)",
+       "example": {
+        "es": "¡Qué pelotudo!",
+        "en": "What an idiot!"
+       }
+      },
+      {
+       "es": "boludez",
+       "en": "trivial thing, silly thing",
+       "example": {
+        "es": "Es una boludez.",
+        "en": "It's nothing."
+       }
+      },
+      {
+       "es": "puteada",
+       "en": "swear word, insult"
+      },
+      {
+       "es": "putear",
+       "en": "to swear (at someone)",
+       "example": {
+        "es": "Me puteó en la calle.",
+        "en": "He swore at me in the street."
+       }
+      }
+     ]
+    },
+    {
+     "slug": "gil-forro-chanta",
+     "title": "Gil, forro, chanta: the cast of characters",
+     "summary": "The people Argentines love to complain about",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The gil",
+       "emoji": "🐑",
+       "body": "A **gil** is a sucker: naive, easy to fool. It's an old lunfardo word from tango days, when the **gil** was the one who got scammed and the **vivo** was the sharp guy. **No seas gil** = 'Don't be a sucker'. Rude, but mild.",
+       "fun_fact": "Tango lyrics are full of giles who got their heart broken."
+      },
+      {
+       "type": "info",
+       "title": "The chanta",
+       "emoji": "🎩",
+       "body": "A **chanta** is a bullshitter: someone who brags, promises and never delivers. The plumber who says 'mañana vengo' for three weeks? **Chanta**. The guy who claims he played in the Primera? **Chanta**. It comes from **chantapufi**, an Italian-dialect word for someone who doesn't pay his debts."
+      },
+      {
+       "type": "info",
+       "title": "The forro",
+       "emoji": "🐍",
+       "body": "**Forro** literally means 'lining' and is also slang for condom. Called at a person, it means a jerk: someone mean, disloyal or selfish. **Sos un forro** = 'You're such a jerk'. It hurts more than **boludo** because it's about character, not brains."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the character to who they are",
+       "pairs": [
+        [
+         "gil",
+         "a naive sucker"
+        ],
+        [
+         "chanta",
+         "a bragging bullshitter"
+        ],
+        [
+         "forro",
+         "a mean, disloyal jerk"
+        ],
+        [
+         "boludo",
+         "an idiot (or your buddy)"
+        ]
+       ]
+      },
+      {
+       "type": "choice",
+       "scenario": "A taxi driver charges you triple because you're a tourist, and you paid.",
+       "prompt": "What would your Argentine friend call you, lovingly?",
+       "options": [
+        "Chanta",
+        "Gil",
+        "Forro"
+       ],
+       "correct": 1,
+       "explain": "You got fooled, so you're the **gil**. The taxi driver is the **chanta** (or the **forro**)."
+      },
+      {
+       "type": "info",
+       "title": "The pests",
+       "emoji": "🦟",
+       "body": "Someone who won't stop bugging you is a **hinchapelotas** or **rompebolas**: literally 'ball-swelling' and 'ball-breaking'. Pain in the neck. **Pajero** literally means 'wanker'; among friends it often means lazy or spaced out: **No seas pajero, ayudame** = 'Don't be lazy, help me'. Crude, so keep it among friends."
+      },
+      {
+       "type": "true_false",
+       "statement": "Calling your friend a 'hinchapelotas' because he texts you 40 times a day is a fair use of the word.",
+       "answer": true,
+       "explain": "Exactly the right use. Between friends it's a jokey complaint, not a war."
+      },
+      {
+       "type": "gap",
+       "prompt": "Your roommate is on the couch while you carry all the groceries.",
+       "text": "¡No seas ___, ayudame!",
+       "options": [
+        "pajero",
+        "chanta",
+        "gil"
+       ],
+       "correct": 0,
+       "translation": "Don't be lazy, help me!",
+       "explain": "**Pajero** here = lazy. A **chanta** lies, a **gil** gets fooled."
+      },
+      {
+       "type": "choice",
+       "scenario": "Your friend promised to help you move, didn't show up, and posted beach pics that same day.",
+       "prompt": "Which word fits him best?",
+       "options": [
+        "Forro",
+        "Gil",
+        "Boludez"
+       ],
+       "correct": 0,
+       "explain": "Disloyal and selfish: that's a **forro**. A **boludez** is a trivial thing, not a person."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "gil",
+       "en": "sucker, naive fool",
+       "example": {
+        "es": "No seas gil.",
+        "en": "Don't be a sucker."
+       }
+      },
+      {
+       "es": "chanta",
+       "en": "bullshitter, all talk",
+       "example": {
+        "es": "Ese plomero es un chanta.",
+        "en": "That plumber is all talk."
+       }
+      },
+      {
+       "es": "forro",
+       "en": "jerk (literally 'lining', also 'condom')",
+       "example": {
+        "es": "Sos un forro.",
+        "en": "You're such a jerk."
+       }
+      },
+      {
+       "es": "hinchapelotas",
+       "en": "pain in the neck, pest"
+      },
+      {
+       "es": "rompebolas",
+       "en": "pain in the neck, pest",
+       "example": {
+        "es": "¡Qué rompebolas que sos!",
+        "en": "You're such a pain!"
+       }
+      },
+      {
+       "es": "pajero",
+       "en": "wanker; among friends, lazy or spaced out",
+       "example": {
+        "es": "No seas pajero, ayudame.",
+        "en": "Don't be lazy, help me."
+       }
+      },
+      {
+       "es": "vivo",
+       "en": "sharp, street-smart (the opposite of a gil)"
+      }
+     ]
+    },
+    {
+     "slug": "la-puta-madre",
+     "title": "La puta madre: pure frustration",
+     "summary": "The exclamations for when everything goes wrong",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Swearing at the universe",
+       "emoji": "🌪️",
+       "body": "Stub your toe, miss the bus, see the inflation numbers: **¡La puta madre!** Nobody's mother is involved; it's just 'Damn it!'. It goes up in levels: **la puta que lo parió** ('the whore who gave birth to it') and the maximum, **la re puta que lo parió**. The **re** means 'really, super'.",
+       "fun_fact": "People shorten it to just 'La puta…' with a long, tired sigh."
+      },
+      {
+       "type": "info",
+       "title": "The heavy one",
+       "emoji": "💣",
+       "body": "**¡La concha de tu madre!** is very vulgar (**concha** is vulgar slang for female genitals). Shouted at nobody, after dropping your phone in the toilet, it's frustration. Aimed at a person, it's a serious insult. Fun variant: **la concha de la lora** ('the parrot's...'), pure frustration, no target."
+      },
+      {
+       "type": "order",
+       "prompt": "Order these from mildest to strongest",
+       "items": [
+        "¡Pucha!",
+        "¡La puta madre!",
+        "¡La re puta que lo parió!",
+        "¡La concha de tu madre! (at someone)"
+       ],
+       "explain": "The euphemism is softest, and aiming a vulgar phrase *at a person* is the strongest of all."
+      },
+      {
+       "type": "info",
+       "title": "Dismissals",
+       "emoji": "🙄",
+       "body": "**¡Andá a cagar!** literally 'go take a shit', means 'get lost'. But between friends it's often disbelief: 'No way!' or 'Shut up!'. And **me chupa un huevo** ('it sucks me an egg', with egg = testicle) means 'I don't give a damn'. The deluxe version: **me chupa un huevo y la mitad del otro**."
+      },
+      {
+       "type": "choice",
+       "scenario": "You tell your friend you met Messi at the airport. She laughs and says: '¡Andá a cagar!'",
+       "prompt": "What does she mean?",
+       "options": [
+        "Get lost, I hate you",
+        "No way, you're kidding!",
+        "Go to the bathroom"
+       ],
+       "correct": 1,
+       "explain": "Laughing + amazing news = disbelief. Same words, said cold, would mean 'get lost'."
+      },
+      {
+       "type": "gap",
+       "prompt": "Your coworker asks if you care who wins the reality show. You really don't.",
+       "text": "Me chupa un ___.",
+       "options": [
+        "huevo",
+        "mate",
+        "pelotudo"
+       ],
+       "correct": 0,
+       "translation": "I don't give a damn.",
+       "explain": "**Me chupa un huevo** = I couldn't care less. Crude, so coworkers only if you're close."
+      },
+      {
+       "type": "info",
+       "title": "The family-friendly versions",
+       "emoji": "😇",
+       "body": "Around kids or grandparents? Swap in a euphemism. **¡Miércoles!** ('Wednesday!') stands in for **mierda** (shit). **¡Pucha!** or **¡La pucha!** replaces **la puta**. **Me importa un comino** ('I don't care a cumin seed') replaces the egg one. Same frustration, no scandal."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the polite version to the one it's hiding",
+       "pairs": [
+        [
+         "miércoles",
+         "mierda"
+        ],
+        [
+         "la pucha",
+         "la puta"
+        ],
+        [
+         "me importa un comino",
+         "me chupa un huevo"
+        ]
+       ],
+       "explain": "Euphemisms sound like the real thing, so everyone knows what you meant, but nobody's offended."
+      },
+      {
+       "type": "true_false",
+       "statement": "When someone shouts '¡La puta madre!' after missing the bus, they're insulting someone's mother.",
+       "answer": false,
+       "explain": "It's an exclamation, like 'Damn it!'. No mothers were harmed."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "la puta madre",
+       "en": "damn it! (vulgar)",
+       "example": {
+        "es": "¡La puta madre, perdí el colectivo!",
+        "en": "Damn it, I missed the bus!"
+       }
+      },
+      {
+       "es": "la re puta que lo parió",
+       "en": "god-fucking-dammit (maximum frustration)"
+      },
+      {
+       "es": "la concha de tu madre",
+       "en": "very vulgar: frustration, or a serious insult at someone",
+       "note": "Never aim it at a person unless you want a fight."
+      },
+      {
+       "es": "andá a cagar",
+       "en": "get lost / no way! (among friends)",
+       "example": {
+        "es": "¿Conociste a Messi? ¡Andá a cagar!",
+        "en": "You met Messi? No way!"
+       }
+      },
+      {
+       "es": "me chupa un huevo",
+       "en": "I don't give a damn (crude)"
+      },
+      {
+       "es": "miércoles",
+       "en": "shoot! (polite stand-in for 'mierda'; literally Wednesday)"
+      },
+      {
+       "es": "la pucha",
+       "en": "darn it! (polite stand-in for 'la puta')",
+       "example": {
+        "es": "¡La pucha, se me cayó!",
+        "en": "Darn, I dropped it!"
+       }
+      },
+      {
+       "es": "me importa un comino",
+       "en": "I couldn't care less (polite)"
+      }
+     ]
+    },
+    {
+     "slug": "leer-el-contexto",
+     "title": "Reading the room",
+     "summary": "The stadium, the traffic, and your girlfriend's grandma",
+     "pages": [
+      {
+       "type": "info",
+       "title": "At the cancha",
+       "emoji": "🏟️",
+       "body": "The football stadium (**la cancha**) is where swearing becomes a sport. The referee (**el referí**) gets **¡Cobrá, la concha de tu madre!** ('Make the call!'), and a slow striker hears **¡Dale, pelotudo!**. Warning: many stadium chants include slurs about gays, other nationalities and so on. We skip those, and so should you.",
+       "fun_fact": "The ref is insulted so often that some fans say it's part of the ticket price."
+      },
+      {
+       "type": "true_false",
+       "statement": "Singing along to every stadium chant is fine, since everyone else is doing it.",
+       "answer": false,
+       "explain": "Lots of chants are homophobic or racist, and there's growing pushback against them. Cheer, swear at the ref, but skip the slurs."
+      },
+      {
+       "type": "info",
+       "title": "Behind the wheel",
+       "emoji": "🚗",
+       "body": "Buenos Aires traffic turns saints into sailors. The light turns green and someone honks: **¡Dale, boludo!** ('Come on, idiot!'). Somebody cuts you off: **¡Aprendé a manejar!** ('Learn to drive!') or **¿Quién te dio el registro?** ('Who gave you a license?'). Usually it's just venting. Hand gestures can escalate things, so keep yours on the wheel."
+      },
+      {
+       "type": "gap",
+       "prompt": "The light turned green five seconds ago and the car in front hasn't moved.",
+       "text": "¡Dale, ___!",
+       "options": [
+        "boludo",
+        "abuela",
+        "comino"
+       ],
+       "correct": 0,
+       "translation": "Come on, idiot!",
+       "explain": "Classic traffic venting. Said to a stranger in a car, **boludo** is an insult, but a very routine one."
+      },
+      {
+       "type": "info",
+       "title": "The abuela test",
+       "emoji": "👵",
+       "body": "Before you swear, ask: would I say this in front of my girlfriend's grandma? With close friends, **boludo**, **la puta madre** and **andá a cagar** are totally normal. With your boss, your in-laws, a cop or a stranger? Go polite: **¡pucha!**, **¡miércoles!** Swearing badly makes you sound rude; swearing well makes you sound local."
+      },
+      {
+       "type": "choice",
+       "scenario": "Sunday lunch with your girlfriend's family. You burn your tongue on the ravioles.",
+       "prompt": "What do you say?",
+       "options": [
+        "¡La re puta que lo parió!",
+        "¡Uy, la pucha!",
+        "¡La concha de la lora!"
+       ],
+       "correct": 1,
+       "explain": "**La pucha** says 'ouch, darn' without making the abuela drop her fork."
+      },
+      {
+       "type": "choice",
+       "scenario": "You're watching the match at a bar with your friends and your team misses a penalty.",
+       "prompt": "Which reaction fits in?",
+       "options": [
+        "¡La puta madre!",
+        "Oh dear, what a pity.",
+        "¡Miércoles, qué lástima!"
+       ],
+       "correct": 0,
+       "explain": "At a bar with friends during football, full swearing is expected. 'Oh dear' would get you strange looks."
+      },
+      {
+       "type": "order",
+       "prompt": "Order from 'swear freely' to 'keep it clean'",
+       "items": [
+        "Your best friends at the cancha",
+        "Your coworkers at an after-office",
+        "Your new boss",
+        "Your girlfriend's grandma"
+       ],
+       "explain": "The closer and more relaxed the relationship, the more puteadas are allowed."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the place to the classic puteada",
+       "pairs": [
+        [
+         "at the stadium",
+         "¡Cobrá, referí!"
+        ],
+        [
+         "in traffic",
+         "¡Aprendé a manejar!"
+        ],
+        [
+         "in front of grandma",
+         "¡La pucha!"
+        ],
+        [
+         "surprising news from a friend",
+         "¡Andá a cagar!"
+        ]
+       ]
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "la cancha",
+       "en": "the football stadium / pitch",
+       "example": {
+        "es": "Vamos a la cancha el domingo.",
+        "en": "We're going to the game on Sunday."
+       }
+      },
+      {
+       "es": "el referí",
+       "en": "the referee"
+      },
+      {
+       "es": "cobrá",
+       "en": "make the call! (shouted at the ref)"
+      },
+      {
+       "es": "¡aprendé a manejar!",
+       "en": "learn to drive!"
+      },
+      {
+       "es": "el registro",
+       "en": "driver's license",
+       "example": {
+        "es": "¿Quién te dio el registro?",
+        "en": "Who gave you a license?"
+       }
+      },
+      {
+       "es": "¡dale!",
+       "en": "come on! / go!",
+       "example": {
+        "es": "¡Dale, que está verde!",
+        "en": "Come on, it's green!"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "historia-nacimiento",
+   "title": "Historia: el nacimiento de un país",
+   "emoji": "🇦🇷",
+   "summary": "From the first peoples to the tango: how Argentina came to be, up to 1930",
+   "classes": [
+    {
+     "slug": "antes-de-buenos-aires",
+     "title": "Before Buenos Aires",
+     "summary": "The first peoples, and a city that had to be founded twice",
+     "pages": [
+      {
+       "type": "info",
+       "title": "They were here first",
+       "emoji": "🌎",
+       "body": "Long before any Spaniard showed up, this land was full of peoples: the **guaraníes** in the humid northeast, the **diaguitas** farming the valleys of the northwest, the **mapuches** in the south by the Andes, the **tehuelches** across Patagonia, and the **querandíes**, hunters of the pampa right where Buenos Aires stands today. Argentines call them **pueblos originarios** (original peoples).",
+       "fun_fact": "Iguazú comes from Guaraní and means roughly 'big water'. Fair enough."
+      },
+      {
+       "type": "match",
+       "prompt": "Match each people to where they lived",
+       "pairs": [
+        [
+         "guaraníes",
+         "the humid northeast, near Iguazú"
+        ],
+        [
+         "diaguitas",
+         "the valleys of the northwest"
+        ],
+        [
+         "querandíes",
+         "the pampa around Buenos Aires"
+        ],
+        [
+         "tehuelches",
+         "the plains of Patagonia"
+        ]
+       ],
+       "explain": "And the mapuches lived on both sides of the Andes, in the south. The map was never empty."
+      },
+      {
+       "type": "info",
+       "title": "Words that stayed",
+       "emoji": "🌽",
+       "body": "You speak native languages every day here without noticing. From **quechua** (the Andean language of the Inca world): **cancha** (field, court), **choclo** (corn on the cob), **palta** (avocado) and even **mate** — the word first meant the gourd. From **guaraní**: **ñandú** (the local ostrich-like bird) and **yaguareté** (jaguar). So when you ask for a **tostado con palta**, say thanks to the Andes."
+      },
+      {
+       "type": "choice",
+       "scenario": "At a parrilla, your friend asks if you want a **choclo** on the grill.",
+       "prompt": "What are they offering you?",
+       "options": [
+        "A corn on the cob",
+        "A blood sausage",
+        "An avocado",
+        "A glass of wine"
+       ],
+       "correct": 0,
+       "explain": "**Choclo** is corn on the cob, a word from quechua. The avocado is **palta** — also quechua, and never 'aguacate' here."
+      },
+      {
+       "type": "info",
+       "title": "Buenos Aires, take one",
+       "emoji": "⛵",
+       "body": "In **1536** the Spaniard **Pedro de Mendoza** founded a settlement on the Río de la Plata and named it after the Virgin of the good winds: **Santa María del Buen Ayre**. It went badly. Hunger, disease and fights with the **querandíes** crushed it, and by **1541** the survivors had abandoned it. Many sailed up the river to Asunción, in today's Paraguay."
+      },
+      {
+       "type": "info",
+       "title": "Take two",
+       "emoji": "🏗️",
+       "body": "In **1580**, **Juan de Garay** came down from Asunción and founded the city again — this time for good. That's why porteños talk about **la primera fundación** and **la segunda fundación**. For two centuries it stayed a small, muddy port, more famous for smuggling than for anything else. The real money was in the silver mines of **Potosí**, far up in today's Bolivia.",
+       "fun_fact": "**Porteño** literally means 'from the port' — that's what people from Buenos Aires are called."
+      },
+      {
+       "type": "order",
+       "prompt": "Put these in order",
+       "items": [
+        "Pueblos originarios live across the land for thousands of years",
+        "Pedro de Mendoza founds Buenos Aires (1536)",
+        "The first Buenos Aires is abandoned (1541)",
+        "Juan de Garay founds it again (1580)"
+       ]
+      },
+      {
+       "type": "true_false",
+       "statement": "Buenos Aires has survived without interruption since its very first founding.",
+       "answer": false,
+       "explain": "The first one (1536) was abandoned in 1541. The city that lasted is Garay's, from 1580."
+      },
+      {
+       "type": "gap",
+       "prompt": "Your friend is from Buenos Aires. How do they describe themselves?",
+       "text": "Soy ___.",
+       "options": [
+        "porteño",
+        "mapuche",
+        "tehuelche"
+       ],
+       "correct": 0,
+       "translation": "I'm from Buenos Aires.",
+       "explain": "**Porteño** — from the port. You'll hear it a hundred times a day."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "pueblos originarios",
+       "en": "indigenous peoples (lit. original peoples)",
+       "example": {
+        "es": "Los pueblos originarios vivían acá mucho antes.",
+        "en": "Indigenous peoples lived here long before."
+       }
+      },
+      {
+       "es": "porteño",
+       "en": "person from Buenos Aires",
+       "example": {
+        "es": "¿Sos porteño?",
+        "en": "Are you from Buenos Aires?"
+       }
+      },
+      {
+       "es": "fundación",
+       "en": "founding"
+      },
+      {
+       "es": "choclo",
+       "en": "corn on the cob"
+      },
+      {
+       "es": "palta",
+       "en": "avocado",
+       "example": {
+        "es": "Un tostado con palta, por favor.",
+        "en": "A toasted sandwich with avocado, please."
+       }
+      },
+      {
+       "es": "cancha",
+       "en": "field, court (sports)"
+      },
+      {
+       "es": "ñandú",
+       "en": "rhea, a large flightless bird"
+      }
+     ]
+    },
+    {
+     "slug": "virreinato-e-invasiones",
+     "title": "A viceroyalty and two British invasions",
+     "summary": "How a sleepy port became a capital, and threw out the British twice",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The Virreinato",
+       "emoji": "👑",
+       "body": "In **1776** the Spanish crown created the **Virreinato del Río de la Plata** (Viceroyalty of the River Plate), with Buenos Aires as its capital. It covered today's Argentina, Uruguay, Paraguay and Bolivia. Overnight the smuggling port became the boss, run by a **virrey** (viceroy) who answered to the king in Spain."
+      },
+      {
+       "type": "choice",
+       "prompt": "Which of these countries was NOT part of the Virreinato del Río de la Plata?",
+       "options": [
+        "Chile",
+        "Uruguay",
+        "Paraguay",
+        "Bolivia"
+       ],
+       "correct": 0,
+       "explain": "Chile was a separate Spanish territory. The Virreinato covered Argentina, Uruguay, Paraguay and Bolivia."
+      },
+      {
+       "type": "info",
+       "title": "The Cabildo",
+       "emoji": "🏛️",
+       "body": "Every Spanish colonial city had a **cabildo**: the town council, and the building where it met. The one in Buenos Aires is still standing on **Plaza de Mayo**, white, with arches and a little tower. You can visit it — it's a museum now. Look closely: it's shorter than it used to be.",
+       "fun_fact": "It lost three arches in 1889 to open Avenida de Mayo, and three more in 1931. From eleven arches to five."
+      },
+      {
+       "type": "info",
+       "title": "The British are coming",
+       "emoji": "🇬🇧",
+       "body": "In **1806** a British force under **William Beresford** took Buenos Aires. The viceroy ran away to Córdoba — not his finest hour. Locals organized under **Santiago de Liniers** and kicked the British out that August: the **Reconquista**. In **1807** the British came back, bigger, with **John Whitelocke**. Porteños fought street by street, and won again: the **Defensa**."
+      },
+      {
+       "type": "info",
+       "title": "Hot water from the rooftops",
+       "emoji": "🔥",
+       "body": "The story every Argentine kid learns: during the Defensa, neighbors threw boiling water and oil from the flat rooftops onto the British soldiers. Some of it is legend polished over time, but the street fighting was very real. And the lesson stuck: porteños had beaten an empire without Spain's help. Why keep obeying a viceroy?"
+      },
+      {
+       "type": "true_false",
+       "statement": "When the British took Buenos Aires in 1806, the viceroy led the defense of the city.",
+       "answer": false,
+       "explain": "Viceroy Sobremonte fled to Córdoba with the treasury. The locals, led by Liniers, did the fighting."
+      },
+      {
+       "type": "choice",
+       "scenario": "Walking downtown, you pass a street called **Reconquista**. Later, in San Telmo, you walk down **Defensa**.",
+       "prompt": "What do those street names remember?",
+       "options": [
+        "The victories against the British invasions",
+        "Two famous tango songs",
+        "Battles against Brazil",
+        "Two football clubs"
+       ],
+       "correct": 0,
+       "explain": "**Reconquista** (1806) and **Defensa** (1807): the two times porteños beat the British. Buenos Aires names its streets after its history."
+      },
+      {
+       "type": "order",
+       "prompt": "Put these in order",
+       "items": [
+        "Juan de Garay founds Buenos Aires",
+        "Spain creates the Virreinato del Río de la Plata",
+        "The British take Buenos Aires and are expelled (Reconquista)",
+        "The British return and lose again (Defensa)"
+       ]
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "virreinato",
+       "en": "viceroyalty"
+      },
+      {
+       "es": "virrey",
+       "en": "viceroy"
+      },
+      {
+       "es": "cabildo",
+       "en": "colonial town council (and its building)",
+       "example": {
+        "es": "Vamos a visitar el Cabildo.",
+        "en": "Let's visit the Cabildo."
+       }
+      },
+      {
+       "es": "invasiones inglesas",
+       "en": "the British invasions (1806–1807)"
+      },
+      {
+       "es": "reconquista",
+       "en": "reconquest, taking back"
+      },
+      {
+       "es": "defensa",
+       "en": "defense"
+      },
+      {
+       "es": "techo",
+       "en": "roof"
+      }
+     ]
+    },
+    {
+     "slug": "mayo-y-julio",
+     "title": "May and July: the big dates",
+     "summary": "The Revolución de Mayo in 1810 and independence in 1816",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Spain in trouble",
+       "emoji": "⚔️",
+       "body": "In 1808 Napoleon invaded Spain and locked up its king. In **May 1810**, news arrived in Buenos Aires that Spain had almost completely fallen. Big question: if there's no king, who's in charge here? On **22 May** the city held a **cabildo abierto** — an open town meeting of leading neighbors — and voted to remove the viceroy."
+      },
+      {
+       "type": "info",
+       "title": "25 de mayo de 1810",
+       "emoji": "🌤️",
+       "body": "On **25 May 1810** a new local government took over: the **Primera Junta** (First Board), led by **Cornelio Saavedra**. It still ruled in the name of the Spanish king, at least on paper, so it wasn't independence yet. But it was the first government chosen here, by people from here. This is the **Revolución de Mayo**, and it's why the main square is called **Plaza de Mayo**.",
+       "fun_fact": "The classic school drawing shows the crowd with umbrellas. Historians say umbrellas were rare back then — it's probably a myth."
+      },
+      {
+       "type": "choice",
+       "scenario": "It's the 25th of May and your friend offers you **locro** (a thick corn-and-meat stew) and **pastelitos** (fried pastries with quince).",
+       "prompt": "What are you celebrating?",
+       "options": [
+        "The Revolución de Mayo, 1810",
+        "Independence Day",
+        "The founding of Buenos Aires",
+        "The end of the British invasions"
+       ],
+       "correct": 0,
+       "explain": "The 25th of May is the Revolución de Mayo. Locro and pastelitos are the patriotic menu — you'll see them again on the 9th of July."
+      },
+      {
+       "type": "info",
+       "title": "9 de julio de 1816",
+       "emoji": "📜",
+       "body": "Six years of war later, delegates from the provinces met in a house in **San Miguel de Tucumán**, in the northwest. On **9 July 1816** the **Congreso de Tucumán** declared independence from Spain and from any foreign power. The country called itself the **Provincias Unidas en Sud América**. The house is now the **Casa Histórica**, a museum."
+      },
+      {
+       "type": "true_false",
+       "statement": "Argentina declared its independence in Buenos Aires, on the 25th of May.",
+       "answer": false,
+       "explain": "Independence was declared in Tucumán, on 9 July 1816. The 25th of May (1810) is the revolution that started the process."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the date to what happened",
+       "pairs": [
+        [
+         "22 de mayo de 1810",
+         "Cabildo abierto votes out the viceroy"
+        ],
+        [
+         "25 de mayo de 1810",
+         "The Primera Junta takes power"
+        ],
+        [
+         "9 de julio de 1816",
+         "Independence declared in Tucumán"
+        ]
+       ]
+      },
+      {
+       "type": "info",
+       "title": "Walk the calendar",
+       "emoji": "🗺️",
+       "body": "Buenos Aires is a history book you can walk. **Avenida de Mayo** runs from the Casa Rosada to the Congress. **Avenida 9 de Julio**, the huge one with the Obelisco, is named after independence day. Both dates are **feriados** (public holidays), and almost every town in the country has a street called 25 de Mayo and another called 9 de Julio."
+      },
+      {
+       "type": "gap",
+       "prompt": "You're in a taxi and want the widest avenue in town. You say:",
+       "text": "Vamos a la avenida ___ de Julio, por favor.",
+       "options": [
+        "9",
+        "25",
+        "20"
+       ],
+       "correct": 0,
+       "translation": "Let's go to 9 de Julio Avenue, please.",
+       "explain": "**9 de Julio**: independence day, and the avenue with the Obelisco."
+      },
+      {
+       "type": "order",
+       "prompt": "Put these in order",
+       "items": [
+        "Napoleon invades Spain",
+        "Cabildo abierto in Buenos Aires",
+        "The Primera Junta takes power",
+        "The Congreso de Tucumán declares independence"
+       ]
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "cabildo abierto",
+       "en": "open town meeting"
+      },
+      {
+       "es": "Primera Junta",
+       "en": "First Board, the first local government (1810)"
+      },
+      {
+       "es": "revolución",
+       "en": "revolution"
+      },
+      {
+       "es": "independencia",
+       "en": "independence",
+       "example": {
+        "es": "El 9 de julio se festeja la independencia.",
+        "en": "Independence is celebrated on the 9th of July."
+       }
+      },
+      {
+       "es": "feriado",
+       "en": "public holiday",
+       "example": {
+        "es": "Mañana es feriado, ¿querés hacer algo?",
+        "en": "Tomorrow is a holiday, do you want to do something?"
+       }
+      },
+      {
+       "es": "locro",
+       "en": "thick stew of corn, beans and meat"
+      },
+      {
+       "es": "pastelitos",
+       "en": "fried pastries filled with quince or sweet potato jam"
+      }
+     ]
+    },
+    {
+     "slug": "san-martin-y-belgrano",
+     "title": "San Martín, Belgrano and the flag",
+     "summary": "The general who crossed the Andes and the man who made the flag",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Belgrano's flag",
+       "emoji": "🏳️",
+       "body": "**Manuel Belgrano** was a lawyer and economist who ended up a general in the independence wars. On **27 February 1812**, by the Paraná river in **Rosario**, he raised a light blue and white flag for the first time. Buenos Aires wasn't thrilled — it was a bit too independent for 1812. Today Rosario has a giant **Monumento a la Bandera**."
+      },
+      {
+       "type": "info",
+       "title": "Why light blue and white?",
+       "emoji": "☁️",
+       "body": "Kids learn the colors come from the sky and its clouds. Some historians argue they come from the colors of the Spanish royal house of Borbón instead. Nobody can prove either one. Before the flag came the **escarapela**, a light blue and white rosette people pin on their chest on patriotic days. The **sol de mayo** (May sun) in the middle came later.",
+       "fun_fact": "The 18th of May is Día de la Escarapela. Watch for the rosettes on kids' school uniforms."
+      },
+      {
+       "type": "true_false",
+       "statement": "Belgrano died a rich and famous man, and that's why his day is a holiday.",
+       "answer": false,
+       "explain": "He died poor, in Buenos Aires, on 20 June 1820. That date is now Día de la Bandera (Flag Day), a holiday."
+      },
+      {
+       "type": "info",
+       "title": "San Martín crosses the Andes",
+       "emoji": "🏔️",
+       "body": "**José de San Martín**, born in **Yapeyú** (Corrientes) and trained as a soldier in Spain, had a bold plan: beat Spain in Peru by going through Chile. From **Mendoza** he built the **Ejército de los Andes** and in **1817** crossed the mountains — thousands of men, mules and horses over passes more than 4,000 meters high. He won at **Chacabuco** and helped free Chile, then Peru."
+      },
+      {
+       "type": "choice",
+       "scenario": "You're in the Catedral Metropolitana, next to Plaza de Mayo, and see soldiers in old blue uniforms guarding a tomb.",
+       "prompt": "Whose tomb is it?",
+       "options": [
+        "San Martín's",
+        "Belgrano's",
+        "Juan de Garay's",
+        "The last viceroy's"
+       ],
+       "correct": 0,
+       "explain": "San Martín's mausoleum, guarded by the **Granaderos**, the cavalry regiment he founded. He died in France in 1850; his remains came home in 1880."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the hero to the fact",
+       "pairs": [
+        [
+         "Belgrano",
+         "raised the first flag in Rosario"
+        ],
+        [
+         "San Martín",
+         "crossed the Andes with an army"
+        ],
+        [
+         "Liniers",
+         "led the fight against the British in 1806"
+        ],
+        [
+         "Saavedra",
+         "led the Primera Junta"
+        ]
+       ]
+      },
+      {
+       "type": "gap",
+       "prompt": "Argentines call San Martín the father of the nation:",
+       "text": "Es el Padre de la ___.",
+       "options": [
+        "Patria",
+        "Bandera",
+        "Junta"
+       ],
+       "correct": 0,
+       "translation": "He's the Father of the Homeland.",
+       "explain": "**Padre de la Patria**. His day is 17 August, the anniversary of his death — another feriado."
+      },
+      {
+       "type": "order",
+       "prompt": "Put these in order",
+       "items": [
+        "Revolución de Mayo",
+        "Belgrano raises the flag in Rosario",
+        "Independence declared in Tucumán",
+        "San Martín crosses the Andes"
+       ]
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "bandera",
+       "en": "flag",
+       "example": {
+        "es": "El 20 de junio es el Día de la Bandera.",
+        "en": "The 20th of June is Flag Day."
+       }
+      },
+      {
+       "es": "celeste",
+       "en": "light blue",
+       "example": {
+        "es": "La bandera es celeste y blanca.",
+        "en": "The flag is light blue and white."
+       }
+      },
+      {
+       "es": "escarapela",
+       "en": "light blue and white rosette worn on patriotic days"
+      },
+      {
+       "es": "cordillera",
+       "en": "mountain range (the Andes)"
+      },
+      {
+       "es": "ejército",
+       "en": "army"
+      },
+      {
+       "es": "prócer",
+       "en": "founding hero of the nation",
+       "note": "San Martín and Belgrano are próceres."
+      },
+      {
+       "es": "Patria",
+       "en": "homeland, nation"
+      }
+     ]
+    },
+    {
+     "slug": "unitarios-federales-y-gauchos",
+     "title": "Unitarios, federales and gauchos",
+     "summary": "Decades of civil war, Rosas, and the horsemen of the pampa",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Independent... and now what?",
+       "emoji": "🥊",
+       "body": "Winning independence was the easy part. Then came decades of civil wars between two camps. The **unitarios** wanted one strong central government run from Buenos Aires. The **federales** wanted the provinces to rule themselves. Behind it all: who keeps the money from the port of Buenos Aires? The provinces had a pretty good guess."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the word to its meaning",
+       "pairs": [
+        [
+         "unitarios",
+         "wanted a strong central government in Buenos Aires"
+        ],
+        [
+         "federales",
+         "wanted the provinces to govern themselves"
+        ],
+        [
+         "caudillo",
+         "a regional strongman with his own followers"
+        ]
+       ]
+      },
+      {
+       "type": "info",
+       "title": "Rosas",
+       "emoji": "🔴",
+       "body": "**Juan Manuel de Rosas**, a rich landowner and a federal, governed Buenos Aires from 1829 to 1832 and again from 1835 to **1852**, with near-total power. Red was the federal color, and wearing it was all but required. His police, the **Mazorca**, terrorized opponents. He also defied the British and French fleets. He fell at the battle of **Caseros**, in 1852."
+      },
+      {
+       "type": "info",
+       "title": "Hero or tyrant?",
+       "emoji": "⚖️",
+       "body": "Argentines still argue about Rosas. For the liberals who came after him, like **Sarmiento**, he was a bloody tyrant. For the **revisionistas** (historians who rethought him in the 20th century), he defended national sovereignty against foreign powers. Both sides have a point, and both have their sources. Don't bring it up at an asado unless you have time.",
+       "fun_fact": "The 20 November holiday, Día de la Soberanía Nacional, remembers a battle fought under Rosas against the Anglo-French fleet in 1845."
+      },
+      {
+       "type": "info",
+       "title": "The gaucho",
+       "emoji": "🐎",
+       "body": "Out on the pampa lived the **gauchos**: expert horsemen, often of mixed Spanish and native roots, who worked with cattle. Knife, **boleadoras** (throwing weights borrowed from native hunters), poncho, mate and guitar. Governments treated them as vagrants and forced many into the army. Only later did they become national symbols."
+      },
+      {
+       "type": "choice",
+       "scenario": "At a bookstore, your friend points at a book and says: 'Everyone had to read this at school. It's about a gaucho forced into the army on the frontier.'",
+       "prompt": "Which book is it?",
+       "options": [
+        "Martín Fierro",
+        "Don Quijote",
+        "Rayuela",
+        "Facundo"
+       ],
+       "correct": 0,
+       "explain": "**El gaucho Martín Fierro**, a poem by **José Hernández** (1872, with a second part in 1879). *Facundo*, by Sarmiento, is also a classic — but it's about a caudillo, not Fierro."
+      },
+      {
+       "type": "true_false",
+       "statement": "The Día de la Tradición (10 November) is celebrated on José Hernández's birthday.",
+       "answer": true,
+       "explain": "Hernández was born on 10 November 1834. That day celebrates gaucho culture: horses, folk music, empanadas."
+      },
+      {
+       "type": "gap",
+       "prompt": "The most quoted advice from Martín Fierro: brothers must stick together.",
+       "text": "Los hermanos sean ___.",
+       "options": [
+        "unidos",
+        "federales",
+        "gauchos"
+       ],
+       "correct": 0,
+       "translation": "Brothers, be united.",
+       "explain": "'Los hermanos sean unidos, porque esa es la ley primera.' Argentines quote it to this day."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "unitario",
+       "en": "supporter of central government (19th century)"
+      },
+      {
+       "es": "federal",
+       "en": "supporter of provincial self-rule (19th century)"
+      },
+      {
+       "es": "caudillo",
+       "en": "regional strongman"
+      },
+      {
+       "es": "gaucho",
+       "en": "horseman of the pampa",
+       "example": {
+        "es": "Martín Fierro es un gaucho.",
+        "en": "Martín Fierro is a gaucho."
+       }
+      },
+      {
+       "es": "pampa",
+       "en": "the vast grassy plains"
+      },
+      {
+       "es": "boleadoras",
+       "en": "throwing weights joined by cords, for hunting"
+      },
+      {
+       "es": "tradición",
+       "en": "tradition"
+      }
+     ]
+    },
+    {
+     "slug": "desierto-e-inmigrantes",
+     "title": "The frontier and the boats",
+     "summary": "The Campaña del Desierto, the immigration wave, conventillos, lunfardo and tango",
+     "pages": [
+      {
+       "type": "info",
+       "title": "A country on paper",
+       "emoji": "📘",
+       "body": "After Rosas fell, a **Constitución** was written in **1853** (Buenos Aires joined a few years later). The new leaders had a plan: bring in European immigrants, railways and investment, and grab the land still held by the native peoples. The motto came from the thinker **Alberdi**: **gobernar es poblar**, to govern is to populate."
+      },
+      {
+       "type": "info",
+       "title": "The Campaña del Desierto",
+       "emoji": "⚠️",
+       "body": "Between **1878** and **1885**, the army led by **Julio Argentino Roca** took the pampa and Patagonia from the **mapuche**, **ranquel**, **tehuelche** and other peoples. Official history called it the 'desert', but it was not empty. Thousands were killed; thousands more were taken prisoner, families were split up, and many were forced to work on farms or as servants. The land went to a few big owners."
+      },
+      {
+       "type": "info",
+       "title": "Still debated",
+       "emoji": "🗣️",
+       "body": "For a long time schools taught it as a heroic conquest, and Roca was on the 100-peso bill. Today many historians and indigenous communities call it a **genocidio** (genocide); others reject that word and frame it as a war over territory. The debate is alive: Roca's statues get painted and argued over, and many prefer to say **Conquista del Desierto** in quotes, or not at all."
+      },
+      {
+       "type": "true_false",
+       "statement": "The 'desert' conquered in the Campaña del Desierto was an empty land.",
+       "answer": false,
+       "explain": "It was home to mapuche, ranquel, tehuelche and other peoples. 'Desierto' was the word the state used to justify taking it."
+      },
+      {
+       "type": "info",
+       "title": "The boats arrive",
+       "emoji": "🚢",
+       "body": "From the 1870s to 1930, millions of Europeans arrived, mostly **italianos** and **españoles**. In the 1914 census about **30%** of the country was foreign-born — in Buenos Aires, around half. Porteños still call any Spaniard a **gallego**, since so many came from Galicia. That's why the Italian influence is everywhere: pizza, **fainá**, **ñoquis** on the 29th, and talking with your hands.",
+       "fun_fact": "The old Hotel de Inmigrantes, where newcomers slept their first nights, is now a museum in Retiro."
+      },
+      {
+       "type": "info",
+       "title": "Life in the conventillo",
+       "emoji": "🏚️",
+       "body": "Many newcomers crammed into **conventillos**: old houses split into single rooms, one family per room, one shared patio and bathroom for dozens. Crowded, loud, mixed: Italians, Spaniards, Jews, Arabs and locals, all together. In **1907** the tenants went on a famous rent strike. La Boca's colorful **Caminito** is a tourist version of that world."
+      },
+      {
+       "type": "info",
+       "title": "Lunfardo and tango",
+       "emoji": "💃",
+       "body": "From that mix came **lunfardo**, the slang of Buenos Aires, full of Italian: **laburo** (job, from *lavoro*), **morfar** (to eat), **birra** (beer), **fiaca** (laziness). And in the outskirts of Buenos Aires and Montevideo, in the late 1800s, came **tango**, mixing habanera, **milonga** and African-rooted **candombe**. It started in humble places before it conquered Paris and the salons."
+      },
+      {
+       "type": "choice",
+       "scenario": "Your friend groans on Monday morning: 'Uf, qué fiaca ir al laburo.'",
+       "prompt": "What do they mean?",
+       "options": [
+        "They're too lazy to go to work",
+        "They want to eat a big lunch",
+        "They're going to a tango class",
+        "They lost their job"
+       ],
+       "correct": 0,
+       "explain": "**Fiaca** is laziness, **laburo** is work — both from Italian, both pure lunfardo."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the lunfardo word to its meaning",
+       "pairs": [
+        [
+         "laburo",
+         "job, work"
+        ],
+        [
+         "morfar",
+         "to eat"
+        ],
+        [
+         "birra",
+         "beer"
+        ],
+        [
+         "fiaca",
+         "laziness"
+        ]
+       ],
+       "explain": "Italian roots all over: *lavoro*, *birra*, *fiacca*."
+      },
+      {
+       "type": "order",
+       "prompt": "Put these in order",
+       "items": [
+        "Rosas falls at Caseros",
+        "The Constitución is written",
+        "The Campaña del Desierto begins",
+        "The census shows about 30% of the country was born abroad"
+       ]
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "inmigrante",
+       "en": "immigrant",
+       "example": {
+        "es": "Mi bisabuelo era un inmigrante italiano.",
+        "en": "My great-grandfather was an Italian immigrant."
+       }
+      },
+      {
+       "es": "conventillo",
+       "en": "tenement house, one family per room"
+      },
+      {
+       "es": "gallego",
+       "en": "a Galician; in Argentina, any Spaniard",
+       "note": "Colloquial, usually affectionate."
+      },
+      {
+       "es": "lunfardo",
+       "en": "the slang of Buenos Aires"
+      },
+      {
+       "es": "laburo",
+       "en": "job, work (lunfardo)",
+       "example": {
+        "es": "Me voy al laburo.",
+        "en": "I'm off to work."
+       }
+      },
+      {
+       "es": "morfar",
+       "en": "to eat (lunfardo)"
+      },
+      {
+       "es": "fiaca",
+       "en": "laziness",
+       "example": {
+        "es": "Qué fiaca, no quiero salir.",
+        "en": "I feel so lazy, I don't want to go out."
+       }
+      },
+      {
+       "es": "birra",
+       "en": "beer"
+      },
+      {
+       "es": "genocidio",
+       "en": "genocide"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "historia-moderna",
+   "title": "Historia: el siglo XX y hoy",
+   "emoji": "📜",
+   "summary": "Coups, Perón, the dictatorship, Malvinas, 2001 and why everyone thinks in dollars",
+   "classes": [
+    {
+     "slug": "golpes-peron-y-evita",
+     "title": "Coups, Perón and Evita",
+     "summary": "From the 1930 coup to the man who still splits family asados",
+     "pages": [
+      {
+       "type": "info",
+       "title": "A century of coups",
+       "emoji": "🪖",
+       "body": "Between 1930 and 1976 the army overthrew elected governments six times: in **1930, 1943, 1955, 1962, 1966 and 1976**. A coup is a **golpe de Estado**, usually just **golpe**. The 1930s got a nickname: the **Década Infame** (Infamous Decade), with elections so openly rigged that some called it *fraude patriótico*, 'patriotic fraud'."
+      },
+      {
+       "type": "true_false",
+       "statement": "Between 1930 and 1976, Argentina's military took power by force six times.",
+       "answer": true,
+       "explain": "Six coups: 1930, 1943, 1955, 1962, 1966 and 1976. Since 1983 Argentina has had uninterrupted democracy, its longest ever."
+      },
+      {
+       "type": "info",
+       "title": "Enter Perón",
+       "emoji": "🎖️",
+       "body": "**Juan Domingo Perón** was an army colonel in the government born of the 1943 coup. As labour secretary he backed unions and pushed new rights for workers: pensions, paid holidays, labour courts. Workers had never had a friend that high up. The army's old guard, the bosses and much of the middle class got nervous.",
+       "fun_fact": "The **aguinaldo**, an extra month's pay split into June and December, was created in 1945. Argentines still count on it every year."
+      },
+      {
+       "type": "info",
+       "title": "17 de octubre de 1945",
+       "emoji": "✊",
+       "body": "His rivals forced Perón out and locked him up on **Isla Martín García**. On **17 October 1945**, huge crowds of workers marched into Plaza de Mayo demanding his release. Some cooled their tired feet in the fountains, an image that became legend. That night Perón spoke from the balcony of the Casa Rosada. Four months later he won the presidency."
+      },
+      {
+       "type": "choice",
+       "scenario": "It's 17 October. Your Argentine friend posts a photo of Plaza de Mayo with 'Feliz Día de la Lealtad'.",
+       "prompt": "What are they celebrating?",
+       "options": [
+        "Independence Day",
+        "The 1945 workers' march that freed Perón",
+        "Maradona's birthday",
+        "The end of the dictatorship"
+       ],
+       "correct": 1,
+       "explain": "Peronists call 17 October **Día de la Lealtad**, Loyalty Day. (Maradona's birthday is close, though: 30 October.)"
+      },
+      {
+       "type": "info",
+       "title": "Los descamisados",
+       "emoji": "👕",
+       "body": "Opponents sneered at Perón's supporters as **descamisados**, 'the shirtless ones': poor, rough, not fit for politics. Perón and his wife flipped the insult and wore it with pride. Workers who had felt invisible suddenly felt that the country was theirs too. That feeling of **dignidad** is the heart of what Peronists love about Perón."
+      },
+      {
+       "type": "info",
+       "title": "Evita",
+       "emoji": "🌹",
+       "body": "**Eva Duarte**, a young actress from a small town in Buenos Aires province, married Perón in 1945. As **Evita** she ran a foundation that built hospitals, schools and homes, and gave aid directly to the poor. She pushed the 1947 law that gave women the vote. She died of cancer in 1952, aged 33, and millions queued for days to say goodbye.",
+       "fun_fact": "When Madonna came to film *Evita* in 1996, plenty of Argentines were not amused. 'Fuera Madonna' graffiti showed up in Buenos Aires."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the year to what happened",
+       "pairs": [
+        [
+         "1945",
+         "Workers march for Perón"
+        ],
+        [
+         "1947",
+         "Women get the vote"
+        ],
+        [
+         "1952",
+         "Evita dies"
+        ],
+        [
+         "1955",
+         "A coup overthrows Perón"
+        ]
+       ]
+      },
+      {
+       "type": "info",
+       "title": "Why it still splits families",
+       "emoji": "🍖",
+       "body": "After the 1955 coup, Peronism was banned for 18 years. Perón came back, won again in 1973 and died in 1974. For supporters, Peronism means social justice and workers' rights. Critics point to censorship, a personality cult, jailed opponents and costly economics. It has had left and right wings. The political divide is called **la grieta**, 'the crack', and it often runs through the family asado."
+      },
+      {
+       "type": "choice",
+       "scenario": "At a family asado, your girlfriend's tío grumbles that her new neighbour 'es un gorila'.",
+       "prompt": "What does he mean?",
+       "options": [
+        "The neighbour is very hairy",
+        "The neighbour is anti-Peronist",
+        "The neighbour is a great goalkeeper"
+       ],
+       "correct": 1,
+       "explain": "**Gorila** is Peronist slang for an anti-Peronist. It's a jab, so keep it for when you know the room. Anti-Peronists have their own words for Peronists, too."
+      },
+      {
+       "type": "gap",
+       "prompt": "How do Peronists name 17 October?",
+       "text": "El 17 de octubre es el Día de la ___.",
+       "options": [
+        "Lealtad",
+        "Independencia",
+        "Bandera"
+       ],
+       "correct": 0,
+       "translation": "17 October is Loyalty Day.",
+       "explain": "**Lealtad** means loyalty: the workers' loyalty to Perón, and his to them."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "golpe de Estado",
+       "en": "coup",
+       "example": {
+        "es": "Hubo un golpe en 1930.",
+        "en": "There was a coup in 1930."
+       }
+      },
+      {
+       "es": "descamisado",
+       "en": "'shirtless one', a Peronist worker"
+      },
+      {
+       "es": "peronista",
+       "en": "Peronist",
+       "example": {
+        "es": "Mi abuela es peronista de toda la vida.",
+        "en": "My grandma has always been a Peronist."
+       }
+      },
+      {
+       "es": "gorila",
+       "en": "anti-Peronist (Peronist slang)",
+       "note": "A jab. Not a word for a first meeting."
+      },
+      {
+       "es": "la grieta",
+       "en": "the political divide"
+      },
+      {
+       "es": "aguinaldo",
+       "en": "extra month's pay, split into June and December"
+      },
+      {
+       "es": "lealtad",
+       "en": "loyalty"
+      }
+     ]
+    },
+    {
+     "slug": "la-ultima-dictadura",
+     "title": "The last dictatorship",
+     "summary": "1976–1983: the disappeared, the Madres and Abuelas, and 'Nunca Más'",
+     "pages": [
+      {
+       "type": "info",
+       "title": "24 de marzo de 1976",
+       "emoji": "🗓️",
+       "body": "After Perón died in 1974, his widow and vice-president, **Isabel Perón**, took over amid guerrilla attacks, killings by the far-right **Triple A** and economic chaos. On **24 March 1976** a military junta led by **Jorge Rafael Videla** seized power. It called itself the Proceso de Reorganización Nacional. Argentines just say **el Proceso**, or **la dictadura**."
+      },
+      {
+       "type": "info",
+       "title": "Los desaparecidos",
+       "emoji": "🕯️",
+       "body": "The regime hunted anyone it called 'subversive': guerrillas, but also union delegates, students, lawyers, priests, teenagers. People were kidnapped, taken to secret detention centres like the **ESMA**, tortured, and most were murdered, many thrown alive from planes into the sea or the Río de la Plata. Families got no answers. The victims became **los desaparecidos**, the disappeared."
+      },
+      {
+       "type": "true_false",
+       "statement": "In Argentina, 'los desaparecidos' refers to people who fled abroad during the dictatorship.",
+       "answer": false,
+       "explain": "**Desaparecidos** are people the state kidnapped and made vanish, with no record, no body, no answer. Many others did go into exile, but they are called **exiliados**."
+      },
+      {
+       "type": "info",
+       "title": "How many?",
+       "emoji": "📋",
+       "body": "Human rights organisations speak of **30,000** desaparecidos, and '30.000' appears on banners every 24 March. The commission set up in 1984 documented close to 9,000 cases, and official lists have grown since. The regime destroyed its records, so a full count may never exist. When politicians question the 30,000 figure, it sparks fierce public debate."
+      },
+      {
+       "type": "info",
+       "title": "Las Madres de Plaza de Mayo",
+       "emoji": "🤍",
+       "body": "On **30 April 1977**, fourteen mothers met in Plaza de Mayo to ask where their children were. Gatherings were banned, so when police told them to move along, they walked in pairs around the pyramid. They covered their heads with **pañuelos blancos**, white headscarves, first made from their children's cloth nappies. Their founder, **Azucena Villaflor**, was herself disappeared that December."
+      },
+      {
+       "type": "choice",
+       "scenario": "Thursday, 3:30 pm, Plaza de Mayo. A group of older women in white headscarves walk slowly around the monument in the middle.",
+       "prompt": "Who are they?",
+       "options": [
+        "A church procession",
+        "The Madres de Plaza de Mayo",
+        "A tour group",
+        "Nurses on strike"
+       ],
+       "correct": 1,
+       "explain": "The Madres have walked there on Thursday afternoons for decades. The white headscarf is also painted on the ground around the Pirámide de Mayo."
+      },
+      {
+       "type": "info",
+       "title": "Las Abuelas and the stolen babies",
+       "emoji": "🧬",
+       "body": "Pregnant prisoners gave birth in captivity; their babies, and other children, were handed to other families, often close to the regime, under false identities. The **Abuelas de Plaza de Mayo** (grandmothers) have searched for them since 1977, helping pioneer DNA methods to prove kinship. As of 2025, **140 nietos** (grandchildren) had recovered their identity. Their president, **Estela de Carlotto**, found her own grandson in 2014."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the name to what it is",
+       "pairs": [
+        [
+         "Madres de Plaza de Mayo",
+         "Mothers asking for their disappeared children"
+        ],
+        [
+         "Abuelas de Plaza de Mayo",
+         "Grandmothers searching for stolen babies"
+        ],
+        [
+         "pañuelo blanco",
+         "The white headscarf that became their symbol"
+        ],
+        [
+         "ESMA",
+         "Navy school used as a detention centre, now a memory site"
+        ]
+       ]
+      },
+      {
+       "type": "info",
+       "title": "Nunca Más",
+       "emoji": "⚖️",
+       "body": "In 1984 a commission led by writer **Ernesto Sábato** published its report, **Nunca Más** ('Never Again'). In 1985, civilian judges tried the juntas in the **Juicio a las Juntas**; prosecutor **Julio Strassera** closed with 'Señores jueces: nunca más.' Videla got life. Amnesty laws and pardons followed, but they were struck down in 2003–2005 and trials continue today.",
+       "fun_fact": "The trial is the subject of the film *Argentina, 1985*, nominated for the Oscar for best international film."
+      },
+      {
+       "type": "order",
+       "prompt": "Put these in order, oldest first",
+       "items": [
+        "Coup of 24 March 1976",
+        "First march of the Madres (1977)",
+        "Malvinas war (1982)",
+        "Democracy returns (1983)",
+        "'Nunca Más' report (1984)",
+        "Juicio a las Juntas (1985)"
+       ],
+       "explain": "Seven and a half years of dictatorship, then the first steps of justice."
+      },
+      {
+       "type": "gap",
+       "prompt": "24 March is a national holiday: el Día Nacional de la Memoria por la Verdad y la Justicia. Its motto is:",
+       "text": "Memoria, Verdad y ___.",
+       "options": [
+        "Justicia",
+        "Libertad",
+        "Paz"
+       ],
+       "correct": 0,
+       "translation": "Memory, Truth and Justice.",
+       "explain": "Every **24 de marzo** hundreds of thousands march to Plaza de Mayo, with photos of the disappeared and the chant 'Nunca más'."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "la dictadura",
+       "en": "the dictatorship"
+      },
+      {
+       "es": "desaparecido",
+       "en": "person disappeared by the state",
+       "example": {
+        "es": "Su tío es un desaparecido.",
+        "en": "Her uncle is one of the disappeared."
+       }
+      },
+      {
+       "es": "pañuelo blanco",
+       "en": "white headscarf (symbol of the Madres)"
+      },
+      {
+       "es": "Madres de Plaza de Mayo",
+       "en": "Mothers of the Plaza de Mayo"
+      },
+      {
+       "es": "Abuelas de Plaza de Mayo",
+       "en": "Grandmothers of the Plaza de Mayo"
+      },
+      {
+       "es": "nieto restituido",
+       "en": "stolen grandchild who recovered their identity"
+      },
+      {
+       "es": "Nunca Más",
+       "en": "Never Again"
+      },
+      {
+       "es": "memoria",
+       "en": "memory, remembrance",
+       "example": {
+        "es": "Memoria, Verdad y Justicia.",
+        "en": "Memory, Truth and Justice."
+       }
+      }
+     ]
+    },
+    {
+     "slug": "malvinas",
+     "title": "Malvinas",
+     "summary": "The 1982 war, the veterans, and a claim nearly every Argentine shares",
+     "pages": [
+      {
+       "type": "info",
+       "title": "The islands",
+       "emoji": "🏝️",
+       "body": "The **Islas Malvinas** sit in the South Atlantic, about 500 km off Patagonia. Britain has held them since **1833**, when it expelled the Argentine authorities there, and Argentina has claimed them ever since. The British call them the Falklands. In Argentina, always say **Malvinas**: 'Falklands' lands very badly."
+      },
+      {
+       "type": "choice",
+       "scenario": "At dinner in Córdoba, someone asks where you've travelled. You went to those islands in the South Atlantic.",
+       "prompt": "What do you call them?",
+       "options": [
+        "The Falklands",
+        "Las Malvinas"
+       ],
+       "correct": 1,
+       "explain": "**Las Malvinas**. Using the British name in Argentina sounds like taking sides, and it's a sore point."
+      },
+      {
+       "type": "info",
+       "title": "2 de abril de 1982",
+       "emoji": "⚓",
+       "body": "The dictatorship, now led by **Leopoldo Galtieri**, faced a collapsing economy and growing protests. On **2 April 1982** Argentine troops landed on the islands, and crowds cheered in Plaza de Mayo. Margaret Thatcher's government sent a naval task force. The war lasted 74 days. Argentina surrendered on **14 June 1982**. **649 Argentines** died, along with 255 British servicemen and 3 islanders."
+      },
+      {
+       "type": "true_false",
+       "statement": "The Malvinas war lasted about two and a half months.",
+       "answer": true,
+       "explain": "From 2 April to 14 June 1982: 74 days."
+      },
+      {
+       "type": "info",
+       "title": "The soldiers",
+       "emoji": "🎗️",
+       "body": "Many who fought were **conscriptos**, 18- and 19-year-olds doing compulsory military service, known as **la colimba**. They were sent to freezing trenches, often underfed and badly equipped, and some later reported abuse from their own officers. On 2 May the cruiser **ARA General Belgrano** was sunk: 323 men died, about half of all Argentine deaths."
+      },
+      {
+       "type": "info",
+       "title": "Veteranos y caídos",
+       "emoji": "🇦🇷",
+       "body": "Today the survivors are honoured as **veteranos** or **ex combatientes**, and the dead as **los caídos**, the fallen. **2 April** is a national holiday: the Day of the Veterans and the Fallen in the Malvinas War. For years many veterans felt forgotten, and the war's wounds, physical and mental, are still an open subject."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the date to the Malvinas memory",
+       "pairs": [
+        [
+         "2 de abril",
+         "Troops land; today, veterans' day"
+        ],
+        [
+         "2 de mayo",
+         "The Belgrano is sunk"
+        ],
+        [
+         "14 de junio",
+         "Argentina surrenders"
+        ]
+       ]
+      },
+      {
+       "type": "info",
+       "title": "Las Malvinas son argentinas",
+       "emoji": "🪧",
+       "body": "You'll see **'Las Malvinas son argentinas'** on road signs, murals and buses. Since 1994 the claim is in the Constitution. It's one of the few things almost all Argentines agree on, across parties. The war is another matter: most see it as a doomed gamble by the dictatorship. The islanders voted in 2013 to stay British; Argentina does not accept that vote as deciding the question."
+      },
+      {
+       "type": "choice",
+       "scenario": "Your taxi driver hears your English accent and says, half-smiling: 'Las Malvinas son argentinas, eh.'",
+       "prompt": "What's the best response?",
+       "options": [
+        "Argue that they're British",
+        "Say 'Sí, lo sé' and ask him about it",
+        "Pretend you didn't hear"
+       ],
+       "correct": 1,
+       "explain": "It's usually a friendly-ish poke, not hostility. Listening goes a long way: many Argentines have a relative or neighbour who fought there."
+      },
+      {
+       "type": "gap",
+       "prompt": "Complete the phrase you'll see all over the country",
+       "text": "Las Malvinas ___ argentinas.",
+       "options": [
+        "son",
+        "están",
+        "eran"
+       ],
+       "correct": 0,
+       "translation": "The Malvinas are Argentine.",
+       "explain": "**Son**, from ser: it's said as a permanent fact, and definitely not in the past tense."
+      },
+      {
+       "type": "true_false",
+       "statement": "Defeat in Malvinas helped bring down the dictatorship.",
+       "answer": true,
+       "explain": "The defeat discredited the military. Galtieri was replaced within days, and elections were held in October 1983."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "las Malvinas",
+       "en": "the Falkland Islands (Argentine name)",
+       "example": {
+        "es": "Las Malvinas son argentinas.",
+        "en": "The Malvinas are Argentine."
+       }
+      },
+      {
+       "es": "veterano",
+       "en": "war veteran"
+      },
+      {
+       "es": "ex combatiente",
+       "en": "former combatant, veteran"
+      },
+      {
+       "es": "conscripto",
+       "en": "conscript"
+      },
+      {
+       "es": "la colimba",
+       "en": "compulsory military service (slang)"
+      },
+      {
+       "es": "los caídos",
+       "en": "the fallen"
+      },
+      {
+       "es": "soberanía",
+       "en": "sovereignty",
+       "example": {
+        "es": "Reclamamos la soberanía sobre las islas.",
+        "en": "We claim sovereignty over the islands."
+       }
+      }
+     ]
+    },
+    {
+     "slug": "democracia-y-crisis",
+     "title": "Democracy, hyperinflation and 2001",
+     "summary": "From Alfonsín to 'que se vayan todos'",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Vuelve la democracia",
+       "emoji": "🗳️",
+       "body": "On 30 October 1983 **Raúl Alfonsín**, of the Radical party (UCR), won the election and took office on **10 December 1983**. He closed his rallies reciting the Preamble of the Constitution, and promised that 'con la democracia se come, se cura y se educa': with democracy, people eat, heal and learn. Every 10 December marks another year of democracy."
+      },
+      {
+       "type": "info",
+       "title": "Hiperinflación",
+       "emoji": "🔥",
+       "body": "The economy didn't cooperate. Debt was huge, and a new currency, the **austral** (1985), soon crumbled. In 1989 prices went wild: yearly inflation passed **3,000%**. Supermarkets relabelled prices several times a day, and there were **saqueos**, lootings. Alfonsín handed power to the Peronist **Carlos Menem** five months early, in July 1989."
+      },
+      {
+       "type": "choice",
+       "scenario": "It's 1989 and you just got paid in australes.",
+       "prompt": "What's the smart move?",
+       "options": [
+        "Put it in a savings account for next year",
+        "Spend it right away, before prices go up",
+        "Frame a note as a souvenir"
+       ],
+       "correct": 1,
+       "explain": "With prices climbing by the day, money lost value in your pocket. People ran to the supermarket on payday, a reflex some Argentines still have."
+      },
+      {
+       "type": "info",
+       "title": "Convertibilidad: 1 peso = 1 dólar",
+       "emoji": "💵",
+       "body": "In April 1991, Menem's economy minister **Domingo Cavallo** launched the **convertibilidad**: by law, one peso was worth one dollar, and you could swap them freely. A new peso replaced the austral at 10,000 to one. Inflation vanished. The '90s brought privatisations, cheap imports and cheap trips abroad.",
+       "fun_fact": "Argentine shoppers abroad got the nickname **'deme dos'** ('give me two') in the cheap-dollar years around 1980, and it came right back in the '90s."
+      },
+      {
+       "type": "info",
+       "title": "The hangover",
+       "emoji": "🤕",
+       "body": "Supporters remember the stability after years of chaos. Critics remember the rest: factories closed, unemployment passed 18% by 1995, and debt piled up to keep the peg alive. From 1998 the country was in recession, and the 1-to-1 dollar was getting hard to hold. Opinions on the '90s still split dinner tables."
+      },
+      {
+       "type": "true_false",
+       "statement": "Under convertibilidad, one peso was legally worth one US dollar.",
+       "answer": true,
+       "explain": "From 1991 to early 2002. Many Argentines still remember when a dollar cost exactly one peso."
+      },
+      {
+       "type": "info",
+       "title": "Diciembre de 2001",
+       "emoji": "🥘",
+       "body": "Under President **Fernando de la Rúa**, people rushed to pull their money out. On 1 December 2001 the government capped cash withdrawals at 250 pesos a week: the **corralito**, 'little pen'. The middle class took to the streets banging pots: the **cacerolazo**. On 19 and 20 December protests and repression left dozens dead. De la Rúa resigned and left the Casa Rosada by helicopter."
+      },
+      {
+       "type": "info",
+       "title": "Que se vayan todos",
+       "emoji": "📢",
+       "body": "The chant was **'¡Que se vayan todos!'**: 'Out with all of them', every politician. Then came five presidents in about twelve days: De la Rúa, **Ramón Puerta**, **Adolfo Rodríguez Saá** (who declared a debt default), **Eduardo Camaño** and **Eduardo Duhalde**, who took over in January 2002 and ended the 1-to-1 peso. Savings lost much of their value overnight."
+      },
+      {
+       "type": "order",
+       "prompt": "Put the timeline in order",
+       "items": [
+        "Alfonsín takes office (1983)",
+        "Hyperinflation; Alfonsín leaves early (1989)",
+        "Convertibilidad begins (1991)",
+        "The corralito (December 2001)",
+        "De la Rúa resigns (December 2001)",
+        "The 1-to-1 peso ends (2002)"
+       ]
+      },
+      {
+       "type": "match",
+       "prompt": "Match the word to its meaning",
+       "pairs": [
+        [
+         "corralito",
+         "Limit on taking cash out of the bank"
+        ],
+        [
+         "cacerolazo",
+         "Protest banging pots and pans"
+        ],
+        [
+         "saqueo",
+         "Looting"
+        ],
+        [
+         "hiperinflación",
+         "Prices rising out of control"
+        ]
+       ]
+      },
+      {
+       "type": "gap",
+       "prompt": "Complete the chant of 2001",
+       "text": "¡Que se ___ todos!",
+       "options": [
+        "vayan",
+        "van",
+        "fueron"
+       ],
+       "correct": 0,
+       "translation": "Out with all of them!",
+       "explain": "**Que se vayan** uses the subjunctive: it's a demand, 'let them all go'."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "hiperinflación",
+       "en": "hyperinflation"
+      },
+      {
+       "es": "saqueo",
+       "en": "looting"
+      },
+      {
+       "es": "convertibilidad",
+       "en": "the 1991–2002 one-peso-one-dollar system"
+      },
+      {
+       "es": "corralito",
+       "en": "2001 cap on bank withdrawals",
+       "example": {
+        "es": "Con el corralito no podías sacar tu plata.",
+        "en": "With the corralito you couldn't take your money out."
+       }
+      },
+      {
+       "es": "cacerolazo",
+       "en": "pot-banging protest"
+      },
+      {
+       "es": "¡que se vayan todos!",
+       "en": "out with all of them!"
+      },
+      {
+       "es": "devaluación",
+       "en": "devaluation"
+      }
+     ]
+    },
+    {
+     "slug": "pensar-en-dolares",
+     "title": "Money today: thinking in dollars",
+     "summary": "Inflation, the dólar blue, arbolitos and cash under the mattress",
+     "pages": [
+      {
+       "type": "info",
+       "title": "Pesos to spend, dollars to save",
+       "emoji": "💸",
+       "body": "After decades of inflation, devaluations and a corralito, Argentines learned one lesson: save in dollars. Flats and cars are priced in dollars (**U$S**). Pesos are for spending, fast. Plenty of savings sit at home in cash, **bajo el colchón**, under the mattress, and Argentines are thought to hold more US banknotes per person than almost anyone outside the US."
+      },
+      {
+       "type": "choice",
+       "scenario": "You're flat-hunting in Palermo. The listing says 'U$S 120.000'.",
+       "prompt": "How is a deal like this usually paid?",
+       "options": [
+        "In pesos, by card",
+        "In US dollars, often in cash",
+        "In monthly instalments of mate"
+       ],
+       "correct": 1,
+       "explain": "Property is typically bought in dollars, and it's common for the notes to be counted on the spot at signing."
+      },
+      {
+       "type": "info",
+       "title": "Inflación, the national sport",
+       "emoji": "📈",
+       "body": "When the monthly inflation figure comes out, it's headline news. People **remarcan**, relabel prices, and everyone compares: '¿Viste lo que sale el café?' Yearly inflation passed 200% in 2023, then slowed sharply in 2024 and 2025. Whether it stays low is a matter of hot debate. Either way, every Argentine is a part-time economist."
+      },
+      {
+       "type": "info",
+       "title": "El dólar blue",
+       "emoji": "💙",
+       "body": "For years, buying dollars legally was capped by currency controls, the **cepo** (2011–2015, then 2019–2025). So a parallel market boomed: the **dólar blue**, usually pricier than the official rate. Nobody fully agrees why it's called 'blue'. At one point there were over a dozen dollar rates, from the **dólar tarjeta** to the short-lived **dólar Coldplay**, for concert tickets abroad."
+      },
+      {
+       "type": "choice",
+       "scenario": "Walking down calle Florida in Buenos Aires, a man on the corner mutters at you: 'Cambio, cambio, dólar, euro, real...'",
+       "prompt": "What is he offering?",
+       "options": [
+        "Directions to the bus stop",
+        "To swap your money on the informal market",
+        "Tickets to a tango show"
+       ],
+       "correct": 1,
+       "explain": "He's an **arbolito**, a street money changer, offering the blue rate. They're a classic sight on Florida."
+      },
+      {
+       "type": "info",
+       "title": "Arbolitos y cuevas",
+       "emoji": "🌳",
+       "body": "**Arbolito** means 'little tree': he stands on the pavement all day, like a tree. He takes you to a **cueva**, a 'cave', a back office where the swap happens. It's informal, and fake notes happen. In April 2025 people were allowed to buy dollars freely again, and the gap between blue and official shrank to a few percent. But the words, and the habit of checking, remain."
+      },
+      {
+       "type": "true_false",
+       "statement": "The dólar blue is a special blue banknote.",
+       "answer": false,
+       "explain": "It's a rate, not a note. The one colour detail that matters: older US$100 bills, the **cara chica** (small face), often get a worse rate than the newer **cara grande** ones with the blue security strip."
+      },
+      {
+       "type": "match",
+       "prompt": "Match the money word to its meaning",
+       "pairs": [
+        [
+         "arbolito",
+         "Street money changer"
+        ],
+        [
+         "cueva",
+         "Back-room exchange office"
+        ],
+        [
+         "cepo",
+         "Currency controls"
+        ],
+        [
+         "colchón",
+         "Where the cash savings hide"
+        ],
+        [
+         "remarcar",
+         "To relabel prices"
+        ]
+       ]
+      },
+      {
+       "type": "gap",
+       "prompt": "The small-talk question that rivals the weather",
+       "text": "¿A cuánto está el ___ hoy?",
+       "options": [
+        "dólar",
+        "mate",
+        "subte"
+       ],
+       "correct": 0,
+       "translation": "What's the dollar at today?",
+       "explain": "Argentines check the dollar the way others check the weather. Ask it and you'll sound like a local."
+      }
+     ],
+     "vocabulary": [
+      {
+       "es": "plata",
+       "en": "money",
+       "example": {
+        "es": "No tengo plata.",
+        "en": "I don't have any money."
+       }
+      },
+      {
+       "es": "dólar blue",
+       "en": "informal-market dollar rate"
+      },
+      {
+       "es": "arbolito",
+       "en": "street money changer"
+      },
+      {
+       "es": "cueva",
+       "en": "informal exchange office"
+      },
+      {
+       "es": "cepo",
+       "en": "currency controls"
+      },
+      {
+       "es": "inflación",
+       "en": "inflation"
+      },
+      {
+       "es": "remarcar",
+       "en": "to relabel prices"
+      },
+      {
+       "es": "bajo el colchón",
+       "en": "under the mattress (cash savings at home)"
+      },
+      {
+       "es": "¿A cuánto está el dólar?",
+       "en": "What's the dollar at?"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

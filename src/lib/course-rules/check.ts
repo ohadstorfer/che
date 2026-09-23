@@ -4,9 +4,47 @@
 
 import type { FormFeatures } from '../types';
 import { generateVariants, uncoveredTokens } from './accept';
-import { REGIONAL, TUTEO, TUTEO_AMBIGUOUS, bare, fold, registerRank } from './rules';
-import { type Token, buildIndex, tokenize } from './tokenize';
+import { CHE_GREETINGS, CLITIC_LEMMAS, REGIONAL, REGIONAL_PHRASES, TUTEO, TUTEO_AMBIGUOUS, bare, fold, registerRank } from './rules';
+import { clausesOf, wordsIn } from './shape';
+import { type Token, buildIndex, split, tokenize } from './tokenize';
 import { type VocabForm, type VocabUnit, type Vocabulary, drillable } from './vocabulary';
+
+/** A phrase as the denylist compares them: "¿Qué tal?" and "qué tal" are one. */
+const phraseKey = (s: string) => ` ${bare(s).split(/\s+/).filter(Boolean).join(' ')} `;
+
+/** Set phrases from other Spanishes, matched over the whole sentence. */
+export function checkPhrases(es: string) {
+  const hay = phraseKey(es);
+  const problems: string[] = [];
+  for (const [phrase, instead] of REGIONAL_PHRASES) {
+    if (hay.includes(phraseKey(phrase))) problems.push(`"${phrase}" is not how it's said here — use "${instead}"`);
+  }
+  return problems;
+}
+
+/**
+ * `che` opens what you say. It is "hey", not the English "man": *Che, mal.*,
+ * not *Mal, che.* Straight after a bare greeting is the one exception, because
+ * "Hola, che." is a single gesture rather than a tag on the end of a sentence.
+ * Checked per clause, so "Hola. Che, ¿todo bien?" is fine.
+ */
+export function chePlacement(es: string) {
+  const problems: string[] = [];
+  for (const clause of clausesOf(es)) {
+    const words = wordsIn(clause).map((w) => fold(split(w).core));
+    words.forEach((w, i) => {
+      if (w !== 'che') return;
+      const afterGreeting =
+        (i === 1 && CHE_GREETINGS.has(words[0])) || (i === 2 && CHE_GREETINGS.has(`${words[0]} ${words[1]}`));
+      if (i === 0 || afterGreeting) return;
+      problems.push(
+        `"${clause}" — "che" goes in front, where English puts "hey": "Che, mal.", not "Mal, che.". ` +
+          `Only a bare greeting may come before it ("Hola, che."); anywhere else it reads as the English "man" tacked on the end.`,
+      );
+    });
+  }
+  return problems;
+}
 
 /** Forms a sentence in a unit may use: its own and every earlier unit's. */
 export function availableForms<F extends { unit_order: number }>(vocabulary: { forms: F[] }, courseOrder: number) {
@@ -39,8 +77,17 @@ export function checkSentence(vocabulary: Vocabulary, unit: VocabUnit, es: strin
       );
     } else if (t.forms.every((f) => registerRank(f.register) > registerRank(unit.register_max))) {
       problems.push(`"${t.core}" is ${t.forms[0].register}; this unit allows up to ${unit.register_max}`);
+    } else if (t.forms.every((f) => f.bound)) {
+      // The tokenizer takes the longest form it can, so a bound form resolving
+      // on its own means the chunk it belongs to is not there: the sentence
+      // said "llamo" where it had to say "me llamo".
+      const chunks = vocabulary.forms.filter((f) => isChunkFor(f, t.forms[0]));
+      problems.push(
+        `"${t.core}" is never said on its own — ${chunks.length ? `use ${chunks.map((c) => `"${c.form}"`).join(' or ')}` : 'it only exists inside a longer form'}`,
+      );
     }
   }
+  problems.push(...checkPhrases(es), ...chePlacement(es));
   return problems;
 }
 
@@ -57,7 +104,63 @@ export function checkFormEntry(form: { form: string; pos: string; features: Form
     problems.push('second-person singular verb form must be tagged "vos"');
   }
   if (REGIONAL.has(folded)) problems.push(`"${form.form}" is not rioplatense — use "${REGIONAL.get(folded)}"`);
+  // A multi-word entry can be a whole foreign phrase ("echo de menos").
+  problems.push(...checkPhrases(form.form));
   return problems;
+}
+
+/** Whether `chunk` is a multi-word form of the same lemma that ends in `bound`. */
+const isChunkFor = (chunk: VocabForm, bound: VocabForm) =>
+  chunk.id !== bound.id &&
+  chunk.lemma_id === bound.lemma_id &&
+  fold(chunk.form).split(' ').length > 1 &&
+  fold(chunk.form).endsWith(` ${fold(bound.form)}`);
+
+/**
+ * Forms that behave as if they were bound but are not marked so: every time
+ * the course says the word, the same little word comes first.
+ *
+ * This is how `llamo` was found. It had a card of its own reading "llamo /
+ * name is", which is not a question anyone can answer: all nineteen sentences
+ * that say `llamo` say `me llamo`, so the half the card left out is the half
+ * that carries the meaning (docs/course-spec.md §1.5).
+ *
+ * The test is deliberately blunt — a word is suspect only when it has never
+ * once stood on its own — so a real word that merely *likes* a neighbour
+ * ("muy bien") is not swept up with it.
+ *
+ * @param minSeen  how many times the course must say the word before its
+ *                 company means anything. Two sentences prove nothing.
+ */
+export function boundCandidates(
+  vocabulary: Vocabulary,
+  sentences: { es: string }[],
+  { minSeen = 3 }: { minSeen?: number } = {},
+) {
+  const index = buildIndex(vocabulary.forms);
+  const before = new Map<string, string[]>();
+  for (const s of sentences) {
+    const tokens = tokenize(s.es, index);
+    tokens.forEach((t, i) => {
+      const previous = i > 0 ? fold(tokens[i - 1].core) : '';
+      for (const f of t.forms) {
+        if (!before.has(f.id)) before.set(f.id, []);
+        before.get(f.id)!.push(previous);
+      }
+    });
+  }
+
+  const out: { form: VocabForm; seen: number; after: string }[] = [];
+  for (const form of vocabulary.forms) {
+    if (form.bound || !drillable(form)) continue;
+    const company = before.get(form.id) ?? [];
+    if (company.length < minSeen) continue;
+    const [first] = company;
+    if (!CLITIC_LEMMAS.has(first)) continue;
+    if (!company.every((w) => w === first)) continue;
+    out.push({ form, seen: company.length, after: first });
+  }
+  return out;
 }
 
 /**

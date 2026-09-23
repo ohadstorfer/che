@@ -13,12 +13,17 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { parse } from 'yaml';
 
 import { checkFormEntry, checkSentence, glossRepeats, meaningOverlaps } from '../../../src/lib/course-rules/check.ts';
+import { drillable } from '../../../src/lib/course-rules/vocabulary.ts';
 import { ids, lemmaKey } from './ids.mjs';
 import { POS, REGISTERS, parseFeatures } from './rules.mjs';
 
 // The checks themselves take a vocabulary — this outline, or the database's
 // (lib/vocabulary.mjs) — and are shared with the admin.
 export { availableForms, checkSentence, meaningOverlaps, senses } from '../../../src/lib/course-rules/check.ts';
+// One definition of "may this form be asked about on its own", shared with the
+// app and the admin. The scripts each used to keep their own copy of it, which
+// is how a rule added in one place could quietly miss the other four.
+export { drillable };
 
 const COURSE_DIR = new URL('../../../docs/course/', import.meta.url);
 /** Every section file, in order: a new section is a new section-N.yaml. */
@@ -196,6 +201,9 @@ export function loadOutline(paths = SECTION_PATHS) {
             // Its place among the words its unit teaches: the order lessons take them in.
             position: forms.filter((f) => f.unit_id === unitId).length + 1,
             is_glue: row.is_glue,
+            // A form that is only ever said inside a longer one: it keeps its
+            // place in sentences and in the dictionary, and is never drilled.
+            bound: e.bound === true,
             register: row.register,
             audio_path: null,
             status: 'draft',
@@ -204,7 +212,7 @@ export function loadOutline(paths = SECTION_PATHS) {
       });
 
       // The lessons follow from how much the unit teaches, unless it says.
-      const drillableHere = forms.filter((f) => f.unit_id === unitId && !f.is_glue && f.pos !== 'propn').length;
+      const drillableHere = forms.filter((f) => f.unit_id === unitId && drillable(f)).length;
       const lessonCount = u.lessons ?? lessonCountFor(drillableHere);
       unit.lessons = Array.from({ length: lessonCount }, (_, k) => {
         const ordinal = k + 1;

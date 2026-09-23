@@ -5,14 +5,13 @@
 
 import { generateVariants, uncoveredTokens } from './accept.mjs';
 import { ids } from './ids.mjs';
-import { checkSentence, availableForms } from './outline.mjs';
+import { checkSentence, availableForms, drillable } from './outline.mjs';
 import { bare, fold } from './rules.mjs';
 import { checkShape } from '../../../src/lib/course-rules/shape.ts';
 import { buildIndex, tokenize } from './tokenize.mjs';
 
 const SENTENCE_MODES = ['sentence_intro', 'sentence_meaning', 'sentence_gap', 'sentence_build', 'sentence_listen'];
 
-const drillable = (f) => !f.is_glue && f.pos !== 'propn';
 
 /** Two answers are the same answer when their words are: "¿Sos Juan?" = "sos juan". */
 const answerKey = (es) => bare(es).split(/\s+/).filter(Boolean).join(' ');
@@ -176,7 +175,14 @@ export function buildContent(outline, content, { source = 'human', status = 'dra
           case 'teach': {
             const form = resolveFormRef(outline, unit, value, where, errors);
             if (!form) return;
-            if (!drillable(form)) warnings.push(`${where}: teaching "${form.form}", a ${form.is_glue ? 'glue word' : 'name'}`);
+            if (!drillable(form)) {
+              const what = form.bound
+                ? 'a form that is never said on its own — teach the chunk it lives in'
+                : form.is_glue
+                  ? 'a glue word'
+                  : 'a name';
+              warnings.push(`${where}: teaching "${form.form}", ${what}`);
+            }
             slot.form_id = form.id;
             taught.add(form.id);
             break;

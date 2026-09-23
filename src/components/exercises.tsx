@@ -45,13 +45,15 @@ import {
   tokenIndexOf,
   tokenTail,
   tokenWord,
+  gradeGap,
   gradeTyped,
   labelOf,
   meaningOf,
   type Note,
+  startsSentence,
 } from '@/lib/answers';
 import type { AnswerExtra, QueueItem } from '@/lib/round';
-import { RUNG_BUILD_AT } from '@/lib/sentences';
+import { DEFAULT_LADDER, type Ladder, RUNG_BUILD_AT } from '@/lib/sentences';
 import { SETTLED_DAYS, buildTiles, wordPool } from '@/lib/session';
 import { colors, radius, shadow } from '@/lib/theme';
 import type { Form, Sentence, Tip } from '@/lib/types';
@@ -70,20 +72,25 @@ import type { Form, Sentence, Tip } from '@/lib/types';
  *  panel can offer to report or explain a wrong answer. */
 const ItemContext = createContext<QueueItem | null>(null);
 
+/** The ladder the round was built with — what decides when a screen is still
+ *  new enough to her to be worth marking "Harder". */
+const LadderContext = createContext<Ladder>(DEFAULT_LADDER);
+
 type Answered = (wrongFormIds: string[], extra?: AnswerExtra) => void;
 type Single = (correct: boolean, extra?: AnswerExtra) => void;
 
 /** The label a harder exercise wears (learning-engine-spec §6.5). */
-function badgeFor(item: QueueItem): string | undefined {
+function badgeFor(item: QueueItem, ladder: Ladder = DEFAULT_LADDER): string | undefined {
   if (item.isIntro || item.isRetry || item.placementUnit) return undefined;
   // Building one clause is the step the ladder takes *instead* of the full
   // build, because the full build was too much. It never wears the badge.
   if (item.clause != null) return undefined;
   if (item.promoted || item.mode === 'typing') return 'Harder';
-  if ((item.mode === 'sentence_build' || item.mode === 'sentence_listen') && item.sentence) {
-    // Only while the rung is new to her: the first builds of a sentence.
-    return (item.sentence.shown?.correct_count ?? 0) <= RUNG_BUILD_AT ? 'Harder' : undefined;
-  }
+  // Only while the rung is new to her: the first screens of a sentence at it.
+  const newAt = (until: number) => ((item.sentence?.shown?.correct_count ?? 0) <= until ? 'Harder' : undefined);
+  if ((item.mode === 'sentence_build' || item.mode === 'sentence_listen') && item.sentence) return newAt(RUNG_BUILD_AT);
+  if (item.mode === 'sentence_gap_tiles' && item.sentence) return newAt(ladder.gapTilesAt);
+  if (item.mode === 'sentence_gap_typed' && item.sentence) return newAt(ladder.gapTypedAt);
   return undefined;
 }
 
@@ -97,11 +104,12 @@ function Frame({
   answer?: string;
 }) {
   const item = useContext(ItemContext);
+  const ladder = useContext(LadderContext);
   const wrong = props.verdict && !props.verdict.correct;
   return (
     <ExerciseFrame
       {...props}
-      badge={item ? badgeFor(item) : undefined}
+      badge={item ? badgeFor(item, ladder) : undefined}
       actions={wrong && item && answer ? <WrongAnswerActions item={item} answer={answer} /> : undefined}
     />
   );
@@ -136,6 +144,7 @@ export function Exercise({
   onAnswered,
   hints,
   lexicon,
+  ladder = DEFAULT_LADDER,
 }: {
   item: QueueItem;
   allForms: Form[];
@@ -148,18 +157,24 @@ export function Exercise({
   /** The whole lexicon, not just the deck. A tapped word can be a function
    *  word or a form she is not drilling, and neither is in `allForms`. */
   lexicon?: Map<string, Form>;
+  /** The ladder the round was built with (session.ts). Only the badge reads
+   *  it: on an easier or harder ladder a screen becomes new to her at a
+   *  different pass count. */
+  ladder?: Ladder;
 }) {
   return (
     <ItemContext.Provider value={item}>
-      <ExerciseBody
-        item={item}
-        allForms={allForms}
-        allSentences={allSentences}
-        onIntroDone={onIntroDone}
-        onAnswered={onAnswered}
-        hints={!!hints}
-        lexicon={lexicon}
-      />
+      <LadderContext.Provider value={ladder}>
+        <ExerciseBody
+          item={item}
+          allForms={allForms}
+          allSentences={allSentences}
+          onIntroDone={onIntroDone}
+          onAnswered={onAnswered}
+          hints={!!hints}
+          lexicon={lexicon}
+        />
+      </LadderContext.Provider>
     </ItemContext.Provider>
   );
 }
@@ -192,6 +207,17 @@ function ExerciseBody({
   switch (item.mode) {
     case 'matching':
       return <Matching item={item} onAnswered={onAnswered} />;
+    case 'sentence_meaning_tiles':
+      return (
+        <SentenceBuild
+          item={item}
+          allForms={allForms}
+          onAnswered={onAnswered}
+          side="en"
+          canTap={canTap}
+          lexicon={lexicon}
+        />
+      );
     case 'sentence_intro':
     case 'sentence_meaning':
       return (
@@ -205,6 +231,8 @@ function ExerciseBody({
         />
       );
     case 'sentence_gap':
+    case 'sentence_gap_tiles':
+    case 'sentence_gap_typed':
       return (
         <SentenceGap
           item={item}
@@ -212,6 +240,7 @@ function ExerciseBody({
           onAnswered={onAnswered}
           canTap={canTap}
           lexicon={lexicon}
+          fill={item.mode === 'sentence_gap_typed' ? 'typed' : item.mode === 'sentence_gap_tiles' ? 'tiles' : 'choices'}
         />
       );
     case 'sentence_build':
@@ -542,8 +571,8 @@ function MultipleChoice({
       ? 'What does this phrase mean?'
       : 'What does it mean?'
     : phrase
-      ? 'How do you say this phrase in Argentine Spanish?'
-      : 'How do you say it in Argentine Spanish?';
+      ? 'How do you say this phrase in Spanish?'
+      : 'How do you say it in Spanish?';
 
   return (
     <Frame
@@ -1142,7 +1171,12 @@ export function TileBuilder({
                     webPress,
                     dragTouch,
                   ]}>
-                  <Text style={[styles.tileText, flying && { opacity: 0 }]}>{tiles[tileIndex]}</Text>
+                  {/* First on the line, a word takes its capital again. */}
+                  <Text style={[styles.tileText, flying && { opacity: 0 }]}>
+                    {position === 0
+                      ? tiles[tileIndex].charAt(0).toLocaleUpperCase('es') + tiles[tileIndex].slice(1)
+                      : tiles[tileIndex]}
+                  </Text>
                 </Pressable>
               </GestureDetector>
             );
@@ -1342,7 +1376,7 @@ function Typing({
 
   return (
     <Frame
-      prompt="Type it in Argentine Spanish"
+      prompt="Type it in Spanish"
       verdict={verdict}
       canCheck={!!input.trim()}
       onCheck={check}
@@ -1562,9 +1596,9 @@ export function SentenceLine({
                       blank.tone === 'right' && { color: colors.success },
                       blank.tone === 'wrong' && { color: colors.dangerInk },
                     ]}>
-                    {/* Back in its sentence, a first word takes its capital again. */}
+                    {/* Back in its sentence, a word that opens one takes its capital again. */}
                     {blank.filled
-                      ? i === 0
+                      ? startsSentence(sentence.tokens, i)
                         ? blank.filled.charAt(0).toLocaleUpperCase('es') + blank.filled.slice(1)
                         : blank.filled
                       : ' '}
@@ -1755,66 +1789,186 @@ function SentenceIntro({
 // the session picked among the words the sentence covers), and four words to
 // fill it with. The English sits under the bubble: without it any word that
 // fits the grammar would do.
+/** How many words the tile bank offers when the blank is filled from tiles. */
+const GAP_TILES = 8;
+
+/**
+ * The sentence with one word blanked out, filled three ways. Which one she
+ * gets is the gap's flavour (session.ts, `gapMode`): four choices on a
+ * sentence she has just started passing, a bank of tiles once it stops moving
+ * up the ladder, and typed once it has stayed there. The screen around them is
+ * the same — the sentence, the recording once she has answered, the English
+ * underneath — because it is the same question, asked with less help.
+ */
 function SentenceGap({
   item,
   allForms,
   onAnswered,
   canTap,
   lexicon,
+  fill = 'choices',
 }: {
   item: QueueItem;
   allForms: Form[];
   onAnswered: Answered;
   canTap: boolean;
   lexicon?: Map<string, Form>;
+  fill?: 'choices' | 'tiles' | 'typed';
 }) {
   const sentence = item.sentence!;
   const target = item.form;
   const words = useWordPopover(lookupWith(lexicon, allForms));
   const [index] = useState(() => tokenIndexOf(sentence, target.id));
-  const [options] = useState(() => gapOptions(sentence, target, allForms));
+  const [options] = useState(() =>
+    fill === 'typed' ? [] : gapOptions(sentence, target, allForms, fill === 'tiles' ? GAP_TILES : 4),
+  );
   const [chosen, setChosen] = useState<string | null>(null);
+  const [input, setInput] = useState('');
+  const [graded, setGraded] = useState<ReturnType<typeof gradeGap> | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
 
-  const filled = options.find((o) => o.id === chosen)?.label;
   const answer = index >= 0 ? tokenWord(sentence.tokens[index]) : target.form;
+  const typed = input.trim();
+  const filled = fill === 'typed' ? typed || undefined : options.find((o) => o.id === chosen)?.label;
+  const correct = fill === 'typed' ? !!graded?.correct : chosen === target.id;
+
+  const check = () => {
+    const g = fill === 'typed' ? gradeGap(typed, target, allForms) : null;
+    setGraded(g);
+    setVerdict({
+      correct: g ? g.correct : chosen === target.id,
+      answer: `${answer} — ${sentence.en}`,
+      note: g?.note ? NOTE_TEXT[g.note](g.expected) : undefined,
+    });
+  };
 
   return (
     <Frame
       prompt={item.isRetry ? '🔁 Complete the sentence' : 'Complete the sentence'}
       verdict={verdict}
-      canCheck={!!chosen}
-      onCheck={() =>
-        setVerdict({ correct: chosen === target.id, answer: `${answer} — ${sentence.en}` })
-      }
-      onContinue={() => onAnswered(verdict?.correct ? [] : [target.id], { hinted: words.peeked })}>
+      canCheck={fill === 'typed' ? !!typed : !!chosen}
+      onCheck={check}
+      answer={fill === 'typed' ? typed : undefined}
+      onContinue={() =>
+        onAnswered(correct ? [] : [target.id], {
+          hinted: words.peeked,
+          ...(fill === 'typed' ? { answer: typed, note: graded?.note } : {}),
+        })
+      }>
+      {/* The English is what she is asked, so it is what Mora says. The Spanish
+          sits under it on its own ruled line, the way a build lays out its
+          answer: this is the sentence she is completing, not reading. */}
       <SpeechBubble>
         <View style={styles.bubbleRow}>
-          {/* Not before she answers — the recording says the missing word. Once
-              the verdict is in it gives nothing away and is worth the most:
-              she hears the sentence whole, with the word she just chose in it. */}
-          {verdict && sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
-          <SentenceLine
-            sentence={sentence}
-            onWord={canTap ? words.open : undefined}
-            blank={{
-              index,
-              filled,
-              tone: verdict ? (verdict.correct ? 'right' : 'wrong') : undefined,
-            }}
-          />
+          <View style={styles.bubbleText}>
+            <Text style={styles.bubblePhraseEn}>{sentence.en}</Text>
+          </View>
         </View>
       </SpeechBubble>
+      <View style={styles.gapLine}>
+        {/* Not before she answers — the recording says the missing word. Once
+            the verdict is in it gives nothing away and is worth the most:
+            she hears the sentence whole, with the word she just chose in it. */}
+        {verdict && sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
+        <SentenceLine
+          sentence={sentence}
+          onWord={canTap ? words.open : undefined}
+          blank={{
+            index,
+            filled,
+            tone: verdict ? (correct ? 'right' : 'wrong') : undefined,
+          }}
+        />
+      </View>
       <WordBubble state={words.showing} onClose={words.close} />
-      <Text style={styles.gapEn}>{sentence.en}</Text>
-      <Choices
-        options={options}
-        correctId={target.id}
-        chosen={chosen}
-        revealed={verdict !== null}
-        onPick={setChosen}
-      />
+      {fill === 'typed' ? (
+        <TextInput
+          value={input}
+          onChangeText={setInput}
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoFocus
+          placeholder="the missing word…"
+          placeholderTextColor={colors.faint}
+          editable={verdict === null}
+          onSubmitEditing={check}
+          style={[
+            styles.typingInput,
+            verdict?.correct === true && { borderColor: colors.success, backgroundColor: colors.successSoft },
+            verdict?.correct === false && { borderColor: colors.danger, backgroundColor: colors.dangerSoft },
+          ]}
+        />
+      ) : fill === 'tiles' ? (
+        <GapBank
+          options={options}
+          correctId={target.id}
+          chosen={chosen}
+          revealed={verdict !== null}
+          onPick={setChosen}
+        />
+      ) : (
+        <Choices
+          options={options}
+          correctId={target.id}
+          chosen={chosen}
+          revealed={verdict !== null}
+          onPick={setChosen}
+        />
+      )}
     </Frame>
+  );
+}
+
+/**
+ * The bank a tile gap is filled from: the same question as the four choices,
+ * with twice as many words and none of the help a full-width button gives.
+ * Tiles are tapped rather than dragged — there is only one slot to fill.
+ */
+function GapBank({
+  options,
+  correctId,
+  chosen,
+  revealed,
+  onPick,
+}: {
+  options: Option[];
+  correctId: string;
+  chosen: string | null;
+  revealed: boolean;
+  onPick: (id: string) => void;
+}) {
+  return (
+    <View style={styles.gapBank}>
+      {options.map((opt) => {
+        const picked = chosen === opt.id;
+        const right = revealed && opt.id === correctId;
+        const wrong = revealed && picked && opt.id !== correctId;
+        return (
+          <Pressable
+            key={opt.id}
+            disabled={revealed}
+            onPress={() => onPick(opt.id)}
+            style={({ pressed }) => [
+              styles.tile,
+              picked && styles.choicePicked,
+              right && styles.choiceRight,
+              wrong && styles.choiceWrong,
+              { transform: [{ scale: pressed && !revealed ? 0.96 : 1 }] },
+              webPress,
+            ]}>
+            <Text
+              style={[
+                styles.tileText,
+                picked && { color: colors.primaryDark },
+                right && { color: colors.success },
+                wrong && { color: colors.danger },
+              ]}>
+              {opt.label}
+            </Text>
+          </Pressable>
+        );
+      })}
+    </View>
   );
 }
 
@@ -1826,19 +1980,32 @@ function SentenceBuild({
   allForms,
   onAnswered,
   byEar,
+  side = 'es',
+  canTap = false,
+  lexicon,
 }: {
   item: QueueItem;
   allForms: Form[];
   onAnswered: Answered;
   byEar?: boolean;
+  /** Only the English build shows Spanish to read, so only it can offer the
+   *  word-tap — the others show English, or nothing at all. */
+  canTap?: boolean;
+  lexicon?: Map<string, Form>;
+  /** Which side she puts together. The English side is the meaning rung asked
+   *  properly: she reads the Spanish and builds what it says, instead of
+   *  picking it out of four. No clause ever narrows it — the English of a long
+   *  sentence is still English she can read. */
+  side?: 'es' | 'en';
 }) {
   const sentence = item.sentence!;
   // A sentence too long to rebuild whole asks for one of its clauses, with the
   // rest of it written out above. Everything below works on `asked` — the
   // clause, or the whole sentence when there is no clause to single out — so
   // the tiles, the marking and the blame all narrow together.
-  const asked = item.clause != null ? clauseOf(sentence, item.clause) : sentence;
-  const [{ tiles }] = useState(() => sentenceTiles(asked, allForms));
+  const asked = item.clause != null && side === 'es' ? clauseOf(sentence, item.clause) : sentence;
+  const words = useWordPopover(lookupWith(lexicon, allForms));
+  const [{ tiles }] = useState(() => sentenceTiles(asked, allForms, side));
   const [used, setUsed] = useState<number[]>([]);
   const [verdict, setVerdict] = useState<Verdict>(null);
 
@@ -1847,26 +2014,47 @@ function SentenceBuild({
   return (
     <Frame
       prompt={
-        byEar ? 'What does the audio say?' : item.clause != null ? 'Say the missing part' : 'Translate this sentence'
+        side === 'en'
+          ? 'What does this say?'
+          : byEar
+            ? 'What does the audio say?'
+            : item.clause != null
+              ? 'Say the missing part'
+              : 'Translate this sentence'
       }
       verdict={verdict}
       canCheck={used.length > 0}
       onCheck={() =>
         setVerdict({
-          correct: sentenceAnswerMatches(placed, asked, { byEar }),
+          correct: sentenceAnswerMatches(placed, asked, { byEar, side }),
           answer: `${sentence.es} — ${sentence.en}`,
           // Right, but not the sentence as written: show that one too.
-          also: isCanonical(placed, asked) ? undefined : asked.es,
+          also: isCanonical(placed, asked, side) ? undefined : side === 'en' ? asked.en : asked.es,
         })
       }
       answer={placed.join(' ')}
       onContinue={() =>
-        onAnswered(verdict?.correct ? [] : missedForms(asked, placed, allForms), {
+        onAnswered(verdict?.correct ? [] : missedForms(asked, placed, allForms, { side, drilled: item.form.id }), {
           answer: placed.join(' '),
+          ...(side === 'en' ? { hinted: words.peeked } : {}),
         })
       }>
       {byEar && sentence.audio_path ? (
         <AudioPad path={sentence.audio_path} />
+      ) : side === 'en' ? (
+        // Reading a sentence in Spanish, like the rung this replaces: the
+        // recording binds the sound to the spelling, and a word she cannot
+        // place is one tap away. Losing both on the harder half of a coin
+        // flip would make the same rung two different exercises.
+        <>
+          <SpeechBubble>
+            <View style={styles.bubbleRow}>
+              {sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
+              <SentenceLine sentence={sentence} onWord={canTap ? words.open : undefined} />
+            </View>
+          </SpeechBubble>
+          <WordBubble state={words.showing} onClose={words.close} />
+        </>
       ) : (
         <SpeechBubble>
           <View style={styles.bubbleRow}>
@@ -1876,7 +2064,7 @@ function SentenceBuild({
           </View>
         </SpeechBubble>
       )}
-      {item.clause != null ? <ClauseContext es={sentence.es} clause={item.clause} /> : null}
+      {item.clause != null && side === 'es' ? <ClauseContext es={sentence.es} clause={item.clause} /> : null}
       <TileBuilder tiles={tiles} used={used} setUsed={setUsed} locked={verdict !== null} ruled />
     </Frame>
   );
@@ -2027,7 +2215,16 @@ const styles = StyleSheet.create({
   gapRight: { borderBottomColor: colors.success },
   gapWrong: { borderBottomColor: colors.danger },
   gapText: { fontSize: 22, lineHeight: 30, fontWeight: '700', color: colors.primaryDark },
-  gapEn: { fontSize: 18, lineHeight: 26, color: colors.muted, textAlign: 'center' },
+  gapLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
+    paddingVertical: 14,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: colors.border,
+  },
+  gapBank: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 10 },
   // The aside sits a step down from the gloss it explains: lighter, smaller,
   // and never bold — it is context, not the thing being learnt.
   glossNote: { fontSize: 14, color: colors.muted, lineHeight: 19 },

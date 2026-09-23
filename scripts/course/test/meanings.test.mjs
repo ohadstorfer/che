@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { gradeTyped, meaningOf, selfGlossed, sharesMeaning } from '../../../src/lib/answers.ts';
-import { meaningsFromSentences, standsAlone, withMeanings } from '../../../src/lib/meanings.ts';
+import { meaningsFromSentences, popoverMeanings, standsAlone, withMeanings } from '../../../src/lib/meanings.ts';
 import { buildRows } from '../lib/rows.mjs';
 
 const form = (id, text, gloss, unit_order, extra = {}) => ({
@@ -98,7 +98,7 @@ test('a meaning another word in reach also has is passed over while there is a c
 test("a sentence's rendering leaves the sentence only if it is a translation of the word", () => {
   assert.equal(standsAlone("you're", 'you are'), true, 'contractions are opened');
   assert.equal(standsAlone('are you', 'you are'), true);
-  assert.equal(standsAlone('not great', 'badly, not well'), true, 'a new meaning the gloss never listed');
+  assert.equal(standsAlone('pretty bad', 'bad, badly'), true, 'a new meaning the gloss never listed');
   assert.equal(standsAlone("it's", 'you are'), false, '"¡Sos vos!" = "It\'s you!"');
   assert.equal(standsAlone('there', 'hey'), false, '"Hola, che" = "Hi there"');
   assert.equal(standsAlone('me', 'I'), false, '"¿Yo?" = "Me?"');
@@ -159,4 +159,34 @@ test('a word is never its own meaning while its gloss has a real translation', (
   const cortado = form('co', 'cortado', 'cortado', 1, { pos: 'noun' });
   assert.equal(byId(withMeanings([cortado], [])).get('co').meaning_en, 'cortado');
   assert.equal(selfGlossed(cortado), true);
+});
+
+// ---------------------------------------------------------------------------
+// The popover: what a tapped word lists.
+// ---------------------------------------------------------------------------
+
+const rows = (form, gloss_en, inContext) => popoverMeanings({ form, gloss_en }, inContext);
+
+test('a rendering that is a meaning of the word stands on its own', () => {
+  // `bien` in "bien hecho" is "well", not the dictionary's "well, fine, good".
+  assert.deepEqual(rows('bien', 'well, fine, good', 'well'), [{ text: 'well' }]);
+  assert.deepEqual(rows('sos', 'you are', "you're"), [{ text: "you're" }]);
+});
+
+test("a rendering that isn't brings the word's own meaning with it", () => {
+  // Every sentence the course has renders `cómo` as "what's" — and the drill
+  // two screens later asks for "how".
+  assert.deepEqual(rows('cómo', 'how', "what's"), [{ text: "what's", here: true }, { text: 'how' }]);
+  assert.deepEqual(rows('che', 'hey', 'there'), [{ text: 'there', here: true }, { text: 'hey' }]);
+  // The label only appears when a row follows it to explain what it is next to.
+  assert.deepEqual(rows('mate', 'mate', 'the drink'), [{ text: 'the drink' }]);
+  // "a" for `un` ("a, an") is the word's meaning, though both sides are filler.
+  assert.deepEqual(rows('un', 'a, an', 'a'), [{ text: 'a' }]);
+});
+
+test('an unglossed sentence still lists the dictionary, as written', () => {
+  assert.deepEqual(rows('dale', 'OK, sure, go ahead'), [{ text: 'OK' }, { text: 'sure' }, { text: 'go ahead' }]);
+  // A loanword is not its own translation: the row is dropped, the note stays.
+  assert.deepEqual(rows('mate', 'mate'), []);
+  assert.deepEqual(rows('mate', 'mate', 'mate'), []);
 });

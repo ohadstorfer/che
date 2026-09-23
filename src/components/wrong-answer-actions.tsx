@@ -20,7 +20,14 @@ export interface AnswerActions {
 export const AnswerActionsContext = createContext<AnswerActions | null>(null);
 
 /** Modes whose answer is something she built or typed, so it can be reported. */
-const REPORTABLE = new Set(['sentence_build', 'sentence_listen', 'typing', 'word_build']);
+const REPORTABLE = new Set([
+  'sentence_build',
+  'sentence_listen',
+  'sentence_meaning_tiles',
+  'sentence_gap_typed',
+  'typing',
+  'word_build',
+]);
 
 export function WrongAnswerActions({ item, answer }: { item: QueueItem; answer: string }) {
   const actions = useContext(AnswerActionsContext);

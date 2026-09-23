@@ -1,0 +1,231 @@
+# Words from other Spanishes the course never uses, and the word a porteño
+# says instead (course-spec Appendix B, "Lexicon"). A sentence or a lexicon
+# entry with any form of a word on the left fails the linter and is told the
+# word on the right, so the generator rewrites it — nothing is swapped blindly,
+# because "el ordenador" → "la computadora" changes the article too.
+#
+# Mined from Wiktionary's regional tags (English and Spanish editions, via
+# kaikki.org) and reviewed by hand. Only words that mean nothing else in
+# Argentina belong here: `falda` is a cut of beef, `piña` a punch, `metro` a
+# metre, `plátano` the street tree — blocking those would reject real Argentine.
+# A false block is worse than a miss.
+#
+# Edit this file, then `npm run course:regional` to rebuild every inflected
+# form into src/lib/course-rules/regional-words.ts.
+#
+#   es:  the lemma to block (singular / infinitive); several words = a phrase
+#   ar:  what to say instead
+#   pos: noun | verb | adj | adv | interj | phrase
+#   src: wiktionary | reviewer | hand
+words:
+  - { es: acera, ar: vereda, pos: noun, src: reviewer }
+  - { es: aguacate, ar: palta, pos: noun, src: hand }
+  - { es: ahorita, ar: ahora, pos: adv, src: reviewer }
+  - { es: albaricoque, ar: damasco, pos: noun, src: reviewer }
+  - { es: alberca, ar: pileta, pos: noun, src: reviewer }
+  - { es: alcalde, ar: intendente, pos: noun, src: wiktionary }
+  - { es: aliñar, ar: condimentar, pos: verb, src: reviewer }
+  - { es: allí, ar: allá, pos: adv, src: hand }
+  - { es: alubia, ar: poroto, pos: noun, src: reviewer }
+  - { es: aparcamiento, ar: estacionamiento, pos: noun, src: wiktionary }
+  - { es: aparcar, ar: estacionar, pos: verb, src: reviewer }
+  - { es: apartamento, ar: departamento, pos: noun, src: wiktionary }
+  - { es: apetecer, ar: tener ganas, pos: verb, src: reviewer }
+  - { es: aprisa, ar: rápido, pos: adv, src: reviewer }
+  - { es: aquí, ar: acá, pos: adv, src: hand }
+  - { es: atasco, ar: embotellamiento, pos: noun, src: reviewer }
+  - { es: autobús, ar: "colectivo / bondi", pos: noun, src: hand }
+  - { es: autocar, ar: micro, pos: noun, src: reviewer }
+  - { es: aventar, ar: tirar, pos: verb, src: reviewer }
+  - { es: ayuntamiento, ar: municipalidad, pos: noun, src: reviewer }
+  - { es: balda, ar: estante, pos: noun, src: reviewer }
+  - { es: baloncesto, ar: básquet, pos: noun, src: wiktionary }
+  - { es: banano, ar: banana, pos: noun, src: reviewer }
+  - { es: bayeta, ar: rejilla, pos: noun, src: reviewer }
+  - { es: bañador, ar: malla, pos: noun, src: wiktionary }
+  - { es: bañera, ar: bañadera, pos: noun, src: reviewer }
+  - { es: becario, ar: pasante, pos: noun, src: reviewer }
+  - { es: beicon, ar: panceta, pos: noun, src: reviewer }
+  - { es: betabel, ar: remolacha, pos: noun, src: reviewer }
+  - { es: biberón, ar: mamadera, pos: noun, src: reviewer }
+  - { es: bistec, ar: bife, pos: noun, src: wiktionary }
+  - { es: bocadillo, ar: sándwich, pos: noun, src: wiktionary }
+  - { es: bocata, ar: sándwich, pos: noun, src: reviewer }
+  - { es: boli, ar: birome, pos: noun, src: reviewer }
+  - { es: bollería, ar: facturas, pos: noun, src: hand }
+  - { es: bolígrafo, ar: birome, pos: noun, src: wiktionary }
+  - { es: bombona, ar: garrafa, pos: noun, src: reviewer }
+  - { es: boniato, ar: batata, pos: noun, src: reviewer }
+  - { es: bonito, ar: lindo, pos: adj, src: hand }
+  - { es: braga, ar: bombacha, pos: noun, src: reviewer }
+  - { es: cabreado, ar: enojado, pos: adj, src: wiktionary }
+  - { es: cabrearse, ar: enojarse, pos: verb, src: reviewer }
+  - { es: cacahuate, ar: maní, pos: noun, src: reviewer }
+  - { es: cacahuete, ar: maní, pos: noun, src: reviewer }
+  - { es: cajuela, ar: baúl, pos: noun, src: reviewer }
+  - { es: calabacita, ar: zapallito, pos: noun, src: reviewer }
+  - { es: calabacín, ar: zapallito, pos: noun, src: reviewer }
+  - { es: calcetín, ar: media, pos: noun, src: reviewer }
+  - { es: camarera, ar: moza, pos: noun, src: hand }
+  - { es: camarero, ar: mozo, pos: noun, src: wiktionary }
+  - { es: camiseta, ar: remera, pos: noun, src: hand }
+  - { es: cazadora, ar: campera, pos: noun, src: wiktionary }
+  - { es: cazo, ar: cacerola, pos: noun, src: reviewer }
+  - { es: cebolleta, ar: cebolla de verdeo, pos: noun, src: reviewer }
+  - { es: cerilla, ar: fósforo, pos: noun, src: reviewer }
+  - { es: cerillo, ar: fósforo, pos: noun, src: reviewer }
+  - { es: chabacano, ar: damasco, pos: noun, src: reviewer }
+  - { es: chabola, ar: villa, pos: noun, src: reviewer }
+  - { es: chachi, ar: bárbaro, pos: adj, src: reviewer }
+  - { es: chamaco, ar: nene, pos: noun, src: reviewer }
+  - { es: chamarra, ar: campera, pos: noun, src: hand }
+  - { es: chamba, ar: laburo, pos: noun, src: hand }
+  - { es: chambear, ar: laburar, pos: verb, src: hand }
+  - { es: chancla, ar: ojota, pos: noun, src: reviewer }
+  - { es: chaqueta, ar: campera, pos: noun, src: hand }
+  - { es: charcutería, ar: fiambrería, pos: noun, src: reviewer }
+  - { es: chava, ar: piba, pos: noun, src: hand }
+  - { es: chavala, ar: piba, pos: noun, src: hand }
+  - { es: chaval, ar: pibe, pos: noun, src: hand }
+  - { es: chavo, ar: pibe, pos: noun, src: hand }
+  - { es: chido, ar: "copado / bárbaro", pos: adj, src: hand }
+  - { es: chismorrear, ar: chusmear, pos: verb, src: reviewer }
+  - { es: chorrada, ar: pavada, pos: noun, src: reviewer }
+  - { es: chuche, ar: golosina, pos: noun, src: reviewer }
+  - { es: chuchería, ar: golosina, pos: noun, src: reviewer }
+  - { es: chuleta, ar: costeleta, pos: noun, src: reviewer }
+  - { es: chulo, ar: lindo, pos: adj, src: reviewer }
+  - { es: chungo, ar: feo, pos: adj, src: reviewer }
+  - { es: chutar, ar: patear, pos: verb, src: reviewer }
+  - { es: chándal, ar: jogging, pos: noun, src: reviewer }
+  - { es: chévere, ar: bárbaro, pos: adj, src: reviewer }
+  - { es: chícharo, ar: arveja, pos: noun, src: reviewer }
+  - { es: claxon, ar: bocina, pos: noun, src: reviewer }
+  - { es: cláxon, ar: bocina, pos: noun, src: reviewer }
+  - { es: cobija, ar: frazada, pos: noun, src: reviewer }
+  - { es: coche, ar: auto, pos: noun, src: hand }
+  - { es: coger, ar: "agarrar / tomar", pos: verb, src: hand }
+  - { es: col, ar: repollo, pos: noun, src: reviewer }
+  - { es: columpio, ar: hamaca, pos: noun, src: wiktionary }
+  - { es: computador, ar: computadora, pos: noun, src: wiktionary }
+  - { es: conducir, ar: manejar, pos: verb, src: hand }
+  - { es: cortacésped, ar: cortadora de pasto, pos: noun, src: reviewer }
+  - { es: cotilla, ar: chusma, pos: noun, src: reviewer }
+  - { es: cotillear, ar: chusmear, pos: verb, src: reviewer }
+  - { es: coña, ar: broma, pos: noun, src: wiktionary }
+  - { es: cremallera, ar: cierre, pos: noun, src: reviewer }
+  - { es: crispeta, ar: pochoclo, pos: noun, src: reviewer }
+  - { es: cuate, ar: amigo, pos: noun, src: reviewer }
+  - { es: currar, ar: laburar, pos: verb, src: hand }
+  - { es: curro, ar: laburo, pos: noun, src: hand }
+  - { es: deportivas, ar: zapatillas, pos: noun, src: hand }
+  - { es: deprisa, ar: rápido, pos: adv, src: reviewer }
+  - { es: discoteca, ar: boliche, pos: noun, src: hand }
+  - { es: echar de menos, ar: extrañar, pos: phrase, src: reviewer }
+  - { es: ejote, ar: chaucha, pos: noun, src: reviewer }
+  - { es: elote, ar: choclo, pos: noun, src: hand }
+  - { es: emparedado, ar: sándwich, pos: noun, src: wiktionary }
+  - { es: encimera, ar: mesada, pos: noun, src: reviewer }
+  - { es: enfadado, ar: enojado, pos: adj, src: wiktionary }
+  - { es: enfadar, ar: enojar, pos: verb, src: reviewer }
+  - { es: enfadarse, ar: enojarse, pos: verb, src: reviewer }
+  - { es: engrapadora, ar: abrochadora, pos: noun, src: reviewer }
+  - { es: enhorabuena, ar: felicitaciones, pos: interj, src: reviewer }
+  - { es: escaparate, ar: vidriera, pos: noun, src: reviewer }
+  - { es: escuincle, ar: nene, pos: noun, src: reviewer }
+  - { es: esparadrapo, ar: cinta adhesiva, pos: noun, src: reviewer }
+  - { es: estanco, ar: kiosco, pos: noun, src: reviewer }
+  - { es: farola, ar: farol, pos: noun, src: reviewer }
+  - { es: flipar, ar: sorprenderse, pos: verb, src: reviewer }
+  - { es: follón, ar: lío, pos: noun, src: wiktionary }
+  - { es: fregadero, ar: pileta, pos: noun, src: reviewer }
+  - { es: fregona, ar: trapo de piso, pos: noun, src: reviewer }
+  - { es: fresa, ar: frutilla, pos: noun, src: hand }
+  - { es: frigorífico, ar: heladera, pos: noun, src: reviewer }
+  - { es: frijol, ar: poroto, pos: noun, src: reviewer }
+  - { es: friolero, ar: friolento, pos: adj, src: reviewer }
+  - { es: furgoneta, ar: camioneta, pos: noun, src: wiktionary }
+  - { es: gafas, ar: anteojos, pos: noun, src: hand }
+  - { es: gasolina, ar: nafta, pos: noun, src: wiktionary }
+  - { es: gasolinera, ar: estación de servicio, pos: noun, src: reviewer }
+  - { es: gilipollez, ar: pavada, pos: noun, src: wiktionary }
+  - { es: gis, ar: tiza, pos: noun, src: reviewer }
+  - { es: grama, ar: pasto, pos: noun, src: reviewer }
+  - { es: grapadora, ar: abrochadora, pos: noun, src: reviewer }
+  - { es: grifo, ar: canilla, pos: noun, src: wiktionary }
+  - { es: guagua, ar: colectivo, pos: noun, src: reviewer }
+  - { es: guay, ar: "copado / bárbaro", pos: adj, src: hand }
+  - { es: guindilla, ar: ají, pos: noun, src: reviewer }
+  - { es: guisante, ar: arveja, pos: noun, src: reviewer }
+  - { es: habichuela, ar: poroto, pos: noun, src: reviewer }
+  - { es: halar, ar: tirar, pos: verb, src: reviewer }
+  - { es: hervidor, ar: pava eléctrica, pos: noun, src: reviewer }
+  - { es: híjole, ar: uh, pos: interj, src: reviewer }
+  - { es: jalar, ar: tirar, pos: verb, src: reviewer }
+  - { es: jaleo, ar: lío, pos: noun, src: wiktionary }
+  - { es: jamón york, ar: jamón cocido, pos: phrase, src: reviewer }
+  - { es: jersey, ar: pulóver, pos: noun, src: wiktionary }
+  - { es: jitomate, ar: tomate, pos: noun, src: reviewer }
+  - { es: jolín, ar: uh, pos: interj, src: reviewer }
+  - { es: judía verde, ar: chaucha, pos: phrase, src: reviewer }
+  - { es: lavabo, ar: lavatorio, pos: noun, src: reviewer }
+  - { es: lavadora, ar: lavarropas, pos: noun, src: wiktionary }
+  - { es: lavavajillas, ar: lavaplatos, pos: noun, src: reviewer }
+  - { es: lejía, ar: lavandina, pos: noun, src: wiktionary }
+  - { es: litera, ar: cucheta, pos: noun, src: wiktionary }
+  - { es: majo, ar: simpático, pos: adj, src: reviewer }
+  - { es: maleta, ar: valija, pos: noun, src: wiktionary }
+  - { es: maletero, ar: baúl, pos: noun, src: wiktionary }
+  - { es: mantequilla, ar: manteca, pos: noun, src: wiktionary }
+  - { es: mazorca, ar: choclo, pos: noun, src: reviewer }
+  - { es: mechero, ar: encendedor, pos: noun, src: reviewer }
+  - { es: melocotón, ar: durazno, pos: noun, src: reviewer }
+  - { es: mesera, ar: moza, pos: noun, src: hand }
+  - { es: mesero, ar: mozo, pos: noun, src: reviewer }
+  - { es: mogollón, ar: montón, pos: noun, src: reviewer }
+  - { es: molar, ar: copar, pos: verb, src: reviewer }
+  - { es: moqueta, ar: alfombra, pos: noun, src: reviewer }
+  - { es: moratón, ar: moretón, pos: noun, src: reviewer }
+  - { es: móvil, ar: celular, pos: noun, src: hand }
+  - { es: nevera, ar: heladera, pos: noun, src: wiktionary }
+  - { es: ordenador, ar: computadora, pos: noun, src: hand }
+  - { es: pan de molde, ar: pan lactal, pos: phrase, src: reviewer }
+  - { es: papel de cocina, ar: rollo de cocina, pos: phrase, src: reviewer }
+  - { es: papelería, ar: librería, pos: noun, src: reviewer }
+  - { es: paso de cebra, ar: senda peatonal, pos: phrase, src: reviewer }
+  - { es: patata, ar: papa, pos: noun, src: hand }
+  - { es: perrito caliente, ar: pancho, pos: phrase, src: reviewer }
+  - { es: pijo, ar: cheto, pos: adj, src: reviewer }
+  - { es: pillar, ar: agarrar, pos: verb, src: reviewer }
+  - { es: pimiento, ar: morrón, pos: noun, src: reviewer }
+  - { es: piscina, ar: pileta, pos: noun, src: wiktionary }
+  - { es: platicar, ar: charlar, pos: verb, src: reviewer }
+  - { es: playera, ar: remera, pos: noun, src: hand }
+  - { es: popote, ar: sorbete, pos: noun, src: reviewer }
+  - { es: prisa, ar: apuro, pos: noun, src: hand }
+  - { es: refrigerador, ar: heladera, pos: noun, src: wiktionary }
+  - { es: regañar, ar: retar, pos: verb, src: reviewer }
+  - { es: rentar, ar: alquilar, pos: verb, src: reviewer }
+  - { es: repostar, ar: cargar nafta, pos: verb, src: reviewer }
+  - { es: requesón, ar: ricota, pos: noun, src: reviewer }
+  - { es: retrete, ar: inodoro, pos: noun, src: reviewer }
+  - { es: rotulador, ar: fibra, pos: noun, src: reviewer }
+  - { es: secadora, ar: secarropas, pos: noun, src: reviewer }
+  - { es: seta, ar: hongo, pos: noun, src: reviewer }
+  - { es: subrayador, ar: resaltador, pos: noun, src: reviewer }
+  - { es: sudadera, ar: buzo, pos: noun, src: wiktionary }
+  - { es: sujetador, ar: corpiño, pos: noun, src: wiktionary }
+  - { es: tacón, ar: taco, pos: noun, src: wiktionary }
+  - { es: tapadera, ar: tapa, pos: noun, src: reviewer }
+  - { es: tirita, ar: curita, pos: noun, src: reviewer }
+  - { es: tocino, ar: panceta, pos: noun, src: wiktionary }
+  - { es: toronja, ar: pomelo, pos: noun, src: reviewer }
+  - { es: trancón, ar: embotellamiento, pos: noun, src: reviewer }
+  - { es: trapeador, ar: trapo de piso, pos: noun, src: reviewer }
+  - { es: trastero, ar: baulera, pos: noun, src: reviewer }
+  - { es: trasto, ar: cachivache, pos: noun, src: reviewer }
+  - { es: váter, ar: inodoro, pos: noun, src: reviewer }
+  - { es: zacate, ar: pasto, pos: noun, src: reviewer }
+  - { es: zumo, ar: jugo, pos: noun, src: hand }
+  - { es: ándale, ar: dale, pos: interj, src: reviewer }
+  - { es: órale, ar: dale, pos: interj, src: reviewer }

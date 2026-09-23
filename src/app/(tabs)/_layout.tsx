@@ -47,6 +47,15 @@ export default function TabsLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="culture"
+        options={{
+          title: 'Culture',
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'cafe' : 'cafe-outline'} color={color} size={size} />
+          ),
+        }}
+      />
     </Tabs>
     </View>
   );

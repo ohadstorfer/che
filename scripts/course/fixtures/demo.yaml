@@ -109,13 +109,14 @@ hola-che:
     no_soy_lucia: {es: "No, soy Lucía.", en: "No, I'm Lucía.", target: "no"}
     no_gracias: {es: "No, gracias.", en: "No, thanks.", target: "no"}
     bien_gracias: {es: "Bien, gracias.", en: "Fine, thanks.", target: bien}
-    bien_che: {es: "Bien, che.", en: "Fine, man.", target: bien}
-    mal_che: {es: "Mal, che.", en: "Not great, man.", target: mal}
-    que_tal: {es: "¿Qué tal?", en: "How's it going?", target: qué tal}
-    hola_que_tal: {es: "Hola, ¿qué tal?", en: "Hi, how's it going?", target: qué tal}
+    si_bien: {es: "Sí, bien.", en: "Yes, fine.", target: bien}
+    bien_o_mal: {es: "Che, ¿bien o mal?", en: "Hey, good or bad?", target: mal}
+    que_onda: {es: "¿Qué onda?", en: "What's up?", target: qué onda}
+    hola_que_onda: {es: "Hola, ¿qué onda?", en: "Hi, what's up?", target: qué onda}
     todo_bien: {es: "¿Todo bien?", en: "All good?", target: todo bien}
+    che_todo_bien: {es: "Che, ¿todo bien?", en: "Hey, all good?", target: todo bien}
     todo_bien_gracias: {es: "Todo bien, gracias.", en: "All good, thanks.", target: todo bien}
-  key_phrases: [hola_que_tal, todo_bien_gracias, si_dale, bueno_chau]
+  key_phrases: [hola_que_onda, todo_bien_gracias, si_dale, bueno_chau]
   lessons:
     1:
       - {tip: 0}
@@ -151,21 +152,21 @@ hola-che:
     3:
       - {teach: bien}
       - {drill: bien_gracias, mode: sentence_meaning}
-      - {drill: bien_che, mode: sentence_gap}
+      - {drill: si_bien, mode: sentence_gap}
       - {teach: mal}
-      - {drill: mal_che, mode: sentence_meaning}
-      - {teach: qué tal}
-      - {drill: que_tal, mode: sentence_meaning}
-      - {drill: hola_que_tal, mode: sentence_build}
+      - {drill: bien_o_mal, mode: sentence_meaning}
+      - {teach: qué onda}
+      - {drill: que_onda, mode: sentence_meaning}
+      - {drill: hola_que_onda, mode: sentence_build}
       - {teach: todo bien}
       - {drill: todo_bien, mode: sentence_meaning}
-      - {drill: todo_bien_gracias, mode: sentence_build}
-      - {drill: mal_che, mode: sentence_build}
+      - {drill: che_todo_bien, mode: sentence_build}
+      - {drill: bien_o_mal, mode: sentence_build}
       - {review: 2}
       - {match}
     4:
       - {recap: 8, scope: unit}
-      - {drill: hola_que_tal, mode: sentence_build}
+      - {drill: hola_que_onda, mode: sentence_build}
       - {drill: no_gracias, mode: sentence_build}
       - {drill: yo_soy_martin, mode: sentence_build}
   stories:
@@ -173,7 +174,7 @@ hola-che:
       title: "At the café"
       lines:
         - {speaker: Martín, es: "Hola, Sofi.", en: "Hi, Sofi."}
-        - {speaker: Sofi, es: "Hola, che. ¿Qué tal?", en: "Hi there. How's it going?"}
+        - {speaker: Sofi, es: "Hola, che. ¿Qué onda?", en: "Hi there. What's up?"}
         - {speaker: Martín, sentence: todo_bien_gracias, question: {type: meaning}}
         - {speaker: Sofi, es: "¿Un café?", en: "A coffee?"}
         - {speaker: Martín, es: "No, un mate, por favor.", en: "No, a mate, please.", question: {type: build}}
@@ -182,9 +183,7 @@ hola-che:
         - {speaker: Sofi, sentence: si_dale}
         - {speaker: Martín, es: "Gracias, Sofi.", en: "Thanks, Sofi."}
         - speaker: Sofi
-          es: "Bueno, chau, che."
-          en: "Well, bye."
-          loose: [che]
+          sentence: bueno_chau
           question:
             type: choice
             prompt_en: "What does Martín order?"
