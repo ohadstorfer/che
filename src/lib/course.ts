@@ -130,3 +130,51 @@ export function currentIndex(path: PathLesson[], done: Set<string>): number {
   const i = path.findIndex((l) => !done.has(l.id));
   return i === -1 ? path.length : i;
 }
+
+// ---------------------------------------------------------------------------
+// Sections, as the map shows them. The road is walked one section at a time,
+// the way Duolingo does it: the path holds a single section, and the sections
+// screen is where she sees the whole course and moves between them.
+// ---------------------------------------------------------------------------
+
+export type SectionState = 'done' | 'current' | 'locked';
+
+export interface SectionSummary {
+  section: Section;
+  /** Its units that have lessons, in order. */
+  units: Unit[];
+  /** Index on the whole road of its first and last lessons. */
+  firstIndex: number;
+  lastIndex: number;
+  lessons: number;
+  /** Lessons of it she has finished. */
+  done: number;
+  state: SectionState;
+}
+
+/** Every section that has something to walk, with how far she is through it. */
+export function sectionSummaries(course: Course, current: number): SectionSummary[] {
+  const out: SectionSummary[] = [];
+  for (const section of course.sections) {
+    const own = course.path.filter((l) => l.section.id === section.id);
+    if (own.length === 0) continue;
+    const firstIndex = own[0].index;
+    const lastIndex = own[own.length - 1].index;
+    out.push({
+      section,
+      units: course.units.filter((u) => u.section_id === section.id),
+      firstIndex,
+      lastIndex,
+      lessons: own.length,
+      done: Math.max(0, Math.min(current, lastIndex + 1) - firstIndex),
+      state: current > lastIndex ? 'done' : current >= firstIndex ? 'current' : 'locked',
+    });
+  }
+  return out;
+}
+
+/** The section her step is in — the last one once the course is finished. */
+export function sectionAt(course: Course, index: number): Section | null {
+  const lesson = course.path[Math.min(index, course.path.length - 1)];
+  return lesson?.section ?? null;
+}

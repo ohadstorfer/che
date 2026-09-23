@@ -1,6 +1,6 @@
 import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { router, useFocusEffect } from 'expo-router';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { Fragment, type ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   AccessibilityInfo,
@@ -20,7 +20,16 @@ import { Guidebook } from '@/components/guidebook';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { localDateStr, WEEKDAY_INITIALS, weekDates } from '@/lib/dates';
-import { type Course, currentIndex, loadCheckAttempts, loadCourse, loadProgress, type PathLesson } from '@/lib/course';
+import {
+  type Course,
+  currentIndex,
+  loadCheckAttempts,
+  loadCourse,
+  loadProgress,
+  type PathLesson,
+  sectionAt,
+  sectionSummaries,
+} from '@/lib/course';
 import { maxUnitsInTest } from '@/lib/placement';
 import {
   enablePartnerReminders,
@@ -90,7 +99,7 @@ const BANNER_H = 76;
 const BANNER_GAP = 26;
 const BANNER_PITCH = BANNER_H + BANNER_GAP;
 /** So is the header that opens a section. */
-const SECTION_H = 48;
+const SECTION_H = 64;
 const SECTION_GAP = 22;
 const SECTION_PITCH = SECTION_H + SECTION_GAP;
 /** Where step `i` sits, given the banners and section headers standing above it. */
@@ -411,40 +420,72 @@ function PathStep({
 }
 
 // ---------------------------------------------------------------------------
-// SectionHeader — the road is banded into sections, so the learner can see
-// where one stretch of the course ends and the next begins. It says less than
-// a unit banner on purpose: the unit is what she is walking through now, the
-// section is only where she is on the map.
+// SectionBar — the top of the road. The road holds one section, the way
+// Duolingo's does, so the bar says which one and is the way to the map of all
+// of them: tap it and the sections screen opens.
 // ---------------------------------------------------------------------------
-function SectionHeader({ section, onJump }: { section: Section; onJump?: () => void }) {
+function SectionBar({ section, onPress }: { section: Section; onPress: () => void }) {
   return (
-    <View
-      style={styles.sectionHeader}
-      accessible
-      accessibilityRole="header"
-      accessibilityLabel={`Section ${section.ordinal}: ${section.title_en}, level ${section.cefr}`}>
-      <View style={styles.sectionRule} />
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityHint="Shows every section of the course"
+      accessibilityLabel={`Section ${section.ordinal}: ${section.title_en}, level ${section.cefr}`}
+      style={({ pressed }) => [styles.sectionBar, { transform: [{ scale: pressed ? 0.98 : 1 }] }, webTransition]}>
       <View style={styles.sectionLabel}>
-        <Text style={styles.sectionEyebrow}>SECTION {section.ordinal}</Text>
+        <Text style={styles.sectionEyebrow}>
+          SECTION {section.ordinal} · {section.cefr}
+        </Text>
         <Text style={styles.sectionName} numberOfLines={1}>
           {section.title_en}
         </Text>
       </View>
-      <View style={styles.cefrChip}>
-        <Text style={styles.cefrText}>{section.cefr}</Text>
+      <View style={styles.sectionMap}>
+        <Ionicons name="list" size={20} color={colors.primary} />
       </View>
-      {onJump ? (
-        <Pressable
-          onPress={onJump}
-          accessibilityRole="button"
-          accessibilityLabel={`Jump to section ${section.ordinal}`}
-          hitSlop={8}
-          style={({ pressed }) => [styles.jumpChip, { transform: [{ scale: pressed ? 0.95 : 1 }] }, webTransition]}>
-          <Ionicons name="play-skip-forward" size={12} color={colors.primaryDark} />
-          <Text style={styles.jumpChipText}>Jump here</Text>
-        </Pressable>
-      ) : null}
-      <View style={styles.sectionRule} />
+    </Pressable>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// SectionEnd — where the road stops. It names the section that comes next and,
+// when she has got there, takes her onto it; one still ahead says what opens
+// it, and offers the jump test when that can reach it in one sitting.
+// ---------------------------------------------------------------------------
+function SectionEnd({
+  next,
+  onOpen,
+  onJump,
+}: {
+  next: { section: Section; units: Unit[] } | null;
+  onOpen?: () => void;
+  onJump?: () => void;
+}) {
+  if (!next) {
+    return (
+      <View style={styles.sectionEnd}>
+        <MaterialCommunityIcons name="white-balance-sunny" size={28} color={colors.primary} />
+        <Text style={styles.sectionEndTitle}>That's the whole course, for now</Text>
+        <Text style={styles.sectionEndText}>More sections are on the way.</Text>
+      </View>
+    );
+  }
+  const { section, units } = next;
+  return (
+    <View style={styles.sectionEnd}>
+      <Text style={styles.sectionEyebrow}>UP NEXT · SECTION {section.ordinal}</Text>
+      <Text style={styles.sectionEndTitle}>{section.title_en}</Text>
+      <Text style={styles.sectionEndText}>
+        {section.cefr} · {units.length} units
+        {onOpen ? '' : ' · opens when you finish this section'}
+      </Text>
+      {onOpen ? (
+        <Button title={`Go to section ${section.ordinal}`} onPress={onOpen} />
+      ) : onJump ? (
+        <Button title="Jump ahead" variant="secondary" onPress={onJump} />
+      ) : (
+        <Ionicons name="lock-closed" size={18} color={colors.faint} />
+      )}
     </View>
   );
 }
@@ -950,6 +991,8 @@ const EASE_SCROLL = Easing.bezier(0.4, 0, 0.2, 1);
 export default function Home() {
   const { profile } = useAuth();
   const insets = useSafeAreaInsets();
+  /** The section she opened from the sections screen; none means hers. */
+  const { section: askedSection } = useLocalSearchParams<{ section?: string }>();
   // The header is a white card running the full width, so the strip iOS
   // reserves above it should be that same white and disappear into it.
   useStatusBarColor(colors.card);
@@ -976,14 +1019,18 @@ export default function Home() {
   }, []);
 
   const scrollRef = useRef<ScrollView>(null);
-  /** Which unit and section each step is in — what `yOf` counts above it. */
+  /** Which unit each step is in, and where its section starts — what `yOf`
+   *  counts above it. The road holds one section at a time, so a step's place
+   *  is counted from the top of its own section: one header, the units of that
+   *  section before it, and its steps. */
   const unitIndexOf = useRef<number[]>([]);
-  const sectionIndexOf = useRef<number[]>([]);
+  const sectionStartOf = useRef<number[]>([]);
   const yOf = useCallback((i: number) => {
     const units = unitIndexOf.current;
     if (units.length === 0) return stepY(i, 0, 0);
     const at = Math.min(i, units.length - 1);
-    return stepY(i, (units[at] ?? 0) + 1, (sectionIndexOf.current[at] ?? 0) + 1);
+    const start = sectionStartOf.current[at] ?? 0;
+    return stepY(i - start, (units[at] ?? 0) - (units[start] ?? 0) + 1, 1);
   }, []);
   /** Where the path starts inside the scroll content, and how tall the window is. */
   const pathTop = useRef(0);
@@ -992,6 +1039,8 @@ export default function Home() {
   const viewport = useRef(0);
   /** The road is put in place once, as soon as both measurements exist. */
   const placed = useRef(false);
+  /** Which section's road is standing — a different one is placed afresh. */
+  const lastRoadKey = useRef<string | null>(null);
   /** When it landed — the hold that keeps her old status readable counts from
    *  there, not from when the data happened to arrive. */
   const placedAt = useRef(0);
@@ -1030,7 +1079,11 @@ export default function Home() {
     ]);
 
     unitIndexOf.current = course.path.map((l) => l.unitIndex);
-    sectionIndexOf.current = course.path.map((l) => l.sectionIndex);
+    const starts = new Map<number, number>();
+    sectionStartOf.current = course.path.map((l) => {
+      if (!starts.has(l.section.id)) starts.set(l.section.id, l.index);
+      return starts.get(l.section.id)!;
+    });
     setData({
       course,
       current: currentIndex(course.path, done),
@@ -1224,6 +1277,26 @@ export default function Home() {
   const path = data?.course.path ?? [];
   const noCourse = data != null && path.length === 0;
   const current = shown?.lessons ?? 0;
+
+  // One section at a time (the sections screen holds the whole map). The road
+  // opens on the section she is in, or on one she picked there; a section still
+  // ahead is never walked into from a stale link, its road opens once she gets
+  // there.
+  const summaries = data ? sectionSummaries(data.course, current) : [];
+  const hereSection = data ? sectionAt(data.course, current) : null;
+  const asked = summaries.find((x) => String(x.section.id) === askedSection && x.state !== 'locked');
+  const viewed = asked ?? summaries.find((x) => x.section.id === hereSection?.id) ?? null;
+  const road = viewed ? path.filter((l) => l.section.id === viewed.section.id) : path;
+  const nextSection = viewed ? (summaries[summaries.indexOf(viewed) + 1] ?? null) : null;
+  const currentHere = road.some((l) => l.index === current);
+  // A new section is a new road: it is placed afresh, not scrolled to.
+  const roadKey = viewed ? `${viewed.section.id}` : 'all';
+  if (lastRoadKey.current !== roadKey) {
+    lastRoadKey.current = roadKey;
+    placed.current = false;
+  }
+  const openSection = (id: number) => router.setParams({ section: String(id) });
+
   const phaseOf = (i: number): Phase => (i < current ? 2 : i === current ? 1 : 0);
   const unitStateOf = (lesson: PathLesson): UnitState => {
     const unitLessons = path.filter((l) => l.unit_id === lesson.unit_id);
@@ -1237,7 +1310,8 @@ export default function Home() {
     if (placed.current || viewport.current === 0 || pathTop.current === 0) return;
     placed.current = true;
     placedAt.current = Date.now();
-    const step = current;
+    // Her own step when it is on this road; the top of the section otherwise.
+    const step = currentHere ? current : (road[0]?.index ?? 0);
     scrollToStep(step, false);
     if (pendingAdvance.current) {
       requestAnimationFrame(advance);
@@ -1320,6 +1394,7 @@ export default function Home() {
         onScroll={({ nativeEvent: e }) => {
           // Wandering up the road she has walked, or down the one she hasn't,
           // offers a way back to the step that is actually hers.
+          if (!currentHere) return;
           const node = pathTop.current + yOf(current) + BOX / 2;
           const top = e.contentOffset.y;
           const bottom = top + e.layoutMeasurement.height;
@@ -1370,20 +1445,17 @@ export default function Home() {
           // observed — onLayout goes silent, pathTop stays unmeasured, and the
           // road opens at the top instead of on her step.
           <View
-            key="path"
+            key={`path:${roadKey}`}
             ref={pathRef}
             style={styles.path}
             onLayout={(e) => {
               pathTop.current = e.nativeEvent.layout.y;
               place();
             }}>
-            {path.map((lesson) => (
+            {road.map((lesson) => (
               <Fragment key={`${epoch}:${lesson.id}`}>
                 {lesson.opensSection ? (
-                  <SectionHeader
-                    section={lesson.section}
-                    onJump={lesson.index > current && canJumpTo(lesson.unit) ? () => jumpTo(lesson.unit) : undefined}
-                  />
+                  <SectionBar section={lesson.section} onPress={() => router.push('/sections')} />
                 ) : null}
                 {lesson.opensUnit ? (
                   <UnitBanner lesson={lesson} state={unitStateOf(lesson)} onPress={() => setGuide(lesson.unit)} />
@@ -1399,6 +1471,17 @@ export default function Home() {
                 />
               </Fragment>
             ))}
+            {viewed ? (
+              <SectionEnd
+                next={nextSection}
+                onOpen={nextSection && nextSection.state !== 'locked' ? () => openSection(nextSection.section.id) : undefined}
+                onJump={
+                  nextSection?.state === 'locked' && nextSection.units[0] && canJumpTo(nextSection.units[0])
+                    ? () => jumpTo(nextSection.units[0])
+                    : undefined
+                }
+              />
+            ) : null}
           </View>
         )}
       </ScrollView>
@@ -1416,7 +1499,13 @@ export default function Home() {
         jump={guideJump}
       />
       {!noCourse ? (
-        <JumpButton direction={jump} reduced={reduced} onPress={() => scrollToStep(current, !reduced)} />
+        <JumpButton
+          direction={currentHere ? jump : viewed?.state === 'done' ? 'down' : 'up'}
+          reduced={reduced}
+          onPress={() =>
+            currentHere ? scrollToStep(current, !reduced) : hereSection ? openSection(hereSection.id) : undefined
+          }
+        />
       ) : null}
     </View>
   );
@@ -1634,33 +1723,50 @@ const styles = StyleSheet.create({
   errorText: { fontSize: 14, color: colors.dangerInk, lineHeight: 20 },
 
   // Unit banners -------------------------------------------------------------
-  sectionHeader: {
+  sectionBar: {
     height: SECTION_H,
     marginBottom: SECTION_GAP,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-  },
-  // A hairline that runs to the label, so the band reads as a divider in the
-  // road rather than another card competing with the unit banner under it.
-  sectionRule: { flex: 1, height: 1, backgroundColor: colors.border },
-  sectionLabel: { alignItems: 'center', gap: 1, flexShrink: 1 },
-  sectionEyebrow: {
-    fontSize: 10,
-    fontWeight: '800',
-    letterSpacing: 1.2,
-    color: colors.faint,
-  },
-  sectionName: { fontSize: 14, fontWeight: '700', color: colors.muted },
-  cefrChip: {
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: radius.sm,
+    paddingLeft: 16,
+    paddingRight: 10,
+    borderRadius: radius.lg,
     backgroundColor: colors.card,
     borderWidth: 1,
     borderColor: colors.border,
   },
-  cefrText: { fontSize: 11, fontWeight: '700', color: colors.muted, letterSpacing: 0.4 },
+  sectionLabel: { flex: 1, gap: 2 },
+  sectionEyebrow: {
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 1.2,
+    color: colors.faint,
+  },
+  sectionName: { fontSize: 17, fontWeight: '800', color: colors.ink, letterSpacing: -0.2 },
+  sectionMap: {
+    width: 40,
+    height: 40,
+    borderRadius: radius.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.primarySoft,
+  },
+  sectionEnd: {
+    marginTop: 8,
+    // Clear of the floating tab bar and the Mistakes button, which both sit
+    // over the bottom of the scroller.
+    marginBottom: 120,
+    alignItems: 'center',
+    gap: 8,
+    padding: 22,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: colors.border,
+  },
+  sectionEndTitle: { fontSize: 20, fontWeight: '800', color: colors.ink, textAlign: 'center', letterSpacing: -0.2 },
+  sectionEndText: { fontSize: 14, color: colors.muted, textAlign: 'center', marginBottom: 6 },
   banner: {
     height: BANNER_H,
     marginBottom: BANNER_GAP,
@@ -1689,16 +1795,6 @@ const styles = StyleSheet.create({
   mistakes: { height: 40, paddingLeft: 12, paddingRight: 14, gap: 6 },
   mistakesCount: { fontSize: 13, fontWeight: '800', color: colors.accent, fontVariant: ['tabular-nums'] },
   placement: { gap: 10 },
-  jumpChip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    paddingHorizontal: 9,
-    paddingVertical: 4,
-    borderRadius: radius.pill,
-    backgroundColor: colors.primarySoft,
-  },
-  jumpChipText: { fontSize: 11, fontWeight: '700', color: colors.primaryDark, letterSpacing: 0.2 },
   attempts: {
     position: 'absolute',
     right: 0,
