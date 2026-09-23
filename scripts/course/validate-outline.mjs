@@ -42,9 +42,13 @@ if (fromYaml) {
   // Words the course only ever says with the same little word in front of them.
   // A card for one asks a question with no answer — "llamo / name is" — so the
   // chunk has to be the form, and the bare one marked `bound`
-  // (docs/course-spec.md §1.5). An error, not a warning: this shipped once.
+  // (docs/course-spec.md §1.5). An error once the evidence is heavy — "llamo"
+  // was nineteen sentences out of nineteen, and it shipped. A handful is only
+  // a hint: four sentences that all say "le escribí" say nothing about whether
+  // "escribí" can stand alone (it can), so they are a warning to look at.
+  const BOUND_EVIDENCE = 8;
   for (const { form, seen, after } of boundCandidates(outline, live)) {
-    errors.push(
+    (seen >= BOUND_EVIDENCE ? errors : warnings).push(
       `unit ${form.unit_order} · "${form.form}": never said without "${after}" in front of it (${seen} sentences) — ` +
         `teach "${after} ${form.form}" as a form of its own and mark "${form.form}" bound`,
     );

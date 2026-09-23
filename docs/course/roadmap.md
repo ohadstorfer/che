@@ -64,8 +64,21 @@ The imperfect, and the difference between the two pasts: what *was going on* and
 - Relationships — *salir con alguien*, *pelearse*, *extrañar*.
 - Checkpoint.
 
-## Sections 7–8 · B1
+## Section 7 · B1.1 · "Wishes and advice" · units 61–70
 
-The subjunctive, in the order it is needed: after *quiero que* (7), after *cuando* for the future and *ojalá* (7), for doubt and opinion (8), and the conditional for advice and hypotheticals (8). Lunfardo widens here — *laburo* and *boludo* were early; *chamuyar, morfar, fiaca, mina, bancar* arrive as a register, with the note on when each one lands.
+`section-7.yaml`. The subjunctive, taught in the order it is needed rather than as a paradigm: *quiero que vengas* → the daily wishes (*que te vaya bien, que la pases lindo, ojalá*) → *cuando* about the future (*avisame cuando llegues*) → opinion (*no creo que venga, ¿qué te parece?*) → the negative commands that are nothing but subjunctive (*no te preocupes, no te hagas problema*) → advice (*te recomiendo que pruebes*) → reactions (*¡qué bueno que estés acá!*) → knowing and understanding (*sé, sabés, ni idea*) → a unit of lunfardo proper (*morfar, guita, fiaca, bancar*) → the checkpoint, the long porteño goodbye.
 
-Written in detail when section 6 is published: a plan this far ahead would be written against a course that will have moved.
+Vos in the subjunctive: the course teaches *que vengas*, the everyday form, tagged `vos`; *vengás* is emphatic and left out.
+
+## Section 8 · B1.2
+
+The conditional for advice and hypotheticals (*yo que vos iría*, *si tuviera plata…*), the imperfect subjunctive only where the conditional drags it in, the news and politics without the politics, work and money, and the city itself — neighbourhoods, *la General Paz*, *el conurbano*. Written in detail once section 7 is published.
+
+## Status
+
+| Section | Outline | Seeded | Sentences |
+|---|---|---|---|
+| 4 | ✓ | ✓ 20260924000001 | ✓ published, glossed (708) |
+| 5 | ✓ | ✓ 20260924000002 | in progress |
+| 6 | ✓ | ✓ 20260924000003 | — |
+| 7 | ✓ | ✓ 20260924000004 | — |
