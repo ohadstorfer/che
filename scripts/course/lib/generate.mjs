@@ -22,6 +22,22 @@ const list = (xs, join = 'or') =>
 const chunkFor = (outline, bound) =>
   outline.forms.find((f) => f.lemma_id === bound.lemma_id && f.id !== bound.id && f.form.endsWith(` ${bound.form}`));
 
+/**
+ * Two of a unit's forms can share a spelling — "fue" is both ir's "went" and
+ * ser's "was" — and are then named "fue/ir" and "fue/ser": in the prompt's
+ * target list, in the writer's answer, and on the sentence it becomes.
+ */
+const sameSpelling = (outline, unit, f) =>
+  outline.forms.filter((g) => g.unit_id === unit.id && fold(g.form) === fold(f.form)).length > 1;
+export const targetLabel = (outline, unit, f) => (sameSpelling(outline, unit, f) ? `${f.form}/${f.lemma}` : f.form);
+function findTarget(outline, unit, ref) {
+  const [surface, qualifier] = String(ref ?? '').split('/').map((x) => x.trim());
+  const hits = outline.forms.filter(
+    (f) => f.unit_id === unit.id && fold(f.form) === fold(surface) && (!qualifier || f.lemma === qualifier || f.pos === qualifier),
+  );
+  return hits.length === 1 ? { form: hits[0] } : { ambiguous: hits.length > 1 };
+}
+
 /** Candidates asked for per sentence the unit needs (§13.2). */
 export const OVERGENERATE = 3;
 /** Per new form: one intro sentence and three drills (course-spec §4). */
@@ -111,7 +127,10 @@ export function generationPrompt({ outline, unit, targets, examples, existing, s
     'Spell with every accent and with opening ¿ and ¡.',
     '',
     'Target words:',
-    ...targets.map((f) => `- ${f.form} (${f.pos}, "${f.gloss_en ?? lemmaById.get(f.lemma_id)?.gloss_en ?? ''}")`),
+    ...targets.map((f) => `- ${targetLabel(outline, unit, f)} (${f.pos}, "${f.gloss_en ?? lemmaById.get(f.lemma_id)?.gloss_en ?? ''}")`),
+    ...(targets.some((f) => sameSpelling(outline, unit, f))
+      ? ['A target written "word/lemma" (fue/ir, fue/ser) is that word in that verb\'s sense: put the label in "target" exactly as listed; the sentence itself just says the word.']
+      : []),
     // A unit's proper nouns are never targets — nobody drills "Montevideo" as
     // vocabulary — so without this they are taught and then never said. Unit 5
     // introduced six places and its first draft used two of them.
@@ -149,8 +168,15 @@ export function checkCandidates({ outline, unit, candidates, existingEs = [] }) 
     const where = `candidate ${i + 1} "${c.es}"`;
     const problems = [];
     if (taken.has(fold(c.es))) problems.push('duplicates a sentence the course already has');
-    const target = outline.forms.find((f) => f.unit_id === unit.id && fold(f.form) === fold(c.target));
-    if (!target) problems.push(`target "${c.target}" is not a word this unit introduces`);
+    const found = findTarget(outline, unit, c.target);
+    const target = found.form ?? null;
+    if (!target) {
+      problems.push(
+        found.ambiguous
+          ? `target "${c.target}" is two words this unit teaches — write it as the prompt lists it ("word/lemma")`
+          : `target "${c.target}" is not a word this unit introduces`,
+      );
+    }
     const built = buildContent(
       outline,
       {
@@ -160,7 +186,7 @@ export function checkCandidates({ outline, unit, candidates, existingEs = [] }) 
               es: c.es,
               en: c.en,
               en_alt: c.en_alt ?? [],
-              target: target ? (outline.forms.filter((f) => f.unit_id === unit.id && fold(f.form) === fold(target.form)).length > 1 ? `${target.form}/${target.pos}` : target.form) : c.target,
+              target: target ? targetLabel(outline, unit, target) : c.target,
               difficulty: c.difficulty,
               loose: c.loose ?? [],
             },

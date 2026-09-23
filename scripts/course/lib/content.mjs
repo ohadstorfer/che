@@ -18,9 +18,11 @@ const answerKey = (es) => bare(es).split(/\s+/).filter(Boolean).join(' ');
 
 /** Resolve "tenés" or "argentina/adj" to one of a unit's own forms. */
 function resolveFormRef(outline, unit, ref, where, errors) {
+  // "word/pos" or "word/lemma": the lemma is what tells ir's "fue" from ser's.
   const [surface, pos] = String(ref).split('/');
   const hits = outline.forms.filter(
-    (f) => f.unit_order === unit.course_order && fold(f.form) === fold(surface) && (!pos || f.pos === pos),
+    (f) =>
+      f.unit_order === unit.course_order && fold(f.form) === fold(surface) && (!pos || f.pos === pos || f.lemma === pos),
   );
   if (hits.length === 1) return hits[0];
   errors.push(

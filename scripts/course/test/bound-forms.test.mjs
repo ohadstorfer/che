@@ -64,8 +64,10 @@ test('the validator finds a form nobody marked bound', () => {
     { es: '¿Te llamás Juan?' },
     { es: 'Che, ¿cómo te llamás?' },
   ];
+  // Unit 37's llamar has a bare "llamo" of its own, which these sentences never
+  // let stand alone either; the pairs are what matter.
   const found = boundCandidates(beforeTheFix, sentences).map((c) => `${c.after} ${c.form.form}`);
-  assert.deepEqual(found.sort(), ['me llamo', 'te llamás']);
+  assert.deepEqual([...new Set(found)].sort(), ['me llamo', 'te llamás']);
 });
 
 test('a word that merely likes a neighbour is left alone', () => {

@@ -89,12 +89,16 @@ test('a spelling fixed in the admin and copied into the YAML is not a new word',
   assert.ok(plan.skipped.some((s) => s.includes('already exists, fixed in the admin')), plan.skipped.join('\n'));
 });
 
+// The section after the last real one: the fixture must never collide with a
+// section the course actually has.
+const NEXT_SECTION = SECTION_PATHS.length + 1;
+
 test('a new unit in a new section file is added, and nothing else', () => {
   const dir = mkdtempSync(join(tmpdir(), 'che-seed-'));
-  const path = join(dir, 'section-4.yaml');
+  const path = join(dir, `section-${NEXT_SECTION}.yaml`);
   writeFileSync(
     path,
-    `section: {id: 4, slug: prueba, title: Test, cefr: A2.1}
+    `section: {id: ${NEXT_SECTION}, slug: prueba, title: Test, cefr: A2.1}
 units:
   - ordinal: 1
     slug: prueba-pileta
@@ -110,7 +114,7 @@ units:
   );
   const withNew = buildRows({ publishThrough: 2, paths: [...SECTION_PATHS, path] });
   const plan = planSeed(withNew, asDatabase(built));
-  assert.deepEqual(plan.insert.sections.map((s) => s.id), [4]);
+  assert.deepEqual(plan.insert.sections.map((s) => s.id), [NEXT_SECTION]);
   assert.deepEqual(plan.insert.units.map((u) => u.slug), ['prueba-pileta']);
   assert.equal(plan.insert.units[0].status, 'draft');
   assert.deepEqual(plan.insert.forms.map((f) => f.form).sort(), ['nado', 'pileta']);
@@ -126,10 +130,10 @@ test('a new unit whose place in the course is taken is skipped, with its words',
   const last = db.units.at(-1);
   db.units.push({ ...last, id: 'other', slug: 'made-in-admin', course_order: last.course_order + 1, ordinal: last.ordinal + 1 });
   const dir = mkdtempSync(join(tmpdir(), 'che-seed-'));
-  const path = join(dir, 'section-4.yaml');
+  const path = join(dir, `section-${NEXT_SECTION}.yaml`);
   writeFileSync(
     path,
-    `section: {id: 4, slug: dup, title: Dup, cefr: A2.1}
+    `section: {id: ${NEXT_SECTION}, slug: dup, title: Dup, cefr: A2.1}
 units:
   - {ordinal: 1, slug: late, title: Late, summary: Late, grammar: [g], register_max: informal, tips: [{title: T, body: B}], words: [{lemma: pileta, pos: noun, en: pool}]}
 `,
