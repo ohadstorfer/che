@@ -492,7 +492,7 @@ units:
         en: "to sing"
         forms:
           - form: "canta"
-            en: "sings"
+            en: "sing, sings"
             f: "3sg.pres.ind"
           - form: "cantar"
             f: "inf"
