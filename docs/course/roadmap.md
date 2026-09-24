@@ -83,3 +83,4 @@ The conditional for advice and hypotheticals (*yo que vos iría*, *si tuviera pl
 | 6 | ✓ | ✓ 20260924000003 | ✓ published, glossed (570) |
 | 7 | ✓ | ✓ 20260924000004 | ✓ published, glossed (385) |
 | 8 | ✓ | ✓ 20260924000005 | ✓ published, glossed (364) |
+| 9 | ✓ | ✓ 20260924000010 | ✓ published, glossed (384) |

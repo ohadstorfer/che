@@ -308,8 +308,8 @@
   "pos": "phrase",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:00:41.790001+00"
  },
  {
   "gloss_en": "message",
@@ -334,8 +334,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:23:46.730111+00"
  },
  {
   "gloss_en": "dessert",
@@ -360,8 +360,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:12:32.666361+00"
  },
  {
   "gloss_en": "empanada",
@@ -503,8 +503,8 @@
   "pos": "adj",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:13.690418+00"
  },
  {
   "gloss_en": "yesterday",
@@ -555,8 +555,8 @@
   "pos": "phrase",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:14:01.760544+00"
  },
  {
   "gloss_en": "if",
@@ -893,8 +893,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:12:32.666361+00"
  },
  {
   "gloss_en": "you, yourself",
@@ -921,6 +921,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 19:58:24.459018+00"
+ },
+ {
+  "gloss_en": "which, what",
+  "gloss_note_en": null,
+  "id": "1a2ebe62-a148-5b40-8a52-589657524b8a",
+  "is_glue": false,
+  "lemma": "cuál",
+  "notes_en": null,
+  "pos": "pron",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:55.39398+00"
  },
  {
   "gloss_en": "that, which",
@@ -1066,6 +1079,19 @@
   "updated_at": "2026-09-24 00:52:14.787731+00"
  },
  {
+  "gloss_en": "who",
+  "gloss_note_en": null,
+  "id": "1d153b6a-dc80-5e40-aa78-8638f1d95bf8",
+  "is_glue": false,
+  "lemma": "quién",
+  "notes_en": null,
+  "pos": "pron",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:55.39398+00"
+ },
+ {
   "gloss_en": "now",
   "gloss_note_en": null,
   "id": "1d293c04-7432-57d2-9ad0-723a387166fe",
@@ -1140,8 +1166,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:04:12.425811+00"
  },
  {
   "gloss_en": "to have dinner",
@@ -1296,8 +1322,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:12:32.666361+00"
  },
  {
   "gloss_en": "suddenly",
@@ -1573,6 +1599,19 @@
   "updated_at": "2026-09-24 00:00:40.250698+00"
  },
  {
+  "gloss_en": "sorry",
+  "gloss_note_en": null,
+  "id": "2a98cef9-ba3e-589e-bb20-830429411f70",
+  "is_glue": false,
+  "lemma": "perdón",
+  "notes_en": null,
+  "pos": "interj",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 07:23:46.730111+00"
+ },
+ {
   "gloss_en": "if all else fails, at worst",
   "gloss_note_en": null,
   "id": "2ada2a08-0a4d-54a8-9036-04df1c34a610",
@@ -1842,8 +1881,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:04:12.425811+00"
  },
  {
   "gloss_en": "yes",
@@ -1868,8 +1907,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:04:12.425811+00"
  },
  {
   "gloss_en": "well, OK",
@@ -1896,6 +1935,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-24 00:13:39.721406+00"
+ },
+ {
+  "gloss_en": "that",
+  "gloss_note_en": null,
+  "id": "325dfadb-1986-540b-856b-4b3221d69787",
+  "is_glue": false,
+  "lemma": "eso",
+  "notes_en": null,
+  "pos": "pron",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 07:14:01.760544+00"
  },
  {
   "gloss_en": "why",
@@ -1946,8 +1998,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:12:32.666361+00"
  },
  {
   "gloss_en": "what",
@@ -1959,8 +2011,8 @@
   "pos": "phrase",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:55.39398+00"
  },
  {
   "gloss_en": "thanks a million",
@@ -2063,8 +2115,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:14:01.760544+00"
  },
  {
   "gloss_en": "to play",
@@ -2479,8 +2531,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:13.690418+00"
  },
  {
   "gloss_en": "flan, crème caramel",
@@ -2518,8 +2570,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:23:46.730111+00"
  },
  {
   "gloss_en": "to drink, to have",
@@ -2700,8 +2752,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:13:16.477524+00"
  },
  {
   "gloss_en": "Tuesday",
@@ -2791,8 +2843,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:13:16.477524+00"
  },
  {
   "gloss_en": "nice to meet you",
@@ -2856,8 +2908,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:05:36.022297+00"
  },
  {
   "gloss_en": "to invite",
@@ -3077,8 +3129,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:13:16.477524+00"
  },
  {
   "gloss_en": "to arrange, to agree",
@@ -3376,8 +3428,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:04:12.425811+00"
  },
  {
   "gloss_en": "to come",
@@ -3484,6 +3536,19 @@
   "updated_at": "2026-09-24 06:22:41.033889+00"
  },
  {
+  "gloss_en": "truth, true",
+  "gloss_note_en": null,
+  "id": "5e327ce4-1a78-5852-b47c-ce2aa4d3c38c",
+  "is_glue": false,
+  "lemma": "verdad",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:55.39398+00"
+ },
+ {
   "gloss_en": "school subject",
   "gloss_note_en": null,
   "id": "5e328028-b443-5128-b36b-e96a0363a89c",
@@ -3571,8 +3636,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:22:29.004136+00"
  },
  {
   "gloss_en": "to be left, to stay",
@@ -4039,8 +4104,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:22:29.004136+00"
  },
  {
   "gloss_en": "favour",
@@ -4156,8 +4221,8 @@
   "pos": "phrase",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:14:01.760544+00"
  },
  {
   "gloss_en": "holidays, vacation",
@@ -4301,6 +4366,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 19:34:09.517589+00"
+ },
+ {
+  "gloss_en": "this",
+  "gloss_note_en": null,
+  "id": "72ab77ae-2c89-552e-b35d-ed2699d1852f",
+  "is_glue": false,
+  "lemma": "esto",
+  "notes_en": null,
+  "pos": "pron",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 07:14:01.760544+00"
  },
  {
   "gloss_en": "table",
@@ -4702,8 +4780,8 @@
   "pos": "phrase",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:14:01.760544+00"
  },
  {
   "gloss_en": "better, best",
@@ -4923,8 +5001,8 @@
   "pos": "phrase",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:00:41.790001+00"
  },
  {
   "gloss_en": "Palermo",
@@ -4949,8 +5027,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:22:29.004136+00"
  },
  {
   "gloss_en": "trip",
@@ -5430,8 +5508,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:13:16.477524+00"
  },
  {
   "gloss_en": "you're welcome",
@@ -5456,8 +5534,8 @@
   "pos": "phrase",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:14:01.760544+00"
  },
  {
   "gloss_en": "medicine",
@@ -5612,8 +5690,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:13.690418+00"
  },
  {
   "gloss_en": "sad",
@@ -5703,8 +5781,8 @@
   "pos": "adj",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:04:12.425811+00"
  },
  {
   "gloss_en": "Córdoba",
@@ -6132,8 +6210,8 @@
   "pos": "adj",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:23:46.730111+00"
  },
  {
   "gloss_en": "how great, so good",
@@ -6691,8 +6769,8 @@
   "pos": "verb",
   "register": "informal",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:55.39398+00"
  },
  {
   "gloss_en": "friendly, likeable",
@@ -6860,8 +6938,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:22:29.004136+00"
  },
  {
   "gloss_en": "Montevideo",
@@ -7185,8 +7263,21 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:23:46.730111+00"
+ },
+ {
+  "gloss_en": "oh no, whoa",
+  "gloss_note_en": null,
+  "id": "c9b8e671-60c4-55a8-9f9c-0f0593be7307",
+  "is_glue": false,
+  "lemma": "uy",
+  "notes_en": null,
+  "pos": "interj",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 07:23:46.730111+00"
  },
  {
   "gloss_en": "clothes, gear",
@@ -7237,8 +7328,8 @@
   "pos": "verb",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:13.690418+00"
  },
  {
   "gloss_en": "around, about",
@@ -7328,8 +7419,8 @@
   "pos": "adj",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:13.690418+00"
  },
  {
   "gloss_en": "well I never, would you look at that",
@@ -7341,8 +7432,8 @@
   "pos": "phrase",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:55.39398+00"
  },
  {
   "gloss_en": "public holiday",
@@ -7679,8 +7770,8 @@
   "pos": "noun",
   "register": "informal",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:55.39398+00"
  },
  {
   "gloss_en": "two",
@@ -7770,8 +7861,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:23:46.730111+00"
  },
  {
   "gloss_en": "as, like",
@@ -8186,8 +8277,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:13:16.477524+00"
  },
  {
   "gloss_en": "summer",
@@ -8849,8 +8940,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:29:13.690418+00"
  },
  {
   "gloss_en": "the Capital (the city)",
@@ -8979,8 +9070,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:12:32.666361+00"
  },
  {
   "gloss_en": "good",
@@ -9005,8 +9096,8 @@
   "pos": "noun",
   "register": "neutral",
   "source": "outline",
-  "status": "draft",
-  "updated_at": "2026-09-24 01:16:56.863946+00"
+  "status": "published",
+  "updated_at": "2026-09-24 07:14:01.760544+00"
  },
  {
   "gloss_en": "Monday",
