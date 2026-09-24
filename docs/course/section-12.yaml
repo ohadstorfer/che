@@ -1,0 +1,736 @@
+# ---------------------------------------------------------------------------
+# Che — Section 12 outline: "In other words" (C1.1)
+#
+# Passing on what other people said and asked (me pidió que le trajera algo,
+# me preguntó si venía), switching into usted when the situation calls for it,
+# writing the email that goes with it, telling how a story turned out
+# (resulta que, encima), the porteño "la" expressions (se la cree, me la
+# banco), what just happened and what usually does (acabo de, suelo), how the
+# city has changed, being fed up, and a checkpoint that tells the whole story
+# short.
+#
+# Plan: docs/course/roadmap.md §Section 12.
+# Validate:  npm run course:validate -- --yaml
+# ---------------------------------------------------------------------------
+
+section:
+  id: 12
+  slug: "in-other-words"
+  title: "In other words"
+  cefr: "C1.1"
+  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
+units:
+  - ordinal: 1
+    slug: "me-pidio-que"
+    title: "Pass on what someone asked"
+    summary: "Me pidió que le trajera algo"
+    grammar:
+      - "discurso-referido.pedido"
+      - "subjuntivo.imperfecto"
+    register_max: "informal"
+    sample:
+      es: "Me pidió que le trajera algo."
+      en: "She asked me to bring her something."
+    tips:
+      - title: "Me pidió que…"
+        body: "A request told later takes the past subjunctive: «Traeme pan» → **me pidió que le trajera
+          pan**; «Esperen» → **nos dijo que esperáramos**. *Dijo que* + subjunctive is an order;
+          *dijo que* + indicative is news."
+      - title: "Insistió, sugirió"
+        body: "**Insistió en que fuera** — *she insisted I go*. **Me sugirió que la llamara** — *he
+          suggested I call her*. Same pattern: the verb after **que** in the past subjunctive."
+    words:
+      - lemma: "traer"
+        pos: "verb"
+        forms:
+          - form: "trajera"
+            en: "(that) I brought, (that) he brought"
+            f: "sg.impf.subj.irregular"
+          - form: "trajeras"
+            en: "(that) you brought"
+            f: "2sg.impf.subj.vos.irregular"
+      - lemma: "dejar"
+        pos: "verb"
+        forms:
+          - form: "dejara"
+            en: "(that) I left, (that) he let"
+            f: "sg.impf.subj"
+      - lemma: "esperar"
+        pos: "verb"
+        forms:
+          - form: "esperáramos"
+            en: "(that) we waited"
+            f: "1pl.impf.subj"
+      - lemma: "insistir"
+        pos: "verb"
+        en: "to insist"
+        forms:
+          - form: "insistió"
+            en: "he insisted, she insisted"
+            f: "3sg.pret.ind"
+          - form: "insisto"
+            en: "I insist"
+            f: "1sg.pres.ind"
+      - lemma: "sugerir"
+        pos: "verb"
+        en: "to suggest"
+        forms:
+          - form: "sugirió"
+            en: "he suggested, she suggested"
+            f: "3sg.pret.ind.irregular"
+          - form: "sugiero"
+            en: "I suggest"
+            f: "1sg.pres.ind.irregular"
+      - lemma: "aclarar"
+        pos: "verb"
+        en: "to make clear, to clarify"
+        forms:
+          - form: "aclaró"
+            en: "he made clear, she made clear"
+            f: "3sg.pret.ind"
+          - form: "aclarar"
+            f: "inf"
+
+  - ordinal: 2
+    slug: "me-pregunto-si"
+    title: "Ask whether"
+    summary: "Me preguntó si venía"
+    grammar:
+      - "discurso-referido.pregunta"
+      - "si.interrogativo"
+    register_max: "informal"
+    sample:
+      es: "Me preguntó si venía."
+      en: "He asked me if I was coming."
+    tips:
+      - title: "Si = whether"
+        body: "A yes-or-no question told later hangs on **si**: «¿Venís?» → **me preguntó si venía**.
+          *No sé si abre hoy* — *I don't know if it's open today*. **Dudo** — *I doubt it*."
+      - title: "A ver si…"
+        body: "**A ver si** is *let's see if* — and, just as often, a hope: **a ver si nos juntamos** —
+          *we should get together sometime*. To find something out, porteños **averiguan**."
+    words:
+      - lemma: "a ver si"
+        pos: "phrase"
+        en: "let's see if"
+      - lemma: "averiguar"
+        pos: "verb"
+        en: "to find out, to look into"
+        forms:
+          - form: "averiguar"
+            f: "inf"
+          - form: "averiguo"
+            en: "I'll find out, I find out"
+            f: "1sg.pres.ind"
+          - form: "averiguá"
+            en: "find out"
+            f: "2sg.imp.vos"
+      - lemma: "dudar"
+        pos: "verb"
+        en: "to doubt"
+        forms:
+          - form: "dudo"
+            en: "I doubt"
+            f: "1sg.pres.ind"
+          - form: "dudás"
+            en: "you doubt"
+            f: "2sg.pres.ind.vos"
+      - lemma: "abrir"
+        pos: "verb"
+        forms:
+          - form: "abre"
+            en: "opens, is open"
+            f: "3sg.pres.ind"
+      - lemma: "cerrar"
+        pos: "verb"
+        forms:
+          - form: "cierra"
+            en: "closes"
+            f: "3sg.pres.ind.irregular"
+
+  - ordinal: 3
+    slug: "usted"
+    title: "Speak formally"
+    summary: "Disculpe, ¿usted es el dueño?"
+    grammar:
+      - "usted"
+      - "imperativo.usted"
+      - "cortesia"
+    register_max: "informal"
+    sample:
+      es: "Disculpe, ¿usted es el dueño?"
+      en: "Excuse me, are you the owner?"
+    tips:
+      - title: "Usted"
+        body: "Porteños say **vos** to almost everyone, but **usted** to an older stranger, a doctor, a
+          building's owner. Usted takes the *él* form of the verb: **¿usted es el dueño?**, **pase**,
+          **siéntese**."
+      - title: "Quisiera"
+        body: "The politest way to ask is **quisiera** — *I'd like*: **quisiera un turno**. **Disculpe**
+          gets attention, **le agradezco** says thank you. To a friend: **disculpá**, **te agradezco**."
+    words:
+      - lemma: "usted"
+        pos: "pron"
+        en: "you (formal)"
+      - lemma: "señor"
+        pos: "noun"
+        en: "sir, gentleman"
+        forms:
+          - form: "señor"
+            en: "sir, gentleman"
+            f: "m.sg"
+          - form: "señora"
+            en: "madam, lady"
+            f: "f.sg"
+      - lemma: "disculpar"
+        pos: "verb"
+        en: "to excuse"
+        forms:
+          - form: "disculpe"
+            en: "excuse me (formal)"
+            f: "3sg.imp"
+          - form: "disculpá"
+            en: "excuse me"
+            f: "2sg.imp.vos"
+      - lemma: "pasar"
+        pos: "verb"
+        forms:
+          - form: "pase"
+            en: "come in (formal)"
+            f: "3sg.imp"
+      - lemma: "sentarse"
+        pos: "verb"
+        forms:
+          - form: "siéntese"
+            en: "sit down (formal)"
+            f: "3sg.imp.clitic"
+      - lemma: "querer"
+        pos: "verb"
+        forms:
+          - form: "quisiera"
+            en: "I'd like"
+            f: "sg.impf.subj.irregular"
+      - lemma: "agradecer"
+        pos: "verb"
+        en: "to thank"
+        forms:
+          - form: "agradezco"
+            en: "I thank"
+            f: "1sg.pres.ind.irregular"
+
+  - ordinal: 4
+    slug: "practica-me-pidio"
+    title: "Practice: requests, questions and usted"
+    summary: "Me pidió que esperáramos"
+    grammar:
+      - "repaso.discurso-referido"
+      - "repaso.usted"
+    register_max: "informal"
+    sample:
+      es: "Me pidió que esperáramos."
+      en: "She asked us to wait."
+    tips:
+      - title: "Me pidió que, me preguntó si"
+        body: "A request told later: **me pidió que le trajera algo**. A question: **me preguntó si venía**."
+      - title: "Usted"
+        body: "**Disculpe**, **pase**, **siéntese**, **quisiera** — the *él* form, for someone you don't tutear… or vosear."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "trajera"
+      - "dejara"
+      - "esperáramos"
+      - "insistió"
+      - "sugirió"
+      - "a ver si"
+      - "averiguar"
+      - "dudo"
+      - "abre"
+      - "usted"
+      - "señora"
+      - "disculpe"
+      - "quisiera"
+      - "agradezco"
+      - "viniera"
+      - "hubiera"
+
+  - ordinal: 5
+    slug: "cualquier-cosa-avisame"
+    title: "Write a work email"
+    summary: "Te adjunto el contrato"
+    grammar:
+      - "registro.escrito"
+      - "mail"
+    register_max: "informal"
+    sample:
+      es: "Te adjunto el contrato."
+      en: "I'm attaching the contract."
+    tips:
+      - title: "Estimado…"
+        body: "A work email opens with **Estimado Juan** or **Estimada Sofi** and ends with **Saludos**.
+          **Te adjunto** is *I'm attaching*; **desde ya, gracias** is *thanks in advance*."
+      - title: "Cualquier cosa, avisame"
+        body: "The porteño sign-off, in emails and out of them: **cualquier cosa, avisame** — *if anything
+          comes up, let me know*. A **consulta** is a question you send; a **respuesta**, the reply."
+    words:
+      - lemma: "adjuntar"
+        pos: "verb"
+        en: "to attach"
+        forms:
+          - form: "adjunto"
+            en: "I'm attaching"
+            f: "1sg.pres.ind"
+          - form: "adjunté"
+            en: "I attached"
+            f: "1sg.pret.ind"
+      - lemma: "estimado"
+        pos: "adj"
+        en: "dear (in a letter)"
+        forms:
+          - form: "estimado"
+            f: "m.sg"
+          - form: "estimada"
+            f: "f.sg"
+      - lemma: "saludo"
+        pos: "noun"
+        en: "greeting; regards"
+        forms:
+          - form: "saludo"
+            f: "m.sg"
+          - form: "saludos"
+            en: "regards"
+            f: "m.pl"
+      - lemma: "desde ya"
+        pos: "phrase"
+        en: "in advance"
+      - lemma: "consulta"
+        pos: "noun"
+        en: "inquiry"
+      - lemma: "respuesta"
+        pos: "noun"
+        en: "answer, reply"
+      - lemma: "enviar"
+        pos: "verb"
+        en: "to send"
+        forms:
+          - form: "envié"
+            en: "I sent"
+            f: "1sg.pret.ind"
+          - form: "enviás"
+            en: "you send (formal)"
+            f: "2sg.pres.ind.vos"
+      - lemma: "cualquier cosa"
+        pos: "phrase"
+        en: "if anything comes up"
+
+  - ordinal: 6
+    slug: "resulta-que"
+    title: "Tell how it turned out"
+    summary: "Resulta que se enteró todo el barrio"
+    grammar:
+      - "narracion.conectores"
+      - "enterarse"
+    register_max: "informal"
+    sample:
+      es: "Resulta que se enteró todo el barrio."
+      en: "It turns out the whole neighborhood found out."
+    tips:
+      - title: "Resulta que"
+        body: "**Resulta que** — *it turns out* — is how a porteño story takes its turn. **Encima** — *on
+          top of that* — makes it worse: **encima, llovía**. **Total** shrugs it off: **total, nadie se
+          dio cuenta**."
+      - title: "Me enteré"
+        body: "**Enterarse** is *to find out, to hear about*: **me enteré ayer**, **¿te enteraste?**,
+          **se enteró todo el mundo**."
+    words:
+      - lemma: "resulta que"
+        pos: "phrase"
+        en: "it turns out that"
+      - lemma: "resultar"
+        pos: "verb"
+        en: "to turn out"
+        forms:
+          - form: "resultó"
+            en: "it turned out"
+            f: "3sg.pret.ind"
+      - lemma: "enterarse"
+        pos: "verb"
+        en: "to find out, to hear about"
+        forms:
+          - form: "me enteré"
+            en: "I found out"
+            f: "1sg.pret.ind.clitic"
+          - form: "te enteraste"
+            en: "you found out"
+            f: "2sg.pret.ind.vos.clitic"
+          - form: "se enteró"
+            en: "he found out, she found out"
+            f: "3sg.pret.ind.clitic"
+          - form: "enteré"
+            f: "1sg.pret.ind"
+            bound: true
+          - form: "enteraste"
+            f: "2sg.pret.ind.vos"
+            bound: true
+          - form: "enteró"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "encima"
+        pos: "adv"
+        en: "on top of that, what's more"
+      - lemma: "total"
+        pos: "adv"
+        en: "after all, whatever"
+        register: "informal"
+
+  - ordinal: 7
+    slug: "se-la-cree"
+    title: "Use the porteño 'la'"
+    summary: "Ese pibe se la cree"
+    grammar:
+      - "clitico.la-idiomatico"
+      - "registro.informal"
+    register_max: "informal"
+    sample:
+      es: "Ese pibe se la cree."
+      en: "That guy is so full of himself."
+    tips:
+      - title: "Se la cree"
+        body: "A little **la** that points at nothing turns a verb into an idiom: **se la cree** — *he's
+          full of himself*; **me la banco** — *I can handle it*; **la tenés clara** — *you know your
+          stuff*. With **las**: **me las arreglo** — *I get by*."
+      - title: "La verdad"
+        body: "**La verdad** opens an honest answer: **la verdad, no sé** — *honestly, I don't know*.
+          **La verdad que sí** — *yeah, really*."
+    words:
+      - lemma: "creérsela"
+        pos: "verb"
+        en: "to be full of oneself"
+        register: "informal"
+        forms:
+          - form: "se la cree"
+            en: "he's full of himself, she's full of herself"
+            f: "3sg.pres.ind.clitic"
+          - form: "te la creés"
+            en: "you're full of yourself"
+            f: "2sg.pres.ind.vos.clitic"
+          - form: "cree"
+            f: "3sg.pres.ind"
+            bound: true
+      - lemma: "bancársela"
+        pos: "verb"
+        en: "to handle it, to put up with it"
+        register: "informal"
+        forms:
+          - form: "me la banco"
+            en: "I can handle it"
+            f: "1sg.pres.ind.clitic"
+          - form: "se la bancó"
+            en: "he handled it, she put up with it"
+            f: "3sg.pret.ind.clitic"
+          - form: "bancó"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "arreglárselas"
+        pos: "verb"
+        en: "to manage, to get by"
+        forms:
+          - form: "me las arreglo"
+            en: "I manage, I get by"
+            f: "1sg.pres.ind.clitic"
+          - form: "arreglo"
+            f: "1sg.pres.ind"
+            bound: true
+      - lemma: "la tenés clara"
+        pos: "phrase"
+        en: "you know your stuff, you've got it figured out"
+        register: "informal"
+      - lemma: "la verdad"
+        pos: "phrase"
+        en: "to be honest, truth is"
+
+  - ordinal: 8
+    slug: "practica-resulta-que"
+    title: "Practice: emails, stories and 'la'"
+    summary: "Resulta que se la cree"
+    grammar:
+      - "repaso.mail"
+      - "repaso.conectores"
+      - "repaso.clitico-la"
+    register_max: "informal"
+    sample:
+      es: "La verdad, me las arreglo."
+      en: "Honestly, I get by."
+    tips:
+      - title: "Resulta que, encima"
+        body: "**Resulta que** turns the story, **encima** makes it worse, **total** shrugs."
+      - title: "Se la cree, me la banco"
+        body: "**Se la cree**, **me la banco**, **me las arreglo**, **la tenés clara** — a *la* that points at nothing."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "adjunto"
+      - "estimado"
+      - "saludos"
+      - "desde ya"
+      - "consulta"
+      - "cualquier cosa"
+      - "resulta que"
+      - "me enteré"
+      - "se enteró"
+      - "encima"
+      - "total"
+      - "se la cree"
+      - "me la banco"
+      - "me las arreglo"
+      - "la tenés clara"
+      - "la verdad"
+      - "usted"
+      - "trajera"
+
+  - ordinal: 9
+    slug: "acabo-de"
+    title: "Say what just happened"
+    summary: "Acabo de llegar"
+    grammar:
+      - "acabar-de"
+      - "soler"
+      - "volver-a"
+    register_max: "informal"
+    sample:
+      es: "Acabo de llegar."
+      en: "I just got here."
+    tips:
+      - title: "Acabo de"
+        body: "**Acabo de** + infinitive is *I just did it*: **acabo de llegar**, **acaba de salir**.
+          **Volví a** is *I did it again*: **volví a perder las llaves**. Or just **de nuevo**."
+      - title: "Suelo"
+        body: "**Soler** is *to usually*: **suelo almorzar tarde** — *I usually have lunch late*; **¿solés
+          venir acá?** It only ever comes with an infinitive."
+    words:
+      - lemma: "acabar de"
+        pos: "phrase"
+        en: "to have just (done)"
+        forms:
+          - form: "acabo de"
+            en: "I just (did)"
+            f: "1sg.pres.ind"
+          - form: "acabás de"
+            en: "you just (did)"
+            f: "2sg.pres.ind.vos"
+          - form: "acaba de"
+            en: "he just (did), she just (did)"
+            f: "3sg.pres.ind"
+      - lemma: "soler"
+        pos: "verb"
+        en: "to usually (do)"
+        forms:
+          - form: "suelo"
+            en: "I usually"
+            f: "1sg.pres.ind.irregular"
+          - form: "solés"
+            en: "you usually"
+            f: "2sg.pres.ind.vos"
+          - form: "suele"
+            en: "he usually, it usually"
+            f: "3sg.pres.ind.irregular"
+      - lemma: "volver a"
+        pos: "phrase"
+        en: "to (do) again"
+        forms:
+          - form: "volví a"
+            en: "I (did) again"
+            f: "1sg.pret.ind"
+          - form: "vuelvo a"
+            en: "I (do) again"
+            f: "1sg.pres.ind"
+      - lemma: "de nuevo"
+        pos: "phrase"
+        en: "once more"
+
+  - ordinal: 10
+    slug: "cada-vez-mas"
+    title: "Talk about how things changed"
+    summary: "El barrio cambió un montón"
+    grammar:
+      - "cambio.antes-ahora"
+      - "cada-vez-mas"
+    register_max: "informal"
+    sample:
+      es: "El barrio cambió un montón."
+      en: "The neighborhood changed a lot."
+    tips:
+      - title: "Ya no"
+        body: "**Ya no** is *not anymore*: **ya no vivo ahí**. **Cada vez más** — *more and more*: **cada
+          vez más caro**; **cada vez menos** — *less and less*."
+      - title: "Creció"
+        body: "**Crecer** is *to grow* — a city, a kid, a tree: **el barrio creció**, **crecí en
+          Rosario** — *I grew up in Rosario*. The new towers are **edificios**."
+    words:
+      - lemma: "ya no"
+        pos: "phrase"
+        en: "not anymore, no longer"
+      - lemma: "cada vez más"
+        pos: "phrase"
+        en: "more and more"
+      - lemma: "cada vez menos"
+        pos: "phrase"
+        en: "less and less"
+      - lemma: "cambiar"
+        pos: "verb"
+        forms:
+          - form: "cambió"
+            en: "changed"
+            f: "3sg.pret.ind"
+      - lemma: "crecer"
+        pos: "verb"
+        en: "to grow, to grow up"
+        forms:
+          - form: "creció"
+            en: "grew"
+            f: "3sg.pret.ind"
+          - form: "crecí"
+            en: "I grew up"
+            f: "1sg.pret.ind"
+      - lemma: "edificio"
+        pos: "noun"
+        en: "building"
+        forms:
+          - form: "edificio"
+            f: "m.sg"
+          - form: "edificios"
+            f: "m.pl"
+
+  - ordinal: 11
+    slug: "estoy-podrido"
+    title: "Say you're fed up"
+    summary: "Estoy podrido del ruido"
+    grammar:
+      - "estar.harto"
+      - "queja"
+    register_max: "informal"
+    sample:
+      es: "Estoy podrido del ruido."
+      en: "I'm sick of the noise."
+    tips:
+      - title: "Harto, podrido"
+        body: "**Estoy harto** — *I'm fed up*; porteños go further: **estoy podrido** — literally
+          *rotten*. Both take **de**: **harta del tránsito**, **podrido del ruido**."
+      - title: "No doy más"
+        body: "**No doy más** — *I can't take it anymore*. **No lo aguanto** — *I can't stand him*. And
+          when it's one thing too many: **¡es el colmo!**"
+    words:
+      - lemma: "harto"
+        pos: "adj"
+        en: "fed up"
+        forms:
+          - form: "harto"
+            f: "m.sg"
+          - form: "harta"
+            f: "f.sg"
+      - lemma: "podrido"
+        pos: "adj"
+        en: "sick of it"
+        register: "informal"
+        forms:
+          - form: "podrido"
+            f: "m.sg"
+          - form: "podrida"
+            f: "f.sg"
+      - lemma: "aguantar"
+        pos: "verb"
+        en: "to stand, to put up with"
+        forms:
+          - form: "aguanto"
+            en: "I can stand, I can bear"
+            f: "1sg.pres.ind"
+          - form: "aguantar"
+            f: "inf"
+      - lemma: "colmo"
+        pos: "noun"
+        en: "the last straw"
+      - lemma: "cansarse"
+        pos: "verb"
+        forms:
+          - form: "me cansé"
+            en: "I got tired, I got sick of it"
+            f: "1sg.pret.ind.clitic"
+          - form: "cansé"
+            f: "1sg.pret.ind"
+            bound: true
+      - lemma: "no doy más"
+        pos: "phrase"
+        en: "I can't take it anymore, I'm exhausted"
+
+  - ordinal: 12
+    slug: "practica-no-doy-mas"
+    title: "Practice: just, again, changes, fed up"
+    summary: "Ya no doy más"
+    grammar:
+      - "repaso.acabar-de"
+      - "repaso.cambio"
+      - "repaso.queja"
+    register_max: "informal"
+    sample:
+      es: "Ya no aguanto el ruido."
+      en: "I can't stand the noise anymore."
+    tips:
+      - title: "Acabo de, suelo, volví a"
+        body: "**Acabo de** — just now; **suelo** — usually; **volví a** — again."
+      - title: "Ya no, cada vez más"
+        body: "**Ya no** — not anymore; **cada vez más** — more and more. And when it's too much: **estoy podrido**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "acabo de"
+      - "acaba de"
+      - "suelo"
+      - "suele"
+      - "volví a"
+      - "de nuevo"
+      - "ya no"
+      - "cada vez más"
+      - "cambió"
+      - "creció"
+      - "edificio"
+      - "harto"
+      - "podrido"
+      - "aguanto"
+      - "no doy más"
+      - "me enteré"
+      - "quisiera"
+
+  - ordinal: 13
+    slug: "te-la-hago-corta"
+    title: "Tell the whole story, short"
+    summary: "Te la hago corta"
+    grammar:
+      - "narracion.muletillas"
+      - "repaso.c1"
+    register_max: "informal"
+    sample:
+      es: "Te la hago corta: no vino."
+      en: "Long story short: he didn't come."
+    tips:
+      - title: "Te la hago corta"
+        body: "**Te la hago corta** — *long story short* — is usually followed by a long story. **La
+          cuestión es que** — *the thing is* — brings it back on track; **en fin** closes it."
+      - title: "Y nada"
+        body: "**Y nada** is the porteño *so, yeah*: it fills the pause at the end of a story. **Al
+          toque** — *right away*: **me contestó al toque**."
+    words:
+      - lemma: "te la hago corta"
+        pos: "phrase"
+        en: "long story short"
+        register: "informal"
+      - lemma: "la cuestión es que"
+        pos: "phrase"
+        en: "the thing is"
+      - lemma: "en fin"
+        pos: "phrase"
+        en: "all in all"
+      - lemma: "y nada"
+        pos: "phrase"
+        en: "so yeah"
+        register: "informal"
+      - lemma: "al toque"
+        pos: "phrase"
+        en: "in a flash, straight away"
+        register: "informal"
