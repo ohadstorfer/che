@@ -722,7 +722,7 @@ units:
         register: "informal"
       - lemma: "la cuestión es que"
         pos: "phrase"
-        en: "the thing is"
+        en: "the point is"
       - lemma: "en fin"
         pos: "phrase"
         en: "all in all"

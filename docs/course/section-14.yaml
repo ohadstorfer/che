@@ -1,0 +1,607 @@
+# ---------------------------------------------------------------------------
+# Che — Section 14 outline: "Shades of meaning" (C1.3)
+#
+# The fine grain of the language: turning down gently (no es que no quiera,
+# es que…), what would be true now if the past had gone differently (si
+# hubiera ahorrado, ahora tendría…), regret (tendría que haber ido), the
+# diminutives that soften everything (un ratito), lo que pasa es que, the
+# sayings, lunfardo that isn't in section 7, what makes you laugh or cry,
+# cuanto más… mejor, and a checkpoint on saying the hard thing kindly.
+#
+# Plan: docs/course/roadmap.md §Section 14.
+# Validate:  npm run course:validate -- --yaml
+# ---------------------------------------------------------------------------
+
+section:
+  id: 14
+  slug: "shades-of-meaning"
+  title: "Shades of meaning"
+  cefr: "C1.3"
+  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
+units:
+  - ordinal: 1
+    slug: "no-es-que"
+    title: "Turn it down gently"
+    summary: "No es que no quiera, es que no puedo"
+    grammar:
+      - "no-es-que.subjuntivo"
+      - "es-que"
+    register_max: "informal"
+    sample:
+      es: "No es que no quiera, es que no puedo."
+      en: "It's not that I don't want to, it's just that I can't."
+    tips:
+      - title: "No es que…"
+        body: "A reason you deny takes the subjunctive: **no es que no quiera** — *it's not that I don't
+          want to*. The real reason follows with **es que** and the normal verb: **es que no puedo**."
+      - title: "Es que…"
+        body: "On its own, **es que…** is the start of every porteño excuse: **¿no venís? — Es que
+          laburo temprano**. **El hecho de que** — *the fact that* — is its formal cousin."
+    words:
+      - lemma: "no es que"
+        pos: "phrase"
+        en: "it's not that"
+      - lemma: "es que"
+        pos: "phrase"
+        en: "it's just that"
+      - lemma: "el hecho de que"
+        pos: "phrase"
+        en: "the fact that"
+      - lemma: "querer"
+        pos: "verb"
+        forms:
+          - form: "quiera"
+            en: "(that) I want, (that) he wants"
+            f: "sg.pres.subj.irregular"
+      - lemma: "tener"
+        pos: "verb"
+        forms:
+          - form: "tengamos"
+            en: "(that) we have"
+            f: "1pl.pres.subj.irregular"
+
+  - ordinal: 2
+    slug: "si-hubiera-ahorrado"
+    title: "Say what would be true now"
+    summary: "Si hubiera ahorrado, ahora tendría un depto"
+    grammar:
+      - "condicional.mixto"
+      - "pluscuamperfecto.subjuntivo"
+    register_max: "informal"
+    sample:
+      es: "Si hubiera ahorrado, ahora tendría un depto."
+      en: "If I'd saved, I'd have an apartment now."
+    tips:
+      - title: "Then and now"
+        body: "A past that went differently, and what it would mean today: **si hubiera ahorrado** (then),
+          **ahora tendría un depto** (now). The first half is *hubiera* + participle, the second the
+          plain conditional."
+      - title: "Hubiéramos"
+        body: "With *we*: **si hubiéramos salido antes, ya estaríamos ahí**. The participles: **ahorrado,
+          comprado, vendido, aceptado**."
+    words:
+      - lemma: "haber"
+        pos: "verb"
+        forms:
+          - form: "hubiéramos"
+            en: "(if) we had; we would have"
+            f: "1pl.impf.subj.irregular"
+      - lemma: "ahorrar"
+        pos: "verb"
+        forms:
+          - form: "ahorrado"
+            en: "saved"
+            f: "part"
+      - lemma: "comprar"
+        pos: "verb"
+        forms:
+          - form: "comprado"
+            en: "bought"
+            f: "part"
+      - lemma: "vender"
+        pos: "verb"
+        forms:
+          - form: "vendido"
+            en: "sold"
+            f: "part"
+      - lemma: "aceptar"
+        pos: "verb"
+        forms:
+          - form: "aceptado"
+            en: "accepted"
+            f: "part"
+      - lemma: "estar"
+        pos: "verb"
+        forms:
+          - form: "estaríamos"
+            en: "we would be"
+            f: "1pl.cond.ind"
+
+  - ordinal: 3
+    slug: "tendria-que-haber"
+    title: "Talk about regrets"
+    summary: "Tendría que haber ido"
+    grammar:
+      - "tendria-que-haber"
+      - "arrepentirse"
+    register_max: "informal"
+    sample:
+      es: "Tendría que haber ido."
+      en: "I should have gone."
+    tips:
+      - title: "Tendría que haber…"
+        body: "**Tendría que haber** + participle is *I should have*: **tendría que haber ido**,
+          **tendrías que haber avisado**. Porteños use it far more than any other past regret."
+      - title: "Me arrepiento"
+        body: "**Me arrepiento** — *I regret it*; **me arrepentí** — *I regretted it, I changed my
+          mind*. A missed chance is a **oportunidad** you didn't **aprovechar**."
+    words:
+      - lemma: "tendría que haber"
+        pos: "phrase"
+        en: "I should have, he should have"
+      - lemma: "tendrías que haber"
+        pos: "phrase"
+        en: "you should have"
+      - lemma: "arrepentirse"
+        pos: "verb"
+        en: "to regret; to change one's mind"
+        forms:
+          - form: "me arrepiento"
+            en: "I regret it"
+            f: "1sg.pres.ind.clitic.irregular"
+          - form: "me arrepentí"
+            en: "I regretted it, I changed my mind"
+            f: "1sg.pret.ind.clitic"
+          - form: "arrepiento"
+            f: "1sg.pres.ind.irregular"
+            bound: true
+          - form: "arrepentí"
+            f: "1sg.pret.ind"
+            bound: true
+      - lemma: "oportunidad"
+        pos: "noun"
+        en: "chance, opportunity"
+      - lemma: "aprovechar"
+        pos: "verb"
+        en: "to make the most of, to take advantage of"
+        forms:
+          - form: "aprovechar"
+            f: "inf"
+          - form: "aproveché"
+            en: "I made the most of"
+            f: "1sg.pret.ind"
+          - form: "aprovechado"
+            en: "made the most of"
+            f: "part"
+
+  - ordinal: 4
+    slug: "practica-no-es-que"
+    title: "Practice: excuses, what-ifs and regrets"
+    summary: "Es que tendría que haber ahorrado"
+    grammar:
+      - "repaso.no-es-que"
+      - "repaso.condicional-mixto"
+      - "repaso.arrepentirse"
+    register_max: "informal"
+    sample:
+      es: "Me arrepiento, tendría que haber ido."
+      en: "I regret it, I should have gone."
+    tips:
+      - title: "No es que…, es que…"
+        body: "**No es que no quiera** (subjunctive), **es que no puedo** (normal verb)."
+      - title: "Hubiera, tendría que haber"
+        body: "**Si hubiera ahorrado, ahora tendría…** — and the regret: **tendría que haber ahorrado**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "no es que"
+      - "es que"
+      - "el hecho de que"
+      - "quiera"
+      - "hubiéramos"
+      - "ahorrado"
+      - "comprado"
+      - "vendido"
+      - "estaríamos"
+      - "tendría que haber"
+      - "tendrías que haber"
+      - "me arrepiento"
+      - "me arrepentí"
+      - "oportunidad"
+      - "aprovechar"
+      - "hubiera"
+      - "a menos que"
+
+  - ordinal: 5
+    slug: "un-ratito"
+    title: "Soften it with -ito"
+    summary: "Esperame un ratito"
+    grammar:
+      - "diminutivo"
+    register_max: "informal"
+    sample:
+      es: "Esperame un ratito."
+      en: "Wait for me a moment."
+    tips:
+      - title: "-ito, -ita"
+        body: "**-ito** makes things small, and requests smaller: **un ratito** — *a sec*; **un cafecito**;
+          **un poquito**. It sounds kind rather than childish."
+      - title: "Cerquita, despacito"
+        body: "It works on adverbs too: **cerquita** — *really close*; **despacito** — *nice and slow*.
+          **Chiquito** — *tiny*."
+    words:
+      - lemma: "ratito"
+        pos: "noun"
+        en: "a moment, a sec"
+      - lemma: "cafecito"
+        pos: "noun"
+        en: "a little coffee"
+      - lemma: "poquito"
+        pos: "adv"
+        en: "a little bit"
+      - lemma: "cerquita"
+        pos: "adv"
+        en: "really close"
+      - lemma: "despacito"
+        pos: "adv"
+        en: "nice and slow"
+      - lemma: "chiquito"
+        pos: "adj"
+        en: "tiny"
+        forms:
+          - form: "chiquito"
+            f: "m.sg"
+          - form: "chiquita"
+            f: "f.sg"
+
+  - ordinal: 6
+    slug: "lo-que-pasa-es-que"
+    title: "Explain what's really going on"
+    summary: "Lo que pasa es que no tengo tiempo"
+    grammar:
+      - "lo.nominalizacion"
+    register_max: "informal"
+    sample:
+      es: "Lo que pasa es que no tengo tiempo."
+      en: "The thing is, I don't have time."
+    tips:
+      - title: "Lo que pasa es que…"
+        body: "**Lo que pasa es que…** — *the thing is* — explains the real reason. **Lo raro es que…**
+          — *the weird thing is*; **lo importante es que…** — *what matters is*."
+      - title: "Lo de…"
+        body: "**Lo de** is *the business with*: **¿qué pasó con lo de Juan?** And **lo de siempre** is
+          *the usual*: at the café, at the bar, in life."
+    words:
+      - lemma: "lo que pasa es que"
+        pos: "phrase"
+        en: "what's going on is"
+      - lemma: "lo raro"
+        pos: "phrase"
+        en: "the weird thing"
+      - lemma: "lo importante"
+        pos: "phrase"
+        en: "what matters"
+      - lemma: "lo de siempre"
+        pos: "phrase"
+        en: "the usual"
+      - lemma: "lo de"
+        pos: "phrase"
+        en: "the business with, the thing about"
+
+  - ordinal: 7
+    slug: "como-dice-el-dicho"
+    title: "Use the sayings"
+    summary: "Más vale tarde que nunca"
+    grammar:
+      - "refranes"
+    register_max: "informal"
+    sample:
+      es: "Más vale tarde que nunca."
+      en: "Better late than never."
+    tips:
+      - title: "Como dice el dicho"
+        body: "A **dicho** is a saying, and porteños drop one to close an argument: **más vale tarde que
+          nunca**; **no hay mal que por bien no venga** — *every cloud has a silver lining*."
+      - title: "El que avisa no traiciona"
+        body: "**El que avisa no traiciona** — *I warned you*, literally *who warns doesn't betray*.
+          **Al mal tiempo, buena cara** — *grin and bear it*."
+    words:
+      - lemma: "dicho"
+        pos: "noun"
+        en: "proverb, saying (noun)"
+      - lemma: "más vale tarde que nunca"
+        pos: "phrase"
+        en: "better late than never"
+      - lemma: "no hay mal que por bien no venga"
+        pos: "phrase"
+        en: "every cloud has a silver lining"
+      - lemma: "el que avisa no traiciona"
+        pos: "phrase"
+        en: "don't say I didn't warn you"
+      - lemma: "al mal tiempo, buena cara"
+        pos: "phrase"
+        en: "grin and bear it"
+
+  - ordinal: 8
+    slug: "practica-lo-que-pasa"
+    title: "Practice: -ito, lo que pasa, sayings"
+    summary: "Lo de siempre, un cafecito"
+    grammar:
+      - "repaso.diminutivo"
+      - "repaso.lo"
+      - "repaso.refranes"
+    register_max: "informal"
+    sample:
+      es: "Lo de siempre: un cafecito."
+      en: "The usual: a little coffee."
+    tips:
+      - title: "Un ratito"
+        body: "**-ito** softens: **un ratito**, **un cafecito**, **cerquita**."
+      - title: "Lo que pasa es que…"
+        body: "**Lo que pasa es que**, **lo raro es que**, **lo de siempre** — and a **dicho** to close it."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "ratito"
+      - "cafecito"
+      - "poquito"
+      - "cerquita"
+      - "despacito"
+      - "chiquito"
+      - "lo que pasa es que"
+      - "lo raro"
+      - "lo importante"
+      - "lo de siempre"
+      - "lo de"
+      - "más vale tarde que nunca"
+      - "el que avisa no traiciona"
+      - "no es que"
+      - "lo bueno"
+
+  - ordinal: 9
+    slug: "ese-chabon"
+    title: "More lunfardo"
+    summary: "Ese chabón es un groso"
+    grammar:
+      - "lunfardo"
+      - "registro"
+    register_max: "lunfardo"
+    sample:
+      es: "Ese chabón es un groso."
+      en: "That guy is awesome."
+    tips:
+      - title: "Chabón, mina"
+        body: "A **chabón** is a guy, a **mina** a woman — among friends; both sound rude to strangers.
+          Someone great at what they do is a **groso**; a **birra** is a beer."
+      - title: "Trucho, zarpado"
+        body: "**Trucho** — *fake, dodgy*: *un billete trucho*. **Zarpado** — *over the top*, for good or
+          bad. **Bardo** — *a mess, trouble*: *se armó un bardo*."
+    words:
+      - lemma: "chabón"
+        pos: "noun"
+        en: "bloke, fella"
+        register: "lunfardo"
+      - lemma: "mina"
+        pos: "noun"
+        en: "woman, girl (slang)"
+        register: "lunfardo"
+      - lemma: "groso"
+        pos: "adj"
+        en: "awesome, a legend"
+        register: "lunfardo"
+        forms:
+          - form: "groso"
+            f: "m.sg"
+          - form: "grosa"
+            f: "f.sg"
+      - lemma: "birra"
+        pos: "noun"
+        en: "beer"
+        register: "lunfardo"
+        forms:
+          - form: "birra"
+            f: "f.sg"
+          - form: "birras"
+            f: "f.pl"
+      - lemma: "trucho"
+        pos: "adj"
+        en: "fake, dodgy"
+        register: "lunfardo"
+        forms:
+          - form: "trucho"
+            f: "m.sg"
+          - form: "trucha"
+            f: "f.sg"
+      - lemma: "zarpado"
+        pos: "adj"
+        en: "over the top, wild"
+        register: "lunfardo"
+        forms:
+          - form: "zarpado"
+            f: "m.sg"
+          - form: "zarpada"
+            f: "f.sg"
+      - lemma: "bardo"
+        pos: "noun"
+        en: "trouble, ruckus"
+        register: "lunfardo"
+
+  - ordinal: 10
+    slug: "me-hizo-reir"
+    title: "Say what made you laugh or cry"
+    summary: "Me hizo reír un montón"
+    grammar:
+      - "hacer.causativo"
+      - "reirse"
+    register_max: "informal"
+    sample:
+      es: "Me hizo reír un montón."
+      en: "It made me laugh so much."
+    tips:
+      - title: "Me hizo reír"
+        body: "**Hacer** + infinitive is *to make someone do*: **me hizo reír**, **me hizo llorar**, **nos
+          hizo esperar**. **Me hace acordar** — *it reminds me*: *esta canción me hace acordar a vos*."
+      - title: "Me reí"
+        body: "**Reírse** is *to laugh*: **me reí un montón**, **nos reímos de todo**. **Llorar** is *to
+          cry*: **lloré con la película**."
+    words:
+      - lemma: "reír"
+        pos: "verb"
+        en: "to laugh"
+        forms:
+          - form: "reír"
+            f: "inf"
+      - lemma: "reírse"
+        pos: "verb"
+        en: "to laugh"
+        forms:
+          - form: "me reí"
+            en: "I laughed"
+            f: "1sg.pret.ind.clitic"
+          - form: "nos reímos"
+            en: "we laugh, we laughed"
+            f: "1pl.pres.ind.clitic"
+          - form: "reí"
+            f: "1sg.pret.ind"
+            bound: true
+          - form: "reímos"
+            f: "1pl.pres.ind"
+            bound: true
+      - lemma: "llorar"
+        pos: "verb"
+        en: "to cry"
+        forms:
+          - form: "llorar"
+            f: "inf"
+          - form: "lloré"
+            en: "I cried"
+            f: "1sg.pret.ind"
+      - lemma: "hacer acordar"
+        pos: "phrase"
+        en: "to remind"
+        forms:
+          - form: "me hace acordar"
+            en: "it reminds me"
+            f: "3sg.pres.ind"
+      - lemma: "canción"
+        pos: "noun"
+        en: "song"
+
+  - ordinal: 11
+    slug: "cuanto-mas"
+    title: "Say the more, the better"
+    summary: "Cuanto más practicás, mejor hablás"
+    grammar:
+      - "cuanto-mas"
+      - "a-medida-que"
+    register_max: "informal"
+    sample:
+      es: "Cuanto más practicás, mejor hablás."
+      en: "The more you practise, the better you speak."
+    tips:
+      - title: "Cuanto más…"
+        body: "**Cuanto más** — *the more*: **cuanto más practicás, mejor hablás**. **Cuanto menos** —
+          *the less*. And **cuanto antes** — *the sooner the better*: **avisame cuanto antes**."
+      - title: "A medida que"
+        body: "**A medida que** — *as*, for two things changing together: **a medida que pasa el tiempo,
+          te vas acostumbrando**."
+    words:
+      - lemma: "cuanto más"
+        pos: "phrase"
+        en: "the more"
+      - lemma: "cuanto menos"
+        pos: "phrase"
+        en: "the less"
+      - lemma: "cuanto antes"
+        pos: "phrase"
+        en: "as soon as possible"
+      - lemma: "a medida que"
+        pos: "phrase"
+        en: "as (gradually)"
+      - lemma: "practicar"
+        pos: "verb"
+        en: "to practise"
+        forms:
+          - form: "practicar"
+            f: "inf"
+          - form: "practicás"
+            en: "you practise"
+            f: "2sg.pres.ind.vos"
+
+  - ordinal: 12
+    slug: "practica-cuanto-mas"
+    title: "Practice: slang, laughing and 'the more'"
+    summary: "Cuanto más me reí, más lloré"
+    grammar:
+      - "repaso.lunfardo"
+      - "repaso.causativo"
+      - "repaso.cuanto-mas"
+    register_max: "lunfardo"
+    sample:
+      es: "Ese chabón me hizo reír un montón."
+      en: "That guy made me laugh so much."
+    tips:
+      - title: "Chabón, groso"
+        body: "**Chabón**, **mina**, **groso**, **birra**, **trucho** — among friends."
+      - title: "Me hizo reír, cuanto más"
+        body: "**Me hizo reír**, **me hace acordar**, and **cuanto más practicás, mejor**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "chabón"
+      - "mina"
+      - "groso"
+      - "birra"
+      - "trucho"
+      - "bardo"
+      - "reír"
+      - "me reí"
+      - "llorar"
+      - "me hace acordar"
+      - "canción"
+      - "cuanto más"
+      - "cuanto antes"
+      - "a medida que"
+      - "practicar"
+      - "ratito"
+
+  - ordinal: 13
+    slug: "no-te-lo-tomes-a-mal"
+    title: "Say the hard thing kindly"
+    summary: "No te lo tomes a mal"
+    grammar:
+      - "tacto"
+      - "repaso.c1"
+    register_max: "informal"
+    sample:
+      es: "No te lo tomes a mal."
+      en: "Don't take it the wrong way."
+    tips:
+      - title: "No te lo tomes a mal"
+        body: "Before the hard thing: **no te lo tomes a mal** — *don't take it the wrong way*; **con todo
+          respeto** — *with all due respect*. After it: **no lo dije para ofenderte**."
+      - title: "Entre nos"
+        body: "**Entre nos** — *between you and me* — is where porteño gossip starts. **Sin querer** —
+          *by accident*: **te pisé sin querer**."
+    words:
+      - lemma: "no te lo tomes a mal"
+        pos: "phrase"
+        en: "don't take it the wrong way"
+      - lemma: "con todo respeto"
+        pos: "phrase"
+        en: "with all due respect"
+      - lemma: "entre nos"
+        pos: "phrase"
+        en: "between you and me"
+      - lemma: "sin querer"
+        pos: "phrase"
+        en: "by accident, without meaning to"
+      - lemma: "ofender"
+        pos: "verb"
+        en: "to offend"
+        forms:
+          - form: "ofender"
+            f: "inf"
+          - form: "te ofendiste"
+            en: "you took offence"
+            f: "2sg.pret.ind.vos.clitic"
+          - form: "ofendiste"
+            f: "2sg.pret.ind.vos"
+            bound: true
