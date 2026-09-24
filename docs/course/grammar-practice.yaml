@@ -785,3 +785,66 @@ units:
         | **Está por** llover. | It's about to rain. |
 
         **Ir** + gerund is change in progress; **estar por** + infinitive is what's about to happen.
+
+  # ── Section 12 ──────────────────────────────────────────────────────────
+  - unit: me-pidio-que
+    lessons: 2
+    focus: [{ tense: impf, mood: subj }]
+    tip:
+      title: "A request, told later"
+      body: |
+        | what she said | what you tell |
+        | «Traeme algo.» | Me pidió que le **trajera** algo. |
+        | «Esperen.» | Nos dijo que **esperáramos**. |
+        | «Dejalo acá.» | Me pidió que lo **dejara** acá. |
+        | «Vení.» | Quería que **viniera**. |
+
+        A request or an order told later takes the past subjunctive after **que**. News doesn't: *dijo que venía*.
+
+  - unit: me-pregunto-si
+    lessons: 1
+    tip:
+      title: "Si = whether"
+      body: |
+        | «¿Venís?» | Me preguntó **si** venía. |
+        | «¿Abre hoy?» | No sé **si** abre hoy. |
+        | | **A ver si** nos juntamos. |
+
+        A yes-or-no question told later hangs on **si**, with the normal verb.
+
+  - unit: usted
+    lessons: 1
+    tip:
+      title: "Vos and usted"
+      body: |
+        | vos | usted |
+        | ¿Vos sos el dueño? | ¿**Usted** es el dueño? |
+        | Pasá. | **Pase**. |
+        | Sentate. | **Siéntese**. |
+        | Disculpá. | **Disculpe**. |
+
+        Usted takes the *él* form. **Quisiera** — *I'd like* — works with both.
+
+  - unit: se-la-cree
+    lessons: 1
+    tip:
+      title: "A la that points at nothing"
+      body: |
+        | **Se la cree.** | He's full of himself. |
+        | **Me la banco.** | I can handle it. |
+        | **Se la bancó.** | She put up with it. |
+        | **Me las arreglo.** | I get by. |
+        | **La tenés clara.** | You know your stuff. |
+
+        The *la* stays *la* whoever you're talking about; only the verb and the first pronoun change.
+
+  - unit: acabo-de
+    lessons: 1
+    tip:
+      title: "Just, usually, again"
+      body: |
+        | **Acabo de** llegar. | I just got here. |
+        | **Suelo** almorzar tarde. | I usually have lunch late. |
+        | **Volví a** perder las llaves. | I lost my keys again. |
+
+        All three take an infinitive. **Soler** has no past you'll need: *antes almorzaba tarde* does the job.
