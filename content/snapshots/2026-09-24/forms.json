@@ -191,6 +191,27 @@
   "features": {
    "mood": "ind",
    "number": "sg",
+   "tense": "impf"
+  },
+  "form": "quería",
+  "gloss_en": "I wanted, he wanted, she wanted",
+  "gloss_note_en": null,
+  "id": "0124d719-520c-54e5-89b2-464090b064d0",
+  "lemma_id": "9f36dba5-abc3-5065-83f0-32181c195852",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
    "person": 1,
    "tense": "pret"
   },
@@ -442,6 +463,28 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "tense": "impf"
+  },
+  "form": "hubiera",
+  "gloss_en": "(if) I had, (if) he had; I would have",
+  "gloss_note_en": null,
+  "id": "02e3e661-3338-52cf-b8d2-ff2ab43989ae",
+  "lemma_id": "c2a40273-851a-5287-a16f-72c488149cba",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
+  "updated_at": "2026-09-24 16:08:17.244619+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "gender": "f",
    "number": "sg"
   },
@@ -553,6 +596,23 @@
   "status": "published",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
   "updated_at": "2026-09-23 19:22:02.809359+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "donde",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "03a67e5f-b2fb-5231-a3d6-bdf3f5dd0f78",
+  "lemma_id": "11e2d053-b6bc-5571-97f0-8d66ebaaf758",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
   "voice_id": null
  },
  {
@@ -783,6 +843,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "DNI",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "05262b13-987f-553e-a3f7-7c0b4b46ad03",
+  "lemma_id": "549caf1c-a8ff-5cab-8c88-e01867c9524c",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "cancha",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -984,6 +1061,28 @@
   "status": "published",
   "unit_id": "13fec277-30b8-5bdb-9718-e682351abfd9",
   "updated_at": "2026-09-23 20:11:12.124649+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "imp",
+   "number": "pl",
+   "person": 3
+  },
+  "form": "traigan",
+  "gloss_en": "bring (you all)",
+  "gloss_note_en": null,
+  "id": "072322ba-41e6-5c3f-95f0-a0a1ff7187bb",
+  "lemma_id": "65098dab-4516-5c89-a92f-56e27d64a65e",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
   "voice_id": null
  },
  {
@@ -1439,6 +1538,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "convence",
+  "gloss_en": "convinces",
+  "gloss_note_en": null,
+  "id": "0ad7bd33-9c0a-5d5a-9a9d-2629b7588960",
+  "lemma_id": "5942d372-bc39-5bfa-8cef-44e344e12418",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "updated_at": "2026-09-24 16:12:56.791351+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "ascensor",
   "gloss_en": null,
@@ -1467,6 +1588,42 @@
   "status": "published",
   "unit_id": "c72176ae-a8de-5a47-9b37-cf9bdf84de08",
   "updated_at": "2026-09-23 23:15:20.78631+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "part"
+  },
+  "form": "llamado",
+  "gloss_en": "called",
+  "gloss_note_en": null,
+  "id": "0bd5304d-04af-5d19-a208-d381e0b0b333",
+  "lemma_id": "e3139f5f-e574-5c58-a1da-4f7659096ba8",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
+  "updated_at": "2026-09-24 16:08:17.244619+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "pasaporte",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "0bdc496e-8570-5682-a537-54cf6e9a2f5b",
+  "lemma_id": "e6cc70e6-cbd3-54ec-9353-dd4358352a54",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
   "voice_id": null
  },
  {
@@ -1779,6 +1936,52 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "impf",
+   "voseo": true
+  },
+  "form": "avisaras",
+  "gloss_en": "(that) you let know",
+  "gloss_note_en": null,
+  "id": "0db3a2e4-46f8-5dc4-bbfc-2d7154cbb22c",
+  "lemma_id": "d32f8623-eb52-5fa3-8337-8c86316dac22",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "pl",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "nos conocimos",
+  "gloss_en": "we met",
+  "gloss_note_en": null,
+  "id": "0dbfa2bf-8632-5588-b184-78b4cdd73881",
+  "lemma_id": "4d292f8a-5ef6-547f-b130-ba8582756e56",
+  "position": 11,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "clitic": true,
    "mood": "ind",
    "number": "pl",
@@ -1908,6 +2111,23 @@
   "status": "published",
   "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
   "updated_at": "2026-09-24 01:21:03.370827+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "mail",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "0f060264-3749-5f61-b4da-e9d8c257dd4b",
+  "lemma_id": "6ee69a0e-f2cd-50c9-b94c-015acb2f8d90",
+  "position": 14,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
   "voice_id": null
  },
  {
@@ -2081,6 +2301,26 @@
   "status": "published",
   "unit_id": "07ff3e13-7b95-55ab-aab7-ac48151e0d8c",
   "updated_at": "2026-09-23 23:19:06.342269+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "tonta",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "111c5995-7211-5042-bca8-45dfb003c5fb",
+  "lemma_id": "6c794441-1a4d-5641-a3a3-4ab541e6089f",
+  "position": 13,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
   "voice_id": null
  },
  {
@@ -2596,6 +2836,43 @@
   "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
   "updated_at": "2026-09-24 01:00:17.279796+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "pl"
+  },
+  "form": "meses",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "14cc4fd9-560b-5efa-afdd-bf3d835ae3f4",
+  "lemma_id": "ad35efb8-6b1e-56bd-af91-865bbe53c45d",
+  "position": 11,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "aunque",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "14e86dd8-2427-5875-b1ce-e071861b7b27",
+  "lemma_id": "f390a47b-3b50-5615-9dee-71f5cbc3966a",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "updated_at": "2026-09-24 15:44:42.843759+00",
   "voice_id": null
  },
  {
@@ -3564,6 +3841,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "a tiempo",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "1cd5f9c6-7957-543d-bc87-a3f6403d70f0",
+  "lemma_id": "b0815464-cc93-52ed-8fe7-2d421693fb29",
+  "position": 11,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "mood": "ind",
    "number": "sg",
@@ -3869,6 +4163,49 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "cueste",
+  "gloss_en": "(that) it costs, (that) it's hard",
+  "gloss_note_en": null,
+  "id": "1f16114e-13cb-52aa-8bde-7a9972fd7e73",
+  "lemma_id": "d17af3b8-68ec-5210-81e1-906adc72cd9a",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "updated_at": "2026-09-24 15:44:42.843759+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "pl"
+  },
+  "form": "papeles",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "1f68a041-4e08-5eb9-ac0a-cbf746968b07",
+  "lemma_id": "203cf158-f370-5d57-bf4e-f63730e3548e",
+  "position": 12,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "veintidós",
   "gloss_en": null,
@@ -3916,6 +4253,28 @@
   "status": "published",
   "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
   "updated_at": "2026-09-24 07:23:46.730111+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "renové",
+  "gloss_en": "I renewed",
+  "gloss_note_en": null,
+  "id": "20046663-d110-5237-b44f-cac8cef5934d",
+  "lemma_id": "5ac7605a-750a-5269-a567-7c7572bfa46a",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
   "voice_id": null
  },
  {
@@ -4591,6 +4950,28 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "clitic": true,
+   "mood": "imp",
+   "number": "pl",
+   "person": 3
+  },
+  "form": "quédense",
+  "gloss_en": "stay (you all)",
+  "gloss_note_en": null,
+  "id": "257f77fd-985f-5441-9f13-e9c03eb67f52",
+  "lemma_id": "5f23ef84-b641-5867-94f8-ca9c64e10012",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "gender": "f",
    "number": "sg"
   },
@@ -4738,6 +5119,26 @@
   "status": "published",
   "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
   "updated_at": "2026-09-23 23:38:40.820065+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "el que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "2627481d-7427-57ae-a38e-0f79fce9263e",
+  "lemma_id": "dca51ddd-35fe-567d-bc36-21e7e67cb26f",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
   "voice_id": null
  },
  {
@@ -5365,6 +5766,52 @@
   "features": {
    "mood": "ind",
    "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "volvió",
+  "gloss_en": "he came back, he did again",
+  "gloss_note_en": null,
+  "id": "2c1278fc-bb8c-5534-9a9e-750cc0b1f889",
+  "lemma_id": "1c74d674-430e-539b-b6b7-39c28bf4326a",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "impf",
+   "voseo": true
+  },
+  "form": "vinieras",
+  "gloss_en": "(that) you came",
+  "gloss_note_en": null,
+  "id": "2c71cd61-a05d-55db-8a2f-f53db3f4d036",
+  "lemma_id": "5b62af3b-e8fc-5569-a120-eaefdc16eaef",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
    "person": 1,
    "tense": "pret"
   },
@@ -5430,6 +5877,25 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "verb_form": "ger"
+  },
+  "form": "viviendo",
+  "gloss_en": "living",
+  "gloss_note_en": null,
+  "id": "2d70c8ae-5f05-5fef-aa09-5695090c763a",
+  "lemma_id": "4129ad8b-802c-5748-a098-c7f4dc42fb26",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "irregular": true,
    "mood": "ind",
    "number": "sg",
@@ -5487,6 +5953,25 @@
   "status": "published",
   "unit_id": "e7976a3a-80b3-505d-abc8-858bd6a92a90",
   "updated_at": "2026-09-24 00:07:20.443047+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "inf"
+  },
+  "form": "firmar",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "2da2be77-57a1-5dc1-959d-5a1fbac97ad9",
+  "lemma_id": "76d97dbd-148a-5885-865b-07dea363c2b1",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
   "voice_id": null
  },
  {
@@ -5815,6 +6300,26 @@
   "status": "published",
   "unit_id": "dc485e04-124e-516d-9061-98a2d00f4d57",
   "updated_at": "2026-09-24 00:00:40.250698+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "distraída",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "31f01d5b-4980-5c07-9057-bc29743c852d",
+  "lemma_id": "b0871afe-85c8-56a6-ab58-ddd6427a9c73",
+  "position": 11,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
   "voice_id": null
  },
  {
@@ -7032,6 +7537,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "subj",
+   "number": "pl",
+   "person": 3
+  },
+  "form": "se preocupen",
+  "gloss_en": "(don't) worry (you all)",
+  "gloss_note_en": null,
+  "id": "3c2ce352-7424-5435-8f4c-fcd9aa142ffa",
+  "lemma_id": "4777463c-0260-5d8d-b2ff-5fd478cd382f",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "cabeza",
   "gloss_en": null,
@@ -7082,6 +7609,23 @@
   "status": "published",
   "unit_id": "afdaff40-37c8-56af-ae39-78f1ed48e97e",
   "updated_at": "2026-09-24 00:03:41.02582+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "en cambio",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "3d3cd98a-0fbb-54c5-9d6e-2e238f849705",
+  "lemma_id": "ba74a9a5-f4a9-58f6-9e08-7b32f0f91ef4",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "updated_at": "2026-09-24 16:12:56.791351+00",
   "voice_id": null
  },
  {
@@ -7380,6 +7924,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "dejé",
+  "gloss_en": "I stopped, I quit",
+  "gloss_note_en": null,
+  "id": "3fdadca8-b6af-5083-9c60-d73ef93d9639",
+  "lemma_id": "7c941511-4dd1-51d0-841f-7c2412273053",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "seguro",
   "gloss_en": null,
@@ -7549,6 +8115,27 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "imp",
+   "number": "pl",
+   "person": 3
+  },
+  "form": "esperen",
+  "gloss_en": "wait (you all)",
+  "gloss_note_en": null,
+  "id": "417e2b74-dda2-5db7-be01-a8ae17d26745",
+  "lemma_id": "d5b724c8-81ca-5c57-8bee-20b935f1949c",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "semáforo",
   "gloss_en": null,
@@ -7596,6 +8183,25 @@
   "status": "published",
   "unit_id": "be613042-6935-5185-bf3a-fa4dc33eca15",
   "updated_at": "2026-09-23 19:53:48.73596+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "inf"
+  },
+  "form": "discutir",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "41e1ac46-f2cb-5b3d-a459-3bdf44a11182",
+  "lemma_id": "b7ed0752-de11-5a41-8da0-f1f8905fd7a7",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "3a4f3640-2502-5b70-b610-aa933a78c1a5",
+  "updated_at": "2026-09-24 16:23:05.089081+00",
   "voice_id": null
  },
  {
@@ -8068,6 +8674,29 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "preferís",
+  "gloss_en": "you prefer",
+  "gloss_note_en": null,
+  "id": "44b135b1-9f18-5984-b234-0c5eb6647744",
+  "lemma_id": "f925e26b-14f5-59b9-9969-11c8f791b177",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "que",
   "gloss_en": null,
@@ -8157,6 +8786,23 @@
   "status": "published",
   "unit_id": "61a56ded-546a-5ad6-a8ac-310375bed4ac",
   "updated_at": "2026-09-23 19:54:45.405956+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "formulario",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "456963bc-3b38-5b1a-b72a-d47c8eda7d15",
+  "lemma_id": "b258807d-c43c-52d9-8ad6-f0200dc16fda",
+  "position": 11,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
   "voice_id": null
  },
  {
@@ -8318,6 +8964,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "como si",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "46ee3eb7-b013-52eb-bfdf-58e2aa647244",
+  "lemma_id": "a98be171-dbfa-5bbc-b856-58d02b7ee216",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "mood": "ind",
    "number": "sg",
@@ -8422,6 +9085,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "lleva",
+  "gloss_en": "he's been, she's been (for a time)",
+  "gloss_note_en": null,
+  "id": "47d06e18-527b-5021-b71b-5d454e91dec5",
+  "lemma_id": "d92aed4c-0a6a-52e2-977c-ba653771aff7",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "gente",
   "gloss_en": null,
@@ -8473,6 +9158,25 @@
   "status": "published",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
   "updated_at": "2026-09-23 22:50:56.462386+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "part"
+  },
+  "form": "ido",
+  "gloss_en": "gone",
+  "gloss_note_en": null,
+  "id": "48a3fffe-9dce-5236-a29a-bdd3d0466a45",
+  "lemma_id": "c805c5b8-6272-5330-bc99-bb4eb88ec083",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
+  "updated_at": "2026-09-24 16:08:17.244619+00",
   "voice_id": null
  },
  {
@@ -8666,6 +9370,28 @@
   "status": "published",
   "unit_id": "754cc69f-e7cf-5e64-ba22-2679bc1f609e",
   "updated_at": "2026-09-24 06:22:41.033889+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "imp",
+   "number": "pl",
+   "person": 3
+  },
+  "form": "vengan",
+  "gloss_en": "come (you all)",
+  "gloss_note_en": null,
+  "id": "49ff2a78-f97c-5136-872b-1943a3926c6a",
+  "lemma_id": "5b62af3b-e8fc-5569-a120-eaefdc16eaef",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
   "voice_id": null
  },
  {
@@ -9116,6 +9842,23 @@
   "status": "published",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
   "updated_at": "2026-09-18 13:23:35.932625+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "por eso",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "4f161329-b880-5a26-bec3-d22c79d39c45",
+  "lemma_id": "3fb33541-17c9-56c0-b024-759b55a86544",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "updated_at": "2026-09-24 16:12:56.791351+00",
   "voice_id": null
  },
  {
@@ -9580,6 +10323,25 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "verb_form": "part"
+  },
+  "form": "sabido",
+  "gloss_en": "known",
+  "gloss_note_en": null,
+  "id": "54445f89-1417-5b7e-9ff9-cec9692db34d",
+  "lemma_id": "a4f93c5c-f70d-5d66-a7f2-ab38c0e26c15",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
+  "updated_at": "2026-09-24 16:08:17.244619+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "invierno",
   "gloss_en": null,
@@ -9859,6 +10621,26 @@
   "status": "published",
   "unit_id": "2c5ceb94-a924-5797-9279-29476c698177",
   "updated_at": "2026-09-23 20:23:40.004714+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "vencido",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "56ce8a6e-04b1-5a36-a8bc-fafd06edf4be",
+  "lemma_id": "0f59958c-cdac-5643-89c9-de293f6dbc42",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
   "voice_id": null
  },
  {
@@ -10210,6 +10992,29 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "prefiero",
+  "gloss_en": "I prefer",
+  "gloss_note_en": null,
+  "id": "5aae87b5-8726-59fd-9ff7-100fb459cf36",
+  "lemma_id": "f925e26b-14f5-59b9-9969-11c8f791b177",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": true,
   "features": {
    "mood": "ind",
@@ -10519,6 +11324,27 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "subj",
+   "number": "sg",
+   "tense": "impf"
+  },
+  "form": "esperara",
+  "gloss_en": "(that) I waited, (that) he waited",
+  "gloss_note_en": null,
+  "id": "5d43d7a6-1d82-5458-aae8-c285e775c60c",
+  "lemma_id": "d5b724c8-81ca-5c57-8bee-20b935f1949c",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "casa",
   "gloss_en": null,
@@ -10787,6 +11613,29 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "opinás",
+  "gloss_en": "you think",
+  "gloss_note_en": null,
+  "id": "5e5a4295-176f-563b-beb3-8c36f13a64d8",
+  "lemma_id": "4e5ff650-8222-5759-bcdd-bbd8f5fd759f",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "updated_at": "2026-09-24 16:12:56.791351+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "nunca",
   "gloss_en": null,
@@ -10960,6 +11809,47 @@
   "status": "published",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
   "updated_at": "2026-09-18 14:12:51.556883+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "distraído",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "60601bce-38fd-55fe-94f0-b749264a0602",
+  "lemma_id": "b0871afe-85c8-56a6-ab58-ddd6427a9c73",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "imp",
+   "number": "pl",
+   "person": 3
+  },
+  "form": "pasen",
+  "gloss_en": "come in (you all)",
+  "gloss_note_en": null,
+  "id": "6087f8ae-9268-5938-98d4-437a605eb3fc",
+  "lemma_id": "ddef54fa-fb1c-5679-afd1-d9db9c14272b",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
   "voice_id": null
  },
  {
@@ -11425,6 +12315,45 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "verb_form": "inf"
+  },
+  "form": "fumar",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "64eacd10-56a4-5db1-930f-30b8603738b6",
+  "lemma_id": "a710a5bf-e027-54e2-b150-4a95c4a8f10f",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "cómoda",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "651e4bc8-c05e-58b3-baf7-967034c150c5",
+  "lemma_id": "604b5cd7-b344-50c3-b055-6652749f8e15",
+  "position": 11,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "person": 1,
@@ -11744,6 +12673,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "a pesar de",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "68f80fec-8295-5265-992a-de19223b489a",
+  "lemma_id": "6003c5ec-e77a-53db-9d8e-2e8d7cfaf9fe",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "updated_at": "2026-09-24 15:44:42.843759+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "gender": "f",
    "number": "sg"
@@ -11758,6 +12704,26 @@
   "status": "published",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
   "updated_at": "2026-09-23 23:06:40.129285+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "cómodo",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "6969ca1c-2ad5-5bf5-9c86-b7bf2f104ff3",
+  "lemma_id": "604b5cd7-b344-50c3-b055-6652749f8e15",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
   "voice_id": null
  },
  {
@@ -12035,6 +13001,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "por un lado",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "6c1def76-2208-5421-9415-702fdb9aa5e3",
+  "lemma_id": "c397d248-c38d-5ff1-a40a-bc57bb7caf85",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "updated_at": "2026-09-24 16:12:56.791351+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "cuatro",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -12102,6 +13085,28 @@
   "status": "published",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
   "updated_at": "2026-09-23 20:21:28.625105+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "firmé",
+  "gloss_en": "I signed",
+  "gloss_note_en": null,
+  "id": "6d8e88bb-0805-5201-b26a-ac7a6f8cdef2",
+  "lemma_id": "76d97dbd-148a-5885-865b-07dea363c2b1",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
   "voice_id": null
  },
  {
@@ -13058,6 +14063,29 @@
  },
  {
   "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "pl",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "vinieron",
+  "gloss_en": "they came",
+  "gloss_note_en": null,
+  "id": "746c0d9f-e3ce-577d-a8f7-cb5debc2e272",
+  "lemma_id": "5b62af3b-e8fc-5569-a120-eaefdc16eaef",
+  "position": 13,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
   "audio_path": "cards/747b8e5a-a87a-538e-a105-a5e1423994b4-tomas-1789733966293.mp3",
   "bound": false,
   "features": {},
@@ -13072,6 +14100,26 @@
   "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
   "updated_at": "2026-09-18 12:20:35.3136+00",
   "voice_id": "tomas"
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "dormido",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "7489912f-2896-55ed-bc19-7515bdebae48",
+  "lemma_id": "1e6ce853-05c2-5e5a-9e45-d7bba320b424",
+  "position": 14,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
+  "voice_id": null
  },
  {
   "alt": [],
@@ -13203,6 +14251,25 @@
   "status": "published",
   "unit_id": "754cc69f-e7cf-5e64-ba22-2679bc1f609e",
   "updated_at": "2026-09-24 06:22:41.033889+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "inf"
+  },
+  "form": "renovar",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "75428af5-a5b7-5a2f-86f3-6773a81818c0",
+  "lemma_id": "5ac7605a-750a-5269-a567-7c7572bfa46a",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
   "voice_id": null
  },
  {
@@ -13467,6 +14534,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "viva",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "77a737d8-8445-53e5-af60-f49859227e52",
+  "lemma_id": "bbaf9d7f-97a0-5fe9-b924-cf104a1f13fe",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "person": 3,
@@ -13611,6 +14698,23 @@
   "status": "published",
   "unit_id": "c7cbf578-23ab-5875-9a1c-8104be80ad3e",
   "updated_at": "2026-09-23 19:51:18.52367+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "esfuerzo",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "786d0325-9104-56c4-9ce8-25dc51e569a9",
+  "lemma_id": "f0927bdf-87c5-5438-a193-08474875a27e",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "updated_at": "2026-09-24 15:44:42.843759+00",
   "voice_id": null
  },
  {
@@ -14396,6 +15500,29 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "me canso",
+  "gloss_en": "I get tired",
+  "gloss_note_en": null,
+  "id": "7f50067c-aa7b-5d56-b3e2-272b02f5c992",
+  "lemma_id": "c795496b-0958-5de5-b42b-bc726e69c53a",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "updated_at": "2026-09-24 15:44:42.843759+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "avenida",
   "gloss_en": null,
@@ -14427,6 +15554,23 @@
   "status": "published",
   "unit_id": "61a56ded-546a-5ad6-a8ac-310375bed4ac",
   "updated_at": "2026-09-23 19:54:45.405956+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "ni que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "800eacc9-ebf2-5fe8-a8bc-78abdb443be9",
+  "lemma_id": "d63dcb3c-6580-5d2a-8b79-ae29f3fbf393",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
   "voice_id": null
  },
  {
@@ -14686,6 +15830,29 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "impf",
+   "voseo": true
+  },
+  "form": "querías",
+  "gloss_en": "you wanted",
+  "gloss_note_en": null,
+  "id": "828f4e34-f41a-5806-ab6d-d2a7527ee76b",
+  "lemma_id": "9f36dba5-abc3-5065-83f0-32181c195852",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "mensaje",
   "gloss_en": null,
@@ -14734,6 +15901,30 @@
   "status": "published",
   "unit_id": "13fec277-30b8-5bdb-9718-e682351abfd9",
   "updated_at": "2026-09-23 20:11:12.124649+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "quieras",
+  "gloss_en": "(that) you want",
+  "gloss_note_en": null,
+  "id": "837e7cbb-b1b1-58f4-b441-6b48479a7089",
+  "lemma_id": "9f36dba5-abc3-5065-83f0-32181c195852",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "updated_at": "2026-09-24 15:44:42.843759+00",
   "voice_id": null
  },
  {
@@ -15055,6 +16246,30 @@
   "status": "published",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
   "updated_at": "2026-09-23 20:21:28.625105+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "se hizo",
+  "gloss_en": "he acted, she played (the)",
+  "gloss_note_en": null,
+  "id": "87236fea-7268-5191-9a22-6b0c8206c708",
+  "lemma_id": "6df7ec2e-e97b-5f63-b0e8-6055a7f9d9c5",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
   "voice_id": null
  },
  {
@@ -15501,6 +16716,49 @@
   "bound": false,
   "features": {
    "gender": "m",
+   "number": "sg"
+  },
+  "form": "vivo",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "8ad8eacf-6fec-58f6-9bca-2fd56deb072a",
+  "lemma_id": "bbaf9d7f-97a0-5fe9-b924-cf104a1f13fe",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "se hace",
+  "gloss_en": "he acts, she plays (the)",
+  "gloss_note_en": null,
+  "id": "8af33086-60c9-5405-baa7-5726d6659e1c",
+  "lemma_id": "6df7ec2e-e97b-5f63-b0e8-6055a7f9d9c5",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
    "number": "pl"
   },
   "form": "nerviosos",
@@ -15750,6 +17008,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "vencida",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "8e6ffbf3-995f-5d24-8c75-a655bcabfea4",
+  "lemma_id": "0f59958c-cdac-5643-89c9-de293f6dbc42",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "clitic": true,
    "mood": "imp",
    "number": "sg",
@@ -15848,6 +17126,23 @@
   "status": "published",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
   "updated_at": "2026-09-23 23:41:37.581944+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "ojo",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "8f22168b-7217-510f-a7ff-7b0c2871a120",
+  "lemma_id": "db58edcf-b6ef-57ac-80af-3789446e0562",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "3a4f3640-2502-5b70-b610-aa933a78c1a5",
+  "updated_at": "2026-09-24 16:23:05.089081+00",
   "voice_id": null
  },
  {
@@ -16242,6 +17537,29 @@
   "status": "published",
   "unit_id": "a921ed27-35b4-5222-9699-d8dd343c1f79",
   "updated_at": "2026-09-24 00:13:39.721406+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "pl",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "sirven",
+  "gloss_en": "are useful, work",
+  "gloss_note_en": null,
+  "id": "928f14d6-e5ae-52fc-a828-9006ab1afedb",
+  "lemma_id": "778d66ff-81d1-5c2c-9d8b-7e9986f6b199",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "updated_at": "2026-09-24 15:44:42.843759+00",
   "voice_id": null
  },
  {
@@ -16700,6 +18018,28 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "imp",
+   "number": "sg",
+   "person": 2,
+   "voseo": true
+  },
+  "form": "firmá",
+  "gloss_en": "sign",
+  "gloss_note_en": null,
+  "id": "9752095e-5f94-538d-a098-7a0bfd002c37",
+  "lemma_id": "76d97dbd-148a-5885-865b-07dea363c2b1",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "verb_form": "inf"
   },
   "form": "comer",
@@ -16732,6 +18072,29 @@
   "status": "published",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
   "updated_at": "2026-09-23 23:26:00.580368+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "impf",
+   "voseo": true
+  },
+  "form": "llamaras",
+  "gloss_en": "(that) you called",
+  "gloss_note_en": null,
+  "id": "97ace542-eb97-5f18-b116-fc84826d76cf",
+  "lemma_id": "e3139f5f-e574-5c58-a1da-4f7659096ba8",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
   "voice_id": null
  },
  {
@@ -17052,6 +18415,29 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "sirve",
+  "gloss_en": "is useful, works",
+  "gloss_note_en": null,
+  "id": "99432308-f91e-594d-946a-da2161c2b4f8",
+  "lemma_id": "778d66ff-81d1-5c2c-9d8b-7e9986f6b199",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "updated_at": "2026-09-24 15:44:42.843759+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "bondi",
   "gloss_en": null,
@@ -17294,6 +18680,29 @@
   "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
   "updated_at": "2026-09-24 01:08:19.028822+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "elijo",
+  "gloss_en": "I choose",
+  "gloss_note_en": null,
+  "id": "9b644045-f04e-51a0-b369-a37fc4f92a93",
+  "lemma_id": "1e0ef9d3-b06d-5297-8c12-a2c1379d0422",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
   "voice_id": null
  },
  {
@@ -17960,6 +19369,26 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "pl"
+  },
+  "form": "los que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "a1bd5482-0bc8-5d2b-859c-187453eb79a7",
+  "lemma_id": "dca51ddd-35fe-567d-bc36-21e7e67cb26f",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "seiscientos",
   "gloss_en": null,
@@ -18051,6 +19480,25 @@
   "status": "published",
   "unit_id": "a2eec2e1-5a4c-5372-a1e8-7ac3076576e6",
   "updated_at": "2026-09-23 19:35:07.962231+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "part"
+  },
+  "form": "venido",
+  "gloss_en": "come",
+  "gloss_note_en": null,
+  "id": "a3b050fd-2508-5097-8ed7-a543dd819627",
+  "lemma_id": "5b62af3b-e8fc-5569-a120-eaefdc16eaef",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
+  "updated_at": "2026-09-24 16:08:17.244619+00",
   "voice_id": null
  },
  {
@@ -18191,6 +19639,29 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pret",
+   "voseo": true
+  },
+  "form": "elegiste",
+  "gloss_en": "you chose",
+  "gloss_note_en": null,
+  "id": "a451487e-1bbe-579a-bce8-e76580e3719a",
+  "lemma_id": "1e0ef9d3-b06d-5297-8c12-a2c1379d0422",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "clitic": true,
    "mood": "ind",
    "number": "sg",
@@ -18219,6 +19690,28 @@
    "person": 1,
    "tense": "pres"
   },
+  "form": "discutimos",
+  "gloss_en": "we argue, we argued",
+  "gloss_note_en": null,
+  "id": "a49b4756-456c-5b89-86e3-7df5567a8294",
+  "lemma_id": "b7ed0752-de11-5a41-8da0-f1f8905fd7a7",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "3a4f3640-2502-5b70-b610-aa933a78c1a5",
+  "updated_at": "2026-09-24 16:23:05.089081+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "pl",
+   "person": 1,
+   "tense": "pres"
+  },
   "form": "aprendemos",
   "gloss_en": "we learn",
   "gloss_note_en": null,
@@ -18229,6 +19722,29 @@
   "status": "published",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
   "updated_at": "2026-09-23 19:43:38.303503+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "seguís",
+  "gloss_en": "you keep on, you still",
+  "gloss_note_en": null,
+  "id": "a4b92258-4875-5905-83aa-e15dcdd74cfb",
+  "lemma_id": "d779f819-1cb3-581f-a5e1-646578a7a8eb",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
   "voice_id": null
  },
  {
@@ -19584,6 +21100,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "tense": "impf"
+  },
+  "form": "hiciera",
+  "gloss_en": "(that) I did, (that) he did",
+  "gloss_note_en": null,
+  "id": "ae5997ab-dedb-566b-b4a0-0869109fb76d",
+  "lemma_id": "ebbd1e1f-1610-5693-bcb6-fb0128dbc509",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "heladera",
   "gloss_en": null,
@@ -19617,6 +21155,25 @@
   "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
   "updated_at": "2026-09-24 01:02:30.793022+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "inf"
+  },
+  "form": "cambiar",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "aeca9ddb-0da5-5323-a00c-071ec8be3b34",
+  "lemma_id": "53c4d266-44d1-5a61-88b9-b13b584ce0a6",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "3a4f3640-2502-5b70-b610-aa933a78c1a5",
+  "updated_at": "2026-09-24 16:23:05.089081+00",
   "voice_id": null
  },
  {
@@ -19988,6 +21545,29 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "llevás",
+  "gloss_en": "you've been (for a time)",
+  "gloss_note_en": null,
+  "id": "b268fc64-fd8b-554a-88aa-5a880838c6b5",
+  "lemma_id": "d92aed4c-0a6a-52e2-977c-ba653771aff7",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "number": "sg"
   },
   "form": "mi",
@@ -20113,6 +21693,29 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pret",
+   "voseo": true
+  },
+  "form": "dejaste",
+  "gloss_en": "you stopped, you quit",
+  "gloss_note_en": null,
+  "id": "b33fb42a-1e52-53f8-972a-2ea8210b0a35",
+  "lemma_id": "7c941511-4dd1-51d0-841f-7c2412273053",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "clitic": true,
    "irregular": true,
    "mood": "ind",
@@ -20187,6 +21790,25 @@
   "status": "published",
   "unit_id": "dc485e04-124e-516d-9061-98a2d00f4d57",
   "updated_at": "2026-09-24 00:00:40.250698+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "part"
+  },
+  "form": "estudiado",
+  "gloss_en": "studied",
+  "gloss_note_en": null,
+  "id": "b4b3ed19-f8bc-515f-81d3-986c3b0b09d1",
+  "lemma_id": "93d43d04-745d-5b8c-a9d4-0fdfe5ee6a5f",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
+  "updated_at": "2026-09-24 16:08:17.244619+00",
   "voice_id": null
  },
  {
@@ -20563,6 +22185,26 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "dormida",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "b84091bc-f168-5774-b85e-5574f1710773",
+  "lemma_id": "1e6ce853-05c2-5e5a-9e45-d7bba320b424",
+  "position": 15,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "de una",
   "gloss_en": null,
@@ -20632,6 +22274,29 @@
   "status": "published",
   "unit_id": "f1fa7454-72a3-546d-8f72-4aab149bbbbe",
   "updated_at": "2026-09-18 14:14:36.377978+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "sigo",
+  "gloss_en": "I keep on, I still",
+  "gloss_note_en": null,
+  "id": "b9c2d761-54ab-56cb-81f8-2f11cb12c028",
+  "lemma_id": "d779f819-1cb3-581f-a5e1-646578a7a8eb",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
   "voice_id": null
  },
  {
@@ -20838,6 +22503,28 @@
   "status": "published",
   "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
   "updated_at": "2026-09-24 07:13:16.477524+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "canso",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "bbbc16a1-efe1-5584-9c79-6a7060ee8c4d",
+  "lemma_id": "c795496b-0958-5de5-b42b-bc726e69c53a",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "updated_at": "2026-09-24 15:44:42.843759+00",
   "voice_id": null
  },
  {
@@ -21279,6 +22966,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "de hecho",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "bf5a3a09-686c-5cf7-9462-aa74dbdadd08",
+  "lemma_id": "0b914b4c-21dd-5973-a019-223d924ecb55",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "updated_at": "2026-09-24 16:12:56.791351+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "irregular": true,
    "mood": "subj",
@@ -21316,6 +23020,26 @@
   "status": "published",
   "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
   "updated_at": "2026-09-23 19:34:09.517589+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "pl"
+  },
+  "form": "bienvenidos",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "bfe36049-fd3e-5f42-baaa-c1629aa2cbb0",
+  "lemma_id": "8e360f0f-07ae-5753-84ea-98e97613a9eb",
+  "position": 13,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
   "voice_id": null
  },
  {
@@ -21495,6 +23219,23 @@
   "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
   "updated_at": "2026-09-24 00:52:14.787731+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "en realidad",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "c20dd790-428a-5487-bdd2-53f9ab99a657",
+  "lemma_id": "ebb73d8e-50d0-5699-825b-661161059ee6",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "updated_at": "2026-09-24 16:12:56.791351+00",
   "voice_id": null
  },
  {
@@ -21858,6 +23599,50 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "pl",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "conocimos",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "c62b2d04-3401-57b2-b230-fa6dfce458d3",
+  "lemma_id": "4d292f8a-5ef6-547f-b130-ba8582756e56",
+  "position": 12,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "opino",
+  "gloss_en": "I think",
+  "gloss_note_en": null,
+  "id": "c66b6127-5e10-59aa-b56e-193a28260284",
+  "lemma_id": "4e5ff650-8222-5759-bcdd-bbd8f5fd759f",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "updated_at": "2026-09-24 16:12:56.791351+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": false,
   "features": {},
   "form": "tele",
@@ -21893,6 +23678,43 @@
   "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
   "updated_at": "2026-09-24 01:08:19.028822+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "segura",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "c68a2042-5410-517f-866b-be8c90ff8765",
+  "lemma_id": "8adc0b15-1d2e-52a9-9a74-bf65980e465e",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "3a4f3640-2502-5b70-b610-aa933a78c1a5",
+  "updated_at": "2026-09-24 16:23:05.089081+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "como si nada",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "c6f9b170-22fc-561c-8fd5-99a509ab0cf3",
+  "lemma_id": "c1ff276b-144d-554b-b10c-28e6914d89ce",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
   "voice_id": null
  },
  {
@@ -22037,6 +23859,29 @@
   "status": "published",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
   "updated_at": "2026-09-24 00:15:04.523306+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pret",
+   "voseo": true
+  },
+  "form": "convenciste",
+  "gloss_en": "you convinced",
+  "gloss_note_en": null,
+  "id": "c7c54d7c-8a4f-5c87-99c8-2b4ca8d37d3b",
+  "lemma_id": "5942d372-bc39-5bfa-8cef-44e344e12418",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "updated_at": "2026-09-24 16:12:56.791351+00",
   "voice_id": null
  },
  {
@@ -22575,6 +24420,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "bar",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "ceaecb8e-77b8-5fb5-8f3d-638c2e24fc53",
+  "lemma_id": "13408ae2-eea4-526e-838e-e3ae7aec7ed8",
+  "position": 14,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "mood": "ind",
    "number": "sg",
@@ -22734,6 +24596,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "m",
+   "number": "pl"
+  },
+  "form": "cómodos",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "d04ef862-5ebb-5946-b368-868d267ab7eb",
+  "lemma_id": "604b5cd7-b344-50c3-b055-6652749f8e15",
+  "position": 12,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "pl",
    "person": 1,
@@ -22766,6 +24648,26 @@
   "status": "published",
   "unit_id": "28d6c921-dae2-50d2-b6a0-a5e2423428a6",
   "updated_at": "2026-09-23 23:35:46.537011+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "tonto",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "d0d9e60d-42eb-5468-9ba3-5f3a8d6e9809",
+  "lemma_id": "6c794441-1a4d-5641-a3a3-4ab541e6089f",
+  "position": 12,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
   "voice_id": null
  },
  {
@@ -22891,6 +24793,29 @@
   "bound": false,
   "features": {
    "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "sigue",
+  "gloss_en": "he keeps on, she still",
+  "gloss_note_en": null,
+  "id": "d1c90756-0e01-58bd-b83a-225bbc5ff843",
+  "lemma_id": "d779f819-1cb3-581f-a5e1-646578a7a8eb",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "updated_at": "2026-09-24 15:51:46.957087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
    "mood": "subj",
    "number": "sg",
    "person": 2,
@@ -22960,6 +24885,28 @@
   "status": "published",
   "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
   "updated_at": "2026-09-24 07:29:55.39398+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "cambié",
+  "gloss_en": "I changed",
+  "gloss_note_en": null,
+  "id": "d2fb8e55-9af0-526f-ac0b-5344927e7143",
+  "lemma_id": "53c4d266-44d1-5a61-88b9-b13b584ce0a6",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "3a4f3640-2502-5b70-b610-aa933a78c1a5",
+  "updated_at": "2026-09-24 16:23:05.089081+00",
   "voice_id": null
  },
  {
@@ -23223,6 +25170,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "de todos modos",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "d56635f6-8d8e-5c58-9291-b55b317120bc",
+  "lemma_id": "4e2cf6c3-70a3-50e5-8ab5-26274674bc46",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "updated_at": "2026-09-24 15:44:42.843759+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "irregular": true,
    "mood": "subj",
@@ -23241,6 +25205,28 @@
   "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
   "updated_at": "2026-09-24 01:08:19.028822+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "imp",
+   "number": "sg",
+   "person": 2,
+   "voseo": true
+  },
+  "form": "elegí",
+  "gloss_en": "choose, pick",
+  "gloss_note_en": null,
+  "id": "d62bef24-448d-5439-8577-799d1255cce4",
+  "lemma_id": "1e0ef9d3-b06d-5297-8c12-a2c1379d0422",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
   "voice_id": null
  },
  {
@@ -23405,6 +25391,27 @@
   "status": "published",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
   "updated_at": "2026-09-23 23:26:55.917775+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "subj",
+   "number": "sg",
+   "tense": "impf"
+  },
+  "form": "llamara",
+  "gloss_en": "(that) I called, (that) he called",
+  "gloss_note_en": null,
+  "id": "d7e6732a-cbfd-58d1-b778-d859291cc74c",
+  "lemma_id": "e3139f5f-e574-5c58-a1da-4f7659096ba8",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
   "voice_id": null
  },
  {
@@ -23615,6 +25622,30 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "impf",
+   "voseo": true
+  },
+  "form": "supieras",
+  "gloss_en": "(that) you knew",
+  "gloss_note_en": null,
+  "id": "d943ee7a-b21e-5c24-89f2-795bd72a0296",
+  "lemma_id": "a4f93c5c-f70d-5d66-a7f2-ab38c0e26c15",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "person": 3,
@@ -23684,6 +25715,28 @@
   "status": "published",
   "unit_id": "7c33a900-8b22-5a9e-a34e-7c274e6a21b0",
   "updated_at": "2026-09-23 23:16:46.080289+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "tense": "impf"
+  },
+  "form": "viniera",
+  "gloss_en": "(that) I came, (that) he came",
+  "gloss_note_en": null,
+  "id": "d9bbe8f4-a95c-5089-b823-eb619c2ad659",
+  "lemma_id": "5b62af3b-e8fc-5569-a120-eaefdc16eaef",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
   "voice_id": null
  },
  {
@@ -24251,6 +26304,29 @@
  },
  {
   "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "irregular": true,
+   "mood": "imp",
+   "number": "pl",
+   "person": 3
+  },
+  "form": "pónganse",
+  "gloss_en": "make yourselves (comfortable)",
+  "gloss_note_en": null,
+  "id": "dea78b46-6357-5447-ab74-dc6130733038",
+  "lemma_id": "9e4f4f57-72a3-5ee0-bf9d-5b59da7186cc",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
   "audio_path": "cards/deb6b73d-0a96-5cdb-bc6f-dfa02f562b0d-tomas-1789722112979.mp3",
   "bound": false,
   "features": {
@@ -24572,6 +26648,30 @@
   "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
   "updated_at": "2026-09-24 01:18:06.414424+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "impf",
+   "voseo": true
+  },
+  "form": "hubieras",
+  "gloss_en": "(if) you had; you would have",
+  "gloss_note_en": null,
+  "id": "e105015f-9cb7-5cbd-ab76-772a763f142b",
+  "lemma_id": "c2a40273-851a-5287-a16f-72c488149cba",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
+  "updated_at": "2026-09-24 16:08:17.244619+00",
   "voice_id": null
  },
  {
@@ -25026,6 +27126,48 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "imp",
+   "number": "pl",
+   "person": 3
+  },
+  "form": "siéntense",
+  "gloss_en": "sit down (you all)",
+  "gloss_note_en": null,
+  "id": "e5da0ee2-d010-575f-9b0f-4abc228014e7",
+  "lemma_id": "a4378858-a972-5026-a1b0-f37d665f3fa1",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "bienvenida",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "e6072fa4-2200-50e3-8b38-2ca2c81026fc",
+  "lemma_id": "8e360f0f-07ae-5753-84ea-98e97613a9eb",
+  "position": 14,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": true,
   "features": {
    "mood": "ind",
@@ -25097,6 +27239,52 @@
   "status": "published",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
   "updated_at": "2026-09-23 23:06:40.129285+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "impf",
+   "voseo": true
+  },
+  "form": "hicieras",
+  "gloss_en": "(that) you did",
+  "gloss_note_en": null,
+  "id": "e667c257-e478-5c39-83f5-534435074d04",
+  "lemma_id": "ebbd1e1f-1610-5693-bcb6-fb0128dbc509",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "updated_at": "2026-09-24 15:45:45.960099+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "tense": "impf"
+  },
+  "form": "supiera",
+  "gloss_en": "(that) I knew, (that) he knew",
+  "gloss_note_en": null,
+  "id": "e669afef-5652-5eb5-a686-adcbf62bef71",
+  "lemma_id": "a4f93c5c-f70d-5d66-a7f2-ab38c0e26c15",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "updated_at": "2026-09-24 16:02:50.969193+00",
   "voice_id": null
  },
  {
@@ -25385,6 +27573,26 @@
   "status": "published",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
   "updated_at": "2026-09-23 19:43:38.303503+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "pl"
+  },
+  "form": "las que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "e8dcb91c-8902-536f-be18-3fd9c110092d",
+  "lemma_id": "dca51ddd-35fe-567d-bc36-21e7e67cb26f",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
   "voice_id": null
  },
  {
@@ -25996,6 +28204,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "la que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "ebcd4d05-1a94-51a3-80bc-723e08590d43",
+  "lemma_id": "dca51ddd-35fe-567d-bc36-21e7e67cb26f",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "updated_at": "2026-09-24 16:05:52.336791+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "tense": "impf"
@@ -26040,6 +28268,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "por otro lado",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "ebdaed9a-e58f-570e-bddd-4497eca224f1",
+  "lemma_id": "1c4bfca6-0568-562b-9e61-ad1a3135f652",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "updated_at": "2026-09-24 16:12:56.791351+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "hotel",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -26067,6 +28312,23 @@
   "status": "published",
   "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
   "updated_at": "2026-09-23 19:10:29.815079+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "fila",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "ece332b0-a9a6-5ce8-88b5-5fc3191b9862",
+  "lemma_id": "6523d40b-5d7c-5863-b71d-fceb28223483",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
   "voice_id": null
  },
  {
@@ -26154,6 +28416,25 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "verb_form": "part"
+  },
+  "form": "avisado",
+  "gloss_en": "let know",
+  "gloss_note_en": null,
+  "id": "ee55a180-7ef0-5961-8be5-e34d2d6ae462",
+  "lemma_id": "d32f8623-eb52-5fa3-8337-8c86316dac22",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
+  "updated_at": "2026-09-24 16:08:17.244619+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "paraguas",
   "gloss_en": null,
@@ -26165,6 +28446,25 @@
   "status": "published",
   "unit_id": "2c5ceb94-a924-5797-9279-29476c698177",
   "updated_at": "2026-09-23 20:23:40.004714+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "part"
+  },
+  "form": "pensado",
+  "gloss_en": "thought",
+  "gloss_note_en": null,
+  "id": "eef469f8-957c-5d76-bd64-da987f13cdb4",
+  "lemma_id": "123ac2d0-e05c-56b9-89d1-bddeb3dc6891",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
+  "updated_at": "2026-09-24 16:08:17.244619+00",
   "voice_id": null
  },
  {
@@ -26540,6 +28840,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "papel",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "f1ab598f-a46b-5332-b578-95175c8cf45d",
+  "lemma_id": "203cf158-f370-5d57-bf4e-f63730e3548e",
+  "position": 13,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "updated_at": "2026-09-24 16:21:08.82276+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "person": 3,
@@ -26719,6 +29039,26 @@
   "status": "published",
   "unit_id": "770b6d5f-bd8c-5c17-a05f-4721faaa1706",
   "updated_at": "2026-09-24 00:23:43.658623+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "seguro",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "f43453a6-6726-5eed-bf58-b06b288baa09",
+  "lemma_id": "8adc0b15-1d2e-52a9-9a74-bf65980e465e",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "3a4f3640-2502-5b70-b610-aa933a78c1a5",
+  "updated_at": "2026-09-24 16:23:05.089081+00",
   "voice_id": null
  },
  {
@@ -27201,6 +29541,27 @@
   "unit_id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
   "updated_at": "2026-09-18 09:03:35.761532+00",
   "voice_id": "malena"
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "subj",
+   "number": "pl",
+   "person": 3
+  },
+  "form": "preocupen",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "f9455f43-89ee-51c1-84f6-13d5d1ca8ab7",
+  "lemma_id": "4777463c-0260-5d8d-b2ff-5fd478cd382f",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "updated_at": "2026-09-24 15:59:02.43234+00",
+  "voice_id": null
  },
  {
   "alt": [],

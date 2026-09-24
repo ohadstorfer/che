@@ -74,6 +74,10 @@ Vos in the subjunctive: the course teaches *que vengas*, the everyday form, tagg
 
 The conditional for advice and hypotheticals (*yo que vos iría*, *si tuviera plata…*), the imperfect subjunctive only where the conditional drags it in, the news and politics without the politics, work and money, and the city itself — neighbourhoods, *la General Paz*, *el conurbano*. Written in detail once section 7 is published.
 
+## Section 10 · B2.1 · "Making your case" · units 109–121
+
+`section-10.yaml`. The past subjunctive stops being a fixed phrase and follows the sentence: *quería que vinieras* → *aunque llueva* → *llevo dos años viviendo acá* → practice → *pasen, siéntense* (ustedes commands, hosting) → *como si nada*, *se hace el vivo* → *el que quieras*, *donde* → practice → *si hubiera sabido, te hubiera avisado* (hubiera in both halves, the porteño way) → *por un lado… por otro lado*, *en cambio*, *de hecho* → the paperwork (*sacar turno*, *DNI*, *vencido*) → practice → the checkpoint, arguing it out (*¿y vos qué opinás?*, *me convenciste*, *¡ojo!*).
+
 ## Practice (2026-09-24)
 
 A review of the course found it thinning out as it got harder: by sections 7–9 a unit had 4 lessons and a word met 4 sentences in the whole course, and a tense taught in one section (the imperfect, the future, the conditional) all but disappeared in the next. Three changes, for sections 4–9:
@@ -105,3 +109,4 @@ A second review found three more gaps: the hardest grammar got the fewest lesson
 | 7 | ✓ | ✓ 20260924000004 | ✓ published, glossed (385) |
 | 8 | ✓ | ✓ 20260924000005 | ✓ published, glossed (364) |
 | 9 | ✓ | ✓ 20260924000010 | ✓ published, glossed (384) |
+| 10 | ✓ | ✓ 20260924000025 | ✓ published, glossed (1,246) |

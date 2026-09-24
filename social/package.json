@@ -1,0 +1,1 @@
+{"name":"che-social","private":true,"scripts":{"studio":"remotion studio src/index.ts","render":"node render.mjs"},"dependencies":{"@remotion/bundler":"^4.0.528","@remotion/cli":"^4.0.528","@remotion/renderer":"^4.0.528","@types/react":"^19.3.0","react":"^18.3.1","react-dom":"^18.3.1","remotion":"^4.0.528","typescript":"^7.0.2"}}

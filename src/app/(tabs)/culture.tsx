@@ -142,12 +142,13 @@ const styles = StyleSheet.create({
   tile: {
     width: '46%', // two per row; flexGrow shares out the rest of the row
     flexGrow: 1,
-    minHeight: 184,
+    minHeight: 196,
     borderRadius: radius.xl,
     padding: 16,
     paddingTop: 18,
     overflow: 'hidden',
-    justifyContent: 'space-between',
+    // Name, count and progress stack at the foot of the tile; the picture owns the top.
+    justifyContent: 'flex-end',
   },
   tileWide: { width: '100%', minHeight: 150 },
   art: {
@@ -173,10 +174,10 @@ const styles = StyleSheet.create({
   resumeTitle: { fontFamily: fonts.displayMedium, fontSize: 17, lineHeight: 21, color: colors.onPrimary },
   resumeMeta: { fontSize: 13, color: 'rgba(241, 238, 230, 0.7)' },
   resumeGo: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.onPrimary, alignItems: 'center', justifyContent: 'center' },
-  tileText: { gap: 3, marginTop: 64, maxWidth: '100%' },
+  tileText: { gap: 3, maxWidth: '100%' },
   eyebrow: { fontSize: 12, fontWeight: '700', letterSpacing: 0.7, textTransform: 'uppercase' },
   tileTitle: { fontFamily: fonts.displayMedium, fontSize: 19, lineHeight: 23, letterSpacing: -0.3 },
-  tileFoot: { gap: 7, marginTop: 12 },
+  tileFoot: { gap: 7, marginTop: 8 },
   count: { fontSize: 13, fontWeight: '600', fontVariant: ['tabular-nums'] },
   track: { height: 5, borderRadius: radius.pill, overflow: 'hidden' },
   fill: { height: '100%', borderRadius: radius.pill },

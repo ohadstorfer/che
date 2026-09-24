@@ -283,6 +283,24 @@
   "updated_at": "2026-09-24 09:41:25.175416+00"
  },
  {
+  "course_order": 110,
+  "grammar_focus": [
+   "aunque.indicativo-subjuntivo",
+   "a-pesar-de",
+   "servir"
+  ],
+  "id": "21206ba6-6522-5849-be52-419e7d6d1007",
+  "ordinal": 2,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 10,
+  "slug": "aunque-llueva",
+  "status": "published",
+  "summary_en": "Aunque llueva, vamos igual",
+  "title_en": "Say even if and even though",
+  "updated_at": "2026-09-24 15:44:42.843759+00"
+ },
+ {
   "course_order": 3107,
   "grammar_focus": [
    "estar.pres.1sg-3sg",
@@ -335,6 +353,42 @@
   "summary_en": "La semana que viene",
   "title_en": "Make plans for next week",
   "updated_at": "2026-09-24 09:41:25.175416+00"
+ },
+ {
+  "course_order": 120,
+  "grammar_focus": [
+   "repaso.subjuntivo.pluscuamperfecto",
+   "repaso.conectores",
+   "repaso.tramites"
+  ],
+  "id": "29bb2939-3d2a-50ef-b526-0e4e6c65ed68",
+  "ordinal": 12,
+  "register_max": "informal",
+  "review_form_ids": [
+   "02e3e661-3338-52cf-b8d2-ff2ab43989ae",
+   "e105015f-9cb7-5cbd-ab76-772a763f142b",
+   "54445f89-1417-5b7e-9ff9-cec9692db34d",
+   "ee55a180-7ef0-5961-8be5-e34d2d6ae462",
+   "a3b050fd-2508-5097-8ed7-a543dd819627",
+   "6c1def76-2208-5421-9415-702fdb9aa5e3",
+   "3d3cd98a-0fbb-54c5-9d6e-2e238f849705",
+   "bf5a3a09-686c-5cf7-9462-aa74dbdadd08",
+   "c20dd790-428a-5487-bdd2-53f9ab99a657",
+   "5e5a4295-176f-563b-beb3-8c36f13a64d8",
+   "0bdc496e-8570-5682-a537-54cf6e9a2f5b",
+   "75428af5-a5b7-5a2f-86f3-6773a81818c0",
+   "56ce8a6e-04b1-5a36-a8bc-fafd06edf4be",
+   "9752095e-5f94-538d-a098-7a0bfd002c37",
+   "ece332b0-a9a6-5ce8-88b5-5fc3191b9862",
+   "46ee3eb7-b013-52eb-bfdf-58e2aa647244",
+   "b9c2d761-54ab-56cb-81f8-2f11cb12c028"
+  ],
+  "section_id": 10,
+  "slug": "practica-el-tramite",
+  "status": "published",
+  "summary_en": "Si hubiera sabido, venía",
+  "title_en": "Practice: what would have happened, both sides, paperwork",
+  "updated_at": "2026-09-24 16:24:09.815218+00"
  },
  {
   "course_order": 55,
@@ -527,6 +581,23 @@
   "updated_at": "2026-09-24 09:41:25.175416+00"
  },
  {
+  "course_order": 121,
+  "grammar_focus": [
+   "debate",
+   "repaso.b2"
+  ],
+  "id": "3a4f3640-2502-5b70-b610-aa933a78c1a5",
+  "ordinal": 13,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 10,
+  "slug": "que-opinas",
+  "status": "published",
+  "summary_en": "¿Y vos qué opinás?",
+  "title_en": "Talk it through",
+  "updated_at": "2026-09-24 16:23:05.089081+00"
+ },
+ {
   "course_order": 11,
   "grammar_focus": [
    "pron.sujeto.plural",
@@ -661,6 +732,39 @@
   "updated_at": "2026-09-18 12:13:13.419253+00"
  },
  {
+  "course_order": 112,
+  "grammar_focus": [
+   "repaso.subjuntivo.imperfecto",
+   "repaso.aunque",
+   "repaso.llevar"
+  ],
+  "id": "518b71b2-b596-542b-9566-2ef65e7af724",
+  "ordinal": 4,
+  "register_max": "informal",
+  "review_form_ids": [
+   "0124d719-520c-54e5-89b2-464090b064d0",
+   "2c71cd61-a05d-55db-8a2f-f53db3f4d036",
+   "e667c257-e478-5c39-83f5-534435074d04",
+   "d7e6732a-cbfd-58d1-b778-d859291cc74c",
+   "14e86dd8-2427-5875-b1ce-e071861b7b27",
+   "68f80fec-8295-5265-992a-de19223b489a",
+   "99432308-f91e-594d-946a-da2161c2b4f8",
+   "837e7cbb-b1b1-58f4-b441-6b48479a7089",
+   "ef2b5fe8-1c05-5f5f-bb87-77466fb59db5",
+   "b9c2d761-54ab-56cb-81f8-2f11cb12c028",
+   "3fdadca8-b6af-5083-9c60-d73ef93d9639",
+   "2d70c8ae-5f05-5fef-aa09-5695090c763a",
+   "5c2f5959-e047-54a2-b715-7e9f41083c9d",
+   "0834f7a4-b678-5309-a062-e50efc76eb83"
+  ],
+  "section_id": 10,
+  "slug": "practica-llevo-un-rato",
+  "status": "published",
+  "summary_en": "Llevo un rato esperando",
+  "title_en": "Practice: what you wanted, even if, how long",
+  "updated_at": "2026-09-24 15:56:03.58913+00"
+ },
+ {
   "course_order": 46,
   "grammar_focus": [
    "imperfecto.escena",
@@ -696,6 +800,23 @@
   "updated_at": "2026-09-24 09:41:25.175416+00"
  },
  {
+  "course_order": 119,
+  "grammar_focus": [
+   "tramites",
+   "vencido"
+  ],
+  "id": "53eebe4b-3a77-563a-84b1-b0ae2a42641c",
+  "ordinal": 11,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 10,
+  "slug": "el-tramite",
+  "status": "published",
+  "summary_en": "Sacá turno y traé el DNI",
+  "title_en": "Deal with the paperwork",
+  "updated_at": "2026-09-24 16:21:08.82276+00"
+ },
+ {
   "course_order": 104,
   "grammar_focus": [
    "banco",
@@ -711,6 +832,23 @@
   "summary_en": "Voy al cajero",
   "title_en": "Deal with the bank",
   "updated_at": "2026-09-24 09:41:25.175416+00"
+ },
+ {
+  "course_order": 109,
+  "grammar_focus": [
+   "subjuntivo.imperfecto.querer-que",
+   "correlacion.tiempos"
+  ],
+  "id": "59b48665-2d47-587e-b406-84d2800c4161",
+  "ordinal": 1,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 10,
+  "slug": "queria-que-vinieras",
+  "status": "published",
+  "summary_en": "Quería que vinieras",
+  "title_en": "Say what you wanted others to do",
+  "updated_at": "2026-09-24 15:45:45.960099+00"
  },
  {
   "course_order": 30,
@@ -799,6 +937,40 @@
   "summary_en": "La hora",
   "title_en": "Tell the time",
   "updated_at": "2026-09-23 19:54:45.405956+00"
+ },
+ {
+  "course_order": 116,
+  "grammar_focus": [
+   "repaso.imperativo.ustedes",
+   "repaso.como-si",
+   "repaso.el-que"
+  ],
+  "id": "696d87b3-3675-5b84-ae2f-61e5be334c9a",
+  "ordinal": 8,
+  "register_max": "informal",
+  "review_form_ids": [
+   "6087f8ae-9268-5938-98d4-437a605eb3fc",
+   "49ff2a78-f97c-5136-872b-1943a3926c6a",
+   "e5da0ee2-d010-575f-9b0f-4abc228014e7",
+   "3c2ce352-7424-5435-8f4c-fcd9aa142ffa",
+   "dea78b46-6357-5447-ab74-dc6130733038",
+   "46ee3eb7-b013-52eb-bfdf-58e2aa647244",
+   "e669afef-5652-5eb5-a686-adcbf62bef71",
+   "8af33086-60c9-5405-baa7-5726d6659e1c",
+   "8ad8eacf-6fec-58f6-9bca-2fd56deb072a",
+   "2627481d-7427-57ae-a38e-0f79fce9263e",
+   "ebcd4d05-1a94-51a3-80bc-723e08590d43",
+   "03a67e5f-b2fb-5231-a3d6-bdf3f5dd0f78",
+   "5aae87b5-8726-59fd-9ff7-100fb459cf36",
+   "2c71cd61-a05d-55db-8a2f-f53db3f4d036",
+   "14e86dd8-2427-5875-b1ce-e071861b7b27"
+  ],
+  "section_id": 10,
+  "slug": "practica-como-si",
+  "status": "published",
+  "summary_en": "Pasen, elijan el que quieran",
+  "title_en": "Practice: hosting, as if, and which one",
+  "updated_at": "2026-09-24 16:10:55.242848+00"
  },
  {
   "course_order": 60,
@@ -1244,6 +1416,23 @@
   "updated_at": "2026-09-18 13:30:13.218308+00"
  },
  {
+  "course_order": 118,
+  "grammar_focus": [
+   "conectores.argumentacion",
+   "opinar"
+  ],
+  "id": "9cd92c11-142e-5820-ac05-2ba0eb3f623c",
+  "ordinal": 10,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 10,
+  "slug": "por-un-lado",
+  "status": "published",
+  "summary_en": "Por un lado sí, por otro no",
+  "title_en": "Weigh both sides",
+  "updated_at": "2026-09-24 16:12:56.791351+00"
+ },
+ {
   "course_order": 47,
   "grammar_focus": [
    "repaso.imperfecto",
@@ -1484,6 +1673,23 @@
   "updated_at": "2026-09-24 09:41:25.175416+00"
  },
  {
+  "course_order": 117,
+  "grammar_focus": [
+   "subjuntivo.pluscuamperfecto",
+   "si-hipotetico.pasado"
+  ],
+  "id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
+  "ordinal": 9,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 10,
+  "slug": "si-hubiera-sabido",
+  "status": "published",
+  "summary_en": "Si hubiera sabido…",
+  "title_en": "Say what would have happened",
+  "updated_at": "2026-09-24 16:08:17.244619+00"
+ },
+ {
   "course_order": 96,
   "grammar_focus": [
    "se-accidental"
@@ -1599,6 +1805,23 @@
   "updated_at": "2026-09-24 09:59:33.29136+00"
  },
  {
+  "course_order": 115,
+  "grammar_focus": [
+   "relativo.el-que",
+   "relativo.donde"
+  ],
+  "id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
+  "ordinal": 7,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 10,
+  "slug": "el-que-quieras",
+  "status": "published",
+  "summary_en": "El que quieras",
+  "title_en": "Say which one you mean",
+  "updated_at": "2026-09-24 16:05:52.336791+00"
+ },
+ {
   "course_order": 32,
   "grammar_focus": [
    "preterito.er-ir.singular",
@@ -1702,6 +1925,23 @@
   "summary_en": "Hoy te toca a vos",
   "title_en": "Split the chores",
   "updated_at": "2026-09-24 09:41:25.175416+00"
+ },
+ {
+  "course_order": 113,
+  "grammar_focus": [
+   "imperativo.ustedes",
+   "hospitalidad"
+  ],
+  "id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
+  "ordinal": 5,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 10,
+  "slug": "pasen-pasen",
+  "status": "published",
+  "summary_en": "Pasen, pasen",
+  "title_en": "Welcome people into your home",
+  "updated_at": "2026-09-24 15:59:02.43234+00"
  },
  {
   "course_order": 20,
@@ -1933,6 +2173,25 @@
   "updated_at": "2026-09-24 09:41:25.175416+00"
  },
  {
+  "course_order": 111,
+  "grammar_focus": [
+   "llevar.tiempo.gerundio",
+   "hace-que",
+   "seguir.gerundio",
+   "dejar-de"
+  ],
+  "id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
+  "ordinal": 3,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 10,
+  "slug": "llevo-dos-anos",
+  "status": "published",
+  "summary_en": "Llevo dos años acá",
+  "title_en": "Say how long you've been at it",
+  "updated_at": "2026-09-24 15:51:46.957087+00"
+ },
+ {
   "course_order": 79,
   "grammar_focus": [
    "saber",
@@ -1949,6 +2208,24 @@
   "summary_en": "Ni idea",
   "title_en": "Say what you know and understand",
   "updated_at": "2026-09-24 09:41:25.175416+00"
+ },
+ {
+  "course_order": 114,
+  "grammar_focus": [
+   "como-si.subjuntivo-imperfecto",
+   "hacerse-el",
+   "ni-que"
+  ],
+  "id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
+  "ordinal": 6,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 10,
+  "slug": "como-si-nada",
+  "status": "published",
+  "summary_en": "Como si nada",
+  "title_en": "Say as if",
+  "updated_at": "2026-09-24 16:02:50.969193+00"
  },
  {
   "course_order": 13,

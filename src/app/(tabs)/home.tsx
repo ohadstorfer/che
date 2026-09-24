@@ -181,7 +181,7 @@ const webTransition =
 //
 // These are cut-outs, not the boxed app icon — a figure standing on the page
 // reads as part of the world; a rounded tile reads as a button she can't press.
-// Keep the widths under ~115 so the figure never crowds the coin, even when
+// Keep the widths under ~126 so the figure never crowds the coin, even when
 // the road swings fully to its side on a narrow phone. That is where the two
 // meet: on a 320pt screen the path is 280 wide, and a node swung its full 78
 // out leaves 179pt of clear margin opposite it, minus the breathing room a
@@ -192,23 +192,23 @@ const webTransition =
 // space in the row instead of a squashed figure.
 // ---------------------------------------------------------------------------
 const FIGURES = [
-  { source: require('@/assets/images/capybara/capybara-gaucho-figure.png'), width: 68, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-asado-figure.png'), width: 107, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-mate-figure.png'), width: 85, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-futbol-pateando-figure.png'), width: 109, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-facturas-figure.png'), width: 92, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-tango-figure.png'), width: 86, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-milanesa-figure.png'), width: 94, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-saludando-figure.png'), width: 78, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-empanadas-figure.png'), width: 76, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-mate-amargo-figure.png'), width: 78, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-futbol-gol-figure.png'), width: 94, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-alfajor-figure.png'), width: 90, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-choripan-figure.png'), width: 90, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-gaucho-cafe-figure.png'), width: 89, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-dulce-de-leche-figure.png'), width: 87, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-mate-sorbiendo-figure.png'), width: 78, height: 116 },
-  { source: require('@/assets/images/capybara/capybara-alfajor-maicena-figure.png'), width: 90, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-gaucho-figure.png'), width: 77, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-asado-figure.png'), width: 120, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-mate-figure.png'), width: 95, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-futbol-pateando-figure.png'), width: 122, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-facturas-figure.png'), width: 103, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-tango-figure.png'), width: 96, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-milanesa-figure.png'), width: 105, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-saludando-figure.png'), width: 87, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-empanadas-figure.png'), width: 85, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-mate-amargo-figure.png'), width: 88, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-futbol-gol-figure.png'), width: 106, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-alfajor-figure.png'), width: 101, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-choripan-figure.png'), width: 101, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-gaucho-cafe-figure.png'), width: 100, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-dulce-de-leche-figure.png'), width: 98, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-mate-sorbiendo-figure.png'), width: 88, height: 130 },
+  { source: require('@/assets/images/capybara/capybara-alfajor-maicena-figure.png'), width: 101, height: 130 },
 ];
 
 // One figure per arc, standing in the bay the road leaves as it curves away.
@@ -859,7 +859,7 @@ function HomeHeader({
     <View style={[styles.header, { paddingTop: 14 + topInset }]}>
       <View style={styles.headerTop}>
         <Image
-          source={require('@/assets/images/mora-avatar.png')}
+          source={require('@/assets/images/capybara-avatar.png')}
           style={styles.avatar}
           contentFit="cover"
           accessible={false}

@@ -25,6 +25,9 @@ const A = {
   hi: require('@/assets/images/capybara/capybara-saludando-figure.png'),
   gaucho: require('@/assets/images/capybara/capybara-gaucho-figure.png'),
   gauchoCafe: require('@/assets/images/capybara/capybara-gaucho-cafe-figure.png'),
+  angry: require('@/assets/images/capybara/capybara-puteadas-figure.png'),
+  guitar: require('@/assets/images/capybara/capybara-musica-figure.png'),
+  flag: require('@/assets/images/capybara/capybara-historia-figure.png'),
 } satisfies Record<string, ImageSourcePropType>;
 
 const bySection: Record<string, ImageSourcePropType[]> = {
@@ -34,6 +37,10 @@ const bySection: Record<string, ImageSourcePropType[]> = {
   alfajores: [A.alfajor, A.dulce, A.alfajorMaicena, A.facturas],
   futbol: [A.goal, A.kick],
   tango: [A.tango],
+  puteadas: [A.angry],
+  musica: [A.guitar],
+  'historia-nacimiento': [A.flag],
+  'historia-moderna': [A.flag],
 };
 
 const general = [A.hi, A.gaucho, A.gauchoCafe];

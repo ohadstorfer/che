@@ -65,16 +65,16 @@ export function ScreenBackground() {
 }
 
 // ---------------------------------------------------------------------------
-// MoraFace — the app icon, reused as artwork inside the app.
+// MoraFace — the capybara's face on the brand green, as a tile.
 // ---------------------------------------------------------------------------
 export function MoraFace({ size = 112 }: { size?: number }) {
   return (
     <View style={[styles.face, { width: size, height: size, borderRadius: size * 0.2237 }]}>
       <Image
-        source={require('@/assets/images/mora.png')}
+        source={require('@/assets/images/capybara-tile.png')}
         style={{ width: size, height: size }}
         contentFit="contain"
-        accessibilityLabel="Mora"
+        accessibilityLabel="Che capybara"
       />
     </View>
   );

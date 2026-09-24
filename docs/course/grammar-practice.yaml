@@ -606,3 +606,95 @@ units:
         | **Se saluda** con un beso. | You greet with a kiss. |
 
         **Se** + the *él* form talks about everyone in general, no one in particular.
+
+  # ── Section 10 ──────────────────────────────────────────────────────────
+  - unit: queria-que-vinieras
+    lessons: 2
+    focus: [{ tense: impf, mood: subj }]
+    tip:
+      title: "Quería que vinieras"
+      body: |
+        The second verb follows the first into the past:
+
+        | now | then |
+        | Quiero que **vengas**. | Quería que **vinieras**. |
+        | Te pido que **llames**. | Te pedí que **llamaras**. |
+        | Me dice que **espere**. | Me dijo que **esperara**. |
+
+        The past subjunctive is the *ellos* past with **-ra**: *vinieron* → **viniera**, *hicieron* → **hiciera**. With vos: **vinieras, hicieras, llamaras**.
+
+  - unit: aunque-llueva
+    lessons: 1
+    tip:
+      title: "Aunque + fact, aunque + maybe"
+      body: |
+        | a fact — normal verb | a maybe — subjunctive |
+        | Aunque **llueve**, vamos. | Aunque **llueva**, vamos. |
+        | Aunque **cuesta**, sigo. | Aunque **cueste**, sigo. |
+        | Aunque **querés**, no podés. | Aunque no **quieras**, tenés que ir. |
+
+        Left: it *is* raining. Right: whether or not it rains. **Igual** at the end — *anyway* — often closes it.
+
+  - unit: llevo-dos-anos
+    lessons: 2
+    tip:
+      title: "How long: llevar, hace, seguir"
+      body: |
+        | Llevo dos años **viviendo** acá. | I've been living here for two years. |
+        | Hace dos años que **vivo** acá. | (the same) |
+        | **Sigo** laburando ahí. | I still work there. |
+        | **Dejé de** fumar. | I quit smoking. |
+        | **Volvió a** llamar. | He called again. |
+
+        English *have been …ing* is the present in Spanish. **Llevar** + time + *-ando, -iendo*.
+
+  - unit: pasen-pasen
+    lessons: 2
+    tip:
+      title: "Commands for ustedes"
+      body: |
+        | one person (vos) | more than one (ustedes) |
+        | pasá | **pasen** |
+        | esperá | **esperen** |
+        | vení | **vengan** |
+        | traé | **traigan** |
+        | sentate | **siéntense** |
+        | no te preocupes | **no se preocupen** |
+
+        -ar verbs end in **-en**, the rest in **-an**. The pronoun is **se**, stuck on the end — and then the accent appears: **siéntense, quédense**.
+
+  - unit: como-si-nada
+    lessons: 1
+    focus: [{ tense: impf, mood: subj }]
+    tip:
+      title: "Como si + past subjunctive"
+      body: |
+        | Habla **como si supiera** todo. | He talks as if he knew everything. |
+        | **Como si fuera** fácil. | As if it were easy. |
+        | Me saludó **como si nada**. | He said hi as if nothing had happened. |
+        | ¡**Ni que fuera** tan difícil! | It's not like it's that hard! |
+
+        After **como si** and **ni que**, always the *-ra* form, whatever the time.
+
+  - unit: el-que-quieras
+    lessons: 1
+    tip:
+      title: "El que, la que, donde"
+      body: |
+        | a masculine thing | **el que** quieras |
+        | a feminine thing | **la que** está en la esquina |
+        | more than one | **los que** vinieron, **las que** prefieras |
+        | a place | el bar **donde** nos conocimos |
+
+        It matches what it stands for. *El que quieras* — whichever you want — takes the subjunctive: you haven't chosen yet.
+
+  - unit: si-hubiera-sabido
+    lessons: 2
+    focus: [{ verb_form: part }]
+    tip:
+      title: "Si hubiera + participle"
+      body: |
+        | yo, él, ella | **hubiera** | sabido, venido, ido |
+        | vos | **hubieras** | llamado, avisado, pensado |
+
+        For what didn't happen, both halves: **Si hubiera sabido, te hubiera avisado.** *If I'd known, I'd have told you.* Compare *si supiera* — if I knew (now).

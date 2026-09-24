@@ -56,7 +56,12 @@ const matches = (features, filter) => Object.entries(filter).every(([k, v]) => f
  * @returns {Map<unitId, {slots, warnings}>} and exposure stats, for every
  *          published unit, planned in course order.
  */
-export function planCourse({ outline = loadOutlineFromDb(), sentencesByUnit = loadPublishedSentences(), plan = loadGrammarPlan() } = {}) {
+export function planCourse({
+  outline = loadOutlineFromDb(),
+  sentencesByUnit = loadPublishedSentences(),
+  plan = loadGrammarPlan(),
+  include = [], // slugs planned though not yet published — the unit `publish` is about to publish
+} = {}) {
   const formById = new Map(outline.forms.map((f) => [f.id, f]));
   const content = (s) =>
     [...new Set(s.tokens.flatMap((t) => t.form_ids ?? []))].filter((id) => formById.has(id) && drillable(formById.get(id)));
@@ -64,7 +69,7 @@ export function planCourse({ outline = loadOutlineFromDb(), sentencesByUnit = lo
 
   // form id -> { last: course_order last drilled, n: later units it came back in }
   const exposure = new Map();
-  const units = outline.units.filter((u) => u.status === 'published');
+  const units = outline.units.filter((u) => u.status === 'published' || include.includes(u.slug));
   const result = new Map();
   const earlier = []; // sentences of units already planned
 

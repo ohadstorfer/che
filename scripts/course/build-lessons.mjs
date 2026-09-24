@@ -21,7 +21,7 @@ if (!slug && !flags.has('--all')) {
   process.exit(1);
 }
 
-const planned = planCourse();
+const planned = planCourse({ include: slug ? [slug] : [] });
 const { result, units } = planned;
 const wanted = flags.has('--all') ? units : units.filter((u) => u.slug === slug);
 if (!wanted.length) {

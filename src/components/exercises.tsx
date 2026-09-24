@@ -463,7 +463,11 @@ export function PlayButton({ path, big }: { path: string; big?: boolean }) {
 }
 
 // ---------------------------------------------------------------------------
-// SpeechBubble — Mora, and a bubble coming out of her.
+// SpeechBubble — a capybara, and a bubble coming out of it.
+//
+// Each bubble that appears gets the next capybara in the set, so a lesson isn't
+// asked by the same face all the way through. They all look left in the art, and
+// the bubble is on the right, so they are mirrored to look at what they say.
 //
 // The tail is two stacked triangles because the bubble is a bordered panel:
 // the back one is the border colour, the front one the fill, a couple of
@@ -471,19 +475,33 @@ export function PlayButton({ path, big }: { path: string; big?: boolean }) {
 // and covers the panel's own border where the two meet. That is what makes the
 // outline read as one continuous shape rather than a form with a sticker on it.
 // ---------------------------------------------------------------------------
-const MORA_WIDTH = 74;
-/** The cut-out is 275 × 379; holding the ratio keeps her head from squashing. */
-const MORA_HEIGHT = Math.round((MORA_WIDTH * 379) / 275);
+const SPEAKERS = [
+  require('@/assets/images/capybara/capybara-saludando-figure.png'),
+  require('@/assets/images/capybara/capybara-gaucho-figure.png'),
+  require('@/assets/images/capybara/capybara-mate-figure.png'),
+  require('@/assets/images/capybara/capybara-gaucho-cafe-figure.png'),
+  require('@/assets/images/capybara/capybara-empanadas-figure.png'),
+  require('@/assets/images/capybara/capybara-dulce-de-leche-figure.png'),
+  require('@/assets/images/capybara/capybara-facturas-figure.png'),
+  require('@/assets/images/capybara/capybara-alfajor-maicena-figure.png'),
+];
+let nextSpeaker = 0;
+
+/** Every capybara is fitted into the same box, so the bubble beside it never shifts. */
+const SPEAKER_WIDTH = 84;
+const SPEAKER_HEIGHT = 100;
 const TAIL = 11;
 const TAIL_RIM = 2;
 
 export function SpeechBubble({ children }: { children: React.ReactNode }) {
+  const [speaker] = useState(() => SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
   return (
     <View style={styles.speechRow}>
       <Image
-        source={require('@/assets/images/mora-figure.png')}
-        style={styles.moraFigure}
+        source={speaker}
+        style={styles.speaker}
         contentFit="contain"
+        contentPosition={{ left: 0 }}
         accessible={false}
       />
       <View style={styles.bubbleWrap}>
@@ -2167,11 +2185,13 @@ const styles = StyleSheet.create({
   enPhrase: { fontSize: 20, color: colors.primaryDark, fontWeight: '700', textAlign: 'center' },
   divider: { height: 1, backgroundColor: colors.border, alignSelf: 'stretch', marginVertical: 8 },
 
-  // Mora and her bubble ------------------------------------------------------
-  // The tail is absolute, so it eats into this gap: 16 leaves its tip about
-  // five points clear of her beard instead of growing out of it.
-  speechRow: { flexDirection: 'row', alignItems: 'center', gap: 16 },
-  moraFigure: { width: MORA_WIDTH, height: MORA_HEIGHT },
+  // The capybara and its bubble ---------------------------------------------
+  // The tail is absolute, so it eats into this gap: 12 leaves its tip a few
+  // points clear of the snout instead of growing out of it. The figure is packed
+  // against the box's inner edge (left, before the mirror), so the gap is the
+  // same for every one.
+  speechRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  speaker: { width: SPEAKER_WIDTH, height: SPEAKER_HEIGHT, transform: [{ scaleX: -1 }] },
   bubbleWrap: { flex: 1 },
   bubble: { paddingVertical: 16, paddingHorizontal: 16 },
   bubbleRow: { flexDirection: 'row', alignItems: 'center', gap: 14 },
