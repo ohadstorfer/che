@@ -883,3 +883,61 @@ units:
         | **Lo peor** es el calor. | The worst part is the heat. |
 
         **Lo** + adjective makes *the … thing*. It never changes: *lo bueno*, even of a plural.
+
+  # ── Section 14 ──────────────────────────────────────────────────────────
+  - unit: no-es-que
+    lessons: 1
+    tip:
+      title: "No es que…, es que…"
+      body: |
+        | **No es que** no **quiera**, | It's not that I don't want to, |
+        | **es que** no puedo. | it's just that I can't. |
+        | **No es que** no **tengamos** ganas. | It's not that we don't feel like it. |
+
+        The reason you deny takes the subjunctive; the real one, after **es que**, the normal verb.
+
+  - unit: si-hubiera-ahorrado
+    lessons: 2
+    focus: [{ tense: impf, mood: subj }, { tense: cond }]
+    tip:
+      title: "Then, and what it means now"
+      body: |
+        | if (then) | now |
+        | Si **hubiera ahorrado**, | ahora **tendría** un depto. |
+        | Si **hubiéramos** salido antes, | ya **estaríamos** ahí. |
+        | Si **hubiera aceptado**, | ahora **sería** otra cosa. |
+
+        *Hubiera* + participle for the past that didn't happen; the plain conditional for today.
+
+  - unit: tendria-que-haber
+    lessons: 1
+    tip:
+      title: "Should have"
+      body: |
+        | **Tendría que haber** ido. | I should have gone. |
+        | **Tendrías que haber** avisado. | You should have let us know. |
+        | **Me arrepiento.** | I regret it. |
+
+        **Tendría que haber** + participle: the porteño regret. Never *he debido*.
+
+  - unit: me-hizo-reir
+    lessons: 1
+    tip:
+      title: "Hacer + infinitive"
+      body: |
+        | **Me hizo reír.** | It made me laugh. |
+        | **Me hizo llorar.** | It made me cry. |
+        | **Me hace acordar** a vos. | It reminds me of you. |
+
+        **Hacer** + infinitive is *to make someone do it*. The person goes in front: **me**, **te**, **nos**.
+
+  - unit: cuanto-mas
+    lessons: 1
+    tip:
+      title: "The more…"
+      body: |
+        | **Cuanto más** practicás, | The more you practice, |
+        | mejor hablás. | the better you speak. |
+        | Avisame **cuanto antes**. | Let me know as soon as you can. |
+
+        **Cuanto más** + one thing, then the other with **más**, **menos**, **mejor**.
