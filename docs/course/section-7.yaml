@@ -406,9 +406,12 @@ units:
         pos: "verb"
         en: "to recommend"
         forms:
-          - form: "recomiendo"
+          - form: "te recomiendo"
             en: "I recommend"
+            f: "1sg.pres.ind.irregular.clitic"
+          - form: "recomiendo"
             f: "1sg.pres.ind.irregular"
+            bound: true
           - form: "recomendás"
             en: "you recommend"
             f: "2sg.pres.ind.vos"

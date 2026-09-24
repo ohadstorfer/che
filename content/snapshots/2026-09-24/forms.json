@@ -2110,6 +2110,30 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "clitic": true,
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "te recomiendo",
+  "gloss_en": "I recommend",
+  "gloss_note_en": null,
+  "id": "116522b6-a148-5b8c-bc86-4512d019a0de",
+  "lemma_id": "18defe56-99e0-5170-8bd1-b5f1573430c6",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
+  "updated_at": "2026-09-24 06:51:08.840155+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "pilcha",
   "gloss_en": null,
@@ -17816,7 +17840,7 @@
    "tense": "pret"
   },
   "form": "estuvo",
-  "gloss_en": "was (somewhere, he/she was)",
+  "gloss_en": "was (somewhere)",
   "gloss_note_en": null,
   "id": "a3c730d9-e62c-54ba-95f3-f96bacada9a3",
   "lemma_id": "5d9cbffe-c740-5cbb-b69d-8c5b6440d6c6",
@@ -17824,7 +17848,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-23 22:57:13.830499+00",
+  "updated_at": "2026-09-24 06:51:08.840155+00",
   "voice_id": null
  },
  {
@@ -25383,7 +25407,7 @@
  {
   "alt": [],
   "audio_path": null,
-  "bound": false,
+  "bound": true,
   "features": {
    "irregular": true,
    "mood": "ind",
@@ -25392,7 +25416,7 @@
    "tense": "pres"
   },
   "form": "recomiendo",
-  "gloss_en": "I recommend",
+  "gloss_en": null,
   "gloss_note_en": null,
   "id": "ea755953-82bf-5023-bdf4-6cc763994567",
   "lemma_id": "18defe56-99e0-5170-8bd1-b5f1573430c6",
@@ -25400,7 +25424,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 01:05:43.940994+00",
+  "updated_at": "2026-09-24 06:51:08.840155+00",
   "voice_id": null
  },
  {

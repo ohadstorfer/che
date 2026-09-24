@@ -876,18 +876,6 @@
   "tip_id": null
  },
  {
-  "form_id": "479d6ab0-1eac-590a-80d4-c12f1382775e",
-  "id": "03721bf1-aab5-48d7-a560-eabff2601bdb",
-  "kind": "teach",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": null,
-  "ordinal": 2,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
   "form_id": "5c2f5959-e047-54a2-b715-7e9f41083c9d",
   "id": "0373e115-bb70-423a-8fae-3c8af3dca8d8",
   "kind": "teach",
@@ -969,18 +957,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "95d6df13-8bdb-53e2-ad56-eeda15a7c4ad",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "03f5b68b-246f-4f0b-ae03-39c649b5ca1d",
-  "kind": "drill",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": "sentence_build",
-  "ordinal": 10,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "f3fa70fb-a4b3-5d37-98ee-ef4e50fd94eb",
   "tip_id": null
  },
  {
@@ -2580,18 +2556,6 @@
   "tip_id": null
  },
  {
-  "form_id": null,
-  "id": "0ad02709-9424-49dc-aa53-2bd166c3b6ab",
-  "kind": "drill",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": "sentence_build",
-  "ordinal": 12,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "a5ff35f2-dfa7-58c1-8f4b-f431730d3516",
-  "tip_id": null
- },
- {
   "form_id": "ebc255bf-12be-50f7-a2b9-3febfcef060d",
   "id": "0ad03654-2143-4bb7-a144-32dc26a25fd5",
   "kind": "teach",
@@ -3132,6 +3096,18 @@
   "tip_id": null
  },
  {
+  "form_id": null,
+  "id": "0cc83d2d-04a0-4be6-a8ae-b621884e0aa0",
+  "kind": "recap",
+  "lesson_id": "147e90a9-ce86-5c47-8a20-188f7e58f14f",
+  "mode": null,
+  "ordinal": 1,
+  "review_count": 12,
+  "scope": "unit",
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
   "form_id": "785a4625-3913-5445-aa6d-5ca2ad3561b6",
   "id": "0ccb4da4-f175-4ef8-8767-c5ab9fd81e66",
   "kind": "teach",
@@ -3625,6 +3601,18 @@
  },
  {
   "form_id": null,
+  "id": "0e55ebc6-2fbe-4fcd-9a51-b121377829a2",
+  "kind": "drill",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": "sentence_gap",
+  "ordinal": 4,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "bf387e0b-3a73-5b6e-826d-499aef7deca1",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "0e6ce8c0-f7ad-4db1-a227-2de2adda59c8",
   "kind": "drill",
   "lesson_id": "8f8b8433-bca0-5219-ae93-96a7b7faed8c",
@@ -3813,6 +3801,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "f879bf37-bba3-5048-bb86-a6099816fa34",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "0efb79ef-f673-4259-ac90-2a249dcf6d52",
+  "kind": "drill",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": "sentence_build",
+  "ordinal": 12,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "a5ff35f2-dfa7-58c1-8f4b-f431730d3516",
   "tip_id": null
  },
  {
@@ -4416,18 +4416,6 @@
   "tip_id": null
  },
  {
-  "form_id": "e6dfd5d8-6467-5d5a-87cf-888a9a2abb8c",
-  "id": "112cd6f9-3ac6-4b1a-851d-f2fcb0115695",
-  "kind": "teach",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": null,
-  "ordinal": 7,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
   "form_id": null,
   "id": "11339b6a-c84e-451c-895c-f604ad9daf3d",
   "kind": "drill",
@@ -4489,18 +4477,6 @@
  },
  {
   "form_id": null,
-  "id": "1157136f-7b73-4520-9b2b-6140c5a77127",
-  "kind": "review",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": null,
-  "ordinal": 13,
-  "review_count": 2,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "1167bfdc-9da7-43e0-ac0f-c70391fdb8ea",
   "kind": "drill",
   "lesson_id": "08d47074-98e8-5a44-9014-2f0aa36d6b18",
@@ -4557,6 +4533,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "bf278c5e-1b79-5e81-883d-39b6aa35543e",
+  "tip_id": null
+ },
+ {
+  "form_id": "d1e53396-944b-5d3a-9c82-872641717a8f",
+  "id": "118313c2-49d1-474f-bb15-f7d98290c12e",
+  "kind": "teach",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": null,
+  "ordinal": 8,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -4629,6 +4617,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "3c572ffe-3984-5e78-a9ce-0959a129b270",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "119538a8-efe0-4ea1-8ff9-ca22d3b10b7b",
+  "kind": "drill",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": "sentence_gap",
+  "ordinal": 7,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "de1f4800-196c-543e-9846-1fde45f91938",
   "tip_id": null
  },
  {
@@ -7237,6 +7237,18 @@
  },
  {
   "form_id": null,
+  "id": "1b200c6a-3eb5-4fc2-8322-4917a9919d73",
+  "kind": "match",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": null,
+  "ordinal": 14,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "1b249412-563a-489e-bd8d-06dfa543e040",
   "kind": "drill",
   "lesson_id": "f3e5200f-3d02-54b1-95e0-e069fcbc399e",
@@ -7293,18 +7305,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "a7463fc6-7c13-515f-a58c-b8572cb5e039",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "1b4421eb-8ad2-43bd-a6e9-5ec645352b76",
-  "kind": "drill",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": "sentence_build",
-  "ordinal": 11,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "558b8bfc-1d6a-560a-9be0-6cf88da57873",
   "tip_id": null
  },
  {
@@ -8013,18 +8013,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "0fca597f-73e5-540e-bb56-09689dcf147f",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "1df5d226-4a26-4c5e-98cf-ad366f1f17a9",
-  "kind": "drill",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": "sentence_build",
-  "ordinal": 12,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "57421f40-44ac-585f-91ee-b5258f6a0393",
   "tip_id": null
  },
  {
@@ -8856,18 +8844,6 @@
   "tip_id": null
  },
  {
-  "form_id": "a974d264-c100-59c2-8e38-dbabc8115210",
-  "id": "20c35915-f9c1-40ec-a564-a20d972edeed",
-  "kind": "teach",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": null,
-  "ordinal": 5,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
   "form_id": null,
   "id": "20cbfa66-1842-47e2-b264-bdbe10dc8d42",
   "kind": "drill",
@@ -9408,6 +9384,18 @@
   "tip_id": null
  },
  {
+  "form_id": "e5b6285e-ae89-5f02-8788-5c223ba3e6e8",
+  "id": "224e2f89-65bc-42ca-a6c3-b1bb2c5f9a7e",
+  "kind": "teach",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": null,
+  "ordinal": 5,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
   "form_id": null,
   "id": "2251ddbd-030f-4cad-a434-3c66b1e31038",
   "kind": "drill",
@@ -9925,6 +9913,18 @@
  },
  {
   "form_id": null,
+  "id": "23f91349-ec7e-47cb-b869-a2df8fbe4f49",
+  "kind": "drill",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": "sentence_build",
+  "ordinal": 11,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "bf387e0b-3a73-5b6e-826d-499aef7deca1",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "23fb8162-dade-4c96-ae43-690e22a5dc5f",
   "kind": "drill",
   "lesson_id": "810d4fec-899e-52af-a803-5c922af3f453",
@@ -10344,6 +10344,18 @@
   "tip_id": null
  },
  {
+  "form_id": null,
+  "id": "257045fa-35ea-486c-8540-abb42c8f49c0",
+  "kind": "drill",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": "sentence_meaning",
+  "ordinal": 9,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "2636f36b-a6e3-5982-8b1b-6aa26a15e511",
+  "tip_id": null
+ },
+ {
   "form_id": "a648ba67-40aa-568d-a02b-cb1f4dc5d041",
   "id": "2573981e-9f5f-44dd-a6d3-3ca3d030d1a7",
   "kind": "teach",
@@ -10389,18 +10401,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "5e0edb16-0018-58ad-bc7e-335b5b37812d",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "257b157c-7d56-4787-9a45-3f53db6f63db",
-  "kind": "match",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": null,
-  "ordinal": 15,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -10629,18 +10629,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "736160d9-ff92-55d6-8902-0f877c1441b5",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "2633cab9-7300-4761-8310-d8342f95ec02",
-  "kind": "drill",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": "sentence_build",
-  "ordinal": 13,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "cdd03584-5ae3-55cc-b2fd-03233f63df31",
   "tip_id": null
  },
  {
@@ -10969,6 +10957,18 @@
  },
  {
   "form_id": null,
+  "id": "277cf76e-2bab-4f20-8263-4a930f187ec3",
+  "kind": "review",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": null,
+  "ordinal": 13,
+  "review_count": 2,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "27818266-0a2c-4e25-9288-7290988dc14c",
   "kind": "drill",
   "lesson_id": "f5070908-82fa-5d07-9713-f4b2215ced41",
@@ -11206,6 +11206,18 @@
   "scope": null,
   "sentence_id": "cc4b7a31-0555-54ef-9b40-0e8786a583df",
   "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "2875c06e-e466-4e6e-b60f-818ab4996d99",
+  "kind": "tip",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": null,
+  "ordinal": 1,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": "3e5b7344-8608-58cc-a353-cae39fa8aefc"
  },
  {
   "form_id": null,
@@ -12517,18 +12529,6 @@
  },
  {
   "form_id": null,
-  "id": "2dd60845-cc87-4da5-bf41-6cf077b3d4e4",
-  "kind": "drill",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": "sentence_gap",
-  "ordinal": 6,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "110f0586-acc5-55f8-96eb-a9b9ab9027e8",
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "2ddb3ecd-7ff5-450d-aca9-51671b53c1b6",
   "kind": "drill",
   "lesson_id": "4f26c4b6-056e-5978-8f90-7c2d71d848a5",
@@ -13681,18 +13681,6 @@
  },
  {
   "form_id": null,
-  "id": "32e4afe9-07c9-4714-a108-55dab3dd986b",
-  "kind": "match",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": null,
-  "ordinal": 14,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "32e825d4-118c-4336-b8f3-ce708a7883dd",
   "kind": "drill",
   "lesson_id": "a017d971-b2bb-587f-8f98-86c9298ed5d2",
@@ -13857,6 +13845,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "3e3324a6-2b7f-565e-b740-36f148cfd5d3",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "335c7787-c752-4a29-8677-f7bef1580bdb",
+  "kind": "drill",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": "sentence_build",
+  "ordinal": 10,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "f3fa70fb-a4b3-5d37-98ee-ef4e50fd94eb",
   "tip_id": null
  },
  {
@@ -14784,30 +14784,6 @@
   "tip_id": null
  },
  {
-  "form_id": "d1e53396-944b-5d3a-9c82-872641717a8f",
-  "id": "372844b9-76e7-4835-8700-86c60febc2ee",
-  "kind": "teach",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": null,
-  "ordinal": 8,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "374742e3-d354-40ab-927d-8b7b33fd5677",
-  "kind": "drill",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": "sentence_meaning",
-  "ordinal": 5,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "cb66dba0-adb6-56f3-87fc-7469d797f80f",
-  "tip_id": null
- },
- {
   "form_id": null,
   "id": "3748d9ad-f44d-4ef4-b6fb-c8bac61a0ed6",
   "kind": "review",
@@ -14815,18 +14791,6 @@
   "mode": null,
   "ordinal": 10,
   "review_count": 2,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": "79fd484a-d703-5752-bf1b-24c30768bf33",
-  "id": "375a87e4-585b-477e-801d-e7794b71951a",
-  "kind": "teach",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": null,
-  "ordinal": 4,
-  "review_count": null,
   "scope": null,
   "sentence_id": null,
   "tip_id": null
@@ -14841,18 +14805,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "9ceeb26f-c7de-50d7-9325-4a258d1ec1b0",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "37751515-3264-46ea-8c82-da3298e970aa",
-  "kind": "review",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": null,
-  "ordinal": 13,
-  "review_count": 2,
-  "scope": null,
-  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -15121,18 +15073,6 @@
  },
  {
   "form_id": null,
-  "id": "387708cd-8fce-4a36-b85d-ee22302725ae",
-  "kind": "drill",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": "sentence_gap",
-  "ordinal": 7,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "0f2b15fb-eee4-5542-b99a-fc1607016c24",
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "387a9f2e-5a3c-4fd3-81ff-9a9f542af9d6",
   "kind": "drill",
   "lesson_id": "06c8116d-7e96-5a6d-bdaa-8620eb334e9d",
@@ -15321,18 +15261,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "a9dbcec0-654a-5ab6-a41c-1c857e221ece",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "3928d15d-b5de-4d0b-9135-fd050039e16a",
-  "kind": "drill",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": "sentence_meaning",
-  "ordinal": 9,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "de76e93d-12df-52a1-9cdc-107009b24c88",
   "tip_id": null
  },
  {
@@ -16464,6 +16392,18 @@
   "tip_id": null
  },
  {
+  "form_id": null,
+  "id": "3d28c04e-10d9-4679-9981-b874760ea398",
+  "kind": "drill",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": "sentence_meaning",
+  "ordinal": 9,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "de76e93d-12df-52a1-9cdc-107009b24c88",
+  "tip_id": null
+ },
+ {
   "form_id": "db1c4e0a-fb89-5186-93ef-86a92c58d963",
   "id": "3d2e863d-c9cc-4349-90f1-e4c342515326",
   "kind": "teach",
@@ -17197,6 +17137,18 @@
  },
  {
   "form_id": null,
+  "id": "4024cb39-8109-4808-ab2d-990639b5d987",
+  "kind": "drill",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": "sentence_gap",
+  "ordinal": 10,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "9f57bf28-48d9-5503-a633-5179643b36b4",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "4030c904-0c71-4992-944c-6c3ab864db00",
   "kind": "review",
   "lesson_id": "3fc97831-edd1-5b5c-992a-371d4529117d",
@@ -17313,18 +17265,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "97b791c2-cf5a-5ed8-a6f8-bbf81b3480d7",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "40b25780-bb75-4365-9f80-7569a94a7552",
-  "kind": "drill",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": "sentence_gap",
-  "ordinal": 7,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "de1f4800-196c-543e-9846-1fde45f91938",
   "tip_id": null
  },
  {
@@ -17505,6 +17445,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": null,
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "41567d8b-3562-4a60-bac1-0c3d0543b3e0",
+  "kind": "drill",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": "sentence_meaning",
+  "ordinal": 3,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "5513cd71-ba49-50f6-aaca-fb0ad1dbb799",
   "tip_id": null
  },
  {
@@ -20208,6 +20160,18 @@
   "tip_id": null
  },
  {
+  "form_id": "64129437-b5aa-5622-b101-c317d9f610f0",
+  "id": "4bca273f-b83c-4685-baab-ff921eacff17",
+  "kind": "teach",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": null,
+  "ordinal": 1,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
   "form_id": null,
   "id": "4bdd9012-d190-4a30-ac19-7f1d40e7a1cd",
   "kind": "drill",
@@ -21313,18 +21277,6 @@
  },
  {
   "form_id": null,
-  "id": "50349334-ffb6-4684-87aa-09003a33dbcd",
-  "kind": "drill",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": "sentence_build",
-  "ordinal": 13,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "171b1428-dfb8-57eb-adc6-b9dcd3353bca",
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "50370675-3104-4660-bd71-aabaa3cd9454",
   "kind": "drill",
   "lesson_id": "e2e0df52-64c6-5397-a6d9-b6c6540615d7",
@@ -22080,6 +22032,18 @@
   "tip_id": null
  },
  {
+  "form_id": null,
+  "id": "532fe117-7375-4da0-9582-d1a5b857051d",
+  "kind": "drill",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": "sentence_meaning",
+  "ordinal": 2,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "30ef4c7d-76ad-5099-9503-8cb1ea09b8fd",
+  "tip_id": null
+ },
+ {
   "form_id": "6aeda9bd-9e43-52e7-99c7-be3e450ce46b",
   "id": "533e978c-35dd-45c0-9895-59b94f91d4db",
   "kind": "teach",
@@ -22329,6 +22293,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "572698f6-f172-59d9-9c97-ae63482dfb45",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "53c198c8-3807-41b6-9ffd-07daa543f416",
+  "kind": "drill",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": "sentence_meaning",
+  "ordinal": 2,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "d9eba736-5a11-59e9-bc14-c6860f131859",
   "tip_id": null
  },
  {
@@ -22761,6 +22737,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "27e1fde8-8387-5f82-96b7-5dc7dd23c3cf",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "557b8b33-06ee-4c5a-8585-c02687801f47",
+  "kind": "drill",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": "sentence_gap",
+  "ordinal": 6,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "110f0586-acc5-55f8-96eb-a9b9ab9027e8",
   "tip_id": null
  },
  {
@@ -23688,18 +23676,6 @@
   "tip_id": null
  },
  {
-  "form_id": null,
-  "id": "59697bf4-66ff-451e-b643-324d869a2880",
-  "kind": "drill",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": "sentence_gap",
-  "ordinal": 3,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "2a2bd073-c4c8-512a-a257-f7023fd426ff",
-  "tip_id": null
- },
- {
   "form_id": "c1ce99a1-5cc7-59c8-ae5d-42e15358c31a",
   "id": "596f9c52-21a9-45c2-976d-c7ee7e91ef23",
   "kind": "teach",
@@ -24165,18 +24141,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "5acfd972-e12d-4f35-9ccf-79c7f304ff47",
-  "kind": "drill",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": "sentence_build",
-  "ordinal": 12,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "0f2b15fb-eee4-5542-b99a-fc1607016c24",
   "tip_id": null
  },
  {
@@ -24817,6 +24781,18 @@
  },
  {
   "form_id": null,
+  "id": "5d59b180-b4f9-4a05-a3db-4264c05fc9dc",
+  "kind": "drill",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": "sentence_meaning",
+  "ordinal": 6,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "0edd3163-e932-59cf-b745-a6553fb1d722",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "5d5e1725-1f69-4ceb-80ba-bed5d24cc439",
   "kind": "drill",
   "lesson_id": "8d3d3648-07ff-5b39-b0ee-10bcda84b086",
@@ -25077,6 +25053,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": null,
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "5e37dad1-15e8-432b-b22d-76bce6c0d5fb",
+  "kind": "drill",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": "sentence_build",
+  "ordinal": 11,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "110f0586-acc5-55f8-96eb-a9b9ab9027e8",
   "tip_id": null
  },
  {
@@ -26737,18 +26725,6 @@
  },
  {
   "form_id": null,
-  "id": "647228ba-4ff5-4165-ad2e-601b24f2e127",
-  "kind": "drill",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": "sentence_gap",
-  "ordinal": 4,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "bf387e0b-3a73-5b6e-826d-499aef7deca1",
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "6484c7f3-be06-45cf-8b5b-bca360ce0230",
   "kind": "drill",
   "lesson_id": "99d995d2-2c8f-533b-96f5-7fb94b2aba00",
@@ -26841,18 +26817,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "1dba7f6c-803b-5705-9306-62deaa5e2ef8",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "64f0f216-f4ea-4acc-ab4d-46c557539882",
-  "kind": "drill",
-  "lesson_id": "147e90a9-ce86-5c47-8a20-188f7e58f14f",
-  "mode": "sentence_build",
-  "ordinal": 3,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "a4b7aad8-10cf-5577-8861-bffa3b4ba85d",
   "tip_id": null
  },
  {
@@ -27018,6 +26982,18 @@
   "lesson_id": "ce7cd9bb-a60f-5e5a-abd1-7dde36b30844",
   "mode": null,
   "ordinal": 4,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
+  "form_id": "fed612ad-6baf-524e-889b-e32592132175",
+  "id": "65709da2-3c92-487d-b38d-5951b2db2e44",
+  "kind": "teach",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": null,
+  "ordinal": 7,
   "review_count": null,
   "scope": null,
   "sentence_id": null,
@@ -29269,18 +29245,6 @@
  },
  {
   "form_id": null,
-  "id": "6e436871-ec28-4a78-8a68-49017615b04d",
-  "kind": "drill",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": "sentence_gap",
-  "ordinal": 9,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "15829fbb-45dd-52db-9e2d-2e50dff9471e",
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "6e53e459-22e4-4db7-a7db-9903d2611265",
   "kind": "drill",
   "lesson_id": "6028c04e-3389-5d91-a1f2-1c3741bbe469",
@@ -29485,18 +29449,6 @@
  },
  {
   "form_id": null,
-  "id": "6f1e80de-599d-47da-a1b6-ff3570637dca",
-  "kind": "drill",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": "sentence_meaning",
-  "ordinal": 8,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "4f876708-1124-5bd5-8a0e-7211dd711ef5",
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "6f3e04cf-d28b-4d46-bbc6-0004b6477d7d",
   "kind": "review",
   "lesson_id": "a355d162-7ec3-582d-888c-52afbbcac09b",
@@ -29637,6 +29589,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": null,
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "6fc57987-47d7-4550-932a-3f55d9bb9ac7",
+  "kind": "drill",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": "sentence_meaning",
+  "ordinal": 5,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "cb66dba0-adb6-56f3-87fc-7469d797f80f",
   "tip_id": null
  },
  {
@@ -29805,18 +29769,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "7062fcc4-795d-4dfd-9ae5-cab6757eab8a",
-  "kind": "drill",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": "sentence_meaning",
-  "ordinal": 2,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "30ef4c7d-76ad-5099-9503-8cb1ea09b8fd",
   "tip_id": null
  },
  {
@@ -30061,6 +30013,18 @@
  },
  {
   "form_id": null,
+  "id": "71ad526c-6104-4c6a-8785-773ff77bc3c3",
+  "kind": "drill",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": "sentence_build",
+  "ordinal": 12,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "bcc46997-7118-5c1f-b00f-e83fa1f057aa",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "71c011d7-1d77-41bd-aa3c-7701707f47f8",
   "kind": "drill",
   "lesson_id": "b81e1b5c-0d25-53ba-b171-6be635e9b502",
@@ -30129,18 +30093,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "04bea076-cf96-50e1-ac4f-ad1e41b3d05f",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "721c7d52-a860-477d-9731-9c20f94dbc69",
-  "kind": "drill",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": "sentence_build",
-  "ordinal": 11,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "110f0586-acc5-55f8-96eb-a9b9ab9027e8",
   "tip_id": null
  },
  {
@@ -30601,6 +30553,18 @@
  },
  {
   "form_id": null,
+  "id": "741a0550-7854-4670-b507-661da33ff8e7",
+  "kind": "drill",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": "sentence_meaning",
+  "ordinal": 3,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "08ff8233-33be-5768-b149-005308514a1c",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "741fb748-8b93-4f60-a301-163ecc94dddc",
   "kind": "drill",
   "lesson_id": "d931471c-6dd6-573b-8c13-f2b6330073e5",
@@ -30697,6 +30661,18 @@
  },
  {
   "form_id": null,
+  "id": "747b18bc-8afc-4fe4-b31d-3cc11372b9db",
+  "kind": "drill",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": "sentence_build",
+  "ordinal": 12,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "de1f4800-196c-543e-9846-1fde45f91938",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "748a4d9d-fa5b-45e0-a08b-86ce3eb85a2e",
   "kind": "drill",
   "lesson_id": "00a99802-4694-5a31-8794-1f98b809f670",
@@ -30789,18 +30765,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "1966189f-5a4c-5ace-895f-d86976d0ee96",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "75012514-d1bd-433b-83c7-dfbb15fbd078",
-  "kind": "drill",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": "sentence_meaning",
-  "ordinal": 2,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "d9eba736-5a11-59e9-bc14-c6860f131859",
   "tip_id": null
  },
  {
@@ -30984,6 +30948,18 @@
   "tip_id": null
  },
  {
+  "form_id": "e6dfd5d8-6467-5d5a-87cf-888a9a2abb8c",
+  "id": "75bc8cbb-7b8c-4521-8dfa-51c3ca232f2c",
+  "kind": "teach",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": null,
+  "ordinal": 7,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
   "form_id": null,
   "id": "75bfdf32-e7d1-449c-8fe2-1fc9e5290997",
   "kind": "tip",
@@ -31017,6 +30993,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": null,
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "75e7afa1-9413-49ae-9d46-89c6824d8525",
+  "kind": "drill",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": "sentence_gap",
+  "ordinal": 3,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "2a2bd073-c4c8-512a-a257-f7023fd426ff",
   "tip_id": null
  },
  {
@@ -31920,6 +31908,18 @@
   "tip_id": null
  },
  {
+  "form_id": null,
+  "id": "7909fd61-4fb3-4eba-a6b8-1f1418e09e77",
+  "kind": "drill",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": "sentence_build",
+  "ordinal": 11,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "558b8bfc-1d6a-560a-9be0-6cf88da57873",
+  "tip_id": null
+ },
+ {
   "form_id": "630745ed-7e16-5a43-9895-a801d86382dc",
   "id": "790b9f83-84b0-4c91-be73-cc2f1532c78f",
   "kind": "teach",
@@ -32253,6 +32253,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "61cb796d-f5b2-5ead-821a-171d717c9a63",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "7a8e3cfa-b594-4b3f-bd6b-6e69339e924f",
+  "kind": "drill",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": "sentence_gap",
+  "ordinal": 10,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "860b0993-e35c-551b-9fb6-a2832a386a34",
   "tip_id": null
  },
  {
@@ -32904,18 +32916,6 @@
   "tip_id": null
  },
  {
-  "form_id": null,
-  "id": "7cbdb631-3789-48ca-8a93-87f5b4a922dd",
-  "kind": "drill",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": "sentence_gap",
-  "ordinal": 3,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "f3fa70fb-a4b3-5d37-98ee-ef4e50fd94eb",
-  "tip_id": null
- },
- {
   "form_id": "6d1af423-7b0b-5380-8075-ac90f85c6e9b",
   "id": "7ccf78c1-77e3-4e44-803a-11e457fb0cc6",
   "kind": "teach",
@@ -33093,6 +33093,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "16e86c05-04b8-56b6-bb94-42719154dcb4",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "7d5790f5-acad-40b2-8697-bfc4d1d80213",
+  "kind": "drill",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": "sentence_gap",
+  "ordinal": 6,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "558b8bfc-1d6a-560a-9be0-6cf88da57873",
   "tip_id": null
  },
  {
@@ -33573,6 +33585,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "0fca9f75-e9c0-5b94-9822-ebc3e9fe1cdb",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "7ee54ad8-b371-4a6d-85f8-52f0587e4e71",
+  "kind": "drill",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": "sentence_gap",
+  "ordinal": 9,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "e2c75c89-7c21-53f3-b301-eedf4b10b06a",
   "tip_id": null
  },
  {
@@ -34081,6 +34105,18 @@
  },
  {
   "form_id": null,
+  "id": "80fc9ce8-ad22-420e-bebe-7b3ebf2dc39c",
+  "kind": "tip",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": null,
+  "ordinal": 1,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": "6dba3657-5b5a-5fe4-b4f7-b617abe5cac5"
+ },
+ {
+  "form_id": null,
   "id": "8107f93b-926f-48cb-916b-db34adc2d4d4",
   "kind": "drill",
   "lesson_id": "e044c584-9592-5647-a34f-b6b3dfdd01e7",
@@ -34348,18 +34384,6 @@
   "id": "81cee716-b462-4911-b37e-beef8ef628dc",
   "kind": "teach",
   "lesson_id": "f107624d-fbe9-5a19-83ee-1a27fade75ed",
-  "mode": null,
-  "ordinal": 5,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": "e5b6285e-ae89-5f02-8788-5c223ba3e6e8",
-  "id": "81d0259f-0222-4327-b1b0-a9e70ddf4b13",
-  "kind": "teach",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
   "mode": null,
   "ordinal": 5,
   "review_count": null,
@@ -34897,18 +34921,6 @@
  },
  {
   "form_id": null,
-  "id": "83e288f7-e630-480a-8d34-b547457de13e",
-  "kind": "drill",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": "sentence_meaning",
-  "ordinal": 6,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "0edd3163-e932-59cf-b745-a6553fb1d722",
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "83f363bd-6069-4056-86f4-2064354db0e0",
   "kind": "drill",
   "lesson_id": "4bbf709b-9e41-5278-aa7d-dc53af792c4c",
@@ -35409,18 +35421,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "bd3d3edc-331c-5239-98e3-86377e7bb806",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "85c593e2-02be-4c71-b710-580c560c0106",
-  "kind": "drill",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": "sentence_meaning",
-  "ordinal": 6,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "a3cd02f5-cf0e-57b6-8ac9-be2c9f41af2d",
   "tip_id": null
  },
  {
@@ -36924,6 +36924,18 @@
   "tip_id": null
  },
  {
+  "form_id": "479d6ab0-1eac-590a-80d4-c12f1382775e",
+  "id": "8bbcc638-f5cd-4ddc-8a8e-f70dd9ecf4d6",
+  "kind": "teach",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": null,
+  "ordinal": 2,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
   "form_id": null,
   "id": "8bced5f2-964d-4abb-b61c-8f6774807e74",
   "kind": "drill",
@@ -37681,14 +37693,14 @@
  },
  {
   "form_id": null,
-  "id": "8e4206c2-c0f7-4ad8-bb9e-cc67e49e8f0c",
-  "kind": "drill",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": "sentence_meaning",
-  "ordinal": 5,
-  "review_count": null,
+  "id": "8e44c0ea-706b-4e2c-a364-ca42eb58b321",
+  "kind": "review",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": null,
+  "ordinal": 14,
+  "review_count": 2,
   "scope": null,
-  "sentence_id": "c3098281-9de6-5544-bc5c-d35c712cebc3",
+  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -38289,18 +38301,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "910d8b0e-eaca-4cc9-b5e3-2996b7fdd58e",
-  "kind": "drill",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": "sentence_gap",
-  "ordinal": 9,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "e2c75c89-7c21-53f3-b301-eedf4b10b06a",
   "tip_id": null
  },
  {
@@ -39081,18 +39081,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "98f56260-082a-5b2d-91b7-66bafde0bbf3",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "93b4c597-dc3d-4465-ad65-ba528229bb3a",
-  "kind": "review",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": null,
-  "ordinal": 14,
-  "review_count": 2,
-  "scope": null,
-  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -41592,6 +41580,18 @@
   "tip_id": "7fef5512-863f-5d20-a29e-02e373792bb2"
  },
  {
+  "form_id": null,
+  "id": "9ccbe9c3-0b4b-42cf-b910-ad312af51f73",
+  "kind": "drill",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": "sentence_gap",
+  "ordinal": 9,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "15829fbb-45dd-52db-9e2d-2e50dff9471e",
+  "tip_id": null
+ },
+ {
   "form_id": "0b978e0d-38e0-54cd-b780-ac7aa4cfdcb8",
   "id": "9cd21f2d-7bec-4507-8bd7-c8f05e98b674",
   "kind": "teach",
@@ -42781,6 +42781,18 @@
  },
  {
   "form_id": null,
+  "id": "a14fecfb-13ba-4439-93c3-4987263119b4",
+  "kind": "review",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": null,
+  "ordinal": 13,
+  "review_count": 2,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "a150256b-5289-421c-861b-63047c3620c0",
   "kind": "drill",
   "lesson_id": "0f852559-0e7f-534a-956f-1b78340a152c",
@@ -43437,6 +43449,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "f1b02d90-9ddb-583c-b46b-edf265df975c",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "a318e61a-5a52-465c-9906-4545f6000212",
+  "kind": "drill",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": "sentence_gap",
+  "ordinal": 3,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "f3fa70fb-a4b3-5d37-98ee-ef4e50fd94eb",
   "tip_id": null
  },
  {
@@ -45756,18 +45780,6 @@
   "tip_id": null
  },
  {
-  "form_id": null,
-  "id": "ab4baf31-0077-43d1-ac85-4cb275d2204a",
-  "kind": "drill",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": "sentence_build",
-  "ordinal": 12,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "de1f4800-196c-543e-9846-1fde45f91938",
-  "tip_id": null
- },
- {
   "form_id": "745ea94e-3578-5eef-a765-98eca5c36f46",
   "id": "ab5c075d-beba-4d60-8eb7-75a32a38a4bf",
   "kind": "teach",
@@ -45825,18 +45837,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "a085200f-39cf-5293-90e1-676f1b476359",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "ab9c620d-869d-410e-8292-f797a77ecc70",
-  "kind": "drill",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": "sentence_gap",
-  "ordinal": 6,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "558b8bfc-1d6a-560a-9be0-6cf88da57873",
   "tip_id": null
  },
  {
@@ -46789,6 +46789,18 @@
  },
  {
   "form_id": null,
+  "id": "ae735f7b-b9af-4001-9bd6-2bcc888bad38",
+  "kind": "drill",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": "sentence_build",
+  "ordinal": 12,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "0f2b15fb-eee4-5542-b99a-fc1607016c24",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "ae7b3bb5-b9ba-493c-996b-c6e8ff1cbaea",
   "kind": "drill",
   "lesson_id": "dc4feda6-4e3c-519c-a38d-808f39da0284",
@@ -47077,6 +47089,18 @@
  },
  {
   "form_id": null,
+  "id": "af7c7fc7-5398-4694-85e4-a60125b8b416",
+  "kind": "drill",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": "sentence_gap",
+  "ordinal": 7,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "0f2b15fb-eee4-5542-b99a-fc1607016c24",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "af820918-f751-4c3f-9795-65b2f4f41c36",
   "kind": "tip",
   "lesson_id": "c5ef7d1e-7984-51ed-abbb-07eebeef3e9f",
@@ -47278,18 +47302,6 @@
   "scope": null,
   "sentence_id": "e12d1976-31ab-5f59-ada7-c6763e513015",
   "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "b04b0cda-8330-456e-b27a-2ea6c60df8e9",
-  "kind": "tip",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": null,
-  "ordinal": 1,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": "6dba3657-5b5a-5fe4-b4f7-b617abe5cac5"
  },
  {
   "form_id": null,
@@ -47532,6 +47544,18 @@
   "tip_id": null
  },
  {
+  "form_id": "a974d264-c100-59c2-8e38-dbabc8115210",
+  "id": "b0fe0a4f-f55f-4084-b92c-9ffb9fd3b1b7",
+  "kind": "teach",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": null,
+  "ordinal": 5,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
   "form_id": null,
   "id": "b1173bd2-d76f-468c-aabf-c809d290bfc8",
   "kind": "drill",
@@ -47589,6 +47613,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "ed7d45f3-5283-5abf-b861-753c11b1e719",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "b12d2ca0-7955-4cc8-baa5-2257d53f11ea",
+  "kind": "drill",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": "sentence_build",
+  "ordinal": 10,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "2a2bd073-c4c8-512a-a257-f7023fd426ff",
   "tip_id": null
  },
  {
@@ -47877,18 +47913,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "d172bac2-b24f-5298-abd3-6ed6b58d670e",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "b24ba9da-5f48-47a2-bd75-bc3df7f75438",
-  "kind": "drill",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": "sentence_build",
-  "ordinal": 11,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "bf387e0b-3a73-5b6e-826d-499aef7deca1",
   "tip_id": null
  },
  {
@@ -48613,6 +48637,18 @@
  },
  {
   "form_id": null,
+  "id": "b55cc1b1-067c-4eea-bb2b-bc4a73a11a87",
+  "kind": "match",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": null,
+  "ordinal": 14,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "b5793979-f3f6-46b1-8ce9-03940577cc5c",
   "kind": "review",
   "lesson_id": "5973b32f-aeae-5b95-bf9c-c28cd854ac36",
@@ -48654,6 +48690,18 @@
   "lesson_id": "83668910-f4d1-51c4-b5df-7071cd91c258",
   "mode": null,
   "ordinal": 7,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
+  "form_id": "a03dba40-5be6-5175-9566-6897a9db5387",
+  "id": "b59a7073-f82f-4004-b233-4e002c7e4d31",
+  "kind": "teach",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": null,
+  "ordinal": 1,
   "review_count": null,
   "scope": null,
   "sentence_id": null,
@@ -49833,30 +49881,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "78253a2f-d111-5724-8e46-075c6829e32a",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "ba513e5c-9a68-4554-af4f-50e9fc4c46b0",
-  "kind": "drill",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": "sentence_meaning",
-  "ordinal": 9,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "2636f36b-a6e3-5982-8b1b-6aa26a15e511",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "ba51e395-d067-4844-9a9f-6b1adff3f01e",
-  "kind": "drill",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": "sentence_gap",
-  "ordinal": 10,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "9f57bf28-48d9-5503-a633-5179643b36b4",
   "tip_id": null
  },
  {
@@ -52272,18 +52296,6 @@
   "tip_id": null
  },
  {
-  "form_id": null,
-  "id": "c2681c55-0cc7-4295-ab64-f0260c4bac6e",
-  "kind": "recap",
-  "lesson_id": "147e90a9-ce86-5c47-8a20-188f7e58f14f",
-  "mode": null,
-  "ordinal": 1,
-  "review_count": 12,
-  "scope": "unit",
-  "sentence_id": null,
-  "tip_id": null
- },
- {
   "form_id": "608d8eba-2978-5c54-8b14-5a6cc3bbc9fb",
   "id": "c2758ac8-3a4e-4718-89ce-96af7d096ea1",
   "kind": "teach",
@@ -52765,6 +52777,18 @@
  },
  {
   "form_id": null,
+  "id": "c45d79a6-c88e-4de3-9922-41142e4edb95",
+  "kind": "drill",
+  "lesson_id": "147e90a9-ce86-5c47-8a20-188f7e58f14f",
+  "mode": "sentence_build",
+  "ordinal": 2,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "a5ff35f2-dfa7-58c1-8f4b-f431730d3516",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "c46ab752-3a03-4c31-a728-7fa0065e307b",
   "kind": "drill",
   "lesson_id": "71948571-23f6-5e0c-9958-958283692393",
@@ -52845,18 +52869,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "113e0f6d-f388-5ceb-85d7-505cd6e182bb",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "c4ddd249-5bb9-4b28-9e0f-0068856bfadd",
-  "kind": "drill",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": "sentence_build",
-  "ordinal": 11,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "b3b857d6-e46c-50f0-8df7-5dca78aefef1",
   "tip_id": null
  },
  {
@@ -53581,6 +53593,18 @@
  },
  {
   "form_id": null,
+  "id": "c7c74239-37ea-43b3-a12c-f3574c19fcc8",
+  "kind": "drill",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": "sentence_meaning",
+  "ordinal": 8,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "4f876708-1124-5bd5-8a0e-7211dd711ef5",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "c7c95393-c859-428a-b675-d77cfcbb09db",
   "kind": "drill",
   "lesson_id": "c770a175-bf15-5e18-b461-5cc4f2e7b3b6",
@@ -53805,6 +53829,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "be8555ff-9a89-514d-80b9-e97badd102c2",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "c88e4589-e70b-470a-b33d-8e34f62ffa51",
+  "kind": "drill",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": "sentence_gap",
+  "ordinal": 4,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "b3b857d6-e46c-50f0-8df7-5dca78aefef1",
   "tip_id": null
  },
  {
@@ -54469,18 +54505,6 @@
  },
  {
   "form_id": null,
-  "id": "cada61ac-1616-4dc4-80ab-59630dabdc51",
-  "kind": "drill",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": "sentence_build",
-  "ordinal": 10,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "2a2bd073-c4c8-512a-a257-f7023fd426ff",
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "cade24ab-46d7-4796-9350-e7b392d443d9",
   "kind": "recap",
   "lesson_id": "4bab1c10-1c5f-5905-af63-b977008635e2",
@@ -54498,18 +54522,6 @@
   "lesson_id": "98a692e5-ee4e-5443-ad27-af9902d91a44",
   "mode": null,
   "ordinal": 4,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": "fed612ad-6baf-524e-889b-e32592132175",
-  "id": "cae27d62-a64a-4342-9ea7-e72ed7916bd2",
-  "kind": "teach",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": null,
-  "ordinal": 7,
   "review_count": null,
   "scope": null,
   "sentence_id": null,
@@ -54985,18 +54997,6 @@
  },
  {
   "form_id": null,
-  "id": "cd5d35b5-cfc7-4a72-a0ee-f79530bce399",
-  "kind": "match",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": null,
-  "ordinal": 14,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "cd606eab-8437-4b55-83f4-c857490162a5",
   "kind": "match",
   "lesson_id": "25e02ebb-6954-5d1c-828a-b905d76287bc",
@@ -55092,18 +55092,6 @@
   "tip_id": null
  },
  {
-  "form_id": "ea755953-82bf-5023-bdf4-6cc763994567",
-  "id": "cdc72855-ee41-4c8a-a530-72f9e51df19f",
-  "kind": "teach",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": null,
-  "ordinal": 2,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
   "form_id": "8e0923c5-3a9c-58a4-8e79-8e745c2331d3",
   "id": "cdd3067a-fae5-4526-b993-1fdced20888c",
   "kind": "teach",
@@ -55185,18 +55173,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "caa3ed0c-f9c6-566a-bd44-5c336270b271",
-  "tip_id": null
- },
- {
-  "form_id": "8817401b-233f-545b-a836-560aed094fe6",
-  "id": "ce3c6c92-a9e0-4381-b1ca-2ea421105fd9",
-  "kind": "teach",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": null,
-  "ordinal": 8,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -56217,18 +56193,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "335a2be5-2434-5a73-a525-efdb6d5427dd",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "d24eaadf-4319-434d-ac00-532ad2bbc3ed",
-  "kind": "drill",
-  "lesson_id": "147e90a9-ce86-5c47-8a20-188f7e58f14f",
-  "mode": "sentence_build",
-  "ordinal": 2,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "a5ff35f2-dfa7-58c1-8f4b-f431730d3516",
   "tip_id": null
  },
  {
@@ -57577,6 +57541,18 @@
  },
  {
   "form_id": null,
+  "id": "d7f800e7-1e87-4184-8b19-5502a8a6869b",
+  "kind": "drill",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": "sentence_meaning",
+  "ordinal": 5,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "c3098281-9de6-5544-bc5c-d35c712cebc3",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "d8091aa4-71a8-460d-afff-aad0f42b41d1",
   "kind": "drill",
   "lesson_id": "058096a2-19c2-5547-a648-2528f1b311e2",
@@ -58081,18 +58057,6 @@
  },
  {
   "form_id": null,
-  "id": "d9f362b5-3f1e-4fdd-b912-2332ab7162fa",
-  "kind": "drill",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": "sentence_meaning",
-  "ordinal": 3,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "08ff8233-33be-5768-b149-005308514a1c",
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "d9fb8351-32a1-4b7f-87b8-cbc1c6dbf94d",
   "kind": "drill",
   "lesson_id": "a7dd8480-5763-54b2-adba-01e178023d57",
@@ -58549,6 +58513,18 @@
  },
  {
   "form_id": null,
+  "id": "dc87da35-6302-43c8-bc33-f0f3d087523f",
+  "kind": "drill",
+  "lesson_id": "147e90a9-ce86-5c47-8a20-188f7e58f14f",
+  "mode": "sentence_build",
+  "ordinal": 4,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "171b1428-dfb8-57eb-adc6-b9dcd3353bca",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "dc979f43-6a08-41e4-a2cb-1c92c53f40b5",
   "kind": "drill",
   "lesson_id": "b7597d74-ee62-528c-ada5-46551e782f65",
@@ -58681,6 +58657,18 @@
  },
  {
   "form_id": null,
+  "id": "dcfa817a-d765-40bb-a09e-0e07748ab25b",
+  "kind": "drill",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": "sentence_build",
+  "ordinal": 13,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "171b1428-dfb8-57eb-adc6-b9dcd3353bca",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "dd0d7881-9cd3-4c34-8ef5-ac2dcb5a28bb",
   "kind": "drill",
   "lesson_id": "9e1c1bab-bdb2-5c1f-90db-8de1eb6be436",
@@ -58773,18 +58761,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": null,
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "dd76a28e-2f8b-4fe7-bc5c-fe5c9518f86d",
-  "kind": "drill",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": "sentence_gap",
-  "ordinal": 4,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "b3b857d6-e46c-50f0-8df7-5dca78aefef1",
   "tip_id": null
  },
  {
@@ -59701,6 +59677,18 @@
  },
  {
   "form_id": null,
+  "id": "e0ce0494-abd1-4bb4-8cf2-7ab934a75257",
+  "kind": "drill",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": "sentence_meaning",
+  "ordinal": 8,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "2be0fb63-2e5a-55ab-b3c8-034f60278c60",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "e0db0584-47f7-4a43-a7df-64e250480351",
   "kind": "drill",
   "lesson_id": "3ee76fe5-5057-5ded-9b7a-ea63188e88d6",
@@ -60333,6 +60321,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "49878cf9-4cfe-54c0-9456-5c71418f91fd",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "e2ba471d-84fe-4769-b00b-0f469e85bf86",
+  "kind": "drill",
+  "lesson_id": "147e90a9-ce86-5c47-8a20-188f7e58f14f",
+  "mode": "sentence_build",
+  "ordinal": 3,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "a4b7aad8-10cf-5577-8861-bffa3b4ba85d",
   "tip_id": null
  },
  {
@@ -61741,6 +61741,18 @@
  },
  {
   "form_id": null,
+  "id": "e75584e5-9537-48c2-b883-0316ee1afc62",
+  "kind": "drill",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": "sentence_meaning",
+  "ordinal": 6,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "a3cd02f5-cf0e-57b6-8ac9-be2c9f41af2d",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "e767d0c3-e1d1-439e-b8d4-32369f2f4416",
   "kind": "drill",
   "lesson_id": "3db0e643-1b26-56ce-ab35-8a49c617ea48",
@@ -61785,6 +61797,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "714661be-c472-57e4-8f02-7755d6fda68d",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "e76f3f04-3129-40a7-a2fe-51eb25260308",
+  "kind": "drill",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": "sentence_build",
+  "ordinal": 11,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "b3b857d6-e46c-50f0-8df7-5dca78aefef1",
   "tip_id": null
  },
  {
@@ -62088,15 +62112,15 @@
   "tip_id": null
  },
  {
-  "form_id": null,
-  "id": "e8770fd1-0ad9-4606-ace4-5f9c9c5c9920",
-  "kind": "drill",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": "sentence_meaning",
-  "ordinal": 8,
+  "form_id": "976750b9-651d-588a-a81a-fa8fc5f3b60b",
+  "id": "e873937d-6fd4-4646-8188-80d3b33e11fa",
+  "kind": "teach",
+  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
+  "mode": null,
+  "ordinal": 4,
   "review_count": null,
   "scope": null,
-  "sentence_id": "2be0fb63-2e5a-55ab-b3c8-034f60278c60",
+  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -62181,18 +62205,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "9c815c18-3e7e-573a-b8f6-a1a493fd46fa",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "e8c049cb-cd76-43ed-811a-f9005c1e3fc4",
-  "kind": "drill",
-  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
-  "mode": "sentence_gap",
-  "ordinal": 10,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "860b0993-e35c-551b-9fb6-a2832a386a34",
   "tip_id": null
  },
  {
@@ -62665,6 +62677,18 @@
  },
  {
   "form_id": null,
+  "id": "ea9fe99e-ecb3-4ee3-bbe8-07b72a82fe89",
+  "kind": "drill",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": "sentence_build",
+  "ordinal": 13,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": "b633ec1e-5a1b-50fe-a257-954a72cb3663",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
   "id": "eaac8f9c-e189-4639-b374-0aa6ce689cd0",
   "kind": "drill",
   "lesson_id": "54c1bcb4-91a0-5a4c-9fdd-bfd8aff93382",
@@ -62805,6 +62829,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "c5edb2d3-1bab-598c-8b4d-e71bc8028db3",
+  "tip_id": null
+ },
+ {
+  "form_id": null,
+  "id": "eb51c3ea-4e0a-477d-a690-715dfc42e601",
+  "kind": "match",
+  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
+  "mode": null,
+  "ordinal": 15,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -62965,18 +63001,6 @@
  },
  {
   "form_id": null,
-  "id": "ebf20dbd-0b10-4e6b-817b-92ead059cac1",
-  "kind": "drill",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": "sentence_meaning",
-  "ordinal": 3,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "5513cd71-ba49-50f6-aaca-fb0ad1dbb799",
-  "tip_id": null
- },
- {
-  "form_id": null,
   "id": "ebfd0de3-f2f6-4aa2-8eb7-4e918386b236",
   "kind": "drill",
   "lesson_id": "68d2575d-3bf1-5034-950e-a501062b9663",
@@ -63009,18 +63033,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "e8e9fb77-6d4a-5dee-85d2-564ac44d0862",
-  "tip_id": null
- },
- {
-  "form_id": "64129437-b5aa-5622-b101-c317d9f610f0",
-  "id": "ec3b58e6-b98a-4509-bfbd-93b5fd4bf1ba",
-  "kind": "teach",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": null,
-  "ordinal": 1,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -64764,18 +64776,6 @@
   "tip_id": null
  },
  {
-  "form_id": "976750b9-651d-588a-a81a-fa8fc5f3b60b",
-  "id": "f337287b-dba8-40e1-a63f-de9be680e591",
-  "kind": "teach",
-  "lesson_id": "d32585d7-a30d-500d-bde4-adfbcfe34789",
-  "mode": null,
-  "ordinal": 4,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": null
- },
- {
   "form_id": null,
   "id": "f33a5cbc-5716-4bcd-8c21-02a25812c1b0",
   "kind": "drill",
@@ -65325,18 +65325,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "70a4f988-2293-55d0-9e18-554dd96b5b2b",
-  "tip_id": null
- },
- {
-  "form_id": "a03dba40-5be6-5175-9566-6897a9db5387",
-  "id": "f574a81b-0195-48df-88b6-b19b93c1e45a",
-  "kind": "teach",
-  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
-  "mode": null,
-  "ordinal": 1,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -66024,6 +66012,18 @@
   "tip_id": null
  },
  {
+  "form_id": "116522b6-a148-5b8c-bc86-4512d019a0de",
+  "id": "f7f95b1c-f9e9-4b88-912b-fb9327ab2c5d",
+  "kind": "teach",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": null,
+  "ordinal": 2,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
   "form_id": null,
   "id": "f7fb3645-33d1-40d0-8b97-de0c279a656a",
   "kind": "drill",
@@ -66477,6 +66477,18 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "f42cc38b-44ad-5e33-bc15-95095744b11e",
+  "tip_id": null
+ },
+ {
+  "form_id": "79fd484a-d703-5752-bf1b-24c30768bf33",
+  "id": "f958b6a0-f191-4877-b137-96ec639938b1",
+  "kind": "teach",
+  "lesson_id": "5cdeecfe-680a-515a-af75-30fab1229a10",
+  "mode": null,
+  "ordinal": 4,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
   "tip_id": null
  },
  {
@@ -67416,6 +67428,18 @@
   "tip_id": null
  },
  {
+  "form_id": "8817401b-233f-545b-a836-560aed094fe6",
+  "id": "fcb51fd2-c8bd-4230-b0e6-c7902ad4834f",
+  "kind": "teach",
+  "lesson_id": "52125c57-d497-566f-a5e1-b8b95baf830c",
+  "mode": null,
+  "ordinal": 8,
+  "review_count": null,
+  "scope": null,
+  "sentence_id": null,
+  "tip_id": null
+ },
+ {
   "form_id": null,
   "id": "fcc0b6cb-f612-4e68-9a92-e6dcae944078",
   "kind": "review",
@@ -67642,18 +67666,6 @@
   "scope": null,
   "sentence_id": "338fefca-3276-53c9-a108-429419c7f8ec",
   "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "fd91652a-8791-45fa-b1ee-bddcbb67225c",
-  "kind": "tip",
-  "lesson_id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
-  "mode": null,
-  "ordinal": 1,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": null,
-  "tip_id": "3e5b7344-8608-58cc-a353-cae39fa8aefc"
  },
  {
   "form_id": null,
@@ -67917,18 +67929,6 @@
   "review_count": null,
   "scope": null,
   "sentence_id": "97653940-e283-5567-8cd0-687aab42b92e",
-  "tip_id": null
- },
- {
-  "form_id": null,
-  "id": "fe87d53c-1848-449a-bf4d-552887c3d6e6",
-  "kind": "drill",
-  "lesson_id": "147e90a9-ce86-5c47-8a20-188f7e58f14f",
-  "mode": "sentence_build",
-  "ordinal": 4,
-  "review_count": null,
-  "scope": null,
-  "sentence_id": "7f48d440-17d5-5834-b457-0913e88965e4",
   "tip_id": null
  },
  {
