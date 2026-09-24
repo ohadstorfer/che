@@ -220,6 +220,27 @@ units:
       - lemma: "apenas"
         pos: "adv"
         en: "as soon as"
+      - lemma: "cuándo"
+        pos: "adv"
+        en: "when (asking)"
+      - lemma: "dar"
+        pos: "verb"
+        forms:
+          - form: "di"
+            en: "I gave"
+            f: "1sg.pret.ind.irregular"
+          - form: "diste"
+            en: "you gave"
+            f: "2sg.pret.ind.vos.irregular"
+          - form: "dio"
+            en: "gave (he/she gave)"
+            f: "3sg.pret.ind.irregular"
+      - lemma: "prestar"
+        pos: "verb"
+        forms:
+          - form: "presto"
+            en: "I lend"
+            f: "1sg.pres.ind"
 
   - ordinal: 4
     slug: "no-creo"
