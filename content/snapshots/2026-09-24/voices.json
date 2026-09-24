@@ -1,23 +1,23 @@
 [
  {
-  "accent": "rioplatense",
-  "gender": "female",
   "id": "malena",
-  "model": "eleven_multilingual_v2",
   "name": "Malena",
+  "gender": "female",
+  "accent": "rioplatense",
   "provider": "elevenlabs",
   "provider_id": "p7AwDmKvTdoHTBuueGvP",
+  "model": "eleven_multilingual_v2",
   "status": "published",
   "updated_at": "2026-09-18 08:03:38.822218+00"
  },
  {
-  "accent": "rioplatense",
-  "gender": "male",
   "id": "tomas",
-  "model": "eleven_multilingual_v2",
   "name": "Tomás",
+  "gender": "male",
+  "accent": "rioplatense",
   "provider": "elevenlabs",
   "provider_id": "QK4xDwo9ESPHA4JNUpX3",
+  "model": "eleven_multilingual_v2",
   "status": "published",
   "updated_at": "2026-09-18 08:03:38.822218+00"
  }
