@@ -306,7 +306,7 @@ units:
             en: "you ordered, you asked for"
             f: "2sg.pret.ind.vos"
           - form: "pidió"
-            en: "ordered (he/she ordered)"
+            en: "ordered, asked (he/she)"
             f: "3sg.pret.ind.irregular"
           - form: "pedir"
             f: "inf"
