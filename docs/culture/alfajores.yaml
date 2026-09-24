@@ -12,6 +12,7 @@ classes:
     pages:
       - type: info
         title: "The national snack"
+        word: { es: "alfajor", tag: "The national snack", en: "two cookies, one filling" }
         emoji: "🍪"
         body: "An **alfajor** is two soft cookies (**tapas**, literally 'lids') glued together with **dulce de leche**, usually dipped in chocolate. That's it. That's the whole religion. We eat them at the office, on the bus, after football, at 2am. If an Argentine offers you half their alfajor, that's basically friendship."
         fun_fact: "Industry estimates say Argentines eat around six million alfajores a day. Nobody has counted properly — we were busy eating."
@@ -95,6 +96,7 @@ classes:
     pages:
       - type: info
         title: "The kiosco"
+        word: { es: "kiosco", tag: "Corner shop", en: "candy, drinks and snacks" }
         emoji: "🏪"
         body: "Every block has one. A **kiosco** is a tiny shop — sometimes just a window — selling candy, drinks, cigarettes, phone credit and, above all, alfajores. Many stay open late; some never close (look for the **24 hs** sign). The bigger ones are **maxikioscos**. The person behind the counter is the **kiosquero**, and they know your order."
         fun_fact: "The **ventanita** kiosco is literally a window in someone's house. Knock, ask, pay, done."
@@ -109,7 +111,7 @@ classes:
       - type: info
         title: "The heavyweights"
         emoji: "🥊"
-        body: "**Havanna**: born in Mar del Plata in 1947, the fancy one you bring as a gift. **Jorgito** (1960): the working-class hero. **Guaymallén** (1945): cheap, humble, legendary — 'el alfajor de la familia'. **Fantoche**: famous for its triple. Then there's **Capitán del Espacio**, a cult classic; **Cachafaz**, premium and named after a tango dancer; and the big-company ones, **Terrabusi** and **Milka**."
+        body: "**Havanna**: born in Mar del Plata in 1947, the fancy one you bring as a gift. **Jorgito**: the working-class hero. **Guaymallén**: cheap, humble, legendary. **Fantoche**: famous for its triple. Then there's **Capitán del Espacio**, a cult classic; **Cachafaz**, premium and named after a tango dancer; and the big-company ones, **Terrabusi** and **Milka**."
 
       - type: true_false
         statement: "Havanna is from Mar del Plata, the beach city."
@@ -133,15 +135,15 @@ classes:
         prompt: "Match the brand to its reputation"
         pairs:
           - ["Havanna", "the fancy gift from Mar del Plata"]
-          - ["Guaymallén", "cheap, humble, 'de la familia'"]
+          - ["Guaymallén", "cheap, humble, legendary"]
           - ["Fantoche", "famous for the triple"]
           - ["Cachafaz", "premium, named after a tango dancer"]
 
       - type: info
         title: "The World Cup of alfajores"
         emoji: "🏆"
-        body: "Yes, it exists. The **Campeonato Mundial del Alfajor** started in Buenos Aires in 2022. Hundreds of alfajores, a blind tasting, a serious jury of pastry chefs. Most winners are small artisan makers, not the big brands. In 2026 the top prize went to El Rodeo, from Catamarca: fig filling, walnuts and a glaze with coconut."
-        fun_fact: "Argentina hosting a 'world' championship for its own snack and winning it every year is peak Argentina."
+        body: "Yes, it exists. The **Campeonato Mundial del Alfajor** started in Buenos Aires in 2022. Hundreds of alfajores, a blind tasting, a serious jury of pastry chefs. The winners are often small makers, not the big brands: a Catamarca brand, **El Rodeo**, has won gold there for its sugar-glazed alfajor."
+        fun_fact: "Argentina hosting a 'world' championship for its own snack is peak Argentina."
 
       - type: gap
         prompt: "At the kiosco, you want two alfajores. Ask for them."
@@ -178,6 +180,7 @@ classes:
     pages:
       - type: info
         title: "The brown gold"
+        word: { es: "dulce de leche", tag: "Brown gold", en: "milk caramel spread" }
         emoji: "🍯"
         body: "**Dulce de leche** is milk and sugar cooked slowly for hours until it turns thick, brown and caramel-y. We put it on toast, in cakes, in alfajores, on a spoon straight from the jar at midnight. It's not 'caramel'. Don't call it caramel. An Argentine will correct you, gently, for twenty minutes."
 
@@ -259,6 +262,7 @@ classes:
     pages:
       - type: info
         title: "What are facturas?"
+        word: { es: "facturas", tag: "From the bakery", en: "sweet pastries" }
         emoji: "🥐"
         body: "**Facturas** are the pastries you buy at the **panadería** (bakery), usually by the **docena** (dozen) in a paper bag. They're the official partner of mate. Afternoon at a friend's place? Someone shows up with a dozen facturas. It's the law. (Yes, 'factura' also means invoice. Context helps.)"
 
@@ -343,3 +347,83 @@ classes:
         en: "filled fried dough ball (lit. 'friar's ball')"
       - es: "surtido"
         en: "assorted"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "postres-caseros"
+    title: "¿Qué hay de postre?"
+    summary: "Flan, panqueques, arroz con leche and the rest of the abuela's menu"
+    pages:
+      - type: info
+        title: "The question after lunch"
+        emoji: "🍮"
+        body: "Sunday lunch is over, and someone asks the big one: **¿qué hay de postre?** (what's for dessert?). At home or at a **bodegón** (old-school neighborhood restaurant), the answers are the same homemade classics: **flan**, **budín de pan**, **panqueques**, **arroz con leche**. And almost every one of them can come **con dulce de leche**. Of course."
+
+      - type: info
+        title: "Flan mixto"
+        emoji: "🥄"
+        body: "**Flan** is egg custard with a caramel top. Here it rarely comes alone: you get it with a fat spoonful of dulce de leche, with **crema** (whipped cream), or with both, which is a flan **mixto**. On menus, **flan casero** means house-made, and it's the thing to order at a bodegón."
+
+      - type: choice
+        scenario: "At a bodegón, the mozo asks: \"¿El flan con crema, con dulce o mixto?\""
+        prompt: "What is \"mixto\"?"
+        options: ["With both cream and dulce de leche", "Half flan, half ice cream", "With caramel and chocolate"]
+        correct: 0
+        explain: "**Mixto** = both toppings. It's the correct answer. The mozo won't say it, but he's proud of you."
+
+      - type: info
+        title: "Panqueques and arroz con leche"
+        emoji: "🥞"
+        body: "**Panqueques** here are thin crêpes, rolled around dulce de leche. Some parrillas serve them **quemados**, with sugar burnt crunchy on top. **Arroz con leche** is rice pudding: rice slowly cooked in milk with sugar, lemon peel and cinnamon. Every kid knows the song that starts **\"Arroz con leche, me quiero casar…\"**"
+
+      - type: gap
+        prompt: "Finish the first line of the kids' song"
+        text: "Arroz con leche, me quiero ___."
+        options: ["casar", "comer", "quedar"]
+        correct: 0
+        translation: "Rice pudding, I want to get married."
+        explain: "It goes on: *con una señorita de San Nicolás*. A playground classic, sung in a circle."
+
+      - type: info
+        title: "Nothing gets wasted"
+        emoji: "🍞"
+        body: "**Budín de pan** is bread pudding made from yesterday's bread, milk, eggs and caramel: immigrant thrift turned into dessert. And the cheapest classic is the **postre vigilante**: a slice of cheese with **membrillo** (quince paste) or **batata** (sweet-potato paste). The story goes that it's named after the cops who ordered it at bodegones because it cost almost nothing. Also just **queso y dulce**."
+
+      - type: true_false
+        statement: "Budín de pan is made with fresh bread from that morning's panadería."
+        answer: false
+        explain: "The whole point is the leftover bread. Nobody throws bread away in an abuela's kitchen."
+
+      - type: match
+        prompt: "Match the dessert to what it is"
+        pairs:
+          - ["flan mixto", "custard with dulce de leche and cream"]
+          - ["postre vigilante", "cheese with quince or sweet-potato paste"]
+          - ["budín de pan", "pudding made from leftover bread"]
+          - ["arroz con leche", "rice cooked in milk with cinnamon"]
+
+      - type: choice
+        scenario: "You're full after a huge lunch, but the abuela brings out a tray of homemade flan."
+        prompt: "What's the smart move?"
+        options: ["Say you're on a diet", "Have at least a little piece", "Take one home for later, untouched"]
+        correct: 1
+        explain: "Turning down the abuela's flan is a small tragedy. **Un poquito nomás** (just a little bit) keeps everyone happy."
+
+    vocabulary:
+      - es: "postre"
+        en: "dessert"
+        example: { es: "¿Qué hay de postre?", en: "What's for dessert?" }
+      - es: "flan"
+        en: "egg custard with caramel"
+      - es: "mixto"
+        en: "with both (cream and dulce de leche)"
+      - es: "crema"
+        en: "whipped cream"
+      - es: "casero"
+        en: "homemade"
+        example: { es: "¿El flan es casero?", en: "Is the flan homemade?" }
+      - es: "panqueque"
+        en: "thin crêpe"
+      - es: "queso y dulce"
+        en: "cheese with fruit paste (postre vigilante)"
+      - es: "un poquito nomás"
+        en: "just a little bit"

@@ -1,0 +1,445 @@
+section:
+  slug: "habla"
+  title: "Cómo hablamos"
+  emoji: "🗣️"
+  summary: "Vos, the \"sh\" sound, lunfardo and a lot of hands"
+
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "vos-sos-vos"
+    title: "Vos, not tú"
+    summary: "The little pronoun that makes you sound Argentine"
+    pages:
+      - type: info
+        title: "Goodbye, tú"
+        emoji: "👉"
+        body: "Your textbook taught you **tú**. Forget it here. In Argentina, \"you\" (informal) is **vos**: **vos sos** (you are), **vos tenés** (you have), **¿vos querés?** (do you want?). Say *tú tienes* in Buenos Aires and people will understand you perfectly, and instantly clock you as someone who learned Spanish from a book, or from Netflix."
+        fun_fact: "Uruguay and Paraguay use vos too, and so do parts of Central America."
+
+      - type: info
+        title: "Just move the stress"
+        emoji: "🎯"
+        body: "Good news: most vos forms are easy. In the present, take the infinitive, drop the **-r**, add **-s** and stress the end: **hablar → hablás**, **tener → tenés**, **venir → venís**. Commands are even shorter, just drop the **-r**: **¡vení!** (come!), **¡mirá!** (look!), **¡decime!** (tell me!). The one weird one: **ser → vos sos**."
+
+      - type: match
+        prompt: "Match the tú form to its vos twin"
+        pairs:
+          - ["tú eres", "vos sos"]
+          - ["tú tienes", "vos tenés"]
+          - ["tú quieres", "vos querés"]
+          - ["ven", "vení"]
+          - ["dime", "decime"]
+        explain: "Notice the vos forms never change the vowel inside: no *tienes*, no *quieres*. That's why kids here pick up verbs so fast."
+
+      - type: info
+        title: "Why vos survived here"
+        emoji: "🗺️"
+        body: "Vos is old Spanish. In colonial times, **tú** took over in the rich centers, **Lima** and **Mexico City**, where viceroys and their courts kept up with Madrid's fashions. The Río de la Plata was a far-off, poor corner of the empire. Nobody bothered to update our pronoun, so vos just stayed. Being the backwater has its perks."
+
+      - type: true_false
+        statement: "Argentine schools have always taught kids to use vos."
+        answer: false
+        explain: "For a long time schools taught **tú**, even though nobody spoke it at home. In **1982** the Academia Argentina de Letras accepted vos as correct, educated Spanish, and classrooms slowly switched."
+
+      - type: info
+        title: "No vosotros, and usted on standby"
+        emoji: "👥"
+        body: "Plural \"you\" is always **ustedes**. **Vosotros** is for Spain; here it only lives in the national anthem and old prayers. And **usted**? It's for respect and distance: an elderly neighbor, a doctor, a formal email. Still, people here drop into vos fast. A waiter your age will most likely vos you from the first word."
+
+      - type: choice
+        scenario: "You're at a kiosco. The guy behind the counter is about your age. You want to ask if he has change."
+        prompt: "What sounds most natural?"
+        options: ["¿Tú tienes cambio?", "¿Tenés cambio?", "¿Vosotros tenéis cambio?", "¿Tienes cambio, señor?"]
+        correct: 1
+        explain: "**¿Tenés cambio?** Short, vos, done. Also notice you don't even need to say *vos*: the **-és** ending already tells everyone who you mean."
+
+      - type: gap
+        prompt: "Your friend is late and texts you. What do you answer?"
+        text: "Dale, ___ tranqui, te espero."
+        options: ["vení", "ven", "venid"]
+        correct: 0
+        translation: "Sure, come whenever, no rush, I'll wait for you."
+        explain: "**Vení** is the vos command. *Ven* is tú, *venid* is vosotros: both sound foreign here."
+
+      - type: choice
+        scenario: "You're visiting your friend's grandmother, 85, for the first time. She offers you tea."
+        prompt: "How do you ask her if she wants help in the kitchen?"
+        options: ["¿Querés que te ayude?", "¿Quiere que la ayude?", "¿Queréis que os ayude?"]
+        correct: 1
+        explain: "With an older person you've just met, **usted** is a safe bet: **¿Quiere que la ayude?** If she says \"¡Tratame de vos, querido!\", relax and switch."
+
+    vocabulary:
+      - es: "vos"
+        en: "you (informal)"
+        example: { es: "¿Y vos qué hacés?", en: "And what are you up to?" }
+      - es: "sos"
+        en: "you are (vos)"
+        example: { es: "¿De dónde sos?", en: "Where are you from?" }
+      - es: "tenés"
+        en: "you have (vos)"
+      - es: "querés"
+        en: "you want (vos)"
+        example: { es: "¿Querés un café?", en: "Do you want a coffee?" }
+      - es: "vení"
+        en: "come! (vos command)"
+      - es: "decime"
+        en: "tell me (vos command)"
+        example: { es: "Decime la verdad.", en: "Tell me the truth." }
+      - es: "ustedes"
+        en: "you (plural)"
+        note: "Argentina never uses vosotros."
+      - es: "usted"
+        en: "you (formal)"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "sho-y-che"
+    title: "Sho, che and the melody"
+    summary: "The sound, the word and the tune that give a porteño away"
+    pages:
+      - type: info
+        title: "Sho me shamo"
+        word: { es: "sho me shamo", tag: "Say it like a porteño", en: "yo me llamo" }
+        emoji: "🔊"
+        body: "The quickest way to spot a porteño: **y** and **ll** sound like English **\"sh\"**. **Yo** is \"sho\". **Calle** (street) is \"cashe\". **Pollo** (chicken) is \"posho\". **Me llamo** is \"me shamo\". Linguists call it **yeísmo rehilado**, the rest of the Spanish-speaking world calls it \"the Argentine thing\", and it's also heard across the river in Montevideo."
+
+      - type: info
+        title: "Grandma says zh, you say sh"
+        emoji: "👵"
+        body: "It used to be softer: a buzzing **zh**, like the *s* in *measure*. Over the second half of the 20th century, younger porteños pushed it to a crisp **sh**, like *shoe*. Studies show young people, and especially women, lead the change. So a grandma in Palermo might say \"zho\" and her granddaughter \"sho\". Both are 100% porteño."
+
+      - type: true_false
+        statement: "All Argentines pronounce \"yo\" as \"sho\"."
+        answer: false
+        explain: "It's the Buenos Aires region's trademark, and it spreads. But in the northeast, in places like **Corrientes** or **Misiones**, you'll often hear a softer *y*, and some people even say **ll** and **y** differently. Argentina is big."
+
+      - type: gap
+        prompt: "Which word here would a porteño say with a \"sh\" sound?"
+        text: "Nos vemos en la ___ Corrientes."
+        options: ["calle", "casa", "plaza"]
+        correct: 0
+        translation: "See you on Corrientes street."
+        explain: "**Calle** → \"cashe\". The double **ll** is the giveaway. *Casa* and *plaza* have no y or ll, so no sh."
+
+      - type: info
+        title: "Che!"
+        word: { es: "che", tag: "Argentina's word", en: "hey, dude" }
+        emoji: "👋"
+        body: "**Che** is how you get someone's attention: \"hey\", \"dude\", \"listen\". **Che, ¿me pasás la sal?** **Che, ¿viste lo que pasó?** It's so typical of us that Ernesto Guevara's Cuban comrades nicknamed him **Che** because he said it all the time. Its best-known partner is **boludo** (\"dude\", or \"idiot\"), but that one has its own section."
+
+      - type: info
+        title: "Where does che come from?"
+        emoji: "🤷"
+        body: "Nobody knows for sure, and people love arguing about it. One theory: **Guaraní**, where *che* means \"I\" or \"my\". Another: **Mapudungun** (the Mapuche language), where *che* means \"people\". A third: the **Valencian** interjection for \"hey\". Every theory has fans and holes. Pick your favorite and defend it over a mate."
+
+      - type: choice
+        prompt: "Which of these is a real theory about where \"che\" comes from?"
+        options: ["From Guaraní, where it means \"I\" or \"my\"", "From English \"chap\"", "It's short for \"chévere\"", "From the Italian \"ciao\""]
+        correct: 0
+        explain: "Guaraní is one of the favorites, along with Mapudungun and Valencian. \"Ciao\" gave us another word, though: **chau**, the everyday goodbye."
+
+      - type: info
+        title: "Spanish with an Italian tune"
+        emoji: "🇮🇹"
+        body: "Foreigners often say porteños sound Italian. There's science behind it: CONICET researcher **Jorge Gurlekian** and **Laura Colantoni** (University of Toronto) compared Buenos Aires intonation with other languages and found it's closer to **Neapolitan** Italian than to anything else. The melody likely came with the huge wave of Italian immigrants around 1900. Before that, the city probably sounded more like Spain."
+
+      - type: true_false
+        statement: "The Italian-sounding melody of Buenos Aires Spanish has been there since colonial times."
+        answer: false
+        explain: "It's relatively recent. Researchers link it to the early 20th century, when Italians poured into the city. Their accents faded, but the tune stuck."
+
+      - type: choice
+        scenario: "You're walking with a friend and see an old classmate across the avenue."
+        prompt: "What's the most porteño way to call him?"
+        options: ["¡Oye, Martín!", "¡Che, Martín!", "¡Oiga, Martín!"]
+        correct: 1
+        explain: "**¡Che!** *Oye* sounds Spanish or Caribbean, and *oiga* is for a stranger you're about to complain to."
+
+    vocabulary:
+      - es: "che"
+        en: "hey, dude (to get attention)"
+        example: { es: "Che, ¿tenés hora?", en: "Hey, do you have the time?" }
+      - es: "chau"
+        en: "bye"
+        note: "From the Italian ciao."
+      - es: "calle"
+        en: "street"
+        note: "Said \"cashe\" in Buenos Aires."
+      - es: "me llamo…"
+        en: "my name is…"
+        example: { es: "Me llamo Sofía, ¿y vos?", en: "I'm Sofía, and you?" }
+      - es: "pollo"
+        en: "chicken"
+      - es: "lluvia"
+        en: "rain"
+      - es: "¿viste?"
+        en: "you know?, right? (filler)"
+        example: { es: "Hacía un frío, ¿viste?", en: "It was so cold, you know?" }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "lunfardo"
+    title: "Lunfardo"
+    summary: "The street slang born in the conventillos"
+    pages:
+      - type: info
+        title: "A language made of immigrants"
+        emoji: "🚢"
+        body: "Around 1900, Buenos Aires was packed with newcomers, mostly Italians and Spaniards, living side by side in **conventillos** (tenements). Out of that mix came **lunfardo**: a street vocabulary built from Italian dialects, Spanish slang, Portuguese and whatever else was lying around. The name itself probably comes from **lombardo**, someone from Lombardy, which back then had become slang for \"thief\"."
+
+      - type: info
+        title: "Police first, poets later"
+        emoji: "🕵️"
+        body: "The first people who wrote lunfardo down, in the late 1800s, were **police officers and journalists**, convinced it was the secret code of thieves. Turned out half the city talked like that. Then **tango** took it to the radio: **Mi noche triste** (1917), sung by Carlos Gardel, is considered the first tango-canción, a tango that tells a story, and its lyrics are packed with lunfardo. After that, there was no stopping it."
+
+      - type: info
+        title: "The starter pack"
+        emoji: "🎒"
+        body: "Words you'll hear today: **guita** (money), **mango** (a peso: *no tengo un mango* = I'm broke), **pibe** / **piba** (kid, guy, girl), **mina** (woman, a bit macho), **bondi** (bus), **laburo** (job, from Italian *lavoro*), **morfar** (to eat), **fiaca** (laziness). Pibe probably comes from Genoese *pivetto*, little boy."
+
+      - type: match
+        prompt: "Match the lunfardo to its meaning"
+        pairs:
+          - ["guita", "money"]
+          - ["bondi", "city bus"]
+          - ["pibe", "kid, young guy"]
+          - ["morfar", "to eat"]
+          - ["fiaca", "laziness"]
+
+      - type: info
+        title: "Bondi: a word that took the tram"
+        emoji: "🚌"
+        body: "In Brazil, trams are called **bonde**, from English **bond**. The story goes that early tram tickets were sold as \"bonds\". The word traveled south, and in Buenos Aires the tram became the **bondi**. When trams disappeared, the name jumped onto the **colectivo** (city bus). So every time you say \"me tomo el bondi\", you're quoting an English word by way of Brazilian Portuguese."
+
+      - type: choice
+        scenario: "A friend texts: \"Estoy sin un mango, ¿morfamos en casa?\""
+        prompt: "What's going on?"
+        options: ["They want mango for dinner", "They're broke and suggest eating at home", "They lost their phone and want to meet at home", "They're on a diet"]
+        correct: 1
+        explain: "**Sin un mango** = without a peso. **Morfar** = to eat. Bring a bottle of wine and you're the hero."
+
+      - type: info
+        title: "The art of chamuyo"
+        emoji: "💬"
+        body: "**Chamuyo** is smooth talk: half truth, half invention, all charm. It comes from the Caló (Spanish Romani) *chamullar*, to talk. You **chamuyás** a date, a cop or your boss. Someone who does it too well is a **chamuyero**. And if someone's story sounds too good, just say **eso es puro chamuyo**: that's pure baloney."
+
+      - type: gap
+        prompt: "Your friend claims he almost got signed by Boca. What do you say?"
+        text: "Dale, eso es puro ___."
+        options: ["chamuyo", "laburo", "bondi"]
+        correct: 0
+        translation: "Come on, that's pure baloney."
+        explain: "**Chamuyo** = sweet-talking nonsense. The other two would just mean \"pure work\" or \"pure bus\"."
+
+      - type: order
+        prompt: "Put lunfardo's life story in order"
+        items:
+          - "\"Mi noche triste\", the first tango-canción, full of lunfardo (1917)"
+          - "José Gobello publishes \"Lunfardía\", a key study (1953)"
+          - "The Academia Porteña del Lunfardo is founded (1962)"
+          - "Buenos Aires starts celebrating the Día del Lunfardo on September 5 (2000)"
+        explain: "The date of the Día del Lunfardo honors Gobello's book. Yes, slang has its own academy here, and its members take it very seriously."
+
+      - type: true_false
+        statement: "Lunfardo is an old tango thing that nobody really uses anymore."
+        answer: false
+        explain: "Some words aged (nobody says **percanta** for woman anymore), but **guita**, **laburo**, **pibe** and **bondi** are everyday Spanish here, from kids to newsreaders."
+
+    vocabulary:
+      - es: "guita"
+        en: "money"
+        example: { es: "No me alcanza la guita.", en: "I don't have enough money." }
+      - es: "mango"
+        en: "a peso, a buck"
+        example: { es: "No tengo un mango.", en: "I'm broke." }
+      - es: "pibe"
+        en: "kid, young guy"
+        note: "Piba for a girl. Used for adults too."
+      - es: "mina"
+        en: "woman, girl"
+        note: "Very casual, can sound a bit macho."
+      - es: "bondi"
+        en: "city bus"
+        example: { es: "Me tomo el bondi.", en: "I'm taking the bus." }
+      - es: "chamuyo"
+        en: "smooth talk, baloney"
+      - es: "chamuyar"
+        en: "to sweet-talk, to flirt"
+        example: { es: "La estaba chamuyando toda la noche.", en: "He was chatting her up all night." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "vesre-re-posta"
+    title: "Vesre, re and posta"
+    summary: "Words backwards, words turned up, and the truth"
+    pages:
+      - type: info
+        title: "Al vesre"
+        emoji: "🔁"
+        body: "Porteños like to flip words around. Swap the syllables of **revés** (backwards) and you get **vesre**: the name of the game is itself vesre. **Café** becomes **feca**, **mujer** becomes **jermu**, **tango** becomes **gotán**. It's playful, it's a bit of a wink, and it came up along with lunfardo on the streets and in tango lyrics."
+
+      - type: match
+        prompt: "Flip them back: match the vesre to the original"
+        pairs:
+          - ["feca", "café"]
+          - ["jermu", "mujer"]
+          - ["gotán", "tango"]
+          - ["telo", "hotel"]
+          - ["garpar", "pagar"]
+        explain: "Some are old-fashioned now (**gotán**, **jermu**), but **garpar** (to pay) and **telo** are used every day."
+
+      - type: info
+        title: "Careful with telo"
+        emoji: "🏩"
+        body: "A **telo** is not just any hotel. It's a **hotel alojamiento**: rooms by the hour, discreet entrance, for couples who want privacy. With so many people living with their parents into their twenties, telos are a normal, even cheerful, part of city life. For your holiday hotel, just say **hotel**."
+
+      - type: choice
+        scenario: "At a party you tell a new friend: \"Me estoy quedando en un telo re lindo en Palermo.\" Everyone bursts out laughing."
+        prompt: "Why?"
+        options: ["Palermo is a boring neighborhood", "You just said you're living in a love hotel", "\"Telo\" means hostel for backpackers", "You pronounced \"re\" wrong"]
+        correct: 1
+        explain: "**Telo** = love hotel, rented by the hour. For your stay, say **hotel**, or **hostel** if you're a backpacker. Great story for the rest of the night, though."
+
+      - type: info
+        title: "Re: the volume knob"
+        emoji: "🎚️"
+        body: "Want to say \"very\"? Stick **re** in front: **re lindo** (really nice), **re lejos** (super far), **re bien**. Need more? **Recontra**: **recontra cansado**, dead tired. It even works alone as an answer: **—¿Te gustó? —¡Re!** (Did you like it? Totally!) Once you start, you'll never say *muy* again."
+
+      - type: gap
+        prompt: "Your friend asks how the concert was. It was amazing."
+        text: "¡Estuvo ___ bueno!"
+        options: ["re", "tan", "mucho"]
+        correct: 0
+        translation: "It was really good!"
+        explain: "**Re bueno** is the natural way. *Mucho bueno* is just wrong, and *tan bueno* usually sets up more: *tan bueno que…*"
+
+      - type: info
+        title: "Posta"
+        emoji: "✅"
+        body: "**Posta** means \"for real\". **¿Posta?** = Really? Seriously? **Te lo digo posta** = I'm telling you straight. **La posta** is the real info, the inside story. The word comes from Italian."
+
+      - type: true_false
+        statement: "If a friend answers your news with \"¿Posta?\", they're asking if it's true or just joking."
+        answer: true
+        explain: "**¿Posta?** = Seriously? It's the Argentine *¿en serio?*, usually with raised eyebrows."
+
+      - type: order
+        prompt: "From calm to over-the-top: order these"
+        items:
+          - "Es lindo."
+          - "Es muy lindo."
+          - "Es re lindo."
+          - "Es recontra lindo."
+        explain: "**Muy** is fine, **re** is how people actually talk, and **recontra** is for when you really, really mean it."
+
+    vocabulary:
+      - es: "vesre"
+        en: "slang that reverses syllables"
+      - es: "feca"
+        en: "coffee (vesre)"
+        example: { es: "¿Vamos a tomar un feca?", en: "Shall we grab a coffee?" }
+        note: "Playful. Café is still the normal word."
+      - es: "garpar"
+        en: "to pay (vesre)"
+        example: { es: "¿Quién garpa?", en: "Who's paying?" }
+      - es: "telo"
+        en: "love hotel"
+      - es: "re"
+        en: "very, really"
+        example: { es: "Está re lejos.", en: "It's really far." }
+      - es: "recontra"
+        en: "super, extremely"
+      - es: "posta"
+        en: "for real, seriously"
+        example: { es: "¿Posta que te vas?", en: "Are you really leaving?" }
+      - es: "la posta"
+        en: "the real deal, the inside info"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "manos-y-chat"
+    title: "Hands and texts"
+    summary: "Gestures you'll see and shortcuts you'll read"
+    pages:
+      - type: info
+        title: "Talking with your hands"
+        emoji: "🙌"
+        body: "Porteños don't just speak, they perform. Hands go up, fingers pinch, wrists shake. Part of it is the Italian heritage, part of it is plain passion. Watch two friends arguing about football from across the street: you'll get the gist without hearing a word. Learn a few gestures and you'll understand half the conversation before your Spanish catches up."
+
+      - type: info
+        title: "The montoncito"
+        emoji: "🤌"
+        body: "Fingertips pinched together pointing up, wrist bobbing up and down: that's the **montoncito** (little pile). It means **¿qué te pasa?** or **¿qué querés?**, \"what's your problem?\", from friendly to threatening depending on the face. Now keep the wrist still and open and close the fingers: that one means someone's scared (**tiene miedo**)."
+        fun_fact: "In 2020 the gesture got its own emoji: 🤌, officially \"pinched fingers\"."
+
+      - type: choice
+        scenario: "Someone cuts in front of you in the bondi line. The lady behind you looks at him, fingers pinched, shaking her wrist."
+        prompt: "What is she telling him?"
+        options: ["\"The food here is delicious\"", "\"What do you think you're doing?\"", "\"Wait a second\"", "\"There were a lot of people\""]
+        correct: 1
+        explain: "The bobbing **montoncito** = **¿qué te pasa?** Here, pure indignation. He'll probably move."
+
+      - type: info
+        title: "Three more to know"
+        emoji: "✋"
+        body: "Open hand, palm down, rocking side to side: **más o menos**, so-so. Back of your fingers brushed forward under your chin: **ni idea**, no clue. Index finger pulling down your lower eyelid: **ojo**, careful, keep an eye out. Throw in a shrug and you can survive a whole conversation."
+
+      - type: match
+        prompt: "Match the gesture to what it means"
+        pairs:
+          - ["Pinched fingers, wrist bobbing", "¿Qué te pasa?"]
+          - ["Flat hand rocking side to side", "Más o menos"]
+          - ["Back of fingers flicked under the chin", "Ni idea"]
+          - ["Finger pulling down the lower eyelid", "Ojo"]
+
+      - type: info
+        title: "The group chat"
+        emoji: "📱"
+        body: "In a WhatsApp group you'll see: **q onda** (what's up, from **¿qué onda?**), **bue** (well, OK… with a sigh), **ntp** (**no te preocupes**, don't worry), **tqm** (**te quiero mucho**, love you), **xq** (**porque**, because), **dsp** (**después**, later). And a strict rule: nobody writes a full sentence when three letters will do."
+
+      - type: match
+        prompt: "Decode the texts"
+        pairs:
+          - ["q onda", "what's up"]
+          - ["ntp", "don't worry"]
+          - ["tqm", "love you"]
+          - ["xq", "because"]
+          - ["dsp", "later"]
+
+      - type: info
+        title: "Ni ahí and nada que ver"
+        emoji: "🙅"
+        body: "Two phrases that do a lot of work. **Ni ahí** = not at all, no way: **¿Te gusta el reggaetón? —Ni ahí.** **Nada que ver** = that's got nothing to do with it, or totally off: **¿Estás enojado? —No, nada que ver.** Say them with a little eye roll and you'll sound like you grew up in Caballito."
+
+      - type: gap
+        prompt: "A friend asks if you're mad that she canceled. You're really not."
+        text: "No, ___ que ver, tranqui."
+        options: ["nada", "ni", "bue"]
+        correct: 0
+        translation: "No, not at all, don't worry."
+        explain: "**Nada que ver** = not at all, that's not it. Add **tranqui** (relax) and she'll believe you."
+
+      - type: choice
+        scenario: "You suggest going for a run at 7 a.m. on Sunday. Your friend replies: \"bue\"."
+        prompt: "How excited are they?"
+        options: ["Thrilled, can't wait", "Going along with it, not happy about it", "They didn't see your message", "They're saying no"]
+        correct: 1
+        explain: "**Bue** is **bueno** with a sigh: fine, whatever, if we must. Expect them to show up late."
+
+    vocabulary:
+      - es: "¿qué te pasa?"
+        en: "what's wrong with you?, what's your problem?"
+      - es: "más o menos"
+        en: "so-so"
+      - es: "ni idea"
+        en: "no clue"
+      - es: "¡ojo!"
+        en: "careful!, watch out!"
+        example: { es: "Ojo con el celular en el subte.", en: "Watch your phone on the subway." }
+      - es: "¿qué onda?"
+        en: "what's up?"
+        example: { es: "¿Qué onda, todo bien?", en: "What's up, all good?" }
+      - es: "bue"
+        en: "well, OK… (resigned)"
+      - es: "no te preocupes"
+        en: "don't worry"
+      - es: "ni ahí"
+        en: "not at all, no way"
+      - es: "nada que ver"
+        en: "not at all, that's got nothing to do with it"

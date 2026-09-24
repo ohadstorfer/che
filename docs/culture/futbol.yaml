@@ -106,6 +106,7 @@ classes:
     pages:
       - type: info
         title: "Hincha, not fan"
+        word: { es: "hincha", tag: "Not \"fan\"", en: "fan, supporter" }
         emoji: "📣"
         body: "A fan is a **hincha**, and all the fans together are **la hinchada**. The story goes that the word comes from a man in Montevideo who inflated (**hinchar**) the balls and shouted so hard he became famous. Whatever the origin: a hincha doesn't *watch* a match. A hincha *plays* it from the stands."
         fun_fact: "**Hinchar** also means to annoy. \"No me hinchés\" = \"Stop bugging me.\""
@@ -136,7 +137,7 @@ classes:
       - type: info
         title: "The dark side: barras bravas"
         emoji: "⚠️"
-        body: "Every big club has a **barra brava** (or just **la barra**): the organized hardcore group that leads the chants and carries the drums. Many are also tangled up in violence and shady business — resale, parking, politics. After years of deaths, visiting fans were banned from most matches in 2013. Pilot tests to bring them back only began in 2025."
+        body: "Every big club has a **barra brava** (or just **la barra**): the organized hardcore group that leads the chants and carries the drums. Many are also tangled up in violence and shady business — resale, parking, politics. After years of deaths, visiting fans were banned in 2013. Talk of bringing them back comes up again and again, but at most league games you'll still see only one hinchada."
 
       - type: choice
         scenario: "At the stadium, a guy from the barra walks past and tells your section to stand up and sing."
@@ -218,7 +219,7 @@ classes:
         items:
           - "The first half ends 0–0"
           - "Maradona scores with his hand"
-          - "Maradona dribbles past five players and the keeper"
+          - "Maradona dribbles past four players and the keeper"
           - "England pulls one back"
           - "Argentina wins 2–1"
         explain: "The Hand of God and the Goal of the Century were only four minutes apart. Gary Lineker scored England's goal near the end."
@@ -357,6 +358,7 @@ classes:
     pages:
       - type: info
         title: "Potrero and picado"
+        word: { es: "potrero", tag: "Where it starts", en: "dirt lot for pickup games" }
         emoji: "🌱"
         body: "Argentines say their football was born in the **potrero** — a dirt lot where kids play with a ball, a couple of stones as goalposts and zero rules. A casual game with friends is a **picado**. \"¿Armamos un picado?\" = *Shall we get a game together?* Today it's usually **fútbol 5** on synthetic grass, then beers."
         fun_fact: "Calling a player \"**de potrero**\" is a big compliment: street-smart, creative, fearless."
@@ -385,7 +387,7 @@ classes:
       - type: info
         title: "El DT and the arquero"
         emoji: "📋"
-        body: "The coach is **el DT** (*de-té*), short for **director técnico**. Every Argentine is secretly a DT: they all know who should play. The goalkeeper is **el arquero** (from **arco**, *goal*). And the defender who kicks everything out? A **hachero** — an *axe man*."
+        body: "The coach is **el DT** (*de-té*), short for **director técnico**. Every Argentine is secretly a DT: they all know who should play. The goalkeeper is **el arquero** (from **arco**, *goal*). And the defender who kicks everything in sight, ball or ankles? A **hachero**, an *axe man*."
 
       - type: true_false
         statement: "In Argentina, \"el DT\" is the team's doctor."
@@ -442,3 +444,163 @@ classes:
         example: { es: "Hacemos la previa en lo de Juan.", en: "We're meeting at Juan's place first." }
       - es: "gastada"
         en: "teasing (after a loss)"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "mas-alla-de-buenos-aires"
+    title: "Beyond Buenos Aires"
+    summary: "Rosario, Córdoba, La Plata, and the women who got there first"
+    pages:
+      - type: info
+        title: "Not everything is Boca-River"
+        emoji: "🧭"
+        body: "Porteños forget it, but some of the fiercest rivalries are outside the capital. Argentines call the rest of the country **el interior**, and in cities like **Rosario**, **Córdoba** and **La Plata** the local **clásico** matters far more than the Superclásico. Ask a rosarino about Boca and River and you'll get a shrug. Ask about Newell's and Central and cancel your plans."
+
+      - type: info
+        title: "Rosario: leprosos vs canallas"
+        emoji: "🔴"
+        body: "**Rosario Central** (1889) against **Newell's Old Boys** (1903, named after the English teacher Isaac Newell, whose former students founded it). The story goes that both were invited to a charity match for a leprosy clinic. Newell's said yes and became the **leprosos** (lepers); Central said no and became the **canallas** (scoundrels). Both now wear the insults with pride."
+
+      - type: true_false
+        statement: "Messi and Di María are both from Rosario and support the same club."
+        answer: false
+        explain: "Same city, opposite sides: Messi played in **Newell's** youth teams, Di María came up at **Central** and went back to play there. Rosario family dinners have survived worse."
+
+      - type: info
+        title: "Córdoba and La Plata"
+        emoji: "🏴‍☠️"
+        body: "In Córdoba it's **Belgrano**, the **Piratas**, against **Talleres**, **la T** or the **Matadores**. They've met hundreds of times, and Belgrano fans still celebrate 2011, when they sent River down to the B. In La Plata, **Estudiantes** fans are **pinchas** (from *pincharratas*, 'rat-stabbers') and **Gimnasia**, founded in 1887, are the **triperos** or **el Lobo**."
+
+      - type: match
+        prompt: "Match the club to its fans' nickname"
+        pairs:
+          - ["Newell's", "leprosos"]
+          - ["Rosario Central", "canallas"]
+          - ["Belgrano", "piratas"]
+          - ["Estudiantes", "pinchas"]
+          - ["Gimnasia", "triperos"]
+
+      - type: choice
+        scenario: "Your first night in Rosario. A new friend pours you a beer and asks: \"¿Sos leproso o canalla?\""
+        prompt: "What are they asking?"
+        options: ["Newell's or Central?", "Are you sick or rude?", "Are you from Rosario or Buenos Aires?"]
+        correct: 0
+        explain: "It's the Rosario version of **¿de qué cuadro sos?** If you don't have a team, say so with a smile. Picking one at random can cost you friends."
+
+      - type: info
+        title: "The pioneers"
+        emoji: "⚽"
+        body: "On **21 August 1971**, at an unofficial women's World Cup in Mexico, Argentina beat England **4–1** in the Estadio Azteca, in front of a huge crowd. **Elba Selva** scored all four. That's why 21 August is the **Día de la Futbolista**. It took until **2019**, after player Macarena Sánchez fought for real contracts, for the women's league to go semi-professional."
+
+      - type: true_false
+        statement: "Argentina's women's team once beat England 4–1 at the Estadio Azteca."
+        answer: true
+        explain: "1971, all four goals by Elba Selva. Fifteen years before Diego's famous goals against England at the same stadium."
+
+      - type: gap
+        prompt: "Tell your friend what 21 August is"
+        text: "Hoy es el Día de la ___."
+        options: ["Futbolista", "Hinchada", "Selección"]
+        correct: 0
+        translation: "Today is the Day of the (Woman) Footballer."
+        explain: "**Futbolista** works for men and women; **la futbolista** is a woman who plays."
+
+    vocabulary:
+      - es: "el interior"
+        en: "the rest of the country (outside Buenos Aires)"
+        note: "Some people outside Buenos Aires find the term a bit porteño-centric."
+      - es: "leproso"
+        en: "Newell's fan (literally 'leper')"
+      - es: "canalla"
+        en: "Rosario Central fan (literally 'scoundrel')"
+      - es: "pincha"
+        en: "Estudiantes de La Plata fan"
+      - es: "tripero"
+        en: "Gimnasia de La Plata fan"
+      - es: "la futbolista"
+        en: "woman footballer"
+        example: { es: "Es futbolista y juega en Boca.", en: "She's a footballer and plays for Boca." }
+      - es: "rosarino"
+        en: "from Rosario"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-tabla-y-el-descenso"
+    title: "The table, the drop and the VAR"
+    summary: "Promedios, irse a la B and everything you'll hear on TV"
+    pages:
+      - type: info
+        title: "Fixture, fecha, tabla"
+        emoji: "📺"
+        body: "The season calendar is the **fixture** (say *fíxtur*), and each round is a **fecha**. After every fecha people check the **tabla** (league table): three points for a win, one for an **empate** (draw). A 5–0 is a **goleada** (thrashing). On Monday, the office talks about nothing else."
+
+      - type: info
+        title: "The nightmare: el descenso"
+        word: { es: "descenso", tag: "The nightmare", en: "relegation" }
+        emoji: "⬇️"
+        body: "The worst thing that can happen to a club is the **descenso** (relegation), or **irse a la B**, going down to the B. The dream of the smaller clubs is the **ascenso** (promotion). Even giants have fallen: San Lorenzo in 1981, Racing in 1983, River in 2011, Independiente in 2013. **Boca** never has, and Boca fans never let anyone forget it."
+
+      - type: true_false
+        statement: "Among the cinco grandes, Boca Juniors is the only one that has never been relegated."
+        answer: true
+        explain: "San Lorenzo, Racing, River and Independiente all went down at some point. It's Boca's favorite chant against every one of them."
+
+      - type: info
+        title: "Promedios"
+        emoji: "🧮"
+        body: "Here's a very Argentine twist: relegation isn't only about this season. Part of it depends on the **promedio**, your points per match averaged over the last three seasons. One great year can't save a struggling club, and one bad year rarely sinks a big one. Critics have long said that's exactly the point: to protect the big clubs. The rules change often; the promedios keep coming back."
+
+      - type: choice
+        scenario: "Your team is fifth this season, but your friend is still nervous about \"los promedios\"."
+        prompt: "Why?"
+        options: ["The last two seasons were terrible, and they still count", "Promedio means goal difference", "The VAR can take points away"]
+        correct: 0
+        explain: "Promedios drag the past along with you. A club that just came up is especially at risk: it has only a few matches to average, so every loss hurts."
+
+      - type: info
+        title: "¿Fue penal?"
+        emoji: "🖥️"
+        body: "Every tight call now goes to **el VAR** (say *el var*), and the debate lasts days: **¿fue penal?** (was it a penalty?), **¿estaba en offside?** Old-timers still say **orsai**, the way their grandparents pronounced offside. Some say the VAR killed the goal scream, since you wait before celebrating. Others say the ref was robbing us anyway, so at least now it's on camera."
+
+      - type: match
+        prompt: "Match the TV word to its meaning"
+        pairs:
+          - ["descenso", "relegation"]
+          - ["ascenso", "promotion"]
+          - ["empate", "draw"]
+          - ["goleada", "thrashing, big win"]
+          - ["fecha", "round of matches"]
+
+      - type: gap
+        prompt: "Your friend is worried before the last match of the season."
+        text: "Si perdemos, nos vamos a la ___."
+        options: ["B", "A", "tabla"]
+        correct: 0
+        translation: "If we lose, we go down."
+        explain: "**Irse a la B** = get relegated. Said with real fear, even when the second division isn't literally called 'B' anymore."
+
+      - type: true_false
+        statement: "\"Irse a la B\" means your team got promoted."
+        answer: false
+        explain: "It means going down. Going up is **subir** or **ascender**, and the promoted team's fans sing about it for years."
+
+    vocabulary:
+      - es: "fecha"
+        en: "round of matches"
+        example: { es: "¿Contra quién jugamos en la próxima fecha?", en: "Who do we play in the next round?" }
+      - es: "tabla"
+        en: "league table"
+      - es: "empate"
+        en: "draw, tie"
+      - es: "goleada"
+        en: "thrashing, big win"
+      - es: "descenso"
+        en: "relegation"
+      - es: "irse a la B"
+        en: "to get relegated"
+        example: { es: "Si perdemos, nos vamos a la B.", en: "If we lose, we go down." }
+      - es: "promedio"
+        en: "points average used for relegation"
+      - es: "¿fue penal?"
+        en: "was it a penalty?"
+      - es: "orsai"
+        en: "offside"
+        note: "Old-fashioned; today most people say offside."

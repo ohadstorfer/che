@@ -12,7 +12,7 @@ classes:
         title: "Welcome to the puteadas"
         emoji: "🧉"
         body: "Grab a mate. In Argentina a **puteada** is a swear or an insult, and **putear** is to swear at someone (or at the universe). Argentines swear a lot, and often with love. This section teaches you to *understand* them, and, more importantly, when *not* to use them."
-        fun_fact: "You'll hear more swearing in a Buenos Aires café than in most bars back home."
+        fun_fact: "Many visitors say they hear more swearing in a Buenos Aires café than in most bars back home."
       - type: info
         title: "Boludo"
         emoji: "🤷"
@@ -76,13 +76,14 @@ classes:
     pages:
       - type: info
         title: "The gil"
+        word: { es: "gil", tag: "A mild insult", en: "sucker, naive fool" }
         emoji: "🐑"
         body: "A **gil** is a sucker: naive, easy to fool. It's an old lunfardo word from tango days, when the **gil** was the one who got scammed and the **vivo** was the sharp guy. **No seas gil** = 'Don't be a sucker'. Rude, but mild."
         fun_fact: "Tango lyrics are full of giles who got their heart broken."
       - type: info
         title: "The chanta"
         emoji: "🎩"
-        body: "A **chanta** is a bullshitter: someone who brags, promises and never delivers. The plumber who says 'mañana vengo' for three weeks? **Chanta**. The guy who claims he played in the Primera? **Chanta**. It comes from **chantapufi**, an Italian-dialect word for someone who doesn't pay his debts."
+        body: "A **chanta** is a bullshitter: someone who brags, promises and never delivers. The plumber who says 'mañana vengo' for three weeks? **Chanta**. The guy who claims he played in the Primera? **Chanta**. It's short for **chantapufi**, from a Genoese word for someone who doesn't pay his debts."
       - type: info
         title: "The forro"
         emoji: "🐍"
@@ -103,7 +104,7 @@ classes:
       - type: info
         title: "The pests"
         emoji: "🦟"
-        body: "Someone who won't stop bugging you is a **hinchapelotas** or **rompebolas**: literally 'ball-swelling' and 'ball-breaking'. Pain in the neck. **Pajero** literally means 'wanker'; among friends it often means lazy or spaced out: **No seas pajero, ayudame** = 'Don't be lazy, help me'. Crude, so keep it among friends."
+        body: "Someone who won't stop bugging you is a **hinchapelotas** or **rompebolas**: literally 'ball-swelling' and 'ball-breaking'. Pain in the neck. **Pajero** literally means 'wanker'; among friends it usually means lazy or useless: **No seas pajero, ayudame** = 'Don't be lazy, help me'. Crude, so keep it among friends."
       - type: true_false
         statement: "Calling your friend a 'hinchapelotas' because he texts you 40 times a day is a fair use of the word."
         answer: true
@@ -137,7 +138,7 @@ classes:
         en: "pain in the neck, pest"
         example: { es: "¡Qué rompebolas que sos!", en: "You're such a pain!" }
       - es: "pajero"
-        en: "wanker; among friends, lazy or spaced out"
+        en: "wanker; among friends, lazy or useless"
         example: { es: "No seas pajero, ayudame.", en: "Don't be lazy, help me." }
       - es: "vivo"
         en: "sharp, street-smart (the opposite of a gil)"
@@ -162,7 +163,7 @@ classes:
       - type: info
         title: "Dismissals"
         emoji: "🙄"
-        body: "**¡Andá a cagar!** literally 'go take a shit', means 'get lost'. But between friends it's often disbelief: 'No way!' or 'Shut up!'. And **me chupa un huevo** ('it sucks me an egg', with egg = testicle) means 'I don't give a damn'. The deluxe version: **me chupa un huevo y la mitad del otro**."
+        body: "**¡Andá a cagar!** literally 'go take a shit', means 'get lost'. But between friends it's often disbelief: 'No way!' or 'Shut up!'. And **me chupa un huevo** ('it sucks me an egg', with egg = testicle) means 'I don't give a damn', like **me importa un carajo** (or **tres carajos**). Deluxe version: **me chupa un huevo y la mitad del otro**."
       - type: choice
         scenario: "You tell your friend you met Messi at the airport. She laughs and says: '¡Andá a cagar!'"
         prompt: "What does she mean?"
@@ -179,13 +180,13 @@ classes:
       - type: info
         title: "The family-friendly versions"
         emoji: "😇"
-        body: "Around kids or grandparents? Swap in a euphemism. **¡Miércoles!** ('Wednesday!') stands in for **mierda** (shit). **¡Pucha!** or **¡La pucha!** replaces **la puta**. **Me importa un comino** ('I don't care a cumin seed') replaces the egg one. Same frustration, no scandal."
+        body: "Around kids or grandparents? Swap in a euphemism. **¡Miércoles!** ('Wednesday!') stands in for **mierda** (shit). **¡Pucha!** or **¡La pucha!** replaces **la puta**. **Me importa un pito** ('I don't care a whistle') is the tamer cousin of the egg one. Same frustration, no scandal."
       - type: match
         prompt: "Match the polite version to the one it's hiding"
         pairs:
           - ["miércoles", "mierda"]
           - ["la pucha", "la puta"]
-          - ["me importa un comino", "me chupa un huevo"]
+          - ["me importa un pito", "me chupa un huevo"]
         explain: "Euphemisms sound like the real thing, so everyone knows what you meant, but nobody's offended."
       - type: true_false
         statement: "When someone shouts '¡La puta madre!' after missing the bus, they're insulting someone's mother."
@@ -210,8 +211,9 @@ classes:
       - es: "la pucha"
         en: "darn it! (polite stand-in for 'la puta')"
         example: { es: "¡La pucha, se me cayó!", en: "Darn, I dropped it!" }
-      - es: "me importa un comino"
-        en: "I couldn't care less (polite)"
+      - es: "me importa un pito"
+        en: "I couldn't care less (tamer)"
+        note: "Milder than 'me chupa un huevo' or 'me importa un carajo', but still not for a job interview."
 
   - slug: "leer-el-contexto"
     title: "Reading the room"
@@ -233,7 +235,7 @@ classes:
       - type: gap
         prompt: "The light turned green five seconds ago and the car in front hasn't moved."
         text: "¡Dale, ___!"
-        options: ["boludo", "abuela", "comino"]
+        options: ["boludo", "abuela", "referí"]
         correct: 0
         translation: "Come on, idiot!"
         explain: "Classic traffic venting. Said to a stranger in a car, **boludo** is an insult, but a very routine one."

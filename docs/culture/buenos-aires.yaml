@@ -1,0 +1,418 @@
+section:
+  slug: "buenos-aires"
+  title: "Buenos Aires"
+  emoji: "🏙️"
+  summary: "Barrios, bondis, cafés and the city that never goes to bed"
+
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "portenos"
+    title: "Porteños and everyone else"
+    summary: "Capital, Provincia, el interior, and what they say about each other"
+    pages:
+      - type: info
+        title: "People of the port"
+        emoji: "⚓"
+        body: "People from Buenos Aires are **porteños**, from **puerto** (port). For centuries the city was the country's gate to the world: ships, goods and millions of immigrants all came in through here. That's why porteños grew up looking at Europe across the water, and why the rest of the country sometimes says they forget there's a whole Argentina behind them."
+
+      - type: info
+        title: "Capital is not Provincia"
+        emoji: "🗺️"
+        body: "Here's the tricky part. The city, **CABA** (Ciudad Autónoma de Buenos Aires), has about 3 million people and 48 official **barrios**. It's *not* part of the **Provincia de Buenos Aires**, which wraps around it. The avenue **General Paz** and the **Riachuelo** river mark the border. Cross it and you're in the **conurbano**, the huge ring of suburbs where millions more live."
+        fun_fact: "The city only got to elect its own mayor, the **Jefe de Gobierno**, after the 1994 constitutional reform."
+
+      - type: choice
+        scenario: "A friend from Quilmes, just outside the city, says: \"Mañana voy a Capital a hacer unos trámites.\""
+        prompt: "Where is she going?"
+        options: ["To the national capital building", "Into the city of Buenos Aires", "To La Plata, the provincial capital", "To a bank"]
+        correct: 1
+        explain: "People in the conurbano say **Capital** (or **Capi**) for the city itself. Funny detail: the capital of the *Provincia* is actually **La Plata**, not Buenos Aires."
+
+      - type: info
+        title: "And then, el interior"
+        emoji: "🌄"
+        body: "Porteños tend to call everywhere outside the metro area **el interior**. People from Córdoba, Mendoza or Salta don't always love that: it makes the whole country sound like a backyard. They have a famous comeback: **\"Dios está en todas partes, pero atiende en Buenos Aires\"**. God is everywhere, but he keeps office hours in Buenos Aires. It's a dig at how much money and power sit in the city."
+
+      - type: true_false
+        statement: "\"Dios está en todas partes, pero atiende en Buenos Aires\" is a compliment about how great the city is."
+        answer: false
+        explain: "It's a complaint. It means everything important gets decided in Buenos Aires, and the provinces have to go ask. The Buenos Aires–interior tension goes back to the 1800s fights over the port's customs money."
+
+      - type: info
+        title: "The stereotypes, both ways"
+        emoji: "🪞"
+        body: "The rest of the country says porteños are **agrandados** (full of themselves), talk too fast and think the world ends at the General Paz. Porteños joke that people in the provinces live slower, take the **siesta** seriously and never hurry. Both sides exaggerate, and both sides laugh. Just don't tell someone from Córdoba they sound \"like a porteño\"."
+        fun_fact: "Abroad, anyone from the whole metro area often just says \"soy de Buenos Aires\". At home, the difference matters."
+
+      - type: match
+        prompt: "Match the word to what it means"
+        pairs:
+          - ["porteño", "from the city of Buenos Aires"]
+          - ["Capital", "the city, as people from the suburbs call it"]
+          - ["conurbano", "the ring of suburbs around the city"]
+          - ["el interior", "the rest of the country, porteño-style"]
+
+      - type: choice
+        scenario: "You're in Mendoza and a local asks where you've been. You say: \"Estuve en Buenos Aires y ahora estoy conociendo el interior.\" He raises an eyebrow."
+        prompt: "What happened?"
+        options: ["You mispronounced Mendoza", "You sounded like a porteño who thinks everything else is \"the inside\"", "\"Interior\" is a rude word", "He thought you meant indoors"]
+        correct: 1
+        explain: "Nothing terrible, but **el interior** is the porteño view of the map. Outside Buenos Aires, people prefer you just name the province: \"estoy recorriendo Mendoza\"."
+
+      - type: gap
+        prompt: "Tell someone you're from the city itself"
+        text: "Soy ___, nací en Palermo."
+        options: ["porteño", "puerto", "provincia"]
+        correct: 0
+        translation: "I'm from Buenos Aires, I was born in Palermo."
+        explain: "**Porteño** / **porteña**. The **puerto** is the port itself, not the people."
+
+    vocabulary:
+      - es: "porteño"
+        en: "from the city of Buenos Aires"
+        example: { es: "¿Sos porteña? Se te nota en el acento.", en: "Are you from Buenos Aires? I can tell by your accent." }
+      - es: "Capital"
+        en: "the city of Buenos Aires (said from the suburbs)"
+        example: { es: "Laburo en Capital pero vivo en Lanús.", en: "I work in the city but I live in Lanús." }
+      - es: "el conurbano"
+        en: "the suburbs around Buenos Aires"
+      - es: "la provincia"
+        en: "the Province of Buenos Aires"
+      - es: "el interior"
+        en: "the rest of the country (porteño view)"
+        note: "Some people outside Buenos Aires find it a bit dismissive."
+      - es: "barrio"
+        en: "neighborhood"
+      - es: "agrandado"
+        en: "full of yourself, cocky"
+        example: { es: "No seas agrandado, che.", en: "Don't be so cocky, man." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "barrios"
+    title: "A city of barrios"
+    summary: "From Caminito to Barrio Chino, each barrio has its own personality"
+    pages:
+      - type: info
+        title: "La Boca and Caminito"
+        emoji: "🎨"
+        body: "**La Boca** sits where the Riachuelo meets the river, and it was filled with Genoese sailors and dockworkers. Its houses were built of wood and **chapa** (corrugated metal). The story goes they were painted with leftover paint from the shipyards. In 1959 the painter **Benito Quinquela Martín** pushed to turn an old alley into **Caminito**, named after a famous tango by Juan de Dios Filiberto."
+
+      - type: true_false
+        statement: "Caminito got its name from a tango."
+        answer: true
+        explain: "The tango \"Caminito\" (1926) had music by **Juan de Dios Filiberto**, from La Boca. In 1959 the city officially named the street after it, at Quinquela Martín's request."
+
+      - type: info
+        title: "San Telmo on Sundays"
+        emoji: "🧳"
+        body: "**San Telmo** is the old colonial south: cobblestones, balconies, antique shops. Every Sunday, **Plaza Dorrego** and calle **Defensa** fill up with the **Feria de San Telmo**, a street market started in 1970 with just 30 stalls. Today you'll find old soda siphons, vinyl, silverware, tango dancers on the corner and a lot of people **mirando nomás** (just looking)."
+
+      - type: info
+        title: "Palermo, the barrio that keeps splitting"
+        emoji: "🌳"
+        body: "**Palermo** is the biggest barrio, so people keep inventing sub-barrios. **Palermo Soho** is bars, design shops and brunch. **Palermo Hollywood** got its name in the 2000s, when TV channels and production companies moved in. Real estate agents have added more (Palermo Chico, Palermo Botánico...). Joke among porteños: soon everything will be \"Palermo something\"."
+
+      - type: gap
+        prompt: "Suggest a Sunday plan"
+        text: "¿Vamos el domingo a la ___ de San Telmo?"
+        options: ["feria", "fiesta", "farmacia"]
+        correct: 0
+        translation: "Shall we go to the San Telmo market on Sunday?"
+        explain: "A **feria** is a street market. There are ferias all over the city, but San Telmo's is the classic one."
+
+      - type: info
+        title: "Recoleta: a city of the dead"
+        emoji: "🕯️"
+        body: "The **Cementerio de la Recoleta** opened in 1822 as the city's first public cemetery. It's a maze of marble **bóvedas** (family vaults), with presidents, writers and lots of cats. **Evita** rests in the Duarte family vault. The most told legend is **Rufina Cambaceres**, a 19-year-old said to have been buried alive in 1902. Historians doubt it, but everyone stops at her tomb."
+
+      - type: info
+        title: "Once, Villa Crespo, Barracas, Barrio Chino"
+        emoji: "🧵"
+        body: "**Once** isn't an official barrio: it's the busy area around Once station, in Balvanera, full of wholesale shops and long home to much of the Jewish community, like neighboring **Villa Crespo**. In **Barracas**, artist Marino Santa María covered **Pasaje Lanín** in paint and mosaics. And in **Belgrano**, calle Arribeños became **Barrio Chino**, started by Taiwanese immigrants in the 1980s."
+
+      - type: choice
+        scenario: "A friend says: \"Voy a Once a comprar tela, es mucho más barato.\" You check the official map of the 48 barrios."
+        prompt: "What do you find?"
+        options: ["Once is barrio number 11", "There's no barrio called Once; it's part of Balvanera", "Once is in the Provincia", "Once is inside Palermo"]
+        correct: 1
+        explain: "Everyone says **Once**, but it's a nickname from the **Once de Septiembre** train station. The official barrio is **Balvanera**. Same thing happens with **Barrio Chino**, which sits inside Belgrano."
+
+      - type: match
+        prompt: "Match the barrio to what it's known for"
+        pairs:
+          - ["La Boca", "Caminito and colorful metal houses"]
+          - ["San Telmo", "Sunday antiques market"]
+          - ["Palermo Hollywood", "TV and film production companies"]
+          - ["Recoleta", "a famous cemetery"]
+          - ["Belgrano", "Barrio Chino"]
+
+    vocabulary:
+      - es: "feria"
+        en: "street market"
+        example: { es: "Los domingos hay feria en la plaza.", en: "There's a market in the square on Sundays." }
+      - es: "mirar nomás"
+        en: "to just be looking (in a shop)"
+        example: { es: "—¿Te ayudo? —No, gracias, estoy mirando nomás.", en: "—Can I help you? —No thanks, just looking." }
+      - es: "chapa"
+        en: "corrugated metal sheet"
+      - es: "bóveda"
+        en: "family vault (in a cemetery)"
+      - es: "adoquines"
+        en: "cobblestones"
+      - es: "pasaje"
+        en: "small side street, alley"
+      - es: "la esquina"
+        en: "the corner"
+        example: { es: "Nos vemos en la esquina de Defensa y Humberto Primo.", en: "See you at the corner of Defensa and Humberto Primo." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "moverse"
+    title: "Bondi, subte, tacho"
+    summary: "How to get around without getting lost (or run over)"
+    pages:
+      - type: info
+        title: "A porteño invention"
+        emoji: "🚌"
+        body: "On **24 September 1928**, taxi drivers short on customers met at a bar on Rivadavia and Lacarra and had an idea: take several passengers at once, each paying a small fare, along a fixed route. That was the first **taxi colectivo**. It grew into the **colectivo**, the city bus. 24 September is still celebrated as the **Día del Colectivo**."
+
+      - type: info
+        title: "Why \"bondi\"?"
+        emoji: "🚏"
+        body: "Nobody says \"autobús\". It's **colectivo**, or even more often, **bondi**. The word comes from Brazil, where trams were called **bonde**, from the English *bond*, the tickets the British tram companies sold. In Buenos Aires **bondi** first meant the tram. When the trams disappeared in the 1960s, the name jumped to the bus."
+
+      - type: true_false
+        statement: "\"Bondi\" is a word that originally meant tram, not bus."
+        answer: true
+        explain: "It came via Brazilian Portuguese **bonde** (tram). Buenos Aires ripped out its trams, but kept the word."
+
+      - type: info
+        title: "Wave, tell, tap"
+        emoji: "✋"
+        body: "Colectivos only stop if you ask. At the **parada** (stop), stick your arm out when yours comes, or it'll fly right past. Fares go by distance, so you tell the **chofer** where you're going, then tap your **SUBE** card (since 2025 many lines also take a contactless bank card). To get off, press the **timbre** (bell) before your stop and use the back door. Porteños also **hacen la cola**: they line up at the stop."
+
+      - type: order
+        prompt: "Take a colectivo, step by step"
+        items:
+          - "Wait at the parada for your line"
+          - "Stick your arm out when it comes"
+          - "Tell the chofer where you're going"
+          - "Tap your SUBE card"
+          - "Press the timbre before your stop"
+        explain: "Skip the arm and it won't stop. Skip the timbre and you'll ride to the next one."
+
+      - type: choice
+        scenario: "You get to the stop. Six people are standing in a neat line along the wall. The bus pulls up right in front of you."
+        prompt: "What do you do?"
+        options: ["Get on, you're closest to the door", "Go to the end of the line", "Ask the driver to wait while you decide"]
+        correct: 1
+        explain: "The **cola** at the parada is sacred. Cut it and you'll get a loud **\"¡Hay cola, eh!\"** from the whole line."
+
+      - type: info
+        title: "The subte and the tachos"
+        emoji: "🚇"
+        body: "The **subte** (metro) opened on **1 December 1913**, the first in Latin America and the southern hemisphere, and older than Madrid's. Today it has lines A, B, C, D, E and H, each with its own color. Taxis are painted **black and yellow**, a rule since 1966. In slang, a taxi is a **tacho**."
+        fun_fact: "The same SUBE card works on colectivos, subte and trains."
+
+      - type: match
+        prompt: "Match the word to the ride"
+        pairs:
+          - ["bondi", "city bus"]
+          - ["subte", "metro"]
+          - ["tacho", "taxi"]
+          - ["SUBE", "the transport card"]
+          - ["parada", "bus stop"]
+
+      - type: gap
+        prompt: "You're on the bus and want to check you're going the right way. You ask the chofer:"
+        text: "¿Me ___ en Plaza Italia?"
+        options: ["deja", "baja", "sube"]
+        correct: 0
+        translation: "Will you drop me at Plaza Italia? (Does this go to Plaza Italia?)"
+        explain: "**¿Me deja en...?** is the classic question to the chofer. Most will answer quickly, and some will even tell you when it's your stop."
+
+    vocabulary:
+      - es: "colectivo"
+        en: "city bus"
+      - es: "bondi"
+        en: "bus (slang)"
+        example: { es: "Me tomo el bondi y llego en veinte.", en: "I'll catch the bus and be there in twenty." }
+      - es: "subte"
+        en: "the Buenos Aires metro"
+      - es: "tacho"
+        en: "taxi (slang)"
+      - es: "la SUBE"
+        en: "transport card"
+        example: { es: "Tengo que cargar la SUBE.", en: "I need to top up my transport card." }
+      - es: "parada"
+        en: "bus stop"
+      - es: "tocar el timbre"
+        en: "to press the bell (to get off)"
+      - es: "hacer la cola"
+        en: "to wait in line"
+      - es: "chofer"
+        en: "driver"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "iconos-de-la-ciudad"
+    title: "Obelisco, Colón and a pink house"
+    summary: "The landmarks, and the stories porteños tell about them"
+    pages:
+      - type: info
+        title: "The Obelisco: built in a month, almost torn down"
+        emoji: "🗼"
+        body: "The **Obelisco** went up in **1936**, for the 400th anniversary of the city's first founding. Workers built it in just **31 days**; it's 67.5 m tall. Lots of porteños hated it. In **1939** the city council actually voted to demolish it, and the mayor vetoed the decision. Today it's where the whole city goes to celebrate, or protest."
+
+      - type: info
+        title: "The widest avenue in the world?"
+        emoji: "🛣️"
+        body: "The Obelisco stands on **Avenida 9 de Julio**. Porteños will proudly tell you it's **la avenida más ancha del mundo**: about **140 meters** if you count the side streets, with up to seven lanes each way. Brazilians like to argue that Brasília's **Eixo Monumental** is wider, but that's two roads with a giant lawn in between: Guinness lists it for the widest *median strip*, and 9 de Julio as the widest avenue."
+        fun_fact: "Crossing 9 de Julio on foot usually takes more than one green light."
+
+      - type: true_false
+        statement: "Guinness lists Brasília's Eixo Monumental as the widest avenue in the world."
+        answer: false
+        explain: "Guinness lists the Eixo Monumental for its huge **median strip**, the lawn between its two roads. The widest-avenue title goes to 9 de Julio, which porteños will happily remind you of."
+
+      - type: info
+        title: "Why is the Casa Rosada pink?"
+        emoji: "🌸"
+        body: "The president's office on **Plaza de Mayo** is the **Casa Rosada**. The popular story: in the 1860s–70s, President **Sarmiento** had it painted pink to mix the **red** of the federales with the **white** of the unitarios, the two old rival factions. Many historians give a messier answer: back then walls were painted with lime mixed with **cow's blood**, which helped against the damp."
+
+      - type: choice
+        prompt: "What's the practical explanation many historians give for the pink?"
+        options: ["Imported Italian marble", "Lime paint mixed with cow's blood", "A tribute to the flag", "The sunset reflected off the river"]
+        correct: 1
+        explain: "Lime plus blood was a common mix, and it held up against Buenos Aires' famous **humedad**. The red-plus-white story is nicer, so that's the one you'll hear on tours."
+
+      - type: info
+        title: "Teatro Colón"
+        emoji: "🎭"
+        body: "The **Teatro Colón** opened on **25 May 1908** with Verdi's *Aida*. Singers and conductors rank its horseshoe-shaped hall among the best in the world for opera acoustics. You don't need a gala ticket to see it: there are daily guided tours, and cheap seats way up high in the **paraíso**, the top gallery."
+
+      - type: info
+        title: "Café Tortoni and the cafés notables"
+        emoji: "☕"
+        body: "The **Café Tortoni**, on Avenida de Mayo, opened in **1858**: it's the oldest café in the city. Borges, Gardel and Lorca all passed through. It's one of the **bares notables**, historic cafés the city protects. Porteño café rule: order a **cortado**, sit for two hours, read, argue. Nobody will rush you, and the **mozo** won't bring the check until you ask."
+
+      - type: choice
+        scenario: "You've been at a café for an hour and a half with one cortado. You're ready to leave, but the mozo hasn't brought the check."
+        prompt: "What's going on?"
+        options: ["He's annoyed you stayed so long", "In Buenos Aires you ask for the check; bringing it unasked is almost rude", "The café is closed", "You're expected to pay at the counter"]
+        correct: 1
+        explain: "Bringing the check unasked feels like kicking you out. Catch the mozo's eye and say **\"¿Me traés la cuenta?\"**."
+
+      - type: match
+        prompt: "Match the landmark to its story"
+        pairs:
+          - ["Obelisco", "built in 31 days in 1936"]
+          - ["Casa Rosada", "pink, maybe thanks to cow's blood"]
+          - ["Teatro Colón", "opened in 1908 with Aida"]
+          - ["Café Tortoni", "oldest café in the city, since 1858"]
+
+      - type: gap
+        prompt: "Order at a café like a local"
+        text: "Un ___ y dos medialunas, por favor."
+        options: ["cortado", "cortante", "corto"]
+        correct: 0
+        translation: "A cortado and two medialunas, please."
+        explain: "A **cortado** is espresso \"cut\" with a bit of milk. With **medialunas** it's the classic café order."
+
+    vocabulary:
+      - es: "cortado"
+        en: "espresso with a splash of milk"
+      - es: "mozo"
+        en: "waiter"
+        example: { es: "¡Mozo! ¿Me traés la cuenta?", en: "Excuse me! Can you bring me the check?" }
+      - es: "la cuenta"
+        en: "the check, the bill"
+      - es: "bar notable"
+        en: "historic protected café"
+      - es: "la humedad"
+        en: "humidity"
+        example: { es: "No es el calor, es la humedad.", en: "It's not the heat, it's the humidity." }
+        note: "The most repeated sentence of every porteño summer."
+      - es: "paraíso"
+        en: "top gallery of a theater (cheapest seats)"
+      - es: "la Rosada"
+        en: "the Casa Rosada, for short"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "vida-portena"
+    title: "Life in the ciudad de la furia"
+    summary: "Therapists, dog walkers, bookshops, late nights, and street smarts"
+    pages:
+      - type: info
+        title: "Everyone has a psicólogo"
+        emoji: "🛋️"
+        body: "Argentina has one of the highest numbers of psychologists per person in the world: a 2016 WHO report counted about **222 per 100,000** people, the highest figure it recorded. A big share work in Buenos Aires. Going to therapy isn't a secret here. **\"Lo hablo con mi psicóloga\"** is a normal thing to say at a dinner."
+
+      - type: true_false
+        statement: "In Buenos Aires, people usually keep quiet about going to therapy."
+        answer: false
+        explain: "Quite the opposite. **Hacer terapia** is so normal that people quote their therapist to friends. Psychoanalysis especially has deep roots here."
+
+      - type: info
+        title: "The paseaperros"
+        word: { es: "paseaperros", tag: "Only in Buenos Aires", en: "dog walker" }
+        emoji: "🐕"
+        body: "Walk around Palermo or Recoleta and you'll see a **paseaperros** (dog walker) being dragged along by a pack of dogs, all on leashes, all different sizes. City rules actually cap it at **8 dogs** at once, and anyone walking more than 3 is supposed to be registered. Big packs still show up, and they get right of way on the sidewalk."
+
+      - type: info
+        title: "Books and theater"
+        emoji: "📚"
+        body: "**El Ateneo Grand Splendid**, on Santa Fe avenue, was a 1919 theater. Since 2000 it's a bookshop, with books in the old boxes and a café on the stage; National Geographic called it the most beautiful bookshop in the world. And avenida **Corrientes** is the city's Broadway: theaters, bookshops open late, pizza at midnight. People call it **la calle que nunca duerme**."
+
+      - type: choice
+        scenario: "A porteño friend invites you to dinner \"temprano, tipo nueve y media\"."
+        prompt: "What should you expect?"
+        options: ["They made a mistake, dinner is at 7", "That's genuinely early for a porteño dinner", "It's a lunch invitation"]
+        correct: 1
+        explain: "Dinner at 9:30 or 10 pm is normal, and on weekends people go out even later. Show up at 8 and you'll catch them in the shower."
+
+      - type: info
+        title: "The ciudad de la furia"
+        emoji: "⚡"
+        body: "In 1988 Soda Stereo released **\"En la ciudad de la furia\"**, and the name stuck to Buenos Aires: fast, loud, horns honking, everyone in a hurry. Most of it is noise, not danger. But be smart with your phone: the famous thief is the **motochorro**, who grabs a phone from the back of a motorbike. Keep it off café tables by the street."
+
+      - type: choice
+        scenario: "You're at a café table on the sidewalk. You put your phone next to your cup. Your porteño friend moves it into your bag."
+        prompt: "Why?"
+        options: ["Phones on the table are rude", "A phone at the edge of a street table is an easy grab", "Phones are banned in cafés"]
+        correct: 1
+        explain: "Nobody's paranoid, just **atento** (alert). Phone in your pocket, backpack in front on a crowded colectivo, and you'll be fine. You'll hear **\"¡Ojo con el celu!\"** a lot."
+
+      - type: gap
+        prompt: "Warn a friend who's holding his phone at the curb"
+        text: "___ con el celu, que pasan motochorros."
+        options: ["Ojo", "Oído", "Ojalá"]
+        correct: 0
+        translation: "Careful with your phone, there are bike thieves around."
+        explain: "**¡Ojo!** literally means \"eye!\": watch out. It's the most useful warning word in the city."
+
+      - type: match
+        prompt: "Match the porteño to what they do"
+        pairs:
+          - ["paseaperros", "walks a pack of dogs"]
+          - ["psicóloga", "listens to your problems, for a fee"]
+          - ["motochorro", "steals from a motorbike"]
+          - ["mozo", "brings your cortado"]
+
+    vocabulary:
+      - es: "hacer terapia"
+        en: "to be in therapy"
+        example: { es: "Hago terapia hace cinco años.", en: "I've been in therapy for five years." }
+      - es: "psicólogo / psicóloga"
+        en: "psychologist, therapist"
+      - es: "paseaperros"
+        en: "dog walker"
+      - es: "motochorro"
+        en: "thief on a motorbike"
+      - es: "¡Ojo!"
+        en: "watch out!"
+        example: { es: "¡Ojo con la mochila en el subte!", en: "Watch your backpack on the metro!" }
+      - es: "el celu"
+        en: "cell phone"
+      - es: "estar atento"
+        en: "to be alert, pay attention"
+      - es: "trasnochar"
+        en: "to stay up late"

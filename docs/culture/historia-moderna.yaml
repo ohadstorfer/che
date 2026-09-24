@@ -13,7 +13,7 @@ classes:
       - type: info
         title: "A century of coups"
         emoji: "🪖"
-        body: "Between 1930 and 1976 the army overthrew elected governments six times: in **1930, 1943, 1955, 1962, 1966 and 1976**. A coup is a **golpe de Estado**, usually just **golpe**. The 1930s got a nickname: the **Década Infame** (Infamous Decade), with elections so openly rigged that some called it *fraude patriótico*, 'patriotic fraud'."
+        body: "Between 1930 and 1976 the army overthrew governments six times, most of them elected: in **1930, 1943, 1955, 1962, 1966 and 1976**. A coup is a **golpe de Estado**, usually just **golpe**. The 1930s got a nickname: the **Década Infame** (Infamous Decade), with elections so openly rigged that some called it *fraude patriótico*, 'patriotic fraud'."
       - type: true_false
         statement: "Between 1930 and 1976, Argentina's military took power by force six times."
         answer: true
@@ -21,7 +21,7 @@ classes:
       - type: info
         title: "Enter Perón"
         emoji: "🎖️"
-        body: "**Juan Domingo Perón** was an army colonel in the government born of the 1943 coup. As labour secretary he backed unions and pushed new rights for workers: pensions, paid holidays, labour courts. Workers had never had a friend that high up. The army's old guard, the bosses and much of the middle class got nervous."
+        body: "**Juan Domingo Perón** was an army colonel in the government born of the 1943 coup. As labour secretary he backed unions and pushed new rights for workers: pensions, paid holidays, labour courts. Many workers felt they had never had a friend that high up. The army's old guard, the bosses and much of the middle class got nervous."
         fun_fact: "The **aguinaldo**, an extra month's pay split into June and December, was created in 1945. Argentines still count on it every year."
       - type: info
         title: "17 de octubre de 1945"
@@ -41,7 +41,7 @@ classes:
         title: "Evita"
         emoji: "🌹"
         body: "**Eva Duarte**, a young actress from a small town in Buenos Aires province, married Perón in 1945. As **Evita** she ran a foundation that built hospitals, schools and homes, and gave aid directly to the poor. She pushed the 1947 law that gave women the vote. She died of cancer in 1952, aged 33, and millions queued for days to say goodbye."
-        fun_fact: "When Madonna came to film *Evita* in 1996, plenty of Argentines were not amused. 'Fuera Madonna' graffiti showed up in Buenos Aires."
+        fun_fact: "When Madonna came to film *Evita* in 1996, plenty of Argentines were not amused. Peronist groups protested, and graffiti against her showed up in Buenos Aires."
       - type: match
         prompt: "Match the year to what happened"
         pairs:
@@ -105,7 +105,7 @@ classes:
       - type: info
         title: "How many?"
         emoji: "📋"
-        body: "Human rights organisations speak of **30,000** desaparecidos, and '30.000' appears on banners every 24 March. The commission set up in 1984 documented close to 9,000 cases, and official lists have grown since. The regime destroyed its records, so a full count may never exist. When politicians question the 30,000 figure, it sparks fierce public debate."
+        body: "Human rights organisations speak of **30,000** desaparecidos, and '30.000' appears on banners every 24 March. It is an estimate: the regime destroyed its records, so a full count may never exist. The commission set up in 1984 documented close to 9,000 cases, and today's official registry lists a similar number of proven victims, disappeared or killed. The figure is contested, and when politicians question the 30,000 it sparks fierce public debate."
       - type: info
         title: "Las Madres de Plaza de Mayo"
         emoji: "🤍"
@@ -119,7 +119,7 @@ classes:
       - type: info
         title: "Las Abuelas and the stolen babies"
         emoji: "🧬"
-        body: "Pregnant prisoners gave birth in captivity; their babies, and other children, were handed to other families, often close to the regime, under false identities. The **Abuelas de Plaza de Mayo** (grandmothers) have searched for them since 1977, helping pioneer DNA methods to prove kinship. As of 2025, **140 nietos** (grandchildren) had recovered their identity. Their president, **Estela de Carlotto**, found her own grandson in 2014."
+        body: "Pregnant prisoners gave birth in captivity; their babies, and other children, were handed to other families, often close to the regime, under false identities. The **Abuelas de Plaza de Mayo** (grandmothers) have searched for them since 1977, helping pioneer DNA methods to prove kinship. By 2025, **140 nietos** (grandchildren) had recovered their identity, and the search goes on. Their president, **Estela de Carlotto**, found her own grandson in 2014."
       - type: match
         prompt: "Match the name to what it is"
         pairs:
@@ -130,7 +130,7 @@ classes:
       - type: info
         title: "Nunca Más"
         emoji: "⚖️"
-        body: "In 1984 a commission led by writer **Ernesto Sábato** published its report, **Nunca Más** ('Never Again'). In 1985, civilian judges tried the juntas in the **Juicio a las Juntas**; prosecutor **Julio Strassera** closed with 'Señores jueces: nunca más.' Videla got life. Amnesty laws and pardons followed, but they were struck down in 2003–2005 and trials continue today."
+        body: "In 1984 a commission led by writer **Ernesto Sábato** published its report, **Nunca Más** ('Never Again'). In 1985, civilian judges tried the juntas in the **Juicio a las Juntas**; prosecutor **Julio Strassera** closed with 'Señores jueces: nunca más.' Videla got life. Amnesty laws and pardons followed, but they were annulled or struck down in the 2000s and trials continue today."
         fun_fact: "The trial is the subject of the film *Argentina, 1985*, nominated for the Oscar for best international film."
       - type: order
         prompt: "Put these in order, oldest first"
@@ -141,7 +141,7 @@ classes:
           - "Democracy returns (1983)"
           - "'Nunca Más' report (1984)"
           - "Juicio a las Juntas (1985)"
-        explain: "Seven and a half years of dictatorship, then the first steps of justice."
+        explain: "Nearly eight years of dictatorship, then the first steps of justice."
       - type: gap
         prompt: "24 March is a national holiday: el Día Nacional de la Memoria por la Verdad y la Justicia. Its motto is:"
         text: "Memoria, Verdad y ___."
@@ -239,6 +239,7 @@ classes:
         en: "conscript"
       - es: "la colimba"
         en: "compulsory military service (slang)"
+        note: "Conscription ended in 1994, so older people use it most."
       - es: "los caídos"
         en: "the fallen"
       - es: "soberanía"
@@ -267,7 +268,7 @@ classes:
       - type: info
         title: "Convertibilidad: 1 peso = 1 dólar"
         emoji: "💵"
-        body: "In April 1991, Menem's economy minister **Domingo Cavallo** launched the **convertibilidad**: by law, one peso was worth one dollar, and you could swap them freely. A new peso replaced the austral at 10,000 to one. Inflation vanished. The '90s brought privatisations, cheap imports and cheap trips abroad."
+        body: "In April 1991, Menem's economy minister **Domingo Cavallo** launched the **convertibilidad**: by law, one peso was worth one dollar, and you could swap them freely. In 1992 a new peso replaced the austral at 10,000 to one. Within a few years inflation fell to almost zero. The '90s brought privatisations, cheap imports and cheap trips abroad."
         fun_fact: "Argentine shoppers abroad got the nickname **'deme dos'** ('give me two') in the cheap-dollar years around 1980, and it came right back in the '90s."
       - type: info
         title: "The hangover"
@@ -347,7 +348,7 @@ classes:
       - type: info
         title: "El dólar blue"
         emoji: "💙"
-        body: "For years, buying dollars legally was capped by currency controls, the **cepo** (2011–2015, then 2019–2025). So a parallel market boomed: the **dólar blue**, usually pricier than the official rate. Nobody fully agrees why it's called 'blue'. At one point there were over a dozen dollar rates, from the **dólar tarjeta** to the short-lived **dólar Coldplay**, for concert tickets abroad."
+        body: "For years, buying dollars legally was capped by currency controls, the **cepo** (2011–2015, then 2019–2025). So a parallel market boomed: the **dólar blue**, usually pricier than the official rate. Nobody fully agrees why it's called 'blue'. At one point there were over a dozen dollar rates, from the **dólar tarjeta** to the short-lived **dólar Coldplay**, for paying foreign acts who played in Argentina."
       - type: choice
         scenario: "Walking down calle Florida in Buenos Aires, a man on the corner mutters at you: 'Cambio, cambio, dólar, euro, real...'"
         prompt: "What is he offering?"
@@ -356,12 +357,13 @@ classes:
         explain: "He's an **arbolito**, a street money changer, offering the blue rate. They're a classic sight on Florida."
       - type: info
         title: "Arbolitos y cuevas"
+        word: { es: "arbolito", tag: "Street money changer", en: "a \"little tree\" on the corner" }
         emoji: "🌳"
-        body: "**Arbolito** means 'little tree': he stands on the pavement all day, like a tree. He takes you to a **cueva**, a 'cave', a back office where the swap happens. It's informal, and fake notes happen. In April 2025 people were allowed to buy dollars freely again, and the gap between blue and official shrank to a few percent. But the words, and the habit of checking, remain."
+        body: "**Arbolito** means 'little tree': he stands on the pavement all day, like a tree. He takes you to a **cueva**, a 'cave', a back office where the swap happens. It's informal, and fake notes happen. In April 2025 people were allowed to buy dollars freely again, and the gap between blue and official shrank sharply. But the words, and the habit of checking, remain."
       - type: true_false
         statement: "The dólar blue is a special blue banknote."
         answer: false
-        explain: "It's a rate, not a note. The one colour detail that matters: older US$100 bills, the **cara chica** (small face), often get a worse rate than the newer **cara grande** ones with the blue security strip."
+        explain: "It's a rate, not a note. The one colour detail that matters: older US$100 bills, the **cara chica** (small face), often get a worse rate than the newer **cara grande** ones; the newest, with a blue security ribbon, are the most welcome."
       - type: match
         prompt: "Match the money word to its meaning"
         pairs:

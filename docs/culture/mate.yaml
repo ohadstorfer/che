@@ -23,6 +23,7 @@ classes:
 
       - type: info
         title: "The Guaraní got there first"
+        word: { es: "ka'a", tag: "Guaraní", en: "the yerba plant" }
         emoji: "🌿"
         body: "Long before the Spanish showed up, the **Guaraní** people of what is now Paraguay, northeast Argentina and southern Brazil were drinking the leaf. In Guaraní the plant is **ka'a** and the drink is **ka'ay**, roughly \"yerba water\". So when you drink mate, you're joining a tradition that is centuries older than Argentina itself."
 
@@ -87,6 +88,7 @@ classes:
 
       - type: info
         title: "The bombilla"
+        word: { es: "bombilla", tag: "The gear", en: "the metal straw" }
         emoji: "🥄"
         body: "The **bombilla** is a metal straw with a filter at the bottom, so you drink the water and not the leaves. Usually steel or alpaca (a nickel-silver alloy), sometimes fancy silver. It goes in once and stays put. It is not a spoon, and it is definitely not a stirring stick."
 
@@ -127,7 +129,7 @@ classes:
       - type: true_false
         statement: "You should wash a brand-new gourd with soap and use it right away."
         answer: false
-        explain: "New gourds get **curados** (cured) with wet yerba first. Soap and gourds don't mix."
+        explain: "New gourds get **curados** (cured) with wet yerba first. And never soap: the gourd soaks it up and your mate tastes of it. Hot water only."
 
     vocabulary:
       - es: "bombilla"
@@ -154,6 +156,7 @@ classes:
     pages:
       - type: info
         title: "Cebar: the verb that matters"
+        word: { es: "cebar", tag: "The verb that matters", en: "to prepare and serve mate" }
         emoji: "🫗"
         body: "**Cebar** means to prepare and serve mate: pour the water, hand it over, get it back, repeat. The person doing it is the **cebador** (or **cebadora**). It's a small job with big status. A good cebador is appreciated; a bad one hears about it, lovingly, all afternoon."
 
@@ -194,7 +197,7 @@ classes:
       - type: true_false
         statement: "The cebador gives the first mate to the most important guest, as an honor."
         answer: false
-        explain: "Usually the opposite: the first one is the harsh one, so the cebador takes the hit. There is even a saying: **el primero es para el zonzo** (the first one is for the fool)."
+        explain: "Usually the opposite: the first one is the harsh one, so the cebador takes the hit. There is even a saying: **el primero es para el zonzo** (also spelled *sonso*: the first one is for the fool)."
 
       - type: gap
         prompt: "The mate has lost all its flavor. What do you say?"
@@ -248,6 +251,7 @@ classes:
 
       - type: info
         title: "Gracias means \"I'm out\""
+        word: { es: "gracias", tag: "In a ronda", en: "\"I'm out\", not \"thanks\"" }
         emoji: "🙅"
         body: "This one catches every foreigner. In a ronda, saying **gracias** when you hand the mate back doesn't mean \"thanks\", it means \"thanks, **I'm done**\". Say it after your first mate and you won't get another. Want to keep going? Just hand it back, maybe with a smile or a \"¡qué rico!\"."
 
@@ -288,7 +292,7 @@ classes:
       - type: true_false
         statement: "Wiping the bombilla before you drink from it is normal and polite."
         answer: false
-        explain: "Sharing the bombilla is the whole point, and wiping it can come off as a bit of an insult. If you're sick or don't want to share, just say **no, gracias** from the start. That's totally fine."
+        explain: "It's not a rule anyone enforces, but sharing the bombilla is the whole point, so many people read wiping it as 'you think I'm dirty'. If you're sick or don't want to share, just say **no, gracias** from the start. That's totally fine."
 
     vocabulary:
       - es: "ronda"
@@ -313,6 +317,7 @@ classes:
     pages:
       - type: info
         title: "Amargo or dulce?"
+        word: { es: "amargo", tag: "Taste", en: "bitter, no sugar" }
         emoji: "🍯"
         body: "Most people drink it **amargo** (bitter, no sugar). **Mate dulce** has sugar or sweetener added, more common in some provinces and families. It's a friendly rivalry, not a war. Some purists will tease you, though. People also add **yuyos** (herbs) like peperina or burrito, or a bit of orange peel."
 
@@ -344,7 +349,7 @@ classes:
       - type: info
         title: "Where? Everywhere."
         emoji: "🌳"
-        body: "In the office, at university, on a road trip (the co-pilot serves), in the park, at the beach. You'll see people walking with the termo under their arm. **Matear** means to drink mate, and **una matera** is the bag to carry the kit. Uruguayans drink even more per person than Argentines, which they will happily remind you."
+        body: "In the office, at university, on a road trip (the co-pilot serves), in the park, at the beach. You'll see people walking with the termo under their arm. **Matear** means to drink mate, and **una matera** is the bag to carry the kit. Uruguayans drink even more per person than Argentines (roughly 8 to 10 kilos of yerba a year, against 6 or so), which they will happily remind you."
 
       - type: true_false
         statement: "Tereré is mostly linked to Paraguay and the hot northeast of Argentina."
@@ -384,3 +389,81 @@ classes:
         en: "afternoon snack"
       - es: "matera"
         en: "bag for carrying the mate kit"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "mate-en-el-barrio"
+    title: "Mate next door"
+    summary: "Uruguay, southern Brazil and a surprise fan in the Middle East"
+    pages:
+      - type: info
+        title: "Same leaf, different rules"
+        emoji: "🗺️"
+        body: "Argentina doesn't own mate. **Uruguay**, **Paraguay** and southern **Brazil** drink it every day too, and each one is sure its way is the right way. The champion per person is Uruguay: roughly 8 to 10 kilos of yerba a year, against about 6 in Argentina. **Cruzá el charco** (cross \"the puddle\", the River Plate) and you'll notice the difference in five minutes."
+
+      - type: info
+        title: "Uruguay: the termo lives under the arm"
+        emoji: "🇺🇾"
+        body: "In Montevideo people walk to work, to the rambla, to the beach with the **termo bajo el brazo** (thermos under the arm) and the mate in hand. Uruguay grows almost no yerba: most of it comes from **Brazil**, ground fine, dusty and almost **sin palo**. It's stronger and more bitter than the Argentine stuff. Plenty of Uruguayans also have *their* mate and don't love others touching it."
+
+      - type: true_false
+        statement: "Uruguay grows most of the yerba its people drink."
+        answer: false
+        explain: "It grows almost none. The biggest mate drinkers in the world import their yerba, mostly from Brazil. That's why **yerba uruguaya** tastes so different: it's a Brazilian-style fine grind."
+
+      - type: choice
+        scenario: "You come back from Montevideo with a pack of yerba uruguaya and use it in your next ronda in Buenos Aires."
+        prompt: "What will your Argentine friends probably say?"
+        options: ["It's sweeter than ours", "It's stronger and dustier", "It tastes exactly the same"]
+        correct: 1
+        explain: "Fine-ground, almost no stems, lots of powder: it hits harder and can clog a bombilla. Some porteños love it, some call it **polvo** (dust)."
+
+      - type: info
+        title: "Brazil: chimarrão"
+        emoji: "🇧🇷"
+        body: "In **Rio Grande do Sul**, Brazil's southern state, the gaúchos drink **chimarrão**: bright green, powder-fine yerba in a big gourd called a **cuia**, sipped through a **bomba**. Same ronda, same hot water, different accent. Since 2003 a state law has named it the region's symbolic drink. Cowboys on both sides of the border, same habit."
+
+      - type: match
+        prompt: "Match the mate to where it's from"
+        pairs:
+          - ["chimarrão", "southern Brazil"]
+          - ["tereré", "Paraguay (cold)"]
+          - ["yerba uruguaya", "Uruguay (fine, almost no stems)"]
+          - ["yerba con palo", "Argentina (with stems)"]
+
+      - type: info
+        title: "The surprise fan: Syria"
+        emoji: "🌍"
+        body: "Guess who buys most of Argentina's exported yerba. **Syria**, by far: it's the main destination year after year. In the late 1800s and early 1900s many Syrians and Lebanese moved to Argentina, and some went home with the habit. Today mate is especially loved by the **Druze** communities of Syria and Lebanon. In Argentina, people of Syrian-Lebanese descent are usually just called **turcos**."
+        fun_fact: "Chile is a distant second on the export list."
+
+      - type: choice
+        prompt: "Which country buys the most Argentine yerba?"
+        options: ["Uruguay", "Syria", "Chile", "United States"]
+        correct: 1
+        explain: "Syria, by far. Uruguay mostly buys from Brazil, and Chile comes second with a much smaller share."
+
+      - type: gap
+        prompt: "Describe the classic Montevideo look"
+        text: "Los uruguayos andan con el termo bajo el ___."
+        options: ["brazo", "mate", "pie"]
+        correct: 0
+        translation: "Uruguayans walk around with the thermos under their arm."
+        explain: "**Bajo el brazo** = under the arm. In Buenos Aires you see it too, just less."
+
+    vocabulary:
+      - es: "yerba uruguaya"
+        en: "fine, almost stemless yerba (Uruguayan style)"
+      - es: "bajo el brazo"
+        en: "under the arm"
+        example: { es: "Siempre anda con el termo bajo el brazo.", en: "He always walks around with the thermos under his arm." }
+      - es: "polvo"
+        en: "dust, powder"
+      - es: "fuerte"
+        en: "strong"
+        example: { es: "Esta yerba es muy fuerte.", en: "This yerba is really strong." }
+      - es: "cruzar el charco"
+        en: "to cross the River Plate (to Uruguay or back)"
+        note: "Literally 'cross the puddle'."
+      - es: "turco"
+        en: "colloquial for someone of Syrian-Lebanese descent"
+        note: "Historically inaccurate (they came with Ottoman passports); usually not meant as an insult, but some find it lazy."

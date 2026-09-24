@@ -1,0 +1,529 @@
+section:
+  slug: "regiones"
+  title: "Las provincias"
+  emoji: "🗺️"
+  summary: "Argentina beyond Buenos Aires, from the salt flats to the end of the world"
+
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-interior"
+    title: "Buenos Aires is not Argentina"
+    summary: "A huge country, 24 districts and one big word: el interior"
+    pages:
+      - type: info
+        title: "Bigger than you think"
+        emoji: "📏"
+        body: "Argentina is the **eighth-largest country** in the world: about 2.8 million km², roughly five times France. From **La Quiaca**, on the Bolivian border, to **Ushuaia**, at the bottom of the map, you've got deserts at 4,000 m, jungle, vineyards, the pampa and glaciers. The legendary **Ruta 40** runs along the Andes for about 5,000 km. Pack a jacket *and* sunscreen."
+
+      - type: info
+        title: "23 plus one"
+        emoji: "🧩"
+        body: "The country has **23 provincias** plus the **Ciudad Autónoma de Buenos Aires** (**CABA**), the capital, which is *not* a province. Confusing part: there's also a **provincia de Buenos Aires**, the biggest one, surrounding the city. Its capital isn't Buenos Aires at all, it's **La Plata**. The smallest province is **Tucumán**; the youngest is **Tierra del Fuego**, which only became a province in 1990."
+
+      - type: true_false
+        statement: "The city of Buenos Aires is the capital of the province of Buenos Aires."
+        answer: false
+        explain: "The city is its own district, CABA. The province's capital is **La Plata**, about an hour south. Porteños mix this up too, don't worry."
+
+      - type: info
+        title: "El interior"
+        emoji: "🧭"
+        body: "In Buenos Aires, anything outside the city and its suburbs is **el interior**. \"Se fue a vivir al interior\" can mean Córdoba or a village of 300 people. The metro area (**AMBA**) holds about **a third** of all Argentines, so the capital tends to think it *is* the country. People from the provinces have noticed, and they have opinions."
+        fun_fact: "Someone from the provinces is a **provinciano**. Someone from the city is a **porteño**, from the port."
+
+      - type: choice
+        scenario: "You meet a girl in Palermo. She tells you she's from Salta and just moved to Buenos Aires for university."
+        prompt: "Which reply goes down best?"
+        options: ["\"Oh, so you're porteña now!\"", "\"¿Y qué extrañás de Salta?\"", "\"Is Salta near Buenos Aires?\""]
+        correct: 1
+        explain: "Asking what she misses (**¿qué extrañás?**) gets you twenty minutes about empanadas, family and the mountains. Calling her porteña is a quick way to get corrected: provincial identity runs deep."
+
+      - type: info
+        title: "The map in five pieces"
+        emoji: "🗺️"
+        body: "Argentines usually split the country into regions: the **Noroeste** (NOA: Salta, Jujuy, Tucumán…), the **Noreste** and **Litoral** (Misiones, Corrientes, Santa Fe…), **Cuyo** (Mendoza, San Juan, San Luis), the **Centro** or pampa (Buenos Aires, Córdoba, La Pampa) and **Patagonia** down south. Each has its own accent, its own food and its own jokes about the others."
+
+      - type: match
+        prompt: "Match the place to what you call someone from there"
+        pairs:
+          - ["Salta", "salteño"]
+          - ["Mendoza", "mendocino"]
+          - ["Córdoba", "cordobés"]
+          - ["Rosario", "rosarino"]
+          - ["Tucumán", "tucumano"]
+        explain: "There's no single rule: -eño, -ino, -és, -ano. You just learn them. Getting it right earns you instant points."
+
+      - type: order
+        prompt: "Put these provinces in order, from north to south"
+        items:
+          - "Jujuy"
+          - "Tucumán"
+          - "Córdoba"
+          - "Neuquén"
+          - "Santa Cruz"
+          - "Tierra del Fuego"
+        explain: "Jujuy touches Bolivia; Tierra del Fuego is an island across the Strait of Magellan. In between, well over 4,000 km of road."
+
+      - type: gap
+        prompt: "A porteño friend tells you his sister moved away from Buenos Aires."
+        text: "Mi hermana se fue a vivir al ___."
+        options: ["interior", "exterior", "campo"]
+        correct: 0
+        translation: "My sister moved out to the provinces."
+        explain: "**Al interior** means anywhere in the provinces. **Al exterior** would mean abroad. **Al campo** is the countryside, a farm, not a city like Rosario."
+
+    vocabulary:
+      - es: "provincia"
+        en: "province"
+        example: { es: "¿De qué provincia sos?", en: "What province are you from?" }
+      - es: "el interior"
+        en: "the provinces (anywhere outside Buenos Aires)"
+        note: "Said mostly from Buenos Aires. Some provincianos find it a bit porteño-centric."
+      - es: "provinciano"
+        en: "someone from the provinces"
+      - es: "porteño"
+        en: "someone from the city of Buenos Aires"
+      - es: "Capital"
+        en: "the city of Buenos Aires (colloquial)"
+        example: { es: "Mañana viajo a Capital.", en: "Tomorrow I'm going to Buenos Aires city." }
+      - es: "extrañar"
+        en: "to miss (someone or something)"
+        example: { es: "Extraño mucho a mi vieja.", en: "I really miss my mum." }
+      - es: "ruta"
+        en: "highway, road"
+        example: { es: "Nos vamos por la ruta 40.", en: "We're taking Route 40." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "noroeste"
+    title: "The Noroeste: Andes, coca and Pachamama"
+    summary: "Salta, Jujuy and the most Andean corner of the country"
+    pages:
+      - type: info
+        title: "Another Argentina"
+        emoji: "🏔️"
+        body: "Fly two hours north of Buenos Aires and you land in the Andes. **Salta** (nicknamed **Salta la linda**, Salta the pretty) and **Jujuy** feel closer to Bolivia and Peru than to Palermo: adobe villages, llamas, **ponchos**, quinoa, and Quechua words in everyday Spanish. The **Quebrada de Humahuaca**, a long valley in Jujuy, has been a UNESCO World Heritage site since 2003."
+
+      - type: info
+        title: "The hill of seven colors"
+        emoji: "🌈"
+        body: "In the little town of **Purmamarca**, the **Cerro de los Siete Colores** looks hand-painted: stripes of red, purple, ochre and green, from different minerals laid down over millions of years. Further up, at around **3,450 m**, the **Salinas Grandes** are a blinding white salt flat, over 200 km² of it. Everyone takes the same fake-perspective photo. You will too."
+
+      - type: true_false
+        statement: "The Cerro de los Siete Colores gets its stripes from paint added for tourists."
+        answer: false
+        explain: "It's all geology: layers of different minerals and sediments. The paint-brush look is completely natural."
+
+      - type: info
+        title: "Coquear"
+        emoji: "🍃"
+        body: "In the northwest, lots of people **coquean**: they tuck coca leaves into their cheek and keep a wad, the **acullico**, there for hours. It fights altitude, cold and tiredness. It's no scandal: since 1989, national law says chewing coca leaves in their natural state is **not** drug use. A few leaves in your cheek are a world away from cocaine, which is very much illegal."
+        fun_fact: "The odd bit: the leaves are legal to chew, but importing them isn't. Most come across the Bolivian border anyway."
+
+      - type: choice
+        scenario: "On a bus to Humahuaca, the man next to you has a bulging cheek and offers you some leaves from a little bag."
+        prompt: "What's going on?"
+        options: ["He's selling something illegal", "He's coqueando and offering to share", "He's chewing tobacco"]
+        correct: 1
+        explain: "Coca leaf is shared like mate up there. Taking a few helps with the altitude. You can also just say **no, gracias**: nobody will be offended."
+
+      - type: info
+        title: "Feeding the Earth"
+        emoji: "🌎"
+        body: "Every **1 de agosto** the Andes celebrate the **Pachamama**, Mother Earth. Families dig a hole, the **boca**, and \"feed\" it with food, coca, chicha and wine, to thank her and ask for a good year. The ritual is called the **corpachada**, a word of Quechua origin. Meanwhile, all over Argentina, people drink **caña con ruda** that morning to keep winter's bad luck away."
+
+      - type: true_false
+        statement: "On August 1st, many Argentines, even in Buenos Aires, drink a shot of caña con ruda."
+        answer: true
+        explain: "It's cane liquor steeped with rue, drunk on an empty stomach, in one, three or seven sips. The tradition is Guaraní in origin but has spread everywhere."
+
+      - type: info
+        title: "Zambas and carnavalito"
+        emoji: "🎶"
+        body: "Salta is the home turf of the **zamba**, a slow, elegant folk dance where couples circle each other waving white **pañuelos** (handkerchiefs). Jujuy dances the **carnavalito**, in a line, to flutes and charangos. And Jujuy's **carnaval** starts with the **desentierro del diablo**: a cloth devil gets dug up from a pile of stones, and the whole town parties until he's buried again."
+        fun_fact: "Dicen que the red poncho with black stripes of Salta mourns General Güemes, the local independence hero."
+
+      - type: match
+        prompt: "Match the word to what it is"
+        pairs:
+          - ["Pachamama", "Mother Earth"]
+          - ["acullico", "wad of coca leaves in the cheek"]
+          - ["zamba", "slow dance with handkerchiefs"]
+          - ["corpachada", "ritual of feeding the Earth"]
+          - ["Salinas Grandes", "huge salt flat"]
+
+      - type: gap
+        prompt: "Your friend in Salta invites you to the Pachamama celebration."
+        text: "El primero de agosto le damos de ___ a la Pachamama."
+        options: ["comer", "beber", "hablar"]
+        correct: 0
+        translation: "On August 1st we feed the Pachamama."
+        explain: "**Darle de comer** means to feed. That's literally the idea of the corpachada."
+
+    vocabulary:
+      - es: "coquear"
+        en: "to chew coca leaves"
+        example: { es: "Coqueá un poco, que ayuda con la altura.", en: "Chew some coca, it helps with the altitude." }
+      - es: "acullico"
+        en: "wad of coca leaves held in the cheek"
+        note: "Northwest word. In Buenos Aires few people know it."
+      - es: "la Pachamama"
+        en: "Mother Earth (Andean)"
+      - es: "caña con ruda"
+        en: "cane liquor with rue, drunk on August 1st"
+      - es: "la altura"
+        en: "altitude"
+        example: { es: "Me pegó la altura.", en: "The altitude got to me." }
+      - es: "pañuelo"
+        en: "handkerchief, scarf"
+      - es: "quebrada"
+        en: "narrow mountain valley, gorge"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "cuyo"
+    title: "Cuyo: wine, water and the siesta"
+    summary: "Mendoza, Malbec and the highest mountain outside Asia"
+    pages:
+      - type: info
+        title: "An oasis in the desert"
+        emoji: "🌵"
+        body: "**Cuyo** (Mendoza, San Juan, San Luis) is dry: the name is usually said to mean \"land of sands\". Mendoza lives on snowmelt from the Andes, channelled through **acequias**, open ditches along every street that water the trees. The system goes back to the **Huarpe** people, before the Spanish. Walk around at night and mind your step: falling into one is a rite of passage."
+
+      - type: info
+        title: "Malbec country"
+        emoji: "🍷"
+        body: "Mendoza produces most of Argentina's wine, and around **85% of its Malbec**. The grape came from France in the 1800s and found its real home here, in sun, altitude and dry air. Today it's the country's flagship wine, with its own day: **17 de abril**, Malbec World Day. A **bodega** is a winery, and visiting them by bike is a local classic."
+
+      - type: true_false
+        statement: "Malbec was originally a French grape."
+        answer: true
+        explain: "It comes from southwest France. It flopped there after frost and disease, and boomed in Mendoza. Argentines are not modest about this."
+
+      - type: info
+        title: "La Vendimia"
+        emoji: "👑"
+        body: "Every year the grape harvest ends with the **Fiesta Nacional de la Vendimia**, official since **1936**. It builds up from January and peaks in early March, with parades, a giant open-air show in a stone amphitheater in the foothills, and the crowning of the **Reina de la Vendimia**, picked from queens sent by each of Mendoza's departments. It's Mendoza's biggest night, by far."
+
+      - type: info
+        title: "El Aconcagua"
+        emoji: "⛰️"
+        body: "Right behind Mendoza stands the **Aconcagua**, at about **6,961 m** the highest mountain outside Asia, and the roof of the Americas. Thousands try to summit it each season; plenty turn back because of altitude and wind. You don't need to climb it: from the road to Chile you can see its snowy face from the Horcones lagoon."
+
+      - type: choice
+        prompt: "What makes the Aconcagua special?"
+        options: ["It's the highest active volcano in the world", "It's the highest mountain outside Asia", "It's on the border with Bolivia", "It's the only mountain in Argentina with snow"]
+        correct: 1
+        explain: "Almost 7,000 m, the highest point of both the western and southern hemispheres. It's entirely inside Argentina, near the Chilean border."
+
+      - type: info
+        title: "La siesta is real"
+        emoji: "😴"
+        body: "In Buenos Aires the siesta is a weekend luxury. In Cuyo and much of the interior it's a schedule: lots of shops close in the early afternoon and reopen around five, and the streets go silent in the summer heat. Try calling someone at 3 p.m. and you'll get a sleepy voice, or no answer. People then stay up late when it cools down."
+
+      - type: choice
+        scenario: "It's 3 p.m. on a hot January weekday in San Juan. You need to buy a charger and the shop is shut."
+        prompt: "What's the most likely explanation?"
+        options: ["It's a public holiday", "It's closed for the siesta and will reopen later", "The shop went bankrupt"]
+        correct: 1
+        explain: "Come back around five or six. The **horario cortado** (split opening hours) is normal in many provinces."
+
+      - type: gap
+        prompt: "A mendocino invites you out for the afternoon."
+        text: "¿Vamos a recorrer ___ en bici?"
+        options: ["bodegas", "acequias", "siestas"]
+        correct: 0
+        translation: "Shall we tour the wineries by bike?"
+        explain: "**Bodega** is a winery (in other contexts, a storeroom). Pedal slowly: the tasting is at every stop."
+
+      - type: true_false
+        statement: "The acequias in Mendoza's streets are just decorative fountains."
+        answer: false
+        explain: "They're real irrigation channels. Without them, the city's trees, and the whole oasis, would die."
+
+    vocabulary:
+      - es: "bodega"
+        en: "winery"
+        example: { es: "Mañana vamos a una bodega en Luján de Cuyo.", en: "Tomorrow we're going to a winery in Luján de Cuyo." }
+      - es: "vendimia"
+        en: "grape harvest"
+      - es: "acequia"
+        en: "irrigation ditch along the street"
+      - es: "dormir la siesta"
+        en: "to take a nap after lunch"
+        example: { es: "No me llames a las tres, que duermo la siesta.", en: "Don't call me at three, I'm napping." }
+      - es: "horario cortado"
+        en: "split opening hours (closed in the afternoon)"
+      - es: "cerro"
+        en: "mountain, hill"
+      - es: "un tinto"
+        en: "a red wine"
+        example: { es: "¿Pedimos un tinto?", en: "Shall we order a red?" }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "cordoba"
+    title: "Córdoba: fernet, cuarteto and the tonada"
+    summary: "The province that talks slower, parties harder and jokes about everything"
+    pages:
+      - type: info
+        title: "La tonada"
+        word: { es: "tonada", tag: "The Córdoba sound", en: "a sing-song accent" }
+        emoji: "🗣️"
+        body: "You'll hear a cordobés before you see one. The **tonada** (or **cantito**) stretches the syllable *before* the stressed one: **\"capiiital\"**, **\"cordoobés\"**, with a little sing-song on top. Some linguists think it's a trace of the **Comechingón** languages spoken there before Spanish. Porteños love imitating it. Cordobeses love telling them they do it badly."
+
+      - type: info
+        title: "La Docta"
+        emoji: "🎓"
+        body: "Córdoba's nickname is **La Docta**, \"the learned one\". Its university, founded by the Jesuits in **1613**, is the oldest in the country, and for over two centuries it was the only one. Today the city is full of students from all over Argentina. The old Jesuit block downtown, the **Manzana Jesuítica**, is a UNESCO World Heritage site."
+
+      - type: true_false
+        statement: "Córdoba is called \"La Docta\" because of its old university."
+        answer: true
+        explain: "**Docta** means learned. The Universidad Nacional de Córdoba dates back to 1613, and for a long time it was the only university in the country."
+
+      - type: info
+        title: "Fernet con coca"
+        emoji: "🥤"
+        body: "**Fernet** is a bitter Italian herbal liqueur. Argentina drinks most of the world's supply, and Córdoba, with about 8% of the population, drinks around **a third** of the country's. Mixed with Coca-Cola, lots of ice, and a proper foam on top, it's the drink of every party. Some cordobeses pour it into a cut-off plastic bottle: the classic **fernet en bidón**."
+        fun_fact: "Argentines also call it a **fernando**. Nobody knows who Fernando was."
+
+      - type: choice
+        scenario: "At a party in Córdoba someone hands you a big glass of something dark and fizzy with a thick foam."
+        prompt: "What is it almost certainly?"
+        options: ["A Malbec with soda", "Fernet con coca", "Cold mate", "A Guinness"]
+        correct: 1
+        explain: "**Fernet con coca**, the unofficial provincial drink. It's bitter the first time and addictive by the third. Pace yourself: fernet is strong stuff, the Coke just hides it."
+
+      - type: info
+        title: "Cuarteto"
+        emoji: "🎤"
+        body: "Córdoba's party music is **cuarteto**, born in **1943** with the **Cuarteto Leo**: Italian tarantella and pasodoble played for working-class dance halls, with a bouncy piano beat locals call **tunga-tunga**. Its king is **Carlos \"La Mona\" Jiménez**, on stage for more than fifty years. **Rodrigo**, \"el Potro\", made it national in the 90s, before dying in a car crash in 2000, aged 27."
+        fun_fact: "In December 2025 UNESCO added cuarteto to its list of intangible heritage of humanity."
+
+      - type: info
+        title: "Culiado"
+        emoji: "😂"
+        body: "Cordobeses are famous for their humor: fast, cheeky, and full of **jodas** (teasing). Their signature word is **culiado** (said **culiao**). It's vulgar in origin, and still an insult if you say it angrily, but between friends it's closer to \"mate\" or \"dude\": \"¿Qué hacés, culiao?\" The story goes that even Paul McCartney greeted a Córdoba crowd with it."
+
+      - type: choice
+        scenario: "You've just met a group of cordobeses. One of them says to another, laughing: \"¡Qué hacés, culiao!\""
+        prompt: "Should you greet them the same way?"
+        options: ["Yes, it's just a local hello", "Better wait until you're friends, it's still rude with strangers", "Never, it's the worst insult in Argentina"]
+        correct: 1
+        explain: "Between friends it's affection. From a gringo they just met, it can land badly. Tone and trust are everything. Wait until they call *you* culiao."
+
+      - type: match
+        prompt: "Match the Córdoba icon to what it is"
+        pairs:
+          - ["La Mona Jiménez", "king of cuarteto"]
+          - ["La Docta", "Córdoba's nickname"]
+          - ["tonada", "the sing-song accent"]
+          - ["fernet con coca", "the party drink"]
+          - ["Rodrigo", "\"el Potro\", cuarteto star"]
+
+      - type: gap
+        prompt: "Your cordobés friend is organizing drinks."
+        text: "Traé hielo, que hacemos un ___ con coca."
+        options: ["fernet", "mate", "tinto"]
+        correct: 0
+        translation: "Bring ice, we're making fernet and coke."
+        explain: "Fernet without ice is a crime in Córdoba. Somebody always forgets the ice anyway."
+
+    vocabulary:
+      - es: "tonada"
+        en: "regional accent, sing-song"
+        example: { es: "Se le nota la tonada cordobesa.", en: "You can hear his Córdoba accent." }
+      - es: "fernet con coca"
+        en: "fernet and cola"
+      - es: "fernando"
+        en: "fernet (slang)"
+      - es: "cuarteto"
+        en: "Córdoba's dance music"
+      - es: "culiado / culiao"
+        en: "dude, mate (between friends in Córdoba)"
+        note: "Vulgar origin. Use only with friends, and only if they use it first."
+      - es: "joda"
+        en: "teasing, a joke; also a party"
+        example: { es: "Era una joda, no te enojes.", en: "It was a joke, don't get mad." }
+      - es: "cantito"
+        en: "sing-song (the Córdoba accent)"
+        example: { es: "Me encanta el cantito cordobés.", en: "I love the Córdoba sing-song." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "litoral"
+    title: "The Litoral: rivers, falls and chamamé"
+    summary: "Iguazú, Guaraní, Rosario and a very loud yell"
+    pages:
+      - type: info
+        title: "A coast with no sea"
+        emoji: "🌊"
+        body: "The **Litoral** (Santa Fe, Entre Ríos, Corrientes, Misiones…) means \"coast\", but none of it touches the ocean. The coasts are **river** banks: the huge **Paraná** and **Uruguay** rivers. Up in the **Noreste**, the air is humid, the soil is bright red (**tierra colorada**), and **siesta**, **tereré** and fishing are serious business."
+
+      - type: info
+        title: "Iguazú"
+        emoji: "💦"
+        body: "On the border with Brazil, the **Cataratas del Iguazú** are around **275 waterfalls** along almost 3 km, about 80% of them on the Argentine side. The star is the **Garganta del Diablo** (Devil's Throat), about 80 m of thundering water. The story goes that when US First Lady **Eleanor Roosevelt** saw it, she sighed: **\"Poor Niagara!\"** Nobody has found proof she said it, but everyone repeats it."
+
+      - type: true_false
+        statement: "Most of the Iguazú waterfalls are on the Argentine side."
+        answer: true
+        explain: "About 80% of the falls are in Argentina. Brazilians like to point out that their side has the better panoramic view. Both are right."
+
+      - type: info
+        title: "Guaraní is still here"
+        emoji: "🗣️"
+        body: "The northeast is Guaraní land, and you can hear it. In **Corrientes**, Guaraní has been an official language alongside Spanish since **2004**. Everyday speech is full of Guaraní words: **gurí** / **gurisa** (kid, boy / girl), **mitaí** (child), **che** (my, as in \"che ru\", my father), **ñandú** (rhea). Many correntinos pepper their Spanish with it."
+
+      - type: info
+        title: "Chamamé and the sapucai"
+        word: { es: "chamamé", tag: "Music of the Litoral", en: "accordion folk music" }
+        emoji: "🪗"
+        body: "The Litoral's music is **chamamé**: accordion, guitar and couples dancing tightly embraced. Every January, **Corrientes** hosts the **Fiesta Nacional del Chamamé**. At the best moment of a song, someone lets out a **sapucai**: a long, high, piercing yell of joy (or grief, or bravery). In 2020 UNESCO listed chamamé as intangible heritage of humanity."
+
+      - type: choice
+        scenario: "You're at a chamamé dance in Corrientes. Suddenly a man next to you throws his head back and lets out a long, piercing scream."
+        prompt: "What's happening?"
+        options: ["He's hurt, call someone", "It's a sapucai, he's feeling the music", "He's calling his dog"]
+        correct: 1
+        explain: "The **sapucai** (from Guaraní) is how chamamé fans express emotion. Nobody will expect you to do one. But if you try, go loud."
+
+      - type: info
+        title: "Rosario"
+        emoji: "🏙️"
+        body: "**Rosario**, in Santa Fe, is Argentina's third city and a river town through and through. It's where Belgrano first raised the flag, hence its giant **Monumento a la Bandera**. It's also the birthplace of **Lionel Messi** (1987) and **Ernesto \"Che\" Guevara** (1928), and of rock star **Fito Páez**. In Santa Fe, a draft beer is ordered as a **liso**, served in a straight glass."
+
+      - type: match
+        prompt: "Match the place to what it's famous for"
+        pairs:
+          - ["Iguazú", "the Garganta del Diablo"]
+          - ["Corrientes", "chamamé and Guaraní"]
+          - ["Rosario", "the Monumento a la Bandera"]
+          - ["Misiones", "red soil and yerba plantations"]
+          - ["Santa Fe", "the liso"]
+
+      - type: gap
+        prompt: "Grandma in Corrientes uses a Guaraní word for the neighbor's boy. Which one?"
+        text: "Ese ___ es bien atrevido."
+        options: ["gurí", "ñandú", "sapucai"]
+        correct: 0
+        translation: "That kid is really cheeky."
+        explain: "**Gurí** (from Guaraní) is what the Litoral and Uruguay call a boy. A **ñandú** is a rhea, and a **sapucai** is a yell. In Buenos Aires you'd hear **pibe**."
+
+      - type: true_false
+        statement: "Che Guevara got his nickname because he was born in Buenos Aires."
+        answer: false
+        explain: "He was born in **Rosario**. Cubans called him \"Che\" because he said it all the time, the most Argentine word there is."
+
+    vocabulary:
+      - es: "río"
+        en: "river"
+      - es: "catarata"
+        en: "waterfall"
+        example: { es: "¿Fuiste a las Cataratas?", en: "Have you been to the Iguazú Falls?" }
+      - es: "gurí / gurisa"
+        en: "boy / girl, kid (Litoral)"
+        note: "Guaraní origin. In Buenos Aires they say pibe / piba."
+      - es: "sapucai"
+        en: "long cry of emotion in chamamé"
+      - es: "chamamé"
+        en: "accordion folk music of the Litoral"
+      - es: "liso"
+        en: "glass of draft beer (Santa Fe)"
+        example: { es: "Dos lisos, por favor.", en: "Two draft beers, please." }
+      - es: "tierra colorada"
+        en: "red soil (Misiones)"
+      - es: "rosarino"
+        en: "someone from Rosario"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "patagonia"
+    title: "Patagonia: ice, wind and Welsh tea"
+    summary: "Glaciers, whales, chocolate and the end of the world"
+    pages:
+      - type: info
+        title: "Big and empty"
+        emoji: "🌬️"
+        body: "**Patagonia** (Neuquén, Río Negro, Chubut, Santa Cruz, Tierra del Fuego) covers more than a quarter of Argentina, but only about **1 in 20** Argentines live there. It's steppe, lakes, the Andes and a wind that never stops. Gusts of 100 km/h are nothing special. You'll spot the tourists: they're the ones chasing their hats."
+
+      - type: info
+        title: "The Perito Moreno"
+        emoji: "🧊"
+        body: "Near **El Calafate**, the **glaciar Perito Moreno** ends in a wall of ice about 70 m tall. Every few years it pushes across the lake, builds an ice bridge, and the bridge collapses on live TV. For decades it was famous for being stable while other glaciers shrank. Bad news: studies now show it has been retreating since around 2020."
+        fun_fact: "Legend says whoever eats a **calafate** berry will come back to Patagonia."
+
+      - type: true_false
+        statement: "The Perito Moreno glacier is still famous for being one of the few glaciers not affected by warming."
+        answer: false
+        explain: "That used to be true. Recent studies show it started retreating around 2020, and the loss is speeding up."
+
+      - type: info
+        title: "Te galés"
+        emoji: "🫖"
+        body: "On **28 July 1865**, the ship **Mimosa** dropped about 150 **Welsh** settlers in what's now **Puerto Madryn**. They wanted a place to keep their language and chapels. They founded towns in the Chubut valley, like **Gaiman**, where today you can have a **té galés**: pots of tea, scones, jams and the **torta negra**, a dense fruit cake built to last through winter."
+
+      - type: info
+        title: "Bariloche and the viaje de egresados"
+        emoji: "🍫"
+        body: "**Bariloche** looks like the Alps: lakes, wooden chalets, ski slopes and **chocolate** shops on every corner. It's also where Argentine teens go on their **viaje de egresados**, the end-of-high-school trip: more than 100,000 a year, with tour-company **coordinadores** trying to keep them alive and sober. Almost every adult has stories. Few will tell you all of them."
+
+      - type: choice
+        scenario: "Your Argentine coworker, 35, shows you a photo of a bunch of teens in matching jackets in the snow."
+        prompt: "What's the photo almost certainly from?"
+        options: ["A school ski team", "Their viaje de egresados to Bariloche", "A trip to Europe"]
+        correct: 1
+        explain: "The group jacket, the snow, the embarrassing haircuts: classic **viaje de egresados**. Ask about it and enjoy the story (the censored version)."
+
+      - type: info
+        title: "Whales and the end of the world"
+        emoji: "🐋"
+        body: "From about **June to December**, southern right whales come to **Península Valdés** to mate and give birth, sometimes a few meters from the shore. Way further south, **Ushuaia** calls itself **el fin del mundo**, the end of the world. Its little **Tren del Fin del Mundo** was once used to take prisoners from the old jail out to cut wood."
+
+      - type: info
+        title: "Cordero al asador"
+        emoji: "🔥"
+        body: "Patagonia's great feast is **cordero patagónico al asador**: a whole lamb opened flat on an iron cross, stuck in the ground leaning over the fire, and cooked slowly for hours. The sheep graze wild on the steppe, so the meat tastes different. It's the southern cousin of the asado, and the waiting, with wine and conversation, is part of the plan."
+
+      - type: order
+        prompt: "Put these Patagonian places in order, from north to south"
+        items:
+          - "Bariloche"
+          - "Península Valdés"
+          - "El Calafate"
+          - "Ushuaia"
+        explain: "Bariloche is in Río Negro, Valdés in Chubut, El Calafate in Santa Cruz and Ushuaia on the island of Tierra del Fuego."
+
+      - type: match
+        prompt: "Match the place to what you go there for"
+        pairs:
+          - ["Gaiman", "Welsh tea"]
+          - ["Península Valdés", "whales"]
+          - ["El Calafate", "the Perito Moreno glacier"]
+          - ["Ushuaia", "the end of the world"]
+          - ["Bariloche", "chocolate and school trips"]
+
+      - type: gap
+        prompt: "A friend asks how your trip to Ushuaia was."
+        text: "Increíble, llegué al fin del ___."
+        options: ["mundo", "país", "camino"]
+        correct: 0
+        translation: "Amazing, I made it to the end of the world."
+        explain: "**El fin del mundo** is Ushuaia's brand. It's on the signs, the train, the post office stamps."
+
+    vocabulary:
+      - es: "viaje de egresados"
+        en: "end-of-high-school trip"
+        example: { es: "En el viaje de egresados no dormí nada.", en: "I didn't sleep at all on my school trip." }
+      - es: "egresado"
+        en: "graduate (of a school)"
+      - es: "glaciar"
+        en: "glacier"
+      - es: "ballena"
+        en: "whale"
+      - es: "cordero"
+        en: "lamb"
+        example: { es: "Hicimos un cordero al asador.", en: "We roasted a lamb on a cross over the fire." }
+      - es: "el fin del mundo"
+        en: "the end of the world (Ushuaia)"
+      - es: "viento"
+        en: "wind"
+        example: { es: "¡Qué viento, por favor!", en: "What a wind, seriously!" }
+      - es: "té galés"
+        en: "Welsh-style afternoon tea"

@@ -1,3 +1,5 @@
+import { Fraunces_700Bold, Fraunces_800ExtraBold } from '@expo-google-fonts/fraunces';
+import { useFonts } from 'expo-font';
 import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import { useEffect } from 'react';
 import { Platform, View } from 'react-native';
@@ -28,6 +30,9 @@ const navigationTheme = {
 export default function RootLayout() {
   // On the web, keep the app inside whatever the keyboard leaves visible.
   useKeyboardViewportFit();
+
+  // Not awaited: the screens draw at once in the system face and pick this up when it lands.
+  useFonts({ Fraunces_700Bold, Fraunces_800ExtraBold });
 
   // Register the service worker early so the PWA is installable and can
   // receive pushes even before notifications are enabled from the home screen.

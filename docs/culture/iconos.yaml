@@ -1,0 +1,402 @@
+section:
+  slug: "iconos"
+  title: "Íconos e inventos"
+  emoji: "🌟"
+  summary: "Mafalda, Borges, the birome and a Pope who paid his club dues"
+
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "mafalda"
+    title: "Mafalda and her gang"
+    summary: "The six-year-old who worried about the whole world"
+    pages:
+      - type: info
+        title: "The girl who hated soup"
+        emoji: "👧"
+        body: "**Mafalda** is a little girl with a big bow and bigger questions: world peace, the Beatles, and why grown-ups run things so badly. She was drawn by **Quino** (Joaquín Salvador Lavado), a cartoonist from Mendoza. Her first strip came out on **29 September 1964**, and she ended in 1973. Her mortal enemy? **La sopa**. She hates soup more than war, almost."
+        fun_fact: "Quino died on 30 September 2020, one day after Mafalda turned 56."
+
+      - type: true_false
+        statement: "Mafalda was first created for an ad campaign for home appliances."
+        answer: true
+        explain: "Quino first sketched her in 1963 for an ad for **Mansfield** appliances (that's why her name starts with M). The campaign never ran, and a year later she got her own strip."
+
+      - type: info
+        title: "The gang"
+        emoji: "👫"
+        body: "**Felipe**: dreamy, shy, allergic to homework. **Manolito**: son of a Spanish **almacenero** (corner-shop owner), obsessed with money. **Susanita**: dreams only of a husband and kids, and gossips nonstop. **Miguelito**: a little philosopher in his own head. **Libertad**: tiny, with big political ideas. Plus **Guille**, Mafalda's baby brother. Every Argentine knows someone who's a Susanita or a Manolito."
+
+      - type: match
+        prompt: "Match the character to their thing"
+        pairs:
+          - ["Manolito", "works at his dad's almacén, loves money"]
+          - ["Susanita", "wants to get married and have kids"]
+          - ["Felipe", "dreamy, shy, hates homework"]
+          - ["Libertad", "the tiny one with big ideas"]
+          - ["Guille", "Mafalda's little brother"]
+
+      - type: choice
+        scenario: "Your friend's kid pushes away the bowl at dinner and crosses her arms."
+        prompt: "What's the classic Argentine joke to make?"
+        options: ["\"¡Qué Susanita!\"", "\"¡Parecés Mafalda con la sopa!\"", "\"¡Qué Manolito!\""]
+        correct: 1
+        explain: "Mafalda vs. soup is *the* running gag. In the strips, soup stands for everything you're forced to swallow, and a lot of readers saw politics in that bowl."
+
+      - type: info
+        title: "A statue on a bench"
+        emoji: "🪑"
+        body: "Quino lived in **San Telmo**, at the corner of **Chile and Defensa**, and that's where Mafalda's home is in the strip. Since 2009 a statue of her sits on a bench right there, and there's always a line of people waiting to take a photo next to her. Susanita and Manolito got statues nearby later, because of course they'd want in."
+
+      - type: gap
+        prompt: "At Manolito's family shop. What's it called?"
+        text: "Manolito atiende el ___ de su papá."
+        options: ["almacén", "colectivo", "kiosco"]
+        correct: 0
+        translation: "Manolito works at his dad's corner shop."
+        explain: "An **almacén** is the old-school neighborhood grocery store. A **kiosco** also exists, but it sells candy and cigarettes, not groceries."
+
+      - type: true_false
+        statement: "Mafalda is only famous in Argentina."
+        answer: false
+        explain: "She's been translated into dozens of languages and is huge in Spain, Italy and all of Latin America. Umberto Eco wrote a famous introduction to the Italian edition."
+
+    vocabulary:
+      - es: "historieta"
+        en: "comic strip, comic"
+        example: { es: "¿Leíste las historietas de Mafalda?", en: "Have you read the Mafalda comics?" }
+      - es: "tira"
+        en: "comic strip (short)"
+      - es: "sopa"
+        en: "soup"
+        example: { es: "Odio la sopa, como Mafalda.", en: "I hate soup, like Mafalda." }
+      - es: "almacén"
+        en: "neighborhood grocery store"
+      - es: "chusma"
+        en: "gossip (a person)"
+        example: { es: "No seas chusma, Susanita.", en: "Don't be such a gossip, Susanita." }
+      - es: "nene / nena"
+        en: "little boy / little girl"
+      - es: "la esquina"
+        en: "the street corner"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "historietas-y-pantallas"
+    title: "Comics, cartoons and snow"
+    summary: "Patoruzú, Clemente, El Eternauta and the first animated film ever"
+    pages:
+      - type: info
+        title: "Patoruzú, the rich cacique"
+        emoji: "🪶"
+        body: "**Patoruzú** is a Tehuelche **cacique** (chief) from Patagonia, created by **Dante Quinterno** in 1928. He's strong, noble, owns an enormous ranch, and gets fleeced by his city-slicker godfather **Isidoro Cañones**, a lazy porteño playboy. For decades kids read his magazine. Today the drawing style feels old-fashioned, but everyone over 40 knows his name."
+
+      - type: info
+        title: "Clemente and the papelitos"
+        emoji: "🐦"
+        body: "**Clemente** is a striped bird with no wings, drawn by **Caloi** in *Clarín* from 1973. In the **1978 World Cup**, a famous radio commentator, **José María Muñoz**, asked fans not to throw **papelitos** (paper confetti) so the country wouldn't look messy. Clemente said the opposite: **\"¡Tiren papelitos, muchachos!\"** The stadiums ended up covered in paper. The bird won."
+
+      - type: choice
+        scenario: "Argentina walks onto the pitch at the 1978 World Cup. Clemente is watching."
+        prompt: "What does he want the fans to do?"
+        options: ["Stay silent", "Throw paper confetti", "Wave flags only", "Sit down"]
+        correct: 1
+        explain: "**Tirar papelitos** is still a thing in Argentine stadiums. Clemente's campaign was playful, but under a dictatorship even a bird cheering for mess felt a little rebellious."
+
+      - type: info
+        title: "El Eternauta: deadly snow"
+        emoji: "❄️"
+        body: "In **1957** writer **Héctor Germán Oesterheld** and artist **Francisco Solano López** started **El Eternauta**: a toxic snow falls on Buenos Aires, and anyone it touches dies. Juan Salvo and his friends survive by working together. The hero isn't one man, it's the group. That idea, often summed up as **nadie se salva solo** (nobody saves themselves alone), became a motto."
+
+      - type: info
+        title: "The author who disappeared"
+        emoji: "🕯️"
+        body: "Oesterheld was politically active with the **Montoneros**. In **1977** the military dictatorship kidnapped him, and he was never seen again. His **four daughters** also disappeared, along with their partners and two grandchildren born in captivity. That's why the Eternauta's silhouette shows up on murals and at human-rights marches. It's a comic, and it's also memory."
+
+      - type: true_false
+        statement: "The 2025 Netflix series of El Eternauta starred Ricardo Darín as Juan Salvo."
+        answer: true
+        explain: "Directed by **Bruno Stagnaro**, it came out on 30 April 2025 and was the most-watched show in many countries. Suddenly half of Buenos Aires was saying **\"nadie se salva solo\"** again."
+
+      - type: info
+        title: "Before Disney: El Apóstol"
+        emoji: "🎞️"
+        body: "In **1917** the Italian-Argentine **Quirino Cristiani** released **El Apóstol**, the world's first animated feature film, 20 years before *Snow White*. It mocked President Yrigoyen, who flies up to Olympus and sets Buenos Aires on fire to clean up corruption. Sadly, the only copy burned in a studio fire in 1926, so today it is a lost film."
+
+      - type: match
+        prompt: "Match the creator to the creation"
+        pairs:
+          - ["Quino", "Mafalda"]
+          - ["Caloi", "Clemente"]
+          - ["Dante Quinterno", "Patoruzú"]
+          - ["Oesterheld", "El Eternauta"]
+          - ["Quirino Cristiani", "El Apóstol"]
+
+      - type: gap
+        prompt: "The motto of El Eternauta"
+        text: "Nadie se salva ___."
+        options: ["solo", "nunca", "rápido"]
+        correct: 0
+        translation: "Nobody saves themselves alone."
+        explain: "People quote it about everything from politics to helping a neighbor move house. It's the group, not the superhero."
+
+    vocabulary:
+      - es: "dibujitos"
+        en: "cartoons"
+        example: { es: "Los nenes están viendo dibujitos.", en: "The kids are watching cartoons." }
+      - es: "papelitos"
+        en: "paper confetti thrown at stadiums"
+      - es: "tirar"
+        en: "to throw"
+        example: { es: "¡Tiren papelitos!", en: "Throw confetti!" }
+      - es: "serie"
+        en: "TV series, show"
+        example: { es: "¿Viste la serie del Eternauta?", en: "Did you watch the Eternauta series?" }
+      - es: "nevada"
+        en: "snowfall"
+      - es: "nadie se salva solo"
+        en: "nobody saves themselves alone"
+      - es: "desaparecido"
+        en: "person disappeared by the dictatorship"
+        note: "A heavy word in Argentina. Use it with care."
+      - es: "cacique"
+        en: "indigenous chief; also a local political boss"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "escritores"
+    title: "The writers"
+    summary: "Borges, Cortázar, Sabato, Alfonsina and the turtle from Pehuajó"
+    pages:
+      - type: info
+        title: "Borges, no Nobel"
+        emoji: "📚"
+        body: "**Jorge Luis Borges** wrote short, dizzying stories about labyrinths, mirrors and infinite libraries. He went almost blind, and in 1955 became director of the **Biblioteca Nacional**, a man surrounded by books he couldn't read. He was nominated for the Nobel again and again and never got it. His conservative politics probably didn't help. Argentines still take that personally."
+        fun_fact: "He's said to have joked that not giving him the Nobel had become a Scandinavian tradition."
+
+      - type: true_false
+        statement: "Borges won the Nobel Prize in Literature."
+        answer: false
+        explain: "Never. He's one of the most famous writers never to win it, and Argentines bring it up like an old football robbery."
+
+      - type: info
+        title: "Rayuela: read it how you like"
+        emoji: "🔢"
+        body: "**Julio Cortázar** published **Rayuela** (*Hopscotch*) in 1963. You can read it straight through, or jump around chapters following a map he gives you at the start, like a hopscotch game. It's set between Paris and Buenos Aires, and it made him an idol for students. Fun detail: he was born in Brussels and kept a slight French-sounding \"r\" all his life."
+
+      - type: info
+        title: "Sabato, the gloomy one"
+        emoji: "🌑"
+        body: "**Ernesto Sabato** trained as a physicist and worked at the Curie lab in Paris, then quit science for novels. **El túnel** (1948) opens with a man confessing he killed the woman he loved. Dark stuff. Later he led the commission that wrote **Nunca Más**, the report on the dictatorship's crimes. Many Argentines read El túnel in high school."
+
+      - type: info
+        title: "Alfonsina and María Elena"
+        emoji: "🐢"
+        body: "**Alfonsina Storni** was a feminist poet in the 1920s; she died in the sea at Mar del Plata in 1938, and the song **Alfonsina y el mar** keeps her alive. **María Elena Walsh** wrote the songs every Argentine kid sings: **Manuelita**, the turtle from **Pehuajó** who went to Paris, and **El Reino del Revés**, where everything is upside down."
+
+      - type: match
+        prompt: "Match the writer to the book or song"
+        pairs:
+          - ["Cortázar", "Rayuela"]
+          - ["Sabato", "El túnel"]
+          - ["María Elena Walsh", "Manuelita"]
+          - ["Borges", "stories about labyrinths"]
+
+      - type: choice
+        scenario: "At a birthday party, a room full of adults suddenly starts singing \"Manuelita vivía en Pehuajó…\" with the kids."
+        prompt: "Who are they singing?"
+        options: ["Alfonsina Storni", "María Elena Walsh", "Mercedes Sosa", "Borges"]
+        correct: 1
+        explain: "Walsh's songs cross generations. Parents learned them as kids and now sing them to theirs, word for word."
+
+      - type: gap
+        prompt: "Recommending a book to a friend"
+        text: "Leé ___, la podés leer en el orden que quieras."
+        options: ["Rayuela", "El túnel", "Manuelita"]
+        correct: 0
+        translation: "Read Rayuela, you can read it in whatever order you want."
+        explain: "**Rayuela** is also the Argentine name of the hopscotch game kids draw in chalk on the sidewalk."
+
+      - type: true_false
+        statement: "Manuelita, from María Elena Walsh's song, is a turtle."
+        answer: true
+        explain: "A turtle from Pehuajó who travels to Paris to get herself fixed up, because she's getting old. Pehuajó even has a Manuelita statue."
+
+    vocabulary:
+      - es: "escritor / escritora"
+        en: "writer"
+      - es: "libro"
+        en: "book"
+      - es: "novela"
+        en: "novel"
+      - es: "cuento"
+        en: "short story"
+        example: { es: "Borges escribía cuentos, no novelas.", en: "Borges wrote short stories, not novels." }
+      - es: "rayuela"
+        en: "hopscotch"
+      - es: "tortuga"
+        en: "turtle"
+      - es: "leer"
+        en: "to read"
+        example: { es: "¿Qué estás leyendo?", en: "What are you reading?" }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "inventos-y-nobeles"
+    title: "Inventions and Nobels"
+    summary: "The birome, fingerprints, the bypass and five Nobel prizes"
+    pages:
+      - type: info
+        title: "The birome"
+        word: { es: "birome", tag: "An Argentine invention", en: "ballpoint pen" }
+        emoji: "🖊️"
+        body: "In Argentina a ballpoint pen is a **birome**. **László Bíró**, a Hungarian journalist, arrived in 1940 and patented the pen here in **1943** with his partner **Juan Jorge Meyne**. **Bi**-ró + **Me**-yne = **birome**. Its first big customer was the British air force, because it didn't leak at altitude. Argentina's **Día del Inventor**, 29 September, is his birthday."
+
+      - type: gap
+        prompt: "In class, you need a pen"
+        text: "¿Me prestás una ___?"
+        options: ["birome", "lapicera fuente", "tiza"]
+        correct: 0
+        translation: "Can you lend me a pen?"
+        explain: "Hardly anyone in Argentina says *bolígrafo*. It's **birome** (or **lapicera**), a brand name turned into a word, like Kleenex."
+
+      - type: info
+        title: "Fingerprints solve a murder"
+        emoji: "🫆"
+        body: "In **1892**, in **Necochea**, two children were murdered. Their mother, **Francisca Rojas**, blamed a neighbor. But police inspector **Eduardo Álvarez**, trained in the new system of **Juan Vucetich**, a Croatian immigrant at the La Plata police, compared a bloody fingerprint on a door with hers. It matched, and she confessed. It was the first crime in the world solved with fingerprints, and Argentina was the first country to use them for identification."
+
+      - type: info
+        title: "The colectivo"
+        emoji: "🚌"
+        body: "On **24 September 1928**, broke Buenos Aires taxi drivers had an idea: share the cab, charge each passenger a fixed fare, follow a route. The **taxi colectivo** was born. Soon they stretched the cars to fit more seats. Today the **colectivo** (or **bondi**) is the city bus, and 24 September is the **Día del Colectivo**."
+
+      - type: info
+        title: "Favaloro and the bypass"
+        emoji: "❤️"
+        body: "**René Favaloro** was a country doctor in La Pampa for twelve years, then went to the Cleveland Clinic. There, in **1967**, he did one of the first coronary **bypass** operations with a leg vein, and the technique spread worldwide. Back home he built a famous heart foundation. In 2000, drowning in the foundation's debts, he took his own life. The country still mourns him."
+
+      - type: true_false
+        statement: "The first crime solved with fingerprints happened in Argentina."
+        answer: true
+        explain: "Necochea, 1892, thanks to **Vucetich**. The fingerprint system he built was copied all over the world. The police school in Buenos Aires province carries his name."
+
+      - type: info
+        title: "Five Nobels"
+        emoji: "🏅"
+        body: "**Saavedra Lamas** (Peace, 1936) helped end the Chaco War. **Houssay** (Medicine, 1947) studied hormones. **Leloir** (Chemistry, 1970) worked on how the body handles sugars. **Pérez Esquivel** (Peace, 1980) defended human rights under the dictatorship. **Milstein** (Medicine, 1984) co-discovered monoclonal antibodies, and the original method was never patented."
+        fun_fact: "Legend says Leloir invented salsa golf (mayo + ketchup) at a Mar del Plata golf club in the 1920s."
+
+      - type: match
+        prompt: "Match the name to the achievement"
+        pairs:
+          - ["Bíró", "the ballpoint pen"]
+          - ["Vucetich", "fingerprint identification"]
+          - ["Favaloro", "coronary bypass"]
+          - ["Milstein", "monoclonal antibodies"]
+          - ["Pérez Esquivel", "Nobel Peace Prize, 1980"]
+
+      - type: choice
+        scenario: "You're in Palermo and need to get to San Telmo. Your friend says: \"Tomate el bondi, te deja en la puerta.\""
+        prompt: "What should you take?"
+        options: ["The subway", "A taxi", "The bus", "A bike"]
+        correct: 2
+        explain: "**Bondi** is slang for **colectivo**, the bus. Pay with your **SUBE** card and don't expect it to stop unless you raise your hand."
+
+    vocabulary:
+      - es: "birome"
+        en: "ballpoint pen"
+        example: { es: "¿Tenés una birome?", en: "Do you have a pen?" }
+      - es: "colectivo"
+        en: "city bus"
+      - es: "bondi"
+        en: "bus (slang)"
+        example: { es: "Me tomo el bondi y voy.", en: "I'll catch the bus and come." }
+      - es: "huella digital"
+        en: "fingerprint"
+      - es: "invento"
+        en: "invention"
+      - es: "prestar"
+        en: "to lend"
+        example: { es: "¿Me prestás la birome?", en: "Can you lend me the pen?" }
+      - es: "salsa golf"
+        en: "mayo-and-ketchup sauce"
+      - es: "premio"
+        en: "prize, award"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "iconos-de-hoy"
+    title: "Modern icons"
+    summary: "A Pope from Flores, the Generación Dorada, Las Leonas and two Oscars"
+    pages:
+      - type: info
+        title: "Francisco, from Flores"
+        emoji: "⛪"
+        body: "**Jorge Mario Bergoglio** was born in **Flores**, Buenos Aires, in 1936. As archbishop he rode the **subte** and the colectivo. In **2013** he became **Pope Francis**, the first from the Americas and the first Jesuit. He loved tango and was a paying member of **San Lorenzo**, card number 88235. He died on 21 April 2025."
+        fun_fact: "After his death, fans noticed the card: 88 was his age, and 2:35 a.m. (Argentine time) the hour he died."
+
+      - type: true_false
+        statement: "Every Argentine loved Pope Francis without reservations."
+        answer: false
+        explain: "Many adored him. Others criticized his conservative Church positions, or felt he meddled in Argentine politics, and some wished he'd visited as Pope (he never did). Mention him at a dinner and you'll hear both sides."
+
+      - type: info
+        title: "Manu and the Generación Dorada"
+        emoji: "🏀"
+        body: "**Manu Ginóbili**, from **Bahía Blanca**, won **four NBA titles** with the San Antonio Spurs and made the eurostep famous. He led the **Generación Dorada** (Golden Generation): in **Athens 2004** Argentina beat the USA in the semifinal and took **Olympic gold** in basketball. Nobody expected that from a football country. Manu entered the Hall of Fame in 2022."
+
+      - type: info
+        title: "Las Leonas and Vilas"
+        emoji: "🏑"
+        body: "The women's field hockey team became **Las Leonas** (the Lionesses) at **Sydney 2000**, when they first wore a lioness on their shirts and won silver. More Olympic medals followed, and **Lucha Aymar** was named world player of the year eight times. Before them, **Guillermo Vilas** won four Grand Slams and 46 matches in a row in 1977, and made tennis popular here."
+
+      - type: choice
+        scenario: "At an asado, someone says: \"Vilas fue número uno, lo que pasa es que el ranking estaba mal.\""
+        prompt: "What are they talking about?"
+        options: ["A football transfer", "Vilas's disputed 1977 ranking", "A Borges book", "The Pope's election"]
+        correct: 1
+        explain: "In 1977 Vilas won almost everything, but the ATP computer ranked him No. 2 behind Connors. Argentines still feel robbed, and a 2020 Netflix documentary retold the whole fight."
+
+      - type: info
+        title: "Two Oscars and Darín"
+        emoji: "🎬"
+        body: "Argentina has two Oscars for foreign-language film: **La historia oficial** (1986) and **El secreto de sus ojos** (2010), starring **Ricardo Darín**. **Argentina, 1985**, also with Darín, was nominated in 2023 and won the Golden Globe, but not the Oscar. Darín is the face of Argentine cinema: *Nueve reinas*, *Relatos salvajes*, and now El Eternauta."
+
+      - type: true_false
+        statement: "\"Argentina, 1985\" won the Oscar for best international film."
+        answer: false
+        explain: "It was nominated and won the Golden Globe, but the Oscar went to a German film. The two Argentine Oscars are **La historia oficial** and **El secreto de sus ojos**."
+
+      - type: match
+        prompt: "Match the icon to their sport or field"
+        pairs:
+          - ["Ginóbili", "basketball"]
+          - ["Las Leonas", "field hockey"]
+          - ["Vilas", "tennis"]
+          - ["Darín", "cinema"]
+          - ["Bergoglio", "the Church"]
+
+      - type: gap
+        prompt: "Praising someone who did something amazing"
+        text: "Manu es un ___, lo más grande que hay."
+        options: ["capo", "chanta", "boludo"]
+        correct: 0
+        translation: "Manu is a legend, the greatest there is."
+        explain: "**Capo** = boss, legend, someone brilliant. **Chanta** is a con man, and **boludo**… you know that one from the puteadas section."
+
+    vocabulary:
+      - es: "capo / capa"
+        en: "legend, brilliant person"
+        example: { es: "Sos un capo, gracias.", en: "You're the best, thanks." }
+      - es: "ídolo"
+        en: "idol, sports hero"
+      - es: "crack"
+        en: "star player, ace"
+        example: { es: "Ginóbili era un crack.", en: "Ginóbili was a star." }
+      - es: "hincha"
+        en: "fan (of a team)"
+        example: { es: "Francisco era hincha de San Lorenzo.", en: "Francis was a San Lorenzo fan." }
+      - es: "socio"
+        en: "paying club member"
+      - es: "peli"
+        en: "movie (short for película)"
+        example: { es: "¿Viste la peli de Darín?", en: "Did you see the Darín movie?" }
+      - es: "subte"
+        en: "Buenos Aires subway"
+      - es: "chanta"
+        en: "con man, someone who talks big and delivers nothing"

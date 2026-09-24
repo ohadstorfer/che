@@ -1,0 +1,436 @@
+section:
+  slug: "musica"
+  title: "Música"
+  emoji: "🎸"
+  summary: "Rock nacional, folklore, cumbia, trap, and crowds louder than the band"
+
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "rock-nacional"
+    title: "Rock nacional"
+    summary: "Rock in Spanish, born in a café bathroom and raised under a dictatorship"
+    pages:
+      - type: info
+        title: "Born in a bathroom"
+        emoji: "🚽"
+        body: "In 1967, **Los Gatos** released **\"La balsa\"** (*The raft*). Legend says Litto Nebbia and Tanguito finished it in the bathroom of **La Perla del Once**, a 24-hour café, to dodge the waiters who kept kicking them out for being loud. It sold over 250,000 copies, proof that rock sung in Spanish could sell. **Rock nacional** was born."
+        fun_fact: "**Rock nacional** doesn't mean patriotic rock. It means rock made here, and sung in Spanish."
+
+      - type: true_false
+        statement: "\"Rock nacional\" is Argentine rock sung mostly in Spanish, not a genre about patriotism."
+        answer: true
+        explain: "Right. The big idea of the 60s was simple and radical: you can rock in *castellano*. Before that, rock meant singing in English or copying the Beatles."
+
+      - type: info
+        title: "El Flaco and Charly"
+        emoji: "🎹"
+        body: "Two names you must know. **Luis Alberto Spinetta**, **el Flaco** (*the skinny one*), wrote poetic songs with his band **Almendra**, like **\"Muchacha (ojos de papel)\"** (1970). **Charly García** started as a teenager in the duo **Sui Generis** with Nito Mestre. Their goodbye at the **Luna Park** in 1975, two shows for about 30,000 people, became a famous live album and film: **Adiós Sui Generis**."
+
+      - type: info
+        title: "Singing in code"
+        emoji: "🕵️"
+        body: "During the 1976–83 dictatorship, rock was watched, censored and harassed. So musicians wrote in metaphors. Charly's band **Serú Girán** (1978) filled stadiums with songs that said things *without saying them*. Their show at **La Rural** in December 1980 drew about 60,000 people. For many kids, a rock concert was the only place they could feel free together."
+
+      - type: info
+        title: "The Malvinas paradox"
+        emoji: "📻"
+        body: "In April 1982, with the Malvinas war, the military government pushed radios to stop playing music **en inglés**. The same regime that had harassed rockers suddenly needed Spanish songs to fill the airwaves. Rock nacional exploded. Many musicians used the moment to ask for peace: in May, the **Festival de la Solidaridad Latinoamericana** gathered thousands at Obras Sanitarias."
+
+      - type: choice
+        scenario: "It's May 1982. You turn on the radio in Buenos Aires."
+        prompt: "What are you most likely to hear?"
+        options: ["The Beatles and Queen, as usual", "Argentine rock and folklore in Spanish", "Only military marches", "Nothing, radios were closed"]
+        correct: 1
+        explain: "English-language music was pulled off the air during the war, so local rock and folklore took over. Plenty of bands went from underground to mainstream almost overnight."
+
+      - type: info
+        title: "Gracias totales"
+        emoji: "🙏"
+        body: "In the 80s came **Soda Stereo**: Gustavo **Cerati**, Zeta Bosio and Charly Alberti. They took Argentine rock across all of Latin America. At their farewell at River's stadium in September 1997, Cerati closed with a line everyone still quotes: **\"¡Gracias… totales!\"**. Today people say it, half joking, to thank someone *big time*."
+        fun_fact: "Fito Páez's **El amor después del amor** (1992), with guests like Spinetta, Charly, Cerati and Mercedes Sosa, is the best-selling album in Argentine rock history."
+
+      - type: gap
+        prompt: "A friend lends you their car for the weekend. How do you thank them, Cerati style?"
+        text: "¡Gracias… ___!"
+        options: ["totales", "todas", "muchas"]
+        correct: 0
+        translation: "Thanks… totally!"
+        explain: "**Gracias totales** is Cerati's goodbye from 1997. Say it and every Argentine gets the reference."
+
+      - type: order
+        prompt: "Put these rock nacional moments in order"
+        items:
+          - "Los Gatos release \"La balsa\""
+          - "Sui Generis says goodbye at the Luna Park"
+          - "Serú Girán plays La Rural under the dictatorship"
+          - "Radios stop playing English songs during Malvinas"
+          - "Cerati says \"gracias totales\" at River"
+        explain: "1967, 1975, 1980, 1982, 1997. Thirty years from a café bathroom to a full River stadium."
+
+      - type: true_false
+        statement: "Charly García once jumped from a ninth-floor hotel room into the pool below."
+        answer: true
+        explain: "March 3, 2000, Hotel Aconcagua, Mendoza. He survived. Charly stories like this are part of the legend, and people tell them with affection."
+
+    vocabulary:
+      - es: "rock nacional"
+        en: "Argentine rock (sung in Spanish)"
+      - es: "banda"
+        en: "band"
+        example: { es: "¿Cuál es tu banda favorita?", en: "What's your favorite band?" }
+      - es: "tema"
+        en: "song, track"
+        note: "Argentines say tema more than canción in casual talk."
+        example: { es: "Poné ese tema de Soda.", en: "Put on that Soda song." }
+      - es: "temazo"
+        en: "a great song, a banger"
+        example: { es: "¡Qué temazo!", en: "What a tune!" }
+      - es: "gracias totales"
+        en: "thanks a lot (Cerati's line)"
+        note: "Playful, a bit over the top. Everyone gets the reference."
+      - es: "el Flaco"
+        en: "the skinny one (Spinetta's nickname)"
+        note: "Also a very common nickname for any thin guy."
+      - es: "disco"
+        en: "album, record"
+        example: { es: "Ese disco lo escuché mil veces.", en: "I've listened to that album a thousand times." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "folklore"
+    title: "Folklore, peñas and pañuelos"
+    summary: "Guitars, handkerchiefs and the voice of La Negra"
+    pages:
+      - type: info
+        title: "Folklore is not old stuff"
+        emoji: "🪕"
+        body: "In Argentina **folklore** is a living music scene, not a museum. It's the music of the provinces: guitars, the **bombo legüero** (a deep drum made of wood and hide), violins and voices. It has many rhythms, like **zamba**, **chacarera** and **chamamé**, and young people still sing it at parties, especially in the north."
+
+      - type: info
+        title: "La Negra"
+        emoji: "🎤"
+        body: "**Mercedes Sosa**, from Tucumán, was **La Negra**, a nickname of affection. In October 1978 she was arrested on stage mid-concert in La Plata, with her audience. She went into exile in Europe. In February 1982, still under the dictatorship, she came back for a run of packed shows at the **Teatro Ópera** in Buenos Aires. Her version of Violeta Parra's **\"Gracias a la vida\"** still makes whole rooms cry."
+
+      - type: true_false
+        statement: "In Argentina, calling Mercedes Sosa \"La Negra\" is an insult."
+        answer: false
+        explain: "It was her nickname, used with love. In Argentina **negro/negra** is a very common nickname for friends and family, though, like everywhere, tone and context matter a lot."
+
+      - type: info
+        title: "The one who came from far away"
+        emoji: "🐴"
+        body: "**Atahualpa Yupanqui** was born **Héctor Roberto Chavero** in 1908, in Buenos Aires province. He took a Quechua-style name, often translated as *\"the one who came from far lands to tell\"*. He traveled the country on horseback and by foot, collecting songs, and wrote classics of the guitar. The main stage at Cosquín bears his name."
+
+      - type: info
+        title: "The peña"
+        emoji: "🍷"
+        body: "A **peña** is a folklore night: long tables, **empanadas** and **locro**, wine, and live music. There's no \"audience\". When a zamba or chacarera starts, people get up and dance between the tables, then sit back down and keep eating. A spontaneous version with friends and a guitar is a **guitarreada**."
+
+      - type: match
+        prompt: "Match the word to what it is"
+        pairs:
+          - ["peña", "folklore night with food and dancing"]
+          - ["guitarreada", "friends singing around a guitar"]
+          - ["bombo legüero", "deep folk drum"]
+          - ["La Negra", "Mercedes Sosa"]
+
+      - type: info
+        title: "Zamba vs chacarera"
+        emoji: "🧣"
+        body: "**Zamba** (not the Brazilian samba!) is slow and romantic. Two dancers circle each other, never touching, waving a **pañuelo** (handkerchief), in a kind of flirting. **Chacarera**, tied to Santiago del Estero, is fast and happy: finger snaps, the man's **zapateo** (stomping footwork) and the woman's **zarandeo** (swirling her skirt)."
+
+      - type: choice
+        scenario: "At a peña, the music goes slow and the couples on the floor pull out white handkerchiefs."
+        prompt: "What are they dancing?"
+        options: ["A chacarera", "A zamba", "A tango", "A cumbia"]
+        correct: 1
+        explain: "The **pañuelo** is the trademark of the zamba. Slow, circling, never touching. If people are stomping and snapping, that's a chacarera."
+
+      - type: info
+        title: "Nine moons in Cosquín"
+        emoji: "🌙"
+        body: "Every January since 1961, the small town of **Cosquín**, in the Córdoba hills, hosts the **Festival Nacional de Folklore**. It runs nine nights, **las nueve lunas**. It happens in the **Plaza Próspero Molina**, and every night opens with the famous shout: **\"¡Aquí Cosquín!\"**"
+
+      - type: gap
+        prompt: "You're at a peña and someone invites you to get up and dance a chacarera. You say yes:"
+        text: "¡___! Pero no sé zapatear."
+        options: ["Dale", "Chau", "Gracias"]
+        correct: 0
+        translation: "Sure! But I don't know how to stomp."
+        explain: "**Dale** = sure, let's go. Nobody expects a foreigner to zapatear well. Getting up is what counts."
+
+    vocabulary:
+      - es: "folklore"
+        en: "Argentine folk music"
+      - es: "peña"
+        en: "folklore night with food, music and dancing"
+        example: { es: "¿Vamos a la peña el sábado?", en: "Shall we go to the peña on Saturday?" }
+      - es: "guitarreada"
+        en: "singalong around a guitar"
+      - es: "zamba"
+        en: "slow folk dance with handkerchiefs"
+        note: "Not the Brazilian samba."
+      - es: "chacarera"
+        en: "fast, happy folk dance"
+      - es: "pañuelo"
+        en: "handkerchief"
+      - es: "zapatear"
+        en: "to stomp out the footwork"
+      - es: "bombo"
+        en: "big drum"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "cumbia-y-cuarteto"
+    title: "Cumbia and cuarteto"
+    summary: "The bailanta, a cumbia saint, and the tunga tunga from Córdoba"
+    pages:
+      - type: info
+        title: "The bailanta"
+        emoji: "🪩"
+        body: "Rock fills stadiums, but **cumbia** fills the dance floor. Born in Colombia, it became deeply Argentine in the dance halls of the suburbs, the **bailantas**. They boomed in the 90s and never went away. At any wedding or birthday, at some point the DJ puts on cumbia and even your serious uncle starts moving. You don't have to like it. You just have to dance."
+
+      - type: info
+        title: "Gilda, the cumbia saint"
+        emoji: "🕯️"
+        body: "**Gilda** (Miriam Bianchi) was a kindergarten teacher who became a cumbia star in her 30s, in a scene run by men. Her hit **\"No me arrepiento de este amor\"** is still sung everywhere. On September 7, 1996, her tour bus crashed on **Ruta 12**, in Entre Ríos. She was 34. People started asking her for miracles, and she became a **santa popular** (folk saint)."
+
+      - type: true_false
+        statement: "At the crash site on Ruta 12 there's a shrine to Gilda where people still leave offerings and ask for favors."
+        answer: true
+        explain: "Yes, at kilometer 129. People ask for health, work or love, and leave thanks. On key dates thousands of people visit. The Church never made her a saint; the people did."
+
+      - type: info
+        title: "Cumbia villera"
+        emoji: "🏚️"
+        body: "In the late 90s, with the economy collapsing, a rawer style was born in the poor neighborhoods: **cumbia villera**. Its big name is **Pablo Lescano**, whose band **Damas Gratis** started in 2000. The lyrics talk about the street, partying and the police. Critics say they glorify drugs and treat women badly. Fans say it's the honest voice of the barrio. Both debates are still alive."
+
+      - type: info
+        title: "Cuarteto: Córdoba's heartbeat"
+        emoji: "🎹"
+        body: "**Cuarteto** was born in **Córdoba** in 1943, with the **Cuarteto Leo**. Its pianist, **Leonor Marzano**, created the bouncy left-hand beat everybody calls **tunga tunga**. In December 2025, UNESCO declared cuarteto Intangible Cultural Heritage of Humanity. Its king is **La Mona Jiménez**, who has played packed weekly **bailes** for decades."
+
+      - type: info
+        title: "El Potro"
+        emoji: "🐎"
+        body: "**Rodrigo Bueno**, **el Potro** (*the colt*), took cuarteto from Córdoba to Buenos Aires and filled the **Luna Park** again and again. On June 24, 2000, after a show, he died in a car crash on the Buenos Aires–La Plata highway. He was 27. His songs, like **\"Soy cordobés\"** and **\"Lo mejor del amor\"**, are still party must-haves."
+
+      - type: match
+        prompt: "Match the artist to their story"
+        pairs:
+          - ["Gilda", "teacher turned cumbia saint"]
+          - ["Pablo Lescano", "father of cumbia villera"]
+          - ["La Mona Jiménez", "king of cuarteto"]
+          - ["Rodrigo", "\"el Potro\", died at 27"]
+          - ["Leonor Marzano", "invented the tunga tunga"]
+
+      - type: choice
+        scenario: "You're at a wedding in Córdoba. At 3 a.m. the DJ switches to a fast beat with a bouncy piano, and everyone runs to the dance floor."
+        prompt: "What's probably playing?"
+        options: ["Tango", "Cuarteto", "Zamba", "Rock nacional"]
+        correct: 1
+        explain: "In Córdoba, the late-night party is cuarteto. That bouncy piano is the **tunga tunga**. Refusing to dance is not really an option."
+
+      - type: gap
+        prompt: "Your friend is inviting you to a night of cumbia dancing:"
+        text: "¿Vamos a la ___ esta noche?"
+        options: ["bailanta", "peña", "cancha"]
+        correct: 0
+        translation: "Shall we go to the bailanta tonight?"
+        explain: "The **bailanta** is the cumbia dance hall. A **peña** is folklore, and the **cancha** is the football stadium."
+
+    vocabulary:
+      - es: "cumbia"
+        en: "cumbia (dance music)"
+      - es: "bailanta"
+        en: "cumbia dance hall"
+      - es: "cumbiero"
+        en: "cumbia lover, or cumbia-style"
+        example: { es: "Mi viejo es re cumbiero.", en: "My dad loves cumbia." }
+      - es: "cuarteto"
+        en: "dance music from Córdoba"
+      - es: "tunga tunga"
+        en: "the bouncy beat of cuarteto"
+      - es: "santa popular"
+        en: "folk saint (made by the people, not the Church)"
+      - es: "bailar"
+        en: "to dance"
+        example: { es: "Dale, vení a bailar.", en: "Come on, come dance." }
+      - es: "pegar"
+        en: "to become a hit"
+        example: { es: "Ese tema pegó muchísimo.", en: "That song was a huge hit." }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "trap-y-rkt"
+    title: "Trap, RKT and Bizarrap"
+    summary: "From freestyle battles in a park to the biggest stages in the world"
+    pages:
+      - type: info
+        title: "It started in a park"
+        emoji: "🌳"
+        body: "From 2012 to 2017, on Sunday afternoons, kids met at **Parque Rivadavia**, in Caballito, for **El Quinto Escalón** (*the fifth step*): free rap battles on the park's steps. Rappers improvised rhymes against each other, **tirar freestyle**, and the crowd picked the winner. Names like **Duki**, **Trueno** and **Wos** came out of there. Today they fill stadiums."
+
+      - type: true_false
+        statement: "Most of Argentina's big trap stars came up through expensive music schools."
+        answer: false
+        explain: "Many of them started in free freestyle battles in parks and plazas, recorded on phones and shared on YouTube. The street was the school."
+
+      - type: info
+        title: "The man in the cap"
+        emoji: "🧢"
+        body: "**Bizarrap** (Gonzalo Conde, from Ramos Mejía) is a producer who never shows his face: always a cap and dark glasses. In his **BZRP Music Sessions**, a guest raps or sings over his beat, filmed in a small studio. **Nicki Nicole**'s session in 2019 launched her. **Shakira**'s, in January 2023, got about 63 million YouTube views in 24 hours and earned a pile of Guinness World Records."
+
+      - type: choice
+        scenario: "Your Argentine friend says: \"¿Viste la nueva sesión de Biza?\""
+        prompt: "What are they asking?"
+        options: ["If you saw Bizarrap's new session", "If you saw a new TV series", "If you went to the gym"]
+        correct: 0
+        explain: "**Biza** is short for Bizarrap. When a new session drops, half the country listens that same day."
+
+      - type: info
+        title: "The new stars"
+        emoji: "🌟"
+        body: "In June 2024, **Duki** became the first Argentine to headline Real Madrid's **Bernabéu** stadium. In March 2024, **María Becerra**, who started as a YouTuber, became the first Argentine woman to headline **River**'s stadium, twice in a row. **Tini** Stoessel, once the star of Disney's *Violetta*, fills stadiums with pop. **Nicki Nicole**, from Rosario, mixes trap and R&B."
+
+      - type: info
+        title: "RKT and the turreo"
+        emoji: "🔊"
+        body: "**RKT** was born in the late 2000s, from DJs at a club called **Rescate** in San Martín, Buenos Aires province. It's reggaetón plus cumbia villera, with huge bass. **L-Gante** made it explode in 2020 with the viral **\"L-Gante RKT\"**. RKT parties are called **turreo**. Critics call the lyrics crude; fans say it's the sound of their barrio."
+
+      - type: match
+        prompt: "Match the artist to the fact"
+        pairs:
+          - ["Duki", "first Argentine to headline the Bernabéu"]
+          - ["María Becerra", "first Argentine woman to headline River"]
+          - ["Bizarrap", "producer who never shows his face"]
+          - ["L-Gante", "made RKT explode in 2020"]
+          - ["Tini", "started on Disney's Violetta"]
+
+      - type: order
+        prompt: "Put these moments in order"
+        items:
+          - "The first El Quinto Escalón battle in Parque Rivadavia"
+          - "Nicki Nicole's session with Bizarrap"
+          - "L-Gante's \"L-Gante RKT\" goes viral"
+          - "Shakira's session with Bizarrap breaks records"
+          - "Duki headlines the Bernabéu"
+        explain: "2012, 2019, 2020, 2023, 2024. A decade from park steps to Real Madrid's stadium."
+
+      - type: gap
+        prompt: "You just heard María Becerra's new song and you loved it."
+        text: "¡Qué ___! No paro de escucharlo."
+        options: ["temazo", "tema", "disco"]
+        correct: 0
+        translation: "What a banger! I can't stop listening to it."
+        explain: "**Temazo** = a great song. The **-azo** ending makes anything bigger and better."
+
+      - type: true_false
+        statement: "If someone says a singer \"la rompió\", they mean she broke something on stage."
+        answer: false
+        explain: "**La rompió** = she killed it, she was amazing. \"María la rompió en River\" is a compliment."
+
+    vocabulary:
+      - es: "tirar freestyle"
+        en: "to improvise rap"
+        example: { es: "Tirate un freestyle, dale.", en: "Come on, drop a freestyle." }
+      - es: "batalla"
+        en: "rap battle"
+      - es: "sesión"
+        en: "session (a Bizarrap song)"
+        example: { es: "Salió la sesión nueva.", en: "The new session is out." }
+      - es: "romperla"
+        en: "to kill it, to be amazing"
+        example: { es: "Duki la rompió.", en: "Duki killed it." }
+      - es: "turreo"
+        en: "RKT party, RKT style"
+        note: "Street slang. Fine among friends."
+      - es: "trap"
+        en: "trap (music)"
+      - es: "artista"
+        en: "artist, performer"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "en-vivo"
+    title: "Live: pogo, bengalas and misas"
+    summary: "Why foreign bands leave Argentina a little shaken"
+    pages:
+      - type: info
+        title: "Recital, not concierto"
+        word: { es: "recital", tag: "Not \"concierto\"", en: "a gig, a concert" }
+        emoji: "🎟️"
+        body: "In Argentina you go to a **recital** or a **show**; **concierto** sounds a bit formal. At a big one, **campo** is the standing area on the pitch, **platea** is seats. The **telonero** is the opening act. And the crowd does not just listen: it sings *every* word, often louder than the band. Many foreign artists say it's one of the loudest crowds they've ever played to."
+
+      - type: choice
+        scenario: "Your friend texts you: \"Tengo dos entradas para campo, ¿venís?\""
+        prompt: "Where will you be?"
+        options: ["In a seat up in the stands", "Standing on the pitch, near the stage", "Outside, watching on a screen"]
+        correct: 1
+        explain: "**Campo** is the standing area on the field. Closer to the band, and closer to the pogo."
+
+      - type: info
+        title: "Olé, olé, olé"
+        emoji: "🙌"
+        body: "Between songs, the crowd sings a football-style chant with the artist's name: **\"Olé, olé, olé, olé… Charly, Charly!\"**. Foreigners get it too. When Paul McCartney plays Buenos Aires, the stadium chants his name like he's a football idol. The Rolling Stones even titled their 2016 Latin America documentary *Olé, Olé, Olé!*. Argentina has so many Stones fans they have a name: **rollingas**."
+
+      - type: gap
+        prompt: "The band walks off before the encore. What does the whole stadium shout?"
+        text: "¡Otro, ___!"
+        options: ["otro", "más", "bis"]
+        correct: 0
+        translation: "One more, one more!"
+        explain: "**¡Otro, otro!** is the Argentine way to ask for an encore. If that doesn't work, switch to \"olé, olé\" with the band's name."
+
+      - type: info
+        title: "The pogo"
+        emoji: "🤘"
+        body: "The **pogo** is jumping and bumping into each other in a big mass, usually near the stage. It looks like chaos, but there's an unwritten rule: **si alguien se cae, se lo levanta** (if someone falls, you pick them up). If you're not up for it, stay on the edges. **Pogear** is the verb."
+
+      - type: choice
+        scenario: "You're in the middle of the pogo at a rock show. The guy next to you trips and falls."
+        prompt: "What do you do?"
+        options: ["Keep jumping, it's part of the pogo", "Stop and help pick him up right away", "Wait until the song ends"]
+        correct: 1
+        explain: "The first rule of the pogo: whoever falls gets picked up, fast. People around you will do the same. Rough, but with a code."
+
+      - type: info
+        title: "Misas ricoteras"
+        emoji: "⛪"
+        body: "**Patricio Rey y sus Redonditos de Ricota**, **los Redondos**, led by the **Indio Solari**, never did much press. Their shows were called **misas** (masses) by fans, who traveled across the country for them. In the 90s, barrio rock like theirs, La Renga or Los Piojos, got the name **rock chabón**, with football-style banners, chants and flares."
+        fun_fact: "In March 2017, Indio Solari's solo show in Olavarría drew somewhere between 200,000 and 400,000 people, depending on who counted. Fans call the song \"Ji ji ji\" \"the biggest pogo in the world\"."
+
+      - type: info
+        title: "Bengalas and Cromañón"
+        emoji: "🕯️"
+        body: "**Bengalas** (flares) came to rock from the football stands. On December 30, 2004, at a Callejeros show at **República Cromañón**, a small club in Once, a flare set the ceiling on fire. The venue was overcrowded and an emergency exit was locked. **194 people died**, most of them young. It changed live music forever: much stricter controls, and a flare indoors is now unthinkable."
+
+      - type: true_false
+        statement: "Since Cromañón, lighting a bengala inside a club in Argentina is seen as totally unacceptable."
+        answer: true
+        explain: "Cromañón is a deep wound, and the families still hold memorials every December 30. You'll still see flares in some big outdoor shows, but inside a venue? Never."
+
+      - type: order
+        prompt: "A typical Argentine recital night, in order"
+        items:
+          - "Queue outside for hours to get a good spot in campo"
+          - "The telonero plays while the crowd fills up"
+          - "The band comes out and everyone sings every word"
+          - "The band leaves, the crowd chants \"olé, olé\" for more"
+          - "They come back for the encore"
+
+    vocabulary:
+      - es: "recital"
+        en: "concert, gig"
+        example: { es: "¿Vas al recital del sábado?", en: "Are you going to the gig on Saturday?" }
+      - es: "entrada"
+        en: "ticket"
+      - es: "campo"
+        en: "standing area on the pitch"
+      - es: "telonero"
+        en: "opening act"
+      - es: "pogo"
+        en: "mosh-style jumping at a show"
+      - es: "pogear"
+        en: "to jump in the pogo"
+        example: { es: "Yo pogeo solo en los temas rápidos.", en: "I only mosh in the fast songs." }
+      - es: "bengala"
+        en: "flare"
+      - es: "rollinga"
+        en: "Rolling Stones fan (Argentine style)"

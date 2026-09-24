@@ -106,6 +106,7 @@ classes:
 
       - type: info
         title: "The Cabildo"
+        word: { es: "cabildo", tag: "Colonial power", en: "town council, and its building" }
         emoji: "🏛️"
         body: "Every Spanish colonial city had a **cabildo**: the town council, and the building where it met. The one in Buenos Aires is still standing on **Plaza de Mayo**, white, with arches and a little tower. You can visit it — it's a museum now. Look closely: it's shorter than it used to be."
         fun_fact: "It lost three arches in 1889 to open Avenida de Mayo, and three more in 1931. From eleven arches to five."
@@ -123,7 +124,7 @@ classes:
       - type: true_false
         statement: "When the British took Buenos Aires in 1806, the viceroy led the defense of the city."
         answer: false
-        explain: "Viceroy Sobremonte fled to Córdoba with the treasury. The locals, led by Liniers, did the fighting."
+        explain: "Viceroy Sobremonte fled toward Córdoba with the treasury — and the British caught up with the treasure anyway. The locals, led by Liniers, did the fighting."
 
       - type: choice
         scenario: "Walking downtown, you pass a street called **Reconquista**. Later, in San Telmo, you walk down **Defensa**."
@@ -171,7 +172,7 @@ classes:
         title: "25 de mayo de 1810"
         emoji: "🌤️"
         body: "On **25 May 1810** a new local government took over: the **Primera Junta** (First Board), led by **Cornelio Saavedra**. It still ruled in the name of the Spanish king, at least on paper, so it wasn't independence yet. But it was the first government chosen here, by people from here. This is the **Revolución de Mayo**, and it's why the main square is called **Plaza de Mayo**."
-        fun_fact: "The classic school drawing shows the crowd with umbrellas. Historians say umbrellas were rare back then — it's probably a myth."
+        fun_fact: "The classic school drawing shows the crowd with umbrellas. Historians argue about it: umbrellas did exist in Buenos Aires, but they were an imported luxury, so that sea of umbrellas is probably exaggerated."
 
       - type: choice
         scenario: "It's the 25th of May and your friend offers you **locro** (a thick corn-and-meat stew) and **pastelitos** (fried pastries with quince)."
@@ -332,12 +333,12 @@ classes:
       - type: info
         title: "Rosas"
         emoji: "🔴"
-        body: "**Juan Manuel de Rosas**, a rich landowner and a federal, governed Buenos Aires from 1829 to 1832 and again from 1835 to **1852**, with near-total power. Red was the federal color, and wearing it was all but required. His police, the **Mazorca**, terrorized opponents. He also defied the British and French fleets. He fell at the battle of **Caseros**, in 1852."
+        body: "**Juan Manuel de Rosas**, a rich landowner and a federal, governed Buenos Aires from 1829 to 1832 and again from 1835 to **1852**, with near-total power. Red was the federal color, and wearing it was all but required. His enforcers, the **Mazorca**, terrorized opponents. He also defied the British and French fleets. He fell at the battle of **Caseros**, in 1852."
 
       - type: info
         title: "Hero or tyrant?"
         emoji: "⚖️"
-        body: "Argentines still argue about Rosas. For the liberals who came after him, like **Sarmiento**, he was a bloody tyrant. For the **revisionistas** (historians who rethought him in the 20th century), he defended national sovereignty against foreign powers. Both sides have a point, and both have their sources. Don't bring it up at an asado unless you have time."
+        body: "Argentines still argue about Rosas. For the liberals who came after him, like **Sarmiento**, he was a bloody tyrant. For the **revisionistas** (historians who rethought him in the 20th century), he defended national sovereignty against foreign powers. Today most academic historians step out of that duel and study how his rule worked, and why so many poor porteños and gauchos backed him. Don't bring it up at an asado unless you have time."
         fun_fact: "The 20 November holiday, Día de la Soberanía Nacional, remembers a battle fought under Rosas against the Anglo-French fleet in 1845."
 
       - type: info
@@ -470,3 +471,84 @@ classes:
         en: "beer"
       - es: "genocidio"
         en: "genocide"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "granero-del-mundo"
+    title: "The granary of the world"
+    summary: "1880 to 1930: trains, wheat, the secret vote and the first radio broadcast"
+    pages:
+      - type: info
+        title: "El granero del mundo"
+        emoji: "🌾"
+        body: "Around 1900 Argentina shipped wheat, corn and beef across the ocean, mostly to Britain. British money built the railways, which fan out from the port of Buenos Aires like the ribs of a hand fan: everything flowed to the port. **Frigoríficos** (meatpacking plants) sent chilled beef to Europe. The country called itself **el granero del mundo**, the world's granary."
+
+      - type: true_false
+        statement: "Argentina's old railway network was built mainly to connect the provinces with each other."
+        answer: false
+        explain: "Mostly British-built, it pointed at the port of Buenos Aires, to ship grain and beef out. That's why, even today, going between two provinces can mean a long detour."
+
+      - type: info
+        title: "Rich, but for whom?"
+        emoji: "🎩"
+        body: "Around the **Centenario** of 1910, many Argentines felt they lived in one of the richest countries on earth, and some economic estimates agree. Buenos Aires got the Congreso and the **Teatro Colón**, which opened in 1908. But the best land was in a few hands, and many workers lived in crowded conventillos. That gap is why people still argue about how 'golden' those years were."
+
+      - type: info
+        title: "Ley Sáenz Peña, 1912"
+        emoji: "🗳️"
+        body: "Before 1912, elections were a show: people voted out loud, the **voto cantado** (sung vote), and fraud was routine. The **Ley Sáenz Peña** made the vote **secreto** and **obligatorio** for men over 18. In 1916 **Hipólito Yrigoyen**, of the Unión Cívica Radical, won the first presidential election held that way. Women won the national vote in 1947 and cast it for the first time in 1951."
+
+      - type: choice
+        scenario: "It's 1905 and you walk into a polling station in Buenos Aires."
+        prompt: "How do you vote?"
+        options: ["Out loud, in front of everyone", "Secretly, in an envelope", "By mail"]
+        correct: 0
+        explain: "The **voto cantado**: you said your choice out loud, with the local boss listening. The secret ballot arrived in 1912."
+
+      - type: info
+        title: "The dark side: January 1919"
+        emoji: "⚠️"
+        body: "In January 1919 a strike at the Vasena metal works in Buenos Aires turned into the **Semana Trágica** (Tragic Week). Under Yrigoyen's government, police, soldiers and armed civilian groups crushed it. Hundreds died (the estimates vary a lot) and thousands were arrested. Gangs also attacked the Jewish neighborhood of **Once**."
+
+      - type: info
+        title: "Los locos de la azotea"
+        emoji: "📻"
+        body: "On **27 August 1920**, Enrique Susini and three friends climbed onto the roof of the Teatro Coliseo and broadcast Wagner's opera *Parsifal*. About 50 people with homemade crystal sets heard it. They were nicknamed **los locos de la azotea**, the rooftop madmen. Argentina counts it among the world's first public radio broadcasts, and 27 August is the **Día de la Radiodifusión**."
+
+      - type: gap
+        prompt: "What were the radio pioneers called?"
+        text: "Los locos de la ___."
+        options: ["azotea", "radio", "esquina"]
+        correct: 0
+        translation: "The rooftop madmen."
+        explain: "**Azotea** is a flat roof terrace. In Buenos Aires they're everywhere, and now you know one made history."
+
+      - type: order
+        prompt: "Put the years in order"
+        items:
+          - "Buenos Aires celebrates the Centenario"
+          - "The Ley Sáenz Peña makes the vote secret"
+          - "Yrigoyen is elected president"
+          - "The Semana Trágica"
+          - "The first radio broadcast from the Teatro Coliseo"
+          - "A military coup overthrows Yrigoyen"
+        explain: "1910, 1912, 1916, 1919, 1920 and 1930. That last coup opens a whole new, rougher chapter."
+
+    vocabulary:
+      - es: "granero"
+        en: "granary"
+      - es: "frigorífico"
+        en: "meatpacking plant"
+      - es: "tren"
+        en: "train"
+        example: { es: "El tren va hasta el puerto.", en: "The train goes to the port." }
+      - es: "voto secreto"
+        en: "secret ballot"
+      - es: "obligatorio"
+        en: "compulsory"
+        example: { es: "En Argentina votar es obligatorio.", en: "In Argentina voting is compulsory." }
+      - es: "huelga"
+        en: "strike"
+      - es: "azotea"
+        en: "flat roof terrace"
+      - es: "Centenario"
+        en: "the 1910 centennial of the May Revolution"

@@ -173,8 +173,9 @@ const webTransition =
 // Figuritas — ornaments standing along the road, the way Duolingo dots its
 // path with characters. They scroll with the path because they belong to it.
 //
-// To add another: cut it out with `python3 scripts/cutout-figure.py <source>
-// <name>-figure`, then drop it in FIGURES with its own width/height. They
+// The figuritas are the capybara mascot (sources in assets/images/mascot/). To
+// add another: cut it out with the `cutout()` helper in scripts/cutout-figure.py
+// into assets/images/capybara/capybara-<name>-figure.png, then drop it in FIGURES with its own width/height. They
 // cycle down the road in order, so each entry takes the next slot and the set
 // only repeats once she has passed all of them.
 //
@@ -191,13 +192,23 @@ const webTransition =
 // space in the row instead of a squashed figure.
 // ---------------------------------------------------------------------------
 const FIGURES = [
-  { source: require('@/assets/images/shakshuka-figure.png'), width: 108, height: 97 },
-  { source: require('@/assets/images/falafel-figure.png'), width: 106, height: 104 },
-  { source: require('@/assets/images/shawarma-figure.png'), width: 108, height: 95 },
-  { source: require('@/assets/images/pita-figure.png'), width: 106, height: 104 },
-  { source: require('@/assets/images/hummus-figure.png'), width: 108, height: 95 },
-  { source: require('@/assets/images/shawarma-pita-figure.png'), width: 106, height: 104 },
-  { source: require('@/assets/images/pita-shnitzel-figure.png'), width: 108, height: 97 },
+  { source: require('@/assets/images/capybara/capybara-gaucho-figure.png'), width: 68, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-asado-figure.png'), width: 107, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-mate-figure.png'), width: 85, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-futbol-pateando-figure.png'), width: 109, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-facturas-figure.png'), width: 92, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-tango-figure.png'), width: 86, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-milanesa-figure.png'), width: 94, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-saludando-figure.png'), width: 78, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-empanadas-figure.png'), width: 76, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-mate-amargo-figure.png'), width: 78, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-futbol-gol-figure.png'), width: 94, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-alfajor-figure.png'), width: 90, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-choripan-figure.png'), width: 90, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-gaucho-cafe-figure.png'), width: 89, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-dulce-de-leche-figure.png'), width: 87, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-mate-sorbiendo-figure.png'), width: 78, height: 116 },
+  { source: require('@/assets/images/capybara/capybara-alfajor-maicena-figure.png'), width: 90, height: 116 },
 ];
 
 // One figure per arc, standing in the bay the road leaves as it curves away.

@@ -162,19 +162,20 @@ classes:
     pages:
       - type: info
         title: "First, the picada"
+        word: { es: "picada", tag: "The opener", en: "snack board" }
         emoji: "🧀"
         body: "While the fire does its thing, there's a **picada**: a board with cheese, salami, olives, bread, maybe peanuts. It keeps everyone alive for the first couple of hours. Don't fill up on it, though — you've got a long way to go."
 
       - type: info
         title: "Then, the achuras"
         emoji: "🌭"
-        body: "Next come the **achuras** (offal) and sausages: **chorizo** (pork sausage), **morcilla** (blood sausage), **chinchulines** (crispy small intestines), **mollejas** (sweetbreads) and **riñones** (kidneys). They come off in waves, often cut up on a board and passed around. Try the mollejas with lemon. Thank me later."
+        body: "Next come the **achuras** (offal) and sausages: **chorizo** (pork-and-beef sausage), **morcilla** (blood sausage), **chinchulines** (crispy small intestines), **mollejas** (sweetbreads) and **riñones** (kidneys). They come off in waves, often cut up on a board and passed around. Try the mollejas with lemon. Thank me later."
         fun_fact: "Technically chorizo and morcilla are sausages, not offal, but at the grill everyone lumps them in with the achuras."
 
       - type: match
         prompt: "Match the achura to what it is"
         pairs:
-          - ["chorizo", "pork sausage"]
+          - ["chorizo", "pork-and-beef sausage"]
           - ["morcilla", "blood sausage"]
           - ["chinchulines", "small intestines"]
           - ["mollejas", "sweetbreads"]
@@ -252,6 +253,7 @@ classes:
     pages:
       - type: info
         title: "The choripán"
+        word: { es: "choripán", tag: "Street food", en: "grilled sausage sandwich" }
         emoji: "🥖"
         body: "**Choripán** = **chorizo** + **pan** (bread). A grilled sausage, split open in a crusty roll. That's it, and it's perfect. It's the first thing out at many asados, and it's also street food: outside football stadiums, at protests, on the Costanera. Everyone calls it **chori**."
 
@@ -266,7 +268,7 @@ classes:
       - type: info
         title: "The provoleta"
         emoji: "🧀"
-        body: "**Provoleta** is a thick round of provolone-style cheese grilled until crispy outside and melty inside, with oregano and chili flakes on top. It's usually credited to Natalio Alba, an Italian immigrant, in the mid-20th century. Eat it hot and fast, straight from the little pan."
+        body: "**Provoleta** is a thick round of provolone-style cheese grilled until crispy outside and melty inside, with oregano and chili flakes on top. It's usually credited to Natalio Alba, an Italian immigrant in Córdoba, around 1940. Eat it hot and fast, straight from the little pan."
 
       - type: info
         title: "Chimichurri and salsa criolla"
@@ -398,3 +400,86 @@ classes:
       - es: "bárbaro"
         en: "great, amazing"
         example: { es: "¡Huele bárbaro!", en: "It smells amazing!" }
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "asados-del-pais"
+    title: "Asados from the rest of the country"
+    summary: "Lamb on a cross, beef in its hide and dinner in a plough disc"
+    pages:
+      - type: info
+        title: "Patagonian lamb"
+        emoji: "🐑"
+        body: "Down south the star isn't beef. It's **cordero patagónico al asador**: a whole lamb opened flat, wired to an iron cross (also called the **asador**, like the grill master) and stuck in the ground, leaning over the fire. It cooks slowly, for four hours or more, until the skin crackles. Every January, Puerto Madryn holds the Fiesta Nacional del Cordero."
+
+      - type: choice
+        scenario: "You're walking through El Calafate and see a restaurant window with lambs spread on iron crosses around a fire."
+        prompt: "What are you looking at?"
+        options: ["Cordero al asador", "Asado con cuero", "Pollo al disco"]
+        correct: 0
+        explain: "Lamb on the **asador** (the cross), Patagonia's signature. It's slow food in the most literal way: it was probably on the fire before lunch was even a thought."
+
+      - type: true_false
+        statement: "Cordero patagónico is a quick dish: twenty minutes on a hot grill."
+        answer: false
+        explain: "It's hours on the cross, far from the flames, so the heat is gentle and the fat melts slowly. Rushing it is a crime down south."
+
+      - type: info
+        title: "Asado con cuero"
+        emoji: "🐄"
+        body: "The big-party version: beef cooked **con cuero**, with its hide still on. The hide works like a pot, holding in the juices and fat. Usually it's a **vaquillona** (young heifer) in huge pieces, over steady embers for **12 hours or more**. It's festival food: Viale, in Entre Ríos, hosts the Fiesta Nacional del Asado con Cuero every year."
+
+      - type: choice
+        scenario: "A town festival poster says: \"Vaquillona con cuero, se sirve a las 13 hs.\""
+        prompt: "When did the asadores probably start cooking?"
+        options: ["Around noon", "The night before", "The week before"]
+        correct: 1
+        explain: "Twelve hours or more of fire means lighting up the night before and taking turns. Someone always brings a guitar and a termo."
+
+      - type: info
+        title: "The disco"
+        emoji: "🍳"
+        body: "Out in the **campo** (countryside), someone took a worn-out **disco de arado** (plough disc), welded on legs and handles, and got a giant wok for the fire. Now it's everywhere: **pollo al disco**, **carne al disco**, onions, peppers, chorizo and a splash of wine, all stewing together. One disco feeds a crowd, and everyone stands around it with a piece of bread."
+
+      - type: match
+        prompt: "Match the dish to how it's cooked"
+        pairs:
+          - ["cordero al asador", "whole lamb on an iron cross"]
+          - ["asado con cuero", "beef cooked with its hide on"]
+          - ["pollo al disco", "chicken stewed in a plough disc"]
+          - ["vaquillona", "young heifer"]
+
+      - type: gap
+        prompt: "Your friend in the campo announces tonight's dinner"
+        text: "Hoy hacemos pollo al ___."
+        options: ["disco", "cuero", "horno de barro"]
+        correct: 0
+        translation: "Tonight we're making chicken in the disc."
+        explain: "**Al disco** = cooked in the plough disc. **Con cuero** is for beef with the hide, and it would take you until tomorrow."
+
+      - type: order
+        prompt: "Cordero al asador, step by step"
+        items:
+          - "Open the lamb out flat"
+          - "Wire it to the iron cross"
+          - "Stick the cross in the ground, leaning over the fire"
+          - "Cook it slowly for hours"
+          - "Carve it right off the cross"
+        explain: "No grill at all: just the cross, the fire and a lot of patience."
+
+    vocabulary:
+      - es: "cordero"
+        en: "lamb"
+        example: { es: "En el sur comimos cordero al asador.", en: "Down south we ate lamb on the cross." }
+      - es: "al asador"
+        en: "roasted on an iron cross by the fire"
+      - es: "con cuero"
+        en: "with the hide on"
+      - es: "vaquillona"
+        en: "young heifer"
+      - es: "disco de arado"
+        en: "plough disc used as a cooking pan"
+      - es: "al disco"
+        en: "cooked in the disc"
+        example: { es: "¿Hacemos pollo al disco?", en: "Shall we make chicken in the disc?" }
+      - es: "campo"
+        en: "countryside, farm"

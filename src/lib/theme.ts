@@ -125,6 +125,16 @@ export const radius = { sm: 10, md: 14, lg: 20, xl: 28, pill: 999 };
 
 export const spacing = { xs: 6, sm: 10, md: 16, lg: 20, xl: 28 };
 
+/**
+ * Display face for the big moments — story titles, fun-fact numbers, tile and
+ * class names. Loaded in the root layout; until it arrives text sits in the
+ * system face, so nothing waits on it.
+ */
+export const fonts = {
+  display: 'Fraunces_800ExtraBold',
+  displayMedium: 'Fraunces_700Bold',
+} as const;
+
 /** Type scale. */
 export const type = {
   display: { fontSize: 30, fontWeight: '700', letterSpacing: -0.5 },
@@ -159,3 +169,16 @@ export const shadow = {
  * smallest scale that still registers as a response.
  */
 export const press = { scale: 0.97, duration: 160 };
+
+/**
+ * Culture subjects. Three tones from the palette, dealt out so neighbouring
+ * tiles never match: deep green with bone type (the heaviest), a terracotta
+ * wash and pale sage. `ink` is the type on the tone, `fill` the progress.
+ */
+export const cultureTones = [
+  { bg: GREEN, ink: BONE, sub: 'rgba(241, 238, 230, 0.72)', track: 'rgba(241, 238, 230, 0.22)', fill: BONE },
+  { bg: 'rgba(184, 84, 58, 0.16)', ink: TERRA_DARK, sub: 'rgba(143, 63, 43, 0.72)', track: 'rgba(143, 63, 43, 0.16)', fill: TERRA },
+  { bg: GREEN_LINE, ink: GREEN_DARK, sub: 'rgba(43, 60, 46, 0.66)', track: 'rgba(43, 60, 46, 0.14)', fill: GREEN },
+] as const;
+
+export type CultureTone = (typeof cultureTones)[number];

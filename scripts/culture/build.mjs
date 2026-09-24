@@ -11,7 +11,12 @@ const DIR = 'docs/culture';
 const OUT = 'src/lib/culture.json';
 
 // The order sections appear in the app. Anything not listed goes last.
-const ORDER = ['mate', 'asado', 'futbol', 'alfajores', 'puteadas', 'historia-nacimiento', 'historia-moderna'];
+const ORDER = [
+  'mate', 'asado', 'comida', 'alfajores',
+  'futbol', 'tango', 'musica', 'habla',
+  'dichos', 'puteadas', 'costumbres', 'buenos-aires',
+  'regiones', 'iconos', 'historia-nacimiento', 'historia-moderna',
+];
 
 const files = readdirSync(DIR).filter((f) => f.endsWith('.yaml'));
 const sections = [];
