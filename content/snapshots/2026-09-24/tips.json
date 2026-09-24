@@ -61,7 +61,7 @@
   "title_en": "Soy, sos, es",
   "body_md": "Three people, three forms of *ser*:\n\n| yo | **soy** |\n| vos | **sos** |\n| él, ella | **es** |\n\nThe verb already tells you who, so the pronoun is usually dropped: *Es de Rosario* — he's (or she's) from Rosario.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "040623f8-7ca5-5206-8e5c-f178b0d6fbe4",
@@ -70,6 +70,14 @@
   "body_md": "For more than one person, Argentina uses **ustedes** with the same verb form as *ellos*: *ustedes son*, *ellos son*.",
   "status": "published",
   "updated_at": "2026-09-23 18:53:27.361826+00"
+ },
+ {
+  "id": "04312d09-ee63-5a2e-aa3d-bac2d25e0910",
+  "unit_id": "f925644a-c585-5773-8af3-f9a36c4cd2b0",
+  "title_en": "Should have",
+  "body_md": "| **Tendría que haber** ido. | I should have gone. |\n| **Tendrías que haber** avisado. | You should have let us know. |\n| **Me arrepiento.** | I regret it. |\n\n**Tendría que haber** + participle: the porteño regret. Never *he debido*.",
+  "status": "published",
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "043bf160-0648-51c6-bec2-2b7afbcb4c4a",
@@ -109,7 +117,7 @@
   "title_en": "Si hubiera + participle",
   "body_md": "| yo, él, ella | **hubiera** | sabido, venido, ido |\n| vos | **hubieras** | llamado, avisado, pensado |\n\nFor what didn't happen, both halves: **Si hubiera sabido, te hubiera avisado.** *If I'd known, I'd have told you.* Compare *si supiera* — if I knew (now).",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "064798bc-ef12-56bf-a592-3c29d6a78677",
@@ -117,7 +125,7 @@
   "title_en": "Fui, estuve, tuve",
   "body_md": "| | ir, ser | estar | tener |\n| yo | **fui** | **estuve** | **tuve** |\n| vos | **fuiste** | **estuviste** | **tuviste** |\n| él, ella | **fue** | **estuvo** | **tuvo** |\n| nosotros | **fuimos** | | |\n| ellos | **fueron** | | |\n\nNo accents here. *Fui a la cancha* is *went*; *fue bárbaro* is *was*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "06c86ef5-7846-5ed7-8073-f632d15a579c",
@@ -141,7 +149,7 @@
   "title_en": "What he said he'd do",
   "body_md": "| what he said | what you tell |\n| «Voy.» | Dijo que **iría**. |\n| «Vengo mañana.» | Dijo que **vendría** mañana. |\n| «Te llamo.» | Dijo que me **llamaría**. |\n\nA promise told later goes into *would*. Just as porteño: **dijo que iba a venir**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "0926cfc4-35c9-5520-acc8-b848dc41bdff",
@@ -165,7 +173,7 @@
   "title_en": "The past of -er and -ir",
   "body_md": "| | -ar | -er, -ir |\n| yo | labur**é** | com**í**, sal**í** |\n| vos | labur**aste** | com**iste**, sal**iste** |\n| él, ella | labur**ó** | com**ió**, sal**ió** |\n| nosotros | | com**imos**, sal**imos** |\n\n-er and -ir share one set of endings. *Salimos* is both *we go out* and *we went out* — *anoche* or *ayer* tells you which.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "0ae8a455-b5ec-5603-9920-7d5ea5055cc5",
@@ -173,7 +181,7 @@
   "title_en": "Se me, se te, se le",
   "body_md": "| to me | **se me** cayó | I dropped it |\n| to you | **se te** cayó | you dropped it |\n| to him, her | **se le** cayó | he dropped it |\n\nSame with *rompió, perdió, olvidó*: **se me olvidó** — *I forgot*. The middle word says who it happened to.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "0c7552f3-e3f0-58fe-a0e2-9b920941566b",
@@ -197,7 +205,7 @@
   "title_en": "Would: -ía",
   "body_md": "| | regular | shortened |\n| yo, él, ella | comprar**ía**, ir**ía** | **tendría**, **podría**, **haría**, **diría** |\n| vos | ir**ías** | |\n\nThe ending goes on the whole infinitive: *comprar* → **compraría**. **Yo que vos** + would is advice: *yo que vos, esperaría*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "0f6658b9-f4e9-5a1d-836b-ec6f489940ff",
@@ -205,7 +213,7 @@
   "title_en": "Tengo, tenés, tiene",
   "body_md": "*Tener* — to have — is how you give your age:\n\n| yo | **tengo** | Tengo veinte años. |\n| vos | **tenés** | ¿Cuántos años tenés? |\n| él, ella | **tiene** | Tiene doce años. |\n\nThe *e* of *tener* becomes *ie* in *tiene* — but never in the vos form: **tenés**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "11b0bc61-a2e4-5460-a657-e0879e09a08c",
@@ -220,8 +228,8 @@
   "unit_id": "24efab50-024b-519e-9029-d2d7f4a05a09",
   "title_en": "Me hizo reír",
   "body_md": "**Hacer** + infinitive is *to make someone do*: **me hizo reír**, **me hizo llorar**, **nos hizo esperar**. **Me hace acordar** — *it reminds me*: *esta canción me hace acordar a vos*.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:00:10.684891+00"
  },
  {
   "id": "14ab3922-a0da-5828-9009-788ce80ae5c3",
@@ -236,8 +244,8 @@
   "unit_id": "58c98ce0-5227-5f11-bf08-49d656a7808b",
   "title_en": "Entre nos",
   "body_md": "**Entre nos** — *between you and me* — is where porteño gossip starts. **Sin querer** — *by accident*: **te pisé sin querer**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:12:11.950554+00"
  },
  {
   "id": "15e39cea-eee9-586b-a3c7-271f2e64edd6",
@@ -261,7 +269,7 @@
   "title_en": "Cuando: always, or not yet",
   "body_md": "| a habit — normal verb | not yet — subjunctive |\n| Cuando **llego**, tomo mate. | Avisame cuando **llegues**. |\n| Cuando **termino**, salgo. | Cuando **termines**, llamame. |\n\nAbout the future, *cuando* and **apenas** take the subjunctive: *apenas puedas*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "178244a5-d8b8-5e7d-a608-d9d95498e537",
@@ -285,15 +293,15 @@
   "title_en": "Gusta or gustan",
   "body_md": "The verb matches the thing you like, not you:\n\n| one thing | more than one |\n| Me **gusta** el mate. | Me **gustan** las facturas. |\n| ¿Te **gusta** la milanesa? | ¿Te **gustan** los mates? |\n\n**Me** — to me, **te** — to you, **le** — to him or her. For emphasis, add *a mí*: *A mí me gusta amargo.*",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "18957af7-bb3a-5323-bc5e-df1ed71877d6",
   "unit_id": "e0efacaf-93a3-521c-850d-fda4909c6796",
   "title_en": "Trucho, zarpado",
   "body_md": "**Trucho** — *fake, dodgy*: *un billete trucho*. **Zarpado** — *over the top*, for good or bad. **Bardo** — *a mess, trouble*: *se armó un bardo*.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:56:44.780814+00"
  },
  {
   "id": "18ab5904-7009-5924-be6f-98b6d24ecd73",
@@ -333,7 +341,7 @@
   "title_en": "Just, usually, again",
   "body_md": "| **Acabo de** llegar. | I just got here. |\n| **Suelo** almorzar tarde. | I usually have lunch late. |\n| **Volví a** perder las llaves. | I lost my keys again. |\n\nAll three take an infinitive. **Soler** has no past you'll need: *antes almorzaba tarde* does the job.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "1a8b45ec-c528-5164-9c7c-bb147aad29d0",
@@ -349,7 +357,7 @@
   "title_en": "Advice: probá, or que pruebes",
   "body_md": "| straight out | softer |\n| Probá el flan. | Te recomiendo que **pruebes** el flan. |\n| Pedí un taxi. | Es mejor que **pidas** un taxi. |\n\n**Te recomiendo que** and **es mejor que** take the subjunctive. *Probar* → **pruebes**, *pedir* → **pidas**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "1b8d8876-164f-505f-a992-fd2a7dad8f99",
@@ -381,7 +389,7 @@
   "title_en": "Había + -ado, -ido",
   "body_md": "| yo, él, ella | **había** | comido, llegado, salido |\n| vos | **habías** | hecho, dicho, visto |\n| ellos | **habían** | |\n\nOne past behind another: **Cuando llegué, ya habían comido.** *Hecho, dicho, visto* are the irregular ones.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "1d2ec980-0806-5da8-bbf4-6621d289bcb9",
@@ -406,6 +414,14 @@
   "body_md": "The politest way to ask is **quisiera** — *I'd like*: **quisiera un turno**. **Disculpe** gets attention, **le agradezco** says thank you. To a friend: **disculpá**, **te agradezco**.",
   "status": "published",
   "updated_at": "2026-09-24 19:39:02.280785+00"
+ },
+ {
+  "id": "1d9ab98d-f6c7-53f6-94dd-02c03d8f55a8",
+  "unit_id": "1c04f11a-4feb-5b1d-956b-3661bab59c15",
+  "title_en": "The more…",
+  "body_md": "| **Cuanto más** practicás, | The more you practice, |\n| mejor hablás. | the better you speak. |\n| Avisame **cuanto antes**. | Let me know as soon as you can. |\n\n**Cuanto más** + one thing, then the other with **más**, **menos**, **mejor**.",
+  "status": "published",
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "1de88b30-f9bf-5d0a-bcf4-7480ca1d4cc7",
@@ -501,7 +517,7 @@
   "title_en": "Present or past: the stress",
   "body_md": "| | now | yesterday |\n| yo | labur**o** | labur**é** |\n| vos | labur**ás** | labur**aste** |\n| él, ella | labur**a** | labur**ó** |\n\n*Laburo* is *I work*; **laburó** is *he worked*. Only the stress, and the accent that marks it, tells them apart. Every regular -ar verb works like this: *hablé, llegaste, compró*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "25d6923c-91de-5dbc-8d0d-f9169a29f8a7",
@@ -517,7 +533,7 @@
   "title_en": "Que tenga, or que tiene",
   "body_md": "| not found yet — subjunctive | already found — normal verb |\n| Busco un depto que **tenga** balcón. | Encontré un depto que **tiene** balcón. |\n| Busco algo que **quede** cerca. | Vivo en un depto que **queda** cerca. |\n| ¿Hay un dueño que **acepte** mascotas? | Mi dueño **acepta** mascotas. |\n\nIf it might not even exist, the verb after **que** goes into the subjunctive.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "26227d1f-a9b0-5c46-814b-dd7d862ecef8",
@@ -565,7 +581,7 @@
   "title_en": "Me puse, me enojé",
   "body_md": "| | ponerse | enojarse |\n| yo | **me puse** | **me enojé** |\n| vos | **te pusiste** | **te enojaste** |\n| él, ella | **se puso** | **se enojó** |\n\nThe pronoun stays in the past. **Ponerse** + a feeling is *to get*: *me puse nervioso* — *I got nervous*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "29090f79-278c-5890-bf3e-c89cc7947b4a",
@@ -589,7 +605,7 @@
   "title_en": "Estar, and ser or estar",
   "body_md": "| yo | **estoy** |\n| vos | **estás** |\n| él, ella | **está** |\n\nTwo verbs mean *to be*. **Ser** says who or what something is, and where it's from: *Soy de Rosario.* **Estar** says where it is right now: *Estoy en el centro.*",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "2b0c0937-8b3c-514f-8274-775cc7aea148",
@@ -653,7 +669,7 @@
   "title_en": "The irregular past",
   "body_md": "| | hacer | ver | decir | venir | poder |\n| yo | hice | vi | dije | vine | pude |\n| vos | hiciste | viste | dijiste | viniste | pudiste |\n| él, ella | hizo | vio | dijo | | |\n\nA new stem, then *-e, -iste, -o* — with no accent. Tell the story in order with **primero**, **entonces**, **al final**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "31b1cddf-37d2-5f9f-88fb-1c86fdda5c9c",
@@ -677,7 +693,7 @@
   "title_en": "Se: what people do",
   "body_md": "| Acá **se cena** tarde. | People eat late here. |\n| **Se saluda** con un beso. | You greet with a kiss. |\n\n**Se** + the *él* form talks about everyone in general, no one in particular.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "333ca1c2-51cd-51af-b620-1c60102642ac",
@@ -813,7 +829,7 @@
   "title_en": "Every -ar verb",
   "body_md": "Take off *-ar* and add the ending for the person:\n\n| yo | labur**o** |\n| vos | labur**ás** |\n| él, ella | labur**a** |\n| nosotros | labur**amos** |\n| ellos, ustedes | labur**an** |\n\nIt works for *hablar, tomar, estudiar, caminar* — every regular -ar verb. **Hacer** is irregular in *yo*: **hago**, *hacés, hace*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "3e33b8ba-1526-5cde-95a7-43b8b9afcc60",
@@ -837,7 +853,7 @@
   "title_en": "Creo que, no creo que",
   "body_md": "| Creo que **es** así. | No creo que **sea** así. |\n| Creo que **está** en casa. | No creo que **esté** en casa. |\n| Creo que **tiene** razón. | No creo que **tenga** razón. |\n| Creo que **hay** tiempo. | No creo que **haya** tiempo. |\n\nSure → the normal verb. Doubting → the subjunctive.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "3f8c383a-9dd6-5525-bc09-f9763a857332",
@@ -901,7 +917,7 @@
   "title_en": "Lo + adjective",
   "body_md": "| **Lo bueno** es la gente. | The good thing is the people. |\n| **Lo malo** es el tránsito. | The bad thing is the traffic. |\n| **Lo mejor** fue el asado. | The best part was the asado. |\n| **Lo peor** es el calor. | The worst part is the heat. |\n\n**Lo** + adjective makes *the … thing*. It never changes: *lo bueno*, even of a plural.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "459ce15a-8a6b-5cd0-a8cb-d2f762e68335",
@@ -932,16 +948,16 @@
   "unit_id": "35edaab3-b8c0-58db-8415-f52edb278a7e",
   "title_en": "-ito, -ita",
   "body_md": "**-ito** makes things small, and requests smaller: **un ratito** — *a sec*; **un cafecito**; **un poquito**. It sounds kind rather than childish.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:41:02.067028+00"
  },
  {
   "id": "49e04ee1-475c-5da9-8fc8-72277c9ebf70",
   "unit_id": "1a2a791f-b759-5930-8cdd-2829e879ce31",
   "title_en": "Lo que pasa es que…",
   "body_md": "**Lo que pasa es que…** — *the thing is* — explains the real reason. **Lo raro es que…** — *the weird thing is*; **lo importante es que…** — *what matters is*.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:44:02.238816+00"
  },
  {
   "id": "4a694bf1-31bd-5bed-856d-62d6bdf86ec7",
@@ -980,8 +996,8 @@
   "unit_id": "e3884c35-d0b6-5d6d-9e7f-b4b1308c5981",
   "title_en": "Estamos atrasados",
   "body_md": "**Estamos atrasados** — *we're behind*. The porteño answer: **no pasa nada, lo sacamos**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:16:25.070848+00"
  },
  {
   "id": "4e8246f2-31a4-5303-97f3-80f702ceb6f8",
@@ -997,7 +1013,7 @@
   "title_en": "Soft advice",
   "body_md": "| **Deberías** descansar. | You should rest. |\n| **Debería** llamarla. | I should call her. |\n| **Estaría bueno** juntarnos. | It'd be nice to get together. |\n| **Habría que** avisarle. | We ought to let him know. |\n\nAll four take an infinitive. *Tenés que* is an order; *deberías* is advice.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "4f6f8f0e-6d84-562a-b6db-ff83d2050223",
@@ -1021,7 +1037,7 @@
   "title_en": "A request, told later",
   "body_md": "| what she said | what you tell |\n| «Traeme algo.» | Me pidió que le **trajera** algo. |\n| «Esperen.» | Nos dijo que **esperáramos**. |\n| «Dejalo acá.» | Me pidió que lo **dejara** acá. |\n| «Vení.» | Quería que **viniera**. |\n\nA request or an order told later takes the past subjunctive after **que**. News doesn't: *dijo que venía*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "52d12bb1-c5ac-5616-9d9f-9d1183ece01e",
@@ -1029,7 +1045,7 @@
   "title_en": "Telling what someone said",
   "body_md": "| what she said | what you tell |\n| «¿Venís?» | Me preguntó **si venía**. |\n| «Sí.» | Le contesté **que sí**. |\n\nThe question comes back with **si**; what was going on slides into the imperfect: *venís* → **venía**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "533b1855-56b9-53e2-9459-caa67e63e95b",
@@ -1092,8 +1108,8 @@
   "unit_id": "1c04f11a-4feb-5b1d-956b-3661bab59c15",
   "title_en": "A medida que",
   "body_md": "**A medida que** — *as*, for two things changing together: **a medida que pasa el tiempo, te vas acostumbrando**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:03:48.954871+00"
  },
  {
   "id": "56d4a95b-8525-5ac4-8df6-3c26ebc33762",
@@ -1101,7 +1117,7 @@
   "title_en": "Every -er and -ir verb",
   "body_md": "| | comer | vivir |\n| yo | com**o** | viv**o** |\n| vos | com**és** | viv**ís** |\n| él, ella | com**e** | viv**e** |\n| nosotros | com**emos** | viv**imos** |\n| ellos, ustedes | com**en** | viv**en** |\n\n-er and -ir are the same except for **vos** and **nosotros**, where each keeps its own vowel.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "575cb41d-92ef-5b02-b25e-72e5a15b2ea0",
@@ -1164,8 +1180,8 @@
   "unit_id": "80d9fccd-c824-5946-8cce-04ecc42e570d",
   "title_en": "Plantear",
   "body_md": "You don't just ask, you **plantear** it — *raise it, put it on the table*: **le planteé lo del aumento a mi jefa**. Then you **negociar** the **condiciones**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:23:15.61054+00"
  },
  {
   "id": "5cb4a4ed-8115-5eba-b4b6-dffd001a2744",
@@ -1197,7 +1213,7 @@
   "title_en": "Estar, and four endings",
   "body_md": "| yo | estoy | vos | estás |\n| él, ella | está | nosotros | **estamos** |\n| ellos, ustedes | **están** | | |\n\nThe word for the feeling matches the people in number too:\n\n| one man | cansad**o** | one woman | cansad**a** |\n| men | cansad**os** | women | cansad**as** |\n\nA word ending in *-e* just adds *-s*: *triste, tristes*. *Feliz* becomes **felices**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "5f1f310a-3dc0-508a-82af-1ac76dfc7a59",
@@ -1309,7 +1325,7 @@
   "title_en": "Aunque + fact, aunque + maybe",
   "body_md": "| a fact — normal verb | a maybe — subjunctive |\n| Aunque **llueve**, vamos. | Aunque **llueva**, vamos. |\n| Aunque **cuesta**, sigo. | Aunque **cueste**, sigo. |\n| Aunque **querés**, no podés. | Aunque no **quieras**, tenés que ir. |\n\nLeft: it *is* raining. Right: whether or not it rains. **Igual** at the end — *anyway* — often closes it.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "64100870-cfc7-57cb-877d-35ee7ebe456f",
@@ -1317,7 +1333,7 @@
   "title_en": "They, whoever they are",
   "body_md": "| **Me robaron** el celu. | My phone got stolen. |\n| ¿Cuánto te **cobraron**? | How much did they charge you? |\n| **Dicen** que mañana llueve. | They say it'll rain tomorrow. |\n\nThe *ellos* form with nobody named is how Spanish says *it got done*: no one to blame, or no one worth naming.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "64263c49-9bbb-598d-b1cd-cbef6fb9640b",
@@ -1340,8 +1356,8 @@
   "unit_id": "58c98ce0-5227-5f11-bf08-49d656a7808b",
   "title_en": "No te lo tomes a mal",
   "body_md": "Before the hard thing: **no te lo tomes a mal** — *don't take it the wrong way*; **con todo respeto** — *with all due respect*. After it: **no lo dije para ofenderte**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:12:11.950554+00"
  },
  {
   "id": "659a6119-e2f6-5433-8d02-6bbaa7f5e7bd",
@@ -1373,7 +1389,7 @@
   "title_en": "How the subjunctive is made",
   "body_md": "Start from the *yo* of the present and swap the vowel: *-ar* verbs take **e**, the rest take **a**.\n\n| yo (now) | vos | yo, él, ella |\n| llamo | **llames** | **llame** |\n| vengo | **vengas** | **venga** |\n| hago | **hagas** | **haga** |\n| traigo | **traigas** | **traiga** |\n| voy | **vayas** | **vaya** |\n\n*Ir* is the odd one out. It follows **quiero que**: *quiero que vengas*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "6671927f-950e-5511-b4d7-c68eaacece32",
@@ -1525,7 +1541,7 @@
   "title_en": "Do, and don't",
   "body_md": "| do | don't |\n| Vení. | No **vengas**. |\n| Andá. | No **vayas**. |\n| Decime. | No **me digas**. |\n| Tocá. | No **toques**. |\n| Olvidate. | No **te olvides**. |\n\n*No* + the subjunctive, and the pronoun moves in front: *preocupate* → **no te preocupes**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "6fd250c0-fa1b-50b6-b892-4e0ec3d17d95",
@@ -1581,7 +1597,7 @@
   "title_en": "Quería que vinieras",
   "body_md": "The second verb follows the first into the past:\n\n| now | then |\n| Quiero que **vengas**. | Quería que **vinieras**. |\n| Te pido que **llames**. | Te pedí que **llamaras**. |\n| Me dice que **espere**. | Me dijo que **esperara**. |\n\nThe past subjunctive is the *ellos* past with **-ra**: *vinieron* → **viniera**, *hicieron* → **hiciera**. With vos: **vinieras, hicieras, llamaras**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "75167017-65a6-5a49-9a02-adfb338b796b",
@@ -1589,7 +1605,7 @@
   "title_en": "How long: llevar, hace, seguir",
   "body_md": "| Llevo dos años **viviendo** acá. | I've been living here for two years. |\n| Hace dos años que **vivo** acá. | (the same) |\n| **Sigo** laburando ahí. | I still work there. |\n| **Dejé de** fumar. | I quit smoking. |\n| **Volvió a** llamar. | He called again. |\n\nEnglish *have been …ing* is the present in Spanish. **Llevar** + time + *-ando, -iendo*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "78286e2b-e254-5636-a5a8-883bdf68f891",
@@ -1597,7 +1613,7 @@
   "title_en": "Querer, poder, ir",
   "body_md": "| | querer | poder | ir |\n| yo | quiero | puedo | voy |\n| vos | **querés** | **podés** | vas |\n| él, ella | quiere | puede | va |\n| nosotros | **queremos** | **podemos** | vamos |\n| ellos | quieren | pueden | van |\n\n*e → ie* and *o → ue* everywhere except **vos** and **nosotros**. *Ir* is its own thing. Add an infinitive for plans: *¿Querés salir?*",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "7abff288-01b8-54a6-8a7f-927e966091f0",
@@ -1605,7 +1621,7 @@
   "title_en": "The word matches the person",
   "body_md": "Words that describe someone change for a man or a woman:\n\n| a man | a woman |\n| argentin**o** | argentin**a** |\n| uruguay**o** | uruguay**a** |\n| porteñ**o** | porteñ**a** |\n| ingl**és** | ingl**esa** |\n\n*-o* becomes *-a*. A word ending in a consonant adds *-a*, and *inglés* loses its accent: **inglesa**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "7bc7cb49-45ee-5195-b8b6-8be5a6f0a0a3",
@@ -1693,7 +1709,7 @@
   "title_en": "Ir + -ando, estar por",
   "body_md": "| **Voy entendiendo.** | I'm starting to get it. |\n| **Vas aprendiendo** de a poco. | You're learning bit by bit. |\n| **Estoy por** salir. | I'm about to leave. |\n| **Está por** llover. | It's about to rain. |\n\n**Ir** + gerund is change in progress; **estar por** + infinitive is what's about to happen.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "82c92152-1296-5058-b7e1-6deb2183513e",
@@ -1725,7 +1741,7 @@
   "title_en": "Comparing",
   "body_md": "| more than | **más** alto **que** yo |\n| less than | **menos** caro **que** |\n| as … as | **tan** lindo **como** |\n| better, worse | **mejor**, **peor** |\n| older, younger | **más grande**, **más chico** |\n| very, very | rico → **riquísimo**, caro → **carísimo** |\n\nThe describing word still matches the person: *mi hermana es más alta que yo*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "84491d82-9e35-581d-8106-2cc1028f2cde",
@@ -1749,7 +1765,7 @@
   "title_en": "Era, tenía, vivía, iba",
   "body_md": "| | ser | tener | vivir | ir |\n| yo, él, ella | era | tenía | vivía | iba |\n| vos | eras | tenías | vivías | ibas |\n| nosotros | éramos | | | íbamos |\n\nThis past describes: how things *were*, what you *had*, where you *lived*. *Yo* and *él* share one form. **Cuando era chico vivía en Rosario.**",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "863cc68c-e7da-5e85-9141-6c897afcf44b",
@@ -1757,15 +1773,15 @@
   "title_en": "Lo, la, le — where they go",
   "body_md": "| the thing, masculine | **lo**, **los** | ¿El audio? **Lo** mando ahora. |\n| the thing, feminine | **la**, **las** | ¿La tarjeta? **La** tengo. |\n| to him, her, them | **le**, **les** | **Le** doy la llave. |\n| me, you | **me**, **te** | **Te** llamo mañana. |\n\nBefore a normal verb: *la tengo*. Stuck to the end of a command: **llamame**, **dame**, **mandame**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "8678fb2f-5583-5729-a7fa-7e1ea3ce583d",
   "unit_id": "80d9fccd-c824-5946-8cce-04ecc42e570d",
   "title_en": "Merezco",
   "body_md": "**Merecer** — *to deserve*: **merezco un aumento**, **te lo merecés**. And a boss who **valora** your work says so with the sueldo.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:23:15.61054+00"
  },
  {
   "id": "867bb841-c3ee-5915-a39a-2a142147407f",
@@ -1788,8 +1804,8 @@
   "unit_id": "24efab50-024b-519e-9029-d2d7f4a05a09",
   "title_en": "Me reí",
   "body_md": "**Reírse** is *to laugh*: **me reí un montón**, **nos reímos de todo**. **Llorar** is *to cry*: **lloré con la película**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:00:10.684891+00"
  },
  {
   "id": "88e0500d-b041-54ab-ab18-c50d35efe8c0",
@@ -1797,15 +1813,15 @@
   "title_en": "Me llamo, te llamás",
   "body_md": "The little word in front changes with the person, and so does the verb:\n\n| yo | **me llamo** | my name is |\n| vos | **te llamás** | your name is |\n\nThe question puts *cómo* first: **¿Cómo te llamás?** The vos form ends in **-ás**, with the stress on the end.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "8a29fec5-b96f-5019-8de7-6e3c598a5302",
   "unit_id": "f925644a-c585-5773-8af3-f9a36c4cd2b0",
   "title_en": "Me arrepiento",
   "body_md": "**Me arrepiento** — *I regret it*; **me arrepentí** — *I regretted it, I changed my mind*. A missed chance is a **oportunidad** you didn't **aprovechar**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:33:15.964308+00"
  },
  {
   "id": "8a55c90c-0fb5-5815-a6a0-17ca65ce25bc",
@@ -1821,7 +1837,7 @@
   "title_en": "A la that points at nothing",
   "body_md": "| **Se la cree.** | He's full of himself. |\n| **Me la banco.** | I can handle it. |\n| **Se la bancó.** | She put up with it. |\n| **Me las arreglo.** | I get by. |\n| **La tenés clara.** | You know your stuff. |\n\nThe *la* stays *la* whoever you're talking about; only the verb and the first pronoun change.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "8af67e04-9d96-5ada-98ea-78bbea30080c",
@@ -1877,7 +1893,7 @@
   "title_en": "Me levanto, te levantás",
   "body_md": "These verbs carry a pronoun that matches the person:\n\n| yo | **me** levanto | **me** acuesto |\n| vos | **te** levantás | **te** acostás |\n| él, ella | **se** levanta | **se** acuesta |\n| nosotros | **nos** levantamos | |\n\nThe pronoun goes before the verb. *Acostarse* changes *o → ue*, but not with vos: **te acostás**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "8f4c23b2-5684-59ec-a311-4cb9e59ce5a6",
@@ -1909,7 +1925,7 @@
   "title_en": "Si tuviera, viajaría",
   "body_md": "The *if* half has its own form. Take the *ellos* past and swap **-ron** for **-ra**:\n\n| tuvie-ron | **tuviera** |\n| fue-ron | **fuera** |\n| pudie-ron | **pudiera** |\n| estuvie-ron | **estuviera** |\n\nThen the other half takes *would*: **si tuviera tiempo, viajaría**. With vos: *si tuvieras*, *¿qué harías?*",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "91a09edc-d241-50cf-8f47-268ab52bfee5",
@@ -1949,7 +1965,7 @@
   "title_en": "Me da + a feeling",
   "body_md": "| Me da **bronca**. | It makes me mad. |\n| Me da **vergüenza**. | I'm embarrassed. |\n| Me da **lástima**. | I feel sorry (for him). |\n| Me da **igual**. | I don't care. |\n\nThe cause follows **que** in the subjunctive: **me da bronca que no avise**. In the past, **me dio**: *me dio vergüenza*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "94d127e4-2339-5415-98ae-ddd06a03e5e1",
@@ -2013,7 +2029,7 @@
   "title_en": "Soy, sos",
   "body_md": "*Ser* — to be — has a form for each person. So far:\n\n| yo | **soy** | I am |\n| vos | **sos** | you are |\n\nUse **vos** with everyone: friends, the waiter, your boss. A question is the same words with a rising voice: *¿Sos Sofi?*",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "97b6abce-e595-58cb-a895-30319da57ada",
@@ -2052,8 +2068,8 @@
   "unit_id": "35edaab3-b8c0-58db-8415-f52edb278a7e",
   "title_en": "Cerquita, despacito",
   "body_md": "It works on adverbs too: **cerquita** — *really close*; **despacito** — *nice and slow*. **Chiquito** — *tiny*.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:41:02.067028+00"
  },
  {
   "id": "9c8a1e7a-1493-5571-8ed6-618849217504",
@@ -2076,8 +2092,8 @@
   "unit_id": "8391605b-e3f5-521c-811d-c849d7eef95f",
   "title_en": "Hubiera, tendría que haber",
   "body_md": "**Si hubiera ahorrado, ahora tendría…** — and the regret: **tendría que haber ahorrado**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:37:26.277312+00"
  },
  {
   "id": "9e470499-223a-5382-8475-2b677a8e1fde",
@@ -2109,7 +2125,7 @@
   "title_en": "Reacting",
   "body_md": "| ¡Qué bueno que **estés** acá! | So good you're here! |\n| Qué lástima que no **vengas**. | Shame you're not coming. |\n| Me molesta que **llegue** tarde. | It bugs me he's late. |\n\nA reaction to something + **que** → the subjunctive. **Me alegro** on its own: *I'm glad*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "a0157ee6-1047-52d7-bc9d-1f2a42b1f1d5",
@@ -2125,7 +2141,7 @@
   "title_en": "Se + verb on a sign",
   "body_md": "| one thing | more than one |\n| **Se vende** auto. | **Se venden** bicis. |\n| **Se alquila** depto. | |\n| **Se necesita** mozo. | |\n\n**Se** + the *él* form, or the *ellos* form for plurals. Nobody is named: it's what's being sold, rented, needed.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "a15090b1-c1fe-5229-a963-37485274bc8d",
@@ -2140,8 +2156,8 @@
   "unit_id": "1c04f11a-4feb-5b1d-956b-3661bab59c15",
   "title_en": "Cuanto más…",
   "body_md": "**Cuanto más** — *the more*: **cuanto más practicás, mejor hablás**. **Cuanto menos** — *the less*. And **cuanto antes** — *the sooner the better*: **avisame cuanto antes**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:03:48.954871+00"
  },
  {
   "id": "a3d8add9-3af2-5335-9dc3-fda0446ac1a7",
@@ -2189,7 +2205,7 @@
   "title_en": "The scene and what happened",
   "body_md": "| the scene — imperfect | what happened — preterite |\n| **Estaba** en el subte | cuando me **llamó** Sofi. |\n| **Llovía** mucho | y **llegué** tarde. |\n| **Había** mucha gente | y no **pude** entrar. |\n\nAsk: was it going on, or did it happen? Going on → *-aba, -ía*. Happened, and finished → the preterite.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "a5efa082-ec6d-55de-8585-829fc1b6a047",
@@ -2261,7 +2277,7 @@
   "title_en": "Conditions",
   "body_md": "| Voy, **a menos que llueva**. | unless |\n| Voy, **siempre y cuando vengas**. | as long as |\n| Llamame **en caso de que haya** un problema. | in case |\n| Llevá paraguas **por si llueve**. | just in case |\n\nThe first three take the subjunctive. **Por si** is the exception: normal verb.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "ade978ac-cf4e-5fde-a04b-a5c2f59f8651",
@@ -2277,7 +2293,7 @@
   "title_en": "Tener que, and jobs",
   "body_md": "**Tener que** + an infinitive — the *-ar, -er, -ir* form — is *to have to*:\n\n| Tengo que laburar. | I have to work. |\n| ¿Tenés que estudiar? | Do you have to study? |\n\nJobs change for a woman: *profesor* → **profesora**, *médico* → **médica**, *jefe* → **jefa**. And no *un, una*: **Soy abogada.**",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "b09d13bc-f73f-5448-80bf-e1a0406e6cf9",
@@ -2293,7 +2309,7 @@
   "title_en": "Ser and tener, all of them",
   "body_md": "With *nosotros* and *ellos*, both verbs are complete:\n\n| | ser | tener |\n| yo | soy | tengo |\n| vos | sos | tenés |\n| él, ella | es | tiene |\n| nosotros | **somos** | **tenemos** |\n| ellos, ustedes | **son** | **tienen** |\n\n**Ustedes** — *you all* — uses the *ellos* form. Argentina never uses *vosotros*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "b2a9d548-3c48-5353-94cd-0f1e4cdfdbf5",
@@ -2324,8 +2340,8 @@
   "unit_id": "544808fd-b59f-580e-b0be-6f789ba2a11c",
   "title_en": "Chabón, groso",
   "body_md": "**Chabón**, **mina**, **groso**, **birra**, **trucho** — among friends.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:08:04.29765+00"
  },
  {
   "id": "b617a7a0-808e-54d7-85f8-735996d78f75",
@@ -2340,8 +2356,8 @@
   "unit_id": "8391605b-e3f5-521c-811d-c849d7eef95f",
   "title_en": "No es que…, es que…",
   "body_md": "**No es que no quiera** (subjunctive), **es que no puedo** (normal verb).",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:37:26.277312+00"
  },
  {
   "id": "b76db757-790f-5e97-9bd8-0076c09777a6",
@@ -2381,7 +2397,7 @@
   "title_en": "Hermano, hermana",
   "body_md": "Most family words come in pairs:\n\n| man | woman |\n| herman**o** | herman**a** |\n| hij**o** | hij**a** |\n| abuel**o** | abuel**a** |\n| novi**o** | novi**a** |\n| viej**o** | viej**a** |\n\n**Mi** — *my* — never changes: *mi hermano*, *mi hermana*. And *papá* ends in *-a* but is a man.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "bb475835-3596-5744-abe5-6a802edce685",
@@ -2460,8 +2476,8 @@
   "unit_id": "544808fd-b59f-580e-b0be-6f789ba2a11c",
   "title_en": "Me hizo reír, cuanto más",
   "body_md": "**Me hizo reír**, **me hace acordar**, and **cuanto más practicás, mejor**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:08:04.29765+00"
  },
  {
   "id": "bf96bee5-076e-5167-adb6-ac24c4793a4d",
@@ -2485,7 +2501,7 @@
   "title_en": "Wishes",
   "body_md": "| Que te vaya bien. | Good luck. |\n| Que la pases lindo. | Have a great time. |\n| Que tengas buen finde. | Have a good weekend. |\n| Ojalá que no llueva. | I hope it doesn't rain. |\n| Ojalá salga todo bien. | I hope it all works out. |\n\nA wish is **que** or **ojalá** + the subjunctive. *Tener → tengas, salir → salga*: the *g* of *tengo, salgo* comes along.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "c2891689-2f3f-54d4-8ece-c513dcc00952",
@@ -2502,6 +2518,14 @@
   "body_md": "**Por las dudas** — *just in case*; **de última** — *if all else fails*; **en serio** — *seriously*; **si querés** — *if you like*. Say them and you sound like you're from here.",
   "status": "published",
   "updated_at": "2026-09-24 06:23:38.701458+00"
+ },
+ {
+  "id": "c3264f00-8549-57e6-b10c-df7f596d789c",
+  "unit_id": "d1ef9d43-816d-571d-a8ba-4ba76a09ba2d",
+  "title_en": "Then, and what it means now",
+  "body_md": "| if (then) | now |\n| Si **hubiera ahorrado**, | ahora **tendría** un depto. |\n| Si **hubiéramos** salido antes, | ya **estaríamos** ahí. |\n| Si **hubiera aceptado**, | ahora **sería** otra cosa. |\n\n*Hubiera* + participle for the past that didn't happen; the plain conditional for today.",
+  "status": "published",
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "c36061ee-ffa6-50e3-a2e5-06e46a8619e6",
@@ -2524,8 +2548,8 @@
   "unit_id": "e0efacaf-93a3-521c-850d-fda4909c6796",
   "title_en": "Chabón, mina",
   "body_md": "A **chabón** is a guy, a **mina** a woman — among friends; both sound rude to strangers. Someone great at what they do is a **groso**; a **birra** is a beer.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:56:44.780814+00"
  },
  {
   "id": "c3db5128-fa8a-560f-886b-8a3374977ee4",
@@ -2533,7 +2557,7 @@
   "title_en": "Para, para que",
   "body_md": "| same person — infinitive | someone else — subjunctive |\n| Estudio **para aprender**. | Te lo explico **para que entiendas**. |\n| | Te lo mando **para que lo leas**. |\n| | Avisame **antes de que** llegue. |\n\n**Antes de que** always takes the subjunctive: it hasn't happened yet.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "c3ebca78-c01d-5635-ae32-235914cc3de0",
@@ -2556,8 +2580,8 @@
   "unit_id": "5ee78c4c-97f9-5e3c-a458-2aff27520c2e",
   "title_en": "Un ratito",
   "body_md": "**-ito** softens: **un ratito**, **un cafecito**, **cerquita**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:52:53.577831+00"
  },
  {
   "id": "c458a9ac-cd4c-5a51-833c-9e9f01372152",
@@ -2581,7 +2605,7 @@
   "title_en": "El que, la que, donde",
   "body_md": "| a masculine thing | **el que** quieras |\n| a feminine thing | **la que** está en la esquina |\n| more than one | **los que** vinieron, **las que** prefieras |\n| a place | el bar **donde** nos conocimos |\n\nIt matches what it stands for. *El que quieras* — whichever you want — takes the subjunctive: you haven't chosen yet.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "c585fa33-b562-55de-93f1-7f619cc3b533",
@@ -2628,8 +2652,8 @@
   "unit_id": "1a2a791f-b759-5930-8cdd-2829e879ce31",
   "title_en": "Lo de…",
   "body_md": "**Lo de** is *the business with*: **¿qué pasó con lo de Juan?** And **lo de siempre** is *the usual*: at the café, at the bar, in life.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:44:02.238816+00"
  },
  {
   "id": "c7612ab5-0ef0-58d3-b838-a200ee62dd58",
@@ -2638,6 +2662,14 @@
   "body_md": "**Lo que** is *what* in the middle of a sentence: **¿viste lo que pasó?**, **no sé lo que quiere**.",
   "status": "published",
   "updated_at": "2026-09-24 07:29:55.39398+00"
+ },
+ {
+  "id": "c84bee89-18a2-5614-8727-17bcdb37c13c",
+  "unit_id": "24efab50-024b-519e-9029-d2d7f4a05a09",
+  "title_en": "Hacer + infinitive",
+  "body_md": "| **Me hizo reír.** | It made me laugh. |\n| **Me hizo llorar.** | It made me cry. |\n| **Me hace acordar** a vos. | It reminds me of you. |\n\n**Hacer** + infinitive is *to make someone do it*. The person goes in front: **me**, **te**, **nos**.",
+  "status": "published",
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "c95952cc-4578-5bd2-a762-e45f3792a19a",
@@ -2693,7 +2725,7 @@
   "title_en": "How a vos command is made",
   "body_md": "Take the infinitive, drop the *-r*, and stress the last vowel:\n\n| mirar | **mirá** |\n| esperar | **esperá** |\n| venir | **vení** |\n| andar | **andá** |\n\nA pronoun joins the end, and the accent goes, because the stress doesn't move: *esperá* → **esperame**. *Decir* → **decime**, *sentarse* → **sentate**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "cf806c31-8f85-5040-8303-14a57a557a27",
@@ -2708,8 +2740,8 @@
   "unit_id": "5ee78c4c-97f9-5e3c-a458-2aff27520c2e",
   "title_en": "Lo que pasa es que…",
   "body_md": "**Lo que pasa es que**, **lo raro es que**, **lo de siempre** — and a **dicho** to close it.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:52:53.577831+00"
  },
  {
   "id": "d14d3ee0-aa95-5ffd-ab43-f1d7d87dfc74",
@@ -2845,7 +2877,7 @@
   "title_en": "Como si + past subjunctive",
   "body_md": "| Habla **como si supiera** todo. | He talks as if he knew everything. |\n| **Como si fuera** fácil. | As if it were easy. |\n| Me saludó **como si nada**. | He said hi as if nothing had happened. |\n| ¡**Ni que fuera** tan difícil! | It's not like it's that hard! |\n\nAfter **como si** and **ni que**, always the *-ra* form, whatever the time.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "d9a173a8-6a0d-5b0d-97f3-ed5a3f6e3055",
@@ -2909,7 +2941,7 @@
   "title_en": "The passive of the news",
   "body_md": "| El puente **fue construido** hace un siglo. | was built |\n| La estación **fue inaugurada** ayer. | was opened |\n| Los chorros **fueron detenidos**. | were arrested |\n\n**Fue** + participle, and the participle agrees like an adjective. In conversation: *construyeron el puente*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "dee7197c-bac0-54b1-aad6-dd4fd838f50a",
@@ -2973,7 +3005,7 @@
   "title_en": "Te lo, se lo",
   "body_md": "| Te devuelvo **el libro**. | Te **lo** devuelvo. |\n| ¿Me dejás **las llaves**? | ¿Me **las** dejás? |\n| Le regalé **un libro**. | **Se lo** regalé. |\n\nThe person goes first, the thing second. *Le* or *les* before *lo, la* becomes **se**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "e3774fe4-ab31-5852-860c-b8663022162f",
@@ -2989,7 +3021,7 @@
   "title_en": "Si = whether",
   "body_md": "| «¿Venís?» | Me preguntó **si** venía. |\n| «¿Abre hoy?» | No sé **si** abre hoy. |\n| | **A ver si** nos juntamos. |\n\nA yes-or-no question told later hangs on **si**, with the normal verb.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "e41cacc8-f196-569f-9838-bdd51d5857fa",
@@ -2997,7 +3029,7 @@
   "title_en": "Vos and usted",
   "body_md": "| vos | usted |\n| ¿Vos sos el dueño? | ¿**Usted** es el dueño? |\n| Pasá. | **Pase**. |\n| Sentate. | **Siéntese**. |\n| Disculpá. | **Disculpe**. |\n\nUsted takes the *él* form. **Quisiera** — *I'd like* — works with both.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "e4442fba-2d7d-515f-bf95-5182892f4c7e",
@@ -3021,15 +3053,15 @@
   "title_en": "The future of guessing",
   "body_md": "| ser | **será** | ¿Qué hora será? |\n| estar | **estará** | Estará en el laburo. |\n| tener | **tendrá** | Tendrá treinta años. |\n| haber | **habrá** | Habrá mucha gente. |\n\nFor plans, porteños say *voy a*. This future is for wondering and guessing: *I wonder…*, *he's probably…*",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "e6b7166a-1ef7-5de5-90cc-d87a7c023771",
   "unit_id": "4023fc2a-56e8-5980-bada-adc3306da091",
   "title_en": "El que avisa no traiciona",
-  "body_md": "**El que avisa no traiciona** — *I warned you*, literally *who warns doesn't betray*. **Al mal tiempo, buena cara** — *grin and bear it*.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "body_md": "**El que avisa no traiciona** — *I warned you*, literally *who warns doesn't betray*.",
+  "status": "published",
+  "updated_at": "2026-09-24 21:48:24.342063+00"
  },
  {
   "id": "e6e2d7cb-a37e-547a-b841-bd24476880df",
@@ -3136,6 +3168,14 @@
   "updated_at": "2026-09-24 06:15:45.142723+00"
  },
  {
+  "id": "ebf70b0b-7f6a-5e96-b746-54f804c3c99b",
+  "unit_id": "74a94584-d79a-55af-920c-e6fa1c59b5ad",
+  "title_en": "No es que…, es que…",
+  "body_md": "| **No es que** no **quiera**, | It's not that I don't want to, |\n| **es que** no puedo. | it's just that I can't. |\n| **No es que** no **tengamos** ganas. | It's not that we don't feel like it. |\n\nThe reason you deny takes the subjunctive; the real one, after **es que**, the normal verb.",
+  "status": "published",
+  "updated_at": "2026-09-24 22:19:22.65844+00"
+ },
+ {
   "id": "ec1122a7-6b09-5324-b5c9-305542cf61e1",
   "unit_id": "d8c13ac1-8ec0-5db3-adbe-39834eed0ff9",
   "title_en": "A ver si…",
@@ -3149,7 +3189,7 @@
   "title_en": "Hay or está",
   "body_md": "| something new | something you already know |\n| **Hay** un kiosco. | **El** kiosco **está** en la esquina. |\n| **Hay** una parada acá. | **La** parada **está** lejos. |\n\n**Hay** goes with *un, una* or a number, and never changes: *hay dos subtes*. **Está** goes with *el, la*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "ed6072dc-6128-51a8-83b7-26e45cf6ccde",
@@ -3164,8 +3204,8 @@
   "unit_id": "e3884c35-d0b6-5d6d-9e7f-b4b1308c5981",
   "title_en": "El plazo",
   "body_md": "At work, a **proyecto** has a **plazo** — *a deadline* — and a **presupuesto** — *a budget*. You **entregás** it to the **cliente**, ideally before you're **atrasado**.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 22:16:25.070848+00"
  },
  {
   "id": "ee4f763f-c680-5a11-ba55-31f7082d3a0c",
@@ -3221,7 +3261,7 @@
   "title_en": "Me gusta + doing something",
   "body_md": "With a verb, *gusta* stays singular, even for two activities:\n\n| Me gusta bailar. | Me gusta leer y cocinar. |\n| Me encanta el fútbol. | Me encantan las series. |\n\nAgreeing: **A mí también** after a *yes*, **A mí tampoco** after a *no*.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "f3006b2f-a540-5da1-90a0-3fcad0038181",
@@ -3252,8 +3292,8 @@
   "unit_id": "4023fc2a-56e8-5980-bada-adc3306da091",
   "title_en": "Como dice el dicho",
   "body_md": "A **dicho** is a saying, and porteños drop one to close an argument: **más vale tarde que nunca**; **no hay mal que por bien no venga** — *every cloud has a silver lining*.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:48:24.342063+00"
  },
  {
   "id": "f3fcc919-1f27-58f9-a544-0c038db923b8",
@@ -3261,7 +3301,7 @@
   "title_en": "-aba and -ía",
   "body_md": "| | -ar | -er, -ir |\n| yo, él, ella | jug**aba** | com**ía** |\n| vos | jug**abas** | com**ías** |\n| nosotros | jug**ábamos** | sal**íamos** |\n\nEvery verb but *ser, ir* and *ver* follows this. It's the *used to* of English: **Los sábados jugábamos a la pelota.**",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "f4ed9ba7-049b-5b3f-a8ac-c10dade176d9",
@@ -3277,7 +3317,7 @@
   "title_en": "Commands for ustedes",
   "body_md": "| one person (vos) | more than one (ustedes) |\n| pasá | **pasen** |\n| esperá | **esperen** |\n| vení | **vengan** |\n| traé | **traigan** |\n| sentate | **siéntense** |\n| no te preocupes | **no se preocupen** |\n\n-ar verbs end in **-en**, the rest in **-an**. The pronoun is **se**, stuck on the end — and then the accent appears: **siéntense, quédense**.",
   "status": "published",
-  "updated_at": "2026-09-24 21:25:00.587058+00"
+  "updated_at": "2026-09-24 22:19:22.65844+00"
  },
  {
   "id": "f62f34aa-e166-53b8-a8ce-cb48487e0e8c",
@@ -3324,8 +3364,8 @@
   "unit_id": "f925644a-c585-5773-8af3-f9a36c4cd2b0",
   "title_en": "Tendría que haber…",
   "body_md": "**Tendría que haber** + participle is *I should have*: **tendría que haber ido**, **tendrías que haber avisado**. Porteños use it far more than any other past regret.",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00"
+  "status": "published",
+  "updated_at": "2026-09-24 21:33:15.964308+00"
  },
  {
   "id": "f8f1dd38-6b20-5a33-9fa8-3f6dc3e87775",

@@ -334,8 +334,8 @@
    "lo.nominalizacion"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:44:02.238816+00",
   "course_order": 166,
   "review_form_ids": []
  },
@@ -351,8 +351,8 @@
    "a-medida-que"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:03:48.954871+00",
   "course_order": 171,
   "review_form_ids": []
  },
@@ -483,8 +483,8 @@
    "reirse"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:00:10.684891+00",
   "course_order": 170,
   "review_form_ids": []
  },
@@ -743,8 +743,8 @@
    "diminutivo"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:41:02.067028+00",
   "course_order": 165,
   "review_form_ids": []
  },
@@ -964,8 +964,8 @@
    "refranes"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:48:24.342063+00",
   "course_order": 167,
   "review_form_ids": []
  },
@@ -1170,8 +1170,8 @@
    "repaso.cuanto-mas"
   ],
   "register_max": "lunfardo",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:08:04.29765+00",
   "course_order": 172,
   "review_form_ids": [
    "db5d2521-6b08-5b4f-b7e5-b4e93aa08b81",
@@ -1237,8 +1237,8 @@
    "repaso.c1"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:12:11.950554+00",
   "course_order": 173,
   "review_form_ids": []
  },
@@ -1308,8 +1308,8 @@
    "repaso.refranes"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:52:53.577831+00",
   "course_order": 168,
   "review_form_ids": [
    "92784159-6eae-5fee-8ee2-dd6820978dca",
@@ -1905,8 +1905,8 @@
    "laburo.negociar"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:23:15.61054+00",
   "course_order": 175,
   "review_form_ids": []
  },
@@ -1923,8 +1923,8 @@
    "repaso.arrepentirse"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 21:22:13.611047+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:37:26.277312+00",
   "course_order": 164,
   "review_form_ids": [
    "292da13b-10ef-545c-a8a2-ae7367ae16c6",
@@ -3351,8 +3351,8 @@
    "registro"
   ],
   "register_max": "lunfardo",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:56:44.780814+00",
   "course_order": 169,
   "review_form_ids": []
  },
@@ -3403,8 +3403,8 @@
    "laburo.proyecto"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:16:25.070848+00",
   "course_order": 174,
   "review_form_ids": []
  },
@@ -3782,8 +3782,8 @@
    "arrepentirse"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:33:15.964308+00",
   "course_order": 163,
   "review_form_ids": []
  },
