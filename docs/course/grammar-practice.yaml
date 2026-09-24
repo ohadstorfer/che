@@ -941,3 +941,27 @@ units:
         | Avisame **cuanto antes**. | Let me know as soon as you can. |
 
         **Cuanto más** + one thing, then the other with **más**, **menos**, **mejor**.
+
+  # ── Section 15 ──────────────────────────────────────────────────────────
+  - unit: merezco-un-aumento
+    lessons: 1
+    tip:
+      title: "Me lo merezco"
+      body: |
+        | **Me merezco** un aumento. | I deserve a raise. |
+        | **Me lo merezco.** | I deserve it. |
+        | **Te lo merecés.** | You deserve it. |
+
+        **Merecerse** comes with its pronoun: the bare *merezco* sounds like a textbook.
+
+  - unit: se-caso
+    lessons: 1
+    tip:
+      title: "Se casó, nació"
+      body: |
+        | Mi prima **se casó** el sábado. | got married |
+        | **Nos casamos** en marzo. | we got married |
+        | El bebé **nació** ayer. | was born |
+        | ¿Dónde **naciste**? | were you born |
+
+        **Casarse** takes its pronoun; **nacer** doesn't.
