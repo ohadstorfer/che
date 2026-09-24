@@ -392,9 +392,16 @@ function gradeWord(
   const answers = only ? [form] : sameAnswer(form, allForms);
   const asked = senseKey(meaning);
   const stored = only ? [] : (form.accepts ?? []).filter((a) => senseKey(a.meaning) === asked).map((a) => a.answer);
-  const accepted = [...answers.flatMap((f) => [f.form, ...(f.alt ?? [])]), ...stored];
+  const own = answers.flatMap((f) => [f.form, ...(f.alt ?? [])]);
+  const accepted = [...own, ...stored];
   const fallback = { correct: false, expected: form.form } as const;
   if (!norm(input)) return fallback;
+
+  // A stored answer is another way to say it, not the word being drilled: it is
+  // right, and the note names the word ("de Buenos Aires" — this one was porteña).
+  const otherWay = stored.find((a) => norm(a) === norm(input) && !own.some((o) => norm(o) === norm(input)));
+
+  if (otherWay) return { correct: true, note: 'synonym', expected: form.form };
 
   const exact = accepted.find((a) => normStrict(a) === normStrict(input));
   if (exact) return { correct: true, expected: exact };

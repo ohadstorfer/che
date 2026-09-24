@@ -403,6 +403,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "lástima",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "0235d3cb-bca8-5c87-8ddb-a73224ece2aa",
+  "lemma_id": "6c904c29-562e-56e8-892c-a7673b56b2ba",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 17:04:07.358313+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "gender": "f",
    "number": "sg"
@@ -1047,6 +1064,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "contrato",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "06df6c1e-d1b8-5ebd-91a4-b7886a691035",
+  "lemma_id": "788075d0-5740-53e2-9d42-1d0f34e47025",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "gender": "f",
    "number": "sg"
@@ -1123,6 +1157,26 @@
   "status": "published",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
   "updated_at": "2026-09-23 23:12:50.467874+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "dueña",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "07a56876-b609-5849-ae84-d7853c0ced70",
+  "lemma_id": "103d96a0-0312-5907-8fb9-6a753f0cc2db",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
   "voice_id": null
  },
  {
@@ -2307,6 +2361,42 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "en caso de que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "10df097c-2104-5b2c-b5f1-08b4249e5b4c",
+  "lemma_id": "f05037ab-ee1f-5262-868c-213071b75690",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 17:21:40.841261+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "ger"
+  },
+  "form": "aprendiendo",
+  "gloss_en": "learning",
+  "gloss_note_en": null,
+  "id": "10eb66d3-7b9b-5926-917c-6d0187cbd79e",
+  "lemma_id": "21a6e054-b9d6-5491-8f71-33c97aaa612b",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 17:34:46.097626+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "gender": "f",
    "number": "sg"
@@ -2661,6 +2751,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "vendí",
+  "gloss_en": "I sold",
+  "gloss_note_en": null,
+  "id": "13625831-98e2-51a0-9ee7-53b3e94e5eca",
+  "lemma_id": "19a19e43-0f3b-595d-8c03-e84ce0d49710",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "ochenta",
   "gloss_en": null,
@@ -2713,6 +2825,23 @@
   "status": "published",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
   "updated_at": "2026-09-23 19:29:03.477849+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "habría que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "13d5df9a-ad5f-5654-aff5-5fa1b5f0efa2",
+  "lemma_id": "85c90bb4-b6de-506a-a189-d24fc5198aa6",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 17:15:57.654257+00",
   "voice_id": null
  },
  {
@@ -2880,6 +3009,25 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "verb_form": "inf"
+  },
+  "form": "cumplir",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "1548ad50-02d3-54ae-b349-b5a6962d83c0",
+  "lemma_id": "41075352-5bb3-5675-abdc-88d8b4869204",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 17:22:44.013204+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "gender": "f",
    "number": "sg"
   },
@@ -2954,6 +3102,26 @@
   "status": "published",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
   "updated_at": "2026-09-24 05:57:59.666661+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "suegro",
+  "gloss_en": "father-in-law",
+  "gloss_note_en": null,
+  "id": "165aca76-f5a6-590d-8599-4abac8f03a38",
+  "lemma_id": "820c7176-9e35-5e32-ba85-fa2ffdd760cb",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:45:02.432872+00",
   "voice_id": null
  },
  {
@@ -3137,6 +3305,29 @@
   "status": "published",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
   "updated_at": "2026-09-23 19:43:38.303503+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "me cae",
+  "gloss_en": "(he) comes across to me",
+  "gloss_note_en": null,
+  "id": "17b88c58-62d3-514f-8796-6b6e38f54413",
+  "lemma_id": "c5288a4f-309b-5909-ab79-647c6546ed00",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00",
   "voice_id": null
  },
  {
@@ -3378,6 +3569,47 @@
   "status": "published",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
   "updated_at": "2026-09-23 23:26:00.580368+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "loco",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "19be694c-e766-5eb9-9617-25fb5ac54560",
+  "lemma_id": "150bc0a8-ff93-5168-90b0-0a362a87a487",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "subj",
+   "number": "sg",
+   "tense": "pres"
+  },
+  "form": "avise",
+  "gloss_en": "(that) he lets know, (that) I let know",
+  "gloss_note_en": null,
+  "id": "19dbe643-74e4-5601-9094-7bcfc122c738",
+  "lemma_id": "d32f8623-eb52-5fa3-8337-8c86316dac22",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 17:04:07.358313+00",
   "voice_id": null
  },
  {
@@ -3982,6 +4214,29 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "pl",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "nos llevamos",
+  "gloss_en": "we get along",
+  "gloss_note_en": null,
+  "id": "1d93f2a9-6640-54c6-9698-436ce7139932",
+  "lemma_id": "4688d424-4acd-50c5-91a4-698cd7d11c59",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "gender": "m",
    "number": "sg"
   },
@@ -4282,6 +4537,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "loca",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "2011010b-efdb-5b7c-84c0-6e0e3956bde2",
+  "lemma_id": "150bc0a8-ff93-5168-90b0-0a362a87a487",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "person": 2,
@@ -4504,6 +4779,29 @@
   "status": "published",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
   "updated_at": "2026-09-23 19:22:02.809359+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "se necesita",
+  "gloss_en": "wanted, is needed",
+  "gloss_note_en": null,
+  "id": "22206b4e-4f4b-5b01-a826-a55a96c07ae2",
+  "lemma_id": "15d6f01e-0710-548b-8eda-6568da700777",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
   "voice_id": null
  },
  {
@@ -4751,6 +5049,28 @@
   "status": "published",
   "unit_id": "b2e41f0e-04f0-5a3b-94eb-850cd2d57575",
   "updated_at": "2026-09-23 23:54:31.558276+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "aumenta",
+  "gloss_en": "goes up",
+  "gloss_note_en": null,
+  "id": "2446ee36-c2d3-503a-828f-0d31d53712a4",
+  "lemma_id": "0da5edb2-7605-5a84-a806-c23682f22fdd",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
   "voice_id": null
  },
  {
@@ -5163,6 +5483,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "cartel",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "266bac6a-0e41-562c-9563-73c46b8e0be2",
+  "lemma_id": "1bbb40a1-f37f-561c-99be-90dfa970014f",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "Mendoza",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -5487,6 +5824,29 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "me acostumbré",
+  "gloss_en": "I got used to",
+  "gloss_note_en": null,
+  "id": "2934aaf2-8a9e-562c-b7e7-7256db61d0ed",
+  "lemma_id": "c3986323-16ac-5662-b173-69a0a8c2eba9",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 17:34:46.097626+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "gender": "f",
    "number": "pl"
   },
@@ -5740,6 +6100,28 @@
   "status": "published",
   "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
   "updated_at": "2026-09-24 07:04:12.425811+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "vende",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "2bf2ccf5-45cc-5cc5-976a-7c4c2425f324",
+  "lemma_id": "19a19e43-0f3b-595d-8c03-e84ce0d49710",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
   "voice_id": null
  },
  {
@@ -6042,6 +6424,50 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "subj",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "acepte",
+  "gloss_en": "(that) accepts, (that) allows",
+  "gloss_note_en": null,
+  "id": "2e2fb152-60ff-505c-a3b1-0f8c2197bdd7",
+  "lemma_id": "e30b334c-37e0-5634-a591-07e18aa232ea",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "pl",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "suben",
+  "gloss_en": "go up",
+  "gloss_note_en": null,
+  "id": "2e604e30-ea20-5c9e-aefb-83dfec9035d0",
+  "lemma_id": "5f9f27e0-83cf-5d60-9531-c7222d5c21a6",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "verb_form": "ger"
   },
   "form": "tomando",
@@ -6071,6 +6497,29 @@
   "status": "published",
   "unit_id": "61a56ded-546a-5ad6-a8ac-310375bed4ac",
   "updated_at": "2026-09-23 19:54:45.405956+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "se vende",
+  "gloss_en": "for sale, is sold",
+  "gloss_note_en": null,
+  "id": "2f03fe34-532e-5e37-a25d-588ee2416662",
+  "lemma_id": "19a19e43-0f3b-595d-8c03-e84ce0d49710",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
   "voice_id": null
  },
  {
@@ -6201,6 +6650,28 @@
   "status": "published",
   "unit_id": "b2e41f0e-04f0-5a3b-94eb-850cd2d57575",
   "updated_at": "2026-09-23 23:54:31.558276+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "bajó",
+  "gloss_en": "went down",
+  "gloss_note_en": null,
+  "id": "305872d3-2a5a-5069-a9d9-e17194f77eaf",
+  "lemma_id": "8a7c9e70-09f7-51c8-8272-db503b9d1f6a",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
   "voice_id": null
  },
  {
@@ -7654,6 +8125,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "garantía",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "3d96b8a6-9f74-59f4-ae38-c17efe4e7e94",
+  "lemma_id": "558d23e7-e98d-50f5-be3f-720f09e7cf8f",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "mood": "ind",
    "number": "sg",
@@ -8868,6 +9356,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "tal cual",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "45a9a830-af06-5812-8757-524a4de74bfd",
+  "lemma_id": "74dd2e5a-d154-522b-b952-1252cb1ff1a9",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "cuatrocientos",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -9645,6 +10150,25 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "verb_form": "ger"
+  },
+  "form": "diciendo",
+  "gloss_en": "saying",
+  "gloss_note_en": null,
+  "id": "4c8557a0-2293-5b8f-9666-de06659540c6",
+  "lemma_id": "bbedb687-226b-51f0-82ab-0d245b73fe7c",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 17:34:46.097626+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "algún día",
   "gloss_en": null,
@@ -9695,6 +10219,28 @@
   "status": "published",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
   "updated_at": "2026-09-24 05:57:59.666661+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "prometió",
+  "gloss_en": "he promised, she promised",
+  "gloss_note_en": null,
+  "id": "4cf0e27e-aa4b-58eb-938f-b4269624e723",
+  "lemma_id": "9bf45722-0612-51ec-9248-bef6ce8d3956",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 17:22:44.013204+00",
   "voice_id": null
  },
  {
@@ -9806,6 +10352,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "mascota",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "4dba679f-4d7e-5b66-954a-424e4910ea88",
+  "lemma_id": "58e96757-a6a0-51a8-ab45-dd190aa01e8b",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "irregular": true,
    "mood": "ind",
    "number": "sg",
@@ -9828,6 +10394,46 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "de a poco",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "4e33450f-b1d3-5d66-84db-ead00b008c0f",
+  "lemma_id": "cfb94ba9-60ea-59ce-a9b4-8e54b4e7377a",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 17:34:46.097626+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "te cae",
+  "gloss_en": "(he) comes across to you",
+  "gloss_note_en": null,
+  "id": "4e80312a-33f7-5271-b453-8cc360aa1e0d",
+  "lemma_id": "c5288a4f-309b-5909-ab79-647c6546ed00",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "gender": "f",
    "number": "sg"
@@ -9842,6 +10448,25 @@
   "status": "published",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
   "updated_at": "2026-09-18 13:23:35.932625+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "ger"
+  },
+  "form": "entendiendo",
+  "gloss_en": "understanding",
+  "gloss_note_en": null,
+  "id": "4e93b206-ad2a-5f14-99dd-cb4545392fb0",
+  "lemma_id": "89e45286-d945-5f42-9a0b-beb8ead3fb9f",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 17:34:46.097626+00",
   "voice_id": null
  },
  {
@@ -9917,6 +10542,26 @@
   "status": "published",
   "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
   "updated_at": "2026-09-23 19:34:09.517589+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "prohibido",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "4fbf785b-f3ed-5964-a170-6d67ab7ad2e6",
+  "lemma_id": "fc4db05f-5f6e-5ef6-a0c8-dcad66f55231",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
   "voice_id": null
  },
  {
@@ -10299,6 +10944,28 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "pl",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "llevamos",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "53cf7c81-bee4-5d4b-9ab1-477e34fcc875",
+  "lemma_id": "4688d424-4acd-50c5-91a4-698cd7d11c59",
+  "position": 9,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": false,
   "features": {
    "mood": "ind",
@@ -10588,6 +11255,28 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "subió",
+  "gloss_en": "went up",
+  "gloss_note_en": null,
+  "id": "56ba0fc8-5c90-56e3-8b0b-844625815e94",
+  "lemma_id": "5f9f27e0-83cf-5d60-9531-c7222d5c21a6",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "clitic": true,
    "mood": "ind",
    "number": "sg",
@@ -10705,6 +11394,23 @@
   "status": "published",
   "unit_id": "a973933b-ccb4-5f7d-9210-9a063ab4ed00",
   "updated_at": "2026-09-24 06:05:11.086413+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "por si",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "57e7e70e-6b73-5bf1-a69c-773fcf70d69e",
+  "lemma_id": "828005e6-a0ff-5eac-8f9e-4234169840dd",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 17:21:40.841261+00",
   "voice_id": null
  },
  {
@@ -11039,6 +11745,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "bici",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "5b3dbdcd-3115-5f35-87ff-dc08706d9ff9",
+  "lemma_id": "3f8eedc5-caab-53cc-a366-195545bc1ce9",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "clitic": true,
    "mood": "ind",
    "number": "sg",
@@ -11277,6 +12003,23 @@
   "status": "published",
   "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
   "updated_at": "2026-09-23 23:51:21.981446+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "a menos que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "5cf55ca7-e75a-5d1f-a010-5342c962f282",
+  "lemma_id": "07e4e41a-5fe5-555d-95b1-6b34267834a6",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 17:21:40.841261+00",
   "voice_id": null
  },
  {
@@ -11753,6 +12496,25 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "verb_form": "inf"
+  },
+  "form": "cuidar",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "5fd1887a-4b81-5cad-96f1-542b536bab42",
+  "lemma_id": "04d31c90-31da-52fe-aa48-90ec792212ac",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 17:15:57.654257+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "imp",
    "number": "sg",
    "person": 2,
@@ -12002,6 +12764,26 @@
  },
  {
   "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "precio",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "61cfa49e-1e1f-5eab-8772-525df362884a",
+  "lemma_id": "78fa6f93-0c87-57c4-8573-b09a38721833",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
   "audio_path": "cards/61df6d82-e066-542f-b158-5524f130294e-tomas-1789722112979.mp3",
   "bound": false,
   "features": {
@@ -12076,6 +12858,23 @@
   "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
   "updated_at": "2026-09-18 09:12:20.630419+00",
   "voice_id": "malena"
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "siempre y cuando",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "627af654-35e8-5971-82d0-305c480c4898",
+  "lemma_id": "8ade1b99-f8e0-5719-a05c-9cd3d714cede",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 17:21:40.841261+00",
+  "voice_id": null
  },
  {
   "alt": [],
@@ -12278,6 +13077,27 @@
   "features": {
    "mood": "ind",
    "number": "sg",
+   "tense": "cond"
+  },
+  "form": "debería",
+  "gloss_en": "I should, he should, she should",
+  "gloss_note_en": null,
+  "id": "644bd87e-8646-5be6-b09e-157f27148e74",
+  "lemma_id": "02764cf9-5a9a-50d1-95f6-bbdc5e4e6015",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 17:15:57.654257+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
    "person": 1,
    "tense": "pres"
   },
@@ -12407,6 +13227,29 @@
   "status": "published",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
   "updated_at": "2026-09-23 23:26:55.917775+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pret",
+   "voseo": true
+  },
+  "form": "prometiste",
+  "gloss_en": "you promised",
+  "gloss_note_en": null,
+  "id": "660d2799-e6c2-5008-980a-34c4591331bf",
+  "lemma_id": "9bf45722-0612-51ec-9248-bef6ce8d3956",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 17:22:44.013204+00",
   "voice_id": null
  },
  {
@@ -12632,6 +13475,28 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "cae",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "6802cb4b-a998-56de-8b1d-24b93040add3",
+  "lemma_id": "c5288a4f-309b-5909-ab79-647c6546ed00",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": false,
   "features": {},
   "form": "cien",
@@ -12751,6 +13616,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "me da igual",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "699e31f8-dd04-57c8-b26c-d0337d372d14",
+  "lemma_id": "5f2345dc-918d-5305-8844-25cb09e5cee1",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 17:04:07.358313+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "ayer",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -12778,6 +13660,28 @@
   "status": "published",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
   "updated_at": "2026-09-23 19:29:03.477849+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "tense": "cond"
+  },
+  "form": "vendría",
+  "gloss_en": "I would come, he would come",
+  "gloss_note_en": null,
+  "id": "69ea83f3-1c8d-5c68-9eaf-b8160593c348",
+  "lemma_id": "5b62af3b-e8fc-5569-a120-eaefdc16eaef",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 17:22:44.013204+00",
   "voice_id": null
  },
  {
@@ -12937,6 +13841,23 @@
   "status": "published",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
   "updated_at": "2026-09-23 19:58:24.459018+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "promesa",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "6b7a200d-6a8c-5b10-bebe-de5e34e04c9a",
+  "lemma_id": "a34261ef-794b-5a9f-b089-efdc6194a1d6",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 17:22:44.013204+00",
   "voice_id": null
  },
  {
@@ -13350,6 +14271,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "inmobiliaria",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "6fbc9d89-4667-51c3-8779-2dceb244eff8",
+  "lemma_id": "a233be1b-2fab-5499-83dc-f7f4076e6029",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "mood": "ind",
    "number": "sg",
@@ -13577,6 +14515,49 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "subj",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "quede",
+  "gloss_en": "(that) it's located, (that) it's",
+  "gloss_note_en": null,
+  "id": "7148c6f1-5e56-5d92-b46a-7669b420822a",
+  "lemma_id": "530e7934-b54e-56b6-800d-101f92882e10",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "tense": "cond"
+  },
+  "form": "llamaría",
+  "gloss_en": "I would call, he would call",
+  "gloss_note_en": null,
+  "id": "714f735e-d6a5-5550-bb3d-580391f59f86",
+  "lemma_id": "e3139f5f-e574-5c58-a1da-4f7659096ba8",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 17:22:44.013204+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "clitic": true,
    "mood": "imp",
    "number": "sg",
@@ -13774,6 +14755,26 @@
   "status": "published",
   "unit_id": "13fec277-30b8-5bdb-9718-e682351abfd9",
   "updated_at": "2026-09-23 20:11:12.124649+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "suegra",
+  "gloss_en": "mother-in-law",
+  "gloss_note_en": null,
+  "id": "7307a5b7-d2b1-5781-90bc-1da0c4e8d623",
+  "lemma_id": "820c7176-9e35-5e32-ba85-fa2ffdd760cb",
+  "position": 11,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:45:02.432872+00",
   "voice_id": null
  },
  {
@@ -14433,6 +15434,26 @@
   "status": "published",
   "unit_id": "5df117af-d5e0-5b71-8caa-6806c47bdff1",
   "updated_at": "2026-09-23 20:28:08.267385+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "dueño",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "76dd1126-2e75-519b-903c-17e7a2fc4a5a",
+  "lemma_id": "103d96a0-0312-5907-8fb9-6a753f0cc2db",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
   "voice_id": null
  },
  {
@@ -15427,6 +16448,29 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "pl",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "me caen",
+  "gloss_en": "(they) come across to me",
+  "gloss_note_en": null,
+  "id": "7ecef39f-b0ef-5ee9-9b08-fd4096392a03",
+  "lemma_id": "c5288a4f-309b-5909-ab79-647c6546ed00",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "mamá",
   "gloss_en": null,
@@ -15540,6 +16584,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "vergüenza",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "7f99efe2-bc74-562a-89fa-42b98f437166",
+  "lemma_id": "5ab445eb-f3c5-5b2f-a1ae-fca6abad3e6b",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 17:04:07.358313+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "gender": "f",
    "number": "sg"
@@ -15561,6 +16622,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "cualquiera",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "800d6668-1194-568f-95ca-fdf3d1e514a3",
+  "lemma_id": "d1f9e339-0433-5fb3-ac0b-b426332c4bac",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "ni que",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -15571,6 +16649,26 @@
   "status": "published",
   "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
   "updated_at": "2026-09-24 16:02:50.969193+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "pl"
+  },
+  "form": "mascotas",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "806a7bc8-23ef-58ad-aeff-460417c9901d",
+  "lemma_id": "58e96757-a6a0-51a8-ab45-dd190aa01e8b",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
   "voice_id": null
  },
  {
@@ -15966,6 +17064,29 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "pl",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "se venden",
+  "gloss_en": "for sale (several), are sold",
+  "gloss_note_en": null,
+  "id": "84dceb00-b1f8-50ac-a129-830d65661ea4",
+  "lemma_id": "19a19e43-0f3b-595d-8c03-e84ce0d49710",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "gender": "m",
    "number": "sg"
   },
@@ -16184,6 +17305,23 @@
   "status": "published",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
   "updated_at": "2026-09-23 19:58:24.459018+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "bronca",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "866c0258-c5f9-5a62-b904-40afd23a0aab",
+  "lemma_id": "ff68ca09-4ba1-5a29-9cca-2c2691dadddd",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 17:04:07.358313+00",
   "voice_id": null
  },
  {
@@ -17230,6 +18368,30 @@
    "irregular": true,
    "mood": "ind",
    "number": "sg",
+   "person": 2,
+   "tense": "cond",
+   "voseo": true
+  },
+  "form": "vendrías",
+  "gloss_en": "you would come",
+  "gloss_note_en": null,
+  "id": "902ff394-3d8c-5d99-8d4c-44bea18ddfb7",
+  "lemma_id": "5b62af3b-e8fc-5569-a120-eaefdc16eaef",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 17:22:44.013204+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
    "person": 3,
    "tense": "fut"
   },
@@ -17344,6 +18506,28 @@
   "status": "published",
   "unit_id": "be613042-6935-5185-bf3a-fa4dc33eca15",
   "updated_at": "2026-09-23 19:53:48.73596+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "cuido",
+  "gloss_en": "I take care of",
+  "gloss_note_en": null,
+  "id": "90f22c3c-7d9a-5e74-8534-e58037dafdb0",
+  "lemma_id": "04d31c90-31da-52fe-aa48-90ec792212ac",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 17:15:57.654257+00",
   "voice_id": null
  },
  {
@@ -17706,6 +18890,27 @@
   "status": "published",
   "unit_id": "5ec6a727-4a91-5545-9e35-7f858d66ced1",
   "updated_at": "2026-09-24 00:37:54.683427+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "subj",
+   "number": "sg",
+   "tense": "pres"
+  },
+  "form": "conteste",
+  "gloss_en": "(that) he answers, (that) I answer",
+  "gloss_note_en": null,
+  "id": "94f68626-b728-5bc3-85cd-40516a126b1d",
+  "lemma_id": "815989b8-a780-50d2-8057-5f249921d329",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 17:04:07.358313+00",
   "voice_id": null
  },
  {
@@ -18589,6 +19794,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "aumento",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "9a73f7cb-7878-5045-ba10-0234205d0fc5",
+  "lemma_id": "a7876f58-d913-57a6-8a78-671f68045f4f",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "por las dudas",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -19141,6 +20363,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "consejo",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "9fc1ce22-d8d3-5a93-9a84-2b3f674d9cae",
+  "lemma_id": "6f90fedd-64de-57cb-9ec6-546b8fc269e4",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 17:15:57.654257+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "sol",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -19457,6 +20696,28 @@
   "status": "published",
   "unit_id": "c7cbf578-23ab-5875-9a1c-8104be80ad3e",
   "updated_at": "2026-09-23 19:51:18.52367+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "acepta",
+  "gloss_en": "accepts, allows",
+  "gloss_note_en": null,
+  "id": "a346a47f-bab0-5cee-95ee-aa81b2bee14e",
+  "lemma_id": "e30b334c-37e0-5634-a591-07e18aa232ea",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
   "voice_id": null
  },
  {
@@ -20107,6 +21368,28 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "pl",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "caen",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "a8322650-3f85-57ce-9901-52899cb2fc90",
+  "lemma_id": "c5288a4f-309b-5909-ab79-647c6546ed00",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": false,
   "features": {},
   "form": "llamada",
@@ -20555,6 +21838,29 @@
    "mood": "ind",
    "number": "sg",
    "person": 2,
+   "tense": "cond",
+   "voseo": true
+  },
+  "form": "deberías",
+  "gloss_en": "you should",
+  "gloss_note_en": null,
+  "id": "aa7d0178-b9eb-51ac-aef1-42854f77d2be",
+  "lemma_id": "02764cf9-5a9a-50d1-95f6-bbdc5e4e6015",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 17:15:57.654257+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
    "tense": "pres",
    "voseo": true
   },
@@ -20656,6 +21962,26 @@
   "status": "published",
   "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
   "updated_at": "2026-09-24 07:00:41.790001+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "pl"
+  },
+  "form": "precios",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "aba249a8-d12e-58e8-a51e-515f4825ec1e",
+  "lemma_id": "78fa6f93-0c87-57c4-8573-b09a38721833",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
   "voice_id": null
  },
  {
@@ -22113,6 +23439,29 @@
    "mood": "ind",
    "number": "sg",
    "person": 1,
+   "tense": "pres"
+  },
+  "form": "me llevo",
+  "gloss_en": "I get along",
+  "gloss_note_en": null,
+  "id": "b77952d8-4c13-53a6-809c-fb4093ce7031",
+  "lemma_id": "4688d424-4acd-50c5-91a4-698cd7d11c59",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
    "tense": "pret"
   },
   "form": "me olvidé",
@@ -22125,6 +23474,28 @@
   "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
   "updated_at": "2026-09-24 01:02:30.793022+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "prometo",
+  "gloss_en": "I promise",
+  "gloss_note_en": null,
+  "id": "b80cef19-8692-5307-9524-35cc750a14a8",
+  "lemma_id": "9bf45722-0612-51ec-9248-bef6ce8d3956",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 17:22:44.013204+00",
   "voice_id": null
  },
  {
@@ -22216,6 +23587,46 @@
   "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
   "updated_at": "2026-09-24 01:18:06.414424+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "luminoso",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "b88e4978-85b6-5016-a139-36b62fd18c7e",
+  "lemma_id": "74d29017-cdef-5e67-be6b-c4682ce162fa",
+  "position": 11,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "luminosa",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "b8b1206d-ab3a-53c2-b9ff-25bccb20efd0",
+  "lemma_id": "74d29017-cdef-5e67-be6b-c4682ce162fa",
+  "position": 12,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 17:07:24.942717+00",
   "voice_id": null
  },
  {
@@ -22484,6 +23895,29 @@
   "status": "published",
   "unit_id": "afdaff40-37c8-56af-ae39-78f1ed48e97e",
   "updated_at": "2026-09-24 00:03:41.02582+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pret",
+   "voseo": true
+  },
+  "form": "flasheaste",
+  "gloss_en": "you imagined it",
+  "gloss_note_en": null,
+  "id": "bb58b86e-443f-571a-9f61-bdbbd93a188b",
+  "lemma_id": "c68348a8-1768-53da-b846-d84c78d1b94d",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00",
   "voice_id": null
  },
  {
@@ -23114,6 +24548,23 @@
   "status": "published",
   "unit_id": "e7976a3a-80b3-505d-abc8-858bd6a92a90",
   "updated_at": "2026-09-24 00:07:20.443047+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "estaría bueno",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "c17a6d29-47cd-5bb4-ab86-323f6712fd64",
+  "lemma_id": "e354c10d-88d9-56eb-89e6-d42c6f22d4d3",
+  "position": 3,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 17:15:57.654257+00",
   "voice_id": null
  },
  {
@@ -23904,6 +25355,28 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "pl",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "venden",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "c839cee3-c10e-5d78-90c4-7d8176e591eb",
+  "lemma_id": "19a19e43-0f3b-595d-8c03-e84ce0d49710",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": false,
   "features": {
    "gender": "m",
@@ -24363,6 +25836,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "está por",
+  "gloss_en": "he's about to, it's about to",
+  "gloss_note_en": null,
+  "id": "cd9a9d8c-2200-53a9-be02-2a6efe63ca76",
+  "lemma_id": "3619cd41-9b72-511d-be67-381b1ff521c0",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 17:34:46.097626+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "algo",
   "gloss_en": null,
@@ -24513,6 +26008,28 @@
   "status": "published",
   "unit_id": "72e14160-96c0-535c-9819-8ab194bd82cc",
   "updated_at": "2026-09-24 06:06:34.296637+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "estoy por",
+  "gloss_en": "I'm about to",
+  "gloss_note_en": null,
+  "id": "cf91bdb1-5429-5f92-9458-d4c89729725a",
+  "lemma_id": "3619cd41-9b72-511d-be67-381b1ff521c0",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 17:34:46.097626+00",
   "voice_id": null
  },
  {
@@ -25212,6 +26729,28 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "ind",
+   "number": "pl",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "cobraron",
+  "gloss_en": "they charged",
+  "gloss_note_en": null,
+  "id": "d5c961c9-04c7-5bd4-a4cb-1ee28db0ffbb",
+  "lemma_id": "60ecefe8-f4d4-5a29-b2f8-18d8d8727a1f",
+  "position": 10,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "imp",
    "number": "sg",
    "person": 2,
@@ -25336,6 +26875,27 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "subj",
+   "number": "sg",
+   "tense": "pres"
+  },
+  "form": "pague",
+  "gloss_en": "(that) he pays, (that) I pay",
+  "gloss_note_en": null,
+  "id": "d7248f00-d3e5-5fb7-9723-b9591cf793eb",
+  "lemma_id": "1142f00c-d24d-59a2-926f-8f80c5a787b7",
+  "position": 5,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 17:21:40.841261+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "verb_form": "ger"
   },
   "form": "lloviendo",
@@ -25412,6 +26972,50 @@
   "status": "published",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
   "updated_at": "2026-09-24 15:45:45.960099+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "pl"
+  },
+  "form": "bicis",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "d856ae5d-3b61-50ec-ab97-824de3f650e0",
+  "lemma_id": "3f8eedc5-caab-53cc-a366-195545bc1ce9",
+  "position": 11,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "me cayó",
+  "gloss_en": "(he) came across to me",
+  "gloss_note_en": null,
+  "id": "d867ba3b-44de-5681-bc76-8556811b8719",
+  "lemma_id": "c5288a4f-309b-5909-ab79-647c6546ed00",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00",
   "voice_id": null
  },
  {
@@ -25559,6 +27163,28 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "acostumbré",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "d9053e3d-6535-50bf-b020-c7db462987c9",
+  "lemma_id": "c3986323-16ac-5662-b173-69a0a8c2eba9",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 17:34:46.097626+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": false,
   "features": {
    "gender": "m",
@@ -25687,6 +27313,29 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "pl",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "vean",
+  "gloss_en": "(that) they see",
+  "gloss_note_en": null,
+  "id": "d9534398-85f2-5b29-96f9-7169c2f8cd76",
+  "lemma_id": "a6a9f7ca-4b38-59ef-bb3a-6f5780e92de5",
+  "position": 7,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 17:04:07.358313+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "adónde",
   "gloss_en": null,
@@ -25737,6 +27386,29 @@
   "status": "published",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
   "updated_at": "2026-09-24 15:45:45.960099+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "se alquila",
+  "gloss_en": "for rent, is rented",
+  "gloss_note_en": null,
+  "id": "da57efca-dee4-59a5-af99-a9d988804f85",
+  "lemma_id": "af97cd44-e074-561e-a1f5-01d04d2fbb3a",
+  "position": 6,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 17:27:11.848914+00",
   "voice_id": null
  },
  {
@@ -25985,6 +27657,28 @@
   "status": "published",
   "unit_id": "7c33a900-8b22-5a9e-a34e-7c274e6a21b0",
   "updated_at": "2026-09-23 23:16:46.080289+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "aumentó",
+  "gloss_en": "went up",
+  "gloss_note_en": null,
+  "id": "dc4f3fd0-ba4c-52eb-9789-2749413db2a7",
+  "lemma_id": "0da5edb2-7605-5a84-a806-c23682f22fdd",
+  "position": 2,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
   "voice_id": null
  },
  {
@@ -27599,6 +29293,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "cobro",
+  "gloss_en": "I get paid, I charge",
+  "gloss_note_en": null,
+  "id": "e8fb84a9-9a85-5c8e-a09c-bc044d735a70",
+  "lemma_id": "60ecefe8-f4d4-5a29-b2f8-18d8d8727a1f",
+  "position": 11,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "partido",
   "gloss_en": null,
@@ -28657,6 +30373,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "cumplió",
+  "gloss_en": "he kept (his word)",
+  "gloss_note_en": null,
+  "id": "f05aae0e-1a56-5e92-94a1-4db41ee1230b",
+  "lemma_id": "41075352-5bb3-5675-abdc-88d8b4869204",
+  "position": 8,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 17:22:44.013204+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "antes",
   "gloss_en": null,
@@ -28859,6 +30597,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "ni ahí",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "f1c00b37-857d-515d-8520-20473e332482",
+  "lemma_id": "5144f75d-03fd-59d5-9cd0-5b62afbcd864",
+  "position": 1,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "mood": "ind",
    "number": "sg",
@@ -28954,6 +30709,23 @@
   "status": "published",
   "unit_id": "754cc69f-e7cf-5e64-ba22-2679bc1f609e",
   "updated_at": "2026-09-24 06:22:41.033889+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "inflación",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "f32b1e5e-211b-53cc-aada-0b783a32dd50",
+  "lemma_id": "9205c9fd-ad74-5970-9378-af4628a2707a",
+  "position": 4,
+  "source": "outline",
+  "status": "published",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00",
   "voice_id": null
  },
  {

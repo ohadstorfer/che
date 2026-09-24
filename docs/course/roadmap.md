@@ -78,6 +78,10 @@ The conditional for advice and hypotheticals (*yo que vos iría*, *si tuviera pl
 
 `section-10.yaml`. The past subjunctive stops being a fixed phrase and follows the sentence: *quería que vinieras* → *aunque llueva* → *llevo dos años viviendo acá* → practice → *pasen, siéntense* (ustedes commands, hosting) → *como si nada*, *se hace el vivo* → *el que quieras*, *donde* → practice → *si hubiera sabido, te hubiera avisado* (hubiera in both halves, the porteño way) → *por un lado… por otro lado*, *en cambio*, *de hecho* → the paperwork (*sacar turno*, *DNI*, *vencido*) → practice → the checkpoint, arguing it out (*¿y vos qué opinás?*, *me convenciste*, *¡ojo!*).
 
+## Section 11 · B2.2 · "Between the lines" · units 122–134
+
+`section-11.yaml`. Saying what you mean without saying it outright: *busco un depto que tenga balcón* (the subjunctive for what you haven't found) → *me da bronca que no avise* → *deberías, estaría bueno, habría que* → practice → *dijo que vendría* (a promise reported) → *a menos que, siempre y cuando, por si* → *se alquila, se vende, prohibido* → practice → prices in an inflationary city (*todo aumenta, ¿cuánto te cobraron?*) → *voy entendiendo, estoy por* → *me cae bien, nos llevamos bien* → practice → the checkpoint, porteño irony (*ni ahí, tal cual, es cualquiera, flasheaste*).
+
 ## Practice (2026-09-24)
 
 A review of the course found it thinning out as it got harder: by sections 7–9 a unit had 4 lessons and a word met 4 sentences in the whole course, and a tense taught in one section (the imperfect, the future, the conditional) all but disappeared in the next. Three changes, for sections 4–9:
@@ -110,3 +114,4 @@ A second review found three more gaps: the hardest grammar got the fewest lesson
 | 8 | ✓ | ✓ 20260924000005 | ✓ published, glossed (364) |
 | 9 | ✓ | ✓ 20260924000010 | ✓ published, glossed (384) |
 | 10 | ✓ | ✓ 20260924000025 | ✓ published, glossed (1,246) |
+| 11 | ✓ | ✓ 20260924000027 | ✓ published, glossed (1,003) |

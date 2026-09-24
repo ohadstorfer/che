@@ -87,7 +87,7 @@ on conflict (id) do nothing;` : ''}
 
 -- New lessons sit before each unit's check. Shifted out of the way first,
 -- because (unit_id, ordinal) is unique at every step.
-update public.lessons set ordinal = ordinal + 5000 where unit_id in (${unitIds});
+update public.lessons set ordinal = ordinal + 5000 where unit_id in (${unitIds}) and status <> 'retired';
 update public.lessons l set ordinal = v.ordinal from (values
 ${order.map((o) => `  (${q(o.id)}::uuid, ${o.ordinal})`).join(',\n')}
 ) as v(id, ordinal) where l.id = v.id;

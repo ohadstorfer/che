@@ -14,5 +14,6 @@ export const SECTION_CAN_DO: Record<string, string> = {
   'if-i-were-you': 'Puedo dar consejos, imaginar qué haría y moverme por Buenos Aires como si fuera de acá.',
   'stories-and-opinions': 'Puedo contar lo que me pasó, discutir sin pelearme y chusmear como corresponde.',
   'making-your-case': 'Puedo defender lo que pienso, recibir gente en casa y hacer un trámite sin perderme.',
+  'between-the-lines': 'Puedo buscar depto, dar consejos sin ofender y entender cuándo un porteño habla en serio.',
   'when-i-was-a-kid': 'Puedo contar cómo era mi vida de chico, pedir en un restaurante y armar planes.',
 };

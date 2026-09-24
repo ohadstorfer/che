@@ -107,3 +107,13 @@ test('a proposed sentence alternative must be buildable from its own tiles', () 
   assert.deepEqual(es_alt, ['¿Sos Lucía?', '¿Sos vos Lucía?', '¿Sos Lucía vos?']);
   assert.equal(problems.length, 2, 'a word the tiles lack, and a missing ¿');
 });
+
+test('a stored phrase for the meaning is right, and names the word being drilled', () => {
+  const porteña = { ...get('porteña'), accepts: [{ meaning: 'from Buenos Aires', answer: 'de Buenos Aires' }] };
+  const graded = gradeTyped('de buenos aires', porteña, deck, 'from Buenos Aires');
+  assert.equal(graded.correct, true);
+  assert.equal(graded.note, 'synonym');
+  assert.equal(graded.expected, 'porteña');
+  assert.equal(gradeTyped('de buenos aires', porteña, deck, 'a porteño').correct, false, 'only for that meaning');
+  assert.equal(gradeTyped('porteña', porteña, deck, 'from Buenos Aires').note, undefined, 'the word itself needs no note');
+});

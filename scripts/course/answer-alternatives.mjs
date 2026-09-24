@@ -6,7 +6,7 @@
 // with a meaning not asked about before and sentences whose text changed.
 //
 // With Claude Code agents, like course:agent:
-//   npm run course:answers -- prompts [--all]
+//   npm run course:answers -- prompts [--all | --phrases]
 //       writes .course-work/answers/{words,sentences}-N.prompt.md and prints the agent task
 //   (an agent per prompt → the same name with .json)
 //   npm run course:answers -- apply [--dry-run]
@@ -39,7 +39,7 @@ if (!['prompts', 'apply', 'api'].includes(stage)) {
   process.exit(1);
 }
 
-const dir = new URL('../../.course-work/answers/', import.meta.url).pathname;
+const dir = process.env.ANSWERS_DIR ? process.env.ANSWERS_DIR.replace(/\/?$/, '/') : new URL('../../.course-work/answers/', import.meta.url).pathname;
 const file = (name) => dir + name;
 const MODEL = stage === 'api' ? 'api' : 'claude-code-agent';
 
@@ -77,17 +77,29 @@ function pending({ forms, sentences, lastAsked }) {
   const words = forms
     .map((f) => ({ ...f, meanings: candidateMeanings(f, sentences) }))
     .filter((f) => {
+      if (flags.has('--phrases')) return !f.form.includes(' ') && f.meanings.some(needsPhrase);
       if (all) return true;
       const before = new Set((lastAsked.get(f.id)?.meanings ?? []).map(senseKey));
       return f.meanings.some((m) => !before.has(senseKey(m)));
     });
   const lines = sentences.filter((s) => {
+    if (flags.has('--phrases')) return false;
     if (all) return true;
     const before = lastAsked.get(s.id);
     return !before || before.es !== s.es || before.en !== s.en;
   });
   return { words, lines };
 }
+
+// A meaning the word alone cannot carry: "from Buenos Aires", "in a hurry" — a
+// preposition or two content words. "I am" and "the croissant" are already
+// covered by the pronoun and article rules.
+const GRAMMAR = new Set('i you he she it we they am are is a an the to me my your his her our their us them him'.split(' '));
+const needsPhrase = (m) => {
+  const words = m.toLowerCase().replace(/[^a-z' ]/g, ' ').split(/\s+/).filter(Boolean);
+  return words.some((w) => 'from in on at of for with by about into out up off over under'.split(' ').includes(w)) ||
+    words.filter((w) => !GRAMMAR.has(w)).length > 1;
+};
 
 const chunks = (list, size) => {
   const out = [];

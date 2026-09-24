@@ -698,3 +698,90 @@ units:
         | vos | **hubieras** | llamado, avisado, pensado |
 
         For what didn't happen, both halves: **Si hubiera sabido, te hubiera avisado.** *If I'd known, I'd have told you.* Compare *si supiera* — if I knew (now).
+
+  # ── Section 11 ──────────────────────────────────────────────────────────
+  - unit: un-depto-que-tenga
+    lessons: 2
+    focus: [{ tense: pres, mood: subj }]
+    tip:
+      title: "Que tenga, or que tiene"
+      body: |
+        | not found yet — subjunctive | already found — normal verb |
+        | Busco un depto que **tenga** balcón. | Encontré un depto que **tiene** balcón. |
+        | Busco algo que **quede** cerca. | Vivo en un depto que **queda** cerca. |
+        | ¿Hay un dueño que **acepte** mascotas? | Mi dueño **acepta** mascotas. |
+
+        If it might not even exist, the verb after **que** goes into the subjunctive.
+
+  - unit: me-da-bronca
+    lessons: 1
+    tip:
+      title: "Me da + a feeling"
+      body: |
+        | Me da **bronca**. | It makes me mad. |
+        | Me da **vergüenza**. | I'm embarrassed. |
+        | Me da **lástima**. | I feel sorry (for him). |
+        | Me da **igual**. | I don't care. |
+
+        The cause follows **que** in the subjunctive: **me da bronca que no avise**. In the past, **me dio**: *me dio vergüenza*.
+
+  - unit: deberias
+    lessons: 1
+    tip:
+      title: "Soft advice"
+      body: |
+        | **Deberías** descansar. | You should rest. |
+        | **Debería** llamarla. | I should call her. |
+        | **Estaría bueno** juntarnos. | It'd be nice to get together. |
+        | **Habría que** avisarle. | We ought to let him know. |
+
+        All four take an infinitive. *Tenés que* is an order; *deberías* is advice.
+
+  - unit: dijo-que-vendria
+    lessons: 2
+    focus: [{ tense: cond }]
+    tip:
+      title: "What he said he'd do"
+      body: |
+        | what he said | what you tell |
+        | «Voy.» | Dijo que **iría**. |
+        | «Vengo mañana.» | Dijo que **vendría** mañana. |
+        | «Te llamo.» | Dijo que me **llamaría**. |
+
+        A promise told later goes into *would*. Just as porteño: **dijo que iba a venir**.
+
+  - unit: a-menos-que
+    lessons: 1
+    tip:
+      title: "Conditions"
+      body: |
+        | Voy, **a menos que llueva**. | unless |
+        | Voy, **siempre y cuando vengas**. | as long as |
+        | Llamame **en caso de que haya** un problema. | in case |
+        | Llevá paraguas **por si llueve**. | just in case |
+
+        The first three take the subjunctive. **Por si** is the exception: normal verb.
+
+  - unit: se-alquila
+    lessons: 1
+    tip:
+      title: "Se + verb on a sign"
+      body: |
+        | one thing | more than one |
+        | **Se vende** auto. | **Se venden** bicis. |
+        | **Se alquila** depto. | |
+        | **Se necesita** mozo. | |
+
+        **Se** + the *él* form, or the *ellos* form for plurals. Nobody is named: it's what's being sold, rented, needed.
+
+  - unit: voy-entendiendo
+    lessons: 1
+    tip:
+      title: "Ir + -ando, estar por"
+      body: |
+        | **Voy entendiendo.** | I'm starting to get it. |
+        | **Vas aprendiendo** de a poco. | You're learning bit by bit. |
+        | **Estoy por** salir. | I'm about to leave. |
+        | **Está por** llover. | It's about to rain. |
+
+        **Ir** + gerund is change in progress; **estar por** + infinitive is what's about to happen.

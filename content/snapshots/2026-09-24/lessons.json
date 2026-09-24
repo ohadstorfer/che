@@ -33,7 +33,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "00a99802-4694-5a31-8794-1f98b809f670",
@@ -42,7 +42,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "012c9fc3-3e7f-5c46-a94d-0b8076ecf306",
@@ -60,7 +60,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "01c93554-f120-5230-b86b-2102ff21ece9",
@@ -69,7 +69,7 @@
   "status": "published",
   "title_en": "Lesson 8",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0200ec47-6244-54fe-b0c4-2027fbc3493a",
@@ -123,7 +123,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "03d69b2e-a7fc-5f30-aeb8-5caf785045cf",
@@ -150,7 +150,16 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "04aef80e-d753-5cec-891f-f7afab704bd6",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0535cddb-d1d6-5150-bf9d-9a2ebf58313d",
@@ -159,7 +168,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "058096a2-19c2-5547-a648-2528f1b311e2",
@@ -186,7 +195,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "069487a6-10df-54d1-9073-eeee981b1925",
@@ -231,7 +240,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "07a6682b-8d28-5b3e-a9aa-efde8f54afe2",
@@ -258,7 +267,16 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "07ef9ea9-974f-51eb-bfbe-2c3bac23e355",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Grammar practice",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "08242a43-2b4b-5767-8b4b-3aadea89992c",
@@ -294,7 +312,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "08cca4d6-6a44-5411-8598-d39d32a2670a",
@@ -303,7 +321,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "08d47074-98e8-5a44-9014-2f0aa36d6b18",
@@ -312,7 +330,16 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "08ea41c1-a45e-5d2c-a04d-616da91ba6d4",
+  "kind": "lesson",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Lesson 2",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
  },
  {
   "id": "0949244b-280f-5986-a4e6-d9cb4e487ac0",
@@ -321,7 +348,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "09ca2de0-f0ed-5c21-bcd1-1a831f92f027",
@@ -348,7 +375,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0a65fc18-4fbd-527f-96bd-7a87f473b0a0",
@@ -357,7 +384,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0ab87afa-2279-54bd-8d79-f659c4244766",
@@ -366,7 +393,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0adb9077-99ac-53f3-8a37-6bf401b2d315",
@@ -375,7 +402,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0b048bda-72e9-509b-b9e2-a1927725640a",
@@ -393,7 +420,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0b922fda-a1d3-5d94-bf9a-71a9d754ca6c",
@@ -402,7 +429,7 @@
   "status": "published",
   "title_en": "Lesson 7",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0b938e22-5cd1-5299-b800-e2f313793d9b",
@@ -411,7 +438,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0ba058c6-35c8-5f6e-a723-4e1371d865a6",
@@ -420,7 +447,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0bb58808-6701-5a0d-a899-a3a1599ecd32",
@@ -438,7 +465,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0c60b847-737e-5ece-bd4e-b5fed6a6b7da",
@@ -447,7 +474,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0c6dd222-34de-5161-b7bc-30e11d8c01b1",
@@ -456,7 +483,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0cff6a40-16b7-552c-a537-a10cf2532630",
@@ -474,7 +501,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0d5b78d8-6399-58f5-83a0-a29342b8660b",
@@ -483,7 +510,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0d8bcbd4-f1c9-5388-84d9-79addca43480",
@@ -492,7 +519,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0df9c888-3623-5ae9-a3c5-77f678cc0b9e",
@@ -501,7 +528,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0e5610ff-7c6d-50f0-b571-eb9affc20ce8",
@@ -528,7 +555,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0ef60964-bb17-510a-b311-2278794ffe9f",
@@ -537,7 +564,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "70dda450-3825-5ea7-88fd-296775bc426c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0f1a69a8-6fd6-50a2-a1e9-36db37df84b7",
@@ -546,7 +573,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0f1f5685-4f2e-5aae-b047-704582d7e1c8",
@@ -555,7 +582,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0f852559-0e7f-534a-956f-1b78340a152c",
@@ -564,7 +591,7 @@
   "status": "published",
   "title_en": "Lesson 7",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "0f93716f-a037-5e62-819e-5faef61ecf7e",
@@ -582,7 +609,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "108f0098-3e6a-5048-8be8-412803cf59da",
@@ -591,7 +618,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "110c1722-6b86-508c-a418-459360bf2faa",
@@ -609,7 +636,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "11aecfc9-92cb-5a83-a80d-298b4b475009",
@@ -618,7 +645,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "11ccc516-966c-51cb-b3c5-b5eb9d990276",
@@ -627,7 +654,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1204dedc-18bc-5c35-aa5f-9343adb9f936",
@@ -648,13 +675,22 @@
   "updated_at": "2026-09-24 10:25:30.075133+00"
  },
  {
+  "id": "130e52bc-1c1f-5224-b3fa-8d4059757d7a",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "1318d247-acc0-5bc6-b8f4-e78739c62c72",
   "kind": "practice",
   "ordinal": 5,
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1321b69a-04b2-5385-a1d5-aa84757de55a",
@@ -663,7 +699,16 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "133ea7ab-15e6-585c-8c06-23d7651eec75",
+  "kind": "checkpoint",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Checkpoint 1",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
  },
  {
   "id": "13dc071a-ee8b-575d-b7a7-dd5f44952796",
@@ -672,7 +717,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "13e9caed-5185-59cd-a164-cd1d1836c222",
@@ -699,7 +744,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "140c933c-abd7-5011-a414-4dacd93dfefc",
@@ -708,7 +753,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "14352238-9614-597a-8048-b85ed65f4ecb",
@@ -717,7 +762,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "144d9428-4029-5ebf-95af-47eb8ddc298d",
@@ -726,7 +771,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "146d3237-1c35-53ca-8c52-447b43559a6e",
@@ -744,7 +789,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "14d2bdc2-6bae-5b47-91eb-f3cbdb1856ec",
@@ -762,7 +807,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "15a492e2-78a5-59b2-9747-5781fe481a9c",
@@ -780,7 +825,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "15f0f59e-6eb7-5c45-a488-e1f262ed6ed2",
@@ -789,7 +834,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "70dda450-3825-5ea7-88fd-296775bc426c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1608fb17-713c-566b-85b0-ae133fcdfaa2",
@@ -798,7 +843,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "16414180-7b4a-5229-a122-be4d126fa49d",
@@ -816,7 +861,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "16bf356d-25e1-5f96-b0e2-476650504164",
@@ -825,7 +870,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "170cafce-4d44-5436-9f82-a7cdd1fcad8c",
@@ -834,7 +879,7 @@
   "status": "published",
   "title_en": "Lesson 8",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "174bab95-7047-5dba-953d-c19076dfd8a7",
@@ -852,7 +897,7 @@
   "status": "published",
   "title_en": "Lesson 9",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "178e889c-a294-5d7c-9502-71fe3adeb980",
@@ -879,7 +924,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "481ae401-6c6e-53d7-9683-853d0cbed672",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "18953cf0-33f1-52dc-ba99-4715dbd8cb27",
@@ -888,7 +933,16 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "18d1705b-df54-58a9-83ef-689ccc0194aa",
+  "kind": "lesson",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Lesson 1",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "18e8780a-e31b-5ffe-b453-f59f84492a0c",
@@ -906,7 +960,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "18fa4804-c923-5ae9-bd4e-b9e66060e0d1",
@@ -915,7 +969,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "190e8627-9dbb-59cb-a37a-ac2b67e3319d",
@@ -924,7 +978,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "19209716-36b8-5386-8613-1cced3848b29",
@@ -942,7 +996,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "481ae401-6c6e-53d7-9683-853d0cbed672",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "19497f46-7896-5867-b245-c9395f170e3d",
@@ -960,7 +1014,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "195af764-f442-531d-8f02-0eaaeac8a7d0",
@@ -969,7 +1023,7 @@
   "status": "published",
   "title_en": "Lesson 11",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "197b62be-9bdf-5d92-9275-adbf9480b9b6",
@@ -978,7 +1032,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "198c7949-c22a-58b7-8fb2-f9f03941dc3a",
@@ -987,7 +1041,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1999c908-9f46-570b-a1dd-a140504b11e9",
@@ -996,7 +1050,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "3cc8b1a1-6314-5a4f-be82-b713ea584203",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "19cbbf1e-5415-5497-9713-9307e8a14485",
@@ -1014,7 +1068,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "19eaf85f-4f1a-546c-a7b1-5fa03b16c516",
@@ -1041,7 +1095,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1a769914-533a-5679-9f04-20e637fec25e",
@@ -1068,7 +1122,16 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "1b21001b-87b3-5395-87e5-7f72d1079e00",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "248f8041-e91e-501f-92e4-301a84aab1d9",
+  "updated_at": "2026-09-24 17:13:11.815745+00"
  },
  {
   "id": "1b84f981-0458-5d73-ad0d-2ef7afdfe71a",
@@ -1080,13 +1143,22 @@
   "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
+  "id": "1bf1c5f3-b902-53ee-8ed6-7e1d40ef9934",
+  "kind": "lesson",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Lesson 2",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "1bfbf035-784c-5cb4-8678-da394f1ff39f",
   "kind": "lesson",
   "ordinal": 3,
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1c91f7bf-2085-5a93-875f-d76c1dfe25ca",
@@ -1113,7 +1185,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1d33414c-e435-54f6-b7f0-cec4bfbeee23",
@@ -1131,7 +1203,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1d5c1191-7fc0-531f-9fbd-dfd9617750fb",
@@ -1140,7 +1212,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1d70fa53-ddbb-52bf-b289-7df56b14363a",
@@ -1149,7 +1221,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1e3e4052-f6d6-5404-8005-332598f963f5",
@@ -1158,7 +1230,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1e610c91-b5ca-57a1-b50c-f437b613a767",
@@ -1203,7 +1275,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1f648ccb-10bf-58bc-bdf1-bd2dc35bfe1e",
@@ -1212,7 +1284,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "1f909188-e61a-5bbf-a75b-d6b5f976c433",
@@ -1257,7 +1329,7 @@
   "status": "published",
   "title_en": "Lesson 9",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "21282ac3-bfee-5374-bd1e-4d07df9de675",
@@ -1266,7 +1338,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "21477296-3af9-559f-a4a3-f5b8290db9e8",
@@ -1284,7 +1356,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "218a2dd4-c33b-53d2-8b5c-746449105ad0",
@@ -1293,7 +1365,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "222b641d-77b1-518b-9a17-61b7c834886b",
@@ -1338,7 +1410,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "237ae368-1e24-581a-a879-b0740583ca83",
@@ -1383,7 +1455,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "249bfe30-8f4a-556c-96fd-86dac1f6547c",
@@ -1410,7 +1482,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "24f4103d-5fbd-5100-b9b6-bcfe0e26f2ed",
@@ -1419,7 +1491,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "25563716-524a-5e0a-ba60-c61eed19b8d7",
@@ -1446,7 +1518,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "71481540-7f7c-5939-9d96-ee76d80128b9",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "25e02ebb-6954-5d1c-828a-b905d76287bc",
@@ -1458,13 +1530,22 @@
   "updated_at": "2026-09-23 20:28:08.267385+00"
  },
  {
+  "id": "263f3e1f-b615-5d96-8dd6-e72c0c779f78",
+  "kind": "lesson",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Lesson 2",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "26407821-82d9-5b74-9404-2afb584d99da",
   "kind": "practice",
   "ordinal": 11,
   "status": "published",
   "title_en": "Practice",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "26b4816b-6bd7-580f-843f-45a0a608fada",
@@ -1500,7 +1581,16 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "27819219-2d1c-5c18-a72d-7bf9a452b0e1",
+  "kind": "lesson",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Lesson 1",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2803650f-973e-570a-a61b-c6fbc235dd78",
@@ -1518,7 +1608,16 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "2948f184-0bb3-553a-b904-c3c51372eb8e",
+  "kind": "lesson",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Lesson 4",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "295bdea9-19f9-5969-a94c-eb320ed40d5c",
@@ -1536,7 +1635,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "29f1f49d-f67a-52b4-9d3b-7fd2cff71772",
@@ -1575,13 +1674,31 @@
   "updated_at": "2026-09-24 15:56:03.58913+00"
  },
  {
+  "id": "2abadf64-1aca-5cdb-92e2-957c390ff8bf",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Grammar practice",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "2abcd7c2-03b3-53d8-ba5f-255cd020a7c9",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "248f8041-e91e-501f-92e4-301a84aab1d9",
+  "updated_at": "2026-09-24 17:13:11.815745+00"
+ },
+ {
   "id": "2abf4016-73bc-59c7-8c14-4463a07ce10d",
   "kind": "review",
   "ordinal": 7,
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2ac07cf7-4018-5fcb-b019-0c8ba9a0ed08",
@@ -1590,7 +1707,16 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "2ada457d-3a6f-58e0-a3b4-4da7b433dc1e",
+  "kind": "lesson",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Lesson 1",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
  },
  {
   "id": "2af58932-a549-5a38-be9c-06fe61f5f13c",
@@ -1599,7 +1725,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2b56346f-293a-592a-80fb-efe46b339b82",
@@ -1617,7 +1743,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2bd89498-1f6f-500d-adda-1cd484061200",
@@ -1635,7 +1761,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2ce7226e-f90e-545f-9b32-6dc9a73c7a9f",
@@ -1662,7 +1788,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2d6ed2d4-bf6f-5456-a44f-5ca290967253",
@@ -1689,7 +1815,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2e08911a-ad31-5802-a5a0-60ad8b1cea14",
@@ -1701,6 +1827,15 @@
   "updated_at": "2026-09-24 07:23:46.730111+00"
  },
  {
+  "id": "2e29e78e-c25e-5277-ba67-fdfdfa866908",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "2e5b595c-b6c2-57df-9211-e5e025933cb9",
   "kind": "practice",
   "ordinal": 5,
@@ -1710,13 +1845,22 @@
   "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
+  "id": "2e7e80fb-5e65-5ff6-8386-644879782b22",
+  "kind": "lesson",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Lesson 1",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00"
+ },
+ {
   "id": "2e884a37-127c-5b43-aeed-75c9d8139002",
   "kind": "lesson",
   "ordinal": 3,
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2f41d1fe-5c40-5eb1-ade3-eb7f23301263",
@@ -1725,7 +1869,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2fa7de20-c164-5331-a216-14594ed496c8",
@@ -1734,7 +1878,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2faa7665-073c-59ab-a61c-bf2b8f8c7c82",
@@ -1743,7 +1887,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "2fd3bcb2-1995-55fd-a895-60f994ba3872",
@@ -1797,7 +1941,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "317ce182-9eb1-5d07-b9b9-c16444755185",
@@ -1806,7 +1950,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "70dda450-3825-5ea7-88fd-296775bc426c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "327c0a8c-6853-5438-8e93-9c67b8138535",
@@ -1815,7 +1959,16 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "32d332e7-df81-5dac-8ead-f35a50f2c131",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Grammar practice",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "33712e06-c4b5-5f41-9667-55af0451d5fd",
@@ -1851,7 +2004,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "34d3c4f3-cd91-59ba-be2d-7b1e72b8a3c7",
@@ -1887,7 +2040,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3642fc2c-334d-5e5b-94cf-3e4568bd4c09",
@@ -1896,7 +2049,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "364a4ab1-6bfb-5366-9777-d829b9c8aca3",
@@ -1905,7 +2058,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3680dfaf-ec4d-569d-96f9-4a2ce2cc7d3c",
@@ -1923,7 +2076,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "36a285c4-082a-5a63-ae5e-86292b7c0e6f",
@@ -1932,7 +2085,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3733d49c-4293-5126-b091-4dc31ae934af",
@@ -1941,7 +2094,7 @@
   "status": "published",
   "title_en": "Lesson 7",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "37348bf6-8fb8-5c5e-8c26-7cb971bc8f1d",
@@ -1950,7 +2103,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "37e029f2-e927-5d84-a520-7d82b0fcfd6c",
@@ -1971,6 +2124,15 @@
   "updated_at": "2026-09-24 00:00:40.250698+00"
  },
  {
+  "id": "38073cd2-af80-5e94-ac90-e313cbfa05d6",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "384e826b-b298-5a5a-b2c2-a334fc26a1b4",
   "kind": "practice",
   "ordinal": 6,
@@ -1986,7 +2148,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "39075fbb-4402-516d-a3b6-f1e622995b15",
@@ -1995,7 +2157,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "39906684-1b5e-5302-8c5f-36de12c6ddc3",
@@ -2004,7 +2166,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "399a3390-6337-5b82-9aff-ee9f13fbdfdc",
@@ -2013,7 +2175,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "39fa6adc-8a25-5483-ad63-961d2f5bd581",
@@ -2058,7 +2220,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3b26196b-2fc1-5e31-8286-4f05d1fe4a47",
@@ -2067,7 +2229,7 @@
   "status": "published",
   "title_en": "Lesson 8",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3b2ebc7d-9a67-5b6b-80b4-5bcc19772bd2",
@@ -2076,7 +2238,16 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "3b7005ab-6a88-5ab5-9715-7bc3a6e5c885",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
  },
  {
   "id": "3b926d44-28a6-5ef9-b1e0-bccb0d0a9a4c",
@@ -2085,7 +2256,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3b9bf5a6-a38b-55c6-bec3-5310138008db",
@@ -2121,7 +2292,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3ce077a8-dd41-5420-aaac-150d13298a22",
@@ -2139,7 +2310,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3d1d27cc-a648-574f-b1cf-e57094bfcc44",
@@ -2148,7 +2319,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3db0e643-1b26-56ce-ab35-8a49c617ea48",
@@ -2166,7 +2337,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3e17a53c-a60a-5283-aaff-978ce888e80d",
@@ -2184,7 +2355,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3e6ec723-4d55-5f23-844e-35c879580dfe",
@@ -2229,7 +2400,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3f643ec6-46d6-58af-b6f5-2b86dc7a59a4",
@@ -2238,7 +2409,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3f7a0545-14ef-5bfc-b19d-ad063672686a",
@@ -2256,7 +2427,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3fc85fdd-61d2-55ac-8314-612481885711",
@@ -2274,7 +2445,16 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "3fcd14c0-7485-5134-ac14-fe902c89b468",
+  "kind": "lesson",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Lesson 1",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3fdf35ed-3419-5cdc-b116-9dbce907afea",
@@ -2283,7 +2463,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "3ff3d2a7-9314-5eec-a95d-4f57b4cc3d45",
@@ -2295,13 +2475,22 @@
   "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
+  "id": "40120699-a56b-5e28-91fb-fabe075897fb",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "404d2b42-41dd-53d0-a175-3830ef4e7e26",
   "kind": "lesson",
   "ordinal": 7,
   "status": "published",
   "title_en": "Lesson 7",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "408253cb-10ca-505c-83a6-494914e24b27",
@@ -2319,7 +2508,16 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "40c2d7c1-0436-54e6-b9f8-4be319dfd8ea",
+  "kind": "lesson",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Lesson 2",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "40fd11c5-3212-5b8a-8a12-8ce865d40a34",
@@ -2328,7 +2526,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4101cbb6-d7f5-5f41-baf1-77a65f90e8db",
@@ -2337,7 +2535,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4121cb79-54a2-5b79-949a-b307bcd5a17c",
@@ -2364,7 +2562,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "41f0ce6d-4193-5265-95cd-8c5d3617a76f",
@@ -2391,7 +2589,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4246665d-44a9-52c1-ae38-045a429c97c8",
@@ -2400,7 +2598,7 @@
   "status": "published",
   "title_en": "Lesson 12",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "42f96089-1bdd-550b-aa94-bfed8ab5648e",
@@ -2409,7 +2607,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4374935e-293e-5a87-8148-999e5a0ebfda",
@@ -2436,7 +2634,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "44832339-25d8-5790-949b-4f8da07475d1",
@@ -2445,7 +2643,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "44b12c94-4eda-5701-994c-c18035394d9c",
@@ -2454,7 +2652,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "44e23759-1497-58a4-8da4-8a167e0aa769",
@@ -2466,13 +2664,22 @@
   "updated_at": "2026-09-24 14:14:32.438614+00"
  },
  {
+  "id": "450bffa3-1b32-550d-8a96-2a97f48929e7",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "450c9d7b-4964-5b61-8c5f-d4257b62957a",
   "kind": "practice",
   "ordinal": 6,
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "459f20b9-064c-54c3-bfc7-f02822dffe82",
@@ -2493,13 +2700,22 @@
   "updated_at": "2026-09-23 23:16:46.080289+00"
  },
  {
+  "id": "45e26c7d-af8d-5b98-8035-b234f6a5a85d",
+  "kind": "lesson",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Lesson 2",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00"
+ },
+ {
   "id": "460e7686-cd6f-5f6b-955d-ff809f97d8da",
   "kind": "review",
   "ordinal": 9,
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "46188000-eec7-51b4-afdf-f962565520b1",
@@ -2535,7 +2751,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "46df3045-ad64-52a6-997a-2689ce0eca02",
@@ -2580,7 +2796,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "481655df-7924-53b7-8f03-74527ab376ab",
@@ -2590,6 +2806,15 @@
   "title_en": "Lesson 3",
   "unit_id": "770b6d5f-bd8c-5c17-a05f-4721faaa1706",
   "updated_at": "2026-09-24 00:23:43.658623+00"
+ },
+ {
+  "id": "487c76b1-d1e0-5047-884c-3ef452582a7b",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4920036d-606c-5b39-9817-1aa44ffd7d5d",
@@ -2625,7 +2850,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4a6ed9e3-90a1-559b-b6dd-c53fde3d3fdc",
@@ -2643,7 +2868,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "d35a777a-0a33-5ede-8fb9-39d0107d41f6",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4ae51956-00c8-5757-ac80-5650f19501cd",
@@ -2652,7 +2877,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "d35a777a-0a33-5ede-8fb9-39d0107d41f6",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4afefc2f-edbb-5dc2-9130-b9844222937b",
@@ -2661,7 +2886,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4b005b92-64ea-5aa3-93a2-c47648337b74",
@@ -2671,6 +2896,15 @@
   "title_en": "Unit check",
   "unit_id": "41b8c894-067c-540c-88b8-1a334f63f9e2",
   "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "4b14047a-ac1e-5f8f-9433-e42b998b81da",
+  "kind": "lesson",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Lesson 2",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4b3401c3-5714-52bd-9833-84ea08847b23",
@@ -2688,7 +2922,7 @@
   "status": "published",
   "title_en": "Lesson 7",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4bab1c10-1c5f-5905-af63-b977008635e2",
@@ -2706,7 +2940,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4be3cbec-dc93-5270-ac38-9a94e20a3676",
@@ -2715,7 +2949,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4c1cadd2-aec5-5b41-8810-90d04d4bdc87",
@@ -2725,6 +2959,15 @@
   "title_en": "Practice",
   "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
   "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "4c1d1d03-ed71-51c0-9727-251d849b1eda",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "caff1c3a-1951-5288-a7b5-c4e6b51a503a",
+  "updated_at": "2026-09-24 17:35:43.978113+00"
  },
  {
   "id": "4c25daec-9a9b-5cb2-a2e3-1c264aa333ad",
@@ -2745,13 +2988,22 @@
   "updated_at": "2026-09-24 16:23:05.089081+00"
  },
  {
+  "id": "4cbe2121-63ad-51ef-b22f-2710f7017768",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Grammar practice",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "4d0e1fa9-c33b-5957-b46e-26c2b02277b0",
   "kind": "practice",
   "ordinal": 4,
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4d28ea91-b30b-570c-8500-5b9b986d273c",
@@ -2769,7 +3021,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4d649300-f886-55d7-9251-a6942fcc012d",
@@ -2796,7 +3048,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4db65264-f02b-5294-8ab4-f207caa2a032",
@@ -2805,7 +3057,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4dd63858-d357-5ee6-8cf6-13b947c2849e",
@@ -2814,7 +3066,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4e3d521a-b085-5d07-a17f-5538fa1c0ce9",
@@ -2823,7 +3075,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4e50cc28-d73d-504e-93ef-8433e1ddd1ac",
@@ -2850,7 +3102,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4f978d03-cffe-5c39-80a7-d9ff92a46299",
@@ -2868,7 +3120,7 @@
   "status": "published",
   "title_en": "Lesson 8",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "4fe48ced-2d81-5ae9-a067-85f96bc6ea51",
@@ -2877,7 +3129,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5057564e-d895-55f1-830b-d80bee63259f",
@@ -2886,7 +3138,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "506c97d4-4f44-5fc2-be26-c8ac7b658236",
@@ -2895,7 +3147,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "50db6e14-093a-589a-b157-7c3567ae160c",
@@ -2922,7 +3174,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "516e40cf-4ed3-5c66-8200-dfeef930beb4",
@@ -2931,7 +3183,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "51fc8bd6-137f-5bd0-962a-c991c14b7ff8",
@@ -2940,7 +3192,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "52125c57-d497-566f-a5e1-b8b95baf830c",
@@ -2949,7 +3201,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "52369e6b-5204-5268-bf18-364f8012bc5d",
@@ -2958,7 +3210,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "52a265e2-2c4f-52bf-b612-98b621f99f73",
@@ -2988,13 +3240,22 @@
   "updated_at": "2026-09-24 14:14:32.438614+00"
  },
  {
+  "id": "52ea56c9-5c17-518e-adeb-950fa5343b64",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
+ },
+ {
   "id": "52f07d2b-4127-5717-9b7b-a8cfcd224248",
   "kind": "lesson",
   "ordinal": 2,
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5378a76e-3fcc-5635-a605-3a837d8e873f",
@@ -3003,7 +3264,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "53793208-103d-5ff9-bfbd-ff5d7925280c",
@@ -3012,7 +3273,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "53a43f66-5270-5aa8-83b0-47f0a334c486",
@@ -3021,7 +3282,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "53ae1935-feda-52e4-b971-594b1204c892",
@@ -3030,7 +3291,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "54c1770f-897e-5f93-a85c-ac520ff9eae9",
@@ -3039,7 +3300,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "54c1bcb4-91a0-5a4c-9fdd-bfd8aff93382",
@@ -3066,7 +3327,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5575c5c6-b740-5eb9-aa3b-b9d3af3435a3",
@@ -3084,7 +3345,7 @@
   "status": "published",
   "title_en": "Lesson 8",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "55dc5387-e56b-52b3-afda-86a09741bb8f",
@@ -3120,7 +3381,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "565b439d-3dca-53bc-a70d-0e89752a0f46",
@@ -3138,7 +3399,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "56c03c6d-a47f-5301-b6c3-8910288838d7",
@@ -3156,7 +3417,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "3cc8b1a1-6314-5a4f-be82-b713ea584203",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "56cd38e1-5e58-5aeb-b874-7850ab07141d",
@@ -3165,7 +3426,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "56dcc87a-c510-5624-9824-fa0306add442",
@@ -3174,7 +3435,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "57498b2c-bf47-5d44-b36d-2063badebcce",
@@ -3183,7 +3444,16 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "57697b20-bd47-5de9-9ab1-bab9255d0039",
+  "kind": "lesson",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Lesson 3",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "576b27c6-b35d-541e-a4a1-1936715f1319",
@@ -3201,7 +3471,16 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "57ec31cb-7276-55fe-b2ed-f31a5c83935d",
+  "kind": "lesson",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Lesson 3",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5887c923-0151-5f00-8c01-2c87b74d8257",
@@ -3210,7 +3489,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "58b6d97f-d8a0-5de2-b60d-9e28a46a35c5",
@@ -3228,7 +3507,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5937daf3-79d9-56e2-be7d-04c4039df7bc",
@@ -3246,7 +3525,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "597bfb3a-ade8-5af8-b9ba-22c3f7d14b13",
@@ -3264,7 +3543,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "59ed1783-ef9c-5c50-8cdb-114faebce45d",
@@ -3273,7 +3552,16 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "5a4d1f4c-bb6b-5ac9-b46f-97416c7d2c15",
+  "kind": "checkpoint",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Checkpoint 3",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
  },
  {
   "id": "5a74d77d-87b8-5c57-8986-9b8ffe2e1e91",
@@ -3282,7 +3570,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5aa2db0c-0bdd-5cb6-be65-ed79e564a6cf",
@@ -3300,7 +3588,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5be89d21-e042-5abe-9f7a-d3c8ed1de908",
@@ -3309,7 +3597,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5c235177-2a73-522d-a49a-4156837eaaeb",
@@ -3327,7 +3615,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5cdeecfe-680a-515a-af75-30fab1229a10",
@@ -3336,7 +3624,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5cf948c8-9639-5818-9e51-831716da17bf",
@@ -3345,7 +3633,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5d1291dd-19cc-50e3-818e-8ce39706c970",
@@ -3363,7 +3651,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5e0c156f-b89a-5609-b0aa-a4745422a330",
@@ -3399,7 +3687,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "5f91914b-c287-52b0-ae7a-53381d5eb476",
@@ -3420,13 +3708,22 @@
   "updated_at": "2026-09-24 10:25:30.075133+00"
  },
  {
+  "id": "600717bf-f914-5de3-967d-3bb78d969a1a",
+  "kind": "lesson",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Lesson 3",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00"
+ },
+ {
   "id": "601b72e5-8fe7-5945-8eb5-0b7e1bb6518e",
   "kind": "practice",
   "ordinal": 4,
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "6028c04e-3389-5d91-a1f2-1c3741bbe469",
@@ -3435,7 +3732,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "481ae401-6c6e-53d7-9683-853d0cbed672",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "60481c8a-d759-5082-847a-828eb761473a",
@@ -3444,7 +3741,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "609b1123-9021-5d21-a072-9be74bf1360b",
@@ -3453,7 +3750,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "60b273b4-7d81-5111-806e-7e2377e9faff",
@@ -3471,7 +3768,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "70dda450-3825-5ea7-88fd-296775bc426c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "611caf17-1b9b-57bb-97ce-efd8db07cfe5",
@@ -3480,7 +3777,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "615b244b-a9ff-58ff-9a0a-6faf10fcab49",
@@ -3492,13 +3789,22 @@
   "updated_at": "2026-09-24 10:34:16.026108+00"
  },
  {
+  "id": "623ef3b9-09e9-57c5-a5dd-e6b9791668df",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "626d6f1f-60b6-5702-938d-369c2f9521b8",
   "kind": "lesson",
   "ordinal": 5,
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "62bce7aa-a664-56b2-947f-05cc019a9e8e",
@@ -3516,7 +3822,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "63bf7c6a-6e08-5c01-9706-aaff269a7313",
@@ -3525,7 +3831,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "63f91821-006b-5598-ad4b-1308aa9eb3ed",
@@ -3552,7 +3858,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "64455074-bde2-5842-b9c3-965f89612dd2",
@@ -3561,7 +3867,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "64482722-4363-52f7-8f94-9eb85bf36a44",
@@ -3588,7 +3894,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "65b074a7-c467-5b69-a74f-ef678e6c9643",
@@ -3606,7 +3912,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "65c62b67-7171-5890-b0a2-46a527048b2f",
@@ -3633,7 +3939,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "66b56855-404c-53c8-bb72-99d5bde3b48d",
@@ -3660,7 +3966,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "67e45354-ea2f-5b11-a055-3f78da39bc14",
@@ -3687,7 +3993,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "68d2575d-3bf1-5034-950e-a501062b9663",
@@ -3714,7 +4020,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "69e99eca-f949-564c-8567-25311ba72f82",
@@ -3732,7 +4038,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "6ab6a7db-b40c-5664-b649-eefee5b235dd",
@@ -3759,7 +4065,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "6b4adc3e-d9c5-537d-b55b-1c5e1522a8d7",
@@ -3768,7 +4074,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "6b6aa46e-4a47-55f2-a6f0-dab524763297",
@@ -3786,7 +4092,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "6bcdeba9-ee97-5f73-a497-f6037eac8e6a",
@@ -3795,7 +4101,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "6be83562-88c3-5921-9927-2b637bfc31fc",
@@ -3804,7 +4110,25 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "6c5714e2-6006-514b-b392-d4953c7d0f7c",
+  "kind": "lesson",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Lesson 3",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "6c734891-a41f-5212-a44c-a9b118787768",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "c934a093-7470-526c-b293-904cab8a522d",
+  "updated_at": "2026-09-24 17:48:01.092047+00"
  },
  {
   "id": "6c8130fd-e8fe-5ab8-ba2d-3ba00ca133c4",
@@ -3813,7 +4137,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "6c99cab7-737f-5d2d-801c-79b1753254ee",
@@ -3831,7 +4155,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "6d9c0132-0484-5fd0-9e35-cc855cafca24",
@@ -3849,7 +4173,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "6eccc1d5-25c0-5c5d-b2fe-bfa7916ef6f9",
@@ -3858,7 +4182,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "6fafcb95-8a6e-5d3b-8408-e504c32e08fc",
@@ -3867,7 +4191,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "701071c8-11a6-5c06-b701-a299b28ebf0e",
@@ -3876,7 +4200,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "70136c4a-65b3-5d52-86a8-5c2f29b6f289",
@@ -3885,7 +4209,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "707555fe-f9bf-5f4b-9e8c-5b6f98b1fe07",
@@ -3894,7 +4218,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "70bebaf4-b998-5a97-90ab-863b509b1c9c",
@@ -3903,7 +4227,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7102013d-d558-59c5-bc58-52fc1cf9ed9b",
@@ -3912,7 +4236,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "714ba255-908b-5cb0-ae7e-7b35672e0dfa",
@@ -3921,7 +4245,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7171de3b-bdb5-558a-8b2a-8b9e66292978",
@@ -3930,7 +4254,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7190c4f9-3889-582e-a4b2-360f68b3c925",
@@ -3939,7 +4263,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "71948571-23f6-5e0c-9958-958283692393",
@@ -3948,7 +4272,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "3cc8b1a1-6314-5a4f-be82-b713ea584203",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "71afbdf6-ad5d-58a3-ac4c-501c43f572d4",
@@ -3975,7 +4299,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7215a36b-68f8-57c0-a894-0c4e8195c3d1",
@@ -3984,7 +4308,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "72281efc-4125-5ac1-8a09-fc777e5da0cd",
@@ -3993,7 +4317,16 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "72b86dd8-590c-5ea4-b74f-6da273078004",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Grammar practice",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "72c08dce-fa77-5188-9092-535cde8ff99c",
@@ -4020,7 +4353,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "73d1cdc4-5cee-5c5b-a109-b7d9078525ed",
@@ -4030,6 +4363,15 @@
   "title_en": "Practice",
   "unit_id": "ce05c318-270e-5388-9073-3793ff249013",
   "updated_at": "2026-09-24 10:23:23.672527+00"
+ },
+ {
+  "id": "73d636b8-522a-5290-a3e6-5493dfec0781",
+  "kind": "lesson",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Lesson 1",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "73eabb24-8e37-5886-965e-7ee5144ed9dc",
@@ -4047,7 +4389,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "748cfb3b-a5f8-58d1-867f-054e72249da1",
@@ -4065,7 +4407,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "d35a777a-0a33-5ede-8fb9-39d0107d41f6",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "75048472-0e09-55b7-b0ed-ec68b7f87e81",
@@ -4074,7 +4416,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "751915c5-d97e-59b7-84b0-76ffd883339f",
@@ -4101,7 +4443,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "75be19b4-c058-53ca-acfc-88becca7faf8",
@@ -4137,7 +4479,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7643762b-358f-5709-a505-bb1cd33ade67",
@@ -4155,7 +4497,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "76b413d6-d912-5a9b-94d2-b495eabecb25",
@@ -4218,7 +4560,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7855bfaf-b221-5237-9a01-0c0c5f475c79",
@@ -4227,7 +4569,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "785e8979-ecb9-56c5-bacd-5d0614fbd3ee",
@@ -4236,7 +4578,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "789020d1-5992-5fba-a99a-7f05520fd0b4",
@@ -4254,7 +4596,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "793c073b-7b29-5e91-962c-455774ee76dc",
@@ -4281,7 +4623,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "79ff741a-bc70-512a-84af-598cf24f4b78",
@@ -4290,7 +4632,7 @@
   "status": "published",
   "title_en": "Lesson 8",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7a54d331-f013-5a16-9913-2b452ac72e36",
@@ -4299,7 +4641,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7a5bb576-200d-5af9-99bd-4280a59b7fb0",
@@ -4308,7 +4650,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7a649f35-ece5-568d-bf0b-724beab3f402",
@@ -4335,7 +4677,7 @@
   "status": "published",
   "title_en": "Lesson 13",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7b577543-1a67-54d6-a4d2-3fca62a8ef4f",
@@ -4344,7 +4686,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7b5ec747-827f-50ca-8862-caa71ddb7163",
@@ -4371,7 +4713,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7b7125ef-bb74-5e8b-94f2-8b4d26f9ac49",
@@ -4380,7 +4722,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7b73880e-4c90-5cb8-9cdb-a0532e4d6cf1",
@@ -4407,7 +4749,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7bfec9fa-9042-5ce1-8d0c-eb8724104750",
@@ -4416,7 +4758,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7c037b2f-6e88-54f3-bece-b6063f3e65a3",
@@ -4426,6 +4768,15 @@
   "title_en": "Unit check",
   "unit_id": "be613042-6935-5185-bf3a-fa4dc33eca15",
   "updated_at": "2026-09-24 14:14:32.438614+00"
+ },
+ {
+  "id": "7ccf546a-2e96-5fe5-a77f-49ee13b7d889",
+  "kind": "lesson",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Lesson 3",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
  },
  {
   "id": "7cf5f61c-8b51-599d-b6f6-02c15a54c356",
@@ -4461,7 +4812,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7eb7c404-7eee-58ad-a3c1-d90232ff3a0c",
@@ -4470,7 +4821,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7ecc25d5-d965-5dd0-b967-c3e69135eeb1",
@@ -4479,7 +4830,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7ee3b82c-e680-5914-8c22-7906bea358ca",
@@ -4488,7 +4839,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7f08f2ce-0e5e-50c1-949c-c28e8385754e",
@@ -4518,13 +4869,22 @@
   "updated_at": "2026-09-24 07:23:46.730111+00"
  },
  {
+  "id": "7f540ad4-6557-5311-86cb-cf0cd5ad3857",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "c934a093-7470-526c-b293-904cab8a522d",
+  "updated_at": "2026-09-24 17:48:01.092047+00"
+ },
+ {
   "id": "7f736c5b-ff82-53c9-947b-57f9a5a4e4c1",
   "kind": "lesson",
   "ordinal": 4,
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7f7e2976-0d39-5c4c-b3c8-0bb14cf5d9de",
@@ -4542,7 +4902,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7faaccf9-1823-5c8f-b486-cabf1766e1b9",
@@ -4551,7 +4911,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7fdb1f14-c8d2-5308-a6c0-0fe0d7ec3ae5",
@@ -4560,7 +4920,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "7ffee0ab-95d9-5aa4-83eb-2602f1e4bf47",
@@ -4578,7 +4938,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "803e624d-1d8a-55ed-91b9-d5d21d318b9f",
@@ -4587,7 +4947,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "d35a777a-0a33-5ede-8fb9-39d0107d41f6",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8064fd46-ab69-5168-a157-451bd6de1906",
@@ -4641,7 +5001,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "81e1b99f-8e56-5329-a824-8bd7ecb3f9d8",
@@ -4677,7 +5037,7 @@
   "status": "published",
   "title_en": "Lesson 7",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8321e109-52f9-5812-8d03-cd95ace38622",
@@ -4686,7 +5046,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "71481540-7f7c-5939-9d96-ee76d80128b9",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "835eb7cd-f182-51fd-8c32-25524c3c61b6",
@@ -4722,7 +5082,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "83b41269-4772-5121-8669-2f78418cd1c9",
@@ -4749,7 +5109,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "83cfff58-49e4-5b88-a7c7-874dd10a50e6",
@@ -4758,7 +5118,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "84890fa5-6ff3-540b-b023-ebea83d4e074",
@@ -4767,7 +5127,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "84be8855-c57a-5cf4-8c54-b904f122e8a9",
@@ -4785,7 +5145,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "85a2a8c5-0078-5b54-a7d4-6aa5653ab5a1",
@@ -4795,6 +5155,24 @@
   "title_en": "Practice",
   "unit_id": "8531d298-54ee-59f6-9973-5e4562177f2e",
   "updated_at": "2026-09-24 10:09:02.025603+00"
+ },
+ {
+  "id": "85b8013d-79de-50be-849e-f5254e9d8391",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "863f2ead-b7df-5088-958b-53c14ea39a60",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "86879de0-a3bd-5443-afbc-c325ccb7d124",
@@ -4821,7 +5199,7 @@
   "status": "published",
   "title_en": "Lesson 8",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "881eb603-b5ca-5fd4-80b1-4b18c2130cbc",
@@ -4839,7 +5217,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "886a522b-f601-5a2b-adfa-775f372f4259",
@@ -4848,7 +5226,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "887849c7-f071-564c-8e49-662fbc2b2574",
@@ -4875,7 +5253,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "89183255-31e9-5827-9f26-ff6ca6ac8339",
@@ -4893,7 +5271,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8961c6d5-171f-5559-b29a-781a26691fba",
@@ -4932,6 +5310,15 @@
   "updated_at": "2026-09-24 14:14:32.438614+00"
  },
  {
+  "id": "8a3a4422-11c0-502f-ac23-e822f0c0e914",
+  "kind": "lesson",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Lesson 4",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
+ },
+ {
   "id": "8ae2e09a-663d-5142-a0ed-70065bc2ba45",
   "kind": "review",
   "ordinal": 7,
@@ -4947,7 +5334,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8b2452e4-5e18-5645-889e-b302ae1f87e7",
@@ -4965,7 +5352,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8c018edf-4b99-55ba-b1c2-1dca3a8d28d1",
@@ -4974,7 +5361,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8c396473-eb4e-578a-b44c-b743e36e1283",
@@ -5001,7 +5388,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "70dda450-3825-5ea7-88fd-296775bc426c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8cb19fe4-c9b3-51a0-ab83-daa32f65578d",
@@ -5010,7 +5397,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8d2ae763-bf21-59dc-9ee9-fb570cda6794",
@@ -5037,7 +5424,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8dc543a6-aa1a-5c90-86b3-34a8b64d5e3f",
@@ -5046,7 +5433,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8e8901b9-73cc-585d-92fc-834fab717c76",
@@ -5073,7 +5460,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "8fc16b8d-79e1-5923-80cb-78f9601c9e47",
@@ -5109,7 +5496,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "9109e02a-d924-5fee-90ce-998b08bedc69",
@@ -5119,6 +5506,15 @@
   "title_en": "Unit check",
   "unit_id": "28d6c921-dae2-50d2-b6a0-a5e2423428a6",
   "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "9130aad9-600f-5747-99f1-c854245f3ca0",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Grammar practice",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "91c088df-90cb-5ce7-9316-fce2dbe34a5b",
@@ -5163,7 +5559,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "923c4ec0-fbc1-561c-881a-ec6f2432e80c",
@@ -5217,7 +5613,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "93dcd629-8365-5576-b1fa-156e66aa751b",
@@ -5244,7 +5640,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "94e08a36-a103-5dc8-bbc3-deef1351c20a",
@@ -5253,7 +5649,16 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "95167b6a-9d46-5568-b8dc-cc7cdb42c28b",
+  "kind": "checkpoint",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Checkpoint 2",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
  },
  {
   "id": "951787f1-164d-5bdc-afb6-0d80c63740ed",
@@ -5280,7 +5685,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "967043ed-46df-57b7-9405-e96d6e040e2a",
@@ -5289,7 +5694,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "96a23bc9-37ad-5141-b8ac-4b848b3425ff",
@@ -5316,7 +5721,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "97154abe-9f02-5d80-9b2e-1ada9a705cbd",
@@ -5346,13 +5751,22 @@
   "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
+  "id": "976d6df6-59a7-5b8b-ac27-93259d2ef084",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Grammar practice",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "9778fdbb-2959-543f-8f02-87a3358d4e83",
   "kind": "lesson",
   "ordinal": 3,
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "97cdf9f6-72be-557a-b3b9-ce78cb1d21bb",
@@ -5361,7 +5775,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "97d282a2-5817-5da8-a885-f890c02ce041",
@@ -5379,7 +5793,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "98a692e5-ee4e-5443-ad27-af9902d91a44",
@@ -5388,7 +5802,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "98fe57c1-b74d-56b0-9360-6fcc38013b63",
@@ -5398,6 +5812,15 @@
   "title_en": "Lesson 3",
   "unit_id": "a921ed27-35b4-5222-9699-d8dd343c1f79",
   "updated_at": "2026-09-24 00:13:39.721406+00"
+ },
+ {
+  "id": "990b362e-5357-56f6-9ce8-64f3324eb00a",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "9976f56a-3266-5309-a73d-b4661ed2cf15",
@@ -5424,7 +5847,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "99d995d2-2c8f-533b-96f5-7fb94b2aba00",
@@ -5433,7 +5856,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "99f3352c-c783-50bc-b6ae-41b515582b18",
@@ -5463,6 +5886,15 @@
   "updated_at": "2026-09-17 07:05:23.033601+00"
  },
  {
+  "id": "9b40bc21-32bf-547b-97ff-156d9485179c",
+  "kind": "review",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "9bafcbca-f68a-5dc6-bcbc-dfdab058ebf6",
   "kind": "lesson",
   "ordinal": 2,
@@ -5478,7 +5910,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "9ca7541f-3b03-5efb-89e6-6b954c88854f",
@@ -5488,6 +5920,15 @@
   "title_en": "Practice",
   "unit_id": "28d6c921-dae2-50d2-b6a0-a5e2423428a6",
   "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "9d157f28-4550-54b4-a20c-78e2eeee2b9a",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "9d3ccd66-94c7-56bb-8c1c-d14056209c7e",
@@ -5505,7 +5946,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "9da711ac-3943-5a02-a135-c5692b0308f3",
@@ -5533,6 +5974,15 @@
   "title_en": "Lesson 7",
   "unit_id": "d8cb78a0-5a7d-5c09-9f7f-9e905e0d2e59",
   "updated_at": "2026-09-24 14:14:32.438614+00"
+ },
+ {
+  "id": "9e1e3cf6-aa69-56fb-9c6c-c3ffff41bb7a",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00"
  },
  {
   "id": "9e36ae97-99b7-535d-bae9-8604747a99e0",
@@ -5568,7 +6018,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "a0ecf94b-409c-5d6c-bfbd-93546530c20d",
@@ -5577,7 +6027,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "a10a1879-17a9-5034-b8ca-a2c7d3cb553e",
@@ -5604,7 +6054,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "a17487a3-5b06-514f-bb79-db8214183419",
@@ -5631,7 +6081,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "a3790806-3596-5f06-b013-fb55ce95b65e",
@@ -5649,7 +6099,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "a3bbfc6a-1848-596e-b377-873dfd0be26d",
@@ -5676,7 +6126,7 @@
   "status": "published",
   "title_en": "Lesson 9",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "a500afb2-5d36-5d81-8bcf-db6f76ec106c",
@@ -5694,7 +6144,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "a68fe9cc-bea7-5da1-b9f7-1465bc3384bf",
@@ -5757,7 +6207,7 @@
   "status": "published",
   "title_en": "Lesson 8",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "a82c7e59-e57d-5f5d-b7b7-79d44c96974c",
@@ -5811,7 +6261,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "70dda450-3825-5ea7-88fd-296775bc426c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "a9c1fc44-6662-5e18-bcb6-5e73629f0336",
@@ -5829,7 +6279,7 @@
   "status": "published",
   "title_en": "Lesson 7",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "a9d69f19-f2fa-5ee3-bb0d-78f51a34faa6",
@@ -5838,7 +6288,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "aa2bc788-ed09-5efe-938e-f2d62629efa1",
@@ -5856,7 +6306,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "3cc8b1a1-6314-5a4f-be82-b713ea584203",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "aa79bf4c-4b37-55fc-aec4-92ff0ef1cc35",
@@ -5865,7 +6315,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "aa95b0ce-8162-582e-baae-6cf871e70599",
@@ -5892,7 +6342,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "aaafb4dd-18af-5b10-be4f-33a46f2cba0e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "abeae42f-06c4-5523-b8e0-1c90c3c84654",
@@ -5913,6 +6363,15 @@
   "updated_at": "2026-09-23 23:16:46.080289+00"
  },
  {
+  "id": "ac896868-3efd-5610-9f1b-dd4e899a75ba",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Grammar practice",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "ad6a7d85-d070-588c-a73c-3a8b635490f6",
   "kind": "lesson",
   "ordinal": 5,
@@ -5928,7 +6387,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "addc79d3-44fd-5d10-ac15-8ad7dd720ad2",
@@ -5946,7 +6405,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ae2f969e-b091-5f5b-8982-30004bacc49a",
@@ -5964,7 +6423,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "af0be2d5-a98c-5e07-bc05-28c25b9ae32b",
@@ -5982,7 +6441,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "af23aaf1-8281-54f7-af4d-8de091255398",
@@ -6018,7 +6477,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "afad9f3a-9810-58dd-8993-95d9c4595b9b",
@@ -6027,7 +6486,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "3cc8b1a1-6314-5a4f-be82-b713ea584203",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b01cabd4-0548-5883-bdcd-16483d679bc7",
@@ -6036,7 +6495,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b0491a6e-eb08-5873-a070-13ecd09ffb9e",
@@ -6045,7 +6504,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b0690dae-ee57-5926-b77d-333149b6f56f",
@@ -6054,7 +6513,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b0819e6f-7ba2-5f64-b4a1-549f810eb159",
@@ -6063,7 +6522,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b097d3c5-2adb-5cbb-9ffb-4fe7662d07f5",
@@ -6072,7 +6531,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b0cdf9f2-f0b5-546b-9858-7afbef916420",
@@ -6081,7 +6540,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b0d743ca-726d-565c-acad-f0338edf3858",
@@ -6099,7 +6558,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b0ffb302-a22f-566b-b2ed-acba9b4d7780",
@@ -6108,7 +6567,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b1112117-e873-5e94-a7c4-527e17759353",
@@ -6135,7 +6594,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "70dda450-3825-5ea7-88fd-296775bc426c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b1f71ff2-c65e-51aa-b785-b97f262221b0",
@@ -6144,7 +6603,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b1f92fc2-1ff9-5a7a-8fc7-0ee579a4e7b6",
@@ -6153,7 +6612,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b1fed780-8a95-5a17-a4b1-26954b060a1f",
@@ -6162,7 +6621,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b21291f7-80e5-5537-b3ee-59079f2d5ead",
@@ -6207,7 +6666,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b2e8a93c-0a9d-5bd5-b9c6-83b74153a32a",
@@ -6216,7 +6675,7 @@
   "status": "published",
   "title_en": "Lesson 7",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b3426dff-8daf-52ee-bbb9-4952a015c7b5",
@@ -6225,7 +6684,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b365bb25-d2ca-50a2-a5dd-ce88fc6e4b73",
@@ -6243,7 +6702,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b4da6d11-61ff-533d-b119-3d3159449b41",
@@ -6270,7 +6729,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b5a63186-4ced-509a-b59e-4ef2fa7c0de1",
@@ -6280,6 +6739,15 @@
   "title_en": "Practice",
   "unit_id": "07ff3e13-7b95-55ab-aab7-ac48151e0d8c",
   "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "b5bbd26b-cf59-58d5-a9c2-d43b9116b801",
+  "kind": "lesson",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Lesson 2",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b620886f-a8a2-57c9-bff9-ba48bb3c2da0",
@@ -6306,7 +6774,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "71481540-7f7c-5939-9d96-ee76d80128b9",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b6f0a0c8-fa91-548a-a034-0a2dc733a838",
@@ -6324,7 +6792,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b7597d74-ee62-528c-ada5-46551e782f65",
@@ -6333,7 +6801,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b75c2402-5551-5fc4-b9cf-1ef61da17946",
@@ -6342,7 +6810,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b760e447-6a20-55bb-84e9-5fdc99d61777",
@@ -6351,7 +6819,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b7d09b8c-f7e7-545f-9108-c8dbefc1f7a0",
@@ -6378,7 +6846,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b8d61e84-5a39-52e2-91dc-b66712763933",
@@ -6396,7 +6864,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b931c3d7-1cf7-5f33-b548-a1aa90c6f08e",
@@ -6405,7 +6873,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b9725f99-264d-55eb-b9e6-7ce8c796a9aa",
@@ -6414,7 +6882,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b9831063-e0c3-572a-9481-5d7f06629a5b",
@@ -6423,7 +6891,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b9baf03f-a094-5ec1-8db2-3b31f85fdb7a",
@@ -6432,7 +6900,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "b9c404f0-790d-5fdd-bb8a-a78a7511caf3",
@@ -6442,6 +6910,15 @@
   "title_en": "Practice",
   "unit_id": "b38bd9a1-f0a8-5fe1-9aa1-0e8260930af6",
   "updated_at": "2026-09-24 09:59:33.29136+00"
+ },
+ {
+  "id": "b9ff9bd3-e1f1-5b36-a8b0-9d322b8568c7",
+  "kind": "lesson",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Lesson 1",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ba1e512f-f9c1-5b7e-91df-d27b6a45eed8",
@@ -6459,7 +6936,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "bb2b8ff1-2298-50ab-8f13-4a3427949b2f",
@@ -6468,7 +6945,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "bbc014fc-8f5a-5267-8970-8eb4c383d4bc",
@@ -6477,7 +6954,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "bc2f4b11-6793-5429-b565-c1484d2814b0",
@@ -6513,7 +6990,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "bd0deaee-f2f1-51df-9a69-513bf978d437",
@@ -6522,7 +6999,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "bd4dc4d0-35c5-5619-9cd0-94fe274c2c1a",
@@ -6558,7 +7035,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "beb7b218-2910-553d-a910-f1c67d9daa6d",
@@ -6567,7 +7044,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "bf00b26c-1ad5-58cd-a165-c59cb6f2e1a8",
@@ -6576,7 +7053,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "bf2309d5-c83a-583a-832b-0cfb54f61052",
@@ -6594,7 +7071,16 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "bf73b4d8-e508-5596-8859-e93764a161f2",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "caff1c3a-1951-5288-a7b5-c4e6b51a503a",
+  "updated_at": "2026-09-24 17:35:43.978113+00"
  },
  {
   "id": "bfb78e13-657b-5944-8876-e6ff7c0ccb3f",
@@ -6621,7 +7107,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c0429ac9-7dfd-5753-8f23-8a90f7365efd",
@@ -6729,7 +7215,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c2bef84e-4170-512c-b7df-33e52e22f8db",
@@ -6756,7 +7242,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c3acdd50-81cd-5e64-9165-6c40735bd3e2",
@@ -6792,7 +7278,7 @@
   "status": "published",
   "title_en": "Lesson 9",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c44368ae-3d6e-5b1a-a42d-42d84dc51931",
@@ -6811,6 +7297,24 @@
   "title_en": "Practice",
   "unit_id": "afdaff40-37c8-56af-ae39-78f1ed48e97e",
   "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "c48c6ca0-0681-56bf-8698-3d0f7bc27792",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
+ },
+ {
+  "id": "c4967790-af09-5efa-93e4-eaf0802c4132",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c5c93bd4-587b-5330-a411-436d8be7ba13",
@@ -6837,7 +7341,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "71481540-7f7c-5939-9d96-ee76d80128b9",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c5f43740-f908-5d40-942b-1a1c5e9dff6c",
@@ -6846,7 +7350,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c616abb9-9cb3-5172-8305-1fcb33503ecd",
@@ -6855,7 +7359,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c637fbc6-8ab4-50fd-85dc-4e8f11eb796f",
@@ -6864,7 +7368,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c65dc784-d0f9-585e-a18a-65a6ba5d407f",
@@ -6882,7 +7386,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c692aee2-5798-5da6-a1ea-34f8e6295745",
@@ -6909,7 +7413,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c6ec610f-bc77-514a-8f72-084a3d83193f",
@@ -6927,7 +7431,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c770a175-bf15-5e18-b461-5cc4f2e7b3b6",
@@ -6936,7 +7440,7 @@
   "status": "published",
   "title_en": "Lesson 7",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c77c73ae-660a-5a61-9beb-f210849cf48e",
@@ -6945,7 +7449,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c7e99cb2-2250-563f-9e44-69be13f55c53",
@@ -6981,7 +7485,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "c9175284-7246-5ab1-bb1f-944175582ac0",
@@ -7008,7 +7512,16 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "c98c1c63-6fd0-5c4f-b452-96c4d4e434f4",
+  "kind": "lesson",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Lesson 1",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ca06def8-c968-55cc-b94e-4663cb515470",
@@ -7035,7 +7548,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "caf92dc0-d8e0-57c7-af15-808498a663d0",
@@ -7044,7 +7557,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "cb138878-281e-5fd9-a8d6-a8818b297740",
@@ -7062,7 +7575,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "cb4c1307-0e59-589e-befc-e495274c7f50",
@@ -7071,7 +7584,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "71481540-7f7c-5939-9d96-ee76d80128b9",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "cb63824a-23b8-5ad4-83c4-9655e72379d0",
@@ -7080,7 +7593,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "cbb4fd35-fcc4-5bbe-a174-158e94cb8513",
@@ -7089,7 +7602,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "cc06a168-4625-5887-8f38-ebcc441337cd",
@@ -7098,7 +7611,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "cc2d7612-9eed-5009-8c36-d7133169b640",
@@ -7116,7 +7629,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "cda348a9-2203-56eb-8d94-327a6479089a",
@@ -7125,7 +7638,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "cdf65b01-5b80-58ef-85a3-2ff75c580f5f",
@@ -7143,7 +7656,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ce4f7808-1121-51ff-8e4b-f6ffa6bd9ef8",
@@ -7170,7 +7683,7 @@
   "status": "published",
   "title_en": "Lesson 9",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ce997e52-9bba-5467-bc5a-6b684aeeb98d",
@@ -7209,6 +7722,24 @@
   "updated_at": "2026-09-24 14:14:32.438614+00"
  },
  {
+  "id": "cf1a99cf-3586-5345-a706-419cb19d2de2",
+  "kind": "lesson",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Lesson 2",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "cf33fc7c-04ba-5463-a3eb-831545856028",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "cf3b95a1-fc37-5b7b-b38e-7f6a7625ae41",
   "kind": "practice",
   "ordinal": 3,
@@ -7224,7 +7755,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "cfde5a5e-e37e-52ad-b9bd-8af13f573b1f",
@@ -7242,7 +7773,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d0277604-c7e1-5013-be69-49c53cddc899",
@@ -7251,7 +7782,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d0659acd-fb0c-55aa-a4fd-53c59a3da616",
@@ -7260,7 +7791,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d0941de3-30a0-585b-9a6f-495c8fe8b806",
@@ -7269,7 +7800,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d1169700-7b9f-5e5f-9ccc-d899b86c6ec1",
@@ -7287,7 +7818,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d135c5ff-7b9d-57e1-8c6c-f306e6593806",
@@ -7296,7 +7827,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d18eac1b-a776-55bc-909d-6f682533213c",
@@ -7332,7 +7863,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d2622d8f-4903-5b49-9e65-63fea779a884",
@@ -7350,7 +7881,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "481ae401-6c6e-53d7-9683-853d0cbed672",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d27d2445-ad88-5902-9e3d-e0bbe6a4ee06",
@@ -7360,6 +7891,15 @@
   "title_en": "Unit check",
   "unit_id": "da566530-f509-5133-b265-9183e82e99e2",
   "updated_at": "2026-09-24 09:51:50.379368+00"
+ },
+ {
+  "id": "d2bfcbad-e553-5677-9372-f8212b0f75c2",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "248f8041-e91e-501f-92e4-301a84aab1d9",
+  "updated_at": "2026-09-24 17:13:11.815745+00"
  },
  {
   "id": "d2d0ebaf-f7fb-5f16-8fbf-e93786bcf342",
@@ -7377,7 +7917,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d378494c-7748-55d4-ae99-8722a1d82032",
@@ -7389,13 +7929,22 @@
   "updated_at": "2026-09-24 06:22:41.033889+00"
  },
  {
+  "id": "d3fabcf2-6467-5c42-b7bc-1c5049b6456c",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "d4138fbf-e466-5329-b5a8-9bd30821b753",
   "kind": "review",
   "ordinal": 17,
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d4d9cb97-a4b5-5ac1-808b-ce0daf94682a",
@@ -7434,6 +7983,15 @@
   "updated_at": "2026-09-23 19:51:18.52367+00"
  },
  {
+  "id": "d54f0f27-dc18-59f0-8fd2-66ffba875d5e",
+  "kind": "lesson",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Lesson 1",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "d55ce1be-cc34-566d-9bdf-fd461cbcfe36",
   "kind": "lesson",
   "ordinal": 13,
@@ -7467,7 +8025,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d67e13ad-e092-51f5-b630-9087c893c28b",
@@ -7476,7 +8034,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d700bdc0-1b54-553d-b84a-22a06f8cea5d",
@@ -7485,7 +8043,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d77d233f-eba7-5e6b-8331-271884f627ba",
@@ -7494,7 +8052,16 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "d7c56566-1dc1-5cf6-a4b3-8a9587006f1b",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "caff1c3a-1951-5288-a7b5-c4e6b51a503a",
+  "updated_at": "2026-09-24 17:35:43.978113+00"
  },
  {
   "id": "d8536f0a-4a5e-5807-9421-6e8e8095cd88",
@@ -7524,13 +8091,22 @@
   "updated_at": "2026-09-24 14:14:32.438614+00"
  },
  {
+  "id": "d8841d5b-cf6c-5304-a87e-f09d7578af04",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "caff1c3a-1951-5288-a7b5-c4e6b51a503a",
+  "updated_at": "2026-09-24 17:35:43.978113+00"
+ },
+ {
   "id": "d885ee06-8b99-5a68-a2af-66d55fbc5cab",
   "kind": "lesson",
   "ordinal": 1,
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d8bc9aa8-9a72-588f-aae9-8bf248c9f136",
@@ -7540,6 +8116,15 @@
   "title_en": "Checkpoint 3",
   "unit_id": "6ec21cf5-83ce-55f4-a07c-355a8fb995bb",
   "updated_at": "2026-09-24 00:36:08.017048+00"
+ },
+ {
+  "id": "d90d3403-d0f2-5c20-b0ae-7e889862d724",
+  "kind": "lesson",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Lesson 2",
+  "unit_id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d91dfd4d-c2bb-5e90-a520-5583d0090c3a",
@@ -7566,7 +8151,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "d93ffdf8-4a01-5b2b-87a9-b9761570fb3f",
@@ -7638,7 +8223,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "da1e8ad0-0943-5d4e-989e-6e019ffcbe40",
@@ -7647,7 +8232,7 @@
   "status": "published",
   "title_en": "Lesson 6",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "da1f84b8-3382-5641-8fcb-fb64289f343d",
@@ -7665,7 +8250,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "dac19912-20d6-56a4-9eaf-99ec76b3c4ca",
@@ -7674,7 +8259,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "dace464a-a536-5e10-91a7-dcbe2adfe357",
@@ -7683,7 +8268,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "dadedd40-0ec9-5ab8-9ccf-b7dac77773d7",
@@ -7719,7 +8304,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "db834500-fcbe-5c24-a9f0-f98130963554",
@@ -7728,7 +8313,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "db90f627-a91c-579e-8736-c2ee7f02e686",
@@ -7737,7 +8322,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "dba3503b-82cc-5a01-a269-5d32954aa9fc",
@@ -7746,7 +8331,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "dbc87a42-a489-5610-85bc-ae962e85d575",
@@ -7773,7 +8358,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "dc5538c8-92c0-5bde-ba29-c2dd7fcccc79",
@@ -7854,7 +8439,7 @@
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "dd337569-dfbc-5d44-99b7-94f5f4b9332d",
@@ -7872,7 +8457,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "dda8dd49-10d2-5429-81b4-32af30a1155f",
@@ -7890,7 +8475,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "de1de61a-7f51-5ea9-86a9-fdd922ca71f8",
@@ -7917,7 +8502,16 @@
   "status": "published",
   "title_en": "Lesson 10",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "de63f30e-c6f2-502e-b9a7-2ba28ca13d5c",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Grammar practice",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "df49710b-f05a-5f49-9818-6fd206ff23a9",
@@ -7938,6 +8532,15 @@
   "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
+  "id": "df57e891-07af-560f-94c9-b8bcb310864c",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00"
+ },
+ {
   "id": "df5a4168-92bc-51df-bc05-836bb7dcf996",
   "kind": "lesson",
   "ordinal": 2,
@@ -7953,7 +8556,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "e31d82b3-e9e2-52bc-bd88-e52c7b53a764",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e044c584-9592-5647-a34f-b6b3dfdd01e7",
@@ -7962,7 +8565,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e093cf35-6944-5744-9d3c-807b1f07fc06",
@@ -7971,7 +8574,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e1009dd1-56f2-5cb2-b4ce-d444ec46a084",
@@ -7980,7 +8583,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e1a9f452-1957-5701-9985-5ce20d7d3530",
@@ -7989,7 +8592,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e2db61fd-8888-54e0-ab90-589875859804",
@@ -7998,7 +8601,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e2e0df52-64c6-5397-a6d9-b6c6540615d7",
@@ -8007,7 +8610,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e2e741ec-339b-56f5-8bcb-11d956d72896",
@@ -8016,7 +8619,16 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "481ae401-6c6e-53d7-9683-853d0cbed672",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "e2ec5305-45ec-5195-8c2f-3ec608cda7f4",
+  "kind": "lesson",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Lesson 3",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e3639580-92aa-5dda-8356-e66963d333d6",
@@ -8025,7 +8637,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e3e51879-38b9-58f0-9dbd-0ae151402908",
@@ -8079,7 +8691,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e4f574f5-09ea-5d9d-a002-fa97f3f7d48d",
@@ -8088,7 +8700,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "b95d926c-3168-53bd-88bd-c02c868d1119",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e5518658-fe5c-518a-98bc-8dca0ae4e4a6",
@@ -8097,7 +8709,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "b3d7d4fe-8ba0-58f9-8d0e-38b9aaf3707f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e57258aa-e5a4-5eaf-b147-23efb2a5b892",
@@ -8106,7 +8718,16 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "e579b4f5-8b10-5284-9be9-fb0deabdd9b2",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e5bc4190-3f42-54cf-8e74-2a5d6f183402",
@@ -8136,6 +8757,15 @@
   "updated_at": "2026-09-24 14:14:32.438614+00"
  },
  {
+  "id": "e6d1493e-2879-5dd2-8946-e756b04e690f",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
+ },
+ {
   "id": "e6fb8f83-505f-5c3d-a6c1-f5a8350de289",
   "kind": "checkpoint",
   "ordinal": 13,
@@ -8151,7 +8781,7 @@
   "status": "published",
   "title_en": "Lesson 4",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e7681552-22bd-5470-a549-85630ab157d7",
@@ -8160,7 +8790,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e7d3bdeb-9945-5523-82de-eb7ee1b7d59b",
@@ -8178,7 +8808,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e8312547-adfa-5518-ac3a-e3a44576de14",
@@ -8196,7 +8826,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "d35a777a-0a33-5ede-8fb9-39d0107d41f6",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e8ac2045-0c1f-53a7-ae37-f28d807cf633",
@@ -8226,13 +8856,22 @@
   "updated_at": "2026-09-24 14:14:32.438614+00"
  },
  {
+  "id": "e97938ab-5337-535a-b7df-1b2c9ecc8e3a",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "updated_at": "2026-09-24 17:41:00.784087+00"
+ },
+ {
   "id": "e97f6ae4-d30a-5bac-ae61-3ba7ccbc8938",
   "kind": "lesson",
   "ordinal": 5,
   "status": "published",
   "title_en": "Lesson 5",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "e9cf98e1-89e1-5bbd-bae6-56e73ce44e40",
@@ -8250,7 +8889,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ea7baadb-1705-5840-9903-c7f0ac4681ff",
@@ -8268,7 +8907,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "eb1ec986-e0ef-549b-b2a5-c7fee30071ad",
@@ -8278,6 +8917,15 @@
   "title_en": "Lesson 1",
   "unit_id": "a973933b-ccb4-5f7d-9210-9a063ab4ed00",
   "updated_at": "2026-09-24 06:05:11.086413+00"
+ },
+ {
+  "id": "eb329e05-209f-54c0-a0f5-8a6e527d7d9a",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "eb636e4b-2eb8-5a51-9736-d40cbf78890a",
@@ -8295,7 +8943,7 @@
   "status": "published",
   "title_en": "Lesson 8",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ecaccb2e-cddb-5c0f-adf9-a22993e389eb",
@@ -8322,7 +8970,16 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "ed54763c-3ed5-5ff6-8fd2-18fb813eea0c",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ed62ce1d-6382-52bf-8812-90022494e11d",
@@ -8331,7 +8988,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ed8bd52e-b680-5ef9-acf7-86c11ff8412f",
@@ -8340,7 +8997,7 @@
   "status": "published",
   "title_en": "Lesson 10",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "edea9a07-5776-5e24-b27f-ab34dae34c13",
@@ -8358,7 +9015,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "3cc8b1a1-6314-5a4f-be82-b713ea584203",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ee69fb28-f74f-5413-bda8-7ddc075c944a",
@@ -8367,7 +9024,16 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "71481540-7f7c-5939-9d96-ee76d80128b9",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "eea76169-6230-5ba3-9432-5eb91b101562",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "ef2c9550-a8a3-5dc7-b4d6-aec6328ca405",
@@ -8406,6 +9072,15 @@
   "updated_at": "2026-09-23 20:28:08.267385+00"
  },
  {
+  "id": "f01ca8ed-c6f6-5bc5-944f-14c62cd6c696",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "c934a093-7470-526c-b293-904cab8a522d",
+  "updated_at": "2026-09-24 17:48:01.092047+00"
+ },
+ {
   "id": "f0dfbfb0-a99f-5d19-bed1-5a724512671c",
   "kind": "lesson",
   "ordinal": 2,
@@ -8430,7 +9105,7 @@
   "status": "published",
   "title_en": "Lesson 1",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "f12c911d-d29d-58f9-964c-7732aec755c8",
@@ -8484,7 +9159,16 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "f2d8de37-b2ca-5fff-bcc2-de21465a2328",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "c934a093-7470-526c-b293-904cab8a522d",
+  "updated_at": "2026-09-24 17:48:01.092047+00"
  },
  {
   "id": "f2fc0ec4-5584-5cb3-8120-059eb2c71556",
@@ -8520,7 +9204,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "f3ccd131-1795-575b-b709-91da74eeda86",
@@ -8538,7 +9222,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "f499966a-de25-5380-8c89-0bb322053aff",
@@ -8550,13 +9234,22 @@
   "updated_at": "2026-09-18 14:14:36.377978+00"
  },
  {
+  "id": "f4caf278-a539-517b-8c6d-8e96af1d82c5",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "caff1c3a-1951-5288-a7b5-c4e6b51a503a",
+  "updated_at": "2026-09-24 17:35:43.978113+00"
+ },
+ {
   "id": "f5070908-82fa-5d07-9713-f4b2215ced41",
   "kind": "lesson",
   "ordinal": 7,
   "status": "published",
   "title_en": "Lesson 7",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "f5299b82-0a07-55dc-8840-de0f80c220a1",
@@ -8592,7 +9285,16 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "f5d004f0-996e-5e9b-8c54-b4deeae91706",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "c934a093-7470-526c-b293-904cab8a522d",
+  "updated_at": "2026-09-24 17:48:01.092047+00"
  },
  {
   "id": "f64425b8-77ac-5f75-951f-fca7d7348df9",
@@ -8601,7 +9303,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "f64662ef-3ca3-5973-bcc6-699c8bd4902b",
@@ -8610,7 +9312,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "f647f30b-ff31-5455-9a8c-a60a10ea144e",
@@ -8631,13 +9333,22 @@
   "updated_at": "2026-09-24 10:09:02.025603+00"
  },
  {
+  "id": "f7427688-3ad2-5eca-934e-9a2488720d65",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
   "id": "f7d85a66-fb8c-5249-9628-eb7ce4725391",
   "kind": "practice",
   "ordinal": 6,
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "f8153c4e-bd14-5a14-be6a-509e9853dd3a",
@@ -8664,7 +9375,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "c7b4cc13-41a1-57bf-b8f9-9c5a2ef4fb1b",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "f97f561c-b4c1-5a16-a334-2d706f84f4b9",
@@ -8673,7 +9384,25 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "21206ba6-6522-5849-be52-419e7d6d1007",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "f9a8ce11-b685-5382-a6c3-60ed2ec80992",
+  "kind": "lesson",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Lesson 3",
+  "unit_id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "f9cd5b00-44f3-5f50-8994-9c5d9aba9aaf",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "248f8041-e91e-501f-92e4-301a84aab1d9",
+  "updated_at": "2026-09-24 17:13:11.815745+00"
  },
  {
   "id": "f9d24317-9a02-5257-aedc-f48485aa371e",
@@ -8685,13 +9414,31 @@
   "updated_at": "2026-09-24 16:23:05.089081+00"
  },
  {
+  "id": "f9f29192-9acb-5fb7-a5cc-aeedf8b608bd",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
+ },
+ {
+  "id": "fa1cae00-72cd-5d02-9552-dd2953a2274f",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "248f8041-e91e-501f-92e4-301a84aab1d9",
+  "updated_at": "2026-09-24 17:13:11.815745+00"
+ },
+ {
   "id": "fa600465-74dd-5cac-b002-d4fbb0d219d3",
   "kind": "practice",
   "ordinal": 4,
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "fa9f9d54-2a0f-572a-8160-b412f91aa977",
@@ -8700,7 +9447,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "fabccae2-58aa-5d38-b121-995ab7c61f1d",
@@ -8709,7 +9456,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "fb4551ca-6726-5bf7-9835-490aed9b5e85",
@@ -8727,7 +9474,7 @@
   "status": "published",
   "title_en": "Lesson 3",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "fbf020e8-1c8c-5688-9321-16f91e7b1435",
@@ -8745,7 +9492,7 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "fcdafdc6-20c0-5ab6-913c-1996f97d0efb",
@@ -8763,7 +9510,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "fd429df5-d24a-5415-9d3b-f7a3602ee01b",
@@ -8781,7 +9528,7 @@
   "status": "published",
   "title_en": "Lesson 2",
   "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "fea9e5d8-7856-523e-9609-ab8eb5f7ca69",
@@ -8790,7 +9537,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "febebc53-19b0-54f8-861f-5f82ca1bd31b",
@@ -8799,7 +9546,7 @@
   "status": "published",
   "title_en": "Practice",
   "unit_id": "dd303fe0-52c5-5e61-97ae-1903616e625c",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "fef7e7f1-b72e-5d15-8ed1-93255e53dcdc",
@@ -8808,7 +9555,7 @@
   "status": "published",
   "title_en": "Unit check",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "fff28407-61a1-5852-aeaa-9334d81cc616",
@@ -8817,7 +9564,16 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
+ },
+ {
+  "id": "fff44c23-88f5-517b-8258-332223270d93",
+  "kind": "lesson",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Lesson 3",
+  "unit_id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  },
  {
   "id": "fff8312c-0cba-543e-8d22-a0c31545329d",
@@ -8826,6 +9582,6 @@
   "status": "published",
   "title_en": "Grammar practice",
   "unit_id": "59b48665-2d47-587e-b406-84d2800c4161",
-  "updated_at": "2026-09-24 16:36:41.295025+00"
+  "updated_at": "2026-09-24 18:26:21.35457+00"
  }
 ]

@@ -169,6 +169,19 @@
   "updated_at": "2026-09-23 23:26:55.917775+00"
  },
  {
+  "gloss_en": "to take care of, to look after",
+  "gloss_note_en": null,
+  "id": "04d31c90-31da-52fe-aa48-90ec792212ac",
+  "is_glue": false,
+  "lemma": "cuidar",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:15:57.654257+00"
+ },
+ {
   "gloss_en": "with",
   "gloss_note_en": null,
   "id": "05210278-36ac-5fc8-b9a4-4be194ebfd08",
@@ -325,6 +338,19 @@
   "updated_at": "2026-09-23 19:43:38.303503+00"
  },
  {
+  "gloss_en": "unless",
+  "gloss_note_en": null,
+  "id": "07e4e41a-5fe5-555d-95b1-6b34267834a6",
+  "is_glue": false,
+  "lemma": "a menos que",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:21:40.841261+00"
+ },
+ {
   "gloss_en": "to run",
   "gloss_note_en": null,
   "id": "0850fe22-dc77-5348-8c90-28f454455c1b",
@@ -468,6 +494,19 @@
   "updated_at": "2026-09-24 01:05:43.940994+00"
  },
  {
+  "gloss_en": "to go up, to increase",
+  "gloss_note_en": null,
+  "id": "0da5edb2-7605-5a84-a806-c23682f22fdd",
+  "is_glue": false,
+  "lemma": "aumentar",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
+ },
+ {
   "gloss_en": "cloudy",
   "gloss_note_en": null,
   "id": "0de5a76b-e5cc-5e4a-8599-5b79858d7120",
@@ -583,6 +622,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-24 07:14:01.760544+00"
+ },
+ {
+  "gloss_en": "owner, landlord",
+  "gloss_note_en": null,
+  "id": "103d96a0-0312-5907-8fb9-6a753f0cc2db",
+  "is_glue": false,
+  "lemma": "dueño",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:07:24.942717+00"
  },
  {
   "gloss_en": "if",
@@ -806,6 +858,19 @@
   "updated_at": "2026-09-23 23:41:37.581944+00"
  },
  {
+  "gloss_en": "crazy",
+  "gloss_note_en": null,
+  "id": "150bc0a8-ff93-5168-90b0-0a362a87a487",
+  "is_glue": false,
+  "lemma": "loco",
+  "notes_en": null,
+  "pos": "adj",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
+ },
+ {
   "gloss_en": "to need",
   "gloss_note_en": null,
   "id": "15d6f01e-0710-548b-8eda-6568da700777",
@@ -975,6 +1040,19 @@
   "updated_at": "2026-09-23 19:58:24.459018+00"
  },
  {
+  "gloss_en": "to sell",
+  "gloss_note_en": null,
+  "id": "19a19e43-0f3b-595d-8c03-e84ce0d49710",
+  "is_glue": false,
+  "lemma": "vender",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:27:11.848914+00"
+ },
+ {
   "gloss_en": "which, what",
   "gloss_note_en": null,
   "id": "1a2ebe62-a148-5b40-8a52-589657524b8a",
@@ -1090,6 +1168,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 20:28:08.267385+00"
+ },
+ {
+  "gloss_en": "sign",
+  "gloss_note_en": null,
+  "id": "1bbb40a1-f37f-561c-99be-90dfa970014f",
+  "is_glue": false,
+  "lemma": "cartel",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:27:11.848914+00"
  },
  {
   "gloss_en": "sea",
@@ -2145,6 +2236,19 @@
   "updated_at": "2026-09-23 19:29:03.477849+00"
  },
  {
+  "gloss_en": "to be about to",
+  "gloss_note_en": null,
+  "id": "3619cd41-9b72-511d-be67-381b1ff521c0",
+  "is_glue": false,
+  "lemma": "estar por",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:34:46.097626+00"
+ },
+ {
   "gloss_en": "to tell",
   "gloss_note_en": null,
   "id": "3625e546-790b-56f2-bef8-b322153f4bba",
@@ -2444,6 +2548,19 @@
   "updated_at": "2026-09-23 20:28:08.267385+00"
  },
  {
+  "gloss_en": "bike",
+  "gloss_note_en": null,
+  "id": "3f8eedc5-caab-53cc-a366-195545bc1ce9",
+  "is_glue": false,
+  "lemma": "bici",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:27:11.848914+00"
+ },
+ {
   "gloss_en": "question",
   "gloss_note_en": null,
   "id": "3fa2b07e-3811-567a-a84e-5b5712952940",
@@ -2520,6 +2637,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 19:54:45.405956+00"
+ },
+ {
+  "gloss_en": "to keep (a promise), to fulfil",
+  "gloss_note_en": null,
+  "id": "41075352-5bb3-5675-abdc-88d8b4869204",
+  "is_glue": false,
+  "lemma": "cumplir",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:22:44.013204+00"
  },
  {
   "gloss_en": "to live",
@@ -2793,6 +2923,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 19:43:38.303503+00"
+ },
+ {
+  "gloss_en": "to get along",
+  "gloss_note_en": null,
+  "id": "4688d424-4acd-50c5-91a4-698cd7d11c59",
+  "is_glue": false,
+  "lemma": "llevarse",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:41:00.784087+00"
  },
  {
   "gloss_en": "head",
@@ -3211,6 +3354,19 @@
   "updated_at": "2026-09-23 19:54:45.405956+00"
  },
  {
+  "gloss_en": "no way, not at all",
+  "gloss_note_en": null,
+  "id": "5144f75d-03fd-59d5-9cd0-5b62afbcd864",
+  "is_glue": false,
+  "lemma": "ni ahí",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "informal",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
+ },
+ {
   "gloss_en": "easy",
   "gloss_note_en": null,
   "id": "515699e5-7961-5e08-9283-4dfe73790873",
@@ -3419,6 +3575,19 @@
   "updated_at": "2026-09-23 19:34:09.517589+00"
  },
  {
+  "gloss_en": "guarantor (for a lease)",
+  "gloss_note_en": null,
+  "id": "558d23e7-e98d-50f5-be3f-720f09e7cf8f",
+  "is_glue": false,
+  "lemma": "garantía",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:07:35.483+00"
+ },
+ {
   "gloss_en": "morning",
   "gloss_note_en": null,
   "id": "55b049dd-fa06-57c7-8e77-c6ecfd37d493",
@@ -3575,6 +3744,19 @@
   "updated_at": "2026-09-23 23:35:46.537011+00"
  },
  {
+  "gloss_en": "pet",
+  "gloss_note_en": null,
+  "id": "58e96757-a6a0-51a8-ab45-dd190aa01e8b",
+  "is_glue": false,
+  "lemma": "mascota",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:07:24.942717+00"
+ },
+ {
   "gloss_en": "green",
   "gloss_note_en": null,
   "id": "59419c4d-4ec1-57e0-b2b8-b2f5854a1072",
@@ -3599,6 +3781,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-24 16:12:56.791351+00"
+ },
+ {
+  "gloss_en": "embarrassment, shame",
+  "gloss_note_en": null,
+  "id": "5ab445eb-f3c5-5b2f-a1ae-fca6abad3e6b",
+  "is_glue": false,
+  "lemma": "vergüenza",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:04:07.358313+00"
  },
  {
   "gloss_en": "to renew",
@@ -3848,6 +4043,19 @@
   "updated_at": "2026-09-24 07:22:29.004136+00"
  },
  {
+  "gloss_en": "I don't care, it's all the same to me",
+  "gloss_note_en": null,
+  "id": "5f2345dc-918d-5305-8844-25cb09e5cee1",
+  "is_glue": false,
+  "lemma": "me da igual",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:04:07.358313+00"
+ },
+ {
   "gloss_en": "to be left, to stay",
   "gloss_note_en": null,
   "id": "5f23ef84-b641-5867-94f8-ca9c64e10012",
@@ -3872,6 +4080,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 23:26:55.917775+00"
+ },
+ {
+  "gloss_en": "to go up, to rise",
+  "gloss_note_en": null,
+  "id": "5f9f27e0-83cf-5d60-9531-c7222d5c21a6",
+  "is_glue": false,
+  "lemma": "subir",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
  },
  {
   "gloss_en": "location",
@@ -3950,6 +4171,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-24 00:03:41.02582+00"
+ },
+ {
+  "gloss_en": "to charge, to get paid",
+  "gloss_note_en": null,
+  "id": "60ecefe8-f4d4-5a29-b2f8-18d8d8727a1f",
+  "is_glue": false,
+  "lemma": "cobrar",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
  },
  {
   "gloss_en": "La Boca",
@@ -4368,6 +4602,19 @@
   "updated_at": "2026-09-24 16:02:50.969193+00"
  },
  {
+  "gloss_en": "pity",
+  "gloss_note_en": null,
+  "id": "6c904c29-562e-56e8-892c-a7673b56b2ba",
+  "is_glue": false,
+  "lemma": "lástima",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:04:07.358313+00"
+ },
+ {
   "gloss_en": "favor",
   "gloss_note_en": null,
   "id": "6cbbf42e-eb7c-5702-9a06-48ffbd76d1a5",
@@ -4563,6 +4810,19 @@
   "updated_at": "2026-09-23 19:53:48.73596+00"
  },
  {
+  "gloss_en": "piece of advice",
+  "gloss_note_en": null,
+  "id": "6f90fedd-64de-57cb-9ec6-546b8fc269e4",
+  "is_glue": false,
+  "lemma": "consejo",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:15:57.654257+00"
+ },
+ {
   "gloss_en": "salary, pay",
   "gloss_note_en": null,
   "id": "6fafdd90-9436-5a32-ad84-f6ec5c9738f6",
@@ -4730,6 +4990,32 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-18 13:23:35.932625+00"
+ },
+ {
+  "gloss_en": "bright, full of light",
+  "gloss_note_en": null,
+  "id": "74d29017-cdef-5e67-be6b-c4682ce162fa",
+  "is_glue": false,
+  "lemma": "luminoso",
+  "notes_en": null,
+  "pos": "adj",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:07:24.942717+00"
+ },
+ {
+  "gloss_en": "exactly",
+  "gloss_note_en": null,
+  "id": "74dd2e5a-d154-522b-b952-1252cb1ff1a9",
+  "is_glue": false,
+  "lemma": "tal cual",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
  },
  {
   "gloss_en": "it's worth it",
@@ -4901,6 +5187,19 @@
   "updated_at": "2026-09-24 00:00:40.250698+00"
  },
  {
+  "gloss_en": "contract, lease",
+  "gloss_note_en": null,
+  "id": "788075d0-5740-53e2-9d42-1d0f34e47025",
+  "is_glue": false,
+  "lemma": "contrato",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:07:24.942717+00"
+ },
+ {
   "gloss_en": "old man",
   "gloss_note_en": null,
   "id": "78f277d0-1761-5697-b08a-ac7c0ef24fd0",
@@ -4912,6 +5211,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-18 13:23:35.932625+00"
+ },
+ {
+  "gloss_en": "price",
+  "gloss_note_en": null,
+  "id": "78fa6f93-0c87-57c4-8573-b09a38721833",
+  "is_glue": false,
+  "lemma": "precio",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
  },
  {
   "gloss_en": "son",
@@ -5122,6 +5434,19 @@
   "updated_at": "2026-09-18 13:32:13.366839+00"
  },
  {
+  "gloss_en": "father-in-law",
+  "gloss_note_en": null,
+  "id": "820c7176-9e35-5e32-ba85-fa2ffdd760cb",
+  "is_glue": false,
+  "lemma": "suegro",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:41:00.784087+00"
+ },
+ {
   "gloss_en": "I",
   "gloss_note_en": null,
   "id": "823c43b9-6e7a-5c5b-b392-415b2d89578b",
@@ -5146,6 +5471,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 20:11:12.124649+00"
+ },
+ {
+  "gloss_en": "just in case, in case",
+  "gloss_note_en": null,
+  "id": "828005e6-a0ff-5eac-8f9e-4234169840dd",
+  "is_glue": false,
+  "lemma": "por si",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:21:40.841261+00"
  },
  {
   "gloss_en": "eight hundred",
@@ -5276,6 +5614,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 23:08:49.662548+00"
+ },
+ {
+  "gloss_en": "we ought to, someone should",
+  "gloss_note_en": null,
+  "id": "85c90bb4-b6de-506a-a189-d24fc5198aa6",
+  "is_glue": false,
+  "lemma": "habría que",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:15:57.654257+00"
  },
  {
   "gloss_en": "all good",
@@ -5460,6 +5811,19 @@
   "updated_at": "2026-09-24 00:37:54.683427+00"
  },
  {
+  "gloss_en": "to go down, to drop",
+  "gloss_note_en": null,
+  "id": "8a7c9e70-09f7-51c8-8272-db503b9d1f6a",
+  "is_glue": false,
+  "lemma": "bajar",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
+ },
+ {
   "gloss_en": "eleven",
   "gloss_note_en": null,
   "id": "8a81abc2-2772-5224-bf1b-9871d5057cce",
@@ -5484,6 +5848,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-24 16:23:05.089081+00"
+ },
+ {
+  "gloss_en": "as long as, provided that",
+  "gloss_note_en": null,
+  "id": "8ade1b99-f8e0-5719-a05c-9cd3d714cede",
+  "is_glue": false,
+  "lemma": "siempre y cuando",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:21:40.841261+00"
  },
  {
   "gloss_en": "cough",
@@ -5614,6 +5991,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 23:08:49.662548+00"
+ },
+ {
+  "gloss_en": "inflation",
+  "gloss_note_en": null,
+  "id": "9205c9fd-ad74-5970-9378-af4628a2707a",
+  "is_glue": false,
+  "lemma": "inflación",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
  },
  {
   "gloss_en": "three hundred",
@@ -5915,6 +6305,19 @@
   "updated_at": "2026-09-17 11:50:41.747624+00"
  },
  {
+  "gloss_en": "to promise",
+  "gloss_note_en": null,
+  "id": "9bf45722-0612-51ec-9248-bef6ce8d3956",
+  "is_glue": false,
+  "lemma": "prometer",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:22:44.013204+00"
+ },
+ {
   "gloss_en": "tip",
   "gloss_note_en": null,
   "id": "9c9aafa9-88ad-50ee-a817-6ac382fcd684",
@@ -6149,6 +6552,19 @@
   "updated_at": "2026-09-23 22:49:34.539799+00"
  },
  {
+  "gloss_en": "real estate agency",
+  "gloss_note_en": null,
+  "id": "a233be1b-2fab-5499-83dc-f7f4076e6029",
+  "is_glue": false,
+  "lemma": "inmobiliaria",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:07:24.942717+00"
+ },
+ {
   "gloss_en": "January",
   "gloss_note_en": null,
   "id": "a270a81c-e02e-550a-8eaa-460588581182",
@@ -6186,6 +6602,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-24 06:05:11.086413+00"
+ },
+ {
+  "gloss_en": "promise",
+  "gloss_note_en": null,
+  "id": "a34261ef-794b-5a9f-b089-efdc6194a1d6",
+  "is_glue": false,
+  "lemma": "promesa",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:22:44.013204+00"
  },
  {
   "gloss_en": "toasted sandwich",
@@ -6368,6 +6797,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 18:53:27.361826+00"
+ },
+ {
+  "gloss_en": "raise, increase",
+  "gloss_note_en": null,
+  "id": "a7876f58-d913-57a6-8a78-671f68045f4f",
+  "is_glue": false,
+  "lemma": "aumento",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
  },
  {
   "gloss_en": "winter",
@@ -7527,6 +7969,19 @@
   "updated_at": "2026-09-24 16:12:56.791351+00"
  },
  {
+  "gloss_en": "to get used to",
+  "gloss_note_en": null,
+  "id": "c3986323-16ac-5662-b173-69a0a8c2eba9",
+  "is_glue": false,
+  "lemma": "acostumbrarse",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:34:46.097626+00"
+ },
+ {
   "gloss_en": "of the",
   "gloss_note_en": null,
   "id": "c4116a31-9aef-549d-95f3-5d15ab6c08f2",
@@ -7577,6 +8032,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 19:10:29.815079+00"
+ },
+ {
+  "gloss_en": "to come across (to someone)",
+  "gloss_note_en": null,
+  "id": "c5288a4f-309b-5909-ab79-647c6546ed00",
+  "is_glue": false,
+  "lemma": "caer",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:41:00.784087+00"
  },
  {
   "gloss_en": "late",
@@ -7642,6 +8110,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-24 06:15:45.142723+00"
+ },
+ {
+  "gloss_en": "to imagine things, to get carried away",
+  "gloss_note_en": null,
+  "id": "c68348a8-1768-53da-b846-d84c78d1b94d",
+  "is_glue": false,
+  "lemma": "flashear",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "informal",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
  },
  {
   "gloss_en": "box",
@@ -8008,6 +8489,19 @@
   "updated_at": "2026-09-24 00:15:04.523306+00"
  },
  {
+  "gloss_en": "little by little, gradually",
+  "gloss_note_en": null,
+  "id": "cfb94ba9-60ea-59ce-a9b4-8e54b4e7377a",
+  "is_glue": false,
+  "lemma": "de a poco",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:34:46.097626+00"
+ },
+ {
   "gloss_en": "plane",
   "gloss_note_en": null,
   "id": "cfb9a51c-d2b2-5f75-99a6-b2464090d772",
@@ -8136,6 +8630,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 23:49:13.3501+00"
+ },
+ {
+  "gloss_en": "nonsense (es cualquiera); anyone",
+  "gloss_note_en": null,
+  "id": "d1f9e339-0433-5fb3-ac0b-b426332c4bac",
+  "is_glue": false,
+  "lemma": "cualquiera",
+  "notes_en": null,
+  "pos": "pron",
+  "register": "informal",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
  },
  {
   "gloss_en": "after, afterwards",
@@ -8775,6 +9282,19 @@
   "updated_at": "2026-09-18 13:32:13.366839+00"
  },
  {
+  "gloss_en": "to accept, to allow",
+  "gloss_note_en": null,
+  "id": "e30b334c-37e0-5634-a591-07e18aa232ea",
+  "is_glue": false,
+  "lemma": "aceptar",
+  "notes_en": null,
+  "pos": "verb",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:07:24.942717+00"
+ },
+ {
   "gloss_en": "to call",
   "gloss_note_en": null,
   "id": "e3139f5f-e574-5c58-a1da-4f7659096ba8",
@@ -8786,6 +9306,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 23:12:50.467874+00"
+ },
+ {
+  "gloss_en": "it would be nice, it would be good",
+  "gloss_note_en": null,
+  "id": "e354c10d-88d9-56eb-89e6-d42c6f22d4d3",
+  "is_glue": false,
+  "lemma": "estaría bueno",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:15:57.654257+00"
  },
  {
   "gloss_en": "wifi",
@@ -9269,6 +9802,19 @@
   "updated_at": "2026-09-23 19:29:03.477849+00"
  },
  {
+  "gloss_en": "in case",
+  "gloss_note_en": null,
+  "id": "f05037ab-ee1f-5262-868c-213071b75690",
+  "is_glue": false,
+  "lemma": "en caso de que",
+  "notes_en": null,
+  "pos": "phrase",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:21:40.841261+00"
+ },
+ {
   "gloss_en": "effort",
   "gloss_note_en": null,
   "id": "f0927bdf-87c5-5438-a193-08474875a27e",
@@ -9685,6 +10231,19 @@
   "updated_at": "2026-09-24 07:14:01.760544+00"
  },
  {
+  "gloss_en": "forbidden, not allowed",
+  "gloss_note_en": null,
+  "id": "fc4db05f-5f6e-5ef6-a0c8-dcad66f55231",
+  "is_glue": false,
+  "lemma": "prohibido",
+  "notes_en": null,
+  "pos": "adj",
+  "register": "neutral",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:27:11.848914+00"
+ },
+ {
   "gloss_en": "Monday",
   "gloss_note_en": null,
   "id": "fc726500-9bf8-5187-ba46-c58497678a17",
@@ -9761,6 +10320,19 @@
   "source": "outline",
   "status": "published",
   "updated_at": "2026-09-23 23:16:46.080289+00"
+ },
+ {
+  "gloss_en": "anger",
+  "gloss_note_en": null,
+  "id": "ff68ca09-4ba1-5a29-9cca-2c2691dadddd",
+  "is_glue": false,
+  "lemma": "bronca",
+  "notes_en": null,
+  "pos": "noun",
+  "register": "informal",
+  "source": "outline",
+  "status": "published",
+  "updated_at": "2026-09-24 17:04:07.358313+00"
  },
  {
   "gloss_en": "cold",

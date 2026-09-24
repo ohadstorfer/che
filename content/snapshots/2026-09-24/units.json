@@ -17,6 +17,23 @@
   "updated_at": "2026-09-24 09:41:25.175416+00"
  },
  {
+  "course_order": 126,
+  "grammar_focus": [
+   "discurso-referido.condicional",
+   "prometer"
+  ],
+  "id": "0323848f-596e-579a-a7dd-1904e93c1f32",
+  "ordinal": 5,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 11,
+  "slug": "dijo-que-vendria",
+  "status": "published",
+  "summary_en": "Dijo que vendría",
+  "title_en": "Say what someone said they'd do",
+  "updated_at": "2026-09-24 17:22:44.013204+00"
+ },
+ {
   "course_order": 64,
   "grammar_focus": [
    "repaso.quedarse-sin",
@@ -130,6 +147,41 @@
   "summary_en": "¿Viste lo que pasó?",
   "title_en": "Catch up on the gossip",
   "updated_at": "2026-09-24 09:41:25.175416+00"
+ },
+ {
+  "course_order": 134,
+  "grammar_focus": [
+   "ironia",
+   "repaso.b2"
+  ],
+  "id": "0e125e12-ab8c-5bfd-8a5d-6ae28790e249",
+  "ordinal": 13,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 11,
+  "slug": "ni-ahi",
+  "status": "published",
+  "summary_en": "¿Estás loco? Ni ahí",
+  "title_en": "Read between the lines",
+  "updated_at": "2026-09-24 17:43:46.357923+00"
+ },
+ {
+  "course_order": 127,
+  "grammar_focus": [
+   "a-menos-que",
+   "siempre-y-cuando",
+   "por-si"
+  ],
+  "id": "109ff419-4504-54fc-a4e6-0f7e45175049",
+  "ordinal": 6,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 11,
+  "slug": "a-menos-que",
+  "status": "published",
+  "summary_en": "Voy, a menos que llueva",
+  "title_en": "Set conditions",
+  "updated_at": "2026-09-24 17:21:40.841261+00"
  },
  {
   "course_order": 25,
@@ -299,6 +351,40 @@
   "summary_en": "Aunque llueva, vamos igual",
   "title_en": "Say even if and even though",
   "updated_at": "2026-09-24 15:44:42.843759+00"
+ },
+ {
+  "course_order": 125,
+  "grammar_focus": [
+   "repaso.subjuntivo.relativo",
+   "repaso.me-da",
+   "repaso.deberias"
+  ],
+  "id": "248f8041-e91e-501f-92e4-301a84aab1d9",
+  "ordinal": 4,
+  "register_max": "informal",
+  "review_form_ids": [
+   "7148c6f1-5e56-5d92-b46a-7669b420822a",
+   "2e2fb152-60ff-505c-a3b1-0f8c2197bdd7",
+   "806a7bc8-23ef-58ad-aeff-460417c9901d",
+   "76dd1126-2e75-519b-903c-17e7a2fc4a5a",
+   "06df6c1e-d1b8-5ebd-91a4-b7886a691035",
+   "866c0258-c5f9-5a62-b904-40afd23a0aab",
+   "7f99efe2-bc74-562a-89fa-42b98f437166",
+   "699e31f8-dd04-57c8-b26c-d0337d372d14",
+   "19dbe643-74e4-5601-9094-7bcfc122c738",
+   "aa7d0178-b9eb-51ac-aef1-42854f77d2be",
+   "644bd87e-8646-5be6-b09e-157f27148e74",
+   "c17a6d29-47cd-5bb4-ab86-323f6712fd64",
+   "13d5df9a-ad5f-5654-aff5-5fa1b5f0efa2",
+   "0124d719-520c-54e5-89b2-464090b064d0",
+   "14e86dd8-2427-5875-b1ce-e071861b7b27"
+  ],
+  "section_id": 11,
+  "slug": "practica-me-da-igual",
+  "status": "published",
+  "summary_en": "Deberías buscar algo que te guste",
+  "title_en": "Practice: what you want, what gets to you, advice",
+  "updated_at": "2026-09-24 17:13:11.815745+00"
  },
  {
   "course_order": 3107,
@@ -492,6 +578,23 @@
   "summary_en": "Dicen que va a llover",
   "title_en": "Pass on the news",
   "updated_at": "2026-09-24 09:41:25.175416+00"
+ },
+ {
+  "course_order": 128,
+  "grammar_focus": [
+   "se-pasiva",
+   "carteles"
+  ],
+  "id": "30394d47-559d-52eb-9c24-d6a8bbaeba36",
+  "ordinal": 7,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 11,
+  "slug": "se-alquila",
+  "status": "published",
+  "summary_en": "Se alquila, se vende",
+  "title_en": "Read the signs",
+  "updated_at": "2026-09-24 17:27:11.848914+00"
  },
  {
   "course_order": 24,
@@ -713,6 +816,23 @@
   "summary_en": "Yo que vos, iría",
   "title_en": "Give advice with would",
   "updated_at": "2026-09-24 09:41:25.175416+00"
+ },
+ {
+  "course_order": 132,
+  "grammar_focus": [
+   "caer-bien",
+   "llevarse"
+  ],
+  "id": "48134c2e-dbea-5e66-9343-0b82457b9fc1",
+  "ordinal": 11,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 11,
+  "slug": "me-cae-bien",
+  "status": "published",
+  "summary_en": "Me cae re bien",
+  "title_en": "Say who you get along with",
+  "updated_at": "2026-09-24 17:41:00.784087+00"
  },
  {
   "course_order": 6,
@@ -1106,6 +1226,23 @@
   "updated_at": "2026-09-24 09:41:25.175416+00"
  },
  {
+  "course_order": 124,
+  "grammar_focus": [
+   "deber.condicional",
+   "estaria-bueno"
+  ],
+  "id": "731a6e56-3586-5647-a6ab-12df3dec98b6",
+  "ordinal": 3,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 11,
+  "slug": "deberias",
+  "status": "published",
+  "summary_en": "Deberías descansar",
+  "title_en": "Give advice gently",
+  "updated_at": "2026-09-24 17:15:57.654257+00"
+ },
+ {
   "course_order": 100,
   "grammar_focus": [
    "deportes",
@@ -1296,6 +1433,23 @@
   "summary_en": "¿De dónde sos?",
   "title_en": "Say where you're from",
   "updated_at": "2026-09-18 12:08:20.477971+00"
+ },
+ {
+  "course_order": 130,
+  "grammar_focus": [
+   "plata.inflacion",
+   "subir-bajar"
+  ],
+  "id": "7f76ec46-2ddd-507d-8073-89a5df445d05",
+  "ordinal": 9,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 11,
+  "slug": "todo-aumenta",
+  "status": "published",
+  "summary_en": "Todo aumenta",
+  "title_en": "Talk about prices going up",
+  "updated_at": "2026-09-24 17:32:35.101242+00"
  },
  {
   "course_order": 42,
@@ -1875,6 +2029,24 @@
   "updated_at": "2026-09-23 19:53:48.73596+00"
  },
  {
+  "course_order": 131,
+  "grammar_focus": [
+   "ir.gerundio",
+   "estar-por",
+   "de-a-poco"
+  ],
+  "id": "c5abd659-9dd6-54e9-9e4f-6e906e375953",
+  "ordinal": 10,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 11,
+  "slug": "voy-entendiendo",
+  "status": "published",
+  "summary_en": "De a poco voy entendiendo",
+  "title_en": "Say it's happening little by little",
+  "updated_at": "2026-09-24 17:34:46.097626+00"
+ },
+ {
   "course_order": 15,
   "grammar_focus": [
    "verbos.-ar.pres",
@@ -1963,6 +2135,58 @@
   "updated_at": "2026-09-23 19:51:18.52367+00"
  },
  {
+  "course_order": 133,
+  "grammar_focus": [
+   "repaso.inflacion",
+   "repaso.ir-gerundio",
+   "repaso.caer-bien"
+  ],
+  "id": "c934a093-7470-526c-b293-904cab8a522d",
+  "ordinal": 12,
+  "register_max": "informal",
+  "review_form_ids": [
+   "2446ee36-c2d3-503a-828f-0d31d53712a4",
+   "dc4f3fd0-ba4c-52eb-9789-2749413db2a7",
+   "61cfa49e-1e1f-5eab-8772-525df362884a",
+   "56ba0fc8-5c90-56e3-8b0b-844625815e94",
+   "d5c961c9-04c7-5bd4-a4cb-1ee28db0ffbb",
+   "4e93b206-ad2a-5f14-99dd-cb4545392fb0",
+   "4e33450f-b1d3-5d66-84db-ead00b008c0f",
+   "cf91bdb1-5429-5f92-9458-d4c89729725a",
+   "2934aaf2-8a9e-562c-b7e7-7256db61d0ed",
+   "17b88c58-62d3-514f-8796-6b6e38f54413",
+   "d867ba3b-44de-5681-bc76-8556811b8719",
+   "b77952d8-4c13-53a6-809c-fb4093ce7031",
+   "1d93f2a9-6640-54c6-9698-436ce7139932",
+   "7307a5b7-d2b1-5781-90bc-1da0c4e8d623",
+   "699e31f8-dd04-57c8-b26c-d0337d372d14",
+   "aa7d0178-b9eb-51ac-aef1-42854f77d2be"
+  ],
+  "section_id": 11,
+  "slug": "practica-me-cae-bien",
+  "status": "published",
+  "summary_en": "De a poco me voy acostumbrando",
+  "title_en": "Practice: prices, little by little, getting along",
+  "updated_at": "2026-09-24 17:48:01.092047+00"
+ },
+ {
+  "course_order": 122,
+  "grammar_focus": [
+   "subjuntivo.relativo-indefinido",
+   "alquiler"
+  ],
+  "id": "c9686bb1-fe4a-58d4-b91f-601bade129fa",
+  "ordinal": 1,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 11,
+  "slug": "un-depto-que-tenga",
+  "status": "published",
+  "summary_en": "Busco un depto que tenga balcón",
+  "title_en": "Describe what you're looking for",
+  "updated_at": "2026-09-24 17:10:56.276278+00"
+ },
+ {
   "course_order": 38,
   "grammar_focus": [
    "repaso.preterito-irregular",
@@ -1992,6 +2216,41 @@
   "summary_en": "¿Qué hiciste el finde?",
   "title_en": "Practice: your weekend",
   "updated_at": "2026-09-24 09:55:09.972746+00"
+ },
+ {
+  "course_order": 129,
+  "grammar_focus": [
+   "repaso.discurso-referido",
+   "repaso.a-menos-que",
+   "repaso.se-pasiva"
+  ],
+  "id": "caff1c3a-1951-5288-a7b5-c4e6b51a503a",
+  "ordinal": 8,
+  "register_max": "informal",
+  "review_form_ids": [
+   "69ea83f3-1c8d-5c68-9eaf-b8160593c348",
+   "902ff394-3d8c-5d99-8d4c-44bea18ddfb7",
+   "714f735e-d6a5-5550-bb3d-580391f59f86",
+   "4cf0e27e-aa4b-58eb-938f-b4269624e723",
+   "660d2799-e6c2-5008-980a-34c4591331bf",
+   "f05aae0e-1a56-5e92-94a1-4db41ee1230b",
+   "5cf55ca7-e75a-5d1f-a010-5342c962f282",
+   "627af654-35e8-5971-82d0-305c480c4898",
+   "57e7e70e-6b73-5bf1-a69c-773fcf70d69e",
+   "d7248f00-d3e5-5fb7-9723-b9591cf793eb",
+   "2f03fe34-532e-5e37-a25d-588ee2416662",
+   "da57efca-dee4-59a5-af99-a9d988804f85",
+   "4fbf785b-f3ed-5964-a170-6d67ab7ad2e6",
+   "266bac6a-0e41-562c-9563-73c46b8e0be2",
+   "aa7d0178-b9eb-51ac-aef1-42854f77d2be",
+   "02e3e661-3338-52cf-b8d2-ff2ab43989ae"
+  ],
+  "section_id": 11,
+  "slug": "practica-se-alquila",
+  "status": "published",
+  "summary_en": "Me prometió que vendría",
+  "title_en": "Practice: promises, conditions and signs",
+  "updated_at": "2026-09-24 17:35:43.978113+00"
  },
  {
   "course_order": 2,
@@ -2449,6 +2708,23 @@
   "summary_en": "Es re buena onda",
   "title_en": "Describe what people are like",
   "updated_at": "2026-09-24 09:41:25.175416+00"
+ },
+ {
+  "course_order": 123,
+  "grammar_focus": [
+   "me-da.emocion",
+   "subjuntivo.emocion"
+  ],
+  "id": "fc31544c-c615-5722-9494-5a728b6cf9be",
+  "ordinal": 2,
+  "register_max": "informal",
+  "review_form_ids": [],
+  "section_id": 11,
+  "slug": "me-da-bronca",
+  "status": "published",
+  "summary_en": "Me da bronca que no avise",
+  "title_en": "Say what gets to you",
+  "updated_at": "2026-09-24 17:04:07.358313+00"
  },
  {
   "course_order": 36,

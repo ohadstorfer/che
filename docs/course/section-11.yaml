@@ -1,0 +1,709 @@
+# ---------------------------------------------------------------------------
+# Che — Section 11 outline: "Between the lines" (B2.2)
+#
+# Saying what you mean without saying it outright: the subjunctive for what
+# you're looking for but haven't found (un depto que tenga balcón), feelings
+# that "give" you something (me da bronca que…), tactful advice (deberías,
+# estaría bueno), what someone said they'd do (dijo que vendría), conditions
+# (a menos que, por si), the signs on every door (se alquila), money in an
+# inflationary city, things happening little by little (voy entendiendo),
+# who you get along with (me cae bien), and a checkpoint of porteño irony.
+#
+# Plan: docs/course/roadmap.md §Section 11.
+# Validate:  npm run course:validate -- --yaml
+# ---------------------------------------------------------------------------
+
+section:
+  id: 11
+  slug: "between-the-lines"
+  title: "Between the lines"
+  cefr: "B2.2"
+  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
+units:
+  - ordinal: 1
+    slug: "un-depto-que-tenga"
+    title: "Describe what you're looking for"
+    summary: "Busco un depto que tenga balcón"
+    grammar:
+      - "subjuntivo.relativo-indefinido"
+      - "alquiler"
+    register_max: "informal"
+    sample:
+      es: "Busco un depto que tenga balcón."
+      en: "I'm looking for an apartment that has a balcony."
+    tips:
+      - title: "Que tenga"
+        body: "Something you're looking for but haven't found yet takes the subjunctive: **busco un depto
+          que tenga balcón**. Once you've found it, it doesn't: *encontré un depto que tiene balcón*."
+      - title: "La garantía"
+        body: "Renting in Buenos Aires means the **inmobiliaria** asks for a **garantía** — a relative's
+          property as a guarantee — and a **contrato**. Some **dueños** don't take **mascotas**."
+    words:
+      - lemma: "quedar"
+        pos: "verb"
+        forms:
+          - form: "quede"
+            en: "(that) it's located, (that) it's"
+            f: "3sg.pres.subj"
+      - lemma: "aceptar"
+        pos: "verb"
+        en: "to accept, to allow"
+        forms:
+          - form: "acepte"
+            en: "(that) accepts, (that) allows"
+            f: "3sg.pres.subj"
+          - form: "acepta"
+            en: "accepts, allows"
+            f: "3sg.pres.ind"
+      - lemma: "mascota"
+        pos: "noun"
+        en: "pet"
+        forms:
+          - form: "mascota"
+            f: "f.sg"
+          - form: "mascotas"
+            f: "f.pl"
+      - lemma: "dueño"
+        pos: "noun"
+        en: "owner, landlord"
+        forms:
+          - form: "dueño"
+            f: "m.sg"
+          - form: "dueña"
+            f: "f.sg"
+      - lemma: "contrato"
+        pos: "noun"
+        en: "contract, lease"
+      - lemma: "garantía"
+        pos: "noun"
+        en: "guarantor (for a lease)"
+      - lemma: "inmobiliaria"
+        pos: "noun"
+        en: "real estate agency"
+      - lemma: "luminoso"
+        pos: "adj"
+        en: "bright, full of light"
+        forms:
+          - form: "luminoso"
+            f: "m.sg"
+          - form: "luminosa"
+            f: "f.sg"
+
+  - ordinal: 2
+    slug: "me-da-bronca"
+    title: "Say what gets to you"
+    summary: "Me da bronca que no avise"
+    grammar:
+      - "me-da.emocion"
+      - "subjuntivo.emocion"
+    register_max: "informal"
+    sample:
+      es: "Me da bronca que no avise."
+      en: "It makes me mad that he doesn't let us know."
+    tips:
+      - title: "Me da bronca"
+        body: "Porteños say a feeling *gives* them something: **me da bronca** — *it makes me mad*; **me da
+          vergüenza** — *I'm embarrassed*; **me da lástima** — *I feel sorry*; **me da igual** — *I
+          don't care*."
+      - title: "Que + subjunctive"
+        body: "What causes the feeling follows **que** in the subjunctive: **me da bronca que no
+          conteste**, **me da vergüenza que me vean así**."
+    words:
+      - lemma: "bronca"
+        pos: "noun"
+        en: "anger"
+        register: "informal"
+      - lemma: "vergüenza"
+        pos: "noun"
+        en: "embarrassment, shame"
+      - lemma: "lástima"
+        pos: "noun"
+        en: "pity"
+      - lemma: "me da igual"
+        pos: "phrase"
+        en: "I don't care, it's all the same to me"
+      - lemma: "avisar"
+        pos: "verb"
+        forms:
+          - form: "avise"
+            en: "(that) he lets know, (that) I let know"
+            f: "sg.pres.subj"
+      - lemma: "contestar"
+        pos: "verb"
+        forms:
+          - form: "conteste"
+            en: "(that) he answers, (that) I answer"
+            f: "sg.pres.subj"
+      - lemma: "ver"
+        pos: "verb"
+        forms:
+          - form: "vean"
+            en: "(that) they see"
+            f: "3pl.pres.subj.irregular"
+
+  - ordinal: 3
+    slug: "deberias"
+    title: "Give advice gently"
+    summary: "Deberías descansar"
+    grammar:
+      - "deber.condicional"
+      - "estaria-bueno"
+    register_max: "informal"
+    sample:
+      es: "Deberías descansar un poco."
+      en: "You should rest a little."
+    tips:
+      - title: "Deberías"
+        body: "**Deberías** — *you should* — is advice with the edges sanded off: **deberías descansar**.
+          **Debería** is *I should* or *he should*: *debería llamar a mi vieja*."
+      - title: "Estaría bueno"
+        body: "The softest porteño suggestion is **estaría bueno** — *it would be nice*: **estaría bueno
+          juntarnos**, **estaría bueno que vengas**. **Habría que** is *we ought to*: *habría que avisarle*."
+    words:
+      - lemma: "deber"
+        pos: "verb"
+        forms:
+          - form: "deberías"
+            en: "you should"
+            f: "2sg.cond.ind.vos"
+          - form: "debería"
+            en: "I should, he should, she should"
+            f: "sg.cond.ind"
+      - lemma: "estaría bueno"
+        pos: "phrase"
+        en: "it would be nice, it would be good"
+      - lemma: "habría que"
+        pos: "phrase"
+        en: "we ought to, someone should"
+      - lemma: "consejo"
+        pos: "noun"
+        en: "piece of advice"
+      - lemma: "cuidar"
+        pos: "verb"
+        en: "to take care of, to look after"
+        forms:
+          - form: "cuidar"
+            f: "inf"
+          - form: "cuido"
+            en: "I take care of"
+            f: "1sg.pres.ind"
+
+  - ordinal: 4
+    slug: "practica-me-da-igual"
+    title: "Practice: what you want, what gets to you, advice"
+    summary: "Deberías buscar algo que te guste"
+    grammar:
+      - "repaso.subjuntivo.relativo"
+      - "repaso.me-da"
+      - "repaso.deberias"
+    register_max: "informal"
+    sample:
+      es: "Me da igual."
+      en: "I don't care."
+    tips:
+      - title: "Que tenga, que avise"
+        body: "The subjunctive after **que** for what you haven't found (*un depto que tenga balcón*) and for what makes you feel something (*me da bronca que no avise*)."
+      - title: "Deberías, estaría bueno"
+        body: "**Deberías** for advice, **estaría bueno** for a gentle suggestion."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "quede"
+      - "acepte"
+      - "mascotas"
+      - "dueño"
+      - "contrato"
+      - "bronca"
+      - "vergüenza"
+      - "me da igual"
+      - "avise"
+      - "deberías"
+      - "debería"
+      - "estaría bueno"
+      - "habría que"
+      - "quería"
+      - "aunque"
+
+  - ordinal: 5
+    slug: "dijo-que-vendria"
+    title: "Say what someone said they'd do"
+    summary: "Dijo que vendría"
+    grammar:
+      - "discurso-referido.condicional"
+      - "prometer"
+    register_max: "informal"
+    sample:
+      es: "Juan dijo que vendría, pero no vino."
+      en: "Juan said he'd come, but he didn't."
+    tips:
+      - title: "Vendrá → vendría"
+        body: "Reporting a promise moves it into *would*: «voy» → **dijo que iría**; «te llamo» → **dijo que
+          me llamaría**. Porteños also say **dijo que iba a venir** — same thing."
+      - title: "Me prometiste"
+        body: "**Me prometiste que vendrías** — *you promised me you'd come*. And the classic ending:
+          **al final no vino**."
+    words:
+      - lemma: "venir"
+        pos: "verb"
+        forms:
+          - form: "vendría"
+            en: "I would come, he would come"
+            f: "sg.cond.ind.irregular"
+          - form: "vendrías"
+            en: "you would come"
+            f: "2sg.cond.ind.vos.irregular"
+      - lemma: "llamar"
+        pos: "verb"
+        forms:
+          - form: "llamaría"
+            en: "I would call, he would call"
+            f: "sg.cond.ind"
+      - lemma: "prometer"
+        pos: "verb"
+        en: "to promise"
+        forms:
+          - form: "prometió"
+            en: "he promised, she promised"
+            f: "3sg.pret.ind"
+          - form: "prometiste"
+            en: "you promised"
+            f: "2sg.pret.ind.vos"
+          - form: "prometo"
+            en: "I promise"
+            f: "1sg.pres.ind"
+      - lemma: "promesa"
+        pos: "noun"
+        en: "promise"
+      - lemma: "cumplir"
+        pos: "verb"
+        en: "to keep (a promise), to fulfil"
+        forms:
+          - form: "cumplió"
+            en: "he kept (his word)"
+            f: "3sg.pret.ind"
+          - form: "cumplir"
+            f: "inf"
+
+  - ordinal: 6
+    slug: "a-menos-que"
+    title: "Set conditions"
+    summary: "Voy, a menos que llueva"
+    grammar:
+      - "a-menos-que"
+      - "siempre-y-cuando"
+      - "por-si"
+    register_max: "informal"
+    sample:
+      es: "Voy, a menos que llueva."
+      en: "I'll go, unless it rains."
+    tips:
+      - title: "A menos que, siempre y cuando"
+        body: "Conditions that haven't happened take the subjunctive: **a menos que llueva** — *unless it
+          rains*; **siempre y cuando vengas** — *as long as you come*; **en caso de que** — *in case*."
+      - title: "Por si"
+        body: "**Por si** — *just in case* — is the exception: it keeps the normal verb. **Llevá paraguas
+          por si llueve.** Short version: **por las dudas**."
+    words:
+      - lemma: "a menos que"
+        pos: "phrase"
+        en: "unless"
+      - lemma: "siempre y cuando"
+        pos: "phrase"
+        en: "as long as, provided that"
+      - lemma: "en caso de que"
+        pos: "phrase"
+        en: "in case"
+      - lemma: "por si"
+        pos: "phrase"
+        en: "just in case, in case"
+      - lemma: "pagar"
+        pos: "verb"
+        forms:
+          - form: "pague"
+            en: "(that) he pays, (that) I pay"
+            f: "sg.pres.subj"
+
+  - ordinal: 7
+    slug: "se-alquila"
+    title: "Read the signs"
+    summary: "Se alquila, se vende"
+    grammar:
+      - "se-pasiva"
+      - "carteles"
+    register_max: "informal"
+    sample:
+      es: "Ese depto se alquila."
+      en: "That apartment is for rent."
+    tips:
+      - title: "Se vende, se alquila"
+        body: "Signs say what's done without saying who: **se vende** — *for sale*; **se alquila** — *for
+          rent*; **se necesita mozo** — *waiter wanted*. More than one thing: **se venden bicis**."
+      - title: "Prohibido"
+        body: "**Prohibido estacionar** — *no parking*; **prohibido fumar** — *no smoking*. The sign
+          itself is a **cartel**."
+    words:
+      - lemma: "vender"
+        pos: "verb"
+        en: "to sell"
+        forms:
+          - form: "se vende"
+            en: "for sale, is sold"
+            f: "3sg.pres.ind.clitic"
+          - form: "se venden"
+            en: "for sale (several), are sold"
+            f: "3pl.pres.ind.clitic"
+          - form: "vende"
+            f: "3sg.pres.ind"
+            bound: true
+          - form: "venden"
+            f: "3pl.pres.ind"
+            bound: true
+          - form: "vendí"
+            en: "I sold"
+            f: "1sg.pret.ind"
+      - lemma: "alquilar"
+        pos: "verb"
+        forms:
+          - form: "se alquila"
+            en: "for rent, is rented"
+            f: "3sg.pres.ind.clitic"
+      - lemma: "necesitar"
+        pos: "verb"
+        forms:
+          - form: "se necesita"
+            en: "wanted, is needed"
+            f: "3sg.pres.ind.clitic"
+      - lemma: "prohibido"
+        pos: "adj"
+        en: "forbidden, not allowed"
+        forms:
+          - form: "prohibido"
+            f: "m.sg"
+      - lemma: "cartel"
+        pos: "noun"
+        en: "sign"
+      - lemma: "bici"
+        pos: "noun"
+        en: "bike"
+        forms:
+          - form: "bici"
+            f: "f.sg"
+          - form: "bicis"
+            f: "f.pl"
+
+  - ordinal: 8
+    slug: "practica-se-alquila"
+    title: "Practice: promises, conditions and signs"
+    summary: "Me prometió que vendría"
+    grammar:
+      - "repaso.discurso-referido"
+      - "repaso.a-menos-que"
+      - "repaso.se-pasiva"
+    register_max: "informal"
+    sample:
+      es: "Me prometió que vendría."
+      en: "He promised me he'd come."
+    tips:
+      - title: "Dijo que vendría"
+        body: "Reported promises go into *would*: **dijo que vendría**, **me prometiste que me llamarías**."
+      - title: "A menos que, por si"
+        body: "**A menos que** takes the subjunctive (*a menos que llueva*); **por si** doesn't (*por si llueve*)."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "vendría"
+      - "vendrías"
+      - "llamaría"
+      - "prometió"
+      - "prometiste"
+      - "cumplió"
+      - "a menos que"
+      - "siempre y cuando"
+      - "por si"
+      - "pague"
+      - "se vende"
+      - "se alquila"
+      - "prohibido"
+      - "cartel"
+      - "deberías"
+      - "hubiera"
+
+  - ordinal: 9
+    slug: "todo-aumenta"
+    title: "Talk about prices going up"
+    summary: "Todo aumenta"
+    grammar:
+      - "plata.inflacion"
+      - "subir-bajar"
+    register_max: "informal"
+    sample:
+      es: "Todo aumenta todos los meses."
+      en: "Everything goes up every month."
+    tips:
+      - title: "Todo aumenta"
+        body: "In Buenos Aires prices **aumentan** so often that the word is small talk: **¿viste cómo
+          aumentó el café?** The **aumento** of your salary never quite keeps up with the **inflación**."
+      - title: "Subir, bajar, cobrar"
+        body: "Prices **suben** and, now and then, **bajan**. **¿Cuánto te cobraron?** — *how much did they
+          charge you?* A **precio** is a price; *está a buen precio* — *it's a good price*."
+    words:
+      - lemma: "aumentar"
+        pos: "verb"
+        en: "to go up, to increase"
+        forms:
+          - form: "aumenta"
+            en: "goes up"
+            f: "3sg.pres.ind"
+          - form: "aumentó"
+            en: "went up"
+            f: "3sg.pret.ind"
+      - lemma: "aumento"
+        pos: "noun"
+        en: "raise, increase"
+      - lemma: "inflación"
+        pos: "noun"
+        en: "inflation"
+      - lemma: "precio"
+        pos: "noun"
+        en: "price"
+        forms:
+          - form: "precio"
+            f: "m.sg"
+          - form: "precios"
+            f: "m.pl"
+      - lemma: "subir"
+        pos: "verb"
+        en: "to go up, to rise"
+        forms:
+          - form: "suben"
+            en: "go up"
+            f: "3pl.pres.ind"
+          - form: "subió"
+            en: "went up"
+            f: "3sg.pret.ind"
+      - lemma: "bajar"
+        pos: "verb"
+        en: "to go down, to drop"
+        forms:
+          - form: "bajó"
+            en: "went down"
+            f: "3sg.pret.ind"
+      - lemma: "cobrar"
+        pos: "verb"
+        en: "to charge, to get paid"
+        forms:
+          - form: "cobraron"
+            en: "they charged"
+            f: "3pl.pret.ind"
+          - form: "cobro"
+            en: "I get paid, I charge"
+            f: "1sg.pres.ind"
+
+  - ordinal: 10
+    slug: "voy-entendiendo"
+    title: "Say it's happening little by little"
+    summary: "De a poco voy entendiendo"
+    grammar:
+      - "ir.gerundio"
+      - "estar-por"
+      - "de-a-poco"
+    register_max: "informal"
+    sample:
+      es: "De a poco voy entendiendo."
+      en: "Little by little I'm starting to understand."
+    tips:
+      - title: "Voy entendiendo"
+        body: "**Ir** + *-ando, -iendo* is something happening bit by bit: **voy entendiendo** — *I'm
+          starting to get it*; **se va llenando** — *it's filling up*. **De a poco** — *little by
+          little* — goes with it."
+      - title: "Estoy por salir"
+        body: "**Estar por** + infinitive is *to be about to*: **estoy por salir** — *I'm just about to
+          leave*. A porteño's *I'm on my way* is often **ya salgo**, which may mean in an hour."
+    words:
+      - lemma: "entender"
+        pos: "verb"
+        forms:
+          - form: "entendiendo"
+            en: "understanding"
+            f: "ger"
+      - lemma: "aprender"
+        pos: "verb"
+        forms:
+          - form: "aprendiendo"
+            en: "learning"
+            f: "ger"
+      - lemma: "decir"
+        pos: "verb"
+        forms:
+          - form: "diciendo"
+            en: "saying"
+            f: "ger"
+      - lemma: "de a poco"
+        pos: "phrase"
+        en: "little by little, gradually"
+      - lemma: "estar por"
+        pos: "phrase"
+        en: "to be about to"
+        forms:
+          - form: "estoy por"
+            en: "I'm about to"
+            f: "1sg.pres.ind"
+          - form: "está por"
+            en: "he's about to, it's about to"
+            f: "3sg.pres.ind"
+      - lemma: "acostumbrarse"
+        pos: "verb"
+        en: "to get used to"
+        forms:
+          - form: "me acostumbré"
+            en: "I got used to"
+            f: "1sg.pret.ind.clitic"
+          - form: "acostumbré"
+            f: "1sg.pret.ind"
+            bound: true
+
+  - ordinal: 11
+    slug: "me-cae-bien"
+    title: "Say who you get along with"
+    summary: "Me cae re bien"
+    grammar:
+      - "caer-bien"
+      - "llevarse"
+    register_max: "informal"
+    sample:
+      es: "Tu amiga me cae re bien."
+      en: "I really like your friend."
+    tips:
+      - title: "Me cae bien"
+        body: "**Me cae bien** is *I like him* — as a person, not romantically. It works like *gustar*:
+          **me cae bien Juan**, **me caen bien tus amigos**. The first impression: **me cayó mal**."
+      - title: "Nos llevamos bien"
+        body: "**Llevarse bien** is *to get along*: **me llevo bien con mi hermana**, **nos llevamos
+          re mal**."
+    words:
+      - lemma: "caer"
+        pos: "verb"
+        en: "to come across (to someone)"
+        forms:
+          - form: "me cae"
+            en: "(he) comes across to me"
+            f: "3sg.pres.ind.clitic"
+          - form: "te cae"
+            en: "(he) comes across to you"
+            f: "3sg.pres.ind.clitic"
+          - form: "me caen"
+            en: "(they) come across to me"
+            f: "3pl.pres.ind.clitic"
+          - form: "me cayó"
+            en: "(he) came across to me"
+            f: "3sg.pret.ind.clitic.irregular"
+          - form: "cae"
+            f: "3sg.pres.ind"
+            bound: true
+          - form: "caen"
+            f: "3pl.pres.ind"
+            bound: true
+      - lemma: "llevarse"
+        pos: "verb"
+        en: "to get along"
+        forms:
+          - form: "me llevo"
+            en: "I get along"
+            f: "1sg.pres.ind.clitic"
+          - form: "nos llevamos"
+            en: "we get along"
+            f: "1pl.pres.ind.clitic"
+          - form: "llevamos"
+            f: "1pl.pres.ind"
+            bound: true
+      - lemma: "suegro"
+        pos: "noun"
+        en: "father-in-law"
+        forms:
+          - form: "suegro"
+            en: "father-in-law"
+            f: "m.sg"
+          - form: "suegra"
+            en: "mother-in-law"
+            f: "f.sg"
+
+  - ordinal: 12
+    slug: "practica-me-cae-bien"
+    title: "Practice: prices, little by little, getting along"
+    summary: "De a poco me voy acostumbrando"
+    grammar:
+      - "repaso.inflacion"
+      - "repaso.ir-gerundio"
+      - "repaso.caer-bien"
+    register_max: "informal"
+    sample:
+      es: "Mi suegra me cae bien."
+      en: "I like my mother-in-law."
+    tips:
+      - title: "Aumentó, subió"
+        body: "**Todo aumenta**, **el café subió**, **¿cuánto te cobraron?** — the small talk of prices."
+      - title: "Voy entendiendo, me cae bien"
+        body: "**Voy entendiendo** — bit by bit. **Me cae bien** — I like him, as a person."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "aumenta"
+      - "aumentó"
+      - "precio"
+      - "subió"
+      - "cobraron"
+      - "entendiendo"
+      - "de a poco"
+      - "estoy por"
+      - "me acostumbré"
+      - "me cae"
+      - "me cayó"
+      - "me llevo"
+      - "nos llevamos"
+      - "suegra"
+      - "me da igual"
+      - "deberías"
+
+  - ordinal: 13
+    slug: "ni-ahi"
+    title: "Read between the lines"
+    summary: "¿Estás loco? Ni ahí"
+    grammar:
+      - "ironia"
+      - "repaso.b2"
+    register_max: "informal"
+    sample:
+      es: "¿Ir en auto al centro? Ni ahí."
+      en: "Drive downtown? No way."
+    tips:
+      - title: "Ni ahí"
+        body: "**Ni ahí** — *no way, not even close* — is how a porteño turns something down. **Tal cual**
+          — *exactly* — is how they agree."
+      - title: "Es cualquiera"
+        body: "**Es cualquiera** — *that's nonsense*. **Flasheaste** — *you're imagining things*. And a
+          **¡qué lindo!** can be sincere, or ironic when the rain starts."
+    words:
+      - lemma: "ni ahí"
+        pos: "phrase"
+        en: "no way, not at all"
+        register: "informal"
+      - lemma: "tal cual"
+        pos: "phrase"
+        en: "exactly"
+      - lemma: "cualquiera"
+        pos: "pron"
+        en: "nonsense (es cualquiera); anyone"
+        register: "informal"
+      - lemma: "flashear"
+        pos: "verb"
+        en: "to imagine things, to get carried away"
+        register: "informal"
+        forms:
+          - form: "flasheaste"
+            en: "you imagined it"
+            f: "2sg.pret.ind.vos"
+      - lemma: "loco"
+        pos: "adj"
+        en: "crazy"
+        forms:
+          - form: "loco"
+            f: "m.sg"
+          - form: "loca"
+            f: "f.sg"
