@@ -293,6 +293,18 @@ units:
       - lemma: "selección"
         pos: "noun"
         en: "national team"
+      - lemma: "jugar"
+        pos: "verb"
+        forms:
+          - form: "juega"
+            en: "plays"
+            f: "3sg.pres.ind.irregular"
+          - form: "jugamos"
+            en: "we play, we played"
+            f: "1pl.pres.ind"
+          - form: "jugó"
+            en: "played"
+            f: "3sg.pret.ind"
 
   - ordinal: 5
     slug: "no-anda"
@@ -393,6 +405,12 @@ units:
       - lemma: "opinión"
         pos: "noun"
         en: "opinion"
+      - lemma: "eso"
+        pos: "pron"
+        en: "that"
+      - lemma: "esto"
+        pos: "pron"
+        en: "this"
 
   - ordinal: 7
     slug: "el-cajero"
@@ -444,6 +462,12 @@ units:
           - form: "cuentas"
             en: "bills, accounts"
             f: "f.pl"
+      - lemma: "comprar"
+        pos: "verb"
+        forms:
+          - form: "comprar"
+            en: "to buy"
+            f: "inf"
 
   - ordinal: 8
     slug: "que-susto"
@@ -500,6 +524,12 @@ units:
           - form: "corrí"
             en: "I ran"
             f: "1sg.pret.ind"
+      - lemma: "perdón"
+        pos: "interj"
+        en: "sorry"
+      - lemma: "uy"
+        pos: "interj"
+        en: "oh no, whoa"
 
   - ordinal: 9
     slug: "costumbres"
@@ -586,6 +616,9 @@ units:
         pos: "noun"
         en: "gossip (person)"
         register: "informal"
+      - lemma: "quién"
+        pos: "pron"
+        en: "who"
       - lemma: "chusmear"
         pos: "verb"
         en: "to gossip, to snoop"
