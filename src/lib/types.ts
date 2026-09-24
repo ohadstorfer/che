@@ -82,7 +82,7 @@ export interface FormFeatures {
    *  (era, jugábamos), for what was going on and what used to happen. */
   tense?: 'pres' | 'pret' | 'impf' | 'fut' | 'cond';
   mood?: 'ind' | 'imp' | 'subj';
-  verb_form?: 'inf' | 'ger';
+  verb_form?: 'inf' | 'ger' | 'part';
   voseo?: boolean;
   clitic?: boolean;
   gender?: 'm' | 'f';

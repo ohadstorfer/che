@@ -23,6 +23,7 @@ export const CONCEPT_LABELS: Record<string, string> = {
   'verbo.subjuntivo': 'the subjunctive (que vengas, ojalá)',
   'verbo.gerundio': 'the -ando / -iendo form',
   'verbo.infinitivo': 'infinitives',
+  'verbo.participio': 'past participles (había comido)',
   ser: 'ser',
   estar: 'estar',
   tener: 'tener',
@@ -39,6 +40,7 @@ export function conceptsOf(form: Pick<Form, 'lemma' | 'pos' | 'features'>): stri
     else if (f.mood === 'imp' && f.voseo) out.push('verbo.imperativo.vos');
     else if (f.verb_form === 'ger') out.push('verbo.gerundio');
     else if (f.verb_form === 'inf') out.push('verbo.infinitivo');
+    else if (f.verb_form === 'part') out.push('verbo.participio');
     else if (f.tense === 'impf') out.push('verbo.imperfecto');
     else if (f.tense === 'fut') out.push('verbo.futuro');
     else if (f.tense === 'cond') out.push('verbo.condicional');

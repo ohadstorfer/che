@@ -31,6 +31,7 @@ export const FEATURE_TAGS: Record<string, FormFeatures> = {
   subj: { mood: 'subj' },
   inf: { verb_form: 'inf' },
   ger: { verb_form: 'ger' },
+  part: { verb_form: 'part' },
   vos: { voseo: true },
   clitic: { clitic: true },
   m: { gender: 'm' },

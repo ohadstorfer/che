@@ -12,5 +12,6 @@ export const SECTION_CAN_DO: Record<string, string> = {
   'plans-and-favours': 'Puedo pedir favores, arreglarme con el celu y agradecer como un porteño.',
   'wishes-and-advice': 'Puedo desearte suerte, dar consejos y opinar sin quedar mal.',
   'if-i-were-you': 'Puedo dar consejos, imaginar qué haría y moverme por Buenos Aires como si fuera de acá.',
+  'stories-and-opinions': 'Puedo contar lo que me pasó, discutir sin pelearme y chusmear como corresponde.',
   'when-i-was-a-kid': 'Puedo contar cómo era mi vida de chico, pedir en un restaurante y armar planes.',
 };
