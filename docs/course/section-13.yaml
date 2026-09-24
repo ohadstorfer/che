@@ -3,7 +3,7 @@
 #
 # Public life in Buenos Aires, told the way porteños tell it: strikes and
 # road blocks (hoy hay paro), the passive of the news (fue construido), voting
-# without the politics, rumours and sources (según el diario), getting robbed
+# without the politics, rumors and sources (según el diario), getting robbed
 # and reporting it, the building and its expensas, the club you support, the
 # tango, the parrilla — and a checkpoint that weighs up the city (lo bueno de
 # vivir acá).
@@ -138,7 +138,7 @@ units:
       en: "Who did you vote for?"
     tips:
       - title: "Votar"
-        body: "In Argentina voting is **obligatorio**. **¿A quién votaste?** is a real question, though
+        body: "In Argentina voting is **obligatorio** — *mandatory*. **¿A quién votaste?** is a real question, though
           many answer **eso no se pregunta**. **Votar a** someone: *voté a la misma candidata*."
       - title: "Las elecciones"
         body: "**Las elecciones** — *the elections* — decide the **gobierno** and the **presidente**.
@@ -183,7 +183,7 @@ units:
             f: "f.sg"
       - lemma: "obligatorio"
         pos: "adj"
-        en: "compulsory"
+        en: "mandatory, required"
         forms:
           - form: "obligatorio"
             f: "m.sg"
@@ -221,6 +221,7 @@ units:
       - "elecciones"
       - "candidata"
       - "gobierno"
+      - "obligatorio"
       - "se enteró"
       - "resulta que"
 
@@ -241,7 +242,7 @@ units:
           **supuestamente** keep a distance from what you're passing on."
       - title: "¿Está confirmado?"
         body: "A **rumor** is just that until someone **confirma**: *el club confirmó la noticia*. Or
-          as porteños say about any rumour: **dicen que…**"
+          as porteños say about any rumor: **dicen que…**"
     words:
       - lemma: "según"
         pos: "prep"
@@ -264,7 +265,7 @@ units:
             f: "3pl.pret.ind"
       - lemma: "rumor"
         pos: "noun"
-        en: "rumour"
+        en: "rumor"
 
   - ordinal: 6
     slug: "me-robaron"
@@ -374,7 +375,7 @@ units:
 
   - ordinal: 8
     slug: "practica-me-robaron"
-    title: "Practice: rumours, thefts and the building"
+    title: "Practice: rumors, thefts and the building"
     summary: "Según el encargado, se rompió el calefón"
     grammar:
       - "repaso.fuentes"
@@ -430,7 +431,7 @@ units:
     words:
       - lemma: "cuadro"
         pos: "noun"
-        en: "club (football)"
+        en: "club (soccer)"
       - lemma: "hinchar"
         pos: "verb"
         en: "to support (a team)"
@@ -443,13 +444,13 @@ units:
             f: "2sg.pres.ind.vos"
       - lemma: "superclásico"
         pos: "noun"
-        en: "Boca–River derby"
+        en: "Boca–River match"
       - lemma: "clásico"
         pos: "noun"
-        en: "derby"
+        en: "derby, rivalry game"
       - lemma: "tribuna"
         pos: "noun"
-        en: "stands, terraces"
+        en: "stands, bleachers"
       - lemma: "Boca"
         pos: "propn"
         en: "Boca Juniors"

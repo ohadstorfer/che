@@ -377,7 +377,7 @@ units:
     words:
       - lemma: "chabón"
         pos: "noun"
-        en: "bloke, fella"
+        en: "dude, guy"
         register: "lunfardo"
       - lemma: "mina"
         pos: "noun"
@@ -495,7 +495,7 @@ units:
     register_max: "informal"
     sample:
       es: "Cuanto más practicás, mejor hablás."
-      en: "The more you practise, the better you speak."
+      en: "The more you practice, the better you speak."
     tips:
       - title: "Cuanto más…"
         body: "**Cuanto más** — *the more*: **cuanto más practicás, mejor hablás**. **Cuanto menos** —
@@ -518,12 +518,12 @@ units:
         en: "as (gradually)"
       - lemma: "practicar"
         pos: "verb"
-        en: "to practise"
+        en: "to practice"
         forms:
           - form: "practicar"
             f: "inf"
           - form: "practicás"
-            en: "you practise"
+            en: "you practice"
             f: "2sg.pres.ind.vos"
 
   - ordinal: 12
@@ -600,7 +600,7 @@ units:
           - form: "ofender"
             f: "inf"
           - form: "te ofendiste"
-            en: "you took offence"
+            en: "you took offense"
             f: "2sg.pret.ind.vos.clitic"
           - form: "ofendiste"
             f: "2sg.pret.ind.vos"
