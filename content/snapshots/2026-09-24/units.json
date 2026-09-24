@@ -62,8 +62,8 @@
    "arreglar"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 20:48:03.646632+00",
   "course_order": 154,
   "review_form_ids": []
  },
@@ -813,8 +813,8 @@
    "politica.sin-politica"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 20:31:32.486001+00",
   "course_order": 150,
   "review_form_ids": []
  },
@@ -1664,8 +1664,8 @@
    "es-que"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:21:45.983013+00",
   "course_order": 161,
   "review_form_ids": []
  },
@@ -1734,8 +1734,8 @@
    "repaso.voz-pasiva"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 20:37:22.153033+00",
   "course_order": 151,
   "review_form_ids": [
    "f951f4e4-8f58-5e5b-8dd1-3e32d7615d59",
@@ -1754,7 +1754,8 @@
    "f5aa9abd-9e57-5c63-85f7-f7921b99e132",
    "55e9c7e5-cdc2-5c51-928d-3a87e4d434ee",
    "b73e7dfe-a9cd-5017-afaa-def9790a83d4",
-   "88bf9f74-b6f4-5af7-b4f2-6e7cf288de53"
+   "88bf9f74-b6f4-5af7-b4f2-6e7cf288de53",
+   "90a38da1-bc60-5563-b46e-c25acc6c5b29"
   ]
  },
  {
@@ -1769,8 +1770,8 @@
    "seguridad"
   ],
   "register_max": "lunfardo",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 20:44:03.324038+00",
   "course_order": 153,
   "review_form_ids": []
  },
@@ -1796,15 +1797,15 @@
   "section_id": 13,
   "ordinal": 9,
   "slug": "de-que-cuadro-sos",
-  "title_en": "Say which club you support",
+  "title_en": "Say which team you root for",
   "summary_en": "¿De qué cuadro sos?",
   "grammar_focus": [
    "futbol.hinchada",
    "hinchar"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:01:27.240021+00",
   "course_order": 156,
   "review_form_ids": []
  },
@@ -1923,12 +1924,11 @@
   ],
   "register_max": "informal",
   "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "updated_at": "2026-09-24 21:22:13.611047+00",
   "course_order": 164,
   "review_form_ids": [
    "292da13b-10ef-545c-a8a2-ae7367ae16c6",
    "ab54ad8f-7e3a-5c75-8393-c6984cba0951",
-   "7f295f6c-0945-551e-9b0c-977d070374d4",
    "48dfb204-928d-5c33-988f-8b99e13c3116",
    "a07db38c-410b-54ab-9d0f-26e3a158594f",
    "2c64c429-8772-569c-b8e7-31e85b0be687",
@@ -2551,7 +2551,7 @@
   "section_id": 13,
   "ordinal": 8,
   "slug": "practica-me-robaron",
-  "title_en": "Practice: rumours, thefts and the building",
+  "title_en": "Practice: rumors, thefts and the building",
   "summary_en": "Según el encargado, se rompió el calefón",
   "grammar_focus": [
    "repaso.fuentes",
@@ -2559,8 +2559,8 @@
    "repaso.edificio"
   ],
   "register_max": "lunfardo",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 20:52:06.645879+00",
   "course_order": 155,
   "review_form_ids": [
    "a441cb19-fffe-5ab4-b980-2254a80b47b7",
@@ -2710,8 +2710,8 @@
    "cantar"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:04:59.094141+00",
   "course_order": 157,
   "review_form_ids": []
  },
@@ -3052,8 +3052,8 @@
    "comida.parrilla"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:08:54.58891+00",
   "course_order": 158,
   "review_form_ids": []
  },
@@ -3132,8 +3132,8 @@
    "pluscuamperfecto.subjuntivo"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:29:30.939264+00",
   "course_order": 162,
   "review_form_ids": []
  },
@@ -3182,8 +3182,8 @@
    "rumor"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 20:40:38.447534+00",
   "course_order": 152,
   "review_form_ids": []
  },
@@ -3437,8 +3437,8 @@
    "repaso.c1"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:16:38.707351+00",
   "course_order": 160,
   "review_form_ids": []
  },
@@ -3503,14 +3503,14 @@
   "ordinal": 12,
   "slug": "practica-la-parrilla",
   "title_en": "Practice: football, tango and the grill",
-  "summary_en": "Hincho por River",
+  "summary_en": "¿Por quién hinchás?",
   "grammar_focus": [
    "repaso.futbol",
    "repaso.cultura"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 21:13:31.668468+00",
   "course_order": 159,
   "review_form_ids": [
    "50292730-5b5f-5b46-a8c8-efbe2d6fbb8a",
