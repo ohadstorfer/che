@@ -296,6 +296,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "raro",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "01b8d876-0064-59e9-823f-264bd2d8fbdb",
+  "lemma_id": "cd1e361e-0099-5c81-a16a-bf9a752abdf4",
+  "position": 8,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "person": 1,
@@ -334,6 +354,28 @@
   "status": "published",
   "unit_id": "dc485e04-124e-516d-9061-98a2d00f4d57",
   "updated_at": "2026-09-24 00:00:40.250698+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "transferí",
+  "gloss_en": "I transferred",
+  "gloss_note_en": null,
+  "id": "0201c539-019c-5f21-ba9d-4f11a5089f52",
+  "lemma_id": "c0647bd4-1ebc-5a6e-b5b7-01d35cd8ab74",
+  "position": 4,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -393,6 +435,26 @@
   "status": "published",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
   "updated_at": "2026-09-23 23:06:40.129285+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "rara",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "02e98851-b6a5-51dc-aa5c-c7f1a78adb7a",
+  "lemma_id": "cd1e361e-0099-5c81-a16a-bf9a752abdf4",
+  "position": 9,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -738,6 +800,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "luz",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "0535977e-2b1f-515d-8d8f-5fe4976b13cb",
+  "lemma_id": "98d601ed-041a-5e42-bf86-1eb96ebeda0f",
+  "position": 10,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "catorce",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -945,6 +1024,23 @@
   "status": "published",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
   "updated_at": "2026-09-23 23:12:50.467874+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "miedo",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "07c8637f-1929-5480-a0ae-557065d436c1",
+  "lemma_id": "446bca9c-9f92-54f5-9a50-18358769f96d",
+  "position": 1,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -1344,6 +1440,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "ascensor",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "0b3fb080-47b9-5ee7-94ab-33e861f016d2",
+  "lemma_id": "49b9ed77-57ba-5cfb-8315-4db31e2e59d0",
+  "position": 9,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "compras",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -1428,9 +1541,9 @@
   "lemma_id": "41be71fe-77ac-5cd7-aa75-94e2c5e0273b",
   "position": 1,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:18:06.414424+00",
   "voice_id": null
  },
  {
@@ -1525,6 +1638,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "f",
+   "number": "pl"
+  },
+  "form": "cuentas",
+  "gloss_en": "bills, accounts",
+  "gloss_note_en": null,
+  "id": "0c6f8f49-63d7-5c08-9c2a-2766cc81c57f",
+  "lemma_id": "df717da2-a5a1-53fc-b054-455ff49ca67c",
+  "position": 8,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "irregular": true,
    "mood": "ind",
    "number": "sg",
@@ -1573,6 +1706,25 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "verb_form": "part"
+  },
+  "form": "llegado",
+  "gloss_en": "arrived",
+  "gloss_note_en": null,
+  "id": "0d39d9c9-6640-50f1-950e-8d178814d6aa",
+  "lemma_id": "4f167a38-773d-5816-8a7a-e1bdea7d1b72",
+  "position": 10,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "gender": "f",
    "number": "pl"
   },
@@ -1603,6 +1755,23 @@
   "status": "published",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
   "updated_at": "2026-09-23 20:21:28.625105+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "anteojos",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "0d9f5237-71c2-509b-92c3-144972dbb3be",
+  "lemma_id": "31324eb5-22f7-516d-87fc-83cf026714ef",
+  "position": 13,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -1736,9 +1905,9 @@
   "lemma_id": "51eeaed8-ba5d-527a-b167-ce9808dffd53",
   "position": 1,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:21:03.370827+00",
   "voice_id": null
  },
  {
@@ -1949,9 +2118,9 @@
   "lemma_id": "c9d66230-0f57-59bb-aa6c-d7b0df381138",
   "position": 5,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:18:06.414424+00",
   "voice_id": null
  },
  {
@@ -2008,6 +2177,29 @@
   "status": "published",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
   "updated_at": "2026-09-23 19:22:02.809359+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "transferís",
+  "gloss_en": "you transfer",
+  "gloss_note_en": null,
+  "id": "1209c320-76d8-5420-8f71-eb9a8ae61ed2",
+  "lemma_id": "c0647bd4-1ebc-5a6e-b5b7-01d35cd8ab74",
+  "position": 3,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -2116,6 +2308,26 @@
   "status": "draft",
   "unit_id": "fa24b60d-3716-5754-bf36-9f5a6843d7bb",
   "updated_at": "2026-09-23 23:34:23.775762+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "gol",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "13380a02-8a11-5f09-8628-aba78091127f",
+  "lemma_id": "3417a57f-c120-5ea4-abdb-e47b3ca202af",
+  "position": 7,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -2317,9 +2529,9 @@
   "lemma_id": "25fbaa64-14a3-57e3-9a1c-42d84183b036",
   "position": 4,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -2550,6 +2762,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "susto",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "171f56c7-a67b-530c-a80a-6f69d377d9c6",
+  "lemma_id": "d600a088-a6c1-548d-98d7-c21c2ba95b0f",
+  "position": 2,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "mood": "ind",
    "number": "sg",
@@ -2567,6 +2796,23 @@
   "status": "published",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
   "updated_at": "2026-09-23 19:43:38.303503+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "saldo",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "1835cbaa-7c75-5704-a48f-03288bd9aa17",
+  "lemma_id": "874fb440-031f-5155-97e9-c76f69e3f9cb",
+  "position": 6,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -3087,9 +3333,9 @@
   "lemma_id": "89e45286-d945-5f42-9a0b-beb8ead3fb9f",
   "position": 6,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
   "voice_id": null
  },
  {
@@ -3127,9 +3373,9 @@
   "lemma_id": "c2a40273-851a-5287-a16f-72c488149cba",
   "position": 8,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -3390,9 +3636,9 @@
   "lemma_id": "25fbaa64-14a3-57e3-9a1c-42d84183b036",
   "position": 3,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -3412,9 +3658,9 @@
   "lemma_id": "1d52b7a7-a8b5-5d03-8874-200849c89160",
   "position": 6,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00",
+  "updated_at": "2026-09-24 01:24:28.911587+00",
   "voice_id": null
  },
  {
@@ -3977,9 +4223,9 @@
   "lemma_id": "700f2a4e-34f0-5978-bbb8-a527cbd92e33",
   "position": 5,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:02:30.793022+00",
   "voice_id": null
  },
  {
@@ -4044,9 +4290,9 @@
   "lemma_id": "54d78104-b1b2-5422-84d9-dbb0c5924dfb",
   "position": 3,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:08:19.028822+00",
   "voice_id": null
  },
  {
@@ -4141,6 +4387,23 @@
   "status": "published",
   "unit_id": "be613042-6935-5185-bf3a-fa4dc33eca15",
   "updated_at": "2026-09-23 19:53:48.73596+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "en parte",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "255f248b-da72-5b1b-bbda-0ceac96d1fed",
+  "lemma_id": "7f98aacc-7c65-5487-9860-0a2bf7460da2",
+  "position": 4,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -4528,6 +4791,30 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "clitic": true,
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "me dio",
+  "gloss_en": "gave me",
+  "gloss_note_en": null,
+  "id": "279e952d-4de9-5d1e-8662-6da98f9f446e",
+  "lemma_id": "2bc0b8a1-cdf5-5489-9f5f-ab9612dc0078",
+  "position": 4,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "person": 3,
@@ -4650,9 +4937,9 @@
   "lemma_id": "a08136a5-071d-5e97-b720-0e772b77615f",
   "position": 10,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -4690,6 +4977,28 @@
   "status": "published",
   "unit_id": "e7976a3a-80b3-505d-abc8-858bd6a92a90",
   "updated_at": "2026-09-24 00:07:20.443047+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "depende",
+  "gloss_en": "it depends",
+  "gloss_note_en": null,
+  "id": "29eca25e-1698-5329-a35f-1e481ac31688",
+  "lemma_id": "37ed1e19-e305-57a1-ab57-817fc43041ba",
+  "position": 3,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -4750,6 +5059,25 @@
   "status": "published",
   "unit_id": "6ec21cf5-83ce-55f4-a07c-355a8fb995bb",
   "updated_at": "2026-09-24 00:36:08.017048+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "inf"
+  },
+  "form": "creer",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "2ae8f641-19a7-54f0-b017-e7ce09db4020",
+  "lemma_id": "69ec168d-b6f3-5721-9377-ba1fa1e67fdc",
+  "position": 5,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -4856,6 +5184,43 @@
  },
  {
   "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "para que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "2b8d7e23-5120-5751-a3ae-ad29d2a76dd9",
+  "lemma_id": "86a3d944-07fd-5530-b1f6-06a6e0ee1329",
+  "position": 1,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "rota",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "2bd2d665-c2d4-5c08-9cf7-f97f6f9d86c4",
+  "lemma_id": "a0b69d68-16d8-58f8-9607-9f2e3c8a5729",
+  "position": 12,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
   "audio_path": "cards/2bfe7fd9-afaa-5943-8d7b-080a2abaf4d5-malena-1789733966293.mp3",
   "bound": false,
   "features": {},
@@ -4957,9 +5322,9 @@
   "lemma_id": "2bc0b8a1-cdf5-5489-9f5f-ab9612dc0078",
   "position": 14,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 00:12:27.735611+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -5235,6 +5600,29 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "se me rompió",
+  "gloss_en": "I broke (by accident)",
+  "gloss_note_en": null,
+  "id": "305d84a6-8342-5a45-8e02-0bf5ec03ad60",
+  "lemma_id": "5b4823c3-8ed5-5705-8d75-08add3344147",
+  "position": 5,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "kilo",
   "gloss_en": null,
@@ -5282,9 +5670,9 @@
   "lemma_id": "bbedb687-226b-51f0-82ab-0d245b73fe7c",
   "position": 5,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00",
+  "updated_at": "2026-09-24 01:24:28.911587+00",
   "voice_id": null
  },
  {
@@ -5535,9 +5923,9 @@
   "lemma_id": "5ed960fa-e2e5-5a98-b714-3ebb5d03f5ba",
   "position": 12,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 00:12:27.735611+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -5595,9 +5983,28 @@
   "lemma_id": "a4f93c5c-f70d-5d66-a7f2-ab38c0e26c15",
   "position": 1,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "part"
+  },
+  "form": "salido",
+  "gloss_en": "left, gone out",
+  "gloss_note_en": null,
+  "id": "34f7fe62-a4ec-5c85-aae5-2d7bb0fed64c",
+  "lemma_id": "b9446739-a0bd-574f-9dab-10075b457108",
+  "position": 11,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -5843,6 +6250,28 @@
   "status": "published",
   "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
   "updated_at": "2026-09-23 23:38:40.820065+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "ganó",
+  "gloss_en": "won (he/she won)",
+  "gloss_note_en": null,
+  "id": "37c328ac-ef69-547e-a3cf-6e56f3d6447c",
+  "lemma_id": "22d349ae-5a79-5c7a-9c24-0675468f230f",
+  "position": 2,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -6253,9 +6682,9 @@
   "lemma_id": "68fd911d-5c44-57ea-b4db-cef8261e33c6",
   "position": 3,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -6527,9 +6956,9 @@
   "lemma_id": "1d52b7a7-a8b5-5d03-8874-200849c89160",
   "position": 9,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -7029,6 +7458,28 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "explico",
+  "gloss_en": "I explain",
+  "gloss_note_en": null,
+  "id": "41eaf34c-5ed9-570b-8d08-dea1d02d0461",
+  "lemma_id": "9ed6bd04-44ed-5322-9d56-4130f51a2ad9",
+  "position": 7,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "irregular": true,
    "mood": "ind",
    "number": "sg",
@@ -7063,9 +7514,33 @@
   "lemma_id": "10144434-7f97-577d-9527-8bf2a09fe786",
   "position": 8,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:08:19.028822+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "se fue",
+  "gloss_en": "he left, she left",
+  "gloss_note_en": null,
+  "id": "4255b2b7-fd4f-50c4-a878-e1e31f80f514",
+  "lemma_id": "4d60e30d-076e-5da3-acd0-9840986df0da",
+  "position": 5,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -7188,6 +7663,28 @@
   "status": "published",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
   "updated_at": "2026-09-23 23:00:29.247789+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "pl",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "empatamos",
+  "gloss_en": "we drew",
+  "gloss_note_en": null,
+  "id": "435a6259-caed-5fab-a456-689d60198ba9",
+  "lemma_id": "08fc9902-adc9-53f9-80fa-aee5f08373e2",
+  "position": 6,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -7749,9 +8246,9 @@
   "lemma_id": "0d018b02-7307-5cbd-9f30-761b5d52acda",
   "position": 4,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -7963,6 +8460,28 @@
   "status": "published",
   "unit_id": "5df117af-d5e0-5b71-8caa-6806c47bdff1",
   "updated_at": "2026-09-23 20:28:08.267385+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "corrí",
+  "gloss_en": "I ran",
+  "gloss_note_en": null,
+  "id": "498b3ef2-b19d-5769-972c-56bdc1dc862f",
+  "lemma_id": "0850fe22-dc77-5348-8c90-28f454455c1b",
+  "position": 9,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -8185,6 +8704,28 @@
   "status": "draft",
   "unit_id": "a973933b-ccb4-5f7d-9210-9a063ab4ed00",
   "updated_at": "2026-09-23 23:34:23.775762+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "gano",
+  "gloss_en": "I earn",
+  "gloss_note_en": null,
+  "id": "4c44f2c8-6572-5ff4-831e-62d103f8af5c",
+  "lemma_id": "22d349ae-5a79-5c7a-9c24-0675468f230f",
+  "position": 3,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -8480,9 +9021,9 @@
   "lemma_id": "f1272ec5-0d0a-54a7-a20c-68730ad15163",
   "position": 8,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:02:30.793022+00",
   "voice_id": null
  },
  {
@@ -8539,9 +9080,49 @@
   "lemma_id": "ebbd1e1f-1610-5693-bcb6-fb0128dbc509",
   "position": 4,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00",
+  "updated_at": "2026-09-24 01:24:28.911587+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "se me olvidó",
+  "gloss_en": "I forgot",
+  "gloss_note_en": null,
+  "id": "50e67ace-f0e5-54b8-aef0-3e0c11c57aab",
+  "lemma_id": "700f2a4e-34f0-5978-bbb8-a527cbd92e33",
+  "position": 8,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "selección",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "51235bc0-f7aa-5a0b-b605-a36fcf5c290a",
+  "lemma_id": "fbf530e9-fe7e-5829-aec5-4eb78e9d2e7a",
+  "position": 10,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -8704,6 +9285,30 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "clitic": true,
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "se te cayó",
+  "gloss_en": "you dropped",
+  "gloss_note_en": null,
+  "id": "522a3dfa-91e8-5369-af0c-49b58ae8da64",
+  "lemma_id": "30a73722-3e4d-586f-8df8-535189352cb1",
+  "position": 2,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "person": 3,
@@ -8719,6 +9324,26 @@
   "status": "published",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
   "updated_at": "2026-09-23 23:12:50.467874+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "verb_form": "part"
+  },
+  "form": "dicho",
+  "gloss_en": "said, told",
+  "gloss_note_en": null,
+  "id": "5239911f-0637-5870-8d3d-1e3e27921167",
+  "lemma_id": "bbedb687-226b-51f0-82ab-0d245b73fe7c",
+  "position": 8,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -9014,6 +9639,29 @@
    "clitic": true,
    "mood": "ind",
    "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "me voy",
+  "gloss_en": "I'm off, I'm leaving",
+  "gloss_note_en": null,
+  "id": "56a9937a-171a-5c68-aaa8-563ac6ac613b",
+  "lemma_id": "4d60e30d-076e-5da3-acd0-9840986df0da",
+  "position": 4,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
    "person": 3,
    "tense": "pres"
   },
@@ -9170,6 +9818,48 @@
   "status": "published",
   "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
   "updated_at": "2026-09-24 00:28:52.454628+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "inf"
+  },
+  "form": "saludar",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "58cf5022-cc59-54a6-9f79-b467b8fd98dc",
+  "lemma_id": "ca980bf1-16f4-532f-86d3-a76d61ce0566",
+  "position": 2,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "impf"
+  },
+  "form": "se había ido",
+  "gloss_en": "had left",
+  "gloss_note_en": null,
+  "id": "5965aa48-a120-55c3-af51-d76d2973a4ac",
+  "lemma_id": "4d60e30d-076e-5da3-acd0-9840986df0da",
+  "position": 3,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -9376,6 +10066,29 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "me da",
+  "gloss_en": "gives me",
+  "gloss_note_en": null,
+  "id": "5b3e4cfe-eace-51fa-bf4c-aac15ae73a45",
+  "lemma_id": "2bc0b8a1-cdf5-5489-9f5f-ab9612dc0078",
+  "position": 3,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "tarde",
   "gloss_en": null,
@@ -9447,6 +10160,23 @@
   "status": "published",
   "unit_id": "f1fa7454-72a3-546d-8f72-4aab149bbbbe",
   "updated_at": "2026-09-18 14:14:36.377978+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "costumbre",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "5c1270b5-558b-5aa3-9cf8-36ba9be04925",
+  "lemma_id": "f77f1ca9-8f6b-529e-812d-146cc619a137",
+  "position": 6,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -9700,6 +10430,28 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "rompió",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "5db99a71-547b-57be-a0d3-72e8eab79a0d",
+  "lemma_id": "5b4823c3-8ed5-5705-8d75-08add3344147",
+  "position": 7,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": false,
   "features": {
    "irregular": true,
@@ -9749,9 +10501,9 @@
   "lemma_id": "bf167222-46a4-508b-bd73-b375c5cce652",
   "position": 1,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00",
+  "updated_at": "2026-09-24 01:24:28.911587+00",
   "voice_id": null
  },
  {
@@ -9813,9 +10565,31 @@
   "lemma_id": "7b74d01a-12bc-5a79-ac85-c1dd98d36bb2",
   "position": 6,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:08:19.028822+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "pl",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "ganamos",
+  "gloss_en": "we won",
+  "gloss_note_en": null,
+  "id": "5e58e81c-8ecf-5cac-8921-801363bf2032",
+  "lemma_id": "22d349ae-5a79-5c7a-9c24-0675468f230f",
+  "position": 1,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -9895,9 +10669,9 @@
   "lemma_id": "2bc0b8a1-cdf5-5489-9f5f-ab9612dc0078",
   "position": 13,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 00:12:27.735611+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -10034,6 +10808,28 @@
   "status": "published",
   "unit_id": "14b391bd-5db8-50a4-a988-428361e7752a",
   "updated_at": "2026-09-23 23:08:49.662548+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "saluda",
+  "gloss_en": "greets (people greet)",
+  "gloss_note_en": null,
+  "id": "61028a86-bd53-567e-b6b9-af295c78200e",
+  "lemma_id": "ca980bf1-16f4-532f-86d3-a76d61ce0566",
+  "position": 1,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -10329,9 +11125,9 @@
   "lemma_id": "b63085d6-dd2d-5684-ad54-2047f47c4002",
   "position": 10,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -11135,9 +11931,9 @@
   "lemma_id": "4f167a38-773d-5816-8a7a-e1bdea7d1b72",
   "position": 1,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -11229,6 +12025,25 @@
   "status": "draft",
   "unit_id": "754cc69f-e7cf-5e64-ba22-2679bc1f609e",
   "updated_at": "2026-09-23 23:34:23.775762+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "inf"
+  },
+  "form": "chusmear",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "6eea2320-53ef-5125-8f0c-64c61edf4286",
+  "lemma_id": "ba3ed5da-d04d-5b45-b781-53a119181c1c",
+  "position": 4,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -11336,9 +12151,9 @@
   "lemma_id": "a72ffe32-9177-5008-a0ba-e09718e4b437",
   "position": 6,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
-  "updated_at": "2026-09-24 00:36:51.40646+00",
+  "updated_at": "2026-09-24 01:21:03.370827+00",
   "voice_id": null
  },
  {
@@ -11374,9 +12189,31 @@
   "lemma_id": "c805c5b8-6272-5330-bc99-bb4eb88ec083",
   "position": 2,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00",
+  "updated_at": "2026-09-24 01:24:28.911587+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "saqué",
+  "gloss_en": "I took out, I got",
+  "gloss_note_en": null,
+  "id": "7059d672-340d-5df4-ba40-78a4d3ffa999",
+  "lemma_id": "e2c94472-d235-57af-8d48-9d0ba408750b",
+  "position": 7,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -11414,6 +12251,23 @@
   "status": "published",
   "unit_id": "13fec277-30b8-5bdb-9718-e682351abfd9",
   "updated_at": "2026-09-23 20:11:12.124649+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "previa",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "70f7a23b-e474-56b9-8175-226033f1345b",
+  "lemma_id": "433992b6-41ef-54a6-9bb5-bc1b5d33dda5",
+  "position": 4,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -11587,9 +12441,9 @@
   "lemma_id": "9ed6bd04-44ed-5322-9d56-4130f51a2ad9",
   "position": 9,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
   "voice_id": null
  },
  {
@@ -11604,9 +12458,9 @@
   "lemma_id": "19015a56-d379-52e0-a38a-a0b579a78f14",
   "position": 5,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:21:03.370827+00",
   "voice_id": null
  },
  {
@@ -11729,6 +12583,45 @@
   "status": "published",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
   "updated_at": "2026-09-23 19:29:03.477849+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "pl",
+   "person": 3,
+   "tense": "impf"
+  },
+  "form": "habían",
+  "gloss_en": "they had",
+  "gloss_note_en": null,
+  "id": "734bcbe3-7cc4-5f86-aa2d-3cbbc8531889",
+  "lemma_id": "c2a40273-851a-5287-a16f-72c488149cba",
+  "position": 1,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "normal",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "734ea659-5e05-5115-89c8-03735afed928",
+  "lemma_id": "0f0f76e6-7ca0-5f6f-89a7-b24c656cd4c8",
+  "position": 7,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -11904,9 +12797,9 @@
   "lemma_id": "6ebc89d2-1941-5441-8b6f-472996e89100",
   "position": 11,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -11971,6 +12864,28 @@
   "unit_id": "7c5e7c59-5c44-52e3-9900-449c03934359",
   "updated_at": "2026-09-18 12:20:35.3136+00",
   "voice_id": "tomas"
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "escuché",
+  "gloss_en": "I heard",
+  "gloss_note_en": null,
+  "id": "748e2191-0fd8-51ce-9681-a770f3ff8445",
+  "lemma_id": "26012c0b-feb3-5194-aef0-83e4f75a3885",
+  "position": 6,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
  },
  {
   "alt": [],
@@ -12143,6 +13058,29 @@
   "status": "published",
   "unit_id": "dc485e04-124e-516d-9061-98a2d00f4d57",
   "updated_at": "2026-09-24 00:00:40.250698+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "impf",
+   "voseo": true
+  },
+  "form": "habías",
+  "gloss_en": "you had",
+  "gloss_note_en": null,
+  "id": "75ebdfec-68ba-519e-9845-114da9f20aa5",
+  "lemma_id": "c2a40273-851a-5287-a16f-72c488149cba",
+  "position": 2,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -12559,9 +13497,9 @@
   "lemma_id": "68fd911d-5c44-57ea-b4db-cef8261e33c6",
   "position": 6,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -12593,9 +13531,9 @@
   "lemma_id": "011a02d3-362f-531d-9bf6-918998ebcf49",
   "position": 8,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -12669,9 +13607,9 @@
   "lemma_id": "06a41391-66cd-5d15-8326-d6ee53742199",
   "position": 11,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -12891,6 +13829,23 @@
   "audio_path": null,
   "bound": false,
   "features": {},
+  "form": "wifi",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "7c579b4d-3aec-55df-bb52-58ad9496eb94",
+  "lemma_id": "e3e2711b-f935-5409-a760-89474fc81d1c",
+  "position": 8,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
   "form": "propina",
   "gloss_en": null,
   "gloss_note_en": null,
@@ -13049,9 +14004,9 @@
   "lemma_id": "41be71fe-77ac-5cd7-aa75-94e2c5e0273b",
   "position": 2,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:18:06.414424+00",
   "voice_id": null
  },
  {
@@ -13194,6 +14149,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "reclamé",
+  "gloss_en": "I complained (formally)",
+  "gloss_note_en": null,
+  "id": "7f4be922-de91-5e14-b60b-ec713185a1c8",
+  "lemma_id": "52cd80ce-6184-5a3b-ae26-3a47e6e3fdc3",
+  "position": 7,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "avenida",
   "gloss_en": null,
@@ -13251,6 +14228,46 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "puede ser",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "809247a6-cc78-58bf-bcb8-4f45aebe939e",
+  "lemma_id": "103d3cfd-82c2-584d-b02b-b7db15b2b191",
+  "position": 5,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pres"
+  },
+  "form": "transfiero",
+  "gloss_en": "I transfer",
+  "gloss_note_en": null,
+  "id": "80984f56-9cb4-5a21-88ec-0fc5130c7316",
+  "lemma_id": "c0647bd4-1ebc-5a6e-b5b7-01d35cd8ab74",
+  "position": 2,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "mood": "ind",
    "number": "sg",
@@ -13289,6 +14306,30 @@
   "status": "published",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
   "updated_at": "2026-09-23 22:50:56.462386+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "te quejás",
+  "gloss_en": "you complain",
+  "gloss_note_en": null,
+  "id": "81117dc6-6f71-5be8-9af4-bb027b86633e",
+  "lemma_id": "47d070cf-ff94-58f4-b9ad-a5e5d49cd1ae",
+  "position": 3,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -13692,6 +14733,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "roto",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "85de25fd-452c-5907-b39b-710c519fa633",
+  "lemma_id": "a0b69d68-16d8-58f8-9607-9f2e3c8a5729",
+  "position": 11,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "pl",
    "person": 3,
@@ -13847,6 +14908,28 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "anda",
+  "gloss_en": "works (it works)",
+  "gloss_note_en": null,
+  "id": "87d1fadf-25bc-5f17-bf18-af28374d3bb3",
+  "lemma_id": "61811c56-de80-5854-b4d6-5a54254e1ed6",
+  "position": 1,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "subj",
    "number": "sg",
    "tense": "pres"
@@ -13858,9 +14941,9 @@
   "lemma_id": "4f167a38-773d-5816-8a7a-e1bdea7d1b72",
   "position": 2,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -13898,9 +14981,9 @@
   "lemma_id": "0d018b02-7307-5cbd-9f30-761b5d52acda",
   "position": 3,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -14304,9 +15387,26 @@
   "lemma_id": "89e45286-d945-5f42-9a0b-beb8ead3fb9f",
   "position": 5,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "mirá vos",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "8cd19b05-81c7-53d8-95c5-299cf8f6e4ca",
+  "lemma_id": "cd735c8b-13fc-53c9-8f9d-dc137a188247",
+  "position": 2,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -14344,6 +15444,26 @@
   "status": "published",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
   "updated_at": "2026-09-23 19:39:12.082725+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "verb_form": "part"
+  },
+  "form": "hecho",
+  "gloss_en": "done, made",
+  "gloss_note_en": null,
+  "id": "8d43f4e0-f7fa-5a8b-a514-a81f06ab841b",
+  "lemma_id": "ebbd1e1f-1610-5693-bcb6-fb0128dbc509",
+  "position": 7,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -14784,6 +15904,30 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "cond",
+   "voseo": true
+  },
+  "form": "harías",
+  "gloss_en": "you would do",
+  "gloss_note_en": null,
+  "id": "920f2c31-663c-55d7-97c8-6179d9ca62c7",
+  "lemma_id": "ebbd1e1f-1610-5693-bcb6-fb0128dbc509",
+  "position": 10,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
+  "updated_at": "2026-09-24 01:22:51.605067+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "posta",
   "gloss_en": null,
@@ -14839,6 +15983,23 @@
   "status": "published",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
   "updated_at": "2026-09-23 23:12:50.467874+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "sobremesa",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "926f58b8-901a-5950-bbfc-9ebaee912714",
+  "lemma_id": "9f4bda96-e11f-5f83-9c21-3d0fa2e738f2",
+  "position": 5,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -15102,9 +16263,9 @@
   "lemma_id": "20de66ee-8ff3-55dd-b3b0-fc2263a3c700",
   "position": 7,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {
@@ -15225,9 +16386,9 @@
   "lemma_id": "20de66ee-8ff3-55dd-b3b0-fc2263a3c700",
   "position": 2,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {
@@ -15323,9 +16484,9 @@
   "lemma_id": "a93634b7-5b70-5ddb-851d-34115955647b",
   "position": 11,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 00:36:51.40646+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -15346,6 +16507,26 @@
   "status": "published",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
   "updated_at": "2026-09-23 23:26:00.580368+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "m",
+   "number": "pl"
+  },
+  "form": "goles",
+  "gloss_en": "goals",
+  "gloss_note_en": null,
+  "id": "97c0245a-2154-53e0-8595-16cfa528a39a",
+  "lemma_id": "3417a57f-c120-5ea4-abdb-e47b3ca202af",
+  "position": 8,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -15813,6 +16994,30 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "clitic": true,
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "se le cayó",
+  "gloss_en": "he dropped, she dropped",
+  "gloss_note_en": null,
+  "id": "9a8cf4e7-1e30-5565-a801-29fdc80aafdf",
+  "lemma_id": "30a73722-3e4d-586f-8df8-535189352cb1",
+  "position": 3,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "nos",
   "gloss_en": null,
@@ -15861,9 +17066,9 @@
   "lemma_id": "10144434-7f97-577d-9527-8bf2a09fe786",
   "position": 9,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:08:19.028822+00",
   "voice_id": null
  },
  {
@@ -15898,9 +17103,32 @@
   "lemma_id": "a677158a-d385-5a6f-88af-ecd7c5bd217f",
   "position": 4,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:21:03.370827+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "se rompió",
+  "gloss_en": "it broke",
+  "gloss_note_en": null,
+  "id": "9baf4696-28c9-5626-a2de-c8c0f72ad31a",
+  "lemma_id": "5b4823c3-8ed5-5705-8d75-08add3344147",
+  "position": 6,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -15940,6 +17168,28 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "quejé",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "9c7f361c-4e37-5b9a-b466-1f8aa5774199",
+  "lemma_id": "47d070cf-ff94-58f4-b9ad-a5e5d49cd1ae",
+  "position": 4,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": false,
   "features": {
    "gender": "m",
@@ -15975,9 +17225,9 @@
   "lemma_id": "adae3668-d3cb-50b0-aa4d-379ab89a794f",
   "position": 3,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:21:03.370827+00",
   "voice_id": null
  },
  {
@@ -16018,6 +17268,30 @@
   "status": "published",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
   "updated_at": "2026-09-23 22:57:13.830499+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "se me cayó",
+  "gloss_en": "I dropped",
+  "gloss_note_en": null,
+  "id": "9e241544-9c65-56b0-acb3-867d6ace389a",
+  "lemma_id": "30a73722-3e4d-586f-8df8-535189352cb1",
+  "position": 1,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -16068,9 +17342,9 @@
   "lemma_id": "d13afd5f-7f22-5a01-817f-6e889600a05f",
   "position": 10,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
   "voice_id": null
  },
  {
@@ -16114,6 +17388,26 @@
   "status": "published",
   "unit_id": "770b6d5f-bd8c-5c17-a05f-4721faaa1706",
   "updated_at": "2026-09-24 00:23:43.658623+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "gender": "f",
+   "number": "sg"
+  },
+  "form": "oscura",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "9ec95527-6751-5689-8668-d3d69d30ccbc",
+  "lemma_id": "abb2c440-0c20-5a61-88ae-edea48f7095f",
+  "position": 8,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -16236,9 +17530,9 @@
   "lemma_id": "a4f93c5c-f70d-5d66-a7f2-ab38c0e26c15",
   "position": 2,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
   "voice_id": null
  },
  {
@@ -16303,9 +17597,9 @@
   "lemma_id": "1d67bb30-1524-5e66-9e06-4dc996f279ff",
   "position": 7,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -16389,9 +17683,9 @@
   "lemma_id": "20de66ee-8ff3-55dd-b3b0-fc2263a3c700",
   "position": 4,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {
@@ -16428,6 +17722,23 @@
   "status": "published",
   "unit_id": "d8cb78a0-5a7d-5c09-9f7f-9e905e0d2e59",
   "updated_at": "2026-09-23 20:14:21.109669+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "opinión",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "a2fb1f22-70f7-531f-9172-01c24b084242",
+  "lemma_id": "fc36ed4f-05cd-5246-8ec2-66244648224b",
+  "position": 6,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -16631,6 +17942,29 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "se me perdió",
+  "gloss_en": "I lost (it got lost)",
+  "gloss_note_en": null,
+  "id": "a480d495-bbb6-5d6e-a182-a5bf9dfdc978",
+  "lemma_id": "1ee7723a-5cab-5b32-930c-29f8e025752e",
+  "position": 10,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "pl",
    "person": 1,
@@ -16665,9 +17999,9 @@
   "lemma_id": "553486fb-2eee-5d0f-b4c7-554f8355fba4",
   "position": 6,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:18:06.414424+00",
   "voice_id": null
  },
  {
@@ -16748,6 +18082,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "ruido",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "a5aebf88-94dc-5f0c-8c87-b2a3a0ca36f4",
+  "lemma_id": "c94d0ab3-23cc-5be9-90d7-58bc64ab3de1",
+  "position": 5,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "verb_form": "inf"
   },
@@ -16758,9 +18109,9 @@
   "lemma_id": "68fd911d-5c44-57ea-b4db-cef8261e33c6",
   "position": 5,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -16775,9 +18126,9 @@
   "lemma_id": "d15ef62e-d7af-5866-8fe7-a44424544633",
   "position": 8,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:18:06.414424+00",
   "voice_id": null
  },
  {
@@ -16972,6 +18323,26 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "irregular": true,
+   "verb_form": "part"
+  },
+  "form": "visto",
+  "gloss_en": "seen",
+  "gloss_note_en": null,
+  "id": "a7ff6697-55f2-5f55-9579-da2791efcbd3",
+  "lemma_id": "a6a9f7ca-4b38-59ef-bb3a-6f5780e92de5",
+  "position": 9,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "llamada",
   "gloss_en": null,
@@ -16997,9 +18368,9 @@
   "lemma_id": "6d73d662-f91e-57e1-9671-70f29ba906ae",
   "position": 4,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:18:06.414424+00",
   "voice_id": null
  },
  {
@@ -17138,9 +18509,9 @@
   "lemma_id": "bbedb687-226b-51f0-82ab-0d245b73fe7c",
   "position": 9,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:02:30.793022+00",
   "voice_id": null
  },
  {
@@ -17202,9 +18573,9 @@
   "lemma_id": "20de66ee-8ff3-55dd-b3b0-fc2263a3c700",
   "position": 3,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {
@@ -17219,9 +18590,9 @@
   "lemma_id": "abd9a47e-ebd5-5949-af6d-ed6f6ffe7b74",
   "position": 1,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:08:19.028822+00",
   "voice_id": null
  },
  {
@@ -17258,9 +18629,9 @@
   "lemma_id": "0d018b02-7307-5cbd-9f30-761b5d52acda",
   "position": 5,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -17283,6 +18654,30 @@
   "status": "published",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
   "updated_at": "2026-09-23 20:03:32.724278+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "entiendas",
+  "gloss_en": "you understand (so that you understand)",
+  "gloss_note_en": null,
+  "id": "a99623d4-c33f-5b01-9c1b-70290ecce96a",
+  "lemma_id": "89e45286-d945-5f42-9a0b-beb8ead3fb9f",
+  "position": 3,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -17405,9 +18800,9 @@
   "lemma_id": "68fd911d-5c44-57ea-b4db-cef8261e33c6",
   "position": 4,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -17479,6 +18874,30 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "veas",
+  "gloss_en": "you see (so that you see)",
+  "gloss_note_en": null,
+  "id": "ab74c118-a661-5e9f-93b5-807591a88036",
+  "lemma_id": "a6a9f7ca-4b38-59ef-bb3a-6f5780e92de5",
+  "position": 8,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "person": 1,
@@ -17533,9 +18952,9 @@
   "lemma_id": "19646877-1de5-5017-938a-ff82510b6bb3",
   "position": 9,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -17603,9 +19022,26 @@
   "lemma_id": "6df7ec2e-e97b-5f63-b0e8-6055a7f9d9c5",
   "position": 7,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:02:30.793022+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "transferencia",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "acabc425-80fd-5882-b1c8-426304e0d34e",
+  "lemma_id": "5f1345b5-f771-5c45-b2b8-d1d7ce223a4d",
+  "position": 5,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -17626,9 +19062,9 @@
   "lemma_id": "9ed6bd04-44ed-5322-9d56-4130f51a2ad9",
   "position": 8,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
   "voice_id": null
  },
  {
@@ -17929,9 +19365,9 @@
   "lemma_id": "700f2a4e-34f0-5978-bbb8-a527cbd92e33",
   "position": 6,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:02:30.793022+00",
   "voice_id": null
  },
  {
@@ -18227,9 +19663,9 @@
   "lemma_id": "700f2a4e-34f0-5978-bbb8-a527cbd92e33",
   "position": 3,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:02:30.793022+00",
   "voice_id": null
  },
  {
@@ -18334,9 +19770,9 @@
   "lemma_id": "54d78104-b1b2-5422-84d9-dbb0c5924dfb",
   "position": 4,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:08:19.028822+00",
   "voice_id": null
  },
  {
@@ -18357,6 +19793,51 @@
   "status": "published",
   "unit_id": "13fec277-30b8-5bdb-9718-e682351abfd9",
   "updated_at": "2026-09-23 20:11:12.124649+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "clitic": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "me quejé",
+  "gloss_en": "I complained",
+  "gloss_note_en": null,
+  "id": "b2f72ac9-485a-54dc-ae63-7ece15caebc5",
+  "lemma_id": "47d070cf-ff94-58f4-b9ad-a5e5d49cd1ae",
+  "position": 2,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "tense": "pres"
+  },
+  "form": "sepa",
+  "gloss_en": "know (so that I, so that he/she know)",
+  "gloss_note_en": null,
+  "id": "b3066a8f-758a-548c-8d32-4483c786931a",
+  "lemma_id": "a4f93c5c-f70d-5d66-a7f2-ab38c0e26c15",
+  "position": 5,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -18659,6 +20140,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "lo que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "b6546bc4-5b01-500f-b65e-7c618bcef308",
+  "lemma_id": "345844f4-73dd-5c97-8aca-3752c5a61aca",
+  "position": 1,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "gender": "m",
    "number": "sg"
@@ -18680,6 +20178,26 @@
   "audio_path": null,
   "bound": false,
   "features": {
+   "gender": "m",
+   "number": "sg"
+  },
+  "form": "oscuro",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "b667419d-166e-5b08-b29c-08a3554302dd",
+  "lemma_id": "abb2c440-0c20-5a61-88ae-edea48f7095f",
+  "position": 7,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
    "mood": "ind",
    "number": "sg",
    "person": 2,
@@ -18693,9 +20211,9 @@
   "lemma_id": "553486fb-2eee-5d0f-b4c7-554f8355fba4",
   "position": 7,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:18:06.414424+00",
   "voice_id": null
  },
  {
@@ -18733,9 +20251,9 @@
   "lemma_id": "700f2a4e-34f0-5978-bbb8-a527cbd92e33",
   "position": 4,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:02:30.793022+00",
   "voice_id": null
  },
  {
@@ -18770,9 +20288,26 @@
   "lemma_id": "3fa2b07e-3811-567a-a84e-5b5712952940",
   "position": 11,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "chusma",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "b828e467-960d-5bd1-8a0a-b71d706f8207",
+  "lemma_id": "d3a46c01-74b2-565d-a9bf-a18e73f621d1",
+  "position": 3,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -18787,9 +20322,9 @@
   "lemma_id": "61fe2286-d4e0-58d3-9d27-7277522054cc",
   "position": 9,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:18:06.414424+00",
   "voice_id": null
  },
  {
@@ -19011,6 +20546,25 @@
   "status": "published",
   "unit_id": "afdaff40-37c8-56af-ae39-78f1ed48e97e",
   "updated_at": "2026-09-24 00:03:41.02582+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "inf"
+  },
+  "form": "reclamar",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "bb9dc5c1-ca44-506c-bdbd-380eb8cbce88",
+  "lemma_id": "52cd80ce-6184-5a3b-ae26-3a47e6e3fdc3",
+  "position": 6,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -19323,6 +20877,29 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": true,
+  "features": {
+   "irregular": true,
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "cayó",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "be85312a-d08e-5237-a6c5-32a311faeeb5",
+  "lemma_id": "30a73722-3e4d-586f-8df8-535189352cb1",
+  "position": 4,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": false,
   "features": {
    "gender": "m",
@@ -19444,9 +21021,9 @@
   "lemma_id": "19646877-1de5-5017-938a-ff82510b6bb3",
   "position": 8,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -19642,9 +21219,9 @@
   "lemma_id": "20de66ee-8ff3-55dd-b3b0-fc2263a3c700",
   "position": 6,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {
@@ -20040,9 +21617,9 @@
   "lemma_id": "7b74d01a-12bc-5a79-ac85-c1dd98d36bb2",
   "position": 5,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:08:19.028822+00",
   "voice_id": null
  },
  {
@@ -20376,9 +21953,9 @@
   "lemma_id": "eaaee202-fe84-5da7-a4ca-f7990c4ade1f",
   "position": 11,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {
@@ -20486,6 +22063,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "antes de que",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "cb7aaae4-17be-56f8-aea1-28a0d5b11ee3",
+  "lemma_id": "07b8914d-6f7c-52fc-95b7-a197a2ca30f0",
+  "position": 2,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "irregular": true,
    "mood": "ind",
@@ -20499,9 +22093,9 @@
   "lemma_id": "19646877-1de5-5017-938a-ff82510b6bb3",
   "position": 8,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00",
+  "updated_at": "2026-09-24 01:24:28.911587+00",
   "voice_id": null
  },
  {
@@ -20697,9 +22291,9 @@
   "lemma_id": "4e59fa59-5397-5639-a425-56db2db702d5",
   "position": 16,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 00:12:27.735611+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -20766,6 +22360,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "hincha",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "cfcaa4bd-72de-5d43-9a9d-0e32e0dd495c",
+  "lemma_id": "192ab2fe-6c41-5dca-b680-d04b0e5b0233",
+  "position": 9,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "gender": "f",
    "number": "sg"
@@ -20816,9 +22427,9 @@
   "lemma_id": "a4f93c5c-f70d-5d66-a7f2-ab38c0e26c15",
   "position": 4,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
   "voice_id": null
  },
  {
@@ -20972,9 +22583,9 @@
   "lemma_id": "9fec1ae7-f3c8-526b-a758-1151e89c3dc8",
   "position": 6,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -20996,9 +22607,9 @@
   "lemma_id": "0d018b02-7307-5cbd-9f30-761b5d52acda",
   "position": 6,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -21018,6 +22629,23 @@
   "status": "published",
   "unit_id": "5ec6a727-4a91-5545-9e35-7f858d66ced1",
   "updated_at": "2026-09-24 00:37:54.683427+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "para nada",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "d2004b17-34d1-5ed3-9eed-7c1cc2d10e11",
+  "lemma_id": "99647590-2a7a-5eb9-ba1b-762da40376e4",
+  "position": 2,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -21069,9 +22697,9 @@
   "lemma_id": "7b98a6c4-ac0d-565f-99de-ea43ef4ef9ea",
   "position": 2,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:08:19.028822+00",
   "voice_id": null
  },
  {
@@ -21233,9 +22861,9 @@
   "lemma_id": "25fbaa64-14a3-57e3-9a1c-42d84183b036",
   "position": 5,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -21296,9 +22924,9 @@
   "lemma_id": "5d9cbffe-c740-5cbb-b69d-8c5b6440d6c6",
   "position": 7,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:08:19.028822+00",
   "voice_id": null
  },
  {
@@ -21318,9 +22946,9 @@
   "lemma_id": "5d9cbffe-c740-5cbb-b69d-8c5b6440d6c6",
   "position": 7,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -21362,9 +22990,9 @@
   "lemma_id": "68fd911d-5c44-57ea-b4db-cef8261e33c6",
   "position": 7,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -21497,9 +23125,28 @@
   "lemma_id": "1cb325cf-aa68-5ce0-9417-97f059e80a1e",
   "position": 1,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "verb_form": "part"
+  },
+  "form": "comido",
+  "gloss_en": "eaten",
+  "gloss_note_en": null,
+  "id": "d8819700-88cf-5d64-8b0c-f8e2786cb3a0",
+  "lemma_id": "a93634b7-5b70-5ddb-851d-34115955647b",
+  "position": 6,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -21560,9 +23207,9 @@
   "lemma_id": "4777463c-0260-5d8d-b2ff-5fd478cd382f",
   "position": 2,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:02:30.793022+00",
   "voice_id": null
  },
  {
@@ -21794,9 +23441,9 @@
   "lemma_id": "69ec168d-b6f3-5721-9377-ba1fa1e67fdc",
   "position": 2,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -22013,9 +23660,9 @@
   "lemma_id": "4e69eb74-724b-5698-8d55-5c0ef15e2034",
   "position": 2,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:21:03.370827+00",
   "voice_id": null
  },
  {
@@ -22227,9 +23874,9 @@
   "lemma_id": "b9446739-a0bd-574f-9dab-10075b457108",
   "position": 10,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -22312,6 +23959,30 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "irregular": true,
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "sepas",
+  "gloss_en": "you know (so that you know)",
+  "gloss_note_en": null,
+  "id": "dec0a620-9ed4-574d-a5ee-3b1ca97a7a05",
+  "lemma_id": "a4f93c5c-f70d-5d66-a7f2-ab38c0e26c15",
+  "position": 4,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "medio kilo",
   "gloss_en": null,
@@ -22373,6 +24044,23 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {},
+  "form": "de acuerdo",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "df83b6cb-97ef-5e9a-9205-da113bbb2498",
+  "lemma_id": "6e1af5ec-72e5-5509-97da-3ecb64c936ea",
+  "position": 1,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {
    "gender": "f",
    "number": "sg"
@@ -22401,9 +24089,9 @@
   "lemma_id": "fc272cdd-fa34-55e2-b1ce-44974a4aaef5",
   "position": 12,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {
@@ -22424,9 +24112,9 @@
   "lemma_id": "3dd86cb9-f437-5e77-9471-3812e15ceedf",
   "position": 10,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {
@@ -22567,9 +24255,9 @@
   "lemma_id": "adb198a3-f827-53dd-8ff7-5fe98bca310f",
   "position": 3,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:18:06.414424+00",
   "voice_id": null
  },
  {
@@ -22661,6 +24349,28 @@
   "features": {
    "mood": "ind",
    "number": "pl",
+   "person": 1,
+   "tense": "pret"
+  },
+  "form": "perdimos",
+  "gloss_en": "we lost",
+  "gloss_note_en": null,
+  "id": "e261c9d9-86ad-5acd-acdb-1e586f97023b",
+  "lemma_id": "3bccdcc3-c8ca-51cc-b395-ce05efa2a030",
+  "position": 4,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "pl",
    "person": 3,
    "tense": "pres"
   },
@@ -22710,9 +24420,9 @@
   "lemma_id": "89e45286-d945-5f42-9a0b-beb8ead3fb9f",
   "position": 7,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
   "voice_id": null
  },
  {
@@ -22771,9 +24481,9 @@
   "lemma_id": "b9446739-a0bd-574f-9dab-10075b457108",
   "position": 9,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {
@@ -22977,9 +24687,9 @@
   "lemma_id": "18defe56-99e0-5170-8bd1-b5f1573430c6",
   "position": 2,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -22997,6 +24707,28 @@
   "status": "draft",
   "unit_id": "754cc69f-e7cf-5e64-ba22-2679bc1f609e",
   "updated_at": "2026-09-23 23:34:23.775762+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "olvidó",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "e60ceacd-7981-5ed7-9c0e-8bc412f02280",
+  "lemma_id": "700f2a4e-34f0-5978-bbb8-a527cbd92e33",
+  "position": 9,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -23134,9 +24866,9 @@
   "lemma_id": "b3a15f68-a07c-5f20-8b7a-ff5a502172c7",
   "position": 12,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 00:36:51.40646+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -23241,9 +24973,9 @@
   "lemma_id": "a4f93c5c-f70d-5d66-a7f2-ab38c0e26c15",
   "position": 3,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:13:38.667107+00",
   "voice_id": null
  },
  {
@@ -23396,9 +25128,9 @@
   "lemma_id": "4777463c-0260-5d8d-b2ff-5fd478cd382f",
   "position": 1,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:02:30.793022+00",
   "voice_id": null
  },
  {
@@ -23578,9 +25310,9 @@
   "lemma_id": "c805c5b8-6272-5330-bc99-bb4eb88ec083",
   "position": 3,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00",
+  "updated_at": "2026-09-24 01:24:28.911587+00",
   "voice_id": null
  },
  {
@@ -23666,9 +25398,9 @@
   "lemma_id": "18defe56-99e0-5170-8bd1-b5f1573430c6",
   "position": 1,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -23838,9 +25570,9 @@
   "lemma_id": "6953112c-c294-5234-bde8-e6f1d68ce735",
   "position": 10,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:02:30.793022+00",
   "voice_id": null
  },
  {
@@ -23952,6 +25684,29 @@
  {
   "alt": [],
   "audio_path": null,
+  "bound": true,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "quejás",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "ebd7b9d6-3736-5238-acbf-c412ed757fa8",
+  "lemma_id": "47d070cf-ff94-58f4-b9ad-a5e5d49cd1ae",
+  "position": 5,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
   "bound": false,
   "features": {},
   "form": "hotel",
@@ -23981,6 +25736,28 @@
   "status": "published",
   "unit_id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
   "updated_at": "2026-09-23 19:10:29.815079+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pres"
+  },
+  "form": "cena",
+  "gloss_en": "has dinner (people have dinner)",
+  "gloss_note_en": null,
+  "id": "ed3e6930-d00f-522b-94e4-d6f136818cc8",
+  "lemma_id": "1f009685-1d6f-515d-8b02-ca9f5e859b94",
+  "position": 3,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -24431,6 +26208,28 @@
   "alt": [],
   "audio_path": null,
   "bound": false,
+  "features": {
+   "mood": "ind",
+   "number": "sg",
+   "person": 3,
+   "tense": "pret"
+  },
+  "form": "perdió",
+  "gloss_en": "lost (he/she lost)",
+  "gloss_note_en": null,
+  "id": "f1e7f4de-9019-5eba-a101-16cfd9baeb38",
+  "lemma_id": "3bccdcc3-c8ca-51cc-b395-ce05efa2a030",
+  "position": 5,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
   "features": {},
   "form": "momento",
   "gloss_en": null,
@@ -24442,6 +26241,29 @@
   "status": "published",
   "unit_id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
   "updated_at": "2026-09-23 20:03:32.724278+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {
+   "mood": "subj",
+   "number": "sg",
+   "person": 2,
+   "tense": "pres",
+   "voseo": true
+  },
+  "form": "leas",
+  "gloss_en": "you read (so that you read)",
+  "gloss_note_en": null,
+  "id": "f25d47ef-d8bd-5bc8-844c-0948252d8524",
+  "lemma_id": "ca3f016a-a945-5ed9-892d-a6cc3e208529",
+  "position": 6,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -24625,9 +26447,9 @@
   "lemma_id": "69ec168d-b6f3-5721-9377-ba1fa1e67fdc",
   "position": 1,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:00:17.279796+00",
   "voice_id": null
  },
  {
@@ -24649,9 +26471,9 @@
   "lemma_id": "1d52b7a7-a8b5-5d03-8874-200849c89160",
   "position": 8,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {
@@ -24971,9 +26793,9 @@
   "lemma_id": "b3a15f68-a07c-5f20-8b7a-ff5a502172c7",
   "position": 7,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00",
+  "updated_at": "2026-09-24 01:24:28.911587+00",
   "voice_id": null
  },
  {
@@ -25113,9 +26935,9 @@
   "lemma_id": "2bc0b8a1-cdf5-5489-9f5f-ab9612dc0078",
   "position": 15,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 00:12:27.735611+00",
+  "updated_at": "2026-09-24 00:54:40.64413+00",
   "voice_id": null
  },
  {
@@ -25250,9 +27072,9 @@
   "lemma_id": "d5b724c8-81ca-5c57-8bee-20b935f1949c",
   "position": 9,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00",
+  "updated_at": "2026-09-24 01:24:28.911587+00",
   "voice_id": null
  },
  {
@@ -25355,6 +27177,23 @@
   "status": "published",
   "unit_id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
   "updated_at": "2026-09-23 20:13:15.959872+00",
+  "voice_id": null
+ },
+ {
+  "alt": [],
+  "audio_path": null,
+  "bound": false,
+  "features": {},
+  "form": "cajero",
+  "gloss_en": null,
+  "gloss_note_en": null,
+  "id": "fdd459e9-9940-50b6-b78b-851dc816558c",
+  "lemma_id": "6c1f0017-aff4-54af-9be4-60f9e4475ecb",
+  "position": 1,
+  "source": "outline",
+  "status": "draft",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 01:16:56.863946+00",
   "voice_id": null
  },
  {
@@ -25490,9 +27329,9 @@
   "lemma_id": "74fe01e0-bf53-5d1e-8ea6-bb97eeaac7ac",
   "position": 9,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 01:05:43.940994+00",
   "voice_id": null
  },
  {
@@ -25533,9 +27372,9 @@
   "lemma_id": "20de66ee-8ff3-55dd-b3b0-fc2263a3c700",
   "position": 5,
   "source": "outline",
-  "status": "draft",
+  "status": "published",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00",
+  "updated_at": "2026-09-24 00:52:14.787731+00",
   "voice_id": null
  },
  {

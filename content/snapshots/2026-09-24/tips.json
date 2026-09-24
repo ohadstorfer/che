@@ -88,6 +88,14 @@
   "updated_at": "2026-09-23 20:13:15.959872+00"
  },
  {
+  "body_md": "For machines, porteños say **anda** — *it works*: **no anda el wifi**, **¿anda el ascensor?**. *Funciona* is fine, just stiffer.",
+  "id": "17c1c9e2-7e28-5f37-a171-3f6f56f5e112",
+  "status": "draft",
+  "title_en": "No anda",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
+ },
+ {
   "body_md": "The shortest way to order anything: name it and add **por favor**. *Un café, por favor.* *Una medialuna, por favor.* No verb needed.",
   "id": "18ab5904-7009-5924-be6f-98b6d24ecd73",
   "status": "published",
@@ -130,10 +138,10 @@
  {
   "body_md": "**Yo que vos** — *if I were you* — is how a porteño gives advice, and the conditional follows: **yo que vos, iría**, **yo que vos, no diría nada**.",
   "id": "1fb34740-8545-5a6d-a32e-14d71d687456",
-  "status": "draft",
+  "status": "published",
   "title_en": "Yo que vos",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00"
+  "updated_at": "2026-09-24 01:24:28.911587+00"
  },
  {
   "body_md": "The imperfect paints the scene, the preterite is what happens in it: **Estaba en el subte cuando me llamó Sofi** — *I was on the subway when Sofi called me*.",
@@ -158,6 +166,14 @@
   "title_en": "Facu, and jobs without \"a\"",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
   "updated_at": "2026-09-23 19:39:12.082725+00"
+ },
+ {
+  "body_md": "**Para** + an infinitive when it's the same person: *estudio para aprender*. **Para que** + the subjunctive when it's someone else: **te lo mando para que lo leas**.",
+  "id": "23e65acb-db56-56a0-996f-c90f6cdde901",
+  "status": "draft",
+  "title_en": "Para que",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "body_md": "The verb already says who: *soy* is only ever \"I am\", *sos* only \"you are\". So **Soy de acá** and *Yo soy de acá* are both right, and the short one is what people say.",
@@ -234,10 +250,10 @@
  {
   "body_md": "**¿Qué te parece?** — *what do you think?* — and the answer **me parece bien**, **me parece que no**.",
   "id": "3720e015-a831-5b88-af8b-2c4948855038",
-  "status": "draft",
+  "status": "published",
   "title_en": "¿Qué te parece?",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:00:17.279796+00"
  },
  {
   "body_md": "**¿Tenés la tarjeta? Sí, la tengo.** The pronoun stands for the thing and goes before the verb: *lo* and *los* for masculine words, *la* and *las* for feminine ones.",
@@ -266,18 +282,18 @@
  {
   "body_md": "**Vale la pena** — *it's worth it*. The highest praise a porteño gives a place.",
   "id": "3e5b7344-8608-58cc-a353-cae39fa8aefc",
-  "status": "draft",
+  "status": "published",
   "title_en": "Vale la pena",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:05:43.940994+00"
  },
  {
   "body_md": "Lunfardo is Buenos Aires slang, born in the port and the tango: **morfar** (to eat), **guita** (money), **fiaca** (laziness), **pilcha** (clothes). Friends, not job interviews.",
   "id": "3fe61f9b-3382-5a80-b860-0a7c427f3415",
-  "status": "draft",
+  "status": "published",
   "title_en": "Lunfardo",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:18:06.414424+00"
  },
  {
   "body_md": "**Tengo ganas de ir a la playa** — *I feel like going to the beach*. **Pienso ir** — *I'm planning to go*.",
@@ -286,6 +302,14 @@
   "title_en": "Tengo ganas",
   "unit_id": "2902c53a-0143-5823-b423-fd9fe3dc2295",
   "updated_at": "2026-09-23 23:49:55.688445+00"
+ },
+ {
+  "body_md": "**Se** + a verb says what people do in general: **acá se cena tarde** — *people have dinner late here*; **se saluda con un beso** — *you greet with a kiss*.",
+  "id": "40fdebd8-d0d8-529f-9533-ad6c5e3b4982",
+  "status": "draft",
+  "title_en": "Se hace así",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "body_md": "**Recién llegué** — *I just got here*. A porteño uses *recién* with the plain past where English says *just*.",
@@ -330,10 +354,10 @@
  {
   "body_md": "**Creo que viene** — *I think he's coming* — keeps the normal verb. Doubt it and the subjunctive comes in: **no creo que venga**.",
   "id": "4f6f8f0e-6d84-562a-b6db-ff83d2050223",
-  "status": "draft",
+  "status": "published",
   "title_en": "Creo que, no creo que",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:00:17.279796+00"
  },
  {
   "body_md": "**Ir a** + infinitive talks about plans: *Vamos a hacer un asado.* **La semana que viene** is *next week*.",
@@ -346,10 +370,10 @@
  {
   "body_md": "A wish is *que* + the subjunctive: **que te vaya bien** — *good luck, hope it goes well*; **que la pases lindo** — *have a great time*; **que tengas buen finde**.",
   "id": "5477ef64-8dc9-564c-912e-6162a954a14d",
-  "status": "draft",
+  "status": "published",
   "title_en": "Que…: a wish",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 00:52:14.787731+00"
  },
  {
   "body_md": "Mate goes around the circle and always comes back to whoever is serving it. Saying **gracias** means *I'm done* — only say it when you don't want another round.",
@@ -456,12 +480,28 @@
   "updated_at": "2026-09-23 19:43:38.303503+00"
  },
  {
+  "body_md": "**Antes de que llegue** — *before he gets here* — always takes the subjunctive: it hasn't happened yet.",
+  "id": "6448cf46-bc23-5745-bed1-552fb5525e28",
+  "status": "draft",
+  "title_en": "Antes de que",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
+ },
+ {
   "body_md": "**Me preguntó si venía** — *she asked me if I was coming*. **Le contesté que sí** — *I told her yes*. What was said slides into the imperfect.",
   "id": "659a6119-e2f6-5433-8d02-6bbaa7f5e7bd",
   "status": "draft",
   "title_en": "Me preguntó",
   "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
   "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "body_md": "**Había** + a participle is the past behind another past: **cuando llegué, ya habían comido** — *when I got there, they'd already eaten*. Buenos Aires uses this one freely.",
+  "id": "68733a21-83d1-579d-9fce-2d4449ffc000",
+  "status": "draft",
+  "title_en": "The past before the past",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "body_md": "The easy way to order is to ask the waiter to bring it: **¿Me traés un café?** — literally \"do you bring me a coffee?\". *Quiero un café* works too. Add **por favor**.",
@@ -490,10 +530,10 @@
  {
   "body_md": "**Te recomiendo que vayas** — *I'd recommend you go*. **Es mejor que** works the same way: **es mejor que pidas un taxi**.",
   "id": "6dba3657-5b5a-5fe4-b4f7-b617abe5cac5",
-  "status": "draft",
+  "status": "published",
   "title_en": "Recommending",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:05:43.940994+00"
  },
  {
   "body_md": "**Avisame cuando llegás** — *let me know when you get there*. **Te aviso** — *I'll let you know*.",
@@ -518,6 +558,14 @@
   "title_en": "Pesado",
   "unit_id": "fa24b60d-3716-5754-bf36-9f5a6843d7bb",
   "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "body_md": "Spanish tells accidents as if they happened *to* you: **se me cayó** — *I dropped it* (it fell on me); **se me rompió** — *it broke on me*; **se me olvidó** — *I forgot*. Nobody is to blame, which is the point.",
+  "id": "6f7cea1b-f51c-566f-be92-462456d6f490",
+  "status": "draft",
+  "title_en": "It fell on me",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "body_md": "Something that isn't true now: **si tuviera plata, viajaría** — *if I had money, I'd travel*. The *si* half uses a new form, **tuviera**, **fuera**, **pudiera**.",
@@ -558,6 +606,14 @@
   "title_en": "Tengo que, hay que",
   "unit_id": "afdaff40-37c8-56af-ae39-78f1ed48e97e",
   "updated_at": "2026-09-24 00:03:41.02582+00"
+ },
+ {
+  "body_md": "After a match it's **ganamos**, **perdimos** or **empatamos** — *we* won, even if you were on the sofa. The course leaves the club to you.",
+  "id": "7fe05051-cb0d-51d1-a483-3d0d35b01aa0",
+  "status": "draft",
+  "title_en": "Ganamos, perdimos",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "body_md": "**Me gustaría** — *I'd like* — is *gustar* in the conditional, with the same *me*: **me gustaría ir**, **¿te gustaría venir?**. **Me encantaría** is the enthusiastic yes.",
@@ -610,10 +666,10 @@
  {
   "body_md": "A command with *no* uses the subjunctive: *vení* but **no vengas**, *andá* but **no vayas**, *decime* but **no me digas**. The pronoun moves to the front: **no te preocupes**.",
   "id": "87b289c6-cf4a-5163-a0db-d039023d0990",
-  "status": "draft",
+  "status": "published",
   "title_en": "No + the subjunctive",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:02:30.793022+00"
  },
  {
   "body_md": "**Che** is how people in Buenos Aires get someone's attention — like \"hey\". It goes in front, where \"hey\" goes: *Che, ¿todo bien?* Only a greeting comes before it — *Hola, che.* It is never the English \"man\" on the end. It's friendly, never rude.",
@@ -642,10 +698,26 @@
  {
   "body_md": "**No te hagas problema** — *don't worry about it* — is what a porteño says when you apologise. **No te olvides** — *don't forget*.",
   "id": "8fe89548-6879-50eb-a1b5-202ca80d4885",
-  "status": "draft",
+  "status": "published",
   "title_en": "No te hagas problema",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:02:30.793022+00"
+ },
+ {
+  "body_md": "**Estoy de acuerdo** — *I agree*. Disagreeing: **para nada** — *not at all*; **depende** — *it depends*; **en parte** — *partly*.",
+  "id": "92568dab-b1e4-5721-9f67-adeec3747987",
+  "status": "draft",
+  "title_en": "De acuerdo",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
+ },
+ {
+  "body_md": "**Me da miedo** — *it scares me* — works like *gustar*; in a story it's **me dio miedo**. The reaction afterwards: **¡qué susto!**",
+  "id": "94d127e4-2339-5415-98ae-ddd06a03e5e1",
+  "status": "draft",
+  "title_en": "Me dio miedo",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "body_md": "*Es la una* (one o'clock), but *son las dos*, *son las siete*. Add **y media** for half past and **y cuarto** for quarter past. *A la noche* means at night.",
@@ -658,10 +730,10 @@
  {
   "body_md": "**Me molesta que llegue tarde** — *it bugs me that he's late*. *Molestar* works like *gustar*.",
   "id": "98da0042-49a1-5c74-930f-a2b3272b71a6",
-  "status": "draft",
+  "status": "published",
   "title_en": "Me molesta",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:08:19.028822+00"
  },
  {
   "body_md": "The city is **la Capital**; the ring of towns around it, in the province, is **el conurbano**. Palermo, San Telmo and La Boca are all barrios of the Capital.",
@@ -752,6 +824,14 @@
   "updated_at": "2026-09-23 19:08:03.531538+00"
  },
  {
+  "body_md": "A porteño argues hard and softens it: **puede ser, pero…** — *could be, but…*",
+  "id": "b617a7a0-808e-54d7-85f8-735996d78f75",
+  "status": "draft",
+  "title_en": "Softening it",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
+ },
+ {
   "body_md": "**No me alcanza** — *it's not enough*, *I can't make it last*. **Ahorrar** is to save, **gastar** to spend: **gasté todo el sueldo**.",
   "id": "b876ba73-9188-5bb8-ab20-2ee24117ccb9",
   "status": "draft",
@@ -760,12 +840,28 @@
   "updated_at": "2026-09-23 23:34:23.775762+00"
  },
  {
+  "body_md": "A fan is a **hincha**, and a **gol** is shouted, not said.",
+  "id": "b8f8cc97-9d17-54ae-ac0a-deffbff54047",
+  "status": "draft",
+  "title_en": "El hincha",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
+ },
+ {
   "body_md": "The verbs you use most have their own past: **hice** (I did), **vi** (I saw), **dije** (I said), **vine** (I came), **pude** (I could). No accent on any of them.",
   "id": "bbaf9a50-b716-51ad-9001-602ef86b1a04",
   "status": "published",
   "title_en": "The irregular ones",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
   "updated_at": "2026-09-23 23:00:29.247789+00"
+ },
+ {
+  "body_md": "Change the middle word for the person: **se te cayó** — *you dropped it*; **se le rompió** — *he broke it*.",
+  "id": "bc2b8ffb-527b-546f-a547-9c31c7a63d8c",
+  "status": "draft",
+  "title_en": "Se te, se le",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "body_md": "Porteños go on **vacaciones** in January and February, and *la costa* — Mar del Plata, Pinamar — is where half of Buenos Aires ends up.",
@@ -790,6 +886,30 @@
   "title_en": "Medio",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
   "updated_at": "2026-09-23 19:22:02.809359+00"
+ },
+ {
+  "body_md": "Most end in **-ado** or **-ido**: *comido, llegado, salido*. A few don't: **hecho**, **dicho**, **visto**, **roto**.",
+  "id": "bef55cb5-b9c1-55e5-bece-a9cbb5e603a9",
+  "status": "draft",
+  "title_en": "Participles",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
+ },
+ {
+  "body_md": "The ATM is **el cajero** — you go **a sacar plata**. Most porteños split the bill by **transferencia**: **te transfiero** — *I'll transfer it to you*.",
+  "id": "bf96bee5-076e-5167-adb6-ac24c4793a4d",
+  "status": "draft",
+  "title_en": "El cajero",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
+ },
+ {
+  "body_md": "**Me quejé** — *I complained*; **¿de qué te quejás?** — *what are you complaining about?* **Reclamar** is to file a complaint, and something you do a lot with a phone company.",
+  "id": "c011bb73-3d6a-5f36-8017-766c13874cae",
+  "status": "draft",
+  "title_en": "Quejarse",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "body_md": "**Vino** is wine, and it is also *he came*: **vino Juan** — *Juan came*. The sentence always tells which.",
@@ -834,10 +954,10 @@
  {
   "body_md": "**Sé** — *I know* — has an accent to tell it from *se*. **¿Sabés qué?** — *you know what?* — opens every piece of gossip.",
   "id": "c585fa33-b562-55de-93f1-7f619cc3b533",
-  "status": "draft",
+  "status": "published",
   "title_en": "Sé, sabés",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:13:38.667107+00"
  },
  {
   "body_md": "A porteño asks with a plain question in the present: **¿me pasás la sal?**, **¿me ayudás?** — the *can you* is in the tone. **¿Podrías…?** is the extra-polite version.",
@@ -850,10 +970,10 @@
  {
   "body_md": "A porteño goodbye is several: **bueno, nos hablamos**, **cuidate**, **un beso**, **que descanses** — and then another *chau* at the door.",
   "id": "c5e7d696-e96e-5262-abd7-c802b8a68a8d",
-  "status": "draft",
+  "status": "published",
   "title_en": "The long goodbye",
   "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:21:03.370827+00"
  },
  {
   "body_md": "**Me puse nervioso** — *I got nervous*; **se puso contenta** — *she got happy*. The feeling changes, so it's *ponerse*, in the preterite.",
@@ -862,6 +982,14 @@
   "title_en": "Ponerse: to get (a feeling)",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
   "updated_at": "2026-09-23 23:41:37.581944+00"
+ },
+ {
+  "body_md": "**Lo que** is *what* in the middle of a sentence: **¿viste lo que pasó?**, **no sé lo que quiere**.",
+  "id": "c7612ab5-0ef0-58d3-b838-a200ee62dd58",
+  "status": "draft",
+  "title_en": "Lo que",
+  "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "body_md": "Agreeing with something positive: **A mí también.** Agreeing with something negative: **A mí tampoco.**",
@@ -898,10 +1026,18 @@
  {
   "body_md": "**No entiendo** — *I don't understand*. **¿Me explicás?** or **explicame** — *can you explain?*",
   "id": "d292ce1d-68ae-56a4-8a9f-c0cd620f8e18",
-  "status": "draft",
+  "status": "published",
   "title_en": "No entiendo",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:13:38.667107+00"
+ },
+ {
+  "body_md": "**La previa** is the drinks before going out; **la sobremesa** is the long chat at the table after eating, which nobody cuts short.",
+  "id": "d2d06eea-a98e-54f4-9bd4-27bffe69db00",
+  "status": "draft",
+  "title_en": "La previa, la sobremesa",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "body_md": "You ask for a **turno** (an appointment); the **guardia** is the emergency room. **Estoy engripado** — *I've got the flu* — is what gets you the day off.",
@@ -970,10 +1106,10 @@
  {
   "body_md": "**Ojalá** is *I hope*, and the subjunctive follows it: **ojalá que no llueva** — *I hope it doesn't rain*.",
   "id": "da34c0b0-6d8a-5dd0-b0d9-899e344f289b",
-  "status": "draft",
+  "status": "published",
   "title_en": "Ojalá",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 00:52:14.787731+00"
  },
  {
   "body_md": "**Estoy saliendo con alguien** — *I'm seeing someone*. When it ends, porteños **cortan**: **cortamos** — *we broke up*.",
@@ -1010,18 +1146,18 @@
  {
   "body_md": "The conditional adds **-ía** to the whole infinitive: *comprar* → **compraría**. A few shorten first: **haría**, **diría**, **tendría**, **podría**.",
   "id": "e1eabf8c-fd49-53e3-8b04-99a9a67caa72",
-  "status": "draft",
+  "status": "published",
   "title_en": "-ía on the whole verb",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-23 23:34:23.775762+00"
+  "updated_at": "2026-09-24 01:24:28.911587+00"
  },
  {
   "body_md": "**Te banco** — *I've got your back*; **no lo banco** — *I can't stand him*. One verb, and porteños use it for both.",
   "id": "e1ff50e4-f00e-575c-a7a6-7c50b9665559",
-  "status": "draft",
+  "status": "published",
   "title_en": "Bancar",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:18:06.414424+00"
  },
  {
   "body_md": "A porteño's older sister is *mi hermana **más grande***, the younger one *mi hermano **más chico***. And *-ísimo* turns anything up: **riquísimo**, **carísimo**.",
@@ -1066,10 +1202,10 @@
  {
   "body_md": "**¡Qué bueno que estés acá!** — reacting to something *now* takes the subjunctive. **Me alegro** — *I'm glad*; **qué lástima** — *what a shame*.",
   "id": "e80261f8-332a-51cf-8ec3-11e6414d4693",
-  "status": "draft",
+  "status": "published",
   "title_en": "Qué bueno que…",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:08:19.028822+00"
  },
  {
   "body_md": "**Te debo una** — *I owe you one*. The answer is **de nada**, or, more porteño, **no pasa nada**.",
@@ -1088,6 +1224,14 @@
   "updated_at": "2026-09-23 19:53:48.73596+00"
  },
  {
+  "body_md": "**¡Mirá vos!** — *well, would you look at that* — and **no lo puedo creer** keep the story going. A **chusma** is someone who loves the gossip.",
+  "id": "eb718472-c962-5ea6-82e5-8a5d4b4100a9",
+  "status": "draft",
+  "title_en": "¡Mirá vos!",
+  "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
+ },
+ {
   "body_md": "**Buena onda** is the porteño compliment for a person: easy, warm, *nice*. **Mala onda** is the opposite. Both stay the same for everyone: *ella es buena onda*.",
   "id": "ebd8e8e5-7f3a-581d-ac16-f841077ffb75",
   "status": "draft",
@@ -1098,10 +1242,10 @@
  {
   "body_md": "About something that hasn't happened yet, *cuando* takes the subjunctive: **avisame cuando llegues** — *let me know when you get there*. About a habit it doesn't: *cuando llego, tomo mate*.",
   "id": "ee4f763f-c680-5a11-ba55-31f7082d3a0c",
-  "status": "draft",
+  "status": "published",
   "title_en": "Cuando, looking ahead",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 00:54:40.64413+00"
  },
  {
   "body_md": "**Antes era distinto** — *it used to be different*. **¡Qué épocas!** — *those were the days!* — closes it.",

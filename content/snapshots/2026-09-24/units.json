@@ -27,10 +27,10 @@
   "register_max": "informal",
   "section_id": 7,
   "slug": "te-recomiendo",
-  "status": "draft",
+  "status": "published",
   "summary_en": "Te recomiendo que vayas",
   "title_en": "Give advice",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:05:43.940994+00"
  },
  {
   "course_order": 40,
@@ -47,6 +47,23 @@
   "summary_en": "Contame todo",
   "title_en": "Tell the whole story",
   "updated_at": "2026-09-23 23:19:06.342269+00"
+ },
+ {
+  "course_order": 90,
+  "grammar_focus": [
+   "chisme",
+   "lo-que",
+   "repaso.b1"
+  ],
+  "id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "ordinal": 10,
+  "register_max": "informal",
+  "section_id": 9,
+  "slug": "viste-lo-que-paso",
+  "status": "draft",
+  "summary_en": "¿Viste lo que pasó?",
+  "title_en": "Catch up on the gossip",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "course_order": 25,
@@ -110,10 +127,10 @@
   "register_max": "informal",
   "section_id": 7,
   "slug": "que-te-vaya-bien",
-  "status": "draft",
+  "status": "published",
   "summary_en": "Que te vaya bien",
   "title_en": "Wish someone well",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 00:52:14.787731+00"
  },
  {
   "course_order": 19,
@@ -142,10 +159,26 @@
   "register_max": "informal",
   "section_id": 7,
   "slug": "cuidate",
-  "status": "draft",
+  "status": "published",
   "summary_en": "Cuidate mucho",
   "title_en": "Say goodbye properly",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:21:03.370827+00"
+ },
+ {
+  "course_order": 88,
+  "grammar_focus": [
+   "miedo",
+   "relato.susto"
+  ],
+  "id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "ordinal": 8,
+  "register_max": "informal",
+  "section_id": 9,
+  "slug": "que-susto",
+  "status": "draft",
+  "summary_en": "¡Qué susto!",
+  "title_en": "Tell about a scare",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "course_order": 3107,
@@ -310,10 +343,10 @@
   "register_max": "informal",
   "section_id": 7,
   "slug": "que-bueno",
-  "status": "draft",
+  "status": "published",
   "summary_en": "¡Qué bueno que viniste!",
   "title_en": "React to news",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:08:19.028822+00"
  },
  {
   "course_order": 42,
@@ -343,10 +376,10 @@
   "register_max": "lunfardo",
   "section_id": 7,
   "slug": "lunfardo",
-  "status": "draft",
+  "status": "published",
   "summary_en": "Qué fiaca",
   "title_en": "Talk like a porteño",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:18:06.414424+00"
  },
  {
   "course_order": 11,
@@ -426,10 +459,10 @@
   "register_max": "informal",
   "section_id": 8,
   "slug": "yo-que-vos",
-  "status": "draft",
+  "status": "published",
   "summary_en": "Yo que vos, iría",
   "title_en": "Give advice with would",
-  "updated_at": "2026-09-23 23:34:23.775762+00"
+  "updated_at": "2026-09-24 01:24:28.911587+00"
  },
  {
   "course_order": 6,
@@ -475,10 +508,26 @@
   "register_max": "informal",
   "section_id": 7,
   "slug": "no-te-preocupes",
-  "status": "draft",
+  "status": "published",
   "summary_en": "No te preocupes",
   "title_en": "Tell someone not to",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:02:30.793022+00"
+ },
+ {
+  "course_order": 87,
+  "grammar_focus": [
+   "banco",
+   "transferir"
+  ],
+  "id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "ordinal": 7,
+  "register_max": "informal",
+  "section_id": 9,
+  "slug": "el-cajero",
+  "status": "draft",
+  "summary_en": "Voy al cajero",
+  "title_en": "Deal with the bank",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "course_order": 30,
@@ -525,10 +574,25 @@
   "register_max": "informal",
   "section_id": 7,
   "slug": "cuando-llegues",
-  "status": "draft",
+  "status": "published",
   "summary_en": "Avisame cuando llegues",
   "title_en": "Talk about when something will happen",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 00:54:40.64413+00"
+ },
+ {
+  "course_order": 86,
+  "grammar_focus": [
+   "acuerdo-desacuerdo"
+  ],
+  "id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "ordinal": 6,
+  "register_max": "informal",
+  "section_id": 9,
+  "slug": "de-acuerdo",
+  "status": "draft",
+  "summary_en": "Para nada",
+  "title_en": "Agree and disagree",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "course_order": 21,
@@ -547,6 +611,22 @@
   "summary_en": "La hora",
   "title_en": "Tell the time",
   "updated_at": "2026-09-23 19:54:45.405956+00"
+ },
+ {
+  "course_order": 82,
+  "grammar_focus": [
+   "subjuntivo.para-que",
+   "subjuntivo.antes-de-que"
+  ],
+  "id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "ordinal": 2,
+  "register_max": "informal",
+  "section_id": 9,
+  "slug": "para-que",
+  "status": "draft",
+  "summary_en": "Para que entiendas",
+  "title_en": "Say what something is for",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "course_order": 60,
@@ -628,6 +708,22 @@
   "summary_en": "¿En cuántas cuotas?",
   "title_en": "Talk about money",
   "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 84,
+  "grammar_focus": [
+   "deportes",
+   "preterito.ganar-perder"
+  ],
+  "id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "ordinal": 4,
+  "register_max": "informal",
+  "section_id": 9,
+  "slug": "el-partido",
+  "status": "draft",
+  "summary_en": "¿Viste el partido?",
+  "title_en": "Talk about football",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "course_order": 23,
@@ -806,10 +902,10 @@
   "register_max": "informal",
   "section_id": 7,
   "slug": "no-creo",
-  "status": "draft",
+  "status": "published",
   "summary_en": "¿Qué te parece?",
   "title_en": "Give your opinion",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:00:17.279796+00"
  },
  {
   "course_order": 41,
@@ -844,6 +940,22 @@
   "summary_en": "Te llamo mañana",
   "title_en": "Keep it short with lo, la, le",
   "updated_at": "2026-09-23 23:12:50.467874+00"
+ },
+ {
+  "course_order": 85,
+  "grammar_focus": [
+   "quejas",
+   "andar.funcionar"
+  ],
+  "id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "ordinal": 5,
+  "register_max": "informal",
+  "section_id": 9,
+  "slug": "no-anda",
+  "status": "draft",
+  "summary_en": "No anda el wifi",
+  "title_en": "Complain when something doesn't work",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "course_order": 8,
@@ -943,6 +1055,21 @@
   "summary_en": "Me preguntó y le contesté",
   "title_en": "Tell who said what",
   "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 81,
+  "grammar_focus": [
+   "se-accidental"
+  ],
+  "id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "ordinal": 1,
+  "register_max": "informal",
+  "section_id": 9,
+  "slug": "se-me-cayo",
+  "status": "draft",
+  "summary_en": "Se me cayó el celu",
+  "title_en": "Say what went wrong by accident",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
  },
  {
   "course_order": 3,
@@ -1077,6 +1204,22 @@
   "updated_at": "2026-09-23 19:30:48.343599+00"
  },
  {
+  "course_order": 83,
+  "grammar_focus": [
+   "pluscuamperfecto",
+   "participios"
+  ],
+  "id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "ordinal": 3,
+  "register_max": "informal",
+  "section_id": 9,
+  "slug": "ya-habia",
+  "status": "draft",
+  "summary_en": "Cuando llegué, ya se había ido",
+  "title_en": "Tell what had already happened",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
+ },
+ {
   "course_order": 38,
   "grammar_focus": [
    "tareas.de-la-casa",
@@ -1174,6 +1317,22 @@
   "updated_at": "2026-09-24 00:20:44.628111+00"
  },
  {
+  "course_order": 89,
+  "grammar_focus": [
+   "costumbres",
+   "se-impersonal"
+  ],
+  "id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "ordinal": 9,
+  "register_max": "informal",
+  "section_id": 9,
+  "slug": "costumbres",
+  "status": "draft",
+  "summary_en": "La previa y la sobremesa",
+  "title_en": "Learn the local customs",
+  "updated_at": "2026-09-24 01:16:56.863946+00"
+ },
+ {
   "course_order": 26,
   "grammar_focus": [
    "cuanto-sale",
@@ -1218,10 +1377,10 @@
   "register_max": "informal",
   "section_id": 7,
   "slug": "no-se",
-  "status": "draft",
+  "status": "published",
   "summary_en": "Ni idea",
   "title_en": "Say what you know and understand",
-  "updated_at": "2026-09-23 23:01:46.02203+00"
+  "updated_at": "2026-09-24 01:13:38.667107+00"
  },
  {
   "course_order": 13,
