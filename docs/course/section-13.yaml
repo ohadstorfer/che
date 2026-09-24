@@ -4,7 +4,7 @@
 # Public life in Buenos Aires, told the way porteños tell it: strikes and
 # road blocks (hoy hay paro), the passive of the news (fue construido), voting
 # without the politics, rumors and sources (según el diario), getting robbed
-# and reporting it, the building and its expensas, the club you support, the
+# and reporting it, the building and its expensas, the team you root for, the
 # tango, the parrilla — and a checkpoint that weighs up the city (lo bueno de
 # vivir acá).
 #
@@ -412,7 +412,7 @@ units:
 
   - ordinal: 9
     slug: "de-que-cuadro-sos"
-    title: "Say which club you support"
+    title: "Say which team you root for"
     summary: "¿De qué cuadro sos?"
     grammar:
       - "futbol.hinchada"
@@ -420,46 +420,38 @@ units:
     register_max: "informal"
     sample:
       es: "¿De qué cuadro sos?"
-      en: "Which team do you support?"
+      en: "Which team do you root for?"
     tips:
       - title: "¿De qué cuadro sos?"
-        body: "The first question in a new friendship. A club is a **cuadro**, and you don't choose it,
-          you inherit it: **soy de Boca**, **soy de River**, **hincho por Racing**."
+        body: "The first question in a new friendship. A team is a **cuadro**, and you don't choose it,
+          you inherit it: **soy del mismo cuadro que mi viejo**. To root for one is **hinchar por**:
+          **¿por quién hinchás?**"
       - title: "El superclásico"
-        body: "Boca against River is **el superclásico**. Any derby is a **clásico**. The fans stand on
-          the **tribuna**."
+        body: "The two biggest teams playing each other is **el superclásico**; any derby is a
+          **clásico**. The fans stand on the **tribuna**. Which side you're on, the course leaves to you."
     words:
       - lemma: "cuadro"
         pos: "noun"
-        en: "club (soccer)"
+        en: "team (soccer)"
       - lemma: "hinchar"
         pos: "verb"
-        en: "to support (a team)"
+        en: "to root for (a team)"
         forms:
           - form: "hincho"
-            en: "I support"
+            en: "I root for"
             f: "1sg.pres.ind"
           - form: "hinchás"
-            en: "you support"
+            en: "you root for"
             f: "2sg.pres.ind.vos"
       - lemma: "superclásico"
         pos: "noun"
-        en: "Boca–River match"
+        en: "the big derby (the two biggest teams)"
       - lemma: "clásico"
         pos: "noun"
         en: "derby, rivalry game"
       - lemma: "tribuna"
         pos: "noun"
         en: "stands, bleachers"
-      - lemma: "Boca"
-        pos: "propn"
-        en: "Boca Juniors"
-      - lemma: "River"
-        pos: "propn"
-        en: "River Plate"
-      - lemma: "Racing"
-        pos: "propn"
-        en: "Racing Club"
 
   - ordinal: 10
     slug: "el-tango"
@@ -562,14 +554,14 @@ units:
   - ordinal: 12
     slug: "practica-la-parrilla"
     title: "Practice: football, tango and the grill"
-    summary: "Hincho por River"
+    summary: "¿Por quién hinchás?"
     grammar:
       - "repaso.futbol"
       - "repaso.cultura"
     register_max: "informal"
     sample:
       es: "¿Vos de qué cuadro sos?"
-      en: "Which team do you support?"
+      en: "Which team do you root for?"
     tips:
       - title: "El cuadro"
         body: "**¿De qué cuadro sos?** — and the answer is for life."
