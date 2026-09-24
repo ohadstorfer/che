@@ -7,6 +7,7 @@
 import { answerWords, glossSenses, gradeTyped, norm, senseKey } from '../answers';
 import { meaningsFromSentences, standsAlone } from '../meanings';
 import type { Form, Sentence } from '../types';
+import { senseClashes } from './check';
 import { REGIONAL, TUTEO, fold } from './rules';
 
 /** Past this many words an "answer" for one word is a sentence. */
@@ -72,7 +73,7 @@ export function checkWordAnswers({
           ? 'not plain Spanish'
           : wordsOf(answer).length > MAX_ANSWER_WORDS
             ? 'too long'
-            : offends(answer);
+            : (offends(answer) ?? senseClashes(answer, meaning)[0] ?? null);
     if (why || !meaning) {
       problems.push(`${form.form} "${p.meaning}" → "${answer}": ${why}`);
       continue;

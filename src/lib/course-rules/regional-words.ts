@@ -638,8 +638,6 @@ export const REGIONAL_WORDS: Record<string, string> = {
   "camareras":"mozo",
   "camarero":"mozo",
   "camareros":"mozo",
-  "camiseta":"remera",
-  "camisetas":"remera",
   "cazadora":"campera",
   "cazo":"cacerola",
   "cazos":"cacerola",

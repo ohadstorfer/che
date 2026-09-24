@@ -8,6 +8,7 @@ import { ids } from './ids.mjs';
 import { checkSentence, availableForms, drillable } from './outline.mjs';
 import { bare, fold } from './rules.mjs';
 import { checkShape } from '../../../src/lib/course-rules/shape.ts';
+import { senseClashes } from '../../../src/lib/course-rules/check.ts';
 import { buildIndex, tokenize } from './tokenize.mjs';
 
 const SENTENCE_MODES = ['sentence_intro', 'sentence_meaning', 'sentence_gap', 'sentence_build', 'sentence_listen'];
@@ -90,6 +91,9 @@ export function buildContent(outline, content, { source = 'human', status = 'dra
         errors.push(`${where}: target "${s.target}" does not appear in "${s.es}"`);
       }
       if (!s.en) errors.push(`${where}: missing "en"`);
+      for (const en of [s.en ?? '', ...(s.en_alt ?? [])]) {
+        for (const problem of senseClashes(s.es, en)) errors.push(`${where}: "${en}": ${problem}`);
+      }
 
       // The English has to ask for every word the Spanish needs, or building
       // the Spanish from it is a guess.

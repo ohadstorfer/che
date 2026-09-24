@@ -4,7 +4,7 @@
 
 import type { FormFeatures } from '../types';
 import { generateVariants, uncoveredTokens } from './accept';
-import { CHE_GREETINGS, CLITIC_LEMMAS, REGIONAL, REGIONAL_PHRASES, TUTEO, TUTEO_AMBIGUOUS, bare, fold, registerRank } from './rules';
+import { CHE_GREETINGS, CLITIC_LEMMAS, REGIONAL, REGIONAL_PHRASES, SENSES, TUTEO, TUTEO_AMBIGUOUS, bare, fold, registerRank } from './rules';
 import { clausesOf, wordsIn } from './shape';
 import { type Token, buildIndex, split, tokenize } from './tokenize';
 import { type VocabForm, type VocabUnit, type Vocabulary, drillable } from './vocabulary';
@@ -20,6 +20,12 @@ export function checkPhrases(es: string) {
     if (hay.includes(phraseKey(phrase))) problems.push(`"${phrase}" is not how it's said here — use "${instead}"`);
   }
   return problems;
+}
+
+/** A word used in the sense Argentina says differently, judged by its English (SENSES). */
+export function senseClashes(es: string, en: string) {
+  const words = new Set(es.split(/\s+/).map((w) => fold(w.replace(/[^\p{L}]/gu, ''))));
+  return SENSES.filter((s) => s.es.some((w) => words.has(w)) && s.wrongEn.test(en)).map((s) => s.instead);
 }
 
 /**
@@ -281,6 +287,7 @@ export function reviewSentence({
   const problems = [...checkSentence(vocabulary, unit, es, retired), ...missingOpeningMarks(es)];
   if (!en.trim()) problems.push('the English is empty');
   else {
+    problems.push(...senseClashes(es, en));
     for (const t of uncoveredTokens(resolved, en)) {
       problems.push(`the English has nothing for "${t.core}", so a learner can't know it belongs`);
     }

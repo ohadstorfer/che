@@ -96,6 +96,18 @@ export const TUTEO_AMBIGUOUS = new Set([
 export const REGIONAL = new Map(Object.entries(REGIONAL_WORDS));
 
 /**
+ * Words Argentina uses in one sense and another Spanish in a second one, told
+ * apart by the English. A T-shirt is a `remera` — `camiseta` for it is Spain's
+ * — but a team's jersey is `la camiseta` here too; and a `remera` is never a
+ * jersey. Each entry: the Spanish forms, the English that means the wrong
+ * sense, and what to say instead.
+ */
+export const SENSES: { es: string[]; wrongEn: RegExp; instead: string }[] = [
+  { es: ['camiseta', 'camisetas'], wrongEn: /\b(t-?shirts?|tees?|undershirts?|vests?)\b/i, instead: 'a T-shirt is a "remera"; "camiseta" is only a team jersey' },
+  { es: ['remera', 'remeras'], wrongEn: /\b(jerseys?|kits?)\b/i, instead: 'a team jersey is "la camiseta"; a "remera" is a T-shirt' },
+];
+
+/**
  * Set phrases the course never uses, with what a porteño says instead. Same
  * idea as REGIONAL, one level up: `qué tal` is every word of it ordinary
  * Spanish, so no token is wrong on its own — the phrase is. Matched over the

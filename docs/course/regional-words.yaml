@@ -8,7 +8,9 @@
 # kaikki.org) and reviewed by hand. Only words that mean nothing else in
 # Argentina belong here: `falda` is a cut of beef, `piña` a punch, `metro` a
 # metre, `plátano` the street tree — blocking those would reject real Argentine.
-# A false block is worse than a miss.
+# A false block is worse than a miss. `camiseta` is not here: a T-shirt is a
+# `remera`, but a team's jersey is `la camiseta` — SENSES in rules.ts checks
+# which one the English means.
 #
 # Edit this file, then `npm run course:regional` to rebuild every inflected
 # form into src/lib/course-rules/regional-words.ts.
@@ -68,7 +70,6 @@ words:
   - { es: calcetín, ar: media, pos: noun, src: reviewer }
   - { es: camarera, ar: moza, pos: noun, src: hand }
   - { es: camarero, ar: mozo, pos: noun, src: wiktionary }
-  - { es: camiseta, ar: remera, pos: noun, src: hand }
   - { es: cazadora, ar: campera, pos: noun, src: wiktionary }
   - { es: cazo, ar: cacerola, pos: noun, src: reviewer }
   - { es: cebolleta, ar: cebolla de verdeo, pos: noun, src: reviewer }

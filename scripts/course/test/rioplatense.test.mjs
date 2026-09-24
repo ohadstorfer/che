@@ -4,7 +4,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { chePlacement, checkPhrases, checkSentence, compoundPast } from '../../../src/lib/course-rules/check.ts';
+import { chePlacement, checkPhrases, checkSentence, compoundPast, senseClashes } from '../../../src/lib/course-rules/check.ts';
 import { REGIONAL } from '../../../src/lib/course-rules/rules.ts';
 import { buildContent } from '../lib/content.mjs';
 import { loadOutline } from '../lib/outline.mjs';
@@ -93,4 +93,13 @@ test('parts of the day take "a": a la noche, not por la noche', () => {
   assert.match(checkPhrases('Salimos por la noche.')[0] ?? '', /a la noche/);
   assert.match(checkPhrases('Por la mañana tomo mate.')[0] ?? '', /a la mañana/);
   assert.deepEqual(checkPhrases('A la noche salimos.'), []);
+});
+
+test('camiseta is a team jersey, never a T-shirt; a remera is never a jersey', () => {
+  assert.ok(!REGIONAL.has('camiseta'));
+  assert.deepEqual(senseClashes('Me compré la camiseta de la selección.', "I bought the national team's jersey."), []);
+  assert.deepEqual(senseClashes('Tengo una remera nueva.', 'I have a new T-shirt.'), []);
+  assert.equal(senseClashes('Me compré una camiseta blanca.', 'I bought a white T-shirt.').length, 1);
+  assert.equal(senseClashes('Tengo tres camisetas.', 'I have three tees.').length, 1);
+  assert.equal(senseClashes('Llevá la remera de Boca.', "Bring your Boca jersey.").length, 1);
 });
