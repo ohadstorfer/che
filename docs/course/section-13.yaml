@@ -44,7 +44,7 @@ units:
         en: "strike"
       - lemma: "corte"
         pos: "noun"
-        en: "road block; power cut"
+        en: "roadblock, road closure; power cut"
       - lemma: "piquete"
         pos: "noun"
         en: "picket, road blockade"
