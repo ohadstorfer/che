@@ -299,7 +299,7 @@ units:
           nunca**; **no hay mal que por bien no venga** — *every cloud has a silver lining*."
       - title: "El que avisa no traiciona"
         body: "**El que avisa no traiciona** — *I warned you*, literally *who warns doesn't betray*.
-          **Al mal tiempo, buena cara** — *grin and bear it*."
+         "
     words:
       - lemma: "dicho"
         pos: "noun"
@@ -313,9 +313,6 @@ units:
       - lemma: "el que avisa no traiciona"
         pos: "phrase"
         en: "don't say I didn't warn you"
-      - lemma: "al mal tiempo, buena cara"
-        pos: "phrase"
-        en: "grin and bear it"
 
   - ordinal: 8
     slug: "practica-lo-que-pasa"
