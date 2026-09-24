@@ -79,7 +79,8 @@
     "course:snapshot": "node scripts/course/export-snapshot.mjs",
     "course:restore": "node scripts/course/import-snapshot.mjs",
     "culture:validate": "node scripts/culture/validate.mjs",
-    "culture:build": "node scripts/culture/build.mjs"
+    "culture:build": "node scripts/culture/build.mjs",
+    "course:grammar": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/grammar-seed.mjs"
   },
   "private": true
 }

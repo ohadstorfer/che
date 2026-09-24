@@ -197,3 +197,36 @@ test('practice lessons come after the teaching, teach nothing new, and push sent
   }
   assert.deepEqual(warnings.filter((w) => /Practice/.test(w)), []);
 });
+
+test('practice never asks the same sentence twice in a row, and types from the fourth unit on', () => {
+  for (const unit of outline.units.filter((u) => u.course_order >= 2 && u.course_order <= 9)) {
+    const practiceUnit = { ...unit, lessons: [...unit.lessons, { id: `${unit.id}-p`, ordinal: 99, kind: 'practice', title_en: 'Practice' }] };
+    const sentences = unitSentences(unit, outline.forms, { per: 6 });
+    const { slots } = planLessons({ unit: practiceUnit, forms: outline.forms, sentences, tips: unit.tips });
+    const own = slots.filter((s) => s.lesson_id === `${unit.id}-p` && s.kind === 'drill');
+    assert.ok(own.length > 0, `${unit.slug}: practice is empty`);
+    own.slice(1).forEach((s, i) => assert.notEqual(s.sentence_id, own[i].sentence_id, `${unit.slug}: back to back`));
+    const typed = own.some((s) => s.mode === 'sentence_gap_typed');
+    assert.equal(typed, unit.course_order >= 4, `${unit.slug}: typed ${typed}`);
+  }
+});
+
+test('grammar practice drills sentences that carry the grammar, and opens on its pattern', () => {
+  const unit = outline.units.find((u) => u.course_order === 9);
+  const lesson = { id: `${unit.id}-g`, ordinal: 98, kind: 'practice', title_en: 'Grammar practice' };
+  const sentences = unitSentences(unit, outline.forms, { per: 6 });
+  const verbs = outline.forms.filter((f) => f.unit_id === unit.id && f.features?.tense);
+  const tip = { id: 'pattern', title_en: 'Pattern', body_md: '| yo | tengo |' };
+  const { slots } = planLessons({
+    unit: { ...unit, lessons: [...unit.lessons, lesson] },
+    forms: outline.forms,
+    sentences,
+    tips: unit.tips,
+    grammar: { formIds: new Set(verbs.map((f) => f.id)), newIds: new Set(verbs.map((f) => f.id)), glueIds: new Set(), tip },
+  });
+  const own = slots.filter((s) => s.lesson_id === lesson.id);
+  assert.equal(own[0].tip_id, 'pattern');
+  const gaps = own.filter((s) => s.mode === 'sentence_gap' || s.mode === 'sentence_gap_typed');
+  const byId = new Map(sentences.map((s) => [s.id, s]));
+  for (const g of gaps) assert.ok(verbs.some((v) => v.id === byId.get(g.sentence_id).target_form_id), 'a gap asks the grammar');
+});

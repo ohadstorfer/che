@@ -82,6 +82,9 @@ const SENTENCE_MODES: ExerciseMode[] = [
   'sentence_gap',
   'sentence_build',
   'sentence_listen',
+  // Authored where a lesson wants her to produce the word, not pick it: the
+  // practice lessons type what the teaching lessons only showed.
+  'sentence_gap_typed',
 ];
 
 export async function buildLesson(

@@ -24,6 +24,23 @@ export const LESSON_ITEMS = { min: 12, max: 16 };
  */
 export { FORMS_PER_LESSON };
 
+/** The title that marks a practice lesson as grammar practice. */
+export const GRAMMAR_TITLE = 'Grammar practice';
+
+/** The first unit whose practice asks her to type (course_order). */
+const TYPING_FROM = 4;
+
+/** A practice lesson's shape: fresh gaps, recycled earlier sentences, typed gaps. */
+const PRACTICE_GAPS = 3;
+const PRACTICE_RECYCLED = 4;
+const PRACTICE_TYPED = 2;
+
+/** How many equally easy sentences a pick weighs for the words they bring back. */
+const PICK_AMONG = 5;
+
+/** Longest sentence practice asks her to build from tiles, in words. */
+const BUILD_WORDS_MAX = 9;
+
 /** Screens a `review` slot fills. */
 const REVIEW_COUNT = 2;
 
@@ -52,8 +69,11 @@ const itemsOf = (slot) => (slot.kind === 'review' || slot.kind === 'recap' ? (sl
  * @param tips       the unit's tips, in order
  * @returns {{ slots, warnings }}
  */
-export function planLessons({ unit, forms, sentences, tips }) {
+export function planLessons({ unit, forms, sentences, tips, earlier = [], debt = () => 0, grammar = null }) {
   const warnings = [];
+  // Typing a word is production she can only do once the letters of the
+  // course are familiar: from the unit after vos on, practice types.
+  const typing = unit.course_order >= TYPING_FROM;
   const formById = new Map(forms.map((f) => [f.id, f]));
   // A practice unit teaches nothing: its words are the earlier ones it reviews.
   const review = new Set(unit.review_form_ids ?? []);
@@ -70,6 +90,9 @@ export function planLessons({ unit, forms, sentences, tips }) {
   const fresh = (s) => sayable(s) && !used.has(s.id);
   const bySize = [...sentences].sort((a, b) => words(a) - words(b) || a.difficulty - b.difficulty);
   const bySizeDesc = [...bySize].reverse();
+  // Of a few equally good sentences, the one carrying the most earlier words
+  // that are owed a comeback (`debt`) — the first when none owes anything.
+  const owing = (list) => list.reduce((best, s) => (best === undefined || debt(s) > debt(best) ? s : best), undefined);
 
   const slots = [];
   const push = (lesson, slot) =>
@@ -167,7 +190,7 @@ export function planLessons({ unit, forms, sentences, tips }) {
     // It closes on production: tiles for what it just gapped, then a longer
     // sentence of the unit that is sayable by now.
     for (const s of gapped.slice(0, 2)) if (planned() < LESSON_ITEMS.max) drill(make, s, 'sentence_build');
-    const longer = bySizeDesc.find(fresh);
+    const longer = owing(bySizeDesc.filter(fresh).slice(0, PICK_AMONG));
     if (longer && planned() < LESSON_ITEMS.max) drill(make, longer, 'sentence_build');
 
     // Then she hears what she has just read, where there is a recording.
@@ -183,7 +206,7 @@ export function planLessons({ unit, forms, sentences, tips }) {
     // it is for rather than filler.
     for (let k = 0; planned() < LESSON_ITEMS.min; k += 1) {
       const want = RAMP[k % RAMP.length];
-      const pad = want === 'sentence_build' ? bySizeDesc.find(fresh) : bySize.find(fresh);
+      const pad = owing((want === 'sentence_build' ? bySizeDesc : bySize).filter(fresh).slice(0, PICK_AMONG));
       if (pad) {
         drill(want === 'sentence_build' ? make : pads, pad, want);
         continue;
@@ -209,49 +232,162 @@ export function planLessons({ unit, forms, sentences, tips }) {
   });
 
   // Practice lessons teach nothing new: they are the unit's words again, in
-  // sentences she hasn't met yet, pushed up the ramp to the gap and the tiles —
-  // the practice a learner needs before the next unit leans on them. Each
-  // opens on a review of earlier units, so older words and tenses come back
-  // too. A unit out of fresh sentences takes ones it has shown a rung higher.
-  const practice = unit.lessons.filter((l) => l.kind === 'practice');
+  // sentences she hasn't met yet, before the next unit leans on them. Each
+  // opens on a review of earlier units, and holds four kinds of work, spaced
+  // so no sentence is asked twice in a row — the tiles for a sentence come
+  // screens after its gap, never right on top of it, where they'd be copying:
+  //
+  //   gaps      fresh sentences of the unit, the word picked
+  //   recycled  sentences of earlier units carrying words owed a comeback
+  //   typed     sentences she has met, the word typed rather than picked
+  //   tiles     the gapped sentences again, built — in reverse order
+  const practice = unit.lessons.filter((l) => l.kind === 'practice' && l.title_en !== GRAMMAR_TITLE);
+  const drills = unit.lessons.filter((l) => l.kind === 'practice' && l.title_en === GRAMMAR_TITLE);
   const rungs = new Map(); // sentence id -> highest rung reached in any lesson
   for (const s of slots) {
     if (s.sentence_id) rungs.set(s.sentence_id, Math.max(rungs.get(s.sentence_id) ?? 0, RAMP.indexOf(s.mode)));
   }
-  practice.forEach((lesson, pi) => {
+  const recycledHere = new Set(); // earlier sentences this unit already brought back
+  const recycle = (n) => {
     const out = [];
+    const pool = earlier.filter((s) => !recycledHere.has(s.id) && debt(s) > 0);
+    while (out.length < n && pool.length) {
+      let at = 0;
+      for (let i = 1; i < pool.length; i++) if (debt(pool[i]) > debt(pool[at])) at = i;
+      const [s] = pool.splice(at, 1);
+      recycledHere.add(s.id);
+      out.push(s);
+    }
+    return out;
+  };
+  const buildable = (s) => words(s) <= BUILD_WORDS_MAX;
+
+  practice.forEach((lesson, pi) => {
     // A practice unit has no teaching lesson to show its tips: its practice
     // lessons open on them, one each.
     const tip = review.size ? tips[pi] : null;
-    const tail = REVIEW_COUNT + 1 + (tip ? 1 : 0); // tip and review up front, match at the end
-    const planned = () => out.length + tail;
-    const drillP = (s, mode) => {
-      out.push({ kind: 'drill', sentence_id: s.id, mode });
+    const head = [];
+    if (tip) head.push({ kind: 'tip', tip_id: tip.id });
+    head.push({ kind: 'review', review_count: REVIEW_COUNT });
+    const inLesson = new Set();
+    const mark = (s, mode) => {
       use(s);
-      rungs.set(s.id, Math.max(rungs.get(s.id) ?? 0, RAMP.indexOf(mode)));
+      inLesson.add(s.id);
+      rungs.set(s.id, Math.max(rungs.get(s.id) ?? 0, RAMP.indexOf(mode === 'sentence_gap_typed' ? 'sentence_gap' : mode)));
+      return { kind: 'drill', sentence_id: s.id, mode };
     };
-    // Fresh sentences first: a gap, then the same sentence built from tiles.
-    for (const s of bySize.filter(fresh)) {
-      if (planned() + 2 > LESSON_ITEMS.max) break;
-      drillP(s, 'sentence_gap');
-      drillP(s, 'sentence_build');
+
+    const gaps = [];
+    for (let i = 0; i < PRACTICE_GAPS; i++) {
+      const s = owing(bySize.filter((x) => fresh(x) && !inLesson.has(x.id)).slice(0, PICK_AMONG));
+      if (!s) break;
+      gaps.push(s);
+      inLesson.add(s.id);
     }
-    // Then what the unit has shown, least practised first, one rung up.
+    const back = recycle(PRACTICE_RECYCLED + (PRACTICE_GAPS - gaps.length));
+    // Typed: what the teaching lessons showed, least practised first.
+    const met = bySize
+      .filter((x) => sayable(x) && used.has(x.id) && !inLesson.has(x.id))
+      .sort((a, b) => (used.get(a.id) ?? 0) - (used.get(b.id) ?? 0));
+    const typed = typing ? met.slice(0, PRACTICE_TYPED) : [];
+    for (const s of typed) inLesson.add(s.id);
+
+    const body = [];
+    for (const s of gaps) body.push(mark(s, 'sentence_gap'));
+    back.forEach((s, i) => body.push(mark(s, i % 2 === 0 || !buildable(s) ? 'sentence_gap' : 'sentence_build')));
+    for (const s of typed) body.push(mark(s, 'sentence_gap_typed'));
+    for (const s of [...gaps].reverse()) body.push(mark(s, 'sentence_build'));
+
+    // Short of the window: what the unit has shown, a rung up, then typed.
+    const planned = () => head.length + REVIEW_COUNT - 1 + body.length + 1;
     while (planned() < LESSON_ITEMS.min) {
       const again = bySize
-        .filter((s) => sayable(s) && used.has(s.id) && (rungs.get(s.id) ?? 0) < RAMP.length - 1 && !out.some((o) => o.sentence_id === s.id))
+        .filter((s) => sayable(s) && used.has(s.id) && !inLesson.has(s.id) && (rungs.get(s.id) ?? 0) < RAMP.length - 1)
         .sort((a, b) => (rungs.get(a.id) ?? 0) - (rungs.get(b.id) ?? 0) || (used.get(a.id) ?? 0) - (used.get(b.id) ?? 0))[0];
       if (!again) break;
-      drillP(again, RAMP[(rungs.get(again.id) ?? 0) + 1]);
+      body.push(mark(again, RAMP[(rungs.get(again.id) ?? 0) + 1]));
     }
+    while (planned() < LESSON_ITEMS.min) {
+      const more = recycle(1)[0];
+      if (!more) break;
+      body.push(mark(more, 'sentence_gap'));
+    }
+    while (planned() > LESSON_ITEMS.max) body.pop();
+    spaceOut(body);
     if (planned() < LESSON_ITEMS.min) {
       warnings.push(`${unit.slug} ${lesson.title_en ?? `lesson ${lesson.ordinal}`}: ${planned()} screens, wants ${LESSON_ITEMS.min} — the unit is out of sentences.`);
     }
-    if (tip) push(lesson, { kind: 'tip', tip_id: tip.id });
-    push(lesson, { kind: 'review', review_count: REVIEW_COUNT });
-    for (const slot of out) push(lesson, slot);
+    for (const slot of head) push(lesson, slot);
+    for (const slot of body) push(lesson, slot);
     push(lesson, { kind: 'match' });
   });
+
+  // Grammar practice (docs/course/grammar-practice.yaml): the unit's grammar
+  // on its own, in sentences from this unit and earlier ones that carry it.
+  // The first opens on the whole pattern as a table. The work is the gap, the
+  // same gap typed a few screens later, and other sentences built from tiles:
+  //
+  //   gap 1 · gap 2 · gap 3 · tiles 4 · typed 1 · gap 5 · tiles 6 · typed 2 ·
+  //   gap 7 · typed 3 · tiles 8 · typed 5
+  if (drills.length && grammar) {
+    const focusIds = grammar.formIds;
+    const carries = (s) => contentOf(s).some((id) => focusIds.has(id));
+    const aimsAt = (s) => focusIds.has(s.target_form_id);
+    const own = sentences.filter((s) => sayable(s) && carries(s));
+    const before = earlier.filter(carries);
+    const shown = new Map(); // sentence id -> times in grammar lessons
+    // The tokens can't tell the article "la" from the pronoun: a pronoun is
+    // the one right in front of a verb.
+    const isVerb = (t) => (t?.form_ids ?? []).some((id) => formById.get(id)?.features?.tense);
+    const hasGlue = (s) =>
+      s.tokens.some((t, i) => (t.form_ids ?? []).some((id) => grammar.glueIds?.has(id)) && isVerb(s.tokens[i + 1]));
+    const carried = (s) => contentOf(s).filter((id) => focusIds.has(id)).length;
+    const rank = (s) =>
+      (aimsAt(s) ? 4 : 0) + Math.min(2, carried(s) - 1) + (hasGlue(s) ? 2 : 0) + (grammar.newIds.has(s.target_form_id) ? 2 : 0) + Math.min(2, debt(s) / 2) -
+      3 * (shown.get(s.id) ?? 0) - (s.unit_id === unit.id ? 0 : 0.5);
+    const best = (list, taken, want) => {
+      const ok = list.filter((s) => !taken.has(s.id) && (!want || want(s)));
+      ok.sort((a, b) => rank(b) - rank(a) || words(a) - words(b));
+      return ok[0];
+    };
+    drills.forEach((lesson, di) => {
+      const taken = new Set();
+      // Alternate the unit's own sentences with earlier ones, so the pattern
+      // meets both the new words and the old.
+      const picks = [];
+      for (let i = 0; i < 8; i++) {
+        const want = i % 2 === 0 ? own : before.length ? before : own;
+        const s =
+          best(want, taken, i === 3 || i === 5 || i === 7 ? buildable : aimsAt) ??
+          best([...own, ...before], taken, i === 3 || i === 5 || i === 7 ? buildable : null) ??
+          best([...own, ...before], new Set(), null);
+        if (!s) break;
+        taken.add(s.id);
+        shown.set(s.id, (shown.get(s.id) ?? 0) + 1);
+        picks.push(s);
+      }
+      if (picks.length < 4) {
+        warnings.push(`${unit.slug} ${GRAMMAR_TITLE} ${di + 1}: only ${picks.length} sentences carry the unit's grammar.`);
+      }
+      const typedMode = typing ? 'sentence_gap_typed' : 'sentence_build';
+      const plan = [
+        [0, 'sentence_gap'], [1, 'sentence_gap'], [2, 'sentence_gap'], [3, 'sentence_build'],
+        [0, typedMode], [4, 'sentence_gap'], [5, 'sentence_build'], [1, typedMode],
+        [6, 'sentence_gap'], [2, typedMode], [7, 'sentence_build'], [4, typedMode],
+      ];
+      if (di === 0 && grammar.tip) push(lesson, { kind: 'tip', tip_id: grammar.tip.id });
+      push(lesson, { kind: 'review', review_count: REVIEW_COUNT });
+      for (const [i, mode] of plan) {
+        const s = picks[i];
+        if (!s) continue;
+        use(s);
+        push(lesson, { kind: 'drill', sentence_id: s.id, mode });
+      }
+      push(lesson, { kind: 'match' });
+    });
+  } else if (drills.length) {
+    warnings.push(`${unit.slug}: ${drills.length} ${GRAMMAR_TITLE} lesson(s) but no entry in grammar-practice.yaml`);
+  }
 
   if (check) {
     // The check is a recap plus production, sized to the same window.
@@ -271,6 +407,28 @@ export function planLessons({ unit, forms, sentences, tips }) {
     if (count < 3) warnings.push(`${unit.slug}: "${f.form}" has ${count} approved sentence(s); lessons want 3 or more`);
   }
   return { slots, warnings };
+}
+
+/**
+ * Reorders drills in place so no sentence comes twice in a row: a screen that
+ * would repeat the one before it waits for the next that doesn't. One that
+ * can't be placed apart at all is dropped rather than shown back to back.
+ */
+function spaceOut(body) {
+  const out = [];
+  let waiting = [];
+  for (const slot of body) {
+    const next = [];
+    for (const w of waiting) {
+      if (out.at(-1)?.sentence_id !== w.sentence_id) out.push(w);
+      else next.push(w);
+    }
+    waiting = next;
+    if (out.at(-1)?.sentence_id === slot.sentence_id) waiting.push(slot);
+    else out.push(slot);
+  }
+  for (const w of waiting) if (out.at(-1)?.sentence_id !== w.sentence_id) out.push(w);
+  body.splice(0, body.length, ...out);
 }
 
 export { itemsOf };

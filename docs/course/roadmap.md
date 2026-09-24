@@ -84,6 +84,17 @@ A review of the course found it thinning out as it got harder: by sections 7–9
 
 Every new section keeps all three.
 
+## Grammar, recycling and typing (2026-09-24, second review)
+
+A second review found three more gaps: the hardest grammar got the fewest lessons (*si tuviera… viajaría* had 4, the clothes unit 16), half the words of sections 5–9 were never drilled again after their unit, and practice only asked for recognition and tiles. Four changes:
+
+1. **Grammar practice lessons.** `docs/course/grammar-practice.yaml` gives 44 grammar units one or two *Grammar practice* lessons (after teaching, before practice) that drill the unit's tense or pattern in sentences from it and from earlier units with the same tense and mood (`focus` adds more, e.g. the preterite next to the imperfect). Sections 1–3 also get a practice lesson per teaching unit. Seeded by `npm run course:grammar -- <migration.sql>` (migration 20260924000024).
+2. **Pattern tips.** The first grammar lesson opens on the whole pattern as a table (Markdown pipe rows; `TipCard` renders them).
+3. **Recycling.** `course:lessons` now plans the whole course in order (`lib/course-plan.mjs`): each word is owed a comeback 1, 3, 6, 12 and 24 units after it was last drilled, practice lessons spend four screens on earlier sentences carrying the most owed words, and every choice between sentences prefers them. Words never drilled after their unit fell from about half to under 15% in sections 5–8.
+4. **Typing.** From unit 4, practice and grammar lessons pin typed gaps (`sentence_gap_typed`) on sentences she has met; tiles for a sentence never come right after its gap.
+
+`npm run course:lessons -- --all` rebuilds every unit; it prints the recycling figures by section. Listening waits for audio (`course:tts`), which is recorded only for units 1–6.
+
 ## Status
 
 | Section | Outline | Seeded | Sentences |

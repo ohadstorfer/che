@@ -304,10 +304,12 @@ function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
 // TipCard — a grammar note between exercises. It asks nothing and grades
 // nothing; it is there so the rule arrives just before the questions that lean
 // on it. Tips are short by design, so a single panel of prose is enough, with
-// the two bits of emphasis the course writes in: **bold** and *italic*.
+// the two bits of emphasis the course writes in: **bold** and *italic* — and a
+// table of forms, written as Markdown pipe rows (`| yo | soy |`), for the
+// pattern tips that show a whole paradigm at once.
 // ---------------------------------------------------------------------------
 function TipCard({ tip, onDone }: { tip: Tip; onDone: () => void }) {
-  const paragraphs = tip.body_md.split(/\n{2,}/).map((p) => p.replace(/\s*\n\s*/g, ' ').trim());
+  const blocks = tip.body_md.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
   return (
     <Frame
       prompt={`💡 ${tip.title_en}`}
@@ -317,13 +319,39 @@ function TipCard({ tip, onDone }: { tip: Tip; onDone: () => void }) {
       onCheck={onDone}
       onContinue={onDone}>
       <Panel style={styles.tip}>
-        {paragraphs.map((para, i) => (
-          <Text key={i} style={styles.tipText}>
-            {inlineMarkdown(para)}
-          </Text>
-        ))}
+        {blocks.map((block, i) => {
+          const lines = block.split(/\n/).map((l) => l.trim());
+          if (lines.every((l) => l.startsWith('|'))) return <TipTable key={i} rows={lines.map(tableCells)} />;
+          return (
+            <Text key={i} style={styles.tipText}>
+              {inlineMarkdown(block.replace(/\s*\n\s*/g, ' '))}
+            </Text>
+          );
+        })}
       </Panel>
     </Frame>
+  );
+}
+
+/** The cells of a pipe row: `| yo | **soy** |` → ['yo', '**soy**']. */
+const tableCells = (line: string) => line.replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
+
+/** A small paradigm: the first column names the person, the rest are forms.
+ *  Wide tables (five forms across) drop a size so they still fit a phone. */
+function TipTable({ rows }: { rows: string[][] }) {
+  const wide = Math.max(...rows.map((r) => r.length)) > 4;
+  return (
+    <View style={styles.tipTable}>
+      {rows.map((cells, r) => (
+        <View key={r} style={[styles.tipRow, r > 0 && styles.tipRowRule]}>
+          {cells.map((cell, c) => (
+            <Text key={c} style={[styles.tipCell, wide && styles.tipCellWide, c === 0 && styles.tipCellHead]}>
+              {inlineMarkdown(cell)}
+            </Text>
+          ))}
+        </View>
+      ))}
+    </View>
   );
 }
 
@@ -502,15 +530,18 @@ export function Choices({
   chosen,
   revealed,
   onPick,
+  side,
 }: {
   options: Option[];
   correctId: string;
   chosen: string | null;
   revealed: boolean;
   onPick: (id: string) => void;
+  /** Two short answers (true / false) as big buttons next to each other instead of a list. */
+  side?: boolean;
 }) {
   return (
-    <View style={{ gap: 10 }}>
+    <View style={side ? styles.choicesSide : { gap: 10 }}>
       {options.map((opt) => {
         const picked = chosen === opt.id;
         const right = revealed && opt.id === correctId;
@@ -522,6 +553,7 @@ export function Choices({
             onPress={() => onPick(opt.id)}
             style={({ pressed }) => [
               styles.choice,
+              side && styles.choiceSide,
               picked && styles.choicePicked,
               right && styles.choiceRight,
               wrong && styles.choiceWrong,
@@ -531,6 +563,7 @@ export function Choices({
             <Text
               style={[
                 styles.choiceText,
+                side && styles.choiceTextSide,
                 picked && { color: colors.primaryDark, fontWeight: '700' },
                 right && { color: colors.success, fontWeight: '700' },
                 wrong && { color: colors.danger },
@@ -2180,6 +2213,12 @@ const styles = StyleSheet.create({
   tipText: { fontSize: 17, lineHeight: 26, color: colors.ink },
   tipStrong: { fontWeight: '700', color: colors.primaryDark },
   tipEm: { fontStyle: 'italic' },
+  tipTable: { borderRadius: 12, borderWidth: StyleSheet.hairlineWidth, borderColor: colors.border, overflow: 'hidden' },
+  tipRow: { flexDirection: 'row', paddingVertical: 7, paddingHorizontal: 10, columnGap: 8 },
+  tipRowRule: { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: colors.border },
+  tipCell: { flex: 1, fontSize: 15, lineHeight: 21, color: colors.ink },
+  tipCellWide: { fontSize: 13, lineHeight: 18 },
+  tipCellHead: { color: colors.muted },
 
   // Sentences ----------------------------------------------------------------
   // Words are laid out one Text each so a single one can be marked or blanked;
@@ -2266,6 +2305,9 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 18,
   },
+  choicesSide: { flexDirection: 'row', gap: 12 },
+  choiceSide: { flex: 1, minHeight: 88, borderRadius: radius.lg, alignItems: 'center', justifyContent: 'center' },
+  choiceTextSide: { fontSize: 22, fontWeight: '700' },
   choicePicked: { borderColor: colors.primary, backgroundColor: colors.primarySoft },
   choiceRight: { borderColor: colors.success, backgroundColor: colors.successSoft },
   choiceWrong: { borderColor: colors.danger, backgroundColor: colors.dangerSoft },

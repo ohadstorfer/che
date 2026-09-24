@@ -1,0 +1,608 @@
+# ---------------------------------------------------------------------------
+# Grammar practice — the extra time the course gives its hard grammar.
+#
+# A 2026-09-24 review found the course spending its lessons on vocabulary and
+# rushing its grammar: a unit of 46 clothes and colours got 16 lessons, "si
+# tuviera… viajaría" got 4. This file fixes the balance without touching what
+# units teach:
+#
+#   - every unit listed here gets `lessons` Grammar practice lessons, after its
+#     teaching lessons and before its practice and check. They drill the
+#     unit's new grammar — its verb forms, pronouns, agreement — in sentences
+#     from this unit and from earlier ones (`focus`), to the gap, typed, and
+#     built from tiles (scripts/course/lib/course-plan.mjs).
+#   - the first of them opens on `tip`: the whole pattern at once, with a table
+#     of the forms. The unit's own short tips still open its teaching lessons.
+#   - `practice_sections`: teaching units in these sections, which were seeded
+#     before practice lessons existed, get `practice_per_unit` of them.
+#
+# Tables are Markdown pipe rows; the app renders them as a grid (TipCard).
+# A table only shows forms the course has taught by that unit.
+#
+# focus (optional): feature filters for sentences from earlier units that
+# belong in this unit's practice, e.g. {tense: pret} brings the preterite back
+# next to the imperfect. Without it: the unit's new forms, plus the other forms
+# of their lemmas taught before.
+#
+# Apply: npm run course:grammar -- <migration.sql>   (lessons, tips, ordinals)
+#        npm run course:lessons -- --all             (every unit's slots)
+# ---------------------------------------------------------------------------
+
+practice_sections: [1, 2, 3]
+practice_per_unit: 1
+
+units:
+  # ── Section 1 ───────────────────────────────────────────────────────────
+  - unit: vos-y-sos
+    lessons: 1
+    tip:
+      title: "Soy, sos"
+      body: |
+        *Ser* — to be — has a form for each person. So far:
+
+        | yo | **soy** | I am |
+        | vos | **sos** | you are |
+
+        Use **vos** with everyone: friends, the waiter, your boss. A question is the same words with a rising voice: *¿Sos Sofi?*
+
+  - unit: como-te-llamas
+    lessons: 1
+    tip:
+      title: "Me llamo, te llamás"
+      body: |
+        The little word in front changes with the person, and so does the verb:
+
+        | yo | **me llamo** | my name is |
+        | vos | **te llamás** | your name is |
+
+        The question puts *cómo* first: **¿Cómo te llamás?** The vos form ends in **-ás**, with the stress on the end.
+
+  - unit: el-y-ella
+    lessons: 1
+    tip:
+      title: "Soy, sos, es"
+      body: |
+        Three people, three forms of *ser*:
+
+        | yo | **soy** |
+        | vos | **sos** |
+        | él, ella | **es** |
+
+        The verb already tells you who, so the pronoun is usually dropped: *Es de Rosario* — he's (or she's) from Rosario.
+
+  - unit: argentino-argentina
+    lessons: 1
+    tip:
+      title: "The word matches the person"
+      body: |
+        Words that describe someone change for a man or a woman:
+
+        | a man | a woman |
+        | argentin**o** | argentin**a** |
+        | uruguay**o** | uruguay**a** |
+        | porteñ**o** | porteñ**a** |
+        | ingl**és** | ingl**esa** |
+
+        *-o* becomes *-a*. A word ending in a consonant adds *-a*, and *inglés* loses its accent: **inglesa**.
+
+  - unit: la-familia
+    lessons: 1
+    tip:
+      title: "Hermano, hermana"
+      body: |
+        Most family words come in pairs:
+
+        | man | woman |
+        | herman**o** | herman**a** |
+        | hij**o** | hij**a** |
+        | abuel**o** | abuel**a** |
+        | novi**o** | novi**a** |
+        | viej**o** | viej**a** |
+
+        **Mi** — *my* — never changes: *mi hermano*, *mi hermana*. And *papá* ends in *-a* but is a man.
+
+  - unit: cuantos-anos-tenes
+    lessons: 1
+    tip:
+      title: "Tengo, tenés, tiene"
+      body: |
+        *Tener* — to have — is how you give your age:
+
+        | yo | **tengo** | Tengo veinte años. |
+        | vos | **tenés** | ¿Cuántos años tenés? |
+        | él, ella | **tiene** | Tiene doce años. |
+
+        The *e* of *tener* becomes *ie* in *tiene* — but never in the vos form: **tenés**.
+
+  # ── Section 2 ───────────────────────────────────────────────────────────
+  - unit: la-gente
+    lessons: 1
+    tip:
+      title: "Ser and tener, all of them"
+      body: |
+        With *nosotros* and *ellos*, both verbs are complete:
+
+        | | ser | tener |
+        | yo | soy | tengo |
+        | vos | sos | tenés |
+        | él, ella | es | tiene |
+        | nosotros | **somos** | **tenemos** |
+        | ellos, ustedes | **son** | **tienen** |
+
+        **Ustedes** — *you all* — uses the *ellos* form. Argentina never uses *vosotros*.
+
+  - unit: donde-esta
+    lessons: 1
+    tip:
+      title: "Estar, and ser or estar"
+      body: |
+        | yo | **estoy** |
+        | vos | **estás** |
+        | él, ella | **está** |
+
+        Two verbs mean *to be*. **Ser** says who or what something is, and where it's from: *Soy de Rosario.* **Estar** says where it is right now: *Estoy en el centro.*
+
+  - unit: hay-un-kiosco
+    lessons: 1
+    tip:
+      title: "Hay or está"
+      body: |
+        | something new | something you already know |
+        | **Hay** un kiosco. | **El** kiosco **está** en la esquina. |
+        | **Hay** una parada acá. | **La** parada **está** lejos. |
+
+        **Hay** goes with *un, una* or a number, and never changes: *hay dos subtes*. **Está** goes with *el, la*.
+
+  - unit: como-estas
+    lessons: 1
+    tip:
+      title: "Estar, and four endings"
+      body: |
+        | yo | estoy | vos | estás |
+        | él, ella | está | nosotros | **estamos** |
+        | ellos, ustedes | **están** | | |
+
+        The word for the feeling matches the people in number too:
+
+        | one man | cansad**o** | one woman | cansad**a** |
+        | men | cansad**os** | women | cansad**as** |
+
+        A word ending in *-e* just adds *-s*: *triste, tristes*. *Feliz* becomes **felices**.
+
+  - unit: que-haces
+    lessons: 2
+    tip:
+      title: "Every -ar verb"
+      body: |
+        Take off *-ar* and add the ending for the person:
+
+        | yo | labur**o** |
+        | vos | labur**ás** |
+        | él, ella | labur**a** |
+        | nosotros | labur**amos** |
+        | ellos, ustedes | labur**an** |
+
+        It works for *hablar, tomar, estudiar, caminar* — every regular -ar verb. **Hacer** is irregular in *yo*: **hago**, *hacés, hace*.
+
+  - unit: mate-y-facturas
+    lessons: 1
+    tip:
+      title: "Gusta or gustan"
+      body: |
+        The verb matches the thing you like, not you:
+
+        | one thing | more than one |
+        | Me **gusta** el mate. | Me **gustan** las facturas. |
+        | ¿Te **gusta** la milanesa? | ¿Te **gustan** los mates? |
+
+        **Me** — to me, **te** — to you, **le** — to him or her. For emphasis, add *a mí*: *A mí me gusta amargo.*
+
+  - unit: facu-y-laburo
+    lessons: 1
+    tip:
+      title: "Tener que, and jobs"
+      body: |
+        **Tener que** + an infinitive — the *-ar, -er, -ir* form — is *to have to*:
+
+        | Tengo que laburar. | I have to work. |
+        | ¿Tenés que estudiar? | Do you have to study? |
+
+        Jobs change for a woman: *profesor* → **profesora**, *médico* → **médica**, *jefe* → **jefa**. And no *un, una*: **Soy abogada.**
+
+  - unit: comes-vivis
+    lessons: 2
+    tip:
+      title: "Every -er and -ir verb"
+      body: |
+        | | comer | vivir |
+        | yo | com**o** | viv**o** |
+        | vos | com**és** | viv**ís** |
+        | él, ella | com**e** | viv**e** |
+        | nosotros | com**emos** | viv**imos** |
+        | ellos, ustedes | com**en** | viv**en** |
+
+        -er and -ir are the same except for **vos** and **nosotros**, where each keeps its own vowel.
+
+  # ── Section 3 ───────────────────────────────────────────────────────────
+  - unit: queres-podes-vas
+    lessons: 2
+    tip:
+      title: "Querer, poder, ir"
+      body: |
+        | | querer | poder | ir |
+        | yo | quiero | puedo | voy |
+        | vos | **querés** | **podés** | vas |
+        | él, ella | quiere | puede | va |
+        | nosotros | **queremos** | **podemos** | vamos |
+        | ellos | quieren | pueden | van |
+
+        *e → ie* and *o → ue* everywhere except **vos** and **nosotros**. *Ir* is its own thing. Add an infinitive for plans: *¿Querés salir?*
+
+  - unit: dale-veni
+    lessons: 2
+    tip:
+      title: "How a vos command is made"
+      body: |
+        Take the infinitive, drop the *-r*, and stress the last vowel:
+
+        | mirar | **mirá** |
+        | esperar | **esperá** |
+        | venir | **vení** |
+        | andar | **andá** |
+
+        A pronoun joins the end, and the accent goes, because the stress doesn't move: *esperá* → **esperame**. *Decir* → **decime**, *sentarse* → **sentate**.
+
+  - unit: la-rutina
+    lessons: 1
+    tip:
+      title: "Me levanto, te levantás"
+      body: |
+        These verbs carry a pronoun that matches the person:
+
+        | yo | **me** levanto | **me** acuesto |
+        | vos | **te** levantás | **te** acostás |
+        | él, ella | **se** levanta | **se** acuesta |
+        | nosotros | **nos** levantamos | |
+
+        The pronoun goes before the verb. *Acostarse* changes *o → ue*, but not with vos: **te acostás**.
+
+  - unit: que-te-gusta-hacer
+    lessons: 1
+    tip:
+      title: "Me gusta + doing something"
+      body: |
+        With a verb, *gusta* stays singular, even for two activities:
+
+        | Me gusta bailar. | Me gusta leer y cocinar. |
+        | Me encanta el fútbol. | Me encantan las series. |
+
+        Agreeing: **A mí también** after a *yes*, **A mí tampoco** after a *no*.
+
+  # ── Section 4 ───────────────────────────────────────────────────────────
+  - unit: ayer-labure
+    lessons: 2
+    tip:
+      title: "Present or past: the stress"
+      body: |
+        | | now | yesterday |
+        | yo | labur**o** | labur**é** |
+        | vos | labur**ás** | labur**aste** |
+        | él, ella | labur**a** | labur**ó** |
+
+        *Laburo* is *I work*; **laburó** is *he worked*. Only the stress, and the accent that marks it, tells them apart. Every regular -ar verb works like this: *hablé, llegaste, compró*.
+
+  - unit: comi-y-sali
+    lessons: 2
+    focus: [{ tense: pret }]
+    tip:
+      title: "The past of -er and -ir"
+      body: |
+        | | -ar | -er, -ir |
+        | yo | labur**é** | com**í**, sal**í** |
+        | vos | labur**aste** | com**iste**, sal**iste** |
+        | él, ella | labur**ó** | com**ió**, sal**ió** |
+        | nosotros | | com**imos**, sal**imos** |
+
+        -er and -ir share one set of endings. *Salimos* is both *we go out* and *we went out* — *anoche* or *ayer* tells you which.
+
+  - unit: fui-a-la-cancha
+    lessons: 2
+    focus: [{ tense: pret }]
+    tip:
+      title: "Fui, estuve, tuve"
+      body: |
+        | | ir, ser | estar | tener |
+        | yo | **fui** | **estuve** | **tuve** |
+        | vos | **fuiste** | **estuviste** | **tuviste** |
+        | él, ella | **fue** | **estuvo** | **tuvo** |
+        | nosotros | **fuimos** | | |
+        | ellos | **fueron** | | |
+
+        No accents here. *Fui a la cancha* is *went*; *fue bárbaro* is *was*.
+
+  - unit: el-finde
+    lessons: 2
+    focus: [{ tense: pret }]
+    tip:
+      title: "The irregular past"
+      body: |
+        | | hacer | ver | decir | venir | poder |
+        | yo | hice | vi | dije | vine | pude |
+        | vos | hiciste | viste | dijiste | viniste | pudiste |
+        | él, ella | hizo | vio | dijo | | |
+
+        A new stem, then *-e, -iste, -o* — with no accent. Tell the story in order with **primero**, **entonces**, **al final**.
+
+  - unit: mas-alto-que
+    lessons: 2
+    tip:
+      title: "Comparing"
+      body: |
+        | more than | **más** alto **que** yo |
+        | less than | **menos** caro **que** |
+        | as … as | **tan** lindo **como** |
+        | better, worse | **mejor**, **peor** |
+        | older, younger | **más grande**, **más chico** |
+        | very, very | rico → **riquísimo**, caro → **carísimo** |
+
+        The describing word still matches the person: *mi hermana es más alta que yo*.
+
+  - unit: te-llamo
+    lessons: 2
+    tip:
+      title: "Lo, la, le — where they go"
+      body: |
+        | the thing, masculine | **lo**, **los** | ¿El audio? **Lo** mando ahora. |
+        | the thing, feminine | **la**, **las** | ¿La tarjeta? **La** tengo. |
+        | to him, her, them | **le**, **les** | **Le** doy la llave. |
+        | me, you | **me**, **te** | **Te** llamo mañana. |
+
+        Before a normal verb: *la tengo*. Stuck to the end of a command: **llamame**, **dame**, **mandame**.
+
+  # ── Section 5 ───────────────────────────────────────────────────────────
+  - unit: cuando-era-chico
+    lessons: 2
+    tip:
+      title: "Era, tenía, vivía, iba"
+      body: |
+        | | ser | tener | vivir | ir |
+        | yo, él, ella | era | tenía | vivía | iba |
+        | vos | eras | tenías | vivías | ibas |
+        | nosotros | éramos | | | íbamos |
+
+        This past describes: how things *were*, what you *had*, where you *lived*. *Yo* and *él* share one form. **Cuando era chico vivía en Rosario.**
+
+  - unit: siempre-jugabamos
+    lessons: 2
+    focus: [{ tense: impf }]
+    tip:
+      title: "-aba and -ía"
+      body: |
+        | | -ar | -er, -ir |
+        | yo, él, ella | jug**aba** | com**ía** |
+        | vos | jug**abas** | com**ías** |
+        | nosotros | jug**ábamos** | sal**íamos** |
+
+        Every verb but *ser, ir* and *ver* follows this. It's the *used to* of English: **Los sábados jugábamos a la pelota.**
+
+  - unit: estaba-lloviendo
+    lessons: 2
+    focus: [{ tense: impf }, { tense: pret }]
+    tip:
+      title: "The scene and what happened"
+      body: |
+        | the scene — imperfect | what happened — preterite |
+        | **Estaba** en el subte | cuando me **llamó** Sofi. |
+        | **Llovía** mucho | y **llegué** tarde. |
+        | **Había** mucha gente | y no **pude** entrar. |
+
+        Ask: was it going on, or did it happen? Going on → *-aba, -ía*. Happened, and finished → the preterite.
+
+  - unit: me-puse-nervioso
+    lessons: 2
+    tip:
+      title: "Me puse, me enojé"
+      body: |
+        | | ponerse | enojarse |
+        | yo | **me puse** | **me enojé** |
+        | vos | **te pusiste** | **te enojaste** |
+        | él, ella | **se puso** | **se enojó** |
+
+        The pronoun stays in the past. **Ponerse** + a feeling is *to get*: *me puse nervioso* — *I got nervous*.
+
+  # ── Section 6 ───────────────────────────────────────────────────────────
+  - unit: te-lo-devuelvo
+    lessons: 2
+    tip:
+      title: "Te lo, se lo"
+      body: |
+        | Te devuelvo **el libro**. | Te **lo** devuelvo. |
+        | ¿Me dejás **las llaves**? | ¿Me **las** dejás? |
+        | Le regalé **un libro**. | **Se lo** regalé. |
+
+        The person goes first, the thing second. *Le* or *les* before *lo, la* becomes **se**.
+
+  - unit: donde-estara
+    lessons: 1
+    tip:
+      title: "The future of guessing"
+      body: |
+        | ser | **será** | ¿Qué hora será? |
+        | estar | **estará** | Estará en el laburo. |
+        | tener | **tendrá** | Tendrá treinta años. |
+        | haber | **habrá** | Habrá mucha gente. |
+
+        For plans, porteños say *voy a*. This future is for wondering and guessing: *I wonder…*, *he's probably…*
+
+  # ── Section 7 ───────────────────────────────────────────────────────────
+  - unit: quiero-que-vengas
+    lessons: 2
+    tip:
+      title: "How the subjunctive is made"
+      body: |
+        Start from the *yo* of the present and swap the vowel: *-ar* verbs take **e**, the rest take **a**.
+
+        | yo (now) | vos | yo, él, ella |
+        | llamo | **llames** | **llame** |
+        | vengo | **vengas** | **venga** |
+        | hago | **hagas** | **haga** |
+        | traigo | **traigas** | **traiga** |
+        | voy | **vayas** | **vaya** |
+
+        *Ir* is the odd one out. It follows **quiero que**: *quiero que vengas*.
+
+  - unit: que-te-vaya-bien
+    lessons: 2
+    tip:
+      title: "Wishes"
+      body: |
+        | Que te vaya bien. | Good luck. |
+        | Que la pases lindo. | Have a great time. |
+        | Que tengas buen finde. | Have a good weekend. |
+        | Ojalá que no llueva. | I hope it doesn't rain. |
+        | Ojalá salga todo bien. | I hope it all works out. |
+
+        A wish is **que** or **ojalá** + the subjunctive. *Tener → tengas, salir → salga*: the *g* of *tengo, salgo* comes along.
+
+  - unit: cuando-llegues
+    lessons: 2
+    tip:
+      title: "Cuando: always, or not yet"
+      body: |
+        | a habit — normal verb | not yet — subjunctive |
+        | Cuando **llego**, tomo mate. | Avisame cuando **llegues**. |
+        | Cuando **termino**, salgo. | Cuando **termines**, llamame. |
+
+        About the future, *cuando* and **apenas** take the subjunctive: *apenas puedas*.
+
+  - unit: no-creo
+    lessons: 2
+    tip:
+      title: "Creo que, no creo que"
+      body: |
+        | Creo que **es** así. | No creo que **sea** así. |
+        | Creo que **está** en casa. | No creo que **esté** en casa. |
+        | Creo que **tiene** razón. | No creo que **tenga** razón. |
+        | Creo que **hay** tiempo. | No creo que **haya** tiempo. |
+
+        Sure → the normal verb. Doubting → the subjunctive.
+
+  - unit: no-te-preocupes
+    lessons: 2
+    tip:
+      title: "Do, and don't"
+      body: |
+        | do | don't |
+        | Vení. | No **vengas**. |
+        | Andá. | No **vayas**. |
+        | Decime. | No **me digas**. |
+        | Tocá. | No **toques**. |
+        | Olvidate. | No **te olvides**. |
+
+        *No* + the subjunctive, and the pronoun moves in front: *preocupate* → **no te preocupes**.
+
+  - unit: te-recomiendo
+    lessons: 2
+    tip:
+      title: "Advice: probá, or que pruebes"
+      body: |
+        | straight out | softer |
+        | Probá el flan. | Te recomiendo que **pruebes** el flan. |
+        | Pedí un taxi. | Es mejor que **pidas** un taxi. |
+
+        **Te recomiendo que** and **es mejor que** take the subjunctive. *Probar* → **pruebes**, *pedir* → **pidas**.
+
+  - unit: que-bueno
+    lessons: 1
+    tip:
+      title: "Reacting"
+      body: |
+        | ¡Qué bueno que **estés** acá! | So good you're here! |
+        | Qué lástima que no **vengas**. | Shame you're not coming. |
+        | Me molesta que **llegue** tarde. | It bugs me he's late. |
+
+        A reaction to something + **que** → the subjunctive. **Me alegro** on its own: *I'm glad*.
+
+  # ── Section 8 ───────────────────────────────────────────────────────────
+  - unit: yo-que-vos
+    lessons: 2
+    tip:
+      title: "Would: -ía"
+      body: |
+        | | regular | shortened |
+        | yo, él, ella | comprar**ía**, ir**ía** | **tendría**, **podría**, **haría**, **diría** |
+        | vos | ir**ías** | |
+
+        The ending goes on the whole infinitive: *comprar* → **compraría**. **Yo que vos** + would is advice: *yo que vos, esperaría*.
+
+  - unit: si-tuviera
+    lessons: 2
+    focus: [{ tense: cond }]
+    tip:
+      title: "Si tuviera, viajaría"
+      body: |
+        The *if* half has its own form. Take the *ellos* past and swap **-ron** for **-ra**:
+
+        | tuvie-ron | **tuviera** |
+        | fue-ron | **fuera** |
+        | pudie-ron | **pudiera** |
+        | estuvie-ron | **estuviera** |
+
+        Then the other half takes *would*: **si tuviera tiempo, viajaría**. With vos: *si tuvieras*, *¿qué harías?*
+
+  - unit: me-pregunto
+    lessons: 1
+    tip:
+      title: "Telling what someone said"
+      body: |
+        | what she said | what you tell |
+        | «¿Venís?» | Me preguntó **si venía**. |
+        | «Sí.» | Le contesté **que sí**. |
+
+        The question comes back with **si**; what was going on slides into the imperfect: *venís* → **venía**.
+
+  # ── Section 9 ───────────────────────────────────────────────────────────
+  - unit: se-me-cayo
+    lessons: 1
+    tip:
+      title: "Se me, se te, se le"
+      body: |
+        | to me | **se me** cayó | I dropped it |
+        | to you | **se te** cayó | you dropped it |
+        | to him, her | **se le** cayó | he dropped it |
+
+        Same with *rompió, perdió, olvidó*: **se me olvidó** — *I forgot*. The middle word says who it happened to.
+
+  - unit: para-que
+    lessons: 2
+    tip:
+      title: "Para, para que"
+      body: |
+        | same person — infinitive | someone else — subjunctive |
+        | Estudio **para aprender**. | Te lo explico **para que entiendas**. |
+        | | Te lo mando **para que lo leas**. |
+        | | Avisame **antes de que** llegue. |
+
+        **Antes de que** always takes the subjunctive: it hasn't happened yet.
+
+  - unit: ya-habia
+    lessons: 2
+    focus: [{ tense: pret }]
+    tip:
+      title: "Había + -ado, -ido"
+      body: |
+        | yo, él, ella | **había** | comido, llegado, salido |
+        | vos | **habías** | hecho, dicho, visto |
+        | ellos | **habían** | |
+
+        One past behind another: **Cuando llegué, ya habían comido.** *Hecho, dicho, visto* are the irregular ones.
+
+  - unit: costumbres
+    lessons: 1
+    tip:
+      title: "Se: what people do"
+      body: |
+        | Acá **se cena** tarde. | People eat late here. |
+        | **Se saluda** con un beso. | You greet with a kiss. |
+
+        **Se** + the *él* form talks about everyone in general, no one in particular.
