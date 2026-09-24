@@ -1,5 +1,23 @@
 [
  {
+  "id": "003df1e8-bb9d-57bc-a293-50ac1f2593a3",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ce05c318-270e-5388-9073-3793ff249013",
+  "updated_at": "2026-09-24 10:23:23.672527+00"
+ },
+ {
+  "id": "00875d55-9c39-5ed2-96db-b96b6c2d3dbe",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a0a421e1-d5be-5c04-a905-e4bd5424aa57",
+  "updated_at": "2026-09-24 10:01:41.522581+00"
+ },
+ {
   "id": "008ce725-1040-53ed-a290-4bd5da20c3cd",
   "kind": "lesson",
   "ordinal": 1,
@@ -19,12 +37,12 @@
  },
  {
   "id": "012c9fc3-3e7f-5c46-a94d-0b8076ecf306",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 7,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "e7976a3a-80b3-505d-abc8-858bd6a92a90",
-  "updated_at": "2026-09-24 00:07:20.443047+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "0196f255-b06f-5181-8da4-90b1bd8ea783",
@@ -72,6 +90,24 @@
   "updated_at": "2026-09-17 07:05:23.033601+00"
  },
  {
+  "id": "035bbe23-7100-5975-840f-b61c0d523908",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "036a0b77-d0b6-5b52-8056-ad6823cd1b21",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "41b8c894-067c-540c-88b8-1a334f63f9e2",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "03d69b2e-a7fc-5f30-aeb8-5caf785045cf",
   "kind": "lesson",
   "ordinal": 3,
@@ -79,6 +115,15 @@
   "title_en": "Lesson 3",
   "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
   "updated_at": "2026-09-23 23:51:21.981446+00"
+ },
+ {
+  "id": "040bb626-f914-5cbf-920e-e4a6dd6c43fa",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "364e1a73-f26c-5d78-9757-4d096939ebda",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "0477d699-f31d-5d7b-98b4-2c7f91583369",
@@ -91,12 +136,12 @@
  },
  {
   "id": "0535cddb-d1d6-5150-bf9d-9a2ebf58313d",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
-  "updated_at": "2026-09-24 00:52:14.787731+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "058096a2-19c2-5547-a648-2528f1b311e2",
@@ -109,12 +154,12 @@
  },
  {
   "id": "05b8efd6-369a-55c0-9f04-8576650e123f",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 7,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "7c33a900-8b22-5a9e-a34e-7c274e6a21b0",
-  "updated_at": "2026-09-23 23:16:46.080289+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "069487a6-10df-54d1-9073-eeee981b1925",
@@ -124,6 +169,15 @@
   "title_en": "Checkpoint 2",
   "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
   "updated_at": "2026-09-24 07:29:55.39398+00"
+ },
+ {
+  "id": "06b6db6d-bffc-53aa-9263-85f2d56cc720",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a895f900-29bb-56a3-8161-0d08826cfe48",
+  "updated_at": "2026-09-24 10:26:45.400158+00"
  },
  {
   "id": "06c8116d-7e96-5a6d-bdaa-8620eb334e9d",
@@ -162,13 +216,31 @@
   "updated_at": "2026-09-24 01:13:38.667107+00"
  },
  {
+  "id": "07aa17aa-5dce-5fc4-b6e4-29f7836b1069",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "086fd2b3-923e-5813-a8e6-692d82f80687",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "41b8c894-067c-540c-88b8-1a334f63f9e2",
-  "updated_at": "2026-09-24 05:58:42.515176+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "0884a823-24a0-5b61-84e7-12d1ab1df3ea",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a0a421e1-d5be-5c04-a905-e4bd5424aa57",
+  "updated_at": "2026-09-24 10:01:41.522581+00"
  },
  {
   "id": "08cbd9ac-d647-5238-a931-00c27684d54a",
@@ -199,21 +271,57 @@
  },
  {
   "id": "0a4e9471-76fe-5a83-abcf-533503a42367",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
-  "updated_at": "2026-09-24 07:00:41.790001+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "0a65fc18-4fbd-527f-96bd-7a87f473b0a0",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
-  "updated_at": "2026-09-24 06:24:37.789139+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "0ab87afa-2279-54bd-8d79-f659c4244766",
+  "kind": "practice",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "0adb9077-99ac-53f3-8a37-6bf401b2d315",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "0b048bda-72e9-509b-b9e2-a1927725640a",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ca8f891d-0d08-51d6-84de-10ce90c0245f",
+  "updated_at": "2026-09-24 09:55:09.972746+00"
+ },
+ {
+  "id": "0b0c56c1-5e57-534c-b139-8f221a967f9c",
+  "kind": "review",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "0b922fda-a1d3-5d94-bf9a-71a9d754ca6c",
@@ -333,6 +441,15 @@
   "updated_at": "2026-09-24 00:54:40.64413+00"
  },
  {
+  "id": "0f1f5685-4f2e-5aae-b047-704582d7e1c8",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "0f852559-0e7f-534a-956f-1b78340a152c",
   "kind": "lesson",
   "ordinal": 7,
@@ -387,6 +504,33 @@
   "updated_at": "2026-09-24 07:04:12.425811+00"
  },
  {
+  "id": "11ccc516-966c-51cb-b3c5-b5eb9d990276",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "1204dedc-18bc-5c35-aa5f-9343adb9f936",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "127914c0-c4aa-563a-bf1e-98a91af67e19",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "3e9f1f79-1601-518d-ad4c-5540cd98f35b",
+  "updated_at": "2026-09-24 10:25:30.075133+00"
+ },
+ {
   "id": "1321b69a-04b2-5385-a1d5-aa84757de55a",
   "kind": "lesson",
   "ordinal": 3,
@@ -414,6 +558,15 @@
   "updated_at": "2026-09-23 20:28:08.267385+00"
  },
  {
+  "id": "13f01921-b928-51c6-bb7d-0ee2ec84da48",
+  "kind": "review",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "d585de30-5927-5cbf-a88a-fc998547f793",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "140c6ed7-83bb-57e0-875e-d0eb2e074c35",
   "kind": "lesson",
   "ordinal": 5,
@@ -421,6 +574,24 @@
   "title_en": "Lesson 5",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
   "updated_at": "2026-09-23 20:21:28.625105+00"
+ },
+ {
+  "id": "140c933c-abd7-5011-a414-4dacd93dfefc",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "14352238-9614-597a-8048-b85ed65f4ecb",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "144d9428-4029-5ebf-95af-47eb8ddc298d",
@@ -432,13 +603,22 @@
   "updated_at": "2026-09-23 19:10:29.815079+00"
  },
  {
-  "id": "147e90a9-ce86-5c47-8a20-188f7e58f14f",
+  "id": "146d3237-1c35-53ca-8c52-447b43559a6e",
   "kind": "review",
-  "ordinal": 5,
+  "ordinal": 10,
   "status": "published",
   "title_en": "Unit check",
+  "unit_id": "a921ed27-35b4-5222-9699-d8dd343c1f79",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "147e90a9-ce86-5c47-8a20-188f7e58f14f",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
   "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
-  "updated_at": "2026-09-24 01:05:43.940994+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "14d2bdc2-6bae-5b47-91eb-f3cbdb1856ec",
@@ -448,6 +628,15 @@
   "title_en": "Lesson 4",
   "unit_id": "be613042-6935-5185-bf3a-fa4dc33eca15",
   "updated_at": "2026-09-23 19:53:48.73596+00"
+ },
+ {
+  "id": "15a492e2-78a5-59b2-9747-5781fe481a9c",
+  "kind": "practice",
+  "ordinal": 10,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "14b391bd-5db8-50a4-a988-428361e7752a",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "15f0f59e-6eb7-5c45-a488-e1f262ed6ed2",
@@ -466,6 +655,15 @@
   "title_en": "Lesson 1",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
   "updated_at": "2026-09-23 22:50:56.462386+00"
+ },
+ {
+  "id": "16414180-7b4a-5229-a122-be4d126fa49d",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ca8f891d-0d08-51d6-84de-10ce90c0245f",
+  "updated_at": "2026-09-24 09:55:09.972746+00"
  },
  {
   "id": "170cafce-4d44-5436-9f82-a7cdd1fcad8c",
@@ -505,12 +703,12 @@
  },
  {
   "id": "18953cf0-33f1-52dc-ba99-4715dbd8cb27",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 9,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
-  "updated_at": "2026-09-23 22:50:56.462386+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "18e8780a-e31b-5ffe-b453-f59f84492a0c",
@@ -576,6 +774,15 @@
   "updated_at": "2026-09-23 19:29:03.477849+00"
  },
  {
+  "id": "197b62be-9bdf-5d92-9275-adbf9480b9b6",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "198c7949-c22a-58b7-8fb2-f9f03941dc3a",
   "kind": "lesson",
   "ordinal": 5,
@@ -639,6 +846,15 @@
   "updated_at": "2026-09-23 22:57:13.830499+00"
  },
  {
+  "id": "1b84f981-0458-5d73-ad0d-2ef7afdfe71a",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "fa24b60d-3716-5754-bf36-9f5a6843d7bb",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "1bfbf035-784c-5cb4-8678-da394f1ff39f",
   "kind": "lesson",
   "ordinal": 3,
@@ -648,6 +864,24 @@
   "updated_at": "2026-09-23 23:06:40.129285+00"
  },
  {
+  "id": "1d0f71db-ec6f-5d8e-a680-bb4c8608f843",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "da566530-f509-5133-b265-9183e82e99e2",
+  "updated_at": "2026-09-24 09:51:50.379368+00"
+ },
+ {
+  "id": "1d33414c-e435-54f6-b7f0-cec4bfbeee23",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "2902c53a-0143-5823-b423-fd9fe3dc2295",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "1d5c1191-7fc0-531f-9fbd-dfd9617750fb",
   "kind": "review",
   "ordinal": 9,
@@ -655,6 +889,15 @@
   "title_en": "Unit check",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
   "updated_at": "2026-09-23 20:21:28.625105+00"
+ },
+ {
+  "id": "1d70fa53-ddbb-52bf-b289-7df56b14363a",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "1e3e4052-f6d6-5404-8005-332598f963f5",
@@ -667,12 +910,12 @@
  },
  {
   "id": "1e610c91-b5ca-57a1-b50c-f437b613a767",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "2902c53a-0143-5823-b423-fd9fe3dc2295",
-  "updated_at": "2026-09-23 23:49:55.688445+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "1e9b2119-23e5-57c1-b70c-ca4383423b02",
@@ -682,6 +925,24 @@
   "title_en": "Lesson 2",
   "unit_id": "2fb39a77-4405-52e0-83ee-a83f56d744ad",
   "updated_at": "2026-09-24 06:14:14.567351+00"
+ },
+ {
+  "id": "1ef15b05-8261-5115-9f31-ffdb7a32ce3c",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a921ed27-35b4-5222-9699-d8dd343c1f79",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "1f08d9f8-2ed6-52a0-ba3b-1ca5c6188498",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "05dc3d96-dc93-54a8-9eec-ca5cc9baff16",
+  "updated_at": "2026-09-24 10:04:45.287311+00"
  },
  {
   "id": "1f257647-9e84-5727-a04d-fb88feb1c2bd",
@@ -738,6 +999,24 @@
   "updated_at": "2026-09-24 01:05:43.940994+00"
  },
  {
+  "id": "21477296-3af9-559f-a4a3-f5b8290db9e8",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "218743bc-71b7-5b7a-8d27-2dbd247cae63",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "218a2dd4-c33b-53d2-8b5c-746449105ad0",
   "kind": "lesson",
   "ordinal": 2,
@@ -745,6 +1024,15 @@
   "title_en": "Lesson 2",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
   "updated_at": "2026-09-23 19:29:03.477849+00"
+ },
+ {
+  "id": "2236150b-ce5e-52c7-a8fe-e96e095604ae",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a64eb13a-e442-5199-bf7e-cbdf6e56de26",
+  "updated_at": "2026-09-24 10:27:48.471662+00"
  },
  {
   "id": "232865d7-833d-5cb3-94e3-9401ad6330fe",
@@ -783,13 +1071,31 @@
   "updated_at": "2026-09-23 19:53:48.73596+00"
  },
  {
+  "id": "23f96d0e-ef05-53fe-87b2-ed19d47f4880",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "1c4eaeb1-2bcc-5b49-889e-bfd0ac2ed088",
+  "updated_at": "2026-09-24 10:11:49.629982+00"
+ },
+ {
   "id": "24449c9c-66b5-5586-96ba-68f400faaab7",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 6,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
-  "updated_at": "2026-09-23 23:26:00.580368+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "249bfe30-8f4a-556c-96fd-86dac1f6547c",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "a53cea7e-02aa-56f7-a3b8-de1dca112674",
+  "updated_at": "2026-09-24 10:22:18.89547+00"
  },
  {
   "id": "24af986b-0337-576a-8bb3-c2a1fe5aa3e2",
@@ -802,12 +1108,21 @@
  },
  {
   "id": "24bc3c5d-f4a6-52cc-a3c9-6d7f7fb5842e",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
-  "updated_at": "2026-09-24 00:44:27.455593+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "24f4103d-5fbd-5100-b9b6-bcfe0e26f2ed",
+  "kind": "review",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "25563716-524a-5e0a-ba60-c61eed19b8d7",
@@ -855,6 +1170,24 @@
   "updated_at": "2026-09-23 20:14:21.109669+00"
  },
  {
+  "id": "26cff940-3c7b-598d-b4a0-84db7393e4c5",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "2718ed09-b65a-588e-a2d6-13c42922a157",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ef00ab7c-09e9-5c6b-8389-aa83a371e3d1",
+  "updated_at": "2026-09-24 10:14:07.223202+00"
+ },
+ {
   "id": "275a0dc1-bd4e-553d-add5-5e7d41cbd84a",
   "kind": "lesson",
   "ordinal": 1,
@@ -882,6 +1215,15 @@
   "updated_at": "2026-09-23 19:43:38.303503+00"
  },
  {
+  "id": "295bdea9-19f9-5969-a94c-eb320ed40d5c",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ef00ab7c-09e9-5c6b-8389-aa83a371e3d1",
+  "updated_at": "2026-09-24 10:14:07.223202+00"
+ },
+ {
   "id": "29f1f49d-f67a-52b4-9d3b-7fd2cff71772",
   "kind": "checkpoint",
   "ordinal": 3,
@@ -900,6 +1242,15 @@
   "updated_at": "2026-09-17 11:51:22.849897+00"
  },
  {
+  "id": "2a578515-255b-5a32-bb02-1de2037784a0",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "72e14160-96c0-535c-9819-8ab194bd82cc",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "2abf4016-73bc-59c7-8c14-4463a07ce10d",
   "kind": "review",
   "ordinal": 5,
@@ -910,12 +1261,12 @@
  },
  {
   "id": "2af58932-a549-5a38-be9c-06fe61f5f13c",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
-  "updated_at": "2026-09-24 07:05:36.022297+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "2b56346f-293a-592a-80fb-efe46b339b82",
@@ -981,6 +1332,24 @@
   "updated_at": "2026-09-17 07:05:23.033601+00"
  },
  {
+  "id": "2d876a75-a69f-58c6-8379-4f6a6fe375ae",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "f1ba775f-ad41-52d5-ae7c-9ee7834def48",
+  "updated_at": "2026-09-24 10:30:10.577949+00"
+ },
+ {
+  "id": "2d88255d-4ef7-535e-b5f2-84f4b2bb470d",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "2e08911a-ad31-5802-a5a0-60ad8b1cea14",
   "kind": "lesson",
   "ordinal": 2,
@@ -991,12 +1360,12 @@
  },
  {
   "id": "2e5b595c-b6c2-57df-9211-e5e025933cb9",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
-  "updated_at": "2026-09-24 01:13:38.667107+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "2e884a37-127c-5b43-aeed-75c9d8139002",
@@ -1017,6 +1386,15 @@
   "updated_at": "2026-09-23 22:50:56.462386+00"
  },
  {
+  "id": "2fa7de20-c164-5331-a216-14594ed496c8",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "2fd3bcb2-1995-55fd-a895-60f994ba3872",
   "kind": "lesson",
   "ordinal": 5,
@@ -1024,6 +1402,33 @@
   "title_en": "Lesson 5",
   "unit_id": "14b391bd-5db8-50a4-a988-428361e7752a",
   "updated_at": "2026-09-23 23:08:49.662548+00"
+ },
+ {
+  "id": "30054a67-088c-5dca-a380-b16f2bcd6616",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "05dc3d96-dc93-54a8-9eec-ca5cc9baff16",
+  "updated_at": "2026-09-24 10:04:45.287311+00"
+ },
+ {
+  "id": "30323666-add6-59bb-af4e-c6d503887e5e",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "b38bd9a1-f0a8-5fe1-9aa1-0e8260930af6",
+  "updated_at": "2026-09-24 09:59:33.29136+00"
+ },
+ {
+  "id": "30560ddd-bcd4-5691-9cbd-e26ada8054db",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a64eb13a-e442-5199-bf7e-cbdf6e56de26",
+  "updated_at": "2026-09-24 10:27:48.471662+00"
  },
  {
   "id": "30ecedf1-8968-563c-a13a-b638a4429c98",
@@ -1035,6 +1440,15 @@
   "updated_at": "2026-09-23 23:35:46.537011+00"
  },
  {
+  "id": "327c0a8c-6853-5438-8e93-9c67b8138535",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "33712e06-c4b5-5f41-9667-55af0451d5fd",
   "kind": "lesson",
   "ordinal": 4,
@@ -1042,6 +1456,24 @@
   "title_en": "Lesson 4",
   "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
   "updated_at": "2026-09-23 23:51:21.981446+00"
+ },
+ {
+  "id": "3407ed06-597c-5903-a4f1-7fb185396761",
+  "kind": "review",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "7c33a900-8b22-5a9e-a34e-7c274e6a21b0",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "34c1ff0d-202d-5779-a894-db0213214cf7",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "34d3c4f3-cd91-59ba-be2d-7b1e72b8a3c7",
@@ -1080,6 +1512,33 @@
   "updated_at": "2026-09-23 20:21:28.625105+00"
  },
  {
+  "id": "3642fc2c-334d-5e5b-94cf-3e4568bd4c09",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "3680dfaf-ec4d-569d-96f9-4a2ce2cc7d3c",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "36a285c4-082a-5a63-ae5e-86292b7c0e6f",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "3733d49c-4293-5126-b091-4dc31ae934af",
   "kind": "lesson",
   "ordinal": 7,
@@ -1090,12 +1549,12 @@
  },
  {
   "id": "37348bf6-8fb8-5c5e-8c26-7cb971bc8f1d",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 8,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
-  "updated_at": "2026-09-23 23:12:50.467874+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "37e029f2-e927-5d84-a520-7d82b0fcfd6c",
@@ -1116,6 +1575,15 @@
   "updated_at": "2026-09-24 00:00:40.250698+00"
  },
  {
+  "id": "384e826b-b298-5a5a-b2c2-a334fc26a1b4",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "fa24b60d-3716-5754-bf36-9f5a6843d7bb",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "39075fbb-4402-516d-a3b6-f1e622995b15",
   "kind": "lesson",
   "ordinal": 6,
@@ -1125,6 +1593,24 @@
   "updated_at": "2026-09-23 22:50:56.462386+00"
  },
  {
+  "id": "39906684-1b5e-5302-8c5f-36de12c6ddc3",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "3a0f00c3-0852-5485-abf0-1c6cb2f9b23a",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "da566530-f509-5133-b265-9183e82e99e2",
+  "updated_at": "2026-09-24 09:51:50.379368+00"
+ },
+ {
   "id": "3ad01aff-2573-5b9a-b619-d0c0018b40f9",
   "kind": "review",
   "ordinal": 11,
@@ -1132,6 +1618,15 @@
   "title_en": "Unit check",
   "unit_id": "d8cb78a0-5a7d-5c09-9f7f-9e905e0d2e59",
   "updated_at": "2026-09-23 20:14:21.109669+00"
+ },
+ {
+  "id": "3b1f693c-5ef9-54d8-9556-767ab916e480",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "3b26196b-2fc1-5e31-8286-4f05d1fe4a47",
@@ -1171,12 +1666,12 @@
  },
  {
   "id": "3c31b176-db31-5fea-856a-05f742ba65b1",
-  "kind": "review",
+  "kind": "lesson",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Lesson 5",
   "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
-  "updated_at": "2026-09-24 07:12:32.666361+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "3c6432ce-e0cd-54e0-8c56-d90b61cbcfc0",
@@ -1186,6 +1681,15 @@
   "title_en": "Lesson 1",
   "unit_id": "364e1a73-f26c-5d78-9757-4d096939ebda",
   "updated_at": "2026-09-23 23:49:13.3501+00"
+ },
+ {
+  "id": "3c93762c-07d2-558d-a826-3731a58cd9ca",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "3d181c21-6e77-5201-812a-49eec966dd34",
@@ -1204,6 +1708,24 @@
   "title_en": "Lesson 12",
   "unit_id": "13fec277-30b8-5bdb-9718-e682351abfd9",
   "updated_at": "2026-09-23 20:11:12.124649+00"
+ },
+ {
+  "id": "3dd66333-c503-5181-95af-ed3c4985713e",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "3e17a53c-a60a-5283-aaff-978ce888e80d",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "3e219191-a503-58e8-9bc8-82e0b965cfed",
@@ -1242,6 +1764,24 @@
   "updated_at": "2026-09-23 20:11:12.124649+00"
  },
  {
+  "id": "3ef2416a-734a-5b93-8736-97c2c7c03c9c",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "ce05c318-270e-5388-9073-3793ff249013",
+  "updated_at": "2026-09-24 10:23:23.672527+00"
+ },
+ {
+  "id": "3f1e586d-6ffd-509a-a1c5-a58e1610d24f",
+  "kind": "review",
+  "ordinal": 11,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "3f643ec6-46d6-58af-b6f5-2b86dc7a59a4",
   "kind": "lesson",
   "ordinal": 1,
@@ -1278,6 +1818,15 @@
   "updated_at": "2026-09-23 19:58:24.459018+00"
  },
  {
+  "id": "3ff3d2a7-9314-5eec-a95d-4f57b4cc3d45",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "d585de30-5927-5cbf-a88a-fc998547f793",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "404d2b42-41dd-53d0-a175-3830ef4e7e26",
   "kind": "lesson",
   "ordinal": 7,
@@ -1285,6 +1834,15 @@
   "title_en": "Lesson 7",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
   "updated_at": "2026-09-23 23:12:50.467874+00"
+ },
+ {
+  "id": "408253cb-10ca-505c-83a6-494914e24b27",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a0a421e1-d5be-5c04-a905-e4bd5424aa57",
+  "updated_at": "2026-09-24 10:01:41.522581+00"
  },
  {
   "id": "4101cbb6-d7f5-5f41-baf1-77a65f90e8db",
@@ -1369,21 +1927,30 @@
  },
  {
   "id": "4374935e-293e-5a87-8148-999e5a0ebfda",
-  "kind": "review",
+  "kind": "lesson",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Lesson 4",
   "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
-  "updated_at": "2026-09-24 07:23:46.730111+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "43fed059-77f1-53a1-86a4-d281742760e6",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a46178fb-2c93-503a-b057-1838974c2a73",
+  "updated_at": "2026-09-24 10:15:33.261084+00"
  },
  {
   "id": "4445164f-eb35-50b7-9807-c0c12a9bfb19",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
-  "updated_at": "2026-09-24 01:08:19.028822+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "44832339-25d8-5790-949b-4f8da07475d1",
@@ -1411,6 +1978,15 @@
   "title_en": "Lesson 5",
   "unit_id": "d8cb78a0-5a7d-5c09-9f7f-9e905e0d2e59",
   "updated_at": "2026-09-23 20:14:21.109669+00"
+ },
+ {
+  "id": "459f20b9-064c-54c3-bfc7-f02822dffe82",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "754cc69f-e7cf-5e64-ba22-2679bc1f609e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "45bd0209-8239-55ca-bd86-3c475251d619",
@@ -1441,12 +2017,12 @@
  },
  {
   "id": "46510165-3d09-5e9e-9b8a-cb65046d0bd1",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 6,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "28d6c921-dae2-50d2-b6a0-a5e2423428a6",
-  "updated_at": "2026-09-23 23:35:46.537011+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "46bad6be-2670-55b3-bf28-d8aa970680f3",
@@ -1458,6 +2034,15 @@
   "updated_at": "2026-09-23 23:00:29.247789+00"
  },
  {
+  "id": "46df3045-ad64-52a6-997a-2689ce0eca02",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "f1ba775f-ad41-52d5-ae7c-9ee7834def48",
+  "updated_at": "2026-09-24 10:30:10.577949+00"
+ },
+ {
   "id": "46f7f2d3-398f-5245-8409-6f9b2dd4d5e5",
   "kind": "checkpoint",
   "ordinal": 2,
@@ -1465,6 +2050,15 @@
   "title_en": "Checkpoint 2",
   "unit_id": "5df117af-d5e0-5b71-8caa-6806c47bdff1",
   "updated_at": "2026-09-23 20:28:08.267385+00"
+ },
+ {
+  "id": "47004f44-c5c1-54a5-8b10-bbf40431da34",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "b2e41f0e-04f0-5a3b-94eb-850cd2d57575",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "47d0581f-0309-5ef1-9ac4-b2c7b1cfc047",
@@ -1485,13 +2079,40 @@
   "updated_at": "2026-09-24 00:23:43.658623+00"
  },
  {
-  "id": "4a6ed9e3-90a1-559b-b6dd-c53fde3d3fdc",
-  "kind": "review",
+  "id": "4920036d-606c-5b39-9817-1aa44ffd7d5d",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "080920e1-dfcc-555f-94e8-0864285aa5e7",
+  "updated_at": "2026-09-24 10:36:22.353659+00"
+ },
+ {
+  "id": "49ab1f2d-7c6f-5430-8ab1-5460c0d02e79",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "6cbcbdaf-a420-507d-844b-34d87b2822f2",
+  "updated_at": "2026-09-24 10:10:06.427472+00"
+ },
+ {
+  "id": "49f60a5d-8429-56dd-a7ed-a1d72c91299f",
+  "kind": "practice",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
+  "unit_id": "a64eb13a-e442-5199-bf7e-cbdf6e56de26",
+  "updated_at": "2026-09-24 10:27:48.471662+00"
+ },
+ {
+  "id": "4a6ed9e3-90a1-559b-b6dd-c53fde3d3fdc",
+  "kind": "lesson",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Lesson 4",
   "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
-  "updated_at": "2026-09-24 07:22:29.004136+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "4aa43051-0245-53e8-99da-28eda21eebe0",
@@ -1521,6 +2142,15 @@
   "updated_at": "2026-09-24 07:29:13.690418+00"
  },
  {
+  "id": "4b005b92-64ea-5aa3-93a2-c47648337b74",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "41b8c894-067c-540c-88b8-1a334f63f9e2",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "4b8c3463-ac71-5234-8e59-8f9b7ed801e4",
   "kind": "lesson",
   "ordinal": 7,
@@ -1531,12 +2161,12 @@
  },
  {
   "id": "4bab1c10-1c5f-5905-af63-b977008635e2",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "fa24b60d-3716-5754-bf36-9f5a6843d7bb",
-  "updated_at": "2026-09-24 06:15:45.142723+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "4bbf709b-9e41-5278-aa7d-dc53af792c4c",
@@ -1549,12 +2179,30 @@
  },
  {
   "id": "4c1cadd2-aec5-5b41-8810-90d04d4bdc87",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "4c25daec-9a9b-5cb2-a2e3-1c264aa333ad",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "770b6d5f-bd8c-5c17-a05f-4721faaa1706",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "4d28ea91-b30b-570c-8500-5b9b986d273c",
   "kind": "review",
   "ordinal": 5,
   "status": "published",
   "title_en": "Unit check",
-  "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
-  "updated_at": "2026-09-23 23:38:40.820065+00"
+  "unit_id": "a0a421e1-d5be-5c04-a905-e4bd5424aa57",
+  "updated_at": "2026-09-24 10:01:41.522581+00"
  },
  {
   "id": "4d55e7c4-1039-5bbd-b1f6-411cec2333e3",
@@ -1564,6 +2212,15 @@
   "title_en": "Lesson 5",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
   "updated_at": "2026-09-23 19:39:12.082725+00"
+ },
+ {
+  "id": "4d6f1591-2758-5ab7-b6ea-777addd4387c",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a0a421e1-d5be-5c04-a905-e4bd5424aa57",
+  "updated_at": "2026-09-24 10:01:41.522581+00"
  },
  {
   "id": "4d940c0a-29f1-55c3-b924-a1a6336d4d6e",
@@ -1576,12 +2233,21 @@
  },
  {
   "id": "4db65264-f02b-5294-8ab4-f207caa2a032",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 7,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
-  "updated_at": "2026-09-23 23:00:29.247789+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "4dd63858-d357-5ee6-8cf6-13b947c2849e",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "4e3d521a-b085-5d07-a17f-5538fa1c0ce9",
@@ -1609,6 +2275,15 @@
   "title_en": "Lesson 1",
   "unit_id": "770b6d5f-bd8c-5c17-a05f-4721faaa1706",
   "updated_at": "2026-09-24 00:23:43.658623+00"
+ },
+ {
+  "id": "4f280b5b-f20d-58cd-9be0-fee784d4f34c",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "4fa494c3-66d8-5859-a25e-d961e5ec9b0b",
@@ -1674,6 +2349,15 @@
   "updated_at": "2026-09-23 19:34:09.517589+00"
  },
  {
+  "id": "51fc8bd6-137f-5bd0-962a-c991c14b7ff8",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "52125c57-d497-566f-a5e1-b8b95baf830c",
   "kind": "lesson",
   "ordinal": 1,
@@ -1683,6 +2367,15 @@
   "updated_at": "2026-09-24 01:05:43.940994+00"
  },
  {
+  "id": "52369e6b-5204-5268-bf18-364f8012bc5d",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "52a265e2-2c4f-52bf-b612-98b621f99f73",
   "kind": "lesson",
   "ordinal": 1,
@@ -1690,6 +2383,15 @@
   "title_en": "Lesson 1",
   "unit_id": "dc485e04-124e-516d-9061-98a2d00f4d57",
   "updated_at": "2026-09-24 00:00:40.250698+00"
+ },
+ {
+  "id": "52b32e7e-82a2-56a3-b521-003628d87a6f",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "d585de30-5927-5cbf-a88a-fc998547f793",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "52c5e0fb-aa68-583a-a5e7-b532263cc79d",
@@ -1710,6 +2412,15 @@
   "updated_at": "2026-09-24 01:00:17.279796+00"
  },
  {
+  "id": "53a43f66-5270-5aa8-83b0-47f0a334c486",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "54c1770f-897e-5f93-a85c-ac520ff9eae9",
   "kind": "lesson",
   "ordinal": 4,
@@ -1726,6 +2437,15 @@
   "title_en": "Lesson 3",
   "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
   "updated_at": "2026-09-23 23:38:40.820065+00"
+ },
+ {
+  "id": "5548b971-2422-5d12-8fe2-c947f8ac837b",
+  "kind": "review",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "e7976a3a-80b3-505d-abc8-858bd6a92a90",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "556f7fe7-f63f-5631-a1c5-5ec78ddf6ee0",
@@ -1755,6 +2475,15 @@
   "updated_at": "2026-09-23 19:43:38.303503+00"
  },
  {
+  "id": "55dc5387-e56b-52b3-afda-86a09741bb8f",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a973933b-ccb4-5f7d-9210-9a063ab4ed00",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "55de0159-1b91-572d-8a72-1982e0c17595",
   "kind": "lesson",
   "ordinal": 1,
@@ -1762,6 +2491,15 @@
   "title_en": "Lesson 1",
   "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
   "updated_at": "2026-09-23 23:51:21.981446+00"
+ },
+ {
+  "id": "56008de1-2232-5add-90fd-6432ca553ebe",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "080920e1-dfcc-555f-94e8-0864285aa5e7",
+  "updated_at": "2026-09-24 10:36:22.353659+00"
  },
  {
   "id": "565b439d-3dca-53bc-a70d-0e89752a0f46",
@@ -1791,6 +2529,15 @@
   "updated_at": "2026-09-23 18:53:27.361826+00"
  },
  {
+  "id": "56cd38e1-5e58-5aeb-b874-7850ab07141d",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "57498b2c-bf47-5d44-b36d-2063badebcce",
   "kind": "lesson",
   "ordinal": 1,
@@ -1818,6 +2565,24 @@
   "updated_at": "2026-09-23 19:34:09.517589+00"
  },
  {
+  "id": "5887c923-0151-5f00-8c01-2c87b74d8257",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "58b6d97f-d8a0-5de2-b60d-9e28a46a35c5",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "a64eb13a-e442-5199-bf7e-cbdf6e56de26",
+  "updated_at": "2026-09-24 10:27:48.471662+00"
+ },
+ {
   "id": "58c1e475-882a-5a44-a6d1-7f72d34770a1",
   "kind": "lesson",
   "ordinal": 3,
@@ -1825,6 +2590,15 @@
   "title_en": "Lesson 3",
   "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
   "updated_at": "2026-09-23 20:21:28.625105+00"
+ },
+ {
+  "id": "5937daf3-79d9-56e2-be7d-04c4039df7bc",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "da566530-f509-5133-b265-9183e82e99e2",
+  "updated_at": "2026-09-24 09:51:50.379368+00"
  },
  {
   "id": "5973b32f-aeae-5b95-bf9c-c28cd854ac36",
@@ -1855,12 +2629,12 @@
  },
  {
   "id": "59ed1783-ef9c-5c50-8cdb-114faebce45d",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
-  "updated_at": "2026-09-24 07:04:12.425811+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "5a74d77d-87b8-5c57-8986-9b8ffe2e1e91",
@@ -1870,6 +2644,15 @@
   "title_en": "Lesson 4",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
   "updated_at": "2026-09-23 22:57:13.830499+00"
+ },
+ {
+  "id": "5c235177-2a73-522d-a49a-4156837eaaeb",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ef00ab7c-09e9-5c6b-8389-aa83a371e3d1",
+  "updated_at": "2026-09-24 10:14:07.223202+00"
  },
  {
   "id": "5c2463dd-c201-59b3-8d86-f1db2b744856",
@@ -1899,6 +2682,15 @@
   "updated_at": "2026-09-24 07:29:13.690418+00"
  },
  {
+  "id": "5d1291dd-19cc-50e3-818e-8ce39706c970",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "5d1b78d6-8fe4-5397-9c0d-457574054a90",
   "kind": "lesson",
   "ordinal": 3,
@@ -1906,6 +2698,15 @@
   "title_en": "Lesson 3",
   "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
   "updated_at": "2026-09-24 01:00:17.279796+00"
+ },
+ {
+  "id": "5e0c156f-b89a-5609-b0aa-a4745422a330",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ca8f891d-0d08-51d6-84de-10ce90c0245f",
+  "updated_at": "2026-09-24 09:55:09.972746+00"
  },
  {
   "id": "5ebbe326-1ad3-544f-928c-c0e6da8d282b",
@@ -1917,6 +2718,15 @@
   "updated_at": "2026-09-23 23:15:20.78631+00"
  },
  {
+  "id": "5ed1aab3-5339-5de6-bb05-67beaf308e25",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "364e1a73-f26c-5d78-9757-4d096939ebda",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "5f2a67eb-9337-5449-b024-4936921c1c6e",
   "kind": "lesson",
   "ordinal": 1,
@@ -1924,6 +2734,24 @@
   "title_en": "Lesson 1",
   "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
   "updated_at": "2026-09-24 01:08:19.028822+00"
+ },
+ {
+  "id": "5f91914b-c287-52b0-ae7a-53381d5eb476",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ce05c318-270e-5388-9073-3793ff249013",
+  "updated_at": "2026-09-24 10:23:23.672527+00"
+ },
+ {
+  "id": "5ff58d29-14c4-557b-b6c5-7535ae727a19",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "3e9f1f79-1601-518d-ad4c-5540cd98f35b",
+  "updated_at": "2026-09-24 10:25:30.075133+00"
  },
  {
   "id": "6028c04e-3389-5d91-a1f2-1c3741bbe469",
@@ -1944,6 +2772,15 @@
   "updated_at": "2026-09-23 20:03:32.724278+00"
  },
  {
+  "id": "609b1123-9021-5d21-a072-9be74bf1360b",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "60b273b4-7d81-5111-806e-7e2377e9faff",
   "kind": "lesson",
   "ordinal": 4,
@@ -1962,6 +2799,33 @@
   "updated_at": "2026-09-18 15:33:50.92899+00"
  },
  {
+  "id": "615b244b-a9ff-58ff-9a0a-6faf10fcab49",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "2a6a2955-3702-5c32-a348-a1d2c591bdf2",
+  "updated_at": "2026-09-24 10:34:16.026108+00"
+ },
+ {
+  "id": "62bce7aa-a664-56b2-947f-05cc019a9e8e",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "6368e771-317e-5e99-8c54-89f1a2724a2c",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "63bf7c6a-6e08-5c01-9706-aaff269a7313",
   "kind": "lesson",
   "ordinal": 5,
@@ -1969,6 +2833,33 @@
   "title_en": "Lesson 5",
   "unit_id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
   "updated_at": "2026-09-23 19:22:02.809359+00"
+ },
+ {
+  "id": "63f91821-006b-5598-ad4b-1308aa9eb3ed",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "f1ba775f-ad41-52d5-ae7c-9ee7834def48",
+  "updated_at": "2026-09-24 10:30:10.577949+00"
+ },
+ {
+  "id": "640611ed-787e-5206-ae41-28cbc23533b2",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "6cbcbdaf-a420-507d-844b-34d87b2822f2",
+  "updated_at": "2026-09-24 10:10:06.427472+00"
+ },
+ {
+  "id": "6433f27d-4e93-53ac-8a8f-f92125740c52",
+  "kind": "lesson",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Lesson 6",
+  "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "64455074-bde2-5842-b9c3-965f89612dd2",
@@ -1990,12 +2881,12 @@
  },
  {
   "id": "65b074a7-c467-5b69-a74f-ef678e6c9643",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 9,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "14b391bd-5db8-50a4-a988-428361e7752a",
-  "updated_at": "2026-09-23 23:08:49.662548+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "65c1cde0-6d12-5351-b7af-a6c90587078e",
@@ -2016,6 +2907,33 @@
   "updated_at": "2026-09-24 06:05:11.086413+00"
  },
  {
+  "id": "65fc7d91-f8a1-5159-83f3-c983c81c1dbf",
+  "kind": "lesson",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Lesson 7",
+  "unit_id": "a921ed27-35b4-5222-9699-d8dd343c1f79",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "66b56855-404c-53c8-bb72-99d5bde3b48d",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a895f900-29bb-56a3-8161-0d08826cfe48",
+  "updated_at": "2026-09-24 10:26:45.400158+00"
+ },
+ {
+  "id": "66fe568a-ff50-55f4-bf80-d457ec5ef80f",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "b38bd9a1-f0a8-5fe1-9aa1-0e8260930af6",
+  "updated_at": "2026-09-24 09:59:33.29136+00"
+ },
+ {
   "id": "67bc3025-36ed-5457-93bc-a642a98e4562",
   "kind": "lesson",
   "ordinal": 2,
@@ -2023,6 +2941,24 @@
   "title_en": "Lesson 2",
   "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
   "updated_at": "2026-09-24 07:05:36.022297+00"
+ },
+ {
+  "id": "67e45354-ea2f-5b11-a055-3f78da39bc14",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "da566530-f509-5133-b265-9183e82e99e2",
+  "updated_at": "2026-09-24 09:51:50.379368+00"
+ },
+ {
+  "id": "68ae68de-bf69-5a5d-8590-9a187880caef",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "8531d298-54ee-59f6-9973-5e4562177f2e",
+  "updated_at": "2026-09-24 10:09:02.025603+00"
  },
  {
   "id": "68d2575d-3bf1-5034-950e-a501062b9663",
@@ -2034,6 +2970,15 @@
   "updated_at": "2026-09-24 06:14:14.567351+00"
  },
  {
+  "id": "68d2f167-d214-5257-854b-89f36c707846",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "afdaff40-37c8-56af-ae39-78f1ed48e97e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "69e99eca-f949-564c-8567-25311ba72f82",
   "kind": "lesson",
   "ordinal": 2,
@@ -2041,6 +2986,15 @@
   "title_en": "Lesson 2",
   "unit_id": "fa24b60d-3716-5754-bf36-9f5a6843d7bb",
   "updated_at": "2026-09-24 06:15:45.142723+00"
+ },
+ {
+  "id": "6a363c61-bc01-5b3c-9dcc-31851393202a",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "6ac68cbe-9747-5852-afae-d9b6bbb6281a",
@@ -2061,13 +3015,22 @@
   "updated_at": "2026-09-18 13:32:13.366839+00"
  },
  {
-  "id": "6be83562-88c3-5921-9927-2b637bfc31fc",
-  "kind": "review",
+  "id": "6b6aa46e-4a47-55f2-a6f0-dab524763297",
+  "kind": "checkpoint",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Checkpoint 4",
+  "unit_id": "0b94d24b-0ce7-5a34-a580-2ef059801e5e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "6be83562-88c3-5921-9927-2b637bfc31fc",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
   "unit_id": "465d788e-db67-5a57-8f4e-96306374e29c",
-  "updated_at": "2026-09-24 01:24:28.911587+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "6c99cab7-737f-5d2d-801c-79b1753254ee",
@@ -2097,6 +3060,15 @@
   "updated_at": "2026-09-23 19:10:29.815079+00"
  },
  {
+  "id": "701071c8-11a6-5c06-b701-a299b28ebf0e",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "6dc81d68-66ed-5adc-a6d9-ebdfac00662e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "70136c4a-65b3-5d52-86a8-5c2f29b6f289",
   "kind": "lesson",
   "ordinal": 1,
@@ -2113,6 +3085,15 @@
   "title_en": "Lesson 2",
   "unit_id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
   "updated_at": "2026-09-23 19:39:12.082725+00"
+ },
+ {
+  "id": "70bebaf4-b998-5a97-90ab-863b509b1c9c",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "7102013d-d558-59c5-bc58-52fc1cf9ed9b",
@@ -2142,6 +3123,15 @@
   "updated_at": "2026-09-23 20:13:15.959872+00"
  },
  {
+  "id": "7190c4f9-3889-582e-a4b2-360f68b3c925",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "71948571-23f6-5e0c-9958-958283692393",
   "kind": "lesson",
   "ordinal": 3,
@@ -2149,6 +3139,24 @@
   "title_en": "Lesson 3",
   "unit_id": "3cc8b1a1-6314-5a4f-be82-b713ea584203",
   "updated_at": "2026-09-23 19:03:23.01595+00"
+ },
+ {
+  "id": "71afbdf6-ad5d-58a3-ac4c-501c43f572d4",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "770b6d5f-bd8c-5c17-a05f-4721faaa1706",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "71c207d8-960b-57e2-901a-ac740d0cee53",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "71c68290-b9e8-5f47-8824-fc68b21cd22a",
@@ -2169,6 +3177,24 @@
   "updated_at": "2026-09-18 13:32:13.366839+00"
  },
  {
+  "id": "72c08dce-fa77-5188-9092-535cde8ff99c",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "73470a02-0de4-57f9-9b05-241e8d333354",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "05dc3d96-dc93-54a8-9eec-ca5cc9baff16",
+  "updated_at": "2026-09-24 10:04:45.287311+00"
+ },
+ {
   "id": "7350d58c-e926-5969-9234-5283a1410406",
   "kind": "lesson",
   "ordinal": 1,
@@ -2176,6 +3202,15 @@
   "title_en": "Lesson 1",
   "unit_id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
   "updated_at": "2026-09-23 19:58:24.459018+00"
+ },
+ {
+  "id": "73d1cdc4-5cee-5c5b-a109-b7d9078525ed",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ce05c318-270e-5388-9073-3793ff249013",
+  "updated_at": "2026-09-24 10:23:23.672527+00"
  },
  {
   "id": "73eabb24-8e37-5886-965e-7ee5144ed9dc",
@@ -2214,6 +3249,15 @@
   "updated_at": "2026-09-17 07:05:23.033601+00"
  },
  {
+  "id": "7527219f-a089-5dd7-8681-d4f786e5aae3",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "1c4eaeb1-2bcc-5b49-889e-bfd0ac2ed088",
+  "updated_at": "2026-09-24 10:11:49.629982+00"
+ },
+ {
   "id": "75bc0e5e-f292-5c3c-a74f-368a8e0982c9",
   "kind": "lesson",
   "ordinal": 2,
@@ -2221,6 +3265,15 @@
   "title_en": "Lesson 2",
   "unit_id": "1974689a-177e-55c9-b4b1-69fba40389f0",
   "updated_at": "2026-09-23 19:43:38.303503+00"
+ },
+ {
+  "id": "75be19b4-c058-53ca-acfc-88becca7faf8",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "ef00ab7c-09e9-5c6b-8389-aa83a371e3d1",
+  "updated_at": "2026-09-24 10:14:07.223202+00"
  },
  {
   "id": "7609cd71-5146-551d-a8e4-0ea8764581c5",
@@ -2250,6 +3303,15 @@
   "updated_at": "2026-09-23 23:26:55.917775+00"
  },
  {
+  "id": "7643762b-358f-5709-a505-bb1cd33ade67",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a46178fb-2c93-503a-b057-1838974c2a73",
+  "updated_at": "2026-09-24 10:15:33.261084+00"
+ },
+ {
   "id": "767010cd-d3c8-55a4-8910-8cd8dc07dcec",
   "kind": "lesson",
   "ordinal": 1,
@@ -2268,6 +3330,24 @@
   "updated_at": "2026-09-24 06:14:14.567351+00"
  },
  {
+  "id": "771e72ce-ecb0-5490-bc52-df788e39c443",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "b38bd9a1-f0a8-5fe1-9aa1-0e8260930af6",
+  "updated_at": "2026-09-24 09:59:33.29136+00"
+ },
+ {
+  "id": "774f2d5f-5677-5bf4-9e52-4c0462fe4010",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "780b445f-08dc-5ece-8c9a-f105e01fc731",
   "kind": "lesson",
   "ordinal": 2,
@@ -2275,6 +3355,15 @@
   "title_en": "Lesson 2",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
   "updated_at": "2026-09-24 01:18:06.414424+00"
+ },
+ {
+  "id": "783fd940-60ab-51ad-b710-59bc27df2e7e",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "080920e1-dfcc-555f-94e8-0864285aa5e7",
+  "updated_at": "2026-09-24 10:36:22.353659+00"
  },
  {
   "id": "7846c590-b11c-5f9f-b951-bc3bdbdd18bb",
@@ -2295,13 +3384,31 @@
   "updated_at": "2026-09-23 22:57:13.830499+00"
  },
  {
-  "id": "789020d1-5992-5fba-a99a-7f05520fd0b4",
+  "id": "785e8979-ecb9-56c5-bacd-5d0614fbd3ee",
   "kind": "review",
-  "ordinal": 4,
+  "ordinal": 7,
   "status": "published",
   "title_en": "Unit check",
+  "unit_id": "c640ea33-8098-56b9-85a3-15f539f2ece2",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "789020d1-5992-5fba-a99a-7f05520fd0b4",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
   "unit_id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
-  "updated_at": "2026-09-24 01:18:06.414424+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "78aeea75-5125-5488-b3f2-d47a6e65492b",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "793c073b-7b29-5e91-962c-455774ee76dc",
@@ -2320,6 +3427,15 @@
   "title_en": "At the café",
   "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
   "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "id": "797a74fd-6aa9-5d6e-b15a-550aa1cc6cd8",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "79ff741a-bc70-512a-84af-598cf24f4b78",
@@ -2349,6 +3465,15 @@
   "updated_at": "2026-09-23 19:39:12.082725+00"
  },
  {
+  "id": "7a649f35-ece5-568d-bf0b-724beab3f402",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "dc485e04-124e-516d-9061-98a2d00f4d57",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "7ac090ed-67f9-5f51-b119-eec7b1159117",
   "kind": "lesson",
   "ordinal": 13,
@@ -2368,21 +3493,21 @@
  },
  {
   "id": "7b650abd-5c21-5368-a340-9d83318863de",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "770b6d5f-bd8c-5c17-a05f-4721faaa1706",
-  "updated_at": "2026-09-24 00:23:43.658623+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "7b6f7a40-3a4a-5619-a60a-aee61aa2d37d",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 7,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
-  "updated_at": "2026-09-23 23:06:40.129285+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "7b73880e-4c90-5cb8-9cdb-a0532e4d6cf1",
@@ -2403,6 +3528,15 @@
   "updated_at": "2026-09-23 23:49:13.3501+00"
  },
  {
+  "id": "7bdd77cc-6b65-5c01-9cec-0660ed6e1551",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "7bfec9fa-9042-5ce1-8d0c-eb8724104750",
   "kind": "lesson",
   "ordinal": 1,
@@ -2421,6 +3555,15 @@
   "updated_at": "2026-09-23 19:53:48.73596+00"
  },
  {
+  "id": "7cf5f61c-8b51-599d-b6f6-02c15a54c356",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "7c33a900-8b22-5a9e-a34e-7c274e6a21b0",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "7d75b6c2-3e96-5c72-9e3d-b98f5df91960",
   "kind": "lesson",
   "ordinal": 4,
@@ -2430,13 +3573,22 @@
   "updated_at": "2026-09-23 23:49:13.3501+00"
  },
  {
+  "id": "7de802d1-394e-5d3c-a45b-9ba36fe01ff3",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "e7976a3a-80b3-505d-abc8-858bd6a92a90",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "7eb7c404-7eee-58ad-a3c1-d90232ff3a0c",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 6,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
-  "updated_at": "2026-09-23 22:57:13.830499+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "7ecc25d5-d965-5dd0-b967-c3e69135eeb1",
@@ -2511,13 +3663,40 @@
   "updated_at": "2026-09-23 19:43:38.303503+00"
  },
  {
+  "id": "7faaccf9-1823-5c8f-b486-cabf1766e1b9",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "7ffee0ab-95d9-5aa4-83eb-2602f1e4bf47",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "07ff3e13-7b95-55ab-aab7-ac48151e0d8c",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "80244e69-27d4-537b-af44-989e123990be",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "52c51646-b698-5749-ae7b-d554ab2e0240",
-  "updated_at": "2026-09-24 01:02:30.793022+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "8064fd46-ab69-5168-a157-451bd6de1906",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "3e9f1f79-1601-518d-ad4c-5540cd98f35b",
+  "updated_at": "2026-09-24 10:25:30.075133+00"
  },
  {
   "id": "80b35cb7-96af-56c5-ba8b-c54a0d07d13b",
@@ -2539,12 +3718,12 @@
  },
  {
   "id": "80fa7e45-9dcf-59c5-9fe1-03f554da8c08",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 6,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "a973933b-ccb4-5f7d-9210-9a063ab4ed00",
-  "updated_at": "2026-09-24 06:05:11.086413+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "810d4fec-899e-52af-a803-5c922af3f453",
@@ -2563,6 +3742,24 @@
   "title_en": "Lesson 5",
   "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
   "updated_at": "2026-09-23 23:12:50.467874+00"
+ },
+ {
+  "id": "81e1b99f-8e56-5329-a824-8bd7ecb3f9d8",
+  "kind": "checkpoint",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Checkpoint 4",
+  "unit_id": "6ec21cf5-83ce-55f4-a07c-355a8fb995bb",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "822885c7-7746-5081-bdb9-3f81cd87a06d",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "82e34905-31bb-5ef8-a11c-985406d5806c",
@@ -2599,6 +3796,15 @@
   "title_en": "Lesson 4",
   "unit_id": "e7976a3a-80b3-505d-abc8-858bd6a92a90",
   "updated_at": "2026-09-24 00:07:20.443047+00"
+ },
+ {
+  "id": "836f545c-43cb-56d3-8b31-fc9251653252",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "1c4eaeb1-2bcc-5b49-889e-bfd0ac2ed088",
+  "updated_at": "2026-09-24 10:11:49.629982+00"
  },
  {
   "id": "83722c46-6b6b-5b7b-805d-1296b383fa85",
@@ -2664,13 +3870,31 @@
   "updated_at": "2026-09-24 07:04:12.425811+00"
  },
  {
+  "id": "85a2a8c5-0078-5b54-a7d4-6aa5653ab5a1",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "8531d298-54ee-59f6-9973-5e4562177f2e",
+  "updated_at": "2026-09-24 10:09:02.025603+00"
+ },
+ {
+  "id": "86879de0-a3bd-5443-afbc-c325ccb7d124",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "3e9f1f79-1601-518d-ad4c-5540cd98f35b",
+  "updated_at": "2026-09-24 10:25:30.075133+00"
+ },
+ {
   "id": "86e065f6-6ebe-5392-9841-580baccfd790",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "2fb39a77-4405-52e0-83ee-a83f56d744ad",
-  "updated_at": "2026-09-24 06:14:14.567351+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "876cf5f4-89ce-5839-98b1-265b24264169",
@@ -2680,6 +3904,15 @@
   "title_en": "Lesson 8",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
   "updated_at": "2026-09-23 19:29:03.477849+00"
+ },
+ {
+  "id": "881eb603-b5ca-5fd4-80b1-4b18c2130cbc",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a895f900-29bb-56a3-8161-0d08826cfe48",
+  "updated_at": "2026-09-24 10:26:45.400158+00"
  },
  {
   "id": "884b3f60-ccda-54dd-8f36-84bfd6cf1540",
@@ -2700,13 +3933,22 @@
   "updated_at": "2026-09-23 23:26:00.580368+00"
  },
  {
-  "id": "8884e531-1d3f-5cd3-9e4d-458aad668da6",
+  "id": "887849c7-f071-564c-8e49-662fbc2b2574",
   "kind": "review",
-  "ordinal": 3,
+  "ordinal": 5,
   "status": "published",
   "title_en": "Unit check",
+  "unit_id": "6cbcbdaf-a420-507d-844b-34d87b2822f2",
+  "updated_at": "2026-09-24 10:10:06.427472+00"
+ },
+ {
+  "id": "8884e531-1d3f-5cd3-9e4d-458aad668da6",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
   "unit_id": "754cc69f-e7cf-5e64-ba22-2679bc1f609e",
-  "updated_at": "2026-09-24 06:22:41.033889+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "88d60e47-9ba9-5dcf-84d8-744665a899c3",
@@ -2718,6 +3960,33 @@
   "updated_at": "2026-09-23 19:39:12.082725+00"
  },
  {
+  "id": "89183255-31e9-5827-9f26-ff6ca6ac8339",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a53cea7e-02aa-56f7-a3b8-de1dca112674",
+  "updated_at": "2026-09-24 10:22:18.89547+00"
+ },
+ {
+  "id": "8961c6d5-171f-5559-b29a-781a26691fba",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "a973933b-ccb4-5f7d-9210-9a063ab4ed00",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "89a2139a-1035-5d65-ba76-fa0f494f7c1b",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "8531d298-54ee-59f6-9973-5e4562177f2e",
+  "updated_at": "2026-09-24 10:09:02.025603+00"
+ },
+ {
   "id": "8a184f33-31d5-563b-bce3-981cffd02431",
   "kind": "lesson",
   "ordinal": 7,
@@ -2725,6 +3994,15 @@
   "title_en": "Lesson 7",
   "unit_id": "61a56ded-546a-5ad6-a8ac-310375bed4ac",
   "updated_at": "2026-09-23 19:54:45.405956+00"
+ },
+ {
+  "id": "8ae2e09a-663d-5142-a0ed-70065bc2ba45",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "2fb39a77-4405-52e0-83ee-a83f56d744ad",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "8b23f9b8-82e4-50cb-8c1a-33d4cf470ab4",
@@ -2743,6 +4021,15 @@
   "title_en": "Lesson 3",
   "unit_id": "72e14160-96c0-535c-9819-8ab194bd82cc",
   "updated_at": "2026-09-24 06:06:34.296637+00"
+ },
+ {
+  "id": "8b5e5faa-5fc8-5fed-89fc-101dfc1f14d4",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "8c396473-eb4e-578a-b44c-b743e36e1283",
@@ -2853,6 +4140,15 @@
   "updated_at": "2026-09-24 00:07:20.443047+00"
  },
  {
+  "id": "90236c83-81bf-58b3-91be-ec94a4cccba2",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a895f900-29bb-56a3-8161-0d08826cfe48",
+  "updated_at": "2026-09-24 10:26:45.400158+00"
+ },
+ {
   "id": "9030dd0b-7019-5a66-b13c-594cd1a33b03",
   "kind": "lesson",
   "ordinal": 15,
@@ -2860,6 +4156,15 @@
   "title_en": "Lesson 15",
   "unit_id": "13fec277-30b8-5bdb-9718-e682351abfd9",
   "updated_at": "2026-09-23 20:11:12.124649+00"
+ },
+ {
+  "id": "9109e02a-d924-5fee-90ce-998b08bedc69",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "28d6c921-dae2-50d2-b6a0-a5e2423428a6",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "91c088df-90cb-5ce7-9316-fce2dbe34a5b",
@@ -2880,6 +4185,33 @@
   "updated_at": "2026-09-23 23:35:46.537011+00"
  },
  {
+  "id": "91f0ba16-53cc-5965-b102-77411f9cdb62",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "2fb39a77-4405-52e0-83ee-a83f56d744ad",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "92031a71-9d11-5436-8d68-a4d24f633ec6",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "92513632-31b3-5c9a-b872-6fe8470f5048",
+  "kind": "review",
+  "ordinal": 11,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "c72176ae-a8de-5a47-9b37-cf9bdf84de08",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "925982cf-66f9-5b51-9bd4-a21398463154",
   "kind": "lesson",
   "ordinal": 3,
@@ -2898,6 +4230,15 @@
   "updated_at": "2026-09-23 20:11:12.124649+00"
  },
  {
+  "id": "92e68e52-f371-528a-8ce4-3fb9aafb4a5e",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "a46178fb-2c93-503a-b057-1838974c2a73",
+  "updated_at": "2026-09-24 10:15:33.261084+00"
+ },
+ {
   "id": "9383bd4b-3393-5f61-a779-e878c10c5b10",
   "kind": "lesson",
   "ordinal": 4,
@@ -2907,6 +4248,33 @@
   "updated_at": "2026-09-24 07:05:36.022297+00"
  },
  {
+  "id": "93dcd629-8365-5576-b1fa-156e66aa751b",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "afdaff40-37c8-56af-ae39-78f1ed48e97e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "947b5a5a-ad54-54a7-9daa-0354082364ba",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "2a6a2955-3702-5c32-a348-a1d2c591bdf2",
+  "updated_at": "2026-09-24 10:34:16.026108+00"
+ },
+ {
+  "id": "94e08a36-a103-5dc8-bbc3-deef1351c20a",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "951787f1-164d-5bdc-afb6-0d80c63740ed",
   "kind": "lesson",
   "ordinal": 1,
@@ -2914,6 +4282,15 @@
   "title_en": "Lesson 1",
   "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
   "updated_at": "2026-09-24 07:14:01.760544+00"
+ },
+ {
+  "id": "956e4668-3488-5f52-8411-8be1bf16507f",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "05dc3d96-dc93-54a8-9eec-ca5cc9baff16",
+  "updated_at": "2026-09-24 10:04:45.287311+00"
  },
  {
   "id": "9596b1fe-f47e-5edc-918b-8211bf965990",
@@ -2959,6 +4336,24 @@
   "title_en": "Lesson 2",
   "unit_id": "dc485e04-124e-516d-9061-98a2d00f4d57",
   "updated_at": "2026-09-24 00:00:40.250698+00"
+ },
+ {
+  "id": "972c85a2-c831-5585-b179-9c97252fc95a",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "02735212-fad9-5b44-97cb-061657aaad7f",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "97cdf9f6-72be-557a-b3b9-ce78cb1d21bb",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "97d282a2-5817-5da8-a885-f890c02ce041",
@@ -3033,6 +4428,15 @@
   "updated_at": "2026-09-23 23:15:20.78631+00"
  },
  {
+  "id": "9a31f019-8e7e-5dbd-8a9d-6e89fbba5bfa",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "ca8f891d-0d08-51d6-84de-10ce90c0245f",
+  "updated_at": "2026-09-24 09:55:09.972746+00"
+ },
+ {
   "id": "9a3c5aa3-5be9-5d91-935e-80555103d86d",
   "kind": "checkpoint",
   "ordinal": 20002,
@@ -3058,6 +4462,15 @@
   "title_en": "Lesson 2",
   "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
   "updated_at": "2026-09-23 23:06:40.129285+00"
+ },
+ {
+  "id": "9ca7541f-3b03-5efb-89e6-6b954c88854f",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "28d6c921-dae2-50d2-b6a0-a5e2423428a6",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "9d3ccd66-94c7-56bb-8c1c-d14056209c7e",
@@ -3123,6 +4536,15 @@
   "updated_at": "2026-09-23 23:38:40.820065+00"
  },
  {
+  "id": "a0a443ee-5daa-5201-aa6b-1267876df117",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "3e9f1f79-1601-518d-ad4c-5540cd98f35b",
+  "updated_at": "2026-09-24 10:25:30.075133+00"
+ },
+ {
   "id": "a0b161c0-f80b-524f-901a-ce5fba3d5ed9",
   "kind": "lesson",
   "ordinal": 1,
@@ -3139,6 +4561,24 @@
   "title_en": "Lesson 3",
   "unit_id": "14b391bd-5db8-50a4-a988-428361e7752a",
   "updated_at": "2026-09-23 23:08:49.662548+00"
+ },
+ {
+  "id": "a1178a62-4349-5bdf-84d4-0a551d27f37a",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "b38bd9a1-f0a8-5fe1-9aa1-0e8260930af6",
+  "updated_at": "2026-09-24 09:59:33.29136+00"
+ },
+ {
+  "id": "a17487a3-5b06-514f-bb79-db8214183419",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "8531d298-54ee-59f6-9973-5e4562177f2e",
+  "updated_at": "2026-09-24 10:09:02.025603+00"
  },
  {
   "id": "a278b06d-c4a1-5bba-8319-15d092cf0677",
@@ -3159,13 +4599,22 @@
   "updated_at": "2026-09-24 01:02:30.793022+00"
  },
  {
+  "id": "a3790806-3596-5f06-b013-fb55ce95b65e",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "5ec6a727-4a91-5545-9e35-7f858d66ced1",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "a3ae1231-1bb9-5e91-9a0c-316d67d971c4",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
-  "updated_at": "2026-09-23 23:26:55.917775+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "a3bbfc6a-1848-596e-b377-873dfd0be26d",
@@ -3195,6 +4644,15 @@
   "updated_at": "2026-09-23 19:39:12.082725+00"
  },
  {
+  "id": "a500afb2-5d36-5d81-8bcf-db6f76ec106c",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ef00ab7c-09e9-5c6b-8389-aa83a371e3d1",
+  "updated_at": "2026-09-24 10:14:07.223202+00"
+ },
+ {
   "id": "a6401d61-d1c2-5cb5-938f-65a715459bf3",
   "kind": "lesson",
   "ordinal": 4,
@@ -3213,13 +4671,31 @@
   "updated_at": "2026-09-24 00:23:43.658623+00"
  },
  {
+  "id": "a6d53630-ae4f-576c-96bb-742546bd70dc",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "a6dc6c23-04fd-54d4-a6fc-1e55879e4fa0",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 6,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "72e14160-96c0-535c-9819-8ab194bd82cc",
-  "updated_at": "2026-09-24 06:06:34.296637+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "a73c66fc-3f16-5aea-9d67-7336b0a9e5e5",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "a75fb05d-71a3-5498-8856-ffe9464d245b",
@@ -3276,6 +4752,24 @@
   "updated_at": "2026-09-24 00:20:44.628111+00"
  },
  {
+  "id": "a913bbb3-5360-5ec1-8120-fb29dd6a2bf8",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "577ff67b-76f7-513b-adca-5871bbb950dc",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "a92f5a17-b0c4-530f-9a68-5939385efe22",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a64eb13a-e442-5199-bf7e-cbdf6e56de26",
+  "updated_at": "2026-09-24 10:27:48.471662+00"
+ },
+ {
   "id": "a9b91672-7367-541c-931e-9ba21713b6f1",
   "kind": "lesson",
   "ordinal": 3,
@@ -3328,6 +4822,15 @@
   "title_en": "Unit check",
   "unit_id": "3cc8b1a1-6314-5a4f-be82-b713ea584203",
   "updated_at": "2026-09-23 19:03:23.01595+00"
+ },
+ {
+  "id": "aa95b0ce-8162-582e-baae-6cf871e70599",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a53cea7e-02aa-56f7-a3b8-de1dca112674",
+  "updated_at": "2026-09-24 10:22:18.89547+00"
  },
  {
   "id": "abeae42f-06c4-5523-b8e0-1c90c3c84654",
@@ -3384,13 +4887,49 @@
   "updated_at": "2026-09-23 19:22:02.809359+00"
  },
  {
-  "id": "af0be2d5-a98c-5e07-bc05-28c25b9ae32b",
+  "id": "ae2f969e-b091-5f5b-8982-30004bacc49a",
   "kind": "review",
-  "ordinal": 4,
+  "ordinal": 11,
   "status": "published",
   "title_en": "Unit check",
+  "unit_id": "14b391bd-5db8-50a4-a988-428361e7752a",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "aef705cb-f2c6-5366-8638-92e5a57cb84c",
+  "kind": "lesson",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Lesson 6",
+  "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "af0be2d5-a98c-5e07-bc05-28c25b9ae32b",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
   "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
-  "updated_at": "2026-09-24 07:13:16.477524+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "af151f9f-25ff-5244-b6c5-0240e00cfb98",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "af23aaf1-8281-54f7-af4d-8de091255398",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "2a6a2955-3702-5c32-a348-a1d2c591bdf2",
+  "updated_at": "2026-09-24 10:34:16.026108+00"
  },
  {
   "id": "af612d3d-9216-5262-80af-72348587c39a",
@@ -3412,12 +4951,12 @@
  },
  {
   "id": "af934dc4-a7d8-5e27-96ba-9cb68987ba43",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 6,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
-  "updated_at": "2026-09-23 23:41:37.581944+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "b01cabd4-0548-5883-bdcd-16483d679bc7",
@@ -3429,13 +4968,22 @@
   "updated_at": "2026-09-23 20:03:32.724278+00"
  },
  {
+  "id": "b0690dae-ee57-5926-b77d-333149b6f56f",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "b0819e6f-7ba2-5f64-b4a1-549f810eb159",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 7,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
-  "updated_at": "2026-09-23 22:49:34.539799+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "b097d3c5-2adb-5cbb-9ffb-4fe7662d07f5",
@@ -3463,6 +5011,15 @@
   "title_en": "Lesson 2",
   "unit_id": "74698b58-c87a-5870-a6dd-a6652b6da393",
   "updated_at": "2026-09-24 00:44:27.455593+00"
+ },
+ {
+  "id": "b1112117-e873-5e94-a7c4-527e17759353",
+  "kind": "review",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "b1abd58e-56d2-563c-8958-5805411210da",
@@ -3502,12 +5059,12 @@
  },
  {
   "id": "b2620035-d5f5-5cc3-bd68-f5b771b3f3e7",
-  "kind": "review",
+  "kind": "lesson",
   "ordinal": 6,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Lesson 6",
   "unit_id": "a921ed27-35b4-5222-9699-d8dd343c1f79",
-  "updated_at": "2026-09-24 00:13:39.721406+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "b2b94f0e-e73b-5f5d-80bc-e9300aa0beba",
@@ -3537,6 +5094,15 @@
   "updated_at": "2026-09-23 19:58:24.459018+00"
  },
  {
+  "id": "b365bb25-d2ca-50a2-a5dd-ce88fc6e4b73",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "b3eb03d5-9148-51eb-ac32-274f8ecb23fc",
   "kind": "lesson",
   "ordinal": 3,
@@ -3546,6 +5112,15 @@
   "updated_at": "2026-09-23 19:58:24.459018+00"
  },
  {
+  "id": "b4da6d11-61ff-533d-b119-3d3159449b41",
+  "kind": "review",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "dc485e04-124e-516d-9061-98a2d00f4d57",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "b58de8d3-03ba-5cbf-b6d6-a8d3a2756b45",
   "kind": "lesson",
   "ordinal": 4,
@@ -3553,6 +5128,15 @@
   "title_en": "Lesson 4",
   "unit_id": "a2eec2e1-5a4c-5372-a1e8-7ac3076576e6",
   "updated_at": "2026-09-23 19:35:07.962231+00"
+ },
+ {
+  "id": "b5a63186-4ced-509a-b59e-4ef2fa7c0de1",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "07ff3e13-7b95-55ab-aab7-ac48151e0d8c",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "b620886f-a8a2-57c9-bff9-ba48bb3c2da0",
@@ -3664,12 +5248,12 @@
  },
  {
   "id": "b9831063-e0c3-572a-9481-5d7f06629a5b",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
-  "updated_at": "2026-09-24 07:29:13.690418+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "b9baf03f-a094-5ec1-8db2-3b31f85fdb7a",
@@ -3679,6 +5263,15 @@
   "title_en": "Lesson 1",
   "unit_id": "9a649d54-c14a-56da-8701-c4783ad9a159",
   "updated_at": "2026-09-18 13:23:35.932625+00"
+ },
+ {
+  "id": "b9c404f0-790d-5fdd-bb8a-a78a7511caf3",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "b38bd9a1-f0a8-5fe1-9aa1-0e8260930af6",
+  "updated_at": "2026-09-24 09:59:33.29136+00"
  },
  {
   "id": "ba1e512f-f9c1-5b7e-91df-d27b6a45eed8",
@@ -3754,12 +5347,12 @@
  },
  {
   "id": "be512035-bab4-5806-9c08-5684d8f3b0c6",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
-  "updated_at": "2026-09-23 23:33:32.388567+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "bf2309d5-c83a-583a-832b-0cfb54f61052",
@@ -3769,6 +5362,24 @@
   "title_en": "Lesson 4",
   "unit_id": "c72176ae-a8de-5a47-9b37-cf9bdf84de08",
   "updated_at": "2026-09-23 23:15:20.78631+00"
+ },
+ {
+  "id": "bfb78e13-657b-5944-8876-e6ff7c0ccb3f",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "a895f900-29bb-56a3-8161-0d08826cfe48",
+  "updated_at": "2026-09-24 10:26:45.400158+00"
+ },
+ {
+  "id": "c03abb5f-bb64-5cd9-a7c1-b1d6492b9254",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a46178fb-2c93-503a-b057-1838974c2a73",
+  "updated_at": "2026-09-24 10:15:33.261084+00"
  },
  {
   "id": "c03b87c0-f6ab-50f8-849f-94487beab103",
@@ -3798,6 +5409,24 @@
   "updated_at": "2026-09-17 11:51:22.849897+00"
  },
  {
+  "id": "c10c796e-fb3a-5adb-828b-f2ed801054fa",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ca8f891d-0d08-51d6-84de-10ce90c0245f",
+  "updated_at": "2026-09-24 09:55:09.972746+00"
+ },
+ {
+  "id": "c1759eae-afbb-55a4-b29c-59c194935566",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "080920e1-dfcc-555f-94e8-0864285aa5e7",
+  "updated_at": "2026-09-24 10:36:22.353659+00"
+ },
+ {
   "id": "c18a378f-5cce-5d53-9c76-2d8951574da4",
   "kind": "lesson",
   "ordinal": 6,
@@ -3814,6 +5443,15 @@
   "title_en": "Lesson 2",
   "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
   "updated_at": "2026-09-23 23:51:21.981446+00"
+ },
+ {
+  "id": "c2195fba-15e7-516b-8147-43af3af4ee37",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "05dc3d96-dc93-54a8-9eec-ca5cc9baff16",
+  "updated_at": "2026-09-24 10:04:45.287311+00"
  },
  {
   "id": "c241d33e-14f9-52fb-aaca-b5e507ab32d0",
@@ -3852,13 +5490,22 @@
   "updated_at": "2026-09-17 07:05:23.033601+00"
  },
  {
-  "id": "c3ef472b-fade-5191-8d72-ac99b2fd063d",
+  "id": "c3acdd50-81cd-5e64-9165-6c40735bd3e2",
   "kind": "review",
-  "ordinal": 5,
+  "ordinal": 6,
   "status": "published",
   "title_en": "Unit check",
+  "unit_id": "98bdf26a-6fb0-57ec-80b0-092e57969285",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "c3ef472b-fade-5191-8d72-ac99b2fd063d",
+  "kind": "lesson",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Lesson 5",
   "unit_id": "d585de30-5927-5cbf-a88a-fc998547f793",
-  "updated_at": "2026-09-24 00:20:44.628111+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "c3f65208-7230-59cb-aa4b-31a4b3be59a3",
@@ -3888,6 +5535,15 @@
   "updated_at": "2026-09-17 07:05:23.033601+00"
  },
  {
+  "id": "c48abf82-f72b-5fa3-ac39-81575ea5e3b3",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "afdaff40-37c8-56af-ae39-78f1ed48e97e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "c5c93bd4-587b-5330-a411-436d8be7ba13",
   "kind": "lesson",
   "ordinal": 7,
@@ -3913,6 +5569,15 @@
   "title_en": "Lesson 2",
   "unit_id": "71481540-7f7c-5939-9d96-ee76d80128b9",
   "updated_at": "2026-09-23 19:08:03.531538+00"
+ },
+ {
+  "id": "c5f43740-f908-5d40-942b-1a1c5e9dff6c",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ae52684a-c28b-5318-92e0-5d1cc5ac5cf1",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "c637fbc6-8ab4-50fd-85dc-4e8f11eb796f",
@@ -3960,6 +5625,15 @@
   "updated_at": "2026-09-24 05:58:42.515176+00"
  },
  {
+  "id": "c6c993ec-17b2-5eb6-9d8a-5d2a2e7bfe66",
+  "kind": "review",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "c6ec610f-bc77-514a-8f72-084a3d83193f",
   "kind": "checkpoint",
   "ordinal": 2,
@@ -3970,12 +5644,12 @@
  },
  {
   "id": "c70f4e78-0d73-5e1d-af1e-26533a6d33f2",
-  "kind": "review",
+  "kind": "lesson",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Lesson 5",
   "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
-  "updated_at": "2026-09-24 00:54:40.64413+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "c770a175-bf15-5e18-b461-5cc4f2e7b3b6",
@@ -3996,6 +5670,15 @@
   "updated_at": "2026-09-23 22:50:56.462386+00"
  },
  {
+  "id": "c7e99cb2-2250-563f-9e44-69be13f55c53",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a53cea7e-02aa-56f7-a3b8-de1dca112674",
+  "updated_at": "2026-09-24 10:22:18.89547+00"
+ },
+ {
   "id": "c7f03141-5026-5312-b44d-9a5a1037c04b",
   "kind": "checkpoint",
   "ordinal": 3,
@@ -4003,6 +5686,15 @@
   "title_en": "Checkpoint 3",
   "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
   "updated_at": "2026-09-24 01:21:03.370827+00"
+ },
+ {
+  "id": "c82128d2-959b-5180-b20c-a2ae64c19ec5",
+  "kind": "practice",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "dc485e04-124e-516d-9061-98a2d00f4d57",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "c9175284-7246-5ab1-bb1f-944175582ac0",
@@ -4032,6 +5724,15 @@
   "updated_at": "2026-09-23 23:12:50.467874+00"
  },
  {
+  "id": "ca06def8-c968-55cc-b94e-4663cb515470",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "02735212-fad9-5b44-97cb-061657aaad7f",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "caa0946e-9322-5219-9b88-729eff7dd1db",
   "kind": "checkpoint",
   "ordinal": 2,
@@ -4059,6 +5760,15 @@
   "updated_at": "2026-09-24 00:20:44.628111+00"
  },
  {
+  "id": "cb387d29-83cb-5e8b-a3e2-6d20932ca189",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "36b953db-b59d-5c37-8572-47afd0081c48",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "cb4c1307-0e59-589e-befc-e495274c7f50",
   "kind": "lesson",
   "ordinal": 1,
@@ -4068,6 +5778,15 @@
   "updated_at": "2026-09-23 19:08:03.531538+00"
  },
  {
+  "id": "cbb4fd35-fcc4-5bbe-a174-158e94cb8513",
+  "kind": "review",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "cc06a168-4625-5887-8f38-ebcc441337cd",
   "kind": "lesson",
   "ordinal": 4,
@@ -4075,6 +5794,24 @@
   "title_en": "Lesson 4",
   "unit_id": "38114afb-c035-5ae5-956f-723c4f408a0d",
   "updated_at": "2026-09-23 23:26:55.917775+00"
+ },
+ {
+  "id": "cc2d7612-9eed-5009-8c36-d7133169b640",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "2a6a2955-3702-5c32-a348-a1d2c591bdf2",
+  "updated_at": "2026-09-24 10:34:16.026108+00"
+ },
+ {
+  "id": "cc5abbec-ec33-53f1-a1c8-158cac4740cd",
+  "kind": "review",
+  "ordinal": 10,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "cda348a9-2203-56eb-8d94-327a6479089a",
@@ -4087,12 +5824,12 @@
  },
  {
   "id": "ce022c3d-9779-585e-8424-0574021ddd4d",
-  "kind": "review",
+  "kind": "lesson",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Lesson 4",
   "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
-  "updated_at": "2026-09-24 05:57:59.666661+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "ce4f7808-1121-51ff-8e4b-f6ffa6bd9ef8",
@@ -4123,30 +5860,30 @@
  },
  {
   "id": "ce997e52-9bba-5467-bc5a-6b684aeeb98d",
-  "kind": "review",
+  "kind": "lesson",
   "ordinal": 3,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Lesson 3",
   "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
-  "updated_at": "2026-09-24 07:14:01.760544+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "ced22105-4403-5814-8696-f7a428c69f97",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 6,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
-  "updated_at": "2026-09-23 23:51:21.981446+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "cee2c6dc-2915-5ea8-bede-d816d0b4e489",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "364e1a73-f26c-5d78-9757-4d096939ebda",
-  "updated_at": "2026-09-23 23:49:13.3501+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "cef28cf8-a65f-52d9-ab26-6362771e41d1",
@@ -4156,6 +5893,15 @@
   "title_en": "Lesson 5",
   "unit_id": "13fec277-30b8-5bdb-9718-e682351abfd9",
   "updated_at": "2026-09-23 20:11:12.124649+00"
+ },
+ {
+  "id": "cf3b95a1-fc37-5b7b-b38e-7f6a7625ae41",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a46178fb-2c93-503a-b057-1838974c2a73",
+  "updated_at": "2026-09-24 10:15:33.261084+00"
  },
  {
   "id": "cfde5a5e-e37e-52ad-b9bd-8af13f573b1f",
@@ -4185,6 +5931,15 @@
   "updated_at": "2026-09-24 06:24:37.789139+00"
  },
  {
+  "id": "d1169700-7b9f-5e5f-9ccc-d899b86c6ec1",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "2a6a2955-3702-5c32-a348-a1d2c591bdf2",
+  "updated_at": "2026-09-24 10:34:16.026108+00"
+ },
+ {
   "id": "d135c5ff-7b9d-57e1-8c6c-f306e6593806",
   "kind": "review",
   "ordinal": 10,
@@ -4203,6 +5958,24 @@
   "updated_at": "2026-09-23 19:51:18.52367+00"
  },
  {
+  "id": "d1cc4397-8855-53c0-af7a-68ee9818e940",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "d1e5ffad-c151-5cd7-8e63-f752587925a9",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "d2386d78-d5e8-51ac-be23-de967f90f7b7",
   "kind": "lesson",
   "ordinal": 3,
@@ -4212,6 +5985,15 @@
   "updated_at": "2026-09-23 22:49:34.539799+00"
  },
  {
+  "id": "d2622d8f-4903-5b49-9e65-63fea779a884",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "f1ba775f-ad41-52d5-ae7c-9ee7834def48",
+  "updated_at": "2026-09-24 10:30:10.577949+00"
+ },
+ {
   "id": "d2732154-ad4b-5383-b969-faa7e7283f63",
   "kind": "lesson",
   "ordinal": 2,
@@ -4219,6 +6001,15 @@
   "title_en": "Lesson 2",
   "unit_id": "481ae401-6c6e-53d7-9683-853d0cbed672",
   "updated_at": "2026-09-18 12:13:13.419253+00"
+ },
+ {
+  "id": "d27d2445-ad88-5902-9e3d-e0bbe6a4ee06",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "da566530-f509-5133-b265-9183e82e99e2",
+  "updated_at": "2026-09-24 09:51:50.379368+00"
  },
  {
   "id": "d2d0ebaf-f7fb-5f16-8fbf-e93786bcf342",
@@ -4257,13 +6048,31 @@
   "updated_at": "2026-09-23 19:29:03.477849+00"
  },
  {
+  "id": "d4d9cb97-a4b5-5ac1-808b-ce0daf94682a",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "b2e41f0e-04f0-5a3b-94eb-850cd2d57575",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "d4fe3512-fd93-507c-b4c2-47702a6c98dc",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "1c4eaeb1-2bcc-5b49-889e-bfd0ac2ed088",
+  "updated_at": "2026-09-24 10:11:49.629982+00"
+ },
+ {
   "id": "d50b67f9-a223-5539-9da9-87e6c0be10c5",
-  "kind": "review",
+  "kind": "lesson",
   "ordinal": 6,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Lesson 6",
   "unit_id": "dc485e04-124e-516d-9061-98a2d00f4d57",
-  "updated_at": "2026-09-24 00:00:40.250698+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "d5133545-4252-5124-bf99-c1838d5f982c",
@@ -4282,6 +6091,15 @@
   "title_en": "Lesson 13",
   "unit_id": "13fec277-30b8-5bdb-9718-e682351abfd9",
   "updated_at": "2026-09-23 20:11:12.124649+00"
+ },
+ {
+  "id": "d56ffefb-511f-5c84-a526-36ac836566ca",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "6cbcbdaf-a420-507d-844b-34d87b2822f2",
+  "updated_at": "2026-09-24 10:10:06.427472+00"
  },
  {
   "id": "d585324b-1aa4-5d0c-aeac-bd944cfc1ffc",
@@ -4383,6 +6201,33 @@
   "updated_at": "2026-09-24 07:29:55.39398+00"
  },
  {
+  "id": "d9634f40-db66-5a02-b1b7-8480e3104020",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "f1ba775f-ad41-52d5-ae7c-9ee7834def48",
+  "updated_at": "2026-09-24 10:30:10.577949+00"
+ },
+ {
+  "id": "d968160b-967f-5b56-a0d2-39510c007753",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "d9d9e10b-e17e-5823-bcf3-4c883eca2a14",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "2902c53a-0143-5823-b423-fd9fe3dc2295",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "da1e8ad0-0943-5d4e-989e-6e019ffcbe40",
   "kind": "lesson",
   "ordinal": 6,
@@ -4435,6 +6280,15 @@
   "title_en": "Checkpoint 1",
   "unit_id": "07ff3e13-7b95-55ab-aab7-ac48151e0d8c",
   "updated_at": "2026-09-23 23:19:06.342269+00"
+ },
+ {
+  "id": "db90f627-a91c-579e-8736-c2ee7f02e686",
+  "kind": "review",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "d7e9f660-01d8-5d0f-9136-9a85a20fc33b",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "dba3503b-82cc-5a01-a269-5d32954aa9fc",
@@ -4509,6 +6363,24 @@
   "updated_at": "2026-09-17 07:05:23.033601+00"
  },
  {
+  "id": "dcc737f7-3c0f-54df-965a-e4eb060997c7",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "72e14160-96c0-535c-9819-8ab194bd82cc",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "dccbc838-f97a-5c92-be40-fe06c24e2a3f",
+  "kind": "practice",
+  "ordinal": 10,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "c72176ae-a8de-5a47-9b37-cf9bdf84de08",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "dd05dc63-9e89-5c9c-8750-9f77143687ef",
   "kind": "lesson",
   "ordinal": 4,
@@ -4528,12 +6400,21 @@
  },
  {
   "id": "dd337569-dfbc-5d44-99b7-94f5f4b9332d",
-  "kind": "review",
+  "kind": "lesson",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Lesson 5",
   "unit_id": "afdaff40-37c8-56af-ae39-78f1ed48e97e",
-  "updated_at": "2026-09-24 00:03:41.02582+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "dda8dd49-10d2-5429-81b4-32af30a1155f",
+  "kind": "review",
+  "ordinal": 8,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "5ec6a727-4a91-5545-9e35-7f858d66ced1",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "de1de61a-7f51-5ea9-86a9-fdd922ca71f8",
@@ -4561,6 +6442,24 @@
   "title_en": "Lesson 10",
   "unit_id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
   "updated_at": "2026-09-23 19:29:03.477849+00"
+ },
+ {
+  "id": "df49710b-f05a-5f49-9818-6fd206ff23a9",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "6ec21cf5-83ce-55f4-a07c-355a8fb995bb",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "df5485ae-f9db-59ef-ba7a-aaa8b94ff265",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "6ec21cf5-83ce-55f4-a07c-355a8fb995bb",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "df5a4168-92bc-51df-bc05-836bb7dcf996",
@@ -4635,6 +6534,15 @@
   "updated_at": "2026-09-17 07:05:23.033601+00"
  },
  {
+  "id": "e3fe70f4-12ff-5f57-ac67-1618788a7d15",
+  "kind": "practice",
+  "ordinal": 3,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "080920e1-dfcc-555f-94e8-0864285aa5e7",
+  "updated_at": "2026-09-24 10:36:22.353659+00"
+ },
+ {
   "id": "e47890bb-efd5-58dc-afd5-b9c6f0c9c30e",
   "kind": "lesson",
   "ordinal": 2,
@@ -4645,12 +6553,12 @@
  },
  {
   "id": "e493daac-248a-56a3-b382-01ab6ad5b399",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 9,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "c72176ae-a8de-5a47-9b37-cf9bdf84de08",
-  "updated_at": "2026-09-23 23:15:20.78631+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "e5bc4190-3f42-54cf-8e74-2a5d6f183402",
@@ -4698,6 +6606,24 @@
   "updated_at": "2026-09-23 23:12:50.467874+00"
  },
  {
+  "id": "e7681552-22bd-5470-a549-85630ab157d7",
+  "kind": "practice",
+  "ordinal": 10,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "e7d3bdeb-9945-5523-82de-eb7ee1b7d59b",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
   "id": "e7dce1fb-ff12-5cd9-a9ba-6933f50aec7c",
   "kind": "lesson",
   "ordinal": 3,
@@ -4705,6 +6631,15 @@
   "title_en": "Lesson 3",
   "unit_id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
   "updated_at": "2026-09-24 06:24:37.789139+00"
+ },
+ {
+  "id": "e8312547-adfa-5518-ac3a-e3a44576de14",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "5ec6a727-4a91-5545-9e35-7f858d66ced1",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "e83291f0-55e8-5e0f-87b6-abb99c917726",
@@ -4744,12 +6679,39 @@
  },
  {
   "id": "e97f6ae4-d30a-5bac-ae61-3ba7ccbc8938",
-  "kind": "review",
+  "kind": "lesson",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Lesson 5",
   "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 00:15:04.523306+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "e9cf98e1-89e1-5bbd-bae6-56e73ce44e40",
+  "kind": "lesson",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Lesson 6",
+  "unit_id": "d585de30-5927-5cbf-a88a-fc998547f793",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "e9e72485-1d19-5e00-83ac-af3e3b8cf0b7",
+  "kind": "practice",
+  "ordinal": 6,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ce343377-a0c2-5201-9ff4-824789e73e89",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "ea7baadb-1705-5840-9903-c7f0ac4681ff",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "6cbcbdaf-a420-507d-844b-34d87b2822f2",
+  "updated_at": "2026-09-24 10:10:06.427472+00"
  },
  {
   "id": "eb1ec986-e0ef-549b-b2a5-c7fee30071ad",
@@ -4824,6 +6786,15 @@
   "updated_at": "2026-09-23 18:53:27.361826+00"
  },
  {
+  "id": "ef2c9550-a8a3-5dc7-b4d6-aec6328ca405",
+  "kind": "practice",
+  "ordinal": 2,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "ce05c318-270e-5388-9073-3793ff249013",
+  "updated_at": "2026-09-24 10:23:23.672527+00"
+ },
+ {
   "id": "ef40b9fa-2127-5aee-b5ed-95fd3e9b8720",
   "kind": "checkpoint",
   "ordinal": 2,
@@ -4879,12 +6850,12 @@
  },
  {
   "id": "f1d1f10e-9e57-5880-aff6-9f29ad9fc944",
-  "kind": "review",
+  "kind": "lesson",
   "ordinal": 5,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Lesson 5",
   "unit_id": "5ec6a727-4a91-5545-9e35-7f858d66ced1",
-  "updated_at": "2026-09-24 00:37:54.683427+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "f204f915-4d8b-5455-98d7-3dd43e2efdc4",
@@ -4903,6 +6874,15 @@
   "title_en": "Lesson 3",
   "unit_id": "e7976a3a-80b3-505d-abc8-858bd6a92a90",
   "updated_at": "2026-09-24 00:07:20.443047+00"
+ },
+ {
+  "id": "f2fc0ec4-5584-5cb3-8120-059eb2c71556",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "20eecfc9-6b84-54ae-aedc-1c389863baf9",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "f33654cf-be8f-58be-b89e-030457c7c53b",
@@ -4924,12 +6904,21 @@
  },
  {
   "id": "f3b14057-baf2-5a03-80fe-f6139266d0c7",
+  "kind": "practice",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "f3ccd131-1795-575b-b709-91da74eeda86",
   "kind": "review",
   "ordinal": 5,
   "status": "published",
   "title_en": "Unit check",
-  "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 01:00:17.279796+00"
+  "unit_id": "754cc69f-e7cf-5e64-ba22-2679bc1f609e",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "f3e5200f-3d02-54b1-95e0-e069fcbc399e",
@@ -4977,6 +6966,42 @@
   "updated_at": "2026-09-24 00:07:20.443047+00"
  },
  {
+  "id": "f5b714a2-0fc2-510a-9ed5-2d80c7caa34c",
+  "kind": "practice",
+  "ordinal": 1,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a53cea7e-02aa-56f7-a3b8-de1dca112674",
+  "updated_at": "2026-09-24 10:22:18.89547+00"
+ },
+ {
+  "id": "f64662ef-3ca3-5973-bcc6-699c8bd4902b",
+  "kind": "practice",
+  "ordinal": 7,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "f647f30b-ff31-5455-9a8c-a60a10ea144e",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "5fa3a1dc-bfbe-5b52-a8fb-880e0f0b7173",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "f6cfc52a-5fd8-5f96-b646-5cb0e7b6acbb",
+  "kind": "review",
+  "ordinal": 5,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "8531d298-54ee-59f6-9973-5e4562177f2e",
+  "updated_at": "2026-09-24 10:09:02.025603+00"
+ },
+ {
   "id": "f8153c4e-bd14-5a14-be6a-509e9853dd3a",
   "kind": "checkpoint",
   "ordinal": 3,
@@ -4993,6 +7018,15 @@
   "title_en": "Lesson 2",
   "unit_id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
   "updated_at": "2026-09-23 23:33:32.388567+00"
+ },
+ {
+  "id": "fb4551ca-6726-5bf7-9835-490aed9b5e85",
+  "kind": "practice",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "a921ed27-35b4-5222-9699-d8dd343c1f79",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  },
  {
   "id": "fbf020e8-1c8c-5688-9321-16f91e7b1435",
@@ -5022,6 +7056,15 @@
   "updated_at": "2026-09-23 23:26:55.917775+00"
  },
  {
+  "id": "fd429df5-d24a-5415-9d3b-f7a3602ee01b",
+  "kind": "practice",
+  "ordinal": 4,
+  "status": "published",
+  "title_en": "Practice",
+  "unit_id": "1c4eaeb1-2bcc-5b49-889e-bfd0ac2ed088",
+  "updated_at": "2026-09-24 10:11:49.629982+00"
+ },
+ {
   "id": "fdfa3831-029a-515d-abd1-6e3eb4173ce3",
   "kind": "lesson",
   "ordinal": 2,
@@ -5032,11 +7075,20 @@
  },
  {
   "id": "fea9e5d8-7856-523e-9609-ab8eb5f7ca69",
-  "kind": "review",
+  "kind": "practice",
   "ordinal": 4,
   "status": "published",
-  "title_en": "Unit check",
+  "title_en": "Practice",
   "unit_id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
-  "updated_at": "2026-09-24 00:28:52.454628+00"
+  "updated_at": "2026-09-24 09:13:56.051098+00"
+ },
+ {
+  "id": "fef7e7f1-b72e-5d15-8ed1-93255e53dcdc",
+  "kind": "review",
+  "ordinal": 9,
+  "status": "published",
+  "title_en": "Unit check",
+  "unit_id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
+  "updated_at": "2026-09-24 09:13:56.051098+00"
  }
 ]

@@ -935,7 +935,7 @@ units:
         en: "trip"
       - lemma: "vacaciones"
         pos: "noun"
-        en: "holidays, vacation"
+        en: "vacation"
       - lemma: "valija"
         pos: "noun"
         en: "suitcase"

@@ -68,7 +68,9 @@ export function styleSpec(
   const { words } = parse(readFileSync(wordsPath, 'utf8'));
   const pairs = words.map((w) => `${w.es} → ${w.ar}`).join(' · ');
   const senses = 'A T-shirt is a **remera**; **camiseta** only means a team jersey (la camiseta de la selección).';
-  return `${text.slice(start, end > start ? end : undefined).trim()}\n\n**Never use (any form) → say instead:** ${pairs}\n\n**One word, two senses:** ${senses}`;
+  const english =
+    'The English is **US English**: couch, soccer, field, college, bus, cell phone, apartment, a ton, favor, traveled — never sofa, football, pitch, uni, coach, mobile, flat, loads, favour, travelled, "shall we".';
+  return `${text.slice(start, end > start ? end : undefined).trim()}\n\n**Never use (any form) → say instead:** ${pairs}\n\n**One word, two senses:** ${senses}\n\n${english}`;
 }
 
 export const promptHash = (text) => createHash('sha256').update(text).digest('hex').slice(0, 16);

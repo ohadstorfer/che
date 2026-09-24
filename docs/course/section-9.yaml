@@ -638,7 +638,7 @@ units:
             f: "3sg.pres.ind"
       - lemma: "previa"
         pos: "noun"
-        en: "pre-drinks, pre-party"
+        en: "pregame, pre-party"
       - lemma: "sobremesa"
         pos: "noun"
         en: "after-dinner chat"

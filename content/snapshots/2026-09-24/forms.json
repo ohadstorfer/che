@@ -1557,7 +1557,7 @@
    "tense": "pres"
   },
   "form": "cargo",
-  "gloss_en": "I charge, I top up",
+  "gloss_en": "I charge, I load",
   "gloss_note_en": null,
   "id": "0c36052e-5fd6-5fc1-8c18-8e0904d6b425",
   "lemma_id": "b318b760-9208-5f67-a6ca-3da2d4d26bce",
@@ -1565,7 +1565,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "a921ed27-35b4-5222-9699-d8dd343c1f79",
-  "updated_at": "2026-09-24 00:13:39.721406+00",
+  "updated_at": "2026-09-24 10:38:04.611467+00",
   "voice_id": null
  },
  {
@@ -13293,7 +13293,7 @@
    "number": "pl"
   },
   "form": "vecinos",
-  "gloss_en": "neighbours",
+  "gloss_en": "neighbors",
   "gloss_note_en": null,
   "id": "768e7a9a-41da-5631-a245-32fa07b4b483",
   "lemma_id": "cf696a2e-ae86-501f-8c2f-352c809c1001",
@@ -13301,7 +13301,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
-  "updated_at": "2026-09-23 23:51:21.981446+00",
+  "updated_at": "2026-09-24 08:33:51.76632+00",
   "voice_id": null
  },
  {
@@ -14522,7 +14522,7 @@
    "voseo": true
   },
   "form": "cargás",
-  "gloss_en": "you charge, you top up",
+  "gloss_en": "you charge, you load",
   "gloss_note_en": null,
   "id": "8174c46b-5d5f-5306-9fa6-0922f1a72ada",
   "lemma_id": "b318b760-9208-5f67-a6ca-3da2d4d26bce",
@@ -14530,7 +14530,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "a921ed27-35b4-5222-9699-d8dd343c1f79",
-  "updated_at": "2026-09-24 00:13:39.721406+00",
+  "updated_at": "2026-09-24 10:38:04.611467+00",
   "voice_id": null
  },
  {
@@ -15336,7 +15336,7 @@
    "tense": "pres"
   },
   "form": "compartimos",
-  "gloss_en": "we share, shall we share",
+  "gloss_en": "we share, should we share",
   "gloss_note_en": null,
   "id": "894586d9-cf67-5f30-8047-7316df084ded",
   "lemma_id": "89c5a10c-ec07-50b7-aaa0-223f18f96af1",
@@ -15344,7 +15344,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "28d6c921-dae2-50d2-b6a0-a5e2423428a6",
-  "updated_at": "2026-09-23 23:35:46.537011+00",
+  "updated_at": "2026-09-24 08:33:51.76632+00",
   "voice_id": null
  },
  {
@@ -15519,7 +15519,7 @@
    "voseo": true
   },
   "form": "viajaste",
-  "gloss_en": "you travelled",
+  "gloss_en": "you traveled",
   "gloss_note_en": null,
   "id": "8bf70864-4b6e-5ad9-b661-ac1ab7ec90fb",
   "lemma_id": "38a914b8-d94e-5d0f-a2c4-3933a80209bf",
@@ -15527,7 +15527,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "7c33a900-8b22-5a9e-a34e-7c274e6a21b0",
-  "updated_at": "2026-09-23 23:16:46.080289+00",
+  "updated_at": "2026-09-24 08:33:51.76632+00",
   "voice_id": null
  },
  {
@@ -21749,7 +21749,7 @@
    "number": "pl"
   },
   "form": "cuotas",
-  "gloss_en": "instalments",
+  "gloss_en": "installments",
   "gloss_note_en": null,
   "id": "c62861c1-c2f5-53da-a288-9c2005494626",
   "lemma_id": "7f87cdcc-1718-5c9a-8892-392b2f846d18",
@@ -21757,7 +21757,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "72e14160-96c0-535c-9819-8ab194bd82cc",
-  "updated_at": "2026-09-24 06:06:34.296637+00",
+  "updated_at": "2026-09-24 08:33:51.76632+00",
   "voice_id": null
  },
  {
@@ -21831,7 +21831,7 @@
    "tense": "pres"
   },
   "form": "viajamos",
-  "gloss_en": "we travel, we're travelling",
+  "gloss_en": "we travel, we're traveling",
   "gloss_note_en": null,
   "id": "c74fa398-91c5-5b11-8a8a-47b2ba756611",
   "lemma_id": "38a914b8-d94e-5d0f-a2c4-3933a80209bf",
@@ -21839,7 +21839,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "2902c53a-0143-5823-b423-fd9fe3dc2295",
-  "updated_at": "2026-09-23 23:49:55.688445+00",
+  "updated_at": "2026-09-24 08:33:51.76632+00",
   "voice_id": null
  },
  {
@@ -27373,7 +27373,7 @@
    "tense": "pret"
   },
   "form": "viajé",
-  "gloss_en": "I travelled",
+  "gloss_en": "I traveled",
   "gloss_note_en": null,
   "id": "fd0101b0-772b-5106-886d-65ad3d844389",
   "lemma_id": "38a914b8-d94e-5d0f-a2c4-3933a80209bf",
@@ -27381,7 +27381,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "7c33a900-8b22-5a9e-a34e-7c274e6a21b0",
-  "updated_at": "2026-09-23 23:16:46.080289+00",
+  "updated_at": "2026-09-24 08:33:51.76632+00",
   "voice_id": null
  },
  {

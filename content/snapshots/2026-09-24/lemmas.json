@@ -520,7 +520,7 @@
   "updated_at": "2026-09-23 22:50:56.462386+00"
  },
  {
-  "gloss_en": "loads, heaps",
+  "gloss_en": "a lot, a ton",
   "gloss_note_en": null,
   "id": "0f40bba4-6c6c-5d06-bf5c-7357dcde11cb",
   "is_glue": false,
@@ -530,7 +530,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-24 00:36:08.017048+00"
+  "updated_at": "2026-09-24 10:38:04.611467+00"
  },
  {
   "gloss_en": "news",
@@ -975,7 +975,7 @@
   "updated_at": "2026-09-23 20:21:28.625105+00"
  },
  {
-  "gloss_en": "greengrocer",
+  "gloss_en": "produce vendor",
   "gloss_note_en": null,
   "id": "1abf7253-cb1d-58ad-9a74-545d9218f3b6",
   "is_glue": false,
@@ -985,7 +985,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-24 00:07:20.443047+00"
+  "updated_at": "2026-09-24 10:38:04.611467+00"
  },
  {
   "gloss_en": "with me",
@@ -1339,7 +1339,7 @@
   "updated_at": "2026-09-23 23:19:06.342269+00"
  },
  {
-  "gloss_en": "phone, mobile",
+  "gloss_en": "phone, cell phone",
   "gloss_note_en": null,
   "id": "244c8dca-1f42-5751-8232-52638e705f19",
   "is_glue": false,
@@ -1349,7 +1349,7 @@
   "register": "informal",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-24 00:13:39.721406+00"
+  "updated_at": "2026-09-24 09:30:34.047005+00"
  },
  {
   "gloss_en": "five hundred",
@@ -2522,7 +2522,7 @@
   "updated_at": "2026-09-24 00:23:43.658623+00"
  },
  {
-  "gloss_en": "pre-drinks, pre-party",
+  "gloss_en": "pregame, pre-party",
   "gloss_note_en": null,
   "id": "433992b6-41ef-54a6-9bb5-bc1b5d33dda5",
   "is_glue": false,
@@ -2532,7 +2532,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-24 07:29:13.690418+00"
+  "updated_at": "2026-09-24 10:38:04.611467+00"
  },
  {
   "gloss_en": "flan, crème caramel",
@@ -2834,7 +2834,7 @@
   "updated_at": "2026-09-18 13:32:13.366839+00"
  },
  {
-  "gloss_en": "lift, elevator",
+  "gloss_en": "elevator",
   "gloss_note_en": null,
   "id": "49b9ed77-57ba-5cfb-8315-4db31e2e59d0",
   "is_glue": false,
@@ -2844,7 +2844,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-24 07:13:16.477524+00"
+  "updated_at": "2026-09-24 09:30:34.047005+00"
  },
  {
   "gloss_en": "nice to meet you",
@@ -4108,7 +4108,7 @@
   "updated_at": "2026-09-24 07:22:29.004136+00"
  },
  {
-  "gloss_en": "favour",
+  "gloss_en": "favor",
   "gloss_note_en": null,
   "id": "6cbbf42e-eb7c-5702-9a06-48ffbd76d1a5",
   "is_glue": false,
@@ -4118,7 +4118,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-24 00:00:40.250698+00"
+  "updated_at": "2026-09-24 09:30:34.047005+00"
  },
  {
   "gloss_en": "to go to bed",
@@ -4225,7 +4225,7 @@
   "updated_at": "2026-09-24 07:14:01.760544+00"
  },
  {
-  "gloss_en": "holidays, vacation",
+  "gloss_en": "vacation",
   "gloss_note_en": null,
   "id": "6e666c77-ffc0-52a5-ad30-81f75ef079e1",
   "is_glue": false,
@@ -4235,7 +4235,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-23 23:16:46.080289+00"
+  "updated_at": "2026-09-24 10:38:04.611467+00"
  },
  {
   "gloss_en": "if you like",
@@ -4498,7 +4498,7 @@
   "updated_at": "2026-09-23 23:08:49.662548+00"
  },
  {
-  "gloss_en": "football, soccer",
+  "gloss_en": "soccer",
   "gloss_note_en": null,
   "id": "768edca0-1664-5ee1-bca2-2301463f946e",
   "is_glue": false,
@@ -4508,7 +4508,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-23 20:21:28.625105+00"
+  "updated_at": "2026-09-24 10:38:04.611467+00"
  },
  {
   "gloss_en": "to toast, to raise a glass",
@@ -4654,7 +4654,7 @@
   "updated_at": "2026-09-23 20:13:15.959872+00"
  },
  {
-  "gloss_en": "coach, long-distance bus",
+  "gloss_en": "long-distance bus",
   "gloss_note_en": null,
   "id": "7a688d53-8966-5e83-a326-0e27de13bff9",
   "is_glue": false,
@@ -4664,7 +4664,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-23 23:16:46.080289+00"
+  "updated_at": "2026-09-24 08:33:51.76632+00"
  },
  {
   "gloss_en": "to bother",
@@ -4758,7 +4758,7 @@
   "updated_at": "2026-09-24 00:03:41.02582+00"
  },
  {
-  "gloss_en": "instalment",
+  "gloss_en": "installment",
   "gloss_note_en": null,
   "id": "7f87cdcc-1718-5c9a-8892-392b2f846d18",
   "is_glue": false,
@@ -4768,7 +4768,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-24 06:06:34.296637+00"
+  "updated_at": "2026-09-24 08:33:51.76632+00"
  },
  {
   "gloss_en": "partly",
@@ -5122,7 +5122,7 @@
   "updated_at": "2026-09-23 19:39:12.082725+00"
  },
  {
-  "gloss_en": "uni",
+  "gloss_en": "college",
   "gloss_note_en": "short for facultad",
   "id": "8a260486-3e73-5aea-8677-9f4b0267999e",
   "is_glue": false,
@@ -5132,7 +5132,7 @@
   "register": "informal",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-23 19:39:12.082725+00"
+  "updated_at": "2026-09-24 08:33:51.76632+00"
  },
  {
   "gloss_en": "since, from",
@@ -6084,7 +6084,7 @@
   "updated_at": "2026-09-23 19:43:38.303503+00"
  },
  {
-  "gloss_en": "greengrocer's",
+  "gloss_en": "produce store",
   "gloss_note_en": null,
   "id": "a9d48784-96d2-5a38-8ae9-9870344ffbeb",
   "is_glue": false,
@@ -6094,7 +6094,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-23 19:53:48.73596+00"
+  "updated_at": "2026-09-24 10:38:04.611467+00"
  },
  {
   "gloss_en": "dog",
@@ -6409,7 +6409,7 @@
   "updated_at": "2026-09-23 20:14:21.109669+00"
  },
  {
-  "gloss_en": "sofa, armchair",
+  "gloss_en": "couch, armchair",
   "gloss_note_en": null,
   "id": "b0b54c25-5768-59cb-a8b1-be43382920ae",
   "is_glue": false,
@@ -6419,7 +6419,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-23 19:51:18.52367+00"
+  "updated_at": "2026-09-24 10:38:04.611467+00"
  },
  {
   "gloss_en": "card",
@@ -6500,7 +6500,7 @@
   "updated_at": "2026-09-23 23:26:00.580368+00"
  },
  {
-  "gloss_en": "to charge, to top up",
+  "gloss_en": "to charge, to load",
   "gloss_note_en": null,
   "id": "b318b760-9208-5f67-a6ca-3da2d4d26bce",
   "is_glue": false,
@@ -6510,7 +6510,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-24 00:13:39.721406+00"
+  "updated_at": "2026-09-24 10:38:04.611467+00"
  },
  {
   "gloss_en": "to buy",
@@ -6539,7 +6539,7 @@
   "updated_at": "2026-09-18 12:13:13.419253+00"
  },
  {
-  "gloss_en": "neighbourhood",
+  "gloss_en": "neighborhood",
   "gloss_note_en": null,
   "id": "b582300e-f00e-5ff4-9cd9-b5541a92bb6c",
   "is_glue": false,
@@ -6549,7 +6549,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-23 19:53:48.73596+00"
+  "updated_at": "2026-09-24 08:33:51.76632+00"
  },
  {
   "gloss_en": "for",
@@ -6708,7 +6708,7 @@
   "updated_at": "2026-09-23 20:23:40.004714+00"
  },
  {
-  "gloss_en": "pitch, stadium",
+  "gloss_en": "field, stadium",
   "gloss_note_en": null,
   "id": "b9077f29-ea15-5a23-aa14-7102df0233dc",
   "is_glue": false,
@@ -6718,7 +6718,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-23 20:21:28.625105+00"
+  "updated_at": "2026-09-24 10:38:04.611467+00"
  },
  {
   "gloss_en": "to go out, to leave",
@@ -7436,7 +7436,7 @@
   "updated_at": "2026-09-24 07:29:55.39398+00"
  },
  {
-  "gloss_en": "public holiday",
+  "gloss_en": "holiday",
   "gloss_note_en": null,
   "id": "ce2eeb70-b84f-5628-b9dc-b6c53e1afb76",
   "is_glue": false,
@@ -7446,7 +7446,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-23 23:49:13.3501+00"
+  "updated_at": "2026-09-24 10:38:04.611467+00"
  },
  {
   "gloss_en": "Friday",
@@ -7501,7 +7501,7 @@
   "updated_at": "2026-09-23 20:28:08.267385+00"
  },
  {
-  "gloss_en": "neighbour",
+  "gloss_en": "neighbor",
   "gloss_note_en": null,
   "id": "cf696a2e-ae86-501f-8c2f-352c809c1001",
   "is_glue": false,
@@ -7511,7 +7511,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-23 23:51:21.981446+00"
+  "updated_at": "2026-09-24 08:33:51.76632+00"
  },
  {
   "gloss_en": "four hundred",
@@ -8892,7 +8892,7 @@
   "updated_at": "2026-09-23 20:11:12.124649+00"
  },
  {
-  "gloss_en": "mobile phone",
+  "gloss_en": "cell phone",
   "gloss_note_en": null,
   "id": "f64a80b9-c946-5590-a2a7-ab892bf75b5b",
   "is_glue": false,
@@ -8902,7 +8902,7 @@
   "register": "neutral",
   "source": "outline",
   "status": "published",
-  "updated_at": "2026-09-24 00:13:39.721406+00"
+  "updated_at": "2026-09-24 09:30:34.047005+00"
  },
  {
   "gloss_en": "forty",

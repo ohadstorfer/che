@@ -1015,7 +1015,7 @@ units:
             f: "f.pl"
       - lemma: "sillón"
         pos: "noun"
-        en: "sofa, armchair"
+        en: "couch, armchair"
       - lemma: "cama"
         pos: "noun"
         en: "bed"

@@ -74,6 +74,16 @@ Vos in the subjunctive: the course teaches *que vengas*, the everyday form, tagg
 
 The conditional for advice and hypotheticals (*yo que vos iría*, *si tuviera plata…*), the imperfect subjunctive only where the conditional drags it in, the news and politics without the politics, work and money, and the city itself — neighbourhoods, *la General Paz*, *el conurbano*. Written in detail once section 7 is published.
 
+## Practice (2026-09-24)
+
+A review of the course found it thinning out as it got harder: by sections 7–9 a unit had 4 lessons and a word met 4 sentences in the whole course, and a tense taught in one section (the imperfect, the future, the conditional) all but disappeared in the next. Three changes, for sections 4–9:
+
+1. **More sentences per word.** `npm run course:promote -- <slug>` publishes what the judge passed but `publish` left out, re-checked against today's lexicon, until every word has 8 (`--per-word`).
+2. **Practice lessons.** Every unit has two (`practice: 2` under `section:`), between its teaching lessons and its check: the unit's sentences taken to the gap and the tiles, each opening on a review of earlier units (lessons.mjs).
+3. **Practice units.** Three per section, after units 3, 6 and 9 (13 units a section). A practice unit teaches no word: `review:` lists earlier forms — the three units before it plus older tenses, about a third — and the pipeline writes, judges and publishes sentences for them like any unit (`units.review_form_ids`). Four practice lessons, the first two opening on its tips, and a check over the section so far.
+
+Every new section keeps all three.
+
 ## Status
 
 | Section | Outline | Seeded | Sentences |

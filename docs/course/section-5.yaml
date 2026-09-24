@@ -465,7 +465,7 @@ units:
             f: "m.pl"
       - lemma: "feriado"
         pos: "noun"
-        en: "public holiday"
+        en: "holiday"
       - lemma: "ñoquis"
         pos: "noun"
         en: "gnocchi"
