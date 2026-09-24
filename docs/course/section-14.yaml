@@ -36,7 +36,7 @@ units:
           want to*. The real reason follows with **es que** and the normal verb: **es que no puedo**."
       - title: "Es que…"
         body: "On its own, **es que…** is the start of every porteño excuse: **¿no venís? — Es que
-          laburo temprano**. **El hecho de que** — *the fact that* — is its formal cousin."
+          laburo temprano**."
     words:
       - lemma: "no es que"
         pos: "phrase"
@@ -44,9 +44,6 @@ units:
       - lemma: "es que"
         pos: "phrase"
         en: "it's just that"
-      - lemma: "el hecho de que"
-        pos: "phrase"
-        en: "the fact that"
       - lemma: "querer"
         pos: "verb"
         forms:
@@ -195,7 +192,6 @@ units:
     review:
       - "no es que"
       - "es que"
-      - "el hecho de que"
       - "quiera"
       - "hubiéramos"
       - "ahorrado"
