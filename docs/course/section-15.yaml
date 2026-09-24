@@ -113,6 +113,12 @@ units:
           - form: "te merecés"
             en: "you deserve"
             f: "2sg.pres.ind.vos.clitic"
+          - form: "me lo merezco"
+            en: "I deserve it"
+            f: "1sg.pres.ind.clitic.irregular"
+          - form: "te lo merecés"
+            en: "you deserve it"
+            f: "2sg.pres.ind.vos.clitic"
           - form: "merezco"
             f: "1sg.pres.ind.irregular"
             bound: true
