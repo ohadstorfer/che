@@ -15,5 +15,9 @@ export const SECTION_CAN_DO: Record<string, string> = {
   'stories-and-opinions': 'Puedo contar lo que me pasó, discutir sin pelearme y chusmear como corresponde.',
   'making-your-case': 'Puedo defender lo que pienso, recibir gente en casa y hacer un trámite sin perderme.',
   'between-the-lines': 'Puedo buscar depto, dar consejos sin ofender y entender cuándo un porteño habla en serio.',
+  'in-other-words': 'Puedo contar lo que me pidieron, hablar de usted y quejarme como un porteño.',
+  'news-and-the-street': 'Puedo entender las noticias, hacer una denuncia y hablar de fútbol, tango y asado.',
+  'shades-of-meaning': 'Puedo decir que no sin ofender, lamentar lo que no hice y hablar con matices.',
+  'like-a-local': 'Puedo negociar en el laburo, cebar mate y contar la historia de mi familia. Ya soy de acá.',
   'when-i-was-a-kid': 'Puedo contar cómo era mi vida de chico, pedir en un restaurante y armar planes.',
 };

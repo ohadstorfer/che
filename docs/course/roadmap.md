@@ -82,6 +82,24 @@ The conditional for advice and hypotheticals (*yo que vos iría*, *si tuviera pl
 
 `section-11.yaml`. Saying what you mean without saying it outright: *busco un depto que tenga balcón* (the subjunctive for what you haven't found) → *me da bronca que no avise* → *deberías, estaría bueno, habría que* → practice → *dijo que vendría* (a promise reported) → *a menos que, siempre y cuando, por si* → *se alquila, se vende, prohibido* → practice → prices in an inflationary city (*todo aumenta, ¿cuánto te cobraron?*) → *voy entendiendo, estoy por* → *me cae bien, nos llevamos bien* → practice → the checkpoint, porteño irony (*ni ahí, tal cual, es cualquiera, flasheaste*).
 
+## Section 12 · C1.1 · "In other words" · units 135–147
+
+`section-12.yaml`. Passing on what other people said and asked: *me pidió que le trajera algo* (a request told later takes the past subjunctive) → *me preguntó si venía*, *a ver si* → *usted*, for the older stranger and the building's owner (*disculpe, pase, quisiera*) → practice → the work email (*estimado, te adjunto, cualquier cosa, avisame*) → *resulta que, encima, total*, *me enteré* → the porteño *la* (*se la cree, me la banco, me las arreglo*) → practice → *acabo de, suelo, volví a* → *ya no, cada vez más*, how the barrio changed → *estoy podrido, no doy más* → practice → the checkpoint, the story told short (*te la hago corta, la cuestión es que, y nada, al toque*).
+
+## Section 13 · C1.2 · "The news and the street" · units 148–160
+
+`section-13.yaml`. Public life, told the way porteños tell it: *hoy hay paro*, *piquete*, *la calle está cortada* → the passive of the news (*fue construido, fueron detenidos*) → voting without the politics → practice → *según el diario, al parecer, supuestamente* → *me robaron el celu*, the *denuncia* → the building (*expensas, encargado, se rompió el calefón*) → practice → *¿de qué cuadro sos?* → the tango (*Gardel cada día canta mejor*) → the parrilla (*choripán, vacío, jugoso*) → practice → the checkpoint, weighing up the city (*lo bueno, lo malo, no hay nada como*).
+
+## Section 14 · C1.3 · "Shades of meaning" · units 161–173
+
+`section-14.yaml`. *No es que no quiera, es que no puedo* → the mixed conditional (*si hubiera ahorrado, ahora tendría*) → regret (*tendría que haber ido, me arrepiento*) → practice → the diminutive that softens (*un ratito, un cafecito, cerquita*) → *lo que pasa es que, lo de siempre* → the sayings (*más vale tarde que nunca, el que avisa no traiciona*) → practice → more lunfardo (*chabón, mina, groso, trucho, bardo*) → *me hizo reír, me hace acordar* → *cuanto más… mejor, cuanto antes* → practice → the checkpoint, the hard thing said kindly (*no te lo tomes a mal, entre nos, sin querer*).
+
+The present perfect is still left out: the course never produces *he comido*, and `compoundPast` would reject it. *Tendría que haber* + participle is the regret porteños actually say.
+
+## Section 15 · C1.4 · "Like a local" · units 174–186
+
+`section-15.yaml`. The last section: the deadline (*entregar el proyecto, plazo, atrasados*) → asking for a raise (*plantear, merezco*) → the feelings porteños have words for (*me cayó la ficha, me da cosa, me quedé con las ganas*) → practice → the country beyond the city (*recorrimos la Patagonia*) → the mate round (*¿quién ceba?*) → the grandparents who came by boat → practice → teasing (*¿me estás cargando?, en joda*) → weddings and births (*se casó, nació*) → *me emocioné, orgulloso* → practice → the checkpoint: *¡lo lograste! Ya sos de acá.*
+
 ## Practice (2026-09-24)
 
 A review of the course found it thinning out as it got harder: by sections 7–9 a unit had 4 lessons and a word met 4 sentences in the whole course, and a tense taught in one section (the imperfect, the future, the conditional) all but disappeared in the next. Three changes, for sections 4–9:
