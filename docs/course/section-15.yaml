@@ -341,7 +341,7 @@ units:
         en: "ship, boat"
       - lemma: "época"
         pos: "noun"
-        en: "era, period"
+        en: "time, era"
       - lemma: "italiano"
         pos: "adj"
         en: "Italian"
