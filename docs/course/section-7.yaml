@@ -22,6 +22,7 @@ section:
   slug: "wishes-and-advice"
   title: "Wishes and advice"
   cefr: "B1.1"
+  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
 units:
   - ordinal: 1
     slug: "quiero-que-vengas"
@@ -243,6 +244,38 @@ units:
             f: "1sg.pres.ind"
 
   - ordinal: 4
+    slug: "practica-ojala"
+    title: "Practice: wishes and when"
+    summary: "Ojalá que vengas"
+    grammar:
+      - "repaso.subjuntivo.querer-que"
+      - "repaso.subjuntivo.cuando"
+    register_max: "informal"
+    sample:
+      es: "Quiero que vengas cuando termines de laburar."
+      en: "I want you to come when you finish work."
+    tips:
+      - title: "Wanting someone else to"
+        body: "**Quiero ir** — *I want to go*. **Quiero que vayas** — *I want you to go*. When the wish is about someone else, the second verb turns subjunctive."
+      - title: "Cuando about the future"
+        body: "**Cuando llegás, me avisás** is a habit; **cuando llegues, avisame** is one future time. For what hasn't happened yet, *cuando* takes the subjunctive."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "vengas"
+      - "vayas"
+      - "hagas"
+      - "ojalá"
+      - "la pases"
+      - "tengas"
+      - "llegues"
+      - "termines"
+      - "puedas"
+      - "apenas"
+      - "conseguí"
+      - "estaba"
+      - "me puse"
+
+  - ordinal: 5
     slug: "no-creo"
     title: "Give your opinion"
     summary: "¿Qué te parece?"
@@ -316,7 +349,7 @@ units:
         pos: "noun"
         en: "idea"
 
-  - ordinal: 5
+  - ordinal: 6
     slug: "no-te-preocupes"
     title: "Tell someone not to"
     summary: "No te preocupes"
@@ -383,7 +416,7 @@ units:
             en: "you touch (don't touch)"
             f: "2sg.pres.subj.vos"
 
-  - ordinal: 6
+  - ordinal: 7
     slug: "te-recomiendo"
     title: "Give advice"
     summary: "Te recomiendo que vayas"
@@ -457,7 +490,38 @@ units:
             en: "buy"
             f: "2sg.imp.vos"
 
-  - ordinal: 7
+  - ordinal: 8
+    slug: "practica-te-recomiendo"
+    title: "Practice: opinions and advice"
+    summary: "No creo que venga"
+    grammar:
+      - "repaso.subjuntivo.opinion"
+      - "repaso.imperativo.negativo"
+    register_max: "informal"
+    sample:
+      es: "No creo que llueva mañana."
+      en: "I don't think it'll rain tomorrow."
+    tips:
+      - title: "Creo que / no creo que"
+        body: "**Creo que viene** — the indicative, because you believe it. **No creo que venga** — the subjunctive, because you doubt it."
+      - title: "Don't!"
+        body: "A negative command is the subjunctive: **no te preocupes**, **no te olvides**, **no digas nada**. **Probá** becomes **no pruebes**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "creo"
+      - "me parece"
+      - "sea"
+      - "esté"
+      - "te preocupes"
+      - "te olvides"
+      - "te recomiendo"
+      - "pruebes"
+      - "vale la pena"
+      - "dormí"
+      - "tenía"
+      - "fui"
+
+  - ordinal: 9
     slug: "que-bueno"
     title: "React to news"
     summary: "¡Qué bueno que viniste!"
@@ -518,7 +582,7 @@ units:
           - form: "noticias"
             f: "f.pl"
 
-  - ordinal: 8
+  - ordinal: 10
     slug: "no-se"
     title: "Say what you know and understand"
     summary: "Ni idea"
@@ -584,7 +648,7 @@ units:
         pos: "noun"
         en: "question"
 
-  - ordinal: 9
+  - ordinal: 11
     slug: "lunfardo"
     title: "Talk like a porteño"
     summary: "Qué fiaca"
@@ -645,7 +709,38 @@ units:
         en: "sure, right away"
         register: "informal"
 
-  - ordinal: 10
+  - ordinal: 12
+    slug: "practica-que-bueno"
+    title: "Practice: reactions and knowing"
+    summary: "¡Qué bueno que estés acá!"
+    grammar:
+      - "repaso.reacciones"
+      - "repaso.saber-entender"
+    register_max: "informal"
+    sample:
+      es: "¡Qué bueno que estés mejor!"
+      en: "So good that you're feeling better!"
+    tips:
+      - title: "Qué bueno que…"
+        body: "A reaction to someone else's news takes the subjunctive: **qué bueno que estés acá**, **me alegro que te vaya bien**, **qué lástima que no puedas venir**."
+      - title: "Sé, sabés, ni idea"
+        body: "**Sé** (with an accent) is *I know*. **¿Sabés?** — *do you know?* And the porteño *I have no idea*: **ni idea**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "qué bueno"
+      - "qué lástima"
+      - "me alegro"
+      - "estés"
+      - "sé"
+      - "sabés"
+      - "entiendo"
+      - "entendí"
+      - "explicame"
+      - "iba"
+      - "pude"
+      - "estará"
+
+  - ordinal: 13
     slug: "cuidate"
     title: "Say goodbye properly"
     summary: "Cuidate mucho"

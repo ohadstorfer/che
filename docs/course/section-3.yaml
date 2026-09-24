@@ -195,7 +195,7 @@ units:
     words:
       - lemma: "barrio"
         pos: "noun"
-        en: "neighbourhood"
+        en: "neighborhood"
       - lemma: "verdulería"
         pos: "noun"
         en: "greengrocer's"

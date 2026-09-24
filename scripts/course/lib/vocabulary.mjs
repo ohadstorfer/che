@@ -33,6 +33,7 @@ export function outlineFromRows(rows) {
         section_id: u.section_id,
         ordinal: u.ordinal,
         course_order: u.course_order,
+        review_form_ids: u.review_form_ids ?? [],
         slug: u.slug,
         title_en: u.title_en,
         summary_en: u.summary_en,
@@ -125,7 +126,7 @@ const same = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
 const sortKeys = (o) => Object.fromEntries(Object.entries(o ?? {}).sort(([a], [b]) => a.localeCompare(b)));
 
 const FIELDS = {
-  units: ['section_id', 'ordinal', 'course_order', 'slug', 'title_en', 'summary_en', 'grammar_focus', 'register_max'],
+  units: ['section_id', 'ordinal', 'course_order', 'slug', 'title_en', 'summary_en', 'grammar_focus', 'register_max', 'review_form_ids'],
   lessons: ['kind'],
   tips: ['title_en', 'body_md'],
   lemmas: ['lemma', 'pos', 'gloss_en', 'gloss_note_en', 'register', 'is_glue', 'notes_en'],

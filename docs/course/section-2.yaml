@@ -712,7 +712,7 @@ units:
         en: "university"
       - lemma: "facu"
         pos: "noun"
-        en: "uni"
+        en: "college"
         note: "short for facultad"
         register: "informal"
       - lemma: "clase"

@@ -9,6 +9,8 @@ export const q = (v) => {
   return `'${String(v).replace(/'/g, "''")}'`;
 };
 export const jsonb = (v) => `${q(JSON.stringify(v))}::jsonb`;
+/** A uuid[] literal. */
+export const uuidArray = (a) => (a?.length ? `array[${a.map(q).join(', ')}]::uuid[]` : `'{}'::uuid[]`);
 export const textArray = (a) => (a?.length ? `array[${a.map(q).join(', ')}]::text[]` : `'{}'::text[]`);
 
 /** One multi-row upsert. `cast` maps a column to its SQL literal writer. */

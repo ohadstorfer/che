@@ -17,6 +17,7 @@ section:
   slug: "stories-and-opinions"
   title: "Stories and opinions"
   cefr: "B1.3"
+  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
 units:
   - ordinal: 1
     slug: "se-me-cayo"
@@ -232,6 +233,37 @@ units:
             f: "part"
 
   - ordinal: 4
+    slug: "practica-se-me-olvido"
+    title: "Practice: accidents and what had happened"
+    summary: "Se me olvidó que ya había salido"
+    grammar:
+      - "repaso.se-accidental"
+      - "repaso.pluscuamperfecto"
+    register_max: "informal"
+    sample:
+      es: "Cuando llegué, Juan ya se había ido."
+      en: "When I got there, Juan had already left."
+    tips:
+      - title: "It fell on me"
+        body: "**Se me cayó el vaso** — the glass fell, and it happened to me. No blame: that is why every porteño story of a mishap starts with **se me**."
+      - title: "Ya había"
+        body: "**Ya había comido** — *I had already eaten* — puts one past before another: **cuando llegaste, ya había comido**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "se me cayó"
+      - "se me rompió"
+      - "se me olvidó"
+      - "se me perdió"
+      - "para que"
+      - "antes de que"
+      - "sepas"
+      - "habían"
+      - "se había ido"
+      - "iba"
+      - "gustaría"
+      - "llegues"
+
+  - ordinal: 5
     slug: "el-partido"
     title: "Talk about football"
     summary: "¿Viste el partido?"
@@ -306,7 +338,7 @@ units:
             en: "played"
             f: "3sg.pret.ind"
 
-  - ordinal: 5
+  - ordinal: 6
     slug: "no-anda"
     title: "Complain when something doesn't work"
     summary: "No anda el wifi"
@@ -361,12 +393,12 @@ units:
         en: "wifi"
       - lemma: "ascensor"
         pos: "noun"
-        en: "lift, elevator"
+        en: "elevator"
       - lemma: "luz"
         pos: "noun"
         en: "power, electricity, light"
 
-  - ordinal: 6
+  - ordinal: 7
     slug: "de-acuerdo"
     title: "Agree and disagree"
     summary: "Para nada"
@@ -412,7 +444,40 @@ units:
         pos: "pron"
         en: "this"
 
-  - ordinal: 7
+  - ordinal: 8
+    slug: "practica-depende"
+    title: "Practice: football, complaints and opinions"
+    summary: "Depende de cómo juegue"
+    grammar:
+      - "repaso.deportes"
+      - "repaso.quejas"
+      - "repaso.acuerdo"
+    register_max: "informal"
+    sample:
+      es: "El wifi no anda y ya reclamé otra vez."
+      en: "The wifi isn't working and I complained again."
+    tips:
+      - title: "No anda"
+        body: "A machine that doesn't work **no anda**: **no anda el ascensor**, **el wifi no anda**. **Funciona** is correct, but it's what the manual says."
+      - title: "Depende"
+        body: "**Depende**, **puede ser**, **en parte** — the porteño hedge. Full agreement is **estoy de acuerdo**; full disagreement, **para nada**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "ganamos"
+      - "perdimos"
+      - "juega"
+      - "jugó"
+      - "anda"
+      - "me quejé"
+      - "reclamé"
+      - "de acuerdo"
+      - "depende"
+      - "puede ser"
+      - "estaba"
+      - "iría"
+      - "vengas"
+
+  - ordinal: 9
     slug: "el-cajero"
     title: "Deal with the bank"
     summary: "Voy al cajero"
@@ -475,7 +540,7 @@ units:
             en: "to buy"
             f: "inf"
 
-  - ordinal: 8
+  - ordinal: 10
     slug: "que-susto"
     title: "Tell about a scare"
     summary: "¡Qué susto!"
@@ -537,7 +602,7 @@ units:
         pos: "interj"
         en: "oh no, whoa"
 
-  - ordinal: 9
+  - ordinal: 11
     slug: "costumbres"
     title: "Learn the local customs"
     summary: "La previa y la sobremesa"
@@ -592,7 +657,40 @@ units:
           - form: "rara"
             f: "f.sg"
 
-  - ordinal: 10
+  - ordinal: 12
+    slug: "practica-que-susto"
+    title: "Practice: the bank, a scare and the customs"
+    summary: "¡Qué susto me diste!"
+    grammar:
+      - "repaso.banco"
+      - "repaso.relato"
+      - "repaso.costumbres"
+    register_max: "informal"
+    sample:
+      es: "Escuché un ruido y me dio mucho miedo."
+      en: "I heard a noise and it really scared me."
+    tips:
+      - title: "Me dio miedo"
+        body: "**Me da miedo** is *it scares me* in general; **me dio miedo** is one scare, over and done. The thing that scares you is the subject: **me dan miedo los perros**."
+      - title: "Se saluda con un beso"
+        body: "**Acá se saluda con un beso** — *here people greet with a kiss*. **Se** + verb says what everyone does, no subject needed."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "transferí"
+      - "saqué"
+      - "esperar"
+      - "me dio"
+      - "escuché"
+      - "corrí"
+      - "saluda"
+      - "previa"
+      - "costumbre"
+      - "raro"
+      - "tuviera"
+      - "había"
+      - "sea"
+
+  - ordinal: 13
     slug: "viste-lo-que-paso"
     title: "Catch up on the gossip"
     summary: "¿Viste lo que pasó?"

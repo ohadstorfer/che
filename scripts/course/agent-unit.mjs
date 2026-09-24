@@ -19,7 +19,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
-import { FORMS_PER_REQUEST, checkCandidates, generationPrompt, judgePrompt, keptInSpanish, promptHash, selectCandidates, styleSpec, targetsFor } from './lib/generate.mjs';
+import { FORMS_PER_REQUEST, PRACTICE_QUOTA, checkCandidates, isPracticeUnit, generationPrompt, judgePrompt, keptInSpanish, promptHash, selectCandidates, styleSpec, targetsFor } from './lib/generate.mjs';
 import { publishUnit, saveCandidates, sentencesOfUnits, unitFromArgs } from './lib/pipeline.mjs';
 
 const MODEL = 'claude-code-agent';
@@ -110,7 +110,7 @@ if (stage === 'check') {
 }
 
 const scores = new Map(readJson('scores.json').scores.map((s) => [s.id, s]));
-const { selected, rejected } = selectCandidates(checked, scores);
+const { selected, rejected } = selectCandidates(checked, scores, isPracticeUnit(unit) ? PRACTICE_QUOTA : undefined);
 console.log(`selected ${selected.length}, rejected ${rejected.length}`);
 for (const s of selected) console.log(`  ✔ [${s.target.form}] ${s.candidate.es} = ${s.candidate.en}`);
 // Both tallies below count what the unit *will have*, not what this run added.

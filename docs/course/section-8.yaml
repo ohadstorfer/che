@@ -21,6 +21,7 @@ section:
   slug: "if-i-were-you"
   title: "If I were you"
   cefr: "B1.2"
+  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
 units:
   - ordinal: 1
     slug: "yo-que-vos"
@@ -213,6 +214,37 @@ units:
         en: "world"
 
   - ordinal: 4
+    slug: "practica-yo-que-vos"
+    title: "Practice: would and if"
+    summary: "Si pudiera, iría"
+    grammar:
+      - "repaso.condicional"
+      - "repaso.si-hipotetico"
+    register_max: "informal"
+    sample:
+      es: "Si tuviera tiempo, iría con vos."
+      en: "If I had time, I'd go with you."
+    tips:
+      - title: "If I had, I would"
+        body: "**Si tuviera plata, viajaría.** The *if* half takes *tuviera, fuera, pudiera*; the other half takes *-ía*: *iría, haría, sería*."
+      - title: "Yo que vos"
+        body: "Porteño advice starts with **yo que vos** — *if I were you* — and goes straight to the conditional: **yo que vos, no le diría nada**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "yo que vos"
+      - "iría"
+      - "haría"
+      - "diría"
+      - "tuviera"
+      - "fuera"
+      - "pudiera"
+      - "gustaría"
+      - "encantaría"
+      - "vengas"
+      - "ojalá"
+      - "era"
+
+  - ordinal: 5
     slug: "manejar-en-baires"
     title: "Get around by car"
     summary: "Manejar en Buenos Aires"
@@ -283,7 +315,7 @@ units:
             en: "a lot of"
             f: "f.sg"
 
-  - ordinal: 5
+  - ordinal: 6
     slug: "en-cuotas"
     title: "Talk about money"
     summary: "¿En cuántas cuotas?"
@@ -335,12 +367,12 @@ units:
             bound: true
       - lemma: "cuota"
         pos: "noun"
-        en: "instalment"
+        en: "installment"
         forms:
           - form: "cuota"
             f: "f.sg"
           - form: "cuotas"
-            en: "instalments"
+            en: "installments"
             f: "f.pl"
       - lemma: "mes"
         pos: "noun"
@@ -364,7 +396,7 @@ units:
             en: "all, the whole"
             f: "f.sg"
 
-  - ordinal: 6
+  - ordinal: 7
     slug: "dicen-que"
     title: "Pass on the news"
     summary: "Dicen que va a llover"
@@ -425,7 +457,39 @@ units:
         pos: "noun"
         en: "TV"
 
-  - ordinal: 7
+  - ordinal: 8
+    slug: "practica-la-guita"
+    title: "Practice: the city, money and news"
+    summary: "Dicen que va a llover"
+    grammar:
+      - "repaso.plata"
+      - "repaso.dicen-que"
+    register_max: "informal"
+    sample:
+      es: "Gasté un montón este mes y no me alcanza."
+      en: "I spent a ton this month and I don't have enough."
+    tips:
+      - title: "No me alcanza"
+        body: "**No me alcanza** — *it's not enough (for me)*. It works for money, time, anything: **no me alcanza la plata**, **no me alcanza el tiempo**."
+      - title: "Dicen que, parece que"
+        body: "Pass on news without owning it: **dicen que va a llover** — *they say it's going to rain*; **parece que Juan se mudó** — *looks like Juan moved*."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "manejo"
+      - "estacioné"
+      - "cruzá"
+      - "gasté"
+      - "ahorrar"
+      - "me alcanza"
+      - "dicen"
+      - "parece que"
+      - "llamé"
+      - "leí"
+      - "tuviera"
+      - "iría"
+      - "estaba"
+
+  - ordinal: 9
     slug: "buena-onda"
     title: "Describe what people are like"
     summary: "Es re buena onda"
@@ -486,7 +550,7 @@ units:
         pos: "noun"
         en: "person"
 
-  - ordinal: 8
+  - ordinal: 10
     slug: "donde-queda"
     title: "Talk about the barrios"
     summary: "¿Dónde queda Palermo?"
@@ -536,7 +600,7 @@ units:
         pos: "phrase"
         en: "nice area"
 
-  - ordinal: 9
+  - ordinal: 11
     slug: "me-pregunto"
     title: "Tell who said what"
     summary: "Me preguntó y le contesté"
@@ -592,7 +656,37 @@ units:
             en: "talking, speaking"
             f: "ger"
 
-  - ordinal: 10
+  - ordinal: 12
+    slug: "practica-quien-dijo"
+    title: "Practice: people, places and who said what"
+    summary: "Me preguntó dónde queda"
+    grammar:
+      - "repaso.quedar"
+      - "repaso.discurso-referido"
+    register_max: "informal"
+    sample:
+      es: "Me preguntó dónde queda el banco y le contesté."
+      en: "He asked me where the bank is and I answered him."
+    tips:
+      - title: "Queda for places"
+        body: "**¿Dónde queda?** — *where is it?* for a place on the map. **Me queda cerca** — *it's close to me*. People **están**; places **quedan**."
+      - title: "He said he was coming"
+        body: "Report what someone said and the tense steps back: **viene** becomes **dijo que venía**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "buena onda"
+      - "pesado"
+      - "simpático"
+      - "queda"
+      - "me queda"
+      - "pregunté"
+      - "contesté"
+      - "venía"
+      - "iría"
+      - "sea"
+      - "había"
+
+  - ordinal: 13
     slug: "por-las-dudas"
     title: "Sound porteño"
     summary: "Por las dudas"

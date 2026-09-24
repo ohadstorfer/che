@@ -28,12 +28,15 @@ const chunkFor = (outline, bound) =>
  * target list, in the writer's answer, and on the sentence it becomes.
  */
 const sameSpelling = (outline, unit, f) =>
-  outline.forms.filter((g) => g.unit_id === unit.id && fold(g.form) === fold(f.form)).length > 1;
+  outline.forms.filter(
+    (g) => (isPracticeUnit(unit) ? unit.review_form_ids.includes(g.id) : g.unit_id === unit.id) && fold(g.form) === fold(f.form),
+  ).length > 1;
 export const targetLabel = (outline, unit, f) => (sameSpelling(outline, unit, f) ? `${f.form}/${f.lemma}` : f.form);
 function findTarget(outline, unit, ref) {
   const [surface, qualifier] = String(ref ?? '').split('/').map((x) => x.trim());
+  const mine = (f) => (isPracticeUnit(unit) ? unit.review_form_ids.includes(f.id) : f.unit_id === unit.id);
   const hits = outline.forms.filter(
-    (f) => f.unit_id === unit.id && fold(f.form) === fold(surface) && (!qualifier || f.lemma === qualifier || f.pos === qualifier),
+    (f) => mine(f) && fold(f.form) === fold(surface) && (!qualifier || f.lemma === qualifier || f.pos === qualifier),
   );
   return hits.length === 1 ? { form: hits[0] } : { ambiguous: hits.length > 1 };
 }
@@ -42,6 +45,8 @@ function findTarget(outline, unit, ref) {
 export const OVERGENERATE = 3;
 /** Per new form: one intro sentence and three drills (course-spec §4). */
 export const QUOTA = { intro: 1, drill: 3 };
+/** Per reviewed form in a practice unit: practice is the point, so more. */
+export const PRACTICE_QUOTA = { intro: 1, drill: 6 };
 /** Forms per generation request, so each answer stays short and checkable. */
 export const FORMS_PER_REQUEST = 4;
 /** A candidate needs at least this on every judge score to be selected. */
@@ -110,6 +115,14 @@ export function generationPrompt({ outline, unit, targets, examples, existing, s
   const user = [
     `Unit ${unit.course_order}: ${unit.title_en} (${unit.summary_en}). Grammar focus: ${unit.grammar_focus.join(', ')}. Highest register allowed: ${unit.register_max}.`,
     '',
+    ...(isPracticeUnit(unit)
+      ? [
+          'This is a PRACTICE unit: it teaches no new words. The learner has met every target word already; the sentences are where she uses them again, mixed with each other and with what she learned before.',
+          'Mix the tenses and forms she knows in the same sentence where it is natural — only ones the word list shows, since she has met nothing else — and let about a third of the sentences lean on older material from earlier units. Stay concrete and everyday.',
+          'Every target still needs its sentences; an "intro" here is simply an easy one.',
+          '',
+        ]
+      : []),
     'Words available (introduced in this unit are marked *):',
     ...available.map((f) => `${newHere.has(f.id) ? '* ' : '  '}${formLine(f, lemmaById.get(f.lemma_id)?.gloss_en)}`),
     '',
@@ -270,7 +283,7 @@ const total = (s) => s.naturalness + s.grammaticality + s.coherence + s.logic;
  * intro and the best drills, spread over difficulties where it can. Returns
  * the selected and the rejected, each with the reason.
  */
-export function selectCandidates(checked, scores) {
+export function selectCandidates(checked, scores, quota = QUOTA) {
   const selected = [];
   const rejected = [];
   const byTarget = new Map();
@@ -290,14 +303,14 @@ export function selectCandidates(checked, scores) {
     const drills = ranked.filter((c) => c !== intro);
     const seenDifficulty = new Set();
     for (const c of drills) {
-      if ([...chosen].filter((x) => x !== intro).length >= QUOTA.drill) break;
+      if ([...chosen].filter((x) => x !== intro).length >= quota.drill) break;
       if (!seenDifficulty.has(c.candidate.difficulty)) {
         chosen.add(c);
         seenDifficulty.add(c.candidate.difficulty);
       }
     }
     for (const c of drills) {
-      if ([...chosen].filter((x) => x !== intro).length >= QUOTA.drill) break;
+      if ([...chosen].filter((x) => x !== intro).length >= quota.drill) break;
       chosen.add(c);
     }
     for (const c of list) (chosen.has(c) ? selected : rejected).push(chosen.has(c) ? c : { ...c, reason: 'not selected' });
@@ -311,4 +324,10 @@ export function selectCandidates(checked, scores) {
 }
 
 /** The unit's drillable new forms, in outline order, as generation targets. */
-export const targetsFor = (outline, unit) => outline.forms.filter((f) => f.unit_id === unit.id && drillable(f));
+/** A unit's targets: the words it teaches — or, for a practice unit, the
+ *  earlier ones it reviews (`review_form_ids`). */
+export const targetsFor = (outline, unit) =>
+  isPracticeUnit(unit)
+    ? (unit.review_form_ids ?? []).map((id) => outline.forms.find((f) => f.id === id)).filter(Boolean)
+    : outline.forms.filter((f) => f.unit_id === unit.id && drillable(f));
+export const isPracticeUnit = (unit) => (unit.review_form_ids ?? []).length > 0;

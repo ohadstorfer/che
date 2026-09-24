@@ -21,14 +21,14 @@ const answerKey = (es) => bare(es).split(/\s+/).filter(Boolean).join(' ');
 function resolveFormRef(outline, unit, ref, where, errors) {
   // "word/pos" or "word/lemma": the lemma is what tells ir's "fue" from ser's.
   const [surface, pos] = String(ref).split('/');
-  const hits = outline.forms.filter(
-    (f) =>
-      f.unit_order === unit.course_order && fold(f.form) === fold(surface) && (!pos || f.pos === pos || f.lemma === pos),
-  );
+  // A practice unit's targets are the earlier words it reviews.
+  const review = unit.review_form_ids ?? [];
+  const mine = (f) => (review.length ? review.includes(f.id) : f.unit_order === unit.course_order);
+  const hits = outline.forms.filter((f) => mine(f) && fold(f.form) === fold(surface) && (!pos || f.pos === pos || f.lemma === pos));
   if (hits.length === 1) return hits[0];
   errors.push(
     hits.length === 0
-      ? `${where}: "${ref}" is not a form unit ${unit.slug} introduces`
+      ? `${where}: "${ref}" is not a form unit ${unit.slug} ${review.length ? 'reviews' : 'introduces'}`
       : `${where}: "${ref}" is ambiguous (${hits.map((h) => h.pos).join(', ')}) — write it as "${surface}/<pos>"`,
   );
   return null;

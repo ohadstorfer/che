@@ -15,7 +15,7 @@ import { writeFileSync } from 'node:fs';
 import { queryLinked } from './lib/db.mjs';
 import { buildRows } from './lib/rows.mjs';
 import { describeDiff, planSeed } from './lib/seed.mjs';
-import { insertNew, jsonb, textArray } from './lib/sql.mjs';
+import { insertNew, jsonb, textArray, uuidArray } from './lib/sql.mjs';
 import { loadCourseRows } from './lib/vocabulary.mjs';
 
 const args = process.argv.slice(2);
@@ -84,8 +84,8 @@ const sql = [
   insertNew(
     'units',
     insert.units,
-    ['id', 'section_id', 'ordinal', 'course_order', 'slug', 'title_en', 'summary_en', 'grammar_focus', 'register_max', 'status'],
-    { grammar_focus: textArray },
+    ['id', 'section_id', 'ordinal', 'course_order', 'slug', 'title_en', 'summary_en', 'grammar_focus', 'register_max', 'review_form_ids', 'status'],
+    { grammar_focus: textArray, review_form_ids: uuidArray },
   ),
   insertNew('lessons', insert.lessons, ['id', 'unit_id', 'ordinal', 'title_en', 'kind', 'status']),
   insertNew('tips', insert.tips, ['id', 'unit_id', 'title_en', 'body_md', 'status']),

@@ -19,6 +19,7 @@ section:
   slug: "what-happened"
   title: "What happened"
   cefr: "A2.1"
+  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
 units:
   - ordinal: 1
     slug: "ayer-labure"
@@ -295,6 +296,37 @@ units:
         en: "concert, gig"
 
   - ordinal: 4
+    slug: "practica-que-hiciste"
+    title: "Practice: what you did"
+    summary: "¿Qué hiciste ayer?"
+    grammar:
+      - "repaso.preterito"
+      - "presente-vs-preterito"
+    register_max: "informal"
+    sample:
+      es: "Ayer fui a la cancha y después comí con Juan."
+      en: "Yesterday I went to the game and then I ate with Juan."
+    tips:
+      - title: "Today or yesterday: the stress tells"
+        body: "**Hoy laburo**, **ayer laburé**. The same verb, and only the stress moves: *LA-bu-ro* is now, *la-bu-RÉ* is done. Say it out loud and the past is already right."
+      - title: "Fui: two verbs, one word"
+        body: "**Fui** is both *I went* (ir) and *I was* (ser). **Fui a la cancha** — *I went to the game*; **fue re lindo** — *it was really nice*. The sentence always tells you which."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "laburé"
+      - "laburaste"
+      - "comí"
+      - "comiste"
+      - "salí"
+      - "saliste"
+      - "fui"
+      - "fuiste"
+      - "estuve"
+      - "tuve"
+      - "llegué"
+      - "llegaste"
+
+  - ordinal: 5
     slug: "el-finde"
     title: "Tell a friend about your weekend"
     summary: "¿Qué hiciste el finde?"
@@ -384,7 +416,7 @@ units:
         pos: "phrase"
         en: "in the end"
 
-  - ordinal: 5
+  - ordinal: 6
     slug: "mas-alto-que"
     title: "Compare people and things"
     summary: "Más alto que yo"
@@ -483,7 +515,7 @@ units:
             en: "younger, smaller"
             f: "f.sg"
 
-  - ordinal: 6
+  - ordinal: 7
     slug: "me-duele"
     title: "Say what hurts"
     summary: "Me duele la cabeza"
@@ -592,7 +624,39 @@ units:
             en: "rest"
             f: "2sg.imp.vos"
 
-  - ordinal: 7
+  - ordinal: 8
+    slug: "practica-el-finde"
+    title: "Practice: your weekend"
+    summary: "¿Qué hiciste el finde?"
+    grammar:
+      - "repaso.preterito-irregular"
+      - "repaso.comparativos"
+    register_max: "informal"
+    sample:
+      es: "El finde vi a Sofi y comimos un asado riquísimo."
+      en: "On the weekend I saw Sofi and we had a delicious barbecue."
+    tips:
+      - title: "The irregular ones have no accent"
+        body: "**Hice, vi, dije, pude, vine** — the pasts you use most carry no accent, unlike *laburé* or *comí*. **¿Qué hiciste?** — **Nada, vi una peli.**"
+      - title: "Better and worse"
+        body: "**Mejor** and **peor** never take *más*: **está mejor**, **fue peor**. And *-ísimo* is the porteño way to say *really*: **riquísimo**, **carísimo**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "hice"
+      - "hiciste"
+      - "vi"
+      - "viste/ver"
+      - "dije"
+      - "pude"
+      - "vine"
+      - "mejor"
+      - "peor"
+      - "riquísimo"
+      - "me duele"
+      - "fui"
+      - "tuve"
+
+  - ordinal: 9
     slug: "te-llamo"
     title: "Keep it short with lo, la, le"
     summary: "Te llamo mañana"
@@ -715,7 +779,7 @@ units:
             en: "lend me"
             f: "2sg.imp.vos.clitic"
 
-  - ordinal: 8
+  - ordinal: 10
     slug: "las-tareas"
     title: "Split the chores"
     summary: "Hoy te toca a vos"
@@ -829,7 +893,7 @@ units:
           - form: "sucios"
             f: "m.pl"
 
-  - ordinal: 9
+  - ordinal: 11
     slug: "de-viaje"
     title: "Talk about a trip"
     summary: "Me voy de viaje"
@@ -861,10 +925,10 @@ units:
           - form: "viajar"
             f: "inf"
           - form: "viajé"
-            en: "I travelled"
+            en: "I traveled"
             f: "1sg.pret.ind"
           - form: "viajaste"
-            en: "you travelled"
+            en: "you traveled"
             f: "2sg.pret.ind.vos"
       - lemma: "viaje"
         pos: "noun"
@@ -886,7 +950,7 @@ units:
             f: "m.pl"
       - lemma: "micro"
         pos: "noun"
-        en: "coach, long-distance bus"
+        en: "long-distance bus"
       - lemma: "avión"
         pos: "noun"
         en: "plane"
@@ -915,7 +979,38 @@ units:
         pos: "propn"
         en: "Mendoza"
 
-  - ordinal: 10
+  - ordinal: 12
+    slug: "practica-el-viaje"
+    title: "Practice: a trip and the chores"
+    summary: "Mandame un audio"
+    grammar:
+      - "repaso.imperativo.clitico"
+      - "repaso.preterito"
+    register_max: "informal"
+    sample:
+      es: "Mandame un audio del viaje."
+      en: "Send me a voice message from the trip."
+    tips:
+      - title: "The little word goes on the end"
+        body: "In a request the pronoun sticks to the verb: **llamame**, **mandame**, **dame**, **prestame**. In a statement it goes in front: **te llamo**, **me mandás**."
+      - title: "Whose turn is it?"
+        body: "**Me toca lavar** — *it's my turn to wash up*. **¿A quién le toca?** Porteños split the chores with *tocar*, never with *turno*."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "llamame"
+      - "mandame"
+      - "dame"
+      - "prestame"
+      - "me toca"
+      - "te toca"
+      - "lavar"
+      - "viajé"
+      - "viajaste"
+      - "hice"
+      - "estuve"
+      - "fuimos"
+
+  - ordinal: 13
     slug: "contame"
     title: "Tell the whole story"
     summary: "Contame todo"

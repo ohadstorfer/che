@@ -17,6 +17,7 @@ section:
   slug: "plans-and-favours"
   title: "Plans and favours"
   cefr: "A2.3"
+  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
 units:
   - ordinal: 1
     slug: "me-haces-un-favor"
@@ -39,7 +40,7 @@ units:
     words:
       - lemma: "favor"
         pos: "noun"
-        en: "favour"
+        en: "favor"
       - lemma: "pasar"
         pos: "verb"
         forms:
@@ -284,6 +285,37 @@ units:
         en: "greengrocer"
 
   - ordinal: 4
+    slug: "practica-los-mandados"
+    title: "Practice: favors and errands"
+    summary: "¿Me pasás la sal?"
+    grammar:
+      - "repaso.pedidos"
+      - "repaso.obligacion"
+    register_max: "informal"
+    sample:
+      es: "¿Me podrías ayudar? Hay que lavar los platos."
+      en: "Could you help me? The dishes need washing."
+    tips:
+      - title: "Asking nicely"
+        body: "**¿Me pasás la sal?** is how you ask at the table — a question in the present. **¿Podrías…?** is softer, for a bigger favor."
+      - title: "Hay que, tenés que, no hace falta"
+        body: "**Hay que** is *it has to be done* — nobody in particular. **Tenés que** is *you have to*. **No hace falta** is *there's no need*."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "pasame"
+      - "ayudame"
+      - "podrías"
+      - "hay que"
+      - "necesito"
+      - "no hace falta"
+      - "tenemos que"
+      - "kilo"
+      - "docena"
+      - "pedí"
+      - "iba"
+      - "estaba"
+
+  - ordinal: 5
     slug: "el-celu"
     title: "Deal with your phone"
     summary: "Me quedé sin batería"
@@ -304,11 +336,11 @@ units:
     words:
       - lemma: "celu"
         pos: "noun"
-        en: "phone, mobile"
+        en: "phone, cell phone"
         register: "informal"
       - lemma: "celular"
         pos: "noun"
-        en: "mobile phone"
+        en: "cell phone"
       - lemma: "batería"
         pos: "noun"
         en: "battery"
@@ -394,7 +426,7 @@ units:
             en: "you lost"
             f: "2sg.pret.ind.vos"
 
-  - ordinal: 5
+  - ordinal: 6
     slug: "te-lo-devuelvo"
     title: "Lend, borrow and give back"
     summary: "Mañana te lo devuelvo"
@@ -501,7 +533,7 @@ units:
             en: "chargers"
             f: "m.pl"
 
-  - ordinal: 6
+  - ordinal: 7
     slug: "laburo-nuevo"
     title: "Talk about a new job"
     summary: "Conseguí laburo"
@@ -592,7 +624,38 @@ units:
           - form: "mala"
             f: "f.sg"
 
-  - ordinal: 7
+  - ordinal: 8
+    slug: "practica-el-laburo"
+    title: "Practice: the phone, the keys and work"
+    summary: "Me quedé sin batería"
+    grammar:
+      - "repaso.quedarse-sin"
+      - "repaso.devolver-dejar"
+      - "repaso.preterito"
+    register_max: "informal"
+    sample:
+      es: "Me quedé sin batería y no te pude llamar."
+      en: "My phone died and I couldn't call you."
+    tips:
+      - title: "Me quedé sin…"
+        body: "**Me quedé sin batería**, **sin plata**, **sin laburo** — *I ran out of*. It is the preterite: it happened at one moment."
+      - title: "Give it back"
+        body: "**Devolveme las llaves**, **dejame pasar**, **traeme el cargador** — in requests the pronoun rides on the end, and it's always *me*."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "me quedé"
+      - "se cortó"
+      - "perdí"
+      - "devolveme"
+      - "dejame"
+      - "conseguí"
+      - "empecé"
+      - "volví"
+      - "estaba"
+      - "tenía"
+      - "me puse"
+
+  - ordinal: 9
     slug: "salir-con-alguien"
     title: "Talk about going out with someone"
     summary: "Estoy saliendo con alguien"
@@ -670,7 +733,7 @@ units:
           - form: "misma"
             f: "f.sg"
 
-  - ordinal: 8
+  - ordinal: 10
     slug: "donde-estara"
     title: "Guess and wonder"
     summary: "¿Dónde estará?"
@@ -722,7 +785,7 @@ units:
         pos: "phrase"
         en: "I bet, surely"
 
-  - ordinal: 9
+  - ordinal: 11
     slug: "me-siento-mal"
     title: "See the doctor"
     summary: "Me siento mal"
@@ -804,7 +867,37 @@ units:
             en: "get well soon"
             f: "2sg.imp.vos.clitic"
 
-  - ordinal: 10
+  - ordinal: 12
+    slug: "practica-capaz"
+    title: "Practice: people, guesses and the doctor"
+    summary: "Capaz que está enfermo"
+    grammar:
+      - "repaso.futuro-conjetura"
+      - "repaso.sentirse"
+    register_max: "informal"
+    sample:
+      es: "Capaz que Juan está engripado."
+      en: "Maybe Juan has the flu."
+    tips:
+      - title: "Guessing with the future"
+        body: "**¿Dónde estará?** is not about tomorrow: it is *I wonder where he is*. The future guesses; **capaz** and **seguro que** do it in the present."
+      - title: "Me siento, lo siento"
+        body: "**Me siento mal** — *I feel bad*. **Lo siento** — *I'm sorry*, for real bad news. For bumping into someone, say **perdón**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "saliendo"
+      - "nos peleamos"
+      - "estará"
+      - "será"
+      - "capaz"
+      - "me siento"
+      - "te sentís"
+      - "dormí"
+      - "era"
+      - "vivía"
+      - "fui"
+
+  - ordinal: 13
     slug: "te-debo-una"
     title: "Thank someone properly"
     summary: "Te debo una"

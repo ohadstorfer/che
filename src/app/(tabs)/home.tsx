@@ -138,6 +138,7 @@ type StepIcon = (typeof STEP_ICONS)[number] | { set: 'mdi' | 'fa5'; name: string
 /** A lesson that isn't new material wears what it is, not the next ornament. */
 const KIND_ICONS: Partial<Record<LessonKind, StepIcon>> = {
   story: { set: 'mdi', name: 'book-open-page-variant', size: 30 },
+  practice: { set: 'mdi', name: 'dumbbell' },
   review: { set: 'fa5', name: 'trophy' },
   checkpoint: { set: 'fa5', name: 'trophy' },
 };

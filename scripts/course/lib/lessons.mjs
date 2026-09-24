@@ -55,10 +55,12 @@ const itemsOf = (slot) => (slot.kind === 'review' || slot.kind === 'recap' ? (sl
 export function planLessons({ unit, forms, sentences, tips }) {
   const warnings = [];
   const formById = new Map(forms.map((f) => [f.id, f]));
-  const unitForms = forms.filter((f) => f.unit_id === unit.id && drillable(f));
+  // A practice unit teaches nothing: its words are the earlier ones it reviews.
+  const review = new Set(unit.review_form_ids ?? []);
+  const unitForms = review.size ? forms.filter((f) => review.has(f.id)) : forms.filter((f) => f.unit_id === unit.id && drillable(f));
   const teaching = unit.lessons.filter((l) => l.kind === 'lesson' || l.kind === 'checkpoint');
   const check = unit.lessons.find((l) => l.kind === 'review');
-  if (!teaching.length) return { slots: [], warnings: [`${unit.slug}: no teaching lessons`] };
+  if (!teaching.length && !review.size) return { slots: [], warnings: [`${unit.slug}: no teaching lessons`] };
 
   const taught = new Set(forms.filter((f) => f.unit_order < unit.course_order && drillable(f)).map((f) => f.id));
   const contentOf = (s) => [...new Set(s.tokens.flatMap((t) => t.form_ids))].filter((id) => formById.has(id) && drillable(formById.get(id)));
@@ -88,7 +90,7 @@ export function planLessons({ unit, forms, sentences, tips }) {
   // sentences unsayable — but it says how many lessons it actually wants.
   const n = unitForms.length;
   const sizes = teaching.map((_, i) => Math.floor(n / teaching.length) + (i < n % teaching.length ? 1 : 0));
-  if (sizes[0] > FORMS_PER_LESSON) {
+  if (sizes.length && sizes[0] > FORMS_PER_LESSON) {
     warnings.push(
       `${unit.slug}: ${n} words over ${teaching.length} teaching lessons is ${sizes[0]} a lesson, past the ceiling of ` +
         `${FORMS_PER_LESSON}. The lessons still fit ${LESSON_ITEMS.max} screens, but the words past the ceiling are ` +
@@ -206,13 +208,60 @@ export function planLessons({ unit, forms, sentences, tips }) {
     }
   });
 
+  // Practice lessons teach nothing new: they are the unit's words again, in
+  // sentences she hasn't met yet, pushed up the ramp to the gap and the tiles —
+  // the practice a learner needs before the next unit leans on them. Each
+  // opens on a review of earlier units, so older words and tenses come back
+  // too. A unit out of fresh sentences takes ones it has shown a rung higher.
+  const practice = unit.lessons.filter((l) => l.kind === 'practice');
+  const rungs = new Map(); // sentence id -> highest rung reached in any lesson
+  for (const s of slots) {
+    if (s.sentence_id) rungs.set(s.sentence_id, Math.max(rungs.get(s.sentence_id) ?? 0, RAMP.indexOf(s.mode)));
+  }
+  practice.forEach((lesson, pi) => {
+    const out = [];
+    // A practice unit has no teaching lesson to show its tips: its practice
+    // lessons open on them, one each.
+    const tip = review.size ? tips[pi] : null;
+    const tail = REVIEW_COUNT + 1 + (tip ? 1 : 0); // tip and review up front, match at the end
+    const planned = () => out.length + tail;
+    const drillP = (s, mode) => {
+      out.push({ kind: 'drill', sentence_id: s.id, mode });
+      use(s);
+      rungs.set(s.id, Math.max(rungs.get(s.id) ?? 0, RAMP.indexOf(mode)));
+    };
+    // Fresh sentences first: a gap, then the same sentence built from tiles.
+    for (const s of bySize.filter(fresh)) {
+      if (planned() + 2 > LESSON_ITEMS.max) break;
+      drillP(s, 'sentence_gap');
+      drillP(s, 'sentence_build');
+    }
+    // Then what the unit has shown, least practised first, one rung up.
+    while (planned() < LESSON_ITEMS.min) {
+      const again = bySize
+        .filter((s) => sayable(s) && used.has(s.id) && (rungs.get(s.id) ?? 0) < RAMP.length - 1 && !out.some((o) => o.sentence_id === s.id))
+        .sort((a, b) => (rungs.get(a.id) ?? 0) - (rungs.get(b.id) ?? 0) || (used.get(a.id) ?? 0) - (used.get(b.id) ?? 0))[0];
+      if (!again) break;
+      drillP(again, RAMP[(rungs.get(again.id) ?? 0) + 1]);
+    }
+    if (planned() < LESSON_ITEMS.min) {
+      warnings.push(`${unit.slug} ${lesson.title_en ?? `lesson ${lesson.ordinal}`}: ${planned()} screens, wants ${LESSON_ITEMS.min} — the unit is out of sentences.`);
+    }
+    if (tip) push(lesson, { kind: 'tip', tip_id: tip.id });
+    push(lesson, { kind: 'review', review_count: REVIEW_COUNT });
+    for (const slot of out) push(lesson, slot);
+    push(lesson, { kind: 'match' });
+  });
+
   if (check) {
     // The check is a recap plus production, sized to the same window.
     const builds = bySizeDesc.filter(sayable).slice(0, 3);
+    // A practice unit has no words of its own to recap: its check draws on
+    // the section so far, which is what it has been practising.
     push(check, {
       kind: 'recap',
       review_count: Math.min(LESSON_ITEMS.max - builds.length, Math.max(LESSON_ITEMS.min - builds.length, unitForms.length)),
-      scope: 'unit',
+      scope: review.size ? 'section' : 'unit',
     });
     for (const s of builds) push(check, { kind: 'drill', sentence_id: s.id, mode: 'sentence_build' });
   }

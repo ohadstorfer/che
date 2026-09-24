@@ -19,6 +19,7 @@ section:
   slug: "when-i-was-a-kid"
   title: "When I was a kid"
   cefr: "A2.2"
+  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
 units:
   - ordinal: 1
     slug: "cuando-era-chico"
@@ -238,6 +239,38 @@ units:
             f: "f.sg"
 
   - ordinal: 4
+    slug: "practica-de-chico"
+    title: "Practice: back then"
+    summary: "De chico jugaba en la calle"
+    grammar:
+      - "repaso.imperfecto"
+      - "imperfecto-vs-preterito"
+    register_max: "informal"
+    sample:
+      es: "De chico vivía en Rosario y jugaba en la plaza."
+      en: "As a kid I lived in Rosario and played in the park."
+    tips:
+      - title: "The scene and the event"
+        body: "**Era**, **tenía**, **estaba** paint the scene — how things were. **Fui**, **tuve**, **llegó** are what happened in it. **Estaba lloviendo cuando llegó Juan.**"
+      - title: "Used to"
+        body: "English says *used to*; Spanish just uses the imperfect. **Jugábamos en la calle** — *we used to play in the street*. **Siempre**, **a veces** and **de chico** go with it."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "era"
+      - "tenía"
+      - "vivía"
+      - "iba"
+      - "jugaba"
+      - "jugábamos"
+      - "comía"
+      - "salía"
+      - "estaba"
+      - "llovía"
+      - "fui"
+      - "tuve"
+      - "llegó"
+
+  - ordinal: 5
     slug: "en-el-restaurante"
     title: "Eat out"
     summary: "¿Me traés la carta?"
@@ -282,7 +315,7 @@ units:
         en: "to share"
         forms:
           - form: "compartimos"
-            en: "we share, shall we share"
+            en: "we share, should we share"
             f: "1pl.pres.ind"
           - form: "compartir"
             f: "inf"
@@ -308,7 +341,7 @@ units:
         pos: "noun"
         en: "restaurant"
 
-  - ordinal: 5
+  - ordinal: 6
     slug: "tipo-ocho"
     title: "Arrange to meet"
     summary: "Nos vemos tipo ocho"
@@ -377,7 +410,7 @@ units:
         pos: "noun"
         en: "a while"
 
-  - ordinal: 6
+  - ordinal: 7
     slug: "las-fiestas"
     title: "Talk about the holidays"
     summary: "Navidad con calor"
@@ -443,7 +476,38 @@ units:
         pos: "interj"
         en: "cheers"
 
-  - ordinal: 7
+  - ordinal: 8
+    slug: "practica-la-juntada"
+    title: "Practice: meeting up and celebrating"
+    summary: "Nos encontramos tipo ocho"
+    grammar:
+      - "repaso.pedir"
+      - "repaso.avisar-encontrarse"
+    register_max: "informal"
+    sample:
+      es: "Avisame cuando salís y nos encontramos en la esquina."
+      en: "Let me know when you leave and we'll meet on the corner."
+    tips:
+      - title: "Pido, pedí, pidió"
+        body: "**Pedir** changes its vowel: **pido** today, **pedí** yesterday, and **pidió** for someone else. **¿Qué pediste?** — **Pedí un bife.**"
+      - title: "Tipo ocho"
+        body: "**Tipo** makes a time loose: **tipo ocho** is *around eight*, and in Buenos Aires that means eight-thirty. For exactly eight, say **a las ocho en punto**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "pido"
+      - "pedí"
+      - "pidió"
+      - "nos encontramos"
+      - "avisame"
+      - "espero"
+      - "tipo"
+      - "festejamos"
+      - "brindamos"
+      - "era"
+      - "tenía"
+      - "íbamos"
+
+  - ordinal: 9
     slug: "me-puse-nervioso"
     title: "Say how you felt"
     summary: "Me puse re nervioso"
@@ -553,7 +617,7 @@ units:
           - form: "celosa"
             f: "f.sg"
 
-  - ordinal: 8
+  - ordinal: 10
     slug: "la-semana-que-viene"
     title: "Make plans for next week"
     summary: "La semana que viene"
@@ -593,7 +657,7 @@ units:
         pos: "verb"
         forms:
           - form: "viajamos"
-            en: "we travel, we're travelling"
+            en: "we travel, we're traveling"
             f: "1pl.pres.ind"
       - lemma: "mudarse"
         pos: "verb"
@@ -612,7 +676,7 @@ units:
         pos: "adv"
         en: "for sure, definitely"
 
-  - ordinal: 9
+  - ordinal: 11
     slug: "me-mude"
     title: "Talk about moving house"
     summary: "Me mudé al centro"
@@ -623,7 +687,7 @@ units:
     register_max: "informal"
     sample:
       es: "Me mudé al centro y extraño mi barrio."
-      en: "I moved downtown and I miss my neighbourhood."
+      en: "I moved downtown and I miss my neighborhood."
     tips:
       - title: "Extrañar"
         body: "**Extraño a mi vieja** — *I miss my mum*. Not *echar de menos*: that is Spain's, and here
@@ -686,14 +750,14 @@ units:
             f: "f.pl"
       - lemma: "vecino"
         pos: "noun"
-        en: "neighbour"
+        en: "neighbor"
         forms:
           - form: "vecino"
             f: "m.sg"
           - form: "vecina"
             f: "f.sg"
           - form: "vecinos"
-            en: "neighbours"
+            en: "neighbors"
             f: "m.pl"
       - lemma: "tranquilo"
         pos: "adj"
@@ -704,7 +768,39 @@ units:
           - form: "tranquila"
             f: "f.sg"
 
-  - ordinal: 10
+  - ordinal: 12
+    slug: "practica-me-mude"
+    title: "Practice: feelings, plans and moving"
+    summary: "Me puse re contento"
+    grammar:
+      - "repaso.ponerse"
+      - "repaso.ir-a"
+      - "repaso.imperfecto-preterito"
+    register_max: "informal"
+    sample:
+      es: "Me mudé a Córdoba y extraño mucho a mis viejos."
+      en: "I moved to Córdoba and I miss my parents a lot."
+    tips:
+      - title: "Me puse: it happened to you"
+        body: "**Me puse nervioso**, **me enojé**, **me asusté** — a feeling that came over you at one moment is the preterite. **Estaba nervioso** is the state you were in."
+      - title: "Plans with voy a"
+        body: "For plans, porteños use **voy a** + verb far more than the future: **la semana que viene voy a descansar**. **Pienso** and **tengo ganas de** do the same job."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "me puse"
+      - "te pusiste"
+      - "me enojé"
+      - "me asusté"
+      - "pienso"
+      - "ganas"
+      - "me mudé"
+      - "nos mudamos"
+      - "extraño"
+      - "vivía"
+      - "estaba"
+      - "fui"
+
+  - ordinal: 13
     slug: "te-acordas"
     title: "Remember together"
     summary: "¿Te acordás cuando…?"

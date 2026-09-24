@@ -179,3 +179,21 @@ test('a lesson listens only to what it has already shown, and only where there i
     }
   }
 });
+
+test('practice lessons come after the teaching, teach nothing new, and push sentences to the gap and the tiles', () => {
+  const unit = outline.units.find((u) => u.slug === 'me-pregunto');
+  const kinds = unit.lessons.map((l) => l.kind);
+  assert.deepEqual(kinds.slice(-3), ['practice', 'practice', 'review'], 'two practice lessons, then the check');
+  const sentences = unitSentences(unit, outline.forms, { per: 8 });
+  const { slots, warnings } = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips });
+  for (const l of unit.lessons.filter((x) => x.kind === 'practice')) {
+    const own = slots.filter((s) => s.lesson_id === l.id);
+    assert.ok(!own.some((s) => s.kind === 'teach'), 'nothing new');
+    assert.equal(own[0].kind, 'review', 'opens on earlier units');
+    assert.ok(own.some((s) => s.mode === 'sentence_gap') && own.some((s) => s.mode === 'sentence_build'));
+    assert.ok(!own.some((s) => s.mode === 'sentence_meaning'), 'practice starts at the gap');
+    const screens = screensOf(own);
+    assert.ok(screens >= LESSON_ITEMS.min && screens <= LESSON_ITEMS.max, `${screens} screens`);
+  }
+  assert.deepEqual(warnings.filter((w) => /Practice/.test(w)), []);
+});

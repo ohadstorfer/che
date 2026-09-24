@@ -15,7 +15,7 @@ import { parse } from 'yaml';
 import { checkFormEntry, checkSentence, glossRepeats, meaningOverlaps } from '../../../src/lib/course-rules/check.ts';
 import { drillable } from '../../../src/lib/course-rules/vocabulary.ts';
 import { ids, lemmaKey } from './ids.mjs';
-import { POS, REGISTERS, parseFeatures } from './rules.mjs';
+import { POS, REGISTERS, fold, parseFeatures } from './rules.mjs';
 
 // The checks themselves take a vocabulary — this outline, or the database's
 // (lib/vocabulary.mjs) — and are shared with the admin.
@@ -43,6 +43,9 @@ const SUMMARY_MAX = 52;
  * twenty-odd screens and stops being one sitting.
  */
 export const FORMS_PER_LESSON = 3;
+
+/** Lessons a practice unit (one with `review:`) runs before its check. */
+export const PRACTICE_UNIT_LESSONS = 4;
 
 /** Teaching lessons for a unit introducing `forms` drillable forms, plus the
  *  review lesson that is the unit's check. */
@@ -121,6 +124,10 @@ export function loadOutline(paths = SECTION_PATHS) {
         register_max: registerMax,
         status: 'draft',
         sample: u.sample ?? null,
+        // A practice unit (roadmap §Practice) teaches no words of its own: it
+        // drills `review`, earlier forms, resolved once every unit is read.
+        review_refs: Array.isArray(u.review) ? u.review.map(String) : [],
+        review_form_ids: [],
         lessons: [],
         tips: (u.tips ?? []).map((t, k) => {
           if (!t.title || !t.body) errors.push(`${where}: tip ${k + 1} needs a title and a body`);
@@ -214,14 +221,27 @@ export function loadOutline(paths = SECTION_PATHS) {
       // The lessons follow from how much the unit teaches, unless it says.
       const drillableHere = forms.filter((f) => f.unit_id === unitId && drillable(f)).length;
       const lessonCount = u.lessons ?? lessonCountFor(drillableHere);
-      unit.lessons = Array.from({ length: lessonCount }, (_, k) => {
+      // Practice lessons (lessons.mjs) go after the teaching and before the
+      // unit check: the unit's words again, before the next unit leans on them.
+      const practiceUnit = Array.isArray(u.review) && u.review.length > 0;
+      if (practiceUnit && (u.words ?? []).length) errors.push(`${where}: a practice unit (review:) teaches no words — move them to a teaching unit`);
+      if (practiceUnit && checkpoint) errors.push(`${where}: the checkpoint can't be a practice unit`);
+      const practice = practiceUnit ? (u.practice ?? PRACTICE_UNIT_LESSONS) : (u.practice ?? section.practice ?? 0);
+      const hasCheck = !checkpoint && (practiceUnit || lessonCount > 1);
+      const teachingCount = practiceUnit ? 0 : hasCheck ? lessonCount - 1 : lessonCount;
+      const kinds = [
+        ...Array(teachingCount).fill(checkpoint ? 'checkpoint' : 'lesson'),
+        ...Array(practice).fill('practice'),
+        ...(hasCheck ? ['review'] : []),
+      ];
+      unit.lessons = kinds.map((kind, k) => {
         const ordinal = k + 1;
-        const kind = checkpoint ? 'checkpoint' : ordinal === lessonCount && lessonCount > 1 ? 'review' : 'lesson';
         return {
           id: ids.lesson(u.slug, ordinal),
           unit_id: unitId,
           ordinal,
-          title_en: kind === 'review' ? 'Unit check' : kind === 'checkpoint' ? `Checkpoint ${ordinal}` : `Lesson ${ordinal}`,
+          title_en:
+            kind === 'review' ? 'Unit check' : kind === 'checkpoint' ? `Checkpoint ${ordinal}` : kind === 'practice' ? 'Practice' : `Lesson ${ordinal}`,
           kind,
           status: 'draft',
         };
@@ -235,6 +255,24 @@ export function loadOutline(paths = SECTION_PATHS) {
     lemmas: [...lemmas.values()],
     forms,
   };
+
+  // A practice unit's review: forms taught before it, named like a target —
+  // "word", or "word/lemma" where two lemmas share the spelling.
+  for (const unit of units) {
+    for (const ref of unit.review_refs) {
+      const [surface, qualifier] = ref.split('/').map((x) => x.trim());
+      const hits = forms.filter(
+        (f) =>
+          f.unit_order < unit.course_order &&
+          drillable(f) &&
+          fold(f.form) === fold(surface) &&
+          (!qualifier || f.lemma === qualifier || f.pos === qualifier),
+      );
+      if (hits.length === 1) unit.review_form_ids.push(hits[0].id);
+      else errors.push(`unit ${unit.slug} review "${ref}": ${hits.length ? `ambiguous (${hits.map((h) => h.lemma).join(', ')}) — write "${surface}/<lemma>"` : 'not a word taught before this unit'}`);
+    }
+    delete unit.review_refs;
+  }
 
   // Every sample must be sayable with what the course has taught by then.
   for (const unit of units) {
