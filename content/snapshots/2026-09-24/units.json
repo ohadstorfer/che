@@ -1,0 +1,1395 @@
+[
+ {
+  "course_order": 80,
+  "grammar_focus": [
+   "conectores",
+   "repaso.b1"
+  ],
+  "id": "02735212-fad9-5b44-97cb-061657aaad7f",
+  "ordinal": 10,
+  "register_max": "informal",
+  "section_id": 8,
+  "slug": "por-las-dudas",
+  "status": "draft",
+  "summary_en": "Por las dudas",
+  "title_en": "Sound porteño",
+  "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 66,
+  "grammar_focus": [
+   "subjuntivo.recomendar-que",
+   "es-mejor-que",
+   "probar"
+  ],
+  "id": "063d369c-847e-57b8-8451-b9c4049a1d9e",
+  "ordinal": 6,
+  "register_max": "informal",
+  "section_id": 7,
+  "slug": "te-recomiendo",
+  "status": "draft",
+  "summary_en": "Te recomiendo que vayas",
+  "title_en": "Give advice",
+  "updated_at": "2026-09-23 23:01:46.02203+00"
+ },
+ {
+  "course_order": 40,
+  "grammar_focus": [
+   "repaso.preterito",
+   "relato.conectores"
+  ],
+  "id": "07ff3e13-7b95-55ab-aab7-ac48151e0d8c",
+  "ordinal": 10,
+  "register_max": "informal",
+  "section_id": 4,
+  "slug": "contame",
+  "status": "published",
+  "summary_en": "Contame todo",
+  "title_en": "Tell the whole story",
+  "updated_at": "2026-09-23 23:19:06.342269+00"
+ },
+ {
+  "course_order": 25,
+  "grammar_focus": [
+   "adj.concordancia",
+   "ser.descripcion",
+   "demostrativos.este-ese",
+   "re.intensificador"
+  ],
+  "id": "13fec277-30b8-5bdb-9718-e682351abfd9",
+  "ordinal": 5,
+  "register_max": "informal",
+  "section_id": 3,
+  "slug": "ropa-y-colores",
+  "status": "published",
+  "summary_en": "Ropa y colores",
+  "title_en": "Describe clothes and colours",
+  "updated_at": "2026-09-23 20:11:12.124649+00"
+ },
+ {
+  "course_order": 36,
+  "grammar_focus": [
+   "doler.me-duele",
+   "cuerpo",
+   "salud.turno-guardia"
+  ],
+  "id": "14b391bd-5db8-50a4-a988-428361e7752a",
+  "ordinal": 6,
+  "register_max": "informal",
+  "section_id": 4,
+  "slug": "me-duele",
+  "status": "published",
+  "summary_en": "Me duele la cabeza",
+  "title_en": "Say what hurts",
+  "updated_at": "2026-09-23 23:08:49.662548+00"
+ },
+ {
+  "course_order": 3124,
+  "grammar_focus": [
+   "repaso",
+   "registro.informal"
+  ],
+  "id": "185a79c4-daa4-5354-840f-37d36d8a27eb",
+  "ordinal": 3024,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "repaso",
+  "status": "retired",
+  "summary_en": "Checkpoint — everything in section one",
+  "title_en": "Repaso",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "course_order": 62,
+  "grammar_focus": [
+   "subjuntivo.deseos",
+   "ojala"
+  ],
+  "id": "186b6b78-c334-5c53-9675-d7e5ca16b5b4",
+  "ordinal": 2,
+  "register_max": "informal",
+  "section_id": 7,
+  "slug": "que-te-vaya-bien",
+  "status": "draft",
+  "summary_en": "Que te vaya bien",
+  "title_en": "Wish someone well",
+  "updated_at": "2026-09-23 23:01:46.02203+00"
+ },
+ {
+  "course_order": 19,
+  "grammar_focus": [
+   "verbos.-er.pres",
+   "verbos.-ir.pres"
+  ],
+  "id": "1974689a-177e-55c9-b4b1-69fba40389f0",
+  "ordinal": 9,
+  "register_max": "informal",
+  "section_id": 2,
+  "slug": "comes-vivis",
+  "status": "published",
+  "summary_en": "Comés, vivís",
+  "title_en": "Eat, live, read and write",
+  "updated_at": "2026-09-23 19:43:38.303503+00"
+ },
+ {
+  "course_order": 70,
+  "grammar_focus": [
+   "despedidas",
+   "repaso.subjuntivo"
+  ],
+  "id": "20b6357e-6e5d-58e3-814d-c7acd27bedc2",
+  "ordinal": 10,
+  "register_max": "informal",
+  "section_id": 7,
+  "slug": "cuidate",
+  "status": "draft",
+  "summary_en": "Cuidate mucho",
+  "title_en": "Say goodbye properly",
+  "updated_at": "2026-09-23 23:01:46.02203+00"
+ },
+ {
+  "course_order": 3107,
+  "grammar_focus": [
+   "estar.pres.1sg-3sg",
+   "estar.ubicacion",
+   "hay",
+   "contraccion.del-al"
+  ],
+  "id": "28520fe0-1a64-5b4a-810c-da5dfe7ae28c",
+  "ordinal": 3007,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "el-bondi",
+  "status": "retired",
+  "summary_en": "Getting around, and where things are",
+  "title_en": "El bondi",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "course_order": 44,
+  "grammar_focus": [
+   "pedir.pres-pret",
+   "restaurante"
+  ],
+  "id": "28d6c921-dae2-50d2-b6a0-a5e2423428a6",
+  "ordinal": 4,
+  "register_max": "informal",
+  "section_id": 5,
+  "slug": "en-el-restaurante",
+  "status": "published",
+  "summary_en": "¿Me traés la carta?",
+  "title_en": "Eat out",
+  "updated_at": "2026-09-23 23:35:46.537011+00"
+ },
+ {
+  "course_order": 48,
+  "grammar_focus": [
+   "ir-a-infinitivo",
+   "pensar-tener-ganas",
+   "que-viene"
+  ],
+  "id": "2902c53a-0143-5823-b423-fd9fe3dc2295",
+  "ordinal": 8,
+  "register_max": "informal",
+  "section_id": 5,
+  "slug": "la-semana-que-viene",
+  "status": "published",
+  "summary_en": "La semana que viene",
+  "title_en": "Make plans for next week",
+  "updated_at": "2026-09-23 23:49:55.688445+00"
+ },
+ {
+  "course_order": 29,
+  "grammar_focus": [
+   "hace-calor-frio",
+   "esta-nublado",
+   "llueve",
+   "estaciones"
+  ],
+  "id": "2c5ceb94-a924-5797-9279-29476c698177",
+  "ordinal": 9,
+  "register_max": "informal",
+  "section_id": 3,
+  "slug": "clima",
+  "status": "published",
+  "summary_en": "Clima",
+  "title_en": "Talk about the weather",
+  "updated_at": "2026-09-23 20:23:40.004714+00"
+ },
+ {
+  "course_order": 28,
+  "grammar_focus": [
+   "gustar.infinitivo",
+   "encantar",
+   "tambien-tampoco"
+  ],
+  "id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
+  "ordinal": 8,
+  "register_max": "informal",
+  "section_id": 3,
+  "slug": "que-te-gusta-hacer",
+  "status": "published",
+  "summary_en": "¿Qué te gusta hacer?",
+  "title_en": "Talk about your free time",
+  "updated_at": "2026-09-23 20:21:28.625105+00"
+ },
+ {
+  "course_order": 31,
+  "grammar_focus": [
+   "preterito.ar.singular",
+   "tiempo.ayer-anoche-pasado"
+  ],
+  "id": "2fa4826d-6276-5a6f-b7a5-e3c2e6dc4f2d",
+  "ordinal": 1,
+  "register_max": "informal",
+  "section_id": 4,
+  "slug": "ayer-labure",
+  "status": "published",
+  "summary_en": "Ayer laburé",
+  "title_en": "Say what you did yesterday",
+  "updated_at": "2026-09-23 22:50:56.462386+00"
+ },
+ {
+  "course_order": 76,
+  "grammar_focus": [
+   "noticias",
+   "dicen-que",
+   "preterito.llamar-leer"
+  ],
+  "id": "2fb39a77-4405-52e0-83ee-a83f56d744ad",
+  "ordinal": 6,
+  "register_max": "informal",
+  "section_id": 8,
+  "slug": "dicen-que",
+  "status": "draft",
+  "summary_en": "Dicen que va a llover",
+  "title_en": "Pass on the news",
+  "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 24,
+  "grammar_focus": [
+   "imperativo.vos.afirmativo",
+   "enclitico.me-te"
+  ],
+  "id": "3376ea65-8afe-56be-bae8-b5d06b46c9cd",
+  "ordinal": 4,
+  "register_max": "informal",
+  "section_id": 3,
+  "slug": "dale-veni",
+  "status": "published",
+  "summary_en": "Dale, vení",
+  "title_en": "Tell a friend what to do",
+  "updated_at": "2026-09-23 20:03:32.724278+00"
+ },
+ {
+  "course_order": 46,
+  "grammar_focus": [
+   "tradiciones",
+   "festejar-brindar"
+  ],
+  "id": "364e1a73-f26c-5d78-9757-4d096939ebda",
+  "ordinal": 6,
+  "register_max": "informal",
+  "section_id": 5,
+  "slug": "las-fiestas",
+  "status": "published",
+  "summary_en": "Navidad con calor",
+  "title_en": "Talk about the holidays",
+  "updated_at": "2026-09-23 23:49:13.3501+00"
+ },
+ {
+  "course_order": 67,
+  "grammar_focus": [
+   "reacciones.que-bueno-que",
+   "alegrarse",
+   "que-lastima"
+  ],
+  "id": "36b953db-b59d-5c37-8572-47afd0081c48",
+  "ordinal": 7,
+  "register_max": "informal",
+  "section_id": 7,
+  "slug": "que-bueno",
+  "status": "draft",
+  "summary_en": "¡Qué bueno que viniste!",
+  "title_en": "React to news",
+  "updated_at": "2026-09-23 23:01:46.02203+00"
+ },
+ {
+  "course_order": 42,
+  "grammar_focus": [
+   "imperfecto.regular",
+   "habitos.pasado",
+   "a-veces"
+  ],
+  "id": "38114afb-c035-5ae5-956f-723c4f408a0d",
+  "ordinal": 2,
+  "register_max": "informal",
+  "section_id": 5,
+  "slug": "siempre-jugabamos",
+  "status": "published",
+  "summary_en": "Siempre jugábamos",
+  "title_en": "Say what you used to do",
+  "updated_at": "2026-09-23 23:26:55.917775+00"
+ },
+ {
+  "course_order": 69,
+  "grammar_focus": [
+   "lunfardo",
+   "registro"
+  ],
+  "id": "39867eb4-c78d-5533-9fa6-0c4b2813b9c0",
+  "ordinal": 9,
+  "register_max": "lunfardo",
+  "section_id": 7,
+  "slug": "lunfardo",
+  "status": "draft",
+  "summary_en": "Qué fiaca",
+  "title_en": "Talk like a porteño",
+  "updated_at": "2026-09-23 23:01:46.02203+00"
+ },
+ {
+  "course_order": 11,
+  "grammar_focus": [
+   "pron.sujeto.plural",
+   "ser.pres.1pl-3pl",
+   "tener.pres.1pl-3pl",
+   "posesivo.su"
+  ],
+  "id": "3cc8b1a1-6314-5a4f-be82-b713ea584203",
+  "ordinal": 1,
+  "register_max": "informal",
+  "section_id": 2,
+  "slug": "la-gente",
+  "status": "published",
+  "summary_en": "Nosotros, ustedes, ellos",
+  "title_en": "Talk about more than one person",
+  "updated_at": "2026-09-23 18:53:27.361826+00"
+ },
+ {
+  "course_order": 58,
+  "grammar_focus": [
+   "futuro.conjetura",
+   "futuro.ser-estar-tener"
+  ],
+  "id": "3dd370c2-01fe-54ba-95fc-3c5ef1637eb0",
+  "ordinal": 8,
+  "register_max": "informal",
+  "section_id": 6,
+  "slug": "donde-estara",
+  "status": "draft",
+  "summary_en": "¿Dónde estará?",
+  "title_en": "Guess and wonder",
+  "updated_at": "2026-09-23 22:52:22.77172+00"
+ },
+ {
+  "course_order": 73,
+  "grammar_focus": [
+   "condicional.gustar",
+   "cortesia"
+  ],
+  "id": "41b8c894-067c-540c-88b8-1a334f63f9e2",
+  "ordinal": 3,
+  "register_max": "informal",
+  "section_id": 8,
+  "slug": "me-gustaria",
+  "status": "draft",
+  "summary_en": "Me gustaría ir",
+  "title_en": "Say what you'd like",
+  "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 27,
+  "grammar_focus": [
+   "reflexivos.pres",
+   "antes-despues",
+   "los-sabados"
+  ],
+  "id": "441e2e5b-f704-511a-9e55-ef9613425ce8",
+  "ordinal": 7,
+  "register_max": "informal",
+  "section_id": 3,
+  "slug": "la-rutina",
+  "status": "published",
+  "summary_en": "La rutina",
+  "title_en": "Talk about your routine",
+  "updated_at": "2026-09-23 20:13:15.959872+00"
+ },
+ {
+  "course_order": 71,
+  "grammar_focus": [
+   "condicional",
+   "yo-que-vos"
+  ],
+  "id": "465d788e-db67-5a57-8f4e-96306374e29c",
+  "ordinal": 1,
+  "register_max": "informal",
+  "section_id": 8,
+  "slug": "yo-que-vos",
+  "status": "draft",
+  "summary_en": "Yo que vos, iría",
+  "title_en": "Give advice with would",
+  "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 6,
+  "grammar_focus": [
+   "ser.pres.3sg",
+   "pron.sujeto.el-ella"
+  ],
+  "id": "481ae401-6c6e-53d7-9683-853d0cbed672",
+  "ordinal": 6,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "el-y-ella",
+  "status": "published",
+  "summary_en": "Él es de acá",
+  "title_en": "Talk about someone else",
+  "updated_at": "2026-09-18 12:13:13.419253+00"
+ },
+ {
+  "course_order": 43,
+  "grammar_focus": [
+   "imperfecto.escena",
+   "imperfecto-vs-preterito",
+   "mientras"
+  ],
+  "id": "520a3c73-f830-5ea8-bb7f-36b6b5a53614",
+  "ordinal": 3,
+  "register_max": "informal",
+  "section_id": 5,
+  "slug": "estaba-lloviendo",
+  "status": "published",
+  "summary_en": "Estaba lloviendo cuando…",
+  "title_en": "Set the scene of a story",
+  "updated_at": "2026-09-23 23:33:32.388567+00"
+ },
+ {
+  "course_order": 65,
+  "grammar_focus": [
+   "imperativo.negativo",
+   "olvidarse"
+  ],
+  "id": "52c51646-b698-5749-ae7b-d554ab2e0240",
+  "ordinal": 5,
+  "register_max": "informal",
+  "section_id": 7,
+  "slug": "no-te-preocupes",
+  "status": "draft",
+  "summary_en": "No te preocupes",
+  "title_en": "Tell someone not to",
+  "updated_at": "2026-09-23 23:01:46.02203+00"
+ },
+ {
+  "course_order": 30,
+  "grammar_focus": [
+   "estar.gerundio",
+   "ir-a.infinitivo",
+   "la-semana-que-viene",
+   "registro.informal"
+  ],
+  "id": "5df117af-d5e0-5b71-8caa-6806c47bdff1",
+  "ordinal": 10,
+  "register_max": "informal",
+  "section_id": 3,
+  "slug": "ahora-y-planes",
+  "status": "published",
+  "summary_en": "Ahora y planes",
+  "title_en": "Say what's happening and what's next",
+  "updated_at": "2026-09-23 20:28:08.267385+00"
+ },
+ {
+  "course_order": 59,
+  "grammar_focus": [
+   "sentirse",
+   "salud.receta-obra-social"
+  ],
+  "id": "5ec6a727-4a91-5545-9e35-7f858d66ced1",
+  "ordinal": 9,
+  "register_max": "informal",
+  "section_id": 6,
+  "slug": "me-siento-mal",
+  "status": "draft",
+  "summary_en": "Me siento mal",
+  "title_en": "See the doctor",
+  "updated_at": "2026-09-23 22:52:22.77172+00"
+ },
+ {
+  "course_order": 63,
+  "grammar_focus": [
+   "subjuntivo.cuando-futuro",
+   "terminar"
+  ],
+  "id": "5f6c9abe-859a-5d19-853a-7dc6bcce9c99",
+  "ordinal": 3,
+  "register_max": "informal",
+  "section_id": 7,
+  "slug": "cuando-llegues",
+  "status": "draft",
+  "summary_en": "Avisame cuando llegues",
+  "title_en": "Talk about when something will happen",
+  "updated_at": "2026-09-23 23:01:46.02203+00"
+ },
+ {
+  "course_order": 21,
+  "grammar_focus": [
+   "hora.es-la-son-las",
+   "hora.y-media-y-cuarto",
+   "numeros.21-100",
+   "dias.semana"
+  ],
+  "id": "61a56ded-546a-5ad6-a8ac-310375bed4ac",
+  "ordinal": 1,
+  "register_max": "informal",
+  "section_id": 3,
+  "slug": "la-hora",
+  "status": "published",
+  "summary_en": "La hora",
+  "title_en": "Tell the time",
+  "updated_at": "2026-09-23 19:54:45.405956+00"
+ },
+ {
+  "course_order": 60,
+  "grammar_focus": [
+   "agradecer",
+   "repaso.a2"
+  ],
+  "id": "6ec21cf5-83ce-55f4-a07c-355a8fb995bb",
+  "ordinal": 10,
+  "register_max": "informal",
+  "section_id": 6,
+  "slug": "te-debo-una",
+  "status": "draft",
+  "summary_en": "Te debo una",
+  "title_en": "Thank someone properly",
+  "updated_at": "2026-09-23 22:52:22.77172+00"
+ },
+ {
+  "course_order": 18,
+  "grammar_focus": [
+   "tener-que.infinitivo",
+   "ser.profesion.sin-articulo",
+   "sustantivos.profesion.genero"
+  ],
+  "id": "6f572b83-5cbe-528d-bcdf-bbfc32e2b19c",
+  "ordinal": 8,
+  "register_max": "informal",
+  "section_id": 2,
+  "slug": "facu-y-laburo",
+  "status": "published",
+  "summary_en": "Facu y laburo",
+  "title_en": "Study and work",
+  "updated_at": "2026-09-23 19:39:12.082725+00"
+ },
+ {
+  "course_order": 7,
+  "grammar_focus": [
+   "adj.nacionalidad.genero"
+  ],
+  "id": "70dda450-3825-5ea7-88fd-296775bc426c",
+  "ordinal": 7,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "argentino-argentina",
+  "status": "published",
+  "summary_en": "Es argentino, es argentina",
+  "title_en": "Say what people are",
+  "updated_at": "2026-09-18 13:16:05.586045+00"
+ },
+ {
+  "course_order": 12,
+  "grammar_focus": [
+   "estar.pres.1sg-3sg",
+   "estar.ubicacion",
+   "articulo.definido"
+  ],
+  "id": "71481540-7f7c-5939-9d96-ee76d80128b9",
+  "ordinal": 2,
+  "register_max": "informal",
+  "section_id": 2,
+  "slug": "donde-esta",
+  "status": "published",
+  "summary_en": "¿Dónde está?",
+  "title_en": "Say where something is",
+  "updated_at": "2026-09-23 19:08:03.531538+00"
+ },
+ {
+  "course_order": 75,
+  "grammar_focus": [
+   "plata.gastar-ahorrar",
+   "no-me-alcanza"
+  ],
+  "id": "72e14160-96c0-535c-9819-8ab194bd82cc",
+  "ordinal": 5,
+  "register_max": "informal",
+  "section_id": 8,
+  "slug": "en-cuotas",
+  "status": "draft",
+  "summary_en": "¿En cuántas cuotas?",
+  "title_en": "Talk about money",
+  "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 23,
+  "grammar_focus": [
+   "querer.pres",
+   "poder.pres",
+   "ir.pres",
+   "ir-a.lugar",
+   "salir.pres"
+  ],
+  "id": "740b6205-cb92-54dc-806f-96cc347f8ee0",
+  "ordinal": 3,
+  "register_max": "informal",
+  "section_id": 3,
+  "slug": "queres-podes-vas",
+  "status": "published",
+  "summary_en": "Querés, podés, vas",
+  "title_en": "Say what you want to do",
+  "updated_at": "2026-09-23 19:58:24.459018+00"
+ },
+ {
+  "course_order": 61,
+  "grammar_focus": [
+   "subjuntivo.querer-que",
+   "subjuntivo.venir-ir-hacer-llamar"
+  ],
+  "id": "74698b58-c87a-5870-a6dd-a6652b6da393",
+  "ordinal": 1,
+  "register_max": "informal",
+  "section_id": 7,
+  "slug": "quiero-que-vengas",
+  "status": "draft",
+  "summary_en": "Quiero que vengas",
+  "title_en": "Say what you want others to do",
+  "updated_at": "2026-09-23 23:01:46.02203+00"
+ },
+ {
+  "course_order": 78,
+  "grammar_focus": [
+   "quedar.ubicacion",
+   "barrios"
+  ],
+  "id": "754cc69f-e7cf-5e64-ba22-2679bc1f609e",
+  "ordinal": 8,
+  "register_max": "informal",
+  "section_id": 8,
+  "slug": "donde-queda",
+  "status": "draft",
+  "summary_en": "¿Dónde queda Palermo?",
+  "title_en": "Talk about the barrios",
+  "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 3123,
+  "grammar_focus": [
+   "ir-a.infinitivo",
+   "la-semana-que-viene",
+   "quedar-en"
+  ],
+  "id": "7698a287-39c7-5d5e-8c48-7068f3d1927f",
+  "ordinal": 3023,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "planes",
+  "status": "retired",
+  "summary_en": "Plans for the weekend and next week",
+  "title_en": "Planes",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "course_order": 57,
+  "grammar_focus": [
+   "relaciones",
+   "alguien-nadie",
+   "reciprocos.nos-peleamos"
+  ],
+  "id": "770b6d5f-bd8c-5c17-a05f-4721faaa1706",
+  "ordinal": 7,
+  "register_max": "informal",
+  "section_id": 6,
+  "slug": "salir-con-alguien",
+  "status": "draft",
+  "summary_en": "Estoy saliendo con alguien",
+  "title_en": "Talk about going out with someone",
+  "updated_at": "2026-09-23 22:52:22.77172+00"
+ },
+ {
+  "course_order": 55,
+  "grammar_focus": [
+   "pronombres.dobles",
+   "devolver-dejar"
+  ],
+  "id": "776b15fe-c6a5-5aae-8876-404d392e0546",
+  "ordinal": 5,
+  "register_max": "informal",
+  "section_id": 6,
+  "slug": "te-lo-devuelvo",
+  "status": "draft",
+  "summary_en": "Mañana te lo devuelvo",
+  "title_en": "Lend, borrow and give back",
+  "updated_at": "2026-09-23 22:52:22.77172+00"
+ },
+ {
+  "course_order": 3122,
+  "grammar_focus": [
+   "estar.gerundio",
+   "ahora-todavia-ya"
+  ],
+  "id": "79976171-5e4a-5208-ae57-761427a58f39",
+  "ordinal": 3022,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "ahora",
+  "status": "retired",
+  "summary_en": "What's happening right now",
+  "title_en": "Ahora",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "course_order": 1,
+  "grammar_focus": [
+   "pedido.por-favor",
+   "articulo.indefinido",
+   "conj.y-o"
+  ],
+  "id": "7acbb453-0fe4-550b-87a1-c81f0f7e4bd3",
+  "ordinal": 1,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "un-cafe-por-favor",
+  "status": "published",
+  "summary_en": "Un café, por favor",
+  "title_en": "Order at a café",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "course_order": 39,
+  "grammar_focus": [
+   "viajes",
+   "preterito.viajar"
+  ],
+  "id": "7c33a900-8b22-5a9e-a34e-7c274e6a21b0",
+  "ordinal": 9,
+  "register_max": "informal",
+  "section_id": 4,
+  "slug": "de-viaje",
+  "status": "published",
+  "summary_en": "Me voy de viaje",
+  "title_en": "Talk about a trip",
+  "updated_at": "2026-09-23 23:16:46.080289+00"
+ },
+ {
+  "course_order": 5,
+  "grammar_focus": [
+   "ser.de.origen"
+  ],
+  "id": "7c5e7c59-5c44-52e3-9900-449c03934359",
+  "ordinal": 5,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "de-donde-sos",
+  "status": "published",
+  "summary_en": "¿De dónde sos?",
+  "title_en": "Say where you're from",
+  "updated_at": "2026-09-18 12:08:20.477971+00"
+ },
+ {
+  "course_order": 64,
+  "grammar_focus": [
+   "opinion.creo-que",
+   "subjuntivo.no-creo-que",
+   "parecer"
+  ],
+  "id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
+  "ordinal": 4,
+  "register_max": "informal",
+  "section_id": 7,
+  "slug": "no-creo",
+  "status": "draft",
+  "summary_en": "¿Qué te parece?",
+  "title_en": "Give your opinion",
+  "updated_at": "2026-09-23 23:01:46.02203+00"
+ },
+ {
+  "course_order": 41,
+  "grammar_focus": [
+   "imperfecto.ser-tener-vivir-ir",
+   "cuando",
+   "de-chico"
+  ],
+  "id": "8f8a4c97-4077-5352-b040-a22de57f1b7e",
+  "ordinal": 1,
+  "register_max": "informal",
+  "section_id": 5,
+  "slug": "cuando-era-chico",
+  "status": "published",
+  "summary_en": "Cuando era chico",
+  "title_en": "Talk about when you were a kid",
+  "updated_at": "2026-09-23 23:26:00.580368+00"
+ },
+ {
+  "course_order": 37,
+  "grammar_focus": [
+   "pronombres.objeto-directo",
+   "pronombres.objeto-indirecto",
+   "imperativo.vos.clitico"
+  ],
+  "id": "9230420b-8a48-5c4b-b9d9-b7dc3c12bb5d",
+  "ordinal": 7,
+  "register_max": "informal",
+  "section_id": 4,
+  "slug": "te-llamo",
+  "status": "published",
+  "summary_en": "Te llamo mañana",
+  "title_en": "Keep it short with lo, la, le",
+  "updated_at": "2026-09-23 23:12:50.467874+00"
+ },
+ {
+  "course_order": 8,
+  "grammar_focus": [
+   "sustantivo.genero",
+   "posesivo.mi"
+  ],
+  "id": "9a649d54-c14a-56da-8701-c4783ad9a159",
+  "ordinal": 8,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "la-familia",
+  "status": "published",
+  "summary_en": "Mi familia",
+  "title_en": "Introduce your family",
+  "updated_at": "2026-09-18 13:30:13.218308+00"
+ },
+ {
+  "course_order": 17,
+  "grammar_focus": [
+   "querer.pres.1sg-2sg.pedido",
+   "traer.pres.2sg.vos.pedido",
+   "para",
+   "sin"
+  ],
+  "id": "a2eec2e1-5a4c-5372-a1e8-7ac3076576e6",
+  "ordinal": 7,
+  "register_max": "informal",
+  "section_id": 2,
+  "slug": "me-traes-un-cafe",
+  "status": "published",
+  "summary_en": "¿Me traés un café?",
+  "title_en": "Ask for what you want",
+  "updated_at": "2026-09-23 19:35:07.962231+00"
+ },
+ {
+  "course_order": 47,
+  "grammar_focus": [
+   "ponerse.pret",
+   "pronominales.pret"
+  ],
+  "id": "a6c406c0-0103-5fcc-9871-5e1bc85a3833",
+  "ordinal": 7,
+  "register_max": "informal",
+  "section_id": 5,
+  "slug": "me-puse-nervioso",
+  "status": "published",
+  "summary_en": "Me puse re nervioso",
+  "title_en": "Say how you felt",
+  "updated_at": "2026-09-23 23:41:37.581944+00"
+ },
+ {
+  "course_order": 54,
+  "grammar_focus": [
+   "tecnologia",
+   "se-corto"
+  ],
+  "id": "a921ed27-35b4-5222-9699-d8dd343c1f79",
+  "ordinal": 4,
+  "register_max": "informal",
+  "section_id": 6,
+  "slug": "el-celu",
+  "status": "draft",
+  "summary_en": "Me quedé sin batería",
+  "title_en": "Deal with your phone",
+  "updated_at": "2026-09-23 22:52:22.77172+00"
+ },
+ {
+  "course_order": 74,
+  "grammar_focus": [
+   "ciudad.transito",
+   "manejar"
+  ],
+  "id": "a973933b-ccb4-5f7d-9210-9a063ab4ed00",
+  "ordinal": 4,
+  "register_max": "informal",
+  "section_id": 8,
+  "slug": "manejar-en-baires",
+  "status": "draft",
+  "summary_en": "Manejar en Buenos Aires",
+  "title_en": "Get around by car",
+  "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 79,
+  "grammar_focus": [
+   "discurso-referido",
+   "preterito.preguntar-contestar",
+   "venir.vino"
+  ],
+  "id": "aa46af4e-1c1b-50ae-b8c1-03167cabaecc",
+  "ordinal": 9,
+  "register_max": "informal",
+  "section_id": 8,
+  "slug": "me-pregunto",
+  "status": "draft",
+  "summary_en": "Me preguntó y le contesté",
+  "title_en": "Tell who said what",
+  "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 3,
+  "grammar_focus": [
+   "pron.sujeto.vos",
+   "ser.pres.2sg.vos"
+  ],
+  "id": "aea4c640-a7bd-5aba-8ce2-5c2f493637a3",
+  "ordinal": 3,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "vos-y-sos",
+  "status": "published",
+  "summary_en": "¿Sos vos?",
+  "title_en": "Talk to someone as vos",
+  "updated_at": "2026-09-17 11:50:41.747624+00"
+ },
+ {
+  "course_order": 52,
+  "grammar_focus": [
+   "obligacion.hay-que",
+   "necesitar",
+   "no-hace-falta"
+  ],
+  "id": "afdaff40-37c8-56af-ae39-78f1ed48e97e",
+  "ordinal": 2,
+  "register_max": "informal",
+  "section_id": 6,
+  "slug": "hay-que",
+  "status": "published",
+  "summary_en": "Hay que ir temprano",
+  "title_en": "Say what has to be done",
+  "updated_at": "2026-09-24 00:03:41.02582+00"
+ },
+ {
+  "course_order": 9,
+  "grammar_focus": [
+   "tener.pres.1sg-3sg",
+   "numeros.0-20"
+  ],
+  "id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
+  "ordinal": 9,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "cuantos-anos-tenes",
+  "status": "published",
+  "summary_en": "¿Cuántos años tenés?",
+  "title_en": "Say your age",
+  "updated_at": "2026-09-18 14:28:20.264558+00"
+ },
+ {
+  "course_order": 50,
+  "grammar_focus": [
+   "acordarse",
+   "repaso.imperfecto-preterito"
+  ],
+  "id": "b2e41f0e-04f0-5a3b-94eb-850cd2d57575",
+  "ordinal": 10,
+  "register_max": "informal",
+  "section_id": 5,
+  "slug": "te-acordas",
+  "status": "published",
+  "summary_en": "¿Te acordás cuando…?",
+  "title_en": "Remember together",
+  "updated_at": "2026-09-23 23:54:31.558276+00"
+ },
+ {
+  "course_order": 32,
+  "grammar_focus": [
+   "preterito.er-ir.singular",
+   "preterito.nosotros",
+   "recien"
+  ],
+  "id": "b60b2d1f-25dc-5ada-9b93-a0afe7bd9a37",
+  "ordinal": 2,
+  "register_max": "informal",
+  "section_id": 4,
+  "slug": "comi-y-sali",
+  "status": "published",
+  "summary_en": "Anoche salí",
+  "title_en": "Say what you ate and where you went out",
+  "updated_at": "2026-09-23 22:49:34.539799+00"
+ },
+ {
+  "course_order": 16,
+  "grammar_focus": [
+   "gustar.me-te-le"
+  ],
+  "id": "b95d926c-3168-53bd-88bd-c02c868d1119",
+  "ordinal": 6,
+  "register_max": "informal",
+  "section_id": 2,
+  "slug": "mate-y-facturas",
+  "status": "published",
+  "summary_en": "Me gusta el mate",
+  "title_en": "Say what you like",
+  "updated_at": "2026-09-23 19:34:09.517589+00"
+ },
+ {
+  "course_order": 22,
+  "grammar_focus": [
+   "preposiciones.lugar",
+   "al-lado-de",
+   "enfrente-de",
+   "entre"
+  ],
+  "id": "be613042-6935-5185-bf3a-fa4dc33eca15",
+  "ordinal": 2,
+  "register_max": "informal",
+  "section_id": 3,
+  "slug": "el-barrio",
+  "status": "published",
+  "summary_en": "El barrio",
+  "title_en": "Find your way around the barrio",
+  "updated_at": "2026-09-23 19:53:48.73596+00"
+ },
+ {
+  "course_order": 15,
+  "grammar_focus": [
+   "verbos.-ar.pres",
+   "hacer.pres.1sg-3sg",
+   "a-la-noche"
+  ],
+  "id": "c5c43fc3-949b-5f6c-99b4-c6da645e7d7f",
+  "ordinal": 5,
+  "register_max": "informal",
+  "section_id": 2,
+  "slug": "que-haces",
+  "status": "published",
+  "summary_en": "¿Qué hacés?",
+  "title_en": "Talk about what you do",
+  "updated_at": "2026-09-23 19:30:48.343599+00"
+ },
+ {
+  "course_order": 38,
+  "grammar_focus": [
+   "tareas.de-la-casa",
+   "me-toca"
+  ],
+  "id": "c72176ae-a8de-5a47-9b37-cf9bdf84de08",
+  "ordinal": 8,
+  "register_max": "informal",
+  "section_id": 4,
+  "slug": "las-tareas",
+  "status": "published",
+  "summary_en": "Hoy te toca a vos",
+  "title_en": "Split the chores",
+  "updated_at": "2026-09-23 23:15:20.78631+00"
+ },
+ {
+  "course_order": 20,
+  "grammar_focus": [
+   "hay.casa",
+   "tener.casa",
+   "alquilar.pres",
+   "sustantivos.casa"
+  ],
+  "id": "c7cbf578-23ab-5875-9a1c-8104be80ad3e",
+  "ordinal": 10,
+  "register_max": "informal",
+  "section_id": 2,
+  "slug": "mi-casa",
+  "status": "published",
+  "summary_en": "Mi casa",
+  "title_en": "Show someone your place",
+  "updated_at": "2026-09-23 19:51:18.52367+00"
+ },
+ {
+  "course_order": 2,
+  "grammar_focus": [
+   "saludos",
+   "ser.pres.1sg"
+  ],
+  "id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+  "ordinal": 2,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "hola-che",
+  "status": "published",
+  "summary_en": "Hola, che",
+  "title_en": "Greet people",
+  "updated_at": "2026-09-17 07:05:23.033601+00"
+ },
+ {
+  "course_order": 72,
+  "grammar_focus": [
+   "subjuntivo.imperfecto",
+   "si-hipotetico"
+  ],
+  "id": "ce343377-a0c2-5201-9ff4-824789e73e89",
+  "ordinal": 2,
+  "register_max": "informal",
+  "section_id": 8,
+  "slug": "si-tuviera",
+  "status": "draft",
+  "summary_en": "Si tuviera plata…",
+  "title_en": "Imagine what you'd do",
+  "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 4,
+  "grammar_focus": [
+   "llamarse.pres.1sg-2sg.vos"
+  ],
+  "id": "d35a777a-0a33-5ede-8fb9-39d0107d41f6",
+  "ordinal": 4,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "como-te-llamas",
+  "status": "published",
+  "summary_en": "¿Cómo te llamás?",
+  "title_en": "Ask someone's name",
+  "updated_at": "2026-09-18 11:58:56.529834+00"
+ },
+ {
+  "course_order": 56,
+  "grammar_focus": [
+   "trabajo.entrevista-sueldo",
+   "conseguir"
+  ],
+  "id": "d585de30-5927-5cbf-a88a-fc998547f793",
+  "ordinal": 6,
+  "register_max": "informal",
+  "section_id": 6,
+  "slug": "laburo-nuevo",
+  "status": "draft",
+  "summary_en": "Conseguí laburo",
+  "title_en": "Talk about a new job",
+  "updated_at": "2026-09-23 22:52:22.77172+00"
+ },
+ {
+  "course_order": 26,
+  "grammar_focus": [
+   "cuanto-sale",
+   "costar.pres.3",
+   "numeros.100-1000"
+  ],
+  "id": "d8cb78a0-5a7d-5c09-9f7f-9e905e0d2e59",
+  "ordinal": 6,
+  "register_max": "informal",
+  "section_id": 3,
+  "slug": "cuanto-sale",
+  "status": "published",
+  "summary_en": "¿Cuánto sale?",
+  "title_en": "Ask what it costs",
+  "updated_at": "2026-09-23 20:14:21.109669+00"
+ },
+ {
+  "course_order": 51,
+  "grammar_focus": [
+   "pedidos.me-pasas",
+   "condicional.podrias"
+  ],
+  "id": "dc485e04-124e-516d-9061-98a2d00f4d57",
+  "ordinal": 1,
+  "register_max": "informal",
+  "section_id": 6,
+  "slug": "me-haces-un-favor",
+  "status": "published",
+  "summary_en": "¿Me hacés un favor?",
+  "title_en": "Ask for a favour",
+  "updated_at": "2026-09-24 00:00:40.250698+00"
+ },
+ {
+  "course_order": 68,
+  "grammar_focus": [
+   "saber",
+   "entender",
+   "explicar"
+  ],
+  "id": "e21ddcb1-102b-5c87-a018-55c861cdbe47",
+  "ordinal": 8,
+  "register_max": "informal",
+  "section_id": 7,
+  "slug": "no-se",
+  "status": "draft",
+  "summary_en": "Ni idea",
+  "title_en": "Say what you know and understand",
+  "updated_at": "2026-09-23 23:01:46.02203+00"
+ },
+ {
+  "course_order": 13,
+  "grammar_focus": [
+   "hay",
+   "contraccion.del-al"
+  ],
+  "id": "e4dc651e-4fd9-5ba8-8e83-1c8a4131e09e",
+  "ordinal": 3,
+  "register_max": "informal",
+  "section_id": 2,
+  "slug": "hay-un-kiosco",
+  "status": "published",
+  "summary_en": "Hay un kiosco",
+  "title_en": "Say what there is around you",
+  "updated_at": "2026-09-23 19:10:29.815079+00"
+ },
+ {
+  "course_order": 53,
+  "grammar_focus": [
+   "cantidades.kilo-docena",
+   "precio.cuanto-esta"
+  ],
+  "id": "e7976a3a-80b3-505d-abc8-858bd6a92a90",
+  "ordinal": 3,
+  "register_max": "informal",
+  "section_id": 6,
+  "slug": "en-la-verduleria",
+  "status": "draft",
+  "summary_en": "Un kilo de tomates",
+  "title_en": "Shop for fruit and veg",
+  "updated_at": "2026-09-23 22:52:22.77172+00"
+ },
+ {
+  "course_order": 33,
+  "grammar_focus": [
+   "preterito.ir-ser",
+   "preterito.estar-tener",
+   "como-te-fue"
+  ],
+  "id": "e89d1870-c4d1-5692-923d-5e357ae8218e",
+  "ordinal": 3,
+  "register_max": "informal",
+  "section_id": 4,
+  "slug": "fui-a-la-cancha",
+  "status": "published",
+  "summary_en": "¿Cómo te fue?",
+  "title_en": "Say where you went and how it was",
+  "updated_at": "2026-09-23 22:57:13.830499+00"
+ },
+ {
+  "course_order": 14,
+  "grammar_focus": [
+   "estar.estado",
+   "estar.pres.1pl-3pl",
+   "adj.estado.genero",
+   "porque",
+   "medio.atenuador"
+  ],
+  "id": "eda0d38b-9df5-5bba-9665-c300309be0fa",
+  "ordinal": 4,
+  "register_max": "informal",
+  "section_id": 2,
+  "slug": "como-estas",
+  "status": "published",
+  "summary_en": "¿Cómo estás?",
+  "title_en": "Say how you feel",
+  "updated_at": "2026-09-23 19:22:02.809359+00"
+ },
+ {
+  "course_order": 10,
+  "grammar_focus": [
+   "plural.-s-es",
+   "posesivo.tu"
+  ],
+  "id": "f1fa7454-72a3-546d-8f72-4aab149bbbbe",
+  "ordinal": 10,
+  "register_max": "informal",
+  "section_id": 1,
+  "slug": "en-el-kiosco",
+  "status": "published",
+  "summary_en": "Dos medialunas",
+  "title_en": "Buy at the kiosco",
+  "updated_at": "2026-09-18 14:30:31.368763+00"
+ },
+ {
+  "course_order": 49,
+  "grammar_focus": [
+   "mudarse.pret",
+   "extrañar",
+   "vecinos"
+  ],
+  "id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
+  "ordinal": 9,
+  "register_max": "informal",
+  "section_id": 5,
+  "slug": "me-mude",
+  "status": "published",
+  "summary_en": "Me mudé al centro",
+  "title_en": "Talk about moving house",
+  "updated_at": "2026-09-23 23:51:21.981446+00"
+ },
+ {
+  "course_order": 34,
+  "grammar_focus": [
+   "preterito.hacer-ver-decir",
+   "preterito.venir-poder",
+   "relato.primero-entonces"
+  ],
+  "id": "f42f6608-6d16-5d0a-bd3f-896cd5fb4d07",
+  "ordinal": 4,
+  "register_max": "informal",
+  "section_id": 4,
+  "slug": "el-finde",
+  "status": "published",
+  "summary_en": "¿Qué hiciste el finde?",
+  "title_en": "Tell a friend about your weekend",
+  "updated_at": "2026-09-23 23:00:29.247789+00"
+ },
+ {
+  "course_order": 45,
+  "grammar_focus": [
+   "encontrarse",
+   "avisar",
+   "tipo"
+  ],
+  "id": "f901adf3-4ac4-5208-8cac-9261ab754144",
+  "ordinal": 5,
+  "register_max": "informal",
+  "section_id": 5,
+  "slug": "tipo-ocho",
+  "status": "published",
+  "summary_en": "Nos vemos tipo ocho",
+  "title_en": "Arrange to meet",
+  "updated_at": "2026-09-23 23:38:40.820065+00"
+ },
+ {
+  "course_order": 77,
+  "grammar_focus": [
+   "personalidad",
+   "ser-buena-onda"
+  ],
+  "id": "fa24b60d-3716-5754-bf36-9f5a6843d7bb",
+  "ordinal": 7,
+  "register_max": "informal",
+  "section_id": 8,
+  "slug": "buena-onda",
+  "status": "draft",
+  "summary_en": "Es re buena onda",
+  "title_en": "Describe what people are like",
+  "updated_at": "2026-09-23 23:34:23.775762+00"
+ },
+ {
+  "course_order": 35,
+  "grammar_focus": [
+   "comparativo.mas-menos-que",
+   "comparativo.tan-como",
+   "comparativo.mejor-peor",
+   "superlativo.isimo"
+  ],
+  "id": "fd0afb5a-c86b-5339-b28f-31f5431f400a",
+  "ordinal": 5,
+  "register_max": "informal",
+  "section_id": 4,
+  "slug": "mas-alto-que",
+  "status": "published",
+  "summary_en": "Más alto que yo",
+  "title_en": "Compare people and things",
+  "updated_at": "2026-09-23 23:06:40.129285+00"
+ }
+]
