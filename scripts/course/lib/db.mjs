@@ -27,7 +27,7 @@ function queryViaApi(file) {
   writeFileSync(body, JSON.stringify({ query: readFileSync(file, 'utf8') }));
   const out = execFileSync(
     'curl',
-    ['-sS', '--fail-with-body', '--retry', '4', '--retry-all-errors', '-X', 'POST', `https://api.supabase.com/v1/projects/${PROJECT_REF}/database/query`,
+    ['-sS', '--fail-with-body', '--retry', '4', '--retry-connrefused', '-X', 'POST', `https://api.supabase.com/v1/projects/${PROJECT_REF}/database/query`,
       '-H', `Authorization: Bearer ${process.env.SUPABASE_ACCESS_TOKEN}`, '-H', 'Content-Type: application/json', '--data-binary', `@${body}`],
     { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 512 * 1024 * 1024 },
   );
