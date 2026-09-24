@@ -44,9 +44,12 @@ units:
       - lemma: "pasar"
         pos: "verb"
         forms:
+          - form: "me pasás"
+            en: "you pass me"
+            f: "2sg.pres.ind.vos.clitic"
           - form: "pasás"
-            en: "you pass"
             f: "2sg.pres.ind.vos"
+            bound: true
           - form: "pasame"
             en: "pass me"
             f: "2sg.imp.vos.clitic"
@@ -54,9 +57,12 @@ units:
         pos: "verb"
         en: "to hand, to reach"
         forms:
+          - form: "me alcanzás"
+            en: "you hand me"
+            f: "2sg.pres.ind.vos.clitic"
           - form: "alcanzás"
-            en: "you hand"
             f: "2sg.pres.ind.vos"
+            bound: true
           - form: "alcanzame"
             en: "hand me"
             f: "2sg.imp.vos.clitic"
@@ -67,9 +73,12 @@ units:
           - form: "ayudo"
             en: "I help"
             f: "1sg.pres.ind"
+          - form: "me ayudás"
+            en: "you help me"
+            f: "2sg.pres.ind.vos.clitic"
           - form: "ayudás"
-            en: "you help"
             f: "2sg.pres.ind.vos"
+            bound: true
           - form: "ayudame"
             en: "help me"
             f: "2sg.imp.vos.clitic"
@@ -920,9 +929,12 @@ units:
         pos: "verb"
         en: "to owe"
         forms:
+          - form: "te debo"
+            en: "I owe you"
+            f: "1sg.pres.ind.clitic"
           - form: "debo"
-            en: "I owe"
             f: "1sg.pres.ind"
+            bound: true
       - lemma: "de nada"
         pos: "phrase"
         en: "you're welcome"

@@ -445,9 +445,12 @@ units:
           - form: "recomiendo"
             f: "1sg.pres.ind.irregular"
             bound: true
-          - form: "recomendás"
+          - form: "me recomendás"
             en: "you recommend"
+            f: "2sg.pres.ind.vos.clitic"
+          - form: "recomendás"
             f: "2sg.pres.ind.vos"
+            bound: true
       - lemma: "probar"
         pos: "verb"
         en: "to try, to taste"
