@@ -73,19 +73,19 @@ units:
   - ordinal: 2
     slug: "merezco-un-aumento"
     title: "Ask for a raise"
-    summary: "Creo que merezco un aumento"
+    summary: "Me merezco un aumento"
     grammar:
       - "laburo.negociar"
     register_max: "informal"
     sample:
-      es: "Creo que merezco un aumento."
+      es: "Creo que me merezco un aumento."
       en: "I think I deserve a raise."
     tips:
       - title: "Plantear"
         body: "You don't just ask, you **plantear** it — *raise it, put it on the table*: **le planteé lo
           del aumento a mi jefa**. Then you **negociar** the **condiciones**."
       - title: "Merezco"
-        body: "**Merecer** — *to deserve*: **merezco un aumento**, **te lo merecés**. And a boss who
+        body: "**Merecerse** — *to deserve* — comes with its pronoun: **me merezco un aumento**, **te lo merecés**. And a boss who
           **valora** your work says so with the sueldo."
     words:
       - lemma: "plantear"
@@ -107,12 +107,18 @@ units:
         pos: "verb"
         en: "to deserve"
         forms:
-          - form: "merezco"
+          - form: "me merezco"
             en: "I deserve"
-            f: "1sg.pres.ind.irregular"
-          - form: "merecés"
+            f: "1sg.pres.ind.clitic.irregular"
+          - form: "te merecés"
             en: "you deserve"
+            f: "2sg.pres.ind.vos.clitic"
+          - form: "merezco"
+            f: "1sg.pres.ind.irregular"
+            bound: true
+          - form: "merecés"
             f: "2sg.pres.ind.vos"
+            bound: true
       - lemma: "valorar"
         pos: "verb"
         en: "to value, to appreciate"
@@ -185,8 +191,8 @@ units:
       - "entregar"
       - "atrasados"
       - "plantear"
-      - "merezco"
-      - "merecés"
+      - "me merezco"
+      - "te merecés"
       - "condiciones"
       - "me cayó la ficha"
       - "me da cosa"
