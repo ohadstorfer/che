@@ -727,8 +727,8 @@
    "casarse"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 23:01:52.900374+00",
   "course_order": 183,
   "review_form_ids": []
  },
@@ -1203,8 +1203,8 @@
    "cultura.mate"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:45:36.12522+00",
   "course_order": 179,
   "review_form_ids": []
  },
@@ -1473,8 +1473,8 @@
    "viaje.argentina"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:41:20.057739+00",
   "course_order": 178,
   "review_form_ids": []
  },
@@ -1900,13 +1900,13 @@
   "ordinal": 2,
   "slug": "merezco-un-aumento",
   "title_en": "Ask for a raise",
-  "summary_en": "Creo que merezco un aumento",
+  "summary_en": "Me merezco un aumento",
   "grammar_focus": [
    "laburo.negociar"
   ],
   "register_max": "informal",
   "status": "published",
-  "updated_at": "2026-09-24 22:23:15.61054+00",
+  "updated_at": "2026-09-24 22:29:52.660119+00",
   "course_order": 175,
   "review_form_ids": []
  },
@@ -2040,8 +2040,8 @@
    "repaso.sentimientos"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:37:31.172338+00",
   "course_order": 177,
   "review_form_ids": [
    "f873e747-328d-5001-a373-a24047af9b0b",
@@ -2051,15 +2051,17 @@
    "c0a17427-046d-5154-b5cd-20e2312841cc",
    "698eb2bc-7e9e-52d6-8870-4557a7cfcead",
    "a74606e6-493c-5c2a-84d9-d24d503debf5",
-   "3c839330-0f20-5d8b-bfdc-e8c7e23de623",
-   "08b02419-8e0d-514c-8a75-2c000b5f771c",
+   "032b1849-d8ad-582f-aead-e7fc1a5632d9",
+   "bca267dd-fbe8-5f69-8e4c-e0bf3d8ea936",
    "b530386e-a8e3-5e35-9ade-acf09aaa1676",
    "d4f7ba8e-72a4-5d5e-a206-f876277d0c11",
    "c3e95e2b-055c-5071-93ee-2adc9b113a2d",
    "af6f047b-67b6-5de4-8195-334422839475",
    "65145883-e94f-54d4-9a6c-95b8a880312d",
    "836e08dd-594c-51c1-87c5-b1bf74022088",
-   "cdb1c357-aa23-5407-b8f6-00d78d112ac5"
+   "cdb1c357-aa23-5407-b8f6-00d78d112ac5",
+   "56d26b76-ae4a-559c-b68b-2c93fee5d665",
+   "5b06ceef-b8fb-55e0-8c36-282bdc40e15c"
   ]
  },
  {
@@ -2228,8 +2230,8 @@
    "orgullo"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 23:05:26.439263+00",
   "course_order": 184,
   "review_form_ids": []
  },
@@ -2325,8 +2327,8 @@
    "repaso.inmigracion"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:54:15.17401+00",
   "course_order": 181,
   "review_form_ids": [
    "1855e835-d080-5b9c-a446-9b9893670721",
@@ -2762,8 +2764,8 @@
    "repaso.c1"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 23:12:57.617598+00",
   "course_order": 186,
   "review_form_ids": []
  },
@@ -3019,8 +3021,8 @@
    "humor"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:58:12.780256+00",
   "course_order": 182,
   "review_form_ids": []
  },
@@ -3115,8 +3117,8 @@
    "historia.inmigracion"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:49:20.156635+00",
   "course_order": 180,
   "review_form_ids": []
  },
@@ -3624,8 +3626,8 @@
    "sentimientos.expresiones"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 22:33:17.305543+00",
   "course_order": 176,
   "review_form_ids": []
  },
@@ -3695,8 +3697,8 @@
    "repaso.emocionarse"
   ],
   "register_max": "informal",
-  "status": "draft",
-  "updated_at": "2026-09-24 19:23:53.313157+00",
+  "status": "published",
+  "updated_at": "2026-09-24 23:09:24.861009+00",
   "course_order": 185,
   "review_form_ids": [
    "7925978c-affc-57fa-bc2e-e19e535ae4ab",

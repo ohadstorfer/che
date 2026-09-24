@@ -136,4 +136,4 @@ A second review found three more gaps: the hardest grammar got the fewest lesson
 | 12 | ✓ | ✓ 20260924000029 | ✓ published, glossed (995) |
 | 13 | ✓ | ✓ 20260924000029 | ✓ published, glossed (949) |
 | 14 | ✓ | ✓ 20260924000029 | ✓ published, glossed (863) |
-| 15 | ✓ | ✓ 20260924000029 | in progress |
+| 15 | ✓ | ✓ 20260924000029 | ✓ published, glossed (946) |
