@@ -848,3 +848,38 @@ units:
         | **Volví a** perder las llaves. | I lost my keys again. |
 
         All three take an infinitive. **Soler** has no past you'll need: *antes almorzaba tarde* does the job.
+
+  # ── Section 13 ──────────────────────────────────────────────────────────
+  - unit: fue-construido
+    lessons: 1
+    tip:
+      title: "The passive of the news"
+      body: |
+        | El puente **fue construido** hace un siglo. | was built |
+        | La estación **fue inaugurada** ayer. | was opened |
+        | Los chorros **fueron detenidos**. | were arrested |
+
+        **Fue** + participle, and the participle agrees like an adjective. In conversation: *construyeron el puente*.
+
+  - unit: me-robaron
+    lessons: 1
+    tip:
+      title: "They, whoever they are"
+      body: |
+        | **Me robaron** el celu. | My phone got stolen. |
+        | ¿Cuánto te **cobraron**? | How much did they charge you? |
+        | **Dicen** que mañana llueve. | They say it'll rain tomorrow. |
+
+        The *ellos* form with nobody named is how Spanish says *it got done*: no one to blame, or no one worth naming.
+
+  - unit: lo-bueno-de-vivir-aca
+    lessons: 1
+    tip:
+      title: "Lo + adjective"
+      body: |
+        | **Lo bueno** es la gente. | The good thing is the people. |
+        | **Lo malo** es el tránsito. | The bad thing is the traffic. |
+        | **Lo mejor** fue el asado. | The best part was the asado. |
+        | **Lo peor** es el calor. | The worst part is the heat. |
+
+        **Lo** + adjective makes *the … thing*. It never changes: *lo bueno*, even of a plural.
