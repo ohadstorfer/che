@@ -154,6 +154,12 @@ units:
       - lemma: "tiempo"
         pos: "noun"
         en: "time"
+      - lemma: "hacer"
+        pos: "verb"
+        forms:
+          - form: "harías"
+            en: "you would do"
+            f: "2sg.cond.ind.vos.irregular"
 
   - ordinal: 3
     slug: "me-gustaria"
