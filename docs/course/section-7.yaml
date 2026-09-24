@@ -442,6 +442,17 @@ units:
       - lemma: "taxi"
         pos: "noun"
         en: "taxi"
+      - lemma: "comer"
+        pos: "verb"
+        forms:
+          - form: "comer"
+            f: "inf"
+      - lemma: "comprar"
+        pos: "verb"
+        forms:
+          - form: "comprá"
+            en: "buy"
+            f: "2sg.imp.vos"
 
   - ordinal: 7
     slug: "que-bueno"
@@ -673,3 +684,9 @@ units:
       - lemma: "abrazo"
         pos: "noun"
         en: "hug"
+      - lemma: "dormir"
+        pos: "verb"
+        forms:
+          - form: "dormiste"
+            en: "you slept"
+            f: "2sg.pret.ind.vos"
