@@ -91,6 +91,93 @@ units:
             f: "2sg.pres.subj.vos.irregular"
 
   - ordinal: 2
+    slug: "necesito-que-me-ayudes"
+    title: "Ask for help, and offer it"
+    summary: "Necesito que me ayudes"
+    grammar:
+      - "subjuntivo.querer-que"
+      - "subjuntivo.venir-ir-hacer-llamar"
+      - "subjuntivo.necesitar-que"
+    register_max: "informal"
+    sample:
+      es: "Necesito que me ayudes con la mudanza."
+      en: "I need you to help me with the move."
+    tips:
+      - title: "Necesito que, te pido que"
+        body: "*Quiero que* has company: **necesito que me ayudes** — *I need you to help me*; **te pido
+          que me esperes** — *please wait for me*. Whenever you want something from someone else, the
+          verb after *que* goes subjunctive."
+      - title: "-ar takes e, the rest take a"
+        body: "**Ayudar → ayudes**, **esperar → esperes**, **mandar → mandes**, **avisar → avises**. *Poner*
+          and *traer* keep the *g* of their *yo*: **pongo → pongas**, **traigo → traiga**. For *we*:
+          **¿qué querés que hagamos?**"
+      - title: "¿Querés que te lleve?"
+        body: "The offer is the same pattern turned round: **¿querés que te lleve?** — *want a lift?*;
+          **¿querés que traiga algo?** — the guest's question before every *asado*. The *yo* form
+          matches *él*: **lleve**, **traiga**, **ponga**."
+    words:
+      - lemma: "ayudar"
+        pos: "verb"
+        forms:
+          - form: "ayudes"
+            en: "you help (that you help)"
+            f: "2sg.pres.subj.vos"
+          - form: "ayude"
+            en: "help (that I, that he/she help)"
+            f: "sg.pres.subj"
+      - lemma: "esperar"
+        pos: "verb"
+        forms:
+          - form: "esperes"
+            en: "you wait (that you wait)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "poner"
+        pos: "verb"
+        forms:
+          - form: "pongas"
+            en: "you put (that you put)"
+            f: "2sg.pres.subj.vos.irregular"
+          - form: "ponga"
+            en: "put (that I, that he/she put)"
+            f: "sg.pres.subj.irregular"
+      - lemma: "mandar"
+        pos: "verb"
+        forms:
+          - form: "mandes"
+            en: "you send (that you send)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "avisar"
+        pos: "verb"
+        forms:
+          - form: "avises"
+            en: "you let know (that you let me know)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "dar"
+        pos: "verb"
+        forms:
+          - form: "des"
+            en: "you give (that you give)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "hacer"
+        pos: "verb"
+        forms:
+          - form: "hagamos"
+            en: "we do (that we do), let's do"
+            f: "1pl.pres.subj.irregular"
+      - lemma: "traer"
+        pos: "verb"
+        forms:
+          - form: "traiga"
+            en: "bring (that I, that he/she bring)"
+            f: "sg.pres.subj.irregular"
+      - lemma: "llevar"
+        pos: "verb"
+        forms:
+          - form: "lleve"
+            en: "give a lift, take (that I, that he/she take)"
+            f: "sg.pres.subj"
+
+  - ordinal: 3
     slug: "que-te-vaya-bien"
     title: "Wish someone well"
     summary: "Que te vaya bien"
@@ -114,25 +201,12 @@ units:
         en: "I hope, hopefully"
       - lemma: "pasarla"
         pos: "verb"
-        en: "to have a time (good or bad)"
         forms:
           - form: "la pases"
             en: "you have (a time)"
             f: "2sg.pres.subj.vos.clitic"
-          - form: "la pasé"
-            en: "I had (a time)"
-            f: "1sg.pret.ind.clitic"
-          - form: "la pasaste"
-            en: "you had (a time)"
-            f: "2sg.pret.ind.vos.clitic"
           - form: "pases"
             f: "2sg.pres.subj.vos"
-            bound: true
-          - form: "pasé"
-            f: "1sg.pret.ind"
-            bound: true
-          - form: "pasaste"
-            f: "2sg.pret.ind.vos"
             bound: true
       - lemma: "tener"
         pos: "verb"
@@ -152,14 +226,94 @@ units:
           - form: "llueva"
             en: "rains (that it rain)"
             f: "3sg.pres.subj.irregular"
-      - lemma: "suerte"
-        pos: "noun"
-        en: "luck"
       - lemma: "buen"
         pos: "adj"
         en: "good"
 
-  - ordinal: 3
+  - ordinal: 4
+    slug: "que-te-mejores"
+    title: "Wish people well on the big days"
+    summary: "¡Que te mejores!"
+    grammar:
+      - "subjuntivo.deseos"
+      - "ojala"
+    register_max: "informal"
+    sample:
+      es: "¡Suerte en el parcial! Ojalá que te vaya bien."
+      en: "Good luck on the exam! I hope it goes well."
+    tips:
+      - title: "Que te mejores, que te diviertas"
+        body: "The pronoun comes along into the wish: **que te mejores** — *get well soon*; **que te
+          diviertas** — *have fun*; **que lo disfrutes** — *enjoy it*. The same *que* + subjunctive as
+          *que te vaya bien*."
+      - title: "Ojalá, for all of us"
+        body: "**Ojalá que ganemos** — *I hope we win* — *-ar* verbs swap to **e** for *we* too. For a
+          present: **ojalá que te guste**. On a birthday: **¡feliz cumple, que cumplas muchos más!**"
+      - title: "¡Éxitos!"
+        body: "Before an interview or an exam porteños say **¡éxitos!** or **¡mucha suerte!** — and before
+          a **parcial**, the university exam everyone dreads, both."
+    words:
+      - lemma: "mejorarse"
+        pos: "verb"
+        forms:
+          - form: "te mejores"
+            en: "you get better (get well soon)"
+            f: "2sg.pres.subj.vos.clitic"
+          - form: "mejores"
+            f: "2sg.pres.subj.vos"
+            bound: true
+      - lemma: "divertirse"
+        pos: "verb"
+        en: "to have fun"
+        forms:
+          - form: "te diviertas"
+            en: "you have fun (have fun)"
+            f: "2sg.pres.subj.vos.clitic.irregular"
+          - form: "diviertas"
+            f: "2sg.pres.subj.vos.irregular"
+            bound: true
+      - lemma: "disfrutar"
+        pos: "verb"
+        en: "to enjoy"
+        forms:
+          - form: "disfrutes"
+            en: "you enjoy (enjoy it)"
+            f: "2sg.pres.subj.vos"
+          - form: "disfrutar"
+            f: "inf"
+      - lemma: "cumplir"
+        pos: "verb"
+        en: "to turn (an age); to keep (a promise)"
+        forms:
+          - form: "cumplas"
+            en: "you turn (many happy returns)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "ganar"
+        pos: "verb"
+        forms:
+          - form: "ganemos"
+            en: "we win (that we win)"
+            f: "1pl.pres.subj"
+      - lemma: "gustar"
+        pos: "verb"
+        forms:
+          - form: "guste"
+            en: "you like it (that it please)"
+            f: "3sg.pres.subj"
+      - lemma: "parcial"
+        pos: "noun"
+        en: "midterm exam"
+      - lemma: "éxito"
+        pos: "noun"
+        en: "success"
+        forms:
+          - form: "éxito"
+            f: "m.sg"
+          - form: "éxitos"
+            en: "all the best, good luck"
+            f: "m.pl"
+
+  - ordinal: 5
     slug: "cuando-llegues"
     title: "Talk about when something will happen"
     summary: "Avisame cuando llegues"
@@ -221,29 +375,95 @@ units:
       - lemma: "apenas"
         pos: "adv"
         en: "as soon as"
-      - lemma: "cuándo"
-        pos: "adv"
-        en: "when (asking)"
-      - lemma: "dar"
-        pos: "verb"
-        forms:
-          - form: "di"
-            en: "I gave"
-            f: "1sg.pret.ind.irregular"
-          - form: "diste"
-            en: "you gave"
-            f: "2sg.pret.ind.vos.irregular"
-          - form: "dio"
-            en: "gave (he/she gave)"
-            f: "3sg.pret.ind.irregular"
-      - lemma: "prestar"
-        pos: "verb"
-        forms:
-          - form: "presto"
-            en: "I lend"
-            f: "1sg.pres.ind"
 
-  - ordinal: 4
+  - ordinal: 6
+    slug: "cuando-vuelvas"
+    title: "Make plans for when you're back"
+    summary: "Cuando vuelvas, avisame"
+    grammar:
+      - "subjuntivo.cuando-futuro"
+      - "terminar"
+      - "subjuntivo.hasta-que"
+    register_max: "informal"
+    sample:
+      es: "Cuando vuelvas, avisame y nos vemos."
+      en: "When you're back, let me know and we'll meet up."
+    tips:
+      - title: "Cuando vuelvas"
+        body: "Plans hang on *cuando* + the subjunctive: **cuando vuelvas del viaje, nos vemos**; **cuando
+          cobre, te invito**; **cuando empieces el laburo nuevo, contame**. The other half stays normal,
+          or a command."
+      - title: "Hasta que, apenas"
+        body: "**Hasta que** — *until* — works the same way: **esperá hasta que te llame**. And the promise
+          every porteño makes: **apenas sepa algo, te aviso** — *as soon as I know anything, I'll tell
+          you*."
+      - title: "Cuando quieras"
+        body: "**Cuando quieras** — *whenever you like* — leaves an invitation open. The question keeps
+          the normal verb: **¿cuándo nos vemos?** The answer doesn't: **cuando nos veamos, te cuento**."
+    words:
+      - lemma: "volver"
+        pos: "verb"
+        forms:
+          - form: "vuelvas"
+            en: "you come back (when you come back)"
+            f: "2sg.pres.subj.vos.irregular"
+          - form: "vuelva"
+            en: "come back (when I, when he/she come back)"
+            f: "sg.pres.subj.irregular"
+      - lemma: "querer"
+        pos: "verb"
+        forms:
+          - form: "quieras"
+            en: "(that) you want"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "saber"
+        pos: "verb"
+        en: "to know"
+        forms:
+          - form: "sepas"
+            en: "you know (when you know)"
+            f: "2sg.pres.subj.vos.irregular"
+          - form: "sepa"
+            en: "know (when I, when he/she know)"
+            f: "sg.pres.subj.irregular"
+      - lemma: "ver"
+        pos: "verb"
+        forms:
+          - form: "nos veamos"
+            en: "we see each other (when we meet)"
+            f: "1pl.pres.subj.clitic"
+          - form: "veamos"
+            f: "1pl.pres.subj"
+            bound: true
+      - lemma: "hasta que"
+        pos: "phrase"
+        en: "until"
+      - lemma: "cobrar"
+        pos: "verb"
+        forms:
+          - form: "cobre"
+            en: "get paid (when I, when he/she get paid)"
+            f: "sg.pres.subj"
+      - lemma: "mudarse"
+        pos: "verb"
+        forms:
+          - form: "te mudes"
+            en: "you move (when you move house)"
+            f: "2sg.pres.subj.vos.clitic"
+          - form: "mudes"
+            f: "2sg.pres.subj.vos"
+            bound: true
+      - lemma: "empezar"
+        pos: "verb"
+        forms:
+          - form: "empieces"
+            en: "you start (when you start)"
+            f: "2sg.pres.subj.vos.irregular"
+          - form: "empiece"
+            en: "start (when I, when he/she start)"
+            f: "sg.pres.subj.irregular"
+
+  - ordinal: 7
     slug: "practica-ojala"
     title: "Practice: wishes and when"
     summary: "Ojalá que vengas"
@@ -275,7 +495,43 @@ units:
       - "estaba"
       - "me puse"
 
-  - ordinal: 5
+  - ordinal: 8
+    slug: "practica-cuando-vuelvas"
+    title: "Practice: favours, wishes and plans"
+    summary: "Necesito que me ayudes"
+    grammar:
+      - "repaso.subjuntivo.querer-que"
+      - "repaso.subjuntivo.deseos"
+      - "repaso.subjuntivo.cuando"
+    register_max: "informal"
+    sample:
+      es: "Ojalá que te guste. Avisame cuando vuelvas."
+      en: "I hope you like it. Let me know when you're back."
+    tips:
+      - title: "Needing, asking, offering"
+        body: "**Necesito que me ayudes**, **te pido que me esperes**, **¿querés que te lleve?** When the
+          person after *que* is someone else, the verb goes subjunctive."
+      - title: "Wishes and not-yet"
+        body: "Wishes and the future share the form: **que te diviertas**, **ojalá que ganemos**, **cuando
+          vuelvas**, **hasta que sepa algo**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "ayudes"
+      - "esperes"
+      - "pongas"
+      - "hagamos"
+      - "te mejores"
+      - "te diviertas"
+      - "ganemos"
+      - "vuelvas"
+      - "quieras"
+      - "sepa"
+      - "hasta que"
+      - "me mudé"
+      - "hace falta"
+      - "extrañás"
+
+  - ordinal: 9
     slug: "no-creo"
     title: "Give your opinion"
     summary: "¿Qué te parece?"
@@ -342,14 +598,86 @@ units:
           - form: "tenga"
             en: "has (that he/she have)"
             f: "sg.pres.subj.irregular"
-      - lemma: "razón"
-        pos: "noun"
-        en: "reason, right"
       - lemma: "idea"
         pos: "noun"
         en: "idea"
 
-  - ordinal: 6
+  - ordinal: 10
+    slug: "puede-ser-que"
+    title: "Say how likely something is"
+    summary: "Puede ser que llueva"
+    grammar:
+      - "opinion.creo-que"
+      - "subjuntivo.no-creo-que"
+      - "parecer"
+      - "subjuntivo.puede-ser-que"
+    register_max: "informal"
+    sample:
+      es: "Puede ser que estén cerrados hoy."
+      en: "They might be closed today."
+    tips:
+      - title: "Puede ser que"
+        body: "**Puede ser** — *could be* — is the porteño *maybe*. Add *que* and the subjunctive follows:
+          **puede ser que llueva**, **puede ser que estén cerrados**. **Es posible que** says the same,
+          a little more carefully."
+      - title: "No creo que, for them"
+        body: "For *they*, add **-n** to the form you know: **no creo que sean**, **no creo que estén**,
+          **no creo que tengan**, **no creo que puedan**, **no creo que lleguen a tiempo**."
+      - title: "Seguro, or not"
+        body: "Sure of it? The normal verb: **seguro que abren**, **creo que viene**. Doubt it, and the
+          subjunctive: **no creo que abran hoy**. Even the forecast gets the treatment: **el pronóstico
+          es de lluvia, pero no creo que llueva**."
+    words:
+      - lemma: "puede ser"
+        pos: "phrase"
+        en: "could be, it might"
+      - lemma: "posible"
+        pos: "adj"
+        en: "possible"
+      - lemma: "ser"
+        pos: "verb"
+        forms:
+          - form: "sean"
+            en: "are (that they be)"
+            f: "3pl.pres.subj.irregular"
+      - lemma: "estar"
+        pos: "verb"
+        forms:
+          - form: "estén"
+            en: "are (that they be there, that they be so)"
+            f: "3pl.pres.subj.irregular"
+      - lemma: "tener"
+        pos: "verb"
+        forms:
+          - form: "tengan"
+            en: "have (that they have)"
+            f: "3pl.pres.subj.irregular"
+      - lemma: "poder"
+        pos: "verb"
+        forms:
+          - form: "puedan"
+            en: "can (that they can)"
+            f: "3pl.pres.subj.irregular"
+      - lemma: "llegar"
+        pos: "verb"
+        forms:
+          - form: "lleguen"
+            en: "get there (that they get there)"
+            f: "3pl.pres.subj"
+      - lemma: "abrir"
+        pos: "verb"
+        forms:
+          - form: "abran"
+            en: "open (that they open)"
+            f: "3pl.pres.subj"
+      - lemma: "a tiempo"
+        pos: "phrase"
+        en: "on time"
+      - lemma: "pronóstico"
+        pos: "noun"
+        en: "weather forecast"
+
+  - ordinal: 11
     slug: "no-te-preocupes"
     title: "Tell someone not to"
     summary: "No te preocupes"
@@ -384,14 +712,8 @@ units:
           - form: "te olvides"
             en: "you forget (don't forget)"
             f: "2sg.pres.subj.vos.clitic"
-          - form: "me olvidé"
-            en: "I forgot"
-            f: "1sg.pret.ind.clitic"
           - form: "olvides"
             f: "2sg.pres.subj.vos"
-            bound: true
-          - form: "olvidé"
-            f: "1sg.pret.ind"
             bound: true
       - lemma: "hacerse"
         pos: "verb"
@@ -416,7 +738,92 @@ units:
             en: "you touch (don't touch)"
             f: "2sg.pres.subj.vos"
 
-  - ordinal: 7
+  - ordinal: 12
+    slug: "no-seas-asi"
+    title: "Warn a friend what not to do"
+    summary: "No dejes el celu en la mesa"
+    grammar:
+      - "imperativo.negativo"
+      - "olvidarse"
+    register_max: "informal"
+    sample:
+      es: "No saques el celu en el bondi."
+      en: "Don't take your phone out on the bus."
+    tips:
+      - title: "No dejes, no saques"
+        body: "Every *don't* grows from the *yo* of the present: *dejo* → **no dejes**, *cuento* → **no
+          cuentes**. *Saco* gives **no saques**: the *c* turns *qu* to keep
+          its sound."
+      - title: "No te vayas, no te pongas así"
+        body: "With *-se* verbs the pronoun goes in front: *me voy* → **no te vayas**, *me puse nervioso*
+          → **no te pongas nervioso**, *me enojé* → **no te enojes**. And the one every friend says:
+          **no seas así**."
+    words:
+      - lemma: "dejar"
+        pos: "verb"
+        forms:
+          - form: "dejes"
+            en: "you leave (something) (don't leave it)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "sacar"
+        pos: "verb"
+        forms:
+          - form: "saques"
+            en: "you take out (don't take out)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "contar"
+        pos: "verb"
+        forms:
+          - form: "cuentes"
+            en: "you tell (don't tell)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "perder"
+        pos: "verb"
+        forms:
+          - form: "pierdas"
+            en: "you lose (don't lose)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "mentir"
+        pos: "verb"
+        forms:
+          - form: "mientas"
+            en: "you lie (don't lie)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "gastar"
+        pos: "verb"
+        forms:
+          - form: "gastes"
+            en: "you spend (don't spend)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "ser"
+        pos: "verb"
+        forms:
+          - form: "seas"
+            en: "you be (don't be)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "irse"
+        pos: "verb"
+        forms:
+          - form: "te vayas"
+            en: "you go away (don't go)"
+            f: "2sg.pres.subj.vos.clitic.irregular"
+      - lemma: "enojarse"
+        pos: "verb"
+        forms:
+          - form: "te enojes"
+            en: "you get angry (don't get angry)"
+            f: "2sg.pres.subj.vos.clitic"
+          - form: "enojes"
+            f: "2sg.pres.subj.vos"
+            bound: true
+      - lemma: "ponerse"
+        pos: "verb"
+        forms:
+          - form: "te pongas"
+            en: "you get (don't get: nervous, upset)"
+            f: "2sg.pres.subj.vos.clitic.irregular"
+
+  - ordinal: 13
     slug: "te-recomiendo"
     title: "Give advice"
     summary: "Te recomiendo que vayas"
@@ -478,9 +885,6 @@ units:
       - lemma: "vale la pena"
         pos: "phrase"
         en: "it's worth it"
-      - lemma: "taxi"
-        pos: "noun"
-        en: "taxi"
       - lemma: "comer"
         pos: "verb"
         forms:
@@ -493,7 +897,89 @@ units:
             en: "buy"
             f: "2sg.imp.vos"
 
-  - ordinal: 8
+  - ordinal: 14
+    slug: "te-aconsejo"
+    title: "Give tips to a newcomer"
+    summary: "Te aconsejo que lleves efectivo"
+    grammar:
+      - "subjuntivo.recomendar-que"
+      - "es-mejor-que"
+      - "probar"
+      - "conviene-que"
+    register_max: "informal"
+    sample:
+      es: "Te aconsejo que lleves efectivo y que tomes el subte."
+      en: "My advice: bring cash and take the subway."
+    tips:
+      - title: "Te aconsejo que, conviene que"
+        body: "**Te aconsejo que lleves efectivo** — *my advice: bring cash*. **Conviene que** and **es
+          importante que** work like *te recomiendo que*: the advice lands in the subjunctive —
+          **conviene que busques un depto cerca del subte**."
+      - title: "Advice for us"
+        body: "Advice to the group uses *we*: **es mejor que salgamos temprano**, **conviene que lo
+          hagamos mañana**. *Salir* keeps its *g*: *salgo* → **salgamos**."
+      - title: "¡Cuidado!"
+        body: "**¡Cuidado!** — *careful!* — and the tips that come with it: **no uses el celu en la
+          calle**, **es mejor que cambies plata antes**, **te conviene reservar**."
+    words:
+      - lemma: "aconsejar"
+        pos: "verb"
+        en: "to advise"
+        forms:
+          - form: "te aconsejo"
+            en: "I advise (you), my advice is"
+            f: "1sg.pres.ind.clitic"
+          - form: "aconsejo"
+            f: "1sg.pres.ind"
+            bound: true
+      - lemma: "llevar"
+        pos: "verb"
+        forms:
+          - form: "lleves"
+            en: "you bring along (that you bring)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "tomar"
+        pos: "verb"
+        forms:
+          - form: "tomes"
+            en: "you catch, you drink (that you take)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "buscar"
+        pos: "verb"
+        forms:
+          - form: "busques"
+            en: "you look for (that you look for)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "cambiar"
+        pos: "verb"
+        en: "to change"
+        forms:
+          - form: "cambies"
+            en: "you change (that you change)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "usar"
+        pos: "verb"
+        forms:
+          - form: "uses"
+            en: "you use (that you use)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "reservar"
+        pos: "verb"
+        forms:
+          - form: "reserves"
+            en: "you book (that you book)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "salir"
+        pos: "verb"
+        forms:
+          - form: "salgamos"
+            en: "we leave, let's leave (that we leave)"
+            f: "1pl.pres.subj.irregular"
+      - lemma: "cuidado"
+        pos: "noun"
+        en: "care, carefulness"
+
+  - ordinal: 15
     slug: "practica-te-recomiendo"
     title: "Practice: opinions and advice"
     summary: "No creo que venga"
@@ -524,7 +1010,43 @@ units:
       - "tenía"
       - "fui"
 
-  - ordinal: 9
+  - ordinal: 16
+    slug: "practica-te-aconsejo"
+    title: "Practice: doubts, warnings and tips"
+    summary: "No creo que lleguen a tiempo"
+    grammar:
+      - "repaso.subjuntivo.opinion"
+      - "repaso.imperativo.negativo"
+      - "repaso.subjuntivo.consejos"
+    register_max: "informal"
+    sample:
+      es: "Puede ser que llueva: te aconsejo que lleves paraguas."
+      en: "It might rain: I'd bring an umbrella."
+    tips:
+      - title: "They, and we"
+        body: "The subjunctive for *they* adds **-n** (**sean**, **estén**, **lleguen**); for *we*,
+          **-mos** (**salgamos**, **hagamos**). The rule for when to use it doesn't change."
+      - title: "Don't, and better not"
+        body: "**No dejes el celu ahí** is a warning; **es mejor que no lo dejes ahí** is advice. Both
+          take the subjunctive."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "puede ser"
+      - "sean"
+      - "estén"
+      - "a tiempo"
+      - "seas"
+      - "te vayas"
+      - "dejes"
+      - "cuentes"
+      - "te aconsejo"
+      - "lleves"
+      - "salgamos"
+      - "capaz"
+      - "estará"
+      - "tenés que"
+
+  - ordinal: 17
     slug: "que-bueno"
     title: "React to news"
     summary: "¡Qué bueno que viniste!"
@@ -585,7 +1107,80 @@ units:
           - form: "noticias"
             f: "f.pl"
 
-  - ordinal: 10
+  - ordinal: 18
+    slug: "me-preocupa"
+    title: "Share joys and worries"
+    summary: "Me preocupa que trabajes tanto"
+    grammar:
+      - "reacciones.que-bueno-que"
+      - "alegrarse"
+      - "que-lastima"
+      - "preocupar"
+    register_max: "informal"
+    sample:
+      es: "¡Qué suerte que vivas cerca!"
+      en: "How lucky that you live nearby!"
+    tips:
+      - title: "Me preocupa que"
+        body: "**Me preocupa que trabajes tanto** — *it worries me that you work so much*. *Preocupar*
+          and *sorprender* work like *gustar* and *molestar*: **me preocupa**, **me sorprende**, and
+          what follows *que* goes subjunctive."
+      - title: "Qué suerte que"
+        body: "**¡Qué suerte que vivas cerca!**, **¡qué bueno que estemos todos juntos!** Any *qué* +
+          reaction + *que* brings the subjunctive. **Estemos** is *we*: the same form plus **-mos**."
+    words:
+      - lemma: "preocupar"
+        pos: "verb"
+        en: "to worry (someone)"
+        forms:
+          - form: "me preocupa"
+            en: "it worries me"
+            f: "3sg.pres.ind.clitic"
+          - form: "preocupa"
+            f: "3sg.pres.ind"
+            bound: true
+      - lemma: "sorprender"
+        pos: "verb"
+        en: "to surprise"
+        forms:
+          - form: "me sorprende"
+            en: "it surprises me"
+            f: "3sg.pres.ind.clitic"
+          - form: "sorprende"
+            f: "3sg.pres.ind"
+            bound: true
+      - lemma: "qué suerte"
+        pos: "phrase"
+        en: "how lucky"
+      - lemma: "tanto"
+        pos: "adv"
+        en: "so much"
+      - lemma: "vivir"
+        pos: "verb"
+        forms:
+          - form: "vivas"
+            en: "you live (that you live)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "trabajar"
+        pos: "verb"
+        forms:
+          - form: "trabajes"
+            en: "you work (that you work)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "conocer"
+        pos: "verb"
+        forms:
+          - form: "conozcas"
+            en: "you meet, you know (that you meet)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "estar"
+        pos: "verb"
+        forms:
+          - form: "estemos"
+            en: "we are (that we be)"
+            f: "1pl.pres.subj.irregular"
+
+  - ordinal: 19
     slug: "no-se"
     title: "Say what you know and understand"
     summary: "Ni idea"
@@ -621,19 +1216,6 @@ units:
           - form: "sabemos"
             en: "we know"
             f: "1pl.pres.ind"
-      - lemma: "entender"
-        pos: "verb"
-        en: "to understand"
-        forms:
-          - form: "entiendo"
-            en: "I understand"
-            f: "1sg.pres.ind.irregular"
-          - form: "entendés"
-            en: "you understand"
-            f: "2sg.pres.ind.vos"
-          - form: "entendí"
-            en: "I understood"
-            f: "1sg.pret.ind"
       - lemma: "explicar"
         pos: "verb"
         en: "to explain"
@@ -651,7 +1233,92 @@ units:
         pos: "noun"
         en: "question"
 
-  - ordinal: 11
+  - ordinal: 20
+    slug: "que-significa"
+    title: "Ask what something means"
+    summary: "¿Qué significa?"
+    grammar:
+      - "saber"
+      - "entender"
+      - "explicar"
+      - "darse-cuenta"
+    register_max: "informal"
+    sample:
+      es: "Perdón, no entendí. ¿Me lo repetís?"
+      en: "Sorry, I didn't get that. Can you say it again?"
+    tips:
+      - title: "¿Qué significa?"
+        body: "Stuck on a word: **¿qué significa?** Too fast? **¿Me lo repetís?** or **repetime, más
+          despacio**. Got it wrong? **Perdón, me confundí.**"
+      - title: "No sabía, me di cuenta"
+        body: "**No sabía** — *I didn't know* — is the imperfect: a state. **Me di cuenta** — *I
+          realised* — is the moment it clicked. **¿Sabías que…?** opens half the gossip in Buenos
+          Aires."
+      - title: "No hace falta que entiendas todo"
+        body: "Knowing takes the subjunctive when it's wanted or needed: **quiero que me expliques** —
+          *I want you to explain it to me*; **no hace falta que entiendas todo** — *you don't need to
+          understand everything*."
+    words:
+      - lemma: "significar"
+        pos: "verb"
+        en: "to mean"
+        forms:
+          - form: "significa"
+            en: "it means"
+            f: "3sg.pres.ind"
+      - lemma: "repetir"
+        pos: "verb"
+        en: "to repeat"
+        forms:
+          - form: "repetís"
+            en: "you repeat"
+            f: "2sg.pres.ind.vos"
+          - form: "repetime"
+            en: "repeat (it) to me"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "darse cuenta"
+        pos: "verb"
+        en: "to realise"
+        forms:
+          - form: "me di cuenta"
+            en: "I realised"
+            f: "1sg.pret.ind.clitic.irregular"
+          - form: "te diste cuenta"
+            en: "you realised"
+            f: "2sg.pret.ind.vos.clitic.irregular"
+      - lemma: "saber"
+        pos: "verb"
+        forms:
+          - form: "sabía"
+            en: "I knew, he knew, she knew"
+            f: "sg.impf.ind"
+          - form: "sabías"
+            en: "you knew"
+            f: "2sg.impf.ind.vos"
+      - lemma: "entender"
+        pos: "verb"
+        forms:
+          - form: "entiendas"
+            en: "you understand (that you understand)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "explicar"
+        pos: "verb"
+        forms:
+          - form: "expliques"
+            en: "you explain (that you explain)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "confundirse"
+        pos: "verb"
+        en: "to get mixed up"
+        forms:
+          - form: "me confundí"
+            en: "I got it wrong, I got mixed up"
+            f: "1sg.pret.ind.clitic"
+          - form: "te confundiste"
+            en: "you got it wrong"
+            f: "2sg.pret.ind.vos.clitic"
+
+  - ordinal: 21
     slug: "lunfardo"
     title: "Talk like a porteño"
     summary: "Qué fiaca"
@@ -712,7 +1379,85 @@ units:
         en: "sure, right away"
         register: "informal"
 
-  - ordinal: 12
+  - ordinal: 22
+    slug: "es-un-afano"
+    title: "Talk money and people in lunfardo"
+    summary: "¡Es un afano!"
+    grammar:
+      - "lunfardo"
+      - "registro"
+    register_max: "lunfardo"
+    sample:
+      es: "¡Qué afano! Y la pilcha es berreta."
+      en: "What a rip-off! And the clothes are cheap junk."
+    tips:
+      - title: "Garpar, un afano"
+        body: "Money talk goes lunfardo fast: **¿quién garpa?** — *who's paying?*; **¡es un afano!** —
+          *it's a rip-off!*; **berreta** — *cheap, shoddy*. And food is **el morfi**."
+      - title: "Chanta, cheto, piola"
+        body: "People get lunfardo labels: a **chanta** talks big and doesn't deliver, a **cheto** is
+          posh, and someone **piola** is cool and easy-going. **No me chamuyes** — *don't give me that*
+          — is the subjunctive again."
+      - title: "Qué embole"
+        body: "**¡Qué embole!** — *what a drag!* — for a rainy Sunday with nothing on. Like all of
+          these: friends, not job interviews."
+    words:
+      - lemma: "garpar"
+        pos: "verb"
+        en: "to pay up"
+        register: "lunfardo"
+        forms:
+          - form: "garpar"
+            f: "inf"
+          - form: "garpa"
+            en: "pays up (he/she pays up)"
+            f: "3sg.pres.ind"
+      - lemma: "afano"
+        pos: "noun"
+        en: "rip-off"
+        register: "lunfardo"
+      - lemma: "berreta"
+        pos: "adj"
+        en: "shoddy, low-quality"
+        register: "lunfardo"
+      - lemma: "chanta"
+        pos: "noun"
+        en: "bluffer, con artist"
+        register: "lunfardo"
+      - lemma: "cheto"
+        pos: "adj"
+        en: "posh, snobby"
+        register: "informal"
+        forms:
+          - form: "cheto"
+            f: "m.sg"
+          - form: "cheta"
+            f: "f.sg"
+      - lemma: "piola"
+        pos: "adj"
+        en: "easy-going, laid-back"
+        register: "informal"
+      - lemma: "embole"
+        pos: "noun"
+        en: "bore, boring thing"
+        register: "informal"
+      - lemma: "morfi"
+        pos: "noun"
+        en: "grub, food"
+        register: "lunfardo"
+      - lemma: "chamuyar"
+        pos: "verb"
+        en: "to sweet-talk, to spin a line"
+        register: "lunfardo"
+        forms:
+          - form: "chamuyás"
+            en: "you sweet-talk"
+            f: "2sg.pres.ind.vos"
+          - form: "chamuyes"
+            en: "you sweet-talk (don't give me that)"
+            f: "2sg.pres.subj.vos"
+
+  - ordinal: 23
     slug: "practica-que-bueno"
     title: "Practice: reactions and knowing"
     summary: "¡Qué bueno que estés acá!"
@@ -743,7 +1488,109 @@ units:
       - "pude"
       - "estará"
 
-  - ordinal: 13
+  - ordinal: 24
+    slug: "practica-es-un-afano"
+    title: "Practice: worries, meanings and slang"
+    summary: "Qué suerte que estemos todos"
+    grammar:
+      - "repaso.reacciones"
+      - "repaso.saber-entender"
+      - "repaso.lunfardo"
+    register_max: "lunfardo"
+    sample:
+      es: "No sabía que el morfi era tan caro. ¡Es un afano!"
+      en: "I didn't know the food was so expensive. It's a rip-off!"
+    tips:
+      - title: "Reacting to them, to us"
+        body: "**Me preocupa que trabajes tanto**, **qué suerte que estemos todos**, **me sorprende que
+          no sepa** — a reaction + *que* keeps the subjunctive, for any person."
+      - title: "Sabía, me di cuenta"
+        body: "**No sabía** — the state, imperfect. **Me di cuenta** — the moment, preterite. **¿Qué
+          significa *garpar*?** — *to pay*, in lunfardo."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "me preocupa"
+      - "qué suerte"
+      - "vivas"
+      - "estemos"
+      - "significa"
+      - "sabía"
+      - "me di cuenta"
+      - "repetime"
+      - "garpar"
+      - "afano"
+      - "chanta"
+      - "te acordás"
+      - "me enojé"
+      - "conocí"
+
+  - ordinal: 25
+    slug: "saludos-a-tu-vieja"
+    title: "Say goodbye at the door and on the phone"
+    summary: "Saludos a tu vieja"
+    grammar:
+      - "despedidas"
+      - "repaso.subjuntivo"
+    register_max: "informal"
+    sample:
+      es: "Bueno, me voy yendo. ¡Saludos a tu vieja!"
+      en: "Right, I'd better get going. Say hi to your mum!"
+    tips:
+      - title: "Me voy yendo"
+        body: "The porteño exit starts long before the door: **bueno, me voy yendo** — *well, I'd better
+          get going* — and then twenty minutes of talk. On the way out, love for whoever isn't
+          there: **saludos a tu vieja**, **mandale saludos a Juan**."
+      - title: "One more wish"
+        body: "A goodbye is a string of wishes, all *que* + the subjunctive: **que duermas bien**, **que
+          sigas bien**, **que llegues bien**. On the phone it ends with **besos** and **escribime**."
+    words:
+      - lemma: "saludo"
+        pos: "noun"
+        en: "greeting; regards"
+        forms:
+          - form: "saludo"
+            f: "m.sg"
+          - form: "saludos"
+            en: "regards, say hi"
+            f: "m.pl"
+      - lemma: "ir"
+        pos: "verb"
+        forms:
+          - form: "yendo"
+            en: "going"
+            f: "ger.irregular"
+      - lemma: "seguir"
+        pos: "verb"
+        forms:
+          - form: "sigas"
+            en: "you keep (that you keep: well)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "dormir"
+        pos: "verb"
+        forms:
+          - form: "duermas"
+            en: "you sleep (that you sleep)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "mandar"
+        pos: "verb"
+        forms:
+          - form: "mandale"
+            en: "send (to him, to her)"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "escribir"
+        pos: "verb"
+        forms:
+          - form: "escribime"
+            en: "write to me, text me"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "beso"
+        pos: "noun"
+        forms:
+          - form: "besos"
+            en: "kisses (as a sign-off)"
+            f: "m.pl"
+
+  - ordinal: 26
     slug: "cuidate"
     title: "Say goodbye properly"
     summary: "Cuidate mucho"
@@ -779,9 +1626,6 @@ units:
           - form: "nos hablamos"
             en: "we'll talk, talk soon"
             f: "1pl.pres.ind.clitic"
-      - lemma: "beso"
-        pos: "noun"
-        en: "kiss"
       - lemma: "abrazo"
         pos: "noun"
         en: "hug"

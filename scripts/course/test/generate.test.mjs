@@ -91,9 +91,11 @@ test('the lesson plan teaches every word, ramps meaning → gap → tiles, and e
 /** Screens a slot stands for: one, unless it stands for several. */
 const screensOf = (own) => own.reduce((n, s) => n + (s.kind === 'review' || s.kind === 'recap' ? (s.review_count ?? 0) : 1), 0);
 
-/** A unit with `count` sentences per word, optionally recorded. */
+/** A unit with `count` sentences per word — per reviewed word, for a practice unit — optionally recorded. */
 const unitSentences = (unit, forms, { per = 3, audio = false } = {}) => {
-  const content = forms.filter((f) => f.unit_id === unit.id && !f.is_glue && f.pos !== 'propn');
+  const review = new Set(unit.review_form_ids ?? []);
+  const mine = (f) => (review.size ? review.has(f.id) : f.unit_id === unit.id);
+  const content = forms.filter((f) => mine(f) && !f.is_glue && f.pos !== 'propn');
   const earlier = forms.filter((f) => f.unit_order < unit.course_order && !f.is_glue && f.pos !== 'propn');
   const filler = (i, w) => (earlier.length ? [{ form_ids: [earlier[(i + w) % earlier.length].id] }] : []);
   return content.flatMap((f, i) =>
@@ -119,7 +121,12 @@ test('every lesson runs one sitting — never over 16 screens, and under 12 only
       const where = `${unit.slug} lesson ${lesson.ordinal}`;
       assert.ok(screens <= LESSON_ITEMS.max, `${where}: ${screens} screens, over ${LESSON_ITEMS.max}`);
       if (screens < LESSON_ITEMS.min) {
-        assert.ok(warnings.some((w) => w.startsWith(`${where}:`)), `${where}: ${screens} screens and no warning`);
+        // A practice lesson's warning names it by its title ("practica-hola Practice: 10 screens, …").
+        const label = lesson.kind === 'practice' ? `${unit.slug} ${lesson.title_en}` : where;
+        assert.ok(
+          warnings.some((w) => w.startsWith(`${label}:`) && (lesson.kind !== 'practice' || w.includes(`${screens} screens`))),
+          `${where}: ${screens} screens and no warning`,
+        );
       }
       // However crowded the unit, no lesson teaches more than its share.
       const teach = own.filter((s) => s.kind === 'teach').length;

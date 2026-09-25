@@ -83,19 +83,115 @@ units:
           - form: "se me perdió"
             en: "I lost (it got lost)"
             f: "3sg.pret.ind.clitic"
-      - lemma: "roto"
-        pos: "adj"
-        en: "broken"
-        forms:
-          - form: "roto"
-            f: "m.sg"
-          - form: "rota"
-            f: "f.sg"
-      - lemma: "anteojos"
-        pos: "noun"
-        en: "glasses"
 
   - ordinal: 2
+    slug: "se-me-quemo"
+    title: "Tell a mishap at home"
+    summary: "Se me quemó la comida"
+    grammar:
+      - "se-accidental"
+      - "se-accidental.plural"
+    register_max: "informal"
+    sample:
+      es: "Se nos acabó el café y se me quemó la comida."
+      en: "We ran out of coffee and I burnt the food."
+    tips:
+      - title: "One thing, two things"
+        body: "The verb goes with the *thing*, not with you: **se me cayó la taza**, but **se me cayeron
+          las llaves**; **se me quemó la comida**, **se me quemaron las tostadas**. The *me* stays put —
+          it still happened to you."
+      - title: "Se nos, se te"
+        body: "When it happened to all of you, the middle word is **nos**: **se nos acabó el café** —
+          *we ran out of coffee*; **se nos rompió la heladera**. To a friend: **¿se te olvidó?**"
+      - title: "Nobody's fault"
+        body: "That's the whole point: **no fue mi culpa, se me cayó**. And the excuse every porteño has
+          ready when they're late: **se me hizo tarde**."
+    words:
+      - lemma: "quemarse"
+        pos: "verb"
+        en: "to burn, to get burnt"
+        forms:
+          - form: "se me quemó"
+            en: "I burnt (it got burnt)"
+            f: "3sg.pret.ind.clitic"
+          - form: "se me quemaron"
+            en: "I burnt (them)"
+            f: "3pl.pret.ind.clitic"
+          - form: "quemó"
+            f: "3sg.pret.ind"
+            bound: true
+          - form: "quemaron"
+            f: "3pl.pret.ind"
+            bound: true
+      - lemma: "acabarse"
+        pos: "verb"
+        en: "to run out"
+        forms:
+          - form: "se me acabó"
+            en: "I ran out of"
+            f: "3sg.pret.ind.clitic"
+          - form: "se nos acabó"
+            en: "we ran out of"
+            f: "3sg.pret.ind.clitic"
+          - form: "acabó"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "mojarse"
+        pos: "verb"
+        en: "to get wet"
+        forms:
+          - form: "se me mojó"
+            en: "got wet on me"
+            f: "3sg.pret.ind.clitic"
+          - form: "mojó"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "caerse"
+        pos: "verb"
+        forms:
+          - form: "se me cayeron"
+            en: "I dropped (them)"
+            f: "3pl.pret.ind.clitic.irregular"
+          - form: "cayeron"
+            f: "3pl.pret.ind.irregular"
+            bound: true
+      - lemma: "romperse"
+        pos: "verb"
+        forms:
+          - form: "se nos rompió"
+            en: "we broke (by accident)"
+            f: "3sg.pret.ind.clitic"
+      - lemma: "olvidarse"
+        pos: "verb"
+        forms:
+          - form: "se te olvidó"
+            en: "you forgot"
+            f: "3sg.pret.ind.clitic"
+      - lemma: "se me hizo tarde"
+        pos: "phrase"
+        en: "I lost track of time, I'm running late"
+      - lemma: "comida"
+        pos: "noun"
+        en: "the food, a meal"
+      - lemma: "taza"
+        pos: "noun"
+        en: "cup, mug"
+        forms:
+          - form: "taza"
+            f: "f.sg"
+          - form: "tazas"
+            f: "f.pl"
+      - lemma: "pava"
+        pos: "noun"
+        en: "kettle"
+      - lemma: "culpa"
+        pos: "noun"
+        en: "fault, blame"
+      - lemma: "desastre"
+        pos: "noun"
+        en: "disaster"
+
+  - ordinal: 3
     slug: "para-que"
     title: "Say what something is for"
     summary: "Para que entiendas"
@@ -120,21 +216,6 @@ units:
       - lemma: "antes de que"
         pos: "phrase"
         en: "before"
-      - lemma: "entender"
-        pos: "verb"
-        forms:
-          - form: "entiendas"
-            en: "you understand (so that you understand)"
-            f: "2sg.pres.subj.vos.irregular"
-      - lemma: "saber"
-        pos: "verb"
-        forms:
-          - form: "sepas"
-            en: "you know (so that you know)"
-            f: "2sg.pres.subj.vos.irregular"
-          - form: "sepa"
-            en: "know (so that I, so that he/she know)"
-            f: "sg.pres.subj.irregular"
       - lemma: "leer"
         pos: "verb"
         forms:
@@ -154,7 +235,98 @@ units:
             en: "you see (so that you see)"
             f: "2sg.pres.subj.vos.irregular"
 
-  - ordinal: 3
+  - ordinal: 4
+    slug: "para-que-entres"
+    title: "Leave a friend in charge of your place"
+    summary: "Te dejo la llave para que entres"
+    grammar:
+      - "subjuntivo.para-que"
+      - "subjuntivo.antes-de-que"
+      - "subjuntivo.sin-que"
+    register_max: "informal"
+    sample:
+      es: "Te dejo la llave para que entres."
+      en: "I'm leaving you the key so you can get in."
+    tips:
+      - title: "While I'm away"
+        body: "Going on holiday? Every instruction is a **para que** + what the *other* person does:
+          **te dejo la llave para que entres**, **para que riegues las plantas**, **para que el gato
+          coma**. Two people, so the second verb is subjunctive."
+      - title: "Sin que"
+        body: "**Sin que** works the same way: **cerrá la puerta sin que se escape el gato** — *without the
+          cat getting out*. And **antes de que vuelva** — *before I'm back* — hasn't happened yet."
+      - title: "The stems you know"
+        body: "The subjunctive keeps the *yo* stem: *cierro* → **cierres**, *encuentro* → **encuentres**,
+          *riego* → **riegues**. The regular ones just swap the vowel: **entres**, **abras**."
+    words:
+      - lemma: "sin que"
+        pos: "phrase"
+        en: "without (someone doing something)"
+      - lemma: "entrar"
+        pos: "verb"
+        forms:
+          - form: "entres"
+            en: "you get in (so that you get in)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "abrir"
+        pos: "verb"
+        forms:
+          - form: "abras"
+            en: "you open (so that you open)"
+            f: "2sg.pres.subj.vos"
+      - lemma: "cerrar"
+        pos: "verb"
+        forms:
+          - form: "cierres"
+            en: "you close (so that you close)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "encontrar"
+        pos: "verb"
+        forms:
+          - form: "encuentres"
+            en: "you find (so that you find)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "regar"
+        pos: "verb"
+        forms:
+          - form: "riegues"
+            en: "you water (so that you water)"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "comer"
+        pos: "verb"
+        forms:
+          - form: "coma"
+            en: "eat (so that I, so that he/she eat)"
+            f: "sg.pres.subj"
+      - lemma: "escaparse"
+        pos: "verb"
+        en: "to get out, to escape"
+        forms:
+          - form: "se escape"
+            en: "gets out (so that it gets out)"
+            f: "3sg.pres.subj.clitic"
+          - form: "se escapó"
+            en: "got out, escaped"
+            f: "3sg.pret.ind.clitic"
+          - form: "escape"
+            f: "3sg.pres.subj"
+            bound: true
+          - form: "escapó"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "persiana"
+        pos: "noun"
+        en: "roller blind, shutter"
+        forms:
+          - form: "persiana"
+            f: "f.sg"
+          - form: "persianas"
+            f: "f.pl"
+      - lemma: "alarma"
+        pos: "noun"
+        en: "alarm"
+
+  - ordinal: 5
     slug: "ya-habia"
     title: "Tell what had already happened"
     summary: "Cuando llegué, ya se había ido"
@@ -184,14 +356,10 @@ units:
             f: "2sg.impf.ind.vos"
       - lemma: "irse"
         pos: "verb"
-        en: "to leave, to go away"
         forms:
           - form: "se había ido"
             en: "had left"
             f: "3sg.impf.ind.clitic"
-          - form: "me voy"
-            en: "I'm off, I'm leaving"
-            f: "1sg.pres.ind.clitic"
           - form: "se fue"
             en: "he left, she left"
             f: "3sg.pret.ind.clitic.irregular"
@@ -232,7 +400,102 @@ units:
             en: "left, gone out"
             f: "part"
 
-  - ordinal: 4
+  - ordinal: 6
+    slug: "nunca-habia"
+    title: "Say you'd never done it before"
+    summary: "Nunca había probado algo así"
+    grammar:
+      - "pluscuamperfecto"
+      - "participios"
+    register_max: "informal"
+    sample:
+      es: "Nunca había probado algo así."
+      en: "I'd never tried anything like it."
+    tips:
+      - title: "Nunca había…"
+        body: "A first time is told with **nunca había** + a participle: **nunca había probado el dulce de
+          leche** — *I'd never tried dulce de leche* (until that day). **Por primera vez** is the other
+          half: **lo probé por primera vez en Buenos Aires**."
+      - title: "Habíamos"
+        body: "With your friends it's **habíamos**: **ya habíamos terminado cuando llegaste**. The whole
+          set is now *había, habías, habíamos, habían* — and the participle never changes."
+      - title: "Nobody told me"
+        body: "**No me habían avisado** — *nobody had told me*; **ya lo había llamado** — *I'd already
+          called him*. One more irregular participle: *escribir* → **escrito**."
+    words:
+      - lemma: "haber"
+        pos: "verb"
+        forms:
+          - form: "habíamos"
+            en: "we had (done)"
+            f: "1pl.impf.ind"
+      - lemma: "probar"
+        pos: "verb"
+        forms:
+          - form: "probado"
+            en: "tasted, tried out"
+            f: "part"
+      - lemma: "estar"
+        pos: "verb"
+        forms:
+          - form: "estado"
+            en: "been"
+            f: "part"
+      - lemma: "empezar"
+        pos: "verb"
+        forms:
+          - form: "empezado"
+            en: "started"
+            f: "part"
+      - lemma: "terminar"
+        pos: "verb"
+        forms:
+          - form: "terminado"
+            en: "finished"
+            f: "part"
+      - lemma: "escuchar"
+        pos: "verb"
+        forms:
+          - form: "escuchado"
+            en: "heard, listened to"
+            f: "part"
+      - lemma: "escribir"
+        pos: "verb"
+        forms:
+          - form: "escrito"
+            en: "written"
+            f: "part.irregular"
+      - lemma: "llamar"
+        pos: "verb"
+        forms:
+          - form: "llamado"
+            en: "called"
+            f: "part"
+      - lemma: "avisar"
+        pos: "verb"
+        forms:
+          - form: "avisado"
+            en: "let know"
+            f: "part"
+      - lemma: "así"
+        pos: "adv"
+        en: "like this, like that"
+      - lemma: "vez"
+        pos: "noun"
+        en: "time (occasion)"
+        forms:
+          - form: "vez"
+            f: "f.sg"
+          - form: "veces"
+            f: "f.pl"
+      - lemma: "por primera vez"
+        pos: "phrase"
+        en: "for the first time"
+      - lemma: "dulce de leche"
+        pos: "noun"
+        en: "dulce de leche, milk caramel"
+
+  - ordinal: 7
     slug: "practica-se-me-olvido"
     title: "Practice: accidents and what had happened"
     summary: "Se me olvidó que ya había salido"
@@ -263,7 +526,43 @@ units:
       - "gustaría"
       - "llegues"
 
-  - ordinal: 5
+  - ordinal: 8
+    slug: "practica-nunca-habia"
+    title: "Practice: mishaps, favours and first times"
+    summary: "Se nos acabó el café, ¡qué desastre!"
+    grammar:
+      - "repaso.se-accidental"
+      - "repaso.para-que"
+      - "repaso.pluscuamperfecto"
+    register_max: "informal"
+    sample:
+      es: "Nunca había probado el dulce de leche."
+      en: "I'd never tried dulce de leche."
+    tips:
+      - title: "Se me, se nos"
+        body: "The verb agrees with the thing: **se me cayó la taza**, **se me cayeron las llaves**. The
+          middle word is who it happened to: **se nos acabó el café**."
+      - title: "Para que, nunca había"
+        body: "**Te dejo la llave para que entres** — someone else's action takes the subjunctive. **Nunca
+          había probado algo así** — one past before another."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "se me quemó"
+      - "se nos acabó"
+      - "se me cayeron"
+      - "culpa"
+      - "entres"
+      - "riegues"
+      - "sin que"
+      - "habíamos"
+      - "probado"
+      - "por primera vez"
+      - "así"
+      - "me olvidé"
+      - "vengas"
+      - "iba"
+
+  - ordinal: 9
     slug: "el-partido"
     title: "Talk about football"
     summary: "¿Viste el partido?"
@@ -283,23 +582,13 @@ units:
     words:
       - lemma: "ganar"
         pos: "verb"
-        en: "to win, to earn"
         forms:
-          - form: "ganamos"
-            en: "we won"
-            f: "1pl.pret.ind"
-          - form: "ganó"
-            en: "won (he/she won)"
-            f: "3sg.pret.ind"
           - form: "gano"
             en: "I earn"
             f: "1sg.pres.ind"
       - lemma: "perder"
         pos: "verb"
         forms:
-          - form: "perdimos"
-            en: "we lost"
-            f: "1pl.pret.ind"
           - form: "perdió"
             en: "lost (he/she lost)"
             f: "3sg.pret.ind"
@@ -338,7 +627,100 @@ units:
             en: "played"
             f: "3sg.pret.ind"
 
-  - ordinal: 6
+  - ordinal: 10
+    slug: "la-final"
+    title: "Watch the final with the whole bar"
+    summary: "¡Salimos campeones!"
+    grammar:
+      - "deportes"
+      - "preterito.ganar-perder"
+      - "preterito.plural"
+    register_max: "informal"
+    sample:
+      es: "¡Ganamos la final por penales!"
+      en: "We won the final on penalties!"
+    tips:
+      - title: "Ellos ganaron"
+        body: "The other team is *they*: **ganaron**, **perdieron**, **empataron**. Yours is always *we*,
+          from the bar or the sofa: **¡salimos campeones!**"
+      - title: "Penales"
+        body: "A **final** that ends level goes to **penales**: the **arquero atajó** one, somebody
+          **metió** the last, and the whole city is out in the street in the **camiseta**. A great goal
+          is a **golazo**."
+    words:
+      - lemma: "ganar"
+        pos: "verb"
+        forms:
+          - form: "ganaron"
+            en: "they won"
+            f: "3pl.pret.ind"
+      - lemma: "perder"
+        pos: "verb"
+        forms:
+          - form: "perdieron"
+            en: "they lost"
+            f: "3pl.pret.ind"
+      - lemma: "empatar"
+        pos: "verb"
+        forms:
+          - form: "empataron"
+            en: "they drew"
+            f: "3pl.pret.ind"
+      - lemma: "jugar"
+        pos: "verb"
+        forms:
+          - form: "juegan"
+            en: "they play"
+            f: "3pl.pres.ind.irregular"
+      - lemma: "final"
+        pos: "noun"
+        en: "title match, last game of a cup"
+        note: "la final — the final of a tournament"
+      - lemma: "penal"
+        pos: "noun"
+        en: "penalty (kick)"
+        forms:
+          - form: "penal"
+            f: "m.sg"
+          - form: "penales"
+            f: "m.pl"
+      - lemma: "arquero"
+        pos: "noun"
+        en: "goalkeeper"
+      - lemma: "árbitro"
+        pos: "noun"
+        en: "referee"
+      - lemma: "camiseta"
+        pos: "noun"
+        en: "(team) shirt, jersey"
+      - lemma: "campeón"
+        pos: "noun"
+        en: "champion"
+        forms:
+          - form: "campeón"
+            f: "m.sg"
+          - form: "campeones"
+            f: "m.pl"
+      - lemma: "meter"
+        pos: "verb"
+        en: "to put in, to score"
+        forms:
+          - form: "metió"
+            en: "scored, put in"
+            f: "3sg.pret.ind"
+      - lemma: "atajar"
+        pos: "verb"
+        en: "to save (a shot), to stop"
+        forms:
+          - form: "atajó"
+            en: "saved (he/she saved)"
+            f: "3sg.pret.ind"
+      - lemma: "golazo"
+        pos: "noun"
+        en: "great goal, screamer"
+        register: "informal"
+
+  - ordinal: 11
     slug: "no-anda"
     title: "Complain when something doesn't work"
     summary: "No anda el wifi"
@@ -388,17 +770,94 @@ units:
           - form: "reclamé"
             en: "I complained (formally)"
             f: "1sg.pret.ind"
-      - lemma: "wifi"
-        pos: "noun"
-        en: "wifi"
-      - lemma: "ascensor"
-        pos: "noun"
-        en: "elevator"
-      - lemma: "luz"
-        pos: "noun"
-        en: "power, electricity, light"
 
-  - ordinal: 7
+  - ordinal: 12
+    slug: "el-tecnico"
+    title: "Get something fixed"
+    summary: "El aire no anda y hace un calor…"
+    grammar:
+      - "quejas"
+      - "andar.funcionar"
+    register_max: "informal"
+    sample:
+      es: "El aire no anda y el técnico no viene."
+      en: "The air conditioning isn't working and the repairman isn't coming."
+    tips:
+      - title: "Anda, andan, anduvo"
+        body: "One machine **anda**, two **andan**: **no andan las pilas**. The past is irregular:
+          **ayer anduvo bien** — *it worked fine yesterday*. **Funciona**, **funcionan** mean the same,
+          a bit more formal — the technician's word."
+      - title: "Arreglar"
+        body: "**¿Me lo podés arreglar?** — *can you fix it for me?* When the **técnico** has been: **lo
+          arregló en cinco minutos**. When he hasn't, **hacés un reclamo**, and **nos quejamos** all
+          summer."
+    words:
+      - lemma: "andar"
+        pos: "verb"
+        forms:
+          - form: "andan"
+            en: "work (they work)"
+            f: "3pl.pres.ind"
+          - form: "anduvo"
+            en: "worked (it worked)"
+            f: "3sg.pret.ind.irregular"
+      - lemma: "funcionar"
+        pos: "verb"
+        en: "to run, to be working (a machine, a service)"
+        forms:
+          - form: "funciona"
+            en: "is working, runs"
+            f: "3sg.pres.ind"
+          - form: "funcionan"
+            en: "are working, run"
+            f: "3pl.pres.ind"
+      - lemma: "arreglar"
+        pos: "verb"
+        en: "to fix, to repair"
+        forms:
+          - form: "arreglar"
+            f: "inf"
+          - form: "arregló"
+            en: "fixed"
+            f: "3sg.pret.ind"
+      - lemma: "quejarse"
+        pos: "verb"
+        forms:
+          - form: "nos quejamos"
+            en: "we complain"
+            f: "1pl.pres.ind.clitic"
+          - form: "quejamos"
+            f: "1pl.pres.ind"
+            bound: true
+      - lemma: "técnico"
+        pos: "noun"
+        en: "repairman, technician"
+      - lemma: "aire"
+        pos: "noun"
+        en: "air, air conditioning"
+      - lemma: "ventilador"
+        pos: "noun"
+        en: "electric fan"
+      - lemma: "control"
+        pos: "noun"
+        en: "remote"
+        note: "el control — the TV or air-conditioning remote"
+      - lemma: "pila"
+        pos: "noun"
+        en: "battery (AA)"
+        forms:
+          - form: "pila"
+            f: "f.sg"
+          - form: "pilas"
+            f: "f.pl"
+      - lemma: "enchufe"
+        pos: "noun"
+        en: "plug, socket"
+      - lemma: "reclamo"
+        pos: "noun"
+        en: "formal complaint (to a company)"
+
+  - ordinal: 13
     slug: "de-acuerdo"
     title: "Agree and disagree"
     summary: "Para nada"
@@ -431,20 +890,77 @@ units:
       - lemma: "en parte"
         pos: "phrase"
         en: "partly"
-      - lemma: "puede ser"
-        pos: "phrase"
-        en: "could be, maybe"
       - lemma: "opinión"
         pos: "noun"
         en: "opinion"
-      - lemma: "eso"
-        pos: "pron"
-        en: "that"
-      - lemma: "esto"
-        pos: "pron"
-        en: "this"
 
-  - ordinal: 8
+  - ordinal: 14
+    slug: "tenes-razon"
+    title: "Take sides in an argument"
+    summary: "Para mí, tenés razón"
+    grammar:
+      - "acuerdo-desacuerdo"
+      - "opinion"
+    register_max: "informal"
+    sample:
+      es: "Para mí, tenés razón, pero no exageres."
+      en: "I think you're right, but don't exaggerate."
+    tips:
+      - title: "Picking a side"
+        body: "All the way with you: **exacto**, **coincido**, **sin duda**. All the way against:
+          **al contrario**. And for the friend who goes too far: **¡no exageres!**"
+      - title: "¿Vos qué opinás?"
+        body: "**Opinar** is having a view: **¿vos qué opinás?** — *what do you think?*; **yo opino
+          que…**. **Para mí** starts half the sentences at a porteño table: **para mí, depende del
+          tema**."
+    words:
+      - lemma: "opinar"
+        pos: "verb"
+        en: "to think, to have an opinion"
+        forms:
+          - form: "opino"
+            en: "my view is"
+            f: "1sg.pres.ind"
+          - form: "opinás"
+            en: "your view is"
+            f: "2sg.pres.ind.vos"
+      - lemma: "para mí"
+        pos: "phrase"
+        en: "in my opinion, if you ask me"
+      - lemma: "exacto"
+        pos: "interj"
+        en: "precisely, spot on"
+      - lemma: "sin duda"
+        pos: "phrase"
+        en: "no doubt, without a doubt"
+      - lemma: "al contrario"
+        pos: "phrase"
+        en: "on the contrary"
+      - lemma: "coincidir"
+        pos: "verb"
+        en: "to agree, to see eye to eye"
+        forms:
+          - form: "coincido"
+            en: "I agree"
+            f: "1sg.pres.ind"
+      - lemma: "exagerar"
+        pos: "verb"
+        en: "to exaggerate, to overdo it"
+        forms:
+          - form: "exagerás"
+            en: "you exaggerate"
+            f: "2sg.pres.ind.vos"
+          - form: "exageres"
+            en: "(don't) exaggerate"
+            f: "2sg.pres.subj.vos"
+      - lemma: "tema"
+        pos: "noun"
+        en: "topic, subject, issue"
+      - lemma: "discusión"
+        pos: "noun"
+        en: "argument, discussion"
+
+  - ordinal: 15
     slug: "practica-depende"
     title: "Practice: football, complaints and opinions"
     summary: "Depende de cómo juegue"
@@ -477,7 +993,44 @@ units:
       - "iría"
       - "vengas"
 
-  - ordinal: 9
+  - ordinal: 16
+    slug: "practica-tenes-razon"
+    title: "Practice: the final, repairs and arguments"
+    summary: "Para mí, el arquero fue el mejor"
+    grammar:
+      - "repaso.deportes"
+      - "repaso.quejas"
+      - "repaso.acuerdo"
+    register_max: "informal"
+    sample:
+      es: "Ayer anduvo bien, pero hoy no anda."
+      en: "It worked fine yesterday, but today it isn't working."
+    tips:
+      - title: "Ganaron, anduvo"
+        body: "*They* in the past: **ganaron**, **perdieron**, **empataron**. The machine that let you
+          down: **ayer anduvo**, **hoy no anda**."
+      - title: "Para mí"
+        body: "**Para mí**, **opino que**, **coincido**, **al contrario** — the whole argument. And the
+          line that ends it: **¡no exageres!**"
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "ganaron"
+      - "perdieron"
+      - "penales"
+      - "arquero"
+      - "metió"
+      - "anduvo"
+      - "arregló"
+      - "funciona"
+      - "técnico"
+      - "opino"
+      - "coincido"
+      - "exagerás"
+      - "equipo"
+      - "festejamos"
+      - "tendrías"
+
+  - ordinal: 17
     slug: "el-cajero"
     title: "Deal with the bank"
     summary: "Voy al cajero"
@@ -515,18 +1068,6 @@ units:
       - lemma: "saldo"
         pos: "noun"
         en: "balance"
-      - lemma: "sacar"
-        pos: "verb"
-        forms:
-          - form: "saqué"
-            en: "I took out, I got"
-            f: "1sg.pret.ind"
-      - lemma: "esperar"
-        pos: "verb"
-        forms:
-          - form: "esperar"
-            en: "to wait"
-            f: "inf"
       - lemma: "cuenta"
         pos: "noun"
         forms:
@@ -540,7 +1081,82 @@ units:
             en: "to buy"
             f: "inf"
 
-  - ordinal: 10
+  - ordinal: 18
+    slug: "pasame-el-alias"
+    title: "Pay and get paid"
+    summary: "Pasame el alias y te transfiero"
+    grammar:
+      - "banco"
+      - "transferir"
+    register_max: "informal"
+    sample:
+      es: "Pasame el alias y te transfiero."
+      en: "Send me your alias and I'll transfer it to you."
+    tips:
+      - title: "El alias"
+        body: "Every account has an **alias** — a few words instead of a long number — and paying a
+          friend is **pasame el alias** and **te transfiero**. After: **mandame el comprobante**."
+      - title: "Transfirió"
+        body: "*Transferir* changes its stem in the past for *él*: **transfirió**. With vos it doesn't:
+          **¿me transferiste?** Asking for it: **transferime**."
+      - title: "Se me bloqueó"
+        body: "The bank has its own accidents: **se me bloqueó la tarjeta**, **se me venció la
+          tarjeta**. Same *se me* as a dropped glass."
+    words:
+      - lemma: "transferir"
+        pos: "verb"
+        forms:
+          - form: "transfirió"
+            en: "transferred (he/she transferred)"
+            f: "3sg.pret.ind.irregular"
+          - form: "transferiste"
+            en: "you transferred"
+            f: "2sg.pret.ind.vos"
+          - form: "transferime"
+            en: "transfer me"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "alias"
+        pos: "noun"
+        en: "account nickname (for transfers)"
+        note: "el alias — the words that stand in for a bank account number"
+      - lemma: "comprobante"
+        pos: "noun"
+        en: "receipt, proof of payment"
+      - lemma: "clave"
+        pos: "noun"
+        en: "PIN, code (of a card)"
+      - lemma: "comisión"
+        pos: "noun"
+        en: "fee, commission"
+      - lemma: "QR"
+        pos: "noun"
+        en: "scan-to-pay code"
+        note: "pagar con QR — paying by scanning a code with your phone"
+      - lemma: "sucursal"
+        pos: "noun"
+        en: "branch (of a bank or shop)"
+      - lemma: "bloquearse"
+        pos: "verb"
+        en: "to get blocked"
+        forms:
+          - form: "se me bloqueó"
+            en: "got blocked on me"
+            f: "3sg.pret.ind.clitic"
+          - form: "bloqueó"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "vencerse"
+        pos: "verb"
+        en: "to expire"
+        forms:
+          - form: "se me venció"
+            en: "expired on me"
+            f: "3sg.pret.ind.clitic"
+          - form: "venció"
+            f: "3sg.pret.ind"
+            bound: true
+
+  - ordinal: 19
     slug: "que-susto"
     title: "Tell about a scare"
     summary: "¡Qué susto!"
@@ -556,9 +1172,6 @@ units:
         body: "**Me da miedo** — *it scares me* — works like *gustar*; in a story it's **me dio miedo**. The
           reaction afterwards: **¡qué susto!**"
     words:
-      - lemma: "miedo"
-        pos: "noun"
-        en: "fear"
       - lemma: "susto"
         pos: "noun"
         en: "fright, scare"
@@ -571,9 +1184,6 @@ units:
           - form: "me dio"
             en: "gave me"
             f: "3sg.pret.ind.clitic.irregular"
-      - lemma: "ruido"
-        pos: "noun"
-        en: "noise"
       - lemma: "escuchar"
         pos: "verb"
         forms:
@@ -590,19 +1200,118 @@ units:
             f: "f.sg"
       - lemma: "correr"
         pos: "verb"
-        en: "to run"
         forms:
           - form: "corrí"
             en: "I ran"
             f: "1sg.pret.ind"
-      - lemma: "perdón"
-        pos: "interj"
-        en: "sorry"
       - lemma: "uy"
         pos: "interj"
         en: "oh no, whoa"
 
-  - ordinal: 11
+  - ordinal: 20
+    slug: "me-dan-asco"
+    title: "Say what gives you the creeps"
+    summary: "Me dan asco las cucarachas"
+    grammar:
+      - "miedo"
+      - "relato.susto"
+    register_max: "informal"
+    sample:
+      es: "Me dan asco las cucarachas."
+      en: "Cockroaches disgust me."
+    tips:
+      - title: "Me da, me dan"
+        body: "Like *gustar*, the scary thing is the subject. One: **me da asco la cucaracha**; more than
+          one: **me dan asco las cucarachas**, **me dan miedo las arañas**."
+      - title: "¿Te dio miedo?"
+        body: "In the story it's the past: **¿te dio miedo?** — **no, me dio risa**. **Me da
+          vergüenza** — *I'm embarrassed* — is built the same way."
+      - title: "The summer visitor"
+        body: "A hot night, a **cucaracha** in the kitchen, and it **vuela**: **grité**, **salté**, and
+          in the end **la maté** with an **ojota**. Every porteño has this story."
+    words:
+      - lemma: "dar"
+        pos: "verb"
+        forms:
+          - form: "me dan"
+            en: "give me (they give me)"
+            f: "3pl.pres.ind.clitic"
+          - form: "te da"
+            en: "gives you"
+            f: "3sg.pres.ind.clitic"
+          - form: "te dio"
+            en: "gave you"
+            f: "3sg.pret.ind.clitic.irregular"
+      - lemma: "asco"
+        pos: "noun"
+        en: "disgust"
+      - lemma: "vergüenza"
+        pos: "noun"
+        en: "embarrassment, shame"
+      - lemma: "risa"
+        pos: "noun"
+        en: "laughter"
+      - lemma: "cucaracha"
+        pos: "noun"
+        en: "cockroach"
+        forms:
+          - form: "cucaracha"
+            f: "f.sg"
+          - form: "cucarachas"
+            f: "f.pl"
+      - lemma: "araña"
+        pos: "noun"
+        en: "spider"
+        forms:
+          - form: "araña"
+            f: "f.sg"
+          - form: "arañas"
+            f: "f.pl"
+      - lemma: "bicho"
+        pos: "noun"
+        en: "bug, creepy-crawly"
+        forms:
+          - form: "bicho"
+            f: "m.sg"
+          - form: "bichos"
+            f: "m.pl"
+      - lemma: "gritar"
+        pos: "verb"
+        forms:
+          - form: "grité"
+            en: "I screamed, I shouted"
+            f: "1sg.pret.ind"
+      - lemma: "saltar"
+        pos: "verb"
+        en: "to jump"
+        forms:
+          - form: "salté"
+            en: "I jumped"
+            f: "1sg.pret.ind"
+      - lemma: "matar"
+        pos: "verb"
+        en: "to kill"
+        forms:
+          - form: "maté"
+            en: "I killed"
+            f: "1sg.pret.ind"
+      - lemma: "volar"
+        pos: "verb"
+        en: "to fly"
+        forms:
+          - form: "vuela"
+            en: "flies"
+            f: "3sg.pres.ind.irregular"
+      - lemma: "ojota"
+        pos: "noun"
+        en: "flip-flop"
+        forms:
+          - form: "ojota"
+            f: "f.sg"
+          - form: "ojotas"
+            f: "f.pl"
+
+  - ordinal: 21
     slug: "costumbres"
     title: "Learn the local customs"
     summary: "La previa y la sobremesa"
@@ -639,12 +1348,6 @@ units:
       - lemma: "previa"
         pos: "noun"
         en: "pregame, pre-party"
-      - lemma: "sobremesa"
-        pos: "noun"
-        en: "after-dinner chat"
-      - lemma: "costumbre"
-        pos: "noun"
-        en: "custom, habit"
       - lemma: "normal"
         pos: "adj"
         en: "normal"
@@ -657,7 +1360,86 @@ units:
           - form: "rara"
             f: "f.sg"
 
-  - ordinal: 12
+  - ordinal: 22
+    slug: "se-aplaude-al-asador"
+    title: "Get invited to an asado"
+    summary: "Se aplaude al asador"
+    grammar:
+      - "costumbres"
+      - "se-impersonal"
+    register_max: "informal"
+    sample:
+      es: "En un asado se aplaude al asador."
+      en: "At an asado, everyone applauds the one who grilled."
+    tips:
+      - title: "What people do"
+        body: "Same **se** + the *él* form: at an asado **se trae algo** — wine, ice, dessert; **se pone
+          la mesa** while the **asador** handles the **fuego**; **se come** when he says so, **chorizo**
+          first."
+      - title: "Un aplauso para el asador"
+        body: "At the end **se aplaude al asador**: *¡un aplauso para el asador!* **Se brinda** with
+          everyone at the table. Leaving without saying goodbye to each person? Very **maleducado**."
+    words:
+      - lemma: "aplaudir"
+        pos: "verb"
+        en: "to clap, to applaud"
+        forms:
+          - form: "aplaude"
+            en: "claps (people clap)"
+            f: "3sg.pres.ind"
+          - form: "aplaudir"
+            f: "inf"
+      - lemma: "aplauso"
+        pos: "noun"
+        en: "round of applause"
+      - lemma: "asador"
+        pos: "noun"
+        en: "the one who grills (at an asado)"
+      - lemma: "brindar"
+        pos: "verb"
+        forms:
+          - form: "brinda"
+            en: "toasts (people toast)"
+            f: "3sg.pres.ind"
+      - lemma: "traer"
+        pos: "verb"
+        forms:
+          - form: "trae"
+            en: "brings (people bring)"
+            f: "3sg.pres.ind.irregular"
+      - lemma: "poner"
+        pos: "verb"
+        forms:
+          - form: "pone"
+            en: "puts, sets (people set)"
+            f: "3sg.pres.ind.irregular"
+      - lemma: "chorizo"
+        pos: "noun"
+        en: "sausage"
+      - lemma: "fuego"
+        pos: "noun"
+        en: "fire"
+      - lemma: "típico"
+        pos: "adj"
+        en: "typical"
+        forms:
+          - form: "típico"
+            f: "m.sg"
+          - form: "típica"
+            f: "f.sg"
+      - lemma: "maleducado"
+        pos: "adj"
+        en: "rude, bad-mannered"
+        forms:
+          - form: "maleducado"
+            f: "m.sg"
+          - form: "maleducada"
+            f: "f.sg"
+      - lemma: "tradición"
+        pos: "noun"
+        en: "tradition"
+
+  - ordinal: 23
     slug: "practica-que-susto"
     title: "Practice: the bank, a scare and the customs"
     summary: "¡Qué susto me diste!"
@@ -690,7 +1472,125 @@ units:
       - "había"
       - "sea"
 
-  - ordinal: 13
+  - ordinal: 24
+    slug: "practica-un-aplauso"
+    title: "Practice: paying, bugs and the asado"
+    summary: "¡Un aplauso para el asador!"
+    grammar:
+      - "repaso.banco"
+      - "repaso.relato"
+      - "repaso.costumbres"
+    register_max: "informal"
+    sample:
+      es: "Te transferí la plata, mandame el comprobante."
+      en: "I transferred you the money, send me the receipt."
+    tips:
+      - title: "Me dan"
+        body: "**Me da asco la cucaracha**, **me dan asco las cucarachas** — the verb follows the thing.
+          In the story: **¿te dio miedo?** — **no, me dio risa**."
+      - title: "Se trae, se aplaude"
+        body: "What everyone does at an asado: **se trae algo**, **se brinda**, **se aplaude al
+          asador**. **Se** + the *él* form, no subject needed."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "alias"
+      - "comprobante"
+      - "transfirió"
+      - "se me bloqueó"
+      - "me dan"
+      - "cucarachas"
+      - "grité"
+      - "vergüenza"
+      - "aplaude"
+      - "asador"
+      - "trae"
+      - "maleducado"
+      - "pagué"
+      - "débito"
+      - "me asusté"
+
+  - ordinal: 25
+    slug: "no-sabes-lo-que-me-contaron"
+    title: "Pass on the latest scandal"
+    summary: "No sabés lo que me contaron"
+    grammar:
+      - "chisme"
+      - "lo-que"
+    register_max: "informal"
+    sample:
+      es: "No sabés lo que me contaron de Juan."
+      en: "You won't believe what they told me about Juan."
+    tips:
+      - title: "Lo que, the hook"
+        body: "**No sabés lo que me contaron** — *you won't believe what I heard* — is how every chisme
+          starts. **Lo que** carries the whole story: **todo lo que pasó**, **lo que me dijo**."
+      - title: "The reactions"
+        body: "**¡No me digas!** — *no way!*; **¡callate!** — between friends it isn't rude, it means
+          *you're kidding!* And by the afternoon **todo el mundo** knows."
+    words:
+      - lemma: "chisme"
+        pos: "noun"
+        en: "piece of gossip"
+        forms:
+          - form: "chisme"
+            f: "m.sg"
+          - form: "chismes"
+            f: "m.pl"
+      - lemma: "no me digas"
+        pos: "phrase"
+        en: "you don't say, you're kidding"
+      - lemma: "callarse"
+        pos: "verb"
+        en: "to be quiet"
+        register: "informal"
+        forms:
+          - form: "callate"
+            en: "shut up; you're kidding!"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "todo el mundo"
+        pos: "phrase"
+        en: "everybody"
+      - lemma: "engañar"
+        pos: "verb"
+        en: "to cheat on, to deceive"
+        forms:
+          - form: "engañó"
+            en: "cheated on (he/she cheated on)"
+            f: "3sg.pret.ind"
+          - form: "engañaba"
+            en: "was cheating on (he/she was cheating on)"
+            f: "sg.impf.ind"
+      - lemma: "a escondidas"
+        pos: "phrase"
+        en: "secretly, behind someone's back"
+      - lemma: "sospechar"
+        pos: "verb"
+        en: "to suspect"
+        forms:
+          - form: "sospechaba"
+            en: "suspected (I/he/she suspected)"
+            f: "sg.impf.ind"
+      - lemma: "descubrir"
+        pos: "verb"
+        en: "to find out, to discover"
+        forms:
+          - form: "descubrió"
+            en: "found out (he/she found out)"
+            f: "3sg.pret.ind"
+      - lemma: "cortar"
+        pos: "verb"
+        forms:
+          - form: "cortaron"
+            en: "they broke up"
+            f: "3pl.pret.ind"
+      - lemma: "volver"
+        pos: "verb"
+        forms:
+          - form: "volvieron"
+            en: "they came back, they got back together"
+            f: "3pl.pret.ind"
+
+  - ordinal: 26
     slug: "viste-lo-que-paso"
     title: "Catch up on the gossip"
     summary: "¿Viste lo que pasó?"
@@ -720,9 +1620,6 @@ units:
         pos: "noun"
         en: "gossip (person)"
         register: "informal"
-      - lemma: "quién"
-        pos: "pron"
-        en: "who"
       - lemma: "cuál"
         pos: "pron"
         en: "which, what"

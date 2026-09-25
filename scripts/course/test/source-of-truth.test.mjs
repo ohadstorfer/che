@@ -101,24 +101,24 @@ test('a new unit in a new section file is added, and nothing else', () => {
     `section: {id: ${NEXT_SECTION}, slug: prueba, title: Test, cefr: A2.1}
 units:
   - ordinal: 1
-    slug: prueba-pileta
-    title: At the pool
-    summary: La pileta
+    slug: prueba-lancha
+    title: On the river
+    summary: La lancha
     grammar: [g]
     register_max: informal
-    tips: [{title: Pools, body: "In Argentina it's *la pileta*."}]
+    tips: [{title: Boats, body: "In the Tigre delta you get around by *lancha*."}]
     words:
-      - {lemma: pileta, pos: noun, en: swimming pool, forms: [{form: pileta, f: f.sg}]}
-      - {lemma: nadar, pos: verb, en: to swim, forms: [{form: nado, f: 1sg.pres.ind}]}
+      - {lemma: lancha, pos: noun, en: motorboat, forms: [{form: lancha, f: f.sg}]}
+      - {lemma: remar, pos: verb, en: to row, forms: [{form: remo, f: 1sg.pres.ind}]}
 `,
   );
   const withNew = buildRows({ publishThrough: 2, paths: [...SECTION_PATHS, path] });
   const plan = planSeed(withNew, asDatabase(built));
   assert.deepEqual(plan.insert.sections.map((s) => s.id), [NEXT_SECTION]);
-  assert.deepEqual(plan.insert.units.map((u) => u.slug), ['prueba-pileta']);
+  assert.deepEqual(plan.insert.units.map((u) => u.slug), ['prueba-lancha']);
   assert.equal(plan.insert.units[0].status, 'draft');
-  assert.deepEqual(plan.insert.forms.map((f) => f.form).sort(), ['nado', 'pileta']);
-  assert.deepEqual(plan.insert.lemmas.map((l) => l.lemma).sort(), ['nadar', 'pileta']);
+  assert.deepEqual(plan.insert.forms.map((f) => f.form).sort(), ['lancha', 'remo']);
+  assert.deepEqual(plan.insert.lemmas.map((l) => l.lemma).sort(), ['lancha', 'remar']);
   assert.equal(plan.insert.tips.length, 1);
   assert.ok(plan.insert.lessons.length >= 2);
   assert.deepEqual([plan.insert.sentences, plan.insert.lesson_slots, plan.insert.story_lines, plan.insert.unit_phrases].map((r) => r.length), [0, 0, 0, 0]);
@@ -135,7 +135,7 @@ test('a new unit whose place in the course is taken is skipped, with its words',
     path,
     `section: {id: ${NEXT_SECTION}, slug: dup, title: Dup, cefr: A2.1}
 units:
-  - {ordinal: 1, slug: late, title: Late, summary: Late, grammar: [g], register_max: informal, tips: [{title: T, body: B}], words: [{lemma: pileta, pos: noun, en: pool}]}
+  - {ordinal: 1, slug: late, title: Late, summary: Late, grammar: [g], register_max: informal, tips: [{title: T, body: B}], words: [{lemma: lancha, pos: noun, en: motorboat}]}
 `,
   );
   const withNew = buildRows({ publishThrough: 2, paths: [...SECTION_PATHS, path] });

@@ -44,14 +44,6 @@ units:
       - lemma: "presupuesto"
         pos: "noun"
         en: "budget; quote"
-      - lemma: "cliente"
-        pos: "noun"
-        en: "client, customer"
-        forms:
-          - form: "cliente"
-            f: "sg"
-          - form: "clientes"
-            f: "pl"
       - lemma: "entregar"
         pos: "verb"
         en: "to hand in, to deliver"
@@ -71,6 +63,89 @@ units:
             f: "m.pl"
 
   - ordinal: 2
+    slug: "sobre-la-hora"
+    title: "Move a deadline"
+    summary: "Postergaron la fecha: entregamos el lunes"
+    grammar:
+      - "laburo.proyecto"
+    register_max: "informal"
+    sample:
+      es: "Entregamos el informe sobre la hora."
+      en: "We handed in the report right at the deadline."
+    tips:
+      - title: "Entregamos, entregaste"
+        body: "The **plazo** moves: they **postergaron la fecha** — *pushed the date back* — or, worse,
+          **la adelantaron**. Then it's **horas extra** until **entregamos** — *we handed it in*. And the
+          boss asks: **¿ya lo entregaste?**"
+      - title: "Sobre la hora"
+        body: "**Sobre la hora** — *right at the deadline, with seconds to spare* — is how most porteño
+          projects get done. First a **borrador** — *a draft* — then you **corregir** it, and only then
+          the **informe** or the **presentación**. **¿Avanzaron?** — *any progress?*"
+    words:
+      - lemma: "entregar"
+        pos: "verb"
+        forms:
+          - form: "entregamos"
+            en: "we handed in"
+            f: "1pl.pret.ind"
+          - form: "entregaste"
+            en: "you handed in"
+            f: "2sg.pret.ind.vos"
+      - lemma: "informe"
+        pos: "noun"
+        en: "report"
+      - lemma: "presentación"
+        pos: "noun"
+        en: "presentation"
+      - lemma: "borrador"
+        pos: "noun"
+        en: "draft"
+      - lemma: "corregir"
+        pos: "verb"
+        en: "to correct"
+        forms:
+          - form: "corregir"
+            f: "inf"
+          - form: "corrigió"
+            en: "he corrected, she corrected"
+            f: "3sg.pret.ind"
+      - lemma: "avanzar"
+        pos: "verb"
+        en: "to make progress, to move forward"
+        forms:
+          - form: "avanzar"
+            f: "inf"
+          - form: "avanzaron"
+            en: "they made progress"
+            f: "3pl.pret.ind"
+      - lemma: "postergar"
+        pos: "verb"
+        en: "to postpone, to push back"
+        forms:
+          - form: "postergar"
+            f: "inf"
+          - form: "postergaron"
+            en: "they postponed"
+            f: "3pl.pret.ind"
+      - lemma: "adelantar"
+        pos: "verb"
+        en: "to bring forward"
+        forms:
+          - form: "adelantaron"
+            en: "they brought forward"
+            f: "3pl.pret.ind"
+      - lemma: "fecha"
+        pos: "noun"
+        en: "date (on the calendar)"
+      - lemma: "sobre la hora"
+        pos: "phrase"
+        en: "at the very last minute, right at the deadline"
+        register: "informal"
+      - lemma: "horas extra"
+        pos: "phrase"
+        en: "overtime"
+
+  - ordinal: 3
     slug: "merezco-un-aumento"
     title: "Ask for a raise"
     summary: "Me merezco un aumento"
@@ -139,7 +214,96 @@ units:
           - form: "condiciones"
             f: "f.pl"
 
-  - ordinal: 3
+  - ordinal: 4
+    slug: "se-merece-el-ascenso"
+    title: "Back a colleague for a promotion"
+    summary: "Mi compañera se merece el ascenso"
+    grammar:
+      - "laburo.negociar"
+    register_max: "informal"
+    sample:
+      es: "Mi compañera se merece el ascenso."
+      en: "My coworker deserves the promotion."
+    tips:
+      - title: "Se lo merece, nos lo merecemos"
+        body: "**Merecerse** keeps its pronoun for every person: **me lo merezco**, **te lo merecés**, **se
+          lo merece** — *she deserves it* — **nos lo merecemos** — *we deserve it*. A **gerente** who
+          sees your **responsabilidad** grow should hear it: **se merece el ascenso**."
+      - title: "En blanco, en negro"
+        body: "Before you **negociar**, know what you're owed. A job **en blanco** is *on the books*,
+          with aguinaldo and obra social; **en negro** is *off the books*. And with inflation, the
+          yearly **ajuste** — *the pay adjustment* — is the first thing you **exigir**."
+    words:
+      - lemma: "merecer"
+        pos: "verb"
+        forms:
+          - form: "se lo merece"
+            en: "he deserves it, she deserves it"
+            f: "3sg.pres.ind.clitic"
+          - form: "se merece"
+            en: "he deserves, she deserves"
+            f: "3sg.pres.ind.clitic"
+          - form: "nos lo merecemos"
+            en: "we deserve it"
+            f: "1pl.pres.ind.clitic"
+          - form: "merece"
+            f: "3sg.pres.ind"
+            bound: true
+          - form: "merecemos"
+            f: "1pl.pres.ind"
+            bound: true
+      - lemma: "negociar"
+        pos: "verb"
+        forms:
+          - form: "negocié"
+            en: "I negotiated"
+            f: "1sg.pret.ind"
+      - lemma: "ascenso"
+        pos: "noun"
+        en: "promotion"
+      - lemma: "gerente"
+        pos: "noun"
+        en: "manager"
+      - lemma: "responsabilidad"
+        pos: "noun"
+        en: "responsibility"
+        forms:
+          - form: "responsabilidad"
+            f: "f.sg"
+          - form: "responsabilidades"
+            f: "f.pl"
+      - lemma: "objetivo"
+        pos: "noun"
+        en: "target, aim"
+        forms:
+          - form: "objetivo"
+            f: "m.sg"
+          - form: "objetivos"
+            f: "m.pl"
+      - lemma: "evaluación"
+        pos: "noun"
+        en: "evaluation, appraisal"
+      - lemma: "exigir"
+        pos: "verb"
+        en: "to demand"
+        forms:
+          - form: "exigir"
+            f: "inf"
+          - form: "exige"
+            en: "demands"
+            f: "3sg.pres.ind"
+      - lemma: "ajuste"
+        pos: "noun"
+        en: "pay adjustment (for inflation)"
+      - lemma: "en blanco"
+        pos: "phrase"
+        en: "on the books (a job)"
+      - lemma: "en negro"
+        pos: "phrase"
+        en: "off the books (a job)"
+        register: "informal"
+
+  - ordinal: 5
     slug: "me-cayo-la-ficha"
     title: "Name the feelings porteños name"
     summary: "Recién ahora me cayó la ficha"
@@ -172,7 +336,58 @@ units:
         pos: "phrase"
         en: "I missed out (and still want to)"
 
-  - ordinal: 4
+  - ordinal: 6
+    slug: "me-hace-ruido"
+    title: "Put a gut feeling into words"
+    summary: "Algo de todo esto me hace ruido"
+    grammar:
+      - "sentimientos.expresiones"
+    register_max: "informal"
+    sample:
+      es: "Me quedé helado cuando me enteré."
+      en: "I was stunned when I found out."
+    tips:
+      - title: "Me hace ruido"
+        body: "When something doesn't sit right: **me hace ruido** — *something's off about it* — and
+          **no me cierra** — *it doesn't add up*. Porteños say both about a deal, a story, or a new
+          boyfriend."
+      - title: "Me quedé helado"
+        body: "The same shape as **me cayó la ficha** — the feeling happens *to* you: **me quedé helado**
+          — *I froze, I was stunned*; **me dejó pensando** — *it got me thinking*; **me partió el alma**
+          — *it broke my heart*. The good ones: **me hace bien**, **me da ternura**, and **¡qué
+          alivio!**"
+    words:
+      - lemma: "me hace ruido"
+        pos: "phrase"
+        en: "something's off about it"
+        register: "informal"
+      - lemma: "no me cierra"
+        pos: "phrase"
+        en: "it doesn't add up"
+        register: "informal"
+      - lemma: "me quedé helado"
+        pos: "phrase"
+        en: "I froze, I was stunned"
+      - lemma: "me dejó pensando"
+        pos: "phrase"
+        en: "it got me thinking"
+      - lemma: "me partió el alma"
+        pos: "phrase"
+        en: "it broke my heart"
+      - lemma: "me hace bien"
+        pos: "phrase"
+        en: "it does me good"
+      - lemma: "me da ternura"
+        pos: "phrase"
+        en: "I find it sweet, it melts my heart"
+      - lemma: "qué alivio"
+        pos: "phrase"
+        en: "what a relief"
+      - lemma: "angustia"
+        pos: "noun"
+        en: "distress, anxiety"
+
+  - ordinal: 7
     slug: "practica-la-entrega"
     title: "Practice: work and feelings"
     summary: "Me da cosa plantear lo del aumento"
@@ -209,7 +424,47 @@ units:
       - "tendría que haber"
       - "lo de"
 
-  - ordinal: 5
+  - ordinal: 8
+    slug: "practica-me-hace-ruido"
+    title: "Practice: deadlines, promotions and gut feelings"
+    summary: "Se lo merece, pero algo me hace ruido"
+    grammar:
+      - "repaso.laburo"
+      - "repaso.sentimientos"
+    register_max: "informal"
+    sample:
+      es: "Postergaron la fecha: ¡qué alivio!"
+      en: "They pushed the date back: what a relief!"
+    tips:
+      - title: "Sobre la hora, se lo merece"
+        body: "**Entregamos sobre la hora**, **postergaron la fecha**; **se lo merece**, **nos lo
+          merecemos** — work, every person."
+      - title: "Me hace ruido"
+        body: "**Me hace ruido**, **no me cierra**, **me quedé helado**, **qué alivio** — the gut, in
+          porteño."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "entregamos"
+      - "informe"
+      - "borrador"
+      - "postergaron"
+      - "sobre la hora"
+      - "horas extra"
+      - "se lo merece"
+      - "nos lo merecemos"
+      - "ascenso"
+      - "gerente"
+      - "en negro"
+      - "me hace ruido"
+      - "no me cierra"
+      - "me quedé helado"
+      - "qué alivio"
+      - "reunión"
+      - "sueldo"
+      - "aguinaldo"
+      - "bronca"
+
+  - ordinal: 9
     slug: "recorrer-el-pais"
     title: "Travel the country"
     summary: "Recorrimos la Patagonia en auto"
@@ -236,9 +491,6 @@ units:
           - form: "recorrimos"
             en: "we travelled around"
             f: "1pl.pret.ind"
-      - lemma: "ruta"
-        pos: "noun"
-        en: "highway, route"
       - lemma: "paisaje"
         pos: "noun"
         en: "landscape, scenery"
@@ -261,7 +513,100 @@ units:
         pos: "propn"
         en: "Salta"
 
-  - ordinal: 6
+  - ordinal: 10
+    slug: "acampamos-en-el-sur"
+    title: "Tell about a trip south"
+    summary: "Acampamos al lado de un lago en el sur"
+    grammar:
+      - "viaje.argentina"
+    register_max: "informal"
+    sample:
+      es: "Hicimos dedo hasta Bariloche y acampamos al lado de un lago."
+      en: "We hitchhiked to Bariloche and camped next to a lake."
+    tips:
+      - title: "Acampamos, recorrieron"
+        body: "Travel stories run on the preterite: **acampamos** — *we camped* — **hicimos dedo** — *we
+          hitchhiked* — **¿recorriste el norte?**, **mis viejos recorrieron la costa**. Distances are in
+          **kilómetros**, and in the south there are always more than you thought."
+      - title: "La cordillera"
+        body: "The **cordillera** — *the Andes range* — runs down the whole west: **lagos** and **nieve**
+          in the south, **bodegas** — *wineries* — in Mendoza, red **valles** in Jujuy. A **mochilero**
+          does it all with a backpack and a carpa, down to Ushuaia."
+    words:
+      - lemma: "recorrer"
+        pos: "verb"
+        forms:
+          - form: "recorriste"
+            en: "you travelled around"
+            f: "2sg.pret.ind.vos"
+          - form: "recorrieron"
+            en: "they travelled around"
+            f: "3pl.pret.ind"
+      - lemma: "acampar"
+        pos: "verb"
+        en: "to camp"
+        forms:
+          - form: "acampar"
+            f: "inf"
+          - form: "acampamos"
+            en: "we camped"
+            f: "1pl.pret.ind"
+      - lemma: "hacer dedo"
+        pos: "phrase"
+        en: "to hitchhike"
+        register: "informal"
+        forms:
+          - form: "hacer dedo"
+            f: "inf"
+          - form: "hicimos dedo"
+            en: "we hitchhiked"
+            f: "1pl.pret.ind"
+      - lemma: "mochilero"
+        pos: "noun"
+        en: "backpacker"
+        forms:
+          - form: "mochilero"
+            f: "m.sg"
+          - form: "mochilera"
+            f: "f.sg"
+          - form: "mochileros"
+            f: "m.pl"
+      - lemma: "lago"
+        pos: "noun"
+        en: "lake"
+        forms:
+          - form: "lago"
+            f: "m.sg"
+          - form: "lagos"
+            f: "m.pl"
+      - lemma: "cordillera"
+        pos: "noun"
+        en: "mountain range (the Andes)"
+      - lemma: "nieve"
+        pos: "noun"
+        en: "snow"
+      - lemma: "valle"
+        pos: "noun"
+        en: "valley"
+      - lemma: "bodega"
+        pos: "noun"
+        en: "winery"
+      - lemma: "kilómetro"
+        pos: "noun"
+        en: "kilometer"
+        forms:
+          - form: "kilómetro"
+            f: "m.sg"
+          - form: "kilómetros"
+            f: "m.pl"
+      - lemma: "Ushuaia"
+        pos: "propn"
+        en: "Ushuaia"
+      - lemma: "Jujuy"
+        pos: "propn"
+        en: "Jujuy"
+
+  - ordinal: 11
     slug: "quien-ceba"
     title: "Join the mate round"
     summary: "¿Quién ceba?"
@@ -304,7 +649,97 @@ units:
         pos: "noun"
         en: "metal straw (for mate)"
 
-  - ordinal: 7
+  - ordinal: 12
+    slug: "te-convido-un-mate"
+    title: "Make mate the right way"
+    summary: "¿Te convido un mate? Está recién hecho"
+    grammar:
+      - "cultura.mate"
+    register_max: "informal"
+    sample:
+      es: "¿Te convido un mate con bizcochitos?"
+      en: "Can I offer you a mate with some biscuits?"
+    tips:
+      - title: "Calentá el agua, no la hiervas"
+        body: "The rules of the one who ceba: **calentá el agua** in the pava — *heat the water* — but
+          **no la hiervas**: water that **hierve** burns the yerba. **Yo cebo**, you drink. When there's
+          no taste left, **el mate está lavado** — *washed out* — and it's time to change the yerba."
+      - title: "¿Te convido?"
+        body: "**Convidar** is *to offer, to share what's yours*: **¿te convido un mate?**, **convidame
+          uno**. Afternoon **merienda** means mate with **bizcochitos**, or **tortas fritas** when it
+          rains. A **matero** drinks it all day; kids get **mate cocido**, the tea-bag version."
+    words:
+      - lemma: "cebar"
+        pos: "verb"
+        forms:
+          - form: "cebo"
+            en: "I pour (the mate)"
+            f: "1sg.pres.ind"
+      - lemma: "calentar"
+        pos: "verb"
+        en: "to heat, to warm up"
+        forms:
+          - form: "calentar"
+            f: "inf"
+          - form: "calentá"
+            en: "heat (it)"
+            f: "2sg.imp.vos"
+      - lemma: "hervir"
+        pos: "verb"
+        en: "to boil"
+        forms:
+          - form: "hervir"
+            f: "inf"
+          - form: "hierve"
+            en: "boils"
+            f: "3sg.pres.ind"
+          - form: "hiervas"
+            en: "(don't) boil"
+            f: "2sg.pres.subj.vos"
+      - lemma: "lavado"
+        pos: "adj"
+        en: "washed out (mate)"
+        forms:
+          - form: "lavado"
+            f: "m.sg"
+      - lemma: "convidar"
+        pos: "verb"
+        en: "to offer, to share"
+        forms:
+          - form: "convido"
+            en: "I offer"
+            f: "1sg.pres.ind"
+          - form: "convidame"
+            en: "give me some"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "matero"
+        pos: "adj"
+        en: "mate-loving"
+        forms:
+          - form: "matero"
+            f: "m.sg"
+          - form: "matera"
+            f: "f.sg"
+      - lemma: "mate cocido"
+        pos: "phrase"
+        en: "mate tea (from a tea bag)"
+      - lemma: "merienda"
+        pos: "noun"
+        en: "afternoon snack"
+      - lemma: "bizcochito"
+        pos: "noun"
+        en: "small savory biscuit"
+        forms:
+          - form: "bizcochitos"
+            f: "m.pl"
+      - lemma: "torta frita"
+        pos: "phrase"
+        en: "fried dough cake"
+        forms:
+          - form: "tortas fritas"
+            f: "f.pl"
+
+  - ordinal: 13
     slug: "mis-abuelos-italianos"
     title: "Tell where your family came from"
     summary: "Mis abuelos llegaron en barco"
@@ -322,12 +757,6 @@ units:
         body: "**Era otra época** — *it was a different time*. The **inmigrantes** of the early 20th
           century built the city's **conventillos**, its tango and its accent."
     words:
-      - lemma: "llegar"
-        pos: "verb"
-        forms:
-          - form: "llegaron"
-            en: "they arrived"
-            f: "3pl.pret.ind"
       - lemma: "inmigrante"
         pos: "noun"
         en: "immigrant"
@@ -339,17 +768,9 @@ units:
       - lemma: "barco"
         pos: "noun"
         en: "ship, boat"
-      - lemma: "época"
-        pos: "noun"
-        en: "time, era"
       - lemma: "italiano"
         pos: "adj"
-        en: "Italian"
         forms:
-          - form: "italiano"
-            f: "m.sg"
-          - form: "italiana"
-            f: "f.sg"
           - form: "italianos"
             f: "m.pl"
       - lemma: "bisabuelo"
@@ -368,7 +789,94 @@ units:
         pos: "propn"
         en: "Spain"
 
-  - ordinal: 8
+  - ordinal: 14
+    slug: "se-instalaron-en-la-boca"
+    title: "Trace your family's roots"
+    summary: "Se escaparon de la guerra y se instalaron acá"
+    grammar:
+      - "historia.inmigracion"
+    register_max: "informal"
+    sample:
+      es: "Mi bisabuelo era gallego y se instaló en La Boca."
+      en: "My great-grandfather was Spanish and settled in La Boca."
+    tips:
+      - title: "Se instalaron"
+        body: "The family story runs in the third person plural: **se escaparon de la guerra**, **se
+          instalaron en un conventillo** — *a crowded tenement house* — and **trabajaron en el puerto**.
+          One person: **se instaló**. They left **pobreza** behind and **conservaron** the recipes."
+      - title: "Gallego y la ciudadanía"
+        body: "In Argentina every Spaniard is a **gallego**, from Galicia or not. And the great-grandparents
+          still pay off: half of Buenos Aires is sacando **la ciudadanía** italiana or española. Your
+          **raíces** — *roots* — come with a passport."
+    words:
+      - lemma: "escaparse"
+        pos: "verb"
+        forms:
+          - form: "se escaparon"
+            en: "they escaped, they fled"
+            f: "3pl.pret.ind.clitic"
+          - form: "escaparon"
+            f: "3pl.pret.ind"
+            bound: true
+      - lemma: "instalarse"
+        pos: "verb"
+        en: "to settle"
+        forms:
+          - form: "se instalaron"
+            en: "they settled"
+            f: "3pl.pret.ind.clitic"
+          - form: "se instaló"
+            en: "he settled, she settled"
+            f: "3sg.pret.ind.clitic"
+          - form: "instalaron"
+            f: "3pl.pret.ind"
+            bound: true
+          - form: "instaló"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "conservar"
+        pos: "verb"
+        en: "to keep, to preserve"
+        forms:
+          - form: "conservaron"
+            en: "they kept"
+            f: "3pl.pret.ind"
+      - lemma: "guerra"
+        pos: "noun"
+        en: "war"
+      - lemma: "pobreza"
+        pos: "noun"
+        en: "poverty"
+      - lemma: "puerto"
+        pos: "noun"
+        en: "port"
+      - lemma: "conventillo"
+        pos: "noun"
+        en: "tenement house"
+      - lemma: "gallego"
+        pos: "adj"
+        en: "Spanish (in Argentina: any Spaniard)"
+        forms:
+          - form: "gallego"
+            f: "m.sg"
+          - form: "gallega"
+            f: "f.sg"
+          - form: "gallegos"
+            f: "m.pl"
+      - lemma: "ciudadanía"
+        pos: "noun"
+        en: "citizenship"
+      - lemma: "raíz"
+        pos: "noun"
+        en: "root"
+        forms:
+          - form: "raíces"
+            f: "f.pl"
+      - lemma: "Europa"
+        pos: "propn"
+        en: "Europe"
+
+  - ordinal: 15
     slug: "practica-quien-ceba"
     title: "Practice: travel, mate and family history"
     summary: "Mi bisabuela llegó en barco"
@@ -405,7 +913,47 @@ units:
       - "bisabuela"
       - "cuanto antes"
 
-  - ordinal: 9
+  - ordinal: 16
+    slug: "practica-se-instalaron"
+    title: "Practice: road trips, mate and roots"
+    summary: "Acampamos en el sur y el mate lo cebo yo"
+    grammar:
+      - "repaso.viaje"
+      - "repaso.mate"
+      - "repaso.inmigracion"
+    register_max: "informal"
+    sample:
+      es: "Mi bisabuela se instaló en un conventillo."
+      en: "My great-grandmother settled in a tenement house."
+    tips:
+      - title: "Acampamos, te convido"
+        body: "**Acampamos al lado de un lago**, **hicimos dedo**; **¿te convido un mate?** — but **no
+          hiervas el agua**."
+      - title: "Se instalaron"
+        body: "**Se escaparon de la guerra**, **se instalaron en La Boca** — the roots of the city."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "acampamos"
+      - "hicimos dedo"
+      - "lago"
+      - "cordillera"
+      - "recorriste"
+      - "convido"
+      - "calentá"
+      - "lavado"
+      - "merienda"
+      - "se instalaron"
+      - "se escaparon"
+      - "conventillo"
+      - "puerto"
+      - "gallego"
+      - "ciudadanía"
+      - "carpa"
+      - "pava"
+      - "trajeron"
+      - "extraño"
+
+  - ordinal: 17
     slug: "me-estas-cargando"
     title: "Tease and be teased"
     summary: "¿Me estás cargando?"
@@ -450,7 +998,87 @@ units:
           - form: "graciosa"
             f: "f.sg"
 
-  - ordinal: 10
+  - ordinal: 18
+    slug: "caiste"
+    title: "Fall for a wind-up"
+    summary: "¡Caíste! Te estaba tomando el pelo"
+    grammar:
+      - "humor"
+    register_max: "informal"
+    sample:
+      es: "¡Caíste! Te estaba tomando el pelo."
+      en: "Got you! I was pulling your leg."
+    tips:
+      - title: "Te estaba tomando el pelo"
+        body: "**Estar** + the **-ando / -iendo** form is how you catch a joke in progress: **me estás
+          tomando el pelo** — *you're pulling my leg*; **¿me estás jodiendo?** — *you're kidding me*;
+          **estás exagerando**. And when you believed it: **¡caíste!** — *got you!* — **qué
+          inocente**."
+      - title: "No te piques"
+        body: "The joke only works if you don't **picarse** — *get touchy*: **se picó** is the worst
+          thing to say about someone at an asado. Everybody has an **apodo** — *a nickname* — and a
+          **broma** — *a prank* — is a sign of affection. **No te hagas el vivo**, though: **te hacés el
+          vivo** is *you're acting smart*."
+    words:
+      - lemma: "caer"
+        pos: "verb"
+        forms:
+          - form: "caíste"
+            en: "you fell for it"
+            f: "2sg.pret.ind.vos"
+      - lemma: "tomar el pelo"
+        pos: "phrase"
+        en: "to pull someone's leg"
+        forms:
+          - form: "tomar el pelo"
+            f: "inf"
+          - form: "tomando el pelo"
+            en: "pulling someone's leg"
+            f: "ger"
+      - lemma: "joder"
+        pos: "verb"
+        en: "to mess with, to kid"
+        register: "informal"
+        forms:
+          - form: "jodiendo"
+            en: "messing with (someone)"
+            f: "ger"
+      - lemma: "exagerar"
+        pos: "verb"
+        forms:
+          - form: "exagerando"
+            en: "overdoing it"
+            f: "ger"
+      - lemma: "picarse"
+        pos: "verb"
+        en: "to get touchy, to take offense"
+        register: "informal"
+        forms:
+          - form: "se picó"
+            en: "he got touchy, she got touchy"
+            f: "3sg.pret.ind.clitic"
+          - form: "picó"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "hacerse el vivo"
+        pos: "phrase"
+        en: "to act smart, to try to be clever"
+        register: "informal"
+        forms:
+          - form: "te hacés el vivo"
+            en: "you're acting smart"
+            f: "2sg.pres.ind.vos.clitic"
+      - lemma: "apodo"
+        pos: "noun"
+        en: "nickname"
+      - lemma: "broma"
+        pos: "noun"
+        en: "prank, practical joke"
+      - lemma: "inocente"
+        pos: "adj"
+        en: "gullible, innocent"
+
+  - ordinal: 19
     slug: "se-caso"
     title: "Share family news"
     summary: "Mi prima se casó el sábado"
@@ -488,38 +1116,112 @@ units:
       - lemma: "casamiento"
         pos: "noun"
         en: "wedding"
-      - lemma: "nacer"
-        pos: "verb"
-        en: "to be born"
-        forms:
-          - form: "nació"
-            en: "was born"
-            f: "3sg.pret.ind"
-          - form: "naciste"
-            en: "you were born"
-            f: "2sg.pret.ind.vos"
-          - form: "nací"
-            en: "I was born"
-            f: "1sg.pret.ind"
       - lemma: "embarazada"
         pos: "adj"
         en: "pregnant"
         forms:
           - form: "embarazada"
             f: "f.sg"
-      - lemma: "primo"
-        pos: "noun"
-        en: "cousin"
-        forms:
-          - form: "primo"
-            f: "m.sg"
-          - form: "prima"
-            f: "f.sg"
-      - lemma: "bebé"
-        pos: "noun"
-        en: "baby"
 
-  - ordinal: 11
+  - ordinal: 20
+    slug: "se-recibio"
+    title: "Share the other big news"
+    summary: "Mi hermano se recibió y mi tía se jubiló"
+    grammar:
+      - "vida.eventos"
+      - "casarse"
+    register_max: "informal"
+    sample:
+      es: "Mi hermano se recibió de abogado."
+      en: "My brother graduated as a lawyer."
+    tips:
+      - title: "Se recibió, se jubiló"
+        body: "Life's big steps take the pronoun, like **se casó**: **se recibió** — *graduated* (from the
+          facu, with a title: **se recibió de abogado**) — **me recibí**, **se comprometieron** — *they
+          got engaged* — **se jubiló** — *retired*. The sad one too: **se murió** — *died*."
+      - title: "Por civil, y el velorio"
+        body: "Porteños get married **por civil** — *at the registry office* — often with a **padrino**
+          and a **madrina**, then the **luna de miel**. When **nació una nena** or **un nene**, you visit.
+          At a **velorio** — *a wake* — you hug and say **te acompaño en el sentimiento**."
+    words:
+      - lemma: "recibirse"
+        pos: "verb"
+        en: "to graduate"
+        forms:
+          - form: "se recibió"
+            en: "he graduated, she graduated"
+            f: "3sg.pret.ind.clitic"
+          - form: "me recibí"
+            en: "I graduated"
+            f: "1sg.pret.ind.clitic"
+          - form: "recibió"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "comprometerse"
+        pos: "verb"
+        en: "to get engaged"
+        forms:
+          - form: "se comprometieron"
+            en: "they got engaged"
+            f: "3pl.pret.ind.clitic"
+          - form: "comprometieron"
+            f: "3pl.pret.ind"
+            bound: true
+      - lemma: "jubilarse"
+        pos: "verb"
+        en: "to retire"
+        forms:
+          - form: "se jubiló"
+            en: "he retired, she retired"
+            f: "3sg.pret.ind.clitic"
+          - form: "jubiló"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "morirse"
+        pos: "verb"
+        en: "to die"
+        forms:
+          - form: "se murió"
+            en: "he died, she died"
+            f: "3sg.pret.ind.clitic"
+          - form: "murió"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "nene"
+        pos: "noun"
+        en: "little boy"
+        forms:
+          - form: "nene"
+            f: "m.sg"
+          - form: "nena"
+            en: "little girl"
+            f: "f.sg"
+      - lemma: "anillo"
+        pos: "noun"
+        en: "ring"
+      - lemma: "luna de miel"
+        pos: "phrase"
+        en: "honeymoon"
+      - lemma: "padrino"
+        pos: "noun"
+        en: "godfather; best man"
+        forms:
+          - form: "padrino"
+            f: "m.sg"
+          - form: "madrina"
+            en: "godmother; maid of honor"
+            f: "f.sg"
+      - lemma: "por civil"
+        pos: "phrase"
+        en: "at the registry office"
+      - lemma: "velorio"
+        pos: "noun"
+        en: "wake (funeral)"
+      - lemma: "te acompaño en el sentimiento"
+        pos: "phrase"
+        en: "I'm sorry for your loss"
+
+  - ordinal: 21
     slug: "me-emocione"
     title: "Say you were moved"
     summary: "Me emocioné un montón"
@@ -574,7 +1276,85 @@ units:
         pos: "phrase"
         en: "goosebumps"
 
-  - ordinal: 12
+  - ordinal: 22
+    slug: "se-emociono"
+    title: "Tell who got emotional"
+    summary: "Mi viejo se emocionó con el discurso"
+    grammar:
+      - "emocionarse"
+      - "orgullo"
+    register_max: "informal"
+    sample:
+      es: "Mi viejo se emocionó en el casamiento."
+      en: "My dad got emotional at the wedding."
+    tips:
+      - title: "Se emocionó, nos emocionamos"
+        body: "**Emocionarse** in every person: **me emocioné**, **¿te emocionaste?**, **mi viejo se
+          emocionó**, **nos emocionamos todos**. It was **emotivo** — *moving* — and **se me hizo un
+          nudo en la garganta** — *I got a lump in my throat*."
+      - title: "Me llegó"
+        body: "**Me llegó** — *it really touched me*: **tu mensaje me llegó un montón**. Say it **de
+          todo corazón**. **Sos un orgullo** — *you make us proud*. After the **discurso**, everyone
+          **se abrazó** — and the **felicidad** was all over the room."
+    words:
+      - lemma: "emocionarse"
+        pos: "verb"
+        forms:
+          - form: "se emocionó"
+            en: "he got emotional, she got emotional"
+            f: "3sg.pret.ind.clitic"
+          - form: "te emocionaste"
+            en: "you got emotional"
+            f: "2sg.pret.ind.vos.clitic"
+          - form: "nos emocionamos"
+            en: "we got emotional"
+            f: "1pl.pret.ind.clitic"
+          - form: "emocionó"
+            f: "3sg.pret.ind"
+            bound: true
+          - form: "emocionaste"
+            f: "2sg.pret.ind.vos"
+            bound: true
+          - form: "emocionamos"
+            f: "1pl.pret.ind"
+            bound: true
+      - lemma: "emotivo"
+        pos: "adj"
+        en: "moving, emotional (an event)"
+        forms:
+          - form: "emotivo"
+            f: "m.sg"
+          - form: "emotiva"
+            f: "f.sg"
+      - lemma: "me llegó"
+        pos: "phrase"
+        en: "it touched me"
+      - lemma: "nudo en la garganta"
+        pos: "phrase"
+        en: "lump in the throat"
+      - lemma: "orgullo"
+        pos: "noun"
+        en: "pride"
+      - lemma: "corazón"
+        pos: "noun"
+        en: "heart"
+      - lemma: "discurso"
+        pos: "noun"
+        en: "speech"
+      - lemma: "abrazar"
+        pos: "verb"
+        en: "to hug"
+        forms:
+          - form: "abrazar"
+            f: "inf"
+          - form: "abrazó"
+            en: "he hugged, she hugged"
+            f: "3sg.pret.ind"
+      - lemma: "felicidad"
+        pos: "noun"
+        en: "happiness"
+
+  - ordinal: 23
     slug: "practica-me-emocione"
     title: "Practice: jokes, news and feelings"
     summary: "Me emocioné en el casamiento"
@@ -610,7 +1390,122 @@ units:
       - "piel de gallina"
       - "me cayó la ficha"
 
-  - ordinal: 13
+  - ordinal: 24
+    slug: "practica-se-emociono"
+    title: "Practice: pranks, milestones and emotions"
+    summary: "¡Caíste! Pero se recibió de verdad"
+    grammar:
+      - "repaso.humor"
+      - "repaso.eventos"
+      - "repaso.emocionarse"
+    register_max: "informal"
+    sample:
+      es: "Mi hermana se recibió y nos emocionamos todos."
+      en: "My sister graduated and we all got emotional."
+    tips:
+      - title: "¡Caíste!"
+        body: "**Te estaba tomando el pelo**, **¡caíste!**, **no te piques** — the wind-up, in porteño."
+      - title: "Se recibió, se emocionó"
+        body: "**Se recibió**, **se comprometieron**, **se jubiló** — and **se emocionó**, **nos
+          emocionamos**, **me llegó**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "caíste"
+      - "tomando el pelo"
+      - "se picó"
+      - "apodo"
+      - "se recibió"
+      - "se comprometieron"
+      - "se jubiló"
+      - "nene"
+      - "se emocionó"
+      - "nos emocionamos"
+      - "me llegó"
+      - "corazón"
+      - "discurso"
+      - "lloraste"
+      - "me alegro"
+      - "abrazo"
+      - "sonrisa"
+
+  - ordinal: 25
+    slug: "gracias-por-todo"
+    title: "Say goodbye like a porteño"
+    summary: "Gracias por todo: me siento como en casa"
+    grammar:
+      - "despedida"
+      - "repaso.c1"
+    register_max: "informal"
+    sample:
+      es: "Al principio me costó, pero ahora me siento como en casa."
+      en: "It was hard at first, but now I feel at home."
+    tips:
+      - title: "Al principio me costó"
+        body: "Looking back is the preterite: **al principio me costó** — *it was hard at first* — **pero
+          me adapté** — *I adapted*. Now **me siento como en casa**. Say it **de corazón**."
+      - title: "Brindemos"
+        body: "A porteño **despedida** — *farewell party* — ends with a toast: **¡brindemos!**, **brindo
+          por ustedes**. Then **gracias por todo**, **fue un placer**, and never *adiós*: **me despido**
+          with **hasta la próxima**, because here nobody really leaves."
+    words:
+      - lemma: "al principio"
+        pos: "phrase"
+        en: "at first"
+      - lemma: "costar"
+        pos: "verb"
+        forms:
+          - form: "me costó"
+            en: "it was hard for me"
+            f: "3sg.pret.ind.clitic"
+      - lemma: "adaptarse"
+        pos: "verb"
+        en: "to adapt, to settle in"
+        forms:
+          - form: "me adapté"
+            en: "I adapted"
+            f: "1sg.pret.ind.clitic"
+          - form: "adapté"
+            f: "1sg.pret.ind"
+            bound: true
+      - lemma: "como en casa"
+        pos: "phrase"
+        en: "at home (feeling welcome)"
+      - lemma: "de corazón"
+        pos: "phrase"
+        en: "from the heart"
+      - lemma: "despedida"
+        pos: "noun"
+        en: "farewell party, send-off"
+      - lemma: "despedirse"
+        pos: "verb"
+        en: "to say goodbye"
+        forms:
+          - form: "me despido"
+            en: "I say goodbye"
+            f: "1sg.pres.ind.clitic.irregular"
+          - form: "despido"
+            f: "1sg.pres.ind.irregular"
+            bound: true
+      - lemma: "brindar"
+        pos: "verb"
+        forms:
+          - form: "brindemos"
+            en: "let's toast"
+            f: "1pl.pres.subj"
+          - form: "brindo"
+            en: "I toast"
+            f: "1sg.pres.ind"
+      - lemma: "gracias por todo"
+        pos: "phrase"
+        en: "thanks for everything"
+      - lemma: "fue un placer"
+        pos: "phrase"
+        en: "it was a pleasure"
+      - lemma: "hasta la próxima"
+        pos: "phrase"
+        en: "until next time"
+
+  - ordinal: 26
     slug: "ya-sos-de-aca"
     title: "You're from here now"
     summary: "¡Lo lograste! Ya sos de acá"

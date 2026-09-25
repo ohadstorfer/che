@@ -57,18 +57,104 @@ units:
         forms:
           - form: "cortada"
             f: "f.sg"
-      - lemma: "funcionar"
-        pos: "verb"
-        en: "to run, to be working (a machine, a service)"
-        forms:
-          - form: "funciona"
-            en: "is working, runs"
-            f: "3sg.pres.ind"
-          - form: "funcionan"
-            en: "are working, run"
-            f: "3pl.pres.ind"
 
   - ordinal: 2
+    slug: "paro-docente"
+    title: "Plan around a strike"
+    summary: "Mañana hay paro docente"
+    grammar:
+      - "ciudad.paro"
+      - "funcionar"
+    register_max: "informal"
+    sample:
+      es: "Mañana hay paro docente y no hay clases."
+      en: "There's a teachers' strike tomorrow and no school."
+    tips:
+      - title: "Paro docente, paro general"
+        body: "A strike is named after who stops: **paro docente** — *the teachers*; **paro de
+          colectivos** — the **colectiveros**; **paro general** — everyone. The **gremio** — *the union* —
+          **anunció un paro** for Thursday, and the news calls it a **medida de fuerza**."
+      - title: "¿Funciona o no?"
+        body: "The morning after, the question is what still runs: **el subte funciona con normalidad**, or
+          **suspendieron el servicio**. **Hubo un apagón** — *there was a blackout* — and the traffic
+          lights are out: **embotellamiento**, **desvíos**, and half the city goes **a pie**."
+    words:
+      - lemma: "docente"
+        pos: "noun"
+        en: "educator, teaching staff"
+        forms:
+          - form: "docente"
+            f: "sg"
+          - form: "docentes"
+            f: "pl"
+      - lemma: "gremio"
+        pos: "noun"
+        en: "union, trade union"
+      - lemma: "colectivero"
+        pos: "noun"
+        en: "bus driver"
+        forms:
+          - form: "colectivero"
+            f: "m.sg"
+          - form: "colectiveros"
+            f: "m.pl"
+      - lemma: "anunciar"
+        pos: "verb"
+        en: "to announce"
+        forms:
+          - form: "anunció"
+            en: "announced"
+            f: "3sg.pret.ind"
+          - form: "anunciaron"
+            en: "they announced"
+            f: "3pl.pret.ind"
+      - lemma: "suspender"
+        pos: "verb"
+        en: "to suspend, to call off"
+        forms:
+          - form: "suspendieron"
+            en: "they called off, they suspended"
+            f: "3pl.pret.ind"
+          - form: "suspendido"
+            en: "suspended, called off"
+            f: "part"
+          - form: "suspendida"
+            en: "suspended, called off"
+            f: "part.f.sg"
+      - lemma: "haber"
+        pos: "verb"
+        forms:
+          - form: "hubo"
+            en: "there was, there were"
+            f: "3sg.pret.ind.irregular"
+      - lemma: "apagón"
+        pos: "noun"
+        en: "blackout, power outage"
+      - lemma: "embotellamiento"
+        pos: "noun"
+        en: "traffic jam"
+      - lemma: "desvío"
+        pos: "noun"
+        en: "detour, diversion"
+        forms:
+          - form: "desvío"
+            f: "sg"
+          - form: "desvíos"
+            f: "pl"
+      - lemma: "protesta"
+        pos: "noun"
+        en: "protest"
+      - lemma: "a pie"
+        pos: "phrase"
+        en: "on foot"
+      - lemma: "con normalidad"
+        pos: "phrase"
+        en: "as normal, normally (a service)"
+      - lemma: "medida de fuerza"
+        pos: "phrase"
+        en: "industrial action"
+
+  - ordinal: 3
     slug: "fue-construido"
     title: "Read the news"
     summary: "El puente fue construido hace un siglo"
@@ -121,11 +207,110 @@ units:
       - lemma: "siglo"
         pos: "noun"
         en: "century"
-      - lemma: "estación"
-        pos: "noun"
-        en: "station"
 
-  - ordinal: 3
+  - ordinal: 4
+    slug: "fue-clausurado"
+    title: "Read the headlines"
+    summary: "El boliche fue clausurado"
+    grammar:
+      - "voz-pasiva.ser"
+      - "noticias"
+    register_max: "informal"
+    sample:
+      es: "Los vecinos fueron rescatados por los bomberos."
+      en: "The neighbors were rescued by the firefighters."
+    tips:
+      - title: "Fue clausurado, fueron rescatados"
+        body: "The headline verb agrees with what it's about: **el boliche fue clausurado**, **la obra fue
+          clausurada**, **los vecinos fueron rescatados**, **las vecinas fueron rescatadas**. Whoever did
+          it comes after **por**: *por los bomberos*."
+      - title: "Hubo un incendio"
+        body: "The news opens with **hubo**: **hubo un incendio**, **hubo un accidente en la avenida**, **hubo
+          dos heridos** — who then **fueron trasladados al hospital**. At the kitchen table the same story
+          loses the passive: *trasladaron a los heridos*."
+      - title: "Fue elegida"
+        body: "Not only bad news: **la pizzería fue elegida la mejor del barrio**, **la ley fue aprobada**,
+          **el chico fue elegido para el equipo**. Same pattern: **fue** + a participle that agrees."
+    words:
+      - lemma: "clausurar"
+        pos: "verb"
+        en: "to close down (by order)"
+        forms:
+          - form: "clausurado"
+            en: "closed down"
+            f: "part"
+          - form: "clausurada"
+            en: "closed down"
+            f: "part.f.sg"
+      - lemma: "rescatar"
+        pos: "verb"
+        en: "to rescue"
+        forms:
+          - form: "rescatados"
+            en: "rescued"
+            f: "part.m.pl"
+          - form: "rescatadas"
+            en: "rescued"
+            f: "part.f.pl"
+      - lemma: "trasladar"
+        pos: "verb"
+        en: "to transfer, to move (someone somewhere)"
+        forms:
+          - form: "trasladado"
+            en: "transferred, moved"
+            f: "part"
+          - form: "trasladados"
+            en: "transferred, moved"
+            f: "part.m.pl"
+      - lemma: "aprobar"
+        pos: "verb"
+        en: "to approve, to pass"
+        forms:
+          - form: "aprobado"
+            en: "approved, passed"
+            f: "part"
+          - form: "aprobada"
+            en: "approved, passed"
+            f: "part.f.sg"
+      - lemma: "elegir"
+        pos: "verb"
+        forms:
+          - form: "elegido"
+            en: "chosen, elected"
+            f: "part"
+          - form: "elegida"
+            en: "chosen, elected"
+            f: "part.f.sg"
+      - lemma: "herido"
+        pos: "noun"
+        en: "injured person"
+        forms:
+          - form: "herido"
+            f: "m.sg"
+          - form: "heridos"
+            f: "m.pl"
+      - lemma: "incendio"
+        pos: "noun"
+        en: "fire (a building on fire)"
+      - lemma: "accidente"
+        pos: "noun"
+        en: "accident, crash"
+      - lemma: "bombero"
+        pos: "noun"
+        en: "firefighter"
+        forms:
+          - form: "bombero"
+            f: "m.sg"
+          - form: "bomberos"
+            f: "m.pl"
+      - lemma: "ley"
+        pos: "noun"
+        en: "law"
+      - lemma: "obra"
+        pos: "noun"
+        en: "construction work, building site"
+
+  - ordinal: 5
     slug: "las-elecciones"
     title: "Talk about voting"
     summary: "¿A quién votaste?"
@@ -181,14 +366,91 @@ units:
             f: "m.sg"
           - form: "presidenta"
             f: "f.sg"
-      - lemma: "obligatorio"
-        pos: "adj"
-        en: "mandatory, required"
-        forms:
-          - form: "obligatorio"
-            f: "m.sg"
 
-  - ordinal: 4
+  - ordinal: 6
+    slug: "el-cuarto-oscuro"
+    title: "Go and vote"
+    summary: "¿Dónde votás el domingo?"
+    grammar:
+      - "votar"
+      - "politica.sin-politica"
+    register_max: "informal"
+    sample:
+      es: "¿Dónde votás el domingo?"
+      en: "Where do you vote on Sunday?"
+    tips:
+      - title: "¿Dónde votás?"
+        body: "Election day is a Sunday, and everyone asks **¿dónde votás?** You check the **padrón** — *the
+          voter roll* — for your school and your **mesa**. **Votamos** in the school around the corner;
+          **mi abuela votó a las ocho**, first in line."
+      - title: "El cuarto oscuro"
+        body: "The booth is the **cuarto oscuro** — *the dark room* — where you pick your **boleta** and drop
+          it in the **urna**. The **voto** is secret. If nobody wins outright, there's a **balotaje** — *a
+          runoff*. Missed it? You have to **justificar** why."
+      - title: "Las encuestas"
+        body: "Before, the **campaña**, the **debate** on TV and the **encuestas** — *the polls* — that always
+          get it wrong. After, the **resultado**. The course stays out of who won."
+    words:
+      - lemma: "votar"
+        pos: "verb"
+        forms:
+          - form: "votás"
+            en: "you vote"
+            f: "2sg.pres.ind.vos"
+          - form: "votamos"
+            en: "we vote"
+            f: "1pl.pres.ind"
+          - form: "votó"
+            en: "voted (he/she)"
+            f: "3sg.pret.ind"
+      - lemma: "voto"
+        pos: "noun"
+        en: "vote"
+      - lemma: "padrón"
+        pos: "noun"
+        en: "voter roll, electoral register"
+      - lemma: "cuarto oscuro"
+        pos: "phrase"
+        en: "voting booth"
+      - lemma: "boleta"
+        pos: "noun"
+        en: "ballot paper"
+      - lemma: "urna"
+        pos: "noun"
+        en: "ballot box"
+      - lemma: "balotaje"
+        pos: "noun"
+        en: "runoff (election)"
+      - lemma: "justificar"
+        pos: "verb"
+        en: "to justify, to give a reason (for not voting)"
+        forms:
+          - form: "justificar"
+            f: "inf"
+      - lemma: "campaña"
+        pos: "noun"
+        en: "campaign"
+      - lemma: "debate"
+        pos: "noun"
+        en: "debate"
+      - lemma: "encuesta"
+        pos: "noun"
+        en: "poll, survey"
+        forms:
+          - form: "encuesta"
+            f: "sg"
+          - form: "encuestas"
+            f: "pl"
+      - lemma: "resultado"
+        pos: "noun"
+        en: "result"
+        forms:
+          - form: "resultado"
+            f: "sg"
+          - form: "resultados"
+            f: "pl"
+
+  - ordinal: 7
     slug: "practica-hay-paro"
     title: "Practice: strikes, news and votes"
     summary: "Hoy no funciona el subte"
@@ -225,7 +487,45 @@ units:
       - "se enteró"
       - "resulta que"
 
-  - ordinal: 5
+  - ordinal: 8
+    slug: "practica-el-cuarto-oscuro"
+    title: "Practice: strikes, headlines and the ballot"
+    summary: "Hubo desvíos por la marcha"
+    grammar:
+      - "repaso.ciudad"
+      - "repaso.voz-pasiva"
+    register_max: "informal"
+    sample:
+      es: "Hubo un incendio y dos vecinos fueron trasladados al hospital."
+      en: "There was a fire and two neighbors were taken to hospital."
+    tips:
+      - title: "Paro docente, hubo un apagón"
+        body: "**Paro docente**, **suspendieron el servicio**, **hubo desvíos** — and the city **a pie**."
+      - title: "Fue clausurado, ¿dónde votás?"
+        body: "**Fue clausurado**, **fueron rescatados**: **fue** + a participle that agrees. And on Sunday,
+          **¿dónde votás?**"
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "docente"
+      - "gremio"
+      - "suspendieron"
+      - "hubo"
+      - "apagón"
+      - "desvíos"
+      - "a pie"
+      - "clausurado"
+      - "rescatados"
+      - "heridos"
+      - "incendio"
+      - "ley"
+      - "votás"
+      - "padrón"
+      - "boleta"
+      - "encuestas"
+      - "demorado"
+      - "funcionan"
+
+  - ordinal: 9
     slug: "segun-el-diario"
     title: "Say where you heard it"
     summary: "Según el diario, mañana llueve"
@@ -267,7 +567,71 @@ units:
         pos: "noun"
         en: "rumor"
 
-  - ordinal: 6
+  - ordinal: 10
+    slug: "aparentemente"
+    title: "Check whether it's true"
+    summary: "Aparentemente es falso"
+    grammar:
+      - "fuentes"
+      - "rumor"
+    register_max: "informal"
+    sample:
+      es: "Aparentemente es falso: lo desmintieron."
+      en: "Apparently it's fake: they denied it."
+    tips:
+      - title: "Según quién"
+        body: "**Según** takes people as well as papers: **según él**, **según ellos**, **según la fuente**.
+          **Aparentemente** is the neutral *apparently*; **se ve que** is what you conclude from what you
+          see: **se ve que llovió** — *it must have rained*."
+      - title: "Lo desmintieron"
+        body: "A story is **confirmado** or it's **desmentido**: **el gremio desmintió el rumor**, **lo
+          desmintieron en el noticiero**. Before you forward it, ask **¿cuál es la fuente?** — the
+          **titular** says one thing, the **versión oficial** another."
+      - title: "Me llegó una cadena"
+        body: "The family WhatsApp group sends a **cadena** — *a chain message* — every morning. **Chequeá la
+          fuente** before you believe it."
+    words:
+      - lemma: "aparentemente"
+        pos: "adv"
+        en: "seemingly"
+      - lemma: "se ve que"
+        pos: "phrase"
+        en: "it looks like, it must be that"
+      - lemma: "desmentir"
+        pos: "verb"
+        en: "to deny, to refute"
+        forms:
+          - form: "desmintió"
+            en: "denied (he/she/it)"
+            f: "3sg.pret.ind.irregular"
+          - form: "desmintieron"
+            en: "they denied"
+            f: "3pl.pret.ind.irregular"
+      - lemma: "fuente"
+        pos: "noun"
+        en: "source"
+      - lemma: "noticiero"
+        pos: "noun"
+        en: "TV news, news bulletin"
+      - lemma: "titular"
+        pos: "noun"
+        en: "headline"
+        forms:
+          - form: "titular"
+            f: "sg"
+          - form: "titulares"
+            f: "pl"
+      - lemma: "versión"
+        pos: "noun"
+        en: "version, account"
+      - lemma: "oficial"
+        pos: "adj"
+        en: "official"
+      - lemma: "cadena"
+        pos: "noun"
+        en: "chain message"
+
+  - ordinal: 11
     slug: "me-robaron"
     title: "Report a theft"
     summary: "Me robaron el celu"
@@ -314,11 +678,115 @@ units:
       - lemma: "comisaría"
         pos: "noun"
         en: "police station"
-      - lemma: "policía"
-        pos: "noun"
-        en: "police"
 
-  - ordinal: 7
+  - ordinal: 12
+    slug: "me-afanaron"
+    title: "Tell how you got conned"
+    summary: "Me afanaron la billetera"
+    grammar:
+      - "robar"
+      - "seguridad"
+    register_max: "lunfardo"
+    sample:
+      es: "Me descuidé un minuto y me afanaron la billetera."
+      en: "I looked away for a minute and my wallet got nicked."
+    tips:
+      - title: "Me afanaron, nos robaron"
+        body: "Among friends it's **me afanaron** — *they nicked it* — with the same *they* that nobody
+          names. It moves with the victim: **te robaron**, **le robaron a mi vieja**, **nos robaron la
+          bici**. The **motochorro** does it from a motorbike."
+      - title: "El cuento del tío"
+        body: "**Me estafaron** — *I got scammed* — is quieter: a call from a fake bank, a **billete
+          trucho**, the **cuento del tío** — *the old con* — on your grandmother. First thing: **bloqueá la
+          tarjeta**. Then the denuncia, with the **cámaras** of the block if you're lucky."
+      - title: "Me descuidé"
+        body: "The confession that comes with it: **me descuidé** — *I let my guard down*. Porteños answer
+          **¡qué garrón!**"
+    words:
+      - lemma: "afanar"
+        pos: "verb"
+        en: "to nick, to swipe"
+        register: "lunfardo"
+        forms:
+          - form: "me afanaron"
+            en: "they nicked it (from me)"
+            f: "3pl.pret.ind.clitic"
+          - form: "afanaron"
+            f: "3pl.pret.ind"
+            bound: true
+      - lemma: "robar"
+        pos: "verb"
+        forms:
+          - form: "te robaron"
+            en: "they stole (from you), you got robbed"
+            f: "3pl.pret.ind.clitic"
+          - form: "nos robaron"
+            en: "they stole (from us), we got robbed"
+            f: "3pl.pret.ind.clitic"
+          - form: "le robaron"
+            en: "they stole (from him/her)"
+            f: "3pl.pret.ind.clitic"
+      - lemma: "estafar"
+        pos: "verb"
+        en: "to scam, to swindle"
+        forms:
+          - form: "me estafaron"
+            en: "they scammed me, I got scammed"
+            f: "3pl.pret.ind.clitic"
+          - form: "estafaron"
+            f: "3pl.pret.ind"
+            bound: true
+      - lemma: "estafa"
+        pos: "noun"
+        en: "scam, fraud"
+      - lemma: "motochorro"
+        pos: "noun"
+        en: "thief on a motorbike"
+        register: "lunfardo"
+      - lemma: "trucho"
+        pos: "adj"
+        en: "fake, dodgy"
+        register: "lunfardo"
+        forms:
+          - form: "trucho"
+            f: "m.sg"
+          - form: "trucha"
+            f: "f.sg"
+      - lemma: "cuento del tío"
+        pos: "phrase"
+        en: "con trick"
+      - lemma: "bloquear"
+        pos: "verb"
+        en: "to block, to freeze (a card)"
+        forms:
+          - form: "bloquear"
+            f: "inf"
+          - form: "bloqueá"
+            en: "block, freeze"
+            f: "2sg.imp.vos"
+          - form: "bloqueé"
+            en: "I blocked"
+            f: "1sg.pret.ind"
+      - lemma: "cámara"
+        pos: "noun"
+        en: "camera"
+        forms:
+          - form: "cámara"
+            f: "sg"
+          - form: "cámaras"
+            f: "pl"
+      - lemma: "descuidarse"
+        pos: "verb"
+        en: "to let your guard down"
+        forms:
+          - form: "me descuidé"
+            en: "I let my guard down"
+            f: "1sg.pret.ind.clitic"
+          - form: "descuidé"
+            f: "1sg.pret.ind"
+            bound: true
+
+  - ordinal: 13
     slug: "el-consorcio"
     title: "Deal with your building"
     summary: "Se rompió el calefón"
@@ -346,14 +814,6 @@ units:
       - lemma: "consorcio"
         pos: "noun"
         en: "building management, owners' association"
-      - lemma: "encargado"
-        pos: "noun"
-        en: "building super, caretaker"
-        forms:
-          - form: "encargado"
-            f: "m.sg"
-          - form: "encargada"
-            f: "f.sg"
       - lemma: "plomero"
         pos: "noun"
         en: "plumber"
@@ -363,17 +823,83 @@ units:
       - lemma: "pérdida"
         pos: "noun"
         en: "leak"
-      - lemma: "arreglar"
-        pos: "verb"
-        en: "to fix, to repair"
-        forms:
-          - form: "arreglar"
-            f: "inf"
-          - form: "arregló"
-            en: "fixed"
-            f: "3sg.pret.ind"
 
-  - ordinal: 8
+  - ordinal: 14
+    slug: "se-tapo-la-pileta"
+    title: "Get something fixed at home"
+    summary: "Se tapó la pileta de la cocina"
+    grammar:
+      - "edificio.consorcio"
+      - "arreglar"
+    register_max: "informal"
+    sample:
+      es: "Se tapó la pileta de la cocina."
+      en: "The kitchen sink is blocked."
+    tips:
+      - title: "Se tapó, se trabó"
+        body: "Things at home break on their own, with **se**: **se tapó el inodoro** — *the toilet's
+          blocked*; **se trabó el ascensor** — *the lift got stuck*; **se cortó el agua**. Nobody did it —
+          it just **se rompió**."
+      - title: "¿A quién llamo?"
+        body: "Each problem has its person: the **plomero** for a **canilla** that **gotea** — *a dripping
+          tap* — the **gasista** for the calefón, the **encargado** for the **portero eléctrico**. A
+          **filtración** from the flat upstairs goes to the **administración**, and takes months."
+    words:
+      - lemma: "taparse"
+        pos: "verb"
+        en: "to get blocked"
+        forms:
+          - form: "se tapó"
+            en: "got blocked"
+            f: "3sg.pret.ind.clitic"
+          - form: "tapó"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "trabarse"
+        pos: "verb"
+        en: "to get stuck, to jam"
+        forms:
+          - form: "se trabó"
+            en: "got stuck"
+            f: "3sg.pret.ind.clitic"
+          - form: "trabó"
+            f: "3sg.pret.ind"
+            bound: true
+      - lemma: "gotear"
+        pos: "verb"
+        en: "to drip"
+        forms:
+          - form: "gotea"
+            en: "drips, is dripping"
+            f: "3sg.pres.ind"
+      - lemma: "canilla"
+        pos: "noun"
+        en: "tap, faucet"
+      - lemma: "inodoro"
+        pos: "noun"
+        en: "toilet"
+      - lemma: "gasista"
+        pos: "noun"
+        en: "gas fitter"
+      - lemma: "portero eléctrico"
+        pos: "phrase"
+        en: "intercom (at the building door)"
+      - lemma: "filtración"
+        pos: "noun"
+        en: "leak (from above), seepage"
+      - lemma: "administración"
+        pos: "noun"
+        en: "building management office"
+      - lemma: "caño"
+        pos: "noun"
+        en: "pipe"
+        forms:
+          - form: "caño"
+            f: "sg"
+          - form: "caños"
+            f: "pl"
+
+  - ordinal: 15
     slug: "practica-me-robaron"
     title: "Practice: rumors, thefts and the building"
     summary: "Según el encargado, se rompió el calefón"
@@ -410,7 +936,46 @@ units:
       - "paro"
       - "encima"
 
-  - ordinal: 9
+  - ordinal: 16
+    slug: "practica-me-afanaron"
+    title: "Practice: sources, scams and repairs"
+    summary: "Se ve que se tapó un caño"
+    grammar:
+      - "repaso.fuentes"
+      - "repaso.seguridad"
+      - "repaso.edificio"
+    register_max: "lunfardo"
+    sample:
+      es: "Se ve que se tapó un caño."
+      en: "A pipe must have got blocked."
+    tips:
+      - title: "Aparentemente, se ve que"
+        body: "**Aparentemente**, **se ve que**, **lo desmintieron** — and always **¿cuál es la fuente?**"
+      - title: "Me afanaron, se tapó"
+        body: "**Me afanaron la billetera**, **me estafaron**; **se tapó la canilla**, **se trabó el
+          ascensor** — the *they* nobody names, and the *se* nobody did."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "aparentemente"
+      - "se ve que"
+      - "desmintió"
+      - "fuente"
+      - "noticiero"
+      - "me afanaron"
+      - "me estafaron"
+      - "trucho"
+      - "me descuidé"
+      - "bloqueá"
+      - "se tapó"
+      - "gotea"
+      - "gasista"
+      - "canilla"
+      - "según"
+      - "comisaría"
+      - "expensas"
+      - "por lo visto"
+
+  - ordinal: 17
     slug: "de-que-cuadro-sos"
     title: "Say which team you root for"
     summary: "¿De qué cuadro sos?"
@@ -453,7 +1018,94 @@ units:
         pos: "noun"
         en: "stands, bleachers"
 
-  - ordinal: 10
+  - ordinal: 18
+    slug: "socio-del-club"
+    title: "Go to the stadium"
+    summary: "Soy socio del club desde chico"
+    grammar:
+      - "futbol.hinchada"
+      - "hinchar"
+    register_max: "informal"
+    sample:
+      es: "Soy socio del club desde chico."
+      en: "I've been a club member since I was a kid."
+    tips:
+      - title: "Hinchamos por el mismo"
+        body: "**Hinchar por** runs in the family: **en casa hinchamos todos por el mismo cuadro**; **de
+          chico hinchaba por otro, pero mi viejo no me dejó**. A fan **de toda la vida** never changes
+          club — changing wife is easier, they say."
+      - title: "Ser socio"
+        body: "To go to the **estadio** you're **socio** — *a member* — of the **club**, and pay the cuota.
+          The **hinchada** sings its **cantitos** for ninety minutes, under the **banderas**. Away fans?
+          Banned for years: you only go **de visitante** on TV."
+      - title: "El ídolo"
+        body: "Every club has its **ídolo**, the **jugador** whose shirt the kids wear. And every fan fears
+          one word: the **descenso** — *relegation*."
+    words:
+      - lemma: "hinchar"
+        pos: "verb"
+        forms:
+          - form: "hinchamos"
+            en: "we root for"
+            f: "1pl.pres.ind"
+          - form: "hinchaba"
+            en: "I used to root for, he rooted for"
+            f: "sg.impf.ind"
+      - lemma: "socio"
+        pos: "noun"
+        en: "member (of a club)"
+        forms:
+          - form: "socio"
+            f: "m.sg"
+          - form: "socia"
+            f: "f.sg"
+      - lemma: "club"
+        pos: "noun"
+        en: "club"
+      - lemma: "estadio"
+        pos: "noun"
+        en: "stadium building, ground"
+      - lemma: "hinchada"
+        pos: "noun"
+        en: "the fans, the supporters"
+      - lemma: "cantito"
+        pos: "noun"
+        en: "terrace chant"
+        forms:
+          - form: "cantito"
+            f: "sg"
+          - form: "cantitos"
+            f: "pl"
+      - lemma: "bandera"
+        pos: "noun"
+        en: "flag, banner"
+        forms:
+          - form: "bandera"
+            f: "sg"
+          - form: "banderas"
+            f: "pl"
+      - lemma: "jugador"
+        pos: "noun"
+        en: "player"
+        forms:
+          - form: "jugador"
+            f: "m.sg"
+          - form: "jugadores"
+            f: "m.pl"
+      - lemma: "ídolo"
+        pos: "noun"
+        en: "idol, hero"
+      - lemma: "descenso"
+        pos: "noun"
+        en: "relegation"
+      - lemma: "de visitante"
+        pos: "phrase"
+        en: "away (playing away)"
+      - lemma: "de toda la vida"
+        pos: "phrase"
+        en: "lifelong, since forever"
+
+  - ordinal: 19
     slug: "el-tango"
     title: "Talk about the tango"
     summary: "Gardel cada día canta mejor"
@@ -487,20 +1139,85 @@ units:
       - lemma: "nostalgia"
         pos: "noun"
         en: "nostalgia, longing"
-      - lemma: "cantar"
-        pos: "verb"
-        en: "to sing"
-        forms:
-          - form: "canta"
-            en: "sing, sings"
-            f: "3sg.pres.ind"
-          - form: "cantar"
-            f: "inf"
       - lemma: "Gardel"
         pos: "propn"
         en: "Carlos Gardel"
 
-  - ordinal: 11
+  - ordinal: 20
+    slug: "tocas-la-guitarra"
+    title: "Talk about the music you grew up with"
+    summary: "¿Tocás la guitarra?"
+    grammar:
+      - "cultura.tango"
+      - "cantar"
+    register_max: "informal"
+    sample:
+      es: "¿Tocás la guitarra?"
+      en: "Do you play the guitar?"
+    tips:
+      - title: "Tocar, cantar, bailar"
+        body: "An instrument is **tocar**: **¿tocás la guitarra?**, **mi abuelo tocaba el bandoneón en una
+          orquesta**. **¿Cantás?** **¿Bailás tango?** — and at the milonga, **¿bailamos?**"
+      - title: "No todo es tango"
+        body: "Porteños grew up on **rock nacional** — *Argentine rock* — sung in Spanish in the stadiums;
+          the provinces on **folclore**; every party ends in **cumbia**. A **cantante** is a singer;
+          the one who sings tango is a *cantor*."
+      - title: "Piazzolla"
+        body: "Astor **Piazzolla** took the tango out of the **pista** — *the dance floor* — and into the
+          concert hall. The old milongueros never forgave him."
+    words:
+      - lemma: "tocar"
+        pos: "verb"
+        forms:
+          - form: "tocar"
+            f: "inf"
+          - form: "tocás"
+            en: "you play (an instrument)"
+            f: "2sg.pres.ind.vos"
+          - form: "tocaba"
+            en: "I used to play, he used to play"
+            f: "sg.impf.ind"
+      - lemma: "cantar"
+        pos: "verb"
+        forms:
+          - form: "cantás"
+            en: "you sing"
+            f: "2sg.pres.ind.vos"
+      - lemma: "bailar"
+        pos: "verb"
+        forms:
+          - form: "bailás"
+            en: "you dance"
+            f: "2sg.pres.ind.vos"
+          - form: "bailamos"
+            en: "we dance; shall we dance?"
+            f: "1pl.pres.ind"
+      - lemma: "guitarra"
+        pos: "noun"
+        en: "guitar"
+      - lemma: "orquesta"
+        pos: "noun"
+        en: "orchestra"
+      - lemma: "cantante"
+        pos: "noun"
+        en: "singer"
+      - lemma: "pista"
+        pos: "noun"
+        en: "dance floor"
+      - lemma: "rock nacional"
+        pos: "phrase"
+        en: "Argentine rock"
+      - lemma: "folclore"
+        pos: "noun"
+        en: "folk music (Argentine)"
+      - lemma: "cumbia"
+        pos: "noun"
+        en: "cumbia"
+      - lemma: "Piazzolla"
+        pos: "propn"
+        en: "Astor Piazzolla"
+
+  - ordinal: 21
     slug: "la-parrilla"
     title: "Order at the parrilla"
     summary: "¿Me pasás un choripán?"
@@ -521,12 +1238,6 @@ units:
       - lemma: "parrilla"
         pos: "noun"
         en: "grill; steakhouse"
-      - lemma: "choripán"
-        pos: "noun"
-        en: "chorizo sandwich"
-      - lemma: "chorizo"
-        pos: "noun"
-        en: "sausage"
       - lemma: "morcilla"
         pos: "noun"
         en: "blood sausage"
@@ -551,7 +1262,72 @@ units:
         pos: "phrase"
         en: "medium (meat)"
 
-  - ordinal: 12
+  - ordinal: 22
+    slug: "la-parrillada"
+    title: "Share a parrillada"
+    summary: "Una parrillada para dos"
+    grammar:
+      - "comida.parrilla"
+    register_max: "informal"
+    sample:
+      es: "Una parrillada para dos, con chimichurri."
+      en: "A mixed grill for two, with chimichurri."
+    tips:
+      - title: "La parrillada"
+        body: "For the table there's the **parrillada** — *a mixed grill* on its own little grill: chorizo,
+          morcilla, **mollejas**, **chinchulines** and a **tira de asado**. On your own: a **bife de
+          chorizo** or an **entraña**."
+      - title: "¿Y la salsa?"
+        body: "On the table: **chimichurri** — oil, garlic, parsley, chilli — and **salsa criolla** — onion,
+          tomato, pepper. Ketchup is a crime. The meat is cooked **a la leña** at the good places."
+      - title: "Bien cocido"
+        body: "Jugosa, a punto, or **bien cocido** — *well done*; **vuelta y vuelta** is barely warm. The
+          bill has a line for the **cubierto** — *the cover charge*: the bread and the cutlery."
+    words:
+      - lemma: "parrillada"
+        pos: "noun"
+        en: "mixed grill"
+      - lemma: "mollejas"
+        pos: "noun"
+        en: "sweetbreads"
+        forms:
+          - form: "mollejas"
+            f: "f.pl"
+      - lemma: "chinchulines"
+        pos: "noun"
+        en: "grilled small intestine"
+        forms:
+          - form: "chinchulines"
+            f: "m.pl"
+      - lemma: "tira de asado"
+        pos: "phrase"
+        en: "short ribs, rib strip"
+      - lemma: "bife de chorizo"
+        pos: "phrase"
+        en: "sirloin steak"
+      - lemma: "entraña"
+        pos: "noun"
+        en: "skirt steak"
+      - lemma: "chimichurri"
+        pos: "noun"
+        en: "garlic and herb steak sauce"
+      - lemma: "salsa criolla"
+        pos: "phrase"
+        en: "onion and tomato relish"
+      - lemma: "leña"
+        pos: "noun"
+        en: "firewood"
+      - lemma: "bien cocido"
+        pos: "phrase"
+        en: "well done (meat)"
+      - lemma: "vuelta y vuelta"
+        pos: "phrase"
+        en: "seared, very rare"
+      - lemma: "cubierto"
+        pos: "noun"
+        en: "cover charge"
+
+  - ordinal: 23
     slug: "practica-la-parrilla"
     title: "Practice: football, tango and the grill"
     summary: "¿Por quién hinchás?"
@@ -588,7 +1364,101 @@ units:
       - "según"
       - "al toque"
 
-  - ordinal: 13
+  - ordinal: 24
+    slug: "practica-la-parrillada"
+    title: "Practice: the club, the music and the table"
+    summary: "¿Bailás o tocás la guitarra?"
+    grammar:
+      - "repaso.futbol"
+      - "repaso.cultura"
+    register_max: "informal"
+    sample:
+      es: "En casa hinchamos todos por el mismo club."
+      en: "At home we all root for the same club."
+    tips:
+      - title: "Socio de toda la vida"
+        body: "**Socio del club**, **hincha de toda la vida**, the **hinchada** and its **cantitos**."
+      - title: "Rock, cumbia y parrillada"
+        body: "**¿Tocás la guitarra?** **¿Bailás?** And after, a **parrillada** with **chimichurri**, the
+          meat **bien cocido** or jugoso."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "hinchamos"
+      - "socio"
+      - "club"
+      - "hinchada"
+      - "jugador"
+      - "de toda la vida"
+      - "tocás"
+      - "guitarra"
+      - "rock nacional"
+      - "cantante"
+      - "bailás"
+      - "entraña"
+      - "mollejas"
+      - "chimichurri"
+      - "bien cocido"
+      - "cuadro"
+      - "milonga"
+      - "golazo"
+
+  - ordinal: 25
+    slug: "lo-lindo-de-la-ciudad"
+    title: "Say what you love about the city"
+    summary: "Lo lindo es que siempre hay algo"
+    grammar:
+      - "lo.adjetivo"
+      - "repaso.c1"
+    register_max: "informal"
+    sample:
+      es: "Lo lindo de la ciudad es que siempre hay algo para hacer."
+      en: "The nice thing about the city is there's always something to do."
+    tips:
+      - title: "Lo lindo, lo feo"
+        body: "Put **lo** in front of an adjective and it becomes *the … thing*: **lo lindo** — *the nice
+          thing*; **lo feo** — *the ugly part*; **lo difícil** — *the hard part*; **lo único** — *the only
+          thing*: **lo único que extraño es el mar**."
+      - title: "Lo más lindo"
+        body: "**Lo más** + adjective is *the most … thing*: **lo más lindo del barrio es la
+          plaza**. Weighing it up, porteños say the city **tiene sus cosas** — *has its issues*: the
+          **inseguridad**, the **costo de vida** — but the **calidad de vida**, **a la vez**, is hard to
+          beat."
+    words:
+      - lemma: "lo lindo"
+        pos: "phrase"
+        en: "the nice thing, the great thing"
+      - lemma: "lo feo"
+        pos: "phrase"
+        en: "the ugly part, the bad side"
+      - lemma: "lo difícil"
+        pos: "phrase"
+        en: "the hard part"
+      - lemma: "lo único"
+        pos: "phrase"
+        en: "the only thing"
+      - lemma: "lo más"
+        pos: "phrase"
+        en: "the most … thing (+ adjective)"
+      - lemma: "tiene sus cosas"
+        pos: "phrase"
+        en: "it has its issues, it has its ups and downs"
+      - lemma: "inseguridad"
+        pos: "noun"
+        en: "crime, lack of safety"
+      - lemma: "costo de vida"
+        pos: "phrase"
+        en: "cost of living"
+      - lemma: "calidad de vida"
+        pos: "phrase"
+        en: "quality of life"
+      - lemma: "a la vez"
+        pos: "phrase"
+        en: "at the same time"
+      - lemma: "comparado con"
+        pos: "phrase"
+        en: "compared with"
+
+  - ordinal: 26
     slug: "lo-bueno-de-vivir-aca"
     title: "Weigh up the city"
     summary: "Lo bueno de Buenos Aires es la gente"

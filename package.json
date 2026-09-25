@@ -81,7 +81,8 @@
     "culture:validate": "node scripts/culture/validate.mjs",
     "culture:build": "node scripts/culture/build.mjs",
     "course:apply": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/apply-migration.mjs",
-    "course:grammar": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/grammar-seed.mjs"
+    "course:grammar": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/grammar-seed.mjs",
+    "course:reorder": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/reorder.mjs"
   },
   "private": true
 }

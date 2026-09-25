@@ -69,7 +69,7 @@ const edit = (d, es, edits) => planSentence(d, sentence(d, es), edits);
 test('1. a word the learner hasn\'t met yet pauses it; taking it out brings it back', () => {
   const paused = edit(data, 'Un café, por favor.', { es: 'Un perro, por favor.', en: 'A dog, please.', target_form_id: form(data, 'café').id });
   assert.equal(paused.row.status, 'draft');
-  assert.ok(paused.problems.some((p) => p.includes(`"perro" isn't taught until unit 8`)), paused.problems.join('\n'));
+  assert.ok(paused.problems.some((p) => p.includes(`"perro" isn't taught until unit 17`)), paused.problems.join('\n'));
   assert.ok(paused.paused);
   const back = planSentence(applied(data, paused), { ...sentence(data, 'Un café, por favor.'), ...paused.row }, { es: 'Un café, por favor.', en: 'A coffee, please.' });
   assert.deepEqual(back.problems, []);
@@ -222,9 +222,9 @@ test('giving café a gender makes "un café" right', () => {
 
 test('an answer typed by hand is checked like a generated one', () => {
   const hola = form(data, 'hola');
-  const ok = checkAnswer(data, hola, 'hi', 'buenas');
+  const ok = checkAnswer(data, hola, 'hi', 'holis'); // "buenas" is a course word of its own since the doubling
   assert.equal(ok.error, null);
-  assert.deepEqual(ok.writes[0].row, { form_id: hola.id, meaning: 'hi', answer: 'buenas', source: 'staff' });
+  assert.deepEqual(ok.writes[0].row, { form_id: hola.id, meaning: 'hi', answer: 'holis', source: 'staff' });
   assert.match(checkAnswer(data, hola, 'hi', 'hola').error, /already right/);
   assert.match(checkAnswer(data, form(data, 'sos'), 'you are', 'tú eres').error, /tuteo/);
   assert.match(checkAnswer(data, hola, 'goodbye', 'chau').error, /not one of its meanings/);
@@ -300,8 +300,8 @@ test('retiring a word takes it out of its lessons and pauses its sentences', () 
 test('a new word is checked before it is added', () => {
   const unit = data.units[0];
   const lesson = data.lessons.find((l) => l.unit_id === unit.id);
-  const base = { lemma_id: null, lemma: 'pileta', pos: 'noun', features: { gender: 'f', number: 'sg' }, gloss_en: 'swimming pool', gloss_note_en: '', register: 'neutral', is_glue: false, unit_id: unit.id, lesson_id: lesson.id };
-  assert.deepEqual(checkNewForm(data, { ...base, form: 'pileta' }).errors, []);
+  const base = { lemma_id: null, lemma: 'lancha', pos: 'noun', features: { gender: 'f', number: 'sg' }, gloss_en: 'motorboat', gloss_note_en: '', register: 'neutral', is_glue: false, unit_id: unit.id, lesson_id: lesson.id };
+  assert.deepEqual(checkNewForm(data, { ...base, form: 'lancha' }).errors, []);
   assert.ok(checkNewForm(data, { ...base, form: 'mate', lemma: 'mate' }).errors.some((e) => e.includes('already in the course')));
   assert.ok(checkNewForm(data, { ...base, form: 'coche', lemma: 'coche' }).errors.some((e) => e.includes('"auto"')));
 });

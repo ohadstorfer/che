@@ -23,8 +23,8 @@ import { buildRows } from '../lib/rows.mjs';
 const { outline } = loadOutline();
 const { formEntries } = buildRows();
 
-/** The lexicon a learner holds at the end of unit 7 — the deck exercises draw on. */
-const forms = formEntries.filter((f) => f.unit_order <= 7 && !f.is_glue && f.pos !== 'propn');
+/** The lexicon a learner holds at the end of unit 15 (argentino-argentina) — the deck exercises draw on. */
+const forms = formEntries.filter((f) => f.unit_order <= 15 && !f.is_glue && f.pos !== 'propn');
 const byForm = (text) => forms.find((f) => f.form === text);
 const formById = new Map(formEntries.map((f) => [f.id, f]));
 

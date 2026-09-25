@@ -82,8 +82,8 @@ test('a proposed word answer is stored only if it is new, rioplatense, and not a
     form: hola,
     meanings: ['hi', 'hello'],
     proposed: [
-      { meaning: 'hi', answer: 'buenas' },
-      { meaning: 'Hi', answer: 'Buenas' }, // the same answer again
+      { meaning: 'hi', answer: 'holis' }, // "buenas" is a course word of its own since the doubling
+      { meaning: 'Hi', answer: 'Holis' }, // the same answer again
       { meaning: 'hi', answer: 'hola' }, // the word itself
       { meaning: 'hi', answer: 'chau' }, // another course word, another meaning
       { meaning: 'hi', answer: 'hi' }, // the English
@@ -92,7 +92,7 @@ test('a proposed word answer is stored only if it is new, rioplatense, and not a
     ],
     deck,
   });
-  assert.deepEqual(rows, [{ form_id: hola.id, meaning: 'hi', answer: 'buenas' }]);
+  assert.deepEqual(rows, [{ form_id: hola.id, meaning: 'hi', answer: 'holis' }]);
   assert.equal(skipped.length, 2);
   assert.equal(problems.length, 4);
 });

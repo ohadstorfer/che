@@ -121,6 +121,23 @@ A second review found three more gaps: the hardest grammar got the fewest lesson
 
 `npm run course:lessons -- --all` rebuilds every unit; it prints the recycling figures by section. Listening waits for audio (`course:tts`), which is recorded only for units 1–6.
 
+## Doubling (2026-09-25)
+
+Every grammar point got one unit, and the next unit moved on. The course now gives each one a second unit before it moves on: the same grammar, a new situation and new words, so she meets the pattern in twice the sentences and leaves with twice the vocabulary.
+
+**Layout.** A *twin* goes right after the unit it doubles, and each practice unit gets a twin after it. The checkpoint stays last, so its twin goes before it:
+
+- Sections 4–15 (26 units): T1 T1b T2 T2b T3 T3b P1 P1b · T4 T4b T5 T5b T6 T6b P2 P2b · T7 T7b T8 T8b T9 T9b P3 P3b · Cb C
+- Sections 1–3 (23 units), which had no practice units: T1 T1b T2 T2b T3 T3b P1 · T4 … P2 · T7 … P3 · Cb C
+
+**A twin** keeps its original's `grammar:` tags (and may add one) and its `register_max`. It extends the pattern rather than repeating it: more verbs of the same conjugation, the persons the original left out, the same structure in a new setting. A situation she will actually be in, in Buenos Aires. About as many new words as the original (8–14 lemmas); tips that teach the pattern again from the new angle; a sample sayable with what the course has taught by then.
+
+**Word order.** New words are common, useful ones not yet in the course. Where a basic word is taught far too late (a food, a colour, an everyday verb sitting in section 9), the twin takes it: the word moves earlier — never later, so every sentence that uses it stays sayable. Its forms move only if the grammar they need is taught by then (no subjunctive before section 7).
+
+**A practice twin** (P1b) teaches no words: its `review:` lists about 12 forms, mostly from the block's twins, a third from older units.
+
+**Mechanics.** The YAML is the plan; `npm run course:reorder` lays it over the database (which the admin has added to since): it checks every new unit against the live words, and `--sql` writes the migration that renumbers the existing units and moves words earlier. Then `course:seed` adds the new units, `course:reorder --sql` again for moves into them, and each new unit goes through the agent loop like any other. A new unit stays off the path until it is published.
+
 ## Status
 
 | Section | Outline | Seeded | Sentences |

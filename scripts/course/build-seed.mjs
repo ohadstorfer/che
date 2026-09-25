@@ -25,8 +25,10 @@ if (!out && !dryRun) {
   console.error('usage: npm run course:seed -- <output.sql> | --dry-run');
   process.exit(1);
 }
-/** Units up to here were published when the course first went in. */
-const PUBLISH_THROUGH = 2;
+/** Units up to here were published when the course first went in. Those exist
+ *  now, so a new unit is always seeded as a draft: the doubling put a new unit
+ *  at place 2, and it went live with no sentences. */
+const PUBLISH_THROUGH = 0;
 
 let built;
 try {
