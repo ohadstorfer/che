@@ -44,6 +44,25 @@ test('the other gender only when nothing says which', () => {
   assert.deepEqual(alts('argentino-argentina', 'argentino', 'Él es argentino.', "He's Argentinian."), ['Es argentino.']);
 });
 
+test('the other gender never for a word agreeing with a noun, nor when the listener is named', () => {
+  const last = outline.units.at(-1).slug;
+  const all = (es, en) => build(last, 'x', { es, en }).sentences[0].es_alt;
+  // An adjective next to its noun agrees with the noun.
+  assert.ok(!all('Tengo la heladera rota.', "I've got a broken fridge.").some((a) => /roto/.test(a)));
+  // A quantifier agrees with what it counts.
+  assert.ok(!all('¿Cuántos años tenés vos?', 'How old are you?').some((a) => /Cuántas/.test(a)));
+  // Lucía is who she's talking to.
+  assert.ok(!all('Che, Lucía, ¿vos sos chilena?', 'Hey Lucía, are you Chilean?').some((a) => /chileno/.test(a)));
+});
+
+test('no "yo" before a command that is spelled like a first-person verb', () => {
+  const last = outline.units.at(-1).slug;
+  const all = (es, en) => build(last, 'x', { es, en }).sentences[0].es_alt;
+  assert.ok(!all('Sé sincera.', 'Be honest.').some((a) => /^Yo /.test(a)));
+  assert.ok(!all('Pedí unos días.', 'Ask for a few days off.').some((a) => /^Yo /.test(a)));
+  assert.ok(all('Pedí unos días.', 'I asked for a few days off.').includes('Yo pedí unos días.'));
+});
+
 test('an optional "che" can go, and its punctuation goes with it', () => {
   assert.deepEqual(alts('hola-che', 'chau', 'Chau, che.', 'Bye!'), ['Chau.']);
 });

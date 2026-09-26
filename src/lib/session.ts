@@ -33,6 +33,7 @@ import {
   sentenceCap,
   tooLongToBuild,
 } from './sentences';
+import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { ExerciseMode, Form, FormState, Sentence, Tip } from './types';
 
@@ -144,8 +145,9 @@ export interface LearnerData {
  *  ladder her recent rounds and any placement have earned her. */
 export async function loadLearner(userId: string): Promise<LearnerData> {
   const [{ data: formRows }, { data: stateRows }, { data: roundRows }, { data: profile }, { data: answerRows }] = await Promise.all([
-    supabase.from('form_entries').select('*').eq('status', 'published'),
-    supabase.from('form_states').select('*').eq('user_id', userId),
+    // Paged (all): the lexicon and her states are past PostgREST's 1,000 rows.
+    all<Form>(() => supabase.from('form_entries').select('*').eq('status', 'published').order('id')).then((data) => ({ data })),
+    all<FormState>(() => supabase.from('form_states').select('*').eq('user_id', userId).order('form_id')).then((data) => ({ data })),
     supabase
       .from('rounds')
       .select('score, finished_at')
@@ -154,7 +156,9 @@ export async function loadLearner(userId: string): Promise<LearnerData> {
       .order('finished_at', { ascending: false })
       .limit(OFFSET_WINDOW),
     supabase.from('profiles').select('placed_through').eq('user_id', userId).maybeSingle(),
-    supabase.from('form_answers').select('form_id, meaning, answer').eq('status', 'published'),
+    all<{ form_id: string; meaning: string; answer: string }>(() =>
+      supabase.from('form_answers').select('form_id, meaning, answer').eq('status', 'published').order('form_id').order('meaning').order('answer'),
+    ).then((data) => ({ data })),
   ]);
   // The answers stored for each word's meanings (course:answers), next to the word.
   const accepts = new Map<string, { meaning: string; answer: string }[]>();

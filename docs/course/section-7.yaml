@@ -550,16 +550,6 @@ units:
         body: "**¿Qué te parece?** — *what do you think?* — and the answer **me parece bien**, **me parece
           que no**."
     words:
-      - lemma: "creer"
-        pos: "verb"
-        en: "to think, to believe"
-        forms:
-          - form: "creo"
-            en: "I think, I believe"
-            f: "1sg.pres.ind"
-          - form: "creés"
-            en: "you think, you believe"
-            f: "2sg.pres.ind.vos"
       - lemma: "parecer"
         pos: "verb"
         en: "to seem"

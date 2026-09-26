@@ -1,5 +1,6 @@
 import { shuffle } from './answers';
 import { clauseOfSurface, wordsIn } from './course-rules/shape';
+import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { Form, Sentence, SentenceToken } from './types';
 
@@ -32,13 +33,14 @@ export interface SentenceRow {
  * from a name, which the stored tokens don't say.
  */
 export async function loadSentences(userId: string, forms: Form[]): Promise<Sentence[]> {
-  const [{ data: rows }, { data: states }] = await Promise.all([
-    supabase.from('sentences').select('*').eq('status', 'published'),
-    supabase.from('sentence_states').select('*').eq('user_id', userId),
+  // Paged: far past the 1,000 rows PostgREST sends at once.
+  const [rows, states] = await Promise.all([
+    all<SentenceRow>(() => supabase.from('sentences').select('*').eq('status', 'published').order('id')),
+    all<{ sentence_id: string; shown_count: number; correct_count: number; last_shown_at: string | null }>(() => supabase.from('sentence_states').select('*').eq('user_id', userId).order('sentence_id')),
   ]);
   const formById = new Map(forms.map((f) => [f.id, f]));
-  const shownBy = new Map((states ?? []).map((s) => [s.sentence_id as string, s]));
-  return ((rows ?? []) as SentenceRow[]).map((r) => toSentence(r, formById, shownBy.get(r.id)));
+  const shownBy = new Map(states.map((s) => [s.sentence_id, s]));
+  return rows.map((r) => toSentence(r, formById, shownBy.get(r.id)));
 }
 
 /** A stored sentence as the app uses it: tokens split into content forms

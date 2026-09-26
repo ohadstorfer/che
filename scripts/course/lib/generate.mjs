@@ -333,3 +333,7 @@ export const targetsFor = (outline, unit) =>
     ? (unit.review_form_ids ?? []).map((id) => outline.forms.find((f) => f.id === id)).filter(Boolean)
     : outline.forms.filter((f) => f.unit_id === unit.id && drillable(f));
 export const isPracticeUnit = (unit) => (unit.review_form_ids ?? []).length > 0;
+
+/** What a writer answers with, for one batch of targets. */
+export const DRAFT_SCHEMA =
+  'Answer with ONLY a JSON object: {"sentences":[{"target":string (the target word exactly as listed),"role":"intro"|"drill","es":string,"en":string,"en_alt":string[],"difficulty":1-4,"loose":string[] (Spanish words the English renders idiomatically rather than word for word; usually empty)}]}';

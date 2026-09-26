@@ -125,6 +125,23 @@ test('tokenizer keeps punctuation on tokens and merges set phrases', () => {
   assert.equal(tokenize('tenes', buildIndex([{ id: 'x', form: 'tenés' }]))[0].forms.length, 0);
 });
 
+test('tokenizer matches a phrase with its own punctuation, and capitals only where written', () => {
+  const idx = buildIndex([
+    { id: 'sc', form: 'sí, claro' },
+    { id: 'si', form: 'sí' },
+    { id: 'lp', form: 'La Plata' },
+    { id: 'la', form: 'la' },
+    { id: 'pl', form: 'plata' },
+  ]);
+  assert.deepEqual(
+    tokenize('Sí, claro, vamos.', idx).map((t) => [t.surface, t.forms.map((f) => f.id)]),
+    [['Sí, claro,', ['sc']], ['vamos.', []]],
+  );
+  assert.deepEqual(tokenize('No tengo la plata.', idx).map((t) => t.forms.map((f) => f.id)), [[], [], ['la'], ['pl']]);
+  assert.deepEqual(tokenize('La plata no alcanza.', idx).map((t) => t.forms.map((f) => f.id)), [['la'], ['pl'], [], []]);
+  assert.deepEqual(tokenize('Vivo en La Plata.', idx).map((t) => t.forms.map((f) => f.id)), [[], [], ['lp']]);
+});
+
 // --- content (sentences + lesson slots) -----------------------------------
 
 test('the demo fixture builds clean', async () => {

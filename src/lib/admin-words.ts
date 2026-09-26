@@ -7,6 +7,7 @@ import { type VocabForm, type Vocabulary, drillable } from './course-rules/vocab
 import { candidateMeanings, checkWordAnswers } from './course-rules/word-answers';
 import { withMeanings } from './meanings';
 import { toSentence } from './sentences';
+import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { ContentStatus, Form, FormFeatures, Lesson, LessonSlot, Sentence, Unit } from './types';
 
@@ -89,18 +90,6 @@ export interface WordsData {
 // ---------------------------------------------------------------------------
 // Loading
 // ---------------------------------------------------------------------------
-
-/** Every row, past PostgREST's page size. */
-async function all<T>(query: () => { range: (from: number, to: number) => PromiseLike<{ data: unknown; error: { message: string } | null }> }) {
-  const out: T[] = [];
-  for (let from = 0; ; from += 1000) {
-    const { data, error } = await query().range(from, from + 999);
-    if (error) throw new Error(error.message);
-    const rows = (data ?? []) as T[];
-    out.push(...rows);
-    if (rows.length < 1000) return out;
-  }
-}
 
 export async function loadWords(): Promise<WordsData> {
   const [entries, own, lemmas, units, lessons, slots, sentences, answers, reviews] = await Promise.all([

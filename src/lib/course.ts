@@ -1,3 +1,4 @@
+import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { Lesson, Section, Tip, Unit } from './types';
 
@@ -34,18 +35,16 @@ export interface Course {
 }
 
 export async function loadCourse(): Promise<Course> {
-  const [{ data: sections }, { data: units }, { data: lessons }, { data: tips }] = await Promise.all([
-    supabase.from('sections').select('*').eq('status', 'published').order('ordinal', { ascending: true }),
-    supabase.from('units').select('*').eq('status', 'published').order('ordinal', { ascending: true }),
-    supabase.from('lessons').select('*').eq('status', 'published').order('ordinal', { ascending: true }),
-    supabase.from('tips').select('*').eq('status', 'published'),
+  // Paged: the course is past the 1,000 rows PostgREST sends at once (it has
+  // ~2,900 lessons), and a single read silently cut every unit after lesson 3.
+  // `assemble` puts things in order, so the pages go by id.
+  const [sections, units, lessons, tips] = await Promise.all([
+    all<Section>(() => supabase.from('sections').select('*').eq('status', 'published').order('id')),
+    all<Unit>(() => supabase.from('units').select('*').eq('status', 'published').order('id')),
+    all<Lesson>(() => supabase.from('lessons').select('*').eq('status', 'published').order('id')),
+    all<Tip>(() => supabase.from('tips').select('*').eq('status', 'published').order('id')),
   ]);
-  return assemble(
-    (sections ?? []) as Section[],
-    (units ?? []) as Unit[],
-    (lessons ?? []) as Lesson[],
-    (tips ?? []) as Tip[],
-  );
+  return assemble(sections.sort((a, b) => a.ordinal - b.ordinal), units, lessons, tips);
 }
 
 export function assemble(sections: Section[], units: Unit[], lessons: Lesson[], tips: Tip[]): Course {
@@ -102,9 +101,11 @@ export function assemble(sections: Section[], units: Unit[], lessons: Lesson[], 
 /** Lesson ids she has finished — for a unit check, passed (learning-engine-spec
  *  §3): a check finished below the pass score keeps the path waiting on it. */
 export async function loadProgress(userId: string): Promise<Set<string>> {
-  const { data } = await supabase.from('lesson_progress').select('lesson_id, passed').eq('user_id', userId);
+  const data = await all<{ lesson_id: string; passed?: boolean | null }>(() =>
+    supabase.from('lesson_progress').select('lesson_id, passed').eq('user_id', userId).order('lesson_id'),
+  );
   return new Set(
-    ((data ?? []) as { lesson_id: string; passed?: boolean | null }[])
+    data
       .filter((r) => r.passed !== false)
       .map((r) => r.lesson_id),
   );
@@ -113,12 +114,11 @@ export async function loadProgress(userId: string): Promise<Set<string>> {
 /** Attempts at lessons she has tried but not passed — the unit checks still
  *  waiting on her, by lesson id. */
 export async function loadCheckAttempts(userId: string): Promise<Map<string, number>> {
-  const { data } = await supabase
-    .from('lesson_progress')
-    .select('lesson_id, passed, attempts')
-    .eq('user_id', userId);
+  const data = await all<{ lesson_id: string; passed?: boolean | null; attempts?: number }>(() =>
+    supabase.from('lesson_progress').select('lesson_id, passed, attempts').eq('user_id', userId).order('lesson_id'),
+  );
   return new Map(
-    ((data ?? []) as { lesson_id: string; passed?: boolean | null; attempts?: number }[])
+    data
       .filter((r) => r.passed === false)
       .map((r) => [r.lesson_id, r.attempts ?? 1]),
   );

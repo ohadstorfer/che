@@ -20,6 +20,7 @@ import { playAudio } from '@/lib/audio';
 import { useAuth } from '@/lib/auth';
 import { CONCEPT_LABELS, type ConceptScore, conceptScores, weakestConcept } from '@/lib/concepts';
 import { useStatusBarColor } from '@/lib/status-bar-color';
+import { all } from '@/lib/fetch-all';
 import { supabase } from '@/lib/supabase';
 import { colors, radius, shadow } from '@/lib/theme';
 import type { Form, FormState } from '@/lib/types';
@@ -72,8 +73,9 @@ export default function Words() {
     useCallback(() => {
       if (!profile) return;
       Promise.all([
-        supabase.from('form_states').select('*').eq('user_id', profile.id),
-        supabase.from('form_entries').select('*').eq('status', 'published'),
+        // Paged (all): both are past PostgREST's 1,000 rows.
+        all<FormState>(() => supabase.from('form_states').select('*').eq('user_id', profile.id).order('form_id')).then((data) => ({ data })),
+        all<Form>(() => supabase.from('form_entries').select('*').eq('status', 'published').order('id')).then((data) => ({ data })),
       ]).then(([{ data: states }, { data: forms }]) => {
         const formById = new Map(((forms ?? []) as Form[]).map((f) => [f.id, f]));
         const rows = ((states ?? []) as FormState[]).flatMap((state) => {

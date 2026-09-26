@@ -19,7 +19,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
-import { FORMS_PER_REQUEST, PRACTICE_QUOTA, checkCandidates, isPracticeUnit, generationPrompt, judgePrompt, keptInSpanish, promptHash, selectCandidates, styleSpec, targetsFor } from './lib/generate.mjs';
+import { DRAFT_SCHEMA, FORMS_PER_REQUEST, PRACTICE_QUOTA, checkCandidates, isPracticeUnit, generationPrompt, judgePrompt, keptInSpanish, promptHash, selectCandidates, styleSpec, targetsFor } from './lib/generate.mjs';
 import { publishUnit, saveCandidates, sentencesOfUnits, unitFromArgs } from './lib/pipeline.mjs';
 
 const MODEL = 'claude-code-agent';
@@ -37,7 +37,10 @@ try {
   process.exit(1);
 }
 const { outline, unit, flags } = ctx;
-const dir = new URL(`../../.course-work/${unit.slug}/`, import.meta.url).pathname;
+// `--topup` writes more sentences for a published unit's words that have fewer
+// than 4, in its own work folder, and leaves everything else in the unit alone.
+const topup = flags.has('--topup');
+const dir = new URL(`../../.course-work/${unit.slug}${topup ? '-topup' : ''}/`, import.meta.url).pathname;
 mkdirSync(dir, { recursive: true });
 const file = (name) => dir + name;
 const readJson = (name) => {
@@ -60,12 +63,21 @@ const examples = known
   .sort((a, b) => Number(b.unit_id === unit.id) - Number(a.unit_id === unit.id))
   .slice(0, 30);
 const existing = known.filter((s) => s.unit_id === unit.id).map((s) => s.es);
-const targets = targetsFor(outline, unit);
+let targets = targetsFor(outline, unit);
+if (topup) {
+  if (stage === 'prompts') {
+    const have = new Map();
+    for (const s of known) {
+      if (s.unit_id === unit.id && ['approved', 'published'].includes(s.status)) have.set(s.target_form_id, (have.get(s.target_form_id) ?? 0) + 1);
+    }
+    writeFileSync(file('topup.json'), JSON.stringify(targets.filter((t) => (have.get(t.id) ?? 0) < 4).map((t) => t.id)));
+  }
+  const wanted = new Set(readJson('topup.json'));
+  targets = targets.filter((t) => wanted.has(t.id));
+}
 const batches = [];
 for (let i = 0; i < targets.length; i += FORMS_PER_REQUEST) batches.push(targets.slice(i, i + FORMS_PER_REQUEST));
 
-const DRAFT_SCHEMA =
-  'Answer with ONLY a JSON object: {"sentences":[{"target":string (the target word exactly as listed),"role":"intro"|"drill","es":string,"en":string,"en_alt":string[],"difficulty":1-4,"loose":string[] (Spanish words the English renders idiomatically rather than word for word; usually empty)}]}';
 const JUDGE_SCHEMA =
   'Answer with ONLY a JSON object: {"scores":[{"id":int,"naturalness":1-5,"grammaticality":1-5,"coherence":1-5,"logic":1-5,"porteno":bool,"register_ok":bool,"english_natural":bool,"issue":string,"rewrite":string}]} — one entry per sentence.';
 const asFile = ({ system, user }, schema) => `# SYSTEM\n${system}\n\n# TASK\n${user}\n\n${schema}\n`;

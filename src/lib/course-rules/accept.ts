@@ -25,6 +25,7 @@ const GENDER_CUES = /\b(he|she|him|her|his|hers|himself|herself|man|woman|boy|gi
 
 type T = Token<VocabForm>;
 
+const isName = (t: T) => t.forms.length > 0 && t.forms.every((f) => f.pos === 'propn');
 const personalVerb = (t: T) => t.forms.find((f) => f.pos === 'verb' && f.features?.person)?.features ?? null;
 const isClitic = (t: T) => t.forms.some((f) => f.pos === 'pron' && (CLITIC_LEMMAS.has(f.lemma) || f.features?.clitic));
 const subjectPronoun = (t: T) => t.forms.find((f) => f.pos === 'pron' && SUBJECT_PRONOUNS.has(f.lemma))?.lemma ?? null;
@@ -82,12 +83,25 @@ export function generateVariants(tokens: T[], en: string, vocabulary: { forms: V
   const persons = tokens.map(personalVerb).filter((f): f is NonNullable<typeof f> => !!f);
   // Nothing says whether "I" or "you" is a man or a woman when the only people
   // in the sentence are the speaker and the listener, and the English is quiet.
-  const genderOpen = persons.length > 0 && persons.every((f) => f.person !== 3) && !GENDER_CUES.test(en);
+  // A name said to someone — at the start or after a comma, and closed by
+  // punctuation ("Sofi, ¿…", "Mucho gusto, Lucía.") — says who the listener is;
+  // "soy uruguayo, de Montevideo" names a place, and stays open.
+  const named = tokens.some(
+    (t, i) =>
+      isName(t) &&
+      (i === 0 || split(tokens[i - 1].surface).tail.includes(',')) &&
+      (!!split(t.surface).tail || i === tokens.length - 1),
+  );
+  const genderOpen = persons.length > 0 && persons.every((f) => f.person !== 3) && !GENDER_CUES.test(en) && !named;
 
   // Which pronoun a third-person verb stands for, when the English names one.
   const words = englishWords(en);
   const third = words.includes('she') === words.includes('he') ? null : words.includes('she') ? 'ella' : 'él';
-  const pronounFor = (f: { person?: number }) => (f.person === 1 ? 'yo' : f.person === 2 ? 'vos' : third);
+  // "yo" only where the English has "I": "Sé sincera" is "Be honest" and
+  // "Pedí unos días" "Ask for a few days", commands spelled like a first-person
+  // verb. Nor "vos" before a command ("Frená" is not "Vos frená").
+  const pronounFor = (f: { person?: number; mood?: string }) =>
+    f.person === 1 ? (words.includes('i') ? 'yo' : null) : f.person === 2 ? (f.mood === 'imp' ? null : 'vos') : third;
 
   // Slots alternate: a place a pronoun could be put, then a token. Each is a
   // list of choices; null leaves it empty.
@@ -102,7 +116,9 @@ export function generateVariants(tokens: T[], en: string, vocabulary: { forms: V
     const insert: Slot = { original: null, choices: [null] };
     const v = skipClitics(tokens, i);
     const f = tokens[v] && personalVerb(tokens[v]);
-    const lemma = f && f.number === 'sg' && clauseStart(tokens, i) ? pronounFor(f) : null;
+    // Not before a word that can be something else too ("Como siempre": as always).
+    const onlyVerb = !!tokens[v] && tokens[v].forms.every((x) => x.pos === 'verb');
+    const lemma = f && f.number === 'sg' && onlyVerb && clauseStart(tokens, i) ? pronounFor(f) : null;
     if (lemma) {
       const hasOne =
         (i > 0 && subjectPronoun(tokens[i - 1])) || (v + 1 < tokens.length && subjectPronoun(tokens[v + 1]));
@@ -113,8 +129,14 @@ export function generateVariants(tokens: T[], en: string, vocabulary: { forms: V
 
     const token: Slot = { original: piece, choices: [piece] };
     if (optional.has(i)) token.choices.push(null);
+    // Only an adjective said of the speaker or listener, right after the verb
+    // ("soy chileno", "estás muy cansada"); one next to a noun agrees with the
+    // noun ("la heladera rota"), and a quantifier with what it counts ("cuántos años").
     const adj = t.forms.find((x) => x.pos === 'adj' && x.features?.gender);
-    if (adj && genderOpen) {
+    let before = i - 1;
+    while (before >= 0 && tokens[before].forms.length > 0 && tokens[before].forms.every((x) => x.pos === 'adv')) before--;
+    const predicate = before >= 0 && tokens[before].forms.some((x) => x.pos === 'verb') && !split(tokens[before].surface).tail;
+    if (adj && genderOpen && predicate) {
       const other = vocabulary.forms.find(
         (x) =>
           x.lemma_id === adj.lemma_id &&

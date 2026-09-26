@@ -6,7 +6,7 @@
 // units asked for are written. The proposal is checked against the lesson
 // linters, and a reviewer reorders it in the dashboard.
 //
-//   npm run course:lessons -- <unit-slug> [--dry-run]
+//   npm run course:lessons -- <unit-slug> [<unit-slug> …] [--dry-run]
 //   npm run course:lessons -- --all [--dry-run]
 import { exposureReport, planCourse } from './lib/course-plan.mjs';
 import { queryLinked } from './lib/db.mjs';
@@ -15,15 +15,16 @@ import { q, upsert } from './lib/sql.mjs';
 
 const argv = process.argv.slice(2);
 const flags = new Set(argv.filter((a) => a.startsWith('--')));
-const slug = argv.find((a) => !a.startsWith('--'));
+const slugs = argv.filter((a) => !a.startsWith('--'));
+const slug = slugs[0];
 if (!slug && !flags.has('--all')) {
   console.error('usage: course:lessons -- <unit-slug> | --all [--dry-run]');
   process.exit(1);
 }
 
-const planned = planCourse({ include: slug ? [slug] : [] });
+const planned = planCourse({ include: slugs });
 const { result, units } = planned;
-const wanted = flags.has('--all') ? units : units.filter((u) => u.slug === slug);
+const wanted = flags.has('--all') ? units : units.filter((u) => slugs.includes(u.slug));
 if (!wanted.length) {
   console.error(`no published unit ${slug}`);
   process.exit(1);

@@ -763,19 +763,6 @@ units:
           - form: "encontramos"
             f: "1pl.pres.ind"
             bound: true
-      - lemma: "avisar"
-        pos: "verb"
-        en: "to let know"
-        forms:
-          - form: "aviso"
-            en: "I let know, I'll let know"
-            f: "1sg.pres.ind"
-          - form: "avisás"
-            en: "you let know"
-            f: "2sg.pres.ind.vos"
-          - form: "avisame"
-            en: "let me know"
-            f: "2sg.imp.vos.clitic"
       - lemma: "esperar"
         pos: "verb"
         forms:
@@ -1326,16 +1313,6 @@ units:
         body: "**Tengo ganas de ir a la playa** — *I feel like going to the beach*. **Pienso ir** — *I'm
           planning to go*."
     words:
-      - lemma: "pensar"
-        pos: "verb"
-        en: "to think, to plan to"
-        forms:
-          - form: "pienso"
-            en: "I think, I plan to"
-            f: "1sg.pres.ind.irregular"
-          - form: "pensás"
-            en: "you think, you plan to"
-            f: "2sg.pres.ind.vos"
       - lemma: "ganas"
         pos: "noun"
         en: "wish, urge (to feel like)"
@@ -1391,9 +1368,6 @@ units:
       - lemma: "pensar"
         pos: "verb"
         forms:
-          - form: "piensa"
-            en: "thinks, plans to (he/she)"
-            f: "3sg.pres.ind.irregular"
           - form: "pensamos"
             en: "we think, we plan to"
             f: "1pl.pres.ind"
@@ -1482,19 +1456,6 @@ units:
           - form: "mudamos"
             f: "1pl.pret.ind"
             bound: true
-      - lemma: "extrañar"
-        pos: "verb"
-        en: "to miss"
-        forms:
-          - form: "extraño"
-            en: "I miss"
-            f: "1sg.pres.ind"
-          - form: "extrañás"
-            en: "you miss"
-            f: "2sg.pres.ind.vos"
-          - form: "extraña"
-            en: "misses (he/she misses)"
-            f: "3sg.pres.ind"
       - lemma: "mudanza"
         pos: "noun"
         en: "move, removal"

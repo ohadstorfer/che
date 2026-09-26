@@ -51,6 +51,14 @@ export function buildIndex<F extends { form: string }>(forms: F[]): FormIndex<F>
   return { index, maxWords };
 }
 
+const startsUpper = (w: string) => /^\p{Lu}/u.test(w);
+
+/** A form written with capitals (a place, a name) matches only where the sentence capitalizes those words too: "la plata" is money, not La Plata. */
+function caseFits(form: string, core: string): boolean {
+  const cw = core.split(' ');
+  return form.split(' ').every((w, k) => !startsUpper(w) || startsUpper(cw[k] ?? ''));
+}
+
 export function tokenize<F>(es: string, { index, maxWords }: FormIndex<F>): Token<F>[] {
   const pieces = es.trim().split(/\s+/).filter(Boolean).map(split);
   const tokens: Token<F>[] = [];
@@ -60,12 +68,14 @@ export function tokenize<F>(es: string, { index, maxWords }: FormIndex<F>): Toke
     for (let n = Math.min(maxWords, pieces.length - i); n >= 1; n--) {
       const span = pieces.slice(i, i + n);
       // Punctuation may only sit at the outer edges of a multi-word token —
-      // "bien, gracias" is two tokens even though "bien gracias" might not be.
+      // "bien, gracias" is two tokens even though "bien gracias" might not be —
+      // unless the form itself has it there: "sí, claro", "al mal tiempo, buena cara".
       const inner = span.some((p, k) => (k > 0 && p.lead) || (k < n - 1 && p.tail));
-      if (n > 1 && inner) continue;
-      const core = span.map((p) => p.core).join(' ');
-      const hit = index.get(fold(core));
-      if (hit) {
+      const core = inner
+        ? span.map((p, k) => `${k > 0 ? p.lead : ''}${p.core}${k < n - 1 ? p.tail : ''}`).join(' ')
+        : span.map((p) => p.core).join(' ');
+      const hit = index.get(fold(core))?.filter((f) => caseFits((f as { form?: string }).form ?? '', core));
+      if (hit?.length) {
         matched = { n, core, forms: hit };
         break;
       }
@@ -73,7 +83,7 @@ export function tokenize<F>(es: string, { index, maxWords }: FormIndex<F>): Toke
     const n = matched?.n ?? 1;
     const span = pieces.slice(i, i + n);
     tokens.push({
-      surface: span.map((p, k) => `${k === 0 ? p.lead : ''}${p.core}${k === n - 1 ? p.tail : ''}`).join(' '),
+      surface: span.map((p) => `${p.lead}${p.core}${p.tail}`).join(' '),
       core: matched?.core ?? pieces[i].core,
       forms: matched?.forms ?? [],
     });

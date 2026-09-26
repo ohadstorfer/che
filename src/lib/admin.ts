@@ -1,4 +1,5 @@
 import { answerWords } from './answers';
+import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { ContentStatus, Form, Lesson, LessonSlot, Section, Tip, Unit } from './types';
 
@@ -208,12 +209,13 @@ const emptyCounts = () => Object.fromEntries(STATUSES.map((s) => [s, 0])) as Rec
 export async function loadUnits(): Promise<UnitSummary[]> {
   const [{ data: units }, { data: sections }, { data: sentences }, { data: forms }, { data: lessons }, { data: slots }] =
     await Promise.all([
-      supabase.from('units').select('*').neq('status', 'retired'),
-      supabase.from('sections').select('*'),
-      supabase.from('sentences').select('unit_id, status'),
-      supabase.from('forms').select('unit_id, status'),
-      supabase.from('lessons').select('id, unit_id, status').neq('status', 'retired'),
-      supabase.from('lesson_slots').select('lesson_id'),
+      // Paged (all): every one of these is past PostgREST's 1,000 rows.
+      all(() => supabase.from('units').select('*').neq('status', 'retired').order('id')).then((data) => ({ data })),
+      all(() => supabase.from('sections').select('*').order('id')).then((data) => ({ data })),
+      all(() => supabase.from('sentences').select('unit_id, status').order('id')).then((data) => ({ data })),
+      all(() => supabase.from('forms').select('unit_id, status').order('id')).then((data) => ({ data })),
+      all(() => supabase.from('lessons').select('id, unit_id, status').neq('status', 'retired').order('id')).then((data) => ({ data })),
+      all(() => supabase.from('lesson_slots').select('lesson_id').order('id')).then((data) => ({ data })),
     ]);
   const sectionById = new Map(((sections ?? []) as Section[]).map((s) => [s.id, s]));
   const lessonUnit = new Map(((lessons ?? []) as Lesson[]).map((l) => [l.id, l.unit_id]));
