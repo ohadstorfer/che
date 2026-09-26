@@ -339,6 +339,9 @@ units:
           - form: "conociste"
             en: "you met"
             f: "2sg.pret.ind.vos"
+          - form: "conocer"
+            en: "to see, to get to know"
+            f: "inf"
       - lemma: "recién"
         pos: "adv"
         en: "just (a moment ago)"
@@ -442,6 +445,9 @@ units:
       - lemma: "vida"
         pos: "noun"
         en: "life"
+      - lemma: "donde"
+        pos: "adv"
+        en: "where (the place where)"
 
   - ordinal: 5
     slug: "fui-a-la-cancha"
@@ -884,6 +890,9 @@ units:
       - lemma: "carbón"
         pos: "noun"
         en: "charcoal"
+      - lemma: "alguien"
+        pos: "pron"
+        en: "someone, anyone"
 
   - ordinal: 11
     slug: "mas-alto-que"
@@ -1400,6 +1409,9 @@ units:
           - form: "dame"
             en: "give me"
             f: "2sg.imp.vos.clitic"
+          - form: "dar"
+            en: "to give"
+            f: "inf"
       - lemma: "encontrar"
         pos: "verb"
         en: "to find"
@@ -2092,3 +2104,6 @@ units:
         pos: "noun"
         en: "drag, bummer"
         register: "informal"
+      - lemma: "además"
+        pos: "adv"
+        en: "besides, as well"

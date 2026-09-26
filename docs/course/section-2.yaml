@@ -1671,6 +1671,10 @@ units:
         forms:
           - form: "practicar"
             f: "inf"
+      - lemma: "persona"
+        pos: "noun"
+        en: "person"
+
   - ordinal: 19
     slug: "comes-vivis"
     title: "Eat, live, read and write"
@@ -2026,6 +2030,9 @@ units:
       - lemma: "ruido"
         pos: "noun"
         en: "noise"
+      - lemma: "problema"
+        pos: "noun"
+        en: "problem"
   - ordinal: 23
     slug: "mi-casa"
     title: "Show someone your place"
@@ -2128,3 +2135,13 @@ units:
       - lemma: "heladera"
         pos: "noun"
         en: "fridge"
+      - lemma: "cosa"
+        pos: "noun"
+        en: "thing"
+        forms:
+          - form: "cosa"
+            f: "f.sg"
+          - form: "cosas"
+            en: "things"
+            f: "f.pl"
+

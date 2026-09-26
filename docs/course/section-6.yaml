@@ -81,16 +81,6 @@ units:
       - lemma: "obvio"
         pos: "adv"
         en: "of course"
-      - lemma: "cosa"
-        pos: "noun"
-        en: "thing"
-        forms:
-          - form: "cosa"
-            f: "f.sg"
-          - form: "cosas"
-            en: "things"
-            f: "f.pl"
-
   - ordinal: 2
     slug: "me-das-una-mano"
     title: "Ask a friend for a hand"
@@ -226,11 +216,6 @@ units:
           - form: "tenemos que"
             en: "we have to"
             f: "1pl.pres.ind"
-      - lemma: "llegar"
-        pos: "verb"
-        forms:
-          - form: "llegar"
-            f: "inf"
       - lemma: "urgente"
         pos: "adj"
         en: "urgent"
@@ -240,12 +225,6 @@ units:
       - lemma: "importante"
         pos: "adj"
         en: "important"
-      - lemma: "hablar"
-        pos: "verb"
-        forms:
-          - form: "hablar"
-            f: "inf"
-
   - ordinal: 4
     slug: "hay-que-sacar-turno"
     title: "Find out what you need to bring"
@@ -1196,9 +1175,6 @@ units:
           - form: "saliendo"
             en: "going out, seeing"
             f: "ger"
-      - lemma: "alguien"
-        pos: "pron"
-        en: "someone, anyone"
       - lemma: "pelearse"
         pos: "verb"
         en: "to fight, to argue"

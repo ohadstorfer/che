@@ -192,6 +192,9 @@ units:
         forms:
           - form: "torta"
             f: "f.sg"
+      - lemma: "comida"
+        pos: "noun"
+        en: "the food, a meal"
   - ordinal: 3
     slug: "hola-che"
     title: "Greet people"
@@ -571,6 +574,19 @@ units:
       - lemma: "despacio"
         pos: "adv"
         en: "slowly"
+      - lemma: "saber"
+        pos: "verb"
+        en: "to know"
+        forms:
+          - form: "sé"
+            en: "I know"
+            f: "1sg.pres.ind.irregular"
+          - form: "sabés"
+            en: "you know"
+            f: "2sg.pres.ind.vos"
+          - form: "sabe"
+            en: "knows (he/she knows)"
+            f: "3sg.pres.ind"
   - ordinal: 10
     slug: "de-donde-sos"
     title: "Say where you're from"

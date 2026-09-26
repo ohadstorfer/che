@@ -418,7 +418,6 @@ units:
             f: "2sg.pres.subj.vos.irregular"
       - lemma: "saber"
         pos: "verb"
-        en: "to know"
         forms:
           - form: "sepas"
             en: "you know (when you know)"
@@ -722,9 +721,6 @@ units:
           - form: "te hagas"
             en: "you make yourself (don't)"
             f: "2sg.pres.subj.vos.clitic.irregular"
-      - lemma: "problema"
-        pos: "noun"
-        en: "problem"
       - lemma: "decir"
         pos: "verb"
         forms:
@@ -885,11 +881,6 @@ units:
       - lemma: "vale la pena"
         pos: "phrase"
         en: "it's worth it"
-      - lemma: "comer"
-        pos: "verb"
-        forms:
-          - form: "comer"
-            f: "inf"
       - lemma: "comprar"
         pos: "verb"
         forms:
@@ -1202,17 +1193,7 @@ units:
     words:
       - lemma: "saber"
         pos: "verb"
-        en: "to know"
         forms:
-          - form: "sé"
-            en: "I know"
-            f: "1sg.pres.ind.irregular"
-          - form: "sabés"
-            en: "you know"
-            f: "2sg.pres.ind.vos"
-          - form: "sabe"
-            en: "knows (he/she knows)"
-            f: "3sg.pres.ind"
           - form: "sabemos"
             en: "we know"
             f: "1pl.pres.ind"

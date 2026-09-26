@@ -130,9 +130,6 @@ units:
           - form: "eran"
             en: "they were"
             f: "3pl.impf.ind.irregular"
-          - form: "ser"
-            en: "to be"
-            f: "inf"
       - lemma: "tener"
         pos: "verb"
         forms:
@@ -1391,12 +1388,6 @@ units:
           *some day*. **¿Qué piensan hacer?** — **Pensamos juntar plata para viajar.** And the
           classic January promise: **me anoté en el gimnasio**."
     words:
-      - lemma: "tener"
-        pos: "verb"
-        forms:
-          - form: "tener"
-            en: "to have (to)"
-            f: "inf"
       - lemma: "pensar"
         pos: "verb"
         forms:
@@ -1406,12 +1397,6 @@ units:
           - form: "pensamos"
             en: "we think, we plan to"
             f: "1pl.pres.ind"
-      - lemma: "empezar"
-        pos: "verb"
-        forms:
-          - form: "empezar"
-            en: "to start"
-            f: "inf"
       - lemma: "visitar"
         pos: "verb"
         en: "to visit"
@@ -1810,7 +1795,3 @@ units:
       - lemma: "qué épocas"
         pos: "phrase"
         en: "those were the days"
-      - lemma: "por"
-        pos: "prep"
-        en: "for, through, by"
-        glue: true

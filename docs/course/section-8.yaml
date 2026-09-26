@@ -195,9 +195,6 @@ units:
         body: "You meet this form after *si* and after *ojalá* — **ojalá pudiera** — and almost nowhere
           else at this level."
     words:
-      - lemma: "si"
-        pos: "conj"
-        en: "if"
       - lemma: "tener"
         pos: "verb"
         forms:
@@ -353,29 +350,24 @@ units:
           - form: "gustaría"
             en: "would like"
             f: "3sg.cond.ind"
+          - form: "gustarían"
+            en: "would like (them)"
+            f: "3pl.cond.ind"
       - lemma: "encantar"
         pos: "verb"
         forms:
           - form: "encantaría"
             en: "would love"
             f: "3sg.cond.ind"
-      - lemma: "conocer"
+          - form: "encantarían"
+            en: "would love (them)"
+            f: "3pl.cond.ind"
+      - lemma: "interesar"
         pos: "verb"
         forms:
-          - form: "conocer"
-            en: "to see, to get to know"
-            f: "inf"
-      - lemma: "aprender"
-        pos: "verb"
-        forms:
-          - form: "aprender"
-            f: "inf"
-      - lemma: "vivir"
-        pos: "verb"
-        forms:
-          - form: "vivir"
-            f: "inf"
-
+          - form: "interesaría"
+            en: "would interest"
+            f: "3sg.cond.ind"
   - ordinal: 6
     slug: "preferiria"
     title: "Ask and suggest politely"
@@ -439,12 +431,6 @@ units:
           - form: "pasarías"
             en: "you would stop by"
             f: "2sg.cond.ind.vos"
-      - lemma: "esperar"
-        pos: "verb"
-        forms:
-          - form: "esperar"
-            en: "to wait"
-            f: "inf"
       - lemma: "si no es molestia"
         pos: "phrase"
         en: "if it's no trouble"
@@ -714,16 +700,6 @@ units:
           - form: "dólares"
             en: "dollars"
             f: "m.pl"
-      - lemma: "todo"
-        pos: "det"
-        forms:
-          - form: "todo"
-            en: "all, the whole"
-            f: "m.sg"
-          - form: "toda"
-            en: "all, the whole"
-            f: "f.sg"
-
   - ordinal: 12
     slug: "a-medias"
     title: "Split costs and settle debts"
@@ -1037,10 +1013,6 @@ units:
             f: "m.sg"
           - form: "tímida"
             f: "f.sg"
-      - lemma: "persona"
-        pos: "noun"
-        en: "person"
-
   - ordinal: 18
     slug: "es-medio-vago"
     title: "Size up friends and coworkers"
