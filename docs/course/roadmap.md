@@ -138,6 +138,8 @@ Every grammar point got one unit, and the next unit moved on. The course now giv
 
 **Mechanics.** The YAML is the plan; `npm run course:reorder` lays it over the database (which the admin has added to since): it checks every new unit against the live words, and `--sql` writes the migration that renumbers the existing units and moves words earlier. Then `course:seed` adds the new units, `course:reorder --sql` again for moves into them, and each new unit goes through the agent loop like any other. A new unit stays off the path until it is published.
 
+**Done (2026-09-26).** All 195 new units are published (381 live units in all). The 12,412 new sentences are glossed, and have alternative answers (4,413 alternative sentences, 230 word answers). Grammar practice for the twins went in as 20260926000003 (103 lessons, 146 pattern tips), and every unit's lessons were rebuilt (34,442 slots). Still to do: top up words with fewer than 4 sentences; fix a handful of glosses (British English, or a missing sense, like *tocar* "to play" or *carta* "letter"); make forms with a comma inside (*sí, claro*, two sayings in `cada-loco-con-su-tema`) matchable; audit the older accepted answers, some of which are ungrammatical (*la heladera roto*); and move a second batch of late basic words earlier (*pensar, cerrar, dejar, avisar, usar, caminar, escuchar, creo, llover, extrañar*).
+
 ## Status
 
 | Section | Outline | Seeded | Sentences |

@@ -167,15 +167,26 @@ function apply(sent, proposals) {
         ]
       : []),
     ...updates,
-    ...(reviews.length
-      ? [
-          `insert into public.content_reviews (table_name, row_id, stage, verdict, notes) values\n${reviews
-            .map((r) => `  (${q(r.table)}, ${q(r.row_id)}, 'ai', 'pass', ${jsonb(r.notes)})`)
-            .join(',\n')};`,
-        ]
-      : []),
+    ...Array.from({ length: Math.ceil(reviews.length / 500) }, (_, n) =>
+      `insert into public.content_reviews (table_name, row_id, stage, verdict, notes) values\n${reviews
+        .slice(n * 500, n * 500 + 500)
+        .map((r) => `  (${q(r.table)}, ${q(r.row_id)}, 'ai', 'pass', ${jsonb(r.notes)})`)
+        .join(',\n')};`,
+    ),
   ];
-  if (sql.length) queryLinked(sql.join('\n'));
+  // Requests of at most ~1 MB: the API rejects a body much over a few MB (413).
+  let chunk = [];
+  let size = 0;
+  for (const statement of sql) {
+    if (chunk.length && size + statement.length > 1_000_000) {
+      queryLinked(chunk.join('\n'));
+      chunk = [];
+      size = 0;
+    }
+    chunk.push(statement);
+    size += statement.length;
+  }
+  if (chunk.length) queryLinked(chunk.join('\n'));
   console.log('\nwritten');
 }
 

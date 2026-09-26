@@ -83,7 +83,8 @@ function apply(sent, answers) {
     console.log('\n--dry-run: nothing written');
     return;
   }
-  if (writes.length) queryLinked(writes.join('\n'));
+  // One request per 500 updates: the API rejects a body much over a few MB (413).
+  for (let i = 0; i < writes.length; i += 500) queryLinked(writes.slice(i, i + 500).join('\n'));
   console.log('\nwritten');
 }
 
