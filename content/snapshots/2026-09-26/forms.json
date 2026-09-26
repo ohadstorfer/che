@@ -487,7 +487,7 @@
    "tense": "pres"
   },
   "form": "uso",
-  "gloss_en": "I use",
+  "gloss_en": "I use; I wear",
   "gloss_note_en": null,
   "id": "01397295-4ac4-54ba-82ee-12ccdecb4a3d",
   "lemma_id": "e1ffca46-6ca3-5994-91a1-c5dee0a7b43f",
@@ -495,7 +495,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "7f39f4c5-591c-51f7-9f82-ca7f7a1cfb2b",
-  "updated_at": "2026-09-25 17:59:32.15228+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -4779,7 +4779,7 @@
    "number": "pl"
   },
   "form": "billetes",
-  "gloss_en": "banknotes",
+  "gloss_en": "bills (money), banknotes",
   "gloss_note_en": null,
   "id": "0eafaa62-645d-554a-82e4-aeca2012e47d",
   "lemma_id": "3c704f9a-839b-5412-a846-cfcdc6ff08fb",
@@ -4787,7 +4787,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "5f7fde3f-e53e-535b-a6d1-271ba38c2576",
-  "updated_at": "2026-09-25 18:37:17.472034+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -14681,7 +14681,7 @@
    "tense": "pret"
   },
   "form": "se me quemaron",
-  "gloss_en": "I burnt (them)",
+  "gloss_en": "I burned them",
   "gloss_note_en": null,
   "id": "2e69bc9e-14b2-517c-b64c-659405beca58",
   "lemma_id": "559ad648-c626-5d43-9fa4-b4063660b2bf",
@@ -14689,7 +14689,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "cf3f5063-9758-597c-a509-2476bd48db2d",
-  "updated_at": "2026-09-26 06:29:22.503496+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -17446,11 +17446,11 @@
   "gloss_note_en": null,
   "id": "37a4e68e-1bd4-5fea-9af2-5815243ca05f",
   "lemma_id": "d32f8623-eb52-5fa3-8337-8c86316dac22",
-  "position": 4,
+  "position": 22,
   "source": "outline",
   "status": "published",
-  "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
-  "updated_at": "2026-09-23 23:38:40.820065+00",
+  "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -19184,11 +19184,11 @@
   "gloss_note_en": null,
   "id": "3d22ad09-201f-52a7-bef7-01bde1699a83",
   "lemma_id": "123ac2d0-e05c-56b9-89d1-bddeb3dc6891",
-  "position": 2,
+  "position": 25,
   "source": "outline",
   "status": "published",
-  "unit_id": "e550d21d-40fe-5eaa-a4c9-c6b22660639b",
-  "updated_at": "2026-09-25 22:57:36.696603+00",
+  "unit_id": "ba4a74c0-9dbd-5b9f-9f9c-e2c7ec49c749",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -21344,7 +21344,7 @@
    "tense": "pret"
   },
   "form": "empatamos",
-  "gloss_en": "we drew",
+  "gloss_en": "we tied",
   "gloss_note_en": null,
   "id": "435a6259-caed-5fab-a456-689d60198ba9",
   "lemma_id": "08fc9902-adc9-53f9-80fa-aee5f08373e2",
@@ -21352,7 +21352,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "7354baf3-9248-50f2-a9bc-c31acadd98fa",
-  "updated_at": "2026-09-24 07:12:32.666361+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -22624,11 +22624,11 @@
   "gloss_note_en": null,
   "id": "466b1e3a-2a10-52b9-ab98-53ae81443c99",
   "lemma_id": "123ac2d0-e05c-56b9-89d1-bddeb3dc6891",
-  "position": 1,
+  "position": 23,
   "source": "outline",
   "status": "published",
-  "unit_id": "2902c53a-0143-5823-b423-fd9fe3dc2295",
-  "updated_at": "2026-09-23 23:49:55.688445+00",
+  "unit_id": "ba4a74c0-9dbd-5b9f-9f9c-e2c7ec49c749",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -22905,11 +22905,11 @@
   "gloss_note_en": null,
   "id": "476c1f5f-3b91-5e4b-9a4a-bdd4e2913adf",
   "lemma_id": "7c941511-4dd1-51d0-841f-7c2412273053",
-  "position": 5,
+  "position": 15,
   "source": "outline",
   "status": "published",
-  "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 00:15:04.523306+00",
+  "unit_id": "714e2bff-95e1-5d03-96ef-a779c76932b7",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -23840,11 +23840,11 @@
   "gloss_note_en": null,
   "id": "4ab3d9a6-e1d4-5d55-b264-528e7e1ce7b5",
   "lemma_id": "7c941511-4dd1-51d0-841f-7c2412273053",
-  "position": 6,
+  "position": 16,
   "source": "outline",
   "status": "published",
-  "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 00:15:04.523306+00",
+  "unit_id": "714e2bff-95e1-5d03-96ef-a779c76932b7",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -24308,7 +24308,7 @@
    "tense": "pres"
   },
   "form": "usan",
-  "gloss_en": "they use",
+  "gloss_en": "they use; they wear",
   "gloss_note_en": null,
   "id": "4c996d85-8998-5c03-9cde-278a7ea5fa70",
   "lemma_id": "e1ffca46-6ca3-5994-91a1-c5dee0a7b43f",
@@ -24316,7 +24316,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "7f39f4c5-591c-51f7-9f82-ca7f7a1cfb2b",
-  "updated_at": "2026-09-25 17:59:32.15228+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -24695,11 +24695,11 @@
   "gloss_note_en": null,
   "id": "4da25e42-244f-56a8-8415-3375dd44ff5c",
   "lemma_id": "123ac2d0-e05c-56b9-89d1-bddeb3dc6891",
-  "position": 2,
+  "position": 24,
   "source": "outline",
   "status": "published",
-  "unit_id": "2902c53a-0143-5823-b423-fd9fe3dc2295",
-  "updated_at": "2026-09-23 23:49:55.688445+00",
+  "unit_id": "ba4a74c0-9dbd-5b9f-9f9c-e2c7ec49c749",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -27594,7 +27594,7 @@
    "tense": "pres"
   },
   "form": "lleve",
-  "gloss_en": "give a lift, take (that I, that he/she take)",
+  "gloss_en": "give a ride, take (that I, that he/she take)",
   "gloss_note_en": null,
   "id": "58fca8bc-3cf2-5972-8c13-b89572fe5246",
   "lemma_id": "d92aed4c-0a6a-52e2-977c-ba653771aff7",
@@ -27602,7 +27602,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "26521f59-c2c1-5009-ac6b-a7a2e20a4244",
-  "updated_at": "2026-09-26 00:39:01.832528+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -38135,7 +38135,7 @@
    "voseo": true
   },
   "form": "recorriste",
-  "gloss_en": "you travelled around",
+  "gloss_en": "you traveled around",
   "gloss_note_en": null,
   "id": "78dd92c2-bbdf-5045-b75f-44a6e398468e",
   "lemma_id": "896d932d-4b5c-5fd2-a994-7dd8383ad080",
@@ -38143,7 +38143,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "ad17a937-2fe2-519e-9f42-86f123c7e38c",
-  "updated_at": "2026-09-26 13:45:31.600311+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -38257,7 +38257,7 @@
    "tense": "pret"
   },
   "form": "empataron",
-  "gloss_en": "they drew",
+  "gloss_en": "they tied",
   "gloss_note_en": null,
   "id": "7906a7a8-89fa-5e94-9ec7-764ed1e1cd22",
   "lemma_id": "08fc9902-adc9-53f9-80fa-aee5f08373e2",
@@ -38265,7 +38265,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "102a20da-507c-5cab-8d54-b9dc250aebb6",
-  "updated_at": "2026-09-26 06:39:53.896307+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -38439,7 +38439,7 @@
    "tense": "pret"
   },
   "form": "se tapó",
-  "gloss_en": "got blocked",
+  "gloss_en": "got clogged, got blocked",
   "gloss_note_en": null,
   "id": "79869c89-cf90-558b-b095-3d7dd05a88b1",
   "lemma_id": "87afcc91-a109-51e5-a2c8-44457c3e3dd6",
@@ -38447,7 +38447,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "6a58e148-25f1-55f5-9568-c47c2c011c1e",
-  "updated_at": "2026-09-26 12:37:24.804392+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -43021,11 +43021,11 @@
   "gloss_note_en": null,
   "id": "8867761c-2969-52db-bb60-35561af06b39",
   "lemma_id": "d32f8623-eb52-5fa3-8337-8c86316dac22",
-  "position": 3,
+  "position": 21,
   "source": "outline",
   "status": "published",
-  "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
-  "updated_at": "2026-09-23 23:38:40.820065+00",
+  "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -44175,11 +44175,11 @@
   "gloss_note_en": null,
   "id": "8ba32b18-afc3-5381-92a2-ce577c046b50",
   "lemma_id": "47fc0bfe-b38b-506a-b459-43bf8cad35db",
-  "position": 9,
+  "position": 35,
   "source": "outline",
   "status": "published",
-  "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
-  "updated_at": "2026-09-23 23:51:21.981446+00",
+  "unit_id": "7f39f4c5-591c-51f7-9f82-ca7f7a1cfb2b",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -44931,11 +44931,11 @@
   "gloss_note_en": null,
   "id": "8e8826c8-2c7a-5875-99c7-2fcdd0e35c5c",
   "lemma_id": "d32f8623-eb52-5fa3-8337-8c86316dac22",
-  "position": 5,
+  "position": 23,
   "source": "outline",
   "status": "published",
-  "unit_id": "f901adf3-4ac4-5208-8cac-9261ab754144",
-  "updated_at": "2026-09-23 23:38:40.820065+00",
+  "unit_id": "2d151075-cd8d-51b2-9e1c-bf5a34e4ef1b",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -45072,7 +45072,7 @@
    "tense": "pret"
   },
   "form": "revisé",
-  "gloss_en": "I went over, I reviewed",
+  "gloss_en": "I checked, I went over",
   "gloss_note_en": null,
   "id": "8f19ae12-85fb-54c2-92c6-7e773ccc39e0",
   "lemma_id": "a7713dd8-d89c-57bc-b06b-b45dc9d8afb3",
@@ -45080,7 +45080,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "38987042-d239-57ac-9bcf-58be792a8609",
-  "updated_at": "2026-09-26 11:57:53.817506+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -50755,7 +50755,7 @@
    "voseo": true
   },
   "form": "revisá",
-  "gloss_en": "go over, review",
+  "gloss_en": "check, go over",
   "gloss_note_en": null,
   "id": "a050cbe3-479d-534c-abb3-5670a264adc5",
   "lemma_id": "a7713dd8-d89c-57bc-b06b-b45dc9d8afb3",
@@ -50763,7 +50763,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "38987042-d239-57ac-9bcf-58be792a8609",
-  "updated_at": "2026-09-26 11:57:53.817506+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -51230,7 +51230,7 @@
    "tense": "pres"
   },
   "form": "usa",
-  "gloss_en": "uses (he/she uses)",
+  "gloss_en": "uses, wears (he/she)",
   "gloss_note_en": null,
   "id": "a1cf43da-95ef-57ee-b86d-26b5fd2679dd",
   "lemma_id": "e1ffca46-6ca3-5994-91a1-c5dee0a7b43f",
@@ -51238,7 +51238,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "7f39f4c5-591c-51f7-9f82-ca7f7a1cfb2b",
-  "updated_at": "2026-09-25 17:59:32.15228+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -55226,7 +55226,7 @@
    "voseo": true
   },
   "form": "usás",
-  "gloss_en": "you use",
+  "gloss_en": "you use; you wear",
   "gloss_note_en": null,
   "id": "ae523e23-72cf-53e3-b8ec-b5d1bce6d1e8",
   "lemma_id": "e1ffca46-6ca3-5994-91a1-c5dee0a7b43f",
@@ -55234,7 +55234,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "7f39f4c5-591c-51f7-9f82-ca7f7a1cfb2b",
-  "updated_at": "2026-09-25 17:59:32.15228+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -55345,7 +55345,7 @@
    "verb_form": "ger"
   },
   "form": "practicando",
-  "gloss_en": "practising",
+  "gloss_en": "practicing",
   "gloss_note_en": null,
   "id": "aea8dcfb-4c8f-592d-861b-7727499e3d6d",
   "lemma_id": "f3ab9918-4d48-52cd-acbe-d44a673568a7",
@@ -55353,7 +55353,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "558006ff-a18d-5fc9-ae98-edf66c5a28dc",
-  "updated_at": "2026-09-26 07:13:42.795986+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -55862,7 +55862,7 @@
    "voseo": true
   },
   "form": "me llevás",
-  "gloss_en": "you give me a lift, you take me",
+  "gloss_en": "you give me a ride, you take me",
   "gloss_note_en": null,
   "id": "b0ea5e5b-11a2-5f3e-a726-074af4b41794",
   "lemma_id": "d92aed4c-0a6a-52e2-977c-ba653771aff7",
@@ -55870,7 +55870,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "1bb1664d-4c74-5dfd-9001-ae7f0fd897f8",
-  "updated_at": "2026-09-25 23:02:40.3098+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -58950,11 +58950,11 @@
   "gloss_note_en": null,
   "id": "bbe0213a-265d-57b4-840c-ee03254f22c1",
   "lemma_id": "47fc0bfe-b38b-506a-b459-43bf8cad35db",
-  "position": 10,
+  "position": 36,
   "source": "outline",
   "status": "published",
-  "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
-  "updated_at": "2026-09-23 23:51:21.981446+00",
+  "unit_id": "7f39f4c5-591c-51f7-9f82-ca7f7a1cfb2b",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -59543,11 +59543,11 @@
   "gloss_note_en": null,
   "id": "be3d3385-5e53-5f3b-af19-e31e8cdc3dea",
   "lemma_id": "7c941511-4dd1-51d0-841f-7c2412273053",
-  "position": 4,
+  "position": 14,
   "source": "outline",
   "status": "published",
-  "unit_id": "776b15fe-c6a5-5aae-8876-404d392e0546",
-  "updated_at": "2026-09-24 00:15:04.523306+00",
+  "unit_id": "714e2bff-95e1-5d03-96ef-a779c76932b7",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -62348,11 +62348,11 @@
   "gloss_note_en": null,
   "id": "c791a3c0-7194-5a6b-810d-22ac3b4f3ad4",
   "lemma_id": "47fc0bfe-b38b-506a-b459-43bf8cad35db",
-  "position": 11,
+  "position": 37,
   "source": "outline",
   "status": "published",
-  "unit_id": "f2432d21-cbd5-5f7f-aec5-c958b3d7f626",
-  "updated_at": "2026-09-23 23:51:21.981446+00",
+  "unit_id": "7f39f4c5-591c-51f7-9f82-ca7f7a1cfb2b",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -67503,7 +67503,7 @@
    "number": "pl"
   },
   "form": "golosinas",
-  "gloss_en": "sweets, treats",
+  "gloss_en": "candy, treats",
   "gloss_note_en": null,
   "id": "d924205b-c073-574f-9539-16e76de316cc",
   "lemma_id": "7ba46502-40b0-5f35-a6a1-ca7e4f3d4991",
@@ -67511,7 +67511,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "d738540e-3203-5d07-9f0f-01184e8346b0",
-  "updated_at": "2026-09-25 23:07:52.431612+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -67676,7 +67676,7 @@
    "tense": "pret"
   },
   "form": "se me quemó",
-  "gloss_en": "I burnt (it got burnt)",
+  "gloss_en": "I burned it (it got burned)",
   "gloss_note_en": null,
   "id": "d9637c8c-a144-5c5a-a45f-f65d5afe4cdb",
   "lemma_id": "559ad648-c626-5d43-9fa4-b4063660b2bf",
@@ -67684,7 +67684,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "cf3f5063-9758-597c-a509-2476bd48db2d",
-  "updated_at": "2026-09-26 06:29:22.503496+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -68059,11 +68059,11 @@
   "gloss_note_en": null,
   "id": "daaf7871-6257-5db1-b67b-56b78d71905f",
   "lemma_id": "69ec168d-b6f3-5721-9377-ba1fa1e67fdc",
-  "position": 2,
+  "position": 27,
   "source": "outline",
   "status": "published",
-  "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 01:00:17.279796+00",
+  "unit_id": "ba4a74c0-9dbd-5b9f-9f9c-e2c7ec49c749",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -68530,7 +68530,7 @@
    "tense": "pret"
   },
   "form": "me afanaron",
-  "gloss_en": "they nicked it (from me)",
+  "gloss_en": "they stole it (from me), I got robbed",
   "gloss_note_en": null,
   "id": "dc186c63-b3ff-5e9c-b3fc-90fa86f1bca0",
   "lemma_id": "34e128fc-b397-55d9-9825-e01f1999a3dd",
@@ -68538,7 +68538,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "e38a0b51-167e-583b-a179-5eafde3573f0",
-  "updated_at": "2026-09-26 12:30:58.534899+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -70304,7 +70304,7 @@
    "tense": "pret"
   },
   "form": "canceló",
-  "gloss_en": "he cancelled, she cancelled",
+  "gloss_en": "he canceled, she canceled",
   "gloss_note_en": null,
   "id": "e1419c76-2561-53d8-b071-231956d2a42e",
   "lemma_id": "3927905b-5d7b-575b-ab43-ccac1e9e3677",
@@ -70312,7 +70312,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "8ec0010d-66b0-5b69-aadb-eca273e4ae43",
-  "updated_at": "2026-09-26 07:53:26.659292+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {
@@ -76088,11 +76088,11 @@
   "gloss_note_en": null,
   "id": "f44e7ae0-33fa-5921-b778-d474cfab120d",
   "lemma_id": "69ec168d-b6f3-5721-9377-ba1fa1e67fdc",
-  "position": 1,
+  "position": 26,
   "source": "outline",
   "status": "published",
-  "unit_id": "8c4c452e-c6f6-5f26-a9a5-ded2342f7c9f",
-  "updated_at": "2026-09-24 01:00:17.279796+00",
+  "unit_id": "ba4a74c0-9dbd-5b9f-9f9c-e2c7ec49c749",
+  "updated_at": "2026-09-26 16:46:08.335784+00",
   "voice_id": null
  },
  {
@@ -78473,7 +78473,7 @@
    "tense": "pret"
   },
   "form": "recorrieron",
-  "gloss_en": "they travelled around",
+  "gloss_en": "they traveled around",
   "gloss_note_en": null,
   "id": "fd217330-0e7a-5213-bf21-24ce9da96d55",
   "lemma_id": "896d932d-4b5c-5fd2-a994-7dd8383ad080",
@@ -78481,7 +78481,7 @@
   "source": "outline",
   "status": "published",
   "unit_id": "ad17a937-2fe2-519e-9f42-86f123c7e38c",
-  "updated_at": "2026-09-26 13:45:31.600311+00",
+  "updated_at": "2026-09-26 16:09:11.973904+00",
   "voice_id": null
  },
  {

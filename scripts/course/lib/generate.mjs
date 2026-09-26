@@ -31,7 +31,17 @@ const sameSpelling = (outline, unit, f) =>
   outline.forms.filter(
     (g) => (isPracticeUnit(unit) ? unit.review_form_ids.includes(g.id) : g.unit_id === unit.id) && fold(g.form) === fold(f.form),
   ).length > 1;
-export const targetLabel = (outline, unit, f) => (sameSpelling(outline, unit, f) ? `${f.form}/${f.lemma}` : f.form);
+// When the lemma doesn't tell them apart either — "mañana" the noun and the
+// adverb, "tarde" likewise — the part of speech does: "mañana/adv".
+const sameLemma = (outline, unit, f) =>
+  outline.forms.filter(
+    (g) =>
+      (isPracticeUnit(unit) ? unit.review_form_ids.includes(g.id) : g.unit_id === unit.id) &&
+      fold(g.form) === fold(f.form) &&
+      g.lemma === f.lemma,
+  ).length > 1;
+export const targetLabel = (outline, unit, f) =>
+  !sameSpelling(outline, unit, f) ? f.form : sameLemma(outline, unit, f) ? `${f.form}/${f.pos}` : `${f.form}/${f.lemma}`;
 function findTarget(outline, unit, ref) {
   const [surface, qualifier] = String(ref ?? '').split('/').map((x) => x.trim());
   const mine = (f) => (isPracticeUnit(unit) ? unit.review_form_ids.includes(f.id) : f.unit_id === unit.id);
