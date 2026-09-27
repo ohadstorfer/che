@@ -9,10 +9,11 @@ import { join } from 'node:path';
 /**
  * The login role is a temporary one, and several scripts starting at once can
  * trip over each other's: the connection is refused before any SQL runs, so
- * trying again is safe.
+ * trying again is safe. Setting the role up can also time out when many
+ * scripts ask at once; that too happens before any SQL.
  */
-const LOGIN_RETRIES = 4;
-const refusedLogin = (err) => /failed to connect as temp role|password authentication failed/.test(`${err.stdout ?? ''}${err.message}`);
+const LOGIN_RETRIES = 8;
+const refusedLogin = (err) => /failed to connect as temp role|password authentication failed|failed to initialise login role/.test(`${err.stdout ?? ''}${err.message}`);
 const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 
 /**

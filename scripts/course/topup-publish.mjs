@@ -2,7 +2,9 @@
 // checks and selection, with the course loaded once, then one lessons rebuild
 // for all of them. A unit whose folder has no scores.json is skipped.
 //
-//   npm run course:topup-publish -- <file with one unit slug per line> [--dry-run]
+//   npm run course:topup-publish -- <file with one unit slug per line> [--dry-run] [--no-lessons]
+//
+// --no-lessons: leave the lessons rebuild to a later `course:lessons --all`.
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 
@@ -17,9 +19,22 @@ if (!list) {
   process.exit(1);
 }
 const dryRun = rest.includes('--dry-run');
+const noLessons = rest.includes('--no-lessons');
 const slugs = readFileSync(list, 'utf8').split('\n').map((s) => s.trim()).filter(Boolean);
 const outline = loadOutlineFromDb();
 const done = [];
+const pending = [];
+function flush() {
+  if (!pending.length) return;
+  saveCandidates({
+    selected: pending.flatMap((p) => p.selected),
+    rejected: pending.flatMap((p) => p.rejected),
+    known: pending.flatMap((p) => p.known),
+    model: MODEL,
+    status: 'published',
+  });
+  pending.length = 0;
+}
 let total = 0;
 
 for (const slug of slugs) {
@@ -49,14 +64,18 @@ for (const slug of slugs) {
   console.log(`${slug}: +${selected.length}${short.length ? ` · still short: ${short.join(', ')}` : ''}`);
   total += selected.length;
   if (dryRun) continue;
-  saveCandidates({ selected, rejected, known, model: MODEL, status: 'published' });
+  // Written in batches of units: each query pays the database login again,
+  // and one per unit was most of the run.
+  pending.push({ selected, rejected, known });
   done.push(slug);
+  if (pending.length >= 25) flush();
 }
+flush();
 console.log(`\n${total} sentence(s) across ${done.length} unit(s)`);
 if (dryRun) {
   console.log('--dry-run: nothing written');
   process.exit(0);
 }
-if (done.length) {
+if (done.length && !noLessons) {
   execFileSync('node', ['--disable-warning=MODULE_TYPELESS_PACKAGE_JSON', '--import', new URL('../test/register.mjs', import.meta.url).pathname, new URL('./build-lessons.mjs', import.meta.url).pathname, ...done], { stdio: 'inherit' });
 }

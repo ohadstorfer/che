@@ -92,7 +92,14 @@ const formLine = (f, lemmaGloss) => `${f.form} — ${f.pos}, "${f.gloss_en ?? le
  * list of forms the sentences may use is the hard constraint; approved
  * sentences from this and the previous units show the voice (§13.1).
  */
-export function generationPrompt({ outline, unit, targets, examples, existing, style }) {
+/**
+ * @param focus  optional: what this unit's new sentences must practice, when
+ *               they replace filler that drilled something else
+ * @param lean   optional: {counts: Map(target id → sentences wanted)} — a top-up
+ *               that only fills gaps: older words listed bare (no glosses), and
+ *               each target asks for just what it lacks.
+ */
+export function generationPrompt({ outline, unit, targets, examples, existing, style, focus = null, lean = null }) {
   const lemmaById = new Map(outline.lemmas.map((l) => [l.id, l]));
   const available = outline.forms.filter((f) => f.unit_order <= unit.course_order);
   const newHere = new Set(outline.forms.filter((f) => f.unit_id === unit.id).map((f) => f.id));
@@ -127,6 +134,13 @@ export function generationPrompt({ outline, unit, targets, examples, existing, s
   const user = [
     `Unit ${unit.course_order}: ${unit.title_en} (${unit.summary_en}). Grammar focus: ${unit.grammar_focus.join(', ')}. Highest register allowed: ${unit.register_max}.`,
     '',
+    ...(focus
+      ? [
+          `EVERY sentence you write must practice this unit's skill: ${focus}`,
+          'This unit was padded with sentences that drilled old words or other situations, and they were removed. Use each target word inside the unit\'s situation and structure — never as filler. A sentence that could sit in any other unit is rejected.',
+          '',
+        ]
+      : []),
     ...(isPracticeUnit(unit)
       ? [
           'This is a PRACTICE unit: it teaches no new words. The learner has met every target word already; the sentences are where she uses them again, mixed with each other and with what she learned before.',
@@ -135,8 +149,18 @@ export function generationPrompt({ outline, unit, targets, examples, existing, s
           '',
         ]
       : []),
-    'Words available (introduced in this unit are marked *):',
-    ...available.map((f) => `${newHere.has(f.id) ? '* ' : '  '}${formLine(f, lemmaById.get(f.lemma_id)?.gloss_en)}`),
+    ...(lean
+      ? [
+          'Words introduced in this unit:',
+          ...available.filter((f) => newHere.has(f.id)).map((f) => `* ${formLine(f, lemmaById.get(f.lemma_id)?.gloss_en)}`),
+          '',
+          'Words from earlier units, also available (exactly these spellings; nothing else exists):',
+          available.filter((f) => !newHere.has(f.id)).map((f) => f.form).join(', '),
+        ]
+      : [
+          'Words available (introduced in this unit are marked *):',
+          ...available.map((f) => `${newHere.has(f.id) ? '* ' : '  '}${formLine(f, lemmaById.get(f.lemma_id)?.gloss_en)}`),
+        ]),
     '',
     examples.length ? 'Approved sentences from this part of the course, for the voice (do not repeat them):' : '',
     ...examples.map((e) => `- ${e.es} = ${e.en}`),
@@ -144,16 +168,22 @@ export function generationPrompt({ outline, unit, targets, examples, existing, s
     existing.length ? 'Sentences this unit already has (do not repeat or paraphrase them):' : '',
     ...existing.map((e) => `- ${e}`),
     '',
-    'Write, for each target word below:',
-    `- ${QUOTA.intro * OVERGENERATE} "intro" sentences: at most 6 words, difficulty 1–2, where the word's meaning is obvious from context;`,
-    `- ${QUOTA.drill * OVERGENERATE} "drill" sentences across difficulty 1–3 (1: ≤ 4 words, 2: ≤ 7, 3: ≤ 10), varied in shape: statements, questions, answers.`,
+    ...(lean
+      ? [
+          'Write, for each target word below, the number of sentences shown after it: "drill" sentences across difficulty 1–3 (1: ≤ 4 words, 2: ≤ 7, 3: ≤ 10), varied in shape: statements, questions, answers.',
+        ]
+      : [
+          'Write, for each target word below:',
+          `- ${QUOTA.intro * OVERGENERATE} "intro" sentences: at most 6 words, difficulty 1–2, where the word's meaning is obvious from context;`,
+          `- ${QUOTA.drill * OVERGENERATE} "drill" sentences across difficulty 1–3 (1: ≤ 4 words, 2: ≤ 7, 3: ≤ 10), varied in shape: statements, questions, answers.`,
+        ]),
     'Write one sentence, not a chain of them. A second sentence is allowed only when the two are a real exchange — a question and its answer, "Soy Sofi. ¿Y vos?" — never a run of greetings ("Che, ¿sos vos? ¡Hola! ¿Todo bien?" is three sentences and is rejected). Three is never allowed below difficulty 4.',
     'Length is the whole sentence, every clause counted. Reaching a word count by stringing short pieces together makes the drill harder, not longer: a learner rebuilding it from tiles gets no punctuation to tell her where one piece ends.',
     'Each sentence must contain its target word exactly as written. Give the natural English an English speaker would say, and list any other natural English translations.',
     'Spell with every accent and with opening ¿ and ¡.',
     '',
     'Target words:',
-    ...targets.map((f) => `- ${targetLabel(outline, unit, f)} (${f.pos}, "${f.gloss_en ?? lemmaById.get(f.lemma_id)?.gloss_en ?? ''}")`),
+    ...targets.map((f) => `- ${targetLabel(outline, unit, f)} (${f.pos}, "${f.gloss_en ?? lemmaById.get(f.lemma_id)?.gloss_en ?? ''}")${lean ? ` — write ${lean.counts.get(f.id)}` : ''}`),
     ...(targets.some((f) => sameSpelling(outline, unit, f))
       ? ['A target written "word/lemma" (fue/ir, fue/ser) is that word in that verb\'s sense: put the label in "target" exactly as listed; the sentence itself just says the word.']
       : []),

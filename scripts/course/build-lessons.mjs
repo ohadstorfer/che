@@ -68,22 +68,30 @@ if (flags.has('--dry-run')) {
   process.exit(0);
 }
 
-// One unit at a time, so a statement stays a reasonable size.
+// Each unit in its own transaction, many units to a request: every request
+// pays the database login again, and one per unit made --all take an hour.
 let written = 0;
+let batch = '';
+const send = () => {
+  if (batch) queryLinked(batch);
+  batch = '';
+};
 for (const unit of wanted) {
   const { slots } = result.get(unit.id);
   if (!slots.length) continue;
   const lessonIds = unit.lessons.map((l) => l.id);
-  queryLinked(
+  const statement =
     `begin;\ndelete from public.lesson_slots where lesson_id in (${lessonIds.map(q).join(', ')});\n` +
-      upsert(
-        'lesson_slots',
-        slots.map((s) => ({ ...s, id: crypto.randomUUID() })),
-        ['id', 'lesson_id', 'ordinal', 'kind', 'form_id', 'sentence_id', 'tip_id', 'mode', 'review_count', 'scope'],
-      ) +
-      '\ncommit;',
-  );
+    upsert(
+      'lesson_slots',
+      slots.map((s) => ({ ...s, id: crypto.randomUUID() })),
+      ['id', 'lesson_id', 'ordinal', 'kind', 'form_id', 'sentence_id', 'tip_id', 'mode', 'review_count', 'scope'],
+    ) +
+    '\ncommit;\n';
+  if (batch.length + statement.length > 800_000) send();
+  batch += statement;
   written += slots.length;
   if (!verbose) process.stdout.write('.');
 }
+send();
 console.log(`\nwrote ${written} slots across ${wanted.length} unit(s).`);
