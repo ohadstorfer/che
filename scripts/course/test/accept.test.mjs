@@ -63,6 +63,37 @@ test('no "yo" before a command that is spelled like a first-person verb', () => 
   assert.ok(all('Pedí unos días.', 'I asked for a few days off.').includes('Yo pedí unos días.'));
 });
 
+test('no broken Spanish among the alternatives', () => {
+  const last = outline.units.at(-1).slug;
+  const all = (es, en) => build(last, 'x', { es, en }).sentences[0].es_alt;
+  // A language after a verb that isn't "ser" or "estar" is not a nationality.
+  assert.ok(!all('Estudio inglés.', 'I study English.').some((a) => /inglesa/.test(a)));
+  // Never a second "vos".
+  assert.ok(!all('Prometiste que ibas a cocinar vos.', 'You promised you would cook.').some((a) => /vos.*vos/i.test(a)));
+  assert.ok(!all('¿Vas mucho a fiestas o preferís un bar?', 'Do you go to parties a lot or do you prefer a bar?').some((a) => /vos.*vos/i.test(a)));
+  // The thing that fell is the subject: no "ella" in front.
+  assert.ok(!all('Se le cayó el mate.', 'She dropped the mate.').some((a) => /^Ella/.test(a)));
+  assert.ok(!all('Me parece que no viene.', "I don't think he's coming.").some((a) => /^Él/.test(a)));
+  // A new sentence after "?" keeps its capital.
+  assert.ok(all('¿Enojado? No, tengo hambre.', "Angry? No, I'm hungry.").every((a) => !/\? no/.test(a)));
+});
+
+test('the other gender for "I" and "we" in more places', () => {
+  const last = outline.units.at(-1).slug;
+  const all = (es, en) => build(last, 'x', { es, en }).sentences[0].es_alt;
+  // "estaba" can be "I" or "she"; the English says "I".
+  assert.ok(all('Estaba re cansada.', 'I was really tired.').includes('Estaba re cansado.'));
+  assert.ok(!all('Lucía estaba cansada.', 'Lucía was tired.').some((a) => /cansado/.test(a)));
+  // A third person elsewhere doesn't close it for the speaker.
+  const busy = all('Estoy ocupado porque mi hijo está enfermo.', "I'm busy because my son is sick.");
+  assert.ok(busy.includes('Estoy ocupada porque mi hijo está enfermo.'));
+  assert.ok(!busy.some((a) => /enferma/.test(a)));
+  assert.ok(all('Nosotras tenemos tres gatos.', 'We have three cats.').includes('Nosotros tenemos tres gatos.'));
+  assert.ok(all('Encantada.', 'Nice to meet you.').includes('Encantado.'));
+  // All one gender: never half and half.
+  assert.ok(!all('Estamos cansados y apurados.', "We're tired and in a hurry.").some((a) => /cansados y apuradas|cansadas y apurados/.test(a)));
+});
+
 test('an optional "che" can go, and its punctuation goes with it', () => {
   assert.deepEqual(alts('hola-che', 'chau', 'Chau, che.', 'Bye!'), ['Chau.']);
 });

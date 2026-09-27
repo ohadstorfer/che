@@ -13,7 +13,7 @@
 // Spanish needs ("Chau, che." as "Bye!") can't be answered at all.
 // `uncoveredTokens` is the check for that.
 
-import { CLITIC_LEMMAS, OPTIONAL_LEMMAS, SUBJECT_PRONOUNS } from './rules';
+import { CLITIC_LEMMAS, OPTIONAL_LEMMAS, SUBJECT_PRONOUNS, fold } from './rules';
 import { type Token, split } from './tokenize';
 import type { VocabForm } from './vocabulary';
 
@@ -66,10 +66,44 @@ interface Pick {
   tail: string;
   name: boolean;
   inserted?: boolean;
+  /** Opened a sentence in the original, capitalized for that alone. */
+  opens?: boolean;
+  /** The other gender of the word. */
+  swap?: boolean;
 }
 interface Slot {
   original: Pick | null;
   choices: (Pick | null)[];
+  swappable?: boolean;
+}
+
+/**
+ * Verbs that say how the subject is, so an adjective after them is said of the
+ * subject: "estoy cansada", "me puse nerviosa", "llegué re cansado". After any
+ * other verb it is something else — "estudio inglés" is a language, not a
+ * nationality to put in the feminine.
+ */
+const LINKING = new Set([
+  'ser', 'estar', 'quedar', 'quedarse', 'sentir', 'sentirse', 'poner', 'ponerse', 'andar', 'parecer',
+  'volver', 'llegar', 'seguir', 'vivir', 'terminar', 'salir', 'ir', 'venir',
+]);
+
+/**
+ * Verbs whose third person, after an object pronoun, has the thing for its
+ * subject: "me gusta", "me parece", "se le cayó". No "él" or "ella" goes in
+ * front — "Ella se le cayó el mate" is not Spanish.
+ */
+const DATIVE_VERBS = new Set([
+  'gustar', 'encantar', 'parecer', 'doler', 'importar', 'molestar', 'interesar', 'faltar', 'quedar', 'tocar',
+  'preocupar', 'convenir', 'alcanzar', 'sobrar', 'costar', 'pasar', 'caer', 'olvidar', 'romper', 'perder', 'ir',
+]);
+const SENTENCE_END = /[.?!…]["»”)]*$/;
+const DATIVE_CLITICS = new Set(['me', 'te', 'le', 'nos', 'les']);
+
+/** Where there is no stored form for the other gender: cansado → cansada. */
+function otherGender(word: string, gender: string) {
+  const m = gender === 'm' ? word.match(/^(.*)o(s?)$/) : word.match(/^(.*)a(s?)$/);
+  return m ? `${m[1]}${gender === 'm' ? 'a' : 'o'}${m[2]}` : null;
 }
 
 /**
@@ -80,9 +114,6 @@ interface Slot {
  */
 export function generateVariants(tokens: T[], en: string, vocabulary: { forms: VocabForm[] }): string[] {
   const optional = optionalTokens(tokens);
-  const persons = tokens.map(personalVerb).filter((f): f is NonNullable<typeof f> => !!f);
-  // Nothing says whether "I" or "you" is a man or a woman when the only people
-  // in the sentence are the speaker and the listener, and the English is quiet.
   // A name said to someone — at the start or after a comma, and closed by
   // punctuation ("Sofi, ¿…", "Mucho gusto, Lucía.") — says who the listener is;
   // "soy uruguayo, de Montevideo" names a place, and stays open.
@@ -92,23 +123,56 @@ export function generateVariants(tokens: T[], en: string, vocabulary: { forms: V
       (i === 0 || split(tokens[i - 1].surface).tail.includes(',')) &&
       (!!split(t.surface).tail || i === tokens.length - 1),
   );
-  const genderOpen = persons.length > 0 && persons.every((f) => f.person !== 3) && !GENDER_CUES.test(en) && !named;
+  const words = englishWords(en);
+  // Nothing in the English says whether "I", "you" or "we" is a man or a woman.
+  const genderOpen = !GENDER_CUES.test(en) && !named;
 
   // Which pronoun a third-person verb stands for, when the English names one.
-  const words = englishWords(en);
   const third = words.includes('she') === words.includes('he') ? null : words.includes('she') ? 'ella' : 'él';
   // "yo" only where the English has "I": "Sé sincera" is "Be honest" and
   // "Pedí unos días" "Ask for a few days", commands spelled like a first-person
   // verb. Nor "vos" before a command ("Frená" is not "Vos frená").
   const pronounFor = (f: { person?: number; mood?: string }) =>
     f.person === 1 ? (words.includes('i') ? 'yo' : null) : f.person === 2 ? (f.mood === 'imp' ? null : 'vos') : third;
+  // One pronoun of a kind per sentence, and none where it is already said:
+  // "Prometiste que ibas a cocinar vos" takes no second "vos".
+  const said = new Set(tokens.map(subjectPronoun).filter(Boolean));
+  const inserted = new Set<string>();
+
+  /**
+   * Whether the adjective at `i` is said of the speaker or the listener: right
+   * after a linking verb (adverbs between are fine) whose person is first or
+   * second — or, for a form that can be "I" or "he" (estaba, iría, era), when
+   * the English has "I" and nothing in its clause is a third person.
+   */
+  const aboutSpeaker = (i: number, verbs = LINKING) => {
+    // Back over adverbs, and over an adjective before this one: "estamos
+    // cansados y apurados".
+    const skippable = (t: T) =>
+      t.forms.length > 0 &&
+      (t.forms.every((x) => x.pos === 'adv') ||
+        ['y', 'e', 'o', 'ni'].includes(fold(t.core)) ||
+        t.forms.some((x) => (x.pos === 'adj' || x.pos === 'noun') && x.features?.gender));
+    let b = i - 1;
+    while (b >= 0 && skippable(tokens[b]) && !/[.?!;:]/.test(split(tokens[b].surface).tail)) b--;
+    if (b < 0 || split(tokens[b].surface).tail) return false;
+    const verb = tokens[b].forms.find((x) => x.pos === 'verb' && verbs.has(x.lemma));
+    if (!verb) return false;
+    if (verb.features?.person) return verb.features.person !== 3;
+    if (!words.includes('i')) return false;
+    const someone = (t: T) => t.forms.some((x) => x.pos === 'noun' || x.pos === 'propn') || !!subjectPronoun(t);
+    let c = b;
+    for (; c > 0 && !clauseStart(tokens, c); c--) if (someone(tokens[c - 1])) return false;
+    // "un depto que sea luminoso": the "que" clause is about the depto.
+    return !(c >= 2 && fold(tokens[c - 1].core) === 'que' && someone(tokens[c - 2]));
+  };
 
   // Slots alternate: a place a pronoun could be put, then a token. Each is a
   // list of choices; null leaves it empty.
   const slots: Slot[] = [];
   tokens.forEach((t, i) => {
     const { lead, core, tail } = split(t.surface);
-    const piece: Pick = { lead, word: core, tail, name: t.forms.length > 0 && t.forms.every((f) => f.pos === 'propn') };
+    const piece: Pick = { lead, word: core, tail, name: t.forms.length > 0 && t.forms.every((f) => f.pos === 'propn'), opens: i === 0 || SENTENCE_END.test(split(tokens[i - 1].surface).tail) || lead.includes('—') };
 
     // The subject pronoun a verb left out, where Spanish puts one: at the start
     // of its clause, ahead of any clitic — "Soy Sofi" → "Yo soy Sofi", and
@@ -118,43 +182,88 @@ export function generateVariants(tokens: T[], en: string, vocabulary: { forms: V
     const f = tokens[v] && personalVerb(tokens[v]);
     // Not before a word that can be something else too ("Como siempre": as always).
     const onlyVerb = !!tokens[v] && tokens[v].forms.every((x) => x.pos === 'verb');
-    const lemma = f && f.number === 'sg' && onlyVerb && clauseStart(tokens, i) ? pronounFor(f) : null;
-    if (lemma) {
+    // The object pronouns before the verb, standing alone or inside a stored
+    // chunk ("se le cayó", "me parece").
+    const inner = tokens[v] ? fold(tokens[v].core).split(' ') : [];
+    const clitics = [...tokens.slice(i, v).map((x) => fold(x.core)), ...inner.slice(0, -1).filter((w) => CLITIC_LEMMAS.has(w))];
+    const thingIsSubject =
+      (clitics.includes('se') && clitics.length > 1) ||
+      (f?.person === 3 &&
+        clitics.some((c) => DATIVE_CLITICS.has(c)) &&
+        (inner.length > 1 || tokens[v].forms.some((x) => DATIVE_VERBS.has(x.lemma.replace(/se$/, '')))));
+    // "¿Es uruguayo tu profesor?" already has its subject, after the verb.
+    const namedAfter = () => {
+      for (let k = v + 1; k < tokens.length && !clauseStart(tokens, k); k++)
+        if (tokens[k].forms.some((x) => x.pos === 'noun') && tokens[k - 1].forms.some((x) => x.pos === 'det')) return true;
+      return false;
+    };
+    const lemma =
+      f && f.number === 'sg' && onlyVerb && !thingIsSubject && clauseStart(tokens, i) && !(f.person === 3 && namedAfter())
+        ? pronounFor(f)
+        : null;
+    if (lemma && !said.has(lemma) && !inserted.has(lemma)) {
       const hasOne =
         (i > 0 && subjectPronoun(tokens[i - 1])) || (v + 1 < tokens.length && subjectPronoun(tokens[v + 1]));
       const form = vocabulary.forms.find((x) => x.pos === 'pron' && x.lemma === lemma);
-      if (!hasOne && form) insert.choices.push({ lead: '', word: form.form, tail: '', name: false, inserted: true });
+      if (!hasOne && form) {
+        insert.choices.push({ lead: '', word: form.form, tail: '', name: false, inserted: true });
+        inserted.add(lemma);
+      }
     }
     slots.push(insert);
 
     const token: Slot = { original: piece, choices: [piece] };
     if (optional.has(i)) token.choices.push(null);
-    // Only an adjective said of the speaker or listener, right after the verb
-    // ("soy chileno", "estás muy cansada"); one next to a noun agrees with the
-    // noun ("la heladera rota"), and a quantifier with what it counts ("cuántos años").
-    const adj = t.forms.find((x) => x.pos === 'adj' && x.features?.gender);
-    let before = i - 1;
-    while (before >= 0 && tokens[before].forms.length > 0 && tokens[before].forms.every((x) => x.pos === 'adv')) before--;
-    const predicate = before >= 0 && tokens[before].forms.some((x) => x.pos === 'verb') && !split(tokens[before].surface).tail;
-    if (adj && genderOpen && predicate) {
-      const other = vocabulary.forms.find(
-        (x) =>
-          x.lemma_id === adj.lemma_id &&
-          x.pos === 'adj' &&
-          x.features?.gender &&
-          x.features.gender !== adj.features.gender &&
-          x.features.number === adj.features.number,
-      );
-      if (other) token.choices.push({ ...piece, word: other.form });
+
+    // The other gender, where nothing says which: an adjective said of the
+    // speaker or listener ("soy chileno", "estás muy cansada", "Encantada."),
+    // a noun or "el que" after "ser" ("soy médica", "soy el que paga"), and
+    // "nosotras" for "we". One next to a noun agrees with the noun ("la
+    // heladera rota"), and a quantifier with what it counts ("cuántos años").
+    if (genderOpen) {
+      const adj = t.forms.find((x) => x.pos === 'adj' && x.features?.gender);
+      const noun = t.forms.find((x) => (x.pos === 'noun' || x.lemma === 'el que') && x.features?.gender);
+      const we = t.forms.find((x) => x.pos === 'pron' && x.lemma === 'nosotros' && x.features?.gender);
+      const standalone =
+        i === 0 && !!tail && (words.includes('i') || words.includes('you') || words.includes('we'));
+      const swap =
+        adj && (aboutSpeaker(i) || standalone)
+          ? adj
+          : noun && t.forms.every((x) => x.pos !== 'verb') && aboutSpeaker(i, new Set(['ser']))
+            ? noun
+            : we && words.includes('we')
+              ? we
+              : null;
+      if (swap) {
+        const other =
+          vocabulary.forms.find(
+            (x) =>
+              x.lemma_id === swap.lemma_id &&
+              x.pos === swap.pos &&
+              x.features?.gender &&
+              x.features.gender !== swap.features.gender &&
+              x.features.number === swap.features.number,
+          )?.form ?? (swap.pos === 'adj' ? otherGender(fold(core), swap.features.gender!) : null);
+        if (other && fold(other) !== fold(core)) {
+          const word = core[0] === core[0].toLocaleUpperCase('es') ? upper(other) : other;
+          token.choices.push({ ...piece, word, swap: true });
+          token.swappable = true;
+        }
+      }
     }
     slots.push(token);
   });
 
   const seen = new Set([key(slots.map((s) => s.original).filter((p): p is Pick => !!p))]);
   const out: string[] = [];
-  const walk = (k: number, picks: { original: Pick | null; choice: Pick | null }[]) => {
+  const walk = (k: number, picks: { original: Pick | null; choice: Pick | null; swappable?: boolean }[]) => {
     if (out.length >= MAX_VARIANTS) return;
     if (k === slots.length) {
+      // Everyone the sentence leaves open is one person: all one gender or all
+      // the other, never "estamos cansados y apuradas".
+      const kept = picks.filter((p) => p.swappable && p.choice);
+      const swapped = kept.filter((p) => p.choice!.swap).length;
+      if (swapped && swapped < kept.length) return;
       const pieces = render(picks);
       const id = key(pieces);
       if (pieces.length && !seen.has(id)) {
@@ -163,7 +272,8 @@ export function generateVariants(tokens: T[], en: string, vocabulary: { forms: V
       }
       return;
     }
-    for (const choice of slots[k].choices) walk(k + 1, [...picks, { original: slots[k].original, choice }]);
+    for (const choice of slots[k].choices)
+      walk(k + 1, [...picks, { original: slots[k].original, choice, swappable: slots[k].swappable }]);
   };
   walk(0, []);
   return out;
@@ -198,10 +308,16 @@ function render(picks: { original: Pick | null; choice: Pick | null }[]) {
   return out;
 }
 
+/**
+ * Words keep their case, except where a sentence starts — the first word, or
+ * one after ". ? !" or a dash ("¿Enojado? No, …") — and for a word that opened
+ * a sentence only by position, or was put in: "Sos" is "sos" in "¿Vos sos…?".
+ */
 const text = (pieces: Pick[]) =>
   pieces
     .map((p, i) => {
-      const word = p.name ? p.word : i === 0 ? upper(p.word) : lower(p.word);
+      const starts = i === 0 || SENTENCE_END.test(pieces[i - 1].tail) || p.lead.includes('—');
+      const word = p.name ? p.word : starts ? upper(p.word) : p.inserted || p.opens ? lower(p.word) : p.word;
       return `${p.lead}${word}${p.tail}`;
     })
     .join(' ');
