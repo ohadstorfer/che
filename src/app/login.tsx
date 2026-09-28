@@ -13,9 +13,10 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button, Field, MoraFace } from '@/components/ui';
+import { resetTo } from '@/lib/nav';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { supabase } from '@/lib/supabase';
-import { colors, type } from '@/lib/theme';
+import { colors, font, type } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
 // Login — email and password, the accounts Che already has. One form for both
@@ -61,7 +62,7 @@ export default function Login() {
     if (err) return setError(explain(err.message));
     // A project that confirms emails creates the account without a session.
     if (!data.session) return setNotice('We sent you an email to confirm the account. Then sign in.');
-    router.replace('/home');
+    resetTo('/home');
   };
 
   return (
@@ -70,7 +71,7 @@ export default function Login() {
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
           <View style={styles.hero}>
             <MoraFace size={116} />
-            <Text style={styles.title}>Che</Text>
+            <Text style={styles.title}>Posta</Text>
             <Text style={styles.subtitle}>A little Argentine Spanish every day</Text>
           </View>
 
@@ -116,7 +117,9 @@ export default function Login() {
             />
             <Pressable
               onPress={() => {
-                setMode(mode === 'signin' ? 'signup' : 'signin');
+                // A new account starts with onboarding: the plan is what it saves.
+                if (mode === 'signin') return router.replace('/onboarding');
+                setMode('signin');
                 setError(null);
                 setNotice(null);
               }}
@@ -135,7 +138,7 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1 },
+  safe: { flex: 1, backgroundColor: colors.bg },
   container: {
     flexGrow: 1,
     justifyContent: 'center',
@@ -145,12 +148,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   hero: { alignItems: 'center', marginBottom: 36, gap: 8 },
-  title: { fontSize: 34, color: colors.primary, fontWeight: '700', marginTop: 10 },
+  title: { ...type.display, fontSize: 38, lineHeight: 42, letterSpacing: -0.8, color: colors.ink, marginTop: 10 },
   subtitle: { ...type.body, color: colors.muted },
   form: { gap: 16 },
-  error: { fontSize: 14, lineHeight: 20, color: colors.dangerInk },
-  notice: { fontSize: 14, lineHeight: 20, color: colors.primaryDark },
+  error: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.dangerInk },
+  notice: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.primaryDark },
   switch: { alignSelf: 'center', paddingVertical: 6 },
-  switchText: { fontSize: 15, color: colors.muted },
-  switchLink: { color: colors.primary, fontWeight: '700' },
+  switchText: { ...font.body[600], fontSize: 15, color: colors.muted },
+  switchLink: { ...font.body[800], color: colors.primary },
 });

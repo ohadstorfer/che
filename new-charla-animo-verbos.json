@@ -1,0 +1,1111 @@
+{
+ "kept": [
+  {
+   "es": "de una",
+   "pos": "phrase",
+   "en": "sure thing",
+   "note": "Enthusiastic yes: \"¿Vamos? —¡De una!\". Informal, very common among young people.",
+   "example": {
+    "es": "—¿Pedimos pizza? —¡De una, me muero de hambre!",
+    "en": "—Shall we order pizza? —Totally, I'm starving!"
+   },
+   "gap": "De una",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "ni ahí",
+   "pos": "phrase",
+   "en": "not at all",
+   "note": "Strong denial: no way, not even close. Also \"ni ahí con eso\": not into it. Informal.",
+   "example": {
+    "es": "Ni ahí voy a esa fiesta, no conozco a nadie.",
+    "en": "No way am I going to that party, I don't know anyone."
+   },
+   "gap": "Ni ahí",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "qué sé yo",
+   "pos": "phrase",
+   "en": "I dunno",
+   "note": "Shrugging filler when unsure or vague. Often at the end: \"...y qué sé yo\". Neutral, everyone says it.",
+   "example": {
+    "es": "No sé, podemos ir al cine, al parque, qué sé yo.",
+    "en": "I don't know, we could go to the movies, the park, whatever."
+   },
+   "gap": "qué sé yo",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "tipo",
+   "pos": "adv",
+   "en": "like",
+   "note": "Filler like English \"like\": \"tipo, no sé\". Also means around with times: \"tipo ocho\", around eight.",
+   "example": {
+    "es": "Nos vemos tipo nueve en la puerta del bar.",
+    "en": "See you around nine at the bar door."
+   },
+   "gap": "tipo",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "obvio",
+   "pos": "intj",
+   "en": "of course",
+   "note": "The go-to \"of course\" in Argentina: \"¡Obvio!\" or \"obvio que sí\". Informal but used by everyone.",
+   "example": {
+    "es": "—¿Venís al asado? —¡Obvio! ¿Qué llevo?",
+    "en": "—Are you coming to the barbecue? —Of course! What should I bring?"
+   },
+   "gap": "Obvio",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "a full",
+   "pos": "phrase",
+   "en": "totally",
+   "note": "Full on, all the way: \"estoy a full con el laburo\". Anglicism, very common and informal.",
+   "example": {
+    "es": "Esta semana estoy a full con los exámenes.",
+    "en": "This week I'm totally swamped with exams."
+   },
+   "gap": "a full",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "cualquiera",
+   "pos": "phrase",
+   "en": "nonsense",
+   "note": "\"¡Cualquiera!\" or \"qué cualquiera\": that's ridiculous, makes no sense. Also \"hacer cualquiera\": act crazy.",
+   "example": {
+    "es": "¿Te cobraron diez lucas por un café? ¡Cualquiera!",
+    "en": "They charged you ten grand for a coffee? That's nuts!"
+   },
+   "gap": "Cualquiera",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "bueno, nada",
+   "pos": "phrase",
+   "en": "well, anyway",
+   "note": "Filler to wrap up or change topic when there is nothing more to say. Very typical porteño rhythm.",
+   "example": {
+    "es": "Bueno, nada, eso te quería contar. Hablamos después.",
+    "en": "Well, anyway, that's what I wanted to tell you. Talk later."
+   },
+   "gap": "Bueno, nada",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "todo bien",
+   "pos": "phrase",
+   "en": "all good",
+   "note": "\"¿Todo bien?\" is a standard greeting; \"todo bien\" also means no problem or it's fine.",
+   "example": {
+    "es": "Hola, che, ¿todo bien? Hace mil que no te veo.",
+    "en": "Hey, all good? I haven't seen you in ages."
+   },
+   "gap": "todo bien",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "nada que ver",
+   "pos": "phrase",
+   "en": "totally unrelated",
+   "note": "That has nothing to do with it, or \"not at all\" as a reply. \"Es re nada que ver\": it's totally off.",
+   "example": {
+    "es": "¿Que yo estoy enojado? Nada que ver, estoy cansado.",
+    "en": "Me, angry? Not at all, I'm tired."
+   },
+   "gap": "Nada que ver",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "mirá vos",
+   "pos": "phrase",
+   "en": "well, look at that",
+   "note": "Reaction to news, real or feigned surprise: \"¡Mirá vos!\". Can sound ironic with a flat tone.",
+   "example": {
+    "es": "—Se casa Martín. —¡Mirá vos! No sabía que tenía novia.",
+    "en": "—Martín is getting married. —Well, look at that! I didn't know he had a girlfriend."
+   },
+   "gap": "Mirá vos",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "tal cual",
+   "pos": "phrase",
+   "en": "exactly",
+   "note": "Total agreement: \"¡Tal cual!\", that's exactly it. Informal and very frequent.",
+   "example": {
+    "es": "—Este país es una montaña rusa. —Tal cual.",
+    "en": "—This country is a roller coaster. —Exactly."
+   },
+   "gap": "Tal cual",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "qué onda",
+   "pos": "phrase",
+   "en": "what's up",
+   "note": "Casual greeting, or \"¿qué onda con...?\" to ask what's going on with something. Informal.",
+   "example": {
+    "es": "¿Qué onda, che? ¿Salimos esta noche?",
+    "en": "What's up? Are we going out tonight?"
+   },
+   "gap": "Qué onda",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "de diez",
+   "pos": "phrase",
+   "en": "perfect",
+   "note": "Excellent, a ten out of ten: \"quedó de diez\". Casual and positive.",
+   "example": {
+    "es": "La comida estuvo de diez, gracias por invitarnos.",
+    "en": "The food was perfect, thanks for inviting us."
+   },
+   "gap": "de diez",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "fija",
+   "pos": "adj",
+   "en": "a sure thing",
+   "note": "\"Es fija\": it's certain, it'll happen for sure. From horse-racing slang. Informal.",
+   "example": {
+    "es": "Si llueve, es fija que el subte se llena.",
+    "en": "If it rains, it's a sure thing the subway fills up."
+   },
+   "gap": "fija",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "alto",
+   "pos": "adj",
+   "en": "a huge",
+   "note": "Placed before a noun for emphasis: \"alto quilombo\", \"alta fiesta\". Young, very informal.",
+   "example": {
+    "es": "Anoche fue alta fiesta en lo de Juli.",
+    "en": "Last night was a huge party at Juli's."
+   },
+   "gap": "alta",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "una banda",
+   "pos": "phrase",
+   "en": "a ton",
+   "note": "A lot: \"te quiero una banda\", \"había una banda de gente\". Informal, very common.",
+   "example": {
+    "es": "Había una banda de gente en la cancha.",
+    "en": "There were a ton of people at the stadium."
+   },
+   "gap": "una banda",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "un toque",
+   "pos": "phrase",
+   "en": "a bit",
+   "note": "A little, briefly: \"esperá un toque\", \"un toque de sal\". Softens requests. Informal.",
+   "example": {
+    "es": "Esperame un toque que termino y salimos.",
+    "en": "Wait a sec, I'll finish and we'll head out."
+   },
+   "gap": "un toque",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "listo",
+   "pos": "intj",
+   "en": "done, okay",
+   "note": "Closes a deal or topic: \"listo, nos vemos mañana\". Also \"¿listo?\" to check agreement. Everyday word.",
+   "example": {
+    "es": "Listo, entonces paso a buscarte a las siete.",
+    "en": "Okay, so I'll pick you up at seven."
+   },
+   "gap": "Listo",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "olvidate",
+   "pos": "intj",
+   "en": "you bet",
+   "note": "\"¡Olvidate!\" means absolutely, count on it, not forget it. Context decides; tone is enthusiastic.",
+   "example": {
+    "es": "—¿Me ayudás con la mudanza? —¡Olvidate! Ahí estoy.",
+    "en": "—Will you help me move? —You bet! I'll be there."
+   },
+   "gap": "Olvidate",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "de más",
+   "pos": "phrase",
+   "en": "totally, sure",
+   "note": "Enthusiastic agreement among young people: \"—¿Vamos? —¡De más!\". Informal.",
+   "example": {
+    "es": "—¿Te copa ir a la costa? —¡De más!",
+    "en": "—Up for going to the coast? —Totally!"
+   },
+   "gap": "De más",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "sí o sí",
+   "pos": "phrase",
+   "en": "no matter what",
+   "note": "Without fail, one way or another: \"tenés que venir sí o sí\". Neutral, everyone uses it.",
+   "example": {
+    "es": "El viernes tenemos que terminar esto sí o sí.",
+    "en": "We have to finish this by Friday no matter what."
+   },
+   "gap": "sí o sí",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "no da",
+   "pos": "phrase",
+   "en": "it's not okay",
+   "note": "\"No da\" means it's not appropriate or not worth it: \"no da ir así vestido\". Informal.",
+   "example": {
+    "es": "No da llegar tarde a la entrevista, salgamos ya.",
+    "en": "It's not cool to be late to the interview, let's leave."
+   },
+   "gap": "No da",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "cero",
+   "pos": "adj",
+   "en": "zero, no",
+   "note": "Before a noun for emphasis: \"cero ganas\", \"cero onda\". Informal, very common.",
+   "example": {
+    "es": "Hoy tengo cero ganas de cocinar, pidamos algo.",
+    "en": "I have zero desire to cook today, let's order something."
+   },
+   "gap": "cero",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "ya fue",
+   "pos": "phrase",
+   "en": "forget it",
+   "note": "Whatever, it's done, let it go. Also to decide on impulse: \"ya fue, me lo compro\".",
+   "example": {
+    "es": "Ya fue, no me contestó. Me voy a dormir.",
+    "en": "Forget it, he didn't answer. I'm going to bed."
+   },
+   "gap": "Ya fue",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "tranca",
+   "pos": "adj",
+   "en": "chill",
+   "note": "Short for tranquilo: \"todo tranca\", everything's calm. Also \"tranca\" as reassurance: relax. Informal.",
+   "example": {
+    "es": "Tranca, no pasa nada, lo arreglamos mañana.",
+    "en": "Chill, it's no big deal, we'll fix it tomorrow."
+   },
+   "gap": "Tranca",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "sonaste",
+   "pos": "intj",
+   "en": "you're done for",
+   "note": "\"¡Sonaste!\" warns someone they're in trouble. From \"sonar\", to be doomed. Jokey or serious.",
+   "example": {
+    "es": "Si tu vieja ve esa nota, sonaste.",
+    "en": "If your mom sees that grade, you're toast."
+   },
+   "gap": "sonaste",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "buena onda",
+   "pos": "adj",
+   "en": "nice, friendly",
+   "note": "Describes a friendly, easygoing person or vibe: \"es re buena onda\". Opposite: \"mala onda\".",
+   "example": {
+    "es": "El profe nuevo es re buena onda.",
+    "en": "The new teacher is really nice."
+   },
+   "gap": "buena onda",
+   "theme": "charla",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "quemado",
+   "pos": "adj",
+   "en": "burned out",
+   "note": "\"Estar quemado\": mentally fried from work or study. \"Tengo la cabeza quemada\". Informal.",
+   "example": {
+    "es": "Después de seis horas de reunión estoy re quemado.",
+    "en": "After six hours of meetings I'm totally fried."
+   },
+   "gap": "quemado",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "bajón",
+   "pos": "noun",
+   "en": "downer",
+   "note": "A slump, sadness or letdown: \"¡qué bajón!\". \"Estar de bajón\": to feel down. Very common.",
+   "example": {
+    "es": "Qué bajón que se suspendió el recital.",
+    "en": "What a downer that the concert got cancelled."
+   },
+   "gap": "bajón",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "estar de la cabeza",
+   "pos": "phrase",
+   "en": "be nuts",
+   "note": "To be crazy or overwhelmed: \"estás de la cabeza\". Also stressed out. Informal.",
+   "example": {
+    "es": "Con tres laburos, Pablo está de la cabeza.",
+    "en": "With three jobs, Pablo has lost it."
+   },
+   "gap": "está de la cabeza",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "podrido",
+   "pos": "adj",
+   "en": "fed up",
+   "note": "\"Estar podrido de algo\": sick and tired of it. Informal; literally rotten.",
+   "example": {
+    "es": "Estoy podrido de que me cancelen a último momento.",
+    "en": "I'm sick of people cancelling at the last minute."
+   },
+   "gap": "podrido",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "chocho",
+   "pos": "adj",
+   "en": "thrilled",
+   "note": "Delighted, tickled pink: \"está chocha con el nieto\". Warm, a bit old-fashioned but common.",
+   "example": {
+    "es": "Mi abuela está chocha con el perrito nuevo.",
+    "en": "My grandma is thrilled with the new puppy."
+   },
+   "gap": "chocha",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "calentarse",
+   "pos": "verb",
+   "en": "get mad",
+   "note": "To get angry: \"no te calientes\". \"Estar caliente\" can mean angry, but careful: it also means horny.",
+   "example": {
+    "es": "No te calentés, fue sin querer.",
+    "en": "Don't get mad, it was an accident."
+   },
+   "gap": "calentés",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "embolarse",
+   "pos": "verb",
+   "en": "get bored",
+   "note": "To get bored stiff. Informal, very common; \"me embolé\" after a dull movie.",
+   "example": {
+    "es": "Me embolé en la clase y me fui a la mitad.",
+    "en": "I got bored in class and left halfway through."
+   },
+   "gap": "embolé",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "estar en otra",
+   "pos": "phrase",
+   "en": "be elsewhere mentally",
+   "note": "Distracted, or into other things now: \"ya está en otra\". Informal.",
+   "example": {
+    "es": "Te hablo y no me escuchás, estás en otra.",
+    "en": "I'm talking to you and you're not listening, you're miles away."
+   },
+   "gap": "estás en otra",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "enroscarse",
+   "pos": "verb",
+   "en": "overthink",
+   "note": "To get tangled up overthinking something: \"no te enrosques\". Informal.",
+   "example": {
+    "es": "No te enrosques, seguro no te contestó porque estaba laburando.",
+    "en": "Don't overthink it, he surely didn't reply because he was working."
+   },
+   "gap": "enrosques",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "rayado",
+   "pos": "adj",
+   "en": "obsessed, unhinged",
+   "note": "\"Estar rayado\": obsessed with something, or a bit crazy. Informal, youthful.",
+   "example": {
+    "es": "Está rayado con el gimnasio, va todos los días.",
+    "en": "He's obsessed with the gym, he goes every day."
+   },
+   "gap": "rayado",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "sacado",
+   "pos": "adj",
+   "en": "furious, out of it",
+   "note": "Beside oneself with rage, or wild: \"estaba re sacado\". Informal.",
+   "example": {
+    "es": "El vecino vino re sacado por el ruido.",
+    "en": "The neighbor came over furious about the noise."
+   },
+   "gap": "sacado",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "embalado",
+   "pos": "adj",
+   "en": "psyched, on a roll",
+   "note": "Excited and carried away: \"estoy embalado con el proyecto\". Informal.",
+   "example": {
+    "es": "Está embalado con la banda, ensaya todos los días.",
+    "en": "He's psyched about the band, he rehearses every day."
+   },
+   "gap": "embalado",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "a mil",
+   "pos": "phrase",
+   "en": "swamped, wired",
+   "note": "\"Estar a mil\": extremely busy or wound up. Informal.",
+   "example": {
+    "es": "Perdón que no te llamé, estoy a mil con la mudanza.",
+    "en": "Sorry I didn't call, I'm swamped with the move."
+   },
+   "gap": "a mil",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "al horno",
+   "pos": "phrase",
+   "en": "in deep trouble",
+   "note": "\"Estar al horno\": to be in a real fix. Literally in the oven. Informal.",
+   "example": {
+    "es": "Mañana rindo y no estudié nada, estoy al horno.",
+    "en": "I have the exam tomorrow and didn't study, I'm screwed."
+   },
+   "gap": "al horno",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "tildado",
+   "pos": "adj",
+   "en": "frozen, zoned out",
+   "note": "Like a frozen computer: stuck, blank. \"Me quedé tildado\": my mind went blank. Informal.",
+   "example": {
+    "es": "Me preguntó el nombre y me quedé tildado.",
+    "en": "He asked my name and I just froze."
+   },
+   "gap": "tildado",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "colgado",
+   "pos": "adj",
+   "en": "scatterbrained",
+   "note": "Distracted or forgetful: \"soy re colgado\". \"Me colgué\": I forgot. Informal.",
+   "example": {
+    "es": "Perdón, me colgué y no te devolví el llamado.",
+    "en": "Sorry, I spaced out and didn't call you back."
+   },
+   "gap": "colgué",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "cruzado",
+   "pos": "adj",
+   "en": "in a bad mood",
+   "note": "Grumpy, crabby: \"hoy el jefe está cruzado\". Informal.",
+   "example": {
+    "es": "Hoy mi viejo anda cruzado, mejor no le hables.",
+    "en": "My dad is in a bad mood today, better not talk to him."
+   },
+   "gap": "cruzado",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "amargo",
+   "pos": "adj",
+   "en": "killjoy",
+   "note": "Bitter, no fun: \"no seas amargo\". Used for someone who won't join in. Informal.",
+   "example": {
+    "es": "Dale, no seas amargo y vení a bailar.",
+    "en": "Come on, don't be a party pooper and come dance."
+   },
+   "gap": "amargo",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "metejón",
+   "pos": "noun",
+   "en": "crush, infatuation",
+   "note": "An intense crush or obsession: \"tiene un metejón con la vecina\". Lunfardo, still used.",
+   "example": {
+    "es": "Tiene un metejón con esa chica que no se le pasa.",
+    "en": "He has a crush on that girl he just can't shake."
+   },
+   "gap": "metejón",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 3
+  },
+  {
+   "es": "tragado",
+   "pos": "adj",
+   "en": "head over heels",
+   "note": "\"Estar tragado\": totally smitten with someone. Informal.",
+   "example": {
+    "es": "Está re tragado con su compañera de facultad.",
+    "en": "He's head over heels for his classmate."
+   },
+   "gap": "tragado",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "fusilado",
+   "pos": "adj",
+   "en": "wiped out",
+   "note": "Utterly exhausted: \"llegué fusilado\". Informal; literally shot by firing squad.",
+   "example": {
+    "es": "Después del turno doble llegué fusilado a casa.",
+    "en": "After the double shift I got home wiped out."
+   },
+   "gap": "fusilado",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "del tomate",
+   "pos": "phrase",
+   "en": "crazy",
+   "note": "\"Estar del tomate\": to be nuts. Jokey, informal.",
+   "example": {
+    "es": "Querés cruzar la cordillera en bici, estás del tomate.",
+    "en": "You want to cross the Andes by bike, you're nuts."
+   },
+   "gap": "del tomate",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "tentarse",
+   "pos": "verb",
+   "en": "get the giggles",
+   "note": "To be unable to stop laughing, often at the wrong moment: \"me tenté\". Very Argentine.",
+   "example": {
+    "es": "En el velorio me tenté y tuve que salir.",
+    "en": "At the wake I got the giggles and had to step out."
+   },
+   "gap": "tenté",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "julepe",
+   "pos": "noun",
+   "en": "fright",
+   "note": "A scare: \"me pegué un julepe bárbaro\". Rioplatense, a bit old-fashioned.",
+   "example": {
+    "es": "Me pegué un julepe cuando sonó el teléfono a las tres.",
+    "en": "I got a real fright when the phone rang at three."
+   },
+   "gap": "julepe",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 3
+  },
+  {
+   "es": "bronca",
+   "pos": "noun",
+   "en": "anger",
+   "note": "Anger or frustration: \"me da bronca\", it makes me mad. Very common everyday word.",
+   "example": {
+    "es": "Me da bronca que nadie avise cuando llega tarde.",
+    "en": "It makes me mad that nobody warns when they're late."
+   },
+   "gap": "bronca",
+   "theme": "animo",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "agarrar",
+   "pos": "verb",
+   "en": "take, grab",
+   "note": "Argentines say agarrar, never coger, for take or grab: \"agarrá el colectivo\", \"agarrá por Corrientes\".",
+   "example": {
+    "es": "Agarrá la segunda a la derecha y ya llegaste.",
+    "en": "Take the second right and you're there."
+   },
+   "gap": "Agarrá",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "rajar",
+   "pos": "verb",
+   "en": "kick out, split",
+   "note": "\"Rajar\" is to fire or kick out: \"lo rajaron\". \"Rajá de acá\": get out of here. Informal.",
+   "example": {
+    "es": "Lo rajaron del laburo por llegar siempre tarde.",
+    "en": "He got fired for always showing up late."
+   },
+   "gap": "rajaron",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "pispear",
+   "pos": "verb",
+   "en": "peek",
+   "note": "To sneak a look: \"pispeá qué hay en la heladera\". Informal, playful.",
+   "example": {
+    "es": "Pispeé el regalo antes del cumple.",
+    "en": "I peeked at the present before the birthday."
+   },
+   "gap": "Pispeé",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "manotear",
+   "pos": "verb",
+   "en": "snatch",
+   "note": "To grab or swipe with a quick hand movement, or snatch at something. Informal.",
+   "example": {
+    "es": "Me manoteó el celular de la mano en el bondi.",
+    "en": "He snatched the phone out of my hand on the bus."
+   },
+   "gap": "manoteó",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "zafar",
+   "pos": "verb",
+   "en": "get away with it",
+   "note": "To scrape by or escape something: \"zafé del examen\". \"Zafa\": it's passable. Very common.",
+   "example": {
+    "es": "No estudié mucho, pero zafé con un cuatro.",
+    "en": "I didn't study much, but I scraped by with a pass."
+   },
+   "gap": "zafé",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "chequear",
+   "pos": "verb",
+   "en": "check",
+   "note": "Everyday verb for check or verify, preferred over \"comprobar\". Neutral.",
+   "example": {
+    "es": "Chequeá que la puerta quede cerrada antes de salir.",
+    "en": "Check that the door is locked before you leave."
+   },
+   "gap": "Chequeá",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "pegar onda",
+   "pos": "phrase",
+   "en": "hit it off",
+   "note": "To click with someone, often romantically: \"pegamos onda enseguida\". Informal.",
+   "example": {
+    "es": "Pegamos onda en la fiesta y ahora salimos.",
+    "en": "We hit it off at the party and now we're dating."
+   },
+   "gap": "Pegamos onda",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "clavar",
+   "pos": "verb",
+   "en": "stand up, get stuck",
+   "note": "\"Me clavó\": stood me up. \"Clavar el visto\": leave on read. Also stick someone with a cost.",
+   "example": {
+    "es": "Me clavó una hora en el bar y nunca vino.",
+    "en": "He left me waiting an hour at the bar and never came."
+   },
+   "gap": "clavó",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "engancharse",
+   "pos": "verb",
+   "en": "get hooked",
+   "note": "To get into something: \"me enganché con la serie\". Also to join in. Informal.",
+   "example": {
+    "es": "Me enganché con la serie y la terminé en dos días.",
+    "en": "I got hooked on the show and finished it in two days."
+   },
+   "gap": "enganché",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "patinarse",
+   "pos": "verb",
+   "en": "blow money",
+   "note": "To burn through cash: \"me patiné el sueldo\". Informal.",
+   "example": {
+    "es": "Me patiné todo el aguinaldo en una semana.",
+    "en": "I blew my whole bonus in a week."
+   },
+   "gap": "patiné",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "fundirse",
+   "pos": "verb",
+   "en": "go broke",
+   "note": "To go bankrupt or run out of money: \"se fundió el negocio\". Also to be worn out. Informal.",
+   "example": {
+    "es": "Se le fundió el negocio con la crisis.",
+    "en": "His business went bust with the crisis."
+   },
+   "gap": "fundió",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "embarrarla",
+   "pos": "verb",
+   "en": "mess up",
+   "note": "To screw things up: \"la embarré\". Informal, not rude.",
+   "example": {
+    "es": "La embarré, le conté la sorpresa a Juan.",
+    "en": "I messed up, I told Juan about the surprise."
+   },
+   "gap": "embarré",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "apurar",
+   "pos": "verb",
+   "en": "confront, pressure",
+   "note": "Besides hurry, in Argentina it means to corner or press someone for answers: \"lo apuré y confesó\".",
+   "example": {
+    "es": "Lo apuré un poco y terminó contando todo.",
+    "en": "I pressed him a bit and he ended up telling everything."
+   },
+   "gap": "apuré",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "cranear",
+   "pos": "verb",
+   "en": "scheme, dream up",
+   "note": "To think up a plan or idea: \"estoy craneando algo\". Informal.",
+   "example": {
+    "es": "Estamos craneando una sorpresa para su cumple.",
+    "en": "We're cooking up a surprise for her birthday."
+   },
+   "gap": "craneando",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "mandarse",
+   "pos": "verb",
+   "en": "pull off, blunder",
+   "note": "\"Mandarse una macana\": to blunder. \"Mandarse\" also means to go boldly or do on impulse. Informal.",
+   "example": {
+    "es": "Me mandé una macana con el auto de mi viejo.",
+    "en": "I screwed up with my dad's car."
+   },
+   "gap": "mandé",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "retar",
+   "pos": "verb",
+   "en": "scold",
+   "note": "The everyday Argentine word for scold, instead of regañar: \"me retó la maestra\".",
+   "example": {
+    "es": "Mi vieja me retó por llegar tarde.",
+    "en": "My mom told me off for coming home late."
+   },
+   "gap": "retó",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "tomárselas",
+   "pos": "verb",
+   "en": "clear off",
+   "note": "To leave, often in a hurry: \"me las tomo\". \"¡Tomátelas!\": get lost. Informal.",
+   "example": {
+    "es": "Bueno, me las tomo que mañana madrugo.",
+    "en": "Well, I'm off, I have to get up early tomorrow."
+   },
+   "gap": "me las tomo",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "rescatarse",
+   "pos": "verb",
+   "en": "snap out of it",
+   "note": "To calm down or get your act together: \"rescatate\". Youth slang, very common.",
+   "example": {
+    "es": "Rescatate un poco, ya te pasaste con el vino.",
+    "en": "Get a grip, you've had way too much wine."
+   },
+   "gap": "Rescatate",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "cortarla",
+   "pos": "verb",
+   "en": "knock it off",
+   "note": "To stop doing something annoying: \"¡cortala!\". Informal, common with kids and friends.",
+   "example": {
+    "es": "Cortala con el celular y ayudame a poner la mesa.",
+    "en": "Put down the phone and help me set the table."
+   },
+   "gap": "Cortala",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "arrancar",
+   "pos": "verb",
+   "en": "get going",
+   "note": "Start or head off: \"¿arrancamos?\", \"arranqué el gimnasio\". Much more common than empezar in speech.",
+   "example": {
+    "es": "¿Arrancamos? Ya son las diez.",
+    "en": "Shall we get going? It's already ten."
+   },
+   "gap": "Arrancamos",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "fichar",
+   "pos": "verb",
+   "en": "check out",
+   "note": "To eye someone up or keep an eye on them: \"te está fichando\". Informal.",
+   "example": {
+    "es": "Ese flaco te está fichando desde que llegamos.",
+    "en": "That guy has been checking you out since we arrived."
+   },
+   "gap": "fichando",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "gorrear",
+   "pos": "verb",
+   "en": "cheat on",
+   "note": "To be unfaithful: \"lo gorrearon\". From \"poner los cuernos\". Informal.",
+   "example": {
+    "es": "Se separaron porque ella lo gorreaba con un compañero.",
+    "en": "They split up because she was cheating on him with a coworker."
+   },
+   "gap": "gorreaba",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "embocar",
+   "pos": "verb",
+   "en": "get it right",
+   "note": "To hit the target or guess correctly: \"la embocaste\". Informal.",
+   "example": {
+    "es": "Con el regalo la embocaste, le encantó.",
+    "en": "You nailed it with the present, she loved it."
+   },
+   "gap": "embocaste",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "descansar",
+   "pos": "verb",
+   "en": "mock, tease",
+   "note": "Slang sense: to make fun of or show someone up: \"me descansó\". Youthful, informal.",
+   "example": {
+    "es": "Me descansaron todo el día por el corte de pelo.",
+    "en": "They teased me all day about my haircut."
+   },
+   "gap": "descansaron",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 2
+  },
+  {
+   "es": "bochar",
+   "pos": "verb",
+   "en": "fail",
+   "note": "To fail someone on an exam: \"me bocharon en química\". Student slang.",
+   "example": {
+    "es": "Me bocharon en el final de matemática.",
+    "en": "They flunked me on the math final."
+   },
+   "gap": "bocharon",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  },
+  {
+   "es": "cebar",
+   "pos": "verb",
+   "en": "pour mate",
+   "note": "To prepare and serve mate in rounds: \"¿quién ceba?\". Also to egg someone on.",
+   "example": {
+    "es": "¿Cebás vos? A mí siempre me sale lavado.",
+    "en": "Will you pour the mate? Mine always comes out weak."
+   },
+   "gap": "Cebás",
+   "theme": "verbos",
+   "vulgar": false,
+   "level": 1
+  }
+ ],
+ "dropped": []
+}

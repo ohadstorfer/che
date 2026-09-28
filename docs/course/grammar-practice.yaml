@@ -1621,29 +1621,27 @@ units:
   - unit: usted
     lessons: 1
     tip:
-      title: "Vos and usted"
+      title: "Softening a request"
       body: |
-        | vos | usted |
-        | ¿Vos sos el dueño? | ¿**Usted** es el dueño? |
-        | Pasá. | **Pase**. |
-        | Sentate. | **Siéntese**. |
-        | Disculpá. | **Disculpe**. |
+        | straight | softer |
+        | ¿Tenés cambio? | ¿**No tendrás** cambio? |
+        | ¿Sabés dónde queda? | ¿**No sabrás** dónde queda? |
+        | Quiero un turno. | **Quisiera** un turno. |
+        | Perdón. | **Disculpá que te moleste**. |
 
-        Usted takes the *él* form. **Quisiera** — *I'd like* — works with both.
+        **No** plus the future turns a question into a gentle one: *you wouldn't happen to…?* After **disculpá que**, the verb takes the subjunctive: *te moleste*.
 
   - unit: como-no-dona-rosa
     lessons: 1
     tip:
-      title: "Usted commands"
+      title: "Warm, not formal"
       body: |
-        | vos | usted |
-        | Mirá. | **Mire**. |
-        | Esperá. | **Espere**. |
-        | Tomá. | **Tome**. |
-        | Firmá acá. | **Firme** acá. |
-        | Decime. | **Dígame**. |
+        | they say | you answer |
+        | ¿Me ayudás con las bolsas? | **Cómo no**, **te doy una mano**. |
+        | Gracias, querido. | **No es nada.** / **Faltaba más.** |
+        | No, no, yo puedo. | **Dejá, dejá**, que te las llevo. |
 
-        *-ar* verbs end in **-e**, *-er* and *-ir* verbs in **-a** (*venga*). A pronoun sticks on the end: *dígame*, *siéntese*.
+        Respect for **don José** and **doña Rosa** comes from the tone, not from usted.
 
   - unit: se-la-cree
     lessons: 1

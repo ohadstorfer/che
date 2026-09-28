@@ -2,7 +2,7 @@
 # Che — Section 12 outline: "In other words" (C1.1)
 #
 # Passing on what other people said and asked (me pidió que le trajera algo,
-# me preguntó si venía), switching into usted when the situation calls for it,
+# me preguntó si venía), asking strangers and older neighbours politely in vos,
 # writing the email that goes with it, telling how a story turned out
 # (resulta que, encima), the porteño "la" expressions (se la cree, me la
 # banco), what just happened and what usually does (acabo de, suelo), how the
@@ -310,51 +310,64 @@ units:
         en: "in person"
 
   - ordinal: 5
+    # The slug stays "usted" because every id hangs off it; the unit teaches
+    # politeness in vos — Argentina doesn't use usted.
     slug: "usted"
-    title: "Speak formally"
-    summary: "Disculpe, ¿usted es el dueño?"
+    title: "Ask a stranger politely"
+    summary: "Disculpá que te moleste, ¿no tendrás cambio?"
     grammar:
-      - "usted"
-      - "imperativo.usted"
       - "cortesia"
+      - "futuro.cortesia"
+      - "subjuntivo.disculpa-que"
     register_max: "informal"
     sample:
-      es: "Disculpe, ¿usted es el dueño?"
-      en: "Excuse me, are you the owner?"
+      es: "Disculpá que te moleste, ¿no tendrás cambio?"
+      en: "Sorry to bother you, you wouldn't have change, would you?"
     tips:
-      - title: "Usted"
-        body: "Porteños say **vos** to almost everyone, but **usted** to an older stranger, a doctor, a
-          building's owner. Usted takes the *él* form of the verb: **¿usted es el dueño?**, **pase**,
-          **siéntese**."
-      - title: "Quisiera"
-        body: "The politest way to ask is **quisiera** — *I'd like*: **quisiera un turno**. **Disculpe**
-          gets attention, **le agradezco** says thank you. To a friend: **disculpá**, **te agradezco**."
+      - title: "Polite, still vos"
+        body: "Porteños say **vos** to everyone: the shop owner, a doctor, an old man on the bus.
+          The politeness lives in the words around it: **disculpá que te moleste**, **perdón por la
+          molestia**, **muy amable**."
+      - title: "Quisiera, ¿no tendrás…?"
+        body: "The politest way to ask is **quisiera** — *I'd like*: **quisiera un turno**. To ask a
+          stranger for something, add **no** and the future: **¿no tendrás hora?** — *you wouldn't
+          have the time?*"
     words:
-      - lemma: "usted"
-        pos: "pron"
-        en: "you (formal)"
       - lemma: "disculpar"
         pos: "verb"
         en: "to excuse"
         forms:
-          - form: "disculpe"
-            en: "excuse me (formal)"
-            f: "3sg.imp"
           - form: "disculpá"
             en: "excuse me"
             f: "2sg.imp.vos"
-      - lemma: "pasar"
+          - form: "disculpame"
+            en: "excuse me, sorry"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "molestar"
+        pos: "verb"
+        en: "to bother"
+        forms:
+          - form: "moleste"
+            en: "(that) I bother"
+            f: "1sg.pres.subj"
+      - lemma: "molestia"
+        pos: "noun"
+        en: "bother, trouble"
+      - lemma: "tener"
         pos: "verb"
         forms:
-          - form: "pase"
-            en: "come in (formal)"
-            f: "3sg.imp"
-      - lemma: "sentarse"
+          - form: "tendrás"
+            en: "you'd have (polite ¿no tendrás…?)"
+            f: "2sg.fut.ind.vos.irregular"
+      - lemma: "saber"
         pos: "verb"
         forms:
-          - form: "siéntese"
-            en: "sit down (formal)"
-            f: "3sg.imp.clitic"
+          - form: "sabrás"
+            en: "you'd know (polite ¿no sabrás…?)"
+            f: "2sg.fut.ind.vos.irregular"
+      - lemma: "muy amable"
+        pos: "phrase"
+        en: "very kind of you"
       - lemma: "querer"
         pos: "verb"
         forms:
@@ -365,24 +378,23 @@ units:
   - ordinal: 6
     slug: "como-no-dona-rosa"
     title: "Talk to your older neighbours"
-    summary: "Cómo no, doña Rosa, pase"
+    summary: "Cómo no, doña Rosa, te doy una mano"
     grammar:
-      - "usted"
-      - "imperativo.usted"
       - "cortesia"
+      - "imperativo.vos"
     register_max: "informal"
     sample:
-      es: "Mire, don Juan, espere acá un minuto."
-      en: "Look, Don Juan, wait here a minute."
+      es: "Dejá, don Juan, te doy una mano con la bolsa."
+      en: "Let me, Don Juan, I'll give you a hand with the bag."
     tips:
-      - title: "Mire, espere, tome"
-        body: "Usted commands flip the vowel: *mirar* → **mire**, *esperar* → **espere**, *tomar* →
-          **tome**. The *-er* and *-ir* verbs go the other way: *venir* → **venga**, *decir* →
-          **dígame**. **Tome, acá tiene** is how the kiosquero hands you the change."
       - title: "Don, doña"
         body: "The old neighbour is **don José** or **doña Rosa** — first name, with respect. A **persona
-          mayor**, a **jubilado**, gets **usted**, **cómo no** (*of course*) and **con permiso** as you
-          squeeze past. **Perdone** if you bump into them."
+          mayor**, a **jubilado**, still gets **vos**, plus a **cómo no** (*of course*) and a **con
+          permiso** as you squeeze past."
+      - title: "Dejá, faltaba más"
+        body: "Offer help with **te doy una mano**. If they try to carry the bags themselves: **dejá,
+          dejá**. When they thank you: **no es nada** or **faltaba más** (*don't mention it*). And
+          they may call you **querido** or **querida**."
     words:
       - lemma: "don"
         pos: "noun"
@@ -407,6 +419,7 @@ units:
           - form: "jubilada"
             f: "f.sg"
           - form: "jubilados"
+            en: "retirees, pensioners"
             f: "m.pl"
       - lemma: "cómo no"
         pos: "phrase"
@@ -414,43 +427,33 @@ units:
       - lemma: "con permiso"
         pos: "phrase"
         en: "excuse me (to get past)"
-      - lemma: "perdonar"
-        pos: "verb"
-        en: "to forgive"
+      - lemma: "faltaba más"
+        pos: "phrase"
+        en: "don't mention it, of course"
+      - lemma: "no es nada"
+        pos: "phrase"
+        en: "it's nothing"
+      - lemma: "dar una mano"
+        pos: "phrase"
+        en: "to give a hand"
         forms:
-          - form: "perdone"
-            en: "pardon me (formal), forgive me"
-            f: "3sg.imp"
-      - lemma: "mirar"
-        pos: "verb"
-        forms:
-          - form: "mire"
-            en: "look (formal)"
-            f: "3sg.imp"
-      - lemma: "esperar"
-        pos: "verb"
-        forms:
-          - form: "espere"
-            en: "wait (formal)"
-            f: "3sg.imp"
-      - lemma: "tomar"
+          - form: "te doy una mano"
+            en: "I'll give you a hand"
+            f: "1sg.pres.ind"
+      - lemma: "dejar"
         pos: "verb"
         forms:
-          - form: "tome"
-            en: "here you are, take (formal)"
-            f: "3sg.imp"
-      - lemma: "decir"
-        pos: "verb"
+          - form: "dejá"
+            en: "leave it, let me"
+            f: "2sg.imp.vos"
+      - lemma: "querido"
+        pos: "noun"
+        en: "dear (as a form of address)"
         forms:
-          - form: "dígame"
-            en: "tell me (formal)"
-            f: "3sg.imp.clitic.irregular"
-      - lemma: "firmar"
-        pos: "verb"
-        forms:
-          - form: "firme"
-            en: "sign (formal)"
-            f: "3sg.imp"
+          - form: "querido"
+            f: "m.sg"
+          - form: "querida"
+            f: "f.sg"
       - lemma: "atender"
         pos: "verb"
         forms:
@@ -460,11 +463,11 @@ units:
 
   - ordinal: 7
     slug: "practica-me-pidio"
-    title: "Practice: requests, questions and usted"
+    title: "Practice: requests, questions and asking nicely"
     summary: "Me pidió que esperáramos"
     grammar:
       - "repaso.discurso-referido"
-      - "repaso.usted"
+      - "repaso.cortesia"
     register_max: "informal"
     sample:
       es: "Me pidió que esperáramos."
@@ -472,8 +475,8 @@ units:
     tips:
       - title: "Me pidió que, me preguntó si"
         body: "A request told later: **me pidió que le trajera algo**. A question: **me preguntó si venía**."
-      - title: "Usted"
-        body: "**Disculpe**, **pase**, **siéntese**, **quisiera** — the *él* form, for someone you don't tutear… or vosear."
+      - title: "Asking nicely"
+        body: "**Disculpá que te moleste**, **¿no tendrás…?**, **quisiera** — polite without leaving vos."
     # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "trajera"
@@ -485,9 +488,9 @@ units:
       - "averiguar"
       - "dudo"
       - "abre"
-      - "usted"
+      - "moleste"
       - "señora"
-      - "disculpe"
+      - "tendrás"
       - "quisiera"
       - "agradezco"
       - "viniera"
@@ -499,7 +502,7 @@ units:
     summary: "Me preguntaron si tenía turno"
     grammar:
       - "repaso.discurso-referido"
-      - "repaso.usted"
+      - "repaso.cortesia"
     register_max: "informal"
     sample:
       es: "Mi vieja me encargó que comprara pan."
@@ -508,8 +511,8 @@ units:
       - title: "Comprara, llegáramos, trajeran"
         body: "The errand told later: **me pidió que comprara pan**, **nos dijo que llegáramos
           temprano**, **les pidió que trajeran algo**. The question: **preguntale si tienen stock**."
-      - title: "Mire, espere, dígame"
-        body: "With **don José** and **doña Rosa**: **mire**, **espere**, **dígame**, **cómo no**."
+      - title: "Cómo no, faltaba más"
+        body: "With **don José** and **doña Rosa**: **te doy una mano**, **dejá**, **cómo no**, **faltaba más** — vos, said warmly."
     # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "comprara"
@@ -521,8 +524,8 @@ units:
       - "me fijo"
       - "averigüé"
       - "disponible"
-      - "espere"
-      - "dígame"
+      - "te doy una mano"
+      - "faltaba más"
       - "cómo no"
       - "jubilado"
       - "pidió"
@@ -620,6 +623,7 @@ units:
           - form: "archivo"
             f: "sg"
           - form: "archivos"
+            en: "files"
             f: "pl"
       - lemma: "asunto"
         pos: "noun"
@@ -631,6 +635,7 @@ units:
           - form: "duda"
             f: "sg"
           - form: "dudas"
+            en: "doubts; questions"
             f: "pl"
       - lemma: "revisar"
         pos: "verb"
@@ -1006,7 +1011,7 @@ units:
       - "me las arreglo"
       - "la tenés clara"
       - "la verdad"
-      - "usted"
+      - "disculpame"
       - "trajera"
 
   - ordinal: 16
@@ -1181,6 +1186,7 @@ units:
           - form: "pucho"
             f: "sg"
           - form: "puchos"
+            en: "cigarettes, smokes"
             f: "pl"
       - lemma: "de vez en cuando"
         pos: "phrase"
@@ -1332,6 +1338,7 @@ units:
           - form: "torre"
             f: "sg"
           - form: "torres"
+            en: "tower blocks, high-rises"
             f: "pl"
       - lemma: "moderno"
         pos: "adj"

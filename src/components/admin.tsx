@@ -1,16 +1,16 @@
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, usePathname } from 'expo-router';
 import { Platform, Pressable, ScrollView, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { playAudio } from '@/lib/audio';
-import { colors, press, radius } from '@/lib/theme';
+import { colors, font, press, radius } from '@/lib/theme';
 import type { ContentStatus } from '@/lib/types';
 
 // ---------------------------------------------------------------------------
 // The admin dashboard's building blocks. Dense and desktop-first — this is a
-// reviewer's work surface, not the learner's app — but in the app's own paper
-// and greens, so the two never feel like different products.
+// reviewer's work surface, not the learner's app — but in the app's own oat
+// and clay, so the two never feel like different products.
 // ---------------------------------------------------------------------------
 
 const webPress =
@@ -48,7 +48,7 @@ export function AdminScreen({
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <View style={styles.bar}>
-        <Pressable onPress={() => router.replace('/home')} hitSlop={8} accessibilityLabel="Back to the app">
+        <Pressable onPress={() => router.dismissTo('/home')} hitSlop={8} accessibilityLabel="Back to the app">
           <Text style={styles.brand}>che · admin</Text>
         </Pressable>
         <View style={styles.nav}>
@@ -98,12 +98,12 @@ export function Section({ title, right, children, style }: { title: string; righ
 }
 
 const STATUS_TONE: Record<ContentStatus, { bg: string; fg: string }> = {
-  draft: { bg: 'rgba(31, 37, 33, 0.06)', fg: colors.muted },
+  draft: { bg: 'rgba(58, 42, 32, 0.06)', fg: colors.muted },
   linted: { bg: 'rgba(94, 158, 201, 0.14)', fg: '#3E7196' },
   ai_reviewed: { bg: 'rgba(184, 140, 58, 0.16)', fg: '#8A6420' },
   approved: { bg: colors.primarySoft, fg: colors.primaryDark },
   published: { bg: colors.primary, fg: colors.onPrimary },
-  retired: { bg: 'rgba(31, 37, 33, 0.04)', fg: colors.faint },
+  retired: { bg: 'rgba(58, 42, 32, 0.04)', fg: colors.faint },
 };
 
 export function StatusPill({ status, count }: { status: ContentStatus; count?: number }) {
@@ -206,10 +206,10 @@ export function Code({ children }: { children: string }) {
 
 export const adminStyles = StyleSheet.create({
   cellGrow: { flex: 1, minWidth: 0 },
-  cellEs: { fontSize: 15, fontWeight: '700', color: colors.ink },
+  cellEs: { fontSize: 15, ...font.body[700], color: colors.ink },
   cellEn: { fontSize: 14, color: colors.muted },
   num: { fontSize: 14, fontVariant: ['tabular-nums'], color: colors.ink, minWidth: 48, textAlign: 'right' },
-  label: { fontSize: 12, fontWeight: '700', letterSpacing: 0.4, color: colors.muted, textTransform: 'uppercase' },
+  label: { fontSize: 12, ...font.body[700], letterSpacing: 0.4, color: colors.muted, textTransform: 'uppercase' },
   wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, alignItems: 'center' },
 });
 
@@ -226,23 +226,23 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
     flexWrap: 'wrap',
   },
-  brand: { fontSize: 15, fontWeight: '800', color: colors.primaryDark, letterSpacing: 0.2 },
+  brand: { fontSize: 15, ...font.body[800], color: colors.primaryDark, letterSpacing: 0.2 },
   nav: { flexDirection: 'row', gap: 4, flexWrap: 'wrap' },
   navItem: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 12, paddingVertical: 7, borderRadius: radius.pill },
   navItemActive: { backgroundColor: colors.primary },
-  navText: { fontSize: 14, fontWeight: '600', color: colors.muted },
+  navText: { fontSize: 14, ...font.body[600], color: colors.muted },
   navTextActive: { color: colors.onPrimary },
   page: { padding: 24, gap: 20, maxWidth: 1100, width: '100%', alignSelf: 'center' },
   head: { flexDirection: 'row', alignItems: 'center', gap: 12, flexWrap: 'wrap' },
   back: { width: 36, height: 36, borderRadius: radius.pill, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card },
-  title: { fontSize: 24, fontWeight: '700', color: colors.ink, letterSpacing: -0.3 },
+  title: { ...font.display[800], fontSize: 24, color: colors.ink, letterSpacing: -0.3 },
   subtitle: { fontSize: 15, color: colors.muted },
   actions: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
   section: { gap: 8 },
   sectionHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
-  sectionTitle: { fontSize: 13, fontWeight: '700', letterSpacing: 0.5, color: colors.muted, textTransform: 'uppercase' },
+  sectionTitle: { fontSize: 13, ...font.body[700], letterSpacing: 0.5, color: colors.muted, textTransform: 'uppercase' },
   pill: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: radius.pill, alignSelf: 'flex-start' },
-  pillText: { fontSize: 12, fontWeight: '700' },
+  pillText: { fontSize: 12, ...font.body[700] },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -269,8 +269,8 @@ const styles = StyleSheet.create({
   },
   smallPrimary: { backgroundColor: colors.primary, borderColor: colors.primary },
   smallDanger: { backgroundColor: colors.dangerSoft, borderColor: 'transparent' },
-  smallText: { fontSize: 14, fontWeight: '600' },
+  smallText: { fontSize: 14, ...font.body[600] },
   muted: { fontSize: 14, color: colors.muted, lineHeight: 20 },
-  code: { backgroundColor: 'rgba(31, 37, 33, 0.05)', borderRadius: radius.sm, paddingHorizontal: 10, paddingVertical: 8 },
+  code: { backgroundColor: 'rgba(58, 42, 32, 0.05)', borderRadius: radius.sm, paddingHorizontal: 10, paddingVertical: 8 },
   codeText: { fontFamily: Platform.select({ web: 'ui-monospace, Menlo, monospace', default: 'Courier' }), fontSize: 13, color: colors.ink },
 });

@@ -33,6 +33,7 @@ import {
   sentenceCap,
   tooLongToBuild,
 } from './sentences';
+import { cached } from './content-cache';
 import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { ExerciseMode, Form, FormState, Sentence, Tip } from './types';
@@ -141,12 +142,31 @@ export interface LearnerData {
   ladder?: Ladder;
 }
 
+/** The published lexicon with the answers stored for each word's meanings
+ *  (course:answers) next to the word. Downloaded once per app run and shared. */
+export function loadLexicon(): Promise<Form[]> {
+  return cached('lexicon', async () => {
+    // Paged (all): both are past PostgREST's 1,000 rows.
+    const [formRows, answerRows] = await Promise.all([
+      all<Form>(() => supabase.from('form_entries').select('*').eq('status', 'published').order('id')),
+      all<{ form_id: string; meaning: string; answer: string }>(() =>
+        supabase.from('form_answers').select('form_id, meaning, answer').eq('status', 'published').order('form_id').order('meaning').order('answer'),
+      ),
+    ]);
+    const accepts = new Map<string, { meaning: string; answer: string }[]>();
+    for (const a of answerRows) {
+      accepts.set(a.form_id, [...(accepts.get(a.form_id) ?? []), { meaning: a.meaning, answer: a.answer }]);
+    }
+    return formRows.map((f) => (accepts.has(f.id) ? { ...f, accepts: accepts.get(f.id) } : f));
+  });
+}
+
 /** The published lexicon, her SM-2 states, every published sentence, and the
  *  ladder her recent rounds and any placement have earned her. */
 export async function loadLearner(userId: string): Promise<LearnerData> {
-  const [{ data: formRows }, { data: stateRows }, { data: roundRows }, { data: profile }, { data: answerRows }] = await Promise.all([
-    // Paged (all): the lexicon and her states are past PostgREST's 1,000 rows.
-    all<Form>(() => supabase.from('form_entries').select('*').eq('status', 'published').order('id')).then((data) => ({ data })),
+  const [lexicon, { data: stateRows }, { data: roundRows }, { data: profile }] = await Promise.all([
+    loadLexicon(),
+    // Paged (all): her states are past PostgREST's 1,000 rows.
     all<FormState>(() => supabase.from('form_states').select('*').eq('user_id', userId).order('form_id')).then((data) => ({ data })),
     supabase
       .from('rounds')
@@ -156,16 +176,7 @@ export async function loadLearner(userId: string): Promise<LearnerData> {
       .order('finished_at', { ascending: false })
       .limit(OFFSET_WINDOW),
     supabase.from('profiles').select('placed_through').eq('user_id', userId).maybeSingle(),
-    all<{ form_id: string; meaning: string; answer: string }>(() =>
-      supabase.from('form_answers').select('form_id, meaning, answer').eq('status', 'published').order('form_id').order('meaning').order('answer'),
-    ).then((data) => ({ data })),
   ]);
-  // The answers stored for each word's meanings (course:answers), next to the word.
-  const accepts = new Map<string, { meaning: string; answer: string }[]>();
-  for (const a of (answerRows ?? []) as { form_id: string; meaning: string; answer: string }[]) {
-    accepts.set(a.form_id, [...(accepts.get(a.form_id) ?? []), { meaning: a.meaning, answer: a.answer }]);
-  }
-  const lexicon = ((formRows ?? []) as Form[]).map((f) => (accepts.has(f.id) ? { ...f, accepts: accepts.get(f.id) } : f));
   const states = (stateRows ?? []) as FormState[];
   const sentences = await loadSentences(userId, lexicon);
   // What each word means comes from its sentences and how she has met them, so
@@ -551,8 +562,9 @@ export function modeForRung(
 
 /** For home: how many words she has met at all. */
 export async function getPracticeCounts(userId: string) {
-  const { data: states } = await supabase.from('form_states').select('form_id').eq('user_id', userId);
-  return { known: (states ?? []).length };
+  // Counted by the database: fetching the rows to count them capped at 1,000.
+  const { count } = await supabase.from('form_states').select('form_id', { count: 'exact', head: true }).eq('user_id', userId);
+  return { known: count ?? 0 };
 }
 
 // ---------------------------------------------------------------------------
@@ -1005,5 +1017,75 @@ export async function buildMistakesSession(userId: string): Promise<SessionData>
     sentences: data.sentences,
     scheduledFormIds: ids.filter(isDue),
     ladder,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Word practice (the Words tab): the words she knows least well — the ones
+// slipping furthest past their interval, missed most, with the lowest ease —
+// asked the quick ways only: pick the meaning, hear it, match pairs. It counts:
+// every word in it is scheduled, and SM-2 treats a word asked early the way it
+// always does (grows from the days that really passed, never shrinks).
+// ---------------------------------------------------------------------------
+
+export const WORDS_SIZE = 20;
+
+/** How badly a word needs a look, higher first: how far past its interval
+ *  it is, plus its lapses, plus how far its ease has sunk. */
+export function weakness(state: FormState, now = Date.now()): number {
+  const interval = Math.max(state.interval_days, 1);
+  const last = state.due_at ? new Date(state.due_at).getTime() - state.interval_days * 86_400_000 : now;
+  const overdue = Math.max(0, now - last) / 86_400_000 / interval;
+  return overdue + state.lapses * 0.5 + (2.5 - state.ease_factor) * 2;
+}
+
+export async function buildWordsSession(userId: string, size = WORDS_SIZE): Promise<SessionData> {
+  const data = await loadLearner(userId);
+  const deck = deckUpTo(data, reachedUnit(data));
+  const inDeck = new Set(deck.map((f) => f.id));
+  const now = Date.now();
+  // A word that is its own English (mate) has no meaning to pick; only its
+  // sound can be asked, so it needs a recording to be here at all.
+  const askable = (f: Form) => !selfGlossed(f) || !!f.audio_path;
+  const weakest = data.states
+    .filter((s) => inDeck.has(s.form_id) && askable(data.formById.get(s.form_id)!))
+    .sort((a, b) => weakness(b, now) - weakness(a, now))
+    .slice(0, size);
+  const picked = weakest.map((state) => ({ form: data.formById.get(state.form_id)!, state }));
+
+  // Up to two matching screens take four words each; the rest get one screen.
+  const blocks: SessionItem[] = [];
+  const inBlock = new Set<string>();
+  for (let b = 0; b < 2 && deck.length >= MATCH_SIZE; b++) {
+    const group = matchable(picked.filter((p) => !inBlock.has(p.form.id)).map((p) => p.form));
+    if (group.length < MATCH_SIZE) break;
+    for (const f of group) inBlock.add(f.id);
+    blocks.push({
+      form: group[0],
+      state: data.stateByForm.get(group[0].id) ?? null,
+      mode: 'matching',
+      direction: 'es_to_en',
+      group,
+      groupStates: group.map((f) => data.stateByForm.get(f.id)!),
+    });
+  }
+
+  const singles: SessionItem[] = picked
+    .filter((p) => !inBlock.has(p.form.id))
+    .map(({ form, state }) => {
+      const listen = !!form.audio_path && deck.length >= MATCH_SIZE && (selfGlossed(form) || Math.random() < 0.4);
+      const mode: ExerciseMode = listen ? 'listen' : 'multiple_choice';
+      return { form, state, mode, direction: pickDirection(form, mode, true) };
+    });
+
+  const items = shuffle(singles);
+  blocks.forEach((block, i) => items.splice(Math.round(((i + 1) * items.length) / (blocks.length + 1)) + i, 0, block));
+  return {
+    items,
+    allForms: deck,
+    lexicon: data.formById,
+    sentences: [],
+    scheduledFormIds: picked.map((p) => p.form.id),
+    ladder: data.ladder,
   };
 }

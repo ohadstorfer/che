@@ -76,7 +76,12 @@ export function tokenize<F>(es: string, { index, maxWords }: FormIndex<F>): Toke
         : span.map((p) => p.core).join(' ');
       const hit = index.get(fold(core))?.filter((f) => caseFits((f as { form?: string }).form ?? '', core));
       if (hit?.length) {
-        matched = { n, core, forms: hit };
+        // A bound form never stands on its own, so where a free homograph
+        // matches too it is that one: "llamo a mis abuelos" is llamar, not the
+        // `llamo` of "me llamo". A token of bound forms only is kept, for the
+        // check to name the chunk it is missing.
+        const free = hit.filter((f) => !(f as { bound?: boolean }).bound);
+        matched = { n, core, forms: free.length ? free : hit };
         break;
       }
     }

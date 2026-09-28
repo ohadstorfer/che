@@ -17,5 +17,10 @@ export async function resolve(specifier, context, next) {
       if (existsSync(base + ext)) return next(pathToFileURL(base + ext).href, context);
     }
   }
+  // Metro bundles JSON as a module; node wants it asked for as JSON.
+  if (spec.endsWith('.json')) {
+    const resolved = await next(spec, context);
+    return { ...resolved, importAttributes: { ...resolved.importAttributes, type: 'json' } };
+  }
   return next(spec, context);
 }

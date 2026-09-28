@@ -1,4 +1,5 @@
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { Animated as RNAnimated, Easing, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -11,13 +12,15 @@ import { LessonComplete } from '@/components/lesson-complete';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
-import { goBack } from '@/lib/nav';
+import { lessonWithUnit } from '@/lib/lesson';
+import { backToCourse, goBack } from '@/lib/nav';
 import { type AnswerExtra, type FinishResult, type QueueItem, useRound } from '@/lib/round';
 import { type LearnerData, deckUpTo, drillable, loadLearner, sentenceItem } from '@/lib/session';
 import { supabase } from '@/lib/supabase';
-import { colors, radius } from '@/lib/theme';
+import { clay, colors, font, gradients, pastel, radius } from '@/lib/theme';
 import { useStatusBarColor } from '@/lib/status-bar-color';
-import type { Form, Lesson, Sentence, Unit } from '@/lib/types';
+import type { Form, Sentence } from '@/lib/types';
+import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
 // A story (learning-engine-spec §8): a short dialogue made almost entirely of
@@ -87,12 +90,11 @@ export default function Story() {
   useEffect(() => {
     if (!userId || !lessonId) return;
     (async () => {
-      const [{ data: lesson }, { data: rows }, data] = await Promise.all([
-        supabase.from('lessons').select('*').eq('id', lessonId).single(),
+      const [{ lesson, unit }, { data: rows }, data] = await Promise.all([
+        lessonWithUnit(lessonId),
         supabase.from('story_lines').select('*').eq('lesson_id', lessonId).order('ordinal', { ascending: true }),
         loadLearner(userId),
       ]);
-      const { data: unit } = await supabase.from('units').select('*').eq('id', (lesson as Lesson).unit_id).single();
       const built = buildLines(data, (rows ?? []) as RawLine[]);
       formById.current = data.formById;
       const nowIso = new Date().toISOString();
@@ -112,8 +114,8 @@ export default function Story() {
         ladder: data.ladder,
         retries: false,
       });
-      setTitle((lesson as Lesson).title_en);
-      setDeck(deckUpTo(data, (unit as Unit).course_order));
+      setTitle(lesson.title_en);
+      setDeck(deckUpTo(data, unit.course_order));
       setSentences(data.sentences);
       setLines(built);
     })();
@@ -130,7 +132,7 @@ export default function Story() {
           <StreakCelebration
             previous={finished.previous_streak}
             streak={finished.current_streak}
-            onDone={() => router.replace('/home')}
+            onDone={backToCourse}
           />
         </SafeAreaView>
       );
@@ -139,7 +141,7 @@ export default function Story() {
       <SafeAreaView style={styles.safe}>
         <LessonComplete
           streak={celebrate || finished.current_streak <= 0 ? null : finished.current_streak}
-          onNext={() => (celebrate ? setCelebrating(true) : router.replace('/home'))}
+          onNext={() => (celebrate ? setCelebrating(true) : backToCourse())}
         />
       </SafeAreaView>
     );
@@ -238,11 +240,14 @@ function Header({ title, progress }: { title: string; progress: number }) {
         <Ionicons name="close" size={26} color={colors.muted} />
       </Pressable>
       <View style={styles.progressTrack}>
-        <View style={[styles.progressFill, { width: `${Math.max(progress * 100, 3)}%` }]} />
+        <LinearGradient
+          colors={gradients.deep}
+          style={[styles.progressFill, { width: `${Math.max(progress * 100, 3)}%` }]}
+        />
       </View>
-      <Text style={styles.headerTitle} numberOfLines={1}>
+      <FitText style={styles.headerTitle} lines={1}>
         {title}
-      </Text>
+      </FitText>
     </View>
   );
 }
@@ -331,18 +336,25 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
-  progressTrack: { flex: 1, height: 10, borderRadius: 99, backgroundColor: colors.border, overflow: 'hidden' },
-  progressFill: { height: '100%', borderRadius: 99, backgroundColor: colors.primary },
-  headerTitle: { fontSize: 13, fontWeight: '600', color: colors.muted, maxWidth: 120 },
+  progressTrack: {
+    flex: 1,
+    height: 10,
+    borderRadius: 99,
+    backgroundColor: colors.trough,
+    boxShadow: clay.trough,
+    overflow: 'hidden',
+  },
+  progressFill: { height: '100%', borderRadius: 99 },
+  headerTitle: { ...font.body[800], fontSize: 13, color: colors.muted, maxWidth: 120 },
   chat: { padding: 20, gap: 14, maxWidth: 560, width: '100%', alignSelf: 'center', paddingBottom: 32 },
   lineWrap: { alignItems: 'flex-start', gap: 4, maxWidth: '88%' },
   lineRight: { alignSelf: 'flex-end', alignItems: 'flex-end' },
   lineNarrator: { alignSelf: 'center', alignItems: 'center' },
-  speaker: { fontSize: 12, fontWeight: '700', letterSpacing: 0.4, color: colors.muted, marginLeft: 4 },
+  speaker: { ...font.body[800], fontSize: 12, letterSpacing: 0.4, color: colors.muted, marginLeft: 4 },
   speakerRight: { marginLeft: 0, marginRight: 4 },
   bubble: { paddingVertical: 12, paddingHorizontal: 14, borderRadius: radius.lg },
-  bubbleRight: { backgroundColor: colors.primarySoft, borderColor: 'transparent' },
+  bubbleRight: { backgroundColor: pastel.lav, borderColor: 'transparent' },
   bubbleRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  hint: { fontSize: 14, color: colors.faint, textAlign: 'center', marginTop: 8 },
+  hint: { ...font.body[600], fontSize: 14, color: colors.muted, textAlign: 'center', marginTop: 8 },
   footer: { padding: 20, paddingTop: 12, maxWidth: 560, width: '100%', alignSelf: 'center' },
 });

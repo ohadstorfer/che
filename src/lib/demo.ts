@@ -159,7 +159,7 @@ export const demoSession = {
     id: STUDENT,
     aud: 'authenticated',
     role: 'authenticated',
-    email: 'demo@che.app',
+    email: 'demo@posta.app',
     app_metadata: {},
     user_metadata: {},
     created_at: hoursFromNow(-5000),

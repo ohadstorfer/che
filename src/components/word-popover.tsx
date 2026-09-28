@@ -23,7 +23,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { popoverMeanings } from '@/lib/meanings';
-import { colors, radius, shadow } from '@/lib/theme';
+import { clay, colors, font, radius } from '@/lib/theme';
 import type { Form } from '@/lib/types';
 
 /** Where a word sits on screen, in window coordinates. */
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
     paddingBottom: 4,
-    ...shadow.raised,
+    boxShadow: clay.float,
   },
   head: {
     flexDirection: 'row',
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 8,
   },
-  es: { fontSize: 17, fontWeight: '700', color: colors.ink },
+  es: { ...font.display[800], fontSize: 18, color: colors.ink },
   row: {
     flexDirection: 'row',
     alignItems: 'baseline',
@@ -228,10 +228,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: colors.border,
   },
-  en: { flexShrink: 1, fontSize: 16, fontWeight: '600', color: colors.primaryDark },
+  en: { ...font.body[700], flexShrink: 1, fontSize: 16, color: colors.primaryDark },
   // Quiet enough to read as a label on the meaning rather than a second meaning.
-  here: { fontSize: 12, fontWeight: '600', color: colors.muted },
-  note: { fontSize: 13, color: colors.muted, lineHeight: 18, paddingHorizontal: 14, paddingVertical: 8 },
+  here: { ...font.body[700], fontSize: 12, color: colors.muted },
+  note: { ...font.body[600], fontSize: 13, color: colors.muted, lineHeight: 18, paddingHorizontal: 14, paddingVertical: 8 },
   // A rotated square reads as a tail without needing an SVG; the bubble's own
   // border is faked by the two sides of it that stay visible.
   tail: {

@@ -67,6 +67,10 @@ export function validate(doc) {
           if (!str(p.prompt)) err(pat, 'missing prompt');
           if (!Array.isArray(p.items) || p.items.length < 3 || p.items.length > 6 || !p.items.every(str))
             err(pat, 'needs 3–6 items');
+          else
+            for (const it of p.items)
+              if (/\b(1[5-9]\d\d|20\d\d)\b/.test(it) || /\d{1,2}(:\d\d)?\s?[ap]\.?\s?m\.?\b/i.test(it))
+                err(pat, `order item gives away the answer (year/time): ${it}`);
           break;
         case 'match':
           if (!str(p.prompt)) err(pat, 'missing prompt');
@@ -90,8 +94,74 @@ export function validate(doc) {
       if (!str(v.es) || !str(v.en)) err(at, `vocabulary entry needs es and en: ${JSON.stringify(v)}`);
       if (v.example && !(str(v.example.es) && str(v.example.en))) err(at, `example needs es and en: ${v.es}`);
     }
+    // Glossary: Spanish that shows up bold in the reading but isn't practiced. Tappable, never tested.
+    for (const g of c.glossary ?? []) {
+      if (!str(g.es) || !str(g.en)) err(at, `glossary entry needs es and en: ${JSON.stringify(g)}`);
+    }
   }
   return errors;
+}
+
+// Warnings: things that make the class worse without breaking it. The word review at
+// the end builds "pick the meaning" from the class's own glosses, so two glosses that
+// say the same thing give a question with two right answers.
+const fold = (s) =>
+  s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[¡!¿?….,;:()"'“”—–]/g, ' ');
+const STOP = new Set(
+  'a an the of to in on at for and or with from as by is it its be you your someone something lit one ones very really just not no made slang said thing person short'.split(' '),
+);
+const contentWords = (s) => new Set(fold(s).split(/[\s/]+/).filter((w) => w.length > 2 && !STOP.has(w)));
+const ARTICLE = /^(el|la|los|las|un|una|unos|unas)\s+/;
+
+/** Where a vocabulary word may be taught: anything the learner reads before answering, never an explain. */
+function taughtText(pages) {
+  const parts = [];
+  for (const p of pages) {
+    parts.push(p.title, p.body, p.fun_fact, p.word?.es, p.scenario, p.prompt, p.statement, p.text);
+    for (const o of p.options ?? []) parts.push(o);
+    for (const it of p.items ?? []) parts.push(it);
+    for (const pr of p.pairs ?? []) parts.push(...pr);
+  }
+  return fold(parts.filter(Boolean).join(' ')).replace(/\*/g, '').replace(/\s+/g, ' ');
+}
+
+/** True if a form of the word (or a close inflection of it) shows up in the text. */
+function appears(es, text) {
+  return es.split('/').some((form) => {
+    const f = fold(form).replace(/\*/g, '').trim().replace(ARTICLE, '').replace(/\s+/g, ' ');
+    if (!f) return false;
+    if (text.includes(f)) return true;
+    // Allow a changed ending (tomar → tomás, extrañar → extraña): match on the stem.
+    const stem = f.length > 5 ? f.slice(0, -2) : null;
+    return stem ? text.includes(stem) : false;
+  });
+}
+
+export function lint(doc) {
+  const warnings = [];
+  for (const c of doc?.classes ?? []) {
+    const at = `class ${c.slug}`;
+    const text = taughtText(c.pages ?? []);
+    const vocab = c.vocabulary ?? [];
+    for (const v of vocab) {
+      if (!str(v.es) || !str(v.en)) continue;
+      if (!appears(v.es, text)) warnings.push(`${at}: vocabulary "${v.es}" never appears in the pages (explains don't count)`);
+      const head = fold(v.es).replace(ARTICLE, '').replace(/\s+/g, ' ').trim();
+      if (head.length > 3 && ` ${fold(v.en).replace(/\s+/g, ' ')} `.includes(` ${head} `))
+        warnings.push(`${at}: gloss of "${v.es}" contains the word itself ("${v.en}")`);
+    }
+    for (let i = 0; i < vocab.length; i++)
+      for (let j = i + 1; j < vocab.length; j++) {
+        const a = contentWords(vocab[i].en ?? '');
+        const b = contentWords(vocab[j].en ?? '');
+        const shared = [...b].filter((w) => a.has(w));
+        // Two glosses collide when every content word of the shorter one is also in the other.
+        const small = Math.min(a.size, b.size);
+        if (small > 0 && shared.length === small)
+          warnings.push(`${at}: glosses of "${vocab[i].es}" and "${vocab[j].es}" share "${shared.join(', ')}"`);
+      }
+  }
+  return warnings;
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
@@ -108,6 +178,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       console.log(`✗ ${f}`);
       for (const e of errors) console.log(`    ${e}`);
     } else console.log(`✓ ${f} — ${n} classes`);
+    for (const w of lint(doc)) console.log(`    ⚠ ${w}`);
   }
   process.exit(failed ? 1 : 0);
 }

@@ -329,6 +329,7 @@ units:
           - form: "bici"
             f: "f.sg"
           - form: "bicis"
+            en: "bikes"
             f: "f.pl"
       - lemma: "ver"
         pos: "verb"

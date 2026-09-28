@@ -7,7 +7,7 @@ export const TUTEO = new Set([
   "hablas", "estudias", "trabajas", "tomas", "escribes", "lees", "aprendes", "juegas", "pagas",
   "llegas", "prefieres", "duermes", "piensas", "entiendes", "caminas", "desayunas", "almuerzas",
   "acuestas", "levantas", "bañas", "traes", "haz", "ten", "pon", "siéntate", "fíjate", "dime",
-  "espérame", "escúchame", "mírame", "sois", "tenéis", "queréis", "podéis", "vais", "habláis",
+  "espérame", "escúchame", "mírame", "dilo", "dila", "dile", "diles", "dímelo", "díselo", "hazlo", "hazme", "ponlo", "ponte", "tenlo", "pruébalo", "escúchalo", "míralo", "repítelo", "dámelo", "pásamelo", "tráemelo", "cuéntame", "usted", "dígame", "dígale", "siéntese", "disculpe", "discúlpeme", "perdone", "perdóneme", "oiga", "fíjese", "quédese", "tráigame", "cuénteme", "hágame", "póngase", "pásemelo", "acérquese", "sois", "tenéis", "queréis", "podéis", "vais", "habláis",
   "coméis", "estáis", "hacéis",
 ]);
 
@@ -23,5 +23,20 @@ export function offendingSpanish(text: string): string[] {
   const spans = [...text.matchAll(/\*([^*]+)\*/g)].map((m) => m[1]);
   return spans
     .flatMap((span) => span.toLocaleLowerCase("es").split(/[^\p{L}]+/u))
+    .filter((w) => w && (TUTEO.has(w) || REGIONAL.has(w)));
+}
+
+/**
+ * Every word of a text that is tuteo or not rioplatense — not just the quoted
+ * ones. For whole sentences Pancho says out loud (hablar-reply's guard).
+ *
+ * Words are compared whole and exactly (lower-cased), so the character's name
+ * written with its accent, "Tomás", never matches the verb form "tomas".
+ */
+export function offendingWords(text: string): string[] {
+  return text
+    .normalize("NFC")
+    .toLocaleLowerCase("es")
+    .split(/[^\p{L}]+/u)
     .filter((w) => w && (TUTEO.has(w) || REGIONAL.has(w)));
 }

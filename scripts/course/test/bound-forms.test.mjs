@@ -8,6 +8,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { boundCandidates, checkSentence } from '../../../src/lib/course-rules/check.ts';
+import { buildIndex, tokenize } from '../../../src/lib/course-rules/tokenize.ts';
 import { drillable } from '../../../src/lib/course-rules/vocabulary.ts';
 import { exercisesFor } from '../../../src/lib/session.ts';
 import { loadOutline } from '../lib/outline.mjs';
@@ -45,6 +46,13 @@ test('a sentence may not say the bare form, and is told what to say', () => {
   assert.equal(problems.length, 1);
   assert.match(problems[0], /never said on its own/);
   assert.match(problems[0], /me llamo/);
+});
+
+test('a bare word that is also a free verb is that verb', () => {
+  // llamar's "llamo" stands alone; llamarse's is bound. A token tagged with
+  // both showed "to be called" for "llamo a mis abuelos" when tapped.
+  const llamo = tokenize('Los domingos llamo a mis abuelos.', buildIndex(outline.forms)).find((t) => t.core === 'llamo');
+  assert.deepEqual(new Set(llamo.forms.map((f) => f.lemma)), new Set(['llamar']));
 });
 
 /** The lexicon as it was before this rule: no chunks, nothing marked bound. */

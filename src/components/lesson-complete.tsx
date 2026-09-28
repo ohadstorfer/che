@@ -11,7 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { Button } from '@/components/ui';
-import { colors } from '@/lib/theme';
+import { colors, font } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
 // LessonComplete — the beat between the last exercise and whatever comes next.
@@ -84,8 +84,8 @@ export function LessonComplete({
 const styles = StyleSheet.create({
   wrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 24 },
   clip: { width: 260, height: 260 },
-  title: { fontSize: 24, fontWeight: '700', color: colors.ink, textAlign: 'center' },
-  streak: { fontSize: 18, color: colors.primary, fontWeight: '700' },
+  title: { ...font.display[800], fontSize: 30, lineHeight: 34, letterSpacing: -0.5, color: colors.ink, textAlign: 'center' },
+  streak: { ...font.body[800], fontSize: 18, color: colors.primary },
   // `stretch` would override the wrap's centring, and maxWidth then leaves the
   // button pinned to the left edge. Centre it explicitly.
   actions: { alignSelf: 'center', gap: 8, maxWidth: 320, width: '100%', marginTop: 8 },

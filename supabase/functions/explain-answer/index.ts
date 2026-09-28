@@ -73,7 +73,9 @@ Deno.serve(async (req) => {
   }
   const answer = String(body.answer ?? "").trim().slice(0, 200);
   const mode = String(body.mode ?? "");
-  if (!answer || !mode || (!body.sentence_id && !body.form_id)) {
+  // An exercise mode name, nothing else: it goes into the cache key and the prompt.
+  if (!/^[a-z_]{1,40}$/.test(mode)) return json({ error: "invalid mode" }, { status: 400 });
+  if (!answer || (!body.sentence_id && !body.form_id)) {
     return json({ error: "sentence_id or form_id, mode and answer are required" }, { status: 400 });
   }
 
@@ -86,10 +88,14 @@ Deno.serve(async (req) => {
     return json({ explanation: cached.body_md, cached: true });
   }
 
-  // The rate limit counts generated explanations only.
-  const today = new Date().toISOString().slice(0, 10);
-  const { data: usage } = await db.from("explain_usage").select("count").eq("user_id", userId).eq("day", today).maybeSingle();
-  if ((usage?.count ?? 0) >= DAILY_LIMIT) return json({ explanation: null, limited: true });
+  // The rate limit counts generated explanations only. The slot is taken
+  // atomically before the model is called, so parallel requests can't slip past.
+  const { data: allowed, error: slotErr } = await db.rpc("take_explain_slot", { p_user: userId, p_limit: DAILY_LIMIT });
+  if (slotErr) {
+    console.error("take_explain_slot failed", slotErr.message);
+    return json({ error: "try again later" }, { status: 500 });
+  }
+  if (!allowed) return json({ explanation: null, limited: true });
 
   // What the exercise was.
   let expected: string[] = [];
@@ -133,7 +139,7 @@ Deno.serve(async (req) => {
   const fallback = `The answer is *${expected[0]}*. You wrote *${answer}*.`;
   let text = "";
   try {
-    const client = new Anthropic({ apiKey });
+    const client = new Anthropic({ apiKey, timeout: 30_000, maxRetries: 1 });
     const response = await client.messages.create({
       model: MODEL,
       max_tokens: 4000,
@@ -163,9 +169,6 @@ Deno.serve(async (req) => {
     return json({ explanation: fallback, degraded: "checked" });
   }
 
-  await Promise.all([
-    db.from("explanations").upsert({ key, body_md: text, model: MODEL, served: 1, flagged: false }),
-    db.from("explain_usage").upsert({ user_id: userId, day: today, count: (usage?.count ?? 0) + 1 }),
-  ]);
+  await db.from("explanations").upsert({ key, body_md: text, model: MODEL, served: 1, flagged: false });
   return json({ explanation: text });
 });

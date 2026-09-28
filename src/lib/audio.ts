@@ -1,52 +1,174 @@
 import { Platform } from 'react-native';
 import { supabase } from './supabase';
 
-// Recording is web-only for now (the PWA is the primary platform). Safari and
-// Chrome both support MediaRecorder; Safari records audio/mp4 (AAC).
+// Che ships as an iOS and Android app; the web build is a fallback. On the
+// phones recording goes through expo-audio (AAC in an .m4a file). On the web,
+// Safari and Chrome both support MediaRecorder; Safari records audio/mp4 (AAC).
 export const canRecord =
-  Platform.OS === 'web' &&
-  typeof navigator !== 'undefined' &&
-  !!navigator.mediaDevices?.getUserMedia &&
-  typeof MediaRecorder !== 'undefined';
+  Platform.OS !== 'web' ||
+  (typeof navigator !== 'undefined' && !!navigator.mediaDevices?.getUserMedia && typeof MediaRecorder !== 'undefined');
+
+/**
+ * A finished recording. The web hands back a Blob; the phones a file on disk,
+ * which is also how it goes into an upload there.
+ */
+export interface RecordedClip {
+  blob?: Blob;
+  uri?: string;
+  mime: string;
+  size: number;
+  /** Known only on the phones, from the mic level while recording: nothing near speech was heard. */
+  quiet?: boolean;
+}
 
 export interface ActiveRecording {
-  stop: () => Promise<{ blob: Blob; mime: string }>;
+  stop: () => Promise<RecordedClip>;
   cancel: () => void;
+  /** How loud the mic is right now, 0–1. For the on-screen wave; 0 when it can't tell. */
+  level: () => number;
+}
+
+/** A refused microphone, named the way the browser names it so callers check one thing. */
+function micRefused(): Error {
+  const e = new Error('Microphone permission denied');
+  e.name = 'NotAllowedError';
+  return e;
+}
+
+// Level of the mic as the phones report it, in dBFS. Speech at arm's length
+// sits around -30 to -10; a quiet room around -50 and below.
+const FLOOR_DB = -50;
+const QUIET_DB = -48;
+const toLevel = (db: number) => Math.max(0, Math.min(1, (db - FLOOR_DB) / 42));
+
+async function startNativeRecording(): Promise<ActiveRecording> {
+  const { requestRecordingPermissionsAsync, RecordingPresets } = await import('expo-audio');
+  const { default: AudioModule } = await import('expo-audio/build/AudioModule');
+  const { createRecordingOptions } = await import('expo-audio/build/utils/options');
+  const { File } = await import('expo-file-system');
+
+  const perm = await requestRecordingPermissionsAsync();
+  if (!perm.granted) throw micRefused();
+  await setAudioSession('play-and-record');
+
+  const recorder = new AudioModule.AudioRecorder(
+    createRecordingOptions({ ...RecordingPresets.HIGH_QUALITY, numberOfChannels: 1, bitRate: 64000, isMeteringEnabled: true }),
+  );
+  try {
+    await recorder.prepareToRecordAsync();
+    recorder.record();
+  } catch (err) {
+    recorder.release();
+    await setAudioSession('playback');
+    throw err;
+  }
+
+  // The loudest moment so far, sampled on our own clock so the quiet check
+  // doesn't depend on anyone drawing the wave.
+  let peak = -160;
+  const read = () => {
+    const db = recorder.getStatus().metering;
+    if (typeof db === 'number') peak = Math.max(peak, db);
+    return db;
+  };
+  const sampler = setInterval(read, 100);
+
+  let closed = false;
+  const close = async () => {
+    if (closed) return;
+    closed = true;
+    clearInterval(sampler);
+    await recorder.stop().catch(() => {});
+    const uri = recorder.uri;
+    recorder.release();
+    await setAudioSession('playback');
+    return uri;
+  };
+
+  return {
+    stop: async () => {
+      const uri = await close();
+      if (!uri) return { mime: 'audio/mp4', size: 0 };
+      let size = 0;
+      try {
+        size = new File(uri).size ?? 0;
+      } catch {}
+      return { uri, mime: 'audio/mp4', size, quiet: peak > -160 && peak < QUIET_DB };
+    },
+    cancel: () => {
+      void close().then((uri) => {
+        try {
+          if (uri) new File(uri).delete();
+        } catch {}
+      });
+    },
+    level: () => {
+      if (closed) return 0;
+      const db = read();
+      return typeof db === 'number' ? toLevel(db) : 0;
+    },
+  };
 }
 
 export async function startRecording(): Promise<ActiveRecording> {
+  if (Platform.OS !== 'web') return startNativeRecording();
   // The app pins its audio session to `playback` so her side keeps sounding
   // with the silent switch on. That is a promise to the browser that the page
   // only makes sound, and Safari holds it to it: the microphone is refused
   // until the page says it means to record too. Back to `playback` the moment
   // the recording ends.
-  setAudioSession('play-and-record');
+  void setAudioSession('play-and-record');
   let stream: MediaStream;
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   } catch (err) {
-    setAudioSession('playback');
+    void setAudioSession('playback');
     throw err;
   }
-  const mime = ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm']
+  // WebM first: Chrome also offers audio/mp4 now, but its MP4 recorder can hand
+  // back an empty blob. Safari has no WebM recorder and falls through to MP4.
+  const mime = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4']
     .find((m) => MediaRecorder.isTypeSupported(m)) ?? '';
+  const track = stream.getAudioTracks()[0];
+  const describe = () =>
+    track ? `"${track.label}" ${track.readyState}${track.muted ? ' muted' : ''}${track.enabled ? '' : ' disabled'}` : 'no track';
+  console.info(`[audio] mic start: ${describe()}, ${mime || 'default type'}`);
   const recorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+  recorder.onerror = (e) => console.warn('[audio] recorder error', e);
   const chunks: BlobPart[] = [];
   recorder.ondataavailable = (e) => e.data.size > 0 && chunks.push(e.data);
-  recorder.start();
+  // Timesliced, so the audio arrives while she speaks rather than all at stop.
+  recorder.start(250);
+
+  // Loudness for the wave. Best effort: without an AudioContext there's no
+  // wave, and the recording itself doesn't care.
+  let meter: { ctx: AudioContext; analyser: AnalyserNode; buf: Float32Array<ArrayBuffer> } | null = null;
+  try {
+    const Ctx = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const ctx = new Ctx();
+    void ctx.resume().catch(() => {});
+    const analyser = ctx.createAnalyser();
+    analyser.fftSize = 512;
+    ctx.createMediaStreamSource(stream).connect(analyser);
+    meter = { ctx, analyser, buf: new Float32Array(analyser.fftSize) };
+  } catch {}
 
   const cleanup = () => {
+    void meter?.ctx.close().catch(() => {});
+    meter = null;
     stream.getTracks().forEach((t) => t.stop());
-    setAudioSession('playback');
+    void setAudioSession('playback');
   };
 
   return {
     stop: () =>
       new Promise((resolve) => {
         recorder.onstop = () => {
+          console.info(`[audio] mic stop: ${describe()}, ${chunks.length} chunks`);
           cleanup();
           const type = recorder.mimeType || 'audio/webm';
-          resolve({ blob: new Blob(chunks, { type }), mime: type });
+          const blob = new Blob(chunks, { type });
+          resolve({ blob, mime: type, size: blob.size });
         };
         recorder.stop();
       }),
@@ -56,6 +178,14 @@ export async function startRecording(): Promise<ActiveRecording> {
         recorder.stop();
       } catch {}
       cleanup();
+    },
+    level: () => {
+      if (!meter) return 0;
+      meter.analyser.getFloatTimeDomainData(meter.buf);
+      let sum = 0;
+      for (const v of meter.buf) sum += v * v;
+      // RMS of speech sits around 0.02–0.2; the square root spreads it over the bar.
+      return Math.min(1, Math.sqrt(Math.sqrt(sum / meter.buf.length)) * 2.2);
     },
   };
 }
@@ -147,10 +277,21 @@ let unlocked = false;
 // the switch on. `play-and-record` is the same promise plus the microphone,
 // and is what recording needs. Safari 16.4 and up; everywhere else the
 // property is absent and there is nothing to declare.
-function setAudioSession(type: 'playback' | 'play-and-record'): void {
+//
+// The phones get the same two modes through expo-audio. Recording mode on an
+// iPhone sends playback to the earpiece, so it's only on while the mic is.
+export async function setAudioSession(type: 'playback' | 'play-and-record'): Promise<void> {
+  if (!isWeb) {
+    const { setAudioModeAsync } = await import('expo-audio');
+    await setAudioModeAsync({ playsInSilentMode: true, allowsRecording: type === 'play-and-record' }).catch(() => {});
+    return;
+  }
   const session = (navigator as { audioSession?: { type: string } }).audioSession;
   if (session) session.type = type;
 }
+
+// Sound even with the silent switch on, from the first clip.
+if (!isWeb) void setAudioSession('playback');
 
 /**
  * Bless the element on the first touch of the session. Runs at most once, and
@@ -159,7 +300,7 @@ function setAudioSession(type: 'playback' | 'play-and-record'): void {
 function unlock(): void {
   if (unlocked) return;
   unlocked = true;
-  setAudioSession('playback');
+  void setAudioSession('playback');
   const el = player();
   el.src = SILENCE;
   el.load();
@@ -183,7 +324,7 @@ if (hasDom) {
   // session dead. Touching the element again wakes it.
   document.addEventListener('visibilitychange', () => {
     if (document.hidden || !unlocked) return;
-    setAudioSession('playback');
+    void setAudioSession('playback');
     if (element && element.paused) element.load();
   });
 }
@@ -270,6 +411,29 @@ function freeSlot(): void {
   queued.shift()?.();
 }
 
+// On the phones clips are saved to the cache directory the first time they
+// are fetched, so a word she hears twenty times is downloaded once, a lesson's
+// clips are on the device before she presses them, and they play offline.
+// Clip paths never change content, so the path is the key. The OS may clear
+// the directory under storage pressure; a missing file is simply fetched again.
+async function nativeClip(path: string): Promise<string> {
+  const { Directory, File, Paths } = await import('expo-file-system');
+  const dir = new Directory(Paths.cache, 'clips');
+  const file = new File(dir, path.replace(/[^\w.-]/g, '_'));
+  if (file.exists) return file.uri;
+  try {
+    if (!dir.exists) dir.create({ intermediates: true, idempotent: true });
+    // Into a temporary name first, so a cut-off download never passes for a clip.
+    const part = new File(dir, `${file.name}.part`);
+    const got = await File.downloadFileAsync(getAudioUrl(path), part, { idempotent: true });
+    got.move(file);
+    return file.uri;
+  } catch {
+    // Could not save it: let the player stream it, as it always could.
+    return getAudioUrl(path);
+  }
+}
+
 /** The clip, ready to hand to the element. Fetches it if this is the first ask. */
 function clipUrl(path: string, urgent = false): Promise<string | null> {
   const have = clips.get(path);
@@ -282,8 +446,13 @@ function clipUrl(path: string, urgent = false): Promise<string | null> {
   // the store never took one.
   let held = false;
   const job = (async () => {
-    // Off the web the player streams the URL itself.
-    if (!isWeb) return getAudioUrl(path);
+    if (!isWeb) {
+      if (!urgent) {
+        await takeSlot();
+        held = true;
+      }
+      return nativeClip(path);
+    }
 
     const cache = canStore ? await caches.open(STORE) : null;
     const stored = await cache?.match(keyFor(path));
@@ -419,11 +588,15 @@ function start(url: string, onEnd?: OnEnd): void {
       },
     };
     const sub = p.addListener('playbackStatusUpdate', (status) => {
-      if (!status.didJustFinish || current !== entry) return;
+      if (current !== entry) return;
+      // A clip that fails to load never finishes, so without this its button
+      // would stay on "playing" and the player would never be let go.
+      const failed = !!(status as { error?: string | null }).error || status.playbackState === 'failed';
+      if (!status.didJustFinish && !failed) return;
       current = null;
       playingPath = null;
       entry.stop();
-      onEnd?.();
+      onEnd?.(failed ? 'failed' : undefined);
     });
     current = entry;
     p.play();

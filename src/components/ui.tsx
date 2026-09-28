@@ -15,7 +15,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { colors, gradients, press, radius, shadow, type } from '@/lib/theme';
+import { clay, colors, font, gradients, press, radius, type } from '@/lib/theme';
 
 // On web, react-native-web maps these to real CSS transitions, so the press
 // scale eases instead of snapping. Native gets the snap, which is what a
@@ -32,10 +32,10 @@ const webTransition = (property: string, duration: number) =>
     : undefined;
 
 // ---------------------------------------------------------------------------
-// ScreenBackground — the icon's wash, pooled at the bottom of the page.
+// ScreenBackground — warm oat paper, darkening a step toward the bottom.
 // Drop it as the first child of a screen's root view.
 //
-// The fade is deliberately upside-down: pale at the top, lilac and blush
+// The fade is deliberately upside-down: pale at the top, the canvas tone
 // gathering toward the bottom edge. iOS 26 gives an installed web app ONE
 // status-bar colour for the whole session, frozen at page load — no dynamic
 // channel moves it (meta, manifest, body repaints and fixed-element tricks
@@ -46,10 +46,10 @@ const webTransition = (property: string, duration: number) =>
 export function ScreenBackground() {
   return (
     <LinearGradient
-      // Mirror of the old top-heavy fade: the page stays `bg` down to a third
-      // from the bottom, then blush bleeds into lavender at the bottom edge.
-      colors={[colors.bg, gradients.wash[0], colors.blush, colors.lilac]}
-      locations={[0.34, 0.66, 0.89, 1]}
+      // The page stays `bg` down to half-way, then settles into the canvas
+      // tone at the bottom edge, under the floating tab bar.
+      colors={[colors.bg, gradients.wash[0], gradients.wash[1]]}
+      locations={[0.5, 0.75, 1]}
       start={{ x: 0.15, y: 0 }}
       end={{ x: 0.85, y: 1 }}
       // The solid colour underneath is never visible — the gradient covers it
@@ -74,14 +74,15 @@ export function MoraFace({ size = 112 }: { size?: number }) {
         source={require('@/assets/images/capybara-tile.png')}
         style={{ width: size, height: size }}
         contentFit="contain"
-        accessibilityLabel="Che capybara"
+        accessibilityLabel="Posta capybara"
       />
     </View>
   );
 }
 
 // ---------------------------------------------------------------------------
-// Button — subtle scale-down on press for instant tactile feedback.
+// Button — a molded clay pill; subtle scale-down on press for instant
+// tactile feedback. Primary is rosa with the pressed-clay shading.
 // ---------------------------------------------------------------------------
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
@@ -100,11 +101,11 @@ export function Button({
   loading?: boolean;
   small?: boolean;
 }) {
-  const palette: Record<ButtonVariant, { bg: string; fg: string; border?: string }> = {
-    primary: { bg: colors.primary, fg: colors.onPrimary },
-    secondary: { bg: colors.primarySoft, fg: colors.primaryDark },
+  const palette: Record<ButtonVariant, { bg: string; fg: string; border?: string; clay?: string }> = {
+    primary: { bg: colors.primary, fg: colors.onPrimary, clay: clay.button },
+    secondary: { bg: colors.card, fg: colors.ink, clay: clay.surface },
     ghost: { bg: 'transparent', fg: colors.muted, border: colors.border },
-    danger: { bg: colors.dangerSoft, fg: colors.danger },
+    danger: { bg: colors.dangerSoft, fg: colors.dangerInk },
   };
   const p = palette[variant];
   return (
@@ -114,16 +115,34 @@ export function Button({
       style={({ pressed }) => [
         styles.button,
         small && styles.buttonSmall,
-        variant === 'primary' && shadow.card,
         {
           backgroundColor: p.bg,
           borderColor: p.border ?? 'transparent',
-          borderWidth: p.border ? 1 : 0,
+          borderWidth: p.border ? 1.5 : 0,
+          boxShadow: disabled ? undefined : p.clay,
           opacity: disabled ? 0.45 : 1,
           transform: [{ scale: pressed ? press.scale : 1 }],
         },
         webTransition('transform', press.duration),
       ]}>
+      {variant === 'primary' && !disabled && (
+        <LinearGradient
+          colors={gradients.deep}
+          style={[StyleSheet.absoluteFill, { borderRadius: small ? radius.sm + 6 : 27 }]}
+          pointerEvents="none"
+        />
+      )}
+      {/* An inset shadow paints under children, so the gradient would hide the
+          clay's lit top edge; redraw it over the gradient. */}
+      {variant === 'primary' && !disabled && (
+        <View
+          style={[
+            StyleSheet.absoluteFill,
+            { borderRadius: small ? radius.sm + 6 : 27, boxShadow: CLAY_BUTTON_INSET },
+          ]}
+          pointerEvents="none"
+        />
+      )}
       {loading ? (
         <ActivityIndicator color={p.fg} />
       ) : (
@@ -134,6 +153,8 @@ export function Button({
     </Pressable>
   );
 }
+
+const CLAY_BUTTON_INSET = 'inset 0 3px 0 rgba(255,255,255,0.28), inset 0 -5px 10px rgba(80,10,30,0.25)';
 
 // ---------------------------------------------------------------------------
 // Card container
@@ -156,7 +177,7 @@ export function Badge({
     primary: { bg: colors.primarySoft, fg: colors.primaryDark },
     success: { bg: colors.successSoft, fg: colors.success },
     accent: { bg: colors.accentSoft, fg: colors.accent },
-    danger: { bg: colors.dangerSoft, fg: colors.danger },
+    danger: { bg: colors.dangerSoft, fg: colors.dangerInk },
   }[tone];
   return (
     <View style={[styles.badge, { backgroundColor: tones.bg }]}>
@@ -166,7 +187,7 @@ export function Badge({
 }
 
 // ---------------------------------------------------------------------------
-// Labeled text field — the border picks up the kippah navy on focus so the
+// Labeled text field — the border picks up rosa on focus so the
 // caret is never the only thing telling you where you are.
 // ---------------------------------------------------------------------------
 export const Field = forwardRef<TextInput, TextInputProps & { label: string; hint?: string }>(
@@ -205,25 +226,23 @@ export function ScreenTitle({ children }: { children: React.ReactNode }) {
 }
 
 const styles = StyleSheet.create({
-  face: { overflow: 'hidden', ...shadow.raised },
+  face: { overflow: 'hidden', boxShadow: clay.float },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: radius.md,
-    minHeight: 52,
+    paddingHorizontal: 22,
+    borderRadius: 27,
+    minHeight: 54,
   },
-  buttonSmall: { paddingVertical: 9, paddingHorizontal: 14, minHeight: 38, borderRadius: radius.sm },
-  buttonText: { fontSize: 17, fontWeight: '600', letterSpacing: 0.1 },
+  buttonSmall: { paddingVertical: 9, paddingHorizontal: 16, minHeight: 40, borderRadius: radius.sm + 6 },
+  buttonText: { ...font.body[800], fontSize: 17, letterSpacing: 0.1 },
   buttonTextSmall: { fontSize: 14 },
   panel: {
     backgroundColor: colors.card,
     borderRadius: radius.lg,
     padding: 20,
-    borderWidth: 1,
-    borderColor: colors.border,
-    ...shadow.card,
+    boxShadow: clay.surface,
   },
   badge: {
     paddingHorizontal: 10,
@@ -231,16 +250,17 @@ const styles = StyleSheet.create({
     borderRadius: radius.pill,
     alignSelf: 'flex-start',
   },
-  badgeText: { fontSize: 13, fontWeight: '700' },
+  badgeText: { ...font.body[800], fontSize: 13 },
   fieldLabel: { ...type.label, color: colors.muted },
   fieldHint: { ...type.caption, color: colors.faint },
   input: {
     backgroundColor: colors.card,
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: colors.border,
     borderRadius: radius.md,
-    paddingHorizontal: 14,
-    paddingVertical: 13,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    ...font.body[600],
     fontSize: 17,
     color: colors.ink,
   },

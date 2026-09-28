@@ -1,5 +1,6 @@
 import type { Session } from '@supabase/supabase-js';
-import { createContext, useContext, useEffect, useState } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 import { supabase } from './supabase';
 import type { Profile, Role } from './types';
@@ -24,6 +25,14 @@ interface ProfileRow {
   role: Role | null;
   timezone: string | null;
 }
+
+// The native splash stays up until we know whether she is signed in, so a
+// cold start goes splash → her screen, not splash → blank spinner → redirect.
+SplashScreen.preventAutoHideAsync().catch(() => {});
+
+const sameProfile = (a: Profile | null, b: Profile | null) =>
+  a === b ||
+  (!!a && !!b && a.id === b.id && a.role === b.role && a.display_name === b.display_name && a.timezone === b.timezone);
 
 const toProfile = (row: ProfileRow): Profile => ({
   id: row.user_id,
@@ -55,33 +64,56 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(async ({ data }) => {
-      setSession(data.session);
-      if (data.session) setProfile(await fetchProfile(data.session));
-      setLoading(false);
-    });
+    let userId: string | null = null;
+    const loadProfile = (s: Session) =>
+      fetchProfile(s).then((p) => setProfile((prev) => (sameProfile(prev, p) ? prev : p)));
 
-    const { data: sub } = supabase.auth.onAuthStateChange(async (_event, newSession) => {
+    // The session is known as soon as it is read from storage; the app opens
+    // then, and her profile follows in the background. The profile is only
+    // fetched again when the user changes or edits her account — not on every
+    // hourly token refresh, which used to hand Home a new profile and make it
+    // reload everything.
+    const { data: sub } = supabase.auth.onAuthStateChange((event, newSession) => {
       setSession(newSession);
-      if (newSession) setProfile(await fetchProfile(newSession));
-      else setProfile(null);
+      setLoading(false);
+      if (!newSession) {
+        userId = null;
+        setProfile(null);
+        return;
+      }
+      if (newSession.user.id !== userId || event === 'USER_UPDATED') {
+        userId = newSession.user.id;
+        // Deferred: supabase-js must not be awaited inside its own callback.
+        setTimeout(() => loadProfile(newSession), 0);
+      }
     });
-    return () => sub.subscription.unsubscribe();
+    // Never leave the splash up if the session read stalls.
+    const fallback = setTimeout(() => SplashScreen.hideAsync().catch(() => {}), 4000);
+    return () => {
+      clearTimeout(fallback);
+      sub.subscription.unsubscribe();
+    };
   }, []);
 
-  return (
-    <AuthContext.Provider
-      value={{
-        session,
-        profile,
-        loading,
-        refreshProfile: async () => {
-          if (session) setProfile(await fetchProfile(session));
-        },
-      }}>
-      {children}
-    </AuthContext.Provider>
+  useEffect(() => {
+    if (!loading) SplashScreen.hideAsync().catch(() => {});
+  }, [loading]);
+
+  const value = useMemo<AuthValue>(
+    () => ({
+      session,
+      profile,
+      loading,
+      refreshProfile: async () => {
+        if (!session) return;
+        const p = await fetchProfile(session);
+        setProfile((prev) => (sameProfile(prev, p) ? prev : p));
+      },
+    }),
+    [session, profile, loading],
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export const useAuth = () => useContext(AuthContext);

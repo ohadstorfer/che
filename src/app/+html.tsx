@@ -12,7 +12,7 @@ export default function Root({ children }: PropsWithChildren) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no"
         />
-        <title>Che</title>
+        <title>Posta</title>
         <link rel="manifest" href="/manifest.json" />
         {/* On iOS up to 18 (and Android), this is the colour of the strip iOS
             reserves above the app under the `default` status bar style,
@@ -27,7 +27,7 @@ export default function Root({ children }: PropsWithChildren) {
             ignored. The app's answer is design, not plumbing: the screen
             gradient is upside-down (see ScreenBackground), so every screen's
             top edge is pale and the one frozen colour fits them all. */}
-        <meta name="theme-color" content="#F1EEE6" />
+        <meta name="theme-color" content="#F7EFE6" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         {/* `default` keeps the strip opaque and its clock dark on every iOS.
@@ -42,7 +42,7 @@ export default function Root({ children }: PropsWithChildren) {
             from the page's scheme. The app is light only; saying so keeps
             them dark. */}
         <meta name="color-scheme" content="light" />
-        <meta name="apple-mobile-web-app-title" content="Che" />
+        <meta name="apple-mobile-web-app-title" content="Posta" />
         <link rel="icon" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <ScrollViewStyleReset />
@@ -60,7 +60,7 @@ export default function Root({ children }: PropsWithChildren) {
         <style
           dangerouslySetInnerHTML={{
             __html:
-              'body{background-color:#F1EEE6}' +
+              'body{background-color:#F7EFE6}' +
               'html,body{height:100%;margin:0}' +
               '#root{position:fixed;top:0;right:0;bottom:0;left:0;height:auto}',
           }}

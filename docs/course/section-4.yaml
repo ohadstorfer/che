@@ -1124,6 +1124,7 @@ units:
           - form: "pierna"
             f: "f.sg"
           - form: "piernas"
+            en: "legs"
             f: "f.pl"
       - lemma: "pie"
         pos: "noun"
@@ -1915,6 +1916,7 @@ units:
         en: "hills, low mountains"
         forms:
           - form: "sierras"
+            en: "hills, low mountains"
             f: "f.pl"
       - lemma: "campo"
         pos: "noun"

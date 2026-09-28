@@ -1,4 +1,4 @@
-/* Che — service worker for PWA + Web Push (iOS 16.4+ / Android / desktop). */
+/* Posta — service worker for PWA + Web Push (iOS 16.4+ / Android / desktop). */
 
 const CACHE = "che-shell-v1";
 
@@ -24,7 +24,7 @@ self.addEventListener("push", (event) => {
   try {
     payload = event.data ? event.data.json() : {};
   } catch (_e) {
-    payload = { title: "Che", body: event.data ? event.data.text() : "" };
+    payload = { title: "Posta", body: event.data ? event.data.text() : "" };
   }
   const title = typeof payload.title === "string" ? payload.title : "";
   const options = {

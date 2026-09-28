@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Playback Test</title>
+<!--
+  Phase 0 (docs/hablar-hld.md §4.8, §8): can iOS Safari play Tomás's reply the
+  way hablar-reply will deliver it — one mp3 per sentence, arriving over time
+  after the tap — gaplessly, with the silent switch ON?
+
+  How to run it on an iPhone:
+    1. npm run hablar:tts-ab   (writes sentence mp3s + clips.json + a copy of this page)
+       or put any few mp3s next to this page and list them below.
+    2. npx serve .course-work/hablar/tts-ab
+    3. On the iPhone (same Wi-Fi): http://<mac-ip>:3000/playback-test.html
+       (or pick mp3s from Files with the file picker; no server needed then)
+  Standalone: no dependencies, nothing leaves the page.
+-->
+<style>
+  :root {
+    --bg: #fafaf7; --fg: #1b1b1b; --muted: #6b6b6b; --line: #e3e3de; --card: #fff;
+    --accent: #2a6fdb; --ok: #1f8a4c; --bad: #c0392b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121212; --fg: #ececec; --muted: #9a9a9a; --line: #2c2c2c; --card: #1b1b1b;
+      --accent: #6aa2ff; --ok: #4cc27f; --bad: #ff6b5b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121212; --fg: #ececec; --muted: #9a9a9a; --line: #2c2c2c; --card: #1b1b1b;
+    --accent: #6aa2ff; --ok: #4cc27f; --bad: #ff6b5b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg); margin: 0;
+    font: 16px/1.45 -apple-system, system-ui, sans-serif;
+    padding: max(16px, env(safe-area-inset-top)) 16px 32px;
+  }
+  main { max-width: 680px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p, li { color: var(--muted); }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin: 14px 0; }
+  textarea { width: 100%; min-height: 96px; font: 13px ui-monospace, Menlo, monospace; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+  label { display: block; margin: 8px 0; }
+  input[type=number] { width: 90px; font-size: 16px; }
+  button {
+    font: 600 17px -apple-system, system-ui, sans-serif; border: 0; border-radius: 12px;
+    padding: 14px 16px; width: 100%; margin: 6px 0; color: #fff; background: var(--accent);
+    touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  }
+  button.secondary { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+  button:active { transform: scale(0.98); }
+  pre { font: 12px/1.5 ui-monospace, Menlo, monospace; white-space: pre-wrap; word-break: break-word; margin: 0; max-height: 50vh; overflow: auto; }
+  .ok { color: var(--ok); } .bad { color: var(--bad); }
+  #state { font: 13px ui-monospace, Menlo, monospace; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Web audio playback test</h1>
+  <p>Tomás's reply arrives as one mp3 per sentence, after the tap. This checks that iOS Safari
+     plays them back to back, with no gaps, and still plays with the silent switch on.</p>
+
+  <section>
+    <strong>Clips</strong>
+    <textarea id="urls" placeholder="One mp3 URL per line (loaded from clips.json when it sits next to this page)"></textarea>
+    <label>…or pick mp3 files: <input id="files" type="file" accept="audio/mpeg,.mp3" multiple></label>
+    <label>Simulated network: next sentence arrives every <input id="delay" type="number" value="400" min="0" step="50"> ms</label>
+    <label><input id="trim" type="checkbox" checked> Trim the mp3 encoder's silent edges (≤ 60 ms) when scheduling</label>
+  </section>
+
+  <button id="play">▶︎ Play (unlock inside the tap)</button>
+  <button id="control" class="secondary">Control: start audio after an await (expected to fail on iOS)</button>
+  <button id="stop" class="secondary">■ Stop</button>
+
+  <section>
+    <div id="state">—</div>
+    <pre id="log"></pre>
+  </section>
+
+  <section>
+    <strong>What to try on the iPhone</strong>
+    <ol>
+      <li>Silent switch <b>on</b>, volume up: tap Play. It must be audible (that is what
+          <code>navigator.audioSession.type = 'playback'</code> is for, iOS 17+).</li>
+      <li>Listen at every sentence boundary: no click, no gap. The log shows the scheduled
+          gap; anything over ~30 ms is audible.</li>
+      <li>Raise the delay to 1500 ms: the context must stay unlocked when the next sentence
+          arrives late (it underruns, then resumes — that's fine).</li>
+      <li>Play, then lock the screen mid-reply; play, switch apps and come back; Bluetooth
+          headphones on and off.</li>
+      <li>Wait 60 s idle and tap Play again (context suspended by the OS?).</li>
+      <li>Try the Control button: on iOS it usually stays silent. That is the bug the real
+          flow avoids by resuming the context in the Enviar tap.</li>
+      <li>Repeat as an installed PWA (Share → Add to Home Screen).</li>
+    </ol>
+  </section>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const log = (msg, cls) => {
+  const line = document.createElement('div');
+  line.textContent = `${(performance.now() / 1000).toFixed(3).padStart(8)}  ${msg}`;
+  if (cls) line.className = cls;
+  $('log').appendChild(line);
+  $('log').scrollTop = $('log').scrollHeight;
+};
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+let ctx = null;
+let sources = [];
+let run = 0;
+
+function state() {
+  const session = navigator.audioSession ? `audioSession.type=${navigator.audioSession.type}` : 'no navigator.audioSession';
+  $('state').textContent = ctx
+    ? `ctx ${ctx.state} · ${ctx.sampleRate} Hz · baseLatency ${(ctx.baseLatency * 1000 || 0).toFixed(0)} ms · ${session}`
+    : `no AudioContext yet · ${session}`;
+}
+setInterval(state, 500);
+
+// Default clip list: clips.json next to the page (written by hablar:tts-ab).
+fetch('clips.json').then((r) => (r.ok ? r.json() : [])).then((list) => {
+  if (list.length && !$('urls').value) $('urls').value = list.join('\n');
+}).catch(() => {});
+
+function sourcesToLoad() {
+  const files = [...$('files').files];
+  if (files.length) return files.map((f) => ({ name: f.name, load: () => f.arrayBuffer() }));
+  return $('urls').value.split('\n').map((s) => s.trim()).filter(Boolean)
+    .map((url) => ({ name: url.split('/').pop(), load: () => fetch(url).then((r) => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.arrayBuffer();
+    }) }));
+}
+
+// Safari before 14.1 only has the callback form.
+const decode = (buf) => new Promise((ok, fail) => {
+  const p = ctx.decodeAudioData(buf, ok, fail);
+  if (p && p.then) p.then(ok, fail);
+});
+
+/** Where sound starts and ends, ignoring near-silent edges (mp3 encoder padding). */
+function edges(buffer) {
+  if (!$('trim').checked) return { start: 0, end: buffer.duration };
+  const data = buffer.getChannelData(0);
+  const max = Math.floor(0.06 * buffer.sampleRate);
+  const loud = (i) => Math.abs(data[i]) > 0.003;
+  let a = 0; while (a < max && a < data.length && !loud(a)) a++;
+  let b = data.length - 1; while (data.length - 1 - b < max && b > a && !loud(b)) b--;
+  return { start: a / buffer.sampleRate, end: (b + 1) / buffer.sampleRate };
+}
+
+function unlock() {
+  // All of this runs synchronously inside the tap — that is the point.
+  if (navigator.audioSession) {
+    try { navigator.audioSession.type = 'playback'; } catch (e) { log(`audioSession: ${e.message}`, 'bad'); }
+  }
+  if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const t = performance.now();
+  ctx.resume().then(() => log(`context running (${(performance.now() - t).toFixed(0)} ms after tap)`, 'ok'));
+  // A one-sample silent buffer started in the gesture is what really unlocks older iOS.
+  const blip = ctx.createBufferSource();
+  blip.buffer = ctx.createBuffer(1, 1, 22050);
+  blip.connect(ctx.destination);
+  blip.start(0);
+}
+
+async function playSequence(label) {
+  const my = ++run;
+  const list = sourcesToLoad();
+  if (!list.length) return log('no clips: add URLs or pick files', 'bad');
+  const delay = Number($('delay').value) || 0;
+  log(`— ${label}: ${list.length} sentence(s), arriving every ${delay} ms —`);
+  const t0 = performance.now();
+  let nextAt = 0;
+  let prevEnd = null;
+
+  for (const [i, item] of list.entries()) {
+    if (i > 0 && delay) await sleep(delay);
+    if (my !== run) return;
+    try {
+      const tf = performance.now();
+      const bytes = await item.load();
+      const td = performance.now();
+      const buffer = await decode(bytes);
+      const tDone = performance.now();
+      const { start, end } = edges(buffer);
+      const now = ctx.currentTime;
+      const at = Math.max(now + 0.03, nextAt);
+      const underrun = prevEnd !== null && at > prevEnd + 0.001;
+      const src = ctx.createBufferSource();
+      src.buffer = buffer;
+      src.connect(ctx.destination);
+      src.start(at, start, end - start);
+      src.onended = () => log(`  #${i + 1} ended at ctx ${ctx.currentTime.toFixed(3)} s`);
+      sources.push(src);
+      nextAt = at + (end - start);
+      log(`#${i + 1} ${item.name}: load ${(td - tf).toFixed(0)} ms, decode ${(tDone - td).toFixed(0)} ms, ` +
+          `${buffer.duration.toFixed(2)} s (trim ${(start * 1000).toFixed(0)}/${((buffer.duration - end) * 1000).toFixed(0)} ms), ` +
+          `starts ctx ${at.toFixed(3)} s` +
+          (prevEnd === null ? `, first audio ${(performance.now() - t0 + (at - now) * 1000).toFixed(0)} ms after tap`
+            : underrun ? ` — UNDERRUN ${((at - prevEnd) * 1000).toFixed(0)} ms (arrived after the previous one ended)`
+            : ' — gapless'),
+          underrun ? 'bad' : undefined);
+      prevEnd = nextAt;
+    } catch (e) {
+      log(`#${i + 1} ${item.name}: ${e.message || e}`, 'bad');
+    }
+  }
+  log(`all scheduled; ctx state ${ctx.state}`);
+}
+
+$('play').addEventListener('click', () => {
+  unlock();
+  playSequence('unlocked in tap');
+});
+
+$('control').addEventListener('click', async () => {
+  // The wrong way: nothing audio-related happens until after an await, so
+  // the gesture has already expired when the context is created.
+  if (ctx) { await ctx.close(); ctx = null; }
+  await sleep(300);
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  log(`control: context created after an await, state ${ctx.state}`, ctx.state === 'running' ? undefined : 'bad');
+  playSequence('control (no unlock)');
+});
+
+$('stop').addEventListener('click', () => {
+  run++;
+  for (const s of sources) { try { s.stop(); } catch {} }
+  sources = [];
+  log('stopped');
+});
+
+log(navigator.userAgent);
+state();
+</script>
+</body>
+</html>

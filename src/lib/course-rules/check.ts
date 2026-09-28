@@ -231,6 +231,31 @@ export function glossRepeats(vocabulary: Vocabulary) {
   });
 }
 
+/**
+ * Drillable forms that show their lemma's gloss where it can't be theirs: a
+ * plural as the singular (`piernas` "leg"), a conjugated verb as the infinitive
+ * (`recomiendo` "to recommend"). The fix is a gloss of the form's own, even
+ * when it reads the same ("news" for `noticias`).
+ */
+export function glossInherited(vocabulary: Vocabulary) {
+  const lemmaById = new Map((vocabulary.lemmas ?? []).map((l) => [l.id, l]));
+  // `nosotros` "we": the lemma is a plural itself, so its gloss fits `nosotras`.
+  const pluralLemma = new Set(
+    vocabulary.forms.filter((f) => fold(f.form) === fold(f.lemma) && f.features?.number === 'pl').map((f) => f.lemma_id),
+  );
+  const out: { form: VocabForm; why: string }[] = [];
+  for (const f of vocabulary.forms) {
+    if (!drillable(f) || f.gloss_en != null || fold(f.form) === fold(f.lemma)) continue;
+    const gloss = lemmaById.get(f.lemma_id)?.gloss_en ?? '';
+    if ((f.pos === 'noun' || f.pos === 'pron') && f.features?.number === 'pl' && !pluralLemma.has(f.lemma_id)) {
+      out.push({ form: f, why: `plural glossed as its singular "${gloss}"` });
+    } else if (f.pos === 'verb' && f.features?.person && /^to /i.test(gloss)) {
+      out.push({ form: f, why: `conjugated verb glossed as the infinitive "${gloss}"` });
+    }
+  }
+  return out;
+}
+
 // ---------------------------------------------------------------------------
 // A whole sentence, the way the admin saves one (docs/superplan-admin-palabras
 // §3): everything that would keep it from a learner, in plain words.

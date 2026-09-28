@@ -1,5 +1,6 @@
 import { shuffle } from './answers';
 import { clauseOfSurface, wordsIn } from './course-rules/shape';
+import { cached } from './content-cache';
 import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { Form, Sentence, SentenceToken } from './types';
@@ -27,6 +28,15 @@ export interface SentenceRow {
   tokens: { surface: string; form_ids: string[]; gloss?: string }[];
 }
 
+const SENTENCE_COLUMNS = 'id, unit_id, es, en, en_alt, es_alt, audio_path, voice_id, target_form_id, difficulty, tokens';
+
+/** Every published sentence (~26k), downloaded once per app run and shared. */
+export function loadSentenceRows(): Promise<SentenceRow[]> {
+  return cached('sentences', () =>
+    all<SentenceRow>(() => supabase.from('sentences').select(SENTENCE_COLUMNS).eq('status', 'published').order('id')),
+  );
+}
+
 /**
  * Every published sentence with her record for it. `forms` is the lexicon the
  * session already holds — it is what tells a content word from a glue word
@@ -35,7 +45,7 @@ export interface SentenceRow {
 export async function loadSentences(userId: string, forms: Form[]): Promise<Sentence[]> {
   // Paged: far past the 1,000 rows PostgREST sends at once.
   const [rows, states] = await Promise.all([
-    all<SentenceRow>(() => supabase.from('sentences').select('*').eq('status', 'published').order('id')),
+    loadSentenceRows(),
     all<{ sentence_id: string; shown_count: number; correct_count: number; last_shown_at: string | null }>(() => supabase.from('sentence_states').select('*').eq('user_id', userId).order('sentence_id')),
   ]);
   const formById = new Map(forms.map((f) => [f.id, f]));

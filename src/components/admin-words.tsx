@@ -40,7 +40,7 @@ import {
 import { setGloss } from '@/lib/course-rules/gloss';
 import { POS, REGISTERS } from '@/lib/course-rules/rules';
 import { type QueueItem } from '@/lib/round';
-import { colors, radius } from '@/lib/theme';
+import { colors, font, radius } from '@/lib/theme';
 import type { ExerciseMode, Form, FormFeatures } from '@/lib/types';
 
 // ---------------------------------------------------------------------------
@@ -1001,15 +1001,15 @@ const styles = StyleSheet.create({
   },
   fieldRow: { flexDirection: 'row', gap: 8, alignItems: 'center' },
   problem: { fontSize: 14, color: colors.dangerInk, lineHeight: 20 },
-  liveText: { fontSize: 14, color: colors.primaryDark, fontWeight: '600' },
+  liveText: { fontSize: 14, color: colors.primaryDark, ...font.body[600] },
   warn: { fontSize: 14, color: colors.dangerInk },
   badge: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: radius.pill, alignSelf: 'flex-start' },
-  badgeText: { fontSize: 12, fontWeight: '700', color: colors.muted },
+  badgeText: { fontSize: 12, ...font.body[700], color: colors.muted },
   badgeLive: { backgroundColor: colors.primary },
   badgePaused: { backgroundColor: colors.dangerSoft },
-  badgeMuted: { backgroundColor: 'rgba(31, 37, 33, 0.06)' },
+  badgeMuted: { backgroundColor: 'rgba(58, 42, 32, 0.06)' },
   summary: { gap: 8, padding: 14, borderRadius: radius.md, borderWidth: 1, borderColor: colors.primary, backgroundColor: colors.card },
-  summaryTitle: { fontSize: 16, fontWeight: '700', color: colors.ink },
+  summaryTitle: { fontSize: 16, ...font.body[700], color: colors.ink },
   summaryRow: { gap: 2, paddingVertical: 6, borderTopWidth: 1, borderTopColor: colors.border },
   summaryLine: { flexDirection: 'row', gap: 8, alignItems: 'center' },
   summaryBefore: { fontSize: 14, color: colors.faint, textDecorationLine: 'line-through' },
@@ -1018,9 +1018,9 @@ const styles = StyleSheet.create({
   listUnit: { fontSize: 12, color: colors.muted, fontVariant: ['tabular-nums'], minWidth: 26 },
   unitChip: { minWidth: 30, height: 28, paddingHorizontal: 6, borderRadius: radius.sm, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.card, alignItems: 'center', justifyContent: 'center' },
   unitChipOn: { backgroundColor: colors.primary, borderColor: colors.primary },
-  unitChipText: { fontSize: 13, fontWeight: '600', color: colors.ink, fontVariant: ['tabular-nums'] },
+  unitChipText: { fontSize: 13, ...font.body[600], color: colors.ink, fontVariant: ['tabular-nums'] },
   detailHead: { flexDirection: 'row', alignItems: 'flex-start', gap: 12, flexWrap: 'wrap' },
-  detailTitle: { fontSize: 26, fontWeight: '700', color: colors.ink, letterSpacing: -0.3 },
+  detailTitle: { ...font.display[800], fontSize: 26, color: colors.ink, letterSpacing: -0.3 },
   answerRow: { flexDirection: 'row', alignItems: 'center', gap: 10, flexWrap: 'wrap' },
   answerChip: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border },
   answerRetire: { fontSize: 15, color: colors.muted },
@@ -1028,7 +1028,7 @@ const styles = StyleSheet.create({
   editor: { gap: 12, padding: 14, marginLeft: 12, borderLeftWidth: 2, borderLeftColor: colors.border },
   token: { paddingHorizontal: 8, paddingVertical: 5, borderRadius: radius.sm, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border, gap: 2, minWidth: 90 },
   tokenMissing: { borderColor: colors.danger, backgroundColor: colors.dangerSoft },
-  tokenSurface: { fontSize: 15, fontWeight: '700', color: colors.ink },
+  tokenSurface: { fontSize: 15, ...font.body[700], color: colors.ink },
   tokenMeta: { fontSize: 11, color: colors.muted },
   glossInput: { fontSize: 13, color: colors.ink, paddingVertical: 2, borderBottomWidth: 1, borderBottomColor: colors.border, minWidth: 70 },
   preview: { height: 620, borderRadius: radius.lg, borderWidth: 1, borderColor: colors.border, overflow: 'hidden', backgroundColor: colors.bg },

@@ -1,28 +1,26 @@
 {
   "expo": {
-    "name": "Che",
-    "slug": "che",
+    "name": "Posta",
+    "slug": "posta",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "che",
+    "scheme": "posta",
     "userInterfaceStyle": "light",
-    "backgroundColor": "#F1EEE6",
-    "primaryColor": "#3E5641",
+    "backgroundColor": "#F7EFE6",
+    "primaryColor": "#B44A60",
     "ios": {
-      "bundleIdentifier": "com.che.app",
+      "bundleIdentifier": "com.posta.app",
       "supportsTablet": false,
+      "usesAppleSignIn": true,
       "config": {
         "usesNonExemptEncryption": false
-      },
-      "infoPlist": {
-        "UIBackgroundModes": ["remote-notification"]
       }
     },
     "android": {
-      "package": "com.che.app",
+      "package": "com.posta.app",
       "adaptiveIcon": {
-        "backgroundColor": "#F1EEE6",
+        "backgroundColor": "#F7EFE6",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
@@ -30,7 +28,9 @@
       "predictiveBackGestureEnabled": false,
       "permissions": [
         "android.permission.RECORD_AUDIO",
-        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "blockedPermissions": [
         "android.permission.FOREGROUND_SERVICE",
         "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
       ]
@@ -38,27 +38,35 @@
     "web": {
       "output": "static",
       "favicon": "./assets/images/favicon.png",
-      "themeColor": "#F1EEE6",
-      "backgroundColor": "#F1EEE6"
+      "themeColor": "#F7EFE6",
+      "backgroundColor": "#F7EFE6"
     },
     "plugins": [
       "expo-router",
+      "expo-apple-authentication",
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#F1EEE6",
+          "backgroundColor": "#F7EFE6",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 180
         }
       ],
-      "expo-audio",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Posta uses the microphone so you can talk with Pancho and practice saying phrases out loud.",
+          "enableBackgroundPlayback": false
+        }
+      ],
       [
         "expo-notifications",
         {
-          "color": "#3E5641",
+          "color": "#B44A60",
           "defaultChannel": "default"
         }
-      ]
+      ],
+      "expo-build-properties"
     ],
     "experiments": {
       "typedRoutes": true,

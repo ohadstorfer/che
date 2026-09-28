@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import { Button } from '@/components/ui';
-import { colors, radius, shadow } from '@/lib/theme';
+import { clay, colors, font, pastel, radius } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
 // The reward screen for keeping the streak alive, ported from the choreography
@@ -331,37 +331,38 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   intro: { marginTop: 18, gap: 3 },
-  headline: { fontSize: 34, fontWeight: '700', color: colors.ink, letterSpacing: -0.8 },
+  headline: { ...font.display[800], fontSize: 34, lineHeight: 38, color: colors.ink, letterSpacing: -0.5 },
   headlineAccent: {
+    ...font.display[800],
     fontSize: 34,
-    fontWeight: '700',
-    color: colors.primary,
-    letterSpacing: -0.8,
+    lineHeight: 38,
+    // The streak's own warm hue, not rosa: rosa is only ever something to press.
+    color: colors.accent,
+    letterSpacing: -0.5,
   },
-  subhead: { fontSize: 15, color: colors.muted, marginTop: 10, lineHeight: 21 },
+  subhead: { ...font.body[600], fontSize: 15, color: colors.muted, marginTop: 10, lineHeight: 21 },
 
   card: {
     marginTop: 26,
     backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
     borderRadius: radius.xl,
     paddingHorizontal: 22,
     paddingTop: 24,
     paddingBottom: 22,
     alignItems: 'center',
-    ...shadow.raised,
+    boxShadow: clay.surface,
   },
   plus: {
     position: 'absolute',
     top: 14,
     right: 20,
-    backgroundColor: colors.primary,
+    backgroundColor: pastel.peach,
     paddingHorizontal: 11,
     paddingVertical: 5,
     borderRadius: 999,
+    boxShadow: clay.surface,
   },
-  plusText: { color: colors.onPrimary, fontSize: 13, fontWeight: '800' },
+  plusText: { ...font.body[800], color: colors.onPastel, fontSize: 13 },
 
   flameSlot: { height: 108, alignItems: 'center', justifyContent: 'center' },
   flame: { fontSize: 76, lineHeight: 92 },
@@ -375,15 +376,15 @@ const styles = StyleSheet.create({
   },
   numberAbsolute: { position: 'absolute' },
   number: {
+    ...font.display[800],
     fontSize: 78,
     lineHeight: 84,
-    fontWeight: '700',
-    color: colors.primary,
-    letterSpacing: -3,
+    color: colors.accent,
+    letterSpacing: -2,
   },
   caption: {
+    ...font.body[800],
     fontSize: 12,
-    fontWeight: '700',
     letterSpacing: 2,
     color: colors.muted,
     marginTop: 10,
@@ -397,7 +398,7 @@ const styles = StyleSheet.create({
   },
   day: { alignItems: 'center', gap: 6, flex: 1 },
   dot: { width: DOT, height: DOT },
-  // Today's dot layers an empty ring and a rose fill that cross-fades on top;
+  // Today's dot layers an empty ring and a durazno fill that cross-fades on top;
   // the other days are a single flat circle.
   dotFace: {
     width: DOT,
@@ -408,8 +409,8 @@ const styles = StyleSheet.create({
   },
   dotStatic: { width: DOT, height: DOT, borderRadius: DOT / 2, borderWidth: 1.5 },
   dotEmpty: { borderColor: colors.border, backgroundColor: 'transparent' },
-  dotOn: { borderColor: colors.primary, backgroundColor: colors.primary },
-  dayLabel: { fontSize: 11, color: colors.faint, fontWeight: '600', letterSpacing: 1.2 },
+  dotOn: { borderColor: pastel.peach, backgroundColor: pastel.peach },
+  dayLabel: { ...font.body[700], fontSize: 11, color: colors.muted, letterSpacing: 1.2 },
 
   actions: { gap: 8, marginTop: 24 },
 });

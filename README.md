@@ -1,4 +1,4 @@
-# Che — Aprendé español rioplatense
+# Posta — Aprendé español rioplatense
 
 Cross-platform (iOS, Android, web/PWA) Spanish-learning app.
 Supabase is the **only** backend: Postgres + Auth + Edge Functions + pg_cron.

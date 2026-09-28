@@ -1,36 +1,38 @@
-import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
-import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { Fragment, type ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import { router, useFocusEffect, useIsFocused, useLocalSearchParams } from 'expo-router';
+import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   AccessibilityInfo,
   Animated,
   Easing,
+  FlatList,
   Platform,
   Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   View,
   type ViewStyle,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { AppHeader, Pulse } from '@/components/app-header';
 import { Guidebook } from '@/components/guidebook';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
-import { localDateStr, WEEKDAY_INITIALS, weekDates } from '@/lib/dates';
+import { localDateStr, weekDates } from '@/lib/dates';
 import {
   type Course,
   currentIndex,
-  loadCheckAttempts,
   loadCourse,
-  loadProgress,
+  loadLessonProgress,
   type PathLesson,
   sectionAt,
   sectionSummaries,
 } from '@/lib/course';
 import { maxUnitsInTest } from '@/lib/placement';
+import { FREE_UNITS, usePremium } from '@/lib/premium';
 import {
   enablePartnerReminders,
   enablePush,
@@ -42,8 +44,9 @@ import { getMistakeCount, getPracticeCounts } from '@/lib/session';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { streakStatus, type StreakStatus } from '@/lib/streak';
 import { supabase } from '@/lib/supabase';
-import { colors, frost, path, radius, shadow } from '@/lib/theme';
+import { clay, colors, font, gradients, pastel, pastelGrad, path, press, radius } from '@/lib/theme';
 import type { LessonKind, Section, Streak, Unit } from '@/lib/types';
+import { FitText } from '@/components/fit-text';
 
 interface HomeData {
   course: Course;
@@ -61,50 +64,49 @@ interface HomeData {
 }
 
 // ---------------------------------------------------------------------------
-// The path — a Duolingo-style trail of "coin" buttons winding down the screen.
-// One coin per lesson of the course, in order: the ones she has finished, the
-// current step (the only tappable one), and the rest of the road locked ahead
-// of her. Each unit opens with a banner naming what it teaches.
+// The path — a Duolingo-style trail of clay pills winding down the screen.
+// One pill per lesson of the course, in order: the ones she has finished
+// (manteca, with a tick), the current step (the wide rosa one that says
+// "Start", and the only tappable one), and the rest of the road locked ahead
+// of her, pressed flat into the page. Each unit opens with a banner naming
+// what it teaches.
 //
-// A node's whole look — size, colour, icon, ring — is derived from one number,
+// A node's whole look — size, colour, glyph, ring — is derived from one number,
 // its phase: 0 locked, 1 current, 2 done. That is what makes finishing a lesson
 // animatable: the step she just finished runs 1 → 2 while the next runs 0 → 1.
 // ---------------------------------------------------------------------------
 
-const NODE = 62;
-const NODE_ACTIVE = 74;
+/** A done or locked step: a small clay pill. */
+const PILL_W = 74;
+const PILL_H = 64;
+/** The current step: a wide pill with a play disc and what it starts. */
+const CUR_W = 160;
+const CUR_H = 76;
+const DISC = 58;
 const RING_PAD = 5;
 const RING_BORDER = 3;
-/** The current step is drawn bigger by scaling, so the row never reflows. */
-const ACTIVE_SCALE = NODE_ACTIVE / NODE;
-// The coin and freeze palettes live in theme.ts — see `path` and `frost` there
-// for why the freeze blue is the one hue allowed outside Che's palette.
-const LOCKED_FACE = path.lockedFace;
-const ICE_INK = frost.ink;
-const ICE_FACE = frost.face;
-const FROZEN_BG = frost.bg;
+// The pill and freeze palettes live in theme.ts — see `path` and `frost` there
+// for why the freeze blue is the one hue allowed outside the clay family.
 const RING_RGB = path.ringRgb;
-const COIN_SHADOW = path.coinShadow;
 
-// Every row is the same square whatever its phase, so the road's geometry is
+// Every row is the same box whatever its phase, so the road's geometry is
 // arithmetic: no measuring, and scrolling to a step is exact the instant the
-// step exists.
-const BOX = NODE + 2 * (RING_PAD + RING_BORDER);
-const STEP_GAP = 28;
+// step exists. The box fits the current pill with its ring, so a step can
+// grow into it without the row reflowing.
+const RING_OUT = RING_PAD + RING_BORDER;
+const BOX_W = CUR_W + 2 * RING_OUT;
+const BOX = CUR_H + 2 * RING_OUT;
+const STEP_GAP = 4;
 const STEP_PITCH = BOX + STEP_GAP;
 /** Breathing room before the first node. */
 const PATH_TOP = 24;
 /** A unit's banner is a fixed-height row too, so it folds into the arithmetic. */
-const BANNER_H = 76;
-const BANNER_GAP = 26;
+const BANNER_H = 176;
+const BANNER_GAP = 22;
 const BANNER_PITCH = BANNER_H + BANNER_GAP;
-/** So is the header that opens a section. */
-const SECTION_H = 64;
-const SECTION_GAP = 22;
-const SECTION_PITCH = SECTION_H + SECTION_GAP;
-/** Where step `i` sits, given the banners and section headers standing above it. */
-const stepY = (i: number, bannersAbove: number, sectionsAbove: number) =>
-  PATH_TOP + bannersAbove * BANNER_PITCH + sectionsAbove * SECTION_PITCH + i * STEP_PITCH;
+/** Where step `i` sits, given the banners standing above it. The section's
+ *  name lives in the header's pill, so nothing else stands on the road. */
+const stepY = (i: number, bannersAbove: number) => PATH_TOP + bannersAbove * BANNER_PITCH + i * STEP_PITCH;
 
 const EASE_OUT = Easing.bezier(0.23, 1, 0.32, 1);
 const EASE_IN_OUT = Easing.bezier(0.77, 0, 0.175, 1);
@@ -114,120 +116,32 @@ const ENTER_DELAY = 170;
 const ENTER_MS = 430;
 /** Half a breath of the current step's ring — the only thing still moving. */
 const BREATHE_MS = 1300;
-/** Horizontal S-curve: one full wave every 8 steps. */
-const swing = (i: number) => Math.round(Math.sin((i * Math.PI) / 4) * 78);
-// A step's icon is its own, whatever phase it is in: locked it is a grey hint
-// of what's coming, and it lights up when she gets there. Marks of the place
-// beat generic book/headset/dumbbell icons: the road she is walking should look
-// like where the language is spoken.
-//
-// Six marks of the place the language comes from, cycling down the road so no
-// two neighbouring steps wear the same one. Solid weights only: at 27pt an
-// outline glyph goes to lace against a filled coin.
-const STEP_ICONS = [
-  { set: 'mdi', name: 'white-balance-sunny', size: 30 },  // el sol de mayo
-  { set: 'fa5', name: 'mug-hot' },                        // el mate
-  { set: 'fa5', name: 'guitar' },                         // el tango
-  { set: 'fa5', name: 'futbol' },                         // el fútbol
-  { set: 'mdi', name: 'book-open-variant', size: 30 },    // la lectura
-  { set: 'fa5', name: 'drumstick-bite' },                 // el asado
-] as const;
+/** Horizontal S-curve: one full wave every 8 steps. Shallow enough that the
+ *  wide current pill never runs off a narrow phone at the top of a swing. */
+const swing = (i: number) => Math.round(Math.sin((i * Math.PI) / 4) * 56);
 
-type StepIcon = (typeof STEP_ICONS)[number] | { set: 'mdi' | 'fa5'; name: string; size?: number };
-
-/** A lesson that isn't new material wears what it is, not the next ornament. */
-const KIND_ICONS: Partial<Record<LessonKind, StepIcon>> = {
-  story: { set: 'mdi', name: 'book-open-page-variant', size: 30 },
-  practice: { set: 'mdi', name: 'dumbbell' },
-  review: { set: 'fa5', name: 'trophy' },
-  checkpoint: { set: 'fa5', name: 'trophy' },
+/** What the current pill says under "Start": the lesson, or what kind of step it is. */
+const KIND_LABEL: Partial<Record<LessonKind, string>> = {
+  story: 'Story',
+  practice: 'Practice',
+  listening: 'Listening',
+  review: 'Unit check',
+  checkpoint: 'Unit check',
 };
 
-/** One size for every phase — the coin's own scale is what makes hers bigger. */
-const ICON_SIZE = 27;
+/** A check ahead wears its trophy, locked, so she can see the unit's end coming. */
+const isCheck = (kind: LessonKind) => kind === 'review' || kind === 'checkpoint';
 
-/** One glyph, either family, so a step's icon can come from whichever set
- *  draws it best. Colour is a prop on an icon font, hence two of these per
- *  coin rather than one animated colour. */
-function StepGlyph({ icon, color }: { icon: StepIcon; color: string }) {
-  const size = 'size' in icon ? icon.size : ICON_SIZE;
-  return icon.set === 'mdi' ? (
-    <MaterialCommunityIcons name={icon.name as never} size={size} color={color} />
-  ) : (
-    <FontAwesome5 name={icon.name} size={size} color={color} solid />
-  );
-}
-
-// On web, react-native-web turns this into a real CSS transition so the coin
+// On web, react-native-web turns this into a real CSS transition so the pill
 // press eases instead of snapping.
 const webTransition =
   Platform.OS === 'web'
     ? ({
         transitionProperty: 'transform',
-        transitionDuration: '100ms',
+        transitionDuration: `${press.duration}ms`,
         transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
       } as unknown as ViewStyle)
     : undefined;
-
-// ---------------------------------------------------------------------------
-// Figuritas — ornaments standing along the road, the way Duolingo dots its
-// path with characters. They scroll with the path because they belong to it.
-//
-// The figuritas are the capybara mascot (sources in assets/images/mascot/). To
-// add another: cut it out with the `cutout()` helper in scripts/cutout-figure.py
-// into assets/images/capybara/capybara-<name>-figure.png, then drop it in FIGURES with its own width/height. They
-// cycle down the road in order, so each entry takes the next slot and the set
-// only repeats once she has passed all of them.
-//
-// These are cut-outs, not the boxed app icon — a figure standing on the page
-// reads as part of the world; a rounded tile reads as a button she can't press.
-// Keep the widths under ~126 so the figure never crowds the coin, even when
-// the road swings fully to its side on a narrow phone. That is where the two
-// meet: on a 320pt screen the path is 280 wide, and a node swung its full 78
-// out leaves 179pt of clear margin opposite it, minus the breathing room a
-// figure needs not to look glued to the coin.
-//
-// Each height is the source PNG's own aspect at that width. `contentFit` would
-// letterbox a wrong one rather than distort it, so a stale height costs dead
-// space in the row instead of a squashed figure.
-// ---------------------------------------------------------------------------
-const FIGURES = [
-  { source: require('@/assets/images/capybara/capybara-gaucho-figure.png'), width: 77, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-asado-figure.png'), width: 120, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-mate-figure.png'), width: 95, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-futbol-pateando-figure.png'), width: 122, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-facturas-figure.png'), width: 103, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-tango-figure.png'), width: 96, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-milanesa-figure.png'), width: 105, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-saludando-figure.png'), width: 87, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-empanadas-figure.png'), width: 85, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-mate-amargo-figure.png'), width: 88, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-futbol-gol-figure.png'), width: 106, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-alfajor-figure.png'), width: 101, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-choripan-figure.png'), width: 101, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-gaucho-cafe-figure.png'), width: 100, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-dulce-de-leche-figure.png'), width: 98, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-mate-sorbiendo-figure.png'), width: 88, height: 130 },
-  { source: require('@/assets/images/capybara/capybara-alfajor-maicena-figure.png'), width: 101, height: 130 },
-];
-
-// One figure per arc, standing in the bay the road leaves as it curves away.
-// The road is a sine wave eight steps long, so an arc is four steps and its
-// apex — the step that swings furthest out — is where the opposite margin is
-// widest. That is the only place a figure this size fits without crowding the
-// coins above and below it.
-const FIGURE_FIRST = 2;
-const FIGURE_EVERY = 4;
-
-type Figure = (typeof FIGURES)[number] & { side: 'left' | 'right' };
-
-function figureFor(index: number): Figure | null {
-  if (index < FIGURE_FIRST || (index - FIGURE_FIRST) % FIGURE_EVERY !== 0) return null;
-  const slot = (index - FIGURE_FIRST) / FIGURE_EVERY;
-  // Always opposite the node's swing, so the coin and the figure never crowd
-  // each other however far the road curves.
-  return { ...FIGURES[slot % FIGURES.length], side: swing(index) > 0 ? 'left' : 'right' };
-}
 
 /** 0 locked · 1 current · 2 done. */
 type Phase = 0 | 1 | 2;
@@ -242,20 +156,32 @@ const MOVE = {
   0: { duration: 260, delay: 0, easing: EASE_OUT },
 } as const;
 
-function PathStep({
+// Memoized: the road holds a whole section (hundreds of steps), and Home
+// re-renders on every scroll crossing, guidebook open and load. Only the steps
+// whose phase changed, and the current one, need to render again.
+const PathStep = memo(function PathStep({
   index,
   phase,
   reduced,
+  breathe,
   label,
+  sub,
   kind,
   attempts,
+  tone,
   onPress,
 }: {
   index: number;
   phase: Phase;
+  /** Its unit's banner colour: done steps wear it. */
+  tone: BannerTone;
   reduced: boolean;
-  /** What the coin is, for screen readers: "Lesson 2 · Hola, che". */
+  /** The current step's ring breathes only while Home is on screen. */
+  breathe: boolean;
+  /** What the pill is, for screen readers: "Lesson 2 · Hola, che". */
   label: string;
+  /** The line under "Start" while it is her step: "Lesson 3", "Story". */
+  sub: string;
   kind: LessonKind;
   /** A unit check tried and not passed yet: attempts so far, out of three. */
   attempts?: number;
@@ -268,13 +194,12 @@ function PathStep({
   const start = useRef(phase).current;
   const p = useRef(new Animated.Value(start)).current;
   const mounted = useRef(false);
-  const stepIcon: StepIcon = KIND_ICONS[kind] ?? STEP_ICONS[index % STEP_ICONS.length];
   // The ring around the current step is the only "tap here" left on the path,
   // so it breathes: out and faint, back in and solid, forever until she does.
   const breath = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    if (phase !== 1 || reduced) {
+    if (phase !== 1 || reduced || !breathe) {
       breath.setValue(0);
       return;
     }
@@ -284,21 +209,22 @@ function PathStep({
           toValue: 1,
           duration: BREATHE_MS,
           easing: Easing.inOut(Easing.quad),
-          // Shares a view with the ring's animated colour, which the native
-          // driver can't take.
-          useNativeDriver: false,
+          // Native: the breath has its own view, apart from the ring's
+          // colour, so it runs off the JS thread (which a lesson opened on
+          // top of Home needs for drags and audio).
+          useNativeDriver: true,
         }),
         Animated.timing(breath, {
           toValue: 0,
           duration: BREATHE_MS,
           easing: Easing.inOut(Easing.quad),
-          useNativeDriver: false,
+          useNativeDriver: true,
         }),
       ]),
     );
     pulse.start();
     return () => pulse.stop();
-  }, [phase, reduced, breath]);
+  }, [phase, reduced, breathe, breath]);
 
   useEffect(() => {
     // A node that mounts already in its phase has nothing to animate — only a
@@ -316,70 +242,94 @@ function PathStep({
       duration,
       delay,
       easing,
-      // Colours can't ride the native driver, and the whole look is one value.
+      // Size and colour can't ride the native driver, and the whole look is one value.
       useNativeDriver: false,
     });
     move.start();
     return () => move.stop();
   }, [phase, reduced, p, start]);
 
-  const at = (outputRange: number[], inputRange = [0, 1, 2]) =>
-    p.interpolate({ inputRange, outputRange, extrapolate: 'clamp' });
+  // Built once per step: the value never changes, so neither do they.
+  const anim = useMemo(() => {
+    const at = (outputRange: number[], inputRange = [0, 1, 2]) =>
+      p.interpolate({ inputRange, outputRange, extrapolate: 'clamp' });
 
-  // The coin swells past its final size as it lights up, then settles; going
-  // done it dips, the way a stamp presses in.
-  const scale = at(
-    [1, ACTIVE_SCALE * 1.05, ACTIVE_SCALE, 0.97, 1],
-    [0, 0.78, 1, 1.62, 2],
-  );
-  const face = p.interpolate({
-    inputRange: [0, 1, 2],
-    outputRange: [LOCKED_FACE, colors.primary, colors.primary],
-    extrapolate: 'clamp',
-  });
-  const ring = p.interpolate({
-    inputRange: [0, 1, 2],
-    outputRange: [`rgba(${RING_RGB}, 0)`, `rgba(${RING_RGB}, 1)`, `rgba(${RING_RGB}, 0)`],
-    extrapolate: 'clamp',
-  });
+    // The pill widens into her step and narrows back once it is done. On top
+    // of that it swells past its size as it lights up, then settles; going
+    // done it dips, the way a stamp presses in.
+    const width = at([PILL_W, CUR_W, PILL_W]);
+    const height = at([PILL_H, CUR_H, PILL_H]);
+    const scale = at([1, 1.05, 1, 0.97, 1], [0, 0.78, 1, 1.62, 2]);
+    const ring = p.interpolate({
+      inputRange: [0, 1, 2],
+      outputRange: [`rgba(${RING_RGB}, 0)`, `rgba(${RING_RGB}, 1)`, `rgba(${RING_RGB}, 0)`],
+      extrapolate: 'clamp',
+    });
 
-  const breatheScale = breath.interpolate({ inputRange: [0, 1], outputRange: [1, 1.1] });
-  const breatheFade = breath.interpolate({ inputRange: [0, 1], outputRange: [1, 0.32] });
+    const breatheScale = breath.interpolate({ inputRange: [0, 1], outputRange: [1, 1.1] });
+    const breatheFade = breath.interpolate({ inputRange: [0, 1], outputRange: [1, 0.32] });
 
-  // The icon never changes — only its colour does, and it does it by
-  // crossfading two copies of the same glyph in place, since a colour on an
-  // icon font is a prop rather than something the driver can interpolate.
-  // Grey while the step is locked, lit from the moment she reaches it and for
-  // good after: a finished step keeps the ornament it was, so the road behind
-  // her reads as a row of different things instead of a column of ticks.
-  const iconDim = at([1, 0, 0], [0, 0.55, 2]);
-  const iconLit = at([0, 1, 1], [0, 0.55, 2]);
+    // Each phase has its own face — pressed-flat oat, rosa clay, manteca clay —
+    // and its own glyph, and they crossfade in place: a gradient and a clay
+    // shadow are not things a driver can interpolate, but their opacity is.
+    const lockedOn = at([1, 0, 0], [0, 0.55, 2]);
+    const currentOn = at([0, 1, 0], [0.45, 1, 1.55]);
+    const doneOn = at([0, 0, 1], [0, 1.45, 2]);
+    return { width, height, scale, ring, breatheScale, breatheFade, lockedOn, currentOn, doneOn };
+  }, [p, breath]);
 
-  const coin = (pressed: boolean) => (
-    <Animated.View style={[styles.nodeBox, { transform: [{ scale }] }]}>
+  const pill = (pressed: boolean) => (
+    <Animated.View
+      style={[
+        styles.pill,
+        { width: anim.width, height: anim.height, transform: [{ scale: anim.scale }] },
+      ]}>
       <Animated.View
         pointerEvents="none"
-        style={[
-          styles.ring,
-          { borderColor: ring, opacity: breatheFade, transform: [{ scale: breatheScale }] },
-        ]}
-      />
+        style={[styles.ringBox, { opacity: anim.breatheFade, transform: [{ scale: anim.breatheScale }] }]}>
+        <Animated.View style={[styles.ring, { borderColor: anim.ring }]} />
+      </Animated.View>
       <Animated.View
         style={[
-          styles.coin,
-          { backgroundColor: face },
-          { transform: [{ scale: pressed ? 0.94 : 1 }] },
+          styles.pillPress,
+          { transform: [{ scale: pressed ? press.scale : 1 }] },
           webTransition,
         ]}>
-        <Animated.View style={[styles.icon, { opacity: iconDim }]}>
-          <StepGlyph icon={stepIcon} color={path.lockedGlyph} />
+        <Animated.View style={[styles.face, styles.faceLocked, { opacity: anim.lockedOn }]} />
+        <Animated.View style={[styles.face, styles.faceLit, { opacity: anim.currentOn }]}>
+          <LinearGradient pointerEvents="none" colors={gradients.deep} style={StyleSheet.absoluteFill} />
         </Animated.View>
-        <Animated.View style={[styles.icon, { opacity: iconLit }]}>
-          <StepGlyph icon={stepIcon} color={colors.onPrimary} />
+        <Animated.View style={[styles.face, styles.faceDone, { opacity: anim.doneOn }]}>
+          <LinearGradient pointerEvents="none" colors={tone.grad} style={StyleSheet.absoluteFill} />
         </Animated.View>
+        {/* The glyphs sit in a clipped layer of their own, so the wide "Start"
+            row is cut to the pill while it grows rather than spilling past it. */}
+        <View pointerEvents="none" style={styles.glyphs}>
+          <Animated.View style={[styles.glyph, { opacity: anim.lockedOn }]}>
+            <MaterialCommunityIcons
+              name={isCheck(kind) ? 'trophy-outline' : 'lock-outline'}
+              size={26}
+              color={path.lockedGlyph}
+            />
+          </Animated.View>
+          <Animated.View style={[styles.glyph, { opacity: anim.doneOn }]}>
+            <MaterialCommunityIcons name="check-bold" size={28} color={tone.ink} />
+          </Animated.View>
+          <Animated.View style={[styles.startRow, { opacity: anim.currentOn }]}>
+            <View style={styles.disc}>
+              <Ionicons name="play" size={26} color={path.litGlyph} style={styles.play} />
+            </View>
+            <View style={styles.startText}>
+              <Text style={styles.startTitle}>Start</Text>
+              <FitText style={styles.startSub} lines={1}>
+                {sub}
+              </FitText>
+            </View>
+          </Animated.View>
+        </View>
       </Animated.View>
       {attempts ? (
-        // Pinned to the coin's corner, outside the row's arithmetic.
+        // Pinned to the pill's corner, outside the row's arithmetic.
         <View style={styles.attempts} pointerEvents="none">
           <Text style={styles.attemptsText}>{attempts}/3</Text>
         </View>
@@ -387,23 +337,8 @@ function PathStep({
     </Animated.View>
   );
 
-  const figure = figureFor(index);
-
   return (
     <View style={styles.step}>
-      {figure ? (
-        <View
-          style={[styles.figureSlot, figure.side === 'left' ? { left: 0 } : { right: 0 }]}
-          pointerEvents="none">
-          <Image
-            source={figure.source}
-            style={{ width: figure.width, height: figure.height }}
-            contentFit="contain"
-            accessible={false}
-          />
-        </View>
-      ) : null}
-
       <View
         style={[
           styles.stepNode,
@@ -416,48 +351,22 @@ function PathStep({
             accessibilityLabel={`Start: ${label}`}
             hitSlop={8}
             style={styles.nodeBox}>
-            {({ pressed }) => coin(pressed)}
+            {({ pressed }) => pill(pressed)}
           </Pressable>
         ) : (
           <View
             style={styles.nodeBox}
             accessible
             accessibilityLabel={`${label}: ${phase === 2 ? 'done' : 'locked'}`}>
-            {coin(false)}
+            {pill(false)}
           </View>
         )}
       </View>
     </View>
   );
-}
+});
 
-// ---------------------------------------------------------------------------
-// SectionBar — the top of the road. The road holds one section, the way
-// Duolingo's does, so the bar says which one and is the way to the map of all
-// of them: tap it and the sections screen opens.
-// ---------------------------------------------------------------------------
-function SectionBar({ section, onPress }: { section: Section; onPress: () => void }) {
-  return (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="button"
-      accessibilityHint="Shows every section of the course"
-      accessibilityLabel={`Section ${section.ordinal}: ${section.title_en}, level ${section.cefr}`}
-      style={({ pressed }) => [styles.sectionBar, { transform: [{ scale: pressed ? 0.98 : 1 }] }, webTransition]}>
-      <View style={styles.sectionLabel}>
-        <Text style={styles.sectionEyebrow}>
-          SECTION {section.ordinal} · {section.cefr}
-        </Text>
-        <Text style={styles.sectionName} numberOfLines={1}>
-          {section.title_en}
-        </Text>
-      </View>
-      <View style={styles.sectionMap}>
-        <Ionicons name="list" size={20} color={colors.primary} />
-      </View>
-    </Pressable>
-  );
-}
+const NO_PATH: PathLesson[] = [];
 
 // ---------------------------------------------------------------------------
 // SectionEnd — where the road stops. It names the section that comes next and,
@@ -476,7 +385,7 @@ function SectionEnd({
   if (!next) {
     return (
       <View style={styles.sectionEnd}>
-        <MaterialCommunityIcons name="white-balance-sunny" size={28} color={colors.primary} />
+        <MaterialCommunityIcons name="white-balance-sunny" size={28} color={colors.accent} />
         <Text style={styles.sectionEndTitle}>That's the whole course, for now</Text>
         <Text style={styles.sectionEndText}>More sections are on the way.</Text>
       </View>
@@ -496,53 +405,110 @@ function SectionEnd({
       ) : onJump ? (
         <Button title="Jump ahead" variant="secondary" onPress={onJump} />
       ) : (
-        <Ionicons name="lock-closed" size={18} color={colors.faint} />
+        <Ionicons name="lock-closed" size={18} color={path.lockedGlyph} />
       )}
     </View>
   );
 }
 
 // ---------------------------------------------------------------------------
-// UnitBanner — the row that opens each unit on the road: which unit, what it's
-// called, and the one line of what it teaches. The unit she is in wears the
-// primary; finished ones keep a tick; the ones ahead stay quiet and locked.
-// A fixed height, like every row on the road, so scrolling to a step stays
-// arithmetic.
+// UnitBanner — the card that opens each unit on the road: which unit, what
+// it's called, the one line of what it teaches, and how far through it she is,
+// with the carpincho in his pod at the corner. Units take the palette in turn
+// (salvia, durazno, lavanda, manteca, rosa), so each one reads as its own
+// place. A fixed height, like every row on the road, so scrolling to a step
+// stays arithmetic.
 // ---------------------------------------------------------------------------
 type UnitState = 'done' | 'current' | 'locked';
 
-function UnitBanner({ lesson, state, onPress }: { lesson: PathLesson; state: UnitState; onPress: () => void }) {
-  const current = state === 'current';
+/** The carpincho on every banner — the same cut-out he waves with elsewhere. */
+const BANNER_ART = require('@/assets/images/capybara/capybara-saludando-figure.webp');
+
+type BannerTone = {
+  grad: readonly [string, string];
+  ink: string;
+  track: string;
+  /** The progress fill; null draws the rosa gradient. */
+  fill: string | null;
+};
+const onTone = (grad: readonly [string, string]): BannerTone => ({ grad, ink: colors.onPastel, track: colors.trough, fill: null });
+/** Units take the palette in turn; a unit's banner and its finished steps share it. */
+const BANNER_TONES: BannerTone[] = [
+  onTone(pastelGrad.sage),
+  onTone(pastelGrad.peach),
+  onTone(pastelGrad.lav),
+  onTone(pastelGrad.butter),
+  // Rosa is the one dark tone: white type, and the fill turns white so it
+  // still shows against the card.
+  { grad: gradients.deep, ink: colors.onPrimary, track: 'rgba(255, 255, 255, 0.22)', fill: colors.onPrimary },
+];
+
+const toneOf = (unit: Unit) => BANNER_TONES[(unit.ordinal - 1) % BANNER_TONES.length];
+
+function UnitBanner({
+  lesson,
+  state,
+  done,
+  total,
+  onPress,
+}: {
+  lesson: PathLesson;
+  state: UnitState;
+  /** Lessons of the unit she has finished, out of `total`. */
+  done: number;
+  total: number;
+  onPress: () => void;
+}) {
   const { unit } = lesson;
+  const tone = toneOf(unit);
+  const share = total > 0 ? done / total : 0;
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [
-        styles.banner,
-        current && styles.bannerCurrent,
-        state === 'locked' && styles.bannerLocked,
-        { transform: [{ scale: pressed ? 0.98 : 1 }] },
-        webTransition,
-      ]}
+      style={({ pressed }) => [styles.banner, { transform: [{ scale: pressed ? press.scale : 1 }] }, webTransition]}
       accessibilityRole="button"
       accessibilityHint="Opens the unit guidebook"
-      accessibilityLabel={`Unit ${unit.ordinal}: ${unit.title_en}. ${unit.summary_en}`}>
-      <View style={styles.bannerText}>
-        <Text style={[styles.bannerEyebrow, current && styles.onPrimaryMuted]}>UNIT {unit.ordinal}</Text>
-        <Text style={[styles.bannerTitle, current && styles.onPrimary]} numberOfLines={1}>
-          {unit.title_en}
-        </Text>
-        <Text style={[styles.bannerSummary, current && styles.onPrimaryMuted]} numberOfLines={1}>
-          {unit.summary_en}
-        </Text>
+      accessibilityLabel={`Unit ${unit.ordinal}: ${unit.title_en}. ${unit.summary_en}. ${done} of ${total} lessons done`}>
+      <LinearGradient pointerEvents="none" colors={tone.grad} style={StyleSheet.absoluteFill} />
+      {/* An inset shadow paints under children; redraw clay's lit edge over the gradient. */}
+      <View pointerEvents="none" style={styles.bannerClay} />
+      <View pointerEvents="none" style={styles.bannerPod} />
+      <Image source={BANNER_ART} style={styles.bannerArt} contentFit="contain" accessible={false} />
+      <View style={styles.bannerBody}>
+        <View style={styles.bannerText}>
+          <View style={styles.bannerEyebrowRow}>
+            {state === 'current' ? null : (
+              <Ionicons name={state === 'done' ? 'checkmark-circle' : 'lock-closed'} size={13} color={tone.ink} />
+            )}
+            <Text style={[styles.bannerEyebrow, { color: tone.ink }]}>Unit {unit.ordinal}</Text>
+          </View>
+          <FitText style={[styles.bannerTitle, { color: tone.ink }]} lines={2}>
+            {unit.title_en}
+          </FitText>
+          <FitText style={[styles.bannerSummary, { color: tone.ink }]} lines={1}>
+            {unit.summary_en}
+          </FitText>
+        </View>
+        <View style={styles.bannerProgress}>
+          <View style={[styles.bannerTrack, { backgroundColor: tone.track }]}>
+            {done > 0 ? (
+              <View
+                style={[
+                  styles.bannerFill,
+                  { width: `${Math.max(share, 0.08) * 100}%` },
+                  tone.fill ? { backgroundColor: tone.fill } : null,
+                ]}>
+                {tone.fill ? null : (
+                  <LinearGradient pointerEvents="none" colors={gradients.deep} style={StyleSheet.absoluteFill} />
+                )}
+              </View>
+            ) : null}
+          </View>
+          <Text style={[styles.bannerCount, { color: tone.ink }]}>
+            {done}/{total}
+          </Text>
+        </View>
       </View>
-      {state === 'done' ? (
-        <Ionicons name="checkmark-circle" size={26} color={colors.primary} />
-      ) : state === 'locked' ? (
-        <Ionicons name="lock-closed" size={17} color={colors.faint} />
-      ) : (
-        <Ionicons name="book-outline" size={20} color={colors.onPrimary} style={{ opacity: 0.85 }} />
-      )}
     </Pressable>
   );
 }
@@ -634,14 +600,14 @@ function PushPrompt({
       {status === 'needs_install' ? (
         <Text style={styles.mutedText}>
           To get reminders on an iPhone, add the app to your home screen first: in Safari tap{' '}
-          <Text style={{ fontWeight: '700' }}>Share</Text> →{' '}
-          <Text style={{ fontWeight: '700' }}>Add to Home Screen</Text>, then open it from there.
+          <Text style={styles.strong}>Share</Text> →{' '}
+          <Text style={styles.strong}>Add to Home Screen</Text>, then open it from there.
         </Text>
       ) : status === 'denied' ? (
         <Text style={styles.mutedText}>
           {Platform.OS === 'web'
             ? 'Notifications are blocked. Switch them on in your browser settings.'
-            : 'Notifications are blocked. Switch them on in Settings → Che → Notifications.'}
+            : 'Notifications are blocked. Switch them on in Settings → Posta → Notifications.'}
         </Text>
       ) : (
         <>
@@ -658,287 +624,6 @@ function PushPrompt({
         </>
       )}
     </Panel>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Loading — while the data is on its way the header keeps its full silhouette
-// in soft grey, and the road's place is held by a faint white star. Everything
-// breathes on the same slow cycle: that is what reads as "coming" rather than
-// "empty".
-// ---------------------------------------------------------------------------
-const SKELETON = path.skeleton;
-
-function Pulse({
-  reduced,
-  style,
-  children,
-}: {
-  reduced: boolean;
-  style?: ViewStyle;
-  children?: ReactNode;
-}) {
-  const glow = useRef(new Animated.Value(0.55)).current;
-  useEffect(() => {
-    if (reduced) {
-      glow.setValue(0.7);
-      return;
-    }
-    const breathe = (to: number) =>
-      Animated.timing(glow, {
-        toValue: to,
-        duration: 750,
-        easing: Easing.inOut(Easing.quad),
-        useNativeDriver: Platform.OS !== 'web',
-      });
-    const loop = Animated.loop(Animated.sequence([breathe(1), breathe(0.55)]));
-    loop.start();
-    return () => loop.stop();
-  }, [glow, reduced]);
-  return <Animated.View style={[{ opacity: glow }, style]}>{children}</Animated.View>;
-}
-
-/** The week's shape before its data: seven grey ghosts holding the row's height. */
-function WeekStripSkeleton({ reduced }: { reduced: boolean }) {
-  return (
-    <View style={styles.week}>
-      {WEEKDAY_INITIALS.map((_, i) => (
-        <View key={i} style={styles.day}>
-          <Pulse reduced={reduced} style={styles.dayLabelGhost} />
-          <Pulse reduced={reduced} style={styles.dayDotGhost} />
-        </View>
-      ))}
-    </View>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// WeekStrip — the seven days of this week, and which of them she finished.
-//
-// The chip says how long the run is; the strip says where it stands right now,
-// which is the thing that decides whether she practises today. A number can be
-// read as "already safe"; a row with a hole in it can't.
-//
-// Finished days fill in; a past day that went unpractised freezes — the same
-// ice the chip wears when the run itself is frozen — and days still ahead
-// stay quiet.
-// ---------------------------------------------------------------------------
-const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-/** The circle's diameter. Small enough that seven of them fit a narrow phone. */
-const DAY_SIZE = 30;
-
-function WeekStrip({
-  week,
-  done,
-  today,
-  reduced,
-}: {
-  /** This week's seven local dates, Monday first. */
-  week: string[];
-  /** Which of them are finished. */
-  done: Set<string>;
-  today: string;
-  reduced: boolean;
-}) {
-  return (
-    <View style={styles.week} accessibilityRole="summary" accessibilityLabel="This week's streak">
-      {week.map((date, i) => (
-        <DayCell
-          key={date}
-          label={WEEKDAY_INITIALS[i]}
-          name={DAY_NAMES[i]}
-          done={done.has(date)}
-          isToday={date === today}
-          past={date < today}
-          reduced={reduced}
-        />
-      ))}
-    </View>
-  );
-}
-
-function DayCell({
-  label,
-  name,
-  done,
-  isToday,
-  past,
-  reduced,
-}: {
-  label: string;
-  name: string;
-  done: boolean;
-  isToday: boolean;
-  past: boolean;
-  reduced: boolean;
-}) {
-  // The day fills in the moment she comes back from the lesson, and that is the
-  // one thing in this row worth a movement: it happens once a day, and it is
-  // the answer to the question the row was asking. A day that was already done
-  // when the screen opened just sits there.
-  const pop = useRef(new Animated.Value(done ? 1 : 0)).current;
-  const wasDone = useRef(done);
-  useEffect(() => {
-    if (done === wasDone.current) return;
-    wasDone.current = done;
-    if (reduced) {
-      pop.setValue(done ? 1 : 0);
-      return;
-    }
-    Animated.spring(pop, {
-      toValue: done ? 1 : 0,
-      friction: 6,
-      tension: 160,
-      useNativeDriver: Platform.OS !== 'web',
-    }).start();
-  }, [done, pop, reduced]);
-
-  // Never from nothing — the circle is already standing there, it only swells
-  // as it fills.
-  const scale = pop.interpolate({ inputRange: [0, 1], outputRange: [0.88, 1] });
-  const state = done ? 'completado' : isToday ? 'pendiente' : past ? 'congelado' : 'por venir';
-
-  return (
-    <View style={styles.day} accessible accessibilityLabel={`${name}: ${state}`}>
-      <Text style={[styles.dayLabel, isToday && styles.dayLabelToday]}>{label}</Text>
-      <Animated.View
-        style={[
-          styles.dayDot,
-          past && !done && styles.dayDotMissed,
-          isToday && !done && styles.dayDotToday,
-          done && styles.dayDotDone,
-          done && { transform: [{ scale }] },
-        ]}>
-        {done ? (
-          <Ionicons name="checkmark" size={17} color={colors.onPrimary} />
-        ) : past ? (
-          <Ionicons name="snow" size={15} color={ICE_INK} />
-        ) : null}
-      </Animated.View>
-    </View>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// HomeHeader — the mascot, her name, her streak. It holds its place while the
-// road scrolls past underneath, so the one line that says who this is for is
-// never more than a glance away.
-// ---------------------------------------------------------------------------
-function HomeHeader({
-  name,
-  isStaff,
-  status,
-  week,
-  weekDone,
-  today,
-  reduced,
-  epoch,
-  topInset,
-  onLogout,
-}: {
-  name: string;
-  /** Reviewers and admins get a sign-out button; learners never need one. */
-  isStaff: boolean;
-  /** Null until the real streak has loaded. */
-  status: StreakStatus | null;
-  /** This week's seven local dates, Monday first. */
-  week: string[];
-  /** Null until the real week has loaded — the strip waits with the chip. */
-  weekDone: string[] | null;
-  today: string;
-  reduced: boolean;
-  /** Bumped to remount the strip, so a day can be put back without un-ticking
-   *  itself on screen (see `show` in Home). */
-  epoch: number;
-  /** The status-bar inset — the header's white paints all the way up under it. */
-  topInset: number;
-  onLogout: () => void;
-}) {
-  return (
-    <View style={[styles.header, { paddingTop: 14 + topInset }]}>
-      <View style={styles.headerTop}>
-        <Image
-          source={require('@/assets/images/capybara-avatar.png')}
-          style={styles.avatar}
-          contentFit="cover"
-          accessible={false}
-        />
-        <Text style={styles.hello} numberOfLines={1}>
-          {name ? `Hi, ${name}!` : 'Hi!'}
-        </Text>
-        {/* A ghost until the count is real — "0 días" flashing into "1 día" is
-            worse than a chip that arrives a moment late. A frozen run turns
-            the chip dark and icy: the old count struck through, the count she
-            is actually standing on beside it. */}
-        {status == null ? (
-          <Pulse reduced={reduced} style={styles.chipGhost} />
-        ) : (
-          status.kind === 'frozen' || status.kind === 'recovering' ? (
-            <View style={[styles.streakChip, styles.streakChipFrozen]}>
-              <Text style={styles.chipFlame}>🧊</Text>
-              <Text style={styles.chipTextFrozen} numberOfLines={1}>
-                <Text style={styles.chipLost}>{status.lost}</Text>
-                {'  '}
-                {status.kind === 'recovering' ? status.days : 0} day streak
-              </Text>
-            </View>
-          ) : (
-            <View style={styles.streakChip}>
-              <Text style={styles.chipFlame}>🔥</Text>
-              <Text style={styles.chipText} numberOfLines={1}>
-                {status.kind === 'alive' ? status.days : 0}{' '}
-                {status.kind === 'alive' && status.days === 1 ? 'day' : 'days'} streak
-              </Text>
-            </View>
-          )
-        )}
-        {/* Only for staff. A learner stays signed in on her phone forever; the
-            only thing a sign-out button could do for her is lock her out by
-            accident. */}
-        {!isStaff ? null : (
-          <Pressable
-            onPress={() => router.push('/admin')}
-            accessibilityRole="button"
-            accessibilityLabel="Course dashboard"
-            hitSlop={8}
-            style={({ pressed }) => [
-              styles.logout,
-              { transform: [{ scale: pressed ? 0.92 : 1 }] },
-              webTransition,
-            ]}>
-            <Ionicons name="construct-outline" size={19} color={colors.muted} />
-          </Pressable>
-        )}
-        {!isStaff ? null : (
-          <Pressable
-            onPress={onLogout}
-            accessibilityRole="button"
-            accessibilityLabel="Sign out"
-            hitSlop={8}
-            style={({ pressed }) => [
-              styles.logout,
-              { transform: [{ scale: pressed ? 0.92 : 1 }] },
-              webTransition,
-            ]}>
-            <Ionicons name="log-out-outline" size={20} color={colors.muted} />
-          </Pressable>
-        )}
-      </View>
-      {/* Its ghost holds the row's height, so nothing below shifts when the
-          real week lands — and seven empty days never flash like a lost week. */}
-      {weekDone ? (
-        <WeekStrip
-          key={epoch}
-          week={week}
-          done={new Set(weekDone)}
-          today={today}
-          reduced={reduced}
-        />
-      ) : (
-        <WeekStripSkeleton reduced={reduced} />
-      )}
-    </View>
   );
 }
 
@@ -1002,12 +687,13 @@ const EASE_SCROLL = Easing.bezier(0.4, 0, 0.2, 1);
 
 export default function Home() {
   const { profile } = useAuth();
-  const insets = useSafeAreaInsets();
+  const focused = useIsFocused();
+  const { limited, paywall } = usePremium();
   /** The section she opened from the sections screen; none means hers. */
   const { section: askedSection } = useLocalSearchParams<{ section?: string }>();
-  // The header is a white card running the full width, so the strip iOS
-  // reserves above it should be that same white and disappear into it.
-  useStatusBarColor(colors.card);
+  // The header sits straight on the oat, so the strip iOS reserves above it
+  // is the page's own colour.
+  useStatusBarColor(colors.bg);
   const [data, setData] = useState<HomeData | null>(null);
   // Null until the browser has answered. The path waits for it along with the
   // rest of the data, so the prompt is there from the first paint instead of
@@ -1030,7 +716,7 @@ export default function Home() {
     if (snap) setEpoch((n) => n + 1);
   }, []);
 
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<FlatList<PathLesson>>(null);
   /** Which unit each step is in, and where its section starts — what `yOf`
    *  counts above it. The road holds one section at a time, so a step's place
    *  is counted from the top of its own section: one header, the units of that
@@ -1039,18 +725,24 @@ export default function Home() {
   const sectionStartOf = useRef<number[]>([]);
   const yOf = useCallback((i: number) => {
     const units = unitIndexOf.current;
-    if (units.length === 0) return stepY(i, 0, 0);
+    if (units.length === 0) return stepY(i, 0);
     const at = Math.min(i, units.length - 1);
     const start = sectionStartOf.current[at] ?? 0;
-    return stepY(i - start, (units[at] ?? 0) - (units[start] ?? 0) + 1, 1);
+    return stepY(i - start, (units[at] ?? 0) - (units[start] ?? 0) + 1);
   }, []);
   /** Where the path starts inside the scroll content, and how tall the window is. */
   const pathTop = useRef(0);
-  /** The path's own DOM node (web) — measured before first paint. */
-  const pathRef = useRef<View>(null);
+  /** Where the first row of the road starts in the list — the header's bottom.
+   *  State, not just a ref: the list's row offsets are counted from it. */
+  const [listTop, setListTop] = useState(0);
+  /** The list's header (web) — the road starts under it, measured before first paint. */
+  const headerRef = useRef<View>(null);
   const viewport = useRef(0);
   /** The road is put in place once, as soon as both measurements exist. */
   const placed = useRef(false);
+  /** The list's content height, once it has one. On native the road is placed
+   *  only after this: iOS clamps a scroll issued before the content is sized. */
+  const contentH = useRef(0);
   /** Which section's road is standing — a different one is placed afresh. */
   const lastRoadKey = useRef<string | null>(null);
   /** When it landed — the hold that keeps her old status readable counts from
@@ -1068,26 +760,28 @@ export default function Home() {
   /** The unit whose guidebook is open. */
   const [guide, setGuide] = useState<Unit | null>(null);
 
+  // Keyed on her id, not the profile object: a profile refetch that changes
+  // nothing must not reload the path.
+  const userId = profile?.id;
   const load = useCallback(async () => {
-    if (!profile) return;
+    if (!userId) return;
     const week = weekDates();
-    const [course, done, counts, streakRes, weekRes, mistakes, checkAttempts] = await Promise.all([
+    const [course, { done, checkAttempts }, counts, streakRes, weekRes, mistakes] = await Promise.all([
       loadCourse(),
-      loadProgress(profile.id),
-      getPracticeCounts(profile.id),
-      supabase.from('streaks').select('*').eq('user_id', profile.id).maybeSingle(),
+      loadLessonProgress(userId),
+      getPracticeCounts(userId),
+      supabase.from('streaks').select('*').eq('user_id', userId).maybeSingle(),
       // This week's completed days, for the strip in the header. Read off
       // `daily_sessions` rather than derived from the streak: a week with a
       // hole in it still has to show the days on either side of the hole.
       supabase
         .from('daily_sessions')
         .select('session_date')
-        .eq('user_id', profile.id)
+        .eq('user_id', userId)
         .gte('session_date', week[0])
         .lte('session_date', week[6])
         .not('completed_at', 'is', null),
-      getMistakeCount(profile.id),
-      loadCheckAttempts(profile.id),
+      getMistakeCount(userId),
     ]);
 
     unitIndexOf.current = course.path.map((l) => l.unitIndex);
@@ -1105,7 +799,7 @@ export default function Home() {
       mistakes,
       checkAttempts,
     });
-  }, [profile]);
+  }, [userId]);
 
   useFocusEffect(
     useCallback(() => {
@@ -1158,14 +852,14 @@ export default function Home() {
       // whose content just changed. The direct write has nothing to drop.
       if (!animated) {
         if (node) node.scrollTop = y;
-        else scrollRef.current?.scrollTo({ y, animated: false });
+        else scrollRef.current?.scrollToOffset({ offset: y, animated: false });
         return;
       }
       // Native has no duration to give — its animated scroll is the platform's
       // and that is fine there. On web the duration is the whole point, so the
       // tween is written a frame at a time onto the node itself.
       if (!node) {
-        scrollRef.current?.scrollTo({ y, animated: true });
+        scrollRef.current?.scrollToOffset({ offset: y, animated: true });
         return;
       }
       const from = node.scrollTop;
@@ -1260,33 +954,40 @@ export default function Home() {
   // scrollTop here means the first frame anyone sees is already in place.
   // Native (and any web miss) still places through onLayout as before.
   useLayoutEffect(() => {
-    if (Platform.OS !== 'web' || placed.current || shown == null) return;
+    if (Platform.OS !== 'web' || placed.current || shown == null || pushStatus == null) return;
+    if (!data?.course.path.length) return;
     const scrollEl = scrollNode();
-    const pathEl = pathRef.current as unknown as HTMLElement | null;
+    const headerEl = headerRef.current as unknown as HTMLElement | null;
     const contentEl = scrollEl?.firstElementChild as HTMLElement | null;
-    if (!scrollEl || !pathEl || !contentEl) return;
+    if (!scrollEl || !headerEl || !contentEl) return;
     viewport.current = scrollEl.clientHeight;
+    // The header ends in the path's own top padding, so the path "starts"
+    // PATH_TOP above where its first row does — what `yOf` counts from.
     pathTop.current =
-      pathEl.getBoundingClientRect().top - contentEl.getBoundingClientRect().top;
+      headerEl.getBoundingClientRect().bottom - contentEl.getBoundingClientRect().top - PATH_TOP;
     placed.current = true;
     placedAt.current = Date.now();
     scrollEl.scrollTop = Math.max(pathTop.current + yOf(shown.lessons) - viewport.current * 0.42, 0);
     if (pendingAdvance.current) requestAnimationFrame(advance);
-  }, [shown, pushStatus, advance, scrollNode, yOf]);
-
-  if (!profile) return null;
-  const isStaff = profile.role !== 'student';
-  // Re-derived on every render rather than held in state: the screen reloads on
-  // focus, so a phone left open past midnight comes back to the right week.
-  const todayDate = localDateStr();
-  const thisWeek = weekDates();
+  }, [shown, pushStatus, data, askedSection, advance, scrollNode, yOf]);
 
   // ------------------------------------------------------------------
   // Path layout. Every lesson of the course is a coin; the road is drawn from
   // what is *shown*, which lags the data by the length of the advance — that
   // lag is the animation.
   // ------------------------------------------------------------------
-  const path = data?.course.path ?? [];
+  const path = data?.course.path ?? NO_PATH;
+  /** Each unit's last step on the road, so a banner's state is a lookup
+   *  rather than a pass over the whole course. Above the early return: it is
+   *  a hook. */
+  const unitLastIndex = useMemo(() => {
+    const last = new Map<string, number>();
+    for (const l of path) last.set(l.unit_id, l.index);
+    return last;
+  }, [path]);
+
+  if (!profile) return null;
+
   const noCourse = data != null && path.length === 0;
   const current = shown?.lessons ?? 0;
 
@@ -1306,20 +1007,36 @@ export default function Home() {
   if (lastRoadKey.current !== roadKey) {
     lastRoadKey.current = roadKey;
     placed.current = false;
+    contentH.current = 0;
   }
   const openSection = (id: number) => router.setParams({ section: String(id) });
+  /** The road itself is standing, not the loading sun or the empty note. */
+  const roadReady = shown != null && pushStatus != null && !noCourse && road.length > 0;
+  /** A row is a step, with its unit's banner above it when it opens one — so
+   *  its place is the step's, less what stands on it. */
+  const rowAbove = (lesson: PathLesson) => (lesson.opensUnit ? BANNER_PITCH : 0);
+  const rowLayout = (rows: ArrayLike<PathLesson> | null | undefined, i: number) => {
+    const lesson = rows![i];
+    const above = rowAbove(lesson);
+    return { length: above + STEP_PITCH, offset: listTop - PATH_TOP + yOf(lesson.index) - above, index: i };
+  };
 
   const phaseOf = (i: number): Phase => (i < current ? 2 : i === current ? 1 : 0);
   const unitStateOf = (lesson: PathLesson): UnitState => {
-    const unitLessons = path.filter((l) => l.unit_id === lesson.unit_id);
-    const last = unitLessons[unitLessons.length - 1]?.index ?? lesson.index;
+    const last = unitLastIndex.get(lesson.unit_id) ?? lesson.index;
     return current > last ? 'done' : current >= lesson.index ? 'current' : 'locked';
+  };
+  /** How far through a unit she is, from the unit's first step on the road. */
+  const unitProgressOf = (lesson: PathLesson) => {
+    const total = (unitLastIndex.get(lesson.unit_id) ?? lesson.index) - lesson.index + 1;
+    return { total, done: Math.min(Math.max(current - lesson.index, 0), total) };
   };
 
   // Land with the step in view, path history above it — on her old step if a
   // move is about to play, so she sees it happen rather than arriving after it.
   const place = () => {
-    if (placed.current || viewport.current === 0 || pathTop.current === 0) return;
+    if (!roadReady || placed.current || viewport.current === 0 || pathTop.current === 0) return;
+    if (Platform.OS !== 'web' && contentH.current === 0) return;
     placed.current = true;
     placedAt.current = Date.now();
     // Her own step when it is on this road; the top of the section otherwise.
@@ -1342,8 +1059,12 @@ export default function Home() {
     }
   };
 
+  // The free tier is the first units of the road; a step past them opens the
+  // paywall instead, at the moment she is reaching for more.
   const startLesson = (lesson: PathLesson) =>
-    lesson.kind === 'story'
+    limited && lesson.unitIndex >= FREE_UNITS
+      ? paywall('lesson')
+      : lesson.kind === 'story'
       ? router.push(`/story?lesson=${lesson.id}`)
       : router.push(`/practice?lesson=${lesson.id}`);
 
@@ -1371,32 +1092,46 @@ export default function Home() {
     return target ? { units: jumpSpan(target), onPress: () => jumpTo(target) } : null;
   })();
 
-  const logout = async () => {
-    await supabase.auth.signOut();
-    router.replace('/login');
-  };
-
   return (
     <View style={styles.safe}>
       {/* The header is a sibling of the scroller, not its first row: it holds
           its place while the road runs past underneath. The top inset lives
           inside it, so its white reaches up under the status bar instead of
           the page colour showing through a padded band. */}
-      <HomeHeader
-        name={profile.display_name}
-        isStaff={isStaff}
+      {/* On Course the title's place is taken by the section she is on — the
+          same way into the map of sections as the bar atop the road. */}
+      <AppHeader
+        title="Course"
+        pill={
+          viewed
+            ? {
+                label: `Course · Section ${viewed.section.ordinal}`,
+                onPress: () => router.push('/sections'),
+                accessibilityLabel: `Section ${viewed.section.ordinal}: ${viewed.section.title_en}, level ${viewed.section.cefr}`,
+                accessibilityHint: 'Shows every section of the course',
+              }
+            : null
+        }
         status={shown?.streak ?? null}
-        week={thisWeek}
         weekDone={shown?.weekDone ?? null}
-        today={todayDate}
-        reduced={reduced}
         epoch={epoch}
-        topInset={insets.top}
-        onLogout={logout}
       />
 
-      <ScrollView
+      <FlatList
+        // A new section is a new list, opened on its own step.
+        key={`road:${roadKey}`}
         ref={scrollRef}
+        data={roadReady ? road : NO_PATH}
+        keyExtractor={(lesson) => `${epoch}:${lesson.id}`}
+        extraData={shown}
+        getItemLayout={rowLayout}
+        // A section is a few hundred rows; only the ones near the screen are
+        // mounted. Rows are exact, so a jump anywhere lands without measuring.
+        initialNumToRender={14}
+        maxToRenderPerBatch={10}
+        windowSize={7}
+        // Figures stand past their row's edges; nothing may clip them.
+        removeClippedSubviews={false}
         contentContainerStyle={styles.container}
         scrollEventThrottle={16}
         onLayout={(e) => {
@@ -1416,74 +1151,90 @@ export default function Home() {
             setJump(next);
           }
         }}
-        onContentSizeChange={place}>
-        {pushStatus ? (
-          <PushPrompt
-            userId={profile.id}
-            status={pushStatus}
-            onStatus={(s) => {
-              lastPushStatus = s;
-              setPushStatus(s);
-            }}
-          />
-        ) : null}
-
-        {data && data.current === 0 && data.known === 0 && !noCourse ? (
-          <Panel style={styles.placement}>
-            <Text style={styles.sectionTitle}>Already know some Spanish?</Text>
-            <Text style={styles.mutedText}>
-              A short test finds where you should start, so you don&apos;t sit through what you know.
-            </Text>
-            <Button title="Take the placement test" variant="secondary" onPress={() => router.push('/practice?test=placement')} />
-          </Panel>
-        ) : null}
-
-        {shown == null || pushStatus == null ? (
-          // The road's place, held by a sun instead of a spinner: white on the
-          // bone, present but barely, until the real path stands here.
-          <View key="loading" style={styles.pathLoading}>
-            <Pulse reduced={reduced} style={styles.pathLoadingStar}>
-              <MaterialCommunityIcons name="white-balance-sunny" size={124} color={colors.card} />
-            </Pulse>
-          </View>
-        ) : noCourse ? (
-          <Panel key="empty">
-            <Text style={styles.mutedText}>No lessons published yet.</Text>
-          </Panel>
-        ) : (
-          // Keyed so React can never recycle the loading view's DOM node into
-          // this one: react-native-web only wires onLayout's ResizeObserver when
-          // a node mounts, so a recycled node keeps the handler but never gets
-          // observed — onLayout goes silent, pathTop stays unmeasured, and the
-          // road opens at the top instead of on her step.
+        onContentSizeChange={(_, h) => {
+          contentH.current = h;
+          place();
+        }}
+        ListHeaderComponent={
+          // Everything above the road, ending in the road's own top padding —
+          // a spacer rather than padding, so the gap before it only appears
+          // when something stands above it, as it did when this was a column.
           <View
-            key={`path:${roadKey}`}
-            ref={pathRef}
-            style={styles.path}
+            ref={headerRef}
+            style={styles.header}
             onLayout={(e) => {
-              pathTop.current = e.nativeEvent.layout.y;
+              // The list wraps its header in a view of its own at the very top
+              // of the content, so the header's height is where the road starts.
+              const { height } = e.nativeEvent.layout;
+              pathTop.current = height - PATH_TOP;
+              setListTop(height);
               place();
             }}>
-            {road.map((lesson) => (
-              <Fragment key={`${epoch}:${lesson.id}`}>
-                {lesson.opensSection ? (
-                  <SectionBar section={lesson.section} onPress={() => router.push('/sections')} />
-                ) : null}
-                {lesson.opensUnit ? (
-                  <UnitBanner lesson={lesson} state={unitStateOf(lesson)} onPress={() => setGuide(lesson.unit)} />
-                ) : null}
-                <PathStep
-                  index={lesson.index}
-                  phase={phaseOf(lesson.index)}
-                  reduced={reduced}
-                  kind={lesson.kind}
-                  attempts={data?.checkAttempts.get(lesson.id)}
-                  label={`${lesson.title_en} · ${lesson.unit.title_en}`}
-                  onPress={lesson.index === current ? () => startLesson(lesson) : undefined}
-                />
-              </Fragment>
-            ))}
-            {viewed ? (
+            {pushStatus ? (
+              <PushPrompt
+                userId={profile.id}
+                status={pushStatus}
+                onStatus={(s) => {
+                  lastPushStatus = s;
+                  setPushStatus(s);
+                }}
+              />
+            ) : null}
+
+            {data && data.current === 0 && data.known === 0 && !noCourse ? (
+              <Panel style={styles.placement}>
+                <Text style={styles.sectionTitle}>Already know some Spanish?</Text>
+                <Text style={styles.mutedText}>
+                  A short test finds where you should start, so you don&apos;t sit through what you know.
+                </Text>
+                <Button title="Take the placement test" variant="secondary" onPress={() => router.push('/practice?test=placement')} />
+              </Panel>
+            ) : null}
+            <View style={styles.pathTop} />
+          </View>
+        }
+        ListEmptyComponent={
+          noCourse ? (
+            <Panel>
+              <Text style={styles.mutedText}>No lessons published yet.</Text>
+            </Panel>
+          ) : (
+            // The road's place, held by a sun instead of a spinner: clay white on
+            // the oat, present but barely, until the real path stands here.
+            <View style={styles.pathLoading}>
+              <Pulse reduced={reduced} style={styles.pathLoadingStar}>
+                <MaterialCommunityIcons name="white-balance-sunny" size={124} color={colors.card} />
+              </Pulse>
+            </View>
+          )
+        }
+        renderItem={({ item: lesson }) => (
+          <>
+            {lesson.opensUnit ? (
+              <UnitBanner
+                lesson={lesson}
+                state={unitStateOf(lesson)}
+                {...unitProgressOf(lesson)}
+                onPress={() => setGuide(lesson.unit)}
+              />
+            ) : null}
+            <PathStep
+              index={lesson.index}
+              phase={phaseOf(lesson.index)}
+              reduced={reduced}
+              breathe={focused}
+              kind={lesson.kind}
+              sub={KIND_LABEL[lesson.kind] ?? `Lesson ${lesson.ordinal}`}
+              attempts={data?.checkAttempts.get(lesson.id)}
+              tone={toneOf(lesson.unit)}
+              label={`${lesson.title_en} · ${lesson.unit.title_en}`}
+              onPress={lesson.index === current ? () => startLesson(lesson) : undefined}
+            />
+          </>
+        )}
+        ListFooterComponent={
+          roadReady && viewed ? (
+            <View style={styles.pathEnd}>
               <SectionEnd
                 next={nextSection}
                 onOpen={nextSection && nextSection.state !== 'locked' ? () => openSection(nextSection.section.id) : undefined}
@@ -1493,10 +1244,10 @@ export default function Home() {
                     : undefined
                 }
               />
-            ) : null}
-          </View>
-        )}
-      </ScrollView>
+            </View>
+          ) : null
+        }
+      />
 
       {!noCourse && (data?.mistakes ?? 0) > 0 ? (
         <MistakesButton
@@ -1538,11 +1289,11 @@ function MistakesButton({ mistakes, onPress }: { mistakes: number; onPress: () =
         style={({ pressed }) => [
           styles.practice,
           styles.mistakes,
-          { transform: [{ scale: pressed ? 0.94 : 1 }] },
+          { transform: [{ scale: pressed ? press.scale : 1 }] },
           webTransition,
         ]}>
-        <Ionicons name="refresh" size={18} color={colors.accent} />
-        <Text style={[styles.practiceText, { color: colors.accent }]}>Mistakes</Text>
+        <Ionicons name="refresh" size={18} color={colors.onPastel} />
+        <Text style={styles.practiceText}>Mistakes</Text>
         <Text style={styles.mistakesCount}>{mistakes > 99 ? '99+' : mistakes}</Text>
       </Pressable>
     </View>
@@ -1602,7 +1353,7 @@ function JumpButton({
         hitSlop={10}
         style={({ pressed }) => [
           styles.jump,
-          { transform: [{ scale: pressed ? 0.94 : 1 }] },
+          { transform: [{ scale: pressed ? press.scale : 1 }] },
           webTransition,
         ]}>
         <Ionicons
@@ -1615,103 +1366,14 @@ function JumpButton({
   );
 }
 
+/** Covers its parent — spread into the styles that layer the pill's faces. */
+const FILL = { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 } as const;
+
 const styles = StyleSheet.create({
   safe: { flex: 1 },
-  container: { padding: 20, gap: 16, maxWidth: 560, width: '100%', alignSelf: 'center' },
-
-  // Header ------------------------------------------------------------------
-  header: {
-    gap: 14,
-    paddingHorizontal: 20,
-    paddingTop: 14,
-    paddingBottom: 12,
-    backgroundColor: colors.card,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-    ...shadow.card,
-    // The road passes beneath it; the shadow has to land on top of the road.
-    zIndex: 2,
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: colors.primary,
-    backgroundColor: colors.primarySoft,
-  },
-  headerTop: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: 12,
-  },
-  hello: { flex: 1, fontSize: 20, fontWeight: '700', color: colors.ink, letterSpacing: -0.3 },
-  streakChip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    borderRadius: radius.pill,
-    backgroundColor: colors.primarySoft,
-  },
-  chipFlame: { fontSize: 15 },
-  chipText: { fontSize: 15, fontWeight: '700', color: colors.primaryDark },
-  chipGhost: { width: 132, height: 33, borderRadius: radius.pill, backgroundColor: SKELETON },
-  streakChipFrozen: { backgroundColor: FROZEN_BG },
-  chipTextFrozen: { fontSize: 15, fontWeight: '700', color: frost.chipText },
-  /** The count she lost — still legible, visibly crossed out. */
-  chipLost: {
-    color: frost.chipSub,
-    textDecorationLine: 'line-through',
-  },
-  logout: {
-    width: 36,
-    height: 36,
-    borderRadius: radius.pill,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  // The week --------------------------------------------------------------
-  // A tray inset into the white header, so the seven days read as one object
-  // rather than as seven loose dots.
-  week: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 8,
-    paddingVertical: 8,
-    borderRadius: radius.lg,
-    backgroundColor: colors.bg,
-    maxWidth: 420,
-    width: '100%',
-    alignSelf: 'center',
-  },
-  day: { flex: 1, alignItems: 'center', gap: 5 },
-  dayLabel: { fontSize: 11, fontWeight: '700', color: colors.faint, letterSpacing: 0.4 },
-  dayLabelToday: { color: colors.primary },
-  dayDot: {
-    width: DAY_SIZE,
-    height: DAY_SIZE,
-    borderRadius: radius.pill,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // The days still ahead: present, but barely — nothing has happened yet.
-    backgroundColor: path.dayAhead,
-  },
-  /** A day that went by unpractised: frozen over. */
-  dayDotMissed: { backgroundColor: ICE_FACE },
-  /** Today, still open: an empty ring, waiting to be filled. */
-  dayDotToday: { backgroundColor: colors.card, borderWidth: 2, borderColor: colors.primary },
-  dayDotDone: { backgroundColor: colors.primary },
-  dayLabelGhost: { width: 12, height: 11, borderRadius: 4, backgroundColor: SKELETON },
-  dayDotGhost: {
-    width: DAY_SIZE,
-    height: DAY_SIZE,
-    borderRadius: radius.pill,
-    backgroundColor: SKELETON,
-  },
+  // No gap: the list's children are its rows, whose spacing is their own. No
+  // top padding either — the header carries it, so its height is the road's top.
+  container: { paddingHorizontal: 20, paddingBottom: 20, maxWidth: 560, width: '100%', alignSelf: 'center' },
 
   // The road, before there is a road ----------------------------------------
   pathLoading: { alignItems: 'center', paddingVertical: 130 },
@@ -1720,50 +1382,21 @@ const styles = StyleSheet.create({
   // Back to her step --------------------------------------------------------
   jumpSlot: { position: 'absolute', right: 18, bottom: 18 },
   jump: {
-    width: 46,
-    height: 46,
+    width: 48,
+    height: 48,
     borderRadius: radius.pill,
     backgroundColor: colors.card,
-    borderWidth: 1.5,
-    borderColor: colors.border,
     alignItems: 'center',
     justifyContent: 'center',
-    ...shadow.card,
+    boxShadow: clay.surface,
   },
-  sectionTitle: { fontSize: 17, fontWeight: '700', color: colors.ink },
-  mutedText: { fontSize: 15, color: colors.muted, lineHeight: 21 },
-  errorText: { fontSize: 14, color: colors.dangerInk, lineHeight: 20 },
+  sectionTitle: { ...font.display[700], fontSize: 19, color: colors.ink, letterSpacing: -0.2 },
+  mutedText: { ...font.body[600], fontSize: 15, color: colors.muted, lineHeight: 21 },
+  strong: { ...font.body[800] },
+  errorText: { ...font.body[600], fontSize: 14, color: colors.dangerInk, lineHeight: 20 },
 
-  // Unit banners -------------------------------------------------------------
-  sectionBar: {
-    height: SECTION_H,
-    marginBottom: SECTION_GAP,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    paddingLeft: 16,
-    paddingRight: 10,
-    borderRadius: radius.lg,
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-  sectionLabel: { flex: 1, gap: 2 },
-  sectionEyebrow: {
-    fontSize: 11,
-    fontWeight: '800',
-    letterSpacing: 1.2,
-    color: colors.faint,
-  },
-  sectionName: { fontSize: 17, fontWeight: '800', color: colors.ink, letterSpacing: -0.2 },
-  sectionMap: {
-    width: 40,
-    height: 40,
-    borderRadius: radius.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.primarySoft,
-  },
+  // Section end --------------------------------------------------------------
+  sectionEyebrow: { ...font.body[800], fontSize: 11, letterSpacing: 1.2, color: colors.muted },
   sectionEnd: {
     marginTop: 8,
     // Clear of the floating tab bar and the Mistakes button, which both sit
@@ -1772,51 +1405,85 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
     padding: 22,
-    borderRadius: radius.lg,
-    borderWidth: 1,
-    borderStyle: 'dashed',
-    borderColor: colors.border,
+    borderRadius: radius.xl,
+    backgroundColor: colors.card,
+    boxShadow: clay.surface,
   },
-  sectionEndTitle: { fontSize: 20, fontWeight: '800', color: colors.ink, textAlign: 'center', letterSpacing: -0.2 },
-  sectionEndText: { fontSize: 14, color: colors.muted, textAlign: 'center', marginBottom: 6 },
+  sectionEndTitle: {
+    ...font.display[800],
+    fontSize: 22,
+    lineHeight: 25,
+    color: colors.ink,
+    textAlign: 'center',
+    letterSpacing: -0.3,
+  },
+  sectionEndText: { ...font.body[600], fontSize: 14, color: colors.muted, textAlign: 'center', marginBottom: 6 },
+
+  // Unit banners -------------------------------------------------------------
   banner: {
     height: BANNER_H,
     marginBottom: BANNER_GAP,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    paddingHorizontal: 16,
-    borderRadius: radius.lg,
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
+    borderRadius: radius.xl,
     overflow: 'hidden',
-    ...shadow.card,
+    boxShadow: clay.surface,
   },
-  bannerCurrent: { backgroundColor: colors.primary, borderColor: colors.primaryDark },
-  bannerLocked: { backgroundColor: colors.bg, shadowOpacity: 0, elevation: 0 },
-  bannerText: { flex: 1, gap: 1 },
-  bannerEyebrow: { fontSize: 11, lineHeight: 14, fontWeight: '700', letterSpacing: 1.2, color: colors.faint },
-  bannerTitle: { fontSize: 18, lineHeight: 23, fontWeight: '700', color: colors.ink, letterSpacing: -0.2 },
-  bannerSummary: { fontSize: 13, lineHeight: 17, color: colors.muted },
-  onPrimary: { color: colors.onPrimary },
-  onPrimaryMuted: { color: colors.onPrimary, opacity: 0.78 },
+  bannerClay: {
+    ...FILL,
+    borderRadius: radius.xl,
+    boxShadow: 'inset 2px 3px 0 rgba(255,255,255,0.4), inset -3px -5px 10px rgba(120,70,40,0.10)',
+  },
+  /** The text stops short of the carpincho's pod. */
+  bannerBody: { flex: 1, justifyContent: 'space-between', padding: 20, paddingRight: 150 },
+  bannerText: { gap: 2 },
+  bannerEyebrowRow: { flexDirection: 'row', alignItems: 'center', gap: 5 },
+  bannerEyebrow: { ...font.body[800], fontSize: 13, lineHeight: 17, opacity: 0.8 },
+  bannerTitle: { ...font.display[800], fontSize: 30, lineHeight: 31, letterSpacing: -0.5 },
+  bannerSummary: { ...font.body[700], fontSize: 16, lineHeight: 20, opacity: 0.85 },
+  bannerProgress: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  bannerTrack: {
+    flex: 1,
+    height: 16,
+    borderRadius: radius.pill,
+    boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.12)',
+    overflow: 'hidden',
+  },
+  bannerFill: {
+    height: '100%',
+    borderRadius: radius.pill,
+    overflow: 'hidden',
+    boxShadow: 'inset 0 2px 0 rgba(255,255,255,0.35)',
+  },
+  bannerCount: { ...font.body[800], fontSize: 13, fontVariant: ['tabular-nums'] },
+  /** The soft white disc the carpincho stands in, half off the corner. */
+  bannerPod: {
+    position: 'absolute',
+    right: -18,
+    bottom: -26,
+    width: 170,
+    height: 170,
+    borderRadius: 85,
+    backgroundColor: colors.pod,
+    boxShadow: clay.surface,
+  },
+  bannerArt: { position: 'absolute', right: 10, bottom: -8, width: 110, height: 160 },
 
   // Practice ---------------------------------------------------------------
   practiceSlot: { position: 'absolute', left: 18, bottom: 18, gap: 10, alignItems: 'flex-start' },
-  mistakes: { height: 40, paddingLeft: 12, paddingRight: 14, gap: 6 },
-  mistakesCount: { fontSize: 13, fontWeight: '800', color: colors.accent, fontVariant: ['tabular-nums'] },
+  /** Durazno: "needs going over", not "wrong". */
+  mistakes: { height: 46, paddingLeft: 14, paddingRight: 16, gap: 6, backgroundColor: pastel.peach },
+  mistakesCount: { ...font.body[800], fontSize: 13, color: colors.onPastel, fontVariant: ['tabular-nums'] },
   placement: { gap: 10 },
   attempts: {
     position: 'absolute',
-    right: 0,
-    top: 2,
-    paddingHorizontal: 6,
+    right: -8,
+    top: -6,
+    paddingHorizontal: 7,
     paddingVertical: 2,
     borderRadius: radius.pill,
-    backgroundColor: colors.accent,
+    backgroundColor: pastel.peach,
+    boxShadow: clay.surface,
   },
-  attemptsText: { fontSize: 11, fontWeight: '800', color: colors.onPrimary, fontVariant: ['tabular-nums'] },
+  attemptsText: { ...font.body[800], fontSize: 11, color: colors.onPastel, fontVariant: ['tabular-nums'] },
   practice: {
     height: 46,
     flexDirection: 'row',
@@ -1826,49 +1493,73 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     borderRadius: radius.pill,
     backgroundColor: colors.card,
-    borderWidth: 1.5,
-    borderColor: colors.border,
-    ...shadow.card,
+    boxShadow: clay.surface,
   },
-  practiceText: { fontSize: 15, fontWeight: '700', color: colors.primaryDark },
+  practiceText: { ...font.body[800], fontSize: 15, color: colors.onPastel },
 
   // Path -------------------------------------------------------------------
-  path: {
-    paddingTop: PATH_TOP,
-    paddingBottom: 6,
-  },
+  // The list's content is no longer one column with a gap, so the header keeps
+  // the gap itself, and the road's top and bottom padding are their own pieces.
+  header: { gap: 16, paddingTop: 20 },
+  pathTop: { height: PATH_TOP },
+  pathEnd: { paddingBottom: 6 },
   step: { alignItems: 'center', alignSelf: 'stretch', marginBottom: STEP_GAP },
   stepNode: { alignItems: 'center' },
-  /** Full-height slot pinned to one edge of the row, figure centred in it. */
-  figureSlot: { position: 'absolute', top: 0, bottom: 0, justifyContent: 'center' },
-  /** Fixed whatever the node's phase — the current step grows by scaling,
+  /** Fixed whatever the node's phase — the current step grows inside it,
    *  so the road's spacing never shifts under an animation. */
-  nodeBox: { width: BOX, height: BOX, alignItems: 'center', justifyContent: 'center' },
-  /** Sits around the coin rather than wrapping it, so it can breathe alone. */
+  nodeBox: { width: BOX_W, height: BOX, alignItems: 'center', justifyContent: 'center' },
+  /** The pill's own box; its size is animated, its faces fill it. */
+  pill: { alignItems: 'center', justifyContent: 'center' },
+  pillPress: { ...FILL },
+  /** Sits around the pill rather than wrapping it, so it can breathe alone. */
+  ringBox: {
+    position: 'absolute',
+    top: -RING_OUT,
+    left: -RING_OUT,
+    right: -RING_OUT,
+    bottom: -RING_OUT,
+  },
   ring: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    borderRadius: 999,
+    borderRadius: radius.pill,
     borderWidth: RING_BORDER,
   },
-  coin: {
-    width: NODE,
-    height: NODE,
-    borderRadius: NODE / 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: COIN_SHADOW,
-  },
-  icon: {
+  face: { ...FILL, borderRadius: radius.pill, overflow: 'hidden' },
+  faceLocked: { backgroundColor: path.lockedFace, boxShadow: clay.flat },
+  faceLit: { boxShadow: path.coinShadow },
+  faceDone: { boxShadow: clay.surface },
+  glyphs: { ...FILL, borderRadius: radius.pill, overflow: 'hidden' },
+  glyph: { ...FILL, alignItems: 'center', justifyContent: 'center' },
+  /** Laid out at the current pill's full width, left-anchored, so it never
+   *  reflows while the pill grows around it. */
+  startRow: {
     position: 'absolute',
     top: 0,
-    left: 0,
-    right: 0,
     bottom: 0,
+    left: 0,
+    width: CUR_W,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    paddingLeft: (CUR_H - DISC) / 2,
+    paddingRight: 16,
+  },
+  disc: {
+    width: DISC,
+    height: DISC,
+    borderRadius: DISC / 2,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.18)',
+    boxShadow: 'inset 0 2px 0 rgba(255, 255, 255, 0.3)',
   },
+  /** Nudged right: a play triangle's weight sits left of its box. */
+  play: { marginLeft: 3 },
+  startText: { flex: 1 },
+  startTitle: { ...font.display[800], fontSize: 22, lineHeight: 24, color: path.litGlyph },
+  startSub: { ...font.body[700], fontSize: 13, lineHeight: 17, color: path.litGlyph, opacity: 0.9 },
 });

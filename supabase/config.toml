@@ -10,11 +10,14 @@ enable_signup = true
 enable_signup = true
 enable_confirmations = false
 
-[functions.generate-exercises]
-verify_jwt = false
-
 [functions.send-reminder]
 verify_jwt = false
 
 [functions.vapid-public]
+verify_jwt = false
+
+[functions.hablar-retention]
+verify_jwt = false
+
+[functions.revenuecat-webhook]
 verify_jwt = false

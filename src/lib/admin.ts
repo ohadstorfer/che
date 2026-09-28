@@ -1,4 +1,5 @@
 import { answerWords } from './answers';
+import { clearContentCache } from './content-cache';
 import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { ContentStatus, Form, Lesson, LessonSlot, Section, Tip, Unit } from './types';
@@ -52,6 +53,7 @@ export async function staffUpdate<T = Row>(table: string, id: string, patch: Row
   const { data, error } = await supabase.from(table).update(patch).eq('id', id).select().single();
   if (error) throw new Error(error.message);
   await revision(table, id, (before as Row) ?? null, data as Row, opts);
+  clearContentCache();
   return data as T;
 }
 
@@ -59,6 +61,7 @@ export async function staffInsert<T = Row>(table: string, row: Row, opts?: Write
   const { data, error } = await supabase.from(table).insert(row).select().single();
   if (error) throw new Error(error.message);
   await revision(table, (data as Row).id as string, null, data as Row, opts);
+  clearContentCache();
   return data as T;
 }
 

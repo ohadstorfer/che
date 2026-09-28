@@ -52,7 +52,7 @@ units:
     register_max: "informal"
     sample:
       es: "Un café y una medialuna, por favor."
-      en: "A coffee and a croissant, please."
+      en: "A coffee and a medialuna, please."
     tips:
       - title: "Un café, por favor"
         body: "The shortest way to order anything: name it and add **por favor**. *Un café, por favor.* *Una
@@ -97,7 +97,7 @@ units:
         note: "the drink"
       - lemma: "medialuna"
         pos: "noun"
-        en: "croissant"
+        en: "medialuna"
         forms:
           - form: "medialuna"
             f: "f.sg"
@@ -1522,7 +1522,7 @@ units:
     register_max: "informal"
     sample:
       es: "Dos medialunas y dos empanadas, por favor."
-      en: "Two croissants and two empanadas, please."
+      en: "Two medialunas and two empanadas, please."
     tips:
       - title: "More than one"
         body: "Add **-s** after a vowel (*medialuna → medialunas*) and **-es** after a consonant. The word
@@ -1563,7 +1563,7 @@ units:
         pos: "noun"
         forms:
           - form: "medialunas"
-            en: "croissants"
+            en: "medialunas"
             f: "f.pl"
       - lemma: "factura"
         pos: "noun"

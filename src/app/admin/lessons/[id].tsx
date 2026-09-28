@@ -5,7 +5,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { AdminScreen, Muted, RowLink, Section, SmallButton, StatusPill, adminStyles } from '@/components/admin';
 import { type UnitDetail, loadUnit, staffDeleteSlot, staffInsert, staffUpdate } from '@/lib/admin';
 import { supabase } from '@/lib/supabase';
-import { colors, radius } from '@/lib/theme';
+import { colors, font, radius } from '@/lib/theme';
 import type { Lesson, LessonSlot, SlotKind } from '@/lib/types';
 
 // ---------------------------------------------------------------------------
@@ -154,7 +154,7 @@ export default function AdminLesson() {
         {slots.map((s, i) => (
           <RowLink key={s.id}>
             <Text style={[adminStyles.num, { minWidth: 24, textAlign: 'left' }]}>{s.ordinal}</Text>
-            <Text style={[adminStyles.cellEs, adminStyles.cellGrow, { fontWeight: '600' }]}>{describe(s)}</Text>
+            <Text style={[adminStyles.cellEs, adminStyles.cellGrow, { ...font.body[600] }]}>{describe(s)}</Text>
             {s.kind === 'drill' ? (
               <View style={adminStyles.wrap}>
                 {DRILL_MODES.map((m) => (

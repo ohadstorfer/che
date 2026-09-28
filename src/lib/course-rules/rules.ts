@@ -66,6 +66,10 @@ export const TUTEO = new Set([
   'desayunas', 'almuerzas', 'acuestas', 'levantas', 'bañas', 'traes',
   // tú imperatives that are nothing else
   'haz', 'ten', 'pon', 'siéntate', 'fíjate', 'dime', 'espérame', 'escúchame', 'mírame',
+  'dilo', 'dila', 'dile', 'diles', 'dímelo', 'díselo', 'hazlo', 'hazme', 'ponlo', 'ponte', 'tenlo',
+  'pruébalo', 'escúchalo', 'míralo', 'repítelo', 'dámelo', 'pásamelo', 'tráemelo', 'cuéntame',
+  // usted: Argentina says vos to everyone, so the formal forms never appear either
+  'usted', 'dígame', 'dígale', 'siéntese', 'disculpe', 'discúlpeme', 'perdone', 'perdóneme', 'oiga', 'fíjese', 'quédese', 'tráigame', 'cuénteme', 'hágame', 'póngase', 'pásemelo', 'acérquese',
   // vosotros verbs
   'sois', 'tenéis', 'queréis', 'podéis', 'vais', 'habláis', 'coméis', 'estáis', 'hacéis',
   // vosotros past

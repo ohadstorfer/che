@@ -26,6 +26,13 @@ export default function AdminHome() {
 
   return (
     <AdminScreen title="Units" subtitle={units ? `${units.length} units · ${toReview} sentences waiting for review` : 'Loading…'}>
+      <Section title="Testing">
+        <RowLink onPress={() => router.push('/onboarding?replay=1')}>
+          <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>Replay onboarding</Text>
+          <Muted>Questions, plan and paywall, as a new learner sees them. Your account is not changed.</Muted>
+        </RowLink>
+      </Section>
+
       <Section title="Needs attention">
         {!attention ? (
           <Muted>Loading…</Muted>

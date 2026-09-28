@@ -1,9 +1,9 @@
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { createContext, useContext, useState } from 'react';
 import { ActivityIndicator, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import type { QueueItem } from '@/lib/round';
-import { colors, press, radius } from '@/lib/theme';
+import { clay, colors, font, press, radius } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
 // Under a wrong answer: "My answer should be accepted" (learning-engine-spec
@@ -126,22 +126,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    minHeight: 34,
+    minHeight: 44,
+    paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: radius.pill,
-    borderWidth: 1,
-    borderColor: 'rgba(184, 84, 58, 0.35)',
+    backgroundColor: colors.chip,
+    boxShadow: clay.surface,
   },
   chipDone: { opacity: 0.7 },
-  chipText: { fontSize: 14, fontWeight: '600', color: colors.dangerInk },
+  chipText: { ...font.body[700], fontSize: 14, color: colors.dangerInk },
   why: {
     borderRadius: radius.md,
-    backgroundColor: 'rgba(255, 255, 255, 0.55)',
+    backgroundColor: colors.chip,
     paddingHorizontal: 14,
     paddingVertical: 12,
     minHeight: 44,
     justifyContent: 'center',
   },
-  whyText: { fontSize: 15, lineHeight: 21, color: colors.dangerInk },
-  whyEs: { fontWeight: '700', fontStyle: 'italic' },
+  whyText: { ...font.body[600], fontSize: 15, lineHeight: 21, color: colors.dangerInk },
+  whyEs: { ...font.body[800], fontStyle: 'italic' },
 });

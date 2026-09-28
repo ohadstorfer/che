@@ -1,0 +1,129 @@
+# Phase 0 STT gate (docs/hablar-hld.md §4.11): does Scribe keep a learner's
+# mistakes, or quietly fix them?
+#
+# How to use:
+#   1. Copy this file into a folder, e.g. ~/hablar-clips/clips.yaml.
+#   2. Record each `said` line EXACTLY as written, mistakes included, into that
+#      folder under its `file` name. Voice Memos on the iPhone is fine (.m4a);
+#      so is anything that gives .m4a / .mp3 / .wav / .webm.
+#      Speak like a learner: normal speed, your own accent, no exaggerating the
+#      wrong word. Better still, get 2–3 non-native friends to record a share.
+#   3. npm run hablar:stt-gate -- ~/hablar-clips --dry-run   (checks, no calls)
+#      npm run hablar:stt-gate -- ~/hablar-clips             (calls Scribe)
+#
+# Per clip:
+#   file     the recording, relative to this file's folder
+#   said     what you actually say, mistakes and all
+#   errors   the deliberate mistakes: `wrong` is the text as said, `right` is
+#            what a corrected transcript would show instead. Matching ignores
+#            case, accents and punctuation. `kind` groups the summary.
+#   keyterms optional, added to the top-level list for this clip only
+#
+# The top-level `keyterms` are what hablar-transcribe would send: scenario
+# vocabulary and voseo forms. The gate runs each clip with and without them,
+# because biasing toward correct forms is exactly what might erase an error.
+
+keyterms: [vos, sos, tenés, querés, podés, hacés, vivís, medialunas, alfajor, colectivo, SUBE, verdulería, cuánto sale, me traés, Tomás]
+
+clips:
+  # --- gender --------------------------------------------------------------
+  - file: clip01.m4a
+    said: "Quiero un manzana, por favor."
+    errors: [{ kind: gender, wrong: "un manzana", right: "una manzana" }]
+  - file: clip02.m4a
+    said: "¿Me traés una café con leche?"
+    errors: [{ kind: gender, wrong: "una café", right: "un café" }]
+  - file: clip03.m4a
+    said: "La problema es que no tengo plata."
+    errors: [{ kind: gender, wrong: "la problema", right: "el problema" }]
+  - file: clip04.m4a
+    said: "Mi casa es muy lindo."
+    errors: [{ kind: gender, wrong: "casa es muy lindo", right: "casa es muy linda" }]
+  - file: clip05.m4a
+    said: "Quiero dos medialunas chicos."
+    errors: [{ kind: gender, wrong: "medialunas chicos", right: "medialunas chicas" }]
+  - file: clip06.m4a
+    said: "El ciudad es muy grande."
+    errors: [{ kind: gender, wrong: "el ciudad", right: "la ciudad" }]
+  - file: clip07.m4a
+    said: "Tengo un pregunta sobre el colectivo."
+    errors: [{ kind: gender, wrong: "un pregunta", right: "una pregunta" }]
+  - file: clip08.m4a
+    said: "La agua está fría."
+    errors: [{ kind: gender, wrong: "la agua", right: "el agua" }]
+
+  # --- verb agreement ------------------------------------------------------
+  - file: clip09.m4a
+    said: "Yo tiene veinte años."
+    errors: [{ kind: agreement, wrong: "yo tiene", right: "yo tengo" }]
+  - file: clip10.m4a
+    said: "Mis amigos vive en Palermo."
+    errors: [{ kind: agreement, wrong: "amigos vive", right: "amigos viven" }]
+  - file: clip11.m4a
+    said: "Nosotros va al cine el sábado."
+    errors: [{ kind: agreement, wrong: "nosotros va", right: "nosotros vamos" }]
+  - file: clip12.m4a
+    said: "Yo quiere un alfajor de chocolate."
+    errors: [{ kind: agreement, wrong: "yo quiere", right: "yo quiero" }]
+  - file: clip13.m4a
+    said: "Ella trabajo en una oficina."
+    errors: [{ kind: agreement, wrong: "ella trabajo", right: "ella trabaja" }]
+  - file: clip14.m4a
+    said: "Mis padres es de Rosario."
+    errors: [{ kind: agreement, wrong: "padres es", right: "padres son" }]
+  - file: clip15.m4a
+    said: "Ayer yo come una empanada."
+    errors: [{ kind: agreement, wrong: "yo come", right: "yo comí" }]
+  - file: clip16.m4a
+    said: "Los chicos juega al fútbol en la plaza."
+    errors: [{ kind: agreement, wrong: "chicos juega", right: "chicos juegan" }]
+
+  # --- tú forms (Tomás recasts to vos; the transcript must still show them) --
+  - file: clip17.m4a
+    said: "¿Tú tienes hermanos?"
+    errors: [{ kind: tuteo, wrong: "tú tienes", right: "vos tenés" }]
+  - file: clip18.m4a
+    said: "¿De dónde eres?"
+    errors: [{ kind: tuteo, wrong: "eres", right: "sos" }]
+  - file: clip19.m4a
+    said: "¿Quieres ir a tomar algo?"
+    errors: [{ kind: tuteo, wrong: "quieres", right: "querés" }]
+  - file: clip20.m4a
+    said: "¿Puedes repetir, por favor?"
+    errors: [{ kind: tuteo, wrong: "puedes", right: "podés" }]
+  - file: clip21.m4a
+    said: "¿Dónde vives?"
+    errors: [{ kind: tuteo, wrong: "vives", right: "vivís" }]
+  - file: clip22.m4a
+    said: "¿Qué haces el fin de semana?"
+    errors: [{ kind: tuteo, wrong: "haces", right: "hacés" }]
+
+  # --- ser / estar ---------------------------------------------------------
+  - file: clip23.m4a
+    said: "Soy muy cansado hoy."
+    errors: [{ kind: ser-estar, wrong: "soy muy cansado", right: "estoy muy cansado" }]
+  - file: clip24.m4a
+    said: "¿Dónde es la farmacia?"
+    errors: [{ kind: ser-estar, wrong: "dónde es", right: "dónde está" }]
+  - file: clip25.m4a
+    said: "Mi hermana está doctora."
+    errors: [{ kind: ser-estar, wrong: "está doctora", right: "es doctora" }]
+  - file: clip26.m4a
+    said: "La verdulería es cerca de mi casa."
+    errors: [{ kind: ser-estar, wrong: "es cerca", right: "está cerca" }]
+  - file: clip27.m4a
+    said: "Estoy de Canadá."
+    errors: [{ kind: ser-estar, wrong: "estoy de", right: "soy de" }]
+  - file: clip28.m4a
+    said: "El café es frío."
+    errors: [{ kind: ser-estar, wrong: "es frío", right: "está frío" }]
+
+  # --- two in one, and a control with no mistakes --------------------------
+  - file: clip29.m4a
+    said: "Yo es de Estados Unidos y tengo un hermana."
+    errors:
+      - { kind: agreement, wrong: "yo es", right: "yo soy" }
+      - { kind: gender, wrong: "un hermana", right: "una hermana" }
+  - file: clip30.m4a
+    said: "¿Cuánto sale el alfajor? ¿Te puedo pagar con transferencia?"
+    errors: []   # control: the transcript should come back clean and complete

@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useEffect, useState } from 'react';
 import { Modal, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { Easing, FadeIn, FadeOut, SlideInDown, SlideOutDown, useReducedMotion } from 'react-native-reanimated';
@@ -7,7 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PlayButton } from '@/components/exercises';
 import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
-import { colors, press, radius, shadow } from '@/lib/theme';
+import { clay, colors, font, press, radius, shadow } from '@/lib/theme';
 import type { Tip, Unit } from '@/lib/types';
 
 // ---------------------------------------------------------------------------
@@ -159,7 +159,7 @@ const webPress =
 
 const styles = StyleSheet.create({
   root: { flex: 1, justifyContent: 'flex-end' },
-  scrim: { flex: 1, backgroundColor: 'rgba(31, 37, 33, 0.38)' },
+  scrim: { flex: 1, backgroundColor: 'rgba(58, 42, 32, 0.38)' },
   sheet: {
     maxHeight: '86%',
     width: '100%',
@@ -173,22 +173,23 @@ const styles = StyleSheet.create({
     gap: 14,
     ...shadow.raised,
   },
-  grabber: { alignSelf: 'center', width: 40, height: 5, borderRadius: 3, backgroundColor: colors.border },
+  grabber: { alignSelf: 'center', width: 40, height: 5, borderRadius: 3, backgroundColor: colors.trough },
   head: { flexDirection: 'row', alignItems: 'flex-start', gap: 12 },
-  eyebrow: { fontSize: 11, fontWeight: '700', letterSpacing: 1.2, color: colors.faint },
-  title: { fontSize: 22, fontWeight: '700', color: colors.ink, letterSpacing: -0.3 },
-  summary: { fontSize: 15, color: colors.muted },
+  eyebrow: { ...font.body[800], fontSize: 11, letterSpacing: 1.2, color: colors.muted },
+  title: { ...font.display[800], fontSize: 26, lineHeight: 29, color: colors.ink, letterSpacing: -0.4 },
+  summary: { ...font.body[600], fontSize: 15, color: colors.muted },
   close: {
-    width: 36,
-    height: 36,
+    width: 44,
+    height: 44,
     borderRadius: radius.pill,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.card,
+    boxShadow: clay.surface,
   },
   body: { gap: 18, paddingBottom: 4 },
   block: { gap: 10 },
-  label: { fontSize: 13, fontWeight: '700', color: colors.muted, letterSpacing: 0.3 },
+  label: { ...font.body[800], fontSize: 13, color: colors.muted, letterSpacing: 0.3 },
   phrase: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -197,14 +198,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     borderRadius: radius.md,
     backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
+    boxShadow: clay.surface,
   },
-  phraseEs: { fontSize: 18, fontWeight: '700', color: colors.ink },
-  phraseEn: { fontSize: 15, color: colors.primaryDark },
+  phraseEs: { ...font.body[700], fontSize: 18, color: colors.ink },
+  phraseEn: { ...font.body[600], fontSize: 15, color: colors.muted },
   tip: { gap: 4 },
-  tipTitle: { fontSize: 16, fontWeight: '700', color: colors.ink },
-  tipBody: { fontSize: 15, lineHeight: 22, color: colors.ink },
+  tipTitle: { ...font.body[800], fontSize: 16, color: colors.ink },
+  tipBody: { ...font.body[600], fontSize: 15, lineHeight: 22, color: colors.ink },
   jump: { gap: 10, paddingTop: 12, borderTopWidth: 1, borderTopColor: colors.border },
-  jumpText: { fontSize: 14, lineHeight: 20, color: colors.muted },
+  jumpText: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.muted },
 });

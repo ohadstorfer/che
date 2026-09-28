@@ -1,5 +1,6 @@
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'expo-image';
+import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -17,7 +18,7 @@ import { useAuth } from '@/lib/auth';
 import { conceptsOf } from '@/lib/concepts';
 import { currentIndex, loadCourse, loadProgress } from '@/lib/course';
 import { buildLesson } from '@/lib/lesson';
-import { goBack } from '@/lib/nav';
+import { backToCourse, goBack } from '@/lib/nav';
 import { DEFAULT_LADDER, type Ladder } from '@/lib/sentences';
 import { type TestMode, type TestOutcome, buildTest, maxUnitsInTest, shouldStop, testOutcome } from '@/lib/placement';
 import {
@@ -29,10 +30,10 @@ import {
   useRound,
   withIntros,
 } from '@/lib/round';
-import { type SessionData, buildFreeSession, buildMistakesSession, buildSession } from '@/lib/session';
+import { type SessionData, buildFreeSession, buildMistakesSession, buildSession, buildWordsSession } from '@/lib/session';
 import { streakStatus } from '@/lib/streak';
 import { supabase } from '@/lib/supabase';
-import { colors, press, radius } from '@/lib/theme';
+import { clay, colors, font, gradients, press, radius } from '@/lib/theme';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import type { Form, Sentence, Streak, Unit } from '@/lib/types';
 
@@ -58,6 +59,7 @@ export default function Practice() {
   //   ?lesson=<id>            a lesson off the path (a unit check when it is
   //                           the unit's review lesson)
   //   ?mode=mistakes          the words she has missed lately
+  //   ?mode=words             the Words tab's round: her weakest words
   //   ?mode=concept&concept=  free practice of one grammar concept
   //   ?test=placement         the onboarding placement test
   //   ?test=jump&to=<unit>    a jump-ahead test to a later unit
@@ -152,6 +154,8 @@ export default function Practice() {
         return { data, kind: check ? 'unit_check' : 'lesson' };
       }
       if (params.mode === 'mistakes') return { data: await buildMistakesSession(userId), kind: 'mistakes' };
+      // Scheduled like any practice round: the Words tab's drills count.
+      if (params.mode === 'words') return { data: await buildWordsSession(userId), kind: 'practice' };
       if (params.mode === 'concept' && params.concept) {
         // Practice of one grammar concept: free practice, so SM-2 is left alone.
         const concept = params.concept;
@@ -430,7 +434,7 @@ export default function Practice() {
                 />
                 <Text style={styles.gateBody}>One more lesson and you get your {lost} day streak back.</Text>
                 <Button title="One more lesson" onPress={() => router.replace('/practice?again=1')} />
-                <Button title="Back home" variant="ghost" onPress={() => router.replace('/home')} />
+                <Button title="Back home" variant="ghost" onPress={backToCourse} />
               </View>
             </View>
           </SafeAreaView>
@@ -441,7 +445,7 @@ export default function Practice() {
           <StreakCelebration
             previous={finished.previous}
             streak={finished.streak}
-            onDone={() => router.replace('/home')}
+            onDone={backToCourse}
           />
         </SafeAreaView>
       );
@@ -450,7 +454,7 @@ export default function Practice() {
       <SafeAreaView style={styles.safe}>
         <LessonComplete
           streak={celebrate || finished.streak <= 0 ? null : finished.streak}
-          onNext={() => (celebrate ? setCelebrating(true) : router.replace('/home'))}
+          onNext={() => (celebrate ? setCelebrating(true) : backToCourse())}
         />
       </SafeAreaView>
     );
@@ -507,7 +511,7 @@ export default function Practice() {
                 : 'Nothing to practise right now'}
           </Text>
           <Text style={styles.doneHint}>Take a lesson on the path and come back.</Text>
-          <Button title="Back home" onPress={() => router.replace('/home')} />
+          <Button title="Back home" onPress={backToCourse} />
         </View>
       </SafeAreaView>
     );
@@ -523,7 +527,9 @@ export default function Practice() {
           : 'Placement'
         : kind === 'mistakes'
           ? 'Mistakes'
-          : null;
+          : params.mode === 'words'
+            ? 'Word practice'
+            : null;
 
   return (
     // The bottom edge is left to the exercise frame: its docked bar and its
@@ -534,7 +540,9 @@ export default function Practice() {
           <Ionicons name="close" size={26} color={colors.muted} />
         </Pressable>
         <View style={styles.progressTrack}>
-          <View style={[styles.progressFill, { width: `${Math.max(progress * 100, 3)}%` }]} />
+          <View style={[styles.progressFill, { width: `${Math.max(progress * 100, 3)}%` }]}>
+            <LinearGradient colors={gradients.deep} style={StyleSheet.absoluteFill} />
+          </View>
         </View>
         <Text style={styles.counter}>
           {index + 1}/{queue.length}
@@ -709,7 +717,8 @@ function TestResult({ outcome, plan, onDone }: { outcome: TestOutcome; plan: Tes
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1 },
+  // Plain oat: the lesson sits on bare clay paper, not the app's wash.
+  safe: { flex: 1, backgroundColor: colors.bg },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -722,16 +731,17 @@ const styles = StyleSheet.create({
   },
   progressTrack: {
     flex: 1,
-    height: 10,
-    borderRadius: 99,
-    backgroundColor: colors.border,
+    height: 14,
+    borderRadius: radius.pill,
+    backgroundColor: colors.trough,
+    boxShadow: clay.trough,
     overflow: 'hidden',
   },
-  progressFill: { height: '100%', borderRadius: 99, backgroundColor: colors.primary },
-  counter: { fontSize: 13, fontWeight: '600', color: colors.muted, minWidth: 40, textAlign: 'right' },
+  progressFill: { height: '100%', borderRadius: radius.pill, backgroundColor: colors.primary, overflow: 'hidden' },
+  counter: { ...font.body[800], fontSize: 13, color: colors.muted, minWidth: 40, textAlign: 'right' },
   kicker: {
+    ...font.body[800],
     fontSize: 12,
-    fontWeight: '700',
     letterSpacing: 0.8,
     textTransform: 'uppercase',
     color: colors.muted,
@@ -757,8 +767,8 @@ const styles = StyleSheet.create({
     marginBottom: -4,
   },
   simLabel: {
+    ...font.body[800],
     fontSize: 11,
-    fontWeight: '700',
     letterSpacing: 0.6,
     textTransform: 'uppercase',
     color: colors.faint,
@@ -772,14 +782,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 11,
     borderRadius: radius.pill,
   },
-  simButtonText: { fontSize: 13, fontWeight: '700' },
+  simButtonText: { ...font.body[800], fontSize: 13 },
 
   // The frozen-streak gate, and the unit-check and test results ---------------
   gatePanel: { alignItems: 'stretch', gap: 12, maxWidth: 400, width: '100%' },
-  gateTitle: { fontSize: 22, fontWeight: '700', color: colors.ink, textAlign: 'center' },
+  gateTitle: { ...font.display[800], fontSize: 26, letterSpacing: -0.3, color: colors.ink, textAlign: 'center' },
   gateClip: { width: 210, height: 210, alignSelf: 'center' },
-  gateSub: { fontSize: 17, fontWeight: '700', color: colors.ink, textAlign: 'center' },
+  gateSub: { ...font.body[800], fontSize: 17, color: colors.ink, textAlign: 'center' },
   gateBody: {
+    ...font.body[600],
     fontSize: 15,
     color: colors.muted,
     textAlign: 'center',
@@ -787,10 +798,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   missed: { gap: 8, paddingVertical: 14, paddingHorizontal: 16, marginBottom: 4 },
-  missedLabel: { fontSize: 13, fontWeight: '700', color: colors.muted, letterSpacing: 0.3 },
+  missedLabel: { ...font.body[800], fontSize: 13, color: colors.muted, letterSpacing: 0.3 },
   missedRow: { flexDirection: 'row', justifyContent: 'space-between', gap: 12 },
-  missedEs: { fontSize: 17, fontWeight: '700', color: colors.ink },
-  missedEn: { fontSize: 15, color: colors.primaryDark, flexShrink: 1, textAlign: 'right' },
+  missedEs: { ...font.body[800], fontSize: 17, color: colors.ink },
+  missedEn: { ...font.body[600], fontSize: 15, color: colors.primaryDark, flexShrink: 1, textAlign: 'right' },
   resultIcon: {
     width: 76,
     height: 76,
@@ -799,9 +810,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
+    boxShadow: clay.button,
   },
-  resultIconSoft: { backgroundColor: colors.primarySoft },
+  resultIconSoft: { backgroundColor: colors.card, boxShadow: clay.surface },
   doneEmoji: { fontSize: 64 },
-  doneTitle: { fontSize: 24, fontWeight: '700', color: colors.ink, textAlign: 'center' },
-  doneHint: { fontSize: 15, color: colors.muted, textAlign: 'center' },
+  doneTitle: { ...font.display[800], fontSize: 26, letterSpacing: -0.3, color: colors.ink, textAlign: 'center' },
+  doneHint: { ...font.body[600], fontSize: 15, color: colors.muted, textAlign: 'center' },
 });

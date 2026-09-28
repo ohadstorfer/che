@@ -28,6 +28,41 @@ nearby the first time. Tone: a friend from Buenos Aires explaining things over
 a mate — warm, a bit cheeky, never a textbook. Short: an `info` body is at most
 ~70 words.
 
+## Writing rules
+
+The learner is a beginner or a tourist. Every page answers "what will I see,
+hear, say or do because of this?".
+
+- **Teach, then test.** A question may only ask about what an earlier page
+  taught. An `explain` confirms or nuances; it never carries a new fact the
+  class relies on. If the best line is in an explain, move it to a page.
+- **Every vocabulary word appears in the pages**, in Spanish, before the word
+  review. Bold it where the English already is ("the **adoquines**
+  (cobblestones)"). No generic filler words (libro, banda, tren).
+- **Glosses are distinct within a class.** "Pick the meaning" uses the other
+  glosses as wrong answers, so two glosses that say the same thing make two
+  right answers. A gloss never contains the word it defines. Near-synonyms go
+  to `glossary`.
+- **One right answer.** A gap distractor breaks the *meaning*, not the grammar
+  ("ayudo / cobro / pego", not "ayudo / ayudás / ayudamos"). At most one joke
+  option per question. Options are about the same length; the right one is not
+  the only careful, hedged one.
+- **True/false is balanced**: about as many true as false. No giveaway words
+  ("everyone", "always", "historians agree"), and the page before must not
+  state the answer in its title.
+- **`order` only for a real, taught, single sequence** that teaches something.
+  Common sense or date recall is not a sequence; use a scenario `choice`.
+- **At most one number per info page**, and it has to earn its place. Match
+  things to what you do with them, not to years.
+- **Test a fact once or twice per class**, not five times.
+- **Each section stands alone**: no "remember the vivo from Puteadas?".
+  A topic has one home; elsewhere, one line and move on.
+- **Heavy topics get a transition.** No jump from a tragedy to a joke on the
+  next tap.
+
+`npm run culture:validate` prints ⚠ warnings for vocabulary missing from the
+pages and for colliding glosses. Aim for zero.
+
 ## Page types
 
 ```yaml
@@ -56,6 +91,8 @@ a mate — warm, a bit cheeky, never a textbook. Short: an `info` body is at mos
 - type: order
   prompt: "Prepare a mate, step by step"
   items: ["...", "...", "..."]   # 3–6 items
+  # Items must not contain the clue that sorts them (years, times, scores, "first/last").
+  # If the numbers are the point, use a `match` page instead. Put dates in `explain`.
   explain: "..."           # optional
 
 # Match pairs. 3–5 pairs.

@@ -1,13 +1,13 @@
 {
-  "name": "Che — Aprendé español",
-  "short_name": "Che",
+  "name": "Posta — Aprendé español",
+  "short_name": "Posta",
   "description": "Practicá español rioplatense con ejercicios generados por IA y mantené tu racha diaria.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#F1EEE6",
-  "theme_color": "#3E5641",
+  "background_color": "#F7EFE6",
+  "theme_color": "#F7EFE6",
   "lang": "es-AR",
   "icons": [
     {

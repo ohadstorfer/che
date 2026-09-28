@@ -3,8 +3,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
 import { Platform } from 'react-native';
 
-import { demoClient } from './demo';
-
 /**
  * The app talks to the real project. `EXPO_PUBLIC_DEMO=1` swaps in the fixture
  * backend instead (lib/demo.ts) — a learner mid-course with no network, no
@@ -28,4 +26,6 @@ const realClient = createClient(url, anonKey, {
   },
 });
 
-export const supabase = (DEMO ? demoClient : realClient) as typeof realClient;
+// Required only in demo mode, so a release build never loads (or ships) the
+// 330 KB fixture course.
+export const supabase = (DEMO ? require('./demo').demoClient : realClient) as typeof realClient;

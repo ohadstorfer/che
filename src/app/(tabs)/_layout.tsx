@@ -1,21 +1,26 @@
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Redirect } from 'expo-router';
 import { Tabs } from 'expo-router/js-tabs';
 import { View } from 'react-native';
 
 import { TabBar } from '@/components/tab-bar';
 import { useAuth } from '@/lib/auth';
+import { usePremium } from '@/lib/premium';
 import { colors } from '@/lib/theme';
 
 export default function TabsLayout() {
   const { session, loading } = useAuth();
-  if (!loading && !session) return <Redirect href="/login" />;
+  const { limited, hardPaywall } = usePremium();
+  if (!loading && !session) return <Redirect href="/welcome" />;
+  // The store can switch the free tier off (offering metadata `hard_paywall`):
+  // then a free account sees the paywall, with no way around it.
+  if (limited && hardPaywall) return <Redirect href="/paywall?from=gate" />;
 
   return (
-    // Opaque wrapper: the tab screens are flat `bg`, but the zone behind the
-    // floating tab bar belongs to this layout, not the scenes — left
-    // transparent it shows the root gradient, whose bottom is now the lilac
-    // pool (the fade is inverted), seaming against the flat pages above it.
+    // Opaque wrapper: the tab screens are flat oat `bg`, but the zone behind
+    // the floating tab bar belongs to this layout, not the scenes — left
+    // transparent it shows the root gradient, seaming against the flat pages
+    // above it.
     <View style={{ flex: 1, backgroundColor: colors.bg }}>
       <Tabs
       // The stock bar is a flat slab welded to the bottom edge; ours is a
@@ -30,11 +35,11 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Home',
-          // Outline while resting, filled once selected — the weight change is
-          // what separates the active tab, not just a hue swap.
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name={focused ? 'home' : 'home-outline'} color={color} size={size} />
+          title: 'Course',
+          // Always the outline: the ink pill behind the selected tab is what
+          // marks it, so the glyph itself doesn't change.
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="map-outline" color={color} size={size} />
           ),
         }}
       />
@@ -42,8 +47,8 @@ export default function TabsLayout() {
         name="words"
         options={{
           title: 'Words',
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name={focused ? 'albums' : 'albums-outline'} color={color} size={size} />
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="albums-outline" color={color} size={size} />
           ),
         }}
       />
@@ -51,8 +56,17 @@ export default function TabsLayout() {
         name="culture"
         options={{
           title: 'Culture',
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name={focused ? 'cafe' : 'cafe-outline'} color={color} size={size} />
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="cafe-outline" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="hablar"
+        options={{
+          title: 'Speaking',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="chatbubble-ellipses-outline" color={color} size={size} />
           ),
         }}
       />

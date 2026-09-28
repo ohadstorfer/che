@@ -1,57 +1,94 @@
 import type { ImageSourcePropType } from 'react-native';
 
 // ---------------------------------------------------------------------------
-// The capybara art for culture screens. Each subject has figures of its own;
-// the rest borrow from a general set so no screen is ever bare. Pages of one
-// class rotate through their subject's figures, so a class doesn't repeat one
+// The art for culture screens. Culture shows the thing itself — a mate, a
+// parrilla, a bandoneón — so the capybara doesn't carry every screen of the
+// app. He stays as the one who asks the questions (`speakerArt`). Pages of one
+// class rotate through their subject's objects, so a class doesn't repeat one
 // picture card after card.
 // ---------------------------------------------------------------------------
 
-const A = {
-  mate: require('@/assets/images/capybara/capybara-mate-figure.png'),
-  mateSip: require('@/assets/images/capybara/capybara-mate-sorbiendo-figure.png'),
-  mateBitter: require('@/assets/images/capybara/capybara-mate-amargo-figure.png'),
-  asado: require('@/assets/images/capybara/capybara-asado-figure.png'),
-  choripan: require('@/assets/images/capybara/capybara-choripan-figure.png'),
-  empanadas: require('@/assets/images/capybara/capybara-empanadas-figure.png'),
-  milanesa: require('@/assets/images/capybara/capybara-milanesa-figure.png'),
-  alfajor: require('@/assets/images/capybara/capybara-alfajor-figure.png'),
-  alfajorMaicena: require('@/assets/images/capybara/capybara-alfajor-maicena-figure.png'),
-  dulce: require('@/assets/images/capybara/capybara-dulce-de-leche-figure.png'),
-  facturas: require('@/assets/images/capybara/capybara-facturas-figure.png'),
-  goal: require('@/assets/images/capybara/capybara-futbol-gol-figure.png'),
-  kick: require('@/assets/images/capybara/capybara-futbol-pateando-figure.png'),
-  tango: require('@/assets/images/capybara/capybara-tango-figure.png'),
-  hi: require('@/assets/images/capybara/capybara-saludando-figure.png'),
-  gaucho: require('@/assets/images/capybara/capybara-gaucho-figure.png'),
-  gauchoCafe: require('@/assets/images/capybara/capybara-gaucho-cafe-figure.png'),
-  angry: require('@/assets/images/capybara/capybara-puteadas-figure.png'),
-  guitar: require('@/assets/images/capybara/capybara-musica-figure.png'),
-  flag: require('@/assets/images/capybara/capybara-historia-figure.png'),
+const O = {
+  mate: require('@/assets/images/objects/mate-figure.webp'),
+  mateTermo: require('@/assets/images/objects/mate-termo-figure.webp'),
+  mateYerba: require('@/assets/images/objects/mate-yerba-figure.webp'),
+  asado: require('@/assets/images/objects/asado-figure.webp'),
+  choripan: require('@/assets/images/objects/choripan-figure.webp'),
+  provoleta: require('@/assets/images/objects/provoleta-figure.webp'),
+  empanadas: require('@/assets/images/objects/empanadas-figure.webp'),
+  milanesa: require('@/assets/images/objects/milanesa-figure.webp'),
+  pizza: require('@/assets/images/objects/pizza-figure.webp'),
+  alfajor: require('@/assets/images/objects/alfajor-figure.webp'),
+  dulce: require('@/assets/images/objects/dulce-de-leche-figure.webp'),
+  alfajorMaicena: require('@/assets/images/objects/alfajor-maicena-figure.webp'),
+  facturas: require('@/assets/images/objects/facturas-figure.webp'),
+  ball: require('@/assets/images/objects/futbol-figure.webp'),
+  jersey: require('@/assets/images/objects/futbol-camiseta-figure.webp'),
+  cup: require('@/assets/images/objects/futbol-copa-figure.webp'),
+  bandoneon: require('@/assets/images/objects/tango-figure.webp'),
+  fedora: require('@/assets/images/objects/tango-sombrero-figure.webp'),
+  guitar: require('@/assets/images/objects/musica-figure.webp'),
+  bombo: require('@/assets/images/objects/musica-bombo-figure.webp'),
+  redCard: require('@/assets/images/objects/puteadas-figure.webp'),
+  scroll: require('@/assets/images/objects/historia-nacimiento-figure.webp'),
+  flag: require('@/assets/images/objects/historia-moderna-figure.webp'),
+  obelisco: require('@/assets/images/objects/buenos-aires-figure.webp'),
+  colectivo: require('@/assets/images/objects/buenos-aires-colectivo-figure.webp'),
+  cafe: require('@/assets/images/objects/costumbres-figure.webp'),
+  book: require('@/assets/images/objects/dichos-figure.webp'),
+  phone: require('@/assets/images/objects/habla-figure.webp'),
+  birome: require('@/assets/images/objects/iconos-figure.webp'),
+  andes: require('@/assets/images/objects/regiones-figure.webp'),
 } satisfies Record<string, ImageSourcePropType>;
 
 const bySection: Record<string, ImageSourcePropType[]> = {
-  mate: [A.mateSip, A.mate, A.mateBitter],
-  asado: [A.asado, A.choripan],
-  comida: [A.empanadas, A.milanesa, A.choripan],
-  alfajores: [A.alfajor, A.dulce, A.alfajorMaicena, A.facturas],
-  futbol: [A.goal, A.kick],
-  tango: [A.tango],
-  puteadas: [A.angry],
-  musica: [A.guitar],
-  'historia-nacimiento': [A.flag],
-  'historia-moderna': [A.flag],
+  mate: [O.mate, O.mateTermo, O.mateYerba],
+  asado: [O.asado, O.choripan, O.provoleta],
+  comida: [O.empanadas, O.milanesa, O.pizza],
+  alfajores: [O.alfajor, O.dulce, O.alfajorMaicena, O.facturas],
+  futbol: [O.ball, O.jersey, O.cup],
+  tango: [O.bandoneon, O.fedora],
+  musica: [O.guitar, O.bombo],
+  puteadas: [O.redCard],
+  'historia-nacimiento': [O.scroll],
+  'historia-moderna': [O.flag],
+  'buenos-aires': [O.obelisco, O.colectivo, O.cafe],
+  costumbres: [O.cafe, O.mate],
+  dichos: [O.book],
+  habla: [O.phone],
+  iconos: [O.birome],
+  regiones: [O.andes],
 };
 
-const general = [A.hi, A.gaucho, A.gauchoCafe];
+const general = [O.mate, O.empanadas, O.cafe];
 
-/** The figure for the nth page of a class in this subject. */
+/** The object for the nth page of a class in this subject. */
 export function artFor(section: string, n = 0): ImageSourcePropType {
   const set = bySection[section] ?? general;
   return set[n % set.length];
 }
 
-/** A subject's own figure for its tile and hero; subjects without one take turns with the general set. */
+/** A subject's own object for its tile and hero; unknown subjects take turns with the general set. */
 export function tileArt(section: string, index: number): ImageSourcePropType {
   return bySection[section]?.[0] ?? general[index % general.length];
+}
+
+// The capybara who asks the quiz questions — a person talks, a mate doesn't.
+const speakers: Record<string, ImageSourcePropType> = {
+  mate: require('@/assets/images/capybara/capybara-mate-sorbiendo-figure.webp'),
+  asado: require('@/assets/images/capybara/capybara-asado-figure.webp'),
+  comida: require('@/assets/images/capybara/capybara-empanadas-figure.webp'),
+  alfajores: require('@/assets/images/capybara/capybara-alfajor-figure.webp'),
+  futbol: require('@/assets/images/capybara/capybara-futbol-gol-figure.webp'),
+  tango: require('@/assets/images/capybara/capybara-tango-figure.webp'),
+  puteadas: require('@/assets/images/capybara/capybara-puteadas-figure.webp'),
+  musica: require('@/assets/images/capybara/capybara-musica-figure.webp'),
+  'historia-nacimiento': require('@/assets/images/capybara/capybara-historia-figure.webp'),
+  'historia-moderna': require('@/assets/images/capybara/capybara-historia-figure.webp'),
+};
+const speaker = require('@/assets/images/capybara/capybara-saludando-figure.webp');
+
+/** The capybara beside a quiz question in this subject. */
+export function speakerArt(section: string): ImageSourcePropType {
+  return speakers[section] ?? speaker;
 }

@@ -1,19 +1,10 @@
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useEffect, useRef, useState } from 'react';
-import {
-  Animated,
-  Easing,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Animated, Easing, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui';
-import { colors, press, radius, shadow } from '@/lib/theme';
+import { clay, colors, font, radius } from '@/lib/theme';
 
 /** Set once an exercise has been checked; `answer` is shown when she missed it,
  *  `also` when she got it right another way than the one written, `note` when
@@ -80,7 +71,6 @@ export function ExerciseFrame({
           </View>
         ) : null}
         <Text style={styles.prompt}>{prompt}</Text>
-        <View style={styles.rule} />
         {children}
       </ScrollView>
 
@@ -132,8 +122,9 @@ function FeedbackBar({
   const good = verdict.correct;
   // A wash of the colour, with the text in its deep tone — the panel covers a
   // third of the screen at the moment she is reading the answer, and a solid
-  // block of saturated green or red that size shouts at her instead of telling
-  // her something. The one saturated thing left is what she has to act on.
+  // block of saturated salvia or coral that size shouts at her instead of
+  // telling her something. The one saturated thing left is what she has to act
+  // on: the rosa clay button, the same action as everywhere else.
   const tint = good ? colors.success : colors.dangerInk;
   const wash = good ? colors.successSoft : colors.dangerSoft;
 
@@ -186,22 +177,7 @@ function FeedbackBar({
 
       {actions}
 
-      <Pressable
-        onPress={onContinue}
-        style={({ pressed }) => [
-          styles.feedbackButton,
-          { backgroundColor: tint },
-          { transform: [{ scale: pressed ? press.scale : 1 }] },
-          Platform.OS === 'web'
-            ? ({
-                transitionProperty: 'transform',
-                transitionDuration: `${press.duration}ms`,
-                transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
-              } as object)
-            : null,
-        ]}>
-        <Text style={styles.feedbackButtonText}>{good ? 'Continue' : 'Got it'}</Text>
-      </Pressable>
+      <Button title={good ? 'Continue' : 'Got it'} onPress={onContinue} />
     </Animated.View>
   );
 }
@@ -209,48 +185,41 @@ function FeedbackBar({
 const styles = StyleSheet.create({
   frame: { flex: 1, width: '100%', maxWidth: 560, alignSelf: 'center' },
   body: { padding: 20, paddingBottom: 28, gap: 18, flexGrow: 1 },
-  prompt: { fontSize: 22, fontWeight: '700', color: colors.ink, letterSpacing: -0.3 },
-  rule: { height: 1, backgroundColor: colors.border, marginTop: -6 },
+  prompt: { ...font.display[800], fontSize: 24, lineHeight: 29, color: colors.ink, letterSpacing: -0.4 },
   footer: { padding: 20, paddingTop: 12, gap: 10 },
-  note: { fontSize: 15, color: colors.muted, textAlign: 'center', paddingVertical: 16 },
+  note: { ...font.body[600], fontSize: 15, color: colors.muted, textAlign: 'center', paddingVertical: 16 },
   badge: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
     gap: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
     borderRadius: radius.pill,
     backgroundColor: colors.accentSoft,
     marginBottom: -8,
   },
-  badgeText: { fontSize: 12, fontWeight: '700', letterSpacing: 0.4, color: colors.accent, textTransform: 'uppercase' },
-  feedbackNote: { fontSize: 15, lineHeight: 21, fontWeight: '600', color: colors.accent },
+  badgeText: { ...font.body[800], fontSize: 12, letterSpacing: 0.4, color: colors.accent, textTransform: 'uppercase' },
+  feedbackNote: { ...font.body[700], fontSize: 15, lineHeight: 21, color: colors.accent },
 
   feedback: {
     padding: 20,
-    paddingTop: 18,
+    paddingTop: 20,
     gap: 14,
-    borderTopLeftRadius: radius.lg,
-    borderTopRightRadius: radius.lg,
-    ...shadow.raised,
+    borderTopLeftRadius: radius.xl,
+    borderTopRightRadius: radius.xl,
+    boxShadow: clay.float,
   },
   feedbackHead: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   feedbackIcon: {
-    width: 28,
-    height: 28,
+    width: 32,
+    height: 32,
     borderRadius: radius.pill,
     alignItems: 'center',
     justifyContent: 'center',
+    boxShadow: clay.surface,
   },
-  feedbackTitle: { fontSize: 21, fontWeight: '700', letterSpacing: -0.2 },
-  feedbackLabel: { fontSize: 15, fontWeight: '700' },
-  feedbackAnswer: { fontSize: 17, lineHeight: 24 },
-  feedbackButton: {
-    borderRadius: radius.md,
-    minHeight: 52,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  feedbackButtonText: { fontSize: 17, fontWeight: '700', letterSpacing: 0.3, color: colors.onPrimary },
+  feedbackTitle: { ...font.display[800], fontSize: 23, letterSpacing: -0.3 },
+  feedbackLabel: { ...font.body[800], fontSize: 15 },
+  feedbackAnswer: { ...font.body[600], fontSize: 17, lineHeight: 24 },
 });

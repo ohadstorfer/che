@@ -5,7 +5,7 @@ import { Text, TextInput, View } from 'react-native';
 import { AdminScreen, Muted, RowLink, Section, SmallButton, adminStyles } from '@/components/admin';
 import { type ReportGroup, type SentenceRow, acceptReport, loadReportGroups, rejectReport } from '@/lib/admin';
 import { supabase } from '@/lib/supabase';
-import { colors, radius } from '@/lib/theme';
+import { colors, font, radius } from '@/lib/theme';
 import type { Form } from '@/lib/types';
 
 // ---------------------------------------------------------------------------
@@ -67,7 +67,7 @@ export default function AdminReports() {
                 <TextInput
                   value={value}
                   onChangeText={(v) => setEdits({ ...edits, [key(g)]: v })}
-                  style={{ backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border, borderRadius: radius.sm, paddingHorizontal: 10, paddingVertical: 6, fontSize: 16, fontWeight: '700', color: colors.ink }}
+                  style={{ backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border, borderRadius: radius.sm, paddingHorizontal: 10, paddingVertical: 6, fontSize: 16, ...font.body[700], color: colors.ink }}
                 />
               </View>
               <Text style={adminStyles.num}>{g.reports}×</Text>

@@ -11,7 +11,8 @@ import {
   View,
   type ViewStyle,
 } from 'react-native';
-import { colors, press, radius, shadow } from '@/lib/theme';
+import { clay, colors, font, press } from '@/lib/theme';
+import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
 // TabBar
@@ -20,18 +21,17 @@ import { colors, press, radius, shadow } from '@/lib/theme';
 // hairline on top — on iOS Safari its labels end up clipped by the browser
 // chrome, and it reads as browser furniture rather than part of the app.
 //
-// This one is a floating card: same white, same violet-tinted shadow and same
-// radius as the word cards above it, lifted clear of the home indicator. The
-// active tab is marked by a lavender pill that *slides* between tabs, so the
-// selection reads as a place you moved to rather than a colour that blinked.
+// This one is a floating clay pill lifted clear of the home indicator. The
+// active tab is marked by a tinta (ink) pill that *slides* between tabs, so
+// the selection reads as a place you moved to rather than a colour that blinked.
 // ---------------------------------------------------------------------------
 
 /** Movement on screen wants ease-in-out; 220ms keeps it under the 300ms ceiling. */
 const SLIDE_DURATION = 220;
 const SLIDE_EASING = Easing.bezier(0.77, 0, 0.175, 1);
 
-/** Breathing room between the pill and its tab slot. */
-const PILL_INSET = 4;
+/** The bar's padding: the pill and the tabs both sit inside it. */
+const BAR_PAD = 6;
 
 // Colour can't ride the native driver, so on web it eases via a real CSS
 // transition and on native it simply lands — the sliding pill already carries
@@ -71,7 +71,9 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
     }).start();
   }
 
-  const slotWidth = rowWidth / Math.max(state.routes.length, 1);
+  // The tabs share the bar's width inside its padding, so the slots do too —
+  // measuring the padded width would drift the pill right, tab by tab.
+  const slotWidth = (rowWidth - BAR_PAD * 2) / Math.max(state.routes.length, 1);
 
   return (
     <View style={styles.dock}>
@@ -85,12 +87,12 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
             style={[
               styles.pill,
               {
-                width: slotWidth - PILL_INSET * 2,
+                width: slotWidth,
                 transform: [
                   {
                     translateX: slide.interpolate({
                       inputRange: [0, 1],
-                      outputRange: [PILL_INSET, PILL_INSET + slotWidth],
+                      outputRange: [BAR_PAD, BAR_PAD + slotWidth],
                     }),
                   },
                 ],
@@ -105,7 +107,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
           const label = options.title ?? route.name;
           // Icon and label share one resting tone so neither reads as the
           // louder half of the pair; `faint` is reserved for disabled glyphs.
-          const tint = focused ? colors.primary : colors.muted;
+          const tint = focused ? colors.card : colors.muted;
 
           return (
             <Pressable
@@ -134,15 +136,16 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                     pressTransition,
                   ]}>
                   {options.tabBarIcon?.({ focused, color: tint, size: 23 })}
-                  <Text
-                    numberOfLines={1}
+                  <FitText
+                    lines={1}
                     style={[
                       styles.label,
-                      { color: focused ? colors.primaryDark : colors.muted },
+                      focused ? styles.labelActive : null,
+                      { color: focused ? colors.card : colors.muted },
                       colorTransition,
                     ]}>
                     {label}
-                  </Text>
+                  </FitText>
                 </View>
               )}
             </Pressable>
@@ -167,21 +170,23 @@ const styles = StyleSheet.create({
   bar: {
     flexDirection: 'row',
     backgroundColor: colors.card,
-    borderRadius: radius.xl,
-    padding: PILL_INSET,
-    ...shadow.card,
+    borderRadius: 34,
+    padding: BAR_PAD,
+    boxShadow: clay.float,
   },
   pill: {
     position: 'absolute',
-    top: PILL_INSET,
-    bottom: PILL_INSET,
+    top: BAR_PAD,
+    bottom: BAR_PAD,
     left: 0,
-    borderRadius: radius.lg,
-    backgroundColor: colors.primarySoft,
+    borderRadius: 28,
+    backgroundColor: colors.ink,
+    // Ink's own shade: a drop in its colour and a faint lit edge.
+    boxShadow: 'inset 0 2px 0 rgba(255, 255, 255, 0.15), 0 10px 22px -10px rgba(58, 42, 32, 0.6)',
   },
   tab: {
     flex: 1,
-    // 52 + the 4pt padding either side clears the 44pt touch-target minimum
+    // 52 + the 6pt padding either side clears the 44pt touch-target minimum
     // and, more importantly, gives the label room to sit without being clipped.
     height: 52,
     justifyContent: 'center',
@@ -192,9 +197,10 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   label: {
-    fontSize: 11,
-    lineHeight: 14,
-    fontWeight: '600',
+    ...font.body[700],
+    fontSize: 12,
+    lineHeight: 15,
     letterSpacing: 0.1,
   },
+  labelActive: font.body[800],
 });

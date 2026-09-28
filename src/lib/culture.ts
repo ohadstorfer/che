@@ -41,6 +41,8 @@ export interface CultureWord {
   en: string;
   example?: { es: string; en: string };
   note?: string;
+  /** Storage path of the recorded pronunciation, once it exists. */
+  audio?: string;
 }
 
 export interface CultureClass {
@@ -49,6 +51,8 @@ export interface CultureClass {
   summary: string;
   pages: CulturePage[];
   vocabulary: CultureWord[];
+  /** Spanish that appears in the reading but isn't practiced: tappable for its meaning, never quizzed. */
+  glossary?: CultureWord[];
 }
 
 export interface CultureSection {

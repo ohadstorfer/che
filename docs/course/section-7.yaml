@@ -1086,6 +1086,7 @@ units:
           - form: "noticia"
             f: "f.sg"
           - form: "noticias"
+            en: "news"
             f: "f.pl"
 
   - ordinal: 18

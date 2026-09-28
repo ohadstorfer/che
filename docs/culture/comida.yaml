@@ -13,21 +13,21 @@ classes:
       - type: info
         title: "Four meals, odd hours"
         emoji: "🕙"
-        body: "The **desayuno** (breakfast) is tiny: a **café con leche** and some **tostadas** with butter and jam. The **almuerzo** (lunch) lands around 1 p.m. At about 5 comes the **merienda**, a mini-breakfast with mate or coffee. And the **cena** (dinner)? Nine thirty, ten. Book a restaurant for 8 p.m. and you'll eat alone with the waiters."
-        fun_fact: "Kids get a merienda at school too. It's sacred."
+        body: "The **desayuno** (breakfast) is tiny: a **café con leche** and some **tostadas**. The **almuerzo** (lunch) lands around one. Around five comes the **merienda**, a mini-breakfast with mate or coffee. And the **cena** (dinner)? Ten-ish. Book a restaurant for eight and you'll eat alone with the waiters."
+        fun_fact: "Invited to dinner at someone's home? Arriving 15 to 30 minutes late is normal. On the dot is early."
 
       - type: true_false
-        statement: "If friends invite you to dinner at their place \"a las diez\", they mean 10 in the morning."
-        answer: false
-        explain: "10 p.m., obviously. And you're not expected to be on time either: showing up 15 to 30 minutes late to a dinner at someone's home is completely normal."
+        statement: "If friends invite you to dinner at their place \"a las diez\", showing up at twenty past ten is fine."
+        answer: true
+        explain: "More than fine. Arriving a bit late to a dinner at someone's home is normal. Right at ten, you might catch the host still cooking."
 
-      - type: order
-        prompt: "Put a normal Argentine day of eating in order"
-        items:
-          - "Desayuno: café con leche y tostadas"
-          - "Almuerzo, around 1 p.m."
-          - "Merienda, around 5 p.m."
-          - "Cena, around 9:30 or 10 p.m."
+      - type: match
+        prompt: "Match each meal to when Argentines have it"
+        pairs:
+          - ["Desayuno", "Early, and tiny"]
+          - ["Almuerzo", "Around one"]
+          - ["Merienda", "Around five"]
+          - ["Cena", "Around ten"]
         explain: "The merienda is what makes a 10 p.m. dinner survivable. Skip it and you'll be starving by eight."
 
       - type: info
@@ -38,27 +38,26 @@ classes:
       - type: choice
         scenario: "You've finished eating and you're in a hurry. The waiter walks past without stopping."
         prompt: "What's going on?"
-        options: ["They're ignoring you on purpose", "They're waiting for you to ask for the bill", "The bill comes automatically after 30 minutes"]
+        options: ["They're ignoring you on purpose", "They're waiting for you to ask", "The bill comes by itself, later"]
         correct: 1
         explain: "Bringing the bill unasked is almost rude here. Say **\"¿Me traés la cuenta, por favor?\"** and it's on its way."
 
       - type: info
         title: "Cubierto, propina, vaquita"
         emoji: "💵"
-        body: "Many menus charge a **cubierto** or **servicio de mesa** per person: bread, water, the table setting. It is *not* a tip. The **propina** (tip) is on top, usually about **10%**, and since 2024 you can add it on the card. And splitting? Friends mostly divide evenly, or **hacen una vaquita**: everyone throws money into the pot."
-        fun_fact: "In Buenos Aires city, a place that charges cubierto has to give each person at least 250 ml of drinking water."
+        body: "Many menus charge a **cubierto** per person: bread, water, the table setting. It is *not* a tip. The **propina** (tip) goes on top, usually about 10%. With friends, lots of dishes are ordered **para compartir** (to share, in the middle of the table), and the bill is split evenly. Or everyone throws in a share: that's **hacer una vaquita**."
 
       - type: true_false
         statement: "If the bill says \"cubierto\", the tip is already included."
         answer: false
-        explain: "The **cubierto** pays for bread, water and the setting, and it doesn't necessarily reach the waiter. The **propina**, about 10%, is separate."
+        explain: "The **cubierto** pays for bread, water and the setting, and it doesn't necessarily reach the waiter. The **propina** is separate."
 
       - type: choice
         scenario: "Four friends at a pizzería. Someone looks at the menu and says: \"¿Pedimos para compartir?\""
         prompt: "What are they suggesting?"
-        options: ["Everyone orders their own dish", "Ordering a few things for the middle and sharing", "Splitting the bill by what each person ate"]
+        options: ["Everyone orders their own dish", "Ordering things for the middle", "Splitting the bill by dish"]
         correct: 1
-        explain: "Pizzas, empanadas, a **picada**: lots of food is ordered **para compartir**. Say **dale** and grab a slice."
+        explain: "Pizzas, empanadas, a **picada**: all for the middle. Say **dale** and grab a slice."
 
       - type: gap
         prompt: "The dinner is over and you want to pay."
@@ -69,9 +68,6 @@ classes:
         explain: "**La cuenta** is the bill. Using **traés** (voseo) with the waiter is normal and friendly, not rude."
 
     vocabulary:
-      - es: "merienda"
-        en: "afternoon snack, around 5 p.m."
-        example: { es: "¿Vamos a merendar a un bar?", en: "Shall we get a snack at a café?" }
       - es: "cena"
         en: "dinner"
       - es: "mozo"
@@ -85,11 +81,24 @@ classes:
       - es: "cubierto"
         en: "cover charge (bread, water, setting)"
       - es: "para compartir"
-        en: "to share"
+        en: "for the whole table (dishes)"
         example: { es: "¿Pedimos algo para compartir?", en: "Shall we order something to share?" }
       - es: "hacer una vaquita"
-        en: "to pool money"
+        en: "to chip in (everyone pays a share)"
         example: { es: "Hagamos una vaquita para las pizzas.", en: "Let's all chip in for the pizzas." }
+    glossary:
+      - es: "desayuno"
+        en: "breakfast"
+      - es: "café con leche"
+        en: "coffee with milk"
+      - es: "tostadas"
+        en: "toast"
+      - es: "almuerzo"
+        en: "lunch"
+      - es: "merienda"
+        en: "afternoon snack"
+      - es: "sobremesa"
+        en: "lingering at the table after a meal"
 
   # ─────────────────────────────────────────────────────────────
   - slug: "empanadas"
@@ -100,8 +109,8 @@ classes:
         title: "The national handheld"
         word: { es: "empanada", tag: "Handheld", en: "stuffed pastry" }
         emoji: "🥟"
-        body: "An **empanada** is a half-moon of dough stuffed with filling, baked or fried. Every Argentine has a favorite place, a favorite filling and a grandma who does it better. You order them by the **docena** (dozen) or **media docena** (half dozen) for home, a party, or a lazy Sunday night. **Carne**, **pollo**, **jamón y queso**, **humita** (creamy corn) and **verdura** are the classics."
-        fun_fact: "April 8 is celebrated as the Día de la Empanada."
+        body: "An **empanada** is a half-moon of dough stuffed with filling, baked or fried. Every Argentine has a favorite place, a favorite filling and a grandma who does it better. You order them by the **docena** (dozen) or **media docena** (half dozen), for home, a party or a lazy Sunday night."
+        fun_fact: "The classic fillings: **carne**, **pollo**, **jamón y queso**, **humita** (creamy sweet corn) and **verdura**."
 
       - type: info
         title: "The repulgue is a label"
@@ -111,7 +120,7 @@ classes:
       - type: choice
         scenario: "A dozen empanadas arrive in a box. Six have one kind of braided edge, six have another. Nothing is written on the box."
         prompt: "What's the best move?"
-        options: ["Bite one of each to find out", "Ask: \"¿Cuál es cuál?\"", "Assume the braided ones are always carne"]
+        options: ["Bite one of each to find out", "Ask: \"¿Cuál es cuál?\"", "Assume the braided ones are carne"]
         correct: 1
         explain: "The repulgue codes change from shop to shop. Asking **¿cuál es cuál?** (which is which?) is totally normal. Biting and putting back is not."
 
@@ -119,12 +128,11 @@ classes:
         title: "Salta vs Tucumán"
         emoji: "⚔️"
         body: "The northwest takes this very seriously. The **salteña** is small and juicy, with meat, egg, spring onion and little cubes of **papa** (potato). The **tucumana** says no to potato: knife-cut meat, onion, egg, cumin, and lots of juice. Each province claims it makes the best one, and neither will ever admit otherwise."
-        fun_fact: "Famaillá, in Tucumán, holds the Fiesta Nacional de la Empanada every year."
 
       - type: info
         title: "Cortada a cuchillo"
         emoji: "🔪"
-        body: "The phrase you'll see on good menus is **carne cortada a cuchillo**: beef chopped by hand into small cubes instead of ground. It keeps the filling juicy. Then comes the eternal question: **al horno** (baked) or **frita** (fried)? Baked is the everyday one in Buenos Aires. Fried, often in beef fat, is a northern delicacy that stains your shirt."
+        body: "On good menus you'll see **carne cortada a cuchillo**: beef chopped by hand instead of ground, so the filling stays juicy. Then the eternal question: **al horno** (baked) or **frita** (fried)? Baked is the everyday one in Buenos Aires; fried is a northern delicacy that stains your shirt. Either way, bite a corner first and let the steam out. They're full of hot juice."
 
       - type: true_false
         statement: "A classic empanada tucumana has potato in it."
@@ -143,26 +151,26 @@ classes:
       - type: choice
         scenario: "The first empanada of the night arrives straight from the oven. Your friend grabs it with their hand and bites a corner."
         prompt: "Why a corner first?"
-        options: ["It's bad luck to start in the middle", "To let the steam and juice out so you don't burn your mouth", "Because the corners are the best part"]
+        options: ["It's bad luck to start in the middle", "To let the hot juice out first", "The corners are the best part"]
         correct: 1
-        explain: "A good juicy empanada is basically soup in a pastry. People eat them with their hands, leaning over the plate, and up north people say a good one drips down to your elbow."
+        explain: "A good juicy empanada is basically soup in a pastry. People eat them with their hands, leaning over the plate, and up north they say a good one drips down to your elbow."
 
       - type: gap
         prompt: "Calling the empanada place to order for the family"
         text: "Hola, quería una ___ de carne y media de pollo."
-        options: ["docena", "porción", "cuenta"]
+        options: ["docena", "mesa", "cuenta"]
         correct: 0
         translation: "Hi, I'd like a dozen beef and a half-dozen chicken."
         explain: "Empanadas are counted in **docenas**. \"**Quería**\" (I wanted) is the polite, very Argentine way to order."
 
     vocabulary:
       - es: "empanada"
-        en: "stuffed pastry, baked or fried"
+        en: "half-moon stuffed pastry"
       - es: "docena"
         en: "dozen"
         example: { es: "Pedimos una docena y media.", en: "We ordered a dozen and a half." }
       - es: "repulgue"
-        en: "the folded edge of an empanada"
+        en: "the braided, folded edge"
       - es: "cortada a cuchillo"
         en: "hand-chopped (meat)"
       - es: "al horno"
@@ -173,6 +181,21 @@ classes:
         en: "creamy sweet corn filling"
       - es: "¿cuál es cuál?"
         en: "which is which?"
+    glossary:
+      - es: "Carne"
+        en: "beef"
+      - es: "pollo"
+        en: "chicken"
+      - es: "jamón y queso"
+        en: "ham and cheese"
+      - es: "verdura"
+        en: "vegetables (usually chard or spinach)"
+      - es: "salteña"
+        en: "empanada style from Salta"
+      - es: "papa"
+        en: "potato"
+      - es: "tucumana"
+        en: "empanada style from Tucumán"
 
   # ─────────────────────────────────────────────────────────────
   - slug: "pizza-portena"
@@ -187,7 +210,7 @@ classes:
       - type: info
         title: "Fugazza and fugazzeta"
         emoji: "🧅"
-        body: "**Fugazza** is dough topped with a mountain of onion and oregano, no tomato. Add cheese and it's a **fugazzeta**. Pizzería **Banchero**, opened in La Boca in 1932 by a Genoese family, is credited with putting cheese on the fugazza. Then came the **fugazzeta rellena**: cheese *inside* the dough, onions on top. Heavy? Completely."
+        body: "**Fugazza** is dough topped with a mountain of onion and oregano, no tomato. Add cheese and it's a **fugazzeta**. Pizzería **Banchero**, in La Boca, is credited with putting the cheese on. Then came the **fugazzeta rellena**: cheese *inside* the dough, onions on top. Heavy? Completely."
 
       - type: match
         prompt: "Match the pizza word to what it is"
@@ -212,15 +235,14 @@ classes:
       - type: info
         title: "Standing at the counter"
         emoji: "🧍"
-        body: "**Avenida Corrientes** is the pizza street. **Güerrín**, also from 1932, is the famous one: a line out the door, and a choice between sitting down or eating **de parado** (standing up) at the counter, a **porción** in your hand, before or after the theater. Eating de parado is faster, cheaper, and honestly more fun."
-        fun_fact: "The story goes that on a busy winter Saturday, Güerrín feeds thousands of people."
+        body: "**Avenida Corrientes** is the pizza street, and **Güerrín** is the famous one: a line out the door, and a choice between sitting down or eating **de parado** (standing up) at the **mostrador** (counter), a **porción** in your hand, before or after the theater. Eating de parado is faster, cheaper, and honestly more fun."
 
       - type: choice
         scenario: "It's 11 p.m. on Corrientes. The play just ended, there's no free table at Güerrín, and you're hungry."
         prompt: "What do porteños do?"
-        options: ["Give up and go home", "Order a porción at the counter and eat standing up", "Ask for the pizza to be delivered to the theater"]
+        options: ["Wait an hour for a table", "Eat a porción at the counter", "Order delivery to the theater"]
         correct: 1
-        explain: "Eating **de parado** at the **mostrador** (counter) is a classic. A **porción de muzza** and maybe a slice of fainá: done in ten minutes."
+        explain: "Eating **de parado** at the mostrador is a classic. A **porción de muzza** and maybe a slice of fainá: done in ten minutes."
 
       - type: gap
         prompt: "Ordering at the counter"
@@ -231,10 +253,11 @@ classes:
         explain: "Pizza and fainá are ordered together all the time. Then you decide if it goes **a caballo**."
 
       - type: choice
-        prompt: "What is fainá made of?"
-        options: ["Corn flour", "Chickpea flour", "Potato", "Cheese and eggs"]
-        correct: 1
-        explain: "Chickpea flour, water, olive oil, salt, baked in a hot oven. Simple immigrant food from Genoa that became a porteño must."
+        scenario: "Your friend orders \"una fugazzeta rellena\" for the table."
+        prompt: "What arrives?"
+        options: ["Onion pizza, cheese inside the dough", "Cheese pizza with ham on top", "A pizza folded like an empanada"]
+        correct: 0
+        explain: "Cheese stuffed *inside*, a mountain of onion on top. Share it, or skip dinner tomorrow."
 
     vocabulary:
       - es: "muzza"
@@ -252,10 +275,19 @@ classes:
       - es: "fugazzeta"
         en: "onion and cheese pizza"
       - es: "a caballo"
-        en: "on top (fainá on pizza, egg on a milanesa)"
+        en: "with fainá on top (lit. on horseback)"
       - es: "moscato"
         en: "sweet, cheap white wine"
         note: "The moscato-pizza-fainá combo is a bit old-school, but still loved."
+    glossary:
+      - es: "al molde"
+        en: "baked in a pan"
+      - es: "a la piedra"
+        en: "on the stone (thin, crispy)"
+      - es: "Fugazza"
+        en: "onion pizza without cheese"
+      - es: "fugazzeta rellena"
+        en: "fugazzeta with cheese inside the dough"
 
   # ─────────────────────────────────────────────────────────────
   - slug: "herencia-italiana"
@@ -265,11 +297,10 @@ classes:
       - type: info
         title: "The milanesa"
         emoji: "🍖"
-        body: "A thin slice of beef, dipped in egg, coated in **pan rallado** (breadcrumbs), then fried or baked. It came with Italian immigrants (think *cotoletta alla milanese*) and became *the* home-cooked dish. **Milanesa con papas fritas** is what kids ask for on their birthday. In a sandwich it's a **sánguche de milanesa**, and with two fried eggs on top it's a milanesa **a caballo**."
-        fun_fact: "May 3 is the unofficial Día de la Milanesa. Nobody is quite sure who started it."
+        body: "A thin slice of beef, dipped in egg, coated in **pan rallado** (breadcrumbs), then fried or baked. It came with Italian immigrants and became *the* home-cooked dish; there's chicken too, and **soja** (soy) for vegetarians. **Milanesa con papas fritas** is what kids ask for on their birthday. In a roll it's a **sánguche de milanesa**, and with two fried eggs on top it's a milanesa **a caballo**."
 
       - type: info
-        title: "Napolitana: not from Naples"
+        title: "The napolitana"
         emoji: "🍅"
         body: "A **milanesa a la napolitana** has tomato sauce, ham and melted cheese on top. The name comes from **Nápoli**, a restaurant across from the Luna Park stadium in Buenos Aires, around 1940. The legend: a cook burnt a milanesa and hid the damage under ham, cheese and sauce. Others say it was invented on purpose. Either way: 100% porteño."
 
@@ -286,19 +317,19 @@ classes:
       - type: info
         title: "Ñoquis del 29"
         emoji: "💸"
-        body: "On the **29th** of every month, people eat **ñoquis** (gnocchi) with a banknote under the plate, for luck and money. One explanation: by the end of the month, salaries had run out and potato gnocchi were cheap. There's also a legend about a saint rewarding a poor family with coins under their plates. Restaurants put ñoquis on the menu every 29th."
+        body: "On the **29th** of every month, people eat **ñoquis** (gnocchi) with a banknote under the plate, for luck and money. One explanation: by the end of the month salaries had run out, and potato gnocchi were cheap. That's also why a **ñoqui** is someone on the public payroll who only shows up around the 29th, to get paid."
 
       - type: choice
         scenario: "It's the 29th. Your host serves ñoquis and slips a bill under your plate before you sit."
         prompt: "What do you do with the money?"
-        options: ["Give it back: it's not yours", "Leave it there while you eat, for luck", "Use it to pay for dinner"]
+        options: ["Give it back: it's not yours", "Leave it there while you eat", "Use it to pay for dinner"]
         correct: 1
-        explain: "It stays under the plate during the meal, for **prosperidad**. Afterwards, many people keep it in their wallet until next month."
+        explain: "It stays under the plate during the meal, for luck. Afterwards, many people keep it in their wallet until next month."
 
       - type: true_false
-        statement: "In Argentina, calling a public employee a \"ñoqui\" is a compliment."
-        answer: false
-        explain: "A **ñoqui** is someone on the payroll who never works and only shows up around the 29th, to collect. It's a classic political insult."
+        statement: "Calling a public employee a \"ñoqui\" means they get paid without really working."
+        answer: true
+        explain: "Exactly: they only show up around the 29th, to collect. It's a classic political insult, and nothing to do with pasta except the date."
 
       - type: match
         prompt: "Match the dish to what it is"
@@ -315,7 +346,7 @@ classes:
         options: ["soja", "tuco", "fainá"]
         correct: 0
         translation: "For me, a soy milanesa with mashed potatoes."
-        explain: "**Milanesa de soja** is everywhere, cheap and a vegetarian lifesaver. You'll also find milanesas of chicken, eggplant, even **nalga** (beef round)."
+        explain: "**Milanesa de soja** is everywhere, cheap and a vegetarian lifesaver."
 
     vocabulary:
       - es: "milanesa"
@@ -331,96 +362,165 @@ classes:
       - es: "tuco"
         en: "tomato sauce for pasta"
       - es: "ñoquis"
-        en: "gnocchi"
+        en: "potato gnocchi, eaten on the 29th"
         example: { es: "Hoy es 29, ¿comemos ñoquis?", en: "It's the 29th, shall we have gnocchi?" }
-      - es: "ñoqui"
-        en: "slacker on the public payroll"
-        note: "Insult. Nothing to do with pasta, except the date."
       - es: "nona"
         en: "grandma"
         example: { es: "Los domingos comemos en lo de la nona.", en: "On Sundays we eat at grandma's." }
+    glossary:
+      - es: "a caballo"
+        en: "topped with fried eggs; on horseback"
+      - es: "soja"
+        en: "soy"
+      - es: "ravioles"
+        en: "ravioli"
+      - es: "tallarines"
+        en: "tagliatelle-style noodles"
+      - es: "nono"
+        en: "grandpa"
+      - es: "sorrentinos"
+        en: "big round stuffed pasta"
+      - es: "ñoqui"
+        en: "slacker on the public payroll"
+        note: "Insult. Nothing to do with pasta, except the date."
 
   # ─────────────────────────────────────────────────────────────
   - slug: "guisos-y-helado"
-    title: "Stews, corn and helado"
-    summary: "Winter pots, patriotic locro, and ice cream by the kilo"
+    title: "Stews and corn"
+    summary: "Winter pots, patriotic locro and corn in its husk"
     pages:
       - type: info
         title: "Locro, the patriotic stew"
         word: { es: "locro", tag: "The patriotic stew", en: "thick corn and meat stew" }
         emoji: "🍲"
-        body: "**Locro** is a thick stew of white corn, beans, squash and several meats (pork, chorizo, beef). It comes from the Andes, from long before Argentina existed. On **25 de mayo** and **9 de julio**, families, clubs and neighborhoods make huge pots of it. Spoon on the **quiquirimichi**, a red, spicy fat with paprika and chili, also called **grasita colorada**."
-
-      - type: info
-        title: "Carbonada, humita, tamales"
-        emoji: "🌽"
-        body: "The **carbonada** is a stew of meat (often beef), squash, corn and sweet potato, often with dried peaches, sometimes served inside a whole baked pumpkin. From the northwest come the corn classics: **humita en chala**, sweet corn paste wrapped in corn husk (**chala**), and **tamales**, corn dough with meat, wrapped and tied. On a cold night, any **guiso** (stew) is home."
+        body: "**Locro** is a thick stew of white corn, beans, squash and several meats (pork, chorizo, beef). It comes from the Andes, from long before Argentina existed. On **25 de mayo** and **9 de julio**, families, clubs and neighborhoods make huge pots of it. Spoon on the **quiquirimichi**, a red, spicy fat with paprika and chili."
 
       - type: choice
         scenario: "It's the 25th of May. Your neighbors invite you to the club and ask you to bring a container."
         prompt: "What are you most likely eating?"
-        options: ["Pizza a caballo", "Locro", "Ñoquis", "Helado"]
+        options: ["Pizza a caballo", "Locro", "Ñoquis", "Milanesas"]
         correct: 1
         explain: "Clubs and parishes often sell **locro** by the portion on patriotic dates, and people take it home in their own tupper."
+
+      - type: true_false
+        statement: "Locro was invented in Buenos Aires by Italian immigrants."
+        answer: false
+        explain: "It's Andean, and much older than Argentina. The immigrants brought the pasta; the locro was already here."
+
+      - type: info
+        title: "Carbonada in a pumpkin"
+        emoji: "🎃"
+        body: "The **carbonada** is a stew of beef, squash, corn and sweet potato, often with dried peaches for a sweet touch. The showstopper version is served inside a whole baked pumpkin, and you scrape the walls as you eat. On a cold night, any **guiso** (stew) at home will do."
+
+      - type: info
+        title: "Corn in its own wrapper"
+        emoji: "🌽"
+        body: "From the northwest come the **choclo** (corn) classics. The star is **humita en chala**: fresh corn grated into a sweet paste, wrapped in the corn's own husk, the **chala**, tied up and boiled. You unwrap it at the table like a present. Same humita you find inside empanadas, just in its natural packaging."
 
       - type: match
         prompt: "Match the dish to its description"
         pairs:
           - ["locro", "corn, beans and meat stew"]
-          - ["carbonada", "meat, squash and peach stew"]
+          - ["carbonada", "stew served in a pumpkin"]
           - ["humita en chala", "corn paste in a corn husk"]
           - ["quiquirimichi", "spicy red fat for locro"]
 
+      - type: gap
+        prompt: "Winter just arrived. What's for dinner?"
+        text: "Con este frío, se viene un ___."
+        options: ["guiso", "ventilador", "protector solar"]
+        correct: 0
+        translation: "With this cold, it's stew time."
+        explain: "**Guiso** season. Often in the diminutive: **un guisito**, which somehow makes it cozier."
+
+    vocabulary:
+      - es: "locro"
+        en: "patriotic corn stew (25 de mayo)"
+      - es: "guiso"
+        en: "any hearty home stew"
+        example: { es: "Con este frío, se viene un guisito.", en: "With this cold, it's stew time." }
+      - es: "carbonada"
+        en: "beef and squash stew, often in a pumpkin"
+      - es: "choclo"
+        en: "corn on the cob, sweet corn"
+      - es: "chala"
+        en: "the leaves wrapping a corncob"
+      - es: "humita en chala"
+        en: "sweet corn paste boiled in its wrapper"
+    glossary:
+      - es: "quiquirimichi"
+        en: "spicy red fat sauce"
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "helado"
+    title: "Helado"
+    summary: "Italian roots, flavors called gustos, and ice cream by the kilo"
+    pages:
       - type: info
         title: "Helado, all year round"
         emoji: "🍦"
-        body: "Thanks to Italian immigrants, Argentina has some of the best **helado** (ice cream) outside Italy. There are thousands of **heladerías artesanales**, and people eat them even in winter. Flavors are called **gustos**. Ordering a **cucurucho** (cone) or a **vasito** (cup), you'll hear: **\"¿Qué gustos?\"** The small ones take two, the bigger ones take three or four."
-        fun_fact: "Argentines eat around 7 kilos of helado per person per year."
-
-      - type: info
-        title: "By the kilo, delivered"
-        emoji: "🛵"
-        body: "The real move is ordering helado to your door, packed in a foam box: **un cuarto** (¼ kg), **medio** (½) or **un kilo**. Late at night, after dinner, for the whole family. A porteño favorite is **dulce de leche granizado**, with chocolate flakes. And **sambayón**, from the Italian *zabaione*: egg yolks, sugar and wine. Grown-up flavor."
-
-      - type: true_false
-        statement: "In Argentina, people only buy helado in summer."
-        answer: false
-        explain: "Most people say they eat it all year. Ordering a **kilo** after a winter dinner is completely normal."
-
-      - type: gap
-        prompt: "Ordering helado delivery for four people"
-        text: "Quería un ___ de helado: dulce de leche granizado, chocolate y sambayón."
-        options: ["kilo", "docena", "porción"]
-        correct: 0
-        translation: "I'd like a kilo of ice cream: dulce de leche with chocolate chips, chocolate and sambayón."
-        explain: "Helado to take home is sold by weight: **cuarto**, **medio**, **kilo**. Usually up to four gustos in a kilo."
+        body: "Thanks to Italian immigrants, Argentina has some of the best **helado** (ice cream) outside Italy. There are thousands of **heladerías** (gelato shops), and people eat it even in winter. Flavors are called **gustos**. You pick a **cucurucho** (cone) or a **vasito** (small cup): the small ones take two gustos, the bigger ones three or four."
 
       - type: choice
         scenario: "At the heladería, the guy behind the counter asks: \"¿Qué gustos?\""
         prompt: "What does he want to know?"
         options: ["If you like the shop", "Which flavors you want", "What size you want"]
         correct: 1
-        explain: "**Gusto** means flavor. \"Dulce de leche granizado y limón\" is a perfectly good answer."
+        explain: "**Gusto** means flavor. \"Dulce de leche y limón\" is a perfectly good answer."
+
+      - type: info
+        title: "By the kilo, delivered"
+        emoji: "🛵"
+        body: "The real move is ordering helado to your door, packed in a foam box: **un cuarto** (a quarter kilo), **medio** (half) or **un kilo**. Late at night, after dinner, for the whole family, even in July. Up to four gustos fit in a kilo, and a kilo is about right for four people."
+
+      - type: choice
+        scenario: "Four friends, after dinner at your place. You're ordering helado to the door."
+        prompt: "What size do you ask for?"
+        options: ["Un vasito", "Un cuarto", "Un kilo"]
+        correct: 2
+        explain: "**Un kilo** for four. Un cuarto is for one person with self-control, and a vasito is for a walk in the park."
+
+      - type: info
+        title: "The flavors to try"
+        emoji: "🍨"
+        body: "A porteño favorite is **dulce de leche granizado**: dulce de leche ice cream with chocolate flakes. Then there's **sambayón**, from the Italian *zabaione*: egg yolks, sugar and wine. A grown-up flavor. Order both, and add a fruit one so you can say you ate something healthy."
+
+      - type: true_false
+        statement: "Sambayón is a flavor made with egg yolks, sugar and wine."
+        answer: true
+        explain: "Right, it's the Italian *zabaione* turned into helado. Your abuelo's favorite, probably."
+
+      - type: gap
+        prompt: "At the counter, order a cone with the porteño favorite"
+        text: "Un cucurucho de dulce de leche ___, por favor."
+        options: ["granizado", "lavado", "mojado"]
+        correct: 0
+        translation: "A cone of dulce de leche with chocolate flakes, please."
+        explain: "**Granizado** = with chocolate flakes. You'll order it again tomorrow."
 
     vocabulary:
-      - es: "locro"
-        en: "thick corn and meat stew"
-      - es: "guiso"
-        en: "stew"
-        example: { es: "Con este frío, se viene un guisito.", en: "With this cold, it's stew time." }
-      - es: "choclo"
-        en: "corn on the cob, sweet corn"
-      - es: "chala"
-        en: "corn husk"
       - es: "helado"
         en: "ice cream"
+      - es: "heladería"
+        en: "gelato shop"
       - es: "gusto"
-        en: "flavor (of ice cream)"
+        en: "flavor"
         example: { es: "¿Qué gustos querés?", en: "Which flavors do you want?" }
       - es: "cucurucho"
         en: "cone"
+      - es: "vasito"
+        en: "small cup"
       - es: "un cuarto"
-        en: "a quarter kilo (of ice cream)"
+        en: "a quarter kilo"
         example: { es: "Pedí un cuarto de helado.", en: "I ordered a quarter kilo of ice cream." }
-      - es: "heladería"
-        en: "ice cream shop"
+      - es: "granizado"
+        en: "with chocolate flakes"
+      - es: "sambayón"
+        en: "zabaione-style, with egg and wine"
+    glossary:
+      - es: "medio"
+        en: "half (a kilo)"
+      - es: "un kilo"
+        en: "one kilo (of ice cream)"
+      - es: "dulce de leche granizado"
+        en: "dulce de leche with chocolate flakes"

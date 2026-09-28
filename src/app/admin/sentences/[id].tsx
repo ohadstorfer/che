@@ -15,7 +15,7 @@ import {
 import { type QueueItem } from '@/lib/round';
 import { toSentence } from '@/lib/sentences';
 import { supabase } from '@/lib/supabase';
-import { colors, radius } from '@/lib/theme';
+import { colors, font, radius } from '@/lib/theme';
 import type { ExerciseMode, Form } from '@/lib/types';
 
 // ---------------------------------------------------------------------------
@@ -238,9 +238,9 @@ const styles = StyleSheet.create({
   },
   token: { paddingHorizontal: 8, paddingVertical: 5, borderRadius: radius.sm, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border, gap: 1 },
   tokenMissing: { borderColor: colors.danger, backgroundColor: colors.dangerSoft },
-  tokenSurface: { fontSize: 15, fontWeight: '700', color: colors.ink },
+  tokenSurface: { fontSize: 15, ...font.body[700], color: colors.ink },
   tokenForms: { fontSize: 11, color: colors.muted },
   review: { gap: 4 },
-  reviewHead: { fontSize: 13, fontWeight: '600', color: colors.muted },
+  reviewHead: { fontSize: 13, ...font.body[600], color: colors.muted },
   preview: { height: 620, borderRadius: radius.lg, borderWidth: 1, borderColor: colors.border, overflow: 'hidden', backgroundColor: colors.bg },
 });

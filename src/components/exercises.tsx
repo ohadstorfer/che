@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'expo-image';
 import {
   createContext,
@@ -55,8 +55,9 @@ import {
 import type { AnswerExtra, QueueItem } from '@/lib/round';
 import { DEFAULT_LADDER, type Ladder, RUNG_BUILD_AT } from '@/lib/sentences';
 import { SETTLED_DAYS, buildTiles, wordPool } from '@/lib/session';
-import { colors, radius, shadow } from '@/lib/theme';
+import { clay, colors, font, pastel, radius } from '@/lib/theme';
 import type { Form, Sentence, Tip } from '@/lib/types';
+import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
 // The exercises a round is played through — every screen the practice queue
@@ -476,14 +477,14 @@ export function PlayButton({ path, big }: { path: string; big?: boolean }) {
 // outline read as one continuous shape rather than a form with a sticker on it.
 // ---------------------------------------------------------------------------
 const SPEAKERS = [
-  require('@/assets/images/capybara/capybara-saludando-figure.png'),
-  require('@/assets/images/capybara/capybara-gaucho-figure.png'),
-  require('@/assets/images/capybara/capybara-mate-figure.png'),
-  require('@/assets/images/capybara/capybara-gaucho-cafe-figure.png'),
-  require('@/assets/images/capybara/capybara-empanadas-figure.png'),
-  require('@/assets/images/capybara/capybara-dulce-de-leche-figure.png'),
-  require('@/assets/images/capybara/capybara-facturas-figure.png'),
-  require('@/assets/images/capybara/capybara-alfajor-maicena-figure.png'),
+  require('@/assets/images/capybara/capybara-saludando-figure.webp'),
+  require('@/assets/images/capybara/capybara-gaucho-figure.webp'),
+  require('@/assets/images/capybara/capybara-mate-figure.webp'),
+  require('@/assets/images/capybara/capybara-gaucho-cafe-figure.webp'),
+  require('@/assets/images/capybara/capybara-empanadas-figure.webp'),
+  require('@/assets/images/capybara/capybara-dulce-de-leche-figure.webp'),
+  require('@/assets/images/capybara/capybara-facturas-figure.webp'),
+  require('@/assets/images/capybara/capybara-alfajor-maicena-figure.webp'),
 ];
 let nextSpeaker = 0;
 
@@ -582,8 +583,8 @@ export function Choices({
               style={[
                 styles.choiceText,
                 side && styles.choiceTextSide,
-                picked && { color: colors.primaryDark, fontWeight: '700' },
-                right && { color: colors.success, fontWeight: '700' },
+                picked && { color: colors.card, ...font.body[800] },
+                right && { color: colors.success, ...font.body[800] },
                 wrong && { color: colors.danger },
               ]}>
               {opt.label}
@@ -772,8 +773,10 @@ function TrueFalse({
 
       <View style={styles.ratingRow}>
         {[
-          { label: 'No', value: false, icon: 'close' as const, tone: colors.danger },
-          { label: 'Yes', value: true, icon: 'checkmark' as const, tone: colors.success },
+          // Her answer, not the verdict: an ink outline either way — salvia
+          // and coral are kept for the result sheet that grades it.
+          { label: 'No', value: false, icon: 'close' as const },
+          { label: 'Yes', value: true, icon: 'checkmark' as const },
         ].map((opt) => (
           <Pressable
             key={opt.label}
@@ -781,20 +784,20 @@ function TrueFalse({
             onPress={() => setPicked(opt.value)}
             style={({ pressed }) => [
               styles.bigChoice,
-              { borderColor: colors.border },
-              picked === opt.value && { borderColor: opt.tone, backgroundColor: colors.card },
+              { borderColor: 'transparent' },
+              picked === opt.value && { borderColor: colors.ink, backgroundColor: colors.card },
               { transform: [{ scale: pressed && verdict === null ? 0.97 : 1 }] },
               webPress,
             ]}>
             <Ionicons
               name={opt.icon}
               size={22}
-              color={picked === opt.value ? opt.tone : colors.faint}
+              color={picked === opt.value ? colors.ink : colors.faint}
             />
             <Text
               style={[
                 styles.bigChoiceText,
-                { color: picked === opt.value ? opt.tone : colors.muted },
+                { color: picked === opt.value ? colors.ink : colors.muted },
               ]}>
               {opt.label}
             </Text>
@@ -1545,15 +1548,15 @@ function Matching({
                   { transform: [{ scale: pressed && !isMatched ? 0.97 : 1 }] },
                   webPress,
                 ]}>
-                <Text
+                <FitText
                   style={[
                     styles.matchText,
-                    isSelected && { color: colors.onPrimary },
+                    isSelected && { color: colors.card },
                     isMatched && { color: colors.success },
                   ]}
-                  numberOfLines={2}>
+                  lines={2}>
                   {c.form}
-                </Text>
+                </FitText>
               </Pressable>
             );
           })}
@@ -1576,11 +1579,11 @@ function Matching({
                   { transform: [{ scale: pressed && !isMatched ? 0.97 : 1 }] },
                   webPress,
                 ]}>
-                <Text
+                <FitText
                   style={[styles.matchText, isMatched && { color: colors.success }]}
-                  numberOfLines={2}>
+                  lines={2}>
                   {meaningOf(c)}
-                </Text>
+                </FitText>
               </Pressable>
             );
           })}
@@ -1638,6 +1641,7 @@ export function SentenceLine({
                 <View
                   style={[
                     styles.gap,
+                    !blank.filled && styles.gapEmpty,
                     blank.tone === 'right' && styles.gapRight,
                     blank.tone === 'wrong' && styles.gapWrong,
                   ]}>
@@ -2010,7 +2014,7 @@ function GapBank({
             <Text
               style={[
                 styles.tileText,
-                picked && { color: colors.primaryDark },
+                picked && { color: colors.card },
                 right && { color: colors.success },
                 wrong && { color: colors.danger },
               ]}>
@@ -2143,6 +2147,9 @@ function ClauseContext({ es, clause }: { es: string; clause: number }) {
   );
 }
 
+/** The ink pick's own shade: a drop in its colour and a faint lit edge. */
+const PICK_SHADOW = 'inset 0 2px 0 rgba(255, 255, 255, 0.15), 0 10px 22px -10px rgba(58, 42, 32, 0.6)';
+
 const styles = StyleSheet.create({
   bigCard: { alignItems: 'center', gap: 10, paddingVertical: 26 },
 
@@ -2150,40 +2157,41 @@ const styles = StyleSheet.create({
   // ink of a finished sentence, and the part she owes is an empty rule of the
   // same height, so the line reads as one sentence with a hole in it.
   clauseLine: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 8 },
-  clauseWritten: { fontSize: 20, lineHeight: 30, color: colors.ink, fontWeight: '700' },
+  clauseWritten: { ...font.display[700], fontSize: 20, lineHeight: 30, color: colors.ink },
   clauseSlot: {
     width: 72,
-    height: 2,
-    borderRadius: 1,
-    backgroundColor: colors.border,
+    height: 3,
+    borderRadius: radius.pill,
+    backgroundColor: colors.trough,
     marginBottom: 6,
   },
   // The Spanish leads — it is the form she is being tested on — and the meaning
   // sits under a rule, in the primary's deep tone.
   esHero: {
+    ...font.display[800],
     fontSize: 42,
     color: colors.ink,
-    fontWeight: '700',
     textAlign: 'center',
     letterSpacing: -0.5,
   },
   esBig: {
+    ...font.display[800],
     fontSize: 34,
     color: colors.ink,
-    fontWeight: '700',
     textAlign: 'center',
     letterSpacing: -0.4,
   },
   esPhraseHero: {
+    ...font.display[800],
     fontSize: 28,
     color: colors.ink,
-    fontWeight: '700',
     textAlign: 'center',
     lineHeight: 36,
   },
-  enBig: { fontSize: 24, color: colors.primaryDark, fontWeight: '700', textAlign: 'center' },
-  enPhrase: { fontSize: 20, color: colors.primaryDark, fontWeight: '700', textAlign: 'center' },
-  divider: { height: 1, backgroundColor: colors.border, alignSelf: 'stretch', marginVertical: 8 },
+  enBig: { ...font.display[700], fontSize: 24, color: colors.ink, textAlign: 'center' },
+  enPhrase: { ...font.display[700], fontSize: 20, color: colors.ink, textAlign: 'center' },
+  // Room between the prompt and the sentence — space, not a line.
+  divider: { height: 6, alignSelf: 'stretch' },
 
   // The capybara and its bubble ---------------------------------------------
   // The tail is absolute, so it eats into this gap: 12 leaves its tip a few
@@ -2193,7 +2201,7 @@ const styles = StyleSheet.create({
   speechRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   speaker: { width: SPEAKER_WIDTH, height: SPEAKER_HEIGHT, transform: [{ scaleX: -1 }] },
   bubbleWrap: { flex: 1 },
-  bubble: { paddingVertical: 16, paddingHorizontal: 16 },
+  bubble: { paddingVertical: 16, paddingHorizontal: 16, borderRadius: radius.md + 4 },
   bubbleRow: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   bubbleText: { flex: 1, gap: 2 },
   // The apex sits at the element's left edge and halfway down its height, so
@@ -2213,7 +2221,8 @@ const styles = StyleSheet.create({
     borderTopWidth: TAIL,
     borderBottomWidth: TAIL,
     borderRightWidth: TAIL,
-    borderRightColor: colors.border,
+    // The panel has no rim any more — it is clay — so the edge is clay too.
+    borderRightColor: colors.card,
   },
   tailFill: {
     left: -(TAIL - TAIL_RIM) + 1,
@@ -2223,22 +2232,22 @@ const styles = StyleSheet.create({
     borderRightWidth: TAIL - TAIL_RIM,
     borderRightColor: colors.card,
   },
-  bubbleWord: { fontSize: 32, color: colors.ink, fontWeight: '700', letterSpacing: -0.4 },
-  bubbleEn: { fontSize: 26, color: colors.primaryDark, fontWeight: '700' },
-  bubblePhrase: { fontSize: 22, lineHeight: 30, color: colors.ink, fontWeight: '700' },
-  bubblePhraseEn: { fontSize: 20, lineHeight: 28, color: colors.primaryDark, fontWeight: '700' },
+  bubbleWord: { ...font.display[800], fontSize: 32, color: colors.ink, letterSpacing: -0.4 },
+  bubbleEn: { ...font.display[800], fontSize: 26, color: colors.ink, letterSpacing: -0.3 },
+  bubblePhrase: { ...font.display[700], fontSize: 22, lineHeight: 30, color: colors.ink },
+  bubblePhraseEn: { ...font.display[700], fontSize: 20, lineHeight: 28, color: colors.ink },
 
   // Tips ---------------------------------------------------------------------
   tip: { gap: 12, paddingVertical: 20, paddingHorizontal: 20 },
-  tipText: { fontSize: 17, lineHeight: 26, color: colors.ink },
-  tipStrong: { fontWeight: '700', color: colors.primaryDark },
+  tipText: { ...font.body[600], fontSize: 17, lineHeight: 26, color: colors.ink },
+  tipStrong: { ...font.body[800], color: colors.primaryDark },
   tipEm: { fontStyle: 'italic' },
-  tipTable: { borderRadius: 12, borderWidth: StyleSheet.hairlineWidth, borderColor: colors.border, overflow: 'hidden' },
+  tipTable: { borderRadius: radius.sm, backgroundColor: colors.trough, boxShadow: clay.trough, overflow: 'hidden' },
   tipRow: { flexDirection: 'row', paddingVertical: 7, paddingHorizontal: 10, columnGap: 8 },
   tipRowRule: { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: colors.border },
-  tipCell: { flex: 1, fontSize: 15, lineHeight: 21, color: colors.ink },
+  tipCell: { ...font.body[600], flex: 1, fontSize: 15, lineHeight: 21, color: colors.ink },
   tipCellWide: { fontSize: 13, lineHeight: 18 },
-  tipCellHead: { color: colors.muted },
+  tipCellHead: { ...font.body[800], color: colors.muted },
 
   // Sentences ----------------------------------------------------------------
   // Words are laid out one Text each so a single one can be marked or blanked;
@@ -2264,42 +2273,42 @@ const styles = StyleSheet.create({
     textDecorationStyle: 'dotted',
     textDecorationColor: colors.faint,
   },
+  // The blank: once a word is in, it just sits in the sentence on an ink
+  // underline — no fill. Salvia or coral once it is judged.
   gap: {
     minWidth: 68,
     alignItems: 'center',
-    paddingHorizontal: 4,
-    borderBottomWidth: 2.5,
-    borderBottomColor: colors.primary,
+    paddingHorizontal: 6,
+    borderBottomWidth: 3,
+    borderBottomColor: colors.ink,
   },
+  /** Nothing picked yet: a sunken slot, waiting. */
+  gapEmpty: { borderRadius: 12, borderBottomWidth: 0, backgroundColor: colors.trough, boxShadow: clay.trough },
   gapRight: { borderBottomColor: colors.success },
   gapWrong: { borderBottomColor: colors.danger },
-  gapText: { fontSize: 22, lineHeight: 30, fontWeight: '700', color: colors.primaryDark },
+  gapText: { ...font.display[800], fontSize: 22, lineHeight: 30, color: colors.ink },
   gapLine: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 14,
     paddingVertical: 14,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: colors.border,
   },
   gapBank: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 10 },
   // The aside sits a step down from the gloss it explains: lighter, smaller,
   // and never bold — it is context, not the thing being learnt.
-  glossNote: { fontSize: 14, color: colors.muted, lineHeight: 19 },
-  peekHint: { fontSize: 14, color: colors.faint, textAlign: 'center' },
+  glossNote: { ...font.body[500], fontSize: 14, color: colors.muted, lineHeight: 19 },
+  peekHint: { ...font.body[600], fontSize: 14, color: colors.muted, textAlign: 'center' },
 
   playWrap: { alignItems: 'center', gap: 6 },
-  playButton: { backgroundColor: colors.primary, borderRadius: 99, padding: 13 },
-  playButtonDead: { backgroundColor: colors.muted },
+  playButton: { backgroundColor: colors.primary, borderRadius: radius.pill, padding: 13, boxShadow: clay.button },
+  playButtonDead: { backgroundColor: colors.muted, boxShadow: clay.flat },
   playButtonBig: { padding: 18 },
   playButtonOn: { backgroundColor: colors.primaryDark },
   pulse: { position: 'absolute', borderRadius: 99, borderWidth: 2, borderColor: colors.primary },
   audioPad: {
-    borderWidth: 1.5,
-    borderColor: colors.border,
-    borderRadius: radius.lg,
+    borderRadius: radius.xl,
     backgroundColor: colors.card,
+    boxShadow: clay.surface,
     paddingVertical: 30,
     alignItems: 'center',
     gap: 12,
@@ -2312,26 +2321,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 4,
+    boxShadow: clay.button,
   },
-  audioPadHint: { fontSize: 15, color: colors.muted },
-  audioProblem: { fontSize: 13, color: colors.muted, textAlign: 'center' },
+  audioPadHint: { ...font.body[700], fontSize: 15, color: colors.muted },
+  audioProblem: { ...font.body[600], fontSize: 13, color: colors.muted, textAlign: 'center' },
 
   // Choices ------------------------------------------------------------------
+  // Clay chips. The border stays, transparent, so a state's rim never shifts
+  // the layout.
   choice: {
     backgroundColor: colors.card,
     borderWidth: 1.5,
-    borderColor: colors.border,
+    borderColor: 'transparent',
     borderRadius: radius.md,
+    boxShadow: clay.surface,
     paddingVertical: 16,
     paddingHorizontal: 18,
   },
   choicesSide: { flexDirection: 'row', gap: 12 },
-  choiceSide: { flex: 1, minHeight: 88, borderRadius: radius.lg, alignItems: 'center', justifyContent: 'center' },
-  choiceTextSide: { fontSize: 22, fontWeight: '700' },
-  choicePicked: { borderColor: colors.primary, backgroundColor: colors.primarySoft },
+  choiceSide: { flex: 1, minHeight: 88, borderRadius: radius.lg - 4, alignItems: 'center', justifyContent: 'center' },
+  choiceTextSide: { ...font.display[800], fontSize: 22 },
+  // Picked is tinta: the warm ink, with the card's cream on it — firm and
+  // unmistakable, and never mistaken for right (salvia) or wrong (coral).
+  choicePicked: { borderColor: 'transparent', backgroundColor: colors.ink, boxShadow: PICK_SHADOW },
   choiceRight: { borderColor: colors.success, backgroundColor: colors.successSoft },
   choiceWrong: { borderColor: colors.danger, backgroundColor: colors.dangerSoft },
-  choiceText: { fontSize: 17, color: colors.ink, textAlign: 'center', fontWeight: '500' },
+  choiceText: { ...font.body[700], fontSize: 17, color: colors.ink, textAlign: 'center' },
 
   ratingRow: { flexDirection: 'row', gap: 10 },
   bigChoice: {
@@ -2344,8 +2359,9 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
     borderWidth: 2,
     backgroundColor: colors.card,
+    boxShadow: clay.surface,
   },
-  bigChoiceText: { fontSize: 17, fontWeight: '700' },
+  bigChoiceText: { ...font.body[800], fontSize: 17 },
 
   typingInput: {
     backgroundColor: colors.card,
@@ -2354,6 +2370,7 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
     paddingHorizontal: 16,
     paddingVertical: 15,
+    ...font.body[700],
     fontSize: 19,
     color: colors.ink,
     textAlign: 'center',
@@ -2361,76 +2378,76 @@ const styles = StyleSheet.create({
 
   // Tile building ------------------------------------------------------------
   answerArea: { minHeight: TILE_ROW * 2 + 4 },
-  answerAreaRuled: { borderTopWidth: 1, borderTopColor: colors.border, paddingTop: 4 },
+  answerAreaRuled: { borderTopWidth: 1, borderTopColor: colors.trough, paddingTop: 4 },
+  // A sunken well the tiles drop into.
   answerAreaBoxed: {
-    borderRadius: radius.md,
+    borderRadius: radius.lg,
     borderWidth: 1.5,
-    borderColor: colors.border,
-    backgroundColor: colors.card,
+    borderColor: 'transparent',
+    backgroundColor: colors.trough,
+    boxShadow: clay.trough,
     justifyContent: 'center',
     minHeight: 72,
     padding: 8,
   },
-  answerRule: { position: 'absolute', left: 0, right: 0, height: 1, backgroundColor: colors.border },
+  answerRule: { position: 'absolute', left: 0, right: 0, height: 1, backgroundColor: colors.trough },
   answerTiles: { flexDirection: 'row', flexWrap: 'wrap', alignContent: 'flex-start', gap: 8 },
-  answerPlaceholder: { color: colors.faint, fontSize: 15, alignSelf: 'center' },
+  answerPlaceholder: { ...font.body[600], color: colors.muted, fontSize: 15, alignSelf: 'center' },
   tileBank: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'center' },
   tile: {
     minWidth: 54,
     height: 50,
     paddingHorizontal: 16,
-    // Rounded rectangle, not a pill: a row of pills reads as loose beads, and
+    // Rounded clay block, not a pill: a row of pills reads as loose beads, and
     // the words have to line up like something she is building a sentence out of.
-    borderRadius: radius.md,
+    // The border stays, transparent, so state rims never change a tile's size.
+    borderRadius: 18,
     backgroundColor: colors.card,
     borderWidth: 1.5,
-    borderColor: colors.border,
+    borderColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    ...shadow.card,
+    boxShadow: clay.surface,
   },
   // An empty slot while its tile is in the air: the outline stays so nothing
   // reflows mid-flight, but it reads as a gap rather than as a tile.
-  tileInFlight: { backgroundColor: 'transparent', borderColor: 'transparent', shadowOpacity: 0, elevation: 0 },
+  tileInFlight: { backgroundColor: 'transparent', borderColor: 'transparent', boxShadow: 'none' },
   tileFlying: { position: 'absolute', zIndex: 10 },
-  // Held: off the page rather than on it, so it reads as picked up and not as
-  // one more tile sitting in the row.
+  // Held: manteca, lifted off the page rather than on it, so it reads as
+  // picked up and not as one more tile sitting in the row.
   tileHeld: {
     zIndex: 20,
-    borderColor: colors.primary,
-    shadowOpacity: 0.22,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 8,
+    backgroundColor: pastel.butter,
+    boxShadow: clay.float,
   },
+  // Where a tile came from: a pressed-in hollow of its shape.
   tileTaken: {
-    backgroundColor: colors.border,
-    borderColor: colors.border,
-    shadowOpacity: 0,
-    elevation: 0,
+    backgroundColor: colors.trough,
+    boxShadow: clay.trough,
   },
-  tileText: { fontSize: 19, fontWeight: '600', color: colors.ink },
+  tileText: { ...font.body[800], fontSize: 19, color: colors.ink },
 
   // Matching -----------------------------------------------------------------
   matchGrid: { flexDirection: 'row', gap: 10 },
   matchColumn: { flex: 1, gap: 10 },
   matchCell: {
     minHeight: 58,
-    borderRadius: radius.md,
+    borderRadius: 18,
     borderWidth: 1.5,
-    borderColor: colors.border,
+    borderColor: 'transparent',
     backgroundColor: colors.card,
+    boxShadow: clay.surface,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 12,
     paddingVertical: 10,
   },
-  matchCellPicked: { borderColor: colors.primary, backgroundColor: colors.primary },
+  matchCellPicked: { borderColor: 'transparent', backgroundColor: colors.ink, boxShadow: PICK_SHADOW },
   matchCellDone: {
     borderColor: colors.success,
     backgroundColor: colors.successSoft,
     opacity: 0.75,
   },
-  matchText: { fontSize: 16, fontWeight: '600', color: colors.ink, textAlign: 'center' },
+  matchText: { ...font.body[800], fontSize: 16, color: colors.ink, textAlign: 'center' },
 
 });

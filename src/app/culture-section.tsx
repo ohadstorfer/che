@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -9,11 +9,11 @@ import { classMinutes, cultureSections, sectionTone, splitTitle, useCultureDone 
 import { tileArt } from '@/lib/culture-art';
 import { goBack } from '@/lib/nav';
 import { useStatusBarColor } from '@/lib/status-bar-color';
-import { colors, fonts, press, radius, shadow } from '@/lib/theme';
+import { clay, colors, font, press, pastelGrad, radius } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
-// One culture subject: a hero in the subject's own tone, then its classes as a
-// short path. Nothing is locked — the path only suggests an order — but the
+// One culture subject: a clay hero in the subject's own pastel, then its
+// classes as a short path. Nothing is locked — the path only suggests an order — but the
 // first class she hasn't finished is marked "Up next" and carries the one
 // primary button on the screen, so there is never a question of where to tap.
 // ---------------------------------------------------------------------------
@@ -38,7 +38,7 @@ export default function CultureSectionScreen() {
       <SafeAreaView style={styles.safe}>
         <View style={styles.missing}>
           <Text style={styles.missingText}>This subject doesn't exist.</Text>
-          <Button title="Back to culture" onPress={() => router.replace('/culture')} />
+          <Button title="Back to culture" onPress={() => router.dismissTo('/culture')} />
         </View>
       </SafeAreaView>
     );
@@ -64,15 +64,16 @@ export default function CultureSectionScreen() {
         </Pressable>
 
         <View style={[styles.hero, { backgroundColor: tone.bg }]}>
+          <View style={styles.pod} pointerEvents="none" />
           <Image
             source={tileArt(section.slug, cultureSections.indexOf(section))}
             style={styles.heroArt}
             contentFit="contain"
             accessible={false}
           />
-          {eyebrow ? <Text style={[styles.eyebrow, { color: tone.sub }]}>{eyebrow}</Text> : null}
+          {eyebrow ? <Text style={[styles.eyebrow, { color: tone.ink }]}>{eyebrow}</Text> : null}
           <Text style={[styles.heroTitle, { color: tone.ink }]}>{title}</Text>
-          <Text style={[styles.heroSummary, { color: tone.sub }]}>{section.summary}</Text>
+          <Text style={[styles.heroSummary, { color: tone.ink }]}>{section.summary}</Text>
 
           <View style={styles.stats}>
             <Stat tone={tone} icon="albums-outline" label={`${total} classes`} />
@@ -80,7 +81,7 @@ export default function CultureSectionScreen() {
             {done > 0 ? <Stat tone={tone} icon="checkmark-circle-outline" label={`${done} done`} /> : null}
           </View>
           {done > 0 ? (
-            <View style={[styles.track, { backgroundColor: tone.track }]}>
+            <View style={styles.track}>
               <View style={[styles.fill, { backgroundColor: tone.fill, width: `${(done / total) * 100}%` }]} />
             </View>
           ) : null}
@@ -97,7 +98,7 @@ export default function CultureSectionScreen() {
                 <View style={styles.rail}>
                   <View style={[styles.node, finished && styles.nodeDone, next && styles.nodeNext]}>
                     {finished ? (
-                      <Ionicons name="checkmark" size={18} color={colors.accent} />
+                      <Ionicons name="checkmark" size={18} color={colors.onPastel} />
                     ) : (
                       <Text style={[styles.nodeText, next && { color: colors.onPrimary }]}>{i + 1}</Text>
                     )}
@@ -150,7 +151,7 @@ function Stat({
 }) {
   return (
     <View style={styles.stat}>
-      <Ionicons name={icon} size={15} color={tone.sub} />
+      <Ionicons name={icon} size={15} color={tone.ink} />
       <Text style={[styles.statText, { color: tone.ink }]}>{label}</Text>
     </View>
   );
@@ -161,30 +162,57 @@ const NODE = 32;
 const styles = StyleSheet.create({
   safe: { flex: 1 },
   missing: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 24 },
-  missingText: { fontSize: 17, color: colors.muted },
+  missingText: { ...font.body[600], fontSize: 17, color: colors.muted },
   container: { padding: 20, paddingTop: 8, gap: 22, maxWidth: 560, width: '100%', alignSelf: 'center', paddingBottom: 48 },
 
   back: {
-    width: 40,
-    height: 40,
+    width: 44,
+    height: 44,
     borderRadius: radius.pill,
     backgroundColor: colors.card,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: -8,
-    ...shadow.card,
+    boxShadow: clay.surface,
   },
 
-  hero: { borderRadius: radius.xl, padding: 22, paddingTop: 24, gap: 6, overflow: 'hidden', minHeight: 230, justifyContent: 'flex-end' },
+  hero: {
+    borderRadius: radius.xl,
+    padding: 22,
+    paddingTop: 24,
+    gap: 6,
+    overflow: 'hidden',
+    minHeight: 230,
+    justifyContent: 'flex-end',
+    boxShadow: clay.surface,
+  },
+  // The soft white disc behind the subject's art.
+  pod: {
+    position: 'absolute',
+    right: -28,
+    top: 4,
+    width: 180,
+    height: 180,
+    borderRadius: 90,
+    backgroundColor: colors.pod,
+    boxShadow: clay.surface,
+  },
   heroArt: { position: 'absolute', right: 8, top: 10, width: 136, height: 170 },
-  eyebrow: { fontSize: 12, fontWeight: '700', letterSpacing: 0.7, textTransform: 'uppercase' },
-  heroTitle: { fontFamily: fonts.display, fontSize: 34, lineHeight: 37, letterSpacing: -0.8, maxWidth: '62%' },
-  heroSummary: { fontSize: 16, lineHeight: 22, maxWidth: '62%' },
+  eyebrow: { ...font.body[800], fontSize: 13, opacity: 0.8 },
+  heroTitle: { ...font.display[800], fontSize: 30, lineHeight: 31, letterSpacing: -0.4, maxWidth: '62%' },
+  heroSummary: { ...font.body[600], fontSize: 15, lineHeight: 21, maxWidth: '62%', opacity: 0.85 },
   stats: { flexDirection: 'row', flexWrap: 'wrap', gap: 16, marginTop: 12 },
   stat: { flexDirection: 'row', alignItems: 'center', gap: 5 },
-  statText: { fontSize: 14, fontWeight: '600', fontVariant: ['tabular-nums'] },
-  track: { height: 6, borderRadius: radius.pill, overflow: 'hidden', marginTop: 10 },
-  fill: { height: '100%', borderRadius: radius.pill },
+  statText: { ...font.body[800], fontSize: 13, fontVariant: ['tabular-nums'] },
+  track: {
+    height: 8,
+    borderRadius: 6,
+    overflow: 'hidden',
+    marginTop: 10,
+    backgroundColor: colors.trough,
+    boxShadow: clay.trough,
+  },
+  fill: { height: '100%', borderRadius: 6 },
 
   step: { flexDirection: 'row', gap: 14 },
   rail: { width: NODE, alignItems: 'center' },
@@ -192,19 +220,18 @@ const styles = StyleSheet.create({
     width: NODE,
     height: NODE,
     borderRadius: radius.pill,
-    borderWidth: 1.5,
-    borderColor: colors.border,
-    backgroundColor: colors.bg,
+    backgroundColor: colors.trough,
+    boxShadow: clay.trough,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 16,
   },
-  // A finished class is a stamp in her passport: terracotta ink, the way the class ends.
-  nodeDone: { backgroundColor: colors.accentSoft, borderColor: colors.accent, borderWidth: 2.5 },
-  nodeNext: { backgroundColor: colors.primary, borderColor: colors.primary },
-  nodeText: { fontSize: 14, fontWeight: '700', color: colors.muted, fontVariant: ['tabular-nums'] },
-  line: { flex: 1, width: 2, marginVertical: 4, borderRadius: 1, backgroundColor: colors.border },
-  lineDone: { backgroundColor: colors.accent },
+  // A finished class is a manteca coin, the way done steps look on the path.
+  nodeDone: { backgroundColor: pastelGrad.butter[1], boxShadow: clay.surface },
+  nodeNext: { backgroundColor: colors.primary, boxShadow: clay.button },
+  nodeText: { ...font.body[800], fontSize: 14, color: colors.muted, fontVariant: ['tabular-nums'] },
+  line: { flex: 1, width: 3, marginVertical: 4, borderRadius: 2, backgroundColor: colors.trough },
+  lineDone: { backgroundColor: pastelGrad.butter[1] },
 
   card: {
     flex: 1,
@@ -213,22 +240,14 @@ const styles = StyleSheet.create({
     gap: 4,
     borderRadius: radius.lg,
     backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    ...shadow.card,
+    boxShadow: clay.surface,
   },
-  cardNext: { borderColor: colors.primary, borderWidth: 1.5 },
-  upNext: {
-    fontSize: 11,
-    fontWeight: '700',
-    letterSpacing: 0.7,
-    textTransform: 'uppercase',
-    color: colors.primary,
-    marginBottom: 2,
-  },
-  cardTitle: { fontSize: 17, fontWeight: '700', color: colors.ink, letterSpacing: -0.2 },
-  cardSummary: { fontSize: 14, lineHeight: 20, color: colors.muted },
+  // The class to open next wears a rosa ring on top of its clay.
+  cardNext: { boxShadow: `${clay.surface}, 0 0 0 2px ${colors.primary}` },
+  upNext: { ...font.body[800], fontSize: 13, color: colors.primary, marginBottom: 2 },
+  cardTitle: { ...font.display[800], fontSize: 19, lineHeight: 22, color: colors.ink, letterSpacing: -0.2 },
+  cardSummary: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.muted },
   cardFoot: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 6 },
-  meta: { fontSize: 13, color: colors.faint, fontWeight: '600', fontVariant: ['tabular-nums'] },
-  again: { fontSize: 13, color: colors.primary, fontWeight: '600' },
+  meta: { ...font.body[800], fontSize: 13, color: colors.muted, fontVariant: ['tabular-nums'] },
+  again: { ...font.body[800], fontSize: 13, color: colors.primary },
 });

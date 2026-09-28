@@ -7,7 +7,7 @@
 //
 // Exits non-zero on any error, so it can gate the seed script and CI.
 
-import { boundCandidates, chePlacement, checkFormEntry, checkPhrases, glossRepeats, meaningOverlaps } from '../../src/lib/course-rules/check.ts';
+import { boundCandidates, chePlacement, checkFormEntry, checkPhrases, glossInherited, glossRepeats, meaningOverlaps } from '../../src/lib/course-rules/check.ts';
 import { drillable } from '../../src/lib/course-rules/vocabulary.ts';
 import { checkShape } from '../../src/lib/course-rules/shape.ts';
 import { loadOutline } from './lib/outline.mjs';
@@ -28,6 +28,9 @@ if (fromYaml) {
   }
   for (const f of glossRepeats(outline)) {
     warnings.push(`"${f.form}" (unit ${f.unit_order}): gloss repeats the Spanish word — move the explanation to the note`);
+  }
+  for (const { form: f, why } of glossInherited(outline)) {
+    warnings.push(`"${f.form}" (unit ${f.unit_order}): ${why} — give it a gloss of its own`);
   }
   for (const { a, b, shared } of meaningOverlaps(outline)) {
     warnings.push(`"${a.form}" (unit ${a.unit_order}) and "${b.form}" (unit ${b.unit_order}) share the meaning "${shared.join(', ')}"`);

@@ -1062,6 +1062,7 @@ units:
           - form: "cliente"
             f: "sg"
           - form: "clientes"
+            en: "clients, customers"
             f: "pl"
       - lemma: "aguinaldo"
         pos: "noun"

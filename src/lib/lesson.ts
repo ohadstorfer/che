@@ -23,6 +23,7 @@ import {
   modeForRung,
   sentenceItem,
 } from './session';
+import { loadCourse } from './course';
 import { supabase } from './supabase';
 import type { ExerciseMode, Form, FormState, Lesson, LessonSlot, Sentence, Tip, Unit } from './types';
 
@@ -92,23 +93,36 @@ export async function buildLesson(
   lessonId: string,
   { canonical = false }: BuildLessonOptions = {},
 ): Promise<LessonData> {
-  const [{ data: lesson }, { data: slotRows }, data] = await Promise.all([
-    supabase.from('lessons').select('*').eq('id', lessonId).single(),
+  const [{ lesson, unit, tips }, { data: slotRows }, data] = await Promise.all([
+    lessonWithUnit(lessonId),
     supabase.from('lesson_slots').select('*').eq('lesson_id', lessonId).order('ordinal', { ascending: true }),
     loadLearner(userId),
   ]);
+
+  return {
+    ...resolveSlots(data, unit, (slotRows ?? []) as LessonSlot[], tips, canonical),
+    lesson,
+    unit,
+  };
+}
+
+/** A lesson, its unit and the unit's tips — from the cached course when the
+ *  lesson is on it, else (a draft staff are previewing) straight from the DB. */
+export async function lessonWithUnit(lessonId: string): Promise<{ lesson: Lesson; unit: Unit; tips: Tip[] }> {
+  const course = await loadCourse().catch(() => null);
+  const onPath = course?.path.find((l) => l.id === lessonId);
+  if (onPath && course) {
+    const { unit, section, index, unitIndex, sectionIndex, opensUnit, opensSection, ...lesson } = onPath;
+    return { lesson, unit, tips: course.tipsByUnit.get(unit.id) ?? [] };
+  }
+  const { data: lesson } = await supabase.from('lessons').select('*').eq('id', lessonId).single();
   if (!lesson) throw new Error(`lesson ${lessonId} not found`);
   const [{ data: unit }, { data: tipRows }] = await Promise.all([
     supabase.from('units').select('*').eq('id', (lesson as Lesson).unit_id).single(),
     supabase.from('tips').select('*').eq('unit_id', (lesson as Lesson).unit_id),
   ]);
   if (!unit) throw new Error(`unit for lesson ${lessonId} not found`);
-
-  return {
-    ...resolveSlots(data, unit as Unit, (slotRows ?? []) as LessonSlot[], (tipRows ?? []) as Tip[], canonical),
-    lesson: lesson as Lesson,
-    unit: unit as Unit,
-  };
+  return { lesson: lesson as Lesson, unit: unit as Unit, tips: (tipRows ?? []) as Tip[] };
 }
 
 /** The slot resolution itself, apart from any loading — pure given its inputs. */

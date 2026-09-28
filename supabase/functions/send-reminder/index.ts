@@ -125,19 +125,16 @@ Deno.serve(async (req) => {
     events.length = 0;
   };
 
+  // Fails closed: no secret, no sends.
   const { data: cronSecret, error: secretErr } = await supabase.rpc("get_cron_secret");
   if (secretErr) warn("get_cron_secret error", { error: secretErr.message });
-  if (typeof cronSecret === "string" && cronSecret.length > 0) {
-    const auth = req.headers.get("authorization") || "";
-    if (auth !== `Bearer ${cronSecret}`) {
-      warn("unauthorized — bearer mismatch", { hasAuth: Boolean(auth) });
-      await flush();
-      return json({ error: "unauthorized", traceId }, { status: 401 });
-    }
-    log("auth ok");
-  } else {
-    warn("cron_secret not set — auth check skipped");
+  const auth = req.headers.get("authorization") || "";
+  if (typeof cronSecret !== "string" || !cronSecret || auth !== `Bearer ${cronSecret}`) {
+    warn("unauthorized", { hasAuth: Boolean(auth), hasSecret: Boolean(cronSecret) });
+    await flush();
+    return json({ error: "unauthorized", traceId }, { status: 401 });
   }
+  log("auth ok");
 
   const { data: subs, error: subsErr } = await supabase
     .from("push_subscriptions")
@@ -246,7 +243,7 @@ Deno.serve(async (req) => {
       body: p.body,
       sound: "default",
       channelId: "default",
-      data: { url: "che://" },
+      data: { url: "posta://" },
     }));
     for (let i = 0; i < messages.length; i += BATCH_SIZE) {
       const batch = messages.slice(i, i + BATCH_SIZE);

@@ -12,7 +12,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { parse } from 'yaml';
 
-import { checkFormEntry, checkSentence, glossRepeats, meaningOverlaps } from '../../../src/lib/course-rules/check.ts';
+import { checkFormEntry, checkSentence, glossInherited, glossRepeats, meaningOverlaps } from '../../../src/lib/course-rules/check.ts';
 import { drillable } from '../../../src/lib/course-rules/vocabulary.ts';
 import { ids, lemmaKey } from './ids.mjs';
 import { POS, REGISTERS, fold, parseFeatures } from './rules.mjs';
@@ -288,6 +288,11 @@ export function loadOutline(paths = SECTION_PATHS) {
   // drink)" — hands over the answer. The explanation belongs in "note".
   for (const f of glossRepeats(outline)) {
     warnings.push(`"${f.form}" (unit ${f.unit_order}): gloss repeats the Spanish word — move the explanation to "note"`);
+  }
+  // "piernas" as "leg", "recomiendo" as "to recommend": a form left without
+  // "en" shows its lemma's, which is wrong for a plural or a conjugation.
+  for (const { form: f, why } of glossInherited(outline)) {
+    warnings.push(`"${f.form}" (unit ${f.unit_order}): ${why} — give it an "en" of its own`);
   }
 
   // Two words sharing a meaning can't be told apart from the English. The app

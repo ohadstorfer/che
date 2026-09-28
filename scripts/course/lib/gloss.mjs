@@ -30,7 +30,7 @@ export function glossPrompt({ sentences, formById }) {
     '- Leave out the punctuation around them.',
     '- The meaning in THIS sentence: `bien` in "¡Bien hecho!" = "Well done!" is "well"; in "Estoy bien" = "I\'m fine" it is "fine".',
     '- A token that is a whole expression gets the whole English expression: `todo bien` in "Todo bien" = "All good" is "all good"; `por favor` is "please".',
-    '- When English folds two Spanish words into one ("Soy" = "I\'m", "Dámelo" = "Give it to me"), give each token the English words it accounts for; two tokens may share a word.',
+    '- When English folds two Spanish words into one ("Soy" = "I\'m", "Damelo" = "Give it to me"), give each token the English words it accounts for; two tokens may share a word.',
     '- A verb whose subject Spanish leaves out takes the English subject with it: `soy` in "Soy de acá" = "I\'m from here" is "I\'m".',
     '- Leave a token out when the English has nothing for it: `che` usually, an article English drops, a pronoun the English doesn\'t repeat.',
     '',

@@ -1,4 +1,5 @@
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -10,14 +11,15 @@ import { goBack } from '@/lib/nav';
 import { maxUnitsInTest } from '@/lib/placement';
 import { SECTION_CAN_DO } from '@/lib/sections';
 import { useStatusBarColor } from '@/lib/status-bar-color';
-import { colors, press, radius, shadow } from '@/lib/theme';
+import { clay, colors, font, gradients, pastelGrad, path, press, radius } from '@/lib/theme';
+import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
 // The course as a map of sections, the way Duolingo lays it out: one card per
 // section with how far she is through it and which units it spans. The path on
 // Home holds a single section; this is where she sees all of them and moves
-// between them. The section she is in is the one card in green, with what it
-// lets her say in a speech bubble and the only primary button on the screen.
+// between them. The section she is in is the one card in salvia clay, with what
+// it lets her say in a speech bubble and the only primary button on the screen.
 // Finished sections open straight onto their road; the ones ahead stay locked
 // unless a jump test can reach them in one sitting.
 // ---------------------------------------------------------------------------
@@ -64,7 +66,7 @@ export default function SectionsScreen() {
     return span > 0 && span <= maxUnitsInTest() ? target : null;
   };
 
-  const open = (s: SectionSummary) => router.navigate({ pathname: '/home', params: { section: String(s.section.id) } });
+  const open = (s: SectionSummary) => router.dismissTo({ pathname: '/home', params: { section: String(s.section.id) } });
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
@@ -73,7 +75,7 @@ export default function SectionsScreen() {
           onPress={() => goBack('/home')}
           hitSlop={10}
           accessibilityLabel="Close"
-          style={({ pressed }) => [styles.close, { transform: [{ scale: pressed ? 0.92 : 1 }] }, webPress]}>
+          style={({ pressed }) => [styles.close, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
           <Ionicons name="close" size={26} color={colors.ink} />
         </Pressable>
         <Text style={styles.topTitle} accessibilityRole="header">
@@ -128,6 +130,9 @@ function SectionCard({
   }`;
   const body = (
     <>
+      {current ? (
+        <LinearGradient pointerEvents="none" colors={pastelGrad.sage} style={StyleSheet.absoluteFill} />
+      ) : null}
       {current && canDo ? (
         <View style={styles.bubbleRow}>
           <View style={styles.bubble}>
@@ -139,19 +144,19 @@ function SectionCard({
 
       <View style={styles.cardHead}>
         <View style={styles.cardTitles}>
-          <Text style={[styles.eyebrow, current && styles.onPrimaryMuted]}>SECTION {section.ordinal}</Text>
-          <Text style={[styles.title, current && styles.onPrimary, locked && styles.lockedText]} numberOfLines={1}>
+          <Text style={[styles.eyebrow, current && styles.onPastelMuted]}>SECTION {section.ordinal}</Text>
+          <FitText style={[styles.title, locked && styles.lockedText]} lines={1}>
             {section.title_en}
-          </Text>
+          </FitText>
         </View>
         <View style={[styles.chip, current && styles.chipCurrent]}>
-          <Text style={[styles.chipText, current && styles.onPrimary]}>{range}</Text>
+          <Text style={[styles.chipText, current && styles.onPastel]}>{range}</Text>
         </View>
       </View>
 
       {locked ? (
         <View style={styles.lockedRow}>
-          <Ionicons name="lock-closed" size={15} color={colors.faint} />
+          <Ionicons name="lock-closed" size={15} color={path.lockedGlyph} />
           <Text style={styles.lockedLabel}>{section.cefr} · {units.length} units</Text>
           {jump ? (
             <Pressable
@@ -159,7 +164,7 @@ function SectionCard({
               hitSlop={8}
               accessibilityRole="button"
               accessibilityLabel={`Jump to section ${section.ordinal}`}
-              style={({ pressed }) => [styles.jump, { transform: [{ scale: pressed ? 0.95 : 1 }] }, webPress]}>
+              style={({ pressed }) => [styles.jump, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
               <Ionicons name="play-skip-forward" size={12} color={colors.primaryDark} />
               <Text style={styles.jumpText}>Jump here</Text>
             </Pressable>
@@ -167,19 +172,15 @@ function SectionCard({
         </View>
       ) : (
         <View style={styles.progressRow}>
-          <View style={[styles.track, current && styles.trackCurrent]}>
-            <View
-              style={[
-                styles.fill,
-                current && styles.fillCurrent,
-                { width: `${Math.max(share, done > 0 ? 0.04 : 0) * 100}%` },
-              ]}
-            />
+          <View style={styles.track}>
+            <View style={[styles.fill, { width: `${Math.max(share, done > 0 ? 0.04 : 0) * 100}%` }]}>
+              <LinearGradient pointerEvents="none" colors={gradients.deep} style={StyleSheet.absoluteFill} />
+            </View>
           </View>
           {state === 'done' ? (
-            <Ionicons name="checkmark-circle" size={22} color={colors.primary} />
+            <Ionicons name="checkmark-circle" size={22} color={colors.success} />
           ) : (
-            <Text style={[styles.count, styles.onPrimaryMuted]}>
+            <Text style={[styles.count, current && styles.onPastel]}>
               {done}/{lessons}
             </Text>
           )}
@@ -188,8 +189,9 @@ function SectionCard({
 
       {current ? (
         <View style={styles.continue}>
+          <LinearGradient pointerEvents="none" colors={gradients.deep} style={StyleSheet.absoluteFill} />
           <Text style={styles.continueText}>Continue</Text>
-          <Ionicons name="arrow-forward" size={16} color={colors.primary} />
+          <Ionicons name="arrow-forward" size={16} color={colors.onPrimary} />
         </View>
       ) : null}
     </>
@@ -212,7 +214,7 @@ function SectionCard({
       style={({ pressed }) => [
         styles.card,
         current && styles.cardCurrent,
-        { transform: [{ scale: pressed ? 0.98 : 1 }] },
+        { transform: [{ scale: pressed ? press.scale : 1 }] },
         webPress,
       ]}>
       {body}
@@ -228,25 +230,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
   },
-  close: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
-  topTitle: { fontSize: 17, fontWeight: '800', color: colors.ink, letterSpacing: -0.2 },
+  close: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
+  topTitle: { ...font.display[800], fontSize: 20, color: colors.ink, letterSpacing: -0.2 },
   loading: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  list: { padding: 16, gap: 14, paddingBottom: 48, width: '100%', maxWidth: 560, alignSelf: 'center' },
+  list: { padding: 16, gap: 16, paddingBottom: 48, width: '100%', maxWidth: 560, alignSelf: 'center' },
 
   card: {
-    borderRadius: radius.lg,
+    borderRadius: radius.xl,
     backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    padding: 18,
+    padding: 20,
     gap: 14,
-    ...shadow.card,
+    // The gradient on the current card is clipped to the clay's corners.
+    overflow: 'hidden',
+    boxShadow: clay.surface,
   },
-  cardCurrent: { backgroundColor: colors.primary, borderColor: colors.primaryDark },
-  cardLocked: { backgroundColor: colors.bg, shadowOpacity: 0, elevation: 0 },
+  cardCurrent: { backgroundColor: pastelGrad.sage[1] },
+  /** Pressed flat into the page: no lift, nothing to open. */
+  cardLocked: { backgroundColor: path.lockedFace, boxShadow: clay.flat },
 
   bubbleRow: { flexDirection: 'row' },
   bubble: {
@@ -255,8 +256,9 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
     paddingHorizontal: 14,
     paddingVertical: 12,
+    boxShadow: clay.surface,
   },
-  bubbleText: { fontSize: 16, lineHeight: 22, color: colors.ink },
+  bubbleText: { ...font.body[600], fontSize: 16, lineHeight: 22, color: colors.onPastel },
   // A small square turned on its corner: the bubble points down at the section
   // it is speaking for.
   bubbleTail: {
@@ -271,51 +273,56 @@ const styles = StyleSheet.create({
 
   cardHead: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   cardTitles: { flex: 1, gap: 2 },
-  eyebrow: { fontSize: 11, fontWeight: '800', letterSpacing: 1.2, color: colors.faint },
-  title: { fontSize: 22, lineHeight: 27, fontWeight: '800', color: colors.ink, letterSpacing: -0.3 },
+  eyebrow: { ...font.body[800], fontSize: 13, letterSpacing: 0.4, color: colors.muted },
+  title: { ...font.display[800], fontSize: 26, lineHeight: 29, color: colors.ink, letterSpacing: -0.5 },
   lockedText: { color: colors.muted },
   chip: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
     borderRadius: radius.pill,
-    backgroundColor: colors.bg,
-    borderWidth: 1,
-    borderColor: colors.border,
+    backgroundColor: colors.trough,
   },
-  chipCurrent: { backgroundColor: 'rgba(241, 238, 230, 0.16)', borderColor: 'rgba(241, 238, 230, 0.28)' },
-  chipText: { fontSize: 12, fontWeight: '700', color: colors.muted },
+  chipCurrent: { backgroundColor: colors.chip, boxShadow: clay.surface },
+  chipText: { ...font.body[800], fontSize: 12, color: colors.muted },
 
   progressRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  track: { flex: 1, height: 12, borderRadius: radius.pill, backgroundColor: colors.primarySoft, overflow: 'hidden' },
-  trackCurrent: { backgroundColor: 'rgba(241, 238, 230, 0.22)' },
-  fill: { height: '100%', borderRadius: radius.pill, backgroundColor: colors.primary },
-  fillCurrent: { backgroundColor: colors.onPrimary },
-  count: { fontSize: 13, fontWeight: '700', minWidth: 44, textAlign: 'right' },
+  track: {
+    flex: 1,
+    height: 14,
+    borderRadius: radius.pill,
+    backgroundColor: colors.trough,
+    boxShadow: clay.trough,
+    overflow: 'hidden',
+  },
+  fill: { height: '100%', borderRadius: radius.pill, overflow: 'hidden' },
+  count: { ...font.body[800], fontSize: 13, color: colors.muted, minWidth: 44, textAlign: 'right' },
 
   lockedRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  lockedLabel: { flex: 1, fontSize: 13, fontWeight: '600', color: colors.faint },
+  lockedLabel: { ...font.body[700], flex: 1, fontSize: 13, color: colors.muted },
   jump: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
+    minHeight: 32,
+    paddingHorizontal: 12,
     borderRadius: radius.pill,
-    backgroundColor: colors.primarySoft,
+    backgroundColor: colors.card,
+    boxShadow: clay.surface,
   },
-  jumpText: { fontSize: 12, fontWeight: '800', color: colors.primaryDark },
+  jumpText: { ...font.body[800], fontSize: 12, color: colors.primaryDark },
 
   continue: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
-    height: 46,
-    borderRadius: radius.md,
-    backgroundColor: colors.onPrimary,
+    height: 52,
+    borderRadius: 26,
+    overflow: 'hidden',
+    boxShadow: clay.button,
   },
-  continueText: { fontSize: 16, fontWeight: '800', color: colors.primary },
+  continueText: { ...font.body[800], fontSize: 16, color: colors.onPrimary },
 
-  onPrimary: { color: colors.onPrimary },
-  onPrimaryMuted: { color: colors.onPrimary, opacity: 0.78 },
+  onPastel: { color: colors.onPastel },
+  onPastelMuted: { color: colors.onPastel, opacity: 0.8 },
 });

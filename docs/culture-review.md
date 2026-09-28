@@ -62,3 +62,133 @@ A native speaker should confirm, fix or cut each one.
 - Exact wording of anti-Madonna graffiti (now generic).
 - "Argentines are thought to hold more US banknotes per person than almost anyone outside the US" (already hedged; plausible, kept).
 - Dólar Coldplay definition: fixed from memory, no page reachable to confirm.
+
+---
+
+# Added by the 2026-09-27 rewrite (see docs/culture-audit.md)
+
+The audit rewrite moved facts from explains into pages, cut trivia, and wrote new exercises.
+The items below are NEW claims or NEW Spanish that nobody has checked yet.
+
+## New factual claims
+
+**Food.**
+- Invited to an asado at one, you eat about an hour later.
+- Sausages usually come off the grill first.
+- Morcilla is "soft, rich, a bit sweet".
+- Provoleta is the classic starter at any parrilla.
+- The asador is usually let off the washing up.
+- Humita en chala is tied up, boiled and unwrapped at the table.
+- Carbonada: you scrape the walls of the pumpkin as you eat.
+- A kilo of helado is about right for four.
+- An alfajor blanco has a sugar glaze, not white chocolate.
+- The Mundial del Alfajor is held in Buenos Aires.
+
+**Mate.**
+- "Grab a con palo pack for your first time" (advice).
+- Take the ferry to cross to Uruguay.
+- Chile is a distant second behind Syria in buying Argentine yerba.
+
+**Fútbol.**
+- Most big-club tickets go to socios, and visitors mostly go with official tour packages.
+- Tickets sold outside the stadium are often fake.
+- Relegated big clubs often sell out a division below.
+- Shirt colours: Boca blue and gold, River white with a red sash, Racing light blue and white, Independiente red.
+- There are Maradona murals all over the city.
+- Messi and Di María come from rival Rosario clubs.
+
+**Tango and music.**
+- Gardel was "the country's first pop ídolo".
+- Around 11 December there are free concerts and open-air milongas.
+- Troilo is "maybe the most loved bandoneonista".
+- Cosquín is in late January, the main stage is named after Yupanqui, and peñas run until sunrise.
+- Before rock nacional, rock here was sung in English.
+- Mercedes Sosa "packed theater after theater" on her return.
+- Gilda has a shrine by the road where she died.
+
+**Customs and Buenos Aires.**
+- Beber sounds bookish; Argentines say tomar.
+- Work, classes and the doctor run on the clock; flexible time is only for social life.
+- Long weekends fill buses and hotels.
+- On 21 September the parks are packed with students.
+- Boludo from a foreigner with an accent can land as an insult, and some people use it casually even at work.
+- Dios es argentino is said after a lucky last-second escape.
+- La Boca: stay on Caminito; the streets beyond are rougher after dark.
+- Barrio Chino is a few blocks of calle Arribeños.
+- "Mirando nomás" gets San Telmo sellers off your back.
+- The paseaperros pack gets the sidewalk.
+- A pizza on Corrientes after the theater is the classic plan.
+
+**Regions.**
+- Chicha is corn beer.
+- The Garganta del Diablo is reached on a walkway.
+- Some families in Gaiman still speak Welsh.
+- Mendoza's acequias run along the curb, open and unlit.
+- Tucumano is the demonym.
+
+**Icons.**
+- Patoruzú is now widely seen as a stereotype.
+- Papelitos still rain down at matches.
+- Borges kept writing by dictating.
+- The first crime in the world was solved with fingerprints in Argentina.
+- Nobels: two for peace, three in science.
+- Colectivo drivers take no cash (SUBE only).
+- Favaloro's foundation still runs a top heart hospital.
+- Mafalda's name starts with M because of Mansfield.
+
+**History.**
+- The Cabildo lost arches twice for new avenues.
+- Rosas died in exile in England.
+- Martín Fierro ends up an outlaw.
+- On Día de la Tradición, San Antonio de Areco has gauchos, horses and folk music.
+- Belgrano gave much of what he had to the cause.
+- Caminito was painted with leftover shipyard paint (framed as "the story goes").
+- Tango reached the salons only after Paris fell for it.
+- The Semana Trágica is described as a pogrom.
+- The 1929 crisis sank grain and beef prices.
+- The 1930 coup was the first of several.
+- Perón died in office.
+- Most Malvinas soldiers were conscripts.
+- The Juicio a las Juntas was one of the first trials of former dictators in ordinary courts.
+- After 2001, many people stopped trusting banks.
+- Shops give discounts for cash or transfer, and some quote prices in dollars.
+
+## New Spanish to check (naturalness)
+
+**Gap sentences and their options.**
+- Poné más ___ debajo de la carne.
+- Un ___ con chimichurri, por favor.
+- Con este frío, se viene un ___.
+- Un cucurucho de dulce de leche ___, por favor.
+- ¿El flan es ___?
+- ¿Me ___ dos alfajores? (das / debés / leés)
+- Tiene relleno de ___.
+- ¡Ahora, el tirón de ___!
+- ¡Vamos al ___, que son las doce!
+- Y nada, se me hizo tarde, ¿___?
+- Muchachos, ahora nos volvimos a ___.
+- Les tiraban agua hirviendo desde los ___.
+- Uf, me voy al ___.
+- Es por la ___: mitad peronistas, mitad gorilas.
+- Traé hielo, que hacemos un ___ con coca.
+
+**Phrases and options.**
+- ¡No me cae la ficha!
+- ¡Ojo con la mochila! / ¡Ojo, que viene el bondi!
+- ¡Uy, la pucha!
+- ¿Hacemos un asado el domingo? Vení a la una.
+- Probá la morcilla.
+- ¿Ya salen las achuras?
+- Last one left? Be nice: comela vos.
+- ¡Parecés Susanita!
+- Me encanta esa tira de Mafalda.
+- ¿Vemos una peli de Darín?
+- ¿Efectivo o tarjeta?
+- Boca, obvio.
+- ¡Es mufa! / ¡Es cábala!
+- Andá a cantarle a Gardel (used as a when-to-say-it choice).
+- ¡Eso no es tango! / Es música contemporánea.
+- Me voy al laburo. / ¿Qué morfamos? / ¡Qué fiaca!
+- Es lindo. / Es re lindo. / Es recontra lindo.
+
+**Refranes.** The commas were removed in "el que se quema con leche ve una vaca y llora" and "el que no llora no mama".

@@ -13,17 +13,17 @@ classes:
       - type: info
         title: "One kiss. Just one."
         emoji: "😘"
-        body: "In Argentina you say hi with **un beso**: one kiss, cheek to cheek, usually on the right side, with a little kissing sound. Not two like in Spain, not three. Friends, family, your friend's cousin you just met, the new guy at work: all get **un beso**. A handshake with someone your own age at a party can feel a bit cold."
+        body: "In Argentina you say hi with **un beso**: one kiss, **cachete** a **cachete** (cheek to cheek), usually on the right side. Not two like in Spain, not three. Friends, family, your friend's cousin you just met, the new guy at work: all get **un beso**. And yes, men too: friends, brothers, fathers and sons, often with a pat on the back."
 
       - type: true_false
-        statement: "Two Argentine men who are friends will usually greet each other with a handshake, never a kiss."
-        answer: false
-        explain: "Men kiss too: friends, brothers, fathers and sons, teammates. It became more and more common over the last decades, and today it's the norm, especially among younger men. A kiss plus a pat on the back is the classic combo."
+        statement: "Two Argentine guys who are friends will usually greet each other with a kiss."
+        answer: true
+        explain: "A kiss plus a pat on the back is the classic combo, especially among younger men. A handshake between two friends would feel oddly stiff."
 
       - type: info
         title: "Saludar a todos"
         emoji: "👋"
-        body: "Arrive at a party with twelve people and you **saludás a todos**: you go around and kiss every single one, even the ones you don't know. A general \"¡hola!\" from the door comes across as unfriendly. And yes, you do it again when you leave. Budget five minutes for it, both ways."
+        body: "Arrive at a party with twelve people and you **saludás a todos**: you go around and kiss every single one, even the ones you don't know. A general \"¡hola!\" from the door comes across as unfriendly. And you do it again when you leave, a kiss and a **chau** for each one. Budget five minutes for it, both ways."
 
       - type: choice
         scenario: "You get to a friend's birthday. Fifteen people are already sitting around the table, most of them strangers."
@@ -58,7 +58,7 @@ classes:
         explain: "**¿Qué hacés?** is a hello. \"Bien, ¿vos?\" is plenty. Explaining that you're taking out the trash is optional."
 
       - type: match
-        prompt: "Match the greeting to what it really means"
+        prompt: "Match the phrase to what it really means"
         pairs:
           - ["¿Todo bien?", "All good?"]
           - ["¿Cómo andás?", "How's it going?"]
@@ -71,7 +71,7 @@ classes:
         example: { es: "Te saludo con un beso.", en: "I'll greet you with a kiss." }
         note: "Also how people sign off a message: \"Beso\" or \"Besos\"."
       - es: "saludar"
-        en: "to greet, to say hi or bye"
+        en: "to greet someone"
         example: { es: "Andá a saludar a tu tía.", en: "Go say hi to your aunt." }
       - es: "¿Todo bien?"
         en: "All good?"
@@ -79,7 +79,7 @@ classes:
       - es: "¿Cómo andás?"
         en: "How's it going?"
       - es: "¿Qué hacés?"
-        en: "Hi, what's up?"
+        en: "hi (lit. 'what are you doing?')"
         note: "A greeting, not a real question."
       - es: "el cachete"
         en: "cheek"
@@ -87,6 +87,11 @@ classes:
       - es: "chau"
         en: "bye"
         example: { es: "Chau, nos vemos.", en: "Bye, see you." }
+    glossary:
+      - es: "saludás a todos"
+        en: "you greet everyone"
+      - es: "Todo bien, ¿vos?"
+        en: "all good, and you?"
 
   # ─────────────────────────────────────────────────────────────
   - slug: "la-hora-argentina"
@@ -96,8 +101,7 @@ classes:
       - type: info
         title: "Nine means nine thirty"
         emoji: "⏰"
-        body: "Invited to a dinner **a las nueve**? Nobody expects you at nine. Showing up 20 or 30 minutes late to a party or a dinner at someone's house is normal, even polite: the host is probably still in the shower. Dinner itself is late, often around ten. Arriving early is the real faux pas."
-        fun_fact: "Surveys on punctuality keep finding the same thing: for plenty of Argentines, you're not really late until it's been half an hour."
+        body: "Invited to a dinner **a las nueve**? Nobody expects you at nine. Showing up 20 or 30 minutes late to a party or a dinner at someone's house is normal, even polite: the host is probably still setting the table. Arriving early is the real faux pas. But that's social life only: work, classes and the doctor run on the clock."
 
       - type: true_false
         statement: "Arriving 30 minutes late to a work meeting or a university class is fine, just like with a party."
@@ -120,15 +124,15 @@ classes:
       - type: info
         title: "Traé algo para tomar"
         emoji: "🍷"
-        body: "Never show up empty-handed. The host will say **no traigas nada** (don't bring anything). Bring something anyway. Often they'll ask directly: **traé algo para tomar** (bring something to drink): wine, beer, a soda. Other safe bets: something sweet for dessert, or a tub of **helado** from the heladería, sold by weight, a kilo being the classic."
+        body: "Never show up empty-handed. The host will say **no traigas nada** (don't bring anything). Bring something anyway. Often they'll ask directly: **traé algo para tomar** (bring something to drink): wine, beer, a soda. Other safe bets: something sweet for dessert, or a tub of **helado** from the heladería, sold by weight, a kilo being the classic. And note: to drink is **tomar** here; *beber* sounds like a textbook."
 
       - type: gap
         prompt: "Your friend is hosting and you ask what to bring. She answers:"
         text: "Traé algo para ___, que la comida la pongo yo."
-        options: ["tomar", "beber", "comer"]
+        options: ["tomar", "comer", "leer"]
         correct: 0
         translation: "Bring something to drink, I've got the food covered."
-        explain: "Argentines **toman**, they don't *beben*. \"Algo para tomar\" means drinks, from wine to Coca-Cola."
+        explain: "\"Algo para tomar\" means drinks, from wine to Coca-Cola. The food is covered, so **comer** is out."
 
       - type: info
         title: "Juntada and vamos viendo"
@@ -141,15 +145,12 @@ classes:
         emoji: "🚪"
         body: "Leaving takes a while. You announce **bueno, me voy yendo** (well, I'm getting going), then someone serves another round, then you kiss everyone goodbye, then you chat at the door for twenty minutes. Slipping out without saying goodbye is **irse a la francesa** (leaving French-style), and people notice."
 
-      - type: order
-        prompt: "Leave a party, Argentine style"
-        items:
-          - "Say \"bueno, me voy yendo\""
-          - "Accept one last drink"
-          - "Kiss everyone goodbye, one by one"
-          - "Keep chatting at the door"
-          - "Actually leave"
-        explain: "From announcement to exit, half an hour is normal. Add it to your plans."
+      - type: choice
+        scenario: "You said \"bueno, me voy yendo\" ten minutes ago. Now the host pours you another glass."
+        prompt: "What's the Argentine move?"
+        options: ["Take it: the goodbye just started", "Refuse: they want you gone", "Slip out without a word"]
+        correct: 0
+        explain: "Totally normal. Then the kisses, then the chat at the door. From announcement to exit, half an hour is normal. Slipping out is **irse a la francesa**, and people notice."
 
       - type: match
         prompt: "Match the phrase to what it really means"
@@ -167,7 +168,7 @@ classes:
         en: "let's see how it goes"
         example: { es: "—¿Venís el viernes? —Vamos viendo.", en: "—Are you coming Friday? —We'll see." }
       - es: "ya salgo"
-        en: "I'm leaving now (not always true)"
+        en: "on my way (really: not yet)"
       - es: "traé algo para tomar"
         en: "bring something to drink"
       - es: "un audio"
@@ -177,9 +178,22 @@ classes:
         en: "to leave someone on read"
         example: { es: "Me clavó el visto.", en: "He left me on read." }
       - es: "me voy yendo"
-        en: "I'm getting going"
+        en: "time for me to go (the start of a long goodbye)"
       - es: "irse a la francesa"
         en: "to leave without saying goodbye"
+    glossary:
+      - es: "a las nueve"
+        en: "at nine o'clock"
+      - es: "Estoy saliendo"
+        en: "I'm heading out"
+      - es: "Llego en cinco"
+        en: "I'll be there in five"
+      - es: "no traigas nada"
+        en: "don't bring anything"
+      - es: "helado"
+        en: "ice cream"
+      - es: "audios"
+        en: "voice messages"
 
   # ─────────────────────────────────────────────────────────────
   - slug: "salir-de-noche"
@@ -189,7 +203,7 @@ classes:
       - type: info
         title: "The night starts late"
         emoji: "🌙"
-        body: "If you're used to going out at nine, recalibrate. In Buenos Aires dinner is around ten, the bar is at midnight, and the **boliche** (nightclub) opens around 1 a.m. Most people walk in between two and three. Going home at six, with the sun coming up, is a normal Saturday, not a wild one."
+        body: "If you're used to going out at nine, recalibrate. The **boliche** (nightclub) opens around one, and **salir a bailar** (going out dancing) really starts at two or three. Going home at six, with the sun coming up, is a normal Saturday, not a wild one. There's a verb for it: **trasnochar**, staying up all night."
 
       - type: info
         title: "La previa"
@@ -206,24 +220,23 @@ classes:
         explain: "At nine the night hasn't started. The previa gets going around midnight, and you might leave for the boliche at two."
 
       - type: true_false
-        statement: "Boliches in Buenos Aires usually open their doors around 9 or 10 p.m."
-        answer: false
-        explain: "More like 1 a.m., and they fill up from two. Show up at eleven and you'll dance alone with the bartender."
-
-      - type: order
-        prompt: "A classic Saturday night, in order"
-        items:
-          - "Late dinner, around ten"
-          - "La previa at a friend's place"
-          - "Walk into the boliche, around two"
-          - "Dance until close to six"
-          - "Coffee and medialunas at sunrise"
-        explain: "Ending the night with coffee and **medialunas** (croissants) in a bar that's just opening is a porteño classic."
+        statement: "For plenty of porteños, the previa is the best part of the night."
+        answer: true
+        explain: "Cheaper drinks, your own music, and you can actually hear your friends. The boliche is the excuse; the previa is the party."
 
       - type: info
         title: "The after"
         emoji: "🌅"
-        body: "For some, six a.m. isn't the end. An **after** is a party that keeps going after the boliche closes, at a house or a place that opens in the morning. Everyone else goes for **un café con medialunas** and heads home to sleep until lunch. Sunday afternoon exists mainly for recovery, often with a mate."
+        body: "For some, six a.m. isn't the end. An **after** is a party that keeps going after the boliche closes, at a house or a place that opens in the morning. Everyone else goes for **un café con medialunas** (coffee and croissants) and heads home to sleep until lunch. Sunday afternoon exists mainly for recovery, often with a mate."
+
+      - type: order
+        prompt: "A classic Saturday night, in order"
+        items:
+          - "La previa at a friend's place"
+          - "Walk into the boliche"
+          - "Dance until the sun comes up"
+          - "Café con medialunas"
+        explain: "The previa from midnight, the boliche around two, dancing until close to six, then coffee as the bars open. That last stop is a porteño classic."
 
       - type: gap
         prompt: "It's Saturday, and you want to know where your friends are meeting before the club."
@@ -250,63 +263,61 @@ classes:
         example: { es: "Hacemos la previa en casa.", en: "We'll do pregame at my place." }
       - es: "salir a bailar"
         en: "to go out dancing"
-      - es: "salir"
-        en: "to go out (at night)"
-        example: { es: "¿Salís hoy?", en: "Are you going out tonight?" }
       - es: "el after"
         en: "after-party"
       - es: "medialunas"
         en: "croissants"
       - es: "trasnochar"
         en: "to stay up very late"
+    glossary:
+      - es: "boliche"
+        en: "nightclub"
+      - es: "after"
+        en: "after-party (Spanglish)"
 
   # ─────────────────────────────────────────────────────────────
   - slug: "sin-filtro"
     title: "No filter"
-    summary: "Money talk, body comments and the viveza criolla debate"
+    summary: "Money talk, body comments, and the gauchada"
     pages:
       - type: info
         title: "Money is not a secret"
         emoji: "💸"
-        body: "After decades of inflation, prices are everyone's favorite topic. **¿Cuánto pagaste?** (how much did you pay?) is a normal question about your phone, your rent, your shoes. Friends may even ask **¿cuánto ganás?** (how much do you earn?). It's not rude here, it's comparing notes to survive. Same with **¿cuánto te salió?** (what did it cost you?)."
+        body: "After decades of inflation, prices are everyone's favorite topic. **¿Cuánto pagaste?** (how much did you pay?) is a normal question about your phone, your rent, your shoes. Friends may even ask **¿cuánto ganás?** (how much do you earn?). It's not rude here, it's comparing notes to survive."
+
+      - type: choice
+        scenario: "At a party, someone you met ten minutes ago asks how much you pay in rent."
+        prompt: "How should you take it?"
+        options: ["As small talk: answer if you like", "As rude: change the subject", "As a hint she needs a loan"]
+        correct: 0
+        explain: "Normal here. Answer, dodge with a joke, or ask back: comparing prices is how people keep up with inflation."
 
       - type: info
         title: "Estás más gordito"
         emoji: "🍝"
-        body: "Your aunt sees you after the holidays and says **estás más gordito** (you've put on a little weight). Nobody here thinks that's an insult. It's said with affection, like \"you're looking well fed\". Many couples call each other **gordo** or **gorda** as a pet name, whatever their size. Younger people are more careful with body comments, though."
+        body: "Your aunt sees you after the holidays and says **estás más gordito** (you've put on a little weight). It's said with affection, like \"you're looking well fed\". Couples call each other **gordo** or **gorda** as a pet name, whatever their size. And **flaco** (skinny) is how you call out to a guy you don't know: **¡Flaco, se te cayó esto!**"
 
       - type: choice
         scenario: "Your friend's grandmother pinches your cheek and says: \"¡Ay, estás más gordito!\""
         prompt: "What's the best reaction?"
-        options: ["Look offended and change the subject", "Laugh and say something like \"¡Es que como bien!\"", "Explain that you've been going to the gym"]
+        options: ["Look offended and go quiet", "Laugh: \"¡Es que como bien!\"", "Explain your gym routine"]
         correct: 1
-        explain: "It's a warm comment, not a diet review. Laugh it off. She'll probably serve you a second plate anyway."
+        explain: "It's a warm comment, not a diet review. Laugh it off. She'll probably serve you a second plate anyway. Younger people are more careful with body comments, though."
 
       - type: true_false
         statement: "When an Argentine partner calls you \"gorda\", they're usually commenting on your weight."
         answer: false
-        explain: "**Gordo/gorda** is one of the most common pet names in the country, like *honey*. **Flaco** (skinny) is also a common way to call a guy you don't know: \"¡Flaco, se te cayó esto!\""
+        explain: "**Gordo/gorda** is one of the most common pet names in the country, like *honey*."
 
       - type: info
-        title: "Viveza criolla"
-        word: { es: "viveza criolla", tag: "A cultural idea", en: "Argentine cunning" }
-        emoji: "🦊"
-        body: "**Viveza criolla** is the habit of getting ahead by being sharp: cutting the line, dodging a rule, finding the trick. In 1965 the sociologist **Julio Mafud** wrote a whole book on it, and people still argue about it at every sobremesa. Is it a national flaw, or just a stereotype?"
-
-      - type: info
-        title: "The two sides"
-        emoji: "⚖️"
-        body: "Critics say it wears down trust: if everyone expects the other guy to cheat, nobody plays fair, and rules stop working. Others push back: most Argentines are honest people tired of the label, and a lot of that sharpness is just **rebusque**, the art of getting by when the economy keeps collapsing. Both views are common, often in the same person."
-
-      - type: info
-        title: "The flip side: la gauchada"
+        title: "La gauchada"
         emoji: "🤲"
-        body: "If viveza is the dark side, **la gauchada** is the bright one: a favor done for free, just because. Lending the neighbor your drill, driving a friend to the airport at 5 a.m., a stranger helping you push your car. **¿Me hacés una gauchada?** (can you do me a favor?) is one of the nicest questions in the language."
+        body: "Argentines love to complain about **viveza criolla**, getting ahead by cutting corners. Its opposite is **la gauchada**: a favor done for free, just because. Lending the neighbor your drill, driving a friend to the airport at dawn, a stranger helping you push your car. **¿Me hacés una gauchada?** (can you do me a favor?) is one of the nicest questions in the language."
 
       - type: choice
         scenario: "Your coworker asks: \"¿Me hacés una gauchada? Mañana necesito que me cubras una hora.\""
-        prompt: "What is she asking for?"
-        options: ["Money", "A favor: to cover for her for an hour", "To go out with her after work"]
+        prompt: "What kind of thing is she asking for?"
+        options: ["An apology", "A favor", "A date"]
         correct: 1
         explain: "A **gauchada** is a favor. The word comes from **gaucho**, the countryside horseman, famous for helping strangers on the road."
 
@@ -315,7 +326,7 @@ classes:
         pairs:
           - ["¿Cuánto pagaste?", "How much did you pay?"]
           - ["Estás más gordito", "You've put on a bit of weight (said kindly)"]
-          - ["Viveza criolla", "Getting ahead by being sharp"]
+          - ["¡Flaco!", "Hey, you! (to a guy you don't know)"]
           - ["Gauchada", "A favor done for free"]
 
     vocabulary:
@@ -329,17 +340,23 @@ classes:
       - es: "flaco"
         en: "skinny; also \"dude\" to a stranger"
         example: { es: "Flaco, ¿tenés hora?", en: "Hey man, do you have the time?" }
-      - es: "viveza criolla"
-        en: "Argentine cunning, cutting corners"
-      - es: "el rebusque"
-        en: "getting by, finding a way to make money"
-        example: { es: "Vivo del rebusque.", en: "I get by doing whatever comes up." }
       - es: "una gauchada"
         en: "a favor"
         example: { es: "¿Me hacés una gauchada?", en: "Can you do me a favor?" }
+    glossary:
       - es: "¿Cuánto te salió?"
-        en: "What did it cost you?"
-        example: { es: "Qué lindas zapatillas, ¿cuánto te salieron?", en: "Nice sneakers, how much were they?" }
+        en: "what did it cost you?"
+      - es: "estás más gordito"
+        en: "you've put on a little weight"
+        note: "Said with affection, not as an insult."
+      - es: "gordo"
+        en: "chubby; pet name for a partner"
+      - es: "gorda"
+        en: "chubby; pet name for a partner"
+      - es: "viveza criolla"
+        en: "getting ahead by cutting corners"
+      - es: "la gauchada"
+        en: "the favor (helping someone out)"
 
   # ─────────────────────────────────────────────────────────────
   - slug: "navidad-en-verano"
@@ -347,14 +364,14 @@ classes:
     summary: "Cider, vitel toné and fireworks at midnight"
     pages:
       - type: info
-        title: "Santa in 35 degrees"
+        title: "Santa in shorts weather"
         emoji: "🎄"
-        body: "In Argentina Christmas falls in summer. It can be 35 °C, and Papá Noel is still in his wool coat. Families put up the **arbolito** (Christmas tree) on **8 December**, a public holiday. The big night is not the 25th: it's **Nochebuena**, the night of the 24th, with a long dinner, often outside, that ends well after midnight."
+        body: "In Argentina Christmas falls in summer. It can be scorching, and Papá Noel is still in his wool coat. Families put up the **arbolito** (Christmas tree) on **8 December**, a public holiday. The big night is not the 25th: it's **Nochebuena**, the night of the 24th, with a long dinner, often outside, that ends well after midnight."
 
       - type: info
         title: "The Christmas table"
         emoji: "🍽️"
-        body: "The food is mostly cold, because of the heat. The star is **vitel toné**: thin slices of veal in a creamy tuna sauce, brought by immigrants from Piedmont, in Italy. Then **pan dulce** (a panettone-style sweet bread), **turrón** (nougat), **garrapiñada** (candied peanuts) and cider. Yes, there's often an asado too."
+        body: "The food is mostly cold, because of the heat. The star is **vitel toné**: thin slices of veal in a creamy tuna sauce, an Italian import. Then **pan dulce** (a panettone-style sweet bread), **turrón** (nougat), **garrapiñada** (candied peanuts) and **sidra** (sparkling cider). Yes, there's often an asado too."
 
       - type: match
         prompt: "Match the Christmas food to what it is"
@@ -368,36 +385,27 @@ classes:
       - type: info
         title: "Twelve o'clock"
         emoji: "🎆"
-        body: "At midnight on the 24th everyone stands up for the **brindis** (toast), with **sidra** or champagne, and says **¡Feliz Navidad!** The sky explodes with fireworks from every backyard and balcony. Then the presents: in most homes they're opened right then, at midnight, not on the morning of the 25th. The 25th is for leftovers and naps."
+        body: "At midnight on the 24th everyone stands up for the **brindis** (toast), with **sidra** or champagne, and says **¡Feliz Navidad!** The sky explodes with **fuegos artificiales** (fireworks) from every backyard and balcony. Then the presents: in most homes they're opened right then, not on the morning of the 25th. The 25th is for leftovers and naps."
         fun_fact: "Many families play **amigo invisible** (Secret Santa) so nobody has to buy twenty gifts."
 
       - type: true_false
-        statement: "Argentine kids usually open their Christmas presents on the morning of 25 December."
+        statement: "In most Argentine homes, the presents wait until the morning of the 25th."
         answer: false
-        explain: "Most open them right after midnight on the 24th, with the fireworks going off. The morning of the 25th is very quiet."
-
-      - type: order
-        prompt: "Nochebuena, in order"
-        items:
-          - "Late dinner with vitel toné"
-          - "Brindis at midnight"
-          - "Fireworks fill the sky"
-          - "Open the presents"
-          - "Pan dulce and turrón until late"
+        explain: "Most open them right after the midnight brindis, with the fireworks going off. The morning of the 25th is very quiet."
 
       - type: info
-        title: "Año Nuevo and the paper rain"
+        title: "Año Nuevo, then the beach"
         emoji: "🥂"
-        body: "New Year's Eve repeats the formula: dinner, a toast at midnight, fireworks. On the last working day of the year, office workers downtown used to throw paper out of the windows, covering the streets of the **microcentro**. The city has tried to discourage it for years, but some still do it. Then everyone heads for the beach, because January is holiday month."
+        body: "New Year's Eve repeats the formula: dinner, a toast at midnight, fireworks. After **las fiestas** (the holidays), the city empties: January is holiday month, and everyone who can heads for the beach. Downtown, some office workers still throw paper out of the windows on their last working day of the year."
         fun_fact: "On 6 January, kids leave their shoes out with grass and water for the camels of the **Reyes Magos** (Three Kings)."
 
       - type: gap
-        prompt: "It's midnight on 24 December and everyone raises a glass. What do you say?"
-        text: "¡Feliz ___!"
-        options: ["Navidad", "cumple", "Año Nuevo"]
+        prompt: "It's midnight on the 31st. Your host grabs the sidra and calls everyone to the table."
+        text: "¡Vamos al ___, que son las doce!"
+        options: ["brindis", "arbolito", "asado"]
         correct: 0
-        translation: "Merry Christmas!"
-        explain: "On the 24th it's **Feliz Navidad**. A week later, at midnight on the 31st, it's **Feliz Año Nuevo**. Both come with a kiss for everyone at the table."
+        translation: "Time for the toast, it's midnight!"
+        explain: "Midnight = **brindis**, then **¡Feliz Año Nuevo!** and a kiss for everyone at the table."
 
       - type: choice
         scenario: "You're invited to Nochebuena with your partner's family. It's 34 °C."
@@ -426,6 +434,31 @@ classes:
       - es: "las fiestas"
         en: "the holidays (Christmas and New Year)"
         example: { es: "¿Dónde pasás las fiestas?", en: "Where are you spending the holidays?" }
+    glossary:
+      - es: "arbolito"
+        en: "little Christmas tree"
+      - es: "vitel toné"
+        en: "cold veal in tuna sauce"
+      - es: "pan dulce"
+        en: "panettone-style sweet bread"
+      - es: "turrón"
+        en: "nougat"
+      - es: "garrapiñada"
+        en: "candied peanuts"
+      - es: "brindis"
+        en: "toast (with drinks)"
+      - es: "sidra"
+        en: "cider"
+      - es: "¡Feliz Navidad!"
+        en: "Merry Christmas!"
+      - es: "¡Feliz Año Nuevo!"
+        en: "Happy New Year!"
+      - es: "amigo invisible"
+        en: "Secret Santa"
+      - es: "Reyes Magos"
+        en: "the Three Kings"
+      - es: "ensalada rusa"
+        en: "potato salad"
 
   # ─────────────────────────────────────────────────────────────
   - slug: "el-calendario"
@@ -435,59 +468,65 @@ classes:
       - type: info
         title: "Día del Amigo"
         emoji: "🌕"
-        body: "On **20 July 1969** humans walked on the Moon, and an Argentine teacher and dentist, **Enrique Febbraro**, decided it should be a day of friendship for the whole world. He sent a thousand letters to a hundred countries. Today **20 de julio** is **Día del Amigo**: restaurants are packed and everyone messages everyone."
+        body: "On **20 de julio** Argentina celebrates **Día del Amigo**, Friends' Day. The idea came from an Argentine who watched the Moon landing on that date and thought the whole world should celebrate friendship. Today restaurants are packed, your phone won't stop buzzing, and you're expected to text your friends: **¡Feliz Día del Amigo!**"
         fun_fact: "In the 2000s so many texts were sent that the phone networks reportedly collapsed."
 
-      - type: true_false
-        statement: "Día del Amigo on 20 July was an Argentine idea, inspired by the Moon landing."
-        answer: true
-        explain: "Febbraro's idea: if humans could reach the Moon together, the world could celebrate friendship together. Uruguay and Brazil also celebrate it on 20 July."
+      - type: choice
+        scenario: "It's 20 July. Your Argentine coworker texts you first thing in the morning."
+        prompt: "What does she write?"
+        options: ["¡Feliz Día del Amigo!", "¡Feliz Día de la Luna!", "¡Feliz invierno!"]
+        correct: 0
+        explain: "**¡Feliz Día del Amigo!** Text back the same, and if there's a dinner, go: it's the busiest restaurant night of the winter."
 
       - type: info
         title: "Spring and students"
         emoji: "🌸"
-        body: "**21 September** is a double party: the first day of spring and the **Día del Estudiante**. It honors **Sarmiento**, the president who pushed public schools, whose remains came back to Buenos Aires in September 1888. Students get the day off and fill the parks with picnics, guitars and music."
+        body: "**21 de septiembre** is a double party: the first day of spring and the **Día del Estudiante**. Students get the day off and fill the parks with picnics, guitars and music. Want a quiet walk in the park? Not on that day."
+
+      - type: true_false
+        statement: "If you're in a big park on 21 September, expect it to be packed with students."
+        answer: true
+        explain: "Picnics, music and very loud teenagers. It's a lovely chaos, and very porteño."
 
       - type: info
         title: "Carnaval and long weekends"
         emoji: "🎭"
-        body: "**Carnaval** Monday and Tuesday are public holidays, with **murgas** (street bands in costumes, drums and dance) and foam sprays. The last dictatorship removed the holiday in 1976, and it only came back in 2011. Argentines also love **fines de semana largos** (long weekends): the government can add up to three **feriados puente**, bridge days that connect a holiday to the weekend."
+        body: "**Carnaval** Monday and Tuesday are public holidays, with **murgas** (street bands in costumes, drums and dance) and foam sprays. Argentines also love a **finde largo** (long weekend): the government adds **feriados puente**, bridge days that join a holiday to the weekend. On a long weekend, buses and hotels fill up fast, so book early."
 
       - type: choice
         scenario: "Your friend says: \"El jueves es feriado y el viernes es puente. ¿Nos vamos a la costa?\""
         prompt: "What is she proposing?"
-        options: ["A four-day trip to the beach", "Working on Friday to cover the holiday", "Crossing a bridge on Thursday"]
+        options: ["A four-day trip to the beach", "Working Friday to make up for it", "Crossing a bridge on Thursday"]
         correct: 0
         explain: "A **puente** turns a Thursday holiday into a four-day weekend. Argentines plan trips around them months in advance."
 
       - type: info
         title: "Que los cumplas feliz"
         emoji: "🎂"
-        body: "The birthday song here goes **Que los cumplas feliz** (may you have a happy birthday), to the usual tune. Then the **tirón de orejas**: friends pull your ears, one tug for each year. And never wish someone **feliz cumple** before the day. It's bad luck. The story goes that even Pope Francis, from Buenos Aires, warned a crowd who greeted him early."
+        body: "The birthday song here goes **Que los cumplas feliz** (may you have a happy birthday), to the usual tune. Then the **tirón de orejas**: friends pull your ears, one tug for each year. And never wish someone **feliz cumple** before the day. It's **yeta**: bad luck. The story goes that even Pope Francis, a porteño, warned a crowd who greeted him early."
 
       - type: choice
         scenario: "Your friend's birthday is tomorrow. You won't see her, so you want to text her today."
         prompt: "What should you do?"
-        options: ["Text \"feliz cumple\" today, early is fine", "Wait and text her tomorrow", "Send a present with no message"]
+        options: ["Text \"feliz cumple\" today", "Wait and text her tomorrow", "Send a present, no message"]
         correct: 1
-        explain: "Early birthday wishes are **yeta** (bad luck). Wait until the day. At midnight is ideal: the first message wins."
+        explain: "Early wishes are **yeta**. Wait until the day. At midnight is ideal: the first message wins."
 
       - type: match
-        prompt: "Match the date to the celebration"
+        prompt: "Match the celebration to what people do"
         pairs:
-          - ["20 de julio", "Día del Amigo"]
-          - ["21 de septiembre", "Día del Estudiante and spring"]
-          - ["8 de diciembre", "Put up the Christmas tree"]
-          - ["Third Sunday of October", "Día de la Madre"]
-        explain: "Mother's Day in October, not May, surprises a lot of visitors. It goes back to a 1930s Catholic feast for Mary's motherhood."
+          - ["Día del Amigo", "Text all your friends, then dinner"]
+          - ["Día del Estudiante", "Picnics and guitars in the park"]
+          - ["Carnaval", "Murgas and foam sprays"]
+          - ["Your cumple", "Ear pulls, one per year"]
 
       - type: gap
-        prompt: "It's your friend's birthday. Everyone stands up to sing."
-        text: "Que los cumplas ___, que los cumplas feliz…"
-        options: ["feliz", "bien", "contento"]
+        prompt: "The candles are out, and your friends are reaching for your ears."
+        text: "¡Ahora, el tirón de ___!"
+        options: ["orejas", "manos", "pies"]
         correct: 0
-        translation: "May you have a happy birthday…"
-        explain: "The whole song is **que los cumplas feliz**, four times, with the name in the third line. Then the ears."
+        translation: "Now, the ear pull!"
+        explain: "One tug for every year. Birthdays over 40 get long."
 
     vocabulary:
       - es: "el cumple"
@@ -509,3 +548,16 @@ classes:
         example: { es: "No me saludes antes, que es yeta.", en: "Don't wish me early, it's bad luck." }
       - es: "la murga"
         en: "carnival street band"
+    glossary:
+      - es: "Día del Estudiante"
+        en: "Students' Day (and first day of spring)"
+      - es: "Carnaval"
+        en: "Carnival"
+      - es: "murgas"
+        en: "street bands in costume"
+      - es: "feriados puente"
+        en: "bridge holidays"
+      - es: "Que los cumplas feliz"
+        en: "may you have a happy birthday"
+      - es: "feliz cumple"
+        en: "happy birthday (casual)"
