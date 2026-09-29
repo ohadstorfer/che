@@ -1,6 +1,6 @@
 import { shuffle } from './answers';
 import { clauseOfSurface, wordsIn } from './course-rules/shape';
-import { cached } from './content-cache';
+import { cached, stampHash, versioned } from './content-cache';
 import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { Form, Sentence, SentenceToken } from './types';
@@ -30,26 +30,126 @@ export interface SentenceRow {
 
 const SENTENCE_COLUMNS = 'id, unit_id, es, en, en_alt, es_alt, audio_path, voice_id, target_form_id, difficulty, tokens';
 
-/** Every published sentence (~26k), downloaded once per app run and shared. */
+/** Every published sentence (~26k, 24 MB of JSON), downloaded once per app run
+ *  and shared. Only the fallback when the bounded load below can't run. */
 export function loadSentenceRows(): Promise<SentenceRow[]> {
   return cached('sentences', () =>
     all<SentenceRow>(() => supabase.from('sentences').select(SENTENCE_COLUMNS).eq('status', 'published').order('id')),
   );
 }
 
+// ---------------------------------------------------------------------------
+// Loading only what's in reach.
+//
+// A learner in unit 3 needs unit 1–3's sentences, not all 381 units'. They are
+// fetched in blocks of consecutive units, each block once per app run (cached,
+// so a block is shared by every screen and not fetched again as she moves on),
+// and only as far as the furthest unit a round can touch. The last block runs
+// a few units past it, so the next lessons usually find theirs already here.
+// ---------------------------------------------------------------------------
+
+/** Units per block: ~70 sentences a unit, so a block is one page. */
+export const SENTENCE_BLOCK_UNITS = 8;
+/** Blocks fetched at once. */
+const BLOCKS_IN_FLIGHT = 4;
+/** Ids per `in` filter, to keep the request URL short. */
+const IDS_PER_QUERY = 150;
+
+/** How far a load must reach. */
+export interface SentenceReach {
+  /** The course_order of the furthest unit a round may draw sentences from. */
+  throughOrder: number;
+  /** Published units in course order (course.ts). */
+  units: { id: string; course_order: number }[];
+  /** Units to load whatever their place — a draft a reviewer is previewing. */
+  unitIds?: string[];
+  /** Sentences a round needs by id, wherever they are — a story's lines, the
+   *  ones she has been shown. */
+  ids?: string[];
+}
+
+/** The unit blocks covering everything up to `throughOrder`, as unit ids. */
+export function blocksThrough(units: SentenceReach['units'], throughOrder: number): string[][] {
+  const sorted = [...units].sort((a, b) => a.course_order - b.course_order);
+  const needed = sorted.filter((u) => u.course_order <= throughOrder).length;
+  const blocks: string[][] = [];
+  for (let at = 0; at < needed; at += SENTENCE_BLOCK_UNITS) {
+    blocks.push(sorted.slice(at, at + SENTENCE_BLOCK_UNITS).map((u) => u.id));
+  }
+  return blocks;
+}
+
+const unitRows = (unitIds: string[]) =>
+  // Named by its units, so a course that changes shape gets new blocks; current
+  // while none of its units' sentences changed.
+  versioned(
+    `sentences-${stampHash(unitIds)}`,
+    (v) => stampHash(unitIds.map((id) => v.units[id] ?? '')),
+    () =>
+      all<SentenceRow>(() =>
+        supabase.from('sentences').select(SENTENCE_COLUMNS).eq('status', 'published').in('unit_id', unitIds).order('id'),
+      ),
+  );
+
+async function inBatches<T, R>(list: T[], size: number, run: (item: T) => Promise<R>): Promise<R[]> {
+  const out: R[] = [];
+  for (let at = 0; at < list.length; at += size) out.push(...(await Promise.all(list.slice(at, at + size).map(run))));
+  return out;
+}
+
+const chunks = <T>(list: T[], size: number) =>
+  Array.from({ length: Math.ceil(list.length / size) }, (_, k) => list.slice(k * size, k * size + size));
+
+/** The published sentences in reach, in id order — as the full load has them. */
+export async function loadSentenceRowsInReach(reach: SentenceReach): Promise<SentenceRow[]> {
+  const inCourse = new Set(reach.units.map((u) => u.id));
+  const blocks = [
+    ...blocksThrough(reach.units, reach.throughOrder),
+    ...[...new Set(reach.unitIds ?? [])].filter((id) => !inCourse.has(id)).map((id) => [id]),
+  ];
+  const byId = new Map<string, SentenceRow>();
+  for (const rows of await inBatches(blocks, BLOCKS_IN_FLIGHT, unitRows)) for (const r of rows) byId.set(r.id, r);
+
+  const missing = [...new Set(reach.ids ?? [])].filter((id) => !byId.has(id));
+  const extra = await Promise.all(
+    chunks(missing, IDS_PER_QUERY).map((ids) =>
+      all<SentenceRow>(() =>
+        supabase.from('sentences').select(SENTENCE_COLUMNS).eq('status', 'published').in('id', ids).order('id'),
+      ),
+    ),
+  );
+  for (const rows of extra) for (const r of rows) byId.set(r.id, r);
+  return [...byId.values()].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+}
+
+type ShownRow = { sentence_id: string; shown_count: number; correct_count: number; last_shown_at: string | null };
+
+/** Her record of every sentence she has been shown. */
+export const loadSentenceStates = (userId: string) =>
+  // Paged: far past the 1,000 rows PostgREST sends at once.
+  all<ShownRow>(() => supabase.from('sentence_states').select('*').eq('user_id', userId).order('sentence_id'));
+
 /**
- * Every published sentence with her record for it. `forms` is the lexicon the
+ * The published sentences with her record for each. `forms` is the lexicon the
  * session already holds — it is what tells a content word from a glue word
  * from a name, which the stored tokens don't say.
+ *
+ * With a `reach`, only the sentences in it — plus every one she has been
+ * shown, wherever it is, since her ladder and her words' meanings are counted
+ * from those. Without one, every published sentence.
  */
-export async function loadSentences(userId: string, forms: Form[]): Promise<Sentence[]> {
-  // Paged: far past the 1,000 rows PostgREST sends at once.
-  const [rows, states] = await Promise.all([
-    loadSentenceRows(),
-    all<{ sentence_id: string; shown_count: number; correct_count: number; last_shown_at: string | null }>(() => supabase.from('sentence_states').select('*').eq('user_id', userId).order('sentence_id')),
-  ]);
+export async function loadSentences(
+  userId: string,
+  forms: Form[],
+  reach?: SentenceReach,
+  states?: ShownRow[],
+): Promise<Sentence[]> {
+  const shown = states ?? (await loadSentenceStates(userId));
+  const rows = reach
+    ? await loadSentenceRowsInReach({ ...reach, ids: [...(reach.ids ?? []), ...shown.map((s) => s.sentence_id)] })
+    : await loadSentenceRows();
   const formById = new Map(forms.map((f) => [f.id, f]));
-  const shownBy = new Map(states.map((s) => [s.sentence_id, s]));
+  const shownBy = new Map(shown.map((s) => [s.sentence_id, s]));
   return rows.map((r) => toSentence(r, formById, shownBy.get(r.id)));
 }
 

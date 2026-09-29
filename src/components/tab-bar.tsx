@@ -11,7 +11,7 @@ import {
   View,
   type ViewStyle,
 } from 'react-native';
-import { clay, colors, font, press } from '@/lib/theme';
+import { clay, colors, font, PICKED, press } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
@@ -22,8 +22,9 @@ import { FitText } from '@/components/fit-text';
 // chrome, and it reads as browser furniture rather than part of the app.
 //
 // This one is a floating clay pill lifted clear of the home indicator. The
-// active tab is marked by a tinta (ink) pill that *slides* between tabs, so
-// the selection reads as a place you moved to rather than a colour that blinked.
+// active tab is marked by a soft ink-outlined pill (the same "picked" look as a
+// chosen answer) that *slides* between tabs, with the tab's icon turning solid,
+// so the selection reads as a place you moved to rather than a colour that blinked.
 // ---------------------------------------------------------------------------
 
 /** Movement on screen wants ease-in-out; 220ms keeps it under the 300ms ceiling. */
@@ -107,7 +108,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
           const label = options.title ?? route.name;
           // Icon and label share one resting tone so neither reads as the
           // louder half of the pair; `faint` is reserved for disabled glyphs.
-          const tint = focused ? colors.card : colors.muted;
+          const tint = focused ? colors.ink : colors.muted;
 
           return (
             <Pressable
@@ -141,7 +142,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                     style={[
                       styles.label,
                       focused ? styles.labelActive : null,
-                      { color: focused ? colors.card : colors.muted },
+                      { color: tint },
                       colorTransition,
                     ]}>
                     {label}
@@ -180,9 +181,8 @@ const styles = StyleSheet.create({
     bottom: BAR_PAD,
     left: 0,
     borderRadius: 28,
-    backgroundColor: colors.ink,
-    // Ink's own shade: a drop in its colour and a faint lit edge.
-    boxShadow: 'inset 0 2px 0 rgba(255, 255, 255, 0.15), 0 10px 22px -10px rgba(58, 42, 32, 0.6)',
+    borderWidth: 1.5,
+    ...PICKED,
   },
   tab: {
     flex: 1,

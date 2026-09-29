@@ -1,6 +1,16 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useEffect, useRef, useState } from 'react';
-import { Animated, Easing, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Animated,
+  Easing,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui';
@@ -56,10 +66,23 @@ export function ExerciseFrame({
   // that stops short of the edge reads as a card that failed to land. The inset
   // goes on the padding instead, which keeps the button clear of the home
   // indicator while the colour runs all the way down.
-  const bottom = useSafeAreaInsets().bottom;
+  const inset = useSafeAreaInsets().bottom;
+  // With the keyboard up the home indicator is under it, so its inset would
+  // only leave a gap between the button and the keys.
+  const keyboard = useKeyboardUp();
+  const bottom = keyboard ? 0 : inset;
+
+  // The keyboard would sit over the answer the moment it lands, so it goes
+  // down as she checks.
+  const check = () => {
+    Keyboard.dismiss();
+    onCheck?.();
+  };
 
   return (
-    <View style={styles.frame}>
+    // On iOS the keyboard covers the screen instead of shrinking it, so the
+    // docked button would end up underneath it; Android resizes on its own.
+    <KeyboardAvoidingView style={styles.frame} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView
         contentContainerStyle={styles.body}
         keyboardShouldPersistTaps="handled"
@@ -81,12 +104,29 @@ export function ExerciseFrame({
           {note ? (
             <Text style={styles.note}>{note}</Text>
           ) : (
-            <Button title={checkLabel} onPress={onCheck ?? (() => {})} disabled={!canCheck} />
+            <Button title={checkLabel} onPress={check} disabled={!canCheck} />
           )}
         </View>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
+}
+
+function useKeyboardUp() {
+  const [up, setUp] = useState(false);
+  useEffect(() => {
+    if (Platform.OS === 'web') return;
+    // iOS announces the keyboard before it moves, Android only once it has.
+    const show = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+    const hide = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+    const a = Keyboard.addListener(show, () => setUp(true));
+    const b = Keyboard.addListener(hide, () => setUp(false));
+    return () => {
+      a.remove();
+      b.remove();
+    };
+  }, []);
+  return up;
 }
 
 // ---------------------------------------------------------------------------

@@ -46,6 +46,8 @@ const EXPO_PUSH_URL = "https://exp.host/--/api/v2/push/send";
 const MIN_GAP_MINUTES = 25;
 const EARLIEST_LOCAL = "08:00";
 const BATCH_SIZE = 100;
+const PAGE = 1000; // PostgREST's row cap per request
+const ID_CHUNK = 200; // ids per `.in()` filter, which travels in the URL
 
 const MESSAGES = [
   "Hora de practicar tu español 💪",
@@ -119,9 +121,10 @@ Deno.serve(async (req) => {
   });
 
   const flush = async () => {
-    if (events.length === 0) return;
-    const { error: evErr } = await supabase.from("notification_events").insert(events);
-    if (evErr) console.error(`[send-reminder ${traceId}] failed to insert debug events`, evErr.message);
+    for (const chunk of chunks(events, PAGE)) {
+      const { error: evErr } = await supabase.from("notification_events").insert(chunk);
+      if (evErr) console.error(`[send-reminder ${traceId}] failed to insert debug events`, evErr.message);
+    }
     events.length = 0;
   };
 
@@ -136,19 +139,26 @@ Deno.serve(async (req) => {
   }
   log("auth ok");
 
-  const { data: subs, error: subsErr } = await supabase
-    .from("push_subscriptions")
-    .select(
-      "id,user_id,expo_push_token,platform,reminder_time,timezone,notifications_enabled,last_sent_at,last_text_index,web_push_endpoint,web_push_p256dh,web_push_auth",
-    )
-    .eq("notifications_enabled", true);
-
-  if (subsErr) {
-    err("db error fetching subs", { error: subsErr.message });
-    return json({ error: `db error: ${subsErr.message}` }, { status: 500 });
+  // PostgREST returns at most 1,000 rows a request, so read in pages
+  // (ordered by id, so no row repeats or goes missing between pages).
+  const candidates: PushSub[] = [];
+  for (let from = 0; ; from += PAGE) {
+    const { data: page, error: subsErr } = await supabase
+      .from("push_subscriptions")
+      .select(
+        "id,user_id,expo_push_token,platform,reminder_time,timezone,notifications_enabled,last_sent_at,last_text_index,web_push_endpoint,web_push_p256dh,web_push_auth",
+      )
+      .eq("notifications_enabled", true)
+      .order("id")
+      .range(from, from + PAGE - 1);
+    if (subsErr) {
+      err("db error fetching subs", { error: subsErr.message });
+      await flush();
+      return json({ error: `db error: ${subsErr.message}` }, { status: 500 });
+    }
+    candidates.push(...((page ?? []) as PushSub[]));
+    if ((page ?? []).length < PAGE) break;
   }
-
-  const candidates = (subs ?? []) as PushSub[];
   log("candidates loaded", { count: candidates.length });
   if (candidates.length === 0) {
     log("no enabled subscriptions — exit");
@@ -157,16 +167,17 @@ Deno.serve(async (req) => {
   }
 
   const userIds = [...new Set(candidates.map((s) => s.user_id))];
-  const { data: streaks, error: streaksErr } = await supabase
-    .from("streaks")
-    .select("user_id,current_streak,last_practice_date")
-    .in("user_id", userIds);
-  if (streaksErr) warn("streaks query error", { error: streaksErr.message });
-
-  const streakByUser = new Map<string, Streak>(
-    (streaks ?? []).map((s) => [s.user_id, s as Streak]),
-  );
-  log("streaks loaded", { users: userIds.length, rows: streaks?.length ?? 0 });
+  // Ids go in the URL, so ask in chunks: thousands at once overflow it.
+  const streakByUser = new Map<string, Streak>();
+  for (const ids of chunks(userIds, ID_CHUNK)) {
+    const { data: streaks, error: streaksErr } = await supabase
+      .from("streaks")
+      .select("user_id,current_streak,last_practice_date")
+      .in("user_id", ids);
+    if (streaksErr) warn("streaks query error", { error: streaksErr.message });
+    for (const s of streaks ?? []) streakByUser.set(s.user_id, s as Streak);
+  }
+  log("streaks loaded", { users: userIds.length, rows: streakByUser.size });
 
   const now = new Date();
   const due: PushSub[] = [];
@@ -183,20 +194,14 @@ Deno.serve(async (req) => {
 
     if (streak?.last_practice_date === todayLocal) {
       bumpSkip("done-today");
-      console.log(`[send-reminder ${traceId}] skip — done today`, { sub: s.id, user: s.user_id, channel, todayLocal });
-      event("skip-done-today", { userId: s.user_id, subId: s.id, detail: { channel, todayLocal } });
       continue;
     }
     if (localNow < earliest) {
       bumpSkip("before-earliest");
-      console.log(`[send-reminder ${traceId}] skip — before earliest`, { sub: s.id, user: s.user_id, channel, localNow, earliest, tz: s.timezone });
-      event("skip-before-earliest", { userId: s.user_id, subId: s.id, detail: { channel, localNow, earliest, tz: s.timezone } });
       continue;
     }
     if (gapMs !== null && gapMs < MIN_GAP_MINUTES * 60_000) {
       bumpSkip("throttled");
-      console.log(`[send-reminder ${traceId}] skip — throttled`, { sub: s.id, user: s.user_id, channel, gapMin: Math.round(gapMs / 60_000) });
-      event("skip-throttled", { userId: s.user_id, subId: s.id, detail: { channel, gapMs } });
       continue;
     }
     console.log(`[send-reminder ${traceId}] due`, {
@@ -296,8 +301,9 @@ Deno.serve(async (req) => {
       err("web push: VAPID not configured — skipping web subscriptions", { count: webPicks.length });
     } else {
       log("web push: starting", { count: webPicks.length });
-      await Promise.all(
-        webPicks.map(async (p) => {
+      // A few dozen at a time, not thousands of open connections at once.
+      for (const batch of chunks(webPicks, BATCH_SIZE)) await Promise.all(
+        batch.map(async (p) => {
           const payload = JSON.stringify({
             title: "",
             body: p.body,
@@ -348,27 +354,35 @@ Deno.serve(async (req) => {
   if (sentSubIds.size > 0) {
     const sentAt = now.toISOString();
     log("updating last_sent_at + last_text_index", { count: sentSubIds.size });
-    const updateResults = await Promise.all(
-      picks
-        .filter((p) => sentSubIds.has(p.sub.id))
-        .map((p) =>
-          supabase
-            .from("push_subscriptions")
-            .update({ last_sent_at: sentAt, last_text_index: p.nextIdx })
-            .eq("id", p.sub.id)
-        ),
-    );
-    const failed = updateResults.filter((r) => r.error).length;
-    if (failed > 0) warn("update errors", { failed, total: updateResults.length });
+    // Everyone sent shares sentAt, and nextIdx has only MESSAGES.length
+    // values, so one update per (nextIdx, id chunk) instead of one per user.
+    const idsByIdx = new Map<number, string[]>();
+    for (const p of picks) {
+      if (!sentSubIds.has(p.sub.id)) continue;
+      idsByIdx.set(p.nextIdx, [...(idsByIdx.get(p.nextIdx) ?? []), p.sub.id]);
+    }
+    let failed = 0;
+    for (const [nextIdx, ids] of idsByIdx) {
+      for (const chunk of chunks(ids, ID_CHUNK)) {
+        const { error: upErr } = await supabase
+          .from("push_subscriptions")
+          .update({ last_sent_at: sentAt, last_text_index: nextIdx })
+          .in("id", chunk);
+        if (upErr) failed += chunk.length;
+      }
+    }
+    if (failed > 0) warn("update errors", { failed, total: sentSubIds.size });
   }
 
   if (expiredSubIds.length > 0) {
     log("pruning expired", { count: expiredSubIds.length, ids: expiredSubIds });
-    const { error: delErr } = await supabase
-      .from("push_subscriptions")
-      .delete()
-      .in("id", expiredSubIds);
-    if (delErr) err("prune error", { error: delErr.message });
+    for (const chunk of chunks(expiredSubIds, ID_CHUNK)) {
+      const { error: delErr } = await supabase
+        .from("push_subscriptions")
+        .delete()
+        .in("id", chunk);
+      if (delErr) err("prune error", { error: delErr.message });
+    }
   }
 
   const summary = {
@@ -386,6 +400,12 @@ Deno.serve(async (req) => {
   await flush();
   return json({ ...summary, traceId });
 });
+
+function chunks<T>(items: T[], size: number): T[][] {
+  const out: T[][] = [];
+  for (let i = 0; i < items.length; i += size) out.push(items.slice(i, i + size));
+  return out;
+}
 
 function tryHostname(url: string | null | undefined): string | null {
   if (!url) return null;

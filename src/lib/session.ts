@@ -14,7 +14,8 @@ import {
 } from './answers';
 import { conceptScores, conceptsOf, weakestConcept } from './concepts';
 import { addDays, localDateStr } from './dates';
-import { withMeanings } from './meanings';
+import { type GlossTallies, withMeanings } from './meanings';
+import { loadCourse } from './course';
 import {
   DEFAULT_LADDER,
   type Ladder,
@@ -27,13 +28,14 @@ import {
   ladderOffset,
   passedScreens,
   passesOfSentence,
+  loadSentenceStates,
   loadSentences,
   pickReviewSentences,
   rungFor,
   sentenceCap,
   tooLongToBuild,
 } from './sentences';
-import { cached } from './content-cache';
+import { versioned } from './content-cache';
 import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { ExerciseMode, Form, FormState, Sentence, Tip } from './types';
@@ -142,29 +144,73 @@ export interface LearnerData {
   ladder?: Ladder;
 }
 
-/** The published lexicon with the answers stored for each word's meanings
- *  (course:answers) next to the word. Downloaded once per app run and shared. */
-export function loadLexicon(): Promise<Form[]> {
-  return cached('lexicon', async () => {
-    // Paged (all): both are past PostgREST's 1,000 rows.
-    const [formRows, answerRows] = await Promise.all([
-      all<Form>(() => supabase.from('form_entries').select('*').eq('status', 'published').order('id')),
-      all<{ form_id: string; meaning: string; answer: string }>(() =>
-        supabase.from('form_answers').select('form_id, meaning, answer').eq('status', 'published').order('form_id').order('meaning').order('answer'),
-      ),
-    ]);
-    const accepts = new Map<string, { meaning: string; answer: string }[]>();
-    for (const a of answerRows) {
-      accepts.set(a.form_id, [...(accepts.get(a.form_id) ?? []), { meaning: a.meaning, answer: a.answer }]);
-    }
-    return formRows.map((f) => (accepts.has(f.id) ? { ...f, accepts: accepts.get(f.id) } : f));
-  });
+interface LexiconRows {
+  forms: Form[];
+  answers: { form_id: string; meaning: string; answer: string }[];
 }
 
-/** The published lexicon, her SM-2 states, every published sentence, and the
- *  ladder her recent rounds and any placement have earned her. */
-export async function loadLearner(userId: string): Promise<LearnerData> {
-  const [lexicon, { data: stateRows }, { data: roundRows }, { data: profile }] = await Promise.all([
+/** The published lexicon with the answers stored for each word's meanings
+ *  (course:answers) next to the word. Loaded once and kept on the phone. */
+export async function loadLexicon(): Promise<Form[]> {
+  const rows = await versioned('lexicon', (v) => v.lexicon, fetchLexiconRows);
+  return merged(rows);
+}
+
+async function fetchLexiconRows(): Promise<LexiconRows> {
+  // Paged (all): both are past PostgREST's 1,000 rows.
+  const [forms, answers] = await Promise.all([
+    all<Form>(() => supabase.from('form_entries').select('*').eq('status', 'published').order('id')),
+    all<{ form_id: string; meaning: string; answer: string }>(() =>
+      supabase.from('form_answers').select('form_id, meaning, answer').eq('status', 'published').order('form_id').order('meaning').order('answer'),
+    ),
+  ]);
+  return { forms, answers };
+}
+
+// Merged once per set of rows, which every caller in a run shares.
+const lexicons = new WeakMap<LexiconRows, Form[]>();
+function merged(rows: LexiconRows): Form[] {
+  let forms = lexicons.get(rows);
+  if (!forms) {
+    const accepts = new Map<string, { meaning: string; answer: string }[]>();
+    for (const a of rows.answers) {
+      accepts.set(a.form_id, [...(accepts.get(a.form_id) ?? []), { meaning: a.meaning, answer: a.answer }]);
+    }
+    forms = rows.forms.map((f) => (accepts.has(f.id) ? { ...f, accepts: accepts.get(f.id) } : f));
+    lexicons.set(rows, forms);
+  }
+  return forms;
+}
+
+/** What a round needs of the course beyond her own units (loadLearner). */
+export interface LearnerReach {
+  /** course_order of the furthest unit the round may play — a lesson's unit,
+   *  the last unit a test spans. Her own furthest unit is always in reach. */
+  throughOrder?: number;
+  /** A unit off the published course: a draft a reviewer previews. */
+  unitIds?: string[];
+  /** Sentences the round needs by id, wherever they are: a story's lines. */
+  sentenceIds?: string[];
+}
+
+/** Every published sentence's share of a word's meanings (meanings.ts), summed
+ *  by the database. Once per app run and shared. */
+const loadGlossTallies = () =>
+  versioned('tallies', (v) => v.tallies, async () => {
+    const { data, error } = await supabase.rpc('form_gloss_tallies');
+    if (error || !data || typeof data !== 'object') throw new Error(error?.message ?? 'no gloss tallies');
+    return data as GlossTallies;
+  });
+
+/** The published lexicon, her SM-2 states, the published sentences in reach,
+ *  and the ladder her recent rounds and any placement have earned her.
+ *
+ *  Sentences load only as far as she has got, or the round goes (`reach`) —
+ *  not the whole course, which is 24 MB for a learner who needs a few hundred
+ *  KB of it. Should that load fail (the server is older than the app, say),
+ *  it falls back to every sentence, as it always did. */
+export async function loadLearner(userId: string, reach: LearnerReach = {}): Promise<LearnerData> {
+  const [lexicon, { data: stateRows }, { data: roundRows }, { data: profile }, shown, course, tallies] = await Promise.all([
     loadLexicon(),
     // Paged (all): her states are past PostgREST's 1,000 rows.
     all<FormState>(() => supabase.from('form_states').select('*').eq('user_id', userId).order('form_id')).then((data) => ({ data })),
@@ -176,17 +222,41 @@ export async function loadLearner(userId: string): Promise<LearnerData> {
       .order('finished_at', { ascending: false })
       .limit(OFFSET_WINDOW),
     supabase.from('profiles').select('placed_through').eq('user_id', userId).maybeSingle(),
+    loadSentenceStates(userId),
+    loadCourse().catch(() => null),
+    loadGlossTallies().catch(() => null),
   ]);
   const states = (stateRows ?? []) as FormState[];
-  const sentences = await loadSentences(userId, lexicon);
-  // What each word means comes from its sentences and how she has met them, so
-  // it is worked out here, where both are to hand, every time her data loads.
+  const placedThrough = (profile as { placed_through?: number } | null)?.placed_through ?? 0;
   const orderOf = new Map(lexicon.map((f) => [f.id, f.unit_order]));
   const reached = Math.max(0, ...states.map((s) => orderOf.get(s.form_id) ?? 0));
-  const forms = withMeanings(lexicon, sentences, reached);
+
+  // Everything up to the furthest of: the unit she has reached, the one a
+  // placement put her past, and the one this round plays.
+  let sentences: Sentence[] | null = null;
+  if (course && tallies) {
+    sentences = await loadSentences(
+      userId,
+      lexicon,
+      {
+        throughOrder: Math.max(reached, placedThrough, reach.throughOrder ?? 0),
+        units: course.units,
+        unitIds: reach.unitIds,
+        ids: reach.sentenceIds,
+      },
+      shown,
+    ).catch(() => null);
+  }
+  const bounded = sentences != null;
+  sentences ??= await loadSentences(userId, lexicon, undefined, shown);
+
+  // What each word means comes from its sentences and how she has met them, so
+  // it is worked out here, where both are to hand, every time her data loads.
+  // The sentences she hasn't got add to it through `tallies`.
+  const forms = withMeanings(lexicon, sentences, reached, bounded ? (tallies ?? undefined) : undefined);
   const scores = ((roundRows ?? []) as { score: number | null }[]).flatMap((r) => (r.score == null ? [] : [r.score]));
   const ladder = ladderFor(ladderOffset(scores), {
-    placedThrough: (profile as { placed_through?: number } | null)?.placed_through ?? 0,
+    placedThrough,
     glue: forms.filter((f) => f.is_glue),
     passed: passedScreens(sentences),
   });

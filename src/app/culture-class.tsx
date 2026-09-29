@@ -32,7 +32,7 @@ import {
 import { playAudio } from '@/lib/audio';
 import { goBack } from '@/lib/nav';
 import { useStatusBarColor } from '@/lib/status-bar-color';
-import { clay, colors, font, gradients, pastel, pastelGrad, radius, shadow } from '@/lib/theme';
+import { clay, colors, font, gradients, pastel, pastelGrad, PICKED, radius, shadow } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
@@ -1028,7 +1028,7 @@ function Stamp({ label, number }: { label: string; number: number }) {
     <RNAnimated.View style={[styles.stamp, { opacity: t, transform: [{ rotate: '-9deg' }, ...scale] }]}>
       <View style={styles.stampDashed} />
       <View style={styles.stampInner} />
-      <Text style={styles.stampTop}>CHE · ARGENTINA</Text>
+      <Text style={styles.stampTop}>POSTA · ARGENTINA</Text>
       <FitText style={styles.stampLabel} lines={1}>
         {label}
       </FitText>
@@ -1318,7 +1318,6 @@ function MatchStep({
         <Text
           style={[
             styles.matchText,
-            picked && { color: colors.onPrimary },
             done && { color: colors.success },
           ]}>
           {text}
@@ -1417,7 +1416,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
   },
-  matchCellPicked: { backgroundColor: colors.primary, boxShadow: clay.button },
+  matchCellPicked: PICKED,
   matchCellWrong: { borderColor: colors.danger, backgroundColor: colors.dangerSoft },
   matchCellDone: { borderColor: colors.success, backgroundColor: colors.successSoft, boxShadow: clay.flat, opacity: 0.75 },
   matchText: { ...font.body[700], fontSize: 15, color: colors.ink, textAlign: 'center' },

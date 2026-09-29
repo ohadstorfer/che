@@ -55,7 +55,7 @@ import {
 import type { AnswerExtra, QueueItem } from '@/lib/round';
 import { DEFAULT_LADDER, type Ladder, RUNG_BUILD_AT } from '@/lib/sentences';
 import { SETTLED_DAYS, buildTiles, wordPool } from '@/lib/session';
-import { clay, colors, font, pastel, radius } from '@/lib/theme';
+import { clay, colors, font, pastel, PICKED, radius } from '@/lib/theme';
 import type { Form, Sentence, Tip } from '@/lib/types';
 import { FitText } from '@/components/fit-text';
 
@@ -427,14 +427,18 @@ function Pulse({ inset }: { inset: number }) {
   );
 }
 
-export function PlayButton({ path, big }: { path: string; big?: boolean }) {
+export function PlayButton({ path, big, autoPlay = true }: { path: string; big?: boolean; autoPlay?: boolean }) {
   const { playing, problem, play } = useClip(path);
   const reduced = useReducedMotion();
 
   // It says itself on arrival, the way a teacher would say the word before
   // asking about it — the button is there to hear it again. Every place this
   // sits, the Spanish is already on screen, so the sound gives nothing away.
-  useEffect(() => play(), [play]);
+  // Lists (the guidebook, her words) turn it off: a page of rows would all
+  // start talking at once. There it plays only when tapped.
+  useEffect(() => {
+    if (autoPlay) play();
+  }, [autoPlay, play]);
 
   return (
     <View style={styles.playWrap}>
@@ -583,7 +587,7 @@ export function Choices({
               style={[
                 styles.choiceText,
                 side && styles.choiceTextSide,
-                picked && { color: colors.card, ...font.body[800] },
+                picked && font.body[800],
                 right && { color: colors.success, ...font.body[800] },
                 wrong && { color: colors.danger },
               ]}>
@@ -785,7 +789,7 @@ function TrueFalse({
             style={({ pressed }) => [
               styles.bigChoice,
               { borderColor: 'transparent' },
-              picked === opt.value && { borderColor: colors.ink, backgroundColor: colors.card },
+              picked === opt.value && PICKED,
               { transform: [{ scale: pressed && verdict === null ? 0.97 : 1 }] },
               webPress,
             ]}>
@@ -1551,7 +1555,6 @@ function Matching({
                 <FitText
                   style={[
                     styles.matchText,
-                    isSelected && { color: colors.card },
                     isMatched && { color: colors.success },
                   ]}
                   lines={2}>
@@ -2014,7 +2017,6 @@ function GapBank({
             <Text
               style={[
                 styles.tileText,
-                picked && { color: colors.card },
                 right && { color: colors.success },
                 wrong && { color: colors.danger },
               ]}>
@@ -2148,7 +2150,6 @@ function ClauseContext({ es, clause }: { es: string; clause: number }) {
 }
 
 /** The ink pick's own shade: a drop in its colour and a faint lit edge. */
-const PICK_SHADOW = 'inset 0 2px 0 rgba(255, 255, 255, 0.15), 0 10px 22px -10px rgba(58, 42, 32, 0.6)';
 
 const styles = StyleSheet.create({
   bigCard: { alignItems: 'center', gap: 10, paddingVertical: 26 },
@@ -2341,9 +2342,7 @@ const styles = StyleSheet.create({
   choicesSide: { flexDirection: 'row', gap: 12 },
   choiceSide: { flex: 1, minHeight: 88, borderRadius: radius.lg - 4, alignItems: 'center', justifyContent: 'center' },
   choiceTextSide: { ...font.display[800], fontSize: 22 },
-  // Picked is tinta: the warm ink, with the card's cream on it — firm and
-  // unmistakable, and never mistaken for right (salvia) or wrong (coral).
-  choicePicked: { borderColor: 'transparent', backgroundColor: colors.ink, boxShadow: PICK_SHADOW },
+  choicePicked: PICKED,
   choiceRight: { borderColor: colors.success, backgroundColor: colors.successSoft },
   choiceWrong: { borderColor: colors.danger, backgroundColor: colors.dangerSoft },
   choiceText: { ...font.body[700], fontSize: 17, color: colors.ink, textAlign: 'center' },
@@ -2442,7 +2441,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
   },
-  matchCellPicked: { borderColor: 'transparent', backgroundColor: colors.ink, boxShadow: PICK_SHADOW },
+  matchCellPicked: PICKED,
   matchCellDone: {
     borderColor: colors.success,
     backgroundColor: colors.successSoft,

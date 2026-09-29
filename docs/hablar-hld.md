@@ -134,7 +134,8 @@ AAC, Chrome → `audio/webm` Opus). Native comes second; the differences are in 
 - **The server builds every prompt.** The client sends only ids (`session_id`, `turn_id`), never
   prompt text. The same pattern as `explain-answer`.
 - **The server keeps the transcript.** `reply` takes a `turn_id` and uses the text *it* transcribed.
-  Since input is voice-only, nobody can type to Pancho through the API.
+  A typed line (the keyboard next to the mic, added 2026-09-29) goes through `hablar-transcribe` as
+  `text` instead of `audio` and is stored the same way, so `reply` still never takes text from the client.
 - **The server clock decides.** The daily limit, the deadline and the wrap-up are all computed on the
   server. The client timer is only a display.
 - **Stream what the learner waits for; save everything else in the background.** Replies stream as
@@ -397,7 +398,7 @@ Kept as decided, listed here so the trade-offs are on record:
 
 - **1 chat a day.** The apps allow retrying a scenario, and repetition is where immediate feedback
   pays off. Possible later: the daily chat counts for the streak, retries don't.
-- **Voice only.** The apps keep a keyboard fallback for mic denied, noisy places, accessibility and
+- **Voice only.** Reversed 2026-09-29: a keyboard sits next to the mic. The apps keep a keyboard fallback for mic denied, noisy places, accessibility and
   repeated STT failures. At minimum we need a clear screen for "mic permission denied".
 - **Streak on open+close.** Others require some number of learner turns; ours is easier to game.
   That's accepted for now.

@@ -9,12 +9,14 @@ import {
   Animated,
   AppState,
   Easing,
+  KeyboardAvoidingView,
   Linking,
   Platform,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -50,6 +52,7 @@ import {
   newTurnId,
   reply,
   resolveAudio,
+  sendTyped,
   signedHablarUrl,
   startCache,
   tomasAudioPath,
@@ -150,6 +153,11 @@ export default function HablarChat() {
   const [phase, setPhase] = useState<Phase>('boot');
   const [messages, setMessages] = useState<Msg[]>([]);
   const [draft, setDraft] = useState<{ turnId: string; text: string } | null>(null);
+  /** Writing instead of speaking — the only way in where the mic can't record. */
+  const [typing, setTyping] = useState(!canRecord);
+  const [typed, setTyped] = useState('');
+  const [sendingTyped, setSendingTyped] = useState(false);
+  const sendingTypedRef = useRef(false);
   const [goals, setGoals] = useState<Goal[]>([]);
   const [goalsDone, setGoalsDone] = useState<string[]>([]);
   const [title, setTitle] = useState<{ text: string; role: string | null }>({
@@ -592,6 +600,27 @@ export default function HablarChat() {
     sendTurn(draft.turnId, draft.text);
   };
 
+  /** A typed line: stored on the server like a transcript, then answered. */
+  const submitTyped = async () => {
+    const text = typed.trim();
+    if (!text || sendingTypedRef.current) return;
+    sendingTypedRef.current = true;
+    setSendingTyped(true);
+    prime(); // inside the tap: Pancho's first sentence must be allowed to sound
+    const turnId = newTurnId();
+    try {
+      const res = await sendTyped({ text, session_id: sessionId, turn_id: turnId, paused_seconds: takePaused() });
+      setTyped('');
+      sendTurn(turnId, res.text || text);
+    } catch (e) {
+      if (e instanceof HablarError && (e.status === 409 || e.status === 410 || e.status === 403)) setPhase('ended');
+      else say("Couldn't send that. Try again.");
+    } finally {
+      sendingTypedRef.current = false;
+      setSendingTyped(false);
+    }
+  };
+
   const retry = () => {
     prime();
     const last = [...messages].reverse().find((m): m is PanchoMsg => m.role === 'tomas' && !!m.failed);
@@ -670,16 +699,6 @@ export default function HablarChat() {
       </FullMessage>
     );
   }
-  if (!canRecord && phase !== 'boot') {
-    return (
-      <FullMessage
-        icon="phone-portrait-outline"
-        title="This browser can't record"
-        body="Open Posta on your phone to talk with Pancho.">
-        <Button title="End chat" variant="secondary" onPress={() => void finish('user')} />
-      </FullMessage>
-    );
-  }
   if (phase === 'denied') {
     return (
       <FullMessage
@@ -691,6 +710,14 @@ export default function HablarChat() {
             : 'Posta needs the microphone for this. Turn it on in Settings, then come back and try again.'
         }>
         {Platform.OS !== 'web' ? <Button title="Open Settings" onPress={() => void Linking.openSettings()} /> : null}
+        <Button
+          title="Type instead"
+          variant="secondary"
+          onPress={() => {
+            setTyping(true);
+            setPhase('idle');
+          }}
+        />
         <Button
           title="Try again"
           onPress={() => {
@@ -705,6 +732,8 @@ export default function HablarChat() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom', 'left', 'right']}>
+      {/* On iOS the keyboard covers the screen instead of shrinking it. */}
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       {/* Header: back · Pancho · scenario · timer · ⋮ */}
       <View style={styles.header}>
         <Pressable
@@ -1003,6 +1032,79 @@ export default function HablarChat() {
             </Text>
             <Button title="Ver resumen" loading={phase === 'ending'} onPress={() => void finish('time')} />
           </View>
+        ) : typing && phase !== 'recording' ? (
+          <>
+            <View style={styles.typeRow}>
+              <Pressable
+                onPress={() => void onHint()}
+                disabled={busy || sendingTyped || phase === 'boot' || hintState.loading}
+                hitSlop={4}
+                accessibilityRole="button"
+                accessibilityLabel={`Hint, ${Math.max(0, HINTS_PER_CHAT - hintsUsed)} left`}
+                style={({ pressed }) => [
+                  styles.typeCircle,
+                  { backgroundColor: pastel.butter },
+                  (busy || sendingTyped || phase === 'boot') && { opacity: 0.4 },
+                  { transform: [{ scale: pressed ? 0.94 : 1 }] },
+                  webPress,
+                ]}>
+                {hintState.loading ? (
+                  <ActivityIndicator size="small" color={colors.ink} />
+                ) : (
+                  <MaterialCommunityIcons name="lightbulb-on-outline" size={22} color={colors.ink} />
+                )}
+              </Pressable>
+              <TextInput
+                value={typed}
+                onChangeText={setTyped}
+                placeholder="Escribile a Pancho…"
+                placeholderTextColor={colors.muted}
+                multiline
+                maxLength={300}
+                autoFocus={canRecord}
+                autoCorrect={false}
+                editable={!sendingTyped}
+                accessibilityLabel="Your message to Pancho"
+                style={styles.typeInput}
+              />
+              <Pressable
+                onPress={() => void submitTyped()}
+                disabled={!typed.trim() || busy || sendingTyped || phase === 'boot'}
+                hitSlop={4}
+                accessibilityRole="button"
+                accessibilityLabel="Send"
+                accessibilityState={{ disabled: !typed.trim() || busy || sendingTyped, busy: sendingTyped }}
+                style={({ pressed }) => [
+                  styles.typeCircle,
+                  { backgroundColor: colors.primary },
+                  (!typed.trim() || busy || phase === 'boot') && { opacity: 0.4 },
+                  { transform: [{ scale: pressed ? 0.94 : 1 }] },
+                  webPress,
+                ]}>
+                {sendingTyped ? (
+                  <ActivityIndicator size="small" color={colors.onPrimary} />
+                ) : (
+                  <Ionicons name="arrow-up" size={22} color={colors.onPrimary} />
+                )}
+              </Pressable>
+            </View>
+            {canRecord ? (
+              <Pressable
+                onPress={() => setTyping(false)}
+                hitSlop={8}
+                accessibilityRole="button"
+                style={({ pressed }) => [styles.typeSwitch, { opacity: pressed ? 0.6 : 1 }, webPress]}>
+                <MaterialCommunityIcons name="microphone-outline" size={16} color={colors.muted} />
+                <Text style={styles.caption}>
+                  {phase === 'waiting' || phase === 'streaming' ? 'Pancho está hablando…' : 'Hablar en vez de escribir'}
+                </Text>
+              </Pressable>
+            ) : (
+              <Text style={styles.caption}>
+                {phase === 'waiting' || phase === 'streaming' ? 'Pancho está hablando…' : 'Escribí en español'}
+              </Text>
+            )}
+          </>
         ) : (
           <>
             <View style={styles.barRow}>
@@ -1030,7 +1132,13 @@ export default function HablarChat() {
                   accessibilityLabel="Cancel recording"
                 />
               ) : (
-                <View style={styles.side} />
+                <SideButton
+                  icon="keyboard-outline"
+                  label="Type"
+                  disabled={phase === 'boot'}
+                  onPress={() => setTyping(true)}
+                  accessibilityLabel="Type instead of speaking"
+                />
               )}
             </View>
             {phase === 'recording' ? (
@@ -1051,6 +1159,8 @@ export default function HablarChat() {
           </>
         )}
       </View>
+
+      </KeyboardAvoidingView>
 
       {/* ✏️ correction */}
       <Sheet open={sheet?.kind === 'correction'} onClose={() => setSheet(null)} title="Correction">
@@ -1645,6 +1755,35 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   barStack: { gap: 8, paddingVertical: 6 },
+  typeRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 10 },
+  typeCircle: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  typeInput: {
+    flex: 1,
+    minHeight: 48,
+    maxHeight: 120,
+    paddingHorizontal: 16,
+    paddingTop: 13,
+    paddingBottom: 13,
+    borderRadius: 24,
+    backgroundColor: colors.card,
+    ...font.body[600],
+    fontSize: 17,
+    lineHeight: 22,
+    color: colors.ink,
+  },
+  typeSwitch: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    minHeight: 32,
+  },
   side: { width: 72, alignItems: 'center', gap: 4 },
   sideCircle: {
     width: 48,

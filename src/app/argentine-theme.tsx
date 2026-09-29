@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui';
 import { type ArPack, findTheme, packTone, packsOf } from '@/lib/argentine';
-import { themeArt } from '@/lib/argentine-art';
+import { themeObject } from '@/lib/argentine-art';
 import { MASTERED, type PackScore, usePackScores } from '@/lib/argentine-scores';
 import { goBack } from '@/lib/nav';
 import { useStatusBarColor } from '@/lib/status-bar-color';
@@ -76,7 +76,7 @@ export default function ArgentineTheme() {
         <View style={styles.hero}>
           <LinearGradient colors={gradOf(tone.bg)} style={StyleSheet.absoluteFill} pointerEvents="none" />
           <View style={styles.heroPod} />
-          <Image source={themeArt(theme.slug)} style={styles.heroArt} contentFit="contain" accessible={false} />
+          <Image source={themeObject(theme.slug)} style={styles.heroArt} contentFit="contain" accessible={false} />
           <Text style={[styles.heroEyebrow, { color: tone.ink }]}>
             {packs.length === 1 ? '1 pack' : `${packs.length} packs`} · {words} words
           </Text>
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     boxShadow: clay.surface,
   },
   heroPod: { position: 'absolute', right: -6, top: 14, width: 132, height: 132, borderRadius: 66, backgroundColor: colors.pod },
-  heroArt: { position: 'absolute', right: 8, top: 10, width: 112, height: 160, transform: [{ rotate: '-6deg' }] },
+  heroArt: { position: 'absolute', right: 10, top: 18, width: 124, height: 124, transform: [{ rotate: '-6deg' }] },
   heroEyebrow: { ...font.body[800], fontSize: 13, opacity: 0.8 },
   heroTitle: { ...font.display[800], fontSize: 30, lineHeight: 32, letterSpacing: -0.5, maxWidth: '68%' },
   heroAbout: { ...font.body[600], opacity: 0.85, fontSize: 14, lineHeight: 19, maxWidth: '62%' },

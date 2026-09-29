@@ -17,7 +17,7 @@ import { preloadAudio } from '@/lib/audio';
 import { useAuth } from '@/lib/auth';
 import { conceptsOf } from '@/lib/concepts';
 import { currentIndex, loadCourse, loadProgress } from '@/lib/course';
-import { buildLesson } from '@/lib/lesson';
+import { LessonLockedError, buildLesson } from '@/lib/lesson';
 import { backToCourse, goBack } from '@/lib/nav';
 import { DEFAULT_LADDER, type Ladder } from '@/lib/sentences';
 import { type TestMode, type TestOutcome, buildTest, maxUnitsInTest, shouldStop, testOutcome } from '@/lib/placement';
@@ -192,6 +192,10 @@ export default function Practice() {
       setLexicon(data.lexicon);
       setAllSentences(data.sentences);
       setLadder(data.ladder ?? DEFAULT_LADDER);
+    }).catch((e) => {
+      if (cancelled) return;
+      if (e instanceof LessonLockedError) router.replace('/paywall?from=lesson');
+      else console.warn('lesson failed to load', e);
     });
     return () => {
       cancelled = true;

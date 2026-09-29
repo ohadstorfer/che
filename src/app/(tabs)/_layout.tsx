@@ -36,10 +36,10 @@ export default function TabsLayout() {
         name="home"
         options={{
           title: 'Course',
-          // Always the outline: the ink pill behind the selected tab is what
-          // marks it, so the glyph itself doesn't change.
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="map-outline" color={color} size={size} />
+          // Outline at rest, solid when selected: the glyph fills in as the
+          // outlined pill slides behind it.
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'map' : 'map-outline'} color={color} size={size} />
           ),
         }}
       />
@@ -47,8 +47,8 @@ export default function TabsLayout() {
         name="words"
         options={{
           title: 'Words',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="albums-outline" color={color} size={size} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'albums' : 'albums-outline'} color={color} size={size} />
           ),
         }}
       />
@@ -56,8 +56,8 @@ export default function TabsLayout() {
         name="culture"
         options={{
           title: 'Culture',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cafe-outline" color={color} size={size} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'cafe' : 'cafe-outline'} color={color} size={size} />
           ),
         }}
       />
@@ -65,8 +65,8 @@ export default function TabsLayout() {
         name="hablar"
         options={{
           title: 'Speaking',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="chatbubble-ellipses-outline" color={color} size={size} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline'} color={color} size={size} />
           ),
         }}
       />

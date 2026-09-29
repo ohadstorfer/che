@@ -10,7 +10,7 @@
     "backgroundColor": "#F7EFE6",
     "primaryColor": "#B44A60",
     "ios": {
-      "bundleIdentifier": "com.posta.app",
+      "bundleIdentifier": "app.posta.ios",
       "supportsTablet": false,
       "usesAppleSignIn": true,
       "config": {

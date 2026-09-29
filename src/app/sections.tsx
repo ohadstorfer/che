@@ -2,8 +2,16 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ActivityIndicator, Platform, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import Animated, {
+  Easing,
+  runOnJS,
+  useAnimatedStyle,
+  useReducedMotion,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useAuth } from '@/lib/auth';
 import { type Course, currentIndex, loadCourse, loadProgress, sectionSummaries, type SectionSummary } from '@/lib/course';
@@ -43,6 +51,28 @@ export default function SectionsScreen() {
   const { profile } = useAuth();
   const [data, setData] = useState<Data | null>(null);
 
+  // The map of sections drops down from above, like a blind pulled over the
+  // road, and goes back up the way it came. The stack shows it with no
+  // animation of its own over a see-through backdrop; the motion is ours.
+  // Strong ease-out in, a quicker ease-in out; reduced motion just fades.
+  const { height } = useWindowDimensions();
+  // Insets from the hook, not SafeAreaView: that one measures where it sits,
+  // and it first sits a screen above the notch, so it would pad nothing.
+  const insets = useSafeAreaInsets();
+  const reduced = useReducedMotion();
+  const shown = useSharedValue(0);
+  useEffect(() => {
+    shown.value = withTiming(1, { duration: reduced ? 180 : 420, easing: Easing.bezier(0.23, 1, 0.32, 1) });
+  }, [shown, reduced]);
+  const sheet = useAnimatedStyle(() =>
+    reduced ? { opacity: shown.value } : { transform: [{ translateY: (shown.value - 1) * height }] },
+  );
+  const leave = (then: () => void) => {
+    shown.value = withTiming(0, { duration: reduced ? 150 : 280, easing: Easing.bezier(0.55, 0, 1, 0.45) }, (done) => {
+      if (done) runOnJS(then)();
+    });
+  };
+
   useEffect(() => {
     if (!profile) return;
     Promise.all([loadCourse(), loadProgress(profile.id)]).then(([course, done]) =>
@@ -66,44 +96,47 @@ export default function SectionsScreen() {
     return span > 0 && span <= maxUnitsInTest() ? target : null;
   };
 
-  const open = (s: SectionSummary) => router.dismissTo({ pathname: '/home', params: { section: String(s.section.id) } });
+  const open = (s: SectionSummary) =>
+    leave(() => router.dismissTo({ pathname: '/home', params: { section: String(s.section.id) } }));
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
-      <View style={styles.topBar}>
-        <Pressable
-          onPress={() => goBack('/home')}
-          hitSlop={10}
-          accessibilityLabel="Close"
-          style={({ pressed }) => [styles.close, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
-          <Ionicons name="close" size={26} color={colors.ink} />
-        </Pressable>
-        <Text style={styles.topTitle} accessibilityRole="header">
-          Rioplatense Spanish
-        </Text>
-        <View style={styles.close} />
-      </View>
-
-      {!data ? (
-        <View style={styles.loading}>
-          <ActivityIndicator color={colors.primary} />
+    <Animated.View style={[styles.sheet, sheet]}>
+      <View style={[styles.safe, { paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right }]}>
+        <View style={styles.topBar}>
+          <Pressable
+            onPress={() => leave(() => goBack('/home'))}
+            hitSlop={10}
+            accessibilityLabel="Close"
+            style={({ pressed }) => [styles.close, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
+            <Ionicons name="close" size={26} color={colors.ink} />
+          </Pressable>
+          <Text style={styles.topTitle} accessibilityRole="header">
+            Rioplatense Spanish
+          </Text>
+          <View style={styles.close} />
         </View>
-      ) : (
-        <ScrollView contentContainerStyle={styles.list} showsVerticalScrollIndicator={false}>
-          {summaries.map((s) => (
-            <SectionCard
-              key={s.section.id}
-              summary={s}
-              onOpen={s.state === 'locked' ? undefined : () => open(s)}
-              jump={(() => {
-                const target = jumpTarget(s);
-                return target ? () => router.push(`/practice?test=jump&to=${target.id}`) : undefined;
-              })()}
-            />
-          ))}
-        </ScrollView>
-      )}
-    </SafeAreaView>
+
+        {!data ? (
+          <View style={styles.loading}>
+            <ActivityIndicator color={colors.primary} />
+          </View>
+        ) : (
+          <ScrollView contentContainerStyle={styles.list} showsVerticalScrollIndicator={false}>
+            {summaries.map((s) => (
+              <SectionCard
+                key={s.section.id}
+                summary={s}
+                onOpen={s.state === 'locked' ? undefined : () => open(s)}
+                jump={(() => {
+                  const target = jumpTarget(s);
+                  return target ? () => router.push(`/practice?test=jump&to=${target.id}`) : undefined;
+                })()}
+              />
+            ))}
+          </ScrollView>
+        )}
+      </View>
+    </Animated.View>
   );
 }
 
@@ -223,6 +256,7 @@ function SectionCard({
 }
 
 const styles = StyleSheet.create({
+  sheet: { flex: 1 },
   safe: { flex: 1, backgroundColor: colors.bg },
   topBar: {
     height: 52,

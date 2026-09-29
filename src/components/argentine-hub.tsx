@@ -1,10 +1,11 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { Platform, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 
 import { type ArPack, arPacks, arThemes, packTone, packsOf } from '@/lib/argentine';
-import { themeArt } from '@/lib/argentine-art';
+import { themeArt, themeObject } from '@/lib/argentine-art';
 import { type PackScore, useShowAdult } from '@/lib/argentine-scores';
 import { clay, colors, font, gradients, pastel, pastelGrad, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
@@ -63,9 +64,12 @@ export function ArgentineHub({ scores }: { scores: Record<string, PackScore> }) 
               accessibilityRole="button"
               accessibilityLabel={`${theme.title}, ${packs.length} packs${done ? `, ${done} done` : ''}`}
               style={({ pressed }) => [styles.tile, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
-              <View style={[styles.avatar, { backgroundColor: tone.bg }]}>
-                <Image source={themeArt(theme.slug)} style={styles.avatarArt} contentFit="contain" accessible={false} />
+              {/* A soft pastel pod running off the card's edge, clipped by its own
+                  layer: clipping the tile itself would clip its clay shadow too. */}
+              <View style={styles.podClip} pointerEvents="none">
+                <View style={[styles.pod, { backgroundColor: tone.bg }]} />
               </View>
+              <Image source={themeObject(theme.slug)} style={styles.tileArt} contentFit="contain" accessible={false} />
               <View style={styles.tileText}>
                 <FitText style={styles.tileTitle} lines={2}>
                   {theme.title}
@@ -99,7 +103,7 @@ export function ArgentineHub({ scores }: { scores: Record<string, PackScore> }) 
       {rude ? (
         <View style={styles.adultRow}>
           <View style={[styles.adultAvatar, { backgroundColor: pastel.peach }]}>
-            <Image source={themeArt(rude.slug)} style={styles.adultArt} contentFit="contain" accessible={false} />
+            <Image source={themeObject(rude.slug)} style={styles.adultArt} contentFit="contain" accessible={false} />
           </View>
           <View style={{ flex: 1, gap: 2 }}>
             <View style={styles.adultTitleRow}>
@@ -186,26 +190,21 @@ function KeepGoing({ pack }: { pack: ArPack }) {
       accessibilityLabel={`Keep going: ${pack.title}`}
       style={({ pressed }) => [styles.keep, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
       <LinearGradient colors={pastelGrad.lav} style={[StyleSheet.absoluteFill, styles.keepFace]} pointerEvents="none" />
+      <Image source={themeObject(pack.theme)} style={styles.keepImage} contentFit="contain" accessible={false} />
       <View style={styles.keepHead}>
-        <Text style={styles.keepEyebrow}>Keep going · {pack.words.length} words</Text>
+        <FitText style={styles.keepEyebrow} lines={1}>
+          Keep going · {pack.words.length} words
+        </FitText>
         <FitText style={styles.keepTitle} lines={2}>
-          {theme ? `${theme.title}\n` : ''}
+          {theme ? `${theme.title} · ` : ''}
           {pack.name}
         </FitText>
       </View>
-      <View style={styles.keepChips}>
-        {pack.words.slice(0, 4).map((w) => (
-          <FitText key={w.id} style={styles.keepChip} lines={1}>
-            {w.es}
-          </FitText>
-        ))}
-      </View>
-      {/* The button is drawn, not pressable: the whole card is the tap. */}
+      {/* Drawn, not pressable: the whole card is the tap. */}
       <View style={styles.keepGo}>
         <LinearGradient colors={gradients.deep} style={[StyleSheet.absoluteFill, styles.keepGoFace]} pointerEvents="none" />
-        <Text style={styles.keepGoText}>Continue</Text>
+        <Ionicons name="arrow-forward" size={22} color={colors.onPrimary} />
       </View>
-      <Image source={themeArt(pack.theme)} style={styles.keepImage} contentFit="contain" accessible={false} />
     </Pressable>
   );
 }
@@ -267,39 +266,31 @@ const styles = StyleSheet.create({
   // The capybara stands above the card's top edge, so the card leaves it room
   // and does not clip.
   keep: {
-    marginTop: 14,
-    padding: 20,
-    gap: 14,
-    borderRadius: radius.xl,
+    marginTop: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingVertical: 12,
+    paddingLeft: 10,
+    paddingRight: 14,
+    borderRadius: radius.lg,
     boxShadow: clay.surface,
   },
-  keepFace: { borderRadius: radius.xl },
-  keepHead: { gap: 4, paddingRight: 92 },
+  keepFace: { borderRadius: radius.lg },
+  keepImage: { width: 58, height: 72 },
+  keepHead: { flex: 1, gap: 2 },
   keepEyebrow: { ...font.body[800], fontSize: 13, color: colors.onPastel, opacity: 0.8 },
-  keepTitle: { ...font.display[800], fontSize: 26, lineHeight: 28, letterSpacing: -0.3, color: colors.onPastel },
-  keepChips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  keepChip: {
-    ...font.body[800],
-    fontSize: 15,
-    color: colors.onPastel,
-    backgroundColor: colors.chip,
-    boxShadow: clay.surface,
-    borderRadius: 18,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    overflow: 'hidden',
-  },
+  keepTitle: { ...font.display[800], fontSize: 18, lineHeight: 22, letterSpacing: -0.2, color: colors.onPastel },
   keepGo: {
-    height: 54,
-    borderRadius: 27,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
     boxShadow: clay.button,
   },
-  keepGoFace: { borderRadius: 27 },
-  keepGoText: { ...font.body[800], fontSize: 17, color: colors.onPrimary },
-  keepImage: { position: 'absolute', right: 10, top: -26, width: 84, height: 120 },
+  keepGoFace: { borderRadius: 24 },
 
   sectionHead: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between', marginTop: 2 },
   sectionTitle: { ...font.display[800], fontSize: 21, lineHeight: 25, letterSpacing: -0.2, color: colors.ink },
@@ -308,27 +299,30 @@ const styles = StyleSheet.create({
   tile: {
     width: '46%', // two per row; flexGrow shares out the rest
     flexGrow: 1,
-    minHeight: 74,
+    minHeight: 84,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 12,
+    gap: 8,
+    paddingVertical: 10,
+    paddingLeft: 8,
+    paddingRight: 12,
     borderRadius: radius.lg,
     backgroundColor: colors.card,
     boxShadow: clay.surface,
   },
   filler: { opacity: 0, boxShadow: undefined },
-  avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    overflow: 'hidden',
-    alignItems: 'center',
-    flexShrink: 0,
-    boxShadow: clay.surface,
+  podClip: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: radius.lg, overflow: 'hidden' },
+  pod: {
+    position: 'absolute',
+    left: -18,
+    top: '50%',
+    width: 84,
+    height: 84,
+    marginTop: -42,
+    borderRadius: 42,
+    opacity: 0.55,
   },
-  avatarArt: { width: 42, height: 62, marginTop: 4 },
+  tileArt: { width: 68, height: 62, flexShrink: 0 },
   tileText: { flex: 1, gap: 3 },
   tileTitle: { ...font.body[800], fontSize: 14, lineHeight: 17, color: colors.ink },
   tileMeta: { ...font.body[700], fontSize: 12, color: colors.muted, fontVariant: ['tabular-nums'] },
@@ -351,8 +345,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card,
     boxShadow: clay.surface,
   },
-  adultAvatar: { width: 48, height: 48, borderRadius: 24, overflow: 'hidden', alignItems: 'center', boxShadow: clay.surface },
-  adultArt: { width: 42, height: 62, marginTop: 4 },
+  adultAvatar: { width: 48, height: 48, borderRadius: 24, overflow: 'hidden', alignItems: 'center', justifyContent: 'center', boxShadow: clay.surface },
+  adultArt: { width: 38, height: 38 },
   adultTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   adultTitle: { ...font.body[800], fontSize: 16, color: colors.ink },
   adultBadge: {

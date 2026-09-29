@@ -222,3 +222,10 @@ export const cultureTones = [
 ] as const;
 
 export type CultureTone = (typeof cultureTones)[number];
+
+/** A selected answer or tab: a soft ink outline pressed into the page — the text keeps its own color. */
+export const PICKED = {
+  borderColor: 'rgba(58, 42, 32, 0.55)',
+  backgroundColor: 'rgba(58, 42, 32, 0.06)',
+  boxShadow: 'inset 0 2px 4px rgba(58, 42, 32, 0.08), 0 0 0 3px rgba(58, 42, 32, 0.08)',
+};

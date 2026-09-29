@@ -88,19 +88,61 @@ const SENTENCE_MODES: ExerciseMode[] = [
   'sentence_gap_typed',
 ];
 
+/** The server holds back a lesson's slots (a story's lines) past the free
+ *  tier (migration 20260928000004). */
+export class LessonLockedError extends Error {
+  constructor(lessonId: string) {
+    super(`lesson ${lessonId} is locked`);
+  }
+}
+
+/**
+ * The rows of a lesson that sit behind the premium lock: its slots, or a
+ * story's lines. An empty read is asked about, not guessed at — it may be a
+ * draft with nothing in it yet. When the server says locked, it may only be
+ * behind the store: a purchase whose webhook hasn't landed. sync-entitlement
+ * asks RevenueCat directly, and if she has paid, the rows are read again.
+ */
+export async function readLessonRows<T>(table: 'lesson_slots' | 'story_lines', lessonId: string): Promise<T[]> {
+  const read = async () => {
+    const { data, error } = await supabase
+      .from(table)
+      .select('*')
+      .eq('lesson_id', lessonId)
+      .order('ordinal', { ascending: true });
+    if (error) throw error;
+    return (data ?? []) as T[];
+  };
+  const rows = await read();
+  if (rows.length > 0) return rows;
+  const { data: locked, error } = await supabase.rpc('lesson_locked', { p_lesson: lessonId });
+  if (error) throw error;
+  if (!locked) return rows;
+  const { data: synced } = await supabase.functions
+    .invoke<{ premium: boolean }>('sync-entitlement', { body: {} })
+    .catch(() => ({ data: null }));
+  if (!synced?.premium) throw new LessonLockedError(lessonId);
+  return read();
+}
+
 export async function buildLesson(
   userId: string,
   lessonId: string,
   { canonical = false }: BuildLessonOptions = {},
 ): Promise<LessonData> {
-  const [{ lesson, unit, tips }, { data: slotRows }, data] = await Promise.all([
+  const [{ lesson, unit, tips }, slotRows] = await Promise.all([
     lessonWithUnit(lessonId),
-    supabase.from('lesson_slots').select('*').eq('lesson_id', lessonId).order('ordinal', { ascending: true }),
-    loadLearner(userId),
+    readLessonRows<LessonSlot>('lesson_slots', lessonId),
   ]);
+  // Sentences as far as this lesson's unit, and any a slot names by id.
+  const data = await loadLearner(userId, {
+    throughOrder: unit.course_order,
+    unitIds: [unit.id],
+    sentenceIds: slotRows.flatMap((s) => (s.sentence_id ? [s.sentence_id] : [])),
+  });
 
   return {
-    ...resolveSlots(data, unit, (slotRows ?? []) as LessonSlot[], tips, canonical),
+    ...resolveSlots(data, unit, slotRows, tips, canonical),
     lesson,
     unit,
   };

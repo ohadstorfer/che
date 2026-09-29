@@ -106,7 +106,7 @@ export function Guidebook({
                   <Text style={styles.label}>Key phrases</Text>
                   {phrases.map((p) => (
                     <View key={p.ordinal} style={styles.phrase}>
-                      {p.audio_path ? <PlayButton path={p.audio_path} /> : null}
+                      {p.audio_path ? <PlayButton path={p.audio_path} autoPlay={false} /> : null}
                       <View style={{ flex: 1, gap: 2 }}>
                         <Text style={styles.phraseEs}>{p.es}</Text>
                         <Text style={styles.phraseEn}>{p.en}</Text>

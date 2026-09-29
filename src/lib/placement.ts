@@ -100,9 +100,11 @@ export function planTest(data: LearnerData, units: Unit[]): SessionItem[] {
 }
 
 export async function buildTest(userId: string, units: Unit[]): Promise<SessionData> {
-  const data = await loadLearner(userId);
-  const items = planTest(data, units);
   const last = units.at(-1);
+  // Sentences as far as the last unit the test samples.
+  const sampled = units.slice(0, maxUnitsInTest()).at(-1);
+  const data = await loadLearner(userId, { throughOrder: sampled?.course_order ?? 0 });
+  const items = planTest(data, units);
   return {
     items,
     allForms: last ? deckUpTo(data, last.course_order) : [],

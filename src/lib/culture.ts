@@ -3,13 +3,15 @@ import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 
 import data from './culture.json';
+import { localKey, pushSide, type SideEntries, syncSide } from './side-progress';
 import { type CultureTone, cultureTones } from './theme';
 
 // ---------------------------------------------------------------------------
 // Culture lessons (docs/culture-spec.md): short classes about Argentine life,
 // apart from the grammar course. The content ships inside the app — it is
 // built from docs/culture/*.yaml by `npm run culture:build` — and which
-// classes she has finished is kept on the device.
+// classes she has finished is kept on the device and on her account
+// (lib/side-progress.ts).
 // ---------------------------------------------------------------------------
 
 export type CulturePage =
@@ -76,13 +78,32 @@ const keyOf = (section: string, cls: string) => `${section}/${cls}`;
 
 export const classKey = keyOf;
 
-async function readDone(): Promise<Set<string>> {
+async function readLocal(key: string): Promise<Set<string>> {
   try {
-    const raw = await AsyncStorage.getItem(KEY);
+    const raw = await AsyncStorage.getItem(key);
     return new Set(raw ? (JSON.parse(raw) as string[]) : []);
   } catch {
     return new Set();
   }
+}
+
+// A finished class is a pack score of 100 played once, so both kinds sync the same way.
+const asEntries = (done: Set<string>): SideEntries =>
+  Object.fromEntries([...done].map((k) => [k, { best: 100, last: 100, plays: 1 }]));
+
+async function readDone(): Promise<Set<string>> {
+  const key = await localKey(KEY);
+  const done = await readLocal(key);
+  const merged = await syncSide('culture', asEntries(done)).catch(() => null);
+  if (!merged) return done;
+  // Re-read so a class finished while the server answered isn't dropped.
+  const all = new Set([...Object.keys(merged), ...(await readLocal(key))]);
+  try {
+    await AsyncStorage.setItem(key, JSON.stringify([...all]));
+  } catch {
+    // Still shown this time; the next session syncs again.
+  }
+  return all;
 }
 
 /** Records the class as finished and returns everything she has finished, this one included. */
@@ -90,10 +111,11 @@ export async function markClassDone(section: string, cls: string) {
   const done = await readDone();
   done.add(keyOf(section, cls));
   try {
-    await AsyncStorage.setItem(KEY, JSON.stringify([...done]));
+    await AsyncStorage.setItem(await localKey(KEY), JSON.stringify([...done]));
   } catch {
     // Progress is a convenience; the class itself already happened.
   }
+  pushSide('culture', keyOf(section, cls), { best: 100, last: 100, plays: 1, at: Date.now() });
   return done;
 }
 

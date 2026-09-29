@@ -12,11 +12,10 @@ import { LessonComplete } from '@/components/lesson-complete';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
-import { lessonWithUnit } from '@/lib/lesson';
+import { LessonLockedError, lessonWithUnit, readLessonRows } from '@/lib/lesson';
 import { backToCourse, goBack } from '@/lib/nav';
 import { type AnswerExtra, type FinishResult, type QueueItem, useRound } from '@/lib/round';
 import { type LearnerData, deckUpTo, drillable, loadLearner, sentenceItem } from '@/lib/session';
-import { supabase } from '@/lib/supabase';
 import { clay, colors, font, gradients, pastel, radius } from '@/lib/theme';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import type { Form, Sentence } from '@/lib/types';
@@ -89,13 +88,20 @@ export default function Story() {
 
   useEffect(() => {
     if (!userId || !lessonId) return;
+    let cancelled = false;
     (async () => {
-      const [{ lesson, unit }, { data: rows }, data] = await Promise.all([
+      const [{ lesson, unit }, rows] = await Promise.all([
         lessonWithUnit(lessonId),
-        supabase.from('story_lines').select('*').eq('lesson_id', lessonId).order('ordinal', { ascending: true }),
-        loadLearner(userId),
+        readLessonRows<RawLine>('story_lines', lessonId),
       ]);
-      const built = buildLines(data, (rows ?? []) as RawLine[]);
+      // Sentences as far as the story's unit, and every line's, wherever it is.
+      const data = await loadLearner(userId, {
+        throughOrder: unit.course_order,
+        unitIds: [unit.id],
+        sentenceIds: rows.map((r) => r.sentence_id),
+      });
+      if (cancelled) return;
+      const built = buildLines(data, rows);
       formById.current = data.formById;
       const nowIso = new Date().toISOString();
       const queue = built.flatMap((l) => (l.item ? [l.item] : []));
@@ -118,7 +124,14 @@ export default function Story() {
       setDeck(deckUpTo(data, unit.course_order));
       setSentences(data.sentences);
       setLines(built);
-    })();
+    })().catch((e) => {
+      if (cancelled) return;
+      if (e instanceof LessonLockedError) router.replace('/paywall?from=lesson');
+      else console.warn('story failed to load', e);
+    });
+    return () => {
+      cancelled = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, lessonId]);
 

@@ -32,6 +32,15 @@ interface Tally {
 }
 
 /**
+ * The content-wide part of the tallies, per form, as the database sums it over
+ * every published sentence (migration 20260929000001, form_gloss_tallies):
+ * `[text, uses, carries, unit]`, in the order the sentences first give them.
+ * With it the app need not hold every sentence to rank a word's meanings — only
+ * the ones she has been shown, which is all `met` is counted from.
+ */
+export type GlossTallies = Record<string, [string, number, number, number][]>;
+
+/**
  * A form's meanings across the sentences, most familiar to her first. Between
  * two she has met as often, `closeness` breaks the tie: "you're" before "are
  * you" for `sos`, because it reads as the dictionary does.
@@ -39,8 +48,21 @@ interface Tally {
 export function meaningsFromSentences(
   sentences: Sentence[],
   closeness: (formId: string, meaning: string) => number = () => 0,
+  /** Every sentence's share, summed ahead (GlossTallies). `sentences` then only
+   *  add how often she has met each meaning, so they can be just the ones
+   *  loaded — as long as every sentence she has been shown is among them. */
+  base?: GlossTallies,
 ): Map<string, string[]> {
   const tallies = new Map<string, Map<string, Tally>>();
+  if (base) {
+    for (const [id, list] of Object.entries(base)) {
+      const own = new Map<string, Tally>();
+      for (const [text, uses, carries, unit] of list) own.set(senseKey(text), { text, met: 0, carries, uses, unit });
+      tallies.set(id, own);
+    }
+  }
+  // Tallies `base` doesn't have: a sentence published after it was summed.
+  const fresh = new Set<Tally>();
   for (const s of sentences) {
     for (const t of s.tokens) {
       const text = t.gloss?.trim();
@@ -49,11 +71,18 @@ export function meaningsFromSentences(
         const own = tallies.get(id) ?? new Map<string, Tally>();
         tallies.set(id, own);
         const key = senseKey(text);
-        const tally = own.get(key) ?? { text, met: 0, carries: 0, uses: 0, unit: Infinity };
+        let tally = own.get(key);
+        if (!tally) {
+          tally = { text, met: 0, carries: 0, uses: 0, unit: Infinity };
+          fresh.add(tally);
+        }
         tally.met += s.shown?.shown_count ?? 0;
-        if (s.target_form_id === id) tally.carries++;
-        tally.uses++;
-        tally.unit = Math.min(tally.unit, s.unit_order ?? 0);
+        // What `base` holds is already counted there.
+        if (!base || fresh.has(tally)) {
+          if (s.target_form_id === id) tally.carries++;
+          tally.uses++;
+          tally.unit = Math.min(tally.unit, s.unit_order ?? 0);
+        }
         own.set(key, tally);
       }
     }
@@ -171,9 +200,9 @@ export function popoverMeanings(form: { form: string; gloss_en: string }, inCont
  * `reached` is the furthest unit she has met a word from: every word up to
  * there, or up to the word's own unit, counts as one she could know.
  */
-export function withMeanings(forms: Form[], sentences: Sentence[], reached = 0): Form[] {
+export function withMeanings(forms: Form[], sentences: Sentence[], reached = 0, base?: GlossTallies): Form[] {
   const glossById = new Map(forms.map((f) => [f.id, f.gloss_en]));
-  const fromSentences = meaningsFromSentences(sentences, (id, m) => closeness(m, glossById.get(id) ?? ''));
+  const fromSentences = meaningsFromSentences(sentences, (id, m) => closeness(m, glossById.get(id) ?? ''), base);
   const meaningsOf = (f: Form) => (fromSentences.get(f.id) ?? []).filter((m) => standsAlone(m, f.gloss_en));
 
   // Who answers to each piece of English.

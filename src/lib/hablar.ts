@@ -285,6 +285,23 @@ export async function transcribe(args: {
   return { text: (res?.text ?? '').trim(), status: res?.status };
 }
 
+/** A typed line for Pancho: stored as the turn's draft, the same as a transcript. */
+export async function sendTyped(args: {
+  text: string;
+  session_id: string;
+  turn_id: string;
+  paused_seconds?: number;
+}): Promise<{ text: string }> {
+  const form = new FormData();
+  form.append('text', args.text);
+  form.append('session_id', args.session_id);
+  form.append('turn_id', args.turn_id);
+  form.append('purpose', 'turn');
+  if (args.paused_seconds) form.append('paused_seconds', String(args.paused_seconds));
+  const res = await call<{ text?: string }>('hablar-transcribe', form);
+  return { text: (res?.text ?? '').trim() };
+}
+
 /**
  * §4.5 — the streamed turn. `functions.invoke` can't stream, so this is a
  * plain POST whose body is read and split into SSE events by hand. Resolves

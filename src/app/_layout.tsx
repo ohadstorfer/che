@@ -82,6 +82,12 @@ export default function RootLayout() {
                   its own button (which may first show the one-time offer),
                   so no swipe can skip past that. */}
               <Stack.Screen name="paywall" options={{ gestureEnabled: false, animation: 'slide_from_bottom' }} />
+              {/* The sections map drops in from the top; the screen animates
+                  itself (no native slide goes that way), over what's behind. */}
+              <Stack.Screen
+                name="sections"
+                options={{ presentation: 'transparentModal', animation: 'none', gestureEnabled: false }}
+              />
               <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />
             </Stack>
           </ThemeProvider>

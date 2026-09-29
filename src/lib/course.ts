@@ -1,4 +1,4 @@
-import { cached } from './content-cache';
+import { versioned } from './content-cache';
 import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { Lesson, Section, Tip, Unit } from './types';
@@ -35,12 +35,32 @@ export interface Course {
   tipsByUnit: Map<string, Tip[]>;
 }
 
-/** The published course, loaded once and shared (content-cache.ts). */
-export function loadCourse(): Promise<Course> {
-  return cached('course', fetchCourse);
+interface CourseRows {
+  sections: Section[];
+  units: Unit[];
+  lessons: Lesson[];
+  tips: Tip[];
 }
 
-async function fetchCourse(): Promise<Course> {
+/** The published course, loaded once and kept on the phone (content-cache.ts). */
+export async function loadCourse(): Promise<Course> {
+  const rows = await versioned('course', (v) => v.course, fetchCourseRows);
+  return assembled(rows);
+}
+
+// Assembled once per set of rows: the rows are shared by every caller in a
+// run, and the road holds Maps, which a stored file can't.
+const courses = new WeakMap<CourseRows, Course>();
+function assembled(rows: CourseRows): Course {
+  let course = courses.get(rows);
+  if (!course) {
+    course = assemble([...rows.sections].sort((a, b) => a.ordinal - b.ordinal), rows.units, rows.lessons, rows.tips);
+    courses.set(rows, course);
+  }
+  return course;
+}
+
+async function fetchCourseRows(): Promise<CourseRows> {
   // Paged: the course is past the 1,000 rows PostgREST sends at once (it has
   // ~2,900 lessons), and a single read silently cut every unit after lesson 3.
   // `assemble` puts things in order, so the pages go by id.
@@ -50,7 +70,7 @@ async function fetchCourse(): Promise<Course> {
     all<Lesson>(() => supabase.from('lessons').select('*').eq('status', 'published').order('id')),
     all<Tip>(() => supabase.from('tips').select('*').eq('status', 'published').order('id')),
   ]);
-  return assemble(sections.sort((a, b) => a.ordinal - b.ordinal), units, lessons, tips);
+  return { sections, units, lessons, tips };
 }
 
 export function assemble(sections: Section[], units: Unit[], lessons: Lesson[], tips: Tip[]): Course {

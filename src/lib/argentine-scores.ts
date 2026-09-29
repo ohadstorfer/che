@@ -2,9 +2,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 
+import { localKey, mergeEntries, pushSide, syncSide } from './side-progress';
+
 // ---------------------------------------------------------------------------
 // Argentine pack scores: the best and last share she got right on the first
-// try, kept on the device.
+// try, kept on the device and on her account (lib/side-progress.ts).
 // ---------------------------------------------------------------------------
 
 export interface PackScore {
@@ -21,13 +23,28 @@ export const MASTERED = 90;
 
 const KEY = 'argentine:scores';
 
-async function readScores(): Promise<Record<string, PackScore>> {
+async function readLocal(key: string): Promise<Record<string, PackScore>> {
   try {
-    const raw = await AsyncStorage.getItem(KEY);
+    const raw = await AsyncStorage.getItem(key);
     return raw ? (JSON.parse(raw) as Record<string, PackScore>) : {};
   } catch {
     return {};
   }
+}
+
+async function readScores(): Promise<Record<string, PackScore>> {
+  const key = await localKey(KEY);
+  const local = await readLocal(key);
+  const merged = await syncSide('pack', local).catch(() => null);
+  if (!merged) return local;
+  // Re-read so a round finished while the server answered isn't dropped.
+  const all = mergeEntries(merged, await readLocal(key));
+  try {
+    await AsyncStorage.setItem(key, JSON.stringify(all));
+  } catch {
+    // Still shown this time; the next session syncs again.
+  }
+  return all;
 }
 
 /** Records a finished play and returns the pack's updated score. */
@@ -37,10 +54,11 @@ export async function savePackScore(slug: string, score: number): Promise<PackSc
   const next = { best: Math.max(had?.best ?? 0, score), last: score, plays: (had?.plays ?? 0) + 1, at: Date.now() };
   all[slug] = next;
   try {
-    await AsyncStorage.setItem(KEY, JSON.stringify(all));
+    await AsyncStorage.setItem(await localKey(KEY), JSON.stringify(all));
   } catch {
     // A score is a convenience; the practice itself already happened.
   }
+  pushSide('pack', slug, next);
   return next;
 }
 
