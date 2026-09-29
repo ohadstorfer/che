@@ -31,6 +31,19 @@ export function useKeyboardViewportFit() {
     if (!viewport || !root) return;
 
     const apply = () => {
+      // Only while a keyboard is really up. At rest the visual viewport can
+      // come up short of the screen too (a home-screen PWA on iOS reports it
+      // ~60pt shy of the bottom edge), and fitting to it then leaves a strip
+      // of bare body under the app that cuts the tab bar's shadow flat.
+      // No keyboard is shorter than 150pt, and no resting gap is that tall.
+      const keyboard = window.innerHeight - viewport.height > 150;
+      if (!keyboard) {
+        // Back to the stylesheet's four pinned edges.
+        root.style.bottom = '';
+        root.style.height = '';
+        root.style.top = '';
+        return;
+      }
       // `bottom` has to go: with it still pinned, `height` is ignored.
       root.style.bottom = 'auto';
       root.style.height = `${viewport.height}px`;

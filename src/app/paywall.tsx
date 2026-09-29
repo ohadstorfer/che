@@ -58,13 +58,13 @@ export default function Paywall() {
   const reduced = useReducedMotion();
   const params = useLocalSearchParams<{ from?: string }>();
   const from = (params.from ?? 'home') as PaywallSource;
-  const { catalog, hardPaywall, grant, refresh } = usePremium();
+  const { catalog, hardPaywall, grant, refresh, testerUnlock, unlockAsTester } = usePremium();
   const main = catalog?.main ?? null;
   const locked = hardPaywall || from === 'gate';
 
   const [stage, setStage] = useState<Stage>('plans');
   const [selected, setSelected] = useState<string | null>(null);
-  const [busy, setBusy] = useState<'buy' | 'restore' | null>(null);
+  const [busy, setBusy] = useState<'buy' | 'restore' | 'tester' | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [canClose, setCanClose] = useState(from !== 'onboarding');
   const [headline, setHeadline] = useState<{ title: string; sub: string } | null>(null);
@@ -157,6 +157,18 @@ export default function Paywall() {
     if (!ok) return setError('No subscription found for this account.');
     success();
     grant();
+    setStage('done');
+  };
+
+  const unlockTester = async () => {
+    if (busy) return;
+    tap();
+    setBusy('tester');
+    setError(null);
+    const ok = await unlockAsTester();
+    setBusy(null);
+    if (!ok) return setError('Could not unlock. Check your connection and try again.');
+    success();
     setStage('done');
   };
 
@@ -253,8 +265,17 @@ export default function Paywall() {
           title={plan?.trialDays ? `Start my free ${trialWord(plan.trialDays)}` : 'Continue'}
           onPress={() => void buy('main', plan)}
           loading={busy === 'buy'}
-          disabled={!plan}
+          disabled={!plan || !!busy}
         />
+        {testerUnlock ? (
+          <Button
+            title="Unlock as a tester"
+            variant="secondary"
+            onPress={() => void unlockTester()}
+            loading={busy === 'tester'}
+            disabled={!!busy}
+          />
+        ) : null}
         {plan ? (
           <Text style={styles.terms}>
             {plan.trialDays

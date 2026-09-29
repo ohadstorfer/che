@@ -38,6 +38,11 @@ interface PremiumValue {
   refresh: () => Promise<void>;
   /** After a purchase: open everything at once, before the store round-trips. */
   grant: () => void;
+  /** Before the store launch: testers unlock Premium from the paywall
+   *  (functions/tester-premium, switched on by a server secret). */
+  testerUnlock: boolean;
+  /** Premium for her as a tester, on the server too. False if it didn't take. */
+  unlockAsTester: () => Promise<boolean>;
   paywall: (from: PaywallSource) => void;
 }
 
@@ -49,6 +54,8 @@ const PremiumContext = createContext<PremiumValue>({
   hardPaywall: false,
   refresh: async () => {},
   grant: () => {},
+  testerUnlock: false,
+  unlockAsTester: async () => false,
   paywall: () => {},
 });
 
@@ -68,6 +75,7 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
   const staff = profile?.role === 'admin' || profile?.role === 'reviewer';
   const [status, setStatus] = useState<Status>('loading');
   const [catalog, setCatalog] = useState<Catalog | null>(null);
+  const [testerUnlock, setTesterUnlock] = useState(false);
   const granted = useRef(false);
 
   const refresh = useCallback(async () => {
@@ -92,8 +100,16 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
       if (!alive) return;
       await refresh();
       // Fetched now so the paywall opens with its prices already on it.
-      const c = await billing.catalog().catch(() => null);
-      if (alive) setCatalog(c);
+      const [c, tester] = await Promise.all([
+        billing.catalog().catch(() => null),
+        supabase.functions
+          .invoke<{ enabled: boolean }>('tester-premium', { body: { check: true } })
+          .then(({ data }) => !!data?.enabled)
+          .catch(() => false),
+      ]);
+      if (!alive) return;
+      setCatalog(c);
+      setTesterUnlock(tester);
     })();
     const off = billing.onChange((premium) => {
       if (premium) setStatus('premium');
@@ -110,6 +126,15 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
     setStatus('premium');
   }, []);
 
+  const unlockAsTester = useCallback(async () => {
+    const { data } = await supabase.functions
+      .invoke<{ premium: boolean }>('tester-premium', { body: {} })
+      .catch(() => ({ data: null }));
+    if (!data?.premium) return false;
+    grant();
+    return true;
+  }, [grant]);
+
   const paywall = useCallback((from: PaywallSource) => router.push(`/paywall?from=${from}`), []);
 
   const value = useMemo(
@@ -121,9 +146,11 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
       hardPaywall: !!catalog?.main?.hardPaywall,
       refresh,
       grant,
+      testerUnlock,
+      unlockAsTester,
       paywall,
     }),
-    [status, staff, catalog, refresh, grant, paywall],
+    [status, staff, catalog, refresh, grant, testerUnlock, unlockAsTester, paywall],
   );
 
   return <PremiumContext.Provider value={value}>{children}</PremiumContext.Provider>;
