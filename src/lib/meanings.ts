@@ -145,6 +145,19 @@ export function closeness(meaning: string, gloss: string) {
   return standsAlone(meaning, gloss) ? 1 : 0;
 }
 
+/**
+ * Whether an English rendering is just the word again. "the mate", "some
+ * mate" and "mate's" are still `mate` — a sentence's article or possessive
+ * doesn't make a translation of it, and letting one through puts "the mate"
+ * on the card that teaches the word (the drink, read as "the friend").
+ */
+const isItself = (text: string, form: string) => {
+  const bare = (s: string) => norm(s.replace(/^\s*(the|a|an|some)\s+/i, '').replace(/['’]s\s*$/i, ''));
+  const word = norm(form);
+  const it = bare(text);
+  return it === word || it + 's' === word || it === word + 's';
+};
+
 /** A row of the word popover: what it says, and whether it is only true here. */
 export interface MeaningRow {
   text: string;
@@ -175,7 +188,7 @@ export interface MeaningRow {
  * with the note, or the plain fact that English borrowed it whole.
  */
 export function popoverMeanings(form: { form: string; gloss_en: string }, inContext?: string): MeaningRow[] {
-  const itself = (text: string) => norm(text) === norm(form.form);
+  const itself = (text: string) => isItself(text, form.form);
   const dictionary = glossSenses(form.gloss_en).filter((t) => !itself(t));
   const here = inContext?.trim() && !itself(inContext) ? inContext.trim() : null;
   if (!here) return dictionary.map((text) => ({ text }));
@@ -231,9 +244,12 @@ export function withMeanings(forms: Form[], sentences: Sentence[], reached = 0, 
     // dictionary gloss ("croissant") stands in. A word that has nothing else —
     // mate, cortado — keeps it, and `selfGlossed` keeps the exercises that
     // translate it away from it instead (answers.ts).
-    const itself = (text: string) => norm(text) === norm(f.form);
+    const itself = (text: string) => isItself(text, f.form);
     const meaning =
-      candidates.find((c) => !itself(c) && !shared(c)) ?? candidates.find((c) => !itself(c)) ?? candidates[0];
+      candidates.find((c) => !itself(c) && !shared(c)) ??
+      candidates.find((c) => !itself(c)) ??
+      glossSenses(f.gloss_en)[0] ??
+      candidates[0];
     return { ...f, meaning_en: meaning, meanings_en: meanings };
   });
 }

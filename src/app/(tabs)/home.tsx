@@ -21,13 +21,15 @@ import { AppHeader, Pulse } from '@/components/app-header';
 import { Guidebook } from '@/components/guidebook';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
-import { localDateStr, weekDates } from '@/lib/dates';
+import { markBootReady } from '@/lib/boot';
+import { localDateStr } from '@/lib/dates';
 import {
   type Course,
   currentIndex,
   loadCourse,
   loadLessonProgress,
   type PathLesson,
+  peekCourse,
   sectionAt,
   sectionSummaries,
 } from '@/lib/course';
@@ -42,8 +44,9 @@ import {
 } from '@/lib/push';
 import { getMistakeCount, getPracticeCounts } from '@/lib/session';
 import { useStatusBarColor } from '@/lib/status-bar-color';
+import { readSnapshot, writeSnapshot } from '@/lib/snapshot';
 import { streakStatus, type StreakStatus } from '@/lib/streak';
-import { supabase } from '@/lib/supabase';
+import { fetchStreakWeek } from '@/lib/streak-week';
 import { clay, colors, font, gradients, pastel, pastelGrad, path, press, radius } from '@/lib/theme';
 import type { LessonKind, Section, Streak, Unit } from '@/lib/types';
 import { FitText } from '@/components/fit-text';
@@ -61,6 +64,21 @@ interface HomeData {
   mistakes: number;
   /** Unit checks tried and not yet passed, by lesson id: attempts so far. */
   checkAttempts: Map<string, number>;
+  /** Drawn from the phone's copy; the real load hasn't landed yet. */
+  cached?: boolean;
+}
+
+/** What the phone keeps of Home between launches (snapshot.ts): her status,
+ *  never the course — that is content-cache's. */
+interface HomeSnapshot {
+  /** Lessons finished — kept as ids, so the copy still fits a course that changed. */
+  done: string[];
+  checkAttempts: [string, number][];
+  streak: Streak | null;
+  known: number;
+  weekDone: string[];
+  mistakes: number;
+  pushStatus: PushStatus | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -704,7 +722,10 @@ const EASE_SCROLL = Easing.bezier(0.4, 0, 0.2, 1);
 
 
 export default function Home() {
-  const { profile } = useAuth();
+  // Her id comes straight off the session, which is read from storage: waiting
+  // for the profile row as well put a whole round trip in front of the road.
+  const { session } = useAuth();
+  const userId = session?.user.id;
   const focused = useIsFocused();
   const { limited, paywall } = usePremium();
   /** The section she opened from the sections screen; none means hers. */
@@ -778,30 +799,15 @@ export default function Home() {
   /** The unit whose guidebook is open. */
   const [guide, setGuide] = useState<Unit | null>(null);
 
-  // Keyed on her id, not the profile object: a profile refetch that changes
-  // nothing must not reload the path.
-  const userId = profile?.id;
-  const load = useCallback(async () => {
-    if (!userId) return;
-    const week = weekDates();
-    const [course, { done, checkAttempts }, counts, streakRes, weekRes, mistakes] = await Promise.all([
-      loadCourse(),
-      loadLessonProgress(userId),
-      getPracticeCounts(userId),
-      supabase.from('streaks').select('*').eq('user_id', userId).maybeSingle(),
-      // This week's completed days, for the strip in the header. Read off
-      // `daily_sessions` rather than derived from the streak: a week with a
-      // hole in it still has to show the days on either side of the hole.
-      supabase
-        .from('daily_sessions')
-        .select('session_date')
-        .eq('user_id', userId)
-        .gte('session_date', week[0])
-        .lte('session_date', week[6])
-        .not('completed_at', 'is', null),
-      getMistakeCount(userId),
-    ]);
+  /** Set once the real load has landed: a late read of the phone's copy must
+   *  never paint over it. */
+  const fresh = useRef(false);
+  /** The road on screen was drawn from the phone's copy, and the real load
+   *  hasn't checked it yet. */
+  const shownFromCache = useRef(false);
 
+  /** Puts a course and her status on the road — the real load's or the phone's copy. */
+  const adopt = useCallback((course: Course, snap: HomeSnapshot, cached: boolean) => {
     unitIndexOf.current = course.path.map((l) => l.unitIndex);
     const starts = new Map<number, number>();
     sectionStartOf.current = course.path.map((l) => {
@@ -810,14 +816,61 @@ export default function Home() {
     });
     setData({
       course,
-      current: currentIndex(course.path, done),
-      streak: (streakRes.data as Streak) ?? null,
-      known: counts.known,
-      weekDone: (weekRes.data ?? []).map((r: { session_date: string }) => r.session_date),
-      mistakes,
-      checkAttempts,
+      current: currentIndex(course.path, new Set(snap.done)),
+      streak: snap.streak,
+      known: snap.known,
+      weekDone: snap.weekDone,
+      mistakes: snap.mistakes,
+      checkAttempts: new Map(snap.checkAttempts),
+      cached,
     });
-  }, [userId]);
+  }, []);
+
+  // Keyed on her id, not the profile object: a profile refetch that changes
+  // nothing must not reload the path.
+  const load = useCallback(async () => {
+    if (!userId) return;
+    const [course, { done, checkAttempts }, counts, streakWeek, mistakes] = await Promise.all([
+      loadCourse(),
+      loadLessonProgress(userId),
+      getPracticeCounts(userId),
+      // Her streak and this week's days, for the header — published to the
+      // copy every tab's header reads, so theirs is in place before they open.
+      fetchStreakWeek(userId),
+      getMistakeCount(userId),
+    ]);
+    const snap: HomeSnapshot = {
+      done: [...done],
+      checkAttempts: [...checkAttempts],
+      streak: streakWeek.streak,
+      known: counts.known,
+      weekDone: streakWeek.weekDone,
+      mistakes,
+      pushStatus: lastPushStatus,
+    };
+    fresh.current = true;
+    adopt(course, snap, false);
+    writeSnapshot('home', userId, snap);
+  }, [userId, adopt]);
+
+  // A cold start opens on the road as the phone last saw it — course and
+  // status both — and the real load corrects it quietly behind. Coming back
+  // from a lesson needs none of this: `lastShown` is already standing.
+  useEffect(() => {
+    if (!userId || lastShown) return;
+    let alive = true;
+    void Promise.all([peekCourse(), readSnapshot<HomeSnapshot>('home', userId)]).then(([course, snap]) => {
+      if (!alive || fresh.current || !course || !snap) return;
+      if (snap.pushStatus && lastPushStatus == null) {
+        lastPushStatus = snap.pushStatus;
+        setPushStatus((s) => s ?? snap.pushStatus);
+      }
+      adopt(course, snap, true);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [userId, adopt]);
 
   useFocusEffect(
     useCallback(() => {
@@ -950,7 +1003,19 @@ export default function Home() {
     // A cold start has nothing to move from, so the screen simply opens where
     // she is — every node mounts in its phase and no animation runs.
     if (!from) {
+      shownFromCache.current = !!data.cached;
       show(next);
+      return;
+    }
+    // The real status, landing on a road drawn from the phone's copy. Nothing
+    // she did on this screen changed it, so nothing animates: a step finished
+    // elsewhere is put in place, and the header simply takes the true count.
+    if (shownFromCache.current && !data.cached) {
+      shownFromCache.current = false;
+      if (sameShown(from, next)) return;
+      const moved = next.lessons !== from.lessons;
+      show(next, moved || !isAdvance(from, next));
+      if (moved && placed.current) requestAnimationFrame(() => scrollToStep(next.lessons, false));
       return;
     }
     if (sameShown(from, next)) return;
@@ -963,7 +1028,7 @@ export default function Home() {
     }
     pendingAdvance.current = next;
     if (placed.current) advance();
-  }, [data, advance, show]);
+  }, [data, advance, show, scrollToStep]);
 
   // On web the road is pinned before its first paint. RNW's onLayout arrives a
   // few frames after the path appears — long enough for the top of the road to
@@ -986,6 +1051,7 @@ export default function Home() {
     placed.current = true;
     placedAt.current = Date.now();
     scrollEl.scrollTop = Math.max(pathTop.current + yOf(shown.lessons) - viewport.current * 0.42, 0);
+    markBootReady();
     if (pendingAdvance.current) requestAnimationFrame(advance);
   }, [shown, pushStatus, data, askedSection, advance, scrollNode, yOf]);
 
@@ -1004,7 +1070,12 @@ export default function Home() {
     return last;
   }, [path]);
 
-  if (!profile) return null;
+  // Nothing to place: the launch splash has waited long enough.
+  useEffect(() => {
+    if (data && data.course.path.length === 0) markBootReady();
+  }, [data]);
+
+  if (!userId) return null;
 
   const noCourse = data != null && path.length === 0;
   const current = shown?.lessons ?? 0;
@@ -1057,6 +1128,7 @@ export default function Home() {
     if (Platform.OS !== 'web' && contentH.current === 0) return;
     placed.current = true;
     placedAt.current = Date.now();
+    markBootReady();
     // Her own step when it is on this road; the top of the section otherwise.
     const step = currentHere ? current : (road[0]?.index ?? 0);
     scrollToStep(step, false);
@@ -1136,6 +1208,9 @@ export default function Home() {
               }
             : null
         }
+        // Until the course is read, the pill's place is held rather than
+        // filled with a title that would turn into the pill a moment later.
+        pillPending={!data}
         status={shown?.streak ?? null}
         weekDone={shown?.weekDone ?? null}
         epoch={epoch}
@@ -1196,7 +1271,7 @@ export default function Home() {
             }}>
             {pushStatus ? (
               <PushPrompt
-                userId={profile.id}
+                userId={userId}
                 status={pushStatus}
                 onStatus={(s) => {
                   lastPushStatus = s;
@@ -1285,7 +1360,8 @@ export default function Home() {
         onClose={() => setGuide(null)}
         jump={guideJump}
       />
-      {!noCourse ? (
+      {/* Only once there is a road to jump along — not over the loading sun. */}
+      {roadReady ? (
         <JumpButton
           direction={currentHere ? jump : viewed?.state === 'done' ? 'down' : 'up'}
           reduced={reduced}

@@ -6,15 +6,18 @@ import {
 } from '@expo-google-fonts/figtree';
 import { Gabarito_600SemiBold, Gabarito_700Bold, Gabarito_800ExtraBold } from '@expo-google-fonts/gabarito';
 import { useFonts } from 'expo-font';
-import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+import { DefaultTheme, Stack, ThemeProvider, usePathname } from 'expo-router';
 import { useEffect } from 'react';
 import { Platform, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+import { BootSplash } from '@/components/boot-splash';
 import { ScreenBackground } from '@/components/ui';
-import { AuthProvider } from '@/lib/auth';
+import { AuthProvider, useAuth } from '@/lib/auth';
+import { useBootReady } from '@/lib/boot';
 import { useKeyboardViewportFit } from '@/lib/keyboard-viewport';
-import { PremiumProvider } from '@/lib/premium';
+import { prefetchTabs } from '@/lib/prefetch';
+import { PremiumProvider, usePremium } from '@/lib/premium';
 import { colors } from '@/lib/theme';
 
 // React Navigation paints its own opaque screen background (#f2f2f2 by
@@ -58,42 +61,80 @@ export default function RootLayout() {
     }
   }, []);
 
-  if (!fontsLoaded && !fontError) return <View style={{ flex: 1, backgroundColor: colors.bg }} />;
+  const fontsReady = fontsLoaded || !!fontError;
 
   return (
     // Gestures — the tiles she drags into order — do nothing at all, and say
     // nothing about why, unless this sits above everything that uses them.
     <GestureHandlerRootView style={{ flex: 1 }}>
+      {/* Above the font gate: her session is read from storage while the
+          fonts load, not after. */}
       <AuthProvider>
         <PremiumProvider>
         {/* The icon's gradient is painted once, edge to edge, and every screen
             sits on it transparently — so it never seams at the status bar and
             never re-renders on navigation. */}
         <View style={{ flex: 1, backgroundColor: colors.bg }}>
-          <ScreenBackground />
-          <ThemeProvider value={navigationTheme}>
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                contentStyle: { backgroundColor: 'transparent' },
-              }}>
-              <Stack.Screen name="practice" options={{ gestureEnabled: false }} />
-              {/* The paywall rises over whatever asked for it; closing it is
-                  its own button (which may first show the one-time offer),
-                  so no swipe can skip past that. */}
-              <Stack.Screen name="paywall" options={{ gestureEnabled: false, animation: 'slide_from_bottom' }} />
-              {/* The sections map drops in from the top; the screen animates
-                  itself (no native slide goes that way), over what's behind. */}
-              <Stack.Screen
-                name="sections"
-                options={{ presentation: 'transparentModal', animation: 'none', gestureEnabled: false }}
-              />
-              <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />
-            </Stack>
-          </ThemeProvider>
+          {fontsReady ? (
+            <>
+              <ScreenBackground />
+              <ThemeProvider value={navigationTheme}>
+                <Stack
+                  screenOptions={{
+                    headerShown: false,
+                    contentStyle: { backgroundColor: 'transparent' },
+                  }}>
+                  <Stack.Screen name="practice" options={{ gestureEnabled: false }} />
+                  {/* The paywall rises over whatever asked for it; closing it is
+                      its own button (which may first show the one-time offer),
+                      so no swipe can skip past that. */}
+                  <Stack.Screen name="paywall" options={{ gestureEnabled: false, animation: 'slide_from_bottom' }} />
+                  {/* The sections map drops in from the top; the screen animates
+                      itself (no native slide goes that way), over what's behind. */}
+                  <Stack.Screen
+                    name="sections"
+                    options={{ presentation: 'transparentModal', animation: 'none', gestureEnabled: false }}
+                  />
+                  <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />
+                </Stack>
+              </ThemeProvider>
+            </>
+          ) : null}
+          {/* One place in the tree from the first render on, so the splash
+              never remounts (and restarts) when the fonts land. */}
+          <BootGate fontsReady={fontsReady} />
         </View>
         </PremiumProvider>
       </AuthProvider>
     </GestureHandlerRootView>
   );
+}
+
+/** The other tabs are read once the splash has finished leaving. */
+const PREFETCH_DELAY_MS = 400;
+
+/**
+ * Holds the launch splash until the first screen is standing: the fonts, her
+ * session, and — signed in and headed for Course — the road placed on her
+ * step (lib/boot.ts). Anywhere else she lands (welcome, onboarding, the
+ * paywall, a deep link) has nothing to wait for. Once it lets go, the other
+ * tabs are made ready behind Course (lib/prefetch.ts).
+ */
+function BootGate({ fontsReady }: { fontsReady: boolean }) {
+  const { session, loading } = useAuth();
+  const { limited } = usePremium();
+  const pathname = usePathname();
+  const ready = useBootReady();
+  const toCourse = pathname === '/' || pathname === '/home';
+  const hold = !fontsReady || loading || (!!session && toCourse && !ready);
+  const userId = session?.user.id;
+
+  useEffect(() => {
+    if (hold || !userId) return;
+    // After the splash's fade, so reading the lexicon can't stutter it.
+    const t = setTimeout(() => prefetchTabs(userId, limited), PREFETCH_DELAY_MS);
+    return () => clearTimeout(t);
+  }, [hold, userId, limited]);
+
+  return <BootSplash hold={hold} />;
 }

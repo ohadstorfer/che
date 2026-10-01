@@ -77,9 +77,17 @@ per edit (migration `20260929000004`). The call answers in ~5 ms warm.
 up a publish within ~10 minutes (5 cron + 5 memo) and an app reopened after hours re-checks on its
 first load. Failure → `null` → step 2's "no version" rule, then the old 30-minute memory expiry.
 
-Disk is `expo-file-system` (already used for audio clips in `audio.ts`), only on the phones;
-web and node tests have no disk. Files carry a `format` number; bump `CONTENT_FORMAT` when a row
-shape changes so old files are ignored. A torn or unreadable file is treated as missing.
+Disk is `expo-file-system` (already used for audio clips in `audio.ts`) on the phones, and
+IndexedDB (database `content`, store `files`) on the web — localStorage's few MB can't hold the
+course and the lexicon, and without a copy the PWA paged the whole course down on every launch.
+Node tests have no disk (they hand one in with `setContentDisk`). Files carry a `format` number;
+bump `CONTENT_FORMAT` when a row shape changes so old files are ignored. A torn or unreadable file
+is treated as missing.
+
+`peekStored(name)` returns whatever the disk holds, current or not, without asking the server —
+what a cold start paints from (`peekCourse()` in `course.ts`; see `docs/launch-and-loading.md`).
+The read is shared with the versioned load that follows, so when the copy is still current both
+hand back the very same rows (and Course assembles the road once).
 
 ### 2.3 What goes through the store
 
@@ -90,8 +98,10 @@ shape changes so old files are ignored. A torn or unreadable file is treated as 
 | `tallies` | `tallies` | the gloss tallies object |
 | `sentences-<hash of unit ids>` | hash of the block's unit stamps | one 8-unit block of sentence rows |
 
-Per-user data (form states, sentence states, rounds, progress) is **not** stored: it changes with
-every screen and must be fresh.
+Per-user data (form states, sentence states, rounds, progress) is **not** stored here: it changes
+with every screen and must be fresh. A few screens keep a small *snapshot* of what they last
+showed, to paint a cold start from while the real load runs — that is `snapshot.ts`, never the
+truth (`docs/launch-and-loading.md`).
 
 ### 2.4 Staff
 
@@ -121,4 +131,4 @@ A content fix refreshes only the affected block, for learners who have it.
 
 - Bundling the first block in the app for an instant first lesson.
 - Full offline (queueing progress writes).
-- Per-user data on disk.
+- Per-user data on disk beyond the launch snapshots.

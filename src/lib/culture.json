@@ -17,14 +17,14 @@
       },
       {
        "type": "choice",
-       "prompt": "Yerba looks a lot like green tea. What plant is it really?",
+       "prompt": "Yerba looks a lot like green tea. Is it the same plant?",
        "options": [
-        "A South American holly tree",
-        "A green tea bush from China",
-        "A wild mint from the Andes"
+        "Yes, it's a tea bush, just dried differently",
+        "No, it's a different plant native to South America",
+        "No, it's a ground-up root"
        ],
-       "correct": 0,
-       "explain": "A holly. A totally different plant from tea, but it does have caffeine. That's why half the country runs on it."
+       "correct": 1,
+       "explain": "A totally different plant from tea, but it does have caffeine. That's why half the country runs on it."
       },
       {
        "type": "card",

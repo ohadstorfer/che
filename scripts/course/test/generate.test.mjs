@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { checkCandidates, generationPrompt, selectCandidates, styleSpec, targetsFor } from '../lib/generate.mjs';
-import { FORMS_PER_LESSON, LESSON_ITEMS, planLessons } from '../lib/lessons.mjs';
+import { FORMS_PER_LESSON, LESSON_ITEMS, planLessons, screensOf } from '../lib/lessons.mjs';
 import { loadOutline } from '../lib/outline.mjs';
 
 const RAMP = ['sentence_meaning', 'sentence_gap', 'sentence_build'];
@@ -88,8 +88,6 @@ test('the lesson plan teaches every word, ramps meaning → gap → tiles, and e
   assert.deepEqual(warnings, []);
 });
 
-/** Screens a slot stands for: one, unless it stands for several. */
-const screensOf = (own) => own.reduce((n, s) => n + (s.kind === 'review' || s.kind === 'recap' ? (s.review_count ?? 0) : 1), 0);
 
 /** A unit with `count` sentences per word — per reviewed word, for a practice unit — optionally recorded. */
 const unitSentences = (unit, forms, { per = 3, audio = false } = {}) => {
@@ -155,7 +153,9 @@ test('a thin unit is filled by taking its own sentences a rung higher, not by ru
 
 test('a unit too thin to fill a lesson says so instead of shipping a short one', () => {
   const unit = outline.units.find((u) => u.course_order > 1);
-  const sentences = unitSentences(unit, outline.forms, { per: 1 });
+  // One sentence for one word: a new word now plays as two screens, so a
+  // sentence for every word would fill the lesson honestly.
+  const sentences = unitSentences(unit, outline.forms, { per: 1 }).slice(0, 1);
   const { warnings } = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips });
   assert.ok(warnings.some((w) => /screens, wants/.test(w)), warnings.join('; '));
 });

@@ -19,6 +19,31 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+// The app's own files — the script bundle, images, fonts — carry a content
+// hash in their names, so one never changes under its URL. Served from the
+// cache after the first fetch, a cold start of the installed app stops
+// downloading them again. Pages themselves (and everything off-origin, like
+// the API) always go to the network, so a deploy still lands on next launch.
+const isStatic = (url) =>
+  url.origin === self.location.origin &&
+  (url.pathname.startsWith("/_expo/static/") || url.pathname.startsWith("/assets/"));
+
+self.addEventListener("fetch", (event) => {
+  const req = event.request;
+  if (req.method !== "GET" || req.headers.has("range")) return;
+  if (!isStatic(new URL(req.url))) return;
+  event.respondWith(
+    (async () => {
+      const cache = await caches.open(CACHE);
+      const hit = await cache.match(req);
+      if (hit) return hit;
+      const res = await fetch(req);
+      if (res.status === 200) cache.put(req, res.clone()).catch(() => {});
+      return res;
+    })()
+  );
+});
+
 self.addEventListener("push", (event) => {
   let payload = {};
   try {

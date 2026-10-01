@@ -1,6 +1,9 @@
 import { ScrollViewStyleReset } from 'expo-router/html';
 import type { PropsWithChildren } from 'react';
 
+// On the web a bundled image is `{ uri, width, height }`.
+const SPLASH_ICON = (require('@/assets/images/splash-icon.png') as { uri: string }).uri;
+
 // Custom HTML shell for web: PWA manifest, iOS home-screen metadata, fonts.
 export default function Root({ children }: PropsWithChildren) {
   return (
@@ -61,12 +64,28 @@ export default function Root({ children }: PropsWithChildren) {
           dangerouslySetInnerHTML={{
             __html:
               'body{background-color:#F7EFE6}' +
+              '#boot-splash{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1000;display:flex;' +
+              'align-items:center;justify-content:center;background-color:#F7EFE6}' +
+              '#boot-splash img{display:block;animation:boot-breathe 2.2s ease-in-out infinite}' +
+              '@keyframes boot-breathe{50%{transform:scale(1.04)}}' +
+              '@media (prefers-reduced-motion:reduce){#boot-splash img{animation:none}}' +
               'html,body{height:100%;margin:0}' +
               '#root{position:fixed;top:0;right:0;bottom:0;left:0;height:auto}',
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* The launch splash, in the page itself: the capybara is on screen
+            from the first frame, long before the script has loaded. The app
+            decides when he leaves (components/boot-splash.tsx). The same
+            picture, size and breath as the native splash. */}
+        <div id="boot-splash">
+          <div id="boot-splash-lift">
+            <img src={SPLASH_ICON} width={180} height={180} alt="" />
+          </div>
+        </div>
+      </body>
     </html>
   );
 }

@@ -46,6 +46,31 @@ export interface AnswerExtra {
 export const MAX_RETRIES = 2;
 
 /**
+ * Re-asks a whole round may add. Each one is a screen past the planned 16, so
+ * a shaky lesson tops out near 19 instead of running on to 25.
+ */
+export const MAX_ROUND_RETRIES = 3;
+
+/**
+ * The word a mistake brings back, if any: one per mistake, however many words
+ * it got wrong — a tile build can miss four at once — and the exercise's own
+ * word first, since that is what it was asking about. None once the round has
+ * used its re-asks, or for a word already re-asked `MAX_RETRIES` times. The
+ * words passed over still go to SRS as misses.
+ */
+export function pickRetry(
+  item: { form: { id: string } },
+  drilled: Form[],
+  wrong: Set<string>,
+  retriesOf: (formId: string) => number,
+  granted: number,
+): Form | undefined {
+  if (granted >= MAX_ROUND_RETRIES) return undefined;
+  const missed = drilled.filter((form) => wrong.has(form.id) && retriesOf(form.id) < MAX_RETRIES);
+  return missed.find((form) => form.id === item.form.id) ?? missed[0];
+}
+
+/**
  * Whether this exercise made her spell this form out — what earns "fácil", the
  * rating that stretches an interval furthest.
  *
@@ -422,13 +447,12 @@ export function useRound(userId: string | undefined) {
         results.current.set(form.id, tally);
       }
 
-      const retryItems: QueueItem[] = !allowRetries.current
+      const retry = allowRetries.current
+        ? pickRetry(item, drilled, wrong, (id) => retries.current.get(id) ?? 0, retriesGranted.current)
+        : undefined;
+      const retryItems: QueueItem[] = !retry
         ? []
-        : [...wrong]
-            .map((id) => drilled.find((c) => c.id === id))
-            .filter((c): c is Form => !!c)
-            .filter((form) => (retries.current.get(form.id) ?? 0) < MAX_RETRIES)
-            .map((form) => {
+        : [retry].map((form) => {
               retries.current.set(form.id, (retries.current.get(form.id) ?? 0) + 1);
               retriesGranted.current += 1;
               return {

@@ -24,7 +24,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/lib/auth";
 import { localDateStr, WEEKDAY_INITIALS, weekDates } from "@/lib/dates";
 import { streakStatus, type StreakStatus } from "@/lib/streak";
-import { supabase } from "@/lib/supabase";
+import { fetchStreakWeek, useStreakWeekValue } from "@/lib/streak-week";
 import {
   clay,
   colors,
@@ -35,7 +35,6 @@ import {
   press,
   radius,
 } from "@/lib/theme";
-import type { Streak } from "@/lib/types";
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
@@ -259,6 +258,7 @@ export interface HeaderPill {
 export function AppHeader({
   title,
   pill,
+  pillPending = false,
   status,
   weekDone,
   epoch = 0,
@@ -266,6 +266,8 @@ export function AppHeader({
   title: string;
   /** Shown instead of the title when set. */
   pill?: HeaderPill | null;
+  /** A pill is coming: hold its place with a ghost instead of the title. */
+  pillPending?: boolean;
   /** Null until the real streak has loaded. */
   status: StreakStatus | null;
   /** Null until the real week has loaded — the strip waits with the count. */
@@ -308,6 +310,10 @@ export function AppHeader({
                 </FitText>
                 <Ionicons name="chevron-down" size={16} color={colors.ink} />
               </Pressable>
+            </View>
+          ) : pillPending ? (
+            <View style={styles.pillSlot}>
+              <Pulse reduced={reduced} style={styles.pillGhost} />
             </View>
           ) : (
             <FitText
@@ -421,48 +427,24 @@ function useReduced() {
 
 /**
  * The header's data for the tabs that don't load it themselves: her streak row
- * and this week's finished days, refreshed whenever the tab comes into focus.
- * (Course loads its own, alongside the path, so it can celebrate a new day.)
+ * and this week's finished days. Read from the one shared copy (streak-week.ts)
+ * so the chip is already there when a tab opens, and refreshed whenever the
+ * tab comes into focus. (Course loads its own, alongside the path, so it can
+ * celebrate a new day — and publishes it to the same copy.)
  */
 export function useStreakWeek() {
-  const { profile } = useAuth();
-  const [status, setStatus] = useState<StreakStatus | null>(null);
-  const [weekDone, setWeekDone] = useState<string[] | null>(null);
+  const { session } = useAuth();
+  const userId = session?.user.id;
+  const value = useStreakWeekValue(userId);
   useFocusEffect(
     useCallback(() => {
-      if (!profile) return;
-      let alive = true;
-      const week = weekDates();
-      void Promise.all([
-        supabase
-          .from("streaks")
-          .select("*")
-          .eq("user_id", profile.id)
-          .maybeSingle(),
-        supabase
-          .from("daily_sessions")
-          .select("session_date")
-          .eq("user_id", profile.id)
-          .gte("session_date", week[0])
-          .lte("session_date", week[6])
-          .not("completed_at", "is", null),
-      ]).then(([streakRes, weekRes]) => {
-        if (!alive) return;
-        setStatus(
-          streakStatus((streakRes.data as Streak) ?? null, localDateStr()),
-        );
-        setWeekDone(
-          (weekRes.data ?? []).map(
-            (r: { session_date: string }) => r.session_date,
-          ),
-        );
-      });
-      return () => {
-        alive = false;
-      };
-    }, [profile]),
+      if (userId) void fetchStreakWeek(userId).catch(() => {});
+    }, [userId]),
   );
-  return { status, weekDone };
+  return {
+    status: value ? streakStatus(value.streak, localDateStr()) : null,
+    weekDone: value?.weekDone ?? null,
+  };
 }
 
 const styles = StyleSheet.create({
@@ -520,6 +502,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colors.onPastel,
     fontVariant: ["tabular-nums"],
+  },
+  pillGhost: {
+    width: 190,
+    height: 44,
+    borderRadius: radius.pill,
+    backgroundColor: colors.chip,
   },
   chipGhost: {
     width: 70,

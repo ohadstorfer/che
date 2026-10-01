@@ -734,6 +734,12 @@ export function AudioPad({ path }: { path: string }) {
 
 // ---------------------------------------------------------------------------
 // ¿Sí o no? — a fast recognition check: is this the right meaning?
+//
+// The English is set as a guess — smaller, in a dashed box with a rosa "?" —
+// so it reads as a claim to judge rather than the word's translation. A word
+// and its meaning stacked at the same weight is a flashcard, and that is how
+// it used to read. One tap answers: with two choices, a Check button is only a
+// second tap.
 // ---------------------------------------------------------------------------
 function TrueFalse({
   item,
@@ -755,24 +761,41 @@ function TrueFalse({
     return { shown: meaningOf(imposter), isTrue: false };
   });
 
+  const choose = (value: boolean) => {
+    if (verdict) return;
+    setPicked(value);
+    setVerdict({
+      correct: value === isTrue,
+      answer: isTrue ? undefined : `«${form.form}» es «${meaningOf(form)}»`,
+      about: form.gloss_note_en ?? undefined,
+    });
+  };
+
   return (
     <Frame
-      prompt={item.isRetry ? '🔁 Does it mean this?' : 'Does it mean this?'}
+      prompt={item.isRetry ? '🔁 Is this right?' : 'Is this right?'}
       verdict={verdict}
-      canCheck={picked !== null}
-      onCheck={() =>
-        setVerdict({
-          correct: picked === isTrue,
-          answer: isTrue ? undefined : `«${form.form}» es «${meaningOf(form)}»`,
-          about: form.gloss_note_en ?? undefined,
-        })
-      }
+      instant
       onContinue={() => onAnswer(!!verdict?.correct)}>
       <Panel style={styles.bigCard}>
         <Text style={styles.esBig}>{form.form}</Text>
         {form.audio_path ? <PlayButton path={form.audio_path} /> : null}
-        <View style={styles.divider} />
-        <Text style={styles.enBig}>{shown}</Text>
+        <Text style={styles.guessMeans}>means</Text>
+        {/* Once answered the guess shows what it was: confirmed, or struck out. */}
+        <View
+          style={[
+            styles.guess,
+            verdict && (isTrue ? styles.guessTrue : styles.guessFalse),
+          ]}>
+          <Text
+            style={[
+              styles.guessText,
+              verdict && !isTrue && styles.guessTextFalse,
+            ]}>
+            {shown}
+          </Text>
+          {verdict ? null : <Text style={styles.guessMark}>?</Text>}
+        </View>
       </Panel>
 
       <View style={styles.ratingRow}>
@@ -785,7 +808,10 @@ function TrueFalse({
           <Pressable
             key={opt.label}
             disabled={verdict !== null}
-            onPress={() => setPicked(opt.value)}
+            onPress={() => choose(opt.value)}
+            accessibilityRole="button"
+            accessibilityLabel={opt.label}
+            accessibilityState={{ selected: picked === opt.value, disabled: verdict !== null }}
             style={({ pressed }) => [
               styles.bigChoice,
               { borderColor: 'transparent' },
@@ -846,8 +872,10 @@ type Rect = { x: number; y: number; width: number; height: number };
 type Flight = { id: number; text: string; from: Rect; to: Rect; hide: string };
 /** A tile dropped onto the line that does not yet know where it landed. */
 type Pending = { text: string; from: Rect; slot: string };
-/** The tile under her finger, and where it was picked up from. */
-type Drag = { tile: number; origin: Rect };
+/** The tile under her finger, and where it was picked up from. `out` while it
+ *  is held below the line: it stays in `used`, with its slot folded away, until
+ *  she lets go, because unmounting the slot would take the gesture with it. */
+type Drag = { tile: number; origin: Rect; out?: boolean };
 
 /**
  * Where `node` sits inside `root`, in layout coordinates. The offset chain is
@@ -945,6 +973,9 @@ export function TileBuilder({
   /** Which drag this is. A tile picked up while the last one is still settling
    *  must not be cleared away by that one finishing. */
   const seq = useRef(0);
+  /** From the press turning into a drag until the finger lifts. The pick-up is
+   *  measured asynchronously on native, and a quick flick can let go first. */
+  const holding = useRef(false);
   const dx = useSharedValue(0);
   const dy = useSharedValue(0);
   const lift = useSharedValue(0);
@@ -1030,7 +1061,13 @@ export function TileBuilder({
   const syncSlots = () => {
     const count = usedRef.current.length;
     const out: (Rect | null)[] = new Array(count).fill(null);
-    for (let p = 0; p < count; p++) rectOf(`t${usedRef.current[p]}`, (r) => (out[p] = r));
+    const d = dragRef.current;
+    for (let p = 0; p < count; p++) {
+      const tile = usedRef.current[p];
+      // A folded slot is nowhere on the line, so it is nothing to aim at.
+      if (d?.out && d.tile === tile) continue;
+      rectOf(`t${tile}`, (r) => (out[p] = r));
+    }
     slotsSV.set(out);
     rectOf('area', (r) => areaBottomSV.set(r ? r.y + r.height : 0));
   };
@@ -1050,9 +1087,12 @@ export function TileBuilder({
     // A tile already on the line is not the bank's to pick up again.
     if (fromBank && position >= 0) return;
     dragged.current = true;
-    seq.current += 1;
+    holding.current = true;
+    const mine = ++seq.current;
     rectOf(position < 0 ? `b${i}` : `t${i}`, (origin) => {
-      if (!origin) return;
+      // Let go (or superseded) before the measurement came back: starting the
+      // drag now would leave a tile in the air that no gesture will ever land.
+      if (!origin || !holding.current || seq.current !== mine) return;
       originSV.set(origin);
       dragRef.current = { tile: i, origin };
       setDrag({ tile: i, origin });
@@ -1065,11 +1105,28 @@ export function TileBuilder({
   /** Dropped into slot `to`, or back into the bank when `to` is -1. Called only
    *  as the finger crosses out of one slot and into the next. */
   const moveTo = (i: number, to: number) => {
+    const d = dragRef.current;
+    const wasOut = !!d?.out;
+    const setOut = (out: boolean) => {
+      if (!d || d.tile !== i || wasOut === out) return;
+      // Written through to the ref at once: the next crossing can arrive before
+      // React has rendered this one.
+      dragRef.current = { ...d, out };
+      setDrag(dragRef.current);
+    };
+    // Off the line, it only folds its slot away. Taking it out of `used` here
+    // would unmount the slot, and the gesture under her finger with it — it
+    // would never finish. It leaves the line for real when she lets go.
+    if (to < 0) return setOut(true);
     const prev = usedRef.current;
+    const at = prev.indexOf(i);
     const next = prev.filter((x) => x !== i);
     // The slot she is over is measured on the line as it stands now, so the
-    // tile simply takes that index: whatever was there slides along.
-    if (to >= 0) next.splice(Math.min(to, next.length), 0, i);
+    // tile simply takes that index: whatever was there slides along. A folded
+    // tile still holds its index, so the slots after it sit one further on.
+    const index = wasOut && at >= 0 && to > at ? to - 1 : to;
+    next.splice(Math.min(index, next.length), 0, i);
+    setOut(false);
     if (next.length === prev.length && next.every((x, p) => x === prev[p])) return;
     setUsed(next);
   };
@@ -1080,6 +1137,7 @@ export function TileBuilder({
     const d = dragRef.current;
     const mine = seq.current;
     const stale = () => seq.current !== mine;
+    holding.current = false;
     // Only the React state is cleared, never the offsets: the tile is standing
     // exactly on its slot by now, and zeroing them here would flick it back to
     // where it was picked up for the one frame before it disappears. The next
@@ -1093,11 +1151,13 @@ export function TileBuilder({
       setDrag(null);
     };
     if (!d) return done();
+    // Carried off the line: now that the gesture is over, the slot can go.
+    const home = d.out || !usedRef.current.includes(i);
+    if (d.out) setUsed(usedRef.current.filter((x) => x !== i));
     // One frame for the last reorder to lay itself out before it is measured.
     requestAnimationFrame(() => {
       if (stale()) return;
-      const position = usedRef.current.indexOf(i);
-      rectOf(position >= 0 ? `t${i}` : `b${i}`, (to) => {
+      rectOf(home ? `b${i}` : `t${i}`, (to) => {
         if (!to || reduced) return done();
         const settle = { duration: 320, dampingRatio: 0.85 };
         lift.set(withTiming(0, { duration: 160, easing: EASE_OUT }));
@@ -1181,6 +1241,25 @@ export function TileBuilder({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tiles.length, locked]);
 
+  // Rebuilt gestures replace the one under her finger without it ever
+  // finishing, so whatever drag it was carrying ends here instead of hanging.
+  useEffect(
+    () => () => {
+      seq.current += 1;
+      holding.current = false;
+      dragged.current = false;
+      dragRef.current = null;
+      originSV.set(null);
+      overSV.set(-2);
+      setDrag(null);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [gestures],
+  );
+
+  const folded = drag?.out ? drag.tile : -1;
+  const firstOnLine = used.find((t) => t !== folded);
+
   const ghost = useAnimatedStyle(() => ({
     transform: [
       { translateX: dx.get() },
@@ -1206,7 +1285,7 @@ export function TileBuilder({
           {used.length === 0 && !ruled ? (
             <Text style={styles.answerPlaceholder}>tap the tiles…</Text>
           ) : null}
-          {used.map((tileIndex, position) => {
+          {used.map((tileIndex) => {
             const key = `t${tileIndex}`;
             // While its word is in the air — thrown by a tap, or carried by a
             // finger — the slot holds the space, empty.
@@ -1220,18 +1299,21 @@ export function TileBuilder({
                   onLayout={landed(key)}
                   onPress={() => {
                     if (dragged.current) return;
-                    remove(position);
+                    remove(used.indexOf(tileIndex));
                   }}
                   style={({ pressed }) => [
                     styles.tile,
                     flying && styles.tileInFlight,
+                    // Held off the line: out of the flow but still mounted, so
+                    // the drag it is carrying can finish.
+                    folded === tileIndex && styles.tileFolded,
                     { transform: [{ scale: pressed && !locked && !drag ? 0.94 : 1 }] },
                     webPress,
                     dragTouch,
                   ]}>
                   {/* First on the line, a word takes its capital again. */}
                   <Text style={[styles.tileText, flying && { opacity: 0 }]}>
-                    {position === 0
+                    {tileIndex === firstOnLine
                       ? tiles[tileIndex].charAt(0).toLocaleUpperCase('es') + tiles[tileIndex].slice(1)
                       : tiles[tileIndex]}
                   </Text>
@@ -2190,6 +2272,25 @@ const styles = StyleSheet.create({
     lineHeight: 36,
   },
   enBig: { ...font.display[700], fontSize: 24, color: colors.ink, textAlign: 'center' },
+  // ¿Sí o no?: the meaning on offer, set as a guess rather than an answer.
+  guessMeans: { ...font.body[600], fontSize: 15, color: colors.muted, textAlign: 'center' },
+  guess: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: 6,
+    maxWidth: '100%',
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: radius.sm,
+    borderWidth: 2,
+    borderStyle: 'dashed',
+    borderColor: colors.faint,
+  },
+  guessTrue: { borderStyle: 'solid', borderColor: colors.success, backgroundColor: colors.successSoft },
+  guessFalse: { borderStyle: 'solid', borderColor: colors.danger, backgroundColor: colors.dangerSoft },
+  guessText: { ...font.display[700], fontSize: 21, color: colors.ink, textAlign: 'center', flexShrink: 1 },
+  guessTextFalse: { textDecorationLine: 'line-through', textDecorationColor: colors.danger },
+  guessMark: { ...font.display[800], fontSize: 21, color: colors.primary },
   enPhrase: { ...font.display[700], fontSize: 20, color: colors.ink, textAlign: 'center' },
   // Room between the prompt and the sentence — space, not a line.
   divider: { height: 6, alignSelf: 'stretch' },
@@ -2412,6 +2513,7 @@ const styles = StyleSheet.create({
   // reflows mid-flight, but it reads as a gap rather than as a tile.
   tileInFlight: { backgroundColor: 'transparent', borderColor: 'transparent', boxShadow: 'none' },
   tileFlying: { position: 'absolute', zIndex: 10 },
+  tileFolded: { position: 'absolute', opacity: 0 },
   // Held: manteca, lifted off the page rather than on it, so it reads as
   // picked up and not as one more tile sitting in the row.
   tileHeld: {

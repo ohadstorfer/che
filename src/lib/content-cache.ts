@@ -91,13 +91,49 @@ let diskPromise: Promise<ContentDisk | null> | undefined;
 /** Tests hand in a fake; the app finds the phone's storage by itself. */
 export function setContentDisk(disk: ContentDisk | null) {
   diskPromise = Promise.resolve(disk);
+  peeked.clear();
+}
+
+/** The web's copy lives in IndexedDB: localStorage's few megabytes can't hold
+ *  the course and the lexicon, and without a copy the PWA paged the whole
+ *  course down again on every launch. */
+function webDisk(): ContentDisk | null {
+  if (typeof indexedDB === 'undefined') return null;
+  const STORE = 'files';
+  let opened: Promise<IDBDatabase> | null = null;
+  const db = () =>
+    (opened ??= new Promise<IDBDatabase>((resolve, reject) => {
+      const req = indexedDB.open('content', 1);
+      req.onupgradeneeded = () => req.result.createObjectStore(STORE);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    }));
+  const run = <T>(mode: IDBTransactionMode, act: (s: IDBObjectStore) => IDBRequest<T>) =>
+    db().then(
+      (d) =>
+        new Promise<T>((resolve, reject) => {
+          const req = act(d.transaction(STORE, mode).objectStore(STORE));
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        }),
+    );
+  return {
+    read: (name) => run('readonly', (s) => s.get(name)).then((v) => (typeof v === 'string' ? v : null)),
+    write: (name, text) => run('readwrite', (s) => s.put(text, name)).then(() => {}),
+  };
 }
 
 function disk(): Promise<ContentDisk | null> {
   diskPromise ??= (async () => {
-    // Only on the phones: the web has no file system to speak of, and node
-    // (the tests) must never load the native module.
-    if (typeof navigator === 'undefined' || navigator.product !== 'ReactNative') return null;
+    if (typeof navigator === 'undefined') return null;
+    if (navigator.product !== 'ReactNative') {
+      // Node (the tests) has no IndexedDB, and must never load the native module.
+      try {
+        return webDisk();
+      } catch {
+        return null;
+      }
+    }
     try {
       const { Directory, File, Paths } = await import('expo-file-system');
       const dir = new Directory(Paths.document, 'content');
@@ -119,20 +155,37 @@ function disk(): Promise<ContentDisk | null> {
   return diskPromise;
 }
 
-async function readStored(name: string, version: string | null): Promise<{ data: unknown } | null> {
-  try {
-    const text = await (await disk())?.read(name);
-    if (!text) return null;
-    const parsed = JSON.parse(text) as Partial<Stored>;
-    if (parsed.format !== CONTENT_FORMAT || typeof parsed.version !== 'string') return null;
-    if (version != null && parsed.version !== version) return null;
-    return { data: parsed.data };
-  } catch {
-    return null;
+/** What `peekStored` has read, so the versioned load that follows it hands
+ *  back the very same rows when they are still current. */
+const peeked = new Map<string, Promise<{ version: string; data: unknown } | null>>();
+
+function readAny(name: string): Promise<{ version: string; data: unknown } | null> {
+  let read = peeked.get(name);
+  if (!read) {
+    read = (async () => {
+      try {
+        const text = await (await disk())?.read(name);
+        if (!text) return null;
+        const parsed = JSON.parse(text) as Partial<Stored>;
+        if (parsed.format !== CONTENT_FORMAT || typeof parsed.version !== 'string') return null;
+        return { version: parsed.version, data: parsed.data };
+      } catch {
+        return null;
+      }
+    })();
+    peeked.set(name, read);
   }
+  return read;
+}
+
+async function readStored(name: string, version: string | null): Promise<{ data: unknown } | null> {
+  const hit = await readAny(name);
+  if (!hit || (version != null && hit.version !== version)) return null;
+  return { data: hit.data };
 }
 
 function writeStored(name: string, version: string, data: unknown) {
+  peeked.set(name, Promise.resolve({ version, data }));
   disk()
     .then((d) => d?.write(name, JSON.stringify({ format: CONTENT_FORMAT, version, data } satisfies Stored)))
     .catch(() => {});
@@ -171,6 +224,15 @@ export function versioned<T>(
   return contentVersion().then((v) => stored(name, v ? pick(v) : null, fetch));
 }
 
+/**
+ * Whatever the phone holds for `name`, current or not, without asking the
+ * server anything — what a cold start paints from while the real load checks
+ * the version behind it. Null when there is no copy.
+ */
+export function peekStored<T>(name: string): Promise<T | null> {
+  return readAny(name).then((hit) => (hit ? (hit.data as T) : null));
+}
+
 /** The unversioned form, for anything the version call doesn't cover. */
 export function cached<T>(key: string, load: () => Promise<T>): Promise<T> {
   return stored(key, null, load);
@@ -181,5 +243,6 @@ export function cached<T>(key: string, load: () => Promise<T>): Promise<T> {
  *  passed over. */
 export function clearContentCache() {
   memo.clear();
+  peeked.clear();
   version = null;
 }

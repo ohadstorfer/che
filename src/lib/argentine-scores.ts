@@ -62,12 +62,25 @@ export async function savePackScore(slug: string, score: number): Promise<PackSc
   return next;
 }
 
+/** The last read, so the Words tab opens on it instead of on empty bars. */
+let lastScores: Record<string, PackScore> | null = null;
+
+/** Reads (and syncs) pack scores ahead of the tab opening. */
+export function prefetchPackScores(): Promise<void> {
+  return readScores().then((s) => {
+    lastScores = s;
+  });
+}
+
 /** Every pack's score, re-read whenever the screen comes back into focus. */
 export function usePackScores() {
-  const [scores, setScores] = useState<Record<string, PackScore>>({});
+  const [scores, setScores] = useState<Record<string, PackScore>>(() => lastScores ?? {});
   useFocusEffect(
     useCallback(() => {
-      void readScores().then(setScores);
+      void readScores().then((s) => {
+        lastScores = s;
+        setScores(s);
+      });
     }, []),
   );
   return scores;

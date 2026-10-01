@@ -190,3 +190,20 @@ test('an unglossed sentence still lists the dictionary, as written', () => {
   assert.deepEqual(rows('mate', 'mate'), []);
   assert.deepEqual(rows('mate', 'mate', 'mate'), []);
 });
+
+test('an article or possessive does not make a loanword a translation', () => {
+  // One sentence glossed `mate` as "the mate" — and the card teaching the
+  // drink said "the mate", which an English speaker reads as "the friend".
+  const mate = form('ma', 'mate', 'mate', 1, { pos: 'noun' });
+  const mates = form('ms', 'mates', 'mates', 1, { pos: 'noun' });
+  const sentences = [
+    sentence('s1', [{ surface: 'mate', form_ids: ['ma'], gloss: 'the mate' }], 5, 'ma'),
+    sentence('s2', [{ surface: 'mate', form_ids: ['ma'], gloss: "mate's" }], 0, 'ma'),
+    sentence('s3', [{ surface: 'mates', form_ids: ['ms'], gloss: 'some mate' }], 0, 'ms'),
+  ];
+  const out = byId(withMeanings([mate, mates], sentences));
+  assert.equal(out.get('ma').meaning_en, 'mate');
+  assert.equal(out.get('ms').meaning_en, 'mates');
+  assert.equal(selfGlossed(out.get('ma')), true);
+  assert.deepEqual(rows('mate', 'mate', 'the mate'), []);
+});

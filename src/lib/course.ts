@@ -1,4 +1,4 @@
-import { versioned } from './content-cache';
+import { peekStored, versioned } from './content-cache';
 import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { Lesson, Section, Tip, Unit } from './types';
@@ -46,6 +46,14 @@ interface CourseRows {
 export async function loadCourse(): Promise<Course> {
   const rows = await versioned('course', (v) => v.course, fetchCourseRows);
   return assembled(rows);
+}
+
+/** The course as the phone last stored it, without asking the server whether
+ *  it is current — what a cold start draws the road from. Null when there is
+ *  no copy yet. */
+export async function peekCourse(): Promise<Course | null> {
+  const rows = await peekStored<CourseRows>('course');
+  return rows ? assembled(rows) : null;
 }
 
 // Assembled once per set of rows: the rows are shared by every caller in a

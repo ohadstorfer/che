@@ -20,7 +20,7 @@ export const LESSON_ITEMS = { min: 12, max: 16 };
 /**
  * New forms one teaching lesson introduces — the same number the outline sizes
  * a unit's lessons by, so a unit seeded today plans inside the window. Three at
- * the full ramp (teach · meaning · gap) is 9 of the 16 screens.
+ * the full ramp (teach · meaning · gap, the teach two screens) is 12 of the 16.
  */
 export { FORMS_PER_LESSON };
 
@@ -58,8 +58,18 @@ const LISTEN_PER_LESSON = 2;
 /** The rungs a sentence climbs inside one lesson (§5.2). */
 const RAMP = ['sentence_meaning', 'sentence_gap', 'sentence_build'];
 
+/**
+ * Screens a `teach` slot plays as for a word she hasn't met: the app meets the
+ * word (in a sentence, or on the plain intro screen) and then asks one easy
+ * question about it (src/lib/lesson.ts, `case 'teach'`). Counting it as one
+ * screen let lessons plan at 16 and play at 20.
+ */
+const TEACH_SCREENS = 2;
+
 /** What a slot costs the budget: one screen, unless it stands for several. */
-const itemsOf = (slot) => (slot.kind === 'review' || slot.kind === 'recap' ? (slot.review_count ?? 0) : 1);
+const itemsOf = (slot) =>
+  slot.kind === 'review' || slot.kind === 'recap' ? (slot.review_count ?? 0) : slot.kind === 'teach' ? TEACH_SCREENS : 1;
+const screensOf = (list) => list.reduce((n, slot) => n + itemsOf(slot), 0);
 
 /**
  * @param unit       outline unit (with lessons: [{id, ordinal, kind}])
@@ -138,7 +148,7 @@ export function planLessons({ unit, forms, sentences, tips, earlier = [], debt =
     const hear = []; // listening
     const metHere = []; // sentences shown in writing here, in the order shown
     const rung = new Map(); // sentence id -> highest rung it has reached here
-    const planned = () => head.length + ramp.length + pads.length + make.length + hear.length + tail;
+    const planned = () => head.length + screensOf(ramp) + pads.length + make.length + hear.length + tail;
     const drill = (into, s, mode) => {
       into.push({ kind: 'drill', sentence_id: s.id, mode });
       use(s);
@@ -179,7 +189,7 @@ export function planLessons({ unit, forms, sentences, tips, earlier = [], debt =
       // Giving it up keeps the lesson one sitting instead of letting the last
       // words of an oversized unit push it past twenty screens.
       const rest = chunks[li].slice(chunks[li].indexOf(form) + 1).filter((f) => !taught.has(f.id)).length;
-      if (planned() + 1 + 2 * rest + MIN_PRODUCTION > LESSON_ITEMS.max) continue;
+      if (planned() + 1 + (TEACH_SCREENS + 1) * rest + MIN_PRODUCTION > LESSON_ITEMS.max) continue;
       const next = bySize.find((s) => s.target_form_id === form.id && fresh(s));
       if (next) {
         drill(ramp, next, 'sentence_gap');
@@ -431,4 +441,4 @@ function spaceOut(body) {
   body.splice(0, body.length, ...out);
 }
 
-export { itemsOf };
+export { itemsOf, screensOf };

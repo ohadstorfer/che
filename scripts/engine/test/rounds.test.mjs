@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { recapItems } from '../../../src/lib/lesson.ts';
-import { typedHere } from '../../../src/lib/round.ts';
+import { MAX_RETRIES, MAX_ROUND_RETRIES, pickRetry, typedHere } from '../../../src/lib/round.ts';
 import { glueSeen } from '../../../src/lib/sentences.ts';
 import {
   earnedTail,
@@ -478,4 +478,20 @@ test('"fácil" is earned by spelling the word out, on its own or into a sentence
   for (const mode of ['word_build', 'listen_build', 'sentence_gap', 'sentence_gap_tiles', 'multiple_choice']) {
     assert.ok(!typedHere({ form: cafe, mode }, cafe), mode);
   }
+});
+
+test('a mistake brings back one word, its own first, and a round stops re-asking after its cap', () => {
+  const [a, b, c] = ['a', 'b', 'c'].map((id) => ({ id }));
+  const none = () => 0;
+  // A tile build that missed three words re-asks one — the exercise's word.
+  assert.equal(pickRetry({ form: b }, [a, b, c], new Set(['a', 'b', 'c']), none, 0), b);
+  // Its own word right: the first word it did miss.
+  assert.equal(pickRetry({ form: a }, [a, b, c], new Set(['c', 'b']), none, 0), b);
+  // Nothing wrong, nothing back.
+  assert.equal(pickRetry({ form: a }, [a, b], new Set(), none, 0), undefined);
+  // A word re-asked its limit already gives way to the next one missed.
+  const tired = (id) => (id === 'a' ? MAX_RETRIES : 0);
+  assert.equal(pickRetry({ form: a }, [a, b], new Set(['a', 'b']), tired, 0), b);
+  // The round has used its re-asks.
+  assert.equal(pickRetry({ form: a }, [a], new Set(['a']), none, MAX_ROUND_RETRIES), undefined);
 });

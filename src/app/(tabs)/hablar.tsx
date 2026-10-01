@@ -14,16 +14,14 @@ import {
   type ConversationRow,
   conversationTitle,
   end,
-  getDefaultLevel,
-  history,
   isToday,
-  latestConversation,
   type Scenario,
   scenarioAt,
   scenarios,
 } from '@/lib/hablar';
 import { freeChatArt, levelDistance, pickScenario, scenarioArt } from '@/lib/hablar-art';
-import { chatsUsed, FREE_CHATS, usePremium } from '@/lib/premium';
+import { forgetHablarLatest, loadHablarHome, peekHablarHome } from '@/lib/hablar-home';
+import { FREE_CHATS, usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, type PastelName, pastel, pastelGrad, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
@@ -50,53 +48,60 @@ type Today =
 /** Scenario rows deal their icon circles through these, so neighbours differ. */
 const ROW_TONES = [pastel.peach, pastel.sage, pastel.lav, pastel.sky, pastel.butter] as const;
 
+/** The top card for her latest chat: Resume while one is open today, its
+ *  summary once it's done, the day's pick otherwise. */
+const todayOf = (latest: ConversationRow | null, staff: boolean): Today =>
+  // Staff chats don't use up the day: a finished one leaves the door open.
+  latest && isToday(latest) && !((latest.unlimited || staff) && latest.ended_at)
+    ? { state: latest.ended_at ? 'done' : 'open', conversation: latest }
+    : { state: 'free' };
+
 export default function Hablar() {
   const { height } = useWindowDimensions();
   useStatusBarColor(colors.bg);
   const { status: streak, weekDone } = useStreakWeek();
-  const [today, setToday] = useState<Today>({ state: 'loading' });
-  const [past, setPast] = useState<ConversationRow[]>([]);
-  /** Pancho's call was answered: the sheet asking what to talk about is up. */
-  const [choosing, setChoosing] = useState(false);
-  /** Her saved level; null until read. It is changed on the brief, not here. */
-  const [level, setLevel] = useState<Band | null>(null);
   // Staff have no daily limit (hablar-start agrees), so a finished chat never locks the tab.
-  const { profile } = useAuth();
+  const { profile, session } = useAuth();
+  const userId = session?.user.id;
   const staff = profile?.role === 'admin' || profile?.role === 'reviewer';
   // A free account has a few chats in all; null until counted.
   const { limited, paywall } = usePremium();
-  const [used, setUsed] = useState<number | null>(null);
+  // Opens on what was read last — or read ahead while she was on Course
+  // (lib/prefetch.ts) — and refreshes on focus.
+  const kept = peekHablarHome(userId, limited);
+  const [today, setToday] = useState<Today>(() => (kept ? todayOf(kept.latest, staff) : { state: 'loading' }));
+  const [past, setPast] = useState<ConversationRow[]>(() => kept?.past ?? []);
+  /** Pancho's call was answered: the sheet asking what to talk about is up. */
+  const [choosing, setChoosing] = useState(false);
+  /** Her saved level; null until read. It is changed on the brief, not here. */
+  const [level, setLevel] = useState<Band | null>(() => kept?.level ?? null);
+  const [used, setUsed] = useState<number | null>(() => kept?.used ?? null);
   const freeLeft = limited && used != null ? Math.max(0, FREE_CHATS - used) : null;
 
   useFocusEffect(
     useCallback(() => {
+      if (!userId) return;
       let alive = true;
       (async () => {
-        let latest = await latestConversation().catch(() => null);
+        const home = await loadHablarHome(userId, limited);
+        let latest = home.latest;
         // A chat left open on an earlier day (app killed mid-chat): close it
         // quietly so it gets its summary. The streak isn't bumped for that day.
         if (latest && !latest.ended_at && !isToday(latest)) {
           await end({ session_id: latest.id, reason: 'time' }).catch(() => {});
+          forgetHablarLatest();
           latest = null;
         }
-        const [rows, count, band] = await Promise.all([
-          history().catch(() => []),
-          profile && limited ? chatsUsed(profile.id).catch(() => null) : Promise.resolve(null),
-          getDefaultLevel().catch((): Band => 'A1'),
-        ]);
         if (!alive) return;
-        setPast(rows);
-        setLevel(band);
-        setUsed(count);
-        // Staff chats don't use up the day: a finished one leaves the door open.
-        if (latest && isToday(latest) && !((latest.unlimited || staff) && latest.ended_at)) {
-          setToday({ state: latest.ended_at ? 'done' : 'open', conversation: latest });
-        } else setToday({ state: 'free' });
+        setPast(home.past);
+        setLevel(home.level);
+        setUsed(home.used);
+        setToday(todayOf(latest, staff));
       })();
       return () => {
         alive = false;
       };
-    }, [staff, profile, limited]),
+    }, [staff, userId, limited]),
   );
 
   const openDoor = (kind: 'scenario' | 'free', topic?: string) => {

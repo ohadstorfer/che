@@ -47,6 +47,7 @@ export function ExerciseFrame({
   checkLabel = 'Check',
   badge,
   actions,
+  instant,
 }: {
   prompt: string;
   children: React.ReactNode;
@@ -61,6 +62,8 @@ export function ExerciseFrame({
   badge?: string;
   /** Extra controls in the result panel, under the answer (report, why). */
   actions?: React.ReactNode;
+  /** Graded on the tap itself (yes/no), so there is no button to wait on. */
+  instant?: boolean;
 }) {
   // The screen leaves its bottom edge alone so this bar can own it: a panel
   // that stops short of the edge reads as a card that failed to land. The inset
@@ -99,7 +102,7 @@ export function ExerciseFrame({
 
       {verdict ? (
         <FeedbackBar verdict={verdict} onContinue={onContinue} bottom={bottom} actions={actions} />
-      ) : (
+      ) : instant ? null : (
         <View style={[styles.footer, { paddingBottom: 20 + bottom }]}>
           {note ? (
             <Text style={styles.note}>{note}</Text>

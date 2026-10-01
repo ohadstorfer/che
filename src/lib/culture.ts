@@ -121,12 +121,25 @@ export async function markClassDone(section: string, cls: string) {
   return done;
 }
 
+/** The last read, so the tab opens on it instead of on empty bars. */
+let lastDone: Set<string> | null = null;
+
+/** Reads (and syncs) finished classes ahead of the tab opening. */
+export function prefetchCultureDone(): Promise<void> {
+  return readDone().then((d) => {
+    lastDone = d;
+  });
+}
+
 /** Finished classes, re-read whenever the screen comes back into focus. */
 export function useCultureDone() {
-  const [done, setDone] = useState<Set<string>>(new Set());
+  const [done, setDone] = useState<Set<string>>(() => lastDone ?? new Set());
   useFocusEffect(
     useCallback(() => {
-      void readDone().then(setDone);
+      void readDone().then((d) => {
+        lastDone = d;
+        setDone(d);
+      });
     }, []),
   );
   return (section: string, cls: string) => done.has(keyOf(section, cls));

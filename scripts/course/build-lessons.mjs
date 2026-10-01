@@ -10,7 +10,7 @@
 //   npm run course:lessons -- --all [--dry-run]
 import { exposureReport, planCourse } from './lib/course-plan.mjs';
 import { queryLinked } from './lib/db.mjs';
-import { FORMS_PER_LESSON, LESSON_ITEMS } from './lib/lessons.mjs';
+import { FORMS_PER_LESSON, LESSON_ITEMS, screensOf } from './lib/lessons.mjs';
 import { q, upsert } from './lib/sql.mjs';
 
 const argv = process.argv.slice(2);
@@ -31,8 +31,8 @@ if (!wanted.length) {
 }
 
 // The linters look at the proposal the way they look at hand-written lessons.
-// Length is counted in screens, not slots: a review slot stands for several.
-const screensOf = (own) => own.reduce((n, s) => n + (s.kind === 'review' || s.kind === 'recap' ? (s.review_count ?? 0) : 1), 0);
+// Length is counted in screens, not slots: a review slot stands for several,
+// and a new word for two.
 const verbose = wanted.length === 1;
 let problems = 0;
 for (const unit of wanted) {

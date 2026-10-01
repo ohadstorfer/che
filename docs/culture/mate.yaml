@@ -15,13 +15,13 @@ classes:
       - type: card
         text: "**Mate** is hot water poured over **yerba**, dried and ground leaves. You sip it from a small gourd through a metal straw, then it gets refilled and passed on."
       - type: choice
-        prompt: "Yerba looks a lot like green tea. What plant is it really?"
+        prompt: "Yerba looks a lot like green tea. Is it the same plant?"
         options:
-          - "A South American holly tree"
-          - "A green tea bush from China"
-          - "A wild mint from the Andes"
-        correct: 0
-        explain: "A holly. A totally different plant from tea, but it does have caffeine. That's why half the country runs on it."
+          - "Yes, it's a tea bush, just dried differently"
+          - "No, it's a different plant native to South America"
+          - "No, it's a ground-up root"
+        correct: 1
+        explain: "A totally different plant from tea, but it does have caffeine. That's why half the country runs on it."
       - type: card
         text: "The gourd is also called a **mate**. And you don't drink mate here: you **tomás mate**."
       - type: card
