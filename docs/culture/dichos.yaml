@@ -3,318 +3,140 @@ section:
   title: "Dichos y refranes"
   emoji: "💬"
   summary: "Expressions, idioms and sayings: how Argentines really talk"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one saying per big card,
+# with the moment people say it. 2–3 guess-first questions, no word review.
 classes:
+  # ─────────────────────────────────────────────────────────────
   - slug: "expresiones-del-dia"
     title: "Everyday expressions"
     summary: "The phrases you'll hear before lunch on any given day"
     pages:
-      - type: info
-        title: "Idioms, Argentine style"
-        emoji: "🗣️"
-        body: "A **dicho** is a saying or expression. Argentines talk in them constantly, and they rarely mean what the words say. Learn the words alone and you'll understand every word of a sentence, and still miss the point. So let's learn the phrases whole, the way a porteño says them."
-        fun_fact: "Many of these are also used in Uruguay: it's the Río de la Plata, not just Buenos Aires."
-      - type: info
-        title: "The penny drops"
-        word: { es: "me cayó la ficha", tag: "Idiom", en: "the penny dropped" }
-        emoji: "☎️"
-        body: "**Me cayó la ficha** = 'the penny dropped', 'I finally got it'. It comes from old public phones that ran on **fichas** (tokens): the call only went through when the token fell. The opposite: **no le cae la ficha** = 'he still doesn't get it'."
-      - type: info
-        title: "In the oven"
-        emoji: "🔥"
-        body: "**Estar al horno** = 'to be in the oven', i.e. in big trouble. Exam tomorrow, nothing studied? **Estoy al horno.** Your team loses 3–0 at half time? **Estamos al horno.** When things are hopeless but it's also a little funny, add **con papas**: **al horno con papas**, like a roast with potatoes."
+      - type: card
+        text: "Exam tomorrow, nothing studied? **Estoy al horno**: I'm in the oven. Completely doomed? **Al horno con papas**: in the oven, with potatoes, like a Sunday roast."
       - type: choice
-        scenario: "Your friend explains a joke for the third time. Suddenly you laugh."
-        prompt: "What do you say?"
-        options: ["¡Me cayó la ficha!", "¡Estoy al horno!", "¡No me cae la ficha!"]
+        prompt: "When you finally get something, you say **“me cayó la ficha”**: the ficha dropped. What was the ficha?"
+        options:
+          - "A token for old pay phones"
+          - "A tile in a game of dominoes"
+          - "A chip at the casino table"
         correct: 0
-        explain: "**Me cayó la ficha** = 'Now I get it!'. The token finally dropped. **No me cae la ficha** would mean you still don't get it."
-      - type: info
-        title: "Pulling your hair"
-        emoji: "💇"
-        body: "**Tomar el pelo** = 'to pull someone's leg' (literally 'to take the hair'). **¿Me estás tomando el pelo?** = 'Are you kidding me?'. And when someone needs to get their act together: **ponete las pilas** = 'put your batteries in', i.e. wake up, get going."
-      - type: gap
-        prompt: "Your roommate has been on the couch all week and exams start Monday."
-        text: "Che, ponete las ___."
-        options: ["pilas", "fichas", "papas"]
+        explain: "Old public phones ran on **fichas**. The call only went through when the token dropped. Now it's the moment the penny drops."
+      - type: card
+        text: "Your roommate hasn't left the couch all week, and exams start Monday. Time to tell him: **“Ponete las pilas.”** Put your batteries in. Get going."
+      - type: card
+        text: "A cancelled plan, rain on a Saturday, a two-hour line at the bank. You sigh: **“¡Qué garrón!”** What a drag."
+      - type: choice
+        prompt: "You didn't study, so in the exam you write a full page of confident nonsense. What do Argentines say you did?"
+        options:
+          - "**Mandaste fruta**: you sent fruit"
+          - "**Pateaste el tablero**: you kicked the board"
+          - "**Tiraste la toalla**: you threw in the towel"
         correct: 0
-        translation: "Hey, get your act together."
-        explain: "**Ponerse las pilas** = recharge and get to work."
-      - type: info
-        title: "Drags and vibes"
-        emoji: "🌧️"
-        body: "**¡Qué garrón!** = 'What a drag!': a cancelled plan, a rainy Saturday, a two-hour line at the bank. The opposite feeling is **buena onda** (good vibes, nice): **Tu hermana es re buena onda** = 'Your sister is really nice'. And **mala onda** is bad vibes, or a person who's unfriendly."
-      - type: match
-        prompt: "Match the expression to its meaning"
-        pairs:
-          - ["estar al horno", "to be in trouble"]
-          - ["tomar el pelo", "to pull someone's leg"]
-          - ["¡qué garrón!", "what a drag!"]
-          - ["buena onda", "nice, good vibes"]
-      - type: true_false
-        statement: "A new coworker never says hi and grumbles at everyone. Your Argentine friends could fairly call him mala onda."
-        answer: true
-        explain: "Unfriendly, sour, bad vibes: that's **mala onda**. And a coworker who brings facturas on Friday? **Re buena onda**."
-    vocabulary:
-      - es: "me cayó la ficha"
-        en: "the penny dropped, I finally got it"
-        example: { es: "Ahora me cayó la ficha.", en: "Now I get it." }
-      - es: "estar al horno"
-        en: "to be in big trouble"
-        example: { es: "Mañana tengo examen y estoy al horno.", en: "I have an exam tomorrow and I'm screwed." }
-      - es: "tomar el pelo"
-        en: "to pull someone's leg"
-        example: { es: "¿Me estás tomando el pelo?", en: "Are you kidding me?" }
-      - es: "ponete las pilas"
-        en: "get your act together! (lit. put your batteries in)"
-      - es: "¡qué garrón!"
-        en: "what a drag!"
-      - es: "buena onda"
-        en: "nice, good vibes"
-        example: { es: "Es re buena onda.", en: "He's really nice." }
-      - es: "mala onda"
-        en: "unfriendly, sour"
-    glossary:
-      - es: "dicho"
-        en: "saying, expression"
-      - es: "fichas"
-        en: "tokens (for old pay phones)"
-      - es: "no le cae la ficha"
-        en: "he still doesn't get it"
-      - es: "Estoy al horno."
-        en: "I'm in big trouble."
-      - es: "Estamos al horno."
-        en: "We're in big trouble."
-      - es: "con papas"
-        en: "with potatoes (added for humor)"
-      - es: "al horno con papas"
-        en: "in deep trouble, jokingly"
-      - es: "¿Me estás tomando el pelo?"
-        en: "are you pulling my leg?"
-      - es: "ponerse las pilas"
-        en: "to get your act together"
+        explain: "**Mandar fruta** is winging it with words. Students do it in exams, and plenty of politicians do it on TV."
+      - type: card
+        text: "Your friend has to go to a boring wedding alone, so you go with her. You **le hacés la gamba**: you lend her your leg. It means keeping someone company when it counts."
+      - type: card
+        text: "The best thing you can say about someone is simple: **es re buena onda**. Easygoing, warm, good vibes. The coworker who never says hi? **Mala onda**."
+    vocabulary: []
 
+  # ─────────────────────────────────────────────────────────────
   - slug: "mas-que"
-    title: "Más perdido que turco en la neblina"
+    title: "Más contento que perro con dos colas"
     summary: "The comparisons Argentines use to exaggerate everything"
     pages:
-      - type: info
-        title: "More X than Y"
-        emoji: "📏"
-        body: "Why say 'very lost' when you can say **más perdido que turco en la neblina**: 'more lost than a Turk in the fog'? Argentines love these **más … que …** comparisons. They're vivid, a bit absurd, and everyone knows them by heart. Use one at the right moment and you'll get a laugh and a look of respect."
-        fun_fact: "'Turco' was the loose name given to immigrants from the Ottoman Empire: Syrians, Lebanese, Armenians and more. It's old-fashioned, and a bit of a stereotype."
-      - type: info
-        title: "Lost, long and boring"
-        emoji: "🌫️"
-        body: "**Más perdido que turco en la neblina**: totally lost, or clueless. **Más largo que esperanza de pobre**: 'longer than a poor man's hope', for a line, a meeting or a week that never ends. **Más aburrido que chupar un clavo**: 'more boring than sucking a nail'."
+      - type: card
+        text: "Why say “very happy” when you can be **más contento que perro con dos colas**? Happier than a dog with two tails. Argentines love a good **más … que**."
+      - type: card
+        text: "The line at the bank, a meeting, the last week before payday. Anything endless is **más largo que esperanza de pobre**: longer than a poor man's hope."
       - type: choice
-        scenario: "A tourist has been walking in circles around the same plaza for an hour, holding his map upside down."
-        prompt: "How would a porteño describe him?"
-        options: ["Más perdido que turco en la neblina", "Más largo que esperanza de pobre", "Más aburrido que chupar un clavo"]
+        prompt: "A guy at the party has explained his crypto plan to you three times. Your friend whispers: **“Es más pesado que un collar de…”** Heavier than a necklace of what?"
+        options:
+          - "Melons"
+          - "Bricks"
+          - "Stones"
         correct: 0
-        explain: "Lost and clueless = **más perdido que turco en la neblina**. Works for directions, and for anyone who has no idea what's going on."
-      - type: info
-        title: "Fakes and pests"
-        emoji: "💵"
-        body: "**Más trucho que billete de tres pesos**: 'faker than a three-peso bill' (**trucho** = fake, dodgy). **Más pesado que collar de melones**: 'heavier than a necklace of melons', for someone who's a real pain. And a happy one: **más contento que perro con dos colas**, 'happier than a dog with two tails'."
-      - type: gap
-        prompt: "A guy on the street is selling 'original' Messi shirts for almost nothing."
-        text: "Esa camiseta es más trucha que billete de tres ___."
-        options: ["pesos", "melones", "colas"]
-        correct: 0
-        translation: "That shirt is as fake as a three-peso bill."
-        explain: "There's no such thing as a three-peso bill, so it's obviously **trucho**."
-      - type: info
-        title: "Round and round"
-        emoji: "🎠"
-        body: "Someone who can't make a simple decision **tiene más vueltas que una calesita**: 'has more turns than a merry-go-round'. And someone who thinks they're irresistible **se cree la última Coca-Cola del desierto**: 'thinks they're the last Coke in the desert'."
-      - type: match
-        prompt: "Match the comparison to the person"
-        pairs:
-          - ["más pesado que collar de melones", "someone who won't stop bugging you"]
-          - ["más contento que perro con dos colas", "someone thrilled"]
-          - ["tiene más vueltas que una calesita", "someone who can't just decide"]
-          - ["se cree la última Coca-Cola del desierto", "someone full of themselves"]
+        explain: "**Más pesado que collar de melones.** **Pesado** is heavy, and also a pain. Picture wearing melons around your neck all night."
+      - type: card
+        text: "Fake stuff is **trucho**. And nothing's faker than a bill that doesn't exist: **más trucho que billete de tres pesos**. That street-stall “original” Messi shirt? Exactly that."
+      - type: card
+        text: "The friend who can't just pick a restaurant **tiene más vueltas que una calesita**: more turns than a merry-go-round."
       - type: choice
-        scenario: "Your Monday meeting was supposed to take twenty minutes. Two hours later, nobody has decided anything."
-        prompt: "How was the meeting?"
-        options: ["Más largo que esperanza de pobre", "Más trucho que billete de tres pesos", "Más contento que perro con dos colas"]
+        prompt: "Your friend's ex walks into the bar like he owns it. You whisper: **“Se cree la última … del desierto.”** He thinks he's the last what in the desert?"
+        options:
+          - "Coca-Cola"
+          - "Drop of water"
+          - "Palm tree"
         correct: 0
-        explain: "Endless = **más largo que esperanza de pobre**. It fits lines, meetings, and the last hour before the weekend."
-    vocabulary:
-      - es: "más perdido que turco en la neblina"
-        en: "totally lost or clueless"
-      - es: "más largo que esperanza de pobre"
-        en: "endless, it goes on forever"
-        example: { es: "Esta fila es más larga que esperanza de pobre.", en: "This line is endless." }
-      - es: "más aburrido que chupar un clavo"
-        en: "incredibly boring"
-      - es: "trucho"
-        en: "fake, dodgy"
-        example: { es: "Ese reloj es trucho.", en: "That watch is fake." }
-      - es: "más pesado que collar de melones"
-        en: "a real pain, very annoying"
-      - es: "más contento que perro con dos colas"
-        en: "over the moon"
-      - es: "tiene más vueltas que una calesita"
-        en: "overcomplicates things, never just decides"
-      - es: "se cree la última Coca-Cola del desierto"
-        en: "thinks they're God's gift"
-    glossary:
-      - es: "más … que …"
-        en: "more … than …"
-      - es: "tener más vueltas que una calesita"
-        en: "to have more twists than a carousel"
-      - es: "creerse la última Coca-Cola del desierto"
-        en: "to think you're God's gift"
+        explain: "**La última Coca-Cola del desierto**: the one thing everybody wants. Or so he thinks."
+      - type: card
+        text: "And a class that won't end, or a film where nothing happens? **Más aburrido que chupar un clavo**: more boring than sucking a nail."
+    vocabulary: []
 
+  # ─────────────────────────────────────────────────────────────
   - slug: "refranes"
     title: "Grandma's refranes"
     summary: "The old sayings every abuela has ready for any occasion"
     pages:
-      - type: info
-        title: "What's a refrán?"
-        emoji: "👵"
-        body: "A **refrán** is a proverb: a short, fixed sentence with a lesson inside. Most came from Spain and are known all over the Spanish-speaking world. What's local is how you'll hear them: your abuela quotes one before you finish telling her your problem, and people often say just the first half and let you finish it."
-      - type: info
-        title: "Burned by milk"
-        emoji: "🐄"
-        body: "The English 'once bitten, twice shy' becomes **el que se quema con leche ve una vaca y llora**: 'whoever gets burned by milk cries when they see a cow'. Another classic: **no hay mal que por bien no venga**, 'every cloud has a silver lining' (there's no bad thing that doesn't bring something good)."
-      - type: info
-        title: "Birds and gift horses"
-        emoji: "🐴"
-        body: "**Más vale pájaro en mano que cien volando**: 'a bird in the hand is worth a hundred flying' (in English, only two in the bush). And **a caballo regalado no se le miran los dientes**: 'don't look a gift horse in the mouth'. Your abuela will use it when you complain about a present."
+      - type: card
+        text: "A **refrán** is an old proverb, and most came from Spain. What's Argentine is the timing: your abuela has one ready before you finish telling her the problem."
+      - type: card
+        text: "And she only says half. You complain about your aunt's ugly sweater: **“Y bueno, a caballo regalado…”** Everyone knows the rest: **no se le miran los dientes**. Don't look a gift horse in the mouth."
       - type: choice
-        scenario: "After a terrible breakup, your friend refuses to even go on a first date."
-        prompt: "Which refrán fits?"
-        options: ["El que se quema con leche ve una vaca y llora", "Más vale pájaro en mano que cien volando", "A caballo regalado no se le miran los dientes"]
+        prompt: "After a bad breakup, your friend won't even go on a date. Abuela nods: **“El que se quema con leche, ve una vaca y…”** Burned by milk, you see a cow and…?"
+        options:
+          - "**Llora**: cry"
+          - "**Corre**: run"
+          - "**Sopla**: blow on it"
         correct: 0
-        explain: "Burned once, now scared of everything that looks similar."
+        explain: "You cry at the sight of a cow. Once hurt, you fear anything that looks like it."
+      - type: card
+        text: "New friends look a bit shady? Abuela raises an eyebrow: **“Decime con quién andás y te diré quién sos.”** Tell me who you hang out with, and I'll tell you who you are."
+      - type: card
+        text: "Your friend swears, again, that he starts the gym on Monday. **Del dicho al hecho hay mucho trecho**: from saying to doing, it's a long way."
       - type: choice
-        scenario: "You grumble that your aunt's gift is a sweater two sizes too big. Your abuela sighs: \"Y bueno, a caballo regalado…\", and waits for you."
-        prompt: "How does it end?"
-        options: ["no se le miran los dientes", "que cien volando", "ve una vaca y llora"]
+        prompt: "In English, a bird in the hand is worth two in the bush. In Spanish, it's worth how many flying?"
+        options:
+          - "A hundred"
+          - "Three"
+          - "Ten"
         correct: 0
-        explain: "**A caballo regalado no se le miran los dientes**: it was a gift, so don't complain. Saying just the first half is the most common way to use it."
-      - type: info
-        title: "Said and done"
-        emoji: "🏋️"
-        body: "**Del dicho al hecho hay mucho trecho**: 'from saying to doing is a long way'. Easy to promise, hard to deliver. It's the refrán for the friend who starts the gym every Monday, the plumber who's coming 'tomorrow', and every New Year's resolution."
-      - type: gap
-        prompt: "Your friend promises, again, that he'll start the gym on Monday."
-        text: "Del dicho al ___ hay mucho trecho."
-        options: ["hecho", "caballo", "pájaro"]
-        correct: 0
-        translation: "Easier said than done."
-        explain: "**Dicho** (said) and **hecho** (done) rhyme with **trecho** (a stretch of road). That's why it sticks."
-      - type: match
-        prompt: "Match the refrán to its English cousin"
-        pairs:
-          - ["A caballo regalado no se le miran los dientes", "Don't look a gift horse in the mouth"]
-          - ["No hay mal que por bien no venga", "Every cloud has a silver lining"]
-          - ["Más vale pájaro en mano que cien volando", "A bird in the hand…"]
-          - ["El que se quema con leche ve una vaca y llora", "Once bitten, twice shy"]
-      - type: true_false
-        statement: "When Argentines quote a refrán, they usually say the whole thing, word for word."
-        answer: false
-        explain: "Often just the first half: \"Y bueno, del dicho al hecho…\". Everyone knows the rest."
-    vocabulary:
-      - es: "refrán"
-        en: "proverb, saying"
-      - es: "el que se quema con leche ve una vaca y llora"
-        en: "once bitten, twice shy"
-      - es: "no hay mal que por bien no venga"
-        en: "every cloud has a silver lining"
-      - es: "más vale pájaro en mano que cien volando"
-        en: "a bird in the hand is worth two in the bush"
-      - es: "a caballo regalado no se le miran los dientes"
-        en: "don't look a gift horse in the mouth"
-      - es: "del dicho al hecho hay mucho trecho"
-        en: "easier said than done"
-    glossary:
-      - es: "dicho"
-        en: "said (also: a saying)"
-      - es: "hecho"
-        en: "done"
-      - es: "trecho"
-        en: "a stretch (of road)"
+        explain: "**Más vale pájaro en mano que cien volando.** Same lesson, much bigger flock."
+      - type: card
+        text: "And when something goes wrong, the silver-lining one: **no hay mal que por bien no venga**. There's no bad thing that doesn't bring something good."
+    vocabulary: []
 
+  # ─────────────────────────────────────────────────────────────
   - slug: "filosofia-criolla"
     title: "Argentine philosophy in six sentences"
     summary: "The maxims that explain how the country sees itself"
     pages:
-      - type: info
-        title: "A country in sayings"
-        emoji: "🇦🇷"
-        body: "Some sayings aren't just proverbs: they're a worldview. Crisis after crisis, Argentines built a set of maxims that are part resignation, part humour, part survival guide. Hear them and you'll understand a lot about how people here think. Take them with a pinch of salt: they're often said with a wink."
-      - type: info
-        title: "Crying and cheating"
-        emoji: "🍼"
-        body: "**El que no llora no mama**: 'the baby who doesn't cry doesn't get fed', if you don't complain, you get nothing. **Hecha la ley, hecha la trampa**: 'as soon as a law is made, so is the way around it'. Both are said with a shrug, about bureaucracy, taxes and life in general."
+      - type: card
+        text: "Crisis after crisis, Argentines built a set of sayings that are part shrug, part joke, part survival guide. Hear them and you'll get how people here think."
+      - type: card
+        text: "The bank ignores your complaint? Call every day and make noise. **El que no llora no mama**: the baby who doesn't cry doesn't get fed."
       - type: choice
-        scenario: "The bank keeps ignoring your complaint. Your Argentine friend tells you to call every day and make noise."
-        prompt: "Which saying is she following?"
-        options: ["El que no llora no mama", "Hecha la ley, hecha la trampa", "Siempre que llovió, paró"]
+        prompt: "A new tax is announced. By dinnertime, your friends already know three ways around it. They shrug: **“Hecha la ley, hecha la…”** Made the law, made the what?"
+        options:
+          - "**Trampa**: the trick"
+          - "**Queja**: the complaint"
+          - "**Fiesta**: the party"
         correct: 0
-        explain: "Squeaky wheel gets the grease. Complain, insist, and you'll get it."
-      - type: info
-        title: "The vivo and the gil"
-        emoji: "🦊"
-        body: "In Argentine slang, a **vivo** is the sharp one, always finding the angle, and a **gil** is the sucker who gets fooled. A famously cynical maxim: **el vivo vive del gil, y el gil de su trabajo**, 'the sharp one lives off the sucker, and the sucker off his work'. That habit of getting ahead by cutting corners has a name: **viveza criolla**."
+        explain: "As soon as a law is made, so is the trick around it. Said with a shrug about bureaucracy, taxes and life."
+      - type: card
+        text: "Skipping the line, dodging the fare, finding the loophole: that's **viveza criolla**. The one who pulls it off is a **vivo**. The one who plays fair risks being called a **gil**, a sucker."
       - type: choice
-        scenario: "A guy walks past the whole line at the bakery, smiles, and gets served first. Nobody says a word."
-        prompt: "In the maxim, who's the gil?"
-        options: ["The people in line", "The guy who cut in", "The baker"]
+        prompt: "With all that viveza, what do porteños do at a bus stop?"
+        options:
+          - "Stand in a neat single-file line"
+          - "Crowd the door, first come first in"
+          - "Let the oldest board, then push"
         correct: 0
-        explain: "He's playing the **vivo**; the people who waited and said nothing are the **giles**. Pure **viveza criolla**."
-      - type: info
-        title: "Joke or confession?"
-        emoji: "⚖️"
-        body: "Argentines argue about **viveza criolla** at every sobremesa. Critics say it wears down trust: if everyone expects the other guy to cheat, nobody plays fair. Others push back: most people here are honest and tired of the label. Its opposite, and the one people are proud of, is **la gauchada**: a favor done for free."
-        fun_fact: "Plenty of Argentines blame viveza criolla for the country's problems. It's a joke and a confession at the same time."
-      - type: true_false
-        statement: "Plenty of Argentines criticise viveza criolla, even while they joke about it."
-        answer: true
-        explain: "It's cynical and self-critical at once. Admiring the **vivo** out loud would make most people wince."
-      - type: info
-        title: "Wire and hope"
-        emoji: "🌦️"
-        body: "**Atado con alambre**: 'tied up with wire', anything held together by a quick, improvised fix. A car, a plan, sometimes the whole economy. And for hard times: **siempre que llovió, paró**, 'every time it rained, it stopped'. When luck saves the day at the last second, someone will say **Dios es argentino**: God is Argentine."
-      - type: gap
-        prompt: "Your friend is devastated after losing her job. You want to comfort her."
-        text: "Tranqui, siempre que llovió, ___."
-        options: ["paró", "mamó", "lloró"]
-        correct: 0
-        translation: "Relax, it always stops raining eventually."
-        explain: "Hard times pass. It's one of the kindest things you can say."
-      - type: match
-        prompt: "Match the maxim to the situation"
-        pairs:
-          - ["Atado con alambre", "The fridge door is held shut with a belt"]
-          - ["Dios es argentino", "A goal in the 94th minute saves the team"]
-          - ["Hecha la ley, hecha la trampa", "A new tax, and everyone already knows how to dodge it"]
-          - ["El que no llora no mama", "You call the airline every day until they refund you"]
-    vocabulary:
-      - es: "el que no llora no mama"
-        en: "the squeaky wheel gets the grease"
-      - es: "hecha la ley, hecha la trampa"
-        en: "every law has its loophole"
-      - es: "el vivo vive del gil"
-        en: "the sharp one lives off the sucker (cynical)"
-      - es: "viveza criolla"
-        en: "getting ahead by cutting corners"
-        note: "Joked about and criticised at the same time."
-      - es: "atado con alambre"
-        en: "held together with a quick fix"
-        example: { es: "El auto anda, pero está atado con alambre.", en: "The car runs, but it's held together with tape." }
-      - es: "siempre que llovió, paró"
-        en: "hard times pass"
-      - es: "Dios es argentino"
-        en: "said after a lucky last-second escape"
-    glossary:
-      - es: "vivo"
-        en: "sharp, streetwise person"
-      - es: "gil"
-        en: "sucker, naive person"
-        note: "Argentine slang; mildly rude."
-      - es: "la gauchada"
-        en: "a favor done for free"
+        explain: "The **fila del colectivo** is sacred. Visitors are often amazed. Cutting it is the kind of viveza nobody forgives."
+      - type: card
+        text: "The fridge door shut with a belt, a car that runs on a prayer, sometimes the whole economy: **atado con alambre**. Held together with wire."
+      - type: card
+        text: "A goal in the 94th minute, a flight you caught by seconds. When luck saves the day, someone will say it: **Dios es argentino**. God is Argentine."
+      - type: card
+        text: "And for a friend going through hard times, the kindest one: **siempre que llovió, paró**. Every time it rained, it stopped."
+    vocabulary: []

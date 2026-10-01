@@ -63,6 +63,26 @@ hear, say or do because of this?".
 `npm run culture:validate` prints ⚠ warnings for vocabulary missing from the
 pages and for colliding glosses. Aim for zero.
 
+## Card classes
+
+Every section uses this shape since 2026-09-30 (the older info-page format below is kept only for reference): about culture, not words.
+A class is 5–8 **cards** and 2–3 **questions**, around two minutes.
+
+```yaml
+- type: card
+  text: "A fan is a **hincha**. The crowd is **la hinchada**. …"   # ≤ 40 words, one idea
+  chip: "Did you know?"                                           # optional; default is the class title
+```
+
+- Every card is shown in big type, so one idea per card. Cut the trivia: no
+  word origins unless the origin *is* the story.
+- Pick what's surprising or what the learner will actually meet (the
+  jumping Bombonera, the mufa friend), not what fills a textbook.
+- Questions are `choice` with only a `prompt`. They ask the learner to guess
+  something surprising, and the explain (or the next card) reveals it. No
+  "what does X mean?", nothing the card before just said.
+- No info pages, no `vocabulary` (leave it `[]`), so there's no word review.
+
 ## Page types
 
 ```yaml

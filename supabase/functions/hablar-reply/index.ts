@@ -8,13 +8,16 @@
 //   text      {"seq":n,"delta":"Jaja, "}                 reply text as it's written
 //   text_fix  {"seq":n,"from":"…","to":"…"}              sentence n was rewritten by the guard
 //   audio     {"seq":n,"text":"…","mp3":"<base64>"}      one per sentence, in order
-//   feedback  {has_error,severity,corrected,spans,why_en,better,goals_done}
-//   done      {"turn_id","tomas_turn_id","wrap_up","ended","goals_done","audio_path"}
+//   done      {"turn_id","tomas_turn_id","wrap_up","ended","audio_path"}
+//   feedback  {has_error,severity,corrected,spans,why_en,better}   usually before done, may come after
 //   error     {"stage":"claude|tts|feedback","retry":bool,"seq"?}
 //
 // Two Claude calls run in parallel: the streamed reply (cached persona + the
 // chat's level/scene block + history) and the structured feedback, which never
-// holds the reply up. Each finished sentence goes through the rioplatense guard
+// holds the reply up: `done` goes out as soon as the reply's audio has, and a
+// slower feedback follows it on the same stream. Pancho ends the chat himself by
+// closing his goodbye with END_MARKER, which is stripped before anything is
+// sent or spoken. Each finished sentence goes through the rioplatense guard
 // and then to ElevenLabs; several can be in TTS at once, but audio is sent in
 // order. All of it runs under EdgeRuntime.waitUntil, so a client that drops
 // mid-stream still gets its turn saved, and calling again with the same
@@ -31,15 +34,18 @@ import {
   CHAT_SECONDS,
   claudeUsage,
   concatBytes,
+  exchangeOf,
+  MarkerStripper,
   sessionElapsed,
   GRACE_SECONDS,
   hablarEnv,
   isUuid,
-  loadSession,
   logUsage,
   nextUserIdx,
   recordPause,
   serviceClient,
+  sessionRow,
+  shouldCloseSoon,
   shouldWrapUp,
   synthesize,
   tomasVoice,
@@ -51,6 +57,8 @@ import {
   type Usage,
 } from "../_shared/hablar.ts";
 import {
+  CLOSE_SOON_NOTE,
+  END_MARKER,
   FEEDBACK_SCHEMA,
   FEEDBACK_SYSTEM,
   feedbackInput,
@@ -89,7 +97,7 @@ async function storedReply(db: SupabaseClient, turnId: string): Promise<Turn | n
 }
 
 /** A turn already answered, sent again as one burst. */
-async function replay(sse: SseWriter, db: SupabaseClient, user: Turn, tomas: Turn, session: Session) {
+async function replay(sse: SseWriter, db: SupabaseClient, user: Turn, tomas: Turn) {
   sse.send("text", { seq: 0, delta: tomas.text });
   if (tomas.audio_path) {
     const { data } = await db.storage.from("hablar").download(tomas.audio_path);
@@ -102,15 +110,14 @@ async function replay(sse: SseWriter, db: SupabaseClient, user: Turn, tomas: Tur
     tomas_turn_id: tomas.id,
     wrap_up: Boolean(tomas.meta?.wrap_up),
     ended: Boolean(tomas.meta?.ended),
-    goals_done: session.goals_done,
     audio_path: tomas.audio_path,
     replay: true,
   });
   sse.close();
 }
 
-/** Only what the schema promised, with goals limited to this chat's own. */
-function cleanFeedback(raw: Feedback, line: string, goalIds: string[]): Feedback {
+/** Only what the schema promised. */
+function cleanFeedback(raw: Feedback, line: string): Feedback {
   const spans = (raw.spans ?? []).filter((s) => s && typeof s.from === "string" && typeof s.to === "string");
   return {
     has_error: Boolean(raw.has_error),
@@ -119,7 +126,6 @@ function cleanFeedback(raw: Feedback, line: string, goalIds: string[]): Feedback
     spans: raw.has_error ? spans : [],
     why_en: raw.has_error ? String(raw.why_en ?? "") : "",
     better: String(raw.better ?? ""),
-    goals_done: [...new Set((raw.goals_done ?? []).filter((g) => goalIds.includes(g)))],
   };
 }
 
@@ -152,9 +158,10 @@ async function runTurn(opts: {
   const { env, db, sse, session, topic, user, userIdx } = opts;
   const client = new Anthropic({ apiKey: env.anthropicKey, ...CLAUDE_OPTIONS });
   const usage: Usage[] = [];
-  const goalIds = topic.goals.map((g) => g.id);
   const elapsed = sessionElapsed(session);
-  const wrapUp = shouldWrapUp(elapsed, goalIds, session.goals_done);
+  const exchange = exchangeOf(userIdx);
+  const wrapUp = shouldWrapUp(elapsed, exchange);
+  const closeSoon = !wrapUp && shouldCloseSoon(elapsed, exchange);
   const tomasId = crypto.randomUUID();
 
   // History: every sent line before this one, oldest first.
@@ -175,6 +182,7 @@ async function runTurn(opts: {
   const notes = [
     session.hint_turns.includes(userIdx) && session.hint_turns.includes(userIdx - 2) ? SIMPLIFY_NOTE : "",
     wrapUp ? WRAP_UP_NOTE : "",
+    closeSoon ? CLOSE_SOON_NOTE : "",
   ].filter(Boolean);
   const messages: Anthropic.MessageParam[] = [
     { role: "user", content: "[La charla empieza.]" },
@@ -201,17 +209,19 @@ async function runTurn(opts: {
   ];
 
   // ----- feedback, in parallel -----
-  let feedback: Feedback | null = null;
   const feedbackDone = structured<Feedback>(client, {
     system: FEEDBACK_SYSTEM,
     schema: FEEDBACK_SCHEMA as unknown as Record<string, unknown>,
-    input: feedbackInput({ level: session.level, goals: topic.goals, goalsDone: session.goals_done, tomasBefore, line: user.text }),
+    input: feedbackInput({ level: session.level, tomasBefore, line: user.text }),
   })
-    .then(({ value, usage: u, ms }) => {
+    .then(async ({ value, usage: u, ms }) => {
       usage.push(claudeUsage({ conversation_id: session.id, turn_id: user.id, model: MODEL, stage: "feedback", ms }, u));
       if (!value) throw new Error("no feedback");
-      feedback = cleanFeedback(value, user.text, goalIds);
-      sse.send("feedback", feedback);
+      const fb = cleanFeedback(value, user.text);
+      sse.send("feedback", fb);
+      // Saved before the stream closes, so the summary (built once it has) sees it.
+      const { error } = await db.from("conversation_turns").update({ feedback: fb }).eq("id", user.id);
+      if (error) console.error("feedback save failed", error.message);
     })
     .catch((err) => {
       console.error("feedback failed", err);
@@ -219,7 +229,8 @@ async function runTurn(opts: {
     });
 
   // ----- sentence pipe: guard → TTS → audio in order -----
-  const voiceId = await tomasVoice(db).catch((err) => {
+  // Not waited on here: the reply starts streaming while the voice id loads.
+  const voice = tomasVoice(db).catch((err) => {
     console.error(err);
     return null;
   });
@@ -251,6 +262,7 @@ async function runTurn(opts: {
           console.error("guard rewrite failed", err);
         }
       }
+      const voiceId = await voice;
       if (!voiceId) return null;
       return await slot(async () => {
         const t0 = Date.now();
@@ -282,8 +294,15 @@ async function runTurn(opts: {
 
   // ----- the reply, streamed -----
   const splitter = new SentenceSplitter();
+  const endMark = new MarkerStripper(END_MARKER);
   let deltaSeq = 0;
   let replyText = "";
+  const take = (delta: string) => {
+    if (!delta) return;
+    replyText += delta;
+    sse.send("text", { seq: deltaSeq++, delta });
+    for (const s of splitter.push(delta)) enqueue(s);
+  };
   const t0 = Date.now();
   try {
     const stream = client.messages.stream({
@@ -296,12 +315,9 @@ async function runTurn(opts: {
       messages,
     });
     for await (const ev of stream) {
-      if (ev.type === "content_block_delta" && ev.delta.type === "text_delta") {
-        replyText += ev.delta.text;
-        sse.send("text", { seq: deltaSeq++, delta: ev.delta.text });
-        for (const s of splitter.push(ev.delta.text)) enqueue(s);
-      }
+      if (ev.type === "content_block_delta" && ev.delta.type === "text_delta") take(endMark.push(ev.delta.text));
     }
+    take(endMark.flush());
     const final = await stream.finalMessage();
     usage.push(claudeUsage({ conversation_id: session.id, turn_id: tomasId, model: MODEL, stage: "reply", ms: Date.now() - t0 }, final.usage));
     const rest = splitter.flush();
@@ -322,53 +338,38 @@ async function runTurn(opts: {
   }
 
   await emitChain;
-  await Promise.race([feedbackDone, sleep(15_000)]);
 
   // ----- save, then done -----
   const text = sentences.join(" ");
   const clips = audio.filter((a): a is Uint8Array<ArrayBuffer> => !!a);
   const audioPath = clips.length ? `${opts.userId}/${session.id}/${user.id}-tomas.mp3` : null;
-  const ended = wrapUp || sessionElapsed(session) >= CHAT_SECONDS;
+  const ended = wrapUp || endMark.found || sessionElapsed(session) >= CHAT_SECONDS;
 
-  let goalsDone = session.goals_done;
-  const fb = feedback as Feedback | null;
-  if (fb?.goals_done.length) {
-    const { data: s } = await db.from("conversations").select("goals_done").eq("id", session.id).single();
-    goalsDone = [...new Set([...(s?.goals_done ?? []), ...fb.goals_done])];
-    await db.from("conversations").update({ goals_done: goalsDone }).eq("id", session.id);
-  }
-  const [{ error: insertErr }] = await Promise.all([
-    db.from("conversation_turns").insert({
-      id: tomasId,
-      conversation_id: session.id,
-      idx: userIdx + 1,
-      role: "tomas",
-      status: "final",
-      text,
-      audio_path: audioPath,
-      reply_to: user.id,
-      meta: { wrap_up: wrapUp, ended },
-    }),
-    fb ? db.from("conversation_turns").update({ feedback: fb }).eq("id", user.id) : Promise.resolve(),
-  ]);
+  const { error: insertErr } = await db.from("conversation_turns").insert({
+    id: tomasId,
+    conversation_id: session.id,
+    idx: userIdx + 1,
+    role: "tomas",
+    status: "final",
+    text,
+    audio_path: audioPath,
+    reply_to: user.id,
+    meta: { wrap_up: wrapUp, ended },
+  });
   if (insertErr) console.error("tomas turn insert failed", insertErr.message);
 
-  sse.send("done", { turn_id: user.id, tomas_turn_id: tomasId, wrap_up: wrapUp, ended, goals_done: goalsDone, audio_path: audioPath });
+  // The learner can answer now; a feedback still in flight follows on the stream.
+  sse.send("done", { turn_id: user.id, tomas_turn_id: tomasId, wrap_up: wrapUp, ended, audio_path: audioPath });
+  const upload = audioPath
+    ? db.storage.from("hablar").upload(audioPath, new Blob([concatBytes(clips)], { type: "audio/mpeg" }), {
+      contentType: "audio/mpeg",
+      upsert: true,
+    }).then(({ error }) => error && console.error("reply mp3 upload failed", error.message))
+    : Promise.resolve();
+  await Promise.race([feedbackDone, sleep(15_000)]);
   sse.close();
 
-  await Promise.all([
-    audioPath
-      ? db.storage.from("hablar").upload(audioPath, new Blob([concatBytes(clips)], { type: "audio/mpeg" }), {
-        contentType: "audio/mpeg",
-        upsert: true,
-      }).then(({ error }) => error && console.error("reply mp3 upload failed", error.message))
-      : Promise.resolve(),
-    feedbackDone.then(async () => {
-      // Feedback that came after the 15 s cap still lands on the turn.
-      const late = feedback as Feedback | null;
-      if (late && !fb) await db.from("conversation_turns").update({ feedback: late }).eq("id", user.id);
-    }),
-  ]);
+  await Promise.all([upload, feedbackDone]);
   await logUsage(db, usage);
 }
 
@@ -379,29 +380,34 @@ Deno.serve(async (req) => {
 
   const env = hablarEnv();
   if (!env) return json({ error: "function is not configured" }, { status: 500 });
-  const who = await caller(req, env);
-  if (!who) return json({ error: "not authenticated" }, { status: 401 });
 
   let body: { session_id?: string; turn_id?: string; paused_seconds?: number };
   try {
     body = await req.json();
   } catch {
-    return json({ error: "invalid JSON" }, { status: 400 });
+    body = {};
   }
-  if (!isUuid(body.turn_id)) return json({ error: "turn_id must be a uuid" }, { status: 400 });
 
   const db = serviceClient(env);
-  // Read together rather than one after another: each is a round trip before
-  // Pancho can start talking. The turn is checked against the session below.
-  const [session, { data: turnRow }, stored] = await Promise.all([
-    loadSession(db, body.session_id, who.userId),
-    db.from("conversation_turns").select("*").eq("id", body.turn_id).maybeSingle(),
-    storedReply(db, body.turn_id),
+  // Read together rather than one after another, the auth check included: each
+  // is a round trip before Pancho can start talking. Nothing read is used until
+  // the caller is known and owns the session; the turn is checked against it below.
+  const turnId = isUuid(body.turn_id) ? body.turn_id : null;
+  const [who, row, { data: turnRow }, stored] = await Promise.all([
+    caller(req, env),
+    sessionRow(db, body.session_id),
+    turnId
+      ? db.from("conversation_turns").select("*").eq("id", turnId).maybeSingle()
+      : Promise.resolve({ data: null }),
+    turnId ? storedReply(db, turnId) : Promise.resolve(null),
   ]);
+  if (!who) return json({ error: "not authenticated" }, { status: 401 });
+  if (!turnId) return json({ error: "turn_id must be a uuid" }, { status: 400 });
+  const session = row && row.user_id === who.userId ? row : null;
   if (!session) return json({ error: "no such session" }, { status: 404 });
   // Not waited on: nothing below needs the write, only the value on `session`.
   background(recordPause(db, session, body.paused_seconds));
-  const topic = topicOf(session.kind, session.topic_id, session.level);
+  const topic = topicOf(session.kind, session.topic_id, session.level, session.scenario);
   if (!topic) return json({ error: "this chat's topic no longer exists" }, { status: 410 });
 
   let user = turnRow as Turn | null;
@@ -419,7 +425,7 @@ Deno.serve(async (req) => {
   }
   if (answered) {
     const sse = sseStream();
-    background(replay(sse, db, user, answered, session));
+    background(replay(sse, db, user, answered));
     return sse.response;
   }
 

@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import { Platform, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 
 import { type ArPack, arPacks, arThemes, packTone, packsOf } from '@/lib/argentine';
-import { themeArt, themeObject } from '@/lib/argentine-art';
+import { themeObject } from '@/lib/argentine-art';
 import { type PackScore, useShowAdult } from '@/lib/argentine-scores';
 import { clay, colors, font, gradients, pastel, pastelGrad, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
@@ -81,7 +81,7 @@ export function ArgentineHub({ scores }: { scores: Record<string, PackScore> }) 
                     </FitText>
                     <View style={styles.tileTrack}>
                       <LinearGradient
-                        colors={gradients.deep}
+                        colors={gradients.progress}
                         style={[styles.tileFill, { width: `${(done / packs.length) * 100}%` }]}
                       />
                     </View>
@@ -127,39 +127,29 @@ export function ArgentineHub({ scores }: { scores: Record<string, PackScore> }) 
 }
 
 /**
- * What this half is, said the way a word card says a word: a clay sticker
- * pinned on the durazno at a tilt, the capybara beside it on its pod, and her
- * progress right on the tile — no card of its own, so the themes come sooner.
+ * What this half is, said the way the Culture tab says what it is: a kicker, a
+ * heading and one line, straight on the oat — then her progress as one bar, so
+ * the themes come sooner.
  */
 function Banner({ learned, total }: { learned: number; total: number }) {
   const pct = total ? Math.round((learned / total) * 100) : 0;
   return (
-    <View style={styles.banner}>
-      <LinearGradient colors={pastelGrad.peach} style={StyleSheet.absoluteFill} pointerEvents="none" />
-      <View style={styles.bannerPod} />
-      <View style={styles.bannerTop}>
-        <View style={styles.bannerLeft} accessibilityRole="header" accessibilityLabel="Lunfardo: Argentine slang">
-          <View style={styles.bannerCard}>
-            <FitText style={styles.bannerWord} lines={1}>
-              lunfardo
-            </FitText>
-            <Text style={styles.bannerTag}>ARGENTINE SLANG</Text>
-          </View>
-          <Text style={styles.bannerSub}>The words locals actually use.</Text>
-        </View>
-        <Image source={themeArt('casa')} style={styles.bannerCapy} contentFit="contain" accessible={false} />
-      </View>
+    <View style={styles.intro}>
+      <Text style={styles.kicker}>Argentine slang</Text>
+      <Text style={styles.heading} accessibilityRole="header">
+        Talk like a local
+      </Text>
+      <Text style={styles.lead}>The words locals actually use.</Text>
       <View style={styles.progress} accessibilityLabel={`${learned} of ${total} words learned`}>
-        <View style={styles.progressRow}>
-          <View style={styles.progressCount}>
-            <Text style={styles.progressBig}>{learned}</Text>
-            <Text style={styles.progressOf}>of {total} words</Text>
-          </View>
-          <Text style={styles.progressPct}>{pct}%</Text>
-        </View>
         <View style={styles.track}>
-          <View style={[styles.fill, { width: `${Math.max(pct, learned ? 3 : 0)}%` }]} />
+          <LinearGradient
+            colors={gradients.progress}
+            style={[styles.fill, { width: `${Math.max(pct, learned ? 3 : 0)}%` }]}
+          />
         </View>
+        <Text style={styles.progressOf}>
+          {learned} of {total}
+        </Text>
       </View>
     </View>
   );
@@ -209,59 +199,28 @@ function KeepGoing({ pack }: { pack: ArPack }) {
   );
 }
 
-/** Text on the durazno banner: the pastel ink, a touch softer for asides. */
-const BANNER_SUB = 'rgba(58, 42, 32, 0.8)';
 
 const styles = StyleSheet.create({
   container: { gap: 18, paddingBottom: 32 },
 
-  banner: { padding: 18, gap: 14, borderRadius: radius.xl, overflow: 'hidden', boxShadow: clay.surface },
-  bannerPod: {
-    position: 'absolute',
-    right: -14,
-    top: 8,
-    width: 128,
-    height: 128,
-    borderRadius: 64,
-    backgroundColor: colors.pod,
-  },
-  bannerTop: { flexDirection: 'row', alignItems: 'flex-start', gap: 8 },
-  bannerLeft: { flex: 1, gap: 14, alignItems: 'flex-start' },
-  bannerCard: {
-    backgroundColor: colors.card,
-    borderRadius: 18,
-    paddingTop: 10,
-    paddingBottom: 8,
-    paddingHorizontal: 16,
-    boxShadow: clay.surface,
-    transform: [{ rotate: '-3deg' }],
-  },
-  bannerWord: { ...font.display[800], fontSize: 36, lineHeight: 40, letterSpacing: -1, color: colors.ink },
-  bannerTag: { ...font.body[800], fontSize: 10, letterSpacing: 1.3, color: colors.onPastel, opacity: 0.8 },
-  bannerSub: { ...font.body[600], fontSize: 15, lineHeight: 20, color: BANNER_SUB, paddingLeft: 4 },
-  bannerCapy: { width: 92, height: 136, marginRight: -6, marginBottom: -20 },
+  // The same header as the Culture tab.
+  intro: { gap: 6, paddingHorizontal: 2, paddingTop: 4 },
+  /** Durazno, darkened until it reads as text on the oat. */
+  kicker: { ...font.body[800], fontSize: 16, letterSpacing: 1.6, textTransform: 'uppercase', color: '#A8502C' },
+  heading: { ...font.display[800], fontSize: 40, lineHeight: 42, letterSpacing: -1, color: colors.ink },
+  lead: { ...font.body[600], fontSize: 16, lineHeight: 22, color: colors.muted },
 
-  progress: { gap: 8 },
-  progressRow: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' },
-  progressCount: { flexDirection: 'row', alignItems: 'baseline', gap: 6 },
-  progressBig: {
-    ...font.display[800],
-    fontSize: 26,
-    lineHeight: 30,
-    letterSpacing: -0.5,
-    color: colors.onPastel,
-    fontVariant: ['tabular-nums'],
-  },
-  progressOf: { ...font.body[700], fontSize: 14, color: BANNER_SUB },
-  progressPct: { ...font.body[800], fontSize: 13, color: BANNER_SUB, fontVariant: ['tabular-nums'] },
+  progress: { flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 10 },
+  progressOf: { ...font.body[800], fontSize: 13, color: colors.muted, fontVariant: ['tabular-nums'] },
   track: {
-    height: 10,
+    flex: 1,
+    height: 16,
     borderRadius: radius.pill,
     backgroundColor: colors.trough,
     boxShadow: clay.trough,
     overflow: 'hidden',
   },
-  fill: { height: '100%', borderRadius: radius.pill, backgroundColor: colors.onPastel },
+  fill: { height: '100%', borderRadius: radius.pill },
 
   // The capybara stands above the card's top edge, so the card leaves it room
   // and does not clip.

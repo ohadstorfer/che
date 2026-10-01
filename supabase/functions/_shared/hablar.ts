@@ -20,6 +20,8 @@ export type ScenarioVersion = {
   setting_es: string;
   setting_en: string;
   role_es: string;
+  /** Written scenarios leave it to the app's bundle; a unit's scene carries it. */
+  role_en?: string;
   goals: Goal[];
   key_phrases: Line[];
   opener: Line;
@@ -76,8 +78,13 @@ export type Topic = {
   goals: Goal[];
 };
 
-/** What a session is about, from its kind, topic id and level. Null if the topic no longer exists. */
-export function topicOf(kind: string, topicId: string | null, level: Band): Topic | null {
+/**
+ * What a session is about, from its kind, topic id and level. Null if the
+ * topic no longer exists. A unit chat's scene isn't in the bundle: it is the
+ * copy the conversation kept (`stored`, the row's `scenario`).
+ */
+export function topicOf(kind: string, topicId: string | null, level: Band, stored?: Scenario | null): Topic | null {
+  if (kind === "unit") return stored ? { scenario: stored, culture: null, goals: stored.goals } : null;
   if (kind === "scenario") {
     const scenario = scenarioAt(topicId, level);
     return scenario ? { scenario, culture: null, goals: scenario.goals } : null;
@@ -97,8 +104,9 @@ export const publicAudioUrl = (supabaseUrl: string, path: string | null | undefi
 // The clock (§4.5 step 2). The server decides; the client timer is a display.
 // ---------------------------------------------------------------------------
 
-export const CHAT_SECONDS = 300; // 5:00
-export const WRAP_SECONDS = 270; // 4:30 — Pancho is told to close
+export const CHAT_SECONDS = 180; // 3:00 — the hard stop; Pancho usually closes around 2:00
+export const CLOSE_SOON_SECONDS = 100; // Pancho is told it's about time to close
+export const WRAP_SECONDS = 150; // 2:30 — Pancho is told to close now
 export const GRACE_SECONDS = 30; // a turn already being recorded at 5:00 still counts
 export const PAUSE_CAP_SECONDS = 900; // at most 15 min of background time
 export const MAX_HINTS = 3;
@@ -134,10 +142,22 @@ export function mergePaused(stored: number, reported: unknown): number {
   return Math.max(0, Math.min(next, PAUSE_CAP_SECONDS));
 }
 
-/** Should this reply close the chat? At 4:30, or once every goal is done. */
-export function shouldWrapUp(elapsed: number, goalIds: string[], goalsDone: string[]): boolean {
-  if (elapsed >= WRAP_SECONDS) return true;
-  return goalIds.length > 0 && goalIds.every((g) => goalsDone.includes(g));
+// Pancho decides when the chat ends (the END_MARKER on his goodbye). These
+// nudge him when he hasn't: by time, or by exchanges for a clockless staff chat.
+const CLOSE_SOON_EXCHANGES = 6;
+const WRAP_EXCHANGES = 10;
+
+/** The learner's nth line, from its idx (opener 0, learner lines 1, 3, 5…). */
+export const exchangeOf = (userIdx: number) => Math.ceil(userIdx / 2);
+
+/** Must this reply close the chat? At 2:30, or after ten exchanges. */
+export function shouldWrapUp(elapsed: number, exchange: number): boolean {
+  return elapsed >= WRAP_SECONDS || exchange >= WRAP_EXCHANGES;
+}
+
+/** Should Pancho be told it's about time to close? */
+export function shouldCloseSoon(elapsed: number, exchange: number): boolean {
+  return elapsed >= CLOSE_SOON_SECONDS || exchange >= CLOSE_SOON_EXCHANGES;
 }
 
 // ---------------------------------------------------------------------------
@@ -304,7 +324,8 @@ export type Session = {
   id: string;
   user_id: string;
   local_date: string;
-  kind: "scenario" | "culture" | "free";
+  kind: "scenario" | "culture" | "free" | "unit";
+  /** A unit chat: its unit's id. */
   topic_id: string | null;
   level: Band;
   started_at: string;
@@ -317,13 +338,22 @@ export type Session = {
   summary: Record<string, unknown> | null;
   /** Staff chat: no clock, no daily limit. */
   unlimited: boolean;
+  /** A unit chat: the Speaking lesson it plays, and the scene it ran. */
+  lesson_id?: string | null;
+  scenario?: Scenario | null;
 };
+
+/** The session row, whoever it belongs to — check `user_id` before using it. */
+export async function sessionRow(db: SupabaseClient, sessionId: unknown): Promise<Session | null> {
+  if (typeof sessionId !== "string" || !isUuid(sessionId)) return null;
+  const { data } = await db.from("conversations").select("*").eq("id", sessionId).maybeSingle();
+  return (data as Session) ?? null;
+}
 
 /** The session, if it exists and belongs to the caller. */
 export async function loadSession(db: SupabaseClient, sessionId: unknown, userId: string): Promise<Session | null> {
-  if (typeof sessionId !== "string" || !isUuid(sessionId)) return null;
-  const { data } = await db.from("conversations").select("*").eq("id", sessionId).maybeSingle();
-  return data && data.user_id === userId ? (data as Session) : null;
+  const row = await sessionRow(db, sessionId);
+  return row && row.user_id === userId ? row : null;
 }
 
 /** Store a client pause report if it moves the total; returns the total. */
@@ -498,4 +528,41 @@ export function concatBytes(parts: Uint8Array[]): Uint8Array<ArrayBuffer> {
     at += p.length;
   }
   return out;
+}
+
+// ---------------------------------------------------------------------------
+// End marker: Pancho ends his goodbye with it; it is never shown or spoken.
+// ---------------------------------------------------------------------------
+
+/**
+ * Takes the streamed reply a delta at a time and passes on everything but the
+ * marker. A tail that could be the start of the marker is held back until the
+ * next delta shows whether it is; anything after the marker is dropped.
+ */
+export class MarkerStripper {
+  found = false;
+  private held = "";
+  constructor(private readonly marker: string) {}
+
+  push(delta: string): string {
+    if (this.found) return "";
+    const buf = this.held + delta;
+    const at = buf.indexOf(this.marker);
+    if (at >= 0) {
+      this.found = true;
+      this.held = "";
+      return buf.slice(0, at);
+    }
+    let keep = Math.min(buf.length, this.marker.length - 1);
+    while (keep > 0 && !this.marker.startsWith(buf.slice(buf.length - keep))) keep--;
+    this.held = buf.slice(buf.length - keep);
+    return buf.slice(0, buf.length - keep);
+  }
+
+  /** What was held back, once the stream is over (it wasn't the marker). */
+  flush(): string {
+    const rest = this.found ? "" : this.held;
+    this.held = "";
+    return rest;
+  }
 }

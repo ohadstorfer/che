@@ -2,477 +2,187 @@ section:
   slug: "historia-moderna"
   title: "Historia: el siglo XX y hoy"
   emoji: "📜"
-  summary: "Coups, Perón, the dictatorship, Malvinas, 2001 and why everyone thinks in dollars"
+  summary: "Perón, the dictatorship, Malvinas, 2001 and why everyone thinks in dollars"
 
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
 classes:
   # ─────────────────────────────────────────────────────────────
   - slug: "golpes-peron-y-evita"
     title: "Coups, Perón and Evita"
-    summary: "From the 1930 coup to the man who still splits family asados"
+    summary: "The man who still splits family asados, and the woman millions mourned"
     pages:
-      - type: info
-        title: "A century of coups"
-        emoji: "🪖"
-        body: "From 1930 on, the army overthrew governments again and again, most of them elected. A coup is a **golpe de Estado**, usually just **golpe**. The 1930s even got a nickname, the **Década Infame** (Infamous Decade), for its openly rigged elections. The good news: since **1983** Argentina has had uninterrupted democracy, its longest run ever, and most Argentines guard that fiercely."
-
-      - type: true_false
-        statement: "Argentina's last military coup happened during the crisis of the 1990s."
-        answer: false
-        explain: "The last one was in 1976. Democracy came back in 1983 and has held ever since, through hyperinflation, 2001 and everything else."
-
-      - type: info
-        title: "Enter Perón"
-        emoji: "🎖️"
-        body: "**Juan Domingo Perón** was an army colonel in the government born of the 1943 coup. As labour secretary he backed unions and pushed new rights for workers: pensions, paid holidays, labour courts. Many workers felt they had never had a friend that high up. The army's old guard, the bosses and much of the middle class got nervous."
-        fun_fact: "The **aguinaldo**, an extra month's pay split into June and December, dates from those years. Argentines still count on it every year."
-
-      - type: info
-        title: "17 de octubre de 1945"
-        emoji: "✊"
-        body: "His rivals forced Perón out and locked him up on **Isla Martín García**. On **17 October 1945**, huge crowds of workers marched into Plaza de Mayo demanding his release. Some cooled their tired feet in the fountains, an image that became legend. That night Perón spoke from the balcony of the Casa Rosada. Peronists still celebrate it as the **Día de la Lealtad** (Loyalty Day)."
-
+      - type: card
+        text: "For half a century, the army overthrew governments again and again. The good news: since 1983 Argentina has had its longest run of democracy ever, and most Argentines guard it fiercely."
+      - type: card
+        text: "**Juan Domingo Perón** was a colonel in the government of the 1943 coup. As labor secretary he backed the unions: pensions, paid holidays, labor courts. Many workers felt they finally had a friend up high."
       - type: choice
-        scenario: "It's 17 October. Your Argentine friend posts a photo of Plaza de Mayo with 'Feliz Día de la Lealtad'."
-        prompt: "What are they celebrating?"
-        options: ["Independence Day", "The march that freed Perón", "Maradona's birthday", "The end of the dictatorship"]
-        correct: 1
-        explain: "The workers' loyalty to Perón, and his to them. Four months after that march he won the presidency."
-
-      - type: info
-        title: "Evita"
-        emoji: "🌹"
-        body: "**Eva Duarte**, a young actress from a small town in Buenos Aires province, married Perón. As **Evita** she ran a foundation that built hospitals, schools and homes, and gave aid directly to the poor. She pushed the law that gave women the vote. She died of cancer at just 33, and millions queued for days to say goodbye."
-        fun_fact: "When Madonna came to film *Evita*, plenty of Argentines were not amused. Peronist groups protested, and graffiti against her showed up in Buenos Aires."
-
-      - type: info
-        title: "Los descamisados"
-        emoji: "👕"
-        body: "Opponents sneered at Perón's supporters as **descamisados**, 'the shirtless ones': poor, rough, not fit for politics. Perón and Evita flipped the insult and wore it with pride. Workers who had felt invisible suddenly felt that the country was theirs too. That feeling of **dignidad** is the heart of what Peronists love about Perón."
-
-      - type: match
-        prompt: "Match the word to what it means today"
-        pairs:
-          - ["descamisado", "a proud label for poor workers"]
-          - ["aguinaldo", "extra pay in June and December"]
-          - ["Día de la Lealtad", "the Peronist 17 October"]
-          - ["Evita", "her foundation, and women's vote"]
-
-      - type: info
-        title: "Why it still splits families"
-        emoji: "🍖"
-        body: "After a coup in 1955, Peronism was banned for almost two decades. Perón came back, won again and died in office. For supporters, Peronism means social justice and workers' rights. Critics point to censorship, a personality cult, jailed opponents and costly economics. Peronists call their opponents **gorilas**. The divide is **la grieta**, 'the crack', and it often runs through the family asado."
-
-      - type: choice
-        scenario: "At a family asado, your girlfriend's tío grumbles that her new neighbour 'es un gorila'."
-        prompt: "What does he mean?"
-        options: ["The neighbour is very hairy", "The neighbour is anti-Peronist", "The neighbour is a Peronist"]
-        correct: 1
-        explain: "It's a jab, so keep it for when you know the room. Anti-Peronists have their own words for Peronists, too."
-
-      - type: gap
-        prompt: "Your friend explains why nobody talks politics at Sunday lunch."
-        text: "Es por la ___: mitad peronistas, mitad gorilas."
-        options: ["grieta", "sopa", "lluvia"]
+        prompt: "In 1945 Perón's rivals forced him out and locked him up on an island. What got him out?"
+        options:
+          - "A mass march of workers"
+          - "A secret deal with the navy"
+          - "A ruling from the Supreme Court"
         correct: 0
-        translation: "It's the divide: half Peronists, half gorilas."
-        explain: "**La grieta** runs through families, friendships and group chats. Many asados have a no-politics rule for a reason."
-
-    vocabulary:
-      - es: "golpe de Estado"
-        en: "coup"
-        example: { es: "Hubo un golpe en 1930.", en: "There was a coup in 1930." }
-      - es: "descamisado"
-        en: "'shirtless one': proud label of poor workers"
-      - es: "peronista"
-        en: "Peronist"
-        example: { es: "Mi abuela es peronista de toda la vida.", en: "My grandma has always been a Peronist." }
-      - es: "gorila"
-        en: "what Peronists call their opponents"
-        note: "A jab. Not a word for a first meeting."
-      - es: "la grieta"
-        en: "the political divide"
-      - es: "aguinaldo"
-        en: "extra month's pay, split into June and December"
-      - es: "lealtad"
-        en: "loyalty"
-    glossary:
-      - es: "golpe"
-        en: "coup"
-        note: "Short for golpe de Estado."
-      - es: "Década Infame"
-        en: "Infamous Decade"
-      - es: "dignidad"
-        en: "dignity"
+        explain: "On **17 de octubre**, workers marched into the square and demanded him back. Some cooled their tired feet in the fountains, an image that became legend."
+      - type: card
+        text: "That night Perón spoke from the balcony of the Casa Rosada. Peronists still celebrate 17 October as the **Día de la Lealtad**, Loyalty Day."
+      - type: card
+        text: "**Evita**, a young actress from a small town, married Perón. Her foundation built hospitals and schools, and she pushed the law that gave women the vote. She died at 33. Millions queued for days to say goodbye."
+      - type: card
+        text: "Opponents sneered at Perón's supporters as **descamisados**, the shirtless ones. Perón and Evita turned the insult into a badge of pride."
+      - type: choice
+        prompt: "Peronists have an animal nickname for anti-Peronists. Which animal?"
+        options:
+          - "Gorila"
+          - "Gallina"
+          - "Cuervo"
+        correct: 0
+        explain: "**Gorila**. It's a jab, so keep it for when you know the room. Anti-Peronists have their own names for Peronists, too."
+      - type: card
+        text: "A 1955 coup threw Perón out and banned Peronism for almost two decades. He came back, won again and died in office. For fans, social justice. For critics, censorship and a personality cult."
+      - type: card
+        chip: "Pro tip"
+        text: "The divide is **la grieta**, the crack, and it runs right through the family asado. Plenty of families have a no-politics rule at Sunday lunch. Respect it."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "la-ultima-dictadura"
     title: "The last dictatorship"
-    summary: "1976–1983: the disappeared, the Madres and Abuelas, and 'Nunca Más'"
+    summary: "1976–1983: the disappeared, the Madres and Abuelas, and “Nunca más”"
     pages:
-      - type: info
-        title: "24 de marzo de 1976"
-        emoji: "🗓️"
-        body: "After Perón died in 1974, his widow and vice-president, **Isabel Perón**, took over amid guerrilla attacks, killings by the far-right **Triple A** and economic chaos. On **24 March 1976** a military junta led by **Jorge Rafael Videla** seized power. It called itself the Proceso de Reorganización Nacional. Argentines just say **el Proceso**, or **la dictadura**."
-
-      - type: info
-        title: "Los desaparecidos"
-        emoji: "🕯️"
-        body: "The regime hunted anyone it called 'subversive': guerrillas, but also union delegates, students, lawyers, priests, teenagers. People were kidnapped, taken to secret detention centres like the **ESMA**, tortured, and most were murdered, many thrown alive from planes into the sea. Families got no answers. The victims became **los desaparecidos**, the disappeared. Today you can visit the ESMA as a memory site."
-
-      - type: true_false
-        statement: "In Argentina, 'los desaparecidos' refers to people who fled abroad during the dictatorship."
-        answer: false
-        explain: "**Desaparecidos** are people the state kidnapped and made vanish, with no record, no body, no answer. Many others did go into exile, but they are called **exiliados**."
-
-      - type: info
-        title: "How many?"
-        emoji: "📋"
-        body: "Human rights organisations speak of **30,000** desaparecidos, and '30.000' appears on banners every 24 March. It is an estimate: the regime destroyed its records, so a full count may never exist. Official records document close to 9,000 proven cases, disappeared or killed. The figure is contested, and when politicians question the 30,000 it sparks fierce public debate."
-
-      - type: info
-        title: "Las Madres de Plaza de Mayo"
-        emoji: "🤍"
-        body: "In 1977, a handful of mothers met in Plaza de Mayo to ask where their children were. Gatherings were banned, so when police told them to move along, they walked in pairs around the pyramid. They covered their heads with **pañuelos blancos**, white headscarves. They still walk there on Thursday afternoons, and the headscarf is painted on the ground around the **Pirámide de Mayo**."
-        fun_fact: "Their founder, **Azucena Villaflor**, was herself disappeared the same year."
-
+      - type: card
+        text: "After Perón died came chaos: guerrilla attacks, far-right death squads, a failing economy. On **24 de marzo de 1976** a military junta led by **Jorge Rafael Videla** seized power."
+      - type: card
+        text: "The regime hunted anyone it called “subversive”: guerrillas, but also union delegates, students, lawyers, teenagers. People were kidnapped, taken to secret centers like the **ESMA**, tortured, and most were murdered."
+      - type: card
+        text: "Families got no body and no answer. The victims became **los desaparecidos**, the disappeared. Human rights groups speak of 30,000. The regime destroyed its records, so a full count may never exist."
       - type: choice
-        scenario: "Thursday afternoon, Plaza de Mayo. A group of older women in white headscarves walk slowly around the monument in the middle."
-        prompt: "Who are they?"
-        options: ["A church procession", "The Madres de Plaza de Mayo", "A tour group", "Nurses on strike"]
-        correct: 1
-        explain: "The Madres have walked there every Thursday for decades. If you're there, stand back and watch in silence; many visitors do."
-
-      - type: info
-        title: "Las Abuelas and the stolen babies"
-        emoji: "🧬"
-        body: "Pregnant prisoners gave birth in captivity; their babies were handed to other families, often close to the regime, under false identities. The **Abuelas de Plaza de Mayo** (grandmothers) have searched for them ever since, helping pioneer DNA methods to prove kinship. Each **nieto restituido** (grandchild who got their identity back) makes the news: by 2025 there were 140, and the search goes on."
-
-      - type: match
-        prompt: "Match the name to what it is"
-        pairs:
-          - ["Madres de Plaza de Mayo", "Mothers asking for their disappeared children"]
-          - ["Abuelas de Plaza de Mayo", "Grandmothers searching for stolen babies"]
-          - ["pañuelo blanco", "The white headscarf that became their symbol"]
-          - ["ESMA", "Navy school used as a detention centre, now a memory site"]
-
-      - type: info
-        title: "Nunca Más"
-        emoji: "⚖️"
-        body: "After democracy returned, a commission led by writer **Ernesto Sabato** published its report, **Nunca Más** ('Never Again'). Then civilian judges tried the juntas in the **Juicio a las Juntas**; prosecutor **Julio Strassera** closed with 'Señores jueces: nunca más.' Videla got life. Amnesty laws and pardons followed, but they were annulled or struck down in the 2000s and trials continue today. Every 24 March, the Day of Memory, crowds march for **Memoria, Verdad y Justicia**."
-        fun_fact: "The trial is the subject of the film *Argentina, 1985*, nominated for the Oscar for best international film."
-
-      - type: true_false
-        statement: "The leaders of the junta were put on trial by civilian courts after democracy returned."
-        answer: true
-        explain: "The Juicio a las Juntas, in 1985, was one of the first times a country tried its own former dictators in ordinary courts. Argentines are rightly proud of it."
-
-      - type: gap
-        prompt: "24 March is the Day of Memory, a national holiday. Its motto is:"
-        text: "Memoria, Verdad y ___."
-        options: ["Justicia", "Libertad", "Paz"]
+        prompt: "In 1977, mothers of the disappeared met in Plaza de Mayo. Gatherings were banned, and police told them to move along. What did they do?"
+        options:
+          - "Kept walking in pairs around the monument"
+          - "Moved their meetings into a church nearby"
+          - "Went home and wrote letters abroad"
         correct: 0
-        translation: "Memory, Truth and Justice."
-        explain: "Every **24 de marzo** hundreds of thousands march to Plaza de Mayo, with photos of the disappeared and the chant 'Nunca más'."
-
-    vocabulary:
-      - es: "la dictadura"
-        en: "the dictatorship"
-      - es: "desaparecido"
-        en: "person disappeared by the state"
-        example: { es: "Su tío es un desaparecido.", en: "Her uncle is one of the disappeared." }
-      - es: "pañuelo blanco"
-        en: "white headscarf (symbol of the Madres)"
-      - es: "Madres de Plaza de Mayo"
-        en: "Mothers of the Plaza de Mayo"
-      - es: "Abuelas de Plaza de Mayo"
-        en: "Grandmothers of the Plaza de Mayo"
-      - es: "nieto restituido"
-        en: "stolen grandchild who recovered their identity"
-      - es: "Nunca Más"
-        en: "Never Again"
-      - es: "memoria"
-        en: "memory, remembrance"
-        example: { es: "Memoria, Verdad y Justicia.", en: "Memory, Truth and Justice." }
-    glossary:
-      - es: "el Proceso"
-        en: "the Process (the dictatorship's own name)"
-      - es: "pañuelos blancos"
-        en: "white headscarves"
-      - es: "Pirámide de Mayo"
-        en: "May Pyramid (the obelisk in Plaza de Mayo)"
-      - es: "Juicio a las Juntas"
-        en: "Trial of the Juntas"
+        explain: "Standing still was a gathering. Walking wasn't. So they walked, with white headscarves on their heads."
+      - type: card
+        text: "They're the **Madres de Plaza de Mayo**, and they still walk there on Thursday afternoons. Their white **pañuelo** is painted on the ground around the square's monument."
+      - type: card
+        text: "Babies born to prisoners were handed to other families under false names. The **Abuelas de Plaza de Mayo**, the grandmothers, have searched for them ever since."
+      - type: choice
+        prompt: "With the parents gone, how could the Abuelas prove a young person was their grandchild?"
+        options:
+          - "A DNA test using the grandparents' blood"
+          - "Matching old baby photos"
+          - "Birth records kept secretly by nurses"
+        correct: 0
+        explain: "They helped push scientists to create a “grandparent” DNA test. Each **nieto restituido**, a grandchild who gets their identity back, makes national news."
+      - type: card
+        text: "In 1985 civilian judges put the junta leaders on trial. The prosecutor closed with **“Señores jueces: nunca más.”** Videla got life. The film *Argentina, 1985* tells that story."
+      - type: card
+        text: "Every 24 March, the **Día de la Memoria**, hundreds of thousands march to Plaza de Mayo with photos of the disappeared: **Memoria, Verdad y Justicia**."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "malvinas"
     title: "Malvinas"
-    summary: "The 1982 war, the veterans, and a claim nearly every Argentine shares"
+    summary: "The 1982 war, the young soldiers, and a claim nearly every Argentine shares"
     pages:
-      - type: info
-        title: "The islands"
-        emoji: "🏝️"
-        body: "The **Islas Malvinas** sit in the South Atlantic, off the coast of Patagonia. Britain has held them since **1833**, when it expelled the Argentine authorities there, and Argentina has claimed them ever since. The British call them the Falklands. In Argentina, always say **Malvinas**: 'Falklands' lands very badly."
-
-      - type: info
-        title: "2 de abril de 1982"
-        emoji: "⚓"
-        body: "The dictatorship, now led by **Leopoldo Galtieri**, faced a collapsing economy and growing protests. On **2 April 1982** Argentine troops landed on the islands, and crowds cheered in Plaza de Mayo. Margaret Thatcher's government sent a naval task force. Argentina surrendered in June. **649 Argentines** died, and British soldiers and islanders died too. The defeat sank the junta: democracy returned the next year."
-
-      - type: info
-        title: "The soldiers"
-        emoji: "🎗️"
-        body: "Most who fought were **conscriptos**, 18- and 19-year-olds doing compulsory military service, known as **la colimba**. They were sent to freezing trenches, often underfed and badly equipped, and some later reported abuse from their own officers. When the cruiser **ARA General Belgrano** was sunk, 323 men died, about half of all Argentine deaths."
-
-      - type: true_false
-        statement: "Most of the Argentine soldiers in Malvinas were career professionals."
-        answer: false
-        explain: "Most were young conscripts, barely out of school, sent to fight in the South Atlantic winter."
-
-      - type: info
-        title: "Ex combatientes y caídos"
-        emoji: "🇦🇷"
-        body: "Today the survivors are honoured as **ex combatientes** (veterans), and the dead as **los caídos**, the fallen. **2 April** is a national holiday: the Day of the Veterans and the Fallen in the Malvinas War. For years many veterans felt forgotten, and the war's wounds, physical and mental, are still an open subject."
-
+      - type: card
+        text: "The **Islas Malvinas** sit in the South Atlantic, off Patagonia. Britain has held them since 1833 and Argentina has claimed them ever since. Here, always say **Malvinas**, never Falklands."
+      - type: card
+        text: "In 1982 the dictatorship faced a collapsing economy and growing protests. On **2 de abril** its troops landed on the islands, and crowds cheered in Plaza de Mayo. Britain sent a fleet."
       - type: choice
-        scenario: "It's 2 April. Schools are closed, and there are flags and ceremonies all over the country."
-        prompt: "Who are people remembering?"
-        options: ["Malvinas veterans and the fallen", "The victims of the dictatorship", "The heroes of independence"]
+        prompt: "Who made up most of Argentina's troops on the islands?"
+        options:
+          - "Conscripts doing military service"
+          - "Career soldiers with years of training"
+          - "Volunteers who signed up after the landing"
         correct: 0
-        explain: "The date the troops landed became the day for the people who were sent there. The victims of the dictatorship have their own day, 24 March."
-
-      - type: info
-        title: "Las Malvinas son argentinas"
-        emoji: "🪧"
-        body: "You'll see **'Las Malvinas son argentinas'** on road signs, murals and buses. The claim to **soberanía** (sovereignty) is written into the Constitution. It's one of the few things almost all Argentines agree on, across parties. The war is another matter: most see it as a doomed gamble by the dictatorship. The islanders voted in 2013 to stay British; Argentina does not accept that vote as deciding the question."
-
+        explain: "Most were **conscriptos** of 18 or 19, barely out of school, sent to freezing trenches, often underfed and badly equipped."
+      - type: card
+        text: "649 Argentines died. Almost half of them went down with one ship, the cruiser **General Belgrano**."
       - type: choice
-        scenario: "Your taxi driver hears your English accent and says, half-smiling: 'Las Malvinas son argentinas, eh.'"
-        prompt: "What's the best response?"
-        options: ["Argue that they're British", "Say 'Sí, lo sé' and ask him about it", "Pretend you didn't hear"]
-        correct: 1
-        explain: "It's usually a friendly-ish poke, not hostility. Listening goes a long way: many Argentines have a relative or neighbour who fought there."
-
-      - type: gap
-        prompt: "Complete the phrase you'll see all over the country"
-        text: "Las Malvinas ___ argentinas."
-        options: ["son", "estaban", "eran"]
+        prompt: "During the war, what did most people at home hear from the news?"
+        options:
+          - "That Argentina was winning"
+          - "Nothing until it was over"
+          - "Daily counts of the dead"
         correct: 0
-        translation: "The Malvinas are Argentine."
-        explain: "Said as a permanent fact, and definitely not in the past tense."
-
-      - type: true_false
-        statement: "Defeat in Malvinas helped bring down the dictatorship."
-        answer: true
-        explain: "The defeat discredited the military. Galtieri was replaced within days, and elections were held in October 1983."
-
-    vocabulary:
-      - es: "las Malvinas"
-        en: "the Falkland Islands (Argentine name)"
-        example: { es: "Las Malvinas son argentinas.", en: "The Malvinas are Argentine." }
-      - es: "ex combatiente"
-        en: "Malvinas veteran (lit. former combatant)"
-      - es: "conscripto"
-        en: "young man doing compulsory service"
-      - es: "la colimba"
-        en: "military service (slang)"
-        note: "Conscription ended in 1994, so older people use it most."
-      - es: "los caídos"
-        en: "the fallen"
-      - es: "soberanía"
-        en: "sovereignty"
-        example: { es: "Reclamamos la soberanía sobre las islas.", en: "We claim sovereignty over the islands." }
-    glossary:
-      - es: "veterano"
-        en: "veteran"
+        explain: "Censored news and magazines kept saying **“estamos ganando”**, we're winning, almost until the surrender in June. The shock turned into fury, and the junta fell. Democracy came back in 1983."
+      - type: card
+        text: "Today 2 April is a national holiday for the **ex combatientes** and **los caídos**, the veterans and the fallen. For years many veterans felt forgotten, and the wounds are still an open subject."
+      - type: card
+        text: "You'll see **“Las Malvinas son argentinas”** on road signs, murals and buses. The claim is one of the few things almost everyone agrees on. The war is different: most see it as the dictatorship's doomed gamble."
+      - type: card
+        chip: "Pro tip"
+        text: "If it comes up, listen more than you argue. Plenty of Argentines have a relative or neighbor who fought there."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "democracia-y-crisis"
     title: "Democracy, hyperinflation and 2001"
-    summary: "From Alfonsín to 'que se vayan todos'"
+    summary: "From Alfonsín to “que se vayan todos”"
     pages:
-      - type: info
-        title: "Vuelve la democracia"
-        emoji: "🗳️"
-        body: "In 1983 **Raúl Alfonsín**, of the Radical party (UCR), won the election and took office on **10 December**. He closed his rallies reciting the Preamble of the Constitution, and promised that 'con la democracia se come, se cura y se educa': with democracy, people eat, heal and learn. Every 10 December marks another year of democracy."
-
-      - type: info
-        title: "Hiperinflación"
-        emoji: "🔥"
-        body: "The economy didn't cooperate. Debt was huge, and a new currency, the **austral**, soon crumbled. In 1989 prices went wild: yearly inflation passed **3,000%**. Supermarkets relabelled prices several times a day, and there were **saqueos**, lootings. Alfonsín handed power to the Peronist **Carlos Menem** months early."
-
+      - type: card
+        text: "In 1983 democracy returned with **Raúl Alfonsín**. His promise is still quoted: **“con la democracia se come, se cura y se educa”**. With democracy, people eat, heal and learn."
+      - type: card
+        text: "The economy didn't cooperate. By the end of the decade prices went wild: yearly inflation passed 3,000%. Supermarkets relabeled prices several times a day."
       - type: choice
-        scenario: "It's 1989 and you just got paid in australes."
-        prompt: "What's the smart move?"
-        options: ["Save it for next year", "Spend it right away", "Frame a note as a souvenir"]
-        correct: 1
-        explain: "With prices climbing by the day, money lost value in your pocket. People ran to the supermarket on payday, a reflex some Argentines still have."
-
-      - type: info
-        title: "Convertibilidad: 1 peso = 1 dólar"
-        emoji: "💵"
-        body: "In 1991, Menem's economy minister **Domingo Cavallo** launched the **convertibilidad**: by law, one peso was worth one dollar, and you could swap them freely. Within a few years inflation fell to almost zero. The '90s brought privatisations, cheap imports and cheap trips abroad."
-        fun_fact: "Argentine shoppers abroad got the nickname **'deme dos'** ('give me two') in the cheap-dollar years around 1980, and it came right back in the '90s."
-
-      - type: info
-        title: "The hangover"
-        emoji: "🤕"
-        body: "Supporters remember the stability after years of chaos. Critics remember the rest: factories closed, unemployment passed 18%, and debt piled up to keep the peg alive. By the end of the decade the country was in recession, and the 1-to-1 dollar was getting hard to hold. Opinions on the '90s still split dinner tables."
-
-      - type: true_false
-        statement: "Unemployment fell during the convertibilidad years."
-        answer: false
-        explain: "Prices calmed down, but jobs didn't follow: many factories couldn't compete with cheap imports. That's the part critics remember."
-
-      - type: info
-        title: "Diciembre de 2001"
-        emoji: "🥘"
-        body: "Under President **Fernando de la Rúa**, people rushed to pull their money out. In December 2001 the government capped cash withdrawals: the **corralito**, 'little pen'. The middle class took to the streets banging pots: the **cacerolazo**. On 19 and 20 December protests and repression left dozens dead. De la Rúa resigned and left the Casa Rosada by helicopter."
-
-      - type: info
-        title: "Que se vayan todos"
-        emoji: "📢"
-        body: "The chant was **'¡Que se vayan todos!'**: 'Out with all of them', every politician. Five presidents came and went in about twelve days. Then the 1-to-1 peso ended, and the **devaluación** (devaluation) wiped out much of people's savings. That's why many Argentines still don't trust banks, and why so many save in dollars."
-
-      - type: true_false
-        statement: "After 2001, many Argentines stopped trusting banks with their savings."
-        answer: true
-        explain: "Many still keep savings in dollars, and some in cash at home. The corralito taught a whole generation to be careful."
-
-      - type: match
-        prompt: "Match the word to its meaning"
-        pairs:
-          - ["corralito", "Limit on taking cash out of the bank"]
-          - ["cacerolazo", "Protest banging pots and pans"]
-          - ["saqueo", "Looting"]
-          - ["hiperinflación", "Prices rising out of control"]
-
-      - type: gap
-        prompt: "Complete the chant of 2001"
-        text: "¡Que se ___ todos!"
-        options: ["vayan", "queden", "callen"]
+        prompt: "It's 1989 and you just got paid. What's the smart move?"
+        options:
+          - "Spend it all that same day"
+          - "Put it in a savings account"
+          - "Keep it at home for next month"
         correct: 0
-        translation: "Out with all of them!"
-        explain: "It's a demand: 'let them all go'. You'll still see it painted on walls and shouted at protests."
-
-    vocabulary:
-      - es: "hiperinflación"
-        en: "hyperinflation"
-      - es: "saqueo"
-        en: "looting"
-      - es: "convertibilidad"
-        en: "the 1991–2002 one-peso-one-dollar system"
-      - es: "corralito"
-        en: "2001 cap on bank withdrawals"
-        example: { es: "Con el corralito no podías sacar tu plata.", en: "With the corralito you couldn't take your money out." }
-      - es: "cacerolazo"
-        en: "pot-banging protest"
-      - es: "¡que se vayan todos!"
-        en: "out with all of them!"
-      - es: "devaluación"
-        en: "devaluation"
-    glossary:
-      - es: "austral"
-        en: "austral (old Argentine currency)"
-      - es: "'deme dos'"
-        en: "'give me two' (shopping-spree nickname)"
+        explain: "Money lost value in your pocket by the hour. People ran to the supermarket on payday, a reflex some Argentines still have."
+      - type: card
+        text: "In 1991 a law fixed it: **one peso = one dollar**, the **convertibilidad**. Inflation fell to almost zero. The decade brought cheap imports and cheap trips abroad."
+      - type: card
+        text: "The hangover came later: factories closed, unemployment passed 18%, debt piled up to keep the peg alive. That decade still splits dinner tables."
+      - type: card
+        text: "December 2001: people rushed to pull out their savings, so the government capped withdrawals. That's the **corralito**. The middle class hit the streets banging pots: the **cacerolazo**."
+      - type: choice
+        prompt: "The protests brought down President De la Rúa, who fled the Casa Rosada by helicopter. How many presidents did Argentina have in about twelve days?"
+        options:
+          - "Five"
+          - "Two"
+          - "Three"
+        correct: 0
+        explain: "Five presidents came and went. The chant on every street was **“¡Que se vayan todos!”**: out with all of them."
+      - type: card
+        text: "Then the one-to-one peso ended, and the devaluation wiped out much of people's savings. A whole generation learned never to fully trust a bank again."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "pensar-en-dolares"
     title: "Money today: thinking in dollars"
     summary: "Inflation, the dólar blue, arbolitos and cash under the mattress"
     pages:
-      - type: info
-        title: "Pesos to spend, dollars to save"
-        emoji: "💸"
-        body: "After decades of inflation, devaluations and a corralito, Argentines learned one lesson: save in dollars. Flats and cars are priced in dollars (**U$S**). Pesos, the everyday **plata** (money), are for spending, fast. Plenty of savings sit at home in cash, **bajo el colchón**, under the mattress. Argentines are thought to hold more US banknotes per person than almost anyone outside the US."
-
+      - type: card
+        text: "After all that, Argentines live by one rule: pesos to spend, dollars to save. Plenty of savings sit at home in cash, **bajo el colchón**, under the mattress."
       - type: choice
-        scenario: "You're flat-hunting in Palermo. The listing says 'U$S 120.000'."
-        prompt: "How is a deal like this usually paid?"
-        options: ["In pesos, by card", "In US dollars, often in cash", "In monthly instalments of mate"]
-        correct: 1
-        explain: "Property is typically bought in dollars, and it's common for the notes to be counted on the spot at signing."
-
-      - type: info
-        title: "Inflación, the national sport"
-        emoji: "📈"
-        body: "When the monthly inflation figure comes out, it's headline news. People **remarcan**, relabel prices, and everyone compares: '¿Viste lo que sale el café?' Yearly inflation passed 200% in 2023, then slowed sharply. Whether it stays low is a matter of hot debate. Either way, every Argentine is a part-time economist."
-
-      - type: info
-        title: "El dólar blue"
-        emoji: "💙"
-        body: "For years, buying dollars legally was capped by currency controls, the **cepo**. So a parallel market boomed: the **dólar blue**, usually pricier than the official rate. Nobody fully agrees why it's called 'blue'. At one point there were over a dozen dollar rates, even a **dólar Coldplay**. Hence the small talk that rivals the weather: **¿A cuánto está el dólar?**"
-
-      - type: choice
-        scenario: "Walking down calle Florida in Buenos Aires, a man on the corner mutters at you: 'Cambio, cambio, dólar, euro, real...'"
-        prompt: "What is he offering?"
-        options: ["Directions to the bus stop", "To change money, off the books", "Tickets to a tango show"]
-        correct: 1
-        explain: "He's an **arbolito**, a street money changer, offering the blue rate. They're a classic sight on Florida."
-
-      - type: info
-        title: "Arbolitos y cuevas"
-        word: { es: "arbolito", tag: "Street money changer", en: "a \"little tree\" on the corner" }
-        emoji: "🌳"
-        body: "The **arbolito** ('little tree') stands on the pavement all day, like a tree, and takes you to a **cueva**, a 'cave': a back office where the swap happens. It's informal, and fake notes happen. Bring clean, newer US$100 bills: older **cara chica** (small face) notes often get a worse rate than **cara grande** ones. Since 2025 dollars can be bought freely again, but the habit of checking remains."
-
-      - type: true_false
-        statement: "At a cueva, an older small-face $100 bill can get you fewer pesos than a newer one."
-        answer: true
-        explain: "The **cara chica** discount is real. The newest bills, with a blue security ribbon, are the most welcome. Leave the old ones at home."
-
-      - type: info
-        title: "Paying as a visitor"
-        emoji: "💳"
-        body: "Before you pay, ask. Many shops and restaurants give a discount for **efectivo** (cash) or bank transfer, and some quote prices in dollars too. Carry a mix: a card for big things, pesos for kioscos, small shops and tips. When someone asks **¿Efectivo o tarjeta?**, it's not small talk: the answer can change the price."
-
-      - type: match
-        prompt: "Match the money word to its meaning"
-        pairs:
-          - ["arbolito", "Street money changer"]
-          - ["cueva", "Back-room exchange office"]
-          - ["cepo", "Currency controls"]
-          - ["colchón", "Where the cash savings hide"]
-          - ["remarcar", "To relabel prices"]
-
-      - type: gap
-        prompt: "The small-talk question that rivals the weather"
-        text: "¿A cuánto está el ___ hoy?"
-        options: ["dólar", "mate", "subte"]
+        prompt: "You're buying a flat in Palermo. How is it usually paid for?"
+        options:
+          - "In US dollars, often counted in cash"
+          - "In pesos, by bank transfer"
+          - "In monthly peso instalments"
         correct: 0
-        translation: "What's the dollar at today?"
-        explain: "Argentines check the dollar the way others check the weather. Ask it and you'll sound like a local."
-
-    vocabulary:
-      - es: "plata"
-        en: "money"
-        example: { es: "No tengo plata.", en: "I don't have any money." }
-      - es: "dólar blue"
-        en: "informal-market dollar rate"
-      - es: "arbolito"
-        en: "street currency dealer"
-      - es: "cueva"
-        en: "back-room exchange office"
-      - es: "cepo"
-        en: "limits on buying foreign currency"
-      - es: "inflación"
-        en: "inflation"
-      - es: "remarcar"
-        en: "to relabel prices"
-      - es: "bajo el colchón"
-        en: "under the mattress (savings kept at home)"
-      - es: "¿A cuánto está el dólar?"
-        en: "What's the dollar at?"
-      - es: "efectivo"
-        en: "paying in notes and coins"
-    glossary:
-      - es: "U$S"
-        en: "US dollars (Argentine notation)"
-      - es: "remarcan"
-        en: "they raise prices"
-      - es: "dólar Coldplay"
-        en: "Coldplay dollar (concert-ticket rate)"
-      - es: "cara chica"
-        en: "older US$100 bill (small portrait)"
-      - es: "cara grande"
-        en: "newer US$100 bill (big portrait)"
+        explain: "Flats and cars are priced in dollars (**U$S**), and it's common for the notes to be counted on the spot at signing."
+      - type: card
+        text: "Inflation even ate the money itself. Your Argentine grandparents may have used five different currencies, each one born by chopping zeros off the last."
+      - type: card
+        text: "For years buying dollars was capped, so a parallel market boomed: the **dólar blue**. At one point there were over a dozen dollar rates, even a **dólar Coldplay** for concert tickets."
+      - type: choice
+        prompt: "On calle Florida, a man keeps muttering “Cambio, cambio.” Locals call him an **arbolito**, a little tree. Why, the story goes?"
+        options:
+          - "He stands in the same spot all day, like a tree"
+          - "He hides behind street trees from the police"
+          - "The first ones worked out of a city park"
+        correct: 0
+        explain: "He's a street money changer. He'll walk you to a **cueva**, a “cave”: the back office where the swap happens."
+      - type: card
+        text: "Since 2025 anyone can buy dollars freely again. The habit stays: **¿A cuánto está el dólar?** is small talk, like the weather."
+      - type: card
+        chip: "Pro tip"
+        text: "Before you pay, ask. Many shops give a discount for **efectivo** (cash) or transfer. When they ask **“¿Efectivo o tarjeta?”**, the answer can change the price."
+    vocabulary: []

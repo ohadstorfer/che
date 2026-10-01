@@ -3,7 +3,7 @@
 //
 // Body: { session_id, reason: 'user'|'time', paused_seconds? }. Idempotent: a
 // chat that already has a summary gets the same one back. The summary is built
-// from what is stored — goals from the session, the top 3 corrections from the
+// from what is stored — the top 3 corrections from the
 // feedback already on the turns, nothing re-graded — plus one structured call
 // for "phrases worth keeping" and "what went well". The three corrected lines
 // are recorded in Pancho's voice for ▶️ and Decilo.
@@ -28,11 +28,10 @@ import {
   serviceClient,
   synthesize,
   tomasVoice,
-  topicOf,
   TTS_MODEL,
   type Usage,
 } from "../_shared/hablar.ts";
-import { SUMMARY_SCHEMA, SUMMARY_SYSTEM, type Feedback } from "../_shared/hablar-prompt.ts";
+import { LEVEL_GRAMMAR, SUMMARY_SCHEMA, SUMMARY_SYSTEM, type Feedback } from "../_shared/hablar-prompt.ts";
 import { Anthropic, MODEL, structured } from "../_shared/hablar-claude.ts";
 
 const SEVERITY_RANK: Record<string, number> = { meaning: 0, target: 1, minor: 2, none: 3 };
@@ -57,25 +56,23 @@ Deno.serve(async (req) => {
   const session = await loadSession(db, body.session_id, who.userId);
   if (!session) return json({ error: "no such session" }, { status: 404 });
   if (session.summary) return json({ summary: session.summary, streak: null });
-  await recordPause(db, session, body.paused_seconds);
-
   const reason = body.reason === "time" ? "time" : "user";
   const endedAt = session.ended_at ?? new Date().toISOString();
-  if (!session.ended_at) {
-    await db.from("conversations").update({ ended_at: endedAt, end_reason: reason }).eq("id", session.id).is("ended_at", null);
-  }
-
-  const { data: rows } = await db
-    .from("conversation_turns")
-    .select("id, idx, role, status, text, feedback")
-    .eq("conversation_id", session.id)
-    .not("idx", "is", null)
-    .order("idx");
+  // Independent writes and the read, together rather than one after another.
+  const [, , { data: rows }] = await Promise.all([
+    recordPause(db, session, body.paused_seconds),
+    session.ended_at
+      ? Promise.resolve()
+      : db.from("conversations").update({ ended_at: endedAt, end_reason: reason }).eq("id", session.id).is("ended_at", null),
+    db
+      .from("conversation_turns")
+      .select("id, idx, role, status, text, feedback")
+      .eq("conversation_id", session.id)
+      .not("idx", "is", null)
+      .order("idx"),
+  ]);
   const turns = (rows ?? []).filter((t) => t.role === "tomas" || t.status === "final");
   const userTurns = turns.filter((t) => t.role === "user");
-
-  const topic = topicOf(session.kind, session.topic_id, session.level);
-  const goals = (topic?.goals ?? []).map((g) => ({ ...g, done: session.goals_done.includes(g.id) }));
 
   // Top 3 corrections: what blocks meaning first, then the level's targets, then the rest; earlier first.
   const corrections = userTurns
@@ -101,6 +98,7 @@ Deno.serve(async (req) => {
     if (!userTurns.length) return { phrases: [] as { es: string; en: string }[], went_well: null as string | null };
     const input = [
       `Level: ${session.level}`,
+      `Grammar the level allows (for the phrases): ${LEVEL_GRAMMAR[session.level]}`,
       "Conversation:",
       ...turns.map((t) => `${t.role === "tomas" ? "Pancho" : "Learner"}: ${t.text}`),
       corrections.length
@@ -151,11 +149,19 @@ Deno.serve(async (req) => {
     }));
   })();
 
-  // The streak: only for a chat whose day is still today where she lives.
+  // A unit chat she said something in finishes its Speaking lesson on the road.
+  const lessonId = session.kind === "unit" && userTurns.length ? session.lesson_id ?? null : null;
+
+  // The streak: only for a chat whose day is still today where she lives. A
+  // unit chat finished on a later day still finishes its lesson, credited to
+  // that day.
   const streak = (async () => {
     const today = localDate(await profileTimezone(db, who.userId));
-    if (today !== session.local_date) return { credited: false, row: null };
-    const { data, error } = await who.asUser.rpc("finish_lesson", { p_local_date: session.local_date });
+    if (today !== session.local_date && !lessonId) return { credited: false, row: null };
+    const { data, error } = await who.asUser.rpc("finish_lesson", {
+      p_local_date: today,
+      ...(lessonId ? { p_lesson_id: lessonId } : {}),
+    });
     if (error) {
       console.error("finish_lesson failed", error.message);
       return { credited: false, row: null };
@@ -179,11 +185,11 @@ Deno.serve(async (req) => {
     ended_at: endedAt,
     reason: session.end_reason ?? reason,
     turns: userTurns.length,
-    goals,
     corrections,
     phrases,
     went_well,
     streak_credited: credit.credited,
+    ...(session.kind === "unit" ? { title: session.scenario?.title_en ?? null, lesson_done: Boolean(lessonId && credit.credited) } : {}),
   };
   await db.from("conversations").update({ summary }).eq("id", session.id);
   background(logUsage(db, usage));

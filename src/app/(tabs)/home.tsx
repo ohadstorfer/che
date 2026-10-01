@@ -127,10 +127,32 @@ const KIND_LABEL: Partial<Record<LessonKind, string>> = {
   listening: 'Listening',
   review: 'Unit check',
   checkpoint: 'Unit check',
+  speak: 'Speaking',
+  slang: 'Slang',
+  culture: 'Culture',
 };
 
-/** A check ahead wears its trophy, locked, so she can see the unit's end coming. */
-const isCheck = (kind: LessonKind) => kind === 'review' || kind === 'checkpoint';
+type IoniconName = React.ComponentProps<typeof Ionicons>['name'];
+
+/**
+ * What a step wears: the same icons as the tabs its classes belong to, so the
+ * road says what each step is — a lesson, Slang (Words), Culture, a chat with
+ * Pancho (Speaking) — and the face's colour says how far she is. Always the
+ * outline: the solid glyphs sat on the clay faces as heavy dark blots, and
+ * the tab bar is line icons too. A check ahead wears its trophy, so she can
+ * see the unit's end coming.
+ */
+const KIND_GLYPH: Record<LessonKind, IoniconName> = {
+  lesson: 'book-outline',
+  practice: 'book-outline',
+  story: 'reader-outline',
+  listening: 'headset-outline',
+  review: 'trophy-outline',
+  checkpoint: 'trophy-outline',
+  slang: 'albums-outline',
+  culture: 'cafe-outline',
+  speak: 'chatbubble-ellipses-outline',
+};
 
 // On web, react-native-web turns this into a real CSS transition so the pill
 // press eases instead of snapping.
@@ -306,14 +328,10 @@ const PathStep = memo(function PathStep({
             row is cut to the pill while it grows rather than spilling past it. */}
         <View pointerEvents="none" style={styles.glyphs}>
           <Animated.View style={[styles.glyph, { opacity: anim.lockedOn }]}>
-            <MaterialCommunityIcons
-              name={isCheck(kind) ? 'trophy-outline' : 'lock-outline'}
-              size={26}
-              color={path.lockedGlyph}
-            />
+            <Ionicons name={KIND_GLYPH[kind]} size={26} color={path.lockedGlyph} />
           </Animated.View>
           <Animated.View style={[styles.glyph, { opacity: anim.doneOn }]}>
-            <MaterialCommunityIcons name="check-bold" size={28} color={tone.ink} />
+            <Ionicons name={KIND_GLYPH[kind]} size={27} color={tone.ink} />
           </Animated.View>
           <Animated.View style={[styles.startRow, { opacity: anim.currentOn }]}>
             <View style={styles.disc}>
@@ -428,7 +446,7 @@ type BannerTone = {
   grad: readonly [string, string];
   ink: string;
   track: string;
-  /** The progress fill; null draws the rosa gradient. */
+  /** The progress fill; null draws the progress gradient. */
   fill: string | null;
 };
 const onTone = (grad: readonly [string, string]): BannerTone => ({ grad, ink: colors.onPastel, track: colors.trough, fill: null });
@@ -499,7 +517,7 @@ function UnitBanner({
                   tone.fill ? { backgroundColor: tone.fill } : null,
                 ]}>
                 {tone.fill ? null : (
-                  <LinearGradient pointerEvents="none" colors={gradients.deep} style={StyleSheet.absoluteFill} />
+                  <LinearGradient pointerEvents="none" colors={gradients.progress} style={StyleSheet.absoluteFill} />
                 )}
               </View>
             ) : null}
@@ -1066,6 +1084,12 @@ export default function Home() {
       ? paywall('lesson')
       : lesson.kind === 'story'
       ? router.push(`/story?lesson=${lesson.id}`)
+      : lesson.kind === 'speak'
+      ? router.push(`/hablar-brief?kind=unit&lesson=${lesson.id}`)
+      : lesson.kind === 'slang'
+      ? router.push(`/argentine-round?lesson=${lesson.id}`)
+      : lesson.kind === 'culture'
+      ? router.push(`/culture-class?lesson=${lesson.id}`)
       : router.push(`/practice?lesson=${lesson.id}`);
 
   // Jumping ahead (learning-engine-spec §7): a unit or section still ahead can

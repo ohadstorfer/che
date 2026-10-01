@@ -5,6 +5,9 @@
 import { queryLinked } from './db.mjs';
 import { ids } from './ids.mjs';
 
+/** Lessons the outline doesn't hold: stories, and the speak · slang · culture classes every unit gets. */
+const OFF_OUTLINE = new Set(['story', 'speak', 'slang', 'culture']);
+
 const live = (r) => r.status !== 'retired';
 const byOrdinal = (a, b) => a.ordinal - b.ordinal;
 
@@ -42,7 +45,8 @@ export function outlineFromRows(rows) {
         status: u.status,
         sample: null,
         lessons: rows.lessons
-          .filter((l) => l.unit_id === u.id && live(l) && l.kind !== 'story')
+          // Stories and a unit's extra classes (unit-extras.mjs) have no slots to plan.
+          .filter((l) => l.unit_id === u.id && live(l) && !OFF_OUTLINE.has(l.kind))
           .sort(byOrdinal)
           .map(({ id, unit_id, ordinal, title_en, kind, status }) => ({ id, unit_id, ordinal, title_en, kind, status })),
         tips: rows.tips

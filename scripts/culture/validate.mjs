@@ -7,6 +7,7 @@ import { parse } from 'yaml';
 const DIR = 'docs/culture';
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const MAX_INFO_WORDS = 90; // spec says ~70; this is the hard stop
+const MAX_CARD_WORDS = 40; // a card is read in big type: one idea, one breath
 
 const str = (v) => typeof v === 'string' && v.trim().length > 0;
 const words = (s) => s.trim().split(/\s+/).length;
@@ -32,18 +33,25 @@ export function validate(doc) {
     for (const k of ['title', 'summary']) if (!str(c[k])) err(at, `missing ${k}`);
 
     const pages = c.pages ?? [];
+    // A card class: big one-idea cards and a few questions, no info pages and no word review.
+    const cards = pages.some((p) => p?.type === 'card');
     if (pages.length < 5 || pages.length > 12) err(at, `${pages.length} pages (want 5–12)`);
-    if (pages[0]?.type !== 'info') err(at, 'first page must be info');
+    if (pages[0]?.type !== (cards ? 'card' : 'info')) err(at, `first page must be ${cards ? 'card' : 'info'}`);
+    if (cards && pages.some((p) => p?.type === 'info')) err(at, 'a card class has no info pages');
     let infoRun = 0;
     let questions = 0;
 
     for (const [pi, p] of pages.entries()) {
       const pat = `${at} page ${pi + 1} (${p?.type})`;
-      infoRun = p.type === 'info' ? infoRun + 1 : 0;
-      if (infoRun > 3) err(pat, 'more than 3 info pages in a row');
-      if (p.type !== 'info') questions++;
+      infoRun = p.type === 'info' || p.type === 'card' ? infoRun + 1 : 0;
+      if (infoRun > 3) err(pat, `more than 3 ${p.type} pages in a row`);
+      if (p.type !== 'info' && p.type !== 'card') questions++;
 
       switch (p.type) {
+        case 'card':
+          if (!str(p.text)) err(pat, 'missing text');
+          else if (words(p.text) > MAX_CARD_WORDS) err(pat, `card is ${words(p.text)} words`);
+          break;
         case 'info':
           if (!str(p.title) || !str(p.body)) err(pat, 'needs title and body');
           else if (words(p.body) > MAX_INFO_WORDS) err(pat, `body is ${words(p.body)} words`);
@@ -87,9 +95,11 @@ export function validate(doc) {
       }
     }
     if (questions < 2) err(at, 'fewer than 2 questions');
+    if (cards && questions > 3) err(at, `${questions} questions (a card class wants 2–3)`);
 
     const vocab = c.vocabulary ?? [];
-    if (vocab.length < 4 || vocab.length > 10) err(at, `${vocab.length} vocabulary words (want 4–10)`);
+    if (cards ? vocab.length > 0 : vocab.length < 4 || vocab.length > 10)
+      err(at, `${vocab.length} vocabulary words (want ${cards ? 'none in a card class' : '4–10'})`);
     for (const v of vocab) {
       if (!str(v.es) || !str(v.en)) err(at, `vocabulary entry needs es and en: ${JSON.stringify(v)}`);
       if (v.example && !(str(v.example.es) && str(v.example.en))) err(at, `example needs es and en: ${v.es}`);
@@ -117,7 +127,7 @@ const ARTICLE = /^(el|la|los|las|un|una|unos|unas)\s+/;
 function taughtText(pages) {
   const parts = [];
   for (const p of pages) {
-    parts.push(p.title, p.body, p.fun_fact, p.word?.es, p.scenario, p.prompt, p.statement, p.text);
+    parts.push(p.title, p.body, p.text, p.fun_fact, p.word?.es, p.scenario, p.prompt, p.statement, p.text);
     for (const o of p.options ?? []) parts.push(o);
     for (const it of p.items ?? []) parts.push(it);
     for (const pr of p.pairs ?? []) parts.push(...pr);

@@ -12,7 +12,10 @@ import {
   nearestBand,
   nextUserIdx,
   resolveLevel,
+  MarkerStripper,
+  shouldCloseSoon,
   shouldWrapUp,
+  exchangeOf,
   sttKeyterms,
   topicOf,
 } from "./hablar.ts";
@@ -35,8 +38,8 @@ Deno.test("pauses are capped at 15 minutes and at the wall time itself", () => {
 });
 
 Deno.test("deadline moves with the pauses", () => {
-  assertEquals(deadlineAt(start, 0, at(10)), "2026-09-25T12:05:00.000Z");
-  assertEquals(deadlineAt(start, 90, at(200)), "2026-09-25T12:06:30.000Z");
+  assertEquals(deadlineAt(start, 0, at(10)), "2026-09-25T12:03:00.000Z");
+  assertEquals(deadlineAt(start, 90, at(200)), "2026-09-25T12:04:30.000Z");
 });
 
 Deno.test("pause reports only grow, and cap", () => {
@@ -46,11 +49,15 @@ Deno.test("pause reports only grow, and cap", () => {
   assertEquals(mergePaused(30, undefined), 30);
 });
 
-Deno.test("wrap up at 4:30, or when every goal is done", () => {
-  assertEquals(shouldWrapUp(269, ["a", "b"], ["a"]), false);
-  assertEquals(shouldWrapUp(270, [], []), true);
-  assertEquals(shouldWrapUp(60, ["a", "b"], ["b", "a"]), true);
-  assertEquals(shouldWrapUp(60, [], []), false);
+Deno.test("wrap up at 2:30 or after ten exchanges; nudge at 1:40 or six", () => {
+  assertEquals(shouldWrapUp(149, 9), false);
+  assertEquals(shouldWrapUp(150, 1), true);
+  assertEquals(shouldWrapUp(0, 10), true);
+  assertEquals(shouldCloseSoon(99, 5), false);
+  assertEquals(shouldCloseSoon(100, 1), true);
+  assertEquals(shouldCloseSoon(0, 6), true);
+  assertEquals(exchangeOf(1), 1);
+  assertEquals(exchangeOf(11), 6);
 });
 
 Deno.test("level: band of the section, and the override chip", () => {
@@ -107,6 +114,15 @@ Deno.test("content: every scenario resolves at every level, keyterms are bounded
   assertEquals(topicOf("free", null, "A1")!.goals, []);
 });
 
+Deno.test("a unit chat plays the scene it kept, and nothing without one", () => {
+  const kept = { ...topicOf("scenario", "cafe", "A1")!.scenario!, id: "unit-id" };
+  const t = topicOf("unit", "unit-id", "A1", kept)!;
+  assertEquals(t.scenario, kept);
+  assertEquals(t.goals, kept.goals);
+  assertEquals(topicOf("unit", "unit-id", "A1", null), null);
+  assertEquals(topicOf("unit", "unit-id", "A1"), null);
+});
+
 Deno.test("a level with no version gets the nearest one, the easier on a tie", () => {
   assertEquals(nearestBand(["A1", "A2", "B1", "B2"], "B1"), "B1");
   assertEquals(nearestBand(["B1"], "A1"), "B1");
@@ -115,4 +131,16 @@ Deno.test("a level with no version gets the nearest one, the easier on a tie", (
   assertEquals(nearestBand([], "A2"), null);
   assertEquals(topicOf("scenario", "cafe", "B2")!.scenario!.goals[0].id, "complain");
   assertEquals(topicOf("scenario", "entrevista", "A1")!.scenario!.band, "B2");
+});
+
+Deno.test("end marker: stripped across deltas, text kept otherwise", () => {
+  const run = (deltas: string[]) => {
+    const m = new MarkerStripper("[FIN]");
+    const out = deltas.map((d) => m.push(d)).join("") + m.flush();
+    return { out, found: m.found };
+  };
+  assertEquals(run(["Chau, ¡nos vemos! [F", "IN]"]), { out: "Chau, ¡nos vemos! ", found: true });
+  assertEquals(run(["Chau [FIN]", " extra"]), { out: "Chau ", found: true });
+  assertEquals(run(["Hola [", "casa] bien"]), { out: "Hola [casa] bien", found: false });
+  assertEquals(run(["Termina en [F"]), { out: "Termina en [F", found: false });
 });

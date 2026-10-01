@@ -55,18 +55,13 @@ Deno.serve(async (req) => {
 
   const env = hablarEnv();
   if (!env) return json({ error: "function is not configured" }, { status: 500 });
-  const who = await caller(req, env);
-  if (!who) return json({ error: "not authenticated" }, { status: 401 });
-
   if (Number(req.headers.get("content-length") ?? 0) > MAX_BYTES + 64 * 1024) {
     return json({ error: "audio too long" }, { status: 413 });
   }
-  let form: FormData;
-  try {
-    form = await req.formData();
-  } catch {
-    return json({ error: "expected multipart/form-data" }, { status: 400 });
-  }
+  // The auth check runs while the upload is read, not before it.
+  const [who, form] = await Promise.all([caller(req, env), req.formData().catch(() => null)]);
+  if (!who) return json({ error: "not authenticated" }, { status: 401 });
+  if (!form) return json({ error: "expected multipart/form-data" }, { status: 400 });
   const typed = form.get("text");
   if (typeof typed === "string") return typedTurn(env, who.userId, form, typed);
 
@@ -91,18 +86,24 @@ Deno.serve(async (req) => {
   if (purpose === "turn" && !isUuid(turnId)) return json({ error: "turn_id must be a uuid" }, { status: 400 });
 
   const db = serviceClient(env);
-  const session = await loadSession(db, form.get("session_id"), who.userId);
+  const sessionId = form.get("session_id");
+  // Read together: each is a round trip before speech-to-text can start.
+  // Nothing is used until the session is known to be the caller's.
+  const [session, { count }, { data: existing }] = await Promise.all([
+    loadSession(db, sessionId, who.userId),
+    isUuid(sessionId)
+      ? db.from("hablar_usage").select("id", { count: "exact", head: true }).eq("conversation_id", sessionId).eq("stage", "stt")
+      : Promise.resolve({ count: 0 }),
+    purpose === "turn" && isUuid(turnId)
+      ? db.from("conversation_turns").select("*").eq("id", turnId).maybeSingle()
+      : Promise.resolve({ data: null }),
+  ]);
   if (!session) return json({ error: "no such session" }, { status: 404 });
-  await recordPause(db, session, form.get("paused_seconds"));
-
-  const { count } = await db
-    .from("hablar_usage")
-    .select("id", { count: "exact", head: true })
-    .eq("conversation_id", session.id)
-    .eq("stage", "stt");
+  // Not waited on: nothing below needs the write, only the value on `session`.
+  background(recordPause(db, session, form.get("paused_seconds")));
   if ((count ?? 0) >= MAX_STT_PER_CHAT) return json({ error: "too many recordings" }, { status: 429 });
 
-  const topic = topicOf(session.kind, session.topic_id, session.level);
+  const topic = topicOf(session.kind, session.topic_id, session.level, session.scenario);
   const bytes = await audio.arrayBuffer();
   const mime = audio.type || "application/octet-stream";
   const ext = audioExt(mime);
@@ -145,7 +146,6 @@ Deno.serve(async (req) => {
   }
 
   const hash = await sha256(bytes);
-  const { data: existing } = await db.from("conversation_turns").select("*").eq("id", turnId).maybeSingle();
   if (existing) {
     if (existing.conversation_id !== session.id || existing.role !== "user") {
       return json({ error: "turn_id belongs to something else" }, { status: 409 });
@@ -220,15 +220,17 @@ async function typedTurn(env: Env, userId: string, form: FormData, raw: string) 
   if (!isUuid(turnId)) return json({ error: "turn_id must be a uuid" }, { status: 400 });
 
   const db = serviceClient(env);
-  const session = await loadSession(db, form.get("session_id"), userId);
+  const [session, { data: existing }] = await Promise.all([
+    loadSession(db, form.get("session_id"), userId),
+    db.from("conversation_turns").select("*").eq("id", turnId).maybeSingle(),
+  ]);
   if (!session) return json({ error: "no such session" }, { status: 404 });
-  await recordPause(db, session, form.get("paused_seconds"));
+  background(recordPause(db, session, form.get("paused_seconds")));
   if (session.ended_at) return json({ error: "ended" }, { status: 409 });
   if (sessionElapsed(session) >= CHAT_SECONDS + GRACE_SECONDS) {
     return json({ error: "time_up" }, { status: 409 });
   }
 
-  const { data: existing } = await db.from("conversation_turns").select("*").eq("id", turnId).maybeSingle();
   if (existing) {
     if (existing.conversation_id !== session.id || existing.role !== "user") {
       return json({ error: "turn_id belongs to something else" }, { status: 409 });

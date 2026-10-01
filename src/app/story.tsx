@@ -254,7 +254,7 @@ function Header({ title, progress }: { title: string; progress: number }) {
       </Pressable>
       <View style={styles.progressTrack}>
         <LinearGradient
-          colors={gradients.deep}
+          colors={gradients.progress}
           style={[styles.progressFill, { width: `${Math.max(progress * 100, 3)}%` }]}
         />
       </View>
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
   },
   progressTrack: {
     flex: 1,
-    height: 10,
+    height: 18,
     borderRadius: 99,
     backgroundColor: colors.trough,
     boxShadow: clay.trough,

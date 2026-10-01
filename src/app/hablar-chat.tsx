@@ -44,7 +44,6 @@ import {
   bandOf,
   findScenario,
   scenarioAt,
-  type Goal,
   HablarError,
   hint,
   type HintResult,
@@ -114,9 +113,7 @@ type UserMsg = {
   feedback: Feedback | null;
   pending: boolean;
 };
-/** A goal she completed this session, shown as a line in the thread. */
-type GoalMsg = { role: 'goal'; key: string; text: string };
-type Msg = PanchoMsg | UserMsg | GoalMsg;
+type Msg = PanchoMsg | UserMsg;
 
 type Phase =
   | 'boot'
@@ -158,8 +155,6 @@ export default function HablarChat() {
   const [typed, setTyped] = useState('');
   const [sendingTyped, setSendingTyped] = useState(false);
   const sendingTypedRef = useRef(false);
-  const [goals, setGoals] = useState<Goal[]>([]);
-  const [goalsDone, setGoalsDone] = useState<string[]>([]);
   const [title, setTitle] = useState<{ text: string; role: string | null }>({
     text: '',
     role: null,
@@ -186,7 +181,6 @@ export default function HablarChat() {
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
 
   const [sheet, setSheet] = useState<
-    | { kind: 'correction'; key: string; explain: boolean }
     | { kind: 'better'; key: string }
     | { kind: 'message'; key: string }
     | { kind: 'end' }
@@ -204,8 +198,6 @@ export default function HablarChat() {
   /** Total seconds spent in the background this chat. The server keeps the max it has seen, so this is cumulative. */
   const pausedTotal = useRef(0);
   const abort = useRef<AbortController | null>(null);
-  const goalsRef = useRef<Goal[]>([]);
-  const doneRef = useRef<string[]>([]);
 
   const say = useCallback((text: string) => {
     setNotice(text);
@@ -223,11 +215,9 @@ export default function HablarChat() {
       if (started) {
         const kind = started.kind ?? 'scenario';
         setTitle({
-          text: conversationTitle(kind, started.topic_id),
-          role: versionOf(kind, started.topic_id, started.level)?.role_es ?? null,
+          text: conversationTitle(kind, started.topic_id, started.title),
+          role: versionOf(kind, started.topic_id, started.level)?.role_es ?? started.role_es ?? null,
         });
-        goalsRef.current = started.goals ?? [];
-        setGoals(started.goals ?? []);
         setUnlimited(!!started.unlimited);
         if (started.deadline_at) setDeadline(new Date(started.deadline_at).getTime());
         setMessages([
@@ -252,13 +242,9 @@ export default function HablarChat() {
       if (conversation.ended_at) return router.replace(`/hablar-summary?session=${sessionId}`);
       const scenario = versionOf(conversation.kind, conversation.topic_id, conversation.level);
       setTitle({
-        text: conversationTitle(conversation.kind, conversation.topic_id),
-        role: scenario?.role_es ?? null,
+        text: conversationTitle(conversation.kind, conversation.topic_id, conversation.scenario?.title_en),
+        role: scenario?.role_es ?? conversation.scenario?.role_es ?? null,
       });
-      goalsRef.current = scenario?.goals ?? [];
-      doneRef.current = conversation.goals_done ?? [];
-      setGoals(scenario?.goals ?? []);
-      setGoalsDone(conversation.goals_done ?? []);
       setHintsUsed(conversation.hints_used ?? 0);
       pausedTotal.current = conversation.paused_seconds ?? 0;
       setUnlimited(!!conversation.unlimited);
@@ -461,29 +447,22 @@ export default function HablarChat() {
   // --- the turn -----------------------------------------------------------------
   const patch = (key: string, fn: (m: Msg) => Msg) => setMessages((ms) => ms.map((m) => (m.key === key ? fn(m) : m)));
 
-  /** New goals get a line in the thread, right under the turn that did them. */
-  const addGoalsDone = (ids: string[], turnId: string) => {
-    const fresh = ids.filter((id) => !doneRef.current.includes(id));
-    if (!fresh.length) return;
-    doneRef.current = [...doneRef.current, ...fresh];
-    setGoalsDone(doneRef.current);
-    const lines: GoalMsg[] = fresh.map((id) => ({
-      role: 'goal',
-      key: `goal-${id}`,
-      text: goalsRef.current.find((g) => g.id === id)?.es ?? '',
-    }));
-    setMessages((ms) => {
-      const at = ms.findIndex((m) => m.key === turnId);
-      return at < 0 ? [...ms, ...lines] : [...ms.slice(0, at + 1), ...lines, ...ms.slice(at + 1)];
-    });
-  };
-
   const runReply = async (turnId: string, attempt = 0): Promise<void> => {
     const tkey = `${turnId}-tomas`;
+    const settle = (d: DoneEvent) => {
+      streamEnd(tkey);
+      patch(tkey, (m) => ({
+        ...(m as PanchoMsg),
+        streaming: false,
+        turnId: d.tomas_turn_id,
+        audioPath: d.audio_path ?? (userId ? tomasAudioPath(userId, sessionId, turnId) : null),
+      }));
+      if (d.wrap_up) setWrapUp(true);
+      setPhase(d.ended ? 'ended' : 'idle');
+    };
     streamStart(tkey);
     patch(tkey, (m) => ({ ...m, text: '', streaming: true, failed: false }) as PanchoMsg);
     setPhase('waiting');
-    let failed = false;
     let fatal = false;
     let done: DoneEvent | null = null;
     abort.current = new AbortController();
@@ -515,24 +494,23 @@ export default function HablarChat() {
           onAudio: (seq, mp3) => streamChunk(tkey, seq, mp3),
           onFeedback: (fb) => {
             patch(turnId, (m) => ({ ...m, feedback: fb, pending: false }) as UserMsg);
-            if (fb.goals_done?.length) addGoalsDone(fb.goals_done, turnId);
           },
           onDone: (d) => {
             done = d;
-            if (d.goals_done) addGoalsDone(d.goals_done, turnId);
+            // Pancho is done talking: she can answer now, while a slower
+            // correction may still be on its way down the same stream.
+            settle(d);
           },
           onError: (err) => {
-            // Only a failed reply is fatal to the turn. A sentence without
-            // voice or a missing badge is not worth interrupting her for.
-            if (err.stage === 'claude') failed = true;
-            else if (err.stage === 'tts' && err.seq !== undefined) streamSkip(tkey, err.seq);
+            // A failed reply sends no `done`, which retries below. A sentence
+            // without voice or a missing correction is not worth interrupting her for.
+            if (err.stage === 'tts' && err.seq !== undefined) streamSkip(tkey, err.seq);
             else if (err.stage === 'feedback') patch(turnId, (m) => ({ ...m, pending: false }) as UserMsg);
           },
         },
         abort.current.signal,
       );
     } catch (e) {
-      failed = true;
       // 409 "time_up" / "ended" closes the chat; a 409 with retry:true means
       // the same turn is still being answered, so it's worth another try.
       if (
@@ -543,14 +521,14 @@ export default function HablarChat() {
         fatal = true;
       if ((e as Error)?.name === 'AbortError') return;
     }
-    streamEnd(tkey);
+    const d = done as DoneEvent | null;
+    if (!d) streamEnd(tkey); // otherwise settle() already did
 
     if (fatal) {
       setPhase('ended');
       return;
     }
-    const d = done as DoneEvent | null;
-    if (failed || !d) {
+    if (!d) {
       // One quiet retry with the same turn_id: the server replays a turn it
       // already finished, or runs it again if it didn't.
       if (attempt === 0) return runReply(turnId, 1);
@@ -558,20 +536,14 @@ export default function HablarChat() {
       setPhase('retry');
       return;
     }
-    patch(tkey, (m) => ({
-      ...(m as PanchoMsg),
-      streaming: false,
-      turnId: d.tomas_turn_id,
-      audioPath: d.audio_path ?? (userId ? tomasAudioPath(userId, sessionId, turnId) : null),
-    }));
+    // The stream is closed, so a correction that never came won't.
     patch(turnId, (m) => ({ ...m, pending: false }) as UserMsg);
-    if (d.wrap_up) setWrapUp(true);
     if (d.ended) {
-      setPhase('ended');
-      // Let him finish his goodbye, then the summary.
+      // Let him finish his goodbye, then the summary. Called once the stream
+      // has closed, so the last line's correction is already saved for it.
       whenIdle(() => setTimeout(() => void finish('time'), 1200));
       if (!nowPlaying()) setTimeout(() => void finish('time'), 2500);
-    } else setPhase('idle');
+    }
   };
 
   const sendTurn = (turnId: string, text: string) => {
@@ -687,8 +659,6 @@ export default function HablarChat() {
   const sheetMsg = sheet && 'key' in sheet ? (messages.find((m) => m.key === sheet.key) as Msg | undefined) : undefined;
   const busy = phase === 'waiting' || phase === 'streaming' || phase === 'transcribing';
   const micLocked = timeUp && phase !== 'recording' && phase !== 'draft';
-  const currentGoal = goals.find((g) => !goalsDone.includes(g.id));
-  const goalsDoneCount = goals.filter((g) => goalsDone.includes(g.id)).length;
   const lastPanchoKey = [...messages].reverse().find((m) => m.role === 'tomas')?.key;
 
   // --- screens that replace the chat ----------------------------------------------
@@ -766,35 +736,6 @@ export default function HablarChat() {
         </Pressable>
       </View>
 
-      {goals.length ? (
-        <View style={styles.goalCard}>
-          <View style={styles.goalHead}>
-            <Text style={styles.goalLabel}>
-              {currentGoal ? `Goal ${goalsDoneCount + 1} of ${goals.length}` : 'All goals done'}
-            </Text>
-            <View style={styles.segments}>
-              {goals.map((g) => (
-                <View
-                  key={g.id}
-                  style={[
-                    styles.segment,
-                    goalsDone.includes(g.id)
-                      ? { backgroundColor: colors.success }
-                      : g.id === currentGoal?.id && {
-                          backgroundColor: colors.primary,
-                        },
-                  ]}
-                />
-              ))}
-            </View>
-          </View>
-          <Text style={styles.goalMain}>{currentGoal ? currentGoal.en : '¡Bien ahí!'}</Text>
-          <Text style={styles.goalSub}>
-            {currentGoal ? currentGoal.es : 'Keep chatting, or end the chat to see your summary.'}
-          </Text>
-        </View>
-      ) : null}
-
       <ScrollView
         ref={scroll}
         style={{ flex: 1 }}
@@ -802,18 +743,6 @@ export default function HablarChat() {
         onContentSizeChange={() => scroll.current?.scrollToEnd({ animated: true })}
         showsVerticalScrollIndicator={false}>
         {messages.map((m) => {
-          if (m.role === 'goal') {
-            return (
-              <Appear key={m.key}>
-                <View style={styles.goalLine}>
-                  <MaterialCommunityIcons name="check-bold" size={13} color={colors.success} />
-                  <FitText style={styles.goalLineText} lines={2}>
-                    Goal done · {m.text}
-                  </FitText>
-                </View>
-              </Appear>
-            );
-          }
           if (m.role === 'tomas') {
             const tools = !m.streaming && !m.failed && (m.key === lastPanchoKey || revealed.has(m.key));
             return (
@@ -888,35 +817,22 @@ export default function HablarChat() {
                   <LinearGradient colors={gradients.deep} style={styles.userFill} pointerEvents="none" />
                   <Text style={styles.userText}>{m.text}</Text>
                 </Pressable>
-                {m.pending || fb ? (
-                  <View style={styles.chips}>
-                    {m.pending ? (
-                      <View style={[styles.chip, styles.chipQuiet]} accessibilityLabel="Checking what you said">
-                        <ThinkingDots />
-                      </View>
-                    ) : fb ? (
-                      <Chip
-                        tone={fb.has_error ? 'fix' : 'ok'}
-                        icon={fb.has_error ? undefined : 'check-bold'}
-                        label={fb.has_error ? 'See the fix' : 'Correct'}
-                        onPress={() =>
-                          setSheet({
-                            kind: 'correction',
-                            key: m.key,
-                            explain: false,
-                          })
-                        }
-                      />
-                    ) : null}
-                    {!m.pending && fb?.better ? (
-                      <Chip
-                        tone="local"
-                        icon="creation"
-                        label="Like a local"
-                        onPress={() => setSheet({ kind: 'better', key: m.key })}
-                      />
-                    ) : null}
+                {m.pending ? (
+                  <View style={styles.checking} accessibilityLabel="Checking what you said">
+                    <ThinkingDots />
                   </View>
+                ) : fb ? (
+                  <Appear>
+                    <Correction said={m.text} feedback={fb} />
+                  </Appear>
+                ) : null}
+                {!m.pending && fb?.better ? (
+                  <Chip
+                    tone="local"
+                    icon="creation"
+                    label="Like a local"
+                    onPress={() => setSheet({ kind: 'better', key: m.key })}
+                  />
                 ) : null}
               </View>
             </Appear>
@@ -1162,41 +1078,6 @@ export default function HablarChat() {
 
       </KeyboardAvoidingView>
 
-      {/* ✏️ correction */}
-      <Sheet open={sheet?.kind === 'correction'} onClose={() => setSheet(null)} title="Correction">
-        {sheetMsg?.role === 'user' ? (
-          sheetMsg.pending ? (
-            <Text style={styles.sheetBody}>Checking what you said…</Text>
-          ) : !sheetMsg.feedback ? (
-            <Text style={styles.sheetBody}>No feedback for this one.</Text>
-          ) : !sheetMsg.feedback.has_error ? (
-            <>
-              <Text style={styles.sheetBig}>{sheetMsg.text}</Text>
-              <Text style={styles.sheetGood}>¡Perfecto! Nothing to fix.</Text>
-            </>
-          ) : (
-            <>
-              <Diff parts={wordDiff(sheetMsg.text, sheetMsg.feedback.corrected)} />
-              {sheet?.kind === 'correction' && sheet.explain ? (
-                <Text style={styles.sheetBody}>{sheetMsg.feedback.why_en}</Text>
-              ) : (
-                <Button
-                  title="Explain this feedback"
-                  variant="secondary"
-                  onPress={() =>
-                    setSheet({
-                      kind: 'correction',
-                      key: sheetMsg.key,
-                      explain: true,
-                    })
-                  }
-                />
-              )}
-            </>
-          )
-        ) : null}
-      </Sheet>
-
       {/* 🪄 better phrasing */}
       <Sheet open={sheet?.kind === 'better'} onClose={() => setSheet(null)} title="A more natural way">
         {sheetMsg?.role === 'user' ? (
@@ -1312,7 +1193,28 @@ function Tool({
   );
 }
 
-/** Labeled chip under her message: the correction, or the local way to say it. */
+/**
+ * The correction, always open under her message: what she said with the fix
+ * struck through and filled in, and why — or a quiet tick when it was right.
+ */
+function Correction({ said, feedback }: { said: string; feedback: Feedback }) {
+  if (!feedback.has_error) {
+    return (
+      <View style={styles.correct} accessibilityLabel="Correct">
+        <MaterialCommunityIcons name="check-bold" size={14} color={colors.success} />
+        <Text style={styles.correctText}>Correct</Text>
+      </View>
+    );
+  }
+  return (
+    <View style={styles.correction} accessibilityLabel={`Correction: ${feedback.corrected}`}>
+      <Diff parts={wordDiff(said, feedback.corrected)} size={16} />
+      {feedback.why_en ? <Text style={styles.correctionWhy}>{feedback.why_en}</Text> : null}
+    </View>
+  );
+}
+
+/** Labeled chip under her message: the local way to say it. */
 function Chip({
   tone,
   icon,
@@ -1517,56 +1419,6 @@ const styles = StyleSheet.create({
     fontVariant: ['tabular-nums'],
   },
 
-  goalCard: {
-    marginHorizontal: 16,
-    marginBottom: 4,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    borderRadius: radius.lg,
-    backgroundColor: colors.card,
-    maxWidth: 608,
-    alignSelf: 'stretch',
-    boxShadow: clay.surface,
-  },
-  goalHead: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  goalLabel: {
-    ...font.body[800],
-    fontSize: 13,
-    color: colors.muted,
-  },
-  segments: { flexDirection: 'row', gap: 4 },
-  segment: {
-    width: 28,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: colors.trough,
-    boxShadow: clay.trough,
-  },
-  goalMain: { ...font.display[700], fontSize: 18, color: colors.ink, marginTop: 6 },
-  goalSub: { ...font.body[600], fontSize: 13, color: colors.muted, marginTop: 1 },
-
-  goalLine: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'center',
-    gap: 6,
-    maxWidth: '90%',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: radius.pill,
-    backgroundColor: colors.successSoft,
-  },
-  goalLineText: {
-    ...font.body[800],
-    fontSize: 13,
-    color: colors.success,
-    flexShrink: 1,
-  },
-
   thread: {
     padding: 16,
     gap: 14,
@@ -1631,7 +1483,25 @@ const styles = StyleSheet.create({
     boxShadow: clay.button,
   },
   userFill: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, borderRadius: 26, borderBottomRightRadius: 8 },
-  chips: { flexDirection: 'row', gap: 6 },
+  checking: {
+    height: 30,
+    paddingHorizontal: 12,
+    justifyContent: 'center',
+    borderRadius: radius.pill,
+    backgroundColor: colors.trough,
+    boxShadow: clay.trough,
+  },
+  correct: { flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 4 },
+  correctText: { ...font.body[800], fontSize: 13, color: colors.success },
+  correction: {
+    gap: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 11,
+    borderRadius: 18,
+    borderTopRightRadius: 6,
+    backgroundColor: colors.dangerSoft,
+  },
+  correctionWhy: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.muted },
   chip: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -1641,10 +1511,6 @@ const styles = StyleSheet.create({
     borderRadius: radius.pill,
     backgroundColor: colors.card,
     boxShadow: clay.surface,
-  },
-  chipQuiet: {
-    backgroundColor: colors.trough,
-    boxShadow: clay.trough,
   },
   chipDot: {
     width: 8,

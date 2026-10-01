@@ -88,6 +88,7 @@ for (const theme of THEMES) {
         pos: w.pos,
         en: w.en,
         note: w.note,
+        ...(w.tag ? { tag: w.tag } : {}),
         example: { es: w.example.es, en: w.example.en },
         gap: w.gap,
         level: w.level,

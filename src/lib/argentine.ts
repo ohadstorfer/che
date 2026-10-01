@@ -23,6 +23,8 @@ export interface ArWord {
   en: string;
   /** How it is used: register, nuance, origin. */
   note: string;
+  /** Two or three words shown beside the translation when it alone could mislead: "Cheer of support". */
+  tag?: string;
   example: { es: string; en: string };
   /** The word as it appears in the example — what the blank is cut out of. */
   gap: string;

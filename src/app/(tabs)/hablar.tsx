@@ -29,7 +29,7 @@ import { clay, colors, font, type PastelName, pastel, pastelGrad, press, radius 
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
-// Speaking — one five-minute chat a day with Pancho (docs/hablar-hld.md §2.1).
+// Speaking — one short chat a day with Pancho (docs/hablar-hld.md §2.1).
 //
 // The top card is the day: Pancho's pick with one Start button while the chat
 // is still there to take, Resume while one is open, and once it's used, what
@@ -156,7 +156,7 @@ export default function Hablar() {
                     art={scenarioArt(s.id)}
                     tone={i}
                     title={s.title_en}
-                    sub={v.goals[0]?.en ?? s.title_en}
+                    sub={`With ${v.role_en}`}
                     label={s.title_en}
                     onPress={() => openDoor('scenario', s.id)}
                   />
@@ -203,7 +203,7 @@ export default function Hablar() {
                 art={scenarioArt(s.id)}
                 tone={i}
                 title={s.title_en}
-                sub={v.goals[0]?.en ?? s.title_en}
+                sub={`With ${v.role_en}`}
                 label={s.title_en}
                 onPress={() => {
                   setChoosing(false);
@@ -286,7 +286,7 @@ function ResumeCard({ conversation }: { conversation: ConversationRow }) {
     <Hero>
       <View style={styles.heroHead}>
         <Text style={styles.heroEyebrow}>Chat in progress</Text>
-        <Text style={styles.heroTitle}>{conversationTitle(conversation.kind, conversation.topic_id)}</Text>
+        <Text style={styles.heroTitle}>{conversationTitle(conversation.kind, conversation.topic_id, conversation.summary?.title)}</Text>
       </View>
       <PanchoSays line="Pancho is waiting for your answer. Pick up where you left off." />
       <StartButton label="Resume" onPress={() => router.push(`/hablar-chat?session=${conversation.id}`)} />
@@ -297,9 +297,8 @@ function ResumeCard({ conversation }: { conversation: ConversationRow }) {
 /** Today's chat is used: what it gave her and a way into the summary. */
 function DoneCard({ conversation }: { conversation: ConversationRow }) {
   const summary = conversation.summary;
-  const goals = summary?.goals ?? [];
   const stats: [string, string][] = [
-    goals.length ? [`${goals.filter((g) => g.done).length}/${goals.length}`, 'goals'] : ['5', 'minutes'],
+    [String(summary?.turns ?? 0), (summary?.turns ?? 0) === 1 ? 'answer' : 'answers'],
     [String(summary?.phrases?.length ?? 0), 'new phrases'],
     [String(summary?.corrections?.length ?? 0), (summary?.corrections?.length ?? 0) === 1 ? 'fix' : 'fixes'],
   ];
@@ -308,7 +307,7 @@ function DoneCard({ conversation }: { conversation: ConversationRow }) {
       <View style={styles.heroBody}>
         <View style={[styles.heroHead, { flex: 1 }]}>
           <Text style={styles.heroEyebrow}>Done for today</Text>
-          <Text style={styles.heroTitle}>¡Bien ahí!{'\n'}5 minutes, out loud.</Text>
+          <Text style={styles.heroTitle}>¡Bien ahí!{'\n'}A real chat, out loud.</Text>
         </View>
         <View style={styles.doneArtPod}>
           <Image source={scenarioArt('conocer')} style={styles.doneArt} contentFit="contain" accessible={false} />
@@ -347,7 +346,7 @@ function Tomorrow({ scenario, band }: { scenario: Scenario; band: Band }) {
         <View style={styles.rowText}>
           <Text style={styles.rowTitle}>{scenario.title_en}</Text>
           <FitText style={styles.rowSub} lines={1}>
-            {v.goals.map((g) => g.en.toLowerCase()).slice(0, 2).join(', ').replace(/^./, (c) => c.toUpperCase())}
+            {`With ${v.role_en}`}
           </FitText>
         </View>
         <Text style={styles.tomorrowIn}>in {hours} h</Text>
@@ -356,7 +355,7 @@ function Tomorrow({ scenario, band }: { scenario: Scenario; band: Band }) {
   );
 }
 
-/** A scenario as a clay row: pastel circle with its art, name, first goal, level. */
+/** A scenario as a clay row: pastel circle with its art, name, who Pancho plays, level. */
 function Row({
   art,
   tone,

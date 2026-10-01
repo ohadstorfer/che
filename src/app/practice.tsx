@@ -3,12 +3,11 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Exercise } from '@/components/exercises';
 import { LessonComplete } from '@/components/lesson-complete';
-import { LoadingVideo } from '@/components/loading-video';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
 import { type AnswerActions, AnswerActionsContext } from '@/components/wrong-answer-actions';
@@ -103,8 +102,6 @@ export default function Practice() {
     | { kind: 'test'; outcome: TestOutcome; plan: TestPlan }
     | null
   >(null);
-  /** The loading clip is watched to the end before the first exercise shows. */
-  const [clipPlayed, setClipPlayed] = useState(false);
   /** Set by the Dale! on the finish screen, when there is a streak to show. */
   const [celebrating, setCelebrating] = useState(false);
   /** A frozen streak stops her at the door: what she lost, and the way back.
@@ -211,7 +208,6 @@ export default function Practice() {
     setCelebrating(false);
     setIndex(0);
     setQueue(null);
-    setClipPlayed(false);
   }, [lessonId, isAgain, testMode, params.mode]);
 
   // The gate is read once, on the way in.
@@ -235,12 +231,6 @@ export default function Practice() {
   }, [userId, isAgain, preview]);
 
   const current = queue?.[index] ?? null;
-
-  // Latency is measured from the moment an exercise is on screen.
-  useEffect(() => {
-    round.shown();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, clipPlayed]);
 
   // The clips for the exercise she is on and the two after it are fetched
   // ahead of the press, so by the time she taps the speaker there is nothing
@@ -280,6 +270,12 @@ export default function Practice() {
     const giveUp = setTimeout(open, 2500);
     return () => clearTimeout(giveUp);
   }, [firstClip]);
+
+  // Latency is measured from the moment an exercise is on screen.
+  useEffect(() => {
+    round.shown();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, queue, firstReady]);
 
   const finish = async () => {
     if (!profile || finishing.current) return;
@@ -492,11 +488,11 @@ export default function Practice() {
     );
   }
 
-  if (!queue || (queue.length > 0 && (!clipPlayed || (!!firstClip && !firstReady)))) {
+  if (!queue || (queue.length > 0 && !!firstClip && !firstReady)) {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.doneWrap}>
-          <LoadingVideo onPlayedThrough={() => setClipPlayed(true)} />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       </SafeAreaView>
     );
@@ -545,7 +541,7 @@ export default function Practice() {
         </Pressable>
         <View style={styles.progressTrack}>
           <View style={[styles.progressFill, { width: `${Math.max(progress * 100, 3)}%` }]}>
-            <LinearGradient colors={gradients.deep} style={StyleSheet.absoluteFill} />
+            <LinearGradient colors={gradients.progress} style={StyleSheet.absoluteFill} />
           </View>
         </View>
         <Text style={styles.counter}>
@@ -735,13 +731,13 @@ const styles = StyleSheet.create({
   },
   progressTrack: {
     flex: 1,
-    height: 14,
+    height: 18,
     borderRadius: radius.pill,
     backgroundColor: colors.trough,
     boxShadow: clay.trough,
     overflow: 'hidden',
   },
-  progressFill: { height: '100%', borderRadius: radius.pill, backgroundColor: colors.primary, overflow: 'hidden' },
+  progressFill: { height: '100%', borderRadius: radius.pill, backgroundColor: colors.progress, overflow: 'hidden' },
   counter: { ...font.body[800], fontSize: 13, color: colors.muted, minWidth: 40, textAlign: 'right' },
   kicker: {
     ...font.body[800],

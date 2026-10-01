@@ -25,7 +25,7 @@ import {
   serviceClient,
   topicOf,
 } from "../_shared/hablar.ts";
-import { HINT_SCHEMA, HINT_SYSTEM, TRANSLATE_SCHEMA, TRANSLATE_SYSTEM } from "../_shared/hablar-prompt.ts";
+import { HINT_SCHEMA, HINT_SYSTEM, LEVEL_GRAMMAR, TRANSLATE_SCHEMA, TRANSLATE_SYSTEM } from "../_shared/hablar-prompt.ts";
 import { Anthropic, MODEL, structured } from "../_shared/hablar-claude.ts";
 import { offendingWords } from "../_shared/rioplatense.ts";
 
@@ -110,13 +110,12 @@ Deno.serve(async (req) => {
     .maybeSingle();
   if (!counted) return json({ error: "hint_limit", hints_left: 0 }, { status: 429 });
 
-  const topic = topicOf(session.kind, session.topic_id, session.level);
-  const open = (topic?.goals ?? []).filter((g) => !session.goals_done.includes(g.id));
+  const topic = topicOf(session.kind, session.topic_id, session.level, session.scenario);
   const input = [
     `Level: ${session.level}`,
+    `Grammar the level allows: ${LEVEL_GRAMMAR[session.level]}`,
     topic?.scenario ? `Scene: ${topic.scenario.setting_es} Pancho is ${topic.scenario.role_es}.` : "",
     topic?.culture ? `Topic: ${topic.culture.id}` : "",
-    open.length ? `Open goals: ${open.map((g) => g.es).join("; ")}` : "",
     "Conversation so far:",
     ...recent.map((t) => `${t.role === "tomas" ? "Pancho" : "Learner"}: ${t.text}`),
   ]

@@ -104,7 +104,7 @@ export function ExerciseFrame({
           {note ? (
             <Text style={styles.note}>{note}</Text>
           ) : (
-            <Button title={checkLabel} onPress={check} disabled={!canCheck} />
+            <Button title={checkLabel} variant="check" onPress={check} disabled={!canCheck} />
           )}
         </View>
       )}
@@ -164,7 +164,7 @@ function FeedbackBar({
   // third of the screen at the moment she is reading the answer, and a solid
   // block of saturated salvia or coral that size shouts at her instead of
   // telling her something. The one saturated thing left is what she has to act
-  // on: the rosa clay button, the same action as everywhere else.
+  // on: the button, in the verdict's own colour so the sheet reads as one piece.
   const tint = good ? colors.success : colors.dangerInk;
   const wash = good ? colors.successSoft : colors.dangerSoft;
 
@@ -217,7 +217,7 @@ function FeedbackBar({
 
       {actions}
 
-      <Button title={good ? 'Continue' : 'Got it'} onPress={onContinue} />
+      <Button title={good ? 'Continue' : 'Got it'} variant={good ? 'right' : 'wrong'} onPress={onContinue} />
     </Animated.View>
   );
 }
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     marginBottom: -8,
   },
   badgeText: { ...font.body[800], fontSize: 12, letterSpacing: 0.4, color: colors.accent, textTransform: 'uppercase' },
-  feedbackNote: { ...font.body[700], fontSize: 15, lineHeight: 21, color: colors.accent },
+  feedbackNote: { ...font.body[700], fontSize: 15, lineHeight: 21, color: colors.inkOnWash },
 
   feedback: {
     padding: 20,

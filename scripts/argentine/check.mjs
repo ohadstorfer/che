@@ -35,6 +35,8 @@ export function checkWord(w) {
   need(!/[()]/.test(w.en ?? ''), 'en must not contain parentheses: put the aside in note');
   if (w.es && w.en && fold(w.es).length > 2) need(!hasWhole(w.en, w.es), 'en must not contain the Spanish word');
   need(typeof w.note === 'string' && w.note.length >= 10 && w.note.length <= 170, 'note must be 10–170 chars');
+  if (w.tag !== undefined)
+    need(typeof w.tag === 'string' && w.tag.length > 0 && w.tag.length <= 24 && w.tag.split(/\s+/).length <= 3, 'tag must be 1–3 words, at most 24 chars');
   need(w.example && typeof w.example.es === 'string' && typeof w.example.en === 'string', 'example {es, en} missing');
   if (w.example?.es) {
     need(w.example.es.split(/\s+/).length <= 16, 'example.es must be at most 16 words');

@@ -36,7 +36,18 @@ export interface Unit {
   status: ContentStatus;
 }
 
-export type LessonKind = 'lesson' | 'practice' | 'story' | 'listening' | 'review' | 'checkpoint';
+export type LessonKind =
+  | 'lesson'
+  | 'practice'
+  | 'story'
+  | 'listening'
+  | 'review'
+  | 'checkpoint'
+  // A unit's three extra classes (src/lib/unit-extras.ts): what they play
+  // ships with the app, the rows only give them their place on the road.
+  | 'speak'
+  | 'slang'
+  | 'culture';
 
 export interface Lesson {
   id: string;

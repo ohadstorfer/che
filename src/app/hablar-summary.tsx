@@ -12,9 +12,6 @@ import {
   type ConversationRow,
   conversationTitle,
   end,
-  bandOf,
-  findScenario,
-  scenarioAt,
   type HablarSummary,
   isToday,
   loadConversation,
@@ -24,13 +21,14 @@ import {
   wordDiff,
 } from '@/lib/hablar';
 import { play, stopAll, usePlaying } from '@/lib/hablar-audio';
+import { goBack } from '@/lib/nav';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, pastel, pastelGrad, radius } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
 // The summary (§2.5), and History's view of an old chat. Generic summaries are
 // the top complaint about these apps, so this one is concrete and short:
-// goals, the top corrections (each with Decilo), phrases worth keeping, one
+// the top corrections (each with Decilo), phrases worth keeping, one
 // specific line on what went well. The full transcript folds away below.
 // ---------------------------------------------------------------------------
 
@@ -67,7 +65,8 @@ export default function HablarSummaryScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId]);
 
-  const close = () => router.dismissTo('/hablar');
+  // A unit chat was opened from the road (or from History): back to wherever that was.
+  const close = () => (conversation?.kind === 'unit' ? goBack('/home') : router.dismissTo('/hablar'));
 
   if (state === 'loading') {
     return (
@@ -88,13 +87,6 @@ export default function HablarSummaryScreen() {
 
   const s = summary ?? {};
 
-  const found = conversation?.kind === 'scenario' ? findScenario(conversation.topic_id) : undefined;
-  const scenario = found ? scenarioAt(found, bandOf(conversation?.level)) : undefined;
-  // The summary's own goal list wins; otherwise rebuild it from the scenario and the session row.
-  const goals =
-    s.goals ??
-    scenario?.goals.map((g) => ({ id: g.id, es: g.es, en: g.en, done: !!conversation?.goals_done?.includes(g.id) })) ??
-    [];
   const corrections = (s.corrections ?? []).slice(0, 3);
   const phrases = (s.phrases ?? []).slice(0, 5);
 
@@ -117,7 +109,11 @@ export default function HablarSummaryScreen() {
           <Text style={styles.title}>¡Bien ahí!</Text>
           {conversation ? (
             <Text style={styles.heroMeta}>
-              {conversationTitle(conversation.kind, conversation.topic_id)} · {formatDay(conversation.local_date)}
+              {conversationTitle(
+                conversation.kind,
+                conversation.topic_id,
+                conversation.summary?.title ?? conversation.scenario?.title_en,
+              )} · {formatDay(conversation.local_date)}
             </Text>
           ) : null}
           {s.xp ? (
@@ -126,24 +122,6 @@ export default function HablarSummaryScreen() {
             </View>
           ) : null}
         </View>
-
-        {goals.length ? (
-          <Card title="Goals">
-            {goals.map((g) => (
-              <View key={g.id} style={styles.goal}>
-                <MaterialCommunityIcons
-                  name={g.done ? 'check-circle' : 'close-circle-outline'}
-                  size={22}
-                  color={g.done ? colors.success : colors.faint}
-                />
-                <View style={{ flex: 1 }}>
-                  <Text style={[styles.goalMain, !g.done && { color: colors.muted }]}>{g.en || g.es}</Text>
-                  {g.en ? <Text style={styles.small}>{g.es}</Text> : null}
-                </View>
-              </View>
-            ))}
-          </Card>
-        ) : null}
 
         {corrections.length ? (
           <Card title="Worth fixing">
@@ -319,8 +297,6 @@ const styles = StyleSheet.create({
     boxShadow: clay.surface,
   },
   cardTitle: { ...font.display[800], fontSize: 20, letterSpacing: -0.1, color: colors.ink },
-  goal: { flexDirection: 'row', gap: 10, alignItems: 'flex-start' },
-  goalMain: { ...font.body[700], fontSize: 16, color: colors.ink },
   correction: { gap: 8 },
   correctionActions: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   play: {

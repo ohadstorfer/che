@@ -40,7 +40,7 @@ export const BANDS: Band[] = ['A1', 'A2', 'B1', 'B2'];
 export const LEVEL_NAMES: Record<Band, string> = { A1: 'Beginner', A2: 'Intermediate', B1: 'Advanced', B2: 'Local' };
 /** One line on how Pancho talks at each level — shown under the level picker. */
 export const LEVEL_NOTES: Record<Band, string> = {
-  A1: 'Short, simple sentences. Present tense.',
+  A1: 'Short, simple sentences. Present tense only.',
   A2: 'Everyday talk. The past tense comes in.',
   B1: 'Natural speed, some lunfardo.',
   B2: 'Full speed. Idioms, lunfardo, opinions.',
@@ -113,7 +113,8 @@ export function resolveAudio(ref?: string | null): string | null {
 
 // --- types on the wire ---------------------------------------------------------
 
-export type HablarKind = 'scenario' | 'culture' | 'free';
+/** 'unit': a unit's Speaking lesson on the road — its own scene, outside the day's one chat. */
+export type HablarKind = 'scenario' | 'culture' | 'free' | 'unit';
 
 export interface StartResult {
   session_id: string;
@@ -123,11 +124,13 @@ export interface StartResult {
   started_at?: string;
   limit_seconds?: number | null;
   key_words?: string[];
+  /** A unit chat: its scene's title, and who Pancho plays in it. */
+  title?: string | null;
+  role_es?: string | null;
   /** null for a staff chat: no clock. */
   deadline_at: string | null;
   unlimited?: boolean;
   opener: { turn_id?: string; text: string; text_en: string; audio_url: string | null };
-  goals: Goal[];
   key_phrases: { es: string; en: string; audio_url: string | null }[];
 }
 
@@ -140,7 +143,6 @@ export interface Feedback {
   spans?: { from: string; to: string }[];
   why_en: string;
   better: string;
-  goals_done: string[];
 }
 
 export type DiloStatus = 'ok' | 'almost' | 'again';
@@ -162,11 +164,15 @@ export interface SummaryCorrection {
 }
 
 export interface HablarSummary {
-  goals?: { id: string; es: string; en?: string; done: boolean }[];
+  /** Lines she said. */
+  turns?: number;
   corrections?: SummaryCorrection[];
   phrases?: { es: string; en?: string }[];
   went_well?: string | null;
   streak_credited?: boolean;
+  /** A unit chat: its scene's title, and whether it finished its lesson on the road. */
+  title?: string | null;
+  lesson_done?: boolean;
   /** Filled client-side from `end`'s `streak` (first close only; a repeat returns null). */
   streak?: number;
   previous_streak?: number;
@@ -180,10 +186,8 @@ export interface DoneEvent {
   /** Storage path of the joined reply mp3 in the `hablar` bucket (▶ / 🐢 after a reload). */
   audio_path?: string | null;
   wrap_up: boolean;
-  /** True whenever wrap_up is: go to the summary once this reply's audio has played. */
+  /** Pancho closed the chat (his call, or wrap_up): go to the summary once this reply's audio has played. */
   ended: boolean;
-  /** Session total. */
-  goals_done?: string[];
   /** The server replayed a turn it had already answered. */
   replay?: boolean;
 }
@@ -225,6 +229,9 @@ async function call<T>(name: string, body: Record<string, unknown> | FormData): 
       console.warn(`[hablar] ${name} ${res.status}`, parsed);
       throw new HablarError(res.status, parsed);
     }
+    // No response at all (the request never got through): say why.
+    const cause = (error as { context?: unknown }).context;
+    console.warn(`[hablar] ${name} failed: ${error.name}: ${error.message}`, cause instanceof Error ? cause.message : cause);
     throw new HablarError(0, null);
   }
   return out as T;
@@ -236,12 +243,15 @@ async function call<T>(name: string, body: Record<string, unknown> | FormData): 
 export async function start(args: {
   kind: HablarKind;
   topic_id?: string | null;
+  /** A unit chat: its Speaking lesson. */
+  lesson_id?: string | null;
   level: Band;
 }): Promise<StartResult | { doneToday: true; summaryId: string | null } | { paywall: true }> {
   try {
     const res = await call<StartResult>('hablar-start', {
       kind: args.kind,
       topic_id: args.topic_id ?? null,
+      ...(args.lesson_id ? { lesson_id: args.lesson_id } : {}),
       level_override: args.level,
     });
     startCache.set(res.session_id, res);
@@ -274,8 +284,14 @@ export async function transcribe(args: {
   const form = new FormData();
   const name = `${args.turn_id}.${clip.mime.includes('mp4') ? 'm4a' : 'webm'}`;
   if (clip.blob) form.append('audio', clip.blob, name);
-  // React Native's FormData takes a file on disk as { uri, name, type }.
-  else form.append('audio', { uri: clip.uri, name, type: clip.mime } as unknown as Blob);
+  else {
+    // The phones' fetch is expo/fetch (SDK 57 installs it globally), which
+    // can't send React Native's { uri, name, type } part ("Unsupported
+    // FormDataPart implementation"). It sends any part that has bytes().
+    const { File } = await import('expo-file-system');
+    const file = new File(clip.uri!);
+    form.append('audio', { name, type: clip.mime, bytes: () => file.bytes() } as unknown as Blob);
+  }
   form.append('session_id', args.session_id);
   form.append('turn_id', args.turn_id);
   form.append('purpose', args.purpose);
@@ -443,6 +459,8 @@ export interface ConversationRow {
   summary: HablarSummary | null;
   /** Staff chat: no clock, no daily limit. */
   unlimited: boolean;
+  /** A unit chat: the scene it ran. */
+  scenario?: { title_en?: string; role_es?: string } | null;
 }
 
 export interface TurnRow {
@@ -459,12 +477,14 @@ export interface TurnRow {
 }
 
 const CONVERSATION_COLS =
-  'id, local_date, kind, topic_id, level, started_at, ended_at, paused_seconds, hints_used, goals_done, summary, unlimited';
+  'id, local_date, kind, topic_id, level, started_at, ended_at, paused_seconds, hints_used, goals_done, summary, unlimited, scenario';
 
+/** The day's chat, or the last one: a unit chat on the road is never the day's chat. */
 export async function latestConversation(): Promise<ConversationRow | null> {
   const { data: rows } = await supabase
     .from('conversations')
     .select(CONVERSATION_COLS)
+    .neq('kind', 'unit')
     .order('started_at', { ascending: false })
     .limit(1);
   return ((rows ?? [])[0] as ConversationRow | undefined) ?? null;
@@ -506,13 +526,14 @@ export function tomasAudioPath(userId: string, sessionId: string, userTurnId: st
 
 export const isToday = (c: ConversationRow) => c.local_date === localDateStr();
 
-/** Five minutes, plus whatever time the app spent in the background. */
-export const CHAT_SECONDS = 300;
+/** The hard stop (Pancho usually closes around two minutes), plus whatever time the app spent in the background. */
+export const CHAT_SECONDS = 180;
 export const deadlineOf = (c: ConversationRow) =>
   new Date(new Date(c.started_at).getTime() + (CHAT_SECONDS + (c.paused_seconds ?? 0)) * 1000).toISOString();
 
 /** A human title for a conversation, for History and the summary header. */
-export function conversationTitle(kind: HablarKind, topicId: string | null | undefined): string {
+export function conversationTitle(kind: HablarKind, topicId: string | null | undefined, title?: string | null): string {
+  if (kind === 'unit') return title ?? 'Unit chat';
   if (kind === 'scenario') return findScenario(topicId)?.title_en ?? 'Scenario';
   if (kind === 'culture') return cultureSections.find((s) => s.slug === topicId)?.title ?? 'Culture';
   return 'Talk about anything';

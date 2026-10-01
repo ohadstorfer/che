@@ -61,6 +61,9 @@ export const clay = {
     'inset 0 3px 0 rgba(255,255,255,0.28), inset 0 -5px 10px rgba(80,10,30,0.25), 0 12px 22px -8px rgba(160,50,75,0.55)',
   float: 'inset 2px 3px 0 rgba(255,255,255,0.7), 0 18px 36px -12px rgba(120,70,40,0.4)',
   trough: 'inset 0 2px 5px rgba(58,42,32,0.12)',
+  /** The verdict buttons (green / coral) — the rosa button's clay, with a neutral warm drop. */
+  verdictButton:
+    'inset 0 3px 0 rgba(255,255,255,0.28), inset 0 -5px 10px rgba(0,0,0,0.22), 0 12px 22px -8px rgba(58,42,32,0.45)',
   /** A flat, pressed-down surface (locked coins, disabled) — no lift. */
   flat: 'inset 0 2px 4px rgba(58,42,32,0.08)',
 } as const;
@@ -72,6 +75,8 @@ export const gradients = {
   wash: [OAT, CANVAS] as const,
   /** The rosa action, top to bottom — primary buttons and the current step. */
   deep: [ROSA_TOP, ROSA_BOTTOM] as const,
+  /** Progress, everywhere: the rosa, like the actions. */
+  progress: [ROSA_TOP, ROSA_BOTTOM] as const,
 };
 
 export const colors = {
@@ -109,6 +114,14 @@ export const colors = {
   dangerSoft: 'rgba(201, 85, 62, 0.14)',
   /** Text on `dangerSoft`. */
   dangerInk: CORAL_DARK,
+  /** An exercise's Check button: the primary. */
+  check: ROSA,
+  /** Progress (bars, the current step's ring): the rosa. */
+  progress: ROSA,
+  /** The "wrong" button: coral a step deeper, so white text on it reads. */
+  dangerSolid: '#B24A34',
+  /** Body text on the answer sheet's green or coral wash — warm ink, dark enough to read on both. */
+  inkOnWash: '#6B5647',
 
   // Sunken wells: progress tracks, segmented-control backs.
   trough: 'rgba(58, 42, 32, 0.10)',
@@ -211,7 +224,7 @@ const tone = (bg: string) => ({
   ink: INK,
   sub: 'rgba(58, 42, 32, 0.72)',
   track: 'rgba(58, 42, 32, 0.12)',
-  fill: INK,
+  fill: ROSA,
 });
 export const cultureTones = [
   tone(pastel.sage),

@@ -326,6 +326,55 @@ export function LevelChip({
   );
 }
 
+/**
+ * The level picker as tabs: all four levels in view, one tap to pick, and one
+ * line under them on how Pancho talks there. Levels a scenario isn't written
+ * at stay in the row but can't be picked.
+ */
+export function LevelTabs({
+  value,
+  onChange,
+  available = BANDS,
+}: {
+  value: Band;
+  onChange: (v: Band) => void;
+  available?: Band[];
+}) {
+  return (
+    <View style={styles.tabsWrap}>
+      <View style={styles.tabs} accessibilityRole="tablist">
+        {BANDS.map((b) => {
+          const on = b === value;
+          const open = available.includes(b);
+          return (
+            <Pressable
+              key={b}
+              onPress={() => open && onChange(b)}
+              disabled={!open}
+              accessibilityRole="tab"
+              accessibilityState={{ selected: on, disabled: !open }}
+              style={({ pressed }) => [
+                styles.tab,
+                on && styles.tabOn,
+                { transform: [{ scale: pressed ? press.scale : 1 }] },
+                webPress,
+              ]}>
+              <Text
+                style={[styles.tabText, on && styles.tabTextOn, !open && { opacity: 0.35 }]}
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                minimumFontScale={0.8}>
+                {LEVEL_NAMES[b]}
+              </Text>
+            </Pressable>
+          );
+        })}
+      </View>
+      <Text style={styles.tabsNote}>{LEVEL_NOTES[value]}</Text>
+    </View>
+  );
+}
+
 function StepArrow({
   dir,
   target,
@@ -611,6 +660,15 @@ const styles = StyleSheet.create({
 
   removed: { textDecorationLine: 'line-through', color: colors.dangerInk, backgroundColor: colors.dangerSoft },
   added: { ...font.body[800], color: colors.success, backgroundColor: colors.successSoft },
+
+  // The level tabs: a sunken well with the picked level raised out of it.
+  tabsWrap: { gap: 10 },
+  tabs: { flexDirection: 'row', padding: 4, borderRadius: radius.pill, backgroundColor: colors.trough, boxShadow: clay.trough },
+  tab: { flex: 1, height: 42, borderRadius: radius.pill, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
+  tabOn: { backgroundColor: colors.card, boxShadow: clay.surface },
+  tabText: { ...font.body[800], fontSize: 13, color: colors.muted },
+  tabTextOn: { color: colors.ink },
+  tabsNote: { ...font.body[600], fontSize: 15, lineHeight: 21, color: colors.muted },
 
   // The level stepper: round clay arrows either side of the name.
   stepper: { gap: 10 },

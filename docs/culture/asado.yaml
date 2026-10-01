@@ -4,470 +4,206 @@ section:
   emoji: "🥩"
   summary: "Fire, meat and a whole Sunday with your people"
 
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
 classes:
   # ─────────────────────────────────────────────────────────────
   - slug: "el-ritual"
     title: "More than a barbecue"
     summary: "Why an asado is a whole afternoon, not a meal"
     pages:
-      - type: info
-        title: "It's not just meat"
-        emoji: "🔥"
-        body: "An **asado** is grilled meat, sure. But mostly it's an excuse to spend hours together. Sunday lunch with the family, Friday night with friends, a birthday, a work thing — you name it, there's an asado. When someone says **¿hacemos un asado?** (shall we do an asado?), they're really asking: *wanna hang out all day?*"
-        fun_fact: "Argentines also say **asado** for a specific cut: the ribs. Context tells you which one."
-
-      - type: info
-        title: "Clear your schedule"
-        emoji: "⏳"
-        body: "Nobody does a quick asado. Someone lights the fire late morning, the meat cooks slowly, you eat around two, and then comes the **sobremesa** — sitting at the table long after the food is gone, talking, joking, arguing about football. Getting up at five is totally normal. Leaving right after eating? A bit rude."
-
-      - type: true_false
-        statement: "At a Sunday asado, still sitting at the table at five in the afternoon is normal."
-        answer: true
-        explain: "Completely normal. The **sobremesa** is half the point. Leaving right after the food looks like you only came to eat."
-
-      - type: info
-        title: "The asador"
-        emoji: "👨‍🍳"
-        body: "Every asado has one **asador**: the person in charge of the fire and the meat. Traditionally it's the dad, the uncle, the friend who \"knows\". It's a role with a lot of pride attached. While the meat cooks, people hang out next to the grill with a drink to keep the asador company. The grill is where the party starts."
-
+      - type: card
+        text: "An **asado** is grilled meat, sure. But mostly it's an excuse to spend the whole day together. **¿Hacemos un asado?** really means: want to hang out?"
       - type: choice
-        scenario: "You arrive at the asado. The fire's going, the meat is on, and the table is still empty."
-        prompt: "Where's everyone?"
-        options: ["By the grill, drink in hand", "Inside, away from the smoke", "At the table, waiting quietly"]
-        correct: 0
-        explain: "Around the **asador**, keeping them company. Grab a drink and join them."
-
-      - type: choice
-        scenario: "Your coworker invites you: \"¿Hacemos un asado el domingo? Vení a la una.\" (Come at one.)"
-        prompt: "When will you probably eat?"
-        options: ["Right at one", "An hour or so later", "Around dinner time"]
+        prompt: "The invite says **“Vení a la una.”** Come at one. When will you probably eat?"
+        options:
+          - "Right at one"
+          - "An hour or two later"
+          - "Around dinner time"
         correct: 1
-        explain: "The fire is slow and so is everything else. Show up at one, have a drink by the grill, and eat when the asador says so."
-
-      - type: match
-        prompt: "Match the word to its meaning"
-        pairs:
-          - ["asado", "the whole grilled-meat gathering"]
-          - ["asador", "the person in charge of the grill"]
-          - ["sobremesa", "chatting at the table after eating"]
-          - ["¿hacemos un asado?", "an invite to spend the day"]
-
-    vocabulary:
-      - es: "asado"
-        en: "barbecue; the gathering around it"
-        example: { es: "¿Hacemos un asado el domingo?", en: "Shall we do an asado on Sunday?" }
-      - es: "asador"
-        en: "grill master"
-      - es: "sobremesa"
-        en: "long chat at the table after the meal"
-      - es: "¿hacemos un asado?"
-        en: "wanna get together? (lit. shall we do an asado?)"
+        explain: "The fire is slow, and so is everything else. Have a drink by the grill and eat when the asador says so."
+      - type: card
+        text: "Every asado has one **asador**, in charge of the fire and the meat. It's a role with a lot of pride. Everyone else keeps them company by the grill, drink in hand."
+      - type: card
+        text: "An asado is also how Argentines celebrate almost anything: a birthday, a win, a new job, a Friday."
+      - type: choice
+        prompt: "Builders just poured the concrete roof of a new house. What does the owner traditionally pay for?"
+        options:
+          - "An asado for the whole crew"
+          - "A day off for the whole crew"
+          - "A cash bonus for the foreman"
+        correct: 0
+        explain: "The **asado de la losa**, for the finished roof slab. The crew grills right there on site, on bricks and a scrap of iron grate."
+      - type: card
+        text: "For lots of families it's a weekly date: **el asado del domingo**. Same backyard, same asador, same arguments."
+      - type: card
+        chip: "Did you know?"
+        text: "**Asado** is also the name of a cut: the ribs. So yes, you can eat asado at an asado."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "el-fuego"
     title: "Playing with fire"
-    summary: "Parrilla, fogón, leña, carbón — and the embers"
+    summary: "Embers, firewood, salt and how you like it"
     pages:
-      - type: info
-        title: "Parrilla or fogón?"
-        emoji: "🔥"
-        body: "The **parrilla** is the grill: an iron grate over the embers, often built into the backyard in brick. The **fogón** is an open fire on the ground — think countryside, camping, or a whole lamb on an iron cross leaning over the flames (**asado a la cruz** or **al asador**: two names, same dish). City asados are almost always on a parrilla."
-        fun_fact: "Many Buenos Aires apartments have a small parrilla on the balcony or rooftop. Priorities."
-
-      - type: info
-        title: "The secret is patience"
-        emoji: "🪵"
-        body: "Here's the secret: you don't cook over flames. You cook over **brasas** (embers). The asador burns wood or charcoal on the side, then shovels the glowing embers under the grill, little by little. Slow heat, lots of patience. If you see flames licking the meat, something went wrong."
-
-      - type: true_false
-        statement: "A good asado is cooked over big, tall flames so it's done fast."
-        answer: false
-        explain: "It's cooked slowly over **brasas** (embers). Flames burn the outside and leave the inside raw."
-
-      - type: info
-        title: "Leña vs carbón"
-        emoji: "⚖️"
-        body: "**Leña** is firewood — hardwoods like quebracho or algarrobo. It takes longer but many swear it gives better flavor. **Carbón** (charcoal) lights faster and is easier, so it's what most people use in the city. Which is better? Ask two Argentines and you'll get three opinions."
-
-      - type: match
-        prompt: "Match the fire words"
-        pairs:
-          - ["parrilla", "grill"]
-          - ["fogón", "open fire on the ground"]
-          - ["brasas", "embers"]
-          - ["leña", "firewood"]
-          - ["carbón", "charcoal"]
-
+      - type: card
+        text: "The **parrilla** is the grill: an iron grate, often built into the backyard in brick. Plenty of city apartments have a little one on the balcony. Priorities."
+      - type: card
+        text: "No balcony? Lots of apartment buildings have a **quincho**: a shared room with a parrilla, often on the roof. Neighbors book it for the weekend."
       - type: choice
-        scenario: "The asador keeps a fire going off to one side and shovels embers under the grill, a bit at a time."
-        prompt: "Why not just burn the logs right under the meat?"
-        options: ["Flames would scorch the meat", "It's bad luck at an asado", "The wood would run out"]
+        prompt: "What's the secret of a good asado fire?"
+        options:
+          - "No flames under the meat at all"
+          - "Tall flames, for a crispy outside"
+          - "A lid on top, to trap the smoke"
         correct: 0
-        explain: "Flames char the outside and leave the inside raw. Embers give steady, gentle heat."
-
-      - type: gap
-        prompt: "The asador wants more heat under the meat. What do they ask for?"
-        text: "Poné más ___ debajo de la carne."
-        options: ["brasas", "hielo", "agua"]
+        explain: "You cook over **brasas**, embers. The asador burns wood off to one side and shovels embers under the grill, little by little. Flames burn the outside and leave the inside raw."
+      - type: card
+        text: "**Leña**, firewood, takes longer, but many swear it tastes better. **Carbón**, charcoal, is faster, so most city asados use it. Ask two Argentines which is best: three opinions."
+      - type: choice
+        prompt: "What does the asador put on the meat before it hits the grill?"
+        options:
+          - "Just coarse salt"
+          - "A garlic and pepper rub"
+          - "An overnight marinade"
         correct: 0
-        translation: "Put more embers under the meat."
-        explain: "**Brasas**, always. Ice and water are for the drinks."
-
-    vocabulary:
-      - es: "parrilla"
-        en: "grill"
-        note: "Also a restaurant that serves grilled meat."
-      - es: "fogón"
-        en: "open fire, campfire"
-      - es: "brasas"
-        en: "embers"
-        example: { es: "Poné más brasas debajo del vacío.", en: "Put more embers under the flank." }
-      - es: "leña"
-        en: "firewood"
-      - es: "carbón"
-        en: "charcoal"
-    glossary:
-      - es: "asado a la cruz"
-        en: "whole lamb roasted on an iron cross (also: al asador)"
+        explain: "Usually just **sal gruesa**, coarse salt. Good meat and good embers do the rest. Chimichurri waits at the table."
+      - type: card
+        text: "Then patience. The big cuts cook slowly, often for an hour and a half or more, and a good asador flips each one only once."
+      - type: card
+        text: "How do you like it? Most Argentines say **a punto**, medium, or **jugoso**, a bit pink. Ask for it very rare and you'll get a raised eyebrow."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "el-orden"
     title: "What comes off the grill, and when"
     summary: "Picada, sausages, achuras, then the big cuts"
     pages:
-      - type: info
-        title: "First, the picada"
-        word: { es: "picada", tag: "The opener", en: "snack board" }
-        emoji: "🧀"
-        body: "While the fire does its thing, there's a **picada**: a board with cheese, salami, olives, bread, maybe peanuts. It keeps everyone alive for the first couple of hours. Don't fill up on it, though — you've got a long way to go."
-
-      - type: info
-        title: "Then, the sausages"
-        emoji: "🌭"
-        body: "The first things off the grill are usually the sausages: **chorizo** (pork-and-beef sausage) and **morcilla** (blood sausage, dark and soft). They get cut up on a board and passed around, often on a piece of bread. Squeeze of lemon optional, second helping expected."
-
-      - type: info
-        title: "The brave stuff"
-        emoji: "😬"
-        body: "Next, the **achuras** (offal). **Chinchulines** are small intestines, grilled until golden and crispy. **Mollejas** are sweetbreads, the thymus gland: crispy outside, creamy inside. Try the mollejas with lemon. Thank me later."
-        fun_fact: "Technically chorizo and morcilla aren't offal, but at the grill plenty of people lump them in with the achuras."
-
-      - type: match
-        prompt: "Match it to what it is"
-        pairs:
-          - ["chorizo", "pork-and-beef sausage"]
-          - ["morcilla", "blood sausage"]
-          - ["chinchulines", "crispy small intestines"]
-          - ["mollejas", "sweetbreads, creamy inside"]
-
-      - type: info
-        title: "Finally, the cuts"
-        emoji: "🥩"
-        body: "Then the main event, the **cortes** (cuts): **asado de tira** (short ribs cut across the bone), **vacío** (flank) and **entraña** (skirt steak, juicy and loved). The asador decides the order. Your job is to eat and say **¡qué rico!** (so good!)."
-
-      - type: order
-        prompt: "Put a classic asado in order"
-        items:
-          - "Picada while the fire gets going"
-          - "Chorizo and morcilla"
-          - "Vacío, entraña and asado de tira"
-        explain: "Every family does it a bit differently, but snacks, then sausages, then the big cuts is the usual rhythm. The achuras come off somewhere in between."
-
+      - type: card
+        text: "While the fire does its thing, there's a **picada**: cheese, salami, olives, bread. It keeps everyone alive. Don't fill up, though. There's a long way to go."
       - type: choice
-        scenario: "Someone slices a dark, almost black sausage and hands you a piece on bread: \"Probá la morcilla.\""
-        prompt: "What are you about to eat?"
-        options: ["Blood sausage", "Chocolate sausage", "Burnt chorizo"]
+        prompt: "How much meat does the host buy per person?"
+        options:
+          - "About 250 grams"
+          - "About half a kilo"
+          - "About a kilo"
+        correct: 1
+        explain: "Half a kilo each is the classic rule, bones included. Nobody wants to be the host who ran out."
+      - type: card
+        text: "First off the grill: **chorizo** and **morcilla**. They get cut up on a board and passed around, often on a piece of bread."
+      - type: choice
+        prompt: "The morcilla is dark, soft and a little sweet. What's it made with?"
+        options:
+          - "Pig's blood"
+          - "Chicken liver"
+          - "Black beans"
         correct: 0
-        explain: "**Morcilla** is blood sausage: soft, rich, a bit sweet. Sounds scary, tastes amazing. Saying **no, gracias** is fine too."
-
-      - type: info
-        title: "How do you like it?"
-        emoji: "🌡️"
-        body: "The asador might ask how you want your meat. **Jugoso** means juicy, pink inside. **A punto** is medium. **Cocido** is well done. Most Argentines like it a punto or a bit jugoso. Asking for it very rare? You'll get a raised eyebrow."
-
-      - type: gap
-        prompt: "Ask for your meat medium"
-        text: "Para mí, a ___, por favor."
-        options: ["punto", "fuego", "gusto"]
-        correct: 0
-        translation: "Medium for me, please."
-        explain: "**A punto** = medium. **Jugoso** if you want it pinker, **cocido** if you want it well done."
-
-      - type: true_false
-        statement: "Vacío and entraña are types of achuras."
-        answer: false
-        explain: "They're **cortes** (cuts of beef). Achuras are the offal: chinchulines, mollejas and friends."
-
-    vocabulary:
-      - es: "picada"
-        en: "snack board (cheese, salami…)"
-      - es: "achuras"
-        en: "offal"
-        example: { es: "¿Ya salen las achuras?", en: "Is the offal ready yet?" }
-      - es: "morcilla"
-        en: "blood sausage"
-      - es: "chinchulines"
-        en: "grilled small intestines"
-      - es: "mollejas"
-        en: "sweetbreads (thymus gland)"
-      - es: "vacío"
-        en: "flank"
-      - es: "entraña"
-        en: "skirt steak"
-      - es: "a punto"
-        en: "medium (meat)"
-        example: { es: "Para mí, a punto, por favor.", en: "Medium for me, please." }
-      - es: "¡qué rico!"
-        en: "so good!"
-    glossary:
-      - es: "asado de tira"
-        en: "short ribs cut across the bone"
-      - es: "chorizo"
-        en: "pork-and-beef sausage"
-      - es: "cortes"
-        en: "cuts (of meat)"
-      - es: "jugoso"
-        en: "juicy, medium-rare"
-      - es: "cocido"
-        en: "well done"
+        explain: "Blood sausage. Sounds scary, tastes amazing. Saying **no, gracias** is fine too."
+      - type: card
+        text: "Then the brave stuff, the **achuras**: **chinchulines**, crispy grilled intestines, and **mollejas**, sweetbreads, crispy outside and creamy inside. Try the mollejas with lemon."
+      - type: card
+        text: "Finally the main event: **asado de tira** (short ribs), **vacío** (flank) and **entraña** (skirt steak). The asador decides the order. Your job: eat, and say **¡qué rico!**"
+      - type: card
+        chip: "Did you know?"
+        text: "**Matambre a la pizza**: a thin flat cut, grilled until tender, then topped with tomato sauce and cheese right on the grill. Yes, pizza on the parrilla."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "chori-y-salsas"
     title: "Choripán, provoleta and the sauces"
     summary: "The sandwich, the grilled cheese and what goes on top"
     pages:
-      - type: info
-        title: "The choripán"
-        word: { es: "choripán", tag: "Street food", en: "grilled sausage sandwich" }
-        emoji: "🥖"
-        body: "**Choripán** = **chorizo** + **pan** (bread). A grilled sausage, split open in a crusty roll. That's it, and it's perfect. It's the first thing out at many asados, and it's also street food: outside football stadiums, at protests, on the Costanera. Everyone calls it **chori**."
-
-      - type: info
-        title: "The provoleta"
-        emoji: "🧀"
-        body: "**Provoleta** is a thick round of provolone-style cheese grilled until crispy outside and melty inside, with oregano and chili flakes on top. It's the classic starter at any parrilla: order one for the table and eat it fast, straight from the little pan, before it turns to rubber."
-
-      - type: info
-        title: "Chimichurri and salsa criolla"
-        emoji: "🌿"
-        body: "Two sauces rule. **Chimichurri**: parsley, oregano, garlic, chili flakes, vinegar and oil. **Salsa criolla**: chopped tomato, onion and bell pepper in vinegar and oil. Both go on the choripán and the meat. Where does the name chimichurri come from? Nobody knows for sure, and everyone has a theory."
-
-      - type: match
-        prompt: "Match the thing to what's in it"
-        pairs:
-          - ["choripán", "sausage in a bread roll"]
-          - ["provoleta", "grilled cheese round"]
-          - ["chimichurri", "parsley, garlic, vinegar, oil"]
-          - ["salsa criolla", "tomato, onion, bell pepper"]
-
-      - type: true_false
-        statement: "Of the two classic sauces, salsa criolla is the one with chopped tomato."
-        answer: true
-        explain: "Right: tomato, onion and bell pepper. **Chimichurri** is the green one, with parsley, garlic and oregano."
-
+      - type: card
+        text: "**Choripán**: a grilled chorizo split open in a crusty roll. That's it, and it's perfect. Everyone calls it **chori**."
+      - type: card
+        text: "Ask for it **mariposa**, butterfly: the chorizo is split lengthwise and opened flat, so it cooks faster and crisps up."
       - type: choice
-        scenario: "You're at a football match in Buenos Aires. Outside the stadium, smoke everywhere and people lining up at a street grill."
-        prompt: "What are they most likely selling?"
-        options: ["Choripanes", "Provoletas", "Entrañas on a plate"]
+        prompt: "It's 5 a.m. and the boliche just closed. Where do porteños go for a chori?"
+        options:
+          - "A food stall by the river"
+          - "A 24-hour kiosco"
+          - "The bakery, just opening"
         correct: 0
-        explain: "The **chori** is the king of street food at stadiums. Cheap, fast, and you eat it standing up with chimichurri dripping everywhere."
-
-      - type: gap
-        prompt: "Your turn at the street grill. Order a sausage sandwich with the green sauce."
-        text: "Un ___ con chimichurri, por favor."
-        options: ["chori", "vaso", "hielo"]
+        explain: "The **carritos de la Costanera**, grill stalls along the river that barely ever close. Smoke, a line, and chimichurri dripping everywhere."
+      - type: card
+        text: "Chori is street food everywhere: outside football stadiums, at every festival, and at political rallies."
+      - type: choice
+        prompt: "Critics sometimes call rally crowds **choripaneros**. What's the jab?"
+        options:
+          - "They only came for a free chori"
+          - "The rally was held at a parrilla"
+          - "The crowd sang about choripán"
         correct: 0
-        translation: "A chori with chimichurri, please."
-        explain: "**Un chori con chimichurri**: the most-said sentence outside any stadium on a Sunday."
-
-    vocabulary:
-      - es: "choripán"
-        en: "grilled sausage sandwich"
-        note: "Short: chori."
-        example: { es: "¿Te hago un chori?", en: "Shall I make you a chori?" }
-      - es: "chorizo"
-        en: "pork (and beef) sausage"
-      - es: "provoleta"
-        en: "grilled provolone-style cheese"
-      - es: "chimichurri"
-        en: "green herb, garlic and vinegar sauce"
-      - es: "salsa criolla"
-        en: "tomato, onion and pepper relish"
-    glossary:
-      - es: "chori"
-        en: "short for choripán (slang)"
-      - es: "pan"
-        en: "bread"
+        explain: "The insult says people were brought in with a free sandwich, not real conviction. It's a political dig, so use it with care."
+      - type: card
+        text: "**Provoleta** is a thick round of provolone-style cheese, grilled crispy outside and melty inside, with oregano and chili. Eat it fast, before it turns to rubber."
+      - type: card
+        text: "Two sauces rule. **Chimichurri** is green: parsley, oregano, garlic, chili flakes, vinegar and oil. **Salsa criolla** is tomato, onion and bell pepper."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "sos-invitado"
-    title: "You're invited — now what?"
-    summary: "What to bring, what to say, and how not to annoy the asador"
+    title: "You're invited. Now what?"
+    summary: "What to bring, how not to annoy the asador, and the applause"
     pages:
-      - type: info
-        title: "Never show up empty-handed"
-        emoji: "🍷"
-        body: "The host usually buys the meat. You bring something else: **vino** (wine, often a Malbec), **bebida** (drinks: soda, beer, fernet), **postre** (dessert — ice cream is a classic), or **hielo** (ice, and someone always forgets it). Just ask: **¿qué llevo?** (what should I bring?)."
-        fun_fact: "With friends, everyone often chips in for the meat. That's **hacer una vaquita**."
-
+      - type: card
+        text: "The host buys the meat. Guests bring **vino**, drinks, dessert or **hielo**. Someone always forgets the ice."
       - type: choice
-        scenario: "Your friend's family invited you to their Sunday asado. You ask what to bring and they say \"nada, vení\" (nothing, just come)."
-        prompt: "What do you actually do?"
-        options: ["Show up with nothing, as told", "Bring wine or dessert anyway", "Bring a kilo of steak for yourself"]
-        correct: 1
-        explain: "\"**Nada, vení**\" is being polite. A bottle of wine or some dessert is always welcome. Bringing your own meat can look like you don't trust the host."
-
-      - type: gap
-        prompt: "Ask what you should bring"
-        text: "¿Qué ___ para el asado?"
-        options: ["llevo", "vendo", "leo"]
+        prompt: "Before anything reaches the table, who gets the first bites?"
+        options:
+          - "Whoever keeps the asador company"
+          - "The kids, so they stop asking"
+          - "The host's parents, out of respect"
         correct: 0
-        translation: "What should I bring to the asado?"
-        explain: "**¿Qué llevo?** — the classic question. Argentines use **llevar** (take) from the guest's point of view."
-
-      - type: info
-        title: "The golden rule"
-        emoji: "🤐"
-        body: "Don't tell the asador how to cook. Not \"it needs more heat\", not \"in my country we…\". And never grab the tongs: the fire and the meat are theirs. Keep them company, bring them a glass of wine, and say **¡huele bárbaro!** (smells amazing!). Want to help? Ask **¿te ayudo en algo?** and do exactly what they say."
-
+        explain: "Hang out by the grill and the asador will pass you bits of chorizo or crackling on bread, straight off the fire. Company earns you snacks."
+      - type: card
+        text: "Golden rule: don't tell the asador how to cook. Not “it needs more heat”, not “in my country we…”. And never touch the tongs."
+      - type: card
+        text: "Want to help? Ask **“¿Te ayudo en algo?”** and do exactly what you're told. Or just bring the asador a glass of wine."
       - type: choice
-        scenario: "You think the vacío has been on too long. The asador turns and asks: \"¿Todo bien?\""
-        prompt: "Best answer?"
-        options: ["\"It's burning, take it off\"", "\"¡Todo bien! Huele bárbaro.\"", "Grab the tongs and take it off"]
-        correct: 1
-        explain: "Trust the asador. Criticizing the asado is almost a personal insult."
-
-      - type: info
-        title: "The applause"
-        emoji: "👏"
-        body: "When the meat's done and everyone's eaten, someone raises a glass: **¡Un aplauso para el asador!** Everyone claps, even if the meat was a bit dry. The asador cooked, so the others clear the table and wash up. Then nobody gets up: the **sobremesa** (the long chat at the table) has started, and you stay for it."
-
-      - type: gap
-        prompt: "Complete the classic toast"
-        text: "¡Un aplauso para el ___!"
-        options: ["asador", "mozo", "vacío"]
+        prompt: "The meat's done and everyone has eaten. What does someone always call out?"
+        options:
+          - "A round of applause for the asador"
+          - "A short speech from the host"
+          - "A group photo for the family chat"
         correct: 0
-        translation: "A round of applause for the grill master!"
-        explain: "Always the **asador**. A **mozo** is a waiter, and nobody applauds the flank."
-
-      - type: true_false
-        statement: "At an asado, the asador usually gets out of washing up."
-        answer: true
-        explain: "They did the cooking. Offering to help with the dishes earns you points, and a second invitation."
-
-      - type: order
-        prompt: "A perfect guest's afternoon"
-        items:
-          - "Ask ¿qué llevo?"
-          - "Arrive with wine and ice"
-          - "Keep the asador company at the grill"
-          - "Eat everything and say ¡qué rico!"
-          - "Aplauso para el asador"
-          - "Stay for the sobremesa"
-        explain: "Nail these and you'll be invited back next Sunday."
-
-    vocabulary:
-      - es: "bebida"
-        en: "drinks (soda, beer…)"
-      - es: "postre"
-        en: "dessert"
-      - es: "hielo"
-        en: "ice"
-        example: { es: "¿Alguien trajo hielo?", en: "Did anyone bring ice?" }
-      - es: "¿qué llevo?"
-        en: "what should I bring?"
-        example: { es: "¿Qué llevo el domingo?", en: "What should I bring on Sunday?" }
-      - es: "¿te ayudo en algo?"
-        en: "can I help with anything?"
-      - es: "bárbaro"
-        en: "great, amazing"
-        example: { es: "¡Huele bárbaro!", en: "It smells amazing!" }
-      - es: "¡un aplauso para el asador!"
-        en: "a round of applause for the cook!"
-    glossary:
-      - es: "vino"
-        en: "wine"
-      - es: "hacer una vaquita"
-        en: "to chip in (everyone pays a share)"
-      - es: "nada, vení"
-        en: "nothing, just come (but do bring something)"
+        explain: "**¡Un aplauso para el asador!** Everyone claps, even if the meat was a bit dry."
+      - type: card
+        text: "When the asador calls **“¡A la mesa!”**, go right away. Letting the meat go cold while you finish a story is the real insult."
+      - type: card
+        text: "The asador cooked, so the others clear the table and wash up. Offer to help with the dishes: that's how you get invited back."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "asados-del-pais"
     title: "Asados from the rest of the country"
     summary: "Lamb on a cross, beef in its hide and dinner in a plough disc"
     pages:
-      - type: info
-        title: "Patagonian lamb"
-        emoji: "🐑"
-        body: "Down south the star isn't beef. It's **cordero patagónico al asador**, also called **asado a la cruz**: a whole lamb opened flat, wired to an iron cross and stuck in the ground, leaning over the fire. Yes, the cross is *also* called an **asador**, like the grill master. It cooks slowly, for hours, until the skin crackles."
-
+      - type: card
+        text: "Down south the star isn't beef. It's **cordero patagónico**: a whole lamb opened flat, wired to an iron cross and stuck in the ground beside the fire for hours."
+      - type: card
+        text: "The big-party version is **asado con cuero**: beef cooked with its hide on. The hide works like a pot, holding in the juices and fat."
       - type: choice
-        scenario: "You're walking through El Calafate and see a restaurant window with lambs spread on iron crosses around a fire."
-        prompt: "What are you looking at?"
-        options: ["Cordero al asador", "Asado con cuero", "Pollo al disco"]
+        prompt: "A festival poster says the **vaquillona con cuero** is served at 1 p.m. When did the cooks light the fire?"
+        options:
+          - "The night before"
+          - "Around ten that morning"
+          - "Right at noon"
         correct: 0
-        explain: "Lamb on the **asador** (the cross), Patagonia's signature. It's slow food in the most literal way: it was probably on the fire before lunch was even a thought."
-
-      - type: info
-        title: "Asado con cuero"
-        emoji: "🐄"
-        body: "The big-party version: beef cooked **con cuero**, with its hide still on. The hide works like a pot, holding in the juices and fat. Usually it's a **vaquillona** (young heifer) in huge pieces, over steady embers for **12 hours or more**. It's festival food, made for a crowd."
-        fun_fact: "Travel tip: the town of Viale, in Entre Ríos, throws a national festival for it every year."
-
-      - type: true_false
-        statement: "In an asado con cuero, the hide is left on to keep the juices in."
-        answer: true
-        explain: "Exactly: the hide works like a pot. That's also why it takes forever."
-
+        explain: "Twelve hours or more over the embers means starting the night before and taking turns. Someone always brings a guitar and a termo."
+      - type: card
+        chip: "Did you know?"
+        text: "The town of **Viale**, in Entre Ríos, throws a national festival for asado con cuero every year."
+      - type: card
+        text: "In the west it's **chivito**: young goat, grilled slowly over the embers. Mendoza and Neuquén each swear theirs is the best."
       - type: choice
-        scenario: "A town festival poster says: \"Vaquillona con cuero, se sirve a las 13 hs.\""
-        prompt: "When did the asadores probably start cooking?"
-        options: ["Around noon", "The night before", "The week before"]
-        correct: 1
-        explain: "Twelve hours or more of fire means lighting up the night before and taking turns. Someone always brings a guitar and a termo."
-
-      - type: info
-        title: "The disco"
-        emoji: "🍳"
-        body: "Out in the **campo** (countryside), someone took a worn-out **disco de arado** (plough disc), welded on legs and handles, and got a giant wok for the fire. Now it's everywhere: **pollo al disco**, **carne al disco**, onions, peppers, chorizo and a splash of wine, all stewing together. One disco feeds a crowd, and everyone stands around it with a piece of bread."
-
-      - type: match
-        prompt: "Match the dish to how it's cooked"
-        pairs:
-          - ["cordero al asador", "whole lamb on an iron cross"]
-          - ["asado con cuero", "beef cooked with its hide on"]
-          - ["pollo al disco", "chicken stewed in a plough disc"]
-          - ["vaquillona", "young heifer"]
-
-      - type: gap
-        prompt: "Your friend in the campo announces tonight's dinner"
-        text: "Hoy hacemos pollo al ___."
-        options: ["disco", "cuero", "arado"]
+        prompt: "Out in the **campo** there's a giant pan for the fire called **el disco**. What was it originally?"
+        options:
+          - "A plough disc from the farm"
+          - "The rim of a cart wheel"
+          - "An old oil drum lid"
         correct: 0
-        translation: "Tonight we're making chicken in the disc."
-        explain: "**Al disco** = cooked in the plough disc. **Con cuero** is for beef with the hide, and nobody cooks the plough itself."
-
-    glossary:
-      - es: "asador"
-        en: "the grill master; also, the iron cross for roasting"
-      - es: "asado a la cruz"
-        en: "another name for lamb al asador"
-      - es: "disco de arado"
-        en: "plough disc used as a cooking pan"
-    vocabulary:
-      - es: "cordero"
-        en: "lamb"
-        example: { es: "En el sur comimos cordero al asador.", en: "Down south we ate lamb on the cross." }
-      - es: "al asador"
-        en: "roasted on an iron cross by the fire"
-      - es: "con cuero"
-        en: "with the hide on"
-      - es: "vaquillona"
-        en: "young heifer"
-      - es: "al disco"
-        en: "stewed in a plough disc"
-        example: { es: "¿Hacemos pollo al disco?", en: "Shall we make chicken in the disc?" }
-      - es: "campo"
-        en: "countryside, farm"
+        explain: "A worn-out **disco de arado**, plough disc, with legs and handles welded on. Instant giant wok."
+      - type: card
+        text: "Chicken, onions, peppers, chorizo and a splash of wine, all stewing together: **pollo al disco**. One disco feeds a crowd, everyone standing around it with bread."
+    vocabulary: []

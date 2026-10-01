@@ -17,13 +17,13 @@ Langua) and the corrective-feedback research. Sources are in §9.
 | Topic | Decision |
 |---|---|
 | Mode | **Turn-based**, not a live call. |
-| Content | **Scenarios** (with goals), **culture topics**, **free chat**. |
+| Content | **Scenarios**, **culture topics**, **free chat**. No goals (removed 2026-09-30): Pancho leads the conversation. |
 | Character | **One**: Pancho, using the existing `tomas` ElevenLabs voice. Backstory and avatar: later. |
 | Input | **Voice only.** Tap to start, tap to stop. |
-| Level | Defaults to the learner's **course level**; they can override it (Easier / My level / Harder). |
-| Limit | **1 conversation a day, 5 minutes**, reset at **local midnight**. The timer counts the whole session and pauses when the app is in the background. |
-| Time's up | Pancho is told to wrap up and closes in character; then the summary shows. No hard cut. |
-| Corrections | Pancho recasts the mistake **inside his reply**. The **badge** on the user's message holds the exact fix, shown on tap. |
+| Level | Defaults to the learner's **course level**; they can override it (Easier / My level / Harder). Each level has a strict grammar list (`LEVEL_GRAMMAR`: A1 is present tense only) that the reply, the "better" line, hints and summary phrases all follow. |
+| Limit | **1 conversation a day, about 2 minutes** (hard stop 3:00), reset at **local midnight**. The timer counts the whole session and pauses when the app is in the background. |
+| Ending | **Pancho decides** when the chat is over and ends his goodbye with a `[FIN]` marker the server strips. He is nudged at 1:40 (or 6 exchanges) and told to close at 2:30 (or 10). |
+| Corrections | Pancho recasts the mistake **inside his reply**. The exact fix and its explanation are **always shown under the user's message** (since 2026-09-30), no tap needed. |
 | Message tools | User: ✏️ correction + "Explain" · 🪄 better phrasing + **"Decilo"**. Pancho: ▶️ replay · 🐢 slow · 🔤 translate. |
 | Tone | **Relaxed porteño.** Understands and explains lunfardo and puteadas, never insults the learner. |
 | History | Saved, with an **end-of-chat summary**. |

@@ -4,450 +4,183 @@ section:
   emoji: "💃"
   summary: "The sad, sexy music of the Río de la Plata, and how not to embarrass yourself at a milonga"
 
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
 classes:
   # ─────────────────────────────────────────────────────────────
   - slug: "nacido-en-el-arrabal"
     title: "Born on the edge of town"
     summary: "Two cities, one port, and a German squeezebox"
     pages:
-      - type: info
-        title: "From the arrabal"
-        word: { es: "arrabal", tag: "Where tango began", en: "rough city outskirts" }
-        emoji: "🏚️"
-        body: "Tango was born in the late 1800s in the **arrabal**, the rough outskirts of the city: crowded tenements called **conventillos**, corner bars, the port. It was the music of immigrants, sailors, workers and **compadritos** (local tough guys with a knife and a nice hat). Polite society found it scandalous, until tango became a craze in **Paris**. Suddenly the rich loved it."
-
-      - type: info
-        title: "Buenos Aires AND Montevideo"
-        emoji: "🤝"
-        body: "Careful here: tango isn't only **porteño** (from Buenos Aires). It's **rioplatense**: it grew up on both sides of the **Río de la Plata**, in Buenos Aires and in **Montevideo**. Uruguayans will remind you, with love and zero patience. The most famous tango of all, **La Cumparsita**, was written by a Uruguayan and premiered in a Montevideo café."
-        fun_fact: "Argentina and Uruguay went to UNESCO together, and tango became Intangible Cultural Heritage of Humanity."
-
+      - type: card
+        text: "Tango was born in the late 1800s in the **arrabal**, the rough edge of town: tenements, corner bars, the port. The music of immigrants, sailors and workers."
       - type: choice
-        scenario: "You're in Montevideo and you say: \"I love Argentine tango!\" Your Uruguayan friend raises an eyebrow."
-        prompt: "What's the safer thing to say?"
-        options: ["\"Porteño tango\"", "\"Tango rioplatense\"", "\"Spanish tango\"", "\"Buenos Aires tango\""]
+        prompt: "Polite Buenos Aires society found tango scandalous. What finally changed their minds?"
+        options:
+          - "A president danced it in public"
+          - "It became a craze in Paris"
+          - "The Church gave it its blessing"
         correct: 1
-        explain: "**Rioplatense** covers both cities. It's even how UNESCO put it. Your friend will lower the eyebrow."
-
-      - type: info
-        title: "Men danced with men"
-        emoji: "🕺"
-        body: "Around 1900 there were way more men than women in the city, because most immigrants were young single guys. So men often practiced tango **with each other**, on the street corner or in the patio, to the sound of an **organito** (a street barrel organ). Getting good mattered: you had to be decent before anyone would dance with you."
-
-      - type: true_false
-        statement: "Tango started as elegant ballroom music for the rich in Buenos Aires."
-        answer: false
-        explain: "The opposite. It was born among the poor and the rough, and the upper class only embraced it after Paris did. Nothing like European approval to change a porteño's mind."
-
-      - type: info
-        title: "A squeezebox from Germany"
-        emoji: "🪗"
-        body: "The sound of tango is the **bandoneón**, and it's German. The name comes from **Heinrich Band**, who sold them, supposedly so small churches with no organ could have music. Sailors and immigrants brought it to the Río de la Plata; nobody's sure who brought the first one. From church hymns to brothel music in one boat trip."
-
-      - type: info
-        title: "The fueye"
-        emoji: "💨"
-        body: "Tangueros call the bandoneón **el fueye**, from *fuelle* (bellows). It's famously hard: dozens of buttons, and each one plays a *different note* depending on whether you open or close it. Old German-made ones are still the most wanted, and a good one costs a small fortune."
-
-      - type: match
-        prompt: "Match the word to what it is"
-        pairs:
-          - ["arrabal", "the rough outskirts of the city"]
-          - ["fueye", "the bandoneón's nickname"]
-          - ["organito", "street barrel organ"]
-          - ["compadrito", "old-time local tough guy"]
-
+        explain: "Once Paris loved it, the rich loved it too. Nothing like European approval to change a porteño's mind."
+      - type: card
+        text: "Around 1900, men far outnumbered women in the city. So men often practiced tango with each other until they were good enough to dance with a woman."
       - type: choice
-        prompt: "Why is the bandoneón so hard to play?"
-        options: ["Each button has two notes", "It's as heavy as a piano", "It only plays in one key"]
+        prompt: "The most famous tango ever, **La Cumparsita**, was written where?"
+        options:
+          - "In Montevideo, by a student"
+          - "In Buenos Aires, by Gardel"
+          - "In Paris, during the craze"
         correct: 0
-        explain: "Same button, different note depending on whether the bellows open or close. Now imagine doing that at tango speed."
-
-    vocabulary:
-      - es: "tanguero"
-        en: "tango lover, tango person"
-        example: { es: "Mi abuelo era re tanguero.", en: "My grandpa was a huge tango fan." }
-      - es: "bandoneón"
-        en: "German squeezebox, the sound of tango"
-      - es: "arrabal"
-        en: "rough outskirts of the city"
-        note: "Poetic and old-fashioned today; you'll find it in lyrics."
-      - es: "rioplatense"
-        en: "from the Río de la Plata (Argentina and Uruguay)"
-      - es: "compadrito"
-        en: "old-time street tough guy"
-    glossary:
-      - es: "fueye"
-        en: "the bandoneón (slang, from 'bellows')"
-      - es: "conventillos"
-        en: "crowded tenement houses"
-      - es: "porteño"
-        en: "from Buenos Aires"
-      - es: "La Cumparsita"
-        en: "The Little Parade (famous tango)"
-      - es: "organito"
-        en: "street barrel organ"
+        explain: "Gerardo Matos Rodríguez, a young Uruguayan, wrote it, and it premiered in a Montevideo café."
+      - type: card
+        text: "So tango isn't only Argentine. It's **rioplatense**, from both sides of the river. In 2009 UNESCO listed it as heritage of both countries, and Uruguayans will remind you."
+      - type: card
+        text: "The sound of tango is the **bandoneón**, and it's German. The story goes it was meant for small churches with no organ. Hymns to tango bars in one boat trip."
+      - type: choice
+        prompt: "Why is the bandoneón famously hard to play?"
+        options:
+          - "Each button plays two different notes"
+          - "It's as heavy as a small piano"
+          - "It only plays in a single key"
+        correct: 0
+        explain: "The note changes depending on whether the bellows open or close. Tangueros call it **el fueye**: the bellows."
+      - type: card
+        text: "Early tango was quick and playful, played on flute, violin and guitar. Many say the bandoneón slowed it down, and that's where tango got its famous sadness."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "la-milonga"
     title: "At the milonga"
-    summary: "The unwritten rules of the dance floor, and tango today"
+    summary: "The unwritten rules of the dance floor"
     pages:
-      - type: info
-        title: "What's a milonga?"
-        word: { es: "milonga", tag: "Tango night", en: "a dance night, and a rhythm" }
-        emoji: "🌙"
-        body: "A **milonga** is a tango dance night: a hall, tables around a wooden floor, music from a DJ or a live orquesta, and people of every age dancing until late. (It's also a faster, bouncier rhythm related to tango, so yes, you can dance a milonga at the milonga.) There are milongas every night of the week in Buenos Aires."
-
-      - type: info
-        title: "The cabeceo"
-        emoji: "👀"
-        body: "Nobody walks up and asks \"¿bailamos?\" at a traditional milonga. You use the **mirada** (look) and the **cabeceo** (a small nod). You catch someone's eye from across the room and nod. If they nod back, you go get them. If they look away, no one got rejected in public. The regulars, the **milongueros**, are masters at it."
-
+      - type: card
+        text: "A **milonga** is a tango dance night: tables around a wooden floor, a DJ or a live orquesta, every age dancing until late. Buenos Aires has one every night of the week."
       - type: choice
-        scenario: "At a milonga, you catch someone's eye and nod. They look down at their shoes."
-        prompt: "What happened?"
-        options: ["They didn't see you, walk over and ask", "They said no, politely. Try someone else.", "They want you to nod again, harder"]
+        prompt: "At a traditional milonga, how do you ask someone to dance?"
+        options:
+          - "Walk to their table and offer your hand"
+          - "Catch their eye across the room and nod"
+          - "Ask the DJ to dedicate them a song"
         correct: 1
-        explain: "Looking away is the polite **no**. Walking over anyway puts them on the spot, and that's exactly what the **cabeceo** exists to avoid."
-
-      - type: info
-        title: "Tandas and cortinas"
-        emoji: "🎶"
-        body: "The music comes in **tandas**: sets of 3 or 4 songs of the same style and usually the same orquesta. Between tandas, the DJ plays a **cortina** (curtain), a short bit of non-tango music. That's the signal: everyone leaves the floor and changes partners. Many milongas end the night with **La Cumparsita**."
-
-      - type: info
-        title: "Gracias = I'm done"
-        emoji: "🙅"
-        body: "Here's the trap. You dance the whole tanda with your partner. If you say **gracias** after the first song, it doesn't mean \"thanks\", it means \"thanks, **that's enough**\". Your partner will walk you back to your table. Want to keep going? Just smile and wait for the next song."
-
-      - type: true_false
-        statement: "At a milonga, it's polite to say \"gracias\" after every song."
-        answer: false
-        explain: "**Gracias** ends the tanda. Say it after one song and you just dumped your partner, politely but clearly."
-
-      - type: info
-        title: "The ronda"
-        emoji: "🔄"
-        body: "Couples move around the floor in a **ronda**, counterclockwise, like cars on a track. These are the **códigos** (unwritten rules) of the floor: no passing, no stopping to chat, no big kicks that hit the couple behind you. And never **teach on the floor**: correcting your partner mid-dance is a big no. Save it for class, or better, for never."
-
-      - type: order
-        prompt: "A tanda at the milonga, in order"
-        items:
-          - "Catch someone's eye and nod (cabeceo)"
-          - "Meet on the floor and join the ronda"
-          - "Dance the whole tanda together"
-          - "The cortina plays: say gracias, back to your table"
-
-      - type: info
-        title: "Show or milonga?"
-        emoji: "🎭"
-        body: "Tourists often see tango at a **cena show**: dinner, sequins, flying legs, a rose in someone's mouth. Porteños call it **tango for export**. It's real skill, but it's stage tango. At a milonga, the dance is small, close and improvised. Each August the city hosts the **Mundial de Tango**, with a stage category and a **pista** (social floor) one."
-
+        explain: "That's the **cabeceo**: a look, a small nod. If they nod back, you go get them."
+      - type: card
+        text: "And if they look away? That's a no, and nobody got rejected in public. That's the whole point of the cabeceo."
+      - type: card
+        text: "Music comes in **tandas**, sets of 3 or 4 songs. Then a short non-tango **cortina** plays, the floor clears, and everyone changes partners."
       - type: choice
-        scenario: "You want to see how porteños actually dance tango, not a show."
-        prompt: "Where do you go?"
-        options: ["A dinner show with a set menu", "A neighborhood milonga, just to watch", "A street performance in Caminito"]
-        correct: 1
-        explain: "At a **milonga** you can sit, have a drink and watch. Nobody minds, as long as you stay off the floor until you know the **códigos**."
-
-    vocabulary:
-      - es: "milonga"
-        en: "tango dance night (also a tango-related rhythm)"
-        example: { es: "¿Vamos a la milonga el jueves?", en: "Shall we go to the milonga on Thursday?" }
-      - es: "milonguero"
-        en: "regular at the milongas"
-      - es: "cabeceo"
-        en: "the nod used to invite someone to dance"
-      - es: "tanda"
-        en: "set of 3 or 4 songs danced with one partner"
-      - es: "cortina"
-        en: "short break between tandas"
-      - es: "pista"
-        en: "dance floor"
-      - es: "¿bailamos?"
-        en: "shall we dance? (asked out loud)"
-      - es: "códigos"
-        en: "unwritten rules"
-        example: { es: "Acá hay códigos, eh.", en: "There are rules here, you know." }
-      - es: "for export"
-        en: "made for tourists, not the real thing"
-        example: { es: "Ese show es puro tango for export.", en: "That show is pure tourist tango." }
-    glossary:
-      - es: "mirada"
-        en: "look, glance"
-      - es: "La Cumparsita"
-        en: "The Little Parade (famous tango)"
-      - es: "gracias"
-        en: "thank you"
-      - es: "ronda"
-        en: "round, circle"
-      - es: "cena show"
-        en: "dinner show"
+        prompt: "Your partner says **“gracias”** after the first song. What just happened?"
+        options:
+          - "They're being polite, keep dancing"
+          - "They want a short break"
+          - "They're done dancing with you"
+        correct: 2
+        explain: "**Gracias** mid-tanda means “thanks, that's enough”. Want to keep going? Just smile and wait for the next song."
+      - type: card
+        text: "Couples move counterclockwise in a **ronda**, like cars on a track. No passing, no big kicks, and never teach your partner on the floor."
+      - type: card
+        chip: "Did you know?"
+        text: "The dinner shows with flying legs and a rose in someone's mouth? Porteños call that **tango for export**. At a milonga, the dance is small, close and improvised."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "gardel"
     title: "Gardel"
     summary: "The voice, the smile, and the question of where he was born"
     pages:
-      - type: info
-        title: "El Zorzal"
-        emoji: "🎩"
-        body: "**Carlos Gardel** is *the* tango **cantor** (singer), and the country's first pop **ídolo**. Slicked-back hair, a smile that sold records, a voice people still call perfect. They call him **el Zorzal criollo** (the local songbird) and **el Morocho del Abasto**: the dark-haired guy from Abasto, the market barrio where he grew up. His house there is now a museum."
-
-      - type: info
-        title: "Toulouse or Tacuarembó?"
-        emoji: "🗺️"
-        body: "Where was he born? Most researchers say **Toulouse, France**: son of a single mother who brought him to Buenos Aires as a toddler. But Gardel himself once signed papers saying he was born in **Tacuarembó, Uruguay**. Many Uruguayans believe that version, and new documents keep reopening the fight. Argentines just say he's porteño, since that's where he grew up."
-
-      - type: true_false
-        statement: "Gardel himself once signed papers saying he was born in Uruguay."
-        answer: true
-        explain: "He did, and Tacuarembó has never let it go. Toulouse has the French birth record. Everyone claims him."
-
-      - type: info
-        title: "Cada día canta mejor"
-        emoji: "✈️"
-        body: "In 1935, at the peak of his fame, Gardel died in a plane crash in **Medellín**, Colombia, during a tour. The country went into mourning, and the myth started right there. Hence the classic line about him: **cada día canta mejor**, \"he sings better every day\". It's the perfect joke: he's been dead for ages and he keeps improving."
-
+      - type: card
+        text: "**Carlos Gardel** is *the* tango singer, and Argentina's first pop idol. Slicked-back hair, a movie-star smile, a voice people still call perfect."
       - type: choice
-        scenario: "Your friend's uncle, a Gardel fanatic, says: \"Gardel murió en el 35, pero cada día canta mejor.\""
-        prompt: "What's he saying?"
-        options: ["The old records got remastered", "His legend keeps growing", "A new singer sounds just like him"]
+        prompt: "So where was Gardel born?"
+        options:
+          - "Abasto, Buenos Aires"
+          - "Toulouse, France"
+          - "Naples, Italy"
         correct: 1
-        explain: "It's affection and a joke at the same time. For tangueros, Gardel isn't a dead singer, he's a permanent presence."
-
-      - type: info
-        title: "A pucho for Gardel"
-        emoji: "🚬"
-        body: "At his tomb in **Chacarita** cemetery, fans put a lit **pucho** (cigarette) between the fingers of his bronze statue. Legend says if it burns all the way, your wish comes true. He's so present that when someone won't stop whining, porteños say **andá a cantarle a Gardel**: go sing it to Gardel, meaning go tell someone who cares."
-
+        explain: "Most researchers say **Toulouse**. But Gardel once signed papers saying **Tacuarembó**, Uruguay, and many Uruguayans still claim him."
+      - type: card
+        text: "Argentines settle it simply: he grew up in **Abasto**, the market barrio, so he's porteño. They call him **el Morocho del Abasto**."
+      - type: card
+        text: "In 1935, at the peak of his fame, Gardel died in a plane crash in **Medellín**, Colombia, while on tour. The whole country went into mourning."
       - type: choice
-        scenario: "Your roommate has been complaining about the same ex for an hour."
-        prompt: "What can you say, cheekily?"
-        options: ["\"Andá a cantarle a Gardel.\"", "\"Cada día canta mejor.\"", "\"¿Me das un pucho?\""]
+        prompt: "At his tomb in Chacarita cemetery, what do fans leave in his bronze statue's hand?"
+        options:
+          - "A lit cigarette"
+          - "A folded page of sheet music"
+          - "A glass of wine"
         correct: 0
-        explain: "**Andá a cantarle a Gardel** is a cheeky brush-off: take your sad song somewhere else. Cheeky, not rude, so save it for friends."
-
-      - type: info
-        title: "Día Nacional del Tango"
-        emoji: "📅"
-        body: "Argentina celebrates the **Día Nacional del Tango** on **December 11**, Gardel's birthday. If you're in Buenos Aires that week, keep an eye out for free concerts and open-air milongas around the city. A perfect excuse to try your first cabeceo."
-
-      - type: match
-        prompt: "Match the place or date to what you'll find"
-        pairs:
-          - ["Abasto", "his old house, now a museum"]
-          - ["Chacarita", "a statue with a pucho in its hand"]
-          - ["11 de diciembre", "Día del Tango, with milongas"]
-
-    vocabulary:
-      - es: "cantor"
-        en: "singer (especially of tango or folk)"
-        example: { es: "Gardel es el cantor de tango por excelencia.", en: "Gardel is THE tango singer." }
-      - es: "morocho"
-        en: "dark-haired, brunette"
-        example: { es: "Es un morocho alto, de rulos.", en: "He's a tall dark-haired guy with curls." }
-      - es: "pucho"
-        en: "cigarette"
-        example: { es: "¿Tenés un pucho?", en: "Got a cigarette?" }
-      - es: "cada día canta mejor"
-        en: "he sings better every day (said of Gardel)"
-      - es: "andá a cantarle a Gardel"
-        en: "go tell someone who cares"
-        note: "Cheeky, not rude."
-      - es: "ídolo"
-        en: "idol, hero"
-    glossary:
-      - es: "el Zorzal criollo"
-        en: "the Creole Songthrush (nickname)"
-      - es: "el Morocho del Abasto"
-        en: "the dark-haired guy from Abasto"
+        explain: "A lit **pucho**. Legend says if it burns all the way down, your wish comes true."
+      - type: card
+        text: "His fans' favorite line: **cada día canta mejor**, he sings better every day. Dead since 1935, and still improving."
+      - type: card
+        chip: "Pro tip"
+        text: "Friend whining about an ex for an hour? **Andá a cantarle a Gardel**: go sing it to Gardel. Cheeky, not rude."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "orquestas-y-piazzolla"
     title: "Big bands and a rebel"
-    summary: "The golden age of the orquestas, and the man they called tango's assassin"
+    summary: "The golden age of the orquestas, and the rebel who broke the rules"
     pages:
-      - type: info
-        title: "The golden age"
-        emoji: "🎻"
-        body: "In the **1940s**, tango was pop music. Every club, radio station and neighborhood dance had an **orquesta típica**: bandoneones, violins, piano and double bass, often with a singer. People followed bandleaders like football teams. Friday night meant going to hear *your* orquesta, and arguing about it on the way home."
-
-      - type: info
-        title: "Hear the difference"
-        emoji: "🎼"
-        body: "Tango DJs still build whole nights around a few orquestas. **Juan D'Arienzo**, **el Rey del Compás** (the King of the Beat): punchy and rhythmic, pure energy. **Carlos Di Sarli**: smooth and elegant. **Osvaldo Pugliese**: dark, dramatic, deep. And **Aníbal Troilo**, **Pichuco**, maybe the most loved **bandoneonista** (bandoneón player) ever."
-
-      - type: match
-        prompt: "Match the bandleader to how he sounds"
-        pairs:
-          - ["D'Arienzo", "punchy and rhythmic"]
-          - ["Di Sarli", "smooth and elegant"]
-          - ["Pugliese", "dark and dramatic"]
-
-      - type: info
-        title: "A red carnation on the piano"
-        emoji: "🌹"
-        body: "Pugliese was a member of the Communist Party and was jailed more than once for it. When he couldn't show up, his orquesta played anyway, with a **clavel rojo** (red carnation) on the empty piano. Everyone in the room got the message. As an old man he packed the **Teatro Colón**, just where his mom always said he would end up."
-
-      - type: true_false
-        statement: "When Pugliese was in prison, his orquesta cancelled all its shows."
-        answer: false
-        explain: "They kept playing, with a red carnation on the piano instead of him. A silent protest everyone understood."
-
-      - type: info
-        title: "Piazzolla breaks the rules"
-        emoji: "⚡"
-        body: "**Astor Piazzolla**, from Mar del Plata, played bandoneón in Troilo's orquesta as a young man. Then he went to Paris to study classical music with **Nadia Boulanger**, who told him to stop hiding tango and build on it. He came back and mixed tango with jazz and classical: **tango nuevo**. Think **Libertango** and **Adiós Nonino**."
-
-      - type: info
-        title: "\"That's not tango!\""
-        emoji: "😤"
-        body: "The traditionalists hated it. Piazzolla got called **el asesino del tango** (tango's assassin), and \"**eso no es tango**\" followed him for years. He answered that it was *música contemporánea de Buenos Aires*. Today he's one of the most played Argentine composers in the world, and the fight is still tango's oldest **grieta** (divide), at family dinners included."
-
+      - type: card
+        text: "In the **1940s**, tango was pop music. Every club and radio station had an **orquesta típica**, and people followed bandleaders like football teams."
+      - type: card
+        text: "Tango DJs still build whole nights around them: **D'Arienzo**, punchy and rhythmic. **Di Sarli**, smooth and elegant. **Pugliese**, dark and dramatic."
       - type: choice
-        scenario: "At a family dinner, the grandpa says Piazzolla ruined tango. The grandson says Piazzolla saved it."
-        prompt: "What's the grandpa's line?"
-        options: ["\"¡Eso no es tango!\"", "\"Es música contemporánea.\"", "\"¡Qué lindo compás!\""]
-        correct: 0
-        explain: "**Eso no es tango** is the purist's battle cry. The grandson's side is Piazzolla's own answer: *música contemporánea de Buenos Aires*."
-
+        prompt: "Pugliese was a communist and was jailed more than once. What did his orquesta do while he was inside?"
+        options:
+          - "Cancelled every show until he was freed"
+          - "Played on, with a red carnation on his piano"
+          - "Hired a new pianist and never looked back"
+        correct: 1
+        explain: "A **clavel rojo** on the empty piano. Everyone in the room got the message."
+      - type: card
+        text: "Then came the rebel: **Astor Piazzolla**. He grew up in New York, where his dad gave him a bandoneón as a kid."
       - type: choice
-        scenario: "You're in a café and the radio plays **Libertango**."
-        prompt: "What are you hearing?"
-        options: ["Piazzolla's tango nuevo", "A golden-age orquesta típica", "An old tango by Gardel"]
+        prompt: "At 13, Piazzolla played in a Gardel film in New York, and Gardel invited him on his 1935 tour. What happened?"
+        options:
+          - "His father said he was too young"
+          - "He joined and played every show"
+          - "He said no to keep studying piano"
         correct: 0
-        explain: "**Libertango** is pure Piazzolla: tango mixed with jazz and classical, made to be *listened* to — which is exactly what bugged the dancers."
-
-    vocabulary:
-      - es: "orquesta típica"
-        en: "classic tango orchestra"
-      - es: "compás"
-        en: "beat, rhythm"
-        example: { es: "Este tango tiene un compás bárbaro para bailar.", en: "This tango has a great beat for dancing." }
-      - es: "bandoneonista"
-        en: "bandoneón player"
-      - es: "clavel"
-        en: "carnation"
-      - es: "grieta"
-        en: "deep divide (between two camps)"
-        example: { es: "En mi familia hay grieta con Piazzolla.", en: "My family is split over Piazzolla." }
-        note: "Today mostly used for politics."
-      - es: "eso no es tango"
-        en: "that's not tango (the purist's complaint)"
-    glossary:
-      - es: "Pichuco"
-        en: "nickname of Aníbal Troilo"
-      - es: "el Rey del Compás"
-        en: "the King of the Beat (D'Arienzo)"
-      - es: "tango nuevo"
-        en: "new tango"
-      - es: "Adiós Nonino"
-        en: "Goodbye, Nonino (Piazzolla piece)"
-      - es: "el asesino del tango"
-        en: "the assassin of tango"
+        explain: "Lucky boy. That was Gardel's last tour: it ended in the plane crash in Medellín."
+      - type: card
+        text: "Back in Buenos Aires he played in **Troilo**'s orquesta, then studied classical music in Paris with **Nadia Boulanger**. She told him to stop hiding his tango."
+      - type: card
+        text: "So he mixed tango with jazz and classical: **tango nuevo**. Think **Libertango** and **Adiós Nonino**."
+      - type: card
+        text: "Traditionalists called him **el asesino del tango**, and **“eso no es tango”** followed him for years. Today he's among the most played Argentine composers in the world."
+    vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "las-letras"
     title: "What tango sings about"
     summary: "Mom, the barrio, the woman who left, and a world gone wrong"
     pages:
-      - type: info
-        title: "Three minutes of heartbreak"
-        emoji: "💔"
-        body: "Tango **letras** (lyrics) have favorite subjects. **La mina que se fue**, the woman who left (and it's always her fault). **La vieja**, mom, a saint. **El barrio**, the neighborhood as it used to be. And **nostalgia** for everything. Tango poet **Discépolo** put it best: **el tango es un pensamiento triste que se baila**, a sad thought you can dance to."
-
-      - type: info
-        title: "Old slang in the lyrics"
-        emoji: "📜"
-        body: "Early lyrics are full of **lunfardo**, Buenos Aires street slang. Some of it you'll only hear in old tangos now: **percanta** is a woman, **bulín** a bachelor pad, **garufa** a night out partying. Those words survived only because tango kept singing them."
-
-      - type: match
-        prompt: "Match the tango word"
-        pairs:
-          - ["percanta", "woman, in old tangos"]
-          - ["bulín", "bachelor pad"]
-          - ["garufa", "a night out partying"]
-          - ["la vieja", "mom"]
-
-      - type: info
-        title: "Mi Buenos Aires querido"
-        emoji: "🌆"
-        body: "Gardel and his lyricist **Le Pera** wrote **Mi Buenos Aires querido**: a man far away, dreaming of seeing the city again. It's pure **extrañar**, missing home. The famous line: **\"cuando yo te vuelva a ver, no habrá más penas ni olvido\"** (when I see you again, there'll be no more sorrow or forgetting). Every Argentine living abroad has cried to it at least once."
-
-      - type: info
-        title: "Volver"
-        word: { es: "volver", tag: "A Gardel classic", en: "to return, to come back" }
-        emoji: "⏳"
-        body: "**Volver** (to return), also Gardel and Le Pera, is about coming back older to a city and a love you left. It has maybe the most quoted line in tango: **\"que veinte años no es nada\"** (twenty years is nothing). People say it at reunions, birthdays, anywhere time has passed and everyone pretends it hasn't."
-
-      - type: gap
-        prompt: "You run into an old school friend after ages. What do you say, quoting Volver?"
-        text: "¡Qué increíble! Veinte años no es ___."
-        options: ["nada", "poco", "tango"]
-        correct: 0
-        translation: "Unbelievable! Twenty years is nothing."
-        explain: "Straight out of **Volver**. Every Argentine will get the reference, and probably start humming."
-
-      - type: info
-        title: "Cambalache: the angry one"
-        emoji: "🧺"
-        body: "**Cambalache**, by Discépolo, isn't about love. It says the 20th century is a mess where \"lo mismo un burro que un gran profesor\" (a donkey and a great professor, same thing): **\"el mundo fue y será una porquería\"** (the world was and will be garbage). A military government later banned it from the radio for years. It still sounds like this morning's news."
-        fun_fact: "A **cambalache** is a junk shop where everything is thrown together. People still say \"¡esto es un cambalache!\" about a total mess."
-
-      - type: true_false
-        statement: "For a few years, Cambalache was banned from Argentine radio."
-        answer: true
-        explain: "The military government of the 1940s went after it, and Perón later lifted the ban. Being banned only made it more famous."
-
+      - type: card
+        text: "Tango lyrics have favorite subjects: the woman who left (always her fault), mom (a saint), the old barrio, and nostalgia for everything."
+      - type: card
+        text: "Tango poet **Discépolo** summed it up: **el tango es un pensamiento triste que se baila**. A sad thought you can dance to."
       - type: choice
-        scenario: "A friend looks at the chaos at a government office and sighs: \"Esto es un cambalache.\""
-        prompt: "What do they mean?"
-        options: ["It's a junk shop", "It's an unfair mess", "It's a great bargain"]
-        correct: 1
-        explain: "Thanks to Discépolo, **cambalache** means a mess where nothing makes sense and nobody plays fair. The tango turned a shop into a worldview."
-
-    vocabulary:
-      - es: "letra"
-        en: "lyrics"
-        example: { es: "La letra de este tango me mata.", en: "The lyrics of this tango kill me." }
-      - es: "la vieja"
-        en: "mom"
-        example: { es: "Hoy como en lo de mi vieja.", en: "I'm eating at my mom's today." }
-        note: "Affectionate, not an insult."
-      - es: "percanta"
-        en: "old tango word for a woman (dated)"
-        note: "Only in lyrics now."
-      - es: "cambalache"
-        en: "a mess where everything is mixed up"
-        example: { es: "Este país es un cambalache.", en: "This country is a total mess." }
-      - es: "volver"
-        en: "to return, to come back"
-      - es: "extrañar"
-        en: "to miss (someone or something)"
-        example: { es: "Extraño Buenos Aires.", en: "I miss Buenos Aires." }
-      - es: "garufa"
-        en: "a night out partying"
-        note: "Dated. You'll hear it in the tango \"Garufa\"."
-    glossary:
-      - es: "mina"
-        en: "woman (lunfardo, still used)"
-      - es: "el barrio"
-        en: "the neighborhood"
-      - es: "nostalgia"
-        en: "nostalgia"
-      - es: "el tango es un pensamiento triste que se baila"
-        en: "tango is a sad thought you can dance"
-      - es: "lunfardo"
-        en: "Buenos Aires street slang"
-      - es: "bulín"
-        en: "bachelor pad (lunfardo)"
-      - es: "Mi Buenos Aires querido"
-        en: "My beloved Buenos Aires"
-      - es: "\"cuando yo te vuelva a ver, no habrá más penas ni olvido\""
-        en: "\"when I see you again, no more sorrow or forgetting\""
-      - es: "\"que veinte años no es nada\""
-        en: "\"twenty years is nothing\""
-      - es: "\"el mundo fue y será una porquería\""
-        en: "\"the world was and will be garbage\""
+        prompt: "Gardel's **Volver** has tango's most quoted line. What does it claim?"
+        options:
+          - "Love always comes back"
+          - "The barrio never changes"
+          - "Twenty years is nothing"
+        correct: 2
+        explain: "**“Que veinte años no es nada.”** Heard at reunions and birthdays, anywhere time has passed and everyone pretends it hasn't."
+      - type: card
+        text: "**Mi Buenos Aires querido** is a man far away, dreaming of coming home. Ask any Argentine living abroad whether it makes them cry."
+      - type: card
+        text: "**Cambalache**, also by Discépolo, isn't about love. It says the world is a junk shop where a donkey and a great professor count the same."
+      - type: choice
+        prompt: "What happened to **Cambalache** in the 1940s?"
+        options:
+          - "It was banned from the radio"
+          - "The national team adopted it"
+          - "It won a national music prize"
+        correct: 0
+        explain: "The military government of the 1940s banned it, along with lots of lunfardo. Being banned only made it more famous. It still sounds like this morning's news."
+      - type: card
+        chip: "Pro tip"
+        text: "Its name stuck, too. When something is a total, unfair mess, Argentines sigh: **“esto es un cambalache.”**"
+    vocabulary: []

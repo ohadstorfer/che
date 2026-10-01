@@ -3,345 +3,148 @@ section:
   title: "Puteadas"
   emoji: "🤬"
   summary: "Argentine swearing: what it means, and when to keep your mouth shut"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
 classes:
+  # ─────────────────────────────────────────────────────────────
   - slug: "boludo"
     title: "Boludo, the word that does everything"
     summary: "Greeting, insult, punctuation: one word, many jobs"
     pages:
-      - type: info
-        title: "Welcome to the puteadas"
-        emoji: "🧉"
-        body: "Grab a mate. In Argentina a **puteada** is a swear or an insult, and **putear** is to swear at someone (or at the universe). Argentines swear a lot, and often with love. This section teaches you to *understand* them, and, more importantly, when *not* to use them."
-      - type: info
-        title: "Boludo"
-        word: { es: "boludo", tag: "Say it only once friends say it to you", en: "dude / idiot" }
-        emoji: "🤷"
-        body: "**Boludo** (**boluda** for a woman) literally means 'big-balled', i.e. an idiot. But between friends it softened into 'dude' or 'mate'. **¿Qué hacés, boludo?** is just 'What's up, man?'. Same word, said slowly with a stare, is still an insult: 'you idiot'. Some people toss it casually at anyone, even at work. Tone and relationship decide everything."
-        fun_fact: "Some porteños use it so often it's basically a comma: 'Fui al súper, boludo, y no había nada, boludo.'"
+      - type: card
+        text: "A **puteada** is a swear or an insult. Argentines swear a lot, and often with love. The goal here: understand them, and know when to keep quiet."
       - type: choice
-        scenario: "Your friend Nico sees you at the bar, grins and shouts: '¡Boludo! ¿Qué hacés acá?'"
-        prompt: "Is Nico insulting you?"
-        options: ["Yes, that was rude", "No, he's happy to see you", "He's calling a waiter"]
+        prompt: "First week at a new job. A coworker your age says: **“Che, boludo, ¿venís a almorzar?”** What does it tell you?"
+        options:
+          - "He thinks you messed something up"
+          - "He's already treating you as a friend"
+          - "He's testing whether you'll push back"
         correct: 1
-        explain: "Warm tone plus a friend = **boludo** means 'dude'. He's just surprised to see you there."
+        explain: "Between people who get along, **boludo** is closer to “dude” than to “idiot”. Here's how that happened."
+      - type: card
+        text: "**Boludo** literally means big-balled: an idiot. But between friends it softened into “dude”. **¿Qué hacés, boludo?** is just “What's up, man?”"
+      - type: card
+        chip: "Did you know?"
+        text: "Some porteños use it like a comma: **“Fui al súper, boludo, y no había nada, boludo.”**"
+      - type: card
+        text: "Same word, said slowly with a stare, is still an insult. From a local friend it's warm. From a stranger with an accent, it can land like a slap."
       - type: choice
-        scenario: "Your brand-new boss, on your first day, says: 'Che, boludo, pasame eso.'"
-        prompt: "Is he insulting you?"
-        options: ["Yes, it's an insult", "No, just very casual", "No, it's formal office talk"]
+        prompt: "Boludo has a longer cousin: **pelotudo**. Compared with boludo, how does it land?"
+        options:
+          - "Softer, almost cute"
+          - "Harsher, rarely friendly"
+          - "Exactly the same"
         correct: 1
-        explain: "Some people use **boludo** with anyone. It's very casual for a boss, and never the formal option. Don't say it back until you know him well."
-      - type: info
-        title: "Pelotudo: the upgrade"
-        word: { es: "pelotudo", tag: "Understand it, never say it", en: "real jerk" }
-        emoji: "⚽"
-        body: "**Pelotudo** comes from **pelotas** (balls, again) and means 'idiot' too, but stronger. It's rarely affectionate. **¡Qué pelotudo!** = 'What an idiot!'. A silly or trivial thing is a **boludez** or **pelotudez**: 'Es una boludez' = 'It's nothing / it's a dumb little thing'."
-      - type: true_false
-        statement: "Pelotudo is the friendly, softer version of boludo."
-        answer: false
-        explain: "It's the other way around. **Boludo** can be friendly; **pelotudo** almost always stings."
-      - type: gap
-        prompt: "Your friend apologizes for spilling a bit of mate. How do you say 'Don't worry, it's nothing'?"
-        text: "Tranqui, es una ___."
-        options: ["boludez", "boluda", "pelotudo"]
-        correct: 0
-        translation: "Relax, it's nothing."
-        explain: "**Boludez** = a trivial thing. Friendly and harmless."
-      - type: info
-        title: "The tourist rule"
-        emoji: "🧭"
-        body: "Your accent changes how it lands. From a local friend, **boludo** is warm; from a stranger with an accent, it can sound like an insult. So: understand it everywhere, but say it only once your friends say it to you. Never to a waiter, a driver or someone you just met. **Pelotudo**: understand it, never say it. **Boludez**: safe anywhere."
-      - type: choice
-        scenario: "A stranger bumps into you on the subte and you say '¡Boludo!' with a frown."
-        prompt: "How will he hear it?"
-        options: ["As 'hey, buddy!'", "As 'you idiot!'", "He won't understand"]
-        correct: 1
-        explain: "No friendship, angry tone: it's an insult. The word didn't change; the context did."
-    vocabulary:
-      - es: "boludo"
-        en: "dude among friends; an insult in anger"
-        example: { es: "¿Qué hacés, boludo?", en: "What's up, dude?" }
-      - es: "pelotudo"
-        en: "real jerk (almost never friendly)"
-        example: { es: "¡Qué pelotudo!", en: "What an idiot!" }
-      - es: "boludez"
-        en: "trivial thing, silly thing"
-        example: { es: "Es una boludez.", en: "It's nothing." }
-      - es: "putear"
-        en: "to swear at someone"
-        example: { es: "Me puteó en la calle.", en: "He swore at me in the street." }
-    glossary:
-      - es: "puteada"
-        en: "a swear word, an insult"
-      - es: "boluda"
-        en: "feminine form (very common between women friends)"
-        note: "¡Boluda, no sabés lo que pasó! = Girl, you won't believe what happened!"
-      - es: "pelotas"
-        en: "balls (vulgar)"
-      - es: "pelotudez"
-        en: "a dumb, trivial thing"
+        explain: "**Boludo** can be love. **Pelotudo** rarely is."
+      - type: card
+        text: "**¡Qué pelotudo!** means “What an idiot!”, and it's meant. Understand it, never say it."
+      - type: card
+        chip: "Pro tip"
+        text: "Say boludo only once your friends say it to you. Never to a waiter, a driver or someone you just met."
+    vocabulary: []
 
+  # ─────────────────────────────────────────────────────────────
   - slug: "gil-forro-chanta"
     title: "Gil, forro, chanta: the cast of characters"
     summary: "The people Argentines love to complain about"
     pages:
-      - type: info
-        title: "The gil"
-        word: { es: "gil", tag: "Safe to joke with friends", en: "sucker, naive fool" }
-        emoji: "🐑"
-        body: "A **gil** is a sucker: naive, easy to fool. It's an old lunfardo word from tango days, when the **gil** was the one who got scammed and the **vivo** was the sharp guy. **No seas gil** = 'Don't be a sucker'. Rude, but mild."
-        fun_fact: "Tango lyrics are full of giles who got their heart broken."
-      - type: info
-        title: "The chanta"
-        word: { es: "chanta", tag: "Safe to joke with friends", en: "all talk" }
-        emoji: "🎩"
-        body: "A **chanta** is a bullshitter: someone who brags, promises and never delivers. The plumber who says 'mañana vengo' for three weeks? **Chanta**. The guy who claims he played in the Primera? **Chanta**. Among friends it's a tease, not a war."
-      - type: info
-        title: "The forro"
-        word: { es: "forro", tag: "Understand it, never say it", en: "jerk" }
-        emoji: "🐍"
-        body: "**Forro** literally means 'lining' and is also slang for condom. Called at a person, it means a jerk: someone mean, disloyal or selfish. **Sos un forro** = 'You're such a jerk'. It hurts more than **boludo** because it's about character, not brains."
-      - type: match
-        prompt: "Match the character to who they are"
-        pairs:
-          - ["gil", "a naive sucker"]
-          - ["chanta", "a bragging bullshitter"]
-          - ["forro", "a mean, disloyal jerk"]
-          - ["boludo", "an idiot (or your buddy)"]
+      - type: card
+        text: "Argentines love complaining about certain kinds of people, and each kind has a name. Meet the cast."
       - type: choice
-        scenario: "A taxi driver charges you triple because you're a tourist, and you paid."
-        prompt: "What would your Argentine friend call you, lovingly?"
-        options: ["Chanta", "Gil", "Forro"]
-        correct: 1
-        explain: "You got fooled, so you're the **gil**. The taxi driver is the **chanta** (or the **forro**)."
-      - type: info
-        title: "The pests"
-        word: { es: "pajero", tag: "Friends only", en: "lazy, useless" }
-        emoji: "🦟"
-        body: "Someone who won't stop bugging you is a **hinchapelotas** or **rompebolas**: literally 'ball-swelling' and 'ball-breaking'. Pain in the neck. **Pajero** literally means 'wanker'; among friends it usually means lazy or useless: **No seas pajero, ayudame** = 'Don't be lazy, help me'. Crude, so keep it among friends."
-      - type: true_false
-        statement: "Calling your friend a 'hinchapelotas' because he texts you 40 times a day is a fair use of the word."
-        answer: true
-        explain: "Exactly the right use. Between friends it's a jokey complaint, not a war."
-      - type: gap
-        prompt: "Your roommate is on the couch while you carry all the groceries."
-        text: "¡No seas ___, ayudame!"
-        options: ["pajero", "chanta", "gil"]
-        correct: 0
-        translation: "Don't be lazy, help me!"
-        explain: "**Pajero** here = lazy. A **chanta** lies, a **gil** gets fooled."
+        prompt: "A taxi driver charges you triple because you're a tourist, and you pay. What does your Argentine friend call you, lovingly?"
+        options:
+          - "Chanta"
+          - "Forro"
+          - "Gil"
+        correct: 2
+        explain: "You got fooled, so you're the **gil**: the sucker. **No seas gil** means don't be a sucker."
+      - type: card
+        text: "It's old tango slang: the gil got scammed, the **vivo** did the scamming. Rude, but mild enough to tease friends with."
+      - type: card
+        text: "The **chanta** is all talk: brags, promises, never delivers. The plumber who says **“mañana vengo”** for three weeks? Chanta."
       - type: choice
-        scenario: "Your friend tells the whole group your secret, just to get a laugh at your expense."
-        prompt: "Which word fits him best?"
-        options: ["Forro", "Gil", "Chanta"]
+        prompt: "Of these three, which one hurts most when said to someone's face?"
+        options:
+          - "Forro"
+          - "Gil"
+          - "Chanta"
         correct: 0
-        explain: "He didn't brag or break a promise, so he's not a **chanta**. This is mean and disloyal: that's a **forro**. Now you know why it stings."
-      - type: info
-        title: "Your cheat sheet"
-        emoji: "📋"
-        body: "Safe to joke with friends: **gil**, **chanta**. Friends only, and only once they use them with you: **hinchapelotas**, **rompebolas**, **pajero**. Understand it, never say it: **forro**. With a stranger, none of them. When in doubt, laugh and keep quiet: you'll sound more local than any puteada."
-    vocabulary:
-      - es: "gil"
-        en: "sucker, naive fool"
-        example: { es: "No seas gil.", en: "Don't be a sucker." }
-      - es: "chanta"
-        en: "bullshitter, all talk"
-        example: { es: "Ese plomero es un chanta.", en: "That plumber is all talk." }
-      - es: "forro"
-        en: "mean, disloyal jerk"
-        example: { es: "Sos un forro.", en: "You're such a jerk." }
-      - es: "hinchapelotas"
-        en: "pest who won't stop bugging you"
-      - es: "pajero"
-        en: "(among friends) lazy, useless"
-        example: { es: "No seas pajero, ayudame.", en: "Don't be lazy, help me." }
-      - es: "vivo"
-        en: "sharp, street-smart (the opposite of a sucker)"
-    glossary:
-      - es: "rompebolas"
-        en: "ball-breaker, pain in the neck"
-      - es: "boludo"
-        en: "idiot, dude (friendly or insulting)"
-      - es: "No seas gil"
-        en: "don't be a sucker"
+        explain: "**Forro**, by far. Here's why."
+      - type: card
+        text: "**Forro** means lining, and it's slang for condom. Said to a person, it means mean or disloyal. It's about character, not brains. Understand it, never say it."
+      - type: card
+        text: "The friend who won't stop bugging you is a **rompebolas**: a ball-breaker. Between friends it's a jokey complaint, not a war."
+      - type: card
+        chip: "Pro tip"
+        text: "With a stranger, none of these. When in doubt, laugh and keep quiet: you'll sound more local than any puteada."
+    vocabulary: []
 
+  # ─────────────────────────────────────────────────────────────
   - slug: "la-puta-madre"
     title: "La puta madre: pure frustration"
     summary: "The exclamations for when everything goes wrong"
     pages:
-      - type: info
-        title: "Swearing at the universe"
-        word: { es: "la puta madre", tag: "Friends only, never at a person", en: "damn it!" }
-        emoji: "🌪️"
-        body: "Stub your toe, miss the bus, see the inflation numbers: **¡La puta madre!** Nobody's mother is involved; it's just 'Damn it!'. It goes up in levels: **la puta que lo parió** ('the whore who gave birth to it') and the maximum, **la re puta que lo parió**. The **re** means 'really, super'."
-        fun_fact: "People shorten it to just 'La puta…' with a long, tired sigh."
-      - type: info
-        title: "The heavy one"
-        word: { es: "la concha de tu madre", tag: "Understand it, never say it", en: "very vulgar" }
-        emoji: "💣"
-        body: "**¡La concha de tu madre!** is very vulgar (**concha** is vulgar slang for female genitals). Shouted at nobody, after dropping your phone in the toilet, it's frustration. Aimed at a person, it's a serious insult. Fun variant: **la concha de la lora** ('the parrot's...'), pure frustration, no target."
-      - type: true_false
-        statement: "When someone shouts '¡La puta madre!' after missing the bus, they're insulting someone's mother."
-        answer: false
-        explain: "It's an exclamation, like 'Damn it!'. No mothers were harmed."
-      - type: info
-        title: "Andá a cagar"
-        word: { es: "andá a cagar", tag: "Friends only", en: "get lost / no way!" }
-        emoji: "🙄"
-        body: "**¡Andá a cagar!**, literally 'go take a shit', means 'get lost'. But between friends it's often disbelief: 'No way!' or 'Shut up!'. The tone tells you which one: said laughing, it's amazement; said cold, with a door closing, it's goodbye."
+      - type: card
+        text: "Stub your toe, miss the bus, see the inflation numbers: **¡La puta madre!** Nobody's mother is involved. It's just “damn it!”, aimed at the universe."
+      - type: card
+        text: "It comes in levels: **la puta que lo parió**, then the maximum, **la re puta que lo parió**. Or just a long, tired **“la puta…”**"
       - type: choice
-        scenario: "You tell your friend you met Messi at the airport. She laughs and says: '¡Andá a cagar!'"
-        prompt: "What does she mean?"
-        options: ["Get lost, I hate you", "No way, you're kidding!", "Go to the bathroom"]
+        prompt: "You tell your friend you met Messi at the airport. She laughs: **“¡Andá a cagar!”**, literally “go take a shit”. What does she mean?"
+        options:
+          - "“Get lost, I'm done with you”"
+          - "“No way, you're kidding!”"
+          - "“Stop bragging, it's rude”"
         correct: 1
-        explain: "Laughing + amazing news = disbelief. Same words, said cold, would mean 'get lost'."
-      - type: info
-        title: "I couldn't care less"
-        emoji: "🥚"
-        body: "**Me chupa un huevo** ('it sucks me an egg', with egg = testicle) means 'I don't give a damn'. Crude, so close friends only. When you really, really don't care, there's a deluxe version: **me chupa un huevo y la mitad del otro**, 'one egg and half of the other'."
-      - type: gap
-        prompt: "Your friend asks if you care who wins the reality show. You really don't."
-        text: "Me chupa un ___."
-        options: ["huevo", "mate", "dulce"]
-        correct: 0
-        translation: "I don't give a damn."
-        explain: "**Me chupa un huevo** = I couldn't care less. Crude, so friends only."
-      - type: info
-        title: "The family-friendly versions"
-        word: { es: "la pucha", tag: "Safe anywhere", en: "darn!" }
-        emoji: "😇"
-        body: "Around kids or grandparents? Swap in a euphemism. **¡Miércoles!** ('Wednesday!') stands in for **mierda** (shit). **¡Pucha!** or **¡La pucha!** replaces **la puta**. **Me importa un pito** ('I don't care a whistle') is the tamer cousin of the egg one. Same frustration, no scandal."
-      - type: order
-        prompt: "Order these from mildest to strongest"
-        items: ["¡Pucha!", "¡La puta madre!", "¡La re puta que lo parió!"]
-        explain: "The euphemism is softest, and the **re** takes the classic to the maximum."
-      - type: match
-        prompt: "Match the polite version to the one it's hiding"
-        pairs:
-          - ["miércoles", "mierda"]
-          - ["la pucha", "la puta"]
-          - ["me importa un pito", "me chupa un huevo"]
-        explain: "Euphemisms sound like the real thing, so everyone knows what you meant, but nobody's offended."
-    vocabulary:
-      - es: "la puta madre"
-        en: "damn it! (everyday frustration)"
-        example: { es: "¡La puta madre, perdí el colectivo!", en: "Damn it, I missed the bus!" }
-      - es: "la concha de tu madre"
-        en: "the heaviest one: a serious insult if aimed at someone"
-        note: "Never aim it at a person unless you want a fight."
-      - es: "andá a cagar"
-        en: "get lost / no way! (among friends)"
-        example: { es: "¿Conociste a Messi? ¡Andá a cagar!", en: "You met Messi? No way!" }
-      - es: "me chupa un huevo"
-        en: "I don't give a damn (crude)"
-      - es: "la pucha"
-        en: "darn! (the polite version, fine with grandma)"
-        example: { es: "¡La pucha, se me cayó!", en: "Darn, I dropped it!" }
-    glossary:
-      - es: "la puta que lo parió"
-        en: "damn it! (strong)"
-      - es: "la re puta que lo parió"
-        en: "god-fucking-dammit (maximum frustration)"
-      - es: "re"
-        en: "really, super (intensifier)"
-        note: "Prefix that boosts what follows."
-      - es: "la puta"
-        en: "damn (vulgar)"
-      - es: "concha"
-        en: "vulgar word for female genitals"
-        note: "Very vulgar, and also a shell."
-      - es: "la concha de la lora"
-        en: "damn it! (frustration, no target)"
-      - es: "me chupa un huevo y la mitad del otro"
-        en: "I couldn't care less (deluxe)"
-      - es: "me importa un pito"
-        en: "I couldn't care less (tamer)"
-      - es: "miércoles"
-        en: "shoot! (polite stand-in for 'mierda'; literally Wednesday)"
-      - es: "mierda"
-        en: "shit"
-        note: "Rude, so use the euphemism around kids."
-      - es: "¡Pucha!"
-        en: "darn! (mild euphemism)"
+        explain: "Laughing plus big news means disbelief. Said cold, with a door closing, the same words mean “get lost”."
+      - type: card
+        text: "**La concha de tu madre** is the heavy one, very vulgar. Shouted at nobody after your phone hits the floor, it's frustration. Aimed at a person, it's a serious insult."
+      - type: card
+        chip: "Did you know?"
+        text: "**Me chupa un huevo** (egg = testicle) means “I couldn't care less”. Really don't care? **Me chupa un huevo y la mitad del otro.**"
+      - type: choice
+        prompt: "Around kids and grandmas, Argentines swap **mierda** for a harmless word that sounds similar. Which one?"
+        options:
+          - "¡Mercado!"
+          - "¡Mirá vos!"
+          - "¡Miércoles!"
+        correct: 2
+        explain: "**¡Miércoles!** Wednesday. Everyone knows what you meant, and nobody's offended."
+      - type: card
+        chip: "Pro tip"
+        text: "Same trick for la puta: **¡la pucha!** Safe with kids, bosses and grandmas, and it still sounds like you mean it."
+    vocabulary: []
 
+  # ─────────────────────────────────────────────────────────────
   - slug: "leer-el-contexto"
     title: "Reading the room"
-    summary: "The stadium, the traffic, and your girlfriend's grandma"
+    summary: "The stadium, the traffic, and your partner's grandma"
     pages:
-      - type: info
-        title: "At the cancha"
-        emoji: "🏟️"
-        body: "The football stadium (**la cancha**) is where swearing becomes a sport. The referee (**el referí**) gets **¡Cobrá, la concha de tu madre!** ('Make the call!'), and a slow striker hears **¡Dale, pelotudo!**. Warning: many stadium chants include slurs about gays, other nationalities and so on. Cheer, swear at the ref, but skip the slurs, even if the whole stand is singing them."
-        fun_fact: "The ref is insulted so often that some fans say it's part of the ticket price."
+      - type: card
+        text: "At **la cancha**, swearing is a sport. The referee hears **“¡Cobrá, referí!”** plus a few mothers. Some fans joke it's part of the ticket price."
+      - type: card
+        text: "Careful with the chants, though. Many carry slurs about gay people or other nationalities, and the pushback is growing. Clap and jump; the words can wait."
       - type: choice
-        scenario: "Your first match. The whole stand starts a chant you don't understand, and your neighbor nudges you to join in."
-        prompt: "What do you do?"
-        options: ["Sing every word with them", "Clap along, skip the words", "Leave the stadium"]
-        correct: 1
-        explain: "Lots of chants are homophobic or racist, and there's growing pushback against them. Clapping and jumping get you in the mood; the words can wait until you know what they say."
-      - type: info
-        title: "Behind the wheel"
-        emoji: "🚗"
-        body: "Buenos Aires traffic turns saints into sailors. The light turns green and someone honks: **¡Dale, boludo!** ('Come on, idiot!'). Somebody cuts you off: **¡Aprendé a manejar!** ('Learn to drive!') or **¿Quién te dio el registro?** ('Who gave you a license?'). Usually it's just venting. Hand gestures can escalate things, so keep yours on the wheel."
-      - type: gap
-        prompt: "The light turned green five seconds ago and the car in front hasn't moved."
-        text: "¡Dale, ___!"
-        options: ["boludo", "abuela", "referí"]
+        prompt: "In Qatar, shy, polite Messi snapped at a Dutch player on live TV: **“¿Qué mirás, bobo?”** What happened next?"
+        options:
+          - "It ended up on T-shirts and mugs"
+          - "FIFA banned him for a match"
+          - "He apologized on Dutch TV"
         correct: 0
-        translation: "Come on, idiot!"
-        explain: "Classic traffic venting. Said to a stranger in a car, **boludo** is an insult, but a very routine one."
-      - type: info
-        title: "The abuela test"
-        emoji: "👵"
-        body: "Before you swear, ask: would I say this in front of my girlfriend's grandma? With close friends, **boludo**, **la puta madre** and **andá a cagar** are totally normal. With your boss, your in-laws, a cop or a stranger? Go polite: **¡pucha!**, **¡miércoles!** Swearing badly makes you sound rude; swearing well makes you sound local."
+        explain: "**Bobo** is mild, almost childish, which made it even funnier. Within days it was a national catchphrase."
+      - type: card
+        text: "Buenos Aires traffic turns saints into sailors. Green light, one second: **¡Dale, boludo!** Cut off: **¿Quién te dio el registro?**, who gave you a license? Usually it's just venting."
+      - type: card
+        text: "Before you swear, ask: would I say this in front of my partner's grandma? With close friends, go ahead. With your boss, a cop or a stranger, keep it clean."
       - type: choice
-        scenario: "Sunday lunch with your girlfriend's family. You burn your tongue on the ravioles."
-        prompt: "What do you say?"
-        options: ["¡La re puta que lo parió!", "¡Uy, la pucha!", "¡La concha de la lora!"]
-        correct: 1
-        explain: "**La pucha** says 'ouch, darn' without making the abuela drop her fork."
-      - type: choice
-        scenario: "You're watching the match at a bar with your friends and your team misses a penalty."
-        prompt: "Which reaction sounds most like your friends?"
-        options: ["¡La puta madre!", "\"Oh dear, what a pity.\"", "Swear at the friend next to you"]
+        prompt: "In 2009, right after qualifying for the World Cup, coach Maradona told journalists on live TV: **“que la chupen”**, suck it. What happened?"
+        options:
+          - "FIFA banned him for two months"
+          - "He was fired the next week"
+          - "Nothing: nobody even blinked"
         correct: 0
-        explain: "At a bar with friends during football, swearing at the universe is expected. Swearing *at* a friend is another story, and 'Oh dear' would get you strange looks."
-      - type: order
-        prompt: "Order from 'swear freely' to 'keep it clean'"
-        items: ["Your best friends at the cancha", "Your coworkers at an after-office", "A job interview"]
-        explain: "The closer and more relaxed the relationship, the more puteadas are allowed."
-      - type: match
-        prompt: "Match the situation to what you'd hear"
-        pairs:
-          - ["a clear foul nobody calls", "¡Cobrá, referí!"]
-          - ["someone cuts you off", "¡Aprendé a manejar!"]
-          - ["a hot ravioli at grandma's", "¡Uy, la pucha!"]
-          - ["a friend says she met Messi", "¡Andá a cagar!"]
-    vocabulary:
-      - es: "la cancha"
-        en: "the football stadium / pitch"
-        example: { es: "Vamos a la cancha el domingo.", en: "We're going to the game on Sunday." }
-      - es: "el referí"
-        en: "the referee"
-      - es: "cobrá"
-        en: "make the call! (shouted at the ref)"
-      - es: "¡aprendé a manejar!"
-        en: "learn to drive!"
-      - es: "el registro"
-        en: "driver's license"
-        example: { es: "¿Quién te dio el registro?", en: "Who gave you a license?" }
-      - es: "¡dale!"
-        en: "come on! / go!"
-        example: { es: "¡Dale, que está verde!", en: "Come on, it's green!" }
-    glossary:
-      - es: "¡Dale, pelotudo!"
-        en: "come on, you idiot!"
-      - es: "¡Dale, boludo!"
-        en: "come on, idiot! (in traffic; 'come on, dude!' between friends)"
-      - es: "la puta madre"
-        en: "damn it! (vulgar)"
-      - es: "andá a cagar"
-        en: "get lost / no way! (friends only)"
-      - es: "¡pucha!"
-        en: "darn! (mild euphemism)"
-      - es: "¡miércoles!"
-        en: "darn! (lit. Wednesday)"
+        explain: "FIFA suspended him and fined him. Argentines, meanwhile, turned the line into a classic."
+      - type: card
+        chip: "Pro tip"
+        text: "Swearing badly makes you sound rude. Swearing well makes you sound local. It's all in the timing."
+    vocabulary: []

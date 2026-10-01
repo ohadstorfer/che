@@ -121,7 +121,7 @@ export default function CultureSectionScreen() {
                   <Text style={styles.cardSummary}>{cls.summary}</Text>
                   <View style={styles.cardFoot}>
                     <Text style={styles.meta}>
-                      {classMinutes(cls)} min · {cls.vocabulary.length} words
+                      {classMinutes(cls)} min{cls.vocabulary.length ? ` · ${cls.vocabulary.length} words` : ''}
                     </Text>
                     {finished ? <Text style={styles.again}>Read again</Text> : null}
                   </View>

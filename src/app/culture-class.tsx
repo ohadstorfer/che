@@ -19,6 +19,7 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ExerciseFrame, type Verdict } from '@/components/exercise-frame';
 import { Choices } from '@/components/exercises';
+import { PathLessonDone } from '@/components/path-lesson-done';
 import { Button, Panel } from '@/components/ui';
 import { artFor, speakerArt } from '@/lib/culture-art';
 import {
@@ -30,10 +31,13 @@ import {
   splitTitle,
 } from '@/lib/culture';
 import { playAudio } from '@/lib/audio';
+import { lessonWithUnit } from '@/lib/lesson';
 import { goBack } from '@/lib/nav';
+import type { FinishResult } from '@/lib/round';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, gradients, pastel, pastelGrad, PICKED, radius, shadow } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
+import { finishPathLesson, unitCulture } from '@/lib/unit-extras';
 
 // ---------------------------------------------------------------------------
 // A culture class (docs/culture-spec.md), played as cards: the reading is cut
@@ -70,12 +74,16 @@ interface Fact {
   text: string;
   /** The date or year worth showing huge, when the fact has one. */
   hero: string | null;
+  /** A card class's card: its own chip and colour, and its bold words kept. */
+  chip?: string;
+  bg?: string;
 }
 
 type Step =
   | { kind: 'story'; story: Story }
   | { kind: 'fact'; fact: Fact }
-  | { kind: 'page'; page: CulturePage }
+  /** `bare`: a card class's question, asked straight, without the capybara's aside. */
+  | { kind: 'page'; page: CulturePage; bare?: boolean }
   | { kind: 'words'; words: CultureWord[] }
   | { kind: 'match'; pairs: [string, string][] }
   | { kind: 'meaning'; word: CultureWord; options: string[] };
@@ -168,9 +176,16 @@ function buildSteps(section: string, classTitle: string, pages: CulturePage[], v
     return prev;
   };
   const speaker = speakerArt(section);
+  const cardClass = pages.some((p) => p.type === 'card');
+  let tone = 0;
   pages.forEach((page, n) => {
+    if (page.type === 'card') {
+      const bg = CARD_TONES[tone++ % CARD_TONES.length];
+      steps.push({ kind: 'fact', fact: { art: artFor(section, n), text: page.text, hero: null, chip: page.chip ?? classTitle, bg } });
+      return;
+    }
     if (page.type !== 'info') {
-      steps.push({ kind: 'page', page });
+      steps.push({ kind: 'page', page, bare: cardClass });
       return;
     }
     const art = artFor(section, n);
@@ -192,7 +207,7 @@ function buildSteps(section: string, classTitle: string, pages: CulturePage[], v
       steps.push({ kind: 'fact', fact: { art: artFor(section, n + 1), text: page.fun_fact, hero: heroOf(page.fun_fact) } });
     }
   });
-  steps.push({ kind: 'words', words: vocab });
+  if (vocab.length) steps.push({ kind: 'words', words: vocab });
   // Matches of 3–5 pairs: split evenly rather than leaving a stub of one or two.
   const groups = Math.ceil(vocab.length / 5);
   const mixed = shuffle(vocab);
@@ -210,30 +225,74 @@ function buildSteps(section: string, classTitle: string, pages: CulturePage[], v
   return steps;
 }
 
+/**
+ * A class from the Culture tab (?section=&class=), or a unit's culture class
+ * on the road (?lesson=<id>), which plays the class the unit was given
+ * (unit-extras.ts). Played on the road, it counts in the passport too, and
+ * finishing it finishes the lesson and goes back to the path.
+ */
 export default function CultureClass() {
+  const params = useLocalSearchParams<{ section?: string; class?: string; lesson?: string }>();
+  const lessonId = params.lesson;
+  const [fromLesson, setFromLesson] = useState<ReturnType<typeof findClass> | undefined>(undefined);
+
+  useEffect(() => {
+    if (!lessonId) return;
+    let cancelled = false;
+    lessonWithUnit(lessonId)
+      .then(({ unit }) => unitCulture(unit.slug))
+      .catch(() => null)
+      .then((found) => {
+        if (!cancelled) setFromLesson(found);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [lessonId]);
+
+  if (lessonId) {
+    if (fromLesson === undefined) return <SafeAreaView style={styles.safe} />;
+    return <ClassPlayer found={fromLesson} lessonId={lessonId} />;
+  }
+  return <ClassPlayer found={findClass(params.section ?? '', params.class ?? '')} />;
+}
+
+function ClassPlayer({ found, lessonId }: { found: ReturnType<typeof findClass>; lessonId?: string }) {
   useStatusBarColor(colors.bg);
-  const params = useLocalSearchParams<{ section?: string; class?: string }>();
-  const found = findClass(params.section ?? '', params.class ?? '');
   const [steps] = useState(() =>
     found ? buildSteps(found.section.slug, found.cls.title, found.cls.pages, found.cls.vocabulary) : [],
   );
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState<Set<string> | null>(null);
+  const [ended, setEnded] = useState<{ result: FinishResult | null } | null>(null);
   const finished = found !== null && index >= steps.length;
+  const sectionSlug = found?.section.slug;
+  const classSlug = found?.cls.slug;
 
   useEffect(() => {
-    if (finished && params.section && params.class) void markClassDone(params.section, params.class).then(setDone);
-  }, [finished, params.section, params.class]);
+    if (!finished || !sectionSlug || !classSlug) return;
+    void markClassDone(sectionSlug, classSlug).then(setDone);
+    if (lessonId) void finishPathLesson(lessonId, null).then((result) => setEnded({ result }));
+  }, [finished, sectionSlug, classSlug, lessonId]);
 
   if (!found) {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.missing}>
           <Text style={styles.missingText}>This class doesn't exist.</Text>
-          <Button title="Back to culture" onPress={() => router.dismissTo('/culture')} />
+          {lessonId ? (
+            <Button title="Back to the course" onPress={() => goBack('/home')} />
+          ) : (
+            <Button title="Back to culture" onPress={() => router.dismissTo('/culture')} />
+          )}
         </View>
       </SafeAreaView>
     );
+  }
+
+  if (finished && lessonId) {
+    // A beat of nothing while the lesson is saved: the path must know it's done before she returns to it.
+    return ended ? <PathLessonDone result={ended.result} /> : <SafeAreaView style={styles.safe} />;
   }
 
   if (finished) {
@@ -299,11 +358,12 @@ function StepView({
   const page = step.page;
   switch (page.type) {
     case 'info':
-      return null; // Always split into story and fact cards by buildSteps.
+    case 'card':
+      return null; // Always turned into story and fact cards by buildSteps.
     case 'choice':
       return (
         <ChoiceStep prompt={page.prompt} options={page.options} correct={page.correct} explain={page.explain} onDone={onDone}>
-          <CapySays art={speakerArt(section)} />
+          {step.bare ? null : <CapySays art={speakerArt(section)} />}
           {page.scenario ? (
             <View style={styles.scenario}>
               <Text style={styles.scenarioText}>
@@ -380,13 +440,13 @@ function Enter({ children }: { children: React.ReactNode }) {
 const plain = (text?: string) => text?.replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\*([^*]+)\*/g, '$1');
 
 /** Light markdown: **bold** and *italic*, nothing else. Render inside a Text. */
-function Rich({ text }: { text: string }) {
+function Rich({ text, bold }: { text: string; bold?: object }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean);
   return (
     <>
       {parts.map((p, i) =>
         p.startsWith('**') ? (
-          <Text key={i} style={styles.bold}>
+          <Text key={i} style={bold ?? styles.bold}>
             {p.slice(2, -2)}
           </Text>
         ) : p.startsWith('*') && p.length > 2 ? (
@@ -906,23 +966,35 @@ const CARD_BG: Record<Layout, string> = {
   chat: colors.bg,
 };
 
-/** The fun fact, on a card of its own so it lands instead of hanging off the end of a paragraph. */
+/** A card class deals these in turn, so two cards running never share a colour. */
+const CARD_TONES = [pastel.butter, pastel.sky, pastel.peach, pastel.sage, pastel.lav];
+
+/**
+ * The fun fact, on a card of its own so it lands instead of hanging off the end
+ * of a paragraph. A card class tells its whole story on these.
+ */
 function FactCard({ fact, onDone, onBack }: { fact: Fact; onDone: () => void; onBack?: () => void }) {
   const bottom = useSafeAreaInsets().bottom;
   const tap = useSideTap(onDone, onBack);
+  // The biggest size fits about 22 words above the art; a longer card steps down one.
+  const size = fact.hero || wordCount(fact.text) > 22 ? styles.factText : styles.factTextBig;
   return (
-    <Pressable ref={tap.ref} style={[styles.card, styles.factCard]} onPress={tap.onPress} accessible={false}>
+    <Pressable
+      ref={tap.ref}
+      style={[styles.card, styles.factCard, fact.bg ? { backgroundColor: fact.bg } : null]}
+      onPress={tap.onPress}
+      accessible={false}>
       <Image source={fact.art} style={styles.factArt} contentFit="contain" accessible={false} />
       <View style={styles.factBody}>
         <View style={styles.factChip}>
-          <Text style={styles.factChipText}>Did you know?</Text>
+          <Text style={styles.factChipText}>{fact.chip ?? 'Did you know?'}</Text>
         </View>
         {fact.hero ? (
           <Text style={[styles.factHero, fact.hero.length > 4 && styles.factHeroLong]}>
             {fact.hero}
           </Text>
         ) : null}
-        <Text style={fact.hero ? styles.factText : styles.factTextBig}>{stripMarks(fact.text)}</Text>
+        <Text style={size}>{fact.chip ? <Rich text={fact.text} bold={styles.factBold} /> : stripMarks(fact.text)}</Text>
       </View>
       <View style={[styles.factFoot, { paddingBottom: 24 + bottom }]}>
         <Pressable
@@ -1661,10 +1733,11 @@ const styles = StyleSheet.create({
   factHeroLong: { fontSize: 60, lineHeight: 64, letterSpacing: -2 },
   factText: { ...font.display[700], fontSize: 26, lineHeight: 31, letterSpacing: -0.3, color: colors.onPastel },
   factTextBig: { ...font.display[700], fontSize: 30, lineHeight: 36, letterSpacing: -0.4, color: colors.onPastel },
-  factArt: { position: 'absolute', right: 4, bottom: 70, width: 150, height: 180 },
+  factBold: { ...font.display[800], color: colors.primaryDark },
+  factArt: { position: 'absolute', left: 4, bottom: 70, width: 150, height: 180 },
   factFoot: { paddingHorizontal: 28, paddingTop: 12 },
   factButton: {
-    alignSelf: 'flex-start',
+    alignSelf: 'flex-end',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,

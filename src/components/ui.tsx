@@ -15,7 +15,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { clay, colors, font, gradients, press, radius, type } from '@/lib/theme';
+import { clay, colors, font, gradients, path, press, radius, type } from '@/lib/theme';
 
 // On web, react-native-web maps these to real CSS transitions, so the press
 // scale eases instead of snapping. Native gets the snap, which is what a
@@ -84,7 +84,7 @@ export function MoraFace({ size = 112 }: { size?: number }) {
 // Button — a molded clay pill; subtle scale-down on press for instant
 // tactile feedback. Primary is rosa with the pressed-clay shading.
 // ---------------------------------------------------------------------------
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'right' | 'wrong' | 'check';
 
 export function Button({
   title,
@@ -106,8 +106,16 @@ export function Button({
     secondary: { bg: colors.card, fg: colors.ink, clay: clay.surface },
     ghost: { bg: 'transparent', fg: colors.muted, border: colors.border },
     danger: { bg: colors.dangerSoft, fg: colors.dangerInk },
+    // The answer sheet's button wears the verdict's colour.
+    right: { bg: colors.success, fg: colors.onPrimary, clay: clay.verdictButton },
+    wrong: { bg: colors.dangerSolid, fg: colors.onPrimary, clay: clay.verdictButton },
+    // An exercise's Check: the primary once there is an answer to check.
+    check: { bg: colors.check, fg: colors.onPrimary, clay: clay.button },
   };
-  const p = palette[variant];
+  // Check waits in flat grey instead of a faded primary, so "not yet" never
+  // reads as a washed-out version of "go".
+  const grey = variant === 'check' && disabled;
+  const p = grey ? { bg: path.lockedFace, fg: path.lockedGlyph } : palette[variant];
   return (
     <Pressable
       onPress={onPress}
@@ -120,7 +128,7 @@ export function Button({
           borderColor: p.border ?? 'transparent',
           borderWidth: p.border ? 1.5 : 0,
           boxShadow: disabled ? undefined : p.clay,
-          opacity: disabled ? 0.45 : 1,
+          opacity: disabled && !grey ? 0.45 : 1,
           transform: [{ scale: pressed ? press.scale : 1 }],
         },
         webTransition('transform', press.duration),
@@ -128,7 +136,7 @@ export function Button({
       {variant === 'primary' && !disabled && (
         <LinearGradient
           colors={gradients.deep}
-          style={[StyleSheet.absoluteFill, { borderRadius: small ? radius.sm + 6 : 27 }]}
+          style={[StyleSheet.absoluteFill, { borderRadius: small ? radius.sm + 6 : BUTTON_RADIUS }]}
           pointerEvents="none"
         />
       )}
@@ -138,7 +146,7 @@ export function Button({
         <View
           style={[
             StyleSheet.absoluteFill,
-            { borderRadius: small ? radius.sm + 6 : 27, boxShadow: CLAY_BUTTON_INSET },
+            { borderRadius: small ? radius.sm + 6 : BUTTON_RADIUS, boxShadow: CLAY_BUTTON_INSET },
           ]}
           pointerEvents="none"
         />
@@ -153,6 +161,9 @@ export function Button({
     </Pressable>
   );
 }
+
+/** Full-size buttons are rounded squares, not pills — they read as a key to press. */
+const BUTTON_RADIUS = 18;
 
 const CLAY_BUTTON_INSET = 'inset 0 3px 0 rgba(255,255,255,0.28), inset 0 -5px 10px rgba(80,10,30,0.25)';
 
@@ -232,7 +243,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 15,
     paddingHorizontal: 22,
-    borderRadius: 27,
+    borderRadius: BUTTON_RADIUS,
     minHeight: 54,
   },
   buttonSmall: { paddingVertical: 9, paddingHorizontal: 16, minHeight: 40, borderRadius: radius.sm + 6 },

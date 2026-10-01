@@ -6,9 +6,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ExerciseFrame } from '@/components/exercise-frame';
 import { Exercise } from '@/components/exercises';
+import { PathLessonDone } from '@/components/path-lesson-done';
 import { Button } from '@/components/ui';
-import { INTRO_LOOKS, WordIntro, lookOffset } from '@/components/word-intro';
+import { WordIntro } from '@/components/word-intro';
 import {
+  type ArPack,
   type ArWord,
   type PackItem,
   buildPackRound,
@@ -19,23 +21,35 @@ import {
   toForm,
   toGapForm,
 } from '@/lib/argentine';
-import { themeArt } from '@/lib/argentine-art';
 import { type PackScore, savePackScore } from '@/lib/argentine-scores';
 import { useAuth } from '@/lib/auth';
+import { lessonWithUnit } from '@/lib/lesson';
 import { goBack } from '@/lib/nav';
+import type { FinishResult } from '@/lib/round';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font } from '@/lib/theme';
+import { finishPathLesson, unitSlang } from '@/lib/unit-extras';
 
 // ---------------------------------------------------------------------------
 // One play of an Argentine pack (?pack=<slug>). The course's own exercises,
 // graded here and nowhere else: nothing is scheduled, and all that is kept is
 // the share she got right on the first try. A miss comes back once at the end,
 // the way a lesson re-asks, without counting toward the score.
+//
+// A unit's slang class on the road (?lesson=<id>) is the same round over the
+// unit's three words (unit-extras.ts), taught the first-time way; finishing it
+// finishes the lesson and goes back to the path.
 // ---------------------------------------------------------------------------
 
+/** Each word once: the packs of a slang class share their theme's words. */
+const uniqueWords = (words: ArWord[]) => [...new Map(words.map((w) => [w.id, w])).values()];
+
 export default function ArgentineRound() {
-  const { pack: slug, first } = useLocalSearchParams<{ pack?: string; first?: string }>();
+  const { pack: slug, first, lesson: lessonId } = useLocalSearchParams<{ pack?: string; first?: string; lesson?: string }>();
   const pack = slug ? findPack(slug) : null;
+  /** The unit's slang class, once its unit is known; null if it has none. */
+  const [slang, setSlang] = useState<{ words: ArWord[]; packs: ArPack[] } | null | undefined>(undefined);
+  const [ended, setEnded] = useState<{ result: FinishResult | null } | null>(null);
   const { profile } = useAuth();
   const userId = profile?.id;
 
@@ -46,21 +60,32 @@ export default function ArgentineRound() {
   const firstTries = useRef<boolean[]>([]);
   const retried = useRef(new Set<number>());
 
-  // A new word gets one of the intro looks, dealt in turn through the pack so
-  // neighbours differ; the page and the status bar take the look's colour.
-  const introLook = useMemo(() => {
-    const item = queue?.[index];
-    if (!queue || !pack || item?.kind !== 'intro') return null;
-    const n = queue.slice(0, index).filter((q) => q.kind === 'intro').length;
-    return INTRO_LOOKS[(lookOffset(pack.slug) + n) % INTRO_LOOKS.length];
-  }, [queue, index, pack]);
-  useStatusBarColor(introLook?.bg ?? colors.bg);
+  useStatusBarColor(colors.bg);
 
   // Wrong answers come from the pack, its theme, then any clean word; the gap
   // draws from the same words as they appear in their examples.
-  const decoys = useMemo(() => (pack ? decoyWords(pack) : []), [pack]);
+  const decoys = useMemo(
+    () => (pack ? decoyWords(pack) : slang ? uniqueWords(slang.packs.flatMap(decoyWords)) : []),
+    [pack, slang],
+  );
   const forms = useMemo(() => decoys.map(toForm), [decoys]);
   const gapForms = useMemo(() => decoys.map(toGapForm), [decoys]);
+
+  useEffect(() => {
+    if (!lessonId) return;
+    let cancelled = false;
+    lessonWithUnit(lessonId)
+      .then(({ unit }) => unitSlang(unit.slug))
+      .catch(() => null)
+      .then((found) => {
+        if (cancelled) return;
+        setSlang(found);
+        if (found) setQueue(buildPackRound(found.words, true));
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [lessonId]);
 
   useEffect(() => {
     if (!pack || !userId) return;
@@ -77,7 +102,19 @@ export default function ArgentineRound() {
     };
   }, [pack, userId, first]);
 
-  if (!pack) {
+  if (lessonId) {
+    if (ended) return <PathLessonDone result={ended.result} />;
+    if (slang === null) {
+      return (
+        <SafeAreaView style={styles.safe}>
+          <View style={styles.center}>
+            <Text style={styles.centerText}>This class isn't here anymore.</Text>
+            <Button title="Back to the course" onPress={() => goBack('/home')} />
+          </View>
+        </SafeAreaView>
+      );
+    }
+  } else if (!pack) {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
@@ -90,7 +127,7 @@ export default function ArgentineRound() {
 
   if (!queue) return <SafeAreaView style={styles.safe} />;
 
-  if (queue.length === 0) {
+  if (queue.length === 0 && pack) {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
@@ -103,7 +140,7 @@ export default function ArgentineRound() {
     );
   }
 
-  if (done) {
+  if (done && pack) {
     return (
       <Finish
         score={done.score}
@@ -124,6 +161,8 @@ export default function ArgentineRound() {
     }
     const tries = firstTries.current;
     const score = tries.length ? Math.round((tries.filter(Boolean).length / tries.length) * 100) : 100;
+    if (lessonId) return void finishPathLesson(lessonId, score).then((result) => setEnded({ result }));
+    if (!pack) return;
     void savePackScore(pack.slug, score).then((saved) => setDone({ score, saved }));
   };
 
@@ -142,32 +181,28 @@ export default function ArgentineRound() {
   };
 
   return (
-    <SafeAreaView style={[styles.safe, introLook && { backgroundColor: introLook.bg }]} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
-        <Pressable onPress={() => goBack('/words')} hitSlop={12} accessibilityLabel="Close">
-          <Ionicons name="close" size={26} color={introLook?.ink ?? colors.muted} />
+        <Pressable onPress={() => goBack(lessonId ? '/home' : '/words')} hitSlop={12} accessibilityLabel="Close">
+          <Ionicons name="close" size={26} color={colors.muted} />
         </Pressable>
-        <View style={[styles.progressTrack, introLook && { backgroundColor: introLook.track }]}>
+        <View style={styles.progressTrack}>
           <View
             style={[
               styles.progressFill,
               { width: `${Math.max((index / queue.length) * 100, 3)}%` },
-              introLook && { backgroundColor: introLook.fill },
             ]}
           />
         </View>
-        <Text style={[styles.counter, introLook && { color: introLook.ink }]}>
+        <Text style={styles.counter}>
           {index + 1}/{queue.length}
         </Text>
       </View>
-      <Text style={[styles.kicker, introLook && { color: introLook.ink }]}>{pack.title}</Text>
 
       {current.kind === 'intro' ? (
         <WordIntro
           key={`intro-${index}`}
-          look={introLook ?? INTRO_LOOKS[0]}
           word={current.word}
-          art={themeArt(pack.theme)}
           onDone={() => next(queue)}
         />
       ) : (
@@ -255,25 +290,14 @@ const styles = StyleSheet.create({
   },
   progressTrack: {
     flex: 1,
-    height: 10,
+    height: 18,
     borderRadius: 99,
     backgroundColor: colors.trough,
     boxShadow: clay.trough,
     overflow: 'hidden',
   },
-  progressFill: { height: '100%', borderRadius: 99, backgroundColor: colors.primary },
+  progressFill: { height: '100%', borderRadius: 99, backgroundColor: colors.progress },
   counter: { ...font.body[800], fontSize: 13, color: colors.muted, minWidth: 40, textAlign: 'right' },
-  kicker: {
-    ...font.body[800],
-    fontSize: 12,
-    letterSpacing: 0.8,
-    textTransform: 'uppercase',
-    color: colors.muted,
-    maxWidth: 560,
-    width: '100%',
-    alignSelf: 'center',
-    paddingHorizontal: 20,
-  },
   center: {
     flex: 1,
     alignItems: 'center',

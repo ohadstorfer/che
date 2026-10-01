@@ -24,6 +24,8 @@ export type CulturePage =
       /** A word or phrase worth a card of its own: shown huge, with a tag and its meaning. */
       word?: { es: string; en: string; tag?: string };
     }
+  /** One short idea in big type, for classes told as cards (docs/culture-spec.md, "Card classes"). */
+  | { type: 'card'; text: string; chip?: string }
   | { type: 'choice'; scenario?: string; prompt: string; options: string[]; correct: number; explain: string }
   | { type: 'true_false'; statement: string; answer: boolean; explain: string }
   | { type: 'order'; prompt: string; items: string[]; explain?: string }
@@ -138,8 +140,12 @@ export function splitTitle(title: string): { eyebrow: string | null; title: stri
   return { eyebrow: title.slice(0, i).trim(), title: rest.charAt(0).toUpperCase() + rest.slice(1) };
 }
 
-/** Rough reading time: ~20s a page, plus a minute for the words at the end. */
+/** A class told as big cards, with no word review at the end. */
+export const isCardClass = (cls: CultureClass) => cls.pages.some((p) => p.type === 'card');
+
+/** Rough reading time: ~20s a page, plus a minute for the words at the end. A card class is ~12s a card, no words. */
 export function classMinutes(cls: CultureClass) {
+  if (isCardClass(cls)) return Math.max(1, Math.round((cls.pages.length * 12) / 60));
   return Math.max(2, Math.round((cls.pages.length * 20 + 60) / 60));
 }
 
