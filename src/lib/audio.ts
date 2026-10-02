@@ -41,14 +41,56 @@ const FLOOR_DB = -50;
 const QUIET_DB = -48;
 const toLevel = (db: number) => Math.max(0, Math.min(1, (db - FLOOR_DB) / 42));
 
-async function startNativeRecording(): Promise<ActiveRecording> {
-  const { requestRecordingPermissionsAsync, RecordingPresets } = await import('expo-audio');
-  const { default: AudioModule } = await import('expo-audio/build/AudioModule');
-  const { createRecordingOptions } = await import('expo-audio/build/utils/options');
-  const { File } = await import('expo-file-system');
+// Everything a recording needs that doesn't depend on the tap, loaded once:
+// the modules, and whether the mic is already allowed. A tap then goes straight
+// to the audio session and the recorder.
+type NativeKit = {
+  audio: typeof import('expo-audio');
+  AudioModule: typeof import('expo-audio/build/AudioModule').default;
+  createRecordingOptions: typeof import('expo-audio/build/utils/options').createRecordingOptions;
+  File: typeof import('expo-file-system').File;
+};
+let kit: Promise<NativeKit> | null = null;
+let micAllowed = false;
 
-  const perm = await requestRecordingPermissionsAsync();
-  if (!perm.granted) throw micRefused();
+function nativeKit(): Promise<NativeKit> {
+  kit ??= Promise.all([
+    import('expo-audio'),
+    import('expo-audio/build/AudioModule'),
+    import('expo-audio/build/utils/options'),
+    import('expo-file-system'),
+  ]).then(([audio, mod, options, fs]) => ({
+    audio,
+    AudioModule: mod.default,
+    createRecordingOptions: options.createRecordingOptions,
+    File: fs.File,
+  }));
+  return kit;
+}
+
+/**
+ * Get the mic ready ahead of the tap, on a screen that will record: loads what
+ * recording needs and learns whether the mic is allowed, without asking.
+ */
+export function warmMic(): void {
+  if (Platform.OS === 'web') return;
+  void nativeKit()
+    .then(({ audio }) => audio.getRecordingPermissionsAsync())
+    .then((perm) => {
+      if (perm.granted) micAllowed = true;
+    })
+    .catch(() => {});
+}
+
+async function startNativeRecording(): Promise<ActiveRecording> {
+  const { audio, AudioModule, createRecordingOptions, File } = await nativeKit();
+  const { RecordingPresets } = audio;
+
+  if (!micAllowed) {
+    const perm = await audio.requestRecordingPermissionsAsync();
+    if (!perm.granted) throw micRefused();
+    micAllowed = true;
+  }
   await setAudioSession('play-and-record');
 
   const recorder = new AudioModule.AudioRecorder(
@@ -60,6 +102,8 @@ async function startNativeRecording(): Promise<ActiveRecording> {
   } catch (err) {
     recorder.release();
     await setAudioSession('playback');
+    // Maybe the mic was taken away in Settings: ask again next time.
+    micAllowed = false;
     throw err;
   }
 
@@ -416,17 +460,24 @@ function freeSlot(): void {
 // clips are on the device before she presses them, and they play offline.
 // Clip paths never change content, so the path is the key. The OS may clear
 // the directory under storage pressure; a missing file is simply fetched again.
+/** path -> file uri, for the clips already on the phone. */
+const onDevice = new Map<string, string>();
+
 async function nativeClip(path: string): Promise<string> {
   const { Directory, File, Paths } = await import('expo-file-system');
   const dir = new Directory(Paths.cache, 'clips');
   const file = new File(dir, path.replace(/[^\w.-]/g, '_'));
-  if (file.exists) return file.uri;
+  if (file.exists) {
+    onDevice.set(path, file.uri);
+    return file.uri;
+  }
   try {
     if (!dir.exists) dir.create({ intermediates: true, idempotent: true });
     // Into a temporary name first, so a cut-off download never passes for a clip.
     const part = new File(dir, `${file.name}.part`);
     const got = await File.downloadFileAsync(getAudioUrl(path), part, { idempotent: true });
     got.move(file);
+    onDevice.set(path, file.uri);
     return file.uri;
   } catch {
     // Could not save it: let the player stream it, as it always could.
@@ -486,6 +537,12 @@ function clipUrl(path: string, urgent = false): Promise<string | null> {
 
   loading.set(path, job);
   return job;
+}
+
+/** A clip that is already here (warmed in memory, or saved on the phone), ready to play with no wait. */
+export function readyClip(path: string | null | undefined): string | null {
+  if (!path) return null;
+  return clips.get(path) ?? onDevice.get(path) ?? null;
 }
 
 /** Fetch a clip ahead of the press. Resolves when it is ready to play — or when

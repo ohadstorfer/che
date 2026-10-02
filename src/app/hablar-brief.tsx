@@ -18,7 +18,9 @@ import {
   scenarioAt,
   setDefaultLevel,
   start,
+  warm,
 } from '@/lib/hablar';
+import { preloadAudio } from '@/lib/audio';
 import { freeChatArt, scenarioArt } from '@/lib/hablar-art';
 import { loadCourse } from '@/lib/course';
 import { prime } from '@/lib/hablar-audio';
@@ -49,6 +51,12 @@ export default function HablarBrief() {
   // The version she'd play: the chip's level, or the nearest one written.
   const version = scenario ? scenarioAt(scenario, level) : undefined;
   const played: Band = version?.band ?? level;
+
+  // While she reads the brief: boot the function that starts the chat, and get
+  // Pancho's opening line onto the phone so he speaks the moment it opens.
+  useEffect(() => warm('hablar-start'), []);
+  const openerAudio = version?.opener.audio;
+  useEffect(() => void preloadAudio(openerAudio), [openerAudio]);
 
   const [starting, setStarting] = useState(false);
   const [error, setError] = useState<string | null>(null);

@@ -102,7 +102,7 @@ export default function Practice() {
     | { kind: 'test'; outcome: TestOutcome; plan: TestPlan }
     | null
   >(null);
-  /** Set by the Dale! on the finish screen, when there is a streak to show. */
+  /** Set by Keep going on the finish screen, when there is a streak to show. */
   const [celebrating, setCelebrating] = useState(false);
   /** A frozen streak stops her at the door: what she lost, and the way back.
    *  `undefined` while the answer is in flight — the doorway holds still until

@@ -19,15 +19,20 @@ import { offendingSpanish } from "../_shared/rioplatense.ts";
 // Short, bounded explanations: Sonnet at low effort is plenty.
 const MODEL = "claude-sonnet-5";
 const DAILY_LIMIT = 30;
+// Part of the cache key: bump it when SYSTEM changes, so learners stop getting
+// explanations written under the old rules.
+const PROMPT_VERSION = 2;
 
 const SYSTEM = `You explain one mistake to a learner of Argentine (rioplatense) Spanish whose first language is English.
 
 Rules:
-- English, at most 60 words, no greeting, no praise, no lists.
-- Explain the one difference that matters between what they wrote and the accepted answer: the grammar point, the word, or the form — using the unit's grammar and tips when they apply.
+- English, one short sentence, at most 25 words. No greeting, no praise, no lists.
+- Name the one difference that matters and why, using the unit's grammar and tips when they apply. Don't repeat the accepted answer — it is already on screen.
 - Argentine Spanish uses vos: sos, tenés, querés, mirá. Never mention or use tú forms or vosotros.
 - Put every Spanish word or phrase you quote in *asterisks*.
-- If their answer is actually also correct Spanish for the prompt, say so plainly in one sentence.`;
+- If their answer is actually also correct Spanish for the prompt, say so plainly.
+
+Example: "Tired is a passing state, so it takes *estar*: *estoy*, not *soy*."`;
 
 type Row = Record<string, unknown>;
 
@@ -80,7 +85,7 @@ Deno.serve(async (req) => {
   }
 
   const db = createClient(url, serviceRole, { auth: { persistSession: false } });
-  const key = await sha256(`${body.sentence_id ?? ""}|${body.form_id ?? ""}|${mode}|${answerKey(answer)}`);
+  const key = await sha256(`v${PROMPT_VERSION}|${body.sentence_id ?? ""}|${body.form_id ?? ""}|${mode}|${answerKey(answer)}`);
 
   const { data: cached } = await db.from("explanations").select("body_md, flagged, served").eq("key", key).maybeSingle();
   if (cached && !cached.flagged) {
@@ -164,7 +169,7 @@ Deno.serve(async (req) => {
   }
 
   const bad = offendingSpanish(text);
-  if (!text || bad.length || text.split(/\s+/).length > 90) {
+  if (!text || bad.length || text.split(/\s+/).length > 45) {
     if (bad.length) console.warn("explanation rejected by the rioplatense check", bad);
     return json({ explanation: fallback, degraded: "checked" });
   }

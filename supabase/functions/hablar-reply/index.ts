@@ -1,10 +1,19 @@
 // Edge function: POST /functions/v1/hablar-reply  (SSE)
 // Pancho answers one learner turn (docs/hablar-hld.md §4.5).
 //
-// Body: { session_id, turn_id, paused_seconds? }. The turn is the draft
-// hablar-transcribe stored — the server answers the text it transcribed, never
-// text from the client. The response is an SSE stream:
+// Two ways in:
+//  - multipart { audio | text, session_id, turn_id, paused_seconds? }: the line
+//    itself. It is transcribed and stored as hablar-transcribe stores it, then
+//    answered on the same stream, which opens with `transcript`. What current
+//    builds send.
+//  - JSON { session_id, turn_id, paused_seconds? }: a line already stored (a
+//    draft from hablar-transcribe, or a retry after a dropped stream).
+// Either way the server answers the text it transcribed, never text from the
+// client. Silence comes back as plain JSON { status: "empty" }, not a stream.
+// The response is an SSE stream:
 //
+//   transcript {"turn_id","text"}                          the line, as stored (multipart only)
+//   correction {"has_error","corrected"}                  the verdict, as soon as it is written
 //   text      {"seq":n,"delta":"Jaja, "}                 reply text as it's written
 //   text_fix  {"seq":n,"from":"…","to":"…"}              sentence n was rewritten by the guard
 //   audio     {"seq":n,"text":"…","mp3":"<base64>"}      one per sentence, in order
@@ -13,7 +22,7 @@
 //   error     {"stage":"claude|tts|feedback","retry":bool,"seq"?}
 //
 // Two Claude calls run in parallel: the streamed reply (cached persona + the
-// chat's level/scene block + history) and the structured feedback, which never
+// chat's level/scene block + history) and the streamed feedback, which never
 // holds the reply up: `done` goes out as soon as the reply's audio has, and a
 // slower feedback follows it on the same stream. Pancho ends the chat himself by
 // closing his goodbye with END_MARKER, which is stripped before anything is
@@ -24,6 +33,7 @@
 // turn_id replays the stored result as one burst.
 
 import { json, preflight } from "../_shared/cors.ts";
+import { MAX_AUDIO_BYTES, spokenDraft, type TurnRow, typedDraft } from "../_shared/hablar-draft.ts";
 import { offendingWords } from "../_shared/rioplatense.ts";
 import { SentenceSplitter } from "../_shared/sentences.ts";
 import { sseStream, toBase64, type SseWriter } from "../_shared/sse.ts";
@@ -40,6 +50,7 @@ import {
   GRACE_SECONDS,
   hablarEnv,
   isUuid,
+  loadSession,
   logUsage,
   nextUserIdx,
   recordPause,
@@ -48,6 +59,7 @@ import {
   shouldCloseSoon,
   shouldWrapUp,
   synthesize,
+  TALK_SPEED,
   tomasVoice,
   topicOf,
   TTS_MODEL,
@@ -69,7 +81,7 @@ import {
   WRAP_UP_NOTE,
   type Feedback,
 } from "../_shared/hablar-prompt.ts";
-import { Anthropic, MODEL, plain, structured } from "../_shared/hablar-claude.ts";
+import { Anthropic, earlyVerdict, MODEL, plain, streamedStructured } from "../_shared/hablar-claude.ts";
 import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
 const HISTORY_TURNS = 20;
@@ -77,17 +89,7 @@ const TTS_PARALLEL = 3;
 const LATE_SECONDS = 120; // a draft recorded in the grace period may still be sent a little later
 const FALLBACK_LINE = "Perdón, se me cortó. ¿Me lo repetís?";
 
-type Turn = {
-  id: string;
-  conversation_id: string;
-  idx: number | null;
-  role: "user" | "tomas";
-  status: "draft" | "final";
-  text: string;
-  audio_path: string | null;
-  feedback: Feedback | null;
-  meta: Record<string, unknown>;
-};
+type Turn = TurnRow;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -209,10 +211,21 @@ async function runTurn(opts: {
   ];
 
   // ----- feedback, in parallel -----
-  const feedbackDone = structured<Feedback>(client, {
+  // Streamed, so the verdict (right or wrong, and the fixed line) goes out the
+  // moment it is written — usually before Pancho's first sentence. The why and
+  // the better phrasing follow in the full `feedback`.
+  let verdictSent = false;
+  const feedbackDone = streamedStructured<Feedback>(client, {
     system: FEEDBACK_SYSTEM,
     schema: FEEDBACK_SCHEMA as unknown as Record<string, unknown>,
     input: feedbackInput({ level: session.level, tomasBefore, line: user.text }),
+    onText: (soFar) => {
+      if (verdictSent) return;
+      const verdict = earlyVerdict(soFar, user.text);
+      if (!verdict) return;
+      verdictSent = true;
+      sse.send("correction", verdict);
+    },
   })
     .then(async ({ value, usage: u, ms }) => {
       usage.push(claudeUsage({ conversation_id: session.id, turn_id: user.id, model: MODEL, stage: "feedback", ms }, u));
@@ -267,7 +280,7 @@ async function runTurn(opts: {
       return await slot(async () => {
         const t0 = Date.now();
         try {
-          const mp3 = await synthesize({ key: env.elevenKey, voiceId, text, previousText });
+          const mp3 = await synthesize({ key: env.elevenKey, voiceId, text, previousText, speed: TALK_SPEED[session.level] });
           usage.push({
             conversation_id: session.id,
             turn_id: tomasId,
@@ -380,7 +393,13 @@ Deno.serve(async (req) => {
 
   const env = hablarEnv();
   if (!env) return json({ error: "function is not configured" }, { status: 500 });
+  const db = serviceClient(env);
+  const spoken = (req.headers.get("content-type") ?? "").includes("multipart/form-data");
+  return spoken ? speak(req, env, db) : answerStored(req, env, db);
+});
 
+/** JSON `{ session_id, turn_id }`: answer a line already stored (a draft, a retry, a replay). */
+async function answerStored(req: Request, env: Env, db: SupabaseClient): Promise<Response> {
   let body: { session_id?: string; turn_id?: string; paused_seconds?: number };
   try {
     body = await req.json();
@@ -388,7 +407,6 @@ Deno.serve(async (req) => {
     body = {};
   }
 
-  const db = serviceClient(env);
   // Read together rather than one after another, the auth check included: each
   // is a round trip before Pancho can start talking. Nothing read is used until
   // the caller is known and owns the session; the turn is checked against it below.
@@ -407,16 +425,90 @@ Deno.serve(async (req) => {
   if (!session) return json({ error: "no such session" }, { status: 404 });
   // Not waited on: nothing below needs the write, only the value on `session`.
   background(recordPause(db, session, body.paused_seconds));
+  return answer({ env, db, userId: who.userId, session, user: turnRow as Turn | null, stored });
+}
+
+/**
+ * Multipart `{ audio | text, session_id, turn_id, paused_seconds? }`: the line
+ * and its answer in one request. The line is stored as hablar-transcribe stores
+ * it, then answered on the same stream, which opens with `transcript` — one
+ * round trip, one cold start and one auth check fewer than a transcribe call
+ * followed by a reply call. Sent again with the same turn_id it neither
+ * transcribes nor answers twice.
+ */
+async function speak(req: Request, env: Env, db: SupabaseClient): Promise<Response> {
+  if (Number(req.headers.get("content-length") ?? 0) > MAX_AUDIO_BYTES + 64 * 1024) {
+    return json({ error: "audio too long" }, { status: 413 });
+  }
+  // The auth check runs while the upload is read, not before it.
+  const [who, form] = await Promise.all([caller(req, env), req.formData().catch(() => null)]);
+  if (!who) return json({ error: "not authenticated" }, { status: 401 });
+  if (!form) return json({ error: "expected multipart/form-data" }, { status: 400 });
+  const turnId = form.get("turn_id");
+  if (!isUuid(turnId)) return json({ error: "turn_id must be a uuid" }, { status: 400 });
+  const typed = form.get("text");
+  // Not `instanceof File`: the edge runtime can hand an upload back as a plain Blob.
+  const audio = form.get("audio");
+  if (typeof typed !== "string" && (!audio || typeof audio === "string" || audio.size === 0)) {
+    return json({ error: "audio or text is required" }, { status: 400 });
+  }
+  if (audio && typeof audio !== "string" && audio.size > MAX_AUDIO_BYTES) {
+    return json({ error: "audio too long" }, { status: 413 });
+  }
+
+  const sessionId = form.get("session_id");
+  const [session, { count }, { data: existing }, stored] = await Promise.all([
+    loadSession(db, sessionId, who.userId),
+    typeof typed !== "string" && isUuid(sessionId)
+      ? db.from("hablar_usage").select("id", { count: "exact", head: true }).eq("conversation_id", sessionId).eq("stage", "stt")
+      : Promise.resolve({ count: 0 }),
+    db.from("conversation_turns").select("*").eq("id", turnId).maybeSingle(),
+    storedReply(db, turnId),
+  ]);
+  if (!session) return json({ error: "no such session" }, { status: 404 });
+  background(recordPause(db, session, form.get("paused_seconds")));
+
+  const out = typeof typed === "string"
+    ? await typedDraft({ db, session, turnId, raw: typed, existing: existing as Turn | null })
+    : await spokenDraft({
+      env,
+      db,
+      userId: who.userId,
+      session,
+      turnId,
+      audio: audio as Blob,
+      existing: existing as Turn | null,
+      sttCount: count ?? 0,
+    });
+  if ("error" in out) return out.error;
+  if ("empty" in out) return json({ text: "", turn_id: turnId, status: "empty" });
+  return answer({ env, db, userId: who.userId, session, user: out.turn, stored, transcript: true });
+}
+
+async function answer(opts: {
+  env: Env;
+  db: SupabaseClient;
+  userId: string;
+  session: Session;
+  user: Turn | null;
+  stored: Turn | null;
+  /** Open the stream with the line itself (the one-request path). */
+  transcript?: boolean;
+}): Promise<Response> {
+  const { env, db, session } = opts;
   const topic = topicOf(session.kind, session.topic_id, session.level, session.scenario);
   if (!topic) return json({ error: "this chat's topic no longer exists" }, { status: 410 });
 
-  let user = turnRow as Turn | null;
+  let user = opts.user;
   if (!user || user.conversation_id !== session.id || user.role !== "user") {
     return json({ error: "no such turn" }, { status: 404 });
   }
+  const lead = (sse: SseWriter) => {
+    if (opts.transcript) sse.send("transcript", { turn_id: user!.id, text: user!.text });
+  };
 
   // Already answered, or being answered by an earlier request: replay.
-  let answered = stored;
+  let answered = opts.stored;
   if (!answered && user.status === "final") {
     for (let i = 0; i < 25 && !answered; i++) {
       await sleep(1000);
@@ -425,6 +517,7 @@ Deno.serve(async (req) => {
   }
   if (answered) {
     const sse = sseStream();
+    lead(sse);
     background(replay(sse, db, user, answered));
     return sse.response;
   }
@@ -466,12 +559,13 @@ Deno.serve(async (req) => {
   if (userIdx < 1) return json({ error: "turn has no place in the chat" }, { status: 409 });
 
   const sse = sseStream();
+  lead(sse);
   background(
-    runTurn({ env, db, sse, session, topic, user, userIdx, userId: who.userId }).catch((err) => {
+    runTurn({ env, db, sse, session, topic, user, userIdx, userId: opts.userId }).catch((err) => {
       console.error("turn failed", err);
       sse.send("error", { stage: "claude", retry: true });
       sse.close();
     }),
   );
   return sse.response;
-});
+}

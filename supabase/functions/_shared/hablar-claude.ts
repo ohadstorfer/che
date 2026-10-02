@@ -38,6 +38,63 @@ export async function structured<T>(
   }
 }
 
+/**
+ * `structured`, streamed and without thinking, for the one call that sits in
+ * front of the learner: `onText` sees the JSON as it grows, so a field can be
+ * shown the moment it is complete. Left unset, thinking on this model runs
+ * adaptive, and the wait before the first character is what the learner feels.
+ */
+export async function streamedStructured<T>(
+  client: Anthropic,
+  opts: { system: string; schema: Record<string, unknown>; input: string; maxTokens?: number; onText: (soFar: string) => void },
+): Promise<{ value: T | null; usage: CallUsage | undefined; ms: number }> {
+  const t0 = Date.now();
+  const stream = client.messages.stream({
+    model: MODEL,
+    max_tokens: opts.maxTokens ?? 2000,
+    // deno-lint-ignore no-explicit-any
+    ...({ thinking: { type: "disabled" }, output_config: { format: { type: "json_schema", schema: opts.schema } } } as any),
+    system: cachedSystem(opts.system),
+    messages: [{ role: "user", content: opts.input }],
+  });
+  let text = "";
+  for await (const ev of stream) {
+    if (ev.type === "content_block_delta" && ev.delta.type === "text_delta") {
+      text += ev.delta.text;
+      opts.onText(text);
+    }
+  }
+  const response = await stream.finalMessage();
+  const ms = Date.now() - t0;
+  if (response.stop_reason === "refusal" || response.stop_reason === "max_tokens") {
+    return { value: null, usage: response.usage, ms };
+  }
+  try {
+    return { value: JSON.parse(text) as T, usage: response.usage, ms };
+  } catch {
+    return { value: null, usage: response.usage, ms };
+  }
+}
+
+/**
+ * The verdict of a feedback object still being written: whether the line has
+ * an error and its corrected form, as soon as both are complete in `soFar`.
+ * A line with no error needs only the first. Null until then.
+ */
+export function earlyVerdict(soFar: string, line: string): { has_error: boolean; corrected: string } | null {
+  const flag = /"has_error"\s*:\s*(true|false)/.exec(soFar);
+  if (!flag) return null;
+  if (flag[1] === "false") return { has_error: false, corrected: line };
+  // A complete JSON string: the closing quote is present and not escaped.
+  const field = /"corrected"\s*:\s*("(?:[^"\\]|\\.)*")/.exec(soFar);
+  if (!field) return null;
+  try {
+    return { has_error: true, corrected: JSON.parse(field[1]) as string };
+  } catch {
+    return null;
+  }
+}
+
 /** Plain text, short, no thinking — the guard's rewrite. */
 export async function plain(
   client: Anthropic,

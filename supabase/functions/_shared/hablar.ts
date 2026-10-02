@@ -423,7 +423,24 @@ export function background(work: Promise<unknown>) {
 // ---------------------------------------------------------------------------
 
 const ELEVEN = "https://api.elevenlabs.io/v1";
+/**
+ * How fast Pancho speaks at each level. Said slowly by the voice itself, not
+ * stretched afterwards, so it stays natural. Beginner and Intermediate get it
+ * very slow, Advanced a little under native, Local at full native speed.
+ * (ElevenLabs takes 0.7–1.2.)
+ */
+export const TALK_SPEED: Record<Band, number> = { A1: 0.75, A2: 0.75, B1: 0.9, B2: 1 };
+
 export const TTS_MODEL = () => Deno.env.get("HABLAR_TTS_MODEL") || "eleven_flash_v2_5";
+/**
+ * How steady Pancho's voice stays, 0–1. Lower lets the pitch move more — the
+ * rise and fall of porteño speech — at the cost of a less even read. A secret,
+ * so it can be tuned by ear without a deploy.
+ */
+export const TTS_STABILITY = () => {
+  const v = Number(Deno.env.get("HABLAR_TTS_STABILITY"));
+  return Number.isFinite(v) && v >= 0 && v <= 1 && Deno.env.get("HABLAR_TTS_STABILITY") ? v : 0.6;
+};
 
 let voiceCache: string | null = null;
 
@@ -450,6 +467,8 @@ export async function synthesize(opts: {
   voiceId: string;
   text: string;
   previousText?: string;
+  /** Speaking speed, 0.7–1.2 (1 is natural): TALK_SPEED for the chat's level. */
+  speed?: number;
   signal?: AbortSignal;
 }): Promise<Uint8Array<ArrayBuffer>> {
   const model = TTS_MODEL();
@@ -465,7 +484,13 @@ export async function synthesize(opts: {
       // Only the flash/turbo models accept a forced language.
       ...(/flash|turbo/.test(model) ? { language_code: "es" } : {}),
       ...(opts.previousText ? { previous_text: opts.previousText.slice(-500) } : {}),
-      voice_settings: { stability: 0.6, similarity_boost: 0.85, style: 0, use_speaker_boost: true },
+      voice_settings: {
+        stability: TTS_STABILITY(),
+        similarity_boost: 0.85,
+        style: 0,
+        use_speaker_boost: true,
+        speed: opts.speed ?? 1,
+      },
     }),
   });
   if (!res.ok) {

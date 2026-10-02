@@ -1,326 +1,415 @@
-import { useEffect, useRef } from 'react';
-import {
-  AccessibilityInfo,
-  Animated,
+import { Image, type ImageSource } from 'expo-image';
+import { useEffect } from 'react';
+import { StyleSheet, Text, View, type ViewStyle } from 'react-native';
+import Animated, {
   Easing,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+  useAnimatedProps,
+  useAnimatedStyle,
+  useReducedMotion,
+  useSharedValue,
+  withDelay,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
+import Svg, { Ellipse, G, Path, Rect } from 'react-native-svg';
 
+import { Flame } from '@/components/flame';
 import { Button } from '@/components/ui';
-import { clay, colors, font, pastel, radius } from '@/lib/theme';
+import { success } from '@/lib/haptics';
+import { colors, font, pastel } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
-// The reward screen for keeping the streak alive, ported from the choreography
-// we used in the "che" app: the card lands, the flame pops and then breathes,
-// yesterday's number slides up and out while today's rises to replace it, a +1
-// drops in, and finally today's dot on the week strip fills.
+// The reward screen for keeping the streak alive, framed in filete porteño:
+// the painted frames on Buenos Aires colectivos and shop signs.
 //
-// Timings are deliberately staggered — each beat lands after the eye has
-// finished the previous one, so it reads as a sequence rather than a flash.
+// The frame draws itself first — the rosa border, then the durazno one inside
+// it, then the corner curls in pairs, then the crown on top — so the eye
+// follows the brush. When the frame closes, the flame and today's count pop
+// into the middle (with a success tap) and the capybara arrives, then the
+// banner unrolls, then the words and the button.
+//
+// The capybara has four ways in, and the count picks which: consecutive days
+// never repeat, and the same day always plays the same one.
+//
+//   goal      cheering in the jersey, rising from behind the banner
+//   flag      beside the sign, waving the flag over it
+//   serenade  at the corner, strumming, notes floating up to the count
+//   mate      dropping onto the top of the sign and settling in
+//
+// Strokes are drawn once and left alone. Everything after that moves by
+// transform only — the capybara is one image, never redrawn — so it all runs
+// on the UI thread.
 // ---------------------------------------------------------------------------
 
-const DAY_LABELS = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
-const NUMBER_TRAVEL = 84;
+/** Strong ease-out: all of the movement is spent in the first third. */
+const EASE = Easing.bezier(0.23, 1, 0.32, 1);
+/** A small overshoot, so things land rather than appear. */
+const POP = Easing.bezier(0.34, 1.56, 0.64, 1);
+const SWING = Easing.inOut(Easing.sin);
 
-/** Monday-first index of today. */
-function todayIndex(): number {
-  return (new Date().getDay() + 6) % 7;
+const DRAW = 1100;
+const LAND = 900; // the frame is closed; the count pops in
+const BANNER = 1300;
+const WORDS = 1500;
+
+// The frame is drawn in a 240 × 270 box and scaled to each variant's width.
+const BOX_W = 240;
+const BOX_H = 270;
+
+// Dash lengths at least as long as each stroke, so offset = length hides it.
+const STROKES = [
+  { kind: 'rect', x: 20, y: 20, w: 200, h: 210, r: 30, color: colors.primary, width: 5, len: 780, delay: 0 },
+  { kind: 'rect', x: 32, y: 32, w: 176, h: 186, r: 22, color: pastel.peach, width: 3, len: 700, delay: 120 },
+  { kind: 'path', d: 'M44 66 C44 48 60 40 72 46 C82 51 80 64 70 64 C63 64 62 56 67 55', color: colors.success, width: 4, len: 140, delay: 300 },
+  { kind: 'path', d: 'M196 66 C196 48 180 40 168 46 C158 51 160 64 170 64 C177 64 178 56 173 55', color: colors.success, width: 4, len: 140, delay: 300 },
+  { kind: 'path', d: 'M44 184 C44 202 60 210 72 204 C82 199 80 186 70 186 C63 186 62 194 67 195', color: pastel.lav, width: 4, len: 140, delay: 420 },
+  { kind: 'path', d: 'M196 184 C196 202 180 210 168 204 C158 199 160 186 170 186 C177 186 178 194 173 195', color: pastel.lav, width: 4, len: 140, delay: 420 },
+  { kind: 'path', d: 'M96 40 C108 30 132 30 144 40', color: pastel.butter, width: 5, len: 80, delay: 520 },
+] as const;
+
+const RIBBON = 'M30 222 L50 214 L190 214 L210 222 L190 230 L190 252 L50 252 L50 230 Z';
+
+type Motion = 'goal' | 'flag' | 'serenade' | 'mate';
+
+interface Variant {
+  motion: Motion;
+  source: ImageSource;
+  /** The figure's width ÷ height. */
+  aspect: number;
+  /** Frame width in points. */
+  frame: number;
+  /** Room left around the frame for the capybara, so it stays on screen. */
+  room: ViewStyle;
+  /** The capybara, as fractions of the frame: width and left of its width,
+   *  bottom of its height. Negative reaches outside. */
+  capy: { width: number; left: number; bottom: number; origin: string };
+  /** The count's box, as fractions of the frame's height, and its sizes in box units. */
+  count: { row: boolean; top: number; height: number; flame: number; number: number };
 }
 
-// The native driver can't run on web, and animating there is still smooth
-// because react-native-web compiles these to compositor-friendly transforms.
-const NATIVE = Platform.OS !== 'web';
+const COUNT_DEFAULT = { row: false, top: 0.21, height: 0.52, flame: 54, number: 60 };
+
+const VARIANTS: Variant[] = [
+  {
+    motion: 'goal',
+    source: require('@/assets/images/capybara/capybara-futbol-gol-figure.webp'),
+    aspect: 312 / 384,
+    frame: 250,
+    room: {},
+    capy: { width: 0.46, left: 0.27, bottom: 0.13, origin: 'bottom' },
+    // The capybara takes the middle, so the count moves up into a row.
+    count: { row: true, top: 0.11, height: 0.24, flame: 40, number: 46 },
+  },
+  {
+    motion: 'flag',
+    source: require('@/assets/images/capybara/capybara-historia-figure.webp'),
+    aspect: 282 / 384,
+    frame: 200,
+    room: { marginLeft: 76 },
+    capy: { width: 0.66, left: -0.4, bottom: -0.04, origin: '40% 100%' },
+    count: { ...COUNT_DEFAULT, number: 54 },
+  },
+  {
+    motion: 'serenade',
+    source: require('@/assets/images/capybara/capybara-musica-figure.webp'),
+    aspect: 343 / 384,
+    frame: 200,
+    room: { marginRight: 76 },
+    capy: { width: 0.64, left: 0.8, bottom: -0.06, origin: 'bottom' },
+    count: { ...COUNT_DEFAULT, number: 54 },
+  },
+  {
+    motion: 'mate',
+    source: require('@/assets/images/capybara/capybara-mate-figure.webp'),
+    aspect: 280 / 384,
+    frame: 210,
+    room: { marginTop: 108 },
+    capy: { width: 0.52, left: 0.26, bottom: 0.82, origin: 'bottom' },
+    count: { ...COUNT_DEFAULT, number: 54 },
+  },
+];
+
+// Notes float up and left out of the guitar, staggered: [delay, dx, dy, spin, colour].
+const NOTES = [
+  [1300, -70, -120, -18, colors.primary],
+  [1550, -30, -150, 14, colors.accent],
+  [1800, -95, -95, -10, colors.success],
+  [2050, -50, -170, 20, pastel.lav],
+] as const;
+
+const AnimatedRect = Animated.createAnimatedComponent(Rect);
+const AnimatedPath = Animated.createAnimatedComponent(Path);
+
+function Stroke({ stroke, reduced }: { stroke: (typeof STROKES)[number]; reduced: boolean }) {
+  const drawn = useSharedValue(reduced ? 1 : 0);
+  useEffect(() => {
+    if (reduced) return;
+    drawn.value = withDelay(stroke.delay, withTiming(1, { duration: DRAW, easing: EASE }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const props = useAnimatedProps(() => ({ strokeDashoffset: stroke.len * (1 - drawn.value) }));
+
+  const common = {
+    fill: 'none',
+    stroke: stroke.color,
+    strokeWidth: stroke.width,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+    strokeDasharray: stroke.len,
+    animatedProps: props,
+  };
+  return stroke.kind === 'rect' ? (
+    <AnimatedRect x={stroke.x} y={stroke.y} width={stroke.w} height={stroke.h} rx={stroke.r} {...common} />
+  ) : (
+    <AnimatedPath d={stroke.d} {...common} />
+  );
+}
+
+/** Fades in (and, motion allowing, rises or pops) after `delay`. */
+function useEntrance(delay: number, from: { y?: number; scale?: number }) {
+  const reduced = useReducedMotion();
+  const t = useSharedValue(0);
+  useEffect(() => {
+    t.value = withDelay(
+      reduced ? 0 : delay,
+      withTiming(1, { duration: reduced ? 160 : from.scale ? 520 : 400, easing: from.scale ? POP : EASE }),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return useAnimatedStyle(() => ({
+    // Clamped: the pop overshoots past 1, and opacity mustn't.
+    opacity: Math.min(1, t.value),
+    transform: reduced
+      ? []
+      : [
+          { translateY: (from.y ?? 0) * (1 - t.value) },
+          { scale: from.scale ? from.scale + (1 - from.scale) * t.value : 1 },
+        ],
+  }));
+}
+
+function Capybara({ variant, reduced }: { variant: Variant; reduced: boolean }) {
+  const { motion, capy, frame } = variant;
+  const width = capy.width * frame;
+  const height = width / variant.aspect;
+  const frameH = frame * (BOX_H / BOX_W);
+
+  const enter = useSharedValue(0);
+  /** The after-move: a hop, a wave, a strum, or the squash on landing. */
+  const beat = useSharedValue(0);
+
+  useEffect(() => {
+    if (reduced) {
+      enter.value = withTiming(1, { duration: 160 });
+      return;
+    }
+    switch (motion) {
+      case 'goal':
+        enter.value = withDelay(LAND + 50, withTiming(1, { duration: 620, easing: POP }));
+        beat.value = withDelay(
+          1800,
+          withRepeat(
+            withSequence(
+              withTiming(1, { duration: 240, easing: Easing.out(Easing.quad) }),
+              withTiming(0, { duration: 240, easing: Easing.in(Easing.quad) }),
+            ),
+            2,
+          ),
+        );
+        break;
+      case 'flag':
+        enter.value = withDelay(LAND + 50, withTiming(1, { duration: 620, easing: POP }));
+        beat.value = withDelay(1600, withRepeat(withTiming(1, { duration: 420, easing: SWING }), 6, true));
+        break;
+      case 'serenade':
+        enter.value = withDelay(LAND + 50, withTiming(1, { duration: 560, easing: EASE }));
+        beat.value = withDelay(1550, withRepeat(withTiming(1, { duration: 300, easing: SWING }), 8, true));
+        break;
+      case 'mate':
+        // Falls (accelerating), then squashes on the sign and springs back.
+        enter.value = withDelay(LAND + 100, withTiming(1, { duration: 340, easing: Easing.in(Easing.quad) }));
+        beat.value = withDelay(
+          LAND + 440,
+          withSequence(withTiming(1, { duration: 90 }), withTiming(0, { duration: 280, easing: POP })),
+        );
+        break;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const style = useAnimatedStyle(() => {
+    const e = enter.value;
+    const b = beat.value;
+    const opacity = Math.min(1, motion === 'mate' ? e * 3 : e);
+    if (reduced) return { opacity };
+    switch (motion) {
+      case 'goal':
+        return {
+          opacity,
+          transform: [
+            { translateY: 0.4 * height * (1 - e) - 0.09 * height * b },
+            { scale: 0.92 + 0.08 * e },
+          ],
+        };
+      case 'flag':
+        return {
+          opacity,
+          transform: [{ translateY: 0.4 * height * (1 - e) }, { scale: 0.92 + 0.08 * e }, { rotate: `${-4 * b}deg` }],
+        };
+      case 'serenade':
+        return {
+          opacity,
+          transform: [
+            { translateX: 0.45 * width * (1 - e) },
+            { translateY: b },
+            { rotate: `${8 * (1 - e) + 1.8 * b}deg` },
+          ],
+        };
+      case 'mate':
+        return {
+          opacity,
+          transform: [{ translateY: -50 * (1 - e) }, { scaleX: 1 + 0.06 * b }, { scaleY: 1 - 0.1 * b }],
+        };
+    }
+  });
+
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={[
+        {
+          position: 'absolute',
+          width,
+          height,
+          left: capy.left * frame,
+          bottom: capy.bottom * frameH,
+          transformOrigin: capy.origin,
+        },
+        style,
+      ]}>
+      <Image source={variant.source} style={StyleSheet.absoluteFill} contentFit="contain" accessible={false} />
+    </Animated.View>
+  );
+}
+
+function Note({ note, from }: { note: (typeof NOTES)[number]; from: { left: number; bottom: number } }) {
+  const [delay, dx, dy, spin, color] = note;
+  const t = useSharedValue(0);
+  useEffect(() => {
+    t.value = withDelay(delay, withRepeat(withTiming(1, { duration: 1500, easing: EASE }), 2));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const style = useAnimatedStyle(() => {
+    const v = t.value;
+    return {
+      // In over the first fifth, held, out over the last third.
+      opacity: v === 0 ? 0 : v < 0.2 ? v / 0.2 : v > 0.7 ? (1 - v) / 0.3 : 1,
+      transform: [{ translateX: dx * v }, { translateY: dy * v }, { rotate: `${spin * v}deg` }, { scale: 0.8 + 0.3 * v }],
+    };
+  });
+  return (
+    <Animated.View pointerEvents="none" style={[{ position: 'absolute', width: 16, height: 20, ...from }, style]}>
+      <Svg width={16} height={20} viewBox="0 0 20 24">
+        <Ellipse cx={6} cy={19} rx={5.5} ry={4.2} fill={color} rotation={-20} origin="6, 19" />
+        <Rect x={10} y={2} width={2.4} height={17} rx={1} fill={color} />
+        <Path d="M12.4 2 C18 3.5 19.5 7 18.5 11 C17.5 8 15.5 6.8 12.4 6.6 Z" fill={color} />
+      </Svg>
+    </Animated.View>
+  );
+}
 
 export function StreakCelebration({
-  previous,
   streak,
   onDone,
 }: {
-  previous: number;
+  /** The count before this round. Callers pass it; the frame shows only today's. */
+  previous?: number;
   streak: number;
   onDone: () => void;
 }) {
-  const today = todayIndex();
+  const reduced = useReducedMotion();
+  const variant = VARIANTS[Math.abs(streak) % VARIANTS.length];
+  const W = variant.frame;
+  const K = W / BOX_W;
+  const H = BOX_H * K;
+  const count = variant.count;
 
-  const cardOpacity = useRef(new Animated.Value(0)).current;
-  const cardShift = useRef(new Animated.Value(14)).current;
-  const cardScale = useRef(new Animated.Value(0.98)).current;
-
-  const flameOpacity = useRef(new Animated.Value(0)).current;
-  const flamePop = useRef(new Animated.Value(0.6)).current;
-  const flameFlicker = useRef(new Animated.Value(1)).current;
-  const flameSway = useRef(new Animated.Value(0)).current;
-  const flameLift = useRef(new Animated.Value(0)).current;
-
-  const oldOpacity = useRef(new Animated.Value(1)).current;
-  const oldShift = useRef(new Animated.Value(0)).current;
-  const newOpacity = useRef(new Animated.Value(0)).current;
-  const newShift = useRef(new Animated.Value(NUMBER_TRAVEL)).current;
-
-  const plusScale = useRef(new Animated.Value(0)).current;
-  const plusShift = useRef(new Animated.Value(-38)).current;
-  const plusSpin = useRef(new Animated.Value(-15)).current;
-
-  const dotScale = useRef(new Animated.Value(0)).current;
-  const dotFill = useRef(new Animated.Value(0)).current;
-
-  const actionsOpacity = useRef(new Animated.Value(0)).current;
+  const center = useEntrance(LAND, { scale: 0.8 });
+  const banner = useEntrance(BANNER, { y: 10, scale: 0.85 });
+  const words = useEntrance(WORDS, { y: 10 });
+  const action = useEntrance(WORDS + 300, { y: 10 });
 
   useEffect(() => {
-    let loops: Animated.CompositeAnimation[] = [];
-
-    const settleInstantly = () => {
-      // Reduced motion: everything simply is where it ends up, no travel.
-      [cardOpacity, flameOpacity, oldOpacity, newOpacity, actionsOpacity].forEach((v) =>
-        v.setValue(1),
-      );
-      oldOpacity.setValue(0);
-      [cardShift, oldShift, newShift, plusShift, plusSpin].forEach((v) => v.setValue(0));
-      [cardScale, flamePop, plusScale, dotScale, dotFill].forEach((v) => v.setValue(1));
-    };
-
-    AccessibilityInfo.isReduceMotionEnabled().then((reduce) => {
-      if (reduce) {
-        settleInstantly();
-        return;
-      }
-
-      const timing = (
-        value: Animated.Value,
-        toValue: number,
-        duration: number,
-        delay = 0,
-        easing: (v: number) => number = Easing.out(Easing.cubic),
-      ) =>
-        Animated.timing(value, {
-          toValue,
-          duration,
-          delay,
-          easing,
-          useNativeDriver: NATIVE,
-        });
-
-      // 1. The card arrives.
-      Animated.parallel([
-        timing(cardOpacity, 1, 520, 120),
-        timing(cardShift, 0, 560, 120),
-        timing(cardScale, 1, 560, 120),
-      ]).start();
-
-      // 2. The flame pops...
-      Animated.parallel([
-        timing(flameOpacity, 1, 240, 260),
-        Animated.sequence([
-          Animated.delay(260),
-          timing(flamePop, 1.14, 420, 0, Easing.bezier(0.2, 0.9, 0.2, 1.05)),
-          timing(flamePop, 1, 340),
-        ]),
-      ]).start();
-
-      // 3. ...and then breathes forever: three overlapping loops at different
-      //    periods so the motion never visibly repeats.
-      const breathe = (
-        value: Animated.Value,
-        frames: [number, number][],
-      ): Animated.CompositeAnimation =>
-        Animated.loop(
-          Animated.sequence(
-            frames.map(([to, duration]) =>
-              Animated.timing(value, {
-                toValue: to,
-                duration,
-                easing: Easing.inOut(Easing.quad),
-                useNativeDriver: NATIVE,
-              }),
-            ),
-          ),
-        );
-
-      const startBreathing = setTimeout(() => {
-        loops = [
-          breathe(flameFlicker, [
-            [1.04, 900],
-            [0.97, 1000],
-            [1.03, 850],
-            [0.98, 950],
-          ]),
-          breathe(flameSway, [
-            [-4, 1800],
-            [4, 1900],
-            [-2, 1600],
-            [2, 1700],
-          ]),
-          breathe(flameLift, [
-            [-3, 1300],
-            [0, 1250],
-            [-1.5, 1100],
-            [0, 1200],
-          ]),
-        ];
-        loops.forEach((l) => l.start());
-      }, 1100);
-
-      // 4. The number swaps: the old one leaves upward, the new one follows it in.
-      Animated.parallel([
-        timing(oldOpacity, 0, 700, 780),
-        timing(oldShift, -NUMBER_TRAVEL, 780, 780, Easing.bezier(0.4, 0, 0.2, 1)),
-        timing(newOpacity, 1, 560, 780),
-        timing(newShift, 0, 820, 780, Easing.bezier(0.2, 0.9, 0.2, 1.05)),
-      ]).start();
-
-      // 5. The +1 drops in and settles.
-      Animated.parallel([
-        Animated.sequence([
-          Animated.delay(1080),
-          timing(plusScale, 1.18, 330, 0, Easing.bezier(0.2, 0.9, 0.2, 1.4)),
-          timing(plusScale, 1, 150),
-        ]),
-        timing(plusShift, 0, 380, 1080, Easing.bezier(0.2, 0.9, 0.2, 1.4)),
-        Animated.sequence([
-          Animated.delay(1080),
-          timing(plusSpin, 8, 240),
-          timing(plusSpin, 0, 240),
-        ]),
-      ]).start();
-
-      // 6. Today's dot bounces in, then fills in.
-      Animated.sequence([
-        Animated.delay(1300),
-        timing(dotScale, 1.18, 340, 0, Easing.bezier(0.2, 0.9, 0.2, 1.4)),
-        timing(dotScale, 1, 180),
-      ]).start();
-      timing(dotFill, 1, 620, 1900).start();
-
-      timing(actionsOpacity, 1, 400, 2100).start();
-    });
-
-    return () => loops.forEach((l) => l.stop());
+    const t = setTimeout(success, reduced ? 0 : LAND);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const flameStyle = {
-    opacity: flameOpacity,
-    transform: [
-      { translateY: flameLift },
-      {
-        rotate: flameSway.interpolate({
-          inputRange: [-10, 10],
-          outputRange: ['-10deg', '10deg'],
-        }),
-      },
-      { scale: Animated.multiply(flamePop, flameFlicker) },
-    ],
-  };
+  const caption = streak === 1 ? 'DAY IN A ROW' : 'DAYS IN A ROW';
+
+  const bannerView = (
+    <Animated.View
+      style={[styles.banner, { top: 214 * K, left: 20 * K, width: 200 * K, height: 38 * K }, banner]}>
+      <Svg width={200 * K} height={38 * K} viewBox="20 214 200 38" style={StyleSheet.absoluteFill}>
+        <G>
+          <Path d={RIBBON} fill={colors.primary} />
+          <Path d="M50 214 L50 252 M190 214 L190 252" stroke={colors.primaryDark} strokeWidth={2} />
+        </G>
+      </Svg>
+      <Text style={[styles.bannerText, { fontSize: 12 * K, letterSpacing: 2.5 * K }]}>{caption}</Text>
+    </Animated.View>
+  );
+  const capybara = <Capybara variant={variant} reduced={reduced} />;
+  // The cheering capybara stands behind the banner; the others are in front of the sign.
+  const behindBanner = variant.motion === 'goal';
 
   return (
     <View style={styles.wrap}>
-      <View style={styles.intro}>
-        <Text style={styles.headline}>That's</Text>
-        <Text style={styles.headlineAccent}>another day.</Text>
-        <Text style={styles.subhead}>You've kept this up longer than you think. It's a habit now.</Text>
+      <Animated.Text style={[styles.headline, words]} accessibilityRole="header">
+        What a <Text style={styles.headlineAccent}>streak!</Text>
+      </Animated.Text>
+
+      <View style={styles.stage}>
+        <View
+          style={[{ width: W, height: H }, variant.room]}
+          accessible
+          accessibilityLabel={`${streak} ${caption.toLowerCase()}`}>
+          <Svg width={W} height={H} viewBox={`0 0 ${BOX_W} ${BOX_H}`} style={StyleSheet.absoluteFill}>
+            {STROKES.map((s, i) => (
+              <Stroke key={i} stroke={s} reduced={reduced} />
+            ))}
+          </Svg>
+
+          <Animated.View
+            style={[
+              styles.count,
+              count.row && styles.countRow,
+              { top: count.top * H, height: count.height * H },
+              center,
+            ]}>
+            <Flame size={count.flame * K} />
+            <Text style={[styles.number, { fontSize: count.number * K, lineHeight: count.number * K * 1.08 }]}>
+              {streak}
+            </Text>
+          </Animated.View>
+
+          {behindBanner ? capybara : null}
+          {bannerView}
+          {behindBanner ? null : capybara}
+
+          {variant.motion === 'serenade' && !reduced
+            ? NOTES.map((n, i) => <Note key={i} note={n} from={{ left: 1.0 * W, bottom: 0.22 * H }} />)
+            : null}
+        </View>
       </View>
 
-      <Animated.View
-        style={[
-          styles.card,
-          {
-            opacity: cardOpacity,
-            transform: [{ translateY: cardShift }, { scale: cardScale }],
-          },
-        ]}>
-        {/* +1 */}
-        <Animated.View
-          style={[
-            styles.plus,
-            {
-              transform: [
-                { translateY: plusShift },
-                { scale: plusScale },
-                {
-                  rotate: plusSpin.interpolate({
-                    inputRange: [-20, 20],
-                    outputRange: ['-20deg', '20deg'],
-                  }),
-                },
-              ],
-            },
-          ]}>
-          {/* Usually +1; a recovered streak leaps by the whole thawed run. */}
-          <Text style={styles.plusText}>+{Math.max(streak - previous, 1)}</Text>
-        </Animated.View>
-
-        <View style={styles.flameSlot}>
-          <Animated.Text style={[styles.flame, flameStyle]}>🔥</Animated.Text>
-        </View>
-
-        {/* The number swap happens inside a clipped window. */}
-        <View style={styles.numberWindow}>
-          <Animated.Text
-            style={[
-              styles.number,
-              styles.numberAbsolute,
-              { opacity: oldOpacity, transform: [{ translateY: oldShift }] },
-            ]}>
-            {previous}
-          </Animated.Text>
-          <Animated.Text
-            style={[
-              styles.number,
-              styles.numberAbsolute,
-              { opacity: newOpacity, transform: [{ translateY: newShift }] },
-            ]}>
-            {streak}
-          </Animated.Text>
-        </View>
-
-        <Text style={styles.caption}>
-          {streak === 1 ? 'DÍA SEGUIDO' : 'DÍAS SEGUIDOS'}
-        </Text>
-
-        {/* Week strip */}
-        <View style={styles.week}>
-          {DAY_LABELS.map((label, i) => {
-            const isToday = i === today;
-            const filled = !isToday && i < today && today - i <= streak - 1;
-            return (
-              <View key={i} style={styles.day}>
-                {isToday ? (
-                  <Animated.View style={[styles.dot, { transform: [{ scale: dotScale }] }]}>
-                    <View style={[styles.dotFace, styles.dotEmpty]} />
-                    <Animated.View
-                      style={[
-                        styles.dotFace,
-                        styles.dotOn,
-                        { opacity: dotFill },
-                      ]}
-                    />
-                  </Animated.View>
-                ) : (
-                  <View
-                    style={[styles.dotStatic, filled ? styles.dotOn : styles.dotEmpty]}
-                  />
-                )}
-                <Text style={styles.dayLabel}>{label}</Text>
-              </View>
-            );
-          })}
-        </View>
-      </Animated.View>
-
-      <View style={{ flex: 1 }} />
-
-      {/* One door out: the map is where another round is offered, and going
-          back to it is what shows her the step she just earned. */}
-      <Animated.View style={[styles.actions, { opacity: actionsOpacity }]}>
-        <Button title="Dale!" onPress={onDone} />
+      <Animated.View style={[styles.actions, action]}>
+        <Button title="Let's go!" onPress={onDone} />
       </Animated.View>
     </View>
   );
 }
-
-const DOT = 22;
 
 const styles = StyleSheet.create({
   wrap: {
@@ -330,87 +419,42 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
-  intro: { marginTop: 18, gap: 3 },
-  headline: { ...font.display[800], fontSize: 34, lineHeight: 38, color: colors.ink, letterSpacing: -0.5 },
-  headlineAccent: {
+  headline: {
     ...font.display[800],
     fontSize: 34,
     lineHeight: 38,
-    // The streak's own warm hue, not rosa: rosa is only ever something to press.
-    color: colors.accent,
+    color: colors.ink,
     letterSpacing: -0.5,
+    marginTop: 18,
   },
-  subhead: { ...font.body[600], fontSize: 15, color: colors.muted, marginTop: 10, lineHeight: 21 },
+  // The streak's own warm hue, not rosa: rosa is only ever something to press.
+  headlineAccent: { color: colors.accent },
 
-  card: {
-    marginTop: 26,
-    backgroundColor: colors.card,
-    borderRadius: radius.xl,
-    paddingHorizontal: 22,
-    paddingTop: 24,
-    paddingBottom: 22,
-    alignItems: 'center',
-    boxShadow: clay.surface,
-  },
-  plus: {
+  stage: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  // Sits in the frame's open middle, between the top and bottom curls.
+  count: {
     position: 'absolute',
-    top: 14,
-    right: 20,
-    backgroundColor: pastel.peach,
-    paddingHorizontal: 11,
-    paddingVertical: 5,
-    borderRadius: 999,
-    boxShadow: clay.surface,
-  },
-  plusText: { ...font.body[800], color: colors.onPastel, fontSize: 13 },
-
-  flameSlot: { height: 108, alignItems: 'center', justifyContent: 'center' },
-  flame: { fontSize: 76, lineHeight: 92 },
-
-  numberWindow: {
-    height: NUMBER_TRAVEL,
-    alignSelf: 'stretch',
+    left: 0,
+    right: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
   },
-  numberAbsolute: { position: 'absolute' },
+  countRow: { flexDirection: 'row', gap: 6 },
   number: {
     ...font.display[800],
-    fontSize: 78,
-    lineHeight: 84,
     color: colors.accent,
     letterSpacing: -2,
+    fontVariant: ['tabular-nums'],
   },
-  caption: {
-    ...font.body[800],
-    fontSize: 12,
-    letterSpacing: 2,
-    color: colors.muted,
-    marginTop: 10,
-  },
-
-  week: {
-    marginTop: 20,
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'space-between',
-  },
-  day: { alignItems: 'center', gap: 6, flex: 1 },
-  dot: { width: DOT, height: DOT },
-  // Today's dot layers an empty ring and a durazno fill that cross-fades on top;
-  // the other days are a single flat circle.
-  dotFace: {
-    width: DOT,
-    height: DOT,
-    borderRadius: DOT / 2,
-    borderWidth: 1.5,
+  banner: {
     position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  dotStatic: { width: DOT, height: DOT, borderRadius: DOT / 2, borderWidth: 1.5 },
-  dotEmpty: { borderColor: colors.border, backgroundColor: 'transparent' },
-  dotOn: { borderColor: pastel.peach, backgroundColor: pastel.peach },
-  dayLabel: { ...font.body[700], fontSize: 11, color: colors.muted, letterSpacing: 1.2 },
+  bannerText: {
+    ...font.body[800],
+    color: colors.card,
+  },
 
   actions: { gap: 8, marginTop: 24 },
 });

@@ -448,7 +448,7 @@ function finishLesson(args: {
     last_practice_date: string | null;
     recoverable_streak: number;
   };
-  const previous = streak.current_streak;
+  let previous = streak.current_streak;
   const yesterday = (() => {
     const [y, m, d] = today.split('-').map(Number);
     const t = new Date(y, m - 1, d - 1);
@@ -460,6 +460,7 @@ function finishLesson(args: {
       streak.current_streak += 1;
       streak.recoverable_streak = 0;
     } else {
+      previous = 0;
       streak.recoverable_streak = streak.last_practice_date ? streak.current_streak : 0;
       streak.current_streak = 1;
     }

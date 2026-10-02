@@ -29,6 +29,8 @@ const isName = (t: T) => t.forms.length > 0 && t.forms.every((f) => f.pos === 'p
 const personalVerb = (t: T) => t.forms.find((f) => f.pos === 'verb' && f.features?.person)?.features ?? null;
 const isClitic = (t: T) => t.forms.some((f) => f.pos === 'pron' && (CLITIC_LEMMAS.has(f.lemma) || f.features?.clitic));
 const subjectPronoun = (t: T) => t.forms.find((f) => f.pos === 'pron' && SUBJECT_PRONOUNS.has(f.lemma))?.lemma ?? null;
+/** "un", "una": the indefinite article. */
+const isIndefinite = (t: T) => t.forms.length > 0 && t.forms.every((f) => f.pos === 'det' && f.lemma === 'un');
 const isOptionalWord = (t: T) => t.forms.length > 0 && t.forms.every((f) => OPTIONAL_LEMMAS.has(f.lemma));
 
 /** Index of the first token from `i` that isn't a clitic. */
@@ -126,6 +128,17 @@ export function generateVariants(tokens: T[], en: string, vocabulary: { forms: V
   const words = englishWords(en);
   // Nothing in the English says whether "I", "you" or "we" is a man or a woman.
   const genderOpen = !GENDER_CUES.test(en) && !named;
+  // An offer or an order the English makes with no "a": "Tea and cake?
+  // Coffee and cake, thanks" is "¿Té y torta? Café y torta, gracias" as much as
+  // "¿Un té y torta? Un café y torta". Only where the article opens the question
+  // or its answer — elsewhere the bare noun is wrong ("Estoy sin un peso",
+  // "Un saludo a tu vieja", "Es un caos").
+  const bareNouns = !['a', 'an', 'one', 'some', 'another'].some((w) => words.includes(w));
+  // "¿Un café o un té?": the second goes with the first.
+  const offered = (i: number): boolean =>
+    split(tokens[i].surface).lead.includes('¿') ||
+    (i > 0 && /\?["»”)]*$/.test(split(tokens[i - 1].surface).tail)) ||
+    (i > 2 && fold(tokens[i - 1].core) === 'o' && isIndefinite(tokens[i - 3]) && offered(i - 3));
 
   // Which pronoun a third-person verb stands for, when the English names one.
   const third = words.includes('she') === words.includes('he') ? null : words.includes('she') ? 'ella' : 'él';
@@ -214,6 +227,7 @@ export function generateVariants(tokens: T[], en: string, vocabulary: { forms: V
 
     const token: Slot = { original: piece, choices: [piece] };
     if (optional.has(i)) token.choices.push(null);
+    else if (bareNouns && isIndefinite(t) && offered(i) && tokens[i + 1]?.forms.some((x) => x.pos === 'noun')) token.choices.push(null);
 
     // The other gender, where nothing says which: an adjective said of the
     // speaker or listener ("soy chileno", "estás muy cansada", "Encantada."),

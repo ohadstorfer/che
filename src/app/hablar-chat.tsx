@@ -3,7 +3,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import * as Clipboard from 'expo-clipboard';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Animated,
@@ -33,7 +33,7 @@ import {
   webPress,
 } from '@/components/hablar-ui';
 import { Button } from '@/components/ui';
-import { type ActiveRecording, canRecord, type RecordedClip, startRecording } from '@/lib/audio';
+import { type ActiveRecording, canRecord, readyClip, type RecordedClip, startRecording, warmMic } from '@/lib/audio';
 import { useAuth } from '@/lib/auth';
 import {
   conversationTitle,
@@ -51,12 +51,12 @@ import {
   newTurnId,
   reply,
   resolveAudio,
-  sendTyped,
   signedHablarUrl,
+  speak,
   startCache,
   tomasAudioPath,
-  transcribe,
   translate,
+  warm,
   wordDiff,
 } from '@/lib/hablar';
 import {
@@ -74,15 +74,18 @@ import {
   usePlaying,
   whenIdle,
 } from '@/lib/hablar-audio';
+import { tap } from '@/lib/haptics';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, gradients, pastel, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
-// The conversation (§2.3–2.4). Turn-based: she records and taps to send; the
-// transcript goes straight to Pancho, whose reply streams in as text while his
-// voice starts on the first sentence; the correction chip fills a moment later.
-// (A draft left over from an older build still shows for review after a reload.)
+// The conversation (§2.3–2.4). Turn-based: she records and taps to send. The
+// recording goes to hablar-reply, which transcribes it and answers on the same
+// stream: her line lands, then the verdict on it, then Pancho — his reply is
+// held back (text and voice) until the correction is on screen, or for at most
+// HOLD_MS, so the thread always reads in that order and nothing jumps under
+// him. (A draft left over from an older build still shows for review after a reload.)
 //
 // The server owns the clock. The timer here is a display: it counts down to
 // `deadline_at`, stops while the app is in the background, and reports those
@@ -104,6 +107,8 @@ type PanchoMsg = {
   audioPath?: string | null;
   streaming?: boolean;
   failed?: boolean;
+  /** Not shown yet: waiting for the correction above it (see HOLD_MS). */
+  held?: boolean;
 };
 
 type UserMsg = {
@@ -130,6 +135,8 @@ type Phase =
   | 'gone';
 
 const HINTS_PER_CHAT = 3;
+/** Longest Pancho waits for the correction once his reply has started coming in. */
+const HOLD_MS = 1200;
 
 /** The scenario version a chat runs: the one of its level (hablar-start stores the version's band). */
 const versionOf = (kind: string | undefined, topicId: string | null | undefined, level: string | null | undefined) => {
@@ -149,12 +156,13 @@ export default function HablarChat() {
 
   const [phase, setPhase] = useState<Phase>('boot');
   const [messages, setMessages] = useState<Msg[]>([]);
+  /** The thread as last rendered, for code that runs between renders. */
+  const messagesRef = useRef(messages);
+  messagesRef.current = messages;
   const [draft, setDraft] = useState<{ turnId: string; text: string } | null>(null);
   /** Writing instead of speaking — the only way in where the mic can't record. */
   const [typing, setTyping] = useState(!canRecord);
   const [typed, setTyped] = useState('');
-  const [sendingTyped, setSendingTyped] = useState(false);
-  const sendingTypedRef = useRef(false);
   const [title, setTitle] = useState<{ text: string; role: string | null }>({
     text: '',
     role: null,
@@ -177,7 +185,7 @@ export default function HablarChat() {
   const [hintsUsed, setHintsUsed] = useState(0);
   const [showEn, setShowEn] = useState<Set<string>>(new Set());
   const [translating, setTranslating] = useState<string | null>(null);
-  /** Older Pancho messages she tapped to show their ▶ / 0.7× / EN row. */
+  /** Older Pancho messages she tapped to show their ▶ / 🐢 / EN row. */
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
 
   const [sheet, setSheet] = useState<
@@ -189,8 +197,14 @@ export default function HablarChat() {
 
   const playing = usePlaying();
   const scroll = useRef<ScrollView>(null);
+  /**
+   * The recording in progress. The button turns to "recording" on the tap
+   * itself; the recorder catches up a moment later (`rec` stays null until
+   * `starting` settles, and a stop before then waits for it).
+   */
   const rec = useRef<{
-    rec: ActiveRecording;
+    rec: ActiveRecording | null;
+    starting: Promise<ActiveRecording | null>;
     at: number;
     timer: ReturnType<typeof setTimeout>;
   } | null>(null);
@@ -231,8 +245,11 @@ export default function HablarChat() {
           },
         ]);
         setPhase('idle');
-        // Pancho speaks first. The context was woken in the Empezar tap.
-        if (started.opener.audio_url) void play('opener', async () => resolveAudio(started.opener.audio_url));
+        // Pancho speaks first. The context was woken in the Empezar tap; the
+        // brief put his line on the phone, when it could.
+        const openerPath = versionOf(kind, started.topic_id, started.level)?.opener.audio;
+        if (started.opener.audio_url)
+          void play('opener', async () => readyClip(openerPath) ?? resolveAudio(started.opener.audio_url));
         return;
       }
       const loaded = await loadConversation(sessionId).catch(() => null);
@@ -283,6 +300,13 @@ export default function HablarChat() {
     };
   }, [sessionId]);
 
+  // Get the first turn's way ready while Pancho says his opener: the recorder,
+  // and the function that will answer.
+  useEffect(() => {
+    warmMic();
+    warm('hablar-reply');
+  }, []);
+
   // --- the clock: pauses while the app is in the background ---------------------
   // The ticking display is its own component (ChatTimer), so the countdown
   // re-renders one chip, not the whole chat, every half second.
@@ -311,7 +335,7 @@ export default function HablarChat() {
   useEffect(
     () => () => {
       // Leaving the screen: silence Pancho, drop a recording in progress.
-      rec.current?.rec.cancel();
+      dropRecording();
       abort.current?.abort();
       stopAll();
       whenIdle(null);
@@ -341,7 +365,7 @@ export default function HablarChat() {
       finishing.current = true;
       whenIdle(null);
       stopAll();
-      rec.current?.rec.cancel();
+      dropRecording();
       setPhase('ending');
       await end({
         session_id: sessionId,
@@ -354,15 +378,27 @@ export default function HablarChat() {
   );
 
   // --- recording ----------------------------------------------------------------
+  /** Drop a recording in progress, whether or not the recorder has started yet. */
+  function dropRecording() {
+    const r = rec.current;
+    if (!r) return;
+    rec.current = null;
+    clearTimeout(r.timer);
+    if (r.rec) r.rec.cancel();
+    else void r.starting.then((x) => x?.cancel());
+  }
+
   const stopRecording = async () => {
     const r = rec.current;
     if (!r) return;
     rec.current = null;
     clearTimeout(r.timer);
     setPhase('transcribing');
+    const active = r.rec ?? (await r.starting);
+    if (!active) return setPhase('idle'); // the mic never opened; startRec said why
     let clip: RecordedClip;
     try {
-      clip = await r.rec.stop();
+      clip = await active.stop();
     } catch {
       setPhase('idle');
       return say('No te escuché.');
@@ -381,65 +417,63 @@ export default function HablarChat() {
     // A re-record replaces the draft for the same turn.
     const turnId = reRecordTurn.current ?? newTurnId();
     reRecordTurn.current = turnId;
-    try {
-      const res = await transcribe({
-        clip,
-        session_id: sessionId,
-        turn_id: turnId,
-        purpose: 'turn',
-        paused_seconds: takePaused(),
-      });
-      if (!res.text || res.status === 'empty') {
-        setPhase('idle');
-        return say('No te escuché.');
-      }
-      sendTurn(turnId, res.text);
-    } catch (e) {
-      if (e instanceof HablarError && (e.status === 409 || e.status === 410 || e.status === 403)) {
-        setPhase('ended');
-        return;
-      }
-      setPhase('idle');
-      say("Couldn't transcribe that. Try again.");
-    }
+    void runReply(turnId, 0, { clip });
   };
 
-  const startRec = async () => {
+  const startRec = () => {
     stopAll();
-    try {
-      const r = await startRecording();
-      rec.current = {
-        rec: r,
-        at: Date.now(),
-        timer: setTimeout(() => void stopRecording(), MAX_RECORD_MS),
-      };
-      setPhase('recording');
-    } catch (e) {
-      const name = e && typeof e === 'object' ? (e as Error).name : '';
-      if (name === 'NotAllowedError' || name === 'SecurityError' || name === 'PermissionDeniedError')
-        setPhase('denied');
-      else say("Couldn't open the microphone.");
-    }
+    tap();
+    // She talks for a few seconds: long enough to boot the function that will answer.
+    warm('hablar-reply');
+    const starting = startRecording().then(
+      (r) => r,
+      (e) => {
+        // Only if it's still this attempt she's waiting on.
+        if (rec.current?.starting === starting) {
+          clearTimeout(rec.current.timer);
+          rec.current = null;
+          const name = e && typeof e === 'object' ? (e as Error).name : '';
+          if (name === 'NotAllowedError' || name === 'SecurityError' || name === 'PermissionDeniedError')
+            setPhase('denied');
+          else {
+            setPhase('idle');
+            say("Couldn't open the microphone.");
+          }
+        }
+        return null;
+      },
+    );
+    rec.current = {
+      rec: null,
+      starting,
+      at: Date.now(),
+      timer: setTimeout(() => void stopRecording(), MAX_RECORD_MS),
+    };
+    // On the tap, not when the recorder is ready: the button answers at once.
+    setPhase('recording');
+    // Cancelled meanwhile: dropRecording cancels it. Stopped meanwhile:
+    // stopRecording waits on `starting` itself.
+    void starting.then((r) => {
+      if (r && rec.current?.starting === starting) rec.current.rec = r;
+    });
   };
 
   const toggleMic = () => {
     if (phase === 'recording') {
       prime(); // inside the tap: the transcript is sent without another one
+      tap();
       return void stopRecording();
     }
     if (phase === 'draft' && draft) {
       reRecordTurn.current = draft.turnId;
       setDraft(null);
     }
-    void startRec();
+    startRec();
   };
 
   const cancelRecording = () => {
-    const r = rec.current;
-    if (!r) return;
-    rec.current = null;
-    clearTimeout(r.timer);
-    r.rec.cancel();
+    if (!rec.current) return;
+    dropRecording();
     reRecordTurn.current = null;
     setPhase('idle');
   };
@@ -447,8 +481,66 @@ export default function HablarChat() {
   // --- the turn -----------------------------------------------------------------
   const patch = (key: string, fn: (m: Msg) => Msg) => setMessages((ms) => ms.map((m) => (m.key === key ? fn(m) : m)));
 
-  const runReply = async (turnId: string, attempt = 0): Promise<void> => {
+  /** Her line and Pancho's answer, side by side in the thread; his stays hidden until released. */
+  const addTurn = (turnId: string, text: string) =>
+    setMessages((ms) =>
+      ms.some((m) => m.key === turnId)
+        ? ms.map((m) => (m.key === turnId ? ({ ...m, text } as UserMsg) : m))
+        : [
+            ...ms,
+            { role: 'user', key: turnId, text, feedback: null, pending: true },
+            { role: 'tomas', key: `${turnId}-tomas`, userTurnId: turnId, text: '', streaming: true, held: true },
+          ],
+    );
+
+  /** Take a turn back out of the thread: it never reached the server. */
+  const dropTurn = (turnId: string) =>
+    setMessages((ms) => ms.filter((m) => m.key !== turnId && m.key !== `${turnId}-tomas`));
+
+  /**
+   * Answer a turn. With `line` (a recording or typed text) the line itself goes
+   * up and the stream opens with its transcript; without, the turn is already
+   * stored and only the answer comes back.
+   */
+  const runReply = async (
+    turnId: string,
+    attempt = 0,
+    line?: { clip: RecordedClip } | { text: string },
+  ): Promise<void> => {
     const tkey = `${turnId}-tomas`;
+    let heard = !line; // the server has her line (a stored turn always has)
+
+    // Pancho waits for the correction: everything of his goes through `held`
+    // until the verdict lands, or HOLD_MS after his reply starts coming in. A
+    // retry whose correction is already on screen doesn't wait.
+    let holding = !messagesRef.current.some((m) => m.key === turnId && m.role === 'user' && m.feedback);
+    const waiting: (() => void)[] = [];
+    let holdTimer: ReturnType<typeof setTimeout> | null = null;
+    const release = () => {
+      if (!holding) return;
+      holding = false;
+      if (holdTimer) clearTimeout(holdTimer);
+      patch(tkey, (m) => ({ ...m, held: false }) as PanchoMsg);
+      for (const fn of waiting.splice(0)) fn();
+    };
+    const held = (fn: () => void) => {
+      if (!holding) return fn();
+      waiting.push(fn);
+      holdTimer ??= setTimeout(release, HOLD_MS);
+    };
+
+    // Text arrives a few characters at a time: one render per frame, not per delta.
+    let pendingText = '';
+    let frame: number | null = null;
+    const flushText = () => {
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = null;
+      if (!pendingText) return;
+      const add = pendingText;
+      pendingText = '';
+      patch(tkey, (m) => ({ ...m, text: m.text + add }));
+    };
+
     const settle = (d: DoneEvent) => {
       streamEnd(tkey);
       patch(tkey, (m) => ({
@@ -461,55 +553,80 @@ export default function HablarChat() {
       setPhase(d.ended ? 'ended' : 'idle');
     };
     streamStart(tkey);
-    patch(tkey, (m) => ({ ...m, text: '', streaming: true, failed: false }) as PanchoMsg);
-    setPhase('waiting');
+    if (heard) patch(tkey, (m) => ({ ...m, text: '', streaming: true, failed: false }) as PanchoMsg);
+    // A recording shows "listening" until its transcript is back; anything else is already in the thread.
+    if (!line || !('clip' in line)) setPhase('waiting');
     let fatal = false;
+    let empty = false;
     let done: DoneEvent | null = null;
     abort.current = new AbortController();
+    const handlers = {
+      onTranscript: (text: string) => {
+        heard = true;
+        // Sent: the next recording is a new turn, not a re-record of this one.
+        reRecordTurn.current = null;
+        addTurn(turnId, text);
+        setPhase('waiting');
+      },
+      onCorrection: (v: { has_error: boolean; corrected: string }) => {
+        patch(turnId, (m) =>
+          (m as UserMsg).feedback
+            ? m
+            : ({ ...m, feedback: { ...v, why_en: '', better: '' }, pending: false } as UserMsg),
+        );
+        release();
+      },
+      onText: (_seq: number, delta: string) =>
+        held(() => {
+          setPhase((p) => (p === 'waiting' ? 'streaming' : p));
+          pendingText += delta;
+          frame ??= requestAnimationFrame(flushText);
+        }),
+      onTextFix: (_seq: number, from: string, to: string) =>
+        held(() => {
+          if (!from) return;
+          flushText();
+          patch(tkey, (m) => {
+            const at = m.text.lastIndexOf(from);
+            return at < 0
+              ? m
+              : {
+                  ...m,
+                  text: m.text.slice(0, at) + to + m.text.slice(at + from.length),
+                };
+          });
+        }),
+      onAudio: (seq: number, mp3: string) => held(() => streamChunk(tkey, seq, mp3)),
+      onFeedback: (fb: Feedback) => {
+        patch(turnId, (m) => ({ ...m, feedback: fb, pending: false }) as UserMsg);
+        release();
+      },
+      onDone: (d: DoneEvent) => {
+        done = d;
+        release();
+        flushText();
+        // Pancho is done talking: she can answer now, while a slower
+        // correction may still be on its way down the same stream.
+        settle(d);
+      },
+      onError: (err: { stage: string; retry: boolean; seq?: number }) => {
+        // A failed reply sends no `done`, which retries below. A sentence
+        // without voice or a missing correction is not worth interrupting her for.
+        if (err.stage === 'tts' && err.seq !== undefined) {
+          const seq = err.seq;
+          held(() => streamSkip(tkey, seq));
+        } else if (err.stage === 'feedback') {
+          patch(turnId, (m) => ({ ...m, pending: false }) as UserMsg);
+          release();
+        }
+      },
+    };
     try {
-      await reply(
-        {
-          session_id: sessionId,
-          turn_id: turnId,
-          paused_seconds: takePaused(),
-        },
-        {
-          onText: (_seq, delta) => {
-            setPhase((p) => (p === 'waiting' ? 'streaming' : p));
-            patch(tkey, (m) => ({ ...m, text: m.text + delta }));
-            toBottom();
-          },
-          onTextFix: (_seq, from, to) => {
-            if (!from) return;
-            patch(tkey, (m) => {
-              const at = m.text.lastIndexOf(from);
-              return at < 0
-                ? m
-                : {
-                    ...m,
-                    text: m.text.slice(0, at) + to + m.text.slice(at + from.length),
-                  };
-            });
-          },
-          onAudio: (seq, mp3) => streamChunk(tkey, seq, mp3),
-          onFeedback: (fb) => {
-            patch(turnId, (m) => ({ ...m, feedback: fb, pending: false }) as UserMsg);
-          },
-          onDone: (d) => {
-            done = d;
-            // Pancho is done talking: she can answer now, while a slower
-            // correction may still be on its way down the same stream.
-            settle(d);
-          },
-          onError: (err) => {
-            // A failed reply sends no `done`, which retries below. A sentence
-            // without voice or a missing correction is not worth interrupting her for.
-            if (err.stage === 'tts' && err.seq !== undefined) streamSkip(tkey, err.seq);
-            else if (err.stage === 'feedback') patch(turnId, (m) => ({ ...m, pending: false }) as UserMsg);
-          },
-        },
-        abort.current.signal,
-      );
+      const args = { session_id: sessionId, turn_id: turnId, paused_seconds: takePaused() };
+      const out = line && !heard
+        ? await speak({ ...args, ...line }, handlers, abort.current.signal)
+        : await reply(args, handlers, abort.current.signal);
+      empty = out === 'empty';
     } catch (e) {
       // 409 "time_up" / "ended" closes the chat; a 409 with retry:true means
       // the same turn is still being answered, so it's worth another try.
@@ -520,7 +637,21 @@ export default function HablarChat() {
       )
         fatal = true;
       if ((e as Error)?.name === 'AbortError') return;
+      if (!heard && e instanceof HablarError && e.status === 429) {
+        streamEnd(tkey);
+        dropTurn(turnId);
+        reRecordTurn.current = null;
+        setPhase('idle');
+        if (line && 'text' in line) {
+          const text = line.text;
+          setTyped((t) => t || text);
+          return say("That's all the lines this chat can take.");
+        }
+        return say('That was the last recording for this chat. Type instead.');
+      }
     }
+    release();
+    flushText();
     const d = done as DoneEvent | null;
     if (!d) streamEnd(tkey); // otherwise settle() already did
 
@@ -528,10 +659,25 @@ export default function HablarChat() {
       setPhase('ended');
       return;
     }
+    if (empty) {
+      dropTurn(turnId);
+      setPhase('idle');
+      return say('No te escuché.');
+    }
     if (!d) {
       // One quiet retry with the same turn_id: the server replays a turn it
-      // already finished, or runs it again if it didn't.
-      if (attempt === 0) return runReply(turnId, 1);
+      // already finished, runs it again if it didn't, and takes her line
+      // again if it never got it.
+      if (attempt === 0) return runReply(turnId, 1, heard ? undefined : line);
+      if (!heard) {
+        // Her line never got through: give it back.
+        dropTurn(turnId);
+        reRecordTurn.current = null;
+        setPhase('idle');
+        const typedText = line && 'text' in line ? line.text : null;
+        if (typedText) setTyped((t) => t || typedText);
+        return say(typedText ? "Couldn't send that. Try again." : "Couldn't hear that. Try again.");
+      }
       patch(tkey, (m) => ({ ...m, streaming: false, failed: true }) as PanchoMsg);
       setPhase('retry');
       return;
@@ -546,23 +692,14 @@ export default function HablarChat() {
     }
   };
 
-  const sendTurn = (turnId: string, text: string) => {
+  /** Show a line in the thread right away and answer it (a restored draft, or typed text). */
+  const sendTurn = (turnId: string, text: string, line?: { text: string }) => {
     setDraft(null);
     reRecordTurn.current = null;
     setHintState({ data: null, level: 0, loading: false });
-    setMessages((ms) => [
-      ...ms,
-      { role: 'user', key: turnId, text, feedback: null, pending: true },
-      {
-        role: 'tomas',
-        key: `${turnId}-tomas`,
-        userTurnId: turnId,
-        text: '',
-        streaming: true,
-      },
-    ]);
+    addTurn(turnId, text);
     toBottom();
-    void runReply(turnId);
+    void runReply(turnId, 0, line);
   };
 
   /** A restored draft: she reviews it and taps Enviar. */
@@ -572,25 +709,13 @@ export default function HablarChat() {
     sendTurn(draft.turnId, draft.text);
   };
 
-  /** A typed line: stored on the server like a transcript, then answered. */
-  const submitTyped = async () => {
+  /** A typed line: on screen at once, stored and answered in one request. */
+  const submitTyped = () => {
     const text = typed.trim();
-    if (!text || sendingTypedRef.current) return;
-    sendingTypedRef.current = true;
-    setSendingTyped(true);
+    if (!text || busy) return;
     prime(); // inside the tap: Pancho's first sentence must be allowed to sound
-    const turnId = newTurnId();
-    try {
-      const res = await sendTyped({ text, session_id: sessionId, turn_id: turnId, paused_seconds: takePaused() });
-      setTyped('');
-      sendTurn(turnId, res.text || text);
-    } catch (e) {
-      if (e instanceof HablarError && (e.status === 409 || e.status === 410 || e.status === 403)) setPhase('ended');
-      else say("Couldn't send that. Try again.");
-    } finally {
-      sendingTypedRef.current = false;
-      setSendingTyped(false);
-    }
+    setTyped('');
+    sendTurn(newTurnId(), text, { text });
   };
 
   const retry = () => {
@@ -654,6 +779,21 @@ export default function HablarChat() {
     const ok = slow ? await playSlow(m.key, sourceOf(m)) : await play(m.key, sourceOf(m));
     if (!ok) say("Couldn't play that.");
   };
+
+  // Stable across renders, so a row that didn't change doesn't redraw while
+  // Pancho's reply streams into the one that did.
+  const toggleReveal = useStable((key: string) =>
+    setRevealed((s) => {
+      const next = new Set(s);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    }),
+  );
+  const playMsg = useStable((m: PanchoMsg, slow: boolean) => void onPlay(m, slow));
+  const translateMsg = useStable((m: PanchoMsg) => void onTranslate(m));
+  const openMessage = useStable((key: string) => setSheet({ kind: 'message', key }));
+  const openBetter = useStable((key: string) => setSheet({ kind: 'better', key }));
 
   // --- derived ----------------------------------------------------------------------
   const sheetMsg = sheet && 'key' in sheet ? (messages.find((m) => m.key === sheet.key) as Msg | undefined) : undefined;
@@ -742,102 +882,26 @@ export default function HablarChat() {
         contentContainerStyle={styles.thread}
         onContentSizeChange={() => scroll.current?.scrollToEnd({ animated: true })}
         showsVerticalScrollIndicator={false}>
-        {messages.map((m) => {
-          if (m.role === 'tomas') {
-            const tools = !m.streaming && !m.failed && (m.key === lastPanchoKey || revealed.has(m.key));
-            return (
-              <Appear key={m.key}>
-                <View style={styles.tomasRow}>
-                  <PanchoAvatar size={28} />
-                  <Pressable
-                    onPress={() =>
-                      m.key !== lastPanchoKey &&
-                      setRevealed((s) => {
-                        const next = new Set(s);
-                        if (next.has(m.key)) next.delete(m.key);
-                        else next.add(m.key);
-                        return next;
-                      })
-                    }
-                    accessibilityHint={m.key === lastPanchoKey ? undefined : 'Shows play and translate'}
-                    style={[styles.tomasBubble, tools && styles.tomasBubbleTools]}>
-                    {m.streaming && !m.text ? (
-                      <View style={styles.thinking}>
-                        <Text style={styles.thinkingText}>Pancho está pensando</Text>
-                        <ThinkingDots />
-                      </View>
-                    ) : (
-                      <Text style={styles.tomasText}>{m.text}</Text>
-                    )}
-                    {m.failed ? <Text style={styles.failed}>Se cortó la conexión.</Text> : null}
-                    {showEn.has(m.key) && m.textEn ? <Text style={styles.english}>{m.textEn}</Text> : null}
-                    {tools ? (
-                      <View style={styles.tools}>
-                        <Tool
-                          active={playing?.key === m.key && !playing.slow}
-                          onPress={() => void onPlay(m, false)}
-                          accessibilityLabel="Play">
-                          <MaterialCommunityIcons
-                            name={playing?.key === m.key && !playing.slow ? 'stop' : 'play'}
-                            size={20}
-                            color={colors.primary}
-                          />
-                        </Tool>
-                        <Tool
-                          active={playing?.key === m.key && playing.slow}
-                          onPress={() => void onPlay(m, true)}
-                          accessibilityLabel="Play slowly">
-                          <Text style={styles.toolText}>0.7×</Text>
-                        </Tool>
-                        <Tool
-                          active={showEn.has(m.key)}
-                          onPress={() => void onTranslate(m)}
-                          accessibilityLabel={showEn.has(m.key) ? 'Hide translation' : 'Translate'}>
-                          {translating === m.key ? (
-                            <ActivityIndicator size="small" color={colors.primary} />
-                          ) : (
-                            <Text style={styles.toolText}>EN</Text>
-                          )}
-                        </Tool>
-                      </View>
-                    ) : null}
-                  </Pressable>
-                </View>
-              </Appear>
-            );
-          }
-          const fb = m.feedback;
-          return (
-            <Appear key={m.key}>
-              <View style={styles.userRow}>
-                <Pressable
-                  onLongPress={() => setSheet({ kind: 'message', key: m.key })}
-                  accessibilityHint="Long-press to copy"
-                  style={styles.userBubble}>
-                  <LinearGradient colors={gradients.deep} style={styles.userFill} pointerEvents="none" />
-                  <Text style={styles.userText}>{m.text}</Text>
-                </Pressable>
-                {m.pending ? (
-                  <View style={styles.checking} accessibilityLabel="Checking what you said">
-                    <ThinkingDots />
-                  </View>
-                ) : fb ? (
-                  <Appear>
-                    <Correction said={m.text} feedback={fb} />
-                  </Appear>
-                ) : null}
-                {!m.pending && fb?.better ? (
-                  <Chip
-                    tone="local"
-                    icon="creation"
-                    label="Like a local"
-                    onPress={() => setSheet({ kind: 'better', key: m.key })}
-                  />
-                ) : null}
-              </View>
-            </Appear>
-          );
-        })}
+        {messages.map((m) =>
+          m.role === 'tomas' ? (
+            m.held ? null : (
+              <PanchoRow
+                key={m.key}
+                m={m}
+                isLast={m.key === lastPanchoKey}
+                revealed={revealed.has(m.key)}
+                english={showEn.has(m.key)}
+                translating={translating === m.key}
+                playing={playing?.key === m.key ? (playing.slow ? 'slow' : 'normal') : null}
+                onToggle={toggleReveal}
+                onPlay={playMsg}
+                onTranslate={translateMsg}
+              />
+            )
+          ) : (
+            <UserRow key={m.key} m={m} onCopy={openMessage} onBetter={openBetter} />
+          ),
+        )}
 
         {phase === 'transcribing' ? (
           <Appear key="transcribing">
@@ -953,14 +1017,14 @@ export default function HablarChat() {
             <View style={styles.typeRow}>
               <Pressable
                 onPress={() => void onHint()}
-                disabled={busy || sendingTyped || phase === 'boot' || hintState.loading}
+                disabled={busy || phase === 'boot' || hintState.loading}
                 hitSlop={4}
                 accessibilityRole="button"
                 accessibilityLabel={`Hint, ${Math.max(0, HINTS_PER_CHAT - hintsUsed)} left`}
                 style={({ pressed }) => [
                   styles.typeCircle,
                   { backgroundColor: pastel.butter },
-                  (busy || sendingTyped || phase === 'boot') && { opacity: 0.4 },
+                  (busy || phase === 'boot') && { opacity: 0.4 },
                   { transform: [{ scale: pressed ? 0.94 : 1 }] },
                   webPress,
                 ]}>
@@ -979,17 +1043,16 @@ export default function HablarChat() {
                 maxLength={300}
                 autoFocus={canRecord}
                 autoCorrect={false}
-                editable={!sendingTyped}
                 accessibilityLabel="Your message to Pancho"
                 style={styles.typeInput}
               />
               <Pressable
-                onPress={() => void submitTyped()}
-                disabled={!typed.trim() || busy || sendingTyped || phase === 'boot'}
+                onPress={submitTyped}
+                disabled={!typed.trim() || busy || phase === 'boot'}
                 hitSlop={4}
                 accessibilityRole="button"
                 accessibilityLabel="Send"
-                accessibilityState={{ disabled: !typed.trim() || busy || sendingTyped, busy: sendingTyped }}
+                accessibilityState={{ disabled: !typed.trim() || busy }}
                 style={({ pressed }) => [
                   styles.typeCircle,
                   { backgroundColor: colors.primary },
@@ -997,11 +1060,7 @@ export default function HablarChat() {
                   { transform: [{ scale: pressed ? 0.94 : 1 }] },
                   webPress,
                 ]}>
-                {sendingTyped ? (
-                  <ActivityIndicator size="small" color={colors.onPrimary} />
-                ) : (
-                  <Ionicons name="arrow-up" size={22} color={colors.onPrimary} />
-                )}
+                <Ionicons name="arrow-up" size={22} color={colors.onPrimary} />
               </Pressable>
             </View>
             {canRecord ? (
@@ -1058,7 +1117,7 @@ export default function HablarChat() {
               )}
             </View>
             {phase === 'recording' ? (
-              <RecordingMeter since={rec.current?.at ?? Date.now()} level={() => rec.current?.rec.level() ?? 0} />
+              <RecordingMeter since={rec.current?.at ?? Date.now()} level={() => rec.current?.rec?.level() ?? 0} />
             ) : (
               <Text style={styles.caption}>
                 {phase === 'transcribing'
@@ -1135,6 +1194,117 @@ export default function HablarChat() {
   );
 }
 
+/** A callback that keeps its identity across renders but always runs the latest closure. */
+function useStable<A extends unknown[], R>(fn: (...args: A) => R): (...args: A) => R {
+  const ref = useRef(fn);
+  ref.current = fn;
+  return useCallback((...args: A) => ref.current(...args), []);
+}
+
+/** One of Pancho's messages. Memoized: while one streams, the rest of the thread stays still. */
+const PanchoRow = memo(function PanchoRow({
+  m,
+  isLast,
+  revealed,
+  english,
+  translating,
+  playing,
+  onToggle,
+  onPlay,
+  onTranslate,
+}: {
+  m: PanchoMsg;
+  isLast: boolean;
+  revealed: boolean;
+  english: boolean;
+  translating: boolean;
+  playing: 'normal' | 'slow' | null;
+  onToggle: (key: string) => void;
+  onPlay: (m: PanchoMsg, slow: boolean) => void;
+  onTranslate: (m: PanchoMsg) => void;
+}) {
+  const tools = !m.streaming && !m.failed && (isLast || revealed);
+  return (
+    <Appear>
+      <View style={styles.tomasRow}>
+        <PanchoAvatar size={28} />
+        <Pressable
+          onPress={() => !isLast && onToggle(m.key)}
+          accessibilityHint={isLast ? undefined : 'Shows play and translate'}
+          style={[styles.tomasBubble, tools && styles.tomasBubbleTools]}>
+          {m.streaming && !m.text ? (
+            <View style={styles.thinking}>
+              <Text style={styles.thinkingText}>Pancho está pensando</Text>
+              <ThinkingDots />
+            </View>
+          ) : (
+            <Text style={styles.tomasText}>{m.text}</Text>
+          )}
+          {m.failed ? <Text style={styles.failed}>Se cortó la conexión.</Text> : null}
+          {english && m.textEn ? <Text style={styles.english}>{m.textEn}</Text> : null}
+          {tools ? (
+            <View style={styles.tools}>
+              <Tool active={playing === 'normal'} onPress={() => onPlay(m, false)} accessibilityLabel="Play">
+                <MaterialCommunityIcons name={playing === 'normal' ? 'stop' : 'play'} size={20} color={colors.primary} />
+              </Tool>
+              <Tool active={playing === 'slow'} onPress={() => onPlay(m, true)} accessibilityLabel="Play slowly">
+                <MaterialCommunityIcons name={playing === 'slow' ? 'stop' : 'tortoise'} size={20} color={colors.primary} />
+              </Tool>
+              <Tool
+                active={english}
+                onPress={() => onTranslate(m)}
+                accessibilityLabel={english ? 'Hide translation' : 'Translate'}>
+                {translating ? (
+                  <ActivityIndicator size="small" color={colors.primary} />
+                ) : (
+                  <Text style={styles.toolText}>EN</Text>
+                )}
+              </Tool>
+            </View>
+          ) : null}
+        </Pressable>
+      </View>
+    </Appear>
+  );
+});
+
+/** One of her messages, with the correction and the local way to say it under it. */
+const UserRow = memo(function UserRow({
+  m,
+  onCopy,
+  onBetter,
+}: {
+  m: UserMsg;
+  onCopy: (key: string) => void;
+  onBetter: (key: string) => void;
+}) {
+  const fb = m.feedback;
+  return (
+    <Appear>
+      <View style={styles.userRow}>
+        <Pressable onLongPress={() => onCopy(m.key)} accessibilityHint="Long-press to copy" style={styles.userBubble}>
+          <LinearGradient colors={gradients.deep} style={styles.userFill} pointerEvents="none" />
+          <Text style={styles.userText}>{m.text}</Text>
+        </Pressable>
+        {m.pending ? (
+          <View style={styles.checking} accessibilityLabel="Checking what you said">
+            <ThinkingDots />
+          </View>
+        ) : fb ? (
+          <Appear>
+            <Correction said={m.text} feedback={fb} />
+          </Appear>
+        ) : null}
+        {!m.pending && fb?.better ? (
+          <Appear>
+            <Chip tone="local" icon="creation" label="Like a local" onPress={() => onBetter(m.key)} />
+          </Appear>
+        ) : null}
+      </View>
+    </Appear>
+  );
+});
+
 /** Messages rise into place: 200ms, ease-out, a few points of travel. */
 function Appear({ children }: { children: React.ReactNode }) {
   const t = useRef(new Animated.Value(0)).current;
@@ -1164,7 +1334,7 @@ function Appear({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** ▶ / 0.7× / EN inside Pancho's bubble. */
+/** ▶ / 🐢 / EN inside Pancho's bubble. */
 function Tool({
   active,
   onPress,

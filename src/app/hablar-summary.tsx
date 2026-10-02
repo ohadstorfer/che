@@ -7,6 +7,7 @@ import { ActivityIndicator, Animated, Easing, Pressable, ScrollView, StyleSheet,
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Diff, DiloButton, PanchoAvatar, webPress } from '@/components/hablar-ui';
+import { StreakCelebration } from '@/components/streak-celebration';
 import { Button } from '@/components/ui';
 import {
   type ConversationRow,
@@ -40,6 +41,7 @@ export default function HablarSummaryScreen() {
   const [summary, setSummary] = useState<HablarSummary | null>(sessionId ? (summaryCache.get(sessionId) ?? null) : null);
   const [state, setState] = useState<'loading' | 'ready' | 'missing'>('loading');
   const [showTranscript, setShowTranscript] = useState(false);
+  const [celebrating, setCelebrating] = useState(false);
 
   useEffect(() => {
     if (!sessionId) return setState('missing');
@@ -66,7 +68,18 @@ export default function HablarSummaryScreen() {
   }, [sessionId]);
 
   // A unit chat was opened from the road (or from History): back to wherever that was.
-  const close = () => (conversation?.kind === 'unit' ? goBack('/home') : router.dismissTo('/hablar'));
+  const leave = () => (conversation?.kind === 'unit' ? goBack('/home') : router.dismissTo('/hablar'));
+
+  // The chat that moved the streak (the day's first thing done) hands over to
+  // the same celebration a lesson ends on. `streak` is only filled on the close
+  // that credited the day, and dropped once seen so History never replays it.
+  const rose = !!summary?.streak && summary.streak !== (summary.previous_streak ?? 0);
+  const close = () => {
+    if (!rose || !summary) return leave();
+    const { streak: _s, previous_streak: _p, ...rest } = summary;
+    if (sessionId) summaryCache.set(sessionId, rest);
+    setCelebrating(true);
+  };
 
   if (state === 'loading') {
     return (
@@ -81,6 +94,14 @@ export default function HablarSummaryScreen() {
       <SafeAreaView style={[styles.safe, styles.center]}>
         <Text style={styles.muted}>This chat isn't here.</Text>
         <Button title="Back to Speaking" onPress={close} />
+      </SafeAreaView>
+    );
+  }
+
+  if (celebrating && summary?.streak) {
+    return (
+      <SafeAreaView style={styles.safe}>
+        <StreakCelebration previous={summary.previous_streak ?? 0} streak={summary.streak} onDone={leave} />
       </SafeAreaView>
     );
   }

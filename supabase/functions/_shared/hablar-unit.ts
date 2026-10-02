@@ -11,7 +11,7 @@ import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
 import { Anthropic, structured } from "./hablar-claude.ts";
 import { LEVEL_GRAMMAR } from "./hablar-prompt.ts";
-import { type Band, CLAUDE_OPTIONS, type Env, type Scenario, synthesize, tomasVoice } from "./hablar.ts";
+import { type Band, CLAUDE_OPTIONS, type Env, type Scenario, synthesize, TALK_SPEED, tomasVoice } from "./hablar.ts";
 
 /** A Speaking lesson's unit, if the lesson is one. */
 export async function speakingUnit(
@@ -127,7 +127,12 @@ export async function unitScenario(
   // served from the public audio bucket.
   let audio: string | null = null;
   try {
-    const mp3 = await synthesize({ key: env.elevenKey, voiceId: await tomasVoice(db), text: value.opener.es });
+    const mp3 = await synthesize({
+      key: env.elevenKey,
+      voiceId: await tomasVoice(db),
+      text: value.opener.es,
+      speed: TALK_SPEED[level],
+    });
     const path = `hablar/units/${unit.id}/${level}-opener.mp3`;
     const { error } = await db.storage.from("audio").upload(path, new Blob([mp3], { type: "audio/mpeg" }), {
       contentType: "audio/mpeg",

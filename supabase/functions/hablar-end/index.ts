@@ -27,6 +27,7 @@ import {
   recordPause,
   serviceClient,
   synthesize,
+  TALK_SPEED,
   tomasVoice,
   TTS_MODEL,
   type Usage,
@@ -127,7 +128,7 @@ Deno.serve(async (req) => {
     await Promise.all(corrections.map(async (c, i) => {
       const t0 = Date.now();
       try {
-        const mp3 = await synthesize({ key: env.elevenKey, voiceId, text: c.corrected });
+        const mp3 = await synthesize({ key: env.elevenKey, voiceId, text: c.corrected, speed: TALK_SPEED[session.level] });
         const path = `${who.userId}/${session.id}/summary-${i}.mp3`;
         const { error } = await db.storage.from("hablar").upload(path, new Blob([mp3], { type: "audio/mpeg" }), {
           contentType: "audio/mpeg",

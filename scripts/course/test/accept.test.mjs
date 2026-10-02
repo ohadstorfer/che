@@ -98,6 +98,16 @@ test('an optional "che" can go, and its punctuation goes with it', () => {
   assert.deepEqual(alts('hola-che', 'chau', 'Chau, che.', 'Bye!'), ['Chau.']);
 });
 
+test('an "un" the English has no "a" for can go', () => {
+  assert.ok(
+    alts('otro-cafe', 'torta', '¿Un té y torta? Un café y torta, gracias.', 'Tea and cake? Coffee and cake, thanks.').includes(
+      '¿Té y torta? Café y torta, gracias.',
+    ),
+  );
+  // "A coffee" asks for the article.
+  assert.deepEqual(alts('otro-cafe', 'torta', 'Un café, gracias.', 'A coffee, thanks.'), []);
+});
+
 test('authored alternatives are checked like the sentence', () => {
   const { errors } = build('de-donde-sos', 'dónde', {
     es: '¿De dónde sos?',

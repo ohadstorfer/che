@@ -193,6 +193,10 @@ export interface DoneEvent {
 }
 
 export interface ReplyHandlers {
+  /** The line as the server stored it (speak only): it opens the stream. */
+  onTranscript?: (text: string) => void;
+  /** The verdict on her line, ahead of the full feedback: right or wrong, and the fixed line. */
+  onCorrection?: (verdict: { has_error: boolean; corrected: string }) => void;
   onText: (seq: number, delta: string) => void;
   /** The rioplatense guard rewrote part of an already-shown sentence: replace `from` with `to`. */
   onTextFix: (seq: number, from: string, to: string) => void;
@@ -282,16 +286,7 @@ export async function transcribe(args: {
   console.info(`[hablar] transcribe ${clip.size} bytes, ${clip.mime}`);
   if (!clip.size) return { text: '', status: 'empty' };
   const form = new FormData();
-  const name = `${args.turn_id}.${clip.mime.includes('mp4') ? 'm4a' : 'webm'}`;
-  if (clip.blob) form.append('audio', clip.blob, name);
-  else {
-    // The phones' fetch is expo/fetch (SDK 57 installs it globally), which
-    // can't send React Native's { uri, name, type } part ("Unsupported
-    // FormDataPart implementation"). It sends any part that has bytes().
-    const { File } = await import('expo-file-system');
-    const file = new File(clip.uri!);
-    form.append('audio', { name, type: clip.mime, bytes: () => file.bytes() } as unknown as Blob);
-  }
+  await appendClip(form, clip, args.turn_id);
   form.append('session_id', args.session_id);
   form.append('turn_id', args.turn_id);
   form.append('purpose', args.purpose);
@@ -319,39 +314,106 @@ export async function sendTyped(args: {
 }
 
 /**
- * §4.5 — the streamed turn. `functions.invoke` can't stream, so this is a
- * plain POST whose body is read and split into SSE events by hand. Resolves
- * when the stream closes; rejects on a network failure or a non-2xx status.
- * React Native's own fetch has no readable body, so the phones use expo/fetch.
+ * §4.5 — the streamed turn, for a line already stored (a draft from an older
+ * build, or a retry after a dropped stream).
  */
-export async function reply(
+export function reply(
   args: { session_id: string; turn_id: string; paused_seconds?: number },
   on: ReplyHandlers,
   signal?: AbortSignal,
-): Promise<void> {
-  const base = process.env.EXPO_PUBLIC_SUPABASE_URL ?? '';
+): Promise<'streamed' | 'empty'> {
+  return streamTurn(
+    JSON.stringify({
+      session_id: args.session_id,
+      turn_id: args.turn_id,
+      paused_seconds: args.paused_seconds ?? 0,
+    }),
+    on,
+    signal,
+  );
+}
+
+/**
+ * Her line and Pancho's answer in one request: the recording (or what she
+ * typed) goes straight to hablar-reply, which transcribes it, stores it and
+ * answers on the same stream, opening with `transcript`. Resolves 'empty' when
+ * nothing usable was heard. Safe to send again with the same turn_id: the
+ * server neither transcribes nor answers twice.
+ */
+export async function speak(
+  args: { clip?: RecordedClip; text?: string; session_id: string; turn_id: string; paused_seconds?: number },
+  on: ReplyHandlers,
+  signal?: AbortSignal,
+): Promise<'streamed' | 'empty'> {
+  const form = new FormData();
+  if (args.clip) {
+    const { clip } = args;
+    console.info(`[hablar] speak ${clip.size} bytes, ${clip.mime}`);
+    await appendClip(form, clip, args.turn_id);
+  } else form.append('text', args.text ?? '');
+  form.append('session_id', args.session_id);
+  form.append('turn_id', args.turn_id);
+  if (args.paused_seconds) form.append('paused_seconds', String(args.paused_seconds));
+  return streamTurn(form, on, signal);
+}
+
+/** The recording as a multipart part, the way each platform's fetch can send it. */
+async function appendClip(form: FormData, clip: RecordedClip, turnId: string) {
+  const name = `${turnId}.${clip.mime.includes('mp4') ? 'm4a' : 'webm'}`;
+  if (clip.blob) return form.append('audio', clip.blob, name);
+  // The phones' fetch is expo/fetch (SDK 57 installs it globally), which
+  // can't send React Native's { uri, name, type } part ("Unsupported
+  // FormDataPart implementation"). It sends any part that has bytes().
+  const { File } = await import('expo-file-system');
+  const file = new File(clip.uri!);
+  form.append('audio', { name, type: clip.mime, bytes: () => file.bytes() } as unknown as Blob);
+}
+
+const functionsBase = () => `${process.env.EXPO_PUBLIC_SUPABASE_URL ?? ''}/functions/v1`;
+
+/**
+ * Boot an edge function ahead of the request that needs it: a cold one costs
+ * a few hundred milliseconds the learner would otherwise wait through. A CORS
+ * preflight is the cheapest request that starts the worker; nothing is read.
+ */
+export function warm(...names: ('hablar-start' | 'hablar-reply')[]): void {
+  for (const name of names) {
+    void fetch(`${functionsBase()}/${name}`, { method: 'OPTIONS' }).catch(() => {});
+  }
+}
+
+/**
+ * A plain POST whose body is read and split into SSE events by hand:
+ * `functions.invoke` can't stream. Resolves when the stream closes; rejects on
+ * a network failure or a non-2xx status. React Native's own fetch has no
+ * readable body, so the phones use expo/fetch.
+ */
+async function streamTurn(body: string | FormData, on: ReplyHandlers, signal?: AbortSignal): Promise<'streamed' | 'empty'> {
   const anon = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? '';
   const { data: auth } = await supabase.auth.getSession();
   const token = auth.session?.access_token ?? anon;
 
   const streamingFetch = (Platform.OS === 'web' ? fetch : expoFetch) as typeof fetch;
-  const res = await streamingFetch(`${base}/functions/v1/hablar-reply`, {
+  const res = await streamingFetch(`${functionsBase()}/hablar-reply`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
       apikey: anon,
-      'Content-Type': 'application/json',
+      // A form sets its own type, with the boundary.
+      ...(typeof body === 'string' ? { 'Content-Type': 'application/json' } : {}),
       Accept: 'text/event-stream',
     },
-    body: JSON.stringify({
-      session_id: args.session_id,
-      turn_id: args.turn_id,
-      paused_seconds: args.paused_seconds ?? 0,
-    }),
+    body,
     signal,
   });
   if (!res.ok || !res.body) {
     throw new HablarError(res.status, await res.json().catch(() => null));
+  }
+  // Nothing usable was heard: a plain answer, not a stream.
+  if ((res.headers.get('content-type') ?? '').includes('application/json')) {
+    const out = (await res.json().catch(() => null)) as { status?: string } | null;
+    if (out?.status === 'empty') return 'empty';
+    throw new HablarError(res.status, out as Record<string, unknown> | null);
   }
 
   const reader = res.body.getReader();
@@ -366,6 +428,12 @@ export async function reply(
       return;
     }
     switch (event) {
+      case 'transcript':
+        on.onTranscript?.(String(payload.text ?? ''));
+        break;
+      case 'correction':
+        on.onCorrection?.({ has_error: payload.has_error === true, corrected: String(payload.corrected ?? '') });
+        break;
       case 'text':
         on.onText(Number(payload.seq ?? 0), String(payload.delta ?? ''));
         break;
@@ -410,6 +478,7 @@ export async function reply(
     }
     if (done) break;
   }
+  return 'streamed';
 }
 
 /** §4.7. Hints are capped at 3 per chat on the server. */
