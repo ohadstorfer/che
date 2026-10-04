@@ -94,8 +94,8 @@ un-cafe-por-favor:
 
 hola-che:
   sentences:
-    hola_che: {es: "Hola, che.", en: "Hi there.", en_alt: ["Hey there."], target: che}
-    chau_che: {es: "Chau, che.", en: "Bye!", en_alt: ["See you."], target: chau}
+    hola_che: {es: "Che, ¿un café?", en: "Hey, a coffee?", en_alt: ["Hey, coffee?"], target: che}
+    chau_che: {es: "Che, chau.", en: "Bye!", en_alt: ["See you."], target: chau}
     dale_chau: {es: "Dale, chau.", en: "OK, bye.", target: dale}
     bueno_chau: {es: "Bueno, chau.", en: "Well, bye.", target: bueno}
     bueno_dale: {es: "Bueno, dale.", en: "Well, OK.", target: bueno}
@@ -174,7 +174,7 @@ hola-che:
       title: "At the café"
       lines:
         - {speaker: Martín, es: "Hola, Sofi.", en: "Hi, Sofi."}
-        - {speaker: Sofi, es: "Hola, che. ¿Qué onda?", en: "Hi there. What's up?"}
+        - {speaker: Sofi, es: "Che, ¿qué onda?", en: "Hey, what's up?"}
         - {speaker: Martín, sentence: todo_bien_gracias, question: {type: meaning}}
         - {speaker: Sofi, es: "¿Un café?", en: "A coffee?"}
         - {speaker: Martín, es: "No, un mate, por favor.", en: "No, a mate, please.", question: {type: build}}

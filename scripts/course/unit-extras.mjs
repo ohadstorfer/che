@@ -15,12 +15,16 @@
 //            word may be grows with the course (BANDS): A1 gets only level-1
 //            words said every day or very often. Never the rude theme, never a
 //            word the course teaches itself. A word is used once.
-//   Culture  about one unit in four, start to end. A class goes to the unit
+//   Culture  about two units in five, start to end. A class goes to the unit
 //            that talks about the same thing where there is one (café unit →
 //            ordering at a café, the bondi → the SUBE card); the rest fill the
-//            widest gaps in a beginner-friendly order. History and the
-//            provinces wait for section 6. The swearing section is only for a
-//            unit called `puteadas`. A class is used once.
+//            widest gaps: everyday things early, the in-depth ones (how
+//            Argentines are, beliefs, protest) late, and of the next few in
+//            line the one that has something to do with the unit. A unit
+//            keeps the class it already plays (src/lib/unit-extras.json, as
+//            the last run left it), so new classes never move old ones.
+//            History and the provinces wait for section 6. The swearing
+//            section is only for a unit called `puteadas`. A class is used once.
 //   Speaking none in section 1 (no verbs yet); from section 2, every unit.
 //
 //   npm run course:extras -- [<snapshot date>] [--sql <migration file>] [--plan <markdown file> [--why <units>]]
@@ -140,30 +144,31 @@ const TOPICS = [
   { id: 'reading and writing', unit: /read and write|\bescrib/, themes: [], culture: ['iconos/escritores'] },
   // Everyday life (the 2026-10 sections). They come after the topics above, so
   // a unit that already had a class by topic keeps it. No slang themes: the
-  // topics below still choose a unit's slang.
-  { id: 'strikes and marches', unit: /strike|\bparo\b|nothing's running|marcha/, themes: [], culture: ['escuela-y-laburo/paros-y-marchas'] },
-  { id: 'the news on TV and radio', unit: /headline|read the news|where you heard/, themes: [], culture: ['pantallas/la-tele', 'pantallas/la-radio'] },
-  { id: 'your building', unit: /edificio|building|consorcio|neighbou?rs/, themes: [], culture: ['casa/el-encargado', 'casa/dos-ambientes'] },
-  { id: 'renting and moving', unit: /\brent\b|moving house|mud[eo]\b|new place|live in/, themes: [], culture: ['casa/dos-ambientes'] },
-  { id: 'your place', unit: /your place|\bdepto\b/, themes: [], culture: ['casa/dos-ambientes'] },
-  { id: 'the shops on the block', unit: /verduler|feria|deli\b|what it costs/, themes: [], culture: ['casa/la-cuadra'] },
-  { id: 'the weather', unit: /weather|\bheat\b|\bclima\b/, themes: [], culture: ['dia-a-dia/el-clima'] },
-  { id: 'the doctor', unit: /doctor|check-up|siento mal/, themes: [], culture: ['dia-a-dia/al-medico'] },
-  { id: 'aches and cures', unit: /duele|dolio|hurt/, themes: [], culture: ['creencias/empacho-y-ojeo', 'dia-a-dia/al-medico'] },
-  { id: 'the car', unit: /\bcar\b|\bauto\b|driving/, themes: [], culture: ['dia-a-dia/manejar'] },
-  { id: 'school', unit: /school days|primaria|\bkid\b|figuritas/, themes: [], culture: ['escuela-y-laburo/la-escuela', 'juegos/figuritas', 'escuela-y-laburo/egresados'] },
-  { id: 'studying', unit: /\bstudy\b|learning castellano|\bstudent\b/, themes: [], culture: ['escuela-y-laburo/la-facultad'] },
-  { id: 'work', unit: /laburo|\bwork\b|\bjob|living|hiring|\braise\b|promotion|\bascenso\b/, themes: [], culture: ['escuela-y-laburo/el-laburo'] },
-  { id: 'names and nicknames', unit: /someone's name|\bnombre\b|talk sweet|-ito\b/, themes: [], culture: ['familia/apodos'] },
-  { id: 'love', unit: /novios|\blove\b|going out with|break-ups/, themes: [], culture: ['familia/amor'] },
-  { id: 'the big days', unit: /family news|big news|big days|milestones/, themes: [], culture: ['familia/casamientos-y-quince'] },
-  { id: 'family', unit: /familia|family|parents/, themes: [], culture: ['familia/domingo-en-familia', 'familia/casamientos-y-quince'] },
-  { id: 'friends', unit: /friends|amigos|get along|who came/, themes: [], culture: ['familia/los-amigos'] },
-  { id: 'holidays', unit: /holiday|vacaciones|weekend/, themes: [], culture: ['vacaciones/enero', 'vacaciones/la-playa', 'vacaciones/escapadas', 'vacaciones/carnaval'] },
-  { id: 'free time', unit: /free time|routine|interests you/, themes: [], culture: ['deportes/el-club', 'juegos/el-truco', 'pantallas/novelas'] },
-  { id: 'jokes and laughs', unit: /laugh|risa|cracked|joke|tease|prank/, themes: [], culture: ['pantallas/el-humor', 'pantallas/cine'] },
-  { id: 'drinks', unit: /\bdrink|birra|\bvino\b|parrillada|eat out/, themes: [], culture: ['bebidas/el-vino', 'bebidas/la-birra', 'bebidas/fernet-y-vermut'] },
-  { id: 'luck', unit: /\bluck|suerte|loteria|gut feeling/, themes: [], culture: ['juegos/la-quiniela', 'creencias/martes-trece'] },
+  // topics below still choose a unit's slang. They read a unit's
+  // slug and title only: a summary that mentions a drink is not a unit about drinks.
+  { id: 'strikes and marches', unit: /strike|\bparo\b|nothing's running|marcha/, themes: [], titleOnly: true, culture: ['escuela-y-laburo/paros-y-marchas'] },
+  { id: 'the news on TV and radio', unit: /headline|read the news|where you heard/, themes: [], titleOnly: true, culture: ['pantallas/la-tele', 'pantallas/la-radio'] },
+  { id: 'your building', unit: /edificio|building|consorcio|neighbou?rs/, themes: [], titleOnly: true, culture: ['casa/el-encargado', 'casa/dos-ambientes'] },
+  { id: 'renting and moving', unit: /\brent\b|moving house|mud[eo]\b|new place|live in/, themes: [], titleOnly: true, culture: ['casa/dos-ambientes'] },
+  { id: 'your place', unit: /your place|\bdepto\b/, themes: [], titleOnly: true, culture: ['casa/dos-ambientes'] },
+  { id: 'the shops on the block', unit: /verduler|feria|deli\b|what it costs/, themes: [], titleOnly: true, culture: ['casa/la-cuadra'] },
+  { id: 'the weather', unit: /weather|\bheat\b|\bclima\b/, themes: [], titleOnly: true, culture: ['dia-a-dia/el-clima'] },
+  { id: 'the doctor', unit: /doctor|check-up|siento mal/, themes: [], titleOnly: true, culture: ['dia-a-dia/al-medico'] },
+  { id: 'aches and cures', unit: /duele|dolio|hurt/, themes: [], titleOnly: true, culture: ['creencias/empacho-y-ojeo', 'dia-a-dia/al-medico'] },
+  { id: 'the car', unit: /\bcar\b|\bauto\b|driving/, themes: [], titleOnly: true, culture: ['dia-a-dia/manejar'] },
+  { id: 'school', unit: /school days|primaria|\bkid\b|figuritas/, themes: [], titleOnly: true, culture: ['escuela-y-laburo/la-escuela', 'juegos/figuritas', 'escuela-y-laburo/egresados'] },
+  { id: 'studying', unit: /\bstudy\b|learning castellano|\bstudent\b/, themes: [], titleOnly: true, culture: ['escuela-y-laburo/la-facultad'] },
+  { id: 'work', unit: /laburo|\bwork\b|\bjob|living|hiring|\braise\b|promotion|\bascenso\b/, themes: [], titleOnly: true, culture: ['escuela-y-laburo/el-laburo'] },
+  { id: 'names and nicknames', unit: /someone's name|\bnombre\b|talk sweet|-ito\b/, themes: [], titleOnly: true, culture: ['familia/apodos'] },
+  { id: 'love', unit: /novios|\blove\b|going out with|break-ups/, themes: [], titleOnly: true, culture: ['familia/amor'] },
+  { id: 'the big days', unit: /family news|big news|big days|milestones/, themes: [], titleOnly: true, culture: ['familia/casamientos-y-quince'] },
+  { id: 'family', unit: /familia|family|parents/, themes: [], titleOnly: true, culture: ['familia/domingo-en-familia', 'familia/casamientos-y-quince'] },
+  { id: 'friends', unit: /friends|amigos|get along|who came/, themes: [], titleOnly: true, culture: ['familia/los-amigos'] },
+  { id: 'holidays', unit: /holiday|vacaciones|weekend/, themes: [], titleOnly: true, culture: ['vacaciones/enero', 'vacaciones/la-playa', 'vacaciones/escapadas', 'vacaciones/carnaval'] },
+  { id: 'free time', unit: /free time|routine|interests you/, themes: [], titleOnly: true, culture: ['deportes/el-club', 'juegos/el-truco', 'pantallas/novelas'] },
+  { id: 'jokes and laughs', unit: /laugh|risa|cracked|joke|tease|prank/, themes: [], titleOnly: true, culture: ['pantallas/el-humor', 'pantallas/cine'] },
+  { id: 'drinks', unit: /\bdrink|birra|\bvino\b|parrillada|eat out/, themes: [], titleOnly: true, culture: ['bebidas/el-vino', 'bebidas/la-birra', 'bebidas/fernet-y-vermut'] },
+  { id: 'luck', unit: /\bluck|suerte|loteria|gut feeling/, themes: [], titleOnly: true, culture: ['juegos/la-quiniela', 'creencias/martes-trece'] },
   // Slang themes only: no culture class is about these.
   { id: 'food', unit: /food|comida|verduler|feria|deli\b|hambre|hungry|cocin|\beat\b|\bate\b|tomar\b|something to eat/, themes: ['comida'], culture: [] },
   { id: 'home and clothes', unit: /\bcasa\b|edificio|building|depto|ropa|clothes|chores|tareas|consorcio|fixed|mud[eo]\b|pileta|llaves|your place/, themes: ['casa'], culture: [] },
@@ -177,7 +182,9 @@ const TOPICS = [
 const isPractice = (u) => /^practice\b/i.test(u.title_en);
 for (const u of road) {
   const hay = fold([u.slug, u.title_en, isPractice(u) ? '' : u.summary_en, isPractice(u) ? '' : (u.grammar_focus ?? []).join(' ')].join(' · '));
-  u.topics = TOPICS.filter((t) => t.unit.test(hay));
+  const name = fold([u.slug, u.title_en].join(' · '));
+  u.hay = hay;
+  u.topics = TOPICS.filter((t) => t.unit.test(t.titleOnly ? name : hay));
   u.themes = [...new Set(u.topics.flatMap((t) => t.themes))];
 }
 
@@ -369,7 +376,7 @@ for (const band of BANDS) {
 /** Easy and everyday first. The two history sections are one story, told in order. */
 const CULTURE_ORDER = [
   ['mate'], ['asado'], ['comida'], ['alfajores'], ['futbol'], ['costumbres'], ['buenos-aires'], ['habla'],
-  ['familia'], ['casa'], ['dia-a-dia'], ['bebidas'], ['juegos'], ['vacaciones'], ['naturaleza'], ['deportes'],
+  ['asi-somos'], ['familia'], ['casa'], ['dia-a-dia'], ['bebidas'], ['juegos'], ['vacaciones'], ['naturaleza'], ['deportes'],
   ['pantallas'], ['creencias'], ['escuela-y-laburo'],
   ['musica'], ['tango'], ['dichos'], ['iconos'], ['regiones'], ['historia-nacimiento', 'historia-moderna'],
 ];
@@ -408,11 +415,24 @@ const give = (u, key, why, topic) => {
   cultureOf.set(u.id, { ...classes.get(key), why, topic });
 };
 
+// A unit keeps the class it already plays: a learner who did it keeps it, and
+// more classes only ever fill units that had none.
+{
+  let before = {};
+  try {
+    before = read('src/lib/unit-extras.json').units ?? {};
+  } catch {}
+  for (const u of road) {
+    const c = before[u.slug]?.culture;
+    const key = c && `${c.section}/${c.class}`;
+    if (key && classes.has(key) && !usedClasses.has(key) && mayPlay(u, key)) give(u, key, 'already plays it');
+  }
+}
 // A unit named like a class is about that class.
 const bySlug = new Map([...classes].map(([key, c]) => [c.class, key]));
 for (const u of road) {
   const key = bySlug.get(u.slug);
-  if (key && !ADULT_SECTIONS.has(classes.get(key).section) && mayPlay(u, key)) give(u, key, 'the unit and the class share a name');
+  if (key && !cultureOf.has(u.id) && !usedClasses.has(key) && !ADULT_SECTIONS.has(classes.get(key).section) && mayPlay(u, key)) give(u, key, 'the unit and the class share a name');
 }
 // Then topic by topic, the most exact first; within a topic in course order.
 // Classes don't pile up: at most two units in a row get one, and never two
@@ -424,37 +444,90 @@ for (const topic of TOPICS) {
     if (key) give(u, key, `topic "${topic.id}"`, topic);
   }
 }
-// The rest go where the road is longest without one: each into the middle of
-// the widest gap. Then, in course order, each of those units takes the next
-// class of the beginner-friendly order it may play.
-const fallback = [];
+// The rest go where the road is longest without one. FILL lists them in the
+// order they are placed, each with the sections it may land in (everyday
+// things early, the in-depth ones late) and the words of a unit it has
+// something to do with. Classes not listed (the older sections) follow in
+// CULTURE_ORDER, anywhere they may play.
+const EARLY = [1, 7];
+const MIDDLE = [4, 12];
+const LATE = [9, 15];
+const FILL = [
+  ['familia/apodos', EARLY, /name|nombre|who's who|point people/],
+  ['naturaleza/el-carpincho', EARLY, /animal|describe|how they are|what there is/],
+  ['casa/la-cuadra', EARLY, /buy|kiosco|costs|snack|shop/],
+  ['familia/domingo-en-familia', EARLY, /family|familia|table|eat|hungry/],
+  ['dia-a-dia/el-clima', EARLY, /cold|hot|weather|how you feel|sleepy/],
+  ['casa/dos-ambientes', EARLY, /where something is|your things|around you|place|building/],
+  ['casa/el-encargado', EARLY, /building|neighbou?r|barrio|around/],
+  ['naturaleza/pajaros', EARLY, /around|city|barrio|corner|park|color/],
+  ['familia/los-amigos', EARLY, /friend|plans|free time|what you do|like/],
+  ['deportes/el-club', EARLY, /free time|routine|what you do|barrio|interest/],
+  ['escuela-y-laburo/la-escuela', EARLY, /study|learn|school|kid|read and write/],
+  ['vacaciones/enero', EARLY, /trip|weekend|holiday|where you went|plans|months/],
+  ['vacaciones/la-playa', EARLY, /trip|weekend|holiday|where you went|heat/],
+  ['dia-a-dia/manejar', EARLY, /taxi|car|directions|way around|trip/],
+  ['dia-a-dia/al-medico', EARLY, /hurt|doctor|feel|emergency|help/],
+  ['bebidas/la-birra', MIDDLE, /order|table|go out|bar|friends|night/],
+  ['bebidas/el-vino', MIDDLE, /ate|eat|brought|table|parrill|restaurant/],
+  ['juegos/figuritas', MIDDLE, /kid|child|used to|loved|collect/],
+  ['juegos/el-truco', MIDDLE, /free time|friends|game|plans|lie|pretend/],
+  ['familia/amor', MIDDLE, /love|going out|novi|couple|someone/],
+  ['familia/casamientos-y-quince', MIDDLE, /news|birthday|party|wish|big day|family/],
+  ['bebidas/fernet-y-vermut', MIDDLE, /go out|night|party|friends|traditions/],
+  ['vacaciones/escapadas', MIDDLE, /trip|weekend|town|car|plans|next week/],
+  ['vacaciones/carnaval', MIDDLE, /tradition|customs|holiday|party|music/],
+  ['escuela-y-laburo/egresados', MIDDLE, /school|memories|remember|used to|trip/],
+  ['escuela-y-laburo/la-facultad', MIDDLE, /study|learn|career|what you do|living/],
+  ['escuela-y-laburo/el-laburo', MIDDLE, /job|work|laburo|boss|hiring|payday|raise/],
+  ['juegos/la-quiniela', MIDDLE, /dream|guess|wonder|likely|luck|number/],
+  ['creencias/martes-trece', MIDDLE, /warn|not to|luck|scare|guess|likely|careful/],
+  ['deportes/pumas-y-leonas', MIDDLE, /team|game|best|compare|soccer/],
+  ['deportes/el-pato', MIDDLE, /team|game|story|used to|country/],
+  ['deportes/polo', MIDDLE, /best|compare|horse|country|rich/],
+  ['deportes/fierros', MIDDLE, /car|drive|fast|story|team/],
+  ['pantallas/la-tele', MIDDLE, /news|heard|said|gossip|scandal|react/],
+  ['pantallas/novelas', MIDDLE, /story|said|love|drama|what happened/],
+  ['pantallas/cine', LATE, /story|twist|laugh|what happened|cry/],
+  ['creencias/gauchito-gil', LATE, /road|trip|car|wish|favor|promise/],
+  ['asi-somos/el-ego', LATE, /best|compare|opinion|pretend|as if|size up/],
+  ['asi-somos/la-queja', LATE, /complain|fed up|angry|annoy|doesn't work|prices/],
+  ['asi-somos/todos-opinan', LATE, /opinion|agree|argument|sides|advice|case/],
+  ['asi-somos/el-drama', LATE, /felt|feel|emotion|moved|cry|exaggerat|scare/],
+  ['creencias/empacho-y-ojeo', LATE, /hurt|advice|doctor|calm|stress|believe/],
+  ['escuela-y-laburo/paros-y-marchas', LATE, /strike|news|running|city|vote/],
+  ['pantallas/el-humor', LATE, /laugh|joke|tease|prank|nonsense/],
+  ['pantallas/la-radio', LATE, /heard|news|listen|said|source/],
+  ['creencias/caminar-a-lujan', LATE, /promise|wish|regret|hard|keep going/],
+  ['asi-somos/argentinos-afuera', LATE, /came from|roots|abroad|back|miss|goodbye|trip/],
+  ['asi-somos/sobrevivir', LATE, /prices|money|payday|changed|debts|what if|regret/],
+];
+for (const [key] of FILL) if (!classes.has(key)) throw new Error(`FILL names the culture class ${key}, which does not exist`);
+const fallback = FILL.filter(([key]) => !usedClasses.has(key));
 {
   const tracks = CULTURE_ORDER.map((slugs) => slugs.flatMap((slug) => culture.find((s) => s.slug === slug)?.classes.map((c) => `${slug}/${c.slug}`) ?? []));
+  const listed = new Set(FILL.map(([key]) => key));
   for (let round = 0; tracks.some((t) => round < t.length); round++) {
-    for (const t of tracks) if (round < t.length && !usedClasses.has(t[round])) fallback.push(t[round]);
+    for (const t of tracks) if (round < t.length && !usedClasses.has(t[round]) && !listed.has(t[round])) fallback.push([t[round], [1, Infinity], null]);
   }
 }
-{
-  const taken = new Set([...cultureOf.keys()].map((id) => road.find((u) => u.id === id).index));
-  const slots = [];
-  for (let n = 0; n < fallback.length; n++) {
-    const marks = [-1, ...[...taken].sort((a, b) => a - b), road.length];
-    let best = null;
-    for (let i = 0; i + 1 < marks.length; i++) {
-      const width = marks[i + 1] - marks[i] - 1;
-      if (width > 0 && (!best || width > best.width)) best = { width, at: marks[i] + Math.ceil(width / 2) };
-    }
-    if (!best) break;
-    taken.add(best.at);
-    slots.push(best.at);
-  }
-  for (const at of slots.sort((a, b) => a - b)) {
-    const u = road[at];
-    const i = fallback.findIndex((k) => mayPlay(u, k));
-    if (i < 0) continue;
-    const [key] = fallback.splice(i, 1);
-    give(u, key, 'fills a gap, next in the beginner-friendly order');
-  }
+// Each class goes to the unit furthest from any other class, among the units
+// it may land in; of the units about as far, one it has to do with wins.
+for (const [key, [from, to], hint] of fallback) {
+  const gap = (u) => {
+    let before = 0;
+    while (u.index - before - 1 >= 0 && !cultureOf.has(road[u.index - before - 1].id)) before++;
+    let after = 0;
+    while (u.index + after + 1 < road.length && !cultureOf.has(road[u.index + after + 1].id)) after++;
+    return Math.min(before, after);
+  };
+  const open = road
+    .filter((u) => !cultureOf.has(u.id) && u.section >= from && u.section <= to && mayPlay(u, key) && runWith(u) <= MAX_RUN)
+    .map((u) => ({ u, gap: gap(u) }))
+    .sort((x, y) => y.gap - x.gap || x.u.index - y.u.index);
+  if (!open.length) continue;
+  const near = hint && open.find((o) => o.gap >= Math.max(1, open[0].gap - 1) && !isPractice(o.u) && hint.test(o.u.hay));
+  give((near || open[0]).u, key, near ? 'fills a gap, has to do with the unit' : 'fills a gap');
 }
 
 // ---------------------------------------------------------------------------

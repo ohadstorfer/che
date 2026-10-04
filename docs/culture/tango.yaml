@@ -21,7 +21,7 @@ classes:
           - "It became a craze in Paris"
           - "The Church gave it its blessing"
         correct: 1
-        explain: "Once Paris loved it, the rich loved it too. Nothing like European approval to change a porteño's mind."
+        explain: "Once Paris loved it, the rich loved it too. Nothing like European approval to change the mind of a porteño, a Buenos Aires local."
       - type: card
         text: "Around 1900, men far outnumbered women in the city. So men often practiced tango with each other until they were good enough to dance with a woman."
       - type: choice
@@ -31,7 +31,7 @@ classes:
           - "In Buenos Aires, by Gardel"
           - "In Paris, during the craze"
         correct: 0
-        explain: "Gerardo Matos Rodríguez, a young Uruguayan student, wrote it around 1916, and it premiered in a Montevideo café. Milongas still play it as the last tango of the night."
+        explain: "Gerardo Matos Rodríguez, a young Uruguayan student, wrote it around 1916, and it premiered in a Montevideo café. Milongas, tango dance nights, still play it as the last tango of the night."
       - type: card
         text: "So tango isn't only Argentine. It's **rioplatense**, from both sides of the river. In 2009 UNESCO listed it as heritage of both countries, and Uruguayans will remind you."
       - type: card
@@ -43,7 +43,7 @@ classes:
           - "It's as heavy as a small piano"
           - "It only plays in a single key"
         correct: 0
-        explain: "The note changes depending on whether the bellows open or close. Tangueros call it **el fueye**: the bellows."
+        explain: "The note changes depending on whether the bellows open or close. Tango musicians call it **el fueye**: the bellows."
       - type: card
         text: "Early tango was quick and playful, played on flute, violin and guitar. Many say the bandoneón slowed it down, and that's where tango got its famous sadness."
     vocabulary: []
@@ -110,7 +110,7 @@ classes:
           - "A folded page of sheet music"
           - "A glass of wine"
         correct: 0
-        explain: "A lit **pucho**. Legend says if it burns all the way down, your wish comes true."
+        explain: "A lit **pucho**, slang for cigarette. Legend says if it burns all the way down, your wish comes true."
       - type: card
         text: "His fans' favorite line: **cada día canta mejor**, he sings better every day. Almost a century later, and still improving."
       - type: card
@@ -136,7 +136,7 @@ classes:
           - "Played on, with a red carnation on his piano"
           - "Hired a new pianist and never looked back"
         correct: 1
-        explain: "A **clavel rojo** on the empty piano. Everyone in the room got the message. Musicians still say **“¡Pugliese, Pugliese, Pugliese!”** for good luck before a show."
+        explain: "A **clavel rojo**, a red carnation, on the empty piano. Everyone in the room got the message. Musicians still say **“¡Pugliese, Pugliese, Pugliese!”** for good luck before a show."
       - type: card
         text: "Then came the rebel: **Astor Piazzolla**. He grew up in New York, where his dad gave him a bandoneón as a kid."
       - type: choice
@@ -171,7 +171,7 @@ classes:
           - "The barrio never changes"
           - "Twenty years is nothing"
         correct: 2
-        explain: "**“Que veinte años no es nada.”** The words are by **Alfredo Le Pera**, Gardel's writing partner. Heard at reunions and birthdays, anywhere time has passed and everyone pretends it hasn't."
+        explain: "**“Que veinte años no es nada.”** Twenty years is nothing. The words are by **Alfredo Le Pera**, Gardel's writing partner. Heard at reunions and birthdays, anywhere time has passed and everyone pretends it hasn't."
       - type: card
         text: "**Mi Buenos Aires querido** is a man far away, dreaming of coming home. Ask any Argentine living abroad whether it makes them cry."
       - type: card

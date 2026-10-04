@@ -65,7 +65,7 @@ classes:
           - "Whether the dictator should hand out the cup"
           - "Which club Clemente secretly supported"
         correct: 0
-        explain: "The commentator asked fans not to throw **papelitos**, so the country wouldn't look messy. Clemente said **“¡Tiren papelitos, muchachos!”** The stadiums ended up covered in paper."
+        explain: "The commentator asked fans not to throw **papelitos**, bits of paper, so the country wouldn't look messy. Clemente said **“¡Tiren papelitos, muchachos!”** Throw them, boys! The stadiums ended up covered in paper."
       - type: card
         text: "**El Eternauta** began as a comic in 1957. A deadly snowfall covers Buenos Aires, and anyone it touches dies. In 2025 Netflix made it a hit series with **Ricardo Darín**."
       - type: card
@@ -103,7 +103,7 @@ classes:
           - "A cow who dreams of tango"
           - "A girl who talks to the moon"
         correct: 0
-        explain: "Parents who sang **“Manuelita vivía en Pehuajó…”** as kids now sing it to theirs, word for word. At a kids' party, the adults sing loudest."
+        explain: "Parents who sang **“Manuelita vivía en Pehuajó…”** (Manuelita lived in Pehuajó) as kids now sing it to theirs, word for word. At a kids' party, the adults sing loudest."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────

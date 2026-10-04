@@ -83,7 +83,7 @@ import {
   WRAP_UP_NOTE,
   type Feedback,
 } from "../_shared/hablar-prompt.ts";
-import { Anthropic, earlyVerdict, MODEL, plain, streamedStructured } from "../_shared/hablar-claude.ts";
+import { Anthropic, earlyVerdict, MODEL, plain, sameWords, streamedStructured } from "../_shared/hablar-claude.ts";
 import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
 const HISTORY_TURNS = 20;
@@ -125,17 +125,26 @@ function cleanFeedback(raw: Feedback, line: string, english = false): Feedback {
   // A line said in English is never a mistake: she is shown the Spanish for it.
   if (english && raw.verdict !== "unclear") raw = { ...raw, has_error: false, verdict: "note" };
   const spans = (raw.spans ?? []).filter((s) => s && typeof s.from === "string" && typeof s.to === "string");
+  const corrected = String(raw.corrected || line);
   // A tick only for a line that is right as it stands: an English word, a tú
   // form or a garbled transcript is not an error, but it is not "Correct" either.
-  const quiet = raw.verdict === "note" || raw.verdict === "unclear" ? raw.verdict : "correct";
-  const better = raw.verdict === "unclear" ? "" : String(raw.better ?? "");
+  let quiet: Feedback["verdict"] = raw.verdict === "note" || raw.verdict === "unclear" ? raw.verdict : "correct";
+  let better = raw.verdict === "unclear" ? "" : String(raw.better ?? "").trim();
+  // A suggestion that is her own words again says nothing — and when only an
+  // accent differs (andas / andás), it was the recogniser's guess, not her stress.
+  if (better && sameWords(better, corrected)) better = "";
+  if (quiet === "note" && !better) quiet = "correct";
+  // Outside a note, the Argentine way is shown only when her line really sounds foreign.
+  const unnatural = Boolean(raw.unnatural) && Boolean(better);
+  if (quiet !== "note" && !unnatural) better = "";
   return {
     has_error: Boolean(raw.has_error),
     verdict: raw.has_error ? "error" : quiet,
     severity: raw.has_error ? (raw.severity === "none" ? "minor" : raw.severity) : "none",
-    corrected: String(raw.corrected || line),
+    corrected,
     spans: raw.has_error ? spans : [],
     why_en: raw.has_error ? String(raw.why_en ?? "") : "",
+    unnatural,
     better,
     better_en: better ? String(raw.better_en ?? "") : "",
   };

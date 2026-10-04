@@ -1,0 +1,211 @@
+section:
+  slug: "asi-somos"
+  title: "How Argentines are"
+  emoji: "🇦🇷"
+  summary: "The ego, the drama and the complaints, as Argentines tell it themselves"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+# These are the stereotypes Argentines joke about themselves. Every card says
+# who says it ("people say", "the joke goes"); none states one as a fact.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-ego"
+    title: "The famous ego"
+    summary: "The joke all of Latin America tells, and Argentines tell first"
+    pages:
+      - type: card
+        text: "Ask anyone in Latin America about Argentines and you'll hear one word: **ego**. Argentines, people say, think they are the best. Argentines know the jokes, and tell them first."
+      - type: choice
+        prompt: "A joke from the rest of Latin America starts: “What is the ego?” How does it end?"
+        options:
+          - "“The little Argentine we all have inside”"
+          - "“The only thing Argentina sells abroad”"
+          - "“A small country south of Brazil”"
+        correct: 0
+        explain: "**“El pequeño argentino que todos llevamos dentro.”** Another one: in a storm, an Argentine looks up at the lightning and smiles. He thinks God is taking his photo."
+      - type: card
+        text: "The proof they give, as a joke: the Pope was Argentine, Messi and Maradona are Argentine, even the queen of the Netherlands is Argentine. So, they say, **Dios es argentino**."
+      - type: card
+        text: "In the provinces, people say the ego lives in Buenos Aires. Their word for it is **agrandado**. The cure is a friend who says **“bajá un cambio”**: calm down."
+      - type: choice
+        prompt: "Argentines say they have the best meat, the best fans and the best ice cream in the world. And when the news is bad, like prices going up fast?"
+        options:
+          - "“It's the same in every country”"
+          - "“We're the worst in the world”"
+          - "“It's not so bad”"
+        correct: 1
+        explain: "Never in the middle, the joke goes: the best football and the worst economy, the best friends and the worst traffic. Being a normal country would be the real insult."
+      - type: card
+        text: "Uruguayans have their own complaint: Argentines, they say, think that mate, tango, dulce de leche and the asado are all Argentine. Uruguay says every one of them is Uruguayan too."
+      - type: card
+        text: "The soft side: the people with the famous ego are also the first to laugh at it. Nobody tells more jokes about Argentines than Argentines."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-queja"
+    title: "Complaining, with love"
+    summary: "The national sport that is not football"
+    pages:
+      - type: card
+        text: "Argentines say complaining is their national sport. Two words start it: **“Este país…”** This country… Then comes a long breath, and everybody at the table agrees."
+      - type: choice
+        prompt: "A classic line from someone who is tired of it all: “The only way out is…” What?"
+        options:
+          - "The next election"
+          - "The lottery"
+          - "The airport"
+        correct: 2
+        explain: "**“La única salida es Ezeiza”**: the international airport of Buenos Aires. Many people say it. Few buy the ticket."
+      - type: card
+        text: "The list is always the same: prices, politicians, traffic, the bank, the heat. Ask **“¿Todo bien?”** in a line at the shop and you can hear all five before your turn."
+      - type: card
+        text: "Another favorite: **“Argentina no es para principiantes.”** Argentina is not for beginners. It's a complaint and a little pride at the same time."
+      - type: choice
+        prompt: "Your Argentine friend says the country is a disaster. You, a foreigner, say he's right. What happens?"
+        options:
+          - "He thanks you for being honest"
+          - "He starts to defend Argentina"
+          - "He changes the subject"
+        correct: 1
+        explain: "Only Argentines can speak badly of Argentina. From you, he wants to hear about the meat, the people and Messi."
+      - type: card
+        text: "And the same person who complained all through dinner will tell you at dessert that he could never live in any other country."
+      - type: card
+        chip: "Pro tip"
+        text: "You can complain too, about small things. **“¡Qué caro está todo!”** Everything is so expensive! Everyone agrees, and you have new friends."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "todos-opinan"
+    title: "Everyone is an expert"
+    summary: "Opinions on everything, all at the same time"
+    pages:
+      - type: card
+        text: "Argentines joke that they have an opinion about everything, and share it. Someone who gives opinions on every subject, knowing or not, is an **opinólogo**."
+      - type: choice
+        prompt: "Four friends sit in a café for three hours and solve every problem of the country. What do Argentines call that?"
+        options:
+          - "Hacer la tarea"
+          - "Arreglar el mundo"
+          - "Pagar la cuenta"
+        correct: 1
+        explain: "**Arreglar el mundo**: to fix the world. Nothing changes outside the café, but everyone goes home feeling better."
+      - type: card
+        text: "The classic expert is the taxi driver. In ten blocks he explains how to fix the economy, the national team and your love life, and he doesn't charge extra."
+      - type: card
+        text: "The classic start: **“¿Sabés cuál es el problema de este país?”** Do you know what this country's problem is? Don't answer. The speaker already has the answer, and it's long."
+      - type: choice
+        prompt: "Two friends shout at each other about politics for an hour at dinner. How does the night end?"
+        options:
+          - "They don't speak for a month"
+          - "One of them leaves early"
+          - "They hug and plan the next dinner"
+        correct: 2
+        explain: "Arguing is a way of spending time together. A loud **discusión**, an argument, is not a fight. Between friends, silence would be worse."
+      - type: card
+        text: "Still, some subjects are too dangerous. Many families have one rule for Sunday lunch: no politics at the table. It lasts until the coffee."
+      - type: card
+        chip: "Pro tip"
+        text: "To give your opinion, don't wait for silence. Say **“para mí…”**, for me…, and go. And when you agree with someone: **“Tal cual.”** Exactly."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-drama"
+    title: "A little drama"
+    summary: "Big words for small things, and feelings in public"
+    pages:
+      - type: card
+        text: "Argentines say of themselves that they exaggerate. Nothing is just good or bad. It's **lo más**, the best thing ever, or **un desastre**, a disaster."
+      - type: choice
+        prompt: "Your friend arrives and says **“me quiero morir”**: I want to die. What probably happened?"
+        options:
+          - "She left her phone charger at home"
+          - "She lost her job"
+          - "Someone in her family is very sick"
+        correct: 0
+        explain: "Small problems get big words. **“Me muero”**, I'm dying, can be about hunger, heat, laughing or shame. When something is really serious, people speak more quietly."
+      - type: card
+        text: "Every story starts the same way: **“No sabés lo que me pasó.”** You have no idea what happened to me. What happened: the bus was late."
+      - type: card
+        text: "Feelings are shown. A man can cry in public for a goal, a song or a goodbye, and nobody finds it strange."
+      - type: choice
+        prompt: "A young man is leaving to work abroad for one year. Who comes to the airport to say goodbye?"
+        options:
+          - "Nobody: goodbyes are said at home"
+          - "One parent, who drives him"
+          - "Parents, grandparents, cousins and friends"
+        correct: 2
+        explain: "Ten or fifteen people, tears and a long group hug. Coming back is the same, with a sign that says **“Bienvenido”**: welcome."
+      - type: card
+        text: "One Argentine word is hard to translate: **histeriquear**. You show interest in someone, then you go cold, again and again. People accuse each other of it all the time."
+      - type: card
+        text: "Argentines joke that this is why Buenos Aires is so full of psychologists. Going to therapy is normal, and people talk about it at dinner."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "argentinos-afuera"
+    title: "Argentines abroad"
+    summary: "How to find one anywhere in the world"
+    pages:
+      - type: card
+        text: "Many Argentines go to live abroad, above all in Spain. It's easier for them than for most: a grandparent from Italy or Spain often means a European passport."
+      - type: choice
+        prompt: "On a beach on the other side of the world, how do two Argentines find each other?"
+        options:
+          - "By the mate and the termo"
+          - "By the way they swim"
+          - "By their sunglasses"
+        correct: 0
+        explain: "A termo, the bottle of hot water for mate, works like a flag. (It could be a Uruguayan. They ask anyway.) Then comes **“¿De dónde sos?”** Where are you from? Ten minutes later they have friends in common."
+      - type: card
+        text: "The suitcase of an Argentine abroad carries yerba, dulce de leche and alfajores. And anyone who visits from home gets a shopping list first."
+      - type: card
+        text: "They look for each other. In every big city there's an Argentine bakery, a group that plays football on Sundays and someone making an asado on a very small balcony."
+      - type: choice
+        prompt: "A plane from Europe lands in Buenos Aires. What do many passengers do?"
+        options:
+          - "They sing a football song"
+          - "They clap"
+          - "They call home before the doors open"
+        correct: 1
+        explain: "Clapping when the plane lands is a habit Argentines are famous for. Some people find it embarrassing, and clap anyway."
+      - type: card
+        text: "What they feel has a verb: **extrañar**, to miss. **“Extraño el asado, a mis amigos, los domingos.”** Nobody says they miss the prices."
+      - type: card
+        chip: "Did you know?"
+        text: "At the World Cup in Qatar, tens of thousands of Argentine fans made every game feel like a home game. Some sold their car to pay for the trip."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "sobrevivir"
+    title: "Getting through it"
+    summary: "A country of crises, and people proud of surviving them"
+    pages:
+      - type: card
+        text: "Argentines have lived through many crises: prices that double, savings that disappear, rules that change in one night. People say there's one every ten years."
+      - type: choice
+        prompt: "A famous economist is said to have joked that there are four kinds of countries: rich, poor, Japan and… which one?"
+        options:
+          - "Switzerland"
+          - "Argentina"
+          - "Brazil"
+        correct: 1
+        explain: "Japan, because nobody understood how it became rich so fast. Argentina, because nobody understood how such a rich country became poorer. Argentines love to repeat it."
+      - type: card
+        text: "A very Argentine verb is **zafar**: to get out of a problem at the last second. **“Zafé”** means: that was close, but I'm fine."
+      - type: card
+        text: "A small extra way to make money is a **rebusque**: selling cakes, driving at night, fixing phones. Many people have one, and they are proud of knowing how to invent it."
+      - type: choice
+        prompt: "When prices rise fast, what do many Argentines do with their salary on the day it arrives?"
+        options:
+          - "Leave it in the bank for months"
+          - "Spend it or change it fast"
+          - "Give half to their parents"
+        correct: 1
+        explain: "Pesos lose value, so people fill the fridge, pay their monthly payments or buy dollars the same week. Saving in pesos feels like losing money."
+      - type: card
+        text: "So people enjoy today. In the middle of a crisis, on a Tuesday night, the pizzerías are full. Visitors never understand it."
+      - type: card
+        text: "The pride is this: **“De esta también salimos.”** We'll get through this one too. And while it's still happening, someone is already making jokes about it."
+    vocabulary: []

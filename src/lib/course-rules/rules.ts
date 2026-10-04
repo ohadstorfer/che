@@ -139,7 +139,6 @@ export const OPTIONAL_LEMMAS = new Set(['che']);
  * one breath: *Hola, che.* / *Chau, che.* Anything further in ("Bien, che.",
  * "Bueno, chau, che.") reads as the English tag and is wrong.
  */
-export const CHE_GREETINGS = new Set(['hola', 'chau', 'buenas', 'buen día', 'buenos días', 'buenas tardes', 'buenas noches']);
 
 /** Subject pronouns — Spanish drops them whenever the verb already says who. */
 export const SUBJECT_PRONOUNS = new Map<string, { person: number; number: 'sg' | 'pl' }>([

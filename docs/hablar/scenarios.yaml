@@ -1328,7 +1328,7 @@ openers:
   free:
     A1:
       - { es: "¡Hola! ¿Cómo andás?", en: "Hi! How are you doing?" }
-      - { es: "¡Hola, che! ¿De dónde sos?", en: "Hi! Where are you from?" }
+      - { es: "¡Hola! ¿De dónde sos?", en: "Hi! Where are you from?" }
       - { es: "¡Buenas! ¿Qué te gusta hacer?", en: "Hi! What do you like to do?" }
     A2:
       - { es: "¡Hola! ¿Qué hiciste hoy?", en: "Hi! What did you do today?" }

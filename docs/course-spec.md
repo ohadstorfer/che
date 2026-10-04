@@ -577,7 +577,7 @@ The full list — about 200 words and every form of each (`piscina` / pileta, `n
 
 **Register**
 - `che`, `dale`, `re`, `bárbaro` from unit 1 — they are neutral-informal, not slang.
-- `che` goes in **front**, where English puts "hey": *Che, ¿todo bien?*, *Che, mal.* It is not the English "man" you tack on the end — *Mal, che.* and *Bueno, chau, che.* are wrong. The one thing that may come before it is a bare greeting: *Hola, che.*, *Chau, che.* This holds in `es_alt` too.
+- `che` goes in **front**, where English puts "hey": *Che, ¿todo bien?*, *Che, mal.* It is not the English "man" you tack on the end — *Mal, che.* and *Bueno, chau, che.* are wrong. Nor does it close a greeting: *Hola, che.* and *Chau, che.* are out too. It calls someone: *Che, Tomás, ¿querés mate?* This holds in `es_alt` too.
 - `boludo/a` only in the checkpoint unit's register note, flagged `informal`, with the warning that it is affectionate among friends and an insult otherwise. Never in a drill sentence.
 - No vulgar register in section 1.
 
@@ -607,7 +607,7 @@ Each rule is a pure function `(sentence, ctx) → Finding | null`, unit-tested w
 | `voseo.no_tuteo` | denylist of tuteo-only surfaces: `tú, ti, contigo, tienes, eres, puedes, quieres, vienes, haces, dices, sabes, ven, di, haz, sal, ten, pon, sé, vosotros, os, vuestro…` | fail |
 | `lexicon.regional` | denylist from Appendix B's right-hand column — every inflected form of every word in `docs/course/regional-words.yaml`, built by `npm run course:regional` | fail |
 | `lexicon.phrases` | set phrases from another Spanish, matched over the whole sentence — no token is wrong on its own, the phrase is (`qué tal`) — *built*, `REGIONAL_PHRASES` | fail |
-| `che.placement` | `che` first in its clause, or straight after a bare greeting (`Hola, che.`); never the English "man" on the end — *built*, `chePlacement` | fail |
+| `che.placement` | `che` first in its clause; never after a greeting (`Hola, che.`) and never the English "man" on the end — *built*, `chePlacement` | fail |
 | `register.max` | no lemma with register above `units.register_max` | fail |
 | `length.band` | words ≤ 4 / 7 / 10 / 14 for difficulty 1 / 2 / 3 / 4 — *built*, in `checkShape` | flag |
 | `clause.count` | sentences-in-one ≤ 2 / 2 / 2 / 3 for difficulty 1 / 2 / 3 / 4. A word count alone rewards chaining: "Che, ¿sos vos? ¡Hola! ¿Todo bien?" is six words and passes the band, and is three greetings a beginner has to order with the punctuation stripped off. An exchange — a question and its answer — is two and stays legal. *Built*, in `checkShape` | fail |

@@ -23,7 +23,7 @@ classes:
           - "Only mate, and nothing to eat"
           - "A quick drink before dinner"
         correct: 0
-        explain: "It's an invitation to the merienda: mate, something sweet, and time to talk. The verb is **merendar**: **“¿Merendamos?”** Some older people say **tomar el té**, even with no tea on the table."
+        explain: "It's an invitation to the merienda: mate, something sweet, and time to talk. The verb is **merendar**: **“¿Merendamos?”** (shall we have a merienda?)"
       - type: card
         text: "Kids keep the same hours. At eleven at night you still see families in restaurants, above all on weekends, with little ones running between the tables or asleep across two chairs."
       - type: choice
@@ -33,7 +33,7 @@ classes:
           - "Bills only come once the kitchen has closed"
           - "He's waiting for you to order a coffee first"
         correct: 0
-        explain: "The table is yours until you ask: **“¿Me traés la cuenta?”** Or catch the **mozo**'s eye and pretend to write in the air."
+        explain: "The table is yours until you ask: **“¿Me traés la cuenta?”** (can you bring me the bill?) Or catch the waiter's eye and pretend to write in the air."
       - type: card
         text: "The reason is the **sobremesa**: the long chat after the meal, over coffee. It often lasts longer than the meal itself, and nobody rushes you."
       - type: card
@@ -117,7 +117,7 @@ classes:
           - "Take a number and wait an hour"
           - "Buy a pizza to eat in the theater"
         correct: 0
-        explain: "Eating **de parado** at the counter, a **porción** in your hand, is a classic. Faster, cheaper, and honestly more fun."
+        explain: "Eating **de parado**, standing up, at the counter, a **porción** in your hand, is a classic. Faster, cheaper, and honestly more fun."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────

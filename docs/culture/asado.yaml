@@ -21,7 +21,7 @@ classes:
           - "An hour or two later"
           - "Around dinner time"
         correct: 1
-        explain: "The fire is slow, and so is everything else. Have a drink by the grill and eat when the asador says so."
+        explain: "The fire is slow, and so is everything else. Have a drink by the grill and eat when the asador, the grill cook, says so."
       - type: card
         text: "Every asado has one **asador**, also called the **parrillero**, in charge of the fire and the meat. It's a role with a lot of pride. Everyone else keeps them company by the grill, drink in hand."
       - type: card
@@ -154,7 +154,7 @@ classes:
           - "Whoever brought the wine"
           - "The host's parents, out of respect"
         correct: 0
-        explain: "Hang out by the grill and the asador will pass you a slice of chorizo or molleja on bread, straight off the fire. Stay close and you get to taste first."
+        explain: "Hang out by the grill and the asador will pass you a slice of chorizo or molleja (sweetbread) on bread, straight off the fire. Stay close and you get to taste first."
       - type: card
         text: "Golden rule: don't tell the asador how to cook. Not “it needs more heat”, not “in my country we…”. And never touch the tongs."
       - type: card
@@ -189,7 +189,7 @@ classes:
           - "Around ten that morning"
           - "Right at noon"
         correct: 0
-        explain: "Twelve hours or more over the embers means starting the night before and taking turns. Someone always brings a guitar and a termo."
+        explain: "Twelve hours or more over the embers means starting the night before and taking turns. Someone always brings a guitar and a thermos."
       - type: card
         chip: "Did you know?"
         text: "The town of **Viale**, in Entre Ríos, throws a national festival for asado con cuero every year."

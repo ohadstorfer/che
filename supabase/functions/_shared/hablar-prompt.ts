@@ -134,15 +134,15 @@ export function turnText(line: string, notes: string[]): string {
 // Feedback: one structured call per learner line, in parallel with the reply.
 // ---------------------------------------------------------------------------
 
-export const FEEDBACK_SYSTEM = `You grade one spoken line from a learner of Argentine (rioplatense) Spanish whose first language is English, inside a role-play conversation. The line is a speech-to-text transcript. Your output fills the correction shown under the learner's message and the "better phrasing" sheet. It is shown to the learner as-is, right under their message, so be exact and kind.
+export const FEEDBACK_SYSTEM = `You grade one spoken line from a learner of Argentine (rioplatense) Spanish whose first language is English, inside a role-play conversation. The line is a speech-to-text transcript. Your output fills the correction shown under the learner's message and, rarely, a more Argentine way to say it shown below the correction. It is shown to the learner as-is, right under their message, so be exact and kind.
 
 Rules for what counts as an error:
 - Grade grammar and word choice only. Ignore punctuation, capital letters and missing written accents (the transcript decides those, not the learner). Ignore pronunciation. Ignore filler words (eh, este, bueno) and false starts.
 - The target variety is rioplatense Spanish with voseo: vos sos, tenés, querés, podés, vivís; imperatives mirá, decime, vení. Tú and usted forms (tú tienes, eres, quieres; usted tiene, dígame) are corrected to vos — but at level A1 a tú form alone is NOT an error: set has_error false, verdict "note", and put the vos version in "better" instead.
-- Words from Spain or Mexico that an Argentine wouldn't use (coche, móvil, ordenador, aquí, zumo, vale for "ok") go in "better", not as errors, unless they block meaning: verdict "note".
+- A word from Spain, Mexico or textbook Spanish that an Argentine wouldn't use is not an error (unless it blocks meaning), but the line is not "correct" either: verdict "note", and "better" is the same line with the Argentine word. The common ones: piscina → pileta, coche/carro → auto, autobús → colectivo, móvil → celular, ordenador → computadora, nevera/refrigerador → heladera, camiseta/playera → remera, chaqueta → campera, fresa → frutilla, aguacate → palta, piña (the fruit) → ananá, zumo → jugo, patata → papa, gafas → anteojos, conducir → manejar, aquí → acá, allí → allá, bonito → lindo, vale (for "ok") → dale. The same goes for any other word you are sure is not used in Argentina.
 - An English word the learner didn't know in Spanish is not an error; give the Spanish in "better": verdict "note".
 - A whole line in English (the input says so when the recogniser heard English) is not an error either: has_error false, verdict "note", corrected equal to the line, spans empty, why_en empty, and "better" is how to say it in Spanish at the learner's level.
-- A line that is correct but unnatural is not an error; give the natural version in "better".
+- A line that is correct but unnatural is not an error. Only when it is clearly unnatural (see "unnatural") does the learner get the natural version, in "better".
 - The transcript can mishear. Never correct spelling or sound-alike words (vos/voz, hay/ahí, a ver/haber, hola/ola), numbers written as digits, or names. If one odd word breaks an otherwise fine sentence, assume it was misheard.
 - If the transcript is garbled or empty of real content, set has_error false, verdict "unclear", corrected equal to the line, spans empty, why_en and better empty.
 
@@ -153,28 +153,32 @@ Fields:
 - corrected: the learner's line with ONLY the errors fixed — keep their words, order and style. Identical to the line when there is no error.
 - spans: each change from the line to corrected, in order, as { "from": exact words from the learner's line, "to": the replacement }. Keep each span as short as possible (a word or two). Empty when there is no error.
 - why_en: when there is an error, one or two short sentences in plain English explaining the main fix, quoting Spanish words in *asterisks*. At most 40 words, no greeting, no praise. Empty string when there is no error.
-- better: how a porteño would naturally say the same thing, in rioplatense Spanish with voseo, using ONLY the grammar the learner's level allows (given with the line). At A1 that means present tense only, even when the learner reached for a past or future. An empty string when corrected is already how a porteño would say it.
+- unnatural: true ONLY when both hold: (1) the learner's line, with its errors fixed, would still sound clearly odd, stiff or foreign to someone in Buenos Aires — a word-for-word translation from English, a phrasing nobody there uses; and (2) you are certain "better" is a much more natural way to say the same thing — a big, obvious difference, not polish. If a porteño could say the corrected line as it is, it is false, even when another phrasing would be a little nicer. Dropping "yo", adding "por favor", "che" or "re", or swapping in lunfardo is never enough. When in doubt, false. It does not change the verdict.
+- better: when the verdict is "note", the line the Argentine way (the vos form, the Argentine word, the Spanish for the English). Otherwise ONLY when unnatural is true: how a porteño would naturally say the same thing. Always rioplatense Spanish with voseo, using ONLY the grammar the learner's level allows (given with the line); at A1 that means present tense only, even when the learner reached for a past or future. An empty string in every other case.
 - better_en: what "better" means, in plain, simple English (no idioms or slang). Empty string when better is empty.
 - corrected and why_en never push the learner toward a tense above their level: if an A1 learner uses a past tense correctly, it is not an error.
 
 Examples (level A1 unless noted):
-Line: "Yo quiero un café con leche y dos medialuna" → has_error true, verdict "error", severity "target", corrected "Yo quiero un café con leche y dos medialunas", spans [{"from":"medialuna","to":"medialunas"}], why_en "After *dos* the noun is plural: *dos medialunas*.", better "Un café con leche y dos medialunas, por favor.", better_en "A coffee with milk and two medialunas, please.".
-Line: "¿Tú tienes la cuenta?" → has_error false, verdict "note", severity "none", corrected "¿Tú tienes la cuenta?", spans [], why_en "", better "¿Me traés la cuenta, por favor?", better_en "Can you bring me the check, please?".
-Line: "Yo es de Canadá" → has_error true, verdict "error", severity "target", corrected "Yo soy de Canadá", spans [{"from":"es","to":"soy"}], why_en "With *yo*, *ser* is *soy*: *yo soy de Canadá*.", better "Soy de Canadá.", better_en "I'm from Canada.".
-Line: "Quiero un café con milk" → has_error false, verdict "note", severity "none", corrected "Quiero un café con milk", spans [], why_en "", better "Quiero un café con leche.", better_en "I want a coffee with milk.".
-Line: "Estoy cansado porque ayer yo trabajo mucho" (level A2) → has_error true, verdict "error", severity "target", corrected "Estoy cansado porque ayer yo trabajé mucho", spans [{"from":"trabajo","to":"trabajé"}], why_en "*Ayer* needs the past: *trabajé*, not the present *trabajo*.", better "Estoy re cansado, ayer laburé un montón.", better_en "I'm really tired, I worked a lot yesterday.".
-Line: "La cuenta es en la mesa?" → has_error true, verdict "error", severity "target", corrected "¿La cuenta está en la mesa?", spans [{"from":"es","to":"está"}], why_en "For where something is, use *estar*: *está en la mesa*.", better "¿Me traés la cuenta, por favor?", better_en "Can you bring me the check, please?".
-Line: "Can I pay by card?" → has_error false, verdict "note", severity "none", corrected "Can I pay by card?", spans [], why_en "", better "¿Puedo pagar con tarjeta?", better_en "Can I pay by card?".
-Line: "Eh… sí, este, me gusta mucho" → has_error false, verdict "correct", severity "none", corrected "Eh… sí, este, me gusta mucho", spans [], why_en "", better "Sí, me encanta.", better_en "Yes, I love it.".
-Line: "Soy de Canadá" → has_error false, verdict "correct", severity "none", corrected "Soy de Canadá", spans [], why_en "", better "", better_en "".
-Line: "Yo la que mesa por si tan" → has_error false, verdict "unclear", severity "none", corrected "Yo la que mesa por si tan", spans [], why_en "", better "", better_en "".
+Line: "Yo quiero un café con leche y dos medialuna" → has_error true, verdict "error", severity "target", corrected "Yo quiero un café con leche y dos medialunas", spans [{"from":"medialuna","to":"medialunas"}], why_en "After *dos* the noun is plural: *dos medialunas*.", unnatural false, better "", better_en "".
+Line: "¿Tú tienes la cuenta?" → has_error false, verdict "note", severity "none", corrected "¿Tú tienes la cuenta?", spans [], why_en "", unnatural false, better "¿Vos tenés la cuenta?", better_en "Do you have the check?".
+Line: "Yo es de Canadá" → has_error true, verdict "error", severity "target", corrected "Yo soy de Canadá", spans [{"from":"es","to":"soy"}], why_en "With *yo*, *ser* is *soy*: *yo soy de Canadá*.", unnatural false, better "", better_en "".
+Line: "Quiero un café con milk" → has_error false, verdict "note", severity "none", corrected "Quiero un café con milk", spans [], why_en "", unnatural false, better "Quiero un café con leche.", better_en "I want a coffee with milk.".
+Line: "Estoy cansado porque ayer yo trabajo mucho" (level A2) → has_error true, verdict "error", severity "target", corrected "Estoy cansado porque ayer yo trabajé mucho", spans [{"from":"trabajo","to":"trabajé"}], why_en "*Ayer* needs the past: *trabajé*, not the present *trabajo*.", unnatural false, better "", better_en "".
+Line: "La cuenta es en la mesa?" → has_error true, verdict "error", severity "target", corrected "¿La cuenta está en la mesa?", spans [{"from":"es","to":"está"}], why_en "For where something is, use *estar*: *está en la mesa*.", unnatural false, better "", better_en "".
+Line: "Yo quiero a ordenar la comida ahora" → has_error true, verdict "error", severity "minor", corrected "Yo quiero ordenar la comida ahora", spans [{"from":"quiero a ordenar","to":"quiero ordenar"}], why_en "After *quiero* the verb comes straight away, with no *a*: *quiero ordenar*.", unnatural true, better "Quiero pedir la comida.", better_en "I want to order the food.".
+Line: "¿Puedo tener un café?" → has_error false, verdict "correct", severity "none", corrected "¿Puedo tener un café?", spans [], why_en "", unnatural true, better "¿Me das un café?", better_en "Can I get a coffee?".
+Line: "Sí, también me gusta nadar en la piscina" → has_error false, verdict "note", severity "none", corrected "Sí, también me gusta nadar en la piscina", spans [], why_en "", unnatural false, better "Sí, también me gusta nadar en la pileta.", better_en "Yes, I also like swimming in the pool.".
+Line: "Can I pay by card?" → has_error false, verdict "note", severity "none", corrected "Can I pay by card?", spans [], why_en "", unnatural false, better "¿Puedo pagar con tarjeta?", better_en "Can I pay by card?".
+Line: "Eh… sí, este, me gusta mucho" → has_error false, verdict "correct", severity "none", corrected "Eh… sí, este, me gusta mucho", spans [], why_en "", unnatural false, better "", better_en "".
+Line: "Soy de Canadá" → has_error false, verdict "correct", severity "none", corrected "Soy de Canadá", spans [], why_en "", unnatural false, better "", better_en "".
+Line: "Yo la que mesa por si tan" → has_error false, verdict "unclear", severity "none", corrected "Yo la que mesa por si tan", spans [], why_en "", unnatural false, better "", better_en "".
 
-Keep "corrected" faithful: never rewrite a correct line into a nicer one there — that is what "better" is for. When a line has several errors, fix all of them in "corrected" and list each span, but explain only the most serious one in "why_en".`;
+Keep "corrected" faithful: never rewrite a correct line into a nicer one there. When a line has several errors, fix all of them in "corrected" and list each span, but explain only the most serious one in "why_en".`;
 
 export const FEEDBACK_SCHEMA = {
   type: "object",
   additionalProperties: false,
-  required: ["has_error", "verdict", "severity", "corrected", "spans", "why_en", "better", "better_en"],
+  required: ["has_error", "verdict", "severity", "corrected", "spans", "why_en", "unnatural", "better", "better_en"],
   properties: {
     has_error: { type: "boolean" },
     // Right after has_error: the two together are the early verdict (earlyVerdict).
@@ -191,6 +195,8 @@ export const FEEDBACK_SCHEMA = {
       },
     },
     why_en: { type: "string" },
+    // Before better: the judgement is made first, the phrasing written only if it holds.
+    unnatural: { type: "boolean" },
     better: { type: "string" },
     better_en: { type: "string" },
   },
@@ -206,6 +212,9 @@ export type Feedback = {
   corrected: string;
   spans: { from: string; to: string }[];
   why_en: string;
+  /** Her line sounds clearly foreign in Argentina and `better` is much more natural. */
+  unnatural?: boolean;
+  /** The Argentine way to say it: a note's content, or shown under the correction when `unnatural`. Empty otherwise. */
   better: string;
   better_en: string;
 };

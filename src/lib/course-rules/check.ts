@@ -4,7 +4,7 @@
 
 import type { FormFeatures } from '../types';
 import { generateVariants, uncoveredTokens } from './accept';
-import { CHE_GREETINGS, CLITIC_LEMMAS, REGIONAL, REGIONAL_PHRASES, SENSES, TUTEO, TUTEO_AMBIGUOUS, bare, fold, registerRank } from './rules';
+import { CLITIC_LEMMAS, REGIONAL, REGIONAL_PHRASES, SENSES, TUTEO, TUTEO_AMBIGUOUS, bare, fold, registerRank } from './rules';
 import { clausesOf, wordsIn } from './shape';
 import { type Token, buildIndex, split, tokenize } from './tokenize';
 import { type VocabForm, type VocabUnit, type Vocabulary, drillable } from './vocabulary';
@@ -41,8 +41,8 @@ export function compoundPast(es: string) {
 
 /**
  * `che` opens what you say. It is "hey", not the English "man": *Che, mal.*,
- * not *Mal, che.* Straight after a bare greeting is the one exception, because
- * "Hola, che." is a single gesture rather than a tag on the end of a sentence.
+ * not *Mal, che.*, and not *Hola, che.* or *Chau, che.* either — it calls
+ * someone ("Che, Tomás, ¿querés mate?"), it doesn't close a greeting.
  * Checked per clause, so "Hola. Che, ¿todo bien?" is fine.
  */
 export function chePlacement(es: string) {
@@ -51,12 +51,10 @@ export function chePlacement(es: string) {
     const words = wordsIn(clause).map((w) => fold(split(w).core));
     words.forEach((w, i) => {
       if (w !== 'che') return;
-      const afterGreeting =
-        (i === 1 && CHE_GREETINGS.has(words[0])) || (i === 2 && CHE_GREETINGS.has(`${words[0]} ${words[1]}`));
-      if (i === 0 || afterGreeting) return;
+      if (i === 0) return;
       problems.push(
         `"${clause}" — "che" goes in front, where English puts "hey": "Che, mal.", not "Mal, che.". ` +
-          `Only a bare greeting may come before it ("Hola, che."); anywhere else it reads as the English "man" tacked on the end.`,
+          `It calls someone ("Che, Juan, ¿un mate?"); it doesn't close a greeting ("Hola, che.").`,
       );
     });
   }

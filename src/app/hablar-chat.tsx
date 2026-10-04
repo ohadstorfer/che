@@ -23,7 +23,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import {
   Diff,
-  DiloButton,
   type IconName,
   MicButton,
   Sheet,
@@ -192,7 +191,6 @@ export default function HablarChat() {
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
 
   const [sheet, setSheet] = useState<
-    | { kind: 'better'; key: string }
     | { kind: 'message'; key: string }
     | { kind: 'end' }
     | null
@@ -827,7 +825,6 @@ export default function HablarChat() {
   const playMsg = useStable((m: PanchoMsg, slow: boolean) => void onPlay(m, slow));
   const translateMsg = useStable((m: PanchoMsg) => void onTranslate(m));
   const openMessage = useStable((key: string) => setSheet({ kind: 'message', key }));
-  const openBetter = useStable((key: string) => setSheet({ kind: 'better', key }));
 
   // --- derived ----------------------------------------------------------------------
   const sheetMsg = sheet && 'key' in sheet ? (messages.find((m) => m.key === sheet.key) as Msg | undefined) : undefined;
@@ -933,7 +930,7 @@ export default function HablarChat() {
               />
             )
           ) : (
-            <UserRow key={m.key} m={m} onCopy={openMessage} onBetter={openBetter} />
+            <UserRow key={m.key} m={m} onCopy={openMessage} />
           ),
         )}
 
@@ -1171,25 +1168,6 @@ export default function HablarChat() {
 
       </KeyboardAvoidingView>
 
-      {/* 🪄 better phrasing */}
-      <Sheet open={sheet?.kind === 'better'} onClose={() => setSheet(null)} title="A more natural way">
-        {sheetMsg?.role === 'user' ? (
-          sheetMsg.pending ? (
-            <Text style={styles.sheetBody}>Thinking of a better way to say it…</Text>
-          ) : sheetMsg.feedback?.better ? (
-            <>
-              <Text style={styles.sheetBig}>{sheetMsg.feedback.better}</Text>
-              {sheetMsg.feedback.better_en ? (
-                <Text style={styles.sheetBody}>{sheetMsg.feedback.better_en}</Text>
-              ) : null}
-              <DiloButton key={sheetMsg.key} sessionId={sessionId} target={sheetMsg.feedback.better} />
-            </>
-          ) : (
-            <Text style={styles.sheetBody}>Nothing to add. That already sounds natural.</Text>
-          )
-        ) : null}
-      </Sheet>
-
       {/* long-press on her message */}
       <Sheet open={sheet?.kind === 'message'} onClose={() => setSheet(null)}>
         {sheetMsg ? (
@@ -1304,11 +1282,9 @@ const PanchoRow = memo(function PanchoRow({
 const UserRow = memo(function UserRow({
   m,
   onCopy,
-  onBetter,
 }: {
   m: UserMsg;
   onCopy: (key: string) => void;
-  onBetter: (key: string) => void;
 }) {
   const fb = m.feedback;
   return (
@@ -1325,11 +1301,6 @@ const UserRow = memo(function UserRow({
         ) : fb ? (
           <Appear>
             <Correction said={m.text} feedback={fb} />
-          </Appear>
-        ) : null}
-        {!m.pending && fb?.better ? (
-          <Appear>
-            <Chip tone="local" icon="creation" label="Like a local" onPress={() => onBetter(m.key)} />
           </Appear>
         ) : null}
       </View>
@@ -1400,6 +1371,10 @@ function Tool({
  * struck through and filled in, and why — or a quiet tick when it was right.
  * A line that is no mistake but not right either (an English word, a tú form)
  * gets the way to say it instead of the tick; a garbled one gets nothing.
+ *
+ * When her line would sound foreign in Argentina — and only then; the server
+ * decides, strictly — the Argentine way to say it sits in the same card, under
+ * a line.
  */
 function Correction({ said, feedback }: { said: string; feedback: Feedback }) {
   const verdict = verdictOf(feedback);
@@ -1413,54 +1388,40 @@ function Correction({ said, feedback }: { said: string; feedback: Feedback }) {
       </View>
     );
   }
+  const tick = (
+    <View style={styles.correct} accessibilityLabel="Correct">
+      <MaterialCommunityIcons name="check-bold" size={14} color={colors.success} />
+      <Text style={styles.correctText}>Correct</Text>
+    </View>
+  );
   if (verdict === 'correct') {
+    if (!feedback.better) return tick;
     return (
-      <View style={styles.correct} accessibilityLabel="Correct">
-        <MaterialCommunityIcons name="check-bold" size={14} color={colors.success} />
-        <Text style={styles.correctText}>Correct</Text>
+      <View style={[styles.correction, styles.correctionPlain]}>
+        <View style={{ marginHorizontal: -4 }}>{tick}</View>
+        <Local feedback={feedback} />
       </View>
     );
   }
   return (
     <View style={styles.correction} accessibilityLabel={`Correction: ${feedback.corrected}`}>
-      <Diff parts={wordDiff(said, feedback.corrected)} size={16} />
+      <Diff parts={wordDiff(said, feedback.corrected)} size={17} />
       {feedback.why_en ? <Text style={styles.correctionWhy}>{feedback.why_en}</Text> : null}
+      {feedback.better ? <Local feedback={feedback} /> : null}
     </View>
   );
 }
 
-/** Labeled chip under her message: the local way to say it. */
-function Chip({
-  tone,
-  icon,
-  label,
-  onPress,
-}: {
-  tone: 'ok' | 'fix' | 'local';
-  icon?: IconName;
-  label: string;
-  onPress: () => void;
-}) {
-  const fg = tone === 'ok' ? colors.success : tone === 'fix' ? colors.dangerInk : colors.accent;
+/** Under the line in the correction card: the Argentine way to say it. Arrives with the full feedback, so it fades in. */
+function Local({ feedback }: { feedback: Feedback }) {
   return (
-    <Pressable
-      onPress={onPress}
-      hitSlop={4}
-      accessibilityRole="button"
-      accessibilityLabel={label}
-      style={({ pressed }) => [
-        styles.chip,
-        tone === 'fix' && { backgroundColor: colors.dangerSoft },
-        { transform: [{ scale: pressed ? press.scale : 1 }] },
-        webPress,
-      ]}>
-      {tone === 'fix' ? (
-        <View style={styles.chipDot} />
-      ) : icon ? (
-        <MaterialCommunityIcons name={icon} size={15} color={fg} />
-      ) : null}
-      <Text style={[styles.chipText, { color: fg }]}>{label}</Text>
-    </Pressable>
+    <Appear>
+      <View style={styles.local} accessibilityLabel={`A more Argentine way to say it: ${feedback.better}`}>
+        <Text style={styles.localLabel}>A more Argentine way to say it:</Text>
+        <Text style={styles.localText}>{feedback.better}</Text>
+        {feedback.better_en ? <Text style={styles.correctionWhy}>{feedback.better_en}</Text> : null}
+      </View>
+    </Appear>
   );
 }
 
@@ -1661,11 +1622,11 @@ const styles = StyleSheet.create({
     boxShadow: clay.surface,
   },
   tomasBubbleTools: { paddingBottom: 4 },
-  tomasText: { ...font.body[600], fontSize: 17, lineHeight: 24, color: colors.ink },
+  tomasText: { ...font.body[600], fontSize: 19, lineHeight: 27, color: colors.ink },
   english: {
     ...font.body[500],
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 15,
+    lineHeight: 21,
     color: colors.muted,
     fontStyle: 'italic',
   },
@@ -1719,23 +1680,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.dangerSoft,
   },
   correctionWhy: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.muted },
-  chip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    height: 38,
-    paddingHorizontal: 13,
-    borderRadius: radius.pill,
-    backgroundColor: colors.card,
-    boxShadow: clay.surface,
+  /** A correct line that still gets the Argentine way: the card without the red. */
+  correctionPlain: { backgroundColor: colors.card, boxShadow: clay.surface },
+  local: {
+    gap: 3,
+    marginTop: 4,
+    paddingTop: 9,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: colors.border,
   },
-  chipDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: colors.danger,
-  },
-  chipText: { ...font.body[800], fontSize: 14 },
+  localLabel: { ...font.body[700], fontSize: 12, lineHeight: 16, color: colors.muted },
+  localText: { ...font.body[700], fontSize: 17, lineHeight: 24, color: colors.ink },
   listening: {
     height: 46,
     paddingHorizontal: 18,
@@ -1747,7 +1702,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     backgroundColor: colors.card,
   },
-  userText: { ...font.body[600], fontSize: 17, lineHeight: 24, color: colors.onPrimary },
+  userText: { ...font.body[600], fontSize: 19, lineHeight: 27, color: colors.onPrimary },
 
   draftLabel: {
     ...font.body[800],
@@ -1764,7 +1719,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     backgroundColor: colors.card,
   },
-  draftText: { ...font.body[600], fontSize: 17, lineHeight: 24, color: colors.ink },
+  draftText: { ...font.body[600], fontSize: 19, lineHeight: 27, color: colors.ink },
   draftActions: { flexDirection: 'row', gap: 8 },
   redo: {
     flexDirection: 'row',

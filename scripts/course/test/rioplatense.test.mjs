@@ -18,16 +18,12 @@ const problems = (slug, target, es, en) =>
 test('che opens what you say', () => {
   assert.deepEqual(chePlacement('Che, ¿todo bien?'), []);
   assert.deepEqual(chePlacement('Che, Lucía, ¿vos sos de acá?'), []);
-  // A bare greeting is the one thing that may come first: the two are one breath.
-  assert.deepEqual(chePlacement('Hola, che.'), []);
-  assert.deepEqual(chePlacement('Chau, che.'), []);
-  assert.deepEqual(chePlacement('Buenas tardes, che.'), []);
   // Per clause, so a greeting and then a question is fine.
   assert.deepEqual(chePlacement('Hola. Che, ¿todo bien?'), []);
 });
 
 test('che is never the English "man" on the end', () => {
-  for (const es of ['Mal, che.', 'Bien, che.', 'Bueno, chau, che.', 'Bueno, che, chau.', '¿Cómo te llamás, che?']) {
+  for (const es of ['Hola, che.', 'Chau, che.', 'Buenas tardes, che.', 'Mal, che.', 'Bien, che.', 'Bueno, chau, che.', 'Bueno, che, chau.', '¿Cómo te llamás, che?']) {
     assert.equal(chePlacement(es).length, 1, es);
     assert.match(chePlacement(es)[0], /goes in front/);
   }

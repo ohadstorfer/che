@@ -59,7 +59,7 @@ classes:
           - "Locking her front door"
           - "Already on the bus"
         correct: 0
-        explain: "**Ya salgo** always includes some extra time, and **llego en cinco** means fifteen. Nobody's lying: everyone knows how to read it."
+        explain: "**Ya salgo** always includes some extra time, and **llego en cinco**, I'll be there in five, means fifteen. Nobody's lying: everyone knows how to read it."
       - type: card
         text: "Plans live in the WhatsApp group, and the key phrase is **vamos viendo**: let's see. The plan is alive, but nothing's fixed until an hour before."
       - type: card
@@ -90,7 +90,7 @@ classes:
           - "The party already in full swing"
           - "Everyone leaving for the club"
         correct: 0
-        explain: "At nine most people haven't even had dinner. The previa gets going around eleven or midnight."
+        explain: "At nine most people haven't even had dinner. The previa, drinks at home before going out, gets going around eleven or midnight."
       - type: card
         text: "**La previa** is drinks at a friend's place before going out: cheaper, your own music, and you can hear each other. For plenty of people it's the best part. The boliche is just the excuse."
       - type: choice
@@ -100,7 +100,7 @@ classes:
           - "Cumbia"
           - "Reggaetón"
         correct: 0
-        explain: "Tango lives in the **milongas**, with their own crowd. The boliche runs on reggaetón, cumbia, electronic music and whatever everyone can shout along to."
+        explain: "Tango lives in the **milongas**, the tango dance halls, with their own crowd. The boliche runs on reggaetón, cumbia, electronic music and whatever everyone can shout along to."
       - type: card
         text: "And six a.m. isn't always the end. Some go on to an **after**, a party after the boliche closes. Everyone else heads for **café con medialunas** as the cafés open, then sleeps until lunch."
       - type: card
@@ -123,7 +123,7 @@ classes:
           - "To say you look too thin today"
           - "To warn you about a pickpocket"
         correct: 0
-        explain: "**Flaco** is how you call out to a guy you don't know, and **flaca** to a woman. **“¡Flaco, se te cayó esto!”** Hey, you dropped this. You'll also hear **jefe** and **maestro**."
+        explain: "**Flaco** is how you call out to a guy you don't know, and **flaca** to a woman. **“¡Flaco, se te cayó esto!”** Hey, you dropped this."
       - type: card
         chip: "Pro tip"
         text: "Younger people are more careful with body comments. Laugh off grandma's, but don't start making your own."
@@ -157,7 +157,7 @@ classes:
           - "Roast turkey with gravy"
           - "Baked ham with pineapple"
         correct: 0
-        explain: "**Vitel toné**, an Italian import, served cold: in this heat, most of the food is. Plus **pan dulce** (sweet bread with fruit), **turrón** (nougat) and **sidra** (sparkling cider). And yes, often an asado too."
+        explain: "**Vitel toné**, an Italian import, served cold: in this heat, most of the food is. Plus **pan dulce** (sweet bread with fruit), nougat and sparkling cider. And yes, often an asado too."
       - type: card
         text: "At midnight everyone stands for the **brindis**, the toast: **¡Salud!** and **¡Feliz Navidad!** Fireworks go off across the sky, though fewer each year: loud ones are now banned in many places."
       - type: choice
@@ -203,7 +203,7 @@ classes:
           - "Today, so you're first"
           - "Either day, it's fine"
         correct: 0
-        explain: "Wishing **feliz cumple** early brings **yeta**: bad luck. Even Pope Francis, a porteño, warned a crowd who greeted him early, before his 80th birthday."
+        explain: "Wishing **feliz cumple**, happy birthday, early brings **yeta**: bad luck. Even Pope Francis, from Buenos Aires, warned a crowd who greeted him early, before his 80th birthday."
       - type: card
         chip: "Pro tip"
         text: "Close friends often write right at midnight. Any time on the day is fine. Just not the day before."

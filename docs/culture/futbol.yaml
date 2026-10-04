@@ -35,7 +35,7 @@ classes:
           - "Across the city, 30 km"
           - "In different provinces"
         correct: 0
-        explain: "You can see one stadium from the other. That's the **clásico de Avellaneda**: living three blocks from the team you hate most."
+        explain: "You can see one stadium from the other. That's the **clásico de Avellaneda**, the Avellaneda derby: living three blocks from the team you hate most."
       - type: card
         text: "Golden rule: never wear one club's colors near the other's stadium. Especially on match day."
       - type: card

@@ -41,7 +41,7 @@ const CONTENT = {
   },
   'hola-che': {
     sentences: {
-      chau_che: { es: 'Chau, che.', en: 'Bye!', target: 'chau' },
+      chau_che: { es: 'Che, chau.', en: 'Bye!', target: 'chau' },
       que_onda: { es: '¿Qué onda?', en: "What's up?", target: 'qué onda' },
       dale_chau: { es: 'Dale, chau.', en: 'OK, bye.', target: 'dale' },
       bueno_chau: { es: 'Bueno, chau.', en: 'Well, bye.', target: 'bueno' },
@@ -95,7 +95,7 @@ const sentence = (es) => {
 const words = (text) => text.split(' ');
 
 test('a sentence build accepts what the English allows', () => {
-  assert.ok(sentenceAnswerMatches(['chau'], sentence('Chau, che.')), '"che" is optional');
+  assert.ok(sentenceAnswerMatches(['chau'], sentence('Che, chau.')), '"che" is optional');
   assert.ok(sentenceAnswerMatches(words('sos Juan'), sentence('¿Vos sos Juan?')), 'pronoun dropped');
   assert.ok(sentenceAnswerMatches(words('yo soy de acá'), sentence('Soy de acá.')), 'pronoun added');
   assert.ok(sentenceAnswerMatches(words('sos argentina'), sentence('¿Sos argentino?')), 'other gender');
@@ -113,8 +113,8 @@ test('a sentence build rejects real mistakes, however small', () => {
 });
 
 test('transcribing audio accepts only what was said', () => {
-  assert.ok(sentenceAnswerMatches(words('chau che'), sentence('Chau, che.'), { byEar: true }));
-  assert.ok(!sentenceAnswerMatches(['chau'], sentence('Chau, che.'), { byEar: true }));
+  assert.ok(sentenceAnswerMatches(words('che chau'), sentence('Che, chau.'), { byEar: true }));
+  assert.ok(!sentenceAnswerMatches(['chau'], sentence('Che, chau.'), { byEar: true }));
 });
 
 test('typing forgives typos, not other words', () => {

@@ -143,7 +143,7 @@ classes:
           - "Still buried in France"
           - "Under his monument in Mendoza"
         correct: 0
-        explain: "His remains came home. His tomb in the **Catedral** on Plaza de Mayo is guarded by **Granaderos** in old blue uniforms, the regiment he founded. The day he died, **17 de agosto**, is a feriado too."
+        explain: "His remains came home. His tomb in the **Catedral** on Plaza de Mayo is guarded by **Granaderos** in old blue uniforms, the regiment he founded. The day he died, **17 de agosto**, is a holiday too."
       - type: card
         chip: "Did you know?"
         text: "Every town has a San Martín street, square or statue, usually on horseback. If you're lost, head for the plaza: he's probably in the middle."

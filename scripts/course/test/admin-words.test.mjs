@@ -129,11 +129,11 @@ test('8. a missing opening ¿ or ¡ pauses it', () => {
 test('9. a word too informal for the unit pauses it', () => {
   const strict = structuredClone({ ...data, asked: undefined });
   strict.asked = new Map();
-  const unit = strict.units.find((u) => u.id === sentence(strict, 'Chau, che.').unit_id);
+  const unit = strict.units.find((u) => u.id === sentence(strict, 'Che, chau.').unit_id);
   unit.register_max = 'neutral';
-  const plan = planSentence(strict, sentence(strict, 'Chau, che.'), { es: 'Chau, che.' });
-  assert.ok(plan.problems.some((p) => p.includes('"che" is informal; this unit allows up to neutral')), plan.problems.join('\n'));
-  assert.deepEqual(planSentence(strict, { ...sentence(strict, 'Chau, che.'), ...plan.row }, { es: 'Chau.', en: 'Bye!' }).problems, []);
+  const plan = planSentence(strict, sentence(strict, 'Che, chau.'), { es: 'Che, chau.' });
+  assert.ok(plan.problems.some((p) => p.includes('"Che" is informal; this unit allows up to neutral')), plan.problems.join('\n'));
+  assert.deepEqual(planSentence(strict, { ...sentence(strict, 'Che, chau.'), ...plan.row }, { es: 'Chau.', en: 'Bye!' }).problems, []);
 });
 
 test('an untouched sentence writes nothing', () => {

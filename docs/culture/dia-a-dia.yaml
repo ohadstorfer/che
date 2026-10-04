@@ -93,7 +93,7 @@ classes:
           - "Stop every two hours"
           - "Keep the windows closed"
         correct: 0
-        explain: "Low lights on, day and night, on every **ruta**. A ruta is a road between towns; inside the city it's a **calle** or an **avenida**."
+        explain: "Low lights on, day and night, on every **ruta**. A ruta is a road between towns; inside the city it's a street or an avenue."
       - type: card
         text: "You don't fill the tank yourself. At the **estación de servicio** a worker does it. Gas for the car is **nafta**, and you say **“Llenalo, por favor”**: fill it up."
       - type: choice
@@ -103,7 +103,7 @@ classes:
           - "Fresh orange juice"
           - "Hot water for mate"
         correct: 2
-        explain: "For a small price, or free, it fills your termo with water at the right temperature. Every road trip stops for it."
+        explain: "For a small price, or free, it fills your thermos with water at the right temperature. Every road trip stops for it."
       - type: card
         text: "Park near a stadium or a concert and a man waves a cloth to guide you in. He is a **trapito**, and he expects a tip to “look after” your car."
       - type: card

@@ -102,7 +102,7 @@ classes:
           - "Career soldiers with years of training"
           - "Volunteers who signed up after the landing"
         correct: 0
-        explain: "Most were **conscriptos** of 18 to 20, barely out of school. Argentines call them **los chicos de la guerra**. They were sent to freezing trenches, often underfed and badly equipped."
+        explain: "Most were **conscriptos** of 18 to 20, barely out of school. Argentines call them **los chicos de la guerra**, the kids of the war. They were sent to freezing trenches, often underfed and badly equipped."
       - type: card
         text: "649 Argentines died. Almost half of them went down with one ship, the cruiser **General Belgrano**."
       - type: choice

@@ -70,7 +70,7 @@ classes:
           - "Bad: it's cheap, low-grade yerba"
           - "Bad: stems clog the bombilla"
         correct: 0
-        explain: "That's **yerba con palo**, the usual kind in Argentina: milder, and it lasts more rounds. **Sin palo**, just leaves, is stronger. First time? Buy con palo."
+        explain: "That's **yerba con palo** (with stems), the usual kind in Argentina: milder, and it lasts more rounds. **Sin palo**, just leaves, is stronger. First time? Buy con palo."
       - type: card
         chip: "Pro tip"
         text: "Pick your yerba brand carefully. People are fiercely loyal to theirs, and they'll happily tell you why yours is wrong."
@@ -133,7 +133,7 @@ classes:
           - "You get the next one first"
           - "The cebador changes the yerba"
         correct: 0
-        explain: "In a ronda, **gracias** means “I'm done”. Want more? Just hand it back, maybe with a **¡qué rico!**"
+        explain: "In a ronda, **gracias** means “I'm done”. Want more? Just hand it back, maybe with a **¡qué rico!**, so good!"
       - type: card
         text: "Don't hold the mate while you tell a long story. Everyone's waiting and the water's getting cold. Someone will say **“¡No es un micrófono!”**"
       - type: card
@@ -162,7 +162,7 @@ classes:
           - "The driver, at red lights"
           - "Whoever sits in the back"
         correct: 0
-        explain: "The co-pilot is the cebador. Keep them coming, and don't burn the driver."
+        explain: "The co-pilot is the cebador, the one who serves. Keep them coming, and don't burn the driver."
       - type: card
         text: "Mate goes everywhere: the office, university, the park, the beach. **Matear** is to drink mate together, and the **matera** is the bag that carries the kit."
       - type: choice
@@ -191,7 +191,7 @@ classes:
           - "Argentina"
           - "Paraguay"
         correct: 0
-        explain: "Uruguay, even more than Argentina. In Montevideo people carry the **termo bajo el brazo**, under the arm: to work, to the beach, along the rambla."
+        explain: "Uruguay, even more than Argentina. In Montevideo people carry the **termo bajo el brazo**, the thermos under the arm: to work, to the beach, along the waterfront."
       - type: card
         text: "The twist: Uruguay grows almost no yerba. Most of it comes from **Brazil**, ground fine, almost without stems. Stronger and more bitter."
       - type: card

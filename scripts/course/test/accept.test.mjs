@@ -95,7 +95,7 @@ test('the other gender for "I" and "we" in more places', () => {
 });
 
 test('an optional "che" can go, and its punctuation goes with it', () => {
-  assert.deepEqual(alts('hola-che', 'chau', 'Chau, che.', 'Bye!'), ['Chau.']);
+  assert.deepEqual(alts('hola-che', 'chau', 'Che, chau.', 'Bye!'), ['Chau.']);
 });
 
 test('an "un" the English has no "a" for can go', () => {

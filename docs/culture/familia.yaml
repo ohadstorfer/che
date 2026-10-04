@@ -83,15 +83,15 @@ classes:
       - type: card
         text: "Friends are a second family. Many people keep the same group from school for life: **los chicos del colegio**, still together at forty, fifty and sixty."
       - type: choice
-        prompt: "Many groups of friends have one fixed plan every week. What is it usually?"
+        prompt: "A group of friends from school, now forty years old. What do they do every Thursday night?"
         options:
-          - "A film at the cinema"
-          - "A dinner or a football game, always on the same day"
-          - "A walk in the park on Sunday morning"
+          - "Go to the cinema"
+          - "Have an asado together"
+          - "Walk in the park"
         correct: 1
-        explain: "**El asado de los jueves**, the Thursday asado. Or **fútbol 5**, with five players per team, on Tuesdays, then pizza. The day is fixed and nobody books anything else."
+        explain: "**El asado de los jueves**, the Thursday barbecue. Or **fútbol 5**, with five players per team, on Tuesdays, then pizza. The day is fixed and nobody books anything else."
       - type: card
-        text: "The verb is **juntarse**: to get together. **“¿Nos juntamos?”** needs no plan and no reason. And **“Caete a casa”** means: come over, any time."
+        text: "The verb is **juntarse**: to get together. **“¿Nos juntamos?”** needs no plan and no reason. And **“Caete por casa”** means: come over, any time."
       - type: card
         text: "Friends say **te quiero**, I love you, to each other. Men too, with a long hug. Nobody finds it strange."
       - type: choice
@@ -101,12 +101,12 @@ classes:
           - "“Te aviso”"
           - "“Te debo una”"
         correct: 0
-        explain: "**Bancar** a friend is to be with them when things go wrong. **“Te banco”**: I'm with you, whatever happens. It's the best thing a friend can say."
+        explain: "**Bancar** a friend is to be with them when things go wrong. **“Te banco”**: I'm with you, whatever happens. (Bancar can also mean to wait, or to put up with something.)"
       - type: card
         text: "When a friend moves abroad, there is a **despedida**: a goodbye party, usually an asado, with speeches and tears. Some people get three or four of them."
       - type: card
         chip: "Pro tip"
-        text: "To make friends, say yes to the first invitation, even if it starts at eleven at night. The second one comes much faster."
+        text: "Say yes to the first invitation, even if it starts at eleven at night. Soon someone adds you to the **grupo de WhatsApp**, and that's how you know you're one of them."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -115,21 +115,21 @@ classes:
     summary: "The steps of a couple, the message with no answer and the big Sunday test"
     pages:
       - type: card
-        text: "The steps: first you're **saliendo**, going out. Then you're **de novios**, an official couple. Then you **convivís**, you live together. Many couples never marry at all."
+        text: "The steps: first you're **saliendo**, going out. Then you're **de novios**, an official couple. Then comes **convivir**, living together. Many couples never marry at all."
       - type: card
         text: "Before all that there is the **casi algo**, the “almost something”: you see each other, you write every day, and nobody says what it is."
       - type: choice
-        prompt: "A friend is angry: **“¡Me clavó el visto!”** What did the other person do?"
+        prompt: "Your friend wrote to the boy she likes. He read the message at nine. It's midnight and there's no answer. What does she tell the group?"
         options:
-          - "Arrived an hour late to the date"
-          - "Read the message and didn't answer"
-          - "Told everyone about them"
+          - "“¡Me cayó bien!”"
+          - "“¡Me clavó el visto!”"
+          - "“¡Me re sirve!”"
         correct: 1
-        explain: "**El visto** is the mark that shows a message was seen. **Clavar el visto** is to see it and say nothing. Friends will study it with you for hours."
+        explain: "**El visto** is the mark that shows a message was seen. **Clavar el visto** is to see it and say nothing. Her friends will study it with her for hours."
       - type: card
         text: "The real test is the family. When your partner invites you to Sunday lunch with parents, grandparents and cousins, it's serious. Everyone will ask you questions."
       - type: card
-        text: "**Novio** and **novia** have no age limit: a woman of sixty can introduce her **novio**. And couples kiss in the street, the park and the bus. Nobody looks."
+        text: "**Novio** and **novia** have no age limit: a woman of sixty can introduce her **novio**. A neutral word for any partner is **pareja**."
       - type: choice
         prompt: "In 2010 Argentina became the first country in Latin America to do something. What?"
         options:
@@ -137,12 +137,11 @@ classes:
           - "Make divorce legal"
           - "Give fathers a month off for a new baby"
         correct: 0
-        explain: "The law is called **matrimonio igualitario**, equal marriage. It was a fast change: divorce had only been legal since 1987."
+        explain: "The law is called **matrimonio igualitario**, equal marriage. It was a fast change: the divorce law is only from 1987."
       - type: card
         text: "Young couples celebrate every month together, not only every year: **“Cumplimos seis meses.”** We've been together six months."
       - type: card
-        chip: "Pro tip"
-        text: "**“¿Estás saliendo con alguien?”** Are you seeing someone? It's a normal question from a new friend, an aunt or the person cutting your hair."
+        text: "Many people live with their parents until almost thirty. So couples go to a **telo**, a hotel with rooms by the hour. It's normal, and nobody is embarrassed."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -159,7 +158,7 @@ classes:
           - "Around two in the morning"
           - "Around five or six in the morning"
         correct: 2
-        explain: "A party that ends at two is a bad party. Grandparents stay until four. The last thing served is breakfast: coffee and medialunas."
+        explain: "A party that ends at two is a bad party. Grandparents stay until four. The last thing served is breakfast: coffee and medialunas, small sweet croissants."
       - type: card
         text: "Dinner comes in parts, and between them everyone gets up to dance. Each block of dancing is a **tanda**. So you eat, dance, eat, dance."
       - type: card

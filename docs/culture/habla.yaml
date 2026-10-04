@@ -55,7 +55,7 @@ classes:
           - "Grandma buzzes “zho”, the girl says “sho”"
           - "Grandma says “yo”, just like in Madrid"
         correct: 1
-        explain: "The older sound is a buzzing **zh**, like the s in *measure*. Younger porteños, led by women, pushed it to a crisp **sh**. Both are 100% porteño."
+        explain: "The older sound is a buzzing **zh**, like the s in *measure*. Younger porteños (people from Buenos Aires), led by women, pushed it to a crisp **sh**. Both are 100% porteño."
       - type: card
         text: "The sh isn't only Argentine, it's **rioplatense**: Montevideo says it too. And not all of Argentina does. Much of the interior, like Córdoba, Cuyo, the north and the northeast, keeps a softer y."
       - type: choice

@@ -56,7 +56,7 @@ classes:
           - "Bricks"
           - "Stones"
         correct: 0
-        explain: "**Más pesado que collar de melones.** **Pesado** is heavy, and also a pain. Picture wearing melons around your neck all night. Some say **sandías**, watermelons."
+        explain: "**Más pesado que collar de melones.** **Pesado** is heavy, and also a pain. Picture wearing melons around your neck all night."
       - type: card
         text: "Fake stuff is **trucho**. And nothing's faker than a bill that doesn't exist: **más trucho que billete de tres pesos**. That street-stall “original” Messi shirt? Exactly that."
       - type: card

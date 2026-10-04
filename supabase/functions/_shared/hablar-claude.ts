@@ -102,6 +102,13 @@ export function earlyVerdict(
   }
 }
 
+/** The same words, whatever the accents, capitals and punctuation — all of which the transcript decides, not her. */
+export function sameWords(a: string, b: string): boolean {
+  const key = (t: string) =>
+    t.normalize("NFD").replace(/\p{M}/gu, "").toLocaleLowerCase("es").replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  return key(a) === key(b);
+}
+
 /** Plain text, short, no thinking — the guard's rewrite. */
 export async function plain(
   client: Anthropic,

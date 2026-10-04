@@ -161,7 +161,7 @@ classes:
           - "Architects"
           - "Tango teachers"
         correct: 0
-        explain: "**Hacer terapia** is no secret here. **“Lo hablo con mi psicóloga”** is a normal thing to say at dinner."
+        explain: "Going to therapy is no secret here. **“Lo hablo con mi psicóloga”** (I'll talk about it with my psychologist) is a normal thing to say at dinner."
       - type: card
         text: "In Palermo or Recoleta you'll meet a **paseaperros**, a dog walker, dragged along by a whole pack of dogs at once. The pack gets the sidewalk."
       - type: card
@@ -206,7 +206,7 @@ classes:
           - "No, each rider needs their own card"
           - "Only if the driver knows them"
         correct: 0
-        explain: "Tell the driver **“Tres, hasta Plaza Italia”** and tap once for each person. Just check you have enough saldo first."
+        explain: "Tell the driver **“Tres, hasta Plaza Italia”** (three, to Plaza Italia) and tap once for each person. Just check you have enough saldo first."
       - type: card
         text: "Every subte turnstile also takes a contactless bank card or a phone, and more bus lines add this all the time. Not every bus has it yet, so the SUBE is still the safe choice."
       - type: card
@@ -238,7 +238,7 @@ classes:
           - "The nickname your friends call you"
           - "The password for your phone"
         correct: 0
-        explain: "An **alias** is a few easy words that stand for an account. With it she can send you the money in seconds: **“Te transfiero.”**"
+        explain: "An **alias** is a few easy words that stand for an account. With it she can send you the money in seconds: **“Te transfiero.”** I'll transfer it to you."
       - type: card
         text: "Paying by **transferencia**, a bank transfer, is normal even in tiny shops. You send the money, show your screen, and the seller checks it arrived. It needs an Argentine account, so visitors mostly use a card or cash."
       - type: card

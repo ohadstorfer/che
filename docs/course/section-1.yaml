@@ -216,19 +216,19 @@ units:
   - ordinal: 3
     slug: "hola-che"
     title: "Greet people"
-    summary: "Hola, che"
+    summary: "Che, ¿todo bien?"
     grammar:
       - "saludos"
       - "ser.pres.1sg"
     register_max: "informal"
     sample:
-      es: "Hola, che. Todo bien."
-      en: "Hi there. All good."
+      es: "Che, ¿todo bien?"
+      en: "Hey, all good?"
     tips:
       - title: "Che"
         body: "**Che** is how people in Buenos Aires get someone's attention — like \"hey\": *Che, ¿todo
-          bien?* It can also close a greeting: *Hola, che.* It's friendly and casual — not for
-          formal moments."
+          bien?* It comes first, often with a name: *Che, Juan, ¿un mate?* It's friendly and
+          casual — not for formal moments."
       - title: "Soy"
         body: "To say who you are, use **soy**: *Soy Sofi.* One word carries \"I am\". The word for \"I\"
           (**yo**) is usually left out; add it only to stress or contrast: *Yo soy Martín.*"

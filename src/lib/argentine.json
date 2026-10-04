@@ -227,10 +227,10 @@
      "en": "what's up",
      "note": "Casual greeting, or \"¿qué onda con...?\" to ask what's going on with something. Informal.",
      "example": {
-      "es": "¿Qué onda, che? ¿Salimos esta noche?",
-      "en": "What's up? Are we going out tonight?"
+      "es": "Che, ¿qué onda? ¿Salimos esta noche?",
+      "en": "Hey, what's up? Are we going out tonight?"
      },
-     "gap": "Qué onda",
+     "gap": "qué onda",
      "level": 1
     },
     {
@@ -268,7 +268,7 @@
      "en": "all good",
      "note": "\"¿Todo bien?\" is a standard greeting; \"todo bien\" also means no problem or it's fine.",
      "example": {
-      "es": "Hola, che, ¿todo bien? Hace mil que no te veo.",
+      "es": "Che, ¿todo bien? Hace mil que no te veo.",
       "en": "Hey, all good? I haven't seen you in ages."
      },
      "gap": "todo bien",

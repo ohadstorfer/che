@@ -88,7 +88,7 @@ classes:
           - "A note saying they owe you"
           - "A bus token"
         correct: 0
-        explain: "During years of coin shortages, **caramelos** became the unofficial small change. Today coins are almost gone, and most people pay with a QR code or a card."
+        explain: "During years of coin shortages, **caramelos**, candies, became the unofficial small change. Today coins are almost gone, and most people pay with a QR code or a card."
       - type: card
         text: "Late at night, many kioscos serve through a small window or a grille, **la reja**. Ask, pay, done."
       - type: card

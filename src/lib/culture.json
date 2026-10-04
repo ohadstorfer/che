@@ -83,7 +83,7 @@
         "Already on the bus"
        ],
        "correct": 0,
-       "explain": "**Ya salgo** always includes some extra time, and **llego en cinco** means fifteen. Nobody's lying: everyone knows how to read it."
+       "explain": "**Ya salgo** always includes some extra time, and **llego en cinco**, I'll be there in five, means fifteen. Nobody's lying: everyone knows how to read it."
       },
       {
        "type": "card",
@@ -129,7 +129,7 @@
         "Everyone leaving for the club"
        ],
        "correct": 0,
-       "explain": "At nine most people haven't even had dinner. The previa gets going around eleven or midnight."
+       "explain": "At nine most people haven't even had dinner. The previa, drinks at home before going out, gets going around eleven or midnight."
       },
       {
        "type": "card",
@@ -144,7 +144,7 @@
         "Reggaetón"
        ],
        "correct": 0,
-       "explain": "Tango lives in the **milongas**, with their own crowd. The boliche runs on reggaetón, cumbia, electronic music and whatever everyone can shout along to."
+       "explain": "Tango lives in the **milongas**, the tango dance halls, with their own crowd. The boliche runs on reggaetón, cumbia, electronic music and whatever everyone can shout along to."
       },
       {
        "type": "card",
@@ -179,7 +179,7 @@
         "To warn you about a pickpocket"
        ],
        "correct": 0,
-       "explain": "**Flaco** is how you call out to a guy you don't know, and **flaca** to a woman. **“¡Flaco, se te cayó esto!”** Hey, you dropped this. You'll also hear **jefe** and **maestro**."
+       "explain": "**Flaco** is how you call out to a guy you don't know, and **flaca** to a woman. **“¡Flaco, se te cayó esto!”** Hey, you dropped this."
       },
       {
        "type": "card",
@@ -230,7 +230,7 @@
         "Baked ham with pineapple"
        ],
        "correct": 0,
-       "explain": "**Vitel toné**, an Italian import, served cold: in this heat, most of the food is. Plus **pan dulce** (sweet bread with fruit), **turrón** (nougat) and **sidra** (sparkling cider). And yes, often an asado too."
+       "explain": "**Vitel toné**, an Italian import, served cold: in this heat, most of the food is. Plus **pan dulce** (sweet bread with fruit), nougat and sparkling cider. And yes, often an asado too."
       },
       {
        "type": "card",
@@ -300,7 +300,7 @@
         "Either day, it's fine"
        ],
        "correct": 0,
-       "explain": "Wishing **feliz cumple** early brings **yeta**: bad luck. Even Pope Francis, a porteño, warned a crowd who greeted him early, before his 80th birthday."
+       "explain": "Wishing **feliz cumple**, happy birthday, early brings **yeta**: bad luck. Even Pope Francis, from Buenos Aires, warned a crowd who greeted him early, before his 80th birthday."
       },
       {
        "type": "card",
@@ -616,7 +616,7 @@
         "Tango teachers"
        ],
        "correct": 0,
-       "explain": "**Hacer terapia** is no secret here. **“Lo hablo con mi psicóloga”** is a normal thing to say at dinner."
+       "explain": "Going to therapy is no secret here. **“Lo hablo con mi psicóloga”** (I'll talk about it with my psychologist) is a normal thing to say at dinner."
       },
       {
        "type": "card",
@@ -685,7 +685,7 @@
         "Only if the driver knows them"
        ],
        "correct": 0,
-       "explain": "Tell the driver **“Tres, hasta Plaza Italia”** and tap once for each person. Just check you have enough saldo first."
+       "explain": "Tell the driver **“Tres, hasta Plaza Italia”** (three, to Plaza Italia) and tap once for each person. Just check you have enough saldo first."
       },
       {
        "type": "card",
@@ -732,7 +732,7 @@
         "The password for your phone"
        ],
        "correct": 0,
-       "explain": "An **alias** is a few easy words that stand for an account. With it she can send you the money in seconds: **“Te transfiero.”**"
+       "explain": "An **alias** is a few easy words that stand for an account. With it she can send you the money in seconds: **“Te transfiero.”** I'll transfer it to you."
       },
       {
        "type": "card",
@@ -979,7 +979,7 @@
         "Grandma says “yo”, just like in Madrid"
        ],
        "correct": 1,
-       "explain": "The older sound is a buzzing **zh**, like the s in *measure*. Younger porteños, led by women, pushed it to a crisp **sh**. Both are 100% porteño."
+       "explain": "The older sound is a buzzing **zh**, like the s in *measure*. Younger porteños (people from Buenos Aires), led by women, pushed it to a crisp **sh**. Both are 100% porteño."
       },
       {
        "type": "card",
@@ -1225,7 +1225,7 @@
         "A quick drink before dinner"
        ],
        "correct": 0,
-       "explain": "It's an invitation to the merienda: mate, something sweet, and time to talk. The verb is **merendar**: **“¿Merendamos?”** Some older people say **tomar el té**, even with no tea on the table."
+       "explain": "It's an invitation to the merienda: mate, something sweet, and time to talk. The verb is **merendar**: **“¿Merendamos?”** (shall we have a merienda?)"
       },
       {
        "type": "card",
@@ -1240,7 +1240,7 @@
         "He's waiting for you to order a coffee first"
        ],
        "correct": 0,
-       "explain": "The table is yours until you ask: **“¿Me traés la cuenta?”** Or catch the **mozo**'s eye and pretend to write in the air."
+       "explain": "The table is yours until you ask: **“¿Me traés la cuenta?”** (can you bring me the bill?) Or catch the waiter's eye and pretend to write in the air."
       },
       {
        "type": "card",
@@ -1369,7 +1369,7 @@
         "Buy a pizza to eat in the theater"
        ],
        "correct": 0,
-       "explain": "Eating **de parado** at the counter, a **porción** in your hand, is a classic. Faster, cheaper, and honestly more fun."
+       "explain": "Eating **de parado**, standing up, at the counter, a **porción** in your hand, is a classic. Faster, cheaper, and honestly more fun."
       }
      ],
      "vocabulary": []
@@ -1656,7 +1656,7 @@
         "A bus token"
        ],
        "correct": 0,
-       "explain": "During years of coin shortages, **caramelos** became the unofficial small change. Today coins are almost gone, and most people pay with a QR code or a card."
+       "explain": "During years of coin shortages, **caramelos**, candies, became the unofficial small change. Today coins are almost gone, and most people pay with a QR code or a card."
       },
       {
        "type": "card",
@@ -1901,7 +1901,7 @@
         "Bad: stems clog the bombilla"
        ],
        "correct": 0,
-       "explain": "That's **yerba con palo**, the usual kind in Argentina: milder, and it lasts more rounds. **Sin palo**, just leaves, is stronger. First time? Buy con palo."
+       "explain": "That's **yerba con palo** (with stems), the usual kind in Argentina: milder, and it lasts more rounds. **Sin palo**, just leaves, is stronger. First time? Buy con palo."
       },
       {
        "type": "card",
@@ -1994,7 +1994,7 @@
         "The cebador changes the yerba"
        ],
        "correct": 0,
-       "explain": "In a ronda, **gracias** means “I'm done”. Want more? Just hand it back, maybe with a **¡qué rico!**"
+       "explain": "In a ronda, **gracias** means “I'm done”. Want more? Just hand it back, maybe with a **¡qué rico!**, so good!"
       },
       {
        "type": "card",
@@ -2039,7 +2039,7 @@
         "Whoever sits in the back"
        ],
        "correct": 0,
-       "explain": "The co-pilot is the cebador. Keep them coming, and don't burn the driver."
+       "explain": "The co-pilot is the cebador, the one who serves. Keep them coming, and don't burn the driver."
       },
       {
        "type": "card",
@@ -2081,7 +2081,7 @@
         "Paraguay"
        ],
        "correct": 0,
-       "explain": "Uruguay, even more than Argentina. In Montevideo people carry the **termo bajo el brazo**, under the arm: to work, to the beach, along the rambla."
+       "explain": "Uruguay, even more than Argentina. In Montevideo people carry the **termo bajo el brazo**, the thermos under the arm: to work, to the beach, along the waterfront."
       },
       {
        "type": "card",
@@ -2136,7 +2136,7 @@
         "Around dinner time"
        ],
        "correct": 1,
-       "explain": "The fire is slow, and so is everything else. Have a drink by the grill and eat when the asador says so."
+       "explain": "The fire is slow, and so is everything else. Have a drink by the grill and eat when the asador, the grill cook, says so."
       },
       {
        "type": "card",
@@ -2337,7 +2337,7 @@
         "The host's parents, out of respect"
        ],
        "correct": 0,
-       "explain": "Hang out by the grill and the asador will pass you a slice of chorizo or molleja on bread, straight off the fire. Stay close and you get to taste first."
+       "explain": "Hang out by the grill and the asador will pass you a slice of chorizo or molleja (sweetbread) on bread, straight off the fire. Stay close and you get to taste first."
       },
       {
        "type": "card",
@@ -2391,7 +2391,7 @@
         "Right at noon"
        ],
        "correct": 0,
-       "explain": "Twelve hours or more over the embers means starting the night before and taking turns. Someone always brings a guitar and a termo."
+       "explain": "Twelve hours or more over the embers means starting the night before and taking turns. Someone always brings a guitar and a thermos."
       },
       {
        "type": "card",
@@ -2469,7 +2469,7 @@
         "In different provinces"
        ],
        "correct": 0,
-       "explain": "You can see one stadium from the other. That's the **clásico de Avellaneda**: living three blocks from the team you hate most."
+       "explain": "You can see one stadium from the other. That's the **clásico de Avellaneda**, the Avellaneda derby: living three blocks from the team you hate most."
       },
       {
        "type": "card",
@@ -2810,6 +2810,317 @@
    ]
   },
   {
+   "slug": "asi-somos",
+   "title": "How Argentines are",
+   "emoji": "🇦🇷",
+   "summary": "The ego, the drama and the complaints, as Argentines tell it themselves",
+   "classes": [
+    {
+     "slug": "el-ego",
+     "title": "The famous ego",
+     "summary": "The joke all of Latin America tells, and Argentines tell first",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Ask anyone in Latin America about Argentines and you'll hear one word: **ego**. Argentines, people say, think they are the best. Argentines know the jokes, and tell them first."
+      },
+      {
+       "type": "choice",
+       "prompt": "A joke from the rest of Latin America starts: “What is the ego?” How does it end?",
+       "options": [
+        "“The little Argentine we all have inside”",
+        "“The only thing Argentina sells abroad”",
+        "“A small country south of Brazil”"
+       ],
+       "correct": 0,
+       "explain": "**“El pequeño argentino que todos llevamos dentro.”** Another one: in a storm, an Argentine looks up at the lightning and smiles. He thinks God is taking his photo."
+      },
+      {
+       "type": "card",
+       "text": "The proof they give, as a joke: the Pope was Argentine, Messi and Maradona are Argentine, even the queen of the Netherlands is Argentine. So, they say, **Dios es argentino**."
+      },
+      {
+       "type": "card",
+       "text": "In the provinces, people say the ego lives in Buenos Aires. Their word for it is **agrandado**. The cure is a friend who says **“bajá un cambio”**: calm down."
+      },
+      {
+       "type": "choice",
+       "prompt": "Argentines say they have the best meat, the best fans and the best ice cream in the world. And when the news is bad, like prices going up fast?",
+       "options": [
+        "“It's the same in every country”",
+        "“We're the worst in the world”",
+        "“It's not so bad”"
+       ],
+       "correct": 1,
+       "explain": "Never in the middle, the joke goes: the best football and the worst economy, the best friends and the worst traffic. Being a normal country would be the real insult."
+      },
+      {
+       "type": "card",
+       "text": "Uruguayans have their own complaint: Argentines, they say, think that mate, tango, dulce de leche and the asado are all Argentine. Uruguay says every one of them is Uruguayan too."
+      },
+      {
+       "type": "card",
+       "text": "The soft side: the people with the famous ego are also the first to laugh at it. Nobody tells more jokes about Argentines than Argentines."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "la-queja",
+     "title": "Complaining, with love",
+     "summary": "The national sport that is not football",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Argentines say complaining is their national sport. Two words start it: **“Este país…”** This country… Then comes a long breath, and everybody at the table agrees."
+      },
+      {
+       "type": "choice",
+       "prompt": "A classic line from someone who is tired of it all: “The only way out is…” What?",
+       "options": [
+        "The next election",
+        "The lottery",
+        "The airport"
+       ],
+       "correct": 2,
+       "explain": "**“La única salida es Ezeiza”**: the international airport of Buenos Aires. Many people say it. Few buy the ticket."
+      },
+      {
+       "type": "card",
+       "text": "The list is always the same: prices, politicians, traffic, the bank, the heat. Ask **“¿Todo bien?”** in a line at the shop and you can hear all five before your turn."
+      },
+      {
+       "type": "card",
+       "text": "Another favorite: **“Argentina no es para principiantes.”** Argentina is not for beginners. It's a complaint and a little pride at the same time."
+      },
+      {
+       "type": "choice",
+       "prompt": "Your Argentine friend says the country is a disaster. You, a foreigner, say he's right. What happens?",
+       "options": [
+        "He thanks you for being honest",
+        "He starts to defend Argentina",
+        "He changes the subject"
+       ],
+       "correct": 1,
+       "explain": "Only Argentines can speak badly of Argentina. From you, he wants to hear about the meat, the people and Messi."
+      },
+      {
+       "type": "card",
+       "text": "And the same person who complained all through dinner will tell you at dessert that he could never live in any other country."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "You can complain too, about small things. **“¡Qué caro está todo!”** Everything is so expensive! Everyone agrees, and you have new friends."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "todos-opinan",
+     "title": "Everyone is an expert",
+     "summary": "Opinions on everything, all at the same time",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Argentines joke that they have an opinion about everything, and share it. Someone who gives opinions on every subject, knowing or not, is an **opinólogo**."
+      },
+      {
+       "type": "choice",
+       "prompt": "Four friends sit in a café for three hours and solve every problem of the country. What do Argentines call that?",
+       "options": [
+        "Hacer la tarea",
+        "Arreglar el mundo",
+        "Pagar la cuenta"
+       ],
+       "correct": 1,
+       "explain": "**Arreglar el mundo**: to fix the world. Nothing changes outside the café, but everyone goes home feeling better."
+      },
+      {
+       "type": "card",
+       "text": "The classic expert is the taxi driver. In ten blocks he explains how to fix the economy, the national team and your love life, and he doesn't charge extra."
+      },
+      {
+       "type": "card",
+       "text": "The classic start: **“¿Sabés cuál es el problema de este país?”** Do you know what this country's problem is? Don't answer. The speaker already has the answer, and it's long."
+      },
+      {
+       "type": "choice",
+       "prompt": "Two friends shout at each other about politics for an hour at dinner. How does the night end?",
+       "options": [
+        "They don't speak for a month",
+        "One of them leaves early",
+        "They hug and plan the next dinner"
+       ],
+       "correct": 2,
+       "explain": "Arguing is a way of spending time together. A loud **discusión**, an argument, is not a fight. Between friends, silence would be worse."
+      },
+      {
+       "type": "card",
+       "text": "Still, some subjects are too dangerous. Many families have one rule for Sunday lunch: no politics at the table. It lasts until the coffee."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "To give your opinion, don't wait for silence. Say **“para mí…”**, for me…, and go. And when you agree with someone: **“Tal cual.”** Exactly."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "el-drama",
+     "title": "A little drama",
+     "summary": "Big words for small things, and feelings in public",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Argentines say of themselves that they exaggerate. Nothing is just good or bad. It's **lo más**, the best thing ever, or **un desastre**, a disaster."
+      },
+      {
+       "type": "choice",
+       "prompt": "Your friend arrives and says **“me quiero morir”**: I want to die. What probably happened?",
+       "options": [
+        "She left her phone charger at home",
+        "She lost her job",
+        "Someone in her family is very sick"
+       ],
+       "correct": 0,
+       "explain": "Small problems get big words. **“Me muero”**, I'm dying, can be about hunger, heat, laughing or shame. When something is really serious, people speak more quietly."
+      },
+      {
+       "type": "card",
+       "text": "Every story starts the same way: **“No sabés lo que me pasó.”** You have no idea what happened to me. What happened: the bus was late."
+      },
+      {
+       "type": "card",
+       "text": "Feelings are shown. A man can cry in public for a goal, a song or a goodbye, and nobody finds it strange."
+      },
+      {
+       "type": "choice",
+       "prompt": "A young man is leaving to work abroad for one year. Who comes to the airport to say goodbye?",
+       "options": [
+        "Nobody: goodbyes are said at home",
+        "One parent, who drives him",
+        "Parents, grandparents, cousins and friends"
+       ],
+       "correct": 2,
+       "explain": "Ten or fifteen people, tears and a long group hug. Coming back is the same, with a sign that says **“Bienvenido”**: welcome."
+      },
+      {
+       "type": "card",
+       "text": "One Argentine word is hard to translate: **histeriquear**. You show interest in someone, then you go cold, again and again. People accuse each other of it all the time."
+      },
+      {
+       "type": "card",
+       "text": "Argentines joke that this is why Buenos Aires is so full of psychologists. Going to therapy is normal, and people talk about it at dinner."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "argentinos-afuera",
+     "title": "Argentines abroad",
+     "summary": "How to find one anywhere in the world",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Many Argentines go to live abroad, above all in Spain. It's easier for them than for most: a grandparent from Italy or Spain often means a European passport."
+      },
+      {
+       "type": "choice",
+       "prompt": "On a beach on the other side of the world, how do two Argentines find each other?",
+       "options": [
+        "By the mate and the termo",
+        "By the way they swim",
+        "By their sunglasses"
+       ],
+       "correct": 0,
+       "explain": "A termo, the bottle of hot water for mate, works like a flag. (It could be a Uruguayan. They ask anyway.) Then comes **“¿De dónde sos?”** Where are you from? Ten minutes later they have friends in common."
+      },
+      {
+       "type": "card",
+       "text": "The suitcase of an Argentine abroad carries yerba, dulce de leche and alfajores. And anyone who visits from home gets a shopping list first."
+      },
+      {
+       "type": "card",
+       "text": "They look for each other. In every big city there's an Argentine bakery, a group that plays football on Sundays and someone making an asado on a very small balcony."
+      },
+      {
+       "type": "choice",
+       "prompt": "A plane from Europe lands in Buenos Aires. What do many passengers do?",
+       "options": [
+        "They sing a football song",
+        "They clap",
+        "They call home before the doors open"
+       ],
+       "correct": 1,
+       "explain": "Clapping when the plane lands is a habit Argentines are famous for. Some people find it embarrassing, and clap anyway."
+      },
+      {
+       "type": "card",
+       "text": "What they feel has a verb: **extrañar**, to miss. **“Extraño el asado, a mis amigos, los domingos.”** Nobody says they miss the prices."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "At the World Cup in Qatar, tens of thousands of Argentine fans made every game feel like a home game. Some sold their car to pay for the trip."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "sobrevivir",
+     "title": "Getting through it",
+     "summary": "A country of crises, and people proud of surviving them",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Argentines have lived through many crises: prices that double, savings that disappear, rules that change in one night. People say there's one every ten years."
+      },
+      {
+       "type": "choice",
+       "prompt": "A famous economist is said to have joked that there are four kinds of countries: rich, poor, Japan and… which one?",
+       "options": [
+        "Switzerland",
+        "Argentina",
+        "Brazil"
+       ],
+       "correct": 1,
+       "explain": "Japan, because nobody understood how it became rich so fast. Argentina, because nobody understood how such a rich country became poorer. Argentines love to repeat it."
+      },
+      {
+       "type": "card",
+       "text": "A very Argentine verb is **zafar**: to get out of a problem at the last second. **“Zafé”** means: that was close, but I'm fine."
+      },
+      {
+       "type": "card",
+       "text": "A small extra way to make money is a **rebusque**: selling cakes, driving at night, fixing phones. Many people have one, and they are proud of knowing how to invent it."
+      },
+      {
+       "type": "choice",
+       "prompt": "When prices rise fast, what do many Argentines do with their salary on the day it arrives?",
+       "options": [
+        "Leave it in the bank for months",
+        "Spend it or change it fast",
+        "Give half to their parents"
+       ],
+       "correct": 1,
+       "explain": "Pesos lose value, so people fill the fridge, pay their monthly payments or buy dollars the same week. Saving in pesos feels like losing money."
+      },
+      {
+       "type": "card",
+       "text": "So people enjoy today. In the middle of a crisis, on a Tuesday night, the pizzerías are full. Visitors never understand it."
+      },
+      {
+       "type": "card",
+       "text": "The pride is this: **“De esta también salimos.”** We'll get through this one too. And while it's still happening, someone is already making jokes about it."
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
    "slug": "familia",
    "title": "Family and friends",
    "emoji": "👨‍👩‍👧",
@@ -2928,18 +3239,18 @@
       },
       {
        "type": "choice",
-       "prompt": "Many groups of friends have one fixed plan every week. What is it usually?",
+       "prompt": "A group of friends from school, now forty years old. What do they do every Thursday night?",
        "options": [
-        "A film at the cinema",
-        "A dinner or a football game, always on the same day",
-        "A walk in the park on Sunday morning"
+        "Go to the cinema",
+        "Have an asado together",
+        "Walk in the park"
        ],
        "correct": 1,
-       "explain": "**El asado de los jueves**, the Thursday asado. Or **fútbol 5**, with five players per team, on Tuesdays, then pizza. The day is fixed and nobody books anything else."
+       "explain": "**El asado de los jueves**, the Thursday barbecue. Or **fútbol 5**, with five players per team, on Tuesdays, then pizza. The day is fixed and nobody books anything else."
       },
       {
        "type": "card",
-       "text": "The verb is **juntarse**: to get together. **“¿Nos juntamos?”** needs no plan and no reason. And **“Caete a casa”** means: come over, any time."
+       "text": "The verb is **juntarse**: to get together. **“¿Nos juntamos?”** needs no plan and no reason. And **“Caete por casa”** means: come over, any time."
       },
       {
        "type": "card",
@@ -2954,7 +3265,7 @@
         "“Te debo una”"
        ],
        "correct": 0,
-       "explain": "**Bancar** a friend is to be with them when things go wrong. **“Te banco”**: I'm with you, whatever happens. It's the best thing a friend can say."
+       "explain": "**Bancar** a friend is to be with them when things go wrong. **“Te banco”**: I'm with you, whatever happens. (Bancar can also mean to wait, or to put up with something.)"
       },
       {
        "type": "card",
@@ -2963,7 +3274,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "To make friends, say yes to the first invitation, even if it starts at eleven at night. The second one comes much faster."
+       "text": "Say yes to the first invitation, even if it starts at eleven at night. Soon someone adds you to the **grupo de WhatsApp**, and that's how you know you're one of them."
       }
      ],
      "vocabulary": []
@@ -2975,7 +3286,7 @@
      "pages": [
       {
        "type": "card",
-       "text": "The steps: first you're **saliendo**, going out. Then you're **de novios**, an official couple. Then you **convivís**, you live together. Many couples never marry at all."
+       "text": "The steps: first you're **saliendo**, going out. Then you're **de novios**, an official couple. Then comes **convivir**, living together. Many couples never marry at all."
       },
       {
        "type": "card",
@@ -2983,14 +3294,14 @@
       },
       {
        "type": "choice",
-       "prompt": "A friend is angry: **“¡Me clavó el visto!”** What did the other person do?",
+       "prompt": "Your friend wrote to the boy she likes. He read the message at nine. It's midnight and there's no answer. What does she tell the group?",
        "options": [
-        "Arrived an hour late to the date",
-        "Read the message and didn't answer",
-        "Told everyone about them"
+        "“¡Me cayó bien!”",
+        "“¡Me clavó el visto!”",
+        "“¡Me re sirve!”"
        ],
        "correct": 1,
-       "explain": "**El visto** is the mark that shows a message was seen. **Clavar el visto** is to see it and say nothing. Friends will study it with you for hours."
+       "explain": "**El visto** is the mark that shows a message was seen. **Clavar el visto** is to see it and say nothing. Her friends will study it with her for hours."
       },
       {
        "type": "card",
@@ -2998,7 +3309,7 @@
       },
       {
        "type": "card",
-       "text": "**Novio** and **novia** have no age limit: a woman of sixty can introduce her **novio**. And couples kiss in the street, the park and the bus. Nobody looks."
+       "text": "**Novio** and **novia** have no age limit: a woman of sixty can introduce her **novio**. A neutral word for any partner is **pareja**."
       },
       {
        "type": "choice",
@@ -3009,7 +3320,7 @@
         "Give fathers a month off for a new baby"
        ],
        "correct": 0,
-       "explain": "The law is called **matrimonio igualitario**, equal marriage. It was a fast change: divorce had only been legal since 1987."
+       "explain": "The law is called **matrimonio igualitario**, equal marriage. It was a fast change: the divorce law is only from 1987."
       },
       {
        "type": "card",
@@ -3017,8 +3328,7 @@
       },
       {
        "type": "card",
-       "chip": "Pro tip",
-       "text": "**“¿Estás saliendo con alguien?”** Are you seeing someone? It's a normal question from a new friend, an aunt or the person cutting your hair."
+       "text": "Many people live with their parents until almost thirty. So couples go to a **telo**, a hotel with rooms by the hour. It's normal, and nobody is embarrassed."
       }
      ],
      "vocabulary": []
@@ -3041,7 +3351,7 @@
         "Around five or six in the morning"
        ],
        "correct": 2,
-       "explain": "A party that ends at two is a bad party. Grandparents stay until four. The last thing served is breakfast: coffee and medialunas."
+       "explain": "A party that ends at two is a bad party. Grandparents stay until four. The last thing served is breakfast: coffee and medialunas, small sweet croissants."
       },
       {
        "type": "card",
@@ -3370,7 +3680,7 @@
         "Keep the windows closed"
        ],
        "correct": 0,
-       "explain": "Low lights on, day and night, on every **ruta**. A ruta is a road between towns; inside the city it's a **calle** or an **avenida**."
+       "explain": "Low lights on, day and night, on every **ruta**. A ruta is a road between towns; inside the city it's a street or an avenue."
       },
       {
        "type": "card",
@@ -3385,7 +3695,7 @@
         "Hot water for mate"
        ],
        "correct": 2,
-       "explain": "For a small price, or free, it fills your termo with water at the right temperature. Every road trip stops for it."
+       "explain": "For a small price, or free, it fills your thermos with water at the right temperature. Every road trip stops for it."
       },
       {
        "type": "card",
@@ -3645,7 +3955,7 @@
         "Stones"
        ],
        "correct": 0,
-       "explain": "**Más pesado que collar de melones.** **Pesado** is heavy, and also a pain. Picture wearing melons around your neck all night. Some say **sandías**, watermelons."
+       "explain": "**Más pesado que collar de melones.** **Pesado** is heavy, and also a pain. Picture wearing melons around your neck all night."
       },
       {
        "type": "card",
@@ -3982,7 +4292,7 @@
         "He apologized on Dutch TV"
        ],
        "correct": 0,
-       "explain": "**Bobo** is mild, almost childish, which made it even funnier. Within days it was a national catchphrase."
+       "explain": "He said “What are you looking at, fool?” **Bobo** is mild, almost childish, which made it even funnier. Within days it was a national catchphrase."
       },
       {
        "type": "card",
@@ -4125,7 +4435,7 @@
         "They drop it for the other to pick up"
        ],
        "correct": 0,
-       "explain": "The **pañuelo** turns the zamba into slow flirting. And no, it's not the Brazilian samba. The fast one, with stomping and finger snaps, is the **chacarera**."
+       "explain": "The **pañuelo**, the handkerchief, turns the zamba into slow flirting. And no, it's not the Brazilian samba. The fast one, with stomping and finger snaps, is the **chacarera**."
       },
       {
        "type": "card",
@@ -4338,7 +4648,7 @@
         "The Church gave it its blessing"
        ],
        "correct": 1,
-       "explain": "Once Paris loved it, the rich loved it too. Nothing like European approval to change a porteño's mind."
+       "explain": "Once Paris loved it, the rich loved it too. Nothing like European approval to change the mind of a porteño, a Buenos Aires local."
       },
       {
        "type": "card",
@@ -4353,7 +4663,7 @@
         "In Paris, during the craze"
        ],
        "correct": 0,
-       "explain": "Gerardo Matos Rodríguez, a young Uruguayan student, wrote it around 1916, and it premiered in a Montevideo café. Milongas still play it as the last tango of the night."
+       "explain": "Gerardo Matos Rodríguez, a young Uruguayan student, wrote it around 1916, and it premiered in a Montevideo café. Milongas, tango dance nights, still play it as the last tango of the night."
       },
       {
        "type": "card",
@@ -4372,7 +4682,7 @@
         "It only plays in a single key"
        ],
        "correct": 0,
-       "explain": "The note changes depending on whether the bellows open or close. Tangueros call it **el fueye**: the bellows."
+       "explain": "The note changes depending on whether the bellows open or close. Tango musicians call it **el fueye**: the bellows."
       },
       {
        "type": "card",
@@ -4473,7 +4783,7 @@
         "A glass of wine"
        ],
        "correct": 0,
-       "explain": "A lit **pucho**. Legend says if it burns all the way down, your wish comes true."
+       "explain": "A lit **pucho**, slang for cigarette. Legend says if it burns all the way down, your wish comes true."
       },
       {
        "type": "card",
@@ -4513,7 +4823,7 @@
         "Hired a new pianist and never looked back"
        ],
        "correct": 1,
-       "explain": "A **clavel rojo** on the empty piano. Everyone in the room got the message. Musicians still say **“¡Pugliese, Pugliese, Pugliese!”** for good luck before a show."
+       "explain": "A **clavel rojo**, a red carnation, on the empty piano. Everyone in the room got the message. Musicians still say **“¡Pugliese, Pugliese, Pugliese!”** for good luck before a show."
       },
       {
        "type": "card",
@@ -4567,7 +4877,7 @@
         "Twenty years is nothing"
        ],
        "correct": 2,
-       "explain": "**“Que veinte años no es nada.”** The words are by **Alfredo Le Pera**, Gardel's writing partner. Heard at reunions and birthdays, anywhere time has passed and everyone pretends it hasn't."
+       "explain": "**“Que veinte años no es nada.”** Twenty years is nothing. The words are by **Alfredo Le Pera**, Gardel's writing partner. Heard at reunions and birthdays, anywhere time has passed and everyone pretends it hasn't."
       },
       {
        "type": "card",
@@ -4909,7 +5219,7 @@
         "They throw water from the roofs"
        ],
        "correct": 1,
-       "explain": "The **diablito** was buried at the end of last year's carnival. Out he comes, and for about a week people dance, covered in flour and paper ribbons. Then they bury him again."
+       "explain": "The **diablito**, the little devil, was buried at the end of last year's carnival. Out he comes, and for about a week people dance, covered in flour and paper ribbons. Then they bury him again."
       },
       {
        "type": "card",
@@ -5196,7 +5506,7 @@
         "Full of traffic, because everyone drives"
        ],
        "correct": 1,
-       "explain": "No trains, no subte, few buses, no banks, almost no flights. Many people work from home or don't work."
+       "explain": "No trains, no subway, few buses, no banks, almost no flights. Many people work from home or don't work."
       },
       {
        "type": "card",
@@ -5356,7 +5666,7 @@
         "A lion"
        ],
        "correct": 1,
-       "explain": "It's a yaguareté. On a tour in 1965, a journalist saw it, wrote “Pumas”, and the wrong name stayed forever."
+       "explain": "It's a yaguareté, a jaguar. On a tour in 1965, a journalist saw it, wrote “Pumas”, and the wrong name stayed forever."
       },
       {
        "type": "card",
@@ -5497,9 +5807,9 @@
   },
   {
    "slug": "naturaleza",
-   "title": "Animals and nature",
+   "title": "Animals",
    "emoji": "🦫",
-   "summary": "Carpinchos, a bird that builds ovens, whales and purple streets",
+   "summary": "The carpincho and the birds you'll see every day",
    "classes": [
     {
      "slug": "el-carpincho",
@@ -5523,7 +5833,7 @@
         "They ate a whole field of yerba"
        ],
        "correct": 1,
-       "explain": "**Nordelta**, a barrio of big houses, was built on the land where they lived. They came back, ate the gardens and crossed the streets. Most of the country was on their side."
+       "explain": "**Nordelta**, a neighborhood of big houses, was built on the land where they lived. They came back, ate the gardens and crossed the streets. Most of the country was on their side."
       },
       {
        "type": "card",
@@ -5599,158 +5909,6 @@
        "type": "card",
        "chip": "Did you know?",
        "text": "So there's a saying for someone who talks about one thing to hide another: he's **como el tero**. He shouts in one place and has his eggs in another."
-      }
-     ],
-     "vocabulary": []
-    },
-    {
-     "slug": "ballenas-y-pinguinos",
-     "title": "Whales, penguins and a mistake from Canada",
-     "summary": "The wild coast of Patagonia",
-     "pages": [
-      {
-       "type": "card",
-       "text": "Every year from June to December, hundreds of whales come to **Península Valdés**, in Patagonia, to have their babies. The whale is the **ballena franca**."
-      },
-      {
-       "type": "card",
-       "text": "On a beach near the city of Puerto Madryn, at high tide, the whales swim a few meters from the sand. You watch them standing up, with dry feet."
-      },
-      {
-       "type": "choice",
-       "prompt": "At **Punta Tombo** you can walk through a place where penguins make their nests. How many penguins come each year?",
-       "options": [
-        "About 500",
-        "About 20,000",
-        "Hundreds of thousands"
-       ],
-       "correct": 2,
-       "explain": "It's one of the biggest penguin colonies on the continent. The rule on the path: if a **pingüino** wants to cross, you stop and wait."
-      },
-      {
-       "type": "card",
-       "text": "Along the roads of Patagonia you see **guanacos**, wild cousins of the llama. They jump fences easily and, like llamas, they spit when they're angry."
-      },
-      {
-       "type": "choice",
-       "prompt": "In 1946, twenty animals were brought from Canada to Tierra del Fuego. Now there are more than 100,000 and nobody can stop them. Which animal?",
-       "options": [
-        "Wolves",
-        "Beavers",
-        "Brown bears"
-       ],
-       "correct": 1,
-       "explain": "The plan was to sell their fur. But the **castores** have no enemies there. They cut down trees and build dams, and whole forests have died."
-      },
-      {
-       "type": "card",
-       "chip": "Did you know?",
-       "text": "At Península Valdés, orcas throw themselves onto the beach to catch young sea lions, then slide back into the water. Very few orcas in the world hunt like that."
-      },
-      {
-       "type": "card",
-       "text": "Further south, in **Ushuaia**, boats take you past small islands covered in sea lions and seabirds, at the very end of the continent."
-      }
-     ],
-     "vocabulary": []
-    },
-    {
-     "slug": "yaguarete",
-     "title": "The biggest cat in the Americas",
-     "summary": "The yaguareté, thieves at the falls and the softest wool",
-     "pages": [
-      {
-       "type": "card",
-       "text": "The **yaguareté**, the jaguar, is the biggest cat in the Americas. It lives in the forests of the north, and only a few hundred are left in Argentina."
-      },
-      {
-       "type": "choice",
-       "prompt": "In 2016, new peso notes came out without presidents or heroes. What was on them?",
-       "options": [
-        "Animals of Argentina",
-        "Football players",
-        "Famous foods"
-       ],
-       "correct": 0,
-       "explain": "The yaguareté, the whale, the hornero, the guanaco, the condor. A few years later a new set brought back the faces of historical figures."
-      },
-      {
-       "type": "card",
-       "text": "In the wetlands of **Iberá**, the yaguareté was gone for seventy years. In 2021, the first ones were set free there again, and now cubs are born in the wild."
-      },
-      {
-       "type": "card",
-       "text": "At the Iguazú falls, the thieves are **coatíes**: animals with a long nose and a striped tail. They open bags and steal sandwiches. Don't feed them."
-      },
-      {
-       "type": "choice",
-       "prompt": "Can you see wild toucans in Argentina?",
-       "options": [
-        "No, only in zoos",
-        "Yes, in the forest of Misiones",
-        "Yes, in the parks of Buenos Aires"
-       ],
-       "correct": 1,
-       "explain": "The **tucán**, with its huge orange beak, flies around the Iguazú falls and the red-earth forest of Misiones."
-      },
-      {
-       "type": "card",
-       "text": "High in the Andes of the northwest lives the **vicuña**, a small wild cousin of the llama. Its wool is one of the finest and most expensive in the world."
-      },
-      {
-       "type": "card",
-       "chip": "Did you know?",
-       "text": "You don't have to kill a vicuña for its wool. Once a year, villagers form a human chain, bring the animals together, cut the wool and let them go."
-      }
-     ],
-     "vocabulary": []
-    },
-    {
-     "slug": "arboles",
-     "title": "Purple streets",
-     "summary": "The trees of Buenos Aires, and a tree that isn't one",
-     "pages": [
-      {
-       "type": "card",
-       "text": "Every November, Buenos Aires turns purple. Thousands of **jacarandá** trees flower at the same time, and the pavements are covered in purple too."
-      },
-      {
-       "type": "card",
-       "text": "Most of the city's street trees and big parks are the work of one man: **Carlos Thays**, a French garden designer who arrived in 1889 and stayed for life."
-      },
-      {
-       "type": "choice",
-       "prompt": "The name of the **palo borracho** tree means “drunk stick”. What does it look like?",
-       "options": [
-        "Its branches hang down to the ground",
-        "It grows leaning to one side",
-        "Its trunk is fat like a bottle, with thorns"
-       ],
-       "correct": 2,
-       "explain": "The trunk keeps water inside and swells like a belly. In autumn it's covered in big pink flowers."
-      },
-      {
-       "type": "card",
-       "text": "The national flower is the red flower of the **ceibo**, a tree that grows along the rivers."
-      },
-      {
-       "type": "choice",
-       "prompt": "The **ombú** is the giant of the open country, with a huge trunk and wide shade. What is strange about it?",
-       "options": [
-        "It only grows in pairs",
-        "Its wood is soft and wet, and useless as wood",
-        "It has no leaves for most of the year"
-       ],
-       "correct": 1,
-       "explain": "Many say it's not a real tree but a giant plant. The trunk is full of water, so it can't be used for building or for fire. Its gift is shade."
-      },
-      {
-       "type": "card",
-       "text": "In Recoleta there's a giant fig tree more than 200 years old, the **Gran Gomero**. Its branches are so long that poles hold them up, and one is carried by a statue."
-      },
-      {
-       "type": "card",
-       "text": "In spring, the **plátanos** along the streets drop a yellow dust, and half the city sneezes. **“Es la alergia”**, people say with red eyes."
       }
      ],
      "vocabulary": []
@@ -5956,7 +6114,7 @@
         "A small part"
        ],
        "correct": 2,
-       "explain": "For many, religion is family events more than Sunday mass: a baby's **bautismo** and a child's **primera comunión** are big parties with all the cousins."
+       "explain": "For many, religion is family events more than Sunday mass: a baby's **bautismo** (baptism) and a child's **primera comunión** (first communion) are big parties with all the cousins."
       },
       {
        "type": "card",
@@ -6667,7 +6825,7 @@
         "Which club Clemente secretly supported"
        ],
        "correct": 0,
-       "explain": "The commentator asked fans not to throw **papelitos**, so the country wouldn't look messy. Clemente said **“¡Tiren papelitos, muchachos!”** The stadiums ended up covered in paper."
+       "explain": "The commentator asked fans not to throw **papelitos**, bits of paper, so the country wouldn't look messy. Clemente said **“¡Tiren papelitos, muchachos!”** Throw them, boys! The stadiums ended up covered in paper."
       },
       {
        "type": "card",
@@ -6726,7 +6884,7 @@
         "A girl who talks to the moon"
        ],
        "correct": 0,
-       "explain": "Parents who sang **“Manuelita vivía en Pehuajó…”** as kids now sing it to theirs, word for word. At a kids' party, the adults sing loudest."
+       "explain": "Parents who sang **“Manuelita vivía en Pehuajó…”** (Manuelita lived in Pehuajó) as kids now sing it to theirs, word for word. At a kids' party, the adults sing loudest."
       }
      ],
      "vocabulary": []
@@ -7050,7 +7208,7 @@
         "Under his monument in Mendoza"
        ],
        "correct": 0,
-       "explain": "His remains came home. His tomb in the **Catedral** on Plaza de Mayo is guarded by **Granaderos** in old blue uniforms, the regiment he founded. The day he died, **17 de agosto**, is a feriado too."
+       "explain": "His remains came home. His tomb in the **Catedral** on Plaza de Mayo is guarded by **Granaderos** in old blue uniforms, the regiment he founded. The day he died, **17 de agosto**, is a holiday too."
       },
       {
        "type": "card",
@@ -7432,7 +7590,7 @@
         "Volunteers who signed up after the landing"
        ],
        "correct": 0,
-       "explain": "Most were **conscriptos** of 18 to 20, barely out of school. Argentines call them **los chicos de la guerra**. They were sent to freezing trenches, often underfed and badly equipped."
+       "explain": "Most were **conscriptos** of 18 to 20, barely out of school. Argentines call them **los chicos de la guerra**, the kids of the war. They were sent to freezing trenches, often underfed and badly equipped."
       },
       {
        "type": "card",

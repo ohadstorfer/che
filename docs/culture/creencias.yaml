@@ -136,7 +136,7 @@ classes:
           - "About half"
           - "A small part"
         correct: 2
-        explain: "For many, religion is family events more than Sunday mass: a baby's **bautismo** and a child's **primera comunión** are big parties with all the cousins."
+        explain: "For many, religion is family events more than Sunday mass: a baby's **bautismo** (baptism) and a child's **primera comunión** (first communion) are big parties with all the cousins."
       - type: card
         chip: "Did you know?"
         text: "Argentina has the biggest Jewish community in Latin America, and millions of people with Syrian and Lebanese grandparents. Many came on the same boats, a century ago."

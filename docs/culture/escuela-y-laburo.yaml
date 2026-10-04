@@ -154,7 +154,7 @@ classes:
           - "Like a Sunday: quiet streets, few buses"
           - "Full of traffic, because everyone drives"
         correct: 1
-        explain: "No trains, no subte, few buses, no banks, almost no flights. Many people work from home or don't work."
+        explain: "No trains, no subway, few buses, no banks, almost no flights. Many people work from home or don't work."
       - type: card
         text: "A **piquete** is a group of people who block a street or a road to protest. The blocked street is a **corte**. Radio and map apps list the day's cortes every morning."
       - type: card

@@ -91,7 +91,7 @@ test('rejects a non-rioplatense word', () => {
 test('rejects a sample that uses a word taught later', () => {
   const { errors } = outlineFrom(
     HEADER +
-      unit(1, `      - {lemma: hola, pos: interj, en: hi}`, 'Hola, che.') +
+      unit(1, `      - {lemma: hola, pos: interj, en: hi}`, 'Che, hola.') +
       unit(2, `      - {lemma: che, pos: interj, en: hey}`, 'Che.'),
   );
   assert.ok(errors.some((e) => e.includes(`isn't taught until unit 2`)), errors.join('\n'));
@@ -184,7 +184,7 @@ test('rejects a drill that uses a word before its teach slot', () => {
   const { outline } = loadOutline();
   const { errors } = buildContent(outline, {
     'hola-che': {
-      sentences: { s: { es: 'Hola, che.', en: 'Hey there.', target: 'che' } },
+      sentences: { s: { es: 'Che, hola.', en: 'Hey, hi.', target: 'che' } },
       lessons: { 1: [{ drill: 's' }, { teach: 'hola' }, { teach: 'che' }] },
     },
   });
