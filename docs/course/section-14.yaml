@@ -15,9 +15,9 @@
 section:
   id: 14
   slug: "news-and-the-street"
-  title: "The news and the street"
+  title: "The news and the city"
   cefr: "B2.4"
-  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
+  practice: 2
 units:
   - ordinal: 1
     slug: "hay-paro"
@@ -33,8 +33,8 @@ units:
     tips:
       - title: "Hay paro"
         body: "A strike is a **paro**: **hay paro de subte**, **paro de colectivos**. When protesters block
-          a street it's a **piquete** or a **corte**, and the street **está cortada**. A **marcha** is a
-          march."
+          a street it's a **piquete** or a **corte**, and the street **está cortada**. A **marcha**
+          is a march."
       - title: "No funciona"
         body: "**Funcionar** is *to work* for things: **el subte no funciona**, **los semáforos no
           funcionan**. For people, it's still *laburar*."
@@ -66,7 +66,6 @@ units:
             f: "m.sg"
           - form: "cercana"
             f: "f.sg"
-
   - ordinal: 2
     slug: "paro-docente"
     title: "Plan around a strike"
@@ -80,15 +79,15 @@ units:
       en: "There's a teachers' strike tomorrow and no school."
     tips:
       - title: "Paro docente, paro general"
-        body: "A strike is named after who stops: **paro docente** — *the teachers*; **paro de
-          colectivos** — the **colectiveros**; **paro general** — everyone. The **gremio** — *the union* —
+        body: "A strike is named after who stops: **paro docente** — *the teachers*; **paro de colectivos**
+          — the **colectiveros**; **paro general** — everyone. The **gremio** — *the union* —
           **anunció un paro** for Thursday, and the news calls it a **medida de fuerza**."
       - title: "¿Funciona o no?"
-        body: "The morning after, the question is what still runs: **el subte funciona con
-          normalidad**, or **suspendieron el servicio**. When the strike itself is called off, the
-          fixed phrase is **levantaron el paro** / **se levantó el paro**; *suspender* is for classes,
-          an exam, a march or a service. **Hubo un apagón** — *there was a blackout* — and the traffic
-          lights are out: **embotellamiento**, **desvíos**, and half the city goes **a pie**."
+        body: "The morning after, the question is what still runs: **el subte funciona con normalidad**, or
+          **suspendieron el servicio**. When the strike itself is called off, the fixed phrase is
+          **levantaron el paro** / **se levantó el paro**; *suspender* is for classes, an exam, a
+          march or a service. **Hubo un apagón** — *there was a blackout* — and the traffic lights
+          are out: **embotellamiento**, **desvíos**, and half the city goes **a pie**."
     words:
       - lemma: "docente"
         pos: "noun"
@@ -176,7 +175,6 @@ units:
           - form: "se levantó"
             en: "was lifted, ended (a strike)"
             f: "3sg.pret.ind.clitic"
-
   - ordinal: 3
     slug: "fue-construido"
     title: "Read the news"
@@ -190,14 +188,14 @@ units:
       en: "The bridge was built a century ago."
     tips:
       - title: "Fue construido"
-        body: "The news likes the passive: **fue** + participle. **El puente fue construido en 1900**;
-          **la estación fue inaugurada ayer**. The participle agrees like an adjective: *construido,
+        body: "The news likes the passive: **fue** + participle. **El puente fue construido en 1900**; **la
+          estación fue inaugurada ayer**. The participle agrees like an adjective: *construido,
           construida*."
       - title: "Fueron detenidos"
-        body: "More than one: **fueron detenidos** — *they were arrested*. Just as common, in the
-          news and in speech, is **se** + verb: **el puente se construyó hace un siglo**, **se
-          inauguró la estación**. In conversation porteños also turn it around: *construyeron el
-          puente*, *los detuvieron*."
+        body: "More than one: **fueron detenidos** — *they were arrested*. Just as common, in the news and
+          in speech, is **se** + verb: **el puente se construyó hace un siglo**, **se inauguró la
+          estación**. In conversation porteños also turn it around: *construyeron el puente*, *los
+          detuvieron*."
     words:
       - lemma: "construir"
         pos: "verb"
@@ -238,7 +236,6 @@ units:
       - lemma: "siglo"
         pos: "noun"
         en: "century"
-
   - ordinal: 4
     slug: "fue-clausurado"
     title: "Read the headlines"
@@ -253,15 +250,16 @@ units:
     tips:
       - title: "Fue clausurado, fueron rescatados"
         body: "The headline verb agrees with what it's about: **el boliche fue clausurado**, **la obra fue
-          clausurada**, **los vecinos fueron rescatados**, **las vecinas fueron rescatadas**. Whoever did
-          it comes after **por**: *por los bomberos*."
+          clausurada**, **los vecinos fueron rescatados**, **las vecinas fueron rescatadas**.
+          Whoever did it comes after **por**: *por los bomberos*."
       - title: "Hubo un incendio"
-        body: "The news opens with **hubo**: **hubo un incendio**, **hubo un accidente en la avenida**, **hubo
-          dos heridos** — who then **fueron trasladados al hospital**. At the kitchen table the same story
-          loses the passive: *trasladaron a los heridos*."
+        body: "The news opens with **hubo**: **hubo un incendio**, **hubo un accidente en la avenida**,
+          **hubo dos heridos** — who then **fueron trasladados al hospital**. At the kitchen table
+          the same story loses the passive: *trasladaron a los heridos*."
       - title: "Fue elegida"
         body: "Not only bad news: **la pizzería fue elegida la mejor del barrio**, **la ley fue aprobada**,
-          **el chico fue elegido para el equipo**. Same pattern: **fue** + a participle that agrees."
+          **el chico fue elegido para el equipo**. Same pattern: **fue** + a participle that
+          agrees."
     words:
       - lemma: "clausurar"
         pos: "verb"
@@ -339,7 +337,6 @@ units:
       - lemma: "obra"
         pos: "noun"
         en: "construction work, building site"
-
   - ordinal: 5
     slug: "las-elecciones"
     title: "Talk about voting"
@@ -355,11 +352,22 @@ units:
       - title: "Votar"
         body: "In Argentina voting is **obligatorio** — *mandatory*. **¿A quién votaste?** is a real
           question, though many answer **eso no se pregunta**. **Votar a** someone: *voté a la misma
-          candidata*. **Votar en blanco** is to cast a blank vote. And from the night before there is
-          **veda**: no campaigning, and shops and bars can't sell alcohol."
+          candidata*. **Votar en blanco** is to cast a blank vote. And from the night before there
+          is **veda**: no campaigning, and shops and bars can't sell alcohol."
       - title: "Las elecciones"
-        body: "**Las elecciones** — *the elections* — decide the **gobierno** and the **presidente**.
-          The course stays out of it: the words, not the opinions."
+        body: "**Las elecciones** — *the elections* — decide the **gobierno** and the **presidente**. The
+          course stays out of it: the words, not the opinions."
+      - title: "¿Dónde votás?"
+        body: "Election day is a Sunday, and everyone asks **¿dónde votás?** You check the **padrón** — *the
+          voter roll* — for your school and your **mesa**. **Votamos** in the school around the
+          corner; **mi abuela votó a las ocho**, first in line."
+      - title: "El cuarto oscuro"
+        body: "The booth is the **cuarto oscuro** — *the dark room* — where you pick your **boleta** and
+          drop it in the **urna**. The **voto** is secret. If nobody wins outright, there's a
+          **balotaje** — *a runoff*. Missed it? You have to **justificar** why."
+      - title: "Las encuestas"
+        body: "Before, the **campaña**, the **debate** on TV and the **encuestas** — *the polls* — that
+          always get it wrong. After, the **resultado**. The course stays out of who won."
     words:
       - lemma: "votar"
         pos: "verb"
@@ -373,6 +381,15 @@ units:
           - form: "votaste"
             en: "you voted"
             f: "2sg.pret.ind.vos"
+          - form: "votás"
+            en: "you vote"
+            f: "2sg.pres.ind.vos"
+          - form: "votamos"
+            en: "we vote"
+            f: "1pl.pres.ind"
+          - form: "votó"
+            en: "voted (he/she)"
+            f: "3sg.pret.ind"
       - lemma: "elección"
         pos: "noun"
         en: "election"
@@ -403,82 +420,15 @@ units:
         pos: "noun"
         en: "pre-election ban"
         note: "from the night before the vote: no campaigning and no alcohol sold"
-
-  - ordinal: 6
-    slug: "el-cuarto-oscuro"
-    title: "Go and vote"
-    summary: "¿Dónde votás el domingo?"
-    grammar:
-      - "votar"
-      - "politica.sin-politica"
-    register_max: "informal"
-    sample:
-      es: "¿Dónde votás el domingo?"
-      en: "Where do you vote on Sunday?"
-    tips:
-      - title: "¿Dónde votás?"
-        body: "Election day is a Sunday, and everyone asks **¿dónde votás?** You check the **padrón** — *the
-          voter roll* — for your school and your **mesa**. **Votamos** in the school around the corner;
-          **mi abuela votó a las ocho**, first in line."
-      - title: "El cuarto oscuro"
-        body: "The booth is the **cuarto oscuro** — *the dark room* — where you pick your **boleta** and drop
-          it in the **urna**. The **voto** is secret. If nobody wins outright, there's a **balotaje** — *a
-          runoff*. Missed it? You have to **justificar** why."
-      - title: "Las encuestas"
-        body: "Before, the **campaña**, the **debate** on TV and the **encuestas** — *the polls* — that always
-          get it wrong. After, the **resultado**. The course stays out of who won."
-    words:
-      - lemma: "votar"
-        pos: "verb"
-        forms:
-          - form: "votás"
-            en: "you vote"
-            f: "2sg.pres.ind.vos"
-          - form: "votamos"
-            en: "we vote"
-            f: "1pl.pres.ind"
-          - form: "votó"
-            en: "voted (he/she)"
-            f: "3sg.pret.ind"
       - lemma: "voto"
         pos: "noun"
         en: "vote"
-      - lemma: "padrón"
-        pos: "noun"
-        en: "voter roll, electoral register"
-      - lemma: "cuarto oscuro"
-        pos: "phrase"
-        en: "voting booth"
-      - lemma: "boleta"
-        pos: "noun"
-        en: "ballot paper"
-      - lemma: "urna"
-        pos: "noun"
-        en: "ballot box"
       - lemma: "balotaje"
         pos: "noun"
         en: "runoff (election)"
-      - lemma: "justificar"
-        pos: "verb"
-        en: "to justify, to give a reason (for not voting)"
-        forms:
-          - form: "justificar"
-            f: "inf"
-      - lemma: "campaña"
-        pos: "noun"
-        en: "campaign"
       - lemma: "debate"
         pos: "noun"
         en: "debate"
-      - lemma: "encuesta"
-        pos: "noun"
-        en: "poll, survey"
-        forms:
-          - form: "encuesta"
-            f: "sg"
-          - form: "encuestas"
-            en: "polls, surveys"
-            f: "pl"
       - lemma: "resultado"
         pos: "noun"
         en: "result"
@@ -488,8 +438,7 @@ units:
           - form: "resultados"
             en: "results"
             f: "pl"
-
-  - ordinal: 7
+  - ordinal: 6
     slug: "practica-el-cuarto-oscuro"
     title: "Practice: strikes, headlines and the ballot"
     summary: "Hubo desvíos por la marcha"
@@ -506,7 +455,6 @@ units:
       - title: "Fue clausurado, ¿dónde votás?"
         body: "**Fue clausurado**, **fueron rescatados**: **fue** + a participle that agrees. And on Sunday,
           **¿dónde votás?**"
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "docente"
       - "gremio"
@@ -521,13 +469,9 @@ units:
       - "incendio"
       - "ley"
       - "votás"
-      - "padrón"
-      - "boleta"
-      - "encuestas"
       - "demorado"
       - "funcionan"
-
-  - ordinal: 8
+  - ordinal: 7
     slug: "segun-el-diario"
     title: "Say where you heard it"
     summary: "Según el diario, mañana llueve"
@@ -540,13 +484,25 @@ units:
       en: "According to the paper, it's raining tomorrow."
     tips:
       - title: "Según"
-        body: "**Según** — *according to*: **según el diario**, **según mi vieja**. **Al parecer**
-          and **supuestamente** keep a distance from what you're passing on; *al parecer* is news
+        body: "**Según** — *according to*: **según el diario**, **según mi vieja**. **Al parecer** and
+          **supuestamente** keep a distance from what you're passing on; *al parecer* is news
           language. For gossip porteños say **por lo visto** or **parece que**: *por lo visto, Sofi
           tiene novio nuevo*; *parece que no viene*."
       - title: "¿Está confirmado?"
-        body: "A **rumor** is just that until someone **confirma**: *el club confirmó la noticia*. Or
-          as porteños say about any rumor: **dicen que…**"
+        body: "A **rumor** is just that until someone **confirma**: *el club confirmó la noticia*. Or as
+          porteños say about any rumor: **dicen que…**"
+      - title: "Según quién"
+        body: "**Según** takes people as well as papers: **según él**, **según ellos**, **según la fuente**.
+          **Aparentemente** is the neutral *apparently*; **se ve que** is what you conclude from
+          what you see: **se ve que llovió** — *it must have rained*."
+      - title: "Lo desmintieron"
+        body: "A story is **confirmado** or it's **desmentido**: **el gremio desmintió el rumor**, **lo
+          desmintieron en el noticiero**. Before you forward it, ask **¿cuál es la fuente?** — the
+          **titular** says one thing, the **versión oficial** another."
+      - title: "Me llegó una cadena"
+        body: "The family WhatsApp group sends a **cadena** — *a chain message* — every morning. **Chequeá
+          la fuente** before you believe it — and before **compartirlo**. If it isn't true: **es
+          mentira**, **es falso** or, very porteño, **es verso** — *it's made up*."
     words:
       - lemma: "según"
         pos: "prep"
@@ -570,32 +526,6 @@ units:
       - lemma: "rumor"
         pos: "noun"
         en: "rumor"
-
-  - ordinal: 9
-    slug: "aparentemente"
-    title: "Check whether it's true"
-    summary: "Aparentemente es falso"
-    grammar:
-      - "fuentes"
-      - "rumor"
-    register_max: "informal"
-    sample:
-      es: "Aparentemente es falso: lo desmintieron."
-      en: "Apparently it's fake: they denied it."
-    tips:
-      - title: "Según quién"
-        body: "**Según** takes people as well as papers: **según él**, **según ellos**, **según la fuente**.
-          **Aparentemente** is the neutral *apparently*; **se ve que** is what you conclude from what you
-          see: **se ve que llovió** — *it must have rained*."
-      - title: "Lo desmintieron"
-        body: "A story is **confirmado** or it's **desmentido**: **el gremio desmintió el rumor**, **lo
-          desmintieron en el noticiero**. Before you forward it, ask **¿cuál es la fuente?** — the
-          **titular** says one thing, the **versión oficial** another."
-      - title: "Me llegó una cadena"
-        body: "The family WhatsApp group sends a **cadena** — *a chain message* — every morning.
-          **Chequeá la fuente** before you believe it — and before **compartirlo**. If it isn't true:
-          **es mentira**, **es falso** or, very porteño, **es verso** — *it's made up*."
-    words:
       - lemma: "aparentemente"
         pos: "adv"
         en: "seemingly"
@@ -646,8 +576,7 @@ units:
           - form: "compartirlo"
             en: "to share it"
             f: "inf.clitic"
-
-  - ordinal: 10
+  - ordinal: 8
     slug: "practica-me-afanaron"
     title: "Practice: sources, scams and repairs"
     summary: "Se ve que se tapó un caño"
@@ -665,7 +594,6 @@ units:
       - title: "Me afanaron, se tapó"
         body: "**Me afanaron la billetera**, **me estafaron**; **se tapó la canilla**, **se trabó el
           ascensor** — the *they* nobody names, and the *se* nobody did."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "aparentemente"
       - "se ve que"
@@ -685,8 +613,7 @@ units:
       - "comisaría"
       - "expensas"
       - "por lo visto"
-
-  - ordinal: 11
+  - ordinal: 9
     slug: "el-tango"
     title: "Talk about the tango"
     summary: "Gardel cada día canta mejor"
@@ -700,7 +627,8 @@ units:
     tips:
       - title: "Gardel cada día canta mejor"
         body: "Carlos **Gardel** died in 1935, and porteños still say he **canta mejor cada día**. A tango's
-          **letra** — *lyrics* — is usually about **nostalgia**: the barrio, the mother, the woman who left."
+          **letra** — *lyrics* — is usually about **nostalgia**: the barrio, the mother, the woman
+          who left."
       - title: "La milonga"
         body: "A **milonga** is both a dance hall and a faster cousin of the tango. The instrument that
           sighs is the **bandoneón**."
@@ -723,8 +651,7 @@ units:
       - lemma: "Gardel"
         pos: "propn"
         en: "Carlos Gardel"
-
-  - ordinal: 12
+  - ordinal: 10
     slug: "tocas-la-guitarra"
     title: "Talk about the music you grew up with"
     summary: "¿Tocás la guitarra?"
@@ -797,8 +724,7 @@ units:
       - lemma: "Piazzolla"
         pos: "propn"
         en: "Astor Piazzolla"
-
-  - ordinal: 13
+  - ordinal: 11
     slug: "practica-la-parrillada"
     title: "Practice: the club, the music and the table"
     summary: "¿Bailás o tocás la guitarra?"
@@ -807,17 +733,15 @@ units:
       - "repaso.cultura"
     register_max: "informal"
     sample:
-      es: "En casa hinchamos todos por el mismo club."
-      en: "At home we all root for the same club."
+      es: "¿Bailás o tocás la guitarra?"
+      en: "Do you dance or play the guitar?"
     tips:
       - title: "Socio de toda la vida"
         body: "**Socio del club**, **hincha de toda la vida**, the **hinchada** and its **cantitos**."
       - title: "Rock, cumbia y parrillada"
         body: "**¿Tocás la guitarra?** **¿Bailás?** And after, a **parrillada** with **chimichurri**, the
           meat **bien cocido** or jugoso."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
-      - "hinchamos"
       - "socio"
       - "club"
       - "hinchada"
@@ -835,8 +759,7 @@ units:
       - "cuadro"
       - "milonga"
       - "golazo"
-
-  - ordinal: 14
+  - ordinal: 12
     slug: "lo-lindo-de-la-ciudad"
     title: "Say what you love about the city"
     summary: "Lo lindo es que siempre hay algo"
@@ -850,16 +773,21 @@ units:
     tips:
       - title: "Lo lindo, lo feo"
         body: "Put **lo** in front of an adjective and it becomes *the … thing*: **lo lindo** — *the nice
-          thing*; **lo feo** — *the ugly part*; **lo difícil** — *the hard part*; **lo único** — *the only
-          thing*: **lo único que extraño es el mar**."
+          thing*; **lo feo** — *the ugly part*; **lo difícil** — *the hard part*; **lo único** —
+          *the only thing*: **lo único que extraño es el mar**."
       - title: "Lo más lindo"
-        body: "**Lo más** + adjective is *the most … thing*: **lo más lindo del barrio es la
-          plaza**. Weighing it up, porteños say the city **tiene sus cosas** — *has its issues*: the
-          **inseguridad**, the **costo de vida** — but the **calidad de vida**, **a la vez**, is hard to
-          beat."
+        body: "**Lo más** + adjective is *the most … thing*: **lo más lindo del barrio es la plaza**.
+          Weighing it up, porteños say the city **tiene sus cosas** — *has its issues*: the
+          **inseguridad**, the **costo de vida** — but the **calidad de vida**, **a la vez**, is
+          hard to beat."
       - title: "Lo que más me gusta"
-        body: "The most natural way to say what you love about a place: **lo que más me gusta de
-          Buenos Aires es la noche**. And the opposite: **lo que menos me gusta es el ruido**."
+        body: "The most natural way to say what you love about a place: **lo que más me gusta de Buenos
+          Aires es la noche**. And the opposite: **lo que menos me gusta es el ruido**."
+      - title: "Lo bueno, lo malo"
+        body: "**Lo** + adjective is *the … thing*: **lo bueno** — *the good thing*; **lo malo** — *the bad
+          thing*; **lo mejor** and **lo peor**. **Lo bueno de vivir acá es que…**"
+      - title: "No hay nada como…"
+        body: "**No hay nada como** — *there's nothing like*: **no hay nada como un asado con amigos**."
     words:
       - lemma: "lo lindo"
         pos: "phrase"
@@ -900,25 +828,6 @@ units:
       - lemma: "lo que menos"
         pos: "phrase"
         en: "what… least"
-
-  - ordinal: 15
-    slug: "lo-bueno-de-vivir-aca"
-    title: "Weigh up the city"
-    summary: "Lo bueno de Buenos Aires es la gente"
-    grammar:
-      - "lo.adjetivo"
-      - "repaso.c1"
-    register_max: "informal"
-    sample:
-      es: "Lo bueno de Buenos Aires es la gente."
-      en: "The good thing about Buenos Aires is the people."
-    tips:
-      - title: "Lo bueno, lo malo"
-        body: "**Lo** + adjective is *the … thing*: **lo bueno** — *the good thing*; **lo malo** — *the
-          bad thing*; **lo mejor** and **lo peor**. **Lo bueno de vivir acá es que…**"
-      - title: "No hay nada como…"
-        body: "**No hay nada como** — *there's nothing like*: **no hay nada como un asado con amigos**."
-    words:
       - lemma: "lo bueno"
         pos: "phrase"
         en: "the good thing"
@@ -934,8 +843,7 @@ units:
       - lemma: "no hay nada como"
         pos: "phrase"
         en: "there's nothing like"
-
-  - ordinal: 16
+  - ordinal: 13
     slug: "no-es-que"
     title: "Turn it down gently"
     summary: "No es que no quiera, es que no puedo"
@@ -949,10 +857,11 @@ units:
     tips:
       - title: "No es que…"
         body: "A reason you deny takes the subjunctive: **no es que no quiera** — *it's not that I don't
-          want to*. The real reason follows with **es que** and the normal verb: **es que no puedo**."
+          want to*. The real reason follows with **es que** and the normal verb: **es que no
+          puedo**."
       - title: "Es que…"
-        body: "On its own, **es que…** is the start of every porteño excuse: **¿no venís? — Es que
-          laburo temprano**."
+        body: "On its own, **es que…** is the start of every porteño excuse: **¿no venís? — Es que laburo
+          temprano**."
     words:
       - lemma: "no es que"
         pos: "phrase"
@@ -972,8 +881,7 @@ units:
           - form: "tengamos"
             en: "(that) we have"
             f: "1pl.pres.subj.irregular"
-
-  - ordinal: 17
+  - ordinal: 14
     slug: "no-es-que-no-me-guste"
     title: "Turn down an invitation"
     summary: "No es que no me interese, es que no llego"
@@ -987,14 +895,14 @@ units:
     tips:
       - title: "Any verb, any person"
         body: "**No es que** takes the subjunctive with every verb and every person: **no es que no me
-          interese**, **no es que no me importe**, **no es que me caiga mal** — *it's not that I don't like
-          him*; **no es que no queramos**, **no es que no podamos**."
+          interese**, **no es que no me importe**, **no es que me caiga mal** — *it's not that I
+          don't like him*; **no es que no queramos**, **no es que no podamos**."
       - title: "Saying no without quedar mal"
         body: "Nobody wants to **quedar mal** — *come off as rude*. So you thank them for the
           **invitación**, blame a **compromiso** — *something already on*, and leave the door open:
-          **la próxima voy**, **otro día**. And if they push: **no insistas, che**. **Rechazar** needs
-          something after it — *rechacé dos invitaciones* — and sounds formal; day to day people say
-          **decir que no**: *me cuesta decir que no*."
+          **la próxima voy**, **otro día**. And if they push: **no insistas, che**. **Rechazar**
+          needs something after it — *rechacé dos invitaciones* — and sounds formal; day to day
+          people say **decir que no**: *me cuesta decir que no*."
     words:
       - lemma: "importar"
         pos: "verb"
@@ -1068,8 +976,7 @@ units:
       - lemma: "otro día"
         pos: "phrase"
         en: "some other day, another time"
-
-  - ordinal: 18
+  - ordinal: 15
     slug: "si-hubiera-ahorrado"
     title: "Say what would be true now"
     summary: "Si hubiera ahorrado, ahora tendría un depto"
@@ -1088,6 +995,14 @@ units:
       - title: "Hubiéramos"
         body: "With *we*: **si hubiéramos salido antes, ya estaríamos ahí**. The participles: **ahorrado,
           comprado, vendido, aceptado**."
+      - title: "Your life, my life"
+        body: "The mixed conditional with *you*: **si hubieras estudiado medicina, ahora serías médico**;
+          **si me hubieras hecho caso, no estarías así**. With *we*: **si hubiéramos ahorrado, ahora
+          tendríamos para las vacaciones**."
+      - title: "A esta altura…"
+        body: "**A esta altura** — *by now* — is how porteños bring the other life into the present: **si me
+          hubiera mudado a Córdoba, a esta altura estaría re tranquilo**. New participles: **mudado,
+          aprendido, dejado, invertido**."
     words:
       - lemma: "ahorrar"
         pos: "verb"
@@ -1119,28 +1034,12 @@ units:
           - form: "estaríamos"
             en: "we would be"
             f: "1pl.cond.ind"
-
-  - ordinal: 19
-    slug: "si-hubieras-estudiado"
-    title: "Imagine the life you'd have now"
-    summary: "Si hubieras estudiado, ahora serías médico"
-    grammar:
-      - "condicional.mixto"
-      - "pluscuamperfecto.subjuntivo"
-    register_max: "informal"
-    sample:
-      es: "Si hubiera invertido en dólares, ahora tendría ahorros."
-      en: "If I'd invested in dollars, I'd have savings now."
-    tips:
-      - title: "Your life, my life"
-        body: "The mixed conditional with *you*: **si hubieras estudiado medicina, ahora serías médico**;
-          **si me hubieras hecho caso, no estarías así**. With *we*: **si hubiéramos ahorrado, ahora
-          tendríamos para las vacaciones**."
-      - title: "A esta altura…"
-        body: "**A esta altura** — *by now* — is how porteños bring the other life into the present: **si
-          me hubiera mudado a Córdoba, a esta altura estaría re tranquilo**. New participles:
-          **mudado, aprendido, dejado, invertido**."
-    words:
+          - form: "estaría"
+            en: "I would be, he would be"
+            f: "sg.cond.ind"
+          - form: "estarías"
+            en: "you would be (somewhere, some way)"
+            f: "2sg.cond.ind.vos"
       - lemma: "mudarse"
         pos: "verb"
         forms:
@@ -1166,15 +1065,6 @@ units:
           - form: "invertido"
             en: "invested"
             f: "part"
-      - lemma: "estar"
-        pos: "verb"
-        forms:
-          - form: "estaría"
-            en: "I would be, he would be"
-            f: "sg.cond.ind"
-          - form: "estarías"
-            en: "you would be (somewhere, some way)"
-            f: "2sg.cond.ind.vos"
       - lemma: "ser"
         pos: "verb"
         forms:
@@ -1208,8 +1098,7 @@ units:
       - lemma: "a esta altura"
         pos: "phrase"
         en: "by now, at this point"
-
-  - ordinal: 20
+  - ordinal: 16
     slug: "tendria-que-haber"
     title: "Talk about regrets"
     summary: "Tendría que haber ido"
@@ -1222,14 +1111,14 @@ units:
       en: "I should have gone."
     tips:
       - title: "Tendría que haber…"
-        body: "**Tendría que haber** + participle is *I should have*: **tendría que haber ido**,
-          **tendrías que haber avisado**. With **no** it is *I shouldn't have*: **no tendría que haber
-          dicho eso**. Porteños use it far more than any other past regret."
+        body: "**Tendría que haber** + participle is *I should have*: **tendría que haber ido**, **tendrías
+          que haber avisado**. With **no** it is *I shouldn't have*: **no tendría que haber dicho
+          eso**. Porteños use it far more than any other past regret."
       - title: "Me arrepiento"
-        body: "**Me arrepiento** — *I regret it*; **me arrepentí** — *I regretted it, I changed my
-          mind*. With what you did or didn't do, **de (no) haber** + participle: **me arrepiento de no
-          haber ido** — *I regret not going*; *no me arrepiento de haber venido*. A missed chance is a
-          **oportunidad** you didn't **aprovechar**."
+        body: "**Me arrepiento** — *I regret it*; **me arrepentí** — *I regretted it, I changed my mind*.
+          With what you did or didn't do, **de (no) haber** + participle: **me arrepiento de no
+          haber ido** — *I regret not going*; *no me arrepiento de haber venido*. A missed chance is
+          a **oportunidad** you didn't **aprovechar**."
     words:
       - lemma: "tendría que haber"
         pos: "phrase"
@@ -1274,8 +1163,7 @@ units:
           - form: "haber"
             en: "to have (done)"
             f: "inf"
-
-  - ordinal: 21
+  - ordinal: 17
     slug: "me-hubiera-gustado"
     title: "Say what you wish you'd done"
     summary: "Me hubiera gustado ir, pero no pude"
@@ -1289,17 +1177,18 @@ units:
     tips:
       - title: "We should have, they should have"
         body: "The regret works for everyone: **tendríamos que haber salido antes**, **tendrían que haber
-          avisado**. And the softest one of all: **me hubiera gustado** — *I'd have liked to*: **me hubiera
-          gustado verte**."
+          avisado**. And the softest one of all: **me hubiera gustado** — *I'd have liked to*: **me
+          hubiera gustado verte**."
       - title: "¿Te arrepentís?"
-        body: "With *vos*: **¿te arrepentís?**; with *him*: **se arrepintió**. A chance you
-          **dejaste pasar** — *let slip* — gets a **te lo perdiste** from your friends; a blunder is
-          **metí la pata** or, more porteño, **me mandé una macana**. **¡Qué macana!** — *what a
-          shame*. **Lamentablemente**, you can't **volver atrás** — so you drop it with **ya fue**."
+        body: "With *vos*: **¿te arrepentís?**; with *him*: **se arrepintió**. A chance you **dejaste
+          pasar** — *let slip* — gets a **te lo perdiste** from your friends; a blunder is **metí la
+          pata** or, more porteño, **me mandé una macana**. **¡Qué macana!** — *what a shame*.
+          **Lamentablemente**, you can't **volver atrás** — so you drop it with **ya fue**."
       - title: "¡Hubieras avisado!"
         body: "On its own, **hubieras** + participle is a reproach — *you should have*: **¡hubieras
-          avisado!** — *you should have told me!* As a question it is *would you have…?*: **¿hubieras
-          ido?** And for *we shouldn't have*, add **no**: **no tendríamos que haber venido**."
+          avisado!** — *you should have told me!* As a question it is *would you have…?*:
+          **¿hubieras ido?** And for *we shouldn't have*, add **no**: **no tendríamos que haber
+          venido**."
     words:
       - lemma: "tendríamos que haber"
         pos: "phrase"
@@ -1360,8 +1249,7 @@ units:
         en: "blunder, silly mistake"
         note: "¡qué macana! = what a shame; me mandé una macana = I messed up"
         register: "informal"
-
-  - ordinal: 22
+  - ordinal: 18
     slug: "practica-me-hubiera-gustado"
     title: "Practice: saying no, other lives, missed chances"
     summary: "Me hubiera gustado, pero tengo un compromiso"
@@ -1375,12 +1263,11 @@ units:
       en: "If you'd accepted the invitation, you'd be at the beach by now."
     tips:
       - title: "No es que no me interese"
-        body: "Any verb after **no es que** goes subjunctive: **no me interese**, **no queramos**, **me caiga
-          mal**."
+        body: "Any verb after **no es que** goes subjunctive: **no me interese**, **no queramos**, **me
+          caiga mal**."
       - title: "Otra vida, otra oportunidad"
         body: "**Si hubieras estudiado, ahora serías…** — and the one you let slip: **me hubiera gustado**,
           **tendríamos que haber…**, **te lo perdiste**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "interese"
       - "caiga"
@@ -1399,8 +1286,7 @@ units:
       - "hubieras"
       - "ojalá"
       - "de verdad"
-
-  - ordinal: 23
+  - ordinal: 19
     slug: "lo-que-pasa-es-que"
     title: "Explain what's really going on"
     summary: "Lo que pasa es que no tengo tiempo"
@@ -1412,11 +1298,11 @@ units:
       en: "The thing is, I don't have time."
     tips:
       - title: "Lo que pasa es que…"
-        body: "**Lo que pasa es que…** — *the thing is* — explains the real reason. **Lo raro es que…**
-          — *the weird thing is*; **lo importante es que…** — *what matters is*."
+        body: "**Lo que pasa es que…** — *the thing is* — explains the real reason. **Lo raro es que…** —
+          *the weird thing is*; **lo importante es que…** — *what matters is*."
       - title: "Lo de…"
-        body: "**Lo de** is *the business with*: **¿qué pasó con lo de Juan?** After **a** or **en**
-          it is *someone's place*: **voy a lo de Sofi**, **estamos en lo de mis viejos**. And **lo de
+        body: "**Lo de** is *the business with*: **¿qué pasó con lo de Juan?** After **a** or **en** it is
+          *someone's place*: **voy a lo de Sofi**, **estamos en lo de mis viejos**. And **lo de
           siempre** is *the usual*: at the café, at the bar, in life."
     words:
       - lemma: "lo que pasa es que"
@@ -1434,3 +1320,63 @@ units:
       - lemma: "lo de"
         pos: "phrase"
         en: "the business with, the thing about; someone's place"
+  - ordinal: 20
+    slug: "lo-que-paso-fue-que"
+    title: "Clear up a misunderstanding"
+    summary: "Lo que pasó fue que no te entendí"
+    grammar:
+      - "lo.nominalizacion"
+    register_max: "informal"
+    sample:
+      es: "Fue un malentendido: lo que pasó fue que no te entendí."
+      en: "It was a misunderstanding: what happened was I didn't understand you."
+    tips:
+      - title: "Lo que pasó fue que…"
+        body: "Tell it in the past: **lo que pasó fue que se cortó el subte**. Say what you meant: **lo que
+          quiero decir es que…**. **Lo que más** — *what… most*: **lo que más me molestó fue eso**.
+          And **en el fondo** — *deep down* — for the real reason under it."
+      - title: "Lo mío, lo tuyo"
+        body: "**Lo** turns anything into *the thing*: **lo tuyo es la cocina** — *your thing is cooking*;
+          **lo mío** — *my thing*; **lo primero** — *the first thing*; **lo justo** — *just enough*.
+          Giving up an argument: **lo que vos digas** or **lo que sea** — *whatever*."
+      - title: "Aclarar"
+        body: "To clear it up — **aclarar**: **quiero aclarar algo**. Then: **no quise decir eso** — *I
+          didn't mean that*; **me expresé mal** — *I put it badly*; **me entendiste mal** — *you
+          misunderstood me*; **no lo dije por vos** — *I didn't say it about you*."
+    words:
+      - lemma: "lo que pasó fue que"
+        pos: "phrase"
+        en: "what happened was"
+      - lemma: "lo que quiero decir es que"
+        pos: "phrase"
+        en: "what I mean is"
+      - lemma: "lo mío"
+        pos: "phrase"
+        en: "my thing, what's mine"
+      - lemma: "lo tuyo"
+        pos: "phrase"
+        en: "your thing, what's yours"
+      - lemma: "lo primero"
+        pos: "phrase"
+        en: "the first thing"
+      - lemma: "lo justo"
+        pos: "phrase"
+        en: "just enough, what's fair"
+      - lemma: "lo que sea"
+        pos: "phrase"
+        en: "whatever it is, anything goes"
+      - lemma: "lo que vos digas"
+        pos: "phrase"
+        en: "whatever you say"
+      - lemma: "en el fondo"
+        pos: "phrase"
+        en: "deep down"
+      - lemma: "malentendido"
+        pos: "noun"
+        en: "misunderstanding"
+      - lemma: "quise decir"
+        pos: "phrase"
+        en: "I meant"
+      - lemma: "me expresé mal"
+        pos: "phrase"
+        en: "I put it badly"

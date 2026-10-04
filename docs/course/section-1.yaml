@@ -113,7 +113,6 @@ units:
       - lemma: "jugo"
         pos: "noun"
         en: "juice"
-
   - ordinal: 2
     slug: "otro-cafe"
     title: "Order something to eat"
@@ -128,13 +127,15 @@ units:
       en: "Another coffee and some toast, please."
     tips:
       - title: "Otro, never un otro"
-        body: "To order the same again, say **otro**: *Otro café, por favor.* For a word that takes
-          *una*, it's **otra**: *Otra cerveza.* It already means \"another\", so nothing goes in front."
+        body: "To order the same again, say **otro**: *Otro café, por favor.* For a word that takes *una*,
+          it's **otra**: *Otra cerveza.* It already means \"another\", so nothing goes in front."
       - title: "Un or una"
         body: "The little word matches the thing, not you: **un** té, **un** helado, but **una** torta,
           **una** pizza. Learn each new word with its *un* or *una* and you'll never have to guess."
       - title: "Tostadas, un tostado"
-        body: "In a café nobody orders one slice: ask for **tostadas** — *Un café y tostadas, por favor.* **Un tostado** is something else: a toasted ham-and-cheese sandwich, the classic café lunch. *Una tostada* is one slice, at home: *¿Otra tostada?*"
+        body: "In a café nobody orders one slice: ask for **tostadas** — *Un café y tostadas, por favor.*
+          **Un tostado** is something else: a toasted ham-and-cheese sandwich, the classic café
+          lunch. *Una tostada* is one slice, at home: *¿Otra tostada?*"
     words:
       - lemma: "otro"
         pos: "det"
@@ -202,7 +203,6 @@ units:
         pos: "noun"
         en: "toasted sandwich"
         note: "a toasted ham-and-cheese sandwich, the classic café order"
-
   - ordinal: 3
     slug: "hola-che"
     title: "Greet people"
@@ -217,13 +217,15 @@ units:
     tips:
       - title: "Che"
         body: "**Che** is how people in Buenos Aires get someone's attention — like \"hey\". It goes in
-          front, where \"hey\" goes: *Che, ¿todo bien?* Only a greeting comes before it — *Hola, che.*
-          It is never the English \"man\" on the end. It's friendly, never rude."
+          front, where \"hey\" goes: *Che, ¿todo bien?* Only a greeting comes before it — *Hola,
+          che.* It is never the English \"man\" on the end. It's friendly, never rude."
       - title: "Soy"
         body: "To say who you are, use **soy**: *Soy Sofi.* One word carries \"I am\" — Spanish has no
           separate word for \"I\" here."
       - title: "¿Cómo andás?"
-        body: "**¿Cómo andás?** is the everyday porteño *how are you?* — you will hear it all day. The answer is short: *Bien.* or *Todo bien.* **¿Qué onda?** gets the same answer: *¿Qué onda? — Todo bien.*"
+        body: "**¿Cómo andás?** is the everyday porteño *how are you?* — you will hear it all day. The
+          answer is short: *Bien.* or *Todo bien.* **¿Qué onda?** gets the same answer: *¿Qué onda?
+          — Todo bien.*"
     words:
       - lemma: "hola"
         pos: "interj"
@@ -259,9 +261,6 @@ units:
         pos: "phrase"
         en: "all good"
         note: "also the question: ¿Todo bien?"
-      # "qué tal" was retired here: it is Spanish from Spain in a porteño's
-      # mouth. The greeting is "¿Qué onda?", and "¿Todo bien?" asks as well as
-      # answers. Retiring happens in the admin; the YAML only adds (§7.2).
       - lemma: "qué onda"
         pos: "phrase"
         en: "what's up"
@@ -328,7 +327,6 @@ units:
         pos: "phrase"
         en: "how are you doing"
         note: "the everyday porteño greeting: ¿Cómo andás?"
-
   - ordinal: 4
     slug: "buen-dia"
     title: "Say hello and goodbye"
@@ -342,9 +340,9 @@ units:
       en: "Good afternoon, I'm Martín."
     tips:
       - title: "Buen día"
-        body: "In Buenos Aires the morning greeting is **buen día**, until lunch. After that it's
-          **buenas tardes**, and once it's dark **buenas noches** — hello *and* goodbye. Short for any
-          of them: **buenas**."
+        body: "In Buenos Aires the morning greeting is **buen día**, until lunch. After that it's **buenas
+          tardes**, and once it's dark **buenas noches** — hello *and* goodbye. Short for any of
+          them: **buenas**."
       - title: "Gracias, de nada"
         body: "When someone says *gracias*, answer **de nada**. *Of course* is **claro**. And when
           something's sorted, porteños say **¡joya!** — *¿Todo bien? — ¡Joya!*"
@@ -383,7 +381,9 @@ units:
         en: "perfect, all set"
         note: "¡Joya! — great, sorted"
         register: "informal"
-
+      - lemma: "muy"
+        pos: "adv"
+        en: "very"
   - ordinal: 5
     slug: "vos-y-sos"
     title: "Talk to someone as vos"
@@ -409,7 +409,6 @@ units:
           - form: "sos"
             en: "you are"
             f: "2sg.pres.ind.vos"
-
   - ordinal: 6
     slug: "sos-turista"
     title: "Find the person you're meeting"
@@ -427,14 +426,14 @@ units:
         body: "With *ser*, a role goes straight after the verb: **Soy estudiante.** **¿Sos turista?**
           English says *a student*; Spanish leaves the *un* out."
       - title: "¿Sos vos?"
-        body: "**Vos** can come after the verb when you're checking who someone is: *Ah, ¿sos vos?* —
-          *Oh, it's you?* The answer: **Sí, soy yo.** Can't believe it? **¿Posta?** — *for real?*"
+        body: "**Vos** can come after the verb when you're checking who someone is: *Ah, ¿sos vos?* — *Oh,
+          it's you?* The answer: **Sí, soy yo.** Can't believe it? **¿Posta?** — *for real?*"
       - title: "Bienvenido, bienvenida"
-        body: "Someone new in town gets a **¡bienvenido!** — or **¡bienvenida!** for a woman. The end of
-          the word matches the person."
+        body: "Someone new in town gets a **¡bienvenido!** — or **¡bienvenida!** for a woman. The end of the
+          word matches the person."
       - title: "Disculpá, permiso"
-        body: "**Disculpá** gets a stranger's attention: *Disculpá, ¿sos Martín?* **Permiso** is what
-          you say to get past someone, on a full bus or in a doorway."
+        body: "**Disculpá** gets a stranger's attention: *Disculpá, ¿sos Martín?* **Permiso** is what you
+          say to get past someone, on a full bus or in a doorway."
     words:
       - lemma: "perdón"
         pos: "interj"
@@ -473,7 +472,6 @@ units:
             f: "m.sg"
           - form: "extranjera"
             f: "f.sg"
-      # Moved up from usted, which keeps "disculpame".
       - lemma: "disculpar"
         pos: "verb"
         en: "to excuse"
@@ -481,13 +479,10 @@ units:
           - form: "disculpá"
             en: "excuse me"
             f: "2sg.imp.vos"
-      # What you say to get past. "permiso" the noun (permission) is
-      # mis-viejos-querian's, and "con permiso" is como-no-dona-rosa's.
       - lemma: "permiso"
         pos: "interj"
         en: "let me through"
         note: "said to get past someone, where English says excuse me"
-
   - ordinal: 7
     slug: "practica-hola"
     title: "Practice: first meetings"
@@ -501,12 +496,11 @@ units:
       en: "Good morning. Are you Martín? Yes, it's me."
     tips:
       - title: "Soy, sos"
-        body: "Two forms of *ser* so far: **soy** for yourself, **sos** for the person in front of you.
-          *Soy Lucía, ¿y vos?* — *¿Sos turista?* The pronoun is optional; the verb already says who."
+        body: "Two forms of *ser* so far: **soy** for yourself, **sos** for the person in front of you. *Soy
+          Lucía, ¿y vos?* — *¿Sos turista?* The pronoun is optional; the verb already says who."
       - title: "The right hello"
-        body: "**Buen día** in the morning, **buenas tardes** later, **buenas** any time. To leave:
-          **chau** or **hasta luego**. And after every *gracias*, a **de nada**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+        body: "**Buen día** in the morning, **buenas tardes** later, **buenas** any time. To leave: **chau**
+          or **hasta luego**. And after every *gracias*, a **de nada**."
     review:
       - "otro"
       - "tostada"
@@ -520,7 +514,6 @@ units:
       - "sos"
       - "soy"
       - "medialuna"
-
   - ordinal: 8
     slug: "como-te-llamas"
     title: "Ask someone's name"
@@ -548,14 +541,6 @@ units:
         pos: "verb"
         en: "to be called"
         forms:
-          # What the learner meets is the chunk. "llamo" is never said without
-          # "me" in front of it — nineteen sentences in the course contain it
-          # and every one says "me llamo" — so a card for the bare form asks a
-          # question with no answer, and its English can only be written by
-          # smuggling the missing word into a parenthesis: "(my name) is".
-          # The two bare forms stay below, marked `bound`: sentences still
-          # resolve through them and the dictionary still has the conjugation,
-          # but nothing drills them. docs/course-spec.md §1.5.
           - form: "me llamo"
             en: "my name is"
             f: "1sg.pres.ind.clitic"
@@ -571,60 +556,30 @@ units:
       - lemma: "cómo"
         pos: "adv"
         en: "how"
-      # "qué" is not here: at this point the course has no verb for it to
-      # question, so every sentence it can appear in is a bare "¿Qué?" asking
-      # for a repeat — which is curt in Buenos Aires. "¿Cómo?", taught just
-      # above, is the neutral way to ask that. It arrives in the next unit,
-      # with "¿qué significa?".
       - lemma: "mucho gusto"
         pos: "phrase"
         en: "nice to meet you"
-
   - ordinal: 9
-    slug: "encantado"
-    title: "Get to know someone"
-    summary: "Encantado. ¿Hablás inglés?"
+    slug: "no-entiendo"
+    title: "Say you don't understand"
+    summary: "No entiendo. ¿Hablás inglés?"
     grammar:
-      - "llamarse.pres.1sg-2sg.vos"
       - "pres.1sg-2sg.vos"
+      - "frases.supervivencia"
     register_max: "informal"
     sample:
-      es: "Me llamo Martín, encantado. ¿Hablás inglés?"
-      en: "My name is Martín, nice to meet you. Do you speak English?"
+      es: "No entiendo. ¿Hablás inglés?"
+      en: "I don't understand. Do you speak English?"
     tips:
-      - title: "Encantado, encantada"
-        body: "**Encantado** — *delighted* — is what you say when you meet someone, and it matches whoever is speaking: a man says *encantado*, a woman **encantada**. The reply: **igualmente** — *likewise*. Day to day, most porteños just say **un gusto** or *mucho gusto*: *Soy Sofi.* — *Un gusto, Sofi.*"
-      - title: "-o for me, -ás or -és for vos"
-        body: "Other verbs work like *me llamo, te llamás*: **hablo**, **¿hablás?** — **entiendo**,
-          **¿entendés?** The *I* form ends in **-o**; the vos form is stressed on the end. Lost?
-          *Perdón, no entiendo. **Despacio**, por favor.*"
-      - title: "Nombre y apellido"
-        body: "At any counter in Buenos Aires you'll hear *nombre y apellido, por favor* — your first
-          name and your surname."
-      - title: "When you get lost"
-        body: "Stuck on a word: **¿cómo se dice…?** — *how do you say…?* — and **¿qué significa?** —
-          *what does it mean?* Too fast: **¿me repetís?** or **más despacio, por favor**. **No
-          entendí** is *I didn't get that*. And the line that buys you patience: **hablo un poco de
-          castellano** — Argentines call the language *castellano*."
+      - title: "Hablo, hablás"
+        body: "The *I* form ends in **-o**: **hablo**, **entiendo**. The vos form is stressed on the end:
+          **hablás**, **entendés**, **repetís**. One verb is different: *I know* is just **sé**, and
+          the vos form is **sabés**. *No entiendo. ¿Hablás inglés?* — *No sé.*"
+      - title: "Ask for help"
+        body: "Stuck on a word: **¿cómo se dice…?** — *how do you say…?* — and **¿qué significa?** — *what
+          does it mean?* Too fast: **más despacio, por favor**. And the line that buys you patience:
+          **hablo un poco** — *I speak a little*. Argentines call the language **castellano**."
     words:
-      - lemma: "nombre"
-        pos: "noun"
-        en: "name, first name"
-      - lemma: "apellido"
-        pos: "noun"
-        en: "surname, last name"
-      - lemma: "encantado"
-        pos: "adj"
-        en: "delighted"
-        note: "said when you meet someone"
-        forms:
-          - form: "encantado"
-            f: "m.sg"
-          - form: "encantada"
-            f: "f.sg"
-      - lemma: "igualmente"
-        pos: "adv"
-        en: "likewise, same to you"
       - lemma: "hablar"
         pos: "verb"
         en: "to speak, to talk"
@@ -638,6 +593,10 @@ units:
       - lemma: "inglés"
         pos: "noun"
         en: "English (the language)"
+      - lemma: "castellano"
+        pos: "noun"
+        en: "Spanish"
+        note: "Argentines say castellano, not español"
       - lemma: "entender"
         pos: "verb"
         en: "to understand"
@@ -648,14 +607,6 @@ units:
           - form: "entendés"
             en: "you understand"
             f: "2sg.pres.ind.vos"
-          # A past form, learnt whole in "no entendí": the preterite starts in
-          # section 4, and naci-en teaches "entendiste".
-          - form: "entendí"
-            en: "I understood, I got it"
-            f: "1sg.pret.ind"
-      - lemma: "despacio"
-        pos: "adv"
-        en: "slowly"
       - lemma: "saber"
         pos: "verb"
         en: "to know"
@@ -666,12 +617,15 @@ units:
           - form: "sabés"
             en: "you know"
             f: "2sg.pres.ind.vos"
-          - form: "sabe"
-            en: "knows (he/she knows)"
-            f: "3sg.pres.ind"
-      # The survival phrases, moved up from the units that taught them (que-haces,
-      # me-traes-un-cafe, de-donde-sos, que-significa), so a beginner can ask for
-      # help from the first week.
+      - lemma: "despacio"
+        pos: "adv"
+        en: "slowly"
+      - lemma: "más"
+        pos: "adv"
+        en: "more"
+      - lemma: "poco"
+        pos: "adv"
+        en: "a little"
       - lemma: "cómo se dice"
         pos: "phrase"
         en: "how do you say"
@@ -692,26 +646,77 @@ units:
           - form: "repetís"
             en: "you repeat"
             f: "2sg.pres.ind.vos"
-      - lemma: "más"
+  - ordinal: 10
+    slug: "encantado"
+    title: "Say nice to meet you"
+    summary: "Encantado. —Igualmente."
+    grammar:
+      - "llamarse.pres.1sg-2sg.vos"
+      - "pres.1sg-2sg.vos"
+    register_max: "informal"
+    sample:
+      es: "Encantado. —Igualmente."
+      en: "Nice to meet you. —Likewise."
+    tips:
+      - title: "Encantado, encantada"
+        body: "**Encantado** — *delighted* — is what you say when you meet someone, and it matches whoever
+          is speaking: a man says *encantado*, a woman **encantada**. The reply: **igualmente** —
+          *likewise*. Day to day, most porteños just say **un gusto** or *mucho gusto*: *Soy Sofi.*
+          — *Un gusto, Sofi.*"
+      - title: "-o for me, -ás or -és for vos"
+        body: "Other verbs work like *me llamo, te llamás*: **hablo**, **¿hablás?** — **entiendo**,
+          **¿entendés?** The *I* form ends in **-o**; the vos form is stressed on the end. Lost?
+          *Perdón, no entiendo. **Despacio**, por favor.*"
+      - title: "Nombre y apellido"
+        body: "At any counter in Buenos Aires you'll hear *nombre y apellido, por favor* — your first name
+          and your surname."
+      - title: "When you get lost"
+        body: "Stuck on a word: **¿cómo se dice…?** — *how do you say…?* — and **¿qué significa?** — *what
+          does it mean?* Too fast: **¿me repetís?** or **más despacio, por favor**. **No entendí**
+          is *I didn't get that*. And the line that buys you patience: **hablo un poco de
+          castellano** — Argentines call the language *castellano*."
+    words:
+      - lemma: "nombre"
+        pos: "noun"
+        en: "name, first name"
+      - lemma: "apellido"
+        pos: "noun"
+        en: "surname, last name"
+      - lemma: "encantado"
+        pos: "adj"
+        en: "delighted"
+        note: "said when you meet someone"
+        forms:
+          - form: "encantado"
+            f: "m.sg"
+          - form: "encantada"
+            f: "f.sg"
+      - lemma: "igualmente"
         pos: "adv"
-        en: "more"
-      - lemma: "poco"
-        pos: "adv"
-        en: "a little"
+        en: "likewise, same to you"
+      - lemma: "entender"
+        pos: "verb"
+        en: "to understand"
+        forms:
+          - form: "entendí"
+            en: "I understood, I got it"
+            f: "1sg.pret.ind"
+      - lemma: "saber"
+        pos: "verb"
+        en: "to know"
+        forms:
+          - form: "sabe"
+            en: "knows (he/she knows)"
+            f: "3sg.pres.ind"
       - lemma: "de"
         pos: "prep"
         en: "from, of"
         glue: true
-      - lemma: "castellano"
-        pos: "noun"
-        en: "Spanish"
-        note: "Argentines say castellano, not español"
       - lemma: "un gusto"
         pos: "phrase"
         en: "pleased to meet you"
         note: "what most porteños say when they meet someone"
-
-  - ordinal: 10
+  - ordinal: 11
     slug: "de-donde-sos"
     title: "Say where you're from"
     summary: "¿De dónde sos?"
@@ -749,8 +754,7 @@ units:
       - lemma: "Montevideo"
         pos: "propn"
         en: "Montevideo"
-
-  - ordinal: 11
+  - ordinal: 12
     slug: "soy-de-zona-norte"
     title: "Say which part you're from"
     summary: "Soy de zona norte"
@@ -762,8 +766,8 @@ units:
       en: "Are you from the city? No, I'm from a small town in Córdoba."
     tips:
       - title: "De, for any size of place"
-        body: "*Ser de* works for a country, a city or one corner of it: **Soy de un pueblo de
-          Córdoba.** **Soy de zona sur.** *Zona norte*, *zona sur* and *zona oeste* take no extra word."
+        body: "*Ser de* works for a country, a city or one corner of it: **Soy de un pueblo de Córdoba.**
+          **Soy de zona sur.** *Zona norte*, *zona sur* and *zona oeste* take no extra word."
       - title: "Capital"
         body: "Porteños call the city itself **Capital** — *Soy de Capital* — to set it apart from the
           suburbs around it. Not from here at all? **Soy de afuera.**"
@@ -829,17 +833,13 @@ units:
       - lemma: "Alemania"
         pos: "propn"
         en: "Germany"
-      - lemma: "México"
-        pos: "propn"
-        en: "Mexico"
       - lemma: "España"
         pos: "propn"
         en: "Spain"
       - lemma: "Italia"
         pos: "propn"
         en: "Italy"
-
-  - ordinal: 12
+  - ordinal: 13
     slug: "el-y-ella"
     title: "Talk about someone else"
     summary: "Él es de acá"
@@ -876,8 +876,7 @@ units:
       - lemma: "pero"
         pos: "conj"
         en: "but"
-
-  - ordinal: 13
+  - ordinal: 14
     slug: "quien-es"
     title: "Point people out"
     summary: "¿Quién es ella?"
@@ -891,14 +890,14 @@ units:
       en: "Who is she? She's Lucía, a friend."
     tips:
       - title: "Se llama"
-        body: "For someone else the little word is **se**: *me llamo*, *te llamás*, **se llama**.
-          *¿Cómo se llama él?* — *Se llama Juan.*"
+        body: "For someone else the little word is **se**: *me llamo*, *te llamás*, **se llama**. *¿Cómo se
+          llama él?* — *Se llama Juan.*"
       - title: "¿Quién es?"
-        body: "**Quién** asks *who*: *¿Quién es él?* The answer drops the pronoun: *Es Martín, un
-          vecino.* A **pibe** is a guy and a **piba** a girl — any age, very porteño."
+        body: "**Quién** asks *who*: *¿Quién es él?* The answer drops the pronoun: *Es Martín, un vecino.* A
+          **pibe** is a guy and a **piba** a girl — any age, very porteño."
       - title: "También, tampoco"
-        body: "**Tampoco** is the *no* version of *también*: *Él no es de acá, y ella tampoco.* —
-          *He's not from here, and neither is she.*"
+        body: "**Tampoco** is the *no* version of *también*: *Él no es de acá, y ella tampoco.* — *He's not
+          from here, and neither is she.*"
     words:
       - lemma: "quién"
         pos: "pron"
@@ -910,7 +909,6 @@ units:
       - lemma: "llamarse"
         pos: "verb"
         forms:
-          # Taught as the chunk, like "me llamo" in unit 4. docs/course-spec.md §1.5.
           - form: "se llama"
             en: "his/her name is"
             f: "3sg.pres.ind.clitic"
@@ -965,8 +963,7 @@ units:
       - lemma: "tampoco"
         pos: "adv"
         en: "neither, not either"
-
-  - ordinal: 14
+  - ordinal: 15
     slug: "practica-quien-es"
     title: "Practice: who's who"
     summary: "Se llama Juan y es de acá"
@@ -979,12 +976,11 @@ units:
       en: "His name is Juan and he's from a small town in Córdoba."
     tips:
       - title: "Soy, sos, es"
-        body: "Three people now: **soy** de acá, **¿sos** de Capital?, **es** de afuera. Name,
-          origin, role — *ser* carries all of them."
+        body: "Three people now: **soy** de acá, **¿sos** de Capital?, **es** de afuera. Name, origin, role
+          — *ser* carries all of them."
       - title: "Me, te, se"
-        body: "The name verb changes its little word with the person: **me llamo**, **te llamás**,
-          **se llama**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+        body: "The name verb changes its little word with the person: **me llamo**, **te llamás**, **se
+          llama**."
     review:
       - "se llama"
       - "encantada"
@@ -998,8 +994,7 @@ units:
       - "perdón"
       - "turista"
       - "buen día"
-
-  - ordinal: 15
+  - ordinal: 16
     slug: "argentino-argentina"
     title: "Say what people are"
     summary: "Es argentino, es argentina"
@@ -1057,8 +1052,7 @@ units:
             f: "m.sg"
           - form: "porteña"
             f: "f.sg"
-
-  - ordinal: 16
+  - ordinal: 17
     slug: "de-todos-lados"
     title: "Meet people from everywhere"
     summary: "Ella es canadiense, él es brasileño"
@@ -1075,8 +1069,8 @@ units:
           española*; *francés, francesa* (the accent goes). A word in **-e** never changes:
           *canadiense*, *estadounidense* — for a man or a woman."
       - title: "Small letters"
-        body: "Nationalities are written in lowercase: *Ella es* **italiana**, never *Italiana*. Only
-          the country takes a capital: *Brasil*, *Estados Unidos*."
+        body: "Nationalities are written in lowercase: *Ella es* **italiana**, never *Italiana*. Only the
+          country takes a capital: *Brasil*, *Estados Unidos*."
     words:
       - lemma: "brasileño"
         pos: "adj"
@@ -1138,22 +1132,6 @@ units:
             f: "m.sg"
           - form: "australiana"
             f: "f.sg"
-      - lemma: "colombiano"
-        pos: "adj"
-        en: "Colombian"
-        forms:
-          - form: "colombiano"
-            f: "m.sg"
-          - form: "colombiana"
-            f: "f.sg"
-      - lemma: "venezolano"
-        pos: "adj"
-        en: "Venezuelan"
-        forms:
-          - form: "venezolano"
-            f: "m.sg"
-          - form: "venezolana"
-            f: "f.sg"
       - lemma: "paraguayo"
         pos: "adj"
         en: "Paraguayan"
@@ -1162,16 +1140,7 @@ units:
             f: "m.sg"
           - form: "paraguaya"
             f: "f.sg"
-      - lemma: "peruano"
-        pos: "adj"
-        en: "Peruvian"
-        forms:
-          - form: "peruano"
-            f: "m.sg"
-          - form: "peruana"
-            f: "f.sg"
-
-  - ordinal: 17
+  - ordinal: 18
     slug: "la-familia"
     title: "Introduce your family"
     summary: "Mi familia"
@@ -1258,8 +1227,7 @@ units:
       - lemma: "perro"
         pos: "noun"
         en: "dog"
-
-  - ordinal: 18
+  - ordinal: 19
     slug: "tios-y-primos"
     title: "Talk about the whole family"
     summary: "Mi tía, mi primo, mi gato"
@@ -1272,11 +1240,11 @@ units:
       en: "My uncle is from Rosario and my cousin is from Buenos Aires."
     tips:
       - title: "Tío, tía"
-        body: "Most of the family comes in *-o / -a* pairs: **tío, tía** — **primo, prima** —
-          **sobrino, sobrina** — **nieto, nieta**. *Mi* stays the same for all of them."
+        body: "Most of the family comes in *-o / -a* pairs: **tío, tía** — **primo, prima** — **sobrino,
+          sobrina** — **nieto, nieta**. *Mi* stays the same for all of them."
       - title: "Mi mujer, mi marido"
-        body: "Porteños say **mi mujer** for *my wife* and **mi marido** for *my husband* — two
-          different words, not a pair. And **bebé** is one word for a baby boy or girl: *un bebé*."
+        body: "Porteños say **mi mujer** for *my wife* and **mi marido** for *my husband* — two different
+          words, not a pair. And **bebé** is one word for a baby boy or girl: *un bebé*."
     words:
       - lemma: "tío"
         pos: "noun"
@@ -1353,8 +1321,7 @@ units:
           - form: "gata"
             en: "cat (female)"
             f: "f.sg"
-
-  - ordinal: 19
+  - ordinal: 20
     slug: "cuantos-anos-tenes"
     title: "Say your age"
     summary: "¿Cuántos años tenés?"
@@ -1389,11 +1356,6 @@ units:
         forms:
           - form: "cuántos"
             f: "m.pl"
-          # "cuántas" waits for unit 10. Here the only plural noun is "años",
-          # which is masculine, so the feminine form would agree with nothing
-          # and every sentence built on it is elliptical — the judge threw all
-          # twelve out. Unit 10 brings empanadas, facturas, medialunas and
-          # hermanas, and "¿Cuántas empanadas?" is that unit's own question.
       - lemma: "año"
         pos: "noun"
         en: "year"
@@ -1466,8 +1428,79 @@ units:
       - lemma: "veinte"
         pos: "num"
         en: "twenty"
-
-  - ordinal: 20
+  - ordinal: 21
+    slug: "treinta-y-cuatro"
+    title: "Count to a hundred and say your real age"
+    summary: "Tengo treinta y cuatro años"
+    grammar:
+      - "numeros.21-100"
+      - "tener.pres.1sg-3sg"
+    register_max: "informal"
+    sample:
+      es: "Tengo treinta y cuatro años"
+      en: "I'm thirty-four"
+    tips:
+      - title: "Veinticinco, treinta y cuatro"
+        body: "From 21 to 29 the number is one word: **veintiuno**, **veintidós**, **veinticinco**. From
+          **treinta** on it is three words joined by **y**: *Tengo treinta y cuatro años.* The same
+          pattern works for **cuarenta**, **cincuenta** and all the way up to **noventa**."
+      - title: "Sesenta or setenta?"
+        body: "**Sesenta** (60) and **setenta** (70) are the pair everyone mixes up: **sesenta** has the
+          **s** of *six*, **setenta** has the **t** of *seven*. And a round hundred is just **cien**
+          — never *un cien*."
+    words:
+      - lemma: "veintiuno"
+        pos: "num"
+        en: "twenty-one"
+      - lemma: "veintidós"
+        pos: "num"
+        en: "twenty-two"
+      - lemma: "veintitrés"
+        pos: "num"
+        en: "twenty-three"
+      - lemma: "veinticuatro"
+        pos: "num"
+        en: "twenty-four"
+      - lemma: "veinticinco"
+        pos: "num"
+        en: "twenty-five"
+      - lemma: "veintiséis"
+        pos: "num"
+        en: "twenty-six"
+      - lemma: "veintisiete"
+        pos: "num"
+        en: "twenty-seven"
+      - lemma: "veintiocho"
+        pos: "num"
+        en: "twenty-eight"
+      - lemma: "veintinueve"
+        pos: "num"
+        en: "twenty-nine"
+      - lemma: "treinta"
+        pos: "num"
+        en: "thirty"
+      - lemma: "cuarenta"
+        pos: "num"
+        en: "forty"
+      - lemma: "cincuenta"
+        pos: "num"
+        en: "fifty"
+      - lemma: "sesenta"
+        pos: "num"
+        en: "sixty"
+      - lemma: "setenta"
+        pos: "num"
+        en: "seventy"
+      - lemma: "ochenta"
+        pos: "num"
+        en: "eighty"
+      - lemma: "noventa"
+        pos: "num"
+        en: "ninety"
+      - lemma: "cien"
+        pos: "num"
+        en: "a hundred"
+  - ordinal: 22
     slug: "tengo-hambre"
     title: "Say you're hungry, cold or sleepy"
     summary: "Tengo hambre y tengo frío"
@@ -1480,12 +1513,12 @@ units:
       en: "I'm hungry. Are you cold?"
     tips:
       - title: "You have hunger"
-        body: "Where English *is*, Spanish *has*: **tengo hambre** (I'm hungry), **tengo sed**
-          (thirsty), **tengo frío**, **tengo calor**, **tengo sueño** (sleepy), **tengo miedo**
-          (scared). The same *tener* as your age."
+        body: "Where English *is*, Spanish *has*: **tengo hambre** (I'm hungry), **tengo sed** (thirsty),
+          **tengo frío**, **tengo calor**, **tengo sueño** (sleepy), **tengo miedo** (scared). The
+          same *tener* as your age."
       - title: "Tenés razón"
-        body: "**Tenés razón** — *you're right*, literally *you have reason*. **No tengo tiempo** —
-          *I don't have time*. **Tiene suerte** — *he's lucky*."
+        body: "**Tenés razón** — *you're right*, literally *you have reason*. **No tengo tiempo** — *I don't
+          have time*. **Tiene suerte** — *he's lucky*."
     words:
       - lemma: "hambre"
         pos: "noun"
@@ -1517,8 +1550,7 @@ units:
       - lemma: "tiempo"
         pos: "noun"
         en: "time"
-
-  - ordinal: 21
+  - ordinal: 23
     slug: "practica-tengo-hambre"
     title: "Practice: people and how they are"
     summary: "Mi tía es italiana y tiene frío"
@@ -1531,12 +1563,11 @@ units:
       en: "My sister is hungry and my uncle is sleepy."
     tips:
       - title: "Tengo, tenés, tiene"
-        body: "One verb for your age and for how you feel: **tengo** veinte años, **¿tenés** frío?,
-          mi tío **tiene** sueño."
+        body: "One verb for your age and for how you feel: **tengo** veinte años, **¿tenés** frío?, mi tío
+          **tiene** sueño."
       - title: "-o, -a, or no change"
-        body: "Words for people follow the person: *mi tío, mi tía*; *brasileño, brasileña*. A word in
-          *-e* stays put: *canadiense*."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+        body: "Words for people follow the person: *mi tío, mi tía*; *brasileño, brasileña*. A word in *-e*
+          stays put: *canadiense*."
     review:
       - "brasileña"
       - "canadiense"
@@ -1550,8 +1581,7 @@ units:
       - "tenés"
       - "quién"
       - "se llama"
-
-  - ordinal: 22
+  - ordinal: 24
     slug: "alfajores-y-chicles"
     title: "Buy snacks by the dozen"
     summary: "Una docena de alfajores"
@@ -1568,11 +1598,11 @@ units:
           ending in a consonant adds **-es**: *alfajor → **alfajores***. With a number, *un* and
           *una* drop out: *dos paquetes*."
       - title: "Tu, tus — mi, mis"
-        body: "*Your* is **tu**, and it takes an *-s* with more than one: **tu** hermano, **tus**
-          hermanos. *My* works the same way: *mi* gato, **mis** gatos."
+        body: "*Your* is **tu**, and it takes an *-s* with more than one: **tu** hermano, **tus** hermanos.
+          *My* works the same way: *mi* gato, **mis** gatos."
       - title: "Alfajores"
-        body: "An **alfajor** is two soft biscuits stuck together with *dulce de leche*, often dipped
-          in chocolate. Every kiosco sells them, and every porteño has a favourite."
+        body: "An **alfajor** is two soft biscuits stuck together with *dulce de leche*, often dipped in
+          chocolate. Every kiosco sells them, and every porteño has a favourite."
     words:
       - lemma: "tu"
         pos: "det"
@@ -1665,8 +1695,7 @@ units:
           - form: "gatos"
             en: "cats"
             f: "m.pl"
-
-  - ordinal: 23
+  - ordinal: 25
     slug: "en-el-kiosco"
     title: "Buy at the kiosco"
     summary: "Dos medialunas"
@@ -1685,16 +1714,11 @@ units:
         body: "A **kiosco** is the corner shop that sells drinks, sweets and bus cards, often through a
           window onto the street. Many never close."
     words:
-      # Not "kiosk": the judge threw out all twelve sentences that said it,
-      # because an English speaker hears a newsstand or a mall stand. It joins
-      # cortado, mate and medialuna as a word the course keeps and explains.
       - lemma: "kiosco"
         pos: "noun"
         en: "kiosco"
-        note: "the corner shop that sells drinks, sweets and bus cards, often through a window onto the street"
-      # The feminine half of "cuánto", held back from unit 9 (see there): it
-      # needs a feminine plural noun to agree with, and this unit is full of
-      # them.
+        note: "the corner shop that sells drinks, sweets and bus cards, often through a window onto the
+          street"
       - lemma: "cuánto"
         pos: "adj"
         en: "how many, how much"
@@ -1750,23 +1774,27 @@ units:
             en: "parents"
             note: "informal and affectionate"
             f: "m.pl"
-
-  - ordinal: 24
-    slug: "cuanto-sale"
+  - ordinal: 26
+    slug: "cuanto-cuesta"
     title: "Ask what it costs"
     summary: "¿Cuánto sale?"
     grammar:
       - "cuanto-sale"
       - "costar.pres.3"
-      - "numeros.100-1000"
+      - "numeros.miles"
     register_max: "informal"
     sample:
-      es: "¿Cuánto sale un café? Mil quinientos mangos."
-      en: "How much is a coffee? Fifteen hundred pesos."
+      es: "¿Cuánto sale?"
+      en: "How much is it?"
     tips:
       - title: "¿Cuánto sale?"
-        body: "**¿Cuánto sale?** is the everyday Argentine way to ask a price — *¿cuánto cuesta?* works too.
-          For more than one thing: **¿cuánto salen?** **Mangos** is slang for pesos."
+        body: "**¿Cuánto sale?** is the everyday Argentine way to ask a price — **¿cuánto cuesta?** works
+          too and means the same. For more than one thing the verb changes: **¿cuánto salen?**,
+          **¿cuánto cuestan?**"
+      - title: "Mil, never un mil"
+        body: "Argentine prices run into the thousands, so you will say **mil** all day. One thousand is
+          just **mil** — never *un mil* — and the word does not change: *Sale mil pesos.* *¿Mil
+          pesos? Es caro.*"
     words:
       - lemma: "cuánto"
         pos: "adj"
@@ -1794,6 +1822,54 @@ units:
           - form: "cuestan"
             en: "cost (several things)"
             f: "3pl.pres.ind"
+      - lemma: "peso"
+        pos: "noun"
+        en: "peso"
+        forms:
+          - form: "peso"
+            f: "m.sg"
+          - form: "pesos"
+            en: "pesos"
+            f: "m.pl"
+      - lemma: "plata"
+        pos: "noun"
+        en: "money"
+      - lemma: "caro"
+        pos: "adj"
+        en: "expensive"
+        forms:
+          - form: "caro"
+            f: "m.sg"
+          - form: "cara"
+            f: "f.sg"
+      - lemma: "barato"
+        pos: "adj"
+        en: "cheap"
+        forms:
+          - form: "barato"
+            f: "m.sg"
+          - form: "barata"
+            f: "f.sg"
+      - lemma: "mil"
+        pos: "num"
+        en: "a thousand"
+  - ordinal: 27
+    slug: "cuanto-sale"
+    title: "Pay for what you buy"
+    summary: "¿Efectivo o tarjeta?"
+    grammar:
+      - "cuanto-sale"
+      - "costar.pres.3"
+      - "numeros.100-1000"
+    register_max: "informal"
+    sample:
+      es: "¿Efectivo o tarjeta?"
+      en: "Cash or card?"
+    tips:
+      - title: "¿Cuánto sale?"
+        body: "**¿Cuánto sale?** is the everyday Argentine way to ask a price — *¿cuánto cuesta?* works too.
+          For more than one thing: **¿cuánto salen?** **Mangos** is slang for pesos."
+    words:
       - lemma: "pagar"
         pos: "verb"
         en: "to pay"
@@ -1826,10 +1902,6 @@ units:
           - form: "comprar"
             en: "to buy"
             f: "inf"
-
-      - lemma: "plata"
-        pos: "noun"
-        en: "money"
       - lemma: "mango"
         pos: "noun"
         en: "peso, buck"
@@ -1840,31 +1912,6 @@ units:
           - form: "mangos"
             en: "pesos, bucks"
             f: "m.pl"
-      - lemma: "peso"
-        pos: "noun"
-        en: "peso"
-        forms:
-          - form: "peso"
-            f: "m.sg"
-          - form: "pesos"
-            en: "pesos"
-            f: "m.pl"
-      - lemma: "caro"
-        pos: "adj"
-        en: "expensive"
-        forms:
-          - form: "caro"
-            f: "m.sg"
-          - form: "cara"
-            f: "f.sg"
-      - lemma: "barato"
-        pos: "adj"
-        en: "cheap"
-        forms:
-          - form: "barato"
-            f: "m.sg"
-          - form: "barata"
-            f: "f.sg"
       - lemma: "efectivo"
         pos: "noun"
         en: "cash"
@@ -1898,6 +1945,3 @@ units:
       - lemma: "novecientos"
         pos: "num"
         en: "nine hundred"
-      - lemma: "mil"
-        pos: "num"
-        en: "a thousand"

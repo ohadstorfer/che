@@ -16,70 +16,9 @@ section:
   slug: "like-a-local"
   title: "Like a local"
   cefr: "B2.5"
-  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
+  practice: 2
 units:
   - ordinal: 1
-    slug: "lo-que-paso-fue-que"
-    title: "Clear up a misunderstanding"
-    summary: "Lo que pasó fue que no te entendí"
-    grammar:
-      - "lo.nominalizacion"
-    register_max: "informal"
-    sample:
-      es: "Fue un malentendido: lo que pasó fue que no te entendí."
-      en: "It was a misunderstanding: what happened was I didn't understand you."
-    tips:
-      - title: "Lo que pasó fue que…"
-        body: "Tell it in the past: **lo que pasó fue que se cortó el subte**. Say what you meant: **lo que
-          quiero decir es que…**. **Lo que más** — *what… most*: **lo que más me molestó fue eso**. And
-          **en el fondo** — *deep down* — for the real reason under it."
-      - title: "Lo mío, lo tuyo"
-        body: "**Lo** turns anything into *the thing*: **lo tuyo es la cocina** — *your thing is cooking*;
-          **lo mío** — *my thing*; **lo primero** — *the first thing*; **lo justo** — *just enough*. Giving
-          up an argument: **lo que vos digas** or **lo que sea** — *whatever*."
-      - title: "Aclarar"
-        body: "To clear it up — **aclarar**: **quiero aclarar algo**. Then: **no quise decir eso** —
-          *I didn't mean that*; **me expresé mal** — *I put it badly*; **me entendiste mal** — *you
-          misunderstood me*; **no lo dije por vos** — *I didn't say it about you*."
-    words:
-      - lemma: "lo que pasó fue que"
-        pos: "phrase"
-        en: "what happened was"
-      - lemma: "lo que quiero decir es que"
-        pos: "phrase"
-        en: "what I mean is"
-      - lemma: "lo mío"
-        pos: "phrase"
-        en: "my thing, what's mine"
-      - lemma: "lo tuyo"
-        pos: "phrase"
-        en: "your thing, what's yours"
-      - lemma: "lo primero"
-        pos: "phrase"
-        en: "the first thing"
-      - lemma: "lo justo"
-        pos: "phrase"
-        en: "just enough, what's fair"
-      - lemma: "lo que sea"
-        pos: "phrase"
-        en: "whatever it is, anything goes"
-      - lemma: "lo que vos digas"
-        pos: "phrase"
-        en: "whatever you say"
-      - lemma: "en el fondo"
-        pos: "phrase"
-        en: "deep down"
-      - lemma: "malentendido"
-        pos: "noun"
-        en: "misunderstanding"
-      - lemma: "quise decir"
-        pos: "phrase"
-        en: "I meant"
-      - lemma: "me expresé mal"
-        pos: "phrase"
-        en: "I put it badly"
-
-  - ordinal: 2
     slug: "como-dice-el-dicho"
     title: "Use the sayings"
     summary: "Más vale tarde que nunca"
@@ -94,9 +33,9 @@ units:
         body: "A **dicho** is a saying, and porteños drop one to close an argument: **más vale tarde que
           nunca**; **no hay mal que por bien no venga** — *every cloud has a silver lining*."
       - title: "El que avisa no traiciona"
-        body: "**El que avisa no traiciona** — *I warned you*, literally *who warns doesn't betray*.
-          Two you'll hear every week in Buenos Aires: **sobre gustos no hay nada escrito** — *there's
-          no accounting for taste*; **el que quiere celeste, que le cueste** — *if you want the good
+        body: "**El que avisa no traiciona** — *I warned you*, literally *who warns doesn't betray*. Two
+          you'll hear every week in Buenos Aires: **sobre gustos no hay nada escrito** — *there's no
+          accounting for taste*; **el que quiere celeste, que le cueste** — *if you want the good
           stuff, it will cost you*."
     words:
       - lemma: "dicho"
@@ -117,8 +56,7 @@ units:
       - lemma: "el que quiere celeste, que le cueste"
         pos: "phrase"
         en: "if you want something good, it will cost you"
-
-  - ordinal: 3
+  - ordinal: 2
     slug: "cada-loco-con-su-tema"
     title: "Close an argument with a saying"
     summary: "Como dice el dicho: cada loco con su tema"
@@ -130,14 +68,14 @@ units:
       en: "As the saying goes: to each their own."
     tips:
       - title: "Como dice el dicho…"
-        body: "**Como dice el dicho** — *as the saying goes* — and then the one that fits: **cada loco con su
-          tema** — *to each their own*; **no hay dos sin tres** — *it happened twice, it'll happen again*;
-          **el que no llora no mama** — *the squeaky wheel gets the grease*."
+        body: "**Como dice el dicho** — *as the saying goes* — and then the one that fits: **cada loco con
+          su tema** — *to each their own*; **no hay dos sin tres** — *it happened twice, it'll
+          happen again*; **el que no llora no mama** — *the squeaky wheel gets the grease*."
       - title: "The ones grandma says"
-        body: "**Más vale pájaro en mano que cien volando** — *a bird in the hand*; **a caballo
-          regalado no se le miran los dientes**; **ojos que no ven, corazón que no siente**; **del
-          dicho al hecho hay mucho trecho** — *easier said than done*. **El que se quema con leche, ve
-          una vaca y llora** — *once bitten, twice shy*. For someone who complicates everything:
+        body: "**Más vale pájaro en mano que cien volando** — *a bird in the hand*; **a caballo regalado no
+          se le miran los dientes**; **ojos que no ven, corazón que no siente**; **del dicho al
+          hecho hay mucho trecho** — *easier said than done*. **El que se quema con leche, ve una
+          vaca y llora** — *once bitten, twice shy*. For someone who complicates everything:
           **buscarle la quinta pata al gato** — *to look for the cat's fifth leg*. And when someone
           walks in: **hablando del rey de Roma…**"
     words:
@@ -174,8 +112,7 @@ units:
       - lemma: "buscarle la quinta pata al gato"
         pos: "phrase"
         en: "to look for problems where there are none"
-
-  - ordinal: 4
+  - ordinal: 3
     slug: "practica-cada-loco-con-su-tema"
     title: "Practice: -ito, what happened, more sayings"
     summary: "Lo que pasó fue que hacía fresquito"
@@ -194,7 +131,6 @@ units:
       - title: "Lo que pasó fue que…"
         body: "**Lo que pasó fue que**, **lo que quiero decir es que**, **lo tuyo**, **lo que sea** — and
           **como dice el dicho**, **cada loco con su tema**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "fresquito"
       - "solcito"
@@ -215,8 +151,7 @@ units:
       - "un toque"
       - "lo mismo"
       - "o sea"
-
-  - ordinal: 5
+  - ordinal: 4
     slug: "me-hizo-reir"
     title: "Say what made you laugh or cry"
     summary: "Me hizo reír un montón"
@@ -230,11 +165,12 @@ units:
     tips:
       - title: "Me hizo reír"
         body: "**Hacer** + infinitive is *to make someone do*: **me hizo reír**, **me hizo llorar**, **nos
-          hizo esperar**. **Me hace acordar** — *it reminds me*: *esta canción me hace acordar a vos*."
+          hizo esperar**. **Me hace acordar** — *it reminds me*: *esta canción me hace acordar a
+          vos*."
       - title: "Me reí"
-        body: "**Reírse** is *to laugh*: **me río mucho con vos** — *I laugh a lot with you*; **me
-          reí un montón**, **nos reímos de todo**; **¿te reíste?** **Llorar** is *to cry*: **lloré con
-          la película**."
+        body: "**Reírse** is *to laugh*: **me río mucho con vos** — *I laugh a lot with you*; **me reí un
+          montón**, **nos reímos de todo**; **¿te reíste?** **Llorar** is *to cry*: **lloré con la
+          película**."
     words:
       - lemma: "reír"
         pos: "verb"
@@ -246,29 +182,17 @@ units:
         pos: "verb"
         en: "to laugh"
         forms:
-          - form: "me reí"
-            en: "I laughed"
-            f: "1sg.pret.ind.clitic"
-          - form: "nos reímos"
-            en: "we laugh, we laughed"
-            f: "1pl.pres.ind.clitic"
           - form: "me río"
             en: "I laugh"
             f: "1sg.pres.ind.clitic.irregular"
           - form: "te reíste"
             en: "you laughed"
             f: "2sg.pret.ind.vos.clitic"
-          - form: "reí"
-            f: "1sg.pret.ind"
-            bound: true
           - form: "río"
             f: "1sg.pres.ind.irregular"
             bound: true
           - form: "reíste"
             f: "2sg.pret.ind.vos"
-            bound: true
-          - form: "reímos"
-            f: "1pl.pres.ind"
             bound: true
       - lemma: "llorar"
         pos: "verb"
@@ -289,8 +213,7 @@ units:
       - lemma: "canción"
         pos: "noun"
         en: "song"
-
-  - ordinal: 6
+  - ordinal: 5
     slug: "me-mori-de-risa"
     title: "Tell what cracked you up"
     summary: "Me morí de risa con esa comedia"
@@ -306,10 +229,10 @@ units:
         body: "**Hacer** + infinitive works with any verb: **me hizo sentir como en casa**, **te hace
           pensar**, **nos hizo llorar a todos**. And people too: **vos me hacés reír**."
       - title: "¿De qué te reís?"
-        body: "**Reírse** with *vos*: **¿de qué te reís?**; with *him*: **se ríe de todo**, **se
-          rió**. **¿Lloraste?** For the big laugh: **me morí de risa** — *I died laughing*. A
-          **comedia** gets a **sonrisa**; a sad scene, **lágrimas** and **tristeza**. And people with
-          **sentido del humor** laugh at themselves."
+        body: "**Reírse** with *vos*: **¿de qué te reís?**; with *him*: **se ríe de todo**, **se rió**.
+          **¿Lloraste?** For the big laugh: **me morí de risa** — *I died laughing*. A **comedia**
+          gets a **sonrisa**; a sad scene, **lágrimas** and **tristeza**. And people with **sentido
+          del humor** laugh at themselves."
     words:
       - lemma: "reírse"
         pos: "verb"
@@ -385,8 +308,7 @@ units:
       - lemma: "sentido del humor"
         pos: "phrase"
         en: "sense of humor"
-
-  - ordinal: 7
+  - ordinal: 6
     slug: "cuanto-mas"
     title: "Say the more, the better"
     summary: "Cuanto más practicás, mejor hablás"
@@ -399,11 +321,11 @@ units:
       en: "The more you practice, the better you speak."
     tips:
       - title: "Cuanto más…"
-        body: "**Cuanto más** — *the more*: **cuanto más practicás, mejor hablás**. **Cuanto menos** —
-          *the less*. And **cuanto antes** — *the sooner the better*: **avisame cuanto antes**."
+        body: "**Cuanto más** — *the more*: **cuanto más practicás, mejor hablás**. **Cuanto menos** — *the
+          less*. And **cuanto antes** — *the sooner the better*: **avisame cuanto antes**."
       - title: "A medida que"
-        body: "**A medida que** — *as*, for two things changing together: **a medida que pasa el tiempo,
-          te vas acostumbrando**."
+        body: "**A medida que** — *as*, for two things changing together: **a medida que pasa el tiempo, te
+          vas acostumbrando**."
     words:
       - lemma: "cuanto más"
         pos: "phrase"
@@ -417,8 +339,7 @@ units:
       - lemma: "a medida que"
         pos: "phrase"
         en: "as (gradually)"
-
-  - ordinal: 8
+  - ordinal: 7
     slug: "cuanto-antes-lleguemos"
     title: "Plan it: the sooner, the better"
     summary: "Cuanto antes lleguemos, mejor"
@@ -433,12 +354,12 @@ units:
     tips:
       - title: "Cuanto antes lleguemos"
         body: "About what hasn't happened yet, the verb after **cuanto** goes subjunctive: **cuanto antes
-          lleguemos, mejor**; **cuanto antes reservemos, más barato**; **cuanto más temprano empecemos,
-          antes terminamos**. About what always happens, the normal verb: **cuanto más ganás, más
-          gastás**."
+          lleguemos, mejor**; **cuanto antes reservemos, más barato**; **cuanto más temprano
+          empecemos, antes terminamos**. About what always happens, the normal verb: **cuanto más
+          ganás, más gastás**."
       - title: "Mejor todavía"
-        body: "**Mejor todavía** — *even better*: **¿es gratis? Mejor todavía**; also **mejor así**
-          — *better this way*. *Tanto mejor* says the same but sounds bookish. To **evitar** the
+        body: "**Mejor todavía** — *even better*: **¿es gratis? Mejor todavía**; also **mejor así** —
+          *better this way*. *Tanto mejor* says the same but sounds bookish. To **evitar** the
           **hora pico**, you go early; the place **se llena** fast; and leaving early, the day
           **rinde** — *goes further*."
     words:
@@ -501,8 +422,7 @@ units:
       - lemma: "mejor todavía"
         pos: "phrase"
         en: "even better"
-
-  - ordinal: 9
+  - ordinal: 8
     slug: "practica-me-mori-de-risa"
     title: "Practice: barrio slang, laughs and plans"
     summary: "Estoy manija: cuanto antes, mejor"
@@ -516,11 +436,11 @@ units:
       en: "I'm so hyped: the sooner we get there, the better."
     tips:
       - title: "Al horno, manija"
-        body: "**Al horno**, **qué bajón**, **ni en pedo**, **rata**, **careta**, **manija** — among friends."
+        body: "**Al horno**, **qué bajón**, **ni en pedo**, **rata**, **careta**, **manija** — among
+          friends."
       - title: "Me morí de risa, tanto mejor"
         body: "**Me morí de risa**, **¿de qué te reís?**, **me hizo sentir…** — and **cuanto antes
           lleguemos, mejor**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "al horno"
       - "bajón"
@@ -540,8 +460,7 @@ units:
       - "guita"
       - "a la larga"
       - "mejor todavía"
-
-  - ordinal: 10
+  - ordinal: 9
     slug: "sin-ofender"
     title: "Give honest feedback"
     summary: "Te lo digo con cariño, sin ofender"
@@ -558,8 +477,8 @@ units:
           cariño**; **no es nada personal**. A **crítica** goes down better that way, above all on a
           **tema delicado**."
       - title: "Perdoname, quise decir…"
-        body: "When it lands badly: **perdoname, me expresé mal** — *I put it badly*; **quise decir
-          otra cosa** — *I meant something else*; **no fue mi intención lastimarte**."
+        body: "When it lands badly: **perdoname, me expresé mal** — *I put it badly*; **quise decir otra
+          cosa** — *I meant something else*; **no fue mi intención lastimarte**."
     words:
       - lemma: "sin ofender"
         pos: "phrase"
@@ -597,8 +516,7 @@ units:
           - form: "perdoname"
             en: "forgive me"
             f: "2sg.imp.vos.clitic"
-
-  - ordinal: 11
+  - ordinal: 10
     slug: "no-te-lo-tomes-a-mal"
     title: "Say the hard thing kindly"
     summary: "No te lo tomes a mal"
@@ -614,8 +532,8 @@ units:
         body: "Before the hard thing: **no te lo tomes a mal** — *don't take it the wrong way*; **con todo
           respeto** — *with all due respect*. After it: **no lo dije para ofenderte**."
       - title: "Entre nos"
-        body: "**Entre nos** — *between you and me* — is where porteño gossip starts. **Sin querer** —
-          *by accident*: **te pisé sin querer**."
+        body: "**Entre nos** — *between you and me* — is where porteño gossip starts. **Sin querer** — *by
+          accident*: **te pisé sin querer**."
     words:
       - lemma: "no te lo tomes a mal"
         pos: "phrase"
@@ -640,8 +558,7 @@ units:
           - form: "ofendiste"
             f: "2sg.pret.ind.vos"
             bound: true
-
-  - ordinal: 12
+  - ordinal: 11
     slug: "me-cayo-la-ficha"
     title: "Name the feelings porteños name"
     summary: "Recién ahora me cayó la ficha"
@@ -656,10 +573,10 @@ units:
         body: "**Me cayó la ficha** — *the penny dropped* — comes from the old phone tokens that fell when
           the call went through. **Recién ahora me cayó la ficha** — *it only just sank in*."
       - title: "Me da cosa"
-        body: "**Me da cosa** — *I feel awkward about it, it makes me uneasy*. Mostly with an
-          infinitive: **me da cosa pedirle plata** — *I feel bad asking him for money*; and about a
-          thing: *ese perro me da cosa*. **Me pone mal** — *it gets me down*. **Me quedé con las
-          ganas** — *I missed out, and I still want to*."
+        body: "**Me da cosa** — *I feel awkward about it, it makes me uneasy*. Mostly with an infinitive:
+          **me da cosa pedirle plata** — *I feel bad asking him for money*; and about a thing: *ese
+          perro me da cosa*. **Me pone mal** — *it gets me down*. **Me quedé con las ganas** — *I
+          missed out, and I still want to*."
     words:
       - lemma: "me cayó la ficha"
         pos: "phrase"
@@ -687,8 +604,7 @@ units:
           - form: "decirle"
             en: "to tell him, to tell her"
             f: "inf.clitic"
-
-  - ordinal: 13
+  - ordinal: 12
     slug: "me-hace-ruido"
     title: "Put a gut feeling into words"
     summary: "Algo de todo esto me hace ruido"
@@ -700,14 +616,14 @@ units:
       en: "I was stunned when I found out."
     tips:
       - title: "Me hace ruido"
-        body: "When something doesn't sit right: **me hace ruido** — *something's off about it* — and
-          **no me cierra** — *it doesn't add up*. Porteños say both about a deal, a story, or a new
+        body: "When something doesn't sit right: **me hace ruido** — *something's off about it* — and **no
+          me cierra** — *it doesn't add up*. Porteños say both about a deal, a story, or a new
           boyfriend."
       - title: "Me quedé helado"
-        body: "The same shape as **me cayó la ficha** — the feeling happens *to* you: **me quedé helado**
-          — *I froze, I was stunned*; **me dejó pensando** — *it got me thinking*; **me partió el alma**
-          — *it broke my heart*. The good ones: **me hace bien**, **me da ternura**, and **¡qué
-          alivio!**"
+        body: "The same shape as **me cayó la ficha** — the feeling happens *to* you: **me quedé helado** —
+          *I froze, I was stunned*; **me dejó pensando** — *it got me thinking*; **me partió el
+          alma** — *it broke my heart*. The good ones: **me hace bien**, **me da ternura**, and
+          **¡qué alivio!**"
     words:
       - lemma: "me hace ruido"
         pos: "phrase"
@@ -745,8 +661,7 @@ units:
           - form: "sentí"
             en: "I felt"
             f: "1sg.pret.ind"
-
-  - ordinal: 14
+  - ordinal: 13
     slug: "practica-me-hace-ruido"
     title: "Practice: deadlines, promotions and gut feelings"
     summary: "Se lo merece, pero algo me hace ruido"
@@ -764,7 +679,6 @@ units:
       - title: "Me hace ruido"
         body: "**Me hace ruido**, **no me cierra**, **me quedé helado**, **qué alivio** — the gut, in
           porteño."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "entregamos"
       - "informe"
@@ -785,8 +699,7 @@ units:
       - "sueldo"
       - "aguinaldo"
       - "bronca"
-
-  - ordinal: 15
+  - ordinal: 14
     slug: "mis-abuelos-italianos"
     title: "Tell where your family came from"
     summary: "Mis abuelos llegaron en barco"
@@ -798,12 +711,12 @@ units:
       en: "My grandparents came from Italy by boat."
     tips:
       - title: "Llegaron en barco"
-        body: "Most porteños have an **abuelo** or **bisabuelo** who **llegó en barco** from Italy
-          or Spain. An Italian, or anyone with an Italian surname, is a **tano** or a **tana**: *mi
-          abuelo era tano*. That's why a porteño talks with his hands and eats ñoquis on the 29th."
+        body: "Most porteños have an **abuelo** or **bisabuelo** who **llegó en barco** from Italy or Spain.
+          An Italian, or anyone with an Italian surname, is a **tano** or a **tana**: *mi abuelo era
+          tano*. That's why a porteño talks with his hands and eats ñoquis on the 29th."
       - title: "Otra época"
-        body: "**Era otra época** — *it was a different time*. The **inmigrantes** of the early 20th
-          century built the city's **conventillos**, its tango and its accent."
+        body: "**Era otra época** — *it was a different time*. The **inmigrantes** of the early 20th century
+          built the city's **conventillos**, its tango and its accent."
     words:
       - lemma: "inmigrante"
         pos: "noun"
@@ -841,8 +754,7 @@ units:
             f: "m.sg"
           - form: "tana"
             f: "f.sg"
-
-  - ordinal: 16
+  - ordinal: 15
     slug: "se-instalaron-en-la-boca"
     title: "Trace your family's roots"
     summary: "Se escaparon de la guerra y se instalaron acá"
@@ -861,8 +773,8 @@ units:
           the same, but it is a written word."
       - title: "Gallego y la ciudadanía"
         body: "In Argentina every Spaniard is a **gallego**, from Galicia or not. And the great-grandparents
-          still pay off: half of Buenos Aires is sacando **la ciudadanía** italiana or española. Your
-          **raíces** — *roots* — come with a passport."
+          still pay off: half of Buenos Aires is sacando **la ciudadanía** italiana or española.
+          Your **raíces** — *roots* — come with a passport."
     words:
       - lemma: "escaparse"
         pos: "verb"
@@ -944,8 +856,7 @@ units:
           - form: "guardaron"
             en: "they saved, they put away"
             f: "3pl.pret.ind"
-
-  - ordinal: 17
+  - ordinal: 16
     slug: "practica-se-instalaron"
     title: "Practice: road trips, mate and roots"
     summary: "Acampamos en el sur y el mate lo cebo yo"
@@ -963,7 +874,6 @@ units:
           hiervas el agua**."
       - title: "Se instalaron"
         body: "**Se escaparon de la guerra**, **se instalaron en La Boca** — the roots of the city."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "acampamos"
       - "hicimos dedo"
@@ -984,8 +894,7 @@ units:
       - "pava"
       - "trajeron"
       - "extraño"
-
-  - ordinal: 18
+  - ordinal: 17
     slug: "me-emocione"
     title: "Say you were moved"
     summary: "Me emocioné un montón"
@@ -1039,8 +948,7 @@ units:
       - lemma: "piel de gallina"
         pos: "phrase"
         en: "goosebumps"
-
-  - ordinal: 19
+  - ordinal: 18
     slug: "se-emociono"
     title: "Tell who got emotional"
     summary: "Mi viejo se emocionó con el discurso"
@@ -1057,9 +965,9 @@ units:
           emocionó**, **nos emocionamos todos**. It was **emotivo** — *moving* — and **se me hizo un
           nudo en la garganta** — *I got a lump in my throat*."
       - title: "Me llegó"
-        body: "**Me llegó** — *it really touched me*: **tu mensaje me llegó un montón**. Say it **de
-          todo corazón**. **Sos un orgullo** — *you make us proud*. After the **discurso**, everyone
-          **se abrazó** — and the **felicidad** was all over the room."
+        body: "**Me llegó** — *it really touched me*: **tu mensaje me llegó un montón**. Say it **de todo
+          corazón**. **Sos un orgullo** — *you make us proud*. After the **discurso**, everyone **se
+          abrazó** — and the **felicidad** was all over the room."
     words:
       - lemma: "emocionarse"
         pos: "verb"
@@ -1117,8 +1025,7 @@ units:
       - lemma: "felicidad"
         pos: "noun"
         en: "happiness"
-
-  - ordinal: 20
+  - ordinal: 19
     slug: "practica-se-emociono"
     title: "Practice: pranks, milestones and emotions"
     summary: "¡Caíste! Pero se recibió de verdad"
@@ -1136,7 +1043,6 @@ units:
       - title: "Se recibió, se emocionó"
         body: "**Se recibió**, **se comprometieron**, **se jubiló** — and **se emocionó**, **nos
           emocionamos**, **me llegó**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "caíste"
       - "tomando el pelo"
@@ -1155,8 +1061,7 @@ units:
       - "me alegro"
       - "abrazo"
       - "sonrisa"
-
-  - ordinal: 21
+  - ordinal: 20
     slug: "gracias-por-todo"
     title: "Say goodbye like a porteño"
     summary: "Gracias por todo: me siento como en casa"
@@ -1169,8 +1074,8 @@ units:
       en: "It was hard at first, but now I feel at home."
     tips:
       - title: "Al principio me costó"
-        body: "Looking back is the preterite: **al principio me costó** — *it was hard at first* — **pero
-          me adapté** — *I adapted*. Now **me siento como en casa**. Say it **de corazón**."
+        body: "Looking back is the preterite: **al principio me costó** — *it was hard at first* — **pero me
+          adapté** — *I adapted*. Now **me siento como en casa**. Say it **de corazón**."
       - title: "Brindemos"
         body: "A porteño **despedida** — *farewell party* — ends with a toast, a **brindis**:
           **¡brindemos!**, **brindo por ustedes**, **¡salud!** Then **gracias por todo**, **fue un
@@ -1246,8 +1151,7 @@ units:
           - form: "decirles"
             en: "to say to them, to tell them"
             f: "inf.clitic"
-
-  - ordinal: 22
+  - ordinal: 21
     slug: "ya-sos-de-aca"
     title: "You're from here now"
     summary: "¡Lo lograste! Ya sos de acá"
@@ -1260,9 +1164,9 @@ units:
       en: "You did it! You're a local now."
     tips:
       - title: "Lo lograste"
-        body: "**Lograr** — *to manage, to pull off*: **¡lo lograste!** — *you did it!* And your own
-          line: **¡lo logré!** — *I did it!* **Felicitaciones** is how the course says it;
-          **¡grande!** is how a porteño would."
+        body: "**Lograr** — *to manage, to pull off*: **¡lo lograste!** — *you did it!* And your own line:
+          **¡lo logré!** — *I did it!* **Felicitaciones** is how the course says it; **¡grande!** is
+          how a porteño would."
       - title: "Ya sos de acá"
         body: "When your **acento** gives you away less and less, someone will say **ya sos de acá** —
           *you're one of us now*. Take it: it's the highest praise the city has."

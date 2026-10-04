@@ -55,7 +55,8 @@ test("a section's last unit is built like the others: lessons, then the unit che
   assert.deepEqual(outline.units[1].lessons.map((l) => l.kind), ['lesson', 'lesson', 'review']);
 });
 
-test("a section can't end on a practice unit", () => {
+// Every unit ends on its own check now, so a section may end on a practice unit.
+test('a section may end on a practice unit', () => {
   const practice = `
   - ordinal: 2
     slug: u2
@@ -65,7 +66,7 @@ test("a section can't end on a practice unit", () => {
     tips: [{title: T, body: B}]
     review: [che]`;
   const { errors } = outlineFrom(HEADER + unit(1, '      - {lemma: che, pos: interj, en: hey}') + practice);
-  assert.ok(errors.some((e) => e.includes("can't end on a practice unit")), errors.join('\n'));
+  assert.ok(!errors.some((e) => e.includes('practice unit')), errors.join('\n'));
 });
 
 test('rejects a tuteo form in the lexicon', () => {
@@ -203,11 +204,11 @@ test('rejects an ambiguous form reference and accepts the disambiguated one', ()
   const { outline } = loadOutline();
   // "mañana" is both the morning and tomorrow, and one unit teaches both.
   const bad = buildContent(outline, {
-    'la-hora': { sentences: { s: { es: 'Mañana.', en: 'Tomorrow.', target: 'mañana' } } },
+    'hoy-y-manana': { sentences: { s: { es: 'Mañana.', en: 'Tomorrow.', target: 'mañana' } } },
   });
   assert.ok(bad.errors.some((e) => e.includes('ambiguous')), bad.errors.join('\n'));
   const good = buildContent(outline, {
-    'la-hora': { sentences: { s: { es: 'Mañana.', en: 'Tomorrow.', target: 'mañana/adv' } } },
+    'hoy-y-manana': { sentences: { s: { es: 'Mañana.', en: 'Tomorrow.', target: 'mañana/adv' } } },
   });
   assert.deepEqual(good.errors, []);
 });

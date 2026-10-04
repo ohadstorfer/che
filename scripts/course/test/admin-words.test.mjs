@@ -69,7 +69,7 @@ const edit = (d, es, edits) => planSentence(d, sentence(d, es), edits);
 test('1. a word the learner hasn\'t met yet pauses it; taking it out brings it back', () => {
   const paused = edit(data, 'Un café, por favor.', { es: 'Un perro, por favor.', en: 'A dog, please.', target_form_id: form(data, 'café').id });
   assert.equal(paused.row.status, 'draft');
-  assert.ok(paused.problems.some((p) => p.includes(`"perro" isn't taught until unit 17`)), paused.problems.join('\n'));
+  assert.ok(paused.problems.some((p) => p.includes(`"perro" isn't taught until unit 18`)), paused.problems.join('\n'));
   assert.ok(paused.paused);
   const back = planSentence(applied(data, paused), { ...sentence(data, 'Un café, por favor.'), ...paused.row }, { es: 'Un café, por favor.', en: 'A coffee, please.' });
   assert.deepEqual(back.problems, []);

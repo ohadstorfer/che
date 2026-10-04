@@ -59,9 +59,11 @@ units:
         body: "For more than one person, Argentina uses **ustedes** with the same verb form as *ellos*:
           *ustedes son*, *ellos son*."
       - title: "Nosotras, ellas"
-        body: "**Nosotras** and **ellas** are for groups of women only. One man in the group makes it **nosotros** and **ellos**."
+        body: "**Nosotras** and **ellas** are for groups of women only. One man in the group makes it
+          **nosotros** and **ellos**."
       - title: "Nuestro, nuestra"
-        body: "*Our* matches the thing, not the people: **nuestro** país, **nuestra** familia, **nuestros** hijos, **nuestras** hermanas. *Their* is still **su**: *su familia*, *sus hijos*."
+        body: "*Our* matches the thing, not the people: **nuestro** país, **nuestra** familia, **nuestros**
+          hijos, **nuestras** hermanas. *Their* is still **su**: *su familia*, *sus hijos*."
     words:
       - lemma: "nosotros"
         pos: "pron"
@@ -122,7 +124,6 @@ units:
             f: "m.pl"
           - form: "nuestras"
             f: "f.pl"
-
   - ordinal: 2
     slug: "altos-y-morochos"
     title: "Describe the people in your life"
@@ -139,8 +140,8 @@ units:
       en: "My brothers are tall and dark-haired."
     tips:
       - title: "Son altos"
-        body: "What people are like goes with *ser*: **somos altos**, **son morochos**. The word takes
-          an *-s* for more than one, and *-os* covers a mixed group: *mis hermanos son altos*, even if
+        body: "What people are like goes with *ser*: **somos altos**, **son morochos**. The word takes an
+          *-s* for more than one, and *-os* covers a mixed group: *mis hermanos son altos*, even if
           one of them is a sister."
       - title: "Morocho, rubio, flaco"
         body: "Porteños describe people by the obvious and nobody minds: **morocho** is dark-haired,
@@ -266,7 +267,6 @@ units:
           - form: "mellizos"
             en: "twins"
             f: "m.pl"
-
   - ordinal: 3
     slug: "donde-esta"
     title: "Say where something is"
@@ -333,7 +333,6 @@ units:
       - lemma: "lejos"
         pos: "adv"
         en: "far"
-
   - ordinal: 4
     slug: "donde-estan-las-llaves"
     title: "Find your things"
@@ -352,7 +351,10 @@ units:
         body: "One thing **está**, more than one **están**: *¿Dónde está mi celu?* — *¿Dónde están mis
           anteojos?* The answer drops the thing you're looking for: **Están en la mochila.**"
       - title: "Arriba, abajo, adentro"
-        body: "Three words that need nothing after them: **arriba** (up, upstairs), **abajo** (down, downstairs), **adentro** (inside). *Estoy abajo* is what a porteño texts from the street when they're at your door. The fourth one is **afuera** — *outside*: *mi auto está afuera*."
+        body: "Three words that need nothing after them: **arriba** (up, upstairs), **abajo** (down,
+          downstairs), **adentro** (inside). *Estoy abajo* is what a porteño texts from the street
+          when they're at your door. The fourth one is **afuera** — *outside*: *mi auto está
+          afuera*."
       - title: "En casa"
         body: "No *la* before home: **estoy en casa**, *I'm at home*. With anything else the little word
           comes back: *en la mochila*, *en el auto*."
@@ -405,7 +407,30 @@ units:
       - lemma: "adentro"
         pos: "adv"
         en: "inside"
-
+      - lemma: "cargador"
+        pos: "noun"
+        en: "charger"
+        forms:
+          - form: "cargador"
+          - form: "cargadores"
+            en: "chargers"
+            f: "m.pl"
+      - lemma: "mío"
+        pos: "adj"
+        en: "mine"
+        forms:
+          - form: "mío"
+            en: "mine"
+          - form: "mía"
+            en: "mine"
+      - lemma: "tuyo"
+        pos: "adj"
+        en: "yours"
+        forms:
+          - form: "tuyo"
+            en: "yours"
+          - form: "tuya"
+            en: "yours"
   - ordinal: 5
     slug: "hay-un-kiosco"
     title: "Say what there is around you"
@@ -471,7 +496,6 @@ units:
       - lemma: "calle"
         pos: "noun"
         en: "street"
-
   - ordinal: 6
     slug: "hay-un-tren"
     title: "Find your way around the city"
@@ -485,14 +509,14 @@ units:
       en: "Is there a train station around here?"
     tips:
       - title: "Por acá"
-        body: "**Por acá** is *around here*, the end of every question on the street: *¿Hay un bar por
-          acá?* *¿Hay un taxi por acá?* The answer is usually a finger and *a dos cuadras*."
+        body: "**Por acá** is *around here*, the end of every question on the street: *¿Hay un bar por acá?*
+          *¿Hay un taxi por acá?* The answer is usually a finger and *a dos cuadras*."
       - title: "Hay gente"
-        body: "**Hay** works for things you can't count, too: **hay gente** — there are people. *Gente*
-          is singular in Spanish: *la gente está en la plaza*."
+        body: "**Hay** works for things you can't count, too: **hay gente** — there are people. *Gente* is
+          singular in Spanish: *la gente está en la plaza*."
       - title: "Al parque, del subte"
-        body: "The same two joins as before: *a la plaza* but **al** parque, **al** hospital; *la
-          estación **del** subte*, *la parada **del** bondi*."
+        body: "The same two joins as before: *a la plaza* but **al** parque, **al** hospital; *la estación
+          **del** subte*, *la parada **del** bondi*."
     words:
       - lemma: "tren"
         pos: "noun"
@@ -530,8 +554,71 @@ units:
       - lemma: "por acá"
         pos: "phrase"
         en: "around here"
-
+      - lemma: "malo"
+        pos: "adj"
+        en: "bad"
+        forms:
+          - form: "malo"
+            f: "m.sg"
+          - form: "mala"
+            f: "f.sg"
+      - lemma: "bueno"
+        pos: "adj"
+        en: "good"
+        forms:
+          - form: "buena"
+            en: "good"
+            f: "f.sg"
+          - form: "buenos"
+            en: "good"
+            f: "m.pl"
   - ordinal: 7
+    slug: "adonde-vas"
+    title: "Say where you're going"
+    summary: "¿Adónde vas? Voy a la plaza"
+    grammar:
+      - "ir.pres"
+      - "ir-a.lugar"
+      - "contraccion.del-al"
+    register_max: "informal"
+    sample:
+      es: "¿Adónde vas? Voy a la plaza"
+      en: "Where are you going? I'm going to the square."
+    tips:
+      - title: "Voy, vas, va"
+        body: "**Ir** — *to go* — looks nothing like its forms: **voy**, **vas**, **va**, **vamos**,
+          **van**. Spanish uses one form for *I go* and *I'm going*: *Voy a la plaza* is both. And
+          **vamos** on its own also means *let's go*."
+      - title: "Always with a"
+        body: "Going somewhere takes **a** — *to* — every time: *Voy a la plaza.* The question word has that
+          **a** built in: **¿adónde vas?** is *where are you going to?* English often drops the
+          *to*; Spanish never drops the **a**."
+    words:
+      - lemma: "ir"
+        pos: "verb"
+        en: "to go"
+        forms:
+          - form: "ir"
+            f: "inf"
+          - form: "voy"
+            en: "I go, I'm going"
+            f: "1sg.pres.ind"
+          - form: "vas"
+            en: "you go, you're going"
+            f: "2sg.pres.ind.vos"
+          - form: "va"
+            en: "goes (he/she goes)"
+            f: "3sg.pres.ind"
+          - form: "vamos"
+            en: "we go, let's go"
+            f: "1pl.pres.ind"
+          - form: "van"
+            en: "they go"
+            f: "3pl.pres.ind"
+      - lemma: "adónde"
+        pos: "adv"
+        en: "where (to)"
+  - ordinal: 8
     slug: "practica-por-aca"
     title: "Practice: people and places"
     summary: "Mis hermanos están en la plaza"
@@ -544,12 +631,11 @@ units:
       en: "My brothers are nice and they're in the square."
     tips:
       - title: "Son or están"
-        body: "**Son** says what people are like: *son altos*, *son simpáticos*. **Están** says where
-          they are: *están en la plaza*. The same people, two verbs."
+        body: "**Son** says what people are like: *son altos*, *son simpáticos*. **Están** says where they
+          are: *están en la plaza*. The same people, two verbs."
       - title: "Hay or está"
-        body: "**Hay** for something new: *hay una estación por acá*. **Está** for the one you already
-          mean: *la estación está en la avenida*."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+        body: "**Hay** for something new: *hay una estación por acá*. **Está** for the one you already mean:
+          *la estación está en la avenida*."
     review:
       - "rubia"
       - "simpáticos"
@@ -563,8 +649,7 @@ units:
       - "tienen"
       - "esquina"
       - "lejos"
-
-  - ordinal: 8
+  - ordinal: 9
     slug: "como-estas"
     title: "Say how you feel"
     summary: "¿Cómo estás?"
@@ -687,8 +772,7 @@ units:
       - lemma: "por qué"
         pos: "phrase"
         en: "why"
-
-  - ordinal: 9
+  - ordinal: 10
     slug: "esta-cerrado"
     title: "Say how things are"
     summary: "El bar está lleno"
@@ -704,15 +788,15 @@ units:
       en: "The bar is packed and the beer is warm."
     tips:
       - title: "Estar for how things are"
-        body: "*Estar* isn't only for people: things have a state right now too. **El bar está
-          cerrado**, **el bondi está lleno**, **la cerveza está caliente**. The word matches the thing:
-          *el bar* está llen**o**, *la plaza* está llen**a**."
+        body: "*Estar* isn't only for people: things have a state right now too. **El bar está cerrado**,
+          **el bondi está lleno**, **la cerveza está caliente**. The word matches the thing: *el
+          bar* está llen**o**, *la plaza* está llen**a**."
       - title: "¿Listo? Listo."
-        body: "**Listo** is *ready* — *¿estás lista?* — and on its own it closes any deal: *Listo,
-          dale.* **Apurado** is *in a hurry*, the normal state of anyone in the centro."
+        body: "**Listo** is *ready* — *¿estás lista?* — and on its own it closes any deal: *Listo, dale.*
+          **Apurado** is *in a hurry*, the normal state of anyone in the centro."
       - title: "Caliente"
-        body: "**Caliente** is for things: *el café está caliente*. Said about a person it means angry
-          — or something ruder — so for the weather or yourself, use *tengo calor*."
+        body: "**Caliente** is for things: *el café está caliente*. Said about a person it means angry — or
+          something ruder — so for the weather or yourself, use *tengo calor*."
     words:
       - lemma: "abierto"
         pos: "adj"
@@ -809,8 +893,7 @@ units:
             f: "sg"
           - form: "libres"
             f: "pl"
-
-  - ordinal: 10
+  - ordinal: 11
     slug: "que-haces"
     title: "Talk about what you do"
     summary: "¿Qué hacés?"
@@ -926,8 +1009,6 @@ units:
           - form: "camina"
             en: "walks (he/she walks)"
             f: "3sg.pres.ind"
-      # "qué", the unit's own question, is taught in encantado now, with
-      # "¿qué significa?"; so are "castellano" and "poco".
       - lemma: "hacer"
         pos: "verb"
         en: "to do, to make"
@@ -953,8 +1034,7 @@ units:
       - lemma: "nunca"
         pos: "adv"
         en: "never"
-
-  - ordinal: 11
+  - ordinal: 12
     slug: "practico-castellano"
     title: "Talk about learning castellano"
     summary: "Practico castellano y mi vecina me ayuda"
@@ -969,14 +1049,14 @@ units:
     tips:
       - title: "The same five endings"
         body: "Every new verb here is a regular -ar verb, so you already know them: *practic**o**,
-          practic**ás**, practic**a**, practic**amos***. Learn the infinitive and the rest comes free:
-          *necesito, usás, ayuda, enseñan*."
+          practic**ás**, practic**a**, practic**amos***. Learn the infinitive and the rest comes
+          free: *necesito, usás, ayuda, enseñan*."
       - title: "Buscar, preguntar"
-        body: "**Buscar** is *to look for* — no *for* needed: *busco una palabra*. **Preguntar** is *to
-          ask* a question: *pregunto por qué*. Neither takes an extra word in front of the thing."
+        body: "**Buscar** is *to look for* — no *for* needed: *busco una palabra*. **Preguntar** is *to ask*
+          a question: *pregunto por qué*. Neither takes an extra word in front of the thing."
       - title: "Más despacio"
-        body: "Porteños talk **rápido**. The line that saves you: *¿Podés hablar más despacio?* — and
-          most people will happily slow down and **ayudar**."
+        body: "Porteños talk **rápido**. The line that saves you: *¿Podés hablar más despacio?* — and most
+          people will happily slow down and **ayudar**."
     words:
       - lemma: "practicar"
         pos: "verb"
@@ -1026,7 +1106,6 @@ units:
           - form: "ayudás"
             en: "you help"
             f: "2sg.pres.ind.vos"
-          # "ayudás" is said with its "me" ("¿me ayudás?"), so the chunk comes with it.
           - form: "me ayudás"
             en: "you help me"
             f: "2sg.pres.ind.vos.clitic"
@@ -1128,8 +1207,48 @@ units:
           - form: "extraña"
             en: "misses (he/she misses)"
             f: "3sg.pres.ind"
-
-  - ordinal: 12
+  - ordinal: 13
+    slug: "hoy-y-manana"
+    title: "Say when: today, tomorrow, now"
+    summary: "Hoy laburo, mañana no"
+    grammar:
+      - "tiempo.hoy-manana-ahora"
+      - "a-la-noche"
+    register_max: "informal"
+    sample:
+      es: "Hoy laburo, mañana no"
+      en: "I'm working today, not tomorrow"
+    tips:
+      - title: "Two mañanas"
+        body: "**Mañana** on its own is *tomorrow*: *Hoy laburo, mañana no.* With **la** it is *the
+          morning*, and porteños say **a la mañana** for *in the morning*. So *tomorrow morning* is
+          **mañana a la mañana**."
+      - title: "Tarde: afternoon or late"
+        body: "**Tarde** works the same way. **A la tarde** is *in the afternoon*; on its own **tarde**
+          means *late*: *Es tarde.* Its opposite is **temprano** — *early*: *Es temprano.*"
+    words:
+      - lemma: "hoy"
+        pos: "adv"
+        en: "today"
+      - lemma: "mañana"
+        pos: "noun"
+        en: "morning"
+      - lemma: "mañana"
+        pos: "adv"
+        en: "tomorrow"
+      - lemma: "tarde"
+        pos: "noun"
+        en: "afternoon, evening"
+      - lemma: "tarde"
+        pos: "adv"
+        en: "late"
+      - lemma: "temprano"
+        pos: "adv"
+        en: "early"
+      - lemma: "ahora"
+        pos: "adv"
+        en: "now"
+  - ordinal: 14
     slug: "mate-y-facturas"
     title: "Say what you like"
     summary: "Me gusta el mate"
@@ -1202,8 +1321,13 @@ units:
       - lemma: "nada"
         pos: "pron"
         en: "nothing, (not) at all"
-
-  - ordinal: 13
+      - lemma: "a mí también"
+        pos: "phrase"
+        en: "me too"
+      - lemma: "a mí tampoco"
+        pos: "phrase"
+        en: "me neither"
+  - ordinal: 15
     slug: "nos-gustan-los-fideos"
     title: "Say what food you like"
     summary: "Nos gustan los fideos"
@@ -1217,14 +1341,14 @@ units:
     tips:
       - title: "Nos gusta, les gusta"
         body: "The little word changes with the people who like it: **nos** gusta — we like it; **les**
-          gusta — they like it, or you all do. The verb still matches the food: *nos gusta el pollo*,
-          *nos gust**an** los fideos*."
+          gusta — they like it, or you all do. The verb still matches the food: *nos gusta el
+          pollo*, *nos gust**an** los fideos*."
       - title: "A ellos les gusta"
         body: "*Les* can be *them* or *you all*, so porteños often say who: **a ellos** les gusta, **a
           ustedes** les gusta. The same with *le*: *a ella le gusta el pescado*."
       - title: "Los fideos, la verdura"
-        body: "Pasta is **los fideos**, always plural. **La verdura** is vegetables in general: *no le
-          gusta la verdura*."
+        body: "Pasta is **los fideos**, always plural. **La verdura** is vegetables in general: *no le gusta
+          la verdura*."
     words:
       - lemma: "nos"
         pos: "pron"
@@ -1283,8 +1407,7 @@ units:
           - form: "huevos"
             en: "eggs"
             f: "m.pl"
-
-  - ordinal: 14
+  - ordinal: 16
     slug: "practica-nos-gusta"
     title: "Practice: how you are, what you do, what you like"
     summary: "Estamos cansados, pero nos gusta el mate"
@@ -1298,12 +1421,11 @@ units:
       en: "We're tired, but we like drinking mate."
     tips:
       - title: "Three verbs, three rules"
-        body: "*Estar* and its word match the person: *estamos cansad**os***. An -ar verb takes the
-          person's ending: *practic**amos***. *Gustar* matches the thing: *nos gust**an** los fideos*."
+        body: "*Estar* and its word match the person: *estamos cansad**os***. An -ar verb takes the person's
+          ending: *practic**amos***. *Gustar* matches the thing: *nos gust**an** los fideos*."
       - title: "Me, te, le, nos, les"
         body: "With *gustar* the person goes in front: **me** gusta, **te** gusta, **le** gusta, **nos**
           gusta, **les** gusta. Only *gusta* or *gustan* ever changes after it."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "cerrada"
       - "lleno"
@@ -1317,8 +1439,7 @@ units:
       - "estudiamos"
       - "gustan"
       - "enojado"
-
-  - ordinal: 15
+  - ordinal: 17
     slug: "me-traes-un-cafe"
     title: "Ask for what you want"
     summary: "¿Me traés un café?"
@@ -1385,8 +1506,15 @@ units:
       - lemma: "algo"
         pos: "pron"
         en: "something, anything"
-
-  - ordinal: 16
+      - lemma: "frío"
+        pos: "adj"
+        en: "cold"
+        forms:
+          - form: "frío"
+            f: "m.sg"
+          - form: "fría"
+            f: "f.sg"
+  - ordinal: 18
     slug: "que-quieren-tomar"
     title: "Order for the whole table"
     summary: "¿Qué quieren tomar?"
@@ -1406,11 +1534,11 @@ units:
           quieren?** And for someone else: *ella **quiere** un té*. The *ie* is everywhere except
           *querés* and *queremos*."
       - title: "¿Nos traés…?"
-        body: "Swap *me* for **nos** and the whole table orders at once: **¿Nos traés la carta?** —
-          *¿Nos traés dos vasos, por favor?*"
+        body: "Swap *me* for **nos** and the whole table orders at once: **¿Nos traés la carta?** — *¿Nos
+          traés dos vasos, por favor?*"
       - title: "Soda y picada"
-        body: "**Soda** is fizzy water, still served from a siphon in the old cafés. A **picada** is a
-          board of cheese and cold cuts to share before dinner."
+        body: "**Soda** is fizzy water, still served from a siphon in the old cafés. A **picada** is a board
+          of cheese and cold cuts to share before dinner."
     words:
       - lemma: "querer"
         pos: "verb"
@@ -1459,8 +1587,10 @@ units:
       - lemma: "servilleta"
         pos: "noun"
         en: "napkin"
-
-  - ordinal: 17
+      - lemma: "mesa"
+        pos: "noun"
+        en: "table"
+  - ordinal: 19
     slug: "facu-y-laburo"
     title: "Study and work"
     summary: "Facu y laburo"
@@ -1480,7 +1610,9 @@ units:
         body: "**Facu** is short for *facultad* — university. For jobs, Spanish drops the article: **Soy
           profesora**, not *soy una profesora*."
       - title: "¿De qué laburás?"
-        body: "*¿Qué hacés?* is mostly just *hi*. To ask about someone's job, say **¿De qué laburás?** or **¿De qué trabajás?** The answer takes *de* too: *Laburo de mozo.* Or with *ser*: *Soy abogada.*"
+        body: "*¿Qué hacés?* is mostly just *hi*. To ask about someone's job, say **¿De qué laburás?** or
+          **¿De qué trabajás?** The answer takes *de* too: *Laburo de mozo.* Or with *ser*: *Soy
+          abogada.*"
     words:
       - lemma: "que"
         pos: "conj"
@@ -1595,8 +1727,7 @@ units:
         pos: "noun"
         en: "job, work"
         register: "informal"
-
-  - ordinal: 18
+  - ordinal: 20
     slug: "es-enfermera"
     title: "Say what people do for a living"
     summary: "Mi hermana es enfermera"
@@ -1610,14 +1741,14 @@ units:
       en: "My sister is a nurse and has to work nights."
     tips:
       - title: "No un, no una"
-        body: "The same rule as *soy profesora*: **es enfermera**, **soy contador** — no *un*, no *una*.
-          The article only comes back when you add something: *es una periodista argentina*."
+        body: "The same rule as *soy profesora*: **es enfermera**, **soy contador** — no *un*, no *una*. The
+          article only comes back when you add something: *es una periodista argentina*."
       - title: "-o, -or, -ista"
-        body: "**Cocinero → cocinera**, **vendedor → vendedora**. Words in **-ista** don't change:
-          *el periodista, la periodista*. And **policía** is the same word for both."
+        body: "**Cocinero → cocinera**, **vendedor → vendedora**. Words in **-ista** don't change: *el
+          periodista, la periodista*. And **policía** is the same word for both."
       - title: "Tenemos que, tienen que"
-        body: "*Tener que* works with every person: *tenemos que laburar*, *los médicos tienen que
-          ayudar*. After it, **buscar** is also *to pick someone up*: *tengo que buscar a mi hijo*."
+        body: "*Tener que* works with every person: *tenemos que laburar*, *los médicos tienen que ayudar*.
+          After it, **buscar** is also *to pick someone up*: *tengo que buscar a mi hijo*."
     words:
       - lemma: "enfermero"
         pos: "noun"
@@ -1709,8 +1840,7 @@ units:
       - lemma: "persona"
         pos: "noun"
         en: "person"
-
-  - ordinal: 19
+  - ordinal: 21
     slug: "comes-vivis"
     title: "Eat, live, read and write"
     summary: "Comés, vivís"
@@ -1832,8 +1962,7 @@ units:
           - form: "libros"
             en: "books"
             f: "m.pl"
-
-  - ordinal: 20
+  - ordinal: 22
     slug: "vendo-diarios"
     title: "Say what goes on in the barrio"
     summary: "Vendo diarios en el negocio de mi viejo"
@@ -1850,8 +1979,8 @@ units:
           *compartís, compartimos*. Everywhere else they match: *come, comparte*; *comen, leen,
           escriben*."
       - title: "Abre, recibe"
-        body: "**Abrir** and **recibir** are regular: *abro, abrís, abre*; *recibo, recibís, recibe*.
-          *¿El negocio abre a la noche?*"
+        body: "**Abrir** and **recibir** are regular: *abro, abrís, abre*; *recibo, recibís, recibe*. *¿El
+          negocio abre a la noche?*"
       - title: "El negocio"
         body: "**Negocio** is any shop, not just a business: *el negocio de la esquina*. And porteños
           **comparten** everything, from a flat to a mate."
@@ -1981,8 +2110,7 @@ units:
           - form: "pibes"
             en: "guys, kids"
             f: "m.pl"
-
-  - ordinal: 21
+  - ordinal: 23
     slug: "practica-el-vecino"
     title: "Practice: ordering, jobs and the barrio"
     summary: "Somos cocineros y vendemos empanadas"
@@ -1996,12 +2124,11 @@ units:
       en: "We're cooks and we sell empanadas."
     tips:
       - title: "Everyone ends in -n"
-        body: "The *ellos* form of every verb you have ends in **-n**: *quieren, tienen, laburan,
-          viven, escriben*. Hear the *-n* and you know it's more than one."
+        body: "The *ellos* form of every verb you have ends in **-n**: *quieren, tienen, laburan, viven,
+          escriben*. Hear the *-n* and you know it's more than one."
       - title: "Es cocinero"
         body: "Jobs take no *un*: **es cocinero**, **soy contadora**. The word changes for a woman —
           *cocinera* — except the *-ista* ones: *periodista*."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "quieren"
       - "queremos"
@@ -2015,8 +2142,7 @@ units:
       - "diario"
       - "traés"
       - "vivimos"
-
-  - ordinal: 22
+  - ordinal: 24
     slug: "mi-edificio"
     title: "Talk about your building"
     summary: "Mi edificio tiene ascensor"
@@ -2034,10 +2160,14 @@ units:
         body: "When you just say whether it has one, no *un*: *mi edificio **tiene** ascensor*, *no
           **tiene** terraza*. **Hay** for what's there: *en la planta baja **hay** un patio*."
       - title: "El encargado"
-        body: "Most buildings have an **encargado** who lives in, keeps it clean and takes in your
-          packages. He knows everything that happens on every **piso**."
+        body: "Most buildings have an **encargado** who lives in, keeps it clean and takes in your packages.
+          He knows everything that happens on every **piso**."
       - title: "Planta baja"
-        body: "The ground floor is **la planta baja**; the one above it is *el primer piso*. Ringing from the street, you press the **timbre** with the floor and the letter: *4° B*. Out loud, *4° B* is **cuarto B**: *vivo en el cuarto B*. The first five floors: **primero, segundo, tercero, cuarto, quinto** — and *primero* loses its *-o* before a noun: *el **primer** piso*."
+        body: "The ground floor is **la planta baja**; the one above it is *el primer piso*. Ringing from
+          the street, you press the **timbre** with the floor and the letter: *4° B*. Out loud, *4°
+          B* is **cuarto B**: *vivo en el cuarto B*. The first five floors: **primero, segundo,
+          tercero, cuarto, quinto** — and *primero* loses its *-o* before a noun: *el **primer**
+          piso*."
     words:
       - lemma: "edificio"
         pos: "noun"
@@ -2104,8 +2234,7 @@ units:
       - lemma: "quinto"
         pos: "adj"
         en: "fifth"
-
-  - ordinal: 23
+  - ordinal: 25
     slug: "mi-casa"
     title: "Show someone your place"
     summary: "Mi casa"
@@ -2187,9 +2316,6 @@ units:
       - lemma: "puerta"
         pos: "noun"
         en: "door"
-      - lemma: "mesa"
-        pos: "noun"
-        en: "table"
       - lemma: "silla"
         pos: "noun"
         en: "chair"
@@ -2217,3 +2343,143 @@ units:
           - form: "cosas"
             en: "things"
             f: "f.pl"
+  - ordinal: 26
+    slug: "la-hora"
+    title: "Tell the time"
+    summary: "La hora"
+    grammar:
+      - "hora.es-la-son-las"
+      - "hora.y-media-y-cuarto"
+      - "numeros.21-100"
+      - "dias.semana"
+    register_max: "informal"
+    sample:
+      es: "Nos vemos a las siete y media."
+      en: "See you at half past seven."
+    tips:
+      - title: "Telling the time"
+        body: "*Es la una* (one o'clock), but *son las dos*, *son las siete*. Add **y media** for half past
+          and **y cuarto** for quarter past. *A la noche* means at night."
+    words:
+      - lemma: "hora"
+        pos: "noun"
+        en: "hour, time"
+        forms:
+          - form: "hora"
+            f: "f.sg"
+          - form: "horas"
+            en: "hours"
+            f: "f.pl"
+      - lemma: "media"
+        pos: "adj"
+        en: "half (past)"
+      - lemma: "cuarto"
+        pos: "noun"
+        en: "quarter (past)"
+      - lemma: "ver"
+        pos: "verb"
+        en: "to see"
+        forms:
+          - form: "vemos"
+            en: "we see"
+            f: "1pl.pres.ind"
+      - lemma: "día"
+        pos: "noun"
+        en: "day"
+        forms:
+          - form: "día"
+            f: "m.sg"
+          - form: "días"
+            en: "days"
+            f: "m.pl"
+      - lemma: "semana"
+        pos: "noun"
+        en: "week"
+      - lemma: "lunes"
+        pos: "noun"
+        en: "Monday"
+      - lemma: "martes"
+        pos: "noun"
+        en: "Tuesday"
+      - lemma: "miércoles"
+        pos: "noun"
+        en: "Wednesday"
+      - lemma: "jueves"
+        pos: "noun"
+        en: "Thursday"
+      - lemma: "viernes"
+        pos: "noun"
+        en: "Friday"
+      - lemma: "sábado"
+        pos: "noun"
+        en: "Saturday"
+      - lemma: "domingo"
+        pos: "noun"
+        en: "Sunday"
+  - ordinal: 27
+    slug: "a-que-hora-abre"
+    title: "Ask when places open"
+    summary: "¿A qué hora abre?"
+    grammar:
+      - "hora.es-la-son-las"
+      - "hora.y-media-y-cuarto"
+      - "numeros.21-100"
+      - "dias.semana"
+      - "hora.desde-hasta"
+    register_max: "informal"
+    sample:
+      es: "¿Cuándo cierra el kiosco? A las ocho menos cuarto."
+      en: "When does the kiosco close? At a quarter to eight."
+    tips:
+      - title: "Menos cuarto"
+        body: "After half past, porteños count down to the next hour: **las ocho menos cuarto** is *7:45*,
+          *las nueve menos diez* is *8:50*. On the hour exactly: **a las diez en punto**."
+      - title: "Desde las nueve hasta las seis"
+        body: "Opening hours are **desde** … **hasta**: *abre desde las nueve hasta las seis*. At twelve
+          it's **el mediodía** — and plenty of small shops **cierran** for a while right after it."
+    words:
+      - lemma: "menos"
+        pos: "adv"
+        en: "less, to (the hour)"
+      - lemma: "en punto"
+        pos: "phrase"
+        en: "on the dot, sharp"
+      - lemma: "mediodía"
+        pos: "noun"
+        en: "noon, midday"
+      - lemma: "minuto"
+        pos: "noun"
+        en: "minute"
+        forms:
+          - form: "minuto"
+            f: "m.sg"
+          - form: "minutos"
+            en: "minutes"
+            f: "m.pl"
+      - lemma: "desde"
+        pos: "prep"
+        en: "since, from"
+        glue: true
+      - lemma: "hasta"
+        pos: "prep"
+        en: "until, up to"
+        glue: true
+      - lemma: "cuándo"
+        pos: "adv"
+        en: "when (asking)"
+      - lemma: "cerrar"
+        pos: "verb"
+        en: "to close"
+        forms:
+          - form: "cierra"
+            en: "closes"
+            f: "3sg.pres.ind.irregular"
+          - form: "cierran"
+            en: "close (they close)"
+            f: "3pl.pres.ind.irregular"
+      - lemma: "abrir"
+        pos: "verb"
+        forms:
+          - form: "abren"
+            en: "open (they open)"
+            f: "3pl.pres.ind"

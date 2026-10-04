@@ -22,7 +22,7 @@ section:
   slug: "wishes-and-advice"
   title: "Wishes and advice"
   cefr: "B1.1"
-  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
+  practice: 2
 units:
   - ordinal: 1
     slug: "quiero-que-vengas"
@@ -37,9 +37,9 @@ units:
       en: "I want you to come on Saturday."
     tips:
       - title: "Quiero que + a new verb form"
-        body: "When you want *someone else* to do something, the second verb changes: **quiero que
-          vengas** — *I want you to come*. This form is the **subjunctive**, and *querer que* is where
-          it starts."
+        body: "When you want *someone else* to do something, the second verb changes: **quiero que vengas**
+          — *I want you to come*. This form is the **subjunctive**, and *querer que* is where it
+          starts."
       - title: "One word for yo and él"
         body: "**Venga**, **vaya**, **haga** are both *I* and *he/she*: *quiere que venga* — *he wants
           me/him to come*. The *que* and the context tell you who."
@@ -89,7 +89,6 @@ units:
           - form: "traigas"
             en: "you bring (that you bring)"
             f: "2sg.pres.subj.vos.irregular"
-
   - ordinal: 2
     slug: "necesito-que-me-ayudes"
     title: "Ask for help, and offer it"
@@ -104,17 +103,17 @@ units:
       en: "I need you to help me with the move."
     tips:
       - title: "Necesito que, te pido que"
-        body: "*Quiero que* has company: **necesito que me ayudes** — *I need you to help me*; **te
-          pido que me esperes** — *please wait for me*. Whenever you want something from someone
-          else, the verb after *que* goes subjunctive. **No hace falta que** — *you do not need to*
-          — works the same way: **no hace falta que traigas nada**. And **que venga** on its own is
-          *let him come*, *tell him to come*: **dale, que venga**."
+        body: "*Quiero que* has company: **necesito que me ayudes** — *I need you to help me*; **te pido que
+          me esperes** — *please wait for me*. Whenever you want something from someone else, the
+          verb after *que* goes subjunctive. **No hace falta que** — *you do not need to* — works
+          the same way: **no hace falta que traigas nada**. And **que venga** on its own is *let him
+          come*, *tell him to come*: **dale, que venga**."
       - title: "-ar takes e, the rest take a"
-        body: "**Ayudar → ayudes**, **esperar → esperes**, **mandar → mandes**, **avisar → avises**.
-          *Poner* and *traer* keep the *g* of their *yo*: **pongo → pongas**, **traigo → traiga**.
-          For *we*: **¿qué querés que hagamos?** The same form, with **no** in front, tells someone
-          not to: *esperame* — **no me esperes**; *llamame* — **no me llames**. The pronoun jumps to
-          the front."
+        body: "**Ayudar → ayudes**, **esperar → esperes**, **mandar → mandes**, **avisar → avises**. *Poner*
+          and *traer* keep the *g* of their *yo*: **pongo → pongas**, **traigo → traiga**. For *we*:
+          **¿qué querés que hagamos?** The same form, with **no** in front, tells someone not to:
+          *esperame* — **no me esperes**; *llamame* — **no me llames**. The pronoun jumps to the
+          front."
       - title: "¿Querés que te lleve?"
         body: "The offer is the same pattern turned round: **¿querés que te lleve?** — *want a lift?*;
           **¿querés que traiga algo?** — the guest's question before every *asado*. The *yo* form
@@ -180,7 +179,6 @@ units:
           - form: "lleve"
             en: "give a lift, take (that I, that he/she take)"
             f: "sg.pres.subj"
-
   - ordinal: 3
     slug: "que-te-vaya-bien"
     title: "Wish someone well"
@@ -194,13 +192,13 @@ units:
       en: "Have a great time!"
     tips:
       - title: "Que…: a wish"
-        body: "A wish is *que* + the subjunctive: **que te vaya bien** — *good luck, hope it goes
-          well*; **que la pases lindo** — *have a great time*; **que tengas buen finde**. The answer
-          to any wish is **gracias, igualmente** — *thanks, you too*. And afterwards you ask **¿cómo
-          te fue?** — *how did it go?*"
+        body: "A wish is *que* + the subjunctive: **que te vaya bien** — *good luck, hope it goes well*;
+          **que la pases lindo** — *have a great time*; **que tengas buen finde**. The answer to any
+          wish is **gracias, igualmente** — *thanks, you too*. And afterwards you ask **¿cómo te
+          fue?** — *how did it go?*"
       - title: "Ojalá"
-        body: "**Ojalá** is *I hope*, and the subjunctive follows it: **ojalá que no llueva** — *I hope
-          it doesn't rain*."
+        body: "**Ojalá** is *I hope*, and the subjunctive follows it: **ojalá que no llueva** — *I hope it
+          doesn't rain*."
     words:
       - lemma: "ojalá"
         pos: "interj"
@@ -235,7 +233,6 @@ units:
       - lemma: "buen"
         pos: "adj"
         en: "good"
-
   - ordinal: 4
     slug: "que-te-mejores"
     title: "Wish people well on the big days"
@@ -250,14 +247,15 @@ units:
     tips:
       - title: "Que te mejores, que te diviertas"
         body: "The pronoun comes along into the wish: **que te mejores** — *get well soon*; **que te
-          diviertas** — *have fun*; **que lo disfrutes** — *enjoy it*. The same *que* + subjunctive as
-          *que te vaya bien*."
+          diviertas** — *have fun*; **que lo disfrutes** — *enjoy it*. The same *que* + subjunctive
+          as *que te vaya bien*."
       - title: "Ojalá, for all of us"
         body: "**Ojalá que ganemos** — *I hope we win* — *-ar* verbs swap to **e** for *we* too. For a
-          present: **ojalá que te guste**. On a birthday: **¡feliz cumple, que cumplas muchos más!**"
+          present: **ojalá que te guste**. On a birthday: **¡feliz cumple, que cumplas muchos
+          más!**"
       - title: "¡Éxitos!"
-        body: "Before an interview or an exam porteños say **¡éxitos!** or **¡mucha suerte!** — and before
-          a **parcial**, the university exam everyone dreads, both."
+        body: "Before an interview or an exam porteños say **¡éxitos!** or **¡mucha suerte!** — and before a
+          **parcial**, the university exam everyone dreads, both."
     words:
       - lemma: "mejorarse"
         pos: "verb"
@@ -318,7 +316,6 @@ units:
           - form: "éxitos"
             en: "all the best, good luck"
             f: "m.pl"
-
   - ordinal: 5
     slug: "cuando-llegues"
     title: "Talk about when something will happen"
@@ -333,8 +330,8 @@ units:
     tips:
       - title: "Cuando, looking ahead"
         body: "About something that hasn't happened yet, *cuando* takes the subjunctive: **avisame cuando
-          llegues** — *let me know when you get there*. About a habit it doesn't: *cuando llego, tomo
-          mate*."
+          llegues** — *let me know when you get there*. About a habit it doesn't: *cuando llego,
+          tomo mate*."
     words:
       - lemma: "llegar"
         pos: "verb"
@@ -381,7 +378,6 @@ units:
       - lemma: "apenas"
         pos: "adv"
         en: "as soon as"
-
   - ordinal: 6
     slug: "cuando-vuelvas"
     title: "Make plans for when you're back"
@@ -397,15 +393,15 @@ units:
     tips:
       - title: "Cuando vuelvas"
         body: "Plans hang on *cuando* + the subjunctive: **cuando vuelvas del viaje, nos vemos**; **cuando
-          cobre, te invito**; **cuando empieces el laburo nuevo, contame**. The other half stays normal,
-          or a command."
+          cobre, te invito**; **cuando empieces el laburo nuevo, contame**. The other half stays
+          normal, or a command."
       - title: "Hasta que, apenas"
         body: "**Hasta que** — *until* — works the same way: **esperá hasta que te llame**. And the promise
-          every porteño makes: **apenas sepa algo, te aviso** — *as soon as I know anything, I'll tell
-          you*."
+          every porteño makes: **apenas sepa algo, te aviso** — *as soon as I know anything, I'll
+          tell you*."
       - title: "Cuando quieras"
-        body: "**Cuando quieras** — *whenever you like* — leaves an invitation open. The question keeps
-          the normal verb: **¿cuándo nos vemos?** The answer doesn't: **cuando nos veamos, te cuento**."
+        body: "**Cuando quieras** — *whenever you like* — leaves an invitation open. The question keeps the
+          normal verb: **¿cuándo nos vemos?** The answer doesn't: **cuando nos veamos, te cuento**."
     words:
       - lemma: "volver"
         pos: "verb"
@@ -467,7 +463,6 @@ units:
           - form: "empiece"
             en: "start (when I, when he/she start)"
             f: "sg.pres.subj.irregular"
-
   - ordinal: 7
     slug: "practica-cuando-vuelvas"
     title: "Practice: favours, wishes and plans"
@@ -488,9 +483,8 @@ units:
         body: "Wishes and the future share the form: **que te diviertas**, **ojalá que ganemos**, **cuando
           vuelvas**, **hasta que sepa algo**."
       - title: "No hace falta que"
-        body: "**No hace falta que** + subjunctive is *you do not need to*: **no hace falta que
-          vengas hoy**. With a thing, **hace falta** is *we need*: **hace falta pan**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+        body: "**No hace falta que** + subjunctive is *you do not need to*: **no hace falta que vengas
+          hoy**. With a thing, **hace falta** is *we need*: **hace falta pan**."
     review:
       - "ayudes"
       - "esperes"
@@ -506,7 +500,6 @@ units:
       - "me mudé"
       - "hace falta"
       - "extrañás"
-
   - ordinal: 8
     slug: "no-creo"
     title: "Give your opinion"
@@ -524,24 +517,10 @@ units:
         body: "**Creo que viene** — *I think he's coming* — keeps the normal verb. Doubt it and the
           subjunctive comes in: **no creo que venga**."
       - title: "¿Qué te parece?"
-        body: "**¿Qué te parece?** — *what do you think?* — and the answer **me parece bien**, **me
-          parece que no**. Day to day an opinion starts with **para mí**: **para mí, es caro**;
-          **para mí que no viene** — *I reckon he is not coming*. And to dodge the question: **ni
-          idea**."
+        body: "**¿Qué te parece?** — *what do you think?* — and the answer **me parece bien**, **me parece
+          que no**. Day to day an opinion starts with **para mí**: **para mí, es caro**; **para mí
+          que no viene** — *I reckon he is not coming*. And to dodge the question: **ni idea**."
     words:
-      - lemma: "parecer"
-        pos: "verb"
-        en: "to seem"
-        forms:
-          - form: "me parece"
-            en: "I think, it seems to me"
-            f: "3sg.pres.ind.clitic"
-          - form: "te parece"
-            en: "you think, it seems to you"
-            f: "3sg.pres.ind.clitic"
-          - form: "parece"
-            f: "3sg.pres.ind"
-            bound: true
       - lemma: "ser"
         pos: "verb"
         forms:
@@ -566,16 +545,9 @@ units:
           - form: "tenga"
             en: "has (that he/she have)"
             f: "sg.pres.subj.irregular"
-      - lemma: "idea"
-        pos: "noun"
-        en: "idea"
       - lemma: "para mí"
         pos: "phrase"
         en: "in my opinion, if you ask me"
-      - lemma: "ni idea"
-        pos: "phrase"
-        en: "no idea"
-
   - ordinal: 9
     slug: "puede-ser-que"
     title: "Say how likely something is"
@@ -592,15 +564,15 @@ units:
     tips:
       - title: "Puede ser que"
         body: "**Puede ser** — *could be* — is the porteño *maybe*. Add *que* and the subjunctive follows:
-          **puede ser que llueva**, **puede ser que estén cerrados**. **Es posible que** says the same,
-          a little more carefully."
+          **puede ser que llueva**, **puede ser que estén cerrados**. **Es posible que** says the
+          same, a little more carefully."
       - title: "No creo que, for them"
         body: "For *they*, add **-n** to the form you know: **no creo que sean**, **no creo que estén**,
           **no creo que tengan**, **no creo que puedan**, **no creo que lleguen a tiempo**."
       - title: "Seguro, or not"
         body: "Sure of it? The normal verb: **seguro que abren**, **creo que viene**. Doubt it, and the
-          subjunctive: **no creo que abran hoy**. Even the forecast gets the treatment: **el pronóstico
-          es de lluvia, pero no creo que llueva**."
+          subjunctive: **no creo que abran hoy**. Even the forecast gets the treatment: **el
+          pronóstico es de lluvia, pero no creo que llueva**."
     words:
       - lemma: "puede ser"
         pos: "phrase"
@@ -650,7 +622,6 @@ units:
       - lemma: "pronóstico"
         pos: "noun"
         en: "weather forecast"
-
   - ordinal: 10
     slug: "no-te-preocupes"
     title: "Tell someone not to"
@@ -664,8 +635,8 @@ units:
       en: "Don't worry, I'll let you know."
     tips:
       - title: "No + the subjunctive"
-        body: "A command with *no* uses the subjunctive: *vení* but **no vengas**, *andá* but **no
-          vayas**, *decime* but **no me digas**. The pronoun moves to the front: **no te preocupes**."
+        body: "A command with *no* uses the subjunctive: *vení* but **no vengas**, *andá* but **no vayas**,
+          *decime* but **no me digas**. The pronoun moves to the front: **no te preocupes**."
       - title: "No te hagas problema"
         body: "**No te hagas problema** — *don't worry about it* — is what a porteño says when you
           apologise. **No te olvides** — *don't forget*."
@@ -708,7 +679,6 @@ units:
           - form: "toques"
             en: "you touch (don't touch)"
             f: "2sg.pres.subj.vos"
-
   - ordinal: 11
     slug: "no-seas-asi"
     title: "Warn a friend what not to do"
@@ -723,11 +693,10 @@ units:
     tips:
       - title: "No dejes, no saques"
         body: "Every *don't* grows from the *yo* of the present: *dejo* → **no dejes**, *cuento* → **no
-          cuentes**. *Saco* gives **no saques**: the *c* turns *qu* to keep
-          its sound."
+          cuentes**. *Saco* gives **no saques**: the *c* turns *qu* to keep its sound."
       - title: "No te vayas, no te pongas así"
-        body: "With *-se* verbs the pronoun goes in front: *me voy* → **no te vayas**, *me puse nervioso*
-          → **no te pongas nervioso**, *me enojé* → **no te enojes**. And the one every friend says:
+        body: "With *-se* verbs the pronoun goes in front: *me voy* → **no te vayas**, *me puse nervioso* →
+          **no te pongas nervioso**, *me enojé* → **no te enojes**. And the one every friend says:
           **no seas así**."
     words:
       - lemma: "dejar"
@@ -793,7 +762,6 @@ units:
           - form: "te pongas"
             en: "you get (don't get: nervous, upset)"
             f: "2sg.pres.subj.vos.clitic.irregular"
-
   - ordinal: 12
     slug: "te-recomiendo"
     title: "Give advice"
@@ -842,9 +810,6 @@ units:
           - form: "pidas"
             en: "you order (that you order)"
             f: "2sg.pres.subj.vos.irregular"
-      - lemma: "lugar"
-        pos: "noun"
-        en: "place"
       - lemma: "vale la pena"
         pos: "phrase"
         en: "it's worth it"
@@ -854,7 +819,6 @@ units:
           - form: "comprá"
             en: "buy"
             f: "2sg.imp.vos"
-
   - ordinal: 13
     slug: "te-aconsejo"
     title: "Give tips to a newcomer"
@@ -870,18 +834,18 @@ units:
       en: "My advice: bring cash and take the subway."
     tips:
       - title: "Te aconsejo que, conviene que"
-        body: "**Te aconsejo que lleves efectivo** — *my advice: bring cash*. **Conviene que** and
-          **es importante que** work like *te recomiendo que*: the advice lands in the subjunctive —
+        body: "**Te aconsejo que lleves efectivo** — *my advice: bring cash*. **Conviene que** and **es
+          importante que** work like *te recomiendo que*: the advice lands in the subjunctive —
           **conviene que busques un depto cerca del subte**. In everyday speech the short way wins:
           **te conviene** + infinitive — **te conviene buscar un depto cerca del subte**, **te
           conviene tomar el subte**, **te conviene reservar hoy**."
       - title: "Advice for us"
-        body: "Advice to the group uses *we*: **es mejor que salgamos temprano**, **conviene que lo
-          hagamos mañana**. *Salir* keeps its *g*: *salgo* → **salgamos**."
+        body: "Advice to the group uses *we*: **es mejor que salgamos temprano**, **conviene que lo hagamos
+          mañana**. *Salir* keeps its *g*: *salgo* → **salgamos**."
       - title: "¡Cuidado!"
-        body: "**¡Cuidado!** — *careful!* — or the full **tené cuidado**: **tené cuidado con la
-          billetera en el subte**. The tips that come with it: **no uses el celu en la calle**, **no
-          tomes taxi para todo**, **es mejor que pagues en efectivo**, **te conviene reservar**."
+        body: "**¡Cuidado!** — *careful!* — or the full **tené cuidado**: **tené cuidado con la billetera en
+          el subte**. The tips that come with it: **no uses el celu en la calle**, **no tomes taxi
+          para todo**, **es mejor que pagues en efectivo**, **te conviene reservar**."
     words:
       - lemma: "aconsejar"
         pos: "verb"
@@ -955,7 +919,6 @@ units:
       - lemma: "ojo"
         pos: "interj"
         en: "careful!, watch out!"
-
   - ordinal: 14
     slug: "practica-te-aconsejo"
     title: "Practice: doubts, warnings and tips"
@@ -970,12 +933,11 @@ units:
       en: "It might rain: I'd bring an umbrella."
     tips:
       - title: "They, and we"
-        body: "The subjunctive for *they* adds **-n** (**sean**, **estén**, **lleguen**); for *we*,
-          **-mos** (**salgamos**, **hagamos**). The rule for when to use it doesn't change."
+        body: "The subjunctive for *they* adds **-n** (**sean**, **estén**, **lleguen**); for *we*, **-mos**
+          (**salgamos**, **hagamos**). The rule for when to use it doesn't change."
       - title: "Don't, and better not"
-        body: "**No dejes el celu ahí** is a warning; **es mejor que no lo dejes ahí** is advice. Both
-          take the subjunctive."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+        body: "**No dejes el celu ahí** is a warning; **es mejor que no lo dejes ahí** is advice. Both take
+          the subjunctive."
     review:
       - "puede ser"
       - "sean"
@@ -992,7 +954,6 @@ units:
       - "estará"
       - "tenés que"
       - "debe"
-
   - ordinal: 15
     slug: "que-bueno"
     title: "React to news"
@@ -1077,7 +1038,6 @@ units:
         forms:
           - form: "creer"
             f: "inf"
-
   - ordinal: 16
     slug: "me-preocupa"
     title: "Share joys and worries"
@@ -1093,12 +1053,13 @@ units:
       en: "How lucky that you live nearby!"
     tips:
       - title: "Me preocupa que"
-        body: "**Me preocupa que trabajes tanto** — *it worries me that you work so much*. *Preocupar*
-          and *sorprender* work like *gustar* and *molestar*: **me preocupa**, **me sorprende**, and
+        body: "**Me preocupa que trabajes tanto** — *it worries me that you work so much*. *Preocupar* and
+          *sorprender* work like *gustar* and *molestar*: **me preocupa**, **me sorprende**, and
           what follows *que* goes subjunctive."
       - title: "Qué suerte que"
         body: "**¡Qué suerte que vivas cerca!**, **¡qué bueno que estemos todos juntos!** Any *qué* +
-          reaction + *que* brings the subjunctive. **Estemos** is *we*: the same form plus **-mos**."
+          reaction + *que* brings the subjunctive. **Estemos** is *we*: the same form plus
+          **-mos**."
     words:
       - lemma: "preocupar"
         pos: "verb"
@@ -1123,9 +1084,6 @@ units:
       - lemma: "qué suerte"
         pos: "phrase"
         en: "how lucky"
-      - lemma: "tanto"
-        pos: "adv"
-        en: "so much"
       - lemma: "vivir"
         pos: "verb"
         forms:
@@ -1150,55 +1108,10 @@ units:
           - form: "estemos"
             en: "we are (that we be)"
             f: "1pl.pres.subj.irregular"
-
   - ordinal: 17
-    slug: "no-se"
-    title: "Say what you know and understand"
-    summary: "Ni idea"
-    grammar:
-      - "saber"
-      - "entender"
-      - "explicar"
-    register_max: "informal"
-    sample:
-      es: "No sé, ni idea."
-      en: "I don't know, no idea."
-    tips:
-      - title: "Sé, sabés"
-        body: "**Sé** — *I know* — has an accent to tell it from *se*. **¿Sabés qué?** — *you know what?*
-          — opens every piece of gossip."
-      - title: "No entiendo"
-        body: "**No entiendo** — *I don't understand*. **¿Me explicás?** or **explicame** — *can you
-          explain?*"
-      - title: "Saber or conocer?"
-        body: "**Saber** + a verb is *to know how to*: **¿sabés cocinar?** For people and places use
-          **conocer**: **conozco a Juan**, **¿conocés Palermo?** And **qué sé yo** is the porteño
-          shrug — *who knows*."
-    words:
-      - lemma: "saber"
-        pos: "verb"
-        forms:
-          - form: "sabemos"
-            en: "we know"
-            f: "1pl.pres.ind"
-      - lemma: "explicar"
-        pos: "verb"
-        en: "to explain"
-        forms:
-          - form: "explicás"
-            en: "you explain"
-            f: "2sg.pres.ind.vos"
-          - form: "explicame"
-            en: "explain to me"
-            f: "2sg.imp.vos.clitic"
-      - lemma: "pregunta"
-        pos: "noun"
-        en: "question"
-
-  - ordinal: 18
     slug: "que-significa"
-    title: "Ask what something means"
-    summary: "¿Qué significa?"
+    title: "Say you realised or got mixed up"
+    summary: "Me di cuenta tarde"
     grammar:
       - "saber"
       - "entender"
@@ -1206,19 +1119,18 @@ units:
       - "darse-cuenta"
     register_max: "informal"
     sample:
-      es: "Perdón, no entendí. ¿Me lo repetís?"
-      en: "Sorry, I didn't get that. Can you say it again?"
+      es: "Me di cuenta tarde"
+      en: "I realised too late"
     tips:
       - title: "¿Qué significa?"
         body: "Stuck on a word: **¿qué significa?** Too fast? **¿Me lo repetís?** or **repetime, más
           despacio**. Got it wrong? **Perdón, me confundí.**"
       - title: "No sabía, me di cuenta"
-        body: "**No sabía** — *I didn't know* — is the imperfect: a state. **Me di cuenta** — *I
-          realised* — is the moment it clicked. **¿Sabías que…?** opens half the gossip in Buenos
-          Aires."
+        body: "**No sabía** — *I didn't know* — is the imperfect: a state. **Me di cuenta** — *I realised* —
+          is the moment it clicked. **¿Sabías que…?** opens half the gossip in Buenos Aires."
       - title: "No hace falta que entiendas todo"
-        body: "Knowing takes the subjunctive when it's wanted or needed: **quiero que me expliques** —
-          *I want you to explain it to me*; **no hace falta que entiendas todo** — *you don't need to
+        body: "Knowing takes the subjunctive when it's wanted or needed: **quiero que me expliques** — *I
+          want you to explain it to me*; **no hace falta que entiendas todo** — *you don't need to
           understand everything*."
     words:
       - lemma: "repetir"
@@ -1269,8 +1181,7 @@ units:
           - form: "te confundiste"
             en: "you got it wrong"
             f: "2sg.pret.ind.vos.clitic"
-
-  - ordinal: 19
+  - ordinal: 18
     slug: "lunfardo"
     title: "Talk like a porteño"
     summary: "Qué fiaca"
@@ -1284,7 +1195,8 @@ units:
     tips:
       - title: "Lunfardo"
         body: "Lunfardo is Buenos Aires slang, born in the port and the tango: **morfar** (to eat),
-          **guita** (money), **fiaca** (laziness), **pilcha** (clothes). Friends, not job interviews."
+          **guita** (money), **fiaca** (laziness), **pilcha** (clothes). Friends, not job
+          interviews."
       - title: "Bancar"
         body: "**Te banco** — *I've got your back*; **no lo banco** — *I can't stand him*. One verb, and
           porteños use it for both."
@@ -1330,8 +1242,7 @@ units:
         pos: "phrase"
         en: "sure, right away"
         register: "informal"
-
-  - ordinal: 20
+  - ordinal: 19
     slug: "es-un-afano"
     title: "Talk money and people in lunfardo"
     summary: "¡Es un afano!"
@@ -1344,15 +1255,15 @@ units:
       en: "What a rip-off! And the clothes are cheap junk."
     tips:
       - title: "Garpar, un afano"
-        body: "Money talk goes lunfardo fast: **¿quién garpa?** — *who's paying?*; **¡es un afano!** —
-          *it's a rip-off!*; **berreta** — *cheap, shoddy*. And food is **el morfi**."
+        body: "Money talk goes lunfardo fast: **¿quién garpa?** — *who's paying?*; **¡es un afano!** — *it's
+          a rip-off!*; **berreta** — *cheap, shoddy*. And food is **el morfi**."
       - title: "Chanta, cheto, piola"
-        body: "People get lunfardo labels: a **chanta** talks big and doesn't deliver, a **cheto** is
-          posh, and someone **piola** is cool and easy-going. **No me chamuyes** — *don't give me that*
-          — is the subjunctive again."
+        body: "People get lunfardo labels: a **chanta** talks big and doesn't deliver, a **cheto** is posh,
+          and someone **piola** is cool and easy-going. **No me chamuyes** — *don't give me that* —
+          is the subjunctive again."
       - title: "Qué embole"
-        body: "**¡Qué embole!** — *what a drag!* — for a rainy Sunday with nothing on. Like all of
-          these: friends, not job interviews."
+        body: "**¡Qué embole!** — *what a drag!* — for a rainy Sunday with nothing on. Like all of these:
+          friends, not job interviews."
     words:
       - lemma: "garpar"
         pos: "verb"
@@ -1408,8 +1319,7 @@ units:
           - form: "chamuyes"
             en: "you sweet-talk (don't give me that)"
             f: "2sg.pres.subj.vos"
-
-  - ordinal: 21
+  - ordinal: 20
     slug: "practica-es-un-afano"
     title: "Practice: worries, meanings and slang"
     summary: "Qué suerte que estemos todos"
@@ -1423,12 +1333,11 @@ units:
       en: "I didn't know the food was so expensive. It's a rip-off!"
     tips:
       - title: "Reacting to them, to us"
-        body: "**Me preocupa que trabajes tanto**, **qué suerte que estemos todos**, **me sorprende que
-          no sepa** — a reaction + *que* keeps the subjunctive, for any person."
+        body: "**Me preocupa que trabajes tanto**, **qué suerte que estemos todos**, **me sorprende que no
+          sepa** — a reaction + *que* keeps the subjunctive, for any person."
       - title: "Sabía, me di cuenta"
         body: "**No sabía** — the state, imperfect. **Me di cuenta** — the moment, preterite. **¿Qué
           significa *garpar*?** — *to pay*, in lunfardo."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "me preocupa"
       - "qué suerte"
@@ -1444,8 +1353,7 @@ units:
       - "te acordás"
       - "me enojé"
       - "conocí"
-
-  - ordinal: 22
+  - ordinal: 21
     slug: "saludos-a-tu-vieja"
     title: "Say goodbye at the door and on the phone"
     summary: "Saludos a tu vieja"
@@ -1458,12 +1366,13 @@ units:
       en: "Right, I'd better get going. Say hi to your mum!"
     tips:
       - title: "Me voy yendo"
-        body: "The porteño exit starts long before the door: **bueno, me voy yendo** — *well, I'd better
-          get going* — and then twenty minutes of talk. On the way out, love for whoever isn't
-          there: **saludos a tu vieja**, **mandale saludos a Juan**."
+        body: "The porteño exit starts long before the door: **bueno, me voy yendo** — *well, I'd better get
+          going* — and then twenty minutes of talk. On the way out, love for whoever isn't there:
+          **saludos a tu vieja**, **mandale saludos a Juan**."
       - title: "One more wish"
         body: "A goodbye is a string of wishes, all *que* + the subjunctive: **que duermas bien**, **que
-          sigas bien**, **que llegues bien**. On the phone it ends with **besos** and **escribime**."
+          sigas bien**, **que llegues bien**. On the phone it ends with **besos** and
+          **escribime**."
     words:
       - lemma: "saludo"
         pos: "noun"
@@ -1510,8 +1419,7 @@ units:
           - form: "besos"
             en: "kisses (as a sign-off)"
             f: "m.pl"
-
-  - ordinal: 23
+  - ordinal: 22
     slug: "cuidate"
     title: "Say goodbye properly"
     summary: "Cuidate mucho"
@@ -1524,10 +1432,9 @@ units:
       en: "Take care, and sleep well."
     tips:
       - title: "The long goodbye"
-        body: "A porteño goodbye is several: **bueno, nos hablamos**, **cuidate**, **un beso**,
-          **que descanses** — and then another *chau* at the door. **Un abrazo** — or just
-          **abrazo** — is the usual sign-off, especially between men: **dale, abrazo**; **chau, un
-          abrazo**."
+        body: "A porteño goodbye is several: **bueno, nos hablamos**, **cuidate**, **un beso**, **que
+          descanses** — and then another *chau* at the door. **Un abrazo** — or just **abrazo** — is
+          the usual sign-off, especially between men: **dale, abrazo**; **chau, un abrazo**."
     words:
       - lemma: "cuidarse"
         pos: "verb"

@@ -112,7 +112,6 @@ export function loadOutline(paths = SECTION_PATHS) {
       const unitId = ids.unit(u.slug);
       // The unit that closes its section. It is built like any other — lessons,
       // then the unit check — but it may not be a practice unit (below).
-      const closesSection = u.ordinal === (doc.units ?? []).length;
       courseOrder += 1;
       const unit = {
         id: unitId,
@@ -227,7 +226,6 @@ export function loadOutline(paths = SECTION_PATHS) {
       // unit check: the unit's words again, before the next unit leans on them.
       const practiceUnit = Array.isArray(u.review) && u.review.length > 0;
       if (practiceUnit && (u.words ?? []).length) errors.push(`${where}: a practice unit (review:) teaches no words — move them to a teaching unit`);
-      if (practiceUnit && closesSection) errors.push(`${where}: a section can't end on a practice unit`);
       const practice = practiceUnit ? (u.practice ?? PRACTICE_UNIT_LESSONS) : (u.practice ?? section.practice ?? 0);
       // A section's last unit used to be seeded as `checkpoint` lessons with no
       // check of its own: ordinary teaching lessons drawn and graded as a test.

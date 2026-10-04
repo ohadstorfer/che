@@ -16,9 +16,9 @@
 section:
   id: 13
   slug: "in-other-words"
-  title: "In other words"
+  title: "At work"
   cefr: "B2.3"
-  practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
+  practice: 2
 units:
   - ordinal: 1
     slug: "me-pidio-que"
@@ -33,10 +33,10 @@ units:
       en: "She asked me to bring her something."
     tips:
       - title: "Me pidió que…"
-        body: "A request told later takes the past subjunctive: «Traeme pan» → **me pidió que le
-          trajera pan**; «Esperen» → **nos dijo que esperáramos**. *Dijo que* + subjunctive is an
-          order; *dijo que* + indicative is news. In everyday speech you will also hear the present:
-          *me pidió que le **traiga** algo*. Both are fine."
+        body: "A request told later takes the past subjunctive: «Traeme pan» → **me pidió que le trajera
+          pan**; «Esperen» → **nos dijo que esperáramos**. *Dijo que* + subjunctive is an order;
+          *dijo que* + indicative is news. In everyday speech you will also hear the present: *me
+          pidió que le **traiga** algo*. Both are fine."
       - title: "Insistió, sugirió"
         body: "**Insistió en que fuera** — *she insisted I go*. **Me sugirió que la llamara** — *he
           suggested I call her*. Same pattern: the verb after **que** in the past subjunctive."
@@ -91,7 +91,6 @@ units:
             f: "3sg.pret.ind"
           - form: "aclarar"
             f: "inf"
-
   - ordinal: 2
     slug: "me-encargo-que"
     title: "Pass on a list of errands"
@@ -110,8 +109,8 @@ units:
           cerrara la puerta**; «Apagá la luz» → **que apagara la luz**."
       - title: "Llegáramos, trajeran"
         body: "The other persons follow: **nos pidió que llegáramos temprano** — *she asked us to get there
-          early*; **les dijo que trajeran algo** — *he told them to bring something*. **Me encargó que
-          le llevara** is the errand version: *she asked me to take her…*"
+          early*; **les dijo que trajeran algo** — *he told them to bring something*. **Me encargó
+          que le llevara** is the errand version: *she asked me to take her…*"
       - title: "De parte de…"
         body: "Passing on a message ends with who it's from: **saludos de parte de mi vieja**. And the
           classic order from home, told later: «Portate bien» → **me dijo que me portara bien**."
@@ -183,7 +182,6 @@ units:
       - lemma: "de parte de"
         pos: "phrase"
         en: "on behalf of"
-
   - ordinal: 3
     slug: "me-pregunto-si"
     title: "Ask whether"
@@ -197,11 +195,11 @@ units:
       en: "He asked me if I was coming."
     tips:
       - title: "Si = whether"
-        body: "A yes-or-no question told later hangs on **si**: «¿Venís?» → **me preguntó si venía**.
-          *No sé si abre hoy* — *I don't know if it's open today*. **Dudo** — *I doubt it*."
+        body: "A yes-or-no question told later hangs on **si**: «¿Venís?» → **me preguntó si venía**. *No sé
+          si abre hoy* — *I don't know if it's open today*. **Dudo** — *I doubt it*."
       - title: "A ver si…"
-        body: "**A ver si** is *let's see if* — and, just as often, a hope: **a ver si nos juntamos** —
-          *we should get together sometime*. To find something out, porteños **averiguan**."
+        body: "**A ver si** is *let's see if* — and, just as often, a hope: **a ver si nos juntamos** — *we
+          should get together sometime*. To find something out, porteños **averiguan**."
     words:
       - lemma: "a ver si"
         pos: "phrase"
@@ -228,7 +226,6 @@ units:
           - form: "dudás"
             en: "you doubt"
             f: "2sg.pres.ind.vos"
-
   - ordinal: 4
     slug: "fijate-si-tienen"
     title: "Check before you go"
@@ -303,7 +300,6 @@ units:
       - lemma: "en persona"
         pos: "phrase"
         en: "in person"
-
   - ordinal: 5
     slug: "practica-como-no"
     title: "Practice: errands, checking and don José"
@@ -317,11 +313,11 @@ units:
       en: "My mum asked me to buy bread."
     tips:
       - title: "Comprara, llegáramos, trajeran"
-        body: "The errand told later: **me pidió que comprara pan**, **nos dijo que llegáramos
-          temprano**, **les pidió que trajeran algo**. The question: **preguntale si tienen stock**."
+        body: "The errand told later: **me pidió que comprara pan**, **nos dijo que llegáramos temprano**,
+          **les pidió que trajeran algo**. The question: **preguntale si tienen stock**."
       - title: "Cómo no, faltaba más"
-        body: "With **don José** and **doña Rosa**: **te doy una mano**, **dejá**, **cómo no**, **faltaba más** — vos, said warmly."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+        body: "With **don José** and **doña Rosa**: **te doy una mano**, **dejá**, **cómo no**, **faltaba
+          más** — vos, said warmly."
     review:
       - "comprara"
       - "llegáramos"
@@ -338,7 +334,6 @@ units:
       - "jubilado"
       - "pidió"
       - "dijera"
-
   - ordinal: 6
     slug: "cualquier-cosa-avisame"
     title: "Write a work email"
@@ -352,14 +347,15 @@ units:
       en: "I'm attaching the contract."
     tips:
       - title: "Hola, Juan:"
-        body: "Most work emails open with **Hola, Juan:** or **Buen día, Sofi:** and close with
-          **Saludos**, **Abrazo** or **Un abrazo**. **Estimado Juan** / **Estimada Sofi** is the
-          formal exception, and so is **quedo atento** (a woman: **quedo atenta**) — *I look forward
-          to your reply*. **Te adjunto** is *I'm attaching*: *te adjunto mi CV*; **desde ya, gracias**
+        body: "Most work emails open with **Hola, Juan:** or **Buen día, Sofi:** and close with **Saludos**,
+          **Abrazo** or **Un abrazo**. **Estimado Juan** / **Estimada Sofi** is the formal
+          exception, and so is **quedo atento** (a woman: **quedo atenta**) — *I look forward to
+          your reply*. **Te adjunto** is *I'm attaching*: *te adjunto mi CV*; **desde ya, gracias**
           is *thanks in advance*."
       - title: "Cualquier cosa, avisame"
         body: "The porteño sign-off, in emails and out of them: **cualquier cosa, avisame** — *if anything
-          comes up, let me know*. A **consulta** is a question you send; a **respuesta**, the reply."
+          comes up, let me know*. A **consulta** is a question you send; a **respuesta**, the
+          reply."
     words:
       - lemma: "adjuntar"
         pos: "verb"
@@ -407,7 +403,6 @@ units:
       - lemma: "CV"
         pos: "noun"
         en: "résumé"
-
   - ordinal: 7
     slug: "te-reenvio-el-archivo"
     title: "Answer a work email"
@@ -425,9 +420,9 @@ units:
           paso el link**; **te pongo en copia** — *I'm cc'ing you*. **Revisé la planilla** — *I went
           through the spreadsheet*."
       - title: "Cualquier duda…"
-        body: "**Cualquier duda, avisame** — *any questions, let me know* — closes half the emails in
-          Buenos Aires. What's still to do is **pendiente**: **me quedó pendiente el archivo**. And if
-          it needs a meeting, you **agendás** it."
+        body: "**Cualquier duda, avisame** — *any questions, let me know* — closes half the emails in Buenos
+          Aires. What's still to do is **pendiente**: **me quedó pendiente el archivo**. And if it
+          needs a meeting, you **agendás** it."
     words:
       - lemma: "reenviar"
         pos: "verb"
@@ -498,7 +493,6 @@ units:
       - lemma: "en copia"
         pos: "phrase"
         en: "cc'd, copied in"
-
   - ordinal: 8
     slug: "la-entrega"
     title: "Meet a deadline"
@@ -545,7 +539,6 @@ units:
       - lemma: "entrega"
         pos: "noun"
         en: "hand-in, submission"
-
   - ordinal: 9
     slug: "sobre-la-hora"
     title: "Move a deadline"
@@ -558,13 +551,13 @@ units:
       en: "We handed in the report right at the deadline."
     tips:
       - title: "Entregamos, entregaste"
-        body: "The **plazo** moves: they **postergaron la fecha** — *pushed the date back* — or, worse,
-          **la adelantaron**. Then it's **horas extra** until **entregamos** — *we handed it in*. And the
+        body: "The **plazo** moves: they **postergaron la fecha** — *pushed the date back* — or, worse, **la
+          adelantaron**. Then it's **horas extra** until **entregamos** — *we handed it in*. And the
           boss asks: **¿ya lo entregaste?**"
       - title: "Sobre la hora"
         body: "**Sobre la hora** — *right at the deadline, with seconds to spare* — is how most porteño
-          projects get done. First a **borrador** — *a draft* — then you **corregir** it, and only then
-          the **informe** or the **presentación**. **¿Avanzaron?** — *any progress?*"
+          projects get done. First a **borrador** — *a draft* — then you **corregir** it, and only
+          then the **informe** or the **presentación**. **¿Avanzaron?** — *any progress?*"
     words:
       - lemma: "entregar"
         pos: "verb"
@@ -618,9 +611,6 @@ units:
           - form: "adelantaron"
             en: "they brought forward"
             f: "3pl.pret.ind"
-      - lemma: "fecha"
-        pos: "noun"
-        en: "date (on the calendar)"
       - lemma: "sobre la hora"
         pos: "phrase"
         en: "at the very last minute, right at the deadline"
@@ -628,7 +618,6 @@ units:
       - lemma: "horas extra"
         pos: "phrase"
         en: "overtime"
-
   - ordinal: 10
     slug: "merezco-un-aumento"
     title: "Ask for a raise"
@@ -644,8 +633,8 @@ units:
         body: "You don't just ask, you **plantear** it — *raise it, put it on the table*: **le planteé lo
           del aumento a mi jefa**. Then you **negociar** the **condiciones**."
       - title: "Merezco"
-        body: "**Merecerse** — *to deserve* — comes with its pronoun: **me merezco un aumento**, **te lo merecés**. And a boss who
-          **valora** your work says so with the sueldo."
+        body: "**Merecerse** — *to deserve* — comes with its pronoun: **me merezco un aumento**, **te lo
+          merecés**. And a boss who **valora** your work says so with the sueldo."
     words:
       - lemma: "plantear"
         pos: "verb"
@@ -698,7 +687,6 @@ units:
           - form: "condiciones"
             en: "conditions, terms"
             f: "f.pl"
-
   - ordinal: 11
     slug: "se-merece-el-ascenso"
     title: "Back a colleague for a promotion"
@@ -712,12 +700,12 @@ units:
     tips:
       - title: "Se lo merece, nos lo merecemos"
         body: "**Merecerse** keeps its pronoun for every person: **me lo merezco**, **te lo merecés**, **se
-          lo merece** — *she deserves it* — **nos lo merecemos** — *we deserve it*. A **gerente** who
-          sees your **responsabilidad** grow should hear it: **se merece el ascenso**."
+          lo merece** — *she deserves it* — **nos lo merecemos** — *we deserve it*. A **gerente**
+          who sees your **responsabilidad** grow should hear it: **se merece el ascenso**."
       - title: "En blanco, en negro"
-        body: "Before you **negociar**, know what you're owed. A job **en blanco** is *on the books*,
-          with aguinaldo and obra social; **en negro** is *off the books*. And with inflation, the
-          yearly **ajuste** — *the pay adjustment* — is the first thing you **exigir**."
+        body: "Before you **negociar**, know what you're owed. A job **en blanco** is *on the books*, with
+          aguinaldo and obra social; **en negro** is *off the books*. And with inflation, the yearly
+          **ajuste** — *the pay adjustment* — is the first thing you **exigir**."
     words:
       - lemma: "merecer"
         pos: "verb"
@@ -782,7 +770,6 @@ units:
       - lemma: "ajuste"
         pos: "noun"
         en: "pay adjustment (for inflation)"
-
   - ordinal: 12
     slug: "resulta-que"
     title: "Tell how it turned out"
@@ -797,11 +784,11 @@ units:
     tips:
       - title: "Resulta que"
         body: "**Resulta que** — *it turns out* — is how a porteño story takes its turn. **Encima** — *on
-          top of that* — makes it worse: **encima, llovía**. **Total** shrugs it off: **total, nadie se
-          dio cuenta**."
+          top of that* — makes it worse: **encima, llovía**. **Total** shrugs it off: **total, nadie
+          se dio cuenta**."
       - title: "Me enteré"
-        body: "**Enterarse** is *to find out, to hear about*: **me enteré ayer**, **¿te enteraste?**,
-          **se enteró todo el mundo**."
+        body: "**Enterarse** is *to find out, to hear about*: **me enteré ayer**, **¿te enteraste?**, **se
+          enteró todo el mundo**."
     words:
       - lemma: "resulta que"
         pos: "phrase"
@@ -830,7 +817,6 @@ units:
         pos: "adv"
         en: "after all, whatever"
         register: "informal"
-
   - ordinal: 13
     slug: "para-colmo"
     title: "Tell the twist in the story"
@@ -844,11 +830,11 @@ units:
       en: "They fired him out of the blue, and to top it off he found out by email."
     tips:
       - title: "De golpe, para colmo"
-        body: "The twist arrives **de golpe** — *all of a sudden* — or **de la nada** — *out of
-          nowhere*. **Para colmo** stacks one more thing on top, like **encima**: **para colmo,
-          llovía**. **Por lo visto** — *apparently* — is what you say when you weren't there. When
-          someone loses a job, people say **lo echaron**; **lo despidieron** is the word of the news
-          and of HR."
+        body: "The twist arrives **de golpe** — *all of a sudden* — or **de la nada** — *out of nowhere*.
+          **Para colmo** stacks one more thing on top, like **encima**: **para colmo, llovía**.
+          **Por lo visto** — *apparently* — is what you say when you weren't there. When someone
+          loses a job, people say **lo echaron**; **lo despidieron** is the word of the news and of
+          HR."
       - title: "Nos enteramos, se enteraron"
         body: "**Enterarse** for everyone: **nos enteramos tarde** — *we found out late*; **se enteraron
           todos** — *everybody found out*. The one who tells it best adds **¡ni te cuento!** — *you
@@ -910,7 +896,6 @@ units:
           - form: "me sorprendió"
             en: "it surprised me"
             f: "3sg.pret.ind.clitic"
-
   - ordinal: 14
     slug: "se-la-cree"
     title: "Use the porteño 'la'"
@@ -928,8 +913,8 @@ units:
           full of himself*; **me la banco** — *I can handle it*; **la tenés clara** — *you know your
           stuff*. With **las**: **me las arreglo** — *I get by*."
       - title: "La verdad"
-        body: "**La verdad** opens an honest answer: **la verdad, no sé** — *honestly, I don't know*.
-          **La verdad que sí** — *yeah, really*."
+        body: "**La verdad** opens an honest answer: **la verdad, no sé** — *honestly, I don't know*. **La
+          verdad que sí** — *yeah, really*."
     words:
       - lemma: "creérsela"
         pos: "verb"
@@ -973,7 +958,6 @@ units:
         pos: "phrase"
         en: "you know your stuff, you've got it figured out"
         register: "informal"
-
   - ordinal: 15
     slug: "me-la-jugue"
     title: "Use more porteño 'la' idioms"
@@ -987,10 +971,10 @@ units:
       en: "I went for it and blew it, but I'm getting by."
     tips:
       - title: "Me la jugué, la pifié, la rompe"
-        body: "More verbs that take a **la** pointing at nothing: **me la juego** — *I'll go for
-          it*; **la pifié** — *I blew it* — and its opposite, **la pegaste** — *you got it right*;
-          **la rompe** — *she nails it, she kills it*; **se la agarró conmigo** — *he took it out on
-          me*. **Me las tomo** — *I'm out of here*. And to make someone stop: **¡cortala!** — *cut it
+        body: "More verbs that take a **la** pointing at nothing: **me la juego** — *I'll go for it*; **la
+          pifié** — *I blew it* — and its opposite, **la pegaste** — *you got it right*; **la
+          rompe** — *she nails it, she kills it*; **se la agarró conmigo** — *he took it out on me*.
+          **Me las tomo** — *I'm out of here*. And to make someone stop: **¡cortala!** — *cut it
           out!*"
       - title: "Te la bancás, te las arreglás"
         body: "The *la* stays put while the person changes: **me la banco**, **te la bancás**, **nos la
@@ -1090,7 +1074,6 @@ units:
           - form: "cortala"
             en: "cut it out, stop it"
             f: "2sg.imp.vos.clitic"
-
   - ordinal: 16
     slug: "practica-me-la-jugue"
     title: "Practice: replies, twists and more 'la'"
@@ -1110,7 +1093,6 @@ units:
       - title: "Me la jugué, la rompe"
         body: "**Me la jugué**, **la pifié**, **la rompe**, **te las arreglás** — the *la* again, doing
           nothing and everything."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
     review:
       - "reenvío"
       - "archivo"
@@ -1128,164 +1110,7 @@ units:
       - "la rompe"
       - "te las arreglás"
       - "adjunto"
-
   - ordinal: 17
-    slug: "cada-vez-mas"
-    title: "Talk about how things changed"
-    summary: "El barrio cambió un montón"
-    grammar:
-      - "cambio.antes-ahora"
-      - "cada-vez-mas"
-    register_max: "informal"
-    sample:
-      es: "El barrio cambió un montón."
-      en: "The neighborhood changed a lot."
-    tips:
-      - title: "Ya no"
-        body: "**Ya no** is *not anymore*: **ya no vivo ahí**. **Cada vez más** — *more and more*: **cada
-          vez más caro**; **cada vez menos** — *less and less*."
-      - title: "Creció"
-        body: "**Crecer** is *to grow* — a city, a kid, a tree: **el barrio creció**, **crecí en
-          Rosario** — *I grew up in Rosario*. Porteños also say **me crié**: *me crié en Flores* — *I
-          grew up in Flores*. The new towers are **edificios**."
-      - title: "Antes… ahora"
-        body: "To say how things changed, set **antes** + the *-aba / -ía* past against **ahora** +
-          the present: *antes era tranquilo, ahora hay mucho ruido*; *antes costaba poco, ahora es
-          carísimo*."
-    words:
-      - lemma: "ya no"
-        pos: "phrase"
-        en: "not anymore, no longer"
-      - lemma: "cada vez más"
-        pos: "phrase"
-        en: "more and more"
-      - lemma: "cada vez menos"
-        pos: "phrase"
-        en: "less and less"
-      - lemma: "cambiar"
-        pos: "verb"
-        forms:
-          - form: "cambió"
-            en: "changed"
-            f: "3sg.pret.ind"
-      - lemma: "crecer"
-        pos: "verb"
-        en: "to grow, to grow up"
-        forms:
-          - form: "creció"
-            en: "grew"
-            f: "3sg.pret.ind"
-          - form: "crecí"
-            en: "I grew up"
-            f: "1sg.pret.ind"
-
-  - ordinal: 18
-    slug: "estas-cambiado"
-    title: "Say how people and places changed"
-    summary: "¡Estás cambiado! No te reconocí"
-    grammar:
-      - "cambio.antes-ahora"
-      - "cada-vez-mas"
-    register_max: "informal"
-    sample:
-      es: "¡Estás re cambiado! No te reconocí."
-      en: "You've changed so much! I didn't recognize you."
-    tips:
-      - title: "Cambiaste, mejoró, empeoró"
-        body: "Change, person by person: **cambiaste un montón**, **cambiaron los precios**, **el barrio
-          mejoró**, **el servicio empeoró**. **Estás cambiado** — *you look different* — agrees like an
-          adjective: *estás cambiada*."
-      - title: "Cada vez peor, de moda"
-        body: "**Cada vez peor** and **cada vez mejor** — *worse and worse, better and better*. What's in
-          is **de moda**; what's gone **desapareció**: **desaparecieron los almacenes**, and where the
-          old house stood there's a **torre**. Ya no es **lo mismo**."
-    words:
-      - lemma: "cambiar"
-        pos: "verb"
-        forms:
-          - form: "cambiaste"
-            en: "you changed"
-            f: "2sg.pret.ind.vos"
-          - form: "cambiaron"
-            en: "they changed"
-            f: "3pl.pret.ind"
-      - lemma: "cambiado"
-        pos: "adj"
-        en: "transformed, not the same"
-        forms:
-          - form: "cambiado"
-            f: "m.sg"
-          - form: "cambiada"
-            f: "f.sg"
-      - lemma: "reconocer"
-        pos: "verb"
-        forms:
-          - form: "reconocí"
-            en: "I recognized"
-            f: "1sg.pret.ind"
-      - lemma: "crecer"
-        pos: "verb"
-        forms:
-          - form: "creciste"
-            en: "you grew up"
-            f: "2sg.pret.ind.vos"
-          - form: "crecieron"
-            en: "they grew"
-            f: "3pl.pret.ind"
-      - lemma: "mejorar"
-        pos: "verb"
-        forms:
-          - form: "mejoró"
-            en: "got better, improved"
-            f: "3sg.pret.ind"
-      - lemma: "empeorar"
-        pos: "verb"
-        en: "to get worse"
-        forms:
-          - form: "empeoró"
-            en: "got worse"
-            f: "3sg.pret.ind"
-      - lemma: "desaparecer"
-        pos: "verb"
-        en: "to disappear"
-        forms:
-          - form: "desapareció"
-            en: "disappeared"
-            f: "3sg.pret.ind"
-          - form: "desaparecieron"
-            en: "they disappeared"
-            f: "3pl.pret.ind"
-      - lemma: "cada vez peor"
-        pos: "phrase"
-        en: "worse and worse"
-      - lemma: "cada vez mejor"
-        pos: "phrase"
-        en: "better and better"
-      - lemma: "de moda"
-        pos: "phrase"
-        en: "in fashion, trendy"
-      - lemma: "lo mismo"
-        pos: "phrase"
-        en: "the same (thing)"
-      - lemma: "torre"
-        pos: "noun"
-        en: "tower block, high-rise"
-        forms:
-          - form: "torre"
-            f: "sg"
-          - form: "torres"
-            en: "tower blocks, high-rises"
-            f: "pl"
-      - lemma: "moderno"
-        pos: "adj"
-        en: "modern"
-        forms:
-          - form: "moderno"
-            f: "m.sg"
-          - form: "moderna"
-            f: "f.sg"
-
-  - ordinal: 19
     slug: "estoy-podrido"
     title: "Say you're fed up"
     summary: "Estoy podrido del ruido"
@@ -1298,13 +1123,13 @@ units:
       en: "I'm sick of the noise."
     tips:
       - title: "Harto, podrido"
-        body: "**Estoy harto** — *I'm fed up*; porteños go further: **estoy podrido** — literally
-          *rotten*. Both take **de** + a thing or an infinitive: **harta del tránsito**, **podrido del
+        body: "**Estoy harto** — *I'm fed up*; porteños go further: **estoy podrido** — literally *rotten*.
+          Both take **de** + a thing or an infinitive: **harta del tránsito**, **podrido del
           ruido**. When someone or something else is doing it: **de que** + subjunctive — *estoy
           podrido de que el ascensor esté roto*."
       - title: "No doy más"
-        body: "**No doy más** — *I can't take it anymore*. **No lo aguanto** — *I can't stand him*. And
-          when it's one thing too many: **¡es el colmo!**"
+        body: "**No doy más** — *I can't take it anymore*. **No lo aguanto** — *I can't stand him*. And when
+          it's one thing too many: **¡es el colmo!**"
     words:
       - lemma: "harto"
         pos: "adj"
@@ -1338,8 +1163,7 @@ units:
       - lemma: "no doy más"
         pos: "phrase"
         en: "I can't take it anymore, I'm exhausted"
-
-  - ordinal: 20
+  - ordinal: 18
     slug: "me-pudri"
     title: "Complain about what wears you down"
     summary: "Me pudrí de hacer fila"
@@ -1352,14 +1176,14 @@ units:
       en: "Enough! I got fed up with waiting in line."
     tips:
       - title: "Me pudrí, me harté"
-        body: "The moment you snap is in the past: **me harté** — *I got fed up*; porteños say **me
-          pudrí**: **me pudrí y me fui**. Both take **de** + infinitive: **me pudrí de esperar**. Then
-          one word: **¡basta!**"
+        body: "The moment you snap is in the past: **me harté** — *I got fed up*; porteños say **me pudrí**:
+          **me pudrí y me fui**. Both take **de** + infinitive: **me pudrí de esperar**. Then one
+          word: **¡basta!**"
       - title: "Me quejo, reniego"
-        body: "**Me quejo** — *I complain*; **renegar** is the Argentine *to struggle with
-          something, to grumble*. For a habit: **siempre reniego con el wifi**. For something going on
-          now: **estoy renegando con el trámite del DNI**. Someone who's **agotado** is *wiped out*;
-          the **estrés** is why. And the traffic? **Un caos**."
+        body: "**Me quejo** — *I complain*; **renegar** is the Argentine *to struggle with something, to
+          grumble*. For a habit: **siempre reniego con el wifi**. For something going on now:
+          **estoy renegando con el trámite del DNI**. Someone who's **agotado** is *wiped out*; the
+          **estrés** is why. And the traffic? **Un caos**."
     words:
       - lemma: "pudrirse"
         pos: "verb"
@@ -1423,8 +1247,7 @@ units:
       - lemma: "me saca de quicio"
         pos: "phrase"
         en: "it drives me up the wall"
-
-  - ordinal: 21
+  - ordinal: 19
     slug: "practica-me-pudri"
     title: "Practice: quitting, changing, getting fed up"
     summary: "Me harté y dejé de fumar"
@@ -1440,9 +1263,8 @@ units:
       - title: "Dejé de, volví a, solemos"
         body: "**Dejé de fumar**, **volvió a correr**, **solemos cenar tarde**, **acabamos de llegar**."
       - title: "Cada vez peor, me pudrí"
-        body: "**Cambiaste un montón**, **el servicio empeoró**, **cada vez peor** — and then: **me
-          pudrí**, **¡basta!**"
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+        body: "**Cambiaste un montón**, **el servicio empeoró**, **cada vez peor** — and then: **me pudrí**,
+          **¡basta!**"
     review:
       - "dejé de"
       - "volvió a"
@@ -1461,8 +1283,7 @@ units:
       - "me quejo"
       - "suelo"
       - "ya no"
-
-  - ordinal: 22
+  - ordinal: 20
     slug: "como-te-decia"
     title: "Keep a story on track"
     summary: "Como te decía, el tema es que no vino"
@@ -1479,8 +1300,8 @@ units:
           brings it back; **el tema es que** — *the thing is* — gets to the point; **a todo esto** —
           *by the way* — goes off on a side road; **hablando de** jumps to the next story."
       - title: "Y bueno"
-        body: "**Y bueno** is the porteño shrug — *oh well, what can you do*: **y bueno, así es**. **Ah,
-          me olvidaba** — *oh, I forgot to say* — adds the best part at the end. A story can be
+        body: "**Y bueno** is the porteño shrug — *oh well, what can you do*: **y bueno, así es**. **Ah, me
+          olvidaba** — *oh, I forgot to say* — adds the best part at the end. A story can be
           **larga** or **corta**; this one never is."
     words:
       - lemma: "como te decía"
@@ -1531,8 +1352,7 @@ units:
       - lemma: "en resumen"
         pos: "phrase"
         en: "in short, to sum up"
-
-  - ordinal: 23
+  - ordinal: 21
     slug: "te-la-hago-corta"
     title: "Tell the whole story, short"
     summary: "Te la hago corta"
@@ -1548,8 +1368,8 @@ units:
         body: "**Te la hago corta** — *long story short* — is usually followed by a long story. **La
           cuestión es que** — *the thing is* — brings it back on track; **en fin** closes it."
       - title: "Y nada"
-        body: "**Y nada** is the porteño *so, yeah*: it fills the pause at the end of a story. **Al
-          toque** — *right away*: **me contestó al toque**."
+        body: "**Y nada** is the porteño *so, yeah*: it fills the pause at the end of a story. **Al toque**
+          — *right away*: **me contestó al toque**."
     words:
       - lemma: "te la hago corta"
         pos: "phrase"
