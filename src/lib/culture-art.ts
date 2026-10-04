@@ -68,9 +68,15 @@ export function artFor(section: string, n = 0): ImageSourcePropType {
   return set[n % set.length];
 }
 
+/** Pictures cropped for the small tile: the parrilla without its tall plume of
+ *  smoke, which shrank the grill to fit. */
+const tileOnly: Record<string, ImageSourcePropType> = {
+  asado: require('@/assets/images/objects/asado-tile.webp'),
+};
+
 /** A subject's own object for its tile and hero; unknown subjects take turns with the general set. */
 export function tileArt(section: string, index: number): ImageSourcePropType {
-  return bySection[section]?.[0] ?? general[index % general.length];
+  return tileOnly[section] ?? bySection[section]?.[0] ?? general[index % general.length];
 }
 
 // The capybara who asks the quiz questions — a person talks, a mate doesn't.

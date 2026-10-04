@@ -369,6 +369,17 @@ Scripts live in `scripts/course/`, run locally, write to the DB. Every stage is 
 | Publish | dashboard | approved unit | flips unit, its forms, sentences, lessons, tips to `published` | `published` |
 | Snapshot | `export-snapshot.mjs` | everything | `content/snapshots/<date>/*.json`, committed | — |
 
+**Assemble by level (as built, 2026-10-04).** A unit is planned at the level its section's `cefr` names (`levelOf` in `scripts/course/lib/lessons.mjs`), inside the slot kinds and modes the player already has:
+
+| Level | Sentences | Exercise mix |
+|---|---|---|
+| A1 | shortest first | teach · meaning · gap, then tiles; typed gaps only in practice |
+| A2 | 4 words or more first | a teaching lesson also types 1–2 words into sentences it has shown |
+| B1 | 5 words or more first, two clauses before one; practice takes the longest buildable | a meaning is picked only when a word is first met; top-ups are gap · typed · tiles; practice types one more |
+| B2 | 6 words or more first | every gap is typed: past the first meeting it is type or build |
+
+A word with only short sentences still gets them. Practice brings earlier sentences back from the current level and the one below; an older word that no sentence in that window carries comes back in one of its own, one a unit. A tip opens the first lesson that teaches a word it shows in **bold** (else its place in the list), and the unit's pattern table opens its first lesson as well as grammar practice. No sentence has more than two screens in a lesson. `lintLessons` checks the proposal: `lesson.density`, `lesson.length`, `lesson.repeat`, `lesson.unused` (a word taught and in no sentence after), `lesson.tip`, `lesson.typed`, `lesson.meaning`, `lesson.window`.
+
 **Generator constraints (hard, in the prompt and re-checked by the linter):**
 
 - May use only forms in `available_forms(unit)`. The prompt receives the literal list.

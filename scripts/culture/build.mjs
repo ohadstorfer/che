@@ -12,9 +12,9 @@ const OUT = 'src/lib/culture.json';
 
 // The order sections appear in the app. Anything not listed goes last.
 const ORDER = [
-  'mate', 'asado', 'comida', 'alfajores',
-  'futbol', 'tango', 'musica', 'habla',
-  'dichos', 'puteadas', 'costumbres', 'buenos-aires',
+  'costumbres', 'buenos-aires', 'habla', 'comida',
+  'alfajores', 'mate', 'asado', 'futbol',
+  'dichos', 'puteadas', 'musica', 'tango',
   'regiones', 'iconos', 'historia-nacimiento', 'historia-moderna',
 ];
 

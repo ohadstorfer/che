@@ -93,7 +93,7 @@ for (const u of units.filter((x) => x.isNew)) {
   if (u.sample) for (const p of checkSentence(merged, u, u.sample.es)) errors.push(`new unit ${u.course_order} ${u.slug} sample "${u.sample.es}": ${p}`);
 }
 
-const renumbered = units.filter((u) => !u.isNew && (u.old.ordinal !== u.ordinal || u.old.course_order !== u.course_order));
+const renumbered = units.filter((u) => !u.isNew && (u.old.section_id !== u.section_id || u.old.ordinal !== u.ordinal || u.old.course_order !== u.course_order));
 const newUnits = units.filter((u) => u.isNew);
 console.log(`${units.length} units (${newUnits.length} new, ${renumbered.length} renumbered) · ${forms.filter((f) => f.isNew).length} new words · ${moves.length} moved earlier`);
 for (const m of moves) console.log(`  move "${m.form.form}" (${m.form.lemma}): ${m.from.course_order} ${m.from.slug} → ${m.to.course_order} ${m.to.slug}`);
@@ -139,8 +139,10 @@ if (sqlOut) {
 insert into reorder_units values
   ${values};
 
--- Through a free range first: ordinals and course places are unique.
-update public.units u set ordinal = 20000 + r.ordinal, course_order = 20000 + r.course_order from reorder_units r where u.id = r.id;
+-- Through a free range first: ordinals and course places are unique. The course
+-- place is the free ordinal too: a unit changing section may land on an ordinal
+-- another unit of its old section is also headed for.
+update public.units u set ordinal = 20000 + r.course_order, course_order = 20000 + r.course_order from reorder_units r where u.id = r.id;
 update public.units u set section_id = r.section_id, ordinal = r.ordinal, course_order = r.course_order from reorder_units r where u.id = r.id;
 
 -- A placement or jump test is remembered as a course place.

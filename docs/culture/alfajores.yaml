@@ -2,7 +2,7 @@ section:
   slug: "alfajores"
   title: "Alfajores y dulces"
   emoji: "🍪"
-  summary: "Dulce de leche, kioscos and the snack that runs on sugar"
+  summary: "Dulce de leche, facturas and what to buy at the kiosco"
 
 # Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
 # 2–3 guess-first questions, no word review.
@@ -15,7 +15,7 @@ classes:
       - type: card
         text: "**Dulce de leche** is milk and sugar cooked slowly for hours until thick and brown. On toast, in cakes, straight from the jar with a spoon at midnight."
       - type: card
-        text: "Just don't call it caramel. Say that to an Argentine and watch their face fall."
+        text: "Just don't call it caramel. Caramel is cooked sugar. Dulce de leche is mostly milk, and Argentines will correct you."
       - type: choice
         prompt: "Legend says dulce de leche was invented by accident in 1829. How?"
         options:
@@ -23,7 +23,7 @@ classes:
           - "A soldier left sugar in his canteen"
           - "A baker burned a batch of flan"
         correct: 0
-        explain: "The story goes: a ranch in Cañuelas, the governor Rosas meeting his rival Lavalle to sign a truce, and a maid so caught up in the drama she forgot the pot."
+        explain: "The story goes: a ranch in Cañuelas, the future governor Rosas meeting his rival Lavalle to sign a truce, and a maid so caught up in the drama she forgot the pot."
       - type: card
         text: "Cute story, almost certainly a legend. Uruguay, Chile, France and others claim dulce de leche too. Uruguay, loudly."
       - type: card
@@ -35,9 +35,9 @@ classes:
           - "About forty minutes"
           - "Two hours, slowly"
         correct: 0
-        explain: "Zero. Chocolinas cookies dipped in milk, layered with dulce de leche mixed with cream cheese. Into the fridge, done."
+        explain: "Zero. Chocolinas cookies dipped in milk or coffee, layered with dulce de leche mixed with cream cheese. Into the fridge, done."
       - type: card
-        text: "Two more to know: **pastafrola**, a lattice tart with quince or sweet potato jam, and **Mantecol**, a peanut nougat bar people get weirdly emotional about."
+        text: "Two more to know: **pastafrola**, a lattice tart filled with quince or sweet potato paste, and **Mantecol**, a crumbly peanut sweet, a bit like halva, that is on the table every Christmas."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -46,15 +46,15 @@ classes:
     summary: "Two cookies, dulce de leche in the middle, and a very long trip"
     pages:
       - type: card
-        text: "An **alfajor** is two soft cookies stuck together with a filling, usually dulce de leche, often dipped in chocolate. That's it. That's the whole religion."
+        text: "An **alfajor** is two soft cookies stuck together with a filling, usually dulce de leche, often dipped in chocolate. That's all it is, and the whole country loves it."
       - type: choice
-        prompt: "Where was the alfajor born?"
+        prompt: "Where do the alfajor's name and ancestor come from?"
         options:
-          - "In Muslim Spain"
-          - "In colonial Peru"
-          - "In southern Italy"
+          - "Muslim Spain"
+          - "Colonial Peru"
+          - "Southern Italy"
         correct: 0
-        explain: "The name comes from Andalusian Arabic. In al-Ándalus it was a honey, almond and spice sweet, and Andalucía still makes it today."
+        explain: "The name comes from Andalusian Arabic. In al-Ándalus it was a honey, almond and spice sweet, and Andalucía still makes it today. The cookie sandwich came later, in the Americas."
       - type: card
         text: "The Spanish brought the name across the ocean, and here it became cookies plus dulce de leche. Argentina just, humbly, perfected it."
       - type: card
@@ -64,11 +64,11 @@ classes:
       - type: choice
         prompt: "Industry estimates count how many alfajores Argentines eat. How many a day?"
         options:
-          - "Around six million"
+          - "Six million or more"
           - "Around sixty thousand"
           - "Around six hundred thousand"
         correct: 0
-        explain: "About six million a day, by the industry's own estimate. That's roughly one for every eight people, every single day."
+        explain: "Estimates start at about six million a day, and some recent ones are much higher. That's at least one for every eight people, every single day."
       - type: card
         chip: "Pro tip"
         text: "Skipped lunch? Ask for a **triple**: three cookies, two layers of dulce de leche. More alfajor per alfajor."
@@ -82,15 +82,17 @@ classes:
       - type: card
         text: "Every block has a **kiosco**: a tiny shop selling candy, drinks, phone credit and, above all, alfajores. Many stay open late, some never close: look for **24 hs**."
       - type: choice
-        prompt: "The kiosco has no coins for your change. What might you get instead?"
+        prompt: "For years, kioscos often had no coins for your change. What did you get instead?"
         options:
           - "A few candies"
-          - "An IOU on a napkin"
+          - "A note saying they owe you"
           - "A bus token"
         correct: 0
-        explain: "During years of coin shortages, **caramelos** became the unofficial small change. Some kioscos still do it."
+        explain: "During years of coin shortages, **caramelos** became the unofficial small change. Today coins are almost gone, and most people pay with a QR code or a card."
       - type: card
-        text: "Some kioscos are literally a **ventanita**, a little window in someone's house. Knock, ask, pay, done."
+        text: "Late at night, many kioscos serve through a small window or a grille, **la reja**. Ask, pay, done."
+      - type: card
+        text: "To buy one, say **“¿Me das un alfajor?”** To ask the price: **“¿Cuánto sale?”** You may get a question back: **“¿Negro o blanco?”**, dark or white chocolate."
       - type: choice
         prompt: "You're meeting your partner's family for the first time. Which alfajores do you bring?"
         options:
@@ -98,14 +100,12 @@ classes:
           - "A box of Guaymallén"
           - "A box of Jorgitos"
         correct: 0
-        explain: "**Havanna**, from Mar del Plata, is the fancy one: the box you bring as a gift."
+        explain: "**Havanna**, from Mar del Plata, is the expensive one: the box you bring as a gift."
       - type: card
-        text: "**Jorgito** and **Guaymallén** are the everyday kiosco heroes: cheap, humble, legendary. Beloved, but a coins-in-your-pocket snack, not a meet-the-parents gift."
-      - type: card
-        text: "Ask a table “which is the best alfajor?” and clear your afternoon. Some swear by Havanna. Others call it overpriced and grab a humble **Guaymallén**."
+        text: "**Jorgito** and **Guaymallén** are the everyday kiosco alfajores: cheap and much loved. Ask a table which alfajor is the best and the argument can last all afternoon."
       - type: card
         chip: "Did you know?"
-        text: "There's even a **Mundial del Alfajor**, held in Buenos Aires. A “world” championship for our own snack: peak Argentina."
+        text: "There's even a **Mundial del Alfajor**, held in Buenos Aires. A “world” championship for a snack that almost only Argentina eats. Very Argentine."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -114,27 +114,29 @@ classes:
     summary: "Medialunas, bolas de fraile and the rebel bakers who named them"
     pages:
       - type: card
-        text: "**Facturas** are the sweet pastries from the **panadería**, bought by the dozen in a paper bag. Everyone mixes their own dozen, and everyone has a favorite."
+        text: "**Facturas** are the sweet pastries from the **panadería**, bought by the dozen and wrapped in paper. Everyone mixes their own dozen, and everyone has a favorite."
+      - type: card
+        text: "You choose one by one, pointing. Or say **“una docena surtida”**, a mixed dozen, or **“media docena”**, half a dozen. In a busy bakery, take a number at the door first."
       - type: choice
         prompt: "The queen is the **medialuna**, a small croissant. There are two kinds. How do you tell them apart at a glance?"
         options:
-          - "Butter ones curve, fat ones are straight"
-          - "Butter ones are twice as big"
+          - "Butter ones are plump and shiny"
+          - "Butter ones are straight, not curved"
           - "Fat ones have sesame on top"
         correct: 0
-        explain: "The old rule: **manteca curva, grasa recta**. Lots of bakeries still shape them that way."
+        explain: "**De manteca**, with butter: plump, soft and shiny with syrup. **De grasa**, with beef fat: thinner, flakier, no shine."
       - type: card
-        text: "**De manteca**, with butter, is sweet and glazed. **De grasa**, with beef fat, is drier and a little salty. Which is better is a national debate."
+        text: "**De manteca** is the sweet one. **De grasa** is drier and a little salty. Which is better is a national debate."
       - type: choice
-        prompt: "Pastries here have names like “friar's balls” and “nun's sighs”. Who named them, the story goes?"
+        prompt: "Pastries here have names like “friar's balls”, “sacraments” and “little cannons”. Who named them, the story goes?"
         options:
           - "Anarchist bakers"
           - "Nuns selling for charity"
           - "A radio comedian"
         correct: 0
-        explain: "In 1887 Buenos Aires bakers, many of them Italian and Spanish anarchists, founded their first union. The story goes they named pastries to mock the Church, the army and the police."
+        explain: "In 1887 Buenos Aires bakers, many of them Italian and Spanish anarchists, founded their first union. The story goes that during a strike in 1888 they named pastries to mock the Church, the army and the police."
       - type: card
-        text: "The **vigilante**, the cop, is long like a police baton. **Bolas de fraile** and **suspiros de monja** tease the Church. **Cañoncitos**, little cannons, go after the army."
+        text: "The **vigilante**, the cop, is long like a police baton. **Bolas de fraile** and **sacramentos** tease the Church. **Cañoncitos**, little cannons, go after the army."
       - type: card
         chip: "Did you know?"
         text: "Historians debate how much of this story is documented. But it's the one every baker will tell you."
@@ -146,12 +148,12 @@ classes:
   # ─────────────────────────────────────────────────────────────
   - slug: "postres-caseros"
     title: "¿Qué hay de postre?"
-    summary: "Flan mixto, a cop's dessert and the rest of the abuela's menu"
+    summary: "Flan mixto, a cop's dessert and the other homemade classics"
     pages:
       - type: card
         text: "Sunday lunch is over and someone asks the big one: **¿qué hay de postre?** At home or at a **bodegón**, an old-school restaurant, the answer is a homemade classic."
       - type: card
-        text: "**Flan** is egg custard with caramel. Here it rarely comes alone: with dulce de leche, with whipped cream, or both. Both is **mixto**, and it's the right answer."
+        text: "**Flan** is egg custard with caramel. Here it rarely comes alone: with dulce de leche, with whipped cream, or both. Both is **mixto**: **“Un flan mixto, por favor.”**"
       - type: choice
         prompt: "The bodegón menu offers **postre vigilante**. What arrives?"
         options:
@@ -159,7 +161,7 @@ classes:
           - "The long pastry from the bakery"
           - "Ice cream with dulce de leche"
         correct: 0
-        explain: "Also called **queso y dulce**: a slice of cheese with quince or sweet potato paste. The story goes police ordered it because it cost almost nothing."
+        explain: "Also called **queso y dulce**: a slice of cheese with quince or sweet potato paste. The story goes police from a station in Palermo ordered it in the 1920s: cheap, quick, and easy to eat with one hand."
       - type: card
         text: "**Budín de pan** is bread pudding made from yesterday's bread, milk, eggs and caramel. Immigrant thrift turned into dessert."
       - type: card
@@ -176,5 +178,5 @@ classes:
         text: "**Panqueques** here are thin crêpes rolled around dulce de leche. Some parrillas serve them **quemados**, with the sugar burnt crunchy on top."
       - type: card
         chip: "Pro tip"
-        text: "Too full for the abuela's flan? Say **“un poquito nomás”**, just a little bit. Saying no is not an option."
+        text: "Too full for your host's flan? Say **“un poquito nomás”**, just a little bit. Saying no is not an option."
     vocabulary: []

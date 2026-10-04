@@ -19,7 +19,21 @@ import { currentIndex, loadCourse, loadProgress } from '@/lib/course';
 import { LessonLockedError, buildLesson } from '@/lib/lesson';
 import { backToCourse, goBack } from '@/lib/nav';
 import { DEFAULT_LADDER, type Ladder } from '@/lib/sentences';
-import { type TestMode, type TestOutcome, buildTest, maxUnitsInTest, shouldStop, testOutcome } from '@/lib/placement';
+import { loadAnswers } from '@/lib/onboarding';
+import {
+  PLACEMENT_MAX_ITEMS,
+  type PlacementSession,
+  type TestMode,
+  type TestOutcome,
+  type WalkResults,
+  beginPlacement,
+  buildTest,
+  nextStage,
+  placementOutcome,
+  placementStage,
+  sectionPassed,
+  testOutcome,
+} from '@/lib/placement';
 import {
   type AnswerExtra,
   type FinishResult,
@@ -34,7 +48,7 @@ import { streakStatus } from '@/lib/streak';
 import { supabase } from '@/lib/supabase';
 import { clay, colors, font, gradients, press, radius } from '@/lib/theme';
 import { useStatusBarColor } from '@/lib/status-bar-color';
-import type { Form, Sentence, Streak, Unit } from '@/lib/types';
+import type { Form, Section, Sentence, Streak, Unit } from '@/lib/types';
 
 /** Score a unit check needs (learning-engine-spec §3). Mirrors finish_lesson. */
 const UNIT_PASS_SCORE = 80;
@@ -46,6 +60,29 @@ interface TestPlan {
   /** course_order she lands on if the test lets her through. */
   targetOrder: number;
   target: Unit | null;
+  /** Placement: the course's sections, to name where she landed. */
+  sections?: Section[];
+  /** Placement: the walk ended because the next section couldn't be loaded. */
+  cutShort?: boolean;
+}
+
+// The press scale eases on the web; on the phones it follows the finger.
+const webPress =
+  Platform.OS === 'web'
+    ? ({
+        transitionProperty: 'transform',
+        transitionDuration: `${press.duration}ms`,
+        transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+      } as object)
+    : null;
+
+/** The onboarding placement as it walks the course (placement.ts). */
+interface Walk {
+  session: PlacementSession;
+  results: WalkResults;
+  /** Index of the section being asked. */
+  stage: number;
+  cutShort: boolean;
 }
 
 export default function Practice() {
@@ -115,28 +152,48 @@ export default function Practice() {
   const userId = profile?.id;
   const round = useRound(userId);
   const finishing = useRef(false);
+  /** The placement walk: which sections she has passed, and the one on screen. */
+  const walk = useRef<Walk | null>(null);
+  /** The next section of a placement is on its way. */
+  const [staging, setStaging] = useState(false);
+  const [loadFailed, setLoadFailed] = useState(false);
 
   useEffect(() => {
     if (!userId) return;
     let cancelled = false;
     finishing.current = false;
+    walk.current = null;
 
-    const load = async (): Promise<{ data: SessionData; kind: RoundKind; plan?: TestPlan }> => {
+    const load = async (): Promise<{ data: SessionData; kind: RoundKind; plan?: TestPlan; walk?: Walk }> => {
       if (testMode) {
         const [course, done] = await Promise.all([loadCourse(), loadProgress(userId)]);
         const units = course.units;
-        let span: Unit[];
-        let target: Unit | null = null;
         if (testMode === 'placement') {
-          span = units.slice(0, maxUnitsInTest());
-        } else {
-          target = units.find((u) => u.id === params.to) ?? null;
-          const here = course.path[currentIndex(course.path, done)]?.unit;
-          span =
-            target && here
-              ? units.filter((u) => u.course_order >= here.course_order && u.course_order < target!.course_order)
-              : [];
+          // Starts at the level she gave in onboarding, and fetches a section's
+          // sentences only when the walk gets to it.
+          const answers = await loadAnswers();
+          const session = await beginPlacement(userId, course, answers?.level);
+          const first = await placementStage(session, session.start);
+          const opening: Walk = { session, results: new Map(), stage: session.start, cutShort: false };
+          return {
+            data: {
+              items: first.items,
+              allForms: first.allForms,
+              lexicon: session.data.formById,
+              sentences: first.sentences,
+              scheduledFormIds: [],
+            },
+            kind: 'placement',
+            plan: { mode: testMode, units, targetOrder: 0, target: null, sections: course.sections },
+            walk: opening,
+          };
         }
+        const target = units.find((u) => u.id === params.to) ?? null;
+        const here = course.path[currentIndex(course.path, done)]?.unit;
+        const span: Unit[] =
+          target && here
+            ? units.filter((u) => u.course_order >= here.course_order && u.course_order < target.course_order)
+            : [];
         const targetOrder = target?.course_order ?? (span.at(-1)?.course_order ?? 0) + 1;
         const data = await buildTest(userId, span);
         return { data, kind: 'placement', plan: { mode: testMode, units: span, targetOrder, target } };
@@ -168,8 +225,9 @@ export default function Practice() {
       return { data: { ...free, items: free.items.map((it) => ({ ...it, filler: true })) }, kind: 'free' };
     };
 
-    load().then(({ data, kind: k, plan: p }) => {
+    load().then(({ data, kind: k, plan: p, walk: w }) => {
       if (cancelled) return;
+      walk.current = w ?? null;
       const q = withIntros(data.items);
       round.begin({
         kind: k,
@@ -192,7 +250,14 @@ export default function Practice() {
     }).catch((e) => {
       if (cancelled) return;
       if (e instanceof LessonLockedError) router.replace('/paywall?from=lesson');
-      else console.warn('lesson failed to load', e);
+      else {
+        console.warn('lesson failed to load', e);
+        // A test that can't be built says so rather than spinning for good.
+        if (testMode) {
+          setLoadFailed(true);
+          setQueue([]);
+        }
+      }
     });
     return () => {
       cancelled = true;
@@ -208,6 +273,8 @@ export default function Practice() {
     setCelebrating(false);
     setIndex(0);
     setQueue(null);
+    setStaging(false);
+    setLoadFailed(false);
   }, [lessonId, isAgain, testMode, params.mode]);
 
   // The gate is read once, on the way in.
@@ -284,7 +351,14 @@ export default function Practice() {
 
     let result: FinishResult | null;
     if (plan) {
-      const outcome = testOutcome(plan.mode, round.testAnswers.current, plan.units, plan.targetOrder);
+      const w = walk.current;
+      const outcome = w
+        ? placementOutcome(
+            w.session.sections.map((s) => s.units),
+            w.results,
+            round.testAnswers.current,
+          )
+        : testOutcome(plan.mode, round.testAnswers.current, plan.units, plan.targetOrder);
       if (outcome.passed) {
         const { error } = await supabase.rpc('apply_placement', {
           p_round_id: round.roundId.current,
@@ -295,7 +369,7 @@ export default function Practice() {
         if (error) console.warn('apply_placement failed', error);
       }
       result = await round.finish();
-      setVerdict({ kind: 'test', outcome, plan });
+      setVerdict({ kind: 'test', outcome, plan: { ...plan, cutShort: w?.cutShort } });
     } else {
       result = await round.finish();
       if (kind === 'unit_check' && result && !result.passed) {
@@ -332,9 +406,49 @@ export default function Practice() {
   const onAnswered = async (item: QueueItem, wrongFormIds: string[], extra?: AnswerExtra) => {
     if (!queue) return;
     const next = await round.answer(item, index, queue, wrongFormIds, extra);
-    // A placement test stops as soon as she has reached her level.
-    if (plan?.mode === 'placement' && shouldStop(round.testAnswers.current)) return void finish();
+    // A placement asks a section at a time: at the end of one, the walk
+    // decides whether there is another to ask.
+    if (walk.current && index + 1 >= next.length) return void nextSection(walk.current, next);
     advance(next);
+  };
+
+  const stagingNow = useRef(false);
+  const nextSection = async (w: Walk, asked: QueueItem[]) => {
+    if (stagingNow.current || finishing.current) return;
+    const own = new Set(w.session.sections[w.stage]?.units.map((u) => u.id));
+    w.results.set(
+      w.stage,
+      sectionPassed(round.testAnswers.current.filter((a) => own.has(a.unitId)).map((a) => a.correct)),
+    );
+    const to = nextStage(w.session.sections.length, w.session.start, w.results);
+    if (to == null) return void finish();
+    stagingNow.current = true;
+    setStaging(true);
+    try {
+      const stage = await placementStage(w.session, to);
+      // A section with nothing to ask ends the walk where it stands.
+      if (stage.items.length === 0) return void finish();
+      const items = withIntros(stage.items);
+      round.extend(items);
+      w.stage = to;
+      setAllForms(stage.allForms);
+      setAllSentences(stage.sentences);
+      setQueue([...asked, ...items]);
+      setIndex(asked.length);
+    } catch (e) {
+      console.warn('placement section failed to load', e);
+      w.cutShort = true;
+      void finish();
+    } finally {
+      stagingNow.current = false;
+      setStaging(false);
+    }
+  };
+
+  /** Stop here: she is placed with the sections she has passed so far. */
+  const stopPlacement = () => {
+    if (stagingNow.current) return;
+    void finish();
   };
 
   // -------------------------------------------------------------------------
@@ -507,24 +621,33 @@ export default function Practice() {
             {kind === 'mistakes'
               ? 'No mistakes to go over'
               : plan
-                ? 'Nothing to test here yet'
+                ? loadFailed
+                  ? "Couldn't load the test"
+                  : 'Nothing to test here yet'
                 : 'Nothing to practise right now'}
           </Text>
-          <Text style={styles.doneHint}>Take a lesson on the path and come back.</Text>
+          <Text style={styles.doneHint}>
+            {loadFailed ? 'Check your connection and try again.' : 'Take a lesson on the path and come back.'}
+          </Text>
           <Button title="Back home" onPress={backToCourse} />
         </View>
       </SafeAreaView>
     );
   }
 
-  const progress = index / queue.length;
+  // A placement has no set length: its bar runs towards the most it ever asks,
+  // and the line under it says which section she is being asked about.
+  const placing = walk.current;
+  const progress = placing ? Math.min(index / PLACEMENT_MAX_ITEMS, 1) : index / queue.length;
   const title =
     kind === 'unit_check'
       ? 'Unit check'
       : kind === 'placement'
         ? plan?.mode === 'jump'
           ? 'Jump ahead'
-          : 'Placement'
+          : placing
+            ? `Placement · Section ${placing.stage + 1} of ${placing.session.sections.length}`
+            : 'Placement'
         : kind === 'mistakes'
           ? 'Mistakes'
           : params.mode === 'words'
@@ -544,14 +667,31 @@ export default function Practice() {
             <LinearGradient colors={gradients.progress} style={StyleSheet.absoluteFill} />
           </View>
         </View>
-        <Text style={styles.counter}>
-          {index + 1}/{queue.length}
-        </Text>
+        {placing ? (
+          <Pressable
+            onPress={stopPlacement}
+            disabled={staging}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel="Stop the test and start where you have got to"
+            style={({ pressed }) => [styles.stop, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
+            <Text style={styles.stopText}>Stop here</Text>
+          </Pressable>
+        ) : (
+          <Text style={styles.counter}>
+            {index + 1}/{queue.length}
+          </Text>
+        )}
       </View>
       {title ? <Text style={styles.kicker}>{title}</Text> : null}
       {profile.role !== 'student' ? <SimulateBar onSimulate={(c) => void simulate(c)} /> : null}
 
-      {current && (
+      {staging ? (
+        <View style={styles.doneWrap}>
+          <ActivityIndicator size="large" color={colors.primary} />
+        </View>
+      ) : null}
+      {current && !staging && (
         <AnswerActionsContext.Provider value={kind === 'placement' ? null : actions}>
           <Exercise
             key={`${current.form.id}-${index}`}
@@ -687,6 +827,10 @@ function CheckNotYet({
 // ---------------------------------------------------------------------------
 function TestResult({ outcome, plan, onDone }: { outcome: TestOutcome; plan: TestPlan; onDone: () => void }) {
   const landed = plan.units.find((u) => u.course_order === outcome.throughOrder) ?? plan.target;
+  const section = landed ? plan.sections?.find((s) => s.id === landed.section_id) : undefined;
+  const where = section
+    ? `Section ${section.ordinal}, ${section.title_en}: ${landed?.title_en}`
+    : (landed?.title_en ?? 'a later unit');
   let title: string;
   let body: string;
   if (plan.mode === 'jump') {
@@ -697,8 +841,9 @@ function TestResult({ outcome, plan, onDone }: { outcome: TestOutcome; plan: Tes
   } else {
     title = outcome.passed ? 'Placed!' : "Let's start from the beginning";
     body = outcome.passed
-      ? `You start at ${landed?.title_en ?? 'a later unit'}. What you skipped will come back in reviews over the next week.`
+      ? `You start at ${where}. What you skipped will come back in reviews over the next week.`
       : 'The first units will get you going quickly.';
+    if (plan.cutShort) body += " We couldn't load the next section, so the test stopped early.";
   }
   return (
     <View style={styles.gatePanel}>
@@ -739,6 +884,8 @@ const styles = StyleSheet.create({
   },
   progressFill: { height: '100%', borderRadius: radius.pill, backgroundColor: colors.progress, overflow: 'hidden' },
   counter: { ...font.body[800], fontSize: 13, color: colors.muted, minWidth: 40, textAlign: 'right' },
+  stop: { paddingVertical: 4 },
+  stopText: { ...font.body[800], fontSize: 13, color: colors.primaryDark },
   kicker: {
     ...font.body[800],
     fontSize: 12,

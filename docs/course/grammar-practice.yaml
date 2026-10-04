@@ -1120,7 +1120,7 @@ units:
         | to you | **se te** cayó | you dropped it |
         | to him, her | **se le** cayó | he dropped it |
 
-        Same with *rompió, perdió, olvidó*: **se me olvidó** — *I forgot*. The middle word says who it happened to.
+        Same with *rompió, perdió, pasó*: **se me pasó** — *I forgot*. The middle word says who it happened to.
 
   - unit: se-me-quemo
     lessons: 1
@@ -1129,7 +1129,7 @@ units:
       body: |
         | | one thing | more than one |
         | to me | **se me** quemó la comida | **se me** cayeron las llaves |
-        | to you | **se te** olvidó | |
+        | to you | **se te** pasó | |
         | to us | **se nos** acabó el café | |
 
         The verb follows the thing: one thing **-ó**, more than one **-aron / -eron**. The middle word says who it happened to: **se me**, **se te**, **se le**, **se nos**.

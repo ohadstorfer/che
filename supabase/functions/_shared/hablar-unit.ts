@@ -90,6 +90,15 @@ type Written = {
   keyterms: string[];
 };
 
+const UNIT_WORDS = 40;
+
+type Form = { form: string; gloss_en: string | null };
+const unitForms = (db: SupabaseClient, unitId: string) =>
+  db.from("forms").select("form, gloss_en").eq("unit_id", unitId).eq("status", "published").limit(60);
+/** The forms a unit taught, as the short list Pancho is asked to stay near (sessionBlock). */
+export const unitWords = (forms: Form[] | null | undefined) =>
+  [...new Set((forms ?? []).map((f) => f.form.trim()).filter(Boolean))].slice(0, UNIT_WORDS);
+
 /** The unit's scene at a level: kept, or written now (and kept). Null if it couldn't be written. */
 export async function unitScenario(
   db: SupabaseClient,
@@ -103,11 +112,15 @@ export async function unitScenario(
     .eq("unit_id", unit.id)
     .eq("level", level)
     .maybeSingle();
-  if (kept?.scenario) return kept.scenario as Scenario;
+  if (kept?.scenario) {
+    const scene = kept.scenario as Scenario;
+    // A scene kept before it carried the unit's words: read them now.
+    return scene.words ? scene : { ...scene, words: unitWords((await unitForms(db, unit.id)).data) };
+  }
 
   const [{ data: unitRow }, { data: forms }, { data: sentences }] = await Promise.all([
     db.from("units").select("title_en, summary_en, grammar_focus").eq("id", unit.id).maybeSingle(),
-    db.from("forms").select("form, gloss_en").eq("unit_id", unit.id).eq("status", "published").limit(60),
+    unitForms(db, unit.id),
     db.from("sentences").select("es, en").eq("unit_id", unit.id).eq("status", "published").limit(12),
   ]);
   const input = [
@@ -157,6 +170,7 @@ export async function unitScenario(
     key_phrases: value.key_phrases.slice(0, 6).map((p) => ({ es: p.es, en: p.en, audio: null })),
     opener: { es: value.opener.es, en: value.opener.en, audio },
     keyterms: value.keyterms.slice(0, 10),
+    words: unitWords(forms),
   };
   // Two learners opening the same new scene at once: the first one kept wins.
   const { error } = await db.from("unit_scenarios").insert({ unit_id: unit.id, level, scenario });

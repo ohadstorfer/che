@@ -58,6 +58,10 @@ units:
       - title: "Ustedes"
         body: "For more than one person, Argentina uses **ustedes** with the same verb form as *ellos*:
           *ustedes son*, *ellos son*."
+      - title: "Nosotras, ellas"
+        body: "**Nosotras** and **ellas** are for groups of women only. One man in the group makes it **nosotros** and **ellos**."
+      - title: "Nuestro, nuestra"
+        body: "*Our* matches the thing, not the people: **nuestro** país, **nuestra** familia, **nuestros** hijos, **nuestras** hermanas. *Their* is still **su**: *su familia*, *sus hijos*."
     words:
       - lemma: "nosotros"
         pos: "pron"
@@ -105,6 +109,20 @@ units:
             f: "sg"
           - form: "sus"
             f: "pl"
+      - lemma: "nuestro"
+        pos: "det"
+        en: "our"
+        glue: true
+        forms:
+          - form: "nuestro"
+            f: "m.sg"
+          - form: "nuestra"
+            f: "f.sg"
+          - form: "nuestros"
+            f: "m.pl"
+          - form: "nuestras"
+            f: "f.pl"
+
   - ordinal: 2
     slug: "altos-y-morochos"
     title: "Describe the people in your life"
@@ -248,6 +266,7 @@ units:
           - form: "mellizos"
             en: "twins"
             f: "m.pl"
+
   - ordinal: 3
     slug: "donde-esta"
     title: "Say where something is"
@@ -314,6 +333,7 @@ units:
       - lemma: "lejos"
         pos: "adv"
         en: "far"
+
   - ordinal: 4
     slug: "donde-estan-las-llaves"
     title: "Find your things"
@@ -332,9 +352,7 @@ units:
         body: "One thing **está**, more than one **están**: *¿Dónde está mi celu?* — *¿Dónde están mis
           anteojos?* The answer drops the thing you're looking for: **Están en la mochila.**"
       - title: "Arriba, abajo, adentro"
-        body: "Three words that need nothing after them: **arriba** (up, upstairs), **abajo** (down,
-          downstairs), **adentro** (inside). *Estoy abajo* is what a porteño texts from the street when
-          they're at your door."
+        body: "Three words that need nothing after them: **arriba** (up, upstairs), **abajo** (down, downstairs), **adentro** (inside). *Estoy abajo* is what a porteño texts from the street when they're at your door. The fourth one is **afuera** — *outside*: *mi auto está afuera*."
       - title: "En casa"
         body: "No *la* before home: **estoy en casa**, *I'm at home*. With anything else the little word
           comes back: *en la mochila*, *en el auto*."
@@ -387,6 +405,7 @@ units:
       - lemma: "adentro"
         pos: "adv"
         en: "inside"
+
   - ordinal: 5
     slug: "hay-un-kiosco"
     title: "Say what there is around you"
@@ -452,6 +471,7 @@ units:
       - lemma: "calle"
         pos: "noun"
         en: "street"
+
   - ordinal: 6
     slug: "hay-un-tren"
     title: "Find your way around the city"
@@ -510,6 +530,7 @@ units:
       - lemma: "por acá"
         pos: "phrase"
         en: "around here"
+
   - ordinal: 7
     slug: "practica-por-aca"
     title: "Practice: people and places"
@@ -542,6 +563,7 @@ units:
       - "tienen"
       - "esquina"
       - "lejos"
+
   - ordinal: 8
     slug: "como-estas"
     title: "Say how you feel"
@@ -665,6 +687,7 @@ units:
       - lemma: "por qué"
         pos: "phrase"
         en: "why"
+
   - ordinal: 9
     slug: "esta-cerrado"
     title: "Say how things are"
@@ -786,6 +809,7 @@ units:
             f: "sg"
           - form: "libres"
             f: "pl"
+
   - ordinal: 10
     slug: "que-haces"
     title: "Talk about what you do"
@@ -902,11 +926,8 @@ units:
           - form: "camina"
             en: "walks (he/she walks)"
             f: "3sg.pres.ind"
-      # The unit's own question. Held back from unit 4, where "qué" had no verb
-      # to attach to; here it finally has one.
-      - lemma: "qué"
-        pos: "pron"
-        en: "what"
+      # "qué", the unit's own question, is taught in encantado now, with
+      # "¿qué significa?"; so are "castellano" and "poco".
       - lemma: "hacer"
         pos: "verb"
         en: "to do, to make"
@@ -926,19 +947,13 @@ units:
       - lemma: "noche"
         pos: "noun"
         en: "night"
-      - lemma: "castellano"
-        pos: "noun"
-        en: "Spanish"
-        note: "Argentines say castellano, not español"
       - lemma: "siempre"
         pos: "adv"
         en: "always"
       - lemma: "nunca"
         pos: "adv"
         en: "never"
-      - lemma: "poco"
-        pos: "adv"
-        en: "a little"
+
   - ordinal: 11
     slug: "practico-castellano"
     title: "Talk about learning castellano"
@@ -1113,6 +1128,7 @@ units:
           - form: "extraña"
             en: "misses (he/she misses)"
             f: "3sg.pres.ind"
+
   - ordinal: 12
     slug: "mate-y-facturas"
     title: "Say what you like"
@@ -1186,6 +1202,7 @@ units:
       - lemma: "nada"
         pos: "pron"
         en: "nothing, (not) at all"
+
   - ordinal: 13
     slug: "nos-gustan-los-fideos"
     title: "Say what food you like"
@@ -1266,6 +1283,7 @@ units:
           - form: "huevos"
             en: "eggs"
             f: "m.pl"
+
   - ordinal: 14
     slug: "practica-nos-gusta"
     title: "Practice: how you are, what you do, what you like"
@@ -1299,6 +1317,7 @@ units:
       - "estudiamos"
       - "gustan"
       - "enojado"
+
   - ordinal: 15
     slug: "me-traes-un-cafe"
     title: "Ask for what you want"
@@ -1366,9 +1385,7 @@ units:
       - lemma: "algo"
         pos: "pron"
         en: "something, anything"
-      - lemma: "más"
-        pos: "adv"
-        en: "more"
+
   - ordinal: 16
     slug: "que-quieren-tomar"
     title: "Order for the whole table"
@@ -1442,6 +1459,7 @@ units:
       - lemma: "servilleta"
         pos: "noun"
         en: "napkin"
+
   - ordinal: 17
     slug: "facu-y-laburo"
     title: "Study and work"
@@ -1461,6 +1479,8 @@ units:
       - title: "Facu, and jobs without \"a\""
         body: "**Facu** is short for *facultad* — university. For jobs, Spanish drops the article: **Soy
           profesora**, not *soy una profesora*."
+      - title: "¿De qué laburás?"
+        body: "*¿Qué hacés?* is mostly just *hi*. To ask about someone's job, say **¿De qué laburás?** or **¿De qué trabajás?** The answer takes *de* too: *Laburo de mozo.* Or with *ser*: *Soy abogada.*"
     words:
       - lemma: "que"
         pos: "conj"
@@ -1575,6 +1595,7 @@ units:
         pos: "noun"
         en: "job, work"
         register: "informal"
+
   - ordinal: 18
     slug: "es-enfermera"
     title: "Say what people do for a living"
@@ -1796,15 +1817,22 @@ units:
       - lemma: "departamento"
         pos: "noun"
         en: "apartment"
-      - lemma: "libro"
-        pos: "noun"
-        en: "book"
       - lemma: "mensaje"
         pos: "noun"
         en: "message"
       - lemma: "carne"
         pos: "noun"
         en: "meat"
+      - lemma: "libro"
+        pos: "noun"
+        en: "book"
+        forms:
+          - form: "libro"
+            f: "m.sg"
+          - form: "libros"
+            en: "books"
+            f: "m.pl"
+
   - ordinal: 20
     slug: "vendo-diarios"
     title: "Say what goes on in the barrio"
@@ -1947,6 +1975,13 @@ units:
       - lemma: "negocio"
         pos: "noun"
         en: "shop, business"
+      - lemma: "pibe"
+        pos: "noun"
+        forms:
+          - form: "pibes"
+            en: "guys, kids"
+            f: "m.pl"
+
   - ordinal: 21
     slug: "practica-el-vecino"
     title: "Practice: ordering, jobs and the barrio"
@@ -1980,6 +2015,7 @@ units:
       - "diario"
       - "traés"
       - "vivimos"
+
   - ordinal: 22
     slug: "mi-edificio"
     title: "Talk about your building"
@@ -2001,8 +2037,7 @@ units:
         body: "Most buildings have an **encargado** who lives in, keeps it clean and takes in your
           packages. He knows everything that happens on every **piso**."
       - title: "Planta baja"
-        body: "The ground floor is **la planta baja**; the one above it is *el primer piso*. Ringing
-          from the street, you press the **timbre** with the floor and the letter: *4° B*."
+        body: "The ground floor is **la planta baja**; the one above it is *el primer piso*. Ringing from the street, you press the **timbre** with the floor and the letter: *4° B*. Out loud, *4° B* is **cuarto B**: *vivo en el cuarto B*. The first five floors: **primero, segundo, tercero, cuarto, quinto** — and *primero* loses its *-o* before a noun: *el **primer** piso*."
     words:
       - lemma: "edificio"
         pos: "noun"
@@ -2048,6 +2083,28 @@ units:
       - lemma: "problema"
         pos: "noun"
         en: "problem"
+      - lemma: "primero"
+        pos: "adj"
+        en: "first (floor, place in a row)"
+        forms:
+          - form: "primero"
+            f: "m.sg"
+          - form: "primer"
+            en: "first (before a noun)"
+            f: "m.sg"
+      - lemma: "segundo"
+        pos: "adj"
+        en: "second"
+      - lemma: "tercero"
+        pos: "adj"
+        en: "third"
+      - lemma: "cuarto"
+        pos: "adj"
+        en: "fourth"
+      - lemma: "quinto"
+        pos: "adj"
+        en: "fifth"
+
   - ordinal: 23
     slug: "mi-casa"
     title: "Show someone your place"
@@ -2160,4 +2217,3 @@ units:
           - form: "cosas"
             en: "things"
             f: "f.pl"
-

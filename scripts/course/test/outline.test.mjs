@@ -42,6 +42,32 @@ test('the real outline validates', () => {
   assert.deepEqual(errors, []);
 });
 
+test("a section's last unit is built like the others: lessons, then the unit check", () => {
+  const words = ['hola', 'chau', 'gracias', 'perdón'].map((w) => `      - {lemma: ${w}, pos: interj, en: ${w}}`).join('\n');
+  const { outline } = outlineFrom(HEADER + unit(1, '      - {lemma: che, pos: interj, en: hey}') + unit(2, words));
+  for (const u of outline.units) {
+    const kinds = u.lessons.map((l) => l.kind);
+    assert.ok(!kinds.includes('checkpoint'), `${u.slug}: no checkpoint lessons`);
+    assert.deepEqual(kinds.slice(-1), ['review'], `${u.slug} ends on its check`);
+    assert.deepEqual(u.lessons.map((l) => l.title_en), [...kinds.slice(0, -1).map((_, i) => `Lesson ${i + 1}`), 'Unit check']);
+  }
+  // Four words: two teaching lessons, the same as anywhere else in the section.
+  assert.deepEqual(outline.units[1].lessons.map((l) => l.kind), ['lesson', 'lesson', 'review']);
+});
+
+test("a section can't end on a practice unit", () => {
+  const practice = `
+  - ordinal: 2
+    slug: u2
+    title: U2
+    summary: Summary
+    grammar: [g]
+    tips: [{title: T, body: B}]
+    review: [che]`;
+  const { errors } = outlineFrom(HEADER + unit(1, '      - {lemma: che, pos: interj, en: hey}') + practice);
+  assert.ok(errors.some((e) => e.includes("can't end on a practice unit")), errors.join('\n'));
+});
+
 test('rejects a tuteo form in the lexicon', () => {
   const { errors } = outlineFrom(
     HEADER + unit(1, `      - {lemma: tener, pos: verb, en: have, forms: [{form: tienes, f: 2sg.pres.ind.vos}]}`),

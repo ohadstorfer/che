@@ -16,7 +16,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '@/lib/auth';
 import { type Course, currentIndex, loadCourse, loadProgress, sectionSummaries, type SectionSummary } from '@/lib/course';
 import { goBack } from '@/lib/nav';
-import { maxUnitsInTest } from '@/lib/placement';
+import { jumpAllowed } from '@/lib/placement';
 import { SECTION_CAN_DO } from '@/lib/sections';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, gradients, pastelGrad, path, press, radius } from '@/lib/theme';
@@ -90,10 +90,7 @@ export default function SectionsScreen() {
     const hereUnit = data.course.path[data.current]?.unit;
     const target = s.units[0];
     if (!hereUnit || !target) return null;
-    const span = data.course.units.filter(
-      (u) => u.course_order >= hereUnit.course_order && u.course_order < target.course_order,
-    ).length;
-    return span > 0 && span <= maxUnitsInTest() ? target : null;
+    return jumpAllowed(data.course.units, hereUnit.course_order, target) ? target : null;
   };
 
   const open = (s: SectionSummary) =>

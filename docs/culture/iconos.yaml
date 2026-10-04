@@ -15,13 +15,13 @@ classes:
       - type: card
         text: "**Mafalda** is a little girl with a big bow and bigger questions: world peace, the Beatles, and why grown-ups run things so badly. **Quino** drew her from 1964 to 1973."
       - type: choice
-        prompt: "Why does Mafalda's name start with M?"
+        prompt: "Mafalda was not created for a comic strip. What was she first drawn for?"
         options:
-          - "She was first drawn for an appliance ad"
-          - "Quino named her after his mother"
-          - "It's borrowed from an old tango title"
+          - "An ad for home appliances"
+          - "A school book for children"
+          - "A poster for a political party"
         correct: 0
-        explain: "Her name had to echo **Mansfield**, a brand of home appliances. The ad never ran, so she got her own comic strip instead."
+        explain: "Her name had to start with M, like **Mansfield**, a brand of home appliances. The ad never ran, so she got her own comic strip instead."
       - type: card
         text: "Her mortal enemy? **La sopa**. Mafalda hates soup almost more than war. Lots of readers saw politics in that bowl: everything you're forced to swallow."
       - type: card
@@ -38,7 +38,7 @@ classes:
         explain: "In **San Telmo**, at Chile and Defensa, right by the building where Quino lived. There's always a line for a photo on the bench next to her."
       - type: card
         chip: "Did you know?"
-        text: "Quino died in 2020, one day after Mafalda's birthday. Fans filled her bench in San Telmo with flowers and notes."
+        text: "Quino died in 2020, one day after the anniversary of Mafalda's first strip. Fans filled her bench in San Telmo with flowers and notes."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -69,7 +69,7 @@ classes:
       - type: card
         text: "**El Eternauta** began as a comic in 1957. A deadly snowfall covers Buenos Aires, and anyone it touches dies. In 2025 Netflix made it a hit series with **Ricardo Darín**."
       - type: card
-        text: "The hero isn't one man, it's the group. Its motto, **nadie se salva solo**, nobody saves themselves alone, is quoted at marches and whenever a neighbor needs a hand."
+        text: "The hero isn't one man, it's the group. Its idea, made famous by the series, is **nadie se salva solo**: nobody is saved alone. It's quoted at marches and whenever a neighbor needs a hand."
       - type: card
         text: "Its writer, **Héctor Oesterheld**, was kidnapped by the dictatorship and never seen again. So were his four daughters. That's why the Eternauta's silhouette appears at human-rights marches."
     vocabulary: []
@@ -80,7 +80,7 @@ classes:
     summary: "Borges, Cortázar, Alfonsina and the songs every kid sings"
     pages:
       - type: card
-        text: "The writer every Argentine name-drops is **Jorge Luis Borges**: short, dizzying stories about labyrinths, mirrors and infinite libraries."
+        text: "The writer every Argentine likes to mention is **Jorge Luis Borges**: short, dizzying stories about labyrinths, mirrors and infinite libraries."
       - type: choice
         prompt: "Borges went almost blind. What job did he get around the same time?"
         options:
@@ -93,9 +93,9 @@ classes:
         chip: "Did you know?"
         text: "Borges was nominated for the Nobel again and again, and never won. He's said to have joked that not giving it to him had become a Scandinavian tradition."
       - type: card
-        text: "**Julio Cortázar**'s novel **Rayuela**, Hopscotch, can be read straight through, or by jumping between chapters along a map he gives you. It made him an idol for students."
+        text: "**Alfonsina Storni** was a feminist poet of the 1920s. She took her own life in the sea at Mar del Plata, and the song **“Alfonsina y el mar”** keeps her alive."
       - type: card
-        text: "**Alfonsina Storni** was a feminist poet of the 1920s. She died in the sea at Mar del Plata, and the song **“Alfonsina y el mar”** keeps her alive."
+        text: "**Julio Cortázar**'s novel **Rayuela**, Hopscotch, can be read straight through, or by jumping between chapters along a map he gives you. It made him an idol for students."
       - type: choice
         prompt: "**María Elena Walsh** wrote the songs every Argentine kid sings. Her most famous is about Manuelita. Who's Manuelita?"
         options:
@@ -109,7 +109,7 @@ classes:
   # ─────────────────────────────────────────────────────────────
   - slug: "inventos-y-nobeles"
     title: "Inventions and Nobels"
-    summary: "A Hungarian's pen, a murder in Necochea, a Nobel's sauce and a heart surgeon"
+    summary: "A Hungarian's pen, the first fingerprint case, a Nobel's sauce and a heart surgeon"
     pages:
       - type: card
         text: "In Argentina a ballpoint pen is a **birome**. **László Bíró**, a Hungarian journalist, patented it here in the 1940s with his partner **Juan Jorge Meyne**. Bi-ró plus Me-yne: birome."
@@ -122,21 +122,13 @@ classes:
         correct: 0
         explain: "Unlike fountain pens, it didn't leak at high altitude. Argentina is so proud that Bíró's birthday is the **Día del Inventor**."
       - type: card
-        text: "In 1892, in the town of **Necochea**, two children were murdered. Their mother blamed a neighbor."
-      - type: choice
-        prompt: "How did the police crack the case?"
-        options:
-          - "A bloody fingerprint on a door"
-          - "A letter in the mother's handwriting"
-          - "A neighbor who saw her at the window"
-        correct: 0
-        explain: "Using the new system of **Juan Vucetich**, a Croatian immigrant at the La Plata police, the print matched the mother. The first crime in the world solved with fingerprints."
+        text: "In 1892, in the town of **Necochea**, a murder became the first in the world solved with a fingerprint. The system came from **Juan Vucetich**, a Croatian immigrant working for the La Plata police."
       - type: card
         text: "In 1914 a Buenos Aires doctor, **Luis Agote**, did one of the first transfusions with blood kept in a flask, not straight from the donor's arm. A pinch of sodium citrate stopped it from clotting."
       - type: card
         text: "Argentina has five Nobel prizes. **Luis Leloir** won chemistry for his work on how the body handles sugars."
       - type: choice
-        prompt: "The story goes that young Leloir also invented something now on every Argentine table. What?"
+        prompt: "The story goes that young Leloir also invented something now found in every Argentine supermarket. What?"
         options:
           - "Salsa golf: mayo mixed with ketchup"
           - "Dulce de leche sold in a jar"
@@ -161,11 +153,11 @@ classes:
           - "A tango orchestra in Flores"
           - "The national chess federation"
         correct: 0
-        explain: "A paying **socio** of San Lorenzo, and he kept his membership as Pope."
+        explain: "A paying **socio**, a club member, of San Lorenzo. He kept his membership as Pope."
       - type: card
-        text: "At home he divided people: many adored him, others disliked his politics. And as Pope he never came back to visit. People still argue about why."
+        text: "At home he divided people: many adored him, others disliked his politics. As Pope he never came back to visit, and people still argue about why. He died in 2025."
       - type: card
-        text: "**Manu Ginóbili**, from **Bahía Blanca**, won four NBA titles with San Antonio and led the **Generación Dorada** to Olympic gold, beating the USA on the way. In a football country, nobody saw it coming."
+        text: "**Manu Ginóbili**, from **Bahía Blanca**, won four NBA titles with San Antonio and led the **Generación Dorada** to Olympic gold at Athens 2004, beating the USA on the way. For once, a football country stayed up to watch basketball."
       - type: card
         text: "In 1977 **Guillermo Vilas** had a magical tennis season and won almost everything. He made tennis popular in Argentina."
       - type: choice

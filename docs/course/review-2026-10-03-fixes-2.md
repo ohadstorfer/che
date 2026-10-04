@@ -1,0 +1,255 @@
+# Changes in migration 20261003000008_course_review_fixes_2 (before → after)
+
+## Spanish rewritten (47)
+
+- `029971b1` cuando-llegues (c13#10)
+  - Cuando termine el laburo, te busco.
+  - → **Cuando termine de laburar, te busco.**
+  - When I finish work, I'll pick you up.
+- `ba29ad16` es-un-afano (c14#10)
+  - No chamuyes a mi hermana.
+  - → **No te chamuyes a mi hermana.**
+  - Don't hit on my sister.
+- `971864a8` es-un-afano (c14#10)
+  - Chamuyás a todas, Martín.
+  - → **Te chamuyás a todas, Martín.**
+  - You sweet-talk every girl, Martín.
+  - → **You hit on every girl, Martín.**
+- `8abd99f3` a-medias (c15#17)
+  - Compré las zapatillas con crédito en seis cuotas.
+  - → **Compré las zapatillas con tarjeta de crédito en seis cuotas.**
+  - I bought the sneakers on credit in six installments.
+  - → **I bought the sneakers with my credit card, in six installments.**
+- `3eda69c1` a-medias (c15#17)
+  - Lo compré con crédito.
+  - → **Lo compré con tarjeta de crédito.**
+  - I bought it with a credit card.
+- `8fec1638` practica-me-dijo (c16#11)
+  - Al lado de mi depto hay una pizzería re rica.
+  - → **Al lado de mi depto hay una pizzería re buena.**
+  - There's a really good pizza place next to my apartment.
+- `31776808` se-me-cayo (c16#20)
+  - Se rompió el subte y tomé un taxi.
+  - → **Se rompió el auto y tomé un taxi.**
+  - The subway broke down and I took a taxi.
+  - → **The car broke down and I took a taxi.**
+- `0fb3e6d6` de-acuerdo (c17#11)
+  - En mi opinión, el mate amargo es mejor.
+  - → **Nadie te pidió tu opinión.**
+  - In my opinion, bitter mate is better.
+  - → **Nobody asked for your opinion.**
+- `0e504f73` practica-depende (c17#13)
+  - Depende de cuánto cuesta el pasaje.
+  - → **Depende de cuánto salga el pasaje.**
+  - It depends on how much the ticket costs.
+- `121ad5f9` el-cajero (c17#17)
+  - Este mes tengo muchas cuentas.
+  - → **Este mes tengo muchas cuentas para pagar.**
+  - I have a lot of bills this month.
+  - → **I have a lot of bills to pay this month.**
+- `2942c0e5` me-dan-asco (c17#22)
+  - Salté del susto cuando vi al bicho.
+  - → **Salté del susto cuando vi el bicho.**
+  - I jumped in fright when I saw the bug.
+- `ec253a06` costumbres (c17#23)
+  - Después del asado hicimos una sobremesa de tres horas.
+  - → **Después del asado nos quedamos tres horas de sobremesa.**
+  - After the barbecue we sat at the table chatting for three hours.
+  - → **After the barbecue we stayed at the table chatting for three hours.**
+- `f2636086` practica-un-aplauso (c17#27)
+  - ¿Le tenés miedo a las cucarachas?
+  - → **¿Les tenés miedo a las cucarachas?**
+  - Are you scared of cockroaches?
+- `74d01c90` aunque-llueva (c18#17)
+  - Mis anteojos ya no sirven.
+  - → **Mis anteojos ya no me sirven.**
+  - My glasses are no good anymore.
+  - → **My glasses don't work for me anymore.**
+- `766e5baa` pasen-pasen (c18#30)
+  - Siéntense en el living, les hago un mate.
+  - → **Siéntense en el living, les hago unos mates.**
+  - Sit in the living room, I'll make you some mate.
+- `d2f09ab4` todo-aumenta (c21#18)
+  - ¿Te dio aumento tu jefe?
+  - → **¿Te dio un aumento tu jefe?**
+  - Did your boss give you a raise?
+- `6028b921` ni-ahi (c22#1)
+  - No estoy enojada ni ahí.
+  - → **¿Enojada? Ni ahí.**
+  - I'm not angry at all.
+  - → **Angry? Not at all.**
+- `734cf17b` fijate-si-tienen (c22#10)
+  - ¿Puedo consultar algo?
+  - → **¿Te puedo consultar algo?**
+  - Can I ask something?
+  - → **Can I ask you something?**
+- `e9780c46` se-la-cree (c22#26)
+  - La verdad, esta semana no me la banco.
+  - → **La verdad, esta semana no me la banco más.**
+  - To be honest, I can't handle this week.
+  - → **To be honest, I can't handle it anymore this week.**
+- `bd68761a` practica-me-la-jugue (c23#10)
+  - Laburaba tranquilo y de golpe me despidieron.
+  - → **Laburaba tranquilo y de golpe me echaron.**
+  - I was working away and out of nowhere they fired me.
+  - → **I was working calmly and all of a sudden they fired me.**
+- `0b1f5559` estas-cambiado (c23#22)
+  - Volví después de diez años y el centro mejoró.
+  - → **Volví después de diez años y vi que el centro mejoró un montón.**
+  - I came back after ten years and downtown got better.
+  - → **I came back after ten years and saw that downtown improved a lot.**
+- `f879cb8a` estoy-podrido (c23#25)
+  - Me cansé de esperar que Martín me llame.
+  - → **Me cansé de esperar a que Martín me llame.**
+  - I got tired of waiting for Martín to call me.
+- `58392dfb` me-pudri (c23#26)
+  - Reniego con el trámite del DNI.
+  - → **Hace una semana que reniego con el trámite del DNI.**
+  - I'm struggling with the ID paperwork.
+  - → **I've been struggling with the ID paperwork for a week.**
+- `401e0dd5` practica-el-cuarto-oscuro (c24#21)
+  - Anoche hubo un apagón en el barrio.
+  - → **Anoche hubo un corte de luz en el barrio.**
+  - There was a blackout in the neighborhood last night.
+  - → **There was a power outage in the neighborhood last night.**
+- `6fc82027` segun-el-diario (c24#23)
+  - ¿Quién confirmó?
+  - → **¿Quién lo confirmó?**
+  - Who confirmed?
+  - → **Who confirmed it?**
+- `cb5054ef` lo-lindo-de-la-ciudad (c25#23)
+  - ¿Cómo puede ser tan cara y linda a la vez?
+  - → **¿Cómo puede ser tan cara y tan linda a la vez?**
+  - How can it be so expensive and so pretty at the same time?
+- `5d71d2e1` no-es-que-no-me-guste (c25#25)
+  - Me cuesta rechazar planes.
+  - → **Me cuesta rechazar una invitación.**
+  - It's hard for me to turn down plans.
+  - → **It's hard for me to turn down an invitation.**
+- `4353f47b` practica-cada-loco-con-su-tema (c26#26)
+  - Tempranito hace fresquito, así que llevá campera.
+  - → **A la mañana tempranito hace fresquito, así que llevá campera.**
+  - It's chilly early in the morning, so take a jacket.
+  - → **Early in the morning it's chilly, so take a jacket.**
+- `3c047b84` estoy-al-horno (c27#3)
+  - Fui a la mudanza de Lucía a hacer la gamba.
+  - → **Le fui a hacer la gamba a Lucía con la mudanza.**
+  - I went to Lucía's move to help her out.
+  - → **I went to help Lucía with her move.**
+- `6a630bff` estoy-al-horno (c27#3)
+  - Juan no vino a hacer la gamba, qué bajón.
+  - → **Juan no me vino a hacer la gamba, qué bajón.**
+  - Juan didn't come to help me, what a shame.
+- `2f6c4aec` estoy-al-horno (c27#3)
+  - Nadie vino a hacer la gamba.
+  - → **Nadie me vino a hacer la gamba.**
+  - Nobody came to help me.
+- `9021a8f3` practica-me-mori-de-risa (c27#3)
+  - ¿Venís a hacer la gamba al partido?
+  - → **¿Me venís a hacer la gamba al partido?**
+  - Are you coming to the game to cheer me on?
+- `50050619` practica-me-mori-de-risa (c27#3)
+  - Mi viejo siempre iba a hacer la gamba.
+  - → **Mi viejo siempre me venía a hacer la gamba.**
+  - My dad always went to cheer me on.
+  - → **My dad always came to cheer me on.**
+- `09e0886a` practica-me-mori-de-risa (c27#3)
+  - Vine a hacer la gamba.
+  - → **Te vine a hacer la gamba.**
+  - I came to be there for you.
+- `7c0a4812` estoy-al-horno (c27#3)
+  - Mi vieja vino desde Córdoba a hacer la gamba.
+  - → **Mi vieja me vino a hacer la gamba desde Córdoba.**
+  - My mom came all the way from Córdoba to be there for me.
+- `6950cdda` estoy-al-horno (c27#4)
+  - No me pongas más manija.
+  - → **No me des más manija.**
+  - Don't get me any more wound up.
+  - → **Don't get me even more excited.**
+- `8dfcd478` practica-me-mori-de-risa (c27#7)
+  - ¿Por qué tenés ese bajón?
+  - → **¿Y ese bajón? ¿Qué te pasó?**
+  - Why are you so down?
+  - → **Why so down? What happened to you?**
+- `b348d75f` cuanto-mas (c27#11)
+  - A medida que conozco a Lucía, me cae mejor.
+  - → **A medida que la voy conociendo, Lucía me cae mejor.**
+  - As I get to know Lucía, I like her better.
+- `86b3fcba` cuanto-antes-lleguemos (c27#13)
+  - Cuanto antes empecemos a estudiar, mejor nos va.
+  - → **Cuanto antes empecemos a estudiar, mejor nos va a ir.**
+  - The sooner we start studying, the better we'll do.
+- `91148057` me-hace-ruido (c27#25)
+  - Cuando se fue mi hija, me partió el alma.
+  - → **Cuando se fue mi hija, se me partió el alma.**
+  - When my daughter left, it broke my heart.
+  - → **When my daughter left, my heart broke.**
+- `8cef646c` practica-se-emociono (c29#4)
+  - El audio de mi abuela me llegó.
+  - → **El audio de mi abuela me llegó al corazón.**
+  - My grandmother's voice message touched me.
+  - → **My grandmother's voice message touched my heart.**
+- `e64c58e4` practica-se-emociono (c29#4)
+  - Me llegó lo que escribiste.
+  - → **Me llegó un montón lo que escribiste.**
+  - What you wrote touched me.
+  - → **What you wrote really touched me.**
+- `68e2012a` practica-se-emociono (c29#4)
+  - Tu mensaje me llegó, posta.
+  - → **Tu mensaje me llegó un montón, posta.**
+  - Your message really touched me.
+  - → **Your message touched me a lot, for real.**
+- `0459f07e` ya-sos-de-aca (c29#26, c29#27)
+  - Mirá vos, lograste tomar mate sin azúcar.
+  - → **Mirá vos, lograste tomar mate amargo.**
+  - Look at you, you managed to drink mate without sugar.
+- `2227342f` practica-nunca-habia (c99#2)
+  - Me olvidé de que venías hoy, perdón.
+  - → **Me olvidé que venías hoy, perdón.**
+  - Sorry, I forgot you were coming today.
+- `972c0b50` practica-te-recomiendo (c99#2)
+  - No te olvides de que mañana tenemos examen.
+  - → **No te olvides que mañana tenemos examen.**
+  - Don't forget we have an exam tomorrow.
+- `78eac661` a-medias (c99#2)
+  - No te olvides de que me debés una cerveza.
+  - → **No te olvides que me debés una cerveza.**
+  - Don't forget you owe me a beer.
+
+## Tips (8)
+
+- `081f428b` dijo-que-vendria — What he said he'd do
+  - before: | what he said | what you tell | | «Voy.» | Dijo que **iría**. | | «Vengo mañana.» | Dijo que **vendría** mañana. | | «Te llamo.» | Dijo que me **llamaría**. | A promise told later goes into *would*. Just as porteño: **dijo que iba a venir**.
+  - after: **| what he said | what you tell | | «Voy.» | Dijo que **iría**. | | «Vengo mañana.» | Dijo que **vendría** mañana. | | «Te llamo.» | Dijo que me **llamaría**. | A promise told later goes into *would*. In everyday speech porteños mostly say **dijo que iba a venir**; the *-ría* form sounds more careful.**
+- `ad441301` a-menos-que — Conditions
+  - before: | Voy, **a menos que llueva**. | unless | | Voy, **siempre y cuando vengas**. | as long as | | Llamame **en caso de que haya** un problema. | in case | | Llevá paraguas **por si llueve**. | just in case | The first three take the subjunctive. **Por si** is the exception: normal verb.
+  - after: **| Voy, **a menos que llueva**. | unless | | Voy, **siempre y cuando vengas**. | as long as | | Llamame **en caso de que haya** un problema. | if, in case (formal) | | Llevá paraguas **por si llueve**. | just in case | The first three take the subjunctive. **Por si** is the exception: normal verb.**
+- `8b11e00f` ni-ahi — Ni ahí
+  - before: **Ni ahí** — *no way, not even close* — is how a porteño turns something down. **Tal cual** — *exactly* — is how they agree.
+  - after: ****Ni ahí** — *no way, not even close* — is a strong porteño no, also to a question like **¿estás cansado?**. **Tal cual** — *exactly* — is how they agree.**
+- `5c404af7` segun-el-diario — Según
+  - before: **Según** — *according to*: **según el diario**, **según mi vieja**. **Al parecer** and **supuestamente** keep a distance from what you're passing on.
+  - after: ****Según** — *according to*: **según el diario**, **según mi vieja**. **Al parecer** and **supuestamente** keep a distance from what you're passing on. **Al parecer** sounds like the news; in chat people say **por lo visto** or **parece que**.**
+- `5c59e9dc` se-tapo-la-pileta — Se tapó, se trabó
+  - before: Things at home break on their own, with **se**: **se tapó el inodoro** — *the toilet's clogged*; **se trabó el ascensor** — *the elevator got stuck*; **se cortó el agua**. Nobody did it — it just **se rompió**.
+  - after: **Things at home break on their own, with **se**: **se tapó el inodoro** — *the toilet's clogged*; **se trabó la puerta** — *the door got stuck*; **se cortó el agua**. Nobody did it — it just **se rompió**.**
+- `9521c790` la-parrilla — El asado
+  - before: An asado comes in order: first **chorizo** and **morcilla**, the **achuras**, then the cuts — **vacío**, bife. A **choripán** is a chorizo in bread, the food of every stadium.
+  - after: **An asado comes in order: first **chorizo** and **morcilla**, the **achuras**, then the cuts — **vacío**, tira de asado. A **choripán** is a chorizo in bread, the food of every stadium.**
+- `a25e7141` se-emociono — Me llegó
+  - before: **Me llegó** — *it really touched me*: **tu mensaje me llegó un montón**. Say it **de todo corazón**. **Sos un orgullo** — *you make us proud*. After the **discurso**, my dad **me abrazó** — *hugged me* — and the **felicidad** was all over the room.
+  - after: ****Me llegó** — *it really touched me*: **tu mensaje me llegó un montón**. Careful: plain **me llegó tu mensaje** just means *I got your message*. Say it **de todo corazón**. **Sos un orgullo** — *you make us proud*. After the **discurso**, my dad **me abrazó** — *hugged me* — and the **felicidad** was all over the room.**
+- `7fef5512` me-gustaria — Me gustaría
+  - before: **Me gustaría** — *I'd like* — is *gustar* in the conditional, with the same *me*: **me gustaría ir**, **¿te gustaría venir?**. **Me encantaría** is the enthusiastic yes. For more than one thing, **-ían**: **nos encantarían unas empanadas**.
+  - after: ****Me gustaría** — *I'd like* — is *gustar* in the conditional, with the same *me*: **me gustaría ir**, **¿te gustaría venir?**. **Me encantaría** is the enthusiastic yes. For more than one thing, **-ían**: **nos encantarían unas empanadas**. To order or offer something day to day, porteños say **quería** or **¿querés?**: *¿querés tomar unos mates?***
+
+## English corrected or made plain (1)
+
+- `e87dcbe3` practica-nunca-habia (c16#31)
+  - No voy a firmar nada sin que me expliques todo.
+  - I won't sign anything until you explain everything to me.
+  - → **I won't sign anything without you explaining everything to me.**
+
+## Word glosses only (0)
+
+

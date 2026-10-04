@@ -27,7 +27,7 @@ classes:
       - type: card
         text: "Porteños call everywhere outside the metro area **el interior**. People from Córdoba or Mendoza don't love it: it makes the whole country sound like a backyard."
       - type: choice
-        prompt: "The provinces have a famous comeback: “God is everywhere…” How does it end?"
+        prompt: "The provinces have a famous saying about this: “God is everywhere…” How does it end?"
         options:
           - "“…but his office is in Buenos Aires”"
           - "“…but he was born in Córdoba”"
@@ -35,7 +35,7 @@ classes:
         correct: 0
         explain: "**“Dios está en todas partes, pero atiende en Buenos Aires.”** Everything important gets decided in the capital, and everyone else has to go and ask."
       - type: card
-        text: "The stereotypes fly both ways. The provinces say porteños are **agrandados**, full of themselves, and talk too fast. Porteños joke that the provinces live slower. Both sides exaggerate, and both laugh."
+        text: "The stereotypes go both ways. The provinces say porteños are **agrandados**, people who think they are better than everyone, and talk too fast. Porteños joke that the provinces live slower. Both sides exaggerate, and both laugh."
       - type: card
         chip: "Pro tip"
         text: "Traveling around? Don't say you're touring “el interior”. Name the province: **“Estoy recorriendo Mendoza.”**"
@@ -49,7 +49,9 @@ classes:
       - type: card
         text: "Ask porteños where they're from and you'll get a barrio, not a city: Boedo, Flores, Palermo. Each has its own cafés, its own club and its own pride."
       - type: card
-        text: "**La Boca** sits where the Riachuelo meets the river. Its dockworkers built houses of wood and **chapa**, painted, the story goes, with leftover paint from the shipyards."
+        text: "Porteños give an address as two streets that cross: **“Corrientes y Callao”**. Distance is counted in blocks: **“Son cinco cuadras”**, it's five blocks."
+      - type: card
+        text: "**La Boca** sits where the Riachuelo meets the Río de la Plata. Its dockworkers built houses of wood and **chapa** (metal sheets), painted, the story goes, with paint left over from the shipyards."
       - type: choice
         prompt: "La Boca's famous colorful street, **Caminito**, is named after what?"
         options:
@@ -61,7 +63,7 @@ classes:
       - type: card
         text: "**San Telmo** is the old colonial south: cobblestones, balconies, antique shops. On Sundays, calle **Defensa** turns into a street market, with tango dancers on the corners."
       - type: card
-        text: "**Palermo** is the biggest barrio, so people keep inventing sub-barrios: **Palermo Soho**, **Palermo Hollywood**, Palermo Chico. The joke: soon everything will be “Palermo something”."
+        text: "**Palermo** is the biggest barrio, so people keep inventing sub-barrios: **Palermo Soho**, **Palermo Hollywood**, even “Palermo Queens” for the barrio next door. The joke: soon everything will be “Palermo something”."
       - type: card
         text: "In the **Recoleta Cemetery**, marble family vaults line the paths like little streets, with presidents, writers and lots of cats. Most visitors come for one grave: **Evita**'s."
       - type: choice
@@ -81,6 +83,8 @@ classes:
     pages:
       - type: card
         text: "The city bus is the **colectivo**, but everyone calls it **bondi**. And porteños invented it."
+      - type: card
+        text: "You can't pay cash on the bondi. Tap a **SUBE** card, sold at kioscos and subte stations. Many lines also take a bank card or phone. Tell the driver where you're going: **“Hasta Plaza Italia.”**"
       - type: choice
         prompt: "How was the colectivo born, in 1928?"
         options:
@@ -90,11 +94,11 @@ classes:
         correct: 0
         explain: "Taxi drivers short on customers charged each passenger a fixed fare along a route. Soon they stretched the cars to fit more seats."
       - type: card
-        text: "The bondi only stops if you ask. When your line comes, stick your arm out, or it drives right past you."
+        text: "The bondi only stops if you ask. When your line comes, stick your arm out, or it drives right past you. To get off, press the **timbre** (the bell) before your stop and leave by the back door."
       - type: card
         text: "At the stop, people line up along the wall: **la cola**. It's sacred. Cut it and the whole line will let you know: **“¡Hay cola, eh!”**"
       - type: card
-        text: "Taxis are black and yellow, and porteños call them **tachos**."
+        text: "Taxis are black and yellow, and a free one shows a red **LIBRE** light. Porteños call the taxi a **tacho** and the driver a **tachero**."
       - type: choice
         prompt: "The **subte**, Buenos Aires' metro, opened in 1913. Which of these is younger?"
         options:
@@ -127,6 +131,8 @@ classes:
         text: "It stands on **Avenida 9 de Julio**, which porteños proudly call the widest avenue in the world. Crossing on foot usually takes more than one green light."
       - type: card
         text: "The president's office is the **Casa Rosada**. The popular story: President **Sarmiento** had it painted pink to mix the red and white of two rival parties."
+      - type: card
+        text: "In front of it is the **Plaza de Mayo**, where the country comes to celebrate and to protest. The **Madres de Plaza de Mayo** have walked around it every Thursday since 1977."
       - type: choice
         prompt: "There's a messier theory for the pink. What?"
         options:
@@ -138,7 +144,7 @@ classes:
       - type: card
         text: "Singers and conductors rank the **Teatro Colón** among the best opera houses in the world for its sound. The cheapest seats, way up top, are called **el paraíso**: paradise."
       - type: card
-        text: "At a classic café like the **Tortoni**, order a **cortado** and stay two hours. The waiter won't bring the check until you ask. Bringing it early would feel like kicking you out."
+        text: "At any neighborhood café, order a **cortado** (espresso with a little milk) and stay two hours. Nobody will rush you. The famous one is the **Tortoni**, with a line of tourists at the door."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -159,9 +165,9 @@ classes:
       - type: card
         text: "In Palermo or Recoleta you'll meet a **paseaperros**, a dog walker, dragged along by a whole pack of dogs at once. The pack gets the sidewalk."
       - type: card
-        text: "Avenida **Corrientes** is the city's Broadway: theaters, bookshops open late, pizza at midnight. People call it **la calle que nunca duerme**, the street that never sleeps."
+        text: "Avenida **Corrientes** is the city's Broadway: theaters, and bookshops open late. People call it **la calle que nunca duerme**, the street that never sleeps."
       - type: choice
-        prompt: "**El Ateneo Grand Splendid**, often called one of the world's most beautiful bookshops, used to be something else. What?"
+        prompt: "On Avenida **Santa Fe**, **El Ateneo Grand Splendid**, often called one of the world's most beautiful bookshops, used to be something else. What?"
         options:
           - "A theater"
           - "A train station"
@@ -171,5 +177,174 @@ classes:
       - type: card
         text: "The thief to know is the **motochorro**, who snatches phones from the back of a motorbike. Porteños aren't paranoid, just alert. Keep your phone off café tables by the street."
       - type: card
-        text: "The word you'll hear most in your first week: **¡Ojo!**, literally “eye!”. It means watch out. **“¡Ojo con el celu!”** Careful with your phone."
+        text: "A word you'll hear a lot in your first week: **¡Ojo!**, literally “eye!”. It means watch out. **“¡Ojo con el celu!”** Careful with your phone."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-sube"
+    title: "SUBE: one card for everything"
+    summary: "Loading it, tapping it, and reading the subte like a local"
+    pages:
+      - type: card
+        text: "The **SUBE** is one blue card for the bus, the subte and the train. Get one on your first day and keep it in your pocket. You'll tap it several times a day."
+      - type: card
+        text: "The card holds credit, your **saldo**. To add more, go to a kiosco with a SUBE sign and ask **“¿Me cargás la SUBE?”** Can you load my SUBE? Say how much. Subte stations have machines too."
+      - type: choice
+        prompt: "The bus is here and your SUBE has no credit left. What happens when you tap?"
+        options:
+          - "It lets you ride and goes a little below zero"
+          - "It beeps red and you have to get off"
+          - "The driver sells you a paper ticket"
+        correct: 0
+        explain: "The card can go a little into the red: **saldo negativo**. You pay it back the next time you load. The limit is small, so load it soon."
+      - type: card
+        text: "Not sure it's your bus? Ask before you get on: **“¿Este va a Retiro?”** Does this one go to Retiro? Then tell the driver your stop, wait for his nod, and tap. Longer trips cost more."
+      - type: choice
+        prompt: "Three friends get on a bondi with only one SUBE between them. Can they all ride?"
+        options:
+          - "Yes, one card can pay for all three"
+          - "No, each rider needs their own card"
+          - "Only if the driver knows them"
+        correct: 0
+        explain: "Tell the driver **“Tres, hasta Plaza Italia”** and tap once for each person. Just check you have enough saldo first."
+      - type: card
+        text: "Every subte turnstile also takes a contactless bank card or a phone, and more bus lines add this all the time. Not every bus has it yet, so the SUBE is still the safe choice."
+      - type: card
+        text: "The subte has six lines, each with a letter and a color: **A, B, C, D, E** and **H**. To change from one line to another, follow the signs that say **combinación**."
+      - type: choice
+        prompt: "You're on the platform of the D line. What tells you which way the train is going?"
+        options:
+          - "The name of the last station on the line"
+          - "The words “north” or “south”"
+          - "A number on the front of the train"
+        correct: 0
+        explain: "Signs show the end of the line: **“a Catedral”** or **“a Congreso de Tucumán”**. Before you go down, check which end is past your stop."
+      - type: card
+        chip: "Pro tip"
+        text: "The subte closes at night, but many bondis run until morning. Tired? Take a taxi or an app like Uber, Cabify or DiDi. And on any bus: **“¿Me avisás dónde me bajo?”** Can you tell me where to get off?"
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "pagar"
+    title: "Paying like a local"
+    summary: "QR codes, cuotas, cash discounts and the hunt for small notes"
+    pages:
+      - type: card
+        text: "Argentines pay for almost everything with their phone. A fruit stand, a taxi, a street musician: each one has a **QR** code, and most people scan it with an app called **Mercado Pago**."
+      - type: choice
+        prompt: "A friend owes you her half of dinner. She takes out her phone and says **“Pasame tu alias.”** What is she asking for?"
+        options:
+          - "The short name of your bank account"
+          - "The nickname your friends call you"
+          - "The password for your phone"
+        correct: 0
+        explain: "An **alias** is a few easy words that stand for an account. With it she can send you the money in seconds: **“Te transfiero.”**"
+      - type: card
+        text: "Paying by **transferencia**, a bank transfer, is normal even in tiny shops. You send the money, show your screen, and the seller checks it arrived. It needs an Argentine account, so visitors mostly use a card or cash."
+      - type: card
+        text: "Pay by card and you may hear **“¿En cuotas?”** In monthly payments? Locals split big purchases into **cuotas**, and shop windows promise **“12 cuotas sin interés”**. With a foreign card, just say **“en un pago”**: all at once."
+      - type: choice
+        prompt: "A shop window says **“Descuento en efectivo”**: a discount for cash. Why would a shop want cash that much?"
+        options:
+          - "Card money arrives later and costs the shop a fee"
+          - "Cash is quicker to count at closing time"
+          - "Card machines stop working when it rains"
+        correct: 0
+        explain: "With a card, the shop pays a fee and may wait for its money. When prices keep rising, waiting costs money too. So it's always worth asking: **“¿Hay descuento en efectivo?”**"
+      - type: card
+        text: "Small shops often have no change. You'll hear **“¿Tenés más chico?”** Do you have a smaller note? Keep your small notes for kioscos and taxis, and break the big ones at the supermarket."
+      - type: choice
+        prompt: "**“¿Me hacés precio?”** means “Can you give me a better price?” Where can you ask it?"
+        options:
+          - "At a street market, buying three things"
+          - "At the supermarket checkout"
+          - "At a restaurant, when the bill comes"
+        correct: 0
+        explain: "It works at a **feria** (a street market), with antiques or crafts, or when you buy several things in a small shop. Ask once, with a smile. Not where the prices are fixed."
+      - type: card
+        text: "Visiting? The rules for foreign cards and for changing money have changed many times. Before you travel, check what rate your card gets right now. Bring some cash too, and change it at a bank or a **casa de cambio**."
+      - type: card
+        chip: "Pro tip"
+        text: "At a restaurant, the tip is about 10% and people usually leave it in cash on the table, even when they pay the bill by card."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "calle-con-cuidado"
+    title: "Street smarts"
+    summary: "Small habits locals have, and what to say if something happens"
+    pages:
+      - type: card
+        text: "Buenos Aires is a big city, and big-city rules apply. Most visits go by with no trouble at all. Locals just have a few habits they follow without thinking. Copy them and relax."
+      - type: card
+        text: "First habit: the phone. Don't use it at the edge of the sidewalk, next to the traffic. To read a map or answer a message, step into a doorway or a shop."
+      - type: choice
+        prompt: "The subte is packed at rush hour. Where do many locals carry their backpack?"
+        options:
+          - "On their chest, in front"
+          - "On their back, straps pulled tight"
+          - "On the floor, between their feet"
+        correct: 0
+        explain: "You'll see half the carriage wearing the **mochila** (backpack) in front, with the zips closed. It's also good manners: it leaves more room for everyone."
+      - type: choice
+        scenario: "A friendly stranger points at your jacket: something dirty has landed on it. He takes out tissues and offers to help you clean it."
+        prompt: "What do locals do?"
+        options:
+          - "Say “No, gracias” and keep walking"
+          - "Stop and let him wipe it off"
+          - "Put the bag down and clean it"
+        correct: 0
+        explain: "It's an old trick, **la mancha**, the stain. One person makes the stain, another “helps”, and while you're busy, your bag or wallet is gone. Keep walking and clean it later, inside a café."
+      - type: card
+        text: "Streets change after dark. An avenue full of people at noon can be empty at midnight. Ask someone at your hotel or a café: **“¿Es tranquilo por acá de noche?”** Is it calm around here at night?"
+      - type: card
+        text: "Late at night, don't walk long empty blocks. Order a car with an app, or ask the restaurant to call a **radio taxi**: a taxi booked by phone, so the company knows who is driving you."
+      - type: choice
+        prompt: "Someone grabs your phone and runs. What do Argentines tell each other to do?"
+        options:
+          - "Let it go, you matter more than the phone"
+          - "Run after him and shout for help"
+          - "Hold on to it as hard as you can"
+        correct: 0
+        explain: "Everyone gives the same advice: don't fight for a thing. A phone can be replaced. Then ask the people around you for help. They usually stop."
+      - type: card
+        text: "Three things to say. **“¡Cuidado!”** Careful! **“Me robaron.”** I was robbed. **“¿Me ayudás?”** Can you help me? In Buenos Aires, the emergency number for the police is **911**."
+      - type: card
+        chip: "Pro tip"
+        text: "If something is stolen, go to a **comisaría**, a police station, and make a **denuncia**, a report. Your insurance and your embassy will ask for that paper."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "pedir-un-cafe"
+    title: "Ordering at a café"
+    summary: "Lágrima, submarino, two kinds of medialunas and a free glass of soda"
+    pages:
+      - type: card
+        text: "Ask for **un café** and you get a small, strong espresso. There are no sizes to choose and nobody writes your name on a cup. Want a bit more? Ask for it **en jarrito**, in a taller cup."
+      - type: choice
+        prompt: "The menu lists **una lágrima**: “a tear”. What arrives at your table?"
+        options:
+          - "Hot milk with a drop of coffee"
+          - "Coffee with a drop of cold milk"
+          - "Coffee with a drop of liquor"
+        correct: 0
+        explain: "The “tear” is the coffee: just a drop in a cup of hot milk. It's the softest coffee on the menu."
+      - type: card
+        text: "From the most coffee to the most milk: **café**, **cortado**, **café con leche** (about half and half), **lágrima**. A big mug of black filter coffee is hard to find in a classic café."
+      - type: card
+        text: "The classic order is **café con leche con medialunas**, small sweet croissants. There are two kinds: **de manteca** (butter), soft and shiny, and **de grasa** (lard), thinner, crisper and less sweet."
+      - type: choice
+        prompt: "You order a **submarino**. The waiter brings a tall glass of hot milk and… what?"
+        options:
+          - "A bar of chocolate to drop in"
+          - "A small coffee to pour in"
+          - "A scoop of ice cream on a spoon"
+        correct: 0
+        explain: "You sink the chocolate bar in the milk, like a submarine, and stir until it melts. Kids love it, and so do adults on a cold day."
+      - type: card
+        text: "Many cafés bring a tiny glass of **soda**, fizzy water, with your coffee. It's free. For something salty, order a **tostado**: a toasted ham and cheese sandwich on thin white bread."
+      - type: card
+        text: "The waiter is the **mozo**. In a classic café you sit down first and he comes to you. To call him, raise a hand and say **“Disculpá”**. You order and pay at the table."
+      - type: card
+        chip: "Pro tip"
+        text: "At a newer café they ask at the counter: **“¿Para acá o para llevar?”** For here or to go? When you want to pay at a table, say **“¿Me cobrás?”** Can you charge me?"
     vocabulary: []

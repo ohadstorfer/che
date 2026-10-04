@@ -79,17 +79,24 @@ export async function streamedStructured<T>(
 /**
  * The verdict of a feedback object still being written: whether the line has
  * an error and its corrected form, as soon as both are complete in `soFar`.
- * A line with no error needs only the first. Null until then.
+ * A line with no error needs its `verdict` instead (a tick, a note, or
+ * nothing to say about a garbled line). Null until then.
  */
-export function earlyVerdict(soFar: string, line: string): { has_error: boolean; corrected: string } | null {
+export function earlyVerdict(
+  soFar: string,
+  line: string,
+): { has_error: boolean; verdict: "correct" | "error" | "note" | "unclear"; corrected: string } | null {
   const flag = /"has_error"\s*:\s*(true|false)/.exec(soFar);
   if (!flag) return null;
-  if (flag[1] === "false") return { has_error: false, corrected: line };
+  if (flag[1] === "false") {
+    const kind = /"verdict"\s*:\s*"(correct|note|unclear)"/.exec(soFar);
+    return kind ? { has_error: false, verdict: kind[1] as "correct" | "note" | "unclear", corrected: line } : null;
+  }
   // A complete JSON string: the closing quote is present and not escaped.
   const field = /"corrected"\s*:\s*("(?:[^"\\]|\\.)*")/.exec(soFar);
   if (!field) return null;
   try {
-    return { has_error: true, corrected: JSON.parse(field[1]) as string };
+    return { has_error: true, verdict: "error", corrected: JSON.parse(field[1]) as string };
   } catch {
     return null;
   }

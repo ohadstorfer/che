@@ -110,7 +110,9 @@ export function loadOutline(paths = SECTION_PATHS) {
       if (!Array.isArray(u.tips) || u.tips.length === 0) errors.push(`${where}: needs at least one tip`);
 
       const unitId = ids.unit(u.slug);
-      const checkpoint = u.ordinal === (doc.units ?? []).length;
+      // The unit that closes its section. It is built like any other — lessons,
+      // then the unit check — but it may not be a practice unit (below).
+      const closesSection = u.ordinal === (doc.units ?? []).length;
       courseOrder += 1;
       const unit = {
         id: unitId,
@@ -225,23 +227,22 @@ export function loadOutline(paths = SECTION_PATHS) {
       // unit check: the unit's words again, before the next unit leans on them.
       const practiceUnit = Array.isArray(u.review) && u.review.length > 0;
       if (practiceUnit && (u.words ?? []).length) errors.push(`${where}: a practice unit (review:) teaches no words — move them to a teaching unit`);
-      if (practiceUnit && checkpoint) errors.push(`${where}: the checkpoint can't be a practice unit`);
+      if (practiceUnit && closesSection) errors.push(`${where}: a section can't end on a practice unit`);
       const practice = practiceUnit ? (u.practice ?? PRACTICE_UNIT_LESSONS) : (u.practice ?? section.practice ?? 0);
-      const hasCheck = !checkpoint && (practiceUnit || lessonCount > 1);
+      // A section's last unit used to be seeded as `checkpoint` lessons with no
+      // check of its own: ordinary teaching lessons drawn and graded as a test.
+      // Every unit now ends on its review (sync-lessons.mjs converted the old
+      // rows); the kind is still accepted where it is read.
+      const hasCheck = practiceUnit || lessonCount > 1;
       const teachingCount = practiceUnit ? 0 : hasCheck ? lessonCount - 1 : lessonCount;
-      const kinds = [
-        ...Array(teachingCount).fill(checkpoint ? 'checkpoint' : 'lesson'),
-        ...Array(practice).fill('practice'),
-        ...(hasCheck ? ['review'] : []),
-      ];
+      const kinds = [...Array(teachingCount).fill('lesson'), ...Array(practice).fill('practice'), ...(hasCheck ? ['review'] : [])];
       unit.lessons = kinds.map((kind, k) => {
         const ordinal = k + 1;
         return {
           id: ids.lesson(u.slug, ordinal),
           unit_id: unitId,
           ordinal,
-          title_en:
-            kind === 'review' ? 'Unit check' : kind === 'checkpoint' ? `Checkpoint ${ordinal}` : kind === 'practice' ? 'Practice' : `Lesson ${ordinal}`,
+          title_en: kind === 'review' ? 'Unit check' : kind === 'practice' ? 'Practice' : `Lesson ${ordinal}`,
           kind,
           status: 'draft',
         };

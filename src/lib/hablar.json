@@ -84,7 +84,7 @@
       {
        "id": "ask",
        "es": "Preguntá qué trae el tostado",
-       "en": "Ask what comes in the tostado"
+       "en": "Ask what comes in the toasted sandwich"
       },
       {
        "id": "card",
@@ -100,7 +100,7 @@
       },
       {
        "es": "¿Qué trae el tostado?",
-       "en": "What comes in the tostado?",
+       "en": "What comes in the toasted sandwich?",
        "audio": null
       },
       {
@@ -237,12 +237,12 @@
      "key_phrases": [
       {
        "es": "Mirá, no es por molestar, pero el café llegó frío.",
-       "en": "Look, I don't mean to be a pain, but the coffee came cold.",
+       "en": "Look, I don't want to bother you, but the coffee came cold.",
        "audio": null
       },
       {
        "es": "Entiendo que están a full, pero esperé media hora.",
-       "en": "I get that you're swamped, but I waited half an hour.",
+       "en": "I understand you're very busy, but I waited half an hour.",
        "audio": null
       },
       {
@@ -258,7 +258,7 @@
      ],
      "opener": {
       "es": "Perdón por la demora, hoy estamos a full. ¿Todo bien con el café?",
-      "en": "Sorry for the wait, we're swamped today. Is the coffee all right?",
+      "en": "Sorry for the wait, we're very busy today. Is the coffee all right?",
       "audio": null
      },
      "keyterms": [
@@ -309,8 +309,8 @@
       },
       {
        "id": "pay",
-       "es": "Pagá con transferencia",
-       "en": "Pay by bank transfer"
+       "es": "Preguntá si podés pagar con tarjeta",
+       "en": "Ask if you can pay by card"
       }
      ],
      "key_phrases": [
@@ -330,9 +330,9 @@
        "audio": "hablar/0ce34cdf784c3f43d296.mp3"
       },
       {
-       "es": "¿Te puedo pagar con transferencia?",
-       "en": "Can I pay you by bank transfer?",
-       "audio": "hablar/179ec69ec4aa85473d93.mp3"
+       "es": "¿Puedo pagar con tarjeta?",
+       "en": "Can I pay by card?",
+       "audio": null
       }
      ],
      "opener": {
@@ -364,8 +364,8 @@
      "goals": [
       {
        "id": "several",
-       "es": "Pedí tres cosas distintas",
-       "en": "Ask for three different things"
+       "es": "Pedí dos cosas distintas",
+       "en": "Ask for two different things"
       },
       {
        "id": "compare",
@@ -645,9 +645,9 @@
     },
     "A2": {
      "setting_es": "Estás en un cumpleaños y un amigo del cumpleañero te saca charla.",
-     "setting_en": "You're at a birthday party and a friend of the birthday boy starts chatting with you.",
+     "setting_en": "You're at Martín's birthday party and one of his friends starts chatting with you.",
      "role_es": "un amigo de Martín, el cumpleañero",
-     "role_en": "a friend of Martín, the birthday boy",
+     "role_en": "a friend of Martín, whose birthday it is",
      "goals": [
       {
        "id": "host",
@@ -912,7 +912,7 @@
      ],
      "opener": {
       "es": "¡Buen día! ¿Qué te llevás hoy?",
-      "en": "Morning! What'll it be today?",
+      "en": "Good morning! What would you like today?",
       "audio": "hablar/bff31f3448811a2bd5c4.mp3"
      },
      "keyterms": [
@@ -945,7 +945,7 @@
       {
        "id": "amounts",
        "es": "Pedí medio kilo de algo y un cuarto de otra cosa",
-       "en": "Ask for half a kilo of one thing and a quarter of another"
+       "en": "Ask for half a kilo of one thing and a quarter kilo of another"
       },
       {
        "id": "bag",
@@ -961,7 +961,7 @@
       },
       {
        "es": "Dame medio kilo de tomates y un cuarto de cebolla.",
-       "en": "Give me half a kilo of tomatoes and a quarter of onions.",
+       "en": "Give me half a kilo of tomatoes and a quarter kilo of onions.",
        "audio": null
       },
       {
@@ -977,7 +977,7 @@
      ],
      "opener": {
       "es": "¡Buen día! ¿Qué vas a cocinar hoy?",
-      "en": "Morning! What are you cooking today?",
+      "en": "Good morning! What are you cooking today?",
       "audio": null
      },
      "keyterms": [
@@ -1028,7 +1028,7 @@
      "key_phrases": [
       {
        "es": "Ayer me llevé tres paltas y dos estaban negras.",
-       "en": "Yesterday I took three avocados and two were black inside.",
+       "en": "Yesterday I bought three avocados and two were black inside.",
        "audio": null
       },
       {
@@ -1157,9 +1157,9 @@
    "versions": {
     "A1": {
      "setting_es": "Buscás una farmacia en Almagro y le preguntás a un vecino.",
-     "setting_en": "You're looking for a pharmacy in Almagro, so you ask a neighbor.",
+     "setting_en": "You're looking for a pharmacy in Almagro, so you ask a local.",
      "role_es": "un vecino del barrio",
-     "role_en": "a neighbor from the barrio",
+     "role_en": "a man who lives in the barrio",
      "goals": [
       {
        "id": "where",
@@ -1225,12 +1225,12 @@
      "setting_es": "Quedaste con amigos en un bar de Almagro, pero el celular se quedó sin batería.",
      "setting_en": "You're meeting friends at a bar in Almagro, but your phone just died.",
      "role_es": "un vecino del barrio",
-     "role_en": "a neighbor from the barrio",
+     "role_en": "a man who lives in the barrio",
      "goals": [
       {
        "id": "address",
-       "es": "Preguntá cómo llegar a la calle Medrano",
-       "en": "Ask how to get to Medrano Street"
+       "es": "Preguntá cómo llegar a Medrano y Corrientes",
+       "en": "Ask how to get to the corner of Medrano and Corrientes"
       },
       {
        "id": "walk",
@@ -1245,8 +1245,8 @@
      ],
      "key_phrases": [
       {
-       "es": "Perdón, ¿sabés cómo llego a la calle Medrano?",
-       "en": "Excuse me, do you know how I get to Medrano Street?",
+       "es": "Perdón, ¿sabés cómo llego a Medrano y Corrientes?",
+       "en": "Excuse me, do you know how I get to Medrano and Corrientes?",
        "audio": null
       },
       {
@@ -1286,6 +1286,7 @@
       "enfrente",
       "perdón",
       "Medrano",
+      "Corrientes",
       "cómo llego",
       "caminando",
       "sin batería",
@@ -1296,10 +1297,10 @@
      ]
     },
     "B1": {
-     "setting_es": "Bajaste del subte en otra estación y tenés que llegar a un turno médico en quince minutos.",
+     "setting_es": "Te bajaste del subte en la estación equivocada y tenés que llegar a un turno médico en quince minutos.",
      "setting_en": "You got off the subway at the wrong station and have to get to a doctor's appointment in fifteen minutes.",
      "role_es": "un vecino que pasea al perro",
-     "role_en": "a neighbor walking his dog",
+     "role_en": "a local walking his dog",
      "goals": [
       {
        "id": "explain",
@@ -1372,9 +1373,9 @@
     },
     "B2": {
      "setting_es": "Te perdiste buscando la casa de un amigo, y el vecino que te ayuda tiene opiniones sobre todo el barrio.",
-     "setting_en": "You got lost looking for a friend's place, and the neighbor helping you has opinions about the whole barrio.",
+     "setting_en": "You got lost looking for a friend's place, and the local helping you has opinions about the whole barrio.",
      "role_es": "un vecino charlatán que vive en Almagro hace cuarenta años",
-     "role_en": "a chatty neighbor who has lived in Almagro for forty years",
+     "role_en": "a chatty local who has lived in Almagro for forty years",
      "goals": [
       {
        "id": "directions",
@@ -1410,13 +1411,13 @@
       },
       {
        "es": "Te agradezco un montón, sos un genio.",
-       "en": "Thanks a lot, you're a star.",
+       "en": "Thanks a lot, you're the best.",
        "audio": null
       }
      ],
      "opener": {
       "es": "¿Buscás la calle Bulnes? Uh, este barrio cambió muchísimo. ¿Vos sos de acá?",
-      "en": "Looking for Bulnes Street? Oh, this barrio has changed so much. Are you from here?",
+      "en": "Looking for Bulnes Street? Oh, this neighborhood has changed so much. Are you from here?",
       "audio": null
      },
      "keyterms": [
@@ -1464,8 +1465,8 @@
       },
       {
        "id": "sube",
-       "es": "Preguntá si podés pagar con la SUBE",
-       "en": "Ask if you can pay with the SUBE card"
+       "es": "Preguntá cómo se paga el colectivo",
+       "en": "Ask how you pay on the bus"
       },
       {
        "id": "stop",
@@ -1480,9 +1481,9 @@
        "audio": "hablar/83140f855f86c90549e7.mp3"
       },
       {
-       "es": "¿Se puede pagar con la SUBE?",
-       "en": "Can you pay with the SUBE card?",
-       "audio": "hablar/3c65ad3757fc860e6461.mp3"
+       "es": "¿Se puede pagar en efectivo o necesito la SUBE?",
+       "en": "Can I pay cash, or do I need the SUBE card?",
+       "audio": null
       },
       {
        "es": "¿Dónde me tengo que bajar?",
@@ -1550,8 +1551,8 @@
        "audio": null
       },
       {
-       "es": "¿Me avisás cuando llegamos?",
-       "en": "Will you let me know when we get there?",
+       "es": "¿Me avisás dónde me bajo?",
+       "en": "Can you tell me where to get off?",
        "audio": null
       },
       {
@@ -1583,7 +1584,7 @@
       "Plaza Italia",
       "falta mucho",
       "me avisás",
-      "cuando llegamos",
+      "dónde me bajo",
       "amable"
      ]
     },
@@ -1674,7 +1675,7 @@
       {
        "id": "defend",
        "es": "Defendé algo bueno del bondi",
-       "en": "Defend something good about the bondi"
+       "en": "Defend something good about the buses"
       },
       {
        "id": "agree",
@@ -1685,12 +1686,12 @@
      "key_phrases": [
       {
        "es": "En mi ciudad el transporte es más caro y pasa menos seguido.",
-       "en": "In my city transport is pricier and comes less often.",
+       "en": "In my city transport is more expensive and comes less often.",
        "audio": null
       },
       {
        "es": "Igual, hay que reconocer que el bondi te lleva a todos lados.",
-       "en": "Still, you have to admit the bondi takes you everywhere.",
+       "en": "Still, you have to admit the bus takes you everywhere.",
        "audio": null
       },
       {
@@ -1925,7 +1926,7 @@
      ],
      "opener": {
       "es": "¡Che, el sábado vamos a un boliche en Palermo hasta las seis de la mañana! ¿Te sumás?",
-      "en": "Hey, on Saturday we're going to a club in Palermo until six in the morning! You in?",
+      "en": "Hey, on Saturday we're going to a club in Palermo until six in the morning! Do you want to come?",
       "audio": null
      },
      "keyterms": [
@@ -2321,10 +2322,902 @@
    }
   },
   {
+   "id": "farmacia",
+   "title_es": "En la farmacia",
+   "title_en": "At the pharmacy",
+   "versions": {
+    "A1": {
+     "setting_es": "Te duele la cabeza y entrás a una farmacia de Palermo.",
+     "setting_en": "You have a headache and walk into a pharmacy in Palermo.",
+     "role_es": "el farmacéutico",
+     "role_en": "the pharmacist",
+     "goals": [
+      {
+       "id": "hurts",
+       "es": "Decí qué te duele",
+       "en": "Say what hurts"
+      },
+      {
+       "id": "ask",
+       "es": "Pedí algo para el dolor",
+       "en": "Ask for something for the pain"
+      },
+      {
+       "id": "how",
+       "es": "Preguntá cómo se toma",
+       "en": "Ask how to take it"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Me duele mucho la cabeza.",
+       "en": "My head hurts a lot.",
+       "audio": null
+      },
+      {
+       "es": "Quiero algo para el dolor, por favor.",
+       "en": "I want something for the pain, please.",
+       "audio": null
+      },
+      {
+       "es": "¿Necesito receta?",
+       "en": "Do I need a prescription?",
+       "audio": null
+      },
+      {
+       "es": "¿Cómo se toma?",
+       "en": "How do I take it?",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¡Hola! ¿En qué te ayudo?",
+      "en": "Hi! How can I help you?",
+      "audio": null
+     },
+     "keyterms": [
+      "farmacia",
+      "me duele",
+      "dolor de cabeza",
+      "la cabeza",
+      "la garganta",
+      "la panza",
+      "ibuprofeno",
+      "paracetamol",
+      "pastilla",
+      "pastillas",
+      "receta",
+      "cómo se toma",
+      "cada ocho horas",
+      "tenés algo para"
+     ]
+    },
+    "A2": {
+     "setting_es": "Tenés tos y dolor de garganta hace dos días y entrás a una farmacia.",
+     "setting_en": "You have had a cough and a sore throat for two days, and you walk into a pharmacy.",
+     "role_es": "el farmacéutico",
+     "role_en": "the pharmacist",
+     "goals": [
+      {
+       "id": "since",
+       "es": "Contá qué te pasa y desde cuándo",
+       "en": "Say what is wrong and since when"
+      },
+      {
+       "id": "cough",
+       "es": "Preguntá si tiene algo para la tos",
+       "en": "Ask if he has something for a cough"
+      },
+      {
+       "id": "product",
+       "es": "Pedí una caja de ibuprofeno",
+       "en": "Ask for a box of ibuprofen"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Estoy con tos desde el lunes y me duele la garganta.",
+       "en": "I've had a cough since Monday and my throat hurts.",
+       "audio": null
+      },
+      {
+       "es": "¿Tenés algo para la tos?",
+       "en": "Do you have something for a cough?",
+       "audio": null
+      },
+      {
+       "es": "Dame también una caja de ibuprofeno.",
+       "en": "Give me a box of ibuprofen too.",
+       "audio": null
+      },
+      {
+       "es": "¿Cada cuántas horas lo tomo?",
+       "en": "How many hours between doses?",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¡Hola! Uy, qué tos tenés. ¿Desde cuándo estás así?",
+      "en": "Hi! Oh, that's a bad cough. How long have you been like this?",
+      "audio": null
+     },
+     "keyterms": [
+      "farmacia",
+      "me duele",
+      "dolor de cabeza",
+      "la cabeza",
+      "la garganta",
+      "la panza",
+      "ibuprofeno",
+      "paracetamol",
+      "pastilla",
+      "pastillas",
+      "receta",
+      "cómo se toma",
+      "cada ocho horas",
+      "tenés algo para",
+      "tos",
+      "jarabe",
+      "resfrío",
+      "desde el lunes",
+      "una caja",
+      "cada cuántas horas",
+      "dame",
+      "fiebre"
+     ]
+    },
+    "B1": {
+     "setting_es": "Hace cinco días que te duele la panza y el farmacéutico te hace preguntas antes de darte algo.",
+     "setting_en": "Your stomach has hurt for five days, and the pharmacist asks you questions before he gives you anything.",
+     "role_es": "el farmacéutico",
+     "role_en": "the pharmacist",
+     "goals": [
+      {
+       "id": "symptoms",
+       "es": "Describí los síntomas y hace cuánto los tenés",
+       "en": "Describe your symptoms and how long you have had them"
+      },
+      {
+       "id": "doctor",
+       "es": "Preguntá si te conviene ir al médico",
+       "en": "Ask if you should see a doctor"
+      },
+      {
+       "id": "discount",
+       "es": "Preguntá si hay descuento con tu obra social",
+       "en": "Ask if your health insurance gives you a discount"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Hace cinco días que me duele la panza y casi no tengo hambre.",
+       "en": "My stomach has hurt for five days and I'm hardly hungry.",
+       "audio": null
+      },
+      {
+       "es": "No tengo fiebre, pero a la noche me siento peor.",
+       "en": "I don't have a fever, but I feel worse at night.",
+       "audio": null
+      },
+      {
+       "es": "¿Te parece que tendría que ir al médico?",
+       "en": "Do you think I should see a doctor?",
+       "audio": null
+      },
+      {
+       "es": "¿Con la obra social me hacen algún descuento?",
+       "en": "Do I get a discount with my health insurance?",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¡Hola! No tenés buena cara. ¿Qué te anda pasando?",
+      "en": "Hi! You don't look well. What's going on?",
+      "audio": null
+     },
+     "keyterms": [
+      "farmacia",
+      "me duele",
+      "dolor de cabeza",
+      "la cabeza",
+      "la garganta",
+      "la panza",
+      "ibuprofeno",
+      "paracetamol",
+      "pastilla",
+      "pastillas",
+      "receta",
+      "cómo se toma",
+      "cada ocho horas",
+      "tenés algo para",
+      "síntomas",
+      "hace cinco días",
+      "obra social",
+      "prepaga",
+      "descuento",
+      "médico",
+      "guardia",
+      "me siento peor",
+      "tendría que"
+     ]
+    },
+    "B2": {
+     "setting_es": "Tenés una infección de garganta, pedís un antibiótico y el farmacéutico te dice que necesitás receta.",
+     "setting_en": "You have a throat infection, you ask for an antibiotic, and the pharmacist says you need a prescription.",
+     "role_es": "el farmacéutico",
+     "role_en": "the pharmacist",
+     "goals": [
+      {
+       "id": "explain",
+       "es": "Explicá por qué no tenés receta",
+       "en": "Explain why you have no prescription"
+      },
+      {
+       "id": "alt",
+       "es": "Pedí una alternativa de venta libre",
+       "en": "Ask for an option you can buy without a prescription"
+      },
+      {
+       "id": "plan",
+       "es": "Averiguá dónde conseguir una receta hoy",
+       "en": "Find out where you can get a prescription today"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "En mi país lo compro sin receta, no sabía que acá hacía falta.",
+       "en": "In my country I buy it without a prescription. I didn't know I needed one here.",
+       "audio": null
+      },
+      {
+       "es": "Te entiendo, no quiero que tengas un problema por mi culpa.",
+       "en": "I understand, I don't want you to have a problem because of me.",
+       "audio": null
+      },
+      {
+       "es": "¿Hay algo de venta libre que me alivie hasta que vea a un médico?",
+       "en": "Is there something without a prescription that would help until I see a doctor?",
+       "audio": null
+      },
+      {
+       "es": "¿Sabés si en una guardia me harían la receta en el momento?",
+       "en": "Do you know if an emergency room would write me the prescription right away?",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "Uh, mirá, este se vende solo con receta. ¿La tenés a mano?",
+      "en": "Oh, look, this one is sold only with a prescription. Do you have it with you?",
+      "audio": null
+     },
+     "keyterms": [
+      "farmacia",
+      "me duele",
+      "dolor de cabeza",
+      "la cabeza",
+      "la garganta",
+      "la panza",
+      "ibuprofeno",
+      "paracetamol",
+      "pastilla",
+      "pastillas",
+      "receta",
+      "cómo se toma",
+      "cada ocho horas",
+      "tenés algo para",
+      "antibiótico",
+      "infección",
+      "venta libre",
+      "hacía falta",
+      "que me alivie",
+      "guardia",
+      "receta electrónica",
+      "en el momento",
+      "a mano"
+     ]
+    }
+   }
+  },
+  {
+   "id": "taxi",
+   "title_es": "En el taxi",
+   "title_en": "Taking a taxi",
+   "versions": {
+    "A1": {
+     "setting_es": "Parás un taxi en el centro para ir a un bar en Palermo.",
+     "setting_en": "You stop a taxi downtown to go to a bar in Palermo.",
+     "role_es": "el tachero",
+     "role_en": "the taxi driver",
+     "goals": [
+      {
+       "id": "address",
+       "es": "Decí adónde vas",
+       "en": "Say where you are going"
+      },
+      {
+       "id": "price",
+       "es": "Preguntá cuánto sale más o menos",
+       "en": "Ask about how much it costs"
+      },
+      {
+       "id": "pay",
+       "es": "Preguntá si podés pagar con tarjeta",
+       "en": "Ask if you can pay by card"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Voy a Thames y Gorriti, por favor.",
+       "en": "I'm going to Thames and Gorriti, please.",
+       "audio": null
+      },
+      {
+       "es": "¿Cuánto sale más o menos?",
+       "en": "About how much is it?",
+       "audio": null
+      },
+      {
+       "es": "¿Cuánto tardamos?",
+       "en": "How long does it take?",
+       "audio": null
+      },
+      {
+       "es": "¿Puedo pagar con tarjeta?",
+       "en": "Can I pay by card?",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¡Buenas! ¿Adónde vamos?",
+      "en": "Hi! Where are we going?",
+      "audio": null
+     },
+     "keyterms": [
+      "taxi",
+      "tachero",
+      "Thames",
+      "Gorriti",
+      "Thames y Gorriti",
+      "voy a",
+      "cuánto sale",
+      "más o menos",
+      "cuánto tardamos",
+      "efectivo",
+      "tarjeta",
+      "Mercado Pago",
+      "la esquina",
+      "acá está bien"
+     ]
+    },
+    "A2": {
+     "setting_es": "Llegás a Aeroparque, tomás un taxi a San Telmo y el tachero te saca charla.",
+     "setting_en": "You land at Aeroparque airport, take a taxi to San Telmo, and the driver starts chatting with you.",
+     "role_es": "el tachero",
+     "role_en": "the taxi driver",
+     "goals": [
+      {
+       "id": "address",
+       "es": "Decí a qué esquina vas",
+       "en": "Say which street corner you are going to"
+      },
+      {
+       "id": "chat",
+       "es": "Contá por qué viniste y cuánto te quedás",
+       "en": "Say why you came and how long you are staying"
+      },
+      {
+       "id": "pay",
+       "es": "Pagá en efectivo y preguntá si tiene cambio",
+       "en": "Pay in cash and ask if he has change"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Voy a Defensa y Carlos Calvo, en San Telmo.",
+       "en": "I'm going to Defensa and Carlos Calvo, in San Telmo.",
+       "audio": null
+      },
+      {
+       "es": "Vine de vacaciones y me voy a quedar dos semanas.",
+       "en": "I came on vacation and I'm going to stay two weeks.",
+       "audio": null
+      },
+      {
+       "es": "¿Siempre hay tanto tránsito a esta hora?",
+       "en": "Is there always this much traffic at this time?",
+       "audio": null
+      },
+      {
+       "es": "Te pago en efectivo. ¿Tenés cambio?",
+       "en": "I'll pay cash. Do you have change?",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¡Buenas! Subí. ¿Adónde te llevo?",
+      "en": "Hi! Get in. Where can I take you?",
+      "audio": null
+     },
+     "keyterms": [
+      "taxi",
+      "tachero",
+      "Thames",
+      "Gorriti",
+      "Thames y Gorriti",
+      "voy a",
+      "cuánto sale",
+      "más o menos",
+      "cuánto tardamos",
+      "efectivo",
+      "tarjeta",
+      "Mercado Pago",
+      "la esquina",
+      "acá está bien",
+      "Aeroparque",
+      "San Telmo",
+      "Defensa",
+      "Carlos Calvo",
+      "vine de vacaciones",
+      "me voy a quedar",
+      "tránsito",
+      "cambio",
+      "valija"
+     ]
+    },
+    "B1": {
+     "setting_es": "Vas en taxi a Palermo, ves en el mapa que el tachero agarra un camino más largo y, al llegar, el posnet no anda.",
+     "setting_en": "You are in a taxi to Palermo. On the map you see the driver is taking a longer way, and when you arrive the card reader does not work.",
+     "role_es": "el tachero",
+     "role_en": "the taxi driver",
+     "goals": [
+      {
+       "id": "route",
+       "es": "Preguntá por qué va por ese camino",
+       "en": "Ask why he is going that way"
+      },
+      {
+       "id": "ask",
+       "es": "Pedile que vaya por la avenida que vos conocés",
+       "en": "Ask him to take the avenue you know"
+      },
+      {
+       "id": "pay",
+       "es": "Resolvé cómo pagar si el posnet no anda",
+       "en": "Work out how to pay if the card reader does not work"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Perdón, ¿por qué vamos por acá? El mapa me marca otro camino.",
+       "en": "Sorry, why are we going this way? The map shows me another way.",
+       "audio": null
+      },
+      {
+       "es": "Prefiero que vayas por Córdoba, si no te molesta.",
+       "en": "I'd rather you take Córdoba Avenue, if you don't mind.",
+       "audio": null
+      },
+      {
+       "es": "No tengo efectivo. ¿Te puedo pagar con Mercado Pago?",
+       "en": "I don't have cash. Can I pay you with Mercado Pago?",
+       "audio": null
+      },
+      {
+       "es": "Si no, paramos en un cajero y saco plata.",
+       "en": "If not, we can stop at an ATM and I'll take out money.",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "Mirá, Córdoba está imposible a esta hora, así que agarro por otro lado. ¿Tenés mucho apuro?",
+      "en": "Look, Córdoba Avenue is impossible at this time, so I'm going another way. Are you in a big hurry?",
+      "audio": null
+     },
+     "keyterms": [
+      "taxi",
+      "tachero",
+      "Thames",
+      "Gorriti",
+      "Thames y Gorriti",
+      "voy a",
+      "cuánto sale",
+      "más o menos",
+      "cuánto tardamos",
+      "efectivo",
+      "tarjeta",
+      "Mercado Pago",
+      "la esquina",
+      "acá está bien",
+      "posnet",
+      "no anda",
+      "otro camino",
+      "Córdoba",
+      "que vayas",
+      "cajero",
+      "saco plata",
+      "el mapa",
+      "apuro",
+      "agarro por"
+     ]
+    },
+    "B2": {
+     "setting_es": "Cruzás la ciudad en taxi en hora pico con un tachero que opina de todo y se distrae del camino.",
+     "setting_en": "You cross the city by taxi at rush hour with a driver who has an opinion on everything and forgets about the route.",
+     "role_es": "un tachero charlatán que maneja el taxi hace treinta años",
+     "role_en": "a chatty taxi driver who has driven a taxi for thirty years",
+     "goals": [
+      {
+       "id": "opinion",
+       "es": "Opiná sobre el tránsito de la ciudad",
+       "en": "Give your opinion about traffic in the city"
+      },
+      {
+       "id": "route",
+       "es": "Indicale el camino sin cortar la charla",
+       "en": "Tell him the way without ending the chat"
+      },
+      {
+       "id": "stop",
+       "es": "Avisale dónde querés bajarte",
+       "en": "Tell him where you want to get out"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Para mí el problema no son los autos, es que nadie respeta nada.",
+       "en": "For me the problem is not the cars. It's that nobody respects any rules.",
+       "audio": null
+      },
+      {
+       "es": "Perdón que te corte, pero acá convendría doblar, ¿no?",
+       "en": "Sorry to interrupt, but we should turn here, right?",
+       "audio": null
+      },
+      {
+       "es": "Si agarráramos por Juan B. Justo, llegaríamos antes.",
+       "en": "If we took Juan B. Justo Avenue, we would arrive sooner.",
+       "audio": null
+      },
+      {
+       "es": "Dejame en la esquina, antes del semáforo, que me queda perfecto.",
+       "en": "Drop me at the corner, before the traffic light. That works well for me.",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¿Viste lo que es el tránsito hoy? Entre los cortes y las obras, esta ciudad es un caos. ¿En tu país se maneja así?",
+      "en": "Did you see the traffic today? With the street protests and the roadworks, this city is chaos. Do people drive like this in your country?",
+      "audio": null
+     },
+     "keyterms": [
+      "taxi",
+      "tachero",
+      "Thames",
+      "Gorriti",
+      "Thames y Gorriti",
+      "voy a",
+      "cuánto sale",
+      "más o menos",
+      "cuánto tardamos",
+      "efectivo",
+      "tarjeta",
+      "Mercado Pago",
+      "la esquina",
+      "acá está bien",
+      "tránsito",
+      "hora pico",
+      "cortes",
+      "piquete",
+      "Juan B. Justo",
+      "convendría doblar",
+      "semáforo",
+      "dejame en la esquina",
+      "nadie respeta nada"
+     ]
+    }
+   }
+  },
+  {
+   "id": "supermercado",
+   "title_es": "En la caja del súper",
+   "title_en": "At the supermarket checkout",
+   "versions": {
+    "A1": {
+     "setting_es": "Terminaste de comprar en el súper del barrio y te toca pagar en la caja.",
+     "setting_en": "You finished shopping at the local supermarket and it is your turn to pay at the checkout.",
+     "role_es": "el cajero del supermercado",
+     "role_en": "the supermarket cashier",
+     "goals": [
+      {
+       "id": "pay",
+       "es": "Decí si pagás en efectivo o con tarjeta",
+       "en": "Say if you are paying by cash or card"
+      },
+      {
+       "id": "debit",
+       "es": "Decí si es débito o crédito",
+       "en": "Say if it is debit or credit"
+      },
+      {
+       "id": "bag",
+       "es": "Pedí una bolsa",
+       "en": "Ask for a bag"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Con tarjeta, por favor.",
+       "en": "By card, please.",
+       "audio": null
+      },
+      {
+       "es": "Débito, en un pago.",
+       "en": "Debit, in one payment.",
+       "audio": null
+      },
+      {
+       "es": "Sí, una bolsa, por favor.",
+       "en": "Yes, a bag, please.",
+       "audio": null
+      },
+      {
+       "es": "No, no tengo la tarjeta del súper.",
+       "en": "No, I don't have the store card.",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¡Hola! ¿Pagás en efectivo o con tarjeta?",
+      "en": "Hi! Are you paying by cash or card?",
+      "audio": null
+     },
+     "keyterms": [
+      "súper",
+      "supermercado",
+      "la caja",
+      "efectivo",
+      "tarjeta",
+      "débito",
+      "crédito",
+      "cuotas",
+      "en un pago",
+      "bolsa",
+      "la tarjeta del súper",
+      "QR",
+      "cuánto es",
+      "ticket"
+     ]
+    },
+    "A2": {
+     "setting_es": "Estás en el chino de la esquina, no encontraste el café y llegás a la caja con un billete grande.",
+     "setting_en": "You are at the small corner supermarket. You did not find the coffee, and you get to the checkout with a large bill.",
+     "role_es": "el cajero del súper chino del barrio",
+     "role_en": "the cashier at the small neighborhood supermarket",
+     "goals": [
+      {
+       "id": "where",
+       "es": "Preguntá dónde está el café",
+       "en": "Ask where the coffee is"
+      },
+      {
+       "id": "change",
+       "es": "Decí que no tenés un billete más chico",
+       "en": "Say that you do not have a smaller bill"
+      },
+      {
+       "id": "qr",
+       "es": "Preguntá si podés pagar con QR",
+       "en": "Ask if you can pay by QR code"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "No, no encontré el café. ¿Dónde está?",
+       "en": "No, I didn't find the coffee. Where is it?",
+       "audio": null
+      },
+      {
+       "es": "Te pago en efectivo.",
+       "en": "I'll pay you in cash.",
+       "audio": null
+      },
+      {
+       "es": "No tengo más chico, perdón.",
+       "en": "I don't have anything smaller, sorry.",
+       "audio": null
+      },
+      {
+       "es": "¿Puedo pagar con QR?",
+       "en": "Can I pay by QR code?",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¡Hola! ¿Encontraste todo?",
+      "en": "Hi! Did you find everything?",
+      "audio": null
+     },
+     "keyterms": [
+      "súper",
+      "supermercado",
+      "la caja",
+      "efectivo",
+      "tarjeta",
+      "débito",
+      "crédito",
+      "cuotas",
+      "en un pago",
+      "bolsa",
+      "la tarjeta del súper",
+      "QR",
+      "cuánto es",
+      "ticket",
+      "el chino",
+      "café",
+      "pasillo",
+      "al fondo",
+      "más chico",
+      "billete",
+      "cambio",
+      "encontré",
+      "no encontré"
+     ]
+    },
+    "B1": {
+     "setting_es": "En la caja, el yogur te sale más caro que el precio que viste en la góndola.",
+     "setting_en": "At the checkout, the yogurt costs more than the price you saw on the shelf.",
+     "role_es": "el cajero del supermercado",
+     "role_en": "the supermarket cashier",
+     "goals": [
+      {
+       "id": "notice",
+       "es": "Avisá que en la góndola decía otro precio",
+       "en": "Say that the shelf showed a different price"
+      },
+      {
+       "id": "check",
+       "es": "Pedí que revisen el precio",
+       "en": "Ask them to check the price"
+      },
+      {
+       "id": "decide",
+       "es": "Decidí si lo llevás o lo dejás",
+       "en": "Decide if you take it or leave it"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Perdón, en la góndola el yogur tenía otro precio.",
+       "en": "Sorry, the yogurt had a different price on the shelf.",
+       "audio": null
+      },
+      {
+       "es": "¿Podrías fijarte? Creo que estaba en oferta.",
+       "en": "Could you check? I think it was on sale.",
+       "audio": null
+      },
+      {
+       "es": "Si no es ese precio, prefiero dejarlo.",
+       "en": "If that is not the price, I'd rather leave it.",
+       "audio": null
+      },
+      {
+       "es": "Lo demás lo pago con débito.",
+       "en": "I'll pay for the rest with debit.",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "Bueno, son cuarenta y dos mil trescientos. ¿Débito o crédito?",
+      "en": "OK, that's forty-two thousand three hundred. Debit or credit?",
+      "audio": null
+     },
+     "keyterms": [
+      "súper",
+      "supermercado",
+      "la caja",
+      "efectivo",
+      "tarjeta",
+      "débito",
+      "crédito",
+      "cuotas",
+      "en un pago",
+      "bolsa",
+      "la tarjeta del súper",
+      "QR",
+      "cuánto es",
+      "ticket",
+      "góndola",
+      "yogur",
+      "otro precio",
+      "en oferta",
+      "fijarte",
+      "prefiero dejarlo",
+      "lo demás",
+      "dos por uno",
+      "cuarenta y dos mil"
+     ]
+    }
+   }
+  },
+  {
    "id": "depto",
    "title_es": "Problema en el depto",
    "title_en": "Trouble at the apartment",
    "versions": {
+    "A2": {
+     "setting_es": "No hay agua caliente en tu depto y llamás al dueño.",
+     "setting_en": "There is no hot water in your apartment and you call your landlord.",
+     "role_es": "el dueño del departamento que alquilás",
+     "role_en": "the owner of the apartment you rent",
+     "goals": [
+      {
+       "id": "problem",
+       "es": "Contá cuál es el problema",
+       "en": "Say what the problem is"
+      },
+      {
+       "id": "since",
+       "es": "Decí desde cuándo pasa",
+       "en": "Say since when it has been happening"
+      },
+      {
+       "id": "when",
+       "es": "Preguntá cuándo puede venir alguien",
+       "en": "Ask when someone can come"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "No hay agua caliente en el depto.",
+       "en": "There's no hot water in the apartment.",
+       "audio": null
+      },
+      {
+       "es": "El calefón no anda desde ayer.",
+       "en": "The water heater hasn't worked since yesterday.",
+       "audio": null
+      },
+      {
+       "es": "¿Cuándo puede venir alguien a arreglarlo?",
+       "en": "When can someone come to fix it?",
+       "audio": null
+      },
+      {
+       "es": "Mañana a la mañana estoy en casa.",
+       "en": "Tomorrow morning I'm at home.",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "Hola, ¿cómo andás? ¿Pasó algo con el depto?",
+      "en": "Hi, how are you? Is something wrong with the apartment?",
+      "audio": null
+     },
+     "keyterms": [
+      "pérdida",
+      "pileta",
+      "canilla",
+      "gotea",
+      "plomero",
+      "cocina",
+      "depto",
+      "departamento",
+      "dueño",
+      "alquiler",
+      "podrías",
+      "mañana",
+      "WhatsApp",
+      "agua caliente",
+      "calefón",
+      "termotanque",
+      "no anda",
+      "desde ayer",
+      "arreglar",
+      "gasista",
+      "a la mañana"
+     ]
+    },
     "B1": {
      "setting_es": "Hay una pérdida de agua en tu cocina y llamás al dueño del departamento.",
      "setting_en": "There's a water leak in your kitchen and you call your landlord.",
@@ -2371,7 +3264,7 @@
      ],
      "opener": {
       "es": "Hola, ¿cómo andás? ¿Pasó algo con el depto?",
-      "en": "Hi, how are you? Something up with the apartment?",
+      "en": "Hi, how are you? Is something wrong with the apartment?",
       "audio": null
      },
      "keyterms": [
@@ -2397,6 +3290,78 @@
    "title_es": "Devolver una compra",
    "title_en": "Returning something",
    "versions": {
+    "A2": {
+     "setting_es": "Ayer compraste una remera, te queda chica y querés cambiarla por otro talle.",
+     "setting_en": "Yesterday you bought a T-shirt. It is too small and you want to change it for another size.",
+     "role_es": "el vendedor del negocio",
+     "role_en": "the shop assistant",
+     "goals": [
+      {
+       "id": "explain",
+       "es": "Explicá que la remera te queda chica",
+       "en": "Explain that the T-shirt is too small for you"
+      },
+      {
+       "id": "swap",
+       "es": "Pedí cambiarla por un talle más grande",
+       "en": "Ask to change it for a bigger size"
+      },
+      {
+       "id": "color",
+       "es": "Preguntá si la tienen en otro color",
+       "en": "Ask if they have it in another color"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Compré esta remera ayer y me queda chica.",
+       "en": "I bought this T-shirt yesterday and it's too small for me.",
+       "audio": null
+      },
+      {
+       "es": "¿La puedo cambiar por un talle más grande?",
+       "en": "Can I change it for a bigger size?",
+       "audio": null
+      },
+      {
+       "es": "Acá tengo el ticket.",
+       "en": "I have the receipt here.",
+       "audio": null
+      },
+      {
+       "es": "¿La tenés en otro color?",
+       "en": "Do you have it in another color?",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¡Hola! ¿Te puedo ayudar con algo?",
+      "en": "Hi! Can I help you with something?",
+      "audio": null
+     },
+     "keyterms": [
+      "auriculares",
+      "ticket",
+      "cambio",
+      "devolución",
+      "devolver",
+      "garantía",
+      "no andan",
+      "no funcionan",
+      "plata",
+      "la semana pasada",
+      "compré",
+      "preferiría",
+      "remera",
+      "talle",
+      "me queda chica",
+      "más grande",
+      "cambiar",
+      "otro color",
+      "probador",
+      "ayer"
+     ]
+    },
     "B1": {
      "setting_es": "Compraste unos auriculares hace una semana y ya no andan.",
      "setting_en": "You bought headphones a week ago and they've already stopped working.",
@@ -2468,6 +3433,78 @@
    "title_es": "En la peluquería",
    "title_en": "At the hairdresser's",
    "versions": {
+    "A2": {
+     "setting_es": "Entrás sin turno a una peluquería de barrio para un corte simple.",
+     "setting_en": "You walk into a neighborhood hairdresser without an appointment for a simple haircut.",
+     "role_es": "el peluquero",
+     "role_en": "the hairdresser",
+     "goals": [
+      {
+       "id": "cut",
+       "es": "Decí cuánto querés que te corte",
+       "en": "Say how much you want him to cut"
+      },
+      {
+       "id": "price",
+       "es": "Preguntá cuánto sale el corte",
+       "en": "Ask how much the haircut costs"
+      },
+      {
+       "id": "pay",
+       "es": "Preguntá si podés pagar con Mercado Pago",
+       "en": "Ask if you can pay with Mercado Pago"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Cortame solo un poco, por favor.",
+       "en": "Cut just a little, please.",
+       "audio": null
+      },
+      {
+       "es": "A los costados, más corto.",
+       "en": "Shorter on the sides.",
+       "audio": null
+      },
+      {
+       "es": "¿Cuánto sale el corte?",
+       "en": "How much is the haircut?",
+       "audio": null
+      },
+      {
+       "es": "¿Te puedo pagar con Mercado Pago?",
+       "en": "Can I pay you with Mercado Pago?",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¡Hola! Sentate acá. ¿Te corto mucho o poco?",
+      "en": "Hi! Sit here. Do you want me to cut a lot or a little?",
+      "audio": null
+     },
+     "keyterms": [
+      "corte",
+      "cortar",
+      "costados",
+      "arriba",
+      "atrás",
+      "flequillo",
+      "largo",
+      "corto",
+      "barba",
+      "peluquería",
+      "que me cortes",
+      "que quede",
+      "cortame",
+      "un poco",
+      "más corto",
+      "cuánto sale",
+      "Mercado Pago",
+      "turno",
+      "mucho o poco",
+      "así está bien"
+     ]
+    },
     "B1": {
      "setting_es": "Vas a una peluquería de barrio y tenés que explicar qué corte querés.",
      "setting_en": "You go to a neighborhood hairdresser and have to explain the cut you want.",
@@ -2539,6 +3576,76 @@
    "title_es": "Cena con la familia",
    "title_en": "Dinner with the family",
    "versions": {
+    "A2": {
+     "setting_es": "Un amigo te invita a cenar con su familia y su papá te saca charla.",
+     "setting_en": "A friend invites you to dinner with his family, and his dad starts chatting with you.",
+     "role_es": "el papá de tu amigo, que es muy charlatán",
+     "role_en": "your friend's dad, a big talker",
+     "goals": [
+      {
+       "id": "thank",
+       "es": "Agradecé la invitación",
+       "en": "Thank them for inviting you"
+      },
+      {
+       "id": "food",
+       "es": "Decí que la comida está rica",
+       "en": "Say that the food is good"
+      },
+      {
+       "id": "why",
+       "es": "Contá por qué viniste a Buenos Aires",
+       "en": "Say why you came to Buenos Aires"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "Muchas gracias por la invitación.",
+       "en": "Thank you very much for the invitation.",
+       "audio": null
+      },
+      {
+       "es": "Traje un vino para compartir.",
+       "en": "I brought some wine to share.",
+       "audio": null
+      },
+      {
+       "es": "Las milanesas están riquísimas.",
+       "en": "The milanesas are delicious.",
+       "audio": null
+      },
+      {
+       "es": "Vine a Buenos Aires para aprender español.",
+       "en": "I came to Buenos Aires to learn Spanish.",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "¡Hola! Pasá, pasá, estás en tu casa. ¿Llegaste bien?",
+      "en": "Hi! Come in, come in, make yourself at home. Did you find us okay?",
+      "audio": null
+     },
+     "keyterms": [
+      "gracias",
+      "invitación",
+      "invitarme",
+      "riquísimo",
+      "buenísimo",
+      "milanesas",
+      "vino",
+      "postre",
+      "planes",
+      "me gustaría",
+      "quedarme",
+      "familia",
+      "llegué bien",
+      "traje",
+      "riquísimas",
+      "vine",
+      "aprender español",
+      "me gusta mucho"
+     ]
+    },
     "B1": {
      "setting_es": "Un amigo te invita a cenar con su familia y su papá te saca charla.",
      "setting_en": "A friend invites you to dinner with his family, and his dad starts chatting with you.",
@@ -2752,6 +3859,78 @@
    "title_es": "Alquilar un depto",
    "title_en": "Renting an apartment",
    "versions": {
+    "A2": {
+     "setting_es": "Visitás un depto en Villa Crespo con el dueño y querés saber lo básico.",
+     "setting_en": "You visit an apartment in Villa Crespo with the owner and want to know the basic facts.",
+     "role_es": "el dueño del departamento",
+     "role_en": "the owner of the apartment",
+     "goals": [
+      {
+       "id": "price",
+       "es": "Preguntá cuánto sale el alquiler por mes",
+       "en": "Ask how much the rent is per month"
+      },
+      {
+       "id": "fees",
+       "es": "Preguntá si las expensas están incluidas",
+       "en": "Ask if the building fees are included"
+      },
+      {
+       "id": "move",
+       "es": "Preguntá cuándo te podés mudar",
+       "en": "Ask when you can move in"
+      }
+     ],
+     "key_phrases": [
+      {
+       "es": "¿Cuánto sale el alquiler por mes?",
+       "en": "How much is the rent per month?",
+       "audio": null
+      },
+      {
+       "es": "¿Las expensas están incluidas en el precio?",
+       "en": "Are the building fees included in the price?",
+       "audio": null
+      },
+      {
+       "es": "¿Tiene lavarropas?",
+       "en": "Does it have a washing machine?",
+       "audio": null
+      },
+      {
+       "es": "Me gusta mucho. ¿Cuándo me puedo mudar?",
+       "en": "I like it a lot. When can I move in?",
+       "audio": null
+      }
+     ],
+     "opener": {
+      "es": "Bueno, pasá. Este es el living. ¿Te gusta?",
+      "en": "OK, come in. This is the living room. Do you like it?",
+      "audio": null
+     },
+     "keyterms": [
+      "alquiler",
+      "expensas",
+      "contrato",
+      "depósito",
+      "garantía",
+      "presupuesto",
+      "por adelantado",
+      "dos años",
+      "balcón",
+      "Villa Crespo",
+      "me lo dejarías",
+      "living",
+      "por mes",
+      "incluidas",
+      "lavarropas",
+      "mudar",
+      "me puedo mudar",
+      "ambientes",
+      "me gusta mucho",
+      "cuándo"
+     ]
+    },
     "B2": {
      "setting_es": "Te gustó un depto en Villa Crespo, pero el precio es alto y querés negociar.",
      "setting_en": "You like an apartment in Villa Crespo, but the rent is high and you want to negotiate.",
@@ -2853,12 +4032,12 @@
       },
       {
        "es": "En eso te doy la razón.",
-       "en": "I'll give you that.",
+       "en": "You're right about that.",
        "audio": null
       },
       {
        "es": "Bueno, pero no me vas a negar que el viaje es un garrón.",
-       "en": "Well, you can't deny the commute is a drag.",
+       "en": "Well, you can't deny the commute is really annoying.",
        "audio": null
       },
       {
@@ -2917,12 +4096,12 @@
     },
     {
      "es": "Che, ¿qué hacés los fines de semana?",
-     "en": "Hey, what do you do at the weekend?",
+     "en": "Hey, what do you do on the weekend?",
      "audio": "hablar/f3c744d1686bf675a46c.mp3"
     },
     {
      "es": "Che, ¿cómo es tu barrio? ¿Te gusta?",
-     "en": "Hey, what's your neighbourhood like? Do you like it?",
+     "en": "Hey, what's your neighborhood like? Do you like it?",
      "audio": "hablar/7ae2f5e508801213e788.mp3"
     }
    ],
@@ -2934,7 +4113,7 @@
     },
     {
      "es": "Che, ¿alguna vez viajaste a otro país? ¿Adónde fuiste?",
-     "en": "Hey, have you ever travelled abroad? Where did you go?",
+     "en": "Hey, have you ever traveled abroad? Where did you go?",
      "audio": "hablar/e8663230d8c8fe2103e9.mp3"
     },
     {
@@ -2962,37 +4141,58 @@
    ]
   },
   "culture": {
-   "mate": {
-    "es": "Che, ¿alguna vez tomaste mate? ¿Te gustó?",
-    "en": "Hey, have you ever had mate? Did you like it?",
-    "audio": "hablar/282b261023df6a313d37.mp3",
+   "costumbres": {
+    "es": "¿Qué costumbre argentina te sorprendió más? ¿El beso para saludar?",
+    "en": "Which Argentine custom surprised you most? The kiss when you say hello?",
+    "audio": "hablar/5d983a66ef023aef01d4.mp3",
     "keyterms": [
-     "mate",
-     "yerba",
-     "bombilla",
-     "termo",
-     "cebar",
-     "cebador",
-     "amargo",
-     "dulce",
-     "la ronda",
-     "pasame el mate"
+     "beso",
+     "saludar",
+     "llegar tarde",
+     "cenar tarde",
+     "sobremesa",
+     "juntada",
+     "despedirse",
+     "Navidad",
+     "feriado"
     ]
    },
-   "asado": {
-    "es": "¿Fuiste alguna vez a un asado? ¿Qué es lo que más te gusta comer?",
-    "en": "Have you ever been to an asado? What do you like eating most?",
-    "audio": "hablar/3ae08308bfc06ff8cc4d.mp3",
+   "buenos-aires": {
+    "es": "¿Conocés Buenos Aires? ¿Qué barrio te gusta más?",
+    "en": "Do you know Buenos Aires? Which barrio do you like best?",
+    "audio": "hablar/fb7558450e63fc81056d.mp3",
     "keyterms": [
-     "asado",
-     "asador",
-     "parrilla",
-     "choripán",
-     "vacío",
-     "provoleta",
-     "chimichurri",
-     "achuras",
-     "un aplauso para el asador"
+     "Buenos Aires",
+     "porteño",
+     "porteña",
+     "barrio",
+     "Palermo",
+     "San Telmo",
+     "La Boca",
+     "Recoleta",
+     "bondi",
+     "subte",
+     "tacho",
+     "Obelisco"
+    ]
+   },
+   "habla": {
+    "es": "¿Qué te parece el voseo? ¿Te cuesta usar vos?",
+    "en": "What do you think of voseo? Is using vos hard for you?",
+    "audio": "hablar/c58c30aa1871f965ae3f.mp3",
+    "keyterms": [
+     "vos",
+     "voseo",
+     "che",
+     "lunfardo",
+     "posta",
+     "re",
+     "sos",
+     "tenés",
+     "querés",
+     "podés",
+     "vesre",
+     "boludo"
     ]
    },
    "comida": {
@@ -3027,9 +4227,42 @@
      "bola de fraile"
     ]
    },
+   "mate": {
+    "es": "Che, ¿alguna vez tomaste mate? ¿Te gustó?",
+    "en": "Hey, have you ever had mate? Did you like it?",
+    "audio": "hablar/282b261023df6a313d37.mp3",
+    "keyterms": [
+     "mate",
+     "yerba",
+     "bombilla",
+     "termo",
+     "cebar",
+     "cebador",
+     "amargo",
+     "dulce",
+     "la ronda",
+     "pasame el mate"
+    ]
+   },
+   "asado": {
+    "es": "¿Fuiste alguna vez a un asado? ¿Qué es lo que más te gusta comer?",
+    "en": "Have you ever been to an asado? What do you like eating most?",
+    "audio": "hablar/3ae08308bfc06ff8cc4d.mp3",
+    "keyterms": [
+     "asado",
+     "asador",
+     "parrilla",
+     "choripán",
+     "vacío",
+     "provoleta",
+     "chimichurri",
+     "achuras",
+     "un aplauso para el asador"
+    ]
+   },
    "futbol": {
     "es": "¿Te gusta el fútbol? ¿Mirás los partidos?",
-    "en": "Do you like football? Do you watch the matches?",
+    "en": "Do you like soccer? Do you watch the games?",
     "audio": "hablar/5ef1823bddf668657ace.mp3",
     "keyterms": [
      "fútbol",
@@ -3043,57 +4276,6 @@
      "Maradona",
      "la Selección",
      "el Mundial"
-    ]
-   },
-   "tango": {
-    "es": "¿Alguna vez escuchaste tango? ¿Qué te parece?",
-    "en": "Have you ever listened to tango? What do you think of it?",
-    "audio": "hablar/784b413d0d8741cec135.mp3",
-    "keyterms": [
-     "tango",
-     "milonga",
-     "Gardel",
-     "bandoneón",
-     "Piazzolla",
-     "bailar",
-     "orquesta",
-     "arrabal"
-    ]
-   },
-   "musica": {
-    "es": "¿Qué música escuchás? ¿Conocés algo de rock nacional?",
-    "en": "What music do you listen to? Do you know any rock nacional?",
-    "audio": "hablar/10aaad40ad4445e636fc.mp3",
-    "keyterms": [
-     "rock nacional",
-     "cumbia",
-     "cuarteto",
-     "folklore",
-     "trap",
-     "recital",
-     "Soda Stereo",
-     "Charly García",
-     "Bizarrap",
-     "peña"
-    ]
-   },
-   "habla": {
-    "es": "¿Qué te parece el voseo? ¿Te cuesta usar vos?",
-    "en": "What do you think of voseo? Is using vos hard for you?",
-    "audio": "hablar/c58c30aa1871f965ae3f.mp3",
-    "keyterms": [
-     "vos",
-     "voseo",
-     "che",
-     "lunfardo",
-     "posta",
-     "re",
-     "sos",
-     "tenés",
-     "querés",
-     "podés",
-     "vesre",
-     "boludo"
     ]
    },
    "dichos": {
@@ -3127,39 +4309,36 @@
      "la puta madre"
     ]
    },
-   "costumbres": {
-    "es": "¿Qué costumbre argentina te sorprendió más? ¿El beso para saludar?",
-    "en": "Which Argentine custom surprised you most? The kiss when you say hello?",
-    "audio": "hablar/5d983a66ef023aef01d4.mp3",
+   "musica": {
+    "es": "¿Qué música escuchás? ¿Conocés algo de rock nacional?",
+    "en": "What music do you listen to? Do you know any rock nacional?",
+    "audio": "hablar/10aaad40ad4445e636fc.mp3",
     "keyterms": [
-     "beso",
-     "saludar",
-     "llegar tarde",
-     "cenar tarde",
-     "sobremesa",
-     "juntada",
-     "despedirse",
-     "Navidad",
-     "feriado"
+     "rock nacional",
+     "cumbia",
+     "cuarteto",
+     "folklore",
+     "trap",
+     "recital",
+     "Soda Stereo",
+     "Charly García",
+     "Bizarrap",
+     "peña"
     ]
    },
-   "buenos-aires": {
-    "es": "¿Conocés Buenos Aires? ¿Qué barrio te gusta más?",
-    "en": "Do you know Buenos Aires? Which barrio do you like best?",
-    "audio": "hablar/fb7558450e63fc81056d.mp3",
+   "tango": {
+    "es": "¿Alguna vez escuchaste tango? ¿Qué te parece?",
+    "en": "Have you ever listened to tango? What do you think of it?",
+    "audio": "hablar/784b413d0d8741cec135.mp3",
     "keyterms": [
-     "Buenos Aires",
-     "porteño",
-     "porteña",
-     "barrio",
-     "Palermo",
-     "San Telmo",
-     "La Boca",
-     "Recoleta",
-     "bondi",
-     "subte",
-     "tacho",
-     "Obelisco"
+     "tango",
+     "milonga",
+     "Gardel",
+     "bandoneón",
+     "Piazzolla",
+     "bailar",
+     "orquesta",
+     "arrabal"
     ]
    },
    "regiones": {

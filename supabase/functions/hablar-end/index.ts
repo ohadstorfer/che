@@ -103,7 +103,7 @@ Deno.serve(async (req) => {
       "Conversation:",
       ...turns.map((t) => `${t.role === "tomas" ? "Pancho" : "Learner"}: ${t.text}`),
       corrections.length
-        ? `Corrections shown to the learner:\n${corrections.map((c) => `- "${c.said}" → "${c.corrected}" (natural: "${c.better}")`).join("\n")}`
+        ? `Corrections shown to the learner:\n${corrections.map((c) => `- "${c.said}" → "${c.corrected}"${c.better ? ` (natural: "${c.better}")` : ""}`).join("\n")}`
         : "The learner made no corrected mistakes.",
     ].join("\n");
     try {

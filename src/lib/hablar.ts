@@ -137,13 +137,24 @@ export interface StartResult {
 /** The feedback event on a learner turn (§3.2). */
 export interface Feedback {
   has_error: boolean;
+  /** What she is told. Missing on turns stored before it existed: read it with `verdictOf`. */
+  verdict?: Verdict;
   severity?: 'none' | 'meaning' | 'target' | 'minor';
   corrected: string;
   /** Shape not pinned down yet; the diff is computed client-side from `text` vs `corrected`. */
   spans?: { from: string; to: string }[];
   why_en: string;
   better: string;
+  /** Plain English for `better`. */
+  better_en?: string;
 }
+
+/** A tick, the fix, the Argentine way to say it ("note"), or nothing (a garbled line). */
+export type Verdict = 'correct' | 'error' | 'note' | 'unclear';
+const VERDICTS: Verdict[] = ['correct', 'error', 'note', 'unclear'];
+
+export const verdictOf = (fb: Pick<Feedback, 'has_error' | 'verdict'>): Verdict =>
+  fb.has_error ? 'error' : fb.verdict ?? 'correct';
 
 export type DiloStatus = 'ok' | 'almost' | 'again';
 
@@ -196,7 +207,7 @@ export interface ReplyHandlers {
   /** The line as the server stored it (speak only): it opens the stream. */
   onTranscript?: (text: string) => void;
   /** The verdict on her line, ahead of the full feedback: right or wrong, and the fixed line. */
-  onCorrection?: (verdict: { has_error: boolean; corrected: string }) => void;
+  onCorrection?: (verdict: { has_error: boolean; verdict?: Verdict; corrected: string }) => void;
   onText: (seq: number, delta: string) => void;
   /** The rioplatense guard rewrote part of an already-shown sentence: replace `from` with `to`. */
   onTextFix: (seq: number, from: string, to: string) => void;
@@ -432,7 +443,11 @@ async function streamTurn(body: string | FormData, on: ReplyHandlers, signal?: A
         on.onTranscript?.(String(payload.text ?? ''));
         break;
       case 'correction':
-        on.onCorrection?.({ has_error: payload.has_error === true, corrected: String(payload.corrected ?? '') });
+        on.onCorrection?.({
+          has_error: payload.has_error === true,
+          verdict: VERDICTS.find((v) => v === payload.verdict),
+          corrected: String(payload.corrected ?? ''),
+        });
         break;
       case 'text':
         on.onText(Number(payload.seq ?? 0), String(payload.delta ?? ''));
@@ -595,10 +610,17 @@ export function tomasAudioPath(userId: string, sessionId: string, userTurnId: st
 
 export const isToday = (c: ConversationRow) => c.local_date === localDateStr();
 
-/** The hard stop (Pancho usually closes around two minutes), plus whatever time the app spent in the background. */
-export const CHAT_SECONDS = 180;
+/**
+ * The hard stop by level, as the server's CLOCK has it (supabase/functions/_shared/hablar.ts):
+ * four minutes for A1 and A2, three above. A chat just started counts down to the server's own
+ * `deadline_at`; this is for the brief, and for a chat loaded back from the tables.
+ */
+export const chatSeconds = (level: string | null | undefined) => (level === 'A1' || level === 'A2' ? 240 : 180);
+/** What the brief promises: Pancho usually closes about a minute before the hard stop. */
+export const chatLength = (level: string | null | undefined) => `About ${chatSeconds(level) / 60 - 1} min`;
+/** The hard stop, plus whatever time the clock was stopped (the app in the background, Pancho's turn). */
 export const deadlineOf = (c: ConversationRow) =>
-  new Date(new Date(c.started_at).getTime() + (CHAT_SECONDS + (c.paused_seconds ?? 0)) * 1000).toISOString();
+  new Date(new Date(c.started_at).getTime() + (chatSeconds(c.level) + (c.paused_seconds ?? 0)) * 1000).toISOString();
 
 /** A human title for a conversation, for History and the summary header. */
 export function conversationTitle(kind: HablarKind, topicId: string | null | undefined, title?: string | null): string {

@@ -294,6 +294,16 @@ export function useRound(userId: string | undefined) {
 
   const hasState = (formId: string) => liveStates.current.has(formId);
 
+  /** Items that join the round after it began — the next stage of an adaptive
+   *  test. They are filler, like every test question: logged, never scheduled. */
+  const extend = useCallback((items: QueueItem[]) => {
+    for (const it of items) {
+      if (it.state) liveStates.current.set(it.form.id, it.state);
+      for (const s of it.groupStates ?? []) liveStates.current.set(s.form_id, s);
+      for (const form of formsOf(it)) fillerForms.current.add(form.id);
+    }
+  }, []);
+
   // Commits SM-2 for a form once nothing else in the queue drills it.
   const commitIfDone = (formId: string) => {
     if (!userId) return;
@@ -510,6 +520,7 @@ export function useRound(userId: string | undefined) {
 
   return {
     begin,
+    extend,
     shown,
     createState,
     hasState,

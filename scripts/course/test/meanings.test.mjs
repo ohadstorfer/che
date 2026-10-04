@@ -161,8 +161,23 @@ test('a word is never its own meaning while its gloss has a real translation', (
   assert.equal(selfGlossed(cortado), true);
 });
 
-// ---------------------------------------------------------------------------
-// The popover: what a tapped word lists.
+test("a sentence's article does not go on the word's card", () => {
+  // She met "Y pan, por favor" ("And some bread, please") most, and the
+  // exercise asked what `pan` means with "some bread" as the answer.
+  const pan = form('pa', 'pan', 'bread', 1, { pos: 'noun' });
+  const turista = form('tu', 'turista', 'tourist', 1, { pos: 'noun' });
+  const sentences = [
+    sentence('s1', [{ surface: 'pan,', form_ids: ['pa'], gloss: 'some bread' }], 5, 'pa'),
+    sentence('s2', [{ surface: 'pan.', form_ids: ['pa'], gloss: 'bread' }], 0, 'pa'),
+    sentence('s3', [{ surface: 'turista.', form_ids: ['tu'], gloss: 'a tourist' }], 3, 'tu'),
+  ];
+  const out = byId(withMeanings([pan, turista], sentences));
+  assert.equal(out.get('pa').meaning_en, 'bread');
+  assert.equal(out.get('tu').meaning_en, 'tourist');
+  // Still what the sentences say, so typing it is still right.
+  assert.deepEqual(out.get('pa').meanings_en, ['some bread', 'bread']);
+});
+
 // ---------------------------------------------------------------------------
 
 const rows = (form, gloss_en, inContext) => popoverMeanings({ form, gloss_en }, inContext);

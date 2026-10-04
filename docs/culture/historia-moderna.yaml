@@ -13,7 +13,7 @@ classes:
     summary: "The man who still splits family asados, and the woman millions mourned"
     pages:
       - type: card
-        text: "For half a century, the army overthrew governments again and again. The good news: since 1983 Argentina has had its longest run of democracy ever, and most Argentines guard it fiercely."
+        text: "From 1930 to 1983, the army overthrew governments again and again. The good news: since 1983 Argentina has had its longest run of democracy ever, and most Argentines guard it fiercely."
       - type: card
         text: "**Juan Domingo Perón** was a colonel in the government of the 1943 coup. As labor secretary he backed the unions: pensions, paid holidays, labor courts. Many workers felt they finally had a friend up high."
       - type: choice
@@ -23,13 +23,13 @@ classes:
           - "A secret deal with the navy"
           - "A ruling from the Supreme Court"
         correct: 0
-        explain: "On **17 de octubre**, workers marched into the square and demanded him back. Some cooled their tired feet in the fountains, an image that became legend."
+        explain: "On **17 de octubre**, workers from the factory suburbs filled **Plaza de Mayo** and demanded him back. Some cooled their tired feet in the fountains, an image that became legend."
       - type: card
-        text: "That night Perón spoke from the balcony of the Casa Rosada. Peronists still celebrate 17 October as the **Día de la Lealtad**, Loyalty Day."
+        text: "That night Perón spoke from the balcony of the Casa Rosada. Peronists still celebrate 17 October as the **Día de la Lealtad**, Loyalty Day. In 1946 he was elected president, and re-elected in 1951."
       - type: card
-        text: "**Evita**, a young actress from a small town, married Perón. Her foundation built hospitals and schools, and she pushed the law that gave women the vote. She died at 33. Millions queued for days to say goodbye."
+        text: "**Evita**, a young actress from a small town, married Perón. Her foundation built hospitals and schools, and she pushed the 1947 law that gave women the vote. She died in 1952, aged 33. Millions queued for days to say goodbye."
       - type: card
-        text: "Opponents sneered at Perón's supporters as **descamisados**, the shirtless ones. Perón and Evita turned the insult into a badge of pride."
+        text: "Opponents mocked Perón's supporters as **descamisados**, the shirtless ones. Perón and Evita turned the insult into a badge of pride."
       - type: choice
         prompt: "Peronists have an animal nickname for anti-Peronists. Which animal?"
         options:
@@ -37,12 +37,14 @@ classes:
           - "Gallina"
           - "Cuervo"
         correct: 0
-        explain: "**Gorila**. It's a jab, so keep it for when you know the room. Anti-Peronists have their own names for Peronists, too."
+        explain: "**Gorila**. It's an insult, so don't use it unless you know the people well. Anti-Peronists have their own names for Peronists, too."
       - type: card
-        text: "A 1955 coup threw Perón out and banned Peronism for almost two decades. He came back, won again and died in office. For fans, social justice. For critics, censorship and a personality cult."
+        text: "In 1955 a coup threw Perón out, and Peronism was banned for almost two decades. He came back in 1973, won a third time and died in office in 1974. His widow and vice-president, **Isabel Perón**, took over."
+      - type: card
+        text: "Argentines still disagree about him. Supporters remember workers' rights, dignity and the vote for women. Critics remember jailed opponents, a controlled press and a cult of the leader."
       - type: card
         chip: "Pro tip"
-        text: "The divide is **la grieta**, the crack, and it runs right through the family asado. Plenty of families have a no-politics rule at Sunday lunch. Respect it."
+        text: "Today the political divide is called **la grieta**, the crack. The word is from the 2010s, about the Kirchner governments and their opponents, but the split is much older. Many families ban politics at Sunday lunch. Respect it."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -51,11 +53,11 @@ classes:
     summary: "1976–1983: the disappeared, the Madres and Abuelas, and “Nunca más”"
     pages:
       - type: card
-        text: "After Perón died came chaos: guerrilla attacks, far-right death squads, a failing economy. On **24 de marzo de 1976** a military junta led by **Jorge Rafael Videla** seized power."
+        text: "On **24 de marzo de 1976** a military junta led by **Jorge Rafael Videla** overthrew President Isabel Perón. The country was in crisis: guerrilla attacks, right-wing death squads, very high inflation. What followed was far worse."
       - type: card
-        text: "The regime hunted anyone it called “subversive”: guerrillas, but also union delegates, students, lawyers, teenagers. People were kidnapped, taken to secret centers like the **ESMA**, tortured, and most were murdered."
+        text: "The regime hunted anyone it called “subversive”: guerrillas, but also union delegates, students, lawyers, teenagers. People were kidnapped, taken to secret centers like the **ESMA**, tortured, and thousands were murdered."
       - type: card
-        text: "Families got no body and no answer. The victims became **los desaparecidos**, the disappeared. Human rights groups speak of 30,000. The regime destroyed its records, so a full count may never exist."
+        text: "Families got no body and no answer. The victims are **los desaparecidos**, the disappeared. In 1984 the **CONADEP** commission documented about 9,000 cases. Human rights groups speak of 30,000. The regime hid its records, and the number is still disputed."
       - type: choice
         prompt: "In 1977, mothers of the disappeared met in Plaza de Mayo. Gatherings were banned, and police told them to move along. What did they do?"
         options:
@@ -63,11 +65,11 @@ classes:
           - "Moved their meetings into a church nearby"
           - "Went home and wrote letters abroad"
         correct: 0
-        explain: "Standing still was a gathering. Walking wasn't. So they walked, with white headscarves on their heads."
+        explain: "Standing still was a gathering. Walking wasn't. So they walked in circles around the monument. The white headscarf came a few months later: at first it was a baby's cloth diaper."
       - type: card
-        text: "They're the **Madres de Plaza de Mayo**, and they still walk there on Thursday afternoons. Their white **pañuelo** is painted on the ground around the square's monument."
+        text: "They're the **Madres de Plaza de Mayo**, and the walk still happens every Thursday afternoon, now with the last few Madres and many supporters. Their white **pañuelo** is painted on the ground around the square's monument."
       - type: card
-        text: "Babies born to prisoners were handed to other families under false names. The **Abuelas de Plaza de Mayo**, the grandmothers, have searched for them ever since."
+        text: "Babies born to prisoners were handed to other families under false names. The **Abuelas de Plaza de Mayo**, the grandmothers, think there were about 500. They have searched for them ever since, and found about 140."
       - type: choice
         prompt: "With the parents gone, how could the Abuelas prove a young person was their grandchild?"
         options:
@@ -77,7 +79,9 @@ classes:
         correct: 0
         explain: "They helped push scientists to create a “grandparent” DNA test. Each **nieto restituido**, a grandchild who gets their identity back, makes national news."
       - type: card
-        text: "In 1985 civilian judges put the junta leaders on trial. The prosecutor closed with **“Señores jueces: nunca más.”** Videla got life. The film *Argentina, 1985* tells that story."
+        text: "In 1985 civilian judges put the junta leaders on trial: the **Juicio a las Juntas**. Prosecutor **Julio Strassera** closed with **“Señores jueces: nunca más.”** Videla got life. The film *Argentina, 1985* tells that story."
+      - type: card
+        text: "It didn't end there. Laws from 1986–87 stopped most other trials, and in 1989–90 President Menem pardoned those convicted. In the 2000s the laws were struck down and trials began again. Over a thousand people have been convicted."
       - type: card
         text: "Every 24 March, the **Día de la Memoria**, hundreds of thousands march to Plaza de Mayo with photos of the disappeared: **Memoria, Verdad y Justicia**."
     vocabulary: []
@@ -88,7 +92,7 @@ classes:
     summary: "The 1982 war, the young soldiers, and a claim nearly every Argentine shares"
     pages:
       - type: card
-        text: "The **Islas Malvinas** sit in the South Atlantic, off Patagonia. Britain has held them since 1833 and Argentina has claimed them ever since. Here, always say **Malvinas**, never Falklands."
+        text: "The **Islas Malvinas** sit in the South Atlantic, off Patagonia. Britain has held them since 1833 and Argentina has claimed them ever since. The British call them the Falkland Islands. Here, always say **Malvinas**, never Falklands."
       - type: card
         text: "In 1982 the dictatorship faced a collapsing economy and growing protests. On **2 de abril** its troops landed on the islands, and crowds cheered in Plaza de Mayo. Britain sent a fleet."
       - type: choice
@@ -98,7 +102,7 @@ classes:
           - "Career soldiers with years of training"
           - "Volunteers who signed up after the landing"
         correct: 0
-        explain: "Most were **conscriptos** of 18 or 19, barely out of school, sent to freezing trenches, often underfed and badly equipped."
+        explain: "Most were **conscriptos** of 18 to 20, barely out of school. Argentines call them **los chicos de la guerra**. They were sent to freezing trenches, often underfed and badly equipped."
       - type: card
         text: "649 Argentines died. Almost half of them went down with one ship, the cruiser **General Belgrano**."
       - type: choice
@@ -108,11 +112,11 @@ classes:
           - "Nothing until it was over"
           - "Daily counts of the dead"
         correct: 0
-        explain: "Censored news and magazines kept saying **“estamos ganando”**, we're winning, almost until the surrender in June. The shock turned into fury, and the junta fell. Democracy came back in 1983."
+        explain: "Censored news and magazines kept saying **“estamos ganando”**, we're winning, almost until the surrender in June. The shock turned into fury. General **Galtieri**, the head of the junta, was out within days, and the weakened regime had to call elections. Democracy came back in 1983."
       - type: card
         text: "Today 2 April is a national holiday for the **ex combatientes** and **los caídos**, the veterans and the fallen. For years many veterans felt forgotten, and the wounds are still an open subject."
       - type: card
-        text: "You'll see **“Las Malvinas son argentinas”** on road signs, murals and buses. The claim is one of the few things almost everyone agrees on. The war is different: most see it as the dictatorship's doomed gamble."
+        text: "You'll see **“Las Malvinas son argentinas”** on road signs, murals and buses. The claim is one of the few things almost everyone agrees on. The war is different: most see it as a reckless bet by the dictatorship."
       - type: card
         chip: "Pro tip"
         text: "If it comes up, listen more than you argue. Plenty of Argentines have a relative or neighbor who fought there."
@@ -126,7 +130,7 @@ classes:
       - type: card
         text: "In 1983 democracy returned with **Raúl Alfonsín**. His promise is still quoted: **“con la democracia se come, se cura y se educa”**. With democracy, people eat, heal and learn."
       - type: card
-        text: "The economy didn't cooperate. By the end of the decade prices went wild: yearly inflation passed 3,000%. Supermarkets relabeled prices several times a day."
+        text: "The economy didn't cooperate. By 1989 prices went wild: inflation passed 3,000% in that one year. Supermarkets relabeled prices several times a day."
       - type: choice
         prompt: "It's 1989 and you just got paid. What's the smart move?"
         options:
@@ -136,21 +140,61 @@ classes:
         correct: 0
         explain: "Money lost value in your pocket by the hour. People ran to the supermarket on payday, a reflex some Argentines still have."
       - type: card
-        text: "In 1991 a law fixed it: **one peso = one dollar**, the **convertibilidad**. Inflation fell to almost zero. The decade brought cheap imports and cheap trips abroad."
+        text: "In 1991, under President **Carlos Menem**, a Peronist, a law tied the currency to the dollar: soon **one peso = one dollar**, the **convertibilidad**. Inflation fell to almost zero. Imports and trips abroad got cheap, and state companies were sold."
       - type: card
-        text: "The hangover came later: factories closed, unemployment passed 18%, debt piled up to keep the peg alive. That decade still splits dinner tables."
+        text: "The bill came later: factories closed, unemployment passed 18%, and the country borrowed more and more to keep one peso equal to one dollar. Argentines still argue about that decade."
       - type: card
-        text: "December 2001: people rushed to pull out their savings, so the government capped withdrawals. That's the **corralito**. The middle class hit the streets banging pots: the **cacerolazo**."
+        text: "December 2001: people rushed to pull out their savings, so the government capped withdrawals. That's the **corralito**. The middle class went out to the streets banging pots: the **cacerolazo**."
       - type: choice
-        prompt: "The protests brought down President De la Rúa, who fled the Casa Rosada by helicopter. How many presidents did Argentina have in about twelve days?"
+        prompt: "On 20 December President De la Rúa resigned and left the Casa Rosada by helicopter. Counting him, how many presidents did Argentina have in about twelve days?"
         options:
           - "Five"
           - "Two"
           - "Three"
         correct: 0
-        explain: "Five presidents came and went. The chant on every street was **“¡Que se vayan todos!”**: out with all of them."
+        explain: "Five: De la Rúa, Puerta, Rodríguez Saá, Camaño and Duhalde. The first resigned, the next three lasted only days, and Duhalde stayed until 2003. The chant on every street was **“¡Que se vayan todos!”**: out with all of them."
       - type: card
-        text: "Then the one-to-one peso ended, and the devaluation wiped out much of people's savings. A whole generation learned never to fully trust a bank again."
+        text: "Those days were violent too. On 19 December shops were looted and the government declared a state of siege. People went out anyway. In two days, 39 people were killed across the country, in the looting and the police repression."
+      - type: card
+        text: "In 2002 the one-to-one peso ended. Dollar savings were turned into pesos by force, and more than half the country fell below the poverty line. A whole generation learned never to fully trust a bank again."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "de-2003-a-hoy"
+    title: "From 2003 to today"
+    summary: "Kirchner, Macri, Fernández, Milei, and how to stay out of the argument"
+    pages:
+      - type: card
+        text: "In 2003 a Peronist governor from Patagonia, **Néstor Kirchner**, became president. His wife, **Cristina Fernández de Kirchner**, followed him from 2007 to 2015. Their movement is **kirchnerismo**. In headlines, they're **los K**."
+      - type: card
+        text: "Supporters remember jobs and wages coming back, wider pensions and child benefits, and new trials for the dictatorship's crimes. Critics point to rising inflation, official statistics few people trusted, currency controls and corruption cases."
+      - type: choice
+        prompt: "In 2015 the country voted for change and elected **Mauricio Macri**. What had he run before he ran the country?"
+        options:
+          - "The football club Boca Juniors"
+          - "A late-night talk show on TV"
+          - "The national football team"
+        correct: 0
+        explain: "Macri, a businessman, was president of Boca and then mayor of Buenos Aires. He governed from 2015 to 2019."
+      - type: card
+        text: "Supporters of Macri value statistics people could trust again, more open trade and new roads and public works. Critics point to a record loan from the IMF, and to inflation and poverty that were higher when he left."
+      - type: card
+        text: "In 2019 Peronism returned with **Alberto Fernández** (2019–2023), and Cristina Kirchner as vice-president. Then came the pandemic. Supporters value the emergency aid and the vaccines. Critics point to a very long lockdown and inflation that passed 200% a year."
+      - type: choice
+        prompt: "In the 2023 campaign, the economist **Javier Milei** carried one object at his rallies. Which one?"
+        options:
+          - "A chainsaw"
+          - "A broom"
+          - "A giant pair of scissors"
+        correct: 0
+        explain: "**La motosierra**, the chainsaw, was his picture of what he would do to state spending. Milei calls himself a **libertario**, a libertarian. He has been president since December 2023."
+      - type: card
+        text: "Supporters of Milei point to much lower inflation, a state that no longer spends more than it earns, and fewer currency controls. Critics point to cuts in pensions, universities and public works, and a hard first year for many families."
+      - type: card
+        text: "The divide between the two camps is **la grieta**, the crack, and it runs through families and groups of friends. Whoever governs, two subjects never leave the table: prices and the dollar."
+      - type: card
+        chip: "Pro tip"
+        text: "As a visitor, you don't need to pick a side. Ask **“¿Vos qué pensás?”** What do you think? Then listen. You'll learn a lot."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -161,17 +205,17 @@ classes:
       - type: card
         text: "After all that, Argentines live by one rule: pesos to spend, dollars to save. Plenty of savings sit at home in cash, **bajo el colchón**, under the mattress."
       - type: choice
-        prompt: "You're buying a flat in Palermo. How is it usually paid for?"
+        prompt: "You're buying an apartment in Palermo. How is it usually paid for?"
         options:
           - "In US dollars, often counted in cash"
           - "In pesos, by bank transfer"
-          - "In monthly peso instalments"
+          - "In monthly peso installments"
         correct: 0
-        explain: "Flats and cars are priced in dollars (**U$S**), and it's common for the notes to be counted on the spot at signing."
+        explain: "Apartments are priced in dollars (**U$S**), and it's common for the notes to be counted on the spot at signing."
       - type: card
         text: "Inflation even ate the money itself. Your Argentine grandparents may have used five different currencies, each one born by chopping zeros off the last."
       - type: card
-        text: "For years buying dollars was capped, so a parallel market boomed: the **dólar blue**. At one point there were over a dozen dollar rates, even a **dólar Coldplay** for concert tickets."
+        text: "For years buying dollars was capped (the **cepo**), so a parallel market grew: the **dólar blue**. At one point there were over a dozen dollar rates, even a **dólar Coldplay** for paying foreign bands to come and play."
       - type: choice
         prompt: "On calle Florida, a man keeps muttering “Cambio, cambio.” Locals call him an **arbolito**, a little tree. Why, the story goes?"
         options:
@@ -179,9 +223,9 @@ classes:
           - "He hides behind street trees from the police"
           - "The first ones worked out of a city park"
         correct: 0
-        explain: "He's a street money changer. He'll walk you to a **cueva**, a “cave”: the back office where the swap happens."
+        explain: "The usual story: he stands planted on the sidewalk all day, and his “leaves” are green, like dollar bills. He's a street money changer. He'll walk you to a **cueva**, a “cave”: the back office where the swap happens. It's unofficial, and fake notes are a real risk."
       - type: card
-        text: "Since 2025 anyone can buy dollars freely again. The habit stays: **¿A cuánto está el dólar?** is small talk, like the weather."
+        text: "In 2025 the cap on buying dollars was lifted for ordinary people. The habit stays: **¿A cuánto está el dólar?** is small talk, like the weather."
       - type: card
         chip: "Pro tip"
         text: "Before you pay, ask. Many shops give a discount for **efectivo** (cash) or transfer. When they ask **“¿Efectivo o tarjeta?”**, the answer can change the price."

@@ -1,6 +1,6 @@
 // What the five hablar-* functions share (docs/hablar-hld.md §4).
 //
-// Auth and the session row, the server clock that decides the 5:00, the
+// Auth and the session row, the server clock that decides when time is up, the
 // learner's level, and the bundled scenario content. The pure helpers at the
 // top (clock, level, dilo compare, turn numbering) are unit-tested in
 // hablar_test.ts; the rest talks to Supabase or ElevenLabs.
@@ -26,6 +26,8 @@ export type ScenarioVersion = {
   key_phrases: Line[];
   opener: Line;
   keyterms: string[];
+  /** A unit's scene: the forms the unit taught, for Pancho to stay near. */
+  words?: string[];
 };
 export type ScenarioDoc = {
   id: string;
@@ -104,10 +106,25 @@ export const publicAudioUrl = (supabaseUrl: string, path: string | null | undefi
 // The clock (§4.5 step 2). The server decides; the client timer is a display.
 // ---------------------------------------------------------------------------
 
-export const CHAT_SECONDS = 180; // 3:00 — the hard stop; Pancho usually closes around 2:00
-export const CLOSE_SOON_SECONDS = 100; // Pancho is told it's about time to close
-export const WRAP_SECONDS = 150; // 2:30 — Pancho is told to close now
-export const GRACE_SECONDS = 30; // a turn already being recorded at 5:00 still counts
+/** A chat's clock, in seconds of chat time, and the exchange count that nudges Pancho to close. */
+export type Clock = {
+  /** Pancho is told it's about time to close. */
+  closeSoon: number;
+  /** Pancho is told to close now. */
+  wrap: number;
+  /** The hard stop. */
+  stop: number;
+  /** The same nudge as `closeSoon`, by exchanges: a chat shouldn't drag even with time left. */
+  closeSoonExchanges: number;
+};
+const SHORT: Clock = { closeSoon: 100, wrap: 150, stop: 180, closeSoonExchanges: 6 };
+// Beginners speak slowly and Pancho answers them slowly: on the short clock they got three or four turns.
+const LONG: Clock = { closeSoon: 170, wrap: 210, stop: 240, closeSoonExchanges: 8 };
+/** The only place the numbers live on the server (the app's chatSeconds mirrors `stop`). */
+export const CLOCK: Record<Band, Clock> = { A1: LONG, A2: LONG, B1: SHORT, B2: SHORT };
+/** A level's clock; an unknown level gets the short one. */
+export const clockOf = (level: string | null | undefined): Clock => CLOCK[level as Band] ?? SHORT;
+export const GRACE_SECONDS = 30; // a turn already being recorded at the hard stop still counts
 export const PAUSE_CAP_SECONDS = 900; // at most 15 min of background time
 export const MAX_HINTS = 3;
 
@@ -123,16 +140,16 @@ export function elapsedSeconds(startedAt: string | Date, pausedSeconds: number, 
   return Math.max(0, wall - effectivePaused(pausedSeconds, wall));
 }
 
-/** When the 5:00 runs out, as the server sees it now. */
 /** Chat time used so far; a staff chat's clock never runs. */
 export function sessionElapsed(s: { started_at: string; paused_seconds: number; unlimited?: boolean }, now = new Date()): number {
   return s.unlimited ? 0 : elapsedSeconds(s.started_at, s.paused_seconds, now);
 }
 
-export function deadlineAt(startedAt: string | Date, pausedSeconds: number, now = new Date()): string {
+/** When the level's time runs out, as the server sees it now. */
+export function deadlineAt(startedAt: string | Date, pausedSeconds: number, level: Band, now = new Date()): string {
   const wall = (now.getTime() - new Date(startedAt).getTime()) / 1000;
   const paused = effectivePaused(pausedSeconds, wall);
-  return new Date(new Date(startedAt).getTime() + (CHAT_SECONDS + paused) * 1000).toISOString();
+  return new Date(new Date(startedAt).getTime() + (clockOf(level).stop + paused) * 1000).toISOString();
 }
 
 /** The stored pause total after a client report: it only grows, and caps at 15 min. */
@@ -143,21 +160,22 @@ export function mergePaused(stored: number, reported: unknown): number {
 }
 
 // Pancho decides when the chat ends (the END_MARKER on his goodbye). These
-// nudge him when he hasn't: by time, or by exchanges for a clockless staff chat.
-const CLOSE_SOON_EXCHANGES = 6;
+// nudge him when he hasn't: by time, or by exchanges — the only nudge a
+// clockless staff chat gets, and what keeps a beginner's longer chat from dragging.
 const WRAP_EXCHANGES = 10;
 
 /** The learner's nth line, from its idx (opener 0, learner lines 1, 3, 5…). */
 export const exchangeOf = (userIdx: number) => Math.ceil(userIdx / 2);
 
-/** Must this reply close the chat? At 2:30, or after ten exchanges. */
-export function shouldWrapUp(elapsed: number, exchange: number): boolean {
-  return elapsed >= WRAP_SECONDS || exchange >= WRAP_EXCHANGES;
+/** Must this reply close the chat? At the level's wrap time, or after ten exchanges. */
+export function shouldWrapUp(elapsed: number, exchange: number, level: Band): boolean {
+  return elapsed >= clockOf(level).wrap || exchange >= WRAP_EXCHANGES;
 }
 
-/** Should Pancho be told it's about time to close? */
-export function shouldCloseSoon(elapsed: number, exchange: number): boolean {
-  return elapsed >= CLOSE_SOON_SECONDS || exchange >= CLOSE_SOON_EXCHANGES;
+/** Should Pancho be told it's about time to close? By time, or by exchanges (six; eight for a beginner). */
+export function shouldCloseSoon(elapsed: number, exchange: number, level: Band): boolean {
+  const clock = clockOf(level);
+  return elapsed >= clock.closeSoon || exchange >= clock.closeSoonExchanges;
 }
 
 // ---------------------------------------------------------------------------
@@ -275,13 +293,62 @@ export function sttKeyterms(topic: Topic | null, level: Band): string[] {
 /** Known things STT invents on silence (Whisper-style hallucinations). */
 const SILENCE = [
   "gracias por ver", "gracias por ver el video", "subtítulos realizados por", "subtitulos realizados por",
-  "suscríbete", "suscribete", "amaraorg", "gracias por su atención", "gracias por mirar", "música",
+  "suscríbete", "suscribete", "amaraorg", "gracias por su atención", "gracias por mirar",
 ];
+/** The same, but only when it is all she "said": a real line can have the word in it. */
+const SILENCE_ALONE = ["música", "musica"];
 
 export function isSilenceHallucination(text: string): boolean {
   const k = answerKey(text);
   if (!k) return true;
+  if (SILENCE_ALONE.includes(k)) return true;
   return SILENCE.some((s) => k === answerKey(s) || (k.length < 60 && k.includes(answerKey(s))));
+}
+
+// A line said in English. The recogniser is forced to Spanish (that is what
+// keeps a learner's mistakes as she said them), so English comes back as
+// English words, as nothing, or as nonsense. These tell which, from the words
+// alone. Words both languages have (a, come, son, he, has) count for neither;
+// no, me and ok count as Spanish, so a one-word "No" is never sent round again.
+const ENGLISH = new Set(
+  ("i i'm im i'd i'll i've you you're your we they it it's its the this that these those is are am was were be do don't dont " +
+    "does doesn't did didn't can can't could would should will won't have had want wanna need like know think mean say " +
+    "what what's how why where when who which and or but with for from of to in on at my not yes yeah please sorry thanks " +
+    "thank hello hi hey bye there here some any very really just too also because about maybe").split(" "),
+);
+const SPANISH = new Set(
+  ("el la los las un una unos unas de del al y o u que qué en con por para es soy sos somos está estoy estás están hay yo vos " +
+    "él ella nosotros ustedes ellos mi mis tu tus su sus te se lo le les nos sí si pero como cómo muy más menos bien mal hola " +
+    "chau gracias perdón quiero querés quiere tengo tenés tiene puedo podés puede voy vas va vamos gusta gustan porque cuando " +
+    "cuándo donde dónde quién cuál cuánto este esta esto ese esa eso acá allá ahora hoy ayer mañana también tampoco ya todo " +
+    "nada algo mucho poco bueno dale che claro entiendo sé no me ok okay uno dos tres cuatro cinco seis diez").split(" "),
+);
+const wordsOf = (text: string) => text.normalize("NFC").toLowerCase().replace(/’/g, "'").match(/[\p{L}']+/gu) ?? [];
+
+/** Is the line English? At least half its words are plainly English, and more of them than are plainly Spanish. */
+export function looksEnglish(text: string): boolean {
+  const words = wordsOf(text);
+  const en = words.filter((w) => ENGLISH.has(w)).length;
+  const es = words.filter((w) => SPANISH.has(w)).length;
+  return en > 0 && en > es && en * 2 >= words.length;
+}
+
+/** Does the line have anything plainly Spanish in it: a common word, one of the chat's keyterms, an accent or ñ? */
+export function looksSpanish(text: string, keyterms: string[] = []): boolean {
+  if (/[áéíóúñ¿¡]/i.test(text)) return true;
+  const known = new Set(keyterms.flatMap(wordsOf));
+  return wordsOf(text).some((w) => SPANISH.has(w) || known.has(w));
+}
+
+/**
+ * Is a forced-Spanish transcript worth a second pass with the language left to
+ * the recogniser? Only when it gave nothing usable: silence, a hallucination,
+ * or a line with nothing Spanish in it. A line that already reads as English
+ * needs no second pass.
+ */
+export function wantsLanguageRetry(text: string, keyterms: string[] = []): boolean {
+  if (looksEnglish(text)) return false;
+  return isSilenceHallucination(text) || !looksSpanish(text, keyterms);
 }
 
 // ---------------------------------------------------------------------------
@@ -500,23 +567,48 @@ export async function synthesize(opts: {
   return new Uint8Array(await res.arrayBuffer());
 }
 
-export type Transcript = { text: string; audioSeconds: number | null };
+export type Transcript = {
+  text: string;
+  audioSeconds: number | null;
+  /** "en" when she said the line in English (only looked for with `english`). */
+  language: "es" | "en";
+  /** Speech-to-text requests made: 2 when the line went through a second pass. */
+  calls: number;
+};
+type ScribeOptions = { key: string; audio: Blob; filename: string; keyterms: string[] };
 
-/** Speech to text with Scribe v2, forced to Spanish, bytes sent as they came (§4.4 step 3). */
-export async function transcribe(opts: {
-  key: string;
-  audio: Blob;
-  filename: string;
-  keyterms: string[];
-}): Promise<Transcript> {
+/**
+ * Speech to text with Scribe v2, forced to Spanish, bytes sent as they came
+ * (§4.4 step 3). With `english`, a line said in English is given back as
+ * English: a forced transcript with nothing Spanish in it is heard again with
+ * the language left to Scribe, and that second transcript is kept only if it
+ * reads as English — a beginner's accented Spanish is never handed to language
+ * detection alone.
+ */
+export async function transcribe(opts: ScribeOptions & { english?: boolean }): Promise<Transcript> {
+  const forced = await scribe(opts, "es");
+  if (!opts.english) return { ...forced, language: "es", calls: 1 };
+  if (looksEnglish(forced.text)) return { ...forced, language: "en", calls: 1 };
+  if (!wantsLanguageRetry(forced.text, opts.keyterms)) return { ...forced, language: "es", calls: 1 };
+  // A failed second pass is not worth losing the line over.
+  const free = await scribe(opts, null).catch((err) => {
+    console.error("stt second pass failed", err);
+    return null;
+  });
+  return free && looksEnglish(free.text) ? { ...free, language: "en", calls: 2 } : { ...forced, language: "es", calls: 2 };
+}
+
+/** One Scribe request; `language` null leaves the language to Scribe. */
+async function scribe(opts: ScribeOptions, language: "es" | null): Promise<{ text: string; audioSeconds: number | null }> {
   const form = new FormData();
   form.append("model_id", "scribe_v2");
   form.append("file", opts.audio, opts.filename);
-  form.append("language_code", "es");
+  if (language) form.append("language_code", language);
   form.append("tag_audio_events", "false");
   form.append("no_verbatim", "false");
   form.append("temperature", "0");
-  for (const k of opts.keyterms) form.append("keyterms", k);
+  // Keyterms are Spanish: on the free pass they would pull English toward them.
+  if (language) for (const k of opts.keyterms) form.append("keyterms", k);
   const res = await fetch(`${ELEVEN}/speech-to-text`, {
     method: "POST",
     headers: { "xi-api-key": opts.key },

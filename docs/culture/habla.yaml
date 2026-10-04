@@ -2,7 +2,7 @@ section:
   slug: "habla"
   title: "Cómo hablamos"
   emoji: "🗣️"
-  summary: "Vos, the “sh” sound, lunfardo and a lot of hands"
+  summary: "Vos, the “sh” sound, lunfardo and talking with your hands"
 
 # Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
 # 2–3 guess-first questions, no word review.
@@ -13,7 +13,7 @@ classes:
     summary: "The little pronoun that makes you sound Argentine"
     pages:
       - type: card
-        text: "Your textbook taught you **tú**. Forget it here. Argentines say **vos**: **vos sos**, **vos tenés**, **¿vos querés?** Say “tú tienes” and people understand you, then clock you as a textbook learner."
+        text: "Your textbook taught you **tú**. Forget it here. Argentines say **vos**: **vos sos**, **vos tenés**, **¿vos querés?** Say “tú tienes” and people understand you, then know at once that you learned from a textbook."
       - type: card
         text: "Why vos? It's old Spanish. The usual story: **tú** took over in the rich colonial capitals, Lima and Mexico City. The Río de la Plata was a poor, far-off corner, and nobody updated it."
       - type: choice
@@ -31,11 +31,11 @@ classes:
         options:
           - "Anyone older than you"
           - "Doctors, teachers and waiters"
-          - "Hardly anyone at all"
+          - "Few people, mostly in formal moments"
         correct: 2
-        explain: "The waiter, your doctor, often even your friend's grandma: **vos**. Some people still use usted with the very old, but vos is the normal default."
+        explain: "The waiter, the shop clerk, often even your friend's grandma: **vos**. Usted still shows up with older strangers and in formal settings, and more outside Buenos Aires, but vos is the normal default."
       - type: card
-        text: "So politeness lives in the tone: **disculpá**, **¿me podrías…?**, **por favor**. A warm vos beats a stiff usted every time."
+        text: "So politeness lives in the tone: **disculpá**, **¿me podrías…?**, **por favor**. A warm vos usually beats a stiff usted."
       - type: card
         chip: "Pro tip"
         text: "You don't even need to say vos. The ending does the work: **¿Tenés cambio?** is the whole sentence. Short, friendly, local."
@@ -57,7 +57,7 @@ classes:
         correct: 1
         explain: "The older sound is a buzzing **zh**, like the s in *measure*. Younger porteños, led by women, pushed it to a crisp **sh**. Both are 100% porteño."
       - type: card
-        text: "The sh isn't only Argentine, it's **rioplatense**: Montevideo says it too. And not all of Argentina does. Parts of the north and northeast keep a softer y."
+        text: "The sh isn't only Argentine, it's **rioplatense**: Montevideo says it too. And not all of Argentina does. Much of the interior, like Córdoba, Cuyo, the north and the northeast, keeps a softer y."
       - type: choice
         prompt: "Researchers compared the melody of Buenos Aires Spanish with other ways of speaking. Which was it closest to?"
         options:
@@ -65,11 +65,11 @@ classes:
           - "Brazilian Portuguese"
           - "Neapolitan Italian"
         correct: 2
-        explain: "Closer to **Naples** than to Madrid. That's why foreigners say porteños sound a bit Italian."
+        explain: "Researchers at CONICET, Argentina's science agency, found it closer to **Naples** than to Madrid. That's why foreigners say porteños sound a bit Italian."
       - type: card
-        text: "The tune most likely arrived with the huge wave of Italian immigrants around 1900. Their accents faded, but the melody stuck."
+        text: "The tune most likely arrived with the Italian immigrants around 1900. Their accents faded, but the melody stuck."
       - type: card
-        text: "Then there's **che**: hey, dude, listen. Nobody knows where it comes from. Guaraní? Mapudungun? Valencian? Pick a theory and defend it over a mate."
+        text: "Then there's **che**: hey, dude, listen. Nobody knows for sure where it comes from. An old Spanish call for attention, **ce**? Guaraní? Mapudungun? Valencian? Pick a theory and defend it over a mate."
       - type: choice
         prompt: "Ernesto Guevara became world-famous as “Che”. Who gave him the nickname?"
         options:
@@ -101,9 +101,11 @@ classes:
       - type: card
         text: "Then **tango** carried it onto the radio, and lunfardo went from the tenement patio to every living room in the country."
       - type: card
-        text: "It's no museum piece. Everyone, from teenagers to bank managers, says **me voy al laburo**, I'm off to work. From Italian *lavoro*."
+        text: "It's no museum piece. Everyone, from teenagers to bank managers, says **me voy al laburo**, I'm off to work. It comes from the Italian of the immigrants: *lavoro*, work."
+      - type: card
+        text: "More lunfardo you'll hear every day: **guita**, money. **Pibe** and **piba**, a boy and a girl. **Morfar**, to eat. **Birra**, beer. **Fiaca**, the feeling of not wanting to do anything."
       - type: choice
-        prompt: "The city bus is the **bondi**. Where does the word come from, the story goes?"
+        prompt: "The city bus is the **bondi**. According to the usual story, where does the word come from?"
         options:
           - "The name of an Italian bus company"
           - "A Guaraní word for a big box"
@@ -111,9 +113,9 @@ classes:
         correct: 2
         explain: "Brazilians called trams **bonde**, supposedly after the bonds sold as tickets. Buenos Aires borrowed it, and when the trams vanished, the name jumped onto the bus."
       - type: card
-        text: "**Chamuyo** is smooth talk: half truth, all charm. You chamuyás a date, a cop, your boss. And when a story sounds too good: **eso es puro chamuyo**."
+        text: "**Chamuyo** is smooth talk: half truth, all charm. You can **chamuyar** a date, a cop, your boss. And when a story sounds too good: **eso es puro chamuyo**."
       - type: card
-        text: "One to hear, not say: **mina**, for a woman. Everyone uses it, but it's a bit macho, and from a foreigner it can land badly."
+        text: "One to hear, not say: **mina**, for a woman. Many people use it, women too, but it can sound macho, and from a foreigner it can sound rude."
       - type: card
         chip: "Did you know?"
         text: "Slang has its own academy here: the **Academia Porteña del Lunfardo**, founded in 1962. Scholars meet to study street words the way others study Cervantes."
@@ -145,7 +147,7 @@ classes:
         correct: 0
         explain: "A **telo** is a love hotel: rooms by the hour, discreet entrance. Great story for the rest of the night, though."
       - type: card
-        text: "Plenty of people live with their parents well into their twenties, so telos are a normal, even cheerful, part of city life. For your stay, just say **hotel**."
+        text: "Plenty of people live with their parents well into their twenties, so telos are a normal part of city life, used by couples of all ages. For your stay, just say **hotel**."
       - type: card
         text: "Want “very”? Put **re** in front: **re lindo**, **re lejos**. It even works alone: **—¿Te gustó? —¡Re!**"
       - type: card
@@ -164,16 +166,24 @@ classes:
         prompt: "Someone cuts in the bus line. A lady pinches her fingertips together, pointing up, and bobs her wrist. What's she saying?"
         options:
           - "“Wait a second, please”"
-          - "“It's packed in here”"
+          - "“That costs a lot”"
           - "“What's your problem?”"
         correct: 2
         explain: "That's the **montoncito**: **¿qué te pasa?** From friendly to threatening, depending on the face. It even has its own emoji: 🤌."
       - type: card
-        text: "Two more you'll see daily. Flat hand rocking side to side: **más o menos**. Finger pulling down your lower eyelid: careful, **¡ojo!** Add a shrug and you'll survive a whole conversation."
+        text: "Two more you'll see daily. Flat hand rocking side to side: **más o menos**. Finger pulling down your lower eyelid: careful, **¡ojo!**"
+      - type: choice
+        prompt: "You ask a man where the bus stops. He brushes the back of his fingers forward from under his chin. What is he telling you?"
+        options:
+          - "“No idea”"
+          - "“I don't care”"
+          - "“Go away”"
+        correct: 0
+        explain: "It means **ni idea**, no idea. In Italy the same move means “I don't care”, but here it isn't rude."
       - type: card
         text: "Argentines love **audios**: WhatsApp voice notes instead of typing. A three-minute audio just to say you're running late? Completely normal."
       - type: card
-        text: "When they do type, nobody writes a full sentence if a few letters will do. **tqm**, te quiero mucho, closes half the chats in the country."
+        text: "When they do type, they cut words short: **q** is que, **xq** is porque, **tmb** is también, **dsp** is después. And **tqm**, te quiero mucho, closes many family chats."
       - type: choice
         prompt: "You suggest a 7 a.m. Sunday run. Your friend replies: **“bue”**. How excited are they?"
         options:
@@ -181,8 +191,8 @@ classes:
           - "Going along, not happy"
           - "It's a firm no"
         correct: 1
-        explain: "**Bue** is **bueno** with a sigh: fine, if we must. Expect them to show up late."
+        explain: "**Bue** is **bueno** with a sigh: fine, if we must. Stretched out, **bueee**, it means “oh, come on”."
       - type: card
         chip: "Pro tip"
-        text: "**Nada que ver** is the all-purpose “not at all”: **—¿Estás enojado? —No, nada que ver.**"
+        text: "**Dale** is the reply to almost everything: OK, sure, come on, go ahead. **—¿Vamos a las 8? —Dale.** In a chat, it often closes the conversation."
     vocabulary: []

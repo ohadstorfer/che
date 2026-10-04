@@ -13,7 +13,7 @@ import { parse } from 'yaml';
 
 import { queryLinked } from './db.mjs';
 import { uuid5 } from './ids.mjs';
-import { planLessons } from './lessons.mjs';
+import { levelOf, planLessons } from './lessons.mjs';
 import { drillable } from './outline.mjs';
 import { loadOutlineFromDb } from './vocabulary.mjs';
 
@@ -66,6 +66,11 @@ export function planCourse({
   const content = (s) =>
     [...new Set(s.tokens.flatMap((t) => t.form_ids ?? []))].filter((id) => formById.has(id) && drillable(formById.get(id)));
   const entryBySlug = new Map((plan.units ?? []).map((e) => [e.unit, e]));
+  // A unit is planned at its section's level, and a sentence is as hard as
+  // the unit it was written for.
+  const cefrBySection = new Map(outline.sections.map((s) => [s.id, s.cefr]));
+  const levelByUnit = new Map(outline.units.map((x) => [x.id, levelOf(cefrBySection.get(x.section_id))]));
+  const levelOfSentence = (s) => levelByUnit.get(s.unit_id) ?? 0;
 
   // form id -> { last: course_order last drilled, n: later units it came back in }
   const exposure = new Map();
@@ -117,11 +122,13 @@ export function planCourse({
         tip: unit.tips.find((t) => t.id === grammarIds.tip(unit.slug)) ?? null,
       };
     }
-    // The pattern tip belongs to grammar practice, not to a teaching lesson.
+    // The pattern tip is placed by the planner — the first lesson and grammar
+    // practice — not dealt out with the unit's own tips.
     const tips = unit.tips.filter((t) => t.id !== grammarIds.tip(unit.slug));
 
     const sentences = sentencesByUnit.get(unit.id) ?? [];
-    const planned = planLessons({ unit, forms: outline.forms, sentences, tips, earlier, debt, grammar });
+    const level = levelByUnit.get(unit.id);
+    const planned = planLessons({ unit, forms: outline.forms, sentences, tips, earlier, debt, owed: debtOf, grammar, level, levelOfSentence });
     result.set(unit.id, planned);
 
     const sentenceById = new Map([...sentences, ...earlier].map((s) => [s.id, s]));
@@ -139,7 +146,8 @@ export function planCourse({
     earlier.push(...sentences);
   }
 
-  return { result, exposure, units, formById };
+  const sentenceById = new Map(earlier.map((s) => [s.id, s]));
+  return { result, exposure, units, formById, sentenceById, levelByUnit, levelOfSentence };
 }
 
 /** For the report: how many later units each form came back in, by section. */

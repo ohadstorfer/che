@@ -23,7 +23,7 @@ classes:
         correct: 1
         explain: "The fire is slow, and so is everything else. Have a drink by the grill and eat when the asador says so."
       - type: card
-        text: "Every asado has one **asador**, in charge of the fire and the meat. It's a role with a lot of pride. Everyone else keeps them company by the grill, drink in hand."
+        text: "Every asado has one **asador**, also called the **parrillero**, in charge of the fire and the meat. It's a role with a lot of pride. Everyone else keeps them company by the grill, drink in hand."
       - type: card
         text: "An asado is also how Argentines celebrate almost anything: a birthday, a win, a new job, a Friday."
       - type: choice
@@ -35,7 +35,7 @@ classes:
         correct: 0
         explain: "The **asado de la losa**, for the finished roof slab. The crew grills right there on site, on bricks and a scrap of iron grate."
       - type: card
-        text: "For lots of families it's a weekly date: **el asado del domingo**. Same backyard, same asador, same arguments."
+        text: "For lots of families it's a weekly date: **el asado del domingo**. Same backyard, same asador, same people."
       - type: card
         chip: "Did you know?"
         text: "**Asado** is also the name of a cut: the ribs. So yes, you can eat asado at an asado."
@@ -47,9 +47,9 @@ classes:
     summary: "Embers, firewood, salt and how you like it"
     pages:
       - type: card
-        text: "The **parrilla** is the grill: an iron grate, often built into the backyard in brick. Plenty of city apartments have a little one on the balcony. Priorities."
+        text: "The **parrilla** is the grill: an iron grate, often built into the backyard in brick. A **parrilla** is also a steakhouse: **vamos a una parrilla** means let's go eat grilled meat."
       - type: card
-        text: "No balcony? Lots of apartment buildings have a **quincho**: a shared room with a parrilla, often on the roof. Neighbors book it for the weekend."
+        text: "A **quincho** is a roofed space with a parrilla and a long table: in the backyard of a house, or shared on the roof of an apartment building, where neighbors book it for the weekend."
       - type: choice
         prompt: "What's the secret of a good asado fire?"
         options:
@@ -67,11 +67,11 @@ classes:
           - "A garlic and pepper rub"
           - "An overnight marinade"
         correct: 0
-        explain: "Usually just **sal gruesa**, coarse salt. Good meat and good embers do the rest. Chimichurri waits at the table."
+        explain: "Usually just coarse salt: **sal gruesa** or **sal parrillera**. Good meat and good embers do the rest. Chimichurri waits at the table."
       - type: card
         text: "Then patience. The big cuts cook slowly, often for an hour and a half or more, and a good asador flips each one only once."
       - type: card
-        text: "How do you like it? Most Argentines say **a punto**, medium, or **jugoso**, a bit pink. Ask for it very rare and you'll get a raised eyebrow."
+        text: "At a restaurant they ask **¿Qué punto?** **Jugoso** is rare to medium-rare, **a punto** is medium, **bien cocido** is well done. Tip: a punto here is often more cooked than you expect."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -80,7 +80,7 @@ classes:
     summary: "Picada, sausages, achuras, then the big cuts"
     pages:
       - type: card
-        text: "While the fire does its thing, there's a **picada**: cheese, salami, olives, bread. It keeps everyone alive. Don't fill up, though. There's a long way to go."
+        text: "While the fire gets ready, there's a **picada**: cheese, **salame**, olives, bread. That way nobody gets too hungry. Don't fill up, though. There's a long way to go."
       - type: choice
         prompt: "How much meat does the host buy per person?"
         options:
@@ -92,20 +92,19 @@ classes:
       - type: card
         text: "First off the grill: **chorizo** and **morcilla**. They get cut up on a board and passed around, often on a piece of bread."
       - type: choice
-        prompt: "The morcilla is dark, soft and a little sweet. What's it made with?"
+        prompt: "The morcilla is dark, soft and rich. What's it made with?"
         options:
           - "Pig's blood"
           - "Chicken liver"
           - "Black beans"
         correct: 0
-        explain: "Blood sausage. Sounds scary, tastes amazing. Saying **no, gracias** is fine too."
+        explain: "It's blood sausage: soft, mild and a little sweet. Try it on bread. Saying **no, gracias** is fine too."
       - type: card
-        text: "Then the brave stuff, the **achuras**: **chinchulines**, crispy grilled intestines, and **mollejas**, sweetbreads, crispy outside and creamy inside. Try the mollejas with lemon."
+        text: "Then the **achuras**, the organ meats: **chinchulines**, crispy grilled intestines, and **mollejas**, sweetbreads, crispy outside and creamy inside. Try the mollejas with lemon."
       - type: card
         text: "Finally the main event: **asado de tira** (short ribs), **vacío** (flank) and **entraña** (skirt steak). The asador decides the order. Your job: eat, and say **¡qué rico!**"
       - type: card
-        chip: "Did you know?"
-        text: "**Matambre a la pizza**: a thin flat cut, grilled until tender, then topped with tomato sauce and cheese right on the grill. Yes, pizza on the parrilla."
+        text: "On the side: bread and **ensalada mixta** (lettuce, tomato, onion), maybe **papas fritas**. Vegetarian? Say **soy vegetariano** (or **vegetariana**) early. There's **provoleta** (grilled cheese), grilled **morrones** (bell peppers) and other vegetables."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -116,29 +115,29 @@ classes:
       - type: card
         text: "**Choripán**: a grilled chorizo split open in a crusty roll. That's it, and it's perfect. Everyone calls it **chori**."
       - type: card
-        text: "Ask for it **mariposa**, butterfly: the chorizo is split lengthwise and opened flat, so it cooks faster and crisps up."
+        text: "Ask for it **mariposa**, butterfly: the chorizo is split lengthwise and opened flat, so it cooks faster and gets crispy."
       - type: choice
-        prompt: "It's 5 a.m. and the boliche just closed. Where do porteños go for a chori?"
+        prompt: "It's 6 a.m. and the boliche just closed. Where's a classic place to get a chori?"
         options:
           - "A food stall by the river"
           - "A 24-hour kiosco"
           - "The bakery, just opening"
         correct: 0
-        explain: "The **carritos de la Costanera**, grill stalls along the river that barely ever close. Smoke, a line, and chimichurri dripping everywhere."
+        explain: "The **carritos de la Costanera**, grill stalls along the river that stay open very late. Smoke, a line, and chimichurri dripping everywhere."
       - type: card
         text: "Chori is street food everywhere: outside football stadiums, at every festival, and at political rallies."
       - type: choice
-        prompt: "Critics sometimes call rally crowds **choripaneros**. What's the jab?"
+        prompt: "Opponents sometimes call rally crowds, mostly Peronist ones, **choripaneros**. What's the insult?"
         options:
           - "They only came for a free chori"
           - "The rally was held at a parrilla"
           - "The crowd sang about choripán"
         correct: 0
-        explain: "The insult says people were brought in with a free sandwich, not real conviction. It's a political dig, so use it with care."
+        explain: "The insult says people were brought in with a free sandwich, not real conviction. It's a political insult. Good to understand, better not to say."
       - type: card
-        text: "**Provoleta** is a thick round of provolone-style cheese, grilled crispy outside and melty inside, with oregano and chili. Eat it fast, before it turns to rubber."
+        text: "**Provoleta** is a thick round of provolone-style cheese, grilled crispy outside and melty inside, with oregano and **ají molido**, mild chili flakes. Eat it fast, before it turns to rubber."
       - type: card
-        text: "Two sauces rule. **Chimichurri** is green: parsley, oregano, garlic, chili flakes, vinegar and oil. **Salsa criolla** is tomato, onion and bell pepper."
+        text: "Two sauces are always on the table. **Chimichurri**: parsley, oregano, garlic, **ají molido**, vinegar and oil. Not spicy. **Salsa criolla** is tomato, onion and bell pepper."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -147,21 +146,21 @@ classes:
     summary: "What to bring, how not to annoy the asador, and the applause"
     pages:
       - type: card
-        text: "The host buys the meat. Guests bring **vino**, drinks, dessert or **hielo**. Someone always forgets the ice."
+        text: "Invited? Ask **¿Qué llevo?** What should I bring? Often the answer is drinks or **hielo**, ice. The host usually buys the meat, or friends split the cost later: **después dividimos**."
       - type: choice
         prompt: "Before anything reaches the table, who gets the first bites?"
         options:
           - "Whoever keeps the asador company"
-          - "The kids, so they stop asking"
+          - "Whoever brought the wine"
           - "The host's parents, out of respect"
         correct: 0
-        explain: "Hang out by the grill and the asador will pass you bits of chorizo or crackling on bread, straight off the fire. Company earns you snacks."
+        explain: "Hang out by the grill and the asador will pass you a slice of chorizo or molleja on bread, straight off the fire. Stay close and you get to taste first."
       - type: card
         text: "Golden rule: don't tell the asador how to cook. Not “it needs more heat”, not “in my country we…”. And never touch the tongs."
       - type: card
         text: "Want to help? Ask **“¿Te ayudo en algo?”** and do exactly what you're told. Or just bring the asador a glass of wine."
       - type: choice
-        prompt: "The meat's done and everyone has eaten. What does someone always call out?"
+        prompt: "The meat reaches the table and everyone starts eating. What does someone always call out?"
         options:
           - "A round of applause for the asador"
           - "A short speech from the host"
@@ -169,7 +168,7 @@ classes:
         correct: 0
         explain: "**¡Un aplauso para el asador!** Everyone claps, even if the meat was a bit dry."
       - type: card
-        text: "When the asador calls **“¡A la mesa!”**, go right away. Letting the meat go cold while you finish a story is the real insult."
+        text: "When the asador calls **“¡A comer!”** or **“¡A la mesa!”**, go right away. Letting the meat go cold while you finish a story is the real insult."
       - type: card
         text: "The asador cooked, so the others clear the table and wash up. Offer to help with the dishes: that's how you get invited back."
     vocabulary: []
@@ -180,7 +179,7 @@ classes:
     summary: "Lamb on a cross, beef in its hide and dinner in a plough disc"
     pages:
       - type: card
-        text: "Down south the star isn't beef. It's **cordero patagónico**: a whole lamb opened flat, wired to an iron cross and stuck in the ground beside the fire for hours."
+        text: "Down south the star isn't beef. It's **cordero patagónico**: a whole lamb opened flat, wired to an iron cross and stuck in the ground beside the fire for hours. On menus it's **cordero a la cruz** or **al asador**."
       - type: card
         text: "The big-party version is **asado con cuero**: beef cooked with its hide on. The hide works like a pot, holding in the juices and fat."
       - type: choice
@@ -195,7 +194,7 @@ classes:
         chip: "Did you know?"
         text: "The town of **Viale**, in Entre Ríos, throws a national festival for asado con cuero every year."
       - type: card
-        text: "In the west it's **chivito**: young goat, grilled slowly over the embers. Mendoza and Neuquén each swear theirs is the best."
+        text: "In the west it's **chivito**: young goat, grilled slowly over the embers, a specialty of Mendoza and Neuquén. Further north it's called **cabrito**."
       - type: choice
         prompt: "Out in the **campo** there's a giant pan for the fire called **el disco**. What was it originally?"
         options:

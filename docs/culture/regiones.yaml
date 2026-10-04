@@ -25,7 +25,7 @@ classes:
         correct: 0
         explain: "School maps include the slice of **Antarctica** that Argentina claims, and it belongs to Tierra del Fuego. Leave the ice out and Buenos Aires wins."
       - type: card
-        text: "Getting around means the **micro**, the long-distance bus. Twenty hours overnight in a **coche cama**, a seat that folds almost flat, is completely normal."
+        text: "The classic way to get around is the **micro**, the long-distance bus. Twenty hours overnight in a **coche cama**, a seat that folds almost flat, is normal, though many people now fly."
       - type: choice
         prompt: "About how many Argentines live in and around the city of Buenos Aires?"
         options:
@@ -33,11 +33,9 @@ classes:
           - "About a tenth"
           - "About two thirds"
         correct: 0
-        explain: "One in three, in one metro area. No wonder the capital sometimes thinks it *is* the country."
+        explain: "One in three: about 15 million people in one metro area. The rest of this huge country is much emptier."
       - type: card
         text: "Nearly every town throws a **Fiesta Nacional** of something it's proud of: the Poncho in Catamarca, the Sun in San Juan, even the **Salame Quintero** in Mercedes."
-      - type: card
-        text: "Provincial pride runs deep. Tell a girl from Salta who moved to Buenos Aires that she's porteña now, and she'll correct you on the spot."
       - type: card
         chip: "Pro tip"
         text: "Meet someone from the provinces? Ask **“¿Y qué extrañás de allá?”**, what do you miss from back home. Then settle in for twenty minutes about the food, the family and the landscape."
@@ -49,29 +47,29 @@ classes:
     summary: "Salta, Jujuy and the most Andean corner of the country"
     pages:
       - type: card
-        text: "Fly two hours north of Buenos Aires and you land in the Andes. **Salta** and **Jujuy** feel closer to Bolivia than to Palermo: adobe villages, llamas, ponchos and Quechua words in everyday Spanish."
+        text: "Fly two hours north of Buenos Aires and you land in the Andes. **Salta** and **Jujuy** are Andean Argentina: adobe villages, llamas, ponchos and Quechua words in everyday Spanish."
       - type: card
         text: "In the little town of **Purmamarca** stands the **Cerro de los Siete Colores**, a hill striped red, purple, ochre and green. No paint involved: just layers of different minerals."
       - type: choice
-        prompt: "On a bus to Humahuaca, the man next to you has a bulging cheek and offers you leaves from a little bag. What's going on?"
+        prompt: "On a bus to Humahuaca, the man next to you has one cheek full of something and offers you leaves from a little bag. What's going on?"
         options:
           - "He's sharing coca leaves for the altitude"
           - "He's offering you tobacco to chew"
           - "He's selling a herbal tea he grows"
         correct: 0
-        explain: "Up here lots of people **coquean**: they keep a wad of coca leaves in their cheek for hours against altitude, cold and tiredness. Taking a few is fine. So is **no, gracias**."
+        explain: "Up here lots of people **coquean**: they keep a ball of coca leaves in their cheek for hours against altitude, cold and tiredness. Taking a few is fine. So is **no, gracias**. Just don't pack any to take home."
       - type: card
-        text: "It's no scandal: Argentine law says chewing coca leaves is not drug use. A few leaves in your cheek are a world away from cocaine, which is very much illegal."
+        text: "Nobody is shocked: Argentine law says chewing coca leaves is not drug use. A few leaves in your cheek are a world away from cocaine, which is very much illegal."
       - type: card
-        text: "Every **1 de agosto** the Andes honor the **Pachamama**, Mother Earth. Families dig a hole and “feed” it with food, coca, corn beer and wine, to thank her and ask for a good year."
+        text: "Every **primero de agosto** (1 August) the Andes honor the **Pachamama**, Mother Earth. Families dig a hole and “feed” it with food, coca, **chicha** (corn beer) and wine, to thank her and ask for a good year."
       - type: choice
-        prompt: "That same morning, all over Argentina, even in Buenos Aires, many people take a shot of something on an empty stomach. What?"
+        prompt: "That same morning, all over Argentina, even in Buenos Aires, many people drink a little of something on an empty stomach. What?"
         options:
           - "Caña with rue, against winter's bad luck"
           - "Hot mate with salt, against the flu"
           - "Red wine with honey, for money"
         correct: 0
-        explain: "**Caña con ruda**: cane liquor steeped with rue, the herb. One shot on 1 August keeps the bad luck of winter away, or so they say."
+        explain: "**Caña con ruda**: cane liquor with rue, a bitter herb, soaked in it. Three sips on 1 August keep away the illnesses and bad luck of August, or so they say. The custom is Guaraní, from the northeast, but it shares the date."
       - type: card
         chip: "Did you know?"
         text: "Jujuy's carnival starts by digging up a cloth devil from a pile of stones: the **desentierro del diablo**. The whole town parties until he's buried again."
@@ -93,7 +91,7 @@ classes:
         correct: 0
         explain: "Water from the Andes runs through **acequias**, open channels along the curb. The system goes back to the **Huarpe** people, before the Spanish."
       - type: card
-        text: "Walking home at night, mind your step. Falling into an acequia is a rite of passage, and the locals will laugh, kindly."
+        text: "Walking home at night, mind your step. Everyone falls into an acequia once, and the locals will laugh, kindly."
       - type: card
         text: "Mendoza makes most of Argentina's wine. Touring **bodegas** (wineries) by bike is a local classic. At dinner just order **un tinto**, a red: odds are it's Malbec."
       - type: choice
@@ -107,15 +105,15 @@ classes:
       - type: card
         text: "The grape harvest ends with the **Fiesta de la Vendimia**, in early March: parades, a huge show in the hills, and a harvest queen chosen from the queens of the province's 18 departments."
       - type: card
-        text: "Behind the city stands the **Aconcagua**: almost 7,000 meters, the highest mountain outside Asia. You don't need to climb it. On the road to Chile you can see its snowy face."
+        text: "About three hours west of the city, on the road to Chile, stands **Aconcagua**: almost 7,000 meters, the highest mountain outside Asia. You don't need to climb it: there's a viewpoint near the road."
       - type: card
-        text: "In Buenos Aires the **siesta** is a weekend luxury. Here it's the schedule: shops shut after lunch and reopen late in the afternoon, and the summer streets go silent."
+        text: "In Buenos Aires the **siesta** is a weekend luxury. Here, as in most of the provinces, it's the schedule: shops shut after lunch and the streets go silent. Don't call anyone or ring a doorbell between 2 and 5."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "cordoba"
     title: "Córdoba: fernet, cuarteto and the tonada"
-    summary: "The province that talks slower, parties harder and jokes about everything"
+    summary: "The province that sings when it talks, parties hard and jokes about everything"
     pages:
       - type: card
         text: "You'll hear a cordobés before you see one. The **tonada** stretches the syllable before the stressed one: **“cordoobés”**. Porteños love imitating it. Cordobeses love telling them they do it badly."
@@ -130,9 +128,9 @@ classes:
         correct: 0
         explain: "**Fernet con coca**, lots of ice and a proper foam on top: the drink of every party. Bitter the first time, addictive by the third."
       - type: card
-        text: "Argentina drinks more fernet than any other country, and Córdoba leads the way: the province is said to drink around a third of it. Pace yourself."
+        text: "Argentina drinks more fernet than any other country, and Córdoba leads the way: the province is said to drink around a third of it. Drink slowly."
       - type: card
-        text: "Saturday night means a **baile de cuarteto**, Córdoba's own party music. The crowd dances in a giant circle round the floor, and you just follow it."
+        text: "Saturday night means a **baile de cuarteto**, Córdoba's own party music. Its biggest star is **La Mona Jiménez**. The crowd dances in a giant circle round the floor, and you just follow it."
       - type: choice
         prompt: "Up in Córdoba's hills, **Villa General Belgrano** throws Argentina's big Oktoberfest. Who helped make it a German town?"
         options:
@@ -140,7 +138,7 @@ classes:
           - "Brewers hired by the province"
           - "Monks from a Bavarian abbey"
         correct: 0
-        explain: "In 1939 the warship **Graf Spee** was scuttled off Montevideo. Its crew was interned in Argentina, and some sailors settled in these hills for good."
+        explain: "In 1939 the German warship **Graf Spee** was sunk by its own crew near Montevideo. The sailors were held in Argentina, and some stayed for good in this town, which German families had already founded."
       - type: card
         text: "Cordobeses are famous for their humor. Their signature word is **culiao**. Vulgar and an insult when angry, between friends it means “dude”. Wait until they call *you* culiao before you try it."
     vocabulary: []
@@ -161,9 +159,9 @@ classes:
           - "About half"
           - "Only a few"
         correct: 0
-        explain: "Roughly 80% of the falls are Argentine. Brazilians will point out that their side has the better panoramic view. Both are right."
+        explain: "Roughly 80% of the falls are Argentine. Brazilians will point out that their side has the better wide view. Both are right. The star is the **Garganta del Diablo**, a huge horseshoe of water right on the border."
       - type: card
-        text: "The star is the **Garganta del Diablo**, a horseshoe of thundering water. The story goes that Eleanor Roosevelt saw Iguazú and sighed: “Poor Niagara!”"
+        text: "On street corners and at bus stations, people sell warm **chipá**, small cheese breads made with cassava flour. In the heat, locals drink **tereré**: mate with ice-cold water or juice."
       - type: card
         text: "The northeast is Guaraní land, and you can hear it. In **Corrientes**, Guaraní is an official language next to Spanish. A kid there is a **gurí**, not a pibe."
       - type: card
@@ -177,7 +175,7 @@ classes:
         correct: 0
         explain: "It's a **sapucai**, a Guaraní yell of joy, grief or courage. Nobody expects you to do one. But if you try, go loud."
       - type: card
-        text: "**Rosario**, Argentina's third city, lives by the Paraná. Walk the riverfront and order a **liso**, a draft beer in a straight glass. Rosarinos will remind you that Messi was born here."
+        text: "**Rosario**, Argentina's third city, lives by the Paraná. Walk the riverfront and order a **liso**, a small glass of draft beer. Rosarinos will remind you that Messi was born here and the flag was first raised here, in 1812."
       - type: choice
         prompt: "Rosario is hundreds of kilometers from the sea. Where do rosarinos go to the beach on a hot Sunday?"
         options:
@@ -196,7 +194,7 @@ classes:
       - type: card
         text: "**Patagonia** covers more than a quarter of Argentina, yet hardly anyone lives there. Steppe, lakes, mountains and a wind that never stops. The tourists are the ones chasing their hats."
       - type: card
-        text: "Near **El Calafate**, the **Perito Moreno** glacier ends in a towering wall of ice. For years it kept building an ice bridge across the lake, and each collapse was broadcast live on TV."
+        text: "Near **El Calafate**, the **Perito Moreno** glacier ends in a high wall of ice. Every few years the ice crossed the lake, blocked the water like a dam, then broke in a huge collapse shown on TV."
       - type: choice
         prompt: "For decades, what made the Perito Moreno famous among glaciers?"
         options:
@@ -204,7 +202,9 @@ classes:
           - "It was the fastest-growing in the world"
           - "Its ice was bright pink in summer"
         correct: 0
-        explain: "It stayed stable while others melted. Bad news: since 2019 it has been retreating fast, and scientists doubt it will ever build that ice bridge again."
+        explain: "It stayed stable while others melted. Bad news: since 2019 it has been retreating fast, and scientists doubt it will block the lake again any time soon."
+      - type: card
+        text: "Long before any settlers, this was the land of the **Tehuelche** and the **Mapuche**. Many names on the map come from their languages: **Nahuel Huapi**, **Neuquén**, **Chubut**."
       - type: card
         text: "In 1865 a small ship brought a group of **Welsh** settlers to the Chubut valley. Their towns, chapels and tea houses are still there."
       - type: choice
@@ -228,5 +228,5 @@ classes:
           - "Carrying tourists to the glaciers"
           - "Hauling gold down from the mines"
         correct: 0
-        explain: "Ushuaia began as a prison town. The train carried inmates to the forest to cut timber. Today it carries tourists along the same valley."
+        explain: "Ushuaia grew up around a prison. The train carried inmates to the forest to cut timber. Today it carries tourists along the same valley."
     vocabulary: []

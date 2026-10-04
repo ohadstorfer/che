@@ -95,6 +95,8 @@ export default function RootLayout() {
                     name="sections"
                     options={{ presentation: 'transparentModal', animation: 'none', gestureEnabled: false }}
                   />
+                  {/* Her words rise from the bottom, over the road, and close back down. */}
+                  <Stack.Screen name="my-words" options={{ animation: 'slide_from_bottom' }} />
                   <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />
                 </Stack>
               </ThemeProvider>

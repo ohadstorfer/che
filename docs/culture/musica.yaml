@@ -15,15 +15,15 @@ classes:
       - type: card
         text: "Before 1967, rock here meant copies: foreign hits, translated or sung in English. Then **Los Gatos** released **“La balsa”**, an original song in Spanish, and it sold. **Rock nacional** was born."
       - type: choice
-        prompt: "The story goes that “La balsa” was finished somewhere unusual. Where?"
+        prompt: "The story goes that “La balsa” was started somewhere unusual. Where?"
         options:
-          - "In a café bathroom, hiding from the waiters"
+          - "In the bathroom of an all-night café"
           - "In a police cell, after a noisy night out"
           - "On a ferry crossing the Río de la Plata"
         correct: 0
-        explain: "The bathroom of **La Perla del Once**, a 24-hour café whose waiters kept kicking loud musicians out. At least, that's the legend."
+        explain: "**Tanguito** came up with the opening in the bathroom of **La Perla del Once**, an all-night café where young musicians met. **Litto Nebbia** finished the song. At least, that's the legend."
       - type: card
-        text: "Two names you must know. **Luis Alberto Spinetta**, **el Flaco**, wrote dreamy, poetic songs. **Charly García** became the wild genius: brilliant, unpredictable, loved."
+        text: "Two names you must know. **Luis Alberto Spinetta**, **el Flaco**, wrote dreamy, poetic songs like **“Muchacha (ojos de papel)”**. **Charly García** became the wild genius: brilliant, unpredictable, loved. Start with **“Los dinosaurios”**."
       - type: choice
         prompt: "Charly once made a famous exit from a ninth-floor hotel room in Mendoza. How?"
         options:
@@ -31,7 +31,7 @@ classes:
           - "He climbed down on knotted bedsheets"
           - "He slid down the laundry chute"
         correct: 0
-        explain: "Ninth floor, into the pool, and he walked away. People tell Charly stories like this with pure affection."
+        explain: "Ninth floor, into the pool, and he walked away. It's rock legend now, though it came from a rough time in his life."
       - type: card
         text: "Under the 1976–83 dictatorship, rock was censored and harassed, so musicians sang in metaphors. For many kids, a concert was the only place they could feel free together."
       - type: choice
@@ -43,7 +43,9 @@ classes:
         correct: 0
         explain: "The regime that harassed rockers suddenly needed Spanish songs to fill the airwaves. Bands went from underground to mainstream almost overnight."
       - type: card
-        text: "**Soda Stereo** took Argentine rock across Latin America. At their farewell show, **Gustavo Cerati** closed with **“¡Gracias… totales!”** People still say it to thank someone big time."
+        text: "**Soda Stereo** took Argentine rock across Latin America. At their farewell show in 1997, **Gustavo Cerati** closed with **“¡Gracias… totales!”** People still say it, half joking, for a very big thank you."
+      - type: card
+        text: "More names you'll hear at every party: **Fito Páez**, **Andrés Calamaro**, **Los Fabulosos Cadillacs** and **Divididos**. Everyone in the room knows the words."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -54,9 +56,9 @@ classes:
       - type: card
         text: "In Argentina **folklore** isn't museum music. It's the living sound of the provinces: guitars, violins and the **bombo legüero**, a deep drum of wood and hide."
       - type: card
-        text: "Its rhythms have names, like **zamba**, **chacarera** and **chamamé**. Young people still sing them at parties, especially in the north."
+        text: "Its rhythms have names. **Zamba** and **chacarera** come from the northwest. **Chamamé**, played with accordion, comes from the northeast. Young people still sing them at parties."
       - type: card
-        text: "**Mercedes Sosa**, from Tucumán, was **La Negra**, a nickname said with love. Her **“Gracias a la vida”** still makes whole rooms cry."
+        text: "**Mercedes Sosa**, from Tucumán, was **La Negra**, a nickname said with love. Her version of **“Gracias a la vida”**, by Chile's Violeta Parra, still makes whole rooms cry."
       - type: choice
         prompt: "During the dictatorship, where was Mercedes Sosa arrested?"
         options:
@@ -64,9 +66,9 @@ classes:
           - "At the airport, back from a tour"
           - "At home, while writing a song"
         correct: 0
-        explain: "Arrested mid-concert, she went into exile in Europe. When she came back, still under the dictatorship, she packed theater after theater."
+        explain: "She was arrested mid-concert in La Plata in 1979, along with the audience, and went into exile in Europe. She came back in 1982, still under the dictatorship, and packed theater after theater."
       - type: card
-        text: "A **peña** is a folklore night: long tables, **empanadas**, wine and live music. There's no audience. When a chacarera starts, people dance between the tables, then sit down and keep eating."
+        text: "A **peña** is a folklore night: long tables, **empanadas**, wine and live music. Nobody just sits and watches. When a chacarera starts, people dance between the tables, then sit down and keep eating."
       - type: choice
         prompt: "The **zamba** is a slow dance for couples, with a white handkerchief. How do they use it?"
         options:
@@ -98,15 +100,15 @@ classes:
           - "Radio DJ"
           - "Hairdresser"
         correct: 0
-        explain: "She became a star in her 30s, in a scene run by men."
+        explain: "She was a **maestra jardinera**, a kindergarten teacher, and only became a star in her 30s, in a scene run by men. Her **“No me arrepiento de este amor”** is still sung everywhere."
       - type: card
-        text: "In 1996 Gilda's tour bus crashed on **Ruta 12**. People began asking her for miracles at a shrine by the road. The Church never made her a saint. The people did."
+        text: "In 1996 Gilda died when a truck hit her tour bus on **Ruta 12**, in Entre Ríos. People began asking her for miracles at a shrine by the road. The Church never made her a saint. The people did."
       - type: card
         text: "In the late 90s, with the economy collapsing, a rawer style grew in the poorest neighborhoods: **cumbia villera**. Critics hear crude lyrics. Fans hear the honest voice of the barrio."
       - type: card
         text: "In **Córdoba** the party sound is **cuarteto**, with a bouncy piano beat everyone calls **tunga tunga**. Its king, **La Mona Jiménez**, has played packed dances for decades."
       - type: choice
-        prompt: "Cuarteto recently got an honor that tango got back in 2009. Which one?"
+        prompt: "In 2025 cuarteto got an honor that tango got back in 2009. Which one?"
         options:
           - "A place on UNESCO's heritage list"
           - "Its own Latin Grammy category"
@@ -114,7 +116,9 @@ classes:
         correct: 0
         explain: "UNESCO added cuarteto to its list of Intangible Cultural Heritage. Not bad for music born in Córdoba's dance halls."
       - type: card
-        text: "**Rodrigo**, **el Potro**, took cuarteto to Buenos Aires and filled the Luna Park again and again. He died young, in a car crash after a show, and his songs still close every party."
+        text: "**Rodrigo**, **el Potro**, took cuarteto to Buenos Aires and filled the Luna Park. He died young, in a car crash after a show. **“Soy cordobés”** and **“La mano de Dios”**, his song for Maradona, still close every party."
+      - type: card
+        text: "And today? You'll hear **Los Palmeras**, from Santa Fe, with **“Bombón asesino”**, the cumbia of **Ke Personajes**, and the cuarteto of **La K'onga**."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -123,7 +127,7 @@ classes:
     summary: "From freestyle battles in a park to the biggest stages in the world"
     pages:
       - type: card
-        text: "Argentine trap fills stadiums now. Its big names, like **Duki**, **Trueno** and **Wos**, didn't come from music schools or record labels."
+        text: "Argentine trap and rap fill stadiums now. Its big names, like **Duki**, **Trueno** and **Wos**, didn't come from music schools or record labels."
       - type: choice
         prompt: "So where did they learn?"
         options:
@@ -143,19 +147,19 @@ classes:
         correct: 0
         explain: "He cut and posted clips of battles like the Quinto Escalón. The scene that made Duki and Trueno made him too."
       - type: card
-        text: "A Biza **sesión** can launch a career overnight. In 2023 his session with **Shakira**, a song aimed at her ex, broke YouTube records."
+        text: "A session with **el Biza**, as everyone calls him, can launch a career overnight. In 2023 his session with **Shakira**, a song aimed at her ex, broke YouTube records."
       - type: card
         text: "Women run the charts too: **María Becerra** sold out River's stadium, **Tini** went from Disney star to pop queen, and **Nicki Nicole** broke out of Rosario."
       - type: choice
-        prompt: "The newest party sound is **RKT**. Where does the name come from?"
+        prompt: "One big party sound of the 2020s is **RKT**. Where does the name come from?"
         options:
           - "A club called Rescate"
           - "A rapper called Rocket"
           - "A label called RocKTown"
         correct: 0
-        explain: "DJs at **Rescate**, a club in San Martín, just outside the city, started mixing it in the 2000s, labeling the files “RKT”."
+        explain: "DJs at **Rescate**, a club in San Martín, just outside the city, started mixing it. “RKT” is a short form of the club's name, and the sound kept it."
       - type: card
-        text: "RKT is reggaetón plus cumbia villera, with huge bass. **L-Gante** made it explode, recording his first hits on a laptop the government gave out to schoolkids."
+        text: "RKT is reggaetón plus cumbia villera, with huge bass. **L-Gante** made it explode, recording his first hits on a laptop the government gave out to schoolkids. He calls his style **cumbia 420**."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -174,9 +178,9 @@ classes:
         correct: 0
         explain: "*Olé, Olé, Olé!* Between songs, the stadium sings it football style, followed by the artist's name: **“Olé, olé, olé, olé… Charly, Charly!”**"
       - type: card
-        text: "Argentina has so many Stones fans they have a name: **rollingas**. And when a band walks off before the encore, the whole stadium shouts **“¡Otro, otro!”**"
+        text: "Argentina has so many Stones fans they have a name: **rollingas**. When a band walks off before the encore, the stadium shouts **“¡Otra, otra!”**, or sings **“una más, y no jodemos más”**: one more and we'll stop bothering you."
       - type: card
-        text: "**Los Redondos** barely talked to the press, yet fans crossed the country to see them. They didn't call the shows concerts. They called them **misas**: masses."
+        text: "**Los Redondos**, led by singer **el Indio Solari**, barely talked to the press, yet fans crossed the country to see them. Fans didn't call the shows concerts. They called them **misas**: masses."
       - type: choice
         prompt: "Near the stage, hundreds of people jump and crash into each other: the **pogo**. What happens if someone falls?"
         options:
@@ -188,7 +192,7 @@ classes:
       - type: card
         text: "In the 90s, barrio rock crowds, **rock chabón**, brought the football stadium to gigs: banners, chants and **bengalas**, flares lit right in the crowd."
       - type: card
-        text: "The flares had a dark side. At a show at **República Cromañón**, a flare set the ceiling on fire. The club was overcrowded, an exit was locked. **194 people died**, most of them young."
+        text: "The flares had a dark side. On December 30, 2004, at a **Callejeros** show at **República Cromañón**, a flare set the ceiling on fire. The club was overcrowded, an exit was locked. **194 people died**, most of them young."
       - type: card
         text: "It changed live music forever: much stricter rules, and a flare indoors is now unthinkable. Every December 30, families still gather to remember."
     vocabulary: []

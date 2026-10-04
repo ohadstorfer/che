@@ -74,11 +74,11 @@ scenarios:
         setting_en: You arrive at a café in San Telmo with a friend who doesn't speak Spanish.
         goals:
           - { id: both, es: Pedí para vos y para tu amiga, en: Order for you and your friend }
-          - { id: ask, es: Preguntá qué trae el tostado, en: "Ask what comes in the tostado" }
+          - { id: ask, es: Preguntá qué trae el tostado, en: Ask what comes in the toasted sandwich }
           - { id: card, es: Preguntá si podés pagar con tarjeta, en: Ask if you can pay by card }
         key_phrases:
           - { es: "Para mí un cortado y para ella un té.", en: "A cortado for me and a tea for her." }
-          - { es: "¿Qué trae el tostado?", en: "What comes in the tostado?" }
+          - { es: "¿Qué trae el tostado?", en: "What comes in the toasted sandwich?" }
           - { es: "¿Puedo pagar con tarjeta?", en: "Can I pay by card?" }
           - { es: "Estaba todo riquísimo, gracias.", en: "Everything was delicious, thanks." }
         opener:
@@ -109,13 +109,13 @@ scenarios:
           - { id: fix, es: Negociá cómo te lo compensan, en: Negotiate how they make it up to you }
           - { id: close, es: Cerrá la charla sin pelearte, en: Wrap up without a fight }
         key_phrases:
-          - { es: "Mirá, no es por molestar, pero el café llegó frío.", en: "Look, I don't mean to be a pain, but the coffee came cold." }
-          - { es: "Entiendo que están a full, pero esperé media hora.", en: "I get that you're swamped, but I waited half an hour." }
+          - { es: "Mirá, no es por molestar, pero el café llegó frío.", en: "Look, I don't want to bother you, but the coffee came cold." }
+          - { es: "Entiendo que están a full, pero esperé media hora.", en: "I understand you're very busy, but I waited half an hour." }
           - { es: "Si me lo cambiás, quedamos más que bien.", en: "If you swap it, we're more than fine." }
           - { es: "No te hagas problema, son cosas que pasan.", en: "Don't worry about it, these things happen." }
         opener:
           es: "Perdón por la demora, hoy estamos a full. ¿Todo bien con el café?"
-          en: "Sorry for the wait, we're swamped today. Is the coffee all right?"
+          en: "Sorry for the wait, we're very busy today. Is the coffee all right?"
         keyterms: [frío, media hora, a full, no es por molestar, si me lo cambiás, demora, no te hagas problema]
 
   - id: kiosco
@@ -144,12 +144,12 @@ scenarios:
         goals:
           - { id: ask, es: Pedí un alfajor, en: Ask for an alfajor }
           - { id: price, es: Preguntá cuánto sale, en: Ask how much it costs }
-          - { id: pay, es: Pagá con transferencia, en: Pay by bank transfer }
+          - { id: pay, es: Preguntá si podés pagar con tarjeta, en: Ask if you can pay by card }
         key_phrases:
           - { es: "¿Tenés alfajores?", en: "Do you have alfajores?" }
           - { es: "Un alfajor de chocolate, por favor.", en: "A chocolate alfajor, please." }
           - { es: "¿Cuánto sale?", en: "How much is it?" }
-          - { es: "¿Te puedo pagar con transferencia?", en: "Can I pay you by bank transfer?" }
+          - { es: "¿Puedo pagar con tarjeta?", en: "Can I pay by card?" }
         opener:
           es: "¡Hola! ¿Qué necesitás?"
           en: "Hi! What do you need?"
@@ -157,7 +157,7 @@ scenarios:
         setting_es: Pasás por el kiosco antes de una juntada y querés llevar algo para todos.
         setting_en: You stop at the kiosco before a get-together and want to bring something for everyone.
         goals:
-          - { id: several, es: Pedí tres cosas distintas, en: Ask for three different things }
+          - { id: several, es: Pedí dos cosas distintas, en: Ask for two different things }
           - { id: compare, es: Preguntá cuál es más barato, en: Ask which one is cheaper }
           - { id: change, es: Preguntá si tiene cambio, en: Ask if he has change }
         key_phrases:
@@ -238,9 +238,9 @@ scenarios:
           en: "Hi! I'm Pancho. What's your name?"
       A2:
         setting_es: Estás en un cumpleaños y un amigo del cumpleañero te saca charla.
-        setting_en: "You're at a birthday party and a friend of the birthday boy starts chatting with you."
+        setting_en: "You're at Martín's birthday party and one of his friends starts chatting with you."
         role_es: un amigo de Martín, el cumpleañero
-        role_en: a friend of Martín, the birthday boy
+        role_en: "a friend of Martín, whose birthday it is"
         goals:
           - { id: host, es: Contá cómo conocés a Martín, en: Say how you know Martín }
           - { id: weekend, es: Contá qué hiciste el finde, en: Say what you did last weekend }
@@ -325,22 +325,22 @@ scenarios:
           - { es: "Nada más, gracias.", en: "That's all, thanks." }
         opener:
           es: "¡Buen día! ¿Qué te llevás hoy?"
-          en: "Morning! What'll it be today?"
+          en: "Good morning! What would you like today?"
       A2:
         setting_es: Vas a la verdulería a comprar lo que necesitás para una ensalada.
         setting_en: "You go to the greengrocer's to buy what you need for a salad."
         goals:
           - { id: recipe, es: Contá qué vas a cocinar, en: "Say what you're going to make" }
-          - { id: amounts, es: Pedí medio kilo de algo y un cuarto de otra cosa, en: Ask for half a kilo of one thing and a quarter of another }
+          - { id: amounts, es: Pedí medio kilo de algo y un cuarto de otra cosa, en: Ask for half a kilo of one thing and a quarter kilo of another }
           - { id: bag, es: Pagá y pedí una bolsa, en: Pay and ask for a bag }
         key_phrases:
           - { es: "Voy a hacer una ensalada para cuatro.", en: "I'm going to make a salad for four." }
-          - { es: "Dame medio kilo de tomates y un cuarto de cebolla.", en: "Give me half a kilo of tomatoes and a quarter of onions." }
+          - { es: "Dame medio kilo de tomates y un cuarto de cebolla.", en: "Give me half a kilo of tomatoes and a quarter kilo of onions." }
           - { es: "¿Me das una bolsa?", en: "Can I get a bag?" }
           - { es: "¿Cuánto es todo?", en: "How much is it all?" }
         opener:
           es: "¡Buen día! ¿Qué vas a cocinar hoy?"
-          en: "Morning! What are you cooking today?"
+          en: "Good morning! What are you cooking today?"
         keyterms: [ensalada, un cuarto, cebolla, zanahoria, bolsa, cuánto es todo, voy a hacer]
       B1:
         setting_es: Ayer compraste paltas en esta verdulería y estaban feas por dentro.
@@ -350,7 +350,7 @@ scenarios:
           - { id: choose, es: Pedile que te elija las mejores, en: Ask him to pick the best ones }
           - { id: deal, es: Pedí un descuento con buena onda, en: Ask nicely for a discount }
         key_phrases:
-          - { es: "Ayer me llevé tres paltas y dos estaban negras.", en: "Yesterday I took three avocados and two were black inside." }
+          - { es: "Ayer me llevé tres paltas y dos estaban negras.", en: "Yesterday I bought three avocados and two were black inside." }
           - { es: "¿Me elegís unas que estén para hoy?", en: "Can you pick me some that are ready for today?" }
           - { es: "¿No me hacés un precio?", en: "Can't you give me a better price?" }
           - { es: "Dale, no pasa nada, gracias.", en: "OK, no problem, thanks." }
@@ -379,9 +379,9 @@ scenarios:
     title_es: Perdido en el barrio
     title_en: Lost in the barrio
     setting_es: Buscás una farmacia en Almagro y le preguntás a un vecino.
-    setting_en: "You're looking for a pharmacy in Almagro, so you ask a neighbor."
+    setting_en: "You're looking for a pharmacy in Almagro, so you ask a local."
     role_es: un vecino del barrio
-    role_en: a neighbor from the barrio
+    role_en: a man who lives in the barrio
     keyterms:
       - dónde queda
       - farmacia
@@ -415,23 +415,23 @@ scenarios:
         setting_es: Quedaste con amigos en un bar de Almagro, pero el celular se quedó sin batería.
         setting_en: "You're meeting friends at a bar in Almagro, but your phone just died."
         goals:
-          - { id: address, es: Preguntá cómo llegar a la calle Medrano, en: Ask how to get to Medrano Street }
+          - { id: address, es: Preguntá cómo llegar a Medrano y Corrientes, en: Ask how to get to the corner of Medrano and Corrientes }
           - { id: walk, es: Preguntá si se puede ir caminando, en: Ask if you can walk there }
           - { id: repeat, es: Repetí las indicaciones para confirmar, en: Repeat the directions back to check }
         key_phrases:
-          - { es: "Perdón, ¿sabés cómo llego a la calle Medrano?", en: "Excuse me, do you know how I get to Medrano Street?" }
+          - { es: "Perdón, ¿sabés cómo llego a Medrano y Corrientes?", en: "Excuse me, do you know how I get to Medrano and Corrientes?" }
           - { es: "¿Se puede ir caminando o es muy lejos?", en: "Can I walk, or is it too far?" }
           - { es: "A ver si entendí: tres cuadras derecho y después a la izquierda.", en: "Let me check: three blocks straight, then left." }
           - { es: "Me quedé sin batería en el celular.", en: "My phone ran out of battery." }
         opener:
           es: "¿Buscás algo? ¿Adónde tenés que ir?"
           en: "Looking for something? Where do you need to go?"
-        keyterms: [Medrano, cómo llego, caminando, sin batería, celular, a ver si entendí, después, doblás]
+        keyterms: [Medrano, Corrientes, cómo llego, caminando, sin batería, celular, a ver si entendí, después, doblás]
       B1:
-        setting_es: Bajaste del subte en otra estación y tenés que llegar a un turno médico en quince minutos.
+        setting_es: Te bajaste del subte en la estación equivocada y tenés que llegar a un turno médico en quince minutos.
         setting_en: "You got off the subway at the wrong station and have to get to a doctor's appointment in fifteen minutes."
         role_es: un vecino que pasea al perro
-        role_en: a neighbor walking his dog
+        role_en: a local walking his dog
         goals:
           - { id: explain, es: Explicá adónde tenés que llegar y a qué hora, en: Explain where you need to be and when }
           - { id: fastest, es: Preguntá cuál es la forma más rápida, en: Ask for the quickest way }
@@ -447,9 +447,9 @@ scenarios:
         keyterms: [turno, no llego, subte, estación, la forma más rápida, taxi, tacho, te parece, apuro]
       B2:
         setting_es: Te perdiste buscando la casa de un amigo, y el vecino que te ayuda tiene opiniones sobre todo el barrio.
-        setting_en: "You got lost looking for a friend's place, and the neighbor helping you has opinions about the whole barrio."
+        setting_en: "You got lost looking for a friend's place, and the local helping you has opinions about the whole barrio."
         role_es: un vecino charlatán que vive en Almagro hace cuarenta años
-        role_en: a chatty neighbor who has lived in Almagro for forty years
+        role_en: a chatty local who has lived in Almagro for forty years
         goals:
           - { id: directions, es: Conseguí las indicaciones sin perderte en la charla, en: Get the directions without getting lost in the chat }
           - { id: opinion, es: Preguntale cómo cambió el barrio, en: Ask how the barrio has changed }
@@ -458,10 +458,10 @@ scenarios:
           - { es: "Perdón que te interrumpa, pero ¿entonces doblo en la próxima?", en: "Sorry to interrupt, but so I turn at the next one?" }
           - { es: "¿Y cómo cambió el barrio desde que vivís acá?", en: "And how has the barrio changed since you've lived here?" }
           - { es: "Me encantaría seguir charlando, pero me están esperando.", en: "I'd love to keep chatting, but they're waiting for me." }
-          - { es: "Te agradezco un montón, sos un genio.", en: "Thanks a lot, you're a star." }
+          - { es: "Te agradezco un montón, sos un genio.", en: "Thanks a lot, you're the best." }
         opener:
           es: "¿Buscás la calle Bulnes? Uh, este barrio cambió muchísimo. ¿Vos sos de acá?"
-          en: "Looking for Bulnes Street? Oh, this barrio has changed so much. Are you from here?"
+          en: "Looking for Bulnes Street? Oh, this neighborhood has changed so much. Are you from here?"
         keyterms: [Bulnes, que te interrumpa, doblo, la próxima, cambió, me están esperando, un montón, sos un genio]
 
   - id: colectivo
@@ -489,11 +489,11 @@ scenarios:
       A1:
         goals:
           - { id: which, es: Preguntá qué colectivo va a La Boca, en: Ask which bus goes to La Boca }
-          - { id: sube, es: Preguntá si podés pagar con la SUBE, en: Ask if you can pay with the SUBE card }
+          - { id: sube, es: Preguntá cómo se paga el colectivo, en: Ask how you pay on the bus }
           - { id: stop, es: Preguntá dónde te tenés que bajar, en: Ask where you have to get off }
         key_phrases:
           - { es: "¿Qué colectivo me lleva a La Boca?", en: "Which bus takes me to La Boca?" }
-          - { es: "¿Se puede pagar con la SUBE?", en: "Can you pay with the SUBE card?" }
+          - { es: "¿Se puede pagar en efectivo o necesito la SUBE?", en: "Can I pay cash, or do I need the SUBE card?" }
           - { es: "¿Dónde me tengo que bajar?", en: "Where do I have to get off?" }
           - { es: "¿Dónde puedo cargar la SUBE?", en: "Where can I top up the SUBE card?" }
         opener:
@@ -511,12 +511,12 @@ scenarios:
         key_phrases:
           - { es: "Voy a Plaza Italia. ¿Dónde me bajo?", en: "I'm going to Plaza Italia. Where do I get off?" }
           - { es: "¿Falta mucho?", en: "Is it much further?" }
-          - { es: "¿Me avisás cuando llegamos?", en: "Will you let me know when we get there?" }
+          - { es: "¿Me avisás dónde me bajo?", en: "Can you tell me where to get off?" }
           - { es: "Gracias, sos muy amable.", en: "Thanks, that's very kind." }
         opener:
           es: "Te veo mirando el mapa. ¿Adónde vas?"
           en: "I see you looking at the map. Where are you headed?"
-        keyterms: [Palermo, Plaza Italia, falta mucho, me avisás, cuando llegamos, amable]
+        keyterms: [Palermo, Plaza Italia, falta mucho, me avisás, dónde me bajo, amable]
       B1:
         setting_es: Esperás el colectivo hace media hora y alguien en la parada dice que hay paro.
         setting_en: "You've been waiting for the bus for half an hour, and someone at the stop says there's a strike."
@@ -538,11 +538,11 @@ scenarios:
         setting_en: A passenger complains loudly about public transport and asks for your opinion.
         goals:
           - { id: compare, es: Compará el transporte de acá con el de tu ciudad, en: "Compare transport here with your city's" }
-          - { id: defend, es: Defendé algo bueno del bondi, en: Defend something good about the bondi }
+          - { id: defend, es: Defendé algo bueno del bondi, en: Defend something good about the buses }
           - { id: agree, es: Buscá un punto en común, en: Find some common ground }
         key_phrases:
-          - { es: "En mi ciudad el transporte es más caro y pasa menos seguido.", en: "In my city transport is pricier and comes less often." }
-          - { es: "Igual, hay que reconocer que el bondi te lleva a todos lados.", en: "Still, you have to admit the bondi takes you everywhere." }
+          - { es: "En mi ciudad el transporte es más caro y pasa menos seguido.", en: "In my city transport is more expensive and comes less often." }
+          - { es: "Igual, hay que reconocer que el bondi te lleva a todos lados.", en: "Still, you have to admit the bus takes you everywhere." }
           - { es: "En eso tenés razón, no te lo discuto.", en: "You're right about that, I won't argue." }
           - { es: "Si hubiera más carriles exclusivos, andaría mucho mejor.", en: "If there were more bus lanes, it would run much better." }
         opener:
@@ -616,7 +616,7 @@ scenarios:
           - { es: "Dale, pero la próxima elegís vos.", en: "OK, but next time you choose." }
         opener:
           es: "¡Che, el sábado vamos a un boliche en Palermo hasta las seis de la mañana! ¿Te sumás?"
-          en: "Hey, on Saturday we're going to a club in Palermo until six in the morning! You in?"
+          en: "Hey, on Saturday we're going to a club in Palermo until six in the morning! Do you want to come?"
         keyterms: [no me copa, te sumás, en vez de eso, peña, música en vivo, te va a encantar, la próxima]
       B2:
         setting_es: Organizás un viaje para el finde largo con Pancho y no se ponen de acuerdo.
@@ -718,7 +718,250 @@ scenarios:
           en: "So? How's the steak? Best in the neighborhood, right?"
         keyterms: [pasado, pasada, no dudo, te lo pedí, me llegó, me olvido del tema, de regalo, quedamos a mano]
 
-  # --- Neighbor (B1) only -----------------------------------------------------
+  - id: farmacia
+    title_es: En la farmacia
+    title_en: At the pharmacy
+    setting_es: Te duele la cabeza y entrás a una farmacia de Palermo.
+    setting_en: You have a headache and walk into a pharmacy in Palermo.
+    role_es: el farmacéutico
+    role_en: the pharmacist
+    keyterms:
+      - farmacia
+      - me duele
+      - dolor de cabeza
+      - la cabeza
+      - la garganta
+      - la panza
+      - ibuprofeno
+      - paracetamol
+      - pastilla
+      - pastillas
+      - receta
+      - cómo se toma
+      - cada ocho horas
+      - tenés algo para
+    versions:
+      A1:
+        goals:
+          - { id: hurts, es: Decí qué te duele, en: Say what hurts }
+          - { id: ask, es: Pedí algo para el dolor, en: Ask for something for the pain }
+          - { id: how, es: Preguntá cómo se toma, en: Ask how to take it }
+        key_phrases:
+          - { es: "Me duele mucho la cabeza.", en: "My head hurts a lot." }
+          - { es: "Quiero algo para el dolor, por favor.", en: "I want something for the pain, please." }
+          - { es: "¿Necesito receta?", en: "Do I need a prescription?" }
+          - { es: "¿Cómo se toma?", en: "How do I take it?" }
+        opener:
+          es: "¡Hola! ¿En qué te ayudo?"
+          en: "Hi! How can I help you?"
+      A2:
+        setting_es: Tenés tos y dolor de garganta hace dos días y entrás a una farmacia.
+        setting_en: You have had a cough and a sore throat for two days, and you walk into a pharmacy.
+        goals:
+          - { id: since, es: Contá qué te pasa y desde cuándo, en: Say what is wrong and since when }
+          - { id: cough, es: Preguntá si tiene algo para la tos, en: Ask if he has something for a cough }
+          - { id: product, es: Pedí una caja de ibuprofeno, en: Ask for a box of ibuprofen }
+        key_phrases:
+          - { es: "Estoy con tos desde el lunes y me duele la garganta.", en: "I've had a cough since Monday and my throat hurts." }
+          - { es: "¿Tenés algo para la tos?", en: "Do you have something for a cough?" }
+          - { es: "Dame también una caja de ibuprofeno.", en: "Give me a box of ibuprofen too." }
+          - { es: "¿Cada cuántas horas lo tomo?", en: "How many hours between doses?" }
+        opener:
+          es: "¡Hola! Uy, qué tos tenés. ¿Desde cuándo estás así?"
+          en: "Hi! Oh, that's a bad cough. How long have you been like this?"
+        keyterms: [tos, jarabe, resfrío, desde el lunes, una caja, cada cuántas horas, dame, fiebre]
+      B1:
+        setting_es: Hace cinco días que te duele la panza y el farmacéutico te hace preguntas antes de darte algo.
+        setting_en: Your stomach has hurt for five days, and the pharmacist asks you questions before he gives you anything.
+        goals:
+          - { id: symptoms, es: Describí los síntomas y hace cuánto los tenés, en: Describe your symptoms and how long you have had them }
+          - { id: doctor, es: Preguntá si te conviene ir al médico, en: Ask if you should see a doctor }
+          - { id: discount, es: Preguntá si hay descuento con tu obra social, en: Ask if your health insurance gives you a discount }
+        key_phrases:
+          - { es: "Hace cinco días que me duele la panza y casi no tengo hambre.", en: "My stomach has hurt for five days and I'm hardly hungry." }
+          - { es: "No tengo fiebre, pero a la noche me siento peor.", en: "I don't have a fever, but I feel worse at night." }
+          - { es: "¿Te parece que tendría que ir al médico?", en: "Do you think I should see a doctor?" }
+          - { es: "¿Con la obra social me hacen algún descuento?", en: "Do I get a discount with my health insurance?" }
+        opener:
+          es: "¡Hola! No tenés buena cara. ¿Qué te anda pasando?"
+          en: "Hi! You don't look well. What's going on?"
+        keyterms: [síntomas, hace cinco días, obra social, prepaga, descuento, médico, guardia, me siento peor, tendría que]
+      B2:
+        setting_es: Tenés una infección de garganta, pedís un antibiótico y el farmacéutico te dice que necesitás receta.
+        setting_en: You have a throat infection, you ask for an antibiotic, and the pharmacist says you need a prescription.
+        goals:
+          - { id: explain, es: Explicá por qué no tenés receta, en: Explain why you have no prescription }
+          - { id: alt, es: Pedí una alternativa de venta libre, en: Ask for an option you can buy without a prescription }
+          - { id: plan, es: Averiguá dónde conseguir una receta hoy, en: Find out where you can get a prescription today }
+        key_phrases:
+          - { es: "En mi país lo compro sin receta, no sabía que acá hacía falta.", en: "In my country I buy it without a prescription. I didn't know I needed one here." }
+          - { es: "Te entiendo, no quiero que tengas un problema por mi culpa.", en: "I understand, I don't want you to have a problem because of me." }
+          - { es: "¿Hay algo de venta libre que me alivie hasta que vea a un médico?", en: "Is there something without a prescription that would help until I see a doctor?" }
+          - { es: "¿Sabés si en una guardia me harían la receta en el momento?", en: "Do you know if an emergency room would write me the prescription right away?" }
+        opener:
+          es: "Uh, mirá, este se vende solo con receta. ¿La tenés a mano?"
+          en: "Oh, look, this one is sold only with a prescription. Do you have it with you?"
+        keyterms: [antibiótico, infección, venta libre, hacía falta, que me alivie, guardia, receta electrónica, en el momento, a mano]
+
+  - id: taxi
+    title_es: En el taxi
+    title_en: Taking a taxi
+    setting_es: Parás un taxi en el centro para ir a un bar en Palermo.
+    setting_en: You stop a taxi downtown to go to a bar in Palermo.
+    role_es: el tachero
+    role_en: the taxi driver
+    keyterms:
+      - taxi
+      - tachero
+      - Thames
+      - Gorriti
+      - Thames y Gorriti
+      - voy a
+      - cuánto sale
+      - más o menos
+      - cuánto tardamos
+      - efectivo
+      - tarjeta
+      - Mercado Pago
+      - la esquina
+      - acá está bien
+    versions:
+      A1:
+        goals:
+          - { id: address, es: Decí adónde vas, en: Say where you are going }
+          - { id: price, es: Preguntá cuánto sale más o menos, en: Ask about how much it costs }
+          - { id: pay, es: Preguntá si podés pagar con tarjeta, en: Ask if you can pay by card }
+        key_phrases:
+          - { es: "Voy a Thames y Gorriti, por favor.", en: "I'm going to Thames and Gorriti, please." }
+          - { es: "¿Cuánto sale más o menos?", en: "About how much is it?" }
+          - { es: "¿Cuánto tardamos?", en: "How long does it take?" }
+          - { es: "¿Puedo pagar con tarjeta?", en: "Can I pay by card?" }
+        opener:
+          es: "¡Buenas! ¿Adónde vamos?"
+          en: "Hi! Where are we going?"
+      A2:
+        setting_es: Llegás a Aeroparque, tomás un taxi a San Telmo y el tachero te saca charla.
+        setting_en: You land at Aeroparque airport, take a taxi to San Telmo, and the driver starts chatting with you.
+        goals:
+          - { id: address, es: Decí a qué esquina vas, en: Say which street corner you are going to }
+          - { id: chat, es: Contá por qué viniste y cuánto te quedás, en: Say why you came and how long you are staying }
+          - { id: pay, es: Pagá en efectivo y preguntá si tiene cambio, en: Pay in cash and ask if he has change }
+        key_phrases:
+          - { es: "Voy a Defensa y Carlos Calvo, en San Telmo.", en: "I'm going to Defensa and Carlos Calvo, in San Telmo." }
+          - { es: "Vine de vacaciones y me voy a quedar dos semanas.", en: "I came on vacation and I'm going to stay two weeks." }
+          - { es: "¿Siempre hay tanto tránsito a esta hora?", en: "Is there always this much traffic at this time?" }
+          - { es: "Te pago en efectivo. ¿Tenés cambio?", en: "I'll pay cash. Do you have change?" }
+        opener:
+          es: "¡Buenas! Subí. ¿Adónde te llevo?"
+          en: "Hi! Get in. Where can I take you?"
+        keyterms: [Aeroparque, San Telmo, Defensa, Carlos Calvo, vine de vacaciones, me voy a quedar, tránsito, cambio, valija]
+      B1:
+        setting_es: Vas en taxi a Palermo, ves en el mapa que el tachero agarra un camino más largo y, al llegar, el posnet no anda.
+        setting_en: You are in a taxi to Palermo. On the map you see the driver is taking a longer way, and when you arrive the card reader does not work.
+        goals:
+          - { id: route, es: Preguntá por qué va por ese camino, en: Ask why he is going that way }
+          - { id: ask, es: Pedile que vaya por la avenida que vos conocés, en: Ask him to take the avenue you know }
+          - { id: pay, es: Resolvé cómo pagar si el posnet no anda, en: Work out how to pay if the card reader does not work }
+        key_phrases:
+          - { es: "Perdón, ¿por qué vamos por acá? El mapa me marca otro camino.", en: "Sorry, why are we going this way? The map shows me another way." }
+          - { es: "Prefiero que vayas por Córdoba, si no te molesta.", en: "I'd rather you take Córdoba Avenue, if you don't mind." }
+          - { es: "No tengo efectivo. ¿Te puedo pagar con Mercado Pago?", en: "I don't have cash. Can I pay you with Mercado Pago?" }
+          - { es: "Si no, paramos en un cajero y saco plata.", en: "If not, we can stop at an ATM and I'll take out money." }
+        opener:
+          es: "Mirá, Córdoba está imposible a esta hora, así que agarro por otro lado. ¿Tenés mucho apuro?"
+          en: "Look, Córdoba Avenue is impossible at this time, so I'm going another way. Are you in a big hurry?"
+        keyterms: [posnet, no anda, otro camino, Córdoba, que vayas, cajero, saco plata, el mapa, apuro, agarro por]
+      B2:
+        setting_es: Cruzás la ciudad en taxi en hora pico con un tachero que opina de todo y se distrae del camino.
+        setting_en: You cross the city by taxi at rush hour with a driver who has an opinion on everything and forgets about the route.
+        role_es: un tachero charlatán que maneja el taxi hace treinta años
+        role_en: a chatty taxi driver who has driven a taxi for thirty years
+        goals:
+          - { id: opinion, es: Opiná sobre el tránsito de la ciudad, en: Give your opinion about traffic in the city }
+          - { id: route, es: Indicale el camino sin cortar la charla, en: Tell him the way without ending the chat }
+          - { id: stop, es: Avisale dónde querés bajarte, en: Tell him where you want to get out }
+        key_phrases:
+          - { es: "Para mí el problema no son los autos, es que nadie respeta nada.", en: "For me the problem is not the cars. It's that nobody respects any rules." }
+          - { es: "Perdón que te corte, pero acá convendría doblar, ¿no?", en: "Sorry to interrupt, but we should turn here, right?" }
+          - { es: "Si agarráramos por Juan B. Justo, llegaríamos antes.", en: "If we took Juan B. Justo Avenue, we would arrive sooner." }
+          - { es: "Dejame en la esquina, antes del semáforo, que me queda perfecto.", en: "Drop me at the corner, before the traffic light. That works well for me." }
+        opener:
+          es: "¿Viste lo que es el tránsito hoy? Entre los cortes y las obras, esta ciudad es un caos. ¿En tu país se maneja así?"
+          en: "Did you see the traffic today? With the street protests and the roadworks, this city is chaos. Do people drive like this in your country?"
+        keyterms: [tránsito, hora pico, cortes, piquete, Juan B. Justo, convendría doblar, semáforo, dejame en la esquina, nadie respeta nada]
+
+  - id: supermercado
+    title_es: En la caja del súper
+    title_en: At the supermarket checkout
+    setting_es: Terminaste de comprar en el súper del barrio y te toca pagar en la caja.
+    setting_en: You finished shopping at the local supermarket and it is your turn to pay at the checkout.
+    role_es: el cajero del supermercado
+    role_en: the supermarket cashier
+    keyterms:
+      - súper
+      - supermercado
+      - la caja
+      - efectivo
+      - tarjeta
+      - débito
+      - crédito
+      - cuotas
+      - en un pago
+      - bolsa
+      - la tarjeta del súper
+      - QR
+      - cuánto es
+      - ticket
+    versions:
+      A1:
+        goals:
+          - { id: pay, es: Decí si pagás en efectivo o con tarjeta, en: Say if you are paying by cash or card }
+          - { id: debit, es: Decí si es débito o crédito, en: Say if it is debit or credit }
+          - { id: bag, es: Pedí una bolsa, en: Ask for a bag }
+        key_phrases:
+          - { es: "Con tarjeta, por favor.", en: "By card, please." }
+          - { es: "Débito, en un pago.", en: "Debit, in one payment." }
+          - { es: "Sí, una bolsa, por favor.", en: "Yes, a bag, please." }
+          - { es: "No, no tengo la tarjeta del súper.", en: "No, I don't have the store card." }
+        opener:
+          es: "¡Hola! ¿Pagás en efectivo o con tarjeta?"
+          en: "Hi! Are you paying by cash or card?"
+      A2:
+        setting_es: Estás en el chino de la esquina, no encontraste el café y llegás a la caja con un billete grande.
+        setting_en: You are at the small corner supermarket. You did not find the coffee, and you get to the checkout with a large bill.
+        role_es: el cajero del súper chino del barrio
+        role_en: the cashier at the small neighborhood supermarket
+        goals:
+          - { id: where, es: Preguntá dónde está el café, en: Ask where the coffee is }
+          - { id: change, es: Decí que no tenés un billete más chico, en: Say that you do not have a smaller bill }
+          - { id: qr, es: Preguntá si podés pagar con QR, en: Ask if you can pay by QR code }
+        key_phrases:
+          - { es: "No, no encontré el café. ¿Dónde está?", en: "No, I didn't find the coffee. Where is it?" }
+          - { es: "Te pago en efectivo.", en: "I'll pay you in cash." }
+          - { es: "No tengo más chico, perdón.", en: "I don't have anything smaller, sorry." }
+          - { es: "¿Puedo pagar con QR?", en: "Can I pay by QR code?" }
+        opener:
+          es: "¡Hola! ¿Encontraste todo?"
+          en: "Hi! Did you find everything?"
+        keyterms: [el chino, café, pasillo, al fondo, más chico, billete, cambio, encontré, no encontré]
+      B1:
+        setting_es: En la caja, el yogur te sale más caro que el precio que viste en la góndola.
+        setting_en: At the checkout, the yogurt costs more than the price you saw on the shelf.
+        goals:
+          - { id: notice, es: Avisá que en la góndola decía otro precio, en: Say that the shelf showed a different price }
+          - { id: check, es: Pedí que revisen el precio, en: Ask them to check the price }
+          - { id: decide, es: Decidí si lo llevás o lo dejás, en: Decide if you take it or leave it }
+        key_phrases:
+          - { es: "Perdón, en la góndola el yogur tenía otro precio.", en: "Sorry, the yogurt had a different price on the shelf." }
+          - { es: "¿Podrías fijarte? Creo que estaba en oferta.", en: "Could you check? I think it was on sale." }
+          - { es: "Si no es ese precio, prefiero dejarlo.", en: "If that is not the price, I'd rather leave it." }
+          - { es: "Lo demás lo pago con débito.", en: "I'll pay for the rest with debit." }
+        opener:
+          es: "Bueno, son cuarenta y dos mil trescientos. ¿Débito o crédito?"
+          en: "OK, that's forty-two thousand three hundred. Debit or credit?"
+        keyterms: [góndola, yogur, otro precio, en oferta, fijarte, prefiero dejarlo, lo demás, dos por uno, cuarenta y dos mil]
+
+  # --- Written first for Neighbor (B1); some have a Newcomer (A2) version -------
 
   - id: depto
     title_es: Problema en el depto
@@ -742,6 +985,22 @@ scenarios:
       - mañana
       - WhatsApp
     versions:
+      A2:
+        setting_es: No hay agua caliente en tu depto y llamás al dueño.
+        setting_en: There is no hot water in your apartment and you call your landlord.
+        goals:
+          - { id: problem, es: Contá cuál es el problema, en: Say what the problem is }
+          - { id: since, es: Decí desde cuándo pasa, en: Say since when it has been happening }
+          - { id: when, es: Preguntá cuándo puede venir alguien, en: Ask when someone can come }
+        key_phrases:
+          - { es: "No hay agua caliente en el depto.", en: "There's no hot water in the apartment." }
+          - { es: "El calefón no anda desde ayer.", en: "The water heater hasn't worked since yesterday." }
+          - { es: "¿Cuándo puede venir alguien a arreglarlo?", en: "When can someone come to fix it?" }
+          - { es: "Mañana a la mañana estoy en casa.", en: "Tomorrow morning I'm at home." }
+        opener:
+          es: "Hola, ¿cómo andás? ¿Pasó algo con el depto?"
+          en: "Hi, how are you? Is something wrong with the apartment?"
+        keyterms: [agua caliente, calefón, termotanque, no anda, desde ayer, arreglar, gasista, a la mañana]
       B1:
         goals:
           - { id: explain, es: Explicá el problema, en: Explain the problem }
@@ -754,7 +1013,7 @@ scenarios:
           - { es: "Te mando una foto por WhatsApp.", en: "I'll send you a photo on WhatsApp." }
         opener:
           es: "Hola, ¿cómo andás? ¿Pasó algo con el depto?"
-          en: "Hi, how are you? Something up with the apartment?"
+          en: "Hi, how are you? Is something wrong with the apartment?"
 
   - id: devolucion
     title_es: Devolver una compra
@@ -777,6 +1036,22 @@ scenarios:
       - compré
       - preferiría
     versions:
+      A2:
+        setting_es: Ayer compraste una remera, te queda chica y querés cambiarla por otro talle.
+        setting_en: Yesterday you bought a T-shirt. It is too small and you want to change it for another size.
+        goals:
+          - { id: explain, es: Explicá que la remera te queda chica, en: Explain that the T-shirt is too small for you }
+          - { id: swap, es: Pedí cambiarla por un talle más grande, en: Ask to change it for a bigger size }
+          - { id: color, es: Preguntá si la tienen en otro color, en: Ask if they have it in another color }
+        key_phrases:
+          - { es: "Compré esta remera ayer y me queda chica.", en: "I bought this T-shirt yesterday and it's too small for me." }
+          - { es: "¿La puedo cambiar por un talle más grande?", en: "Can I change it for a bigger size?" }
+          - { es: "Acá tengo el ticket.", en: "I have the receipt here." }
+          - { es: "¿La tenés en otro color?", en: "Do you have it in another color?" }
+        opener:
+          es: "¡Hola! ¿Te puedo ayudar con algo?"
+          en: "Hi! Can I help you with something?"
+        keyterms: [remera, talle, me queda chica, más grande, cambiar, otro color, probador, ayer]
       B1:
         goals:
           - { id: problem, es: Explicá qué les pasa a los auriculares, en: "Explain what's wrong with the headphones" }
@@ -812,6 +1087,22 @@ scenarios:
       - que me cortes
       - que quede
     versions:
+      A2:
+        setting_es: Entrás sin turno a una peluquería de barrio para un corte simple.
+        setting_en: You walk into a neighborhood hairdresser without an appointment for a simple haircut.
+        goals:
+          - { id: cut, es: Decí cuánto querés que te corte, en: Say how much you want him to cut }
+          - { id: price, es: Preguntá cuánto sale el corte, en: Ask how much the haircut costs }
+          - { id: pay, es: Preguntá si podés pagar con Mercado Pago, en: Ask if you can pay with Mercado Pago }
+        key_phrases:
+          - { es: "Cortame solo un poco, por favor.", en: "Cut just a little, please." }
+          - { es: "A los costados, más corto.", en: "Shorter on the sides." }
+          - { es: "¿Cuánto sale el corte?", en: "How much is the haircut?" }
+          - { es: "¿Te puedo pagar con Mercado Pago?", en: "Can I pay you with Mercado Pago?" }
+        opener:
+          es: "¡Hola! Sentate acá. ¿Te corto mucho o poco?"
+          en: "Hi! Sit here. Do you want me to cut a lot or a little?"
+        keyterms: [cortame, un poco, más corto, cuánto sale, Mercado Pago, turno, mucho o poco, así está bien]
       B1:
         goals:
           - { id: cut, es: Explicá qué corte querés, en: Explain the cut you want }
@@ -847,6 +1138,20 @@ scenarios:
       - quedarme
       - familia
     versions:
+      A2:
+        goals:
+          - { id: thank, es: Agradecé la invitación, en: Thank them for inviting you }
+          - { id: food, es: Decí que la comida está rica, en: Say that the food is good }
+          - { id: why, es: Contá por qué viniste a Buenos Aires, en: Say why you came to Buenos Aires }
+        key_phrases:
+          - { es: "Muchas gracias por la invitación.", en: "Thank you very much for the invitation." }
+          - { es: "Traje un vino para compartir.", en: "I brought some wine to share." }
+          - { es: "Las milanesas están riquísimas.", en: "The milanesas are delicious." }
+          - { es: "Vine a Buenos Aires para aprender español.", en: "I came to Buenos Aires to learn Spanish." }
+        opener:
+          es: "¡Hola! Pasá, pasá, estás en tu casa. ¿Llegaste bien?"
+          en: "Hi! Come in, come in, make yourself at home. Did you find us okay?"
+        keyterms: [llegué bien, traje, riquísimas, vine, aprender español, me gusta mucho]
       B1:
         goals:
           - { id: thank, es: Agradecé la invitación, en: Thank them for inviting you }
@@ -861,7 +1166,7 @@ scenarios:
           es: "¡Hola! Pasá, pasá, estás en tu casa. ¿Llegaste bien?"
           en: "Hi! Come in, come in, make yourself at home. Did you find us okay?"
 
-  # --- Local (B2) only --------------------------------------------------------
+  # --- Written for Local (B2); alquiler also has a Newcomer (A2) version --------
 
   - id: entrevista
     title_es: Entrevista de trabajo
@@ -954,6 +1259,22 @@ scenarios:
       - me lo dejarías
       - living
     versions:
+      A2:
+        setting_es: Visitás un depto en Villa Crespo con el dueño y querés saber lo básico.
+        setting_en: You visit an apartment in Villa Crespo with the owner and want to know the basic facts.
+        goals:
+          - { id: price, es: Preguntá cuánto sale el alquiler por mes, en: Ask how much the rent is per month }
+          - { id: fees, es: Preguntá si las expensas están incluidas, en: Ask if the building fees are included }
+          - { id: move, es: Preguntá cuándo te podés mudar, en: Ask when you can move in }
+        key_phrases:
+          - { es: "¿Cuánto sale el alquiler por mes?", en: "How much is the rent per month?" }
+          - { es: "¿Las expensas están incluidas en el precio?", en: "Are the building fees included in the price?" }
+          - { es: "¿Tiene lavarropas?", en: "Does it have a washing machine?" }
+          - { es: "Me gusta mucho. ¿Cuándo me puedo mudar?", en: "I like it a lot. When can I move in?" }
+        opener:
+          es: "Bueno, pasá. Este es el living. ¿Te gusta?"
+          en: "OK, come in. This is the living room. Do you like it?"
+        keyterms: [por mes, incluidas, lavarropas, mudar, me puedo mudar, ambientes, me gusta mucho, cuándo]
       B2:
         goals:
           - { id: ask, es: Preguntá qué incluye el alquiler, en: Ask what the rent includes }
@@ -996,8 +1317,8 @@ scenarios:
           - { id: close, es: Cerrá el debate con humor, en: End the debate with humor }
         key_phrases:
           - { es: "Yo creo que desde casa se rinde más, y te explico por qué.", en: "I think you get more done at home, and I'll tell you why." }
-          - { es: "En eso te doy la razón.", en: "I'll give you that." }
-          - { es: "Bueno, pero no me vas a negar que el viaje es un garrón.", en: "Well, you can't deny the commute is a drag." }
+          - { es: "En eso te doy la razón.", en: "You're right about that." }
+          - { es: "Bueno, pero no me vas a negar que el viaje es un garrón.", en: "Well, you can't deny the commute is really annoying." }
           - { es: "Hagamos las paces y pasame el postre.", en: "Let's make peace and pass me the dessert." }
         opener:
           es: "Yo no entiendo a la gente que trabaja desde casa. ¿A vos qué te gusta más, la oficina o tu casa?"
@@ -1011,11 +1332,11 @@ openers:
       - { es: "¡Buenas! ¿Qué te gusta hacer?", en: "Hi! What do you like to do?" }
     A2:
       - { es: "¡Hola! ¿Qué hiciste hoy?", en: "Hi! What did you do today?" }
-      - { es: "Che, ¿qué hacés los fines de semana?", en: "Hey, what do you do at the weekend?" }
-      - { es: "Che, ¿cómo es tu barrio? ¿Te gusta?", en: "Hey, what's your neighbourhood like? Do you like it?" }
+      - { es: "Che, ¿qué hacés los fines de semana?", en: "Hey, what do you do on the weekend?" }
+      - { es: "Che, ¿cómo es tu barrio? ¿Te gusta?", en: "Hey, what's your neighborhood like? Do you like it?" }
     B1:
       - { es: "¿Cómo te va con el español? ¿Qué es lo más difícil para vos?", en: "How's your Spanish going? What's the hardest part for you?" }
-      - { es: "Che, ¿alguna vez viajaste a otro país? ¿Adónde fuiste?", en: "Hey, have you ever travelled abroad? Where did you go?" }
+      - { es: "Che, ¿alguna vez viajaste a otro país? ¿Adónde fuiste?", en: "Hey, have you ever traveled abroad? Where did you go?" }
       - { es: "Si pudieras vivir en cualquier ciudad del mundo, ¿dónde vivirías?", en: "If you could live in any city in the world, where would you live?" }
     B2:
       - { es: "Che, ¿qué opinás de trabajar desde casa? ¿Te parece mejor o peor?", en: "Hey, what do you think about working from home? Better or worse?" }
@@ -1041,7 +1362,7 @@ openers:
       keyterms: [alfajor, alfajores, maicena, dulce de leche, facturas, medialunas, kiosco, postre, bola de fraile]
     futbol:
       es: "¿Te gusta el fútbol? ¿Mirás los partidos?"
-      en: "Do you like football? Do you watch the matches?"
+      en: "Do you like soccer? Do you watch the games?"
       keyterms: [fútbol, partido, cancha, hincha, cuadro, de qué cuadro sos, gol, Messi, Maradona, la Selección, el Mundial]
     tango:
       es: "¿Alguna vez escuchaste tango? ¿Qué te parece?"

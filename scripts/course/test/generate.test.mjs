@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { checkCandidates, generationPrompt, selectCandidates, styleSpec, targetsFor } from '../lib/generate.mjs';
-import { FORMS_PER_LESSON, LESSON_ITEMS, planLessons, screensOf } from '../lib/lessons.mjs';
+import { FORMS_PER_LESSON, LESSON_ITEMS, SHOWN_MAX, levelOf, lintLessons, planLessons, screensOf } from '../lib/lessons.mjs';
 import { loadOutline } from '../lib/outline.mjs';
 
 const RAMP = ['sentence_meaning', 'sentence_gap', 'sentence_build'];
@@ -236,4 +236,210 @@ test('grammar practice drills sentences that carry the grammar, and opens on its
   const gaps = own.filter((s) => s.mode === 'sentence_gap' || s.mode === 'sentence_gap_typed');
   const byId = new Map(sentences.map((s) => [s.id, s]));
   for (const g of gaps) assert.ok(verbs.some((v) => v.id === byId.get(g.sentence_id).target_form_id), 'a gap asks the grammar');
+});
+
+// ── Lessons by level ────────────────────────────────────────────────────────
+
+/** A unit's slots, lesson by lesson, for the lessons of the given kinds. */
+const lessonsOf = (unit, slots, kinds = ['lesson', 'checkpoint']) =>
+  unit.lessons.filter((l) => kinds.includes(l.kind)).map((l) => slots.filter((s) => s.lesson_id === l.id)).filter((own) => own.length);
+const TYPED = 'sentence_gap_typed';
+const wordsOf = (sentences) => new Map(sentences.map((s) => [s.id, s.tokens.length]));
+
+test('a section is planned at the level its cefr names', () => {
+  assert.deepEqual(['A1.1', 'A1.3', 'A2.4', 'B1.1', 'B2.5', 'C1.2', undefined].map(levelOf), [0, 0, 1, 2, 3, 3, 0]);
+});
+
+test('from A2 a teaching lesson types a word or two; at A1 it types none', () => {
+  const unit = outline.units.find((u) => u.course_order === 9);
+  const sentences = unitSentences(unit, outline.forms, { per: 6 });
+  const typedIn = (level) => {
+    const { slots } = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips, level });
+    return lessonsOf(unit, slots).map((own) => {
+      assert.ok(screensOf(own) <= LESSON_ITEMS.max, `level ${level}: ${screensOf(own)} screens`);
+      return own.filter((s) => s.mode === TYPED).length;
+    });
+  };
+  assert.ok(typedIn(0).every((n) => n === 0), 'A1 as it was');
+  assert.ok(typedIn(1).every((n) => n >= 1 && n <= 2), `A2: ${typedIn(1)}`);
+});
+
+test('from B1 a drill skips the short sentence when the word has a longer one, and takes two clauses first', () => {
+  const unit = outline.units.find((u) => u.course_order === 9);
+  // Lengths one to eight a word; the six-word one has a second clause.
+  const sentences = unitSentences(unit, outline.forms, { per: 8 }).map((s) =>
+    s.id.endsWith('-5') ? { ...s, tokens: s.tokens.map((t, i) => (i === 2 ? { ...t, surface: 'que' } : t)) } : s,
+  );
+  const size = wordsOf(sentences);
+  const a1 = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips });
+  assert.ok(a1.slots.some((s) => s.mode === 'sentence_gap' && size.get(s.sentence_id) < 3), 'A1 still takes the shortest');
+  const b1 = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips, level: 2 });
+  for (const own of lessonsOf(unit, b1.slots)) {
+    for (const s of own.filter((x) => x.kind === 'drill')) assert.ok(size.get(s.sentence_id) >= 5, `${size.get(s.sentence_id)} words`);
+    own.forEach((s, i) => {
+      // teach · meaning · gap: the gap is the sentence with two clauses.
+      if (s.kind === 'teach' && own[i + 2]?.mode === 'sentence_gap') assert.equal(own[i + 2].sentence_id, `${s.form_id}-5`);
+    });
+  }
+});
+
+test('a word with only short sentences is still taught and met in them, at any level', () => {
+  const unit = outline.units.find((u) => u.course_order === 9);
+  const sentences = unitSentences(unit, outline.forms, { per: 3 });
+  const byId = new Map(sentences.map((s) => [s.id, s]));
+  for (const level of [0, 1, 2, 3]) {
+    const { slots, warnings } = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips, level });
+    assert.deepEqual(warnings.filter((w) => /introduces/.test(w)), [], `level ${level}`);
+    for (const own of lessonsOf(unit, slots)) {
+      own.forEach((s, i) => {
+        if (s.kind !== 'teach') return;
+        const next = own.slice(i + 1).find((x) => x.kind === 'drill');
+        assert.equal(byId.get(next.sentence_id).target_form_id, s.form_id, `level ${level}: the drill after a new word uses it`);
+      });
+    }
+  }
+});
+
+test('from B1 a meaning is picked only for a new word, and from B2 the gap is typed', () => {
+  const base = outline.units.find((u) => u.course_order === 9);
+  const unit = { ...base, lessons: [...base.lessons, { id: `${base.id}-p`, ordinal: 99, kind: 'practice', title_en: 'Practice' }] };
+  // Two sentences a word: lessons have to top themselves up.
+  const sentences = unitSentences(unit, outline.forms, { per: 2 });
+  const byId = new Map(sentences.map((s) => [s.id, s]));
+  for (const level of [2, 3]) {
+    const { slots } = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips, level });
+    for (const own of lessonsOf(unit, slots, ['lesson', 'checkpoint', 'practice'])) {
+      const taught = new Set(own.filter((s) => s.kind === 'teach').map((s) => s.form_id));
+      for (const s of own.filter((x) => x.mode === 'sentence_meaning')) {
+        assert.ok(taught.has(byId.get(s.sentence_id).target_form_id), `level ${level}: a meaning for a word already met`);
+      }
+      if (level === 3) assert.ok(!own.some((s) => s.mode === 'sentence_gap'), 'B2: no picked gap');
+    }
+    assert.deepEqual(lintLessons({ unit, slots, sentenceById: byId, formById: new Map(outline.forms.map((f) => [f.id, f])), level }).filter((w) => /meaning|typed/.test(w)), []);
+  }
+});
+
+test('no sentence is on more than two screens of one lesson', () => {
+  for (const base of outline.units.filter((u) => u.course_order >= 2 && u.course_order <= 9)) {
+    const unit = {
+      ...base,
+      lessons: [
+        ...base.lessons,
+        { id: `${base.id}-g`, ordinal: 98, kind: 'practice', title_en: 'Grammar practice' },
+        { id: `${base.id}-p`, ordinal: 99, kind: 'practice', title_en: 'Practice' },
+      ],
+    };
+    const sentences = unitSentences(unit, outline.forms, { per: 1, audio: true });
+    const ids = new Set(outline.forms.filter((f) => f.unit_id === unit.id).map((f) => f.id));
+    for (const level of [0, 1, 2, 3]) {
+      const { slots } = planLessons({
+        unit, forms: outline.forms, sentences, tips: unit.tips, level,
+        grammar: { formIds: ids, newIds: ids, glueIds: new Set(), tip: null },
+      });
+      for (const own of lessonsOf(unit, slots, ['lesson', 'checkpoint', 'practice'])) {
+        const times = new Map();
+        for (const s of own.filter((x) => x.sentence_id)) times.set(s.sentence_id, (times.get(s.sentence_id) ?? 0) + 1);
+        assert.ok(Math.max(0, ...times.values()) <= SHOWN_MAX, `${unit.slug} level ${level}: a sentence ${Math.max(...times.values())} times`);
+      }
+    }
+  }
+});
+
+test('a word with no sentence of its own is met in another word\'s sentence that uses it', () => {
+  const unit = outline.units.find((u) => u.course_order === 9);
+  const [first, second] = outline.forms.filter((f) => f.unit_id === unit.id && !f.is_glue && f.pos !== 'propn');
+  const sentences = [
+    ...unitSentences(unit, outline.forms, { per: 3 }).filter((s) => s.target_form_id !== second.id),
+    { id: 'carrier', target_form_id: first.id, difficulty: 1, tokens: [{ form_ids: [first.id] }, { form_ids: [second.id] }] },
+  ];
+  const { slots } = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips });
+  const at = slots.findIndex((s) => s.kind === 'teach' && s.form_id === second.id);
+  assert.equal(slots[at + 1].sentence_id, 'carrier');
+  assert.equal(slots[at + 1].mode, 'sentence_meaning');
+});
+
+test('practice brings sentences back from this level and the one below, and an older one only for a word nothing nearer carries', () => {
+  const base = outline.units.find((u) => u.course_order === 9);
+  const unit = { ...base, lessons: [...base.lessons, { id: `${base.id}-p`, ordinal: 99, kind: 'practice', title_en: 'Practice' }] };
+  const sentences = unitSentences(unit, outline.forms, { per: 6 });
+  const inUse = new Set(sentences.flatMap((s) => s.tokens.flatMap((t) => t.form_ids)));
+  const old = outline.forms.filter((f) => f.unit_order < unit.course_order && !f.is_glue && f.pos !== 'propn' && !inUse.has(f.id));
+  const [stranded, carried, ...rest] = old;
+  const line = (id, level, forms) => ({ id, level, target_form_id: forms[0].id, difficulty: 1, tokens: forms.map((f) => ({ form_ids: [f.id] })) });
+  const earlier = [
+    line('old-stranded', 0, [stranded]),
+    line('old-carried', 0, [carried]),
+    line('older-still', 1, [carried, rest[0]]),
+    ...Array.from({ length: 8 }, (_, i) => line(`near-${i}`, 2 + (i % 2), [carried, rest[i % rest.length], ...rest.slice(0, i)])),
+  ];
+  const { slots } = planLessons({
+    unit, forms: outline.forms, sentences, tips: unit.tips, earlier, level: 3,
+    levelOfSentence: (s) => s.level,
+    // The old lines are owed the most: before the window they would have come first.
+    debt: (s) => (s.level < 2 ? 10 : 1),
+    owed: () => 1,
+  });
+  const back = slots.filter((s) => s.lesson_id === `${base.id}-p` && earlier.some((e) => e.id === s.sentence_id)).map((s) => s.sentence_id);
+  assert.ok(back.includes('old-stranded'), 'the stranded word comes back in its own sentence');
+  assert.ok(!back.includes('old-carried') && !back.includes('older-still'), 'a word the window carries comes back inside the window');
+  assert.ok(back.filter((id) => id.startsWith('near-')).length >= 3, back.join(', '));
+  // Of the few owed the most, the longest — not the shortest.
+  assert.ok(back.includes('near-4') && !back.includes('near-0'), back.join(', '));
+  const formById = new Map(outline.forms.map((f) => [f.id, f]));
+  const sentenceById = new Map([...sentences, ...earlier].map((s) => [s.id, s]));
+  assert.deepEqual(lintLessons({ unit, slots, sentenceById, formById, level: 3, levelOfSentence: (s) => s.level ?? 3 }).filter((w) => /window/.test(w)), []);
+});
+
+test('a tip opens the lesson that teaches the word it shows in bold; the pattern table opens the first lesson too', () => {
+  const unit = outline.units.find((u) => u.course_order === 9);
+  const sentences = unitSentences(unit, outline.forms, { per: 4 });
+  const plain = planLessons({ unit, forms: outline.forms, sentences, tips: [] });
+  const teaching = lessonsOf(unit, plain.slots).filter((own) => own.some((s) => s.kind === 'teach'));
+  assert.ok(teaching.length >= 3, 'the unit has three teaching lessons');
+  // A word the last lesson teaches, named by the first tip.
+  const late = outline.forms.find((f) => f.id === teaching.at(-1).find((s) => s.kind === 'teach').form_id);
+  const tips = [
+    { id: 'by-content', body_md: `Say **¿${late.form}?** — like this.` },
+    { id: 'by-position', body_md: 'Nothing in bold here.' },
+  ];
+  const pattern = { id: 'pattern', body_md: '| yo | **tengo** |' };
+  const { slots } = planLessons({
+    unit, forms: outline.forms, sentences, tips,
+    grammar: { formIds: new Set(), newIds: new Set(), glueIds: new Set(), tip: pattern },
+  });
+  const lessonOf = (tipId) => slots.find((s) => s.tip_id === tipId)?.lesson_id;
+  assert.equal(lessonOf('by-content'), teaching.at(-1)[0].lesson_id, 'where its word is taught');
+  assert.equal(lessonOf('by-position'), teaching[1][0].lesson_id, 'the second tip, the second lesson');
+  const first = slots.filter((s) => s.lesson_id === teaching[0][0].lesson_id);
+  assert.equal(first[0].tip_id, 'pattern', 'the table opens lesson 1');
+  // The same tip handed in both ways is still shown once.
+  const twice = planLessons({
+    unit, forms: outline.forms, sentences, tips: [pattern],
+    grammar: { formIds: new Set(), newIds: new Set(), glueIds: new Set(), tip: pattern },
+  });
+  for (const own of lessonsOf(unit, twice.slots)) assert.ok(own.filter((s) => s.tip_id === 'pattern').length <= 1);
+});
+
+test('the lesson linters name a word no sentence uses, a sentence shown three times, and a doubled tip', () => {
+  const unit = { slug: 'la-hora', lessons: [{ id: 'l1', ordinal: 1, kind: 'lesson', title_en: 'Lesson 1' }] };
+  const formById = new Map([['ochenta', { id: 'ochenta', form: 'ochenta' }], ['hoy', { id: 'hoy', form: 'hoy' }]]);
+  const sentenceById = new Map([['s1', { id: 's1', es: '¿Qué hacés hoy?', tokens: [{ form_ids: ['hoy'] }] }]]);
+  const slot = (s) => ({ lesson_id: 'l1', ...s });
+  const slots = [
+    slot({ kind: 'tip', tip_id: 't' }), slot({ kind: 'tip', tip_id: 't' }),
+    slot({ kind: 'teach', form_id: 'hoy' }),
+    slot({ kind: 'drill', sentence_id: 's1', mode: 'sentence_meaning' }),
+    slot({ kind: 'teach', form_id: 'ochenta' }),
+    slot({ kind: 'drill', sentence_id: 's1', mode: 'sentence_gap' }),
+    slot({ kind: 'drill', sentence_id: 's1', mode: 'sentence_build' }),
+    slot({ kind: 'review', review_count: 4 }),
+  ];
+  const lint = lintLessons({ unit, slots, sentenceById, formById });
+  assert.ok(lint.some((w) => w.includes('lesson.unused') && w.includes('la-hora') && w.includes('"ochenta"')), lint.join('\n'));
+  assert.ok(!lint.some((w) => w.includes('"hoy"')));
+  assert.ok(lint.some((w) => w.includes('lesson.repeat') && w.includes('¿Qué hacés hoy?')));
+  assert.ok(lint.some((w) => w.includes('lesson.tip')));
+  assert.ok(!lint.some((w) => w.includes('lesson.length')), '2 tips + 2 words + 3 drills + 4 review is 13 screens');
+  // From A2 the same lesson is also missing its typed gap; from B1 nothing here is a stale meaning.
+  assert.ok(lintLessons({ unit, slots, sentenceById, formById, level: 1 }).some((w) => w.includes('lesson.typed')));
 });

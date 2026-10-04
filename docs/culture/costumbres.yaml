@@ -21,9 +21,11 @@ classes:
           - "A firm handshake"
           - "A quick nod and a smile"
         correct: 0
-        explain: "Often a kiss plus a pat on the back. Brothers, fathers and sons too. A handshake between friends would feel oddly stiff."
+        explain: "Often a kiss plus a pat on the back, or a hug. Brothers, fathers and sons too. A handshake is for people you barely know."
       - type: card
-        text: "Arrive at a party of twelve and you **saludás a todos**: you go around and kiss every single person, strangers included. A wave from the door feels cold."
+        text: "Arrive at a dinner of twelve and you **saludás uno por uno**: you go around and kiss each person, strangers included. A wave from the door feels cold. At a huge party, kiss the people near you."
+      - type: card
+        text: "Which side? Lean to your left, so right cheeks touch. And when you leave, you do the whole round again, with a **chau** for each person."
       - type: choice
         prompt: "Your first week at a new job in Buenos Aires. How do your coworkers greet you in the morning?"
         options:
@@ -31,11 +33,11 @@ classes:
           - "A handshake"
           - "A wave from their desks"
         correct: 0
-        explain: "In many offices it's a kiss, every morning, often even with the boss. Nobody thinks it's intimate. It's just hello."
+        explain: "In many offices it's a kiss, every morning, often even with the boss. Not everywhere, so watch what others do. Nobody thinks it's intimate. It's just hello."
       - type: card
         text: "The exception: a very formal first meeting, like a job interview. Then it's often a handshake. Watch what the other person does. By the second meeting, it's usually a kiss."
       - type: card
-        text: "Then comes **¿Todo bien?** or **¿Qué hacés?** Not real questions, just hello. **“Todo bien, ¿vos?”** is the whole answer. The long version comes later, over a mate."
+        text: "Then comes **¿Todo bien?** or **¿Qué hacés?** It looks like “what are you doing?” but here it only means hi. Answer **“Todo bien, ¿y vos?”**, not what you are doing."
       - type: card
         chip: "Pro tip"
         text: "Meeting someone new at a party? Lean in, kiss, and say your name: **“Hola, soy Sam.”** That's all anyone expects."
@@ -47,9 +49,9 @@ classes:
     summary: "Late arrivals, loose plans and goodbyes that never end"
     pages:
       - type: card
-        text: "Invited to dinner at someone's home **a las nueve**? Nobody expects you at nine. Twenty or thirty minutes late is normal. Arriving early is the real faux pas."
+        text: "Invited to dinner at someone's home **a las nueve**? Nobody expects you at nine. Twenty or thirty minutes late is normal. Arriving early is the real mistake: the host may still be in the shower."
       - type: card
-        text: "That's social life only. Work, classes and the doctor run on the clock. Be on time, or at least text."
+        text: "That's social life only. For work, classes and the doctor, be on time, or at least text. (The doctor may still keep you waiting.)"
       - type: choice
         prompt: "Your friend texts **“ya salgo”**: I'm leaving now. What's she most likely doing?"
         options:
@@ -57,11 +59,11 @@ classes:
           - "Locking her front door"
           - "Already on the bus"
         correct: 0
-        explain: "**Ya salgo** has padding built in, and **llego en cinco** means fifteen. Nobody's lying: everyone knows how to read it."
+        explain: "**Ya salgo** always includes some extra time, and **llego en cinco** means fifteen. Nobody's lying: everyone knows how to read it."
       - type: card
         text: "Plans live in the WhatsApp group, and the key phrase is **vamos viendo**: let's see. The plan is alive, but nothing's fixed until an hour before."
       - type: card
-        text: "Never show up empty-handed. The host will say **“no traigas nada”**, don't bring anything. Bring wine or dessert anyway."
+        text: "Never show up empty-handed. Ask **“¿Qué llevo?”**, what should I bring? The host will say **“no traigas nada”**, don't bring anything. Bring wine or **helado**, ice cream, anyway."
       - type: choice
         prompt: "You announce **“bueno, me voy yendo”**: well, I'm heading off. How long until you're out the door?"
         options:
@@ -69,7 +71,7 @@ classes:
           - "About two minutes"
           - "About ten minutes"
         correct: 0
-        explain: "Another glass appears. Then a kiss for everyone. Then a chat at the door. Totally normal."
+        explain: "Half an hour, easily. Another glass appears. Then a kiss for everyone. Then a chat at the door. Totally normal."
       - type: card
         text: "Slipping out without goodbyes is **irse a la francesa**: leaving French-style. People notice, and they'll bring it up next time."
     vocabulary: []
@@ -84,11 +86,11 @@ classes:
       - type: choice
         prompt: "Your friends say: “Previa at Tomi's, then the boliche.” You get to Tomi's at nine. What do you find?"
         options:
-          - "Tomi in pajamas, having dinner"
+          - "Tomi alone, nothing ready yet"
           - "The party already in full swing"
           - "Everyone leaving for the club"
         correct: 0
-        explain: "At nine the night hasn't started. The previa gets going around midnight."
+        explain: "At nine most people haven't even had dinner. The previa gets going around eleven or midnight."
       - type: card
         text: "**La previa** is drinks at a friend's place before going out: cheaper, your own music, and you can hear each other. For plenty of people it's the best part. The boliche is just the excuse."
       - type: choice
@@ -98,13 +100,11 @@ classes:
           - "Cumbia"
           - "Reggaetón"
         correct: 0
-        explain: "Tango lives in the **milongas**, with their own crowd. The boliche runs on cumbia, reggaetón and whatever everyone can shout along to."
+        explain: "Tango lives in the **milongas**, with their own crowd. The boliche runs on reggaetón, cumbia, electronic music and whatever everyone can shout along to."
       - type: card
-        text: "And six a.m. isn't always the end. An **after** keeps the party going once the boliche closes."
+        text: "And six a.m. isn't always the end. Some go on to an **after**, a party after the boliche closes. Everyone else heads for **café con medialunas** as the cafés open, then sleeps until lunch."
       - type: card
-        text: "Everyone else heads for **café con medialunas** as the cafés open, then bed until lunch."
-      - type: card
-        text: "Sunday afternoon exists mostly to recover: blinds down, a mate, and a group chat reconstructing what happened."
+        text: "Not into boliches? Most nights out are simpler: dinner at half past nine or ten, then **un bar** or **una birra**, a beer, with friends. At seven, restaurants are still empty."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -113,9 +113,9 @@ classes:
     summary: "Body comments, money talk, and the gauchada"
     pages:
       - type: card
-        text: "Your aunt sees you after the holidays: **“¡Estás más gordito!”** You've put on a bit of weight. She means it warmly, like “you look well fed.”"
+        text: "Your aunt sees you after the holidays: **“¡Estás más gordito!”** You've put on a bit of weight. She doesn't mean it as an insult. For her generation it's just an observation, like “you got a haircut.”"
       - type: card
-        text: "Couples call each other **gordo** and **gorda** as a pet name, whatever their size. It's the Argentine *honey*."
+        text: "Couples call each other **gordo** and **gorda** as a pet name, whatever their size. Friends use **flaco** or **negro** the same way, with love. Don't copy them with people you don't know well."
       - type: choice
         prompt: "A stranger on the street shouts **“¡Flaco!”** at you. Skinny! What does he want?"
         options:
@@ -123,22 +123,22 @@ classes:
           - "To say you look too thin today"
           - "To warn you about a pickpocket"
         correct: 0
-        explain: "**Flaco** is how you call out to a guy you don't know. **“¡Flaco, se te cayó esto!”** Hey, you dropped this."
+        explain: "**Flaco** is how you call out to a guy you don't know, and **flaca** to a woman. **“¡Flaco, se te cayó esto!”** Hey, you dropped this. You'll also hear **jefe** and **maestro**."
       - type: card
         chip: "Pro tip"
         text: "Younger people are more careful with body comments. Laugh off grandma's, but don't start making your own."
       - type: choice
-        prompt: "Someone you met ten minutes ago asks how much you pay in rent. How should you take it?"
+        prompt: "Someone you just met at a party asks how much you pay in rent. How should you take it?"
         options:
           - "As normal small talk"
           - "As a rude question"
           - "As a sign she's flat hunting"
         correct: 0
-        explain: "After decades of inflation, prices are everyone's favorite topic. **¿Cuánto pagaste?** is fair game, for your phone, your shoes, your rent."
+        explain: "After decades of inflation, prices are everyone's favorite topic. **¿Cuánto pagaste?**, how much did you pay?, is a normal question for your phone, your shoes, your rent. Asking someone's salary is still not polite."
       - type: card
-        text: "One of the nicest questions in the language: **“¿Me hacés una gauchada?”** Can you do me a favor? A **gauchada** is a favor done for free, just because."
+        text: "People ask personal questions early: **¿Tenés novio?** Do you have a boyfriend? They interrupt, talk over each other and give opinions on politics and football. It's interest, not rudeness."
       - type: card
-        text: "Lending your drill, a ride to the airport at dawn, a stranger helping push your stalled car: all gauchadas. Nobody keeps score."
+        text: "Need a hand? Ask **“¿Me hacés una gauchada?”** Can you do me a favor? A **gauchada** is a favor done for free: a ride to the airport, a borrowed drill. Nobody expects anything back."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -149,17 +149,17 @@ classes:
       - type: card
         text: "Christmas in Argentina falls in summer. It can be scorching, and Papá Noel still wears his wool coat."
       - type: card
-        text: "The **arbolito** goes up on **8 December**, a public holiday. The big night isn't the 25th: it's **Nochebuena**, the 24th, with a long dinner, often outdoors."
+        text: "The **arbolito**, the Christmas tree, goes up on **8 December**, a public holiday (**Día de la Virgen**). The big night isn't the 25th: it's **Nochebuena**, the 24th, with a long dinner, often outdoors."
       - type: choice
-        prompt: "It's Nochebuena. What's the classic star of the table?"
+        prompt: "It's Nochebuena. Which of these is a classic on the table?"
         options:
           - "Veal in a creamy tuna sauce"
           - "Roast turkey with gravy"
           - "Baked ham with pineapple"
         correct: 0
-        explain: "**Vitel toné**, an Italian import, served cold. Plus **pan dulce**, **turrón** and **sidra**. And yes, often an asado too."
+        explain: "**Vitel toné**, an Italian import, served cold: in this heat, most of the food is. Plus **pan dulce** (sweet bread with fruit), **turrón** (nougat) and **sidra** (sparkling cider). And yes, often an asado too."
       - type: card
-        text: "At midnight everyone stands for the **brindis**, the toast. The sky explodes with fireworks from every backyard and balcony."
+        text: "At midnight everyone stands for the **brindis**, the toast: **¡Salud!** and **¡Feliz Navidad!** Fireworks go off across the sky, though fewer each year: loud ones are now banned in many places."
       - type: choice
         prompt: "When do most families open the presents?"
         options:
@@ -169,7 +169,7 @@ classes:
         correct: 0
         explain: "Presents at midnight, with the fireworks still going. The 25th is for leftovers and naps."
       - type: card
-        text: "New Year's repeats the formula: dinner, toast, fireworks. Then the city empties. January is holiday month, and everyone who can heads for the beach."
+        text: "New Year's repeats the formula: dinner, toast, fireworks. Then Buenos Aires gets quiet. January is holiday month, and many who can head for the coast."
       - type: card
         chip: "Did you know?"
         text: "On 6 January, kids leave their shoes out with grass and water for the camels of the **Reyes Magos**, the Three Kings."
@@ -191,11 +191,11 @@ classes:
         correct: 0
         explain: "An Argentine, **Enrique Febbraro**, watched the Moon landing and thought the whole world should celebrate friendship that day."
       - type: card
-        text: "**21 de septiembre** is a double party: first day of spring and **Día del Estudiante**. Students fill the parks with picnics and guitars. Want a quiet walk? Not that day."
+        text: "**21 de septiembre** is a double party: first day of spring and **Día del Estudiante**. Students fill the parks with picnics and guitars. Looking for a quiet park? Pick another day."
       - type: card
-        text: "Argentines love a **finde largo**, a long weekend. Some years the government even adds a **feriado puente**: a bridge day off, just to join a holiday to the weekend."
+        text: "Argentines love a **finde largo**, a long weekend. Most years the government even adds a **feriado puente** or two: a bridge day off, just to join a holiday to the weekend."
       - type: card
-        text: "The birthday song here is **“Que los cumplas feliz”**. Then your friends pull your ears: the **tirón de orejas**, one tug for each year."
+        text: "The birthday song here is **“Que los cumplas feliz”**. Then someone may pull your ears: the **tirón de orejas**, one tug for each year. Mostly a thing for kids."
       - type: choice
         prompt: "Your friend's birthday is tomorrow and you won't see her. When do you send your message?"
         options:
@@ -203,8 +203,52 @@ classes:
           - "Today, so you're first"
           - "Either day, it's fine"
         correct: 0
-        explain: "Wishing **feliz cumple** early is **yeta**: bad luck. Even Pope Francis, a porteño, warned a crowd who greeted him early, before his 80th birthday."
+        explain: "Wishing **feliz cumple** early brings **yeta**: bad luck. Even Pope Francis, a porteño, warned a crowd who greeted him early, before his 80th birthday."
       - type: card
         chip: "Pro tip"
-        text: "Set an alarm. A message right at midnight is the classic move: the first one wins."
+        text: "Close friends often write right at midnight. Any time on the day is fine. Just not the day before."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "que-decir"
+    title: "What to say, and what not to say"
+    summary: "Permiso, provecho, Malvinas and a few lines to keep to yourself"
+    pages:
+      - type: card
+        text: "Walking into someone's home, say **“Permiso”** at the door, even if they just invited you in. It means “with your permission”. The answer is **“Pasá, pasá”**: come in, come in."
+      - type: choice
+        prompt: "The bondi is packed and the next stop is yours. What do you say to get to the door?"
+        options:
+          - "“Permiso”"
+          - "“Lo siento”"
+          - "“Con cuidado”"
+        correct: 0
+        explain: "**Permiso** is for before you pass. If you bump into someone, that's **perdón**. Keep **lo siento** for sad news: it means you feel sorry for someone."
+      - type: card
+        text: "See someone eating, at the next table or at their desk at work? Say **“Buen provecho”**, or just **“Provecho”**: enjoy your meal. They'll answer **“Gracias”**, often with a full mouth."
+      - type: card
+        text: "Invited to eat at someone's home? Two lines do the job. Before, **“¿Qué llevo?”** What should I bring? After, to the cook, **“Estuvo riquísimo.”** It was delicious."
+      - type: choice
+        prompt: "At dinner, people start talking about the islands in the South Atlantic that Argentina and Britain fought over in 1982. What do you call them?"
+        options:
+          - "Malvinas, and nothing else"
+          - "Falklands, like in English"
+          - "Either name, nobody minds"
+        correct: 0
+        explain: "Here they are **las Malvinas**, in Spanish and in English. The other name sounds like you're taking a side. It's a painful subject for many families."
+      - type: card
+        text: "Friends call each other **negro**, **gordo** or **flaco**. Between them it's affection, and it isn't about skin or weight. Understand it and smile. As a foreigner, don't copy it."
+      - type: card
+        text: "New friends may ask how old you are, if you're married, or why you have no kids. That's warmth, not an interview. Give a short answer and send it back: **“¿Y vos?”**"
+      - type: choice
+        prompt: "You want to say something nice about Argentina. Which of these goes down badly?"
+        options:
+          - "“It's a lot like Chile and Uruguay.”"
+          - "“The meat here is really good.”"
+          - "“I'd love to see Patagonia.”"
+        correct: 0
+        explain: "Each country is proud of its own accent, food and history, and neighbors are also rivals. Ask what is different here. You'll get a long, happy answer."
+      - type: card
+        chip: "Pro tip"
+        text: "In Argentina, **América** is the whole continent, from Canada down to Patagonia. For the United States, say **Estados Unidos**."
     vocabulary: []

@@ -4,8 +4,9 @@
 //
 //   npm run argentine:build
 //
-// Words are grouped by theme, most common first (level 1 → 3, then
-// alphabetical), and each theme is dealt into packs of about PACK_SIZE words:
+// Words are grouped by theme, most useful first (level 1 → 3, then `rank` 1 → 3
+// with unranked words after them, then alphabetical), and each theme is dealt
+// into packs of about PACK_SIZE words:
 // a theme of 30 becomes three packs of 10, not 12 + 12 + 6. A pack is named
 // for how common its words are (Essentials, Everyday, Going deeper, Rare gems). Any word failing
 // check.mjs stops the build.
@@ -55,11 +56,14 @@ const STEPS = [
 ];
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX'];
 
+/** Where a word with no `rank` sorts within its level: after every ranked one. */
+const UNRANKED = 9;
+
 const packs = [];
 for (const theme of THEMES) {
   const list = words
     .filter((w) => w.theme === theme.slug)
-    .sort((a, b) => a.level - b.level || a.es.localeCompare(b.es, 'es'));
+    .sort((a, b) => a.level - b.level || (a.rank ?? UNRANKED) - (b.rank ?? UNRANKED) || a.es.localeCompare(b.es, 'es'));
   if (!list.length) continue;
   const count = Math.ceil(list.length / PACK_SIZE);
   const dealt = Array.from({ length: count }, (_, i) =>

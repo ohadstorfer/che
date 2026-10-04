@@ -93,6 +93,7 @@
     "culture:build": "node scripts/culture/build.mjs",
     "course:apply": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/apply-migration.mjs",
     "course:grammar": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/grammar-seed.mjs",
+    "course:sync-lessons": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/sync-lessons.mjs",
     "argentine:build": "node scripts/argentine/build.mjs",
     "argentine:check": "node scripts/argentine/check.mjs",
     "hablar:validate": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/hablar/validate.mjs",

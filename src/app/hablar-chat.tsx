@@ -41,6 +41,8 @@ import {
   deadlineOf,
   end,
   type Feedback,
+  type Verdict,
+  verdictOf,
   bandOf,
   findScenario,
   scenarioAt,
@@ -88,8 +90,9 @@ import { FitText } from '@/components/fit-text';
 // him. (A draft left over from an older build still shows for review after a reload.)
 //
 // The server owns the clock. The timer here is a display: it counts down to
-// `deadline_at`, stops while the app is in the background, and reports those
-// paused seconds with the next request so the server can extend the deadline.
+// `deadline_at`, stops while the app is in the background and while it is
+// Pancho's turn (her line is being answered, or he is speaking), and reports
+// those paused seconds with the next request so the server can extend the deadline.
 // ---------------------------------------------------------------------------
 
 type PanchoMsg = {
@@ -209,8 +212,12 @@ export default function HablarChat() {
     timer: ReturnType<typeof setTimeout>;
   } | null>(null);
   const reRecordTurn = useRef<string | null>(null);
-  /** Total seconds spent in the background this chat. The server keeps the max it has seen, so this is cumulative. */
+  /** Total seconds the clock was stopped this chat. The server keeps the max it has seen, so this is cumulative. */
   const pausedTotal = useRef(0);
+  /** What is stopping the clock right now (the app is away, it's Pancho's turn), and since when. */
+  const holds = useRef({ n: 0, since: 0 });
+  /** When the clock stopped, while it is: the timer shows the time left as of then. */
+  const [heldAt, setHeldAt] = useState<number | null>(null);
   const abort = useRef<AbortController | null>(null);
 
   const say = useCallback((text: string) => {
@@ -218,7 +225,9 @@ export default function HablarChat() {
     setTimeout(() => setNotice((n) => (n === text ? null : n)), 3200);
   }, []);
 
-  const takePaused = () => Math.floor(pausedTotal.current);
+  // A stop still running counts up to now, so the server never sees less than the timer shows.
+  const takePaused = () =>
+    Math.floor(pausedTotal.current + (holds.current.n ? (Date.now() - holds.current.since) / 1000 : 0));
 
   // --- boot: from the start hand-off, or from the tables after a reload ------
   useEffect(() => {
@@ -307,20 +316,34 @@ export default function HablarChat() {
     warm('hablar-reply');
   }, []);
 
-  // --- the clock: pauses while the app is in the background ---------------------
+  // --- the clock: stops while the app is in the background, and on Pancho's turn --
   // The ticking display is its own component (ChatTimer), so the countdown
   // re-renders one chip, not the whole chat, every half second.
+  /** Stop the clock, or let it run again. The stops overlap (the app goes away while he speaks): time counts once. */
+  const hold = useCallback((on: boolean) => {
+    const h = holds.current;
+    if (on) {
+      if (h.n++ === 0) setHeldAt((h.since = Date.now()));
+      return;
+    }
+    if (h.n === 0 || --h.n > 0) return;
+    const gap = Date.now() - h.since;
+    pausedTotal.current += gap / 1000;
+    setDeadline((d) => (d ? d + gap : d));
+    setHeldAt(null);
+  }, []);
+
   useEffect(() => {
-    let hiddenAt: number | null = null;
+    let hidden = false;
     const away = () => {
-      if (hiddenAt === null) hiddenAt = Date.now();
+      if (hidden) return;
+      hidden = true;
+      hold(true);
     };
     const back = () => {
-      if (hiddenAt === null) return;
-      const gap = Date.now() - hiddenAt;
-      hiddenAt = null;
-      pausedTotal.current += gap / 1000;
-      setDeadline((d) => (d ? d + gap : d));
+      if (!hidden) return;
+      hidden = false;
+      hold(false);
     };
     if (Platform.OS === 'web') {
       if (typeof document === 'undefined') return;
@@ -330,7 +353,17 @@ export default function HablarChat() {
     }
     const sub = AppState.addEventListener('change', (state) => (state === 'background' ? away() : state === 'active' && back()));
     return () => sub.remove();
-  }, []);
+  }, [hold]);
+
+  // Pancho's turn: from her line going up until his voice has finished (a
+  // replay of one of his lines counts too). A beginner hears him slowly; that
+  // is not her time to lose. Starting to record always ends it (startRec stops the audio).
+  const panchoTurn = phase === 'transcribing' || phase === 'waiting' || phase === 'streaming' || !!playing;
+  useEffect(() => {
+    if (!panchoTurn) return;
+    hold(true);
+    return () => hold(false);
+  }, [panchoTurn, hold]);
 
   useEffect(
     () => () => {
@@ -343,16 +376,17 @@ export default function HablarChat() {
     [],
   );
 
-  // Flips once, when the deadline passes — the deadline moves on a pause.
+  // Flips once, when the deadline passes — the deadline moves on a pause, and a
+  // stopped clock doesn't run out.
   const [timeUp, setTimeUp] = useState(false);
   useEffect(() => {
-    if (!deadline) return;
+    if (!deadline || heldAt !== null) return;
     const left = deadline - Date.now();
     setTimeUp(left <= 0);
     if (left <= 0) return;
     const id = setTimeout(() => setTimeUp(true), left);
     return () => clearTimeout(id);
-  }, [deadline]);
+  }, [deadline, heldAt]);
 
   // Keep the newest message in view.
   const toBottom = () => requestAnimationFrame(() => scroll.current?.scrollToEnd({ animated: true }));
@@ -568,7 +602,7 @@ export default function HablarChat() {
         addTurn(turnId, text);
         setPhase('waiting');
       },
-      onCorrection: (v: { has_error: boolean; corrected: string }) => {
+      onCorrection: (v: { has_error: boolean; verdict?: Verdict; corrected: string }) => {
         patch(turnId, (m) =>
           (m as UserMsg).feedback
             ? m
@@ -864,7 +898,7 @@ export default function HablarChat() {
           </FitText>
         </View>
         {unlimited ? null : (
-          <ChatTimer deadline={deadline} />
+          <ChatTimer deadline={deadline} heldAt={heldAt} />
         )}
         <Pressable
           onPress={() => setSheet({ kind: 'end' })}
@@ -1145,10 +1179,8 @@ export default function HablarChat() {
           ) : sheetMsg.feedback?.better ? (
             <>
               <Text style={styles.sheetBig}>{sheetMsg.feedback.better}</Text>
-              {(sheetMsg.feedback as Feedback & { better_en?: string }).better_en ? (
-                <Text style={styles.sheetBody}>
-                  {(sheetMsg.feedback as Feedback & { better_en?: string }).better_en}
-                </Text>
+              {sheetMsg.feedback.better_en ? (
+                <Text style={styles.sheetBody}>{sheetMsg.feedback.better_en}</Text>
               ) : null}
               <DiloButton key={sheetMsg.key} sessionId={sessionId} target={sheetMsg.feedback.better} />
             </>
@@ -1366,9 +1398,22 @@ function Tool({
 /**
  * The correction, always open under her message: what she said with the fix
  * struck through and filled in, and why — or a quiet tick when it was right.
+ * A line that is no mistake but not right either (an English word, a tú form)
+ * gets the way to say it instead of the tick; a garbled one gets nothing.
  */
 function Correction({ said, feedback }: { said: string; feedback: Feedback }) {
-  if (!feedback.has_error) {
+  const verdict = verdictOf(feedback);
+  if (verdict === 'unclear') return null;
+  if (verdict === 'note') {
+    // Until the full feedback lands there is no better line to show yet.
+    if (!feedback.better) return null;
+    return (
+      <View style={styles.correct} accessibilityLabel={`Try: ${feedback.better}`}>
+        <Text style={styles.noteText}>Try: {feedback.better}</Text>
+      </View>
+    );
+  }
+  if (verdict === 'correct') {
     return (
       <View style={styles.correct} accessibilityLabel="Correct">
         <MaterialCommunityIcons name="check-bold" size={14} color={colors.success} />
@@ -1488,13 +1533,14 @@ function FullMessage({
 }
 
 /** The countdown chip. Ticks on its own, so the chat around it stays still. */
-function ChatTimer({ deadline }: { deadline: number }) {
+function ChatTimer({ deadline, heldAt }: { deadline: number; heldAt: number | null }) {
   const [now, setNow] = useState(Date.now());
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 500);
     return () => clearInterval(id);
   }, []);
-  const remaining = deadline ? Math.max(0, deadline - now) : 5 * 60_000;
+  // Stopped: the time left when it stopped, until the deadline moves by the length of the stop.
+  const remaining = deadline ? Math.max(0, deadline - (heldAt ?? now)) : 5 * 60_000;
   const low = remaining <= 30_000;
   return (
     <View style={[styles.timer, low && styles.timerLow]} accessibilityLabel={`Quedan ${fmt(remaining)}`}>
@@ -1663,6 +1709,7 @@ const styles = StyleSheet.create({
   },
   correct: { flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 4 },
   correctText: { ...font.body[800], fontSize: 13, color: colors.success },
+  noteText: { ...font.body[700], fontSize: 14, lineHeight: 20, color: colors.muted, flexShrink: 1 },
   correction: {
     gap: 6,
     paddingHorizontal: 14,

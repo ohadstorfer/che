@@ -117,7 +117,7 @@ test('6. English that doesn\'t ask for a word pauses it', () => {
 test('7. losing the word it teaches pauses it', () => {
   const plan = edit(data, '¿Y una medialuna?', { es: '¿Y un café?', en: 'And a coffee?' });
   assert.ok(plan.problems.some((p) => p.includes('no longer uses "medialuna"')), plan.problems.join('\n'));
-  assert.deepEqual(planSentence(data, { ...sentence(data, '¿Y una medialuna?'), ...plan.row }, { es: '¿Y una medialuna?', en: 'And a croissant?' }).problems, []);
+  assert.deepEqual(planSentence(data, { ...sentence(data, '¿Y una medialuna?'), ...plan.row }, { es: '¿Y una medialuna?', en: 'And a medialuna?' }).problems, []);
 });
 
 test('8. a missing opening ¿ or ¡ pauses it', () => {
@@ -152,12 +152,12 @@ test('a draft that nobody paused stays a draft when it passes', () => {
 // ---------------------------------------------------------------------------
 
 test('a new English drops the glosses, and course:gloss finds the sentence pending', () => {
-  // Once medialuna means "medialuna", the English can say so.
-  const d = structuredClone({ ...withForm(data, form(data, 'medialuna').id, { gloss_en: 'medialuna' }), asked: undefined });
+  // Once medialuna means "croissant", the English can say so.
+  const d = structuredClone({ ...withForm(data, form(data, 'medialuna').id, { gloss_en: 'croissant' }), asked: undefined });
   d.asked = new Map();
   const s = sentence(d, 'Un café y una medialuna.');
-  s.tokens = s.tokens.map((t, i) => ({ ...t, gloss: ['a', 'coffee', 'and', 'a', 'croissant'][i] }));
-  const plan = planSentence(d, s, { en: 'A coffee and a medialuna.' });
+  s.tokens = s.tokens.map((t, i) => ({ ...t, gloss: ['a', 'coffee', 'and', 'a', 'medialuna'][i] }));
+  const plan = planSentence(d, s, { en: 'A coffee and a croissant.' });
   assert.ok(plan.glossesPending);
   assert.equal(plan.row.tokens.filter((t) => t.gloss).length, 0);
   assert.deepEqual(plan.problems, []);

@@ -22,6 +22,174 @@ section:
   practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
 units:
   - ordinal: 1
+    slug: "ahora-y-planes"
+    title: "Say what's happening and what's next"
+    summary: "Ahora y planes"
+    grammar:
+      - "estar.gerundio"
+      - "ir-a.infinitivo"
+      - "la-semana-que-viene"
+      - "registro.informal"
+    register_max: "lunfardo"
+    sample:
+      es: "El finde vamos a hacer un asado."
+      en: "This weekend we're going to have a barbecue."
+    tips:
+      - title: "Right now"
+        body: "**Estoy laburando** — I'm working (right now). In Argentina, *estoy llegando* can mean you're
+          still ten minutes away."
+      - title: "Going to"
+        body: "**Ir a** + infinitive talks about plans: *Vamos a hacer un asado.* **La semana que viene** is
+          *next week*."
+      - title: "Boludo and quilombo"
+        body: "**Boludo** is common between close friends and an insult to anyone else — understand it,
+          don't use it yet. **Quilombo** means a mess; it's informal, not rude, but keep it out of
+          formal settings."
+    words:
+      - lemma: "llegar"
+        pos: "verb"
+        forms:
+          - form: "llegás"
+            en: "you arrive"
+            f: "2sg.pres.ind.vos"
+          - form: "llega"
+            en: "arrives (he/she arrives)"
+            f: "3sg.pres.ind"
+          - form: "llegando"
+            en: "arriving"
+            f: "ger"
+          - form: "llegar"
+            f: "inf"
+      - lemma: "laburar"
+        pos: "verb"
+        forms:
+          - form: "laburando"
+            en: "working"
+            f: "ger"
+      - lemma: "esperar"
+        pos: "verb"
+        forms:
+          - form: "esperando"
+            en: "waiting"
+            f: "ger"
+      - lemma: "comer"
+        pos: "verb"
+        forms:
+          - form: "comiendo"
+            en: "eating"
+            f: "ger"
+      - lemma: "estudiar"
+        pos: "verb"
+        forms:
+          - form: "estudiando"
+            en: "studying"
+            f: "ger"
+      - lemma: "mirar"
+        pos: "verb"
+        forms:
+          - form: "mirando"
+            en: "watching"
+            f: "ger"
+      - lemma: "hacer"
+        pos: "verb"
+        forms:
+          - form: "haciendo"
+            en: "doing, making"
+            f: "ger"
+      - lemma: "tomar"
+        pos: "verb"
+        forms:
+          - form: "tomando"
+            en: "drinking"
+            f: "ger"
+      - lemma: "ahora"
+        pos: "adv"
+        en: "now"
+      - lemma: "todavía"
+        pos: "adv"
+        en: "still, yet"
+      - lemma: "ya"
+        pos: "adv"
+        en: "already, right away"
+      - lemma: "casi"
+        pos: "adv"
+        en: "almost"
+      - lemma: "venir"
+        pos: "verb"
+        forms:
+          - form: "vengo"
+            en: "I come"
+            f: "1sg.pres.ind"
+          - form: "venís"
+            en: "you come"
+            f: "2sg.pres.ind.vos"
+          - form: "viene"
+            en: "comes (he/she comes)"
+            f: "3sg.pres.ind"
+      - lemma: "quedar"
+        pos: "verb"
+        en: "to arrange, to agree"
+        forms:
+          - form: "quedamos"
+            en: "we agreed, we're meeting"
+            f: "1pl.pres.ind"
+      - lemma: "invitar"
+        pos: "verb"
+        en: "to invite"
+        forms:
+          - form: "invitar"
+            f: "inf"
+          - form: "invito"
+            en: "I invite"
+            f: "1sg.pres.ind"
+      - lemma: "traer"
+        pos: "verb"
+        forms:
+          - form: "traer"
+            f: "inf"
+          - form: "traigo"
+            en: "I bring"
+            f: "1sg.pres.ind"
+      - lemma: "asado"
+        pos: "noun"
+        en: "barbecue"
+      - lemma: "juntada"
+        pos: "noun"
+        en: "get-together"
+        register: "informal"
+      - lemma: "vino"
+        pos: "noun"
+        en: "wine"
+      - lemma: "próximo"
+        pos: "adj"
+        en: "next"
+        forms:
+          - form: "próximo"
+            f: "m.sg"
+      - lemma: "copado"
+        pos: "adj"
+        en: "cool, great"
+        register: "informal"
+        forms:
+          - form: "copado"
+            f: "m.sg"
+          - form: "copada"
+            f: "f.sg"
+      - lemma: "viste"
+        pos: "interj"
+        en: "you know?, see?"
+        register: "informal"
+      - lemma: "quilombo"
+        pos: "noun"
+        en: "mess, chaos"
+        register: "lunfardo"
+      - lemma: "boludo"
+        pos: "noun"
+        en: "dude"
+        note: "between friends only — rude to a stranger"
+        register: "lunfardo"
+
+  - ordinal: 2
     slug: "ayer-labure"
     title: "Say what you did yesterday"
     summary: "Ayer laburé"
@@ -40,6 +208,8 @@ units:
       - title: "Not \"he trabajado\""
         body: "Spain says *hoy he trabajado*; a porteño says **hoy laburé**. Even for today, even for
           something that just happened: **¿Llegaste?** — *Did you get here?*"
+      - title: "Hace = ago"
+        body: "**Hace** + a time is *ago*: **llegué hace una hora** — *I got here an hour ago*; **hablé con Juan hace dos días**. *Not long ago* is **hace poco**, and the question is **¿hace cuánto?** — *how long ago?*"
     words:
       - lemma: "laburar"
         pos: "verb"
@@ -131,7 +301,7 @@ units:
           - form: "pasada"
             f: "f.sg"
 
-  - ordinal: 2
+  - ordinal: 3
     slug: "cenamos-afuera"
     title: "Say what you all did last night"
     summary: "Anoche cenamos afuera"
@@ -254,7 +424,7 @@ units:
             en: "you spent"
             f: "2sg.pret.ind.vos"
 
-  - ordinal: 3
+  - ordinal: 4
     slug: "comi-y-sali"
     title: "Say what you ate and where you went out"
     summary: "Anoche salí"
@@ -274,6 +444,8 @@ units:
       - title: "Recién"
         body: "**Recién llegué** — *I just got here*. A porteño uses *recién* with the plain past where
           English says *just*."
+      - title: "Conocer, saber"
+        body: "**Saber** is to know a fact or how to do something: *sé dónde vive*. **Conocer** is to know a person or a place: **conozco a Juan**, *¿conocés Córdoba?* In the past it changes meaning: **conocí a Juan** — *I met Juan* (for the first time)."
     words:
       - lemma: "comer"
         pos: "verb"
@@ -345,8 +517,17 @@ units:
       - lemma: "recién"
         pos: "adv"
         en: "just (a moment ago)"
+      - lemma: "levantarse"
+        pos: "verb"
+        forms:
+          - form: "me levanté"
+            en: "I got up"
+            f: "1sg.pret.ind.clitic"
+          - form: "levanté"
+            f: "1sg.pret.ind"
+            bound: true
 
-  - ordinal: 4
+  - ordinal: 5
     slug: "naci-en"
     title: "Tell where you were born and where you've lived"
     summary: "Nací en Rosario"
@@ -365,9 +546,7 @@ units:
           For *ellos* it ends in **-ieron**: *mis viejos **vivieron** en Brasil*, ***salieron**
           temprano*."
       - title: "¿Dónde naciste?"
-        body: "It comes right after *¿de dónde sos?*: **¿Dónde naciste?** — **Nací en Rosario, pero
-          vivo acá.** And when you didn't catch what someone said, it's the past too: **perdón, no
-          entendí**."
+        body: "It comes right after *¿de dónde sos?*: **¿Dónde naciste?** — **Nací en Rosario, pero vivo acá.** And when you didn't catch what someone said, it's the past too: **perdón, no entendí**. Where you grew up is **me crié**: *Nací en Rosario, pero me crié en Córdoba.* — *¿Dónde te criaste?*"
     words:
       - lemma: "nacer"
         pos: "verb"
@@ -409,9 +588,6 @@ units:
       - lemma: "entender"
         pos: "verb"
         forms:
-          - form: "entendí"
-            en: "I understood, I got it"
-            f: "1sg.pret.ind"
           - form: "entendiste"
             en: "you understood, you got it"
             f: "2sg.pret.ind.vos"
@@ -448,8 +624,24 @@ units:
       - lemma: "donde"
         pos: "adv"
         en: "where (the place where)"
+      - lemma: "criarse"
+        pos: "verb"
+        en: "to grow up"
+        forms:
+          - form: "me crié"
+            en: "I grew up (was raised)"
+            f: "1sg.pret.ind.clitic"
+          - form: "te criaste"
+            en: "you grew up (were raised)"
+            f: "2sg.pret.ind.vos.clitic"
+          - form: "crié"
+            f: "1sg.pret.ind"
+            bound: true
+          - form: "criaste"
+            f: "2sg.pret.ind.vos"
+            bound: true
 
-  - ordinal: 5
+  - ordinal: 6
     slug: "fui-a-la-cancha"
     title: "Say where you went and how it was"
     summary: "¿Cómo te fue?"
@@ -468,6 +660,8 @@ units:
       - title: "¿Cómo te fue?"
         body: "The porteño *how did it go?* is **¿Cómo te fue?**, and the answer is **Me fue bien** or
           **Me fue re mal**."
+      - title: "¿Cómo estuvo?"
+        body: "To say how something was, porteños mostly use **estuvo**: *¿Cómo estuvo el partido? Estuvo bárbaro.* **Fue** works too, for events: *el recital fue bárbaro*."
     words:
       - lemma: "ir"
         pos: "verb"
@@ -524,7 +718,7 @@ units:
         pos: "noun"
         en: "concert, gig"
 
-  - ordinal: 6
+  - ordinal: 7
     slug: "la-pasamos-barbaro"
     title: "Say how the game and the night went"
     summary: "La pasamos bárbaro"
@@ -605,12 +799,14 @@ units:
         forms:
           - form: "perdí"
             en: "I lost"
+            note: "also missed, for transport: perdí el tren — I missed the train"
             f: "1sg.pret.ind"
           - form: "perdiste"
             en: "you lost"
             f: "2sg.pret.ind.vos"
           - form: "perdimos"
             en: "we lost"
+            note: "also missed, for transport: perdimos el micro — we missed the bus"
             f: "1pl.pret.ind"
       - lemma: "equipo"
         pos: "noun"
@@ -629,37 +825,6 @@ units:
       - lemma: "increíble"
         pos: "adj"
         en: "amazing, incredible"
-
-  - ordinal: 7
-    slug: "practica-que-hiciste"
-    title: "Practice: what you did"
-    summary: "¿Qué hiciste ayer?"
-    grammar:
-      - "repaso.preterito"
-      - "presente-vs-preterito"
-    register_max: "informal"
-    sample:
-      es: "Ayer fui a la cancha y después comí con Juan."
-      en: "Yesterday I went to the game and then I ate with Juan."
-    tips:
-      - title: "Today or yesterday: the stress tells"
-        body: "**Hoy laburo**, **ayer laburé**. The same verb, and only the stress moves: *LA-bu-ro* is now, *la-bu-RÉ* is done. Say it out loud and the past is already right."
-      - title: "Fui: two verbs, one word"
-        body: "**Fui** is both *I went* (ir) and *I was* (ser). **Fui a la cancha** — *I went to the game*; **fue re lindo** — *it was really nice*. The sentence always tells you which."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "laburé"
-      - "laburaste"
-      - "comí"
-      - "comiste"
-      - "salí"
-      - "saliste"
-      - "fui"
-      - "fuiste"
-      - "estuve"
-      - "tuve"
-      - "llegué"
-      - "llegaste"
 
   - ordinal: 8
     slug: "practica-como-estuvo"
@@ -715,6 +880,8 @@ units:
       - title: "¿Viste?"
         body: "*¿Viste?* is also just *you saw*: **¿Viste el partido?** — *Did you see the game?* — the
           same word porteños drop into every story to mean *you know?*"
+      - title: "Después, entonces"
+        body: "Tell a story in order with **primero**, **después**, **al final**: *Primero comimos, después vimos una película.* **Entonces** is mostly *so*: *No pude ir, entonces vi el partido en casa.*"
     words:
       - lemma: "hacer"
         pos: "verb"
@@ -841,6 +1008,7 @@ units:
         forms:
           - form: "vino"
             en: "came (he/she came)"
+            note: "same spelling as vino, wine: Juan vino con vino — Juan came with wine"
             f: "3sg.pret.ind.irregular"
           - form: "vinimos"
             en: "we came"
@@ -1057,6 +1225,9 @@ units:
         forms:
           - form: "lejísimos"
             en: "miles away, really far"
+      - lemma: "Mendoza"
+        pos: "propn"
+        en: "Mendoza"
 
   - ordinal: 13
     slug: "me-duele"
@@ -1075,8 +1246,7 @@ units:
         body: "The thing that hurts is the subject: **me duele la cabeza** — *my head hurts*, **me duelen
           los pies** — *my feet hurt*. The *me* says whose, so Spanish uses *la*, not *mi*."
       - title: "At the doctor's"
-        body: "You ask for a **turno** (an appointment); the **guardia** is the emergency room. **Estoy
-          engripado** — *I've got the flu* — is what gets you the day off."
+        body: "You ask for a **turno** (an appointment), and the verb is **sacar turno**: *tengo que sacar turno con el médico*. The **guardia** is the emergency room. **Estoy engripado** — *I've got the flu* — is what gets you the day off."
     words:
       # The chunk is the form, as with me llamo: "duele" on its own never
       # says whose. docs/course-spec.md §1.5.
@@ -1144,9 +1314,6 @@ units:
       - lemma: "remedio"
         pos: "noun"
         en: "medicine"
-      - lemma: "turno"
-        pos: "noun"
-        en: "appointment"
       - lemma: "guardia"
         pos: "noun"
         en: "emergency room, ER"
@@ -1167,6 +1334,21 @@ units:
           - form: "descansá"
             en: "rest"
             f: "2sg.imp.vos"
+      - lemma: "sacar"
+        pos: "verb"
+        en: "to take out, to get"
+        forms:
+          - form: "sacar"
+            f: "inf"
+      - lemma: "turno"
+        pos: "noun"
+        en: "appointment"
+        forms:
+          - form: "turno"
+            f: "m.sg"
+          - form: "turnos"
+            en: "appointments"
+            f: "m.pl"
 
   - ordinal: 14
     slug: "me-dolio"
@@ -1187,8 +1369,7 @@ units:
           head hurt*, **¿te dolió?**, **a mi viejo le dolió la rodilla**. Two things hurting, two
           endings, just like *me duelen*: **me dolieron los ojos**."
       - title: "At the farmacia"
-        body: "Half the time the pharmacist is your doctor: **estoy resfriado**, **tengo alergia**,
-          **me duele el oído** — and you leave with **una curita** or **unas pastillas**."
+        body: "Half the time the pharmacist is your doctor: **estoy resfriado**, **tengo alergia**, **me duele el oído** — and you leave with **una curita** or **unas pastillas**. To ask: **¿Tenés algo para la alergia?** — **Necesito algo para la garganta.** A broken bone is **quebrado**: *tiene el brazo quebrado*. And when you hurt yourself: **me lastimé la rodilla**."
     words:
       # The chunk is the form, as with me duele. docs/course-spec.md §1.5.
       - lemma: "doler"
@@ -1256,40 +1437,30 @@ units:
       - lemma: "curita"
         pos: "noun"
         en: "plaster, Band-Aid"
+      - lemma: "quebrado"
+        pos: "adj"
+        en: "broken (a bone)"
+        forms:
+          - form: "quebrado"
+            f: "m.sg"
+      - lemma: "lastimarse"
+        pos: "verb"
+        en: "to hurt yourself, to get hurt"
+        forms:
+          - form: "me lastimé"
+            en: "I hurt myself, I hurt (my knee)"
+            f: "1sg.pret.ind.clitic"
+          - form: "lastimé"
+            f: "1sg.pret.ind"
+            bound: true
+      - lemma: "dolor"
+        pos: "noun"
+        en: "pain, ache"
+      - lemma: "resfrío"
+        pos: "noun"
+        en: "a cold"
 
   - ordinal: 15
-    slug: "practica-el-finde"
-    title: "Practice: your weekend"
-    summary: "¿Qué hiciste el finde?"
-    grammar:
-      - "repaso.preterito-irregular"
-      - "repaso.comparativos"
-    register_max: "informal"
-    sample:
-      es: "El finde vi a Sofi y comimos un asado riquísimo."
-      en: "On the weekend I saw Sofi and we had a delicious barbecue."
-    tips:
-      - title: "The irregular ones have no accent"
-        body: "**Hice, vi, dije, pude, vine** — the pasts you use most carry no accent, unlike *laburé* or *comí*. **¿Qué hiciste?** — **Nada, vi una peli.**"
-      - title: "Better and worse"
-        body: "**Mejor** and **peor** never take *más*: **está mejor**, **fue peor**. And *-ísimo* is the porteño way to say *really*: **riquísimo**, **carísimo**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "hice"
-      - "hiciste"
-      - "vi"
-      - "viste/ver"
-      - "dije"
-      - "pude"
-      - "vine"
-      - "mejor"
-      - "peor"
-      - "riquísimo"
-      - "me duele"
-      - "fui"
-      - "tuve"
-
-  - ordinal: 16
     slug: "practica-quien-vino"
     title: "Practice: who came, who's best, what hurt"
     summary: "¿Quién vino al asado?"
@@ -1324,7 +1495,7 @@ units:
       - "hice"
       - "estuve"
 
-  - ordinal: 17
+  - ordinal: 16
     slug: "te-llamo"
     title: "Keep it short with lo, la, le"
     summary: "Te llamo mañana"
@@ -1341,8 +1512,9 @@ units:
         body: "**¿Tenés la tarjeta? Sí, la tengo.** The pronoun stands for the thing and goes before
           the verb: *lo* and *los* for masculine words, *la* and *las* for feminine ones."
       - title: "Stuck onto a command"
-        body: "With a vos command the pronoun joins the end, and there is no accent: **llamame**,
-          **mandame un audio**, **dame**, **prestame**. *Le* and *les* are *to him, to her, to them*."
+        body: "With a vos command the pronoun joins the end, and there is no accent: **llamame**, **mandame un audio**, **dame**, **prestame**. *Le* and *les* are *to him, to her, to them*. To pick someone up, porteños say **pasar a buscar**: *te paso a buscar a las ocho*, *pasame a buscar*."
+      - title: "Se lo, se la"
+        body: "Two pronouns together go person first, thing second: **me lo** mandás, **te la** doy. And *le* or *les* in front of *lo, la, los, las* turns into **se**: *¿le mandás el audio?* → **¿se lo mandás?**; *le doy la llave* → **se la doy**."
     words:
       - lemma: "lo"
         pos: "pron"
@@ -1375,28 +1547,18 @@ units:
             f: "3sg.pres.ind"
           - form: "llamar"
             f: "inf"
-          - form: "llamame"
-            en: "call me"
-            f: "2sg.imp.vos.clitic"
       - lemma: "mandar"
         pos: "verb"
         en: "to send"
         forms:
-          - form: "mando"
-            en: "I send, I'll send"
-            f: "1sg.pres.ind"
           - form: "mandás"
             en: "you send"
             f: "2sg.pres.ind.vos"
-          - form: "mandame"
-            en: "send me"
-            f: "2sg.imp.vos.clitic"
       - lemma: "audio"
         pos: "noun"
         en: "voice message"
       - lemma: "dar"
         pos: "verb"
-        en: "to give"
         forms:
           - form: "doy"
             en: "I give"
@@ -1407,9 +1569,6 @@ units:
           - form: "da"
             en: "gives (he/she gives)"
             f: "3sg.pres.ind"
-          - form: "dame"
-            en: "give me"
-            f: "2sg.imp.vos.clitic"
           - form: "dar"
             en: "to give"
             f: "inf"
@@ -1433,8 +1592,21 @@ units:
           - form: "prestame"
             en: "lend me"
             f: "2sg.imp.vos.clitic"
+      - lemma: "pasar a buscar"
+        pos: "verb"
+        en: "to pick up, to come and get"
+        forms:
+          - form: "paso a buscar"
+            en: "I'll come and pick up"
+            f: "1sg.pres.ind"
+          - form: "pasás a buscar"
+            en: "you'll come and pick up"
+            f: "2sg.pres.ind.vos"
+          - form: "pasame a buscar"
+            en: "come and pick me up"
+            f: "2sg.imp.vos.clitic"
 
-  - ordinal: 18
+  - ordinal: 17
     slug: "te-llame"
     title: "Say who you called and what you sent"
     summary: "¿Me llamaste?"
@@ -1449,12 +1621,12 @@ units:
       en: "I called you last night and sent you the photos."
     tips:
       - title: "Lo vi, la mandé"
-        body: "In the past the pronoun sits in the same place, before the verb: **¿Viste el mensaje?
-          Sí, lo vi.** **¿Recibiste mi mail? No, no lo recibí.** *Le* and *les* too: **le di la llave**,
-          **les mandé las fotos**."
+        body: "In the past the pronoun sits in the same place, before the verb: **¿Viste el mensaje? Sí, lo vi.** **¿Recibiste mi mail? No, no lo recibí.** *Le* and *les* too: **le di la llave**, **les mandé las fotos**. And *le* + *la* is **se la**, as before: **¿La foto? Se la mandé a Juan.** **¿El video? Se lo mostré a Martín.**"
       - title: "Mostrame"
         body: "On a command it goes on the end, as before: **mostrame las fotos**, **buscame a las
           ocho**. The stress doesn't move: *MOS-tra-me*, *BUS-ca-me*."
+      - title: "Le dije a Juan"
+        body: "Even when you name the person, the **le** stays: **le dije a Juan que no**, **le di la llave a Sofi**, **les mandé las fotos a mis viejos**. English says it once; a porteño says it twice. And a message is not *received*, it *reaches* you: **¿Te llegó mi audio?** — **Sí, me llegó.**"
     words:
       - lemma: "llamar"
         pos: "verb"
@@ -1545,7 +1717,7 @@ units:
         pos: "noun"
         en: "video"
 
-  - ordinal: 19
+  - ordinal: 18
     slug: "las-tareas"
     title: "Split the chores"
     summary: "Hoy te toca a vos"
@@ -1563,6 +1735,8 @@ units:
       - title: "Las compras"
         body: "**Hacer las compras** is doing the food shopping; **sacar la basura** is taking the
           rubbish out."
+      - title: "Limpio, limpia"
+        body: "**Limpio** is *I clean* — and also *clean*, the opposite of *sucio*: *limpio el baño* — *el baño está limpio*, *la cocina está limpia*."
     words:
       - lemma: "limpiar"
         pos: "verb"
@@ -1599,7 +1773,6 @@ units:
             f: "inf"
       - lemma: "sacar"
         pos: "verb"
-        en: "to take out, to get"
         forms:
           - form: "saco"
             en: "I take out"
@@ -1607,8 +1780,6 @@ units:
           - form: "sacás"
             en: "you take out"
             f: "2sg.pres.ind.vos"
-          - form: "sacar"
-            f: "inf"
       # "Toca" on its own is "touches" or "plays"; the turn is only ever the
       # chunk. docs/course-spec.md §1.5.
       - lemma: "tocar"
@@ -1645,8 +1816,16 @@ units:
       - lemma: "compras"
         pos: "noun"
         en: "shopping, groceries"
+      - lemma: "limpio"
+        pos: "adj"
+        en: "clean"
+        forms:
+          - form: "limpio"
+            f: "m.sg"
+          - form: "limpia"
+            f: "f.sg"
 
-  - ordinal: 20
+  - ordinal: 19
     slug: "quien-lavo"
     title: "Say who did which chore"
     summary: "Ayer me tocó a mí"
@@ -1666,6 +1845,8 @@ units:
       - title: "El lavarropas"
         body: "Clothes go in the **lavarropas**; to **planchar** them is optional for most porteños.
           The floor: **barrer** with the **escoba**, then a wet **trapo** — *el trapo de piso*."
+      - title: "Me tocó: I got"
+        body: "**Me tocó** is also what you *got* without choosing: **me tocó el baño** — *I got the bathroom*; **me tocó laburar el domingo** — *I had to work on Sunday*; **me tocó un profe re copado** — *I got a really cool teacher*."
     words:
       - lemma: "lavar"
         pos: "verb"
@@ -1762,7 +1943,7 @@ units:
         pos: "noun"
         en: "dirt, grime"
 
-  - ordinal: 21
+  - ordinal: 20
     slug: "de-viaje"
     title: "Talk about a trip"
     summary: "Me voy de viaje"
@@ -1775,11 +1956,12 @@ units:
       en: "In January I went to Mar del Plata."
     tips:
       - title: "Micro, not colectivo"
-        body: "The *colectivo* crosses the city; to go to another city you take the **micro** (the
-          coach). You buy the **pasaje** at the terminal or online."
+        body: "The *colectivo* crosses the city; to go to another city you take the **micro** (the coach). You buy the **pasaje** at the terminal or online. A return ticket is **ida y vuelta**. In Buenos Aires the micros leave from the **terminal** of Retiro, and the airports are Ezeiza (international) and Aeroparque (in the city)."
       - title: "Summer is in January"
         body: "Porteños go on **vacaciones** in January and February, and *la costa* — Mar del Plata,
           Pinamar — is where half of Buenos Aires ends up."
+      - title: "Fui a, me fui a"
+        body: "For where you went, porteños say **fui a** or **me fui a**: *me fui a Bariloche*, *¿adónde te fuiste en enero?* **Viajar** is for the trip itself: *viajé en micro*, *viajé sola*, *viajo mañana*."
     words:
       - lemma: "viajar"
         pos: "verb"
@@ -1790,9 +1972,6 @@ units:
           - form: "viajaste"
             en: "you traveled"
             f: "2sg.pret.ind.vos"
-      - lemma: "viaje"
-        pos: "noun"
-        en: "trip"
       - lemma: "vacaciones"
         pos: "noun"
         en: "vacation"
@@ -1814,29 +1993,41 @@ units:
       - lemma: "avión"
         pos: "noun"
         en: "plane"
-      - lemma: "aeropuerto"
-        pos: "noun"
-        en: "airport"
       - lemma: "mar"
         pos: "noun"
         en: "sea"
       - lemma: "montaña"
         pos: "noun"
         en: "mountains"
-      - lemma: "hotel"
-        pos: "noun"
-        en: "hotel"
       - lemma: "Mar del Plata"
         pos: "propn"
         en: "Mar del Plata"
       - lemma: "Bariloche"
         pos: "propn"
         en: "Bariloche"
-      - lemma: "Mendoza"
-        pos: "propn"
-        en: "Mendoza"
+      - lemma: "ida y vuelta"
+        pos: "phrase"
+        en: "round trip, return (ticket)"
+      - lemma: "terminal"
+        pos: "noun"
+        en: "bus station"
+        forms:
+          - form: "terminal"
+            f: "f.sg"
+      - lemma: "irse"
+        pos: "verb"
+        forms:
+          - form: "me fui"
+            en: "I went off, I went away"
+            f: "1sg.pret.ind.clitic.irregular"
+          - form: "te fuiste"
+            en: "you went off, you went away"
+            f: "2sg.pret.ind.vos.clitic.irregular"
+      - lemma: "vuelo"
+        pos: "noun"
+        en: "flight"
 
-  - ordinal: 22
+  - ordinal: 21
     slug: "las-vacaciones"
     title: "Tell what you did on holiday"
     summary: "Alquilamos una carpa"
@@ -1856,6 +2047,8 @@ units:
         body: "For a porteño **la costa** is the Atlantic beaches south of the city, where you rent a
           **carpa** — a beach tent by the day. The other classic is **las sierras** of Córdoba: a
           **río** instead of the sea."
+      - title: "Con Juan fuimos"
+        body: "**Con Juan fuimos a la costa** means *Juan and I went to the coast* — two people, not three. Argentines say *with Juan we…* where English says *Juan and I*: **con Sofi alquilamos una carpa**."
     words:
       - lemma: "viajar"
         pos: "verb"
@@ -1925,38 +2118,7 @@ units:
         pos: "noun"
         en: "sand"
 
-  - ordinal: 23
-    slug: "practica-el-viaje"
-    title: "Practice: a trip and the chores"
-    summary: "Mandame un audio"
-    grammar:
-      - "repaso.imperativo.clitico"
-      - "repaso.preterito"
-    register_max: "informal"
-    sample:
-      es: "Mandame un audio del viaje."
-      en: "Send me a voice message from the trip."
-    tips:
-      - title: "The little word goes on the end"
-        body: "In a request the pronoun sticks to the verb: **llamame**, **mandame**, **dame**, **prestame**. In a statement it goes in front: **te llamo**, **me mandás**."
-      - title: "Whose turn is it?"
-        body: "**Me toca lavar** — *it's my turn to wash up*. **¿A quién le toca?** Porteños split the chores with *tocar*, never with *turno*."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "llamame"
-      - "mandame"
-      - "dame"
-      - "prestame"
-      - "me toca"
-      - "te toca"
-      - "lavar"
-      - "viajé"
-      - "viajaste"
-      - "hice"
-      - "estuve"
-      - "fuimos"
-
-  - ordinal: 24
+  - ordinal: 22
     slug: "practica-las-vacaciones"
     title: "Practice: calls, chores and the holidays"
     summary: "Te mandé las fotos"
@@ -1992,7 +2154,7 @@ units:
       - "fuimos"
       - "compraste"
 
-  - ordinal: 25
+  - ordinal: 23
     slug: "menos-mal"
     title: "Tell what happened to you"
     summary: "¿Qué te pasó?"
@@ -2057,55 +2219,3 @@ units:
       - lemma: "historia"
         pos: "noun"
         en: "story"
-
-  - ordinal: 26
-    slug: "contame"
-    title: "Tell the whole story"
-    summary: "Contame todo"
-    grammar:
-      - "repaso.preterito"
-      - "relato.conectores"
-    register_max: "informal"
-    sample:
-      es: "Contame qué pasó."
-      en: "Tell me what happened."
-    tips:
-      - title: "How a porteño tells it"
-        body: "**Contame** opens it; **de repente** is the twist, **por suerte** the relief, **al
-          final** the end. **Igual** — *anyway* — goes almost anywhere, and **o sea** is *I mean*."
-      - title: "¡Qué garrón!"
-        body: "When the story ends badly, the answer is **¡Qué garrón!** — *what a drag!* Informal,
-          and everywhere."
-    words:
-      - lemma: "contar"
-        pos: "verb"
-        en: "to tell"
-        forms:
-          - form: "contame"
-            en: "tell me"
-            f: "2sg.imp.vos.clitic"
-          - form: "contás"
-            en: "you tell"
-            f: "2sg.pres.ind.vos"
-          - form: "cuento"
-            en: "I tell"
-            f: "1sg.pres.ind.irregular"
-      - lemma: "de repente"
-        pos: "phrase"
-        en: "suddenly"
-      - lemma: "por suerte"
-        pos: "phrase"
-        en: "luckily"
-      - lemma: "igual"
-        pos: "adv"
-        en: "anyway"
-      - lemma: "o sea"
-        pos: "phrase"
-        en: "I mean"
-      - lemma: "garrón"
-        pos: "noun"
-        en: "drag, bummer"
-        register: "informal"
-      - lemma: "además"
-        pos: "adv"
-        en: "besides, as well"

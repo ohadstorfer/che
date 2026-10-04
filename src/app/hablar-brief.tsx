@@ -11,6 +11,7 @@ import {
   type Band,
   bandOf,
   bandsOf,
+  chatLength,
   findScenario,
   getDefaultLevel,
   type HablarKind,
@@ -153,7 +154,7 @@ export default function HablarBrief() {
       <View style={styles.footer}>
         {error ? <Text style={styles.error}>{error}</Text> : null}
         <View style={styles.rules}>
-          <Rule icon="timer-outline" text="About 2 min" />
+          <Rule icon="timer-outline" text={chatLength(played)} />
           <Rule icon="microphone-outline" text="Tap to talk" />
           <Rule icon="lightbulb-on-outline" text="3 hints" />
         </View>

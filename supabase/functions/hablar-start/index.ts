@@ -8,7 +8,7 @@
 // One chat per local day (staff excepted), enforced by a unique (user_id, local_date) index:
 // a second start that day gets 409 with the existing session. The opener is
 // pre-recorded and bundled, so no model or TTS call happens here; its text is
-// written in as turn 0. The 5:00 runs from the row's started_at.
+// written in as turn 0. The clock (hablar.ts CLOCK, by level) runs from the row's started_at.
 //
 // A unit chat is none of the day's business: it may be had any number of
 // times a day, and doesn't count toward the free chats. The lesson decides
@@ -20,7 +20,7 @@ import { json, preflight } from "../_shared/cors.ts";
 import { speakingUnit, unitScenario } from "../_shared/hablar-unit.ts";
 import {
   caller,
-  CHAT_SECONDS,
+  clockOf,
   deadlineAt,
   freeOpener,
   isUuid,
@@ -154,8 +154,8 @@ Deno.serve(async (req) => {
     level,
     local_date: today,
     started_at: session.started_at,
-    deadline_at: unlimited ? null : deadlineAt(session.started_at, 0),
-    limit_seconds: unlimited ? null : CHAT_SECONDS,
+    deadline_at: unlimited ? null : deadlineAt(session.started_at, 0, level),
+    limit_seconds: unlimited ? null : clockOf(level).stop,
     unlimited,
     opener: { turn_id: openerTurnId, text: opener.es, text_en: opener.en, audio_url: audioUrl },
     goals: [],

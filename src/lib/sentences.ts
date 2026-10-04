@@ -91,6 +91,14 @@ const unitRows = (unitIds: string[]) =>
       ),
   );
 
+/** The published sentences of a few units, each unit as a piece of its own —
+ *  what a placement test samples from sections she hasn't reached, without
+ *  pulling their whole blocks down. Kept on the phone like any block. */
+export async function loadUnitSentenceRows(unitIds: string[]): Promise<SentenceRow[]> {
+  const rows = await inBatches([...new Set(unitIds)], BLOCKS_IN_FLIGHT, (id) => unitRows([id]));
+  return rows.flat();
+}
+
 async function inBatches<T, R>(list: T[], size: number, run: (item: T) => Promise<R>): Promise<R[]> {
   const out: R[] = [];
   for (let at = 0; at < list.length; at += size) out.push(...(await Promise.all(list.slice(at, at + size).map(run))));

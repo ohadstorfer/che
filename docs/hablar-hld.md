@@ -21,8 +21,8 @@ Langua) and the corrective-feedback research. Sources are in §9.
 | Character | **One**: Pancho, using the existing `tomas` ElevenLabs voice. Backstory and avatar: later. |
 | Input | **Voice only.** Tap to start, tap to stop. |
 | Level | Defaults to the learner's **course level**; they can override it (Easier / My level / Harder). Each level has a strict grammar list (`LEVEL_GRAMMAR`: A1 is present tense only) that the reply, the "better" line, hints and summary phrases all follow. |
-| Limit | **1 conversation a day, about 2 minutes** (hard stop 3:00), reset at **local midnight**. The timer counts the whole session and pauses when the app is in the background. |
-| Ending | **Pancho decides** when the chat is over and ends his goodbye with a `[FIN]` marker the server strips. He is nudged at 1:40 (or 6 exchanges) and told to close at 2:30 (or 10). |
+| Limit | **1 conversation a day, about 2 minutes** (hard stop 3:00) at B1/B2, **about 3 minutes** (hard stop 4:00) at A1/A2, reset at **local midnight**. The numbers live in `CLOCK` (`_shared/hablar.ts`). The timer pauses when the app is in the background and while it is Pancho's turn (her line is being answered, or he is speaking). |
+| Ending | **Pancho decides** when the chat is over and ends his goodbye with a `[FIN]` marker the server strips. He is nudged at 1:40 (or 6 exchanges) and told to close at 2:30 (or 10); at A1/A2, nudged at 2:50 (or 8 exchanges) and told to close at 3:30 (or 10). |
 | Corrections | Pancho recasts the mistake **inside his reply**. The exact fix and its explanation are **always shown under the user's message** (since 2026-09-30), no tap needed. |
 | Message tools | User: ✏️ correction + "Explain" · 🪄 better phrasing + **"Decilo"**. Pancho: ▶️ replay · 🐢 slow · 🔤 translate. |
 | Tone | **Relaxed porteño.** Understands and explains lunfardo and puteadas, never insults the learner. |
@@ -182,7 +182,10 @@ service-role client). The Anthropic, ElevenLabs and service-role keys live only 
 2. Reject a body over 1.5 MB (≈ 45 s of audio). The client already drops clips < 0.6 s or silent.
 3. Send the **bytes as they are** to Scribe (no transcoding; both mp4/AAC and webm/Opus are accepted):
    `model_id=scribe_v2, language_code=es, tag_audio_events=false, no_verbatim=false,
-   temperature=0, keyterms=[scenario phrases + voseo forms at this level]` (no `enable_logging=false`: zero-retention mode is Enterprise-only and returns 403).
+   temperature=0, keyterms=[scenario phrases + voseo forms at this level]`. A turn whose forced-Spanish
+   transcript has nothing Spanish in it is sent once more without `language_code`; that transcript is
+   kept only if it reads as English, and the turn is stored with `meta.lang = 'en'` so Pancho gives the
+   Spanish for it and the feedback is a "note" (no `enable_logging=false`: zero-retention mode is Enterprise-only and returns 403).
 4. Empty text, or a known silence hallucination ("gracias por ver…") → `{ text: '' }`, and the client
    says "No te escuché".
 5. **purpose=turn:** insert the user turn as a **draft** (`text`, `audio_path`, `status='draft'`)

@@ -2,7 +2,7 @@ section:
   slug: "tango"
   title: "Tango"
   emoji: "💃"
-  summary: "The sad, sexy music of the Río de la Plata, and how not to embarrass yourself at a milonga"
+  summary: "The music of the Río de la Plata: where it came from, what it sings about, and how to behave at a milonga"
 
 # Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
 # 2–3 guess-first questions, no word review.
@@ -13,7 +13,7 @@ classes:
     summary: "Two cities, one port, and a German squeezebox"
     pages:
       - type: card
-        text: "Tango was born in the late 1800s in the **arrabal**, the rough edge of town: tenements, corner bars, the port. The music of immigrants, sailors and workers."
+        text: "Tango was born in the late 1800s in the **arrabal**, the rough edge of town: **conventillos** (crowded shared houses), corner bars, the port. The music of immigrants, sailors, workers and Afro-Argentines, with African rhythms like **candombe** in the mix."
       - type: choice
         prompt: "Polite Buenos Aires society found tango scandalous. What finally changed their minds?"
         options:
@@ -31,11 +31,11 @@ classes:
           - "In Buenos Aires, by Gardel"
           - "In Paris, during the craze"
         correct: 0
-        explain: "Gerardo Matos Rodríguez, a young Uruguayan, wrote it, and it premiered in a Montevideo café."
+        explain: "Gerardo Matos Rodríguez, a young Uruguayan student, wrote it around 1916, and it premiered in a Montevideo café. Milongas still play it as the last tango of the night."
       - type: card
         text: "So tango isn't only Argentine. It's **rioplatense**, from both sides of the river. In 2009 UNESCO listed it as heritage of both countries, and Uruguayans will remind you."
       - type: card
-        text: "The sound of tango is the **bandoneón**, and it's German. The story goes it was meant for small churches with no organ. Hymns to tango bars in one boat trip."
+        text: "The sound of tango is the **bandoneón**, and it's German. The story goes it was meant for small churches with no organ. It crossed the ocean with immigrants, and went from hymns to tango bars."
       - type: choice
         prompt: "Why is the bandoneón famously hard to play?"
         options:
@@ -66,7 +66,7 @@ classes:
       - type: card
         text: "And if they look away? That's a no, and nobody got rejected in public. That's the whole point of the cabeceo."
       - type: card
-        text: "Music comes in **tandas**, sets of 3 or 4 songs. Then a short non-tango **cortina** plays, the floor clears, and everyone changes partners."
+        text: "Music comes in **tandas**, sets of 3 or 4 songs: tango, **vals**, or **milonga**, which is also the name of a faster, happier rhythm. Then a short non-tango **cortina** plays, and everyone changes partners."
       - type: choice
         prompt: "Your partner says **“gracias”** after the first song. What just happened?"
         options:
@@ -74,12 +74,14 @@ classes:
           - "They want a short break"
           - "They're done dancing with you"
         correct: 2
-        explain: "**Gracias** mid-tanda means “thanks, that's enough”. Want to keep going? Just smile and wait for the next song."
+        explain: "Just like with mate, **gracias** mid-tanda means “thanks, that's enough”. Want to keep going? Chat a little between songs and save **gracias** for the end of the tanda."
       - type: card
-        text: "Couples move counterclockwise in a **ronda**, like cars on a track. No passing, no big kicks, and never teach your partner on the floor."
+        text: "Couples hold each other in the **abrazo**, the embrace, and move counterclockwise in a **ronda**, like cars on a track. No overtaking, no high kicks, and never teach your partner on the floor."
       - type: card
         chip: "Did you know?"
         text: "The dinner shows with flying legs and a rose in someone's mouth? Porteños call that **tango for export**. At a milonga, the dance is small, close and improvised."
+      - type: card
+        text: "One honest note: most Argentines don't dance tango. It's a small, devoted scene, with many foreigners in it. But almost everyone knows the songs."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -90,7 +92,7 @@ classes:
       - type: card
         text: "**Carlos Gardel** is *the* tango singer, and Argentina's first pop idol. Slicked-back hair, a movie-star smile, a voice people still call perfect."
       - type: choice
-        prompt: "So where was Gardel born?"
+        prompt: "Where do most researchers say Gardel was born?"
         options:
           - "Abasto, Buenos Aires"
           - "Toulouse, France"
@@ -110,16 +112,18 @@ classes:
         correct: 0
         explain: "A lit **pucho**. Legend says if it burns all the way down, your wish comes true."
       - type: card
-        text: "His fans' favorite line: **cada día canta mejor**, he sings better every day. Dead since 1935, and still improving."
+        text: "His fans' favorite line: **cada día canta mejor**, he sings better every day. Almost a century later, and still improving."
+      - type: card
+        text: "His name is also a compliment. **Sos Gardel** means you're the best, or you have all you need: **“Con un asado y amigos, sos Gardel.”**"
       - type: card
         chip: "Pro tip"
-        text: "Friend whining about an ex for an hour? **Andá a cantarle a Gardel**: go sing it to Gardel. Cheeky, not rude."
+        text: "Someone keeps complaining about something you can't fix? **Andá a cantarle a Gardel**: go sing it to Gardel, nobody here will listen. It's dismissive, so keep it for friends."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "orquestas-y-piazzolla"
     title: "Big bands and a rebel"
-    summary: "The golden age of the orquestas, and the rebel who broke the rules"
+    summary: "When tango was pop music, and the man who was told “eso no es tango”"
     pages:
       - type: card
         text: "In the **1940s**, tango was pop music. Every club and radio station had an **orquesta típica**, and people followed bandleaders like football teams."
@@ -132,23 +136,23 @@ classes:
           - "Played on, with a red carnation on his piano"
           - "Hired a new pianist and never looked back"
         correct: 1
-        explain: "A **clavel rojo** on the empty piano. Everyone in the room got the message."
+        explain: "A **clavel rojo** on the empty piano. Everyone in the room got the message. Musicians still say **“¡Pugliese, Pugliese, Pugliese!”** for good luck before a show."
       - type: card
         text: "Then came the rebel: **Astor Piazzolla**. He grew up in New York, where his dad gave him a bandoneón as a kid."
       - type: choice
-        prompt: "At 13, Piazzolla played in a Gardel film in New York, and Gardel invited him on his 1935 tour. What happened?"
+        prompt: "At 13, Piazzolla had a tiny part as a newspaper boy in a Gardel film shot in New York, and Gardel invited him on his 1935 tour. What happened?"
         options:
           - "His father said he was too young"
           - "He joined and played every show"
           - "He said no to keep studying piano"
         correct: 0
-        explain: "Lucky boy. That was Gardel's last tour: it ended in the plane crash in Medellín."
+        explain: "His father saved his life. That was Gardel's last tour: it ended in the plane crash in Medellín."
       - type: card
-        text: "Back in Buenos Aires he played in **Troilo**'s orquesta, then studied classical music in Paris with **Nadia Boulanger**. She told him to stop hiding his tango."
+        text: "Back in Buenos Aires he played bandoneón in the orquesta of **Aníbal Troilo**, the most loved bandleader of all, then studied classical music in Paris with **Nadia Boulanger**. She told him to stop hiding his tango."
       - type: card
-        text: "So he mixed tango with jazz and classical: **tango nuevo**. Think **Libertango** and **Adiós Nonino**."
+        text: "So he mixed tango with jazz and classical: **nuevo tango**. Think **Libertango** and **Adiós Nonino**. Traditionalists called him **el asesino del tango**, and **“eso no es tango”** followed him for years."
       - type: card
-        text: "Traditionalists called him **el asesino del tango**, and **“eso no es tango”** followed him for years. Today he's among the most played Argentine composers in the world."
+        text: "Today he's among the most played Argentine composers in the world, and tango keeps changing: bands like **Bajofondo** and **Gotan Project** mix it with electronic beats."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -167,11 +171,11 @@ classes:
           - "The barrio never changes"
           - "Twenty years is nothing"
         correct: 2
-        explain: "**“Que veinte años no es nada.”** Heard at reunions and birthdays, anywhere time has passed and everyone pretends it hasn't."
+        explain: "**“Que veinte años no es nada.”** The words are by **Alfredo Le Pera**, Gardel's writing partner. Heard at reunions and birthdays, anywhere time has passed and everyone pretends it hasn't."
       - type: card
         text: "**Mi Buenos Aires querido** is a man far away, dreaming of coming home. Ask any Argentine living abroad whether it makes them cry."
       - type: card
-        text: "**Cambalache**, also by Discépolo, isn't about love. It says the world is a junk shop where a donkey and a great professor count the same."
+        text: "**Cambalache**, also by Discépolo, isn't about love. Written in 1934, it says the world is a junk shop where **“lo mismo un burro que un gran profesor”**: a donkey and a great professor count the same."
       - type: choice
         prompt: "What happened to **Cambalache** in the 1940s?"
         options:
@@ -179,7 +183,9 @@ classes:
           - "The national team adopted it"
           - "It won a national music prize"
         correct: 0
-        explain: "The military government of the 1940s banned it, along with lots of lunfardo. Being banned only made it more famous. It still sounds like this morning's news."
+        explain: "In 1943 the military government banned slang from the radio, to “protect” the language, and Cambalache went with it. Being banned only made it more famous. It still sounds like this morning's news."
+      - type: card
+        text: "That slang is **lunfardo**, and tango carried it everywhere. Words from its lyrics like **mina** (woman), **laburo** (work) and **guita** (money) are still used every day."
       - type: card
         chip: "Pro tip"
         text: "Its name stuck, too. When something is a total, unfair mess, Argentines sigh: **“esto es un cambalache.”**"

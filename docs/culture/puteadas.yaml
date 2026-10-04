@@ -13,7 +13,7 @@ classes:
     summary: "Greeting, insult, punctuation: one word, many jobs"
     pages:
       - type: card
-        text: "A **puteada** is a swear or an insult. Argentines swear a lot, and often with love. The goal here: understand them, and know when to keep quiet."
+        text: "A **puteada** is a swear word or an insult. Argentines swear a lot, and often with love. The goal here: understand them, and know when to keep quiet."
       - type: choice
         prompt: "First week at a new job. A coworker your age says: **“Che, boludo, ¿venís a almorzar?”** What does it tell you?"
         options:
@@ -21,9 +21,9 @@ classes:
           - "He's already treating you as a friend"
           - "He's testing whether you'll push back"
         correct: 1
-        explain: "Between people who get along, **boludo** is closer to “dude” than to “idiot”. Here's how that happened."
+        explain: "Between people who get along, **boludo** is closer to “dude” than to “idiot”. It started as an insult and got softer between friends."
       - type: card
-        text: "**Boludo** literally means big-balled: an idiot. But between friends it softened into “dude”. **¿Qué hacés, boludo?** is just “What's up, man?”"
+        text: "**Boludo** literally means big-balled: an idiot. But between friends it softened into “dude”. **¿Qué hacés, boludo?** is just “What's up, man?” To a woman it's **boluda**, and women say it to each other just as much."
       - type: card
         chip: "Did you know?"
         text: "Some porteños use it like a comma: **“Fui al súper, boludo, y no había nada, boludo.”**"
@@ -36,9 +36,9 @@ classes:
           - "Harsher, rarely friendly"
           - "Exactly the same"
         correct: 1
-        explain: "**Boludo** can be love. **Pelotudo** rarely is."
+        explain: "**Boludo** can be love. **Pelotudo** rarely is. **¡Qué pelotudo!** means “What an idiot!”, and people mean it."
       - type: card
-        text: "**¡Qué pelotudo!** means “What an idiot!”, and it's meant. Understand it, never say it."
+        text: "Two milder relatives you'll hear all day: **una boludez** is something silly or very easy, as in **es una boludez**. **Boludear** is to waste time or fool around."
       - type: card
         chip: "Pro tip"
         text: "Say boludo only once your friends say it to you. Never to a waiter, a driver or someone you just met."
@@ -52,32 +52,34 @@ classes:
       - type: card
         text: "Argentines love complaining about certain kinds of people, and each kind has a name. Meet the cast."
       - type: choice
-        prompt: "A taxi driver charges you triple because you're a tourist, and you pay. What does your Argentine friend call you, lovingly?"
+        prompt: "A street seller charges you triple because you're a tourist, and you pay. What does your Argentine friend call you, lovingly?"
         options:
-          - "Chanta"
-          - "Forro"
-          - "Gil"
+          - "Chanta: all talk, no action"
+          - "Forro: a nasty person"
+          - "Gil: easy to fool"
         correct: 2
         explain: "You got fooled, so you're the **gil**: the sucker. **No seas gil** means don't be a sucker."
       - type: card
-        text: "It's old tango slang: the gil got scammed, the **vivo** did the scamming. Rude, but mild enough to tease friends with."
+        text: "It's old lunfardo, all over tango lyrics: the gil got scammed, the **vivo** did the scamming. Rude, but mild enough to tease friends with."
       - type: card
-        text: "The **chanta** is all talk: brags, promises, never delivers. The plumber who says **“mañana vengo”** for three weeks? Chanta."
+        text: "The **chanta** is all talk: brags, promises, never delivers. The plumber who says **“mañana paso”** for three weeks? Chanta."
+      - type: card
+        text: "Three more you'll hear today. The **garca** cheats people or treats them badly. The **ortiva** spoils the fun, or tells on you. The **careta** is fake: acts very proper and hides what they really do."
       - type: choice
-        prompt: "Of these three, which one hurts most when said to someone's face?"
+        prompt: "Back to the first three. Which one hurts most when said to someone's face?"
         options:
           - "Forro"
           - "Gil"
           - "Chanta"
         correct: 0
-        explain: "**Forro**, by far. Here's why."
+        explain: "**Forro**, by far: it attacks a person's character. **Gil** and **chanta** are closer to teasing."
       - type: card
-        text: "**Forro** means lining, and it's slang for condom. Said to a person, it means mean or disloyal. It's about character, not brains. Understand it, never say it."
+        text: "**Forro** means lining, and it's slang for condom. Said to a person, it means a nasty, selfish person: a jerk. It's about character, not brains. Understand it, never say it."
       - type: card
-        text: "The friend who won't stop bugging you is a **rompebolas**: a ball-breaker. Between friends it's a jokey complaint, not a war."
+        text: "The friend who won't stop bugging you is an **hinchapelotas** (or **rompebolas**): a ball-breaker. Between friends it's a jokey complaint, not a war."
       - type: card
         chip: "Pro tip"
-        text: "With a stranger, none of these. When in doubt, laugh and keep quiet: you'll sound more local than any puteada."
+        text: "With a stranger, none of these. When in doubt, laugh and keep quiet: no puteada is better than the wrong one."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -86,7 +88,7 @@ classes:
     summary: "The exclamations for when everything goes wrong"
     pages:
       - type: card
-        text: "Stub your toe, miss the bus, see the inflation numbers: **¡La puta madre!** Nobody's mother is involved. It's just “damn it!”, aimed at the universe."
+        text: "Stub your toe, miss the bus, see the price of a coffee: **¡La puta madre!** Nobody's mother is involved. It's just “damn it!”, aimed at the universe."
       - type: card
         text: "It comes in levels: **la puta que lo parió**, then the maximum, **la re puta que lo parió**. Or just a long, tired **“la puta…”**"
       - type: choice
@@ -96,23 +98,27 @@ classes:
           - "“No way, you're kidding!”"
           - "“Stop bragging, it's rude”"
         correct: 1
-        explain: "Laughing plus big news means disbelief. Said cold, with a door closing, the same words mean “get lost”."
+        explain: "Laughing plus big news means disbelief. Said cold, with a door closing, the same words mean “get lost”. More usual for disbelief: **¡No jodas!** or **¡Me estás jodiendo!**, “you're kidding me!” **Joder** here is to joke or to bother."
       - type: card
-        text: "**La concha de tu madre** is the heavy one, very vulgar. Shouted at nobody after your phone hits the floor, it's frustration. Aimed at a person, it's a serious insult."
+        text: "**Cagar**, to shit, is everywhere. **Cagarse de risa** is to laugh very hard. **Una cagada** is a mistake or something bad. **Me cagó** means “he cheated me”. Vulgar, but everyday among friends."
+      - type: card
+        text: "**La concha de tu madre** is the heavy one, very vulgar. Aimed at a person, it's a serious insult. For plain frustration, when your phone hits the floor, people shout **la concha de la lora** at nobody."
       - type: card
         chip: "Did you know?"
-        text: "**Me chupa un huevo** (egg = testicle) means “I couldn't care less”. Really don't care? **Me chupa un huevo y la mitad del otro.**"
+        text: "**Me chupa un huevo** (egg = testicle) means “I couldn't care less”. Very vulgar, for friends only. The clean version is **me da igual**."
       - type: choice
-        prompt: "Around kids and grandmas, Argentines swap **mierda** for a harmless word that sounds similar. Which one?"
+        prompt: "**Pedo** means fart. Your friend says: **“Ni en pedo voy a esa fiesta.”** Is he going to the party?"
         options:
-          - "¡Mercado!"
-          - "¡Mirá vos!"
-          - "¡Miércoles!"
+          - "Yes, but only if he's drunk"
+          - "Maybe, if he gets lucky"
+          - "No way"
         correct: 2
-        explain: "**¡Miércoles!** Wednesday. Everyone knows what you meant, and nobody's offended."
+        explain: "**Ni en pedo** is “no way”. Literally: not even drunk."
+      - type: card
+        text: "The rest of the family: **en pedo** is drunk. **Al pedo** is pointless, for nothing. **De pedo** is by pure luck. Vulgar, but very common among friends."
       - type: card
         chip: "Pro tip"
-        text: "Same trick for la puta: **¡la pucha!** Safe with kids, bosses and grandmas, and it still sounds like you mean it."
+        text: "Need a clean version? Say **¡miércoles!** (Wednesday) for mierda and **¡la pucha!** for la puta. Safe with kids, bosses and grandmas."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -121,11 +127,11 @@ classes:
     summary: "The stadium, the traffic, and your partner's grandma"
     pages:
       - type: card
-        text: "At **la cancha**, swearing is a sport. The referee hears **“¡Cobrá, referí!”** plus a few mothers. Some fans joke it's part of the ticket price."
+        text: "At **la cancha**, swearing is a sport. The referee hears **“¡Cobrá, referí!”** plus a few insults about his mother. Some fans joke it's part of the ticket price."
       - type: card
-        text: "Careful with the chants, though. Many carry slurs about gay people or other nationalities, and the pushback is growing. Clap and jump; the words can wait."
+        text: "Chants also carry real slurs. Never repeat these: **puto**, **trolo** (against gay men), **mogólico** (mocks disability), **negro de mierda** (racist), **bolita**, **paragua** (against Bolivians, Paraguayans). But **negro**, **gordo** and **flaco** alone are loving nicknames between family and friends."
       - type: choice
-        prompt: "In Qatar, shy, polite Messi snapped at a Dutch player on live TV: **“¿Qué mirás, bobo?”** What happened next?"
+        prompt: "In Qatar, quiet, polite Messi got angry at a Dutch player during a live TV interview: **“¿Qué mirás, bobo?”** What happened next?"
         options:
           - "It ended up on T-shirts and mugs"
           - "FIFA banned him for a match"
@@ -133,18 +139,20 @@ classes:
         correct: 0
         explain: "**Bobo** is mild, almost childish, which made it even funnier. Within days it was a national catchphrase."
       - type: card
-        text: "Buenos Aires traffic turns saints into sailors. Green light, one second: **¡Dale, boludo!** Cut off: **¿Quién te dio el registro?**, who gave you a license? Usually it's just venting."
+        text: "**Hijo de puta** is a heavy insult. But after a great goal or a very good joke, **¡qué hijo de puta!** is admiration: “what a genius!” The tone and the smile decide. Understand it, and leave it to the locals."
       - type: card
-        text: "Before you swear, ask: would I say this in front of my partner's grandma? With close friends, go ahead. With your boss, a cop or a stranger, keep it clean."
+        text: "Buenos Aires traffic makes even calm people swear. Green light, one second: **¡Dale, boludo!** Cut off: **¿Quién te dio el registro?**, who gave you a license? Usually it's just venting."
+      - type: card
+        text: "Before you swear, ask: would I say this in front of my partner's grandma? If not, save it for close friends. With your boss, a cop or a stranger, keep it clean."
       - type: choice
         prompt: "In 2009, right after qualifying for the World Cup, coach Maradona told journalists on live TV: **“que la chupen”**, suck it. What happened?"
         options:
           - "FIFA banned him for two months"
           - "He was fired the next week"
-          - "Nothing: nobody even blinked"
+          - "Nothing: nobody cared"
         correct: 0
-        explain: "FIFA suspended him and fined him. Argentines, meanwhile, turned the line into a classic."
+        explain: "FIFA banned him for two months and fined him. He was talking to the journalists who had doubted him. Argentines, meanwhile, turned the line into a classic."
       - type: card
         chip: "Pro tip"
-        text: "Swearing badly makes you sound rude. Swearing well makes you sound local. It's all in the timing."
+        text: "Start safe: **¡la pucha!**, **¡qué bajón!** (that's too bad), **¡uh, no!** Add **boludo** later, once your friends say it to you."
     vocabulary: []

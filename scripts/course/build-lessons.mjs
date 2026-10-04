@@ -10,7 +10,7 @@
 //   npm run course:lessons -- --all [--dry-run]
 import { exposureReport, planCourse } from './lib/course-plan.mjs';
 import { queryLinked } from './lib/db.mjs';
-import { FORMS_PER_LESSON, LESSON_ITEMS, screensOf } from './lib/lessons.mjs';
+import { lintLessons, screensOf } from './lib/lessons.mjs';
 import { q, upsert } from './lib/sql.mjs';
 
 const argv = process.argv.slice(2);
@@ -23,40 +23,34 @@ if (!slug && !flags.has('--all')) {
 }
 
 const planned = planCourse({ include: slugs });
-const { result, units } = planned;
+const { result, units, formById, sentenceById, levelByUnit, levelOfSentence } = planned;
 const wanted = flags.has('--all') ? units : units.filter((u) => slugs.includes(u.slug));
 if (!wanted.length) {
   console.error(`no published unit ${slug}`);
   process.exit(1);
 }
 
-// The linters look at the proposal the way they look at hand-written lessons.
-// Length is counted in screens, not slots: a review slot stands for several,
-// and a new word for two.
+// The linters look at the proposal the way they look at hand-written lessons
+// (`lintLessons`).
 const verbose = wanted.length === 1;
 let problems = 0;
+const byRule = new Map();
 for (const unit of wanted) {
   const { slots, warnings } = result.get(unit.id);
-  const lint = [];
-  for (const l of unit.lessons) {
+  const lint = lintLessons({ unit, slots, sentenceById, formById, level: levelByUnit.get(unit.id), levelOfSentence });
+  for (const l of verbose ? unit.lessons : []) {
     const own = slots.filter((s) => s.lesson_id === l.id);
-    const teach = own.filter((s) => s.kind === 'teach').length;
-    const screens = screensOf(own);
-    if (l.kind === 'lesson' && own.length && teach > FORMS_PER_LESSON) {
-      lint.push(`lesson ${l.ordinal}: lesson.density — ${teach} new forms (the ceiling is ${FORMS_PER_LESSON})`);
-    }
-    if (own.length && (screens < LESSON_ITEMS.min || screens > LESSON_ITEMS.max)) {
-      lint.push(`lesson ${l.ordinal}: lesson.length — ${screens} screens (want ${LESSON_ITEMS.min}–${LESSON_ITEMS.max})`);
-    }
-    if (!own.length) lint.push(`lesson ${l.ordinal} (${l.title_en}): empty`);
-    if (verbose) {
-      const body = own.map((s) => s.kind + (s.mode ? `:${s.mode.replace('sentence_', '')}` : '')).join(' · ') || '—';
-      console.log(`lesson ${l.ordinal} (${l.title_en}, ${screens} screens): ${body}`);
-    }
+    const body = own.map((s) => s.kind + (s.mode ? `:${s.mode.replace('sentence_', '')}` : '')).join(' · ') || '—';
+    console.log(`lesson ${l.ordinal} (${l.title_en}, ${screensOf(own)} screens): ${body}`);
   }
   for (const w of [...warnings, ...lint]) console.warn(`warn  ${unit.slug}: ${w}`);
+  for (const w of lint) {
+    const rule = /(lesson\.\w+|empty)/.exec(w)[1];
+    byRule.set(rule, (byRule.get(rule) ?? 0) + 1);
+  }
   problems += lint.length;
 }
+if (problems) console.log(`\nLint problems by rule: ${[...byRule].map(([rule, n]) => `${rule} ${n}`).join(' · ')}`);
 
 console.log('\nWords drilled again in later units, by the section that taught them:');
 for (const r of exposureReport(planned)) {

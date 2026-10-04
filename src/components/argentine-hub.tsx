@@ -17,7 +17,7 @@ import { FitText } from '@/components/fit-text';
 // and out of the totals — until she turns it on.
 //
 // Theme cards are clay, like every other card in the app; each theme's
-// pastel lives only in the circle behind its capybara, so sixteen of them
+// pastel lives only in the panel its picture sits in, so sixteen of them
 // read as a set rather than a wall. packTone deals the pastels in order, so
 // no two neighbours in the grid — across or down — share one.
 // ---------------------------------------------------------------------------
@@ -30,6 +30,13 @@ const webPress =
         transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
       } as object)
     : null;
+
+/** The art's drop shadow, where one can follow the picture's own outline: a CSS
+ *  filter on web and Android. iOS's view shadow shades the image's whole box —
+ *  a grey rectangle behind the object — so there it goes without. */
+const artShadow = (
+  Platform.OS === 'ios' ? null : { filter: 'drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.18))' }
+) as object | null;
 
 export function ArgentineHub({ scores }: { scores: Record<string, PackScore> }) {
   const [adult, setAdult] = useShowAdult();
@@ -64,12 +71,10 @@ export function ArgentineHub({ scores }: { scores: Record<string, PackScore> }) 
               accessibilityRole="button"
               accessibilityLabel={`${theme.title}, ${packs.length} packs${done ? `, ${done} done` : ''}`}
               style={({ pressed }) => [styles.tile, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
-              {/* A soft pastel pod running off the card's edge, clipped by its own
-                  layer: clipping the tile itself would clip its clay shadow too. */}
-              <View style={styles.podClip} pointerEvents="none">
-                <View style={[styles.pod, { backgroundColor: tone.bg }]} />
+              {/* The theme's pastel is a panel the picture sits in; the card stays clay. */}
+              <View style={[styles.tilePanel, { backgroundColor: tone.bg }]}>
+                <Image source={themeObject(theme.slug)} style={[styles.tileArt, artShadow]} contentFit="contain" accessible={false} />
               </View>
-              <Image source={themeObject(theme.slug)} style={styles.tileArt} contentFit="contain" accessible={false} />
               <View style={styles.tileText}>
                 <FitText style={styles.tileTitle} lines={2}>
                   {theme.title}
@@ -255,38 +260,26 @@ const styles = StyleSheet.create({
   sectionTitle: { ...font.display[800], fontSize: 21, lineHeight: 25, letterSpacing: -0.2, color: colors.ink },
 
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
+  // A clay card with the theme's pastel as a panel on top, the picture
+  // centered in it; name and count underneath.
   tile: {
     width: '46%', // two per row; flexGrow shares out the rest
     flexGrow: 1,
-    minHeight: 84,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    paddingVertical: 10,
-    paddingLeft: 8,
-    paddingRight: 12,
-    borderRadius: radius.lg,
+    padding: 8,
+    paddingBottom: 14,
+    gap: 10,
+    borderRadius: 30,
     backgroundColor: colors.card,
     boxShadow: clay.surface,
   },
   filler: { opacity: 0, boxShadow: undefined },
-  podClip: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: radius.lg, overflow: 'hidden' },
-  pod: {
-    position: 'absolute',
-    left: -18,
-    top: '50%',
-    width: 84,
-    height: 84,
-    marginTop: -42,
-    borderRadius: 42,
-    opacity: 0.55,
-  },
-  tileArt: { width: 68, height: 62, flexShrink: 0 },
-  tileText: { flex: 1, gap: 3 },
-  tileTitle: { ...font.body[800], fontSize: 14, lineHeight: 17, color: colors.ink },
-  tileMeta: { ...font.body[700], fontSize: 12, color: colors.muted, fontVariant: ['tabular-nums'] },
+  tilePanel: { height: 104, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
+  tileArt: { width: 116, height: 88 },
+  tileText: { gap: 3, paddingHorizontal: 6 },
+  tileTitle: { ...font.display[800], fontSize: 18, lineHeight: 20, color: colors.ink },
+  tileMeta: { ...font.body[700], fontSize: 13, color: colors.muted, fontVariant: ['tabular-nums'] },
   tileTrack: {
-    height: 5,
+    height: 7,
     borderRadius: radius.pill,
     backgroundColor: colors.trough,
     boxShadow: clay.trough,

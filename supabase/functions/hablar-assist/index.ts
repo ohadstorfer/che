@@ -115,6 +115,7 @@ Deno.serve(async (req) => {
     `Level: ${session.level}`,
     `Grammar the level allows: ${LEVEL_GRAMMAR[session.level]}`,
     topic?.scenario ? `Scene: ${topic.scenario.setting_es} Pancho is ${topic.scenario.role_es}.` : "",
+    topic?.scenario ? `Key phrases the learner was shown: ${topic.scenario.key_phrases.map((p) => p.es).join(" / ")}` : "",
     topic?.culture ? `Topic: ${topic.culture.id}` : "",
     "Conversation so far:",
     ...recent.map((t) => `${t.role === "tomas" ? "Pancho" : "Learner"}: ${t.text}`),
@@ -132,7 +133,8 @@ Deno.serve(async (req) => {
     background(logUsage(db, [claudeUsage({ conversation_id: session.id, model: MODEL, stage: "hint", ms }, usage)]));
     if (!value?.full) throw new Error("empty hint");
     if (offendingWords(value.full).length) console.warn("hint not rioplatense", offendingWords(value.full));
-    return json({ starter: value.starter, full: value.full, full_en: value.full_en, hints_left: MAX_HINTS - counted.hints_used });
+    // The app prints the "…" after the starter; a model that adds its own would double it.
+    return json({ starter: value.starter.replace(/[\s.…]+$/, ""), full: value.full, full_en: value.full_en, hints_left: MAX_HINTS - counted.hints_used });
   } catch (err) {
     console.error("hint failed", err);
     // Not her fault: give the hint back.

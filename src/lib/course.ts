@@ -1,7 +1,7 @@
 import { peekStored, versioned } from './content-cache';
 import { all } from './fetch-all';
 import { supabase } from './supabase';
-import type { Lesson, Section, Tip, Unit } from './types';
+import type { Lesson, LessonKind, Section, Tip, Unit } from './types';
 
 // ---------------------------------------------------------------------------
 // The curriculum, as the path draws it.
@@ -81,6 +81,12 @@ async function fetchCourseRows(): Promise<CourseRows> {
   return { sections, units, lessons, tips };
 }
 
+// Lesson kinds kept off the road for now. Stories (the two-voice dialogues,
+// app/story.tsx) are hidden until they are ready; their rows stay published,
+// so emptying this brings them back. A lesson left off never becomes the
+// current step, so nobody is held up behind one.
+const HIDDEN_KINDS: ReadonlySet<LessonKind> = new Set<LessonKind>(['story']);
+
 export function assemble(sections: Section[], units: Unit[], lessons: Lesson[], tips: Tip[]): Course {
   const sectionOrdinal = new Map(sections.map((s) => [s.id, s.ordinal]));
   const orderedUnits = units
@@ -92,6 +98,7 @@ export function assemble(sections: Section[], units: Unit[], lessons: Lesson[], 
 
   const lessonsByUnit = new Map<string, Lesson[]>();
   for (const l of lessons) {
+    if (HIDDEN_KINDS.has(l.kind)) continue;
     if (!lessonsByUnit.has(l.unit_id)) lessonsByUnit.set(l.unit_id, []);
     lessonsByUnit.get(l.unit_id)!.push(l);
   }

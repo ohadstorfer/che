@@ -13,7 +13,7 @@ classes:
     summary: "The first peoples, a silver dream, and a city founded twice"
     pages:
       - type: card
-        text: "Long before the Spanish, this land was full of peoples: **guaraníes** in the northeast, **diaguitas** in the northwest valleys, **mapuches** by the southern Andes, **querandíes** on the pampa. Argentines call them **pueblos originarios**."
+        text: "Long before the Spanish, this land was full of peoples: **guaraníes** in the northeast, **diaguitas** in the northwest valleys, **tehuelches** in Patagonia, **querandíes** on the pampa. Argentines call them **pueblos originarios**."
       - type: card
         text: "Their descendants are still here. Today **12 de octubre** is no longer the “Día de la Raza” but the Day of Respect for Cultural Diversity."
       - type: choice
@@ -33,7 +33,7 @@ classes:
           - "A new fleet sent from Spain"
           - "Portuguese traders from Brazil"
         correct: 0
-        explain: "**Juan de Garay** came down the river from Asunción, in today's Paraguay, and founded the city again, this time for good."
+        explain: "**Juan de Garay** came down the river from Asunción, in today's Paraguay, and founded the city again in 1580, this time for good."
       - type: card
         text: "Even the country's name is a hope. **Argentina** comes from the Latin for silver: the Spanish dreamed of silver mountains here."
       - type: card
@@ -47,9 +47,9 @@ classes:
     summary: "How a smuggling port became a capital, and threw out the British twice"
     pages:
       - type: card
-        text: "In 1776 Spain made Buenos Aires the capital of a huge **Virreinato**: today's Argentina, Uruguay, Paraguay and Bolivia. Overnight, the smuggling port became the boss."
+        text: "In 1776 Spain made Buenos Aires the capital of a huge **Virreinato**: today's Argentina, Uruguay, Paraguay and Bolivia. Suddenly the smuggling port was a capital."
       - type: card
-        text: "Power sat in the **Cabildo**, the town council. Its white building with arches still stands on **Plaza de Mayo**. Today it's a museum."
+        text: "The viceroy ruled from the fort, where the Casa Rosada stands today. Across the square sat the **Cabildo**, the town council, the voice of the locals. Its white building with arches is still there, now a museum."
       - type: choice
         prompt: "Look closely at the Cabildo today. What happened to it?"
         options:
@@ -57,9 +57,9 @@ classes:
           - "It was moved stone by stone from Córdoba"
           - "It was built as a church, then converted"
         correct: 0
-        explain: "The city chopped it twice for new avenues. It went from eleven arches down to five."
+        explain: "The city cut it twice to open new avenues. It went from eleven arches down to five."
       - type: card
-        text: "In 1806 a British force sailed in and took Buenos Aires. Argentines still call it the **invasiones inglesas**."
+        text: "In 1806 a British force sailed in and took Buenos Aires. Nobody expected it."
       - type: choice
         prompt: "The British march in. What does the Spanish viceroy do?"
         options:
@@ -67,9 +67,9 @@ classes:
           - "Leads the defense street by street"
           - "Surrenders and swears loyalty to Britain"
         correct: 0
-        explain: "Viceroy Sobremonte ran, not his finest hour. The British caught the treasure in Luján anyway, and he ended up in Córdoba. The locals had to fight on their own."
+        explain: "Viceroy Sobremonte ran away, and people never forgave him. The British caught the treasure in Luján anyway, and he ended up in Córdoba. The locals had to fight on their own."
       - type: card
-        text: "Locals organized under **Santiago de Liniers** and threw the British out. A year later the British came back, bigger. Porteños fought street by street, and won again."
+        text: "Locals organized under **Santiago de Liniers** and threw the British out. In 1807 the British came back, bigger. Porteños fought street by street, and won again. Argentines call the two attacks the **invasiones inglesas**."
       - type: card
         text: "The story every kid learns: neighbors poured boiling water and oil from the flat rooftops onto British soldiers. Some of it is polished legend. The street fighting was very real."
       - type: card
@@ -95,7 +95,7 @@ classes:
         correct: 0
         explain: "A sea of umbrellas, in the rain. Historians have doubts: umbrellas were a pricey import back then, so the picture is probably exaggerated."
       - type: card
-        text: "Not quite independence yet: the Junta still ruled in the Spanish king's name, at least on paper. The real break took six more years of war."
+        text: "Not quite independence yet: the Junta still ruled in the Spanish king's name, at least on paper. The formal break came six years later, and the war with Spain went on even longer."
       - type: choice
         prompt: "Where was independence finally declared?"
         options:
@@ -105,9 +105,9 @@ classes:
         correct: 0
         explain: "Delegates from the provinces met in **San Miguel de Tucumán** and declared independence on **9 de julio de 1816**."
       - type: card
-        text: "That house is now the **Casa Histórica**, a museum and the classic school trip. Almost every Argentine kid has a photo in front of its door."
+        text: "The house was rebuilt around the original room and is now the **Casa Histórica**, a museum and the classic school trip. Almost every Argentine kid has a photo in front of its door."
       - type: card
-        text: "Both days are **feriados**. People pin a blue-and-white **escarapela** to their chest, and schoolkids act out 1810 in colonial costume, with mustaches drawn on in burnt cork."
+        text: "Both days are **feriados**. People pin a light-blue-and-white **escarapela** to their chest, and schoolkids act out 1810 in colonial costume, with mustaches drawn on in burnt cork."
       - type: card
         chip: "Did you know?"
         text: "The dates are on the map too. **Avenida 9 de Julio** is the huge one with the Obelisco, and almost every town has a street called 25 de Mayo."
@@ -119,7 +119,7 @@ classes:
     summary: "The man who made the flag and the general who crossed the Andes"
     pages:
       - type: card
-        text: "**Manuel Belgrano** was a lawyer and economist who ended up a general. By the river in **Rosario** he raised a light blue and white flag. Buenos Aires wasn't thrilled: it looked too independent."
+        text: "**Manuel Belgrano** was a lawyer and economist who ended up a general. In 1812, by the river in **Rosario**, he raised a light blue and white flag. Buenos Aires wasn't thrilled: it looked too independent."
       - type: card
         text: "Kids learn the **celeste** and white come from the sky and its clouds. Some historians aren't so sure."
       - type: choice
@@ -129,11 +129,11 @@ classes:
           - "They copied a British regiment's uniform"
           - "They came from the old Inca empire"
         correct: 0
-        explain: "Some argue celeste and white were colors of the Borbón royal house. Nobody can prove either story."
+        explain: "Some argue celeste and white were colors of the Borbón royal house. Others say they come from the Virgin Mary's robe. Nobody can prove any of the stories."
       - type: card
         text: "Belgrano gave nearly everything to the cause and died poor. The day he died, **20 de junio**, is now **Día de la Bandera**, Flag Day."
       - type: card
-        text: "**José de San Martín** had a bold plan: beat Spain in Peru by going through Chile. From **Mendoza** he led an army over Andes passes more than 4,000 meters high."
+        text: "**José de San Martín** had a bold plan: beat Spain in Peru by going through Chile. In 1817, from **Mendoza**, he led an army over Andes passes more than 4,000 meters high."
       - type: card
         text: "With thousands of men, mules and horses, he crossed the **cordillera**, helped free Chile, then Peru. Argentines call him the **Padre de la Patria**."
       - type: choice
@@ -143,7 +143,7 @@ classes:
           - "Still buried in France"
           - "Under his monument in Mendoza"
         correct: 0
-        explain: "His remains came home. His tomb in the **Catedral** on Plaza de Mayo is guarded by **Granaderos** in old blue uniforms, the regiment he founded."
+        explain: "His remains came home. His tomb in the **Catedral** on Plaza de Mayo is guarded by **Granaderos** in old blue uniforms, the regiment he founded. The day he died, **17 de agosto**, is a feriado too."
       - type: card
         chip: "Did you know?"
         text: "Every town has a San Martín street, square or statue, usually on horseback. If you're lost, head for the plaza: he's probably in the middle."
@@ -155,11 +155,11 @@ classes:
     summary: "Decades of civil war, Rosas, and the horsemen of the pampa"
     pages:
       - type: card
-        text: "Independence was the easy part. Then came decades of civil war. **Unitarios** wanted one strong government in Buenos Aires. **Federales** wanted the provinces to rule themselves, each under its own **caudillo**."
+        text: "Winning independence was one thing. Agreeing on how to run the country was harder: decades of civil war followed. **Unitarios** wanted one strong government in Buenos Aires. **Federales** wanted the provinces to rule themselves, each under its own **caudillo**."
       - type: card
         text: "Behind it all: who keeps the money from the port? Buenos Aires had a clear answer: Buenos Aires."
       - type: card
-        text: "**Juan Manuel de Rosas**, a rich landowner and a federal, ran Buenos Aires for about two decades with near-total power."
+        text: "**Juan Manuel de Rosas**, a rich landowner and a federal, ran Buenos Aires from 1829 to 1852, with one short break, and with near-total power."
       - type: choice
         prompt: "Under Rosas, one color was all but required. Which?"
         options:
@@ -169,7 +169,7 @@ classes:
         correct: 0
         explain: "Wearing federal red was the safe choice. His enforcers, the **Mazorca**, terrorized anyone who looked like an opponent."
       - type: card
-        text: "Argentines still argue about him. A bloody tyrant, said liberals like **Sarmiento**. A defender of the country against British and French fleets, say others. Don't raise it at an asado unless you have time."
+        text: "Argentines still argue about him. A bloody tyrant, said liberals like **Sarmiento**, a writer and later president. A defender of the country against British and French fleets, say others. Don't raise it at an asado unless you have time."
       - type: card
         text: "Out on the pampa lived the **gauchos**: expert horsemen who worked cattle, with knife, poncho, mate and guitar. Governments treated them as vagrants and forced many into the army."
       - type: choice
@@ -179,7 +179,7 @@ classes:
           - "A cavalry victory against Spain"
           - "A tango about life on the pampa"
         correct: 0
-        explain: "**Martín Fierro**, by **José Hernández**, tells of a gaucho dragged to the frontier who ends up an outlaw. Every kid reads it at school."
+        explain: "**Martín Fierro** (1872), by **José Hernández**, tells of a gaucho dragged to the frontier who ends up an outlaw. Most kids meet it at school."
       - type: card
         text: "Hernández's birthday, **10 de noviembre**, is the **Día de la Tradición**. Towns like **San Antonio de Areco** fill with horses, ponchos and folk music."
       - type: card
@@ -193,11 +193,13 @@ classes:
     summary: "A plan to fill the country, and a war over land still argued about"
     pages:
       - type: card
-        text: "After Rosas fell, a **Constitución** was written in 1853. The new leaders' motto: **gobernar es poblar**, to govern is to populate. Bring immigrants, railways and money."
+        text: "After Rosas fell in 1852, a **Constitución** was written in 1853. The new leaders' motto: **gobernar es poblar**, to govern is to populate. Bring immigrants, railways and money."
       - type: card
-        text: "The plan also meant taking land. In the late 1800s, the army under **Julio Argentino Roca** took the pampa and Patagonia from the **mapuche**, **ranquel**, **tehuelche** and other peoples."
+        text: "And schools. **Domingo Faustino Sarmiento**, president from 1868, opened them all over the country, and an 1884 law made primary school free and compulsory. The day he died, **11 de septiembre**, is **Día del Maestro**, Teachers' Day."
+      - type: card
+        text: "The plan also meant taking land. Between 1878 and 1885, the army, first led by **Julio Argentino Roca**, took the pampa and Patagonia from the **mapuches**, **ranqueles**, **tehuelches** and other peoples."
       - type: choice
-        prompt: "Official history called it the Campaña del **Desierto**, the desert campaign. Why that name?"
+        prompt: "Official history called it the **Conquista del Desierto** or Campaña del Desierto: the conquest of the desert. Why “desert”?"
         options:
           - "It painted a lived-in land as empty"
           - "The land was mostly sand dunes"
@@ -205,11 +207,11 @@ classes:
         correct: 0
         explain: "Those lands were home to whole peoples. Calling them “desert” made taking them sound like settling nothing."
       - type: card
-        text: "Thousands were killed. Thousands more were taken prisoner, families split up, and many forced to work on farms or as servants. The land went to a few big owners."
+        text: "By the army's own count for 1879, over a thousand people were killed and over ten thousand taken prisoner. Families were split up and many forced to work as servants. The land went to a few big owners."
       - type: card
         text: "For a long time schools taught it as a heroic conquest. Today many historians and indigenous communities call it a **genocidio**. Others reject that word. Many now write the name in quotes."
       - type: card
-        text: "Roca was on the old 100-peso bill, and his statues stand in many towns. Who belongs on money and pedestals is part of the same argument."
+        text: "Roca was on the old 100-peso bill, and his statues stand in many towns. Who should be on banknotes and statues is part of the same argument."
       - type: choice
         prompt: "In a town square you see a statue of Roca. What's likely to have happened to it lately?"
         options:
@@ -228,15 +230,15 @@ classes:
       - type: card
         text: "From the 1870s on, ships brought millions of Europeans, mostly **italianos** and **españoles**. For a while, around half of Buenos Aires was born abroad."
       - type: card
-        text: "Hence the old joke: Mexicans descend from the Aztecs, Peruvians from the Incas, and Argentines… **from the boats**."
+        text: "Hence the old joke: Mexicans descend from the Aztecs, Peruvians from the Incas, and Argentines… **from the boats**. It forgets the indigenous and Afro-Argentine people who were already here."
       - type: choice
-        prompt: "In Buenos Aires, what do people usually call a man from Madrid?"
+        prompt: "In Buenos Aires, what nickname does a man from Madrid often get?"
         options:
           - "Gallego"
           - "Madrileño"
           - "Tano"
         correct: 0
-        explain: "Galicia sent so many people that **gallego** came to mean any Spaniard. Italians are **tanos**. Both usually affectionate. Usually."
+        explain: "Galicia sent so many people that **gallego** came to mean any Spaniard. Italians are **tanos**. In the same way, Arabs were called **turcos** and Jews **rusos**, whatever country they came from. Among friends these are usually friendly."
       - type: card
         text: "New arrivals could sleep free for a few days at the **Hotel de Inmigrantes**, by the port, while they looked for work. Today it's a museum, and people search its records for their great-grandparents."
       - type: card
@@ -250,7 +252,7 @@ classes:
         correct: 0
         explain: "Brooms, to “sweep away” the landlords. That patio life, with its fights and its songs, fed the city's slang and its tango."
       - type: card
-        text: "The boats still matter. Lots of Argentines hunt down a great-grandparent's papers to get an Italian or Spanish passport. The lines at the consulates are legendary."
+        text: "The boats still matter. For decades, Argentines hunted down a grandparent's or great-grandparent's papers to get an Italian or Spanish passport. Italy made its rules stricter in 2025, but a great many Argentines already have one."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -261,7 +263,7 @@ classes:
       - type: card
         text: "Around 1900 Argentina shipped wheat, corn and beef across the ocean, mostly to Britain. It proudly called itself **el granero del mundo**: the world's granary."
       - type: card
-        text: "British money built the railways. Look at the map: the lines fan out from Buenos Aires like the ribs of a fan, all carrying grain and cattle to one port."
+        text: "British money built the railways. Look at the map: the lines spread out from Buenos Aires like an open fan, all carrying grain and cattle to one port."
       - type: card
         text: "Around the 1910 centenary, many felt they lived in one of the richest countries on earth. The **Teatro Colón** opened. But the best land sat in a few hands."
       - type: choice
@@ -273,7 +275,9 @@ classes:
         correct: 0
         explain: "The **voto cantado**, the sung vote: you said your choice aloud, with the local boss listening. Fraud was routine."
       - type: card
-        text: "In 1912 the **Ley Sáenz Peña** made voting secret and compulsory for men. That's why voting is still compulsory in Argentina today. Women had to wait decades more."
+        text: "In 1912 the **Ley Sáenz Peña** made voting secret and compulsory for men. That's why voting is still compulsory in Argentina today. Women had to wait until 1947."
+      - type: card
+        text: "In 1916 the first presidential election under the new law was won by **Hipólito Yrigoyen**. He led the **radicales** (the UCR party), still one of the main parties today."
       - type: choice
         prompt: "In 1920, four friends climbed onto a theater roof in Buenos Aires. What did they do up there?"
         options:
@@ -281,9 +285,7 @@ classes:
           - "Filmed the first Argentine movie"
           - "Launched a hot-air balloon"
         correct: 0
-        explain: "They broadcast Wagner's *Parsifal* to a few dozen homemade radio sets: one of the world's first public broadcasts."
+        explain: "They broadcast Wagner's *Parsifal* to a few dozen homemade radio sets: one of the world's first public broadcasts. They're remembered as **los locos de la azotea**, the rooftop madmen."
       - type: card
-        text: "They're remembered as **los locos de la azotea**, the rooftop madmen. Argentina still celebrates that day as Broadcasting Day."
-      - type: card
-        text: "Then came the 1929 crash, and grain and beef prices sank. Soon the army overthrew President **Yrigoyen**: the first of many coups, and the end of the granary years."
+        text: "Then came the 1929 crash, and grain and beef prices sank. In 1930 the army overthrew President **Yrigoyen**: the first of many coups, and the end of the granary years."
     vocabulary: []

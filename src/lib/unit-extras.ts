@@ -6,13 +6,13 @@ import { supabase } from './supabase';
 import plan from './unit-extras.json';
 
 // ---------------------------------------------------------------------------
-// A unit's three extra classes, as lessons on the road (kinds speak · slang ·
-// culture; 20260930000001_unit_extras.sql):
+// A unit's extra classes, as lessons on the road (kinds speak · slang ·
+// culture; 20260930000001_unit_extras.sql). Not every unit has all three:
 //   speak    a chat with Pancho about the unit (hablar kind 'unit')
 //   slang    three Argentine words, played like a Words pack
 //   culture  a culture class, played like one from the Culture tab
-// Which words and which class a unit plays is planned once, in course order,
-// by scripts/course/unit-extras.mjs; this file only reads the plan.
+// Which words and which class a unit plays is planned once, by topic, by
+// scripts/course/unit-extras.mjs; this file only reads the plan.
 // ---------------------------------------------------------------------------
 
 interface UnitExtras {

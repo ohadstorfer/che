@@ -10,10 +10,11 @@ import { json } from "./cors.ts";
 import {
   audioExt,
   background,
-  CHAT_SECONDS,
+  clockOf,
   GRACE_SECONDS,
   isSilenceHallucination,
   logUsage,
+  looksEnglish,
   sessionElapsed,
   sttKeyterms,
   topicOf,
@@ -57,7 +58,7 @@ async function sha256(bytes: ArrayBuffer) {
 
 function closed(session: Session): Response | null {
   if (session.ended_at) return json({ error: "ended" }, { status: 409 });
-  if (sessionElapsed(session) >= CHAT_SECONDS + GRACE_SECONDS) return json({ error: "time_up" }, { status: 409 });
+  if (sessionElapsed(session) >= clockOf(session.level).stop + GRACE_SECONDS) return json({ error: "time_up" }, { status: 409 });
   return null;
 }
 
@@ -94,26 +95,30 @@ export async function spokenDraft(opts: {
   const t0 = Date.now();
   let text = "";
   let audioSeconds: number | null = null;
+  let language: "es" | "en" = "es";
+  let calls = 1;
   try {
-    ({ text, audioSeconds } = await transcribe({
+    ({ text, audioSeconds, language, calls } = await transcribe({
       key: env.elevenKey,
       audio: new Blob([bytes], { type: mime }),
       filename: `turn.${ext}`,
       keyterms: sttKeyterms(topicOf(session.kind, session.topic_id, session.level, session.scenario), session.level),
+      english: true,
     }));
   } catch (err) {
     console.error(err);
     return { error: json({ error: "stt_failed", retry: true, detail: String(err).slice(0, 300) }, { status: 502 }) };
   }
-  const usage = logUsage(db, [{
+  // One row per request: a line heard twice cost twice.
+  const usage = logUsage(db, Array.from({ length: calls }, () => ({
     conversation_id: session.id,
     turn_id: turnId,
-    provider: "elevenlabs",
+    provider: "elevenlabs" as const,
     model: "scribe_v2",
-    stage: "stt",
+    stage: "stt" as const,
     audio_seconds: audioSeconds,
-    ms: Date.now() - t0,
-  }]);
+    ms: Math.round((Date.now() - t0) / calls),
+  })));
 
   if (isSilenceHallucination(text)) {
     background(usage);
@@ -128,7 +133,8 @@ export async function spokenDraft(opts: {
     status: "draft",
     text,
     audio_path: audioPath,
-    meta: { audio_sha: hash, audio_seconds: audioSeconds },
+    // `lang: "en"`: she said it in English; hablar-reply tells Pancho and the feedback.
+    meta: { audio_sha: hash, audio_seconds: audioSeconds, ...(language === "en" ? { lang: "en" } : {}) },
   }).select("*").single();
   if (error || !data) {
     console.error("draft upsert failed", error?.message);
@@ -178,7 +184,7 @@ export async function typedDraft(opts: {
     status: "draft",
     text,
     audio_path: null,
-    meta: { typed: true },
+    meta: { typed: true, ...(looksEnglish(text) ? { lang: "en" } : {}) },
   }).select("*").single();
   if (error || !data) {
     console.error("typed draft upsert failed", error?.message);

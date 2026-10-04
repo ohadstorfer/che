@@ -2,7 +2,7 @@ section:
   slug: "dichos"
   title: "Dichos y refranes"
   emoji: "💬"
-  summary: "Expressions, idioms and sayings: how Argentines really talk"
+  summary: "Expressions, comparisons and proverbs for exams, bores and bad luck"
 
 # Card classes (docs/culture-spec.md, "Card classes"): one saying per big card,
 # with the moment people say it. 2–3 guess-first questions, no word review.
@@ -21,11 +21,11 @@ classes:
           - "A tile in a game of dominoes"
           - "A chip at the casino table"
         correct: 0
-        explain: "Old public phones ran on **fichas**. The call only went through when the token dropped. Now it's the moment the penny drops."
+        explain: "Old public phones ran on tokens: **fichas**, also called **cospeles**. The token dropped when the other person picked up, and then you could talk. Now it means the moment you finally understand. (A ficha is also a domino tile or a casino chip, but not here.)"
       - type: card
         text: "Your roommate hasn't left the couch all week, and exams start Monday. Time to tell him: **“Ponete las pilas.”** Put your batteries in. Get going."
       - type: card
-        text: "A cancelled plan, rain on a Saturday, a two-hour line at the bank. You sigh: **“¡Qué garrón!”** What a drag."
+        text: "A cancelled plan, rain on a Saturday, a two-hour line at the bank. You sigh: **“¡Qué garrón!”** What a pain."
       - type: choice
         prompt: "You didn't study, so in the exam you write a full page of confident nonsense. What do Argentines say you did?"
         options:
@@ -33,11 +33,11 @@ classes:
           - "**Pateaste el tablero**: you kicked the board"
           - "**Tiraste la toalla**: you threw in the towel"
         correct: 0
-        explain: "**Mandar fruta** is winging it with words. Students do it in exams, and plenty of politicians do it on TV."
+        explain: "**Mandar fruta** is talking nonsense as if you knew. Students do it in exams, and plenty of politicians do it on TV. **Patear el tablero** is to break the rules of the game and start over. **Tirar la toalla** is to give up."
       - type: card
-        text: "Your friend has to go to a boring wedding alone, so you go with her. You **le hacés la gamba**: you lend her your leg. It means keeping someone company when it counts."
+        text: "Your friend has to go to a boring wedding alone, so you go with her. You **le hacés la gamba**: you back her up, often by going along (**gamba** is slang for leg). Ask for it: **“¿Me hacés la gamba?”**"
       - type: card
-        text: "The best thing you can say about someone is simple: **es re buena onda**. Easygoing, warm, good vibes. The coworker who never says hi? **Mala onda**."
+        text: "The best thing you can say about someone is simple: **es re buena onda**. Easygoing, warm, good vibes. The coworker who never says hi? **Mala onda**. And **¡qué buena onda!** is “how nice!”"
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -48,19 +48,19 @@ classes:
       - type: card
         text: "Why say “very happy” when you can be **más contento que perro con dos colas**? Happier than a dog with two tails. Argentines love a good **más … que**."
       - type: card
-        text: "The line at the bank, a meeting, the last week before payday. Anything endless is **más largo que esperanza de pobre**: longer than a poor man's hope."
+        text: "The line at the bank, a meeting, the wait for payday. Anything endless is **más largo que esperanza de pobre**: longer than a poor man's hope."
       - type: choice
-        prompt: "A guy at the party has explained his crypto plan to you three times. Your friend whispers: **“Es más pesado que un collar de…”** Heavier than a necklace of what?"
+        prompt: "A guy at the party has explained his crypto plan to you three times. Your friend whispers: **“Es más pesado que collar de…”** Heavier than a necklace of what?"
         options:
           - "Melons"
           - "Bricks"
           - "Stones"
         correct: 0
-        explain: "**Más pesado que collar de melones.** **Pesado** is heavy, and also a pain. Picture wearing melons around your neck all night."
+        explain: "**Más pesado que collar de melones.** **Pesado** is heavy, and also a pain. Picture wearing melons around your neck all night. Some say **sandías**, watermelons."
       - type: card
         text: "Fake stuff is **trucho**. And nothing's faker than a bill that doesn't exist: **más trucho que billete de tres pesos**. That street-stall “original” Messi shirt? Exactly that."
       - type: card
-        text: "The friend who can't just pick a restaurant **tiene más vueltas que una calesita**: more turns than a merry-go-round."
+        text: "The friend who can't just pick a restaurant **tiene más vueltas que una calesita**: more turns than a merry-go-round. **Dar vueltas** is to go in circles and not decide. **“No des más vueltas”**: just decide."
       - type: choice
         prompt: "Your friend's ex walks into the bar like he owns it. You whisper: **“Se cree la última … del desierto.”** He thinks he's the last what in the desert?"
         options:
@@ -68,7 +68,7 @@ classes:
           - "Drop of water"
           - "Palm tree"
         correct: 0
-        explain: "**La última Coca-Cola del desierto**: the one thing everybody wants. Or so he thinks."
+        explain: "**La última Coca-Cola del desierto**: the one thing everybody wants. Or so he thinks. You'll hear it all over Latin America."
       - type: card
         text: "And a class that won't end, or a film where nothing happens? **Más aburrido que chupar un clavo**: more boring than sucking a nail."
     vocabulary: []
@@ -81,15 +81,15 @@ classes:
       - type: card
         text: "A **refrán** is an old proverb, and most came from Spain. What's Argentine is the timing: your abuela has one ready before you finish telling her the problem."
       - type: card
-        text: "And she only says half. You complain about your aunt's ugly sweater: **“Y bueno, a caballo regalado…”** Everyone knows the rest: **no se le miran los dientes**. Don't look a gift horse in the mouth."
+        text: "And she only says half. You complain about the ugly sweater your aunt gave you: **“Y bueno, a caballo regalado…”** Everyone knows the rest: **no se le miran los dientes**. Don't look a gift horse in the mouth."
       - type: choice
         prompt: "After a bad breakup, your friend won't even go on a date. Abuela nods: **“El que se quema con leche, ve una vaca y…”** Burned by milk, you see a cow and…?"
         options:
-          - "**Llora**: cry"
-          - "**Corre**: run"
-          - "**Sopla**: blow on it"
+          - "**Llora**: cries"
+          - "**Corre**: runs"
+          - "**Sopla**: blows on it"
         correct: 0
-        explain: "You cry at the sight of a cow. Once hurt, you fear anything that looks like it."
+        explain: "You cry at the sight of a cow. Once hurt, you fear anything that reminds you of it."
       - type: card
         text: "New friends look a bit shady? Abuela raises an eyebrow: **“Decime con quién andás y te diré quién sos.”** Tell me who you hang out with, and I'll tell you who you are."
       - type: card
@@ -103,38 +103,38 @@ classes:
         correct: 0
         explain: "**Más vale pájaro en mano que cien volando.** Same lesson, much bigger flock."
       - type: card
-        text: "And when something goes wrong, the silver-lining one: **no hay mal que por bien no venga**. There's no bad thing that doesn't bring something good."
+        text: "And when something goes wrong, the hopeful one: **no hay mal que por bien no venga**. There's no bad thing that doesn't bring something good."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "filosofia-criolla"
-    title: "Argentine philosophy in six sentences"
+    title: "Argentine philosophy in seven sayings"
     summary: "The maxims that explain how the country sees itself"
     pages:
       - type: card
-        text: "Crisis after crisis, Argentines built a set of sayings that are part shrug, part joke, part survival guide. Hear them and you'll get how people here think."
+        text: "Prices went up again, the train is late, the wifi is down. An Argentine shrugs: **es lo que hay**. It is what it is. You'll hear it every day."
       - type: card
-        text: "The bank ignores your complaint? Call every day and make noise. **El que no llora no mama**: the baby who doesn't cry doesn't get fed."
+        text: "The bank ignores your complaint? Call every day and make noise. **El que no llora no mama**: the baby who doesn't cry doesn't get fed. It's also a line in the famous tango **Cambalache**."
       - type: choice
-        prompt: "A new tax is announced. By dinnertime, your friends already know three ways around it. They shrug: **“Hecha la ley, hecha la…”** Made the law, made the what?"
+        prompt: "A new tax is announced. By dinnertime, your friends already know three ways around it. They shrug: **“Hecha la ley, hecha la…”** Once the law is made, so is the what?"
         options:
-          - "**Trampa**: the trick"
+          - "**Trampa**: the loophole"
           - "**Queja**: the complaint"
           - "**Fiesta**: the party"
         correct: 0
-        explain: "As soon as a law is made, so is the trick around it. Said with a shrug about bureaucracy, taxes and life."
+        explain: "As soon as a law is made, someone finds the way around it. Said with a shrug about bureaucracy, taxes and life."
       - type: card
-        text: "Skipping the line, dodging the fare, finding the loophole: that's **viveza criolla**. The one who pulls it off is a **vivo**. The one who plays fair risks being called a **gil**, a sucker."
+        text: "Skipping the line, a clever shortcut, finding the loophole: that's **viveza criolla**, and the one who does it is a **vivo**. Argentines joke about it, but many hate it and blame it for the country's problems."
       - type: choice
-        prompt: "With all that viveza, what do porteños do at a bus stop?"
+        prompt: "A man cuts in front of you at the bakery. You tell him: **“No te hagas el vivo.”** What does it mean?"
         options:
-          - "Stand in a neat single-file line"
-          - "Crowd the door, first come first in"
-          - "Let the oldest board, then push"
+          - "Don't try to be clever with me"
+          - "Don't be in such a hurry"
+          - "Don't act like you live here"
         correct: 0
-        explain: "The **fila del colectivo** is sacred. Visitors are often amazed. Cutting it is the kind of viveza nobody forgives."
+        explain: "A **vivo** gets ahead by being sly. People here take lines seriously: cut one and you will hear this."
       - type: card
-        text: "The fridge door shut with a belt, a car that runs on a prayer, sometimes the whole economy: **atado con alambre**. Held together with wire."
+        text: "A fridge door held shut with a belt, a car that somehow still runs: **atado con alambre**, held together with wire. **“Lo atamos con alambre”**: we'll fix it with what we have. People are proud of that skill too."
       - type: card
         text: "A goal in the 94th minute, a flight you caught by seconds. When luck saves the day, someone will say it: **Dios es argentino**. God is Argentine."
       - type: card

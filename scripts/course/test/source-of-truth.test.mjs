@@ -65,12 +65,12 @@ test('seeding the same course again adds nothing and reports no difference', () 
 test('an edit made in the admin is kept, and shown as a difference', () => {
   const db = clone(asDatabase(built));
   const lemma = db.lemmas.find((l) => l.lemma === 'medialuna');
-  lemma.gloss_en = 'medialuna';
+  lemma.gloss_en = 'croissant';
   const plan = planSeed(built, db);
   assert.equal(inserted(plan), 0);
   const lines = describeDiff(plan.diff);
   assert.equal(lines.length, 1);
-  assert.match(lines[0], /medialuna.*gloss_en is "medialuna" in the database/);
+  assert.match(lines[0], /medialuna.*gloss_en is "croissant" in the database/);
 });
 
 test('a spelling fixed in the admin and copied into the YAML is not a new word', () => {

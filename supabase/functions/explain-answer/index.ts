@@ -9,6 +9,8 @@
 //
 // The Spanish the model quotes is checked against the course's tuteo and
 // regional denylists; an explanation that fails falls back to a plain diff.
+// The learner's own words are exempt: "it is *tenés*, not *tienes*" has to
+// be sayable about the tú form she wrote.
 
 import Anthropic from "npm:@anthropic-ai/sdk@0.92.0";
 import { createClient } from "jsr:@supabase/supabase-js@2";
@@ -21,16 +23,17 @@ const MODEL = "claude-sonnet-5";
 const DAILY_LIMIT = 30;
 // Part of the cache key: bump it when SYSTEM changes, so learners stop getting
 // explanations written under the old rules.
-const PROMPT_VERSION = 2;
+const PROMPT_VERSION = 3;
 
 const SYSTEM = `You explain one mistake to a learner of Argentine (rioplatense) Spanish whose first language is English.
 
 Rules:
 - English, one short sentence, at most 25 words. No greeting, no praise, no lists.
 - Name the one difference that matters and why, using the unit's grammar and tips when they apply. Don't repeat the accepted answer — it is already on screen.
-- Argentine Spanish uses vos: sos, tenés, querés, mirá. Never mention or use tú forms or vosotros.
+- Argentine Spanish uses vos: sos, tenés, querés, mirá. Never recommend or use tú, usted or vosotros forms yourself. If the learner wrote one, or a word from Spain, quote their own word to say what Argentina uses: "In Argentina it is *tenés*, not *tienes*."
 - Put every Spanish word or phrase you quote in *asterisks*.
-- If their answer is actually also correct Spanish for the prompt, say so plainly.
+- If their answer is also correct Argentine Spanish (with vos) for the prompt, say so plainly. If it is right only with tú, usted or a word from Spain, say that Argentina uses the other form.
+- If the only difference is a typo, a missing accent or a word order that is also fine, say just that in a few words. No grammar terms beyond verb, noun, past, present, plural, masculine and feminine.
 
 Example: "Tired is a passing state, so it takes *estar*: *estoy*, not *soy*."`;
 
@@ -168,7 +171,7 @@ Deno.serve(async (req) => {
     throw err;
   }
 
-  const bad = offendingSpanish(text);
+  const bad = offendingSpanish(text, answer);
   if (!text || bad.length || text.split(/\s+/).length > 45) {
     if (bad.length) console.warn("explanation rejected by the rioplatense check", bad);
     return json({ explanation: fallback, degraded: "checked" });

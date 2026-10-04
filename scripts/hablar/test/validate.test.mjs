@@ -29,7 +29,7 @@ const fails = (edit, pattern) => {
 
 test('the authored scenarios are valid', () => {
   assert.deepEqual(validate(real, { cultureIds }), []);
-  assert.equal(real.scenarios.length, 16);
+  assert.equal(real.scenarios.length, 19);
 });
 
 test('tuteo is rejected anywhere Spanish appears', () => {
@@ -125,7 +125,7 @@ test('build: audio is null until the manifest has the clip', () => {
   assert.deepEqual(Object.keys(s), ['id', 'title_es', 'title_en', 'versions']);
   assert.deepEqual(Object.keys(s.versions), ['A1', 'A2', 'B1', 'B2']);
   assert.deepEqual(Object.keys(s.versions.A1), [
-    'setting_es', 'setting_en', 'role_es', 'goals', 'key_phrases', 'opener', 'keyterms',
+    'setting_es', 'setting_en', 'role_es', 'role_en', 'goals', 'key_phrases', 'opener', 'keyterms',
   ]);
   assert.deepEqual(Object.keys(s.versions.A1.key_phrases[0]), ['es', 'en', 'audio']);
   assert.deepEqual(Object.keys(none.openers.free), ['A1', 'A2', 'B1', 'B2']);

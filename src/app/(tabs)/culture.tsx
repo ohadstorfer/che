@@ -31,12 +31,12 @@ const webPress =
       } as object)
     : null;
 
-/** The tile art's drop shadow: iOS shades the image's own alpha, the rest take a CSS filter. */
+/** The art's drop shadow, where one can follow the picture's own outline: a CSS
+ *  filter on web and Android. iOS's view shadow shades the image's whole box —
+ *  a grey rectangle behind the object — so there it goes without. */
 const artShadow = (
-  Platform.OS === 'ios'
-    ? { shadowColor: '#000', shadowOpacity: 0.18, shadowRadius: 8, shadowOffset: { width: 0, height: 6 } }
-    : { filter: 'drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.18))' }
-) as object;
+  Platform.OS === 'ios' ? null : { filter: 'drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.18))' }
+) as object | null;
 
 export default function Culture() {
   useStatusBarColor(colors.bg);
@@ -123,7 +123,7 @@ function Tile({ section, index, done, wide }: { section: CultureSection; index: 
         webPress,
       ]}>
       {/* The subject's object, tucked in the top corner with a shadow of its own. */}
-      <Image source={tileArt(section.slug, index)} style={[styles.art, artShadow]} contentFit="contain" accessible={false} />
+      <Image source={tileArt(section.slug, index)} style={[styles.art, section.slug === 'asado' && styles.artTall, artShadow]} contentFit="contain" accessible={false} />
 
       <View style={styles.tileText}>
         {eyebrow ? <Text style={[styles.eyebrow, { color: tone.ink }]}>{eyebrow}</Text> : null}
@@ -191,17 +191,20 @@ const styles = StyleSheet.create({
   tile: {
     width: '46%', // two per row; flexGrow shares out the rest of the row
     flexGrow: 1,
-    minHeight: 124,
+    minHeight: 136,
     borderRadius: 30,
     padding: 14,
-    paddingTop: 66, // clears the art in the corner
+    paddingTop: 78, // clears the art in the corner
     overflow: 'hidden',
     // Name and progress stack at the foot of the tile; the picture owns the top.
     justifyContent: 'flex-end',
     boxShadow: clay.surface,
   },
   tileWide: { width: '100%' },
-  art: { position: 'absolute', right: 6, top: 8, width: 84, height: 62 },
+  art: { position: 'absolute', right: 4, top: 6, width: 102, height: 76 },
+  // The parrilla is nearly square, so the wide box held it small; it gets a
+  // taller one, running down beside its short name.
+  artTall: { right: 2, top: 4, width: 112, height: 98 },
   tileText: { gap: 6, maxWidth: '100%' },
   eyebrow: { ...font.body[800], fontSize: 12, opacity: 0.8, marginBottom: -4 },
   tileTitle: { ...font.display[800], fontSize: 18, lineHeight: 20 },

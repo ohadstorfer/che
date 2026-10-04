@@ -1098,7 +1098,7 @@ export async function buildMistakesSession(userId: string): Promise<SessionData>
 // always does (grows from the days that really passed, never shrinks).
 // ---------------------------------------------------------------------------
 
-export const WORDS_SIZE = 20;
+export const WORDS_SIZE = 12;
 
 /** How badly a word needs a look, higher first: how far past its interval
  *  it is, plus its lapses, plus how far its ease has sunk. */

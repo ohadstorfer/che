@@ -44,8 +44,8 @@ un-cafe-por-favor:
     cafe_por_favor: {es: "Un café, por favor.", en: "A coffee, please.", target: por favor}
     un_mate: {es: "Un mate, por favor.", en: "A mate, please.", target: mate}
     cafe_gracias: {es: "Un café, gracias.", en: "A coffee, thanks.", target: gracias}
-    cafe_y_medialuna: {es: "Un café y una medialuna.", en: "A coffee and a croissant.", target: café}
-    una_medialuna: {es: "Una medialuna, por favor.", en: "A croissant, please.", target: medialuna}
+    cafe_y_medialuna: {es: "Un café y una medialuna.", en: "A coffee and a medialuna.", target: café}
+    una_medialuna: {es: "Una medialuna, por favor.", en: "A medialuna, please.", target: medialuna}
     una_factura: {es: "Una factura, por favor.", en: "A pastry, please.", target: factura}
     un_cortado: {es: "Un cortado, por favor.", en: "A cortado, please.", target: cortado}
     cortado_o_cafe: {es: "¿Un cortado o un café?", en: "A cortado or a coffee?", target: cortado}
@@ -179,7 +179,7 @@ hola-che:
         - {speaker: Sofi, es: "¿Un café?", en: "A coffee?"}
         - {speaker: Martín, es: "No, un mate, por favor.", en: "No, a mate, please.", question: {type: build}}
         - {speaker: Sofi, es: "Dale. Un mate y un café.", en: "OK. A mate and a coffee."}
-        - {speaker: Martín, es: "¿Y una medialuna?", en: "And a croissant?", question: {type: gap, form: medialuna}}
+        - {speaker: Martín, es: "¿Y una medialuna?", en: "And a medialuna?", question: {type: gap, form: medialuna}}
         - {speaker: Sofi, sentence: si_dale}
         - {speaker: Martín, es: "Gracias, Sofi.", en: "Thanks, Sofi."}
         - speaker: Sofi

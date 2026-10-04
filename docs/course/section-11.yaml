@@ -1,1670 +1,1515 @@
 # ---------------------------------------------------------------------------
-# Che — Section 11 outline: "Between the lines" (B2.2)
+# Che — Section 10 outline: "Making your case" (B2.1)
 #
-# Saying what you mean without saying it outright: the subjunctive for what
-# you're looking for but haven't found (un depto que tenga balcón), feelings
-# that "give" you something (me da bronca que…), tactful advice (deberías,
-# estaría bueno), what someone said they'd do (dijo que vendría), conditions
-# (a menos que, por si), the signs on every door (se alquila), money in an
-# inflationary city, things happening little by little (voy entendiendo),
-# who you get along with (me cae bien), and a checkpoint of porteño irony.
+# The past subjunctive stops being one fixed phrase and starts following the
+# rest of the sentence (quería que vinieras, como si supiera, si hubiera
+# sabido), and with it the tools for saying what you mean and holding your
+# ground: aunque, how long you've been at something, hosting a table of
+# people (pasen, pasen), which one you mean (el que quieras), weighing two
+# sides (por un lado… por otro lado), and the paperwork every porteño life
+# runs through — ending on a checkpoint that argues it out.
 #
-# Plan: docs/course/roadmap.md §Section 11.
+# Plan: docs/course/roadmap.md §Section 10.
 # Validate:  npm run course:validate -- --yaml
 # ---------------------------------------------------------------------------
 
 section:
   id: 11
-  slug: "between-the-lines"
-  title: "Between the lines"
-  cefr: "B2.2"
+  slug: "making-your-case"
+  title: "Making your case"
+  cefr: "B2.1"
   practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
 units:
   - ordinal: 1
-    slug: "un-depto-que-tenga"
-    title: "Describe what you're looking for"
-    summary: "Busco un depto que tenga balcón"
+    slug: "viste-lo-que-paso"
+    title: "Catch up on the gossip"
+    summary: "¿Viste lo que pasó?"
     grammar:
-      - "subjuntivo.relativo-indefinido"
-      - "alquiler"
+      - "chisme"
+      - "lo-que"
+      - "repaso.b1"
     register_max: "informal"
     sample:
-      es: "Busco un depto que tenga balcón."
-      en: "I'm looking for an apartment that has a balcony."
+      es: "¿Viste lo que pasó con Juan?"
+      en: "Did you see what happened with Juan?"
     tips:
-      - title: "Que tenga"
-        body: "Something you're looking for but haven't found yet takes the subjunctive: **busco un depto
-          que tenga balcón**. Once you've found it, it doesn't: *encontré un depto que tiene balcón*."
-      - title: "La garantía"
-        body: "Renting in Buenos Aires means the **inmobiliaria** asks for a **garantía** — a relative's
-          property as a guarantee — and a **contrato**. Some **dueños** don't take **mascotas**."
+      - title: "Lo que"
+        body: "**Lo que** is *what* in the middle of a sentence: **¿viste lo que pasó?**, **no sé lo que
+          quiere**."
+      - title: "¡Mirá vos!"
+        body: "**¡Mirá vos!** — *well, would you look at that* — and **no lo puedo creer** keep the story
+          going. A **chusma** is someone who loves the gossip."
     words:
-      - lemma: "quedar"
+      - lemma: "lo que"
+        pos: "phrase"
+        en: "what"
+      - lemma: "mirá vos"
+        pos: "phrase"
+        en: "well I never, would you look at that"
+      - lemma: "chusma"
+        pos: "noun"
+        en: "gossip (person)"
+        register: "informal"
+      - lemma: "verdad"
+        pos: "noun"
+        en: "truth, true"
+      - lemma: "chusmear"
         pos: "verb"
+        en: "to gossip, to snoop"
+        register: "informal"
         forms:
-          - form: "quede"
-            en: "(that) it's located, (that) it's"
-            f: "3sg.pres.subj"
-      - lemma: "aceptar"
-        pos: "verb"
-        en: "to accept, to allow"
-        forms:
-          - form: "acepte"
-            en: "(that) accepts, (that) allows"
-            f: "3sg.pres.subj"
-          - form: "acepta"
-            en: "accepts, allows"
-            f: "3sg.pres.ind"
-      - lemma: "mascota"
-        pos: "noun"
-        en: "pet"
-        forms:
-          - form: "mascota"
-            f: "f.sg"
-          - form: "mascotas"
-            en: "pets"
-            f: "f.pl"
-      - lemma: "contrato"
-        pos: "noun"
-        en: "contract, lease"
-      - lemma: "garantía"
-        pos: "noun"
-        en: "guarantee, guarantor (for a lease)"
-        note: "usually a property title a relative or friend puts up for your lease; the person is the garante"
-      - lemma: "luminoso"
-        pos: "adj"
-        en: "bright, full of light"
-        forms:
-          - form: "luminoso"
-            f: "m.sg"
-          - form: "luminosa"
-            f: "f.sg"
+          - form: "chusmear"
+            f: "inf"
 
   - ordinal: 2
-    slug: "conoces-a-alguien-que"
-    title: "Ask around for someone who can help"
-    summary: "¿Conocés a alguien que sepa?"
+    slug: "queria-que-vinieras"
+    title: "Say what you wanted others to do"
+    summary: "Quería que vinieras"
     grammar:
-      - "subjuntivo.relativo-indefinido"
-      - "nadie-que"
+      - "subjuntivo.imperfecto.querer-que"
+      - "correlacion.tiempos"
     register_max: "informal"
     sample:
-      es: "¿Conocés a algún electricista que venga hoy?"
-      en: "Do you know an electrician who can come today?"
+      es: "Quería que vinieras a la juntada."
+      en: "I wanted you to come to the get-together."
     tips:
-      - title: "Alguien que sepa"
-        body: "People work like flats: if you don't know whether they exist, the subjunctive. **¿Conocés
-          a alguien que arregle bicis?** Once you've found one, it's a fact: *tengo un amigo que
-          **sabe** arreglar bicis*."
-      - title: "No hay nadie que…"
-        body: "Nobody, nothing, no one at all — always the subjunctive, because it doesn't exist: **no
-          conozco a nadie que hable inglés**, **no hay ningún electricista que venga el domingo**."
-      - title: "De confianza"
-        body: "In Buenos Aires you don't google an electrician, you ask around: **¿tenés alguien de
-          confianza?** Same for a flatmate: *busco a alguien **ordenado**, que no **fume** y que
-          **comparta** los gastos*."
-    words:
-      - lemma: "alguno"
-        pos: "det"
-        en: "some, any (a … at all)"
-        forms:
-          - form: "algún"
-            f: "m.sg"
-          - form: "alguna"
-            f: "f.sg"
-      - lemma: "ninguno"
-        pos: "det"
-        en: "not a single, not any"
-        forms:
-          - form: "ningún"
-            f: "m.sg"
-          - form: "ninguna"
-            f: "f.sg"
-      - lemma: "electricista"
-        pos: "noun"
-        en: "electrician"
-      - lemma: "de confianza"
-        pos: "phrase"
-        en: "trusted, someone you can trust"
-      - lemma: "hablar"
-        pos: "verb"
-        forms:
-          - form: "hable"
-            en: "(that) he speaks, (that) I speak"
-            f: "sg.pres.subj"
-      - lemma: "arreglar"
-        pos: "verb"
-        forms:
-          - form: "arregle"
-            en: "(that) he fixes, (that) I fix"
-            f: "sg.pres.subj"
-      - lemma: "cocinar"
-        pos: "verb"
-        forms:
-          - form: "cocine"
-            en: "(that) he cooks, (that) I cook"
-            f: "sg.pres.subj"
-      - lemma: "compartir"
-        pos: "verb"
-        forms:
-          - form: "comparta"
-            en: "(that) he shares, (that) I share"
-            f: "sg.pres.subj"
-      - lemma: "fumar"
-        pos: "verb"
-        forms:
-          - form: "fume"
-            en: "(that) he smokes, (that) I smoke"
-            f: "sg.pres.subj"
-      - lemma: "ordenado"
-        pos: "adj"
-        en: "tidy, organised"
-        forms:
-          - form: "ordenado"
-            f: "m.sg"
-          - form: "ordenada"
-            f: "f.sg"
-      - lemma: "responsable"
-        pos: "adj"
-        en: "responsible, reliable"
-
-  - ordinal: 3
-    slug: "me-da-bronca"
-    title: "Say what gets to you"
-    summary: "Me da bronca que no avise"
-    grammar:
-      - "me-da.emocion"
-      - "subjuntivo.emocion"
-    register_max: "informal"
-    sample:
-      es: "Me da bronca que no avise."
-      en: "It makes me mad that he doesn't let us know."
-    tips:
-      - title: "Me da bronca"
-        body: "Porteños say a feeling *gives* them something: **me da bronca** — *it makes me mad*; **me da
-          vergüenza** — *I'm embarrassed*; **me da lástima** — *I feel sorry*; **me da igual** — *I
-          don't care*."
-      - title: "Que + subjunctive"
-        body: "What causes the feeling follows **que** in the subjunctive: **me da bronca que no
-          conteste**, **me da vergüenza que me vean así**."
-    words:
-      - lemma: "bronca"
-        pos: "noun"
-        en: "anger"
-        register: "informal"
-      - lemma: "lástima"
-        pos: "noun"
-        en: "pity"
-      - lemma: "me da igual"
-        pos: "phrase"
-        en: "I don't care, it's all the same to me"
-      - lemma: "avisar"
-        pos: "verb"
-        forms:
-          - form: "avise"
-            en: "(that) he lets know, (that) I let know"
-            f: "sg.pres.subj"
-      - lemma: "contestar"
-        pos: "verb"
-        forms:
-          - form: "conteste"
-            en: "(that) he answers, (that) I answer"
-            f: "sg.pres.subj"
-      - lemma: "ver"
-        pos: "verb"
-        forms:
-          - form: "vean"
-            en: "(that) they see"
-            f: "3pl.pres.subj.irregular"
-
-  - ordinal: 4
-    slug: "me-pone-nervioso-que"
-    title: "Say what drives you up the wall"
-    summary: "Me pone nervioso que llegue tarde"
-    grammar:
-      - "me-da.emocion"
-      - "subjuntivo.emocion"
-      - "poner.emocion"
-    register_max: "informal"
-    sample:
-      es: "Me pone nervioso que cancele a último momento."
-      en: "It drives me crazy that he cancels at the last minute."
-    tips:
-      - title: "Me pone nervioso"
-        body: "**Poner** makes feelings too: **me pone nervioso que llegue tarde**, **me pone de mal
-          humor que cancele**. Same shape as *me da bronca*: the feeling, then **que** + subjunctive."
-      - title: "Me enoja, me alegra"
-        body: "They work like *gustar*: **me enoja que me mienta**, **me alegra que vengas**. If you're
-          the one doing it, no *que*, just the infinitive: *me enoja **llegar** tarde*."
-      - title: "Me clavó el visto"
-        body: "The porteño complaint of the WhatsApp age: **me clavó el visto** — *he left me on read*.
-          And the friend who forgets everything is **re colgado**."
-    words:
-      - lemma: "poner"
-        pos: "verb"
-        forms:
-          - form: "me pone"
-            en: "it makes me (feel)"
-            f: "3sg.pres.ind.clitic"
-      - lemma: "enojar"
-        pos: "verb"
-        en: "to make angry"
-        forms:
-          - form: "me enoja"
-            en: "it makes me angry"
-            f: "3sg.pres.ind.clitic"
-          - form: "enoja"
-            f: "3sg.pres.ind"
-            bound: true
-      - lemma: "alegrar"
-        pos: "verb"
-        en: "to make happy"
-        forms:
-          - form: "me alegra"
-            en: "it makes me happy"
-            f: "3sg.pres.ind.clitic"
-          - form: "alegra"
-            f: "3sg.pres.ind"
-            bound: true
-      - lemma: "cancelar"
-        pos: "verb"
-        en: "to cancel"
-        forms:
-          - form: "cancelar"
-            f: "inf"
-          - form: "cancele"
-            en: "(that) he cancels, (that) I cancel"
-            f: "sg.pres.subj"
-          - form: "canceló"
-            en: "he cancelled, she cancelled"
-            f: "3sg.pret.ind"
-      - lemma: "olvidarse"
-        pos: "verb"
-        forms:
-          - form: "se olvide"
-            en: "(that) he forgets"
-            f: "3sg.pres.subj.clitic"
-      - lemma: "mentir"
-        pos: "verb"
-        forms:
-          - form: "mienta"
-            en: "(that) he lies, (that) I lie"
-            f: "sg.pres.subj.irregular"
-      - lemma: "humor"
-        pos: "noun"
-        en: "mood"
-        note: "de mal humor = in a bad mood"
-      - lemma: "a último momento"
-        pos: "phrase"
-        en: "at the last minute"
-      - lemma: "celos"
-        pos: "noun"
-        en: "jealousy"
-      - lemma: "colgado"
-        pos: "adj"
-        en: "scatterbrained, spaced out"
-        register: "informal"
-        forms:
-          - form: "colgado"
-            f: "m.sg"
-          - form: "colgada"
-            f: "f.sg"
-      - lemma: "me clavó el visto"
-        pos: "phrase"
-        en: "he left me on read"
-        register: "informal"
-
-  - ordinal: 5
-    slug: "deberias"
-    title: "Give advice gently"
-    summary: "Deberías descansar"
-    grammar:
-      - "deber.condicional"
-      - "estaria-bueno"
-    register_max: "informal"
-    sample:
-      es: "Deberías descansar un poco."
-      en: "You should rest a little."
-    tips:
-      - title: "Deberías"
-        body: "**Deberías** — *you should* — is advice with the edges sanded off: **deberías descansar**.
-          **Debería** is *I should* or *he should*: *debería llamar a mi vieja*."
-      - title: "Estaría bueno"
-        body: "The softest porteño suggestion is **estaría bueno** — *it would be nice*: **estaría bueno
-          juntarnos**, **estaría bueno que vengas**. **Habría que** is *we ought to*: *habría que avisarle*."
-    words:
-      - lemma: "deber"
-        pos: "verb"
-        forms:
-          - form: "deberías"
-            en: "you should"
-            f: "2sg.cond.ind.vos"
-          - form: "debería"
-            en: "I should, he should, she should"
-            f: "sg.cond.ind"
-      - lemma: "estaría bueno"
-        pos: "phrase"
-        en: "it would be nice, it would be good"
-      - lemma: "habría que"
-        pos: "phrase"
-        en: "we ought to, someone should"
-      - lemma: "consejo"
-        pos: "noun"
-        en: "piece of advice"
-      - lemma: "cuidar"
-        pos: "verb"
-        forms:
-          - form: "cuidar"
-            f: "inf"
-          - form: "cuido"
-            en: "I take care of"
-            f: "1sg.pres.ind"
-
-  - ordinal: 6
-    slug: "deberias-tomarte-unos-dias"
-    title: "Talk a stressed friend down"
-    summary: "Deberías tomarte unos días"
-    grammar:
-      - "deber.condicional"
-      - "estaria-bueno"
-      - "deber.condicional.personas"
-    register_max: "informal"
-    sample:
-      es: "Deberías tomarte unos días, estás re quemado."
-      en: "You should take a few days off, you're totally burnt out."
-    tips:
-      - title: "Deberíamos, deberían"
-        body: "The whole family of soft advice: **deberíamos juntarnos más** — *we should get together
-          more*; **deberían pagarte más** — *they ought to pay you more*. Advice to *us* is the
-          gentlest of all."
-      - title: "Estaría bueno que…"
-        body: "With a person after it, **que** + subjunctive: **estaría bueno que te tomes unos días**.
-          Without one, the infinitive: *estaría bueno **descansar***. And the push: **¡animate!** —
-          *go for it!*"
-      - title: "Terapia"
-        body: "Buenos Aires has more psychologists per person than almost anywhere, so **deberías ir a
-          terapia** isn't an insult — it's what a good friend says."
-    words:
-      - lemma: "deber"
-        pos: "verb"
-        forms:
-          - form: "deberíamos"
-            en: "we should"
-            f: "1pl.cond.ind"
-          - form: "deberían"
-            en: "they should, you all should"
-            f: "3pl.cond.ind"
-      - lemma: "tomarse"
-        pos: "verb"
-        en: "to take (time off, a break)"
-        forms:
-          - form: "tomarte"
-            en: "(to) take (for yourself)"
-            f: "inf.clitic"
-          - form: "te tomes"
-            en: "(that) you take (for yourself)"
-            f: "2sg.pres.subj.vos.clitic"
-      - lemma: "animarse"
-        pos: "verb"
-        en: "to dare, to go for it"
-        forms:
-          - form: "animate"
-            en: "go for it"
-            f: "2sg.imp.vos.clitic"
-          - form: "me animo"
-            en: "I dare, I'm up for it"
-            f: "1sg.pres.ind.clitic"
-          - form: "animo"
-            f: "1sg.pres.ind"
-            bound: true
-      - lemma: "terapia"
-        pos: "noun"
-        en: "therapy"
-      - lemma: "estresado"
-        pos: "adj"
-        en: "stressed"
-        forms:
-          - form: "estresado"
-            f: "m.sg"
-          - form: "estresada"
-            f: "f.sg"
-      - lemma: "quemado"
-        pos: "adj"
-        en: "burnt out, fried"
-        register: "informal"
-        forms:
-          - form: "quemado"
-            f: "m.sg"
-          - form: "quemada"
-            f: "f.sg"
-      - lemma: "encarar"
-        pos: "verb"
-        en: "to face, to tackle (a problem, a person)"
-        forms:
-          - form: "encarar"
-            f: "inf"
-      - lemma: "paciencia"
-        pos: "noun"
-        en: "patience"
-      - lemma: "franco"
-        pos: "noun"
-        en: "day off (from work)"
-      - lemma: "sincero"
-        pos: "adj"
-        en: "honest, sincere"
-        forms:
-          - form: "sincero"
-            f: "m.sg"
-          - form: "sincera"
-            f: "f.sg"
-      - lemma: "hacer caso"
-        pos: "phrase"
-        en: "to listen to (someone's advice), to do as told"
-        forms:
-          - form: "hacele caso"
-            en: "listen to him, do what he says"
-            f: "2sg.imp.vos.clitic"
-
-  - ordinal: 7
-    slug: "practica-me-da-igual"
-    title: "Practice: what you want, what gets to you, advice"
-    summary: "Deberías buscar algo que te guste"
-    grammar:
-      - "repaso.subjuntivo.relativo"
-      - "repaso.me-da"
-      - "repaso.deberias"
-    register_max: "informal"
-    sample:
-      es: "Me da igual."
-      en: "I don't care."
-    tips:
-      - title: "Que tenga, que avise"
-        body: "The subjunctive after **que** for what you haven't found (*un depto que tenga balcón*) and for what makes you feel something (*me da bronca que no avise*)."
-      - title: "Deberías, estaría bueno"
-        body: "**Deberías** for advice, **estaría bueno** for a gentle suggestion."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "quede"
-      - "acepte"
-      - "mascotas"
-      - "dueño"
-      - "contrato"
-      - "bronca"
-      - "vergüenza"
-      - "me da igual"
-      - "avise"
-      - "deberías"
-      - "debería"
-      - "estaría bueno"
-      - "habría que"
-      - "quería"
-      - "aunque"
-
-  - ordinal: 8
-    slug: "practica-alguien-que-sepa"
-    title: "Practice: someone who can, what drives you mad, advice"
-    summary: "Estaría bueno que te animes"
-    grammar:
-      - "repaso.subjuntivo.relativo"
-      - "repaso.me-da"
-      - "repaso.deberias"
-    register_max: "informal"
-    sample:
-      es: "No conozco a nadie que cocine como mi vieja."
-      en: "I don't know anyone who cooks like my mum."
-    tips:
-      - title: "Alguien que, nadie que"
-        body: "**¿Conocés a alguien que arregle bicis?** — don't know if they exist, subjunctive. **No hay
-          nadie que cocine así** — they don't, subjunctive again. **Me pone nervioso que cancele** — a
-          feeling about it, subjunctive too."
-      - title: "Deberíamos, estaría bueno que"
-        body: "**Deberíamos juntarnos**, **deberían pagarte más**, **estaría bueno que te tomes unos
-          días**. And when they're scared: **¡animate!**"
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "algún"
-      - "ningún"
-      - "de confianza"
-      - "arregle"
-      - "comparta"
-      - "me pone"
-      - "me enoja"
-      - "cancele"
-      - "a último momento"
-      - "deberíamos"
-      - "animate"
-      - "terapia"
-      - "quemado"
-      - "acepte"
-      - "me da igual"
-      - "estaría bueno"
-
-  - ordinal: 9
-    slug: "dijo-que-vendria"
-    title: "Say what someone said they'd do"
-    summary: "Dijo que vendría"
-    grammar:
-      - "discurso-referido.condicional"
-      - "prometer"
-    register_max: "informal"
-    sample:
-      es: "Juan dijo que vendría, pero no vino."
-      en: "Juan said he'd come, but he didn't."
-    tips:
-      - title: "Vendrá → vendría"
-        body: "Reporting a promise moves it into *would*: «voy» → **dijo que iría**; «te llamo» → **dijo que
-          me llamaría**. Porteños also say **dijo que iba a venir** — same thing."
-      - title: "Me prometiste"
-        body: "**Me prometiste que vendrías** — *you promised me you'd come*. And the classic ending:
-          **al final no vino**."
+      - title: "Quería que vinieras"
+        body: "When the wanting is in the past, the second verb moves into the past too: *quiero que
+          vengas* becomes **quería que vinieras** — *I wanted you to come*."
+      - title: "Me pidió que"
+        body: "**Me pidió que lo llamara** — *she asked me to call him*. The same form follows an order
+          told later: **me dijo que esperara** — *he told me to wait*."
     words:
       - lemma: "venir"
         pos: "verb"
         forms:
-          - form: "vendría"
-            en: "I would come, he would come"
-            f: "sg.cond.ind.irregular"
-          - form: "vendrías"
-            en: "you would come"
-            f: "2sg.cond.ind.vos.irregular"
-      - lemma: "llamar"
-        pos: "verb"
-        forms:
-          - form: "llamaría"
-            en: "I would call, he would call"
-            f: "sg.cond.ind"
-      - lemma: "prometer"
-        pos: "verb"
-        forms:
-          - form: "prometió"
-            en: "he promised, she promised"
-            f: "3sg.pret.ind"
-          - form: "prometiste"
-            en: "you promised"
-            f: "2sg.pret.ind.vos"
-      - lemma: "promesa"
-        pos: "noun"
-        en: "promise"
-      - lemma: "cumplir"
-        pos: "verb"
-        en: "to keep (a promise), to fulfil"
-        forms:
-          - form: "cumplió"
-            en: "he kept (his word)"
-            f: "3sg.pret.ind"
-          - form: "cumplir"
-            f: "inf"
-
-  - ordinal: 10
-    slug: "dijo-que-pasaria"
-    title: "Chase a promise that didn't happen"
-    summary: "El técnico dijo que pasaría el martes"
-    grammar:
-      - "discurso-referido.condicional"
-      - "prometer"
-      - "asegurar"
-    register_max: "informal"
-    sample:
-      es: "El técnico dijo que pasaría el martes, pero al final no vino."
-      en: "The repairman said he'd come by on Tuesday, but in the end he didn't come."
-    tips:
-      - title: "Pasaría, traería, devolvería"
-        body: "Any verb goes into *would* the same way — the infinitive plus **-ía**: *pasar* → **dijo
-          que pasaría**; *devolver* → **me juró que me la devolvería**. A few change the stem: *poner*
-          → **pondría**, like *tener* → *tendría*."
-      - title: "Me aseguró que…"
-        body: "Porteños rarely just *say* a promise: **me aseguró que**, **me juró que**. Then comes the
-          **excusa** — and you learn not to **confiar** in the **mentiroso**."
-    words:
-      - lemma: "pasar"
-        pos: "verb"
-        forms:
-          - form: "pasaría"
-            en: "I would come by, he would come by"
-            f: "sg.cond.ind"
-      - lemma: "traer"
-        pos: "verb"
-        forms:
-          - form: "traería"
-            en: "I would bring, he would bring"
-            f: "sg.cond.ind"
-      - lemma: "devolver"
-        pos: "verb"
-        forms:
-          - form: "devolvería"
-            en: "I would give back, he would give back"
-            f: "sg.cond.ind"
-      - lemma: "poner"
-        pos: "verb"
-        forms:
-          - form: "pondría"
-            en: "I would put, he would put"
-            f: "sg.cond.ind.irregular"
-      - lemma: "arreglar"
-        pos: "verb"
-        forms:
-          - form: "arreglaría"
-            en: "I would fix, he would fix"
-            f: "sg.cond.ind"
-      - lemma: "asegurar"
-        pos: "verb"
-        en: "to assure, to swear (to someone)"
-        forms:
-          - form: "aseguró"
-            en: "he assured, she assured"
-            f: "3sg.pret.ind"
-      - lemma: "respuesta"
-        pos: "noun"
-        en: "answer, reply"
-      - lemma: "excusa"
-        pos: "noun"
-        en: "excuse"
-      - lemma: "mentiroso"
-        pos: "adj"
-        en: "liar, lying"
-        forms:
-          - form: "mentiroso"
-            f: "m.sg"
-          - form: "mentirosa"
-            f: "f.sg"
-      - lemma: "confiar"
-        pos: "verb"
-        forms:
-          - form: "confiar"
-            f: "inf"
-      - lemma: "creer"
-        pos: "verb"
-        forms:
-          - form: "creí"
-            en: "I believed"
-            f: "1sg.pret.ind"
-
-  - ordinal: 11
-    slug: "a-menos-que"
-    title: "Set conditions"
-    summary: "Voy, a menos que llueva"
-    grammar:
-      - "a-menos-que"
-      - "siempre-y-cuando"
-      - "por-si"
-    register_max: "informal"
-    sample:
-      es: "Voy, a menos que llueva."
-      en: "I'll go, unless it rains."
-    tips:
-      - title: "A menos que, siempre y cuando"
-        body: "Conditions that haven't happened take the subjunctive: **a menos que llueva** — *unless it
-          rains*; **siempre y cuando vengas** — *as long as you come*; **en caso de que** — *in case*."
-      - title: "Por si"
-        body: "**Por si** — *just in case* — is the exception: it keeps the normal verb. **Llevá paraguas
-          por si llueve.** Short version: **por las dudas**."
-    words:
-      - lemma: "a menos que"
-        pos: "phrase"
-        en: "unless"
-      - lemma: "siempre y cuando"
-        pos: "phrase"
-        en: "as long as, provided that"
-      - lemma: "en caso de que"
-        pos: "phrase"
-        en: "in case"
-      - lemma: "por si"
-        pos: "phrase"
-        en: "just in case, in case"
-      - lemma: "pagar"
-        pos: "verb"
-        forms:
-          - form: "pague"
-            en: "(that) he pays, (that) I pay"
-            f: "sg.pres.subj"
-
-  - ordinal: 12
-    slug: "con-tal-de-que"
-    title: "Lend something, with conditions"
-    summary: "Te lo presto, con tal de que lo cuides"
-    grammar:
-      - "a-menos-que"
-      - "siempre-y-cuando"
-      - "por-si"
-      - "con-tal-de-que"
-    register_max: "informal"
-    sample:
-      es: "Te presto el auto, con tal de que me lo devuelvas con el tanque lleno."
-      en: "I'll lend you the car, as long as you bring it back with a full tank."
-    tips:
-      - title: "Con tal de que, salvo que"
-        body: "Two more conditions that take the subjunctive: **con tal de que me lo devuelvas** — *on
-          condition you give it back*; **salvo que lo necesite** — *unless I need it*. Lending to a
-          friend in Buenos Aires comes with both."
-      - title: "Que no lo choques"
-        body: "The *vos* subjunctive is the one you hear on the way out the door: *te lo presto, siempre
-          y cuando no lo **choques**, lo **cuides** y me lo **devuelvas entero***. The last word:
-          **si no**, *no te presto nada más*."
-    words:
-      - lemma: "con tal de que"
-        pos: "phrase"
-        en: "on condition that, so long as"
-      - lemma: "salvo que"
-        pos: "phrase"
-        en: "except if, barring"
-      - lemma: "si no"
-        pos: "phrase"
-        en: "otherwise, or else"
-      - lemma: "devolver"
-        pos: "verb"
-        forms:
-          - form: "devuelvas"
-            en: "(that) you give back"
-            f: "2sg.pres.subj.vos.irregular"
-      - lemma: "prestar"
-        pos: "verb"
-        forms:
-          - form: "prestes"
-            en: "(that) you lend"
-            f: "2sg.pres.subj.vos"
-          - form: "preste"
-            en: "(that) he lends, (that) I lend"
-            f: "sg.pres.subj"
-      - lemma: "romper"
-        pos: "verb"
-        forms:
-          - form: "rompas"
-            en: "(that) you break"
-            f: "2sg.pres.subj.vos"
-      - lemma: "cuidar"
-        pos: "verb"
-        forms:
-          - form: "cuides"
-            en: "(that) you look after"
-            f: "2sg.pres.subj.vos"
-      - lemma: "manejar"
-        pos: "verb"
-        forms:
-          - form: "manejes"
-            en: "(that) you drive"
-            f: "2sg.pres.subj.vos"
-      - lemma: "chocar"
-        pos: "verb"
-        forms:
-          - form: "choques"
-            en: "(that) you crash"
-            f: "2sg.pres.subj.vos"
-      - lemma: "necesitar"
-        pos: "verb"
-        forms:
-          - form: "necesite"
-            en: "(that) I need, (that) he needs"
-            f: "sg.pres.subj"
-      - lemma: "tanque"
-        pos: "noun"
-        en: "(fuel) tank"
-      - lemma: "entero"
-        pos: "adj"
-        en: "whole, in one piece"
-        forms:
-          - form: "entero"
-            f: "m.sg"
-          - form: "entera"
-            f: "f.sg"
-
-  - ordinal: 13
-    slug: "se-alquila"
-    title: "Read the signs"
-    summary: "Se alquila, se vende"
-    grammar:
-      - "se-pasiva"
-      - "carteles"
-    register_max: "informal"
-    sample:
-      es: "Ese depto se alquila."
-      en: "That apartment is for rent."
-    tips:
-      - title: "Se vende, se alquila"
-        body: "Signs say what's done without saying who: **se vende** — *for sale*; **se alquila** — *for
-          rent*; **se necesita mozo** — *waiter wanted*. More than one thing: **se venden bicis**."
-      - title: "Prohibido"
-        body: "**Prohibido estacionar** — *no parking*; **prohibido fumar** — *no smoking*. The sign
-          itself is a **cartel**."
-    words:
-      - lemma: "vender"
-        pos: "verb"
-        forms:
-          - form: "se vende"
-            en: "for sale, is sold"
-            f: "3sg.pres.ind.clitic"
-          - form: "se venden"
-            en: "for sale (several), are sold"
-            f: "3pl.pres.ind.clitic"
-          - form: "vende"
-            f: "3sg.pres.ind"
-            bound: true
-          - form: "venden"
-            f: "3pl.pres.ind"
-            bound: true
-          - form: "vendí"
-            en: "I sold"
-            f: "1sg.pret.ind"
-      - lemma: "alquilar"
-        pos: "verb"
-        forms:
-          - form: "se alquila"
-            en: "for rent, is rented"
-            f: "3sg.pres.ind.clitic"
-      - lemma: "necesitar"
-        pos: "verb"
-        forms:
-          - form: "se necesita"
-            en: "wanted, is needed"
-            f: "3sg.pres.ind.clitic"
-      - lemma: "prohibido"
-        pos: "adj"
-        en: "forbidden, not allowed"
-        forms:
-          - form: "prohibido"
-            f: "m.sg"
-      - lemma: "cartel"
-        pos: "noun"
-        en: "sign"
-
-  - ordinal: 14
-    slug: "se-aceptan-tarjetas"
-    title: "Read the signs in shop windows"
-    summary: "Se aceptan tarjetas, se hacen envíos"
-    grammar:
-      - "se-pasiva"
-      - "carteles"
-    register_max: "informal"
-    sample:
-      es: "Se aceptan tarjetas, pero no se hacen envíos."
-      en: "Cards accepted, but no deliveries."
-    tips:
-      - title: "Se aceptan, se hacen"
-        body: "Plural things take the plural verb: **se aceptan tarjetas**, **se hacen envíos**, **se
-          arreglan bicis**. One thing, the singular: **se busca perro** — with a **recompensa**
-          if you're lucky."
-      - title: "No se permite"
-        body: "The building speaks the same way: **no se permiten mascotas**, **se prohíbe hacer ruido
-          después de las diez**. On the shop door: **horario de atención** — and the **local** is
-          often **cerrado** at lunchtime."
-    words:
-      - lemma: "buscar"
-        pos: "verb"
-        forms:
-          - form: "se busca"
-            en: "missing, looking for (on a sign)"
-            f: "3sg.pres.ind.clitic"
-      - lemma: "aceptar"
-        pos: "verb"
-        forms:
-          - form: "se aceptan"
-            en: "(are) accepted, we take"
-            f: "3pl.pres.ind.clitic"
-          - form: "aceptan"
-            f: "3pl.pres.ind"
-            bound: true
+          - form: "vinieras"
+            en: "(that) you came"
+            f: "2sg.impf.subj.vos.irregular"
+          - form: "viniera"
+            en: "(that) I came, (that) he came"
+            f: "sg.impf.subj.irregular"
       - lemma: "hacer"
         pos: "verb"
         forms:
-          - form: "se hacen"
-            en: "(are) done, we do"
-            f: "3pl.pres.ind.clitic"
-          - form: "hacen"
-            f: "3pl.pres.ind"
-            bound: true
-      - lemma: "arreglar"
+          - form: "hicieras"
+            en: "(that) you did"
+            f: "2sg.impf.subj.vos.irregular"
+          - form: "hiciera"
+            en: "(that) I did, (that) he did"
+            f: "sg.impf.subj.irregular"
+      - lemma: "llamar"
         pos: "verb"
         forms:
-          - form: "se arreglan"
-            en: "(are) repaired, we fix"
-            f: "3pl.pres.ind.clitic"
-          - form: "arreglan"
-            f: "3pl.pres.ind"
-            bound: true
-      - lemma: "permitir"
+          - form: "llamaras"
+            en: "(that) you called"
+            f: "2sg.impf.subj.vos"
+          - form: "llamara"
+            en: "(that) I called, (that) he called"
+            f: "sg.impf.subj"
+      - lemma: "avisar"
         pos: "verb"
-        en: "to permit"
         forms:
-          - form: "se permite"
-            en: "is permitted"
-            f: "3sg.pres.ind.clitic"
-          - form: "se permiten"
-            en: "are permitted"
-            f: "3pl.pres.ind.clitic"
-          - form: "permite"
-            f: "3sg.pres.ind"
-            bound: true
-          - form: "permiten"
-            f: "3pl.pres.ind"
-            bound: true
-      - lemma: "prohibir"
+          - form: "avisaras"
+            en: "(that) you let know"
+            f: "2sg.impf.subj.vos"
+      - lemma: "esperar"
         pos: "verb"
-        en: "to ban"
         forms:
-          - form: "se prohíbe"
-            en: "it is banned (to)"
-            f: "3sg.pres.ind.clitic"
-          - form: "prohíbe"
-            f: "3sg.pres.ind"
-            bound: true
-      - lemma: "tarjeta"
-        pos: "noun"
-        forms:
-          - form: "tarjetas"
-            en: "cards"
-            f: "f.pl"
-      - lemma: "envío"
-        pos: "noun"
-        en: "delivery, shipping"
-        forms:
-          - form: "envío"
-            f: "m.sg"
-          - form: "envíos"
-            en: "deliveries, shipping"
-            f: "m.pl"
-      - lemma: "local"
-        pos: "noun"
-        en: "shopfront, premises"
-      - lemma: "recompensa"
-        pos: "noun"
-        en: "reward"
-      - lemma: "atención"
-        pos: "noun"
-        en: "customer service"
-        note: "horario de atención = opening hours"
+          - form: "esperara"
+            en: "(that) I waited, (that) he waited"
+            f: "sg.impf.subj"
 
-  - ordinal: 15
-    slug: "practica-se-alquila"
-    title: "Practice: promises, conditions and signs"
-    summary: "Me prometió que vendría"
+  - ordinal: 3
+    slug: "mis-viejos-querian"
+    title: "Say what your parents wanted"
+    summary: "Mis viejos querían que estudiara"
     grammar:
-      - "repaso.discurso-referido"
-      - "repaso.a-menos-que"
-      - "repaso.se-pasiva"
+      - "subjuntivo.imperfecto.querer-que"
+      - "correlacion.tiempos"
+      - "subjuntivo.imperfecto.personas"
     register_max: "informal"
     sample:
-      es: "Me prometió que vendría."
-      en: "He promised me he'd come."
+      es: "Mis viejos querían que estudiara una carrera."
+      en: "My parents wanted me to get a degree."
     tips:
-      - title: "Dijo que vendría"
-        body: "Reported promises go into *would*: **dijo que vendría**, **me prometiste que me llamarías**."
-      - title: "A menos que, por si"
-        body: "**A menos que** takes the subjunctive (*a menos que llueva*); **por si** doesn't (*por si llueve*)."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "vendría"
-      - "vendrías"
-      - "llamaría"
-      - "prometió"
-      - "prometiste"
-      - "cumplió"
-      - "a menos que"
-      - "siempre y cuando"
-      - "por si"
-      - "pague"
-      - "se vende"
-      - "se alquila"
-      - "prohibido"
-      - "cartel"
-      - "deberías"
-      - "hubiera"
-
-  - ordinal: 16
-    slug: "practica-se-aceptan-tarjetas"
-    title: "Practice: broken promises, lending and shop signs"
-    summary: "Me aseguró que me lo devolvería"
-    grammar:
-      - "repaso.discurso-referido"
-      - "repaso.a-menos-que"
-      - "repaso.se-pasiva"
-    register_max: "informal"
-    sample:
-      es: "Me aseguró que me lo devolvería."
-      en: "He assured me he'd give it back."
-    tips:
-      - title: "Pasaría, devolvería"
-        body: "What he swore he'd do, told later: **dijo que pasaría**, **me aseguró que me lo
-          devolvería**. **Pondría** keeps its odd stem."
-      - title: "Con tal de que, se aceptan"
-        body: "**Con tal de que me lo devuelvas** and **salvo que lo necesite** take the subjunctive.
-          On the door: **se aceptan tarjetas**, **se hacen envíos**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "pasaría"
-      - "devolvería"
-      - "pondría"
-      - "aseguró"
-      - "respuesta"
-      - "excusa"
-      - "con tal de que"
-      - "salvo que"
-      - "devuelvas"
-      - "choques"
-      - "se aceptan"
-      - "se hacen"
-      - "envíos"
-      - "vendría"
-      - "a menos que"
-      - "se alquila"
-
-  - ordinal: 17
-    slug: "todo-aumenta"
-    title: "Talk about prices going up"
-    summary: "Todo aumenta"
-    grammar:
-      - "plata.inflacion"
-      - "subir-bajar"
-    register_max: "informal"
-    sample:
-      es: "Todo aumenta todos los meses."
-      en: "Everything goes up every month."
-    tips:
-      - title: "Todo aumenta"
-        body: "In Buenos Aires prices **aumentan** so often that the word is small talk: **¿viste cómo
-          aumentó el café?** The **aumento** of your salary never quite keeps up with the **inflación**."
-      - title: "Subir, bajar, cobrar"
-        body: "Prices **suben** and, now and then, **bajan**. **¿Cuánto te cobraron?** — *how much did they
-          charge you?* A **precio** is a price; *está a buen precio* — *it's a good price*."
+      - title: "Querían que estudiara"
+        body: "Growing up, every wish was in the past: **mis viejos querían que estudiara** — *my parents
+          wanted me to study*; **no querían que saliera de noche** — *they didn't want me going out at
+          night*. The second verb follows the first into the past."
+      - title: "One trick, every verb"
+        body: "Take the *ellos* preterite and swap **-ron** for **-ra**: *salieron* → **saliera**,
+          *volvieron* → **volviera**, *dijeron* → **dijera**. With vos add an **-s**: **estudiaras,
+          dijeras, fueras**. For *ellos*: **querían que vinieran todos**."
+      - title: "Pedir permiso"
+        body: "A porteño family can be **estricta**: *para salir tenía que pedir **permiso***, and my
+          mum **quería que volviera temprano** — which never happened."
     words:
-      - lemma: "aumentar"
-        pos: "verb"
-        en: "to go up, to increase"
-        forms:
-          - form: "aumenta"
-            en: "goes up"
-            f: "3sg.pres.ind"
-          - form: "aumentó"
-            en: "went up"
-            f: "3sg.pret.ind"
-      - lemma: "aumento"
-        pos: "noun"
-        en: "raise, increase"
-      - lemma: "inflación"
-        pos: "noun"
-        en: "inflation"
-      - lemma: "subir"
+      - lemma: "querer"
         pos: "verb"
         forms:
-          - form: "suben"
-            en: "go up"
-            f: "3pl.pres.ind"
-          - form: "subió"
-            en: "went up"
-            f: "3sg.pret.ind"
-      - lemma: "bajar"
-        pos: "verb"
-        en: "to go down, to drop"
-        forms:
-          - form: "bajó"
-            en: "went down"
-            f: "3sg.pret.ind"
-      - lemma: "cobrar"
+          - form: "querían"
+            en: "they wanted"
+            f: "3pl.impf.ind"
+      - lemma: "estudiar"
         pos: "verb"
         forms:
-          - form: "cobraron"
-            en: "they charged"
-            f: "3pl.pret.ind"
-
-  - ordinal: 18
-    slug: "no-me-alcanza"
-    title: "Talk about bills and making it to payday"
-    summary: "Aumentaron la luz y el gas"
-    grammar:
-      - "plata.inflacion"
-      - "subir-bajar"
-    register_max: "informal"
-    sample:
-      es: "Aumentaron la luz y el gas, y el sueldo no me alcanza."
-      en: "Electricity and gas went up, and my salary doesn't stretch."
-    tips:
-      - title: "Aumentaron, bajaron"
-        body: "Bills come in plural, and so do the verbs: **aumentaron la luz y el gas**, **aumentan las
-          tarifas**. Prices that **bajaron**? Nobody remembers. Porteños keep count: *el **boleto**
-          aumentó tres veces este año*."
-      - title: "Llegar a fin de mes"
-        body: "**Llegar a fin de mes** — *to make it to payday* — is the monthly sport. You cut the
-          **gastos**, compare **marcas** at the **chino** (the corner supermarket), and notice when
-          they **remarcaron** everything overnight."
-    words:
-      - lemma: "aumentar"
+          - form: "estudiara"
+            en: "(that) I studied, (that) he studied"
+            f: "sg.impf.subj"
+          - form: "estudiaras"
+            en: "(that) you studied"
+            f: "2sg.impf.subj.vos"
+      - lemma: "salir"
         pos: "verb"
         forms:
-          - form: "aumentaron"
-            en: "went up (several)"
-            f: "3pl.pret.ind"
-          - form: "aumentan"
-            en: "go up (several)"
-            f: "3pl.pres.ind"
-      - lemma: "bajar"
+          - form: "saliera"
+            en: "(that) I went out, (that) he went out"
+            f: "sg.impf.subj"
+          - form: "salieras"
+            en: "(that) you went out"
+            f: "2sg.impf.subj.vos"
+      - lemma: "volver"
         pos: "verb"
         forms:
-          - form: "bajaron"
-            en: "went down (several)"
-            f: "3pl.pret.ind"
-      - lemma: "alcanzar"
-        pos: "verb"
-        forms:
-          - form: "alcanzó"
-            en: "was enough"
-            f: "3sg.pret.ind"
-      - lemma: "gas"
-        pos: "noun"
-        en: "gas (the utility)"
-      - lemma: "tarifa"
-        pos: "noun"
-        en: "rate, utility charge"
-        forms:
-          - form: "tarifa"
-            f: "f.sg"
-          - form: "tarifas"
-            en: "rates, utility charges"
-            f: "f.pl"
-      - lemma: "boleto"
-        pos: "noun"
-        en: "fare (bus, train)"
-      - lemma: "gasto"
-        pos: "noun"
-        en: "expense"
-        forms:
-          - form: "gasto"
-            f: "m.sg"
-          - form: "gastos"
-            en: "expenses"
-            f: "m.pl"
-      - lemma: "servicio"
-        pos: "noun"
-        en: "utility, service"
-        forms:
-          - form: "servicio"
-            f: "m.sg"
-          - form: "servicios"
-            en: "utilities, services"
-            f: "m.pl"
-      - lemma: "chino"
-        pos: "noun"
-        en: "corner supermarket"
-        note: "porteños call the neighbourhood supermarket «el chino»: most are run by Chinese families"
-        register: "informal"
-      - lemma: "marca"
-        pos: "noun"
-        en: "brand"
-      - lemma: "llegar a fin de mes"
-        pos: "phrase"
-        en: "to make it to the end of the month, to make ends meet"
-      - lemma: "remarcar"
-        pos: "verb"
-        en: "to mark up (prices)"
-        forms:
-          - form: "remarcaron"
-            en: "they marked up"
-            f: "3pl.pret.ind"
-
-  - ordinal: 19
-    slug: "voy-entendiendo"
-    title: "Say it's happening little by little"
-    summary: "De a poco voy entendiendo"
-    grammar:
-      - "ir.gerundio"
-      - "estar-por"
-      - "de-a-poco"
-    register_max: "informal"
-    sample:
-      es: "De a poco voy entendiendo."
-      en: "Little by little I'm starting to understand."
-    tips:
-      - title: "Voy entendiendo"
-        body: "**Ir** + *-ando, -iendo* is something happening bit by bit: **voy entendiendo** — *I'm
-          starting to get it*; **se va llenando** — *it's filling up*. **De a poco** — *little by
-          little* — goes with it."
-      - title: "Estoy por salir"
-        body: "**Estar por** + infinitive is *to be about to*: **estoy por salir** — *I'm just about to
-          leave*. A porteño's *I'm on my way* is often **ya salgo**, which may mean in an hour."
-    words:
-      - lemma: "entender"
-        pos: "verb"
-        forms:
-          - form: "entendiendo"
-            en: "understanding"
-            f: "ger"
+          - form: "volviera"
+            en: "(that) I came back, (that) he came back"
+            f: "sg.impf.subj"
       - lemma: "decir"
         pos: "verb"
         forms:
-          - form: "diciendo"
-            en: "saying"
-            f: "ger"
-      - lemma: "de a poco"
-        pos: "phrase"
-        en: "little by little, gradually"
-      - lemma: "estar por"
-        pos: "phrase"
-        en: "to be about to"
-        forms:
-          - form: "estoy por"
-            en: "I'm about to"
-            f: "1sg.pres.ind"
-          - form: "está por"
-            en: "he's about to, it's about to"
-            f: "3sg.pres.ind"
-      - lemma: "acostumbrarse"
-        pos: "verb"
-        en: "to get used to"
-        forms:
-          - form: "me acostumbré"
-            en: "I got used to"
-            f: "1sg.pret.ind.clitic"
-          - form: "acostumbré"
-            f: "1sg.pret.ind"
-            bound: true
-
-  - ordinal: 20
-    slug: "ando-buscando"
-    title: "Say what you're in the middle of"
-    summary: "Ando buscando laburo"
-    grammar:
-      - "ir.gerundio"
-      - "estar-por"
-      - "de-a-poco"
-      - "andar.gerundio"
-    register_max: "informal"
-    sample:
-      es: "Ando buscando laburo, y de a poco voy conociendo gente."
-      en: "I'm looking around for work, and little by little I'm getting to know people."
-    tips:
-      - title: "Ando buscando"
-        body: "**Andar** + *-ando, -iendo* is porteño for *going around doing*: **ando buscando
-          laburo**, **¿qué andás haciendo?** It sounds looser than *estoy*."
-      - title: "Voy conociendo, se va llenando"
-        body: "With **ir**, it grows bit by bit: **voy conociendo gente**, **el bondi se va llenando**,
-          **me voy acostumbrando al ritmo**. It's the verb of settling in."
-      - title: "Estamos por, a punto de"
-        body: "**Estamos por arrancar** — *we're about to start*. **A punto de** is the same, a hair
-          closer: **estoy a punto de terminar**."
-    words:
-      - lemma: "andar"
+          - form: "dijera"
+            en: "(that) I said, (that) he said"
+            f: "sg.impf.subj.irregular"
+          - form: "dijeras"
+            en: "(that) you said"
+            f: "2sg.impf.subj.vos.irregular"
+      - lemma: "ayudar"
         pos: "verb"
         forms:
-          - form: "ando"
-            en: "I'm going around (doing)"
-            f: "1sg.pres.ind"
-          - form: "andás"
-            en: "you're going around (doing)"
-            f: "2sg.pres.ind.vos"
-      - lemma: "pensar"
+          - form: "ayudara"
+            en: "(that) I helped, (that) he helped"
+            f: "sg.impf.subj"
+      - lemma: "ser"
         pos: "verb"
         forms:
-          - form: "pensando"
-            en: "thinking"
-            f: "ger.irregular"
-      - lemma: "acostumbrarse"
+          - form: "fueras"
+            en: "(that) you were"
+            f: "2sg.impf.subj.vos.irregular"
+      - lemma: "venir"
         pos: "verb"
         forms:
-          - form: "acostumbrando"
-            en: "getting used to"
-            f: "ger"
-      - lemma: "llenar"
-        pos: "verb"
-        forms:
-          - form: "llenando"
-            en: "filling up"
-            f: "ger"
-      - lemma: "terminar"
-        pos: "verb"
-        forms:
-          - form: "terminando"
-            en: "finishing"
-            f: "ger"
-      - lemma: "empezar"
-        pos: "verb"
-        forms:
-          - form: "empezando"
-            en: "starting"
-            f: "ger"
-      - lemma: "conocer"
-        pos: "verb"
-        forms:
-          - form: "conociendo"
-            en: "getting to know"
-            f: "ger"
-      - lemma: "estar por"
-        pos: "phrase"
-        forms:
-          - form: "estás por"
-            en: "you're about to"
-            f: "2sg.pres.ind.vos"
-          - form: "estamos por"
-            en: "we're about to"
-            f: "1pl.pres.ind"
-      - lemma: "a punto de"
-        pos: "phrase"
-        en: "on the verge of, just on the point of"
-      - lemma: "arrancar"
-        pos: "verb"
-        en: "to get going, to kick off"
-        forms:
-          - form: "arrancar"
-            f: "inf"
-          - form: "arranca"
-            en: "starts, gets going"
-            f: "3sg.pres.ind"
-      - lemma: "ritmo"
+          - form: "vinieran"
+            en: "(that) they came"
+            f: "3pl.impf.subj.irregular"
+      - lemma: "carrera"
         pos: "noun"
-        en: "pace, rhythm"
-
-  - ordinal: 21
-    slug: "me-cae-bien"
-    title: "Say who you get along with"
-    summary: "Me cae re bien"
-    grammar:
-      - "caer-bien"
-      - "llevarse"
-    register_max: "informal"
-    sample:
-      es: "Tu amiga me cae re bien."
-      en: "I really like your friend."
-    tips:
-      - title: "Me cae bien"
-        body: "**Me cae bien** is *I like him* — as a person, not romantically. It works like *gustar*:
-          **me cae bien Juan**, **me caen bien tus amigos**. The first impression: **me cayó mal**."
-      - title: "Nos llevamos bien"
-        body: "**Llevarse bien** is *to get along*: **me llevo bien con mi hermana**, **nos llevamos
-          re mal**."
-    words:
-      - lemma: "caer"
-        pos: "verb"
-        en: "to come across (to someone)"
-        forms:
-          - form: "me cae"
-            en: "(he) comes across to me"
-            f: "3sg.pres.ind.clitic"
-          - form: "te cae"
-            en: "(he) comes across to you"
-            f: "3sg.pres.ind.clitic"
-          - form: "me caen"
-            en: "(they) come across to me"
-            f: "3pl.pres.ind.clitic"
-          - form: "me cayó"
-            en: "(he) came across to me"
-            f: "3sg.pret.ind.clitic.irregular"
-          - form: "cae"
-            f: "3sg.pres.ind"
-            bound: true
-          - form: "caen"
-            f: "3pl.pres.ind"
-            bound: true
-      - lemma: "llevarse"
-        pos: "verb"
-        en: "to get along"
-        forms:
-          - form: "me llevo"
-            en: "I get along"
-            f: "1sg.pres.ind.clitic"
-          - form: "nos llevamos"
-            en: "we get along"
-            f: "1pl.pres.ind.clitic"
-          - form: "llevamos"
-            f: "1pl.pres.ind"
-            bound: true
-
-  - ordinal: 22
-    slug: "no-lo-aguanto"
-    title: "Say who you can't stand"
-    summary: "A mi cuñado no lo aguanto"
-    grammar:
-      - "caer-bien"
-      - "llevarse"
-      - "caer-bien.personas"
-    register_max: "informal"
-    sample:
-      es: "Tu cuñado le cae re bien a mi vieja."
-      en: "My mum really likes your brother-in-law."
-    tips:
-      - title: "Le cae, nos cae"
-        body: "The whole *gustar* pattern: **le cae bien a mi vieja**, **nos cae re bien**, **¿te caen
-          bien mis amigos?** The person being liked is the subject: *mis amigos **te caen** bien*."
-      - title: "No lo aguanto"
-        body: "The other end: **no lo aguanto** — *I can't stand him*; **es insoportable**; **es re
-          falso**. And the good end: **nos hicimos amigos** — *we became friends* — because **hay
-          química**."
-    words:
-      - lemma: "caer"
-        pos: "verb"
-        forms:
-          - form: "le cae"
-            en: "(he) comes across to him/her"
-            f: "3sg.pres.ind.clitic"
-          - form: "nos cae"
-            en: "(he) comes across to us"
-            f: "3sg.pres.ind.clitic"
-          - form: "les cae"
-            en: "(he) comes across to them"
-            f: "3sg.pres.ind.clitic"
-          - form: "te caen"
-            en: "(they) come across to you"
-            f: "3pl.pres.ind.clitic"
-          - form: "le cayó"
-            en: "(he) came across to him/her"
-            f: "3sg.pret.ind.clitic.irregular"
-      - lemma: "llevarse"
-        pos: "verb"
-        forms:
-          - form: "te llevás"
-            en: "you get along"
-            f: "2sg.pres.ind.vos.clitic"
-          - form: "se llevan"
-            en: "they get along"
-            f: "3pl.pres.ind.clitic"
-      - lemma: "aguantar"
-        pos: "verb"
-        en: "to stand, to put up with"
-        forms:
-          - form: "aguanto"
-            en: "I can stand, I can bear"
-            f: "1sg.pres.ind"
-          - form: "aguantar"
-            f: "inf"
-      - lemma: "insoportable"
+        en: "degree (course), career"
+      - lemma: "estricto"
         pos: "adj"
-        en: "unbearable"
+        en: "strict"
+        forms:
+          - form: "estricto"
+            f: "m.sg"
+          - form: "estricta"
+            f: "f.sg"
+      - lemma: "permiso"
+        pos: "noun"
+        en: "permission"
+
+  - ordinal: 4
+    slug: "aunque-llueva"
+    title: "Say even if and even though"
+    summary: "Aunque llueva, vamos igual"
+    grammar:
+      - "aunque.indicativo-subjuntivo"
+      - "a-pesar-de"
+      - "servir"
+    register_max: "informal"
+    sample:
+      es: "Aunque llueva, vamos igual."
+      en: "Even if it rains, we're going anyway."
+    tips:
+      - title: "Aunque: a fact, or a maybe"
+        body: "**Aunque llueve, vamos** — it's raining, and we're going. **Aunque llueva, vamos** —
+          whether it rains or not. A fact takes the normal verb; a maybe takes the subjunctive."
+      - title: "Igual, a pesar de"
+        body: "Porteños close the thought with **igual** — *anyway*: *aunque esté cansada, voy
+          igual*; *gracias igual* — *thanks anyway*. **De todos modos** says the same thing but sounds
+          written. **A pesar de** takes a noun or an infinitive: *a pesar del frío*."
+    words:
+      - lemma: "aunque"
+        pos: "conj"
+        en: "even though, even if"
+      - lemma: "a pesar de"
+        pos: "phrase"
+        en: "despite, in spite of"
+      - lemma: "servir"
+        pos: "verb"
+        en: "to be useful, to work"
+        forms:
+          - form: "sirve"
+            en: "is useful, works"
+            f: "3sg.pres.ind.irregular"
+          - form: "sirven"
+            en: "are useful, work"
+            f: "3pl.pres.ind.irregular"
+      - lemma: "costar"
+        pos: "verb"
+        forms:
+          - form: "cueste"
+            en: "(that) it costs, (that) it's hard"
+            f: "3sg.pres.subj.irregular"
+      - lemma: "de todos modos"
+        pos: "phrase"
+        en: "anyway, in any case"
+      - lemma: "esfuerzo"
+        pos: "noun"
+        en: "effort"
+      - lemma: "cansarse"
+        pos: "verb"
+        en: "to get tired"
+        forms:
+          - form: "me canso"
+            en: "I get tired"
+            f: "1sg.pres.ind.clitic"
+          - form: "canso"
+            f: "1sg.pres.ind"
+            bound: true
+
+  - ordinal: 5
+    slug: "aunque-no-tenga-ganas"
+    title: "Keep going even when it's hard"
+    summary: "Aunque no tenga ganas, voy igual"
+    grammar:
+      - "aunque.indicativo-subjuntivo"
+      - "a-pesar-de"
+      - "servir"
+      - "por-mas-que"
+    register_max: "informal"
+    sample:
+      es: "Aunque no tenga ganas, voy igual al gimnasio."
+      en: "Even if I don't feel like it, I still go to the gym."
+    tips:
+      - title: "Por más que"
+        body: "**Por más que** — *no matter how much* — is *aunque* turned up: **por más que me cueste,
+          sigo** — *however hard it is, I keep going*. A maybe takes the subjunctive, a fact doesn't:
+          *por más que **entreno**, engordo* — I do train; it just doesn't show."
+      - title: "Aunque sea"
+        body: "**Aunque sea** — *at least, even if it's only* — is the deal you make with yourself:
+          *hoy no tengo ganas, pero **aunque sea** un rato voy*. And the other half of it:
+          **aunque no me dé el tiempo** — *even if I don't have the time*."
+      - title: "Sin embargo, así y todo"
+        body: "Both start the second half: **sin embargo** — *however* — and the more spoken **así y
+          todo** — *even so*: *hice dieta; **así y todo**, engordé*."
+    words:
+      - lemma: "aunque sea"
+        pos: "phrase"
+        en: "even if only, even just"
+      - lemma: "por más que"
+        pos: "phrase"
+        en: "no matter how much, however much"
+      - lemma: "sin embargo"
+        pos: "phrase"
+        en: "however"
+      - lemma: "así y todo"
+        pos: "phrase"
+        en: "even so"
+      - lemma: "dar"
+        pos: "verb"
+        forms:
+          - form: "dé"
+            en: "(that) it gives, (that) I give"
+            f: "sg.pres.subj.irregular"
+      - lemma: "costar"
+        pos: "verb"
+        forms:
+          - form: "me cuesta"
+            en: "it's hard for me"
+            f: "3sg.pres.ind.clitic"
+      - lemma: "entrenar"
+        pos: "verb"
+        en: "to train, to work out"
+        forms:
+          - form: "entrenar"
+            f: "inf"
+          - form: "entreno"
+            en: "I train, I work out"
+            f: "1sg.pres.ind"
+          - form: "entrene"
+            en: "(that) I train, (that) he trains"
+            f: "sg.pres.subj"
+      - lemma: "ejercicio"
+        pos: "noun"
+        en: "exercise"
+      - lemma: "dieta"
+        pos: "noun"
+        en: "diet"
+      - lemma: "engordar"
+        pos: "verb"
+        en: "to put on weight"
+        forms:
+          - form: "engordar"
+            f: "inf"
+          - form: "engordé"
+            en: "I put on weight"
+            f: "1sg.pret.ind"
+
+  - ordinal: 6
+    slug: "llevo-dos-anos"
+    title: "Say how long you've been at it"
+    summary: "Llevo dos años acá"
+    grammar:
+      - "llevar.tiempo.gerundio"
+      - "hace-que"
+      - "seguir.gerundio"
+      - "dejar-de"
+    register_max: "informal"
+    sample:
+      es: "Llevo dos años viviendo en Buenos Aires."
+      en: "I've been living in Buenos Aires for two years."
+    tips:
+      - title: "Hace dos años que…"
+        body: "**Hace dos años que vivo acá** — *I've been living here for two years*. Where English
+          says *have been …ing*, Spanish stays in the present. To ask: **¿hace cuánto que vivís acá?**
+          or just **¿hace cuánto estás acá?**; **¿hace mucho que esperás?** — *have you been waiting
+          long?* You will also hear **llevo dos años viviendo acá** — same meaning, but day to day
+          porteños say **hace… que**."
+      - title: "Sigo, dejé de, volví a"
+        body: "**Sigo laburando ahí** — *I still work there*. **Dejé de fumar** — *I quit smoking*.
+          **Volvió a llamar** — *he called again*."
+    words:
+      - lemma: "hace cuánto"
+        pos: "phrase"
+        en: "how long (has it been)"
+      - lemma: "hace mucho"
+        pos: "phrase"
+        en: "for a long time, a long time ago"
+      - lemma: "llevar"
+        pos: "verb"
+        forms:
+          - form: "llevás"
+            en: "you've been (for a time)"
+            f: "2sg.pres.ind.vos"
+          - form: "lleva"
+            en: "he's been, she's been (for a time)"
+            f: "3sg.pres.ind"
+      - lemma: "vivir"
+        pos: "verb"
+        forms:
+          - form: "viviendo"
+            en: "living"
+            f: "ger"
+      - lemma: "seguir"
+        pos: "verb"
+        forms:
+          - form: "sigo"
+            en: "I keep on, I still"
+            f: "1sg.pres.ind.irregular"
+          - form: "seguís"
+            en: "you keep on, you still"
+            f: "2sg.pres.ind.vos"
+          - form: "sigue"
+            en: "he keeps on, she still"
+            f: "3sg.pres.ind.irregular"
+      - lemma: "dejar"
+        pos: "verb"
+        forms:
+          - form: "dejé"
+            en: "I stopped, I quit"
+            f: "1sg.pret.ind"
+          - form: "dejaste"
+            en: "you stopped, you quit"
+            f: "2sg.pret.ind.vos"
+
+  - ordinal: 7
+    slug: "llevo-un-ano-aprendiendo"
+    title: "Say how long you've been learning"
+    summary: "Llevo un año aprendiendo castellano"
+    grammar:
+      - "llevar.tiempo.gerundio"
+      - "hace-que"
+      - "seguir.gerundio"
+      - "dejar-de"
+      - "volver-a"
+    register_max: "informal"
+    sample:
+      es: "Llevo un año aprendiendo castellano y sigo practicando."
+      en: "I've been learning Spanish for a year and I'm still practising."
+    tips:
+      - title: "¿Hace cuánto?"
+        body: "Every porteño asks it: **¿hace cuánto que estudiás?** — *how long have you been
+          studying?* The everyday answer: **hace un año que estudio**; if it's recent, **hace poco que
+          estudio**. You will also hear **llevo un año estudiando** — same thing, less common here. Or
+          count from a moment: **desde que llegué** — *since I arrived*."
+      - title: "Sigo, seguimos, siguen"
+        body: "Everyone can keep at it: **sigo practicando**, **seguimos buscando** laburo, *mis amigos*
+          **siguen tratando de** entenderme. And stop: **dejaron de** venir — *they stopped
+          coming*."
+      - title: "Volví a"
+        body: "**Volver a** + an infinitive is *to do it again*: **volví a estudiar** — *I went back to
+          studying*; **vuelvo a empezar** — *I'm starting over*."
+    words:
+      - lemma: "hace poco"
+        pos: "phrase"
+        en: "for a short time, not long ago"
+      - lemma: "desde que"
+        pos: "phrase"
+        en: "since (the time when)"
+      - lemma: "llevar"
+        pos: "verb"
+        forms:
+          - form: "llevan"
+            en: "they've been (for a time)"
+            f: "3pl.pres.ind"
+      - lemma: "aprender"
+        pos: "verb"
+        forms:
+          - form: "aprendiendo"
+            en: "learning"
+            f: "ger"
+      - lemma: "buscar"
+        pos: "verb"
+        forms:
+          - form: "buscando"
+            en: "looking for"
+            f: "ger"
+      - lemma: "practicar"
+        pos: "verb"
+        forms:
+          - form: "practicando"
+            en: "practising"
+            f: "ger"
+      - lemma: "mejorar"
+        pos: "verb"
+        en: "to improve, to get better"
+        forms:
+          - form: "mejorar"
+            f: "inf"
+          - form: "mejorando"
+            en: "improving, getting better"
+            f: "ger"
+      - lemma: "tratar de"
+        pos: "phrase"
+        en: "to try to"
+        forms:
+          - form: "trato de"
+            en: "I try to"
+            f: "1sg.pres.ind"
+          - form: "tratando de"
+            en: "trying to"
+            f: "ger"
+      - lemma: "seguir"
+        pos: "verb"
+        forms:
+          - form: "seguimos"
+            en: "we keep on, we still"
+            f: "1pl.pres.ind"
+          - form: "siguen"
+            en: "they keep on, they still"
+            f: "3pl.pres.ind.irregular"
+      - lemma: "dejar"
+        pos: "verb"
+        forms:
+          - form: "dejaron"
+            en: "they stopped, they quit"
+            f: "3pl.pret.ind"
+      - lemma: "volver a"
+        pos: "phrase"
+        en: "to (do) again"
+        forms:
+          - form: "volví a"
+            en: "I (did) again"
+            f: "1sg.pret.ind"
+          - form: "vuelvo a"
+            en: "I (do) again"
+            f: "1sg.pres.ind"
+
+  - ordinal: 8
+    slug: "practica-aunque-sea"
+    title: "Practice: what they wanted, no matter what, how long"
+    summary: "Aunque sea un rato, sigo practicando"
+    grammar:
+      - "repaso.subjuntivo.imperfecto"
+      - "repaso.aunque"
+      - "repaso.llevar"
+    register_max: "informal"
+    sample:
+      es: "Aunque sea un rato, sigo practicando."
+      en: "Even if it's just for a bit, I keep practising."
+    tips:
+      - title: "Querían que, por más que"
+        body: "**Mis viejos querían que estudiara** — the wish is in the past, so the second verb is too.
+          **Por más que me cueste** — however hard it is: a maybe takes the subjunctive."
+      - title: "¿Hace cuánto?"
+        body: "**Hace un año que estudio** says the same as **llevo un año estudiando**. **Seguimos
+          buscando**, **volví a empezar**."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "querían"
+      - "estudiara"
+      - "saliera"
+      - "dijera"
+      - "permiso/noun"
+      - "aunque sea"
+      - "por más que"
+      - "sin embargo"
+      - "me cuesta"
+      - "hace cuánto"
+      - "practicando"
+      - "seguimos"
+      - "volví a"
+      - "cueste"
+      - "llevás"
+      - "a pesar de"
+
+  - ordinal: 9
+    slug: "como-si-nada"
+    title: "Say as if"
+    summary: "Como si nada"
+    grammar:
+      - "como-si.subjuntivo-imperfecto"
+      - "hacerse-el"
+      - "ni-que"
+    register_max: "informal"
+    sample:
+      es: "Me habló como si nada."
+      en: "He talked to me as if nothing had happened."
+    tips:
+      - title: "Como si"
+        body: "**Como si** — *as if* — always takes the past subjunctive: **habla como si supiera
+          todo**, **como si fuera fácil**. **Como si nada** — *as if nothing had happened*. **¡Ni que
+          fuera tan difícil!** — *it's not like it's that hard!*"
+      - title: "Se hace el vivo"
+        body: "**Hacerse el** + a describing word is *to act, to play*: **se hace el vivo** — *he acts
+          all clever*; **se hizo el distraído** — *he pretended not to notice*."
+    words:
+      - lemma: "como si"
+        pos: "phrase"
+        en: "as if"
+      - lemma: "como si nada"
+        pos: "phrase"
+        en: "as if nothing had happened"
+      - lemma: "ni que"
+        pos: "phrase"
+        en: "it's not like, as if (it were)"
+      - lemma: "saber"
+        pos: "verb"
+        forms:
+          - form: "supiera"
+            en: "(that) I knew, (that) he knew"
+            f: "sg.impf.subj.irregular"
+          - form: "supieras"
+            en: "(that) you knew"
+            f: "2sg.impf.subj.vos.irregular"
       - lemma: "hacerse"
         pos: "verb"
         forms:
-          - form: "nos hicimos"
-            en: "we became (friends)"
-            f: "1pl.pret.ind.clitic.irregular"
-      - lemma: "química"
-        pos: "noun"
-        en: "chemistry (between people)"
-      - lemma: "falso"
+          - form: "se hace"
+            en: "he acts, she plays (the)"
+            f: "3sg.pres.ind.clitic"
+          - form: "se hizo"
+            en: "he acted, she played (the)"
+            f: "3sg.pret.ind.clitic.irregular"
+      - lemma: "vivo"
         pos: "adj"
-        en: "two-faced, insincere"
+        en: "clever, sly"
+        register: "informal"
         forms:
-          - form: "falso"
+          - form: "vivo"
             f: "m.sg"
-          - form: "falsa"
+          - form: "viva"
             f: "f.sg"
-      - lemma: "hipócrita"
+      - lemma: "dormido"
         pos: "adj"
-        en: "hypocritical, a hypocrite"
-      - lemma: "respeto"
-        pos: "noun"
-        en: "respect"
-      - lemma: "amistad"
-        pos: "noun"
-        en: "friendship"
-
-  - ordinal: 23
-    slug: "practica-me-cae-bien"
-    title: "Practice: prices, little by little, getting along"
-    summary: "De a poco me voy acostumbrando"
-    grammar:
-      - "repaso.inflacion"
-      - "repaso.ir-gerundio"
-      - "repaso.caer-bien"
-    register_max: "informal"
-    sample:
-      es: "Mi suegra me cae bien."
-      en: "I like my mother-in-law."
-    tips:
-      - title: "Aumentó, subió"
-        body: "**Todo aumenta**, **el café subió**, **¿cuánto te cobraron?** — the small talk of prices."
-      - title: "Voy entendiendo, me cae bien"
-        body: "**Voy entendiendo** — bit by bit. **Me cae bien** — I like him, as a person."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "aumenta"
-      - "aumentó"
-      - "precio"
-      - "subió"
-      - "cobraron"
-      - "entendiendo"
-      - "de a poco"
-      - "estoy por"
-      - "me acostumbré"
-      - "me cae"
-      - "me cayó"
-      - "me llevo"
-      - "nos llevamos"
-      - "suegra"
-      - "me da igual"
-      - "deberías"
-
-  - ordinal: 24
-    slug: "practica-no-lo-aguanto"
-    title: "Practice: bills, the middle of things, who you can't stand"
-    summary: "Me voy acostumbrando al ritmo"
-    grammar:
-      - "repaso.inflacion"
-      - "repaso.ir-gerundio"
-      - "repaso.caer-bien"
-    register_max: "informal"
-    sample:
-      es: "Me voy acostumbrando al ritmo."
-      en: "I'm getting used to the pace."
-    tips:
-      - title: "Aumentaron, no me alcanza"
-        body: "**Aumentaron la luz y el gas**, **el boleto subió**, **no llego a fin de mes** — the small
-          talk of bills."
-      - title: "Ando buscando, le cae bien"
-        body: "**Ando buscando laburo**, **estamos por arrancar**. **Le cae bien a todos**; **a ese no lo
-          aguanto**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "aumentaron"
-      - "tarifas"
-      - "boleto"
-      - "gastos"
-      - "llegar a fin de mes"
-      - "ando"
-      - "andás"
-      - "estamos por"
-      - "a punto de"
-      - "le cae"
-      - "nos hicimos"
-      - "aguanto"
-      - "insoportable"
-      - "cobraron"
-      - "me cae"
-
-  - ordinal: 25
-    slug: "que-novedad"
-    title: "Answer with a raised eyebrow"
-    summary: "¿Otra vez tarde? ¡Qué novedad!"
-    grammar:
-      - "ironia"
-      - "repaso.b2"
-    register_max: "informal"
-    sample:
-      es: "¿Otra vez llega tarde? ¡Qué novedad!"
-      en: "Late again? What a surprise!"
-    tips:
-      - title: "Sí, claro"
-        body: "Said slowly, **sí, claro** means *yeah, right*. **¡Qué novedad!** — *what a surprise* —
-          is for the bondi that's late again; **¡lo que faltaba!** — *that's all we needed* — for the
-          rain that starts on top of it. The tone does the work."
-      - title: "Justo hoy"
-        body: "**Justo** makes a complaint: **justo hoy** — *today of all days*. And **ya fue** — *forget
-          it, it's done* — closes the subject: *¿no vino? Ya fue.*"
-      - title: "Ni a palos"
-        body: "**Ni a palos** — *not in a million years*. The opposite shrug: **dale que va** — *good
-          enough, let's go*. When something's awful: **está de terror**."
-    words:
-      - lemma: "sí, claro"
-        pos: "phrase"
-        en: "yeah, right (ironic)"
-      - lemma: "qué novedad"
-        pos: "phrase"
-        en: "what a surprise (ironic)"
-      - lemma: "lo que faltaba"
-        pos: "phrase"
-        en: "that's all we needed"
-      - lemma: "ya fue"
-        pos: "phrase"
-        en: "forget it, it's over"
-        register: "informal"
-      - lemma: "justo"
-        pos: "adv"
-        en: "just, right (then), of all (days)"
-      - lemma: "ni a palos"
-        pos: "phrase"
-        en: "not in a million years"
-        register: "informal"
-      - lemma: "dale que va"
-        pos: "phrase"
-        en: "good enough, let's go with it"
-        register: "informal"
-      - lemma: "de terror"
-        pos: "phrase"
-        en: "awful, terrible"
-        register: "informal"
-      - lemma: "impecable"
-        pos: "adj"
-        en: "spotless, flawless"
-      - lemma: "tono"
-        pos: "noun"
-        en: "tone (of voice)"
-
-  - ordinal: 26
-    slug: "ni-ahi"
-    title: "Read between the lines"
-    summary: "¿Estás loco? Ni ahí"
-    grammar:
-      - "ironia"
-      - "repaso.b2"
-    register_max: "informal"
-    sample:
-      es: "¿Ir en auto al centro? Ni ahí."
-      en: "Drive downtown? No way."
-    tips:
-      - title: "Ni ahí"
-        body: "**Ni ahí** — *no way, not even close* — is how a porteño turns something down. **Tal cual**
-          — *exactly* — is how they agree."
-      - title: "Es cualquiera"
-        body: "**Es cualquiera** — *that's nonsense*. **Flasheaste** — *you're imagining things*. And a
-          **¡qué lindo!** can be sincere, or ironic when the rain starts."
-    words:
-      - lemma: "ni ahí"
-        pos: "phrase"
-        en: "no way, not at all"
-        register: "informal"
-      - lemma: "tal cual"
-        pos: "phrase"
-        en: "exactly"
-      - lemma: "cualquiera"
-        pos: "pron"
-        en: "nonsense (es cualquiera); anyone"
-        register: "informal"
-      - lemma: "flashear"
-        pos: "verb"
-        en: "to imagine things, to get carried away"
-        register: "informal"
+        en: "asleep"
         forms:
-          - form: "flasheaste"
-            en: "you imagined it"
-            f: "2sg.pret.ind.vos"
-      - lemma: "loco"
-        pos: "adj"
-        en: "crazy"
-        forms:
-          - form: "loco"
+          - form: "dormido"
             f: "m.sg"
-          - form: "loca"
+          - form: "dormida"
+            f: "f.sg"
+
+  - ordinal: 10
+    slug: "no-te-hagas-el-gil"
+    title: "Call out someone who's pretending"
+    summary: "No te hagas el gil"
+    grammar:
+      - "como-si.subjuntivo-imperfecto"
+      - "hacerse-el"
+      - "ni-que"
+    register_max: "lunfardo"
+    sample:
+      es: "Se hace el distraído, como si no me viera."
+      en: "He's pretending not to notice, as if he couldn't see me."
+    tips:
+      - title: "Te hacés el, me hice el"
+        body: "**Hacerse el** works for everyone: **te hacés el sordo** — *you act like you can't
+          hear*; **me hice el distraído** — *I pretended not to notice*. The one who acts like he's
+          seen it all **se hace el canchero**. To stop it: **no te hagas el gil** — *don't play dumb*.
+          The one porteños say most, among friends only: **no te hagas el boludo** (to a woman: **la
+          boluda**)."
+      - title: "Como si no…"
+        body: "**Como si** with a *no*: **como si no pasara nada**, **como si no me viera**, **como si
+          no le importara**. And the comeback: **¡ni que fueras mi viejo!** — *it's not like you're my
+          dad!*"
+      - title: "¡Qué caradura!"
+        body: "Someone who does it with a straight face is a **caradura** — *shameless, cheeky*: **¡qué
+          caradura!** Between friends it's almost a compliment."
+    words:
+      - lemma: "hacerse"
+        pos: "verb"
+        forms:
+          - form: "te hacés"
+            en: "you act, you play (the)"
+            f: "2sg.pres.ind.vos.clitic"
+          - form: "me hice"
+            en: "I acted, I played (the)"
+            f: "1sg.pret.ind.clitic.irregular"
+      - lemma: "gil"
+        pos: "noun"
+        en: "fool, sucker"
+        register: "informal"
+      - lemma: "sordo"
+        pos: "adj"
+        en: "deaf"
+        forms:
+          - form: "sordo"
+            f: "m.sg"
+          - form: "sorda"
+            f: "f.sg"
+      - lemma: "canchero"
+        pos: "adj"
+        en: "smooth, acting all cool"
+        register: "informal"
+        forms:
+          - form: "canchero"
+            f: "m.sg"
+          - form: "canchera"
+            f: "f.sg"
+      - lemma: "caradura"
+        pos: "noun"
+        en: "shameless person, cheeky so-and-so"
+        register: "informal"
+      - lemma: "pasar"
+        pos: "verb"
+        forms:
+          - form: "pasara"
+            en: "(that) it happened"
+            f: "sg.impf.subj"
+      - lemma: "ver"
+        pos: "verb"
+        forms:
+          - form: "viera"
+            en: "(that) I saw, (that) he saw"
+            f: "sg.impf.subj"
+      - lemma: "conocer"
+        pos: "verb"
+        forms:
+          - form: "conociera"
+            en: "(that) I knew (someone), (that) he knew (someone)"
+            f: "sg.impf.subj"
+      - lemma: "importar"
+        pos: "verb"
+        en: "to matter"
+        forms:
+          - form: "me importa"
+            en: "I care, it matters to me"
+            f: "3sg.pres.ind.clitic"
+          - form: "importa"
+            en: "matters"
+            f: "3sg.pres.ind"
+          - form: "importara"
+            en: "(that) it mattered"
+            f: "sg.impf.subj"
+      - lemma: "boludo"
+        pos: "noun"
+        forms:
+          - form: "boluda"
+            en: "dude (to a woman), dummy"
+            f: "f.sg"
+
+  - ordinal: 11
+    slug: "el-que-quieras"
+    title: "Say which one you mean"
+    summary: "El que quieras"
+    grammar:
+      - "relativo.el-que"
+      - "relativo.donde"
+    register_max: "informal"
+    sample:
+      es: "Elegí el que quieras."
+      en: "Pick whichever one you want."
+    tips:
+      - title: "El que, la que"
+        body: "**El que** — *the one that* — matches what it stands for: **el que quieras**, **la que
+          está en la esquina**, **los que vinieron**, **las que prefieras**."
+      - title: "Donde"
+        body: "**Donde** with no accent joins a place to the rest of the sentence: **el bar donde nos
+          conocimos** — *the bar where we met*. The question keeps its accent: *¿dónde?*"
+      - title: "Elegí: two meanings"
+        body: "**Elegí** is the order *choose!* and also *I chose*: **elegí el que quieras** — *pick
+          whichever you want*; *ayer **elegí** la roja* — *yesterday I chose the red one*. The rest of
+          the sentence tells you which."
+    words:
+      - lemma: "el que"
+        pos: "pron"
+        en: "the one that, the one who"
+        forms:
+          - form: "el que"
+            f: "m.sg"
+          - form: "la que"
+            f: "f.sg"
+          - form: "los que"
+            en: "the ones that, the ones who"
+            f: "m.pl"
+          - form: "las que"
+            en: "the ones that, the ones who"
+            f: "f.pl"
+      - lemma: "elegir"
+        pos: "verb"
+        en: "to choose, to pick"
+        forms:
+          - form: "elegí"
+            en: "choose, pick; I chose"
+            f: "2sg.imp.vos"
+          - form: "elijo"
+            en: "I choose"
+            f: "1sg.pres.ind.irregular"
+          - form: "elegiste"
+            en: "you chose"
+            f: "2sg.pret.ind.vos"
+      - lemma: "conocerse"
+        pos: "verb"
+        forms:
+          - form: "nos conocimos"
+            en: "we met"
+            f: "1pl.pret.ind.clitic"
+          - form: "conocimos"
+            f: "1pl.pret.ind"
+            bound: true
+
+  - ordinal: 12
+    slug: "el-de-la-vidriera"
+    title: "Pick one in a shop"
+    summary: "¿Cuál? El de la vidriera"
+    grammar:
+      - "relativo.el-que"
+      - "relativo.donde"
+      - "pronombre.el-de"
+    register_max: "informal"
+    sample:
+      es: "¿Cuál te gusta? El de la vidriera."
+      en: "Which one do you like? The one in the window."
+    tips:
+      - title: "El de, la de"
+        body: "Drop the noun, keep the article: **el de la vidriera** — *the one in the window*;
+          **la de la izquierda** — *the one on the left*; **las de** allá. With a name it is
+          *someone's*: **el de Lucía** — *Lucía's*. With people it is *the guy in, the people from*:
+          **el de rojo** — *the guy in red*; **los de arriba** — *the people upstairs*. It matches
+          what it stands for, like *el que*: **la que te probaste**."
+      - title: "Elijan, como quieras"
+        body: "To a friend: **elegí el que quieras**. To two friends: **elijan los que quieran**. Not
+          chosen yet, so the subjunctive: **el que elijas**, **la que prefieras**. And when you really
+          don't mind: **como quieras** — *whatever you like*."
+    words:
+      - lemma: "el de"
+        pos: "pron"
+        en: "the one (in, from, with); someone's"
+        forms:
+          - form: "el de"
+            f: "m.sg"
+          - form: "la de"
+            f: "f.sg"
+          - form: "los de"
+            en: "the ones (in, from, with)"
+            f: "m.pl"
+          - form: "las de"
+            en: "the ones (in, from, with)"
+            f: "f.pl"
+      - lemma: "vidriera"
+        pos: "noun"
+        en: "shop window"
+      - lemma: "probarse"
+        pos: "verb"
+        en: "to try on"
+        forms:
+          - form: "me pruebo"
+            en: "I try on"
+            f: "1sg.pres.ind.clitic.irregular"
+          - form: "te probaste"
+            en: "you tried on"
+            f: "2sg.pret.ind.vos.clitic"
+          - form: "probate"
+            en: "try on"
+            f: "2sg.imp.vos.clitic"
+      - lemma: "color"
+        pos: "noun"
+        en: "colour"
+        forms:
+          - form: "color"
+            f: "m.sg"
+          - form: "colores"
+            en: "colors"
+            f: "m.pl"
+      - lemma: "elegir"
+        pos: "verb"
+        forms:
+          - form: "elijan"
+            en: "choose (you all)"
+            f: "3pl.imp.irregular"
+          - form: "elijas"
+            en: "(that) you choose"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "querer"
+        pos: "verb"
+        forms:
+          - form: "quieran"
+            en: "(that) they want, (that) you all want"
+            f: "3pl.pres.subj.irregular"
+      - lemma: "preferir"
+        pos: "verb"
+        forms:
+          - form: "prefieras"
+            en: "(that) you prefer"
+            f: "2sg.pres.subj.vos.irregular"
+      - lemma: "como quieras"
+        pos: "phrase"
+        en: "whatever you like, as you like"
+
+  - ordinal: 13
+    slug: "practica-a-la-mesa"
+    title: "Practice: the table, pretending, which one"
+    summary: "Agarren el que quieran"
+    grammar:
+      - "repaso.imperativo.ustedes"
+      - "repaso.como-si"
+      - "repaso.el-que"
+    register_max: "informal"
+    sample:
+      es: "¡A la mesa! Agarren el que quieran."
+      en: "Food's ready! Grab whichever one you want."
+    tips:
+      - title: "Coman, no se olviden"
+        body: "For a group: **coman**, **prueben**, **sírvanse**, **no se olviden**. The *no* doesn't
+          change the verb, only where the pronoun goes."
+      - title: "Como si no, el de"
+        body: "**Como si no me viera** — *as if he didn't see me*. **El de la vidriera** — *the one in
+          the window*; **el que quieras** — *whichever you want*."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "sírvanse"
+      - "coman"
+      - "prueben"
+      - "agarren"
+      - "se olviden"
+      - "te hacés"
+      - "pasara"
+      - "viera"
+      - "caradura"
+      - "el de"
+      - "probador"
+      - "quieran"
+      - "como quieras"
+      - "siéntense"
+      - "supiera"
+      - "estudiara"
+
+  - ordinal: 14
+    slug: "si-hubiera-sabido"
+    title: "Say what would have happened"
+    summary: "Si hubiera sabido…"
+    grammar:
+      - "subjuntivo.pluscuamperfecto"
+      - "si-hipotetico.pasado"
+    register_max: "informal"
+    sample:
+      es: "Si hubiera sabido, te hubiera avisado."
+      en: "If I'd known, I would have told you."
+    tips:
+      - title: "Si hubiera sabido"
+        body: "For what didn't happen: **si hubiera sabido, te hubiera avisado** — *if I'd known,
+          I'd have told you*. Porteños use **hubiera** + a participle in both halves. In writing and
+          on TV you'll also see **habría** in the second half: *te habría avisado* — same meaning."
+      - title: "The same participles"
+        body: "**Hubiera** takes the participles *había* does: **sabido, venido, ido, llamado, dicho,
+          hecho**. **Si hubieras venido** — *if you had come*."
+    words:
+      - lemma: "haber"
+        pos: "verb"
+        forms:
+          - form: "hubiera"
+            en: "(if) I had, (if) he had; I would have"
+            f: "sg.impf.subj.irregular"
+          - form: "hubieras"
+            en: "(if) you had; you would have"
+            f: "2sg.impf.subj.vos.irregular"
+      - lemma: "saber"
+        pos: "verb"
+        forms:
+          - form: "sabido"
+            en: "known"
+            f: "part"
+      - lemma: "venir"
+        pos: "verb"
+        forms:
+          - form: "venido"
+            en: "come"
+            f: "part"
+      - lemma: "ir"
+        pos: "verb"
+        forms:
+          - form: "ido"
+            en: "gone"
+            f: "part"
+      - lemma: "pensar"
+        pos: "verb"
+        forms:
+          - form: "pensado"
+            en: "thought"
+            f: "part"
+      - lemma: "estudiar"
+        pos: "verb"
+        forms:
+          - form: "estudiado"
+            en: "studied"
+            f: "part"
+
+  - ordinal: 15
+    slug: "si-hubieramos-salido"
+    title: "Tell the trip that went wrong"
+    summary: "Si hubiéramos salido antes…"
+    grammar:
+      - "subjuntivo.pluscuamperfecto"
+      - "si-hipotetico.pasado"
+    register_max: "informal"
+    sample:
+      es: "Si hubiéramos salido antes, no hubiéramos perdido el vuelo."
+      en: "If we'd left earlier, we wouldn't have missed the flight."
+    tips:
+      - title: "Hubiéramos, hubieran"
+        body: "For *we*: **si hubiéramos salido antes, no hubiéramos perdido el vuelo**. For *they*:
+          **si hubieran avisado, hubiéramos venido**. Still **hubiera** in both halves, the porteño
+          way. On its own, **hubiéramos** / **hubieran** + participle is a complaint — *we should
+          have, they should have*: **¡hubiéramos ido en tren!** — *we should have gone by train!*"
+      - title: "More participles"
+        body: "-ar verbs take **-ado**, the rest **-ido**: **tomado, reservado, quedado, perdido,
+          conseguido**. *Traer* keeps its accent: **traído**. *Si hubiera tomado un taxi…*, *si me
+          hubiera quedado en casa…*"
+      - title: "Qué mala suerte"
+        body: "When nobody's to blame: **¡qué mala suerte!** And at Ezeiza the board says what every
+          porteño expects: the flight is **demorado** — *delayed*."
+    words:
+      - lemma: "haber"
+        pos: "verb"
+        forms:
+          - form: "hubiéramos"
+            en: "(if) we had; we would have"
+            f: "1pl.impf.subj.irregular"
+          - form: "hubieran"
+            en: "(if) they had; they would have"
+            f: "3pl.impf.subj.irregular"
+      - lemma: "perder"
+        pos: "verb"
+        forms:
+          - form: "perdido"
+            en: "lost, missed (a flight, a bus)"
+            f: "part"
+      - lemma: "tomar"
+        pos: "verb"
+        forms:
+          - form: "tomado"
+            en: "taken"
+            f: "part"
+      - lemma: "reservar"
+        pos: "verb"
+        forms:
+          - form: "reservado"
+            en: "booked"
+            f: "part"
+      - lemma: "quedarse"
+        pos: "verb"
+        forms:
+          - form: "quedado"
+            en: "stayed"
+            f: "part"
+      - lemma: "conseguir"
+        pos: "verb"
+        forms:
+          - form: "conseguido"
+            en: "got, managed to get"
+            f: "part"
+      - lemma: "traer"
+        pos: "verb"
+        forms:
+          - form: "traído"
+            en: "brought"
+            f: "part"
+      - lemma: "demorado"
+        pos: "adj"
+        en: "delayed"
+        forms:
+          - form: "demorado"
+            f: "m.sg"
+          - form: "demorada"
+            f: "f.sg"
+      - lemma: "mala suerte"
+        pos: "phrase"
+        en: "bad luck"
+
+  - ordinal: 16
+    slug: "por-un-lado"
+    title: "Weigh both sides"
+    summary: "Por un lado sí, por otro no"
+    grammar:
+      - "conectores.argumentacion"
+      - "opinar"
+    register_max: "informal"
+    sample:
+      es: "Por un lado es caro, pero por otro lado vale la pena."
+      en: "On the one hand it's expensive, but on the other hand it's worth it."
+    tips:
+      - title: "Por un lado, por otro lado"
+        body: "**Por un lado… por otro lado** weighs two sides. **En cambio** — *whereas* — sets two
+          people or things against each other: *yo laburo, en cambio él no*."
+      - title: "De hecho, en realidad"
+        body: "**De hecho** — *in fact* — backs up what you just said. **En realidad** — *actually* —
+          corrects it: *en realidad no es tan caro*. **Por eso** — *that's why*."
+      - title: "Para mí"
+        body: "To give your view, porteños say **para mí** or **me parece que**: *para mí conviene
+          esperar*; *me parece que es caro*. **¿Qué opinás?** is the natural question; **opino que…**
+          as an answer sounds stiff."
+    words:
+      - lemma: "por un lado"
+        pos: "phrase"
+        en: "on the one hand"
+      - lemma: "por otro lado"
+        pos: "phrase"
+        en: "on the other hand"
+      - lemma: "en cambio"
+        pos: "phrase"
+        en: "whereas"
+      - lemma: "de hecho"
+        pos: "phrase"
+        en: "in fact"
+      - lemma: "en realidad"
+        pos: "phrase"
+        en: "actually"
+      - lemma: "convencer"
+        pos: "verb"
+        en: "to convince"
+        forms:
+          - form: "convenciste"
+            en: "you convinced"
+            f: "2sg.pret.ind.vos"
+          - form: "convence"
+            en: "convinces"
+            f: "3sg.pres.ind"
+
+  - ordinal: 17
+    slug: "la-ventaja-es-que"
+    title: "Weigh up an offer"
+    summary: "La ventaja es que queda cerca"
+    grammar:
+      - "conectores.argumentacion"
+      - "opinar"
+      - "conectores.adicion"
+    register_max: "informal"
+    sample:
+      es: "La ventaja es que pagan bien; además, queda cerca."
+      en: "The upside is that they pay well; besides, it's close by."
+    tips:
+      - title: "Además, sobre todo"
+        body: "To stack up reasons: **además** — *besides* — adds one more; **sobre todo** — *above all*
+          — picks the one that counts: *me gusta, **sobre todo** por la gente*. Porteños also say
+          **más que nada** — *mainly*."
+      - title: "Por lo menos, la verdad"
+        body: "**Por lo menos** — *at least* — finds the good side: *pagan poco, pero **por lo menos**
+          queda cerca*. **La verdad** — *honestly* — says what you really think: ***la verdad**, no
+          me conviene*."
+    words:
+      - lemma: "ventaja"
+        pos: "noun"
+        en: "advantage, upside"
+      - lemma: "desventaja"
+        pos: "noun"
+        en: "disadvantage, downside"
+      - lemma: "sobre todo"
+        pos: "phrase"
+        en: "above all, especially"
+      - lemma: "más que nada"
+        pos: "phrase"
+        en: "mainly, mostly"
+      - lemma: "por lo menos"
+        pos: "phrase"
+        en: "at least"
+      - lemma: "la verdad"
+        pos: "phrase"
+        en: "to be honest, truth is"
+      - lemma: "convenir"
+        pos: "verb"
+        forms:
+          - form: "me conviene"
+            en: "it suits me, it's better for me"
+            f: "3sg.pres.ind.clitic.irregular"
+          - form: "te conviene"
+            en: "it suits you, you'd better"
+            f: "3sg.pres.ind.clitic.irregular"
+      - lemma: "decidir"
+        pos: "verb"
+        en: "to decide"
+        forms:
+          - form: "decidir"
+            f: "inf"
+          - form: "decidí"
+            en: "I decided"
+            f: "1sg.pret.ind"
+      - lemma: "propuesta"
+        pos: "noun"
+        en: "offer, proposal"
+
+  - ordinal: 18
+    slug: "el-tramite"
+    title: "Deal with the paperwork"
+    summary: "Sacá turno y traé el DNI"
+    grammar:
+      - "tramites"
+      - "vencido"
+    register_max: "informal"
+    sample:
+      es: "Tenés que sacar turno para renovar el pasaporte."
+      en: "You have to book an appointment to renew your passport."
+    tips:
+      - title: "Sacar turno"
+        body: "For almost anything official you first **sacás turno** — you book an appointment online —
+          and you bring the **DNI**, the national ID card, without which nothing happens."
+      - title: "Vencido"
+        body: "A document that has run out is **vencido**: *tengo el pasaporte vencido*. You renew
+          it (**renovar**), fill in the form — **completar el formulario**: *ya completé el
+          formulario* —, stand in line — **hacer la cola**; you will also hear **fila** — and sign
+          (**firmar**)."
+    words:
+      - lemma: "DNI"
+        pos: "propn"
+        en: "national ID card"
+      - lemma: "renovar"
+        pos: "verb"
+        en: "to renew"
+        forms:
+          - form: "renovar"
+            f: "inf"
+          - form: "renové"
+            en: "I renewed"
+            f: "1sg.pret.ind"
+      - lemma: "vencido"
+        pos: "adj"
+        en: "expired"
+        forms:
+          - form: "vencido"
+            f: "m.sg"
+          - form: "vencida"
+            f: "f.sg"
+      - lemma: "firmar"
+        pos: "verb"
+        forms:
+          - form: "firmé"
+            en: "I signed"
+            f: "1sg.pret.ind"
+      - lemma: "formulario"
+        pos: "noun"
+        en: "form (to fill in)"
+      - lemma: "papel"
+        pos: "noun"
+        en: "paper, document"
+        forms:
+          - form: "papeles"
+            en: "papers, documents"
+            f: "m.pl"
+          - form: "papel"
+            f: "m.sg"
+      - lemma: "cola"
+        pos: "noun"
+        en: "line, queue"
+      - lemma: "completar"
+        pos: "verb"
+        forms:
+          - form: "completé"
+            en: "I filled in"
+            f: "1sg.pret.ind"
+
+  - ordinal: 19
+    slug: "migraciones"
+    title: "Sort out your residency"
+    summary: "Una consulta: ¿qué requisitos hay?"
+    grammar:
+      - "tramites"
+      - "vencido"
+    register_max: "informal"
+    sample:
+      es: "En Migraciones me pidieron una copia del pasaporte."
+      en: "At the immigration office they asked me for a copy of my passport."
+    tips:
+      - title: "Una consulta"
+        body: "At any **ventanilla**, open with **una consulta** — *a quick question* — and ask for the
+          **requisitos**, *what they need*. They'll say **el original y una copia**, and they mean
+          both."
+      - title: "¿Cuánto demora?"
+        body: "Porteños say **demorar** for how long a trámite takes: **¿cuánto demora la
+          residencia?** The honest answer is *depende*. For a person or a bus they say **tardar**:
+          *Lucía tardó media hora*, *el bondi tardó un montón*. You **presentás** the papers, and when
+          they finally **atienden** you, it's over in five minutes."
+      - title: "What Migraciones asks for"
+        body: "For the **residencia** you need your **antecedentes penales** — *criminal record* —
+          with the **apostilla**, the stamp that makes a foreign paper valid here, and a **certificado
+          de domicilio** — *proof of address*. While you wait they give you the **precaria**, a
+          temporary permit you can already work and travel with."
+    words:
+      - lemma: "Migraciones"
+        pos: "propn"
+        en: "the immigration office"
+      - lemma: "residencia"
+        pos: "noun"
+        en: "residence permit, residency"
+      - lemma: "requisito"
+        pos: "noun"
+        en: "requirement"
+        forms:
+          - form: "requisito"
+            f: "m.sg"
+          - form: "requisitos"
+            en: "requirements"
+            f: "m.pl"
+      - lemma: "consulta"
+        pos: "noun"
+        en: "inquiry"
+      - lemma: "certificado"
+        pos: "noun"
+        en: "certificate"
+      - lemma: "ventanilla"
+        pos: "noun"
+        en: "counter, (service) window"
+      - lemma: "copia"
+        pos: "noun"
+        en: "copy"
+      - lemma: "original"
+        pos: "noun"
+        en: "original"
+      - lemma: "atender"
+        pos: "verb"
+        en: "to serve, to see (someone)"
+        forms:
+          - form: "atienden"
+            en: "they serve, they see (people)"
+            f: "3pl.pres.ind.irregular"
+          - form: "atendieron"
+            en: "they served, they saw (me)"
+            f: "3pl.pret.ind"
+      - lemma: "demorar"
+        pos: "verb"
+        en: "to take (time)"
+        forms:
+          - form: "demora"
+            en: "it takes (time)"
+            f: "3sg.pres.ind"
+          - form: "demoró"
+            en: "it took (time)"
+            f: "3sg.pret.ind"
+      - lemma: "presentar"
+        pos: "verb"
+        en: "to submit, to present"
+        forms:
+          - form: "presentar"
+            f: "inf"
+          - form: "presenté"
+            en: "I submitted"
+            f: "1sg.pret.ind"
+      - lemma: "antecedentes penales"
+        pos: "phrase"
+        en: "criminal record"
+        note: "the police certificate Migraciones asks for"
+      - lemma: "apostilla"
+        pos: "noun"
+        en: "apostille"
+        note: "the official stamp that makes a foreign document valid in Argentina"
+      - lemma: "precaria"
+        pos: "noun"
+        en: "temporary residence permit"
+        note: "short for residencia precaria: the paper you get while your residency is processed"
+      - lemma: "domicilio"
+        pos: "noun"
+        en: "home address"
+
+  - ordinal: 20
+    slug: "practica-migraciones"
+    title: "Practice: what went wrong, the upside, the paperwork"
+    summary: "Por lo menos no demoró tanto"
+    grammar:
+      - "repaso.subjuntivo.pluscuamperfecto"
+      - "repaso.conectores"
+      - "repaso.tramites"
+    register_max: "informal"
+    sample:
+      es: "Por lo menos no demoró tanto."
+      en: "At least it didn't take that long."
+    tips:
+      - title: "Hubiéramos, hubieran"
+        body: "**Si hubiéramos salido antes, no hubiéramos perdido el vuelo** — *we* and *they* take
+          **hubiéramos, hubieran**, in both halves."
+      - title: "Además, por lo menos"
+        body: "**Además** adds a reason; **por lo menos** finds the good side; **la verdad** says what
+          you really think."
+    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
+    review:
+      - "hubiéramos"
+      - "hubieran"
+      - "perdido/perder"
+      - "tomado"
+      - "vuelo"
+      - "mala suerte"
+      - "ventaja"
+      - "además"
+      - "por lo menos"
+      - "la verdad"
+      - "me conviene"
+      - "requisitos"
+      - "consulta"
+      - "demoró"
+      - "hubiera"
+      - "en cambio"
+      - "vencido"
+      - "tardó"
+
+  - ordinal: 21
+    slug: "te-doy-la-razon"
+    title: "Admit you were wrong"
+    summary: "Pensándolo bien, tenés razón"
+    grammar:
+      - "debate"
+      - "repaso.b2"
+    register_max: "informal"
+    sample:
+      es: "Pensándolo bien, te doy la razón: me equivoqué."
+      en: "Thinking about it, you're right: I was wrong."
+    tips:
+      - title: "Me equivoqué"
+        body: "The hardest words in any argument: **me equivoqué** — *I was wrong*. To a friend: **te
+          equivocás** — *you're wrong*. Giving ground: **reconozco que** tenés razón, or just **te doy
+          la razón**."
+      - title: "¡Nada que ver!"
+        body: "**¡Nada que ver!** — *that's got nothing to do with it!* — is how porteños throw out a
+          point. **En eso** tenés razón concedes just the one. **No seas cabeza dura** — *don't be so
+          stubborn*."
+      - title: "A ver, pensándolo bien"
+        body: "**A ver** — *let's see* — slows an argument down; **pensándolo bien** — *thinking about
+          it* — is how you change sides without losing face. **Sos un exagerado** speeds it back up."
+    words:
+      - lemma: "equivocarse"
+        pos: "verb"
+        en: "to be wrong, to make a mistake"
+        forms:
+          - form: "me equivoqué"
+            en: "I was wrong, I made a mistake"
+            f: "1sg.pret.ind.clitic"
+          - form: "te equivocás"
+            en: "you're wrong"
+            f: "2sg.pres.ind.vos.clitic"
+          - form: "equivoqué"
+            f: "1sg.pret.ind"
+            bound: true
+          - form: "equivocás"
+            f: "2sg.pres.ind.vos"
+            bound: true
+      - lemma: "reconocer"
+        pos: "verb"
+        en: "to admit, to recognise"
+        forms:
+          - form: "reconozco"
+            en: "I admit"
+            f: "1sg.pres.ind.irregular"
+          - form: "reconocer"
+            f: "inf"
+      - lemma: "dar la razón"
+        pos: "phrase"
+        en: "to admit someone is right"
+        forms:
+          - form: "te doy la razón"
+            en: "I'll give you that, you're right"
+            f: "1sg.pres.ind"
+      - lemma: "en eso"
+        pos: "phrase"
+        en: "on that (point)"
+      - lemma: "defender"
+        pos: "verb"
+        en: "to defend, to stand up for"
+        forms:
+          - form: "defendés"
+            en: "you defend"
+            f: "2sg.pres.ind.vos"
+          - form: "defiendo"
+            en: "I defend"
+            f: "1sg.pres.ind.irregular"
+      - lemma: "exagerado"
+        pos: "adj"
+        en: "exaggerating, dramatic"
+        forms:
+          - form: "exagerado"
+            f: "m.sg"
+          - form: "exagerada"
+            f: "f.sg"
+      - lemma: "a ver"
+        pos: "phrase"
+        en: "let's see; hang on"
+      - lemma: "cabeza dura"
+        pos: "phrase"
+        en: "stubborn, pigheaded"
+        register: "informal"
+      - lemma: "pensándolo bien"
+        pos: "phrase"
+        en: "thinking about it, on second thought"
+      - lemma: "punto de vista"
+        pos: "phrase"
+        en: "point of view"
+
+  - ordinal: 22
+    slug: "que-opinas"
+    title: "Talk it through"
+    summary: "¿Y vos qué opinás?"
+    grammar:
+      - "debate"
+      - "repaso.b2"
+    register_max: "informal"
+    sample:
+      es: "¿Y vos qué opinás?"
+      en: "And what do you think?"
+    tips:
+      - title: "Arguing like a porteño"
+        body: "An argument in Buenos Aires is a sport, not a fight: **discutimos** a lot and stay
+          friends. **Me convenciste** — *you've convinced me*; **cambié de idea** — *I changed my
+          mind*."
+      - title: "¡Ojo!"
+        body: "**¡Ojo!** — literally *eye!* — is *careful!, watch out!*: **ojo, que no es tan fácil**.
+          **Estoy seguro** — *I'm sure*; **no estoy segura** — *I'm not sure*."
+    words:
+      - lemma: "discutir"
+        pos: "verb"
+        en: "to argue, to discuss"
+        forms:
+          - form: "discutimos"
+            en: "we argue, we argued"
+            f: "1pl.pres.ind"
+          - form: "discutir"
+            f: "inf"
+      - lemma: "cambiar"
+        pos: "verb"
+        en: "to change"
+        forms:
+          - form: "cambié"
+            en: "I changed"
+            f: "1sg.pret.ind"
+      - lemma: "seguro"
+        pos: "adj"
+        en: "sure, certain"
+        forms:
+          - form: "seguro"
+            f: "m.sg"
+          - form: "segura"
             f: "f.sg"

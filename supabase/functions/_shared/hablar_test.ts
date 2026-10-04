@@ -1,6 +1,8 @@
 import { assertEquals } from "jsr:@std/assert@1";
 import {
   bandOf,
+  CLOCK,
+  clockOf,
   CONTENT,
   deadlineAt,
   diloCompare,
@@ -8,6 +10,8 @@ import {
   elapsedSeconds,
   isSilenceHallucination,
   localDate,
+  looksEnglish,
+  looksSpanish,
   mergePaused,
   nearestBand,
   nextUserIdx,
@@ -18,6 +22,7 @@ import {
   exchangeOf,
   sttKeyterms,
   topicOf,
+  wantsLanguageRetry,
 } from "./hablar.ts";
 
 const start = new Date("2026-09-25T12:00:00Z");
@@ -37,9 +42,23 @@ Deno.test("pauses are capped at 15 minutes and at the wall time itself", () => {
   assertEquals(elapsedSeconds(start, 99_999, at(1200)), 300);
 });
 
-Deno.test("deadline moves with the pauses", () => {
-  assertEquals(deadlineAt(start, 0, at(10)), "2026-09-25T12:03:00.000Z");
-  assertEquals(deadlineAt(start, 90, at(200)), "2026-09-25T12:04:30.000Z");
+Deno.test("deadline moves with the pauses, and beginners get a minute more", () => {
+  assertEquals(deadlineAt(start, 0, "B1", at(10)), "2026-09-25T12:03:00.000Z");
+  assertEquals(deadlineAt(start, 90, "B2", at(200)), "2026-09-25T12:04:30.000Z");
+  assertEquals(deadlineAt(start, 0, "A1", at(10)), "2026-09-25T12:04:00.000Z");
+  assertEquals(deadlineAt(start, 90, "A2", at(200)), "2026-09-25T12:05:30.000Z");
+});
+
+Deno.test("the clock by level: four minutes for A1/A2, three for B1/B2", () => {
+  for (const level of ["A1", "A2"] as const) {
+    assertEquals(CLOCK[level], { closeSoon: 170, wrap: 210, stop: 240, closeSoonExchanges: 8 });
+  }
+  for (const level of ["B1", "B2"] as const) {
+    assertEquals(CLOCK[level], { closeSoon: 100, wrap: 150, stop: 180, closeSoonExchanges: 6 });
+  }
+  // A row with no usable level keeps the clock every chat had before.
+  assertEquals(clockOf(null), CLOCK.B1);
+  assertEquals(clockOf("C1"), CLOCK.B1);
 });
 
 Deno.test("pause reports only grow, and cap", () => {
@@ -49,13 +68,23 @@ Deno.test("pause reports only grow, and cap", () => {
   assertEquals(mergePaused(30, undefined), 30);
 });
 
-Deno.test("wrap up at 2:30 or after ten exchanges; nudge at 1:40 or six", () => {
-  assertEquals(shouldWrapUp(149, 9), false);
-  assertEquals(shouldWrapUp(150, 1), true);
-  assertEquals(shouldWrapUp(0, 10), true);
-  assertEquals(shouldCloseSoon(99, 5), false);
-  assertEquals(shouldCloseSoon(100, 1), true);
-  assertEquals(shouldCloseSoon(0, 6), true);
+Deno.test("B1/B2: wrap up at 2:30 or after ten exchanges; nudge at 1:40 or six", () => {
+  assertEquals(shouldWrapUp(149, 9, "B1"), false);
+  assertEquals(shouldWrapUp(150, 1, "B2"), true);
+  assertEquals(shouldWrapUp(0, 10, "B1"), true);
+  assertEquals(shouldCloseSoon(99, 5, "B1"), false);
+  assertEquals(shouldCloseSoon(100, 1, "B2"), true);
+  assertEquals(shouldCloseSoon(0, 6, "B1"), true);
+});
+
+Deno.test("A1/A2: wrap up at 3:30 or after ten exchanges; nudge at 2:50 or eight", () => {
+  assertEquals(shouldWrapUp(209, 9, "A1"), false);
+  assertEquals(shouldWrapUp(210, 1, "A2"), true);
+  assertEquals(shouldWrapUp(0, 10, "A1"), true);
+  assertEquals(shouldCloseSoon(169, 7, "A1"), false);
+  assertEquals(shouldCloseSoon(170, 1, "A2"), true);
+  // With time left, a beginner's chat is still nudged to a close at eight exchanges.
+  assertEquals(shouldCloseSoon(60, 8, "A1"), true);
   assertEquals(exchangeOf(1), 1);
   assertEquals(exchangeOf(11), 6);
 });
@@ -98,6 +127,33 @@ Deno.test("silence hallucinations are dropped", () => {
   assertEquals(isSilenceHallucination("Gracias por ver el video."), true);
   assertEquals(isSilenceHallucination("  "), true);
   assertEquals(isSilenceHallucination("Quiero un alfajor"), false);
+  // "Música" alone is the recogniser hearing a jingle; inside a sentence it is hers.
+  assertEquals(isSilenceHallucination("[Música]"), true);
+  assertEquals(isSilenceHallucination("Me gusta la música"), false);
+});
+
+Deno.test("a line in English is told from Spanish by its words", () => {
+  for (const line of ["I want a coffee", "Yes", "What?", "I don't know", "Coffee, please", "How do you say that?", "No, I don’t"]) {
+    assertEquals(looksEnglish(line), true, line);
+  }
+  for (const line of ["Quiero un café", "No", "Sí, dale", "Quiero un café con milk", "Un café please", "Okay", "Medialunas", ""]) {
+    assertEquals(looksEnglish(line), false, line);
+  }
+  assertEquals(looksSpanish("Dos medialunas"), true);
+  assertEquals(looksSpanish("Una lágrima"), true);
+  assertEquals(looksSpanish("Medialunas"), false);
+  assertEquals(looksSpanish("Medialunas", ["dos medialunas"]), true);
+});
+
+Deno.test("a second pass without the forced language only for a transcript with nothing Spanish in it", () => {
+  assertEquals(wantsLanguageRetry(""), true);
+  assertEquals(wantsLanguageRetry("Gracias por ver el video."), true);
+  assertEquals(wantsLanguageRetry("Guan cofi"), true);
+  assertEquals(wantsLanguageRetry("Quiero un café con leche"), false);
+  assertEquals(wantsLanguageRetry("No"), false);
+  assertEquals(wantsLanguageRetry("Medialunas", ["medialunas"]), false);
+  // Already English as it came back: marked, not heard again.
+  assertEquals(wantsLanguageRetry("I want a coffee"), false);
 });
 
 Deno.test("content: every scenario resolves at every level, keyterms are bounded", () => {

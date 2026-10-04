@@ -13,12 +13,12 @@
 // The response is an SSE stream:
 //
 //   transcript {"turn_id","text"}                          the line, as stored (multipart only)
-//   correction {"has_error","corrected"}                  the verdict, as soon as it is written
+//   correction {"has_error","verdict","corrected"}        the verdict, as soon as it is written
 //   text      {"seq":n,"delta":"Jaja, "}                 reply text as it's written
 //   text_fix  {"seq":n,"from":"…","to":"…"}              sentence n was rewritten by the guard
 //   audio     {"seq":n,"text":"…","mp3":"<base64>"}      one per sentence, in order
 //   done      {"turn_id","tomas_turn_id","wrap_up","ended","audio_path"}
-//   feedback  {has_error,severity,corrected,spans,why_en,better}   usually before done, may come after
+//   feedback  {has_error,verdict,severity,corrected,spans,why_en,better,better_en}   usually before done, may come after
 //   error     {"stage":"claude|tts|feedback","retry":bool,"seq"?}
 //
 // Two Claude calls run in parallel: the streamed reply (cached persona + the
@@ -41,8 +41,8 @@ import {
   CLAUDE_OPTIONS,
   background,
   caller,
-  CHAT_SECONDS,
   claudeUsage,
+  clockOf,
   concatBytes,
   exchangeOf,
   MarkerStripper,
@@ -71,6 +71,7 @@ import {
 import {
   CLOSE_SOON_NOTE,
   END_MARKER,
+  ENGLISH_NOTE,
   FEEDBACK_SCHEMA,
   FEEDBACK_SYSTEM,
   feedbackInput,
@@ -78,6 +79,7 @@ import {
   PERSONA,
   sessionBlock,
   SIMPLIFY_NOTE,
+  turnText,
   WRAP_UP_NOTE,
   type Feedback,
 } from "../_shared/hablar-prompt.ts";
@@ -119,15 +121,23 @@ async function replay(sse: SseWriter, db: SupabaseClient, user: Turn, tomas: Tur
 }
 
 /** Only what the schema promised. */
-function cleanFeedback(raw: Feedback, line: string): Feedback {
+function cleanFeedback(raw: Feedback, line: string, english = false): Feedback {
+  // A line said in English is never a mistake: she is shown the Spanish for it.
+  if (english && raw.verdict !== "unclear") raw = { ...raw, has_error: false, verdict: "note" };
   const spans = (raw.spans ?? []).filter((s) => s && typeof s.from === "string" && typeof s.to === "string");
+  // A tick only for a line that is right as it stands: an English word, a tú
+  // form or a garbled transcript is not an error, but it is not "Correct" either.
+  const quiet = raw.verdict === "note" || raw.verdict === "unclear" ? raw.verdict : "correct";
+  const better = raw.verdict === "unclear" ? "" : String(raw.better ?? "");
   return {
     has_error: Boolean(raw.has_error),
+    verdict: raw.has_error ? "error" : quiet,
     severity: raw.has_error ? (raw.severity === "none" ? "minor" : raw.severity) : "none",
     corrected: String(raw.corrected || line),
     spans: raw.has_error ? spans : [],
     why_en: raw.has_error ? String(raw.why_en ?? "") : "",
-    better: String(raw.better ?? ""),
+    better,
+    better_en: better ? String(raw.better_en ?? "") : "",
   };
 }
 
@@ -162,8 +172,9 @@ async function runTurn(opts: {
   const usage: Usage[] = [];
   const elapsed = sessionElapsed(session);
   const exchange = exchangeOf(userIdx);
-  const wrapUp = shouldWrapUp(elapsed, exchange);
-  const closeSoon = !wrapUp && shouldCloseSoon(elapsed, exchange);
+  const wrapUp = shouldWrapUp(elapsed, exchange, session.level);
+  const closeSoon = !wrapUp && shouldCloseSoon(elapsed, exchange, session.level);
+  const english = user.meta?.lang === "en";
   const tomasId = crypto.randomUUID();
 
   // History: every sent line before this one, oldest first.
@@ -182,10 +193,11 @@ async function runTurn(opts: {
   const tomasBefore = [...history].reverse().find((t) => t.role === "tomas")?.text ?? null;
 
   const notes = [
+    english ? ENGLISH_NOTE : "",
     session.hint_turns.includes(userIdx) && session.hint_turns.includes(userIdx - 2) ? SIMPLIFY_NOTE : "",
     wrapUp ? WRAP_UP_NOTE : "",
     closeSoon ? CLOSE_SOON_NOTE : "",
-  ].filter(Boolean);
+  ];
   const messages: Anthropic.MessageParam[] = [
     { role: "user", content: "[La charla empieza.]" },
     ...history.map((t): Anthropic.MessageParam => ({
@@ -196,7 +208,7 @@ async function runTurn(opts: {
       role: "user",
       content: [{
         type: "text",
-        text: [user.text, ...notes].join("\n\n"),
+        text: turnText(user.text, notes),
         cache_control: { type: "ephemeral" },
       }],
     },
@@ -218,19 +230,22 @@ async function runTurn(opts: {
   const feedbackDone = streamedStructured<Feedback>(client, {
     system: FEEDBACK_SYSTEM,
     schema: FEEDBACK_SCHEMA as unknown as Record<string, unknown>,
-    input: feedbackInput({ level: session.level, tomasBefore, line: user.text }),
+    input: feedbackInput({ level: session.level, tomasBefore, line: user.text, english }),
     onText: (soFar) => {
       if (verdictSent) return;
       const verdict = earlyVerdict(soFar, user.text);
       if (!verdict) return;
       verdictSent = true;
-      sse.send("correction", verdict);
+      sse.send(
+        "correction",
+        english && verdict.verdict !== "unclear" ? { has_error: false, verdict: "note", corrected: user.text } : verdict,
+      );
     },
   })
     .then(async ({ value, usage: u, ms }) => {
       usage.push(claudeUsage({ conversation_id: session.id, turn_id: user.id, model: MODEL, stage: "feedback", ms }, u));
       if (!value) throw new Error("no feedback");
-      const fb = cleanFeedback(value, user.text);
+      const fb = cleanFeedback(value, user.text, english);
       sse.send("feedback", fb);
       // Saved before the stream closes, so the summary (built once it has) sees it.
       const { error } = await db.from("conversation_turns").update({ feedback: fb }).eq("id", user.id);
@@ -356,7 +371,7 @@ async function runTurn(opts: {
   const text = sentences.join(" ");
   const clips = audio.filter((a): a is Uint8Array<ArrayBuffer> => !!a);
   const audioPath = clips.length ? `${opts.userId}/${session.id}/${user.id}-tomas.mp3` : null;
-  const ended = wrapUp || endMark.found || sessionElapsed(session) >= CHAT_SECONDS;
+  const ended = wrapUp || endMark.found || sessionElapsed(session) >= clockOf(session.level).stop;
 
   const { error: insertErr } = await db.from("conversation_turns").insert({
     id: tomasId,
@@ -523,7 +538,7 @@ async function answer(opts: {
   }
 
   if (session.ended_at) return json({ error: "ended" }, { status: 409 });
-  if (sessionElapsed(session) >= CHAT_SECONDS + GRACE_SECONDS + LATE_SECONDS) {
+  if (sessionElapsed(session) >= clockOf(session.level).stop + GRACE_SECONDS + LATE_SECONDS) {
     return json({ error: "time_up" }, { status: 409 });
   }
   if (!user.text.trim()) return json({ error: "empty turn" }, { status: 400 });

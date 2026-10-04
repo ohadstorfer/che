@@ -22,6 +22,58 @@ section:
   practice: 2   # practice lessons per unit, before the unit check (lessons.mjs)
 units:
   - ordinal: 1
+    slug: "contame"
+    title: "Tell the whole story"
+    summary: "Contame todo"
+    grammar:
+      - "repaso.preterito"
+      - "relato.conectores"
+    register_max: "informal"
+    sample:
+      es: "Contame qué pasó."
+      en: "Tell me what happened."
+    tips:
+      - title: "How a porteño tells it"
+        body: "**Contame** opens it; **de repente** is the twist, **por suerte** the relief, **al
+          final** the end. **Igual** — *anyway* — goes almost anywhere, and **o sea** is *I mean*."
+      - title: "¡Qué garrón!"
+        body: "When the story ends badly, the answer is **¡Qué garrón!** — *what a drag!* Informal,
+          and everywhere."
+    words:
+      - lemma: "contar"
+        pos: "verb"
+        en: "to tell"
+        forms:
+          - form: "contame"
+            en: "tell me"
+            f: "2sg.imp.vos.clitic"
+          - form: "contás"
+            en: "you tell"
+            f: "2sg.pres.ind.vos"
+          - form: "cuento"
+            en: "I tell"
+            f: "1sg.pres.ind.irregular"
+      - lemma: "de repente"
+        pos: "phrase"
+        en: "suddenly"
+      - lemma: "por suerte"
+        pos: "phrase"
+        en: "luckily"
+      - lemma: "igual"
+        pos: "adv"
+        en: "anyway"
+      - lemma: "o sea"
+        pos: "phrase"
+        en: "I mean"
+      - lemma: "garrón"
+        pos: "noun"
+        en: "drag, bummer"
+        register: "informal"
+      - lemma: "además"
+        pos: "adv"
+        en: "besides, as well"
+
+  - ordinal: 2
     slug: "cuando-era-chico"
     title: "Talk about when you were a kid"
     summary: "Cuando era chico"
@@ -41,6 +93,8 @@ units:
       - title: "Yo and él share a form"
         body: "In the imperfect, *yo* and *él/ella* are the same word: **era** is *I was* and *he was*.
           The subject — or the story — tells you which. **De chico** is *as a kid*."
+      - title: "Colegio"
+        body: "Porteños mostly say **colegio** for school, primary or secondary: **¿A qué colegio ibas?** — *Iba a un colegio de mi barrio.* *Escuela* is understood and used too, mostly for state primary schools."
     words:
       - lemma: "ser"
         pos: "verb"
@@ -96,8 +150,12 @@ units:
           - form: "escuelas"
             en: "schools"
             f: "f.pl"
+      - lemma: "colegio"
+        pos: "noun"
+        en: "school"
+        note: "what porteños usually call any school, primary or secondary"
 
-  - ordinal: 2
+  - ordinal: 3
     slug: "en-la-primaria"
     title: "Talk about your school days"
     summary: "En la primaria quería ser maestra"
@@ -120,9 +178,7 @@ units:
           quería ser maestro** — *as a kid I wanted to be a teacher*; **no podía salir solo** — *I
           wasn't allowed out on my own*. **En esa época** — *back then* — sets the whole scene."
       - title: "La primaria"
-        body: "School here is **la primaria** (six to twelve) and then **la secundaria**. In a state
-          school everyone wears a white **guardapolvo** over their clothes, and the best part of the
-          day is the **recreo**."
+        body: "School here is **la primaria** (six to twelve) and then **la secundaria**. In a state school everyone wears a white **guardapolvo** over their clothes, and the best part of the day is the **recreo**. In primaria the teacher is **la maestra** or **el maestro**; from secundaria on it is **el profesor**, **la profe**. Each year of primaria is a **grado**: *primer grado*."
     words:
       - lemma: "ser"
         pos: "verb"
@@ -196,7 +252,7 @@ units:
         pos: "noun"
         en: "era, period"
 
-  - ordinal: 3
+  - ordinal: 4
     slug: "siempre-jugabamos"
     title: "Say what you used to do"
     summary: "Siempre jugábamos"
@@ -266,7 +322,7 @@ units:
         en: "every, each"
         glue: true
 
-  - ordinal: 4
+  - ordinal: 5
     slug: "me-encantaba"
     title: "Say what you loved as a kid"
     summary: "Me encantaba andar en bici"
@@ -371,7 +427,7 @@ units:
         pos: "noun"
         en: "swing"
 
-  - ordinal: 5
+  - ordinal: 6
     slug: "estaba-lloviendo"
     title: "Set the scene of a story"
     summary: "Estaba lloviendo cuando…"
@@ -428,7 +484,7 @@ units:
         pos: "conj"
         en: "while"
 
-  - ordinal: 6
+  - ordinal: 7
     slug: "sono-el-timbre"
     title: "Tell what interrupted you"
     summary: "Estaba en la ducha cuando sonó el timbre"
@@ -467,6 +523,8 @@ units:
           - form: "sonaba"
             en: "was ringing"
             f: "3sg.impf.ind"
+          - form: "sonar"
+            f: "inf"
       - lemma: "entrar"
         pos: "verb"
         en: "to go in, to come in"
@@ -518,38 +576,6 @@ units:
           - form: "mojada"
             f: "f.sg"
 
-  - ordinal: 7
-    slug: "practica-de-chico"
-    title: "Practice: back then"
-    summary: "De chico jugaba en la calle"
-    grammar:
-      - "repaso.imperfecto"
-      - "imperfecto-vs-preterito"
-    register_max: "informal"
-    sample:
-      es: "De chico vivía en Rosario y jugaba en la plaza."
-      en: "As a kid I lived in Rosario and played in the park."
-    tips:
-      - title: "The scene and the event"
-        body: "**Era**, **tenía**, **estaba** paint the scene — how things were. **Fui**, **tuve**, **llegó** are what happened in it. **Estaba lloviendo cuando llegó Juan.**"
-      - title: "Used to"
-        body: "English says *used to*; Spanish just uses the imperfect. **Jugábamos en la calle** — *we used to play in the street*. **Siempre**, **a veces** and **de chico** go with it."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "era"
-      - "tenía"
-      - "vivía"
-      - "iba"
-      - "jugaba"
-      - "jugábamos"
-      - "comía"
-      - "salía"
-      - "estaba"
-      - "llovía"
-      - "fui"
-      - "tuve"
-      - "llegó"
-
   - ordinal: 8
     slug: "practica-en-esa-epoca"
     title: "Practice: back in the day"
@@ -587,6 +613,335 @@ units:
       - "dijo"
 
   - ordinal: 9
+    slug: "el-partido"
+    title: "Talk about football"
+    summary: "¿Viste el partido?"
+    grammar:
+      - "deportes"
+      - "preterito.ganar-perder"
+    register_max: "informal"
+    sample:
+      es: "Ganamos dos a uno, ¡qué partido!"
+      en: "We won two–one, what a game!"
+    tips:
+      - title: "Ganamos, perdimos"
+        body: "After a match it's **ganamos**, **perdimos** or **empatamos** — *we* won, even if you were on the sofa. The first football question you will get in Argentina: **¿De qué equipo sos?** — **Soy de Boca.** **Soy de River.** Which one, the course leaves to you."
+      - title: "El hincha"
+        body: "A fan is a **hincha**, and a **gol** is shouted, not said."
+      - title: "Dos a uno"
+        body: "Scores are said with **a**: **ganamos dos a uno**, *empatamos cero a cero*. To score is **hacer un gol**: *Juan hizo dos goles*. And the pitch — and the whole stadium — is **la cancha**."
+    words:
+      - lemma: "ganar"
+        pos: "verb"
+        forms:
+          - form: "gano"
+            en: "I earn"
+            f: "1sg.pres.ind"
+      - lemma: "perder"
+        pos: "verb"
+        forms:
+          - form: "perdió"
+            en: "lost (he/she lost)"
+            f: "3sg.pret.ind"
+      - lemma: "empatar"
+        pos: "verb"
+        en: "to draw, to tie"
+        forms:
+          - form: "empatamos"
+            en: "we drew"
+            f: "1pl.pret.ind"
+      - lemma: "gol"
+        pos: "noun"
+        en: "goal"
+        forms:
+          - form: "gol"
+            f: "m.sg"
+          - form: "goles"
+            en: "goals"
+            f: "m.pl"
+      - lemma: "hincha"
+        pos: "noun"
+        en: "fan, supporter"
+      - lemma: "selección"
+        pos: "noun"
+        en: "national team"
+      - lemma: "jugar"
+        pos: "verb"
+        forms:
+          - form: "juega"
+            en: "plays"
+            f: "3sg.pres.ind.irregular"
+          - form: "jugamos"
+            en: "we play, we played"
+            f: "1pl.pres.ind"
+          - form: "jugó"
+            en: "played"
+            f: "3sg.pret.ind"
+      - lemma: "Boca"
+        pos: "propn"
+        en: "Boca"
+        note: "Boca Juniors, one of the two biggest clubs"
+      - lemma: "River"
+        pos: "propn"
+        en: "River"
+        note: "River Plate, one of the two biggest clubs"
+
+  - ordinal: 10
+    slug: "la-final"
+    title: "Watch the final with the whole bar"
+    summary: "¡Salimos campeones!"
+    grammar:
+      - "deportes"
+      - "preterito.ganar-perder"
+      - "preterito.plural"
+    register_max: "informal"
+    sample:
+      es: "¡Ganamos la final por penales!"
+      en: "We won the final on penalties!"
+    tips:
+      - title: "Ellos ganaron"
+        body: "The other team is *they*: **ganaron**, **perdieron**, **empataron**. Yours is always *we*,
+          from the bar or the sofa: **¡salimos campeones!**"
+      - title: "Penales"
+        body: "A **final** that ends level goes to **penales**: the **arquero atajó** one, somebody **metió** the last, and the whole city is out in the street in the **camiseta**. A great goal is a **golazo**. Before the penales comes the **alargue** — *extra time*. What you shout: **¡Vamos, Argentina!** and **¡Aguante!** with your team: *¡Aguante Boca!* And a referee who gets everything wrong **no pega una**."
+    words:
+      - lemma: "ganar"
+        pos: "verb"
+        forms:
+          - form: "ganaron"
+            en: "they won"
+            f: "3pl.pret.ind"
+      - lemma: "perder"
+        pos: "verb"
+        forms:
+          - form: "perdieron"
+            en: "they lost"
+            f: "3pl.pret.ind"
+      - lemma: "empatar"
+        pos: "verb"
+        forms:
+          - form: "empataron"
+            en: "they drew"
+            f: "3pl.pret.ind"
+      - lemma: "jugar"
+        pos: "verb"
+        forms:
+          - form: "juegan"
+            en: "they play"
+            f: "3pl.pres.ind.irregular"
+      - lemma: "final"
+        pos: "noun"
+        en: "title match, last game of a cup"
+        note: "la final — the final of a tournament"
+      - lemma: "penal"
+        pos: "noun"
+        en: "penalty (kick)"
+        forms:
+          - form: "penal"
+            f: "m.sg"
+          - form: "penales"
+            en: "penalties (kicks)"
+            f: "m.pl"
+      - lemma: "arquero"
+        pos: "noun"
+        en: "goalkeeper"
+      - lemma: "árbitro"
+        pos: "noun"
+        en: "referee"
+      - lemma: "camiseta"
+        pos: "noun"
+        en: "(team) shirt, jersey"
+      - lemma: "campeón"
+        pos: "noun"
+        en: "champion"
+        forms:
+          - form: "campeón"
+            f: "m.sg"
+          - form: "campeones"
+            en: "champions"
+            f: "m.pl"
+      - lemma: "meter"
+        pos: "verb"
+        en: "to put in, to score"
+        forms:
+          - form: "metió"
+            en: "scored, put in"
+            f: "3sg.pret.ind"
+      - lemma: "atajar"
+        pos: "verb"
+        en: "to save (a shot), to stop"
+        forms:
+          - form: "atajó"
+            en: "saved (he/she saved)"
+            f: "3sg.pret.ind"
+      - lemma: "golazo"
+        pos: "noun"
+        en: "great goal, screamer"
+        register: "informal"
+      - lemma: "aguante"
+        pos: "interj"
+        en: "come on (cheering a team)"
+        note: "shouted with the team: ¡Aguante Boca!"
+        register: "informal"
+      - lemma: "alargue"
+        pos: "noun"
+        en: "extra time"
+      - lemma: "no pega una"
+        pos: "phrase"
+        en: "can't get anything right"
+        register: "informal"
+      - lemma: "Mundial"
+        pos: "propn"
+        en: "the World Cup"
+
+  - ordinal: 11
+    slug: "de-que-cuadro-sos"
+    title: "Say which team you root for"
+    summary: "¿De qué cuadro sos?"
+    grammar:
+      - "futbol.hinchada"
+      - "hinchar"
+    register_max: "informal"
+    sample:
+      es: "¿De qué cuadro sos?"
+      en: "Which team do you root for?"
+    tips:
+      - title: "¿De qué cuadro sos?"
+        body: "The first question in a new friendship. A team is a **cuadro**, and you don't choose it, you inherit it: **soy del mismo cuadro que mi viejo**. The answer is **soy de** or **soy hincha de**: *Soy de Racing.* *Soy hincha de River.* **Hinchar por** is for one game or the national team: **¿por quién hinchás?** — *Hincho por Argentina.*"
+      - title: "El superclásico"
+        body: "The two biggest teams, **Boca** and **River**, playing each other is **el superclásico**; any derby is a **clásico** — *Racing* against *Independiente*, for one. Boca fans are called *bosteros* and River fans *gallinas*: insults they now wear with pride. The fans stand on the **tribuna**. Which side you're on, the course leaves to you."
+    words:
+      - lemma: "cuadro"
+        pos: "noun"
+        en: "team (soccer)"
+      - lemma: "hinchar"
+        pos: "verb"
+        en: "to root for (a team)"
+        forms:
+          - form: "hincho"
+            en: "I root for"
+            f: "1sg.pres.ind"
+          - form: "hinchás"
+            en: "you root for"
+            f: "2sg.pres.ind.vos"
+      - lemma: "superclásico"
+        pos: "noun"
+        en: "the big derby (the two biggest teams)"
+      - lemma: "clásico"
+        pos: "noun"
+        en: "derby, rivalry game"
+      - lemma: "tribuna"
+        pos: "noun"
+        en: "stands, bleachers"
+      - lemma: "Racing"
+        pos: "propn"
+        en: "Racing"
+      - lemma: "Independiente"
+        pos: "propn"
+        en: "Independiente"
+      - lemma: "San Lorenzo"
+        pos: "propn"
+        en: "San Lorenzo"
+
+  - ordinal: 12
+    slug: "socio-del-club"
+    title: "Go to the stadium"
+    summary: "Soy socio del club desde chico"
+    grammar:
+      - "futbol.hinchada"
+      - "hinchar"
+    register_max: "informal"
+    sample:
+      es: "Soy socio del club desde chico."
+      en: "I've been a club member since I was a kid."
+    tips:
+      - title: "Hinchamos por el mismo"
+        body: "**Hinchar por** runs in the family: **en casa hinchamos todos por el mismo cuadro**; **de chico hinchaba por otro, pero mi viejo no me dejó**. A fan **de toda la vida** never changes club — changing wife is easier, they say. Day to day, people simply say **somos del mismo cuadro**."
+      - title: "Ser socio"
+        body: "To go to **la cancha** — *estadio* is for signs and maps — you are usually **socio** — *a member* — of the **club**, and pay the cuota. Tickets are *entradas*: the **popular** is the cheap standing end, the **platea** the seats. The **hinchada** sings its **cantitos** for ninety minutes, under the **banderas**. Away fans? Banned for years: you only go **de visitante** on TV."
+      - title: "El ídolo"
+        body: "Every club has its **ídolo**, the **jugador** whose shirt the kids wear. And every fan fears
+          one word: the **descenso** — *relegation*."
+    words:
+      - lemma: "hinchar"
+        pos: "verb"
+        forms:
+          - form: "hinchamos"
+            en: "we root for"
+            f: "1pl.pres.ind"
+          - form: "hinchaba"
+            en: "I used to root for, he rooted for"
+            f: "sg.impf.ind"
+      - lemma: "socio"
+        pos: "noun"
+        en: "member (of a club)"
+        forms:
+          - form: "socio"
+            f: "m.sg"
+          - form: "socia"
+            f: "f.sg"
+      - lemma: "club"
+        pos: "noun"
+        en: "club"
+      - lemma: "estadio"
+        pos: "noun"
+        en: "stadium building, ground"
+      - lemma: "hinchada"
+        pos: "noun"
+        en: "the fans, the supporters"
+      - lemma: "cantito"
+        pos: "noun"
+        en: "terrace chant"
+        forms:
+          - form: "cantito"
+            f: "sg"
+          - form: "cantitos"
+            en: "terrace chants"
+            f: "pl"
+      - lemma: "bandera"
+        pos: "noun"
+        en: "flag, banner"
+        forms:
+          - form: "bandera"
+            f: "sg"
+          - form: "banderas"
+            en: "flags, banners"
+            f: "pl"
+      - lemma: "jugador"
+        pos: "noun"
+        en: "player"
+        forms:
+          - form: "jugador"
+            f: "m.sg"
+          - form: "jugadores"
+            en: "players"
+            f: "m.pl"
+      - lemma: "ídolo"
+        pos: "noun"
+        en: "idol, hero"
+      - lemma: "descenso"
+        pos: "noun"
+        en: "relegation"
+      - lemma: "de visitante"
+        pos: "phrase"
+        en: "away (playing away)"
+      - lemma: "de toda la vida"
+        pos: "phrase"
+        en: "lifelong, since forever"
+      - lemma: "popular"
+        pos: "noun"
+        en: "standing terrace (the cheapest tickets)"
+        forms:
+          - form: "popular"
+            f: "f.sg"
+      - lemma: "platea"
+        pos: "noun"
+        en: "seated stand, seats"
+        forms:
+          - form: "platea"
+            f: "f.sg"
+
+  - ordinal: 13
     slug: "en-el-restaurante"
     title: "Eat out"
     summary: "¿Me traés la carta?"
@@ -599,8 +954,7 @@ units:
       en: "I ordered a steak with fries."
     tips:
       - title: "Pedir"
-        body: "**Pido** (I order), **pedís** (you order); in the past **pedí**, **pediste**, and — with
-          an *i* — **pidió**. At the table: **¿Me traés la carta?** and, at the end, **la cuenta**."
+        body: "**Pido** (I order), **pedís** (you order); in the past **pedí**, **pediste**, and — with an *i* — **pidió**. At the table: **¿Me traés la carta?** and, at the end, **la cuenta**. To get in: **Una mesa para dos, por favor.** And water is **con gas** or **sin gas**: *Para tomar, un agua sin gas.*"
       - title: "Propina"
         body: "The tip is **la propina**, usually ten per cent and in cash. **¿Compartimos?** — *shall we
           share?* — is how two people order one enormous *bife*."
@@ -609,9 +963,6 @@ units:
         pos: "verb"
         en: "to order, to ask for"
         forms:
-          - form: "pido"
-            en: "I order, I ask for"
-            f: "1sg.pres.ind.irregular"
           - form: "pedís"
             en: "you order, you ask for"
             f: "2sg.pres.ind.vos"
@@ -624,8 +975,6 @@ units:
           - form: "pidió"
             en: "ordered, asked (he/she)"
             f: "3sg.pret.ind.irregular"
-          - form: "pedir"
-            f: "inf"
       - lemma: "compartir"
         pos: "verb"
         forms:
@@ -646,8 +995,24 @@ units:
       - lemma: "restaurante"
         pos: "noun"
         en: "restaurant"
+      - lemma: "con gas"
+        pos: "phrase"
+        en: "sparkling (water)"
+      - lemma: "sin gas"
+        pos: "phrase"
+        en: "still (water)"
+      - lemma: "recomendar"
+        pos: "verb"
+        en: "to recommend"
+        forms:
+          - form: "me recomendás"
+            en: "you recommend"
+            f: "2sg.pres.ind.vos.clitic"
+          - form: "recomendás"
+            f: "2sg.pres.ind.vos"
+            bound: true
 
-  - ordinal: 10
+  - ordinal: 14
     slug: "una-grande-de-muzza"
     title: "Order at the pizzería"
     summary: "Una grande de muzza, por favor"
@@ -734,7 +1099,121 @@ units:
         pos: "adj"
         en: "spicy"
 
-  - ordinal: 11
+  - ordinal: 15
+    slug: "la-parrilla"
+    title: "Order at the parrilla"
+    summary: "Un choripán, por favor"
+    grammar:
+      - "comida.parrilla"
+    register_max: "informal"
+    sample:
+      es: "Un choripán, por favor."
+      en: "A choripán, please."
+    tips:
+      - title: "El asado"
+        body: "An asado comes in order: first **chorizo** and **morcilla**, the **achuras**, then the
+          cuts — **vacío**, bife. A **choripán** is a chorizo in bread, the food of every stadium."
+      - title: "¿Cómo la querés?"
+        body: "Meat comes **jugosa** — *pink, juicy* — **a punto** — *medium* — or well done. The
+          **parrilla** is both the grill and the restaurant."
+    words:
+      - lemma: "parrilla"
+        pos: "noun"
+        en: "grill; steakhouse"
+      - lemma: "morcilla"
+        pos: "noun"
+        en: "blood sausage"
+      - lemma: "vacío"
+        pos: "noun"
+        en: "flank steak"
+      - lemma: "achuras"
+        pos: "noun"
+        en: "offal"
+        forms:
+          - form: "achuras"
+            f: "f.pl"
+      - lemma: "jugoso"
+        pos: "adj"
+        en: "juicy, rare"
+        forms:
+          - form: "jugoso"
+            f: "m.sg"
+          - form: "jugosa"
+            f: "f.sg"
+      - lemma: "a punto"
+        pos: "phrase"
+        en: "medium (meat)"
+
+  - ordinal: 16
+    slug: "la-parrillada"
+    title: "Share a parrillada"
+    summary: "Una parrillada para dos"
+    grammar:
+      - "comida.parrilla"
+    register_max: "informal"
+    sample:
+      es: "Una parrillada para dos, con chimichurri."
+      en: "A mixed grill for two, with chimichurri."
+    tips:
+      - title: "La parrillada"
+        body: "For the table there's the **parrillada** — *a mixed grill* on its own little grill: chorizo, morcilla, **mollejas**, **chinchulines** and a **tira de asado**. On your own: a **bife de chorizo** or an **entraña**. The classic start is a **provoleta para compartir**; the prized cuts are **ojo de bife** and **lomo**, with *papas fritas* or *ensalada* on the side."
+      - title: "¿Y la salsa?"
+        body: "On the table: **chimichurri** — oil, garlic, parsley, chilli — and **salsa criolla** — onion,
+          tomato, pepper. Ketchup is a crime. The meat is cooked **a la leña** at the good places."
+      - title: "Bien cocido"
+        body: "Jugosa, a punto, or **bien cocido** — *well done*; **vuelta y vuelta** is barely warm. The
+          bill has a line for the **cubierto** — *the cover charge*: the bread and the cutlery."
+    words:
+      - lemma: "parrillada"
+        pos: "noun"
+        en: "mixed grill"
+      - lemma: "mollejas"
+        pos: "noun"
+        en: "sweetbreads"
+        forms:
+          - form: "mollejas"
+            f: "f.pl"
+      - lemma: "chinchulines"
+        pos: "noun"
+        en: "grilled small intestine"
+        forms:
+          - form: "chinchulines"
+            f: "m.pl"
+      - lemma: "tira de asado"
+        pos: "phrase"
+        en: "short ribs, rib strip"
+      - lemma: "bife de chorizo"
+        pos: "phrase"
+        en: "sirloin steak"
+      - lemma: "entraña"
+        pos: "noun"
+        en: "skirt steak"
+      - lemma: "chimichurri"
+        pos: "noun"
+        en: "garlic and herb steak sauce"
+      - lemma: "salsa criolla"
+        pos: "phrase"
+        en: "onion and tomato relish"
+      - lemma: "leña"
+        pos: "noun"
+        en: "firewood"
+      - lemma: "bien cocido"
+        pos: "phrase"
+        en: "well done (meat)"
+      - lemma: "vuelta y vuelta"
+        pos: "phrase"
+        en: "seared, very rare"
+      - lemma: "cubierto"
+        pos: "noun"
+        en: "cover charge"
+      - lemma: "lomo"
+        pos: "noun"
+        en: "tenderloin"
+      - lemma: "ojo de bife"
+        pos: "phrase"
+        en: "ribeye steak"
+
+  - ordinal: 17
     slug: "tipo-ocho"
     title: "Arrange to meet"
     summary: "Nos vemos tipo ocho"
@@ -753,6 +1232,8 @@ units:
       - title: "Avisame"
         body: "**Avisame cuando llegás** — *let me know when you get there*. **Te aviso** — *I'll let
           you know*."
+      - title: "¿Cómo quedamos?"
+        body: "A plan is closed with **¿Cómo quedamos?** — *so what's the plan?* The answer fixes the time and the place: **Quedamos tipo ocho en la esquina.** Or ask straight: *¿A qué hora nos juntamos?*"
     words:
       - lemma: "encontrarse"
         pos: "verb"
@@ -787,7 +1268,7 @@ units:
         pos: "noun"
         en: "a while"
 
-  - ordinal: 12
+  - ordinal: 18
     slug: "llegue-tarde"
     title: "Say you're running late"
     summary: "Perdón, el bondi tardó mucho"
@@ -802,9 +1283,7 @@ units:
       en: "Sorry, the bus took ages and I didn't let you know."
     tips:
       - title: "¿Por qué no me avisaste?"
-        body: "*Avisar* in the past is plain -ar: **avisé**, **avisaste**, **avisó**. The text at
-          eight-forty: **¿Dónde estás? Te esperaba a las ocho.** And the answer, always: **ya
-          salgo**."
+        body: "*Avisar* in the past is plain -ar: **avisé**, **avisaste**, **avisó**. The text at eight-forty: **¿Dónde estás? Te esperaba a las ocho.** And the answer, always: **ya salgo**. The other classics: **estoy llegando** (still ten minutes away), **estoy en camino** — *I'm on my way* — and **llego en diez**."
       - title: "Tardar"
         body: "**Tardar** is *to take (time)*: **¿cuánto tardás?** — *how long will you be?*; **el
           bondi tardó una hora**. Porteños are rarely **puntuales**, so *tipo ocho* already has the
@@ -874,8 +1353,14 @@ units:
       - lemma: "salida"
         pos: "noun"
         en: "exit, way out"
+      - lemma: "en camino"
+        pos: "phrase"
+        en: "on my way, on the way"
+      - lemma: "se me hizo tarde"
+        pos: "phrase"
+        en: "I lost track of time, I'm running late"
 
-  - ordinal: 13
+  - ordinal: 19
     slug: "las-fiestas"
     title: "Talk about the holidays"
     summary: "Navidad con calor"
@@ -888,8 +1373,7 @@ units:
       en: "At Christmas it's boiling hot."
     tips:
       - title: "Christmas in summer"
-        body: "**Navidad** falls in the heat, so it is often an *asado*, cider and **pan dulce** at
-          midnight, and a **brindis** — *¡salud!* — before the fireworks."
+        body: "**Las fiestas** are Christmas and New Year together: *¡Felices fiestas!* **Navidad** falls in the heat and is celebrated the night before, on **Nochebuena** — the 24th: an *asado* or a cold spread, and at midnight **sidra**, **pan dulce** and a **brindis** — *¡salud!* — before the fireworks and **Papá Noel**."
       - title: "Los ñoquis del 29"
         body: "On the 29th of every month many families eat **ñoquis** with a banknote under the plate,
           for luck. A **feriado** is a public holiday, and there are plenty of them."
@@ -928,8 +1412,23 @@ units:
       - lemma: "salud"
         pos: "interj"
         en: "cheers"
+      - lemma: "sidra"
+        pos: "noun"
+        en: "cider"
+      - lemma: "brindis"
+        pos: "noun"
+        en: "toast (raising a glass)"
+      - lemma: "Nochebuena"
+        pos: "propn"
+        en: "Christmas Eve"
+      - lemma: "Papá Noel"
+        pos: "propn"
+        en: "Santa Claus"
+      - lemma: "felices fiestas"
+        pos: "phrase"
+        en: "happy holidays"
 
-  - ordinal: 14
+  - ordinal: 20
     slug: "en-lo-de-la-abuela"
     title: "Talk about family traditions"
     summary: "Los domingos en lo de la abuela"
@@ -960,6 +1459,9 @@ units:
           - form: "juntábamos"
             f: "1pl.impf.ind"
             bound: true
+          - form: "juntarnos"
+            en: "to get together (us)"
+            f: "inf.clitic"
       - lemma: "festejar"
         pos: "verb"
         forms:
@@ -990,9 +1492,6 @@ units:
       - lemma: "tuco"
         pos: "noun"
         en: "tomato sauce"
-      - lemma: "sidra"
-        pos: "noun"
-        en: "cider"
       - lemma: "arbolito"
         pos: "noun"
         en: "Christmas tree"
@@ -1000,38 +1499,7 @@ units:
         pos: "propn"
         en: "Three Kings' Day"
 
-  - ordinal: 15
-    slug: "practica-la-juntada"
-    title: "Practice: meeting up and celebrating"
-    summary: "Nos encontramos tipo ocho"
-    grammar:
-      - "repaso.pedir"
-      - "repaso.avisar-encontrarse"
-    register_max: "informal"
-    sample:
-      es: "Avisame cuando salís y nos encontramos en la esquina."
-      en: "Let me know when you leave and we'll meet on the corner."
-    tips:
-      - title: "Pido, pedí, pidió"
-        body: "**Pedir** changes its vowel: **pido** today, **pedí** yesterday, and **pidió** for someone else. **¿Qué pediste?** — **Pedí un bife.**"
-      - title: "Tipo ocho"
-        body: "**Tipo** makes a time loose: **tipo ocho** is *around eight*, and in Buenos Aires that means eight-thirty. For exactly eight, say **a las ocho en punto**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "pido"
-      - "pedí"
-      - "pidió"
-      - "nos encontramos"
-      - "avisame"
-      - "espero"
-      - "tipo"
-      - "festejamos"
-      - "brindamos"
-      - "era"
-      - "tenía"
-      - "íbamos"
-
-  - ordinal: 16
+  - ordinal: 21
     slug: "practica-la-sobremesa"
     title: "Practice: late, out and at home"
     summary: "Llegué tarde y ya pidieron"
@@ -1068,7 +1536,7 @@ units:
       - "invitó"
       - "llegaste"
 
-  - ordinal: 17
+  - ordinal: 22
     slug: "me-puse-nervioso"
     title: "Say how you felt"
     summary: "Me puse re nervioso"
@@ -1086,6 +1554,8 @@ units:
       - title: "Me enojé"
         body: "The feeling verbs keep their pronoun in the past too: **me enojé**, **te asustaste**,
           **se preocupó**."
+      - title: "Me dio miedo"
+        body: "The other way to say how you felt is **me dio** + the feeling: **me dio miedo** — *it scared me*. You will hear it with many feelings: *me dio bronca* (it made me angry), *me dio vergüenza* (I was embarrassed), *me dio lástima* (I felt sorry)."
     words:
       - lemma: "ponerse"
         pos: "verb"
@@ -1177,583 +1647,13 @@ units:
             f: "m.sg"
           - form: "celosa"
             f: "f.sg"
-
-  - ordinal: 18
-    slug: "me-olvide"
-    title: "Say what went wrong and how you felt"
-    summary: "Me olvidé de su cumple"
-    grammar:
-      - "ponerse.pret"
-      - "pronominales.pret"
-    register_max: "informal"
-    sample:
-      es: "Me olvidé de su cumple y se enojó."
-      en: "I forgot his birthday and he got angry."
-    tips:
-      - title: "Me olvidé de…"
-        body: "**Me olvidé de su cumple** — *I forgot his birthday*. Like *me enojé* it keeps its
-          pronoun, and takes **de** before what you forgot. Same shape: **me aburrí**, **me calmé**,
-          **me enamoré** — of Buenos Aires, of course."
-      - title: "Estaba or me puse?"
-        body: "**Estaba nervioso** is how you were; **me puse nervioso** is the moment it hit you.
-          **Me sentí re mal** — *I felt awful* — is one moment too. For *us*: **nos pusimos
-          contentos**; and **me puse colorado** is *I blushed*."
-    words:
-      - lemma: "olvidarse"
-        pos: "verb"
-        en: "to forget"
-        forms:
-          - form: "me olvidé"
-            en: "I forgot"
-            f: "1sg.pret.ind.clitic"
-          - form: "olvidé"
-            f: "1sg.pret.ind"
-            bound: true
-      - lemma: "sentirse"
-        pos: "verb"
-        en: "to feel"
-        forms:
-          - form: "me sentí"
-            en: "I felt"
-            f: "1sg.pret.ind.clitic"
-          - form: "te sentiste"
-            en: "you felt"
-            f: "2sg.pret.ind.vos.clitic"
-          - form: "sentí"
-            f: "1sg.pret.ind"
-            bound: true
-          - form: "sentiste"
-            f: "2sg.pret.ind.vos"
-            bound: true
-      - lemma: "ponerse"
-        pos: "verb"
-        forms:
-          - form: "nos pusimos"
-            en: "we got, we became"
-            f: "1pl.pret.ind.clitic.irregular"
-          - form: "pusimos"
-            f: "1pl.pret.ind.irregular"
-            bound: true
-      - lemma: "aburrirse"
-        pos: "verb"
-        en: "to get bored"
-        forms:
-          - form: "me aburrí"
-            en: "I got bored"
-            f: "1sg.pret.ind.clitic"
-          - form: "aburrí"
-            f: "1sg.pret.ind"
-            bound: true
-      - lemma: "asustarse"
-        pos: "verb"
-        forms:
-          - form: "se asustó"
-            en: "he got scared, she got scared"
-            f: "3sg.pret.ind.clitic"
-          - form: "asustó"
-            f: "3sg.pret.ind"
-            bound: true
-      - lemma: "preocuparse"
-        pos: "verb"
-        forms:
-          - form: "te preocupaste"
-            en: "you got worried"
-            f: "2sg.pret.ind.vos.clitic"
-          - form: "preocupaste"
-            f: "2sg.pret.ind.vos"
-            bound: true
-      - lemma: "calmarse"
-        pos: "verb"
-        en: "to calm down"
-        forms:
-          - form: "me calmé"
-            en: "I calmed down"
-            f: "1sg.pret.ind.clitic"
-          - form: "calmé"
-            f: "1sg.pret.ind"
-            bound: true
-          - form: "calmate"
-            en: "calm down"
-            f: "2sg.imp.vos.clitic"
-      - lemma: "enamorarse"
-        pos: "verb"
-        en: "to fall in love"
-        forms:
-          - form: "me enamoré"
-            en: "I fell in love"
-            f: "1sg.pret.ind.clitic"
-          - form: "enamoré"
-            f: "1sg.pret.ind"
-            bound: true
-      - lemma: "colorado"
-        pos: "adj"
-        en: "red-faced"
-        forms:
-          - form: "colorado"
-            f: "m.sg"
-          - form: "colorada"
-            f: "f.sg"
-
-  - ordinal: 19
-    slug: "la-semana-que-viene"
-    title: "Make plans for next week"
-    summary: "La semana que viene"
-    grammar:
-      - "ir-a-infinitivo"
-      - "pensar-tener-ganas"
-      - "que-viene"
-    register_max: "informal"
-    sample:
-      es: "La semana que viene voy a viajar a Córdoba."
-      en: "Next week I'm going to travel to Córdoba."
-    tips:
-      - title: "Voy a…"
-        body: "Porteños talk about the future with **ir a**: **voy a laburar**, **vamos a comer**. *Next
-          week* is **la semana que viene**, *next year* **el año que viene**."
-      - title: "Tengo ganas"
-        body: "**Tengo ganas de ir a la playa** — *I feel like going to the beach*. **Pienso ir** — *I'm
-          planning to go*."
-    words:
-      - lemma: "ganas"
+      - lemma: "bronca"
         pos: "noun"
-        en: "wish, urge (to feel like)"
-      - lemma: "que viene"
-        pos: "phrase"
-        en: "next"
-      - lemma: "viajar"
-        pos: "verb"
-        forms:
-          - form: "viajamos"
-            en: "we travel, we're traveling"
-            f: "1pl.pres.ind"
-      - lemma: "mudarse"
-        pos: "verb"
-        en: "to move (house)"
-        forms:
-          - form: "mudarme"
-            en: "to move (myself)"
-            f: "inf.clitic"
-      - lemma: "descansar"
-        pos: "verb"
-        forms:
-          - form: "descanso"
-            en: "I rest"
-            f: "1sg.pres.ind"
-      - lemma: "seguro"
-        pos: "adv"
-        en: "for sure, definitely"
-
-  - ordinal: 20
-    slug: "voy-a-tener-que"
-    title: "Say what you're going to have to do"
-    summary: "Voy a tener que laburar"
-    grammar:
-      - "ir-a-infinitivo"
-      - "pensar-tener-ganas"
-      - "que-viene"
-      - "voy-a-tener-que"
-    register_max: "informal"
-    sample:
-      es: "El mes que viene voy a tener que laburar mucho."
-      en: "Next month I'm going to have to work a lot."
-    tips:
-      - title: "Voy a tener que"
-        body: "**Tengo que** is *I have to*; put **voy a** in front for later: **voy a tener que
-          laburar** — *I'm going to have to work*. It works for everyone: **vas a tener que**,
-          **vamos a tener que**."
-      - title: "Some day, soon"
-        body: "**Pronto** — *soon*; **a fin de año** — *at the end of the year*; **algún día** —
-          *some day*. **¿Qué piensan hacer?** — **Pensamos juntar plata para viajar.** And the
-          classic January promise: **me anoté en el gimnasio**."
-    words:
-      - lemma: "pensar"
-        pos: "verb"
-        forms:
-          - form: "pensamos"
-            en: "we think, we plan to"
-            f: "1pl.pres.ind"
-      - lemma: "visitar"
-        pos: "verb"
-        en: "to visit"
-        forms:
-          - form: "visitar"
-            f: "inf"
-      - lemma: "juntar"
-        pos: "verb"
-        en: "to save up, to collect"
-        forms:
-          - form: "juntar"
-            f: "inf"
-      - lemma: "anotarse"
-        pos: "verb"
-        en: "to sign up"
-        forms:
-          - form: "anotarme"
-            en: "to sign (myself) up"
-            f: "inf.clitic"
-          - form: "me anoté"
-            en: "I signed up"
-            f: "1sg.pret.ind.clitic"
-          - form: "anoté"
-            f: "1sg.pret.ind"
-            bound: true
-      - lemma: "curso"
+        en: "anger"
+        register: "informal"
+      - lemma: "lástima"
         pos: "noun"
-        en: "course"
-      - lemma: "fin de año"
-        pos: "phrase"
-        en: "end of the year"
-      - lemma: "pronto"
-        pos: "adv"
-        en: "soon"
-      - lemma: "algún día"
-        pos: "phrase"
-        en: "some day"
-
-  - ordinal: 21
-    slug: "me-mude"
-    title: "Talk about moving house"
-    summary: "Me mudé al centro"
-    grammar:
-      - "mudarse.pret"
-      - "extrañar"
-      - "vecinos"
-    register_max: "informal"
-    sample:
-      es: "Me mudé al centro y extraño mi barrio."
-      en: "I moved downtown and I miss my neighborhood."
-    tips:
-      - title: "Extrañar"
-        body: "**Extraño a mi vieja** — *I miss my mum*. Not *echar de menos*: that is Spain's, and here
-          nobody says it."
-      - title: "Me mudé"
-        body: "**Me mudé** — *I moved (house)*; **nos mudamos** — *we moved*. The **mudanza** is the move
-          itself, and always a *quilombo*."
-    words:
-      - lemma: "mudarse"
-        pos: "verb"
-        forms:
-          - form: "me mudé"
-            en: "I moved (house)"
-            f: "1sg.pret.ind.clitic"
-          - form: "te mudaste"
-            en: "you moved (house)"
-            f: "2sg.pret.ind.vos.clitic"
-          - form: "se mudó"
-            en: "he moved, she moved (house)"
-            f: "3sg.pret.ind.clitic"
-          - form: "nos mudamos"
-            en: "we moved (house)"
-            f: "1pl.pret.ind.clitic"
-          - form: "mudé"
-            f: "1sg.pret.ind"
-            bound: true
-          - form: "mudaste"
-            f: "2sg.pret.ind.vos"
-            bound: true
-          - form: "mudó"
-            f: "3sg.pret.ind"
-            bound: true
-          - form: "mudamos"
-            f: "1pl.pret.ind"
-            bound: true
-      - lemma: "mudanza"
+        en: "pity"
+      - lemma: "vergüenza"
         pos: "noun"
-        en: "move, removal"
-      - lemma: "caja"
-        pos: "noun"
-        en: "box"
-        forms:
-          - form: "caja"
-            f: "f.sg"
-          - form: "cajas"
-            en: "boxes"
-            f: "f.pl"
-      - lemma: "vecino"
-        pos: "noun"
-        forms:
-          - form: "vecinos"
-            en: "neighbors"
-            f: "m.pl"
-
-  - ordinal: 22
-    slug: "el-depto-nuevo"
-    title: "Rent and set up a new place"
-    summary: "Pintamos el depto nuevo"
-    grammar:
-      - "mudarse.pret"
-      - "extrañar"
-      - "vecinos"
-    register_max: "informal"
-    sample:
-      es: "Nos mudamos con un flete y pintamos el depto."
-      en: "We moved with a van and painted the flat."
-    tips:
-      - title: "Before and after the move"
-        body: "The old place is imperfect, the move is preterite: **antes alquilaba en el centro** —
-          how it was; **me mudé a Palermo** — what happened. **Extrañaba** is missing that went on:
-          *los primeros meses extrañaba mi barrio*."
-      - title: "The move itself"
-        body: "You rent through an **inmobiliaria** or straight from the **dueño**, and pay the
-          **alquiler** every month. A **flete** takes the **muebles** and the **colchón**, and
-          before unpacking, **pintamos**. The neighbours say it of you: **se mudaron**."
-    words:
-      - lemma: "mudarse"
-        pos: "verb"
-        forms:
-          - form: "se mudaron"
-            en: "they moved (house)"
-            f: "3pl.pret.ind.clitic"
-          - form: "mudaron"
-            f: "3pl.pret.ind"
-            bound: true
-      - lemma: "extrañar"
-        pos: "verb"
-        forms:
-          - form: "extrañaba"
-            en: "missed, used to miss"
-            f: "sg.impf.ind"
-      - lemma: "alquilar"
-        pos: "verb"
-        forms:
-          - form: "alquilaba"
-            en: "rented, used to rent"
-            f: "sg.impf.ind"
-      - lemma: "pintar"
-        pos: "verb"
-        en: "to paint"
-        forms:
-          - form: "pintamos"
-            en: "we painted"
-            f: "1pl.pret.ind"
-          - form: "pintar"
-            f: "inf"
-      - lemma: "dueño"
-        pos: "noun"
-        en: "owner, landlord"
-        forms:
-          - form: "dueño"
-            f: "m.sg"
-          - form: "dueña"
-            f: "f.sg"
-      - lemma: "inmobiliaria"
-        pos: "noun"
-        en: "real estate agency"
-      - lemma: "alquiler"
-        pos: "noun"
-        en: "rent"
-      - lemma: "flete"
-        pos: "noun"
-        en: "moving van"
-      - lemma: "mueble"
-        pos: "noun"
-        en: "piece of furniture"
-        forms:
-          - form: "mueble"
-            f: "m.sg"
-          - form: "muebles"
-            en: "furniture"
-            f: "m.pl"
-      - lemma: "colchón"
-        pos: "noun"
-        en: "mattress"
-
-  - ordinal: 23
-    slug: "practica-me-mude"
-    title: "Practice: feelings, plans and moving"
-    summary: "Me puse re contento"
-    grammar:
-      - "repaso.ponerse"
-      - "repaso.ir-a"
-      - "repaso.imperfecto-preterito"
-    register_max: "informal"
-    sample:
-      es: "Me mudé a Córdoba y extraño mucho a mis viejos."
-      en: "I moved to Córdoba and I miss my parents a lot."
-    tips:
-      - title: "Me puse: it happened to you"
-        body: "**Me puse nervioso**, **me enojé**, **me asusté** — a feeling that came over you at one moment is the preterite. **Estaba nervioso** is the state you were in."
-      - title: "Plans with voy a"
-        body: "For plans, porteños use **voy a** + verb far more than the future: **la semana que viene voy a descansar**. **Pienso** and **tengo ganas de** do the same job."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "me puse"
-      - "te pusiste"
-      - "me enojé"
-      - "me asusté"
-      - "pienso"
-      - "ganas"
-      - "me mudé"
-      - "nos mudamos"
-      - "extraño"
-      - "vivía"
-      - "estaba"
-      - "fui"
-
-  - ordinal: 24
-    slug: "practica-antes-y-ahora"
-    title: "Practice: then, now and next"
-    summary: "Antes alquilaba, ahora me mudo"
-    grammar:
-      - "repaso.ponerse"
-      - "repaso.ir-a"
-      - "repaso.imperfecto-preterito"
-    register_max: "informal"
-    sample:
-      es: "Antes alquilaba en el centro y el año que viene voy a mudarme."
-      en: "I used to rent downtown, and next year I'm going to move."
-    tips:
-      - title: "Three times in one breath"
-        body: "**Antes alquilaba** — how it was; **me mudé** — what happened; **voy a pintar** — what's
-          next. A porteño story moves through all three without stopping."
-      - title: "Me sentí, me olvidé"
-        body: "The moment a feeling hit, or a thing slipped your mind, is preterite with its pronoun:
-          **me sentí re mal**, **me olvidé de avisarte**, **nos pusimos contentos**."
-    # A practice unit (roadmap §Practice): no new words, these earlier ones again.
-    review:
-      - "me olvidé"
-      - "me sentí"
-      - "nos pusimos"
-      - "me enamoré"
-      - "tener"
-      - "pronto"
-      - "algún día"
-      - "se mudaron"
-      - "extrañaba"
-      - "alquilaba"
-      - "vivía"
-      - "estaba"
-      - "fui"
-
-  - ordinal: 25
-    slug: "las-figuritas"
-    title: "Share childhood memories"
-    summary: "No me acordaba de la calesita"
-    grammar:
-      - "acordarse"
-      - "repaso.imperfecto-preterito"
-    register_max: "informal"
-    sample:
-      es: "No me acordaba de la calesita de la plaza."
-      en: "I'd forgotten about the merry-go-round in the square."
-    tips:
-      - title: "Acordarse de"
-        body: "What you remember takes **de**: **mi abuela se acuerda de todo**; **nos acordamos de
-          esa época**. **No me acordaba** — *I'd forgotten* — is imperfect: the not-remembering went
-          on until someone brought it up."
-      - title: "Every porteño childhood"
-        body: "The **calesita** in the plaza, **golosinas** from the kiosco, a **barrilete** on a windy
-          day, and the **álbum** of **figuritas** you filled for every **Mundial** — **lo
-          llenábamos entre todos**."
-    words:
-      - lemma: "acordarse"
-        pos: "verb"
-        en: "to remember"
-        forms:
-          - form: "se acuerda"
-            en: "remembers (he/she remembers)"
-            f: "3sg.pres.ind.clitic.irregular"
-          - form: "nos acordamos"
-            en: "we remember"
-            f: "1pl.pres.ind.clitic"
-          - form: "me acordaba"
-            en: "I remembered, I used to remember"
-            f: "1sg.impf.ind.clitic"
-          - form: "acuerda"
-            f: "3sg.pres.ind.irregular"
-            bound: true
-          - form: "acordamos"
-            f: "1pl.pres.ind"
-            bound: true
-          - form: "acordaba"
-            f: "sg.impf.ind"
-            bound: true
-      - lemma: "ver"
-        pos: "verb"
-        forms:
-          - form: "veíamos"
-            en: "we saw, we used to see"
-            f: "1pl.impf.ind.irregular"
-      - lemma: "llenar"
-        pos: "verb"
-        en: "to fill"
-        forms:
-          - form: "llenábamos"
-            en: "we used to fill"
-            f: "1pl.impf.ind"
-      - lemma: "infancia"
-        pos: "noun"
-        en: "childhood"
-      - lemma: "calesita"
-        pos: "noun"
-        en: "merry-go-round"
-      - lemma: "golosina"
-        pos: "noun"
-        en: "sweet, treat"
-        forms:
-          - form: "golosinas"
-            en: "sweets, treats"
-            f: "f.pl"
-      - lemma: "barrilete"
-        pos: "noun"
-        en: "kite"
-      - lemma: "álbum"
-        pos: "noun"
-        en: "album"
-      - lemma: "figurita"
-        pos: "noun"
-        en: "trading sticker"
-        forms:
-          - form: "figuritas"
-            en: "(trading) stickers"
-            f: "f.pl"
-      - lemma: "Mundial"
-        pos: "propn"
-        en: "the World Cup"
-
-  - ordinal: 26
-    slug: "te-acordas"
-    title: "Remember together"
-    summary: "¿Te acordás cuando…?"
-    grammar:
-      - "acordarse"
-      - "repaso.imperfecto-preterito"
-    register_max: "informal"
-    sample:
-      es: "¿Te acordás cuando íbamos a la playa?"
-      en: "Do you remember when we used to go to the beach?"
-    tips:
-      - title: "¿Te acordás?"
-        body: "**¿Te acordás cuando…?** opens every memory at a family asado. **Me acuerdo** — *I
-          remember*; **no me acuerdo** — *I don't remember*."
-      - title: "Antes era distinto"
-        body: "**Antes era distinto** — *it used to be different*. **¡Qué épocas!** — *those were the
-          days!* — closes it."
-    words:
-      - lemma: "acordarse"
-        pos: "verb"
-        en: "to remember"
-        forms:
-          - form: "me acuerdo"
-            en: "I remember"
-            f: "1sg.pres.ind.clitic.irregular"
-          - form: "te acordás"
-            en: "you remember"
-            f: "2sg.pres.ind.vos.clitic"
-          - form: "acuerdo"
-            f: "1sg.pres.ind.irregular"
-            bound: true
-          - form: "acordás"
-            f: "2sg.pres.ind.vos"
-            bound: true
-      - lemma: "distinto"
-        pos: "adj"
-        en: "different"
-        forms:
-          - form: "distinto"
-            f: "m.sg"
-          - form: "distinta"
-            f: "f.sg"
-      - lemma: "qué épocas"
-        pos: "phrase"
-        en: "those were the days"
+        en: "embarrassment, shame"

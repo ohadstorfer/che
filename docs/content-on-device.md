@@ -121,6 +121,10 @@ A content fix refreshes only the affected block, for learners who have it.
 ## 4. Edge cases covered
 
 - Jumping units/sections, placement: the target unit is always in reach (§1).
+- The onboarding placement walks the whole course a section at a time (`placement.ts`). It does not
+  pull blocks: each section it reaches fetches the sentences of the three units it samples, one
+  stored piece per unit (`loadUnitSentenceRows`), so a full walk is at most 24 units' sentences.
+  If a fetch fails the section is asked through its words alone.
 - Offline: saved blocks open; progress writes still need a connection.
 - Signed out / demo backend: no version → disk if present, else network with the old expiry.
 - App update with a new row shape: `CONTENT_FORMAT` bump invalidates every file.

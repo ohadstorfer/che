@@ -228,7 +228,16 @@ export function withMeanings(forms: Form[], sentences: Sentence[], reached = 0, 
 
   return forms.map((f) => {
     const meanings = meaningsOf(f);
-    const candidates = [...meanings, ...glossSenses(f.gloss_en)];
+    const dictionary = glossSenses(f.gloss_en);
+    // A sentence's article is the sentence's, not the word's: "Y pan, por
+    // favor" is "And some bread, please", but `pan` on its own is "bread". A
+    // rendering that is a dictionary sense behind an article shows as that
+    // sense; `meanings_en` keeps it as written, so it is still a right answer.
+    const plain = (text: string) => {
+      const bare = senseKey(text.replace(/^\s*(the|a|an|some)\s+/i, ''));
+      return dictionary.find((d) => senseKey(d) === bare) ?? text;
+    };
+    const candidates = [...new Set([...meanings.map(plain), ...dictionary])];
     if (!candidates.length) return f;
     const limit = Math.max(reached, f.unit_order);
     const shared = (text: string) =>

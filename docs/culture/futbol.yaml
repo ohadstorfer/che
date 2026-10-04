@@ -2,7 +2,7 @@ section:
   slug: "futbol"
   title: "Fútbol"
   emoji: "⚽"
-  summary: "Not a sport here. A religion with a fixture list."
+  summary: "Clubs, chants, Maradona, Messi and Monday's teasing"
 
 # Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
 # 2–3 guess-first questions, no word review.
@@ -35,12 +35,14 @@ classes:
           - "Across the city, 30 km"
           - "In different provinces"
         correct: 0
-        explain: "You can see one stadium from the other. That's the **clásico de Avellaneda**: sharing a street with the team you hate most."
+        explain: "You can see one stadium from the other. That's the **clásico de Avellaneda**: living three blocks from the team you hate most."
       - type: card
         text: "Golden rule: never wear one club's colors near the other's stadium. Especially on match day."
       - type: card
+        text: "Want to go to a match? Boca and River tickets go mostly to **socios**, club members. Away fans were banned in 2013 and are only slowly coming back. And keep away from the **barra brava**, the organised hard-core fans."
+      - type: card
         chip: "Pro tip"
-        text: "No team? Don't fake one. Say **“No sé, ¿vos de cuál sos?”** and enjoy the next half hour of stories."
+        text: "No team? Don't fake one. Say **“De ninguno todavía. ¿Vos de cuál sos?”** (None yet. Which one are you?) and enjoy the next half hour of stories."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -67,9 +69,9 @@ classes:
       - type: choice
         prompt: "Why are River fans called “gallinas”?"
         options:
-          - "River blew a 2–0 lead in a big final"
+          - "River was winning 2–0 in a big final and lost"
           - "Their first stadium was a chicken farm"
-          - "Their old jersey had feathers on it"
+          - "Their old shirt had feathers on it"
         correct: 0
         explain: "In the 1966 Copa Libertadores final, River were winning 2–0 and lost 4–2. At the next match, rival fans threw a chicken onto the pitch. The name stuck."
       - type: card
@@ -78,13 +80,13 @@ classes:
         prompt: "Your friend's team lost the last 3 matches you watched together. Tonight is the big one. What happens?"
         options:
           - "He saves you the best spot on the couch"
-          - "He asks you to watch it at your place"
+          - "He asks you to watch it somewhere else"
           - "He lends you his lucky shirt"
         correct: 1
         explain: "Nothing personal: you're **mufa**. Maybe you can come back next season."
       - type: card
         chip: "Did you know?"
-        text: "When River got relegated in 2011, their stadium stayed full in the second division. Loyalty like that has a name: **aguante**."
+        text: "Your team loses, it rains, the stadium is far away. You go anyway, and you sing louder. That loyalty has a name: **aguante**."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -105,9 +107,11 @@ classes:
         correct: 0
         explain: "A **caño** is a nutmeg. No goal needed: Nacho will hear about it for weeks."
       - type: card
+        text: "Everyday words: the stadium is **la cancha**, the goalkeeper is the **arquero**, a great goal is a **golazo**. To ask the result: **¿Cómo salió?** Then **ganamos**, **perdimos** or **empatamos**: we won, we lost, we drew."
+      - type: card
         text: "The coach is **el DT**, the director técnico. And every Argentine is secretly a DT: they all know who should have played."
       - type: card
-        text: "Before a big match you **hacer la previa**: meet early to eat, drink and sing. The previa often lasts longer than the match."
+        text: "Before a big match you **hacés la previa**: meet early to eat, drink and sing. The previa often lasts longer than the match."
       - type: choice
         prompt: "It's Monday. Your team lost 4–0 yesterday. What's waiting for you at the office?"
         options:
@@ -115,14 +119,14 @@ classes:
           - "Memes, jokes, and a rival's shirt on your chair"
           - "A calm chat about tactics"
         correct: 1
-        explain: "Welcome to the **gastada**."
+        explain: "That's the **gastada**: the teasing you get after your team loses."
       - type: card
         text: "The **gastada** is the teasing after a loss. You take it, you save the memes, and you pay it back when you win. “It's only a game” is not an accepted answer."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "la-tabla-y-el-descenso"
-    title: "The table, the drop and the VAR"
+    title: "Relegation, promedios and VAR"
     summary: "Irse a la B, the promedios and endless penalty debates"
     pages:
       - type: card
@@ -136,7 +140,7 @@ classes:
         correct: 0
         explain: "Boca has never gone down. Their fans never let anyone forget it."
       - type: card
-        text: "River's drop in 2011 was probably the biggest shock in Argentine football history. More than ten years later, Boca fans still sing about it."
+        text: "River went down in 2011, probably the biggest shock in Argentine football history. Boca fans still sing about it. River fans answer with one word: Madrid."
       - type: choice
         prompt: "Your team finished fifth this season, but your friend is still scared of going down. How is that possible?"
         options:
@@ -144,9 +148,9 @@ classes:
           - "The top five teams swap leagues"
           - "The VAR can take points away"
         correct: 0
-        explain: "Relegation often uses the **promedio**, explained next."
+        explain: "Clubs can go down on their **promedio**: an average of the last three seasons, so old bad years still count."
       - type: card
-        text: "The **promedio** is your points per match over the last three seasons. One great year can't save a small club, and one bad year rarely sinks a big one. Critics say that's the point."
+        text: "The **promedio** is a club's points per match over the last three seasons. Today two clubs go down: the last in the year's table and the last in the promedios. Critics say the system protects the big clubs."
       - type: card
         text: "Every close call goes to **el VAR**, and the debate lasts until Thursday: **¿fue penal?** Was it a penalty? Old-timers still yell **orsai**: offside, the way their grandparents said it."
     vocabulary: []
@@ -157,7 +161,7 @@ classes:
     summary: "A World Cup with a shadow, a church for Diego, and the women who beat England first"
     pages:
       - type: card
-        text: "When **la Selección** plays, the country stops. Boca and River fans hug when Argentina scores. Three World Cups so far: 1978, 1986 and 2022."
+        text: "When **la Selección** plays, the country stops. Boca and River fans hug when Argentina scores. Three World Cups so far: 1978, 1986 and 2022. In 2026 it lost the final to Spain."
       - type: card
         text: "1978 was won at home, under a military dictatorship that used the cup as propaganda. Many Argentines still feel uneasy celebrating it. If it comes up, listen more than you talk."
       - type: card
@@ -169,9 +173,11 @@ classes:
           - "December 25, like everyone else"
           - "June 22, the day he beat England"
         correct: 0
-        explain: "The **Iglesia Maradoniana** counts its years from his birth, in 1960. Half joke, half not."
+        explain: "The **Iglesia Maradoniana** started in Rosario in 1998 and counts its years from his birth, in 1960. June 22 is its Easter. Half joke, half not."
       - type: card
-        text: "Mexico 1986, against England, four years after the **Malvinas** war. Diego scores with his hand, **la Mano de Dios**, then dribbles past half their team for the Goal of the Century."
+        text: "People call him **el Diez**, the number ten, or just **el Diego**. He died on November 25, 2020. The wake was at the Casa Rosada, and huge crowds came to say goodbye."
+      - type: card
+        text: "Mexico 1986, quarter-final against England at the Azteca stadium, four years after the **Malvinas** (Falklands) war. Diego scores with his hand, **la Mano de Dios**, then dribbles past half their team. Argentina went on to win the cup."
       - type: choice
         prompt: "Diego wasn't the first Argentine to beat England at that same stadium. Who was?"
         options:
@@ -187,10 +193,10 @@ classes:
   # ─────────────────────────────────────────────────────────────
   - slug: "messi-y-qatar"
     title: "Messi and Qatar"
-    summary: "Heartbreak in Brazil, glory in Qatar"
+    summary: "Heartbreak in Brazil, glory in Qatar, one more final in 2026"
     pages:
       - type: card
-        text: "**Messi** grew up in Rosario and left for Barcelona at 13. For years, some Argentines grumbled that he only shone for Barça."
+        text: "**Messi** grew up in Rosario and left for Barcelona at 13. For years, some Argentines complained that he only played well for Barça."
       - type: choice
         prompt: "Why did Messi move to Barcelona as a kid?"
         options:
@@ -202,7 +208,7 @@ classes:
       - type: card
         text: "2014 World Cup final, in Brazil: Germany scores in extra time. Messi walks past the trophy he couldn't touch. That photo still hurts."
       - type: card
-        text: "After more lost finals, Messi quit the national team in 2016. Half the country begged him to come back. He did."
+        text: "After more lost finals, Messi quit the national team in 2016. Half the country begged him to come back. He did, and in 2021 he finally won a title with Argentina: the Copa América, against Brazil, in the Maracanã."
       - type: card
         text: "Qatar 2022, the final against France: 2–0, 2–2, 3–2, 3–3. Then penalties. **Dibu Martínez** saves one, **Montiel** scores the last. Messi finally lifts the cup."
       - type: choice
@@ -215,29 +221,31 @@ classes:
         explain: "Millions. The team bus couldn't get through, and the players finished the parade by helicopter."
       - type: card
         text: "The soundtrack of Qatar: **“Muchachos, ahora nos volvimos a ilusionar”**, a fan chant sung to a song by La Mosca. Start it at any party and the whole room joins in."
+      - type: card
+        text: "In 2026 the team, known as **la Scaloneta** after coach Scaloni, reached the final again and lost 1–0 to Spain in extra time. Weeks later, Messi retired from the national team."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
   - slug: "mas-alla-de-buenos-aires"
     title: "Beyond Buenos Aires"
-    summary: "Rosario, Córdoba and La Plata, where the local derby beats Boca-River"
+    summary: "Rosario, Córdoba and La Plata, where the local derby matters more than Boca–River"
     pages:
       - type: card
-        text: "Outside the capital, the local **clásico** beats Boca–River. Ask someone from Rosario about Boca and River: a shrug. Ask about Newell's and Central: cancel your plans."
+        text: "In cities with their own big clubs, like Rosario, Córdoba or La Plata, the local **clásico** matters more than Boca–River. Ask someone from Rosario about Newell's and Central, and you'll be listening for an hour."
       - type: choice
-        prompt: "Newell's fans are proudly called **leprosos**, lepers. Where does that come from?"
+        prompt: "Newell's fans proudly call themselves **leprosos**, an old word for people with leprosy. Where does that come from?"
         options:
-          - "They agreed to a charity match for leprosy patients"
+          - "They agreed to a charity match for people with leprosy"
           - "Their first stadium was an old hospital"
           - "Their founder was a doctor"
         correct: 0
-        explain: "The story goes: around 1920, both Rosario clubs were invited to play a charity match for leprosy patients. Newell's said yes."
+        explain: "The story goes: around 1920, both Rosario clubs were invited to play a charity match for people with leprosy. Newell's said yes. Off the pitch, the word is offensive."
       - type: card
         text: "Legend says Rosario Central turned that match down, so they became the **canallas**: the scoundrels. Nobody can prove it, and both clubs wear the insults with pride."
       - type: card
         text: "Even the Selección splits: **Messi** grew up a Newell's kid, **Di María** is pure Central."
       - type: card
-        text: "In La Plata it's **Estudiantes** against **Gimnasia**. Estudiantes fans are **pinchas**, Gimnasia fans are **triperos**. In Córdoba, it's **Belgrano** against **Talleres**."
+        text: "In La Plata it's **Estudiantes** against **Gimnasia**. Estudiantes fans are **pinchas**, short for **pincharratas** (rat-stabbers), Gimnasia fans are **triperos**. In Córdoba, it's **Belgrano** against **Talleres**."
       - type: choice
         prompt: "Gimnasia fans are called **triperos**, tripe people. Why?"
         options:

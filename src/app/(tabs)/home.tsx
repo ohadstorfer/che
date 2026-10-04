@@ -33,7 +33,7 @@ import {
   sectionAt,
   sectionSummaries,
 } from '@/lib/course';
-import { maxUnitsInTest } from '@/lib/placement';
+import { jumpAllowed } from '@/lib/placement';
 import { FREE_UNITS, usePremium } from '@/lib/premium';
 import {
   enablePartnerReminders,
@@ -42,7 +42,7 @@ import {
   getPushStatus,
   type PushStatus,
 } from '@/lib/push';
-import { getMistakeCount, getPracticeCounts } from '@/lib/session';
+import { getPracticeCounts } from '@/lib/session';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { readSnapshot, writeSnapshot } from '@/lib/snapshot';
 import { streakStatus, type StreakStatus } from '@/lib/streak';
@@ -60,8 +60,6 @@ interface HomeData {
   known: number;
   /** Which days of this week she has already completed, as YYYY-MM-DD. */
   weekDone: string[];
-  /** Words she has missed lately and not got right since — the Mistakes entry. */
-  mistakes: number;
   /** Unit checks tried and not yet passed, by lesson id: attempts so far. */
   checkAttempts: Map<string, number>;
   /** Drawn from the phone's copy; the real load hasn't landed yet. */
@@ -77,7 +75,6 @@ interface HomeSnapshot {
   streak: Streak | null;
   known: number;
   weekDone: string[];
-  mistakes: number;
   pushStatus: PushStatus | null;
 }
 
@@ -820,7 +817,6 @@ export default function Home() {
       streak: snap.streak,
       known: snap.known,
       weekDone: snap.weekDone,
-      mistakes: snap.mistakes,
       checkAttempts: new Map(snap.checkAttempts),
       cached,
     });
@@ -830,14 +826,13 @@ export default function Home() {
   // nothing must not reload the path.
   const load = useCallback(async () => {
     if (!userId) return;
-    const [course, { done, checkAttempts }, counts, streakWeek, mistakes] = await Promise.all([
+    const [course, { done, checkAttempts }, counts, streakWeek] = await Promise.all([
       loadCourse(),
       loadLessonProgress(userId),
       getPracticeCounts(userId),
       // Her streak and this week's days, for the header — published to the
       // copy every tab's header reads, so theirs is in place before they open.
       fetchStreakWeek(userId),
-      getMistakeCount(userId),
     ]);
     const snap: HomeSnapshot = {
       done: [...done],
@@ -845,7 +840,6 @@ export default function Home() {
       streak: streakWeek.streak,
       known: counts.known,
       weekDone: streakWeek.weekDone,
-      mistakes,
       pushStatus: lastPushStatus,
     };
     fresh.current = true;
@@ -1172,10 +1166,8 @@ export default function Home() {
     hereUnit && current < path.length
       ? units.filter((u) => u.course_order >= hereUnit.course_order && u.course_order < target.course_order).length
       : 0;
-  const canJumpTo = (target: Unit) => {
-    const span = jumpSpan(target);
-    return span > 0 && span <= maxUnitsInTest();
-  };
+  const canJumpTo = (target: Unit) =>
+    !!hereUnit && current < path.length && jumpAllowed(units, hereUnit.course_order, target);
   const jumpTo = (target: Unit) => {
     setGuide(null);
     router.push(`/practice?test=jump&to=${target.id}`);
@@ -1348,12 +1340,7 @@ export default function Home() {
         }
       />
 
-      {!noCourse && (data?.mistakes ?? 0) > 0 ? (
-        <MistakesButton
-          mistakes={data?.mistakes ?? 0}
-          onPress={() => router.push('/practice?mode=mistakes')}
-        />
-      ) : null}
+      {!noCourse && (data?.known ?? 0) > 0 ? <ReviewButton onPress={() => router.push('/my-words')} /> : null}
       <Guidebook
         unit={guide}
         tips={guide ? (data?.course.tipsByUnit.get(guide.id) ?? []) : []}
@@ -1375,26 +1362,24 @@ export default function Home() {
 }
 
 // ---------------------------------------------------------------------------
-// MistakesButton — the way back to what she got wrong. It only appears when
-// there is something to go over, so the road is clear the rest of the time.
+// ReviewButton — the way back to what she has already learned: her words, how
+// settled each one is, and a round of the weakest (my-words.tsx, which rises
+// from the bottom). It appears once she knows a word, so the road is clear
+// until there is something behind her to go over.
 // ---------------------------------------------------------------------------
-function MistakesButton({ mistakes, onPress }: { mistakes: number; onPress: () => void }) {
+function ReviewButton({ onPress }: { onPress: () => void }) {
   return (
     <View style={styles.practiceSlot} pointerEvents="box-none">
       <Pressable
         onPress={onPress}
         accessibilityRole="button"
-        accessibilityLabel={`Mistakes: ${mistakes} to go over`}
+        accessibilityLabel="Review your words"
         hitSlop={8}
-        style={({ pressed }) => [
-          styles.practice,
-          styles.mistakes,
-          { transform: [{ scale: pressed ? press.scale : 1 }] },
-          webTransition,
-        ]}>
-        <Ionicons name="refresh" size={18} color={colors.onPastel} />
-        <Text style={styles.practiceText}>Mistakes</Text>
-        <Text style={styles.mistakesCount}>{mistakes > 99 ? '99+' : mistakes}</Text>
+        style={({ pressed }) => [styles.practice, { transform: [{ scale: pressed ? press.scale : 1 }] }, webTransition]}>
+        <View style={styles.practiceIcon}>
+          <Ionicons name="refresh" size={17} color={colors.primary} />
+        </View>
+        <Text style={styles.practiceText}>Review</Text>
       </Pressable>
     </View>
   );
@@ -1499,7 +1484,7 @@ const styles = StyleSheet.create({
   sectionEyebrow: { ...font.body[800], fontSize: 11, letterSpacing: 1.2, color: colors.muted },
   sectionEnd: {
     marginTop: 8,
-    // Clear of the floating tab bar and the Mistakes button, which both sit
+    // Clear of the floating tab bar and the Review button, which both sit
     // over the bottom of the scroller.
     marginBottom: 120,
     alignItems: 'center',
@@ -1569,9 +1554,15 @@ const styles = StyleSheet.create({
 
   // Practice ---------------------------------------------------------------
   practiceSlot: { position: 'absolute', left: 18, bottom: 18, gap: 10, alignItems: 'flex-start' },
-  /** Durazno: "needs going over", not "wrong". */
-  mistakes: { height: 46, paddingLeft: 14, paddingRight: 16, gap: 6, backgroundColor: pastel.peach },
-  mistakesCount: { ...font.body[800], fontSize: 13, color: colors.onPastel, fontVariant: ['tabular-nums'] },
+  /** The rosa well the Review button's arrow sits in. */
+  practiceIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.primarySoft,
+  },
   placement: { gap: 10 },
   attempts: {
     position: 'absolute',
@@ -1589,8 +1580,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    paddingLeft: 14,
-    paddingRight: 16,
+    paddingLeft: 7,
+    paddingRight: 18,
     borderRadius: radius.pill,
     backgroundColor: colors.card,
     boxShadow: clay.surface,

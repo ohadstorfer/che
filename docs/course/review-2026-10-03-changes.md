@@ -1,0 +1,5404 @@
+# Changes in migration 20261003000006 (before → after)
+
+## Spanish rewritten (42)
+
+- `11650925` mas-alto-que
+  - Hoy no hace tan frío como ayer.
+  - → **Hoy no está tan frío como ayer.**
+  - It's not as cold today as yesterday.
+  - glosses: Hoy=today · no=not · está=it's · tan=as · frío=cold · como=as · ayer.=yesterday
+- `27476556` se-me-cayo
+  - Mañana hay examen y se me olvidó estudiar.
+  - → **Mañana hay examen y se me pasó estudiar.**
+  - There's an exam tomorrow and I forgot to study.
+  - glosses: Mañana=tomorrow · hay=there's · examen=exam · y=and · se me pasó=I forgot · estudiar.=to study
+- `34745776` se-me-cayo
+  - Se me olvidó la SUBE.
+  - → **Se me pasó cargar la SUBE.**
+  - I forgot my SUBE.
+  - → **I forgot to put money on my SUBE.**
+  - glosses: Se me pasó=I forgot · cargar=to put money on · la=my · SUBE.=SUBE
+- `36630017` quien-es
+  - Señor, ¿es de Buenos Aires o de afuera?
+  - → **Señor, ¿sos de Buenos Aires o de afuera?**
+  - Sir, are you from Buenos Aires or from out of town?
+  - glosses: Señor,=sir · ¿sos=are you · de=from · Buenos Aires=Buenos Aires · o=or · de=from · afuera?=out of town
+- `38988613` dijo-que-vendria
+  - Prometió una cosa y hizo otra.
+  - → **Prometió una cosa e hizo otra.**
+  - He promised one thing and did another.
+  - glosses: Prometió=he promised · una=one · cosa=thing · e=and · hizo=did · otra.=another
+- `4d59194e` otro-cafe
+  - ¿Una torta o otra pizza?
+  - → **¿Una torta u otra pizza?**
+  - A cake or another pizza?
+  - glosses: ¿Una=a · torta=cake · u=or · otra=another · pizza?=pizza
+- `bdfd97ec` soy-de-zona-norte
+  - ¿Otro país o otra provincia?
+  - → **¿Otro país u otra provincia?**
+  - Another country or another province?
+  - glosses: ¿Otro=another · país=country · u=or · otra=another · provincia?=province
+- `ddcea319` de-todos-lados
+  - Buen día, señor. ¿Es paraguayo?
+  - → **Buen día, señor. ¿Sos paraguayo?**
+  - Good morning, sir. Are you Paraguayan?
+  - glosses: Buen día,=good morning · señor.=sir · ¿Sos=are you · paraguayo?=Paraguayan
+- `8dc611e8` de-todos-lados
+  - Buenas tardes, señora. ¿Es francesa?
+  - → **Buenas tardes, señora. ¿Sos francesa?**
+  - Good afternoon, ma'am. Are you French?
+  - glosses: Buenas tardes,=good afternoon · señora.=ma'am · ¿Sos=are you · francesa?=French
+- `f110ac8a` de-viaje
+  - En julio viajé a Bariloche y hizo mucho frío.
+  - → **En julio viajé a Bariloche e hizo mucho frío.**
+  - In July I traveled to Bariloche and it was really cold.
+  - glosses: En=in · julio=July · viajé=I traveled · a=to · Bariloche=Bariloche · e=and · hizo=it was · mucho=really · frío.=cold
+- `300ac8d7` de-viaje
+  - Fuimos a la montaña y hizo mucho frío.
+  - → **Fuimos a la montaña e hizo mucho frío.**
+  - We went to the mountains and it was really cold.
+  - glosses: Fuimos=we went · a=to · la=the · montaña=mountains · e=and · hizo=it was · mucho=really · frío.=cold
+- `f7c0e9ae` me-robaron
+  - Me robaron la bici y hice la denuncia.
+  - → **Me robaron la bici e hice la denuncia.**
+  - They stole my bike and I filed a police report.
+  - glosses: Me robaron=they stole · la=my · bici=bike · e=and · hice=I filed · la=a · denuncia.=police report
+- `b18204c4` practica-se-instalaron
+  - Llovía y hicimos dedo igual.
+  - → **Llovía e hicimos dedo igual.**
+  - It was raining and we hitchhiked anyway.
+  - glosses: Llovía=it was raining · e=and · hicimos dedo=we hitchhiked · igual.=anyway
+- `0c22c21c` se-recibio
+  - Mi hermano se recibió y hicimos una fiesta.
+  - → **Mi hermano se recibió e hicimos una fiesta.**
+  - My brother graduated and we threw a party.
+  - glosses: Mi=my · hermano=brother · se recibió=graduated · e=and · hicimos=we threw · una=a · fiesta.=party
+- `81d5add3` que-te-mejores
+  - Hice ñoquis, espero que les guste.
+  - → **Hice una torta, espero que les guste.**
+  - I made gnocchi, I hope you like them.
+  - → **I made a cake, I hope you like it.**
+  - glosses: Hice=I made · una=a · torta,=cake · espero=I hope · que=∅ · les=you · guste.=like
+- `c6ce544a` no-lo-aguanto
+  - Sofi le cae bien a todos.
+  - → **Sofi le cae bien a todo el mundo.**
+  - Everybody likes Sofi.
+  - glosses: Sofi=Sofi · le cae=likes · bien=likes · a=∅ · todo el mundo.=everybody
+- `4530d7d1` se-me-cayo
+  - No, se me olvidó.
+  - → **No, se me pasó.**
+  - No, I forgot.
+  - glosses: No,=no · se me pasó.=I forgot
+- `4e78d1f8` se-me-cayo
+  - Se me olvidó el remedio.
+  - → **Se me pasó tomar el remedio.**
+  - I forgot my medicine.
+  - → **I forgot to take my medicine.**
+  - glosses: Se me pasó=I forgot · tomar=to take · el=my · remedio.=medicine
+- `63dd02f6` se-me-cayo
+  - Se me olvidó el cargador en casa.
+  - → **Se me pasó traer el cargador.**
+  - I left my charger at home.
+  - → **I forgot to bring my charger.**
+  - glosses: Se me pasó=I forgot · traer=to bring · el=my · cargador.=charger
+- `b7af383a` se-me-cayo
+  - Se me olvidó el paraguas y está lloviendo.
+  - → **Se me pasó traer el paraguas y está lloviendo.**
+  - I forgot my umbrella and it's raining.
+  - → **I forgot to bring my umbrella and it's raining.**
+  - glosses: Se me pasó=I forgot · traer=to bring · el=my · paraguas=umbrella · y=and · está=it's · lloviendo.=raining
+- `b87bc3fb` se-me-cayo
+  - Se me olvidó tu cumpleaños.
+  - → **Se me pasó tu cumpleaños.**
+  - I forgot your birthday.
+  - glosses: Se me pasó=I forgot · tu=your · cumpleaños.=birthday
+- `f649b469` se-me-cayo
+  - Se me olvidó la contraseña.
+  - → **Se me pasó cambiar la contraseña.**
+  - I forgot the password.
+  - → **I forgot to change the password.**
+  - glosses: Se me pasó=I forgot · cambiar=to change · la=the · contraseña.=password
+- `27551a58` se-me-quemo
+  - ¿Se te olvidó el cumple de Sofi?
+  - → **¿Se te pasó el cumple de Sofi?**
+  - Did you forget Sofi's birthday?
+  - glosses: ¿Se te pasó=did you forget · el=∅ · cumple=birthday · de=∅ · Sofi?=Sofi's
+- `2af99cb5` se-me-quemo
+  - ¿Se te olvidó que hoy cenamos en lo de Juan?
+  - → **¿Se te pasó que hoy cenamos en lo de Juan?**
+  - Did you forget we're having dinner at Juan's tonight?
+  - glosses: ¿Se te pasó=did you forget · que=∅ · hoy=tonight · cenamos=we're having dinner · en lo de=at · Juan?=Juan's
+- `42a8d0b4` se-me-quemo
+  - Che, se te olvidó el vuelto.
+  - → **Che, se te pasó pedir el vuelto.**
+  - Hey, you forgot your change.
+  - → **Hey, you forgot to ask for your change.**
+  - glosses: Che,=hey · se te pasó=you forgot · pedir=to ask for · el=your · vuelto.=change
+- `db7aecc4` se-me-quemo
+  - ¿Otra vez se te olvidó?
+  - → **¿Otra vez se te pasó?**
+  - You forgot again?
+  - glosses: ¿Otra vez=again · se te pasó?=you forgot
+- `9a8b5c27` se-recibio
+  - ¿Se te olvidó el anillo? ¡Sos el padrino!
+  - → **¿Se te cayó el anillo? ¡Sos el padrino!**
+  - Did you forget the ring? You're the padrino!
+  - → **Did you drop the ring? You're the padrino!**
+  - glosses: ¿Se te cayó=did you drop · el=the · anillo?=ring · ¡Sos=you're · el=the · padrino!=padrino
+- `32a428d3` practica-se-me-olvido
+  - ¿Y el pan? Se me olvidó.
+  - → **¿Y el pan? Se me pasó.**
+  - What about the bread? I forgot.
+  - glosses: ¿Y=∅ · el=the · pan?=bread · Se me pasó.=I forgot
+- `4ae3e0d1` practica-se-me-olvido
+  - Se me olvidó que Juan ya se había ido.
+  - → **Se me pasó que Juan ya se había ido.**
+  - I forgot Juan had already left.
+  - glosses: Se me pasó=I forgot · que=∅ · Juan=Juan · ya=already · se había ido.=had already left
+- `5c62a8e3` practica-se-me-olvido
+  - Yo iba a llamar, pero se me olvidó.
+  - → **Yo iba a llamar, pero se me pasó.**
+  - I was going to call, but I forgot.
+  - glosses: Yo=I · iba=was going · a=to · llamar,=call · pero=but · se me pasó.=I forgot
+- `7e729aaa` practica-se-me-olvido
+  - Se me olvidó sacar la basura.
+  - → **Se me pasó sacar la basura.**
+  - I forgot to take out the trash.
+  - glosses: Se me pasó=I forgot · sacar=take out · la=the · basura.=trash
+- `99654a28` practica-se-me-olvido
+  - Se me olvidó todo.
+  - → **Perdón, se me pasó.**
+  - I forgot everything.
+  - → **Sorry, I forgot.**
+  - glosses: Perdón,=sorry · se me pasó.=I forgot
+- `a6eeebd4` practica-se-me-olvido
+  - ¡Se me olvidó tu cumpleaños!
+  - → **¡Se me pasó tu cumpleaños!**
+  - I forgot your birthday!
+  - glosses: ¡Se me pasó=I forgot · tu=your · cumpleaños!=birthday
+- `bf85b34a` practica-se-me-olvido
+  - Se me olvidó el paraguas.
+  - → **Se me pasó traer el paraguas.**
+  - I forgot my umbrella.
+  - → **I forgot to bring my umbrella.**
+  - glosses: Se me pasó=I forgot · traer=to bring · el=my · paraguas.=umbrella
+- `f44c8e9b` practica-se-me-olvido
+  - Se me olvidó la contraseña.
+  - → **Se me pasó cambiar la contraseña.**
+  - I forgot the password.
+  - → **I forgot to change the password.**
+  - glosses: Se me pasó=I forgot · cambiar=to change · la=the · contraseña.=password
+- `f5c51df1` practica-se-me-olvido
+  - Se me olvidó que se había ido de viaje.
+  - → **Se me pasó que se había ido de viaje.**
+  - I forgot he had left on a trip.
+  - glosses: Se me pasó=I forgot · que=∅ · se había ido=he had left · de=on · viaje.=a trip
+- `06a6fa0d` me-encantaba
+  - Sofi andaba en bici al laburo.
+  - → **Sofi andaba en bici por el barrio.**
+  - Sofi rode her bike to work.
+  - → **Sofi rode her bike around the neighborhood.**
+  - glosses: Sofi=Sofi · andaba=rode · en=∅ · bici=her bike · por=around · el=the · barrio.=neighborhood
+- `0c660daa` practica-te-lo-presto
+  - No digo nada, prometo.
+  - → **No digo nada, te lo prometo.**
+  - I won't say anything, I promise.
+  - glosses: No=won't · digo=I won't say · nada,=anything · te=∅ · lo=∅ · prometo.=I promise
+- `f9376114` quien-sera
+  - ¿Qué hora serán?
+  - → **Serán las ocho, ¿no?**
+  - I wonder what time it is.
+  - → **It's probably eight, right?**
+  - glosses: Serán=it's probably · las=∅ · ocho,=eight · ¿no?=right
+- `2f9cf35b` practica-resulta-que
+  - ¿Por qué no venís? Es sábado, total.
+  - → **¿Por qué no venís? Total, es sábado.**
+  - Why don't you come? It's Saturday, after all.
+  - → **Why don't you come? After all, it's Saturday.**
+  - glosses: ¿Por qué=why · no=don't · venís?=don't you come · Total,=after all · es=it's · sábado.=Saturday
+- `ce7a9ae5` el-cuarto-oscuro
+  - Me llamó una encuesta.
+  - → **Me llamaron por una encuesta.**
+  - A pollster called me.
+  - → **They called me for a survey.**
+  - glosses: Me=me · llamaron=they called · por=for · una=a · encuesta.=survey
+- `7b25309f` el-de-la-vidriera
+  - Juan lleva media hora en el probador.
+  - → **Juan está hace media hora en el probador.**
+  - Juan's been in the fitting room for half an hour.
+  - glosses: Juan=Juan's · está=been · hace=for · media=half · hora=an hour · en=in · el=the · probador.=fitting room
+
+## Tips and unit text (14)
+
+- `0ae8a455` Se me, se te, se le: Same with *rompió, perdió, olvidó*: **se me olvidó** — *I forgot*. → **Same with *rompió, perdió, pasó*: **se me pasó** — *I forgot*.**
+- `0b9529ef` Se nos, se te: To a friend: **¿se te olvidó?** → **To a friend: **¿se te pasó?** — *did you forget?***
+- `6f7cea1b` It fell on me: **se me olvidó** — *I forgot* → ****se me pasó** — *I forgot* (it slipped my mind)**
+- `aa612ce1` Se me quemó, se me quemaron: **se te** olvidó → ****se te** pasó**
+- `19fdd686` Caliente: so for the weather or yourself, use *tengo calor*. → **so for yourself use *tengo calor*, and for the weather *hace calor*.**
+- `a59cf449` Con tal de que, salvo que: Llevá plata **por si** lo **necesitás**. → **Llevá plata **por si** la **necesitás**.**
+- `09c42605` Ando buscando, le cae bien: **Le cae bien a todos** → ****Le cae bien a todo el mundo****
+- `36697118` Me dijo que no podías: | «¿Venís?» | Me preguntó **si venías**. | → **| «¿Venís?» | Te preguntó **si venías**. |**
+- `36697118` Me dijo que no podías: | «No podés.» | Me dijo **que no podías**. | → **| «No podés.» | Te dijo **que no podías**. |**
+- `91a5e921` Las expensas: The **encargado** is the building's super, and knows everything. → **The **encargado** is the building caretaker, and knows everything.**
+- `cab9d500` Me afanaron, se tapó: **se tapó la canilla** → ****se tapó la pileta****
+- `25238004` -cito: Words ending in *-or*, *-ol*, *-e* take **-cito**: **calor → calorcito**, **sol → solcito**. → **Words ending in *-r*, *-n*, *-e* take **-cito**: **calor → calorcito**, **café → cafecito**. Short *sol* does too: **solcito**.**
+- `fcd34b7a` Por civil, y el velorio: often with a **padrino** and a **madrina**, then → **and, if there is a church wedding too, with a **padrino** and a **madrina**; then**
+- unit practica-se-me-olvido summary: Se me olvidó que ya había salido → **Se me pasó que ya había salido**
+
+## Dictionary glosses (48)
+
+- buena onda: nice, good vibes → **nice, friendly**
+- mala onda: unfriendly, bad vibes → **unfriendly, not nice**
+- resfriado: down with a cold → **sick with a cold**
+- un montón: a lot, a ton → **a lot**
+- agotado: wiped out, exhausted → **very tired, exhausted**
+- hinchar: to root for (a team) → **to support (a team)**
+- mango: peso, buck → **peso**
+- chabón: dude, guy → **guy, man**
+- engripado: down with the flu → **sick with the flu**
+- guita: money, dough → **money**
+- amargo: bitter; killjoy → **bitter; no fun (a person)**
+- recital: concert, gig → **concert**
+- en punto: on the dot, sharp → **exactly, sharp (with times)**
+- romperla: to nail it, to kill it → **to do something amazingly well**
+- berreta: shoddy, low-quality → **low-quality, cheap and bad**
+- morfi: grub, food → **food**
+- coincidir: to agree, to see eye to eye → **to agree**
+- colgado: scatterbrained, spaced out → **forgetful, distracted**
+- me clavó el visto: he left me on read → **he read my message and didn't answer**
+- chamuyo: smooth talk, BS → **smooth talk, empty talk**
+- bardo: trouble, ruckus → **trouble, mess**
+- ponerse a: to start (doing), to get down to → **to start (doing)**
+- chanta: phony, fraud → **fake, dishonest person**
+- tranqui: relaxed, chill → **relaxed, calm**
+- garrón: annoying situation, a drag → **annoying situation, bad luck**
+- afano: rip-off → **way too expensive (like a robbery)**
+- agrandado: full of himself, cocky → **arrogant**
+- baratísimo: dirt cheap → **very cheap**
+- hinchamos: we root for → **we support**
+- hincho: I root for → **I support**
+- hinchás: you root for → **you support**
+- hinchaba: I used to root for, he rooted for → **I used to support, he supported**
+- mangos: pesos, bucks → **pesos**
+- la rompe: he nails it, she kills it → **he's amazing at it, she's amazing at it**
+- la rompiste: you nailed it → **you were amazing**
+- te la creés: you're full of yourself → **you're arrogant**
+- se la cree: he's full of himself, she's full of herself → **he's arrogant, she's arrogant**
+- conseguí: I landed, I managed to get → **I got, I managed to get**
+- conseguiste: you landed, you managed to get → **you got, you managed to get**
+- consiguió: he landed, she managed to get → **he got, she managed to get**
+- me puse a: I started (doing), I got down to → **I started (doing)**
+- caíste: you fell for it → **you believed it (you were tricked)**
+- mayor: elderly → **elderly; older**
+- les: to them, them → **to them; to you all**
+- preguntale: ask him, ask her, ask them → **ask him, ask her**
+- canta: sing, sings → **sings (he/she sings)**
+- transferime: transfer me → **send me (the money), transfer it to me**
+- expensas (note): Monthly fee in apartment buildings for cleaning, the building manager, the elevator, repairs, etc. → **Monthly fee in apartment buildings for cleaning, the building caretaker, the elevator, repairs, etc.**
+
+## English made plain / corrected (491)
+
+- `bbb877d9` te-lo-presto
+  - Guardame una porción, ya vengo.
+  - Save me a slice, I'll be right there.
+  - → **Save me a slice, I'll be right back.**
+  - glosses: vengo.=I'll be right back
+- `1254993b` practica-nunca-habia
+  - Por primera vez no se me quemó el asado.
+  - For once, I didn't burn the asado.
+  - → **For the first time, I didn't burn the asado.**
+  - glosses: Por primera vez=for the first time
+- `ea1ca8fc` practica-como-si
+  - Sofi se hace la distraída.
+  - Sofi's acting all distracted.
+  - → **Sofi's pretending not to notice.**
+  - glosses: Sofi=Sofi's · se hace=pretending · distraída.=not to notice
+- `9ed6fb7b` como-te-decia
+  - Y bueno, el feriado fue corto, pero la pasamos bien.
+  - Oh well, the long weekend was short, but we had a good time.
+  - → **Oh well, the holiday was short, but we had a good time.**
+  - glosses: feriado=holiday
+- `8025cdf1` hay-paro
+  - ¿Dónde es el corte? En la avenida.
+  - Where's the road block? On the avenue.
+  - → **Where's the roadblock? On the avenue.**
+- `e86394a4` las-elecciones
+  - ¿A quién votaste para presidente?
+  - Who did you vote for president?
+  - → **Who did you vote for for president?**
+- `78c32856` practica-la-parrillada
+  - En el Mundial hinchamos todos juntos.
+  - During the World Cup we all root together.
+  - → **During the World Cup we all support the team together.**
+  - glosses: hinchamos=support
+- `f21b32fa` practica-cada-loco-con-su-tema
+  - Fui un toque a lo de Sofi.
+  - I went over to Sofi's for a sec.
+  - → **I went over to Sofi's for a second.**
+  - glosses: un toque=for a second · lo de=Sofi's · Sofi.=Sofi's
+- `670c7989` practica-me-mori-de-risa
+  - Tranqui, yo te voy a hacer la gamba.
+  - Relax, I'll back you up.
+  - → **Relax, I'll help you.**
+  - glosses: yo=I'll · hacer la gamba.=help
+- `c4cb4da1` practica-me-dijo
+  - Sofi dice que su cuñado es simpático, pero pesado.
+  - Sofi says her brother-in-law is nice, but a bit much.
+  - → **Sofi says her brother-in-law is nice, but annoying.**
+  - glosses: pesado.=annoying
+- `47bb06f5` cuanto-sale
+  - ¿Cien mil pesos? ¡No tengo un mango!
+  - A hundred thousand pesos? I don't have a dime!
+  - → **A hundred thousand pesos? I don't have any money!**
+  - glosses: un=any · mango!=money
+- `dca53a2f` cuanto-sale
+  - Pago yo, vos no tenés un mango.
+  - I'll pay, you don't have a dime.
+  - → **I'll pay, you don't have any money.**
+  - glosses: yo,=I'll · un=any · mango.=money
+- `85325512` me-hizo-reir
+  - Anoche lloré un montón.
+  - Last night I cried a ton.
+  - → **Last night I cried a lot.**
+  - glosses: un montón.=a lot
+- `0406c2fc` la-ruta
+  - Gasté un montón de plata en nafta.
+  - I spent a ton of money on gas.
+  - → **I spent a lot of money on gas.**
+  - glosses: un montón=a lot
+- `04ac443d` todo-aumenta
+  - La carne aumentó un montón.
+  - Meat went up a ton.
+  - → **Meat went up a lot.**
+  - glosses: un montón.=a lot
+- `063ae680` practica-me-cae-bien
+  - Sí, aumentó un montón.
+  - Yes, it went up a ton.
+  - → **Yes, it went up a lot.**
+  - glosses: un montón.=a lot
+- `08d6ae74` como-dice-el-dicho
+  - Estoy engripado, pero leo un montón: no hay mal que por bien no venga.
+  - I'm down with the flu, but I'm reading a ton: every cloud has a silver lining.
+  - → **I'm sick with the flu, but I'm reading a lot: something good can come from something bad.**
+  - glosses: engripado,=sick with the flu · un montón:=a lot · no hay mal que por bien no venga.=something good can come from something bad
+- `0944855b` me-hizo-reir
+  - Con esa canción nos reímos un montón.
+  - We laughed a ton at that song.
+  - → **We laughed a lot at that song.**
+  - glosses: un montón.=a lot
+- `0a3015a9` ni-ahi
+  - ¿Estás nervioso por el examen? Ni ahí, estudié un montón.
+  - Are you nervous about the exam? Not at all, I studied a ton.
+  - → **Are you nervous about the exam? Not at all, I studied a lot.**
+  - glosses: un montón.=a lot
+- `0e5c82b2` en-cuotas
+  - Laburo un montón y no me alcanza.
+  - I work a ton and it's still not enough.
+  - → **I work a lot and it's still not enough.**
+  - glosses: un montón=a lot
+- `1643b309` practica-me-cae-bien
+  - Me cae bien tu suegra, pero habla un montón.
+  - I like your mother-in-law, but she talks a ton.
+  - → **I like your mother-in-law, but she talks a lot.**
+  - glosses: bien=I like · un montón.=a lot
+- `181496c0` te-doy-la-razon
+  - ¿Exagerada? Me dolió un montón.
+  - Dramatic? It hurt a ton!
+  - → **Dramatic? It hurt a lot!**
+  - glosses: un montón.=a lot
+- `1e39a378` practica-la-entrega
+  - Laburaste un montón, te merecés el aumento.
+  - You worked a ton, you deserve the raise.
+  - → **You worked a lot, you deserve the raise.**
+  - glosses: un montón,=a lot
+- `2cefc0b4` a-medias
+  - Así ahorrás un montón.
+  - That way you save a ton.
+  - → **That way you save a lot.**
+  - glosses: un montón.=a lot
+- `333d7d77` te-debo-una
+  - Gracias por todo, te quiero un montón.
+  - Thanks for everything, I love you a ton.
+  - → **Thanks for everything, I love you a lot.**
+  - glosses: un montón.=a lot
+- `37084a61` en-cuotas
+  - Gasté un montón en el regalo de Sofi.
+  - I spent a ton on Sofi's present.
+  - → **I spent a lot on Sofi's present.**
+  - glosses: un montón=a lot
+- `38c29c17` practica-cuanto-mas
+  - Anoche me reí un montón.
+  - I laughed a ton last night.
+  - → **I laughed a lot last night.**
+  - glosses: un montón.=a lot
+- `3ac7cd58` en-cuotas
+  - Si cocino en casa, ahorro un montón.
+  - If I cook at home, I save a ton.
+  - → **If I cook at home, I save a lot.**
+  - glosses: un montón.=a lot
+- `4294c4fb` te-debo-una
+  - Gracias por todo, te debo un montón.
+  - Thanks for everything, I owe you a ton.
+  - → **Thanks for everything, I owe you a lot.**
+  - glosses: te debo=I owe you · un montón.=a lot
+- `42ee1e39` deje-de-fumar
+  - Con la inflación, los puchos aumentaron un montón.
+  - With inflation, cigarettes went up a ton.
+  - → **With inflation, cigarettes went up a lot.**
+  - glosses: un montón.=a lot
+- `42f46c17` merezco-un-aumento
+  - Me lo merezco, laburé un montón.
+  - I deserve it, I worked a ton.
+  - → **I deserve it, I worked a lot.**
+  - glosses: un montón.=a lot
+- `4786c175` me-hizo-reir
+  - La serie me hizo reír un montón.
+  - The show made me laugh a ton.
+  - → **The show made me laugh a lot.**
+  - glosses: un montón.=a lot
+- `4cc15194` me-hizo-reir
+  - En la juntada nos reímos un montón.
+  - We laughed a ton at the get-together.
+  - → **We laughed a lot at the get-together.**
+  - glosses: un montón.=a lot
+- `50f1c669` se-merece-el-ascenso
+  - Laburamos un montón, nos lo merecemos.
+  - We work a ton, we deserve it.
+  - → **We work a lot, we deserve it.**
+  - glosses: un montón,=a lot
+- `5172448b` lunfardo
+  - Cuesta un montón de guita.
+  - It costs a ton of money.
+  - → **It costs a lot of money.**
+  - glosses: un montón=a lot
+- `5275fa86` practica-cuanto-mas
+  - En la sobremesa me reí un montón.
+  - I laughed a ton during the after-dinner chat.
+  - → **I laughed a lot during the after-dinner chat.**
+  - glosses: un montón.=a lot
+- `5609b858` cada-vez-mas
+  - El conurbano creció un montón en diez años.
+  - Greater Buenos Aires grew a ton in ten years.
+  - → **Greater Buenos Aires grew a lot in ten years.**
+  - glosses: un montón=a lot
+- `58b47730` cada-vez-mas
+  - Mis viejos dicen que el barrio creció un montón.
+  - My parents say the neighborhood grew a ton.
+  - → **My parents say the neighborhood grew a lot.**
+  - glosses: un montón.=a lot
+- `5bd4e116` no-me-alcanza
+  - Esa marca aumentó un montón este mes.
+  - That brand went up a ton this month.
+  - → **That brand went up a lot this month.**
+  - glosses: un montón=a lot
+- `5dab67de` practica-me-emocione
+  - Con el chiste de Juan me reí un montón.
+  - I laughed a ton at Juan's joke.
+  - → **I laughed a lot at Juan's joke.**
+  - glosses: un montón.=a lot
+- `6935b030` practica-me-pudri
+  - Posta, cambiaste un montón desde que te mudaste.
+  - Honestly, you've changed a ton since you moved.
+  - → **Honestly, you've changed a lot since you moved.**
+  - glosses: un montón=a lot
+- `6f313984` cada-vez-mas
+  - El barrio cambió un montón, ahora hay muchos edificios.
+  - The neighborhood changed a ton; now there are a lot of buildings.
+  - → **The neighborhood changed a lot; now there are a lot of buildings.**
+  - glosses: un montón,=a lot
+- `706c80a5` merezco-un-aumento
+  - Mis compañeros me valoran un montón.
+  - My coworkers value me a ton.
+  - → **My coworkers value me a lot.**
+  - glosses: un montón.=a lot
+- `77d6318a` se-merece-el-ascenso
+  - Se lo merece, labura un montón.
+  - She deserves it, she works a ton.
+  - → **She deserves it, she works a lot.**
+  - glosses: un montón.=a lot
+- `78748cec` me-hizo-reir
+  - Lloré un montón cuando se fue mi hermana.
+  - I cried a ton when my sister left.
+  - → **I cried a lot when my sister left.**
+  - glosses: un montón=a lot
+- `7ac85e0a` todo-aumenta
+  - ¿Cuánto te cobraron? Uy, un montón.
+  - How much did they charge you? Oh, a ton.
+  - → **How much did they charge you? Oh, a lot.**
+  - glosses: un montón.=a lot
+- `7ed61885` estas-cambiado
+  - ¡Cambiaste un montón!
+  - You've changed a ton!
+  - → **You've changed a lot!**
+  - glosses: un montón!=a lot
+- `7ef1c885` practica-no-lo-aguanto
+  - Este mes tuve un montón de gastos con la mudanza.
+  - I had a ton of expenses with the move this month.
+  - → **I had a lot of expenses with the move this month.**
+  - glosses: un montón=a lot
+- `852d0ded` me-cobras
+  - Esa verdulería cobra re caro.
+  - That produce store charges a ton.
+  - → **That produce store is really expensive.**
+  - glosses: cobra=∅ · re=really · caro.=expensive
+- `8608b92e` es-medio-vago
+  - De chica era seria, ahora habla un montón.
+  - As a kid she was serious, now she talks a ton.
+  - → **As a kid she was serious, now she talks a lot.**
+  - glosses: un montón.=a lot
+- `8b3ccc66` me-hizo-reir
+  - Nos reímos un montón.
+  - We laughed a ton.
+  - → **We laughed a lot.**
+  - glosses: un montón.=a lot
+- `8e8165a0` practica-me-emocione
+  - Mi prima y yo nos reímos un montón.
+  - My cousin and I laughed a ton.
+  - → **My cousin and I laughed a lot.**
+  - glosses: un montón.=a lot
+- `8efb8be4` ya-sos-de-aca
+  - Mi acento cambió un montón en un año.
+  - My accent changed a ton in a year.
+  - → **My accent changed a lot in a year.**
+  - glosses: un montón=a lot
+- `94842bf4` practica-migraciones
+  - Piden un montón de requisitos.
+  - They ask for a ton of requirements.
+  - → **They ask for a lot of requirements.**
+  - glosses: un montón=a lot
+- `968d401f` todo-aumenta
+  - En el taxi me cobraron un montón por dos cuadras.
+  - The taxi charged me a ton for two blocks.
+  - → **The taxi charged me a lot for two blocks.**
+  - glosses: un montón=a lot
+- `9a52ef20` merezco-un-aumento
+  - Laburaste un montón este año, te lo merecés.
+  - You worked a ton this year, you deserve it.
+  - → **You worked a lot this year, you deserve it.**
+  - glosses: un montón=a lot
+- `9d015543` practica-el-clima
+  - ¿Siesta? No, tengo mucho laburo.
+  - A nap? No, I have a ton of work.
+  - → **A nap? No, I have a lot of work.**
+- `9f5d83d7` practica-me-cae-bien
+  - Mi suegra habla un montón.
+  - My mother-in-law talks a ton.
+  - → **My mother-in-law talks a lot.**
+  - glosses: un montón.=a lot
+- `9f6343cb` estas-cambiado
+  - Desde que te mudaste, cambiaste un montón, posta.
+  - Since you moved, you've changed a ton, seriously.
+  - → **Since you moved, you've changed a lot, seriously.**
+  - glosses: un montón,=a lot
+- `a3eb2f3a` se-la-cree
+  - ¿Tu novio se la cree? Sí, un montón.
+  - Is your boyfriend full of himself? Yes, a ton.
+  - → **Is your boyfriend arrogant? Yes, very.**
+  - glosses: se la cree?=arrogant · un montón.=very
+- `a8601a48` me-gustaria
+  - Esas zapatillas me encantarían, pero cuestan un montón.
+  - I would love those sneakers, but they cost a ton.
+  - → **I would love those sneakers, but they cost a lot.**
+  - glosses: un montón.=a lot
+- `aa9d0801` me-hizo-reir
+  - La verdad, me reí un montón en el asado.
+  - To be honest, I laughed a ton at the barbecue.
+  - → **To be honest, I laughed a lot at the barbecue.**
+  - glosses: un montón=a lot
+- `ac92689c` no-me-alcanza
+  - Los servicios aumentaron un montón.
+  - Utilities went up a ton.
+  - → **Utilities went up a lot.**
+  - glosses: un montón.=a lot
+- `b166b351` cada-vez-mas
+  - Desde que se mudó, Lucía cambió un montón.
+  - Since she moved, Lucía has changed a ton.
+  - → **Since she moved, Lucía has changed a lot.**
+  - glosses: un montón.=a lot
+- `b85d1358` practica-se-emociono
+  - Cuando se recibió, lloré un montón.
+  - When she graduated, I cried a ton.
+  - → **When she graduated, I cried a lot.**
+  - glosses: un montón.=a lot
+- `b98d43fe` me-hizo-reir
+  - Cuando nos juntamos con los pibes, nos reímos un montón.
+  - When we get together with the guys, we laugh a ton.
+  - → **When we get together with the guys, we laugh a lot.**
+  - glosses: un montón.=a lot
+- `be099f90` todo-aumenta
+  - ¿Subió? Sí, un montón.
+  - Did it go up? Yes, a ton.
+  - → **Did it go up? Yes, a lot.**
+  - glosses: un montón.=a lot
+- `bf85474a` a-medias
+  - Sin la deuda, podría ahorrar un montón.
+  - If it weren't for the debt, I could save a ton.
+  - → **If it weren't for the debt, I could save a lot.**
+  - glosses: un montón.=a lot
+- `c038d976` la-ruta
+  - Entre la nafta y el peaje, gasté un montón.
+  - Between gas and the toll, I spent a ton.
+  - → **Between gas and the toll, I spent a lot.**
+  - glosses: un montón.=a lot
+- `c511684f` sobre-la-hora
+  - Avanzaron un montón, así que entregamos el lunes.
+  - They made a ton of progress, so we're handing it in on Monday.
+  - → **They made a lot of progress, so we're handing it in on Monday.**
+  - glosses: Avanzaron=they made a lot of progress · un montón,=a lot of
+- `cc38894c` te-debo-una
+  - Gracias por todo, te extraño un montón.
+  - Thanks for everything, I miss you a ton.
+  - → **Thanks for everything, I miss you a lot.**
+  - glosses: un montón.=a lot
+- `cd071721` llevo-un-ano-aprendiendo
+  - Estoy aprendiendo un montón con este profe.
+  - I'm learning a ton from this teacher.
+  - → **I'm learning a lot from this teacher.**
+  - glosses: un montón=a lot
+- `cd36b7e9` practica-me-cae-bien
+  - La luz aumentó un montón.
+  - Electricity went up a ton.
+  - → **Electricity went up a lot.**
+  - glosses: un montón.=a lot
+- `ce9f0b60` aunque-llueva
+  - Aunque cueste un montón, el viaje vale la pena.
+  - Even if it costs a ton, the trip is worth it.
+  - → **Even if it costs a lot, the trip is worth it.**
+  - glosses: un montón,=a lot
+- `d2f8ffe5` me-pudri
+  - Con este trámite hay que renegar un montón.
+  - You have to struggle a ton with this paperwork.
+  - → **You have to struggle a lot with this paperwork.**
+  - glosses: un montón.=a lot
+- `d925e4fd` buena-onda
+  - Juan es tímido, pero con los amigos habla un montón.
+  - Juan's shy, but with his friends he talks a ton.
+  - → **Juan's shy, but with his friends he talks a lot.**
+  - glosses: un montón.=a lot
+- `e07f063f` practica-tenes-razon
+  - El técnico cobra un montón.
+  - The repairman charges a ton.
+  - → **The repairman charges a lot.**
+  - glosses: un montón.=a lot
+- `e1714fe3` todo-aumenta
+  - La luz subió un montón.
+  - Electricity went up a ton.
+  - → **Electricity went up a lot.**
+  - glosses: un montón.=a lot
+- `e754e076` practica-me-pidio
+  - Te agradezco un montón.
+  - Thanks a ton.
+  - → **Thanks a lot.**
+  - glosses: un montón.=a lot
+- `ebf034ef` en-cuotas
+  - Gasté un montón.
+  - I spent a ton.
+  - → **I spent a lot.**
+  - glosses: un montón.=a lot
+- `eea15ecb` practica-no-doy-mas
+  - ¡Uy, tu hermana creció un montón!
+  - Whoa, your sister grew a ton!
+  - → **Wow, your sister grew a lot!**
+  - glosses: ¡Uy,=wow · un montón!=a lot
+- `f04aa296` una-grande-de-muzza
+  - La pizza estaba tan salada que tomé mucha agua.
+  - The pizza was so salty that I drank a ton of water.
+  - → **The pizza was so salty that I drank a lot of water.**
+- `f72153f1` que-opinas
+  - Ayer discutimos un montón.
+  - We argued a ton yesterday.
+  - → **We argued a lot yesterday.**
+  - glosses: un montón.=a lot
+- `f76d14d9` es-medio-vago
+  - Mi novio es callado, pero cuando toma, habla un montón.
+  - My boyfriend is quiet, but when he drinks, he talks a ton.
+  - → **My boyfriend is quiet, but when he drinks, he talks a lot.**
+  - glosses: un montón.=a lot
+- `fdb7145f` practica-me-cae-bien
+  - Me cobraron un montón por el taxi.
+  - They charged me a ton for the taxi.
+  - → **They charged me a lot for the taxi.**
+  - glosses: un montón=a lot
+- `ff42d262` me-hizo-reir
+  - Ese libro me hizo llorar un montón.
+  - That book made me cry a ton.
+  - → **That book made me cry a lot.**
+  - glosses: un montón.=a lot
+- `ff62397d` estas-cambiado
+  - Mi vieja está cambiada, ahora sale un montón.
+  - My mom has changed, now she goes out a ton.
+  - → **My mom has changed, now she goes out a lot.**
+  - glosses: un montón.=a lot
+- `01bebfbb` el-tecnico
+  - En la oficina tienen el aire al mango.
+  - At the office they have the AC on full blast.
+  - → **At the office they have the AC at full power.**
+  - glosses: al=at full power · mango.=at full power
+- `ecc02b14` la-pasamos-barbaro
+  - Anoche la pasamos re bien en el boliche.
+  - We had a blast at the club last night.
+  - → **We had a really good time at the club last night.**
+  - glosses: la pasamos=we had a really good time · re=really · bien=good
+- `10a7bef2` a-medias
+  - Juan siempre está sin plata a fin de mes.
+  - Juan is always broke at the end of the month.
+  - → **Juan is always out of money at the end of the month.**
+  - glosses: sin=out of · plata=money
+- `1c6a06ac` cuanto-sale
+  - Estoy sin un peso.
+  - I'm broke.
+  - → **I have no money.**
+  - glosses: Estoy=I have · sin=no · un=∅ · peso.=money
+- `2ef75726` ando-buscando
+  - Ando sin plata.
+  - I'm broke.
+  - → **I have no money.**
+  - glosses: Ando=I have · sin=no · plata.=money
+- `3ce37c59` practica-me-mori-de-risa
+  - No soy rata, no tengo guita.
+  - I'm not cheap; I'm broke.
+  - → **I'm not cheap; I have no money.**
+  - glosses: no=no · tengo=I have · guita.=money
+- `847d2f0b` cuanto-sale
+  - Estoy sin un peso hasta el lunes.
+  - I'm broke until Monday.
+  - → **I have no money until Monday.**
+  - glosses: Estoy=I have · sin=no · un=∅ · peso=money
+- `c22c3ade` yo-en-tu-lugar
+  - Sin este laburo, me quedaría sin plata.
+  - Without this job, I'd be broke.
+  - → **Without this job, I'd have no money.**
+  - glosses: me quedaría=I'd have · sin=no · plata.=money
+- `4ccaaf07` lunfardo
+  - Lo que dijo el jefe en la reunión fue chamuyo.
+  - What the boss said in the meeting was BS.
+  - → **What the boss said in the meeting was empty talk.**
+- `f52dbe44` lunfardo
+  - No es chamuyo, posta.
+  - It's not BS, for real.
+  - → **It's not empty talk, for real.**
+- `44e80e73` cuanto-sale
+  - Con veinte mil mangos comemos empanadas los cuatro.
+  - The four of us can eat empanadas with twenty thousand bucks.
+  - → **The four of us can eat empanadas with twenty thousand pesos.**
+  - glosses: mangos=pesos
+- `a5a4835b` cuanto-sale
+  - ¿Tres mil mangos un café?
+  - Three thousand bucks for a coffee?
+  - → **Three thousand pesos for a coffee?**
+  - glosses: mangos=pesos
+- `efa98c7f` cuanto-sale
+  - Son mil mangos.
+  - That's a thousand bucks.
+  - → **That's a thousand pesos.**
+  - glosses: mangos.=pesos
+- `34041281` de-que-cuadro-sos
+  - Perdimos el superclásico, qué garrón.
+  - We lost the Boca–River game, what a bummer.
+  - → **We lost the Boca–River game, how annoying.**
+  - glosses: qué=how · garrón.=annoying
+- `136e9d0a` practica-es-un-afano
+  - Es un garrón que vivas tan lejos del laburo.
+  - It's a bummer you live so far from work.
+  - → **It's really annoying that you live so far from work.**
+  - glosses: un=∅ · garrón=really annoying · que=that
+- `1c2f3395` estoy-al-horno
+  - Sofi no viene; ¡qué bajón!
+  - Sofi isn't coming; what a bummer!
+  - → **Sofi isn't coming; what a shame!**
+  - glosses: bajón!=shame
+- `6450791c` practica-me-mori-de-risa
+  - Perdimos el partido, qué bajón.
+  - We lost the game, what a bummer.
+  - → **We lost the game, what a shame.**
+  - glosses: bajón.=shame
+- `6a630bff` estoy-al-horno
+  - Juan no vino a hacer la gamba, qué bajón.
+  - Juan didn't come to back me up, what a bummer.
+  - → **Juan didn't come to help me, what a shame.**
+  - glosses: hacer la gamba,=help me · bajón.=shame
+- `77b9ba55` practica-la-entrega
+  - Las condiciones son un garrón.
+  - The terms are a bummer.
+  - → **The terms are really bad.**
+  - glosses: un=∅ · garrón.=really bad
+- `7a5ca7f9` practica-depende
+  - Anoche perdimos, qué garrón.
+  - We lost last night, what a bummer.
+  - → **We lost last night, how annoying.**
+  - glosses: qué=how · garrón.=annoying
+- `7cf62c27` el-partido
+  - Qué garrón, perdimos otra vez.
+  - What a bummer, we lost again.
+  - → **How annoying, we lost again.**
+  - glosses: Qué=how · garrón,=annoying
+- `85c53001` el-consorcio
+  - El plomero no vino, qué garrón.
+  - The plumber didn't come, what a bummer.
+  - → **The plumber didn't come, how annoying.**
+  - glosses: qué=how · garrón.=annoying
+- `95cdddf1` la-final
+  - Perdimos por penales, qué garrón.
+  - We lost on penalties, what a bummer.
+  - → **We lost on penalties, how annoying.**
+  - glosses: qué=how · garrón.=annoying
+- `994820ee` te-la-hago-corta
+  - En fin, fue un garrón.
+  - All in all, it was a bummer.
+  - → **All in all, it was really annoying.**
+  - glosses: un=∅ · garrón.=really annoying
+- `9c2d93fd` me-hizo-reir
+  - Fue un garrón, pero al final nos reímos.
+  - It was a bummer, but in the end we laughed.
+  - → **It was really annoying, but in the end we laughed.**
+  - glosses: un=∅ · garrón,=really annoying
+- `a0623e71` practica-tenes-razon
+  - Perdimos por penales, qué garrón.
+  - We lost on penalties, what a bummer.
+  - → **We lost on penalties, how annoying.**
+  - glosses: qué=how · garrón.=annoying
+- `a391de8a` practica-la-parrilla
+  - Anoche perdió mi cuadro, qué garrón.
+  - My team lost last night, what a bummer.
+  - → **My team lost last night, how annoying.**
+  - glosses: qué=how · garrón.=annoying
+- `b4f2615c` practica-lo-que-pasa
+  - Lo de ayer fue un garrón.
+  - The thing yesterday was a bummer.
+  - → **What happened yesterday was really annoying.**
+  - glosses: Lo de=what happened · un=∅ · garrón.=really annoying
+- `badd3ac0` me-pone-nervioso-que
+  - ¿Canceló el asado? ¡Qué garrón!
+  - He canceled the barbecue? What a bummer!
+  - → **He canceled the barbecue? How annoying!**
+  - glosses: ¡Qué=how · garrón!=annoying
+- `c82dc6c6` estoy-al-horno
+  - Perdimos el partido, qué bajón.
+  - We lost the game, what a bummer.
+  - → **We lost the game, what a shame.**
+  - glosses: bajón.=shame
+- `d16a1087` socio-del-club
+  - El descenso fue un garrón.
+  - The relegation was a bummer.
+  - → **The relegation was really bad.**
+  - glosses: un=∅ · garrón.=really bad
+- `e5bc0f58` merezco-un-aumento
+  - Estas condiciones son un garrón.
+  - These terms are a bummer.
+  - → **These terms are really bad.**
+  - glosses: un=∅ · garrón.=really bad
+- `05c153b6` deberias-tomarte-unos-dias
+  - Tranqui, deberíamos encarar esto de a poco.
+  - Chill, we should tackle this little by little.
+  - → **Relax, we should deal with this little by little.**
+  - glosses: Tranqui,=relax · encarar=deal with
+- `2e6be1dd` practica-cuanto-mas
+  - ¿Hay bardo? No, todo tranqui.
+  - Is there trouble? No, it's all chill.
+  - → **Is there trouble? No, it's all quiet.**
+  - glosses: tranqui.=quiet
+- `38a5d53b` si-tuviera
+  - Si Martín fuera más tranqui, sería más fácil.
+  - If Martín were more chill, it'd be easier.
+  - → **If Martín were more relaxed, it'd be easier.**
+  - glosses: tranqui,=relaxed
+- `4df9fceb` las-elecciones
+  - Mi candidato perdió, pero igual estoy tranqui.
+  - My candidate lost, but I'm chill anyway.
+  - → **My candidate lost, but I'm calm anyway.**
+  - glosses: tranqui.=calm
+- `5b4da51c` te-debo-una
+  - No pasa nada, tranqui.
+  - It's fine, chill.
+  - → **It's fine, relax.**
+  - glosses: tranqui.=relax
+- `85461a1e` resulta-que
+  - La nueva jefa resultó re tranqui.
+  - The new boss turned out to be really chill.
+  - → **The new boss turned out to be really relaxed.**
+  - glosses: tranqui.=relaxed
+- `9a242f7b` laburo-nuevo
+  - El horario es re tranqui.
+  - The schedule is really chill.
+  - → **The schedule is really relaxed.**
+  - glosses: tranqui.=relaxed
+- `ad4b7745` clima
+  - En enero Buenos Aires está re tranqui.
+  - In January Buenos Aires is really chill.
+  - → **In January Buenos Aires is really quiet.**
+  - glosses: tranqui.=quiet
+- `b8e7ddc9` esta-cerrado
+  - ¿Preocupados? No, estamos tranqui.
+  - Worried? No, we're chill.
+  - → **Worried? No, we're relaxed.**
+  - glosses: tranqui.=relaxed
+- `cf4dcfbb` dijo-que-pasaria
+  - Prometió que pondría plata.
+  - She promised she'd chip in.
+  - → **She promised she'd put in money.**
+  - glosses: pondría=she'd put in · plata.=money
+- `7bee0bb2` se-aplaude-al-asador
+  - Nadie pone plata para el carbón.
+  - Nobody chips in for the charcoal.
+  - → **Nobody puts in money for the charcoal.**
+  - glosses: pone=puts in · plata=money
+- `31952487` es-medio-vago
+  - ¿Agrandado yo? Para nada.
+  - Me, cocky? Not at all.
+  - → **Me, arrogant? Not at all.**
+  - glosses: ¿Agrandado=arrogant
+- `10196d53` es-medio-vago
+  - Ganó y ahora está re agrandado.
+  - He won and now he's really cocky.
+  - → **He won and now he's really arrogant.**
+  - glosses: agrandado.=arrogant
+- `4d892863` es-medio-vago
+  - Es un poco agrandado, pero macanudo.
+  - He's a little cocky, but he's a good guy.
+  - → **He's a little arrogant, but he's a good guy.**
+  - glosses: agrandado,=arrogant
+- `63115c6c` es-medio-vago
+  - Mi cuñado es medio agrandado con la plata.
+  - My brother-in-law is kind of cocky about his money.
+  - → **My brother-in-law is kind of arrogant about his money.**
+  - glosses: agrandado=arrogant
+- `b26fa3ac` no-te-hagas-el-gil
+  - ¿Viste qué canchero anda Martín?
+  - Have you seen how cocky Martín is acting?
+  - → **Have you seen how arrogant Martín is acting?**
+  - glosses: canchero=arrogant
+- `1a03c251` ya-habia
+  - Juan no había comido y estaba re enojado.
+  - Juan hadn't eaten and he was really cranky.
+  - → **Juan hadn't eaten and he was really angry.**
+  - glosses: enojado.=angry
+- `14c2eea0` el-mas-tranquilo
+  - El café acá es baratísimo.
+  - Coffee here is dirt cheap.
+  - → **Coffee here is very cheap.**
+  - glosses: baratísimo.=very cheap
+- `4813e02e` el-mas-tranquilo
+  - El bondi es baratísimo.
+  - The bus is dirt cheap.
+  - → **The bus is very cheap.**
+  - glosses: baratísimo.=very cheap
+- `85e037b2` el-mas-tranquilo
+  - Este almacén es baratísimo, pero está lejos.
+  - This corner store is dirt cheap, but it's far.
+  - → **This corner store is very cheap, but it's far.**
+  - glosses: baratísimo,=very cheap
+- `a0446ce1` el-mas-tranquilo
+  - Es un café lindísimo y baratísimo.
+  - It's a really nice café and dirt cheap.
+  - → **It's a really nice café and very cheap.**
+  - glosses: baratísimo.=very cheap
+- `8e5e92fc` el-mas-tranquilo
+  - Compré un buzo baratísimo en el centro.
+  - I bought a dirt-cheap sweatshirt downtown.
+  - → **I bought a very cheap sweatshirt downtown.**
+  - glosses: baratísimo=very cheap
+- `0b65786e` contame
+  - Estoy engripado, ¡qué garrón!
+  - I'm down with the flu, what a drag!
+  - → **I'm sick with the flu, how annoying!**
+  - glosses: Estoy=I'm · engripado,=sick with the flu · ¡qué=how · garrón!=annoying
+- `6978fff9` practica-resulta-que
+  - Estoy engripada y encima tengo examen mañana.
+  - I'm down with the flu, and on top of that I have an exam tomorrow.
+  - → **I'm sick with the flu, and on top of that I have an exam tomorrow.**
+  - glosses: engripada=sick with the flu
+- `84f79619` practica-no-es-que
+  - Es que estoy engripada.
+  - It's just that I'm down with the flu.
+  - → **It's just that I'm sick with the flu.**
+  - glosses: engripada.=sick with the flu
+- `955c84f7` practica-los-mandados
+  - Anoche estaba engripado y no salí.
+  - Last night I was down with the flu and didn't go out.
+  - → **Last night I was sick with the flu and didn't go out.**
+  - glosses: Anoche=last night · engripado=sick with the flu
+- `acb73bbf` me-gustaria
+  - Me encantaría, pero estoy engripada.
+  - I'd love to, but I'm down with the flu.
+  - → **I'd love to, but I'm sick with the flu.**
+  - glosses: engripada.=sick with the flu
+- `eda9e4bd` practica-lo-que-pasa
+  - Lo que pasa es que estoy engripada.
+  - The thing is, I'm down with the flu.
+  - → **The thing is, I'm sick with the flu.**
+  - glosses: engripada.=sick with the flu
+- `f65ff044` practica-que-bueno
+  - Qué lástima que estés engripado.
+  - What a shame that you're down with the flu.
+  - → **What a shame that you're sick with the flu.**
+  - glosses: engripado.=sick with the flu
+- `04dbb499` contame
+  - ¡Qué garrón!
+  - What a drag!
+  - → **How annoying!**
+  - glosses: ¡Qué=how · garrón!=annoying
+- `160e13f4` contame
+  - Lavar los platos es un garrón.
+  - Washing the dishes is a drag.
+  - → **Washing the dishes is really annoying.**
+  - glosses: un=∅ · garrón.=really annoying
+- `289ad2a0` las-fiestas
+  - Compré los regalos en el centro y fue un garrón.
+  - I bought the presents downtown and it was a drag.
+  - → **I bought the presents downtown and it was really annoying.**
+  - glosses: un=∅ · garrón.=really annoying
+- `346a5203` estoy-al-horno
+  - Los lunes son un bajón.
+  - Mondays are a drag.
+  - → **Mondays make me sad.**
+  - glosses: son=make me · un=∅ · bajón.=sad
+- `3edff2b2` el-celu
+  - Se cortó la llamada con mi jefe, qué garrón.
+  - The call with my boss cut out, what a drag.
+  - → **The call with my boss cut out, how annoying.**
+  - glosses: qué=how · garrón.=annoying
+- `479891b7` no-lo-aguanto
+  - Aguantar a Martín es un garrón.
+  - Putting up with Martín is a drag.
+  - → **Putting up with Martín is really annoying.**
+  - glosses: un=∅ · garrón.=really annoying
+- `52a0afa4` es-un-afano
+  - La reunión fue un embole.
+  - The meeting was a drag.
+  - → **The meeting was really boring.**
+  - glosses: un=∅ · embole.=really boring
+- `681da0fa` las-fiestas
+  - Mi jefe dijo que el feriado laburamos, qué garrón.
+  - My boss said we're working on the holiday, what a drag.
+  - → **My boss said we're working on the holiday, how annoying.**
+  - glosses: qué=how · garrón.=annoying
+- `74484e40` practica-me-robaron
+  - Las expensas son un garrón.
+  - The building fees are a drag.
+  - → **The building fees are really annoying.**
+  - glosses: un=∅ · garrón.=really annoying
+- `7b00a5f2` es-un-afano
+  - Esperar el bondi con lluvia es un embole.
+  - Waiting for the bus in the rain is a drag.
+  - → **Waiting for the bus in the rain is really boring.**
+  - glosses: un=∅ · embole.=really boring
+- `81cb1ad0` me-mude
+  - La mudanza fue un garrón, pero el depto es lindo.
+  - The move was a drag, but the apartment is nice.
+  - → **The move was really annoying, but the apartment is nice.**
+  - glosses: un=∅ · garrón,=really annoying
+- `9b02cd01` contame
+  - Estuve dos horas en la guardia, ¡un garrón!
+  - I was in the ER for two hours, what a drag!
+  - → **I was in the ER for two hours, how annoying!**
+  - glosses: ¡un=how · garrón!=annoying
+- `9deb8e20` es-un-afano
+  - Planchar es un embole.
+  - Ironing is such a drag.
+  - → **Ironing is so boring.**
+  - glosses: un=∅ · embole.=so boring
+- `b0dff168` si-tuviera
+  - Sería un garrón.
+  - It would be a drag.
+  - → **It would be really annoying.**
+  - glosses: un=∅ · garrón.=really annoying
+- `bd2cc74d` lunfardo
+  - ¡Qué fiaca los lunes!
+  - Mondays are such a drag!
+  - → **I feel so lazy on Mondays!**
+  - glosses: ¡Qué=so · fiaca=lazy · los=on
+- `c0c0c92f` es-un-afano
+  - El finde sin guita es un embole.
+  - A weekend with no money is a drag.
+  - → **A weekend with no money is really boring.**
+  - glosses: un=∅ · embole.=really boring
+- `c1d7096f` el-celu
+  - Perdí el celu en el boliche anoche, qué garrón.
+  - I lost my phone at the nightclub last night, what a drag.
+  - → **I lost my phone at the nightclub last night, how annoying.**
+  - glosses: qué=how · garrón.=annoying
+- `d4ba60b5` practica-de-chico
+  - Era un garrón.
+  - It was a drag.
+  - → **It was really annoying.**
+  - glosses: Era=it was · un=∅ · garrón.=really annoying
+- `e04ca7bf` hay-que
+  - Otro trámite, qué garrón.
+  - Another errand, what a drag.
+  - → **Another errand, how annoying.**
+  - glosses: qué=how · garrón.=annoying
+- `ee918180` practica-el-tramite
+  - Sigo sin DNI, ¡qué garrón!
+  - I still don't have an ID, what a drag!
+  - → **I still don't have an ID, how annoying!**
+  - glosses: ¡qué=how · garrón!=annoying
+- `eee25536` salir-con-alguien
+  - La cita fue un garrón.
+  - The date was a drag.
+  - → **The date was really bad.**
+  - glosses: un=∅ · garrón.=really bad
+- `fdfb9c61` practica-el-tramite
+  - Me olvidé el pasaporte en casa, ¡qué garrón!
+  - I forgot my passport at home, what a drag!
+  - → **I forgot my passport at home, how annoying!**
+  - glosses: ¡qué=how · garrón!=annoying
+- `a450be23` practica-cuanto-mas
+  - ¿Qué onda, chabón?
+  - What's up, dude?
+  - → **What's up, man?**
+  - glosses: chabón?=man
+- `a9a41b10` ponele
+  - ¿Dónde está Juan? Qué sé yo.
+  - Where's Juan? I dunno.
+  - → **Where's Juan? I don't know.**
+  - glosses: ¿Dónde=where's · está=where's · Qué sé yo.=I don't know
+- `bcb4e383` ponele
+  - Qué sé yo, capaz que viene más tarde.
+  - I dunno, maybe she'll come later.
+  - → **I don't know, maybe she'll come later.**
+  - glosses: Qué sé yo,=I don't know
+- `3372f5f4` te-doy-la-razon
+  - En eso no pensamos igual.
+  - We don't see eye to eye on that.
+  - → **We don't think the same about that.**
+  - glosses: En eso=about that · pensamos=we don't think · igual.=the same
+- `0eb24356` caiste
+  - ¡Qué inocente, caíste otra vez!
+  - So gullible, you fell for it again!
+  - → **You're so easy to trick, you believed it again!**
+  - glosses: inocente,=easy to trick · caíste=you believed it
+- `1333e672` practica-se-emociono
+  - No lo puedo creer, ¡caíste de nuevo!
+  - I can't believe it, you fell for it again!
+  - → **I can't believe it, you believed it again!**
+  - glosses: ¡caíste=you believed it
+- `263faa51` practica-se-emociono
+  - ¿Caíste vos también?
+  - Did you fall for it too?
+  - → **Did you believe it too?**
+  - glosses: ¿Caíste=did you believe it
+- `3e5c8834` practica-antes-y-ahora
+  - A los quince me enamoré de una compañera.
+  - At fifteen I fell for a classmate.
+  - → **At fifteen I fell in love with a classmate.**
+  - glosses: me enamoré=I fell in love · de=with
+- `58cbabbc` practica-se-emociono
+  - Te estaba cargando y caíste.
+  - I was teasing you and you fell for it.
+  - → **I was teasing you and you believed it.**
+  - glosses: caíste.=you believed it
+- `637c34b1` caiste
+  - Te hacés el vivo, pero caíste.
+  - You act all smart, but you fell for it.
+  - → **You act so smart, but you believed it.**
+  - glosses: Te hacés el vivo,=you act so smart · caíste.=you believed it
+- `65ae2962` practica-se-emociono
+  - ¡Cómo caíste, Lucía!
+  - You totally fell for it, Lucía!
+  - → **You totally believed it, Lucía!**
+  - glosses: caíste,=believed it
+- `77b5b2c2` practica-se-emociono
+  - ¡Caíste, Juan!
+  - You fell for it, Juan!
+  - → **You believed it, Juan!**
+  - glosses: ¡Caíste,=you believed it
+- `811a7229` caiste
+  - Te lo dije en joda y caíste.
+  - I said it as a joke and you fell for it.
+  - → **I said it as a joke and you believed it.**
+  - glosses: caíste.=you believed it
+- `8ba24389` caiste
+  - Mi abuela sabía que era mentira y vos caíste.
+  - My grandma knew it was a lie and you fell for it.
+  - → **My grandma knew it was a lie and you believed it.**
+  - glosses: caíste.=believed it
+- `8c4191f5` caiste
+  - ¡Caíste otra vez!
+  - You fell for it again!
+  - → **You believed it again!**
+  - glosses: ¡Caíste=you believed it
+- `b30ddbe1` caiste
+  - ¡Caíste! Era en joda.
+  - You fell for it! It was a joke.
+  - → **You believed it! It was a joke.**
+  - glosses: ¡Caíste!=you believed it
+- `d71f9ccd` practica-antes-y-ahora
+  - Me enamoré de Martín en la facu.
+  - I fell for Martín in college.
+  - → **I fell in love with Martín in college.**
+  - glosses: Me enamoré=I fell in love · de=with
+- `fa63f59e` practica-se-emociono
+  - Juan te mandó un audio en joda y caíste enseguida.
+  - Juan sent you a voice message as a joke and you fell for it right away.
+  - → **Juan sent you a voice message as a joke and you believed it right away.**
+  - glosses: caíste=you believed it
+- `3ce52ad9` viste-lo-que-paso
+  - ¿Vos podés creer que Lucía y Juan se pelearon?
+  - Can you believe Lucía and Juan fell out?
+  - → **Can you believe Lucía and Juan had a fight?**
+  - glosses: se pelearon?=had a fight
+- `7e98616e` salir-con-alguien
+  - ¿Por qué se pelearon?
+  - Why did they fall out?
+  - → **Why did they have a fight?**
+  - glosses: se pelearon?=did they have a fight
+- `9861a341` salir-con-alguien
+  - Nos peleamos por nada.
+  - We fell out over nothing.
+  - → **We had a fight over nothing.**
+  - glosses: Nos peleamos=we had a fight
+- `b773fc5f` salir-con-alguien
+  - Juan y Sofi se pelearon.
+  - Juan and Sofi fell out.
+  - → **Juan and Sofi had a fight.**
+  - glosses: se pelearon.=had a fight
+- `e18aa442` salir-con-alguien
+  - Se pelearon y ya no se hablan.
+  - They fell out and don't talk anymore.
+  - → **They had a fight and don't talk anymore.**
+  - glosses: Se pelearon=they had a fight
+- `28c4756f` me-hubiera-gustado
+  - No quiero meter la pata.
+  - I don't want to put my foot in it.
+  - → **I don't want to mess up.**
+- `38ff9620` me-hubiera-gustado
+  - Metí la pata: le dije a Lucía que no me gustaba.
+  - I put my foot in it: I told Lucía I didn't like it.
+  - → **I messed up: I told Lucía I didn't like it.**
+- `43700cf3` me-hubiera-gustado
+  - Metí la pata.
+  - I put my foot in it.
+  - → **I messed up.**
+- `44531db6` practica-me-hubiera-gustado
+  - Metí la pata con Sofi.
+  - I put my foot in it with Sofi.
+  - → **I messed up with Sofi.**
+- `5fbc30f9` practica-me-hubiera-gustado
+  - Reconozco que metí la pata.
+  - I admit I put my foot in it.
+  - → **I admit I messed up.**
+- `8326ae37` me-hubiera-gustado
+  - Me hubiera gustado hablar, pero no quería meter la pata.
+  - I would have liked to speak, but I didn't want to put my foot in it.
+  - → **I would have liked to speak, but I didn't want to mess up.**
+- `9178c2f4` me-hubiera-gustado
+  - Metí la pata y ojalá pudiera volver atrás.
+  - I put my foot in it and I wish I could turn back the clock.
+  - → **I messed up and I wish I could go back in time.**
+  - glosses: volver atrás.=go back in time
+- `a7c403d1` practica-me-hubiera-gustado
+  - ¿Metí la pata?
+  - Did I put my foot in it?
+  - → **Did I mess up?**
+  - glosses: ¿Metí la pata?=did I mess up
+- `caea60ba` me-hubiera-gustado
+  - No quiero meter la pata con tus viejos.
+  - I don't want to put my foot in it with your parents.
+  - → **I don't want to mess up with your parents.**
+- `cd169576` me-hubiera-gustado
+  - Ya sé, metí la pata.
+  - I know, I put my foot in it.
+  - → **I know, I messed up.**
+- `efe8fe2e` practica-me-hubiera-gustado
+  - Uy, metí la pata.
+  - Oops, I put my foot in it.
+  - → **Oops, I messed up.**
+  - glosses: Uy,=oops
+- `0a7aeb9d` practica-un-aplauso
+  - Cuando vi la cuenta, me asusté.
+  - When I saw the check, I freaked out.
+  - → **When I saw the check, I got scared.**
+  - glosses: me asusté.=I got scared
+- `0bef3599` practica-resulta-que
+  - Es linda, pero se la cree.
+  - She's pretty, but she's full of herself.
+  - → **She's pretty, but she's arrogant.**
+  - glosses: se la cree.=she's arrogant
+- `104f1eed` se-la-cree
+  - Te la creés porque tenés plata.
+  - You're full of yourself because you have money.
+  - → **You're arrogant because you have money.**
+  - glosses: Te la creés=you're arrogant
+- `18a6c476` se-la-cree
+  - Juan se la cree.
+  - Juan is full of himself.
+  - → **Juan is arrogant.**
+  - glosses: se la cree.=is arrogant
+- `20ef0d81` se-la-cree
+  - ¿Por qué te la creés?
+  - Why are you full of yourself?
+  - → **Why are you arrogant?**
+  - glosses: te la creés?=are you arrogant
+- `31ffbefc` practica-resulta-que
+  - Tu jefe se la cree.
+  - Your boss is full of himself.
+  - → **Your boss is arrogant.**
+  - glosses: se la cree.=is arrogant
+- `3a68e23d` se-la-cree
+  - Che, desde el aumento te la creés.
+  - Hey, ever since the raise you're full of yourself.
+  - → **Hey, ever since the raise you've been arrogant.**
+  - glosses: te la creés.=you've been arrogant
+- `3d930ef0` se-la-cree
+  - Vos te la creés.
+  - You're full of yourself.
+  - → **You're arrogant.**
+  - glosses: te la creés.=you're arrogant
+- `4344507e` es-medio-vago
+  - Ahora que es jefa, está agrandada.
+  - Now that she's the boss, she's full of herself.
+  - → **Now that she's the boss, she's arrogant.**
+  - glosses: agrandada.=arrogant
+- `45260edb` practica-cuanto-mas
+  - Esa mina se la cree porque tiene auto nuevo.
+  - That girl is full of herself because she has a new car.
+  - → **That girl is arrogant because she has a new car.**
+  - glosses: se la cree=is arrogant
+- `4d0704bc` se-la-cree
+  - Mi jefe se la cree.
+  - My boss is full of himself.
+  - → **My boss is arrogant.**
+  - glosses: se la cree.=is arrogant
+- `516b4084` es-medio-vago
+  - Mi prima es linda, pero re agrandada.
+  - My cousin is pretty, but really full of herself.
+  - → **My cousin is pretty, but really arrogant.**
+  - glosses: agrandada.=arrogant
+- `55de1343` se-la-cree
+  - Desde que tiene auto nuevo, se la cree.
+  - Ever since he got a new car, he's full of himself.
+  - → **Ever since he got a new car, he's been arrogant.**
+  - glosses: se la cree.=he's been arrogant
+- `5baf10cc` practica-me-dijo
+  - Es trabajador, pero es un poco agrandado.
+  - He's hard-working, but he's a bit full of himself.
+  - → **He's hard-working, but he's a bit arrogant.**
+  - glosses: agrandado.=arrogant
+- `5f4306d1` se-la-cree
+  - Con ese auto, te la creés un poco.
+  - With that car, you're a little full of yourself.
+  - → **With that car, you're a little arrogant.**
+  - glosses: te la creés=arrogant
+- `6fbdc655` se-la-cree
+  - Esa piba se la cree.
+  - That girl is full of herself.
+  - → **That girl is arrogant.**
+  - glosses: se la cree.=is arrogant
+- `70293d60` practica-resulta-que
+  - Ese pibe se la cree.
+  - That guy is full of himself.
+  - → **That guy is arrogant.**
+  - glosses: se la cree.=is arrogant
+- `8cad916a` practica-resulta-que
+  - ¿Tu profesora se la cree? No, para nada.
+  - Is your teacher full of herself? No, not at all.
+  - → **Is your teacher arrogant? No, not at all.**
+  - glosses: se la cree?=arrogant
+- `b8a1b2ff` practica-resulta-que
+  - Martín se la cree un montón.
+  - Martín is really full of himself.
+  - → **Martín is really arrogant.**
+  - glosses: se la cree=arrogant
+- `bad25ed2` se-la-cree
+  - ¿Te la creés porque jugás bien al fútbol?
+  - Are you full of yourself because you play soccer well?
+  - → **Are you arrogant because you play soccer well?**
+  - glosses: ¿Te la creés=are you arrogant
+- `c2b25bcc` practica-resulta-que
+  - Desde que ganó, se la cree.
+  - Since he won, he's full of himself.
+  - → **Since he won, he's been arrogant.**
+  - glosses: se la cree.=he's been arrogant
+- `c3df5d4b` se-la-cree
+  - Tu hermano se la cree un poco.
+  - Your brother is a little full of himself.
+  - → **Your brother is a little arrogant.**
+  - glosses: se la cree=arrogant
+- `c7df1654` es-medio-vago
+  - ¿Te parece agrandada la piba nueva?
+  - Do you think the new girl is full of herself?
+  - → **Do you think the new girl is arrogant?**
+  - glosses: agrandada=arrogant
+- `e4f777da` practica-resulta-que
+  - Decime la verdad, ¿te la creés?
+  - Tell me the truth, are you full of yourself?
+  - → **Tell me the truth, are you arrogant?**
+  - glosses: ¿te la creés?=are you arrogant
+- `f76856c5` es-medio-vago
+  - ¿Martín? Inteligente sí, pero agrandado.
+  - Martín? Smart, yes, but full of himself.
+  - → **Martín? Smart, yes, but arrogant.**
+  - glosses: agrandado.=arrogant
+- `fc8135a8` practica-resulta-que
+  - La verdad, la jefa se la cree.
+  - To be honest, the boss is full of herself.
+  - → **To be honest, the boss is arrogant.**
+  - glosses: se la cree.=is arrogant
+- `3de1ac21` mas-alto-que
+  - El recital del sábado en Córdoba estuvo buenísimo.
+  - Saturday's gig in Córdoba was great.
+  - → **Saturday's concert in Córdoba was great.**
+  - glosses: recital=concert
+- `d7b93cae` me-gustaria
+  - Posta, me encantaría ir al recital con vos.
+  - Honestly, I'd love to go to the gig with you.
+  - → **Honestly, I'd love to go to the concert with you.**
+  - glosses: recital=concert
+- `c169ddda` deje-de-fumar
+  - Me puse a estudiar.
+  - I got down to studying.
+  - → **I started studying.**
+  - glosses: Me puse a=I started
+- `d147aa30` practica-me-pudri
+  - Hoy me puse a escribir.
+  - Today I got down to writing.
+  - → **Today I started writing.**
+  - glosses: me puse a=I started
+- `9472df5d` es-un-afano
+  - ¿Hay morfi en la heladera?
+  - Is there any grub in the fridge?
+  - → **Is there any food in the fridge?**
+  - glosses: morfi=food
+- `7dd52e39` quien-lavo
+  - ¿Qué es esta mugre?
+  - What's this gunk?
+  - → **What's this dirt?**
+- `d706e8ff` se-aceptan-tarjetas
+  - Ojo, solo efectivo, nada de tarjetas.
+  - Heads up, cash only, no cards.
+  - → **Careful, cash only, no cards.**
+  - glosses: Ojo,=careful
+- `18826db2` la-ruta
+  - Salimos a la ruta temprano.
+  - We hit the road early.
+  - → **We got on the road early.**
+  - glosses: Salimos=we got on
+- `a2d7b279` practica-me-mori-de-risa
+  - Me puse re manija con esa serie nueva.
+  - I got totally hooked on that new show.
+  - → **I got totally obsessed with that new show.**
+  - glosses: manija=obsessed · con=with
+- `e4dcb1c1` estoy-al-horno
+  - Uy, llegué tarde: estoy al horno.
+  - Oh no, I got here late: I'm toast.
+  - → **Oh no, I got here late: I'm in big trouble.**
+  - glosses: al horno.=in big trouble
+- `4fc70735` me-la-jugue
+  - ¡Cómo la rompe!
+  - She totally kills it!
+  - → **She's totally amazing!**
+  - glosses: la rompe!=amazing
+- `688b57c5` practica-me-la-jugue
+  - Sofi la rompe en el laburo.
+  - Sofi kills it at work.
+  - → **Sofi is amazing at work.**
+  - glosses: la rompe=is amazing
+- `6f2ee6ea` me-la-jugue
+  - Juan es callado, pero cuando juega la rompe.
+  - Juan is quiet, but when he plays he kills it.
+  - → **Juan is quiet, but when he plays he's amazing.**
+  - glosses: la rompe.=he's amazing
+- `737e00ba` me-la-jugue
+  - Ese pibe la rompe.
+  - That guy kills it.
+  - → **That guy is amazing.**
+  - glosses: la rompe.=is amazing
+- `a7e19785` practica-me-la-jugue
+  - Esa banda la rompe.
+  - That band kills it.
+  - → **That band is amazing.**
+  - glosses: la rompe.=is amazing
+- `e664f6c3` me-la-jugue
+  - ¡La rompiste en el partido!
+  - You killed it in the game!
+  - → **You were amazing in the game!**
+  - glosses: ¡La rompiste=you were amazing
+- `e77b7ac5` me-la-jugue
+  - Martín la rompe en la cancha.
+  - Martín kills it on the field.
+  - → **Martín is amazing on the field.**
+  - glosses: la rompe=is amazing
+- `4344be1e` mate-y-facturas
+  - A Sofi no le gusta nada, es una amarga.
+  - Sofi doesn't like anything, she's such a killjoy.
+  - → **Sofi doesn't like anything, she's no fun.**
+  - glosses: una=∅ · amarga.=no fun
+- `9147a97f` mate-y-facturas
+  - ¡Sos una amarga!
+  - You're such a killjoy!
+  - → **You're no fun!**
+  - glosses: una=∅ · amarga!=no fun
+- `43ae8048` practica-se-aceptan-tarjetas
+  - ¡Qué mala excusa!
+  - What a lame excuse!
+  - → **What a bad excuse!**
+  - glosses: mala=bad
+- `40363178` laburo-nuevo
+  - No conseguí el laburo, pero tuve una entrevista re buena.
+  - I didn't land the job, but I had a really good interview.
+  - → **I didn't get the job, but I had a really good interview.**
+  - glosses: conseguí=I didn't get
+- `46900353` como-dice-el-dicho
+  - No conseguí el laburo, pero conocí a Sofi: no hay mal que por bien no venga.
+  - I didn't land the job, but I met Sofi: every cloud has a silver lining.
+  - → **I didn't get the job, but I met Sofi: something good can come from something bad.**
+  - glosses: conseguí=I didn't get · no hay mal que por bien no venga.=something good can come from something bad
+- `0a051b4a` como-dice-el-dicho
+  - Conseguí laburo a los cuarenta años: más vale tarde que nunca.
+  - I landed a job at forty: better late than never.
+  - → **I got a job at forty: better late than never.**
+  - glosses: Conseguí=I got
+- `14f96f4e` laburo-nuevo
+  - ¿Conseguiste el laburo?
+  - Did you land the job?
+  - → **Did you get the job?**
+  - glosses: ¿Conseguiste=did you get
+- `1f84b93d` me-contrataron
+  - Sofi mandó el currículum y consiguió el puesto.
+  - Sofi sent her résumé and landed the position.
+  - → **Sofi sent her résumé and got the position.**
+  - glosses: consiguió=got
+- `40f95bfb` laburo-nuevo
+  - Conseguí laburo en una empresa de Córdoba.
+  - I landed a job at a company in Córdoba.
+  - → **I got a job at a company in Córdoba.**
+  - glosses: Conseguí=I got
+- `61e5a68e` me-emocione
+  - Estoy orgulloso porque conseguí un laburo nuevo.
+  - I'm proud because I landed a new job.
+  - → **I'm proud because I got a new job.**
+  - glosses: conseguí=I got
+- `65a65b74` laburo-nuevo
+  - Che, ¿conseguiste laburo en esa empresa?
+  - Hey, did you land a job at that company?
+  - → **Hey, did you get a job at that company?**
+  - glosses: Che,=hey · ¿conseguiste=did you get
+- `72480fa6` laburo-nuevo
+  - Por suerte conseguí laburo.
+  - Luckily I landed a job.
+  - → **Luckily I got a job.**
+  - glosses: conseguí=I got
+- `88bca7c5` laburo-nuevo
+  - Sí, conseguí laburo.
+  - Yes, I landed a job.
+  - → **Yes, I got a job.**
+  - glosses: conseguí=I got
+- `90829da6` laburo-nuevo
+  - ¿Conseguiste laburo?
+  - Did you land a job?
+  - → **Did you get a job?**
+  - glosses: ¿Conseguiste=did you get
+- `94c9aa4e` laburo-nuevo
+  - Conseguí un laburo nuevo.
+  - I landed a new job.
+  - → **I got a new job.**
+  - glosses: Conseguí=I got
+- `98b3a30f` me-contrataron
+  - ¿Juan consiguió otro laburo después de que lo echaron?
+  - Juan landed another job after they fired him?
+  - → **Juan got another job after they fired him?**
+  - glosses: consiguió=got
+- `a1f2f79a` laburo-nuevo
+  - Conseguí laburo en el centro.
+  - I landed a job downtown.
+  - → **I got a job downtown.**
+  - glosses: Conseguí=I got
+- `c4231e1b` laburo-nuevo
+  - Al final conseguí el laburo en la empresa de Juan.
+  - In the end I landed the job at Juan's company.
+  - → **In the end I got the job at Juan's company.**
+  - glosses: conseguí=I got
+- `ca587e91` laburo-nuevo
+  - ¡Conseguí laburo!
+  - I landed a job!
+  - → **I got a job!**
+  - glosses: ¡Conseguí=I got
+- `e76f2ba7` te-la-hago-corta
+  - Te la hago corta, conseguí el laburo.
+  - Long story short, I landed the job.
+  - → **To keep it short, I got the job.**
+  - glosses: Te la hago corta,=to keep it short · conseguí=I got
+- `f21566e9` laburo-nuevo
+  - ¿Conseguiste laburo o todavía no?
+  - Did you land a job or not yet?
+  - → **Did you get a job or not yet?**
+  - glosses: ¿Conseguiste=did you get
+- `0941ced7` me-la-jugue
+  - Te juro que en la reunión la rompiste.
+  - I swear you nailed it in the meeting.
+  - → **I swear you were amazing in the meeting.**
+  - glosses: la rompiste.=you were amazing
+- `ef118b9f` me-la-jugue
+  - ¡La rompiste, genio!
+  - You nailed it, genius!
+  - → **You were amazing, genius!**
+  - glosses: ¡La rompiste,=you were amazing
+- `714bf3e7` me-la-jugue
+  - Tranqui, la pifiaste, no pasa nada.
+  - Relax, you messed up, it's no big deal.
+  - → **Relax, you messed up, it's okay.**
+  - glosses: no pasa nada.=it's okay
+- `a570f153` no-te-hagas-el-gil
+  - No importa, no pasa nada.
+  - It doesn't matter, no big deal.
+  - → **It doesn't matter, it's okay.**
+  - glosses: no pasa nada.=it's okay
+- `bab0c08f` practica-cuando-vuelvas
+  - No te pongas así, no pasa nada.
+  - Don't be like that, it's no big deal.
+  - → **Don't be like that, it's okay.**
+  - glosses: no pasa nada.=it's okay
+- `3e493945` practica-se-aceptan-tarjetas
+  - Sofi me clavó el visto. Esa fue su respuesta.
+  - Sofi left me on read. That was her answer.
+  - → **Sofi read my message and didn't answer. That was her answer.**
+  - glosses: me clavó el visto.=read my message and didn't answer
+- `959af04f` me-pone-nervioso-que
+  - Me clavó el visto ayer y todavía nada.
+  - She left me on read yesterday and still nothing.
+  - → **Yesterday she read my message and didn't answer, and still nothing.**
+  - glosses: Me clavó el visto=she read my message and didn't answer
+- `a99cdb5f` me-pone-nervioso-que
+  - Sofi me clavó el visto, ¿estará enojada?
+  - Sofi left me on read, do you think she's mad?
+  - → **Sofi read my message and didn't answer, do you think she's angry?**
+  - glosses: me clavó el visto,=read my message and didn't answer · enojada?=angry
+- `b2e221e8` practica-me-la-jugue
+  - Para colmo, me clavó el visto.
+  - To top it off, he left me on read.
+  - → **On top of that, he read my message and didn't answer.**
+  - glosses: Para colmo,=on top of that · me clavó el visto.=he read my message and didn't answer
+- `c2a1f22b` me-pone-nervioso-que
+  - Juan me clavó el visto.
+  - Juan left me on read.
+  - → **Juan read my message and didn't answer.**
+  - glosses: me clavó el visto.=read my message and didn't answer
+- `e5834e24` me-pone-nervioso-que
+  - ¿Te contestó? No, me clavó el visto.
+  - Did she answer you? No, she left me on read.
+  - → **Did she answer you? No, she read my message and didn't answer.**
+  - glosses: me clavó el visto.=she read my message and didn't answer
+- `25e9feef` tipo-ocho
+  - A las ocho en punto.
+  - At eight on the dot.
+  - → **At eight exactly.**
+  - glosses: en punto.=exactly
+- `55b09007` a-que-hora-abre
+  - ¿En punto?
+  - On the dot?
+  - → **Exactly?**
+  - glosses: ¿En punto?=exactly
+- `c2a8c346` tipo-ocho
+  - Tipo ocho, no en punto.
+  - Around eight, not on the dot.
+  - → **Around eight, not exactly.**
+  - glosses: en punto.=exactly
+- `6320f55a` es-enfermera
+  - Martín es periodista y siempre está en la calle.
+  - Martín is a journalist and is always out and about.
+  - → **Martín is a journalist and is always out in the streets.**
+  - glosses: en=out in · la=the · calle.=streets
+- `59ecfe53` no-lo-aguanto
+  - Martín es un falso.
+  - Martín is a phony.
+  - → **Martín is a fake.**
+  - glosses: falso.=fake
+- `804863a8` estoy-al-horno
+  - En la oficina es careta, pero con amigos no.
+  - At the office he's a phony, but not with friends.
+  - → **At the office he's a fake, but not with friends.**
+  - glosses: careta,=a fake
+- `c66b9c93` no-lo-aguanto
+  - Mi ex era una falsa.
+  - My ex was a phony.
+  - → **My ex was a fake.**
+  - glosses: falsa.=fake
+- `e2b1eef0` practica-es-un-afano
+  - ¡No seas chanta!
+  - Don't be such a phony!
+  - → **Don't be such a fake!**
+  - glosses: chanta!=such a fake
+- `120a8bd3` practica-quien-vino
+  - Quise invitar yo, pero Juan ya pagó.
+  - I wanted to pick up the tab, but Juan already paid.
+  - → **I wanted to pay the bill, but Juan already paid.**
+  - glosses: invitar=to pay the bill
+- `584d79ef` costumbres
+  - La previa estuvo re buena.
+  - The pregame was really good.
+  - → **The pre-party was really good.**
+- `63026e99` costumbres
+  - Para mi amiga alemana, la previa es rara.
+  - For my German friend, the pregame is weird.
+  - → **For my German friend, the pre-party is weird.**
+- `77627ddb` ese-chabon
+  - Anoche la previa en la casa de Sofi estuvo zarpada.
+  - Last night the pregame at Sofi's house was wild.
+  - → **Last night the pre-party at Sofi's house was wild.**
+- `836dd043` costumbres
+  - Nos juntamos a las once para la previa.
+  - We're getting together at eleven to pregame.
+  - → **We're getting together at eleven for the pre-party.**
+  - glosses: para=for · la=the
+- `88808e8c` costumbres
+  - Primero la previa, después el boliche.
+  - First the pregame, then the club.
+  - → **First the pre-party, then the club.**
+- `c2729fd7` costumbres
+  - Me quedé en la previa y no fui al boliche.
+  - I stayed at the pregame and never made it to the club.
+  - → **I stayed at the pre-party and didn't go to the club.**
+  - glosses: no=didn't · fui=go
+- `cbbdf861` ese-chabon
+  - La previa estuvo zarpada.
+  - The pregame was wild.
+  - → **The pre-party was wild.**
+- `e7a64cfe` ese-chabon
+  - Hay birras en la heladera para la previa.
+  - There are beers in the fridge for the pregame.
+  - → **There are beers in the fridge for the pre-party.**
+- `eae45559` practica-que-susto
+  - Traigo vino para la previa.
+  - I'll bring wine for the pregame.
+  - → **I'll bring wine for the pre-party.**
+- `e7fef63a` practica-a-medias
+  - El verdulero cobra solo en efectivo.
+  - The produce guy only takes cash.
+  - → **The vegetable seller only takes cash.**
+  - glosses: verdulero=vegetable seller
+- `ae924826` practica-me-mori-de-risa
+  - ¿Estás manija con el viaje a Bariloche?
+  - Are you pumped about the trip to Bariloche?
+  - → **Are you excited about the trip to Bariloche?**
+- `bda8c71e` practica-me-mori-de-risa
+  - ¡Estoy manija!
+  - I'm so pumped!
+  - → **I'm so excited!**
+- `06b0d54d` cien-gramos-de-jamon
+  - ¿Necesitás algo más o te cobro?
+  - Do you need anything else, or should I ring you up?
+  - → **Do you need anything else, or should I charge you?**
+  - glosses: cobro?=should I charge
+- `25dc06cb` me-cobras
+  - ¿Te cobro el alfajor también?
+  - Should I ring up the alfajor too?
+  - → **Should I charge you for the alfajor too?**
+  - glosses: ¿Te=you · cobro=should I charge
+- `4174f46c` practica-me-cobras
+  - ¿Me cobrás, por favor?
+  - Can you ring me up, please?
+  - → **Can you charge me, please?**
+  - glosses: cobrás,=can you charge
+- `7453daf4` practica-me-cobras
+  - ¿Me cobrás las dos empanadas y la gaseosa?
+  - Can you ring up the two empanadas and the soda?
+  - → **Can you charge me for the two empanadas and the soda?**
+  - glosses: ¿Me=me · cobrás=can you charge
+- `78f798c9` practica-un-aplauso
+  - ¿Me cobrás con débito?
+  - Can you ring it up on debit?
+  - → **Can you charge me on debit?**
+  - glosses: ¿Me=me · cobrás=can you charge
+- `cdfc6454` me-cobras
+  - ¿Me cobrás con tarjeta o solo efectivo?
+  - Can you ring me up by card, or is it cash only?
+  - → **Can you charge me by card, or is it cash only?**
+  - glosses: cobrás=can you charge
+- `edf2968a` me-cobras
+  - ¿Te cobro?
+  - Can I ring you up?
+  - → **Can I charge you?**
+  - glosses: cobro?=can I charge
+- `f30523e3` me-cobras
+  - ¿Me cobrás, por favor?
+  - Can you ring me up, please?
+  - → **Can you charge me, please?**
+  - glosses: cobrás,=can you charge
+- `0b6aaf9d` practica-es-un-afano
+  - La entrada al recital fue un afano.
+  - The concert ticket was a rip-off.
+  - → **The concert ticket was way too expensive.**
+  - glosses: un=∅ · afano.=way too expensive
+- `238382e0` practica-es-un-afano
+  - Ya sabía que era un afano.
+  - I already knew it was a rip-off.
+  - → **I already knew it was way too expensive.**
+  - glosses: un=∅ · afano.=way too expensive
+- `33e81036` me-afanaron
+  - Ese precio es una estafa.
+  - That price is a rip-off.
+  - → **That price is a scam.**
+  - glosses: estafa.=scam
+- `537e6267` me-afanaron
+  - ¡Qué estafa!
+  - What a rip-off!
+  - → **What a scam!**
+  - glosses: estafa!=scam
+- `745189c3` practica-es-un-afano
+  - ¡Esto es un afano!
+  - This is a rip-off!
+  - → **This is way too expensive!**
+  - glosses: un=∅ · afano!=way too expensive
+- `7f5b5809` es-un-afano
+  - Ese precio es un afano.
+  - That price is a rip-off.
+  - → **That price is way too high.**
+  - glosses: un=∅ · afano.=way too high
+- `8e15f9bd` practica-es-un-afano
+  - Para mí no es un afano, vale la pena.
+  - I don't think it's a rip-off, it's worth it.
+  - → **I don't think it's way too expensive, it's worth it.**
+  - glosses: Para=think · un=∅ · afano,=way too expensive
+- `97a4683e` practica-es-un-afano
+  - ¿Viste el alquiler que piden? Es un afano.
+  - Did you see the rent they're asking? It's a rip-off.
+  - → **Did you see the rent they're asking? It's way too expensive.**
+  - glosses: un=∅ · afano.=way too expensive
+- `a631bc7d` es-un-afano
+  - No vayas ahí, es un afano.
+  - Don't go there, it's a rip-off.
+  - → **Don't go there, it's way too expensive.**
+  - glosses: un=∅ · afano.=way too expensive
+- `a8e9f45e` practica-es-un-afano
+  - Los precios de este bar son un afano.
+  - The prices at this bar are a rip-off.
+  - → **The prices at this bar are way too high.**
+  - glosses: un=∅ · afano.=way too high
+- `dc8fcfb4` es-un-afano
+  - El taxi del aeropuerto siempre es un afano.
+  - The taxi from the airport is always a rip-off.
+  - → **The taxi from the airport is always way too expensive.**
+  - glosses: un=∅ · afano.=way too expensive
+- `e6e8ed9e` es-un-afano
+  - Este alquiler es un afano.
+  - This rent is a rip-off.
+  - → **This rent is way too expensive.**
+  - glosses: un=∅ · afano.=way too expensive
+- `f7c8304a` practica-es-un-afano
+  - No compro más en ese kiosco, es un afano.
+  - I'm not buying at that kiosk anymore, it's a rip-off.
+  - → **I'm not buying at that kiosk anymore, it's way too expensive.**
+  - glosses: un=∅ · afano.=way too expensive
+- `06ba23b9` socio-del-club
+  - Hinchamos por el club del barrio.
+  - We root for the neighborhood club.
+  - → **We support the neighborhood club.**
+  - glosses: Hinchamos=we support · por=∅
+- `074abe5c` practica-la-parrilla
+  - Hincho por el mismo cuadro que mi papá.
+  - I root for the same team as my dad.
+  - → **I support the same team as my dad.**
+  - glosses: Hincho=I support · por=∅
+- `09729be0` socio-del-club
+  - De chico hinchaba por otro cuadro.
+  - As a kid I rooted for another team.
+  - → **As a kid I supported another team.**
+  - glosses: hinchaba=I supported · por=∅
+- `1149ba7d` la-pasamos-barbaro
+  - ¿De qué equipo sos?
+  - What team do you root for?
+  - → **What team do you support?**
+  - glosses: sos?=do you support
+- `14d89dc5` de-que-cuadro-sos
+  - Hincho por Argentina, obvio.
+  - I root for Argentina, of course.
+  - → **I support Argentina, of course.**
+  - glosses: Hincho=I support · por=∅
+- `1e12dbb8` practica-la-parrillada
+  - ¿Por quién hinchamos?
+  - Who are we rooting for?
+  - → **Who are we supporting?**
+  - glosses: ¿Por=∅ · hinchamos?=are we supporting
+- `241406ce` practica-la-parrilla
+  - Vos hinchás por Argentina, ¿no?
+  - You root for Argentina, right?
+  - → **You support Argentina, right?**
+  - glosses: hinchás=support · por=∅
+- `2791e0ac` practica-la-parrilla
+  - Che, ¿por quién hinchás?
+  - Hey, who do you root for?
+  - → **Hey, who do you support?**
+  - glosses: ¿por=∅ · hinchás?=do you support
+- `2b8dcc39` de-que-cuadro-sos
+  - Hincho por Uruguay porque mi vieja es uruguaya.
+  - I root for Uruguay because my mom is Uruguayan.
+  - → **I support Uruguay because my mom is Uruguayan.**
+  - glosses: Hincho=I support · por=∅
+- `2d12a7f1` practica-la-parrilla
+  - Hincho por Argentina y mi novia también.
+  - I root for Argentina and my girlfriend does too.
+  - → **I support Argentina and my girlfriend does too.**
+  - glosses: Hincho=I support · por=∅
+- `2f61cea5` de-que-cuadro-sos
+  - ¿Sabés por quién hincho yo?
+  - Do you know who I root for?
+  - → **Do you know who I support?**
+  - glosses: por=∅ · hincho=I support
+- `38e5b756` practica-la-parrilla
+  - Yo hincho por Uruguay.
+  - I root for Uruguay.
+  - → **I support Uruguay.**
+  - glosses: hincho=support · por=∅
+- `3f078ef6` de-que-cuadro-sos
+  - Hincho por un cuadro de Rosario, como mi abuelo.
+  - I root for a team from Rosario, like my grandfather.
+  - → **I support a team from Rosario, like my grandfather.**
+  - glosses: Hincho=I support · por=∅
+- `400c13fc` de-que-cuadro-sos
+  - Hincho por la selección.
+  - I root for the national team.
+  - → **I support the national team.**
+  - glosses: Hincho=I support · por=∅
+- `423c4cd2` socio-del-club
+  - Hinchamos por ellos desde chicos.
+  - We've rooted for them since we were kids.
+  - → **We've supported them since we were kids.**
+  - glosses: Hinchamos=we've supported · por=∅
+- `45919d83` practica-la-parrilla
+  - ¿Hinchás por la selección?
+  - Do you root for the national team?
+  - → **Do you support the national team?**
+  - glosses: ¿Hinchás=do you support · por=∅
+- `5e860bc3` practica-la-parrillada
+  - Hinchamos por la selección desde chicos.
+  - We've rooted for the national team since we were kids.
+  - → **We've supported the national team since we were kids.**
+  - glosses: Hinchamos=we've supported · por=∅
+- `601c98ee` practica-la-parrilla
+  - Mi mamá es uruguaya, pero yo hincho por Argentina.
+  - My mom is Uruguayan, but I root for Argentina.
+  - → **My mom is Uruguayan, but I support Argentina.**
+  - glosses: hincho=support · por=∅
+- `61b697fa` socio-del-club
+  - Cuando vivía en Rosario, hinchaba por otro cuadro.
+  - When I lived in Rosario, I rooted for another team.
+  - → **When I lived in Rosario, I supported another team.**
+  - glosses: hinchaba=I supported · por=∅
+- `63f5c012` de-que-cuadro-sos
+  - Mi novia es de otro cuadro.
+  - My girlfriend roots for another team.
+  - → **My girlfriend supports another team.**
+  - glosses: es=supports · de=∅
+- `66bc3df4` practica-la-parrillada
+  - Hincho por otro cuadro.
+  - I root for a different team.
+  - → **I support a different team.**
+  - glosses: Hincho=I support · por=∅
+- `6d808a78` de-que-cuadro-sos
+  - Vos hinchás por Uruguay y yo por Argentina.
+  - You root for Uruguay and I root for Argentina.
+  - → **You support Uruguay and I support Argentina.**
+  - glosses: hinchás=support · por=∅ · yo=I · por=∅
+- `6f2290ff` la-pasamos-barbaro
+  - Mi hermana es de otro equipo.
+  - My sister roots for another team.
+  - → **My sister supports another team.**
+  - glosses: es=supports · de=∅
+- `7a10fa02` de-que-cuadro-sos
+  - Desde chico hincho por el mismo cuadro.
+  - I've rooted for the same team since I was a kid.
+  - → **I've supported the same team since I was a kid.**
+  - glosses: hincho=I've supported · por=∅
+- `7e36194e` practica-la-parrilla
+  - ¿Hinchás por un cuadro de Rosario?
+  - Do you root for a team from Rosario?
+  - → **Do you support a team from Rosario?**
+  - glosses: ¿Hinchás=do you support · por=∅
+- `87f289b5` de-que-cuadro-sos
+  - ¿Vos hinchás por Uruguay?
+  - Do you root for Uruguay?
+  - → **Do you support Uruguay?**
+  - glosses: hinchás=do you support · por=∅
+- `88c840e3` de-que-cuadro-sos
+  - Che, ¿vos hinchás por alguien?
+  - Hey, do you root for anyone?
+  - → **Hey, do you support anyone?**
+  - glosses: hinchás=do you support · por=∅
+- `8b3e1ae3` practica-tenes-razon
+  - ¿De qué equipo sos?
+  - Which team do you root for?
+  - → **Which team do you support?**
+  - glosses: sos?=do you support
+- `93eb6ff7` practica-la-parrilla
+  - ¿Vos hinchás por Uruguay?
+  - Do you root for Uruguay?
+  - → **Do you support Uruguay?**
+  - glosses: hinchás=do you support · por=∅
+- `9d0dd9fc` practica-la-parrilla
+  - Hincho por el cuadro de mi barrio.
+  - I root for my neighborhood team.
+  - → **I support my neighborhood team.**
+  - glosses: Hincho=I support · por=∅
+- `a035dd9e` practica-la-parrilla
+  - Siempre hincho por Argentina.
+  - I always root for Argentina.
+  - → **I always support Argentina.**
+  - glosses: hincho=I always support · por=∅
+- `a456ce66` practica-la-parrillada
+  - En lo de mi abuela todos hinchamos por Argentina.
+  - At my grandma's we all root for Argentina.
+  - → **At my grandma's we all support Argentina.**
+  - glosses: hinchamos=we all support · por=∅
+- `a749a295` de-que-cuadro-sos
+  - Decime por quién hinchás.
+  - Tell me who you root for.
+  - → **Tell me who you support.**
+  - glosses: por=∅ · hinchás.=you support
+- `b38079aa` de-que-cuadro-sos
+  - ¿Cómo hinchás por Uruguay si sos argentino?
+  - How can you root for Uruguay if you're Argentinian?
+  - → **How can you support Uruguay if you're Argentinian?**
+  - glosses: hinchás=can you support · por=∅
+- `b38c505f` practica-la-parrillada
+  - Mi viejo y yo hinchamos por el mismo cuadro.
+  - My dad and I root for the same team.
+  - → **My dad and I support the same team.**
+  - glosses: hinchamos=support · por=∅
+- `b795b10b` de-que-cuadro-sos
+  - ¿Hinchás por un cuadro de Córdoba?
+  - Do you root for a team from Córdoba?
+  - → **Do you support a team from Córdoba?**
+  - glosses: ¿Hinchás=do you support · por=∅
+- `c4179b4d` practica-la-parrilla
+  - ¿Por qué hinchás por ese cuadro?
+  - Why do you root for that team?
+  - → **Why do you support that team?**
+  - glosses: hinchás=do you support · por=∅
+- `c809017d` de-que-cuadro-sos
+  - Hincho por el cuadro de mi barrio.
+  - I root for my neighborhood team.
+  - → **I support my neighborhood team.**
+  - glosses: Hincho=I support · por=∅
+- `c8d657e3` socio-del-club
+  - Hinchamos por el mismo cuadro, pero él nunca va a la cancha.
+  - We root for the same team, but he never goes to the stadium.
+  - → **We support the same team, but he never goes to the stadium.**
+  - glosses: Hinchamos=we support · por=∅
+- `cb4d8644` de-que-cuadro-sos
+  - ¿Hinchás por el cuadro de tu barrio?
+  - Do you root for your neighborhood team?
+  - → **Do you support your neighborhood team?**
+  - glosses: ¿Hinchás=do you support · por=∅
+- `cd12f91c` practica-la-parrilla
+  - ¿Hinchás por mi cuadro?
+  - Do you root for my team?
+  - → **Do you support my team?**
+  - glosses: ¿Hinchás=do you support · por=∅
+- `cd28d9a3` de-que-cuadro-sos
+  - Hincho por un cuadro que nunca ganó nada.
+  - I root for a team that has never won anything.
+  - → **I support a team that has never won anything.**
+  - glosses: Hincho=I support · por=∅
+- `cd54eb0a` practica-la-parrilla
+  - ¿En serio hinchás por el cuadro de Martín?
+  - Seriously, you root for Martín's team?
+  - → **Seriously, you support Martín's team?**
+  - glosses: hinchás=you support · por=∅
+- `d35ffb47` de-que-cuadro-sos
+  - ¿Hinchás por Argentina? Sí, obvio.
+  - Do you root for Argentina? Yes, of course.
+  - → **Do you support Argentina? Yes, of course.**
+  - glosses: ¿Hinchás=do you support · por=∅
+- `e2c9b54c` socio-del-club
+  - Mi abuelo hinchaba por ese cuadro.
+  - My grandfather rooted for that team.
+  - → **My grandfather supported that team.**
+  - glosses: hinchaba=supported · por=∅
+- `e7651d40` de-que-cuadro-sos
+  - Toda mi familia es del mismo cuadro.
+  - My whole family roots for the same team.
+  - → **My whole family supports the same team.**
+  - glosses: es=supports · del=the
+- `edd18299` socio-del-club
+  - ¿Tu papá hinchaba por el club?
+  - Did your dad root for the club?
+  - → **Did your dad support the club?**
+  - glosses: hinchaba=support · por=∅
+- `efed5c95` practica-la-parrilla
+  - Hincho por Argentina desde los cinco años.
+  - I've rooted for Argentina since I was five years old.
+  - → **I've supported Argentina since I was five years old.**
+  - glosses: Hincho=I've supported · por=∅
+- `07a7ac0b` ese-chabon
+  - ¡Qué bardo hay en el subte!
+  - What a ruckus there is on the subway!
+  - → **What a mess there is on the subway!**
+  - glosses: bardo=mess
+- `0a6d9a42` ese-chabon
+  - Mirá el bardo que hay en la avenida.
+  - Look at the ruckus there is on the avenue.
+  - → **Look at the mess there is on the avenue.**
+  - glosses: bardo=mess
+- `17fa2f0b` practica-cuanto-mas
+  - ¡Qué bardo!
+  - What a ruckus!
+  - → **What a mess!**
+  - glosses: bardo!=mess
+- `93d40ed8` practica-cuanto-mas
+  - Che, ¿qué fue ese bardo?
+  - Hey, what was that ruckus?
+  - → **Hey, what was that mess?**
+  - glosses: bardo?=mess
+- `6f018d5c` me-pone-nervioso-que
+  - Juan es re colgado.
+  - Juan is so scatterbrained.
+  - → **Juan is so forgetful.**
+  - glosses: colgado.=forgetful
+- `77cf6846` me-pone-nervioso-que
+  - Mi hermano es tan colgado que perdió las llaves.
+  - My brother is so scatterbrained he lost his keys.
+  - → **My brother is so forgetful he lost his keys.**
+  - glosses: colgado=forgetful
+- `95bc98f6` me-pone-nervioso-que
+  - ¡Qué colgado que sos!
+  - You're so scatterbrained!
+  - → **You're so forgetful!**
+  - glosses: ¡Qué=so · colgado=forgetful
+- `9a62f693` me-pone-nervioso-que
+  - Uy, qué colgada, me olvidé.
+  - Oops, I'm so scatterbrained, I forgot.
+  - → **Oops, I'm so forgetful, I forgot.**
+  - glosses: qué=so · colgada,=forgetful
+- `d8f22f7e` dijo-que-pasaria
+  - No es mentirosa, es re colgada.
+  - She's not a liar, she's just really scatterbrained.
+  - → **She's not a liar, she's just really forgetful.**
+  - glosses: colgada.=forgetful
+- `fa1f0e18` me-pone-nervioso-que
+  - No es que sea colgada, tengo mucho en la cabeza.
+  - It's not that I'm scatterbrained, I just have a lot on my mind.
+  - → **It's not that I'm forgetful, I just have a lot on my mind.**
+  - glosses: colgada,=forgetful
+- `07398423` es-un-afano
+  - La compu del laburo es re berreta.
+  - The computer at work is really shoddy.
+  - → **The computer at work is really low quality.**
+  - glosses: berreta.=low quality
+- `082612c8` es-un-afano
+  - Este cargador es re berreta.
+  - This charger is really shoddy.
+  - → **This charger is really low quality.**
+  - glosses: berreta.=low quality
+- `2fddc0bd` es-un-afano
+  - Compré una valija berreta.
+  - I bought a cheap, shoddy suitcase.
+  - → **I bought a cheap, low-quality suitcase.**
+  - glosses: berreta.=cheap, low-quality
+- `7f511936` es-un-afano
+  - Compré una mochila berreta y ya está rota.
+  - I bought a shoddy backpack and it's already broken.
+  - → **I bought a low-quality backpack and it's already broken.**
+  - glosses: berreta=low-quality
+- `4b494fc5` por-un-lado
+  - ¿No te convence el barrio?
+  - You're not sold on the neighborhood?
+  - → **You're not convinced by the neighborhood?**
+  - glosses: convence=convinced by
+- `8cab4bf6` por-un-lado
+  - La idea no me convence.
+  - I'm not sold on the idea.
+  - → **I'm not convinced by the idea.**
+  - glosses: me=I'm · convence.=convinced by
+- `9a61f03b` por-un-lado
+  - El sueldo me convence, el horario no.
+  - I'm sold on the salary, not the schedule.
+  - → **I'm convinced by the salary, not the schedule.**
+  - glosses: convence,=convinced by
+- `b717707a` por-un-lado
+  - El depto es lindo, pero el barrio no me convence.
+  - The apartment is nice, but I'm not sold on the neighborhood.
+  - → **The apartment is nice, but I'm not convinced by the neighborhood.**
+  - glosses: convence.=convinced by
+- `bcdac26b` por-un-lado
+  - No me convence vivir tan lejos del centro.
+  - I'm not sold on living so far from downtown.
+  - → **I'm not convinced about living so far from downtown.**
+  - glosses: me=I'm · convence=convinced about
+- `418bf8ae` hace-fresquito
+  - Sos igualita a tu mamá.
+  - You're the spitting image of your mom.
+  - → **You look just like your mom.**
+  - glosses: Sos=you look · igualita=just like · a=∅
+- `18e951c0` cada-loco-con-su-tema
+  - Pedí un aumento. El que no llora no mama.
+  - Ask for a raise. The squeaky wheel gets the grease.
+  - → **Ask for a raise. If you don't ask, you don't get.**
+- `c5c7561d` cada-loco-con-su-tema
+  - ¿No pediste nada? El que no llora no mama.
+  - You didn't ask for anything? The squeaky wheel gets the grease.
+  - → **You didn't ask for anything? If you don't ask, you don't get.**
+- `e8cc05d7` cada-loco-con-su-tema
+  - Hablá con tu jefe: el que no llora no mama.
+  - Talk to your boss: the squeaky wheel gets the grease.
+  - → **Talk to your boss: if you don't ask, you don't get.**
+- `f43da7ac` cada-loco-con-su-tema
+  - —No me gusta reclamar. —Y, el que no llora no mama.
+  - I don't like complaining. —Well, the squeaky wheel gets the grease.
+  - → **I don't like complaining. —Well, if you don't ask, you don't get.**
+- `b853ecbf` me-afanaron
+  - ¿Te robaron? ¡Qué garrón!
+  - You got robbed? That sucks!
+  - → **You got robbed? What bad luck!**
+  - glosses: ¡Qué=what · garrón!=bad luck
+- `6849b089` practica-como-estuvo
+  - Nací en Uruguay, pero soy re porteña.
+  - I was born in Uruguay, but I'm a porteña through and through.
+  - → **I was born in Uruguay, but I'm one hundred percent porteña.**
+  - glosses: re=one hundred percent · porteña.=porteña
+- `0ce63923` a-la-mesa
+  - Chicos, sírvanse, que hay un montón de empanadas.
+  - Guys, help yourselves, there are tons of empanadas.
+  - → **Guys, help yourselves, there are a lot of empanadas.**
+  - glosses: un montón=a lot
+- `041b38a8` me-hubiera-gustado
+  - A veces quiero volver atrás.
+  - Sometimes I want to turn back the clock.
+  - → **Sometimes I want to go back in time.**
+  - glosses: volver atrás.=to go back in time
+- `79515b11` me-hubiera-gustado
+  - ¿Podemos volver atrás?
+  - Can we turn back the clock?
+  - → **Can we go back in time?**
+  - glosses: volver atrás?=go back in time
+- `c307e6da` me-hubiera-gustado
+  - Ojalá pudiera volver atrás.
+  - I wish I could turn back the clock.
+  - → **I wish I could go back in time.**
+  - glosses: volver atrás.=go back in time
+- `01e161cd` me-pudri
+  - Esto me saca de quicio.
+  - This drives me up the wall.
+  - → **This drives me crazy.**
+- `15fe2c90` me-pudri
+  - Me saca de quicio que Juan no conteste.
+  - It drives me up the wall when Juan doesn't answer.
+  - → **It drives me crazy when Juan doesn't answer.**
+- `19ca0fb3` me-pudri
+  - Me saca de quicio esperar.
+  - Waiting drives me up the wall.
+  - → **Waiting drives me crazy.**
+- `316ebc9f` me-pudri
+  - El ruido me saca de quicio.
+  - The noise drives me up the wall.
+  - → **The noise drives me crazy.**
+- `35d0c9d3` practica-a-la-mesa
+  - Como quieras, pero después no digas que no te avisé.
+  - Suit yourself, but don't say I didn't warn you.
+  - → **Do what you want, but later don't say I didn't warn you.**
+  - glosses: Como quieras,=do what you want · después=later
+- `b2af8467` tenes-razon
+  - De ese tema no opino.
+  - I'm not weighing in on that topic.
+  - → **I don't give my opinion on that topic.**
+  - glosses: no=don't · opino.=I don't give my opinion
+- `996ce954` ponele
+  - ¿Venís al asado? ¡Más vale!
+  - Are you coming to the barbecue? You bet!
+  - → **Are you coming to the barbecue? Of course!**
+  - glosses: ¡Más vale!=of course
+- `1bd38f37` me-pone-nervioso-que
+  - Perdón, estaba colgada. ¿Qué dijiste?
+  - Sorry, I zoned out. What did you say?
+  - → **Sorry, I was distracted. What did you say?**
+  - glosses: estaba=I was · colgada.=distracted
+- `0afe3c31` que-susto
+  - Uy, no te escuché llegar, ¡qué susto me diste!
+  - Whoa, I didn't hear you come in, you scared me!
+  - → **Oh, I didn't hear you come in, you scared me!**
+  - glosses: Uy,=oh
+- `1252294b` como-te-decia
+  - Te la hago corta: perdimos el tren.
+  - Long story short, we missed the train.
+  - → **To keep it short, we missed the train.**
+  - glosses: la=it · hago=to keep
+- `13073dc5` practica-me-la-jugue
+  - Y para colmo, llueve.
+  - And to top it off, it's raining.
+  - → **And on top of that, it's raining.**
+  - glosses: para colmo,=on top of that
+- `156ef967` practica-me-la-jugue
+  - Para colmo, mis viejos se enteraron por la vecina.
+  - To top it off, my parents found out from the neighbor.
+  - → **On top of that, my parents found out from the neighbor.**
+  - glosses: Para colmo,=on top of that
+- `159b79e9` te-la-hago-corta
+  - Te la hago corta, al final fuimos al cine.
+  - Long story short, in the end we went to the movies.
+  - → **To keep it short, in the end we went to the movies.**
+  - glosses: Te la hago corta,=to keep it short
+- `26dd5eca` practica-me-la-jugue
+  - El colectivo no vino y, para colmo, empezó a llover.
+  - The bus didn't come and, to top it off, it started raining.
+  - → **The bus didn't come and, on top of that, it started raining.**
+  - glosses: para colmo,=on top of that
+- `2a2df15c` me-dan-asco
+  - ¡Uy, una araña!
+  - Whoa, a spider!
+  - → **Oh, a spider!**
+  - glosses: ¡Uy,=oh
+- `2b6ef8a4` te-la-hago-corta
+  - Che, te la hago corta: Juan se enojó.
+  - Hey, long story short, Juan got angry.
+  - → **Hey, to keep it short, Juan got angry.**
+  - glosses: te la hago corta:=to keep it short
+- `2e6ff17f` practica-un-aplauso
+  - Uy, me asusté.
+  - Whoa, that scared me.
+  - → **Oh, that scared me.**
+  - glosses: Uy,=oh
+- `2f6c4aec` estoy-al-horno
+  - Nadie vino a hacer la gamba.
+  - Nobody came to back me up.
+  - → **Nobody came to help me.**
+  - glosses: hacer la gamba.=help me
+- `3162a917` practica-lo-que-pasa
+  - Salgo un ratito al balcón.
+  - I'll go out on the balcony for a sec.
+  - → **I'll go out on the balcony for a second.**
+  - glosses: ratito=second
+- `3206ee92` como-te-decia
+  - En resumen, me quedé sin plata.
+  - Long story short, I ran out of money.
+  - → **In short, I ran out of money.**
+  - glosses: En resumen,=in short
+- `34b4b856` te-doy-la-razon
+  - Te defiendo, pero no exageres.
+  - I'll back you up, but don't exaggerate.
+  - → **I'll defend you, but don't exaggerate.**
+  - glosses: defiendo,=I'll defend
+- `3593d44d` caiste
+  - Sos re inocente.
+  - You're so gullible.
+  - → **You're so easy to trick.**
+  - glosses: inocente.=easy to trick
+- `37b844a5` como-dice-el-dicho
+  - Me echaron, pero no hay mal que por bien no venga.
+  - I got fired, but every cloud has a silver lining.
+  - → **I got fired, but something good can come from something bad.**
+  - glosses: no hay mal que por bien no venga.=something good can come from something bad
+- `3f1a0d79` me-das-una-mano
+  - ¿Me cuidás la mochila un toque?
+  - Can you watch my backpack for a sec?
+  - → **Can you watch my backpack for a second?**
+  - glosses: un toque?=for a second
+- `416ff929` un-ratito
+  - ¿Podés hablar un ratito o estás ocupado?
+  - Can you talk for a sec, or are you busy?
+  - → **Can you talk for a second, or are you busy?**
+  - glosses: ratito=second
+- `57b540ec` que-susto
+  - ¡Uy, qué susto!
+  - Whoa, what a scare!
+  - → **Oh, what a scare!**
+  - glosses: ¡Uy,=oh
+- `594c3789` un-ratito
+  - Sentate un ratito, ya vengo.
+  - Sit down for a sec, I'll be right back.
+  - → **Sit down for a second, I'll be right back.**
+  - glosses: ratito,=second
+- `5ae1f09a` que-susto
+  - Uy, ¿qué fue ese ruido?
+  - Whoa, what was that noise?
+  - → **Oh, what was that noise?**
+  - glosses: Uy,=oh
+- `5bbbf15a` cada-loco-con-su-tema
+  - Perdimos, pero como dice el dicho, no hay mal que por bien no venga.
+  - We lost, but as the saying goes, every cloud has a silver lining.
+  - → **We lost, but as the saying goes, something good can come from something bad.**
+  - glosses: no hay mal que por bien no venga.=something good can come from something bad
+- `5bce288c` practica-me-la-jugue
+  - Para colmo, me quedé sin batería.
+  - To top it off, my phone died.
+  - → **On top of that, my phone died.**
+  - glosses: Para colmo,=on top of that · batería.=∅
+- `5cd6a710` estoy-al-horno
+  - Siempre está para hacer la gamba.
+  - She's always there to back you up.
+  - → **She's always there to help you.**
+  - glosses: hacer la gamba.=help you
+- `6002dcaf` como-dice-el-dicho
+  - Me robaron la bici, pero ahora camino más: no hay mal que por bien no venga.
+  - They stole my bike, but now I walk more: every cloud has a silver lining.
+  - → **They stole my bike, but now I walk more: something good can come from something bad.**
+  - glosses: no hay mal que por bien no venga.=something good can come from something bad
+- `680b0bfe` estoy-al-horno
+  - Voy a hablar con el dueño, ¿me hacés la gamba?
+  - I'm going to talk to the landlord, will you back me up?
+  - → **I'm going to talk to the landlord, will you come with me?**
+  - glosses: ¿me hacés la gamba?=will you come with me
+- `6a4455f8` lunfardo
+  - ¿Me bancás en la reunión?
+  - Will you back me up in the meeting?
+  - → **Will you support me in the meeting?**
+  - glosses: bancás=will you support
+- `7be6c418` caiste
+  - Juan, te hacés el vivo, pero sos re inocente.
+  - Juan, you act smart, but you're really gullible.
+  - → **Juan, you act smart, but you're really easy to trick.**
+  - glosses: inocente.=easy to trick
+- `7d132f94` practica-cada-loco-con-su-tema
+  - Hablamos un toque y después me voy.
+  - We'll talk for a sec and then I'm off.
+  - → **We'll talk for a second and then I'm off.**
+  - glosses: un toque=for a second
+- `822630fe` practica-si-ganara
+  - ¿Podríamos hablar un toque?
+  - Could we talk for a sec?
+  - → **Could we talk for a second?**
+  - glosses: un toque?=for a second
+- `8ea69b8e` me-afanaron
+  - Me descuidé un toque.
+  - I got distracted for a sec.
+  - → **I got distracted for a second.**
+  - glosses: un toque.=for a second
+- `90a7f4a7` te-la-hago-corta
+  - Te la hago corta, perdimos.
+  - Long story short, we lost.
+  - → **To keep it short, we lost.**
+  - glosses: Te la hago corta,=to keep it short
+- `9f761ec7` practica-lo-que-pasa
+  - ¿Me prestás el celu un ratito?
+  - Can you lend me your phone for a sec?
+  - → **Can you lend me your phone for a second?**
+  - glosses: ratito?=second
+- `a0be327c` me-la-jugue
+  - Che, la rompiste con la torta.
+  - Hey, you nailed the cake.
+  - → **Hey, you did an amazing job with the cake.**
+  - glosses: la rompiste=you did an amazing job · con=with
+- `a521f6fb` practica-me-mori-de-risa
+  - ¿Me podés hacer la gamba?
+  - Can you back me up?
+  - → **Can you help me?**
+  - glosses: hacer la gamba?=help
+- `a730202c` te-la-hago-corta
+  - Te la hago corta, cortamos.
+  - Long story short, we broke up.
+  - → **To keep it short, we broke up.**
+  - glosses: Te la hago corta,=to keep it short
+- `aa9f33c1` te-la-hago-corta
+  - Bueno, te la hago corta: renuncié.
+  - Well, long story short, I quit.
+  - → **Well, to keep it short, I quit.**
+  - glosses: te la hago corta:=to keep it short
+- `abd59d38` me-das-una-mano
+  - Juan, ¿podés subir un toque a la terraza?
+  - Juan, can you come up to the terrace for a sec?
+  - → **Juan, can you come up to the terrace for a second?**
+  - glosses: un toque=for a second
+- `c82f9da7` estoy-al-horno
+  - Tengo miedo, ¿me hacés la gamba?
+  - I'm scared, will you back me up?
+  - → **I'm scared, will you come with me?**
+  - glosses: ¿me hacés la gamba?=will you come with me
+- `cf445042` caiste
+  - ¿Tan inocente sos?
+  - Are you that gullible?
+  - → **Are you that easy to trick?**
+  - glosses: inocente=easy to trick
+- `d3c10782` te-la-hago-corta
+  - Te la hago corta, se me perdió el celu.
+  - Long story short, I lost my phone.
+  - → **To keep it short, I lost my phone.**
+  - glosses: Te la hago corta,=to keep it short
+- `e2754245` que-susto
+  - ¡Uy, qué susto me diste!
+  - Whoa, you scared me!
+  - → **Oh, you scared me!**
+  - glosses: ¡Uy,=oh
+- `f6fa76ff` practica-me-la-jugue
+  - Es caro y, para colmo, es feo.
+  - It's expensive and, to top it off, it's ugly.
+  - → **It's expensive and, on top of that, it's ugly.**
+  - glosses: para colmo,=on top of that
+- `f9d42ad8` practica-me-robaron
+  - Te la hago corta: el rumor era verdad.
+  - Long story short, the rumor was true.
+  - → **To keep it short, the rumor was true.**
+  - glosses: Te la hago corta:=to keep it short
+- `fbdcd46f` te-la-hago-corta
+  - Te la hago corta: me mudé.
+  - Long story short, I moved.
+  - → **To keep it short, I moved.**
+  - glosses: Te la hago corta:=to keep it short
+- `fdfd0789` practica-me-la-jugue
+  - Para colmo, perdí el bondi.
+  - To top it off, I missed the bus.
+  - → **On top of that, I missed the bus.**
+  - glosses: Para colmo,=on top of that
+- `14402890` practica-aunque-sea
+  - Por más que me digas que no, voy a ir.
+  - No matter what you say, I'm going.
+  - → **Even if you tell me no, I'm going.**
+  - glosses: Por más que=even if · me=me · digas=you tell · no,=no
+- `084c4bb7` la-familia
+  - Che, viejo, ¿todo bien?
+  - Hey, man, all good?
+  - → **Hey, Dad, all good?**
+- `a4afcbcc` alfajores-y-chicles
+  - Vecino, tengo tus paquetes.
+  - Hi, neighbor, I have your packages.
+  - → **Neighbor, I have your packages.**
+- `0609f080` practica-nos-gusta
+  - Che, ¿necesitás la compu o la uso yo?
+  - Hey, do you need the laptop or can I use it?
+  - → **Hey, do you need the computer or can I use it?**
+  - glosses: compu=computer
+- `3884ae98` es-enfermera
+  - Soy programadora y trabajo con gente de Brasil.
+  - I'm a programmer and I work with people in Brazil.
+  - → **I'm a programmer and I work with people from Brazil.**
+  - glosses: de=from
+- `9157e818` queres-podes-vas
+  - Vamos a la plaza.
+  - Let's go to the park.
+  - → **Let's go to the square.**
+  - glosses: plaza.=square
+- `17b8701d` me-cobras
+  - La compu cuesta un millón de pesos.
+  - The laptop costs a million pesos.
+  - → **The computer costs a million pesos.**
+  - glosses: compu=computer
+- `f1dbd4a3` practica-me-cobras
+  - Profe, ¿cuánto cobrás la clase?
+  - How much do you charge for a class?
+  - → **Teacher, how much do you charge for a class?**
+  - glosses: Profe,=teacher
+- `00b75fbb` cenamos-afuera
+  - No pagué nada, invitó Juan.
+  - I didn't pay anything; Juan treated.
+  - → **I didn't pay anything; Juan paid for me.**
+  - glosses: invitó=paid for me
+- `3a8505b5` vinieron-todos
+  - Lucía quiso invitar, pero pagó Martín.
+  - Lucía wanted to treat, but Martín paid.
+  - → **Lucía wanted to pay for everyone, but Martín paid.**
+  - glosses: invitar,=to pay for everyone
+- `1e6e1f93` quien-lavo
+  - ¿Qué te tocó para el asado? El postre.
+  - What did you get for the barbecue? Dessert.
+  - → **What do you have to bring to the barbecue? Dessert.**
+  - glosses: te tocó=do you have to bring · para=to
+- `038043cc` sono-el-timbre
+  - Cocinaba tranquilo cuando empezó el ruido del vecino.
+  - I was calmly cooking when the neighbor's noise started.
+  - → **I was cooking calmly when the neighbor's noise started.**
+  - glosses: Cocinaba=I was cooking
+- `ed1cbcf0` me-das-una-mano
+  - ¿Me das una mano para subir el sillón?
+  - Can you give me a hand getting the couch up?
+  - → **Can you give me a hand carrying the couch up?**
+  - glosses: para=∅ · subir=carrying
+- `10dca536` te-debo-una
+  - Mil gracias, mañana te devuelvo la plata.
+  - Thanks a million, I'll give you the money back tomorrow.
+  - → **Thanks a million, I'll give you back the money tomorrow.**
+  - glosses: devuelvo=I'll give you back
+- `ef7dd056` no-seas-asi
+  - ¿Saco la basura? No, no la saques, está lloviendo.
+  - Should I take out the trash? No, don't, it's raining.
+  - → **Should I take out the trash? No, don't take it out, it's raining.**
+  - glosses: la=it · saques,=take it out
+- `a9481f4c` lunfardo
+  - ¿Me bancás acá mientras voy a buscar las llaves?
+  - Can you wait for me here while I go look for the keys?
+  - → **Can you wait for me here while I go get the keys?**
+  - glosses: buscar=get
+- `f9b1e7a9` cuidate
+  - Chau, un beso.
+  - Bye, hugs!
+  - → **Bye, love you.**
+- `59da6918` manejar-en-baires
+  - ¡Mirá el semáforo!
+  - Look at the light!
+  - → **Look at the traffic light!**
+  - glosses: semáforo!=traffic light
+- `2a7bc014` ya-habia
+  - Nunca me habías dicho que tenías un hermano.
+  - You never told me you had a brother.
+  - → **You'd never told me you had a brother.**
+  - glosses: habías=you'd
+- `4a404c70` la-final
+  - El golazo de la final lo vio todo el país.
+  - The whole country saw the goal in the final.
+  - → **The whole country saw the great goal in the final.**
+  - glosses: golazo=great goal
+- `419373b1` practica-tenes-razon
+  - Opino distinto, pero te entiendo.
+  - I see it differently, but I get it.
+  - → **I see it differently, but I understand you.**
+  - glosses: te=you · entiendo.=I understand
+- `86ea4c9f` a-la-mesa
+  - —¿Qué es esto? —Prueben y después les digo.
+  - What is this? —Try it and I'll tell you after.
+  - → **—What is this? —Try it and I'll tell you after.**
+- `21b7944e` a-la-mesa
+  - —Buen provecho. —Gracias, igualmente.
+  - Enjoy your meal. —Thanks, you too.
+  - → **—Enjoy your meal. —Thanks, you too.**
+- `83d61636` practica-como-si
+  - Che, ¿por qué Martín se hace el distraído?
+  - Hey, why is Martín acting all absent-minded?
+  - → **Hey, why is Martín pretending not to notice?**
+  - glosses: se hace=pretending · distraído?=not to notice
+- `f66f262e` no-te-hagas-el-gil
+  - El caradura llegó tarde y se hizo el enojado.
+  - The jerk showed up late and acted all offended.
+  - → **The shameless guy showed up late and acted offended.**
+  - glosses: caradura=shameless guy · enojado.=offended
+- `5bf92ff1` con-tal-de-que
+  - Por suerte la compu llegó entera.
+  - Luckily the laptop arrived in one piece.
+  - → **Luckily the computer arrived in one piece.**
+  - glosses: compu=computer
+- `d89a4f9f` se-aceptan-tarjetas
+  - Perdón, acá no se hacen fotocopias; probá en la librería.
+  - Sorry, we don't make copies here; try the bookstore.
+  - → **Sorry, we don't make copies here; try the stationery store.**
+  - glosses: librería.=stationery store
+- `aed9b684` no-me-alcanza
+  - En el chino no remarcaron nada, por suerte.
+  - Luckily, the corner store didn't mark anything up.
+  - → **Luckily, the corner store didn't mark up anything.**
+  - glosses: remarcaron=mark up
+- `45f7b342` no-me-alcanza
+  - Remarcaron todo en el súper.
+  - They marked everything up at the supermarket.
+  - → **They marked up everything at the supermarket.**
+  - glosses: Remarcaron=they marked up
+- `6d077bea` practica-me-pidio
+  - ¿Pudiste averiguar algo?
+  - Could you find out anything?
+  - → **Were you able to find out anything?**
+  - glosses: ¿Pudiste=were you able to
+- `3e5c534a` practica-como-no
+  - No averigüé nada todavía.
+  - I haven't looked into it yet.
+  - → **I haven't found out anything yet.**
+  - glosses: averigüé=I haven't found out · nada=anything
+- `a1ee1445` te-reenvio-el-archivo
+  - Che, ¿me sacás una duda?
+  - Hey, can I ask you something?
+  - → **Hey, can you answer a question for me?**
+  - glosses: ¿me=for me · sacás=can you answer · una=a · duda?=question
+- `9dfe55fb` paro-docente
+  - Anoche suspendieron la medida de fuerza.
+  - Last night they called off the job action.
+  - → **Last night they called off the strike.**
+  - glosses: medida de fuerza.=strike
+- `e6cbaa30` la-parrilla
+  - Si el bife no está jugoso, no lo como.
+  - If the steak isn't medium-rare, I won't eat it.
+  - → **If the steak isn't rare, I won't eat it.**
+- `fa5c1af5` practica-me-hubiera-gustado
+  - No quiero quedar mal con Juan.
+  - I don't want to look bad in front of Juan.
+  - → **I don't want to look bad to Juan.**
+  - glosses: con=to
+- `6e400e5d` ese-chabon
+  - ¿Por qué sos tan zarpado?
+  - Why are you so over the top?
+  - → **Why are you so rude?**
+  - glosses: zarpado?=rude
+- `05a276dc` ese-chabon
+  - El chabón me dijo que el depto era barato.
+  - The guy said that the apartment was cheap.
+  - → **The guy told me that the apartment was cheap.**
+  - glosses: me=me · dijo=told
+- `1e79d230` practica-me-hace-ruido
+  - ¿Te pagan el aguinaldo?
+  - Do they pay you the year-end bonus?
+  - → **Do you get the extra month's pay?**
+  - glosses: pagan=do you get · aguinaldo?=extra month's pay
+- `53edb01f` practica-me-hace-ruido
+  - Hoy cobro el sueldo.
+  - I get paid today.
+  - → **I get my salary today.**
+  - glosses: cobro=I get · el=my · sueldo.=salary
+
+## Word glosses only (671)
+
+- `587ea39b` como-te-llamas
+  - Che, ¿cómo te llamás? Yo soy Sofi.
+  - Hey, what's your name? I'm Sofi.
+  - glosses: Yo=I'm
+- `9fe817dd` como-te-llamas
+  - Bueno, ¿y vos cómo te llamás?
+  - OK, and what's your name?
+  - glosses: vos=your
+- `16ad0030` encantado
+  - Encantado, Sofi. Yo soy Martín.
+  - Nice to meet you, Sofi. I'm Martín.
+  - glosses: Yo=I'm
+- `4e5c7281` encantado
+  - ¿Vos sos Sofi? Encantado, yo soy Juan.
+  - You're Sofi? Nice to meet you, I'm Juan.
+  - glosses: yo=I'm
+- `8bed2a44` encantado
+  - ¿Cómo te llamás? Perdón, no entiendo.
+  - What's your name? Sorry, I don't understand.
+  - glosses: ¿Cómo=what's · te llamás?=your name
+- `9f595664` encantado
+  - Ah, ¿vos sos profe? Encantada, yo soy Lucía.
+  - Oh, you're a teacher? Nice to meet you, I'm Lucía.
+  - glosses: yo=I'm
+- `d6656fd9` encantado
+  - Mucho gusto, soy Juan. Igualmente, yo soy Lucía.
+  - Nice to meet you, I'm Juan. Likewise, I'm Lucía.
+  - glosses: yo=I'm
+- `65eeea59` de-donde-sos
+  - Yo soy de Montevideo, no de acá.
+  - I'm from Montevideo, not from here.
+  - glosses: Yo=I'm
+- `1395ebe3` el-y-ella
+  - Ella es profe y es de Inglaterra.
+  - She's a teacher and she's from England.
+  - glosses: Ella=she's
+- `05dbaf27` quien-es
+  - Ella es vecina de Martín, ¿no?
+  - She's Martín's neighbor, right?
+  - glosses: Ella=she's
+- `8cf62f88` quien-es
+  - Ella es una vecina, se llama Lucía.
+  - She's a neighbor, her name is Lucía.
+  - glosses: Ella=she's
+- `add8bda9` quien-es
+  - ¿Cómo se llama? ¿Juan o Martín?
+  - What's his name? Juan or Martín?
+  - glosses: ¿Cómo=what's
+- `b957306c` quien-es
+  - ¿Quién es él? Un conocido.
+  - Who's he? An acquaintance.
+  - glosses: ¿Quién=who's
+- `e8c24cea` quien-es
+  - ¿Quién es de acá y quién es de afuera?
+  - Who's from here and who's from out of town?
+  - glosses: ¿Quién=who's · quién=who's
+- `f007d534` quien-es
+  - Él no es un amigo, es un conocido.
+  - He's not a friend, he's an acquaintance.
+  - glosses: Él=he's
+- `fb8af495` quien-es
+  - ¿Quién es ella? ¿Una amiga?
+  - Who's she? A friend?
+  - glosses: ¿Quién=who's
+- `004e1975` practica-quien-es
+  - Ella no es de Rosario y él tampoco.
+  - She's not from Rosario and neither is he.
+  - glosses: Ella=she's
+- `00af5080` practica-quien-es
+  - ¿Cómo se llama él? —Juan, un vecino de Sofi.
+  - What's his name? —Juan, one of Sofi's neighbors.
+  - glosses: ¿Cómo=what's
+- `1329df82` practica-quien-es
+  - Ella también es de pueblo.
+  - She's from a small town too.
+  - glosses: Ella=she's
+- `38b81d04` practica-quien-es
+  - ¿Quién es ella? —Lucía, una amiga de Martín.
+  - Who's she? —Lucía, a friend of Martín's.
+  - glosses: ¿Quién=who's
+- `5bcbf7ae` practica-quien-es
+  - Encantada, ¿y vos cómo te llamás?
+  - Nice to meet you, and what's your name?
+  - glosses: cómo=what's
+- `c97edf5e` practica-quien-es
+  - Juan no es turista, es un vecino.
+  - Juan's not a tourist, he's a neighbor.
+  - glosses: Juan=Juan's
+- `d9cdb1a9` practica-quien-es
+  - Mucho gusto, soy Juan. —Encantada, yo soy Sofi.
+  - Nice to meet you, I'm Juan. —Nice to meet you, I'm Sofi.
+  - glosses: yo=I'm
+- `e7cd0f3d` practica-quien-es
+  - ¿Quién es de acá y quién es de afuera?
+  - Who's from here and who's from out of town?
+  - glosses: ¿Quién=who's · quién=who's
+- `f1c41bb9` practica-quien-es
+  - ¿Y ella cómo se llama?
+  - And what's her name?
+  - glosses: cómo=what's
+- `f98a358f` practica-quien-es
+  - Perdón, no entiendo, ¿cómo te llamás?
+  - Sorry, I didn't catch that, what's your name?
+  - glosses: ¿cómo=what's
+- `fb61019f` practica-quien-es
+  - ¿Quién es de Córdoba, vos o Juan?
+  - Who's from Córdoba, you or Juan?
+  - glosses: ¿Quién=who's
+- `6e6a1b70` argentino-argentina
+  - Yo soy argentino, y vos, ¿de dónde sos?
+  - I'm Argentinian, and you, where are you from?
+  - glosses: Yo=I'm
+- `93383429` de-todos-lados
+  - Él es australiano, no es inglés.
+  - He's Australian, he's not English.
+  - glosses: Él=he's
+- `09f6bcd3` de-todos-lados
+  - ¿Quién es española, Sofi o Lucía?
+  - Who's from Spain, Sofi or Lucía?
+  - glosses: ¿Quién=who's
+- `0e3b87a9` de-todos-lados
+  - ¿Quién es italiano acá?
+  - Who's Italian here?
+  - glosses: ¿Quién=who's
+- `101fee31` de-todos-lados
+  - Ella es peruana, no es chilena.
+  - She's Peruvian, she's not Chilean.
+  - glosses: Ella=she's
+- `2217045c` de-todos-lados
+  - Ella es brasileña y yo, uruguayo.
+  - She's Brazilian and I'm Uruguayan.
+  - glosses: Ella=she's
+- `37f57351` de-todos-lados
+  - ¿Quién es canadiense? Yo.
+  - Who's Canadian? Me.
+  - glosses: ¿Quién=who's
+- `38e6be4f` de-todos-lados
+  - ¿Una amiga colombiana? Genial, ¿y cómo se llama?
+  - A Colombian friend? Great, and what's her name?
+  - glosses: cómo=what's
+- `5357fd15` de-todos-lados
+  - No, ella es peruana y yo, chilena.
+  - No, she's Peruvian and I'm Chilean.
+  - glosses: ella=she's
+- `8a902dc0` de-todos-lados
+  - Mucho gusto, Lucía. Yo también soy española.
+  - Nice to meet you, Lucía. I'm from Spain too.
+  - glosses: Yo=I'm
+- `b1769917` de-todos-lados
+  - Yo no soy brasileño, pero ella sí.
+  - I'm not Brazilian, but she is.
+  - glosses: Yo=I'm
+- `b2e7dd8d` de-todos-lados
+  - Che, ¿quién es peruano? ¿Vos?
+  - Hey, who's Peruvian? You?
+  - glosses: ¿quién=who's
+- `b54df775` de-todos-lados
+  - ¿Un vecino alemán? ¿Cómo se llama?
+  - A German neighbor? What's his name?
+  - glosses: ¿Cómo=what's
+- `b9fc08fb` de-todos-lados
+  - Yo tampoco soy español.
+  - I'm not from Spain either.
+  - glosses: Yo=I'm
+- `c6429e2c` de-todos-lados
+  - Él es francés y yo también.
+  - He's French and so am I.
+  - glosses: Él=he's
+- `ea85939b` de-todos-lados
+  - Yo soy alemán, ¿y vos? Chileno.
+  - I'm German, and you? Chilean.
+  - glosses: Yo=I'm
+- `ede7ca6a` de-todos-lados
+  - ¿Quién es? Un pibe brasileño.
+  - Who's that? A Brazilian guy.
+  - glosses: ¿Quién=who's
+- `29195bfe` cuantos-anos-tenes
+  - ¿Catorce? Yo tengo trece.
+  - Fourteen? I'm thirteen.
+  - glosses: Yo=I'm
+- `1ca896bf` tengo-hambre
+  - ¿Quién tiene razón?
+  - Who's right?
+  - glosses: ¿Quién=who's · tiene=who's
+- `2482ed2e` tengo-hambre
+  - Che, ¿quién tiene miedo?
+  - Hey, who's scared?
+  - glosses: ¿quién=who's · tiene=who's
+- `c1867abb` tengo-hambre
+  - Ah, ¿vos también tenés frío?
+  - Oh, you're cold too?
+  - glosses: ¿vos=you're · tenés=you're
+- `154bdbaa` alfajores-y-chicles
+  - Tengo un caramelo, pero es de Sofi.
+  - I have a candy, but it's Sofi's.
+  - glosses: Sofi.=Sofi's
+- `5e26407a` en-el-kiosco
+  - Yo soy de acá, pero mis viejos de Rosario.
+  - I'm from here, but my parents are from Rosario.
+  - glosses: Yo=I'm
+- `a259b79e` la-gente
+  - Nosotros tenemos frío, pero ellos tienen calor.
+  - We're cold, but they're hot.
+  - glosses: Nosotros=we're · ellos=they're
+- `c6f8edba` la-gente
+  - Nosotras somos de Uruguay, pero su novio es chileno.
+  - We're from Uruguay, but her boyfriend is Chilean.
+  - glosses: Nosotras=we're
+- `4a09198a` altos-y-morochos
+  - ¿Cómo es tu cuñada? Morocha, flaca y simpática.
+  - What's your sister-in-law like? Dark-haired, thin, and friendly.
+  - glosses: ¿Cómo=what's
+- `8293bb64` altos-y-morochos
+  - ¿Cómo es su novio? Lindo, pero no es simpático.
+  - What's her boyfriend like? Good-looking, but not very friendly.
+  - glosses: ¿Cómo=what's
+- `989c0720` altos-y-morochos
+  - ¿Cómo es Lucía? Alta, rubia y simpática.
+  - What's Lucía like? Tall, blond, and friendly.
+  - glosses: ¿Cómo=what's
+- `a66a462c` altos-y-morochos
+  - ¿Cómo es tu novia? Alta y morocha.
+  - What's your girlfriend like? Tall, with dark hair.
+  - glosses: ¿Cómo=what's
+- `c8f68431` altos-y-morochos
+  - Tu amigo es simpático, ¿de dónde es?
+  - Your friend is nice, where's he from?
+  - glosses: dónde=where's
+- `da853ed2` altos-y-morochos
+  - ¿Flaco yo? No, vos sos flaco.
+  - Me, skinny? No, you're skinny.
+  - glosses: vos=you're
+- `e3d03d82` altos-y-morochos
+  - Tu hermano no es petiso, ¡vos sos alta!
+  - Your brother isn't short, you're tall!
+  - glosses: ¡vos=you're · sos=you're
+- `27ec78d5` donde-estan-las-llaves
+  - ¿Dónde está la compu?
+  - Where's the computer?
+  - glosses: ¿Dónde=where's
+- `4154a1d1` donde-estan-las-llaves
+  - ¿Dónde está mi celu?
+  - Where's my phone?
+  - glosses: ¿Dónde=where's
+- `92db1ab4` donde-estan-las-llaves
+  - ¿Dónde está Sofi? Está arriba.
+  - Where's Sofi? She's upstairs.
+  - glosses: ¿Dónde=where's
+- `abb21720` donde-estan-las-llaves
+  - ¿Dónde está tu mochila?
+  - Where's your backpack?
+  - glosses: ¿Dónde=where's
+- `f0d9527e` donde-estan-las-llaves
+  - ¿Dónde está mi billetera?
+  - Where's my wallet?
+  - glosses: ¿Dónde=where's
+- `fac5db8d` donde-estan-las-llaves
+  - ¿Dónde está la llave de casa?
+  - Where's the house key?
+  - glosses: ¿Dónde=where's
+- `7590726c` hay-un-tren
+  - Ahí está el tren.
+  - There's the train.
+  - glosses: Ahí=there's · está=there's
+- `d04ae212` hay-un-tren
+  - El taxi está afuera.
+  - The taxi's outside.
+  - glosses: taxi=taxi's · está=taxi's
+- `02115121` practica-por-aca
+  - ¿Dónde está la estación?
+  - Where's the station?
+  - glosses: ¿Dónde=where's · está=where's
+- `23c5dca5` practica-por-aca
+  - Somos mellizos, pero él es alto y yo petiso.
+  - We're twins, but he's tall and I'm short.
+  - glosses: él=he's
+- `4d53e132` practica-por-aca
+  - ¿Dónde está tu mochila?
+  - Where's your backpack?
+  - glosses: ¿Dónde=where's · está=where's
+- `4d999d59` practica-por-aca
+  - Ahí está el tren.
+  - There's the train.
+  - glosses: Ahí=there's · está=there's
+- `5b474f58` practica-por-aca
+  - ¿Dónde está Sofi? Arriba.
+  - Where's Sofi? Upstairs.
+  - glosses: ¿Dónde=where's · está=where's
+- `8854eff2` practica-por-aca
+  - Mis hijos son altos, pero yo soy petiso.
+  - My kids are tall, but I'm short.
+  - glosses: yo=I'm
+- `90ce0b78` practica-por-aca
+  - ¿Quién es la rubia?
+  - Who's the blond girl?
+  - glosses: ¿Quién=who's
+- `adb301fb` practica-por-aca
+  - Hola, somos los viejos de Martín.
+  - Hi, we're Martín's parents.
+  - glosses: Martín.=Martín's
+- `cd238100` practica-por-aca
+  - ¿La vecina rubia? Es la mamá de Juan.
+  - The blond neighbor? She's Juan's mom.
+  - glosses: Juan.=Juan's
+- `32626b39` como-estas
+  - Mi hijo está enfermo y yo estoy cansada.
+  - My son is sick and I'm tired.
+  - glosses: yo=I'm
+- `53ca07de` esta-cerrado
+  - La mochila de Sofi está llena de chicles.
+  - Sofi's backpack is full of gum.
+  - glosses: Sofi=Sofi's
+- `5d8e62cf` esta-cerrado
+  - Nosotros estamos libres, pero Lucía no.
+  - We're free, but Lucía isn't.
+  - glosses: Nosotros=we're
+- `aba91689` esta-cerrado
+  - Juan está preocupado porque la estación está cerrada.
+  - Juan's worried because the station is closed.
+  - glosses: Juan=Juan's · está=Juan's
+- `b078ad48` esta-cerrado
+  - El kiosco de mi vecino está abierto, pero no hay alfajores.
+  - My neighbor's kiosco is open, but there are no alfajores.
+  - glosses: vecino=neighbor's
+- `b2e78594` esta-cerrado
+  - Mi auto está roto, ¿tenés el auto de tu papá?
+  - My car broke down, do you have your dad's car?
+  - glosses: papá?=dad's
+- `882df5c1` que-haces
+  - ¿Qué toman? Un café y un jugo, por favor.
+  - What'll you have? A coffee and a juice, please.
+  - glosses: ¿Qué=what'll
+- `2eaf4920` practico-castellano
+  - Yo te enseño inglés y vos me enseñás castellano.
+  - I'll teach you English and you teach me Spanish.
+  - glosses: Yo=I'll
+- `4800bf84` practico-castellano
+  - Nosotros te ayudamos.
+  - We'll help you.
+  - glosses: Nosotros=we'll
+- `d3e39aaa` practico-castellano
+  - Yo te enseño.
+  - I'll teach you.
+  - glosses: Yo=I'll
+- `3b8c1bdc` nos-gustan-los-fideos
+  - En casa nunca hay pescado, a Juan no le gusta.
+  - There's never fish at home; Juan doesn't like it.
+  - glosses: le=∅ · gusta.=like it
+- `685ba609` practica-nos-gusta
+  - ¡Qué rico el pollo de tu vieja!
+  - Your mom's chicken is delicious!
+  - glosses: vieja!=mom's
+- `a36b92bc` practica-nos-gusta
+  - Juan siempre está apurado.
+  - Juan's always in a hurry.
+  - glosses: Juan=Juan's · está=Juan's
+- `a884c283` practica-nos-gusta
+  - Estoy apurado, ¿dónde está la parada?
+  - I'm in a hurry, where's the bus stop?
+  - glosses: ¿dónde=where's · está=where's
+- `b257c89b` que-quieren-tomar
+  - ¿Dónde está la sal?
+  - Where's the salt?
+  - glosses: ¿Dónde=where's
+- `93933711` es-enfermera
+  - Mi tía es policía y mi tío, abogado.
+  - My aunt's a police officer, and my uncle's a lawyer.
+  - glosses: tía=aunt's · es=aunt's · tío,=uncle's
+- `027474b2` es-enfermera
+  - ¿Tu viejo es ingeniero? Mi vieja también.
+  - Your dad's an engineer? So is my mom.
+  - glosses: viejo=dad's
+- `73030443` comes-vivis
+  - ¿Siempre comés sola?
+  - Do you always eat alone?
+  - glosses: comés=do you always eat
+- `3a6241cb` comes-vivis
+  - Yo escribo el mensaje para Juan.
+  - I'll write the message for Juan.
+  - glosses: Yo=I'll
+- `a7463fc6` comes-vivis
+  - Vos escribís el mensaje y yo hablo con la jefa.
+  - You write the message and I'll talk to the boss.
+  - glosses: yo=I'll
+- `072f9850` vendo-diarios
+  - Yo recibo el paquete, tranqui.
+  - I'll take the package, don't worry.
+  - glosses: Yo=I'll · recibo=I'll take
+- `1e66a66e` vendo-diarios
+  - ¿Recibís gente en tu casa?
+  - Do you have people over at your place?
+  - glosses: ¿Recibís=do you have people over
+- `5929eff7` vendo-diarios
+  - Lucía recibe a una amiga en el departamento.
+  - Lucía has a friend over at the apartment.
+  - glosses: recibe=has a friend over
+- `61a150cb` vendo-diarios
+  - ¿Qué leen tus hijos?
+  - What do your kids read?
+  - glosses: leen=read
+- `8687fc9a` vendo-diarios
+  - ¿Martín comparte el departamento con su novia?
+  - Does Martín share an apartment with his girlfriend?
+  - glosses: comparte=share
+- `8e5fd3eb` vendo-diarios
+  - ¿Tu abuela recibe el diario en casa?
+  - Does your grandma get the paper at home?
+  - glosses: recibe=get
+- `a312aa08` vendo-diarios
+  - ¿Ustedes leen en inglés?
+  - Do you guys read in English?
+  - glosses: leen=read
+- `b0b83842` vendo-diarios
+  - ¿Dónde está tu negocio?
+  - Where's your store?
+  - glosses: ¿Dónde=where's
+- `b507b2c6` vendo-diarios
+  - ¿Ustedes comparten el auto?
+  - Do you guys share the car?
+  - glosses: comparten=share
+- `e79cac32` vendo-diarios
+  - ¿Quién recibe el paquete?
+  - Who's getting the package?
+  - glosses: ¿Quién=who's
+- `ea8be1c0` vendo-diarios
+  - ¿Me abrís? Estoy abajo.
+  - Can you let me in? I'm downstairs.
+  - glosses: abrís?=can you let me in
+- `0446a7d3` practica-el-vecino
+  - ¿Quién abre otra cerveza?
+  - Who's opening another beer?
+  - glosses: ¿Quién=who's · abre=who's opening
+- `27d6dfa0` practica-el-vecino
+  - ¿Dónde está el diario?
+  - Where's the newspaper?
+  - glosses: ¿Dónde=where's · está=where's
+- `34a2763b` practica-el-vecino
+  - ¿El bar abre de noche?
+  - Is the bar open at night?
+  - glosses: abre=open
+- `4dc7d17c` practica-el-vecino
+  - ¿Dónde está el cuchillo del pan?
+  - Where's the bread knife?
+  - glosses: ¿Dónde=where's · está=where's
+- `88830171` mi-edificio
+  - ¿Dónde está el ascensor?
+  - Where's the elevator?
+  - glosses: ¿Dónde=where's
+- `8476195d` mi-edificio
+  - Buen día, ¿está la encargada?
+  - Good morning, is the building caretaker in?
+  - glosses: ¿está=is
+- `ca428961` mi-edificio
+  - La encargada nunca está.
+  - The building caretaker is never around.
+  - glosses: está.=is never around
+- `9bb2b2d3` mi-casa
+  - Y acá está el living, con el sillón.
+  - And here's the living room, with the couch.
+  - glosses: acá=here's · está=here's
+- `bb46c910` mi-casa
+  - ¿Qué hay en la heladera?
+  - What's in the fridge?
+  - glosses: ¿Qué=what's
+- `e3f4c853` mi-casa
+  - Acá está la cocina, con mesa y cuatro sillas.
+  - Here's the kitchen, with a table and four chairs.
+  - glosses: Acá=here's · está=here's
+- `0f460295` la-hora
+  - ¿Qué día nos vemos, el viernes o el sábado?
+  - What day are we meeting, Friday or Saturday?
+  - glosses: nos vemos,=are we meeting
+- `2534fabc` la-hora
+  - Nos vemos en una semana.
+  - See you in a week.
+  - glosses: Nos vemos=see you
+- `4242f830` la-hora
+  - Bueno, nos vemos en la esquina del kiosco.
+  - OK, see you at the corner by the kiosco.
+  - glosses: nos vemos=see you
+- `75092d31` la-hora
+  - ¿Nos vemos el sábado?
+  - Should we meet on Saturday?
+  - glosses: ¿Nos vemos=should we meet
+- `9584cedb` la-hora
+  - Nos vemos a las ocho y media.
+  - See you at half past eight.
+  - glosses: Nos vemos=see you
+- `c0605ad9` la-hora
+  - Nos vemos mañana.
+  - See you tomorrow.
+  - glosses: Nos vemos=see you
+- `cb0d6cfd` la-hora
+  - Che, es tarde, ¿nos vemos mañana?
+  - Hey, it's late, should we meet tomorrow?
+  - glosses: ¿nos vemos=should we meet
+- `d3eb1360` la-hora
+  - Chau, nos vemos.
+  - Bye, see you.
+  - glosses: nos vemos.=see you
+- `df3c6f2d` la-hora
+  - ¿Nos vemos el miércoles?
+  - Should we meet on Wednesday?
+  - glosses: ¿Nos vemos=should we meet
+- `e30d96cf` la-hora
+  - ¿Qué día nos vemos?
+  - What day are we meeting?
+  - glosses: nos vemos?=are we meeting
+- `c06ca826` a-que-hora-abre
+  - —¿Cuándo abren? —El veintiséis, a las nueve.
+  - When do you open? —On the twenty-sixth, at nine.
+  - glosses: —El=on the
+- `6fd4d17f` el-barrio
+  - ¿Dónde está la escuela?
+  - Where's the school?
+  - glosses: ¿Dónde=where's
+- `928f9a10` el-barrio
+  - ¿Dónde está el supermercado?
+  - Where's the supermarket?
+  - glosses: ¿Dónde=where's
+- `7950977c` a-la-vuelta
+  - —¿Dónde está la librería? —Por acá, a la derecha.
+  - Where's the bookstore? —Over here, on the right.
+  - glosses: —¿Dónde=where's
+- `0720644e` a-la-vuelta
+  - ¿Tu edificio tiene lavadero?
+  - Does your building have a laundry room?
+  - glosses: tiene=have
+- `593d57dd` queres-podes-vas
+  - Con Juan podemos ir al boliche el viernes.
+  - Juan and I can go to the nightclub on Friday.
+  - glosses: podemos=can
+- `01a3f6a9` preferis-salir
+  - La fiesta de Sofi es el sábado.
+  - Sofi's party is on Saturday.
+  - glosses: Sofi=Sofi's
+- `46447c48` preferis-salir
+  - Dale, vamos al boliche, pero yo vuelvo en taxi.
+  - Okay, let's go to the club, but I'm coming back in a taxi.
+  - glosses: yo=I'm
+- `8cc973d4` dale-veni
+  - Andá vos, yo te voy a esperar acá.
+  - You go, I'll wait for you here.
+  - glosses: yo=I'll
+- `ccb86dc2` dale-veni
+  - Andá en bondi, el subte está lejos.
+  - Go by bus, the subway's far.
+  - glosses: subte=subway's · está=subway's
+- `d8ec4c4e` dale-veni
+  - Mirá, ahí está el bondi.
+  - Look, there's the bus.
+  - glosses: ahí=there's · está=there's
+- `0410ebbf` segui-derecho
+  - Lucía, caminá adelante, yo voy atrás.
+  - Lucía, walk in front, I'll go behind.
+  - glosses: yo=I'll
+- `71e55cef` segui-derecho
+  - Subite atrás, adelante va Martín.
+  - Get in the back, Martín's riding in front.
+  - glosses: va=riding · Martín.=Martín's
+- `57601555` este-buzo
+  - ¿Qué es eso?
+  - What's that?
+  - glosses: ¿Qué=what's · es=what's
+- `0cbbd695` este-buzo
+  - Perdón, ¿para qué es esto?
+  - Sorry, what's this for?
+  - glosses: qué=what's · es=what's
+- `1f012cab` este-buzo
+  - Eso es de mi hermano.
+  - That's my brother's.
+  - glosses: Eso=that's
+- `42e0c0c2` este-buzo
+  - Mirá las zapatillas grises de Juan.
+  - Look at Juan's gray sneakers.
+  - glosses: Juan.=Juan's
+- `6fc36c91` este-buzo
+  - ¿Cómo se llama esto en inglés?
+  - What's this called in English?
+  - glosses: ¿Cómo=what's
+- `998f4725` este-buzo
+  - ¿Dónde está mi gorra?
+  - Where's my cap?
+  - glosses: ¿Dónde=where's · está=where's
+- `a0389280` este-buzo
+  - ¿Esta gorra es de Juan?
+  - Is this cap Juan's?
+  - glosses: Juan?=Juan's
+- `d32da895` este-buzo
+  - ¿Ese buzo es de Juan?
+  - Is that sweatshirt Juan's?
+  - glosses: Juan?=Juan's
+- `edbd972f` este-buzo
+  - Eso no es un buzo, es una campera.
+  - That's not a sweatshirt, it's a jacket.
+  - glosses: Eso=that's
+- `f0689af0` este-buzo
+  - ¿Cuál es el talle más grande?
+  - What's the biggest size?
+  - glosses: ¿Cuál=what's · es=what's
+- `06b371b9` cuanto-sale
+  - Hoy pago yo y el sábado pagás vos.
+  - I'm paying today and you're paying on Saturday.
+  - glosses: yo=I'm
+- `c75459bb` cuanto-sale
+  - Hoy pago yo.
+  - I'm paying today.
+  - glosses: yo.=I'm
+- `dcc74fae` cuanto-sale
+  - Vos comprás las empanadas y yo compro las facturas.
+  - You buy the empanadas and I'll buy the pastries.
+  - glosses: yo=I'll
+- `ec9447c7` cuanto-sale
+  - ¿Qué es más barato, el subte o el bondi?
+  - What's cheaper, the subway or the bus?
+  - glosses: ¿Qué=what's · es=what's
+- `3e368448` practica-me-cobras
+  - Tengo la billetera en la mochila.
+  - My wallet's in my backpack.
+  - glosses: billetera=wallet's
+- `bad3d5aa` practica-me-cobras
+  - —¿Dónde está el súper? —Seguí derecho, está a la izquierda.
+  - "Where's the supermarket?" "Keep going straight, it's on the left."
+  - glosses: —¿Dónde=where's · está=where's
+- `e2cefdf7` practica-me-cobras
+  - ¿Dónde está mi buzo?
+  - Where's my hoodie?
+  - glosses: ¿Dónde=where's · está=where's
+- `405a5bd2` practica-me-cobras
+  - ¿Te busco en la estación?
+  - Should I pick you up at the station?
+  - glosses: busco=should I pick you up
+- `be253dd2` practica-me-cobras
+  - Mañana busco a mi hermana en la escuela.
+  - Tomorrow I'm picking my sister up from school.
+  - glosses: busco=I'm picking my sister up
+- `a859c001` practica-me-cobras
+  - Te busco a las ocho.
+  - I'll pick you up at eight.
+  - glosses: busco=I'll pick you up
+- `242c9c33` me-despierto-temprano
+  - ¿Te apurás, que el taxi está abajo?
+  - Can you hurry up? The taxi's downstairs.
+  - glosses: ¿Te apurás,=can you hurry up · el=the · taxi=taxi's · está=taxi's
+- `ed4a90b2` me-despierto-temprano
+  - Me apuro porque cierra el súper.
+  - I'm hurrying because the supermarket's closing.
+  - glosses: cierra=closing · súper.=supermarket's
+- `8e8fdeb8` que-te-gusta-hacer
+  - Hoy cocino yo.
+  - I'm cooking today.
+  - glosses: yo.=I'm
+- `5ee838b4` clima
+  - Che, ¿dónde está el paraguas?
+  - Hey, where's the umbrella?
+  - glosses: ¿dónde=where's · está=where's
+- `78d71d27` clima
+  - Llueve mucho y el paraguas está en la oficina.
+  - It's pouring and my umbrella's at the office.
+  - glosses: paraguas=umbrella's · está=umbrella's
+- `7c2f3bf7` en-febrero
+  - Esperá acá hasta después de la tormenta.
+  - Wait here until the storm's over.
+  - glosses: tormenta.=storm's
+- `0c7bb1ab` practica-el-clima
+  - Tranqui, yo pago.
+  - Relax, I'll pay.
+  - glosses: yo=I'll
+- `6b2ae6fc` practica-el-clima
+  - Me despierto con frío porque la ventana está abierta.
+  - I wake up cold because the window's open.
+  - glosses: ventana=window's · está=window's
+- `05ea18a9` el-cumple
+  - La invitada es la novia de Martín.
+  - The guest is Martín's girlfriend.
+  - glosses: Martín.=Martín's
+- `0d0f5a1f` el-cumple
+  - El gato está durmiendo arriba.
+  - The cat's sleeping upstairs.
+  - glosses: gato=cat's · está=cat's
+- `10a2e522` el-cumple
+  - ¿Quién es tu invitado? Es mi primo.
+  - Who's your guest? He's my cousin.
+  - glosses: ¿Quién=who's · es=who's
+- `27596bc5` el-cumple
+  - No puedo, estoy preparando la clase de mañana.
+  - I can't, I'm getting tomorrow's class ready.
+  - glosses: mañana.=tomorrow's
+- `35839d91` el-cumple
+  - El bebé está durmiendo.
+  - The baby's sleeping.
+  - glosses: bebé=baby's · está=baby's
+- `3b0b6ca5` el-cumple
+  - Pasado mañana es el cumpleaños de mi abuela.
+  - The day after tomorrow is my grandma's birthday.
+  - glosses: abuela.=grandma's
+- `899e8c9a` el-cumple
+  - ¿Qué está preparando Lucía?
+  - What's Lucía making?
+  - glosses: ¿Qué=what's · está=what's
+- `8e469a6c` el-cumple
+  - El invitado de Lucía no habla castellano.
+  - Lucía's guest doesn't speak Spanish.
+  - glosses: Lucía=Lucía's
+- `8f4057fc` el-cumple
+  - ¿Vas al cumple de Sofi?
+  - Are you going to Sofi's birthday party?
+  - glosses: Sofi?=Sofi's
+- `a694eac4` el-cumple
+  - ¿Quién está preparando la música para la fiesta?
+  - Who's getting the music ready for the party?
+  - glosses: ¿Quién=who's · está=who's
+- `cbe1442a` el-cumple
+  - Papá está durmiendo la siesta.
+  - Dad's taking a nap.
+  - glosses: Papá=dad's · está=dad's
+- `f9064dfd` el-cumple
+  - Martín es el invitado de Sofi.
+  - Martín is Sofi's guest.
+  - glosses: Sofi.=Sofi's
+- `faa8cb8e` el-cumple
+  - Martín no está, está jugando en la cancha.
+  - Martín's not here, he's out playing on the field.
+  - glosses: Martín=Martín's · está,=Martín's
+- `8d40aaa1` ahora-y-planes
+  - Sofi ya está llegando con las facturas.
+  - Sofi's almost here with the pastries.
+  - glosses: Sofi=Sofi's · está=Sofi's
+- `e259250d` ahora-y-planes
+  - Quedamos en que yo traigo el vino.
+  - We agreed that I'm bringing the wine.
+  - glosses: yo=I'm
+- `2de796b4` ayer-labure
+  - Mi novia estudió en la facu con Sofi.
+  - My girlfriend studied at college with Sofi.
+  - glosses: la=∅ · facu=college
+- `f373201b` ayer-labure
+  - La semana pasada llegó mi abuela.
+  - My grandmother arrived last week.
+  - glosses: La=∅ · llegó=arrived
+- `edc77c99` cenamos-afuera
+  - Anoche cocinaste vos, hoy cocino yo.
+  - You cooked last night, so I'll cook today.
+  - glosses: yo.=I'll
+- `1b8840ae` comi-y-sali
+  - Che, ¿qué me escribiste recién?
+  - Hey, what did you just write to me?
+  - glosses: Che,=hey
+- `e8c35bc6` comi-y-sali
+  - Che, ¿saliste o estás en casa?
+  - Hey, did you go out or are you at home?
+  - glosses: Che,=hey
+- `2142ff97` naci-en
+  - Mirá, ahí está la escuela donde estudié.
+  - Look, there's the school where I studied.
+  - glosses: ahí=there's
+- `5c2bd926` la-pasamos-barbaro
+  - La clase de hoy estuvo divertida.
+  - Today's class was fun.
+  - glosses: hoy=today's
+- `6c88ac63` la-pasamos-barbaro
+  - Ganó el equipo de Juan.
+  - Juan's team won.
+  - glosses: Juan.=Juan's
+- `95a85bd5` la-pasamos-barbaro
+  - Ganó Brasil y mi hermano está enojado.
+  - Brazil won and my brother's mad.
+  - glosses: hermano=brother's · está=brother's
+- `e7810832` la-pasamos-barbaro
+  - ¿La pasaste bien con las amigas de Sofi?
+  - Did you have a good time with Sofi's friends?
+  - glosses: Sofi?=Sofi's
+- `6c1eb0f3` practica-que-hiciste
+  - ¿Saliste tarde de la facu?
+  - Did you leave college late?
+  - glosses: la=∅ · facu?=college
+- `58323685` mas-alto-que
+  - Mi hermana más grande es petisa, pero yo soy alta.
+  - My older sister is short, but I'm tall.
+  - glosses: yo=I'm
+- `c07069a9` el-mas-tranquilo
+  - ¿Qué es más lento, el tren o el bondi?
+  - What's slower, the train or the bus?
+  - glosses: ¿Qué=what's · es=what's
+- `ecd127b2` el-mas-tranquilo
+  - ¿Qué es más fácil, el inglés o el castellano?
+  - What's easier, English or Spanish?
+  - glosses: ¿Qué=what's · es=what's
+- `edcab725` el-mas-tranquilo
+  - ¿Cuál es el idioma más difícil del mundo?
+  - What's the hardest language in the world?
+  - glosses: ¿Cuál=what's · es=what's
+- `fe63a9a3` el-mas-tranquilo
+  - ¿Cuál es el barrio más tranquilo de Buenos Aires?
+  - What's the quietest neighborhood in Buenos Aires?
+  - glosses: ¿Cuál=what's · es=what's
+- `ccb4e0d5` practica-el-finde
+  - El lunes es el peor día.
+  - Monday is the worst day.
+  - glosses: El=∅ · lunes=Monday
+- `279a3b84` practica-quien-vino
+  - —¿Qué trajo Martín? —Una picada.
+  - What did Martín bring? — A platter of cheese and cold cuts.
+  - glosses: trajo=bring
+- `9e43f8fb` practica-quien-vino
+  - Me hice mal la rodilla jugando al fútbol.
+  - I hurt my knee playing soccer.
+  - glosses: mal=hurt
+- `a63941b3` practica-quien-vino
+  - Nunca estuve en Brasil.
+  - I've never been to Brazil.
+  - glosses: estuve=I've never been
+- `a6e04f5b` practica-quien-vino
+  - ¿Por qué no vinieron tus viejos?
+  - Why didn't your parents come?
+  - glosses: no=didn't · tus=your · viejos?=parents
+- `6947a2d7` practica-quien-vino
+  - El mundo es re chico, ¿viste?
+  - It's a really small world, huh?
+  - glosses: El=∅ · es=it's · ¿viste?=huh
+- `fa2ed02e` practica-quien-vino
+  - En la guardia me dijeron que tengo que descansar.
+  - At the ER they told me I have to rest.
+  - glosses: que=∅
+- `d7d1a91f` te-llamo
+  - Hoy estoy re ocupado, llamame mañana a la tarde.
+  - I'm really busy today, call me tomorrow afternoon.
+  - glosses: la=∅ · tarde.=afternoon
+- `4bce4a61` las-tareas
+  - Che, ¿limpiás el living antes de la juntada?
+  - Hey, will you clean the living room before the get-together?
+  - glosses: Che,=hey
+- `082508b1` las-vacaciones
+  - ¿Juan viajó solo?
+  - Did Juan travel alone?
+  - glosses: viajó=travel
+- `0c750b46` las-vacaciones
+  - Traje la carpa, ¿vos trajiste el mate?
+  - I brought the tent, did you bring the mate?
+  - glosses: trajiste=did you bring
+- `8519aed1` las-vacaciones
+  - Mi abuela nunca viajó en avión.
+  - My grandmother has never traveled by plane.
+  - glosses: viajó=traveled
+- `d15f7214` las-vacaciones
+  - ¿Con quién viajó Sofi?
+  - Who did Sofi travel with?
+  - glosses: viajó=travel
+- `26d00eef` practica-el-viaje
+  - Dame dos medialunas.
+  - Two medialunas, please.
+  - glosses: dos=two
+- `9cc035b9` cuando-era-chico
+  - ¿Y cómo eras vos?
+  - And what were you like?
+  - glosses: vos?=you
+- `99907865` en-la-primaria
+  - ¿Dónde está tu guardapolvo?
+  - Where's your smock?
+  - glosses: ¿Dónde=where's
+- `0621ae1d` me-encantaba
+  - Iba a la escuela en bici con mi hermano.
+  - I used to ride my bike to school with my brother.
+  - glosses: Iba=I used to ride · a=to · la=∅ · escuela=school
+- `3d823e54` me-encantaba
+  - ¿Ustedes jugaban en la calle?
+  - Did you guys play in the street?
+  - glosses: jugaban=play
+- `45745b41` me-encantaba
+  - ¿Con quién jugaban tus hijos?
+  - Who did your kids play with?
+  - glosses: jugaban=play
+- `5dfeed8a` me-encantaba
+  - Me encantaba la hamaca del patio de mi abuela.
+  - I loved the swing in my grandma's yard.
+  - glosses: patio=yard
+- `614ab5f5` me-encantaba
+  - ¿Qué te encantaba de chico?
+  - What did you love as a kid?
+  - glosses: encantaba=love
+- `726eabdd` me-encantaba
+  - Antes no me gustaban las verduras, ahora sí.
+  - I didn't use to like vegetables, but now I do.
+  - glosses: Antes=use to
+- `e59ba747` me-encantaba
+  - A Lucía la veía siempre en el súper.
+  - I always used to see Lucía at the supermarket.
+  - glosses: veía=I always used to see
+- `b9bfe978` me-encantaba
+  - Siempre íbamos a la plaza con la pelota.
+  - We always went to the park with the ball.
+  - glosses: íbamos=we always went
+- `6f8f0ebd` practica-de-chico
+  - Cuando llegué al súper, estaba lleno de gente.
+  - When I got to the supermarket, it was packed.
+  - glosses: Cuando=when
+- `013c2008` practica-en-esa-epoca
+  - Estábamos en clase y le sonó el celu al profe.
+  - We were in class and the teacher's phone went off.
+  - glosses: profe.=teacher's
+- `10715919` en-el-restaurante
+  - ¿Le das propina al mozo?
+  - Are you giving the waiter a tip?
+  - glosses: mozo?=waiter
+- `b6b4391e` en-el-restaurante
+  - ¿Le pedís la carta al mozo?
+  - Can you ask the waiter for the menu?
+  - glosses: mozo?=waiter
+- `e88feed9` tipo-ocho
+  - Che, avisame.
+  - Hey, let me know.
+  - glosses: Che,=hey
+- `8c9f2a90` llegue-tarde
+  - Yo confirmo con el restaurante y vos avisás en el grupo.
+  - I'll confirm with the restaurant, and you tell the group chat.
+  - glosses: Yo=I'll
+- `9ddf6b3d` en-lo-de-la-abuela
+  - ¿Todavía tenés el arbolito? Sí, hasta Reyes.
+  - Do you still have your Christmas tree up? Yes, until Three Kings' Day.
+  - glosses: tenés=do you still have
+- `af2ce17c` en-lo-de-la-abuela
+  - ¿Dónde está Sofi? En lo de su novio.
+  - Where's Sofi? At her boyfriend's.
+  - glosses: ¿Dónde=where's
+- `ca570b02` en-lo-de-la-abuela
+  - Armábamos la picada entre todos.
+  - We all used to put the picada together.
+  - glosses: Armábamos=we all used to put
+- `73d55377` practica-la-juntada
+  - Íbamos al boliche todos los sábados.
+  - We used to go clubbing every Saturday.
+  - glosses: al=∅ · boliche=clubbing · los=∅ · sábados.=Saturday
+- `2acb094a` practica-la-juntada
+  - Con mis viejos íbamos a Mar del Plata.
+  - My parents and I used to go to Mar del Plata.
+  - glosses: íbamos=used to go
+- `88dff317` practica-la-sobremesa
+  - Te esperaba más temprano.
+  - I was expecting you earlier.
+  - glosses: más=earlier
+- `a2ffdda4` practica-la-sobremesa
+  - No hay luz y ya le avisé al encargado.
+  - The power's out and I already told the building caretaker.
+  - glosses: hay=out
+- `58cbed21` practica-la-sobremesa
+  - Llegaste tarde y ya estábamos en la sobremesa.
+  - You got here late and we were already chatting after the meal.
+  - glosses: sobremesa.=chatting after the meal
+- `1f83fc84` me-puse-nervioso
+  - Che, ¿te asustaste con el perro?
+  - Hey, did the dog scare you?
+  - glosses: Che,=hey
+- `49949c2b` me-puse-nervioso
+  - Che, me asusté. ¿Qué pasó?
+  - Hey, I got scared. What happened?
+  - glosses: Che,=hey
+- `a74418f8` me-puse-nervioso
+  - Che, ¿te enojaste con tu jefe?
+  - Hey, did you get angry with your boss?
+  - glosses: Che,=hey
+- `9efe81e0` me-mude
+  - Me mudé a un barrio más tranquilo.
+  - I moved to a quieter neighborhood.
+  - glosses: más=quieter
+- `07dc2066` te-acordas
+  - Antes el barrio era distinto, más tranquilo.
+  - The neighborhood used to be different, quieter.
+  - glosses: más=quieter
+- `8e5139fb` te-acordas
+  - Mi vieja estaba distinta, más tranquila.
+  - My mom was different, calmer.
+  - glosses: más=calmer
+- `34a8af2b` me-das-una-mano
+  - Tengo el auto roto, ¿me llevás al laburo?
+  - My car's broken down, can you give me a ride to work?
+  - glosses: auto=car's
+- `5b21854d` me-das-una-mano
+  - Prendé la tele, que empieza el partido.
+  - Turn on the TV, the game's starting.
+  - glosses: empieza=starting · partido.=game's
+- `61d7f20c` hay-que
+  - Che, hay que sacar la basura.
+  - Hey, you have to take out the trash.
+  - glosses: Che,=hey
+- `a716000c` hay-que
+  - Che, tenemos que hablar, es importante.
+  - Hey, we have to talk, it's important.
+  - glosses: Che,=hey
+- `bae6dcea` hay-que
+  - Che, necesito un turno para mañana.
+  - Hey, I need an appointment for tomorrow.
+  - glosses: Che,=hey
+- `1da4bc2e` hay-que-sacar-turno
+  - Tomá, completá esto.
+  - Here, fill this out.
+  - glosses: completá=fill this out
+- `932b10b6` hay-que-sacar-turno
+  - Completá esto en casa y me lo mandás.
+  - Fill this out at home and send it to me.
+  - glosses: Completá=fill this out
+- `46e72da8` practica-los-mandados
+  - Hay que sacar la basura.
+  - We have to take out the trash.
+  - glosses: Hay que=we have to · la=the
+- `9d563950` practica-la-feria
+  - Completá el nombre del perro acá.
+  - Fill in the dog's name here.
+  - glosses: perro=dog's
+- `d92ae5f1` practica-la-feria
+  - Papá, llevame al cumple de Lucía.
+  - Dad, take me to Lucía's birthday party.
+  - glosses: Lucía.=Lucía's
+- `1d5c04ab` el-celu
+  - Siempre cargo el celu a la noche.
+  - I always charge my phone at night.
+  - glosses: la=∅ · noche.=night
+- `c1eedd43` el-celu
+  - ¿Cargás el celu a la noche o a la mañana?
+  - Do you charge your phone at night or in the morning?
+  - glosses: la=∅ · a=in · la=the · mañana?=morning
+- `1bca68cf` el-celu
+  - ¿Perdiste el celu o te quedaste sin batería?
+  - Did you lose your phone or did your battery die?
+  - glosses: te quedaste=die · sin=∅
+- `e4ff975c` el-celu
+  - ¿Te quedaste sin batería o se cortó la llamada?
+  - Did your battery die or did the call cut out?
+  - glosses: ¿Te quedaste=die · sin=∅
+- `4f9fde55` el-celu
+  - ¿Te quedaste sin batería?
+  - Did your battery die?
+  - glosses: ¿Te quedaste=die · sin=∅
+- `935ebc42` el-celu
+  - Mandame la ubicación y te busco.
+  - Send me the location and I'll pick you up.
+  - glosses: busco.=I'll pick you up
+- `ba876c42` el-celu
+  - Me quedé sin batería en el subte.
+  - My battery died on the subway.
+  - glosses: Me quedé=died · sin=∅
+- `fb3df42b` el-celu
+  - Me quedé sin batería y no tengo cargador.
+  - My battery died and I don't have a charger.
+  - glosses: Me quedé=died · sin=∅
+- `ca215783` el-celu
+  - Me quedé sin batería.
+  - My battery died.
+  - glosses: Me quedé=died · sin=∅
+- `bf8ad064` no-tengo-senal
+  - Juan se quedó sin batería.
+  - Juan's phone died.
+  - glosses: batería.=∅
+- `43bcb937` te-lo-devuelvo
+  - ¿Me devolvés la SUBE, que necesito ir al centro?
+  - Will you give me back the SUBE? I need to go downtown.
+  - glosses: centro?=downtown
+- `b7fc3900` te-lo-devuelvo
+  - ¿Me devolvés el libro?
+  - Will you give me back the book?
+  - glosses: devolvés=will you give me back
+- `c049ccff` te-lo-devuelvo
+  - ¿Me devolvés la campera, por favor?
+  - Will you give me back the jacket, please?
+  - glosses: devolvés=will you give me back
+- `18ee0f41` te-lo-devuelvo
+  - ¿Me devolvés los cargadores antes del viaje?
+  - Will you give me back the chargers before the trip?
+  - glosses: devolvés=will you give me back
+- `76bed7f8` te-lo-devuelvo
+  - ¿Me lo devolvés mañana?
+  - Will you give it back to me tomorrow?
+  - glosses: devolvés=will you give it back
+- `e76fe29d` te-lo-devuelvo
+  - ¿Te lo devuelvo?
+  - Should I give it back to you?
+  - glosses: devuelvo?=should I give it back
+- `516b1478` te-lo-devuelvo
+  - Cerrá la caja y se la devolvés a Sofi.
+  - Close the box and give it back to Sofi.
+  - glosses: devolvés=give it back
+- `8fc00131` te-lo-devuelvo
+  - Cierro el auto y te lo devuelvo.
+  - I'll lock the car and give it back to you.
+  - glosses: devuelvo.=give it back
+- `bacff238` te-lo-devuelvo
+  - Cierro y te devuelvo la llave.
+  - I'll close up and give you back the key.
+  - glosses: devuelvo=give you back
+- `18456ee2` te-lo-devuelvo
+  - Dale, pero me lo devolvés el lunes.
+  - Sure, but you give it back to me on Monday.
+  - glosses: devolvés=you give it back
+- `aab146ed` te-lo-devuelvo
+  - Mañana te lo devuelvo.
+  - I'll give it back to you tomorrow.
+  - glosses: devuelvo.=I'll give it back
+- `56d30944` te-lo-devuelvo
+  - Te devuelvo la plata el viernes, posta.
+  - I'll give you back the money on Friday, for real.
+  - glosses: devuelvo=I'll give you back
+- `a52a9888` te-lo-devuelvo
+  - Te devuelvo la plata mañana.
+  - I'll give you back the money tomorrow.
+  - glosses: devuelvo=I'll give you back
+- `c419fc7f` te-lo-devuelvo
+  - Te devuelvo los cargadores mañana, ¿dale?
+  - I'll give you back the chargers tomorrow, OK?
+  - glosses: devuelvo=I'll give you back
+- `071f69bd` te-lo-presto
+  - Dame la plata, te la guardo yo.
+  - Give me the money, I'll hold on to it for you.
+  - glosses: yo.=I'll
+- `99bb0113` laburo-nuevo
+  - Che, renuncié.
+  - Hey, I quit.
+  - glosses: Che,=hey
+- `2a86cfe0` practica-el-laburo
+  - Sofi, devolveme la remera azul, es de mi hermana.
+  - Sofi, give me back the blue T-shirt, it's my sister's.
+  - glosses: mi=my
+- `74910f74` practica-el-laburo
+  - Che, devolveme el libro.
+  - Hey, give me back the book.
+  - glosses: Che,=hey
+- `5646f6e1` practica-te-lo-presto
+  - ¿Martín consiguió depto?
+  - Did Martín find an apartment?
+  - glosses: consiguió=find
+- `20898a38` estamos-de-novios
+  - Me encontré con mi ex en el súper.
+  - I ran into my ex at the supermarket.
+  - glosses: con=into
+- `09b019b4` quien-sera
+  - ¿Venís mañana? A lo mejor, te aviso.
+  - Are you coming tomorrow? Maybe, I'll let you know.
+  - glosses: aviso.=I'll let you know
+- `86e662fa` quien-sera
+  - Tu jefe no vino hoy, ¿le pasará algo?
+  - Your boss didn't come in today, do you think something's wrong?
+  - glosses: algo?=something's
+- `a93dc6ab` quien-sera
+  - Supongo que el banco abre a las diez.
+  - I guess the bank opens at ten.
+  - glosses: el=the · a=at · las=∅ · diez.=ten
+- `d2d4e1e6` quien-sera
+  - ¿Dónde estarán mis llaves?
+  - Where could my keys be?
+  - glosses: estarán=could my keys be
+- `2a662f6d` como-se-siente
+  - La abuela se siente mejor.
+  - Grandma's feeling better.
+  - glosses: abuela=grandma's · se siente=feeling
+- `2b71728b` como-se-siente
+  - Mi abuelo se siente solo desde que se mudó.
+  - My grandpa's been feeling lonely since he moved.
+  - glosses: abuelo=grandpa's · se siente=been feeling
+- `3bc46852` como-se-siente
+  - Mi abuelo está re sano.
+  - My grandpa's really healthy.
+  - glosses: abuelo=grandpa's · está=grandpa's
+- `41cc5c54` como-se-siente
+  - Lucía está sana, pero se siente cansada.
+  - Lucía's healthy, but she feels tired.
+  - glosses: Lucía=Lucía's · está=Lucía's
+- `f4721a8e` como-se-siente
+  - Para el análisis de sangre hay que ir sin comer.
+  - You can't eat before the blood test.
+  - glosses: hay que=you can't
+- `dbc72028` como-se-siente
+  - ¿Te dolió la vacuna?
+  - Did the shot hurt?
+  - glosses: ¿Te dolió=hurt
+- `644d3717` practica-capaz
+  - Me duele la garganta, capaz que tengo fiebre.
+  - My throat hurts, maybe I have a fever.
+  - glosses: Me duele=hurts
+- `227cdc58` practica-a-lo-mejor
+  - ¿Vendrá hoy el encargado?
+  - I wonder if the building caretaker's coming today.
+  - glosses: encargado?=building caretaker's
+- `257155c1` practica-a-lo-mejor
+  - A lo mejor Juan tiene razón.
+  - Maybe Juan's right.
+  - glosses: Juan=Juan's · tiene=Juan's
+- `274852ee` practica-a-lo-mejor
+  - ¿Qué hará Sofi ahora?
+  - I wonder what Sofi's doing now.
+  - glosses: Sofi=Sofi's
+- `4b27a921` practica-a-lo-mejor
+  - Con este frío, ¿vendrá alguien al asado?
+  - With this cold, I wonder if anyone's coming to the barbecue.
+  - glosses: alguien=anyone's
+- `4bd1d199` practica-a-lo-mejor
+  - ¿Cómo se siente tu abuela?
+  - How's your grandma feeling?
+  - glosses: ¿Cómo=how's
+- `551784a7` practica-a-lo-mejor
+  - Juan se siente solo desde que se mudó.
+  - Juan's been lonely since he moved.
+  - glosses: Juan=Juan's · se siente=been
+- `679db015` practica-a-lo-mejor
+  - ¿Qué hará Lucía en Mendoza? Estará de vacaciones.
+  - I wonder what Lucía's doing in Mendoza. She's probably on vacation.
+  - glosses: Lucía=Lucía's
+- `69f67945` practica-a-lo-mejor
+  - A lo mejor se quedó sin batería.
+  - Maybe her phone died.
+  - glosses: batería.=∅
+- `946c3058` practica-a-lo-mejor
+  - Sofi estará en el subte, no tiene señal.
+  - Sofi's probably on the subway; she has no signal.
+  - glosses: Sofi=Sofi's · estará=Sofi's probably
+- `daa8cb69` practica-a-lo-mejor
+  - ¿Estará abierta la farmacia?
+  - I wonder if the pharmacy's open.
+  - glosses: farmacia?=pharmacy's
+- `db863ba8` practica-a-lo-mejor
+  - No sé qué hará Juan con su vida.
+  - I don't know what Juan's going to do with his life.
+  - glosses: Juan=Juan's
+- `dece8e1e` practica-a-lo-mejor
+  - ¿Cómo estará Martín en Bariloche?
+  - I wonder how Martín's doing in Bariloche.
+  - glosses: Martín=Martín's
+- `e712628e` practica-a-lo-mejor
+  - ¿Vendrá Juan a la fiesta?
+  - I wonder if Juan's coming to the party.
+  - glosses: Juan=Juan's
+- `7d6280a5` practica-a-lo-mejor
+  - ¿Todavía tenés dolor de muela?
+  - Do you still have a toothache?
+  - glosses: tenés=do you still have
+- `c92cb75a` sos-un-genio
+  - ¿Viste el detalle que tuvo Martín?
+  - Did you see that sweet gesture from Martín?
+  - glosses: que=∅
+- `496500f5` sos-un-genio
+  - ¿Lo hiciste de onda o por plata?
+  - Did you do it as a favor or for money?
+  - glosses: ¿Lo=it · hiciste=did you do
+- `12626bae` te-debo-una
+  - Ya no te debo nada.
+  - I don't owe you anything anymore.
+  - glosses: te debo=owe you
+- `35814e08` te-debo-una
+  - Gracias otra vez, te debo una.
+  - Thanks again, I owe you one.
+  - glosses: te debo=I owe you
+- `6de599aa` te-debo-una
+  - Te debo una.
+  - I owe you one.
+  - glosses: Te debo=I owe you
+- `6e4d3544` te-debo-una
+  - Todavía te debo la plata del asado.
+  - I still owe you the money for the barbecue.
+  - glosses: te debo=I still owe you
+- `78cfe9f0` te-debo-una
+  - ¿Te debo algo?
+  - Do I owe you anything?
+  - glosses: ¿Te debo=do I owe you
+- `9184ae72` te-debo-una
+  - ¿Cuánto te debo?
+  - How much do I owe you?
+  - glosses: te debo?=do I owe you
+- `be4b11eb` te-debo-una
+  - Gracias por el cargador, te debo una.
+  - Thanks for the charger, I owe you one.
+  - glosses: te debo=I owe you
+- `92d98ca6` necesito-que-me-ayudes
+  - Hagamos una cosa: yo cocino y vos lavás los platos.
+  - Let's do this: I'll cook and you do the dishes.
+  - glosses: yo=I'll
+- `0435e9cf` que-te-mejores
+  - ¡Que cumplas muchos más!
+  - Here's to many more!
+  - glosses: cumplas=here's to · más!=more
+- `ea2f0e03` que-te-mejores
+  - ¿Treinta? ¡Que cumplas muchos más, Martín!
+  - Thirty? Here's to many more, Martín!
+  - glosses: cumplas=here's to · más,=more
+- `28bf7e15` cuando-llegues
+  - Cuando llegue, te aviso.
+  - When I get there, I'll let you know.
+  - glosses: aviso.=I'll let you know
+- `9acd3c8e` no-creo
+  - ¿Te parece bien el sábado a la noche?
+  - Is Saturday night good for you?
+  - glosses: la=∅ · noche?=night
+- `032ae70d` te-recomiendo
+  - Para el finde, te recomiendo Mar del Plata.
+  - For the weekend, I recommend Mar del Plata.
+  - glosses: te recomiendo=I recommend
+- `08ff8233` te-recomiendo
+  - Te recomiendo el flan.
+  - I recommend the flan.
+  - glosses: Te recomiendo=I recommend
+- `0edd3163` te-recomiendo
+  - ¿Qué me recomendás?
+  - What do you recommend?
+  - glosses: me recomendás?=do you recommend
+- `1d2211be` te-recomiendo
+  - Te recomiendo que pruebes el vino.
+  - I'd recommend you try the wine.
+  - glosses: Te recomiendo=I'd recommend
+- `2a2bd073` te-recomiendo
+  - Te recomiendo que pidas el bife.
+  - I'd recommend you order the steak.
+  - glosses: Te recomiendo=I'd recommend
+- `349f483a` te-recomiendo
+  - ¿Qué hotel me recomendás en Bariloche?
+  - What hotel do you recommend in Bariloche?
+  - glosses: me recomendás=do you recommend
+- `359967bc` te-recomiendo
+  - ¿Me recomendás el bife?
+  - Do you recommend the steak?
+  - glosses: ¿Me recomendás=do you recommend
+- `57421f40` te-recomiendo
+  - Te recomiendo que pidas la milanesa con papas fritas.
+  - I'd recommend you order the breaded cutlet with fries.
+  - glosses: Te recomiendo=I'd recommend
+- `69d7caee` te-recomiendo
+  - Che, ¿qué película me recomendás para el finde?
+  - Hey, what movie do you recommend for the weekend?
+  - glosses: Che,=hey · me recomendás=do you recommend
+- `6ffba290` te-recomiendo
+  - ¿Qué lugar me recomendás?
+  - What place do you recommend?
+  - glosses: me recomendás?=do you recommend
+- `a0d82976` te-recomiendo
+  - Te recomiendo este lugar.
+  - I recommend this place.
+  - glosses: Te recomiendo=I recommend
+- `a7d7f1d1` te-recomiendo
+  - ¿Qué barrio de Buenos Aires me recomendás?
+  - What neighborhood in Buenos Aires do you recommend?
+  - glosses: me recomendás?=do you recommend
+- `b3b857d6` te-recomiendo
+  - Te recomiendo las empanadas de acá.
+  - I recommend the empanadas here.
+  - glosses: Te recomiendo=I recommend
+- `b633ec1e` te-recomiendo
+  - ¿Qué me recomendás, el bife o la milanesa?
+  - What do you recommend, the steak or the breaded cutlet?
+  - glosses: me recomendás,=do you recommend
+- `cdd03584` te-recomiendo
+  - Te recomiendo que pruebes el mate con azúcar.
+  - I'd recommend you try the mate with sugar.
+  - glosses: Te recomiendo=I'd recommend
+- `de1f4800` te-recomiendo
+  - ¿Qué postre me recomendás?
+  - What dessert do you recommend?
+  - glosses: me recomendás?=do you recommend
+- `2ed1cccd` te-aconsejo
+  - Conviene que busques un depto en zona norte.
+  - You should look for an apartment in the northern suburbs.
+  - glosses: en=in · zona=suburbs · norte.=northern
+- `af7b3083` practica-te-recomiendo
+  - No te preocupes, el perro no hace nada.
+  - Don't worry, the dog doesn't bite.
+  - glosses: No=don't
+- `43c3041e` practica-te-aconsejo
+  - Lucía nunca llega a tiempo a nada.
+  - Lucía's never on time for anything.
+  - glosses: llega=Lucía's
+- `6019ce84` practica-te-aconsejo
+  - No sé, capaz que Lucía tiene razón.
+  - I don't know, maybe Lucía's right.
+  - glosses: tiene=Lucía's
+- `f4a4e3ca` practica-te-aconsejo
+  - Martín estará en el subte todavía.
+  - Martín's probably still on the subway.
+  - glosses: estará=Martín's probably
+- `03dddd4f` que-significa
+  - Sofi está nerviosa, ¿te diste cuenta?
+  - Sofi's nervous, did you notice?
+  - glosses: Sofi=Sofi's · está=Sofi's
+- `81d1409b` que-significa
+  - Lucía, te confundiste de mochila, esa es de Juan.
+  - Lucía, you took the wrong backpack, that one's Juan's.
+  - glosses: esa=that one's
+- `37b41c17` lunfardo
+  - Me da fiaca cocinar.
+  - I can't be bothered to cook.
+  - glosses: da=can't be bothered
+- `ee9876c0` lunfardo
+  - Vamos a morfar al centro.
+  - Let's go eat downtown.
+  - glosses: al=∅ · centro.=downtown
+- `6f4e1a2f` practica-que-bueno
+  - ¿Vos sabés la contraseña?
+  - Do you know the password?
+  - glosses: ¿Vos=you · sabés=do you know
+- `1f19224a` practica-que-bueno
+  - Ya sé que no te gusta el frío.
+  - I know you don't like the cold.
+  - glosses: que=∅
+- `46611013` practica-es-un-afano
+  - Repetime la contraseña del wifi.
+  - Tell me the wifi password again.
+  - glosses: Repetime=tell me
+- `4dd0439a` practica-es-un-afano
+  - Me enojé tanto que salí del bar.
+  - I got so angry that I walked out of the bar.
+  - glosses: Me enojé=I got so angry
+- `a4685b7b` practica-es-un-afano
+  - No tengo guita para garpar el flete.
+  - I don't have the money to pay for the moving van.
+  - glosses: para=to
+- `bbd38266` practica-es-un-afano
+  - ¿Quién va a garpar?
+  - Who's going to pay up?
+  - glosses: ¿Quién=who's
+- `0eeebc0b` saludos-a-tu-vieja
+  - Ya estoy yendo para allá.
+  - I'm on my way over now.
+  - glosses: allá.=over
+- `f2dde3cb` saludos-a-tu-vieja
+  - Te mando besos desde la playa.
+  - Sending you love from the beach.
+  - glosses: besos=love
+- `6c32f4e6` yo-en-tu-lugar
+  - Yo buscaría un departamento más cerca.
+  - I'd look for an apartment closer by.
+  - glosses: más=closer
+- `da7656a7` yo-en-tu-lugar
+  - Entre las dos, me quedaría con la negra.
+  - Between the two, I'd go with the black one.
+  - glosses: con=with
+- `2ffe2690` si-tuviera
+  - Si mañana pudiera dormir hasta tarde, sería feliz.
+  - If I could sleep in tomorrow, I'd be happy.
+  - glosses: hasta=∅
+- `8edb6e5b` si-ganara
+  - Con ese sueldo, Lucía va a ser millonaria.
+  - With that salary, Lucía's going to be a millionaire.
+  - glosses: Lucía=Lucía's · va=Lucía's going
+- `5dd3f2cc` preferiria
+  - ¿Pasarías a buscar a los chicos por la escuela?
+  - Would you pick the kids up from school?
+  - glosses: ¿Pasarías=would you · buscar=pick
+- `a1d8fec0` preferiria
+  - ¿A tus viejos les molestaría si voy?
+  - Would your parents mind if I came?
+  - glosses: molestaría=mind
+- `e4737855` preferiria
+  - ¿Me pasarías a buscar?
+  - Would you pick me up?
+  - glosses: pasarías=would you · buscar?=pick me up
+- `0ff066b9` practica-yo-que-vos
+  - A mi abuela le encantaría conocer a Martín.
+  - My grandmother would love to meet Martín.
+  - glosses: Martín.=Martín
+- `dfbf6fb4` practica-yo-que-vos
+  - Con esta lluvia, yo haría home office.
+  - With this rain, I'd work from home.
+  - glosses: yo=I'd
+- `62dd9ba2` practica-si-ganara
+  - Yo hablaría con ella.
+  - I'd talk to her.
+  - glosses: Yo=I'd
+- `c6a66b13` practica-si-ganara
+  - ¿Te vas? Yo me quedaría a ver el partido.
+  - You're leaving? I'd stay and watch the game.
+  - glosses: Yo=I'd
+- `d19ee2ba` practica-si-ganara
+  - Yo me quedaría en casa.
+  - I'd stay home.
+  - glosses: Yo=I'd
+- `9193d144` practica-si-ganara
+  - En tu lugar, le pediría ayuda a Martín.
+  - If I were you, I'd ask Martín for help.
+  - glosses: a=∅
+- `ff5ce53b` manejar-en-baires
+  - Che, vamos en subte, que en la avenida hay tránsito.
+  - Hey, let's take the subway, there's traffic on the avenue.
+  - glosses: Che,=hey
+- `0c7aedf1` la-ruta
+  - El auto está en la cochera.
+  - The car's in the garage.
+  - glosses: auto=car's · está=car's
+- `10ef5ddf` la-ruta
+  - La autopista está cerrada.
+  - The highway's closed.
+  - glosses: autopista=highway's · está=highway's
+- `57c7b512` la-ruta
+  - ¿Quién maneja hoy?
+  - Who's driving today?
+  - glosses: ¿Quién=who's · maneja=driving
+- `b6727ea7` la-ruta
+  - Si Sofi maneja, yo pongo la música.
+  - If Sofi drives, I'll pick the music.
+  - glosses: yo=I'll
+- `82867724` a-medias
+  - ¿Te alcanza con diez mil?
+  - Is ten thousand enough for you?
+  - glosses: ¿Te alcanza=enough for you
+- `47d0fb36` a-medias
+  - Tengo la plata en la caja de ahorro.
+  - The money's in my savings account.
+  - glosses: la=the · plata=money's
+- `bf748f7e` a-medias
+  - Ya no me debés nada.
+  - You don't owe me anything anymore.
+  - glosses: me debés=you don't owe me
+- `08f4faf4` me-contaron
+  - Me comentaron que estabas enferma.
+  - Someone mentioned you were sick.
+  - glosses: comentaron=someone mentioned · que=∅
+- `57973ceb` me-contaron
+  - Me contaron que Sofi está saliendo con alguien.
+  - I heard Sofi's seeing someone.
+  - glosses: está=Sofi's
+- `13978c2d` practica-la-guita
+  - Che, parece que se cortó.
+  - Hey, looks like it cut out.
+  - glosses: Che,=hey
+- `f1855530` practica-la-guita
+  - No manejo en el centro, hay mucho tránsito.
+  - I don't drive downtown, there's a lot of traffic.
+  - glosses: el=∅ · centro,=downtown
+- `917418cf` practica-la-guita
+  - Sofi iría seguro.
+  - Sofi would definitely go.
+  - glosses: iría=would definitely go
+- `0d65d348` practica-a-medias
+  - Me lo contaron en el laburo.
+  - Someone at work told me.
+  - glosses: contaron=told
+- `1542f35d` es-medio-vago
+  - Mi viejo es trabajador, labura desde los quince.
+  - My dad's a hard worker, he's been working since he was fifteen.
+  - glosses: viejo=dad's · es=dad's
+- `2322348c` es-medio-vago
+  - Juan es macanudo, vas a ver.
+  - Juan's a great guy, you'll see.
+  - glosses: Juan=Juan's · es=Juan's
+- `349672a1` es-medio-vago
+  - Sofi está callada, ¿está enojada?
+  - Sofi's quiet, is she mad?
+  - glosses: Sofi=Sofi's · está=Sofi's
+- `b08bb6b9` es-medio-vago
+  - Martín es trabajador; labura los sábados también.
+  - Martín's a hard worker; he works Saturdays too.
+  - glosses: Martín=Martín's · es=Martín's
+- `be944060` es-medio-vago
+  - Martín es macanudo, siempre ayuda.
+  - Martín's a great guy, he always helps out.
+  - glosses: Martín=Martín's · es=Martín's · ayuda.=helps out
+- `f6f83696` es-medio-vago
+  - En mi familia todos son trabajadores.
+  - In my family everyone's hard-working.
+  - glosses: todos=everyone's · son=everyone's
+- `2035a5fa` zona-norte
+  - Prefiero zona norte, es más tranquila.
+  - I prefer the north side, it's quieter.
+  - glosses: más=quieter
+- `3ab17c67` zona-norte
+  - Alquilamos en zona sur porque es más barato.
+  - We rented on the south side because it's cheaper.
+  - glosses: más=cheaper
+- `c6b066d3` zona-norte
+  - Sofi no vuelve sola porque la zona es insegura.
+  - Sofi doesn't go home alone because the area's unsafe.
+  - glosses: zona=area's · es=area's
+- `cb235cb8` practica-me-dijo
+  - ¿Quién es más generoso, tu papá o tu tío?
+  - Who's more generous, your dad or your uncle?
+  - glosses: ¿Quién=who's · es=who's
+- `c63aad6b` ponele
+  - El depto es chico, digamos, pero re lindo.
+  - The apartment's sort of small, but it's really nice.
+  - glosses: depto=apartment's · es=apartment's
+- `bf62b0d6` por-las-dudas
+  - Si querés, después de clase te llevo a tu casa.
+  - I can drive you home after class if you like.
+  - glosses: llevo=I can drive
+- `41a85242` se-me-cayo
+  - Che, se te cayó algo.
+  - Hey, you dropped something.
+  - glosses: Che,=hey
+- `47d8cd0f` se-me-cayo
+  - Che, se me rompió un vaso.
+  - Hey, I broke a glass.
+  - glosses: Che,=hey
+- `ac3bda4f` practica-se-me-olvido
+  - Iba al centro en bondi.
+  - I used to go downtown by bus.
+  - glosses: centro=downtown
+- `c6f3fb36` practica-se-me-olvido
+  - Te aviso antes de que termine la clase.
+  - I'll let you know before class ends.
+  - glosses: la=∅ · clase.=class
+- `b5b7f651` practica-se-me-olvido
+  - Te lo cuento para que sepas.
+  - I'm telling you so you know.
+  - glosses: lo=∅
+- `f2510013` practica-nunca-habia
+  - Por tu culpa perdimos el colectivo.
+  - We missed the bus because of you.
+  - glosses: culpa=because of
+- `7eb6cabe` practica-nunca-habia
+  - ¿Cuándo viniste a Buenos Aires por primera vez?
+  - When did you first come to Buenos Aires?
+  - glosses: viniste=did you first come
+- `5a0cfb78` el-partido
+  - Che, perdimos.
+  - Hey, we lost.
+  - glosses: Che,=hey
+- `532e085f` la-final
+  - ¿Quién juega de arquero?
+  - Who's playing goalkeeper?
+  - glosses: ¿Quién=who's · juega=playing
+- `fd877a61` la-final
+  - ¿Dónde está mi camiseta?
+  - Where's my jersey?
+  - glosses: ¿Dónde=where's · está=where's
+- `1a1b9c5b` el-tecnico
+  - Las redes no funcionan desde la mañana.
+  - Social media's been down since this morning.
+  - glosses: redes=social media's · funcionan=been down
+- `6947943e` el-tecnico
+  - Mi primo es técnico, capaz te puede ayudar.
+  - My cousin's a technician, maybe he can help you.
+  - glosses: primo=cousin's · es=cousin's
+- `77fa1be0` el-tecnico
+  - ¿Dónde está el control?
+  - Where's the remote?
+  - glosses: ¿Dónde=where's · está=where's
+- `a45d50e6` el-tecnico
+  - ¿Dónde hay un enchufe?
+  - Where's an outlet?
+  - glosses: ¿Dónde=where's · hay=where's
+- `bc4cf487` de-acuerdo
+  - Sofi y Juan nunca están de acuerdo en nada.
+  - Sofi and Juan never agree on anything.
+  - glosses: están=agree
+- `95446b83` tenes-razon
+  - Exacto, ese es el problema.
+  - Exactly, that's the problem.
+  - glosses: ese=that's
+- `897b8bf5` practica-depende
+  - Ganamos y los pibes fueron a festejar al centro.
+  - We won and the guys went downtown to celebrate.
+  - glosses: centro.=downtown
+- `aec88658` practica-depende
+  - ¿Ustedes están de acuerdo?
+  - Do you all agree?
+  - glosses: están=agree
+- `909d25af` practica-tenes-razon
+  - Mañana viene el técnico.
+  - The repairman's coming tomorrow.
+  - glosses: viene=coming · técnico.=repairman's
+- `b28bab72` practica-tenes-razon
+  - ¿Quién es el arquero de la selección?
+  - Who's the national team's goalkeeper?
+  - glosses: ¿Quién=who's · es=who's
+- `04171c30` el-cajero
+  - El viernes te transfiero todo lo que te debo.
+  - On Friday I'll transfer you everything I owe you.
+  - glosses: te debo.=I owe you
+- `0dbaafa1` el-cajero
+  - Ya te transferí todo, no te debo nada.
+  - I've transferred you everything, I don't owe you anything.
+  - glosses: te debo=I don't owe you
+- `55e90692` pasame-el-alias
+  - ¿Tu hermana ya te transfirió lo del alquiler?
+  - Has your sister sent you her share of the rent yet?
+  - glosses: transfirió=sent
+- `a6c5020f` que-susto
+  - El ascensor del depto me da un poco de miedo.
+  - The elevator in my building scares me a bit.
+  - glosses: miedo.=scares
+- `11ba2497` me-dan-asco
+  - ¿Qué es ese bicho?
+  - What's that bug?
+  - glosses: ¿Qué=what's · es=what's
+- `27aafd13` me-dan-asco
+  - ¿Dónde está mi ojota? ¡Hay una cucaracha!
+  - Where's my flip-flop? There's a cockroach!
+  - glosses: ¿Dónde=where's
+- `4e01ea0a` me-dan-asco
+  - —¿Dónde está la araña? —Atrás de la puerta.
+  - Where's the spider? —Behind the door.
+  - glosses: —¿Dónde=where's · está=where's
+- `5659142a` me-dan-asco
+  - Cerrá la ventana, que va a entrar un bicho.
+  - Close the window or a bug's going to get in.
+  - glosses: va=bug's going · bicho.=bug's
+- `b74c29e8` costumbres
+  - Para mi novio inglés es raro saludar con un beso.
+  - For my English boyfriend, greeting people with a kiss is weird.
+  - glosses: con=with
+- `8c6f042d` costumbres
+  - ¿Hay previa hoy?
+  - Is there a pre-party today?
+  - glosses: ¿Hay=is there
+- `102e8751` costumbres
+  - Hicimos la previa en casa.
+  - We had the pre-party at home.
+  - glosses: Hicimos=we had
+- `19d26def` se-aplaude-al-asador
+  - ¿Quién hace el fuego?
+  - Who's making the fire?
+  - glosses: ¿Quién=who's
+- `2d508aeb` se-aplaude-al-asador
+  - ¿Quién pone la mesa?
+  - Who's setting the table?
+  - glosses: ¿Quién=who's · pone=setting
+- `54fa7414` se-aplaude-al-asador
+  - Sofi es vegetariana, así que nada de chorizo.
+  - Sofi's a vegetarian, so no sausage for her.
+  - glosses: Sofi=Sofi's · es=Sofi's
+- `6c66b305` se-aplaude-al-asador
+  - Hoy el asador es Martín.
+  - Martín's the grill master today.
+  - glosses: es=Martín's · Martín.=Martín's
+- `752bb8cc` se-aplaude-al-asador
+  - ¿Quién es el asador?
+  - Who's the grill master?
+  - glosses: ¿Quién=who's · es=who's
+- `9a7e81de` se-aplaude-al-asador
+  - El fuego es cosa del asador.
+  - The fire is the grill master's job.
+  - glosses: asador.=grill master's
+- `e1de381d` se-aplaude-al-asador
+  - ¿Quién trae el vino?
+  - Who's bringing the wine?
+  - glosses: ¿Quién=who's · trae=bringing
+- `fee4b96c` se-aplaude-al-asador
+  - Mi tío es muy buen asador.
+  - My uncle's a really good grill master.
+  - glosses: tío=uncle's · es=uncle's
+- `ffbc9ce4` se-aplaude-al-asador
+  - Martín pone la música.
+  - Martín's in charge of the music.
+  - glosses: Martín=Martín's · pone=in charge of
+- `85898241` practica-un-aplauso
+  - La última vez pagué yo, te toca a vos.
+  - I paid last time — it's your turn.
+  - glosses: vos.=your
+- `5f97ac98` practica-un-aplauso
+  - Mi jefe es un maleducado, nunca dice gracias.
+  - My boss is so rude — he never says thank you.
+  - glosses: nunca=never · gracias.=thank you
+- `a72d8f67` practica-un-aplauso
+  - Acá tenés el comprobante.
+  - Here's the receipt.
+  - glosses: tenés=here's
+- `bc0c8e38` practica-un-aplauso
+  - Se me cayó la taza en la reunión, qué vergüenza.
+  - I dropped my mug in the meeting — so embarrassing.
+  - glosses: qué=so · vergüenza.=embarrassing
+- `2275bafa` aunque-llueva
+  - Aunque no quieras, hay que sacar la basura.
+  - Even if you don't want to, we have to take out the trash.
+  - glosses: hay que=we have to
+- `d6c91246` aunque-no-tenga-ganas
+  - ¿Cómo va la dieta?
+  - How's the diet going?
+  - glosses: ¿Cómo=how's
+- `a3b261fc` llevo-dos-anos
+  - Lucía lleva meses viviendo en la casa de Sofi.
+  - Lucía has been living at Sofi's house for months.
+  - glosses: Sofi.=Sofi's
+- `5342069f` practica-llevo-un-rato
+  - Yo llevo las empanadas, ¿dale?
+  - I'll bring the empanadas, OK?
+  - glosses: Yo=I'll
+- `99d4a667` practica-aunque-sea
+  - Sofi está practicando para la entrevista.
+  - Sofi's practicing for the interview.
+  - glosses: Sofi=Sofi's · está=Sofi's
+- `1bee6379` pasen-pasen
+  - No se preocupen, yo limpio.
+  - Don't worry, I'll clean up.
+  - glosses: yo=I'll
+- `2167be46` pasen-pasen
+  - Vengan el domingo, que festejamos el cumpleaños de Sofi.
+  - Come on Sunday, we're celebrating Sofi's birthday.
+  - glosses: Sofi.=Sofi's
+- `725ca512` pasen-pasen
+  - Pónganse cómodos, que Juan llega en un rato.
+  - Make yourselves comfortable, Juan's getting here in a bit.
+  - glosses: Juan=Juan's · llega=getting here
+- `d44b273b` pasen-pasen
+  - Esperen, ¿dónde está Juan?
+  - Wait, where's Juan?
+  - glosses: ¿dónde=where's
+- `bcea0a6c` a-la-mesa
+  - ¡A la mesa, que ya está la comida!
+  - Come to the table, the food's ready!
+  - glosses: la=the · comida!=food's
+- `7e173a0e` no-te-hagas-el-gil
+  - Ni que fuera gil, ya sé que mentiste.
+  - What am I, stupid? I know you lied.
+  - glosses: fuera=am I
+- `da8f36f6` no-te-hagas-el-gil
+  - Anda re canchera desde que tiene novio.
+  - She's been acting so confident since she got a boyfriend.
+  - glosses: re=so
+- `1b9db2c6` el-que-quieras
+  - Esa es la casa donde vivo.
+  - That's the house where I live.
+  - glosses: Esa=that's
+- `2593ab78` el-que-quieras
+  - Esa es la que te dije.
+  - That's the one I told you about.
+  - glosses: Esa=that's · es=that's
+- `3eb63a36` el-que-quieras
+  - Ese es el barrio donde viví.
+  - That's the neighborhood where I lived.
+  - glosses: Ese=that's
+- `fc7aa14b` el-que-quieras
+  - Mirá, ahí es donde estudio.
+  - Look, that's where I study.
+  - glosses: ahí=that's · es=that's
+- `38871368` el-de-la-vidriera
+  - Probate la que prefieras, el probador está libre.
+  - Try on whichever one you prefer, the fitting room's free.
+  - glosses: probador=fitting room's · está=fitting room's
+- `0d317e9f` el-de-la-vidriera
+  - ¿Esta es tu campera o la de Sofi?
+  - Is this your jacket or Sofi's?
+  - glosses: la de=Sofi's
+- `62a92b66` el-de-la-vidriera
+  - Mis zapatillas son las blancas; las de Juan, las negras.
+  - My sneakers are the white ones; Juan's are the black ones.
+  - glosses: las de=Juan's
+- `71343e35` el-de-la-vidriera
+  - ¿Quién es la de rojo?
+  - Who's the girl in red?
+  - glosses: ¿Quién=who's · es=who's
+- `90fdb5be` el-de-la-vidriera
+  - ¿Dónde está el probador?
+  - Where's the fitting room?
+  - glosses: ¿Dónde=where's · está=where's
+- `9ae80834` el-de-la-vidriera
+  - La clase de hoy fue peor que la de ayer.
+  - Today's class was worse than yesterday's.
+  - glosses: la de=yesterday's
+- `d7331e8c` el-de-la-vidriera
+  - Se me rompió el celu, así que uso el de Lucía.
+  - My phone broke, so I'm using Lucía's.
+  - glosses: el de=Lucía's
+- `05cc3e08` practica-como-si
+  - Lucía es la que llamó.
+  - Lucía's the one who called.
+  - glosses: Lucía=Lucía's · es=Lucía's
+- `14a7337a` practica-como-si
+  - ¿El que está al lado del banco?
+  - The one that's next to the bank?
+  - glosses: ¿El que=the one that's
+- `3d5db0cd` practica-como-si
+  - Sofi es la que más sabe.
+  - Sofi's the one who knows the most.
+  - glosses: Sofi=Sofi's · es=Sofi's
+- `4a813eff` practica-como-si
+  - La que está en la esquina.
+  - The one that's on the corner.
+  - glosses: La que=the one that's · está=that's
+- `63ac9106` practica-como-si
+  - Prefiero el que está más cerca.
+  - I prefer the one that's closer.
+  - glosses: el que=the one that's
+- `6b983247` practica-como-si
+  - Pasen, que ya está el asado.
+  - Come in, the barbecue's ready.
+  - glosses: está=barbecue's · asado.=barbecue's
+- `af785fc2` practica-como-si
+  - Juan se hace el tonto.
+  - Juan's playing dumb.
+  - glosses: Juan=Juan's · se hace=playing
+- `b6657eea` practica-como-si
+  - Juan es el que habla inglés.
+  - Juan's the one who speaks English.
+  - glosses: Juan=Juan's · es=Juan's
+- `b8d39441` practica-como-si
+  - No se preocupen, yo limpio.
+  - Don't worry, I'll clean up.
+  - glosses: yo=I'll
+- `c802b68b` practica-como-si
+  - No se preocupen, yo pago.
+  - Don't worry, I'll pay.
+  - glosses: yo=I'll · pago.=I'll pay
+- `d7a59ce0` practica-como-si
+  - Me encantaría que vinieras.
+  - I'd love for you to come.
+  - glosses: encantaría=I'd love
+- `edd9460a` practica-como-si
+  - Lucía es la que se hizo la dormida.
+  - Lucía's the one who pretended to be asleep.
+  - glosses: Lucía=Lucía's · es=Lucía's
+- `8ab7375d` practica-a-la-mesa
+  - Como quieras, yo te espero acá.
+  - Whatever you want, I'll wait for you here.
+  - glosses: yo=I'll
+- `ccc8505a` practica-a-la-mesa
+  - Mi compañero es un caradura: nunca paga el café.
+  - My coworker is shameless: he never pays for coffee.
+  - glosses: el=∅ · café.=coffee
+- `05ca8939` por-un-lado
+  - Vos sos argentino; yo, en cambio, no.
+  - You're Argentinian, whereas I'm not.
+  - glosses: Vos=you're
+- `791d5296` por-un-lado
+  - No me convence.
+  - I'm not convinced.
+  - glosses: convence.=convinced
+- `8a9dbadf` por-un-lado
+  - Mi hermano es alto; yo, en cambio, soy petiso.
+  - My brother is tall, whereas I'm short.
+  - glosses: yo,=I'm
+- `9da6baa4` por-un-lado
+  - En realidad, no me convence.
+  - Actually, I'm not convinced.
+  - glosses: convence.=convinced
+- `6f797521` la-ventaja-es-que
+  - ¿Y cuál es la ventaja?
+  - And what's the upside?
+  - glosses: cuál=what's · es=what's
+- `ceb7b407` la-ventaja-es-que
+  - ¿Cuál es la desventaja?
+  - What's the downside?
+  - glosses: ¿Cuál=what's · es=what's
+- `ea35d435` la-ventaja-es-que
+  - ¿Qué ventaja tiene?
+  - What's the advantage?
+  - glosses: ¿Qué=what's
+- `248d54aa` practica-migraciones
+  - El registro de Juan está vencido.
+  - Juan's driver's license is expired.
+  - glosses: Juan=Juan's
+- `278dfabf` practica-migraciones
+  - Estoy perdido, ¿dónde queda la estación?
+  - I'm lost. Where's the station?
+  - glosses: ¿dónde=where's · queda=where's
+- `a0c1faed` practica-migraciones
+  - ¿Y qué ventaja tiene vivir en el centro?
+  - And what's the advantage of living downtown?
+  - glosses: qué=what's
+- `f3ed0caa` practica-migraciones
+  - Mis viejos son de Córdoba; yo, en cambio, soy porteño.
+  - My parents are from Córdoba, whereas I'm from Buenos Aires.
+  - glosses: yo,=I'm
+- `3976b106` te-doy-la-razon
+  - Desde el punto de vista del jefe, todo es urgente.
+  - From the boss's point of view, everything's urgent.
+  - glosses: jefe,=boss's · todo=everything's · es=everything's
+- `99e322dd` que-opinas
+  - El que está seguro es Juan, no yo.
+  - The one who's sure is Juan, not me.
+  - glosses: El que=the one who's
+- `10fa1774` conoces-a-alguien-que
+  - ¿Conocés alguna verdulería que esté abierta el domingo?
+  - Do you know a produce store that's open on Sunday?
+  - glosses: que=that's · esté=that's
+- `d3535147` conoces-a-alguien-que
+  - Sofi es la más responsable.
+  - Sofi's the most responsible one.
+  - glosses: Sofi=Sofi's · es=Sofi's
+- `fb26e519` me-pone-nervioso-que
+  - Mi vieja anda re colgada con la mudanza.
+  - My mom is really distracted with the move.
+  - glosses: re=really
+- `d63d8194` deberias
+  - Mientras vos trabajás, yo cuido a los pibes.
+  - While you work, I'll look after the kids.
+  - glosses: yo=I'll
+- `ddc7ba2d` deberias
+  - ¿Podés cuidar al perro? Sí, yo lo cuido.
+  - Can you look after the dog? Yes, I'll look after him.
+  - glosses: yo=I'll
+- `bb8eb7bc` deberias-tomarte-unos-dias
+  - ¿Cuándo es tu franco?
+  - When's your day off?
+  - glosses: ¿Cuándo=when's
+- `9e95a103` practica-me-da-igual
+  - ¿Dónde está el contrato?
+  - Where's the lease?
+  - glosses: ¿Dónde=where's
+- `a3dccc5f` practica-me-da-igual
+  - ¿Quién es el dueño?
+  - Who's the owner?
+  - glosses: ¿Quién=who's
+- `12374f8d` practica-alguien-que-sepa
+  - Animate, el agua está linda.
+  - Come on in, the water's nice.
+  - glosses: agua=water's
+- `22c97f38` practica-alguien-que-sepa
+  - Animate a bailar, Lucía, nadie te está mirando.
+  - Go on and dance, Lucía, nobody's watching you.
+  - glosses: nadie=nobody's
+- `59aaf03d` dijo-que-pasaria
+  - Esa no es una respuesta.
+  - That's not an answer.
+  - glosses: Esa=that's · es=that's
+- `cea45364` dijo-que-pasaria
+  - Todavía no tengo respuesta.
+  - I still don't have an answer.
+  - glosses: tengo=have
+- `d32123b9` dijo-que-pasaria
+  - Siempre tiene una excusa.
+  - He always has an excuse.
+  - glosses: tiene=has
+- `099da5c9` con-tal-de-que
+  - Cocino yo, con tal de que traigas helado.
+  - I'll cook, as long as you bring ice cream.
+  - glosses: yo,=I'll
+- `543a7e7d` se-alquila
+  - Estacioné donde estaba prohibido.
+  - I parked where it wasn't allowed.
+  - glosses: prohibido.=wasn't allowed
+- `b1d35de3` se-aceptan-tarjetas
+  - La dueña del gato me dio la recompensa.
+  - The cat's owner gave me the reward.
+  - glosses: gato=cat's
+- `c87c949b` practica-se-alquila
+  - Está prohibido estacionar en la esquina.
+  - You can't park on the corner.
+  - glosses: Está=can't
+- `bc87d675` practica-se-alquila
+  - Estacioné en la esquina, pero estaba prohibido.
+  - I parked on the corner, but it wasn't allowed.
+  - glosses: prohibido.=wasn't allowed
+- `12a204e7` practica-se-aceptan-tarjetas
+  - Eso no es una respuesta, Juan.
+  - That's not an answer, Juan.
+  - glosses: Eso=that's
+- `73900b53` practica-se-aceptan-tarjetas
+  - Pago yo, con tal de que elijas vos el lugar.
+  - I'll pay, as long as you pick the place.
+  - glosses: yo,=I'll
+- `8cab4b37` practica-se-aceptan-tarjetas
+  - Esas cosas se hacen en la ventanilla dos.
+  - That's handled at window two.
+  - glosses: Esas=that's
+- `9817f2f9` practica-se-aceptan-tarjetas
+  - ¿La tele? Yo la pondría en el living.
+  - The TV? I'd put it in the living room.
+  - glosses: Yo=I'd
+- `085cf1f5` todo-aumenta
+  - Che, todo aumenta.
+  - Hey, everything's going up.
+  - glosses: todo=everything's
+- `2e333830` todo-aumenta
+  - Dicen que la inflación bajó, pero todo sigue caro.
+  - They say inflation went down, but everything's still expensive.
+  - glosses: todo=everything's
+- `1a103d1c` ando-buscando
+  - Cuando estás empezando, todo cuesta.
+  - When you're just starting out, everything's hard.
+  - glosses: todo=everything's · cuesta.=hard
+- `26b00e5d` ando-buscando
+  - El bar ya se está llenando.
+  - The bar's already filling up.
+  - glosses: bar=bar's · está=bar's
+- `27ea6b04` ando-buscando
+  - Vamos, que la cancha se está llenando.
+  - Come on, the stadium's filling up.
+  - glosses: cancha=stadium's · está=stadium's
+- `45d1fdbf` ando-buscando
+  - Lucía está a punto de tener el bebé.
+  - Lucía's about to have the baby.
+  - glosses: está=Lucía's
+- `4f411fb6` ando-buscando
+  - El partido está a punto de empezar, ¡vení!
+  - The game's about to start, come on!
+  - glosses: partido=game's · está=game's
+- `5ffe74bc` ando-buscando
+  - El perro se está acostumbrando al depto.
+  - The dog's getting used to the apartment.
+  - glosses: perro=dog's · está=dog's
+- `6d306cfd` ando-buscando
+  - ¿Cuándo arranca la facu?
+  - When do classes start?
+  - glosses: arranca=start
+- `2d3225e0` practica-no-lo-aguanto
+  - ¿Cómo hacés para llegar a fin de mes?
+  - How do you make ends meet?
+  - glosses: ¿Cómo=how
+- `375b862b` practica-no-lo-aguanto
+  - Me cobraron de más.
+  - They overcharged me.
+  - glosses: cobraron=they overcharged
+- `471c59f8` practica-no-lo-aguanto
+  - Le cae bien a todo el mundo.
+  - Everybody likes him.
+  - glosses: todo el mundo.=everybody
+- `48ee29e3` practica-no-lo-aguanto
+  - ¿Todavía andás con esa campera?
+  - Are you still wearing that jacket?
+  - glosses: andás=are you still wearing
+- `4cb94f76` practica-no-lo-aguanto
+  - ¿Andás con auto hoy?
+  - Do you have the car today?
+  - glosses: ¿Andás=do you have
+- `aaa62835` practica-no-lo-aguanto
+  - Al jefe le cae bien la compañera nueva.
+  - The boss likes the new coworker.
+  - glosses: Al=the
+- `056549a7` que-novedad
+  - El auto hace un ruido raro, pero dale que va.
+  - The car's making a weird noise, but whatever, let's go.
+  - glosses: auto=car's
+- `522bf91c` que-novedad
+  - Lucía empieza la dieta el lunes, ¡qué novedad!
+  - Lucía's starting her diet on Monday, what a surprise!
+  - glosses: Lucía=Lucía's · empieza=starting
+- `8f341acc` que-novedad
+  - ¿El subte no anda? ¡Qué novedad!
+  - The subway's not running? What a surprise!
+  - glosses: subte=subway's
+- `3b5d37c4` ni-ahi
+  - Eso es cualquiera.
+  - That's nonsense.
+  - glosses: Eso=that's
+- `08bf277a` me-encargo-que
+  - Portate bien, que viene la abuela.
+  - Behave, Grandma's coming.
+  - glosses: que viene=coming · abuela.=Grandma's
+- `2adbee0c` como-no-dona-rosa
+  - ¿Quién atiende hoy?
+  - Who's working today?
+  - glosses: ¿Quién=who's · atiende=working
+- `4fd37520` como-no-dona-rosa
+  - Doña Lucía atiende la panadería desde hace años.
+  - Mrs. Lucía has run the bakery for years.
+  - glosses: hace=for
+- `bba7156d` como-no-dona-rosa
+  - Dejá, yo lo hago.
+  - Leave it, I'll do it.
+  - glosses: yo=I'll
+- `cb0f9326` como-no-dona-rosa
+  - Dejá la bolsa, yo la llevo.
+  - Leave the bag, I'll carry it.
+  - glosses: yo=I'll
+- `f6fc29e4` como-no-dona-rosa
+  - Dejá, yo te llevo las compras hasta arriba.
+  - Leave it, I'll carry the groceries up for you.
+  - glosses: yo=I'll
+- `0e2d7438` practica-me-pidio
+  - Yo quisiera el bife con papas fritas, por favor.
+  - I'd like the steak with fries, please.
+  - glosses: Yo=I'd
+- `7402e767` practica-como-no
+  - Preguntale al encargado si el ascensor anda.
+  - Ask the building caretaker if the elevator's working.
+  - glosses: ascensor=elevator's · anda.=working
+- `90403fce` practica-como-no
+  - Portate bien, que viene la abuela.
+  - Be good, Grandma's coming.
+  - glosses: que viene=coming · abuela.=grandma's
+- `73c41fc3` cualquier-cosa-avisame
+  - Estimada Marta, te escribo por el pago del alquiler.
+  - Dear Marta, I'm writing to you about the rent payment.
+  - glosses: Marta,=Marta
+- `83d0d9fe` cualquier-cosa-avisame
+  - Estimada Marta, te adjunto el DNI; desde ya, gracias.
+  - Dear Marta, I'm attaching my ID; thanks in advance.
+  - glosses: Marta,=Marta · te=∅
+- `0886554b` te-reenvio-el-archivo
+  - Todavía tengo pendiente el mail de la contadora.
+  - I still have to answer the accountant's email.
+  - glosses: pendiente=to answer · contadora.=accountant's
+- `09dd2d46` te-reenvio-el-archivo
+  - Te reenvío el mail de Juan.
+  - I'm forwarding you Juan's email.
+  - glosses: Juan.=Juan's
+- `211d97e3` te-reenvio-el-archivo
+  - Acá tenés el link.
+  - Here's the link.
+  - glosses: Acá=here's · tenés=here's
+- `4265c7bc` te-reenvio-el-archivo
+  - ¿Quién está en copia?
+  - Who's cc'd?
+  - glosses: ¿Quién=who's · está=who's
+- `61b11a6c` te-reenvio-el-archivo
+  - ¿Cómo se llama el archivo?
+  - What's the file called?
+  - glosses: ¿Cómo=what's
+- `ad7bb6e2` te-reenvio-el-archivo
+  - Revisá los archivos de ayer.
+  - Check yesterday's files.
+  - glosses: ayer.=yesterday's
+- `ed8d07b3` te-reenvio-el-archivo
+  - Lucía, reenviame el mail de ayer, que lo borré.
+  - Lucía, forward me yesterday's email, I deleted it.
+  - glosses: ayer,=yesterday's
+- `6c7369ff` me-la-jugue
+  - ¿Y a la larga qué conviene?
+  - And in the long run, what's better?
+  - glosses: qué=what's
+- `75f039d9` me-la-jugue
+  - Se la agarró con todos.
+  - He took it out on everyone.
+  - glosses: con=on
+- `b0199ff2` me-la-jugue
+  - La pifié con la dirección y llegué tarde.
+  - I got the address wrong and arrived late.
+  - glosses: La pifié=wrong
+- `15c7a6bc` practica-resulta-que
+  - La verdad, con el inglés la tenés clara.
+  - To be honest, you've got English figured out.
+  - glosses: la tenés clara.=figured out
+- `4a18be1e` practica-me-la-jugue
+  - La pifié con el horario.
+  - I got the time wrong.
+  - glosses: La pifié=wrong · con=∅
+- `9daa2001` deje-de-fumar
+  - Casi nunca manejo.
+  - I hardly ever drive.
+  - glosses: manejo.=drive
+- `b1b1741f` deje-de-fumar
+  - Solo fumo en las fiestas.
+  - I only smoke at parties.
+  - glosses: fumo=smoke
+- `b88eaf96` deje-de-fumar
+  - ¿Volvió a llover?
+  - Did it rain again?
+  - glosses: ¿Volvió a=again
+- `d0dac273` deje-de-fumar
+  - Sofi volvió a fumar.
+  - Sofi started smoking again.
+  - glosses: volvió a=again
+- `f5eb293a` deje-de-fumar
+  - Volvimos a salir.
+  - We started going out again.
+  - glosses: Volvimos a=again
+- `908aec65` estas-cambiado
+  - ¿Cómo va el laburo nuevo? Cada vez mejor.
+  - How's the new job going? Better and better.
+  - glosses: ¿Cómo=how's
+- `a7d34629` estas-cambiado
+  - El barrio mejoró mucho, ¿viste?
+  - The neighborhood got a lot better, you know?
+  - glosses: mejoró=better
+- `777771fe` practica-me-pudri
+  - ¿Dónde está Sofi? Desapareció.
+  - Where's Sofi? She disappeared.
+  - glosses: ¿Dónde=where's · está=where's
+- `f3b2b5d3` practica-me-pudri
+  - ¿Tu abuela empeoró?
+  - Did your grandma get worse?
+  - glosses: empeoró?=get worse
+- `701db24f` como-te-decia
+  - A todo esto, ¿vino Juan?
+  - By the way, did Juan come?
+  - glosses: ¿vino=come
+- `4960e235` paro-docente
+  - Mi viejo está en el gremio.
+  - My dad's in the union.
+  - glosses: viejo=dad's · está=dad's
+- `606cd689` paro-docente
+  - ¿Mañana las escuelas abren con normalidad?
+  - Are schools open as usual tomorrow?
+  - glosses: abren=open
+- `d7ed9ab7` paro-docente
+  - ¿El hospital funciona con normalidad con el paro?
+  - Is the hospital running normally during the strike?
+  - glosses: funciona=running
+- `de5c7623` paro-docente
+  - ¿El subte funciona con normalidad hoy?
+  - Is the subway running normally today?
+  - glosses: funciona=running
+- `14bf558e` fue-clausurado
+  - La pizzería de Juan fue clausurada.
+  - Juan's pizza place was closed down.
+  - glosses: Juan=Juan's
+- `a4126377` fue-clausurado
+  - El restaurante de Juan fue elegido el mejor de la ciudad.
+  - Juan's restaurant was chosen as the best in the city.
+  - glosses: Juan=Juan's
+- `8003e5a3` el-cuarto-oscuro
+  - ¿Dónde está la urna?
+  - Where's the ballot box?
+  - glosses: ¿Dónde=where's · está=where's
+- `a8df8aa0` el-cuarto-oscuro
+  - ¿Dónde está el cuarto oscuro?
+  - Where's the voting booth?
+  - glosses: ¿Dónde=where's · está=where's
+- `4e63af53` practica-el-cuarto-oscuro
+  - Todo demorado hoy.
+  - Everything's delayed today.
+  - glosses: Todo=everything's
+- `1cd14104` aparentemente
+  - ¿Cuál es la fuente?
+  - What's the source?
+  - glosses: ¿Cuál=what's
+- `507dd219` aparentemente
+  - La versión de Martín es muy distinta a la de Lucía.
+  - Martín's version is very different from Lucía's.
+  - glosses: Martín=Martín's · la de=Lucía's · Lucía.=Lucía's
+- `6ca28529` aparentemente
+  - Mi tía dice que aparentemente sube el dólar otra vez.
+  - My aunt says the dollar is apparently going up again.
+  - glosses: sube=going up
+- `c812f68e` aparentemente
+  - Mirá los titulares de hoy.
+  - Look at today's headlines.
+  - glosses: hoy.=today's
+- `8952f819` practica-me-robaron
+  - ¿Quién va a arreglar el ascensor?
+  - Who's going to fix the elevator?
+  - glosses: ¿Quién=who's
+- `0b29e77a` practica-me-afanaron
+  - Se ve que no hay nadie.
+  - Looks like nobody's here.
+  - glosses: hay=nobody's here · nadie.=nobody's
+- `142da8d3` practica-me-afanaron
+  - ¿Cuál es tu fuente?
+  - What's your source?
+  - glosses: ¿Cuál=what's
+- `553b4685` practica-me-afanaron
+  - ¿Dónde queda la comisaría?
+  - Where's the police station?
+  - glosses: ¿Dónde=where's · queda=where's
+- `798f80ee` practica-me-afanaron
+  - Algo gotea en la cocina.
+  - Something's dripping in the kitchen.
+  - glosses: Algo=something's · gotea=dripping
+- `5e1aa595` socio-del-club
+  - Los domingos la cancha del club está llena.
+  - On Sundays the club's stadium is packed.
+  - glosses: club=club's
+- `42bdb994` la-parrillada
+  - Compré medio kilo de entraña para la cena.
+  - I bought half a kilo of skirt steak for dinner.
+  - glosses: la=∅ · cena.=dinner
+- `5d113f6f` la-parrillada
+  - Nunca comí mollejas.
+  - I've never had sweetbreads.
+  - glosses: comí=had
+- `863827b4` la-parrillada
+  - ¿Comiste chinchulines alguna vez?
+  - Have you ever had grilled intestines?
+  - glosses: ¿Comiste=had
+- `958de8a3` la-parrillada
+  - ¿Qué es la entraña?
+  - What's skirt steak?
+  - glosses: ¿Qué=what's
+- `90b76813` practica-la-parrilla
+  - Yo quiero vacío.
+  - I'd like flank steak.
+  - glosses: Yo=I'd
+- `1173c45a` practica-la-parrillada
+  - ¿Todavía bailás?
+  - Do you still dance?
+  - glosses: bailás?=dance
+- `1a4011ad` practica-la-parrillada
+  - ¿Por qué nunca bailás en las fiestas de la facu?
+  - Why do you never dance at college parties?
+  - glosses: bailás=dance
+- `36e44f9f` practica-la-parrillada
+  - ¿Quién es la cantante?
+  - Who's the singer?
+  - glosses: ¿Quién=who's
+- `6051c7c8` practica-la-parrillada
+  - ¿Cuál es tu cuadro?
+  - What's your team?
+  - glosses: ¿Cuál=what's
+- `9ce2f496` practica-la-parrillada
+  - ¿Dónde queda el club?
+  - Where's the club?
+  - glosses: ¿Dónde=where's · queda=where's
+- `c6eec070` practica-la-parrillada
+  - Soy hincha de toda la vida.
+  - I'm a lifelong fan.
+  - glosses: hincha=fan
+- `fe245b6e` practica-la-parrillada
+  - ¿Quién es ese jugador?
+  - Who's that player?
+  - glosses: ¿Quién=who's
+- `3c1fd08f` lo-lindo-de-la-ciudad
+  - ¿Qué es lo feo de vivir acá?
+  - What's the bad part about living here?
+  - glosses: ¿Qué=what's
+- `7fa7ac93` lo-lindo-de-la-ciudad
+  - ¿Qué es lo más difícil de vivir acá?
+  - What's the hardest thing about living here?
+  - glosses: ¿Qué=what's
+- `fbb7313a` lo-lindo-de-la-ciudad
+  - ¿Qué es lo lindo del barrio?
+  - What's the nice thing about the neighborhood?
+  - glosses: ¿Qué=what's
+- `f92ddb17` no-es-que-no-me-guste
+  - No es que no me caiga bien.
+  - It's not that I don't like her.
+  - glosses: bien.=like
+- `81ba97f7` si-hubieras-estudiado
+  - Vos sabrías qué hacer.
+  - You'd know what to do.
+  - glosses: Vos=you'd
+- `13be2bd9` practica-me-hubiera-gustado
+  - Vos serías un cocinero increíble.
+  - You'd be an amazing cook.
+  - glosses: Vos=you'd
+- `4e1d9f44` practica-me-hubiera-gustado
+  - Ojalá le caiga bien a tu mamá.
+  - I hope your mom likes him.
+  - glosses: le=∅ · caiga=likes him · bien=likes
+- `8d644247` practica-me-hubiera-gustado
+  - Ojalá te caiga bien Martín.
+  - I hope you like Martín.
+  - glosses: bien=like
+- `bb8dc2f6` practica-me-hubiera-gustado
+  - ¿Dónde está el error?
+  - Where's the mistake?
+  - glosses: ¿Dónde=where's · está=where's
+- `0e1245e5` hace-fresquito
+  - Compré una remera igualita a la de Juan.
+  - I bought a T-shirt just like Juan's.
+  - glosses: la de=Juan's
+- `0016a872` lo-que-paso-fue-que
+  - Acá está lo tuyo.
+  - Here's yours.
+  - glosses: Acá=here's
+- `2dddccca` lo-que-paso-fue-que
+  - Yo pago lo mío y vos lo tuyo.
+  - I'll pay for mine and you pay for yours.
+  - glosses: Yo=I'll
+- `2a0eec70` practica-lo-que-pasa
+  - Eso es lo raro.
+  - That's the weird thing.
+  - glosses: Eso=that's
+- `8b96501f` practica-lo-que-pasa
+  - ¿Qué es lo bueno del barrio?
+  - What's the good thing about the neighborhood?
+  - glosses: ¿Qué=what's
+- `e73e4f43` practica-lo-que-pasa
+  - Lo bueno es eso.
+  - That's the good thing.
+  - glosses: eso.=that's
+- `fde3a8d1` practica-lo-que-pasa
+  - Llegaste, eso es lo importante.
+  - You got here, that's what matters.
+  - glosses: eso=that's
+- `83036019` practica-cada-loco-con-su-tema
+  - Hace fresquito, pero hay solcito.
+  - It's chilly, but the sun's out.
+  - glosses: hay=sun's out · solcito.=sun's
+- `41ced430` practica-cada-loco-con-su-tema
+  - Hablando del rey de Roma, llegó Juan.
+  - Speak of the devil, Juan's here.
+  - glosses: llegó=Juan's here · Juan.=Juan's
+- `49d71a99` practica-cada-loco-con-su-tema
+  - Quiero aclarar el malentendido de ayer.
+  - I want to clear up yesterday's misunderstanding.
+  - glosses: ayer.=yesterday's
+- `4f209d24` practica-cada-loco-con-su-tema
+  - Tomá, el mate está calentito.
+  - Here, the mate's nice and hot.
+  - glosses: mate=mate's · está=mate's
+- `5a32fe84` practica-cada-loco-con-su-tema
+  - Pedí lo que sea, yo pago.
+  - Order whatever you want, I'm paying.
+  - glosses: yo=I'm
+- `dfca5f8b` practica-cada-loco-con-su-tema
+  - ¿Qué es esa cosita?
+  - What's that little thing?
+  - glosses: ¿Qué=what's
+- `e294f46d` practica-cada-loco-con-su-tema
+  - Hablando del rey de Roma, me llama Sofi.
+  - Speak of the devil, Sofi's calling me.
+  - glosses: Sofi.=Sofi's
+- `f3135608` practica-cada-loco-con-su-tema
+  - Tu perro es igualito al de Juan.
+  - Your dog looks just like Juan's.
+  - glosses: Juan.=Juan's
+- `f5a36f28` practica-cada-loco-con-su-tema
+  - ¿Qué es lo tuyo?
+  - What's your thing?
+  - glosses: ¿Qué=what's
+- `63106ba5` ese-chabon
+  - Ese chabón es un groso, nos invitó unas birras.
+  - That guy's a legend, he bought us some beers.
+  - glosses: chabón=guy's
+- `75397fb2` ese-chabon
+  - Todo bien con el chabón, pero es medio pesado.
+  - The guy's fine, but he's kind of annoying.
+  - glosses: chabón,=guy's
+- `147ecea1` estoy-al-horno
+  - Después de las fiestas siempre tengo un bajón.
+  - After the holidays I always feel down.
+  - glosses: tengo=feel
+- `f5747084` practica-cuanto-mas
+  - Yo pago la birra.
+  - I'll pay for the beer.
+  - glosses: Yo=I'll
+- `8dfcd478` practica-me-mori-de-risa
+  - ¿Por qué tenés ese bajón?
+  - Why are you so down?
+  - glosses: ese=so
+- `e4888c1e` practica-me-mori-de-risa
+  - Vos te reís, pero yo estoy al horno.
+  - You're laughing, but I'm in deep trouble.
+  - glosses: Vos=you're · yo=I'm
+- `8ab141bf` no-te-lo-tomes-a-mal
+  - Con todo respeto, eso es cualquiera.
+  - With all due respect, that's nonsense.
+  - glosses: eso=that's
+- `25032c02` se-merece-el-ascenso
+  - ¿Cuál es tu objetivo?
+  - What's your goal?
+  - glosses: ¿Cuál=what's
+- `e762c17e` se-merece-el-ascenso
+  - El proyecto es mi responsabilidad, así que lo termino yo.
+  - The project is my responsibility, so I'll finish it.
+  - glosses: yo.=I'll
+- `c67fa151` te-convido-un-mate
+  - Yo cebo y vos me pasás los bizcochitos.
+  - I'll pour and you pass the crackers.
+  - glosses: Yo=I'll
+- `de4e001c` te-convido-un-mate
+  - ¿Qué hay de merienda?
+  - What's for the afternoon snack?
+  - glosses: ¿Qué=what's
+- `326333a3` se-instalaron-en-la-boca
+  - ¿Qué es un conventillo?
+  - What's a conventillo?
+  - glosses: ¿Qué=what's
+- `7c8a4df2` practica-quien-ceba
+  - Esta ronda la pago yo.
+  - I'll pay for this round.
+  - glosses: yo.=I'll
+- `476bbef0` practica-se-instalaron
+  - Tomamos mate al lado del lago toda la tarde.
+  - We drank mate by the lake all afternoon.
+  - glosses: lado=by
+- `17479e93` caiste
+  - ¿Cuál es tu apodo?
+  - What's your nickname?
+  - glosses: ¿Cuál=what's
+- `2c77e7f7` se-recibio
+  - ¡Por fin se comprometieron!
+  - They finally got engaged!
+  - glosses: se comprometieron!=got engaged
+- `587d2283` se-recibio
+  - Por fin me recibí.
+  - I finally graduated.
+  - glosses: me recibí.=graduated
+- `852d0c81` se-recibio
+  - ¿Cómo se llama la nena?
+  - What's the little girl's name?
+  - glosses: ¿Cómo=what's · se llama=name
+- `8bba7559` se-recibio
+  - Lo siento mucho, te acompaño en el sentimiento.
+  - I'm so sorry, you have my condolences.
+  - glosses: Lo siento=sorry
+- `c955af6a` se-recibio
+  - ¿Cuándo se recibió tu hermana?
+  - When did your sister graduate?
+  - glosses: se recibió=graduate
+- `ec64a334` se-recibio
+  - ¡Por fin se recibió!
+  - She finally graduated!
+  - glosses: se recibió!=graduated
+- `1bf916af` se-emociono
+  - Se emocionó tanto que me quiso abrazar.
+  - She got so emotional that she wanted to hug me.
+  - glosses: Se emocionó=she got so emotional
+- `f189b5a0` practica-como-estuvo
+  - En el recital la pasé bárbaro, pero Juan no.
+  - I had a great time at the concert, but Juan didn't.
+  - glosses: la pasé=I had a great time
+- `068179ac` ese-chabon
+  - Esa inmobiliaria es re trucha.
+  - That real estate agency is really dishonest.
+  - glosses: trucha.=dishonest
+- `94fa8663` me-hubiera-gustado
+  - No podemos volver atrás, así que mejor seguimos.
+  - We can't go back, so we'd better keep going.
+  - glosses: volver atrás,=go back
+- `9d8b1552` como-dice-el-dicho
+  - ¿Qué significa no hay mal que por bien no venga?
+  - What does "no hay mal que por bien no venga" mean?
+  - glosses: no hay mal que por bien no venga?=no hay mal que por bien no venga
+- `d22bb7e5` a-la-vuelta
+  - El almacén está a la vuelta, al lado del banco.
+  - The store is around the corner, next to the bank.
+  - glosses: al=next to · lado=next to · del=the
+- `fe441f15` a-la-vuelta
+  - El kiosco está en la vereda de enfrente.
+  - The kiosk is across the street.
+  - glosses: vereda=across the street
+- `1a6836f7` comi-y-sali
+  - ¿Conocés a la novia de Martín?
+  - Do you know Martín's girlfriend?
+  - glosses: la=∅
+- `b765e3b2` comi-y-sali
+  - Aprendí a bailar el año pasado.
+  - I learned to dance last year.
+  - glosses: el=∅
+- `eee74aca` comi-y-sali
+  - La semana pasada conocí a la profesora nueva.
+  - Last week I met the new teacher.
+  - glosses: La=∅
+- `67661df6` me-encantaba
+  - ¿Te gustaba la primaria?
+  - Did you like elementary school?
+  - glosses: la=∅
+- `1c443b44` me-das-una-mano
+  - ¿La planta va en el balcón?
+  - Does the plant go on the balcony?
+  - glosses: va=go
+- `a90f1925` cuando-llegues
+  - Cuando pueda, te devuelvo la plata.
+  - When I can, I'll give you back the money.
+  - glosses: devuelvo=I'll give you back
+- `9a35541b` practica-es-un-afano
+  - No le creo nada, es un chanta.
+  - I don't believe a word he says, he's a con artist.
+  - glosses: le=∅
+- `aa46518d` queria-que-vinieras
+  - Te pedí que me avisaras antes.
+  - I asked you to let me know beforehand.
+  - glosses: avisaras=to let me know
+- `ec319406` queria-que-vinieras
+  - Te pedí que me avisaras por mensaje, no por audio.
+  - I asked you to let me know by text, not by voice message.
+  - glosses: avisaras=to let me know
+- `ee64a979` practica-a-la-mesa
+  - Con tu suegra te hacés el simpático, ¿no?
+  - You act all nice with your mother-in-law, huh?
+  - glosses: te hacés=you act
+- `f35f42dc` practica-a-la-mesa
+  - El de al lado pone música a full.
+  - The guy next door plays his music really loud.
+  - glosses: pone=plays
+- `8433c291` practica-se-alquila
+  - ¿Ese depto se alquila?
+  - Is that apartment for rent?
+  - glosses: se alquila?=for rent
+- `bc8d7476` practica-se-alquila
+  - ¿Esta casa se vende?
+  - Is this house for sale?
+  - glosses: se vende?=for sale
+- `64ab08d7` practica-no-lo-aguanto
+  - Con Juan nos hicimos amigos en un asado.
+  - Juan and I became friends at a barbecue.
+  - glosses: nos hicimos=became
+- `0b56da4c` te-reenvio-el-archivo
+  - Perdón, revisé mal y me equivoqué de archivo.
+  - Sorry, I didn't check properly and got the wrong file.
+  - glosses: revisé=I didn't check properly · mal=I didn't check properly
+- `015eb558` deje-de-fumar
+  - Fumo poco.
+  - I don't smoke much.
+  - glosses: Fumo=I don't smoke much · poco.=I don't smoke much
+- `f0a5776a` practica-me-pudri
+  - ¿En serio Juan volvió a fumar?
+  - Did Juan really start smoking again?
+  - glosses: volvió a=start smoking again
+- `99ed6383` practica-me-pudri
+  - ¿Volvió a llover?
+  - Did it start raining again?
+  - glosses: ¿Volvió a=did it start raining again
+- `14570f37` las-elecciones
+  - ¿Por qué no votaste?
+  - Why didn't you vote?
+  - glosses: votaste?=didn't you vote
+- `fb4b2fb8` practica-el-cuarto-oscuro
+  - Me fijo en el padrón y te aviso.
+  - I'll check the voter roll and let you know.
+  - glosses: aviso.=let you know
+- `f1d1d7b5` me-afanaron
+  - A mi abuela le hicieron el cuento del tío.
+  - Someone scammed my grandma.
+  - glosses: A=∅ · el=∅ · cuento del tío.=scammed
+- `be24e3f8` me-afanaron
+  - Me hicieron el cuento del tío.
+  - They scammed me.
+  - glosses: Me=me · el=∅ · cuento del tío.=scammed
+- `4cd50223` si-hubieras-estudiado
+  - ¿Dónde estaría Lucía a esta altura?
+  - Where would Lucía be by now?
+  - glosses: estaría=would Lucía be
+- `c9af9f4d` practica-me-hubiera-gustado
+  - Si te hubieras mudado, ¿estarías mejor?
+  - If you had moved, would you be better off?
+  - glosses: Si=if · te=∅
+- `87c69714` practica-me-mori-de-risa
+  - Cuando se van mis viejos, me da un bajón.
+  - When my parents leave, I feel really down.
+  - glosses: me da=I feel · bajón.=really down

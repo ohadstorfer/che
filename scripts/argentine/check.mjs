@@ -47,6 +47,8 @@ export function checkWord(w) {
   need(typeof w.vulgar === 'boolean', 'vulgar must be true/false');
   need((w.theme === 'puteadas') === (w.vulgar === true), 'vulgar words go in puteadas, and only they do');
   need([1, 2, 3].includes(w.level), 'level must be 1, 2 or 3');
+  // How soon it comes within its level: 1 said every day · 2 very common · 3 common. Absent: after those.
+  if (w.rank !== undefined) need([1, 2, 3].includes(w.rank), 'rank must be 1, 2 or 3 (or left out)');
   return errs;
 }
 

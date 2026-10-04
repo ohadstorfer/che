@@ -113,6 +113,7 @@ units:
       - lemma: "jugo"
         pos: "noun"
         en: "juice"
+
   - ordinal: 2
     slug: "otro-cafe"
     title: "Order something to eat"
@@ -132,6 +133,8 @@ units:
       - title: "Un or una"
         body: "The little word matches the thing, not you: **un** té, **un** helado, but **una** torta,
           **una** pizza. Learn each new word with its *un* or *una* and you'll never have to guess."
+      - title: "Tostadas, un tostado"
+        body: "In a café nobody orders one slice: ask for **tostadas** — *Un café y tostadas, por favor.* **Un tostado** is something else: a toasted ham-and-cheese sandwich, the classic café lunch. *Una tostada* is one slice, at home: *¿Otra tostada?*"
     words:
       - lemma: "otro"
         pos: "det"
@@ -195,6 +198,11 @@ units:
       - lemma: "comida"
         pos: "noun"
         en: "the food, a meal"
+      - lemma: "tostado"
+        pos: "noun"
+        en: "toasted sandwich"
+        note: "a toasted ham-and-cheese sandwich, the classic café order"
+
   - ordinal: 3
     slug: "hola-che"
     title: "Greet people"
@@ -214,6 +222,8 @@ units:
       - title: "Soy"
         body: "To say who you are, use **soy**: *Soy Sofi.* One word carries \"I am\" — Spanish has no
           separate word for \"I\" here."
+      - title: "¿Cómo andás?"
+        body: "**¿Cómo andás?** is the everyday porteño *how are you?* — you will hear it all day. The answer is short: *Bien.* or *Todo bien.* **¿Qué onda?** gets the same answer: *¿Qué onda? — Todo bien.*"
     words:
       - lemma: "hola"
         pos: "interj"
@@ -278,6 +288,47 @@ units:
       - lemma: "Lucía"
         pos: "propn"
         en: "Lucía"
+      - lemma: "Nico"
+        pos: "propn"
+        en: "Nico"
+      - lemma: "Fede"
+        pos: "propn"
+        en: "Fede"
+      - lemma: "Mati"
+        pos: "propn"
+        en: "Mati"
+      - lemma: "Pablo"
+        pos: "propn"
+        en: "Pablo"
+      - lemma: "Diego"
+        pos: "propn"
+        en: "Diego"
+      - lemma: "Santi"
+        pos: "propn"
+        en: "Santi"
+      - lemma: "Cami"
+        pos: "propn"
+        en: "Cami"
+      - lemma: "Juli"
+        pos: "propn"
+        en: "Juli"
+      - lemma: "Mica"
+        pos: "propn"
+        en: "Mica"
+      - lemma: "Belén"
+        pos: "propn"
+        en: "Belén"
+      - lemma: "Rocío"
+        pos: "propn"
+        en: "Rocío"
+      - lemma: "Ana"
+        pos: "propn"
+        en: "Ana"
+      - lemma: "cómo andás"
+        pos: "phrase"
+        en: "how are you doing"
+        note: "the everyday porteño greeting: ¿Cómo andás?"
+
   - ordinal: 4
     slug: "buen-dia"
     title: "Say hello and goodbye"
@@ -332,6 +383,7 @@ units:
         en: "perfect, all set"
         note: "¡Joya! — great, sorted"
         register: "informal"
+
   - ordinal: 5
     slug: "vos-y-sos"
     title: "Talk to someone as vos"
@@ -357,6 +409,7 @@ units:
           - form: "sos"
             en: "you are"
             f: "2sg.pres.ind.vos"
+
   - ordinal: 6
     slug: "sos-turista"
     title: "Find the person you're meeting"
@@ -379,6 +432,9 @@ units:
       - title: "Bienvenido, bienvenida"
         body: "Someone new in town gets a **¡bienvenido!** — or **¡bienvenida!** for a woman. The end of
           the word matches the person."
+      - title: "Disculpá, permiso"
+        body: "**Disculpá** gets a stranger's attention: *Disculpá, ¿sos Martín?* **Permiso** is what
+          you say to get past someone, on a full bus or in a doorway."
     words:
       - lemma: "perdón"
         pos: "interj"
@@ -417,6 +473,21 @@ units:
             f: "m.sg"
           - form: "extranjera"
             f: "f.sg"
+      # Moved up from usted, which keeps "disculpame".
+      - lemma: "disculpar"
+        pos: "verb"
+        en: "to excuse"
+        forms:
+          - form: "disculpá"
+            en: "excuse me"
+            f: "2sg.imp.vos"
+      # What you say to get past. "permiso" the noun (permission) is
+      # mis-viejos-querian's, and "con permiso" is como-no-dona-rosa's.
+      - lemma: "permiso"
+        pos: "interj"
+        en: "let me through"
+        note: "said to get past someone, where English says excuse me"
+
   - ordinal: 7
     slug: "practica-hola"
     title: "Practice: first meetings"
@@ -449,6 +520,7 @@ units:
       - "sos"
       - "soy"
       - "medialuna"
+
   - ordinal: 8
     slug: "como-te-llamas"
     title: "Ask someone's name"
@@ -499,13 +571,15 @@ units:
       - lemma: "cómo"
         pos: "adv"
         en: "how"
-      # "qué" lives in unit 15 ("¿Qué hacés?"), not here: at this point the
-      # course has no verb for it to question, so every sentence it can appear
-      # in is a bare "¿Qué?" asking for a repeat — which is curt in Buenos
-      # Aires. "¿Cómo?", taught just above, is the neutral way to ask that.
+      # "qué" is not here: at this point the course has no verb for it to
+      # question, so every sentence it can appear in is a bare "¿Qué?" asking
+      # for a repeat — which is curt in Buenos Aires. "¿Cómo?", taught just
+      # above, is the neutral way to ask that. It arrives in the next unit,
+      # with "¿qué significa?".
       - lemma: "mucho gusto"
         pos: "phrase"
         en: "nice to meet you"
+
   - ordinal: 9
     slug: "encantado"
     title: "Get to know someone"
@@ -519,9 +593,7 @@ units:
       en: "My name is Martín, nice to meet you. Do you speak English?"
     tips:
       - title: "Encantado, encantada"
-        body: "**Encantado** — *delighted* — is what you say when you meet someone, and it matches
-          whoever is speaking: a man says *encantado*, a woman **encantada**. The reply: **igualmente**
-          — *likewise*."
+        body: "**Encantado** — *delighted* — is what you say when you meet someone, and it matches whoever is speaking: a man says *encantado*, a woman **encantada**. The reply: **igualmente** — *likewise*. Day to day, most porteños just say **un gusto** or *mucho gusto*: *Soy Sofi.* — *Un gusto, Sofi.*"
       - title: "-o for me, -ás or -és for vos"
         body: "Other verbs work like *me llamo, te llamás*: **hablo**, **¿hablás?** — **entiendo**,
           **¿entendés?** The *I* form ends in **-o**; the vos form is stressed on the end. Lost?
@@ -529,6 +601,11 @@ units:
       - title: "Nombre y apellido"
         body: "At any counter in Buenos Aires you'll hear *nombre y apellido, por favor* — your first
           name and your surname."
+      - title: "When you get lost"
+        body: "Stuck on a word: **¿cómo se dice…?** — *how do you say…?* — and **¿qué significa?** —
+          *what does it mean?* Too fast: **¿me repetís?** or **más despacio, por favor**. **No
+          entendí** is *I didn't get that*. And the line that buys you patience: **hablo un poco de
+          castellano** — Argentines call the language *castellano*."
     words:
       - lemma: "nombre"
         pos: "noun"
@@ -571,6 +648,11 @@ units:
           - form: "entendés"
             en: "you understand"
             f: "2sg.pres.ind.vos"
+          # A past form, learnt whole in "no entendí": the preterite starts in
+          # section 4, and naci-en teaches "entendiste".
+          - form: "entendí"
+            en: "I understood, I got it"
+            f: "1sg.pret.ind"
       - lemma: "despacio"
         pos: "adv"
         en: "slowly"
@@ -587,6 +669,48 @@ units:
           - form: "sabe"
             en: "knows (he/she knows)"
             f: "3sg.pres.ind"
+      # The survival phrases, moved up from the units that taught them (que-haces,
+      # me-traes-un-cafe, de-donde-sos, que-significa), so a beginner can ask for
+      # help from the first week.
+      - lemma: "cómo se dice"
+        pos: "phrase"
+        en: "how do you say"
+      - lemma: "qué"
+        pos: "pron"
+        en: "what"
+      - lemma: "significar"
+        pos: "verb"
+        en: "to mean"
+        forms:
+          - form: "significa"
+            en: "it means"
+            f: "3sg.pres.ind"
+      - lemma: "repetir"
+        pos: "verb"
+        en: "to repeat"
+        forms:
+          - form: "repetís"
+            en: "you repeat"
+            f: "2sg.pres.ind.vos"
+      - lemma: "más"
+        pos: "adv"
+        en: "more"
+      - lemma: "poco"
+        pos: "adv"
+        en: "a little"
+      - lemma: "de"
+        pos: "prep"
+        en: "from, of"
+        glue: true
+      - lemma: "castellano"
+        pos: "noun"
+        en: "Spanish"
+        note: "Argentines say castellano, not español"
+      - lemma: "un gusto"
+        pos: "phrase"
+        en: "pleased to meet you"
+        note: "what most porteños say when they meet someone"
+
   - ordinal: 10
     slug: "de-donde-sos"
     title: "Say where you're from"
@@ -601,10 +725,6 @@ units:
       - title: "Ser de"
         body: "To say where someone is from, put **de** after the verb: *Soy de Rosario.* *¿De dónde sos?*"
     words:
-      - lemma: "de"
-        pos: "prep"
-        en: "from, of"
-        glue: true
       - lemma: "dónde"
         pos: "adv"
         en: "where"
@@ -629,6 +749,7 @@ units:
       - lemma: "Montevideo"
         pos: "propn"
         en: "Montevideo"
+
   - ordinal: 11
     slug: "soy-de-zona-norte"
     title: "Say which part you're from"
@@ -696,6 +817,28 @@ units:
       - lemma: "La Plata"
         pos: "propn"
         en: "La Plata"
+      - lemma: "Canadá"
+        pos: "propn"
+        en: "Canada"
+      - lemma: "Australia"
+        pos: "propn"
+        en: "Australia"
+      - lemma: "Francia"
+        pos: "propn"
+        en: "France"
+      - lemma: "Alemania"
+        pos: "propn"
+        en: "Germany"
+      - lemma: "México"
+        pos: "propn"
+        en: "Mexico"
+      - lemma: "España"
+        pos: "propn"
+        en: "Spain"
+      - lemma: "Italia"
+        pos: "propn"
+        en: "Italy"
+
   - ordinal: 12
     slug: "el-y-ella"
     title: "Talk about someone else"
@@ -733,6 +876,7 @@ units:
       - lemma: "pero"
         pos: "conj"
         en: "but"
+
   - ordinal: 13
     slug: "quien-es"
     title: "Point people out"
@@ -821,6 +965,7 @@ units:
       - lemma: "tampoco"
         pos: "adv"
         en: "neither, not either"
+
   - ordinal: 14
     slug: "practica-quien-es"
     title: "Practice: who's who"
@@ -853,6 +998,7 @@ units:
       - "perdón"
       - "turista"
       - "buen día"
+
   - ordinal: 15
     slug: "argentino-argentina"
     title: "Say what people are"
@@ -911,6 +1057,7 @@ units:
             f: "m.sg"
           - form: "porteña"
             f: "f.sg"
+
   - ordinal: 16
     slug: "de-todos-lados"
     title: "Meet people from everywhere"
@@ -1023,6 +1170,7 @@ units:
             f: "m.sg"
           - form: "peruana"
             f: "f.sg"
+
   - ordinal: 17
     slug: "la-familia"
     title: "Introduce your family"
@@ -1110,6 +1258,7 @@ units:
       - lemma: "perro"
         pos: "noun"
         en: "dog"
+
   - ordinal: 18
     slug: "tios-y-primos"
     title: "Talk about the whole family"
@@ -1204,6 +1353,7 @@ units:
           - form: "gata"
             en: "cat (female)"
             f: "f.sg"
+
   - ordinal: 19
     slug: "cuantos-anos-tenes"
     title: "Say your age"
@@ -1316,6 +1466,7 @@ units:
       - lemma: "veinte"
         pos: "num"
         en: "twenty"
+
   - ordinal: 20
     slug: "tengo-hambre"
     title: "Say you're hungry, cold or sleepy"
@@ -1366,6 +1517,7 @@ units:
       - lemma: "tiempo"
         pos: "noun"
         en: "time"
+
   - ordinal: 21
     slug: "practica-tengo-hambre"
     title: "Practice: people and how they are"
@@ -1398,6 +1550,7 @@ units:
       - "tenés"
       - "quién"
       - "se llama"
+
   - ordinal: 22
     slug: "alfajores-y-chicles"
     title: "Buy snacks by the dozen"
@@ -1512,6 +1665,7 @@ units:
           - form: "gatos"
             en: "cats"
             f: "m.pl"
+
   - ordinal: 23
     slug: "en-el-kiosco"
     title: "Buy at the kiosco"
@@ -1556,9 +1710,6 @@ units:
           - form: "empanadas"
             en: "empanadas"
             f: "f.pl"
-      - lemma: "tostado"
-        pos: "noun"
-        en: "toasted sandwich"
       - lemma: "medialuna"
         pos: "noun"
         forms:
@@ -1599,3 +1750,154 @@ units:
             en: "parents"
             note: "informal and affectionate"
             f: "m.pl"
+
+  - ordinal: 24
+    slug: "cuanto-sale"
+    title: "Ask what it costs"
+    summary: "¿Cuánto sale?"
+    grammar:
+      - "cuanto-sale"
+      - "costar.pres.3"
+      - "numeros.100-1000"
+    register_max: "informal"
+    sample:
+      es: "¿Cuánto sale un café? Mil quinientos mangos."
+      en: "How much is a coffee? Fifteen hundred pesos."
+    tips:
+      - title: "¿Cuánto sale?"
+        body: "**¿Cuánto sale?** is the everyday Argentine way to ask a price — *¿cuánto cuesta?* works too.
+          For more than one thing: **¿cuánto salen?** **Mangos** is slang for pesos."
+    words:
+      - lemma: "cuánto"
+        pos: "adj"
+        forms:
+          - form: "cuánto"
+            en: "how much"
+            f: "m.sg"
+      - lemma: "salir"
+        pos: "verb"
+        en: "to cost; to go out, to leave"
+        forms:
+          - form: "sale"
+            en: "costs; goes out"
+            f: "3sg.pres.ind"
+          - form: "salen"
+            en: "cost; they go out"
+            f: "3pl.pres.ind"
+      - lemma: "costar"
+        pos: "verb"
+        en: "to cost"
+        forms:
+          - form: "cuesta"
+            en: "costs"
+            f: "3sg.pres.ind"
+          - form: "cuestan"
+            en: "cost (several things)"
+            f: "3pl.pres.ind"
+      - lemma: "pagar"
+        pos: "verb"
+        en: "to pay"
+        forms:
+          - form: "pago"
+            en: "I pay"
+            f: "1sg.pres.ind"
+          - form: "pagás"
+            en: "you pay"
+            f: "2sg.pres.ind.vos"
+          - form: "paga"
+            en: "pays (he/she pays)"
+            f: "3sg.pres.ind"
+          - form: "pagar"
+            en: "to pay"
+            f: "inf"
+      - lemma: "comprar"
+        pos: "verb"
+        en: "to buy"
+        forms:
+          - form: "compro"
+            en: "I buy"
+            f: "1sg.pres.ind"
+          - form: "comprás"
+            en: "you buy"
+            f: "2sg.pres.ind.vos"
+          - form: "compra"
+            en: "buys (he/she buys)"
+            f: "3sg.pres.ind"
+          - form: "comprar"
+            en: "to buy"
+            f: "inf"
+
+      - lemma: "plata"
+        pos: "noun"
+        en: "money"
+      - lemma: "mango"
+        pos: "noun"
+        en: "peso, buck"
+        register: "informal"
+        forms:
+          - form: "mango"
+            f: "m.sg"
+          - form: "mangos"
+            en: "pesos, bucks"
+            f: "m.pl"
+      - lemma: "peso"
+        pos: "noun"
+        en: "peso"
+        forms:
+          - form: "peso"
+            f: "m.sg"
+          - form: "pesos"
+            en: "pesos"
+            f: "m.pl"
+      - lemma: "caro"
+        pos: "adj"
+        en: "expensive"
+        forms:
+          - form: "caro"
+            f: "m.sg"
+          - form: "cara"
+            f: "f.sg"
+      - lemma: "barato"
+        pos: "adj"
+        en: "cheap"
+        forms:
+          - form: "barato"
+            f: "m.sg"
+          - form: "barata"
+            f: "f.sg"
+      - lemma: "efectivo"
+        pos: "noun"
+        en: "cash"
+      - lemma: "tarjeta"
+        pos: "noun"
+        en: "card"
+      - lemma: "ciento"
+        pos: "num"
+        en: "hundred (in 101–199)"
+      - lemma: "doscientos"
+        pos: "num"
+        en: "two hundred"
+      - lemma: "trescientos"
+        pos: "num"
+        en: "three hundred"
+      - lemma: "cuatrocientos"
+        pos: "num"
+        en: "four hundred"
+      - lemma: "quinientos"
+        pos: "num"
+        en: "five hundred"
+      - lemma: "seiscientos"
+        pos: "num"
+        en: "six hundred"
+      - lemma: "setecientos"
+        pos: "num"
+        en: "seven hundred"
+      - lemma: "ochocientos"
+        pos: "num"
+        en: "eight hundred"
+      - lemma: "novecientos"
+        pos: "num"
+        en: "nine hundred"
+      - lemma: "mil"
+        pos: "num"
+        en: "a thousand"
