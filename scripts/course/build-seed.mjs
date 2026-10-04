@@ -15,7 +15,7 @@ import { writeFileSync } from 'node:fs';
 import { queryLinked } from './lib/db.mjs';
 import { buildRows } from './lib/rows.mjs';
 import { describeDiff, planSeed } from './lib/seed.mjs';
-import { insertNew, jsonb, textArray, uuidArray } from './lib/sql.mjs';
+import { insertNew, jsonb, q, textArray, uuidArray } from './lib/sql.mjs';
 import { loadCourseRows } from './lib/vocabulary.mjs';
 
 const args = process.argv.slice(2);
@@ -107,6 +107,12 @@ const sql = [
     question: (v) => (v == null ? 'null' : jsonb(v)),
   }),
   insertNew('unit_phrases', insert.unit_phrases, ['unit_id', 'ordinal', 'sentence_id']),
+  // A unit added in the middle of the road is done for whoever is already past
+  // it. Only published lessons are on the road: a unit seeded as a draft needs
+  // the same call from whatever publishes it.
+  insert.lessons.length
+    ? `-- Nobody already past these is sent back to them.\nselect public.credit_fresh_lessons(array[\n  ${insert.lessons.map((l) => q(l.id)).join(',\n  ')}\n]::uuid[]);\n`
+    : '',
 ].join('\n');
 
 writeFileSync(out, sql);

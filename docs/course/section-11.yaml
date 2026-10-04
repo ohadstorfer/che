@@ -45,6 +45,8 @@ units:
           - form: "vinieras"
             en: "(that) you came"
             f: "2sg.impf.subj.vos.irregular"
+            note: "In fast speech you will also hear 'quería que vengas'. Both are understood;
+              'vinieras' is the careful form."
           - form: "viniera"
             en: "(that) I came, (that) he came"
             f: "sg.impf.subj.irregular"
@@ -100,8 +102,9 @@ units:
           *volvieron* → **volviera**, *dijeron* → **dijera**. With vos add an **-s**: **estudiaras,
           dijeras, fueras**. For *ellos*: **querían que vinieran todos**."
       - title: "Pedir permiso"
-        body: "A porteño family can be **estricta**: *para salir tenía que pedir **permiso***, and my mum
-          **quería que volviera temprano** — which never happened."
+        body: "**Estricto, estricta** is *strict*. *Para salir tenía que pedir **permiso*** — *to go out I
+          had to ask permission*. *Mi vieja **quería que volviera** temprano* — *my mom wanted me
+          back early*."
     words:
       - lemma: "querer"
         pos: "verb"
@@ -162,7 +165,9 @@ units:
             f: "3pl.impf.subj.irregular"
       - lemma: "carrera"
         pos: "noun"
-        en: "degree (course), career"
+        en: "university degree, course of study"
+        note: "False friend: carrera usually means the degree you study at university, not your job
+          career."
       - lemma: "estricto"
         pos: "adj"
         en: "strict"
@@ -174,6 +179,7 @@ units:
       - lemma: "permiso"
         pos: "noun"
         en: "permission"
+        note: "Say \"permiso\" to get past people or when entering a room or someone's home."
   - ordinal: 3
     slug: "aunque-llueva"
     title: "Say even if and even though"
@@ -192,8 +198,8 @@ units:
           it rains or not. A fact takes the normal verb; a maybe takes the subjunctive."
       - title: "Igual, a pesar de"
         body: "Porteños close the thought with **igual** — *anyway*: *aunque esté cansada, voy igual*;
-          *gracias igual* — *thanks anyway*. **De todos modos** says the same thing but sounds
-          written. **A pesar de** takes a noun or an infinitive: *a pesar del frío*."
+          *gracias igual* — *thanks anyway*. **De todos modos** says the same but sounds written:
+          *salí de todos modos*. **A pesar de** takes a noun or an infinitive: *a pesar del frío*."
     words:
       - lemma: "aunque"
         pos: "conj"
@@ -225,7 +231,7 @@ units:
         en: "effort"
       - lemma: "cansarse"
         pos: "verb"
-        en: "to get tired"
+        en: "to get tired, to get sick of"
         forms:
           - form: "me canso"
             en: "I get tired"
@@ -248,7 +254,7 @@ units:
       en: "Even if I don't feel like it, I still go to the gym."
     tips:
       - title: "Por más que"
-        body: "**Por más que** — *no matter how much* — is *aunque* turned up: **por más que me cueste,
+        body: "**Por más que** — *no matter how much* — is a stronger *aunque*: **por más que me cueste,
           sigo** — *however hard it is, I keep going*. A maybe takes the subjunctive, a fact
           doesn't: *por más que **entreno**, engordo* — I do train; it just doesn't show."
       - title: "Aunque sea"
@@ -256,12 +262,12 @@ units:
           tengo ganas, pero **aunque sea** un rato voy*. And the other half of it: **aunque no me dé
           el tiempo** — *even if I don't have the time*."
       - title: "Sin embargo, así y todo"
-        body: "Both start the second half: **sin embargo** — *however* — and the more spoken **así y todo**
-          — *even so*: *hice dieta; **así y todo**, engordé*."
+        body: "Both start the second half: **sin embargo** — *however*, mostly in writing or formal talk —
+          and the more spoken **así y todo** — *even so*: *hice dieta y **así y todo** engordé*."
     words:
       - lemma: "aunque sea"
         pos: "phrase"
-        en: "even if only, even just"
+        en: "at least, even just"
       - lemma: "por más que"
         pos: "phrase"
         en: "no matter how much, however much"
@@ -358,10 +364,16 @@ units:
           - form: "seguís"
             en: "you keep on, you still"
             f: "2sg.pres.ind.vos"
+      - lemma: "hace años"
+        pos: "phrase"
+        en: "for years; years ago"
+      - lemma: "hace meses"
+        pos: "phrase"
+        en: "for months; months ago"
   - ordinal: 6
     slug: "llevo-un-ano-aprendiendo"
     title: "Say how long you've been learning"
-    summary: "Llevo un año aprendiendo castellano"
+    summary: "Hace un año que aprendo castellano"
     grammar:
       - "llevar.tiempo.gerundio"
       - "hace-que"
@@ -370,7 +382,7 @@ units:
       - "volver-a"
     register_max: "informal"
     sample:
-      es: "Llevo un año aprendiendo castellano y sigo practicando."
+      es: "Hace un año que aprendo castellano y sigo practicando."
       en: "I've been learning Spanish for a year and I'm still practising."
     tips:
       - title: "¿Hace cuánto?"
@@ -411,7 +423,7 @@ units:
         pos: "verb"
         forms:
           - form: "practicando"
-            en: "practising"
+            en: "practicing"
             f: "ger"
       - lemma: "mejorar"
         pos: "verb"
@@ -445,8 +457,14 @@ units:
         pos: "verb"
         forms:
           - form: "dejaron"
-            en: "they stopped, they quit"
+            en: "they left, they stopped"
             f: "3pl.pret.ind"
+      - lemma: "hace un año"
+        pos: "phrase"
+        en: "for a year; a year ago"
+      - lemma: "hace rato"
+        pos: "phrase"
+        en: "for a while; a while ago"
   - ordinal: 7
     slug: "practica-aunque-sea"
     title: "Practice: what they wanted, no matter what, how long"
@@ -462,10 +480,12 @@ units:
     tips:
       - title: "Querían que, por más que"
         body: "**Mis viejos querían que estudiara** — the wish is in the past, so the second verb is too.
-          **Por más que me cueste** — however hard it is: a maybe takes the subjunctive."
+          **Por más que me cueste** — however hard it is. Something not sure or not real yet takes
+          the subjunctive: *por más que llueva, vamos igual*. A fact takes the normal verb: *por más
+          que ahorro, no me alcanza*."
       - title: "¿Hace cuánto?"
         body: "**Hace un año que estudio** says the same as **llevo un año estudiando**. **Seguimos
-          buscando**, **volví a empezar**."
+          buscando** — *we're still looking*; **volví a empezar** — *I started again*."
     review:
       - "querían"
       - "estudiara"
@@ -502,7 +522,8 @@ units:
           tan difícil!** — *it's not like it's that hard!*"
       - title: "Se hace el vivo"
         body: "**Hacerse el** + a describing word is *to act, to play*: **se hace el vivo** — *he acts all
-          clever*; **se hizo el distraído** — *he pretended not to notice*."
+          clever*; **se hizo el distraído** — *he pretended not to notice*. For a woman it's **la**:
+          **se hace la tonta**, **se hizo la distraída**."
     words:
       - lemma: "como si"
         pos: "phrase"
@@ -540,6 +561,7 @@ units:
             f: "m.sg"
           - form: "viva"
             f: "f.sg"
+        note: "Also 'alive'. Hacerse el vivo = try to be smart or take advantage of others."
       - lemma: "dormido"
         pos: "adj"
         en: "asleep"
@@ -572,8 +594,8 @@ units:
           importara**. And the comeback: **¡ni que fueras mi viejo!** — *it's not like you're my
           dad!*"
       - title: "¡Qué caradura!"
-        body: "Someone who does it with a straight face is a **caradura** — *shameless, cheeky*: **¡qué
-          caradura!** Between friends it's almost a compliment."
+        body: "A **caradura** has no shame: never pays, asks for too much, lies and doesn't feel bad about
+          it. **¡Qué caradura!** — *you've got some nerve!* Between friends it's often a joke."
     words:
       - lemma: "hacerse"
         pos: "verb"
@@ -598,13 +620,19 @@ units:
             f: "f.sg"
       - lemma: "canchero"
         pos: "adj"
-        en: "smooth, acting all cool"
+        en: "confident, cool"
         register: "informal"
         forms:
           - form: "canchero"
             f: "m.sg"
+            en: "confident, cool"
+            note: "Hacerse el canchero = to show off, act like you know it all. Ser canchero can also be
+              good: skilled, relaxed."
           - form: "canchera"
             f: "f.sg"
+            en: "confident, cool"
+            note: "Hacerse la canchera = to show off, act like you know it all. Ser canchera can also be
+              good: skilled, relaxed."
       - lemma: "caradura"
         pos: "noun"
         en: "shameless person, cheeky so-and-so"
@@ -712,12 +740,10 @@ units:
       es: "¿Cuál te gusta? El de la vidriera."
       en: "Which one do you like? The one in the window."
     tips:
-      - title: "El de, la de"
-        body: "Drop the noun, keep the article: **el de la vidriera** — *the one in the window*; **la de la
-          izquierda** — *the one on the left*; **las de** allá. With a name it is *someone's*: **el
-          de Lucía** — *Lucía's*. With people it is *the guy in, the people from*: **el de rojo** —
-          *the guy in red*; **los de arriba** — *the people upstairs*. It matches what it stands
-          for, like *el que*: **la que te probaste**."
+      - title: "El de Lucía, el de rojo"
+        body: "**El de** is also for owners and people. With a name it is *someone's*: **el de Lucía** —
+          *Lucía's*; **las de Santi** — *Santi's*. With people it is *the guy in, the people from*:
+          **el de rojo** — *the guy in red*; **los de arriba** — *the people upstairs*."
       - title: "Elijan, como quieras"
         body: "To a friend: **elegí el que quieras**. To two friends: **elijan los que quieran**. Not chosen
           yet, so the subjunctive: **el que elijas**, **la que prefieras**. And when you really
@@ -725,10 +751,11 @@ units:
     words:
       - lemma: "el de"
         pos: "pron"
-        en: "the one (in, from, with); someone's"
+        en: "the one (in, from, with)"
         forms:
           - form: "el de"
             f: "m.sg"
+            en: "the one (in, from, with); someone's"
           - form: "la de"
             f: "f.sg"
           - form: "los de"
@@ -792,10 +819,12 @@ units:
     tips:
       - title: "Coman, no se olviden"
         body: "For a group: **coman**, **prueben**, **sírvanse**, **no se olviden**. The *no* doesn't change
-          the verb, only where the pronoun goes."
-      - title: "Como si no, el de"
+          the verb, only where the pronoun goes: **siéntense** → **no se sienten**; **sírvanse** →
+          **no se sirvan**."
+      - title: "Como si, el de, hacerse el"
         body: "**Como si no me viera** — *as if he didn't see me*. **El de la vidriera** — *the one in the
-          window*; **el que quieras** — *whichever you want*."
+          window*; **el que quieras** — *whichever you want*. And pretending: **te hacés el
+          dormido** — *you're pretending to be asleep*."
     review:
       - "sírvanse"
       - "coman"
@@ -831,7 +860,10 @@ units:
           you'll also see **habría** in the second half: *te habría avisado* — same meaning."
       - title: "The same participles"
         body: "**Hubiera** takes the participles *había* does: **sabido, venido, ido, llamado, dicho,
-          hecho**. **Si hubieras venido** — *if you had come*."
+          hecho**. **Si hubieras venido** — *if you had come*. On its own it's *would have* — *yo
+          hubiera dicho que sí*, *I would have said yes* — or regret, *should have*: **ojalá hubiera
+          estudiado** — *I wish I'd studied*; **¡me hubieras llamado!** — *you should have called
+          me!*"
     words:
       - lemma: "haber"
         pos: "verb"
@@ -891,11 +923,11 @@ units:
           they should have*: **¡hubiéramos ido en tren!** — *we should have gone by train!*"
       - title: "More participles"
         body: "-ar verbs take **-ado**, the rest **-ido**: **tomado, reservado, quedado, perdido,
-          conseguido**. *Traer* keeps its accent: **traído**. *Si hubiera tomado un taxi…*, *si me
-          hubiera quedado en casa…*"
+          conseguido**. *Traer* gives **traído**, with an accent. *Si hubiera tomado un taxi…*, *si
+          me hubiera quedado en casa…*"
       - title: "Qué mala suerte"
-        body: "When nobody's to blame: **¡qué mala suerte!** And at Ezeiza the board says what every porteño
-          expects: the flight is **demorado** — *delayed*."
+        body: "When nobody's to blame: **¡qué mala suerte!** And at Ezeiza, the international airport, the
+          board says what every porteño expects: the flight is **demorado** — *delayed*."
     words:
       - lemma: "haber"
         pos: "verb"
@@ -966,11 +998,12 @@ units:
       en: "On the one hand it's expensive, but on the other hand it's worth it."
     tips:
       - title: "Por un lado, por otro lado"
-        body: "**Por un lado… por otro lado** weighs two sides. **En cambio** — *whereas* — sets two people
-          or things against each other: *yo laburo, en cambio él no*."
+        body: "**Por un lado… por otro lado** weighs two sides. **En cambio** — *but, on the other hand* —
+          sets two people or things against each other: *yo laburo, en cambio él no*."
       - title: "De hecho, en realidad"
-        body: "**De hecho** — *in fact* — backs up what you just said. **En realidad** — *actually* —
-          corrects it: *en realidad no es tan caro*. **Por eso** — *that's why*."
+        body: "**De hecho** — *in fact* — backs up what you just said: *no es caro; de hecho, es barato*.
+          **En realidad** — *actually* — corrects it: *en realidad no es tan caro*. **Por eso** —
+          *that's why*: *está cerca, por eso me gusta*."
       - title: "Para mí"
         body: "To give your view, porteños say **para mí** or **me parece que**: *para mí conviene esperar*;
           *me parece que es caro*. **¿Qué opinás?** is the natural question; **opino que…** as an
@@ -984,7 +1017,7 @@ units:
         en: "on the other hand"
       - lemma: "en cambio"
         pos: "phrase"
-        en: "whereas"
+        en: "whereas, on the other hand"
       - lemma: "de hecho"
         pos: "phrase"
         en: "in fact"
@@ -1021,7 +1054,8 @@ units:
       - title: "Por lo menos, la verdad"
         body: "**Por lo menos** — *at least* — finds the good side: *pagan poco, pero **por lo menos** queda
           cerca*. **La verdad** — *honestly* — says what you really think: ***la verdad**, no me
-          conviene*."
+          conviene*. **Conviene** works like *gustar*: **me conviene** — *it's better for me*; **te
+          conviene llevar paraguas** — *it's a good idea to take an umbrella*."
     words:
       - lemma: "ventaja"
         pos: "noun"
@@ -1065,14 +1099,14 @@ units:
   - ordinal: 17
     slug: "practica-migraciones"
     title: "Practice: what went wrong, the upside, the paperwork"
-    summary: "Por lo menos no demoró tanto"
+    summary: "Por lo menos no tardó tanto"
     grammar:
       - "repaso.subjuntivo.pluscuamperfecto"
       - "repaso.conectores"
       - "repaso.tramites"
     register_max: "informal"
     sample:
-      es: "Por lo menos no demoró tanto."
+      es: "Por lo menos no tardó tanto."
       en: "At least it didn't take that long."
     tips:
       - title: "Hubiéramos, hubieran"
@@ -1114,15 +1148,18 @@ units:
     tips:
       - title: "Me equivoqué"
         body: "The hardest words in any argument: **me equivoqué** — *I was wrong*. To a friend: **te
-          equivocás** — *you're wrong*. Giving ground: **reconozco que** tenés razón, or just **te
-          doy la razón**."
+          equivocás** — *you're wrong*. To admit it: **reconozco que** tenés razón — *I admit you're
+          right* — or just **te doy la razón** — *you're right*. **En eso** te doy la razón —
+          *you're right about that* — admits only one point."
       - title: "¡Nada que ver!"
-        body: "**¡Nada que ver!** — *that's got nothing to do with it!* — is how porteños throw out a point.
-          **En eso** tenés razón concedes just the one. **No seas cabeza dura** — *don't be so
-          stubborn*."
+        body: "An argument in Buenos Aires is a sport, not a fight: **discutimos** a lot and stay friends.
+          To reject a point, say **¡nada que ver!** — *not at all!* (it can also mean *nothing
+          alike* or *nothing to do with it*). If the other person won't listen: **no seas cabeza
+          dura** — *don't be so stubborn*."
       - title: "A ver, pensándolo bien"
-        body: "**A ver** — *let's see* — slows an argument down; **pensándolo bien** — *thinking about it* —
-          is how you change sides without losing face. **Sos un exagerado** speeds it back up."
+        body: "**A ver** — *let's see* — slows an argument down. **Pensándolo bien** — *on second thought* —
+          is how you change sides: *pensándolo bien, me convenciste* — *on second thought, you
+          convinced me*. To heat it up again: **sos un exagerado** — *you're being dramatic*."
       - title: "Arguing like a porteño"
         body: "An argument in Buenos Aires is a sport, not a fight: **discutimos** a lot and stay friends.
           **Me convenciste** — *you've convinced me*; **cambié de idea** — *I changed my mind*."
@@ -1205,6 +1242,7 @@ units:
             f: "1pl.pres.ind"
           - form: "discutir"
             f: "inf"
+        note: "Usually means to argue or fight, not just to talk something over."
       - lemma: "cambiar"
         pos: "verb"
         en: "to change"
@@ -1237,12 +1275,10 @@ units:
           que tenga balcón**. Once you've found it, it doesn't: *encontré un depto que tiene
           balcón*."
       - title: "La garantía"
-        body: "Renting in Buenos Aires means the **inmobiliaria** asks for a **garantía** — a relative's
-          property as a guarantee — and a **contrato**. Foreigners usually take an **alquiler
-          temporario** — *a short-term rental*, **amoblado** — or pay a **seguro de caución**
-          instead of the garantía, plus a **depósito**. Ask about the **expensas** (the monthly
-          building fees) and how many **ambientes** it has: *un dos ambientes* is one bedroom and a
-          living room. Some **dueños** don't take **mascotas**."
+        body: "To rent in Buenos Aires you need a **garantía** — *a guarantor*, usually a relative who owns
+          property: *mi papá me sale de garantía* — *my dad is my guarantor*. No garantía?
+          Foreigners often pay a **seguro de caución** — *rent guarantee insurance* — or take an
+          **alquiler temporario amoblado** — *a furnished short-term rental*."
     words:
       - lemma: "quedar"
         pos: "verb"
@@ -1298,9 +1334,11 @@ units:
           **sabe** arreglar bicis*."
       - title: "No hay nadie que…"
         body: "Nobody, nothing, no one at all — always the subjunctive, because it doesn't exist: **no
-          conozco a nadie que hable inglés**, **no hay ningún electricista que venga el domingo**."
+          conozco a nadie que hable inglés**, **no hay ningún electricista que venga el domingo**.
+          **Algún, ningún** drop the *-o* before a masculine noun (*algún bar*, *ningún
+          electricista*); **alguna, ninguna** for feminine ones."
       - title: "De confianza"
-        body: "In Buenos Aires you don't google an electrician, you ask around: **¿tenés alguien de
+        body: "In Buenos Aires you don't google an electrician, you ask around: **¿conocés a alguien de
           confianza?** Same for a flatmate: *busco a alguien **ordenado**, que no **fume** y que
           **comparta** los gastos*."
     words:
@@ -1355,7 +1393,7 @@ units:
             f: "sg.pres.subj"
       - lemma: "ordenado"
         pos: "adj"
-        en: "tidy, organised"
+        en: "tidy, organized"
         forms:
           - form: "ordenado"
             f: "m.sg"

@@ -19,7 +19,9 @@ const dir = new URL(`../../content/snapshots/${date}/`, import.meta.url);
 mkdirSync(dir, { recursive: true });
 for (const table of SNAPSHOT_TABLES) {
   const rows = queryLinked(`select * from public.${table} order by 1`);
-  writeFileSync(new URL(`${table}.json`, dir), `${JSON.stringify(rows, null, 1)}\n`);
+  // One row per line: a diff still reads row by row, at about half the size of
+  // an indented file (sentences.json was nearing GitHub's 100 MB limit).
+  writeFileSync(new URL(`${table}.json`, dir), `[\n${rows.map((r) => JSON.stringify(r)).join(',\n')}\n]\n`);
   console.log(`${table.padEnd(14)} ${rows.length}`);
 }
 console.log(`\nwrote content/snapshots/${date}/`);

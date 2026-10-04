@@ -34,11 +34,14 @@ units:
       en: "Next week I'm going to travel to Córdoba."
     tips:
       - title: "Voy a…"
-        body: "Porteños talk about the future with **ir a**: **voy a laburar**, **vamos a comer**. *Next
-          week* is **la semana que viene**, *next year* **el año que viene**."
-      - title: "Tengo ganas"
+        body: "The future is **ir a** + verb: **voy a laburar**, **vamos a comer**. For a fixed plan the
+          plain present works too: **viajamos el viernes**. *Viajamos* is also *we traveled*: the
+          time word tells you which. **Que viene** after a time word is *next*: **la semana que
+          viene**, **el año que viene**, **el finde que viene**."
+      - title: "Tengo ganas, pienso ir"
         body: "**Tengo ganas de ir a la playa** — *I feel like going to the beach*. **Pienso ir** — *I'm
-          planning to go*."
+          planning to go*. Careful: **pensar** + a verb is *to plan to*, but **pensar que** is *to
+          think that*: *pienso que tenés razón*."
       - title: "Voy a tener que"
         body: "**Tengo que** is *I have to*; put **voy a** in front for later: **voy a tener que laburar** —
           *I'm going to have to work*. It works for everyone: **vas a tener que**, **vamos a tener
@@ -76,6 +79,7 @@ units:
       - lemma: "seguro"
         pos: "adv"
         en: "for sure, definitely"
+        note: "'Seguro llueve' often means 'it'll probably rain, I bet': less certain than 'definitely'."
       - lemma: "pensar"
         pos: "verb"
         forms:
@@ -112,13 +116,16 @@ units:
         en: "course"
       - lemma: "fin de año"
         pos: "phrase"
-        en: "end of the year"
+        en: "end of the year, New Year's Eve"
       - lemma: "pronto"
         pos: "adv"
         en: "soon"
       - lemma: "algún día"
         pos: "phrase"
         en: "some day"
+      - lemma: "dentro de poco"
+        pos: "phrase"
+        en: "in a little while, before long"
   - ordinal: 2
     slug: "recorrer-el-pais"
     title: "Travel the country"
@@ -144,7 +151,7 @@ units:
           - form: "recorrer"
             f: "inf"
           - form: "recorrimos"
-            en: "we travelled around"
+            en: "we traveled around"
             f: "1pl.pret.ind"
       - lemma: "paisaje"
         pos: "noun"
@@ -158,6 +165,7 @@ units:
         forms:
           - form: "cataratas"
             f: "f.pl"
+        note: "'Las Cataratas' usually means Iguazú Falls, in Misiones."
       - lemma: "Patagonia"
         pos: "propn"
         en: "Patagonia"
@@ -167,9 +175,12 @@ units:
       - lemma: "Salta"
         pos: "propn"
         en: "Salta"
+      - lemma: "ruta"
+        pos: "noun"
+        en: "highway, route"
   - ordinal: 3
     slug: "acampamos-en-el-sur"
-    title: "Tell about a trip south"
+    title: "Talk about a trip around the country"
     summary: "Acampamos al lado de un lago en el sur"
     grammar:
       - "viaje.argentina"
@@ -185,16 +196,16 @@ units:
       - title: "La cordillera"
         body: "The **cordillera** — *the Andes range* — runs down the whole west: **lagos** and **nieve** in
           the south, **bodegas** — *wineries* — in Mendoza, red **valles** in Jujuy. A **mochilero**
-          does it all with a backpack and a carpa, down to Ushuaia."
+          does it all with a backpack and a **carpa** — *a tent*, down to Ushuaia."
     words:
       - lemma: "recorrer"
         pos: "verb"
         forms:
           - form: "recorriste"
-            en: "you travelled around"
+            en: "you traveled around"
             f: "2sg.pret.ind.vos"
           - form: "recorrieron"
-            en: "they travelled around"
+            en: "they traveled around"
             f: "3pl.pret.ind"
       - lemma: "acampar"
         pos: "verb"
@@ -276,11 +287,12 @@ units:
       en: "I moved downtown and I miss my neighborhood."
     tips:
       - title: "Extrañar"
-        body: "**Extraño a mi vieja** — *I miss my mum*. Not *echar de menos*: that is Spain's, and here
-          nobody says it."
+        body: "**Extraño a mi vieja** — *I miss my mom*. A person takes **a**; a thing doesn't: **extraño el
+          mate**. Not *echar de menos*: that is Spain's, and here nobody says it."
       - title: "Me mudé"
-        body: "**Me mudé** — *I moved (house)*; **nos mudamos** — *we moved*. The **mudanza** is the move
-          itself, and always a *quilombo*."
+        body: "**Me mudé** — *I moved (house)*; **nos mudamos** — *we moved*. It always carries
+          *me/te/se/nos*: **te mudaste**, **se mudó**. **Mudarse con** is *to move in with*. The
+          **mudanza** is the move itself, and always a *quilombo* (a mess)."
     words:
       - lemma: "mudarse"
         pos: "verb"
@@ -309,9 +321,21 @@ units:
           - form: "mudamos"
             f: "1pl.pret.ind"
             bound: true
+          - form: "me mudo"
+            en: "I'm moving (house)"
+            f: "1sg.pres.ind.clitic"
+          - form: "te mudás"
+            en: "you're moving (house)"
+            f: "2sg.pres.ind.vos.clitic"
+          - form: "mudo"
+            f: "1sg.pres.ind"
+            bound: true
+          - form: "mudás"
+            f: "2sg.pres.ind.vos"
+            bound: true
       - lemma: "mudanza"
         pos: "noun"
-        en: "move, removal"
+        en: "move (house), moving"
       - lemma: "caja"
         pos: "noun"
         en: "box"
@@ -342,14 +366,13 @@ units:
     tips:
       - title: "Before and after the move"
         body: "The old place is imperfect, the move is preterite: **antes alquilaba en el centro** — how it
-          was; **me mudé a Palermo** — what happened. **Extrañaba** is missing that went on: *los
-          primeros meses extrañaba mi barrio*."
-      - title: "The move itself"
-        body: "You rent through an **inmobiliaria** or straight from the **dueño**, and pay the **alquiler**
-          every month. A **flete** takes the **muebles** and the **colchón**, and before unpacking,
-          **pintamos**. The neighbours say it of you: **se mudaron**. On top of the rent come the
-          **expensas** — *the building fees* — and to move in you leave a **depósito**. The dream is
-          the **casa propia** — *a place of your own*."
+          was; **me mudé a Palermo** — what happened. **Extrañaba** is missing something over a
+          period of time: *los primeros meses extrañaba mi barrio*."
+      - title: "Renting a place"
+        body: "You rent through an **inmobiliaria** or straight from the **dueño**. Every month you pay the
+          **alquiler** plus the **expensas** — *the building fees*. To sign the **contrato** you
+          leave a **depósito** and show a **garantía**: someone who answers for you if you don't
+          pay."
     words:
       - lemma: "mudarse"
         pos: "verb"
@@ -418,6 +441,8 @@ units:
         forms:
           - form: "expensas"
             f: "f.pl"
+        note: "Monthly fee in apartment buildings for cleaning, the building caretaker, the elevator,
+          repairs, etc."
       - lemma: "depósito"
         pos: "noun"
         en: "deposit"
@@ -455,7 +480,8 @@ units:
           next. A porteño story moves through all three without stopping."
       - title: "Me sentí, me olvidé"
         body: "The moment a feeling hit, or a thing slipped your mind, is preterite with its pronoun: **me
-          sentí re mal**, **me olvidé de avisarte**, **nos pusimos contentos**."
+          sentí re mal**, **me olvidé de avisarte** (a thing you left behind takes no *de*: **me
+          olvidé las llaves**), **nos pusimos contentos**."
       - title: "Ponerse a"
         body: "**Ponerse a** + a verb is *to start doing*: **nos pusimos a bailar** — *we started dancing*;
           **me puse a laburar** — *I got down to work*."
@@ -485,15 +511,15 @@ units:
       es: "¿Dónde queda San Telmo?"
       en: "Where's San Telmo?"
     tips:
-      - title: "¿Dónde queda?"
-        body: "For where a place *is*, porteños say **queda**: **¿dónde queda la farmacia?** — *where's the
-          chemist?* — and **me queda cerca** — *it's close to me*."
-      - title: "Capital y provincia"
-        body: "The city is **la Capital**; the ring of towns around it, in the province, is **el
-          conurbano**. Palermo, San Telmo and La Boca are all barrios of the Capital. Each barrio
-          has its thing: **Palermo está lleno de bares**, **en San Telmo hay una feria los
-          domingos**, **La Boca es re turística**. The first question to any porteño: **¿en qué
-          barrio vivís?**"
+      - title: "Queda, me parece"
+        body: "Remember **queda** for where a place *is*: **¿dónde queda Palermo?** New here is **me
+          parece** — *I think, it seems to me*: *me parece re caro*. To ask for an opinion: **¿qué
+          te parece el depto?** — *what do you think of the apartment?*"
+      - title: "Capital y conurbano"
+        body: "The city is **la Capital** — often with no article: *vivo en Capital*. The ring of towns
+          around it is **el conurbano**. Palermo, **San Telmo** and **La Boca** are barrios of the
+          Capital: *Palermo está lleno de bares*, *La Boca es re turística*. The first question to
+          any porteño: **¿en qué barrio vivís?**"
     words:
       - lemma: "San Telmo"
         pos: "propn"
@@ -504,6 +530,8 @@ units:
       - lemma: "conurbano"
         pos: "noun"
         en: "Greater Buenos Aires, the suburbs"
+        note: "The ring of towns around the city of Buenos Aires; often working-class, unlike US
+          'suburbs'."
       - lemma: "linda zona"
         pos: "phrase"
         en: "nice area"
@@ -537,22 +565,24 @@ units:
   - ordinal: 8
     slug: "zona-norte"
     title: "Pick a barrio to live in"
-    summary: "Belgrano queda en zona norte"
+    summary: "San Isidro queda en zona norte"
     grammar:
       - "quedar.ubicacion"
       - "barrios"
     register_max: "informal"
     sample:
-      es: "Belgrano queda en zona norte, lejos del centro."
-      en: "Belgrano is up north, far from downtown."
+      es: "San Isidro queda en zona norte, lejos del centro."
+      en: "San Isidro is in the northern suburbs, far from downtown."
     tips:
-      - title: "Quedan, te queda"
-        body: "Two places: **quedan** — *Recoleta y Belgrano quedan en zona norte*. For you: **¿te queda
-          cerca?** — *is it close for you?*. It's the same *queda*, with whoever it's for in front."
+      - title: "Te queda"
+        body: "You know **queda** and **quedan** for where places are. Put the person in front to say how
+          far it is *for them*: **¿te queda cerca la facu?** — *is college close for you?* — *el
+          centro te queda cerca*."
       - title: "Norte y sur"
-        body: "**Zona norte** — Recoleta, Belgrano, and the suburbs past the General Paz — has the money and
-          the **árboles**; **zona sur** — La Boca, and the conurbano to the south — is cheaper.
-          Caballito, Almagro and Villa Crespo sit in the middle."
+        body: "**Zona norte** — the suburbs north of the General Paz, like San Isidro and Tigre — has a name
+          for money and **árboles**; **zona sur** — Avellaneda, Lanús, Quilmes — is, in general,
+          cheaper. Inside the Capital, Recoleta and Belgrano are the leafy north; Caballito, Almagro
+          and Villa Crespo sit in the middle."
       - title: "Al lado de"
         body: "**Al lado de** — *next to*: **Almagro queda al lado de Caballito**. Before *el* it shrinks:
           **al lado del parque**."
@@ -566,6 +596,8 @@ units:
       - lemma: "zona norte"
         pos: "phrase"
         en: "the north side (of the city and suburbs)"
+        note: "Mainly the northern suburbs (San Isidro, Vicente López, Tigre), seen as the better-off
+          side."
       - lemma: "zona sur"
         pos: "phrase"
         en: "the south side (of the city and suburbs)"
@@ -604,6 +636,9 @@ units:
       - lemma: "Villa Crespo"
         pos: "propn"
         en: "Villa Crespo"
+      - lemma: "San Isidro"
+        pos: "propn"
+        en: "San Isidro"
   - ordinal: 9
     slug: "las-figuritas"
     title: "Share childhood memories"
@@ -618,12 +653,13 @@ units:
     tips:
       - title: "Acordarse de"
         body: "What you remember takes **de**: **mi abuela se acuerda de todo**; **nos acordamos de esa
-          época**. **No me acordaba** — *I'd forgotten* — is imperfect: the not-remembering went on
-          until someone brought it up."
+          época**. Before **que** or **cuando**, people usually drop the **de**: *me acuerdo que
+          íbamos a la playa*. **No me acordaba** — *I'd forgotten* — is imperfect: the
+          not-remembering went on until someone brought it up."
       - title: "Every porteño childhood"
         body: "The **calesita** in the plaza, **golosinas** from the kiosco, a **barrilete** on a windy day,
           and the **álbum** of **figuritas** you filled for every **Mundial** — **lo llenábamos
-          entre todos**."
+          entre todos** — *we used to fill it together*."
     words:
       - lemma: "acordarse"
         pos: "verb"
@@ -678,12 +714,13 @@ units:
       - lemma: "calesita"
         pos: "noun"
         en: "merry-go-round"
+        note: "Neighborhood carousel; kids try to grab the 'sortija' (ring) to win a free ride."
       - lemma: "golosina"
         pos: "noun"
-        en: "sweet, treat"
+        en: "candy, sweet treat"
         forms:
           - form: "golosinas"
-            en: "sweets, treats"
+            en: "candy, treats"
             f: "f.pl"
       - lemma: "barrilete"
         pos: "noun"
@@ -698,6 +735,7 @@ units:
           - form: "figuritas"
             en: "(trading) stickers"
             f: "f.pl"
+        note: "Kids collect and swap them to fill the album, especially the World Cup album."
   - ordinal: 10
     slug: "te-acordas"
     title: "Remember together"
@@ -710,10 +748,10 @@ units:
       es: "¿Te acordás cuando íbamos a la playa?"
       en: "Do you remember when we used to go to the beach?"
     tips:
-      - title: "¿Te acordás?"
-        body: "**¿Te acordás cuando…?** opens every memory at a family asado. **Me acuerdo** — *I remember*;
-          **no me acuerdo** — *I don't remember*. The moment it comes back is the past: **¡ah, ahora
-          me acordé!**; **¿te acordaste de llamar?** — *did you remember to call?*"
+      - title: "Me acordé, acordate"
+        body: "You know **me acuerdo** — *I remember*. The moment something comes back is the past: **¡ah,
+          ahora me acordé!**; **¿te acordaste del pan?** — *did you remember the bread?* To remind
+          someone, use the command: **acordate de las llaves** — *remember the keys*."
       - title: "Antes era distinto"
         body: "**Antes era distinto** — *it used to be different*. **¡Qué épocas!** — *those were the days!*
           — closes it. With *ser* it is a different kind of thing: **el barrio era distinto**. With
@@ -749,9 +787,22 @@ units:
       - lemma: "qué épocas"
         pos: "phrase"
         en: "those were the days"
+      - lemma: "repetida"
+        pos: "noun"
+        en: "double (a sticker you already have)"
+        forms:
+          - form: "repetidas"
+            en: "doubles (stickers you already have)"
+            f: "f.pl"
+      - lemma: "cambiar"
+        pos: "verb"
+        forms:
+          - form: "cambiábamos"
+            en: "we used to swap"
+            f: "1pl.impf.ind"
   - ordinal: 11
     slug: "me-haces-un-favor"
-    title: "Ask for a favour"
+    title: "Ask for a favor"
     summary: "¿Me hacés un favor?"
     grammar:
       - "pedidos.me-pasas"
@@ -763,17 +814,18 @@ units:
     tips:
       - title: "Asking with the present"
         body: "A porteño asks with a plain question in the present: **¿me pasás la sal?**, **¿me ayudás?** —
-          the *can you* is in the tone. **¿Podrías…?** is the extra-polite version."
+          the *can you* is in the tone. **¿Podrías…?** is the extra-polite version. **¿Me pasás…?**
+          and **¿me alcanzás…?** mean the same: *can you pass me…?*"
       - title: "Ayudame"
         body: "With a vos command the pronoun joins the end: **ayudame**, **alcanzame** — *help me*, *hand
-          me*."
+          me*. No written accent: the stress stays on **-da-** and **-za-**, so not *ayúdame*."
     words:
       - lemma: "favor"
         pos: "noun"
         en: "favor"
       - lemma: "alcanzar"
         pos: "verb"
-        en: "to hand, to reach"
+        en: "to be enough; to hand, to pass"
         forms:
           - form: "me alcanzás"
             en: "you hand me"
@@ -799,6 +851,10 @@ units:
       - lemma: "obvio"
         pos: "adv"
         en: "of course"
+      - lemma: "porfa"
+        pos: "interj"
+        en: "please (casual)"
+        register: "informal"
   - ordinal: 12
     slug: "me-das-una-mano"
     title: "Ask a friend for a hand"
@@ -811,11 +867,11 @@ units:
       es: "¿Me acompañás? Esperame un toque."
       en: "Will you come with me? Wait a sec."
     tips:
-      - title: "More favours, same question"
+      - title: "More favors, same question"
         body: "Still a plain question in the present with **me** in front: **¿me acompañás?** — *will you
-          come with me?*; **¿me llevás?** — *can you give me a lift?*; **¿me regás las plantas?** —
-          *can you water my plants?* Asking for two of you? Swap *me* for **nos**: **¿nos sacás una
-          foto?**"
+          come with me?*; **¿me llevás?** — *can you give me a ride?*; **¿me regás las plantas?** —
+          *can you water my plants?* Asking for two of you? Swap *me* for **nos**: **¿nos llevás?**
+          — *can you take us?*"
       - title: "Prendé, apagá"
         body: "Between friends a bare vos command is polite enough: **prendé la luz**, **apagá la tele**.
           With a pronoun it joins the end, like *ayudame*: **acompañame**, **llevame**."
@@ -890,7 +946,7 @@ units:
             f: "2sg.imp.vos"
       - lemma: "subir"
         pos: "verb"
-        en: "to go up, to take up"
+        en: "to go up, to rise; to carry up, to get on"
         forms:
           - form: "subir"
             f: "inf"
@@ -900,6 +956,12 @@ units:
       - lemma: "de paso"
         pos: "phrase"
         en: "while you're at it"
+      - lemma: "dar una mano"
+        pos: "phrase"
+        en: "to give a hand"
+        forms:
+          - form: "una mano"
+            en: "a hand (help)"
   - ordinal: 13
     slug: "un-ratito"
     title: "Soften it with -ito"
@@ -912,13 +974,13 @@ units:
       en: "Wait for me a moment."
     tips:
       - title: "-ito, -ita"
-        body: "**-ito** makes things small, and requests smaller: **un ratito** — *a sec*; **un cafecito**;
-          **un poquito**. It sounds kind rather than childish. It softens bad news and favours too:
-          **tengo un problemita**, **una preguntita**."
+        body: "**-ito** makes things small, and requests smaller: **un ratito** — *a little while*; **un
+          cafecito**; **un poquito**. It sounds kind rather than childish. It softens bad news and
+          favors too: **tengo un problemita**, **una preguntita**."
       - title: "Cerquita, despacito"
-        body: "It works on adverbs too: **cerquita** — *really close*; **despacito** — *nice and slow*.
-          **Chiquito** — *tiny*. Careful: **hablá más despacito** usually means *keep your voice
-          down*, not *slow down*."
+        body: "It works on adverbs too: **cerquita** — *close by*; **despacito** — *nice and slow*.
+          **Chiquito** — *small, little*. Careful: **hablá más despacito** can mean *slower* or
+          *quieter* — the situation tells you."
     words:
       - lemma: "ratito"
         pos: "noun"
@@ -934,7 +996,7 @@ units:
         en: "really close"
       - lemma: "despacito"
         pos: "adv"
-        en: "nice and slow, quietly"
+        en: "nice and slow"
       - lemma: "chiquito"
         pos: "adj"
         en: "tiny"
@@ -961,17 +1023,19 @@ units:
       en: "It's a bit chilly, but the sun's come out."
     tips:
       - title: "-cito"
-        body: "Words ending in *-or*, *-ol*, *-e* take **-cito**: **calor → calorcito**, **sol → solcito**,
-          **fresco → fresquito** (the *c* turns *qu*). Porteños talk about the weather almost only
-          in diminutives: **hace fresquito**, **qué lindo calorcito**."
+        body: "Words ending in *-r*, *-n*, *-e* take **-cito**: **calor → calorcito**, **café → cafecito**.
+          Short *sol* does too: **solcito**. Words in *-o* just swap it for **-ito**, and a *c*
+          turns *qu*: **fresco → fresquito**; a *z* turns *c*: **pedazo → pedacito**. Porteños love
+          diminutives for nice weather: **hace fresquito**, **qué lindo calorcito**."
       - title: "-ito on everything"
         body: "Nouns: **una cosita**, **un pedacito**, **un besito**. Adjectives: **calentito** — *nice and
-          warm*; **cortito**; **igualito a su papá**; **solito** — *all by himself*. Adverbs:
-          **tempranito**, **rapidito**. It agrees like any adjective: **una sopa calentita**."
+          warm*; **cortito**; **igualito a su papá**; **solito** — *all by himself* (to an adult it
+          sounds tender or teasing, so keep it for friends). Adverbs: **tempranito**, **rapidito**.
+          It agrees like any adjective: **una sopa calentita**."
     words:
       - lemma: "fresquito"
         pos: "noun"
-        en: "a nip in the air, chilly weather"
+        en: "chilly weather, a slight chill"
       - lemma: "calorcito"
         pos: "noun"
         en: "nice warm weather"
@@ -999,9 +1063,10 @@ units:
           - form: "besitos"
             en: "little kisses"
             f: "m.pl"
+        note: "Argentines end messages with 'besos' or 'besitos' even to friends; it's not romantic."
       - lemma: "calentito"
         pos: "adj"
-        en: "nice and warm, fresh from the oven"
+        en: "nice and warm, nice and hot"
         forms:
           - form: "calentito"
             f: "m.sg"
@@ -1017,7 +1082,7 @@ units:
             f: "f.sg"
       - lemma: "igualito"
         pos: "adj"
-        en: "just like, the spitting image of"
+        en: "just like, exactly like"
         forms:
           - form: "igualito"
             f: "m.sg"
@@ -1036,7 +1101,7 @@ units:
         en: "nice and early"
       - lemma: "rapidito"
         pos: "adv"
-        en: "real quick"
+        en: "quickly, real quick"
       - lemma: "de mi parte"
         pos: "phrase"
         en: "from me, on my behalf"
@@ -1058,7 +1123,8 @@ units:
           **siéntense**."
       - title: "Están en su casa"
         body: "A porteño host says **pasen, pasen** at the door, **pónganse cómodos**, and **no se
-          preocupen** when you apologise for being late."
+          preocupen** when you apologize for being late. **Están en su casa** — *make yourselves at
+          home*."
     words:
       - lemma: "pasar"
         pos: "verb"
@@ -1103,7 +1169,7 @@ units:
         pos: "verb"
         forms:
           - form: "pónganse"
-            en: "make yourselves (comfortable)"
+            en: "make yourselves (comfortable), put on (you all)"
             f: "3pl.imp.clitic.irregular"
       - lemma: "quedarse"
         pos: "verb"
@@ -1117,6 +1183,9 @@ units:
         forms:
           - form: "bienvenidos"
             f: "m.pl"
+      - lemma: "están en su casa"
+        pos: "phrase"
+        en: "make yourselves at home"
   - ordinal: 16
     slug: "a-la-mesa"
     title: "Call everyone to the table"
@@ -1138,8 +1207,9 @@ units:
         body: "With a *no* in front the verb stays the same and the pronoun jumps ahead: **apúrense**, but
           **no se olviden** — *don't forget*; **no dejen nada** — *don't leave anything*."
       - title: "Buen provecho"
-        body: "Before the first bite: **¡buen provecho!** — *enjoy!* And when the host says **sírvanse** —
-          *help yourselves* — nobody waits to be asked twice."
+        body: "**¡Buen provecho!** — *enjoy!* — is said when you serve food, or when you pass people who are
+          eating, even coworkers or strangers. The answer is **gracias**. And when the host says
+          **sírvanse** — *help yourselves* — everybody starts right away."
     words:
       - lemma: "a la mesa"
         pos: "phrase"
@@ -1147,6 +1217,7 @@ units:
       - lemma: "buen provecho"
         pos: "phrase"
         en: "enjoy your meal"
+        note: "Said to anyone you see eating, even strangers or coworkers at lunch."
       - lemma: "servirse"
         pos: "verb"
         en: "to help yourself (to food)"
@@ -1175,7 +1246,7 @@ units:
             f: "3pl.imp"
       - lemma: "agarrar"
         pos: "verb"
-        en: "to grab"
+        en: "to grab, to take"
         forms:
           - form: "agarren"
             en: "grab (you all)"
@@ -1218,6 +1289,18 @@ units:
           - form: "olviden"
             f: "3pl.subj"
             bound: true
+      - lemma: "sentarse"
+        pos: "verb"
+        forms:
+          - form: "sentándose"
+            en: "sitting down (you all)"
+            f: "ger.clitic"
+      - lemma: "pasar"
+        pos: "verb"
+        forms:
+          - form: "pasando"
+            en: "coming in, going through"
+            f: "ger"
   - ordinal: 17
     slug: "hay-que"
     title: "Say what has to be done"
@@ -1232,8 +1315,8 @@ units:
       en: "You have to get there early."
     tips:
       - title: "Tengo que, hay que"
-        body: "**Tengo que laburar** is *I have to work*; **hay que** is the same for everyone: **hay que
-          sacar la basura** — *the rubbish has to go out*."
+        body: "**Tengo que laburar** is *I have to work*; **hay que** names no person — it just has to be
+          done: **hay que sacar la basura** — *the trash has to go out*."
       - title: "No hace falta"
         body: "**No hace falta** — *there's no need*. **Conviene** is the advice: **conviene ir temprano** —
           *it's best to go early*."
@@ -1257,9 +1340,14 @@ units:
           - form: "tenemos que"
             en: "we have to"
             f: "1pl.pres.ind"
+          - form: "tengo que"
+            en: "I have to"
+            f: "1sg.pres.ind"
       - lemma: "trámite"
         pos: "noun"
-        en: "paperwork, errand"
+        en: "paperwork, official procedure"
+        note: "Any official task at an office or bank (ID, permits, paying bills). Often slow and a big
+          part of daily life."
       - lemma: "importante"
         pos: "adj"
         en: "important"
@@ -1282,7 +1370,7 @@ units:
           que** stays the same for everyone: **hay que hacer la fila**."
       - title: "Hace falta"
         body: "Drop the *no* and **hace falta** says what's needed: **hace falta una fotocopia**. **¿Es
-          obligatorio?** — *is it required?* — is the question every porteño asks at the counter."
+          obligatorio?** — *is it required?* — is a handy question at any counter."
       - title: "Sacar turno"
         body: "Nothing happens in Buenos Aires without **sacar turno** — *booking an appointment*, almost
           always **por internet**. Then they **piden** things: **te piden una fotocopia**,
@@ -1292,13 +1380,13 @@ units:
         pos: "verb"
         forms:
           - form: "tenés que"
-            en: "you've got to"
+            en: "you have to"
             f: "2sg.pres.ind.vos"
           - form: "tiene que"
             en: "has to (he/she has to)"
             f: "3sg.pres.ind"
           - form: "tienen que"
-            en: "they have to"
+            en: "they have to, you guys have to"
             f: "3pl.pres.ind"
       - lemma: "pedir"
         pos: "verb"
@@ -1308,7 +1396,7 @@ units:
             f: "3pl.pres.ind.irregular"
       - lemma: "hace falta"
         pos: "phrase"
-        en: "it's needed, is needed"
+        en: "it's needed, (you) need"
       - lemma: "obligatorio"
         pos: "adj"
         en: "mandatory, required"
@@ -1319,7 +1407,7 @@ units:
             f: "f.sg"
       - lemma: "fila"
         pos: "noun"
-        en: "line, queue"
+        en: "line"
       - lemma: "firmar"
         pos: "verb"
         en: "to sign"
@@ -1331,7 +1419,7 @@ units:
             f: "2sg.imp.vos"
       - lemma: "completar"
         pos: "verb"
-        en: "to fill in"
+        en: "to fill in, to fill out; to complete"
         forms:
           - form: "completar"
             f: "inf"
@@ -1364,12 +1452,12 @@ units:
     tips:
       - title: "Sacar turno"
         body: "For almost anything official you first **sacás turno** — you book an appointment online — and
-          you bring the **DNI**, the national ID card, without which nothing happens."
+          you bring the **DNI**, the national ID card, without which nothing happens. As a
+          foreigner, you use your passport until you get your own DNI."
       - title: "Vencido"
-        body: "A document that has run out is **vencido**: *tengo el pasaporte vencido*. You renew it
-          (**renovar**), fill in the form — **completar el formulario**: *ya completé el formulario*
-          —, stand in line — **hacer la cola**; you will also hear **fila** — and sign
-          (**firmar**)."
+        body: "A document that has run out is **vencido**: *tengo el pasaporte vencido*. What comes next:
+          **renovar** — *renew it*; **completar el formulario** — *fill in the form*; **hacer la
+          cola** (or **la fila**) — *stand in line*; **firmar** — *sign*."
     words:
       - lemma: "DNI"
         pos: "propn"
@@ -1422,11 +1510,20 @@ units:
         pos: "verb"
         forms:
           - form: "dejé"
-            en: "I stopped, I quit"
+            en: "I left, I quit"
             f: "1sg.pret.ind"
           - form: "dejaste"
-            en: "you stopped, you quit"
+            en: "you left, you quit"
             f: "2sg.pret.ind.vos"
+      - lemma: "se cayó el sistema"
+        pos: "phrase"
+        en: "the system is down"
+      - lemma: "volver"
+        pos: "verb"
+        forms:
+          - form: "volvé"
+            en: "come back"
+            f: "2sg.imp.vos"
   - ordinal: 20
     slug: "migraciones"
     title: "Sort out your residency"
@@ -1444,10 +1541,10 @@ units:
           **requisitos**, *what they need*. They'll say **el original y una copia**, and they mean
           both."
       - title: "¿Cuánto demora?"
-        body: "Porteños say **demorar** for how long a trámite takes: **¿cuánto demora la residencia?** The
-          honest answer is *depende*. For a person or a bus they say **tardar**: *Lucía tardó media
-          hora*, *el bondi tardó un montón*. You **presentás** the papers, and when they finally
-          **atienden** you, it's over in five minutes."
+        body: "For paperwork, **demorar** is how long something takes: **¿cuánto demora la residencia?** The
+          honest answer is *depende*. For a person or a bus porteños say **tardar**: *Lucía tardó
+          media hora*, *el bondi tardó un montón*. You **presentás** the papers, and when they
+          finally **atienden** you, it's over in five minutes."
       - title: "What Migraciones asks for"
         body: "For the **residencia** you need your **antecedentes penales** — *criminal record* — with the
           **apostilla**, the stamp that makes a foreign paper valid here, and a **certificado de
@@ -1471,7 +1568,7 @@ units:
             f: "m.pl"
       - lemma: "consulta"
         pos: "noun"
-        en: "inquiry"
+        en: "question, inquiry"
       - lemma: "certificado"
         pos: "noun"
         en: "certificate"
@@ -1610,6 +1707,18 @@ units:
           - form: "mascotas"
             en: "pets"
             f: "f.pl"
+      - lemma: "monoambiente"
+        pos: "noun"
+        en: "studio apartment"
+      - lemma: "dueño directo"
+        pos: "phrase"
+        en: "rented by the owner (no agency)"
+      - lemma: "poder"
+        pos: "verb"
+        forms:
+          - form: "se puede"
+            en: "you can, it's allowed"
+            f: "3sg.pres.ind.clitic"
   - ordinal: 22
     slug: "se-aceptan-tarjetas"
     title: "Read the signs in shop windows"
@@ -1626,10 +1735,10 @@ units:
         body: "Plural things take the plural verb: **se aceptan tarjetas**, **se hacen envíos**, **se
           arreglan bicis**. One thing, the singular: **se busca perro** — with a **recompensa** if
           you're lucky."
-      - title: "No se permite"
-        body: "The building speaks the same way: **no se permiten mascotas**, **se prohíbe hacer ruido
-          después de las diez**. On the shop door: **horario de atención** — and the **local** is
-          often **cerrado** at lunchtime."
+      - title: "On the door"
+        body: "On the shop door: **horario de atención** — *opening hours*; **abierto / cerrado**; **solo
+          efectivo** — *cash only*; **no funciona** — *out of order*; **liquidación** — *sale*. In a
+          building: **no se permiten mascotas**, **se prohíbe hacer ruido**."
       - title: "Out loud: ¿se puede?"
         body: "**Se permite** and **se prohíbe** are sign language. Out loud people say **se puede** / **no
           se puede**: *acá no se puede estacionar*; *¿se puede pagar con tarjeta?* Other signs
@@ -1677,7 +1786,7 @@ units:
             bound: true
       - lemma: "permitir"
         pos: "verb"
-        en: "to permit"
+        en: "to allow, to permit"
         forms:
           - form: "se permite"
             en: "is permitted"
@@ -1718,13 +1827,13 @@ units:
             f: "m.pl"
       - lemma: "local"
         pos: "noun"
-        en: "shopfront, premises"
+        en: "store, shop"
       - lemma: "recompensa"
         pos: "noun"
         en: "reward"
       - lemma: "atención"
         pos: "noun"
-        en: "customer service"
+        en: "service (to customers), attention"
         note: "horario de atención = opening hours"
       - lemma: "liquidación"
         pos: "noun"
@@ -1793,6 +1902,8 @@ units:
           - form: "manzanas"
             en: "apples"
             f: "f.pl"
+        note: "Also means a city block (the whole square). For distance Argentines say 'cuadra': 'a dos
+          cuadras'."
       - lemma: "banana"
         pos: "noun"
         en: "banana"
@@ -1825,19 +1936,19 @@ units:
       es: "Dame cien gramos de jamón y medio kilo de naranjas."
       en: "Give me a hundred grams of ham and half a kilo of oranges."
     tips:
-      - title: "Gramos, litros"
-        body: "At the fiambrería you buy by the **gramo**: **cien gramos de jamón**, cut in **fetas** —
-          *slices*. Milk comes by the **litro**. At the **feria**, the street market, it's still the
-          kilo: **medio kilo de frutillas**. The classic deli order is **un cuarto** — 250 grams:
-          **un cuarto de jamón cocido**. **Jamón cocido** is plain ham; **jamón crudo** is the cured
-          one."
+      - title: "Cien gramos, un cuarto"
+        body: "At the **fiambrería** you buy by weight: **cien gramos de jamón**, cut in **fetas** —
+          *slices*. The classic order is **un cuarto** — 250 grams: *un cuarto de jamón cocido*.
+          **Jamón cocido** is plain ham; **jamón crudo** is the cured one."
       - title: "¿Algo más?"
         body: "The vendor always asks **¿algo más?** — *anything else?* You answer **nada más, gracias**, or
-          keep going: **y un kilo de naranjas**."
+          keep going: **y un kilo de naranjas**. To ask a price, **¿cuánto sale?** is the everyday
+          way — same as *¿cuánto cuesta?* For things sold by weight you already know **¿a cuánto
+          está?**"
       - title: "Palta, frutilla"
-        body: "Buenos Aires has its own names: **palta** is avocado, **frutilla** is strawberry. Before you
+        body: "Argentina has its own names: **palta** is avocado, **frutilla** is strawberry. Before you
           buy, ask **¿están maduras?** — *are they ripe?* The opposite of *madura* is **verde**:
-          **están verdes** — *they are not ripe yet*. (*Es verde* is the colour.)"
+          **están verdes** — *they are not ripe yet*. (*Es verde* is the color.)"
     words:
       - lemma: "gramo"
         pos: "noun"
@@ -1850,10 +1961,11 @@ units:
             f: "m.pl"
       - lemma: "litro"
         pos: "noun"
-        en: "litre"
+        en: "liter"
       - lemma: "jamón"
         pos: "noun"
         en: "ham"
+        note: "Plain 'jamón' usually means cooked ham; cured ham (like prosciutto) is 'jamón crudo'."
       - lemma: "feta"
         pos: "noun"
         en: "slice (of ham, cheese)"
@@ -1949,7 +2061,7 @@ units:
             f: "m.sg"
   - ordinal: 25
     slug: "practica-la-feria"
-    title: "Practice: favours, forms and the market"
+    title: "Practice: favors, forms and the market"
     summary: "¿Me acompañás a la feria?"
     grammar:
       - "repaso.pedidos"
@@ -1961,11 +2073,12 @@ units:
       en: "Will you come with me to the market? I need strawberries."
     tips:
       - title: "Me, nos"
-        body: "**¿Me acompañás?** asks for you; **¿nos sacás una foto?** asks for the two of you. It stays a
-          question in the present — the tone does the asking."
+        body: "**¿Me acompañás?** — the favor is for me; **¿nos sacás una foto?** — the favor is for us. You
+          ask with a plain present-tense question: no *can you* needed. **¿Me podrías…?** — *could
+          you…?* — is the more careful version."
       - title: "Tenés que, hace falta"
-        body: "**Tenés que llevar una fotocopia** — someone has to; **hace falta una fotocopia** — something
-          is needed; **no hace falta** — relax."
+        body: "**Tenés que llevar una fotocopia** — *you have to*; **hace falta una fotocopia** — *a
+          photocopy is needed*, no person named; **no hace falta** — *there's no need*."
     review:
       - "me acompañás"
       - "llevame"
@@ -1980,3 +2093,4 @@ units:
       - "podrías"
       - "compré"
       - "fui"
+      - "hay que"

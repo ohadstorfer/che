@@ -23,8 +23,9 @@ import { buildRows } from '../lib/rows.mjs';
 const { outline } = loadOutline();
 const { formEntries } = buildRows();
 
-/** The lexicon a learner holds at the end of unit 16 (de-todos-lados) — the deck exercises draw on. */
-const forms = formEntries.filter((f) => f.unit_order <= 16 && !f.is_glue && f.pos !== 'propn');
+/** The lexicon a learner holds at the end of de-todos-lados — the deck exercises draw on. */
+const through = outline.units.find((u) => u.slug === 'de-todos-lados').course_order;
+const forms = formEntries.filter((f) => f.unit_order <= through && !f.is_glue && f.pos !== 'propn');
 const byForm = (text) => forms.find((f) => f.form === text);
 const formById = new Map(formEntries.map((f) => [f.id, f]));
 

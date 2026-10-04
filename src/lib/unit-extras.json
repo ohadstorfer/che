@@ -1,5 +1,5 @@
 {
- "snapshot": "2026-10-03",
+ "snapshot": "2026-10-04",
  "units": {
   "un-cafe-por-favor": {
    "culture": {
@@ -29,6 +29,7 @@
    }
   },
   "como-te-llamas": {},
+  "no-entiendo": {},
   "encantado": {},
   "de-donde-sos": {},
   "soy-de-zona-norte": {
@@ -41,15 +42,16 @@
   "quien-es": {},
   "practica-quien-es": {},
   "argentino-argentina": {},
-  "de-todos-lados": {
+  "de-todos-lados": {},
+  "la-familia": {
    "culture": {
     "section": "alfajores",
     "class": "dulce-de-leche"
    }
   },
-  "la-familia": {},
   "tios-y-primos": {},
   "cuantos-anos-tenes": {},
+  "treinta-y-cuatro": {},
   "tengo-hambre": {},
   "practica-tengo-hambre": {},
   "alfajores-y-chicles": {
@@ -59,7 +61,13 @@
    }
   },
   "en-el-kiosco": {},
-  "cuanto-sale": {},
+  "cuanto-cuesta": {},
+  "cuanto-sale": {
+   "culture": {
+    "section": "buenos-aires",
+    "class": "pagar"
+   }
+  },
   "la-gente": {
    "slang": [
     "capo",
@@ -93,29 +101,43 @@
     "class": "la-sube"
    }
   },
+  "adonde-vas": {
+   "slang": [
+    "zafar",
+    "facha",
+    "es-un-monton"
+   ]
+  },
   "practica-por-aca": {},
   "como-estas": {
    "slang": [
     "a-mil",
-    "zafar",
-    "es-un-monton"
+    "dar-bola",
+    "apurar"
    ]
   },
   "esta-cerrado": {
+   "culture": {
+    "section": "musica",
+    "class": "rock-nacional"
+   }
+  },
+  "que-haces": {
    "slang": [
-    "dar-bola",
-    "apurar",
-    "facha"
+    "que-haces",
+    "rulos",
+    "al-mango"
    ]
   },
-  "que-haces": {},
   "practico-castellano": {},
-  "mate-y-facturas": {
+  "hoy-y-manana": {
    "slang": [
-    "pancho",
-    "tarta",
-    "no-te-puedo-creer"
-   ],
+    "cuotas-sin-interes",
+    "dolar-blue",
+    "palo"
+   ]
+  },
+  "mate-y-facturas": {
    "culture": {
     "section": "mate",
     "class": "que-es-el-mate"
@@ -123,9 +145,9 @@
   },
   "nos-gustan-los-fideos": {
    "slang": [
-    "rulos",
-    "al-mango",
-    "engancharse"
+    "tarta",
+    "pancho",
+    "retar"
    ],
    "culture": {
     "section": "comida",
@@ -137,7 +159,7 @@
    "slang": [
     "estar-al-horno",
     "cachete",
-    "retar"
+    "engancharse"
    ],
    "culture": {
     "section": "alfajores",
@@ -152,9 +174,9 @@
   },
   "facu-y-laburo": {
    "slang": [
-    "cuotas-sin-interes",
-    "dolar-blue",
-    "palo"
+    "mala-leche",
+    "rajar",
+    "fachero"
    ]
   },
   "es-enfermera": {},
@@ -162,7 +184,7 @@
    "slang": [
     "me-estas-cargando",
     "boludear",
-    "fachero"
+    "ponerse-las-pilas"
    ],
    "culture": {
     "section": "iconos",
@@ -179,17 +201,18 @@
   "mi-edificio": {
    "slang": [
     "malla",
-    "monoambiente",
-    "placard"
+    "placard",
+    "pulover"
    ]
   },
-  "mi-casa": {},
-  "la-hora": {
+  "mi-casa": {
    "slang": [
-    "que-haces",
-    "ponerse-las-pilas",
-    "rajar"
-   ],
+    "no-te-hagas-problema",
+    "copar",
+    "dar-bronca"
+   ]
+  },
+  "la-hora": {
    "culture": {
     "section": "costumbres",
     "class": "la-hora-argentina"
@@ -199,9 +222,9 @@
   "tengo-una-reserva": {},
   "el-barrio": {
    "slang": [
-    "no-te-hagas-problema",
-    "copar",
-    "dar-bronca"
+    "tener-pinta",
+    "mandarse",
+    "cansador"
    ],
    "culture": {
     "section": "buenos-aires",
@@ -210,17 +233,17 @@
   },
   "a-la-vuelta": {
    "slang": [
-    "mala-leche",
-    "tener-pinta",
-    "mandarse"
+    "tirar-fruta",
+    "de-vuelta",
+    "seno"
    ]
   },
   "queres-podes-vas": {},
   "preferis-salir": {
    "slang": [
     "joda",
-    "tirar-fruta",
-    "sanguche"
+    "estar-hasta-las-manos",
+    "pegar-onda"
    ],
    "culture": {
     "section": "costumbres",
@@ -230,17 +253,17 @@
   "practica-a-la-vuelta": {},
   "dale-veni": {
    "slang": [
-    "de-vuelta",
-    "estar-hasta-las-manos",
-    "seno"
+    "sanguche",
+    "country",
+    "corpino"
    ]
   },
   "segui-derecho": {},
   "tomar-el-bondi": {
    "slang": [
-    "pegar-onda",
     "suprema",
-    "country"
+    "embolarse",
+    "el-interior"
    ],
    "culture": {
     "section": "buenos-aires",
@@ -250,58 +273,65 @@
   "en-taxi": {},
   "ayuda": {
    "slang": [
-    "corpino",
-    "embolarse",
-    "el-interior"
+    "rotiseria",
+    "jogging",
+    "bajar-un-cambio"
    ],
    "culture": {
     "section": "buenos-aires",
     "class": "calle-con-cuidado"
    }
   },
+  "este-y-ese": {},
+  "la-campera-nueva": {
+   "slang": [
+    "tirar-onda",
+    "musculosa",
+    "ponerle-onda"
+   ]
+  },
   "ropa-y-colores": {},
   "este-buzo": {
    "slang": [
-    "pulover",
-    "tirar-onda",
-    "cansador"
+    "clavar",
+    "sorbete",
+    "colita"
    ]
   },
-  "me-cobras": {
-   "culture": {
-    "section": "buenos-aires",
-    "class": "pagar"
-   }
-  },
+  "me-cobras": {},
   "debito-o-credito": {
    "slang": [
     "curro",
-    "bajar-un-cambio",
-    "manguear"
-   ]
+    "manguear",
+    "hacerse-la-pelicula"
+   ],
+   "culture": {
+    "section": "tango",
+    "class": "nacido-en-el-arrabal"
+   }
   },
   "practica-me-cobras": {},
   "la-rutina": {
    "slang": [
-    "jogging",
     "salame",
-    "microcentro"
+    "microcentro",
+    "chorear"
    ]
   },
   "me-despierto-temprano": {},
   "que-te-gusta-hacer": {
    "slang": [
-    "musculosa",
-    "hacerse-la-pelicula",
-    "rotiseria"
+    "tentarse",
+    "bardear",
+    "baul"
    ]
   },
   "me-interesa": {},
   "pasame-tu-numero": {
    "slang": [
     "calza",
-    "ponerle-onda",
-    "chorear"
+    "pina",
+    "dar-manija"
    ],
    "culture": {
     "section": "habla",
@@ -311,9 +341,9 @@
   "clima": {},
   "en-febrero": {
    "slang": [
-    "sorbete",
-    "colita",
-    "tentarse"
+    "aro",
+    "pararse",
+    "anana"
    ],
    "culture": {
     "section": "costumbres",
@@ -322,193 +352,208 @@
   },
   "practica-el-clima": {},
   "el-cumple": {
+   "slang": [
+    "sandwich-de-miga",
+    "empedarse",
+    "tapa"
+   ],
    "culture": {
     "section": "alfajores",
     "class": "postres-caseros"
    }
   },
+  "estoy-llegando": {},
   "ahora-y-planes": {
    "slang": [
-    "bardear",
-    "clavar",
-    "pararse"
-   ]
+    "chocolatin",
+    "batata",
+    "jamon-crudo"
+   ],
+   "culture": {
+    "section": "asado",
+    "class": "el-ritual"
+   }
   },
+  "que-decis": {},
   "ayer-labure": {},
   "cenamos-afuera": {
    "slang": [
-    "tapa",
-    "anana",
-    "batata"
+    "morron",
+    "pochoclo",
+    "bizcochuelo"
    ]
   },
   "comi-y-sali": {
+   "slang": [
+    "milanga",
+    "porron",
+    "chongo"
+   ],
    "culture": {
     "section": "musica",
     "class": "cumbia-y-cuarteto"
    }
   },
-  "naci-en": {
-   "slang": [
-    "banero",
-    "estancia",
-    "gaucho"
-   ]
-  },
+  "naci-en": {},
   "fui-a-la-cancha": {
+   "slang": [
+    "entretiempo",
+    "la-seleccion",
+    "dt"
+   ],
    "culture": {
     "section": "futbol",
     "class": "la-hinchada"
    }
   },
   "la-pasamos-barbaro": {
-   "slang": [
-    "picado",
-    "fulbito",
-    "entretiempo"
-   ],
    "culture": {
     "section": "futbol",
     "class": "hablar-de-futbol"
    }
   },
-  "practica-como-estuvo": {},
+  "practica-como-estuvo": {
+   "slang": [
+    "una-bocha",
+    "cara-o-ceca",
+    "mufa"
+   ]
+  },
   "el-finde": {},
   "vinieron-todos": {
    "slang": [
     "pan-lactal",
-    "jamon-crudo",
-    "morron"
+    "bondiola",
+    "cebador"
    ]
   },
-  "mas-alto-que": {
-   "slang": [
-    "pavo",
-    "gamba",
-    "pera"
-   ]
-  },
+  "mas-alto-que": {},
   "el-mas-tranquilo": {
+   "slang": [
+    "patente",
+    "banero",
+    "banquina"
+   ],
    "culture": {
     "section": "buenos-aires",
     "class": "iconos-de-la-ciudad"
    }
   },
-  "me-duele": {
+  "me-duele": {},
+  "me-dolio": {
    "slang": [
-    "pina",
-    "pinton",
-    "pupo"
+    "gamba",
+    "pera",
+    "pinton"
    ]
   },
-  "me-dolio": {},
-  "practica-quien-vino": {
+  "practica-quien-vino": {},
+  "te-llamo": {
    "slang": [
-    "zarparse",
-    "una-banda",
-    "cara-o-ceca"
+    "de-un-saque",
+    "bochar",
+    "patovica"
    ]
   },
-  "te-llamo": {},
   "te-llame": {},
+  "no-se": {},
   "las-tareas": {
    "slang": [
     "mesada",
     "repasador",
-    "broche"
+    "birome"
    ],
    "culture": {
-    "section": "musica",
-    "class": "rock-nacional"
+    "section": "comida",
+    "class": "empanadas"
    }
   },
   "quien-lavo": {
    "slang": [
-    "aro",
-    "birome",
-    "bombacha"
+    "bombacha",
+    "mesa-de-luz",
+    "toallon"
    ]
   },
   "de-viaje": {},
   "las-vacaciones": {
    "slang": [
-    "chacra",
-    "yuyo",
-    "baul"
+    "estancia",
+    "gaucho",
+    "chacra"
    ]
   },
   "practica-las-vacaciones": {},
-  "menos-mal": {},
+  "menos-mal": {
+   "slang": [
+    "mandar-al-frente",
+    "buchonear",
+    "bolsa-de-dormir"
+   ]
+  },
   "contame": {},
   "cuando-era-chico": {
    "slang": [
+    "pavo",
     "amigovio",
-    "bocho",
-    "buchon"
+    "bocho"
    ],
    "culture": {
     "section": "iconos",
     "class": "mafalda"
    }
   },
-  "en-la-primaria": {
-   "slang": [
-    "chamuyero",
-    "farandula",
-    "gordi"
-   ]
-  },
+  "en-la-primaria": {},
   "siempre-jugabamos": {},
   "me-encantaba": {
    "slang": [
-    "nona",
-    "una-bocha",
-    "de-un-saque"
+    "buchon",
+    "chamuyero",
+    "farandula"
    ],
    "culture": {
     "section": "iconos",
     "class": "historietas-y-pantallas"
    }
   },
-  "estaba-lloviendo": {},
-  "sono-el-timbre": {
+  "estaba-lloviendo": {
    "slang": [
-    "mandar-al-frente",
-    "bochar",
-    "empedarse"
+    "pisar-el-palito",
+    "funcar",
+    "bordo"
    ]
   },
+  "sono-el-timbre": {},
   "practica-en-esa-epoca": {},
   "el-partido": {
    "slang": [
+    "fulbito",
     "metegol",
-    "la-seleccion",
     "futbol-5"
    ]
   },
   "la-final": {
+   "slang": [
+    "picado",
+    "referi",
+    "atajada"
+   ],
    "culture": {
     "section": "futbol",
     "class": "messi-y-qatar"
    }
   },
   "de-que-cuadro-sos": {
-   "slang": [
-    "la-scaloneta",
-    "dt",
-    "referi"
-   ],
    "culture": {
     "section": "futbol",
     "class": "de-que-cuadro-sos"
    }
   },
-  "socio-del-club": {},
   "en-el-restaurante": {
    "slang": [
-    "pochoclo",
-    "sandwich-de-miga",
-    "bizcochuelo"
+    "cebolla-de-verdeo",
+    "chaucha",
+    "humita"
    ]
   },
   "una-grande-de-muzza": {
@@ -519,9 +564,9 @@
   },
   "la-parrilla": {
    "slang": [
-    "bondiola",
-    "cebador",
-    "cebolla-de-verdeo"
+    "matear",
+    "pastafrola",
+    "zapallito"
    ],
    "culture": {
     "section": "asado",
@@ -539,9 +584,9 @@
   "llegue-tarde": {},
   "las-fiestas": {
    "slang": [
-    "chaucha",
-    "chocolatin",
-    "humita"
+    "zapallo-anco",
+    "pudrirse-todo",
+    "ghostear"
    ],
    "culture": {
     "section": "costumbres",
@@ -557,20 +602,13 @@
     "estar-en-otra"
    ]
   },
-  "me-olvide": {
-   "slang": [
-    "porron",
-    "mufa",
-    "chongo"
-   ]
-  },
+  "me-olvide": {},
   "la-semana-que-viene": {},
-  "voy-a-tener-que": {},
   "recorrer-el-pais": {
    "slang": [
-    "patente",
-    "banquina",
-    "cordon"
+    "yuyo",
+    "cordon",
+    "goma"
    ],
    "culture": {
     "section": "regiones",
@@ -579,9 +617,9 @@
   },
   "acampamos-en-el-sur": {
    "slang": [
-    "goma",
     "gomeria",
-    "guarda"
+    "guarda",
+    "lomo-de-burro"
    ],
    "culture": {
     "section": "regiones",
@@ -591,169 +629,202 @@
   "me-mude": {},
   "el-depto-nuevo": {
    "slang": [
-    "mesa-de-luz",
-    "toallon",
-    "velador"
-   ]
-  },
-  "practica-antes-y-ahora": {},
-  "las-figuritas": {
-   "slang": [
-    "pisar-el-palito",
-    "buchonear",
-    "patovica"
-   ],
-   "culture": {
-    "section": "tango",
-    "class": "nacido-en-el-arrabal"
-   }
-  },
-  "te-acordas": {},
-  "me-haces-un-favor": {
-   "slang": [
-    "pudrirse-todo",
-    "funcar",
-    "abrochadora"
-   ]
-  },
-  "me-das-una-mano": {},
-  "un-ratito": {
-   "slang": [
-    "si-te-digo-te-miento",
-    "ghostear",
+    "velador",
+    "abrochadora",
     "banadera"
    ]
   },
-  "hace-fresquito": {
+  "practica-antes-y-ahora": {},
+  "donde-queda": {
+   "slang": [
+    "tacho",
+    "si-te-digo-te-miento",
+    "prenderse"
+   ],
    "culture": {
     "section": "historia-nacimiento",
     "class": "antes-de-buenos-aires"
    }
   },
-  "pasen-pasen": {},
-  "a-la-mesa": {
+  "zona-norte": {},
+  "las-figuritas": {
    "slang": [
-    "milanga",
-    "matear",
-    "pastafrola"
+    "gordi",
+    "nona",
+    "broche"
    ]
   },
-  "hay-que": {
+  "te-acordas": {},
+  "me-haces-un-favor": {
    "slang": [
-    "prenderse",
-    "bolsa-de-dormir",
-    "bordo"
-   ]
-  },
-  "hay-que-sacar-turno": {
-   "culture": {
-    "section": "asado",
-    "class": "el-fuego"
-   }
-  },
-  "en-la-verduleria": {
-   "slang": [
-    "zapallito",
-    "zapallo-anco",
-    "chomba"
-   ]
-  },
-  "cien-gramos-de-jamon": {},
-  "practica-la-feria": {
-   "slang": [
+    "chomba",
     "cucha",
-    "garrafa",
-    "mamadera"
-   ]
-  },
-  "el-celu": {},
-  "no-tengo-senal": {
-   "culture": {
-    "section": "comida",
-    "class": "empanadas"
-   }
-  },
-  "me-robaron": {
-   "slang": [
-    "lomo-de-burro",
-    "tacho",
-    "quincho"
-   ]
-  },
-  "me-afanaron": {
-   "slang": [
-    "rinonera",
-    "taco",
-    "telgopor"
-   ]
-  },
-  "te-lo-devuelvo": {},
-  "te-lo-presto": {
+    "garrafa"
+   ],
    "culture": {
     "section": "musica",
     "class": "folklore"
    }
   },
-  "laburo-nuevo": {
+  "me-das-una-mano": {},
+  "un-ratito": {
    "slang": [
-    "acomodado",
-    "changa",
-    "cueva"
+    "mamadera",
+    "quincho",
+    "rinonera"
    ]
   },
-  "me-contrataron": {
-   "slang": [
-    "laburante",
-    "termotanque",
-    "atenti"
-   ]
-  },
-  "practica-te-lo-presto": {},
-  "salir-con-alguien": {},
-  "estamos-de-novios": {
-   "slang": [
-    "caloron",
-    "a-las-chapas",
-    "atorrante"
-   ],
+  "hace-fresquito": {},
+  "pasen-pasen": {
    "culture": {
     "section": "tango",
     "class": "la-milonga"
    }
   },
-  "me-cae-bien": {
+  "a-la-mesa": {
    "slang": [
-    "chimento",
+    "taco",
+    "telgopor",
+    "termotanque"
+   ]
+  },
+  "hay-que": {
+   "slang": [
+    "atenti",
+    "a-las-chapas",
+    "atorrante"
+   ]
+  },
+  "hay-que-sacar-turno": {},
+  "el-tramite": {
+   "slang": [
+    "boleta",
     "a-los-tumbos",
     "batero"
-   ]
-  },
-  "no-lo-aguanto": {},
-  "se-caso": {
-   "slang": [
-    "de-diez",
-    "al-divino-boton",
-    "boton"
-   ]
-  },
-  "se-recibio": {},
-  "donde-estara": {
-   "slang": [
-    "desprolijo",
-    "anotarse-un-poroto",
-    "cartonero"
    ],
    "culture": {
     "section": "dichos",
     "class": "mas-que"
    }
   },
-  "quien-sera": {},
-  "me-siento-mal": {
+  "migraciones": {},
+  "se-alquila": {},
+  "se-aceptan-tarjetas": {
    "slang": [
-    "epa",
+    "acomodado",
+    "changa",
+    "cueva"
+   ]
+  },
+  "en-la-verduleria": {
+   "slang": [
+    "caloron",
+    "al-divino-boton",
+    "boton"
+   ],
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "virreinato-e-invasiones"
+   }
+  },
+  "cien-gramos-de-jamon": {},
+  "practica-la-feria": {},
+  "el-celu": {
+   "slang": [
+    "chimento",
+    "anotarse-un-poroto",
+    "cartonero"
+   ]
+  },
+  "no-tengo-senal": {
+   "culture": {
+    "section": "asado",
+    "class": "el-orden"
+   }
+  },
+  "me-robaron": {
+   "slang": [
+    "de-diez",
     "atado-con-alambre",
     "chapa"
+   ]
+  },
+  "me-afanaron": {},
+  "te-lo-devuelvo": {
+   "slang": [
+    "desprolijo",
+    "bajar-linea",
+    "ciruja"
+   ]
+  },
+  "te-lo-presto": {
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "mayo-y-julio"
+   }
+  },
+  "laburo-nuevo": {
+   "slang": [
+    "laburante",
+    "epa",
+    "chocolate-por-la-noticia"
+   ]
+  },
+  "me-contrataron": {},
+  "practica-te-lo-presto": {},
+  "manejar-en-baires": {
+   "slang": [
+    "espeso",
+    "cortar-el-rostro",
+    "concheto"
+   ]
+  },
+  "la-ruta": {
+   "slang": [
+    "fija",
+    "cruzar-el-charco",
+    "conductor"
+   ],
+   "culture": {
+    "section": "regiones",
+    "class": "cuyo"
+   }
+  },
+  "salir-con-alguien": {},
+  "estamos-de-novios": {
+   "slang": [
+    "flor-de",
+    "dar-un-pesto",
+    "cumpa"
+   ]
+  },
+  "me-cae-bien": {},
+  "no-lo-aguanto": {
+   "slang": [
+    "pupo",
+    "guarangada",
+    "dato-de-color"
+   ]
+  },
+  "se-caso": {
+   "culture": {
+    "section": "musica",
+    "class": "trap-y-rkt"
+   }
+  },
+  "se-recibio": {
+   "slang": [
+    "literal",
+    "estar-en-la-lona",
+    "deschavetado"
+   ]
+  },
+  "donde-estara": {},
+  "me-siento-mal": {
+   "slang": [
+    "nomas",
+    "faltar-calle",
+    "encarador"
    ]
   },
   "como-se-siente": {},
@@ -761,8 +832,8 @@
   "sos-un-genio": {
    "slang": [
     "caer-la-ficha",
-    "dar-manija",
-    "no-da"
+    "no-da",
+    "pavada"
    ],
    "culture": {
     "section": "habla",
@@ -772,8 +843,16 @@
   "te-debo-una": {
    "slang": [
     "ufa",
-    "pavada",
-    "pucha"
+    "pucha",
+    "una-banda"
+   ]
+  },
+  "buena-onda": {},
+  "es-medio-vago": {
+   "slang": [
+    "olvidate",
+    "hacerle-la-cruz",
+    "entrador"
    ]
   },
   "quien-ceba": {
@@ -790,58 +869,58 @@
   },
   "quiero-que-vengas": {
    "slang": [
-    "faso",
-    "irse-al-pasto",
-    "concheto"
+    "pendejo",
+    "chupar",
+    "tarado"
    ]
   },
   "necesito-que-me-ayudes": {},
   "que-te-vaya-bien": {
    "slang": [
-    "mandarse-la-parte",
-    "conductor",
-    "embalado"
+    "faso",
+    "sobre-el-pucho",
+    "fana"
    ]
   },
   "que-te-mejores": {
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "virreinato-e-invasiones"
+    "section": "tango",
+    "class": "orquestas-y-piazzolla"
    }
   },
   "cuando-llegues": {
    "slang": [
-    "poner-garra",
-    "deschavetado",
-    "enroscarse"
+    "tomarse-para-la-joda",
+    "fisura",
+    "embalado"
    ]
   },
   "cuando-vuelvas": {},
   "practica-cuando-vuelvas": {},
   "no-creo": {
    "slang": [
-    "estar-en-la-lona",
     "paja",
-    "olvidate"
+    "tener-cancha",
+    "tener-la-vaca-atada"
    ]
   },
   "puede-ser-que": {
    "slang": [
-    "bajar-linea",
-    "tener-cancha",
-    "tener-la-vaca-atada"
+    "hacerse-el-boludo",
+    "pedorro",
+    "a-los-pedos"
    ],
    "culture": {
-    "section": "asado",
-    "class": "el-orden"
+    "section": "iconos",
+    "class": "inventos-y-nobeles"
    }
   },
   "no-te-preocupes": {},
   "no-seas-asi": {
    "slang": [
-    "cumpa",
     "guarango",
-    "neri"
+    "neri",
+    "pijotero"
    ]
   },
   "te-recomiendo": {},
@@ -850,35 +929,27 @@
     "seco",
     "chanchito",
     "changarin"
-   ]
-  },
-  "practica-te-aconsejo": {
+   ],
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "mayo-y-julio"
+    "section": "regiones",
+    "class": "cordoba"
    }
   },
+  "practica-te-aconsejo": {},
   "que-bueno": {
    "slang": [
     "salir-con-los-tapones-de-punta",
-    "chocolate-por-la-noticia",
-    "ir-a-los-bifes"
+    "ir-a-los-bifes",
+    "opa"
    ]
   },
   "me-preocupa": {},
-  "no-se": {
-   "slang": [
-    "ponerle-los-puntos",
-    "encarador",
-    "estar-de-la-cabeza"
-   ]
-  },
   "que-significa": {},
   "lunfardo": {
    "slang": [
-    "hacerse-el-boludo",
     "ortiva",
-    "telo"
+    "telo",
+    "hacerse-el-sota"
    ],
    "culture": {
     "section": "habla",
@@ -886,6 +957,11 @@
    }
   },
   "es-un-afano": {
+   "slang": [
+    "tirar-manteca-al-techo",
+    "vaquita",
+    "chirola"
+   ],
    "culture": {
     "section": "dichos",
     "class": "expresiones-del-dia"
@@ -894,9 +970,9 @@
   "practica-es-un-afano": {},
   "saludos-a-tu-vieja": {
    "slang": [
-    "pedorro",
-    "espeso",
-    "fija"
+    "pifie",
+    "pirulo",
+    "sonaste"
    ],
    "culture": {
     "section": "habla",
@@ -906,9 +982,9 @@
   "cuidate": {},
   "yo-que-vos": {
    "slang": [
-    "prendersele-la-lamparita",
-    "entrador",
-    "fusilado"
+    "kiosquero",
+    "enroscarse",
+    "botonear"
    ]
   },
   "yo-en-tu-lugar": {},
@@ -919,48 +995,35 @@
     "lavacopas"
    ]
   },
-  "si-ganara": {},
-  "me-gustaria": {
+  "si-ganara": {
    "culture": {
-    "section": "musica",
-    "class": "trap-y-rkt"
+    "section": "historia-nacimiento",
+    "class": "san-martin-y-belgrano"
    }
   },
+  "me-gustaria": {},
   "preferiria": {
    "slang": [
-    "flor-de",
-    "guarangada",
-    "literal"
+    "tranca",
+    "linyera",
+    "estar-de-la-cabeza"
    ]
   },
   "usted": {
    "slang": [
-    "nomas",
-    "opa",
-    "pifie"
+    "mersa",
+    "fusilado",
+    "cranear"
    ]
   },
   "como-no-dona-rosa": {},
   "practica-si-ganara": {},
-  "manejar-en-baires": {
-   "slang": [
-    "la-general-paz",
-    "aguaviva",
-    "bicisenda"
-   ]
-  },
-  "la-ruta": {
-   "slang": [
-    "cubierta",
-    "grua",
-    "zorrino"
-   ],
-   "culture": {
-    "section": "regiones",
-    "class": "cuyo"
-   }
-  },
   "en-cuotas": {
+   "slang": [
+    "rebusque",
+    "monotributista",
+    "paritaria"
+   ],
    "culture": {
     "section": "historia-moderna",
     "class": "pensar-en-dolares"
@@ -968,67 +1031,61 @@
   },
   "a-medias": {
    "slang": [
-    "monotributista",
-    "paritaria",
-    "plazo-fijo"
+    "plazo-fijo",
+    "posnet",
+    "senar"
    ]
   },
   "dicen-que": {},
   "me-contaron": {
    "slang": [
-    "dato-de-color",
-    "a-los-pedos",
-    "pirulo"
+    "hacerse-la-rata",
+    "hacerse-mala-sangre",
+    "irse-al-pasto"
    ]
   },
-  "practica-a-medias": {
+  "practica-a-medias": {},
+  "cada-vez-mas": {
+   "slang": [
+    "villa",
+    "aguaviva",
+    "bicisenda"
+   ]
+  },
+  "estas-cambiado": {},
+  "todo-aumenta": {
+   "slang": [
+    "mino",
+    "mambeado",
+    "curtir"
+   ],
    "culture": {
-    "section": "tango",
-    "class": "orquestas-y-piazzolla"
+    "section": "mate",
+    "class": "mate-de-todos-los-dias"
    }
   },
-  "buena-onda": {
-   "slang": [
-    "pendejo",
-    "tarado",
-    "ciruja"
-   ]
-  },
-  "es-medio-vago": {},
-  "donde-queda": {
-   "slang": [
-    "cabotaje",
-    "chango",
-    "combi"
-   ]
-  },
-  "zona-norte": {
-   "culture": {
-    "section": "iconos",
-    "class": "inventos-y-nobeles"
-   }
-  },
+  "no-me-alcanza": {},
   "me-pregunto": {},
   "me-dijo-que": {
    "slang": [
-    "sonaste",
-    "tranca",
-    "cortar-el-rostro"
+    "mandarse-la-parte",
+    "meter-pua",
+    "pan-de-dios"
    ]
   },
-  "practica-me-dijo": {},
-  "ponele": {
-   "slang": [
-    "hacerse-mala-sangre",
-    "cruzar-el-charco",
-    "dar-un-pesto"
-   ],
+  "practica-me-dijo": {
    "culture": {
-    "section": "regiones",
-    "class": "cordoba"
+    "section": "comida",
+    "class": "guisos-y-helado"
    }
   },
-  "por-las-dudas": {},
+  "ponele": {
+   "slang": [
+    "poner-garra",
+    "ponerle-los-puntos",
+    "prendersele-la-lamparita"
+   ]
+  },
   "se-me-cayo": {},
   "se-me-quemo": {
    "slang": [
@@ -1039,8 +1096,8 @@
   },
   "para-que": {
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "san-martin-y-belgrano"
+    "section": "futbol",
+    "class": "el-diez"
    }
   },
   "para-que-entres": {
@@ -1052,23 +1109,18 @@
   },
   "ya-habia": {
    "slang": [
-    "quedar-pagando",
-    "fana",
-    "mambeado"
+    "patota",
+    "palida",
+    "deschavar"
    ]
   },
   "nunca-habia": {},
-  "practica-nunca-habia": {
-   "culture": {
-    "section": "mate",
-    "class": "mate-de-todos-los-dias"
-   }
-  },
+  "practica-nunca-habia": {},
   "no-anda": {
    "slang": [
-    "posnet",
-    "rebusque",
-    "senar"
+    "plomo",
+    "rayado",
+    "embarrarla"
    ]
   },
   "el-tecnico": {
@@ -1078,194 +1130,166 @@
     "anotador"
    ]
   },
-  "el-consorcio": {},
+  "el-consorcio": {
+   "culture": {
+    "section": "musica",
+    "class": "en-vivo"
+   }
+  },
   "se-tapo-la-pileta": {
    "slang": [
     "flor-de-la-ducha",
     "mucama",
     "alcaucil"
-   ],
-   "culture": {
-    "section": "comida",
-    "class": "guisos-y-helado"
-   }
+   ]
   },
   "de-acuerdo": {},
   "tenes-razon": {
    "slang": [
-    "faltar-calle",
-    "hacerle-la-cruz",
-    "hacerse-el-sota"
+    "quedar-pagando",
+    "remarla",
+    "ser-de-madera"
    ]
   },
-  "practica-tenes-razon": {},
-  "el-cajero": {
-   "slang": [
-    "vaquita",
-    "remarla",
-    "fisura"
-   ],
+  "practica-tenes-razon": {
    "culture": {
-    "section": "futbol",
-    "class": "el-diez"
+    "section": "tango",
+    "class": "las-letras"
    }
   },
-  "pasame-el-alias": {},
-  "que-susto": {
+  "el-cajero": {
+   "slang": [
+    "potro",
+    "sacado",
+    "embocar"
+   ]
+  },
+  "que-susto": {},
+  "me-dan-asco": {
    "slang": [
     "cruzado",
     "del-tomate",
     "detonado"
    ]
   },
-  "me-dan-asco": {},
   "costumbres": {
-   "slang": [
-    "tetra",
-    "chapar",
-    "chupar"
-   ],
    "culture": {
     "section": "costumbres",
     "class": "sin-filtro"
    }
   },
   "se-aplaude-al-asador": {
+   "slang": [
+    "escabio",
+    "morcipan",
+    "chapar"
+   ],
    "culture": {
     "section": "asado",
     "class": "sos-invitado"
    }
   },
-  "acabo-de": {
+  "acabo-de": {},
+  "deje-de-fumar": {
    "slang": [
-    "ser-de-madera",
-    "kiosquero",
-    "palida"
+    "rugbier",
+    "tildado",
+    "fichar"
    ]
   },
-  "deje-de-fumar": {},
   "practica-un-aplauso": {
    "culture": {
     "section": "asado",
-    "class": "el-ritual"
+    "class": "el-fuego"
    }
   },
-  "no-sabes-lo-que-me-contaron": {
+  "no-sabes-lo-que-me-contaron": {},
+  "queria-que-vinieras": {
    "slang": [
-    "pan-de-dios",
-    "meter-pua",
-    "hacerse-la-rata"
-   ]
-  },
-  "viste-lo-que-paso": {
-   "slang": [
-    "sobre-el-pucho",
-    "tirar-manteca-al-techo",
-    "tomarse-para-la-joda"
-   ]
-  },
-  "queria-que-vinieras": {},
-  "mis-viejos-querian": {
-   "slang": [
-    "traga",
-    "botonear",
-    "after"
-   ],
-   "culture": {
-    "section": "musica",
-    "class": "en-vivo"
-   }
-  },
-  "aunque-llueva": {},
-  "aunque-no-tenga-ganas": {
-   "slang": [
-    "trapito",
-    "cranear",
-    "bailanta"
-   ]
-  },
-  "llevo-dos-anos": {},
-  "llevo-un-ano-aprendiendo": {
-   "slang": [
-    "turro",
-    "curtir",
-    "bolichero"
-   ],
-   "culture": {
-    "section": "tango",
-    "class": "las-letras"
-   }
-  },
-  "practica-aunque-sea": {},
-  "como-si-nada": {
-   "slang": [
-    "vueltero",
-    "deschavar",
-    "cachengue"
-   ]
-  },
-  "no-te-hagas-el-gil": {},
-  "el-que-quieras": {
-   "slang": [
-    "embarrarla",
-    "chopp",
+    "fundirse",
+    "after",
     "azucar-impalpable"
-   ],
+   ]
+  },
+  "mis-viejos-querian": {},
+  "aunque-llueva": {
+   "slang": [
+    "garronear",
+    "bailanta",
+    "bizcocho"
+   ]
+  },
+  "aunque-no-tenga-ganas": {},
+  "llevo-dos-anos": {
+   "slang": [
+    "ligar",
+    "bolichero",
+    "budin-ingles"
+   ]
+  },
+  "llevo-un-ano-aprendiendo": {
    "culture": {
     "section": "iconos",
     "class": "iconos-de-hoy"
    }
   },
-  "el-de-la-vidriera": {},
-  "practica-a-la-mesa": {
+  "practica-aunque-sea": {
    "slang": [
-    "embocar",
-    "cuarteto",
-    "bizcocho"
+    "macanear",
+    "cachengue",
+    "castana-de-caju"
    ]
   },
+  "como-si-nada": {},
+  "no-te-hagas-el-gil": {
+   "slang": [
+    "manotear",
+    "chopp",
+    "chipa"
+   ]
+  },
+  "el-que-quieras": {
+   "culture": {
+    "section": "regiones",
+    "class": "litoral"
+   }
+  },
+  "el-de-la-vidriera": {
+   "slang": [
+    "mufar",
+    "cuarteto",
+    "cubanito"
+   ]
+  },
+  "practica-a-la-mesa": {},
   "si-hubiera-sabido": {},
   "si-hubieramos-salido": {
    "slang": [
-    "contramano",
     "pulperia",
-    "diariero"
+    "cabotaje",
+    "chango"
    ],
    "culture": {
     "section": "regiones",
     "class": "noroeste"
    }
   },
-  "por-un-lado": {},
-  "la-ventaja-es-que": {
+  "por-un-lado": {
    "slang": [
     "calce",
     "minga",
     "anda-a-cantarle-a-gardel"
    ]
   },
-  "el-tramite": {},
-  "migraciones": {
+  "la-ventaja-es-que": {},
+  "practica-migraciones": {
    "slang": [
-    "fichar",
+    "patinarse",
     "cumbia-villera",
-    "budin-ingles"
+    "cuernito"
    ]
   },
-  "practica-migraciones": {},
-  "te-doy-la-razon": {
-   "slang": [
-    "fundirse",
-    "entonado",
-    "castana-de-caju"
-   ]
-  },
-  "que-opinas": {
-   "culture": {
-    "section": "regiones",
-    "class": "litoral"
-   }
-  },
+  "te-doy-la-razon": {},
   "un-depto-que-tenga": {
    "slang": [
     "antiparras",
@@ -1273,33 +1297,33 @@
     "cama-marinera"
    ]
   },
-  "conoces-a-alguien-que": {},
-  "me-da-bronca": {
-   "slang": [
-    "rayado",
-    "sacado",
-    "tildado"
-   ]
-  },
-  "me-pone-nervioso-que": {
+  "conoces-a-alguien-que": {
    "culture": {
     "section": "historia-nacimiento",
     "class": "unitarios-federales-y-gauchos"
    }
   },
+  "me-da-bronca": {
+   "slang": [
+    "berretin",
+    "camote",
+    "julepe"
+   ]
+  },
+  "me-pone-nervioso-que": {},
   "deberias": {
    "slang": [
-    "garronear",
-    "escabiado",
-    "chipa"
+    "pispear",
+    "entonado",
+    "faina"
    ]
   },
   "deberias-tomarte-unos-dias": {},
   "practica-alguien-que-sepa": {
    "slang": [
-    "berretin",
-    "camote",
-    "julepe"
+    "metejon",
+    "quemar",
+    "escabiado"
    ]
   },
   "dijo-que-vendria": {
@@ -1310,54 +1334,37 @@
   },
   "dijo-que-pasaria": {
    "slang": [
-    "ligar",
+    "ranchar",
     "escabiar",
-    "cubanito"
+    "flauta"
    ]
   },
   "a-menos-que": {},
   "con-tal-de-que": {
    "slang": [
-    "macanear",
-    "escabio",
-    "cuernito"
-   ]
-  },
-  "se-alquila": {},
-  "se-aceptan-tarjetas": {
-   "slang": [
-    "amarrocar",
-    "canuto",
-    "estar-pato"
+    "ratearse",
+    "falopa",
+    "grisin"
    ]
   },
   "practica-se-aceptan-tarjetas": {},
-  "todo-aumenta": {
+  "voy-entendiendo": {},
+  "ando-buscando": {
    "slang": [
-    "gatillar",
-    "pichulear",
-    "manotear"
-   ]
-  },
-  "no-me-alcanza": {
+    "estar-pato",
+    "amarrocar",
+    "canuto"
+   ],
    "culture": {
     "section": "asado",
     "class": "asados-del-pais"
    }
   },
-  "voy-entendiendo": {},
-  "ando-buscando": {
-   "slang": [
-    "mufar",
-    "falopa",
-    "faina"
-   ]
-  },
   "practica-no-lo-aguanto": {
    "slang": [
-    "linyera",
-    "mersa",
-    "mino"
+    "tincho",
+    "traga",
+    "trapito"
    ]
   },
   "que-novedad": {},
@@ -1365,15 +1372,15 @@
   "ese-chabon": {
    "slang": [
     "amurar",
-    "catrera",
-    "fulero"
+    "cabrero",
+    "cachuzo"
    ]
   },
   "estoy-al-horno": {
    "slang": [
-    "villa",
     "hacer-pata-ancha",
-    "espiantar"
+    "espiantar",
+    "piantar"
    ]
   },
   "puteadas": {
@@ -1384,9 +1391,9 @@
   },
   "me-estas-cargando": {
    "slang": [
-    "patinarse",
+    "relojear",
     "fernando",
-    "flauta"
+    "lemon-pie"
    ]
   },
   "caiste": {},
@@ -1400,9 +1407,9 @@
   "me-encargo-que": {},
   "me-pregunto-si": {
    "slang": [
-    "pispear",
+    "rescatarse",
     "free",
-    "grisin"
+    "matambre"
    ]
   },
   "fijate-si-tienen": {
@@ -1414,80 +1421,74 @@
   "practica-como-no": {},
   "cualquier-cosa-avisame": {
    "slang": [
-    "quemar",
-    "gira",
-    "lemon-pie"
+    "gatillar",
+    "pichulear",
+    "gira"
    ]
   },
   "te-reenvio-el-archivo": {
    "slang": [
-    "ranchar",
     "hacer-gancho",
-    "matambre"
+    "minuta",
+    "combi"
    ]
   },
   "la-entrega": {},
   "sobre-la-hora": {
    "slang": [
-    "ratearse",
     "histeriquear",
-    "minuta"
+    "napo",
+    "cubierta"
    ]
   },
-  "merezco-un-aumento": {},
-  "se-merece-el-ascenso": {
-   "slang": [
-    "relojear",
-    "jarra-loca",
-    "morcipan"
-   ],
+  "merezco-un-aumento": {
    "culture": {
     "section": "historia-nacimiento",
     "class": "desierto-e-inmigrantes"
    }
   },
+  "se-merece-el-ascenso": {
+   "slang": [
+    "jarra-loca",
+    "pebete",
+    "diariero"
+   ]
+  },
   "resulta-que": {},
   "para-colmo": {},
   "se-la-cree": {
    "slang": [
-    "cabrero",
-    "cachuzo",
-    "chirola"
+    "catrera",
+    "chumbo",
+    "fulero"
    ]
   },
   "me-la-jugue": {
    "slang": [
-    "chumbo",
     "viola",
-    "yeta"
+    "yeta",
+    "bolonqui"
    ]
   },
-  "practica-me-la-jugue": {},
-  "cada-vez-mas": {
-   "slang": [
-    "fierro",
-    "fotomulta",
-    "guino"
-   ],
+  "practica-me-la-jugue": {
    "culture": {
     "section": "futbol",
     "class": "mas-alla-de-buenos-aires"
    }
   },
-  "estas-cambiado": {},
   "estoy-podrido": {
    "slang": [
-    "metejon",
-    "rescatarse",
-    "matinee"
+    "matinee",
+    "pipon",
+    "fierro"
    ]
   },
   "me-pudri": {},
   "practica-me-pudri": {
    "slang": [
     "merca",
-    "napo",
-    "playero"
+    "pizzanesa",
+    "fotomulta"
    ]
   },
   "como-te-decia": {},
@@ -1527,26 +1528,17 @@
     "class": "democracia-y-crisis"
    }
   },
-  "el-cuarto-oscuro": {},
-  "practica-el-cuarto-oscuro": {
+  "practica-el-cuarto-oscuro": {},
+  "segun-el-diario": {
+   "slang": [
+    "cadena-nacional",
+    "peronista",
+    "cacerolazo"
+   ],
    "culture": {
     "section": "historia-moderna",
     "class": "de-2003-a-hoy"
    }
-  },
-  "segun-el-diario": {
-   "slang": [
-    "peronista",
-    "cacerolazo",
-    "casta"
-   ]
-  },
-  "aparentemente": {
-   "slang": [
-    "pogo",
-    "pebete",
-    "polirrubro"
-   ]
   },
   "practica-me-afanaron": {},
   "el-tango": {
@@ -1569,48 +1561,47 @@
   },
   "lo-lindo-de-la-ciudad": {
    "slang": [
-    "patota",
-    "pijotero",
-    "plomo"
+    "la-general-paz",
+    "turro",
+    "vueltero"
    ]
   },
-  "lo-bueno-de-vivir-aca": {
+  "no-es-que": {
    "slang": [
-    "pancheria",
-    "parador",
-    "paragolpes"
+    "pogo",
+    "rabas",
+    "grua"
    ]
   },
-  "no-es-que": {},
   "no-es-que-no-me-guste": {},
   "si-hubiera-ahorrado": {
    "slang": [
-    "canasto",
-    "chiche",
-    "cortadora-de-pasto"
+    "piloto",
+    "lampazo",
+    "canasto"
    ]
   },
-  "si-hubieras-estudiado": {
-   "slang": [
-    "porro",
-    "pipon",
-    "sodero"
-   ],
+  "tendria-que-haber": {
    "culture": {
     "section": "historia-nacimiento",
     "class": "granero-del-mundo"
    }
   },
-  "tendria-que-haber": {},
   "me-hubiera-gustado": {
    "slang": [
-    "quebrar",
-    "pizzanesa",
-    "gomera"
+    "porro",
+    "sorrentinos",
+    "guino"
    ]
   },
   "practica-me-hubiera-gustado": {},
-  "lo-que-pasa-es-que": {},
+  "lo-que-pasa-es-que": {
+   "slang": [
+    "quebrar",
+    "vainilla",
+    "pancheria"
+   ]
+  },
   "lo-que-paso-fue-que": {},
   "como-dice-el-dicho": {
    "slang": [
@@ -1623,13 +1614,7 @@
     "class": "refranes"
    }
   },
-  "cada-loco-con-su-tema": {
-   "slang": [
-    "tirar-los-galgos",
-    "rrpp",
-    "rabas"
-   ]
-  },
+  "cada-loco-con-su-tema": {},
   "practica-cada-loco-con-su-tema": {
    "culture": {
     "section": "dichos",
@@ -1638,32 +1623,39 @@
   },
   "me-hizo-reir": {
    "slang": [
+    "rrpp",
+    "vigilante",
+    "parador"
+   ]
+  },
+  "me-mori-de-risa": {
+   "slang": [
+    "tetra",
+    "paragolpes",
+    "chiche"
+   ]
+  },
+  "cuanto-mas": {},
+  "cuanto-antes-lleguemos": {
+   "slang": [
     "transa",
-    "sorrentinos",
-    "licuadora"
+    "playero",
+    "cortadora-de-pasto"
    ]
   },
-  "me-mori-de-risa": {},
-  "cuanto-mas": {
-   "slang": [
-    "trasnoche",
-    "vainilla",
-    "mecha"
-   ]
-  },
-  "cuanto-antes-lleguemos": {},
   "practica-me-mori-de-risa": {
-   "slang": [
-    "rati",
-    "yuta",
-    "bolonqui"
-   ],
    "culture": {
     "section": "historia-moderna",
     "class": "malvinas"
    }
   },
-  "sin-ofender": {},
+  "sin-ofender": {
+   "slang": [
+    "trasnoche",
+    "polirrubro",
+    "gomera"
+   ]
+  },
   "no-te-lo-tomes-a-mal": {},
   "me-cayo-la-ficha": {
    "slang": [
@@ -1672,26 +1664,26 @@
     "gomia"
    ]
   },
-  "me-hace-ruido": {
-   "slang": [
-    "vigilante",
-    "pata-de-rana",
-    "brushing"
-   ]
-  },
+  "me-hace-ruido": {},
   "practica-me-hace-ruido": {},
   "mis-abuelos-italianos": {
    "slang": [
-    "potro",
-    "rugbier",
-    "tincho"
+    "chinchudo",
+    "cumplemes",
+    "guri"
    ],
    "culture": {
     "section": "historia-nacimiento",
     "class": "los-barcos"
    }
   },
-  "se-instalaron-en-la-boca": {},
+  "se-instalaron-en-la-boca": {
+   "slang": [
+    "malon",
+    "mamerto",
+    "otario"
+   ]
+  },
   "practica-se-instalaron": {
    "culture": {
     "section": "mate",
@@ -1700,18 +1692,12 @@
   },
   "me-emocione": {
    "slang": [
-    "ph",
-    "chicato",
-    "piloto"
+    "sodero",
+    "licuadora",
+    "brushing"
    ]
   },
-  "se-emociono": {
-   "slang": [
-    "piluso",
-    "chueco",
-    "playo"
-   ]
-  },
+  "se-emociono": {},
   "practica-se-emociono": {},
   "gracias-por-todo": {
    "slang": [

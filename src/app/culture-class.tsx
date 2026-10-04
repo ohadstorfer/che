@@ -235,13 +235,20 @@ export default function CultureClass() {
   const params = useLocalSearchParams<{ section?: string; class?: string; lesson?: string }>();
   const lessonId = params.lesson;
   const [fromLesson, setFromLesson] = useState<ReturnType<typeof findClass> | undefined>(undefined);
+  /** The unit couldn't be read at all, which says nothing about whether the class exists. */
+  const [unreachable, setUnreachable] = useState(false);
 
   useEffect(() => {
     if (!lessonId) return;
     let cancelled = false;
     lessonWithUnit(lessonId)
-      .then(({ unit }) => unitCulture(unit.slug))
-      .catch(() => null)
+      .then(
+        ({ unit }) => unitCulture(unit.slug),
+        () => {
+          if (!cancelled) setUnreachable(true);
+          return null;
+        },
+      )
       .then((found) => {
         if (!cancelled) setFromLesson(found);
       });
@@ -252,12 +259,12 @@ export default function CultureClass() {
 
   if (lessonId) {
     if (fromLesson === undefined) return <SafeAreaView style={styles.safe} />;
-    return <ClassPlayer found={fromLesson} lessonId={lessonId} />;
+    return <ClassPlayer found={fromLesson} lessonId={lessonId} unreachable={unreachable} />;
   }
   return <ClassPlayer found={findClass(params.section ?? '', params.class ?? '')} />;
 }
 
-function ClassPlayer({ found, lessonId }: { found: ReturnType<typeof findClass>; lessonId?: string }) {
+function ClassPlayer({ found, lessonId, unreachable }: { found: ReturnType<typeof findClass>; lessonId?: string; unreachable?: boolean }) {
   useStatusBarColor(colors.bg);
   const [steps] = useState(() =>
     found ? buildSteps(found.section.slug, found.cls.title, found.cls.pages, found.cls.vocabulary) : [],
@@ -265,6 +272,7 @@ function ClassPlayer({ found, lessonId }: { found: ReturnType<typeof findClass>;
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState<Set<string> | null>(null);
   const [ended, setEnded] = useState<{ result: FinishResult | null } | null>(null);
+  const [skipping, setSkipping] = useState(false);
   const finished = found !== null && index >= steps.length;
   const sectionSlug = found?.section.slug;
   const classSlug = found?.cls.slug;
@@ -276,12 +284,28 @@ function ClassPlayer({ found, lessonId }: { found: ReturnType<typeof findClass>;
   }, [finished, sectionSlug, classSlug, lessonId]);
 
   if (!found) {
+    if (lessonId && ended) return <PathLessonDone result={ended.result} />;
+    // The road can hold a class this build has no pages for (the plan ships in
+    // the app, the road in the database). It is skipped rather than left as a
+    // step she can never finish.
+    const skip = () => {
+      if (!lessonId) return;
+      setSkipping(true);
+      void finishPathLesson(lessonId, null).then((result) => (result ? setEnded({ result }) : setSkipping(false)));
+    };
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.missing}>
-          <Text style={styles.missingText}>This class doesn't exist.</Text>
+          <Text style={styles.missingText}>
+            {!lessonId
+              ? "This class doesn't exist."
+              : unreachable
+                ? "Couldn't load this class. Check your connection and try again."
+                : "This class isn't in this version of the app."}
+          </Text>
+          {lessonId && !unreachable ? <Button title="Skip it" loading={skipping} onPress={skip} /> : null}
           {lessonId ? (
-            <Button title="Back to the course" onPress={() => goBack('/home')} />
+            <Button title="Back to the course" variant={unreachable ? 'primary' : 'ghost'} onPress={() => goBack('/home')} />
           ) : (
             <Button title="Back to culture" onPress={() => router.dismissTo('/culture')} />
           )}
@@ -1416,7 +1440,7 @@ function MatchStep({
 const styles = StyleSheet.create({
   safe: { flex: 1 },
   missing: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 24 },
-  missingText: { ...font.body[600], fontSize: 17, color: colors.muted },
+  missingText: { ...font.body[600], fontSize: 17, color: colors.muted, textAlign: 'center' },
   header: {
     flexDirection: 'row',
     alignItems: 'center',

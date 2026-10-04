@@ -1,0 +1,109 @@
+section:
+  slug: "juegos"
+  title: "Games"
+  emoji: "🃏"
+  summary: "A card game for liars, football stickers and dream numbers"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-truco"
+    title: "Truco"
+    summary: "The national card game, and how partners talk without words"
+    pages:
+      - type: card
+        text: "**Truco** is the national card game. People play it in bars, on the beach, at school breaks and after every asado, usually two against two."
+      - type: choice
+        prompt: "What is the most important skill in truco?"
+        options:
+          - "Counting fast"
+          - "Lying well"
+          - "Remembering every card"
+        correct: 1
+        explain: "You shout **“¡Truco!”** to raise the bet, even with terrible cards. The other team must decide if you're lying. **Mentir**, to lie, is part of the rules."
+      - type: card
+        text: "It's played with Spanish cards, not hearts and clubs. The four suits are **espadas** (swords), **bastos** (wooden clubs), **oros** (gold coins) and **copas** (cups)."
+      - type: card
+        text: "The strongest card is the 1 of swords: the **ancho de espada**. Nothing beats it."
+      - type: choice
+        prompt: "In the middle of a game, your partner looks at you and lifts both eyebrows. What does it mean?"
+        options:
+          - "“I have nothing, you play”"
+          - "“They are lying”"
+          - "“I have the best card”"
+        correct: 2
+        explain: "Partners talk with secret faces, the **señas**. Lifted eyebrows: the ancho de espada. A wink: the second best card. The trick is that the other team must not see."
+      - type: card
+        text: "A game goes to 30 points. The first fifteen are the **malas**, the bad ones, and the last fifteen are the **buenas**. Points are counted with matches or dry beans."
+      - type: card
+        chip: "Did you know?"
+        text: "Truco gave words to everyday talk. **Retrucar** is to answer back fast in an argument. **Irse al mazo**, to go to the pile, is to give up."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "figuritas"
+    title: "Figuritas"
+    summary: "The sticker album that drives the whole country crazy"
+    pages:
+      - type: card
+        text: "**Figuritas** are small stickers of football players that you collect in an album. Every World Cup, children and adults go a little crazy to fill theirs."
+      - type: choice
+        prompt: "In 2022 there were not enough figuritas in the kioscos. What did the government do?"
+        options:
+          - "It printed its own album"
+          - "It called a meeting about it"
+          - "It set a limit of one pack per child"
+        correct: 1
+        explain: "A real government meeting about football stickers, with the company that makes them and the kiosco owners. Three months later Argentina won the World Cup."
+      - type: card
+        text: "Nobody fills an album alone. You swap. A friend shows you a pile, one by one, and you answer fast: **“late”** (I have it) or **“nola”** (I don't)."
+      - type: card
+        text: "Those two words are **la tengo** and **no la tengo**, cut short. The sticker that almost nobody has is **la difícil**, the hard one."
+      - type: choice
+        prompt: "At school, children also play to win each other's figuritas. How?"
+        options:
+          - "They hide them and the others look for them"
+          - "They throw them at a wall, and the closest one wins"
+          - "They race to stick them in the album"
+        correct: 1
+        explain: "That game is **el espejito**. In another one, **la tapadita**, your figurita has to land on top of someone else's. The winner takes both."
+      - type: card
+        text: "Adults do it too. In a World Cup year, offices have a list on the wall of who needs which number, and nobody finds that strange."
+      - type: card
+        text: "On weekends, in some parks, people of all ages meet to swap figuritas. Parents say it's for the children. It's not always true."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-quiniela"
+    title: "Dream numbers"
+    summary: "The small daily lottery and its list of numbers"
+    pages:
+      - type: card
+        text: "**La quiniela** is a lottery with several draws a day. The simple bet is a number from 00 to 99: you bet a little money at an **agencia**, a small lottery shop."
+      - type: choice
+        prompt: "How do many players choose their number?"
+        options:
+          - "From what they dreamed last night"
+          - "From the price of the dollar"
+          - "From the result of the last football game"
+        correct: 0
+        explain: "Every number has a meaning, and every dream has a number. The list hangs on the wall of every agencia."
+      - type: card
+        text: "Some of the list: **00** is eggs, **14** is the drunk man, **15** is the pretty girl, **17** is bad luck, **32** is money."
+      - type: choice
+        prompt: "One number is called **los dos patitos**, the two little ducks, because of how it looks. Which one?"
+        options:
+          - "11"
+          - "22"
+          - "88"
+        correct: 1
+        explain: "Two 2s look like two ducks swimming. In the dream list, 22 is also **el loco**, the crazy man."
+      - type: card
+        text: "The most famous is **48**: **il morto che parla**, “the dead man who talks”. The name is Italian, because the list came with the immigrants from Naples."
+      - type: card
+        text: "People also play the number plate of a car that crashed, or the age of a famous person who just died. When something big happens, half the country bets on the same number."
+      - type: card
+        chip: "Pro tip"
+        text: "Tell a neighbor you dreamed of your dead grandfather talking, and you'll hear **“jugale al 48”**: bet on 48. It's a joke and real advice at once."
+    vocabulary: []

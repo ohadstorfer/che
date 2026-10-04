@@ -86,6 +86,7 @@
     "course:tts": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/tts.mjs",
     "course:lessons": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/build-lessons.mjs",
     "course:extras": "node scripts/course/unit-extras.mjs",
+    "course:sync-yaml": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/sync-yaml.mjs",
     "course:parity": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/check-parity.mjs",
     "course:snapshot": "node scripts/course/export-snapshot.mjs",
     "course:restore": "node scripts/course/import-snapshot.mjs",

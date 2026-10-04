@@ -135,6 +135,7 @@ if (sqlOut) {
   ];
   if (renumbered.length) {
     const values = renumbered.map((u) => `(${q(u.id)}::uuid, ${u.section_id}, ${u.ordinal}, ${u.course_order}, ${u.old.course_order})`).join(',\n  ');
+    const places = units.filter((u) => !u.isNew).map((u) => `(${u.old.course_order}, ${u.course_order})`).join(', ');
     out.push(`create temporary table reorder_units (id uuid, section_id smallint, ordinal smallint, course_order smallint, old_order smallint) on commit drop;
 insert into reorder_units values
   ${values};
@@ -145,8 +146,16 @@ insert into reorder_units values
 update public.units u set ordinal = 20000 + r.course_order, course_order = 20000 + r.course_order from reorder_units r where u.id = r.id;
 update public.units u set section_id = r.section_id, ordinal = r.ordinal, course_order = r.course_order from reorder_units r where u.id = r.id;
 
--- A placement or jump test is remembered as a course place.
-update public.profiles p set placed_through = r.course_order from reorder_units r where p.placed_through = r.old_order;
+-- A placement or jump test is remembered as a course place. A place no unit
+-- holds any more (its unit was merged into another and retired) falls to the
+-- unit before it, so what she tested out of stays skipped.
+update public.profiles p set placed_through = coalesce((
+  select m.course_order from (values
+    ${places}
+  ) as m (old_order, course_order)
+  where m.old_order <= p.placed_through order by m.old_order desc limit 1
+), 0)
+where p.placed_through > 0;
 `);
   }
   const ready = moves.filter((m) => !m.to.isNew);

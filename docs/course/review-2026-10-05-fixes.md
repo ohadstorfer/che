@@ -1,0 +1,11101 @@
+# Changes in migration 20261005000009 (before → after)
+
+## Spanish rewritten (1293)
+
+- `940a3963` un-cafe-por-favor (c01#1)
+  - Un mate y una medialuna.
+  - → **¿Un mate y una medialuna?**
+  - A mate and a medialuna.
+  - → **A mate and a medialuna?**
+- `dc8b24e3` otro-cafe (c01#3)
+  - Una tostada, por favor.
+  - → **¿Una tostada?**
+  - A piece of toast, please.
+  - → **A piece of toast?**
+- `1b4fe546` otro-cafe (c01#3)
+  - Otra tostada, por favor.
+  - → **¿Otra tostada?**
+  - Another piece of toast, please.
+  - → **Another piece of toast?**
+- `0f1bb2ca` otro-cafe (c01#3)
+  - Un licuado, una tostada y un agua, por favor.
+  - → **¿Un té y otra tostada?**
+  - A smoothie, a piece of toast, and a water, please.
+  - → **A tea and another piece of toast?**
+- `24da847b` practica-hola (c01#4)
+  - Disculpá, otra tostada y un té, por favor.
+  - → **Che, ¿otra tostada y un té?**
+  - Excuse me, another piece of toast and a tea, please.
+  - → **Hey, another piece of toast and a tea?**
+- `2ff4357a` practica-hola (c01#4)
+  - ¿Una medialuna? No, gracias, una tostada.
+  - → **—¿Una medialuna? —No, gracias, una tostada.**
+  - A medialuna? No, thanks, a piece of toast.
+  - → **—A medialuna? —No, thanks, a piece of toast.**
+- `4d59194e` otro-cafe (c01#5)
+  - ¿Una torta u otra pizza?
+  - → **Té y torta, por favor.**
+  - A cake or another pizza?
+  - → **Tea and cake, please.**
+- `bdfd97ec` soy-de-zona-norte (c01#6)
+  - ¿Otro país u otra provincia?
+  - → **¿Sos de otro país o de otra provincia?**
+  - Another country or another province?
+  - → **Are you from another country or from another province?**
+- `6306fa36` otro-cafe (c01#8)
+  - ¿Pan o un sándwich? Pan y un mate, gracias.
+  - → **Pan y agua, por favor.**
+  - Bread or a sandwich? Bread and a mate, thanks.
+  - → **Bread and water, please.**
+- `94869b88` otro-cafe (c01#8)
+  - ¿Pan o una factura?
+  - → **—¿Pan? —Gracias.**
+  - Bread or a pastry?
+  - → **—Bread? —Thanks.**
+- `6d1b0a3a` hola-che (c01#10)
+  - ¿Juan? Mal.
+  - → **—¿Todo bien? —No, mal.**
+  - Juan? Not good.
+  - → **—All good? —No, not good.**
+- `065cd5af` un-cafe-por-favor (c01#14)
+  - ¿Café o agua? Café, por favor.
+  - → **—¿Café o agua? —Café, por favor.**
+  - Coffee or water? Coffee, please.
+  - → **—Coffee or water? —Coffee, please.**
+- `a0b82441` un-cafe-por-favor (c01#14)
+  - ¿Jugo o café? Jugo, gracias.
+  - → **—¿Jugo o café? —Jugo, gracias.**
+  - Juice or coffee? Juice, thanks.
+  - → **—Juice or coffee? —Juice, thanks.**
+- `bb7afa01` un-cafe-por-favor (c01#14)
+  - ¿Un jugo? Gracias.
+  - → **—¿Un jugo? —Gracias.**
+  - A juice? Thanks.
+  - → **—A juice? —Thanks.**
+- `732ec347` un-cafe-por-favor (c01#14)
+  - ¿Un jugo o una factura? Jugo, gracias.
+  - → **—¿Un jugo o una factura? —Jugo, gracias.**
+  - A juice or a pastry? Juice, thanks.
+  - → **—A juice or a pastry? —Juice, thanks.**
+- `ae60c5df` otro-cafe (c01#14)
+  - ¿Torta o una medialuna? Torta, gracias.
+  - → **—¿Torta o una medialuna? —Torta, gracias.**
+  - Cake or a medialuna? Cake, thanks.
+  - → **—Cake or a medialuna? —Cake, thanks.**
+- `819b4f4f` otro-cafe (c01#14)
+  - ¿Torta y helado? ¡Gracias!
+  - → **—¿Torta y helado? —¡Gracias!**
+  - Cake and ice cream? Thanks!
+  - → **—Cake and ice cream? —Thanks!**
+- `26709032` otro-cafe (c01#14)
+  - ¿Un té y torta? Un café y torta, gracias.
+  - → **—¿Un té y torta? —Un café y torta, gracias.**
+  - Tea and cake? Coffee and cake, thanks.
+  - → **—Tea and cake? —Coffee and cake, thanks.**
+- `cddc148d` otro-cafe (c01#14)
+  - ¿Otro café o un agua? Otro café, gracias.
+  - → **—¿Otro café o un agua? —Otro café, gracias.**
+  - Another coffee or a water? Another coffee, thanks.
+  - → **—Another coffee or a water? —Another coffee, thanks.**
+- `94752a3e` otro-cafe (c01#14)
+  - ¿Comida? Una pizza y una cerveza, por favor.
+  - → **—¿Comida? —Una pizza y una cerveza, por favor.**
+  - Food? A pizza and a beer, please.
+  - → **—Food? —A pizza and a beer, please.**
+- `5d16c512` otro-cafe (c01#14)
+  - ¿Y comida? Un tostado y un jugo.
+  - → **—¿Y comida? —Un tostado y un jugo.**
+  - And food? A toasted sandwich and a juice.
+  - → **—And food? —A toasted sandwich and a juice.**
+- `5ed6a3ea` otro-cafe (c01#14)
+  - ¿Cerveza o agua? Cerveza, gracias.
+  - → **—¿Cerveza o agua? —Cerveza, gracias.**
+  - Beer or water? Beer, thanks.
+  - → **—Beer or water? —Beer, thanks.**
+- `70e1fc4c` otro-cafe (c01#14)
+  - ¿Una cerveza o un jugo? Una cerveza, gracias.
+  - → **—¿Una cerveza o un jugo? —Una cerveza, gracias.**
+  - A beer or a juice? A beer, thanks.
+  - → **—A beer or a juice? —A beer, thanks.**
+- `8b414c29` hola-che (c01#14)
+  - ¿Sofi? No, soy Juan.
+  - → **—¿Sofi? —No, soy Juan.**
+  - Sofi? No, I'm Juan.
+  - → **—Sofi? —No, I'm Juan.**
+- `87a8465f` hola-che (c01#14)
+  - ¿Cómo andás, Juan? Todo bien.
+  - → **—¿Cómo andás, Juan? —Todo bien.**
+  - How are you doing, Juan? All good.
+  - → **—How are you doing, Juan? —All good.**
+- `d061f12f` hola-che (c01#14)
+  - ¿Cómo andás? Todo bien.
+  - → **—¿Cómo andás? —Todo bien.**
+  - How are you doing? All good.
+  - → **—How are you doing? —All good.**
+- `1278447a` hola-che (c01#14)
+  - ¿Qué onda? Todo bien, ¿cómo andás?
+  - → **—¿Qué onda? —Todo bien, ¿cómo andás?**
+  - What's up? All good, how are you doing?
+  - → **—What's up? —All good, how are you doing?**
+- `2177a806` hola-che (c01#14)
+  - ¿Todo bien? Sí, todo bien.
+  - → **—¿Todo bien? —Sí, todo bien.**
+  - All good? Yes, all good.
+  - → **—All good? —Yes, all good.**
+- `df9610bd` hola-che (c01#14)
+  - Che, ¿cómo andás? Todo bien, gracias.
+  - → **—Che, ¿cómo andás? —Todo bien, gracias.**
+  - Hey, how are you doing? All good, thanks.
+  - → **—Hey, how are you doing? —All good, thanks.**
+- `8ca1aa94` hola-che (c01#14)
+  - ¿Café? No, mate.
+  - → **—¿Café? —No, mate.**
+  - Coffee? No, some mate.
+  - → **—Coffee? —No, some mate.**
+- `f7ba5953` hola-che (c01#14)
+  - ¿Sofi? No, Lucía.
+  - → **—¿Sofi? —No, Lucía.**
+  - Sofi? No, Lucía.
+  - → **—Sofi? —No, Lucía.**
+- `2149cc59` hola-che (c01#14)
+  - ¿Una cerveza? No, gracias.
+  - → **—¿Una cerveza? —No, gracias.**
+  - A beer? No, thanks.
+  - → **—A beer? —No, thanks.**
+- `812c164a` hola-che (c01#14)
+  - Che, ¿otra cerveza? Sí, dale.
+  - → **—Che, ¿otra cerveza? —Sí, dale.**
+  - Hey, another beer? Yes, sure.
+  - → **—Hey, another beer? —Yes, sure.**
+- `2aa1191b` hola-che (c01#14)
+  - ¿Otro mate? Dale, gracias.
+  - → **—¿Otro mate? —Dale, gracias.**
+  - Another mate? Sure, thanks.
+  - → **—Another mate? —Sure, thanks.**
+- `feaa89a1` hola-che (c01#14)
+  - ¿Un café? Dale.
+  - → **—¿Un café? —Dale.**
+  - A coffee? Sure.
+  - → **—A coffee? —Sure.**
+- `a8194c57` hola-che (c01#14)
+  - ¿Un té? Sí, gracias.
+  - → **—¿Un té? —Sí, gracias.**
+  - Tea? Yes, thanks.
+  - → **—Tea? —Yes, thanks.**
+- `aa3e298b` hola-che (c01#14)
+  - ¿Cómo andás, Lucía? Bien, gracias.
+  - → **—¿Cómo andás, Lucía? —Bien, gracias.**
+  - How are you doing, Lucía? Good, thanks.
+  - → **—How are you doing, Lucía? —Good, thanks.**
+- `329eb0fe` hola-che (c01#14)
+  - Hola, ¿cómo andás? Bien.
+  - → **—Hola, ¿cómo andás? —Bien.**
+  - Hi, how are you doing? Good.
+  - → **—Hi, how are you doing? —Good.**
+- `c7b183d4` hola-che (c01#14)
+  - ¿Qué onda, Sofi? Todo bien.
+  - → **—¿Qué onda, Sofi? —Todo bien.**
+  - What's up, Sofi? All good.
+  - → **—What's up, Sofi? —All good.**
+- `ebee8fbb` hola-che (c01#14)
+  - ¿Qué onda? Bien, ¿cómo andás?
+  - → **—¿Qué onda? —Bien, ¿cómo andás?**
+  - What's up? Good, how are you doing?
+  - → **—What's up? —Good, how are you doing?**
+- `d627b363` hola-che (c01#14)
+  - Che, ¿qué onda? Todo bien, gracias.
+  - → **—Che, ¿qué onda? —Todo bien, gracias.**
+  - Hey, what's up? All good, thanks.
+  - → **—Hey, what's up? —All good, thanks.**
+- `33bf1c30` hola-che (c01#14)
+  - Hola, ¿qué onda? Bien.
+  - → **—Hola, ¿qué onda? —Bien.**
+  - Hi, what's up? Good.
+  - → **—Hi, what's up? —Good.**
+- `71d8aedb` hola-che (c01#14)
+  - ¿Cómo andás? Yo bien.
+  - → **—¿Cómo andás? —Yo bien.**
+  - How are you doing? I'm good.
+  - → **—How are you doing? —I'm good.**
+- `722ef4ba` hola-che (c01#14)
+  - ¿Cómo andás? Yo, mal.
+  - → **—¿Cómo andás? —Yo, mal.**
+  - How are you doing? I'm not good.
+  - → **—How are you doing? —I'm not good.**
+- `ac2cf255` hola-che (c01#14)
+  - ¿Una cerveza? Bueno, dale.
+  - → **—¿Una cerveza? —Bueno, dale.**
+  - A beer? Well, OK.
+  - → **—A beer? —Well, OK.**
+- `256e9955` buen-dia (c01#14)
+  - Gracias, Ana. De nada.
+  - → **—Gracias, Ana. —De nada.**
+  - Thanks, Ana. You're welcome.
+  - → **—Thanks, Ana. —You're welcome.**
+- `ac2129c0` buen-dia (c01#14)
+  - ¿Mate o café? Mate, claro.
+  - → **—¿Mate o café? —Mate, claro.**
+  - Mate or coffee? Mate, of course.
+  - → **—Mate or coffee? —Mate, of course.**
+- `6fc798e5` buen-dia (c01#14)
+  - ¿Otro café? Claro, gracias.
+  - → **—¿Otro café? —Claro, gracias.**
+  - Another coffee? Sure, thanks.
+  - → **—Another coffee? —Sure, thanks.**
+- `0be96024` buen-dia (c01#14)
+  - ¿Un mate? Claro.
+  - → **—¿Un mate? —Claro.**
+  - A mate? Sure.
+  - → **—A mate? —Sure.**
+- `d9849cf4` buen-dia (c01#14)
+  - ¿Todo bien? Sí, genial.
+  - → **—¿Todo bien? —Sí, genial.**
+  - All good? Yes, great.
+  - → **—All good? —Yes, great.**
+- `f0abda8e` buen-dia (c01#14)
+  - ¿Un helado? ¡Genial!
+  - → **—¿Un helado? —¡Genial!**
+  - An ice cream? Great!
+  - → **—An ice cream? —Great!**
+- `cc66eafc` buen-dia (c01#14)
+  - ¿Una torta? ¡Genial, gracias!
+  - → **—¿Una torta? —¡Genial, gracias!**
+  - A cake? Great, thanks!
+  - → **—A cake? —Great, thanks!**
+- `df2b6855` buen-dia (c01#14)
+  - ¿Pizza o sándwich? Pizza, joya.
+  - → **—¿Pizza o sándwich? —Pizza, joya.**
+  - Pizza or a sandwich? Pizza, perfect.
+  - → **—Pizza or a sandwich? —Pizza, perfect.**
+- `5d964484` buen-dia (c01#14)
+  - ¿Un té? Sí, joya.
+  - → **—¿Un té? —Sí, joya.**
+  - A tea? Yes, perfect.
+  - → **—A tea? —Yes, perfect.**
+- `5d828075` buen-dia (c01#14)
+  - ¿Una medialuna? Joya, gracias.
+  - → **—¿Una medialuna? —Joya, gracias.**
+  - A medialuna? Perfect, thanks.
+  - → **—A medialuna? —Perfect, thanks.**
+- `c2cef76c` sos-turista (c01#14)
+  - Profe, ¿otro mate? Dale, gracias.
+  - → **—Profe, ¿otro mate? —Dale, gracias.**
+  - Teacher, another mate? Sure, thanks.
+  - → **—Teacher, another mate? —Sure, thanks.**
+- `f497d8f0` sos-turista (c01#14)
+  - ¿Sos estudiante extranjera? No, soy profe.
+  - → **—¿Sos estudiante extranjera? —No, soy profe.**
+  - Are you a foreign student? No, I'm a teacher.
+  - → **—Are you a foreign student? —No, I'm a teacher.**
+- `e28498bc` practica-hola (c01#14)
+  - Perdón, ¿vos sos Sofi? Sí, soy yo.
+  - → **—Perdón, ¿vos sos Sofi? —Sí, soy yo.**
+  - Sorry, are you Sofi? Yes, that's me.
+  - → **—Sorry, are you Sofi? —Yes, that's me.**
+- `e85645ca` practica-hola (c01#14)
+  - ¡Gracias, Mati! De nada.
+  - → **—¡Gracias, Mati! —De nada.**
+  - Thanks, Mati! You're welcome.
+  - → **—Thanks, Mati! —You're welcome.**
+- `8d0be9d9` practica-hola (c01#14)
+  - Gracias. De nada.
+  - → **—Gracias. —De nada.**
+  - Thanks. You're welcome.
+  - → **—Thanks. —You're welcome.**
+- `2a812458` practica-hola (c01#14)
+  - ¿Medialuna? Claro, y otro café.
+  - → **—¿Medialuna? —Claro, y otro café.**
+  - A medialuna? Sure, and another coffee.
+  - → **—A medialuna? —Sure, and another coffee.**
+- `73eff65e` practica-hola (c01#14)
+  - ¿Una medialuna? No, gracias.
+  - → **—¿Una medialuna? —No, gracias.**
+  - A medialuna? No, thanks.
+  - → **—A medialuna? —No, thanks.**
+- `47f72668` practica-hola (c01#14)
+  - ¿Una cerveza? ¡Dale!
+  - → **—¿Una cerveza? —¡Dale!**
+  - A beer? Sure!
+  - → **—A beer? —Sure!**
+- `0dddc2d1` practica-hola (c01#14)
+  - Che, ¿otra cerveza? No, gracias.
+  - → **—Che, ¿otra cerveza? —No, gracias.**
+  - Hey, another beer? No, thanks.
+  - → **—Hey, another beer? —No, thanks.**
+- `e4478855` practica-hola (c01#14)
+  - ¿Otro té? Sí, gracias.
+  - → **—¿Otro té? —Sí, gracias.**
+  - Another tea? Yes, thanks.
+  - → **—Another tea? —Yes, thanks.**
+- `a1c00b30` practica-hola (c01#14)
+  - Che, Diego, ¿otro mate? No, gracias, todo bien.
+  - → **—Che, Diego, ¿otro mate? —No, gracias, todo bien.**
+  - Hey, Diego, another mate? No, thanks, I'm good.
+  - → **—Hey, Diego, another mate? —No, thanks, I'm good.**
+- `6f49a8c1` practica-hola (c01#14)
+  - ¿Mate o café? Mate, claro.
+  - → **—¿Mate o café? —Mate, claro.**
+  - Mate or coffee? Mate, of course.
+  - → **—Mate or coffee? —Mate, of course.**
+- `ac5cec1c` practica-hola (c01#14)
+  - ¿Un café? ¡Claro!
+  - → **—¿Un café? —¡Claro!**
+  - A coffee? Sure!
+  - → **—A coffee? —Sure!**
+- `8bed2a44` no-entiendo (c01#14)
+  - ¿Cómo te llamás? Perdón, no entiendo.
+  - → **—¿Cómo te llamás? —Perdón, no entiendo.**
+  - What's your name? Sorry, I don't understand.
+  - → **—What's your name? —Sorry, I don't understand.**
+- `52bf3955` no-entiendo (c01#14)
+  - ¿Entendés inglés? —Sí, entiendo bien.
+  - → **—¿Entendés inglés? —Sí, entiendo bien.**
+  - Do you understand English? —Yes, I understand it well.
+  - → **—Do you understand English? —Yes, I understand it well.**
+- `21035901` no-entiendo (c01#14)
+  - ¿Entendés? —Sí, entiendo.
+  - → **—¿Entendés? —Sí, entiendo.**
+  - Do you understand? —Yes, I do.
+  - → **—Do you understand? —Yes, I do.**
+- `3c4d46ef` no-entiendo (c01#14)
+  - ¿Hablás castellano? Un poco.
+  - → **—¿Hablás castellano? —Un poco.**
+  - Do you speak Spanish? A little.
+  - → **—Do you speak Spanish? —A little.**
+- `5e017dce` encantado (c01#14)
+  - Un gusto, Pablo. Igualmente.
+  - → **—Un gusto, Pablo. —Igualmente.**
+  - Pleased to meet you, Pablo. Likewise.
+  - → **—Pleased to meet you, Pablo. —Likewise.**
+- `d6656fd9` encantado (c01#14)
+  - Mucho gusto, soy Diego. Igualmente, yo soy Mica.
+  - → **—Mucho gusto, soy Diego. —Igualmente, yo soy Mica.**
+  - Nice to meet you, I'm Diego. Likewise, I'm Mica.
+  - → **—Nice to meet you, I'm Diego. —Likewise, I'm Mica.**
+- `da92bdc7` encantado (c01#14)
+  - Mucho gusto. Igualmente.
+  - → **—Mucho gusto. —Igualmente.**
+  - Nice to meet you. Likewise.
+  - → **—Nice to meet you. —Likewise.**
+- `f7d1eb5f` encantado (c01#14)
+  - ¿Un gusto significa encantado? Sí, claro.
+  - → **—¿Un gusto significa encantado? —Sí, claro.**
+  - Does 'un gusto' mean 'encantado'? Yes, of course.
+  - → **—Does 'un gusto' mean 'encantado'? —Yes, of course.**
+- `49eb396f` el-y-ella (c01#14)
+  - ¿Ella es turista? No, es de acá.
+  - → **—¿Ella es turista? —No, es de acá.**
+  - Is she a tourist? No, she's from here.
+  - → **—Is she a tourist? —No, she's from here.**
+- `1959decd` quien-es (c01#14)
+  - ¿Quién es ella? Una señora de afuera.
+  - → **—¿Quién es ella? —Una señora de afuera.**
+  - Who is she? A lady from out of town.
+  - → **—Who is she? —A lady from out of town.**
+- `b957306c` quien-es (c01#14)
+  - ¿Quién es él? Un conocido.
+  - → **—¿Quién es él? —Un conocido.**
+  - Who's he? An acquaintance.
+  - → **—Who's he? —An acquaintance.**
+- `c148e8f9` quien-es (c01#14)
+  - ¿Quién es? Una piba de afuera.
+  - → **—¿Quién es? —Una piba de afuera.**
+  - Who is she? A girl from out of town.
+  - → **—Who is she? —A girl from out of town.**
+- `00af5080` practica-quien-es (c01#14)
+  - ¿Cómo se llama él? —Fede, un vecino de Mica.
+  - → **—¿Cómo se llama él? —Fede, un vecino de Mica.**
+  - What's his name? —Fede, one of Mica's neighbors.
+  - → **—What's his name? —Fede, one of Mica's neighbors.**
+- `fa1508ab` practica-quien-es (c01#14)
+  - No entiendo. —Yo tampoco.
+  - → **—No entiendo. —Yo tampoco.**
+  - I don't understand. —Me neither.
+  - → **—I don't understand. —Me neither.**
+- `a283b674` practica-quien-es (c01#14)
+  - Encantada, Nico. —Igualmente, Juli.
+  - → **—Encantada, Nico. —Igualmente, Juli.**
+  - Nice to meet you, Nico. —Likewise, Juli.
+  - → **—Nice to meet you, Nico. —Likewise, Juli.**
+- `d9cdb1a9` practica-quien-es (c01#14)
+  - Mucho gusto, soy Fede. —Encantada, yo soy Cami.
+  - → **—Mucho gusto, soy Fede. —Encantada, yo soy Cami.**
+  - Nice to meet you, I'm Fede. —Nice to meet you, I'm Cami.
+  - → **—Nice to meet you, I'm Fede. —Nice to meet you, I'm Cami.**
+- `bbe21c05` practica-quien-es (c01#14)
+  - Mucho gusto. —Encantada.
+  - → **—Mucho gusto. —Encantada.**
+  - Nice to meet you. —Nice to meet you too.
+  - → **—Nice to meet you. —Nice to meet you too.**
+- `1287056b` practica-quien-es (c01#14)
+  - ¿Sos de acá? —Sí, de zona norte.
+  - → **—¿Sos de acá? —Sí, de zona norte.**
+  - Are you from here? —Yes, the northern suburbs.
+  - → **—Are you from here? —Yes, the northern suburbs.**
+- `f7b76d5c` practica-quien-es (c01#14)
+  - ¡Buen día! —Buenas, ¿qué onda?
+  - → **—¡Buen día! —Buenas, ¿qué onda?**
+  - Good morning! —Hey, what's up?
+  - → **—Good morning! —Hi there, what's up?**
+- `a7dfe112` practica-quien-es (c01#14)
+  - ¡Perdón! —No, todo bien.
+  - → **—¡Perdón! —No, todo bien.**
+  - Sorry! —No, it's all good.
+  - → **—Sorry! —No, it's all good.**
+- `38b81d04` practica-quien-es (c01#14)
+  - ¿Quién es ella? —Ana, una amiga de Martín.
+  - → **—¿Quién es ella? —Ana, una amiga de Martín.**
+  - Who's she? —Ana, a friend of Martín's.
+  - → **—Who's she? —Ana, a friend of Martín's.**
+- `abb09f18` practica-quien-es (c01#14)
+  - ¿Hablás inglés? —Sí, soy de Estados Unidos.
+  - → **—¿Hablás inglés? —Sí, soy de Estados Unidos.**
+  - Do you speak English? —Yes, I'm from the United States.
+  - → **—Do you speak English? —Yes, I'm from the United States.**
+- `42a48e39` argentino-argentina (c01#14)
+  - ¿Fede es argentino? Sí, de Córdoba.
+  - → **—¿Fede es argentino? —Sí, de Córdoba.**
+  - Is Fede Argentinian? Yes, from Córdoba.
+  - → **—Is Fede Argentinian? —Yes, from Córdoba.**
+- `ee8122ed` argentino-argentina (c01#14)
+  - ¿De dónde es Martín? Es uruguayo.
+  - → **—¿De dónde es Martín? —Es uruguayo.**
+  - Where's Martín from? He's Uruguayan.
+  - → **—Where's Martín from? —He's Uruguayan.**
+- `24a53e9f` argentino-argentina (c01#14)
+  - ¿Mati es uruguayo? No, es de Córdoba.
+  - → **—¿Mati es uruguayo? —No, es de Córdoba.**
+  - Is Mati Uruguayan? No, he's from Córdoba.
+  - → **—Is Mati Uruguayan? —No, he's from Córdoba.**
+- `d5dde2e5` argentino-argentina (c01#14)
+  - ¿Vos sos uruguaya? No, yo soy de Rosario.
+  - → **—¿Vos sos uruguaya? —No, yo soy de Rosario.**
+  - Are you Uruguayan? No, I'm from Rosario.
+  - → **—Are you Uruguayan? —No, I'm from Rosario.**
+- `7dfff30c` argentino-argentina (c01#14)
+  - ¿Él es porteño? No, es de Córdoba.
+  - → **—¿Él es porteño? —No, es de Córdoba.**
+  - Is he from Buenos Aires? No, he's from Córdoba.
+  - → **—Is he from Buenos Aires? —No, he's from Córdoba.**
+- `6311e289` argentino-argentina (c01#14)
+  - ¿Belén es argentina? Sí, de Buenos Aires.
+  - → **—¿Belén es argentina? —Sí, de Buenos Aires.**
+  - Is Belén Argentinian? Yes, from Buenos Aires.
+  - → **—Is Belén Argentinian? —Yes, from Buenos Aires.**
+- `97a46cd2` argentino-argentina (c01#14)
+  - ¿Vos sos argentina? No, yo soy de Montevideo.
+  - → **—¿Vos sos argentina? —No, yo soy de Montevideo.**
+  - Are you Argentinian? No, I'm from Montevideo.
+  - → **—Are you Argentinian? —No, I'm from Montevideo.**
+- `e58ff4b7` de-todos-lados (c01#14, verify1)
+  - ¿Rocío es paraguaya? No, es chilena.
+  - → **—¿Rocío es paraguaya? —No, es chilena.**
+  - Is Rocío Paraguayan? No, she's Chilean.
+  - → **—Is Rocío Paraguayan? —No, she's Chilean.**
+- `3405d133` de-todos-lados (c01#14)
+  - ¿Es de acá? No, es española.
+  - → **—¿Es de acá? —No, es española.**
+  - Is she from here? No, she's from Spain.
+  - → **—Is she from here? —No, she's from Spain.**
+- `ed09f74c` de-todos-lados (c01#14)
+  - ¿Una pizza italiana? Dale.
+  - → **—¿Una pizza italiana? —Dale.**
+  - An Italian pizza? Sure.
+  - → **—An Italian pizza? —Sure.**
+- `b85d7f9c` de-todos-lados (c01#14)
+  - ¿Martín es francés? No, es de La Plata.
+  - → **—¿Martín es francés? —No, es de La Plata.**
+  - Is Martín French? No, he's from La Plata.
+  - → **—Is Martín French? —No, he's from La Plata.**
+- `95cf44cc` de-todos-lados (c01#14)
+  - ¿De dónde sos? Soy español.
+  - → **—¿De dónde sos? —Soy español.**
+  - Where are you from? I'm from Spain.
+  - → **—Where are you from? —I'm from Spain.**
+- `a1c4a08c` de-todos-lados (c01#14, verify1)
+  - ¿Nico es australiano? No, es de Montevideo.
+  - → **—¿Nico es australiano? —No, es de Montevideo.**
+  - Is Nico Australian? No, he's from Montevideo.
+  - → **—Is Nico Australian? —No, he's from Montevideo.**
+- `37f57351` de-todos-lados (c01#14, verify1)
+  - ¿Quién es canadiense? Yo.
+  - → **—¿Quién es canadiense? —Yo.**
+  - Who's Canadian? Me.
+  - → **—Who's Canadian? —Me.**
+- `59887fd1` de-todos-lados (c01#14, verify1)
+  - ¿Sos estadounidense? No, canadiense.
+  - → **—¿Sos estadounidense? —No, canadiense.**
+  - Are you American? No, Canadian.
+  - → **—Are you American? —No, Canadian.**
+- `e035a9e1` de-todos-lados (c01#14)
+  - ¿Sos de Inglaterra? No, soy alemán.
+  - → **—¿Sos de Inglaterra? —No, soy alemán.**
+  - Are you from England? No, I'm German.
+  - → **—Are you from England? —No, I'm German.**
+- `ea85939b` de-todos-lados (c01#14)
+  - Yo soy alemán, ¿y vos? Chileno.
+  - → **—Yo soy alemán, ¿y vos? —Chileno.**
+  - I'm German, and you? Chilean.
+  - → **—I'm German, and you? —Chilean.**
+- `92138d48` tios-y-primos (c01#14)
+  - ¿Quién es él? Es mi sobrino de Córdoba.
+  - → **—¿Quién es él? —Es mi sobrino de Córdoba.**
+  - Who's he? He's my nephew from Córdoba.
+  - → **—Who's he? —He's my nephew from Córdoba.**
+- `44fa0c97` tios-y-primos (c01#14)
+  - ¿Vos sos sobrino de Diego? Sí, soy Juan.
+  - → **—¿Vos sos sobrino de Diego? —Sí, soy Juan.**
+  - Are you Diego's nephew? Yes, I'm Juan.
+  - → **—Are you Diego's nephew? —Yes, I'm Juan.**
+- `c07b292b` tios-y-primos (c01#14)
+  - ¿Fede es cuñado de Ana? No, es primo.
+  - → **—¿Fede es cuñado de Ana? —No, es primo.**
+  - Is Fede Ana's brother-in-law? No, he's her cousin.
+  - → **—Is Fede Ana's brother-in-law? —No, he's her cousin.**
+- `c504d742` tios-y-primos (c01#14)
+  - ¿Quién es? Mi tío.
+  - → **—¿Quién es? —Mi tío.**
+  - Who is it? My uncle.
+  - → **—Who is it? —My uncle.**
+- `7e0b9484` sos-turista (c01#20)
+  - Buenas tardes, permiso, soy profe.
+  - → **Permiso, gracias.**
+  - Good afternoon, let me through, I'm a teacher.
+  - → **Excuse me, thanks.**
+- `02918d95` sos-turista (c01#21)
+  - Belén, sos turista, ¿no?
+  - → **Sos turista, ¿no?**
+  - Belén, you're a tourist, right?
+  - → **You're a tourist, right?**
+- `58590334` sos-turista (c01#21)
+  - Che, Martín, ¿sos extranjero?
+  - → **Che, ¿sos extranjero?**
+  - Hey, Martín, are you a foreigner?
+  - → **Hey, are you a foreigner?**
+- `a4cef022` sos-turista (c01#21)
+  - Che, Mica, ¿sos extranjera?
+  - → **Che, ¿sos extranjera?**
+  - Hey, Mica, are you a foreigner?
+  - → **Hey, are you a foreigner?**
+- `e84f7d66` encantado (c01#23)
+  - ¿Belén sabe?
+  - → **¿Belén sabe inglés?**
+  - Does Belén know?
+  - → **Does Belén know English?**
+- `49274cc1` encantado (c01#23)
+  - Belén sabe, ¿y vos?
+  - → **Juan sabe un poco de inglés.**
+  - Belén knows, do you?
+  - → **Juan knows a little English.**
+- `2b798b5f` encantado (c01#23)
+  - Martín sabe, yo no.
+  - → **Martín sabe inglés, yo no.**
+  - Martín knows, I don't.
+  - → **Martín knows English, I don't.**
+- `677fdf56` no-entiendo (c01#25)
+  - Entiendo poco, ¿repetís más despacio?
+  - → **Entiendo poco. ¿Me repetís más despacio?**
+  - I don't understand much, can you repeat more slowly?
+  - → **I understand very little. Can you repeat that more slowly?**
+- `d8fc6856` no-entiendo (c01#26)
+  - Entiendo más inglés, perdón.
+  - → **Un poco más, por favor.**
+  - I understand more English, sorry.
+  - → **A little more, please.**
+- `a67c3288` encantado (c01#27)
+  - Soy estudiante de castellano y no entendí.
+  - → **No entendí, perdón. Hablo poco castellano.**
+  - I'm a Spanish student and I didn't understand.
+  - → **I didn't understand, sorry. I speak very little Spanish.**
+- `6647d2e2` quien-es (c01#33)
+  - ¿Quién es? Un señor de Córdoba, se llama Fede.
+  - → **—¿Quién es? —Un señor de Córdoba, se llama Carlos.**
+  - Who is it? A gentleman from Córdoba, his name is Fede.
+  - → **—Who is it? —A gentleman from Córdoba, his name is Carlos.**
+- `7fe757a7` quien-es (c01#34, verify1)
+  - ¿Ella es una piba de Córdoba o de Rosario?
+  - → **Es una piba de Rosario, amiga de Juan.**
+  - Is she a girl from Córdoba or from Rosario?
+  - → **She's a girl from Rosario, a friend of Juan's.**
+- `f35fe822` argentino-argentina (c01#35)
+  - ¿Ella es inglesa? Sí, pero es de acá.
+  - → **—¿Ella es inglesa? —Sí, y es profe de inglés.**
+  - Is she English? Yes, but she's from here.
+  - → **—Is she English? —Yes, and she's an English teacher.**
+- `24d4298b` de-todos-lados (c01#35)
+  - Es italiana, pero es de Rosario.
+  - → **Es italiana, pero no es turista.**
+  - She's Italian, but she's from Rosario.
+  - → **She's Italian, but she's not a tourist.**
+- `c05e36a2` argentino-argentina (c01#36)
+  - Cami es inglesa, pero Rocío no.
+  - → **Ella es inglesa, pero yo no.**
+  - Cami is English, but Rocío isn't.
+  - → **She's English, but I'm not.**
+- `1f4a4204` argentino-argentina (c01#36)
+  - Mica no es argentina, es inglesa.
+  - → **Ella no es argentina, es inglesa.**
+  - Mica isn't Argentinian, she's English.
+  - → **She isn't Argentinian, she's English.**
+- `0709543d` de-todos-lados (c01#36, verify1)
+  - Lucía es alemana, ¿no? No, es inglesa.
+  - → **—Ella es alemana, ¿no? —No, es inglesa.**
+  - Lucía is German, right? No, she's English.
+  - → **—She's German, right? —No, she's English.**
+- `2aa2c0d2` de-todos-lados (c01#36)
+  - Nico es alemán.
+  - → **Él es alemán.**
+  - Nico is German.
+  - → **He's German.**
+- `d70928ca` de-todos-lados (c01#36)
+  - Che, ¿quién es alemán acá, vos o Nico?
+  - → **Che, ¿quién es alemán acá, vos o él?**
+  - Hey, who's German here, you or Nico?
+  - → **Hey, who's German here, you or him?**
+- `a70e540d` de-todos-lados (c01#36, verify1)
+  - Diego es un turista australiano.
+  - → **Él es un turista australiano.**
+  - Diego is an Australian tourist.
+  - → **He's an Australian tourist.**
+- `13093272` de-todos-lados (c01#36, verify1)
+  - Rocío es una vecina australiana.
+  - → **Ella es una vecina australiana.**
+  - Rocío is an Australian neighbor.
+  - → **She's an Australian neighbor.**
+- `f8a59f46` de-todos-lados (c01#36, verify1)
+  - Che, ¿Belén es australiana o es de Estados Unidos?
+  - → **Che, ¿ella es australiana o es de Estados Unidos?**
+  - Hey, is Belén Australian or is she from the United States?
+  - → **Hey, is she Australian or is she from the United States?**
+- `235edff7` de-todos-lados (c01#36)
+  - ¿Sos estadounidense, Mati?
+  - → **Perdón, ¿sos estadounidense?**
+  - Are you American, Mati?
+  - → **Sorry, are you American?**
+- `df936213` de-todos-lados (c01#36)
+  - Pablo es argentino, pero Cami es estadounidense.
+  - → **Pablo es argentino, pero ella es estadounidense.**
+  - Pablo is Argentinian, but Cami is American.
+  - → **Pablo is Argentinian, but she's American.**
+- `1d5d24b9` de-todos-lados (c01#36)
+  - Mati es brasileño.
+  - → **Él también es brasileño.**
+  - Mati is Brazilian.
+  - → **He's Brazilian too.**
+- `97a4d214` de-todos-lados (c01#36)
+  - Hola, soy Nico, un vecino brasileño. Mucho gusto.
+  - → **Hola, soy brasileño, vecino de Fede. Mucho gusto.**
+  - Hi, I'm Nico, a Brazilian neighbor. Nice to meet you.
+  - → **Hi, I'm Brazilian, Fede's neighbor. Nice to meet you.**
+- `2781167a` de-todos-lados (c01#36, verify1)
+  - Juli es brasileña.
+  - → **No, ella no es de acá, es brasileña.**
+  - Juli is Brazilian.
+  - → **No, she's not from here, she's Brazilian.**
+- `57c0277b` de-todos-lados (c01#36)
+  - Che, ¿Mica es italiana?
+  - → **Che, ¿ella es italiana?**
+  - Hey, is Mica Italian?
+  - → **Hey, is she Italian?**
+- `3103e23f` de-todos-lados (c01#36)
+  - Encantada. Soy Juli, una amiga italiana de Pablo.
+  - → **Encantada. Soy una amiga italiana de Pablo.**
+  - Nice to meet you. I'm Juli, an Italian friend of Pablo's.
+  - → **Nice to meet you. I'm an Italian friend of Pablo's.**
+- `c1f7dfba` de-todos-lados (c01#36)
+  - Lucía es francesa, no argentina.
+  - → **Ella es francesa, no argentina.**
+  - Lucía is French, not Argentinian.
+  - → **She's French, not Argentinian.**
+- `30cfb70d` de-todos-lados (c01#37, verify1)
+  - Che, ¿vos sos paraguayo o sos de Rosario?
+  - → **Che, ¿vos sos paraguayo? ¿De qué ciudad?**
+  - Hey, are you Paraguayan or are you from Rosario?
+  - → **Hey, are you Paraguayan? From what city?**
+- `10c967ad` de-todos-lados (c01#37)
+  - Che, ¿él es francés o es de Montevideo?
+  - → **—¿De dónde es él? —Es francés.**
+  - Hey, is he French or is he from Montevideo?
+  - → **—Where's he from? —He's French.**
+- `ddcea319` de-todos-lados (c01#38, verify1)
+  - Buen día, señor. ¿Sos paraguayo?
+  - → **—¿De dónde sos? —Soy paraguayo, ¿y vos?**
+  - Good morning, sir. Are you Paraguayan?
+  - → **—Where are you from? —I'm Paraguayan, and you?**
+- `8dc611e8` de-todos-lados (c01#38)
+  - Buenas tardes, señora. ¿Sos francesa?
+  - → **Soy francesa, pero hablo un poco de castellano.**
+  - Good afternoon, ma'am. Are you French?
+  - → **I'm French, but I speak a little Spanish.**
+- `04ca8e6a` la-familia (c01#42)
+  - Mi papá es de Córdoba, pero mi mamá no.
+  - → **Él es mi papá, se llama Carlos.**
+  - My dad is from Córdoba, but my mom isn't.
+  - → **He's my dad, his name is Carlos.**
+- `f66f0e39` la-familia (c01#42)
+  - Mi vieja es de acá, pero mi viejo no.
+  - → **Mi vieja es genial, posta.**
+  - My mom's from here, but my dad isn't.
+  - → **My mom is great, honestly.**
+- `31f0fe3e` la-familia (c01#42)
+  - Mi hermana es de acá, pero mi papá no.
+  - → **Mi hermana se llama Juli y es estudiante.**
+  - My sister is from here, but my dad isn't.
+  - → **My sister's name is Juli and she's a student.**
+- `3a6936f4` la-familia (c01#42)
+  - Mi novio es de acá, pero mi familia no.
+  - → **Mi novio se llama Santi, es de zona sur.**
+  - My boyfriend's from here, but my family isn't.
+  - → **My boyfriend's name is Santi, he's from the southern suburbs.**
+- `2038b6a6` la-familia (c01#42)
+  - Mi mamá es de acá, pero mi papá no.
+  - → **Ella es mi mamá, se llama Elena.**
+  - My mom is from here, but my dad isn't.
+  - → **She's my mom, her name is Elena.**
+- `8fe46c4d` la-familia (c01#42)
+  - Mi novia es de Buenos Aires, pero yo no.
+  - → **Mi novia se llama Cami y es profe.**
+  - My girlfriend's from Buenos Aires, but I'm not.
+  - → **My girlfriend's name is Cami and she's a teacher.**
+- `a26d6351` la-familia (c01#43, verify1)
+  - ¿Mi perro? Es de acá.
+  - → **Él es mi perro.**
+  - My dog? He's from here.
+  - → **He's my dog.**
+- `1fb645b7` la-familia (c01#43)
+  - Mi perro es de Uruguay, pero yo no.
+  - → **Mi perro es genial.**
+  - My dog's from Uruguay, but I'm not.
+  - → **My dog is great.**
+- `9d47a9cc` la-familia (c01#45)
+  - Ella es Mica, mi abuela.
+  - → **Ella es Marta, mi abuela.**
+  - She's Mica, my grandmother.
+  - → **She's Marta, my grandmother.**
+- `7b9c50ff` tios-y-primos (c01#45)
+  - Vos sos nieta de Fede, ¿no?
+  - → **Vos sos nieta de José, ¿no?**
+  - You're Fede's granddaughter, right?
+  - → **You're José's granddaughter, right?**
+- `f617bcbf` tios-y-primos (c01#46)
+  - Mi gata es de mi abuela.
+  - → **Ella no es mi gata, es de mi abuela.**
+  - My cat is my grandma's.
+  - → **She's not my cat, she's my grandmother's.**
+- `ed2667d0` tios-y-primos (c01#47)
+  - Hola, suegro, ¿todo bien?
+  - → **Él es mi suegro.**
+  - Hi, father-in-law, all good?
+  - → **He's my father-in-law.**
+- `18c114da` tios-y-primos (c01#47)
+  - Suegro, ¿una cerveza?
+  - → **Mi suegro se llama Raúl.**
+  - A beer, father-in-law?
+  - → **My father-in-law's name is Raúl.**
+- `dddfa41f` tios-y-primos (c01#49)
+  - Mi tío es de Rosario.
+  - → **Hola, tío, ¿cómo andás?**
+  - My uncle is from Rosario.
+  - → **Hi, uncle, how are you doing?**
+- `fffd4a43` tios-y-primos (c01#49)
+  - Mi cuñado es profe.
+  - → **Mi cuñado es amigo de mi primo.**
+  - My brother-in-law is a teacher.
+  - → **My brother-in-law is friends with my cousin.**
+- `2ef548a5` tios-y-primos (c01#49)
+  - Mi tía es profe.
+  - → **Mi tía se llama Susana y es de zona norte.**
+  - My aunt is a teacher.
+  - → **My aunt's name is Susana and she's from the northern suburbs.**
+- `4f975aa9` cuantos-anos-tenes (c02#2)
+  - Mi hija tiene cinco años, pero mi hijo no.
+  - → **Mi hija tiene cinco años y mi hijo, ocho.**
+  - My daughter is five, but my son isn't.
+  - → **My daughter is five and my son is eight.**
+- `985f37c9` cuantos-anos-tenes (c02#2)
+  - Mi hija tiene siete años, pero mi hijo no.
+  - → **Mi hija tiene siete años y mi sobrina, diez.**
+  - My daughter is seven, but my son isn't.
+  - → **My daughter is seven and my niece is ten.**
+- `851b2840` cuantos-anos-tenes (c02#2)
+  - Mi hermana tiene dieciocho años, pero mi hermano no.
+  - → **Mi hijo tiene dieciocho años y es estudiante.**
+  - My sister is eighteen, but my brother isn't.
+  - → **My son is eighteen and he's a student.**
+- `79f180bb` cuantos-anos-tenes (c02#3)
+  - No, mi hija no tiene once.
+  - → **No, mi hija no tiene once, tiene doce.**
+  - No, my daughter isn't eleven.
+  - → **No, my daughter isn't eleven, she's twelve.**
+- `940aeba6` cuantos-anos-tenes (c02#3)
+  - No, Nico no tiene nueve.
+  - → **No, Nico no tiene nueve, tiene diez.**
+  - No, Nico isn't nine.
+  - → **No, Nico isn't nine, he's ten.**
+- `5ba58186` cuantos-anos-tenes (c02#4)
+  - ¿Cuántos años tenés? Tengo diecinueve, pero ella, veinte.
+  - → **—¿Cuántos años tenés? —Tengo diecinueve y ella, veinte.**
+  - How old are you? I'm nineteen, but she's twenty.
+  - → **—How old are you? —I'm nineteen and she's twenty.**
+- `48e9d300` cuantos-anos-tenes (c02#5)
+  - ¿Tenés cinco años?
+  - → **¿Tiene cinco años?**
+  - Are you five?
+  - → **Is he five?**
+- `c76a3fac` cuantos-anos-tenes (c02#5)
+  - ¿Tenés ocho años?
+  - → **¿Tiene ocho años?**
+  - Are you eight?
+  - → **Is she eight?**
+- `13782222` cuantos-anos-tenes (c02#5)
+  - Tengo once años.
+  - → **Mi sobrina tiene once años.**
+  - I'm eleven years old.
+  - → **My niece is eleven.**
+- `4819026b` cuantos-anos-tenes (c02#5)
+  - Tengo doce años.
+  - → **Mi sobrino tiene doce años.**
+  - I'm twelve years old.
+  - → **My nephew is twelve.**
+- `8a18ed64` cuantos-anos-tenes (c02#5)
+  - Hola, soy Juli y tengo doce años.
+  - → **Ella es Juli y tiene doce años.**
+  - Hi, I'm Juli and I'm twelve.
+  - → **She's Juli and she's twelve.**
+- `73447b92` cuantos-anos-tenes (c02#5)
+  - ¿Tenés siete años, Belén?
+  - → **¿Belén tiene siete años?**
+  - Are you seven, Belén?
+  - → **Is Belén seven?**
+- `f8c94a7f` cuantos-anos-tenes (c02#7)
+  - Mi gata es vieja, tiene nueve años.
+  - → **Mi gata tiene nueve años y mi perro, dos.**
+  - My cat is old, she's nine.
+  - → **My cat is nine and my dog is two.**
+- `d2be006d` alfajores-y-chicles (c02#11)
+  - Doce caramelos, por favor.
+  - → **Un paquete de caramelos, por favor.**
+  - Twelve candies, please.
+  - → **A pack of candy, please.**
+- `31504eab` cuanto-sale (c02#14)
+  - ¿Tenés cuatrocientos pesos? No tengo monedas.
+  - → **¿Tenés cuatrocientos pesos? No tengo efectivo.**
+  - Do you have four hundred pesos? I don't have coins.
+  - → **Do you have four hundred pesos? I don't have cash.**
+- `42584bf6` cuanto-sale (c02#14)
+  - ¿Quinientos pesos? Sí, tengo monedas.
+  - → **¿Quinientos pesos? Sí, tengo efectivo.**
+  - Five hundred pesos? Yes, I have coins.
+  - → **Five hundred pesos? Yes, I have cash.**
+- `a020a885` cuanto-sale (c02#14)
+  - Sale mil doscientos, ¿tenés monedas?
+  - → **Sale mil doscientos, ¿tenés plata?**
+  - It's one thousand two hundred, do you have coins?
+  - → **It's one thousand two hundred, do you have money?**
+- `ab06ef3c` donde-estan-las-llaves (c02#14)
+  - Tengo la billetera, pero no tengo monedas.
+  - → **Tengo la billetera, pero no tengo efectivo.**
+  - I have my wallet, but I don't have any coins.
+  - → **I have my wallet, but I don't have any cash.**
+- `6f72c04c` alfajores-y-chicles (c02#15)
+  - ¿Es uno de tus paquetes o es de tu vecino?
+  - → **¿Tu vecino tiene tus paquetes?**
+  - Is it one of your packages or is it your neighbor's?
+  - → **Does your neighbor have your packages?**
+- `342f90be` en-el-kiosco (c02#17)
+  - ¿Tus hermanas? Rocío y Belén.
+  - → **¿Mis hermanas? Rocío y Belén.**
+  - Your sisters? Rocío and Belén.
+  - → **My sisters? Rocío and Belén.**
+- `fffb156e` en-el-kiosco (c02#18)
+  - ¿Chocolate? No, gracias, es de mis abuelos.
+  - → **—¿Es tu chocolate? —No, es de mis abuelos.**
+  - Chocolate? No, thanks, it's my grandparents'.
+  - → **—Is it your chocolate? —No, it's my grandparents'.**
+- `56f9a59e` en-el-kiosco (c02#19)
+  - Yo tengo un kiosco, vos no.
+  - → **¿Tenés un kiosco? ¡Genial!**
+  - I have a kiosco, you don't.
+  - → **You have a kiosco? Awesome!**
+- `c0449fba` en-el-kiosco (c02#19)
+  - Che, ¿tus empanadas o mis medialunas?
+  - → **Che, ¿empanadas o medialunas?**
+  - Hey, your empanadas or my medialunas?
+  - → **Hey, empanadas or medialunas?**
+- `d70b4fc9` cuanto-sale (c02#24)
+  - Un chicle sale ochocientos pesos.
+  - → **Un paquete de chicles sale ochocientos pesos.**
+  - A pack of gum is eight hundred pesos.
+- `f447519f` cuanto-sale (c02#25)
+  - ¿Comprar acá? No, es caro.
+  - → **Comprar acá es caro.**
+  - Buy here? No, it's expensive.
+  - → **Buying here is expensive.**
+- `7514b196` cuanto-sale (c02#25)
+  - ¿Comprar una docena? Dale, sale más barato.
+  - → **Comprar una docena sale más barato.**
+  - Buy a dozen? OK, it's cheaper.
+  - → **Buying a dozen is cheaper.**
+- `8599e5ca` cuanto-sale (c02#27)
+  - ¿Quinientos mangos un caramelo? ¡Qué caro!
+  - → **¿Quinientos mangos un chicle? ¡Qué caro!**
+  - Five hundred pesos for a piece of candy? How expensive!
+  - → **Five hundred pesos for a piece of gum? How expensive!**
+- `c58c98c0` cuanto-sale (c02#27)
+  - ¿Ochocientos pesos un caramelo? No, gracias.
+  - → **¿Ochocientos pesos una galletita? No, gracias.**
+  - Eight hundred pesos for a piece of candy? No, thanks.
+  - → **Eight hundred pesos for a cookie? No, thanks.**
+- `a41aad23` cuanto-sale (c02#27)
+  - Un caramelo sale doscientos pesos.
+  - → **Un chicle sale doscientos pesos.**
+  - A piece of candy is two hundred pesos.
+  - → **A piece of gum is two hundred pesos.**
+- `c6f8edba` la-gente (c02#30)
+  - Nosotras somos de Uruguay, pero su novio es chileno.
+  - → **Nosotras somos de Uruguay, pero nuestra mamá es chilena.**
+  - We're from Uruguay, but her boyfriend is Chilean.
+  - → **We're from Uruguay, but our mom is Chilean.**
+- `fb270375` altos-y-morochos (c02#34)
+  - Ana es linda, pero tiene novio.
+  - → **Tu gata es linda, ¿cuántos años tiene?**
+  - Ana is pretty, but she has a boyfriend.
+  - → **Your cat is cute, how old is she?**
+- `bd2f2360` altos-y-morochos (c02#34)
+  - Tu hermano es lindo, pero tiene novia.
+  - → **¡Qué lindo perro! ¿Cómo se llama?**
+  - Your brother is cute, but he has a girlfriend.
+  - → **What a cute dog! What's his name?**
+- `82dac744` altos-y-morochos (c02#34)
+  - Mati y Fede son lindos, pero son casados.
+  - → **¡Qué lindos son tus gatos!**
+  - Mati and Fede are cute, but they're married.
+  - → **Your cats are so cute!**
+- `e84cf890` donde-esta (c02#38, verify1)
+  - Estoy en el pueblo de los abuelos de Juan.
+  - → **Estoy en Rosario, ¿y vos?**
+  - I'm in Juan's grandparents' town.
+  - → **I'm in Rosario, and you?**
+- `444b4595` donde-esta (c02#38)
+  - ¿La zona norte está lejos de acá?
+  - → **¿La Plata está lejos de acá?**
+  - Are the northern suburbs far from here?
+  - → **Is La Plata far from here?**
+- `52f6e8bd` donde-esta (c02#39)
+  - Mamá, ¿dónde estás? Estoy acá, en el kiosco.
+  - → **—Mamá, ¿dónde estás? —Estoy acá, en Rosario.**
+  - Mom, where are you? I'm here, at the kiosco.
+  - → **—Mom, where are you? —I'm here, in Rosario.**
+- `40081255` donde-esta (c02#39)
+  - ¿Belén está ahí? No, está en el kiosco.
+  - → **—¿Belén está ahí? —No, está en Montevideo.**
+  - Is Belén there? No, she's at the kiosco.
+  - → **—Is Belén there? —No, she's in Montevideo.**
+- `890a6043` donde-esta (c02#40)
+  - Tengo a mi familia cerca.
+  - → **Mi familia está cerca.**
+  - My family is close by.
+- `b5a30746` hay-un-kiosco (c02#43)
+  - Estoy en la calle.
+  - → **¿En qué calle estás?**
+  - I'm out.
+  - → **What street are you on?**
+- `9d6c65ee` practica-tengo-hambre (c02#0, verify1)
+  - Diego no es canadiense, es inglés.
+  - → **Mi amigo no es canadiense, es inglés.**
+  - Diego isn't Canadian, he's English.
+  - → **My friend isn't Canadian, he's English.**
+- `c0e2e18a` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tenés? Dieciocho.
+  - → **—¿Cuántos años tenés? —Dieciocho.**
+  - How old are you? Eighteen.
+  - → **—How old are you? —Eighteen.**
+- `61560cac` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tiene Mica? Quince.
+  - → **—¿Cuántos años tiene Mica? —Quince.**
+  - How old is Mica? Fifteen.
+  - → **—How old is Mica? —Fifteen.**
+- `75f56b7d` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tenés? Trece.
+  - → **—¿Cuántos años tenés? —Trece.**
+  - How old are you? Thirteen.
+  - → **—How old are you? —Thirteen.**
+- `8a89e168` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tiene Mati? Tiene veinte.
+  - → **—¿Cuántos años tiene Mati? —Tiene veinte.**
+  - How old is Mati? He's twenty.
+  - → **—How old is Mati? —He's twenty.**
+- `b841c102` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tiene Cami? Tiene once.
+  - → **—¿Cuántos años tiene Cami? —Tiene once.**
+  - How old is Cami? She's eleven.
+  - → **—How old is Cami? —She's eleven.**
+- `5e52f4a3` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tiene? Uno.
+  - → **—¿Cuántos años tiene? —Uno.**
+  - How old is he? One.
+  - → **—How old is he? —One.**
+- `70ec79df` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tiene? Dos.
+  - → **—¿Cuántos años tiene? —Dos.**
+  - How old is he? Two.
+  - → **—How old is he? —Two.**
+- `9d367b98` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tiene Martín? Tiene veinte.
+  - → **—¿Cuántos años tiene Martín? —Tiene veinte.**
+  - How old is Martín? He's twenty.
+  - → **—How old is Martín? —He's twenty.**
+- `6fcb916d` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tiene Belén? Catorce.
+  - → **—¿Cuántos años tiene Belén? —Catorce.**
+  - How old is Belén? Fourteen.
+  - → **—How old is Belén? —Fourteen.**
+- `33001462` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tenés? Dieciséis.
+  - → **—¿Cuántos años tenés? —Dieciséis.**
+  - How old are you? Sixteen.
+  - → **—How old are you? —Sixteen.**
+- `35ffdc40` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tenés? Tengo diecinueve.
+  - → **—¿Cuántos años tenés? —Tengo diecinueve.**
+  - How old are you? I'm nineteen.
+  - → **—How old are you? —I'm nineteen.**
+- `8adaa7e8` cuantos-anos-tenes (c02#0)
+  - ¿Cuántos años tiene Cami? Tres.
+  - → **—¿Cuántos años tiene Cami? —Tres.**
+  - How old is Cami? Three.
+  - → **—How old is Cami? —Three.**
+- `626a7b63` tengo-hambre (c02#0)
+  - ¿Tenés tiempo? Claro, dale.
+  - → **—¿Tenés tiempo? —Claro, dale.**
+  - Do you have time? Sure, go ahead.
+  - → **—Do you have time? —Sure, go ahead.**
+- `3dd62de5` practica-tengo-hambre (c02#0)
+  - ¿Cuántos años tenés? Veinte.
+  - → **—¿Cuántos años tenés? —Veinte.**
+  - How old are you? Twenty.
+  - → **—How old are you? —Twenty.**
+- `91b03dd3` practica-tengo-hambre (c02#0)
+  - ¿Quién tiene hambre? Yo.
+  - → **—¿Quién tiene hambre? —Yo.**
+  - Who's hungry? Me.
+  - → **—Who's hungry? —Me.**
+- `c6aa57f1` practica-tengo-hambre (c02#0)
+  - ¿Tenés hambre? Sí, y sed también.
+  - → **—¿Tenés hambre? —Sí, y sed también.**
+  - Are you hungry? Yes, and thirsty too.
+  - → **—Are you hungry? —Yes, and thirsty too.**
+- `1d77a9ef` alfajores-y-chicles (c02#0)
+  - ¿Quién tiene chocolate? Yo no.
+  - → **—¿Quién tiene chocolate? —Yo no.**
+  - Who has chocolate? Not me.
+  - → **—Who has chocolate? —Not me.**
+- `c87b415b` alfajores-y-chicles (c02#0)
+  - ¿Tenés monedas? Sí, tengo dos.
+  - → **—¿Tenés monedas? —Sí, tengo dos.**
+  - Do you have coins? Yes, I have two.
+  - → **—Do you have coins? —Yes, I have two.**
+- `3e12b5fc` alfajores-y-chicles (c02#0)
+  - Che, ¿tenés monedas? Sí, tengo cinco.
+  - → **—Che, ¿tenés monedas? —Sí, tengo cinco.**
+  - Hey, do you have coins? Yes, I have five.
+  - → **—Hey, do you have coins? —Yes, I have five.**
+- `0b966b46` alfajores-y-chicles (c02#0)
+  - ¿Tenés alfajores? Sí, de Córdoba.
+  - → **—¿Tenés alfajores? —Sí, de Córdoba.**
+  - Do you have alfajores? Yes, from Córdoba.
+  - → **—Do you have alfajores? —Yes, from Córdoba.**
+- `5cf73614` alfajores-y-chicles (c02#0)
+  - ¿Dos paquetes o tres? Dos, gracias.
+  - → **—¿Dos paquetes o tres? —Dos, gracias.**
+  - Two packs or three? Two, thanks.
+  - → **—Two packs or three? —Two, thanks.**
+- `ffbf885b` alfajores-y-chicles (c02#0)
+  - Che, ¿tenés una moneda? Sí, acá tenés.
+  - → **—Che, ¿tenés una moneda? —Sí, acá tenés.**
+  - Hey, do you have a coin? Yes, here you go.
+  - → **—Hey, do you have a coin? —Yes, here you go.**
+- `21a4bc83` en-el-kiosco (c02#0)
+  - ¿Es tu kiosco? No, es de mis viejos.
+  - → **—¿Es tu kiosco? —No, es de mis viejos.**
+  - Is it your kiosco? No, it's my parents'.
+  - → **—Is it your kiosco? —No, it's my parents'.**
+- `b28acf96` en-el-kiosco (c02#0)
+  - ¿Cuántas facturas, Fede? Ocho.
+  - → **—¿Cuántas facturas, Fede? —Ocho.**
+  - How many pastries, Fede? Eight.
+  - → **—How many pastries, Fede? —Eight.**
+- `6347f7b1` en-el-kiosco (c02#0)
+  - ¿Cuántas facturas? Una docena.
+  - → **—¿Cuántas facturas? —Una docena.**
+  - How many pastries? A dozen.
+  - → **—How many pastries? —A dozen.**
+- `abfb5079` en-el-kiosco (c02#0)
+  - ¿Cuántas tostadas? Dos.
+  - → **—¿Cuántas tostadas? —Dos.**
+  - How many slices of toast? Two.
+  - → **—How many slices of toast? —Two.**
+- `fb8900ef` en-el-kiosco (c02#0)
+  - ¿Cuántas medialunas? Cuatro.
+  - → **—¿Cuántas medialunas? —Cuatro.**
+  - How many medialunas? Four.
+  - → **—How many medialunas? —Four.**
+- `b9e71c58` cuanto-cuesta (c02#0)
+  - ¿Un tostado sale más? Sí, sale siete mil.
+  - → **—¿Un tostado sale más? —Sí, sale siete mil.**
+  - Is a toasted sandwich more? Yes, it's seven thousand.
+  - → **—Is a toasted sandwich more? —Yes, it's seven thousand.**
+- `0410c1b5` cuanto-cuesta (c02#0)
+  - ¿Cuánto es? Mil pesos.
+  - → **—¿Cuánto es? —Mil pesos.**
+  - How much is it? A thousand pesos.
+  - → **—How much is it? —A thousand pesos.**
+- `c0804271` cuanto-cuesta (c02#0)
+  - Ocho mil. Acá tenés diez mil.
+  - → **—Ocho mil. —Acá tenés diez mil.**
+  - Eight thousand. Here's ten thousand.
+  - → **—Eight thousand. —Here's ten thousand.**
+- `a5351aea` cuanto-cuesta (c02#0)
+  - ¿Cuánto es? Dos mil.
+  - → **—¿Cuánto es? —Dos mil.**
+  - How much is it? Two thousand.
+  - → **—How much is it? —Two thousand.**
+- `2079e31d` cuanto-cuesta (c02#0)
+  - ¿Cuánto sale una docena de empanadas? Veinte mil.
+  - → **—¿Cuánto sale una docena de empanadas? —Veinte mil.**
+  - How much is a dozen empanadas? Twenty thousand.
+  - → **—How much is a dozen empanadas? —Twenty thousand.**
+- `a2a8747b` cuanto-cuesta (c02#0)
+  - ¿Es cara? No, sale mil pesos.
+  - → **—¿Es cara? —No, sale mil pesos.**
+  - Is it expensive? No, it's a thousand pesos.
+  - → **—Is it expensive? —No, it's a thousand pesos.**
+- `2ac84b30` cuanto-cuesta (c02#0)
+  - ¿Cuánto es? Tres mil pesos.
+  - → **—¿Cuánto es? —Tres mil pesos.**
+  - How much is it? Three thousand pesos.
+  - → **—How much is it? —Three thousand pesos.**
+- `dfc1d81e` cuanto-cuesta (c02#0)
+  - ¿Es barata? Sí, dos mil.
+  - → **—¿Es barata? —Sí, dos mil.**
+  - Is it cheap? Yes, two thousand.
+  - → **—Is it cheap? —Yes, two thousand.**
+- `b0887886` cuanto-cuesta (c02#0)
+  - ¿Cuánto cuesta un licuado? Cuatro mil.
+  - → **—¿Cuánto cuesta un licuado? —Cuatro mil.**
+  - How much does a smoothie cost? Four thousand.
+  - → **—How much does a smoothie cost? —Four thousand.**
+- `7f7ead2e` cuanto-sale (c02#0)
+  - ¿Cuánto es? Cuatrocientos pesos.
+  - → **—¿Cuánto es? —Cuatrocientos pesos.**
+  - How much is it? Four hundred pesos.
+  - → **—How much is it? —Four hundred pesos.**
+- `434876e5` cuanto-sale (c02#0)
+  - ¿Cuánto sale? Cuatro mil mangos.
+  - → **—¿Cuánto sale? —Cuatro mil mangos.**
+  - How much is it? Four thousand pesos.
+  - → **—How much is it? —Four thousand pesos.**
+- `dd654608` cuanto-sale (c02#0)
+  - ¿Cuánto sale? Quinientos pesos.
+  - → **—¿Cuánto sale? —Quinientos pesos.**
+  - How much is it? Five hundred pesos.
+  - → **—How much is it? —Five hundred pesos.**
+- `6798c58c` cuanto-sale (c02#0)
+  - ¿Cuánto es? Ciento doce mil pesos.
+  - → **—¿Cuánto es? —Ciento doce mil pesos.**
+  - How much is it? A hundred and twelve thousand pesos.
+  - → **—How much is it? —A hundred and twelve thousand pesos.**
+- `ee768261` cuanto-sale (c02#0)
+  - ¿Cuánto sale una medialuna? Novecientos pesos.
+  - → **—¿Cuánto sale una medialuna? —Novecientos pesos.**
+  - How much is a medialuna? Nine hundred pesos.
+  - → **—How much is a medialuna? —Nine hundred pesos.**
+- `571b9a9a` cuanto-sale (c02#0)
+  - Dos mil novecientos, por favor. Acá tenés.
+  - → **—Dos mil novecientos, por favor. —Acá tenés.**
+  - Two thousand nine hundred, please. Here you go.
+  - → **—Two thousand nine hundred, please. —Here you go.**
+- `2c677c27` cuanto-sale (c02#0)
+  - ¿Cuánto es? Dos mil setecientos pesos.
+  - → **—¿Cuánto es? —Dos mil setecientos pesos.**
+  - How much is it? Two thousand seven hundred pesos.
+  - → **—How much is it? —Two thousand seven hundred pesos.**
+- `643687a0` cuanto-sale (c02#0)
+  - ¿Pago acá? Sí, cuatro mil.
+  - → **—¿Pago acá? —Sí, cuatro mil.**
+  - Do I pay here? Yes, four thousand.
+  - → **—Do I pay here? —Yes, four thousand.**
+- `a1e23f5b` cuanto-sale (c02#0)
+  - ¿Cuánto cuestan tres medialunas? Dos mil cuatrocientos.
+  - → **—¿Cuánto cuestan tres medialunas? —Dos mil cuatrocientos.**
+  - How much do three medialunas cost? Two thousand four hundred.
+  - → **—How much do three medialunas cost? —Two thousand four hundred.**
+- `8370dbe2` la-gente (c02#0)
+  - ¿Ustedes tienen hijos? Sí, nosotras tenemos tres.
+  - → **—¿Ustedes tienen hijos? —Sí, nosotras tenemos tres.**
+  - Do you have children? Yes, we have three.
+  - → **—Do you have children? —Yes, we have three.**
+- `188b798b` la-gente (c02#0)
+  - ¿Cuántos son? Somos cuatro.
+  - → **—¿Cuántos son? —Somos cuatro.**
+  - How many of you are there? There are four of us.
+  - → **—How many of you are there? —There are four of us.**
+- `7cab1e39` la-gente (c02#0)
+  - ¿De dónde son ellos? Son de Córdoba.
+  - → **—¿De dónde son ellos? —Son de Córdoba.**
+  - Where are they from? They're from Córdoba.
+  - → **—Where are they from? —They're from Córdoba.**
+- `4a09198a` altos-y-morochos (c02#0)
+  - ¿Cómo es tu cuñada? Morocha, flaca y simpática.
+  - → **—¿Cómo es tu cuñada? —Morocha, flaca y simpática.**
+  - What's your sister-in-law like? Dark-haired, thin, and friendly.
+  - → **—What's your sister-in-law like? —Dark-haired, thin, and friendly.**
+- `0b1420e4` altos-y-morochos (c02#0, verify2)
+  - ¿Tu mamá es morocha? No, rubia.
+  - → **—¿Tu mamá es morocha? —No, rubia.**
+  - Does your mom have dark hair? No, she's blond.
+  - → **—Does your mom have dark hair? —No, she's blonde.**
+- `13bb0b3e` altos-y-morochos (c02#0)
+  - ¿Cómo es tu novio? Alto y simpático.
+  - → **—¿Cómo es tu novio? —Alto y simpático.**
+  - What's your boyfriend like? Tall and friendly.
+  - → **—What's your boyfriend like? —Tall and friendly.**
+- `c48fe5a2` altos-y-morochos (c02#0)
+  - ¿Son casados? No, son hermanos.
+  - → **—¿Son casados? —No, son hermanos.**
+  - Are they married? No, they're siblings.
+  - → **—Are they married? —No, they're siblings.**
+- `8293bb64` altos-y-morochos (c02#0, verify2)
+  - ¿Cómo es su novio? Lindo, pero no es simpático.
+  - → **—¿Cómo es su novio? —Lindo, pero no es simpático.**
+  - What's her boyfriend like? Good-looking, but not very friendly.
+  - → **—What's her boyfriend like? —Good-looking, but not friendly.**
+- `10f68e72` altos-y-morochos (c02#0)
+  - ¿Tus viejos son rubios? Mi papá sí.
+  - → **—¿Tus viejos son rubios? —Mi papá sí.**
+  - Are your parents blond? My dad is.
+  - → **—Are your parents blond? —My dad is.**
+- `2c52cd99` altos-y-morochos (c02#0)
+  - ¿Cómo es tu vecina? Flaca y alta.
+  - → **—¿Cómo es tu vecina? —Flaca y alta.**
+  - What's your neighbor like? Thin and tall.
+  - → **—What's your neighbor like? —Thin and tall.**
+- `aff16a5e` altos-y-morochos (c02#0)
+  - ¿Cómo es tu cuñado? Alto, flaco y morocho.
+  - → **—¿Cómo es tu cuñado? —Alto, flaco y morocho.**
+  - What's your brother-in-law like? Tall, skinny, and dark-haired.
+  - → **—What's your brother-in-law like? —Tall, skinny, and dark-haired.**
+- `3ed633d5` altos-y-morochos (c02#0)
+  - ¿Cómo son tus hermanos? Altos y flacos.
+  - → **—¿Cómo son tus hermanos? —Altos y flacos.**
+  - What are your brothers like? Tall and skinny.
+  - → **—What are your brothers like? —Tall and skinny.**
+- `38017a98` altos-y-morochos (c02#0)
+  - ¿Tus viejos son altos? Sí, y mi hermano también.
+  - → **—¿Tus viejos son altos? —Sí, y mi hermano también.**
+  - Are your parents tall? Yes, and my brother too.
+  - → **—Are your parents tall? —Yes, and my brother too.**
+- `989c0720` altos-y-morochos (c02#0, verify2)
+  - ¿Cómo es Belén? Alta, rubia y simpática.
+  - → **—¿Cómo es Belén? —Alta, rubia y simpática.**
+  - What's Belén like? Tall, blond, and friendly.
+  - → **—What's Belén like? —Tall, blonde, and friendly.**
+- `a66a462c` altos-y-morochos (c02#0)
+  - ¿Cómo es tu novia? Alta y morocha.
+  - → **—¿Cómo es tu novia? —Alta y morocha.**
+  - What's your girlfriend like? Tall, with dark hair.
+  - → **—What's your girlfriend like? —Tall, with dark hair.**
+- `73f14fcc` donde-esta (c02#0)
+  - ¿Estás en el kiosco? Sí, y tengo las galletitas.
+  - → **—¿Estás en el kiosco? —Sí, y tengo las galletitas.**
+  - Are you at the kiosco? Yes, and I've got the cookies.
+  - → **—Are you at the kiosco? —Yes, and I've got the cookies.**
+- `712dea75` donde-esta (c02#0)
+  - ¿Dónde estás? Estoy cerca, en el kiosco.
+  - → **—¿Dónde estás? —Estoy cerca, en el kiosco.**
+  - Where are you? I'm close, at the kiosco.
+  - → **—Where are you? —I'm close, at the kiosco.**
+- `56c4ba88` donde-esta (c02#0)
+  - ¿Tu hermana está allá? No, está en Córdoba.
+  - → **—¿Tu hermana está allá? —No, está en Córdoba.**
+  - Is your sister over there? No, she's in Córdoba.
+  - → **—Is your sister over there? —No, she's in Córdoba.**
+- `0fe6bdd0` donde-estan-las-llaves (c02#0)
+  - ¿Dónde están las llaves? Abajo, en la mochila.
+  - → **—¿Dónde están las llaves? —Abajo, en la mochila.**
+  - Where are the keys? Downstairs, in the backpack.
+  - → **—Where are the keys? —Downstairs, in the backpack.**
+- `92db1ab4` donde-estan-las-llaves (c02#0)
+  - ¿Dónde está Belén? Está arriba.
+  - → **—¿Dónde está Belén? —Está arriba.**
+  - Where's Belén? She's upstairs.
+  - → **—Where's Belén? —She's upstairs.**
+- `272602e0` hay-un-kiosco (c02#0)
+  - ¿Dónde está la parada? Ahí, en la esquina.
+  - → **—¿Dónde está la parada? —Ahí, en la esquina.**
+  - Where's the stop? There, on the corner.
+  - → **—Where's the stop? —There, on the corner.**
+- `1dba7f6c` hay-un-kiosco (c02#0)
+  - ¿El subte está lejos? No, a una cuadra.
+  - → **—¿El subte está lejos? —No, a una cuadra.**
+  - Is the subway far? No, a block away.
+  - → **—Is the subway far? —No, a block away.**
+- `93b4cf69` hay-un-kiosco (c02#0)
+  - ¿El subte está cerca? Sí, a tres cuadras.
+  - → **—¿El subte está cerca? —Sí, a tres cuadras.**
+  - Is the subway close? Yes, three blocks away.
+  - → **—Is the subway close? —Yes, three blocks away.**
+- `1c14ad05` practica-por-aca (c03#6)
+  - Los dos son altos, pero Santi es flaco.
+  - → **Los dos son altos, pero Santi es rubio y Nico es morocho.**
+  - The two of them are tall, but Santi is thin.
+  - → **They're both tall, but Santi is blond and Nico is dark-haired.**
+- `288f410d` practica-por-aca (c03#8)
+  - ¿Rocío es rubia? No, morocha.
+  - → **—¿Rocío es rubia? —No, morocha.**
+  - Is Rocío blond? No, dark-haired.
+  - → **—Is Rocío blonde? —No, dark-haired.**
+- `2d3d20b0` como-estas (c03#10)
+  - Estoy cansada porque mi perro no está bien.
+  - → **Estoy cansada porque mi bebé no está bien.**
+  - I'm tired because my dog isn't well.
+  - → **I'm tired because my baby isn't well.**
+- `3d7708d2` como-estas (c03#12)
+  - Estoy contenta, pero tengo miedo.
+  - → **Estoy contenta, pero medio nerviosa.**
+  - I'm happy, but I'm scared.
+  - → **I'm happy, but kind of nervous.**
+- `044de748` como-estas (c03#15)
+  - ¿Estás ocupada? No, todo bien.
+  - → **—¿Estás ocupada? —No, todo bien.**
+  - Are you busy? No, all good.
+  - → **—Are you busy? —No, all good.**
+- `769ae2d4` como-estas (c03#15)
+  - ¿Estás ocupado? No, dale.
+  - → **—¿Estás ocupado? —No, dale.**
+  - Are you busy? No, go ahead.
+  - → **—Are you busy? —No, go ahead.**
+- `70d3ae60` como-estas (c03#15)
+  - ¿Cómo estás? Medio cansada.
+  - → **—¿Cómo estás? —Medio cansada.**
+  - How are you? Kind of tired.
+  - → **—How are you? —Kind of tired.**
+- `866e1310` como-estas (c03#15)
+  - ¿Estás cansada? Sí, medio.
+  - → **—¿Estás cansada? —Sí, medio.**
+  - Are you tired? Yes, kind of.
+  - → **—Are you tired? —Yes, kind of.**
+- `1d84cb41` como-estas (c03#15)
+  - ¿Cómo estás? Más o menos.
+  - → **—¿Cómo estás? —Más o menos.**
+  - How are you? So-so.
+  - → **—How are you? —So-so.**
+- `de479b95` como-estas (c03#15)
+  - ¿Todo bien? Más o menos.
+  - → **—¿Todo bien? —Más o menos.**
+  - All good? So-so.
+  - → **—All good? —So-so.**
+- `1befe2c8` como-estas (c03#15)
+  - Che, ¿cómo está tu papá? Más o menos.
+  - → **—Che, ¿cómo está tu papá? —Más o menos.**
+  - Hey, how's your dad? So-so.
+  - → **—Hey, how's your dad? —So-so.**
+- `2fed8315` como-estas (c03#15)
+  - ¿Por qué están acá? Porque Sofi está enferma.
+  - → **—¿Por qué están acá? —Porque Sofi está enferma.**
+  - Why are you guys here? Because Sofi is sick.
+  - → **—Why are you guys here? —Because Sofi is sick.**
+- `4a4cd8d5` como-estas (c03#15)
+  - ¿Estás nerviosa? No, todo bien.
+  - → **—¿Estás nerviosa? —No, todo bien.**
+  - Are you nervous? No, all good.
+  - → **—Are you nervous? —No, all good.**
+- `aa72d5c6` esta-cerrado (c03#16)
+  - Dos empanadas, por favor, estamos apurados. Listo.
+  - → **—Dos empanadas, por favor, estamos apurados. —Listo.**
+  - Two empanadas, please, we're in a hurry. Done.
+  - → **—Two empanadas, please, we're in a hurry. —OK.**
+- `39f4adb1` esta-cerrado (c03#16)
+  - ¿Listo? Listo.
+  - → **—¿Listo? —Listo.**
+  - Done? Done.
+  - → **—Ready? —Ready.**
+- `39e51324` esta-cerrado (c03#20)
+  - Los gatos están llenos y tienen sueño.
+  - → **Mis hijos están llenos y tienen sueño.**
+  - The cats are full and sleepy.
+  - → **My kids are full and sleepy.**
+- `6b6ef2a8` esta-cerrado (c03#21)
+  - ¿Por qué está roto tu celu?
+  - → **¿Tu celu está roto?**
+  - Why is your phone broken?
+  - → **Is your phone broken?**
+- `03419896` que-haces (c03#25, verify2)
+  - Juan trabaja a la noche.
+  - → **Juan trabaja de noche.**
+  - Juan works at night.
+- `9fe9bddc` que-haces (c03#25, verify2)
+  - ¿Yo? Laburo en el hospital, a la noche.
+  - → **¿Yo? Laburo en el hospital, de noche.**
+  - Me? I work at the hospital, at night.
+- `d188f470` que-haces (c03#25, verify2)
+  - ¿Por qué laburás a la noche? Porque estudio.
+  - → **—¿Por qué laburás de noche? —Porque estudio.**
+  - Why do you work at night? Because I study.
+  - → **—Why do you work at night? —Because I study.**
+- `dcf2fde9` que-haces (c03#25, verify2)
+  - Estamos cansados porque laburamos a la noche.
+  - → **Estamos cansados porque laburamos de noche.**
+  - We're tired because we work at night.
+- `e2a90b18` que-haces (c03#29)
+  - Rocío camina.
+  - → **Rocío camina porque no tiene auto.**
+  - Rocío walks.
+  - → **Rocío walks because she doesn't have a car.**
+- `97cb825a` que-haces (c03#30)
+  - Mis abuelos laburan en Córdoba.
+  - → **Mis hermanos laburan en Córdoba.**
+  - My grandparents work in Córdoba.
+  - → **My brothers work in Córdoba.**
+- `7f2e35a1` que-haces (c03#32)
+  - Ana habla inglés.
+  - → **Ana habla inglés en el laburo.**
+  - Ana speaks English.
+  - → **Ana speaks English at work.**
+- `4c51437d` que-haces (c03#32)
+  - Belén toma café.
+  - → **Belén toma café porque tiene sueño.**
+  - Belén drinks coffee.
+  - → **Belén drinks coffee because she's sleepy.**
+- `0cf12924` que-haces (c03#32)
+  - Lucía estudia castellano.
+  - → **Lucía estudia castellano porque labura acá.**
+  - Lucía studies Spanish.
+  - → **Lucía studies Spanish because she works here.**
+- `e9507e92` practico-castellano (c03#33)
+  - Uso el castellano, pero hablo despacio.
+  - → **Uso el celu en el bondi.**
+  - I use Spanish, but I speak slowly.
+  - → **I use my phone on the bus.**
+- `54934587` practico-castellano (c03#33)
+  - No sé cómo se dice, uso el inglés.
+  - → **No sé cómo se dice, uso el celu.**
+  - I don't know how you say it, I use English.
+  - → **I don't know how you say it, I use my phone.**
+- `05c02a40` practico-castellano (c03#35)
+  - Necesito una palabra.
+  - → **Necesito un taxi, estoy apurado.**
+  - I need a word.
+  - → **I need a taxi, I'm in a hurry.**
+- `5f33adc0` practico-castellano (c03#35)
+  - Busco una palabra.
+  - → **Busco la parada del bondi.**
+  - I'm looking for a word.
+  - → **I'm looking for the bus stop.**
+- `986f820e` practico-castellano (c03#39)
+  - Mi mamá usa el celu y pregunta cómo se dice.
+  - → **Mi mamá nunca usa el celu, siempre pregunta.**
+  - My mom uses her phone and asks how you say it.
+  - → **My mom never uses her phone, she always asks.**
+- `7f6909b8` practico-castellano (c03#40)
+  - ¿Ustedes necesitan las palabras en inglés?
+  - → **¿Ustedes necesitan un taxi o toman el bondi?**
+  - Do you all need the words in English?
+  - → **Do you guys need a taxi or are you taking the bus?**
+- `36c79fbc` mate-y-facturas (c03#45)
+  - El café de acá está rico, pero el mate no.
+  - → **El café de acá está rico, pero las medialunas no.**
+  - The coffee here is delicious, but the mate isn't.
+  - → **The coffee here is delicious, but the medialunas aren't.**
+- `4ebf501c` nos-gustan-los-fideos (c03#50)
+  - ¿Hay un huevo en casa?
+  - → **Necesito un huevo, ¿tenés?**
+  - Is there an egg at home?
+  - → **I need an egg, do you have one?**
+- `5e9a1e94` practica-nos-gusta (c03#53, verify2)
+  - El tren está lleno, tomamos un taxi.
+  - → **El tren está lleno, ¿tomamos un taxi?**
+  - The train is packed, let's take a taxi.
+  - → **The train is packed, should we take a taxi?**
+- `4cdd4003` practica-nos-gusta (c03#54)
+  - ¿Cuántos fideos necesitamos?
+  - → **¿Cuántos paquetes de fideos necesitamos?**
+  - How much pasta do we need?
+  - → **How many packs of pasta do we need?**
+- `3e1726f3` practica-nos-gusta (c03#56)
+  - No practico nunca y no entiendo nada.
+  - → **Nunca practico y no entiendo nada.**
+  - I never practice and I don't understand anything.
+- `73d69df9` hoy-y-manana (c03#59)
+  - ¿Mañana laburás?
+  - → **¿Laburás a la mañana?**
+  - Are you working tomorrow?
+  - → **Do you work in the morning?**
+- `6d2aa42d` hoy-y-manana (c03#59)
+  - ¿Qué hacés mañana?
+  - → **¿Qué hacés a la mañana?**
+  - What are you doing tomorrow?
+  - → **What do you do in the morning?**
+- `c736ac21` hay-un-tren (c03#0)
+  - ¿Estás en el parque? No, estoy en casa.
+  - → **—¿Estás en el parque? —No, estoy en casa.**
+  - Are you at the park? No, I'm home.
+  - → **—Are you at the park? —No, I'm home.**
+- `04d9e1d3` practica-por-aca (c03#0)
+  - ¿La estación está lejos? No, a dos cuadras.
+  - → **—¿La estación está lejos? —No, a dos cuadras.**
+  - Is the station far? No, two blocks away.
+  - → **—Is the station far? —No, two blocks away.**
+- `24bbb993` practica-por-aca (c03#0)
+  - ¿Ustedes son de acá? No, somos de Montevideo.
+  - → **—¿Ustedes son de acá? —No, somos de Montevideo.**
+  - Are you guys from here? No, we're from Montevideo.
+  - → **—Are you guys from here? —No, we're from Montevideo.**
+- `d8ab081b` practica-por-aca (c03#0)
+  - ¿Cómo son los hijos de Juan? Altos y rubios.
+  - → **—¿Cómo son los hijos de Juan? —Altos y rubios.**
+  - What are Juan's children like? Tall and blond.
+  - → **—What are Juan's children like? —Tall and blond.**
+- `071a0773` practica-por-aca (c03#0)
+  - ¿Dónde estás? En la esquina de la plaza.
+  - → **—¿Dónde estás? —En la esquina de la plaza.**
+  - Where are you? On the corner of the square.
+  - → **—Where are you? —On the corner of the square.**
+- `87ee1a55` practica-por-aca (c03#0)
+  - ¿Hay un bar por acá? Sí, en la esquina.
+  - → **—¿Hay un bar por acá? —Sí, en la esquina.**
+  - Is there a café around here? Yes, on the corner.
+  - → **—Is there a café around here? —Yes, on the corner.**
+- `5b474f58` practica-por-aca (c03#0)
+  - ¿Dónde está Rocío? Arriba.
+  - → **—¿Dónde está Rocío? —Arriba.**
+  - Where's Rocío? Upstairs.
+  - → **—Where's Rocío? —Upstairs.**
+- `6c9df56a` practica-por-aca (c03#0)
+  - ¿Hay alfajores en la mochila? Sí, dos.
+  - → **—¿Hay alfajores en la mochila? —Sí, dos.**
+  - Are there any alfajores in the backpack? Yes, two.
+  - → **—Are there any alfajores in the backpack? —Yes, two.**
+- `89f8f0f1` practica-por-aca (c03#0)
+  - ¿Tienen alfajores? Sí, de chocolate.
+  - → **—¿Tienen alfajores? —Sí, de chocolate.**
+  - Do you have alfajores? Yes, chocolate ones.
+  - → **—Do you have alfajores? —Yes, chocolate ones.**
+- `371915a8` practica-por-aca (c03#0)
+  - ¿Cómo son los mellizos? Rubios y simpáticos.
+  - → **—¿Cómo son los mellizos? —Rubios y simpáticos.**
+  - What are the twins like? Blond and friendly.
+  - → **—What are the twins like? —Blond and friendly.**
+- `cff1bb2d` esta-cerrado (c03#0)
+  - ¿Estás libre? Sí, ¿por qué?
+  - → **—¿Estás libre? —Sí, ¿por qué?**
+  - Are you free? Yes, why?
+  - → **—Are you free? —Yes, why?**
+- `0764dd0e` esta-cerrado (c03#0)
+  - Perdón, ¿está libre? No, está ocupado.
+  - → **—Perdón, ¿está libre? —No, está ocupado.**
+  - Excuse me, is it free? No, it's taken.
+  - → **—Excuse me, is it free? —No, it's taken.**
+- `a68bc837` esta-cerrado (c03#0)
+  - ¿Otra empanada? No, estoy lleno.
+  - → **—¿Otra empanada? —No, estoy lleno.**
+  - Another empanada? No, I'm full.
+  - → **—Another empanada? —No, I'm full.**
+- `5c33cdc2` esta-cerrado (c03#0)
+  - ¿Otra pizza? No, estamos llenos.
+  - → **—¿Otra pizza? —No, estamos llenos.**
+  - Another pizza? No, we're full.
+  - → **—Another pizza? —No, we're full.**
+- `27366be7` esta-cerrado (c03#0)
+  - ¿Un café? No, gracias, estoy apurada.
+  - → **—¿Un café? —No, gracias, estoy apurada.**
+  - A coffee? No, thanks, I'm in a hurry.
+  - → **—A coffee? —No, thanks, I'm in a hurry.**
+- `d9b455eb` esta-cerrado (c03#0)
+  - ¿El tostado está listo? Sí, acá está.
+  - → **—¿El tostado está listo? —Sí, acá está.**
+  - Is the toasted sandwich ready? Yes, here it is.
+  - → **—Is the toasted sandwich ready? —Yes, here it is.**
+- `cd9717f2` esta-cerrado (c03#0)
+  - Santi, ¿estás listo? No, estoy medio nervioso.
+  - → **—Santi, ¿estás listo? —No, estoy medio nervioso.**
+  - Santi, are you ready? No, I'm kind of nervous.
+  - → **—Santi, are you ready? —No, I'm kind of nervous.**
+- `d54a5e98` esta-cerrado (c03#0)
+  - ¿La torta está lista? Sí, y está caliente.
+  - → **—¿La torta está lista? —Sí, y está caliente.**
+  - Is the cake ready? Yes, and it's warm.
+  - → **—Is the cake ready? —Yes, and it's warm.**
+- `3581e6fc` esta-cerrado (c03#0)
+  - Juli, ¿estás lista? Sí, dale.
+  - → **—Juli, ¿estás lista? —Sí, dale.**
+  - Juli, are you ready? Yes, let's go.
+  - → **—Juli, are you ready? —Yes, let's go.**
+- `f8483a37` esta-cerrado (c03#0)
+  - Perdón, ¿están abiertos? No, estamos cerrados.
+  - → **—Perdón, ¿están abiertos? —No, estamos cerrados.**
+  - Sorry, are you open? No, we're closed.
+  - → **—Sorry, are you open? —No, we're closed.**
+- `41e30510` esta-cerrado (c03#0)
+  - ¿Otra medialuna? No, gracias, estoy llena.
+  - → **—¿Otra medialuna? —No, gracias, estoy llena.**
+  - Another medialuna? No, thanks, I'm full.
+  - → **—Another medialuna? —No, thanks, I'm full.**
+- `5590b950` esta-cerrado (c03#0)
+  - ¿Por qué está sucia la casa? Porque tenemos tres gatos.
+  - → **—¿Por qué está sucia la casa? —Porque tenemos tres gatos.**
+  - Why is the house dirty? Because we have three cats.
+  - → **—Why is the house dirty? —Because we have three cats.**
+- `80fa3396` esta-cerrado (c03#0)
+  - ¿La botella está cerrada? Sí, tranqui.
+  - → **—¿La botella está cerrada? —Sí, tranqui.**
+  - Is the bottle closed? Yes, relax.
+  - → **—Is the bottle closed? —Yes, relax.**
+- `db460ba6` esta-cerrado (c03#0)
+  - ¿Están listos? No, estamos medio cansados.
+  - → **—¿Están listos? —No, estamos medio cansados.**
+  - Are you guys ready? No, we're kind of tired.
+  - → **—Are you guys ready? —No, we're kind of tired.**
+- `ecc85007` esta-cerrado (c03#0)
+  - ¿Están sucios? No, están bien.
+  - → **—¿Están sucios? —No, están bien.**
+  - Are they dirty? No, they're fine.
+  - → **—Are they dirty? —No, they're fine.**
+- `b8562fbf` que-haces (c03#0)
+  - ¿Tu hermana trabaja cerca? Sí, a tres cuadras.
+  - → **—¿Tu hermana trabaja cerca? —Sí, a tres cuadras.**
+  - Does your sister work close by? Yes, three blocks away.
+  - → **—Does your sister work close by? —Yes, three blocks away.**
+- `1a4f41bf` que-haces (c03#0)
+  - ¿Qué hace Santi en Córdoba? Estudia.
+  - → **—¿Qué hace Santi en Córdoba? —Estudia.**
+  - What is Santi doing in Córdoba? He's studying.
+  - → **—What is Santi doing in Córdoba? —He's studying.**
+- `746387b5` que-haces (c03#0)
+  - ¿Estudiás castellano? Sí, en el centro.
+  - → **—¿Estudiás castellano? —Sí, en el centro.**
+  - Are you studying Spanish? Yes, downtown.
+  - → **—Are you studying Spanish? —Yes, downtown.**
+- `10ee405f` que-haces (c03#0)
+  - ¿Tus hijos estudian acá? No, en Montevideo.
+  - → **—¿Tus hijos estudian acá? —No, en Montevideo.**
+  - Do your children study here? No, in Montevideo.
+  - → **—Do your children study here? —No, in Montevideo.**
+- `c53a33de` que-haces (c03#0)
+  - ¿Hablás inglés? Un poco, pero estudio.
+  - → **—¿Hablás inglés? —Un poco, pero estudio.**
+  - Do you speak English? A little, but I'm studying.
+  - → **—Do you speak English? —A little, but I'm studying.**
+- `cd1d3f7a` que-haces (c03#0)
+  - ¿Hablás italiano? Un poco, mi abuela es italiana.
+  - → **—¿Hablás italiano? —Un poco, mi abuela es italiana.**
+  - Do you speak Italian? A little; my grandmother is Italian.
+  - → **—Do you speak Italian? —A little; my grandmother is Italian.**
+- `99dd8591` que-haces (c03#0)
+  - ¿Tu novia labura cerca? No, labura lejos.
+  - → **—¿Tu novia labura cerca? —No, labura lejos.**
+  - Does your girlfriend work close by? No, she works far away.
+  - → **—Does your girlfriend work close by? —No, she works far away.**
+- `7e7c25ae` que-haces (c03#0)
+  - ¿Qué hacés en La Plata? Estudio.
+  - → **—¿Qué hacés en La Plata? —Estudio.**
+  - What do you do in La Plata? I study.
+  - → **—What do you do in La Plata? —I study.**
+- `27f77442` que-haces (c03#0)
+  - ¿Qué hacés? Todo bien, ¿y vos?
+  - → **—¿Qué hacés? —Todo bien, ¿y vos?**
+  - How's it going? All good, and you?
+  - → **—How's it going? —All good, and you?**
+- `ade9bbf4` que-haces (c03#0)
+  - ¿Qué hace tu novio? Labura en el centro.
+  - → **—¿Qué hace tu novio? —Labura en el centro.**
+  - What does your boyfriend do? He works downtown.
+  - → **—What does your boyfriend do? —He works downtown.**
+- `d02baade` que-haces (c03#0)
+  - ¿Tomás mate? No, nunca.
+  - → **—¿Tomás mate? —No, nunca.**
+  - Do you drink mate? No, never.
+  - → **—Do you drink mate? —No, never.**
+- `ad8d2bf5` que-haces (c03#0)
+  - ¿Trabajás en Montevideo? No, en Buenos Aires.
+  - → **—¿Trabajás en Montevideo? —No, en Buenos Aires.**
+  - Do you work in Montevideo? No, in Buenos Aires.
+  - → **—Do you work in Montevideo? —No, in Buenos Aires.**
+- `882df5c1` que-haces (c03#0, verify2)
+  - ¿Qué toman? Un café y un jugo, por favor.
+  - → **—¿Qué toman? —Un café y un jugo, por favor.**
+  - What'll you have? A coffee and a juice, please.
+  - → **—What would you like to drink? —A coffee and a juice, please.**
+- `4c1c92e6` que-haces (c03#0)
+  - ¿Laburás? No, estudio.
+  - → **—¿Laburás? —No, estudio.**
+  - Do you work? No, I study.
+  - → **—Do you work? —No, I study.**
+- `4f3b52bd` que-haces (c03#0, verify2)
+  - ¿Qué estudiás? Castellano, porque mi novio es porteño.
+  - → **—¿Qué estudiás? —Castellano, porque mi novio es porteño.**
+  - What do you study? Spanish, because my boyfriend is from Buenos Aires.
+  - → **—What do you study? —Spanish, because my boyfriend is from Buenos Aires.**
+- `e3fc6b23` que-haces (c03#0)
+  - ¿Laburás en La Plata? Sí, tomo el tren.
+  - → **—¿Laburás en La Plata? —Sí, tomo el tren.**
+  - Do you work in La Plata? Yes, I take the train.
+  - → **—Do you work in La Plata? —Yes, I take the train.**
+- `071e2dc6` practico-castellano (c03#0)
+  - ¿Practicamos? Dale.
+  - → **—¿Practicamos? —Dale.**
+  - Want to practice? Sure.
+  - → **—Want to practice? —Sure.**
+- `21ee5db1` practico-castellano (c03#0)
+  - ¿Por qué no practican? No tienen tiempo.
+  - → **—¿Por qué no practican? —No tienen tiempo.**
+  - Why don't they practice? They don't have time.
+  - → **—Why don't they practice? —They don't have time.**
+- `dc5effbf` practico-castellano (c03#0)
+  - ¿Quién necesita ayuda? Yo, no entendí.
+  - → **—¿Quién necesita ayuda? —Yo, no entendí.**
+  - Who needs help? Me, I didn't understand.
+  - → **—Who needs help? —Me, I didn't understand.**
+- `f1182a22` nos-gustan-los-fideos (c03#0)
+  - ¿Fideos con queso? ¡Dale!
+  - → **—¿Fideos con queso? —¡Dale!**
+  - Pasta with cheese? Sure!
+  - → **—Pasta with cheese? —Sure!**
+- `60d03702` nos-gustan-los-fideos (c03#0)
+  - ¿Te gusta la verdura? Más o menos.
+  - → **—¿Te gusta la verdura? —Más o menos.**
+  - Do you like vegetables? Kind of.
+  - → **—Do you like vegetables? —So-so.**
+- `25bfa606` nos-gustan-los-fideos (c03#0)
+  - ¿Verdura? No, gracias.
+  - → **—¿Verdura? —No, gracias.**
+  - Vegetables? No, thanks.
+  - → **—Vegetables? —No, thanks.**
+- `60fa8229` practica-nos-gusta (c03#0)
+  - ¿Practicás mucho? No, practico poco porque laburo mucho.
+  - → **—¿Practicás mucho? —No, practico poco porque laburo mucho.**
+  - Do you practice a lot? No, I practice very little because I work a lot.
+  - → **—Do you practice a lot? —No, I practice very little because I work a lot.**
+- `d1005565` practica-nos-gusta (c03#0)
+  - ¿Otra medialuna? No, estoy lleno.
+  - → **—¿Otra medialuna? —No, estoy lleno.**
+  - Another medialuna? No, I'm full.
+  - → **—Another medialuna? —No, I'm full.**
+- `3e78286f` me-traes-un-cafe (c04#2)
+  - Moza, ¿el licuado es con leche o con agua?
+  - → **¿Dónde está la moza?**
+  - Waitress, is the smoothie made with milk or with water?
+  - → **Where is the waitress?**
+- `d436351b` me-traes-un-cafe (c04#2)
+  - Moza, ¿me traés la cuenta?
+  - → **Perdón, ¿sos la moza?**
+  - Waitress, can you bring me the check?
+  - → **Excuse me, are you the waitress?**
+- `809f69d0` me-traes-un-cafe (c04#2)
+  - Moza, ¿me traés un café para Nico?
+  - → **La moza tiene el café de Nico.**
+  - Waitress, can you bring me a coffee for Nico?
+  - → **The waitress has Nico's coffee.**
+- `f57bad4a` me-traes-un-cafe (c04#2)
+  - Mozo, ¿la ensalada tiene huevo?
+  - → **El mozo tiene la cuenta.**
+  - Waiter, does the salad have egg?
+  - → **The waiter has the check.**
+- `49d3a771` me-traes-un-cafe (c04#2)
+  - Mozo, un café, por favor.
+  - → **¿Dónde está el mozo? Quiero un café.**
+  - Waiter, a coffee, please.
+  - → **Where is the waiter? I want a coffee.**
+- `7e1cd8fe` me-traes-un-cafe (c04#2)
+  - Mozo, el vaso está sucio, ¿me traés otro?
+  - → **Perdón, el vaso está sucio, ¿me traés otro?**
+  - Waiter, the glass is dirty, can you bring me another one?
+  - → **Excuse me, the glass is dirty, can you bring me another one?**
+- `951787ef` que-quieren-tomar (c04#2)
+  - Mozo, la carta, por favor.
+  - → **Perdón, la carta, por favor.**
+  - Waiter, the menu, please.
+  - → **Excuse me, the menu, please.**
+- `5525b8c7` practica-el-vecino (c04#2)
+  - Mozo, no tengo servilleta.
+  - → **Perdón, no tengo servilleta.**
+  - Waiter, I don't have a napkin.
+  - → **Excuse me, I don't have a napkin.**
+- `ba140120` practica-el-vecino (c04#2)
+  - Mozo, ¿nos traés la carta?
+  - → **Perdón, ¿nos traés la carta?**
+  - Waiter, can you bring us the menu?
+  - → **Excuse me, can you bring us the menu?**
+- `e199013e` que-quieren-tomar (c04#5)
+  - ¿Qué queremos, pollo o pescado?
+  - → **Queremos pollo, no pescado.**
+  - What do we want, chicken or fish?
+  - → **We want chicken, not fish.**
+- `eb00affd` que-quieren-tomar (c04#6)
+  - ¿Querés una cuchara para la torta?
+  - → **¿Querés una cuchara para el arroz?**
+  - Do you want a spoon for the cake?
+  - → **Do you want a spoon for the rice?**
+- `27e4939e` practica-el-vecino (c04#7)
+  - ¿Quieren algo más? No, gracias.
+  - → **—¿Quieren algo más? —No, gracias.**
+  - Do you want anything else? No, thanks.
+  - → **—Do you guys want anything else? —No, thanks.**
+- `57fe5058` facu-y-laburo (c04#10)
+  - Estoy cansada porque tengo una reunión a la noche.
+  - → **Estoy cansada y tengo una reunión a la noche.**
+  - I'm tired because I have a meeting at night.
+  - → **I'm tired and I have a meeting tonight.**
+- `3d42b4eb` facu-y-laburo (c04#14)
+  - Mi profesor de inglés es médico también.
+  - → **Mi profesor de inglés también labura en una oficina.**
+  - My English teacher is also a doctor.
+  - → **My English teacher also works in an office.**
+- `96b8be1e` es-enfermera (c04#15)
+  - ¿Quién es la persona que tiene que ayudar?
+  - → **¿Quién es la persona que labura con vos?**
+  - Who is the person who has to help?
+  - → **Who is the person who works with you?**
+- `5a4b0ba7` vendo-diarios (c04#26)
+  - Recibo a mi suegra y estoy nerviosa.
+  - → **A la noche recibo a mi suegra y estoy nerviosa.**
+  - I'm having my mother-in-law over and I'm nervous.
+  - → **I'm having my mother-in-law over tonight and I'm nervous.**
+- `ca835aae` vendo-diarios (c04#27)
+  - Martín abre las galletitas y come tres.
+  - → **Martín abre el paquete de galletitas.**
+  - Martín opens the cookies and eats three.
+  - → **Martín opens the pack of cookies.**
+- `363f9239` mi-edificio (c04#43)
+  - ¿El ascensor está en el segundo?
+  - → **¿La oficina está en el segundo?**
+  - Is the elevator on the second floor?
+  - → **Is the office on the second floor?**
+- `c9b023b1` mi-edificio (c04#44)
+  - ¿El edificio tiene patio? Sí, y terraza también.
+  - → **—¿El edificio tiene patio? —Sí, y terraza también.**
+  - Does the building have a courtyard? Yes, and a roof terrace too.
+  - → **—Does the building have a patio? —Yes, and a roof terrace too.**
+- `31f24ada` la-hora (c04#53)
+  - Estoy enfermo hace dos días.
+  - → **Tengo tres días libres.**
+  - I've been sick for two days.
+  - → **I have three days off.**
+- `15c03cd0` la-hora (c04#53)
+  - Hace tres días que no tomo mate.
+  - → **Estamos dos días en Córdoba.**
+  - I haven't had mate in three days.
+  - → **We're in Córdoba for two days.**
+- `cea716b8` la-hora (c04#56)
+  - ¿Tenés cincuenta pesos?
+  - → **¿Tenés cincuenta mil pesos?**
+  - Do you have fifty pesos?
+  - → **Do you have fifty thousand pesos?**
+- `f33431e0` la-hora (c04#56)
+  - Tengo cien pesos.
+  - → **Tengo cien mil pesos.**
+  - I have a hundred pesos.
+  - → **I have a hundred thousand pesos.**
+- `43d709cd` la-hora (c04#57)
+  - Son treinta mil pesos.
+  - → **Tengo treinta años.**
+  - It's thirty thousand pesos.
+  - → **I'm thirty years old.**
+- `c7406a86` la-hora (c04#57)
+  - Son sesenta mil pesos.
+  - → **Mi vieja tiene sesenta años.**
+  - It's sixty thousand pesos.
+  - → **My mom is sixty years old.**
+- `f071cfe6` la-hora (c04#57)
+  - El martes tengo examen y estoy nerviosa.
+  - → **El martes tengo médico a las diez.**
+  - I have an exam on Tuesday and I'm nervous.
+  - → **On Tuesday I have a doctor's appointment at ten.**
+- `9a7b1a64` la-hora (c04#59)
+  - Corro treinta cuadras a la mañana.
+  - → **Camino treinta cuadras a la mañana.**
+  - I run thirty blocks in the morning.
+  - → **I walk thirty blocks in the morning.**
+- `74e1f5f8` facu-y-laburo (c04#0)
+  - ¿Qué estudiás en la facu? Inglés.
+  - → **—¿Qué estudiás en la facu? —Inglés.**
+  - What do you study at university? English.
+  - → **—What do you study at college? —English.**
+- `c960c6ff` facu-y-laburo (c04#0)
+  - ¿Tu novia estudia en la facu? Sí, y labura también.
+  - → **—¿Tu novia estudia en la facu? —Sí, y labura también.**
+  - Does your girlfriend study at university? Yes, and she works too.
+  - → **—Does your girlfriend study at college? —Yes, and she works too.**
+- `7c45863a` me-traes-un-cafe (c04#0)
+  - ¿Querés mate? Sí, dale.
+  - → **—¿Querés mate? —Sí, dale.**
+  - Do you want mate? Yes, sure.
+  - → **—Do you want mate? —Yes, sure.**
+- `cbdab841` me-traes-un-cafe (c04#0)
+  - ¿Querés algo? No, gracias, estoy bien.
+  - → **—¿Querés algo? —No, gracias, estoy bien.**
+  - Do you want anything? No, thanks, I'm fine.
+  - → **—Do you want anything? —No, thanks, I'm fine.**
+- `572f30f3` me-traes-un-cafe (c04#0)
+  - ¿Me traés un jugo? Sí, ¿con o sin azúcar?
+  - → **—¿Me traés un jugo? —Sí, ¿con o sin azúcar?**
+  - Can you bring me a juice? Sure, with or without sugar?
+  - → **—Can you bring me a juice? —Sure, with or without sugar?**
+- `d5067ce5` me-traes-un-cafe (c04#0)
+  - ¿Querés un vaso de agua o un jugo? Agua, gracias.
+  - → **—¿Querés un vaso de agua o un jugo? —Agua, gracias.**
+  - Do you want a glass of water or a juice? Water, thanks.
+  - → **—Do you want a glass of water or a juice? —Water, thanks.**
+- `cd960d1e` facu-y-laburo (c04#0)
+  - ¿La profesora está en clase? No, en una reunión.
+  - → **—¿La profesora está en clase? —No, en una reunión.**
+  - Is the teacher in class? No, in a meeting.
+  - → **—Is the teacher in class? —No, in a meeting.**
+- `5354d7aa` facu-y-laburo (c04#0)
+  - ¿Tenés examen? Sí, tengo que estudiar mucho.
+  - → **—¿Tenés examen? —Sí, tengo que estudiar mucho.**
+  - Do you have an exam? Yes, I have to study a lot.
+  - → **—Do you have an exam? —Yes, I have to study a lot.**
+- `3bf274b2` facu-y-laburo (c04#0, verify3)
+  - ¿De qué laburás? Tengo un laburo de moza.
+  - → **—¿De qué laburás? —Tengo un laburo de moza.**
+  - What do you do for work? I have a job as a waitress.
+  - → **—What do you do for work? —I have a job as a waitress.**
+- `1de87644` facu-y-laburo (c04#0)
+  - ¿De qué trabaja tu novio? No tiene laburo.
+  - → **—¿De qué trabaja tu novio? —No tiene laburo.**
+  - What does your boyfriend do for work? He doesn't have a job.
+  - → **—What does your boyfriend do for work? —He doesn't have a job.**
+- `c95c3354` facu-y-laburo (c04#0, verify3)
+  - ¿De qué labura tu hermana? Labura en una oficina.
+  - → **—¿De qué labura tu hermana? —Labura en una oficina.**
+  - What does your sister do for work? She works in an office.
+  - → **—What does your sister do for work? —She works in an office.**
+- `fda6a8d6` facu-y-laburo (c04#0)
+  - ¿De qué laburás? En una oficina.
+  - → **—¿De qué laburás? —En una oficina.**
+  - What do you do for work? In an office.
+  - → **—What do you do for work? —In an office.**
+- `72c6ac22` facu-y-laburo (c04#0)
+  - ¿La jefa está en la oficina? Sí, con un abogado.
+  - → **—¿La jefa está en la oficina? —Sí, con un abogado.**
+  - Is the boss in the office? Yes, with a lawyer.
+  - → **—Is the boss in the office? —Yes, with a lawyer.**
+- `8af4feb9` facu-y-laburo (c04#0)
+  - ¿Cuántos exámenes tenés? Dos, y estoy nervioso.
+  - → **—¿Cuántos exámenes tenés? —Dos, y estoy nervioso.**
+  - How many exams do you have? Two, and I'm nervous.
+  - → **—How many exams do you have? —Two, and I'm nervous.**
+- `38d8f04a` facu-y-laburo (c04#0)
+  - ¿Tenés exámenes? Sí, y tengo que laburar también.
+  - → **—¿Tenés exámenes? —Sí, y tengo que laburar también.**
+  - Do you have exams? Yes, and I have to work too.
+  - → **—Do you have exams? —Yes, and I have to work too.**
+- `fc3aa68d` facu-y-laburo (c04#0)
+  - ¿Quién es tu profesor de castellano? Nico.
+  - → **—¿Quién es tu profesor de castellano? —Nico.**
+  - Who's your Spanish teacher? Nico.
+  - → **—Who's your Spanish teacher? —Nico.**
+- `c7405d45` facu-y-laburo (c04#0)
+  - ¿Qué materia tenés a la noche? Castellano.
+  - → **—¿Qué materia tenés a la noche? —Castellano.**
+  - What subject do you have at night? Spanish.
+  - → **—What subject do you have at night? —Spanish.**
+- `e087b17c` facu-y-laburo (c04#0)
+  - ¿Tenés clase? No, estoy en el laburo.
+  - → **—¿Tenés clase? —No, estoy en el laburo.**
+  - Do you have class? No, I'm at work.
+  - → **—Do you have class? —No, I'm at work.**
+- `fcf9f3c8` facu-y-laburo (c04#0)
+  - ¿Cuántas materias tenés? Seis, y estoy cansado.
+  - → **—¿Cuántas materias tenés? —Seis, y estoy cansado.**
+  - How many subjects do you have? Six, and I'm tired.
+  - → **—How many subjects do you have? —Six, and I'm tired.**
+- `9d08d192` es-enfermera (c04#0)
+  - ¿El ingeniero es de acá? No, es de Brasil.
+  - → **—¿El ingeniero es de acá? —No, es de Brasil.**
+  - Is the engineer from here? No, he's from Brazil.
+  - → **—Is the engineer from here? —No, he's from Brazil.**
+- `25e36039` es-enfermera (c04#0)
+  - ¿Rocío es cocinera? No, es médica.
+  - → **—¿Rocío es cocinera? —No, es médica.**
+  - Is Rocío a cook? No, she's a doctor.
+  - → **—Is Rocío a cook? —No, she's a doctor.**
+- `21e9c831` comes-vivis (c04#0)
+  - ¿Vivís con tu novio? No, vivo sola.
+  - → **—¿Vivís con tu novio? —No, vivo sola.**
+  - Do you live with your boyfriend? No, I live alone.
+  - → **—Do you live with your boyfriend? —No, I live alone.**
+- `dd3e8749` comes-vivis (c04#0)
+  - ¿Casa o departamento? Departamento.
+  - → **—¿Casa o departamento? —Departamento.**
+  - House or apartment? Apartment.
+  - → **—House or apartment? —Apartment.**
+- `f3f4cdb3` comes-vivis (c04#0)
+  - ¿Por qué aprendés castellano? Porque vivo acá.
+  - → **—¿Por qué aprendés castellano? —Porque vivo acá.**
+  - Why are you learning Spanish? Because I live here.
+  - → **—Why are you learning Spanish? —Because I live here.**
+- `593fcb5a` vendo-diarios (c04#0)
+  - ¿Corro? No, tranqui, hay tiempo.
+  - → **—¿Corro? —No, tranqui, hay tiempo.**
+  - Should I run? No, relax, there's time.
+  - → **—Should I run? —No, relax, there's time.**
+- `45905f4d` vendo-diarios (c04#0)
+  - ¿Cómo está el negocio? Más o menos.
+  - → **—¿Cómo está el negocio? —Más o menos.**
+  - How's business? So-so.
+  - → **—How's business? —So-so.**
+- `06e820af` practica-el-vecino (c04#0)
+  - ¿Viven acá? No, vivimos en Rosario.
+  - → **—¿Viven acá? —No, vivimos en Rosario.**
+  - Do you guys live here? No, we live in Rosario.
+  - → **—Do you guys live here? —No, we live in Rosario.**
+- `762ca609` practica-el-vecino (c04#0)
+  - ¿Qué quieren? Queremos dos empanadas y un jugo.
+  - → **—¿Qué quieren? —Queremos dos empanadas y un jugo.**
+  - What do you guys want? We'd like two empanadas and a juice.
+  - → **—What do you guys want? —We'd like two empanadas and a juice.**
+- `b7b79451` practica-el-vecino (c04#0)
+  - ¿Sos contador? No, soy ingeniero.
+  - → **—¿Sos contador? —No, soy ingeniero.**
+  - Are you an accountant? No, I'm an engineer.
+  - → **—Are you an accountant? —No, I'm an engineer.**
+- `e6a0c519` mi-edificio (c04#0)
+  - ¿Ascensor o escalera? Escalera, estoy apurado.
+  - → **—¿Ascensor o escalera? —Escalera, estoy apurado.**
+  - Elevator or stairs? Stairs, I'm in a hurry.
+  - → **—Elevator or stairs? —Stairs, I'm in a hurry.**
+- `03da96cd` mi-casa (c04#0)
+  - ¿Dónde alquilás? En Rosario, cerca del centro.
+  - → **—¿Dónde alquilás? —En Rosario, cerca del centro.**
+  - Where do you rent? In Rosario, near downtown.
+  - → **—Where do you rent? —In Rosario, near downtown.**
+- `6d00daa4` mi-casa (c04#0)
+  - ¿Un ambiente? Sí, con balcón.
+  - → **—¿Un ambiente? —Sí, con balcón.**
+  - One room? Yes, with a balcony.
+  - → **—One room? —Yes, with a balcony.**
+- `81712979` mi-casa (c04#0)
+  - ¿Qué onda el depto? Bien, pero medio lejos.
+  - → **—¿Qué onda el depto? —Bien, pero medio lejos.**
+  - What's the apartment like? Good, but kind of far.
+  - → **—What's the apartment like? —Good, but kind of far.**
+- `8cd929ac` la-hora (c04#0)
+  - ¿Qué hora es? Las siete y veintidós.
+  - → **—¿Qué hora es? —Las siete y veintidós.**
+  - What time is it? Seven twenty-two.
+  - → **—What time is it? —Seven twenty-two.**
+- `ca6600fb` la-hora (c04#0)
+  - ¿Qué hora es? Las cuatro y cuarto.
+  - → **—¿Qué hora es? —Las cuatro y cuarto.**
+  - What time is it? Quarter past four.
+  - → **—What time is it? —Quarter past four.**
+- `07f67617` comes-vivis (c04#0)
+  - Juan aprende castellano en Buenos Aires.
+  - → **Mi novio aprende castellano en Buenos Aires.**
+  - Juan is learning Spanish in Buenos Aires.
+  - → **My boyfriend is learning Spanish in Buenos Aires.**
+- `4c87376f` tengo-una-reserva (c05#7)
+  - ¿A nombre de Santi?
+  - → **¿A nombre de Martín?**
+  - Under Santi's name?
+  - → **Under the name Martín?**
+- `c49e0016` el-barrio (c05#12)
+  - ¿El supermercado está adelante o atrás de la escuela?
+  - → **¿El supermercado está al lado o enfrente de la escuela?**
+  - Is the supermarket in front of or behind the school?
+  - → **Is the supermarket next to the school or across from it?**
+- `fb908576` segui-derecho (c05#13)
+  - ¿Qué número es? No sé, preguntá en el kiosco.
+  - → **—¿Qué número es? —No sé, preguntá en el kiosco.**
+  - What number is it? I don't know, ask at the kiosk.
+  - → **—What number is it? —I don't know, ask at the kiosco.**
+- `593d57dd` queres-podes-vas (c05#23)
+  - Con Nico podemos ir al boliche el viernes.
+  - → **Nico y yo podemos ir al boliche el viernes.**
+  - Nico and I can go to the nightclub on Friday.
+- `3deb95f4` queres-podes-vas (c05#24)
+  - ¿Dónde querés estar?
+  - → **¿Querés estar solo?**
+  - Where do you want to be?
+  - → **Do you want to be alone?**
+- `c14b7216` queres-podes-vas (c05#24)
+  - ¿Qué querés escribir?
+  - → **¿Podés escribir tu nombre acá?**
+  - What do you want to write?
+  - → **Can you write your name here?**
+- `52f9f6bd` queres-podes-vas (c05#24, verify3)
+  - ¿A qué hora podés abrir?
+  - → **¿Me podés abrir la puerta? Estoy afuera.**
+  - What time can you open?
+  - → **Can you open the door for me? I'm outside.**
+- `4aabf951` queres-podes-vas (c05#25, verify3)
+  - Necesito entender la tarea.
+  - → **¿Podés entender el mail? Está en inglés.**
+  - I need to understand the homework.
+  - → **Can you understand the email? It's in English.**
+- `26db22e4` queres-podes-vas (c05#26)
+  - ¿Adónde vas el sábado? Al boliche con Rocío.
+  - → **—¿Adónde vas el sábado? —Al boliche con Rocío.**
+  - Where are you going on Saturday? To the club with Rocío.
+  - → **—Where are you going on Saturday? —To the nightclub with Rocío.**
+- `a2799167` preferis-salir (c05#33)
+  - Juan y Sofi empiezan a estudiar juntos.
+  - → **Juan y Sofi empiezan la facu juntos.**
+  - Juan and Sofi start studying together.
+  - → **Juan and Sofi start college together.**
+- `f5af1cf4` el-barrio (c05#0)
+  - ¿Hay un súper cerca? Sí, en la esquina.
+  - → **—¿Hay un súper cerca? —Sí, en la esquina.**
+  - Is there a supermarket nearby? Yes, on the corner.
+  - → **—Is there a supermarket nearby? —Yes, on the corner.**
+- `af62ad97` el-barrio (c05#0)
+  - ¿Hay una farmacia cerca? Sí, a dos cuadras.
+  - → **—¿Hay una farmacia cerca? —Sí, a dos cuadras.**
+  - Is there a pharmacy nearby? Yes, two blocks away.
+  - → **—Is there a pharmacy nearby? —Yes, two blocks away.**
+- `cb0d5a8a` el-barrio (c05#0)
+  - ¿La verdulería está lejos? No, a dos cuadras.
+  - → **—¿La verdulería está lejos? —No, a dos cuadras.**
+  - Is the fruit and vegetable shop far? No, two blocks away.
+  - → **—Is the fruit and vegetable shop far? —No, two blocks away.**
+- `e0248009` el-barrio (c05#0)
+  - ¿El supermercado está cerca? No, a diez cuadras.
+  - → **—¿El supermercado está cerca? —No, a diez cuadras.**
+  - Is the supermarket close? No, ten blocks away.
+  - → **—Is the supermarket close? —No, ten blocks away.**
+- `3752bd00` a-la-vuelta (c05#0)
+  - ¿Dónde quedan las piezas? Arriba.
+  - → **—¿Dónde quedan las piezas? —Arriba.**
+  - Where are the bedrooms? Upstairs.
+  - → **—Where are the bedrooms? —Upstairs.**
+- `6e6938b6` queres-podes-vas (c05#0)
+  - ¿Adónde vas? Al súper, ¿querés algo?
+  - → **—¿Adónde vas? —Al súper, ¿querés algo?**
+  - Where are you going? To the supermarket, do you want anything?
+  - → **—Where are you going? —To the supermarket, do you want anything?**
+- `0980dff1` preferis-salir (c05#0)
+  - ¿Empezás a las ocho? No, a las nueve y media.
+  - → **—¿Empezás a las ocho? —No, a las nueve y media.**
+  - Do you start at eight? No, at nine thirty.
+  - → **—Do you start at eight? —No, at nine thirty.**
+- `bd40533c` este-buzo (c06#13)
+  - Con el pantalón azul prefiero el zapato marrón.
+  - → **Con el pantalón azul prefiero el buzo marrón.**
+  - With the blue pants, I prefer the brown shoes.
+  - → **With the blue pants, I prefer the brown sweatshirt.**
+- `d5680b94` este-buzo (c06#20, verify3)
+  - Mis hijos usan remeras amarillas en la escuela.
+  - → **Mi hermano siempre usa remeras amarillas.**
+  - My kids wear yellow T-shirts at school.
+  - → **My brother always wears yellow T-shirts.**
+- `7176d96d` me-cobras (c06#22)
+  - El depto cuesta ochenta millones.
+  - → **El auto cuesta treinta millones.**
+  - The apartment costs eighty million.
+  - → **The car costs thirty million.**
+- `555b6104` debito-o-credito (c06#30, verify3)
+  - Si pagás por transferencia, tenés diez por ciento de descuento.
+  - → **Si pagás por transferencia, te hago un descuento.**
+  - If you pay by transfer, you get a ten percent discount.
+  - → **If you pay by transfer, I'll give you a discount.**
+- `2e8c8990` la-rutina (c06#36)
+  - Hoy me levanto temprano.
+  - → **Mañana me levanto temprano.**
+  - I'm getting up early today.
+  - → **I'm getting up early tomorrow.**
+- `6c62e85d` la-rutina (c06#37)
+  - Che, ¿te bañás?
+  - → **¿Te bañás ahora o después?**
+  - Hey, are you taking a shower?
+  - → **Are you showering now or later?**
+- `3f04c32c` la-rutina (c06#38)
+  - Che, ¿cenás empanadas conmigo?
+  - → **Che, ¿cenás conmigo? Hay empanadas.**
+  - Hey, will you have empanadas for dinner with me?
+  - → **Hey, will you have dinner with me? There are empanadas.**
+- `9c98cc4c` la-rutina (c06#39)
+  - Todas las llaves están en la mesa.
+  - → **Todas las noches ceno con mi familia.**
+  - All the keys are on the table.
+  - → **Every night I have dinner with my family.**
+- `e0cadddf` la-rutina (c06#40)
+  - El finde me baño tarde y desayuno en la cama.
+  - → **El finde me acuesto tarde y desayuno a las doce.**
+  - On the weekend I shower late and have breakfast in bed.
+  - → **On the weekend I go to bed late and have breakfast at twelve.**
+- `cc304e5b` me-despierto-temprano (c06#41)
+  - ¿Te apurás o vamos sin vos?
+  - → **¿Te apurás o nos vamos sin vos?**
+  - Are you hurrying, or are we going without you?
+  - → **Will you hurry up, or do we leave without you?**
+- `f46060a9` me-despierto-temprano (c06#45)
+  - ¿Dormís la siesta? —A veces, los domingos.
+  - → **—¿Dormís la siesta? —A veces, los domingos.**
+  - Do you take naps? —Sometimes, on Sundays.
+  - → **—Do you take naps? —Sometimes, on Sundays.**
+- `d1dd6051` me-despierto-temprano (c06#45)
+  - ¿Tomás café? A veces.
+  - → **—¿Tomás café? —A veces.**
+  - Do you drink coffee? Sometimes.
+  - → **—Do you drink coffee? —Sometimes.**
+- `67b82aec` me-despierto-temprano (c06#45)
+  - ¿Tus hijos se levantan temprano? Siempre, a las seis.
+  - → **—¿Tus hijos se levantan temprano? —Siempre, a las seis.**
+  - Do your kids get up early? Always, at six.
+  - → **—Do your kids get up early? —Always, at six.**
+- `1f39bb8d` que-te-gusta-hacer (c06#45)
+  - Yo no bailo. Yo tampoco.
+  - → **—Yo no bailo. —Yo tampoco.**
+  - I don't dance. Me neither.
+  - → **—I don't dance. —Me neither.**
+- `87f38257` que-te-gusta-hacer (c06#45)
+  - Me encanta jugar al fútbol. A mí también.
+  - → **—Me encanta jugar al fútbol. —A mí también.**
+  - I love playing soccer. Me too.
+  - → **—I love playing soccer. —Me too.**
+- `294d6e81` que-te-gusta-hacer (c06#45)
+  - No me gusta mirar fútbol. A mí tampoco.
+  - → **—No me gusta mirar fútbol. —A mí tampoco.**
+  - I don't like watching soccer. Me neither.
+  - → **—I don't like watching soccer. —Me neither.**
+- `3e5c6468` que-te-gusta-hacer (c06#45)
+  - ¿Te gustan? Sí, me encantan.
+  - → **—¿Te gustan? —Sí, me encantan.**
+  - Do you like them? Yes, I love them.
+  - → **—Do you like them? —Yes, I love them.**
+- `9cdb9c83` que-te-gusta-hacer (c06#45)
+  - ¿Te gusta? ¡Me encanta!
+  - → **—¿Te gusta? —¡Me encanta!**
+  - Do you like it? I love it!
+  - → **—Do you like it? —I love it!**
+- `00a82c61` que-te-gusta-hacer (c06#46)
+  - A mi hermana le encanta escuchar música todo el día.
+  - → **Me encanta escuchar música todo el día.**
+  - My sister loves listening to music all day.
+  - → **I love listening to music all day.**
+- `6a252d1e` que-te-gusta-hacer (c06#46)
+  - A mi novio le encanta el fútbol, a mí no.
+  - → **A vos te encanta el fútbol, a mí no.**
+  - My boyfriend loves soccer, I don't.
+  - → **You love soccer, I don't.**
+- `d3679ff5` que-te-gusta-hacer (c06#46)
+  - ¿Qué les gusta hacer a tus amigas?
+  - → **¿Salís con tus amigas el finde?**
+  - What do your friends like to do?
+  - → **Are you going out with your friends on the weekend?**
+- `f34f52ab` que-te-gusta-hacer (c06#46)
+  - A mis amigas no les gusta bailar. A mí tampoco.
+  - → **Voy a la cancha con mis amigas.**
+  - My friends don't like to dance. Me neither.
+  - → **I'm going to the game with my friends.**
+- `187ceb63` que-te-gusta-hacer (c06#47)
+  - ¿Les avisás a tus amigos?
+  - → **¿Me avisás si vas a la cancha?**
+  - Will you let your friends know?
+  - → **Will you let me know if you're going to the game?**
+- `7bb150a2` que-te-gusta-hacer (c06#47)
+  - ¿Vos le avisás a Fede o le aviso yo?
+  - → **Si no podés ir, ¿me avisás?**
+  - Will you let Fede know, or should I let him know?
+  - → **If you can't go, will you let me know?**
+- `e13bcd1e` que-te-gusta-hacer (c06#47)
+  - Le aviso a Pablo.
+  - → **Te aviso si nos juntamos el sábado.**
+  - I'll let Pablo know.
+  - → **I'll let you know if we're getting together on Saturday.**
+- `f4f9db53` que-te-gusta-hacer (c06#47, verify3)
+  - Yo les aviso a mis amigos.
+  - → **Te aviso a qué hora empieza la peli.**
+  - I'll let my friends know.
+  - → **I'll let you know what time the movie starts.**
+- `dce7c104` que-te-gusta-hacer (c06#50)
+  - Juego al fútbol, pero no me gusta mirar.
+  - → **Juego al fútbol, pero no voy a la cancha.**
+  - I play soccer, but I don't like watching.
+  - → **I play soccer, but I don't go to games.**
+- `f4f0a234` que-te-gusta-hacer (c06#50)
+  - Juego mucho.
+  - → **Juego al fútbol dos veces por semana.**
+  - I play a lot.
+  - → **I play soccer twice a week.**
+- `dd173aed` pasame-tu-numero (c07#9)
+  - Llamame mañana a la noche.
+  - → **Llamame si necesitás algo.**
+  - Call me tomorrow night.
+  - → **Call me if you need anything.**
+- `17fd4e92` clima (c07#14)
+  - Hay viento en la playa, ¿tenés campera?
+  - → **Hoy hay viento en la playa.**
+  - It's windy at the beach, do you have a jacket?
+  - → **It's windy at the beach today.**
+- `eff24e85` en-febrero (c07#19)
+  - Este mes hay tormenta todos los días.
+  - → **Este mes llueve todos los días.**
+  - This month there's a storm every day.
+  - → **This month it rains every day.**
+- `92e825c3` practica-el-clima (c07#24)
+  - ¿Hace calor? Sí, y mucha humedad.
+  - → **—¿Hace calor? —Sí, y hay mucha humedad.**
+  - Is it hot? Yes, and really humid.
+  - → **—Is it hot? —Yes, and it's really humid.**
+- `dec2e418` practica-el-clima (c07#25)
+  - A veces tomo mate con leche.
+  - → **A veces tomo café con leche.**
+  - Sometimes I drink mate with milk.
+  - → **Sometimes I have coffee with milk.**
+- `456ce143` practica-el-clima (c07#26)
+  - Hay cinco grados afuera.
+  - → **Hace cinco grados afuera.**
+  - It's five degrees outside.
+- `05ea18a9` el-cumple (c07#31)
+  - La invitada es la novia de Santi.
+  - → **Hay una invitada más: la novia de Santi.**
+  - The guest is Santi's girlfriend.
+  - → **There's one more guest: Santi's girlfriend.**
+- `24893c70` el-cumple (c07#32)
+  - ¿Cumplís años y querés una tele?
+  - → **¿Qué querés para tu cumple? ¿Una tele?**
+  - It's your birthday and you want a TV?
+  - → **What do you want for your birthday? A TV?**
+- `faa8cb8e` el-cumple (c07#34)
+  - Pablo no está, está jugando en la cancha.
+  - → **Pablo no está, está jugando al fútbol.**
+  - Pablo's not here, he's out playing on the field.
+  - → **Pablo isn't here, he's playing soccer.**
+- `a1dbb3dd` ahora-y-planes (c07#35)
+  - Estoy llegando al asado, ¿traigo hielo?
+  - → **Estoy llegando al asado, ¿llevo hielo?**
+  - I'm almost at the barbecue, should I bring ice?
+  - → **I'm almost at the asado, should I bring ice?**
+- `870e38b1` ahora-y-planes (c07#35)
+  - Para la juntada traigo empanadas.
+  - → **Para la juntada llevo empanadas.**
+  - I'm bringing empanadas to the get-together.
+- `e259250d` ahora-y-planes (c07#35)
+  - Quedamos en que yo traigo el vino.
+  - → **Quedamos en que yo llevo el vino.**
+  - We agreed that I'm bringing the wine.
+- `fa868dfb` ahora-y-planes (c07#35)
+  - Traigo vino, pero no tengo plata para la carne.
+  - → **Llevo vino, pero no tengo plata para la carne.**
+  - I'll bring wine, but I don't have money for the meat.
+- `b8de3631` ahora-y-planes (c07#35)
+  - Siempre traigo ensalada, pero todos comen carne.
+  - → **Siempre llevo ensalada, pero todos comen carne.**
+  - I always bring salad, but everyone eats meat.
+- `bd0f4ce1` ahora-y-planes (c07#35)
+  - Yo llevo el vino y vos traés las empanadas.
+  - → **Yo llevo el vino y vos, las empanadas.**
+  - I'll bring the wine and you bring the empanadas.
+- `485ec68e` ahora-y-planes (c07#35)
+  - ¿Qué tengo que traer?
+  - → **¿Podés traer hielo?**
+  - What do I have to bring?
+  - → **Can you bring ice?**
+- `ba78eddc` ahora-y-planes (c07#35)
+  - Puedo traer facturas.
+  - → **Mañana puedo traer facturas a la oficina.**
+  - I can bring pastries.
+  - → **Tomorrow I can bring pastries to the office.**
+- `cb96a099` ahora-y-planes (c07#35)
+  - Voy a traer la ensalada.
+  - → **¿Vas a traer la ensalada?**
+  - I'm going to bring the salad.
+  - → **Are you going to bring the salad?**
+- `e15aa0c4` ahora-y-planes (c07#35)
+  - ¿Traigo empanadas para la juntada o ya hay?
+  - → **Voy al súper, ¿traigo empanadas o ya hay?**
+  - Should I bring empanadas for the get-together or are there some already?
+  - → **I'm going to the supermarket, should I bring empanadas or are there some already?**
+- `c7078fd4` ahora-y-planes (c07#42)
+  - Esperame, llego en un momento.
+  - → **Esperame, llego en cinco minutos.**
+  - Wait for me, I'll be there in a moment.
+  - → **Wait for me, I'll be there in five minutes.**
+- `bf2235b9` ahora-y-planes (c07#43)
+  - Laburo mucho, ¿viste?
+  - → **Hace mucho calor acá, ¿viste?**
+  - I work a lot, you know?
+  - → **It's really hot here, you know?**
+- `cb75aafa` ayer-labure (c07#49)
+  - Juli compró facturas y medialunas en la panadería.
+  - → **Juli compró facturas y pan en la panadería.**
+  - Juli bought pastries and medialunas at the bakery.
+  - → **Juli bought pastries and bread at the bakery.**
+- `41067fd9` me-interesa (c07#0)
+  - ¿Vamos al boliche? No, odio bailar.
+  - → **—¿Vamos al boliche? —No, odio bailar.**
+  - Want to go to the club? No, I hate dancing.
+  - → **—Want to go to the nightclub? —No, I hate dancing.**
+- `00a15dbe` clima (c07#0)
+  - ¿Está nublado? Sí, y hace frío.
+  - → **—¿Está nublado? —Sí, y hace frío.**
+  - Is it cloudy? Yes, and it's cold.
+  - → **—Is it cloudy? —Yes, and it's cold.**
+- `f0a631e6` en-febrero (c07#0)
+  - ¿En Córdoba hay humedad? Menos que acá.
+  - → **—¿En Córdoba hay humedad? —Menos que acá.**
+  - Is it humid in Córdoba? Less than here.
+  - → **—Is it humid in Córdoba? —Less than here.**
+- `409bd900` en-febrero (c07#0)
+  - ¿Cuándo volvés? En junio.
+  - → **—¿Cuándo volvés? —En junio.**
+  - When are you coming back? In June.
+  - → **—When are you coming back? —In June.**
+- `054eb89b` practica-el-clima (c07#0)
+  - ¿Salís esta noche? No, salgo mañana.
+  - → **—¿Salís esta noche? —No, salgo mañana.**
+  - Are you going out tonight? No, I'm going out tomorrow.
+  - → **—Are you going out tonight? —No, I'm going out tomorrow.**
+- `b53c8f2d` practica-el-clima (c07#0)
+  - ¿Dormís bien? No, duermo muy poco.
+  - → **—¿Dormís bien? —No, duermo muy poco.**
+  - Do you sleep well? No, I sleep very little.
+  - → **—Do you sleep well? —No, I sleep very little.**
+- `d6b7008f` practica-el-clima (c07#0)
+  - ¿Vas al gimnasio? A veces.
+  - → **—¿Vas al gimnasio? —A veces.**
+  - Do you go to the gym? Sometimes.
+  - → **—Do you go to the gym? —Sometimes.**
+- `51d3342a` el-cumple (c07#0)
+  - ¿La invitada es tu prima? No, es mi vecina.
+  - → **—¿La invitada es tu prima? —No, es mi vecina.**
+  - Is the guest your cousin? No, she's my neighbor.
+  - → **—Is the guest your cousin? —No, she's my neighbor.**
+- `43831df1` el-cumple (c07#0)
+  - ¿Estás durmiendo? No, estoy leyendo.
+  - → **—¿Estás durmiendo? —No, estoy leyendo.**
+  - Are you asleep? No, I'm reading.
+  - → **—Are you asleep? —No, I'm reading.**
+- `10a2e522` el-cumple (c07#0)
+  - ¿Quién es tu invitado? Es mi primo.
+  - → **—¿Quién es tu invitado? —Es mi primo.**
+  - Who's your guest? He's my cousin.
+  - → **—Who's your guest? —He's my cousin.**
+- `0c850b18` estoy-llegando (c07#0)
+  - ¿Qué estás haciendo? Nada, tomando mate.
+  - → **—¿Qué estás haciendo? —Nada, tomando mate.**
+  - What are you doing? Nothing, drinking mate.
+  - → **—What are you doing? —Nothing, drinking mate.**
+- `4d1d0b7f` ayer-labure (c07#0)
+  - ¿A qué hora llegaste anoche? Tarde, a las tres.
+  - → **—¿A qué hora llegaste anoche? —Tarde, a las tres.**
+  - What time did you get here last night? Late, at three.
+  - → **—What time did you get here last night? —Late, at three.**
+- `ca2da3aa` ayer-labure (c07#0)
+  - ¿Llegaste a la parada? Sí, estoy en la esquina.
+  - → **—¿Llegaste a la parada? —Sí, estoy en la esquina.**
+  - Did you get to the bus stop? Yes, I'm on the corner.
+  - → **—Did you get to the bus stop? —Yes, I'm on the corner.**
+- `d87749f2` ayer-labure (c07#0)
+  - ¿Compraste las medialunas? Sí, en la panadería de enfrente.
+  - → **—¿Compraste las medialunas? —Sí, en la panadería de enfrente.**
+  - Did you buy the medialunas? Yes, at the bakery across the street.
+  - → **—Did you buy the medialunas? —Yes, at the bakery across the street.**
+- `fab30add` ayer-labure (c07#0)
+  - ¿Qué pasó? Nada, el subte llegó muy tarde.
+  - → **—¿Qué pasó? —Nada, el subte llegó muy tarde.**
+  - What happened? Nothing, the subway came very late.
+  - → **—What happened? —Nothing, the subway came very late.**
+- `3c7ebca8` ayer-labure (c07#0)
+  - ¿Laburaste ayer? Sí, en la oficina, con Belén.
+  - → **—¿Laburaste ayer? —Sí, en la oficina, con Belén.**
+  - Did you work yesterday? Yes, at the office, with Belén.
+  - → **—Did you work yesterday? —Yes, at the office, with Belén.**
+- `b599ab17` ayer-labure (c07#0)
+  - ¿Hablaste con tu jefe? Sí, ayer, en la oficina.
+  - → **—¿Hablaste con tu jefe? —Sí, ayer, en la oficina.**
+  - Did you talk with your boss? Yes, yesterday, at the office.
+  - → **—Did you talk with your boss? —Yes, yesterday, at the office.**
+- `625a92e5` cenamos-afuera (c07#0)
+  - ¿Esperaste mucho? No, cinco minutos.
+  - → **—¿Esperaste mucho? —No, cinco minutos.**
+  - Did you wait long? No, five minutes.
+  - → **—Did you wait long? —No, five minutes.**
+- `58610e69` fui-a-la-cancha (c08#1)
+  - ¿Tuviste examen ayer?
+  - → **¿Tuviste que laburar ayer?**
+  - Did you have an exam yesterday?
+  - → **Did you have to work yesterday?**
+- `b0d8913a` fui-a-la-cancha (c08#13)
+  - ¿Cómo te fue en el recital?
+  - → **¿Cómo estuvo el recital del sábado?**
+  - How did it go at the concert?
+  - → **How was Saturday's concert?**
+- `f90a0d75` la-pasamos-barbaro (c08#24)
+  - ¿Cuánto perdiste?
+  - → **¿Dónde perdiste la billetera?**
+  - How much did you lose?
+  - → **Where did you lose your wallet?**
+- `14c32c6c` fui-a-la-cancha (c08#30)
+  - ¿Hace mucho que estudiás castellano? —No, dos meses.
+  - → **—¿Hace mucho que estudiás castellano? —No, dos meses.**
+  - Have you been studying Spanish for a long time? —No, two months.
+  - → **—Have you been studying Spanish for a long time? —No, two months.**
+- `b4b4b10a` fui-a-la-cancha (c08#30)
+  - ¿Hace mucho que aprendés castellano? —No, hace poco.
+  - → **—¿Hace mucho que aprendés castellano? —No, hace poco.**
+  - Have you been learning Spanish for a long time? —No, for a short time.
+  - → **—Have you been learning Spanish for a long time? —No, for a short time.**
+- `de0d7435` comi-y-sali (c08#30)
+  - ¿Dónde conociste a Fede? En la facu.
+  - → **—¿Dónde conociste a Fede? —En la facu.**
+  - Where did you meet Fede? At college.
+  - → **—Where did you meet Fede? —At college.**
+- `0ee9420c` la-pasamos-barbaro (c08#30)
+  - ¿Cómo te fue? Perdí, pero estuvo divertido.
+  - → **—¿Cómo te fue? —Perdí, pero estuvo divertido.**
+  - How did it go? I lost, but it was fun.
+  - → **—How did it go? —I lost, but it was fun.**
+- `f83714ac` el-finde (c08#30)
+  - ¿Qué hiciste el finde? Nada, estuve en casa.
+  - → **—¿Qué hiciste el finde? —Nada, estuve en casa.**
+  - What did you do on the weekend? Nothing, I was at home.
+  - → **—What did you do over the weekend? —Nothing, I was at home.**
+- `0d323397` el-finde (c08#30)
+  - ¿Viniste en bondi? No, en subte.
+  - → **—¿Viniste en bondi? —No, en subte.**
+  - Did you come by bus? No, by subway.
+  - → **—Did you come by bus? —No, by subway.**
+- `7cefa861` el-finde (c08#30, verify4)
+  - ¿Viste el partido el domingo? No, estuve laburando.
+  - → **—¿Viste el partido el domingo? —No, estuve laburando.**
+  - Did you see the game on Sunday? No, I was working.
+  - → **—Did you see the game on Sunday? —No, I was working.**
+- `a0ecec19` el-finde (c08#30, verify4)
+  - ¿Pudiste ir al súper? No, no pude.
+  - → **—¿Pudiste ir al súper? —No, no pude.**
+  - Were you able to go to the supermarket? No, I couldn't.
+  - → **—Were you able to go to the supermarket? —No, I couldn't.**
+- `3030b25d` vinieron-todos (c08#30)
+  - ¿Y tu hermano? No vino, está enfermo.
+  - → **—¿Y tu hermano? —No vino, está enfermo.**
+  - What about your brother? He didn't come, he's sick.
+  - → **—What about your brother? —He didn't come, he's sick.**
+- `6f01632d` vinieron-todos (c08#30)
+  - ¿Por qué no fuiste? No quise.
+  - → **—¿Por qué no fuiste? —No quise.**
+  - Why didn't you go? I didn't want to.
+  - → **—Why didn't you go? —I didn't want to.**
+- `f807a0d1` el-finde (c08#31)
+  - Ayer hice la tarea.
+  - → **Ayer hice una ensalada re rica.**
+  - I did the homework yesterday.
+  - → **I made a really tasty salad yesterday.**
+- `51d7e235` el-finde (c08#31)
+  - Primero hice la tarea y después salí con Fede.
+  - → **Primero hice un café y después salí con Fede.**
+  - First I did the homework and then I went out with Fede.
+  - → **First I made a coffee and then I went out with Fede.**
+- `b6774b6b` el-finde (c08#31)
+  - Primero hicimos la tarea y después fuimos al cine.
+  - → **Primero hicimos la comida y después fuimos al cine.**
+  - First we did the homework and then we went to the movies.
+  - → **First we made the food and then we went to the movies.**
+- `541ccd43` el-finde (c08#32, verify4)
+  - El sábado Mica hizo empanadas y comimos en el balcón.
+  - → **El sábado Mica hizo pizza y comimos en el balcón.**
+  - On Saturday Mica made empanadas and we ate on the balcony.
+  - → **On Saturday Mica made pizza and we ate on the balcony.**
+- `8feabd6c` el-finde (c08#33)
+  - ¿Pudiste ir al banco ayer?
+  - → **¿Pudiste hablar con tu jefe?**
+  - Were you able to go to the bank yesterday?
+  - → **Were you able to talk to your boss?**
+- `b89d67ba` el-finde (c08#33)
+  - ¿Pudiste ir a la farmacia antes del laburo?
+  - → **¿Pudiste comprar las entradas?**
+  - Were you able to go to the pharmacy before work?
+  - → **Were you able to buy the tickets?**
+- `464ce63e` vinieron-todos (c08#37)
+  - ¿Y Diego? No pudo, tuvo laburo.
+  - → **—¿Y Diego? —No pudo, tuvo que laburar.**
+  - What about Diego? He couldn't, he had work.
+  - → **—What about Diego? —He couldn't, he had to work.**
+- `84cb7f7d` vinieron-todos (c08#38)
+  - ¿Querés postre?
+  - → **¿Quién trajo el postre?**
+  - Do you want dessert?
+  - → **Who brought the dessert?**
+- `f7f39cc9` vinieron-todos (c08#38)
+  - Mañana traigo el postre.
+  - → **Sofi hizo el postre.**
+  - I'll bring dessert tomorrow.
+  - → **Sofi made the dessert.**
+- `5448a268` mas-alto-que (c08#41)
+  - ¿Comés menos carne?
+  - → **¿Ahora comés menos carne?**
+  - Do you eat less meat?
+  - → **Are you eating less meat now?**
+- `14c2eea0` el-mas-tranquilo (c08#43)
+  - El café acá es baratísimo.
+  - → **El vino acá es baratísimo.**
+  - Coffee here is very cheap.
+  - → **Wine here is very cheap.**
+- `d3425554` el-mas-tranquilo (c08#45)
+  - ¿Cuál es más lenta, esta o esa?
+  - → **¿Cuál es más lenta, esta app o esa?**
+  - Which one is slower, this one or that one?
+  - → **Which one is slower, this app or that one?**
+- `147fd232` el-mas-tranquilo (c08#46)
+  - Cami no es tan ruidosa como Juan.
+  - → **Mi calle no es tan ruidosa como la avenida.**
+  - Cami isn't as loud as Juan.
+  - → **My street isn't as noisy as the avenue.**
+- `5c3427e3` me-duele (c09#2)
+  - —¿Dónde te duele? —En la mano.
+  - → **Me duele acá, en la mano.**
+  - Where does it hurt? — In my hand.
+  - → **It hurts here, in my hand.**
+- `c4b77245` me-duele (c09#3)
+  - A Ana le duele la garganta.
+  - → **A Sofi le duele la garganta.**
+  - Ana's throat hurts.
+  - → **Sofi's throat hurts.**
+- `25d05f7c` me-duele (c09#3)
+  - A Ana le duele la cabeza.
+  - → **A Lucía le duele la cabeza.**
+  - Ana's head hurts.
+  - → **Lucía's head hurts.**
+- `3076d60e` practica-quien-vino (c09#10, verify4)
+  - Nico es re tranquilo, pero su novia vive apurada.
+  - → **Nico es re tranquilo, pero su novia siempre está apurada.**
+  - Nico is really laid-back, but his girlfriend is always in a rush.
+- `24ee9d6a` te-llamo (c09#16)
+  - Prestame cien pesos, por favor.
+  - → **Prestame mil pesos, por favor.**
+  - Lend me a hundred pesos, please.
+  - → **Lend me a thousand pesos, please.**
+- `e8592197` te-llamo (c09#16)
+  - Te doy cien pesos.
+  - → **Te doy diez mil pesos.**
+  - I'll give you a hundred pesos.
+  - → **I'll give you ten thousand pesos.**
+- `ea02dce6` te-llamo (c09#16)
+  - ¿Me prestás cien pesos?
+  - → **¿Me prestás plata para el bondi?**
+  - Can you lend me a hundred pesos?
+  - → **Can you lend me money for the bus?**
+- `858f956b` te-llamo (c09#17)
+  - Dame el paraguas.
+  - → **Dame las llaves.**
+  - Give me the umbrella.
+  - → **Give me the keys.**
+- `6722475e` te-llamo (c09#17)
+  - ¿No encontrás el paraguas?
+  - → **¿No encontrás las llaves?**
+  - Can't you find the umbrella?
+  - → **Can't you find the keys?**
+- `78a2438b` te-llamo (c09#17)
+  - ¿Me prestás el paraguas?
+  - → **¿Me prestás el celu un momento?**
+  - Can you lend me the umbrella?
+  - → **Can you lend me your phone for a moment?**
+- `608ef084` las-tareas (c09#29)
+  - Las compras están en la heladera.
+  - → **Las compras están en la cocina.**
+  - The groceries are in the fridge.
+  - → **The groceries are in the kitchen.**
+- `adf93c3a` quien-lavo (c09#32)
+  - ¿De quién es esta escoba?
+  - → **La escoba está en el balcón.**
+  - Whose broom is this?
+  - → **The broom is on the balcony.**
+- `e203b7ad` quien-lavo (c09#34)
+  - ¿Sacaste plata del banco o pago con tarjeta?
+  - → **¿Sacaste la ropa del lavarropas?**
+  - Did you take money out of the bank, or should I pay by card?
+  - → **Did you take the clothes out of the washing machine?**
+- `232cf04d` de-viaje (c09#36)
+  - ¿Adónde viajaste en enero?
+  - → **¿Con quién viajaste en enero?**
+  - Where did you travel in January?
+  - → **Who did you travel with in January?**
+- `b7b19c09` de-viaje (c09#36)
+  - Viajé a Bariloche.
+  - → **Viajé toda la noche.**
+  - I traveled to Bariloche.
+  - → **I traveled all night.**
+- `5d05d4b0` de-viaje (c09#36)
+  - El año pasado viajé a Mar del Plata.
+  - → **El año pasado viajé mucho.**
+  - Last year I traveled to Mar del Plata.
+  - → **Last year I traveled a lot.**
+- `da158d6c` no-se (c09#44)
+  - Explicame la tarea.
+  - → **Explicame cómo llegar.**
+  - Explain the homework to me.
+  - → **Explain to me how to get there.**
+- `40d82a3d` no-se (c09#44)
+  - ¿Me explicás la tarea?
+  - → **¿Me explicás cómo sacar turno?**
+  - Can you explain the homework to me?
+  - → **Can you explain to me how to make an appointment?**
+- `0820b4dd` no-se (c09#44)
+  - Dale, explicame la pregunta del examen.
+  - → **Dale, explicame qué dijo el médico.**
+  - OK, explain the exam question to me.
+  - → **OK, explain to me what the doctor said.**
+- `4e3e1706` no-se (c09#44)
+  - No entiendo esta materia, es re difícil.
+  - → **No entiendo este mail del banco.**
+  - I don't understand this subject, it's really hard.
+  - → **I don't understand this email from the bank.**
+- `866b3534` no-se (c09#45, verify4)
+  - Sabemos hablar castellano.
+  - → **Tranqui, sabemos llegar.**
+  - We can speak Spanish.
+  - → **Relax, we know how to get there.**
+- `7ba25138` me-dolio (c09#0)
+  - ¿Te dolió el brazo? —Sí, tomé una pastilla.
+  - → **—¿Te dolió el brazo? —Sí, tomé una pastilla.**
+  - Did your arm hurt? —Yes, I took a pill.
+  - → **—Did your arm hurt? —Yes, I took a pill.**
+- `ad5ab5cc` me-dolio (c09#0)
+  - ¿Te dolió algo? —Sí, los ojos.
+  - → **—¿Te dolió algo? —Sí, los ojos.**
+  - Did anything hurt? —Yes, my eyes.
+  - → **—Did anything hurt? —Yes, my eyes.**
+- `a617b1d4` me-dolio (c09#0)
+  - ¿Y la rodilla? Mucho mejor, gracias.
+  - → **—¿Y la rodilla? —Mucho mejor, gracias.**
+  - How's the knee? Much better, thanks.
+  - → **—How's the knee? —Much better, thanks.**
+- `6b64f5b3` no-se (c09#0)
+  - ¿A qué hora cierra? Ni idea.
+  - → **—¿A qué hora cierra? —Ni idea.**
+  - What time does it close? No idea.
+  - → **—What time does it close? —No idea.**
+- `c6035274` no-se (c09#0)
+  - ¿Dónde está mi celu? Ni idea.
+  - → **—¿Dónde está mi celu? —Ni idea.**
+  - Where's my phone? No idea.
+  - → **—Where's my phone? —No idea.**
+- `cf1467d6` no-se (c09#0)
+  - ¿Dónde está Nico? Ni idea.
+  - → **—¿Dónde está Nico? —Ni idea.**
+  - Where's Nico? No idea.
+  - → **—Where's Nico? —No idea.**
+- `ae7cfd1e` no-se (c09#0)
+  - ¿Qué hora es? Ni idea.
+  - → **—¿Qué hora es? —Ni idea.**
+  - What time is it? No idea.
+  - → **—What time is it? —No idea.**
+- `2ced8f01` quien-lavo (c09#0)
+  - ¿Barriste el balcón? No, todavía no.
+  - → **—¿Barriste el balcón? —No, todavía no.**
+  - Did you sweep the balcony? No, not yet.
+  - → **—Did you sweep the balcony? —No, not yet.**
+- `18ed76ef` quien-lavo (c09#0)
+  - ¿Sacaste al perro? Sí, recién.
+  - → **—¿Sacaste al perro? —Sí, recién.**
+  - Did you take the dog out? Yes, just now.
+  - → **—Did you take the dog out? —Yes, just now.**
+- `1e6e1f93` quien-lavo (c09#0)
+  - ¿Qué te tocó para el asado? El postre.
+  - → **—¿Qué te tocó para el asado? —El postre.**
+  - What were you asked to bring to the barbecue? Dessert.
+  - → **—What were you asked to bring to the asado? —Dessert.**
+- `67a31a45` las-vacaciones (c10#2)
+  - Paseamos mucho por Bariloche.
+  - → **Paseamos mucho por Córdoba.**
+  - We went around Bariloche a lot.
+  - → **We went around Córdoba a lot.**
+- `eba4a3b4` las-vacaciones (c10#2)
+  - ¿Llovió en Mendoza?
+  - → **¿Llovió en Uruguay?**
+  - Did it rain in Mendoza?
+  - → **Did it rain in Uruguay?**
+- `9eaa25f1` las-vacaciones (c10#5)
+  - ¿Viajaron al campo en tren?
+  - → **¿Fueron al campo en tren?**
+  - Did they travel to the countryside by train?
+  - → **Did they go to the countryside by train?**
+- `683885bf` practica-las-vacaciones (c10#6, verify4)
+  - Alquilamos una casa con pileta.
+  - → **Alquilamos una casa en la costa por una semana.**
+  - We rented a house with a pool.
+  - → **We rented a house on the coast for a week.**
+- `795cc930` menos-mal (c10#9)
+  - El mozo lo vio, menos mal.
+  - → **Perdí las llaves en el bar, pero el mozo las vio, menos mal.**
+  - The waiter saw it, thank goodness.
+  - → **I lost my keys in the bar, but the waiter saw them, thank goodness.**
+- `22f5cb70` menos-mal (c10#9)
+  - Menos mal que alquilamos el depto por una semana.
+  - → **Llovió todos los días. Menos mal que alquilamos el depto solo por una semana.**
+  - Thank goodness we rented the apartment for a week.
+  - → **It rained every day. Thank goodness we rented the apartment for only a week.**
+- `5dcc8e2b` menos-mal (c10#9)
+  - Por eso gasté mucha plata.
+  - → **Fui en avión, por eso gasté mucha plata.**
+  - That's why I spent a lot of money.
+  - → **I went by plane, that's why I spent a lot of money.**
+- `87be6032` menos-mal (c10#9)
+  - Perdí el celu, así que volví.
+  - → **Perdí el celu en la playa, así que volví.**
+  - I lost my cell phone, so I went back.
+  - → **I lost my phone at the beach, so I went back.**
+- `4d7d394f` contame (c10#12)
+  - De repente me dolió la panza.
+  - → **Llegué a casa y de repente me dolió la panza.**
+  - Suddenly my stomach hurt.
+  - → **I got home and suddenly my stomach hurt.**
+- `d17cc307` contame (c10#12)
+  - De repente vino la policía.
+  - → **Fuimos a una fiesta y de repente vino la policía.**
+  - Suddenly the police came.
+  - → **We went to a party and suddenly the police came.**
+- `774638cd` contame (c10#12)
+  - De repente salió el sol.
+  - → **Llovió toda la mañana y de repente salió el sol.**
+  - Suddenly the sun came out.
+  - → **It rained all morning and suddenly the sun came out.**
+- `79970caa` contame (c10#15)
+  - Contame, ¿cómo fue el partido?
+  - → **Contame, ¿cómo estuvo el partido?**
+  - Tell me, how was the game?
+- `e5e3348e` cuando-era-chico (c10#17)
+  - ¿Juli iba a tu escuela?
+  - → **¿Juli iba a tu colegio?**
+  - Did Juli go to your school?
+- `c729a65b` cuando-era-chico (c10#17)
+  - Fede iba a mi escuela.
+  - → **Fede iba a mi colegio.**
+  - Fede went to my school.
+- `4ea8903c` cuando-era-chico (c10#17)
+  - De chicos íbamos a la escuela en colectivo.
+  - → **De chicos íbamos al colegio en colectivo.**
+  - As kids we used to go to school by bus.
+- `fa8e594f` cuando-era-chico (c10#17)
+  - De chico vivía a dos cuadras de la escuela.
+  - → **De chico vivía a dos cuadras del colegio.**
+  - As a kid I lived two blocks from school.
+- `8341655c` cuando-era-chico (c10#17)
+  - ¿Eras profesor en esa escuela?
+  - → **¿Eras profesor en ese colegio?**
+  - Were you a teacher at that school?
+- `1f413b95` cuando-era-chico (c10#17)
+  - ¿Vos eras compañero de Pablo en la escuela?
+  - → **¿Vos eras compañero de Pablo en el colegio?**
+  - Were you Pablo's classmate at school?
+- `b4e4aa1b` cuando-era-chico (c10#17)
+  - Con Martín éramos compañeros en la escuela.
+  - → **Con Martín éramos compañeros en el colegio.**
+  - Martín and I were classmates at school.
+- `5aa144c2` cuando-era-chico (c10#17)
+  - Éramos compañeros en la escuela.
+  - → **Éramos compañeros en el colegio.**
+  - We were classmates at school.
+- `90ea4012` cuando-era-chico (c10#17)
+  - De chico iba a la escuela en bondi con mi hermano.
+  - → **De chico iba al colegio en bondi con mi hermano.**
+  - As a kid I used to go to school by bus with my brother.
+- `4a24a2dc` cuando-era-chico (c10#20)
+  - ¿Tenías hermanos cuando eras chico?
+  - → **¿Tenías muchos amigos cuando eras chico?**
+  - Did you have siblings when you were a kid?
+  - → **Did you have a lot of friends when you were a kid?**
+- `df8ed202` cuando-era-chico (c10#21)
+  - Cuando éramos chicos, ¿vos no eras más alta?
+  - → **Cuando éramos chicos, ¿vos no eras más alta que yo?**
+  - When we were kids, weren't you taller?
+  - → **When we were kids, weren't you taller than me?**
+- `428c7dc1` cuando-era-chico (c10#24)
+  - ¿Adónde ibas?
+  - → **¿Adónde ibas de vacaciones?**
+  - Where did you use to go?
+  - → **Where did you use to go on vacation?**
+- `125fb6d7` en-la-primaria (c10#25)
+  - Vivíamos en el piso diez, sin ascensor.
+  - → **Vivíamos en el piso tres, sin ascensor.**
+  - We lived on the tenth floor, with no elevator.
+  - → **We lived on the third floor, with no elevator.**
+- `cd484101` en-la-primaria (c10#26)
+  - En el recreo nadie quería jugar conmigo.
+  - → **En el recreo nadie quería volver a clase.**
+  - At recess nobody wanted to play with me.
+  - → **At recess nobody wanted to go back to class.**
+- `13771c02` siempre-jugabamos (c10#33)
+  - Siempre tomaba mate con leche.
+  - → **Siempre tomaba café con leche.**
+  - I always drank mate with milk.
+  - → **I always drank coffee with milk.**
+- `2ba5462b` siempre-jugabamos (c10#35)
+  - Nico jugaba al fútbol.
+  - → **Nico jugaba al tenis.**
+  - Nico used to play soccer.
+  - → **Nico used to play tennis.**
+- `36270fdb` siempre-jugabamos (c10#35)
+  - Tomábamos mate todos los días.
+  - → **Tomábamos helado todos los días.**
+  - We drank mate every day.
+  - → **We had ice cream every day.**
+- `f101a1d8` me-encantaba (c10#38)
+  - ¿Vos también le tenías miedo a la hamaca?
+  - → **¿A vos también te encantaba la hamaca?**
+  - Were you scared of the swing too?
+  - → **Did you love the swing too?**
+- `3829544c` estaba-lloviendo (c10#40)
+  - Hacía sol.
+  - → **Había sol, pero hacía frío.**
+  - It was sunny.
+  - → **It was sunny, but it was cold.**
+- `11e86b28` estaba-lloviendo (c10#41)
+  - El recital estaba lleno de gente.
+  - → **No había gente en la playa.**
+  - The concert was packed with people.
+  - → **There were no people on the beach.**
+- `1bdfca89` estaba-lloviendo (c10#41)
+  - Hacía un calor bárbaro y el subte estaba lleno.
+  - → **Hacía un calor bárbaro y no había nadie en la calle.**
+  - It was really hot and the subway was packed.
+  - → **It was really hot and there was nobody in the street.**
+- `038043cc` sono-el-timbre (c10#43)
+  - Cocinaba tranquilo cuando empezó el ruido del vecino.
+  - → **Estaba cocinando tranquilo cuando empezó el ruido del vecino.**
+  - I was cooking in peace when the neighbor started making noise.
+- `ebae1e99` sono-el-timbre (c10#46)
+  - Llegué a casa y el despertador todavía sonaba.
+  - → **Volví a la pieza y el despertador todavía sonaba.**
+  - I got home and the alarm was still going off.
+  - → **I went back to the room and the alarm was still going off.**
+- `7f69b659` sono-el-timbre (c10#47)
+  - ¿Quién entró? Mi hermano.
+  - → **—¿Quién entró? —Mi hermano.**
+  - Who came in? My brother.
+  - → **—Who came in? —My brother.**
+- `dc009998` contame (c10#49)
+  - ¿Me mandás unos chistes para el cumpleaños de Sofi?
+  - → **¿Me contás uno de tus chistes?**
+  - Can you send me some jokes for Sofi's birthday?
+  - → **Will you tell me one of your jokes?**
+- `7f56d42c` contame (c10#50)
+  - ¿Más chistes? Dale.
+  - → **¿Sabés más chistes? Dale, contame otro.**
+  - More jokes? Sure.
+  - → **Do you know more jokes? Come on, tell me another one.**
+- `b6f0130c` las-vacaciones (c10#0)
+  - ¿Qué hicieron en las sierras? Caminamos y nadamos.
+  - → **—¿Qué hicieron en las sierras? —Caminamos y nadamos.**
+  - What did you guys do in the hills? We walked and swam.
+  - → **—What did you guys do in the hills? —We walked and swam.**
+- `a6020dbf` las-vacaciones (c10#0)
+  - ¿Llovió en las vacaciones? Sí, dos días.
+  - → **—¿Llovió en las vacaciones? —Sí, dos días.**
+  - Did it rain on vacation? Yes, two days.
+  - → **—Did it rain on vacation? —Yes, two days.**
+- `da37932d` practica-las-vacaciones (c10#0)
+  - ¿Buscaste el libro? Sí, lo busqué ayer.
+  - → **—¿Buscaste el libro? —Sí, lo busqué ayer.**
+  - Did you look for the book? Yes, I looked for it yesterday.
+  - → **—Did you look for the book? —Yes, I looked for it yesterday.**
+- `ef3eedc4` practica-las-vacaciones (c10#0, verify4)
+  - ¿Recibiste las fotos? Sí, las recibí.
+  - → **—¿Recibiste las fotos? —Sí, las recibí.**
+  - Did you get the photos? Yes, I got them.
+  - → **—Did you get the photos? —Yes, I got them.**
+- `9b5127eb` menos-mal (c10#0)
+  - Ya no me duele la cabeza. —Menos mal.
+  - → **—Ya no me duele la cabeza. —Menos mal.**
+  - My head doesn't hurt anymore. —Thank goodness.
+  - → **—My head doesn't hurt anymore. —Thank goodness.**
+- `ec8fab55` menos-mal (c10#0)
+  - Me voy a Bariloche. —¿En serio?
+  - → **—Me voy a Bariloche. —¿En serio?**
+  - I'm going to Bariloche. —Really?
+  - → **—I'm going to Bariloche. —Really?**
+- `4f1705c0` el-partido (c11#8)
+  - ¿Perdió Uruguay?
+  - → **¿Perdió Brasil?**
+  - Did Uruguay lose?
+  - → **Did Brazil lose?**
+- `aeed3d3a` el-partido (c11#8)
+  - Otro gol de Uruguay.
+  - → **Otro gol de Brasil.**
+  - Another goal for Uruguay.
+  - → **Another goal for Brazil.**
+- `efe57b1e` el-partido (c11#8)
+  - Uruguay ganó otra vez.
+  - → **Brasil ganó otra vez.**
+  - Uruguay won again.
+  - → **Brazil won again.**
+- `69f3c1f8` el-partido (c11#8)
+  - ¿Hoy juega Uruguay?
+  - → **¿Hoy juega Brasil?**
+  - Is Uruguay playing today?
+  - → **Is Brazil playing today?**
+- `e8b1b7e0` la-final (c11#13)
+  - ¡Qué golazo metió el arquero!
+  - → **¡Qué golazo metió Cami!**
+  - What a great goal the goalkeeper scored!
+  - → **What a great goal Cami scored!**
+- `c809017d` de-que-cuadro-sos (c11#16)
+  - Hincho por el cuadro de mi barrio.
+  - → **En el Mundial hincho por Argentina.**
+  - I support my neighborhood team.
+  - → **In the World Cup I support Argentina.**
+- `3f078ef6` de-que-cuadro-sos (c11#16, verify5)
+  - Hincho por un cuadro de Rosario, como mi abuelo.
+  - → **En la final hincho por el cuadro de Rosario, como mi abuelo.**
+  - I support a team from Rosario, like my grandfather.
+  - → **In the final I'm supporting the team from Rosario, like my grandfather.**
+- `cd28d9a3` de-que-cuadro-sos (c11#16, verify5)
+  - Hincho por un cuadro que nunca ganó nada.
+  - → **Hoy hincho por el cuadro que nunca ganó nada.**
+  - I support a team that has never won anything.
+  - → **Today I'm supporting the team that has never won anything.**
+- `b795b10b` de-que-cuadro-sos (c11#16)
+  - ¿Hinchás por un cuadro de Córdoba?
+  - → **¿En la final hinchás por el cuadro de Córdoba?**
+  - Do you support a team from Córdoba?
+  - → **In the final, are you supporting the team from Córdoba?**
+- `33bfb679` de-que-cuadro-sos (c11#23)
+  - Este cantito es del club.
+  - → **Este cantito lo sabe todo el estadio.**
+  - This chant is the club's.
+  - → **The whole stadium knows this chant.**
+- `2b73872f` de-que-cuadro-sos (c11#23, verify5)
+  - Los jugadores no ganaron nada.
+  - → **Con estos jugadores no ganamos nada.**
+  - The players didn't win anything.
+  - → **With these players we won't win anything.**
+- `46445095` de-que-cuadro-sos (c11#23)
+  - El ídolo volvió al club.
+  - → **Mi ídolo volvió al club.**
+  - The idol came back to the club.
+  - → **My idol came back to the club.**
+- `95b60826` de-que-cuadro-sos (c11#23)
+  - Cuando el ídolo se fue, toda la hinchada estaba triste.
+  - → **Cuando se fue el ídolo del club, toda la hinchada estaba triste.**
+  - When the idol left, all the fans were sad.
+  - → **When the club's idol left, all the fans were sad.**
+- `58ae0830` una-grande-de-muzza (c11#27)
+  - ¿La porción es de muzza o vegetariana?
+  - → **¿Esta porción es de muzza?**
+  - Is the slice mozzarella or vegetarian?
+  - → **Is this slice mozzarella?**
+- `38a21243` la-parrillada (c11#33, verify5)
+  - Con los chinchulines pedimos papas fritas para todos.
+  - → **Pedimos chinchulines y papas fritas para todos.**
+  - With the grilled intestines we ordered fries for everyone.
+  - → **We ordered grilled intestines and fries for everyone.**
+- `8964971a` llegue-tarde (c11#41, verify5)
+  - No te encontré en la parada, ¿ya saliste?
+  - → **No te encontré en la parada, ¿ya te fuiste?**
+  - I didn't find you at the bus stop, did you already leave?
+- `2f740bb8` las-fiestas (c11#46)
+  - En Nochebuena comemos ñoquis.
+  - → **El veintinueve comemos ñoquis.**
+  - On Christmas Eve we eat gnocchi.
+  - → **On the twenty-ninth we eat gnocchi.**
+- `8a4e219a` las-fiestas (c11#46)
+  - Mi abuela hace ñoquis para toda la familia en Nochebuena.
+  - → **Mi abuela hace ñoquis para toda la familia todos los veintinueve.**
+  - My grandmother makes gnocchi for the whole family on Christmas Eve.
+  - → **My grandmother makes gnocchi for the whole family every twenty-ninth.**
+- `ac582a31` las-fiestas (c11#46)
+  - Para Navidad hago ñoquis.
+  - → **Hoy es veintinueve, hago ñoquis.**
+  - I'm making gnocchi for Christmas.
+  - → **Today is the twenty-ninth, I'm making gnocchi.**
+- `e704dd56` las-fiestas (c11#46)
+  - El feriado de Navidad cociné ñoquis para mi suegra.
+  - → **El feriado cociné ñoquis para mi suegra.**
+  - On the Christmas holiday I cooked gnocchi for my mother-in-law.
+  - → **On the holiday I cooked gnocchi for my mother-in-law.**
+- `9bb38800` las-fiestas (c11#49)
+  - Brindamos en el balcón.
+  - → **Brindamos en el patio.**
+  - We're toasting on the balcony.
+  - → **We're toasting in the backyard.**
+- `4911da57` las-fiestas (c11#50)
+  - Con vino o con agua, ¡salud y feliz Navidad!
+  - → **Con vino o con sidra, ¡salud y feliz Navidad!**
+  - With wine or with water, cheers and merry Christmas!
+  - → **With wine or with cider, cheers and merry Christmas!**
+- `4e19d342` la-final (c11#0)
+  - ¿Quién atajó ayer? —Nico, porque Diego estaba enfermo.
+  - → **—¿Quién atajó ayer? —Nico, porque Diego estaba enfermo.**
+  - Who played in goal yesterday? —Nico, because Diego was sick.
+  - → **—Who played in goal yesterday? —Nico, because Diego was sick.**
+- `ceffabc9` la-final (c11#0)
+  - ¿Cómo salieron? —Empataron.
+  - → **—¿Cómo salieron? —Empataron.**
+  - How did they do? —They tied.
+  - → **—How did they do? —They tied.**
+- `60e9fb9f` la-final (c11#0)
+  - ¿Ganaron? —No, empataron.
+  - → **—¿Ganaron? —No, empataron.**
+  - Did they win? —No, they tied.
+  - → **—Did they win? —No, they tied.**
+- `f43a404e` la-parrilla (c11#0)
+  - ¿Cómo querés el bife? A punto.
+  - → **—¿Cómo querés el bife? —A punto.**
+  - How do you want the steak? Medium.
+  - → **—How do you want the steak? —Medium.**
+- `c8701e27` la-parrillada (c11#0)
+  - ¿Cómo querés el lomo? Jugoso.
+  - → **—¿Cómo querés el lomo? —Jugoso.**
+  - How do you want the tenderloin? Rare.
+  - → **—How do you want the tenderloin? —Rare.**
+- `9ddf6b3d` en-lo-de-la-abuela (c11#0)
+  - ¿Todavía tenés el arbolito? Sí, hasta Reyes.
+  - → **—¿Todavía tenés el arbolito? —Sí, hasta Reyes.**
+  - Do you still have your Christmas tree up? Yes, until Three Kings' Day.
+  - → **—Do you still have your Christmas tree up? —Yes, until Three Kings' Day.**
+- `71f3cb6c` en-lo-de-la-abuela (c11#0)
+  - ¿Los fideos eran con tuco? Sí, siempre con tuco.
+  - → **—¿Los fideos eran con tuco? —Sí, siempre con tuco.**
+  - Was the pasta with tomato sauce? Yes, always with sauce.
+  - → **—Was the pasta with tomato sauce? —Yes, always with tomato sauce.**
+- `77bf1a04` en-lo-de-la-abuela (c11#0)
+  - ¿Qué había los domingos? Ravioles, siempre.
+  - → **—¿Qué había los domingos? —Ravioles, siempre.**
+  - What did you have on Sundays? Ravioli, always.
+  - → **—What did you have on Sundays? —Ravioli, always.**
+- `d632d191` en-lo-de-la-abuela (c11#0)
+  - ¿Ravioles otra vez? Es la costumbre.
+  - → **—¿Ravioles otra vez? —Es la costumbre.**
+  - Ravioli again? It's the custom.
+  - → **—Ravioli again? —It's the custom.**
+- `3a85cdbc` en-lo-de-la-abuela (c11#0)
+  - ¿Había sidra en Navidad? Sí, siempre.
+  - → **—¿Había sidra en Navidad? —Sí, siempre.**
+  - Was there cider at Christmas? Yes, always.
+  - → **—Was there cider at Christmas? —Yes, always.**
+- `af2ce17c` en-lo-de-la-abuela (c11#0)
+  - ¿Dónde está Belén? En lo de su novio.
+  - → **—¿Dónde está Belén? —En lo de su novio.**
+  - Where's Belén? At her boyfriend's.
+  - → **—Where's Belén? —At her boyfriend's.**
+- `d44efefa` practica-la-sobremesa (c12#3)
+  - ¿Cuánto tardó el viaje?
+  - → **¿Cuánto tardó el micro a Mendoza?**
+  - How long did the trip take?
+  - → **How long did the bus to Mendoza take?**
+- `f9bc5597` practica-la-sobremesa (c12#5)
+  - Ya le avisé a Ana.
+  - → **Ya le avisé a mi hermana.**
+  - I already let Ana know.
+  - → **I already told my sister.**
+- `75cdedb7` me-puse-nervioso (c12#6)
+  - Me puse re celoso.
+  - → **Me puse re contento con tu mensaje.**
+  - I got really jealous.
+  - → **I was so happy about your message.**
+- `5fff0de7` me-puse-nervioso (c12#6)
+  - Pablo se puso celoso cuando vio a Mica con Juan.
+  - → **Pablo se puso mal cuando perdimos el partido.**
+  - Pablo got jealous when he saw Mica with Juan.
+  - → **Pablo got upset when we lost the game.**
+- `6f356f4d` me-puse-nervioso (c12#6)
+  - Anoche en el boliche te pusiste re celosa, ¿no?
+  - → **Anoche en el boliche te pusiste triste, ¿qué pasó?**
+  - Last night at the nightclub you got really jealous, didn't you?
+  - → **Last night at the nightclub you got sad, what happened?**
+- `c36dea78` me-puse-nervioso (c12#6)
+  - Cuando viste a Sofi con Santi, te pusiste celoso.
+  - → **Cuando viste a tu jefe te pusiste nervioso, ¿no?**
+  - When you saw Sofi with Santi, you got jealous.
+  - → **When you saw your boss you got nervous, didn't you?**
+- `d796c423` me-puse-nervioso (c12#10)
+  - Te pusiste re contento.
+  - → **¡Qué contento te pusiste!**
+  - You got really happy.
+  - → **You were so happy!**
+- `2560926e` me-puse-nervioso (c12#10)
+  - Anoche te asustaste con la lluvia y el viento.
+  - → **¿Anoche te asustaste con la lluvia y el viento?**
+  - Last night the rain and the wind scared you.
+  - → **Did the rain and the wind scare you last night?**
+- `b5894986` me-puse-nervioso (c12#11)
+  - ¿Te enojaste? —No, me puse un poco celosa.
+  - → **—¿Te enojaste? —No, me puse un poco celosa.**
+  - Did you get mad? —No, I got a little jealous.
+  - → **—Did you get angry? —No, I got a little jealous.**
+- `471af026` me-olvide (c12#12)
+  - —¿Por qué estás colorado? —Me olvidé de su cumple.
+  - → **—¿Por qué estás colorado? —Me dio vergüenza.**
+  - Why are you red? —I forgot her birthday.
+  - → **—Why are you red? —I felt embarrassed.**
+- `29b12f22` me-olvide (c12#13)
+  - Perdón, nos olvidamos de tu cumpleaños.
+  - → **Nos olvidamos de reservar y no había mesa.**
+  - Sorry, we forgot your birthday.
+  - → **We forgot to book and there were no tables.**
+- `9012184b` me-olvide (c12#13)
+  - Me olvidé del cumple de Mica y me puse colorada.
+  - → **Me olvidé de pagar la cuenta y me puse colorada.**
+  - I forgot Mica's birthday and turned red.
+  - → **I forgot to pay the check and turned red.**
+- `e83dc0cd` me-olvide (c12#13)
+  - Diego se sintió mal porque se olvidó de tu cumple.
+  - → **Diego se sintió mal porque llegó tarde a tu fiesta.**
+  - Diego felt bad because he forgot your birthday.
+  - → **Diego felt bad because he got to your party late.**
+- `f2f32e68` me-olvide (c12#16)
+  - Cuando tenía quince años, me enamoré de mi profe.
+  - → **Cuando tenía quince años, me enamoré de mi mejor amigo.**
+  - When I was fifteen, I fell in love with my teacher.
+  - → **When I was fifteen, I fell in love with my best friend.**
+- `c36f9b77` la-semana-que-viene (c12#17)
+  - Con mis viejos viajamos a Uruguay en julio.
+  - → **El mes que viene viajamos a Uruguay con mis viejos.**
+  - My parents and I are traveling to Uruguay in July.
+  - → **Next month my parents and I are traveling to Uruguay.**
+- `4792b413` la-semana-que-viene (c12#17)
+  - Viajamos a Mar del Plata en enero.
+  - → **En enero viajamos a Mar del Plata, ¿venís?**
+  - We're traveling to Mar del Plata in January.
+  - → **We're traveling to Mar del Plata in January, are you coming?**
+- `0637af7e` la-semana-que-viene (c12#17)
+  - Viajamos el viernes temprano.
+  - → **Viajamos este viernes temprano.**
+  - We're traveling early on Friday.
+  - → **We're traveling early this Friday.**
+- `1a30cab7` la-semana-que-viene (c12#17)
+  - Viajamos en micro.
+  - → **Esta vez viajamos en micro.**
+  - We're traveling by bus.
+  - → **This time we're traveling by bus.**
+- `30d24dc6` recorrer-el-pais (c12#21)
+  - Recorrimos la Patagonia en auto.
+  - → **Recorrimos el sur en micro.**
+  - We traveled around Patagonia by car.
+  - → **We traveled around the south by bus.**
+- `731453de` recorrer-el-pais (c12#21)
+  - Este verano quiero recorrer Salta.
+  - → **Este verano quiero recorrer Córdoba.**
+  - This summer I want to travel around Salta.
+  - → **This summer I want to travel around Córdoba.**
+- `f64db5f8` recorrer-el-pais (c12#22, verify5)
+  - Sí, queremos recorrer Iguazú.
+  - → **Queremos recorrer el norte y conocer las cataratas.**
+  - Yes, we want to travel around Iguazú.
+  - → **We want to travel around the north and see the waterfalls.**
+- `09333679` recorrer-el-pais (c12#22, verify5)
+  - Sí, recorrimos Iguazú con Lucía.
+  - → **Recorrimos el norte con Lucía y vimos las cataratas.**
+  - Yes, we traveled around Iguazú with Lucía.
+  - → **We traveled around the north with Lucía and saw the waterfalls.**
+- `7d7a23ce` acampamos-en-el-sur (c12#25)
+  - Hicimos dedo el último kilómetro.
+  - → **Caminamos un kilómetro y después hicimos dedo.**
+  - We hitchhiked the last kilometer.
+  - → **We walked a kilometer and then hitchhiked.**
+- `0327043e` acampamos-en-el-sur (c12#26)
+  - Acampamos entre dos lagos, al lado de la cordillera.
+  - → **Acampamos entre dos lagos, cerca de la cordillera.**
+  - We camped between two lakes, next to the Andes.
+  - → **We camped between two lakes, near the Andes.**
+- `6cdd005a` acampamos-en-el-sur (c12#27)
+  - Hay una parada cada kilómetro.
+  - → **Sacamos una foto cada kilómetro.**
+  - There's a stop every kilometer.
+  - → **We took a photo every kilometer.**
+- `b69dbce0` me-mude (c12#30)
+  - Mi hermana se mudó a Mendoza.
+  - → **Mi hermana se mudó con su novio.**
+  - My sister moved to Mendoza.
+  - → **My sister moved in with her boyfriend.**
+- `8c729b57` me-mude (c12#30)
+  - Nico se mudó al centro.
+  - → **Nico se mudó a dos cuadras de acá.**
+  - Nico moved downtown.
+  - → **Nico moved two blocks from here.**
+- `21e053f1` me-mude (c12#30)
+  - El sábado me mudé a Córdoba.
+  - → **El sábado me mudé a lo de mis viejos.**
+  - On Saturday I moved to Córdoba.
+  - → **On Saturday I moved to my parents' place.**
+- `137db4e3` me-mude (c12#30, verify5)
+  - Con Juan nos mudamos a Córdoba.
+  - → **Con Juan nos mudamos a una casa con patio.**
+  - Juan and I moved to Córdoba.
+  - → **Juan and I moved to a house with a yard.**
+- `a6c2bd97` me-mude (c12#30)
+  - Nos mudamos a Rosario.
+  - → **Nos mudamos más cerca del laburo.**
+  - We moved to Rosario.
+  - → **We moved closer to work.**
+- `1d8daa60` me-mude (c12#30)
+  - ¿Te mudaste a Córdoba?
+  - → **¿Te mudaste a un depto más grande?**
+  - Did you move to Córdoba?
+  - → **Did you move to a bigger apartment?**
+- `3a4680d3` me-mude (c12#31)
+  - Conocí a mis vecinos en el asado.
+  - → **Conocí a mis vecinos en el asado del edificio.**
+  - I met my neighbors at the asado.
+  - → **I met my neighbors at the asado in our building.**
+- `f8040082` el-depto-nuevo (c12#39)
+  - El mueble de la cocina está lleno de mugre.
+  - → **El mueble de la cocina es viejo, pero me gusta.**
+  - The kitchen cabinet is covered in dirt.
+  - → **The kitchen cabinet is old, but I like it.**
+- `a89a168f` el-depto-nuevo (c12#40)
+  - ¿De quién es este mueble?
+  - → **¿Este mueble es tuyo o del dueño?**
+  - Whose is this piece of furniture?
+  - → **Is this piece of furniture yours or the landlord's?**
+- `d2fa1b48` el-depto-nuevo (c12#42)
+  - La inmobiliaria pide dos meses de depósito.
+  - → **La inmobiliaria pide un mes de depósito.**
+  - The real estate agency asks for two months' deposit.
+  - → **The real estate agency asks for one month's deposit.**
+- `fb4850a5` el-depto-nuevo (c12#44)
+  - Hoy pintamos el balcón.
+  - → **Ayer pintamos la pieza de los chicos.**
+  - Today we painted the balcony.
+  - → **Yesterday we painted the kids' bedroom.**
+- `dcc97d9d` practica-antes-y-ahora (c12#46)
+  - En la facu alquilaba una pieza en La Plata.
+  - → **En la facu alquilaba una pieza, pero después me mudé con Sofi.**
+  - In college I rented a room in La Plata.
+  - → **In college I rented a room, but then I moved in with Sofi.**
+- `a7c59522` practica-antes-y-ahora (c12#46)
+  - Mi tía alquilaba en el centro.
+  - → **Mi tía alquilaba en el centro, pero se mudó al campo.**
+  - My aunt used to rent downtown.
+  - → **My aunt used to rent downtown, but she moved to the country.**
+- `a97bdaed` practica-antes-y-ahora (c12#46)
+  - Extrañaba el mate de mi abuela.
+  - → **Extrañaba a mi abuela y el domingo la fui a visitar.**
+  - I missed my grandma's mate.
+  - → **I missed my grandma, and on Sunday I went to visit her.**
+- `4fb03efd` practica-antes-y-ahora (c12#47)
+  - Antes vivía en Rosario.
+  - → **Antes vivía en Rosario, me mudé acá y no pienso volver.**
+  - I used to live in Rosario.
+  - → **I used to live in Rosario, I moved here and I'm not planning to go back.**
+- `57819dc1` practica-antes-y-ahora (c12#49)
+  - Fui a Mendoza de vacaciones y me enamoré.
+  - → **Fui a Mendoza de vacaciones y me enamoré de la ciudad.**
+  - I went to Mendoza on vacation and fell in love with it.
+  - → **I went to Mendoza on vacation and fell in love with the city.**
+- `98db590c` practica-antes-y-ahora (c12#50)
+  - ¿Hablaste con él? Sí, y me sentí mejor.
+  - → **—¿Hablaste con él? —Sí, y me sentí mejor.**
+  - Did you talk to him? Yes, and I felt better.
+  - → **—Did you talk to him? —Yes, and I felt better.**
+- `94f714b1` zona-norte (c12#57)
+  - ¿Ese árbol da fruta?
+  - → **Hay un árbol re grande en la puerta de mi edificio.**
+  - Does that tree bear fruit?
+  - → **There's a really big tree at the door of my building.**
+- `848f4edd` me-olvide (c12#0)
+  - ¿Nos olvidamos de algo? Sí, del regalo.
+  - → **—¿Nos olvidamos de algo? —Sí, del regalo.**
+  - Did we forget something? Yes, the present.
+  - → **—Did we forget something? —Yes, the present.**
+- `377b241d` me-olvide (c12#0)
+  - ¿Viste la serie? Sí, pero me aburrí un poco.
+  - → **—¿Viste la serie? —Sí, pero me aburrí un poco.**
+  - Did you watch the show? Yes, but I got a little bored.
+  - → **—Did you watch the show? —Yes, but I got a little bored.**
+- `59b803c0` la-semana-que-viene (c12#0)
+  - ¿Cómo van a ir? Pensamos tomar el tren.
+  - → **—¿Cómo van a ir? —Pensamos tomar el tren.**
+  - How are you guys getting there? We're planning to take the train.
+  - → **—How are you guys getting there? —We're planning to take the train.**
+- `6ab25efc` donde-queda (c12#0)
+  - ¿Hay una farmacia por la zona? Sí, a dos cuadras.
+  - → **—¿Hay una farmacia por la zona? —Sí, a dos cuadras.**
+  - Is there a pharmacy in the area? Yes, two blocks away.
+  - → **—Is there a pharmacy in the area? —Yes, two blocks away.**
+- `688bb676` donde-queda (c12#0)
+  - ¿Te queda cerca? Sí, me queda a tres cuadras.
+  - → **—¿Te queda cerca? —Sí, me queda a tres cuadras.**
+  - Is it close for you? Yes, it's three blocks from me.
+  - → **—Is it close for you? —Yes, it's three blocks from me.**
+- `8e468303` las-figuritas (c13#2)
+  - Llenábamos el álbum del Mundial en una semana.
+  - → **Llenábamos el álbum del Mundial entre todos.**
+  - We'd fill up the World Cup album in a week.
+  - → **We used to fill the World Cup album together.**
+- `cd860d07` te-acordas (c13#7)
+  - Juli está distinta, se mudó a Mendoza.
+  - → **Juli está distinta desde que se mudó a Mendoza.**
+  - Juli seems different, she moved to Mendoza.
+  - → **Juli seems different since she moved to Mendoza.**
+- `ffad170d` me-haces-un-favor (c13#11)
+  - ¿Me alcanzás el agua?
+  - → **¿Me alcanzás la valija?**
+  - Can you hand me the water?
+  - → **Can you hand me the suitcase?**
+- `a340e075` me-haces-un-favor (c13#11)
+  - ¿Me alcanzás un vaso?
+  - → **¿Me alcanzás las medialunas?**
+  - Can you hand me a glass?
+  - → **Can you hand me the medialunas?**
+- `c51f6b4a` me-haces-un-favor (c13#11)
+  - ¿Me alcanzás la sal?
+  - → **¿Me alcanzás ese libro?**
+  - Can you hand me the salt?
+  - → **Can you hand me that book?**
+- `47b06284` me-haces-un-favor (c13#11)
+  - Alcanzame el agua.
+  - → **Alcanzame las llaves.**
+  - Hand me the water.
+  - → **Hand me the keys.**
+- `d3be5c0d` me-haces-un-favor (c13#11)
+  - Alcanzame el pan.
+  - → **Alcanzame la mochila.**
+  - Hand me the bread.
+  - → **Hand me the backpack.**
+- `190399a3` me-das-una-mano (c13#18)
+  - Lucía, ¿me cuidás al gato?
+  - → **Lucía, ¿me cuidás el gato?**
+  - Lucía, can you look after the cat?
+- `ae942a90` un-ratito (c13#23)
+  - Tomá el mate despacito.
+  - → **Tomá despacito, que está caliente.**
+  - Drink the mate nice and slow.
+  - → **Drink it nice and slow, it's hot.**
+- `8dfe8276` pasen-pasen (c13#36)
+  - Bienvenida a la oficina, esta es tu silla.
+  - → **Bienvenida a la oficina, esta es tu compu.**
+  - Welcome to the office, this is your chair.
+  - → **Welcome to the office, this is your computer.**
+- `39168fc2` hay-que (c13#51)
+  - Para mi jefa siempre es urgente.
+  - → **Para mi jefa todo es urgente.**
+  - For my boss it's always urgent.
+  - → **For my boss everything is urgent.**
+- `2063b3bc` hay-que (c13#52)
+  - Para el micro a Mendoza necesitás el pasaje.
+  - → **Para sacar el pasaje necesitás el pasaporte.**
+  - For the bus to Mendoza you need the ticket.
+  - → **To buy the ticket you need your passport.**
+- `102f1c4b` hay-que-sacar-turno (c13#56)
+  - Completá la dirección con la altura.
+  - → **Completá la dirección con el número.**
+  - Fill in the address with the street number.
+- `bd0e7c07` las-figuritas (c13#60)
+  - ¿Te acordás del recreo en la primaria?
+  - → **¿Te acordás del asado en lo de Diego?**
+  - Remember recess in elementary school?
+  - → **Remember the asado at Diego's?**
+- `b29a9532` el-tramite (c13#64)
+  - ¿Puedo firmar acá?
+  - → **¿Tengo que firmar acá también?**
+  - Can I sign here?
+  - → **Do I have to sign here too?**
+- `63b2934b` migraciones (c13#66)
+  - El colectivo demoró y llegué tarde al turno.
+  - → **El trámite demoró un montón y llegué tarde al laburo.**
+  - The bus was late, and I was late for my appointment.
+  - → **The process took a really long time and I was late for work.**
+- `93965f2c` migraciones (c13#67)
+  - ¿Cuánto te demoró el DNI?
+  - → **¿Cuánto demoró tu DNI?**
+  - How long did your ID take?
+- `13f35539` me-haces-un-favor (c13#0)
+  - ¿Me ayudás? —¡Obvio!
+  - → **—¿Me ayudás? —¡Obvio!**
+  - Can you help me? —Of course!
+  - → **—Can you help me? —Of course!**
+- `01e7b49e` me-haces-un-favor (c13#0)
+  - ¿Querés un mate? —¡Claro!
+  - → **—¿Querés un mate? —¡Claro!**
+  - Do you want a mate? —Sure!
+  - → **—Do you want a mate? —Sure!**
+- `a15ad526` me-haces-un-favor (c13#0)
+  - ¿Venís mañana? —Claro, ¿a qué hora?
+  - → **—¿Venís mañana? —Claro, ¿a qué hora?**
+  - Are you coming tomorrow? —Sure, what time?
+  - → **—Are you coming tomorrow? —Sure, what time?**
+- `2937ac36` me-haces-un-favor (c13#0)
+  - ¿Me hacés un favor? —¡Obvio!
+  - → **—¿Me hacés un favor? —¡Obvio!**
+  - Can you do me a favor? —Of course!
+  - → **—Can you do me a favor? —Of course!**
+- `331959c0` me-haces-un-favor (c13#0)
+  - ¿Vas al asado? —¡Obvio!
+  - → **—¿Vas al asado? —¡Obvio!**
+  - Are you going to the asado? —Of course!
+  - → **—Are you going to the asado? —Of course!**
+- `f2be2124` me-haces-un-favor (c13#0)
+  - ¿Te ayudo? —No, gracias.
+  - → **—¿Te ayudo? —No, gracias.**
+  - Can I help you? —No, thanks.
+  - → **—Can I help you? —No, thanks.**
+- `dc136538` me-das-una-mano (c13#0)
+  - ¿Me regás las plantas? —Dale, ¿cuándo te vas?
+  - → **—¿Me regás las plantas? —Dale, ¿cuándo te vas?**
+  - Can you water my plants? —Sure, when are you leaving?
+  - → **—Can you water my plants? —Sure, when are you leaving?**
+- `94f9fe89` me-das-una-mano (c13#0)
+  - ¿Me regás la planta? —Sí, ¿dónde está?
+  - → **—¿Me regás la planta? —Sí, ¿dónde está?**
+  - Can you water the plant for me? —Yes, where is it?
+  - → **—Can you water the plant for me? —Yes, where is it?**
+- `4ebb211f` me-das-una-mano (c13#0)
+  - ¿Me llevás al médico? —Sí, obvio.
+  - → **—¿Me llevás al médico? —Sí, obvio.**
+  - Can you take me to the doctor? —Yes, of course.
+  - → **—Can you take me to the doctor? —Yes, of course.**
+- `e162df54` hay-que-sacar-turno (c13#0)
+  - ¿Dónde están las fotocopias? —En tu mochila.
+  - → **—¿Dónde están las fotocopias? —En tu mochila.**
+  - Where are the photocopies? —In your backpack.
+  - → **—Where are the photocopies? —In your backpack.**
+- `eb35ac92` hay-que-sacar-turno (c13#0)
+  - ¿Hace falta llevar efectivo? —Sí, conviene.
+  - → **—¿Hace falta llevar efectivo? —Sí, conviene.**
+  - Do I need to bring cash? —Yes, it's a good idea.
+  - → **—Do I need to bring cash? —Yes, it's a good idea.**
+- `b3714dbe` hay-que-sacar-turno (c13#0)
+  - ¿Cuándo tenés que ir al médico? —El jueves.
+  - → **—¿Cuándo tenés que ir al médico? —El jueves.**
+  - When do you have to go to the doctor? —On Thursday.
+  - → **—When do you have to go to the doctor? —On Thursday.**
+- `2e750543` cien-gramos-de-jamon (c14#10)
+  - ¿Tenés jamón cocido fresco?
+  - → **¿Tenés jamón cocido?**
+  - Do you have fresh cooked ham?
+  - → **Do you have cooked ham?**
+- `d0c1cdb4` cien-gramos-de-jamon (c14#10)
+  - ¿El jamón está fresco?
+  - → **¿Cuánto sale el jamón?**
+  - Is the ham fresh?
+  - → **How much is the ham?**
+- `879a5d90` no-tengo-senal (c14#25)
+  - Bajá la música con wifi.
+  - → **Bajá el video con wifi.**
+  - Download the music on wifi.
+  - → **Download the video on wifi.**
+- `afc0049f` me-robaron (c14#30, verify5)
+  - Creo que el chorro está en la esquina.
+  - → **Un chorro me sacó el celu en la parada.**
+  - I think the thief is on the corner.
+  - → **A thief took my phone at the bus stop.**
+- `0e979250` me-robaron (c14#30)
+  - Cuidado con el punga.
+  - → **Ojo en el subte, siempre hay un punga.**
+  - Watch out for the pickpocket.
+  - → **Watch out on the subway, there's always a pickpocket.**
+- `541e5247` me-robaron (c14#30)
+  - Hay un punga en el andén.
+  - → **No encuentro la billetera, creo que fue un punga.**
+  - There's a pickpocket on the platform.
+  - → **I can't find my wallet, I think it was a pickpocket.**
+- `f7c0e9ae` me-robaron (c14#31, verify5)
+  - Me robaron la bici e hice la denuncia.
+  - → **Me robaron la bici y fui a hacer la denuncia.**
+  - They stole my bike and I filed a police report.
+  - → **They stole my bike and I went to file a police report.**
+- `d499ca77` me-afanaron (c14#38)
+  - Dos mil pesos un café: me afanaron.
+  - → **Diez mil pesos un café: me afanaron.**
+  - Two thousand pesos for a coffee: they overcharged me.
+  - → **Ten thousand pesos for a coffee: they overcharged me.**
+- `537c018c` me-afanaron (c14#40)
+  - Cuidado con el celu, que hay un motochorro.
+  - → **Cuidado con el celu, que puede pasar un motochorro.**
+  - Watch your phone, there's a thief on a motorbike.
+  - → **Watch your phone, a thief on a motorbike could come by.**
+- `61d042b1` me-afanaron (c14#40)
+  - Hay un motochorro en el barrio.
+  - → **Dicen que hay un motochorro en el barrio.**
+  - There's a motorcycle thief in the neighborhood.
+  - → **They say there's a thief on a motorbike in the neighborhood.**
+- `04fcd765` me-afanaron (c14#42)
+  - Bloqueá la app del banco.
+  - → **Bloqueá la cuenta del banco.**
+  - Block the bank app.
+  - → **Block your bank account.**
+- `8fc00131` te-lo-devuelvo (c14#47, verify5)
+  - Cierro el auto y te lo devuelvo.
+  - → **Cierro el auto y voy.**
+  - I'll lock the car and give it back to you.
+  - → **I'll lock the car and come.**
+- `53250aa6` te-lo-devuelvo (c14#48)
+  - Le regalé vino a Mati.
+  - → **Le regalé un vino a Mati.**
+  - I gave Mati wine.
+  - → **I gave Mati a bottle of wine.**
+- `a693593f` en-la-verduleria (c14#0)
+  - ¿Cuánto? —Un kilo.
+  - → **—¿Cuánto? —Un kilo.**
+  - How much? —A kilo.
+  - → **—How much? —A kilo.**
+- `59e62471` en-la-verduleria (c14#0)
+  - ¿Una docena? —Dale.
+  - → **—¿Una docena? —Dale.**
+  - A dozen? —OK.
+  - → **—A dozen? —OK.**
+- `0a93f657` en-la-verduleria (c14#0)
+  - ¿El tomate está fresco? —Sí, es de hoy.
+  - → **—¿El tomate está fresco? —Sí, es de hoy.**
+  - Is the tomato fresh? —Yes, it's from today.
+  - → **—Is the tomato fresh? —Yes, it's from today.**
+- `5f28b0e6` en-la-verduleria (c14#0)
+  - ¿Un kilo? No, medio kilo.
+  - → **—¿Un kilo? —No, medio kilo.**
+  - A kilo? No, half a kilo.
+  - → **—A kilo? —No, half a kilo.**
+- `9c7283fd` cien-gramos-de-jamon (c14#0)
+  - ¿Algo más? No, nada más, gracias.
+  - → **—¿Algo más? —No, nada más, gracias.**
+  - Anything else? No, that's all, thanks.
+  - → **—Anything else? —No, that's all, thanks.**
+- `1edf6a11` cien-gramos-de-jamon (c14#0)
+  - ¿Algo más? Sí, medio kilo de tomates.
+  - → **—¿Algo más? —Sí, medio kilo de tomates.**
+  - Anything else? Yes, half a kilo of tomatoes.
+  - → **—Anything else? —Yes, half a kilo of tomatoes.**
+- `fab0703f` cien-gramos-de-jamon (c14#0)
+  - ¿Algo más? Sí, un kilo de naranja.
+  - → **—¿Algo más? —Sí, un kilo de naranja.**
+  - Anything else? Yes, a kilo of oranges.
+  - → **—Anything else? —Yes, a kilo of oranges.**
+- `5b5d78a7` cien-gramos-de-jamon (c14#0)
+  - ¿Algo más? Sí, doscientos gramos de jamón.
+  - → **—¿Algo más? —Sí, doscientos gramos de jamón.**
+  - Anything else? Yes, two hundred grams of ham.
+  - → **—Anything else? —Yes, two hundred grams of ham.**
+- `0466de8d` cien-gramos-de-jamon (c14#0)
+  - ¿Una feta sola? No, dame cien gramos.
+  - → **—¿Una feta sola? —No, dame cien gramos.**
+  - Just one slice? No, give me a hundred grams.
+  - → **—Just one slice? —No, give me a hundred grams.**
+- `4120618c` cien-gramos-de-jamon (c14#0)
+  - ¿Está madura? Sí, es para hoy.
+  - → **—¿Está madura? —Sí, es para hoy.**
+  - Is it ripe? Yes, it's for today.
+  - → **—Is it ripe? —Yes, it's for today.**
+- `2b1d246e` cien-gramos-de-jamon (c14#0)
+  - ¿Tenés zanahoria? Sí, ¿cuánto querés?
+  - → **—¿Tenés zanahoria? —Sí, ¿cuánto querés?**
+  - Do you have carrots? Yes, how much do you want?
+  - → **—Do you have carrots? —Yes, how much do you want?**
+- `7c52589f` cien-gramos-de-jamon (c14#0)
+  - ¿Las frutillas son de hoy? Sí, de esta mañana.
+  - → **—¿Las frutillas son de hoy? —Sí, de esta mañana.**
+  - Are the strawberries from today? Yes, from this morning.
+  - → **—Are the strawberries from today? —Yes, from this morning.**
+- `de1e8108` cien-gramos-de-jamon (c14#0)
+  - ¿La frutilla de hoy está madura? —No, medio verde.
+  - → **—¿La frutilla de hoy está madura? —No, medio verde.**
+  - Are today's strawberries ripe? —No, kind of green.
+  - → **—Are today's strawberries ripe? —No, not quite ripe.**
+- `7c277a5f` cien-gramos-de-jamon (c14#0, verify6)
+  - ¿Tenés frutilla? No, hoy no hay.
+  - → **—¿Tenés frutilla? —No, hoy no hay.**
+  - Do you have strawberries? No, there aren't any today.
+  - → **—Do you have strawberries? —No, there aren't any today.**
+- `aaa9847d` se-aceptan-tarjetas (c14#0)
+  - ¿Se hacen envíos? Sí, hacemos envíos hasta las once.
+  - → **—¿Se hacen envíos? —Sí, hacemos envíos hasta las once.**
+  - Do you do deliveries? Yes, we do deliveries until eleven.
+  - → **—Do you do deliveries? —Yes, we do deliveries until eleven.**
+- `4d804006` se-aceptan-tarjetas (c14#0, verify6)
+  - ¿Se puede fumar? No, mirá: no se permite.
+  - → **—¿Se puede fumar? —No, mirá: no se permite.**
+  - Can you smoke? No, look: it's not permitted.
+  - → **—Can you smoke? —No, look: it's not permitted.**
+- `fd32ec3c` el-celu (c14#0)
+  - ¿Me escuchás? Sí, pero te escucho re mal.
+  - → **—¿Me escuchás? —Sí, pero te escucho re mal.**
+  - Can you hear me? Yes, but I can barely hear you.
+  - → **—Can you hear me? —Yes, but I can barely hear you.**
+- `b5536c00` no-tengo-senal (c14#0)
+  - ¿Cómo pago? —Descargá la app.
+  - → **—¿Cómo pago? —Descargá la app.**
+  - How do I pay? —Download the app.
+  - → **—How do I pay? —Download the app.**
+- `621b98ca` me-robaron (c14#0)
+  - ¿Cómo era el ladrón? Petiso.
+  - → **—¿Cómo era el ladrón? —Petiso.**
+  - What was the robber like? Short.
+  - → **—What was the robber like? —Short.**
+- `4ed3012a` me-robaron (c14#0)
+  - ¿Qué pasó? Me robaron.
+  - → **—¿Qué pasó? —Me robaron.**
+  - What happened? I got robbed.
+  - → **—What happened? —I got robbed.**
+- `c46e28c8` me-robaron (c14#0)
+  - ¿Viste a los chorros? No, estaba en el baño.
+  - → **—¿Viste a los chorros? —No, estaba en el baño.**
+  - Did you see the thieves? No, I was in the bathroom.
+  - → **—Did you see the thieves? —No, I was in the bathroom.**
+- `465dc8ac` me-afanaron (c14#0)
+  - ¿Hay algo en las cámaras? No, nada.
+  - → **—¿Hay algo en las cámaras? —No, nada.**
+  - Is there anything on the cameras? No, nothing.
+  - → **—Is there anything on the cameras? —No, nothing.**
+- `cc00f9f5` me-afanaron (c14#0)
+  - ¿Te robaron mucha plata? No, por suerte.
+  - → **—¿Te robaron mucha plata? —No, por suerte.**
+  - Did they take a lot of money? No, luckily.
+  - → **—Did they take a lot of money? —No, luckily.**
+- `fd03565e` te-lo-presto (c15#2)
+  - Perdón, rompí un vaso.
+  - → **Perdón, te rompí el taladro.**
+  - Sorry, I broke a glass.
+  - → **Sorry, I broke your drill.**
+- `4ba3947e` te-lo-presto (c15#5)
+  - Mis fotos de chico no se las muestro a nadie.
+  - → **Esas fotos no se las muestro a nadie.**
+  - I don't show anyone my photos from when I was a kid.
+  - → **I don't show those photos to anyone.**
+- `13a17b22` laburo-nuevo (c15#10)
+  - La comida del avión era re mala.
+  - → **Tuve una semana re mala en el laburo.**
+  - The food on the plane was really bad.
+  - → **I had a really bad week at work.**
+- `98c6cdd1` laburo-nuevo (c15#10)
+  - La señal acá es re mala.
+  - → **La reunión con el equipo fue re mala.**
+  - The signal here is really bad.
+  - → **The meeting with the team was really bad.**
+- `c320763c` laburo-nuevo (c15#12)
+  - Empecé el laburo nuevo.
+  - → **Empecé en el laburo nuevo.**
+  - I started the new job.
+  - → **I started at the new job.**
+- `eb103cb0` practica-te-lo-presto (c15#23)
+  - Mamá, te prometo que estudié.
+  - → **Mamá, te prometo que hoy estudio.**
+  - Mom, I promise I studied.
+  - → **Mom, I promise I'll study today.**
+- `717a510d` salir-con-alguien (c15#29)
+  - Se pelearon por la plata.
+  - → **Se pelearon por una piba.**
+  - They argued about money.
+  - → **They had a fight over a girl.**
+- `a29a8fc2` estamos-de-novios (c15#29)
+  - Se pelean por la plata.
+  - → **Se pelean por todo.**
+  - They fight about money.
+  - → **They fight about everything.**
+- `8bafded5` estamos-de-novios (c15#32)
+  - Mica lo dejó por mail.
+  - → **Mica lo dejó por WhatsApp.**
+  - Mica broke up with him by email.
+  - → **Mica broke up with him on WhatsApp.**
+- `f0047a8f` me-cae-bien (c15#35)
+  - Con mi suegra nos llevamos bárbaro.
+  - → **Con mis compañeros de laburo nos llevamos bárbaro.**
+  - My mother-in-law and I get along great.
+  - → **My coworkers and I get along great.**
+- `6ea70ce4` me-cae-bien (c15#36)
+  - ¿Y Lucía? Me cae re bien.
+  - → **—¿Y Lucía? —Me cae re bien.**
+  - What about Lucía? I really like her.
+  - → **—What about Lucía? —I really like her.**
+- `1dd92014` se-recibio (c15#44)
+  - ¿Se murió tu tía? Te acompaño en el sentimiento.
+  - → **¿Falleció tu tía? Te acompaño en el sentimiento.**
+  - Your aunt died? I'm sorry for your loss.
+  - → **Your aunt passed away? I'm sorry for your loss.**
+- `725efdd7` se-recibio (c15#45)
+  - Te acompaño en el sentimiento, nos vemos en el velorio.
+  - → **Te acompaño en el sentimiento. Si necesitás algo, avisame.**
+  - I'm sorry for your loss, see you at the wake.
+  - → **I'm sorry for your loss. If you need anything, let me know.**
+- `ccee055f` donde-estara (c15#65)
+  - ¿Venís al asado el domingo? Capaz, pero llego tarde.
+  - → **—¿Venís al asado el domingo? —Capaz, pero llego tarde.**
+  - Are you coming to the barbecue on Sunday? Maybe, but I'll be late.
+  - → **—Are you coming to the asado on Sunday? —Maybe, but I'll be late.**
+- `fd43aacb` la-ruta (c15#72)
+  - Frená, que en la General Paz hay mucho tránsito.
+  - → **Frená, que el semáforo está en rojo.**
+  - Brake, there's a lot of traffic on the General Paz.
+  - → **Brake, the light is red.**
+- `0a4bd5bb` la-ruta (c15#72)
+  - Frená, que la ruta está mojada.
+  - → **Frená antes, que la ruta está mojada.**
+  - Brake, the highway is wet.
+  - → **Brake earlier, the highway is wet.**
+- `c850c986` se-caso (c15#0)
+  - ¿Nico se casó? Sí, en julio.
+  - → **—¿Nico se casó? —Sí, en julio.**
+  - Did Nico get married? Yes, in July.
+  - → **—Did Nico get married? —Yes, in July.**
+- `7c464068` se-caso (c15#0)
+  - Che, ¿Sofi está embarazada? Sí, de cinco meses.
+  - → **—Che, ¿Sofi está embarazada? —Sí, de cinco meses.**
+  - Hey, is Sofi pregnant? Yes, five months.
+  - → **—Hey, is Sofi pregnant? —Yes, five months.**
+- `086442a7` se-recibio (c15#0)
+  - ¿Qué le digo? Te acompaño en el sentimiento.
+  - → **—¿Qué le digo? —Te acompaño en el sentimiento.**
+  - What do I say to him? I'm sorry for your loss.
+  - → **—What do I say to him? —I'm sorry for your loss.**
+- `09b019b4` donde-estara (c15#0)
+  - ¿Venís mañana? A lo mejor, te aviso.
+  - → **—¿Venís mañana? —A lo mejor, te aviso.**
+  - Are you coming tomorrow? Maybe, I'll let you know.
+  - → **—Are you coming tomorrow? —Maybe, I'll let you know.**
+- `77c4ec74` donde-estara (c15#0)
+  - ¿Vendrá Diego? Capaz que no, está re ocupado.
+  - → **—¿Vendrá Diego? —Capaz que no, está re ocupado.**
+  - Is Diego coming? Maybe not, he's really busy.
+  - → **—Is Diego coming? —Maybe not, he's really busy.**
+- `6ff66a50` donde-estara (c15#0)
+  - ¿Viene Diego? Supongo que no.
+  - → **—¿Viene Diego? —Supongo que no.**
+  - Is Diego coming? I guess not.
+  - → **—Is Diego coming? —I guess not.**
+- `5c648efd` donde-estara (c15#0)
+  - ¿Viene Lucía? Supongo que sí.
+  - → **—¿Viene Lucía? —Supongo que sí.**
+  - Is Lucía coming? I guess so.
+  - → **—Is Lucía coming? —I guess so.**
+- `d917a13a` donde-estara (c15#0)
+  - ¿Quién llama? Debe ser tu hermana.
+  - → **—¿Quién llama? —Debe ser tu hermana.**
+  - Who's calling? It must be your sister.
+  - → **—Who's calling? —It must be your sister.**
+- `10a1ee04` se-caso (c15#0)
+  - Fede es mi padrino.
+  - → **Carlos es mi padrino.**
+  - Fede is my godfather.
+  - → **Carlos is my godfather.**
+- `d58abf4f` me-siento-mal (c16#1)
+  - ¿Me comprás las pastillas cuando vas a la farmacia?
+  - → **¿Me comprás las pastillas si vas a la farmacia?**
+  - Can you buy me the pills when you go to the pharmacy?
+  - → **Can you buy me the pills if you go to the pharmacy?**
+- `266d8469` me-siento-mal (c16#2, verify6)
+  - Lo siento, la médica ya se fue.
+  - → **¿Perdiste el laburo? Lo siento, Juan.**
+  - I'm sorry, the doctor already left.
+  - → **You lost your job? I'm sorry, Juan.**
+- `352bab6b` me-siento-mal (c16#2)
+  - Lo siento, sin receta no puedo.
+  - → **¿Los análisis salieron mal? Lo siento.**
+  - I'm sorry, I can't without a prescription.
+  - → **The tests came back bad? I'm sorry.**
+- `4250dd09` como-se-siente (c16#11)
+  - Nada de fútbol, estás de reposo.
+  - → **Nada de fútbol, estás en reposo.**
+  - No soccer, you're on bed rest.
+- `95d7c08e` sos-un-genio (c16#14)
+  - Me salvaste. Ni hablar.
+  - → **—Me salvaste. —Ni hablar.**
+  - You saved me. Don't mention it.
+  - → **—You saved me. —Don't mention it.**
+- `c9013873` practica-a-lo-mejor (c16#14)
+  - ¿Quién era? Mi ex.
+  - → **—¿Quién era? —Mi ex.**
+  - Who was that? My ex.
+  - → **—Who was that? —My ex.**
+- `fdb4e357` te-convido-un-mate (c16#14)
+  - ¿Me convidás? No, está frío.
+  - → **—¿Me convidás? —No, está frío.**
+  - Will you share it with me? No, it's cold.
+  - → **—Can I have some? —No, it's cold.**
+- `c0bc98b2` sos-un-genio (c16#18)
+  - No sabés cuánto te agradezco.
+  - → **No sabés cuánto te lo agradezco.**
+  - You have no idea how grateful I am.
+  - → **You don't know how much I appreciate it.**
+- `afdb2516` te-debo-una (c16#20, verify6)
+  - —Te pagué el café otra vez. —¡Gracias, te debo una!
+  - → **—Hoy invito yo otra vez. —¡Gracias, te debo una!**
+  - "I paid for your coffee again." "Thanks, I owe you one!"
+  - → **—I'm paying again today. —Thanks, I owe you one!**
+- `8f4d31a6` te-debo-una (c16#21)
+  - Mil gracias por el cargador.
+  - → **Mil gracias por las fotos.**
+  - Thanks a million for the charger.
+  - → **Thanks a million for the photos.**
+- `be4b11eb` te-debo-una (c16#21)
+  - Gracias por el cargador, te debo una.
+  - → **Gracias por las entradas, te debo una.**
+  - Thanks for the charger, I owe you one.
+  - → **Thanks for the tickets, I owe you one.**
+- `86b4c2aa` te-debo-una (c16#21)
+  - Gracias otra vez por el asado.
+  - → **Gracias otra vez por la torta.**
+  - Thanks again for the barbecue.
+  - → **Thanks again for the cake.**
+- `a43b41f4` quien-ceba (c16#24)
+  - Si das las gracias, salís de la ronda.
+  - → **Si decís gracias, salís de la ronda.**
+  - If you say thanks, you're out of the round.
+- `0969b663` te-convido-un-mate (c16#30)
+  - Te pido una sola cosa: que no hiervas el agua.
+  - → **Te pido una sola cosa: no hiervas el agua.**
+  - I'm asking you just one thing: don't boil the water.
+- `c74280e8` te-convido-un-mate (c16#34)
+  - Mi vecino es tan matero que siempre tiene el termo.
+  - → **Mi vecino es tan matero que siempre está con el termo.**
+  - My neighbor loves mate so much he always has his thermos.
+  - → **My neighbor loves mate so much he always has his thermos with him.**
+- `29212cd4` que-te-mejores (c16#49)
+  - No vengas a laburar hasta que te mejores.
+  - → **Quedate en casa y que te mejores.**
+  - Don't come in to work until you're better.
+  - → **Stay home and get well soon.**
+- `27013d91` cuando-llegues (c16#54)
+  - Llamame cuando termines.
+  - → **Cuando termines, apagá la luz.**
+  - Call me when you finish.
+  - → **When you finish, turn off the light.**
+- `3bf2acf4` buena-onda (c16#58)
+  - ¿Cómo es tu jefe? Re simpático.
+  - → **—¿Cómo es tu jefe? —Re simpático.**
+  - What's your boss like? Really nice.
+  - → **—What's your boss like? —Really friendly.**
+- `65881c38` buena-onda (c16#58)
+  - ¿Tu jefa es simpática? Más o menos.
+  - → **—¿Tu jefa es simpática? —Más o menos.**
+  - Is your boss nice? Sort of.
+  - → **—Is your boss friendly? —Sort of.**
+- `63115c6c` es-medio-vago (c16#63)
+  - Mi cuñado es medio agrandado con la plata.
+  - → **Mi cuñado está medio agrandado desde que tiene plata.**
+  - My brother-in-law is kind of arrogant about his money.
+  - → **My brother-in-law has been kind of arrogant since he got money.**
+- `23d5d68d` me-siento-mal (c16#0)
+  - ¿Cómo te sentís? Mejor, gracias.
+  - → **—¿Cómo te sentís? —Mejor, gracias.**
+  - How do you feel? Better, thanks.
+  - → **—How do you feel? —Better, thanks.**
+- `16858c14` me-siento-mal (c16#0)
+  - ¿Dormís bien? No, tengo tos.
+  - → **—¿Dormís bien? —No, tengo tos.**
+  - Do you sleep well? No, I have a cough.
+  - → **—Do you sleep well? —No, I have a cough.**
+- `f37b8e19` me-siento-mal (c16#0)
+  - ¿Qué obra social tenés? La misma que Mati.
+  - → **—¿Qué obra social tenés? —La misma que Mati.**
+  - What health insurance do you have? The same as Mati.
+  - → **—What health insurance do you have? —The same as Mati.**
+- `b28354d5` practica-a-lo-mejor (c16#0)
+  - ¿Cuándo se separaron? Hace un mes, más o menos.
+  - → **—¿Cuándo se separaron? —Hace un mes, más o menos.**
+  - When did they split up? About a month ago.
+  - → **—When did they split up? —About a month ago.**
+- `808d6865` buena-onda (c16#0, verify6)
+  - ¿Cómo es tu compañera nueva? Es re divertida.
+  - → **—¿Cómo es tu compañera nueva? —Es re divertida.**
+  - What's your new coworker like? She's really fun.
+  - → **—What's your new coworker like? —She's really fun.**
+- `c993a48a` es-medio-vago (c16#0)
+  - ¿Y la novia de Pablo? Macanuda.
+  - → **—¿Y la novia de Pablo? —Macanuda.**
+  - And Pablo's girlfriend? She's great.
+  - → **—And Pablo's girlfriend? —She's great.**
+- `cdcb1f66` te-debo-una (c16#0)
+  - Gracias por el café. —De nada.
+  - → **—Gracias por el café. —De nada.**
+  - Thanks for the coffee. —You're welcome.
+  - → **—Thanks for the coffee. —You're welcome.**
+- `e8a57b29` te-debo-una (c16#0)
+  - Gracias por el cargador. —De nada, Mati.
+  - → **—Gracias por el cargador. —De nada, Mati.**
+  - Thanks for the charger. —You're welcome, Mati.
+  - → **—Thanks for the charger. —You're welcome, Mati.**
+- `094b587e` te-debo-una (c16#0)
+  - Gracias por el mate. —¡De nada!
+  - → **—Gracias por el mate. —¡De nada!**
+  - Thanks for the mate. —You're welcome!
+  - → **—Thanks for the mate. —You're welcome!**
+- `9da33256` te-debo-una (c16#0)
+  - Gracias. —De nada.
+  - → **—Gracias. —De nada.**
+  - Thanks. —You're welcome.
+  - → **—Thanks. —You're welcome.**
+- `3eec059e` te-debo-una (c16#0)
+  - Te traigo las llaves. —¡Mil gracias!
+  - → **—Te traigo las llaves. —¡Mil gracias!**
+  - I'll bring you the keys. —Thanks a million!
+  - → **—I'll bring you the keys. —Thanks a million!**
+- `cba7e937` te-debo-una (c16#0)
+  - ¿Te duele? —No, no pasa nada.
+  - → **—¿Te duele? —No, no pasa nada.**
+  - Does it hurt? —No, it's fine.
+  - → **—Does it hurt? —No, it's fine.**
+- `12113222` te-debo-una (c16#0)
+  - Perdí tu llave. —No pasa nada, tengo otra.
+  - → **—Perdí tu llave. —No pasa nada, tengo otra.**
+  - I lost your key. —No worries, I have another one.
+  - → **—I lost your key. —No worries, I have another one.**
+- `d674a7c0` te-debo-una (c16#0)
+  - Perdón. —No pasa nada.
+  - → **—Perdón. —No pasa nada.**
+  - Sorry. —It's fine.
+  - → **—Sorry. —It's fine.**
+- `d384a7d9` cuando-vuelvas (c17#3)
+  - Cuando Sofi sepa lo del viaje, te llamo.
+  - → **Cuando sepa algo del viaje, te llamo.**
+  - When Sofi knows about the trip, I'll call you.
+  - → **When I know something about the trip, I'll call you.**
+- `6da6bdd9` practica-cuando-vuelvas (c17#5)
+  - Es mejor que Pablo no sepa nada.
+  - → **Prefiero que Pablo no sepa nada.**
+  - It's better if Pablo doesn't know anything.
+  - → **I'd rather Pablo didn't know anything.**
+- `0f2b15fb` te-recomiendo (c17#16)
+  - Quiero probar el flan.
+  - → **Quiero probar la torta de tu mamá.**
+  - I want to try the flan.
+  - → **I want to try your mom's cake.**
+- `ff82cb9d` te-recomiendo (c17#16)
+  - No pidas el flan.
+  - → **No pidas más pan.**
+  - Don't order the flan.
+  - → **Don't order more bread.**
+- `57956a3d` te-recomiendo (c17#16)
+  - Dale, pruebo el flan.
+  - → **Dale, pruebo el postre.**
+  - OK, I'll try the flan.
+  - → **OK, I'll try the dessert.**
+- `c83f7047` te-recomiendo (c17#16)
+  - Mamá quiere que pruebes su flan.
+  - → **Mamá quiere que pruebes sus empanadas.**
+  - Mom wants you to try her flan.
+  - → **Mom wants you to try her empanadas.**
+- `9f57bf28` te-recomiendo (c17#16)
+  - Quiero que pruebes el flan.
+  - → **Quiero que pruebes el asado de mi viejo.**
+  - I want you to try the flan.
+  - → **I want you to try my dad's asado.**
+- `c187d413` te-recomiendo (c17#16)
+  - El flan de acá vale la pena, posta.
+  - → **El café de acá vale la pena, posta.**
+  - The flan here is worth it, honestly.
+  - → **The coffee here is worth it, for real.**
+- `24b14450` te-aconsejo (c17#19, verify6)
+  - No uses el taxi para todo, el subte es barato.
+  - → **No uses el celu en la calle.**
+  - Don't take taxis everywhere, the subway is cheap.
+  - → **Don't use your phone on the street.**
+- `7d052822` te-aconsejo (c17#21)
+  - No tomes taxi en la calle.
+  - → **No tomes taxi para todo, el subte es barato.**
+  - Don't take a taxi on the street.
+  - → **Don't take a taxi for everything, the subway is cheap.**
+- `da4b1c40` te-aconsejo (c17#22)
+  - Es mejor que cambies plata en el banco.
+  - → **Es mejor que cambies plata en el centro.**
+  - It's better to change money at the bank.
+  - → **It's better to change money downtown.**
+- `68a7d8ba` te-aconsejo (c17#23)
+  - Salgamos con efectivo.
+  - → **Es mejor que salgamos temprano.**
+  - Let's go out with cash.
+  - → **It's better if we leave early.**
+- `0ba54e45` practica-te-aconsejo (c17#28)
+  - Antes de que me cuentes, sentate.
+  - → **Antes de que le cuentes a mamá, hablá conmigo.**
+  - Before you tell me, sit down.
+  - → **Before you tell Mom, talk to me.**
+- `32fd6a92` lunfardo (c17#40)
+  - ¿Morfamos en el restaurante de la esquina?
+  - → **¿Morfamos en el bar de la esquina?**
+  - Should we eat at the restaurant on the corner?
+  - → **Should we eat at the bar on the corner?**
+- `136e9d0a` practica-es-un-afano (c17#45)
+  - Es un garrón que vivas tan lejos del laburo.
+  - → **Me preocupa que vivas tan lejos del laburo.**
+  - It's really annoying that you live so far from work.
+  - → **It worries me that you live so far from work.**
+- `9318558c` no-seas-asi (c17#48)
+  - ¿Le cuento a Ana? No, todavía no le cuentes.
+  - → **—¿Le cuento a Sofi? —No, todavía no le cuentes.**
+  - Should I tell Ana? No, don't tell her yet.
+  - → **—Should I tell Sofi? —No, don't tell her yet.**
+- `d2e101e4` no-seas-asi (c17#48)
+  - No le mientas a Ana, ya sabe todo.
+  - → **No le mientas a Lucía, ya sabe todo.**
+  - Don't lie to Ana, she already knows everything.
+  - → **Don't lie to Lucía, she already knows everything.**
+- `dbb4ac19` practica-es-un-afano (c17#48)
+  - Conocí a Ana en la facu.
+  - → **Conocí a Belén en la facu.**
+  - I met Ana at college.
+  - → **I met Belén at college.**
+- `c8f77b0f` cuando-vuelvas (c17#0)
+  - ¿Cuándo nos juntamos? Cuando quieras.
+  - → **—¿Cuándo nos juntamos? —Cuando quieras.**
+  - When should we get together? Whenever you want.
+  - → **—When should we get together? —Whenever you want.**
+- `7c3d4140` cuando-vuelvas (c17#0)
+  - ¿Y el alquiler? Lo pago apenas cobre.
+  - → **—¿Y el alquiler? —Lo pago apenas cobre.**
+  - What about the rent? — I'll pay it as soon as I get paid.
+  - → **—What about the rent? —I'll pay it as soon as I get paid.**
+- `2b009b8c` puede-ser-que (c17#0)
+  - ¿Y los chicos? Puede ser que lleguen a las diez.
+  - → **—¿Y los chicos? —Puede ser que lleguen a las diez.**
+  - What about the guys? Maybe they'll get here at ten.
+  - → **—What about the guys? —Maybe they'll get here at ten.**
+- `7b5a5646` puede-ser-que (c17#0)
+  - ¿Llegás a tiempo? Puede ser, si el tren sale ya.
+  - → **—¿Llegás a tiempo? —Puede ser, si el tren sale ya.**
+  - Will you make it on time? Maybe, if the train leaves now.
+  - → **—Will you make it on time? —Maybe, if the train leaves now.**
+- `3008194c` puede-ser-que (c17#0)
+  - ¿Quién es? Puede ser que sean los chicos.
+  - → **—¿Quién es? —Puede ser que sean los chicos.**
+  - Who is it? Maybe it's the guys.
+  - → **—Who is it? —Maybe it's the guys.**
+- `3b5a1fc3` puede-ser-que (c17#0)
+  - ¿Santi está enojado conmigo? Puede ser, no sé.
+  - → **—¿Santi está enojado conmigo? —Puede ser, no sé.**
+  - Is Santi angry with me? Maybe, I don't know.
+  - → **—Is Santi angry with me? —Maybe, I don't know.**
+- `88c4d70b` puede-ser-que (c17#0)
+  - ¿Viene Fede al asado? Puede ser.
+  - → **—¿Viene Fede al asado? —Puede ser.**
+  - Is Fede coming to the asado? Maybe.
+  - → **—Is Fede coming to the asado? —Maybe.**
+- `af3c1601` no-te-preocupes (c17#0)
+  - ¿Y el vino? Me olvidé.
+  - → **—¿Y el vino? —Me olvidé.**
+  - And the wine? I forgot.
+  - → **—And the wine? —I forgot.**
+- `ef7dd056` no-seas-asi (c17#0, verify6)
+  - ¿Saco la basura? No, no la saques, está lloviendo.
+  - → **—¿Saco la basura? —No, no la saques, está lloviendo.**
+  - Should I take out the trash? No, don't take it out, it's raining.
+  - → **—Should I take out the trash? —No, don't take it out, it's raining.**
+- `6dc57c8b` practica-te-aconsejo (c17#0)
+  - ¿Llegamos a tiempo? Puede ser, si salimos ya.
+  - → **—¿Llegamos a tiempo? —Puede ser, si salimos ya.**
+  - Will we make it on time? Maybe, if we leave now.
+  - → **—Will we make it on time? —Maybe, if we leave now.**
+- `b8455048` practica-te-aconsejo (c17#0)
+  - ¿Viene Juan? Puede ser.
+  - → **—¿Viene Juan? —Puede ser.**
+  - Is Juan coming? Maybe.
+  - → **—Is Juan coming? —Maybe.**
+- `686ba4ee` practica-te-aconsejo (c17#0)
+  - ¿Venís? Capaz.
+  - → **—¿Venís? —Capaz.**
+  - Are you coming? Maybe.
+  - → **—Are you coming? —Maybe.**
+- `3ba30332` lunfardo (c17#0)
+  - ¿Salimos esta noche? ¡De una!
+  - → **—¿Salimos esta noche? —¡De una!**
+  - Should we go out tonight? Sure!
+  - → **—Should we go out tonight? —Sure!**
+- `3e7b0802` lunfardo (c17#0)
+  - ¿Un mate? ¡De una!
+  - → **—¿Un mate? —¡De una!**
+  - A mate? Sure!
+  - → **—A mate? —Sure!**
+- `08932b8f` lunfardo (c17#0)
+  - ¿Vamos a Mar del Plata el finde? ¡De una!
+  - → **—¿Vamos a Mar del Plata el finde? —¡De una!**
+  - Should we go to Mar del Plata this weekend? Sure!
+  - → **—Should we go to Mar del Plata this weekend? —Sure!**
+- `fa6b8b04` lunfardo (c17#0)
+  - ¿Salimos esta noche? No, tengo fiaca.
+  - → **—¿Salimos esta noche? —No, tengo fiaca.**
+  - Should we go out tonight? No, I feel lazy.
+  - → **—Should we go out tonight? —No, I feel lazy.**
+- `f79bc021` lunfardo (c17#0)
+  - ¿Me bancás? Obvio, te banco.
+  - → **—¿Me bancás? —Obvio, te banco.**
+  - Will you support me? Of course, I'm here for you.
+  - → **—Will you support me? —Of course, I'm here for you.**
+- `d84f3ff1` yo-en-tu-lugar (c18#7)
+  - Juli dijo que hablaría con el dueño.
+  - → **Yo hablaría con el dueño antes de pagar.**
+  - Juli said she'd talk to the landlord.
+  - → **I'd talk to the landlord before paying.**
+- `4edfc49c` yo-en-tu-lugar (c18#8)
+  - ¿Fede volvería a la facu a esta altura?
+  - → **Yo volvería a la facu, nunca es tarde.**
+  - Would Fede go back to college at this point?
+  - → **I'd go back to college, it's never too late.**
+- `c22c3ade` yo-en-tu-lugar (c18#9)
+  - Sin este laburo, me quedaría sin plata.
+  - → **Me quedaría una semana más en Mendoza.**
+  - Without this job, I'd have no money.
+  - → **I'd stay one more week in Mendoza.**
+- `0bada229` yo-que-vos (c18#10)
+  - ¿Irías a la playa mañana?
+  - → **¿Irías a la playa con esta lluvia?**
+  - Would you go to the beach tomorrow?
+  - → **Would you go to the beach in this rain?**
+- `f69bf8c6` yo-que-vos (c18#11)
+  - Yo no compraría nada.
+  - → **Con esos precios, yo no compraría nada.**
+  - I wouldn't buy anything.
+  - → **At those prices, I wouldn't buy anything.**
+- `c3863c80` yo-que-vos (c18#11)
+  - Yo no iría.
+  - → **Con este frío, yo no iría.**
+  - I wouldn't go.
+  - → **In this cold, I wouldn't go.**
+- `a5a9262c` yo-que-vos (c18#11)
+  - Yo no esperaría.
+  - → **Ya es tarde, yo no esperaría más.**
+  - I wouldn't wait.
+  - → **It's already late, I wouldn't wait any longer.**
+- `52d95064` me-gustaria (c18#17)
+  - Me gustarían dos entradas.
+  - → **Me gustarían más días de vacaciones.**
+  - I'd like two tickets.
+  - → **I'd like more vacation days.**
+- `a8601a48` me-gustaria (c18#20)
+  - Esas zapatillas me encantarían, pero cuestan un montón.
+  - → **Me encantarían unas zapatillas así, pero cuestan un montón.**
+  - I would love those sneakers, but they cost a lot.
+  - → **I'd love some sneakers like those, but they cost a lot.**
+- `92079478` me-gustaria (c18#21)
+  - ¿No te encantarían unas medialunas ahora?
+  - → **A los chicos les encantarían unos días en la playa.**
+  - Wouldn't you love some medialunas right now?
+  - → **The kids would love a few days at the beach.**
+- `7df13d12` preferiria (c18#24)
+  - Con gusto te muestro el barrio.
+  - → **Con gusto te muestro el depto.**
+  - I'd be happy to show you around the neighborhood.
+  - → **I'd be happy to show you the apartment.**
+- `9e238f28` preferiria (c18#24)
+  - Con gusto voy con vos.
+  - → **—¿Podríamos cambiar de mesa? —Sí, con gusto.**
+  - I'd be happy to go with you.
+  - → **—Could we change tables? —Yes, with pleasure.**
+- `17713e43` como-no-dona-rosa (c18#30)
+  - Don Nico es jubilado y juega al fútbol con su nieto.
+  - → **Don José es jubilado y juega al fútbol con su nieto.**
+  - Don Nico is retired and plays soccer with his grandson.
+  - → **Don José is retired and plays soccer with his grandson.**
+- `6ea62cfd` como-no-dona-rosa (c18#30)
+  - Don Santi atiende el almacén de la esquina.
+  - → **Don Carlos atiende el almacén de la esquina.**
+  - Don Santi runs the corner store.
+  - → **Don Carlos runs the corner store.**
+- `4fd37520` como-no-dona-rosa (c18#30)
+  - Doña Cami atiende la panadería desde hace años.
+  - → **Doña Marta atiende la panadería desde hace años.**
+  - Doña Cami has run the bakery for years.
+  - → **Doña Marta has run the bakery for years.**
+- `d0326d54` como-no-dona-rosa (c18#30, verify7)
+  - —¿Me cuidás las plantas? —Cómo no, doña Cami.
+  - → **—¿Me cuidás las plantas? —Cómo no, doña Rosa.**
+  - —Can you look after my plants? —Of course, Doña Cami.
+  - → **—Can you look after my plants? —Of course, Doña Rosa.**
+- `fa36e175` como-no-dona-rosa (c18#30)
+  - ¿Doña Cami vive sola?
+  - → **¿Doña Marta vive sola?**
+  - Does Doña Cami live alone?
+  - → **Does Doña Marta live alone?**
+- `359a7e44` como-no-dona-rosa (c18#30)
+  - Buenas tardes, doña Juli.
+  - → **Buenas tardes, doña Elena.**
+  - Good afternoon, Doña Juli.
+  - → **Good afternoon, Doña Elena.**
+- `5a405fcd` como-no-dona-rosa (c18#30)
+  - Hace años que doña Mica vive en este edificio.
+  - → **Hace años que doña Susana vive en este edificio.**
+  - Doña Mica has lived in this building for years.
+  - → **Doña Susana has lived in this building for years.**
+- `9532e835` como-no-dona-rosa (c18#33)
+  - —Perdón, no pedí permiso. —Faltaba más, querido.
+  - → **—¿Puedo pasar al baño? —Faltaba más, querido.**
+  - Sorry, I didn't ask permission. —Don't mention it, dear.
+  - → **—Can I use the bathroom? —Of course, dear.**
+- `7df6c4e9` como-no-dona-rosa (c18#36)
+  - ¿Jubilado? ¡Qué suerte!
+  - → **¿Ya estás jubilado? ¡Qué bueno!**
+  - Retired? Lucky you!
+  - → **You're already retired? That's great!**
+- `ddfaad8b` practica-si-ganara (c18#40)
+  - Dijiste que iríamos al cine.
+  - → **Con un día más de vacaciones, iríamos a Mendoza.**
+  - You said we'd go to the movies.
+  - → **With one more day of vacation, we'd go to Mendoza.**
+- `cbc595b9` practica-si-ganara (c18#41)
+  - ¿Qué hago? Yo en tu lugar, esperaría.
+  - → **—¿Qué hago? —Yo en tu lugar, esperaría.**
+  - What should I do? If I were you, I'd wait.
+  - → **—What should I do? —If I were you, I'd wait.**
+- `8aa45824` si-ganara (c18#41)
+  - ¿Y la vuelta al mundo? Si ganara la lotería, sí.
+  - → **—¿Y la vuelta al mundo? —Si ganara la lotería, sí.**
+  - And a trip around the world? If I won the lottery, yes.
+  - → **—And a trip around the world? —If I won the lottery, yes.**
+- `01bc1b2a` en-cuotas (c18#41)
+  - ¿Tres cuotas o seis? Seis, obvio.
+  - → **—¿Tres cuotas o seis? —Seis, obvio.**
+  - Three installments or six? Six, of course.
+  - → **—Three installments or six? —Six, of course.**
+- `516b4af3` en-cuotas (c18#41)
+  - ¿Cuánto gastaste? Poco, dos mil pesos.
+  - → **—¿Cuánto gastaste? —Poco, veinte mil pesos.**
+  - How much did you spend? Not much, two thousand pesos.
+  - → **—How much did you spend? —Not much, twenty thousand pesos.**
+- `820f0ad4` en-cuotas (c18#41)
+  - ¿A cuánto está el dólar? Ni idea.
+  - → **—¿A cuánto está el dólar? —Ni idea.**
+  - What's the dollar at? No idea.
+  - → **—What's the dollar at? —No idea.**
+- `9a15dae4` practica-si-ganara (c18#43)
+  - Mozo, ¿podríamos ver la carta?
+  - → **Disculpá, ¿podríamos ver la carta?**
+  - Excuse me, could we see the menu?
+- `f439438e` en-cuotas (c18#46)
+  - Con mil pesos no me alcanza.
+  - → **Con diez mil pesos no me alcanza.**
+  - A thousand pesos isn't enough.
+  - → **Ten thousand pesos isn't enough.**
+- `be16afe0` en-cuotas (c18#46)
+  - Prestame mil pesos, que no me alcanza.
+  - → **Prestame diez mil pesos, que no me alcanza.**
+  - Lend me a thousand pesos, I don't have enough.
+  - → **Lend me ten thousand pesos, I don't have enough.**
+- `cd16e3bb` usted (c18#46)
+  - ¿No tendrás cambio de mil?
+  - → **¿No tendrás cambio de diez mil?**
+  - Do you happen to have change for a thousand?
+  - → **Do you happen to have change for ten thousand?**
+- `6b488aa3` en-cuotas (c18#47)
+  - La cuota del auto es muy cara.
+  - → **La cuota del auto es muy alta.**
+  - The car installment is very expensive.
+  - → **The car installment is very high.**
+- `61016feb` dicen-que (c18#54)
+  - ¿Leíste que va a llover todo el finde?
+  - → **¿Leíste que cierran el bar de la esquina?**
+  - Did you read that it's going to rain all weekend?
+  - → **Did you read that they're closing the bar on the corner?**
+- `1902963a` dicen-que (c18#54)
+  - Leí que va a llover.
+  - → **Leí que el lunes es feriado.**
+  - I read that it's going to rain.
+  - → **I read that Monday is a holiday.**
+- `c735a5b9` dicen-que (c18#54)
+  - En la tele dicen que va a llover.
+  - → **En la tele dicen que mañana va a hacer calor.**
+  - They say on TV it's going to rain.
+  - → **They say on TV it's going to be hot tomorrow.**
+- `eae59f0c` cuidate (c18#0)
+  - ¿Dormiste bien? No, me duele la cabeza.
+  - → **—¿Dormiste bien? —No, me duele la cabeza.**
+  - Did you sleep well? No, my head hurts.
+  - → **—Did you sleep well? —No, my head hurts.**
+- `0c33df47` cuidate (c18#0)
+  - ¿Dormiste bien? Sí, re bien.
+  - → **—¿Dormiste bien? —Sí, re bien.**
+  - Did you sleep well? Yes, really well.
+  - → **—Did you sleep well? —Yes, really well.**
+- `f63ff974` a-medias (c18#0)
+  - ¿Y la nafta? —Vamos a medias, obvio.
+  - → **—¿Y la nafta? —Vamos a medias, obvio.**
+  - What about the gas? —We'll split it, obviously.
+  - → **—What about the gas? —We'll split it, obviously.**
+- `8d97052e` a-medias (c18#0)
+  - ¿Cuándo cobrás? —A fin de mes.
+  - → **—¿Cuándo cobrás? —A fin de mes.**
+  - When do you get paid? —At the end of the month.
+  - → **—When do you get paid? —At the end of the month.**
+- `c6b5a1ed` practica-me-dijo (c19#6)
+  - ¿Sabés si las escuelas quedan cerca del parque?
+  - → **¿Sabés si esos bares quedan cerca del parque?**
+  - Do you know if the schools are near the park?
+  - → **Do you know if those bars are near the park?**
+- `0a80ee5a` me-pregunto (c19#7)
+  - Le pregunté a Ana si viene al asado.
+  - → **Le pregunté a Sofi si viene al asado.**
+  - I asked Ana if she's coming to the barbecue.
+  - → **I asked Sofi if she's coming to the asado.**
+- `6bb65fde` me-pregunto (c19#7)
+  - Le contesté a Ana que no puedo ir al cine.
+  - → **Le contesté a Juli que no puedo ir al cine.**
+  - I told Ana I can't go to the movies.
+  - → **I told Juli I can't go to the movies.**
+- `b84132e0` se-me-cayo (c19#7)
+  - A Ana se le cayó algo.
+  - → **A Sofi se le cayó algo.**
+  - Ana dropped something.
+  - → **Sofi dropped something.**
+- `97d746f7` me-pregunto (c19#8, verify7)
+  - Estábamos hablando de la juntada.
+  - → **Me preguntó de qué estábamos hablando.**
+  - We were talking about the get-together.
+  - → **He asked me what we were talking about.**
+- `ba2f2888` me-pregunto (c19#8)
+  - Estábamos hablando de vos.
+  - → **Le contesté que estábamos hablando de vos.**
+  - We were talking about you.
+  - → **I told him we were talking about you.**
+- `85fee7db` me-pregunto (c19#10)
+  - Me contestó que venía tarde.
+  - → **Me contestó que venía más tarde.**
+  - He answered that he was coming late.
+  - → **He told me he was coming later.**
+- `7c2fc90f` me-dijo-que (c19#11)
+  - Te cuento la charla con Lucía.
+  - → **Te cuento cómo fue la charla con Lucía.**
+  - I'll tell you about my chat with Lucía.
+  - → **I'll tell you how the chat with Lucía went.**
+- `f8d0a12d` ponele (c19#20)
+  - Si querés, te busco a las ocho.
+  - → **Si querés, te paso a buscar a las ocho.**
+  - I can pick you up at eight if you like.
+- `996ce954` ponele (c19#21)
+  - ¿Venís al asado? ¡Más vale!
+  - → **—¿Venís al asado? —¡Más vale!**
+  - Are you coming to the barbecue? Of course!
+  - → **—Are you coming to the asado? —Of course!**
+- `176fe619` se-me-cayo (c19#22)
+  - Se me rompió el celu.
+  - → **Se me rompió la compu.**
+  - My phone broke.
+  - → **My computer broke.**
+- `30069301` se-me-cayo (c19#22)
+  - A mi abuela se le cayó el celu.
+  - → **A mi abuela se le cayó el helado.**
+  - My grandmother dropped her phone.
+  - → **My grandmother dropped her ice cream.**
+- `6e1c9bcf` se-me-cayo (c19#22)
+  - ¿Se te cayó el celu en el subte?
+  - → **¿Se te cayó el paraguas en el subte?**
+  - Did you drop your phone on the subway?
+  - → **Did you drop your umbrella on the subway?**
+- `ebb508b6` se-me-cayo (c19#22)
+  - ¿Se rompió el celu?
+  - → **¿Se rompió el ascensor?**
+  - Did the phone break?
+  - → **Did the elevator break down?**
+- `27476556` se-me-cayo (c19#24)
+  - Mañana hay examen y se me pasó estudiar.
+  - → **Mañana es el cumple de Mica y se me pasó comprar el regalo.**
+  - There's an exam tomorrow and I forgot to study.
+  - → **Tomorrow is Mica's birthday and I forgot to buy the present.**
+- `44617375` para-que (c19#33, verify7)
+  - Vení al balcón para que veas la lluvia.
+  - → **Vení al balcón para que veas cómo llueve.**
+  - Come to the balcony so you can see the rain.
+  - → **Come to the balcony so you can see how hard it's raining.**
+- `c1523789` para-que-entres (c19#38)
+  - Que no te vea el gato.
+  - → **Que no te vea la vecina.**
+  - Don't let the cat see you.
+  - → **Don't let the neighbor see you.**
+- `559f90e1` para-que-entres (c19#38)
+  - Levantá la persiana sin que se escape el gato.
+  - → **Abrí la ventana sin que se escape el gato.**
+  - Pull up the blind without the cat getting out.
+  - → **Open the window without the cat getting out.**
+- `b36272ed` para-que-entres (c19#38)
+  - Ojalá encuentres la clave.
+  - → **Ojalá encuentres la llave.**
+  - I hope you find the code.
+  - → **I hope you find the key.**
+- `74ae9e0e` todo-aumenta (c19#41)
+  - El café aumenta cada mes.
+  - → **El alquiler aumenta cada tres meses.**
+  - Coffee goes up every month.
+  - → **Rent goes up every three months.**
+- `4a4899e2` todo-aumenta (c19#41)
+  - Todo aumentó.
+  - → **Esta semana aumentó la nafta.**
+  - Everything went up.
+  - → **Gas went up this week.**
+- `2cc71f13` todo-aumenta (c19#41)
+  - Mirá el precio del café.
+  - → **Mirá el precio del queso.**
+  - Look at the price of the coffee.
+  - → **Look at the price of cheese.**
+- `84004c33` todo-aumenta (c19#41)
+  - El precio subió.
+  - → **El precio subió un veinte por ciento.**
+  - The price went up.
+  - → **The price went up twenty percent.**
+- `1363d473` todo-aumenta (c19#45)
+  - ¿Cuánto fue la inflación este mes?
+  - → **¿De cuánto fue la inflación este mes?**
+  - How much was inflation this month?
+- `78aba0e9` no-me-alcanza (c19#46)
+  - ¿Te alcanza para pagar el servicio?
+  - → **¿Te alcanza para pagar el servicio de internet?**
+  - Do you have enough to pay for the service?
+  - → **Do you have enough to pay for internet service?**
+- `9d3a03ab` no-me-alcanza (c19#49)
+  - Este mes la tarifa del gas está re cara.
+  - → **Este mes la tarifa del gas está re alta.**
+  - This month the gas rate is really expensive.
+  - → **This month the gas rate is really high.**
+- `007a7cba` no-me-alcanza (c19#50)
+  - ¿Las tarifas de agua también aumentaron?
+  - → **¿Las tarifas del agua también aumentaron?**
+  - Did the water rates go up too?
+- `e2fa5e91` cada-vez-mas (c19#58)
+  - Pablo come cada vez más.
+  - → **El alquiler está cada vez más caro.**
+  - Pablo eats more and more.
+  - → **Rent is getting more and more expensive.**
+- `4c801654` practica-a-medias (c19#0)
+  - ¿Qué le pasó al auto? Choqué anoche.
+  - → **—¿Qué le pasó al auto? —Choqué anoche.**
+  - What happened to the car? I crashed last night.
+  - → **—What happened to the car? —I crashed last night.**
+- `7ac85e0a` todo-aumenta (c19#0)
+  - ¿Cuánto te cobraron? Uy, un montón.
+  - → **—¿Cuánto te cobraron? —Uy, un montón.**
+  - How much did they charge you? Oh, a lot.
+  - → **—How much did they charge you? —Oh, a lot.**
+- `be099f90` todo-aumenta (c19#0)
+  - ¿Subió? Sí, un montón.
+  - → **—¿Subió? —Sí, un montón.**
+  - Did it go up? Yes, a lot.
+  - → **—Did it go up? —Yes, a lot.**
+- `c828dc3a` todo-aumenta (c19#0)
+  - ¿Bajó? No, subió.
+  - → **—¿Bajó? —No, subió.**
+  - Did it go down? No, it went up.
+  - → **—Did it go down? —No, it went up.**
+- `908aec65` estas-cambiado (c19#0)
+  - ¿Cómo va el laburo nuevo? Cada vez mejor.
+  - → **—¿Cómo va el laburo nuevo? —Cada vez mejor.**
+  - How's the new job going? Better and better.
+  - → **—How's the new job going? —Better and better.**
+- `bfc0779d` ponele (c19#0)
+  - ¿Vas a la fiesta? Ni loco, va mi ex.
+  - → **—¿Vas a la fiesta? —Ni loco, va mi ex.**
+  - Are you going to the party? No way, my ex is going.
+  - → **—Are you going to the party? —No way, my ex is going.**
+- `a9a41b10` ponele (c19#0)
+  - ¿Dónde está Pablo? Qué sé yo.
+  - → **—¿Dónde está Pablo? —Qué sé yo.**
+  - Where's Pablo? I don't know.
+  - → **—Where's Pablo? —I don't know.**
+- `cd1e9985` ponele (c19#0)
+  - ¿Te acordás de Belén? ¡Más vale, éramos vecinos!
+  - → **—¿Te acordás de Belén? —¡Más vale, éramos vecinos!**
+  - Do you remember Belén? Of course, we were neighbors!
+  - → **—Do you remember Belén? —Of course, we were neighbors!**
+- `c396a78c` ponele (c19#0)
+  - ¿Nos juntamos el jueves? No puedo, estoy a full.
+  - → **—¿Nos juntamos el jueves? —No puedo, estoy a full.**
+  - Should we get together on Thursday? I can't, I'm really busy.
+  - → **—Should we get together on Thursday? —I can't, I'm really busy.**
+- `95eed0b8` ponele (c19#0)
+  - ¿A qué hora? Ponele a las ocho.
+  - → **—¿A qué hora? —Ponele a las ocho.**
+  - What time? Let's say eight.
+  - → **—What time? —Let's say eight.**
+- `c142708f` ponele (c19#0)
+  - ¿Cuántos invitados hay? Ponele veinte.
+  - → **—¿Cuántos invitados hay? —Ponele veinte.**
+  - How many guests are there? Say twenty.
+  - → **—How many guests are there? —Say twenty.**
+- `ed3f21a1` ponele (c19#0)
+  - ¿Te gusta el laburo nuevo? Y, ponele.
+  - → **—¿Te gusta el laburo nuevo? —Y, ponele.**
+  - Do you like the new job? Eh, kind of.
+  - → **—Do you like the new job? —Eh, kind of.**
+- `2b80ca13` se-me-quemo (c19#0)
+  - ¿Qué le pasó al celu? —Se me mojó.
+  - → **—¿Qué le pasó al celu? —Se me mojó.**
+  - What happened to your phone? —It got wet.
+  - → **—What happened to your phone? —It got wet.**
+- `2c888b7c` se-me-quemo (c19#0)
+  - ¿Por qué hay tazas en el piso? —Se me cayeron.
+  - → **—¿Por qué hay tazas en el piso? —Se me cayeron.**
+  - Why are there mugs on the floor? —I dropped them.
+  - → **—Why are there mugs on the floor? —I dropped them.**
+- `40782acd` se-me-quemo (c19#0)
+  - ¿Y las papas? —Se me quemaron, perdón.
+  - → **—¿Y las papas? —Se me quemaron, perdón.**
+  - What about the potatoes? —I burned them, sorry.
+  - → **—What about the potatoes? —I burned them, sorry.**
+- `ab30c3aa` se-me-quemo (c19#0)
+  - ¿Cómo te fue en la entrevista? —Un desastre.
+  - → **—¿Cómo te fue en la entrevista? —Un desastre.**
+  - How did the interview go? —It was a disaster.
+  - → **—How did the interview go? —It was a disaster.**
+- `ab7e5f31` ya-habia (c20#3)
+  - Juan se fue.
+  - → **Juan se fue porque ya había comido.**
+  - Juan left.
+  - → **Juan left because he'd already eaten.**
+- `b68f2d1d` ya-habia (c20#3)
+  - Cami se fue temprano.
+  - → **Cami se fue temprano y yo todavía no había llegado.**
+  - Cami left early.
+  - → **Cami left early and I hadn't arrived yet.**
+- `339ec394` ya-habia (c20#3)
+  - ¿Se fue Rocío?
+  - → **¿Se fue Rocío? Todavía no había comido.**
+  - Did Rocío leave?
+  - → **Did Rocío leave? She hadn't eaten yet.**
+- `6b6d66a5` que-susto (c20#7)
+  - Escuché un ruido y corrí.
+  - → **Escuché un ruido y corrí a la puerta.**
+  - I heard a noise and ran.
+  - → **I heard a noise and ran to the door.**
+- `dec16213` que-susto (c20#7)
+  - Me asusté y corrí.
+  - → **Me asusté y corrí hasta la parada del bondi.**
+  - I got scared and ran.
+  - → **I got scared and ran to the bus stop.**
+- `40d0f413` que-susto (c20#7)
+  - Vi al ladrón y corrí.
+  - → **Vi al ladrón y corrí para el otro lado.**
+  - I saw the thief and ran.
+  - → **I saw the thief and ran the other way.**
+- `ca2021cf` se-tapo-la-pileta (c20#8)
+  - Se trabó el ascensor.
+  - → **Se trabó la puerta del ascensor.**
+  - The elevator got stuck.
+  - → **The elevator door got stuck.**
+- `157a22d2` el-consorcio (c20#9)
+  - El plomero arregló el calefón.
+  - → **El plomero arregló la pérdida.**
+  - The plumber fixed the water heater.
+  - → **The plumber fixed the leak.**
+- `748cc4af` se-tapo-la-pileta (c20#10)
+  - La canilla de la cocina gotea, ¿llamás a la administración?
+  - → **La canilla de la cocina gotea, ¿llamás al plomero?**
+  - The kitchen faucet is dripping, can you call the management office?
+  - → **The kitchen faucet is dripping, can you call the plumber?**
+- `08de422a` practica-nunca-habia (c20#22)
+  - Otra vez se me quemó el café.
+  - → **Otra vez se me quemó la comida.**
+  - I burned the coffee again.
+  - → **I burned the food again.**
+- `71bee6e2` de-acuerdo (c20#24, verify7)
+  - ¿Venís al asado? —Depende de la hora.
+  - → **—¿Venís al asado? —Depende de la hora.**
+  - Are you coming to the barbecue? —It depends on the time.
+  - → **—Are you coming to the asado? —It depends on the time.**
+- `f0c89518` se-tapo-la-pileta (c20#26)
+  - ¿Cuánto sale cambiar un inodoro que pierde agua?
+  - → **¿Cuánto sale arreglar un inodoro que pierde agua?**
+  - How much is it to change a toilet that leaks water?
+  - → **How much is it to fix a leaking toilet?**
+- `293d32d4` se-tapo-la-pileta (c20#27)
+  - Mirá los caños antes de alquilar el depto.
+  - → **Preguntá por los caños antes de alquilar el depto.**
+  - Look at the pipes before renting the apartment.
+  - → **Ask about the pipes before renting the apartment.**
+- `8060970f` el-consorcio (c20#31)
+  - ¿Pagás las expensas en efectivo o con tarjeta?
+  - → **¿Pagás las expensas en efectivo o por transferencia?**
+  - Do you pay the building fees in cash or by card?
+  - → **Do you pay the building fees in cash or by transfer?**
+- `51bbdffa` el-consorcio (c20#31)
+  - Pago las expensas con tarjeta.
+  - → **Pago las expensas por transferencia.**
+  - I pay the building fees by card.
+  - → **I pay the building fees by transfer.**
+- `99ae3271` que-susto (c20#34, verify7)
+  - Anoche me pegué un susto.
+  - → **Anoche me pegué un susto bárbaro.**
+  - Last night I got a fright.
+  - → **Last night I got a huge fright.**
+- `cbf4609b` el-cajero (c20#36, verify7)
+  - Al pagar el asado, se me bloqueó la tarjeta.
+  - → **Al pagar la carne para el asado, se me bloqueó la tarjeta.**
+  - When I went to pay for the barbecue, my card got blocked.
+  - → **When I was paying for the meat for the asado, my card got blocked.**
+- `a3b835c3` ya-habia (c20#0)
+  - ¿Cami estaba? No, ya se había ido.
+  - → **—¿Cami estaba? —No, ya se había ido.**
+  - Was Cami there? No, she'd already left.
+  - → **—Was Cami there? —No, she'd already left.**
+- `54a04030` nunca-habia (c20#0)
+  - ¿Por qué no vinieron? Porque ya habíamos hecho planes.
+  - → **—¿Por qué no vinieron? —Porque ya habíamos hecho planes.**
+  - Why didn't you come? Because we'd already made plans.
+  - → **—Why didn't you come? —Because we'd already made plans.**
+- `b118596a` practica-nunca-habia (c20#0)
+  - ¿Qué pasó? Se me cayeron los platos.
+  - → **—¿Qué pasó? —Se me cayeron los platos.**
+  - What happened? I dropped the plates.
+  - → **—What happened? —I dropped the plates.**
+- `36351dce` practica-nunca-habia (c20#0)
+  - ¿Y la pizza? Se me quemó.
+  - → **—¿Y la pizza? —Se me quemó.**
+  - What about the pizza? I burned it.
+  - → **—What about the pizza? —I burned it.**
+- `ec577631` practica-nunca-habia (c20#0)
+  - ¿Hay azúcar? No, se nos acabó.
+  - → **—¿Hay azúcar? —No, se nos acabó.**
+  - Is there any sugar? No, we ran out.
+  - → **—Is there any sugar? —No, we ran out.**
+- `6fcbec70` tenes-razon (c20#0, verify8)
+  - ¿Es caro? Al contrario, es baratísimo.
+  - → **—¿Es caro? —Al contrario, es baratísimo.**
+  - Is it expensive? On the contrary, it's super cheap.
+  - → **—Is it expensive? —On the contrary, it's super cheap.**
+- `69b4ba50` me-dan-asco (c21#1)
+  - Me asusté y salté.
+  - → **Me asusté y salté para atrás.**
+  - I got scared and jumped.
+  - → **I got scared and jumped back.**
+- `68eff3bd` me-dan-asco (c21#1)
+  - —¿Te asustaste? —Sí, hasta salté.
+  - → **—¿Te asustaste? —Sí, salté de la silla.**
+  - Did you get scared? —Yeah, I even jumped.
+  - → **—Did you get scared? —Yeah, I jumped out of my chair.**
+- `75ecaa1b` me-dan-asco (c21#4)
+  - ¡Cuidado, que se vuela la gorra!
+  - → **¡Cuidado, que se te vuela la gorra!**
+  - Careful, the cap is blowing away!
+  - → **Careful, your cap is going to blow away!**
+- `b74c29e8` costumbres (c21#9)
+  - Para mi novio inglés es raro saludar con un beso.
+  - → **Para un extranjero es raro saludar con un beso.**
+  - For my English boyfriend, greeting people with a kiss is weird.
+  - → **For a foreigner, greeting people with a kiss is weird.**
+- `b1bd26c8` se-aplaude-al-asador (c21#17)
+  - Es de maleducado no ayudar a lavar.
+  - → **Es de maleducado no ayudar a lavar los platos.**
+  - It's rude not to help with the dishes.
+  - → **It's rude not to help wash the dishes.**
+- `80b4c0eb` se-aplaude-al-asador (c21#18)
+  - Fui sin nada al asado, ¿soy una maleducada?
+  - → **Fui al asado sin llevar nada, ¿soy una maleducada?**
+  - I went to the asado with nothing, am I rude?
+  - → **I went to the asado without bringing anything, am I rude?**
+- `1aa96d53` acabo-de (c21#22)
+  - ¿Acabás de llegar?
+  - → **Acabás de llegar, ¿ya te vas?**
+  - Did you just arrive?
+  - → **You just got here, are you leaving already?**
+- `3e38fd07` acabo-de (c21#22)
+  - ¿Acabás de terminar la tarea?
+  - → **Acabás de terminar la tarea, descansá un rato.**
+  - Did you just finish the homework?
+  - → **You just finished the homework, rest for a bit.**
+- `9f368292` acabo-de (c21#23)
+  - ¿Tu novio acaba de conocer a tus viejos?
+  - → **Mi novio acaba de conocer a mis viejos.**
+  - Did your boyfriend just meet your parents?
+  - → **My boyfriend just met my parents.**
+- `ca12bc45` acabo-de (c21#25)
+  - No, suelo laburar desde casa.
+  - → **—¿Vas a la oficina? —No, suelo laburar desde casa.**
+  - No, I usually work from home.
+  - → **—Do you go to the office? —No, I usually work from home.**
+- `9671f4ea` acabo-de (c21#26)
+  - En invierno suelo tomar un café con leche.
+  - → **En invierno suelo tomar café con leche.**
+  - In winter I usually have a coffee with milk.
+  - → **In winter I usually have coffee with milk.**
+- `51b04a28` acabo-de (c21#27)
+  - Che, volví a cocinar ñoquis para mis viejos.
+  - → **Volví a cocinar ñoquis para mis viejos.**
+  - Hey, I cooked gnocchi for my parents again.
+  - → **I cooked gnocchi for my parents again.**
+- `06a10c76` no-sabes-lo-que-me-contaron (c21#39)
+  - Hacía meses que la engañaba.
+  - → **La engañaba y ella no sabía nada.**
+  - He'd been cheating on her for months.
+  - → **He was cheating on her and she didn't know anything.**
+- `9824bc95` no-sabes-lo-que-me-contaron (c21#41)
+  - Mirá vos, qué lástima.
+  - → **Mirá vos, no sabía.**
+  - Oh, what a shame.
+  - → **Wow, I didn't know.**
+- `59bded5e` queria-que-vinieras (c21#43)
+  - Mamá quería que hiciera la cena.
+  - → **Sofi quería que hiciera la cena.**
+  - Mom wanted me to make dinner.
+  - → **Sofi wanted me to make dinner.**
+- `106f671d` queria-que-vinieras (c21#43)
+  - Mamá quería que le avisaras.
+  - → **Nico quería que le avisaras.**
+  - Mom wanted you to let her know.
+  - → **Nico wanted you to let him know.**
+- `203699ef` queria-que-vinieras (c21#43)
+  - Mamá quería que viniera temprano.
+  - → **Nadie quería que viniera.**
+  - Mom wanted me to come early.
+  - → **Nobody wanted me to come.**
+- `8573000a` queria-que-vinieras (c21#43)
+  - Mamá quería que vinieras hoy.
+  - → **Mi abuela quería que vinieras hoy.**
+  - Mom wanted you to come today.
+  - → **My grandma wanted you to come today.**
+- `7f0a089e` queria-que-vinieras (c21#43)
+  - Mamá quería que hicieras las compras.
+  - → **Papá quería que hicieras las compras.**
+  - Mom wanted you to do the shopping.
+  - → **Dad wanted you to do the shopping.**
+- `79b7d41f` queria-que-vinieras (c21#43)
+  - Te pedí que hicieras la tarea.
+  - → **Te pedí que hicieras la cama.**
+  - I asked you to do the homework.
+  - → **I asked you to make the bed.**
+- `24f8396b` mis-viejos-querian (c21#47)
+  - No es estricta, es seria.
+  - → **Mi jefa no es estricta, es re tranqui.**
+  - She's not strict, she's serious.
+  - → **My boss isn't strict, she's really relaxed.**
+- `9103e970` mis-viejos-querian (c21#48)
+  - Lucía no quería que su novio volviera.
+  - → **Lucía no quería que su ex volviera.**
+  - Lucía didn't want her boyfriend to come back.
+  - → **Lucía didn't want her ex to come back.**
+- `4af45cbc` aunque-llueva (c21#50)
+  - Aunque llueva, la reunión se hace de todos modos.
+  - → **Aunque llueva, el asado se hace de todos modos.**
+  - Even if it rains, the meeting is happening anyway.
+  - → **Even if it rains, the asado is happening anyway.**
+- `5124fc8d` aunque-no-tenga-ganas (c21#56)
+  - Llovía; así y todo, salí.
+  - → **Llovía y así y todo salí.**
+  - It was raining; even so, I went out.
+  - → **It was raining and even so I went out.**
+- `899b8ce7` aunque-no-tenga-ganas (c21#56)
+  - Estaba enfermo; así y todo, vino.
+  - → **Estaba enfermo y así y todo vino.**
+  - He was sick; even so, he came.
+  - → **He was sick and even so he came.**
+- `52fce698` aunque-no-tenga-ganas (c21#56)
+  - El bondi tardó una hora; así y todo, llegué a tiempo.
+  - → **El bondi tardó una hora y así y todo llegué a tiempo.**
+  - The bus took an hour; even so, I got there on time.
+  - → **The bus took an hour and even so I got there on time.**
+- `afaa7572` aunque-no-tenga-ganas (c21#56)
+  - Hacía mucho frío; así y todo, fuimos a la playa.
+  - → **Hacía mucho frío y así y todo fuimos a la playa.**
+  - It was really cold; even so, we went to the beach.
+  - → **It was really cold and even so we went to the beach.**
+- `f0ca3374` aunque-no-tenga-ganas (c21#56)
+  - Mi hermano es re pesado; así y todo, lo quiero.
+  - → **Mi hermano es re pesado y así y todo lo quiero.**
+  - My brother is really annoying; even so, I love him.
+  - → **My brother is really annoying and even so I love him.**
+- `9a1ab1c3` aunque-no-tenga-ganas (c21#57)
+  - Por más que me dé calor, termino la clase.
+  - → **Por más que me dé vergüenza, voy a hablar en castellano.**
+  - No matter how hot I get, I finish the class.
+  - → **No matter how embarrassed I get, I'm going to speak Spanish.**
+- `ac24f366` aunque-no-tenga-ganas (c21#58)
+  - Entreno igual, aunque sea para no engordar en vacaciones.
+  - → **En vacaciones es difícil no engordar.**
+  - I work out anyway, even if it's just so I don't put on weight on vacation.
+  - → **On vacation it's hard not to put on weight.**
+- `04ecd964` me-dan-asco (c21#0)
+  - ¿Qué te picó? —Ni idea, pero me duele.
+  - → **—¿Qué te picó? —Ni idea, pero me duele.**
+  - What bit you? —No idea, but it hurts.
+  - → **—What bit you? —No idea, but it hurts.**
+- `1c45ee2f` me-dan-asco (c21#0)
+  - ¿Eso es una araña? —No, un mosquito.
+  - → **—¿Eso es una araña? —No, un mosquito.**
+  - Is that a spider? —No, a mosquito.
+  - → **—Is that a spider? —No, a mosquito.**
+- `0806715f` costumbres (c21#0, verify8)
+  - ¿Es normal saludar con un beso? —Sí, acá sí.
+  - → **—¿Es normal saludar con un beso? —Sí, acá sí.**
+  - Is it normal to greet people with a kiss? —Yeah, here it is.
+  - → **—Is it normal to greet people with a kiss? —Yeah, here it is.**
+- `7b88c4c9` costumbres (c21#0)
+  - ¿En serio se cena a las once? —Sí, es normal.
+  - → **—¿En serio se cena a las once? —Sí, es normal.**
+  - Do people really have dinner at eleven? —Yeah, it's normal.
+  - → **—Do people really have dinner at eleven? —Yeah, it's normal.**
+- `874be759` costumbres (c21#0)
+  - ¿Es costumbre traer algo? —Sí, vino o postre.
+  - → **—¿Es costumbre traer algo? —Sí, vino o postre.**
+  - Is it customary to bring something? —Yeah, wine or dessert.
+  - → **—Is it customary to bring something? —Yeah, wine or dessert.**
+- `044b3e04` se-aplaude-al-asador (c21#0)
+  - ¿Se brinda con agua? —No, trae mala suerte.
+  - → **—¿Se brinda con agua? —No, trae mala suerte.**
+  - Can you toast with water? —No, it's bad luck.
+  - → **—Can you toast with water? —No, it's bad luck.**
+- `9e7b36b4` se-aplaude-al-asador (c21#0)
+  - En la cancha, ¿se aplaude al árbitro? —Nunca.
+  - → **—En la cancha, ¿se aplaude al árbitro? —Nunca.**
+  - At the stadium, do people clap for the ref? —Never.
+  - → **—At the stadium, do people clap for the ref? —Never.**
+- `9f60f799` acabo-de (c21#0)
+  - ¿Y Santi? Acaba de salir.
+  - → **—¿Y Santi? —Acaba de salir.**
+  - And Santi? He just left.
+  - → **—And Santi? —He just left.**
+- `2c52bb50` acabo-de (c21#0)
+  - ¿Adónde van los sábados? Solemos ir al cine.
+  - → **—¿Adónde van los sábados? —Solemos ir al cine.**
+  - Where do you guys go on Saturdays? We usually go to the movies.
+  - → **—Where do you guys go on Saturdays? —We usually go to the movies.**
+- `e310a269` acabo-de (c21#0)
+  - ¿Solés manejar al centro? No, voy en subte.
+  - → **—¿Solés manejar al centro? —No, voy en subte.**
+  - Do you usually drive downtown? No, I go by subway.
+  - → **—Do you usually drive downtown? —No, I go by subway.**
+- `9929d2f0` acabo-de (c21#0)
+  - ¿Recién llegaste? —Sí, acabo de entrar.
+  - → **—¿Recién llegaste? —Sí, acabo de entrar.**
+  - Did you just arrive? —Yes, I just came in.
+  - → **—Did you just arrive? —Yes, I just came in.**
+- `d5b95b43` acabo-de (c21#0)
+  - ¿Ya comiste? Sí, acabo de comer una empanada.
+  - → **—¿Ya comiste? —Sí, acabo de comer una empanada.**
+  - Did you already eat? Yes, I just ate an empanada.
+  - → **—Did you already eat? —Yes, I just ate an empanada.**
+- `b47374ed` acabo-de (c21#0)
+  - ¿Qué hacés los sábados? Suelo jugar al fútbol.
+  - → **—¿Qué hacés los sábados? —Suelo jugar al fútbol.**
+  - What do you do on Saturdays? I usually play soccer.
+  - → **—What do you do on Saturdays? —I usually play soccer.**
+- `b74b5559` deje-de-fumar (c21#0)
+  - ¿Salís mucho? De vez en cuando.
+  - → **—¿Salís mucho? —De vez en cuando.**
+  - Do you go out a lot? Every now and then.
+  - → **—Do you go out a lot? —Every now and then.**
+- `c4a90b6d` deje-de-fumar (c21#0)
+  - ¿Tomás mate? Casi nunca.
+  - → **—¿Tomás mate? —Casi nunca.**
+  - Do you drink mate? Hardly ever.
+  - → **—Do you drink mate? —Hardly ever.**
+- `bedd9cbd` practica-un-aplauso (c21#0, verify8)
+  - ¿Y la gaseosa? —La trae Juli.
+  - → **—¿Y la gaseosa? —La trae Juli.**
+  - What about the soda? —Juli's bringing it.
+  - → **—What about the soda? —Juli's bringing it.**
+- `13705628` no-sabes-lo-que-me-contaron (c21#0)
+  - ¿Por qué cortaron? —Le metió los cuernos.
+  - → **—¿Por qué cortaron? —Le metió los cuernos.**
+  - Why did they break up? —She cheated on him.
+  - → **—Why did they break up? —She cheated on him.**
+- `0389d589` llevo-un-ano-aprendiendo (c22#3)
+  - Llevo seis meses acá y sigo mejorando.
+  - → **Hace seis meses que estoy acá y sigo mejorando.**
+  - I've been here six months and I keep getting better.
+- `eb18aac2` llevo-un-ano-aprendiendo (c22#3)
+  - Llevo una hora tratando de llamar a Cami.
+  - → **Hace una hora que estoy tratando de llamar a Cami.**
+  - I've been trying to call Cami for an hour.
+- `71b9d1d5` llevo-un-ano-aprendiendo (c22#3)
+  - Llevo meses practicando y todavía me cuesta.
+  - → **Hace meses que estoy practicando y todavía me cuesta.**
+  - I've been practicing for months and it's still hard for me.
+- `a5cef09c` llevo-un-ano-aprendiendo (c22#8)
+  - Estoy buscando laburo.
+  - → **Hace meses que estoy buscando laburo.**
+  - I'm looking for work.
+  - → **I've been looking for work for months.**
+- `e1f426ae` llevo-un-ano-aprendiendo (c22#8)
+  - Estoy practicando castellano con Cami.
+  - → **Sigo practicando castellano con Cami.**
+  - I'm practicing Spanish with Cami.
+  - → **I'm still practicing Spanish with Cami.**
+- `bf106e3a` llevo-un-ano-aprendiendo (c22#8)
+  - Pablo está aprendiendo a manejar.
+  - → **Hace un mes que Pablo está aprendiendo a manejar.**
+  - Pablo is learning to drive.
+  - → **Pablo has been learning to drive for a month.**
+- `e6b18d24` practica-aunque-sea (c22#9)
+  - ¿Cuánto tiempo llevás practicando con esa profe?
+  - → **¿Hace cuánto que estás practicando con esa profe?**
+  - How long have you been practicing with that teacher?
+- `ad3fe8de` practica-aunque-sea (c22#9)
+  - Llevo dos años acá; sin embargo, me cuesta el castellano.
+  - → **Hace dos años que estoy acá; sin embargo, me cuesta el castellano.**
+  - I've been here two years; however, Spanish is hard for me.
+- `f95098fa` como-si-nada (c22#20)
+  - Mi gato se hace el dormido, como si nada.
+  - → **Mi gato se come mi comida y después se hace el dormido.**
+  - My cat pretends to be asleep, like nothing's going on.
+  - → **My cat eats my food and then pretends to be asleep.**
+- `5439bab7` no-te-hagas-el-gil (c22#30)
+  - ¿Lo viste? Sí, pero me hice el gil.
+  - → **—¿Lo viste? —Sí, pero me hice el gil.**
+  - Did you see him? Yeah, but I pretended I didn't.
+  - → **—Did you see him? —Yeah, but I pretended I didn't.**
+- `07f44278` el-de-la-vidriera (c22#30)
+  - ¿La de la izquierda o la roja? La que prefieras.
+  - → **—¿La de la izquierda o la roja? —La que prefieras.**
+  - The one on the left or the red one? Whichever you prefer.
+  - → **—The one on the left or the red one? —Whichever you prefer.**
+- `cc7912b5` practica-a-la-mesa (c22#30)
+  - ¿Cuál querés? El de chocolate.
+  - → **—¿Cuál querés? —El de chocolate.**
+  - Which one do you want? The chocolate one.
+  - → **—Which one do you want? —The chocolate one.**
+- `e2b0fc74` por-un-lado (c22#30)
+  - ¿Estás cansado? En realidad, no.
+  - → **—¿Estás cansado? —En realidad, no.**
+  - Are you tired? Actually, no.
+  - → **—Are you tired? —Actually, no.**
+- `1ab809fe` el-de-la-vidriera (c22#30)
+  - ¿Efectivo o tarjeta? Como quieras.
+  - → **—¿Efectivo o tarjeta? —Como quieras.**
+  - Cash or card? Whatever you like.
+  - → **—Cash or card? —Whatever you like.**
+- `32346874` el-de-la-vidriera (c22#30)
+  - ¿El rojo o el de la vidriera? Como quieras.
+  - → **—¿El rojo o el de la vidriera? —Como quieras.**
+  - The red one or the one in the window? Whatever you want.
+  - → **—The red one or the one in the window? —Whatever you like.**
+- `8cf5cdf5` el-que-quieras (c22#35)
+  - La jefa es la que llega temprano.
+  - → **La que llega primero siempre es la jefa.**
+  - The boss is the one who arrives early.
+  - → **The one who arrives first is always the boss.**
+- `711d8d19` el-de-la-vidriera (c22#38)
+  - Probate el talle más chico.
+  - → **Probate un talle más chico.**
+  - Try the smaller size.
+  - → **Try one size smaller.**
+- `fa173c54` el-de-la-vidriera (c22#39)
+  - Elijan el talle y se lo traigo.
+  - → **Elijan el color y se lo traigo.**
+  - Choose the size and I'll bring it to you.
+  - → **Choose the color and I'll bring it to you.**
+- `a15cac49` el-de-la-vidriera (c22#40)
+  - Lo podés pagar en cuotas, como quieras.
+  - → **Lo podés pagar en efectivo o en cuotas, como quieras.**
+  - You can pay for it in installments, whatever you like.
+  - → **You can pay for it in cash or in installments, however you like.**
+- `ab5bb0de` practica-a-la-mesa (c22#43)
+  - Habla como si supiera todo.
+  - → **Habla de fútbol como si supiera un montón.**
+  - He talks like he knows everything.
+  - → **He talks about soccer as if he knew a lot.**
+- `dbf511f7` practica-a-la-mesa (c22#43)
+  - ¿Dónde está el probador?
+  - → **¿Hay otro probador?**
+  - Where's the fitting room?
+  - → **Is there another fitting room?**
+- `45a80b2f` si-hubieramos-salido (c22#51)
+  - Si hubiéramos tomado el tren, no hubiéramos perdido el vuelo.
+  - → **Si hubiéramos tomado un taxi, no hubiéramos perdido el vuelo.**
+  - If we had taken the train, we wouldn't have missed the flight.
+  - → **If we had taken a taxi, we wouldn't have missed the flight.**
+- `a270f241` por-un-lado (c22#55)
+  - ¿Opinás que es caro?
+  - → **¿Qué opinás, es caro?**
+  - Do you think it's expensive?
+  - → **What do you think, is it expensive?**
+- `3652469b` por-un-lado (c22#57, verify8)
+  - De hecho, ya fui.
+  - → **—¿Vas a ir? —De hecho, ya fui.**
+  - In fact, I already went.
+  - → **—Are you going to go? —In fact, I already went.**
+- `56fee411` por-un-lado (c22#57)
+  - De hecho, laburo desde casa.
+  - → **No voy a la oficina; de hecho, laburo desde casa.**
+  - In fact, I work from home.
+  - → **I don't go to the office; in fact, I work from home.**
+- `f98e9521` por-un-lado (c22#57)
+  - Por otro lado, hay mucho ruido.
+  - → **Es lindo; por otro lado, hay mucho ruido.**
+  - On the other hand, there's a lot of noise.
+  - → **It's nice; on the other hand, there's a lot of noise.**
+- `626b4a31` por-un-lado (c22#57)
+  - Por otro lado, me parece chico.
+  - → **Está cerca del laburo; por otro lado, me parece chico.**
+  - On the other hand, it seems small to me.
+  - → **It's close to work; on the other hand, I think it's small.**
+- `d3251cfd` practica-migraciones (c22#65)
+  - Juan tardó una hora, pero el trámite no demoró nada.
+  - → **Juan tardó una hora en llegar, pero el trámite no demoró nada.**
+  - Juan took an hour, but the paperwork took no time at all.
+  - → **Juan took an hour to get there, but the paperwork took no time at all.**
+- `8cc92684` practica-migraciones (c22#68)
+  - Pablo labura por lo menos diez horas por día.
+  - → **Fede labura por lo menos diez horas por día.**
+  - Pablo works at least ten hours a day.
+  - → **Fede works at least ten hours a day.**
+- `51b94a05` practica-migraciones (c22#68)
+  - Pablo llegó tarde y además no trajo nada.
+  - → **Nico llegó tarde y además no trajo nada.**
+  - Pablo showed up late, and on top of that he didn't bring anything.
+  - → **Nico showed up late, and on top of that he didn't bring anything.**
+- `248d54aa` practica-migraciones (c22#68)
+  - El registro de Pablo está vencido.
+  - → **El registro de Martín está vencido.**
+  - Pablo's driver's license is expired.
+  - → **Martín's driver's license is expired.**
+- `68d55bb4` te-doy-la-razon (c23#5)
+  - Mica está re segura.
+  - → **Mica está re segura de lo que dice.**
+  - Mica is really sure.
+  - → **Mica is really sure of what she's saying.**
+- `0f9c911d` te-doy-la-razon (c23#5, verify8)
+  - Mica nunca está segura.
+  - → **Lucía nunca está segura de nada.**
+  - Mica is never sure.
+  - → **Lucía is never sure of anything.**
+- `2bebf66b` un-depto-que-tenga (c23#9)
+  - Busco una inmobiliaria que acepte efectivo.
+  - → **Busco un dueño que acepte un contrato en pesos.**
+  - I'm looking for a real estate agency that accepts cash.
+  - → **I'm looking for a landlord who accepts a lease in pesos.**
+- `b97fdc0f` conoces-a-alguien-que (c23#12)
+  - Cuando cocine mi suegra, te invito.
+  - → **Busco a alguien que cocine sin sal para mi viejo.**
+  - When my mother-in-law cooks, I'll invite you.
+  - → **I'm looking for someone who cooks without salt for my dad.**
+- `1ac77197` conoces-a-alguien-que (c23#13)
+  - Busco un vecino que comparta el wifi.
+  - → **Busco a alguien que no fume y que comparta los gastos.**
+  - I'm looking for a neighbor to share the wifi with.
+  - → **I'm looking for someone who doesn't smoke and shares the costs.**
+- `e5834e24` me-pone-nervioso-que (c23#20)
+  - ¿Te contestó? No, me clavó el visto.
+  - → **—¿Te contestó? —No, me clavó el visto.**
+  - Did she answer you? No, she read my message and didn't answer.
+  - → **—Did she answer you? —No, she read my message and didn't answer.**
+- `ddc7ba2d` deberias (c23#20)
+  - ¿Podés cuidar al perro? Sí, yo lo cuido.
+  - → **—¿Podés cuidar al perro? —Sí, yo lo cuido.**
+  - Can you look after the dog? Yes, I'll look after him.
+  - → **—Can you look after the dog? —Yes, I'll look after him.**
+- `677aa100` practica-alguien-que-sepa (c23#20)
+  - ¿Pizza o empanadas? Me da igual.
+  - → **—¿Pizza o empanadas? —Me da igual.**
+  - Pizza or empanadas? I don't mind.
+  - → **—Pizza or empanadas? —I don't mind.**
+- `f7e1418f` deberias (c23#24)
+  - ¿Debería llevar al perro? No, yo lo cuido.
+  - → **—¿Llevo al perro? —No, yo lo cuido.**
+  - Should I take the dog? No, I'll look after him.
+  - → **—Should I take the dog? —No, I'll look after him.**
+- `027c864f` practica-alguien-que-sepa (c23#34)
+  - Le dejé las llaves a Ana porque es de confianza.
+  - → **Le dejé las llaves a Sofi porque es de confianza.**
+  - I left the keys with Ana because I trust her.
+  - → **I left the keys with Sofi because I trust her.**
+- `ffcca8e5` dijo-que-vendria (c23#36)
+  - ¡Prometiste que vendrías!
+  - → **¡Prometiste que ibas a venir!**
+  - You promised you'd come!
+- `00ac3f96` dijo-que-vendria (c23#36)
+  - Me prometiste que vendrías y al final no viniste.
+  - → **Me prometiste que ibas a venir y al final no viniste.**
+  - You promised me you'd come, and in the end you didn't.
+- `51fd8883` dijo-que-vendria (c23#36)
+  - Me prometió que vendría, pero al final no vino.
+  - → **Me prometió que iba a venir, pero al final no vino.**
+  - She promised me she'd come, but in the end she didn't.
+- `ebdc4bde` dijo-que-vendria (c23#36)
+  - Santi prometió que llamaría antes de las ocho.
+  - → **Santi prometió que iba a llamar antes de las ocho.**
+  - Santi promised he'd call before eight.
+- `904c1cd5` dijo-que-pasaria (c23#36)
+  - ¿Mentirosa yo? Te dije que pasaría, y acá estoy.
+  - → **¿Mentirosa yo? Te dije que iba a pasar, y acá estoy.**
+  - Me, a liar? I told you I'd come by, and here I am.
+- `5ed27363` dijo-que-pasaria (c23#36)
+  - Dijo que pasaría y después me puso una excusa.
+  - → **Dijo que iba a pasar y después me puso una excusa.**
+  - He said he'd come by, and then he gave me an excuse.
+- `4a90558d` dijo-que-pasaria (c23#42)
+  - Aseguró que era la última vez.
+  - → **Me aseguró que era la última vez.**
+  - He assured me it was the last time.
+- `dc02ecf4` dijo-que-pasaria (c23#42)
+  - Aseguró que arreglaría todo en un día.
+  - → **Me aseguró que arreglaría todo en un día.**
+  - He assured me he'd fix everything in a day.
+- `e48120f6` dijo-que-pasaria (c23#42)
+  - Aseguró que devolvería todo.
+  - → **Me aseguró que devolvería todo.**
+  - She assured me she'd give everything back.
+  - → **She assured me she'd give back everything.**
+- `29e27b52` dijo-que-pasaria (c23#42)
+  - El encargado aseguró que pasaría mañana.
+  - → **El encargado me aseguró que pasaría mañana.**
+  - The building caretaker assured me he'd come by tomorrow.
+- `3826c56d` a-menos-que (c23#45)
+  - Le doy plata para que pague el taxi.
+  - → **Vamos en taxi, siempre y cuando no pague yo.**
+  - I'm giving him money so he can pay for the taxi.
+  - → **Let's take a taxi, as long as I'm not paying.**
+- `99452490` a-menos-que (c23#46)
+  - ¿Venís? Sí, a menos que llueva.
+  - → **—¿Venís? —Sí, a menos que tenga que laburar.**
+  - Are you coming? Yes, unless it rains.
+  - → **—Are you coming? —Yes, unless I have to work.**
+- `976f1b99` a-menos-que (c23#46)
+  - Nos vemos mañana, a menos que llueva.
+  - → **Nos vemos mañana, a menos que Fede cancele.**
+  - See you tomorrow, unless it rains.
+  - → **See you tomorrow, unless Fede cancels.**
+- `0bff2b93` a-menos-que (c23#46)
+  - ¿Llevo paraguas? Sí, por si llueve.
+  - → **—¿Llevo una campera? —Sí, por si hace frío.**
+  - Should I bring an umbrella? Yes, in case it rains.
+  - → **—Should I bring a jacket? —Yes, in case it's cold.**
+- `84672825` con-tal-de-que (c23#47)
+  - Capaz que la necesite.
+  - → **Te presto la bici, salvo que la necesite yo.**
+  - I might need it.
+  - → **I'll lend you the bike, unless I need it.**
+- `70abd993` con-tal-de-que (c23#50)
+  - Cuidado con mis anteojos; si no, no te presto más.
+  - → **Cuidado con mis anteojos, si no, no te presto nada más.**
+  - Careful with my glasses; otherwise I won't lend you anything again.
+  - → **Careful with my glasses, otherwise I won't lend you anything else.**
+- `2b57e19f` con-tal-de-que (c23#51)
+  - Andá despacio; si no, no te presto más el auto.
+  - → **Andá despacio, si no, no te presto más el auto.**
+  - Go slow; otherwise I won't lend you the car anymore.
+  - → **Go slow, otherwise I won't lend you the car anymore.**
+- `18818886` con-tal-de-que (c23#51)
+  - Prendé la luz, si no no veo nada.
+  - → **Prendé la luz, si no, no veo nada.**
+  - Turn on the light, otherwise I can't see anything.
+- `c256926f` con-tal-de-que (c23#53)
+  - Me alcanza con que me prestes mil pesos.
+  - → **Me alcanza con que me prestes unos pesos.**
+  - It's enough if you lend me a thousand pesos.
+  - → **It's enough if you lend me a few pesos.**
+- `c389b56b` conoces-a-alguien-que (c23#0)
+  - ¿Tu hermana es ordenada? —Para nada.
+  - → **—¿Tu hermana es ordenada? —Para nada.**
+  - Is your sister tidy? —Not at all.
+  - → **—Is your sister tidy? —Not at all.**
+- `5635072c` conoces-a-alguien-que (c23#0)
+  - ¿Y el electricista? —Viene mañana.
+  - → **—¿Y el electricista? —Viene mañana.**
+  - What about the electrician? —He's coming tomorrow.
+  - → **—What about the electrician? —He's coming tomorrow.**
+- `1807d6eb` conoces-a-alguien-que (c23#0)
+  - ¿Sos ordenado? —Más o menos.
+  - → **—¿Sos ordenado? —Más o menos.**
+  - Are you tidy? —Kind of.
+  - → **—Are you tidy? —Kind of.**
+- `4e6cba41` conoces-a-alguien-que (c23#0)
+  - ¿Es de confianza? —Sí, es mi primo.
+  - → **—¿Es de confianza? —Sí, es mi primo.**
+  - Can you trust him? —Yes, he's my cousin.
+  - → **—Can you trust him? —Yes, he's my cousin.**
+- `9a4e2396` a-menos-que (c23#0)
+  - ¿Compro más hielo por si falta? Dale, por las dudas.
+  - → **—¿Compro más hielo por si falta? —Dale, por las dudas.**
+  - Should I buy more ice in case we run out? OK, just in case.
+  - → **—Should I buy more ice in case we run out? —OK, just in case.**
+- `ceee44b9` con-tal-de-que (c23#0)
+  - ¿Me prestás el auto? Sí, si me lo devolvés entero.
+  - → **—¿Me prestás el auto? —Sí, si me lo devolvés entero.**
+  - Will you lend me the car? Yes, if you bring it back in one piece.
+  - → **—Will you lend me the car? —Yes, if you bring it back in one piece.**
+- `80d18e6c` con-tal-de-que (c23#0)
+  - ¿Me prestás tu campera? Dale, pero no la rompas.
+  - → **—¿Me prestás tu campera? —Dale, pero no la rompas.**
+  - Will you lend me your jacket? Sure, but don't rip it.
+  - → **—Will you lend me your jacket? —Sure, but don't rip it.**
+- `27302856` con-tal-de-que (c23#0)
+  - ¿Y si la bici no vuelve entera? Me la pagás.
+  - → **—¿Y si la bici no vuelve entera? —Me la pagás.**
+  - And if the bike doesn't come back in one piece? You pay me for it.
+  - → **—And if the bike doesn't come back in one piece? —You pay me for it.**
+- `54f5a7ea` con-tal-de-que (c23#0)
+  - ¿Me prestás el libro? Sí, pero quiero que lo cuides.
+  - → **—¿Me prestás el libro? —Sí, pero quiero que lo cuides.**
+  - Will you lend me the book? Yes, but I want you to take care of it.
+  - → **—Will you lend me the book? —Yes, but I want you to take care of it.**
+- `3936d274` practica-se-aceptan-tarjetas (c24#2)
+  - Mi hermana vendría a vivir acá si tuviera trabajo.
+  - → **Mi hermana vendría a vivir acá si tuviera laburo.**
+  - My sister would move here if she had a job.
+- `6e0f8da9` practica-se-aceptan-tarjetas (c24#4)
+  - Cuando me devuelvas el libro, te presto otro.
+  - → **Cuando me devuelvas la plata, hablamos.**
+  - When you give me back the book, I'll lend you another one.
+  - → **When you pay me back, we'll talk.**
+- `d97e8474` voy-entendiendo (c24#8)
+  - Mati anda diciendo que tiene novia.
+  - → **Como te iba diciendo, Mati tiene novia.**
+  - Mati is going around saying he has a girlfriend.
+  - → **As I was saying, Mati has a girlfriend.**
+- `d2b7668c` voy-entendiendo (c24#8)
+  - Mi vieja anda diciendo que me extraña.
+  - → **Mi vieja siempre está diciendo que me extraña.**
+  - My mom keeps saying she misses me.
+  - → **My mom is always saying she misses me.**
+- `e9f9bdac` voy-entendiendo (c24#8)
+  - Santi anda diciendo que el depto nuevo es carísimo.
+  - → **Te estoy diciendo que el depto nuevo es carísimo.**
+  - Santi is going around saying the new apartment is super expensive.
+  - → **I'm telling you the new apartment is super expensive.**
+- `de7ab3a5` ando-buscando (c24#12)
+  - ¿Estás conociendo gente acá?
+  - → **¿Vas conociendo gente acá?**
+  - Are you meeting people here?
+  - → **Are you getting to know people here?**
+- `56c40017` ando-buscando (c24#12)
+  - Estoy conociendo la ciudad.
+  - → **De a poco voy conociendo la ciudad.**
+  - I'm getting to know the city.
+  - → **Little by little, I'm getting to know the city.**
+- `26b00e5d` ando-buscando (c24#12, verify8)
+  - El bar ya se está llenando.
+  - → **El bar se va llenando de a poco.**
+  - The bar's already filling up.
+  - → **The bar is filling up little by little.**
+- `ea4e21ab` que-novedad (c24#21)
+  - ¿No trajo hielo? Mirá vos, dale que va.
+  - → **Queda poco hielo, pero dale que va.**
+  - He didn't bring ice? Well, look at that, let's go with it.
+  - → **There's not much ice left, but it's good enough.**
+- `43e156ba` que-novedad (c24#21, verify9)
+  - Menos mal que hay pan de ayer, dale que va.
+  - → **Es pan de ayer, pero dale que va.**
+  - Thank goodness there's bread from yesterday, good enough.
+  - → **It's yesterday's bread, but it's good enough.**
+- `1e4ad9a1` ese-chabon (c24#30, verify9)
+  - Diego está zarpado hoy, ¿viste?
+  - → **Diego estuvo re zarpado con lo que dijo.**
+  - Diego is wild today, you know?
+  - → **Diego was really out of line with what he said.**
+- `9eec3a45` ese-chabon (c24#30)
+  - ¿Por qué tu hermana está tan zarpada?
+  - → **No seas zarpada, es mi abuela.**
+  - Why is your sister so wild?
+  - → **Don't be rude, she's my grandmother.**
+- `b6bb5020` caiste (c24#56)
+  - El profe se calentó conmigo.
+  - → **El profe se calentó porque llegué tarde.**
+  - The teacher got mad at me.
+  - → **The teacher got mad because I got there late.**
+- `7d642b12` me-pidio-que (c24#60)
+  - Cami aclaró que no viene.
+  - → **Cami aclaró que no la esperáramos.**
+  - Cami made it clear she's not coming.
+  - → **Cami made it clear we shouldn't wait for her.**
+- `0f932f59` me-pidio-que (c24#60)
+  - Lucía aclaró que no tiene plata.
+  - → **Lucía aclaró que no le trajera nada.**
+  - Lucía made it clear she doesn't have any money.
+  - → **Lucía made it clear I shouldn't bring her anything.**
+- `f25aa2f2` me-pidio-que (c24#61, verify9)
+  - Sentate, por favor, insisto.
+  - → **Insisto en que te lleves el paraguas.**
+  - Sit down, please, I insist.
+  - → **I insist that you take the umbrella.**
+- `c4796ac6` ando-buscando (c24#0)
+  - ¿Estás por llegar? Sí, estoy a dos cuadras.
+  - → **—¿Estás por llegar? —Sí, estoy a dos cuadras.**
+  - Are you almost here? Yes, I'm two blocks away.
+  - → **—Are you almost here? —Yes, I'm two blocks away.**
+- `5a22ad2a` practica-no-lo-aguanto (c24#0)
+  - ¿Ya salieron? No, estamos por salir.
+  - → **—¿Ya salieron? —No, estamos por salir.**
+  - Did you guys already leave? No, we're about to leave.
+  - → **—Did you guys already leave? —No, we're about to leave.**
+- `3133b5f1` que-novedad (c24#0)
+  - ¿Lo hago de nuevo? No, dale que va.
+  - → **—¿Lo hago de nuevo? —No, dale que va.**
+  - Should I do it again? Nah, it's good enough.
+  - → **—Should I do it again? —Nah, it's good enough.**
+- `219c305f` que-novedad (c24#0)
+  - ¿Juan te pagó? No, pero ya fue.
+  - → **—¿Juan te pagó? —No, pero ya fue.**
+  - Did Juan pay you back? No, but whatever.
+  - → **—Did Juan pay you back? —No, but whatever.**
+- `7d302d96` que-novedad (c24#0)
+  - ¿Pagás vos? Ni a palos.
+  - → **—¿Pagás vos? —Ni a palos.**
+  - You're paying? No way.
+  - → **—Are you paying? —No way.**
+- `be4454df` que-novedad (c24#0)
+  - ¿Salís con este calor? ¡Ni a palos!
+  - → **—¿Salís con este calor? —¡Ni a palos!**
+  - Going out in this heat? No way!
+  - → **—Are you going out in this heat? —No way!**
+- `0520d26d` ni-ahi (c24#0, verify9)
+  - ¿Es caro? Ni ahí, es barato.
+  - → **—¿Es caro? —Ni ahí, es barato.**
+  - Is it expensive? Not at all, it's cheap.
+  - → **—Is it expensive? —Not at all, it's cheap.**
+- `2c6f143d` ni-ahi (c24#0)
+  - ¿Estás cansado? Ni ahí.
+  - → **—¿Estás cansado? —Ni ahí.**
+  - Are you tired? Not at all.
+  - → **—Are you tired? —Not at all.**
+- `0a3015a9` ni-ahi (c24#0)
+  - ¿Estás nervioso por el examen? Ni ahí, estudié un montón.
+  - → **—¿Estás nervioso por el examen? —Ni ahí, estudié un montón.**
+  - Are you nervous about the exam? Not at all, I studied a lot.
+  - → **—Are you nervous about the exam? —Not at all, I studied a lot.**
+- `c4de3d41` estoy-al-horno (c24#0)
+  - ¿Qué hacés? Nada, estoy al pedo en casa.
+  - → **—¿Qué hacés? —Nada, estoy al pedo en casa.**
+  - What are you doing? Nothing, I'm at home with nothing to do.
+  - → **—What are you doing? —Nothing, I'm at home with nothing to do.**
+- `4e24e503` me-pidio-que (c24#0, verify9)
+  - ¿Qué te dijo? Que le trajera el paraguas.
+  - → **—¿Qué te dijo? —Que le trajera el paraguas.**
+  - What did he tell you? To bring him the umbrella.
+  - → **—What did he tell you? —To bring him the umbrella.**
+- `c968c61a` me-encargo-que (c24#0)
+  - ¿Qué te pidió? Que comprara leche.
+  - → **—¿Qué te pidió? —Que comprara leche.**
+  - What did she ask you to do? Buy milk.
+  - → **—What did she ask you to do? —To buy milk.**
+- `4e7ea66e` me-encargo-que (c24#0)
+  - ¿Te encargó algo? Sí, que sacara al perro.
+  - → **—¿Te encargó algo? —Sí, que sacara al perro.**
+  - Did she ask you to do anything? Yes, to take the dog out.
+  - → **—Did she ask you to do anything? —Yes, to take the dog out.**
+- `1ad603d4` practica-como-no (c25#4)
+  - Faltaba más, doña Rocío, te llevo la bolsa.
+  - → **Faltaba más, doña Marta, te llevo la bolsa.**
+  - Of course, Doña Rocío, I'll carry your bag.
+  - → **Of course, Doña Marta, I'll carry your bag.**
+- `9b9798b7` practica-como-no (c25#4)
+  - Don Mati es jubilado, pero sigue laburando.
+  - → **Don José es jubilado, pero sigue laburando.**
+  - Don Mati is retired, but he's still working.
+  - → **Don José is retired, but he's still working.**
+- `7e0b8fef` practica-como-no (c25#7)
+  - ¿Me cuidás el perro? ¡Cómo no!
+  - → **—¿Me cuidás el perro? —¡Cómo no!**
+  - Will you watch my dog? Certainly!
+  - → **—Will you watch my dog? —Of course!**
+- `16fc8d3b` practica-como-no (c25#7)
+  - ¿Me pasás la sal? Cómo no, acá tenés.
+  - → **—¿Me pasás la sal? —Cómo no, acá tenés.**
+  - Can you pass me the salt? Certainly, here you go.
+  - → **—Can you pass me the salt? —Of course, here you go.**
+- `f83e5275` practica-como-no (c25#7)
+  - ¿Me siento acá? ¡Cómo no!
+  - → **—¿Me siento acá? —¡Cómo no!**
+  - Can I sit here? Certainly!
+  - → **—Can I sit here? —Of course!**
+- `bd0a511b` practica-como-no (c25#7)
+  - ¿Te pregunto algo? Cómo no.
+  - → **—¿Te pregunto algo? —Cómo no.**
+  - Can I ask you something? Certainly.
+  - → **—Can I ask you something? —Of course.**
+- `bb81bbf7` cualquier-cosa-avisame (c25#11)
+  - Estimado Mati, te adjunto el contrato.
+  - → **Estimado Carlos, te adjunto el contrato.**
+  - Dear Mati, I'm attaching the contract.
+  - → **Dear Carlos, I'm attaching the contract.**
+- `39d2163c` cualquier-cosa-avisame (c25#11)
+  - Estimado Santi: te escribo por el puesto de vendedor.
+  - → **Estimado Raúl: te escribo por el puesto de vendedor.**
+  - Dear Santi: I'm writing to you about the salesperson position.
+  - → **Dear Raúl: I'm writing to you about the salesperson position.**
+- `6d1455a9` cualquier-cosa-avisame (c25#11)
+  - Estimado Mati, ¿nos enviás los datos antes del jueves?
+  - → **Estimado José, ¿nos enviás los datos antes del jueves?**
+  - Dear Mati, could you send us the details before Thursday?
+  - → **Dear José, could you send us the details before Thursday?**
+- `8210b6ed` cualquier-cosa-avisame (c25#11)
+  - Estimada Cami: te envié mi CV.
+  - → **Estimada Marta: te envié mi CV.**
+  - Dear Cami: I sent you my résumé.
+  - → **Dear Marta: I sent you my CV.**
+- `2f2d1753` cualquier-cosa-avisame (c25#11)
+  - Estimada Mica: ¿hay un puesto disponible en la empresa?
+  - → **Estimada Elena: ¿hay un puesto disponible en la empresa?**
+  - Dear Mica: is there a position available at the company?
+  - → **Dear Elena: is there a position available at the company?**
+- `6fcbb6b4` cualquier-cosa-avisame (c25#11)
+  - Estimada Mica: gracias por la reunión de ayer.
+  - → **Estimada Susana: gracias por la reunión de ayer.**
+  - Dear Mica: thanks for yesterday's meeting.
+  - → **Dear Susana: thanks for yesterday's meeting.**
+- `a98c3207` cualquier-cosa-avisame (c25#14)
+  - Desde ya, gracias por la respuesta y por todo.
+  - → **Desde ya, gracias por tu ayuda.**
+  - Thanks in advance for the reply, and for everything.
+  - → **Thanks in advance for your help.**
+- `742f4317` la-entrega (c25#22)
+  - El presupuesto del proyecto es de cien mil pesos.
+  - → **El presupuesto del proyecto es de diez mil dólares.**
+  - The project's budget is a hundred thousand pesos.
+  - → **The project's budget is ten thousand dollars.**
+- `60dfcf99` la-entrega (c25#24)
+  - ¿Hasta cuándo es el plazo? Hasta el viernes.
+  - → **—¿Hasta cuándo tenemos plazo? —Hasta el viernes.**
+  - When is the deadline? Friday.
+  - → **—When is our deadline? —Friday.**
+- `673d5b77` resulta-que (c25#41)
+  - Resultó mentira.
+  - → **Resultó ser mentira.**
+  - It turned out to be a lie.
+- `3ee993e8` para-colmo (c25#43)
+  - Todo iba bien y, de golpe, me despidieron.
+  - → **Todo iba bien y, de golpe, me echaron.**
+  - Everything was going fine and, all of a sudden, they let me go.
+  - → **Everything was going fine and, all of a sudden, they fired me.**
+- `72efcbb0` para-colmo (c25#43)
+  - A Juan lo despidieron y, para colmo, se enteró por mail.
+  - → **A Juan lo echaron y, para colmo, se enteró por mail.**
+  - Juan got laid off, and to top it all off, he found out by email.
+  - → **Juan got fired, and on top of that, he found out by email.**
+- `25a9f80a` para-colmo (c25#47)
+  - ¿Se enteraron de que Mati se mudó a Córdoba?
+  - → **¿Se enteraron de que Mati renunció?**
+  - Did you guys hear that Mati moved to Córdoba?
+  - → **Did you guys hear that Mati quit?**
+- `883324a3` se-la-cree (c25#49)
+  - ¿Tu hermana se la bancó? Sí, re bien.
+  - → **—¿Tu hermana se la bancó? —Sí, re bien.**
+  - Did your sister put up with it? Yes, really well.
+  - → **—Did your sister handle it? —Yes, really well.**
+- `ef22b701` practica-como-no (c25#0)
+  - ¿Puedo cargar el celular acá un rato? Cómo no.
+  - → **—¿Puedo cargar el celular acá un rato? —Cómo no.**
+  - Can I charge my phone here for a bit? Of course.
+  - → **—Can I charge my phone here for a bit? —Of course.**
+- `940cc817` practica-como-no (c25#0)
+  - ¡Gracias, Sofi! ¡Faltaba más!
+  - → **—¡Gracias, Sofi! —¡Faltaba más!**
+  - Thanks, Sofi! Don't mention it!
+  - → **—Thanks, Sofi! —Don't mention it!**
+- `874de398` practica-como-no (c25#0)
+  - ¿Me ayudás? ¡Faltaba más!
+  - → **—¿Me ayudás? —¡Faltaba más!**
+  - Will you help me? Of course!
+  - → **—Will you help me? —Of course!**
+- `876b4cc6` practica-como-no (c25#0)
+  - ¿Puedo pasar? ¡Faltaba más!
+  - → **—¿Puedo pasar? —¡Faltaba más!**
+  - Can I come in? Of course!
+  - → **—Can I come in? —Of course!**
+- `4de7357d` sobre-la-hora (c25#0)
+  - ¿Postergaron la presentación? Sí, para el lunes.
+  - → **—¿Postergaron la presentación? —Sí, para el lunes.**
+  - Did they postpone the presentation? Yes, to Monday.
+  - → **—Did they postpone the presentation? —Yes, to Monday.**
+- `af29f988` resulta-que (c25#0, verify9)
+  - ¿Tu novia se enteró? No, todavía no.
+  - → **—¿Tu novia se enteró? —No, todavía no.**
+  - Did your girlfriend find out? No, not yet.
+  - → **—Did your girlfriend find out? —No, not yet.**
+- `573ea7cf` para-colmo (c25#0)
+  - ¿Cómo te fue? —Ni te cuento.
+  - → **—¿Cómo te fue? —Ni te cuento.**
+  - How did it go? —Don't even ask.
+  - → **—How did it go? —Don't even ask.**
+- `69e74069` para-colmo (c25#0)
+  - ¿Santi no vino? —Por lo visto, no.
+  - → **—¿Santi no vino? —Por lo visto, no.**
+  - Santi didn't come? —Apparently not.
+  - → **—Santi didn't come? —Apparently not.**
+- `a3eb2f3a` se-la-cree (c25#0)
+  - ¿Tu novio se la cree? Sí, un montón.
+  - → **—¿Tu novio se la cree? —Sí, un montón.**
+  - Is your boyfriend arrogant? Yes, very.
+  - → **—Is your boyfriend arrogant? —Yes, very.**
+- `917399a7` se-la-cree (c25#0)
+  - ¿Cómo hacés con la plata? Me las arreglo.
+  - → **—¿Cómo hacés con la plata? —Me las arreglo.**
+  - How do you manage with money? I get by.
+  - → **—How do you manage with money? —I get by.**
+- `ec222e9b` me-la-jugue (c25#0)
+  - ¿Te vas solo a Bariloche? —Sí, me la juego.
+  - → **—¿Te vas solo a Bariloche? —Sí, me la juego.**
+  - Are you going to Bariloche alone? —Yes, I'm going for it.
+  - → **—Are you going to Bariloche alone? —Yes, I'm going for it.**
+- `8e1e9deb` estoy-podrido (c26#2)
+  - Belén está harta del subte.
+  - → **Belén está harta de viajar dos horas por día.**
+  - Belén is fed up with the subway.
+  - → **Belén is fed up with traveling two hours a day.**
+- `52b19eee` estoy-podrido (c26#2)
+  - Che, ¿no estás harta del frío?
+  - → **Che, ¿no estás harta de comer siempre lo mismo?**
+  - Hey, aren't you fed up with the cold?
+  - → **Hey, aren't you fed up with always eating the same thing?**
+- `4bb2c8cf` estoy-podrido (c26#2)
+  - Cami está podrida del frío.
+  - → **Cami está podrida de los precios del súper.**
+  - Cami is sick of the cold.
+  - → **Cami is sick of the prices at the supermarket.**
+- `310a4b86` estoy-podrido (c26#2)
+  - Che, estoy harto del calor.
+  - → **Che, estoy harto de los mails del laburo.**
+  - Hey, I'm fed up with the heat.
+  - → **Hey, I'm fed up with work emails.**
+- `6db7b708` estoy-podrido (c26#2)
+  - Mi vecino está harto del ruido del edificio.
+  - → **Mi vecino está harto del ascensor, que nunca anda.**
+  - My neighbor is fed up with the noise in the building.
+  - → **My neighbor is fed up with the elevator, which never works.**
+- `6d2485c5` me-pudri (c26#5)
+  - El examen me da estrés.
+  - → **Tengo mucho estrés por el examen.**
+  - The exam stresses me out.
+  - → **I'm under a lot of stress because of the exam.**
+- `301dbdba` me-pudri (c26#5)
+  - Las fiestas me dan estrés.
+  - → **Las fiestas son un estrés.**
+  - The holidays stress me out.
+  - → **The holidays are stressful.**
+- `f30de138` practica-me-pudri (c26#13)
+  - ¿Y tu abuelo? Cada vez peor.
+  - → **—¿Y el laburo? —Cada vez peor.**
+  - And your grandpa? Worse and worse.
+  - → **—And work? —Worse and worse.**
+- `f3b2b5d3` practica-me-pudri (c26#13)
+  - ¿Tu abuela empeoró?
+  - → **¿El wifi empeoró o es mi compu?**
+  - Did your grandma get worse?
+  - → **Did the wifi get worse or is it my computer?**
+- `126ce911` practica-me-pudri (c26#13, verify9)
+  - Nico empeoró y fue a la guardia.
+  - → **El tiempo empeoró y volvimos a casa.**
+  - Nico got worse and went to the ER.
+  - → **The weather got worse and we went back home.**
+- `2242b391` practica-me-pudri (c26#14)
+  - ¿Mejoró o empeoró la fiebre?
+  - → **¿El barrio mejoró o empeoró?**
+  - Did the fever get better or worse?
+  - → **Did the neighborhood get better or worse?**
+- `1172b570` como-te-decia (c26#16)
+  - ¡Qué mensaje corto! ¿Y la historia?
+  - → **El viaje es corto, son dos horas.**
+  - What a short message! And the story?
+  - → **The trip is short, it's two hours.**
+- `6d995779` como-te-decia (c26#16)
+  - Hacé un video corto con esa historia.
+  - → **Mirá este video, es corto.**
+  - Make a short video with that story.
+  - → **Watch this video, it's short.**
+- `a84788c1` como-te-decia (c26#16)
+  - Es una historia corta, te la cuento ahora.
+  - → **La reunión fue corta, por suerte.**
+  - It's a short story, I'll tell you now.
+  - → **The meeting was short, luckily.**
+- `8db26f62` como-te-decia (c26#18)
+  - El tema es que la noche fue corta y dormí poco.
+  - → **La noche fue corta: dormí tres horas.**
+  - The thing is, the night was short and I didn't sleep much.
+  - → **The night was short: I slept three hours.**
+- `1d35042f` hay-paro (c26#24)
+  - El subte más cercano no funciona por el paro.
+  - → **El hospital más cercano queda a diez cuadras.**
+  - The nearest subway isn't working because of the strike.
+  - → **The nearest hospital is ten blocks away.**
+- `9cac91fe` hay-paro (c26#24)
+  - Hay paro, vamos al bar más cercano.
+  - → **Tengo hambre, vamos al bar más cercano.**
+  - There's a strike, let's go to the nearest bar.
+  - → **I'm hungry, let's go to the nearest bar.**
+- `8025cdf1` hay-paro (c26#26)
+  - ¿Dónde es el corte? En la avenida.
+  - → **—¿Dónde es el corte? —En la avenida.**
+  - Where's the roadblock? On the avenue.
+  - → **—Where's the road closure? —On the avenue.**
+- `0b6eb1ce` hay-paro (c26#26)
+  - ¿Por qué hay corte? Por una marcha.
+  - → **—¿Por qué hay corte? —Por una marcha.**
+  - Why is there a roadblock? Because of a march.
+  - → **—Why is there a road closure? —Because of a march.**
+- `7cfd39e2` paro-docente (c26#29)
+  - ¿Ya suspendieron el paro de subte?
+  - → **¿Ya suspendieron las clases de mañana?**
+  - Did they already call off the subway strike?
+  - → **Did they already call off tomorrow's classes?**
+- `2ec8560c` paro-docente (c26#29)
+  - Suspendieron el paro, así que mañana hay clases.
+  - → **Suspendieron las clases, así que mañana los chicos se quedan en casa.**
+  - They called off the strike, so there's school tomorrow.
+  - → **They called off classes, so the kids are staying home tomorrow.**
+- `9dfe55fb` paro-docente (c26#29, verify9)
+  - Anoche suspendieron la medida de fuerza.
+  - → **Anoche suspendieron el servicio por una medida de fuerza.**
+  - Last night they called off the strike.
+  - → **Last night they suspended the service because of a strike.**
+- `123b6b86` paro-docente (c26#29)
+  - Los colectiveros suspendieron el paro, así que hay colectivo.
+  - → **Los colectiveros levantaron el paro, así que hay colectivo.**
+  - The bus drivers called off the strike, so the buses are running.
+  - → **The bus drivers ended the strike, so the buses are running.**
+- `5163085e` paro-docente (c26#29)
+  - Los docentes suspendieron el paro, ¡hay clases!
+  - → **Los docentes levantaron el paro, ¡hay clases!**
+  - The teachers called off the strike, there are classes!
+  - → **The teachers ended the strike, there are classes!**
+- `1fdda350` paro-docente (c26#29)
+  - El paro está suspendido, así que mañana laburo normal.
+  - → **El servicio de tren está suspendido, así que mañana laburo desde casa.**
+  - The strike is called off, so I'm working as usual tomorrow.
+  - → **The train service is suspended, so I'm working from home tomorrow.**
+- `8d25ae4e` practica-el-cuarto-oscuro (c26#29)
+  - ¿Suspendieron el paro? ¡Qué bueno!
+  - → **¿Suspendieron el examen? ¡Qué bueno!**
+  - They called off the strike? That's great!
+  - → **They called off the exam? That's great!**
+- `06f250a9` paro-docente (c26#31)
+  - ¿Cuándo es la medida de fuerza?
+  - → **El gremio docente anunció una medida de fuerza.**
+  - When's the strike?
+  - → **The teachers' union announced a strike.**
+- `14c3a8e7` paro-docente (c26#31)
+  - ¿Mañana también hay medida de fuerza?
+  - → **En la tele dicen que mañana sigue la medida de fuerza.**
+  - Is there a strike tomorrow too?
+  - → **On TV they say the strike continues tomorrow.**
+- `59d16331` paro-docente (c26#31)
+  - El lunes empieza la medida de fuerza.
+  - → **Leí en el diario que el lunes empieza la medida de fuerza.**
+  - The strike starts Monday.
+  - → **I read in the newspaper that the strike starts Monday.**
+- `222d0f0c` paro-docente (c26#33)
+  - Soy colectivero y mañana no laburo por el paro.
+  - → **Mi vecino es colectivero y mañana no labura por el paro.**
+  - I'm a bus driver and I'm not working tomorrow because of the strike.
+  - → **My neighbor is a bus driver and he's not working tomorrow because of the strike.**
+- `8f031d38` fue-construido (c26#35, verify9)
+  - ¿En serio fueron detenidos en la cancha?
+  - → **Dicen en la tele que fueron detenidos en la cancha.**
+  - Were they really arrested at the stadium?
+  - → **They say on TV that they were arrested at the stadium.**
+- `8d0eead0` fue-construido (c26#35)
+  - Me enteré de que fueron detenidos.
+  - → **En la radio dijeron que fueron detenidos.**
+  - I found out they were arrested.
+  - → **On the radio they said they were arrested.**
+- `5b0185d4` fue-construido (c26#35)
+  - ¿Sabés cuándo fue construido el edificio de tu oficina?
+  - → **Leí que el edificio de tu oficina fue construido hace un siglo.**
+  - Do you know when your office building was built?
+  - → **I read that your office building was built a century ago.**
+- `e377994c` fue-clausurado (c26#35)
+  - Mi prima fue elegida para jugar en la selección.
+  - → **Salió en el diario: mi prima fue elegida para jugar en la selección.**
+  - My cousin was chosen to play on the national team.
+  - → **It was in the newspaper: my cousin was chosen to play on the national team.**
+- `bf247be5` practica-el-cuarto-oscuro (c26#35)
+  - Por suerte, mis abuelos fueron rescatados del incendio.
+  - → **Dos vecinos fueron rescatados del incendio.**
+  - Luckily, my grandparents were rescued from the fire.
+  - → **Two neighbors were rescued from the fire.**
+- `fb05682c` fue-clausurado (c26#40)
+  - Los chicos fueron trasladados en micro por la obra.
+  - → **Los chicos fueron trasladados a otra escuela por la obra.**
+  - The kids were moved by bus because of the construction.
+  - → **The kids were moved to another school because of the construction.**
+- `fef0f511` fue-clausurado (c26#41)
+  - Leí en el diario que el contrato fue aprobado.
+  - → **Leí en el diario que el proyecto del subte nuevo fue aprobado.**
+  - I read in the newspaper that the contract was approved.
+  - → **I read in the newspaper that the new subway project was approved.**
+- `4926194d` fue-clausurado (c26#41)
+  - El horario nuevo del subte fue aprobado.
+  - → **Me llegó un mensaje del banco: el crédito fue aprobado.**
+  - The new subway schedule was approved.
+  - → **I got a message from the bank: the loan was approved.**
+- `b382a278` las-elecciones (c26#45)
+  - El domingo voté en blanco y me fui a casa.
+  - → **El domingo voté y me fui a comer un asado.**
+  - On Sunday I cast a blank vote and went home.
+  - → **On Sunday I voted and went to eat an asado.**
+- `821f40d0` las-elecciones (c26#47)
+  - Voté en Rosario porque mi DNI es de allá.
+  - → **Voté en Rosario porque mi DNI todavía tiene la dirección de allá.**
+  - I voted in Rosario because my ID is from there.
+  - → **I voted in Rosario because my ID still has my address there.**
+- `13705278` segun-el-diario (c26#53)
+  - Supuestamente, el dueño acepta mascotas.
+  - → **El dueño, supuestamente, acepta mascotas.**
+  - Supposedly, the landlord allows pets.
+  - → **The landlord supposedly allows pets.**
+- `28dece1d` segun-el-diario (c26#53)
+  - Supuestamente, Pablo llega hoy.
+  - → **Pablo llega hoy, supuestamente.**
+  - Supposedly, Pablo arrives today.
+  - → **Pablo arrives today, supposedly.**
+- `164ba2f2` segun-el-diario (c26#53)
+  - Supuestamente, la reunión es a las diez.
+  - → **La reunión supuestamente es a las diez, pero no hay nadie.**
+  - Supposedly, the meeting is at ten.
+  - → **The meeting is supposedly at ten, but nobody's here.**
+- `3cad4a3c` segun-el-diario (c26#54, verify9)
+  - No, todavía no confirmó nadie.
+  - → **No, todavía no lo confirmó nadie.**
+  - No, nobody has confirmed yet.
+  - → **No, nobody has confirmed it yet.**
+- `2521ee52` segun-el-diario (c26#55)
+  - El rumor es verdad.
+  - → **Al final el rumor era verdad.**
+  - The rumor is true.
+  - → **In the end the rumor was true.**
+- `6701c823` segun-el-diario (c26#55)
+  - Me enteré del rumor ayer por la tele.
+  - → **Me enteré del rumor por el grupo de WhatsApp.**
+  - I found out about the rumor on TV yesterday.
+  - → **I found out about the rumor in the WhatsApp group.**
+- `2addac41` segun-el-diario (c26#57)
+  - Nunca desmintieron nada, así que es verdad.
+  - → **Nunca lo desmintieron, así que puede ser verdad.**
+  - They never denied anything, so it's true.
+  - → **They never denied it, so it may be true.**
+- `ba7a17ad` estoy-podrido (c26#0)
+  - ¿Todavía estudiás? No, me cansé.
+  - → **—¿Todavía estudiás? —No, me cansé.**
+  - Are you still studying? No, I got tired of it.
+  - → **—Are you still studying? —No, I got tired of it.**
+- `e850a400` me-pudri (c26#0)
+  - ¿Y el gimnasio? Me harté, ya no voy.
+  - → **—¿Y el gimnasio? —Me harté, ya no voy.**
+  - What about the gym? I got fed up, I don't go anymore.
+  - → **—What about the gym? —I got fed up, I don't go anymore.**
+- `9b3f669d` me-pudri (c26#0)
+  - ¿Cómo andás? Bien, no me quejo.
+  - → **—¿Cómo andás? —Bien, no me quejo.**
+  - How are you doing? Good, can't complain.
+  - → **—How are you doing? —Good, can't complain.**
+- `5d5937c4` practica-me-pudri (c26#0)
+  - ¿Cómo andás? Bien, no me quejo.
+  - → **—¿Cómo andás? —Bien, no me quejo.**
+  - How are you doing? Good, can't complain.
+  - → **—How are you doing? —Good, can't complain.**
+- `2dbf2840` me-pudri (c26#0)
+  - ¿Por qué dejaste la facu? Me pudrí.
+  - → **—¿Por qué dejaste la facu? —Me pudrí.**
+  - Why did you drop out of college? I got fed up.
+  - → **—Why did you drop out of college? —I got fed up.**
+- `b852f410` me-pudri (c26#0)
+  - ¿Salimos esta noche? No, estoy agotada.
+  - → **—¿Salimos esta noche? —No, estoy agotada.**
+  - Should we go out tonight? No, I'm exhausted.
+  - → **—Should we go out tonight? —No, I'm exhausted.**
+- `73178410` me-pudri (c26#0)
+  - ¿Por qué estás tan agotado? Tuve mucho laburo.
+  - → **—¿Por qué estás tan agotado? —Tuve mucho laburo.**
+  - Why are you so exhausted? I had a lot of work.
+  - → **—Why are you so exhausted? —I had a lot of work.**
+- `ba316f1b` practica-me-pudri (c26#0)
+  - ¿Qué pasó? Nada, me harté.
+  - → **—¿Qué pasó? —Nada, me harté.**
+  - What happened? Nothing, I just got fed up.
+  - → **—What happened? —Nothing, I just got fed up.**
+- `753efe29` practica-me-pudri (c26#0)
+  - ¿Salís mucho? De vez en cuando.
+  - → **—¿Salís mucho? —De vez en cuando.**
+  - Do you go out a lot? Every now and then.
+  - → **—Do you go out a lot? —Every now and then.**
+- `777771fe` practica-me-pudri (c26#0)
+  - ¿Dónde está Juli? Desapareció.
+  - → **—¿Dónde está Juli? —Desapareció.**
+  - Where's Juli? She disappeared.
+  - → **—Where's Juli? —She disappeared.**
+- `3d847973` como-te-decia (c26#0)
+  - ¿Por qué no venís? El tema es que laburo.
+  - → **—¿Por qué no venís? —El tema es que laburo.**
+  - Why aren't you coming? The thing is, I'm working.
+  - → **—Why aren't you coming? —The thing is, I'm working.**
+- `913164ff` como-te-decia (c26#0, verify9)
+  - ¿Es largo? No, es una historia cortita.
+  - → **—¿Es largo? —No, es una historia cortita.**
+  - Is it long? No, it's a very short story.
+  - → **—Is it long? —No, it's a very short story.**
+- `2d0aa03f` como-te-decia (c26#0)
+  - ¿Se fue Sofi? Y bueno, que se vaya.
+  - → **—¿Se fue Sofi? —Y bueno, que se vaya.**
+  - Sofi left? Well, let her go.
+  - → **—Sofi left? —Well, let her go.**
+- `e11ccdca` hay-paro (c26#0)
+  - ¿Funciona el subte? No, hoy hay paro.
+  - → **—¿Funciona el subte? —No, hoy hay paro.**
+  - Is the subway running? No, there's a strike today.
+  - → **—Is the subway running? —No, there's a strike today.**
+- `c7546d60` fue-clausurado (c26#0)
+  - ¿La propuesta fue aprobada? Todavía no.
+  - → **—¿La propuesta fue aprobada? —Todavía no.**
+  - Was the proposal approved? Not yet.
+  - → **—Was the proposal approved? —Not yet.**
+- `78bdca97` las-elecciones (c26#0)
+  - ¿Sabés a quién votó tu papá? Ni idea.
+  - → **—¿Sabés a quién votó tu papá? —Ni idea.**
+  - Do you know who your dad voted for? No idea.
+  - → **—Do you know who your dad voted for? —No idea.**
+- `9d0e5151` las-elecciones (c26#0, verify9)
+  - ¿Ganó tu candidata? Sí, ganó.
+  - → **—¿Ganó tu candidata? —Sí, ganó.**
+  - Did your candidate win? Yes, she won.
+  - → **—Did your candidate win? —Yes, she won.**
+- `a95b6322` las-elecciones (c26#0)
+  - ¿Tenés candidato? No, todavía no.
+  - → **—¿Tenés candidato? —No, todavía no.**
+  - Do you have a candidate? No, not yet.
+  - → **—Do you have a candidate? —No, not yet.**
+- `26ee33fe` las-elecciones (c26#0)
+  - ¿Vos vas a votar? Sí, obvio.
+  - → **—¿Vos vas a votar? —Sí, obvio.**
+  - Are you going to vote? Yes, of course.
+  - → **—Are you going to vote? —Yes, of course.**
+- `2d4d1a45` las-elecciones (c26#0)
+  - ¿Votaste? Sí, voté ayer.
+  - → **—¿Votaste? —Sí, voté ayer.**
+  - Did you vote? Yes, I voted yesterday.
+  - → **—Did you vote? —Yes, I voted yesterday.**
+- `fa8b7e9f` las-elecciones (c26#0)
+  - ¿Qué opinás de la presidenta? De eso no hablo.
+  - → **—¿Qué opinás de la presidenta? —De eso no hablo.**
+  - What do you think of the president? I don't talk about that.
+  - → **—What do you think of the president? —I don't talk about that.**
+- `e39365ac` las-elecciones (c26#0)
+  - ¿Votaste a la presidenta? Sí, obvio.
+  - → **—¿Votaste a la presidenta? —Sí, obvio.**
+  - Did you vote for the president? Yes, of course.
+  - → **—Did you vote for the president? —Yes, of course.**
+- `3cf42cd0` las-elecciones (c26#0)
+  - ¿Hay elecciones este año? Creo que sí.
+  - → **—¿Hay elecciones este año? —Creo que sí.**
+  - Is there an election this year? I think so.
+  - → **—Is there an election this year? —I think so.**
+- `56b60c2b` segun-el-diario (c26#0)
+  - ¿El subte funciona? Aparentemente, no.
+  - → **—¿El subte funciona? —Aparentemente, no.**
+  - Is the subway running? Apparently not.
+  - → **—Is the subway running? —Apparently not.**
+- `99b4e5ac` segun-el-diario (c26#0)
+  - ¿Fuente? El diario.
+  - → **—¿Fuente? —El diario.**
+  - Source? The paper.
+  - → **—Source? —The paper.**
+- `9f6b3ddc` segun-el-diario (c26#0)
+  - ¿Y el presidente? Lo desmintió.
+  - → **—¿Y el presidente? —Lo desmintió.**
+  - And the president? He denied it.
+  - → **—And the president? —He denied it.**
+- `1bfb98fe` el-tango (c27#4, verify9)
+  - Esta noche voy a cantar en la milonga.
+  - → **Esta noche voy a cantar en un bar de San Telmo.**
+  - Tonight I'm going to sing at the milonga.
+  - → **Tonight I'm going to sing at a bar in San Telmo.**
+- `b9d490fc` el-tango (c27#4)
+  - Mi abuela canta en la milonga.
+  - → **Mi abuela todavía canta en las fiestas de la familia.**
+  - My grandmother sings at the milonga.
+  - → **My grandmother still sings at family parties.**
+- `217fb6c2` el-tango (c27#5)
+  - ¿Dónde compraste ese bandoneón?
+  - → **¿Escuchaste? Eso es un bandoneón.**
+  - Where did you buy that bandoneon?
+  - → **Did you hear that? That's a bandoneon.**
+- `aa7f47a0` lo-lindo-de-la-ciudad (c27#18)
+  - Con el costo de vida no puedo ahorrar.
+  - → **Con el costo de vida que hay acá, no puedo ahorrar.**
+  - With the cost of living I can't save.
+  - → **With the cost of living here, I can't save.**
+- `5b458b85` lo-lindo-de-la-ciudad (c27#20)
+  - Lo bueno del barrio es la gente.
+  - → **Lo bueno de este laburo es el horario.**
+  - The good thing about the neighborhood is the people.
+  - → **The good thing about this job is the hours.**
+- `80bf2339` lo-lindo-de-la-ciudad (c27#20)
+  - La gente es lo mejor.
+  - → **El desayuno fue lo mejor del hotel.**
+  - The people are the best part.
+  - → **Breakfast was the best part of the hotel.**
+- `b3cdfc01` lo-lindo-de-la-ciudad (c27#20)
+  - Lo feo es el tránsito.
+  - → **Lo feo del viaje fue el vuelo.**
+  - The bad part is the traffic.
+  - → **The bad part of the trip was the flight.**
+- `2580a0e6` lo-lindo-de-la-ciudad (c27#22)
+  - Lo bueno es el sol.
+  - → **Lo bueno de Mendoza es el sol.**
+  - The good thing is the sun.
+  - → **The good thing about Mendoza is the sun.**
+- `f61ca6f2` lo-lindo-de-la-ciudad (c27#22, verify10)
+  - Lo bueno es el subte.
+  - → **Lo bueno del barrio es que tenés el subte cerca.**
+  - The good thing is the subway.
+  - → **The good thing about the neighborhood is that you have the subway nearby.**
+- `f316179b` lo-lindo-de-la-ciudad (c27#23)
+  - Che, no hay nada como las facturas de mi abuela.
+  - → **Che, no hay nada como las empanadas de mi abuela.**
+  - Hey, there's nothing like my grandmother's pastries.
+  - → **Hey, there's nothing like my grandmother's empanadas.**
+- `10b64186` no-es-que-no-me-guste (c27#27)
+  - No es que no podamos, es que ya tenemos planes.
+  - → **No es que no podamos el sábado, es que el domingo nos queda mejor.**
+  - It's not that we can't, it's that we already have plans.
+  - → **It's not that we can't on Saturday, it's just that Sunday works better for us.**
+- `930d52ef` no-es-que-no-me-guste (c27#29)
+  - No es que me caiga mal, es que es pesado.
+  - → **No es que me caiga mal, es que casi no lo conozco.**
+  - It's not that I don't like him, it's just that he's annoying.
+  - → **It's not that I don't like him, it's just that I barely know him.**
+- `f7e4ac7d` no-es-que-no-me-guste (c27#31)
+  - Odio rechazar una invitación.
+  - → **No podés rechazar un laburo así.**
+  - I hate turning down an invitation.
+  - → **You can't turn down a job like that.**
+- `c56fcf1e` no-es-que-no-me-guste (c27#31)
+  - No puedo rechazar la invitación de mi suegra.
+  - → **¿Te llegó la invitación al cumple de Juli?**
+  - I can't turn down my mother-in-law's invitation.
+  - → **Did you get the invitation to Juli's birthday?**
+- `557167c0` si-hubiera-ahorrado (c27#38, verify10)
+  - Si hubiéramos ido, estaríamos cansados.
+  - → **Si hubiéramos ido al recital, hoy estaríamos re cansados.**
+  - If we had gone, we'd be tired.
+  - → **If we had gone to the concert, we'd be really tired today.**
+- `a488b278` si-hubiera-ahorrado (c27#39)
+  - Si hubiéramos salido temprano, estaríamos en casa.
+  - → **Si hubiéramos salido temprano, ya estaríamos en casa.**
+  - If we had left early, we would be home.
+  - → **If we had left early, we would be home by now.**
+- `da73000d` si-hubiera-ahorrado (c27#40)
+  - Si hubiéramos comprado dólares, estaríamos mejor.
+  - → **Si hubiéramos comprado el auto, ahora no estaríamos esperando el bondi.**
+  - If we had bought dollars, we'd be better off.
+  - → **If we had bought the car, we wouldn't be waiting for the bus now.**
+- `e35c41ec` si-hubiera-ahorrado (c27#40)
+  - ¿Vos hubieras ahorrado en dólares?
+  - → **¿Vos hubieras ahorrado con ese sueldo?**
+  - Would you have saved in dollars?
+  - → **Would you have saved on that salary?**
+- `d6724d39` si-hubiera-ahorrado (c27#40)
+  - Si hubiera invertido en dólares, estaría mucho más tranquila.
+  - → **Si hubiera invertido en un depto, estaría mucho más tranquila.**
+  - If I had invested in dollars, I'd feel much calmer.
+  - → **If I had invested in an apartment, I'd feel much calmer.**
+- `e3c05469` si-hubiera-ahorrado (c27#40)
+  - Si Mati hubiera invertido en dólares, estaría mejor.
+  - → **Si Mati hubiera invertido tiempo en estudiar, tendría un laburo mejor.**
+  - If Mati had invested in dollars, he'd be better off.
+  - → **If Mati had invested time in studying, he'd have a better job.**
+- `6ef85a3f` si-hubiera-ahorrado (c27#43)
+  - ¿Ya habías dejado la facu?
+  - → **Si hubiera dejado ese laburo, ahora estaría más tranquilo.**
+  - Had you already quit college?
+  - → **If I had quit that job, I'd be calmer now.**
+- `4cd50223` si-hubiera-ahorrado (c27#44)
+  - ¿Dónde estaría Mica a esta altura?
+  - → **Si Mica no se hubiera ido, ¿dónde estaría a esta altura?**
+  - Where would Mica be by now?
+  - → **If Mica hadn't left, where would she be by now?**
+- `d5a38e16` tendria-que-haber (c27#45, verify10)
+  - Tendrías que haber ido a aprovechar los precios.
+  - → **Voy a aprovechar los precios y comprar los pasajes hoy.**
+  - You should have gone to take advantage of the prices.
+  - → **I'm going to take advantage of the prices and buy the tickets today.**
+- `7bd3dd76` tendria-que-haber (c27#46)
+  - No aproveché y me arrepiento.
+  - → **No lo aproveché y me arrepiento.**
+  - I didn't make the most of it and I regret it.
+- `e7b3e03e` tendria-que-haber (c27#46)
+  - No aproveché, tendría que haber ido.
+  - → **No aproveché la oferta, tendría que haber ido ayer.**
+  - I didn't make the most of it, I should have gone.
+  - → **I didn't take advantage of the sale, I should have gone yesterday.**
+- `a733be1a` tendria-que-haber (c27#50)
+  - Al final me arrepentí de comprar ese auto.
+  - → **Al final me arrepentí de haber comprado ese auto.**
+  - In the end, I regretted buying that car.
+- `113cce28` me-hubiera-gustado (c27#55, verify10)
+  - Dejé pasar el descuento.
+  - → **Dejé pasar el tren porque venía lleno.**
+  - I let the discount slip by.
+  - → **I skipped the train because it was full.**
+- `38ff9620` me-hubiera-gustado (c27#56)
+  - Metí la pata: le dije a Ana que no me gustaba.
+  - → **Metí la pata: le dije a Sofi que no me gustaba su novio.**
+  - I messed up: I told Ana I didn't like it.
+  - → **I messed up: I told Sofi I didn't like her boyfriend.**
+- `835a5f3e` me-hubiera-gustado (c27#58)
+  - Me hubiera gustado venir.
+  - → **Me hubiera gustado venir antes.**
+  - I would have liked to come.
+  - → **I would have liked to come sooner.**
+- `b1853b88` practica-me-hubiera-gustado (c27#60)
+  - Lo siento, pero tengo un compromiso de laburo.
+  - → **Perdón, pero tengo un compromiso de laburo.**
+  - I'm sorry, but I have a work commitment.
+  - → **Sorry, but I have a work commitment.**
+- `19bc9c01` tendria-que-haber (c27#0)
+  - ¿Compraste los pasajes? No, me arrepentí.
+  - → **—¿Compraste los pasajes? —No, me arrepentí.**
+  - Did you buy the tickets? No, I changed my mind.
+  - → **—Did you buy the tickets? —No, I changed my mind.**
+- `9f7818c6` tendria-que-haber (c27#0)
+  - ¿Renunciaste? Sí, y no me arrepiento.
+  - → **—¿Renunciaste? —Sí, y no me arrepiento.**
+  - Did you quit? Yes, and I don't regret it.
+  - → **—Did you quit? —Yes, and I don't regret it.**
+- `bfd60056` no-es-que (c27#0)
+  - ¿Por qué no viniste? Es que estaba enfermo.
+  - → **—¿Por qué no viniste? —Es que estaba enfermo.**
+  - Why didn't you come? It's just that I was sick.
+  - → **—Why didn't you come? —It's just that I was sick.**
+- `ec566a8b` lo-lindo-de-la-ciudad (c27#0)
+  - ¿Te gusta el barrio? Sí, pero tiene sus cosas.
+  - → **—¿Te gusta el barrio? —Sí, pero tiene sus cosas.**
+  - Do you like the neighborhood? Yes, but it has its issues.
+  - → **—Do you like the neighborhood? —Yes, but it has its issues.**
+- `10cafd6d` no-es-que-no-me-guste (c27#0)
+  - ¿Contestaste la invitación de Diego? No, todavía no.
+  - → **—¿Contestaste la invitación de Diego? —No, todavía no.**
+  - Did you answer Diego's invitation? No, not yet.
+  - → **—Did you answer Diego's invitation? —No, not yet.**
+- `49aaaa76` practica-me-hubiera-gustado (c27#0)
+  - ¿Viene Santi? Ojalá.
+  - → **—¿Viene Santi? —Ojalá.**
+  - Is Santi coming? I hope so.
+  - → **—Is Santi coming? —I hope so.**
+- `66793cf4` me-hubiera-gustado (c27#0, verify10)
+  - ¿Fue un error? No, fue lo mejor.
+  - → **—¿Fue un error? —No, fue lo mejor.**
+  - Was it a mistake? No, it was the best thing.
+  - → **—Was it a mistake? —No, it was the best thing.**
+- `8f680c2b` lo-que-pasa-es-que (c28#2)
+  - Lo raro es que el wifi funciona hoy.
+  - → **Lo raro es que hoy el wifi anda.**
+  - The weird thing is that the wifi is working today.
+- `d8c6540d` lo-que-pasa-es-que (c28#3)
+  - Contame lo de Santi.
+  - → **Contame lo de ayer.**
+  - Tell me about the Santi thing.
+  - → **Tell me about yesterday.**
+- `d8cd7811` lo-que-pasa-es-que (c28#3)
+  - Lo de Diego me molesta un poco.
+  - → **Lo de anoche me molesta un poco.**
+  - The thing with Diego bothers me a little.
+  - → **What happened last night bothers me a little.**
+- `ad2f9edd` lo-que-paso-fue-que (c28#7)
+  - ¿Qué querés tomar? Lo que sea.
+  - → **—¿Qué querés tomar? —Lo que sea.**
+  - What do you want to drink? Whatever.
+  - → **—What do you want to drink? —Anything is fine.**
+- `9fa2fcbe` como-dice-el-dicho (c28#12)
+  - Yo te dije que era caro: el que avisa no traiciona.
+  - → **Te aviso que el examen es difícil: el que avisa no traiciona.**
+  - I told you it was expensive: don't say I didn't warn you.
+  - → **I'm telling you the exam is hard: don't say I didn't warn you.**
+- `874ddb22` como-dice-el-dicho (c28#13, verify10)
+  - —Perdón, llegué a las diez. —Más vale tarde que nunca.
+  - → **—Perdón por la demora. —Más vale tarde que nunca.**
+  - Sorry, I got here at ten. —Better late than never.
+  - → **—Sorry for the delay. —Better late than never.**
+- `ceeb4b5d` cada-loco-con-su-tema (c28#18)
+  - ¿Viste el precio? No, ojos que no ven, corazón que no siente.
+  - → **—¿Viste el precio? —No, ojos que no ven, corazón que no siente.**
+  - Did you see the price? No, what you don't know can't hurt you.
+  - → **—Did you see the price? —No, what I don't know can't hurt me.**
+- `628bb1cd` me-hace-ruido (c28#27)
+  - Sentí angustia cuando vi la cuenta de luz.
+  - → **Me dio angustia cuando vi la cuenta de luz.**
+  - I felt distress when I saw the electricity bill.
+  - → **I got upset when I saw the electricity bill.**
+- `fbd5f7d8` me-hace-ruido (c28#27)
+  - Sentí mucha angustia.
+  - → **Me dio mucha angustia.**
+  - I felt a lot of distress.
+  - → **I got really upset.**
+- `06f8906c` me-hace-ruido (c28#28)
+  - Sentí miedo, pero viajar sola me hace bien.
+  - → **Me da un poco de miedo, pero viajar sola me hace bien.**
+  - I felt fear, but traveling alone does me good.
+  - → **It scares me a little, but traveling alone does me good.**
+- `5ae47a7b` me-hace-ruido (c28#28)
+  - Sentí vergüenza, pero hablar de eso me hace bien.
+  - → **Me da vergüenza, pero hablar de eso me hace bien.**
+  - I felt embarrassment, but talking about that does me good.
+  - → **I feel embarrassed, but talking about it does me good.**
+- `91148057` me-hace-ruido (c28#31)
+  - Cuando se fue mi hija, se me partió el alma.
+  - → **Cuando se fue mi hija, me partió el alma.**
+  - When my daughter left, my heart broke.
+  - → **When my daughter left, it broke my heart.**
+- `29755fb7` me-hace-ruido (c28#32)
+  - Al final se fue el calor, ¡qué alivio!
+  - → **Por fin se fue el calor, ¡qué alivio!**
+  - In the end the heat went away, what a relief!
+  - → **The heat is finally gone, what a relief!**
+- `a41d1714` me-mori-de-risa (c28#34)
+  - ¿Esa lágrima es porque te reíste mucho?
+  - → **Casi se me cae una lágrima.**
+  - Is that tear because you laughed a lot?
+  - → **I almost shed a tear.**
+- `c9a97cd8` me-mori-de-risa (c28#34)
+  - Esa lágrima es de risa.
+  - → **Me reí tanto que se me cayó una lágrima.**
+  - That tear is from laughing.
+  - → **I laughed so much that I shed a tear.**
+- `fe1eff26` me-mori-de-risa (c28#35)
+  - ¿Por qué no querés sonreír?
+  - → **¿Podés sonreír para la foto?**
+  - Why don't you want to smile?
+  - → **Can you smile for the photo?**
+- `bc3655e4` practica-cada-loco-con-su-tema (c28#37)
+  - Hablando del rey de Roma, Juli me mandó una cosita.
+  - → **Hablando del rey de Roma, Juli está en la puerta.**
+  - We were just talking about her, and Juli sent me a little something.
+  - → **We were just talking about her, and Juli is at the door.**
+- `5d1c52bc` practica-cada-loco-con-su-tema (c28#39)
+  - ¿En el fondo, estás contento?
+  - → **En el fondo, ¿estás contento?**
+  - Deep down, are you happy?
+- `2f3b4f5b` practica-cada-loco-con-su-tema (c28#40)
+  - ¿Tenés un toque?
+  - → **Voy un toque al kiosco.**
+  - Do you have a sec?
+  - → **I'm going to the kiosco for a second.**
+- `e02b54fc` cuanto-mas (c28#41)
+  - A medida que leés, entendés más.
+  - → **A medida que conozco el barrio, me gusta más.**
+  - As you read, you understand more.
+  - → **As I get to know the neighborhood, I like it more.**
+- `9419bd3a` cuanto-mas (c28#41)
+  - A medida que practicás, hablás mejor.
+  - → **A medida que hablás más, tenés menos miedo.**
+  - As you practice, you speak better.
+  - → **As you speak more, you're less afraid.**
+- `e71a15e0` cuanto-mas (c28#41)
+  - Cuanto más estudio, más aprendo.
+  - → **Cuanto más lo pienso, menos lo entiendo.**
+  - The more I study, the more I learn.
+  - → **The more I think about it, the less I understand it.**
+- `8486a1c9` cuanto-mas (c28#44)
+  - A medida que leo, aprendo más.
+  - → **A medida que pasa el tiempo, te vas acostumbrando.**
+  - As I read, I learn more.
+  - → **As time goes by, you get used to it.**
+- `3cefa5d2` practica-me-mori-de-risa (c28#50)
+  - Cuando se fue tu abuela, lloraste toda la noche.
+  - → **Cuando se fue tu hermano a España, lloraste toda la noche.**
+  - When your grandma left, you cried all night.
+  - → **When your brother left for Spain, you cried all night.**
+- `daf127cc` sin-ofender (c28#53)
+  - ¿Lastimar a Rocío? ¡Nunca!
+  - → **Nunca quise lastimar a Rocío.**
+  - Hurt Rocío? Never!
+  - → **I never meant to hurt Rocío.**
+- `5848e977` me-cayo-la-ficha (c28#56)
+  - ¿Fuiste al recital? No, me quedé con las ganas.
+  - → **—¿Fuiste al recital? —No, me quedé con las ganas.**
+  - Did you go to the concert? No, I missed out.
+  - → **—Did you go to the concert? —No, I wanted to, but I couldn't.**
+- `c3822f57` me-cayo-la-ficha (c28#57)
+  - A veces el domingo me pone mal.
+  - → **El domingo a la tarde me pone mal.**
+  - Sometimes Sunday gets me down.
+  - → **Sunday afternoon makes me sad.**
+- `6050601b` practica-me-hace-ruido (c28#59)
+  - La empresa dice que el aguinaldo viene en dos cuotas.
+  - → **La empresa dice que este año paga el aguinaldo en cuotas.**
+  - The company says the extra month's pay comes in two installments.
+  - → **The company says it's paying the bonus in installments this year.**
+- `c157b1d2` lo-que-pasa-es-que (c28#0)
+  - ¿Qué hiciste el finde? Lo de siempre.
+  - → **—¿Qué hiciste el finde? —Lo de siempre.**
+  - What did you do over the weekend? The usual.
+  - → **—What did you do over the weekend? —The usual.**
+- `0e848426` lo-que-pasa-es-que (c28#0)
+  - ¿Qué pedís? Lo de siempre.
+  - → **—¿Qué pedís? —Lo de siempre.**
+  - What are you ordering? The usual.
+  - → **—What are you ordering? —The usual.**
+- `f8669746` practica-cada-loco-con-su-tema (c28#0)
+  - ¿Qué tomás? Lo que sea.
+  - → **—¿Qué tomás? —Lo que sea.**
+  - What are you drinking? Whatever.
+  - → **—What are you drinking? —Anything is fine.**
+- `6a683638` me-hizo-reir (c28#0)
+  - ¿Viste la película? Sí, me hizo llorar.
+  - → **—¿Viste la película? —Sí, me hizo llorar.**
+  - Did you see the movie? Yes, it made me cry.
+  - → **—Did you see the movie? —Yes, it made me cry.**
+- `543d97f5` me-mori-de-risa (c28#0)
+  - ¿De qué te reís? —De la escena del perro.
+  - → **—¿De qué te reís? —De la escena del perro.**
+  - What are you laughing at? —At the scene with the dog.
+  - → **—What are you laughing at? —At the scene with the dog.**
+- `1c0501e5` cuanto-mas (c28#0)
+  - ¿Cuándo? Cuanto antes.
+  - → **—¿Cuándo? —Cuanto antes.**
+  - When? As soon as possible.
+  - → **—When? —As soon as possible.**
+- `d7899949` cuanto-mas (c28#0)
+  - ¿Le cuento? No, cuanto menos sepa, mejor.
+  - → **—¿Le cuento? —No, cuanto menos sepa, mejor.**
+  - Should I tell him? No, the less he knows, the better.
+  - → **—Should I tell him? —No, the less he knows, the better.**
+- `53ff70a9` me-cayo-la-ficha (c28#0, verify10)
+  - ¿Y el viaje? Me quedé con las ganas.
+  - → **—¿Y el viaje? —Me quedé con las ganas.**
+  - And the trip? I missed out.
+  - → **—And the trip? —I wanted to go, but I couldn't.**
+- `fbae0ca1` me-hace-ruido (c28#0)
+  - ¿Qué hiciste? Nada, me quedé helado.
+  - → **—¿Qué hiciste? —Nada, me quedé helado.**
+  - What did you do? Nothing, I froze.
+  - → **—What did you do? —Nothing, I froze.**
+- `52081347` practica-me-hace-ruido (c28#0)
+  - ¿Y el informe? Lo entregamos anoche.
+  - → **—¿Y el informe? —Lo entregamos anoche.**
+  - What about the report? We handed it in last night.
+  - → **—What about the report? —We handed it in last night.**
+- `48f6348d` me-cayo-la-ficha (c28#0)
+  - ¿Entendés ahora? Sí, me cayó la ficha.
+  - → **—¿Entendés ahora? —Sí, me cayó la ficha.**
+  - Do you understand now? Yes, it clicked.
+  - → **—Do you understand now? —Yes, I finally understood.**
+- `04365bfa` mis-abuelos-italianos (c29#4)
+  - ¿Tu bisabuela es italiana?
+  - → **¿Tu bisabuela era italiana?**
+  - Is your great-grandmother Italian?
+  - → **Was your great-grandmother Italian?**
+- `6c818f7f` se-instalaron-en-la-boca (c29#5)
+  - Casi todos en Buenos Aires tienen raíces en Europa.
+  - → **Mucha gente en Buenos Aires tiene raíces en Europa.**
+  - Almost everyone in Buenos Aires has roots in Europe.
+  - → **A lot of people in Buenos Aires have roots in Europe.**
+- `0d67c000` se-instalaron-en-la-boca (c29#6)
+  - Mi bisabuela era gallega y llegó sola de Europa.
+  - → **Mi bisabuela era gallega y llegó sola de España.**
+  - My great-grandmother was Spanish and arrived alone from Europe.
+  - → **My great-grandmother was Spanish and arrived alone from Spain.**
+- `6e38e827` practica-se-instalaron (c29#10)
+  - Cuando éramos mochileros, hicimos dedo por todo el sur.
+  - → **Ese verano hicimos dedo por todo el sur.**
+  - When we were backpackers, we hitchhiked all over the south.
+  - → **That summer we hitchhiked all over the south.**
+- `6aee442e` gracias-por-todo (c29#19, verify10)
+  - Me costó decirles chau a todos.
+  - → **Al principio me costó entender a la gente.**
+  - Saying bye to everyone was hard for me.
+  - → **At first it was hard for me to understand people.**
+- `2dfc375a` ya-sos-de-aca (c29#22)
+  - No logré dormir con ese ruido.
+  - → **Por fin logré sacar la ciudadanía.**
+  - I didn't manage to sleep with that noise.
+  - → **At last I managed to get my citizenship.**
+- `c662b63c` ya-sos-de-aca (c29#24)
+  - Lograr ese acento en un año es increíble.
+  - → **Lograr tanto en un año es increíble.**
+  - Getting that accent in a year is incredible.
+  - → **Achieving so much in a year is incredible.**
+- `6c205d34` ya-sos-de-aca (c29#24)
+  - Lograr un buen acento lleva tiempo.
+  - → **Lograr un cambio así lleva tiempo.**
+  - Getting a good accent takes time.
+  - → **Achieving a change like that takes time.**
+- `080eaa38` ya-sos-de-aca (c29#25)
+  - Quiero lograr un acento porteño.
+  - → **Algún día quiero lograr algo grande.**
+  - I want to get a Buenos Aires accent.
+  - → **Someday I want to achieve something big.**
+- `800b9178` me-emocione (c29#44)
+  - ¿Tu abuelo está orgulloso? Sí, un montón.
+  - → **—¿Tu abuelo está orgulloso de vos? —Sí, un montón.**
+  - Is your grandfather proud? Yes, really proud.
+  - → **—Is your grandfather proud of you? —Yes, really proud.**
+- `8e3a4938` mis-abuelos-italianos (c29#0)
+  - ¿Tus abuelos eran italianos? No, vinieron de España.
+  - → **—¿Tus abuelos eran italianos? —No, vinieron de España.**
+  - Were your grandparents Italian? No, they came from Spain.
+  - → **—Were your grandparents Italian? —No, they came from Spain.**
+- `6851dbde` mis-abuelos-italianos (c29#0)
+  - ¿Tu papá es inmigrante? No, es de acá.
+  - → **—¿Tu papá es inmigrante? —No, es de acá.**
+  - Is your dad an immigrant? No, he's from here.
+  - → **—Is your dad an immigrant? —No, he's from here.**
+- `fa109d71` practica-se-instalaron (c29#0)
+  - ¿Cómo llegaron? Hicimos dedo.
+  - → **—¿Cómo llegaron? —Hicimos dedo.**
+  - How did you get there? We hitchhiked.
+  - → **—How did you get there? —We hitchhiked.**
+- `2f72da72` practica-se-instalaron (c29#0)
+  - ¿Sos gallego? No, soy italiano.
+  - → **—¿Sos gallego? —No, soy italiano.**
+  - Are you Spanish? No, I'm Italian.
+  - → **—Are you Spanish? —No, I'm Italian.**
+- `9f3e4162` practica-se-instalaron (c29#0)
+  - ¿Pediste la ciudadanía? Todavía no.
+  - → **—¿Pediste la ciudadanía? —Todavía no.**
+  - Did you apply for citizenship? Not yet.
+  - → **—Did you apply for citizenship? —Not yet.**
+- `933a3e7a` me-emocione (c29#0)
+  - ¿Por qué estás tan orgulloso? Porque ganamos el partido.
+  - → **—¿Por qué estás tan orgulloso? —Porque ganamos el partido.**
+  - Why are you so proud? Because we won the game.
+  - → **—Why are you so proud? —Because we won the game.**
+
+## Tips (323)
+
+- `42b7a8c7` sos-turista — ¿Sos vos?
+  - REMOVED: **Vos** can come after the verb when you're checking who someone is: *Ah, ¿sos vos?* — *Oh, it's you?* The answer: **Sí, soy yo.** Can't believe it? **¿Posta?** — *for real?*
+- `8996e925` encantado — -o for me, -ás or -és for vos
+  - REMOVED: The same two endings as *me llamo, te llamás*, on other verbs: | | yo | vos | | llamarse | **me llamo** | **te llamás** | | hablar | **hablo** | **hablás** | | entender | **entiendo** | **entendés** | | saber | **sé** | **sabés** | The vos form is stressed on the end, and never changes its stem: *entiendo* but **entendés**. *Sé* is a one-off. Lost? *No entiendo. **Despacio**, por favor.*
+- `eabe4bb4` la-gente — Nuestro, nuestra
+  - REMOVED: *Our* matches the thing, not the people: **nuestro** país, **nuestra** familia, **nuestros** hijos, **nuestras** hermanas. *Their* is still **su**: *su familia*, *sus hijos*.
+- `f82e713f` hay-un-tren — Por acá
+  - REMOVED: **Por acá** is *around here*, the end of every question on the street: *¿Hay un bar por acá?* *¿Hay un taxi por acá?* The answer is usually a finger and *a dos cuadras*.
+- `9739d026` ropa-y-colores — Es lindo, está lindo
+  - REMOVED: With **ser** an adjective says what something is like; with **estar**, how it is right now. *Esa remera **es** linda* — it is a nice T-shirt. *¡**Estás** linda!* — you look nice today. *El café de acá **es** rico* — *este café **está** rico*. And **ser listo** is *to be clever*, while **estar listo** is *to be ready*.
+- `d022897b` me-despierto-temprano — The whole routine, every person
+  - REMOVED: | yo | **me** despierto | **me** levanto | **me** acuesto | | vos | **te** despertás | **te** levantás | **te** acostás | | él, ella | **se** despierta | **se** levanta | **se** acuesta | | nosotros | **nos** despertamos | **nos** levantamos | **nos** acostamos | | ellos | **se** despiertan | **se** levantan | **se** acuestan | *Despertarse* and *acostarse* stretch their stem, but not with vos or nosotros. **Me voy** works the same way: *me voy, te vas, se va*.
+- `310543d9` te-llame — Mostrame
+  - REMOVED: On a command it goes on the end, as before: **mostrame las fotos**, **buscame a las ocho**. The stress doesn't move from *mostrá*, *buscá*: *mos-TRA-me*, *bus-CA-me*.
+- `221c8d0b` de-que-cuadro-sos — Hinchamos por el mismo
+  - REMOVED: **Hinchar por** runs in the family: **en casa hinchamos todos por el mismo cuadro**; **de chico hinchaba por otro, pero mi viejo no me dejó**. A fan **de toda la vida** never changes club — changing wife is easier, they say. Day to day, people simply say **somos del mismo cuadro**.
+- `8025b919` de-que-cuadro-sos — El ídolo
+  - REMOVED: Every club has its **ídolo**, the **jugador** whose shirt the kids wear. And every fan fears one word: the **descenso** — *relegation*.
+- `866c54a2` la-semana-que-viene — Some day, soon
+  - REMOVED: **Pronto** — *soon*; **a fin de año** — *at the end of the year*; **algún día** — *some day*. **¿Qué piensan hacer?** — **Pensamos juntar plata para viajar.** Careful: **pensar** + a verb is *to plan to*, but **pensar que** is *to think that*: *Juan piensa que tenés razón.* And the classic promise: **me anoté en el gimnasio**.
+- `a9d44d65` me-afanaron — Me descuidé
+  - REMOVED: The confession that comes with it: **me descuidé** — *I wasn't careful*. Porteños answer **¡qué garrón!**
+- `05104887` donde-estara — Hará, vendrá, estarán
+  - REMOVED: | hacer | **hará** | ¿Qué hará a esta hora? | | venir | **vendrá** | Vendrá más tarde. | | poder | **podrá** | ¿Podrá venir? | | querer | **querrá** | ¿Qué querrá? | | costar | **costará** | ¿Cuánto costará? | | estar | **estarán** | Estarán en el bar. | | ser | **serán** | Serán las ocho. | Regular verbs just add **-á** to the infinitive (*costar* → **costará**); the irregular ones squeeze it (*hacer* → **hará**, *venir* → **vendrá**). For them, it's **-án**; for vos, **-ás**: *¿estarás cansado?*
+- `35d7e2d9` donde-estara — A lo mejor, supongo
+  - REMOVED: The same guess in the present: **a lo mejor** — *maybe*; **supongo que sí** — *I suppose so*; **probablemente** — *probably*.
+- `ce15b13a` donde-estara — Any verb can wonder
+  - REMOVED: **¿Qué hará?** — *I wonder what he's doing*; **¿cuánto saldrá?** — *I wonder how much it is* (a textbook says *¿cuánto costará?*; porteños ask prices with *salir*); **vendrá más tarde** — *she'll probably come later*. For a group: **estarán en el bar**, **serán las ocho**. To vos, the question is **¿estarás cansado?**; the statement is **debés estar cansado** — *you must be tired*. And for a plain future porteños skip this tense: **no sé si va a venir**, **seguro que no viene**.
+- `fd31828f` cuando-vuelvas — Cuando vuelvas
+  - REMOVED: Plans hang on *cuando* + the subjunctive: **cuando vuelvas del viaje, nos vemos**; **cuando cobre, te invito**; **cuando empieces el laburo nuevo, contame**. The other half stays normal, or a command.
+- `3f75481a` se-me-quemo — One thing, two things
+  - REMOVED: The verb goes with the *thing*, not with you: **se me cayó la taza**, but **se me cayeron las llaves**; **se me quemó la comida**, **se me quemaron las tostadas**. The *me* stays put — it still happened to you.
+- `552636d9` ponele — Llevo, llevá
+  - REMOVED: **Llevar** is *to take* — and also *to bring* when you're going somewhere: **¿qué llevo al asado?** — *what should I bring?* **Yo llevo el vino** — *I'll bring the wine*: the present does the job of *will*. To *here*, where you are, it's **traer**: **traeme pan**.
+- `c390a55a` el-cajero — Transfiero, transferís
+  - REMOVED: *Transferir* changes e to ie when the stress falls on it: yo **transfiero**, él **transfiere**. With vos the stress moves, so it stays: **transferís**.
+- `e495c6ac` el-cajero — El alias
+  - REMOVED: Every account has an **alias** — a few words instead of a long number — and paying a friend is **pasame el alias** and **te transfiero**. After: **mandame el comprobante**.
+- `c7612ab5` no-sabes-lo-que-me-contaron — Lo que
+  - REMOVED: **Lo que** is *what* when it means *the thing that*: **¿viste lo que pasó?**, **no sé lo que quiere**. It can start a sentence too: **lo que pasó fue raro**. A direct question keeps **qué**: *¿qué pasó?*
+- `eb718472` no-sabes-lo-que-me-contaron — ¡Mirá vos!
+  - REMOVED: **¡Mirá vos!** — *oh, really?* (mild surprise) — and **no lo puedo creer** keep the story going. Porteños also say **¡no te puedo creer!** — the same thing: *I can't believe it!* A **chusma** is someone who loves the gossip.
+- `2ec6d8dd` deje-de-fumar — Just, usually, again, quit
+  - REMOVED: | **Acabamos de** llegar. | We just got here. | | Los porteños **suelen** cenar tarde. | Porteños usually have dinner late. | | **Volvió a** fumar. | He started smoking again. | | **Dejé de** fumar. | I quit smoking. | | **Me puse a** estudiar. | I started studying. | All five take an infinitive straight after: *acabar de, soler, volver a, dejar de, ponerse a*.
+- `95f52f58` el-que-quieras — El que, la que
+  - REMOVED: **El que** — *the one that* — matches what it stands for: **el que quieras**, **la que está en la esquina**, **los que vinieron**, **las que prefieras**. Not chosen yet, so the subjunctive: *el que quieras* — *whichever you want*.
+- `af169ce1` llevo-un-ano-aprendiendo — Volví a
+  - REMOVED: **Volver a** + an infinitive is *to do it again*: **volví a estudiar** — *I went back to studying*; **vuelvo a empezar** — *I'm starting over*.
+- `622dd83b` me-da-bronca — Que + subjunctive
+  - REMOVED: What causes the feeling follows **que** in the subjunctive: **me da bronca que no conteste**, **me da vergüenza que me vean así**.
+- `0b77ea73` me-pone-nervioso-que — Me pone nervioso
+  - REMOVED: **Poner** makes feelings too: **me pone nervioso que llegue tarde**, **me pone de mal humor que cancele**. Same shape as *me da bronca*: the feeling, then **que** + subjunctive.
+- `081f428b` dijo-que-vendria — What he said he'd do
+  - REMOVED: | what he said | what you tell | | «Voy.» | Dijo que **iría**. | | «Vengo mañana.» | Dijo que **vendría** mañana. | | «Te llamo.» | Dijo que me **llamaría**. | A promise told later goes into *would*. In everyday speech porteños mostly say **dijo que iba a venir**; the *-ría* form sounds more careful.
+- `26cd1c59` te-doy-la-razon — Arguing like a porteño
+  - REMOVED: An argument in Buenos Aires is a sport, not a fight: **discutimos** a lot and stay friends. **Me convenciste** — *you've convinced me*; **cambié de idea** — *I changed my mind*.
+- `b7afb44a` te-doy-la-razon — ¡Ojo!
+  - REMOVED: **¡Ojo!** — literally *eye!* — is *careful!, watch out!*: **ojo, que no es tan fácil**. **Estoy seguro** — *I'm sure*; **no estoy segura** — *I'm not sure*.
+- `1fe7afdb` se-la-cree — La verdad
+  - REMOVED: **La verdad** opens an honest answer: **la verdad, no sé** — *honestly, I don't know*. **La verdad que sí** — *yeah, really*.
+- `0f7e9624` las-elecciones — Las encuestas
+  - REMOVED: Before, the **campaña**, the **debate** on TV and the **encuestas** — *the polls* — that always get it wrong. After, the **resultado**. The course stays out of who won.
+- `60436255` las-elecciones — El cuarto oscuro
+  - REMOVED: The **cuarto oscuro** — *the dark room* — is where you vote alone. In national elections since 2025 you get one **boleta** at your mesa, mark it behind a screen and put it in the **urna**. People still say cuarto oscuro, and some provinces keep the old party ballots. The **voto** is secret. If nobody wins outright, there's a **balotaje** — *a runoff*. Missed it? You have to **justificar** why.
+- `80763ab8` segun-el-diario — ¿Está confirmado?
+  - REMOVED: A **rumor** is just that until someone **confirma**: *el club confirmó la noticia*. Or as porteños say about any rumor: **dicen que…**
+- `df9ba005` segun-el-diario — Me llegó una cadena
+  - REMOVED: The family WhatsApp group sends a **cadena** — *a chain message* — every morning. **Chequeá la fuente** before you believe it — and before **compartirlo**. If it isn't true: **es mentira**, **es falso** or, very porteño, **es verso** — *it's made up*.
+- `aeee8169` fue-clausurado — Fue elegida
+  - REMOVED: Not only bad news: **la pizzería fue elegida la mejor del barrio**, **la ley fue aprobada**, **el chico fue elegido para el equipo**. Same pattern: **fue** + a participle that agrees.
+- `15cf0e24` lo-lindo-de-la-ciudad — Lo lindo, lo feo
+  - REMOVED: Put **lo** in front of an adjective and it becomes *the … thing*: **lo lindo** — *the nice thing*; **lo feo** — *the ugly part*; **lo difícil** — *the hard part*; **lo único** — *the only thing*: **lo único que extraño es el mar**.
+- `45734591` lo-lindo-de-la-ciudad — Lo bueno, lo malo
+  - REMOVED: | **Lo bueno** es la gente. | The good thing is the people. | | **Lo malo** es el tránsito. | The bad thing is the traffic. | | **Lo mejor** fue el asado. | The best part was the asado. | | **Lo peor** es el calor. | The worst part is the heat. | **Lo** + adjective makes *the … thing*, and **de** says of what: **lo peor de Buenos Aires**, **lo bueno de vivir acá es que…** **Lo** never becomes la, los or las. With a plural noun, the verb is plural: **lo malo son los precios**.
+- `f9ad308f` lo-lindo-de-la-ciudad — No hay nada como…
+  - REMOVED: **No hay nada como** — *there's nothing like*: **no hay nada como un asado con amigos**.
+- `5a7bee24` si-hubiera-ahorrado — A esta altura…
+  - REMOVED: **A esta altura** — *by now* — goes in the *now* half of the sentence: **si me hubiera mudado a Córdoba, a esta altura estaría re tranquilo**. New participles: **mudado, aprendido, dejado, invertido**.
+- `82ec2e8e` si-hubiera-ahorrado — The other life, now
+  - REMOVED: | if (then) | now | | Si **hubieras** estudiado medicina, | ahora **serías** médico. | | Si me **hubiera** mudado, | a esta altura **estaría** tranquilo. | | Si **hubiéramos** invertido, | ahora **tendríamos** ahorros. | | Si **hubieras** aprendido inglés, | ahora **sabrías** qué hacer. | *Hubiera* + participle for the past that went another way; the conditional for today.
+- `c3264f00` si-hubiera-ahorrado — Then, and what it means now
+  - REMOVED: | if (then) | now | | Si **hubiera ahorrado**, | ahora **tendría** un depto. | | Si **hubiéramos** salido antes, | ya **estaríamos** ahí. | | Si **hubiera aceptado**, | ahora **sería** otra cosa. | *Hubiera* + participle for the past that didn't happen; the plain conditional for today.
+- `fbdb815c` otro-cafe — Un or una
+  - before: The little word matches the thing, not you: **un** té, **un** helado, but **una** torta, **una** pizza. Learn each new word with its *un* or *una* and you'll never have to guess. One twist: *agua* takes **un** — *un agua*.
+  - after: **The little word matches the thing, not you: **un** té, **un** helado, but **una** torta, **una** pizza. Learn each new word with its *un* or *una* and you'll never have to guess. One twist: *agua* takes **un** — *un agua*. It is still an *una* word, though: *otra agua*.**
+- `03c07d66` hola-che — Soy
+  - before: To say who you are, use **soy**: *Soy Sofi.* One word carries "I am" . The word for "I" (**yo**) is usually left out; add it only to stress or contrast: *Yo soy Martín.*
+  - after: **To say who you are, use **soy**: *Soy Sofi.* One word carries "I am". The word for "I" (**yo**) is usually left out; add it only to stress or contrast: *Yo soy Martín.***
+- `73cc59dc` buen-dia — Gracias, de nada
+  - before: When someone says *gracias*, answer **de nada**. *Of course* is **claro**. And when something's sorted, porteños say **¡joya!** — *¿Todo bien? — ¡Joya!*
+  - after: **When someone says *gracias*, answer **de nada**. *Of course* is **claro**. And when everything is fine or agreed, porteños say **¡joya!** — *¿Todo bien? — ¡Joya!***
+- `1f4b9651` no-entiendo — Ask for help
+  - before: Stuck on a word: **¿cómo se dice…?** — *how do you say…?* — and **¿qué significa?** — *what does it mean?* Too fast: **más despacio, por favor**. And the line that buys you patience: **hablo un poco** — *I speak a little*. Argentines call the language **castellano**.
+  - after: **Stuck on a word: **¿cómo se dice…?** — *how do you say…?* — and **¿qué significa?** — *what does it mean?* Too fast: **más despacio, por favor**. And the line that makes people slow down and help: **hablo un poco** — *I speak a little*. Argentines call the language **castellano**.**
+- `6620174b` practica-hola — Soy, sos
+  - before: Two forms of *ser* so far: **soy** for yourself, **sos** for the person in front of you. *Soy Lucía, ¿y vos?* — *¿Sos turista?* The pronoun is optional; the verb already says who.
+  - after: **Two forms of *ser* so far: **soy** for yourself, **sos** for the person in front of you. *Soy Lucía, ¿y vos?* — *¿Sos turista?* The words *yo* and *vos* are optional; the verb already says who.**
+- `03fc2a95` el-y-ella — Soy, sos, es
+  - before: Three people, three forms of *ser*: | yo | **soy** | | vos | **sos** | | él, ella | **es** | The verb already tells you who, so the pronoun is usually dropped: *Es de Rosario* — he's (or she's) from Rosario.
+  - after: **Three people, three forms of *ser*: | yo | **soy** | | vos | **sos** | | él, ella | **es** | The verb already tells you who, so *él* or *ella* is usually dropped: *Es de Rosario* — he's (or she's) from Rosario.**
+- `fde51102` quien-es — ¿Quién es?
+  - before: **Quién** asks *who*: *¿Quién es él?* The answer drops the pronoun: *Es Martín, un vecino.* Whose? Use **de**: *una amiga de Juan* — *a friend of Juan's*. A **pibe** is a young guy and a **piba** a young woman — very porteño.
+  - after: ****Quién** asks *who*: *¿Quién es él?* The answer drops *él* or *ella*: *Es Martín, un vecino.* Whose? Use **de**: *una amiga de Juan* — *a friend of Juan's*. A **pibe** is a young guy and a **piba** a young woman — very porteño.**
+- `95b906a1` encantado — When you get lost
+  - before: Stuck on a word: **¿cómo se dice…?** — *how do you say…?* — and **¿qué significa?** — *what does it mean?* Too fast: **¿me repetís?** or **más despacio, por favor**. **No entendí** is *I didn't get that*. And the line that buys you patience: **hablo un poco de castellano** — Argentines call the language *castellano*.
+  - after: ****No entendí** — *I didn't understand* — is what you say when you missed something just said: *Perdón, no entendí. ¿Me repetís?* It is the past of *no entiendo*. Add *más despacio, por favor* and people slow down.**
+- `d244b49a` practica-tengo-hambre — -o, -a, or no change
+  - before: Words for people follow the person: *mi tío, mi tía*; *brasileño, brasileña*. A word in *-e* stays put: *canadiense*. One ending in a consonant adds *-a*: *francés → francesa*.
+  - after: **Words for people follow the person: *mi tío, mi tía*; *brasileño, brasileña*. A word in *-e* stays put: *canadiense*. A nationality ending in a consonant adds *-a*, and any accent mark goes: *francés → francesa*, *español → española*.**
+- `c99796c8` alfajores-y-chicles — Alfajores
+  - before: An **alfajor** is two soft biscuits stuck together with *dulce de leche*, often dipped in chocolate. Every kiosco sells them, and every porteño has a favorite.
+  - after: **An **alfajor** is two soft cookies stuck together with *dulce de leche*, often dipped in chocolate. Every kiosco (the corner shop) sells them, and every porteño has a favorite.**
+- `81f0edea` en-el-kiosco — El kiosco
+  - before: A **kiosco** is the corner shop that sells drinks, sweets and bus cards, often through a window onto the street. Many never close.
+  - after: **A **kiosco** is the corner shop that sells drinks, sweets and cigarettes and tops up your SUBE (the bus and subway card), often through a window onto the street. Many are open all night.**
+- `ec69da9b` hay-un-kiosco — Hay or está
+  - before: | something new | something you already know | | **Hay** un kiosco. | **El** kiosco **está** en la esquina. | | **Hay** una parada acá. | **La** parada **está** lejos. | **Hay** goes with *un, una*, a number or no little word at all, and never changes: *hay dos kioscos*, *¿hay agua?* **Está** goes with *el, la*.
+  - after: **| something new | something you already know | | **Hay** un kiosco. | **El** kiosco **está** en la esquina. | | **Hay** una parada acá. | **La** parada **está** lejos. | **Hay** goes with *un, una*, a number or nothing at all, and never changes: *hay dos kioscos*, *¿hay agua?* **Está** goes with *el, la*.**
+- `4a5c7164` donde-estan-las-llaves — En casa
+  - before: No *la* before home: **estoy en casa**, *I'm at home*. With anything else the little word comes back: *en la mochila*, *en el auto*.
+  - after: **No *la* before home: **estoy en casa**, *I'm at home*. With anything else you need *el* or *la*: *en la mochila*, *en el auto*.**
+- `040623f8` la-gente — Su, sus
+  - before: **Su** is *his*, *her* or *their* — and *your* for *ustedes*. Like *mi* and *tu*, it takes an *-s* with more than one: *su mamá*, *sus hijos*. The rest of the sentence tells you whose.
+  - after: ****Su** is *his*, *her* or *their* (and *your* for *ustedes*); with more than one it is **sus**: *su mamá*, *sus hijos*. *Our* matches the thing, not the people: **nuestro** papá, **nuestra** familia, **nuestros** abuelos, **nuestras** hermanas.**
+- `fc0b4b4e` esta-cerrado — ¿Listo? Listo.
+  - before: **Listo** is *ready* — *¿estás lista?* — and on its own it closes any deal: *Listo, dale.* **Apurado** is *in a hurry*, the normal state of anyone in the centro.
+  - after: ****Listo** is *ready* — *¿estás lista?* — and on its own it closes any deal: *Listo, dale.* **Apurado** is *in a hurry*, the normal state of anyone downtown.**
+- `9b8de7a7` que-haces — A la noche, ¿qué hacés?
+  - before: Porteños say **a la noche** for *at night* or *tonight*: *A la noche estudio inglés.* *Hablamos a la noche* — we'll talk tonight. **De noche** is at night in general: *laburo de noche*. And **¿qué hacés?** — literally *what are you doing?* — is also the everyday *how's it going?*: *Hola, ¿qué hacés?*
+  - after: **Porteños say **a la noche** for *at night* or *tonight*: *A la noche estudio inglés.* *Hablamos a la noche* — we'll talk tonight. **De noche** is at night in general: *laburo de noche* (I work nights). And **¿qué hacés?** — literally *what are you doing?* — is also the everyday *how's it going?*: *Hola, ¿qué hacés?***
+- `3df4bd97` que-haces — Every -ar verb
+  - before: Take off *-ar* and add the ending for the person: | yo | labur**o** | | vos | labur**ás** | | él, ella | labur**a** | | nosotros | labur**amos** | | ellos, ustedes | labur**an** | It works for *hablar, tomar, estudiar, caminar* — every regular -ar verb. **Hacer** is irregular in *yo*: **hago**, *hacés, hace*.
+  - after: **Take off *-ar* and add the ending for the person: | yo | labur**o** | | vos | labur**ás** | | él, ella | labur**a** | | nosotros | labur**amos** | | ellos, ustedes | labur**an** | It works for *hablar, tomar, estudiar, caminar* — every regular -ar verb. **Hacer** is not an -ar verb, so learn its three forms as they are: **hago**, *hacés, hace*.**
+- `1861263d` mate-y-facturas — Gusta or gustan
+  - before: The verb matches the thing you like, not you: | one thing | more than one | | Me **gusta** el mate. | Me **gustan** las facturas. | | ¿Te **gusta** la milanesa? | ¿Te **gustan** los mates? | **Me** — to me, **te** — to you, **le** — to him or her. For emphasis, add *a mí*: *A mí me gusta amargo.* With a name you need **a** and **le**: *A Lucía le gusta el mate.* Short answers: *A mí sí. A mí no.* With a verb it's always *gusta*: *me gusta tomar mate*.
+  - after: **The verb matches the thing you like, not you: *Me **gusta** el mate*, but *Me **gustan** las facturas*. The little word in front says who likes it: **me**, **te**, **le**. With a name, add **a** and keep **le**: *A Lucía le gusta el mate.***
+- `a7aca477` practica-nos-gusta — Me, te, le, nos, les
+  - before: With *gustar* the person goes in front: **me** gusta, **te** gusta, **le** gusta, **nos** gusta, **les** gusta. Only *gusta* or *gustan* ever changes after it.
+  - after: **The little word in front says who likes it: **me**, **te**, **le**, **nos**, **les**. The verb is only ever *gusta* (one thing) or *gustan* (several): *le gust**a** el pollo*, *me gust**an** las medialunas*.**
+- `c41cf955` hay-un-tren — ¿Hay … por acá?
+  - before: | asking | **¿Hay** una estación **por acá**? | | yes | Sí, **hay** una en la avenida. | | no | No, acá no **hay** tren. | | where | La estación **está** a dos cuadras. | **Hay** never changes: *hay un bar*, *hay dos plazas*, *hay gente*. 
+  - after: **| asking | **¿Hay** una estación **por acá**? | | yes | Sí, **hay** una en la avenida. | | no | No, acá no **hay** tren. | | where | La estación **está** a dos cuadras. | **Por acá** is *around here*. **Hay** never changes: *hay un bar*, *hay dos plazas*, *hay gente*. **
+- `5accb3e5` me-traes-un-cafe — El mozo
+  - before: In Argentina the waiter is **el mozo** (or *la moza*). To call one over, *perdón* is the gentle way; *¡mozo!* is heard too. When you're done, ask for **la cuenta**. A **cortado** is an espresso with a dash of milk.
+  - after: **In Argentina the waiter is **el mozo** (or *la moza*). To call one over, *perdón* is the gentle way; *¡mozo!* is heard too. When you're done, ask for **la cuenta**. **
+- `bce85693` que-quieren-tomar — Quiere, queremos, quieren
+  - before: Ordering for more than one: **queremos** dos cortados. The mozo asks the table **¿qué quieren?** And for someone else: *ella **quiere** un té*. The *ie* is everywhere except *querés* and *queremos*.
+  - after: **Ordering for more than one: **queremos** dos cafés. The mozo asks the table **¿qué quieren?** And for someone else: *ella **quiere** un té*. The *ie* is everywhere except *querés* and *queremos*.**
+- `6c6949b3` me-traes-un-cafe — ¿Me traés…?
+  - before: The easy way to order is to ask the waiter to bring it: **¿Me traés un café?** — literally "do you bring me a coffee?". *Quiero un café* works too: **quiero**, **¿querés?** — no *ie* in the vos form. Add **por favor**.
+  - after: **The easy way to order is to ask the waiter to bring it: **¿Me traés un café?** — literally "do you bring me a coffee?". *Quiero un café* works too: **quiero**, **¿querés?** — no *ie* in the vos form. Or just name it: *Para mí, un té.* Add **por favor**.**
+- `ae41a407` facu-y-laburo — Tener que, and jobs
+  - before: **Tener que** + an infinitive — the *-ar, -er, -ir* form — is *to have to*: | Tengo que laburar. | I have to work. | | ¿Tenés que estudiar? | Do you have to study? | Jobs change for a woman: *profesor* → **profesora**, *médico* → **médica**, *jefe* → **jefa**. And no *un, una*: **Soy abogada.** **Que** also joins two ideas: *tengo una jefa que habla inglés* — a boss who speaks English.
+  - after: ****Tener que** + an infinitive (the *-ar, -er, -ir* form) is *to have to*: *tengo que laburar* — I have to work; *¿tenés que estudiar?* — do you have to study? A different **que** joins two ideas: *tengo una jefa que habla inglés* — a boss who speaks English.**
+- `2375ef12` facu-y-laburo — Facu, and jobs without "a"
+  - before: **Facu** is short for *facultad* — university. For jobs, Spanish drops the article: **Soy profesora**, not *soy una profesora*.
+  - after: ****Facu** is short for *facultad* — university. For jobs, Spanish drops the article: **Soy profesora**, not *soy una profesora*. Jobs change for a woman: *profesor* → **profesora**, *médico* → **médica**, *jefe* → **jefa**.**
+- `4c58f6d8` es-enfermera — Every person has to
+  - before: | yo | **tengo que** laburar | | vos | **tenés que** practicar | | él, ella | **tiene que** ayudar | | nosotros | **tenemos que** estudiar | | ellos, ustedes | **tienen que** buscar a sus hijos | Jobs: *enfermero* → **enfermera**, *vendedor* → **vendedora**; *periodista* and *policía* stay the same. No *un, una*: **Es contadora.**
+  - after: **| yo | **tengo que** laburar | | vos | **tenés que** practicar | | él, ella | **tiene que** ayudar | | nosotros | **tenemos que** estudiar | | ellos, ustedes | **tienen que** buscar a sus hijos | Jobs: *enfermero* → **enfermera**, *vendedor* → **vendedora**; *periodista* and *policía* stay the same. **
+- `56d4a95b` comes-vivis — Every -er and -ir verb
+  - before: | | comer | vivir | | yo | com**o** | viv**o** | | vos | com**és** | viv**ís** | | él, ella | com**e** | viv**e** | | nosotros | com**emos** | viv**imos** | | ellos, ustedes | com**en** | viv**en** | -er and -ir are the same except for **vos** and **nosotros**, where each keeps its own vowel.
+  - after: **| | comer | vivir | | yo | com**o** | viv**o** | | vos | com**és** | viv**ís** | | él, ella | com**e** | viv**e** | | nosotros | com**emos** | viv**imos** | | ellos, ustedes | com**en** | viv**en** | -er and -ir are the same except for **vos** and **nosotros**, where each keeps its own vowel. The present also covers *I'm eating* and a near future: *te escribo a la noche* — I'll write to you tonight.**
+- `5f609aca` vendo-diarios — Abre, recibe
+  - before: **Abrir** and **recibir** are regular: *abro, abrís, abre*; *recibo, recibís, recibe*. *¿El negocio abre a la noche?*
+  - after: ****Abrir** and **recibir** are regular: *abro, abrís, abre*; *recibo, recibís, recibe*. *¿El negocio abre a la noche?* **Recibir a** someone is to have them over: *recibo a mi suegra*.**
+- `ff18c38c` vendo-diarios — -er and -ir, only two places apart
+  - before: | | leer | compartir | escribir | | yo | le**o** | compart**o** | escrib**o** | | vos | le**és** | compart**ís** | escrib**ís** | | él, ella | le**e** | compart**e** | escrib**e** | | nosotros | le**emos** | compart**imos** | escrib**imos** | | ellos, ustedes | le**en** | compart**en** | escrib**en** | -er keeps **e** and -ir takes **i**, but only for *vos* and *nosotros*: *vend**és**, vend**emos*** but *abr**ís**, abr**imos***. *Recibir* and *correr* follow the same pattern: *recibo, recibís, recibe*.
+  - after: **-er verbs keep **e** and -ir verbs take **i**, but only for *vos* and *nosotros*: *vend**és**, vend**emos*** but *abr**ís**, abr**imos***. Everywhere else they match: *vendo, abro*; *lee, comparte*; *leen, escriben*. *Recibir* and *correr* follow the same pattern.**
+- `9769b812` vendo-diarios — El negocio
+  - before: **Negocio** is any shop, not just a business: *el negocio de la esquina*. And porteños **comparten** everything, from an apartment to a mate.
+  - after: ****Negocio** is any shop, not just a business: *el negocio de la esquina*. And porteños **comparten** everything, from an apartment to a mate. *Con mi hermano vendemos empanadas* means *my brother and I sell* — two people, not three.**
+- `63ff509a` practica-el-vecino — Everyone ends in -n
+  - before: The *ellos* form of every verb you have ends in **-n**: *quieren, tienen, laburan, viven, escriben*. Hear the *-n* and you know it's more than one.
+  - after: **The *ellos* and *ustedes* form of every verb you have ends in **-n**: *quieren, tienen, laburan, viven, escriben*. *¿Quieren café?* — do you guys want coffee? Hear the *-n* and you know it's more than one.**
+- `d8622385` mi-edificio — Planta baja
+  - before: The ground floor is **la planta baja**; the one above it is *el primer piso*. Ringing from the street, you press the **timbre** with the floor and the letter: *4° B*. Out loud, *4° B* is **cuarto B**: *vivo en el cuarto B*. The first five floors: **primero, segundo, tercero, cuarto, quinto** — and *primero* loses its *-o* before a noun: *el **primer** piso*.
+  - after: **The ground floor is **la planta baja**; above it comes *el **primer** piso* (*primero* loses its *-o* before a noun). Then **segundo, tercero, cuarto, quinto**. Higher up, people often just say the number: *piso doce*. On the **timbre**, *4° B* is read **cuarto B**. **Piso** is also the floor you walk on.**
+- `c538de60` mi-edificio — El encargado
+  - before: Most buildings have an **encargado** who lives in, keeps it clean and takes in your packages. He knows everything that happens on every **piso**.
+  - after: **Most buildings have an **encargado** who lives in the building, keeps it clean and takes in your packages. He knows everything that happens on every **piso**.**
+- `f9a1e455` mi-casa — Depto, pieza, living
+  - before: Argentines say **depto** for an apartment, **pieza** for a bedroom and **el living** for the living room. The fridge is **la heladera**.
+  - after: **Argentines say **depto** for an apartment, **pieza** for a bedroom and **el living** for the living room. The fridge is **la heladera**. **Alquilo** on its own means *I rent my place*: *¿Dónde alquilás?***
+- `afc27211` la-hora — Veintiuno, treinta y uno
+  - before: Twenty-one to twenty-nine are one word: **veintiuno**, **veintidós**, **veintitrés**. From thirty on, **y** joins them: *treinta y uno*, *cuarenta y cinco*. A hundred is **cien**. For *on* a day, use **el**: *el miércoles laburo*, *el veintiuno tengo examen*.
+  - after: **Days take **el** for one day and **los** for every week: *el miércoles laburo* (on Wednesday), *los lunes laburo* (on Mondays). They have no capital letter. Dates work the same way, with a plain number: *el veintiuno tengo examen*.**
+- `97b6abce` la-hora — Telling the time
+  - before: *Es la una* (one o'clock), but *son las dos*, *son las siete*. Add **y media** for half past and **y cuarto** for quarter past. *At* a time is **a las**: *¿A qué hora?* — *A las nueve y media.* After a clock time say **de la mañana / de la tarde / de la noche**: *a las dos de la tarde*. With no clock time: **a la mañana**, *a la tarde*, *a la noche*.
+  - after: ***Es la una* (one o'clock), but *son las dos*, *son las siete*. Add **y media** for half past and **y cuarto** for quarter past. Other minutes go the same way: *las siete y veinte*. To ask: *¿Qué hora es?* or *¿Tenés hora?* *At* a time is **a las**: *¿A qué hora?* — *A las nueve y media.* After a clock time say **de la mañana / de la tarde / de la noche**: *a las dos de la tarde*. With no clock time: **a la mañana**, *a la tarde*, *a la noche*.**
+- `7782b8c8` a-que-hora-abre — Desde las nueve hasta las seis
+  - before: Opening hours are **desde** … **hasta**: *abre desde las nueve hasta las seis*. Shorter, and more common: *abre **de** nueve **a** seis*. At twelve it's **el mediodía** — and plenty of small shops **cierran** for a while right after it.
+  - after: **Opening hours are **desde** … **hasta**: *abre desde las nueve hasta las seis*. Shorter, and more common: *abre **de** nueve **a** seis*. At twelve it's **el mediodía** — and plenty of small shops **cierran** for a while right after it. With **desde**, Spanish uses the present: *estoy acá desde las ocho* = I've been here since eight.**
+- `52586356` tengo-una-reserva — Tengo una reserva
+  - before: At the front desk one line does it: **tengo una reserva a nombre de** … and your surname. They will ask for your **pasaporte**. Staying two nights? *Dos noches.*
+  - after: **At the front desk one line does it: **tengo una reserva a nombre de** … and your name. They will ask for your **pasaporte**. Staying two nights? *Dos noches.***
+- `78286e2b` queres-podes-vas — Querer, poder, ir
+  - before: | | querer | poder | ir | | yo | quiero | puedo | voy | | vos | **querés** | **podés** | vas | | él, ella | quiere | puede | va | | nosotros | **queremos** | **podemos** | vamos | | ellos | quieren | pueden | van | *e → ie* and *o → ue* everywhere except **vos** and **nosotros**. *Ir* is its own thing, and takes **a** + place (*a + el* = **al**): *voy al súper*, *voy a la facu*. **Salir** only bends in *yo*: **salgo**, *salís*, *sale*. Add an infinitive for plans: *¿Querés salir?*
+  - after: **| | querer | poder | ir | | yo | quiero | puedo | voy | | vos | **querés** | **podés** | vas | | él, ella | quiere | puede | va | | nosotros | **queremos** | **podemos** | vamos | | ellos, ustedes | quieren | pueden | van | *e → ie* and *o → ue* everywhere except **vos** and **nosotros**. *Ir* is its own thing, and takes **a** + place (*a + el* = **al**): *voy al súper*, *voy a la facu*. **Salir** only bends in *yo*: **salgo**, *salís*, *sale*. Add an infinitive for plans: *¿Querés salir?***
+- `eb18db97` preferis-salir — ¿A qué hora empieza?
+  - before: For a film, a show or a party, ask **¿a qué hora empieza?** Porteños go out late: a **fiesta** that *empieza a las doce* is a normal Saturday, and you **volvés** at six.
+  - after: ****Pienso** + verb is *I plan to*: *pienso ir al cine*, *¿pensás salir hoy?* **Creo que** … is *I think that* …: *creo que está cerrado*, *¿creés que abre hoy?* And **no creo** is *I don't think so*.**
+- `dc9f86b5` dale-veni — The short ones
+  - before: A few commands you will hear all day: *go* is **andá**; *hacer* gives **hacé**; *dar* gives **dame** — *give me*. The same recipe makes the rest: **poné** (put), **tené** (have, hold), **decí** (say), **salí** (go out). Never *ve, haz, pon, di* — those belong to another Spanish.
+  - after: **Three short commands you will hear all day: *hacer* gives **hacé**, *poner* gives **poné**, and *dar* gives **dame** — *give me*: *dame otro*. Never *haz* or *pon* — those belong to another Spanish.**
+- `5c1d67c6` segui-derecho — Bajate, subite
+  - before: On the bondi, getting on and off carries a *te* on the end: **subite** (get on), **bajate en la esquina** (get off at the corner). And **pará** stops anyone: *¡pará, pará!*
+  - after: **On the bondi, getting on and off carries a *te* on the end: **subite** (get on), **bajate en la esquina** (get off at the corner). And **pará** stops anyone: *¡pará, pará!* In a car, **dejar** is *to drop off*: **dejame acá**, *te dejo en la esquina*.**
+- `f8d95867` tomar-el-bondi — No cash on the bondi
+  - before: You can't pay the driver in cash. You tap a **SUBE** card on the reader — on buses, the subte and trains. You load it at a kiosco or a subte station: *¿Me cargás la SUBE?* When the **saldo** runs out, load it again.
+  - after: **You can't pay the driver in cash. You tap a **SUBE** card on the reader — on buses, the subte and trains (many now take a bank card or phone too). You load it at a kiosco or a subte station: *¿Me cargás la SUBE?* When the **saldo** runs out, load it again.**
+- `36daec09` ayuda — The numbers to call
+  - before: In Buenos Aires **911** is the police and **107** is the ambulance. In the street, shout **¡ayuda!** and tell someone what to do: **llamá a la policía**, *llamá a una ambulancia*. *Es urgente.*
+  - after: **In Buenos Aires **911** is the police and **107** is the ambulance. In the street, shout **¡ayuda!** and tell someone what to do: **llamá a la policía**, *llamá una ambulancia*. *Es urgente.***
+- `53370f9c` ropa-y-colores — Un pantalón, un jean
+  - before: One pair of pants is **un pantalón** — singular: *este pantalón es lindo*. *Los pantalones* works too. The same goes for **un jean**. And three colours: **celeste** is the light blue of the flag; **rosa** and **naranja** never change: *una remera rosa*, *un pantalón naranja*.
+  - after: ****Celeste** is the light blue of the flag — for porteños a different color from *azul*: *No son azules, son celestes.* **Rosa** and **naranja** keep the *-a* for masculine too: *un pantalón rosa*, *una campera naranja*.**
+- `14ab3922` ropa-y-colores — Agreement, and re
+  - before: Adjectives match their noun: *remera linda*, *zapatillas lindas*. Ones ending in *-e* or a consonant only change for more than one: *verde* → **verdes**, *azul* → **azules**. **Re** in front of an adjective means *really*: *re lindo*. **Muy** is *very* — and *muy chica para Juan* is *too small for Juan*. And **chico** means *small* — and also *boy* or *girl*: *la chica de la remera verde* is *the girl in the green T-shirt*.
+  - after: **Colors match their noun like any adjective: *un pantalón negro*, *una remera negra*, *zapatillas negras*. Ones ending in *-e* or a consonant only change for more than one: *verde* → **verdes**, *azul* → **azules**. The color comes after the noun.**
+- `1f894de9` este-buzo — ¿Qué es eso?
+  - before: When you don't know the word — or don't need it — use **esto** (this thing here) and **eso** (that thing there). They never change: *¿Cuánto sale eso?*
+  - after: **To say how clothes fit, use **me queda**: *Esta camisa me queda bien* — *this shirt fits me well*. *Me queda chico* — *it's too small for me*. *El vestido me queda grande* — *the dress is too big for me*.**
+- `cb4863d6` me-cobras — ¿Me cobrás?
+  - before: To pay, you don't say *I want to pay*: you ask them to charge you — **¿me cobrás?** The change they give back is **el vuelto**; small coins and notes are **cambio**.
+  - after: **To pay, you don't say *I want to pay*: you ask them to charge you — **¿me cobrás?** The change they give back is **el vuelto**; small coins and bills are **cambio**. **Cobrar** is also *to get paid*: *¿Cuándo cobrás?* — *when do you get paid?***
+- `8eaa2931` la-rutina — Me levanto, te levantás
+  - before: These verbs carry a pronoun that matches the person: | yo | **me** levanto | **me** acuesto | | vos | **te** levantás | **te** acostás | | él, ella | **se** levanta | **se** acuesta | | nosotros | **nos** levantamos | | The pronoun goes before the verb. *Acostarse* and *almorzar* change *o → ue*, but not with vos: **me acuesto**, **almuerzo** — **te acostás**, **almorzás**. **Los sábados** means *on Saturdays*; **antes de** + a verb is *before*: *antes de ir a la facu*. **Una vez por semana** is *once a week*; **a veces** is *sometimes*.
+  - after: **These verbs carry a pronoun that matches the person: | yo | **me** levanto | **me** acuesto | | vos | **te** levantás | **te** acostás | | él, ella | **se** levanta | **se** acuesta | | nosotros | **nos** levantamos | | The pronoun goes before the verb. *Acostarse* and *almorzar* change *o → ue*, but not with vos: **me acuesto**, **almuerzo** — **te acostás**, **almorzás**. **
+- `f255cb1b` que-te-gusta-hacer — Me gusta + doing something
+  - before: With a verb, *gusta* stays singular, even for two activities: | Me gusta bailar. | Me gusta leer y cocinar. | | Me encanta el fútbol. | Me encantan las series. | Agreeing with *me gusta* or *me encanta*: **A mí también** after a *yes*, **A mí tampoco** after a *no*. With a normal verb it's **yo**: *No bailo.* — *Yo tampoco.* **Jugar** stretches like *poder*: **juego**, but **jugás**.
+  - after: **With a verb, **gusta** and **encanta** stay singular, even for two activities: *Me gusta leer y cocinar.* With things they follow the thing: *Me encanta el fútbol*, *me encantan las series*. To agree: **A mí también** after a *yes*, **A mí tampoco** after a *no*. With a normal verb it's **yo**: *No bailo.* — *Yo tampoco.***
+- `63f1c92c` me-despierto-temprano — Me despierto, se despiertan
+  - before: Waking up and getting up are two verbs: **me despierto** at seven, **me levanto** at seven-thirty. The little word follows the person: *me, te, se, nos* — and **se** again for *ellos*: **se levantan**, **se acuestan**.
+  - after: **Waking up and getting up are two verbs: **me despierto** at seven, **me levanto** at seven-thirty. With vos the stem doesn't change: **te despertás**. The little word follows the person: *me, te, se, nos* — and **se** again for *ellos*: **se levantan**, **se acuestan**.**
+- `7125b8a8` ropa-y-colores — This one, that one
+  - before: | | this | that | | masculine | **este**, **estos** | **ese**, **esos** | | feminine | **esta**, **estas** | **esa**, **esas** | Drop the noun and keep *el* or *la*: *¿El negro o el azul?* — *the black one or the blue one?*
+  - after: **To say *the black one*, drop the noun and keep **el** or **la**: *¿El negro o el azul?* — *the black one or the blue one?* *Quiero la roja* — *I want the red one*. The same works with *este* and *ese*: *Quiero este* — *I want this one*.**
+- `66c19e01` me-interesa — Le gusta, les interesa
+  - before: The thing liked is the subject; the pronoun says who likes it: | a mí | **me** gusta nadar | **me** interesa el tenis | | a vos | **te** gusta viajar | **te** interesan los deportes | | a él, a ella | **le** gusta cantar | **le** interesa la música | | a nosotros | **nos** gusta pasear | **nos** encanta la playa | | a ellos | **les** gusta el fútbol | **les** encantan las series | With a verb it stays singular: *me gusta nadar y cantar*. To name the person, put **a** in front and keep **le**: *A mi hermano le gusta nadar.* **Odiar** is a normal verb: *odio, odiás*.
+  - after: **The thing liked is the subject; the pronoun says who likes it: | a mí | **me** gusta nadar | **me** interesa el tenis | | a vos | **te** gusta viajar | **te** interesan los deportes | | a él, a ella | **le** gusta cantar | **le** interesa la música | | a nosotros | **nos** gusta pasear | **nos** encanta la playa | | a ellos, a ustedes | **les** gusta el fútbol | **les** encantan las series | With a verb it stays singular: *me gusta nadar y cantar*. To name the person, put **a** in front and keep **le**: *A mi hermano le gusta nadar.* **Odiar** is a normal verb: *odio, odiás*.**
+- `a807dff0` pasame-tu-numero — Chip y datos
+  - before: For a local number you buy a **chip** — a SIM card — at a phone shop or a kiosco, and then you load **datos**: *cargar datos*, the same verb as loading the SUBE. *No tengo datos* means no internet until the next wifi.
+  - after: **For a local number you buy a **chip** — a SIM card — at a phone shop or a kiosco (take your passport: they may ask for it), and then you load **datos**: *cargar datos*, the same verb as loading the SUBE. *No tengo datos* means no internet until the next wifi.**
+- `d48b1ff9` clima — Weather with hacer
+  - before: **Hace calor**, **hace frío** — it's hot, it's cold. But **hay sol**, **hay viento**, **está nublado**, and **llueve** alone (for right now you'll also hear *está lloviendo*). You yourself **tenés frío**. Seasons are flipped: *el verano* runs from late December to March.
+  - after: ****Hace calor**, **hace frío** — it's hot, it's cold. But **hay sol**, **hay viento**, **está nublado**, and **llueve** alone (for right now you'll also hear *está lloviendo*). You yourself **tenés frío**. Seasons are flipped: *el verano* runs from late December to March. **Bárbaro** means *great*, not barbaric: *¡Bárbaro!* — Great! *Hay un sol bárbaro* — it's really sunny.**
+- `f30ace7e` en-febrero — Months and degrees
+  - before: Months have no capital: **en marzo**, **en diciembre**. Temperature is **grados**: *hace treinta y cinco grados* is a normal January day, and porteños blame everything on **la humedad**. Argentina uses Celsius: *35 grados* is very hot (95°F), and *1 grado* is almost freezing.
+  - after: **Months have no capital: **en marzo**, **en diciembre**. Temperature is **grados**: *hace treinta grados* is a normal January day, and porteños blame everything on **la humedad**. Argentina uses Celsius: *35 grados* is very hot (95°F), and *1 grado* is almost freezing. With **desde** or **hace** + a time, Spanish uses the present: *vivo acá hace dos meses* — I've been living here for two months.**
+- `9bbe1671` el-cumple — El cumple
+  - before: Nobody says *cumpleaños* in a hurry: it's **el cumple**. For plans, **ir a** + a verb: *el sábado vamos a hacer el cumple de Juan* — and **pasado mañana** is *the day after tomorrow*. The verb is **cumplir**: *¿Cuántos años cumplís?* — *Cumplo treinta.*
+  - after: **Nobody says *cumpleaños* in a hurry: it's **el cumple** — *¡Feliz cumple!* The verb is **cumplir**, to turn an age: *¿Cuántos años cumplís?* — *Cumplo treinta.* And *cumplís años el domingo* means your birthday is on Sunday.**
+- `d848ca5a` el-cumple — Te voy a esperar
+  - before: With two verbs, the little word goes before the first one or on the end of the second — never in between: **te voy a esperar** = **voy a esperarte**; **¿me vas a ayudar?** = **¿vas a ayudarme?** Porteños mostly put it first.
+  - after: **For plans, use **ir a** + a verb: *Vamos a organizar el cumple.* *¿Quién va a preparar el café?* A little word like *te* or *me* goes before it: **te voy a esperar**, *¿me vas a ayudar?* You will also hear *voy a esperarte*.**
+- `d5a4acc0` ahora-y-planes — Right now
+  - before: **Estoy laburando** — I'm working (right now). In Argentina, *estoy llegando* can mean you're still ten minutes away.
+  - after: **English *bring* is two verbs here. **Llevar** is to a place where you are not yet: *¿Qué llevo al asado?* **Traer** is to the place where you are now: *¿Podés traer hielo?* Going to a friend's place, always ask **¿qué llevo?****
+- `54719e83` ahora-y-planes — Going to
+  - before: **Ir a** + infinitive talks about plans: *Vamos a hacer un asado.* **La semana que viene** is *next week*. Same with days: *el viernes que viene*. **El próximo viernes** means the same.
+  - after: ****La semana que viene** is *next week* — the week that comes. Same with days: *el viernes que viene*. **El próximo viernes** means the same. **La próxima** alone is *next time*: *La próxima invito yo.***
+- `01e1a3a8` ahora-y-planes — Boludo and quilombo
+  - before: **Boludo** is common between close friends and an insult to anyone else — understand it, don't use it yet. **Quilombo** means a mess; it's informal, not rude, but keep it out of formal settings.
+  - after: ****Boludo** is common between close friends and an insult to anyone else — say it only to friends you know well. **Quilombo** means a mess; it's informal, not rude, but keep it out of formal settings.**
+- `ef4a4d49` naci-en — Your story in -í, -iste, -ió
+  - before: **Nací**, **viví**, **volví** — the -er and -ir past you already know tells a whole life. For *ellos* it ends in **-ieron**: *mis viejos **vivieron** en Brasil*, ***salieron** temprano*.
+  - after: **Tell your life story with the past you already know: **nací** (*I was born*), **viví**, **volví**. **Me crié** is *I grew up*, and it always takes **me**: *Nací en Italia, pero me crié en Buenos Aires.* To ask: *¿Te criaste acá?***
+- `318d0b7a` el-finde — The irregular past
+  - before: | | hacer | ver | decir | venir | poder | | yo | hice | vi | dije | vine | pude | | vos | hiciste | viste | dijiste | viniste | pudiste | | él, ella | hizo | vio | dijo | vino | pudo | | nosotros | hicimos | vimos | | | | A new stem, then *-e, -iste, -o*, with no accent — *hizo* is spelled with a *z*. *Ver* keeps it short: *vi, viste, vio*. Tell the story in order with **primero**, **entonces**, **al final**.
+  - after: **| | hacer | ver | decir | venir | poder | | yo | hice | vi | dije | vine | pude | | vos | hiciste | viste | dijiste | viniste | pudiste | | él, ella | hizo | vio | dijo | vino | pudo | | nosotros | hicimos | vimos | | | | A new stem, then *-e, -iste, -o*, with no accent — *hizo* is spelled with a *z*. *Ver* keeps it short: *vi, viste, vio*.**
+- `9f2c679d` practica-como-estuvo — We: now or then?
+  - before: **Cenamos** and **salimos** look the same in the present and the past: *we have dinner* or *we had dinner*, *we go out* or *we went out*. A porteño never gets lost: **anoche**, **ayer**, **el sábado** — the time word does the work.
+  - after: ****Cenamos** and **salimos** look the same in the present and the past: *we have dinner* or *we had dinner*, *we go out* or *we went out*. Only -ar and -ir verbs do this; -er verbs change: **comemos** (now), **comimos** (then). A porteño never gets lost: **anoche**, **ayer**, **el sábado** — the time word does the work.**
+- `22eec0b9` practica-como-estuvo — One past for everyone
+  - before: **Cené, cenaste, cenó, cenamos, cenaron**; **viví, viviste, vivió, vivimos, vivieron**. Two sets of endings, and every regular verb takes one of them.
+  - after: ****Cené, cenaste, cenó, cenamos, cenaron**; **viví, viviste, vivió, vivimos, vivieron**. Two sets of endings, and every regular verb takes one of them: -ar verbs go like *cenar*; -er and -ir verbs go like *vivir*.**
+- `38bd929f` vinieron-todos — Traje, quise
+  - before: Two more with their own stem and no accent: **traje, trajiste, trajo** (brought) and **quise, quisiste, quiso** (wanted, tried). **Quise** is about one moment — *I tried to*; **no quise** — *I refused*. **Quise venir, pero no pude** — *I wanted to come but couldn't* — is the porteño apology for a missed asado.
+  - after: **Two more with their own stem and no accent: **traje, trajiste, trajo** (brought) and **quise, quisiste, quiso** (wanted, tried). **Quise** is about one moment: *I wanted to* (and tried). **No quise**: *I didn't want to* (and didn't). **Quise venir, pero no pude** — *I wanted to come but couldn't* — is the porteño apology for a missed asado.**
+- `8413be7f` mas-alto-que — Comparing
+  - before: | more than | **más** alto **que** yo | | less than | **menos** caro **que** | | as … as | **tan** lindo **como** | | better, worse | **mejor**, **peor** | | older, younger | **más grande**, **más chico** | | really | rico → **riquísimo**, caro → **carísimo** | The describing word still matches the person: *mi hermana es más alta que yo*.
+  - after: **| more than | **más** alto **que** yo | | less than | **menos** caro **que** | | as … as | **tan** lindo **como** | | better, worse | **mejor**, **peor** | | older, younger | **más grande**, **más chico** | | really | rico → **riquísimo**, caro → **carísimo** | The describing word still matches the person: *mi hermana es más alta que yo*. Say **mejor** for *better*; about a person, **más buena** means *nicer*. **El más chico** is *the youngest*, **el peor** *the worst*.**
+- `863cc68c` te-llamo — Lo, la, le — where they go
+  - before: | him, or a masculine thing | **lo**, **los** | ¿El audio? **Lo** mando ahora. | | her, or a feminine thing | **la**, **las** | ¿La tarjeta? **La** tengo. | | to him, her, them | **le**, **les** | **Le** doy la llave. | | me, you, us | **me**, **te**, **nos** | **Te** llamo mañana. | Before a normal verb: *la tengo*. With a name you often say both: *lo llamo a Juan*, *les mando un audio a mis viejos*. Stuck to the end of a command, with no accent: **llamame**, **dame**, **mandame**, **prestame**.
+  - after: **| him, or a masculine thing | **lo**, **los** | ¿El audio? **Lo** mando ahora. | | her, or a feminine thing | **la**, **las** | ¿La tarjeta? **La** tengo. | | to him, her, them | **le**, **les** | **Le** doy la llave. | | me, you, us | **me**, **te**, **nos** | **Te** llamo mañana. | Before a normal verb: *la tengo*. With a name you often say both: *lo llamo a Juan*, *les mando un audio a mis viejos*. Stuck to the end of a command, with no accent: **llamame**, **dame**, **mandame**, **prestame**. **Buscar** is *to look for*, and also *to pick someone up*: *te busco a las ocho* = *te paso a buscar*.**
+- `89462fe8` te-llame — Le dije a Juan
+  - before: Even when you name the person, the **le** stays: **le dije a Juan que no**, **le di la llave a Sofi**, **les mandé las fotos a mis viejos**. English says it once; a porteño says it twice. And a message is not *received*, it *reaches* you: **¿Te llegó mi audio?** — **Sí, me llegó.**
+  - after: **Even when you name the person, the **le** stays: **le dije a Juan que no**, **le di la llave a Sofi**, **les mandé las fotos a mis viejos**. English says it once; a porteño says it twice. With *lo* or *la* next to it, *le* turns into **se**: *¿La foto? Ya se la mandé a Juan.***
+- `7fd0a81b` te-llame — Di, busqué
+  - before: **Dar** has a short past with no accents: **di, diste, dio** — *le di la llave*. And *buscar* bends in *yo* to keep the hard *c* sound: **busqué** (not *buscé*).
+  - after: ****Dar** has a short past with no accents: **di, diste, dio** — *le di la llave*. And *buscar* bends in *yo* to keep the hard *c* sound: **busqué** (not *buscé*). **Buscar** is *to look for* and also *to pick someone up*: *busqué la billetera*, *la busqué a Mica en la estación*.**
+- `aff1bd39` quien-lavo — El lavarropas
+  - before: Clothes go in the **lavarropas**; to **planchar** them is optional for most porteños. The floor: **barrer** with the **escoba**, then a wet **trapo** — *el trapo de piso*.
+  - after: **Clothes go in the **lavarropas**; to **planchar** them is optional for most porteños. The floor: **barrer** with the **escoba**, then you **pasás el trapo** — the wet *trapo de piso*.**
+- `5877b8a4` de-viaje — Fui a, me fui a
+  - before: For where you went, porteños say **fui a** or **me fui a**: *me fui a Bariloche*, *¿adónde te fuiste en enero?* **Viajar** is for the trip itself: *viajé en micro*, *viajé sola*, *viajo mañana*.
+  - after: **For where you went, porteños mostly say **fui a** or **me fui a**: *me fui a Bariloche*, *¿adónde te fuiste en enero?* **Viajar** is more about the trip itself: *viajé en micro*, *viajé sola*, *viajo mañana*. *Viajé a Bariloche* is fine too, just less everyday.**
+- `bd699582` de-viaje — Summer is in January
+  - before: Porteños go on **vacaciones** in January and February, and *la costa* — Mar del Plata, Pinamar — is where half of Buenos Aires ends up.
+  - after: **Porteños go on **vacaciones** in January and February, and *la costa* — Mar del Plata, Pinamar — is where half of Buenos Aires ends up. A small detail: **y** turns into **e** before an *i* sound — *fuimos a la montaña e hizo mucho frío*.**
+- `3e0c5f85` las-vacaciones — La costa, las sierras
+  - before: For a porteño **la costa** is the Atlantic beaches south of the city, where you rent a **carpa** — a beach tent by the day. The other classic is **las sierras** of Córdoba: a **río** instead of the sea.
+  - after: **For a porteño **la costa** is the Atlantic beaches south of the city, where you rent a **carpa** — a beach tent by the day. The other classic is **las sierras** of Córdoba: a **río** instead of the sea. A **carpa** is also a normal camping tent: *me fui al río con la carpa*.**
+- `c3ebca78` contame — How a porteño tells it
+  - before: **Contame** opens it; **de repente** is the twist, **por suerte** the relief, **al final** the end. **Igual** — *anyway* — goes almost anywhere, and **o sea** is *I mean* or *so*.
+  - after: ****Contame** opens it; **de repente** is the twist, **por suerte** the relief, **al final** the end. **Igual** is *anyway*, *still*: *estoy cansada, pero igual voy*. **O sea** is *I mean* or *so*. **¿Qué contás?** is just a greeting: *what's new?***
+- `862e703e` cuando-era-chico — Era, tenía, vivía, iba
+  - before: | | ser | tener | vivir | ir | | yo, él, ella | era | tenía | vivía | iba | | vos | eras | tenías | vivías | ibas | | nosotros | éramos | | | íbamos | This past describes: how things *were*, what you *had*, where you *lived*, what you *used to* do. *Yo* and *él* share one form — the story tells you which. **De chico** is *as a kid*: **De chico vivía en Rosario.** It changes with the person: **de chica** (a woman), **de chicos** (*we*).
+  - after: **| | ser | tener | vivir | ir | | yo, él, ella | era | tenía | vivía | iba | | vos | eras | tenías | vivías | ibas | | nosotros | éramos | teníamos | vivíamos | íbamos | This past describes: how things *were*, what you *had*, where you *lived*, what you *used to* do. *Yo* and *él* share one form — the story tells you which. **De chico** is *as a kid*: **De chico vivía en Rosario.** It changes with the person: **de chica** (a woman), **de chicos** (*we*).**
+- `a54ef42c` en-la-primaria — Quería, podía
+  - before: Wanting and being able are states, so back then they take the imperfect: **De chico quería ser maestro** — *as a kid I wanted to be a teacher*; **no podía salir solo** — *I wasn't allowed out on my own*. **En esa época** — *back then* — sets the whole scene. At a counter, **quería un cortado** is just a polite *I'd like a cortado*.
+  - after: **Wanting and being able are states, so back then they take the imperfect: **De chico quería ser maestro** — *as a kid I wanted to be a teacher*; **no podía salir solo** — *I wasn't allowed out on my own*. **En esa época** — *back then* — sets the whole scene. At a counter, **quería un cortado** is just a polite *I'd like a cortado*. With a person, **querer a** is *to love*: *quería mucho a mi maestra*.**
+- `a4adbfa9` en-la-primaria — La primaria
+  - before: School here is **la primaria** (six to twelve) and then **la secundaria**. In a state school everyone wears a white **guardapolvo** over their clothes, and the best part of the day is the **recreo**. In primaria the teacher is **la maestra** or **el maestro**; from secundaria on it is **el profesor**, **la profe**. Each year of primaria is a **grado**: *primer grado*.
+  - after: **School here is **la primaria** (six to twelve) and then **la secundaria**. In a state primary school everyone wears a white **guardapolvo** over their clothes, and the best part of the day is the **recreo**. In primaria the teacher is **la maestra** or **el maestro**; from secundaria on it is **el profesor**, **la profe**. Each year of primaria is a **grado**: *primer grado*.**
+- `9ec733ad` me-encantaba — Me gustaba, me encantaba
+  - before: In the past, *gustar* and *encantar* work like any -ar verb: **me gustaba**, **me encantaba** — *I liked*, *I loved*. Several things take an **-n**: **me gustaban los dibujitos**. *Ellos* too: **los pibes jugaban a la pelota en la vereda**.
+  - after: **In the past, *gustar* and *encantar* work like any -ar verb: **me gustaba**, **me encantaba** — *I liked*, *I loved*. Several things take an **-n**: **me gustaban los dibujitos**. The same **-n** makes the *they* form of any verb: **los pibes jugaban a la pelota en la vereda**.**
+- `b8f8cc97` el-partido — El hincha
+  - before: A fan is a **hincha**, and a **gol** is shouted, not said.
+  - after: **A fan is **un hincha** or **una hincha**: the word is the same for a man or a woman. Say who you support with **ser hincha de**: *Mi papá es re hincha de la selección* — my dad is a huge fan of the national team.**
+- `92fc2db4` el-partido — Dos a uno
+  - before: Scores are said with **a**: **ganamos dos a uno**, *empatamos cero a cero*. To score is **hacer un gol**: *Juan hizo dos goles*. And the pitch — and the whole stadium — is **la cancha**.
+  - after: **Scores are said with **a**: **ganamos dos a uno**, *empatamos cero a cero*. To score is **hacer un gol**: *Juan hizo dos goles*. And the field — and the whole stadium — is **la cancha**.**
+- `0543a4d4` la-final — Penales
+  - before: A **final** that ends in a tie goes first to the **alargue** — *extra time* — and then to **penales**: the **arquero atajó** one, somebody **metió** the last, and the whole city is out in the street in the **camiseta**. A great goal is a **golazo**. **Salir campeón** is *to win the title*; **¿cómo salieron?** asks how the game ended. What you shout: **¡Vamos, Argentina!** and **¡Aguante!** with your team: *¡Aguante Boca!* And a referee who gets everything wrong **no pega una**.
+  - after: **A **final** that ends in a tie goes to the **alargue** — *extra time* — and then to **penales**: the **arquero atajó** one and somebody **metió** the last. **Salir campeón** is *to win the title*. **¡Aguante!** shows love for your team, win or lose: *¡Aguante Argentina!***
+- `aefc05cf` la-final — Ellos ganaron
+  - before: The other team is *they*: **ganaron**, **perdieron**, **empataron**. Yours is usually *we*, from the bar or the sofa: **¡salimos campeones!** You can still say **juegan** or **ganaron** about the players.
+  - after: **The other team is *they*: **ganaron**, **perdieron**, **empataron**. Yours is usually *we*, from the bar or the sofa: **¡salimos campeones!** About your own team you can say either: **ganamos** (we, the fans) or **ganaron** (they, the players).**
+- `7fe05051` el-partido — Ganamos, perdimos
+  - before: After a match it's **ganamos**, **perdimos** or **empatamos** — *we* won, even if you were on the sofa. The first football question you will get in Argentina: **¿De qué equipo sos?** — **Soy de Boca.** **Soy de River.** Which one, the course leaves to you.
+  - after: **After a game it's **ganamos**, **perdimos** or **empatamos** — *we* won, even if you were on the sofa. Fans always talk as part of the team: *Anoche ganamos tres a uno.***
+- `2910b1f9` en-el-restaurante — Propina
+  - before: The tip is **la propina**, usually 10 percent and in cash. **¿Compartimos?** — *shall we share?* — is how two people order one enormous *bife*.
+  - after: **The tip is **la propina**, usually 10 percent and in cash. The bill may also have a small charge per person, the *cubierto*: it is not the tip. **¿Compartimos?** — *shall we share?* — is how two people order one enormous *bife*.**
+- `d9075515` la-parrillada — Bien cocido
+  - before: A bife comes jugoso, a punto, or **bien cocido** — *well done*; **vuelta y vuelta** is barely warm. The bill has a line for the **cubierto** — *the cover charge*: the bread and the cutlery.
+  - after: **A bife comes jugoso, a punto, or **bien cocido** — *well done*; **vuelta y vuelta** is seared on each side and almost raw inside. The bill has a line for the **cubierto** — *the cover charge*: the bread and the cutlery.**
+- `a080f44e` en-lo-de-la-abuela — What the family always did
+  - before: Traditions told from back then are imperfect: **nos juntábamos**, **festejábamos**, **armábamos el arbolito** on the 8th of December. **Tenemos la costumbre de…** — *we have the custom of…* — brings them into the present.
+  - after: **Traditions told from back then are imperfect: **nos juntábamos**, **festejábamos**, **armábamos el arbolito** on the 8th of December. **Es costumbre…** — *it's the custom to…* — brings them into the present: *Es costumbre juntarnos en Navidad.***
+- `bb6b163b` de-que-cuadro-sos — ¿De qué cuadro sos?
+  - before: The first question in a new friendship. A team is a **cuadro**, and you don't choose it, you inherit it: **soy del mismo cuadro que mi viejo**. The answer is **soy de** or **soy hincha de**: *Soy de Racing.* *Soy hincha de River.* **Hinchar por** is for one game or the national team: **¿por quién hinchás?** — *Hincho por Argentina.*
+  - after: **The first question in a new friendship. A team is a **cuadro**, and you inherit it: *Soy de Independiente, el cuadro de mi abuelo.* Answer with **soy de** or **soy hincha de**. **Hinchar por** is for one game or the national team: *Hincho por la selección.***
+- `8f4c23b2` de-que-cuadro-sos — El superclásico
+  - before: The two biggest teams, **Boca** and **River**, playing each other is **el superclásico**; any derby is a **clásico** — *Racing* against *Independiente*, for one. Boca fans are called *bosteros* and River fans *gallinas*: insults they now wear with pride. The fans stand on the **tribuna**. Which side you're on, the course leaves to you.
+  - after: ****Boca** against **River** is **el superclásico**; any other big rivalry game is a **clásico**. Boca fans are called *bosteros* and River fans *gallinas*: they say it about themselves with pride, but from you it can be an insult. Which side you're on, the course leaves to you.**
+- `bcc20295` de-que-cuadro-sos — Ser socio
+  - before: To go to **la cancha** — *estadio* is for signs and maps — you are usually **socio** — *a member* — of the **club**, and pay the cuota. Tickets are *entradas*: the **popular** is the cheap standing end, the **platea** the seats. The **hinchada** sings its **cantitos** for ninety minutes, under the **banderas**. Away fans? Mostly banned since 2013: you usually only go **de visitante** on TV.
+  - after: **To go to **la cancha** you are usually a **socio** — *a member* — of the **club**, and you pay a monthly fee. The **popular** is the cheap standing section, where the **hinchada** sings its **cantitos** for ninety minutes under the **banderas**.**
+- `95e185c4` la-parrilla — ¿Cómo la querés?
+  - before: Meat comes **jugosa** — *pink, juicy* — **a punto** — *medium* — or well done. The **parrilla** is both the grill and the restaurant.
+  - after: **Meat comes **jugosa** — *rare* — **a punto** — *medium* — or well done. The **parrilla** is both the grill and the restaurant.**
+- `9ca4eeb2` practica-la-sobremesa — Pedimos, pidieron
+  - before: **Pedimos** keeps the *e*; **pidió** and **pidieron** turn it into *i*. **¿Qué pidieron?** — **Una grande de muzza y dos porciones de provoleta**... and someone always asks **¿es picante?**
+  - after: ****Pedimos** keeps the *e*; **pidió** and **pidieron** turn it into *i*. **¿Qué pidieron?** — **Una grande de muzza y una provoleta para compartir.****
+- `a5a666cc` la-semana-que-viene — Voy a…
+  - before: Porteños talk about the future with **ir a**: **voy a laburar**, **vamos a comer**. For a fixed plan the plain present works too: **viajamos el viernes**. *Next week* is **la semana que viene**, *next year* **el año que viene**.
+  - after: **Porteños talk about the future with **ir a**: **voy a laburar**, **vamos a comer**. For a fixed plan the plain present works too: **viajamos el viernes**. *Viajamos* is also *we traveled*: the time word tells you which. *Next week* is **la semana que viene**, *next year* **el año que viene**.**
+- `40e8fd4a` la-semana-que-viene — Tengo ganas
+  - before: **Tengo ganas de ir a la playa** — *I feel like going to the beach*. **Pienso ir** — *I'm planning to go*.
+  - after: ****Tengo ganas de ir a la playa** — *I feel like going to the beach*. **Pienso ir** — *I'm planning to go*. Careful: **pensar** + a verb is *to plan to*, but **pensar que** is *to think that*: *pienso que tenés razón*.**
+- `72734c3b` me-mude — Me mudé
+  - before: **Me mudé** — *I moved (house)*; **nos mudamos** — *we moved*. The **mudanza** is the move itself, and always a *quilombo* (a mess).
+  - after: ****Me mudé** — *I moved (house)*; **nos mudamos** — *we moved*. It always carries *me/te/se/nos*: **te mudaste**, **se mudó**. **Mudarse con** is *to move in with*. The **mudanza** is the move itself, and always a *quilombo* (a mess).**
+- `dbad321f` el-depto-nuevo — The move itself
+  - before: You rent through an **inmobiliaria** or straight from the **dueño**, and pay the **alquiler** every month. On top of the rent come the **expensas** — *the building fees* — and to move in you leave a **depósito**. A **flete** takes the **muebles** and the **colchón**, and before unpacking, **pintamos**. And *they moved* is **se mudaron**. The dream is the **casa propia** — *a place of your own*.
+  - after: **You rent through an **inmobiliaria** or straight from the **dueño**. Every month you pay the **alquiler** plus the **expensas** — *the building fees*. To sign the **contrato** you leave a **depósito** and show a **garantía**: someone who answers for you if you don't pay.**
+- `dff327fb` practica-antes-y-ahora — Me sentí, me olvidé
+  - before: The moment a feeling hit, or a thing slipped your mind, is preterite with its pronoun: **me sentí re mal**, **me olvidé de avisarte**, **nos pusimos contentos**.
+  - after: **The moment a feeling hit, or a thing slipped your mind, is preterite with its pronoun: **me sentí re mal**, **me olvidé de avisarte** (a thing you left behind takes no *de*: **me olvidé las llaves**), **nos pusimos contentos**.**
+- `9b2c23e3` donde-queda — Capital y provincia
+  - before: The city is **la Capital**; the ring of towns around it, in the province, is **el conurbano**. Palermo, San Telmo and La Boca are all barrios of the Capital. Each barrio has its thing: **Palermo está lleno de bares**, **en San Telmo hay una feria los domingos**, **La Boca es re turística**. The first question to any porteño: **¿en qué barrio vivís?**
+  - after: **The city is **la Capital** — often with no article: *vivo en Capital*. The ring of towns around it is **el conurbano**. Palermo, **San Telmo** and **La Boca** are barrios of the Capital: *Palermo está lleno de bares*, *La Boca es re turística*. The first question to any porteño: **¿en qué barrio vivís?****
+- `ef2f7720` zona-norte — Norte y sur
+  - before: **Zona norte** — the suburbs north of the General Paz, like Vicente López, San Isidro and Tigre — has the money and the **árboles**; **zona sur** — the suburbs to the south, like Avellaneda, Lanús and Quilmes — is cheaper. Inside the Capital, Recoleta and Belgrano are the leafy north; Caballito, Almagro and Villa Crespo sit in the middle.
+  - after: ****Zona norte** — the suburbs north of the General Paz, like San Isidro and Tigre — has a name for money and **árboles**; **zona sur** — Avellaneda, Lanús, Quilmes — is, in general, cheaper. Inside the Capital, Recoleta and Belgrano are the leafy north; Caballito, Almagro and Villa Crespo sit in the middle.**
+- `f7ca6bf1` donde-queda — ¿Dónde queda?
+  - before: For where a place *is*, porteños say **queda**: **¿dónde queda la farmacia?** — *where's the pharmacy?* — and **me queda cerca** — *it's close to me*.
+  - after: **Remember **queda** for where a place *is*: **¿dónde queda Palermo?** New here is **me parece** — *I think, it seems to me*: *me parece re caro*. To ask for an opinion: **¿qué te parece el depto?** — *what do you think of the apartment?***
+- `ca47c7e9` zona-norte — Quedan, te queda
+  - before: Two places: **quedan** — *San Isidro y Tigre quedan en zona norte*. For you: **¿te queda cerca?** — *is it close for you?*. It's the same *queda*, with whoever it's for in front.
+  - after: **You know **queda** and **quedan** for where places are. Put the person in front to say how far it is *for them*: **¿te queda cerca la facu?** — *is college close for you?* — *el centro te queda cerca*.**
+- `086d52a0` las-figuritas — Every porteño childhood
+  - before: The **calesita** in the plaza, **golosinas** from the kiosco, a **barrilete** on a windy day, and the **álbum** of **figuritas** you filled for every **Mundial** — **lo llenábamos entre todos**.
+  - after: **The **calesita** in the plaza, **golosinas** from the kiosco, a **barrilete** on a windy day, and the **álbum** of **figuritas** you filled for every **Mundial** — **lo llenábamos entre todos** — *we used to fill it together*.**
+- `0a0c6336` me-haces-un-favor — Ayudame
+  - before: With a vos command the pronoun joins the end: **ayudame**, **alcanzame** — *help me*, *hand me*.
+  - after: **With a vos command the pronoun joins the end: **ayudame**, **alcanzame** — *help me*, *hand me*. No written accent: the stress stays on **-da-** and **-za-**, so not *ayúdame*.**
+- `795eda4c` me-das-una-mano — More favors, same question
+  - before: Still a plain question in the present with **me** in front: **¿me acompañás?** — *will you come with me?*; **¿me llevás?** — *can you give me a ride?*; **¿me regás las plantas?** — *can you water my plants?* Asking for two of you? Swap *me* for **nos**: **¿nos sacás una foto?**
+  - after: **Still a plain question in the present with **me** in front: **¿me acompañás?** — *will you come with me?*; **¿me llevás?** — *can you give me a ride?*; **¿me regás las plantas?** — *can you water my plants?* Asking for two of you? Swap *me* for **nos**: **¿nos llevás?** — *can you take us?***
+- `9c22a7d9` un-ratito — Cerquita, despacito
+  - before: It works on adverbs too: **cerquita** — *close by*; **despacito** — *nice and slow*. **Chiquito** — *small, little*. Careful: **hablá más despacito** usually means *keep your voice down*, not *slow down*.
+  - after: **It works on adverbs too: **cerquita** — *close by*; **despacito** — *nice and slow*. **Chiquito** — *small, little*. Careful: **hablá más despacito** can mean *slower* or *quieter* — the situation tells you.**
+- `25238004` hace-fresquito — -cito
+  - before: Words ending in *-r*, *-n*, *-e* take **-cito**: **calor → calorcito**, **café → cafecito**. Short *sol* does too: **solcito**. Words in *-o* just swap it for **-ito**, and a *c* turns *qu*: **fresco → fresquito**. Porteños love diminutives for nice weather: **hace fresquito**, **qué lindo calorcito**.
+  - after: **Words ending in *-r*, *-n*, *-e* take **-cito**: **calor → calorcito**, **café → cafecito**. Short *sol* does too: **solcito**. Words in *-o* just swap it for **-ito**, and a *c* turns *qu*: **fresco → fresquito**; a *z* turns *c*: **pedazo → pedacito**. Porteños love diminutives for nice weather: **hace fresquito**, **qué lindo calorcito**.**
+- `48fa40c1` hace-fresquito — -ito on everything
+  - before: Nouns: **una cosita**, **un pedacito**, **un besito**. Adjectives: **calentito** — *nice and warm*; **cortito**; **igualito a su papá**; **solito** — *all by himself*. Adverbs: **tempranito**, **rapidito**. It agrees like any adjective: **una sopa calentita**.
+  - after: **Nouns: **una cosita**, **un pedacito**, **un besito**. Adjectives: **calentito** — *nice and warm*; **cortito**; **igualito a su papá**; **solito** — *all by himself* (to an adult it sounds tender or teasing, so keep it for friends). Adverbs: **tempranito**, **rapidito**. It agrees like any adjective: **una sopa calentita**.**
+- `01a808b3` pasen-pasen — Están en su casa
+  - before: A porteño host says **pasen, pasen** at the door, **pónganse cómodos**, and **no se preocupen** when you apologize for being late.
+  - after: **A porteño host says **pasen, pasen** at the door, **pónganse cómodos**, and **no se preocupen** when you apologize for being late. **Están en su casa** — *make yourselves at home*.**
+- `f534bcfd` pasen-pasen — Commands for ustedes
+  - before: | one person (vos) | more than one (ustedes) | | pasá | **pasen** | | esperá | **esperen** | | vení | **vengan** | | traé | **traigan** | | sentate | **siéntense** | | no te preocupes | **no se preocupen** | -ar verbs end in **-en**, the rest in **-an**. The pronoun is **se**, stuck on the end — and then the accent appears: **siéntense, quédense**.
+  - after: **| one person (vos) | more than one (ustedes) | | pasá | **pasen** | | esperá | **esperen** | | vení | **vengan** | | traé | **traigan** | | sentate | **siéntense** | | no te preocupes | **no se preocupen** | -ar verbs end in **-en**, the rest in **-an**, built on the *yo* form: *vengo* → **vengan**, *traigo* → **traigan**. The pronoun is **se**, stuck on the end — and then the accent appears: **siéntense, quédense**. After *no* it goes in front: **no se preocupen**.**
+- `a5ed425f` a-la-mesa — Ustedes at the table
+  - before: | one person (vos) | more than one (ustedes) | | probá | **prueben** | | agarrá | **agarren** | | tomá | **tomen** | | no te olvides | **no se olviden** | Also **coman**, **hagan** lugar, **vayan**, **dejen**. **Vayan** + *-ando/-iendo* is *go ahead and start*: **vayan comiendo** — *start eating*. -ar verbs **-en**, the rest **-an**. The stem is the *yo* stem: *pruebo* → **prueben**, *hago* → **hagan**, *vengo* → **vengan**. The pronoun sticks on the end — **sírvanse, apúrense** — and after *no* it goes in front: **no se olviden**.
+  - after: **| one person (vos) | more than one (ustedes) | | probá | **prueben** | | agarrá | **agarren** | | tomá | **tomen** | | no te olvides | **no se olviden** | Also **coman**, **hagan** lugar, **vayan**, **dejen**. **Vayan** + *-ando/-iendo* is *go ahead and start*: **vayan comiendo** — *start eating*. -ar verbs **-en**, the rest **-an**. The stem is the *yo* stem: *pruebo* → **prueben**, *hago* → **hagan**, *vengo* → **vengan**. **Dejen de** + verb is *stop*: **dejen de hablar** — *stop talking*.**
+- `1a5ebe3a` a-la-mesa — Buen provecho
+  - before: **¡Buen provecho!** — *enjoy!* — is polite when you serve food or walk in on people eating; at home, people often just start. And when the host says **sírvanse** — *help yourselves* — everybody starts right away.
+  - after: ****¡Buen provecho!** — *enjoy!* — is said when you serve food, or when you pass people who are eating, even coworkers or strangers. The answer is **gracias**. And when the host says **sírvanse** — *help yourselves* — everybody starts right away.**
+- `69d02752` el-tramite — Vencido
+  - before: A document that has run out is **vencido**: *tengo el pasaporte vencido*. You renew it (**renovar**), fill in the form — **completar el formulario**: *ya completé el formulario* —, stand in line — **hacer la cola**; you will also hear **fila** — and sign (**firmar**).
+  - after: **A document that has run out is **vencido**: *tengo el pasaporte vencido*. What comes next: **renovar** — *renew it*; **completar el formulario** — *fill in the form*; **hacer la cola** (or **la fila**) — *stand in line*; **firmar** — *sign*.**
+- `aed54cfb` migraciones — What Migraciones asks for
+  - before: For the **residencia** you need your **antecedentes penales** — *criminal record* — with the **apostilla**, the stamp that makes a foreign paper valid here, and a **certificado de domicilio** — *proof of address*. While you wait they give you the **precaria**, a temporary permit you can already work and travel with.
+  - after: **For the **residencia** you need your **antecedentes penales** — *criminal record certificate* — with the **apostilla**, the stamp that makes a foreign paper valid here, and a **certificado de domicilio** — *proof of address*. While you wait they give you the **precaria**, a temporary permit you can already work and travel with.**
+- `ce04f326` te-acordas — ¿Te acordás?
+  - before: **¿Te acordás cuando…?** opens every memory at a family asado. **Me acuerdo** — *I remember*; **no me acuerdo** — *I don't remember*. The moment it comes back is the past: **¡ah, ahora me acordé!**; **¿te acordaste de llamar?** — *did you remember to call?*
+  - after: **You know **me acuerdo** — *I remember*. The moment something comes back is the past: **¡ah, ahora me acordé!**; **¿te acordaste del pan?** — *did you remember the bread?* To remind someone, use the command: **acordate de las llaves** — *remember the keys*.**
+- `a7acb74c` en-la-verduleria — La papa, la cebolla
+  - before: For produce porteños often use the singular for the whole product: **la papa está cara** — *potatoes are expensive*; **un kilo de cebolla** — *a kilo of onions*.
+  - after: **For produce porteños often use the singular for the whole product: **la papa está cara** — *potatoes are expensive*; **un kilo de cebolla** — *a kilo of onions*. And fruit that **está verde** is *not ripe* yet (*es verde* is the color).**
+- `3d839f10` cien-gramos-de-jamon — Gramos, litros
+  - before: At the fiambrería you buy by the **gramo**: **cien gramos de jamón**, cut in **fetas** — *slices*. Milk comes by the **litro**. At the **feria**, the street market, it's still the kilo: **medio kilo de frutillas**. The classic deli order is **un cuarto** — 250 grams: **un cuarto de jamón cocido**. **Jamón cocido** is plain ham; **jamón crudo** is the cured one.
+  - after: **At the **fiambrería** you buy by weight: **cien gramos de jamón**, cut in **fetas** — *slices*. The classic order is **un cuarto** — 250 grams: *un cuarto de jamón cocido*. **Jamón cocido** is plain ham; **jamón crudo** is the cured one.**
+- `bbf8899a` cien-gramos-de-jamon — ¿Algo más?
+  - before: The vendor always asks **¿algo más?** — *anything else?* You answer **nada más, gracias**, or keep going: **y un kilo de naranjas**. To ask a price, **¿cuánto sale?** is the everyday way — same as *¿cuánto cuesta?*
+  - after: **The vendor always asks **¿algo más?** — *anything else?* You answer **nada más, gracias**, or keep going: **y un kilo de naranjas**. To ask a price, **¿cuánto sale?** is the everyday way — same as *¿cuánto cuesta?* For things sold by weight you already know **¿a cuánto está?****
+- `4492bbdb` practica-la-feria — Me, nos
+  - before: **¿Me acompañás?** — the favor is for me; **¿nos sacás una foto?** — the favor is for us. It stays a question in the present — the tone does the asking.
+  - after: ****¿Me acompañás?** — the favor is for me; **¿nos sacás una foto?** — the favor is for us. You ask with a plain present-tense question: no *can you* needed. **¿Me podrías…?** — *could you…?* — is the more careful version.**
+- `301acde2` el-celu — La SUBE
+  - before: The card for the bus and the subte is **la SUBE**, and you **cargás** it at a kiosco — the same verb as charging a phone.
+  - after: **The card for the bus and the subte is **la SUBE**: you **cargás** it at a kiosco — the same verb as charging **el celu**, the phone (short for **celular**). *Celular* is also the phone number: *pasame tu celular* — *give me your number*.**
+- `4e8246f2` el-celu — El celu
+  - before: The phone is **el celu** (short for *celular*). *Celular* is also the phone number: **pasame tu celular** — *give me your number*. **Me quedé sin batería** — *my battery died*; **se cortó** — *it cut out*; **mandame la ubicación** — *send me your location*. Without *sin*, **quedarse** is *to stay*: **¿te quedaste en casa?**
+  - after: ****Me quedé sin batería** — *my battery died*, literally *I was left without battery*. A call, or the power at home, **se cortó** — *it cut out*. Without *sin*, **quedarse** is *to stay*: *¿te quedaste en casa?***
+- `6d7c070b` no-tengo-senal — Descargá, borrá
+  - before: Tech orders are plain vos commands: **descargá la app**, **borrá las fotos**. What you already did is preterite: **la descargué**, **las borré**. Day to day people say **bajá** or **bajate** for *download*: **bajate la app, es gratis**. *Descargá* is what the screen says.
+  - after: **Tech orders are plain vos commands: **descargá la app**, **borrá las fotos**. What you already did is preterite: **la descargué**, **las borré**. Day to day people say **bajá** or **bajate** for *download*: **bajate la app, es gratis**. *Descargar* is what the screen says.**
+- `ecc14597` no-tengo-senal — Se apagó, se colgó
+  - before: A machine that fails on its own takes **se** and the preterite, like **se cortó**: **se apagó** — *it switched off*; **se colgó** — *it froze*. Your friend **se quedó sin batería**? Now you know why she didn't answer. When anything stops working, porteños say it **no anda**: **no anda el wifi**, **no me anda el celu**. The universal fix: **apagalo y prendelo**.
+  - after: **When anything stops working, porteños say it **no anda**: *no anda el wifi*, *no me anda el celu*. A machine that fails on its own takes **se**: **se apagó** — *it switched off*; **se colgó** — *it froze*. The universal fix: **apagalo y prendelo**.**
+- `65cb8068` me-robaron — La denuncia
+  - before: To report it you **hacés la denuncia** at the **comisaría**, or online. The **policía** rarely finds the phone; the denuncia is for the insurance and the new SIM.
+  - after: **To report it you **hacés la denuncia** at the **comisaría**, or online. The **policía** rarely finds the phone; the denuncia is for the insurance. To block the line, call your phone company. In an emergency, call **911**.**
+- `9005c132` me-afanaron — They took it — from whom?
+  - before: | **me** robaron | they robbed me | | **te** robaron | they robbed you | | **le** robaron a mi vieja | they robbed my mom | | **nos** robaron la bici | they stole our bike | | **me** afanaron, **me** estafaron | they stole it, they scammed me | The verb stays *robaron*; the pronoun in front says who it was taken from.
+  - after: **| **me** robaron | they robbed me | | **te** robaron | they robbed you | | **le** robaron a mi vieja | they robbed my mom | | **nos** robaron la bici | they stole our bike | | **les** robaron a mis viejos | they robbed my parents | The verb stays *robaron*; the pronoun in front says who it was taken from.**
+- `9f1b4f75` me-afanaron — Me afanaron, nos robaron
+  - before: Among friends it's **me afanaron** — *they stole it* (slang) — with the same *they* that nobody names. It moves with the victim: **te robaron**, **le robaron a mi vieja**, **nos robaron la bici**. The **motochorro** does it from a motorbike. It is also what you say when you were overcharged: **me afanaron con el taxi** — *the taxi ripped me off*.
+  - after: **Among friends it's **me afanaron** — *they stole it* (slang). It is also what you say when you were overcharged: *me afanaron con el taxi* — *the taxi overcharged me*. The **motochorro** steals from a motorbike. The confession that comes with it: **me descuidé** — *I wasn't careful*.**
+- `4be9d9ea` se-aceptan-tarjetas — Out loud: ¿se puede?
+  - before: **Se permite** and **se prohíbe** are sign language. Out loud people say **se puede** / **no se puede**: *acá no se puede estacionar*; *¿se puede pagar con tarjeta?* Other signs you'll meet every day: **abierto / cerrado**, **no funciona** — *out of order*, **liquidación** — *sale*, **solo efectivo** — *cash only*, **cuidado con el perro**. And to ask a shop: **¿hacen envíos?** — *do you deliver?*
+  - after: ****Se permite** and **se prohíbe** are sign language. Out loud people say **se puede** / **no se puede**: *acá no se puede estacionar*; *¿se puede pagar con tarjeta?* And to ask a shop: **¿hacen envíos?** — *do you deliver?***
+- `af4c1031` se-aceptan-tarjetas — No se permite
+  - before: The building speaks the same way: **no se permiten mascotas**, **se prohíbe hacer ruido después de las diez**. That's written language: out loud people say **se puede** / **no se puede**. On the shop door: **horario de atención** — and outside those hours the **local** is **cerrado**.
+  - after: **On the shop door: **horario de atención** — *opening hours*; **abierto / cerrado**; **solo efectivo** — *cash only*; **no funciona** — *out of order*; **liquidación** — *sale*. In a building: **no se permiten mascotas**, **se prohíbe hacer ruido**.**
+- `54258bee` te-lo-presto — Se lo digo
+  - before: To him or her, *le lo* turns into **se lo** again: **se lo digo mañana** — *I'll tell her tomorrow*. If it's **un secreto**: **no se lo digo a nadie, te lo prometo**.
+  - after: **A **secreto** stays between two people: **te guardo el secreto** — *I'll keep your secret*. And you promise it: **no se lo digo a nadie, te lo prometo** — *I won't tell anyone, I promise*.**
+- `eac9e910` te-lo-presto — Te lo paso
+  - before: **Te lo paso** is *I'll send it to you* — a number, a photo, a file. And a loan comes back **sin falta** — *without fail*.
+  - after: ****Te lo paso** is *I'll send it to you* — a number, a photo, a file. And a loan comes back **sin falta** — *for sure* (word for word, *without fail*).**
+- `62b08ac0` laburo-nuevo — Home office
+  - before: Working from home is **hacer home office**, in English, and said the Spanish way.
+  - after: **Working from home is **hacer home office**: English words, said with a Spanish accent. It never means the room: *hoy hago home office* — *I'm working from home today*.**
+- `9cfec53b` laburo-nuevo — Conseguir
+  - before: **Conseguí laburo** — *I got a job*. *Conseguir* is the porteño verb for getting anything that took effort: a *turno*, a table, an apartment.
+  - after: ****Conseguí laburo** — *I got a job*. *Conseguir* is the verb for getting anything that took effort: a *turno*, a table, an apartment.**
+- `47214591` me-contrataron — El aguinaldo
+  - before: Twice a year, in June and December, the **aguinaldo** arrives — half a month's extra pay. Ask about it at the *entrevista*, along with the **licencia** — *paid leave* for a reason (sick, a new baby, exams). Your yearly holiday is **vacaciones**.
+  - after: **Twice a year, in June and December, the **aguinaldo** arrives — half a month's extra pay. Every job *en blanco* pays it by law. A **licencia** is *paid leave* for a reason (sick, a new baby, exams). Your yearly holiday is **vacaciones**.**
+- `dbb9fb4d` salir-con-alguien — Salir con
+  - before: **Estoy saliendo con alguien** — *I'm seeing someone*. When it ends, porteños **cortan**: **cortamos** — *we broke up*. They say **con Juan cortamos** — literally *with Juan we broke up* — for *Juan and I broke up*. A fight is **nos peleamos** — *we had a fight* — or, for them, **se pelearon**; same pattern: **con Sofi nos peleamos** — *Sofi and I had a fight*. **Nos peleamos** is the same for now and for the past: *we fight* / *we had a fight*.
+  - after: ****Estoy saliendo con alguien** — *I'm seeing someone*. When it ends, porteños **cortan**: **cortamos** — *we broke up*. With a name they say **con Santi cortamos** — *Santi and I broke up* — and the same for a fight: **con Sofi nos peleamos**. **Nos peleamos** is *we fight* and also *we had a fight*.**
+- `e73a1f00` salir-con-alguien — Alguien, nadie
+  - before: **Alguien** is *someone*, **nadie** is *nobody* — and Spanish keeps the *no* as well: **no vino nadie**.
+  - after: ****Alguien** is *someone*, **nadie** is *nobody* — and Spanish keeps the *no* as well: **no vino nadie**. If *nadie* comes first, drop the *no*: **nadie me dijo nada**.**
+- `28e641b6` se-caso — Se casó, nació
+  - before: | Mi prima **se casó** el sábado. | got married | | **Nos casamos** en marzo. | we got married | | El bebé **nació** ayer. | was born | | ¿Dónde **naciste**? | were you born | **Casarse** takes its pronoun; **nacer** doesn't. The wedding is a **casamiento**, and **está embarazada** is *she's pregnant*.
+  - after: **| Mi prima **se casó** el sábado. | got married | | **Nos casamos** en marzo. | we got married | | El bebé **nació** ayer. | was born | | ¿Dónde **naciste**? | were you born | **Casarse** takes its pronoun; **nacer** doesn't. **Nos casamos** is also the present: *nos casamos en julio* — *we're getting married in July*. The wedding is a **casamiento**, and **está embarazada** is *she's pregnant*.**
+- `fcd34b7a` se-recibio — Por civil, y el velorio
+  - before: Porteños get married **por civil** — *at the registry office* — and, if there is a church wedding too, with a **padrino** and a **madrina**; then the **luna de miel**. When **nació una nena** or **un nene**, you visit. At a **velorio** — *a wake* — you hug and say **te acompaño en el sentimiento**.
+  - after: **When someone dies, family and friends meet at the **velorio** — *the wake*. You hug the family and say **te acompaño en el sentimiento** — *I'm sorry for your loss*.**
+- `6f3c143b` donde-estara — Será
+  - before: **¿Qué hora será?** — *I wonder what time it is*. **Será** on its own shrugs: *could be*. **Capaz**, **quizás** and **seguro que** guess with the plain present: **capaz está en la plaza**; **seguro que es Juan**. In Buenos Aires you will hear **capaz** much more than **quizás**.
+  - after: ****Capaz**, **a lo mejor** and **quizás** all mean *maybe*; **seguro que** is *I bet*; **supongo que** is *I guess*. All take the plain present: **capaz está en la plaza**, **seguro que es Fede**. In Buenos Aires you will hear **capaz** much more than **quizás**.**
+- `e5afe1ea` donde-estara — The future of guessing
+  - before: | ser | **será** | ¿Qué hora será? | | estar | **estará** | Estará en el laburo. | | tener | **tendrá** | Tendrá treinta años. | | haber | **habrá** | Habrá mucha gente. | For plans, porteños say *voy a*. This future is for wondering and guessing: *I wonder…*, *he's probably…*
+  - after: **This future is for wondering: **¿dónde estará?** — *I wonder where he is*. Same with **¿qué hora será?**, **¿tendrá cargador?**, **¿habrá café?**, **¿qué hará?**, **¿vendrá?**, **¿qué le pasará?** For *they*, add **n**: **¿dónde estarán?**, **¿de quién serán?** For plans, porteños say *voy a*.**
+- `7b5302fb` donde-estara — Debe estar
+  - before: To state a guess, porteños mostly say **debe** + infinitive: **debe estar en el laburo** — *he must be at work*; **debe tener cuarenta**; **deben ser las ocho**. The future is more for the question: **¿dónde estará?**, **¿qué hora será?**
+  - after: **To state a guess, porteños mostly say **debe** + infinitive: **debe estar en el laburo** — *he must be at work*; **debe tener cuarenta**; **deben ser las ocho**; to vos, **debés estar cansado** — *you must be tired*. The future is more for the question: **¿dónde estará?**, **¿qué hora será?****
+- `bdb46568` manejar-en-baires — Manejar, estacionar
+  - before: A porteño **maneja** (drives) an **auto** and spends half an hour trying to **estacionar** (park). *Conducir* is only for forms and signs; *aparcar* is Spain's.
+  - after: **A porteño **maneja** (drives) an *auto*. *Conducir* is only for forms and signs. Downtown, the **tránsito** is often **imposible**, and so is finding a place to *estacionar* (park).**
+- `1a8b45ec` me-siento-mal — Me siento
+  - before: **Me siento mal** — *I feel sick*; **¿cómo te sentís?** — *how do you feel?* On its own, **lo siento** is *I'm sorry*. The vowel changes only when it is stressed: **me siento**, but **te sentís**. *Dormir* does the same: **duermo**, but **dormís**. In the past: **dormí** — *I slept*.
+  - after: ****Me siento mal** — *I feel sick*; **¿cómo te sentís?** — *how do you feel?* The vowel changes with *yo*, not with *vos*: **me siento**, but **te sentís**. *Dormir* does the same: **duermo**, but **dormís**; **dormí** is the past, *I slept*. On its own, **lo siento** is *I'm sorry*.**
+- `04747eea` quien-ceba — Cebar
+  - before: One person **ceba** — pours the water from the **termo** — and passes the mate around the **ronda**. You drink it all, through the **bombilla**, and hand it back to the one who ceba.
+  - after: **One person **ceba** — pours the water from the **termo** — and passes the mate around the **ronda**. You drink it all, through the **bombilla**, and hand it back to the **cebador**, the person who pours.**
+- `35a38f0f` quiero-que-vengas — Quiero que + a new verb form
+  - before: When you want *someone else* to do something, the second verb changes: **quiero que vengas** — *I want you to come*. This form is the **subjunctive**, and *querer que* is where it starts.
+  - after: **When you want *someone else* to do something, the second verb changes: **quiero que vengas** — *I want you to come*. This form is the **subjunctive**. **No hace falta que** — *there's no need to* — takes it too: *no hace falta que traigas nada*.**
+- `2d43e784` quiero-que-vengas — One word for yo and él
+  - before: **Venga**, **vaya**, **haga** are both *I* and *he/she*: *quiere que venga* — *he wants me/him to come*. The *que* and the context tell you who.
+  - after: ****Venga**, **vaya**, **haga** are both *I* and *he/she*: *quiere que venga* — *he wants me/him to come*. Context, or an added **yo** or **él**, tells you who: *quiere que vaya yo*. On its own, **que** + this form is *let him* or *tell him to*: *dale, que venga*.**
+- `5477ef64` que-te-vaya-bien — Que…: a wish
+  - before: A wish is *que* + the subjunctive: **que te vaya bien** — *good luck, hope it goes well*, also a friendly goodbye; **que la pases lindo** — *have a great time*; **que tengas buen finde**. The answer to any wish is **gracias, igualmente** — *thanks, you too*. And afterwards you ask **¿cómo te fue?** — *how did it go?* **Pasarla** bien or mal is *to have a good or bad time*: **la pasé re mal**.
+  - after: **A wish is *que* + the subjunctive: **que te vaya bien** — *good luck, hope it goes well* — is also a friendly goodbye. The answer to any wish is **gracias, igualmente** — *thanks, you too*. Afterwards you ask **¿cómo te fue?** — *how did it go?***
+- `ebd8e8e5` buena-onda — Buena onda
+  - before: **Buena onda** is the porteño compliment for a person: easy, warm, *nice*. **Mala onda** is the opposite. **Simpático** is narrower: *friendly*, pleasant to talk to. Both stay the same for everyone: *ella es buena onda*.
+  - after: ****Buena onda** is the porteño compliment for a person: easy, warm, *nice*. **Mala onda** is the opposite. **Buena onda** and **mala onda** never change: *ella es buena onda*. **Simpático** is narrower — *friendly*, pleasant to talk to — and does change: **simpática**.**
+- `088111ce` te-convido-un-mate — Calentá el agua, no la hiervas
+  - before: The rules of the one who ceba: **calentá el agua** in the pava — *heat the water* — but **no la hiervas**: water that **hierve** burns the yerba. **Yo cebo**, you drink. When there's no taste left, **el mate está lavado** — *washed out* — and it's time to change the yerba.
+  - after: **The rules for the person who pours: **calentá el agua** in the pava — *heat the water* — but **no la hiervas**: water that **hierve** burns the yerba. **Yo cebo**, you drink. When there's no taste left, **el mate está lavado** — *washed out* — and it's time to change the yerba.**
+- `85eeb729` te-debo-una — Un montón
+  - before: **Gracias por todo**, **mil gracias**, **gracias un montón** — the thanks gets bigger, the grammar doesn't change. Outside the thanks it is everywhere: **un montón de** + noun is *loads of* — **hay un montón de gente**, **tengo un montón de laburo** — and **me gusta un montón**.
+  - after: ****Gracias por todo** — *thanks for everything*; **mil gracias** — *thanks a million*; **gracias otra vez** — *thanks again*. The thanks gets bigger, the grammar doesn't change. You already know **un montón**: *gracias un montón*.**
+- `c2c2634b` cuando-vuelvas — Cuando, hasta que, apenas
+  - before: | a habit — normal verb | not yet — subjunctive | | Cuando **vuelvo** del laburo, tomo mate. | Cuando **vuelvas**, avisame. | | Cuando **cobro**, pago todo. | Cuando **cobre**, te invito. | | Cuando **empiezo** a estudiar, apago el celu. | Cuando **empieces**, contame. | **Hasta que** and **apenas** work the same way: *esperá hasta que te llame*, *apenas sepa algo, te aviso*. The open invitation: **cuando quieras**.
+  - after: **| a habit — normal verb | not yet — subjunctive | | Cuando **vuelvo** del laburo, tomo mate. | Cuando **vuelvas**, avisame. | | Cuando **cobro**, pago todo. | Cuando **cobre**, te invito. | | Cuando **empiezo** a estudiar, apago el celu. | Cuando **empieces**, contame. | **Hasta que** and **apenas** work the same way: *esperá hasta que te llame*, *apenas sepa algo, te aviso*. **
+- `a2b395ff` practica-cuando-vuelvas — Wishes and not-yet
+  - before: Wishes and the future share the form: **que te diviertas**, **ojalá que ganemos**, **cuando vuelvas**, **hasta que sepa algo**.
+  - after: **Wishes and the future share the form: **que te diviertas**, **ojalá que ganemos**, **cuando vuelvas**, **hasta que sepa algo**. An open choice takes it too: **lo que quieras** — *whatever you want*.**
+- `3720e015` no-creo — ¿Qué te parece?
+  - before: **¿Qué te parece?** — *what do you think?* — and the answer **me parece bien** — *sounds good* — or **me parece que no** — *I don't think so*. **No me parece que** takes the subjunctive, like *no creo que*: *no me parece que sea caro*. Day to day an opinion starts with **para mí**: **para mí, es caro**; **para mí que no viene** — *I think he's not coming*. And to dodge the question: **ni idea**.
+  - after: **Day to day an opinion starts with **para mí**: *para mí, está cerrado* — *if you ask me, it's closed*. **Para mí que** + a normal verb is a guess: *para mí que hoy llueve*. And **no me parece que** takes the subjunctive, like *no creo que*: *no me parece que haya mucha gente*.**
+- `ccbc17ab` te-aconsejo — Te aconsejo que, conviene que
+  - before: | Te aconsejo que **lleves** efectivo. | My advice: bring cash. | | Conviene que **tomes** el subte. | Best to take the subway. | | Es mejor que **reserves**. | Better book ahead. | | Es importante que **uses** la SUBE. | Use your SUBE card. | | Es mejor que **salgamos** temprano. | We'd better leave early. | Advice with **que** takes the subjunctive. In everyday speech the short way wins — no *que*, just the infinitive: *te conviene reservar hoy*, *te conviene tomar el subte*, *te recomiendo ir en subte*. *-ar* verbs take **e** (*llevar* → **lleves**), the rest **a** (*salgo* → **salgamos**).
+  - after: **| Te aconsejo que **lleves** efectivo. | My advice: bring cash. | | Conviene que **tomes** el subte. | Best to take the subway. | | Es mejor que **reserves**. | Better book ahead. | | Es importante que **uses** la SUBE. | It's important to use your SUBE card. | | Es mejor que **salgamos** temprano. | We'd better leave early. | Advice with **que** takes the subjunctive. In everyday speech the short way wins — no *que*, just the infinitive: *te conviene reservar hoy*, *te conviene tomar el subte*, *te recomiendo ir en subte*. *-ar* verbs take **e** (*llevar* → **lleves**), the rest **a** (*salgo* → **salgamos**).**
+- `295c40a8` que-bueno — ¿Hay novedades?
+  - before: News about people is **novedades**: **¿hay novedades de Juan?**, **todavía no hay novedades**. *Noticias* is what is on TV. Good news gets **¡buenísimo!**; bad news **¡qué mal!** or **lo siento mucho**.
+  - after: ****Novedades** is news about people and plans: **¿hay novedades de Juan?**, **todavía no hay novedades**. **Noticias** works too, and is also the news on TV; **una noticia** is one piece of news. Good news gets **¡buenísimo!**; bad news **¡qué mal!****
+- `9fa1891b` que-bueno — Reacting
+  - before: | ¡Qué bueno que **estés** acá! | So good you're here! | | Qué lástima que no **vengas**. | Shame you're not coming. | | Me molesta que **llegue** tarde. | It bothers me that he's late. | A reaction to something now or later + **que** → the subjunctive. For something that already happened, the normal past: **¡qué bueno que viniste!** **Me alegro** on its own: *I'm glad*.
+  - after: **| ¡Qué bueno que **estés** acá! | So good you're here! | | Qué lástima que no **vengas**. | Shame you're not coming. | | Me molesta que **llegue** tarde. | It bothers me that he's late. | A reaction to something now or later + **que** → the subjunctive. For something that already happened, the normal past: **¡qué bueno que viniste!** **Me alegro** on its own: *I'm glad*. With more: **me alegro que** or **me alegro de que** — both are used.**
+- `3fe61f9b` lunfardo — Lunfardo
+  - before: Lunfardo is Buenos Aires slang, born in the port and the tango: **morfar** (to eat), **guita** (money), **fiaca** (laziness), **pilcha** (clothes). Friends, not job interviews.
+  - after: **Lunfardo is Buenos Aires slang, born in the port and the tango: **morfar** (to eat), **guita** (money), **fiaca** (laziness), **pilcha** (clothes). Friends, not job interviews. **Guita** and **fiaca** are fine in any relaxed talk; **morfar** is rougher: with people you just met, say *comer*.**
+- `71152a01` es-un-afano — Chanta, cheto, piola
+  - before: People get lunfardo labels: a **chanta** talks big and doesn't deliver, a **cheto** is posh, and someone **piola** is cool and easy-going. **No me chamuyes** — *don't give me that* — is the subjunctive again.
+  - after: **People get lunfardo labels: a **chanta** talks big and doesn't deliver, a **cheto** is snobby or upper-class, and someone **piola** is cool and easy-going. **No me chamuyes** — *don't give me that* — is the subjunctive again.**
+- `6275c34f` que-significa — No sabía, me di cuenta
+  - before: **No sabía** — *I didn't know* — is the imperfect: a state. **Me di cuenta** — *I realized* — is the moment it clicked. **¿Sabías que…?** opens half the gossip in Buenos Aires.
+  - after: ****No sabía** — *I didn't know* — is the imperfect: a state. **Me di cuenta** — *I realized* — is the moment you finally understood. **¿Sabías que…?** opens half the gossip in Buenos Aires.**
+- `17486898` saludos-a-tu-vieja — Me voy yendo
+  - before: The porteño exit starts long before the door: **bueno, me voy yendo** — *well, I'd better get going* — and then twenty minutes of talk. On the way out, love for whoever isn't there: **saludos a tu vieja**, **mandale saludos a Juan**.
+  - after: **The porteño exit starts long before the door: **bueno, me voy yendo** — *well, I'd better get going* — and then twenty minutes of talk. On the way out, love for whoever isn't there: **saludos a tu vieja**, **mandale saludos a Juan**. *Tu vieja* / *tu viejo* is only for friends your age; to anyone else, *saludos a tu mamá*.**
+- `bacc1caa` yo-en-tu-lugar — Yo en tu lugar…
+  - before: | | regular | shortened | | yo, él, ella | habl**aría**, dej**aría**, ped**iría**, volv**ería** | **saldría**, **tendría**, **diría** | | vos | ir**ías** | **tendrías**, **dirías** | | with *me* | **me quedaría** | | **Yo en tu lugar, hablaría con él.** Vos adds **-s**: *¿vos qué le dirías?* **Tendrías que** is advice too: *tendrías que llamarlo*.
+  - after: **| | regular | shortened | | yo, él, ella | hablar**ía**, dejar**ía**, pedir**ía**, volver**ía** | **saldría**, **tendría**, **diría** | | vos | ir**ías** | **tendrías**, **dirías** | | with *me* | **me quedaría** | | **Yo en tu lugar, hablaría con él.** Vos adds **-s**: *¿vos qué le dirías?* **Tendrías que** is advice too: *tendrías que llamarlo*.**
+- `f09f8f3b` yo-en-tu-lugar — Yo en tu lugar
+  - before: **Yo en tu lugar** — *in your shoes* — means the same as *yo que vos*, a little more serious. The advice after it is still *would*: **yo en tu lugar, hablaría con él**, **yo me quedaría**.
+  - after: ****Yo en tu lugar** — *in your place, if I were you* — means the same as *yo que vos*, a little more serious. The advice after it is still *would*: **yo en tu lugar, hablaría con él**, **yo me quedaría**.**
+- `8ea5b476` si-ganara — We and you
+  - before: Dreaming together: **si tuviéramos plata, iríamos a Bariloche** — the *we* form carries an accent, **tuviéramos**. Asking a friend: **si pudieras, ¿dónde vivirías?** — *si pudieras* is the vos form.
+  - after: **Dreaming together: **si tuviéramos plata, iríamos a Bariloche** — the *we* form carries an accent, **tuviéramos**. Asking a friend: **si pudieras, ¿dónde vivirías?** — *si pudieras* is the vos form. **Ganar** is *to win* and also *to earn*: *si ganara más* — *if I earned more*.**
+- `3119b315` preferiria — The polite would
+  - before: The conditional takes the edge off a request: *¿me das una mano?* becomes **¿me darías una mano?**, *¿me ayudás?* becomes **¿me ayudarías?**. **¿Te molestaría…?** — *would you mind…?* — works like *me gustaría*.
+  - after: **The conditional takes the edge off a request: *¿me das una mano?* becomes **¿me darías una mano?**, *¿me ayudás?* becomes **¿me ayudarías?**. **¿Te molestaría…?** — *would you mind…?* — works like *me gustaría*. With friends the plain *¿me ayudás?* is already polite; the **-ía** form is for bigger favors or people you don't know.**
+- `1d87549c` usted — Quisiera, ¿no tendrás…?
+  - before: Day to day porteños soften a request with **quería**: **quería un turno para mañana**, **te quería pedir algo**. **Quisiera** — *I would like* — is the formal one, for the phone or an office: **quisiera un turno**; nobody orders food with it. To ask a stranger for something, add **no** and the future: **¿no tendrás hora?** — *you would not have the time?*
+  - after: **Day to day porteños soften a request with **quería**: **quería un turno para mañana**, **te quería pedir algo**. **Quisiera** — *I would like* — is the formal one, for the phone or an office: **quisiera un turno**; nobody orders food with it. To ask a stranger for something, add **no** and the future: **¿no tendrás hora?** — *you wouldn't happen to have the time?***
+- `236b1e04` a-medias — Te debo, me debés
+  - before: **Te debo mil pesos** — *I owe you*; **me debés la mitad** — *you owe me half*. Friends split the bill **a medias**, and a **deuda** between friends gets paid **a fin de mes**.
+  - after: ****Te debo diez mil pesos** — *I owe you*; **me debés la mitad** — *you owe me half*. Friends split the bill **a medias**. A **deuda** is what you owe; if you are short, say **te pago a fin de mes** — when you get paid.**
+- `375791dd` me-contaron — ¿Escuchaste?
+  - before: **¿Escuchaste la radio?** — the vos past, like *leíste*. And a tip from someone who knows is **un dato**: *me pasaron el dato*. Gossip opens with **¿viste que…?** — *did you hear that…?*: **¿viste que Juan renunció?**
+  - after: **News starts with **¿escuchaste…?** or **¿te enteraste?** — *did you hear?*: *¿escuchaste lo de Pablo?* The answer is **me enteré** — *I found out*: *me enteré ayer*. A useful piece of news is **un dato**: *gracias por el dato*.**
+- `51b423d8` me-contaron — Dice, me contaron
+  - before: One source: **mi vieja dice que…**. Several: **me contaron que…**, **me comentaron que…** — *people told me*. Porteño news travels by word of mouth and by **audio** — a WhatsApp voice message.
+  - after: **When several people told you, or you'd rather not say who, use **me contaron que…** or **me comentaron que…**: *me contaron que te mudaste*. For one person: **Mati me comentó que renunció**. Porteño news travels by word of mouth and by *audio*, a WhatsApp voice message.**
+- `f448808c` me-contaron — ¿Es cierto?
+  - before: Before you pass it on: **¿es cierto?** — *is it true?* — or **es mentira** — *it's not true* (word for word, *it's a lie*). **Lo leyó en las redes** — *she read it on social media* — is not a source.
+  - after: **Before you pass it on, ask **¿es cierto?** — *is it true?* **Cierto** changes with the noun: *la noticia es cierta*. If the answer is **es mentira** — *it's not true* — stop there. **Lo leyó en las redes** — *she read it on social media* — is not a source.**
+- `60f3cec7` dicen-que — Dicen que
+  - before: **Dicen que** — *they say*, *apparently* — is how a porteño passes on anything heard second-hand. **Parece que** does the same with a shrug.
+  - after: ****Parece que** — *it seems*, *apparently* — passes on news you are not sure of: **parece que va a llover**. *Dicen que* does the same for what people say: *dicen que va a llover todo el finde*. If it turns out to be false, **es mentira**.**
+- `df56a42d` dicen-que — ¿Viste la noticia?
+  - before: Name your source first, then the news: **Leí en el diario que…**, **lo vi en la tele** — and **me llamó Sofi y me dijo que…**
+  - after: **Name your source first, then the news: **lo dijeron en la radio**, **lo vi en las redes**, *lo leí en el diario*, *lo vi en la tele* — or *me llamó Sofi y me dijo que…***
+- `6adce778` ponele — Fillers
+  - before: A porteño sentence breathes through its fillers: **ponele** — *let's say*; **digamos** — *sort of*; **qué sé yo** — *I don't know*; **bah** — *well, I mean*: *son las ocho, bah, ponele*. The ones you will hear most: **o sea** — *I mean*; **tipo** — *like, around*: *es tipo a las nueve*; and **viste** at the end, for *you know*: *estaba cansado, viste*.
+  - after: **A porteño sentence breathes through its fillers: **ponele** — *let's say*; **digamos** — *sort of*; **qué sé yo** — *I don't know*; **bah** — *well, I mean*: *son las ocho, bah, ponele* — or a shrug, *oh well*. The ones you will hear most: **o sea** — *I mean*; **tipo** — *like, around*: *es tipo a las nueve*; and **viste** at the end, for *you know*: *estaba cansado, viste*.**
+- `22f82d78` se-me-quemo — Nobody's fault
+  - before: That's the whole point: **no fue mi culpa, se me cayó**. And the excuse every porteño has ready when they're late: **se me hizo tarde**.
+  - after: ****Se me** + verb says it happened *to* you, by accident — you didn't do it on purpose: **no fue mi culpa, se me cayó** — *it wasn't my fault, I dropped it*. And the excuse every porteño has ready when they're late: **se me hizo tarde** — *it got late*.**
+- `c3db5128` para-que — Para, para que
+  - before: | same person — infinitive | someone else — subjunctive | | Estudio **para aprender**. | Te lo explico **para que entiendas**. | | | Te lo mando **para que lo leas**. | | | Avisame **antes de que** llegue. | When you tell someone to do something, **para que** is normal too: **llevá la campera para que no tengas frío**.
+  - after: **| same person — infinitive | someone else — subjunctive | | Estudio **para aprender**. | Te lo explico **para que entiendas**. | | | Te lo mando **para que lo leas**. | | | Avisame **antes de que** llegue. | In an order, **para que** is normal even for the same person: **llevá la campera para que no tengas frío** (also right: *para no tener frío*).**
+- `8af67e04` todo-aumenta — Subir, bajar, cobrar
+  - before: Prices **suben** — or **aumentan**, same thing — and, now and then, **bajan**. **¿Cuánto te cobraron?** — *how much did they charge you?* **Cobrar** is also *to get paid*: **cobro el viernes** — *I get paid on Friday*; **¿ya cobraste?** A **precio** is a price; *está a buen precio* — *it's a good price*. When it isn't: **es un afano** — *it's a rip-off*; **está por las nubes** — *sky-high*; **sale un ojo de la cara** — *it costs a fortune*.
+  - after: **Prices **suben** — or **aumentan**, same thing — and, now and then, **bajan**. **Cobrar** has two meanings. *To charge*: **¿cuánto te cobraron?** — *how much did they charge you?* And *to get paid*: **¿ya cobraste?** — *did you get paid yet?***
+- `da454431` todo-aumenta — Todo aumenta
+  - before: In Buenos Aires prices **aumentan** so often that the word is small talk: **¿viste cómo aumentó el café?** The **aumento** of your salary never quite keeps up with the **inflación**.
+  - after: **In Buenos Aires prices **aumentan** so often that it is small talk: *¿viste cómo aumentó el café?* Your **aumento** — *raise* — never keeps up with the **inflación**. When something costs too much: **está por las nubes** — *sky-high*; **sale un ojo de la cara** — *it costs a fortune*.**
+- `3b867a4a` cada-vez-mas — Creció
+  - before: **Crecer** is *to grow* — a city, a kid, a tree: **el barrio creció**, **crecí en Rosario** — *I grew up in Rosario*. Porteños also say **me crié**: *me crié en Flores* — *I grew up in Flores*. A building is an **edificio**: **hay cada vez más edificios**.
+  - after: ****Crecer** is *to grow* — a city, a kid, a tree: **el barrio creció**, **crecí en Rosario** — *I grew up in Rosario*. Porteños also say **me crié**: *me crié en Flores* — *I grew up in Flores*. **
+- `c2f1eb75` ponele — The words that glue a conversation
+  - before: **Por las dudas** — *just in case*; **de última** — *if all else fails*; **en serio** — *seriously*; **si querés** — *if you like*. Say them and you sound like you're from here.
+  - after: ****Por las dudas** — *just in case*; **de última** — *if all else fails*; **si querés** — *if you like*. Say them and you sound like you're from here.**
+- `1ce38771` ya-habia — Había + -ado, -ido
+  - before: | yo, él, ella | **había** | comido, llegado, salido | | vos | **habías** | hecho, dicho, visto | | ellos | **habían** | | One past behind another: **Cuando llegué, ya habían comido** — *when I got there, they'd already eaten*. Pronouns go in front: **ya se había ido**, **no me habían dicho nada**. *Hecho, dicho, visto* are the irregular ones. Any participle goes with any person: **habías comido**, **había hecho**.
+  - after: **One past behind another: **había** + a participle. **Cuando llegué, ya habían comido** — *when I got there, they'd already eaten*. Yo, él and ella take **había**; vos, **habías**; ellos, **habían**. Pronouns go in front: **ya se había ido**, **no me habían dicho nada**. *Hecho, dicho, visto* are the irregular ones.**
+- `71a97b7b` el-cajero — Transfirió
+  - before: *Transferir* changes its stem in the past for *él*: **transfirió**. With vos it doesn't: **¿me transferiste?** Asking for it: **transferime**.
+  - after: ****Te transfiero** — *I'll transfer it to you*; with vos, **¿me transferís?** The past: **te transferí**, **¿me transferiste?** — but él changes to **transfirió**. Asking for it: **transferime**.**
+- `bf96bee5` el-cajero — El cajero
+  - before: The ATM is **el cajero** — you go **a sacar plata**. Most porteños split the bill by **transferencia**: **te transfiero** — *I'll transfer it to you*.
+  - after: **The ATM is **el cajero**: **voy al cajero a sacar plata**. Paying a friend goes by **transferencia** to their **alias** — a few words instead of an account number: **¿a qué alias transferiste?** After it: **¿me mandás el comprobante?****
+- `c7048a9e` costumbres — Late, mate and the tip
+  - before: Nobody arrives on time: **si te dicen a las nueve, llegás nueve y media**. In the mate round **gracias** means *no more for me*: **si decís gracias, no tomás más**. Men greet each other with a kiss too. And **la propina** is about ten per cent, in cash.
+  - after: **Nobody arrives on time: **si te dicen a las nueve, llegás a las nueve y media**. In the mate round **gracias** means *no more for me*: **si decís gracias, no tomás más**. Men greet each other with a kiss too. And **la propina** is about ten per cent, in cash.**
+- `742f77df` se-aplaude-al-asador — Un aplauso para el asador
+  - before: When the meat reaches the table, **se aplaude al asador**: *¡un aplauso para el asador!* **Se brinda** with everyone at the table. Leaving without saying goodbye to each person? Very **maleducado**.
+  - after: **When the meat reaches the table, **se aplaude al asador**: *¡un aplauso para el asador!* **Se brinda** with everyone at the table. Leaving without saying goodbye to each person? Very **maleducado**. And **los ñoquis del 29**: on the 29th of each month people eat gnocchi, with money under the plate for luck.**
+- `79c02546` se-aplaude-al-asador — Se: what everyone does at an asado
+  - before: | **Se trae** algo. | You bring something. | | **Se pone** la mesa. | The table gets set. | | **Se brinda** con todos. | Everyone toasts together. | | **Se aplaude** al asador. | Everyone applauds the grill master. | **Se** + the *él* form: no subject, because it's everybody. *Acá se come tarde* works the same way. On your way there, *bring* is **llevar**: **¿qué llevo?** — *what should I bring?*
+  - after: **| **Se trae** algo. | You bring something. | | **Se pone** la mesa. | The table gets set. | | **Se brinda** con todos. | Everyone toasts together. | | **Se aplaude** al asador. | Everyone applauds the grill master. | **Se** + the *él* form: no subject, because it's everybody. *Acá se come tarde* works the same way. As a guest you say **llevar**: **¿qué llevo?** — *what should I bring?* The host, already there, says **traer**: **¿quién trae el vino?****
+- `605b9c23` practica-un-aplauso — Me dan
+  - before: **Me da asco la cucaracha**, **me dan asco las cucarachas** — the verb follows the thing. In the story: **¿te dio miedo?** — **no, me dio risa**.
+  - after: ****Me da asco la cucaracha**, **me dan asco las cucarachas** — the verb follows the thing. In the past: **¿te dio miedo?** — **no, me dio risa**.**
+- `026bd560` no-sabes-lo-que-me-contaron — Los cuernos
+  - before: In real gossip nobody says *lo engañó*: it is **le metió los cuernos** — *cheated on him/her*, literally *put the horns on*. **Engañar** is also plain *to trick, to fool*.
+  - after: **People say **la engañó** — *he cheated on her* — and in gossip even more often **le metió los cuernos**, literally *put the horns on*. **Engañar** is also plain *to trick, to fool*.**
+- `63fad49e` aunque-llueva — Aunque + fact, aunque + maybe
+  - before: | a fact — normal verb | a maybe — subjunctive | | Aunque **llueve**, vamos. | Aunque **llueva**, vamos. | | Aunque **cuesta**, sigo. | Aunque **cueste**, sigo. | | Aunque no **querés**, tenés que ir. | Aunque no **quieras**, tenés que ir. | Left: it *is* raining. Right: whether or not it rains. **Igual** at the end — *anyway* — often closes it.
+  - after: **| a fact — normal verb | a maybe — subjunctive | | Aunque **llueve**, vamos. | Aunque **llueva**, vamos. | | Aunque **cuesta**, sigo. | Aunque **cueste**, sigo. | | Aunque **estoy** cansado, voy. | Aunque **esté** cansado, voy. | Left: it *is* raining. Right: whether or not it rains. **Igual** at the end — *anyway* — often closes it.**
+- `a86f3f75` aunque-no-tenga-ganas — Sin embargo, así y todo
+  - before: Both start the second half: **sin embargo** — *however*, mostly in writing or formal talk — and the more spoken **así y todo** — *even so*: *hice dieta; **así y todo**, engordé*.
+  - after: **Both start the second half: **sin embargo** — *however*, mostly in writing or formal talk — and the more spoken **así y todo** — *even so*: *hice dieta y **así y todo** engordé*.**
+- `28e10253` llevo-dos-anos — Hace dos años que…
+  - before: **Hace dos años que vivo acá** — *I've been living here for two years*. Where English says *have been …ing*, Spanish stays in the present. To ask: **¿hace cuánto que vivís acá?** or just **¿hace cuánto estás acá?**; **¿hace mucho que esperás?** — *have you been waiting long?* You will also hear **llevo dos años viviendo acá** — same meaning, but day to day porteños say **hace… que**.
+  - after: ****Hace un año que vivo acá** — *I've been living here for a year*: Spanish stays in the present. **Llevar** + time + *-ando / -iendo* says the same: **llevo un año viviendo acá**. Or just a place: **lleva un año acá**. With **sin**: **llevás tres días sin dormir**. To ask: **¿hace cuánto que vivís acá?** Day to day porteños say **hace… que**.**
+- `75167017` llevo-dos-anos — How long: llevar, hace, seguir
+  - before: | Llevo dos años **viviendo** acá. | I've been living here for two years. | | Hace dos años que **vivo** acá. | (the same) | | **Sigo** laburando ahí. | I still work there. | | **Dejé de** fumar. | I quit smoking. | | **Volvió a** llamar. | He called again. | English *have been …ing* is the present in Spanish. With a past verb, **hace … que** means *ago*: *hace dos años que dejé de fumar* — *I quit two years ago*. **Llevar** + time + *-ando, -iendo* — or just a place: **lleva un año acá**. **Llevo / sigo sin** + infinitive is *haven't … / still not*: *llevo seis meses sin fumar*.
+  - after: ****Seguir** + *-ando / -iendo* is *still doing* or *keep doing*: **sigo laburando ahí**, **¿seguís viviendo en San Telmo?** With a noun or adjective it is just *still*: **sigo cansado**, **¿seguís con fiebre?** **Seguir sin** + infinitive is *still not*: **¿seguís sin fumar?****
+- `457aa31e` no-sabes-lo-que-me-contaron — Lo que, the hook
+  - before: **No sabés lo que me contaron** — *you won't believe what I heard* — is how every chisme starts. **Lo que** carries the whole story: **todo lo que pasó**, **lo que me dijo**.
+  - after: ****Lo que** is *what* when it means *the thing that*: **¿viste lo que pasó?**, **contame lo que pasó**. It is how every chisme starts: **no sabés lo que me contaron** — *you won't believe what I heard*. A direct question keeps **qué**: *¿qué pasó?***
+- `cba630fb` no-sabes-lo-que-me-contaron — The reactions
+  - before: **¡No me digas!** — *no way!*; **¡callate!** — between friends it isn't rude, it means *you're kidding!* And by the afternoon **todo el mundo** knows.
+  - after: ****¡No me digas!** and **¡callate!** both mean *no way!* — between friends *callate* isn't rude. **¡Mirá vos!** is milder: *wow, really?* By the afternoon **todo el mundo** knows, thanks to the **chusma**: the person who loves gossip.**
+- `559eee63` deje-de-fumar — Solemos, suelen
+  - before: The other persons of *soler*: **solemos juntarnos los viernes**, **los porteños suelen cenar tarde**. And *acabar de* for everyone: **acabamos de llegar**, **acaban de salir**. How often? **De vez en cuando**, or **casi nunca**.
+  - after: ****De vez en cuando** is *every now and then*: **fumo de vez en cuando**. **Casi nunca** is *hardly ever*: **casi nunca manejo**. Both can be a whole answer: *¿Salís mucho? — De vez en cuando.* Your **rutina** is what you do every day.**
+- `df9106c3` practica-aunque-sea — Querían que, por más que
+  - before: **Mis viejos querían que estudiara** — the wish is in the past, so the second verb is too. **Por más que me cueste** — however hard it is: a maybe takes the subjunctive.
+  - after: ****Mis viejos querían que estudiara** — the wish is in the past, so the second verb is too. **Por más que me cueste** — however hard it is. Something not sure or not real yet takes the subjunctive: *por más que llueva, vamos igual*. A fact takes the normal verb: *por más que ahorro, no me alcanza*.**
+- `85402fa0` practica-aunque-sea — ¿Hace cuánto?
+  - before: **Hace un año que estudio** says the same as **llevo un año estudiando**. **Seguimos buscando**, **volví a empezar**.
+  - after: ****Hace un año que estudio** says the same as **llevo un año estudiando**. **Seguimos buscando** — *we're still looking*; **volví a empezar** — *I started again*.**
+- `d953b996` como-si-nada — Como si + past subjunctive
+  - before: | Habla **como si supiera** todo. | He talks as if he knew everything. | | **Como si fuera** fácil. | As if it were easy. | | Me saludó **como si nada**. | He said hi as if nothing had happened. | | ¡**Ni que fuera** tan difícil! | It's not like it's that hard! | After **como si** and **ni que**, always the *-ra* form, whatever the time.
+  - after: **| Habla **como si supiera** todo. | He talks as if he knew everything. | | **Como si fuera** fácil. | As if it were easy. | | Me saludó **como si nada**. | He said hi as if nothing had happened. | | ¡**Ni que fuera** tan difícil! | It's not like it's that hard! | **Ni que…** is a complaint: you are saying the thing is NOT true. After **como si** and **ni que**, always the *-ra* form, whatever the time.**
+- `3e245af1` no-te-hagas-el-gil — Hacerse el, como si no
+  - before: | yo | **me hice** el distraído | I pretended not to notice | | vos | **te hacés** el sordo | you act like you can't hear | | él, ella | **se hace** el canchero | he acts all cool | | | como si no **pasara** nada | as if nothing were happening | | | como si no me **viera** | as if he didn't see me | **No te hagas el gil** — *don't play dumb*. A woman says **la**: *me hice **la** simpática*, *se hace **la** sorda*. After **como si** and **ni que**, always the *-ra* form: *¡ni que **fueras** mi viejo!* But **hace como que** takes a normal verb: *hace como que no le importa*.
+  - after: ****Hacerse el** + a describing word is *to pretend, to act*: **me hice** el distraído — *I pretended not to notice*; **te hacés** el sordo — *you act like you can't hear*; **se hace** el canchero — *he shows off, he acts all cool*. **No te hagas el gil** — *don't play dumb*. A woman says **la**: *me hice **la** simpática*.**
+- `8e0594ac` no-te-hagas-el-gil — ¡Qué caradura!
+  - before: A **caradura** has no shame: never pays, asks for too much, lies with a straight face. **¡Qué caradura!** — *you've got some nerve!* Between friends it's often a joke.
+  - after: **A **caradura** has no shame: never pays, asks for too much, lies and doesn't feel bad about it. **¡Qué caradura!** — *you've got some nerve!* Between friends it's often a joke.**
+- `d4f3c5be` el-de-la-vidriera — El de, la de
+  - before: Drop the noun, keep the article: **el de la vidriera** — *the one in the window*; **la de la izquierda** — *the one on the left*; **las de** allá. With a name it is *someone's*: **el de Lucía** — *Lucía's*. With people it is *the guy in, the people from*: **el de rojo** — *the guy in red*; **los de arriba** — *the people upstairs*. It matches what it stands for, like *el que*: **la que te probaste**.
+  - after: ****El de** is also for owners and people. With a name it is *someone's*: **el de Lucía** — *Lucía's*; **las de Santi** — *Santi's*. With people it is *the guy in, the people from*: **el de rojo** — *the guy in red*; **los de arriba** — *the people upstairs*.**
+- `058b9be3` si-hubiera-sabido — Si hubiera + participle
+  - before: | yo, él, ella | **hubiera** | sabido, venido, ido | | vos | **hubieras** | llamado, avisado, pensado | For what didn't happen, both halves: **Si hubiera sabido, te hubiera avisado.** *If I'd known, I'd have told you.* Compare *si supiera* — if I knew (now).
+  - after: **| yo, él, ella | **hubiera** | sabido, venido, ido | | vos | **hubieras** | llamado, avisado, pensado | For what didn't happen, both halves: **Si hubiera sabido, te hubiera avisado.** *If I'd known, I'd have told you.* You will also hear **habría** in the second half: *te habría avisado*. Same meaning. Compare *si supiera* — if I knew (now).**
+- `ff92a735` si-hubiera-sabido — The same participles
+  - before: **Hubiera** takes the participles *había* does: **sabido, venido, ido, llamado, dicho, hecho**. **Si hubieras venido** — *if you had come*. On its own it's regret: **ojalá hubiera estudiado** — *I wish I'd studied*; **¡me hubieras llamado!** — *you should have called me!*
+  - after: ****Hubiera** takes the participles *había* does: **sabido, venido, ido, llamado, dicho, hecho**. **Si hubieras venido** — *if you had come*. On its own it's *would have* — *yo hubiera dicho que sí*, *I would have said yes* — or regret, *should have*: **ojalá hubiera estudiado** — *I wish I'd studied*; **¡me hubieras llamado!** — *you should have called me!***
+- `d0bec188` por-un-lado — Para mí
+  - before: To give your view, porteños say **para mí** or **me parece que**: *para mí conviene esperar*; *me parece que es caro*. **¿Qué opinás?** is the natural question; **opino que…** as an answer sounds stiff.
+  - after: **To give your view, porteños say **para mí** or **me parece que**: *para mí conviene esperar*; *me parece que es caro*. **¿Qué opinás?** is the natural question; **opino que…** as an answer sounds stiff. **No me convence** — *I'm not sure about it* — works like *gustar*.**
+- `65ee37e5` la-ventaja-es-que — Por lo menos, la verdad
+  - before: **Por lo menos** — *at least* — finds the good side: *pagan poco, pero **por lo menos** queda cerca*. **La verdad** — *honestly* — says what you really think: ***la verdad**, no me conviene*. **Conviene** works like *gustar*: **me conviene** — *it's better for me*; **te conviene llevar paraguas** — *you'd better take an umbrella*.
+  - after: ****Por lo menos** — *at least* — finds the good side: *pagan poco, pero **por lo menos** queda cerca*. **La verdad** — *honestly* — says what you really think: ***la verdad**, no me conviene*. **Conviene** works like *gustar*: **me conviene** — *it's better for me*; **te conviene llevar paraguas** — *it's a good idea to take an umbrella*.**
+- `c22a6a2e` no-te-hagas-el-gil — Me importa
+  - before: **Importar** works like *gustar*: **mi familia me importa** — *my family matters to me*; **¿a quién le importa?** — *who cares?*; **no importa** — *it doesn't matter*.
+  - after: **After **como si** and **ni que**, always the *-ra* form: **como si no pasara nada** — *as if nothing were happening*; **como si no me viera** — *as if he didn't see me*; **¡ni que fueras mi viejo!** — *it's not like you're my dad!* But **hace como que** takes a normal verb: *hace como que no le importa* — *he acts like he doesn't care*.**
+- `1257cd1c` te-doy-la-razon — ¡Nada que ver!
+  - before: **¡Nada que ver!** — *that's got nothing to do with it!* — is how porteños throw out a point. **En eso** tenés razón concedes just the one. **No seas cabeza dura** — *don't be so stubborn*.
+  - after: **An argument in Buenos Aires is a sport, not a fight: **discutimos** a lot and stay friends. To reject a point, say **¡nada que ver!** — *not at all!* (it can also mean *nothing alike* or *nothing to do with it*). If the other person won't listen: **no seas cabeza dura** — *don't be so stubborn*.**
+- `3a35b239` te-doy-la-razon — A ver, pensándolo bien
+  - before: **A ver** — *let's see* — slows an argument down; **pensándolo bien** — *thinking about it* — is how you change sides without losing face. **Sos un exagerado** speeds it back up.
+  - after: ****A ver** — *let's see* — slows an argument down. **Pensándolo bien** — *on second thought* — is how you change sides: *pensándolo bien, me convenciste* — *on second thought, you convinced me*. To heat it up again: **sos un exagerado** — *you're being dramatic*.**
+- `b93ba3b3` te-doy-la-razon — Me equivoqué
+  - before: The hardest words in any argument: **me equivoqué** — *I was wrong*. To a friend: **te equivocás** — *you're wrong*. Giving ground: **reconozco que** tenés razón, or just **te doy la razón**.
+  - after: **The hardest words in any argument: **me equivoqué** — *I was wrong*. To a friend: **te equivocás** — *you're wrong*. To admit it: **reconozco que** tenés razón — *I admit you're right* — or just **te doy la razón** — *you're right*. **En eso** te doy la razón — *you're right about that* — admits only one point.**
+- `b52a18e2` un-depto-que-tenga — La garantía
+  - before: Renting in Buenos Aires means the **inmobiliaria** asks for a **garantía** — a relative's property as a guarantee — and a **contrato**. Foreigners usually take an **alquiler temporario** — *a short-term rental*, **amoblado** — or pay a **seguro de caución** instead of the garantía, plus a **depósito**. Ask about the **expensas** (the monthly building fees) and how many **ambientes** it has: *un dos ambientes* is one bedroom and a living room. Some **dueños** don't take **mascotas**.
+  - after: **To rent in Buenos Aires you need a **garantía** — *a guarantor*, usually a relative who owns property: *mi papá me sale de garantía* — *my dad is my guarantor*. No garantía? Foreigners often pay a **seguro de caución** — *rent guarantee insurance* — or take an **alquiler temporario amoblado** — *a furnished short-term rental*.**
+- `71b73b1e` me-pone-nervioso-que — Me pone, me enoja, me alegra
+  - before: | Me **pone nervioso** que llegue tarde. | It makes me nervous that he's late. | | Me **enoja** que me **mienta**. | It makes me angry that he lies to me. | | Me **alegra** que vengas. | I'm glad you're coming. | | Me da bronca que **cancele**. | It makes me mad that he cancels. | Feeling first, then **que** + subjunctive. If it's you doing it, no *que*: *me enoja **llegar** tarde*.
+  - after: **| Me **pone nervioso** que llegue tarde. | It annoys me when he's late. | | Me **enoja** que me **mienta**. | It makes me angry that he lies to me. | | Me **alegra** que vengas. | I'm glad you're coming. | | Me da bronca que **cancele**. | It makes me mad that he cancels. | Feeling first, then **que** + subjunctive. **Nervioso** here is often *annoyed* or *tense*, not only *nervous*. If it's you doing it, no *que*: *me enoja **llegar** tarde*.**
+- `db21a125` deberias-tomarte-unos-dias — Deber, the whole family
+  - before: | yo, él, ella | **debería** | | vos | **deberías** | | nosotros | **deberíamos** | | ellos, ustedes | **deberían** | All take an infinitive: *deberíamos juntarnos*. **Estaría bueno que** + subjunctive when there's a person: *estaría bueno que te tomes unos días*.
+  - after: **| yo, él, ella | **debería** | | vos | **deberías** | | nosotros | **deberíamos** | | ellos, ustedes | **deberían** | All take an infinitive: *deberíamos juntarnos*. *En esa empresa **deberían** pagar mejor* — *that company should pay better*.**
+- `ba67d83b` deberias-tomarte-unos-dias — Estaría bueno que…
+  - before: With a person after it, **que** + subjunctive: **estaría bueno que te tomes unos días**. Without one, the infinitive: *estaría bueno **descansar***. And the push: **¡animate!** — *go for it!*
+  - after: **When you say who should do it, use **que** + subjunctive: **estaría bueno que te tomes unos días** — *it'd be good if you took a few days off*. For people in general, the infinitive: *estaría bueno **descansar***. And the push: **¡animate!** — *go for it!***
+- `3960dc2b` dijo-que-vendria — Me prometiste
+  - before: **Me prometiste que ibas a venir** — *you promised me you'd come* (more careful: *que vendrías*). And the classic ending: **al final no vino**.
+  - after: ****Me prometiste que ibas a venir** — *you promised me you'd come* (more careful: *que vendrías*). And the classic ending: **al final no vino** — *in the end he didn't come*. If he did, he **cumplió** — *kept his word*: *prometió llamar y cumplió*.**
+- `5aaa801b` dijo-que-pasaria — Me aseguró que…
+  - before: To stress a promise, porteños say **me aseguró que…** — *he assured me* — or **me juró que…** — *he swore*. Then comes the **excusa** (*excuse*), and you learn not to **confiar en** (*trust*) the **mentiroso** (*liar*).
+  - after: **To stress a promise, porteños say **me aseguró que…** — *he assured me* — or **me juró que…** — *he swore*. Then **me puso una excusa** — *he gave me an excuse* — and you learn not to **confiar en** (*trust*) the **mentiroso** (*liar*).**
+- `7d0442f0` con-tal-de-que — Que no lo choques
+  - before: The *vos* subjunctive is the one you hear on the way out the door: *te lo presto, siempre y cuando no lo **choques**, lo **cuides** y me lo **devuelvas entero***. The last word: **si no**, *no te presto nada más*.
+  - after: **When someone lends you something, the conditions come fast: *te lo presto, con tal de que lo **cuides**, no lo **choques** y me lo **devuelvas entero***. The warning at the end is **si no** — *otherwise*: *si no, no te presto nada más*.**
+- `ec66006c` ando-buscando — Andar, ir, estar por
+  - before: | **Ando buscando** laburo. | I'm looking around for work. | | **Voy conociendo** gente. | I'm getting to know people. | | **Estamos por** arrancar. | We're about to start. | | Estoy **a punto de** terminar. | I'm just about to finish. | **Ando** + *-ando* is these days, on and off, not this very second; **voy** + *-ando* happens bit by bit.
+  - after: **| **Ando buscando** laburo. | I've been looking for work. | | **Voy conociendo** gente. | I'm getting to know people. | | **Estamos por** arrancar. | We're about to start. | | Estoy **a punto de** terminar. | I'm just about to finish. | **Ando** + *-ando* is these days, on and off, not this very second; **voy** + *-ando* happens bit by bit.**
+- `5bbac630` ando-buscando — Estamos por, a punto de
+  - before: **Estamos por arrancar** — *we're about to start*. **A punto de** means the same, only even sooner: **estoy a punto de terminar**.
+  - after: ****Estamos por arrancar** — *we're about to start*. **A punto de** is a little stronger — *any second now*: **estoy a punto de terminar**.**
+- `09c42605` practica-no-lo-aguanto — Ando buscando, le cae bien
+  - before: **Ando buscando laburo**, **estamos por arrancar**. **Le cae bien a todo el mundo**; **a ese no lo aguanto**.
+  - after: ****Ando buscando laburo** — *I've been looking for work*: **ando** + *-ando* is these days. **Estamos por arrancar** — *we're about to start*. **Le cae bien a todo el mundo** — *everybody likes him*; **a ese no lo aguanto** — *I can't stand that guy*.**
+- `97c5fbb3` practica-no-lo-aguanto — Aumentaron, no me alcanza
+  - before: **Aumentaron la luz y el gas**, **el boleto subió**, **no llego a fin de mes** — the small talk of bills.
+  - after: **The small talk of bills: **aumentaron la luz y el gas** — *electricity and gas went up*; **el boleto subió** — *the fare went up*; **no llego a fin de mes** — *I can't make ends meet*: the money runs out before the month does.**
+- `e2b47401` que-novedad — Ni a palos
+  - before: **Ni a palos** — *no way, not a chance*. And for a shrug: **dale que va** — *good enough, let's go*. When something's awful: **está de terror**.
+  - after: ****Ni a palos** — *no way, not a chance*. And for a shrug: **dale que va** — *good enough, let's go*. When something's awful: **está de terror**; when it's perfect: **impecable**.**
+- `bb2b8f8c` que-novedad — Sí, claro
+  - before: Said slowly, **sí, claro** means *yeah, right*. **¡Qué novedad!** — *what a surprise* — is for the bondi that's late again; **¡lo que faltaba!** — *that's all we needed* — for the rain that starts on top of it. The everyday ones: **qué raro**, said flat — *¿llegó tarde? Qué raro.* — and **mirá vos** — *well, look at that*. The tone does the work.
+  - after: **Said slowly, **sí, claro** means *yeah, right*. **¡Qué novedad!** — *what a surprise* — is for the bondi that's late again; **¡lo que faltaba!** — *that's all we needed* — for the rain that starts on top of it. The everyday ones: **qué raro**, said flat — *¿llegó tarde? Qué raro.* — and **mirá vos** — *well, look at that*. The **tono** — *tone* — does the work.**
+- `1db93231` estoy-al-horno — Al horno, al pedo
+  - before: **Estoy al horno** — *I'm in trouble, I'm toast*. **Qué bajón** — *what a downer*. **Al pedo** — *for nothing, doing nothing*: **fui al pedo**, **estoy al pedo**. And the flat *no way*: **ni en pedo**. The other *pedo* phrases: **estar en pedo** — *to be drunk*; **de pedo** — *by pure luck*: *llegué de pedo*; **a los pedos** — *very fast*. Among friends only.
+  - after: ****Estoy al horno** — *I'm in big trouble*. **Qué bajón** — *what a shame*. **Al pedo** — *for nothing, doing nothing*: **fui al pedo**, **estoy al pedo**. And the flat *no way*: **ni en pedo**. The other *pedo* phrases: **estar en pedo** — *to be drunk*; **de pedo** — *by pure luck*: *llegué de pedo*. Among friends only.**
+- `361c790d` estoy-al-horno — Rata, careta, grasa
+  - before: People get labels: a **rata** never pays; a **careta** is fake or uptight (or someone who doesn't drink or party); **grasa** is tacky. **Estar manija** is to be very excited about something: **estoy manija con el recital**. The **cana** is the police. A friend who backs you **te hace la gamba**; one who talks nonsense **manda fruta**.
+  - after: **People get labels: a **rata** never pays; a **careta** is fake or uptight (or someone who doesn't drink or party); **grasa** is tacky (a snobbish word: fine as a joke about a shirt, rude about a person). **Estar manija** is to be very excited about something: **estoy manija con el recital**. The **cana** is the police. A friend who backs you **te hace la gamba**; one who talks nonsense **manda fruta**.**
+- `a3dfd806` caiste — Se calentó
+  - before: The joke only works if nobody takes it badly: **se calentó** — *he got mad* — and **se ofendió** — *he took offense* — are the worst things to say about someone at an asado. **Se picó** is what porteños say when a match or an argument got heated: *se picó el partido*. Everybody has an **apodo** — *a nickname*: **el Flaco**, **el Gordo**, **el Negro**, **el Pelado**, **el Colo** (the redhead). They are friendly, not insults: *le dicen el Flaco*. A **broma** — *a prank* — is a sign of affection too. **No te hagas el vivo**, though: **te hacés el vivo** is *you're trying to be clever, to take advantage of someone*.
+  - after: **If someone **se calentó** — *got mad* — or **se ofendió** — *took offense* — the joke went too far. **Se picó**: a game or an argument got heated. An **apodo** (*nickname*) like **el Gordo** or **el Pelado** is friendly among friends; never use one with someone you just met.**
+- `31e9d7c0` me-pidio-que — Insistió, sugirió
+  - before: **Insistió en que fuera** — *she insisted I go*. **Me sugirió que la llamara** — *he suggested I call her*. Same pattern: the verb after **que** in the past subjunctive.
+  - after: ****Insistió en que fuera** — *she insisted I go*. **Me sugirió que la llamara** — *he suggested I call her*. As in *me pidió que trajera*, the verb after **que** is in the past subjunctive (*fuera, llamara*).**
+- `e4034940` me-pregunto-si — Si = whether
+  - before: | «¿Venís?» | Me preguntó **si** venía. | | «¿Abre hoy?» | No sé **si** abre hoy. | | | **A ver si** nos juntamos. | A yes-or-no question told later hangs on **si**, with the normal verb.
+  - after: **A yes/no question told later uses **si** (*whether*): *¿Venís?* → **me preguntó si venía**; *¿Abre hoy?* → **no sé si abre hoy**. The verb is normal, no subjunctive. Told in the past, it usually moves back: *venís* → *venía*.**
+- `e7590664` me-estas-cargando — En joda
+  - before: **Lo dije en joda** — *I was joking*. A **chiste** is a joke you tell; if it lands, it's **gracioso**.
+  - after: ****Lo dije en joda** — *I said it as a joke*. **Tomar el pelo** is the same game as cargar: **¿me estás tomando el pelo?** — *are you joking with me?* **¿Me estás jodiendo?** is very casual: friends only. A **broma** is a prank, or something not said seriously.**
+- `6044efe3` caiste — Te estaba tomando el pelo
+  - before: **Estar** + the **-ando / -iendo** form is how you catch a joke in progress: **me estás tomando el pelo** — *you're joking with me*; **¿me estás jodiendo?** — *you're kidding me*; **estás exagerando**. And when you believed it: **¡caíste!** — *got you!* — **qué inocente**. **Jodiendo** and **en joda** are very casual: fine with friends, not with a boss. Safer: **¿me estás cargando?**
+  - after: **When someone believes your joke: **¡caíste!** — *got you!* — and **qué inocente** — *you're so easy to trick*. If they complain too much: **estás exagerando** — *you're overdoing it*. **Te hacés el vivo** — *you're trying to be clever* — is for someone who tries to take advantage of others.**
+- `e05a6f2c` practica-como-no — Cómo no, faltaba más
+  - before: With **don José** and **doña Rosa**: **te doy una mano**, **dejá**, **cómo no**, **faltaba más** — vos, said warmly.
+  - after: **With older neighbours like **don José** and **doña Marta** you still say vos, but warmly: **cómo no** — *of course*; **faltaba más** — *of course, don't mention it*; **dejá, te doy una mano** — *leave it, I'll give you a hand*.**
+- `5b512731` sobre-la-hora — Sobre la hora
+  - before: **Sobre la hora** — *right at the deadline, with seconds to spare* — is how most porteño projects get done. First a **borrador** — *a draft* — then you **corregir** it, and only then the **informe** or the **presentación**. **¿Avanzaron?** — *any progress?*
+  - after: ****Sobre la hora** — *right at the deadline, at the very last minute* — is how most porteño projects get done. First a **borrador** — *a draft* — then you **corregir** it, and only then the **informe** or the **presentación**. **¿Avanzaron?** — *any progress?***
+- `5f8b9622` merezco-un-aumento — Me lo merezco
+  - before: | **Me merezco** un aumento. | I deserve a raise. | | **Me lo merezco.** | I deserve it. | | **Te lo merecés.** | You deserve it. | **Merecerse** usually comes with its pronoun in speech: the bare *merezco* is correct but more formal. And a boss who **valora** your work — *values* it — says so with the sueldo.
+  - after: **| **Me merezco** un aumento. | I deserve a raise. | | **Me lo merezco.** | I deserve it. | | **Te lo merecés.** | You deserve it. | **Merecerse** usually comes with its pronoun in speech: the bare *merezco* is correct but more formal. **Valorar** is *to value*: *en mi laburo no me valoran* — *at my job they don't value me*.**
+- `24f0169c` se-la-cree — Se la cree
+  - before: A little **la** that points at nothing turns a verb into an idiom: **se la cree** — *he's full of himself*; **me la banco** — *I can handle it*; **la tenés clara** — *you know your stuff*. With **las**: **me las arreglo** — *I get by*.
+  - after: ****Me la banco** — *I can handle it*; **se la bancó** — *she put up with it*. To say you can't stand something, drop the **la** and name it: *no me banco este frío* — *I can't stand this cold*; *no me banco a mi jefe* — *I can't stand my boss*.**
+- `64ddc740` me-la-jugue — Te la bancás, te las arreglás
+  - before: The *la* stays put while the person changes: **me la banco**, **te la bancás**, **nos la bancamos**; **me las arreglo**, **te las arreglás**, **se las arregla**. Two more with the *la* inside: **a las apuradas** — *in a rush* — and **a la larga** — *in the long run*.
+  - after: **Two fixed phrases to learn whole: **a las apuradas** — *in a rush* — and **a la larga** — *in the long run*. Here *las* and *la* are just *the*, not the idiom's *la*: *salí a las apuradas y me olvidé las llaves*.**
+- `d2483fff` me-la-jugue — The la stays, the person changes
+  - before: | yo | vos | él, ella | | **me la banco** | **te la bancás** | **se la bancó** | | **me las arreglo** | **te las arreglás** | **se las arregla** | | **me la jugué** | **la pifiaste** | **se la agarró** | | **me las tomo** | **la rompiste** | **la rompe** | Some verbs carry *me, te, se* plus the *la*; others (*pifiarla, romperla*) just the *la*. The *la* never changes.
+  - after: **| yo | vos | él, ella | | **me la banco** | **te la bancás** | **se la bancó** | | **me las arreglo** | **te las arreglás** | **se las arregla** | Some verbs carry *me, te, se* plus the *la*; others just the *la*: **la pifié**, **la pifiaste**; **la rompiste**, **la rompe**. The *la* never changes.**
+- `915c227f` practica-me-la-jugue — Te reenvío, para colmo
+  - before: **Te reenvío el archivo**, **cualquier duda, avisame**. And the story: **de golpe**, **para colmo**, **por lo visto**.
+  - after: ****Te reenvío el archivo** — *I'm forwarding you the file*; **cualquier duda, avisame** — *any questions, let me know*. And the story: **de golpe** — *all of a sudden*; **para colmo** — *to top it all off*; **por lo visto** — *apparently*.**
+- `68ee52b6` practica-me-pudri — Dejé de, volví a, solemos
+  - before: **Dejé de fumar**, **volvió a correr**, **solemos cenar tarde**, **acabamos de llegar**.
+  - after: ****Dejé de fumar**, **volvió a correr**, **solemos cenar tarde**.**
+- `c94d2e69` como-te-decia — Y bueno
+  - before: **Y bueno** is the porteño shrug — *oh well, what can you do*: **y bueno, así es**. **Ah, me olvidaba** — *oh, I forgot to say* — adds the best part at the end. A story can be **larga** — *long* — or **corta** — *short*.
+  - after: ****Y bueno** is the porteño shrug — *oh well, what can you do*: **y bueno, así es**. **Ah, me olvidaba** — *oh, I almost forgot* — adds the best part at the end. A story can be **larga** — *long* — or **corta** — *short*.**
+- `ee61df72` paro-docente — ¿Funciona o no?
+  - before: The morning after, the question is what still runs: **el subte funciona con normalidad**, or **suspendieron el servicio**. When the strike itself is called off, the fixed phrase is **levantaron el paro** / **se levantó el paro**; *suspender* is for classes, an exam, a march or a service. **Hubo un apagón** — *there was a blackout* — and the traffic lights are out: **embotellamiento**, **desvíos**, and half the city goes **a pie**.
+  - after: **The morning after, the question is what still runs: **el subte funciona con normalidad**, or **suspendieron el servicio**. When the strike itself ends, the phrase is **levantaron el paro** or **se levantó el paro**. **Suspender** is for classes, an exam, a march or a service.**
+- `de7cd7bc` fue-construido — The passive of the news
+  - before: | El puente **fue construido** hace un siglo. | was built | | La estación **fue inaugurada** ayer. | was opened | | Los chorros **fueron detenidos**. | were arrested | **Fue** + participle, and the participle agrees like an adjective. In conversation: *construyeron el puente*. **Detenidos** is also a noun: *hay dos detenidos* — *two people were arrested*.
+  - after: **| El puente **fue construido** hace un siglo. | was built | | La estación **fue inaugurada** ayer. | was opened | | Los ladrones **fueron detenidos**. | were arrested | **Fue** + participle, and the participle agrees like an adjective. **Detenidos** is also a noun: *hay dos detenidos* — *two people were arrested*.**
+- `5f88a88d` fue-construido — Fue construido, fueron detenidos
+  - before: The news likes the passive: **fue** + participle, and the participle agrees like an adjective: **el puente fue construido**, **la estación fue inaugurada**; more than one: **fueron detenidos** — *they were arrested*. In conversation porteños turn it around: *construyeron el puente*, *los detuvieron*. For the future the news says **será inaugurada** — *will be opened*; people say *la van a inaugurar*.
+  - after: **The news says **fue construido**; in conversation porteños turn it around: *construyeron el puente*, *los detuvieron*. Or they use **se**: **el puente se inauguró ayer**, **se construyó hace un siglo**. For the future the news says **será inaugurada** — *will be opened*; people say *la van a inaugurar*.**
+- `6d88948a` segun-el-diario — Según quién
+  - before: **Según** takes people as well as papers: **según él**, **según ellos**, **según la fuente**. **Aparentemente** is the neutral *apparently*; **se ve que** is what you conclude from what you see: **se ve que llovió** — *it must have rained*.
+  - after: ****Aparentemente** is the neutral *apparently*: **aparentemente, mañana hay paro**. **Se ve que** is what you conclude from what you see: **se ve que llovió** — *it must have rained*; **se ve que está cerrado**.**
+- `67c1e923` las-elecciones — Votar
+  - before: In Argentina voting is **obligatorio** from 18 to 70 (optional at 16–17 and after 70). **¿A quién votaste?** is a real question, though many answer **eso no se pregunta**. **Votar a** someone: *voté a la misma candidata*. **Votar por** works too: *¿por quién votás?* **Votar en blanco** is to cast a blank vote. And from the night before there is **veda**: no campaigning, and shops and bars can't sell alcohol.
+  - after: **In Argentina voting is **obligatorio** from 18 to 70. **¿A quién votaste?** is a real question, though many people don't answer it. **Votar a** someone: *voté a otro candidato*. **Votar por** works too: *¿por quién votás?* **Votar en blanco** is to cast a blank vote.**
+- `2a3a2462` las-elecciones — ¿Dónde votás?
+  - before: Election day is a Sunday, and everyone asks **¿dónde votás?** You check the **padrón** — *the voter roll* — for your school and your **mesa** — *your voting table*. **Votamos** in the school around the corner; **mi abuela votó a las ocho**, first in line.
+  - after: **Election day is a Sunday, and everyone asks **¿dónde votás?** — usually at a school near home: **votamos en la misma escuela**. Before it there is **veda**: campaigning stops 48 hours before the vote, and from the night before nobody can sell alcohol.**
+- `eac6d092` las-elecciones — Las elecciones
+  - before: **Las elecciones** — *the elections* — decide the **gobierno** and the **presidente**. The course stays out of it: the words, not the opinions.
+  - after: ****Las elecciones** — *the elections* — decide the **gobierno** and the **presidente**. Before them, the **debate** on TV; after, the **resultados**. If nobody wins outright there's a **balotaje** — *a runoff*. The course stays out of who won: the words, not the opinions.**
+- `5c404af7` segun-el-diario — Según
+  - before: **Según** — *according to*: **según el diario**, **según mi vieja**. **Al parecer** and **supuestamente** keep a distance from what you're passing on. **Al parecer** sounds like the news; in chat people say **por lo visto** or **parece que**: *por lo visto, Sofi tiene novio nuevo*; *parece que no viene*.
+  - after: ****Según** — *according to* — takes papers and people: **según el diario**, **según mi mamá**, **según Nico**. **Supuestamente** and **al parecer** keep a distance from what you pass on. **Al parecer** sounds like the news; in chat people say *parece que*.**
+- `3ff85211` segun-el-diario — Lo desmintieron
+  - before: A story is **confirmado** or it's **desmentido**: **el gremio desmintió el rumor**, **lo desmintieron en el noticiero**. Before you forward it, ask **¿cuál es la fuente?** — the **titular** says one thing, the **versión oficial** another.
+  - after: **A **rumor** is only that until someone **confirma** it, or denies it: **el gobierno desmintió el rumor**. Before **compartirlo**, ask **¿cuál es la fuente?** A **cadena** — *a chain message* — with no source is probably **verso** — *made up*.**
+- `22681126` fue-clausurado — Fue clausurado, fueron rescatados
+  - before: Both parts agree with what it's about — **fue**/**fueron** for one or many, and the ending **-o/-a/-os/-as**: **el boliche fue clausurado**, **la obra fue clausurada**, **los vecinos fueron rescatados**, **las vecinas fueron rescatadas**. Whoever did it comes after **por**: *por los bomberos*. **Fue clausurado** is the event — *it got closed down*; **está clausurado** is the result — *it is closed now*.
+  - after: ****Fue clausurado** is the event — *it got closed down*; **está clausurado** is the result — *it is closed now*. The ending agrees with the thing: **el boliche fue clausurado**, **la obra fue clausurada**, **la cancha está clausurada**.**
+- `501e88f5` fue-clausurado — Fue, fueron + a participle that agrees
+  - before: | one | more than one | | El boliche **fue clausurado**. | Los vecinos **fueron rescatados**. | | La obra **fue clausurada**. | Las vecinas **fueron rescatadas**. | | La ley **fue aprobada**. | Los heridos **fueron trasladados**. | Who did it comes after **por**: *por los bomberos*. The news opens with **hubo**: *hubo un incendio*.
+  - after: **| one | more than one | | El boliche **fue clausurado**. | Los vecinos **fueron rescatados**. | | La obra **fue clausurada**. | Las vecinas **fueron rescatadas**. | | La ley **fue aprobada**. | Los heridos **fueron trasladados**. | Who did it comes after **por**: *por los bomberos*. **
+- `7ae297c7` lo-lindo-de-la-ciudad — Lo + adjective
+  - before: | **Lo lindo** es que siempre hay algo. | The nice thing is there's always something. | | **Lo feo** es el tránsito. | The ugly part is the traffic. | | **Lo difícil** fue el idioma. | The hard part was the language. | | **Lo único** que extraño es el mar. | The only thing I miss is the sea. | | **Lo más** lindo es la plaza del barrio. | The nicest thing is the local square. | **Lo** + adjective makes *the … thing*, and **lo** never becomes la, los or las. With a plural noun, the verb is plural: **lo feo son los precios**.
+  - after: **Put **lo** before an adjective to say *the … thing*: **lo lindo** — *the nice thing*, **lo feo** — *the bad part*, **lo único** — *the only thing*. Add **de** to say of what: **lo peor de Buenos Aires es el tránsito**. **Lo** never changes: **lo feo son los precios**.**
+- `a75b10b9` lo-lindo-de-la-ciudad — Lo más lindo
+  - before: **Lo más** + adjective is *the most … thing*: **lo más lindo del barrio es la plaza**. Weighing it up, porteños say the city **tiene sus cosas** — *has its issues*: the **inseguridad**, the **costo de vida** — but the **calidad de vida**, **a la vez**, is hard to beat.
+  - after: **To say the good and the bad together: **Buenos Aires tiene sus cosas** — *it has its issues* — like the **inseguridad** (*crime*) and the **costo de vida** (*cost of living*). But **a la vez** — *at the same time* — **no hay nada como Buenos Aires**: *there's nothing like it*.**
+- `e4442fba` no-es-que — No es que…
+  - before: A reason you deny takes the subjunctive: **no es que no quiera** — *it's not that I don't want to*. The real reason follows with **es que** and the normal verb: **es que no puedo**.
+  - after: **After **no es que** any verb goes into the subjunctive, and you already know the forms: **sea**, **esté**, **haya**, **tenga**. *No es que sea caro, es que no tengo plata* — *it's not that it's expensive, I just have no money*. *No es que esté cansado, es que laburo temprano.***
+- `cc5e231d` no-es-que-no-me-guste — Saying no without quedar mal
+  - before: Nobody wants to **quedar mal** — *look rude*. So you thank them for the **invitación**, blame a **compromiso** — *a prior commitment* — and leave the door open: **la próxima voy**, **otro día**. And if they push: **no insistas, che**. **Rechazar** needs something after it — *rechacé dos invitaciones* — and sounds formal; day to day people say **decir que no**: *me cuesta decir que no*.
+  - after: **Nobody wants to **quedar mal** — *look rude*. So you thank them for the **invitación**, blame a **compromiso** — *other plans* — and leave the door open: **la próxima voy**, **otro día**. And if they push: **no insistas, che**. **Rechazar** needs something after it — *rechacé dos invitaciones* — and sounds formal; day to day people say **decir que no**: *me cuesta decir que no*.**
+- `2f545600` no-es-que-no-me-guste — No es que… with every verb
+  - before: | **No es que** no me **interese**, | It's not that I'm not interested, | | **No es que** no me **importe**, | It's not that I don't care, | | **No es que** me **caiga** mal, | It's not that I don't like him, | | **No es que** no **queramos**, | It's not that we don't want to, | | **es que** tengo un compromiso. | it's just that I have plans. | The denied reason is subjunctive in every person — **no es que no podamos** too; the real one after **es que** is not. Don't push: **no insistas**.
+  - after: **After **no es que**, every verb goes subjunctive: **no es que no me interese** — *it's not that I'm not interested*; **no es que no me importe** — *it's not that I don't care*; **no es que me caiga mal** — *it's not that I don't like him*; **no es que no queramos / podamos** — *it's not that we don't want to / can't*. The real reason follows with **es que** + a normal verb: *es que no llego* — *I just can't make it*.**
+- `fdea7949` si-hubiera-ahorrado — Hubiéramos
+  - before: With *we*: **si hubiéramos salido antes, ya estaríamos ahí**. The participles: **ahorrado, comprado, vendido, aceptado**. **Hubiera** + participle also works alone as *would have*: **nunca lo hubiera vendido** — *I'd never have sold it*; **yo que vos, no lo hubiera vendido**. With *vos* it is **hubieras**: **¿lo hubieras vendido?** And **ojalá hubiera** + participle = *I wish I had*: **ojalá hubiera ahorrado más**.
+  - after: ****Hubiera** + participle also works alone as *would have*: **nunca lo hubiera vendido** — *I'd never have sold it*; **¿lo hubieras vendido?** — *would you have sold it?* And **ojalá hubiera** + participle is *I wish I had*: **ojalá hubiera ahorrado más**.**
+- `e7e97709` si-hubiera-ahorrado — Your life, my life
+  - before: The mixed conditional with *you*: **si hubieras estudiado medicina, ahora serías médico**; **si me hubieras hecho caso, no estarías así**. With *we*: **si hubiéramos ahorrado, ahora tendríamos para las vacaciones**.
+  - after: ****Hubiera** changes with the person: **hubiera** (I, he, she), **hubieras** (vos), **hubiéramos** (we), **hubieran** (they, you all). *Si hubieras estudiado medicina, ahora serías médico. Si hubiéramos ahorrado, ahora estaríamos en Bariloche. Si hubieran construido el puente, no habría tanto tránsito.***
+- `8a29fec5` tendria-que-haber — Me arrepiento
+  - before: **Me arrepiento** — *I regret it*; **me arrepentí** — *I regretted it, I changed my mind*. With what you did or didn't do, **de (no) haber** + participle: **me arrepiento de no haber ido** — *I regret not going*; *no me arrepiento de haber venido*. A missed chance is a **oportunidad** you didn't **aprovechar**.
+  - after: ****Me arrepiento** — *I regret it*; **me arrepentí** — *I regretted it, I changed my mind*. With what you did or didn't do, **de (no) haber** + participle: **me arrepiento de no haber ido** — *I regret not going*; *no me arrepiento de haber venido*. An **oportunidad** is a chance; **aprovechar** is to make the most of it: *no aproveché la oportunidad*.**
+- `54279426` me-hubiera-gustado — ¿Te arrepentís?
+  - before: With *vos*: **¿te arrepentís?**; with *him*: **se arrepintió**. **Dejé pasar la oportunidad** — *I let the chance go*. **Te lo perdiste** — *you missed out*. **Metí la pata** — *I made a mistake, I said or did the wrong thing* — or, more porteño, **me mandé una macana**. **¡Qué macana!** — *what a shame*. **Lamentablemente**, you can't **volver atrás** — so you drop it with **ya fue**.
+  - after: ****Metí la pata** — *I messed up, I said or did the wrong thing*. More porteño: **me mandé una macana**. A **macana** is a silly mistake; an **error** is any mistake. And when something goes wrong for someone: **¡qué macana!** — *what a shame!***
+- `1d43e9b9` me-hubiera-gustado — ¡Hubieras avisado!
+  - before: On its own, **hubieras** + participle is a reproach — *you should have*: **¡hubieras avisado!** — *you should have told me!* As a question it is *would you have…?*: **¿hubieras ido?** And for *we shouldn't have*, add **no**: **no tendríamos que haber venido**.
+  - after: **A chance you let go: **dejé pasar la oportunidad** — *I let the chance go*. To someone who didn't come: **te lo perdiste** — *you missed out*. **Lamentablemente** — *unfortunately* — you can't **volver atrás** — *go back* — so you drop it with **ya fue**.**
+- `55b97bb7` practica-me-hubiera-gustado — Otra vida, otra oportunidad
+  - before: **Si hubieras estudiado, ahora serías…** — and the one you let slip: **me hubiera gustado**, **tendríamos que haber…**, **te lo perdiste**.
+  - after: **Another life: **si hubieras estudiado, ahora serías médico**. A missed chance: **me hubiera gustado ir**, **tendríamos que haber ido**, **te lo perdiste**. And **hubieras** + participle alone is a reproach: **¡hubieras avisado!** — *you should have told me!***
+- `a1c0dd99` lo-lindo-de-la-ciudad — Lo que más me gusta
+  - before: The most natural way to say what you love about a place: **lo que más me gusta de Buenos Aires es la noche**. And the opposite: **lo que menos me gusta es el ruido**.
+  - after: **The most natural way to say what you love about a place: **lo que más me gusta de Buenos Aires es la noche**. The opposite: **lo que menos me gusta es el ruido**. And **lo más** + adjective is *the most … thing*: **lo más lindo del barrio es la plaza**.**
+- `a0157ee6` si-hubiera-ahorrado — Then and now
+  - before: A past that went differently, and what it would mean today: **si hubiera ahorrado** (then), **ahora tendría un depto** (now). The first half is *hubiera* + participle, the second the plain conditional.
+  - after: **A past that went differently, and what it would mean today: **si hubiera ahorrado** (then), **ahora tendría un depto** (now). The first half is **hubiera** + participle; the second is the plain conditional. **A esta altura** — *by now* — goes in the *now* half: **a esta altura estaría jubilado**.**
+- `1d62d696` no-es-que — Es que…
+  - before: On its own, **es que…** is the start of every porteño excuse: **¿no venís? — Es que laburo temprano**.
+  - after: **On its own, **es que…** is the start of every porteño excuse: **—¿No venís? —Es que laburo temprano.****
+- `83a1fba1` lo-que-paso-fue-que — Lo que pasó fue que…
+  - before: Tell it in the past: **lo que pasó fue que se cortó el subte**. Say what you meant: **lo que quiero decir es que…**. **Lo que más** — *what… most*: **lo que más me molestó fue eso**. And **en el fondo** — *deep down* — for the real reason under it.
+  - after: **Tell it in the past: **lo que pasó fue que se cortó la luz**. Say what you meant: **lo que quiero decir es que…**. You already know **lo que más** — *what… most*: **lo que más me molestó fue eso**. And **en el fondo** — *deep down* — for the real reason under it.**
+- `e6b7166a` como-dice-el-dicho — El que avisa no traiciona
+  - before: **El que avisa no traiciona** — *don't say I didn't warn you*. You say it while you give the warning. Literally: *the one who warns you doesn't betray you*. Two you'll hear every week in Buenos Aires: **sobre gustos no hay nada escrito** — *there's no accounting for taste*; **el que quiere celeste, que le cueste** — *if you want the good stuff, it will cost you*.
+  - after: ****El que avisa no traiciona** — *don't say I didn't warn you*. You say it while you give the warning. Literally: *the one who warns you doesn't betray you*. Two more you'll hear in Buenos Aires: **sobre gustos no hay nada escrito** — *everyone has their own taste*; **el que quiere celeste, que le cueste** — *if you want something good, you have to work for it*.**
+- `a52eadb9` cada-loco-con-su-tema — Como dice el dicho…
+  - before: **Como dice el dicho** — *as the saying goes* — and then the one that fits: **cada loco con su tema** — *to each their own*; **no hay dos sin tres** — *it happened twice, it'll happen again*; **el que no llora no mama** — *if you don't ask, you don't get*.
+  - after: ****Como dice el dicho** — *as the saying goes* — and then the one that fits: **cada loco con su tema** — *to each their own*; **no hay dos sin tres** — *there's always a third time*; **el que no llora no mama** — *if you don't ask, you don't get*.**
+- `c856ee20` cada-loco-con-su-tema — The ones grandma says
+  - before: **Más vale pájaro en mano que cien volando** — *one sure thing is better than a hundred possible ones*; **a caballo regalado no se le miran los dientes** — *you don't complain about a gift*; **ojos que no ven, corazón que no siente** — *what you don't know can't hurt you*; **del dicho al hecho hay mucho trecho** — *easier said than done*. **El que se quema con leche, ve una vaca y llora** — *after a bad experience, you're scared of anything similar*. For someone who complicates everything: **buscarle la quinta pata al gato** — *to look for the cat's fifth leg*. And when someone walks in: **hablando del rey de Roma…** — *we were just talking about you*
+  - after: ****Más vale pájaro en mano que cien volando** — *one sure thing is better than a hundred possible ones*; **a caballo regalado no se le miran los dientes** — *you don't complain about a gift*; **ojos que no ven, corazón que no siente** — *what you don't know can't hurt you*; **del dicho al hecho hay mucho trecho** — *easier said than done*. **El que se quema con leche, ve una vaca y llora** — *after a bad experience, you're scared of anything similar*. For someone who complicates everything: **buscarle la quinta pata al gato** — *to look for the cat's fifth leg*. And when someone walks in: **hablando del rey de Roma…** — *we were just talking about you*.**
+- `2195936f` practica-me-mori-de-risa — Me morí de risa, tanto mejor
+  - before: **Me morí de risa**, **¿de qué te reís?**, **me hizo sentir…** — and **cuanto antes lleguemos, mejor**.
+  - after: ****Me morí de risa**, **¿de qué te reís?**, **me hizo sentir…** — and **cuanto antes lleguemos, mejor**. **A la larga** — *in the long run*: **a la larga, el esfuerzo rinde**.**
+- `2cdd21ad` practica-me-mori-de-risa — Al horno, manija
+  - before: **Al horno** — *in trouble*; **qué bajón** — *what a shame*; **ni en pedo** — *no way*; **rata** — *stingy*; **careta** — *fake*; **manija** — *very excited*. All among friends.
+  - after: ****Al horno** — *in trouble*; **qué bajón** — *what a shame*; **ni en pedo** — *no way*; **rata** — *stingy*; **manija** — *very excited*; **guita** — *money*; **hacer la gamba** — *to help someone out or keep them company*. All among friends.**
+- `0904d601` me-hace-ruido — Me quedé helado
+  - before: The same shape as **me cayó la ficha** — the feeling happens *to* you: **me quedé helado** — *I froze, I was stunned*; **me dejó pensando** — *it got me thinking*; **me partió el alma** — *it broke my heart*. The good ones: **me hace bien**, **me da ternura**, and **¡qué alivio!**
+  - after: **Something does it *to* you: **me dejó pensando** — *it got me thinking*; **me partió el alma** — *it broke my heart*. And you end up frozen: **me quedé helado** — *I froze, I was stunned*. A woman says **me quedé helada**. The good ones: **me hace bien**, **me da ternura**, and **¡qué alivio!****
+- `b1b445dc` practica-cada-loco-con-su-tema — Lo que pasó fue que…
+  - before: **Lo que pasó fue que**, **lo que quiero decir es que**, **lo tuyo**, **lo que sea** — and **como dice el dicho**, **cada loco con su tema**.
+  - after: ****Lo que pasó fue que**, **lo que quiero decir es que**, **lo tuyo**, **lo que sea**, **en el fondo**. And three sayings: **cada loco con su tema** — *to each their own*; **no hay dos sin tres** — *there's always a third time*; **hablando del rey de Roma** — *we were just talking about you*.**
+- `b9bc5c55` cuanto-antes-lleguemos — Mejor todavía
+  - before: **Mejor todavía** — *even better*: **¿es gratis? Mejor todavía**; also **mejor así** — *better this way*. *Tanto mejor* says the same but sounds bookish. To **evitar** the **hora pico**, you go early; the place **se llena** fast; and leaving early, the day **rinde** — *goes further*.
+  - after: ****Mejor todavía** — *even better*: **¿es gratis? Mejor todavía**; also **mejor así** — *better this way*. *Tanto mejor* says the same but sounds bookish. To **evitar** the **hora pico**, you go early; the place **se llena** fast; and leaving early, the day **rinde** — *goes further*. **Ganar tiempo** is *to save time*: **con el subte ganás tiempo**.**
+- `6b55c1f4` me-cayo-la-ficha — Me da cosa
+  - before: **Me da cosa** — *I feel awkward about it, it makes me uneasy*. Mostly with an infinitive: **me da cosa pedirle plata** — *I feel bad asking him for money*; and about a thing: *ese perro me da cosa*. **Me pone mal** — *it gets me down*. **Me quedé con las ganas** — *I missed out, and I still want to*.
+  - after: ****Me da cosa** has two uses. Doing something feels awkward: **me da cosa pedirle plata** — *I feel awkward asking him for money*. Or a thing gives you a bad feeling: **ese perro me da cosa** — *that dog makes me uneasy*. **Me pone mal** — *it makes me sad*. **Me quedé con las ganas** — *I missed out, and I still want to*.**
+- `8845c3ad` me-hizo-reir — Me reí
+  - before: **Reírse** is *to laugh*: **me río mucho con vos** — *I laugh a lot with you*; **me reí un montón**, **nos reímos de todo**; **¿te reíste?** **Llorar** is *to cry*: **lloré con la película**.
+  - after: ****Reírse** is *to laugh*: **me río mucho con vos** — *I laugh a lot with you*. You already know **me reí** and **nos reímos**; with *vos* in the past it is **te reíste**: **¿de qué te reíste?** **Llorar** is *to cry*: **lloré con esa película**.**
+- `a5efa082` mis-abuelos-italianos — Llegaron en barco
+  - before: Most porteños have an **abuelo** or **bisabuelo** who **llegó en barco** from Italy or Spain. An Italian, or anyone with an Italian surname, is a **tano** or a **tana**: *mi abuelo era tano*. That's why a porteño talks with his hands and eats ñoquis on the 29th.
+  - after: **Many porteños have an **abuelo** or **bisabuelo** who **llegó en barco** from Italy or Spain. An Italian, or anyone with an Italian surname, is a **tano** or a **tana**: *mi abuelo era tano*. That's why a porteño talks with his hands and eats ñoquis on the 29th.**
+- `4039fa21` se-instalaron-en-la-boca — Se instalaron
+  - before: The family story runs in the third person plural: **se escaparon de la guerra**, **se instalaron en un conventillo** — *a crowded tenement house* — and **trabajaron en el puerto**. One person: **se instaló**. They left **pobreza** behind, **mantuvieron** the language and the traditions, and **guardaron** the photos of the ship. *Conservaron* says the same, but it is a written word.
+  - after: **The family story runs in the third person plural: **se escaparon de la guerra**, **se instalaron en un conventillo** — *an old shared house where each poor family rented one room* — and **trabajaron en el puerto**. One person: **se instaló**. They left **pobreza** behind, **mantuvieron** the language and the traditions, and **guardaron** the photos of the ship. *Conservaron* says the same, but it is a written word.**
+- `9f9ceb73` practica-se-instalaron — Acampamos, te convido
+  - before: **Acampamos al lado de un lago**, **hicimos dedo**; **¿te convido un mate?** — but **no hiervas el agua**. On the beach, a **carpa** is a rented beach tent (a cabana).
+  - after: ****Acampamos al lado de un lago**, **hicimos dedo**; **¿te convido un mate?** — but **no hiervas el agua**. A **carpa** is a camping tent; on the beach in Mar del Plata it is also a rented shade tent.**
+- `36794004` gracias-por-todo — Al principio me costó
+  - before: Looking back is the preterite: **al principio me costó** — *it was hard at first* — **pero me adapté** — *I adapted*. Now **me siento como en casa**. Say it **de corazón**.
+  - after: **Looking back, a finished thing takes the preterite: **al principio me costó** — *it was hard at first* — **pero me adapté** — *I adapted*. How things were takes the imperfect: *al principio era raro*. Now **me siento como en casa**. Say it **de corazón**.**
+- `bb475835` ya-sos-de-aca — Lo lograste
+  - before: **Lograr** — *to manage, to pull off*: **¡lo lograste!** — *you did it!* And your own line: **¡lo logré!** — *I did it!* Then **felicitaciones** — *congratulations* — or, among friends, just **¡grande!**
+  - after: ****Lograr** — *to manage something hard, to achieve*: **¡lo lograste!** — *you did it!* And your own line: **¡lo logré!** — *I did it!* Then **felicitaciones** — *congratulations* — or, among friends, just **¡grande!****
+- `8e491aaa` ya-sos-de-aca — Ya sos de acá
+  - before: When your **acento** gives you away less and less, someone will say **ya sos de acá** — *you're one of us now*. Take it: it's the highest praise the city has.
+  - after: **When people notice your **acento** less and less, someone will say **ya sos de acá** — *you're one of us now*. Take it: it's the highest praise the city has.**
+- `d3c1b17e` practica-se-emociono — Se recibió, se emocionó
+  - before: **Se recibió**, **se comprometieron**, **se jubiló** — and **se emocionó**, **nos emocionamos**, **me llegó**.
+  - after: **Big moments: **se recibió** — *graduated*; **se comprometieron** — *got engaged*; **se jubiló** — *retired*. And the feelings: **se emocionó** — *got emotional*; **me llegó** — *it touched me*.**
+- `a25e7141` se-emociono — Me llegó
+  - before: **Me llegó** — *it really touched me*: **tu mensaje me llegó un montón**. Careful: plain **me llegó tu mensaje** just means *I got your message*. Say it **de todo corazón**. **Sos un orgullo** — *you make us proud*. After the **discurso**, my dad **me abrazó** — *hugged me* — and the **felicidad** was all over the room.
+  - after: ****Me llegó** — *it really touched me*: **tu mensaje me llegó un montón**. Careful: plain **me llegó tu mensaje** just means *I got your message*.**
+- `cca2ccce` me-emocione — Me emocioné
+  - before: **Emocionarse** is mostly *to be moved, to get emotional* (it can also mean *to get excited*): **me emocioné en el casamiento**. **Se me puso la piel de gallina** — *I got goosebumps*.
+  - after: ****Emocionarse** is mostly *to be moved, to get emotional* (it can also mean *to get excited*): **me emocioné en el casamiento**. **Se me puso la piel de gallina** — *I got goosebumps*. Also **me dio piel de gallina** — *it gave me goosebumps*.**
+- `73a05d53` me-emocione — Orgulloso
+  - before: **Estoy orgulloso de vos** — *I'm proud of you*. **Agradecido** — *grateful*: **estoy muy agradecida**. Grateful *to* a person: **agradecido con vos**. Grateful *for* a thing: **agradecida por el regalo**.
+  - after: ****Estoy orgulloso de vos** — *I'm proud of you*. A woman says **orgullosa** and **agradecida**. **Agradecido** — *grateful*: **estoy muy agradecida**. Grateful *to* a person: **agradecido con vos**. Grateful *for* a thing: **agradecida por el regalo**.**
+- `5d9cf103` aunque-no-tenga-ganas — Aunque, por más que, aunque sea
+  - before: | a fact — normal verb | a maybe — subjunctive | | Aunque **llueve**, entreno. | Aunque **llueva**, entreno igual. | | Por más que me **cuesta**, sigo. | Por más que me **cueste**, sigo. | | Aunque no **tengo** ganas, voy. | Aunque no **tenga** ganas, voy igual. | **Por más que** is a stronger *aunque*. **Aunque sea** — *even just*: *aunque sea un rato*. **Sin embargo, así y todo** start the other half.
+  - after: **| a fact — normal verb | a maybe — subjunctive | | Aunque **llueve**, entreno. | Aunque **llueva**, entreno igual. | | Por más que me **cuesta**, sigo. | Por más que me **cueste**, sigo. | | Aunque no **tengo** ganas, voy. | Aunque no **tenga** ganas, voy igual. | **Aunque sea** — *even just*: *aunque sea un rato*.**
+- `3910aabd` es-enfermera — Tenemos que, tienen que
+  - before: *Tener que* works with every person: *tenemos que laburar*, *los médicos tienen que ayudar*. **Buscar** also means *to pick someone up*: *tengo que buscar a mi hijo*.
+  - after: ****Buscar** is *to look for* — *tengo que buscar laburo* — and also *to pick someone up*: *tengo que buscar a mi hijo*, *tienen que buscar a sus hijos*.**
+
+## English corrected or made plain (932)
+
+- `91dc9348` buen-dia (c01#14)
+  - —Buen día, Mati, ¿todo bien? —Joya, gracias.
+  - Good morning, Mati, all good? —Great, thanks.
+  - → **—Good morning, Mati, all good? —Great, thanks.**
+- `141ef3c7` sos-turista (c01#14)
+  - —¿Sos turista? —No, estudiante.
+  - "Are you a tourist?" "No, a student."
+  - → **—Are you a tourist? —No, a student.**
+- `266e8d44` sos-turista (c01#14)
+  - —¿Sos turista? —No, profe.
+  - "Are you a tourist?" "No, a teacher."
+  - → **—Are you a tourist? —No, a teacher.**
+- `797cd149` sos-turista (c01#14)
+  - —Perdón, ¿sos profe? —Sí, soy Nico.
+  - "Sorry, are you a teacher?" "Yes, I'm Nico."
+  - → **—Sorry, are you a teacher? —Yes, I'm Nico.**
+- `bf74f61d` sos-turista (c01#14)
+  - —¿Sos profe? —No, soy estudiante extranjero.
+  - "Are you a teacher?" "No, I'm a foreign student."
+  - → **—Are you a teacher? —No, I'm a foreign student.**
+- `53dd2214` sos-turista (c01#14)
+  - —¿Sos Pablo? —Ah, no, soy Mati.
+  - "Are you Pablo?" "Oh, no, I'm Mati."
+  - → **—Are you Pablo? —Oh, no, I'm Mati.**
+- `24887ab4` sos-turista (c01#19)
+  - Permiso, por favor.
+  - Let me through, please.
+  - → **Excuse me, please.**
+- `ae4441eb` sos-turista (c01#19)
+  - Perdón, permiso.
+  - Sorry, let me through.
+  - → **Sorry, excuse me.**
+- `027ba81a` tios-y-primos (c01#46)
+  - Mi gata es una señora.
+  - My cat is an old lady.
+  - → **My cat is a lady.**
+- `c9c2084c` practica-quien-es (c01#50)
+  - Hola, amiga, ¿todo bien?
+  - Hey, girl, all good?
+  - → **Hi, my friend, all good?**
+- `74cf79fe` soy-de-zona-norte (c01#0)
+  - ¿Sos de Capital, de La Plata o de otra ciudad?
+  - Are you from the Capital, from La Plata or from another city?
+  - → **Are you from the city of Buenos Aires, from La Plata or from another city?**
+- `b4bf57aa` cuanto-sale (c02#26)
+  - ¿Quién compra pan?
+  - Who buys bread?
+  - → **Who's buying bread?**
+- `e1ec14c3` cuanto-sale (c02#26)
+  - Él compra chocolate y ella paga.
+  - He buys chocolate and she pays.
+  - → **He's buying chocolate and she's paying.**
+- `e27a2acb` cuanto-sale (c02#26)
+  - Mi papá compra y yo pago.
+  - My dad buys and I pay.
+  - → **My dad is buying and I'm paying.**
+- `a0682c19` cuanto-sale (c02#26)
+  - Mi hermana compra una docena de empanadas.
+  - My sister buys a dozen empanadas.
+  - → **My sister is buying a dozen empanadas.**
+- `a57b07aa` cuanto-sale (c02#26)
+  - Ella paga mil pesos y él, dos mil.
+  - She pays a thousand pesos and he pays two thousand.
+  - → **She's paying a thousand pesos and he's paying two thousand.**
+- `bea2ac60` cuanto-sale (c02#26)
+  - Ella paga, él no tiene un peso.
+  - She pays, he doesn't have a peso.
+  - → **She's paying, he doesn't have a peso.**
+- `4fc07370` la-gente (c02#32)
+  - Nosotras somos de Capital.
+  - We're from the Capital.
+  - → **We're from the city of Buenos Aires.**
+- `d1118aed` hay-un-kiosco (c02#43)
+  - No estoy en la calle, estoy en el subte.
+  - I'm not outside, I'm on the subway.
+  - → **I'm not on the street, I'm on the subway.**
+- `7f0b0a81` hay-un-tren (c03#3)
+  - En el bar hay gente de Brasil y de Uruguay.
+  - There are people from Brazil and Uruguay at the bar.
+  - → **There are people from Brazil and Uruguay at the café.**
+- `a180848b` hay-un-tren (c03#3)
+  - Hay gente linda en el bar de la esquina.
+  - There are nice people at the bar on the corner.
+  - → **There are nice people at the café on the corner.**
+- `69a0bd0e` hay-un-tren (c03#3)
+  - ¿El bar está cerca del subte?
+  - Is the bar near the subway?
+  - → **Is the café near the subway?**
+- `69a7f6af` hay-un-tren (c03#3)
+  - Del bar a la estación hay una cuadra.
+  - It's one block from the bar to the station.
+  - → **It's one block from the café to the station.**
+- `4c8d04be` hay-un-tren (c03#3)
+  - Mati está en el bar.
+  - Mati is at the bar.
+  - → **Mati is at the café.**
+- `cd238100` practica-por-aca (c03#8)
+  - ¿La vecina rubia? Es la mamá de Diego.
+  - The blond neighbor? She's Diego's mom.
+  - → **The blonde neighbor? She's Diego's mom.**
+- `90ce0b78` practica-por-aca (c03#8)
+  - ¿Quién es la rubia?
+  - Who's the blond girl?
+  - → **Who's the blonde girl?**
+- `5323580d` practica-por-aca (c03#8)
+  - ¿Tu novia es rubia o morocha?
+  - Is your girlfriend blond or dark-haired?
+  - → **Is your girlfriend blonde or dark-haired?**
+- `06e85b5d` practica-por-aca (c03#8)
+  - La piba rubia es Ana.
+  - The blond girl is Ana.
+  - → **The blonde girl is Ana.**
+- `a93d4656` esta-cerrado (c03#16)
+  - Dos empanadas y un agua. Listo.
+  - Two empanadas and a water. Done.
+  - → **Two empanadas and a water. That's all.**
+- `b7022123` que-haces (c03#31)
+  - Trabajo en la zona sur.
+  - I work in the south part of town.
+  - → **I work in the southern suburbs.**
+- `1798ba9d` practico-castellano (c03#36)
+  - Necesito un profe, hablo poco.
+  - I need a teacher, I don't speak much.
+  - → **I need a teacher, I only speak a little.**
+- `c6d68e16` practico-castellano (c03#36)
+  - Hablamos poco porque nunca practicamos.
+  - We don't speak much because we never practice.
+  - → **We only speak a little because we never practice.**
+- `859f2b16` practica-nos-gusta (c03#52)
+  - ¿Estás enojado?
+  - Are you mad?
+  - → **Are you angry?**
+- `6d17dec9` practica-nos-gusta (c03#52)
+  - ¿Por qué está enojado tu viejo?
+  - Why is your dad mad?
+  - → **Why is your dad angry?**
+- `8cfb0411` practica-nos-gusta (c03#52)
+  - El profe está enojado porque no estudiamos.
+  - The teacher is mad because we don't study.
+  - → **The teacher is angry because we don't study.**
+- `f7d005c3` practica-nos-gusta (c03#52)
+  - Estoy medio enojado con mi novia.
+  - I'm kind of mad at my girlfriend.
+  - → **I'm kind of angry with my girlfriend.**
+- `b4b7b17d` practica-nos-gusta (c03#52)
+  - Martín está enojado con Juli.
+  - Martín is mad at Juli.
+  - → **Martín is angry with Juli.**
+- `1dfaf8ec` practica-por-aca (c03#0)
+  - Mi compu está arriba, pero el celu está acá.
+  - My laptop is upstairs, but my phone is here.
+  - → **My computer is upstairs, but my phone is here.**
+- `22b566b2` practica-por-aca (c03#0)
+  - La compu está en la mochila.
+  - The laptop is in the backpack.
+  - → **The computer is in the backpack.**
+- `d115256a` esta-cerrado (c03#0)
+  - Mi compu está caliente, ¿está rota?
+  - My laptop is hot, is it broken?
+  - → **My computer is hot, is it broken?**
+- `539018dd` practica-nos-gusta (c03#0)
+  - Estoy medio cansada, pero bien.
+  - I'm a bit tired, but fine.
+  - → **I'm kind of tired, but fine.**
+- `c5bd9588` practica-nos-gusta (c03#0)
+  - No, gracias, estoy medio apurado.
+  - No thanks, I'm in a bit of a hurry.
+  - → **No thanks, I'm kind of in a hurry.**
+- `a29d57b5` que-quieren-tomar (c04#4)
+  - Una picada para dos, por favor.
+  - A meat and cheese platter for two, please.
+  - → **A picada for two, please.**
+- `57d494b8` que-quieren-tomar (c04#4)
+  - Queremos una picada para cuatro.
+  - We'd like a meat and cheese platter for four.
+  - → **We'd like a picada for four.**
+- `bf727f39` que-quieren-tomar (c04#7)
+  - ¿Qué quieren tomar?
+  - What do you want to drink?
+  - → **What do you guys want to drink?**
+- `608f2a8f` que-quieren-tomar (c04#7)
+  - ¿Quieren algo más?
+  - Do you want anything else?
+  - → **Do you guys want anything else?**
+- `4de6ccc4` que-quieren-tomar (c04#7)
+  - Perdón, ¿tienen soda?
+  - Excuse me, do you have sparkling water?
+  - → **Excuse me, do you guys have sparkling water?**
+- `85cae879` comes-vivis (c04#7)
+  - ¿Comen con nosotros?
+  - Are you eating with us?
+  - → **Are you guys eating with us?**
+- `74b3d62e` vendo-diarios (c04#7)
+  - ¿Comparten la picada con nosotros?
+  - Will you share the picada with us?
+  - → **Will you guys share the picada with us?**
+- `707c183f` es-enfermera (c04#16, verify2)
+  - El hospital tiene que buscar una persona para la noche.
+  - The hospital has to look for a person for the night.
+  - → **The hospital has to look for a person for the night shift.**
+- `f070ab49` es-enfermera (c04#17)
+  - La cocinera tiene que buscar pan.
+  - The cook has to go get bread.
+  - → **The cook has to pick up bread.**
+- `67cbba22` es-enfermera (c04#18)
+  - ¿Sos la vendedora?
+  - Are you the saleswoman?
+  - → **Are you the salesperson?**
+- `b2d3f0c2` es-enfermera (c04#18)
+  - Belén es vendedora y habla tres idiomas.
+  - Belén is a saleswoman and speaks three languages.
+  - → **Belén is a salesperson and speaks three languages.**
+- `08295af0` es-enfermera (c04#18)
+  - La vendedora está con otra señora.
+  - The saleswoman is with another lady.
+  - → **The salesperson is with another lady.**
+- `07a0ee3f` es-enfermera (c04#18)
+  - Soy vendedora y necesito practicar inglés.
+  - I'm a saleswoman and I need to practice my English.
+  - → **I'm a salesperson and I need to practice my English.**
+- `bb75943d` es-enfermera (c04#18)
+  - El vendedor habla rápido.
+  - The salesman talks fast.
+  - → **The salesperson talks fast.**
+- `70ca4064` es-enfermera (c04#18)
+  - Mi vecino es vendedor y siempre está apurado.
+  - My neighbor is a salesman and is always in a hurry.
+  - → **My neighbor is a salesperson and is always in a hurry.**
+- `b19832b4` comes-vivis (c04#21, verify2)
+  - Como una empanada.
+  - I eat an empanada.
+  - → **I'm eating an empanada.**
+- `73e9cfec` comes-vivis (c04#21)
+  - Cami come una empanada.
+  - Cami eats an empanada.
+  - → **Cami is eating an empanada.**
+- `dfc6964e` practica-el-vecino (c04#37)
+  - Vivimos arriba del kiosco.
+  - We live above the kiosk.
+  - → **We live above the kiosco.**
+- `28457614` practica-el-vecino (c04#37)
+  - El kiosco de la esquina abre a las siete.
+  - The kiosk on the corner opens at seven.
+  - → **The kiosco on the corner opens at seven.**
+- `c260eb78` la-hora (c04#37)
+  - ¿El sábado a qué hora abre el kiosco?
+  - What time does the kiosk open on Saturday?
+  - → **What time does the kiosco open on Saturday?**
+- `9cf86ffe` mi-casa (c04#45)
+  - Tengo un depto de un ambiente.
+  - I have a one-room apartment.
+  - → **I have a studio apartment.**
+- `41184bef` la-hora (c04#50)
+  - Tomo el cuarenta a la tarde.
+  - I take the forty in the afternoon.
+  - → **I take the 40 bus in the afternoon.**
+- `d5d20944` la-hora (c04#50)
+  - Tomo el veintidós a la mañana.
+  - I take the twenty-two in the morning.
+  - → **I take the 22 bus in the morning.**
+- `2f5780e0` la-hora (c04#50)
+  - A la mañana tomo el setenta en la esquina.
+  - In the morning I take the seventy on the corner.
+  - → **In the morning I take the 70 bus on the corner.**
+- `9fa38eaa` la-hora (c04#50)
+  - ¿Tomás el noventa mañana a la mañana?
+  - Are you taking the ninety tomorrow morning?
+  - → **Are you taking the 90 bus tomorrow morning?**
+- `070a5a09` facu-y-laburo (c04#0)
+  - La profesora tiene una reunión en la facu.
+  - The teacher has a meeting at the university.
+  - → **The teacher has a meeting at the college.**
+- `93937cbe` facu-y-laburo (c04#0)
+  - Pablo y Sofi tienen clases en la facu.
+  - Pablo and Sofi have classes at university.
+  - → **Pablo and Sofi have classes at college.**
+- `4838c026` facu-y-laburo (c04#0)
+  - Mi jefe también estudia en la facu.
+  - My boss also studies at university.
+  - → **My boss also studies at college.**
+- `4e66181c` facu-y-laburo (c04#0)
+  - Mica labura en una oficina cerca de la facu.
+  - Mica works in an office near the university.
+  - → **Mica works in an office near the college.**
+- `64e31916` facu-y-laburo (c04#0)
+  - ¿Dónde está tu facu?
+  - Where's your university?
+  - → **Where is your college?**
+- `8b9236ff` facu-y-laburo (c04#0)
+  - Estoy en la facu.
+  - I'm at university.
+  - → **I'm at college.**
+- `ae440977` facu-y-laburo (c04#0)
+  - La facu es mucho laburo.
+  - University is a lot of work.
+  - → **College is a lot of work.**
+- `0b89610a` es-enfermera (c04#0)
+  - Juan tiene que buscar a su hija en la facu.
+  - Juan has to pick up his daughter at the university.
+  - → **Juan has to pick up his daughter at college.**
+- `92f19e6f` comes-vivis (c04#0)
+  - ¿Vos leés algo para la facu?
+  - Are you reading anything for university?
+  - → **Are you reading anything for college?**
+- `70bd4872` comes-vivis (c04#0)
+  - Comemos en la facu porque tenemos clase.
+  - We eat at university because we have class.
+  - → **We eat at college because we have class.**
+- `90a287a5` comes-vivis (c04#0)
+  - Aprendo inglés en la facu.
+  - I'm learning English at university.
+  - → **I'm learning English at college.**
+- `5b3eaa52` vendo-diarios (c04#0)
+  - ¿Recibís mails de la facu?
+  - Do you get emails from the university?
+  - → **Do you get emails from the college?**
+- `65737d13` a-que-hora-abre (c05#3)
+  - —¿Hasta cuándo está cerrado? —Hasta el veintinueve.
+  - Until when is it closed? —Until the twenty-ninth.
+  - → **—Until when is it closed? —Until the twenty-ninth.**
+- `c06ca826` a-que-hora-abre (c05#3)
+  - —¿Cuándo abren? —El veintiséis, a las nueve.
+  - When do you open? —On the twenty-sixth, at nine.
+  - → **—When do you open? —On the twenty-sixth, at nine.**
+- `a0eeb355` a-que-hora-abre (c05#5)
+  - La oficina cierra el veintinueve, ¿no?
+  - The office is closed on the twenty-ninth, right?
+  - → **The office closes on the twenty-ninth, right?**
+- `114e6adf` a-la-vuelta (c05#10)
+  - El lavadero del edificio está en la terraza.
+  - The building's laundry room is on the roof.
+  - → **The building's laundry room is on the rooftop.**
+- `a7726e83` a-que-hora-abre (c05#13)
+  - El kiosco abre a las diez menos cuarto.
+  - The kiosk opens at a quarter to ten.
+  - → **The kiosco opens at a quarter to ten.**
+- `fe441f15` a-la-vuelta (c05#13)
+  - El kiosco está en la vereda de enfrente.
+  - The kiosk is across the street.
+  - → **The kiosco is across the street.**
+- `4e47deea` a-la-vuelta (c05#13)
+  - La carnicería está a la izquierda del kiosco.
+  - The butcher shop is to the left of the kiosk.
+  - → **The butcher shop is to the left of the kiosco.**
+- `d6f27c30` practica-a-la-vuelta (c05#13)
+  - A la izquierda hay un kiosco.
+  - There's a kiosk on the left.
+  - → **There's a kiosco on the left.**
+- `33dcc379` practica-a-la-vuelta (c05#13)
+  - Hay un kiosco en la esquina.
+  - There's a kiosk on the corner.
+  - → **There's a kiosco on the corner.**
+- `40e746c8` practica-a-la-vuelta (c05#13)
+  - El kiosco cierra a las diez.
+  - The kiosk closes at ten.
+  - → **The kiosco closes at ten.**
+- `19c99535` segui-derecho (c05#13)
+  - Preguntá en el kiosco.
+  - Ask at the kiosk.
+  - → **Ask at the kiosco.**
+- `7950977c` a-la-vuelta (c05#16)
+  - —¿Dónde está la librería? —Por acá, a la derecha.
+  - Where's the bookstore? —Over here, on the right.
+  - → **—Where's the bookstore? —Over here, on the right.**
+- `d22bb7e5` a-la-vuelta (c05#17, verify3)
+  - El almacén está a la vuelta, al lado del banco.
+  - The store is around the corner, next to the bank.
+  - → **The grocery store is around the corner, next to the bank.**
+- `0785153f` queres-podes-vas (c05#22)
+  - Si Pablo sale temprano, vamos al cine.
+  - If Pablo gets off early, we'll go to the movies.
+  - → **If Pablo finishes work early, we'll go to the movies.**
+- `85a74a32` queres-podes-vas (c05#26)
+  - No puedo ir al boliche, mañana laburo temprano.
+  - I can't go to the club, I work early tomorrow.
+  - → **I can't go to the nightclub, I work early tomorrow.**
+- `58df2613` queres-podes-vas (c05#26)
+  - ¿Me podés escribir si vas al boliche?
+  - Can you text me if you go to the club?
+  - → **Can you text me if you go to the nightclub?**
+- `0903720e` preferis-salir (c05#26)
+  - Mi hermana piensa ir al boliche, yo no.
+  - My sister is planning to go to the club, I'm not.
+  - → **My sister is planning to go to the nightclub, I'm not.**
+- `0c07e896` preferis-salir (c05#26)
+  - ¿El boliche? No, mañana empiezo a laburar temprano.
+  - The club? No, I start work early tomorrow.
+  - → **The nightclub? No, I start work early tomorrow.**
+- `2b548e46` preferis-salir (c05#26)
+  - Las entradas del boliche están en mi mail.
+  - The club tickets are in my email.
+  - → **The nightclub tickets are in my email.**
+- `46447c48` preferis-salir (c05#26)
+  - Dale, vamos al boliche, pero yo vuelvo en taxi.
+  - Okay, let's go to the club, but I'm coming back in a taxi.
+  - → **Okay, let's go to the nightclub, but I'm coming back in a taxi.**
+- `5408e1b1` practica-a-la-vuelta (c05#26)
+  - El boliche cierra a las seis de la mañana.
+  - The club closes at six in the morning.
+  - → **The nightclub closes at six in the morning.**
+- `4a5f6f91` preferis-salir (c05#34)
+  - ¿Adónde salen hoy a la noche?
+  - Where are you going out tonight?
+  - → **Where are you guys going out tonight?**
+- `52159ec2` dale-veni (c05#38)
+  - Esperá, tiene que pasar una señora.
+  - Wait, a lady has to pass.
+  - → **Wait, a lady needs to get past.**
+- `135e7b84` tomar-el-bondi (c05#45)
+  - Si cargás la SUBE hoy, mañana salimos temprano.
+  - If you load your SUBE today, we can leave early tomorrow.
+  - → **If you load your SUBE today, we'll leave early tomorrow.**
+- `d9b3fa56` en-taxi (c05#49)
+  - ¿Pido un remis para ir al aeropuerto?
+  - Should I order a car service to go to the airport?
+  - → **Should I order a hired car to go to the airport?**
+- `b9e773e2` en-taxi (c05#49)
+  - ¿Me ayudás a pedir un remis para mañana?
+  - Can you help me order a car service for tomorrow?
+  - → **Can you help me order a hired car for tomorrow?**
+- `4cdc63ac` en-taxi (c05#49)
+  - ¿Podés pedir un remis?
+  - Can you order a car service?
+  - → **Can you order a hired car?**
+- `e416f5d5` en-taxi (c05#49)
+  - Tengo que pedir un remis.
+  - I have to order a car service.
+  - → **I have to order a hired car.**
+- `87bce64a` en-taxi (c05#49)
+  - ¿Vamos en remis?
+  - Should we go by car service?
+  - → **Should we go by hired car?**
+- `98df9e6e` en-taxi (c05#49)
+  - Necesito un remis, por favor.
+  - I need a car service, please.
+  - → **I need a hired car, please.**
+- `e9819512` en-taxi (c05#49)
+  - Quiero un remis para mañana a las seis.
+  - I want a car service for tomorrow at six.
+  - → **I want a hired car for tomorrow at six.**
+- `e4e1a2b0` en-taxi (c05#49)
+  - Voy en remis.
+  - I'm going by car service.
+  - → **I'm going by hired car.**
+- `0ceade86` a-que-hora-abre (c05#0)
+  - El negocio está cerrado hasta el veintisiete.
+  - The shop is closed until the twenty-seventh.
+  - → **The store is closed until the twenty-seventh.**
+- `acc58fdc` este-buzo (c06#15)
+  - Me queda chico.
+  - It's small on me.
+  - → **It's too small for me.**
+- `d6a8359f` este-buzo (c06#15)
+  - El vestido me queda grande.
+  - The dress is big on me.
+  - → **The dress is too big for me.**
+- `d3dd61c5` practica-me-cobras (c06#19)
+  - Busco un buzo gris y cómodo.
+  - I'm looking for a comfortable gray hoodie.
+  - → **I'm looking for a comfortable gray sweatshirt.**
+- `29d6930d` practica-me-cobras (c06#19)
+  - —¿Tu buzo es nuevo? —No, es de mi hermana.
+  - "Is your hoodie new?" "No, it's my sister's."
+  - → **—Is your sweatshirt new? —No, it's my sister's.**
+- `f965d110` practica-me-cobras (c06#19)
+  - ¿Cuánto sale ese buzo azul?
+  - How much is that blue hoodie?
+  - → **How much is that blue sweatshirt?**
+- `e2cefdf7` practica-me-cobras (c06#19)
+  - ¿Dónde está mi buzo?
+  - Where's my hoodie?
+  - → **Where's my sweatshirt?**
+- `79d802ed` practica-me-cobras (c06#19)
+  - Este buzo es re cómodo.
+  - This hoodie is really comfortable.
+  - → **This sweatshirt is really comfortable.**
+- `19794201` practica-me-cobras (c06#19)
+  - Tomá mi buzo, afuera hace frío.
+  - Here, take my hoodie, it's cold outside.
+  - → **Here, take my sweatshirt, it's cold outside.**
+- `4eb94657` me-cobras (c06#23)
+  - ¿Cuánto me cobrás?
+  - How much do I owe you?
+  - → **How much will you charge me?**
+- `6a61ac68` debito-o-credito (c06#27)
+  - ¿Puedo pagar con QR?
+  - Can I pay with the QR code?
+  - → **Can I pay by QR code?**
+- `a2c68ce7` debito-o-credito (c06#27)
+  - No tengo la billetera, ¿puedo pagar con QR?
+  - I don't have my wallet, can I pay with the QR code?
+  - → **I don't have my wallet, can I pay by QR code?**
+- `9976437a` me-despierto-temprano (c06#43)
+  - A veces madrugo para estudiar.
+  - Sometimes I get up really early to study.
+  - → **Sometimes I get up early to study.**
+- `bad3d5aa` practica-me-cobras (c06#45)
+  - —¿Dónde está el súper? —Seguí derecho, está a la izquierda.
+  - "Where's the supermarket?" "Keep going straight, it's on the left."
+  - → **—Where's the supermarket? —Keep going straight, it's on the left.**
+- `d7cac8db` practica-me-cobras (c06#45)
+  - —¿Y mi vuelto? —Ah, perdón, tomá.
+  - "What about my change?" "Oh, sorry, here."
+  - → **—What about my change? —Oh, sorry, here.**
+- `6675b32b` que-te-gusta-hacer (c06#48)
+  - ¿Vas a la cancha?
+  - Are you going to the stadium?
+  - → **Are you going to the game?**
+- `9febdedd` que-te-gusta-hacer (c06#48)
+  - El domingo voy a la cancha.
+  - On Sunday I'm going to the stadium.
+  - → **On Sunday I'm going to the game.**
+- `47023d95` que-te-gusta-hacer (c06#48)
+  - No puedo ir a la cancha, estoy enfermo.
+  - I can't go to the stadium, I'm sick.
+  - → **I can't go to the game, I'm sick.**
+- `267bd3d9` que-te-gusta-hacer (c06#48)
+  - Vamos a la cancha.
+  - We're going to the stadium.
+  - → **We're going to the game.**
+- `6a351c51` la-campera-nueva (c06#0)
+  - Voy al boliche con el pantalón nuevo.
+  - I'm going to the club in my new pants.
+  - → **I'm going to the nightclub in my new pants.**
+- `a1a71f0a` ropa-y-colores (c06#0)
+  - Para el boliche, ¿el pantalón rojo o el negro?
+  - For the club, the red pants or the black ones?
+  - → **For the nightclub, the red pants or the black ones?**
+- `d2366b21` la-campera-nueva (c06#0)
+  - El pantalón nuevo está roto.
+  - The new pants are ripped.
+  - → **The new pants are torn.**
+- `95a7e021` ropa-y-colores (c06#0)
+  - El pantalón negro está roto.
+  - The black pants are ripped.
+  - → **The black pants are torn.**
+- `24fa4502` me-despierto-temprano (c06#0)
+  - Los sábados no uso despertador.
+  - On Saturdays I don't use an alarm.
+  - → **On Saturdays I don't use an alarm clock.**
+- `4beacae8` pasame-tu-numero (c07#6)
+  - ¿Cómo te agendo?
+  - How should I save you?
+  - → **How should I save you in my phone?**
+- `16cff8ab` clima (c07#11)
+  - Si llueve, no vamos a la plaza.
+  - If it rains, we're not going to the park.
+  - → **If it rains, we're not going to the square.**
+- `94d2ec42` en-febrero (c07#20)
+  - En diciembre la ciudad está llena de gente.
+  - In December the city is packed with people.
+  - → **In December the city is full of people.**
+- `bb3dd151` en-febrero (c07#20)
+  - En diciembre ceno en la terraza.
+  - In December I have dinner on the roof deck.
+  - → **In December I have dinner on the terrace.**
+- `8bcda3a8` el-cumple (c07#20)
+  - Vamos a hacer el cumple en la terraza.
+  - We're going to have the birthday party on the roof deck.
+  - → **We're going to have the birthday party on the terrace.**
+- `ade24828` cenamos-afuera (c07#20)
+  - Con Belén cenamos en la terraza.
+  - Belén and I had dinner on the roof deck.
+  - → **Belén and I had dinner on the terrace.**
+- `96c8f724` en-febrero (c07#23)
+  - ¿Nos vemos en diciembre?
+  - Should we get together in December?
+  - → **See you in December?**
+- `76414a7c` ahora-y-planes (c07#41)
+  - ¿A qué hora quedamos?
+  - What time are we meeting?
+  - → **What time did we agree on?**
+- `6e629abf` ahora-y-planes (c07#41)
+  - ¿Qué día quedamos?
+  - What day are we meeting?
+  - → **What day did we agree on?**
+- `0d0fab21` ahora-y-planes (c07#45)
+  - Che, ¿ya tenés la carne para el asado?
+  - Hey, do you have the meat for the barbecue yet?
+  - → **Hey, do you have the meat for the asado yet?**
+- `133d5666` ahora-y-planes (c07#45)
+  - ¿A qué hora es el asado?
+  - What time is the barbecue?
+  - → **What time is the asado?**
+- `c639620b` ahora-y-planes (c07#45)
+  - ¿Hay asado?
+  - Is there a barbecue?
+  - → **Is there an asado?**
+- `86f60469` ahora-y-planes (c07#45)
+  - El asado es a las dos, ¿venís?
+  - The barbecue is at two, are you coming?
+  - → **The asado is at two, are you coming?**
+- `4eefbc57` ahora-y-planes (c07#45)
+  - El domingo hay asado.
+  - There's a barbecue on Sunday.
+  - → **There's an asado on Sunday.**
+- `250e2c35` ahora-y-planes (c07#45)
+  - Prefiero el vino con el asado.
+  - I prefer wine with barbecue.
+  - → **I prefer wine with asado.**
+- `8b442f05` ahora-y-planes (c07#45)
+  - ¿Qué llevo al asado del sábado?
+  - What should I bring to Saturday's barbecue?
+  - → **What should I bring to Saturday's asado?**
+- `39e6a39a` ahora-y-planes (c07#45)
+  - La semana que viene hay asado.
+  - There's a barbecue next week.
+  - → **There's an asado next week.**
+- `93d67301` ahora-y-planes (c07#45)
+  - Voy a invitar a mis compañeros al asado.
+  - I'm going to invite my classmates to the barbecue.
+  - → **I'm going to invite my classmates to the asado.**
+- `ffa2e8a9` ahora-y-planes (c07#45)
+  - El próximo finde hay asado.
+  - There's a barbecue next weekend.
+  - → **There's an asado next weekend.**
+- `d10ee1ac` ahora-y-planes (c07#45)
+  - ¿Llegás al asado o no?
+  - Are you making it to the barbecue or not?
+  - → **Are you making it to the asado or not?**
+- `72871a97` ayer-labure (c07#45)
+  - ¿Compraste carne para el asado?
+  - Did you buy meat for the barbecue?
+  - → **Did you buy meat for the asado?**
+- `ad0b959e` cenamos-afuera (c07#45)
+  - Mi vecino nos invitó a un asado en la terraza.
+  - My neighbor invited us to a barbecue on the roof deck.
+  - → **My neighbor invited us to an asado on the terrace.**
+- `095ec7c9` cenamos-afuera (c07#0)
+  - Gasté mucha plata en el boliche.
+  - I spent a lot of money at the club.
+  - → **I spent a lot of money at the nightclub.**
+- `408d2651` en-febrero (c07#0)
+  - Che, ¿no tenés mucho calor con ese buzo?
+  - Hey, aren't you really hot in that hoodie?
+  - → **Hey, aren't you really hot in that sweatshirt?**
+- `e843c4dd` cenamos-afuera (c07#0)
+  - Pagué re caro este buzo.
+  - I paid way too much for this hoodie.
+  - → **I paid way too much for this sweatshirt.**
+- `d18f5618` comi-y-sali (c08#7)
+  - Conozco una verdulería barata en la esquina.
+  - I know a cheap produce store on the corner.
+  - → **I know a cheap fruit and vegetable shop on the corner.**
+- `4b38c524` comi-y-sali (c08#8, verify3)
+  - No, el finde no salí.
+  - No, I didn't go out on the weekend.
+  - → **No, I didn't go out over the weekend.**
+- `9f114d37` comi-y-sali (c08#8)
+  - ¿Saliste con Pablo el finde?
+  - Did you go out with Pablo on the weekend?
+  - → **Did you go out with Pablo over the weekend?**
+- `66b2c94e` comi-y-sali (c08#8)
+  - El finde comimos re bien en Córdoba.
+  - On the weekend we ate really well in Córdoba.
+  - → **Over the weekend we ate really well in Córdoba.**
+- `a5ab1657` el-finde (c08#8)
+  - ¿Hiciste algo el finde?
+  - Did you do anything on the weekend?
+  - → **Did you do anything over the weekend?**
+- `07d1aab0` el-finde (c08#8)
+  - ¿Qué hiciste el finde?
+  - What did you do on the weekend?
+  - → **What did you do over the weekend?**
+- `2e284862` el-finde (c08#8)
+  - El finde hizo mucho calor.
+  - It was really hot on the weekend.
+  - → **It was really hot over the weekend.**
+- `ed5782b9` el-finde (c08#8)
+  - El finde no pude salir porque tuve que estudiar.
+  - I couldn't go out on the weekend because I had to study.
+  - → **I couldn't go out over the weekend because I had to study.**
+- `a1b0bc32` el-finde (c08#8)
+  - El finde no hice nada, posta.
+  - I didn't do anything on the weekend, honestly.
+  - → **I didn't do anything over the weekend, honestly.**
+- `85772430` fui-a-la-cancha (c08#15)
+  - —¿Tuviste frío en la cancha? —Sí, mucho.
+  - Were you cold at the stadium? — Yes, really cold.
+  - → **—Were you cold at the stadium? —Yes, really cold.**
+- `0978f96b` fui-a-la-cancha (c08#15)
+  - —¿Dónde estuviste? —Estuve en la oficina, con mi jefe.
+  - Where were you? — I was at the office, with my boss.
+  - → **—Where were you? —I was at the office, with my boss.**
+- `9f7d1ea6` fui-a-la-cancha (c08#15)
+  - —¿Cómo fue el recital? —¡Fue bárbaro, posta!
+  - How was the concert? — It was great, honestly!
+  - → **—How was the concert? —It was great, honestly!**
+- `995c124c` fui-a-la-cancha (c08#15)
+  - —¿Fuiste al partido? —Sí, fui con mis hermanos.
+  - Did you go to the game? — Yes, I went with my brothers.
+  - → **—Did you go to the game? —Yes, I went with my brothers.**
+- `896d516b` fui-a-la-cancha (c08#15)
+  - —¿Estuviste en Rosario? —Sí, estuve tres días.
+  - Were you in Rosario? — Yes, I was there three days.
+  - → **—Were you in Rosario? —Yes, I was there for three days.**
+- `bfdb2ed0` el-finde (c08#19)
+  - El domingo primero fuimos a la plaza.
+  - On Sunday we went to the park first.
+  - → **On Sunday we went to the square first.**
+- `99128c78` la-pasamos-barbaro (c08#23)
+  - Estuvimos en el cine con Nico.
+  - We went to the movies with Nico.
+  - → **We were at the movies with Nico.**
+- `81f20dd4` comi-y-sali (c08#26)
+  - Conocí a Cami en un asado.
+  - I met Cami at a barbecue.
+  - → **I met Cami at an asado.**
+- `cf0538d6` comi-y-sali (c08#26)
+  - ¿Qué comiste en el asado del sábado?
+  - What did you eat at the barbecue on Saturday?
+  - → **What did you eat at the asado on Saturday?**
+- `cdec1322` comi-y-sali (c08#26)
+  - Comimos asado el domingo.
+  - We ate barbecue on Sunday.
+  - → **We ate asado on Sunday.**
+- `61c8f054` comi-y-sali (c08#26)
+  - ¿Conociste a mi hermana en el asado?
+  - Did you meet my sister at the barbecue?
+  - → **Did you meet my sister at the asado?**
+- `38f6597b` fui-a-la-cancha (c08#26)
+  - Che, ¿fuiste al asado de Mati el sábado?
+  - Hey, did you go to Mati's barbecue on Saturday?
+  - → **Hey, did you go to Mati's asado on Saturday?**
+- `31cef31b` fui-a-la-cancha (c08#26)
+  - El asado fue re lindo.
+  - The barbecue was really nice.
+  - → **The asado was really nice.**
+- `109730c7` fui-a-la-cancha (c08#26)
+  - ¿Cómo estuvo el asado del sábado?
+  - How was Saturday's barbecue?
+  - → **How was Saturday's asado?**
+- `1647da0a` fui-a-la-cancha (c08#26)
+  - El asado estuvo re rico.
+  - The barbecue was really tasty.
+  - → **The asado was really tasty.**
+- `744ecc89` la-pasamos-barbaro (c08#26)
+  - El asado estuvo re divertido, ¿por qué no fuiste?
+  - The barbecue was really fun, why didn't you go?
+  - → **The asado was really fun, why didn't you go?**
+- `474655a5` la-pasamos-barbaro (c08#26)
+  - Fue una juntada divertida, con asado y vino.
+  - It was a fun get-together, with a barbecue and wine.
+  - → **It was a fun get-together, with asado and wine.**
+- `cd6415b9` practica-como-estuvo (c08#26)
+  - El domingo ganamos y después comimos asado con los pibes.
+  - On Sunday we won and then had a barbecue with the guys.
+  - → **On Sunday we won and then ate asado with the guys.**
+- `b0b5d08f` el-finde (c08#26)
+  - El sábado hicimos un asado con mis compañeros del laburo.
+  - On Saturday we had a barbecue with my coworkers.
+  - → **On Saturday we had an asado with my coworkers.**
+- `95ad960b` el-finde (c08#26)
+  - El sábado hicimos un asado.
+  - On Saturday we had a barbecue.
+  - → **On Saturday we had an asado.**
+- `3d9b9225` el-finde (c08#26)
+  - ¿Por qué no viniste al asado el domingo?
+  - Why didn't you come to the barbecue on Sunday?
+  - → **Why didn't you come to the asado on Sunday?**
+- `c52caf66` el-finde (c08#26)
+  - ¿Viste a Santi en el asado del sábado?
+  - Did you see Santi at Saturday's barbecue?
+  - → **Did you see Santi at Saturday's asado?**
+- `732e536d` el-finde (c08#26)
+  - El sábado no pude ir al asado.
+  - I couldn't go to the barbecue on Saturday.
+  - → **I couldn't go to the asado on Saturday.**
+- `5c221d63` el-finde (c08#26)
+  - El domingo hice un asado con amigos.
+  - On Sunday I had a barbecue with friends.
+  - → **On Sunday I had an asado with friends.**
+- `dfc2cb67` el-finde (c08#26)
+  - Al final el asado fue re copado.
+  - In the end the barbecue was really great.
+  - → **In the end the asado was really cool.**
+- `dc24bae6` el-finde (c08#26)
+  - Al final hicimos el asado en la casa de Lucía.
+  - In the end we had the barbecue at Lucía's house.
+  - → **In the end we had the asado at Lucía's house.**
+- `1e04a9b2` vinieron-todos (c08#26)
+  - Compré carbón para el asado.
+  - I bought charcoal for the barbecue.
+  - → **I bought charcoal for the asado.**
+- `a96cec1e` vinieron-todos (c08#26)
+  - ¿Qué trajiste para el asado?
+  - What did you bring for the barbecue?
+  - → **What did you bring for the asado?**
+- `2c68859f` vinieron-todos (c08#26)
+  - ¿Y al final pudieron hacer el asado?
+  - So were you able to have the barbecue in the end?
+  - → **So were you able to have the asado in the end?**
+- `2fbf0204` mas-alto-que (c08#26)
+  - La carne del asado de ayer estuvo riquísima.
+  - The meat at yesterday's barbecue was delicious.
+  - → **The meat at yesterday's asado was delicious.**
+- `77f552c7` mas-alto-que (c08#26)
+  - Anoche comimos un asado riquísimo con mis viejos.
+  - Last night we had a delicious barbecue with my parents.
+  - → **Last night we had a delicious asado with my parents.**
+- `d74f0285` mas-alto-que (c08#26)
+  - Mi viejo hace un asado riquísimo.
+  - My dad makes a delicious barbecue.
+  - → **My dad makes a delicious asado.**
+- `ecc02b14` la-pasamos-barbaro (c08#27)
+  - Anoche la pasamos re bien en el boliche.
+  - We had a really good time at the club last night.
+  - → **We had a really good time at the nightclub last night.**
+- `298ccb13` practica-como-estuvo (c08#27)
+  - El sábado estuvimos en un boliche nuevo.
+  - On Saturday we were at a new club.
+  - → **On Saturday we were at a new nightclub.**
+- `980aa603` vinieron-todos (c08#27)
+  - ¡Vos quisiste ir a ese boliche!
+  - You're the one who wanted to go to that club!
+  - → **You're the one who wanted to go to that nightclub!**
+- `a81e6b0b` el-mas-tranquilo (c08#28)
+  - Mi facu está lejísimos.
+  - My university is really far away.
+  - → **My college is really far away.**
+- `ed580675` practica-como-estuvo (c08#28, verify4)
+  - ¿Ya saliste de la facu?
+  - Are you out of class yet?
+  - → **Did you get out of college already?**
+- `6efa497d` mas-alto-que (c08#28)
+  - Esta facultad es buena, pero está muy lejos de casa.
+  - This university is good, but it's very far from home.
+  - → **This college is good, but it's very far from home.**
+- `a14a7096` el-mas-tranquilo (c08#29)
+  - Mendoza es lindísima y más tranquila que la Capital.
+  - Mendoza is gorgeous and quieter than Buenos Aires.
+  - → **Mendoza is gorgeous and quieter than the city of Buenos Aires.**
+- `b61b5a9b` practica-como-estuvo (c08#30)
+  - —¿Cómo estuvo el cumple? —Bárbaro, cenamos asado.
+  - How was the birthday? — Great, we had asado for dinner.
+  - → **—How was the birthday? —Great, we had asado for dinner.**
+- `de4e8b78` practica-como-estuvo (c08#30)
+  - —¿Tus hermanos vivieron afuera? —Sí, en Inglaterra.
+  - Did your brothers live abroad? — Yes, in England.
+  - → **—Did your brothers live abroad? —Yes, in England.**
+- `0b654091` practica-como-estuvo (c08#30)
+  - —¿Cómo estuvo la juntada? —La pasé más o menos.
+  - How was the get-together? — It was so-so for me.
+  - → **—How was the get-together? —I had an OK time.**
+- `a3adbec1` practica-como-estuvo (c08#30, verify4)
+  - —¿Llegaron los invitados? —Todavía no.
+  - Are the guests here? — Not yet.
+  - → **—Have the guests arrived? —Not yet.**
+- `c44583c3` practica-como-estuvo (c08#30)
+  - —¿Dónde naciste? —Nací en La Plata, pero vivo en Capital.
+  - Where were you born? — In La Plata, but I live in the city.
+  - → **—Where were you born? —I was born in La Plata, but I live in the city.**
+- `6014b3ee` practica-como-estuvo (c08#30)
+  - —¿Compraste pan? —No, compré facturas.
+  - Did you buy bread? — No, I got pastries.
+  - → **—Did you buy bread? —No, I bought pastries.**
+- `74f45844` practica-como-estuvo (c08#30)
+  - —¿Cómo estuvo el recital? —Increíble, estuvimos re cerca.
+  - How was the concert? — Amazing, we were really close.
+  - → **—How was the concert? —Amazing, we were really close.**
+- `81e12eb7` el-mas-tranquilo (c08#49)
+  - ¡Es la pizza más rica del mundo!
+  - It's the best pizza in the world!
+  - → **It's the tastiest pizza in the world!**
+- `6f329424` vinieron-todos (c08#0)
+  - Primero trajeron la picada y después la carne.
+  - First they brought the cheese and cold cuts, and then the meat.
+  - → **First they brought the picada, and then the meat.**
+- `6d473f6d` me-dolio (c09#8, verify4)
+  - Compré pastillas para la garganta.
+  - I bought some tablets for my throat.
+  - → **I bought some pills for my throat.**
+- `d9d8de3a` te-llamo (c09#15)
+  - ¿Juan no te llama?
+  - Isn't Juan calling you?
+  - → **Doesn't Juan call you?**
+- `6dc7c4ca` te-llame (c09#24)
+  - Te busqué en la facu, pero no te vi.
+  - I looked for you at university, but I didn't see you.
+  - → **I looked for you at college, but I didn't see you.**
+- `d028e6be` las-tareas (c09#28)
+  - ¿Sacás al perro a la plaza?
+  - Will you take the dog out to the park?
+  - → **Will you take the dog out to the square?**
+- `9d75deba` de-viaje (c09#38)
+  - Me fui en el primer vuelo de la mañana.
+  - I went on the first flight in the morning.
+  - → **I left on the first flight in the morning.**
+- `23b30969` me-duele (c09#0)
+  - Mi viejo está engripado, no viene al asado.
+  - My dad has the flu, he's not coming to the barbecue.
+  - → **My dad has the flu, he's not coming to the asado.**
+- `0c67b551` practica-quien-vino (c09#0)
+  - Mis hermanos vinieron al asado.
+  - My brothers came to the barbecue.
+  - → **My brothers came to the asado.**
+- `fef5a521` practica-quien-vino (c09#0)
+  - ¿Qué trajiste para el asado?
+  - What did you bring for the barbecue?
+  - → **What did you bring for the asado?**
+- `3bdbcede` practica-quien-vino (c09#0)
+  - ¿Qué dijeron tus viejos del asado?
+  - What did your parents say about the barbecue?
+  - → **What did your parents say about the asado?**
+- `cdaae00c` te-llamo (c09#0)
+  - ¿Me das la plata del asado mañana o el viernes?
+  - Will you give me the money for the barbecue tomorrow or on Friday?
+  - → **Will you give me the money for the asado tomorrow or on Friday?**
+- `fa5d1d57` te-llamo (c09#0)
+  - ¿Me prestás las sillas para el asado del domingo?
+  - Can you lend me the chairs for Sunday's barbecue?
+  - → **Can you lend me the chairs for Sunday's asado?**
+- `d57beb8a` te-llame (c09#0)
+  - ¿La foto del asado? Ya se la mandé a Juan.
+  - The photo from the barbecue? I already sent it to Juan.
+  - → **The photo from the asado? I already sent it to Juan.**
+- `c8bf0a9b` las-tareas (c09#0)
+  - Después del asado hay que lavar muchos platos.
+  - After the barbecue we have to wash a lot of dishes.
+  - → **After the asado we have to wash a lot of dishes.**
+- `b8c0632b` las-tareas (c09#0)
+  - ¿Hiciste las compras para el asado?
+  - Did you do the shopping for the barbecue?
+  - → **Did you do the shopping for the asado?**
+- `91c20550` las-tareas (c09#0)
+  - Los platos del asado todavía están sucios.
+  - The dishes from the barbecue are still dirty.
+  - → **The dishes from the asado are still dirty.**
+- `d8387f01` quien-lavo (c09#0)
+  - Anoche me tocó lavar los platos del asado.
+  - Last night it was my turn to do the dishes from the barbecue.
+  - → **Last night it was my turn to do the dishes from the asado.**
+- `056f0ffc` practica-quien-vino (c09#0)
+  - El boliche estuvo tranquilo anoche.
+  - The club was quiet last night.
+  - → **The nightclub was quiet last night.**
+- `4a2ed374` te-llame (c09#0)
+  - Papá, buscame en el boliche.
+  - Dad, come get me at the club.
+  - → **Dad, come get me at the nightclub.**
+- `8aa9aacf` quien-lavo (c09#0)
+  - Rocío, ¿lavaste mi buzo con la ropa blanca?
+  - Rocío, did you wash my hoodie with the white clothes?
+  - → **Rocío, did you wash my sweatshirt with the white clothes?**
+- `0d52a1f7` te-llame (c09#0)
+  - A Juli le presté la compu para el examen.
+  - I lent Juli my laptop for the exam.
+  - → **I lent Juli my computer for the exam.**
+- `5d4f23b7` me-duele (c09#0)
+  - —¿Dónde te duele? —En la espalda.
+  - Where does it hurt? — In my back.
+  - → **—Where does it hurt? —In my back.**
+- `dd419d4b` me-duele (c09#0)
+  - —¿Todo bien? —No, estoy engripada.
+  - All good? — No, I've got the flu.
+  - → **—All good? —No, I've got the flu.**
+- `3e40dbc1` me-duele (c09#0)
+  - —¿Qué te duele? —La garganta.
+  - What hurts? — My throat.
+  - → **—What hurts? —My throat.**
+- `9d6ff251` me-duele (c09#0)
+  - —¿Te duele mucho? —Sí, vamos a la guardia.
+  - Does it hurt a lot? — Yes, let's go to the ER.
+  - → **—Does it hurt a lot? —Yes, let's go to the ER.**
+- `cec8ba23` me-duele (c09#0)
+  - —¿Te duele? —Sí, un poco.
+  - Does it hurt? — Yes, a little.
+  - → **—Does it hurt? —Yes, a little.**
+- `56a01889` me-duele (c09#0)
+  - —¿Qué te duele? —La panza.
+  - What hurts? — My stomach.
+  - → **—What hurts? —My stomach.**
+- `566ac521` me-duele (c09#0)
+  - —¿Dónde te duele? —En el pie.
+  - Where does it hurt? — In my foot.
+  - → **—Where does it hurt? —In my foot.**
+- `d47c2fb7` me-duele (c09#0)
+  - —¿Qué te duele? —La cabeza.
+  - What hurts? — My head.
+  - → **—What hurts? —My head.**
+- `47213c82` me-duele (c09#0)
+  - —¿Qué te duele? —Una muela.
+  - What hurts? — A tooth.
+  - → **—What hurts? —A tooth.**
+- `c4038c7f` me-duele (c09#0)
+  - —¿Qué le pasó a Santi? —Le duele la pierna.
+  - What happened to Santi? — His leg hurts.
+  - → **—What happened to Santi? —His leg hurts.**
+- `4e88d50c` me-duele (c09#0)
+  - —¿Vamos a bailar? —No, me duelen los pies.
+  - Should we go dancing? — No, my feet hurt.
+  - → **—Should we go dancing? —No, my feet hurt.**
+- `ccf8b905` practica-quien-vino (c09#0)
+  - —¿Tomaste la pastilla? —Sí, con el desayuno.
+  - Did you take the pill? — Yes, with breakfast.
+  - → **—Did you take the pill? —Yes, with breakfast.**
+- `0f853d4c` practica-quien-vino (c09#0)
+  - —¿Qué trajiste? —Una docena de medialunas.
+  - What did you bring? — A dozen medialunas.
+  - → **—What did you bring? —A dozen medialunas.**
+- `d8c81ff9` practica-quien-vino (c09#0)
+  - —¿Por qué no viniste? —Quise ir, pero tuve fiebre.
+  - Why didn't you come? — I wanted to go, but I had a fever.
+  - → **—Why didn't you come? —I wanted to go, but I had a fever.**
+- `279a3b84` practica-quien-vino (c09#0)
+  - —¿Qué trajo Mati? —Una picada.
+  - What did Mati bring? — A platter of cheese and cold cuts.
+  - → **—What did Mati bring? —A picada.**
+- `6de19576` practica-quien-vino (c09#0)
+  - —¿Por qué no viniste? —Estuve engripada.
+  - Why didn't you come? — I had the flu.
+  - → **—Why didn't you come? —I had the flu.**
+- `a7b761d5` practica-quien-vino (c09#0, verify4)
+  - —¿Cómo te fue? —Bien, pero fue difícil.
+  - How did it go? — Good, but it was hard.
+  - → **—How did it go? —Good, but it was hard.**
+- `8150a4a3` de-viaje (c09#0)
+  - —¿Cómo estuvo el viaje? —Bárbaro, gracias.
+  - How was the trip? — Great, thanks.
+  - → **—How was the trip? —Great, thanks.**
+- `16091cca` de-viaje (c09#0)
+  - —¿Pagás el pasaje con tarjeta? —No, en efectivo.
+  - Are you paying for the ticket by card? — No, in cash.
+  - → **—Are you paying for the ticket by card? —No, in cash.**
+- `59b8527c` de-viaje (c09#0)
+  - —¿Viajaste en avión? —No, viajé en micro.
+  - Did you travel by plane? — No, I traveled by bus.
+  - → **—Did you travel by plane? —No, I traveled by bus.**
+- `fbe3a614` de-viaje (c09#0)
+  - —¿Viajaste solo? —No, con mi novia.
+  - Did you travel alone? — No, with my girlfriend.
+  - → **—Did you travel alone? —No, with my girlfriend.**
+- `723c1b1a` de-viaje (c09#0)
+  - —¿Vas de vacaciones? —Sí, a Bariloche.
+  - Are you going on vacation? — Yes, to Bariloche.
+  - → **—Are you going on vacation? —Yes, to Bariloche.**
+- `1b06c001` en-la-primaria (c10#23)
+  - En el recreo íbamos al kiosco de la escuela.
+  - At recess we'd go to the school snack bar.
+  - → **At recess we'd go to the school kiosco.**
+- `fe716997` siempre-jugabamos (c10#32)
+  - Nico tomaba vino en cada asado.
+  - Nico drank wine at every barbecue.
+  - → **Nico drank wine at every asado.**
+- `86b94e97` estaba-lloviendo (c10#32)
+  - Estábamos en el asado cuando llegó Mati con el vino.
+  - We were at the barbecue when Mati arrived with the wine.
+  - → **We were at the asado when Mati arrived with the wine.**
+- `f8137c14` me-encantaba (c10#39)
+  - ¿Cada cuánto veías a tu abuela de chica?
+  - How often did you see your grandma as a girl?
+  - → **How often did you see your grandma as a kid?**
+- `b9c9bfea` me-encantaba (c10#39)
+  - De chica me encantaba mirar dibujitos en la cama.
+  - As a girl I loved watching cartoons in bed.
+  - → **As a kid I loved watching cartoons in bed.**
+- `363fc47f` me-encantaba (c10#39)
+  - De chica, veía la tele con mis viejos.
+  - As a girl, I watched TV with my parents.
+  - → **As a kid, I watched TV with my parents.**
+- `2c9a3ec3` me-encantaba (c10#39)
+  - ¿Vos jugabas a la pelota de chica?
+  - Did you play soccer as a girl?
+  - → **Did you play soccer as a kid?**
+- `bb090a15` estaba-lloviendo (c10#42)
+  - Llovía y el bondi estaba lleno.
+  - It was raining and the bus was packed.
+  - → **It was raining and the bus was full.**
+- `12645c80` estaba-lloviendo (c10#42)
+  - El boliche estaba lleno.
+  - The nightclub was packed.
+  - → **The nightclub was full.**
+- `37a7d208` estaba-lloviendo (c10#42)
+  - El bondi estaba re lleno.
+  - The bus was really packed.
+  - → **The bus was really full.**
+- `97f8dd4e` estaba-lloviendo (c10#42)
+  - El centro estaba lleno de gente porque había un recital.
+  - Downtown was packed with people because there was a concert.
+  - → **Downtown was full of people because there was a concert.**
+- `1df8e967` estaba-lloviendo (c10#42)
+  - El súper estaba lleno de gente.
+  - The supermarket was packed with people.
+  - → **The supermarket was full of people.**
+- `1d79cadc` estaba-lloviendo (c10#42)
+  - Tomé el subte a las ocho y estaba re lleno.
+  - I took the subway at eight and it was really packed.
+  - → **I took the subway at eight and it was really full.**
+- `4ce65674` estaba-lloviendo (c10#42)
+  - ¿La playa estaba llena?
+  - Was the beach packed?
+  - → **Was the beach full?**
+- `97aced75` estaba-lloviendo (c10#42)
+  - Fui a la guardia y estaba llena de gente.
+  - I went to the ER and it was packed with people.
+  - → **I went to the ER and it was full of people.**
+- `45f5519e` estaba-lloviendo (c10#42)
+  - La playa estaba llena porque hacía un calor bárbaro.
+  - The beach was packed because it was really hot.
+  - → **The beach was full because it was really hot.**
+- `deef8962` practica-en-esa-epoca (c10#42)
+  - Mati dijo que el bar estaba lleno.
+  - Mati said the bar was packed.
+  - → **Mati said the bar was full.**
+- `055dfbfd` me-encantaba (c10#47)
+  - —¿A qué jugaban? —A las escondidas, siempre.
+  - "What did you guys play?" "Hide-and-seek, always."
+  - → **—What did you guys play? —Hide-and-seek, always.**
+- `799a858c` las-vacaciones (c10#0)
+  - En el campo comimos asado todos los días.
+  - In the countryside we ate barbecue every day.
+  - → **In the countryside we ate asado every day.**
+- `dbedbf5f` las-vacaciones (c10#0)
+  - Hicimos un asado en el campo de Santi.
+  - We had a barbecue at Santi's farm.
+  - → **We had an asado at Santi's farm.**
+- `6fd5ffc0` practica-las-vacaciones (c10#0)
+  - ¿Compraste el vino para el asado?
+  - Did you buy the wine for the barbecue?
+  - → **Did you buy the wine for the asado?**
+- `fef15555` practica-las-vacaciones (c10#0)
+  - Anoche fuimos a un asado en lo de Nico.
+  - Last night we went to a barbecue at Nico's.
+  - → **Last night we went to an asado at Nico's.**
+- `9ba26c8d` contame (c10#0)
+  - Te cuento el sábado en el asado.
+  - I'll tell you on Saturday at the barbecue.
+  - → **I'll tell you on Saturday at the asado.**
+- `7dd070a5` contame (c10#0)
+  - Anoche Fede hizo un chiste re malo en el asado.
+  - Last night Fede made a really bad joke at the barbecue.
+  - → **Last night Fede made a really bad joke at the asado.**
+- `d15ced41` sono-el-timbre (c10#0)
+  - El carbón estaba mojado y no pudimos hacer el asado.
+  - The charcoal was wet and we couldn't have the barbecue.
+  - → **The charcoal was wet and we couldn't have the asado.**
+- `bf592c8f` cuando-era-chico (c10#0)
+  - De chica iba a la plaza.
+  - As a kid I used to go to the park.
+  - → **As a kid I used to go to the square.**
+- `fc16dc2d` cuando-era-chico (c10#0)
+  - Cuando éramos chicos, íbamos a la plaza.
+  - When we were kids, we used to go to the park.
+  - → **When we were kids, we used to go to the square.**
+- `4522218d` cuando-era-chico (c10#0)
+  - Vivías cerca de la plaza, ¿no?
+  - You lived near the park, right?
+  - → **You lived near the square, right?**
+- `97c02a92` menos-mal (c10#0)
+  - Me duele la garganta, así que no voy a la facu.
+  - My throat hurts, so I'm not going to class.
+  - → **My throat hurts, so I'm not going to college.**
+- `63dcd984` siempre-jugabamos (c10#0)
+  - Salíamos de la facu y tomábamos un café.
+  - We'd come out of the university and have a coffee.
+  - → **We'd come out of college and have a coffee.**
+- `4be46b2a` estaba-lloviendo (c10#0)
+  - Cuando salí de la facu, llovía y hacía frío.
+  - When I came out of the university, it was raining and it was cold.
+  - → **When I came out of college, it was raining and it was cold.**
+- `26547d5e` estaba-lloviendo (c10#0)
+  - Estaba lloviendo, pero igual fui a la facu.
+  - It was raining, but I went to the university anyway.
+  - → **It was raining, but I went to college anyway.**
+- `f6729f84` cuando-era-chico (c10#0)
+  - ¿Vos no ibas al boliche todos los sábados?
+  - Didn't you use to go clubbing every Saturday?
+  - → **Didn't you use to go to the nightclub every Saturday?**
+- `038992a5` practica-en-esa-epoca (c10#0)
+  - Los pibes iban al boliche todos los sábados.
+  - The guys went clubbing every Saturday.
+  - → **The guys went to the nightclub every Saturday.**
+- `023b6a1c` practica-en-esa-epoca (c10#0)
+  - Mi hermana volvía sola del boliche a las cinco.
+  - My sister used to come home alone from the club at five.
+  - → **My sister used to come home alone from the nightclub at five.**
+- `920215d8` el-partido (c11#7)
+  - Ayer jugamos en la plaza.
+  - We played in the park yesterday.
+  - → **We played in the square yesterday.**
+- `97ae1c42` la-final (c11#11)
+  - ¡Aguante Argentina!
+  - Come on, Argentina!
+  - → **Go, Argentina!**
+- `0fcca0d0` la-final (c11#11)
+  - ¡Aguante Argentina, hoy y siempre!
+  - Come on, Argentina, today and always!
+  - → **Go, Argentina, today and always!**
+- `fcc47649` la-final (c11#11)
+  - ¡Aguante la selección!
+  - Come on, national team!
+  - → **Go, national team!**
+- `37ce63ce` la-final (c11#11)
+  - Perdimos en el alargue, pero ¡aguante la selección!
+  - We lost in extra time, but come on, national team!
+  - → **We lost in extra time, but we still love the national team!**
+- `089aafbf` la-final (c11#11)
+  - ¡Aguante los campeones!
+  - Come on, champions!
+  - → **Go, champions!**
+- `345f9bad` la-final (c11#11)
+  - ¡Aguante el campeón!
+  - Come on, champion!
+  - → **Go, champion!**
+- `5fd53f2a` de-que-cuadro-sos (c11#20)
+  - ¿Cuánto sale la popular?
+  - How much is the terrace?
+  - → **How much is the standing section?**
+- `e421007f` de-que-cuadro-sos (c11#20)
+  - La popular es más barata.
+  - The terrace is cheaper.
+  - → **The standing section is cheaper.**
+- `4f2a715f` de-que-cuadro-sos (c11#20)
+  - Soy socio y siempre voy a la popular.
+  - I'm a member and I always go to the terrace.
+  - → **I'm a member and I always go to the standing section.**
+- `7fceff46` de-que-cuadro-sos (c11#20)
+  - Vamos a la popular.
+  - We're going to the terrace.
+  - → **We're going to the standing section.**
+- `1e462d20` de-que-cuadro-sos (c11#20)
+  - La hinchada va a la popular.
+  - The fans go to the terrace.
+  - → **The fans go to the standing section.**
+- `0ec54f32` de-que-cuadro-sos (c11#20)
+  - La popular es de la hinchada.
+  - The terrace belongs to the fans.
+  - → **The standing section belongs to the fans.**
+- `25f8107e` de-que-cuadro-sos (c11#20)
+  - ¿Cómo es el cantito de la popular?
+  - How does the terrace chant go?
+  - → **How does the chant from the standing section go?**
+- `acee8466` una-grande-de-muzza (c11#29)
+  - ¿Dulce o salado?
+  - Sweet or savory?
+  - → **Sweet or salty?**
+- `c70e9b32` una-grande-de-muzza (c11#30)
+  - ¿Cuánto sale el choripán?
+  - How much is the chorizo sandwich?
+  - → **How much is the choripán?**
+- `f1d48a71` una-grande-de-muzza (c11#30)
+  - El mejor choripán del mundo está en esta esquina.
+  - The best chorizo sandwich in the world is on this corner.
+  - → **The best choripán in the world is on this corner.**
+- `0c5ec11d` una-grande-de-muzza (c11#30)
+  - Soy vegetariano, pero extraño el choripán.
+  - I'm vegetarian, but I miss chorizo sandwiches.
+  - → **I'm vegetarian, but I miss choripán.**
+- `f36830ce` una-grande-de-muzza (c11#30)
+  - ¿Querés provoleta o choripán?
+  - Do you want grilled provolone or a choripán?
+  - → **Do you want provoleta or a choripán?**
+- `99629cbd` una-grande-de-muzza (c11#30)
+  - De entrada, ¿pedimos una provoleta?
+  - To start, should we order a grilled provolone?
+  - → **To start, should we order a provoleta?**
+- `9c070aa9` una-grande-de-muzza (c11#30)
+  - La provoleta de acá es riquísima.
+  - The grilled provolone here is delicious.
+  - → **The provoleta here is delicious.**
+- `1651eba5` una-grande-de-muzza (c11#30)
+  - No quiero postre, quiero otra provoleta.
+  - I don't want dessert, I want another grilled provolone.
+  - → **I don't want dessert, I want another provoleta.**
+- `1f90f2d2` una-grande-de-muzza (c11#30)
+  - Primero comimos una provoleta.
+  - First we had some grilled provolone.
+  - → **First we had a provoleta.**
+- `906a6198` de-que-cuadro-sos (c11#56)
+  - Ese jugador metió un golazo.
+  - That player scored an amazing goal.
+  - → **That player scored a great goal.**
+- `53013e8c` el-partido (c11#0)
+  - Empatamos, pero comimos un asado bárbaro con los pibes.
+  - We tied, but we had a great barbecue with the guys.
+  - → **We tied, but we had a great asado with the guys.**
+- `1fbfeb53` la-parrilla (c11#0)
+  - En el asado, mi viejo siempre hace las achuras.
+  - At the barbecue, my dad always does the organ meats.
+  - → **At the asado, my dad always does the organ meats.**
+- `4c5c13ad` las-fiestas (c11#0)
+  - Festejamos con un asado.
+  - We're celebrating with a barbecue.
+  - → **We're celebrating with an asado.**
+- `74c7e16b` la-parrilla (c11#0)
+  - ¿Compartimos un choripán?
+  - Should we share a chorizo sandwich?
+  - → **Should we share a choripán?**
+- `f72ed451` la-parrilla (c11#0)
+  - ¿Querés un choripán?
+  - Do you want a chorizo sandwich?
+  - → **Do you want a choripán?**
+- `d70c628e` la-parrilla (c11#0)
+  - En la cancha siempre como un choripán antes del partido.
+  - At the stadium I always eat a chorizo sandwich before the game.
+  - → **At the stadium I always eat a choripán before the game.**
+- `e13ff7f7` la-parrilla (c11#0)
+  - Mi abuelo dijo que este choripán es el mejor.
+  - My grandfather said this chorizo sandwich is the best.
+  - → **My grandfather said this choripán is the best.**
+- `eb5dc498` la-parrilla (c11#0)
+  - Pido un choripán.
+  - I'll order a chorizo sandwich.
+  - → **I'll order a choripán.**
+- `a35f7942` la-parrilla (c11#0)
+  - Quiero un choripán, por favor.
+  - I'd like a chorizo sandwich, please.
+  - → **I'd like a choripán, please.**
+- `f56847bc` la-parrilla (c11#0)
+  - ¿Querés achuras o un choripán?
+  - Do you want organ meats or a chorizo sandwich?
+  - → **Do you want organ meats or a choripán?**
+- `53f82b12` la-parrillada (c11#0)
+  - Me encanta la provoleta a la leña.
+  - I love grilled provolone cooked over firewood.
+  - → **I love provoleta cooked over firewood.**
+- `23677571` la-parrillada (c11#0)
+  - ¿Compartimos unas mollejas y una provoleta?
+  - Should we share some sweetbreads and a grilled provolone?
+  - → **Should we share some sweetbreads and a provoleta?**
+- `23c7df10` la-parrillada (c11#0)
+  - Mollejas y provoleta para la mesa, por favor.
+  - Sweetbreads and grilled provolone for the table, please.
+  - → **Sweetbreads and provoleta for the table, please.**
+- `76fa84d9` la-parrillada (c11#0)
+  - ¿Chinchulines o provoleta para compartir?
+  - Grilled intestines or grilled provolone to share?
+  - → **Grilled intestines or provoleta to share?**
+- `eee1aad2` la-parrillada (c11#0)
+  - La provoleta con un poco de chimichurri es riquísima.
+  - Grilled provolone with a little chimichurri is delicious.
+  - → **Provoleta with a little chimichurri is delicious.**
+- `e88a56f7` me-puse-nervioso (c12#9)
+  - Mi perro se puso re contento cuando llegué.
+  - My dog got really happy when I got home.
+  - → **My dog was so happy when I got home.**
+- `f1a93e3a` me-puse-nervioso (c12#9)
+  - Mi vieja se puso re contenta.
+  - My mom got really happy.
+  - → **My mom was so happy.**
+- `b89b92fb` me-puse-nervioso (c12#11)
+  - —¿Por qué no me hablás? —Porque me enojé.
+  - Why aren't you speaking to me? — Because I got angry.
+  - → **—Why aren't you speaking to me? —Because I got angry.**
+- `c88ffad5` me-puse-nervioso (c12#11)
+  - —¿Sos celoso? —No, para nada.
+  - Are you jealous? — No, not at all.
+  - → **—Are you jealous? —No, not at all.**
+- `05a67124` me-mude (c12#32)
+  - Juli extraña a su familia, pero está contenta acá.
+  - Juli misses her family, but she's glad to be here.
+  - → **Juli misses her family, but she's happy here.**
+- `138e9ea0` me-mude (c12#32)
+  - ¿Extrañás el barrio o estás contenta en el centro?
+  - Do you miss the neighborhood or are you glad to be downtown?
+  - → **Do you miss the neighborhood or are you happy downtown?**
+- `637a43e0` practica-antes-y-ahora (c12#52)
+  - Cuando llegó Diego, nos pusimos re contentos.
+  - We were so happy when Diego showed up.
+  - → **We were so happy when Diego arrived.**
+- `b2219b1b` zona-norte (c12#59)
+  - Alquilo en Villa Crespo, al lado de mi hermana.
+  - I rent in Villa Crespo, next to my sister.
+  - → **I rent in Villa Crespo, next door to my sister.**
+- `d4e493dd` la-semana-que-viene (c12#65)
+  - Algún día pienso mudarme a la costa.
+  - Someday I plan to move to the coast.
+  - → **Someday I'm planning to move to the coast.**
+- `b6dcccd6` la-semana-que-viene (c12#65)
+  - ¿Pensás viajar a Estados Unidos algún día?
+  - Do you plan to travel to the US someday?
+  - → **Are you planning to travel to the US someday?**
+- `63401b54` acampamos-en-el-sur (c12#0)
+  - —¿Cómo llegaron a Ushuaia? —Hicimos dedo.
+  - How did you get to Ushuaia? —We hitchhiked.
+  - → **—How did you get to Ushuaia? —We hitchhiked.**
+- `671be5e6` me-puse-nervioso (c12#0)
+  - ¿No venís al asado? ¡Qué lástima!
+  - You're not coming to the barbecue? What a shame!
+  - → **You're not coming to the asado? What a shame!**
+- `e13b9d71` me-mude (c12#0)
+  - Me mudé cerca de la facu.
+  - I moved near the university.
+  - → **I moved near college.**
+- `a69f091c` practica-antes-y-ahora (c12#0)
+  - Fui a la facu, pero no había clase.
+  - I went to the university, but there was no class.
+  - → **I went to the college, but there was no class.**
+- `b6b70640` donde-queda (c12#0)
+  - La facu me queda cerca.
+  - The university is close to my place.
+  - → **College is close to my place.**
+- `c734cd34` practica-antes-y-ahora (c12#0)
+  - Me olvidé la compu en la oficina, así que volví.
+  - I left my laptop at the office, so I went back.
+  - → **I left my computer at the office, so I went back.**
+- `dcd1e739` me-puse-nervioso (c12#0)
+  - Me enojé con Fede porque se puso celoso.
+  - I got mad at Fede because he got jealous.
+  - → **I got angry with Fede because he got jealous.**
+- `8e5139fb` te-acordas (c13#8)
+  - Mi vieja estaba distinta, más tranquila.
+  - My mom was different, calmer.
+  - → **My mom seemed different, calmer.**
+- `208a8c82` me-das-una-mano (c13#20)
+  - ¿Me traés pan de paso?
+  - Can you grab me some bread while you're at it?
+  - → **Can you bring me some bread on your way?**
+- `9d97dadf` un-ratito (c13#22)
+  - ¿Tenés tiempo para un cafecito?
+  - Do you have time for a little coffee?
+  - → **Do you have time for a coffee?**
+- `f5c00693` un-ratito (c13#22)
+  - ¿Un cafecito, vecina?
+  - A little coffee, neighbor?
+  - → **A coffee, neighbor?**
+- `91923303` un-ratito (c13#22)
+  - Con el frío que hace, un cafecito viene bárbaro.
+  - With how cold it is, a little coffee would be great.
+  - → **With how cold it is, a coffee would be great.**
+- `4852bff7` un-ratito (c13#22)
+  - Tengo un problemita, ¿lo hablamos con un cafecito?
+  - I have a little problem, can we talk about it over a little coffee?
+  - → **I have a little problem, can we talk about it over a coffee?**
+- `3d2feb09` un-ratito (c13#22)
+  - Una preguntita: ¿dónde tomo un cafecito por acá?
+  - A quick question: where can I have a little coffee around here?
+  - → **A quick question: where can I get a coffee around here?**
+- `8380db24` un-ratito (c13#25)
+  - El baño es re chiquito.
+  - The bathroom is really tiny.
+  - → **The bathroom is really small.**
+- `30486e02` hace-fresquito (c13#29)
+  - ¿Me das un besito?
+  - Will you give me a little kiss?
+  - → **Will you give me a kiss?**
+- `698152bb` hace-fresquito (c13#29)
+  - Besito, nos vemos mañana.
+  - A little kiss, see you tomorrow.
+  - → **Kisses, see you tomorrow.**
+- `c5ae9ccf` hace-fresquito (c13#29)
+  - Chau, un besito a los chicos de mi parte.
+  - Bye, a little kiss to the kids from me.
+  - → **Bye, give the kids a kiss from me.**
+- `d6a6e6ad` hace-fresquito (c13#29)
+  - Dale un besito a tu hermana de mi parte.
+  - Give your sister a little kiss from me.
+  - → **Give your sister a kiss from me.**
+- `eeef8def` hace-fresquito (c13#29)
+  - Dame un besito.
+  - Give me a little kiss.
+  - → **Give me a kiss.**
+- `0688fae9` hace-fresquito (c13#29)
+  - Un besito de mi parte.
+  - A little kiss from me.
+  - → **A kiss from me.**
+- `d0391f7e` hace-fresquito (c13#31)
+  - Fue una tormenta cortita, ya salió el sol.
+  - It was a nice short storm, the sun already came out.
+  - → **It was a short storm, the sun is already out.**
+- `cfb5cd2e` a-la-mesa (c13#43)
+  - No hagan planes para el sábado, hay asado.
+  - Don't make plans for Saturday, there's a barbecue.
+  - → **Don't make plans for Saturday, there's an asado.**
+- `1cab5260` hay-que (c13#53)
+  - Hay que sacar turno.
+  - You have to get an appointment.
+  - → **You have to book an appointment.**
+- `36c3c2c3` hay-que (c13#53)
+  - Conviene sacar turno desde casa, es más fácil.
+  - It's best to get an appointment from home, it's easier.
+  - → **It's best to book an appointment from home, it's easier.**
+- `e518f5de` hay-que (c13#53)
+  - Conviene sacar turno.
+  - It's best to get an appointment.
+  - → **It's best to book an appointment.**
+- `aec3f405` hay-que-sacar-turno (c13#53)
+  - Saqué turno por internet.
+  - I made an appointment online.
+  - → **I booked an appointment online.**
+- `b3e117c5` hay-que-sacar-turno (c13#55)
+  - En mi escuela el guardapolvo era obligatorio.
+  - At my school the white coat was mandatory.
+  - → **At my school the white school coat was mandatory.**
+- `30c9ee4a` migraciones (c13#70)
+  - El certificado de domicilio demoró dos días.
+  - The home address certificate took two days.
+  - → **The proof of address took two days.**
+- `d8602d47` migraciones (c13#70)
+  - Me falta el certificado de domicilio.
+  - I'm missing the home address certificate.
+  - → **I'm missing my proof of address.**
+- `d5510faa` migraciones (c13#70)
+  - Necesito un certificado de domicilio.
+  - I need a home address certificate.
+  - → **I need proof of address.**
+- `bd5e51e1` migraciones (c13#71)
+  - Los antecedentes penales tienen que tener la apostilla.
+  - The criminal record has to have the apostille.
+  - → **The criminal record certificate has to have the apostille.**
+- `67ed5feb` migraciones (c13#71)
+  - Me pidieron los antecedentes penales.
+  - They asked me for my criminal record.
+  - → **They asked me for my criminal record certificate.**
+- `c21c9e77` migraciones (c13#71)
+  - Necesito los antecedentes penales.
+  - I need my criminal record.
+  - → **I need my criminal record certificate.**
+- `faf51bc6` migraciones (c13#71)
+  - Para la residencia piden los antecedentes penales.
+  - For residency they ask for your criminal record.
+  - → **For residency they ask for your criminal record certificate.**
+- `e6b86127` se-alquila (c14#2)
+  - En la verdulería se venden huevos.
+  - Eggs are sold at the produce store.
+  - → **Eggs are sold at the fruit and vegetable shop.**
+- `cd6265f7` en-la-verduleria (c14#5)
+  - Para el asado compro papa y cebolla.
+  - For the barbecue I buy potatoes and onions.
+  - → **For the asado I buy potatoes and onions.**
+- `273e3a35` practica-la-feria (c14#5)
+  - Para el asado hace falta carbón.
+  - We need charcoal for the barbecue.
+  - → **We need charcoal for the asado.**
+- `b0581bd1` practica-la-feria (c14#5)
+  - ¿Hace falta algo más para el asado?
+  - Do we need anything else for the barbecue?
+  - → **Do we need anything else for the asado?**
+- `b1907578` practica-la-feria (c14#5)
+  - El domingo fui a un asado en lo de Nico.
+  - On Sunday I went to a barbecue at Nico's place.
+  - → **On Sunday I went to an asado at Nico's place.**
+- `482966a0` cien-gramos-de-jamon (c14#9, verify5)
+  - Es un cuarto, no falta un gramo.
+  - It's a quarter kilo, not a gram short.
+  - → **It's a quarter kilo, not one gram less.**
+- `c0c682c0` me-afanaron (c14#41)
+  - Fue un motochorro.
+  - It was a thief on a motorcycle.
+  - → **It was a thief on a motorbike.**
+- `8ea29f02` me-afanaron (c14#43, verify5)
+  - Es el cuento del tío.
+  - It's a con.
+  - → **It's a scam.**
+- `7c6a91d8` te-lo-devuelvo (c14#49)
+  - ¿Tenés el número del encargado? Pasámelo.
+  - Do you have the building manager's number? Send it to me.
+  - → **Do you have the building caretaker's number? Send it to me.**
+- `cb06a2ec` se-alquila (c14#54)
+  - Se necesita garantía.
+  - A guarantor is needed.
+  - → **A guarantee is required.**
+- `7c5177cf` se-aceptan-tarjetas (c14#61)
+  - Se busca vendedora.
+  - Looking for a salesperson.
+  - → **Saleswoman wanted.**
+- `04a1fb70` se-alquila (c14#0)
+  - Se alquila pieza cerca de la facu.
+  - Room for rent near the university.
+  - → **Room for rent near the college.**
+- `351e06e1` practica-la-feria (c14#0)
+  - No fui a la facu porque estaba engripado.
+  - I didn't go to class because I had the flu.
+  - → **I didn't go to college because I had the flu.**
+- `4c9c4fb6` practica-la-feria (c14#0)
+  - —¿Viene Lucía? —No, tiene que ir a la facu.
+  - —Is Lucía coming? —No, she has to go to class.
+  - → **—Is Lucía coming? —No, she has to go to college.**
+- `2596a0d1` cien-gramos-de-jamon (c14#0)
+  - Para la picada necesitamos veinte fetas de jamón.
+  - We need twenty slices of ham for the meat and cheese platter.
+  - → **We need twenty slices of ham for the picada.**
+- `831d60d2` te-lo-presto (c15#4)
+  - El lunes te pago el alquiler sin falta.
+  - I'll pay you the rent on Monday without fail.
+  - → **I'll pay you the rent on Monday for sure.**
+- `6ccd861b` te-lo-presto (c15#4)
+  - Mañana te llamo sin falta.
+  - I'll call you tomorrow without fail.
+  - → **I'll call you tomorrow for sure.**
+- `d09316fe` te-lo-presto (c15#4)
+  - Tenemos que hacer esto el jueves sin falta.
+  - We have to do this on Thursday without fail.
+  - → **We have to do this on Thursday for sure.**
+- `67944b5d` te-lo-presto (c15#4)
+  - Vengo sin falta.
+  - I'll come without fail.
+  - → **I'll come for sure.**
+- `6088e516` te-lo-presto (c15#4)
+  - El número de Lucía te lo paso mañana sin falta.
+  - I'll send you Lucía's number tomorrow without fail.
+  - → **I'll send you Lucía's number tomorrow for sure.**
+- `0f8663f4` te-lo-presto (c15#4)
+  - ¿Me prestás el taladro? Te lo devuelvo sin falta.
+  - Will you lend me the drill? I'll give it back without fail.
+  - → **Will you lend me the drill? I'll give it back for sure.**
+- `5ac5f195` laburo-nuevo (c15#8)
+  - ¿El laburo nuevo es en blanco o en negro?
+  - Is the new job on the books or off the books?
+  - → **Is the new job registered or unregistered?**
+- `0126877e` laburo-nuevo (c15#8)
+  - ¿Laburás en negro?
+  - Do you work off the books?
+  - → **Do you work in an unregistered job?**
+- `77f57f7d` laburo-nuevo (c15#8)
+  - Mi hermano labura en negro.
+  - My brother works off the books.
+  - → **My brother works in an unregistered job.**
+- `bb761240` laburo-nuevo (c15#8)
+  - Renuncié porque laburaba en negro.
+  - I quit because I was working off the books.
+  - → **I quit because I was working in an unregistered job.**
+- `58c31beb` laburo-nuevo (c15#8)
+  - ¿El laburo es en blanco?
+  - Is the job on the books?
+  - → **Is the job registered?**
+- `0cfe2901` laburo-nuevo (c15#8)
+  - Conseguí un laburo en blanco.
+  - I got a job on the books.
+  - → **I got a registered job.**
+- `0c478992` laburo-nuevo (c15#8)
+  - En la empresa nueva estoy en blanco desde marzo.
+  - At the new company I've been on the books since March.
+  - → **At the new company I've been registered since March.**
+- `f727786d` laburo-nuevo (c15#8)
+  - Laburo en blanco.
+  - I work on the books.
+  - → **I work in a registered job.**
+- `5f381960` me-contrataron (c15#16)
+  - ¿Santi consiguió el puesto?
+  - Did Santi get the job?
+  - → **Did Santi get the position?**
+- `2503fabb` practica-te-lo-presto (c15#24)
+  - Echaron a la mitad de la oficina.
+  - They laid off half the office.
+  - → **They fired half the office.**
+- `3b576b4d` estamos-de-novios (c15#33)
+  - Amor, ¿me pasás la sal?
+  - Babe, can you pass me the salt?
+  - → **My love, can you pass me the salt?**
+- `e7170b91` estamos-de-novios (c15#33)
+  - Amor, llego tarde: tengo una reunión a las ocho.
+  - Babe, I'll be late: I have a meeting at eight.
+  - → **My love, I'll be late: I have a meeting at eight.**
+- `b3cc2487` estamos-de-novios (c15#33)
+  - Te extraño, amor.
+  - I miss you, babe.
+  - → **I miss you, my love.**
+- `3e2ae069` no-lo-aguanto (c15#38)
+  - Mi jefe es falso con los clientes.
+  - My boss is two-faced with the clients.
+  - → **My boss is fake with the clients.**
+- `59ecfe53` no-lo-aguanto (c15#38)
+  - Nico es un falso.
+  - Nico is two-faced.
+  - → **Nico is fake.**
+- `6dcc06b9` no-lo-aguanto (c15#38)
+  - No confío en ese pibe, es falso.
+  - I don't trust that guy, he's two-faced.
+  - → **I don't trust that guy, he's fake.**
+- `e01bed14` no-lo-aguanto (c15#38)
+  - Tu amigo es re falso.
+  - Your friend is so two-faced.
+  - → **Your friend is really fake.**
+- `4d24dec7` no-lo-aguanto (c15#38)
+  - ¿Por qué sos tan falsa conmigo?
+  - Why are you so two-faced with me?
+  - → **Why are you so fake with me?**
+- `65ad42af` no-lo-aguanto (c15#38)
+  - Mi compañera de laburo es re falsa.
+  - My coworker is really two-faced.
+  - → **My coworker is really fake.**
+- `c66b9c93` no-lo-aguanto (c15#38)
+  - Mi ex era una falsa.
+  - My ex was two-faced.
+  - → **My ex was fake.**
+- `05be1cc3` no-lo-aguanto (c15#38)
+  - A mi cuñado no lo aguanto, es un falso.
+  - I can't stand my brother-in-law, he's two-faced.
+  - → **I can't stand my brother-in-law, he's fake.**
+- `50cd5635` no-lo-aguanto (c15#38)
+  - ¿Por qué hay que aguantar a gente falsa?
+  - Why do we have to put up with two-faced people?
+  - → **Why do we have to put up with fake people?**
+- `be5cfedb` donde-estara (c15#63)
+  - La verdulería está cerrada, estarán de vacaciones.
+  - The produce store is closed, they must be on vacation.
+  - → **The vegetable shop is closed, they must be on vacation.**
+- `4b27a921` donde-estara (c15#65)
+  - Con este frío, ¿vendrá alguien al asado?
+  - With this cold, I wonder if anyone's coming to the barbecue.
+  - → **With this cold, I wonder if anyone's coming to the asado.**
+- `7929c7b0` salir-con-alguien (c15#65)
+  - Nadie de la facu fue al asado de Diego.
+  - Nobody from college went to Diego's barbecue.
+  - → **Nobody from college went to Diego's asado.**
+- `ba3ed2d5` no-lo-aguanto (c15#65)
+  - Mi amistad con Juli empezó en un asado.
+  - My friendship with Juli started at a barbecue.
+  - → **My friendship with Juli started at an asado.**
+- `dab3fb3e` la-ruta (c15#71)
+  - Estuvimos dos horas en la autopista.
+  - We were stuck on the highway for two hours.
+  - → **We were stuck on the expressway for two hours.**
+- `10ef5ddf` la-ruta (c15#71)
+  - La autopista está cerrada.
+  - The highway's closed.
+  - → **The expressway is closed.**
+- `9bc59a39` la-ruta (c15#71)
+  - La autopista tiene peaje.
+  - The highway has a toll.
+  - → **The expressway has a toll.**
+- `0666ac1a` la-ruta (c15#71)
+  - Vamos por la autopista.
+  - Let's take the highway.
+  - → **Let's take the expressway.**
+- `d6362369` la-ruta (c15#71)
+  - En la autopista no se puede frenar así.
+  - You can't brake like that on the highway.
+  - → **You can't brake like that on the expressway.**
+- `0d321d06` la-ruta (c15#73, verify6)
+  - Cargué veinte mil pesos de nafta.
+  - I put in twenty thousand pesos of gas.
+  - → **I put in twenty thousand pesos' worth of gas.**
+- `52e187d2` donde-estara (c15#86)
+  - Quizás Diego tiene el cargador.
+  - Perhaps Diego has the charger.
+  - → **Maybe Diego has the charger.**
+- `1692da46` donde-estara (c15#86)
+  - Quizás está ocupado.
+  - Perhaps he's busy.
+  - → **Maybe he's busy.**
+- `355852e2` donde-estara (c15#86)
+  - Quizás no es tan caro.
+  - Perhaps it's not that expensive.
+  - → **Maybe it's not that expensive.**
+- `52c11d9e` donde-estara (c15#0)
+  - Quizás está en la facu.
+  - Maybe she's at the university.
+  - → **Maybe she's at college.**
+- `dfa58cb8` donde-estara (c15#0)
+  - Es viernes, habrá muchos pibes en el boliche.
+  - It's Friday, there are probably lots of young people at the club.
+  - → **It's Friday, there are probably lots of young people at the nightclub.**
+- `2f1a47d2` como-se-siente (c16#9)
+  - Si se siente peor, vamos a la guardia.
+  - If she feels worse, we'll go to the ER.
+  - → **If she feels worse, we'll go to the emergency room.**
+- `74e9f5c4` practica-a-lo-mejor (c16#9)
+  - Fui a la guardia por el dolor de rodilla.
+  - I went to the ER because of my knee pain.
+  - → **I went to the emergency room because of my knee pain.**
+- `1e425139` quiero-que-vengas (c16#9)
+  - Quiero que vayas a la guardia ya.
+  - I want you to go to the ER right away.
+  - → **I want you to go to the emergency room right away.**
+- `dfd62370` como-se-siente (c16#10)
+  - ¿Cada cuántas horas tomo el jarabe?
+  - How often do I take the syrup?
+  - → **How often do I take the cough syrup?**
+- `944a7af7` como-se-siente (c16#10)
+  - ¿Compraste el jarabe?
+  - Did you buy the syrup?
+  - → **Did you buy the cough syrup?**
+- `19e66cd6` como-se-siente (c16#10)
+  - Este jarabe es re amargo.
+  - This syrup is really bitter.
+  - → **This cough syrup is really bitter.**
+- `1fc8347e` sos-un-genio (c16#19)
+  - Gracias por el asado, genio, estuvo riquísimo.
+  - Thanks for the barbecue, genius, it was delicious.
+  - → **Thanks for the asado, you're the best, it was delicious.**
+- `4daa2a95` sos-un-genio (c16#19)
+  - Gracias por las fotos, genia.
+  - Thanks for the photos, genius.
+  - → **Thanks for the photos, you're the best.**
+- `b6f961b8` quien-ceba (c16#25)
+  - Esta bombilla era de mi abuelo.
+  - This straw was my grandfather's.
+  - → **This mate straw was my grandfather's.**
+- `473c48b3` quien-ceba (c16#25)
+  - Hay que lavar la bombilla con agua caliente.
+  - You have to wash the straw with hot water.
+  - → **You have to wash the mate straw with hot water.**
+- `9a39715d` quien-ceba (c16#25)
+  - La bombilla está sucia, ¿la lavás?
+  - The straw is dirty, can you wash it?
+  - → **The mate straw is dirty, can you wash it?**
+- `87c7f9a9` quien-ceba (c16#25)
+  - No encuentro la bombilla, ¿la viste?
+  - I can't find the straw, have you seen it?
+  - → **I can't find the mate straw, have you seen it?**
+- `f8f7813f` quien-ceba (c16#25)
+  - Se me cayó la bombilla.
+  - I dropped the straw.
+  - → **I dropped the mate straw.**
+- `ecbf36a4` quien-ceba (c16#25)
+  - En la ronda todos toman de la misma bombilla.
+  - When sharing mate, everyone drinks from the same straw.
+  - → **In the round, everyone drinks from the same mate straw.**
+- `2683cb5b` te-convido-un-mate (c16#31)
+  - Está fría, pero tampoco tiene que hervir.
+  - It's cold, but it doesn't have to boil either.
+  - → **It's cold, but it shouldn't boil either.**
+- `5b166945` te-convido-un-mate (c16#32)
+  - ¿Querés tomar unos mates? Hay bizcochitos.
+  - Do you want to drink some mates? There are bizcochitos.
+  - → **Do you want to have some mate? There are bizcochitos.**
+- `38678553` te-convido-un-mate (c16#32)
+  - ¿Querés tomar unos mates? Esperá, el agua está fría.
+  - Do you want to drink some mates? Wait, the water is cold.
+  - → **Do you want to have some mate? Wait, the water is cold.**
+- `f18c1db3` te-convido-un-mate (c16#32)
+  - Calentá agua y tomamos unos mates.
+  - Heat some water and we'll drink some mates.
+  - → **Heat some water and we'll have some mate.**
+- `ac5dc4cf` te-convido-un-mate (c16#32)
+  - Calentá agua, que mi tía quiere tomar unos mates.
+  - Heat some water, my aunt wants to drink some mates.
+  - → **Heat some water, my aunt wants to have some mate.**
+- `67ffc9e9` te-convido-un-mate (c16#33)
+  - ¿Me convidás un mate?
+  - Will you share a mate with me?
+  - → **Can I have a mate?**
+- `086638a7` te-convido-un-mate (c16#33)
+  - ¿Me convidás otro mate?
+  - Will you share another mate with me?
+  - → **Can I have another mate?**
+- `dcca1881` te-convido-un-mate (c16#33)
+  - ¿Me convidás unos bizcochitos?
+  - Will you share some bizcochitos with me?
+  - → **Can I have some bizcochitos?**
+- `2dce2a78` te-convido-un-mate (c16#33)
+  - Me convidás un mate y yo te convido bizcochitos.
+  - You share a mate with me and I'll offer you bizcochitos.
+  - → **You give me a mate and I'll give you bizcochitos.**
+- `1bd2b24f` cuando-llegues (c16#51)
+  - Apenas termines de estudiar, vamos a la plaza.
+  - As soon as you finish studying, let's go to the park.
+  - → **As soon as you finish studying, let's go to the square.**
+- `7ba103cc` cuando-llegues (c16#52)
+  - Cuando llegue mi hermana, vamos al asado.
+  - When my sister gets there, we'll go to the asado.
+  - → **When my sister gets here, we'll go to the asado.**
+- `a28b6d10` cuando-llegues (c16#52)
+  - Cuando llegue Santi, comemos.
+  - When Santi gets there, we'll eat.
+  - → **When Santi gets here, we'll eat.**
+- `6b809661` buena-onda (c16#58)
+  - Sos la persona más simpática que conozco.
+  - You're the nicest person I know.
+  - → **You're the friendliest person I know.**
+- `287f5323` buena-onda (c16#58)
+  - ¿Fede es simpático?
+  - Is Fede nice?
+  - → **Is Fede friendly?**
+- `c6017e67` buena-onda (c16#58)
+  - El médico fue muy simpático con mi abuela.
+  - The doctor was really nice to my grandma.
+  - → **The doctor was very friendly with my grandma.**
+- `820ca4f3` buena-onda (c16#58)
+  - Me parece simpático, pero no lo conozco mucho.
+  - He seems nice, but I don't know him very well.
+  - → **He seems friendly, but I don't know him very well.**
+- `b74ec7d2` buena-onda (c16#58)
+  - Conocí a una piba re simpática en la facu.
+  - I met a really nice girl in college.
+  - → **I met a really friendly girl in college.**
+- `9c16e465` buena-onda (c16#58)
+  - La profesora es simpática, pero da mucha tarea.
+  - The teacher is nice, but she gives a lot of homework.
+  - → **The teacher is friendly, but she gives a lot of homework.**
+- `bc4320d2` buena-onda (c16#58)
+  - La vecina de enfrente es simpática.
+  - The neighbor across the street is nice.
+  - → **The neighbor across the street is friendly.**
+- `65cb7ba3` buena-onda (c16#58, verify6)
+  - Sofi es muy simpática.
+  - Sofi's really nice.
+  - → **Sofi is really friendly.**
+- `ac833815` buena-onda (c16#58)
+  - Tu mamá es re simpática.
+  - Your mom's really nice.
+  - → **Your mom is really friendly.**
+- `1659ee83` es-medio-vago (c16#62)
+  - Es distraída, pero en el laburo es una genia.
+  - She's absent-minded, but at work she's a genius.
+  - → **She's absent-minded, but she's great at her job.**
+- `4344507e` es-medio-vago (c16#64)
+  - Ahora que es jefa, está agrandada.
+  - Now that she's the boss, she's arrogant.
+  - → **Now that she's the boss, she's gotten arrogant.**
+- `10196d53` es-medio-vago (c16#64)
+  - Ganó y ahora está re agrandado.
+  - He won and now he's really arrogant.
+  - → **He won and now he's gotten really arrogant.**
+- `e0290586` me-siento-mal (c16#0)
+  - Mejorate, que el sábado es el asado.
+  - Get well soon, the barbecue is on Saturday.
+  - → **Get well soon, the asado is on Saturday.**
+- `c248e6a1` te-debo-una (c16#0)
+  - Mil gracias por el asado, estuvo riquísimo.
+  - Thanks a million for the barbecue, it was delicious.
+  - → **Thanks a million for the asado, it was delicious.**
+- `6e4d3544` te-debo-una (c16#0)
+  - Todavía te debo la plata del asado.
+  - I still owe you the money for the barbecue.
+  - → **I still owe you the money for the asado.**
+- `77690cf3` quiero-que-vengas (c16#0)
+  - Nico quiere que vengas al asado.
+  - Nico wants you to come to the barbecue.
+  - → **Nico wants you to come to the asado.**
+- `09cf925e` quiero-que-vengas (c16#0)
+  - Para el asado, quiero que traigas la ensalada.
+  - For the barbecue, I want you to bring the salad.
+  - → **For the asado, I want you to bring the salad.**
+- `60d535f7` quiero-que-vengas (c16#0)
+  - Pablo quiere que vaya al asado.
+  - Pablo wants me to go to the barbecue.
+  - → **Pablo wants me to go to the asado.**
+- `dbc32d2c` necesito-que-me-ayudes (c16#0)
+  - Hagamos un asado el sábado.
+  - Let's have a barbecue on Saturday.
+  - → **Let's have an asado on Saturday.**
+- `60c0a80c` cuando-llegues (c16#0)
+  - Cuando salgas de la facu, ¿tomamos un café?
+  - When you leave the university, should we have a coffee?
+  - → **When you leave college, should we have a coffee?**
+- `cccdc5d8` puede-ser-que (c17#11, verify6)
+  - Llegamos temprano, no creo que abran todavía.
+  - We're early, I don't think they're open yet.
+  - → **We got here early, I don't think they're open yet.**
+- `41114dc2` te-recomiendo (c17#17)
+  - Es mejor que pruebes el café de enfrente.
+  - It's better if you try the coffee across the street.
+  - → **It's better if you try the café across the street.**
+- `6f90e3af` te-recomiendo (c17#18)
+  - Es mejor que pidas un taxi, es tarde.
+  - It's better if you call a taxi, it's late.
+  - → **It's better if you order a taxi, it's late.**
+- `ddc0363c` te-aconsejo (c17#20)
+  - De noche, es mejor que tomes un remis.
+  - At night, it's better that you take a car service.
+  - → **At night, it's better to take a hired car.**
+- `b9cb41ce` te-aconsejo (c17#25)
+  - Te aconsejo que pruebes el dulce de leche.
+  - I recommend you try the dulce de leche.
+  - → **I'd advise you to try the dulce de leche.**
+- `1e3332ec` te-aconsejo (c17#25)
+  - Te aconsejo que busques gente para practicar castellano.
+  - I'd recommend you find people to practice Spanish with.
+  - → **I'd advise you to find people to practice Spanish with.**
+- `cd9c5769` lunfardo (c17#39)
+  - Los domingos morfamos asado.
+  - On Sundays we eat barbecue.
+  - → **On Sundays we eat asado.**
+- `590b90fd` practica-es-un-afano (c17#39)
+  - A Diego lo conocí en un asado.
+  - I met Diego at a barbecue.
+  - → **I met Diego at an asado.**
+- `99ef0b46` practica-es-un-afano (c17#39)
+  - Perdimos, así que tenemos que garpar el asado.
+  - We lost, so we have to pay for the barbecue.
+  - → **We lost, so we have to pay for the asado.**
+- `03eaf198` es-un-afano (c17#42)
+  - Mi ex era un chanta y no me di cuenta.
+  - My ex was a fake and I didn't realize it.
+  - → **My ex was dishonest and I didn't realize it.**
+- `94c9e50c` es-un-afano (c17#42)
+  - Tu cuñado es un chanta.
+  - Your brother-in-law is a fake.
+  - → **Your brother-in-law is dishonest.**
+- `44f5f98a` practica-es-un-afano (c17#42)
+  - Al final me di cuenta de que era un chanta.
+  - In the end I realized he was a fake.
+  - → **In the end I realized he was dishonest.**
+- `e2b1eef0` practica-es-un-afano (c17#42)
+  - ¡No seas chanta!
+  - Don't be such a fake!
+  - → **Don't be dishonest!**
+- `cb0ed72a` practica-es-un-afano (c17#42)
+  - ¿Fede, un chanta? ¡Para nada!
+  - Fede, a fake? Not at all!
+  - → **Fede, dishonest? Not at all!**
+- `16920e7d` practica-es-un-afano (c17#42)
+  - Ese pibe es un chanta.
+  - That guy is a fake.
+  - → **That guy is dishonest.**
+- `9a35541b` practica-es-un-afano (c17#42, verify6)
+  - No le creo nada, es un chanta.
+  - I don't believe a word he says, he's a fake.
+  - → **I don't believe a word he says, he's dishonest.**
+- `51e89860` es-un-afano (c17#43)
+  - ¿Tu suegra es cheta?
+  - Is your mother-in-law posh?
+  - → **Is your mother-in-law snobby?**
+- `8d7e1988` es-un-afano (c17#43, verify6)
+  - La novia de Diego es cheta, pero simpática.
+  - Diego's girlfriend is posh, but nice.
+  - → **Diego's girlfriend is snobby, but friendly.**
+- `9890b547` es-un-afano (c17#43)
+  - Mi vecina es muy cheta.
+  - My neighbor is really posh.
+  - → **My neighbor is really snobby.**
+- `fbcf44a6` es-un-afano (c17#43)
+  - ¿Por qué hablás tan cheto?
+  - Why are you talking so posh?
+  - → **Why are you talking so fancy?**
+- `fb561f62` es-un-afano (c17#43)
+  - Ese barrio es muy cheto.
+  - That neighborhood is really posh.
+  - → **That neighborhood is really fancy.**
+- `c7777aba` es-un-afano (c17#43)
+  - Tu novio es re cheto.
+  - Your boyfriend is super posh.
+  - → **Your boyfriend is really snobby.**
+- `ddb5b013` es-un-afano (c17#44)
+  - Diego nunca quiere garpar.
+  - Diego never wants to pay up.
+  - → **Diego never wants to pay.**
+- `bbd38266` practica-es-un-afano (c17#44)
+  - ¿Quién va a garpar?
+  - Who's going to pay up?
+  - → **Who's going to pay?**
+- `96c2c042` practica-es-un-afano (c17#46)
+  - ¡Qué suerte que tu vieja esté mejor!
+  - I'm so glad your mom is better!
+  - → **Good thing your mom is better!**
+- `6d7671c3` te-aconsejo (c17#0)
+  - En el kiosco, es mejor que uses efectivo.
+  - At the kiosk, it's better to pay cash.
+  - → **At the kiosco, it's better to use cash.**
+- `d2fde6ca` no-seas-asi (c17#0)
+  - Esta vez no pierdas el celu en el boliche.
+  - This time, don't lose your phone at the club.
+  - → **This time, don't lose your phone at the nightclub.**
+- `fbbcb24c` practica-te-aconsejo (c17#0)
+  - No lleves la compu a la playa.
+  - Don't take the laptop to the beach.
+  - → **Don't take the computer to the beach.**
+- `8b0bbdb7` practica-te-aconsejo (c17#0)
+  - No seas malo, prestame la compu.
+  - Don't be mean, lend me your laptop.
+  - → **Don't be mean, lend me your computer.**
+- `86ba7b00` cuando-vuelvas (c17#0, verify7)
+  - Salimos a comer cuando quieras, invito yo.
+  - We'll go out to eat whenever you want, my treat.
+  - → **We'll go out to eat whenever you want, I'm paying.**
+- `dc931ab5` saludos-a-tu-vieja (c18#2)
+  - Bueno, me voy yendo, besos a todos.
+  - Well, I'll get going, love to everyone.
+  - → **Well, I'll get going, kisses to everyone.**
+- `17b63add` saludos-a-tu-vieja (c18#2)
+  - Besos a todos y nos vemos el domingo.
+  - Love to everyone, and see you Sunday.
+  - → **Kisses to everyone, and see you Sunday.**
+- `7462848d` saludos-a-tu-vieja (c18#2)
+  - Sofi te mandó besos.
+  - Sofi sends her love.
+  - → **Sofi sent you kisses.**
+- `f2dde3cb` saludos-a-tu-vieja (c18#2)
+  - Te mando besos desde la playa.
+  - Sending you love from the beach.
+  - → **I'm sending you kisses from the beach.**
+- `36325679` saludos-a-tu-vieja (c18#2)
+  - Un montón de besos para la abuela.
+  - Lots of love to Grandma.
+  - → **Lots of kisses for Grandma.**
+- `de272fef` saludos-a-tu-vieja (c18#2)
+  - Mandale besos a tu hermana.
+  - Send your sister my love.
+  - → **Send your sister kisses.**
+- `fcca6dba` cuidate (c18#2)
+  - Mil gracias por todo, Ana, un beso grande.
+  - Thanks a million for everything, Ana, lots of love.
+  - → **Thanks a million for everything, Ana, a big kiss.**
+- `23cabdae` cuidate (c18#2)
+  - Un beso a tu mamá.
+  - Give my love to your mom.
+  - → **A kiss for your mom.**
+- `fdb5dd4d` si-tuviera (c18#6)
+  - ¿Qué harías en mi lugar?
+  - What would you do in my shoes?
+  - → **What would you do if you were me?**
+- `1a7cf50c` como-no-dona-rosa (c18#31)
+  - Dejá, don Diego.
+  - Leave it, Mr. Diego.
+  - → **Leave it to me, Don Diego.**
+- `18a4c67f` como-no-dona-rosa (c18#32)
+  - Dejá, vecina, hoy te hago las compras yo.
+  - Leave it, neighbor, I'll do your shopping today.
+  - → **Leave it to me, neighbor, I'll do your shopping today.**
+- `b7558848` como-no-dona-rosa (c18#32)
+  - Dejá, vecino, yo saco la basura.
+  - Leave it, neighbor, I'll take out the trash.
+  - → **Leave it to me, neighbor, I'll take out the trash.**
+- `bba7156d` como-no-dona-rosa (c18#32)
+  - Dejá, yo lo hago.
+  - Leave it, I'll do it.
+  - → **Leave it to me, I'll do it.**
+- `66d6b9bf` como-no-dona-rosa (c18#38)
+  - —¿Trabajás? —No, soy jubilada.
+  - Do you work? No, I'm retired.
+  - → **—Do you work? —No, I'm retired.**
+- `2270e309` como-no-dona-rosa (c18#38)
+  - —Gracias por el mate. —Faltaba más.
+  - Thanks for the mate. Don't mention it.
+  - → **—Thanks for the mate. —Don't mention it.**
+- `2a74f9af` como-no-dona-rosa (c18#38)
+  - —Gracias por la ayuda, vecino. —Faltaba más.
+  - Thanks for the help, neighbor. —Don't mention it.
+  - → **—Thanks for the help, neighbor. —Don't mention it.**
+- `5e5f3611` como-no-dona-rosa (c18#38)
+  - —Gracias, Belén. —¡Faltaba más!
+  - Thanks, Belén. Don't mention it!
+  - → **—Thanks, Belén. —Don't mention it!**
+- `7311463d` como-no-dona-rosa (c18#38)
+  - —Permiso. —Pasá, faltaba más.
+  - Excuse me. —Come in, of course.
+  - → **—Excuse me. —Come in, of course.**
+- `c4ea62fe` como-no-dona-rosa (c18#38)
+  - —No puedo abrir. —Te doy una mano.
+  - I can't open it. —I'll give you a hand.
+  - → **—I can't open it. —I'll give you a hand.**
+- `ce4bc735` como-no-dona-rosa (c18#38)
+  - —¿Me alcanzás el pan? —Cómo no.
+  - Can you pass me the bread? —Of course.
+  - → **—Can you pass me the bread? —Of course.**
+- `cf99b13e` como-no-dona-rosa (c18#38)
+  - —¿Me pasás la sal? —Cómo no.
+  - Can you pass me the salt? Of course.
+  - → **—Can you pass me the salt? —Of course.**
+- `98a6cf25` como-no-dona-rosa (c18#38, verify7)
+  - —¿Puedo pasar? —¡Cómo no!
+  - May I come in? Of course!
+  - → **—May I come in? —Of course!**
+- `deffed58` yo-que-vos (c18#0)
+  - Yo haría un asado el domingo.
+  - I'd have a barbecue on Sunday.
+  - → **I'd have an asado on Sunday.**
+- `769a6913` yo-que-vos (c18#0)
+  - ¿Irías al asado de Diego?
+  - Would you go to Diego's barbecue?
+  - → **Would you go to Diego's asado?**
+- `a04e1af3` si-tuviera (c18#0)
+  - Si fuera domingo, haría un asado.
+  - If it were Sunday, I'd have a barbecue.
+  - → **If it were Sunday, I'd have an asado.**
+- `42adfae2` si-tuviera (c18#0)
+  - Si tuvieras tiempo el sábado, ¿irías al asado?
+  - If you had time on Saturday, would you go to the barbecue?
+  - → **If you had time on Saturday, would you go to the asado?**
+- `45f4dc77` me-gustaria (c18#0)
+  - ¿Te gustaría ir al asado del sábado?
+  - Would you like to go to the barbecue on Saturday?
+  - → **Would you like to go to the asado on Saturday?**
+- `37b8fe94` practica-si-ganara (c18#0)
+  - ¿Podrías traer hielo para el asado?
+  - Could you bring ice for the barbecue?
+  - → **Could you bring ice for the asado?**
+- `37c600eb` practica-si-ganara (c18#0, verify7)
+  - Mi viejo preferiría un asado antes que una pizza.
+  - My dad would rather have a barbecue than a pizza.
+  - → **My dad would rather have an asado than a pizza.**
+- `398d88e0` practica-si-ganara (c18#0, verify7)
+  - Si tuviéramos patio, haría un asado.
+  - If we had a yard, I'd have a barbecue.
+  - → **If we had a yard, I'd have an asado.**
+- `17ed7550` en-cuotas (c18#0)
+  - ¿Cuánto gastaste en el asado del sábado?
+  - How much did you spend on Saturday's barbecue?
+  - → **How much did you spend on Saturday's asado?**
+- `49f441c4` dicen-que (c18#0)
+  - ¿Llamaste a Mica para el asado del sábado?
+  - Did you call Mica about Saturday's barbecue?
+  - → **Did you call Mica about Saturday's asado?**
+- `1db0d14c` a-medias (c18#0)
+  - El kiosco de la esquina no cobra con débito.
+  - The kiosk on the corner doesn't take debit.
+  - → **The kiosco on the corner doesn't take debit.**
+- `11f4612c` si-tuviera (c18#0)
+  - Si tuviera veinte años otra vez, iría más al boliche.
+  - If I were twenty again, I'd go clubbing more.
+  - → **If I were twenty again, I'd go to the nightclub more.**
+- `17c764f2` en-cuotas (c18#0)
+  - Anoche gasté mucho en el boliche.
+  - Last night I spent a lot at the club.
+  - → **Last night I spent a lot at the nightclub.**
+- `5a867231` a-medias (c18#0)
+  - Si gastás menos en el boliche, te alcanza.
+  - If you spend less at the club, you'll have enough.
+  - → **If you spend less at the nightclub, you'll have enough.**
+- `9c4b3ab5` practica-me-dijo (c19#4)
+  - Cuando le toca lavar los platos, se hace el tonto.
+  - When it's his turn to wash the dishes, he plays dumb.
+  - → **When it's his turn to wash the dishes, he pretends not to notice.**
+- `861b1373` practica-me-dijo (c19#4)
+  - Me hice el tonto y no pagué.
+  - I played dumb and didn't pay.
+  - → **I pretended not to notice and didn't pay.**
+- `78853217` practica-a-medias (c19#4)
+  - Ayer manejé con lluvia y fue un garrón.
+  - Yesterday I drove in the rain and it was a pain.
+  - → **Yesterday I drove in the rain and it was annoying.**
+- `f5dd3142` me-pregunto (c19#5)
+  - De chico venía mucho a esta plaza.
+  - As a kid I used to come to this park a lot.
+  - → **As a kid I used to come to this square a lot.**
+- `2a34ec23` me-pregunto (c19#9)
+  - Sofi me contestó que venía con el novio.
+  - Sofi answered that she was coming with her boyfriend.
+  - → **Sofi told me she was coming with her boyfriend.**
+- `3f180ddd` me-pregunto (c19#9)
+  - Le pregunté si venía y contestó que no sabía.
+  - I asked him if he was coming and he answered that he didn't know.
+  - → **I asked him if he was coming and he said he didn't know.**
+- `e6081c0b` me-pregunto (c19#9)
+  - Me contestó que estaba ocupada.
+  - She answered that she was busy.
+  - → **She told me she was busy.**
+- `715e47b5` me-pregunto (c19#9)
+  - Me contestó que no podía.
+  - He answered that he couldn't.
+  - → **He told me he couldn't.**
+- `b80725e4` me-pregunto (c19#9)
+  - Nico contestó que tenía mucho laburo.
+  - Nico answered that he had a lot of work.
+  - → **Nico said he had a lot of work.**
+- `bae8d492` me-dijo-que (c19#9)
+  - ¿Qué le contestaste?
+  - What did you answer him?
+  - → **What did you say to him?**
+- `c0a25941` me-dijo-que (c19#9)
+  - Cuando Mati te invitó, ¿qué le contestaste?
+  - When Mati invited you, what did you answer him?
+  - → **When Mati invited you, what did you say to him?**
+- `1181ba08` me-pregunto (c19#9)
+  - Le contesté que queríamos pagar con tarjeta.
+  - I answered that we wanted to pay by card.
+  - → **I told him we wanted to pay by card.**
+- `113d4313` practica-me-dijo (c19#14)
+  - Me dijeron que ese lugar era inseguro, pero es tranquilo.
+  - They told me that place was unsafe, but it's calm and safe.
+  - → **They told me that place was unsafe, but it's quiet.**
+- `0064d8cb` practica-me-dijo (c19#15)
+  - La facu y la oficina quedan lejos, así que viajo mucho.
+  - The university and the office are far away, so I spend a lot of time traveling.
+  - → **The college and the office are far away, so I spend a lot of time getting there.**
+- `178f6eb4` me-pregunto (c19#21)
+  - ¿Fede vino al asado?
+  - Did Fede come to the barbecue?
+  - → **Did Fede come to the asado?**
+- `084f355c` practica-a-medias (c19#21)
+  - Todavía me debés lo del asado.
+  - You still owe me for the barbecue.
+  - → **You still owe me for the asado.**
+- `20d9290c` se-me-quemo (c19#21)
+  - Se nos acabó el carbón a mitad del asado.
+  - We ran out of charcoal halfway through the barbecue.
+  - → **We ran out of charcoal halfway through the asado.**
+- `a45e817c` se-me-quemo (c19#28)
+  - Anoche se me hizo tarde leyendo.
+  - I stayed up too late reading last night.
+  - → **Last night it got late while I was reading.**
+- `78bbd29b` se-me-quemo (c19#28)
+  - Me voy, se me hizo tarde.
+  - I'm off, I'm running late.
+  - → **I'm leaving, it got late.**
+- `f06403c0` se-me-quemo (c19#28, verify7)
+  - Se me hizo tarde en la oficina.
+  - I got held up at the office.
+  - → **It got late while I was at the office.**
+- `f204e3e9` se-me-quemo (c19#28)
+  - Se me hizo tarde y perdí el bondi.
+  - I lost track of time and missed the bus.
+  - → **It got late and I missed the bus.**
+- `139475e5` se-me-quemo (c19#28)
+  - Se me hizo tarde y no lavé las tazas.
+  - I lost track of time and didn't wash the mugs.
+  - → **It got late and I didn't wash the mugs.**
+- `744c650c` para-que (c19#31)
+  - Quiero terminar antes de que sea tarde.
+  - I want to finish before it gets late.
+  - → **I want to finish before it's too late.**
+- `06b30c6d` para-que (c19#32)
+  - Avisame para que sepa.
+  - Let me know so I know.
+  - → **Tell me, so I know.**
+- `56bcafec` no-me-alcanza (c19#47)
+  - Con este sueldo no llego a fin de mes.
+  - With this salary I don't make it to the end of the month.
+  - → **With this salary, my money doesn't last until the end of the month.**
+- `57efa5fd` no-me-alcanza (c19#47)
+  - No llego a fin de mes.
+  - I don't make it to the end of the month.
+  - → **My money doesn't last until the end of the month.**
+- `a3e7ea74` no-me-alcanza (c19#47)
+  - Nunca llego a fin de mes.
+  - I never make it to the end of the month.
+  - → **My money never lasts until the end of the month.**
+- `dff635b3` no-me-alcanza (c19#47)
+  - Si pago el alquiler, no llego a fin de mes.
+  - If I pay the rent, I don't make it to the end of the month.
+  - → **If I pay the rent, my money doesn't last until the end of the month.**
+- `b5d4d590` no-me-alcanza (c19#47)
+  - Igual llegamos a fin de mes.
+  - We make it to the end of the month anyway.
+  - → **Our money lasts until the end of the month anyway.**
+- `60edc618` no-me-alcanza (c19#47)
+  - No llegamos a fin de mes.
+  - We don't make it to the end of the month.
+  - → **Our money doesn't last until the end of the month.**
+- `ad444402` no-me-alcanza (c19#47)
+  - Si laburamos los dos, llegamos a fin de mes.
+  - If the two of us work, we make it to the end of the month.
+  - → **If the two of us work, our money lasts until the end of the month.**
+- `dca5c63b` no-me-alcanza (c19#47)
+  - Sin tu sueldo no llegamos a fin de mes.
+  - Without your salary we don't make it to the end of the month.
+  - → **Without your salary, our money doesn't last until the end of the month.**
+- `31294b9b` no-me-alcanza (c19#51)
+  - La fiesta fue un gasto bárbaro.
+  - The party was a tremendous expense.
+  - → **The party was a huge expense.**
+- `014bf0f3` no-me-alcanza (c19#52)
+  - ¿Viste que bajaron las frutillas en la verdulería?
+  - Did you see strawberries went down at the produce stand?
+  - → **Did you see strawberries went down at the produce store?**
+- `24c2a61a` cada-vez-mas (c19#57)
+  - Crecí acá; antes era tranquilo.
+  - I grew up here; before, it was quiet.
+  - → **I grew up here; it used to be quiet.**
+- `8bd68a18` cada-vez-mas (c19#57)
+  - Crecí en esta calle, antes no había tránsito.
+  - I grew up on this street; before, there was no traffic.
+  - → **I grew up on this street; there used to be no traffic.**
+- `06603933` cada-vez-mas (c19#57)
+  - Donde yo crecí antes había una plaza, ahora hay edificios.
+  - Where I grew up there was a square before; now there are buildings.
+  - → **Where I grew up there used to be a square; now there are buildings.**
+- `2ff80139` cada-vez-mas (c19#57)
+  - Antes era barato, ahora ya no.
+  - Before, it was cheap; now it isn't anymore.
+  - → **It used to be cheap; not anymore.**
+- `e06f4c40` cada-vez-mas (c19#57)
+  - Antes éramos vecinos, ahora ya no.
+  - Before, we were neighbors; now we aren't anymore.
+  - → **We used to be neighbors; not anymore.**
+- `b2e4730a` cada-vez-mas (c19#57)
+  - Antes jugaba al fútbol, ahora ya no juego.
+  - Before, I played soccer; now I don't play anymore.
+  - → **I used to play soccer; now I don't play anymore.**
+- `558b7b62` cada-vez-mas (c19#57)
+  - Antes tomaba mate amargo, ahora ya no.
+  - Before, I drank bitter mate; now I don't anymore.
+  - → **I used to drink bitter mate; not anymore.**
+- `66e33c40` cada-vez-mas (c19#57)
+  - Antes no había edificios acá.
+  - Before, there were no buildings here.
+  - → **There were no buildings here before.**
+- `da571846` cada-vez-mas (c19#57)
+  - Antes había una casa, ahora hay un edificio.
+  - Before, there was a house; now there's a building.
+  - → **There used to be a house; now there's a building.**
+- `10a8aec5` estas-cambiado (c19#62)
+  - Mi abuelo me dijo lo mismo: la ciudad está cambiada.
+  - My grandfather said the same thing to me: the city is all changed.
+  - → **My grandfather told me the same thing: the city has changed a lot.**
+- `0a710c62` ponele (c19#68)
+  - Dale, si querés.
+  - Sure, if you want.
+  - → **Sure, if you like.**
+- `ee71552d` ponele (c19#68)
+  - Si querés, compartimos una milanesa.
+  - We can share a milanesa if you want.
+  - → **We can share a milanesa if you like.**
+- `529cde51` ponele (c19#68)
+  - Si querés, mañana nos juntamos a tomar unos mates.
+  - If you want, we can get together for some mate tomorrow.
+  - → **If you like, we can get together for some mate tomorrow.**
+- `ae156888` ponele (c19#68)
+  - Si querés, pago yo.
+  - I'll pay if you want.
+  - → **I'll pay if you like.**
+- `06c22359` se-me-quemo (c19#0)
+  - Se me cayeron dos tazas.
+  - I dropped two cups.
+  - → **I dropped two mugs.**
+- `5dc8675b` se-me-quemo (c19#0)
+  - Se me cayó la taza.
+  - I dropped the cup.
+  - → **I dropped the mug.**
+- `03fd6c11` se-me-quemo (c19#0)
+  - Por suerte no se me mojó la compu.
+  - Luckily my laptop didn't get wet.
+  - → **Luckily my computer didn't get wet.**
+- `401f0031` ya-habia (c20#4)
+  - ¿Nunca habías comido un asado?
+  - You'd never had a barbecue?
+  - → **You'd never had an asado?**
+- `7fd92d09` no-anda (c20#12)
+  - Ayer reclamé y nada.
+  - I complained yesterday and got nothing.
+  - → **I filed a complaint yesterday and got nothing.**
+- `b23aa69a` no-anda (c20#12)
+  - Le reclamé a la empresa.
+  - I complained to the company.
+  - → **I filed a complaint with the company.**
+- `351e417c` no-anda (c20#12)
+  - Reclamé el lunes y todavía no anda el wifi.
+  - I complained on Monday and the wifi still doesn't work.
+  - → **I filed a complaint on Monday and the wifi still doesn't work.**
+- `104edd71` no-anda (c20#12)
+  - Reclamé en el aeropuerto porque no llegó mi valija.
+  - I complained at the airport because my suitcase didn't arrive.
+  - → **I filed a complaint at the airport because my suitcase didn't arrive.**
+- `875f3b56` no-anda (c20#12)
+  - Reclamé por el wifi.
+  - I complained about the wifi.
+  - → **I filed a complaint about the wifi.**
+- `455b5163` no-anda (c20#12)
+  - Ya reclamé en el banco.
+  - I already complained at the bank.
+  - → **I already filed a complaint at the bank.**
+- `650aea82` no-anda (c20#12)
+  - ¿Dónde puedo reclamar?
+  - Where can I make a complaint?
+  - → **Where can I file a complaint?**
+- `7f6c6773` no-anda (c20#12)
+  - Fui al banco a reclamar y había mucha gente.
+  - I went to the bank to complain and there were a lot of people.
+  - → **I went to the bank to file a complaint and there were a lot of people.**
+- `5be75595` no-anda (c20#12)
+  - Hay que reclamar en el banco.
+  - We have to complain at the bank.
+  - → **We have to file a complaint at the bank.**
+- `bdf770de` no-anda (c20#12)
+  - Mañana llamo a la empresa para reclamar.
+  - Tomorrow I'll call the company to complain.
+  - → **Tomorrow I'll call the company to file a complaint.**
+- `43102cda` no-anda (c20#12)
+  - No vale la pena reclamar.
+  - It's not worth complaining.
+  - → **It's not worth filing a complaint.**
+- `f7c2aa1a` no-anda (c20#12)
+  - Si no anda el wifi, tenés que reclamar.
+  - If the wifi doesn't work, you have to complain.
+  - → **If the wifi doesn't work, you have to file a complaint.**
+- `2d6b45b0` no-anda (c20#12)
+  - Voy a reclamar.
+  - I'm going to complain.
+  - → **I'm going to file a complaint.**
+- `747278e5` practica-tenes-razon (c20#12)
+  - Tendrías que reclamar en el banco.
+  - You should complain to the bank.
+  - → **You should file a complaint at the bank.**
+- `1996cae4` practica-nunca-habia (c20#19)
+  - No pasa un día sin que me llame mi vieja.
+  - Not a day passes without my mom calling me.
+  - → **Not a day goes by without my mom calling me.**
+- `00a6d309` que-susto (c20#23)
+  - De noche la plaza me da miedo.
+  - The park scares me at night.
+  - → **The square scares me at night.**
+- `911f401a` practica-nunca-habia (c20#24)
+  - No pasa un finde sin que hagamos un asado.
+  - Not a weekend goes by without us having a barbecue.
+  - → **Not a weekend goes by without us having an asado.**
+- `17de6d56` practica-tenes-razon (c20#24)
+  - Si ganamos el domingo, festejamos con un asado.
+  - If we win on Sunday, we'll celebrate with a barbecue.
+  - → **If we win on Sunday, we'll celebrate with an asado.**
+- `23bbf6b4` que-susto (c20#24)
+  - Me da miedo que llueva el día del asado.
+  - I'm worried it'll rain on the day of the barbecue.
+  - → **I'm worried it'll rain on the day of the asado.**
+- `951135fe` el-cajero (c20#24)
+  - ¿Me transferís veinte mil para el asado?
+  - Can you transfer me twenty thousand for the barbecue?
+  - → **Can you transfer me twenty thousand for the asado?**
+- `16c05406` tenes-razon (c20#24)
+  - Mati dice que el asado es caro, ¿vos qué opinás?
+  - Mati says the barbecue is expensive, what do you think?
+  - → **Mati says asado is expensive, what do you think?**
+- `99193d96` el-tecnico (c20#25)
+  - ¿Compraste pilas o voy yo al kiosco?
+  - Did you buy batteries or should I go to the kiosk?
+  - → **Did you buy batteries or should I go to the kiosco?**
+- `97124d59` practica-tenes-razon (c20#33)
+  - Yo opino lo mismo.
+  - I feel the same way.
+  - → **I think the same thing.**
+- `013eaea2` el-cajero (c20#41)
+  - ¿Quién te transfirió cincuenta mil pesos?
+  - Who sent you fifty thousand pesos?
+  - → **Who transferred you fifty thousand pesos?**
+- `55e90692` el-cajero (c20#41)
+  - ¿Tu hermana ya te transfirió lo del alquiler?
+  - Has your sister sent you her share of the rent yet?
+  - → **Has your sister transferred you her share of the rent yet?**
+- `3335f819` el-cajero (c20#41)
+  - Diego ya me transfirió.
+  - Diego already sent me the money.
+  - → **Diego already transferred me the money.**
+- `2561794d` el-cajero (c20#41)
+  - Mi viejo me transfirió para el alquiler.
+  - My dad sent me money for the rent.
+  - → **My dad transferred me money for the rent.**
+- `fbe99b0b` el-cajero (c20#41)
+  - Che, transferime lo del alquiler antes del viernes.
+  - Hey, send me the rent money before Friday.
+  - → **Hey, transfer me the rent money before Friday.**
+- `3f568be1` el-cajero (c20#41)
+  - Dale, transferime la mitad.
+  - Sure, just send me half.
+  - → **Sure, just transfer me half.**
+- `3c234e6a` el-cajero (c20#41)
+  - Pagué yo la pizza, transferime después.
+  - I paid for the pizza, send me your share later.
+  - → **I paid for the pizza, transfer me your share later.**
+- `26d0d493` el-cajero (c20#41)
+  - Transferime lo de la pizza.
+  - Send me your share for the pizza.
+  - → **Transfer me your share for the pizza.**
+- `69597a7e` el-cajero (c20#41)
+  - ¿A qué alias transferiste?
+  - Which alias did you send it to?
+  - → **Which alias did you transfer it to?**
+- `a95631c6` el-cajero (c20#41)
+  - ¿Ya me transferiste?
+  - Did you send me the money yet?
+  - → **Did you transfer me the money yet?**
+- `46f23c77` el-cajero (c20#41)
+  - Che, ¿le transferiste a Juli lo de la entrada?
+  - Hey, did you send Juli the money for the ticket?
+  - → **Hey, did you transfer Juli the money for the ticket?**
+- `296936e7` el-cajero (c20#41)
+  - Me transferiste de más.
+  - You sent me too much.
+  - → **You transferred me too much.**
+- `54403895` ya-habia (c20#0)
+  - Cuando llegué al asado, Cami ya se había ido.
+  - When I got to the barbecue, Cami had already left.
+  - → **When I got to the asado, Cami had already left.**
+- `54f91701` ya-habia (c20#0)
+  - Anoche Mati se fue del asado re tarde.
+  - Last night Mati left the barbecue really late.
+  - → **Last night Mati left the asado really late.**
+- `01b65c41` practica-nunca-habia (c20#0)
+  - Anoche fui a un boliche por primera vez.
+  - Last night I went to a club for the first time.
+  - → **Last night I went to a nightclub for the first time.**
+- `a6c5020f` que-susto (c20#0)
+  - El ascensor del depto me da un poco de miedo.
+  - The elevator in my building scares me a bit.
+  - → **The elevator in my apartment building scares me a bit.**
+- `0540eeba` me-dan-asco (c21#3)
+  - Salté arriba del sillón cuando vi la araña.
+  - I jumped up on the armchair when I saw the spider.
+  - → **I jumped up on the couch when I saw the spider.**
+- `ec253a06` costumbres (c21#12)
+  - Después del asado nos quedamos tres horas de sobremesa.
+  - After the barbecue we stayed at the table chatting for three hours.
+  - → **After the asado we stayed at the table chatting for three hours.**
+- `9bb872f0` se-aplaude-al-asador (c21#12)
+  - Es típico llegar tarde a un asado.
+  - It's typical to arrive late to a barbecue.
+  - → **It's typical to arrive late to an asado.**
+- `80b49a2d` se-aplaude-al-asador (c21#12)
+  - ¿Soy maleducada si no como carne en el asado?
+  - Am I rude if I don't eat meat at the barbecue?
+  - → **Am I rude if I don't eat meat at the asado?**
+- `e644b757` acabo-de (c21#12)
+  - Los domingos suelo comer asado.
+  - On Sundays I usually eat barbecue.
+  - → **On Sundays I usually eat asado.**
+- `0a1c4499` acabo-de (c21#12)
+  - Los domingos solemos hacer asado.
+  - On Sundays we usually have a barbecue.
+  - → **On Sundays we usually have an asado.**
+- `919ae2fd` deje-de-fumar (c21#12)
+  - Para mi viejo, un pucho después del asado es lo mejor.
+  - For my dad, a cigarette after the barbecue is the best.
+  - → **For my dad, a cigarette after the asado is the best.**
+- `eef4888d` queria-que-vinieras (c21#12)
+  - Cami quería que le avisaras del asado.
+  - Cami wanted you to let her know about the barbecue.
+  - → **Cami wanted you to let her know about the asado.**
+- `368dcd7a` queria-que-vinieras (c21#12)
+  - Juan te pidió que vinieras al asado.
+  - Juan asked you to come to the barbecue.
+  - → **Juan asked you to come to the asado.**
+- `c64af414` mis-viejos-querian (c21#12)
+  - ¿Querían que fueras al asado?
+  - Did they want you to go to the barbecue?
+  - → **Did they want you to go to the asado?**
+- `4474b90a` mis-viejos-querian (c21#12)
+  - Mamá quería que vinieran todos al asado del domingo.
+  - Mom wanted everyone to come to the barbecue on Sunday.
+  - → **Mom wanted everyone to come to the asado on Sunday.**
+- `cd1d3f6c` aunque-llueva (c21#12)
+  - A pesar de la lluvia, el asado estuvo bárbaro.
+  - Despite the rain, the barbecue was great.
+  - → **Despite the rain, the asado was great.**
+- `8ac5dd39` aunque-no-tenga-ganas (c21#12)
+  - Con tanto asado, ¿cómo no vas a engordar?
+  - With all these barbecues, how could you not put on weight?
+  - → **With so much asado, how could you not put on weight?**
+- `8fdf356b` practica-un-aplauso (c21#13)
+  - El asador ya se comió un chorizo.
+  - The grill master already ate a chorizo.
+  - → **The grill master already ate a sausage.**
+- `da4ff180` practica-un-aplauso (c21#13)
+  - Si alguien trae chorizo, yo pongo el pan.
+  - If someone brings chorizo, I'll bring the bread.
+  - → **If someone brings sausage, I'll bring the bread.**
+- `a3b4d507` deje-de-fumar (c21#31)
+  - Llegué a casa y me puse a laburar.
+  - I got home and got to work.
+  - → **I got home and started working.**
+- `f5eb293a` deje-de-fumar (c21#32)
+  - Volvimos a salir.
+  - We started going out again.
+  - → **We went out again.**
+- `620f3aa2` acabo-de (c21#64)
+  - Los domingos solemos hacer asado.
+  - On Sundays we usually have a barbecue.
+  - → **On Sundays we usually have an asado.**
+- `486877df` no-sabes-lo-que-me-contaron (c21#65)
+  - Mirá vos, al final Santi y Mica están saliendo.
+  - Huh, Santi and Mica are dating after all.
+  - → **Wow, Santi and Mica are dating after all.**
+- `645b4c43` no-sabes-lo-que-me-contaron (c21#65)
+  - Mirá vos, Juli se mudó.
+  - Huh, Juli moved out.
+  - → **Wow, Juli moved out.**
+- `902ce16b` no-sabes-lo-que-me-contaron (c21#65)
+  - Mirá vos, Martín ahora cocina.
+  - Huh, Martín cooks now.
+  - → **Wow, Martín cooks now.**
+- `379c2f3e` no-sabes-lo-que-me-contaron (c21#72)
+  - ¡Callate! ¿Cortaron después de diez años?
+  - Shut up! They broke up after ten years?
+  - → **No way! They broke up after ten years?**
+- `0da36a5e` no-sabes-lo-que-me-contaron (c21#72)
+  - ¿La engañó? ¡No me digas!
+  - He cheated on her? You're kidding!
+  - → **He cheated on her? No way!**
+- `0c0a31b5` deje-de-fumar (c21#0)
+  - Compré puchos en el kiosco.
+  - I bought cigarettes at the kiosk.
+  - → **I bought cigarettes at the kiosco.**
+- `4daabc0e` practica-un-aplauso (c21#0)
+  - En el kiosco de la esquina no toman débito.
+  - The kiosk on the corner doesn't take debit.
+  - → **The kiosco on the corner doesn't take debit.**
+- `c2729fd7` costumbres (c21#0)
+  - Me quedé en la previa y no fui al boliche.
+  - I stayed at the pre-party and didn't go to the club.
+  - → **I stayed at the pre-party and didn't go to the nightclub.**
+- `88808e8c` costumbres (c21#0)
+  - Primero la previa, después el boliche.
+  - First the pre-party, then the club.
+  - → **First the pre-party, then the nightclub.**
+- `d028fb00` mis-viejos-querian (c21#0)
+  - Mamá no me dio permiso para ir al boliche.
+  - Mom didn't give me permission to go to the club.
+  - → **Mom didn't give me permission to go to the nightclub.**
+- `d5525cd9` me-dan-asco (c21#0)
+  - —¿Qué preferís, arañas o cucarachas? —Arañas, mil veces.
+  - Which would you rather have, spiders or cockroaches? —Spiders, any day.
+  - → **—Which would you rather have, spiders or cockroaches? —Spiders, a thousand times.**
+- `8088c67c` me-dan-asco (c21#0)
+  - —¿Por qué no alquilás ese depto? —Por las cucarachas.
+  - Why aren't you renting that apartment? —Because of the cockroaches.
+  - → **—Why aren't you renting that apartment? —Because of the cockroaches.**
+- `4bc59d8f` me-dan-asco (c21#0)
+  - —¿Vamos a bailar? —No, me da vergüenza.
+  - Want to dance? —No, I'm too embarrassed.
+  - → **—Want to dance? —No, I'm too embarrassed.**
+- `4e01ea0a` me-dan-asco (c21#0)
+  - —¿Dónde está la araña? —Atrás de la puerta.
+  - Where's the spider? —Behind the door.
+  - → **—Where's the spider? —Behind the door.**
+- `6ce9c2fc` me-dan-asco (c21#0)
+  - —¿Qué pasó? —Una cucaracha, nada más.
+  - What happened? —Just a cockroach.
+  - → **—What happened? —Just a cockroach.**
+- `cdd04c7a` llevo-un-ano-aprendiendo (c22#2)
+  - —¿Hace cuánto practicás? —Un año, y voy mejorando.
+  - "How long have you been practicing?" "A year, and I'm getting better."
+  - → **—How long have you been practicing? —A year, and I'm getting better.**
+- `6273853d` llevo-un-ano-aprendiendo (c22#2)
+  - —¿Por qué seguís estudiando? —Para mejorar.
+  - "Why are you still studying?" "To get better."
+  - → **—Why are you still studying? —To get better.**
+- `6224e0c7` llevo-un-ano-aprendiendo (c22#7)
+  - Mañana seguimos.
+  - We'll pick this up tomorrow.
+  - → **We'll continue tomorrow.**
+- `365b6306` practica-aunque-sea (c22#13)
+  - ¿Seguimos mañana?
+  - Should we pick this up tomorrow?
+  - → **Should we continue tomorrow?**
+- `1105fc22` como-si-nada (c22#21)
+  - ¡Ni que supiera cocinar!
+  - It's not like I know how to cook!
+  - → **It's not like he knows how to cook!**
+- `f66f262e` no-te-hagas-el-gil (c22#26, verify8)
+  - El caradura llegó tarde y se hizo el enojado.
+  - The shameless guy showed up late and acted offended.
+  - → **The shameless guy showed up late and acted angry.**
+- `db2fe400` la-ventaja-es-que (c22#30)
+  - —¿Por qué no? —Más que nada por el sueldo.
+  - "Why not?" "Mainly because of the pay."
+  - → **—Why not? —Mainly because of the pay.**
+- `3dc5d136` no-te-hagas-el-gil (c22#31)
+  - Llegó tarde, como si no pasara nada.
+  - He showed up late, as if nothing was happening.
+  - → **He showed up late, as if nothing was going on.**
+- `0a85a431` el-que-quieras (c22#34)
+  - Elegí la que quieras.
+  - Pick the one you want.
+  - → **Pick whichever one you want.**
+- `22278efb` el-que-quieras (c22#34)
+  - Llevá la que quieras.
+  - Take the one you want.
+  - → **Take whichever one you want.**
+- `4cef743c` el-que-quieras (c22#34)
+  - Tomá el que quieras.
+  - Take the one you want.
+  - → **Take whichever one you want.**
+- `a2e2009e` el-que-quieras (c22#34)
+  - Comprá las que quieras.
+  - Buy the ones you want.
+  - → **Buy whichever ones you want.**
+- `19c5eda9` el-que-quieras (c22#34)
+  - Elegí los que quieras, pago yo.
+  - Pick the ones you want, I'm paying.
+  - → **Pick whichever ones you want, I'm paying.**
+- `396ae62d` practica-a-la-mesa (c22#45)
+  - Prueben con dulce de leche, es otra cosa.
+  - Try it with dulce de leche, it's a whole different thing.
+  - → **Try it with dulce de leche, it's so much better.**
+- `569ed57d` por-un-lado (c22#56)
+  - Este depto es caro; ese, en cambio, es barato.
+  - This apartment is expensive; that one, on the other hand, is cheap.
+  - → **This apartment is expensive, but that one is cheap.**
+- `8a9dbadf` por-un-lado (c22#56)
+  - Mi hermano es alto; yo, en cambio, soy petiso.
+  - My brother is tall; I, on the other hand, am short.
+  - → **My brother is tall, but I'm short.**
+- `5cd7b5d9` por-un-lado (c22#56)
+  - Pablo siempre llega tarde; Juli, en cambio, no.
+  - Pablo always arrives late; Juli, on the other hand, doesn't.
+  - → **Pablo always arrives late, but Juli doesn't.**
+- `72f693bc` por-un-lado (c22#56)
+  - Palermo es caro; San Telmo, en cambio, no.
+  - Palermo is expensive; San Telmo, on the other hand, isn't.
+  - → **Palermo is expensive, but San Telmo isn't.**
+- `05ca8939` por-un-lado (c22#56)
+  - Vos sos argentino; yo, en cambio, no.
+  - You're Argentinian; I, on the other hand, am not.
+  - → **You're Argentinian, but I'm not.**
+- `1dd5e1b0` por-un-lado (c22#56)
+  - Yo laburo; vos, en cambio, estudiás.
+  - I work; you, on the other hand, study.
+  - → **I work, but you study.**
+- `65e3fb78` practica-migraciones (c22#56)
+  - Acá te atienden rápido; allá, en cambio, no.
+  - Here they see you fast; over there, on the other hand, they don't.
+  - → **Here they see you fast, but over there they don't.**
+- `5009d76f` practica-migraciones (c22#56)
+  - Ayer llovió; hoy, en cambio, hay sol.
+  - Yesterday it rained; today, on the other hand, it's sunny.
+  - → **Yesterday it rained, but today it's sunny.**
+- `9ecb0c6f` practica-migraciones (c22#56)
+  - El colectivo tarda; el subte, en cambio, es rápido.
+  - The bus is slow; the subway, on the other hand, is fast.
+  - → **The bus is slow, but the subway is fast.**
+- `454f2f70` practica-migraciones (c22#56)
+  - El DNI demoró una semana; el pasaporte, en cambio, un mes.
+  - The ID took a week; the passport, on the other hand, took a month.
+  - → **The ID took a week, but the passport took a month.**
+- `ea097837` practica-migraciones (c22#56)
+  - El vuelo llegó a horario; la valija, en cambio, no.
+  - The flight arrived on schedule; the suitcase, on the other hand, didn't.
+  - → **The flight arrived on schedule, but the suitcase didn't.**
+- `6b70b5c2` practica-migraciones (c22#56)
+  - Me gusta el invierno; a Diego, en cambio, no.
+  - I like winter; Diego, on the other hand, doesn't.
+  - → **I like winter, but Diego doesn't.**
+- `f3ed0caa` practica-migraciones (c22#56)
+  - Mis viejos son de Córdoba; yo, en cambio, soy porteño.
+  - My parents are from Córdoba; I, on the other hand, am from Buenos Aires.
+  - → **My parents are from Córdoba, but I'm from Buenos Aires.**
+- `54ba73e5` practica-migraciones (c22#56)
+  - Vos estudiás; yo, en cambio, laburo.
+  - You study; I, on the other hand, work.
+  - → **You study, but I work.**
+- `9a61f03b` por-un-lado (c22#59)
+  - El sueldo me convence, el horario no.
+  - I'm convinced by the salary, not the schedule.
+  - → **I'm happy with the salary, but not the schedule.**
+- `6d375a4e` la-ventaja-es-que (c22#60)
+  - Te conviene ir en subte.
+  - You'd better take the subway.
+  - → **It's better for you to go by subway.**
+- `94842bf4` practica-migraciones (c22#66)
+  - Piden un montón de requisitos.
+  - They ask for a lot of requirements.
+  - → **They have a lot of requirements.**
+- `d7d43703` practica-migraciones (c22#67)
+  - ¿Desde cuándo está vencido?
+  - Since when has it been expired?
+  - → **How long has it been expired?**
+- `e2f8a58c` el-que-quieras (c22#0)
+  - El boliche donde nos conocimos está cerrado.
+  - The club where we met is closed.
+  - → **The nightclub where we met is closed.**
+- `461dd45f` practica-a-la-mesa (c22#0)
+  - Si van al asado, no se olviden del carbón.
+  - If you're going to the barbecue, don't forget the charcoal.
+  - → **If you're going to the asado, don't forget the charcoal.**
+- `f5c142af` practica-a-la-mesa (c22#0)
+  - Traigan lo que quieran para el asado.
+  - Bring whatever you want for the barbecue.
+  - → **Bring whatever you want for the asado.**
+- `7620bde7` si-hubiera-sabido (c22#0)
+  - Ojalá hubieras venido al asado.
+  - I wish you had come to the barbecue.
+  - → **I wish you had come to the asado.**
+- `db724122` practica-migraciones (c22#0)
+  - Me conviene vivir cerca de la facu.
+  - It's better for me to live near campus.
+  - → **It's better for me to live near college.**
+- `0fdee7da` practica-a-la-mesa (c22#0)
+  - Pasen y sírvanse, que la picada está en la mesa.
+  - Come in and help yourselves, the snacks are on the table.
+  - → **Come in and help yourselves, the picada is on the table.**
+- `6bbd8030` practica-a-la-mesa (c22#0)
+  - Le presté mi compu para que estudiara.
+  - I lent him my laptop so he could study.
+  - → **I lent him my computer so he could study.**
+- `3072b36d` te-doy-la-razon (c23#3)
+  - En eso te doy la razón.
+  - I'll give you that.
+  - → **You're right about that.**
+- `54ed2a11` te-doy-la-razon (c23#3)
+  - Te lo reconozco.
+  - I'll give you that.
+  - → **I admit it.**
+- `12cf79e7` te-doy-la-razon (c23#3)
+  - Bueno, a ver, te doy la razón en eso.
+  - Well, look, I'll give you that.
+  - → **Well, let's see, you're right about that.**
+- `a67ec330` te-doy-la-razon (c23#6)
+  - Anoche discutimos hasta tarde con Diego.
+  - Last night we argued with Diego until late.
+  - → **Diego and I argued until late last night.**
+- `b7f434bd` conoces-a-alguien-que (c23#14)
+  - ¿Tenés alguna amiga que sepa de plantas?
+  - Do you have any friend who knows about plants?
+  - → **Do you have a friend who knows about plants?**
+- `f2ad78c6` practica-alguien-que-sepa (c23#17)
+  - El tránsito me pone nervioso.
+  - Traffic makes me nervous.
+  - → **Traffic stresses me out.**
+- `bf681c10` me-pone-nervioso-que (c23#22)
+  - Me molesta que la profe cancele tanto.
+  - It bugs me that the teacher cancels so much.
+  - → **It bothers me that the teacher cancels so much.**
+- `ddaf4662` practica-alguien-que-sepa (c23#22)
+  - Me molesta que no comparta nada.
+  - It bugs me that he doesn't share anything.
+  - → **It bothers me that he doesn't share anything.**
+- `10d6e9cf` practica-alguien-que-sepa (c23#22)
+  - No sé por qué, pero ese tema me pone mal.
+  - I don't know why, but that subject really gets to me.
+  - → **I don't know why, but that subject upsets me.**
+- `d33f305b` deberias-tomarte-unos-dias (c23#31)
+  - Estoy quemada, hoy no salgo.
+  - I'm burned out, I'm not going out today.
+  - → **I'm exhausted, I'm not going out today.**
+- `52ebbb0c` practica-alguien-que-sepa (c23#31)
+  - Estoy quemado, me voy a dormir.
+  - I'm burned out, I'm going to bed.
+  - → **I'm exhausted, I'm going to bed.**
+- `40869465` practica-alguien-que-sepa (c23#33)
+  - Estaría bueno que vengas.
+  - It'd be great if you came.
+  - → **It would be nice if you came.**
+- `bbfccc3e` practica-alguien-que-sepa (c23#35)
+  - ¿Hay algún kiosco abierto por acá?
+  - Is there a kiosk open around here?
+  - → **Is there a kiosco open around here?**
+- `19e66b9a` a-menos-que (c23#44)
+  - ¿Y en caso de que no puedas?
+  - And in case you can't?
+  - → **And what if you can't?**
+- `84e79a63` te-doy-la-razon (c23#60)
+  - A ver, ¿qué pasó?
+  - OK, what happened?
+  - → **Let's see, what happened?**
+- `fd2dba1b` te-doy-la-razon (c23#60)
+  - Pensándolo bien, ¿no te conviene el tren?
+  - Come to think of it, wouldn't the train be better for you?
+  - → **On second thought, wouldn't the train be better for you?**
+- `e2a8f28d` te-doy-la-razon (c23#0)
+  - Tenés que reconocer que el asado estuvo bárbaro.
+  - You have to admit the barbecue was great.
+  - → **You have to admit the asado was great.**
+- `badd3ac0` me-pone-nervioso-que (c23#0)
+  - ¿Canceló el asado? ¡Qué garrón!
+  - He canceled the barbecue? How annoying!
+  - → **He canceled the asado? How annoying!**
+- `fb33d31f` deberias (c23#0)
+  - Estaría bueno hacer un asado el sábado.
+  - It would be nice to have a barbecue on Saturday.
+  - → **It would be nice to have an asado on Saturday.**
+- `140d3bb7` practica-alguien-que-sepa (c23#0)
+  - Deberíamos hacer un asado este finde.
+  - We should have a barbecue this weekend.
+  - → **We should have an asado this weekend.**
+- `8cab4b37` practica-se-aceptan-tarjetas (c24#5)
+  - Esas cosas se hacen en la ventanilla dos.
+  - That's handled at window two.
+  - → **Those things are done at window two.**
+- `2ef75726` ando-buscando (c24#13)
+  - Ando sin plata.
+  - I have no money.
+  - → **I've had no money lately.**
+- `c75b63d1` ando-buscando (c24#14)
+  - Ando buscando laburo.
+  - I'm looking for work.
+  - → **I've been looking for work.**
+- `1d10412b` ando-buscando (c24#14, verify9)
+  - Ando buscando un regalo para Mica, ¿alguna idea?
+  - I'm looking for a present for Mica, any ideas?
+  - → **I've been looking for a present for Mica, any ideas?**
+- `18e11cbd` ando-buscando (c24#14, verify9)
+  - Ando pensando en anotarme en el gimnasio.
+  - I'm thinking about signing up at the gym.
+  - → **I've been thinking about signing up at the gym.**
+- `0c475cf0` practica-no-lo-aguanto (c24#20, verify9)
+  - Estuve a punto de decir que no.
+  - I was just about to say no.
+  - → **I was about to say no.**
+- `03683c78` ni-ahi (c24#29)
+  - El árbitro hizo cualquiera en el partido.
+  - The referee did ridiculous things in the game.
+  - → **The referee got everything wrong in the game.**
+- `07a7ac0b` ese-chabon (c24#33)
+  - ¡Qué bardo hay en el subte!
+  - What a mess there is on the subway!
+  - → **What a mess on the subway!**
+- `0a6d9a42` ese-chabon (c24#33)
+  - Mirá el bardo que hay en la avenida.
+  - Look at the mess there is on the avenue.
+  - → **Look at the mess on the avenue.**
+- `75397fb2` ese-chabon (c24#34)
+  - Todo bien con el chabón, pero es medio pesado.
+  - The guy's fine, but he's kind of annoying.
+  - → **I've got nothing against the guy, but he's kind of annoying.**
+- `eff81775` estoy-al-horno (c24#37)
+  - Estoy al horno con el examen.
+  - I'm in deep trouble with the exam.
+  - → **I'm in big trouble with the exam.**
+- `62dbfe38` estoy-al-horno (c24#37)
+  - Perdí las llaves, estoy al horno.
+  - I lost the keys, I'm done for.
+  - → **I lost the keys, I'm in big trouble.**
+- `c89d2433` estoy-al-horno (c24#38)
+  - Estoy al pedo, qué bajón.
+  - I've got nothing to do, what a downer.
+  - → **I've got nothing to do, what a shame.**
+- `2dd6cf6c` estoy-al-horno (c24#40, verify9)
+  - ¿Me hacés la gamba y venís conmigo al médico?
+  - Will you be there for me and come with me to the doctor?
+  - → **Will you do me a favor and come with me to the doctor?**
+- `6bc9eca9` puteadas (c24#44)
+  - Qué cagada que no puedas venir al asado.
+  - It sucks that you can't come to the barbecue.
+  - → **It sucks that you can't come to the asado.**
+- `d930f78a` me-pidio-que (c24#44)
+  - Insisto en que vengas al asado del sábado.
+  - I insist that you come to the barbecue on Saturday.
+  - → **I insist that you come to the asado on Saturday.**
+- `f19739bc` me-pidio-que (c24#44)
+  - Nico sugirió que trajera vino para el asado.
+  - Nico suggested that I bring wine for the barbecue.
+  - → **Nico suggested that I bring wine for the asado.**
+- `e55316d8` puteadas (c24#45)
+  - ¿Pagar yo? ¡Andá a cagar!
+  - Me, pay? No way, get out of here!
+  - → **Me, pay? Go to hell!**
+- `b2ec728a` caiste (c24#52)
+  - ¿Se picó? Pero si era en joda.
+  - He got touchy? But it was a joke.
+  - → **It got heated? But it was a joke.**
+- `21a2c864` caiste (c24#52)
+  - Uy, se picó.
+  - Uh-oh, he got touchy.
+  - → **Uh-oh, it got heated.**
+- `8c4191f5` caiste (c24#57)
+  - ¡Caíste otra vez!
+  - You believed it again!
+  - → **Got you again!**
+- `b30ddbe1` caiste (c24#57)
+  - ¡Caíste! Era en joda.
+  - You believed it! It was a joke.
+  - → **Got you! It was a joke.**
+- `b1600a99` me-encargo-que (c24#64)
+  - Portate bien y después vamos a la plaza.
+  - Be good and then we'll go to the plaza.
+  - → **Be good and then we'll go to the square.**
+- `64ab08d7` practica-no-lo-aguanto (c24#0, verify9)
+  - Con Santi nos hicimos amigos en un asado.
+  - Santi and I became friends at a barbecue.
+  - → **Santi and I became friends at an asado.**
+- `c879b608` que-novedad (c24#0)
+  - El asado estuvo impecable, Santi.
+  - The barbecue was perfect, Santi.
+  - → **The asado was perfect, Santi.**
+- `2fc62c38` ese-chabon (c24#0)
+  - Ese asado estuvo groso.
+  - That barbecue was awesome.
+  - → **That asado was awesome.**
+- `b7269789` ese-chabon (c24#0)
+  - Traigo birra para el asado.
+  - I'll bring beer for the barbecue.
+  - → **I'll bring beer for the asado.**
+- `c69fac05` ese-chabon (c24#0)
+  - Anoche tuve bardo con un chabón en el boliche.
+  - Last night I had trouble with a guy at the club.
+  - → **Last night I had trouble with a guy at the nightclub.**
+- `c3dd54ce` estoy-al-horno (c24#0)
+  - Ese boliche es muy careta.
+  - That club is really snobby.
+  - → **That nightclub is really snobby.**
+- `6d306cfd` ando-buscando (c24#0)
+  - ¿Cuándo arranca la facu?
+  - When do classes start?
+  - → **When does college start?**
+- `8f0c1f40` estoy-al-horno (c24#0)
+  - Siempre me hacés la gamba, gracias.
+  - You always have my back, thanks.
+  - → **You're always there for me, thanks.**
+- `5c439868` fijate-si-tienen (c25#2)
+  - Hay que consultar en la ventanilla.
+  - You have to ask at the window.
+  - → **You have to ask at the counter.**
+- `b15934ac` practica-como-no (c25#7)
+  - ¡Cómo no, pasá!
+  - Certainly, come in!
+  - → **Of course, come in!**
+- `d3ecdb8a` practica-como-no (c25#7)
+  - Cómo no, sentate.
+  - Certainly, sit down.
+  - → **Of course, sit down.**
+- `c664a598` practica-como-no (c25#7)
+  - Cómo no, te espero acá.
+  - Certainly, I'll wait for you here.
+  - → **Of course, I'll wait for you here.**
+- `9011480d` cualquier-cosa-avisame (c25#16)
+  - ¿Dónde dejo el CV?
+  - Where do I leave my résumé?
+  - → **Where do I leave my CV?**
+- `45ebc187` cualquier-cosa-avisame (c25#16)
+  - ¿Me enviás tu CV por mail?
+  - Can you send me your résumé by email?
+  - → **Can you send me your CV by email?**
+- `179c17c5` cualquier-cosa-avisame (c25#16)
+  - Dejé el CV en tres bares de Palermo.
+  - I left my résumé at three bars in Palermo.
+  - → **I left my CV at three bars in Palermo.**
+- `d10755a3` cualquier-cosa-avisame (c25#16)
+  - Hola, Cami: te envié el CV.
+  - Hi, Cami: I sent you the résumé.
+  - → **Hi, Cami: I sent you the CV.**
+- `8ea5f046` cualquier-cosa-avisame (c25#16)
+  - Perdón, ayer no adjunté el CV.
+  - Sorry, I didn't attach the résumé yesterday.
+  - → **Sorry, I didn't attach the CV yesterday.**
+- `4e799eec` te-reenvio-el-archivo (c25#19)
+  - Los pendientes los hablamos el lunes.
+  - We'll talk about the to-dos on Monday.
+  - → **We'll talk about the pending tasks on Monday.**
+- `0be723de` la-entrega (c25#21)
+  - ¿A qué hora es la entrega?
+  - What time is the delivery?
+  - → **What time is the deadline?**
+- `2f102930` la-entrega (c25#21)
+  - El jefe pasó la entrega para el lunes.
+  - The boss moved the delivery to Monday.
+  - → **The boss moved the deadline to Monday.**
+- `a6c01d96` la-entrega (c25#21)
+  - Estamos atrasados y la entrega es pasado mañana.
+  - We're behind schedule and the delivery is the day after tomorrow.
+  - → **We're behind schedule and the deadline is the day after tomorrow.**
+- `64d915f5` la-entrega (c25#21)
+  - La entrega es mañana temprano.
+  - The delivery is early tomorrow.
+  - → **The deadline is early tomorrow.**
+- `50f1c669` se-merece-el-ascenso (c25#37)
+  - Laburamos un montón, nos lo merecemos.
+  - We work a lot, we deserve it.
+  - → **We worked a lot, we deserve it.**
+- `a0807d05` se-merece-el-ascenso (c25#38)
+  - En la evaluación pedí un ajuste por inflación.
+  - In my review I asked for an inflation adjustment.
+  - → **In my evaluation I asked for an inflation adjustment.**
+- `1bc2bf7d` para-colmo (c25#44)
+  - ¿A quién despidieron?
+  - Who got laid off?
+  - → **Who got fired?**
+- `030c80ab` para-colmo (c25#44)
+  - ¿Es verdad que despidieron al gerente?
+  - Is it true that they let the manager go?
+  - → **Is it true that they fired the manager?**
+- `239fdcb5` para-colmo (c25#44)
+  - Martín está tranquilo, aunque lo despidieron el lunes.
+  - Martín is doing OK, even though he got laid off on Monday.
+  - → **Martín is doing OK, even though he got fired on Monday.**
+- `a2504f60` para-colmo (c25#44)
+  - Me despidieron ayer.
+  - I got laid off yesterday.
+  - → **I got fired yesterday.**
+- `4ee47fa6` para-colmo (c25#45)
+  - Nico me llamó de la nada.
+  - Nico called me out of the blue.
+  - → **Nico called me out of nowhere.**
+- `18df93fa` se-la-cree (c25#48)
+  - Con este frío no me la banco.
+  - I can't handle this cold.
+  - → **I can't handle it in this cold.**
+- `e9780c46` se-la-cree (c25#50)
+  - La verdad, esta semana no me la banco más.
+  - To be honest, I can't handle it anymore this week.
+  - → **To be honest, this week I can't handle it anymore.**
+- `9eea1a54` se-la-cree (c25#53)
+  - Mirá vos, la tenés clara.
+  - Would you look at that, you know your stuff.
+  - → **Look at you, you know your stuff.**
+- `5bce288c` practica-me-la-jugue (c25#62)
+  - Para colmo, me quedé sin batería.
+  - On top of that, my phone died.
+  - → **On top of that, my battery died.**
+- `bd68761a` practica-me-la-jugue (c25#64)
+  - Laburaba tranquilo y de golpe me echaron.
+  - I was working calmly and all of a sudden they fired me.
+  - → **I was working with no problems and all of a sudden they fired me.**
+- `48ab4454` practica-me-la-jugue (c25#65)
+  - Nos enteramos de la noticia anoche.
+  - We found out the news last night.
+  - → **We heard the news last night.**
+- `60ded9bc` practica-me-la-jugue (c25#0)
+  - Se cortó la luz y, para colmo, llovía.
+  - The power went out and, to make things worse, it was raining.
+  - → **The power went out and, on top of that, it was raining.**
+- `7f19f19e` estoy-podrido (c26#4)
+  - ¡Esto es el colmo!
+  - This is the last straw!
+  - → **This is too much!**
+- `0828c975` estoy-podrido (c26#4)
+  - Es el colmo.
+  - It's the last straw.
+  - → **It's too much.**
+- `083ae637` me-pudri (c26#7)
+  - No quiero renegar más.
+  - I don't want to struggle anymore.
+  - → **I don't want to deal with this anymore.**
+- `76296632` me-pudri (c26#8)
+  - Reniego con mi hijo.
+  - I struggle with my son.
+  - → **I lose my patience with my son.**
+- `b5335aca` hay-paro (c26#26)
+  - Con este corte, llego tarde seguro.
+  - With this roadblock, I'm definitely going to be late.
+  - → **With this road closure, I'm definitely going to be late.**
+- `7a91589e` hay-paro (c26#26)
+  - Hay corte en la ruta.
+  - There's a roadblock on the highway.
+  - → **There's a road closure on the highway.**
+- `c2a4b3b1` hay-paro (c26#26)
+  - Por el corte, tomé otro colectivo.
+  - Because of the roadblock, I took another bus.
+  - → **Because of the road closure, I took another bus.**
+- `33769a80` practica-el-cuarto-oscuro (c26#26)
+  - Desvíos por el piquete.
+  - Detours because of the roadblock.
+  - → **Detours because of the road blockade.**
+- `996cffee` paro-docente (c26#30)
+  - ¿El paro? Ya se levantó.
+  - The strike? It was already lifted.
+  - → **The strike? It already ended.**
+- `ce8aa7fc` paro-docente (c26#30)
+  - ¿Se levantó el paro docente?
+  - Was the teachers' strike lifted?
+  - → **Did the teachers' strike end?**
+- `003c9698` paro-docente (c26#30)
+  - Se levantó el paro, así que hay clases.
+  - The strike was lifted, so there are classes.
+  - → **The strike ended, so there are classes.**
+- `569e9f63` paro-docente (c26#30)
+  - Se levantó el paro.
+  - The strike was lifted.
+  - → **The strike ended.**
+- `b1844434` practica-el-cuarto-oscuro (c26#42)
+  - Boliche clausurado en Palermo.
+  - Club shut down in Palermo.
+  - → **Nightclub closed down in Palermo.**
+- `211bfd26` practica-el-cuarto-oscuro (c26#42)
+  - El boliche fue clausurado porque no tenía permiso.
+  - The club was shut down because it didn't have a permit.
+  - → **The nightclub was closed down because it didn't have a permit.**
+- `48834d90` practica-el-cuarto-oscuro (c26#42)
+  - ¿Clausurado? ¿Por qué?
+  - Shut down? Why?
+  - → **Closed down? Why?**
+- `e6081a97` practica-el-cuarto-oscuro (c26#42)
+  - ¿Hace cuánto está clausurado el gimnasio?
+  - How long has the gym been shut down?
+  - → **How long has the gym been closed down?**
+- `48eee204` practica-el-cuarto-oscuro (c26#42)
+  - El local fue clausurado.
+  - The store was shut down.
+  - → **The store was closed down.**
+- `3ede02f9` fue-clausurado (c26#42)
+  - La obra de la avenida fue clausurada por el ruido.
+  - The construction site on the avenue was shut down because of the noise.
+  - → **The construction site on the avenue was closed down because of the noise.**
+- `e86394a4` las-elecciones (c26#46)
+  - ¿A quién votaste para presidente?
+  - Who did you vote for for president?
+  - → **Who did you vote for as president?**
+- `789671d3` practica-el-cuarto-oscuro (c26#50, verify9)
+  - Las bicis de la plaza no funcionan desde el lunes.
+  - The bikes at the plaza haven't worked since Monday.
+  - → **The bikes in the square haven't worked since Monday.**
+- `d1708fd8` segun-el-diario (c26#56)
+  - Aparentemente, lo del paro es verso.
+  - Apparently, the thing about the strike is a made-up story.
+  - → **Apparently, the strike thing is made up.**
+- `92f0deba` segun-el-diario (c26#56)
+  - Sin fuente, es verso.
+  - Without a source, it's a made-up story.
+  - → **Without a source, it's made up.**
+- `b7cca98f` segun-el-diario (c26#56)
+  - Es verso, no vale la pena compartirlo.
+  - It's a made-up story, it's not worth sharing it.
+  - → **It's made up, it's not worth sharing.**
+- `89bb9546` segun-el-diario (c26#56)
+  - ¿Es verdad o es verso?
+  - Is it true or is it a made-up story?
+  - → **Is it true or is it made up?**
+- `956c2178` segun-el-diario (c26#56)
+  - Lo del feriado es verso, no es oficial.
+  - The thing about the holiday is a made-up story, it's not official.
+  - → **The holiday thing is made up, it's not official.**
+- `2df16118` segun-el-diario (c26#56)
+  - No es verdad, es verso.
+  - It's not true, it's a made-up story.
+  - → **It's not true, it's made up.**
+- `a9016af7` segun-el-diario (c26#56)
+  - Para mí, esa cadena es verso.
+  - To me, that chain message is a made-up story.
+  - → **To me, that chain message is made up.**
+- `f2861518` practica-me-pudri (c26#0)
+  - Ese kiosco ya no está.
+  - That kiosk isn't there anymore.
+  - → **That kiosco isn't there anymore.**
+- `4364d3ad` tocas-la-guitarra (c27#8, verify9)
+  - ¿Bailás los sábados en el boliche?
+  - Do you dance at the club on Saturdays?
+  - → **Do you dance at the nightclub on Saturdays?**
+- `f891d196` practica-la-parrillada (c27#11, verify9)
+  - Mi vecina de toda la vida se mudó.
+  - My lifelong neighbor moved away.
+  - → **The neighbor I've had all my life moved away.**
+- `d56b6412` lo-lindo-de-la-ciudad (c27#21)
+  - ¡No hay nada como un asado!
+  - There's nothing like a barbecue!
+  - → **There's nothing like an asado!**
+- `9104ab18` no-es-que-no-me-guste (c27#32)
+  - No puedo, tengo un compromiso con mi familia.
+  - I can't, I have a family commitment.
+  - → **I can't, I have plans with my family.**
+- `03422aa0` no-es-que-no-me-guste (c27#32)
+  - Perdón, tengo otro compromiso.
+  - Sorry, I have another commitment.
+  - → **Sorry, I have other plans.**
+- `470621ef` no-es-que-no-me-guste (c27#32)
+  - Tengo un compromiso.
+  - I have a commitment.
+  - → **I have plans.**
+- `083d1bad` no-es-que-no-me-guste (c27#32)
+  - Tengo otro compromiso, ¿vamos otro día?
+  - I have another commitment, can we go another day?
+  - → **I have other plans, can we go another day?**
+- `9dc0a3d3` no-es-que-no-me-guste (c27#32)
+  - No es que no queramos, es que tenemos un compromiso.
+  - It's not that we don't want to, it's that we have a commitment.
+  - → **It's not that we don't want to, it's just that we have plans.**
+- `5ed7acf8` si-hubiera-ahorrado (c27#42)
+  - Si hubieran hecho la obra, habría subte en el barrio.
+  - If they had done the construction, there would be a subway in the neighborhood.
+  - → **If they had done the building work, there would be a subway in the neighborhood.**
+- `e66ca419` practica-me-hubiera-gustado (c27#63)
+  - Che, hubieras avisado.
+  - Hey, you could have told me.
+  - → **Hey, you should have told me.**
+- `082cdbf6` lo-lindo-de-la-ciudad (c27#68)
+  - Lo lindo es la gente.
+  - The great thing is the people.
+  - → **The nice thing is the people.**
+- `f44782db` lo-lindo-de-la-ciudad (c27#68)
+  - Lo lindo es que todo queda cerca.
+  - The great thing is that everything is close by.
+  - → **The nice thing is that everything is close by.**
+- `945cbbd2` practica-la-parrillada (c27#0)
+  - Traje mollejas para el asado.
+  - I brought sweetbreads for the barbecue.
+  - → **I brought sweetbreads for the asado.**
+- `258f05cd` lo-lindo-de-la-ciudad (c27#0)
+  - Obvio, no hay nada como un choripán.
+  - Of course, there's nothing like a chorizo sandwich.
+  - → **Of course, there's nothing like a choripán.**
+- `adad294d` lo-que-paso-fue-que (c28#7)
+  - Pedí lo que sea.
+  - Order whatever.
+  - → **Order anything.**
+- `30b45190` como-dice-el-dicho (c28#9)
+  - —¿Viste la campera amarilla de Santi? —Sobre gustos no hay nada escrito.
+  - Did you see Santi's yellow jacket? —There's no accounting for taste.
+  - → **—Did you see Santi's yellow jacket? —Everyone has their own taste.**
+- `1ebdf14f` como-dice-el-dicho (c28#9)
+  - ¿Fideos con dulce de leche? Sobre gustos no hay nada escrito.
+  - Pasta with dulce de leche? There's no accounting for taste.
+  - → **Pasta with dulce de leche? Everyone has their own taste.**
+- `2183f35a` como-dice-el-dicho (c28#9)
+  - Nico toma mate dulce: sobre gustos no hay nada escrito.
+  - Nico drinks sweet mate: there's no accounting for taste.
+  - → **Nico drinks sweet mate: everyone has their own taste.**
+- `c134e645` como-dice-el-dicho (c28#9)
+  - Sobre gustos no hay nada escrito.
+  - There's no accounting for taste.
+  - → **Everyone has their own taste.**
+- `edf7bb1b` como-dice-el-dicho (c28#11)
+  - —Estudiar medicina es re difícil. —El que quiere celeste, que le cueste.
+  - Studying medicine is really hard. —If you want something good, it will cost you.
+  - → **—Studying medicine is really hard. —If you want something good, you have to work for it.**
+- `55498dcf` como-dice-el-dicho (c28#11)
+  - ¿Querés aprender castellano? El que quiere celeste, que le cueste.
+  - Do you want to learn Spanish? If you want something good, it will cost you.
+  - → **Do you want to learn Spanish? If you want something good, you have to work for it.**
+- `169597dd` como-dice-el-dicho (c28#11)
+  - El que quiere celeste, que le cueste.
+  - If you want something good, it will cost you.
+  - → **If you want something good, you have to work for it.**
+- `8b1eded5` como-dice-el-dicho (c28#11)
+  - Estudio y laburo: el que quiere celeste, que le cueste.
+  - I study and work: if you want something good, it will cost you.
+  - → **I study and work: if you want something good, you have to work for it.**
+- `37fdef4c` cada-loco-con-su-tema (c28#14)
+  - —La campera es fea. —A caballo regalado no se le miran los dientes.
+  - The jacket is ugly. —You don't complain about a gift.
+  - → **—The jacket is ugly. —You don't complain about a gift.**
+- `1845124d` cada-loco-con-su-tema (c28#14)
+  - —¿No esperás algo mejor? —No, más vale pájaro en mano que cien volando.
+  - You're not waiting for something better? —No, one sure thing is better than a hundred possible ones.
+  - → **—You're not waiting for something better? —No, one sure thing is better than a hundred possible ones.**
+- `3c556c4f` cada-loco-con-su-tema (c28#14)
+  - —¿Te quedaste con ese depto? —Sí, más vale pájaro en mano que cien volando.
+  - You took that apartment? —Yes, one sure thing is better than a hundred possible ones.
+  - → **—You took that apartment? —Yes, one sure thing is better than a hundred possible ones.**
+- `bf5daeb8` cada-loco-con-su-tema (c28#14)
+  - —¿Te hicieron descuento? —Sí, el que no llora no mama.
+  - Did they give you a discount? —Yes, if you don't ask, you don't get.
+  - → **—Did they give you a discount? —Yes, if you don't ask, you don't get.**
+- `f43da7ac` cada-loco-con-su-tema (c28#14)
+  - —No me gusta reclamar. —Y, el que no llora no mama.
+  - I don't like complaining. —Well, if you don't ask, you don't get.
+  - → **—I don't like complaining. —Well, if you don't ask, you don't get.**
+- `498a29dd` cada-loco-con-su-tema (c28#14)
+  - —Mati corre con lluvia. —Bueno, cada loco con su tema.
+  - Mati runs in the rain. —Well, to each their own.
+  - → **—Mati runs in the rain. —Well, to each their own.**
+- `31b55124` cada-loco-con-su-tema (c28#14)
+  - —¿Otra vez con Santi? —No, el que se quema con leche, ve una vaca y llora.
+  - Back with Santi again? —No, after a bad experience, you're scared of anything similar.
+  - → **—Back with Santi again? —No, after a bad experience, you're scared of anything similar.**
+- `9cecb8a0` cada-loco-con-su-tema (c28#14)
+  - —¿Querés probar el picante? —Ni loco, el que se quema con leche, ve una vaca y llora.
+  - Want to try the hot sauce? —No way, after a bad experience, you're scared of anything similar.
+  - → **—Want to try the hot sauce? —No way, after a bad experience, you're scared of anything similar.**
+- `966e74aa` cada-loco-con-su-tema (c28#14)
+  - —¿Cuánto gastaste? —Ni idea, ojos que no ven, corazón que no siente.
+  - How much did you spend? —No idea, what I don't know can't hurt me.
+  - → **—How much did you spend? —No idea, what I don't know can't hurt me.**
+- `ad90c1fa` cada-loco-con-su-tema (c28#14)
+  - —¿Le contás a Ana? —No, ojos que no ven, corazón que no siente.
+  - Are you telling Ana? —No, what she doesn't know can't hurt her.
+  - → **—Are you telling Ana? —No, what she doesn't know can't hurt her.**
+- `81261b89` cada-loco-con-su-tema (c28#14)
+  - —¿Diego no viene? —¡Hablando del rey de Roma, ahí está!
+  - Isn't Diego coming? —We were just talking about him, and there he is!
+  - → **—Isn't Diego coming? —We were just talking about him, and there he is!**
+- `f2807522` cada-loco-con-su-tema (c28#14)
+  - —Belén nunca llama. —Hablando del rey de Roma, me mandó un audio.
+  - Belén never calls. —We were just talking about her, and she just sent me a voice message.
+  - → **—Belén never calls. —We were just talking about her, and she just sent me a voice message.**
+- `764b3e36` cada-loco-con-su-tema (c28#14)
+  - —Este año ahorro. —Del dicho al hecho hay mucho trecho.
+  - This year I'm saving. —Easier said than done.
+  - → **—This year I'm saving. —Easier said than done.**
+- `e59d9e1b` cada-loco-con-su-tema (c28#14)
+  - —Pablo dice que mañana empieza la dieta. —Del dicho al hecho hay mucho trecho.
+  - Pablo says tomorrow he starts his diet. —Easier said than done.
+  - → **—Pablo says tomorrow he starts his diet. —Easier said than done.**
+- `2c844d99` cada-loco-con-su-tema (c28#18)
+  - Mejor no me cuentes. Ojos que no ven, corazón que no siente.
+  - Better not tell me. What you don't know can't hurt you.
+  - → **Better not tell me. What I don't know can't hurt me.**
+- `d6236568` cada-loco-con-su-tema (c28#18)
+  - No quiero mirar la cuenta del banco: ojos que no ven, corazón que no siente.
+  - I don't want to look at my bank account: what you don't know can't hurt you.
+  - → **I don't want to look at my bank account: what I don't know can't hurt me.**
+- `3f727d71` cada-loco-con-su-tema (c28#19)
+  - —¿Otra multa? —Y, no hay dos sin tres.
+  - Another ticket? —Well, things come in threes.
+  - → **—Another ticket? —Well, there's always a third time.**
+- `c9498933` cada-loco-con-su-tema (c28#19)
+  - —Se me quemó otra torta. —No hay dos sin tres.
+  - I burned another cake. —Things come in threes.
+  - → **—I burned another cake. —There's always a third time.**
+- `6b301c12` cada-loco-con-su-tema (c28#19)
+  - ¿Otra vez? No hay dos sin tres.
+  - Again? Things come in threes.
+  - → **Again? There's always a third time.**
+- `0fb3bafe` cada-loco-con-su-tema (c28#19)
+  - Otra vez tarde. No hay dos sin tres.
+  - Late again. Things come in threes.
+  - → **Late again. There's always a third time.**
+- `5282d0dd` cada-loco-con-su-tema (c28#19)
+  - Perdí el celular dos veces. No hay dos sin tres.
+  - I lost my cell phone twice. Things come in threes.
+  - → **I lost my cell phone twice. There's always a third time.**
+- `23934dcc` cada-loco-con-su-tema (c28#19)
+  - Como dice el dicho, no hay dos sin tres.
+  - As the saying goes, things come in threes.
+  - → **As the saying goes, there's always a third time.**
+- `fd3a661a` me-hace-ruido (c28#27)
+  - Sentí miedo cuando sonó el timbre a la noche.
+  - I felt fear when the doorbell rang at night.
+  - → **I felt scared when the doorbell rang at night.**
+- `ffb6481e` me-hace-ruido (c28#27)
+  - Sentí mucha vergüenza.
+  - I felt a lot of embarrassment.
+  - → **I felt really embarrassed.**
+- `9387c867` me-hace-ruido (c28#27)
+  - Cuando me echaron del laburo, sentí mucha angustia.
+  - When they fired me from the job, I felt a lot of distress.
+  - → **When they fired me from my job, I felt really upset.**
+- `952d1d52` me-hace-ruido (c28#27)
+  - Sentí angustia toda la noche.
+  - I felt distress all night.
+  - → **I felt upset all night.**
+- `11a3d42b` practica-cada-loco-con-su-tema (c28#38)
+  - ¿Otro malentendido? No hay dos sin tres.
+  - Another misunderstanding? Things come in threes.
+  - → **Another misunderstanding? There's always a third time.**
+- `d63e98cd` practica-cada-loco-con-su-tema (c28#38)
+  - Pablo se mudó dos veces este año: no hay dos sin tres.
+  - Pablo moved twice this year: things come in threes.
+  - → **Pablo moved twice this year: there's always a third time.**
+- `ea26d13c` practica-cada-loco-con-su-tema (c28#38)
+  - Perdí el colectivo dos veces hoy: no hay dos sin tres.
+  - I missed the bus twice today: things come in threes.
+  - → **I missed the bus twice today: there's always a third time.**
+- `8ae1333c` practica-cada-loco-con-su-tema (c28#38)
+  - Se cortó la luz dos veces: no hay dos sin tres.
+  - The power went out twice, and things come in threes.
+  - → **The power went out twice: there's always a third time.**
+- `c22ac45d` practica-cada-loco-con-su-tema (c28#38)
+  - Se me rompió otro vaso, no hay dos sin tres.
+  - Another glass broke on me, bad things come in threes.
+  - → **Another glass broke on me, there's always a third time.**
+- `9021a8f3` practica-me-mori-de-risa (c28#48)
+  - ¿Me venís a hacer la gamba al partido?
+  - Are you coming to the game to cheer me on?
+  - → **Will you come to the game to keep me company?**
+- `50050619` practica-me-mori-de-risa (c28#48)
+  - Mi viejo siempre me venía a hacer la gamba.
+  - My dad always came to cheer me on.
+  - → **My dad always came to keep me company.**
+- `09e0886a` practica-me-mori-de-risa (c28#48)
+  - Te vine a hacer la gamba.
+  - I came to be there for you.
+  - → **I came to keep you company.**
+- `d8e50a52` practica-me-mori-de-risa (c28#48)
+  - Gracias por hacer la gamba siempre.
+  - Thanks for always being there for me.
+  - → **Thanks for always helping me.**
+- `1dc4ca3d` practica-me-mori-de-risa (c28#49)
+  - Los amigos están para hacer la gamba.
+  - That's what friends are for: having your back.
+  - → **Friends are there to help you.**
+- `184bbda2` practica-me-mori-de-risa (c28#49)
+  - Estoy re manija con el recital.
+  - I'm so hyped for the concert.
+  - → **I'm so excited about the concert.**
+- `c5804cd1` practica-me-mori-de-risa (c28#49)
+  - Estoy tan manija que no duermo.
+  - I'm so wound up I can't sleep.
+  - → **I'm so excited I can't sleep.**
+- `9ee86ee9` practica-me-mori-de-risa (c28#49)
+  - Los pibes están re manija.
+  - The guys are really hyped.
+  - → **The guys are really excited.**
+- `2551e1c4` no-te-lo-tomes-a-mal (c28#55)
+  - ¿Te ofendiste por lo que dije?
+  - Did you take offense at what I said?
+  - → **Did you get offended by what I said?**
+- `9882b96a` no-te-lo-tomes-a-mal (c28#55)
+  - Con todo respeto, creo que te ofendiste por nada.
+  - With all due respect, I think you took offense over nothing.
+  - → **With all due respect, I think you got offended over nothing.**
+- `7e56254a` no-te-lo-tomes-a-mal (c28#55)
+  - Entre nos, ¿te ofendiste con lo que dijo Martín?
+  - Between you and me, did you take offense at what Martín said?
+  - → **Between you and me, did you get offended by what Martín said?**
+- `4f3b98c6` no-te-lo-tomes-a-mal (c28#55)
+  - Juli dijo que te ofendiste.
+  - Juli said you took offense.
+  - → **Juli said you got offended.**
+- `2cd52c4b` no-te-lo-tomes-a-mal (c28#55)
+  - Me parece que te ofendiste.
+  - I think you took offense.
+  - → **I think you got offended.**
+- `d5f90d42` me-cayo-la-ficha (c28#56)
+  - Me quedé con las ganas de probar el flan.
+  - I missed out on trying the flan.
+  - → **I never got to try the flan.**
+- `9f5da17f` me-hizo-reir (c28#62)
+  - Esa canción me hace acordar a la primaria.
+  - That song reminds me of grade school.
+  - → **That song reminds me of primary school.**
+- `aa9d0801` me-hizo-reir (c28#0)
+  - La verdad, me reí un montón en el asado.
+  - To be honest, I laughed a lot at the barbecue.
+  - → **To be honest, I laughed a lot at the asado.**
+- `195ac659` me-mori-de-risa (c28#0)
+  - La escena del asado me hizo sentir en casa.
+  - The barbecue scene made me feel at home.
+  - → **The asado scene made me feel at home.**
+- `06eda4d8` cuanto-antes-lleguemos (c28#0)
+  - Cuanto antes compremos las cosas para el asado, mejor.
+  - The sooner we buy the things for the barbecue, the better.
+  - → **The sooner we buy the things for the asado, the better.**
+- `50f2be98` me-cayo-la-ficha (c28#0)
+  - Che, recién me cayó la ficha.
+  - Hey, it just clicked.
+  - → **Hey, I finally understood just now.**
+- `dba2a8e6` me-cayo-la-ficha (c28#0)
+  - Esa canción me pone mal.
+  - That song gets me down.
+  - → **That song makes me sad.**
+- `35bbb956` me-cayo-la-ficha (c28#0)
+  - Eso me pone mal.
+  - That gets me down.
+  - → **That makes me sad.**
+- `8a7c9f41` me-cayo-la-ficha (c28#0)
+  - La lluvia me pone mal.
+  - The rain gets me down.
+  - → **The rain makes me sad.**
+- `e7b149d0` me-cayo-la-ficha (c28#0)
+  - Me pone mal el invierno.
+  - Winter gets me down.
+  - → **Winter makes me sad.**
+- `0de364d8` me-cayo-la-ficha (c28#0)
+  - Me pone mal que mi abuela esté enferma.
+  - It gets me down that my grandmother is sick.
+  - → **It makes me sad that my grandmother is sick.**
+- `0f1c19c6` sin-ofender (c28#0)
+  - Pregunta delicada, ¿no?
+  - Touchy question, right?
+  - → **Sensitive question, right?**
+- `4075ed16` sin-ofender (c28#0)
+  - Hablar de su ex es delicado.
+  - Talking about her ex is touchy.
+  - → **Talking about her ex is a sensitive subject.**
+- `b216666b` practica-me-mori-de-risa (c28#0)
+  - ¡Qué bajón, llueve todo el finde!
+  - What a downer, it's raining all weekend!
+  - → **What a shame, it's raining all weekend!**
+- `d5a6e58f` practica-me-mori-de-risa (c28#0)
+  - Con este tránsito, estoy al horno.
+  - With this traffic, I'm done for.
+  - → **With this traffic, I'm in trouble.**
+- `6b4e7688` practica-me-mori-de-risa (c28#0)
+  - Llegué tarde otra vez: al horno.
+  - I was late again: I'm done for.
+  - → **I was late again: I'm in trouble.**
+- `6c8f0eac` practica-me-mori-de-risa (c28#0)
+  - Si no llegamos a tiempo, estamos al horno.
+  - If we don't get there on time, we're done for.
+  - → **If we don't get there on time, we're in trouble.**
+- `c7556f4c` practica-me-mori-de-risa (c28#0)
+  - Sin la llave, estamos al horno.
+  - Without the key, we're done for.
+  - → **Without the key, we're in trouble.**
+- `2a57489b` mis-abuelos-italianos (c29#3)
+  - Era otra época.
+  - It was another era.
+  - → **It was a different time.**
+- `eed96de4` se-instalaron-en-la-boca (c29#7)
+  - ¿Mantuvieron el negocio de la familia?
+  - Did they keep up the family business?
+  - → **Did they keep the family business going?**
+- `a60942d4` se-instalaron-en-la-boca (c29#7)
+  - Mis abuelos mantuvieron la casa de la familia en Europa.
+  - My grandparents kept up the family home in Europe.
+  - → **My grandparents kept the family home in Europe.**
+- `e8e38a6f` se-instalaron-en-la-boca (c29#8, verify10)
+  - En el conventillo de mi abuela había muchos gallegos.
+  - There were lots of Spaniards in my grandmother's tenement house.
+  - → **There were lots of Spaniards in my grandmother's conventillo.**
+- `888a1499` se-instalaron-en-la-boca (c29#8)
+  - Primero se instaló en un conventillo de La Boca.
+  - First he settled in a tenement in La Boca.
+  - → **First he settled in a conventillo in La Boca.**
+- `593bf462` se-instalaron-en-la-boca (c29#8)
+  - Mis viejos guardaron las fotos del conventillo.
+  - My parents saved the photos of the tenement house.
+  - → **My parents saved the photos of the conventillo.**
+- `5a137e29` se-instalaron-en-la-boca (c29#8)
+  - Fuimos a ver un conventillo de colores en La Boca.
+  - We went to see a colorful tenement house in La Boca.
+  - → **We went to see a colorful conventillo in La Boca.**
+- `760f8562` se-instalaron-en-la-boca (c29#8)
+  - Mi abuela creció en un conventillo.
+  - My grandmother grew up in a tenement house.
+  - → **My grandmother grew up in a conventillo.**
+- `a582a73b` se-instalaron-en-la-boca (c29#8)
+  - Vivían en un conventillo.
+  - They lived in a tenement house.
+  - → **They lived in a conventillo.**
+- `4330904d` se-instalaron-en-la-boca (c29#8)
+  - Desde el puerto se fueron derecho al conventillo.
+  - From the port they went straight to the tenement house.
+  - → **From the port they went straight to the conventillo.**
+- `d09e26a6` practica-se-instalaron (c29#8)
+  - Cuando llegaron, vivieron en un conventillo.
+  - When they arrived, they lived in a tenement house.
+  - → **When they arrived, they lived in a conventillo.**
+- `2b00e183` practica-se-instalaron (c29#8)
+  - El conventillo estaba lleno de gente.
+  - The tenement house was full of people.
+  - → **The conventillo was full of people.**
+- `6272a86a` practica-se-instalaron (c29#8)
+  - El conventillo tenía un solo baño.
+  - The tenement house had just one bathroom.
+  - → **The conventillo had just one bathroom.**
+- `cfef9538` practica-se-instalaron (c29#8)
+  - En el conventillo había ruido todo el día.
+  - There was noise all day in the tenement house.
+  - → **There was noise all day in the conventillo.**
+- `0fabfcfc` practica-se-instalaron (c29#8)
+  - Mi abuela nació en un conventillo.
+  - My grandmother was born in a tenement house.
+  - → **My grandmother was born in a conventillo.**
+- `5f01e6e5` practica-se-instalaron (c29#8)
+  - Mi bisabuelo alquilaba una pieza en un conventillo.
+  - My great-grandfather rented a room in a tenement house.
+  - → **My great-grandfather rented a room in a conventillo.**
+- `41ca4b48` practica-se-instalaron (c29#8)
+  - Vivían en un conventillo.
+  - They lived in a tenement house.
+  - → **They lived in a conventillo.**
+- `a2a6983a` practica-se-instalaron (c29#8)
+  - Del puerto fueron a un conventillo.
+  - From the port they went to a tenement house.
+  - → **From the port they went to a conventillo.**
+- `aa386775` practica-se-instalaron (c29#8)
+  - Se instalaron en un conventillo.
+  - They settled in a tenement house.
+  - → **They settled in a conventillo.**
+- `2f948572` gracias-por-todo (c29#14)
+  - De corazón, gracias por el asado.
+  - From the bottom of my heart, thanks for the barbecue.
+  - → **From the bottom of my heart, thanks for the asado.**
+- `bf9d7c1c` gracias-por-todo (c29#14)
+  - Voy a extrañar el asado del domingo con ustedes.
+  - I'm going to miss the Sunday barbecue with you all.
+  - → **I'm going to miss the Sunday asado with you all.**
+- `4661183f` gracias-por-todo (c29#18)
+  - Brindo por la cocinera: ¡qué ravioles!
+  - I toast to the cook: what ravioli!
+  - → **I toast to the cook: great ravioli!**
+- `61869f6e` ya-sos-de-aca (c29#27)
+  - Me costó un año lograr hablar sin miedo.
+  - It took me a year to manage to speak without fear.
+  - → **It took me a year before I managed to speak without fear.**
+- `54fd223a` ya-sos-de-aca (c29#27)
+  - No pensé que iba a lograr vivir acá.
+  - I didn't think that I was going to manage to live here.
+  - → **I didn't think I'd manage to live here.**
+- `58d7d6fd` se-emociono (c29#37)
+  - Nos emocionamos con esa canción.
+  - That song got us emotional.
+  - → **We got emotional over that song.**
+- `9974897b` se-emociono (c29#38)
+  - Fue una noche muy emotiva.
+  - It was a very emotional night.
+  - → **It was a very moving night.**
+- `dbd03ab3` se-emociono (c29#38)
+  - La reunión con mi familia fue muy emotiva.
+  - The family get-together was very emotional.
+  - → **The family get-together was very moving.**
+- `695a3501` se-emociono (c29#40)
+  - Se emocionó hasta mi hermano, que no tiene corazón.
+  - Even my brother got emotional, and he has no heart.
+  - → **Even my brother, who has no heart, got emotional.**
+- `4fe0ad84` gracias-por-todo (c29#0)
+  - Chau, hasta la próxima.
+  - Bye, see you next time.
+  - → **Bye, until next time.**
+
+## Word glosses only (8)
+
+- `baaeccf6` para-colmo (c25#0)
+  - ¿Y para colmo te cobraron el envío?
+  - And on top of that, they charged you for shipping?
+- `e680358d` para-colmo (c25#0)
+  - Llegamos tarde y, para colmo, no había mesa.
+  - We got there late, and on top of that, there was no table.
+- `26dd5eca` practica-me-la-jugue (c25#0)
+  - El colectivo no vino y, para colmo, empezó a llover.
+  - The bus didn't come and, on top of that, it started raining.
+- `f6fa76ff` practica-me-la-jugue (c25#0)
+  - Es caro y, para colmo, es feo.
+  - It's expensive and, on top of that, it's ugly.
+- `b2e221e8` practica-me-la-jugue (c25#0)
+  - Para colmo, me clavó el visto.
+  - On top of that, he read my message and didn't answer.
+- `fdfd0789` practica-me-la-jugue (c25#0)
+  - Para colmo, perdí el bondi.
+  - On top of that, I missed the bus.
+- `13073dc5` practica-me-la-jugue (c25#0)
+  - Y para colmo, llueve.
+  - And on top of that, it's raining.
+- `156ef967` practica-me-la-jugue (c25#0)
+  - Para colmo, mis viejos se enteraron por la vecina.
+  - On top of that, my parents found out from the neighbor.

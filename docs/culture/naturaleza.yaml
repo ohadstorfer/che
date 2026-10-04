@@ -1,0 +1,177 @@
+section:
+  slug: "naturaleza"
+  title: "Animals and nature"
+  emoji: "🦫"
+  summary: "Carpinchos, a bird that builds ovens, whales and purple streets"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-carpincho"
+    title: "The carpincho"
+    summary: "The calm giant that took over a rich neighborhood"
+    pages:
+      - type: card
+        text: "The **carpincho**, or capybara, is the biggest rodent in the world, a relative of mice and guinea pigs. An adult can weigh more than 60 kilos, like a very big dog."
+      - type: card
+        text: "Carpinchos live in groups near rivers and lakes, in the warm northeast and in the wetlands around Buenos Aires. They eat grass and sleep a lot."
+      - type: choice
+        prompt: "In 2021, carpinchos were in the news all over the world. Why?"
+        options:
+          - "One swam across the river to Uruguay"
+          - "They walked into a rich private barrio and stayed"
+          - "They ate a whole field of yerba"
+        correct: 1
+        explain: "**Nordelta**, a barrio of big houses, was built on the land where they lived. They came back, ate the gardens and crossed the streets. Most of the country was on their side."
+      - type: card
+        text: "They are calm with everyone. Birds stand on their backs and other animals sit next to them. On the internet they're called the friendliest animal in the world."
+      - type: choice
+        prompt: "Carpinchos are very good at one sport. Which one?"
+        options:
+          - "Running long distances"
+          - "Jumping fences"
+          - "Swimming"
+        correct: 2
+        explain: "Their feet are a bit like a duck's, and they can stay under water for minutes to hide from danger."
+      - type: card
+        text: "The best place to see hundreds of them is the **Esteros del Iberá**, in Corrientes: a huge wetland full of birds, deer and **yacarés**, small relatives of the crocodile."
+      - type: card
+        chip: "Did you know?"
+        text: "That's why a carpincho is your guide in this app. Calm, friendly, good with everyone, and very Argentine."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "pajaros"
+    title: "The national bird"
+    summary: "A small brown builder, loud green parrots and a bird that lies"
+    pages:
+      - type: card
+        text: "Argentina's national bird is not a great eagle. It's the **hornero**: small, brown, and living in every plaza and garden."
+      - type: choice
+        prompt: "**Hornero** comes from *horno*, oven. Why is the bird called that?"
+        options:
+          - "It builds a round nest of mud, like an old oven"
+          - "It lives near kitchens and eats bread"
+          - "Its chest is red like fire"
+        correct: 0
+        explain: "A pair builds the nest from mud and straw in about two weeks: on a pole, a traffic light, a statue's head. It's a symbol of home and hard work."
+      - type: card
+        text: "The noise in every park in Buenos Aires comes from **cotorras**: small green parrots. They build huge shared nests of sticks, high in the trees."
+      - type: card
+        text: "The **benteveo** has a yellow chest and shouts its own name. Many people hear something else in its call: **“¡bicho feo!”**, ugly bug."
+      - type: choice
+        prompt: "The **ñandú** is the big bird of the open country, as tall as a person. What can't it do?"
+        options:
+          - "Run fast"
+          - "Fly"
+          - "Swim"
+        correct: 1
+        explain: "It runs at up to 60 km/h but never leaves the ground. And the father sits on the eggs and raises the chicks, not the mother."
+      - type: card
+        text: "The **tero** screams when you come near its nest. But it screams far from the eggs, to send you the wrong way."
+      - type: card
+        chip: "Did you know?"
+        text: "So there's a saying for someone who talks about one thing to hide another: he's **como el tero**. He shouts in one place and has his eggs in another."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "ballenas-y-pinguinos"
+    title: "Whales, penguins and a mistake from Canada"
+    summary: "The wild coast of Patagonia"
+    pages:
+      - type: card
+        text: "Every year from June to December, hundreds of whales come to **Península Valdés**, in Patagonia, to have their babies. The whale is the **ballena franca**."
+      - type: card
+        text: "On a beach near the city of Puerto Madryn, at high tide, the whales swim a few meters from the sand. You watch them standing up, with dry feet."
+      - type: choice
+        prompt: "At **Punta Tombo** you can walk through a place where penguins make their nests. How many penguins come each year?"
+        options:
+          - "About 500"
+          - "About 20,000"
+          - "Hundreds of thousands"
+        correct: 2
+        explain: "It's one of the biggest penguin colonies on the continent. The rule on the path: if a **pingüino** wants to cross, you stop and wait."
+      - type: card
+        text: "Along the roads of Patagonia you see **guanacos**, wild cousins of the llama. They jump fences easily and, like llamas, they spit when they're angry."
+      - type: choice
+        prompt: "In 1946, twenty animals were brought from Canada to Tierra del Fuego. Now there are more than 100,000 and nobody can stop them. Which animal?"
+        options:
+          - "Wolves"
+          - "Beavers"
+          - "Brown bears"
+        correct: 1
+        explain: "The plan was to sell their fur. But the **castores** have no enemies there. They cut down trees and build dams, and whole forests have died."
+      - type: card
+        chip: "Did you know?"
+        text: "At Península Valdés, orcas throw themselves onto the beach to catch young sea lions, then slide back into the water. Very few orcas in the world hunt like that."
+      - type: card
+        text: "Further south, in **Ushuaia**, boats take you past small islands covered in sea lions and seabirds, at the very end of the continent."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "yaguarete"
+    title: "The biggest cat in the Americas"
+    summary: "The yaguareté, thieves at the falls and the softest wool"
+    pages:
+      - type: card
+        text: "The **yaguareté**, the jaguar, is the biggest cat in the Americas. It lives in the forests of the north, and only a few hundred are left in Argentina."
+      - type: choice
+        prompt: "In 2016, new peso notes came out without presidents or heroes. What was on them?"
+        options:
+          - "Animals of Argentina"
+          - "Football players"
+          - "Famous foods"
+        correct: 0
+        explain: "The yaguareté, the whale, the hornero, the guanaco, the condor. A few years later a new set brought back the faces of historical figures."
+      - type: card
+        text: "In the wetlands of **Iberá**, the yaguareté was gone for seventy years. In 2021, the first ones were set free there again, and now cubs are born in the wild."
+      - type: card
+        text: "At the Iguazú falls, the thieves are **coatíes**: animals with a long nose and a striped tail. They open bags and steal sandwiches. Don't feed them."
+      - type: choice
+        prompt: "Can you see wild toucans in Argentina?"
+        options:
+          - "No, only in zoos"
+          - "Yes, in the forest of Misiones"
+          - "Yes, in the parks of Buenos Aires"
+        correct: 1
+        explain: "The **tucán**, with its huge orange beak, flies around the Iguazú falls and the red-earth forest of Misiones."
+      - type: card
+        text: "High in the Andes of the northwest lives the **vicuña**, a small wild cousin of the llama. Its wool is one of the finest and most expensive in the world."
+      - type: card
+        chip: "Did you know?"
+        text: "You don't have to kill a vicuña for its wool. Once a year, villagers form a human chain, bring the animals together, cut the wool and let them go."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "arboles"
+    title: "Purple streets"
+    summary: "The trees of Buenos Aires, and a tree that isn't one"
+    pages:
+      - type: card
+        text: "Every November, Buenos Aires turns purple. Thousands of **jacarandá** trees flower at the same time, and the pavements are covered in purple too."
+      - type: card
+        text: "Most of the city's street trees and big parks are the work of one man: **Carlos Thays**, a French garden designer who arrived in 1889 and stayed for life."
+      - type: choice
+        prompt: "The name of the **palo borracho** tree means “drunk stick”. What does it look like?"
+        options:
+          - "Its branches hang down to the ground"
+          - "It grows leaning to one side"
+          - "Its trunk is fat like a bottle, with thorns"
+        correct: 2
+        explain: "The trunk keeps water inside and swells like a belly. In autumn it's covered in big pink flowers."
+      - type: card
+        text: "The national flower is the red flower of the **ceibo**, a tree that grows along the rivers."
+      - type: choice
+        prompt: "The **ombú** is the giant of the open country, with a huge trunk and wide shade. What is strange about it?"
+        options:
+          - "It only grows in pairs"
+          - "Its wood is soft and wet, and useless as wood"
+          - "It has no leaves for most of the year"
+        correct: 1
+        explain: "Many say it's not a real tree but a giant plant. The trunk is full of water, so it can't be used for building or for fire. Its gift is shade."
+      - type: card
+        text: "In Recoleta there's a giant fig tree more than 200 years old, the **Gran Gomero**. Its branches are so long that poles hold them up, and one is carried by a statue."
+      - type: card
+        text: "In spring, the **plátanos** along the streets drop a yellow dust, and half the city sneezes. **“Es la alergia”**, people say with red eyes."
+    vocabulary: []

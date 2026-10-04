@@ -1,0 +1,176 @@
+section:
+  slug: "pantallas"
+  title: "TV, films and laughs"
+  emoji: "📺"
+  summary: "Red news screens, lunches on TV, cult films and the jokes"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-tele"
+    title: "On TV"
+    summary: "A red screen, a lunch that started in 1968 and a famous question"
+    pages:
+      - type: card
+        text: "The news channel everyone knows by sight is **Crónica TV**. Its style is giant white letters on a red screen and loud march music, for any news, big or tiny."
+      - type: choice
+        prompt: "Which of these does Crónica really put on the screen in giant letters?"
+        options:
+          - "“The Obelisco is tired”"
+          - "“100 days to go until summer”"
+          - "“The president had pizza”"
+        correct: 1
+        explain: "It counts the days to summer and to spring every year. The red screen with **ÚLTIMO MOMENTO**, breaking news, is now a classic joke image online."
+      - type: card
+        text: "**Mirtha Legrand** has had lunch on TV since 1968. Famous people sit at her table, eat and answer her sharp questions. She was born in 1927 and was still on air at 99."
+      - type: card
+        text: "For thirty years, the biggest show was **Marcelo Tinelli**'s: jokes, hidden cameras and a dance contest with famous people. The next morning, everyone at work talked about it."
+      - type: card
+        text: "The other queen of TV is **Susana Giménez**, with decades of talk shows and phone games. The whole country knows her simply as Susana."
+      - type: choice
+        prompt: "A guest once told Susana that a dinosaur from Patagonia was coming to a show in the city. What did she ask, in a line every Argentine knows?"
+        options:
+          - "“Is it alive?”"
+          - "“Does it bite?”"
+          - "“How much is it?”"
+        correct: 0
+        explain: "People tell it as one word: **“¿Vivo?”** She says it was a joke. Today people say it when someone asks a question with an obvious answer."
+      - type: card
+        text: "When the president speaks on all channels at the same time, it's a **cadena nacional**. Your show stops, and half the country complains."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "novelas"
+    title: "Series that went around the world"
+    summary: "Argentine novelas with fans in very far places"
+    pages:
+      - type: card
+        text: "A daily TV series is a **novela**. For years, Argentina made them for teenagers with songs and a band: **Chiquititas**, **Rebelde Way**, **Floricienta**, **Casi Ángeles**."
+      - type: choice
+        prompt: "The band from **Rebelde Way** filled big concert halls far from home. In which country?"
+        options:
+          - "Japan"
+          - "Israel"
+          - "Canada"
+        correct: 1
+        explain: "Israeli teenagers learned Spanish from Argentine novelas. The same story was later made again in Mexico, India and other countries."
+      - type: card
+        text: "The woman behind those shows is the producer **Cris Morena**. Many of today's Argentine actors and singers started as children in her novelas."
+      - type: card
+        text: "**Natalia Oreiro** was born in Uruguay and became a star in Argentina with the novela **Muñeca brava**. Then the series was sold to dozens of countries."
+      - type: choice
+        prompt: "In one country she is so loved that in 2021 she was made a citizen. Which one?"
+        options:
+          - "Italy"
+          - "Russia"
+          - "Brazil"
+        correct: 1
+        explain: "In 2019 she sang in 13 Russian cities, twenty years after the series ended."
+      - type: card
+        text: "The series adults love most is **Los simuladores**: four men who solve people's problems with huge, clever lies. Argentines can repeat whole scenes."
+      - type: card
+        chip: "Pro tip"
+        text: "Want to practice? Watch **El encargado**, a dark comedy about the man who runs a building in Buenos Aires. It's porteño Spanish at normal speed."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "cine"
+    title: "Films everyone can repeat"
+    summary: "The lines every family knows, and a street full of theaters"
+    pages:
+      - type: card
+        text: "Argentina makes a lot of films for its size, and two of them won the Oscar for best foreign film. But the ones people love are not always the ones with prizes."
+      - type: card
+        text: "The film every family knows is **Esperando la carroza**, from 1985: a loud family argues about who has to take care of the grandmother."
+      - type: choice
+        prompt: "In its most famous scene, a man cries about how poor his brother is. What did he see on the brother's table?"
+        options:
+          - "Half a pizza"
+          - "Three empanadas"
+          - "One cold milanesa"
+        correct: 1
+        explain: "**“Tres empanadas”**, said with tears: three old empanadas for two people. He's not really sad, and he ate one himself. Argentines repeat it today when there's not enough of something."
+      - type: card
+        text: "**Relatos salvajes**, from 2014, tells six short stories of normal people who lose control: in traffic, at a wedding, at a public office. Argentines saw themselves in it."
+      - type: choice
+        prompt: "You go to see an American film for adults in a cinema in Buenos Aires. How is it shown?"
+        options:
+          - "With Spanish voices"
+          - "In English, with nothing to read"
+          - "In English, with Spanish words on the screen"
+        correct: 2
+        explain: "Most films for adults are **subtituladas**. Children's films are **dobladas**, with Spanish voices. Good news if you're learning: you can read along."
+      - type: card
+        text: "Buenos Aires has around 300 theaters, more than almost any city in the world. On **Avenida Corrientes**, the shows start late and the pizza places wait for the crowd after."
+      - type: card
+        text: "**Nueve reinas**, from 2000: two small thieves, one day and one big trick. You never know who is lying to whom. Many people call it the best Argentine film."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-humor"
+    title: "What makes Argentines laugh"
+    summary: "Teasing, jokes about themselves and one day to be careful"
+    pages:
+      - type: card
+        text: "Among friends, teasing is love. If your new friends make fun of your accent or your team, you're part of the group. If they are very polite to you, worry."
+      - type: choice
+        prompt: "Argentines love to tell jokes about themselves. What are those jokes usually about?"
+        options:
+          - "How much they eat"
+          - "How late they are"
+          - "How big their ego is"
+        correct: 2
+        explain: "A classic: “The best business? Buy an Argentine for what he's worth and sell him for what he says he's worth.” Told by Argentines, with pride."
+      - type: card
+        text: "The most loved comedy group ever is **Les Luthiers**. For more than fifty years they played funny songs in elegant suits, on instruments they built from tins, tubes and bicycle parts."
+      - type: card
+        text: "On TV, **Diego Capusotto** makes fun of rock stars, politicians and porteños in short, absurd videos. People repeat the lines of his invented characters as if they were real."
+      - type: choice
+        prompt: "On December 28, be careful with what you read and what people tell you. Why?"
+        options:
+          - "It's the day for jokes and fake news"
+          - "It's the day everybody tells the truth"
+          - "It's the day old debts must be paid"
+        correct: 0
+        explain: "It's the **Día de los Inocentes**. If you believe the lie, they say: **“¡Que la inocencia te valga!”** More or less: good luck with being so innocent."
+      - type: card
+        text: "When something bad happens in the country, the jokes arrive in minutes. Laughing at a crisis is how people get through it."
+      - type: card
+        chip: "Did you know?"
+        text: "There's a phrase for all of it: **“Argentina, no lo entenderías.”** Argentina, you wouldn't understand. People post it under any photo of something crazy and local."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-radio"
+    title: "The radio is always on"
+    summary: "Football told like a poem, and the new radio on YouTube"
+    pages:
+      - type: card
+        text: "In taxis, kitchens, shops and kioscos, the radio is on. Morning shows are like company: the same voices every day, for decades."
+      - type: card
+        text: "The person who tells a football game live is the **relator**. A good one talks fast, invents poems as he talks and holds a **“gooool”** for ten seconds."
+      - type: choice
+        prompt: "Some fans watch the game on TV in a special way. How?"
+        options:
+          - "With the TV sound off and the radio on"
+          - "Standing up for the whole game"
+          - "With the screen covered during penalties"
+        correct: 0
+        explain: "They prefer their favorite relator on the radio. The voice and the picture don't always match, and nobody cares."
+      - type: card
+        text: "The most famous radio moment: Maradona's second goal against England in 1986. The relator **Víctor Hugo Morales** cried and called him **barrilete cósmico**: a kite from space."
+      - type: card
+        text: "Young people listen in a new way: on **streaming**. Channels on YouTube make live radio with cameras, all day, and fill big concert halls with their fans."
+      - type: choice
+        prompt: "In 2025, a live stream had more viewers than many TV shows. What did it show?"
+        options:
+          - "A chess game between two ministers"
+          - "A man walking from Ushuaia to the north"
+          - "Scientists looking at the bottom of the sea"
+        correct: 2
+        explain: "Argentine scientists sent a robot with a camera deep into the sea near Mar del Plata. People watched for hours and gave names to the animals, like a starfish with a big bottom."
+      - type: card
+        chip: "Pro tip"
+        text: "Radio is great practice for your ear. Put on a morning show while you make breakfast, and don't worry if you only understand half."
+    vocabulary: []

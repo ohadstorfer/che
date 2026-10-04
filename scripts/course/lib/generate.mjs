@@ -95,11 +95,13 @@ const formLine = (f, lemmaGloss) => `${f.form} — ${f.pos}, "${f.gloss_en ?? le
 /**
  * @param focus  optional: what this unit's new sentences must practice, when
  *               they replace filler that drilled something else
+ * @param riders optional: words she already holds that the new sentences must
+ *               carry, though none of them is a target here
  * @param lean   optional: {counts: Map(target id → sentences wanted)} — a top-up
  *               that only fills gaps: older words listed bare (no glosses), and
  *               each target asks for just what it lacks.
  */
-export function generationPrompt({ outline, unit, targets, examples, existing, style, focus = null, lean = null }) {
+export function generationPrompt({ outline, unit, targets, examples, existing, style, focus = null, riders = [], lean = null }) {
   const lemmaById = new Map(outline.lemmas.map((l) => [l.id, l]));
   const available = outline.forms.filter((f) => f.unit_order <= unit.course_order);
   const newHere = new Set(outline.forms.filter((f) => f.unit_id === unit.id).map((f) => f.id));
@@ -138,6 +140,12 @@ export function generationPrompt({ outline, unit, targets, examples, existing, s
       ? [
           `EVERY sentence you write must practice this unit's skill: ${focus}`,
           'This unit was padded with sentences that drilled old words or other situations, and they were removed. Use each target word inside the unit\'s situation and structure — never as filler. A sentence that could sit in any other unit is rejected.',
+          '',
+        ]
+      : []),
+    ...(riders.length
+      ? [
+          `These words the learner already knows must each appear in at least two of your sentences, riding along in sentences aimed at the target words: ${riders.join(', ')}.`,
           '',
         ]
       : []),

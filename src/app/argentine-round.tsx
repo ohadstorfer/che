@@ -50,6 +50,9 @@ export default function ArgentineRound() {
   /** The unit's slang class, once its unit is known; null if it has none. */
   const [slang, setSlang] = useState<{ words: ArWord[]; packs: ArPack[] } | null | undefined>(undefined);
   const [ended, setEnded] = useState<{ result: FinishResult | null } | null>(null);
+  /** The unit couldn't be read at all, which says nothing about whether the class exists. */
+  const [unreachable, setUnreachable] = useState(false);
+  const [skipping, setSkipping] = useState(false);
   const { profile } = useAuth();
   const userId = profile?.id;
 
@@ -75,8 +78,13 @@ export default function ArgentineRound() {
     if (!lessonId) return;
     let cancelled = false;
     lessonWithUnit(lessonId)
-      .then(({ unit }) => unitSlang(unit.slug))
-      .catch(() => null)
+      .then(
+        ({ unit }) => unitSlang(unit.slug),
+        () => {
+          if (!cancelled) setUnreachable(true);
+          return null;
+        },
+      )
       .then((found) => {
         if (cancelled) return;
         setSlang(found);
@@ -105,11 +113,21 @@ export default function ArgentineRound() {
   if (lessonId) {
     if (ended) return <PathLessonDone result={ended.result} />;
     if (slang === null) {
+      // The road can hold a class this build has no words for (the plan ships in
+      // the app, the road in the database). It is skipped rather than left as a
+      // step she can never finish.
+      const skip = () => {
+        setSkipping(true);
+        void finishPathLesson(lessonId, null).then((result) => (result ? setEnded({ result }) : setSkipping(false)));
+      };
       return (
         <SafeAreaView style={styles.safe}>
           <View style={styles.center}>
-            <Text style={styles.centerText}>This class isn't here anymore.</Text>
-            <Button title="Back to the course" onPress={() => goBack('/home')} />
+            <Text style={styles.centerText}>
+              {unreachable ? "Couldn't load this class. Check your connection and try again." : "This class isn't in this version of the app."}
+            </Text>
+            {unreachable ? null : <Button title="Skip it" loading={skipping} onPress={skip} />}
+            <Button title="Back to the course" variant={unreachable ? 'primary' : 'ghost'} onPress={() => goBack('/home')} />
           </View>
         </SafeAreaView>
       );

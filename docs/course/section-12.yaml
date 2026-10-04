@@ -22,7 +22,7 @@ section:
 units:
   - ordinal: 1
     slug: "me-da-bronca"
-    title: "Say what gets to you"
+    title: "Say what makes you angry"
     summary: "Me da bronca que no avise"
     grammar:
       - "me-da.emocion"
@@ -63,7 +63,7 @@ units:
             f: "3pl.pres.subj.irregular"
   - ordinal: 2
     slug: "me-pone-nervioso-que"
-    title: "Say what drives you up the wall"
+    title: "Say what annoys you"
     summary: "Me pone nervioso que llegue tarde"
     grammar:
       - "me-da.emocion"
@@ -81,8 +81,8 @@ units:
         body: "They work like *gustar*: **me enoja que me mienta**, **me alegra que vengas**. If you're the
           one doing it, no *que*, just the infinitive: *me enoja **llegar** tarde*."
       - title: "Me clavó el visto"
-        body: "The porteño complaint of the WhatsApp age: **me clavó el visto** — *he left me on read*. And
-          the friend who forgets everything is **re colgado**."
+        body: "The porteño complaint of the WhatsApp age: **me clavó el visto** — *he read my message and
+          didn't answer*. And the friend who forgets everything is **re colgado**."
     words:
       - lemma: "poner"
         pos: "verb"
@@ -120,7 +120,7 @@ units:
             en: "(that) he cancels, (that) I cancel"
             f: "sg.pres.subj"
           - form: "canceló"
-            en: "he cancelled, she cancelled"
+            en: "he canceled, she canceled"
             f: "3sg.pret.ind"
       - lemma: "olvidarse"
         pos: "verb"
@@ -144,9 +144,10 @@ units:
       - lemma: "celos"
         pos: "noun"
         en: "jealousy"
+        note: "Always plural: tengo celos = I'm jealous; me da celos = it makes me jealous."
       - lemma: "colgado"
         pos: "adj"
-        en: "scatterbrained, spaced out"
+        en: "forgetful, distracted"
         register: "informal"
         forms:
           - form: "colgado"
@@ -155,7 +156,7 @@ units:
             f: "f.sg"
       - lemma: "me clavó el visto"
         pos: "phrase"
-        en: "he left me on read"
+        en: "he read my message and didn't answer"
         register: "informal"
   - ordinal: 3
     slug: "deberias"
@@ -207,9 +208,15 @@ units:
           - form: "cuido"
             en: "I take care of"
             f: "1sg.pres.ind"
+      - lemma: "tener"
+        pos: "verb"
+        forms:
+          - form: "tendrías que"
+            en: "you should, you ought to"
+            f: "2sg.cond.ind.vos.irregular"
   - ordinal: 4
     slug: "deberias-tomarte-unos-dias"
-    title: "Talk a stressed friend down"
+    title: "Help a stressed friend calm down"
     summary: "Deberías tomarte unos días"
     grammar:
       - "deber.condicional"
@@ -225,9 +232,9 @@ units:
           more*; **deberían pagarte más** — *they ought to pay you more*. Advice to *us* is the
           gentlest of all."
       - title: "Estaría bueno que…"
-        body: "With a person after it, **que** + subjunctive: **estaría bueno que te tomes unos días**.
-          Without one, the infinitive: *estaría bueno **descansar***. And the push: **¡animate!** —
-          *go for it!*"
+        body: "When you say who should do it, use **que** + subjunctive: **estaría bueno que te tomes unos
+          días** — *it'd be good if you took a few days off*. For people in general, the infinitive:
+          *estaría bueno **descansar***. And the push: **¡animate!** — *go for it!*"
       - title: "Terapia"
         body: "Buenos Aires has more psychologists per person than almost anywhere, so **deberías ir a
           terapia** isn't an insult — it's what a good friend says."
@@ -277,7 +284,7 @@ units:
             f: "f.sg"
       - lemma: "quemado"
         pos: "adj"
-        en: "burnt out, fried"
+        en: "burned out, fried"
         register: "informal"
         forms:
           - form: "quemado"
@@ -290,6 +297,7 @@ units:
         forms:
           - form: "encarar"
             f: "inf"
+        note: "Also common: to go up to someone, often to flirt (la encaró en el boliche)."
       - lemma: "paciencia"
         pos: "noun"
         en: "patience"
@@ -373,7 +381,8 @@ units:
           recognise it."
       - title: "Me prometiste"
         body: "**Me prometiste que ibas a venir** — *you promised me you'd come* (more careful: *que
-          vendrías*). And the classic ending: **al final no vino**."
+          vendrías*). And the classic ending: **al final no vino** — *in the end he didn't come*. If
+          he did, he **cumplió** — *kept his word*: *prometió llamar y cumplió*."
     words:
       - lemma: "ir a"
         pos: "phrase"
@@ -417,10 +426,16 @@ units:
         en: "to keep (a promise), to fulfil"
         forms:
           - form: "cumplió"
-            en: "he kept (his word)"
+            en: "he/she kept (his/her word), he/she turned (an age)"
             f: "3sg.pret.ind"
           - form: "cumplir"
             f: "inf"
+      - lemma: "llamar"
+        pos: "verb"
+        forms:
+          - form: "llamaba"
+            en: "was calling, used to call; (he said) he would call"
+            f: "sg.impf.ind"
   - ordinal: 7
     slug: "dijo-que-pasaria"
     title: "Chase a promise that didn't happen"
@@ -440,8 +455,9 @@ units:
           **pondría**, like *tener* → *tendría*. Out loud, porteños mostly say **iba a** +
           infinitive instead: *dijo que iba a pasar el martes*, *dijeron que iban a venir*."
       - title: "Me aseguró que…"
-        body: "Porteños rarely just *say* a promise: **me aseguró que**, **me juró que**. Then comes the
-          **excusa** — and you learn not to **confiar** in the **mentiroso**."
+        body: "To stress a promise, porteños say **me aseguró que…** — *he assured me* — or **me juró que…**
+          — *he swore*. Then **me puso una excusa** — *he gave me an excuse* — and you learn not to
+          **confiar en** (*trust*) the **mentiroso** (*liar*)."
     words:
       - lemma: "pasar"
         pos: "verb"
@@ -503,7 +519,7 @@ units:
         pos: "verb"
         forms:
           - form: "creí"
-            en: "I believed"
+            en: "I thought, I believed"
             f: "1sg.pret.ind"
       - lemma: "ir a"
         pos: "phrase"
@@ -535,9 +551,9 @@ units:
           rains*; **siempre y cuando vengas** — *as long as you come*. **En caso de que** — *if, in
           the event that* — is the formal one: *en caso de que haya un problema, llamame*."
       - title: "Por si"
-        body: "**Por si** — *just in case* — is what people say for everyday precautions, and it keeps the
-          normal verb: **llevá paraguas por si llueve**; *te dejo las llaves por si llegás antes*.
-          Short version: **por las dudas** — *llevá paraguas, por las dudas*."
+        body: "Unlike *a menos que*, **por si** — *just in case* — keeps the normal verb. It's what people
+          say for everyday precautions: **llevá paraguas por si llueve**; *te dejo las llaves por si
+          llegás antes*. Short version: **por las dudas** — *llevá paraguas, por las dudas*."
     words:
       - lemma: "a menos que"
         pos: "phrase"
@@ -547,8 +563,7 @@ units:
         en: "as long as, provided that"
       - lemma: "en caso de que"
         pos: "phrase"
-        en: "in the event that"
-        note: "formal; for everyday precautions say por si"
+        en: "in case"
       - lemma: "por si"
         pos: "phrase"
         en: "just in case, in case"
@@ -577,16 +592,16 @@ units:
           condition you give it back*; **salvo que lo necesite** — *unless I need it*. Lending to a
           friend in Buenos Aires comes with both."
       - title: "Que no lo choques"
-        body: "The *vos* subjunctive is the one you hear on the way out the door: *te lo presto, siempre y
-          cuando no lo **choques**, lo **cuides** y me lo **devuelvas entero***. The last word: **si
-          no**, *no te presto nada más*."
+        body: "When someone lends you something, the conditions come fast: *te lo presto, con tal de que lo
+          **cuides**, no lo **choques** y me lo **devuelvas entero***. The warning at the end is
+          **si no** — *otherwise*: *si no, no te presto nada más*."
     words:
       - lemma: "con tal de que"
         pos: "phrase"
         en: "on condition that, so long as"
       - lemma: "salvo que"
         pos: "phrase"
-        en: "except if, barring"
+        en: "unless, except if"
       - lemma: "si no"
         pos: "phrase"
         en: "otherwise, or else"
@@ -662,10 +677,11 @@ units:
       - title: "Pasaría, devolvería"
         body: "What he swore he'd do, told later — the everyday way: **dijo que iba a pasar**, **me aseguró
           que me lo iba a devolver**. More careful, and in writing: **dijo que pasaría**, **me lo
-          devolvería**; **pondría** keeps its odd stem."
+          devolvería**. Two have a changed stem: *poner* → **pondría**, *venir* → **vendría**."
       - title: "Con tal de que, se aceptan"
-        body: "**Con tal de que me lo devuelvas** and **salvo que lo necesite** take the subjunctive. On the
-          door: **se aceptan tarjetas**, **se hacen envíos**."
+        body: "**Con tal de que me lo devuelvas** — *as long as you give it back* — and **salvo que lo
+          necesite** — *unless I need it* — take the subjunctive. On the door: **se aceptan
+          tarjetas**, **se hacen envíos**."
     review:
       - "pasaría"
       - "devolvería"
@@ -741,6 +757,20 @@ units:
           - form: "acostumbré"
             f: "1sg.pret.ind"
             bound: true
+      - lemma: "ver"
+        pos: "verb"
+        forms:
+          - form: "viendo"
+            en: "seeing"
+            note: "vamos viendo = we will see as we go"
+            f: "ger"
+      - lemma: "avisar"
+        pos: "verb"
+        forms:
+          - form: "avisando"
+            en: "letting know"
+            note: "te voy avisando = I will keep you posted"
+            f: "ger"
   - ordinal: 12
     slug: "ando-buscando"
     title: "Say what you're in the middle of"
@@ -760,19 +790,20 @@ units:
           **¿qué andás haciendo?** It sounds looser than *estoy*."
       - title: "Voy conociendo, se va llenando"
         body: "With **ir**, it grows bit by bit: **voy conociendo gente**, **el bondi se va llenando**, **me
-          voy acostumbrando al ritmo**. It's the verb of settling in."
+          voy acostumbrando al ritmo**. It's the verb of settling in. Careful: in **andá llenando la
+          pava**, *andá* is the command of *ir* (go): *start filling the kettle*."
       - title: "Estamos por, a punto de"
-        body: "**Estamos por arrancar** — *we're about to start*. **A punto de** is the same, a hair closer:
-          **estoy a punto de terminar**."
+        body: "**Estamos por arrancar** — *we're about to start*. **A punto de** is a little stronger — *any
+          second now*: **estoy a punto de terminar**."
     words:
       - lemma: "andar"
         pos: "verb"
         forms:
           - form: "ando"
-            en: "I'm going around (doing)"
+            en: "I'm, I've been (lately)"
             f: "1sg.pres.ind"
           - form: "andás"
-            en: "you're going around (doing)"
+            en: "you're, you've been (lately)"
             f: "2sg.pres.ind.vos"
       - lemma: "pensar"
         pos: "verb"
@@ -821,10 +852,10 @@ units:
             f: "1pl.pres.ind"
       - lemma: "a punto de"
         pos: "phrase"
-        en: "on the verge of, just on the point of"
+        en: "about to, on the verge of"
       - lemma: "arrancar"
         pos: "verb"
-        en: "to get going, to kick off"
+        en: "to start, to get going"
         forms:
           - form: "arrancar"
             f: "inf"
@@ -847,12 +878,14 @@ units:
       es: "Me voy acostumbrando al ritmo."
       en: "I'm getting used to the pace."
     tips:
-      - title: "Aumentaron, no me alcanza"
-        body: "**Aumentaron la luz y el gas**, **el boleto subió**, **no llego a fin de mes** — the small
-          talk of bills."
+      - title: "Aumentaron la luz"
+        body: "The small talk of bills: **aumentaron la luz y el gas** — *electricity and gas went up*; **el
+          boleto subió** — *the fare went up*; **no llego a fin de mes** — *I can't make ends meet*:
+          the money runs out before the month does."
       - title: "Ando buscando, le cae bien"
-        body: "**Ando buscando laburo**, **estamos por arrancar**. **Le cae bien a todos**; **a ese no lo
-          aguanto**."
+        body: "**Ando buscando laburo** — *I've been looking for work*: **ando** + *-ando* is these days.
+          **Estamos por arrancar** — *we're about to start*. **Le cae bien a todo el mundo** —
+          *everybody likes him*; **a ese no lo aguanto** — *I can't stand that guy*."
     review:
       - "aumentaron"
       - "tarifas"
@@ -887,13 +920,14 @@ units:
         body: "Said slowly, **sí, claro** means *yeah, right*. **¡Qué novedad!** — *what a surprise* — is
           for the bondi that's late again; **¡lo que faltaba!** — *that's all we needed* — for the
           rain that starts on top of it. The everyday ones: **qué raro**, said flat — *¿llegó tarde?
-          Qué raro.* — and **mirá vos** — *well, look at that*. The tone does the work."
+          Qué raro.* — and **mirá vos** — *well, look at that*. The **tono** — *tone* — does the
+          work."
       - title: "Justo hoy"
         body: "**Justo** makes a complaint: **justo hoy** — *today of all days*. And **ya fue** — *forget
           it, it's done* — closes the subject: *¿no vino? Ya fue.*"
       - title: "Ni a palos"
-        body: "**Ni a palos** — *not in a million years*. The opposite shrug: **dale que va** — *good
-          enough, let's go*. When something's awful: **está de terror**."
+        body: "**Ni a palos** — *no way, not a chance*. And for a shrug: **dale que va** — *good enough,
+          let's go*. When something's awful: **está de terror**; when it's perfect: **impecable**."
     words:
       - lemma: "sí, claro"
         pos: "phrase"
@@ -913,7 +947,7 @@ units:
         en: "just, right (then), of all (days)"
       - lemma: "ni a palos"
         pos: "phrase"
-        en: "not in a million years"
+        en: "no way, not a chance"
         register: "informal"
       - lemma: "dale que va"
         pos: "phrase"
@@ -929,9 +963,13 @@ units:
       - lemma: "tono"
         pos: "noun"
         en: "tone (of voice)"
+      - lemma: "qué raro"
+        pos: "phrase"
+        en: "how strange"
+        note: "said flat, it is ironic: what a surprise"
   - ordinal: 15
     slug: "ni-ahi"
-    title: "Read between the lines"
+    title: "Say 'no way' and 'that's nonsense'"
     summary: "¿Estás loco? Ni ahí"
     grammar:
       - "ironia"
@@ -942,8 +980,8 @@ units:
       en: "Drive downtown? No way."
     tips:
       - title: "Ni ahí"
-        body: "**Ni ahí** — *no way, not even close* — is how a porteño turns something down. **Tal cual** —
-          *exactly* — is how they agree."
+        body: "**Ni ahí** — *no way, not even close* — is a strong porteño no, also to a question like
+          **¿estás cansado?**. **Tal cual** — *exactly* — is how they agree."
       - title: "Es cualquiera"
         body: "**Es cualquiera** — *that's nonsense*; **dijo cualquiera** — *he talked nonsense*; **hizo
           cualquiera** — *he did something stupid*. **Flasheaste** — *you're imagining things*. And
@@ -971,11 +1009,13 @@ units:
         forms:
           - form: "loco"
             f: "m.sg"
+            en: "crazy"
+            note: "Also said to a friend, like 'man': ¿Qué hacés, loco?"
           - form: "loca"
             f: "f.sg"
   - ordinal: 16
     slug: "ese-chabon"
-    title: "More lunfardo"
+    title: "Talk about people and nights out"
     summary: "Ese chabón es un groso"
     grammar:
       - "lunfardo"
@@ -994,12 +1034,13 @@ units:
     words:
       - lemma: "chabón"
         pos: "noun"
-        en: "dude, guy"
+        en: "guy, man"
         register: "lunfardo"
       - lemma: "mina"
         pos: "noun"
         en: "woman, girl (slang)"
         register: "lunfardo"
+        note: "Common among friends, but can sound disrespectful. Avoid in polite talk."
       - lemma: "groso"
         pos: "adj"
         en: "awesome, a legend"
@@ -1021,7 +1062,7 @@ units:
             f: "f.pl"
       - lemma: "zarpado"
         pos: "adj"
-        en: "over the top, wild"
+        en: "over the top, wild; out of line"
         register: "lunfardo"
         forms:
           - form: "zarpado"
@@ -1030,8 +1071,26 @@ units:
             f: "f.sg"
       - lemma: "bardo"
         pos: "noun"
-        en: "trouble, ruckus"
+        en: "trouble, mess"
         register: "lunfardo"
+      - lemma: "zarparse"
+        pos: "verb"
+        en: "to go too far, to cross the line"
+        register: "lunfardo"
+        forms:
+          - form: "te zarpaste"
+            en: "you crossed the line"
+            f: "2sg.pret.ind.vos.clitic"
+          - form: "me zarpé"
+            en: "I crossed the line"
+            f: "1sg.pret.ind.clitic"
+      - lemma: "armarse"
+        pos: "verb"
+        en: "to break out, to start (a fight, trouble)"
+        forms:
+          - form: "se armó"
+            en: "broke out, started (se armó bardo = trouble started)"
+            f: "3sg.pret.ind.clitic"
   - ordinal: 17
     slug: "estoy-al-horno"
     title: "Talk like the barrio"
@@ -1045,16 +1104,16 @@ units:
       en: "That guy is so cheap: he never pays for a beer."
     tips:
       - title: "Al horno, al pedo"
-        body: "**Estoy al horno** — *I'm in trouble, I'm toast*. **Qué bajón** — *what a downer*. **Al
-          pedo** — *for nothing, doing nothing*: **fui al pedo**, **estoy al pedo**. And the flat
-          *no way*: **ni en pedo**. The other *pedo* phrases: **estar en pedo** — *to be drunk*;
-          **de pedo** — *by pure luck*: *llegué de pedo*; **a los pedos** — *very fast*. Among
-          friends only."
+        body: "**Estoy al horno** — *I'm in big trouble*. **Qué bajón** — *what a shame*. **Al pedo** — *for
+          nothing, doing nothing*: **fui al pedo**, **estoy al pedo**. And the flat *no way*: **ni
+          en pedo**. The other *pedo* phrases: **estar en pedo** — *to be drunk*; **de pedo** — *by
+          pure luck*: *llegué de pedo*. Among friends only."
       - title: "Rata, careta, grasa"
-        body: "People get labels: a **rata** never pays; a **careta** is a square (or sober, or a phony);
-          **grasa** is tacky. A **manija** is wound up about something: **estoy manija con el
-          recital**. The **cana** is the police. A friend who backs you **te hace la gamba**; one
-          who talks nonsense **manda fruta**."
+        body: "People get labels: a **rata** never pays; a **careta** is fake or uptight (or someone who
+          doesn't drink or party); **grasa** is tacky (a snobbish word: fine as a joke about a
+          shirt, rude about a person). **Estar manija** is to be very excited about something:
+          **estoy manija con el recital**. The **cana** is the police. A friend who backs you **te
+          hace la gamba**; one who talks nonsense **manda fruta**."
     words:
       - lemma: "al horno"
         pos: "phrase"
@@ -1068,25 +1127,29 @@ units:
         pos: "phrase"
         en: "for nothing, with nothing to do"
         register: "lunfardo"
+        note: "Very common but a bit crude (pedo = fart). Fine with friends, not at work."
       - lemma: "ni en pedo"
         pos: "phrase"
         en: "hell no (crude)"
         register: "lunfardo"
+        note: "Crude but very common; 'en pedo' means drunk, so literally 'not even drunk'. 'Ni ahí' is
+          softer."
       - lemma: "rata"
         pos: "adj"
         en: "stingy, cheap (person)"
         register: "lunfardo"
       - lemma: "careta"
         pos: "adj"
-        en: "straight-laced, phony"
+        en: "fake, uptight, snobby"
         register: "lunfardo"
+        note: "Also someone who doesn't party or do drugs. A 'boliche careta' is a posh, uptight club."
       - lemma: "grasa"
         pos: "adj"
         en: "tacky"
         register: "lunfardo"
       - lemma: "manija"
         pos: "adj"
-        en: "hyped up, wound up"
+        en: "very excited, hyped up"
         register: "lunfardo"
       - lemma: "cana"
         pos: "noun"
@@ -1133,18 +1196,21 @@ units:
       en: "Damn it! I forgot my keys, what a pain."
     tips:
       - title: "Understand first"
-        body: "You will hear these words every day — in traffic, at the football, between friends. Learn to
+        body: "You will hear these words every day — in traffic, at soccer games, between friends. Learn to
           understand them first. Say them only with close friends who already swear with you. Never
           to a stranger, at work, to someone older or to the police."
       - title: "Swearing at things"
-        body: "Most swearing is aimed at the situation, not at a person: **¡la puta madre!**, **¡mierda!**,
-          **¡carajo!**, **¡qué cagada!** A bad day is *un día de mierda*. Two are harmless: **una
-          boludez** is something silly or small, and **me cagué de risa** means *I laughed a lot*."
+        body: "Most swearing is aimed at the situation, not at a person: **¡la puta madre!**, **¡la concha
+          de la lora!**, **¡mierda!**, **¡carajo!**, **¡qué cagada!** A bad day is *un día de
+          mierda*. **Me chupa un huevo** is *I don't give a shit*. Two are not insults, just very
+          informal: **una boludez** is something silly or small, and **me cagué de risa** means *I
+          laughed my ass off* — I laughed a lot."
       - title: "Swearing at people"
-        body: "These hurt. **Pelotudo** is stronger than *boludo* and rarely friendly. A **forro** is a
-          nasty person. An **hinchapelotas** won't stop bothering you: *¡no rompas las bolas!* —
-          often just *¡no rompas!* **Andá a cagar** is *get lost*: a joke between friends, a fight
-          with a stranger."
+        body: "These hurt. **Pelotudo** is stronger than *boludo*; only close friends say it as a joke. A
+          **forro** is a nasty person. An **hinchapelotas** won't stop bothering you: *¡no rompas
+          las bolas!* — often just *¡no rompas!* **Andá a cagar** is *go to hell*: a joke between
+          friends, a fight with a stranger. **Hijo de puta** is one of the strongest insults — but
+          shouted at a great goal it is admiration."
     words:
       - lemma: "la puta madre"
         pos: "phrase"
@@ -1174,7 +1240,7 @@ units:
         register: "vulgar"
         forms:
           - form: "me cagué de risa"
-            en: "I laughed my head off"
+            en: "I laughed my ass off, I laughed a lot"
             f: "1sg.pret.ind.clitic"
       - lemma: "boludez"
         pos: "noun"
@@ -1188,8 +1254,14 @@ units:
         forms:
           - form: "pelotudo"
             f: "m.sg"
+            en: "idiot, moron"
+            note: "Stronger than boludo. Close friends do say it as a joke, but from a stranger it is an
+              insult."
           - form: "pelotuda"
             f: "f.sg"
+            en: "idiot, moron"
+            note: "Stronger than boluda. Close friends do say it as a joke, but from a stranger it is an
+              insult."
       - lemma: "forro"
         pos: "noun"
         en: "jerk, nasty person"
@@ -1197,8 +1269,10 @@ units:
         forms:
           - form: "forro"
             f: "m.sg"
+            en: "asshole"
           - form: "forra"
             f: "f.sg"
+            en: "asshole"
       - lemma: "hinchapelotas"
         pos: "noun"
         en: "pain in the neck, pest"
@@ -1212,6 +1286,21 @@ units:
         pos: "phrase"
         en: "get lost, piss off"
         register: "vulgar"
+      - lemma: "hijo de puta"
+        pos: "phrase"
+        en: "son of a bitch"
+        note: "very crude; an insult, but also shouted in admiration"
+        register: "vulgar"
+      - lemma: "la concha de la lora"
+        pos: "phrase"
+        en: "damn it"
+        note: "very crude; said at a situation, not at a person"
+        register: "vulgar"
+      - lemma: "me chupa un huevo"
+        pos: "phrase"
+        en: "I don't give a damn"
+        note: "very crude"
+        register: "vulgar"
   - ordinal: 19
     slug: "me-estas-cargando"
     title: "Tease and be teased"
@@ -1224,11 +1313,13 @@ units:
       en: "Are you kidding me?"
     tips:
       - title: "¿Me estás cargando?"
-        body: "**Cargar** someone is *to tease, to wind up*: **¿me estás cargando?** — *are you pulling my
-          leg?* Porteños **cargan** the people they like; being left alone is the bad sign."
+        body: "**Cargar** someone is *to tease, to joke with someone*: **¿me estás cargando?** — *are you
+          joking with me?* Porteños **cargan** the people they like; being left alone is the bad
+          sign."
       - title: "En joda"
-        body: "**Lo dije en joda** — *I was joking*. A **chiste** is a joke you tell; if it lands, it's
-          **gracioso**."
+        body: "**Lo dije en joda** — *I said it as a joke*. **Tomar el pelo** is the same game as cargar:
+          **¿me estás tomando el pelo?** — *are you joking with me?* **¿Me estás jodiendo?** is very
+          casual: friends only. A **broma** is a prank, or something not said seriously."
     words:
       - lemma: "cargar"
         pos: "verb"
@@ -1259,10 +1350,17 @@ units:
             f: "ger"
       - lemma: "broma"
         pos: "noun"
-        en: "prank, practical joke"
+        en: "joke, prank"
+        note: "Chiste = a joke you tell; broma = a prank, or something said not seriously."
+      - lemma: "gastar"
+        pos: "verb"
+        forms:
+          - form: "gastando"
+            en: "making fun of (someone)"
+            f: "ger"
   - ordinal: 20
     slug: "caiste"
-    title: "Fall for a wind-up"
+    title: "Fall for a joke"
     summary: "¡Caíste! Te estaba tomando el pelo"
     grammar:
       - "humor"
@@ -1271,19 +1369,16 @@ units:
       es: "¡Caíste! Te estaba tomando el pelo."
       en: "Got you! I was pulling your leg."
     tips:
-      - title: "Te estaba tomando el pelo"
-        body: "**Estar** + the **-ando / -iendo** form is how you catch a joke in progress: **me estás
-          tomando el pelo** — *you're pulling my leg*; **¿me estás jodiendo?** — *you're kidding
-          me*; **estás exagerando**. And when you believed it: **¡caíste!** — *got you!* — **qué
-          inocente**."
-      - title: "Se calentó"
-        body: "The joke only works if nobody takes it badly: **se calentó** — *he got mad* — and **se
-          ofendió** — *he took offense* — are the worst things to say about someone at an asado.
-          **Se picó** is what porteños say when a match or an argument got heated: *se picó el
-          partido*. Everybody has an **apodo** — *a nickname*: **el Flaco**, **el Gordo**, **el
-          Negro**, **el Pelado**, **el Colo** (the redhead). They are friendly, not insults: *le
-          dicen el Flaco*. A **broma** — *a prank* — is a sign of affection too. **No te hagas el
-          vivo**, though: **te hacés el vivo** is *you're acting smart*."
+      - title: "¡Caíste!"
+        body: "When someone believes your joke: **¡caíste!** — *got you!* — and **qué inocente** — *you're
+          so easy to trick*. If they complain too much: **estás exagerando** — *you're overdoing
+          it*. **Te hacés el vivo** — *you're trying to be clever* — is for someone who tries to
+          take advantage of others."
+      - title: "Se calentó, apodos"
+        body: "If someone **se calentó** — *got mad* — or **se ofendió** — *took offense* — the joke went
+          too far. **Se picó**: a game or an argument got heated. An **apodo** (*nickname*) like
+          **el Gordo** or **el Pelado** is friendly among friends; never use one with someone you
+          just met."
     words:
       - lemma: "caer"
         pos: "verb"
@@ -1291,6 +1386,7 @@ units:
           - form: "caíste"
             en: "you fell for it"
             f: "2sg.pret.ind.vos"
+            note: "Caer = to fall for a joke or a lie: ¡caíste! = got you!"
       - lemma: "exagerar"
         pos: "verb"
         forms:
@@ -1299,7 +1395,7 @@ units:
             f: "ger"
       - lemma: "picarse"
         pos: "verb"
-        en: "to get heated; to get touchy"
+        en: "to get touchy, to take offense"
         register: "informal"
         forms:
           - form: "se picó"
@@ -1316,6 +1412,7 @@ units:
           - form: "te hacés el vivo"
             en: "you're acting smart"
             f: "2sg.pres.ind.vos.clitic"
+        note: "Vivo = sly, street-smart. Hacerse el vivo = trying to take advantage of others."
       - lemma: "apodo"
         pos: "noun"
         en: "nickname"

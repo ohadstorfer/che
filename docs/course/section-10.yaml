@@ -32,8 +32,8 @@ units:
     tips:
       - title: "It fell on me"
         body: "Spanish tells accidents as if they happened *to* you: **se me cayó** — *I dropped it* (it
-          fell on me); **se me rompió** — *it broke on me*; **se me pasó** — *I forgot* (it slipped
-          my mind). Nobody is to blame, which is the point."
+          fell, and it happened to me); **se me rompió** — *it broke on me*; **se me pasó** — *I
+          forgot* (it slipped my mind). Nobody is to blame, which is the point."
       - title: "Se te, se le"
         body: "Change the middle word for the person: **se te cayó** — *you dropped it*; **se le rompió** —
           *he broke it*."
@@ -100,18 +100,19 @@ units:
           **me quedé sin batería**. Keep *acabar* to **se me acabó**: on its own it is sexual slang
           in Argentina."
       - title: "Nobody's fault"
-        body: "That's the whole point: **no fue mi culpa, se me cayó**. And the excuse every porteño has
-          ready when they're late: **se me hizo tarde**."
+        body: "**Se me** + verb says it happened *to* you, by accident — you didn't do it on purpose: **no
+          fue mi culpa, se me cayó** — *it wasn't my fault, I dropped it*. And the excuse every
+          porteño has ready when they're late: **se me hizo tarde** — *it got late*."
     words:
       - lemma: "quemarse"
         pos: "verb"
-        en: "to burn, to get burnt"
+        en: "to burn, to get burned"
         forms:
           - form: "se me quemó"
-            en: "I burnt (it got burnt)"
+            en: "I burned it (it got burned)"
             f: "3sg.pret.ind.clitic"
           - form: "se me quemaron"
-            en: "I burnt (them)"
+            en: "I burned them"
             f: "3pl.pret.ind.clitic"
           - form: "quemó"
             f: "3sg.pret.ind"
@@ -177,7 +178,7 @@ units:
         en: "disaster"
   - ordinal: 3
     slug: "para-que"
-    title: "Say what something is for"
+    title: "Say why you're doing something"
     summary: "Para que entiendas"
     grammar:
       - "subjuntivo.para-que"
@@ -192,7 +193,7 @@ units:
           the subjunctive when it's someone else: **te lo mando para que lo leas**."
       - title: "Antes de que"
         body: "**Antes de que llegue** — *before he gets here* — always takes the subjunctive: it hasn't
-          happened yet."
+          happened yet. Same person on both sides: **antes de** + infinitive — *antes de salir*."
     words:
       - lemma: "para que"
         pos: "phrase"
@@ -232,7 +233,7 @@ units:
       en: "I'm leaving you the key so you can get in."
     tips:
       - title: "While I'm away"
-        body: "Going on holiday? Every instruction is a **para que** + what the *other* person does: **te
+        body: "Going on vacation? Every instruction is a **para que** + what the *other* person does: **te
           dejo la llave para que entres**, **para que riegues las plantas**, **para que el gato
           coma**. Two people, so the second verb is subjunctive."
       - title: "Sin que"
@@ -243,7 +244,8 @@ units:
           persianas**."
       - title: "The stems you know"
         body: "The subjunctive keeps the *yo* stem: *cierro* → **cierres**, *encuentro* → **encuentres**,
-          *riego* → **riegues**. The regular ones just swap the vowel: **entres**, **abras**."
+          *riego* → **riegues** (the **u** is only spelling: it keeps the *g* hard). The regular
+          ones just swap the vowel: **entres**, **abras**."
     words:
       - lemma: "sin que"
         pos: "phrase"
@@ -254,6 +256,10 @@ units:
           - form: "entres"
             en: "you get in (so that you get in)"
             f: "2sg.pres.subj.vos"
+          - form: "entre"
+            f: "3sg.pres.subj"
+            en: "goes in, comes in (after que)"
+            bound: true
       - lemma: "abrir"
         pos: "verb"
         forms:
@@ -492,7 +498,7 @@ units:
         en: "dulce de leche, milk caramel"
   - ordinal: 7
     slug: "practica-nunca-habia"
-    title: "Practice: mishaps, favours and first times"
+    title: "Practice: mishaps, favors and first times"
     summary: "Se nos acabó el café, ¡qué desastre!"
     grammar:
       - "repaso.se-accidental"
@@ -542,9 +548,9 @@ units:
     tips:
       - title: "No anda"
         body: "For machines, porteños say **anda** — *it works*: **no anda el wifi**, **¿anda el
-          ascensor?**. *Funciona* is fine, just stiffer. The other ways things fail: **se rompió**,
-          **está roto**, **no prende** — *it will not turn on*; **se colgó** — *it froze*; **pierde
-          agua** — *it is leaking*."
+          ascensor?**. *Funciona* means the same and is just as common. The other ways things fail:
+          **se rompió**, **está roto**, **no prende** — *it won't turn on*; **se colgó** — *it
+          froze*; **pierde agua** — *it's leaking*."
       - title: "Quejarse"
         body: "**Me quejé** — *I complained*; **¿de qué te quejás?** — *what are you complaining about?*
           **Reclamar** is to file a complaint, and something you do a lot with a phone company."
@@ -600,13 +606,15 @@ units:
     tips:
       - title: "Anda, andan, anduvo"
         body: "One machine **anda**, two **andan**: **no andan las pilas**. The past is irregular: **ayer
-          anduvo bien** — *it worked fine yesterday*. **Funciona**, **funcionan** mean the same, a
-          bit more formal — the technician's word."
+          anduvo bien** — *it worked fine yesterday*. **Funciona**, **funcionan** mean the same and
+          are just as common. For *how* something works, only *funcionar*: **¿cómo funciona este
+          control?**"
       - title: "Arreglar"
-        body: "**¿Me lo podés arreglar?** — *can you fix it for me?* When the **técnico** has been: **lo
-          arregló en cinco minutos**. When he hasn't, **hacés un reclamo**, and **nos quejamos** all
-          summer. The questions for the técnico: **¿tiene arreglo?** — *can it be fixed?*; **¿cuánto
-          me sale el arreglo?**; **¿cuándo podés venir?**"
+        body: "**¿Me lo podés arreglar?** — *can you fix it for me?* After the **técnico** comes: **lo
+          arregló en cinco minutos** — *he fixed it in five minutes*. If he never comes, **hacés un
+          reclamo** — *you file a complaint* — and **nos quejamos** all summer. The questions for
+          the técnico: **¿tiene arreglo?** — *can it be fixed?*; **¿cuánto me sale el arreglo?**;
+          **¿cuándo podés venir?**"
     words:
       - lemma: "andar"
         pos: "verb"
@@ -647,7 +655,7 @@ units:
             bound: true
       - lemma: "técnico"
         pos: "noun"
-        en: "repairman, technician"
+        en: "repairman, technician; coach (soccer)"
       - lemma: "aire"
         pos: "noun"
         en: "air, air conditioning"
@@ -660,13 +668,14 @@ units:
         note: "el control — the TV or air-conditioning remote"
       - lemma: "pila"
         pos: "noun"
-        en: "battery (AA)"
+        en: "battery (small, like AA)"
         forms:
           - form: "pila"
             f: "f.sg"
           - form: "pilas"
-            en: "batteries (AA)"
+            en: "batteries (small, like AA)"
             f: "f.pl"
+        note: "For small devices (remote, watch). A phone or car battery is 'batería'."
       - lemma: "enchufe"
         pos: "noun"
         en: "plug, socket"
@@ -693,7 +702,8 @@ units:
     tips:
       - title: "Las expensas"
         body: "Living in a building means paying **expensas** — *the monthly building fees* — to the
-          **consorcio**. The **encargado** is the building's super, and knows everything."
+          **consorcio** — *the owners' association*. The **encargado** is the building caretaker,
+          and knows everything."
       - title: "El calefón"
         body: "The **calefón** heats the water, and breaks in July. When there's a **pérdida** — *a leak* —
           you call the **plomero** to **arreglar** it."
@@ -709,7 +719,7 @@ units:
         en: "water heater"
       - lemma: "pérdida"
         pos: "noun"
-        en: "leak"
+        en: "loss; leak (water, gas)"
   - ordinal: 11
     slug: "se-tapo-la-pileta"
     title: "Get something fixed at home"
@@ -724,22 +734,23 @@ units:
     tips:
       - title: "Se tapó, se trabó"
         body: "Things at home break on their own, with **se**: **se tapó el inodoro** — *the toilet's
-          blocked*; **se trabó la puerta** — *the door jammed* (a lift stuck between floors **se
-          quedó**: *se quedó el ascensor*); **se cortó el agua**. Nobody did it — it just **se
+          clogged*; **se trabó la puerta** — *the door got stuck* (an elevator stuck between floors
+          **se quedó**: *se quedó el ascensor*); **se cortó el agua**. Nobody did it — it just **se
           rompió**. **La pileta** is the swimming pool and also the kitchen sink — **la pileta de la
           cocina**, or **la bacha**."
       - title: "¿A quién llamo?"
         body: "Each problem has its person: the **plomero** for a **canilla** that **gotea** — *a dripping
-          tap* — the **gasista** for the calefón, the **encargado** for the **portero eléctrico**. A
-          **filtración** from the flat upstairs goes to the **administración**, and takes months. A
-          toilet or a tap that leaks **pierde agua**: **el inodoro pierde agua**."
+          faucet* — the **gasista** for the calefón, the **encargado** for the **portero
+          eléctrico**. A **filtración** from the apartment upstairs goes to the **administración** —
+          *the management office* — and takes months. A toilet or a faucet that leaks **pierde
+          agua**: **el inodoro pierde agua**."
     words:
       - lemma: "taparse"
         pos: "verb"
-        en: "to get blocked"
+        en: "to get clogged, to get blocked"
         forms:
           - form: "se tapó"
-            en: "got blocked"
+            en: "got clogged, got blocked"
             f: "3sg.pret.ind.clitic"
           - form: "tapó"
             f: "3sg.pret.ind"
@@ -803,10 +814,12 @@ units:
       en: "I don't agree, not at all."
     tips:
       - title: "De acuerdo"
-        body: "**Estoy de acuerdo** — *I agree*. Disagreeing: **para nada** — *not at all*; **depende** —
-          *it depends*; **en parte** — *partly*."
+        body: "**Estoy de acuerdo** — *I agree*. Disagreeing: **no estoy de acuerdo**, or a flat **para
+          nada** — *not at all*. In between: **depende** — *it depends*; **en parte** — *partly*."
       - title: "Softening it"
-        body: "A porteño argues hard and softens it: **puede ser, pero…** — *could be, but…*"
+        body: "A porteño argues hard and softens it: **puede ser, pero…** — *could be, but…* **Puede ser
+          que** + the subjunctive is *maybe*: **puede ser que tengas razón** — *you might be right*;
+          **puede ser que llueva**."
     words:
       - lemma: "de acuerdo"
         pos: "phrase"
@@ -845,22 +858,23 @@ units:
           And for the friend who goes too far: **¡no exageres!**"
       - title: "¿Vos qué opinás?"
         body: "**Opinar** is having a view: **¿vos qué opinás?** — *what do you think?*; **opino lo mismo**.
-          But *opino que…* sounds like a TV panel: day to day porteños start with **para mí** or
-          **me parece que**: **para mí, depende del tema**; **me parece que tenés razón**."
+          But **yo opino que…** sounds formal, like a TV panel: in daily speech porteños start with
+          **para mí** or **me parece que**: **para mí, depende del tema**; **me parece que tenés
+          razón**."
     words:
       - lemma: "opinar"
         pos: "verb"
         en: "to think, to have an opinion"
         forms:
           - form: "opino"
-            en: "my view is"
+            en: "I think"
             f: "1sg.pres.ind"
           - form: "opinás"
-            en: "your view is"
+            en: "you think"
             f: "2sg.pres.ind.vos"
       - lemma: "exacto"
         pos: "interj"
-        en: "precisely, spot on"
+        en: "exactly, right"
       - lemma: "sin duda"
         pos: "phrase"
         en: "no doubt, without a doubt"
@@ -869,7 +883,7 @@ units:
         en: "on the contrary"
       - lemma: "coincidir"
         pos: "verb"
-        en: "to agree, to see eye to eye"
+        en: "to agree"
         forms:
           - form: "coincido"
             en: "I agree"
@@ -907,6 +921,7 @@ units:
       - lemma: "nada que ver"
         pos: "phrase"
         en: "nothing to do with it; totally different"
+        note: "Alone as a reply it means 'not at all, no way': ¿Enojada yo? Nada que ver."
   - ordinal: 14
     slug: "practica-tenes-razon"
     title: "Practice: the final, repairs and arguments"
@@ -926,7 +941,8 @@ units:
       - title: "Para mí"
         body: "**Para mí**, **me parece que**, **coincido**, **al contrario** — the whole argument. *Opino
           que* is for TV panels: at the table it is **para mí, el árbitro estuvo mal**. And the line
-          that ends it: **¡no exageres!**"
+          that ends it: **¡no exageres!** For advice, **tendrías que** — *you should*: **tendrías
+          que ir al médico**."
     review:
       - "ganaron"
       - "perdieron"
@@ -955,9 +971,12 @@ units:
       es: "Te transfiero la plata a la noche."
       en: "I'll transfer you the money tonight."
     tips:
-      - title: "El cajero"
-        body: "The ATM is **el cajero** — you go **a sacar plata**. Most porteños split the bill by
-          **transferencia**: **te transfiero** — *I'll transfer it to you*."
+      - title: "El cajero y el alias"
+        body: "The ATM is **el cajero**: **voy al cajero a sacar plata**. Paying a friend goes by
+          **transferencia** to their **alias** — a few words instead of an account number: **¿a qué
+          alias transferiste?** After it: **¿me mandás el comprobante?** The **sucursal** is the
+          bank branch; a **comisión** is the fee a cajero charges; **las cuentas** are your bills,
+          or your bank accounts."
       - title: "Transfiero, transferís"
         body: "*Transferir* changes e to ie when the stress falls on it: yo **transfiero**, él
           **transfiere**. With vos the stress moves, so it stays: **transferís**."
@@ -992,7 +1011,7 @@ units:
             en: "you transferred"
             f: "2sg.pret.ind.vos"
           - form: "transferime"
-            en: "transfer me"
+            en: "send me (the money), transfer it to me"
             f: "2sg.imp.vos.clitic"
       - lemma: "cuenta"
         pos: "noun"
@@ -1098,7 +1117,7 @@ units:
             f: "1sg.pret.ind"
       - lemma: "me pegué un susto"
         pos: "phrase"
-        en: "I got a fright"
+        en: "I got scared"
         register: "informal"
       - lemma: "casi me muero"
         pos: "phrase"
@@ -1106,7 +1125,7 @@ units:
         register: "informal"
   - ordinal: 17
     slug: "me-dan-asco"
-    title: "Say what gives you the creeps"
+    title: "Say what disgusts or scares you"
     summary: "Me dan asco las cucarachas"
     grammar:
       - "miedo"
@@ -1257,22 +1276,25 @@ units:
     words:
       - lemma: "saludar"
         pos: "verb"
-        en: "to greet, to say hello"
+        en: "to greet, to say hi or bye"
         forms:
           - form: "saluda"
             en: "greets (people greet)"
             f: "3sg.pres.ind"
           - form: "saludar"
             f: "inf"
+        note: "Argentines greet and say bye to each person, usually with one kiss on the cheek; skipping it
+          is rude."
       - lemma: "cenar"
         pos: "verb"
         forms:
           - form: "cena"
-            en: "has dinner (people have dinner)"
+            en: "he/she has dinner; dinner"
             f: "3sg.pres.ind"
       - lemma: "previa"
         pos: "noun"
-        en: "pregame, pre-party"
+        en: "pre-party, drinks before going out"
+        note: "Drinking at someone's home before going to a club (boliche), often until 1–2 a.m."
       - lemma: "normal"
         pos: "adj"
         en: "normal"
@@ -1284,6 +1306,12 @@ units:
             f: "m.sg"
           - form: "rara"
             f: "f.sg"
+      - lemma: "dejar"
+        pos: "verb"
+        forms:
+          - form: "deja"
+            en: "leaves (people leave)"
+            f: "3sg.pres.ind"
   - ordinal: 19
     slug: "se-aplaude-al-asador"
     title: "Get invited to an asado"
@@ -1303,9 +1331,10 @@ units:
           te gusta la carne?** — **jugosa**, **a punto** or **bien cocida** — and the right thing to
           say is **está buenísimo**."
       - title: "Un aplauso para el asador"
-        body: "At the end **se aplaude al asador**: *¡un aplauso para el asador!* **Se brinda** with
-          everyone at the table. Leaving without saying goodbye to each person? Very
-          **maleducado**."
+        body: "When the meat reaches the table, **se aplaude al asador**: *¡un aplauso para el asador!* **Se
+          brinda** with everyone at the table. Leaving without saying goodbye to each person? Very
+          **maleducado**. And **los ñoquis del 29**: on the 29th of each month people eat gnocchi,
+          with money under the plate for luck."
     words:
       - lemma: "aplaudir"
         pos: "verb"
@@ -1322,6 +1351,7 @@ units:
       - lemma: "asador"
         pos: "noun"
         en: "the one who grills (at an asado)"
+        note: "At an asado people clap for the asador: \"¡Un aplauso para el asador!\""
       - lemma: "brindar"
         pos: "verb"
         forms:
@@ -1332,11 +1362,13 @@ units:
         pos: "verb"
         forms:
           - form: "trae"
-            en: "brings (people bring)"
+            en: "brings (he/she brings)"
             f: "3sg.pres.ind.irregular"
       - lemma: "chorizo"
         pos: "noun"
         en: "sausage"
+        note: "Fresh pork/beef sausage grilled at asados, not the dry Spanish kind. In bread it's a
+          choripán."
       - lemma: "fuego"
         pos: "noun"
         en: "fire"
@@ -1373,10 +1405,10 @@ units:
       en: "I just got here."
     tips:
       - title: "Acabo de"
-        body: "**Acabo de** + infinitive is *I just did it*: **acabo de llegar**, **acaba de salir**.
+        body: "**Acabo de** + infinitive is *I just did it*: **acabo de comer**, **acaba de salir**.
           Porteños mostly say **recién** + the past instead: **recién llegué**, **recién salió** —
-          it means the same. **Volví a** is *I did it again*: **volví a perder las llaves**. Or just
-          **de nuevo**."
+          it means the same. **Volví a** is *I did it again*: **volví a llamar**. Or just **de
+          nuevo** or **otra vez** — *again*."
       - title: "Suelo"
         body: "**Soler** is *to usually*: **suelo almorzar tarde** — *I usually have lunch late*; **¿solés
           venir acá?** It only ever comes with an infinitive. In speech porteños more often say
@@ -1449,12 +1481,13 @@ units:
     tips:
       - title: "Dejé de, volví a"
         body: "**Dejar de** + infinitive is *to stop, to quit*: **dejé de fumar**, **¿dejaste de ir al
-          gimnasio?**, **¡dejá de quejarte!** Its opposite is **volver a** — **volvió a fumar** — or
-          **ponerse a**, *to get down to it*: **me puse a estudiar**."
-      - title: "Solemos, suelen"
-        body: "The other persons of *soler*: **solemos juntarnos los viernes**, **los porteños suelen cenar
-          tarde**. And *acabar de* for everyone: **acabamos de llegar**, **acaban de salir**. How
-          often? **De vez en cuando**, or **casi nunca**."
+          gimnasio?**, **¡dejá de quejarte!** Its opposite is **volver a**: **volvió a fumar** — *he
+          started smoking again*. **Ponerse a** is *to start doing*: **me puse a estudiar** — *I
+          started studying*."
+      - title: "How often?"
+        body: "**De vez en cuando** is *every now and then*: **fumo de vez en cuando**. **Casi nunca** is
+          *hardly ever*: **casi nunca manejo**. Both can be a whole answer: *¿Salís mucho? — De vez
+          en cuando.* Your **rutina** is what you do every day."
     words:
       - lemma: "volver a"
         pos: "phrase"
@@ -1481,10 +1514,10 @@ units:
             f: "2sg.imp.vos"
       - lemma: "ponerse a"
         pos: "phrase"
-        en: "to start (doing), to get down to"
+        en: "to start (doing)"
         forms:
           - form: "me puse a"
-            en: "I started (doing), I got down to"
+            en: "I started (doing)"
             f: "1sg.pret.ind.clitic"
       - lemma: "fumar"
         pos: "verb"
@@ -1514,7 +1547,7 @@ units:
         en: "routine"
   - ordinal: 22
     slug: "practica-un-aplauso"
-    title: "Practice: paying, bugs and the asado"
+    title: "Practice: paying, scares and the asado"
     summary: "¡Un aplauso para el asador!"
     grammar:
       - "repaso.banco"
@@ -1527,7 +1560,7 @@ units:
     tips:
       - title: "Me dan"
         body: "**Me da asco la cucaracha**, **me dan asco las cucarachas** — the verb follows the thing. In
-          the story: **¿te dio miedo?** — **no, me dio risa**."
+          the past: **¿te dio miedo?** — **no, me dio risa**."
       - title: "Se trae, se aplaude"
         body: "What everyone does at an asado: **se trae algo**, **se brinda**, **se aplaude al asador**.
           **Se** + the *él* form, no subject needed."
@@ -1560,12 +1593,14 @@ units:
       es: "No sabés lo que me contaron de Juan."
       en: "You won't believe what they told me about Juan."
     tips:
-      - title: "Lo que, the hook"
-        body: "**No sabés lo que me contaron** — *you won't believe what I heard* — is how every chisme
-          starts. **Lo que** carries the whole story: **todo lo que pasó**, **lo que me dijo**."
+      - title: "Lo que"
+        body: "**Lo que** is *what* when it means *the thing that*: **¿viste lo que pasó?**, **contame lo
+          que pasó**. It is how every chisme starts: **no sabés lo que me contaron** — *you won't
+          believe what they told me*. A direct question keeps **qué**: *¿qué pasó?*"
       - title: "The reactions"
-        body: "**¡No me digas!** — *no way!*; **¡callate!** — between friends it isn't rude, it means
-          *you're kidding!* And by the afternoon **todo el mundo** knows."
+        body: "**¡No me digas!** and **¡callate!** both mean *no way!* — between friends *callate* isn't
+          rude. **¡Mirá vos!** is milder: *wow, really?* By the afternoon **todo el mundo** knows,
+          thanks to the **chusma**: the person who loves gossip."
       - title: "Los cuernos"
         body: "In real gossip nobody says *lo engañó*: it is **le metió los cuernos** — *cheated on
           him/her*, literally *put the horns on*. **Engañar** is also plain *to trick, to fool*."
@@ -1590,11 +1625,11 @@ units:
         en: "you don't say, you're kidding"
       - lemma: "callarse"
         pos: "verb"
-        en: "to be quiet"
+        en: "to be quiet, to shut up"
         register: "informal"
         forms:
           - form: "callate"
-            en: "shut up; you're kidding!"
+            en: "be quiet, shut up; no way! (surprise)"
             f: "2sg.imp.vos.clitic"
       - lemma: "todo el mundo"
         pos: "phrase"
@@ -1651,15 +1686,22 @@ units:
         en: "what"
       - lemma: "mirá vos"
         pos: "phrase"
-        en: "well I never, would you look at that"
+        en: "would you look at that, wow"
       - lemma: "chusma"
         pos: "noun"
-        en: "gossip (person)"
+        en: "gossip, nosy person"
         register: "informal"
       - lemma: "chusmear"
         pos: "verb"
-        en: "to gossip, to snoop"
+        en: "to gossip, to snoop, to have a look"
         register: "informal"
         forms:
           - form: "chusmear"
             f: "inf"
+      - lemma: "contar"
+        pos: "verb"
+        forms:
+          - form: "cuenta"
+            en: "tells, counts (he/she)"
+            f: "3sg.pres.ind.irregular"
+            bound: true

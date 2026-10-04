@@ -138,6 +138,32 @@ const TOPICS = [
   { id: 'music', unit: /music|guitarra|bailas/, themes: ['noche'], culture: ['musica/rock-nacional', 'musica/folklore', 'musica/cumbia-y-cuarteto'] },
   { id: 'childhood', unit: /\bkid\b|chico\b|childhood|primaria|school days|figuritas/, themes: ['gente'], culture: ['iconos/mafalda', 'iconos/historietas-y-pantallas'] },
   { id: 'reading and writing', unit: /read and write|\bescrib/, themes: [], culture: ['iconos/escritores'] },
+  // Everyday life (the 2026-10 sections). They come after the topics above, so
+  // a unit that already had a class by topic keeps it. No slang themes: the
+  // topics below still choose a unit's slang.
+  { id: 'strikes and marches', unit: /strike|\bparo\b|nothing's running|marcha/, themes: [], culture: ['escuela-y-laburo/paros-y-marchas'] },
+  { id: 'the news on TV and radio', unit: /headline|read the news|where you heard/, themes: [], culture: ['pantallas/la-tele', 'pantallas/la-radio'] },
+  { id: 'your building', unit: /edificio|building|consorcio|neighbou?rs/, themes: [], culture: ['casa/el-encargado', 'casa/dos-ambientes'] },
+  { id: 'renting and moving', unit: /\brent\b|moving house|mud[eo]\b|new place|live in/, themes: [], culture: ['casa/dos-ambientes'] },
+  { id: 'your place', unit: /your place|\bdepto\b/, themes: [], culture: ['casa/dos-ambientes'] },
+  { id: 'the shops on the block', unit: /verduler|feria|deli\b|what it costs/, themes: [], culture: ['casa/la-cuadra'] },
+  { id: 'the weather', unit: /weather|\bheat\b|\bclima\b/, themes: [], culture: ['dia-a-dia/el-clima'] },
+  { id: 'the doctor', unit: /doctor|check-up|siento mal/, themes: [], culture: ['dia-a-dia/al-medico'] },
+  { id: 'aches and cures', unit: /duele|dolio|hurt/, themes: [], culture: ['creencias/empacho-y-ojeo', 'dia-a-dia/al-medico'] },
+  { id: 'the car', unit: /\bcar\b|\bauto\b|driving/, themes: [], culture: ['dia-a-dia/manejar'] },
+  { id: 'school', unit: /school days|primaria|\bkid\b|figuritas/, themes: [], culture: ['escuela-y-laburo/la-escuela', 'juegos/figuritas', 'escuela-y-laburo/egresados'] },
+  { id: 'studying', unit: /\bstudy\b|learning castellano|\bstudent\b/, themes: [], culture: ['escuela-y-laburo/la-facultad'] },
+  { id: 'work', unit: /laburo|\bwork\b|\bjob|living|hiring|\braise\b|promotion|\bascenso\b/, themes: [], culture: ['escuela-y-laburo/el-laburo'] },
+  { id: 'names and nicknames', unit: /someone's name|\bnombre\b|talk sweet|-ito\b/, themes: [], culture: ['familia/apodos'] },
+  { id: 'love', unit: /novios|\blove\b|going out with|break-ups/, themes: [], culture: ['familia/amor'] },
+  { id: 'the big days', unit: /family news|big news|big days|milestones/, themes: [], culture: ['familia/casamientos-y-quince'] },
+  { id: 'family', unit: /familia|family|parents/, themes: [], culture: ['familia/domingo-en-familia', 'familia/casamientos-y-quince'] },
+  { id: 'friends', unit: /friends|amigos|get along|who came/, themes: [], culture: ['familia/los-amigos'] },
+  { id: 'holidays', unit: /holiday|vacaciones|weekend/, themes: [], culture: ['vacaciones/enero', 'vacaciones/la-playa', 'vacaciones/escapadas', 'vacaciones/carnaval'] },
+  { id: 'free time', unit: /free time|routine|interests you/, themes: [], culture: ['deportes/el-club', 'juegos/el-truco', 'pantallas/novelas'] },
+  { id: 'jokes and laughs', unit: /laugh|risa|cracked|joke|tease|prank/, themes: [], culture: ['pantallas/el-humor', 'pantallas/cine'] },
+  { id: 'drinks', unit: /\bdrink|birra|\bvino\b|parrillada|eat out/, themes: [], culture: ['bebidas/el-vino', 'bebidas/la-birra', 'bebidas/fernet-y-vermut'] },
+  { id: 'luck', unit: /\bluck|suerte|loteria|gut feeling/, themes: [], culture: ['juegos/la-quiniela', 'creencias/martes-trece'] },
   // Slang themes only: no culture class is about these.
   { id: 'food', unit: /food|comida|verduler|feria|deli\b|hambre|hungry|cocin|\beat\b|\bate\b|tomar\b|something to eat/, themes: ['comida'], culture: [] },
   { id: 'home and clothes', unit: /\bcasa\b|edificio|building|depto|ropa|clothes|chores|tareas|consorcio|fixed|mud[eo]\b|pileta|llaves|your place/, themes: ['casa'], culture: [] },
@@ -343,6 +369,8 @@ for (const band of BANDS) {
 /** Easy and everyday first. The two history sections are one story, told in order. */
 const CULTURE_ORDER = [
   ['mate'], ['asado'], ['comida'], ['alfajores'], ['futbol'], ['costumbres'], ['buenos-aires'], ['habla'],
+  ['familia'], ['casa'], ['dia-a-dia'], ['bebidas'], ['juegos'], ['vacaciones'], ['naturaleza'], ['deportes'],
+  ['pantallas'], ['creencias'], ['escuela-y-laburo'],
   ['musica'], ['tango'], ['dichos'], ['iconos'], ['regiones'], ['historia-nacimiento', 'historia-moderna'],
 ];
 /** Not before she has some Spanish to talk about them. */
@@ -721,31 +749,9 @@ begin
 end;
 $$;
 
--- Done already for whoever is past it, so nobody is sent back down the road:
--- a fresh class counts as done for a learner if it sits before the first of
--- the course's own lessons she hasn't finished (as in 20260930000003; the
--- hidden stories are nobody's to finish, so they don't hold the line).
-with road as (
-  select l.id, l.kind, row_number() over (order by s.ordinal, u.ordinal, l.ordinal) as pos
-  from public.lessons l
-  join public.units u on u.id = l.unit_id and u.status = 'published'
-  join public.sections s on s.id = u.section_id and s.status = 'published'
-  where l.status = 'published'
-),
-learners as (select distinct user_id from public.lesson_progress),
-frontier as (
-  select lr.user_id, (
-    select min(r.pos) from road r
-    where r.kind not in ('speak', 'slang', 'culture', 'story')
-      and not exists (select 1 from public.lesson_progress p where p.user_id = lr.user_id and p.lesson_id = r.id)
-  ) as pos
-  from learners lr
-)
-insert into public.lesson_progress (user_id, lesson_id, score, attempts, passed, passed_by)
-select f.user_id, r.id, null::smallint, 0::smallint, true, 'placement'
-from frontier f
-join road r on r.id in (select lesson_id from extras_fresh) and (f.pos is null or r.pos < f.pos)
-on conflict (user_id, lesson_id) do nothing;
+-- Done already for whoever is past it, so nobody is sent back down the road
+-- (credit_fresh_lessons, 20261005000022).
+select public.credit_fresh_lessons(array(select lesson_id from extras_fresh));
 
 drop table unit_extras;
 drop table extras_fresh;

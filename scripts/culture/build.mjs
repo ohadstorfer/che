@@ -14,7 +14,10 @@ const OUT = 'src/lib/culture.json';
 const ORDER = [
   'costumbres', 'buenos-aires', 'habla', 'comida',
   'alfajores', 'mate', 'asado', 'futbol',
+  'familia', 'casa', 'dia-a-dia', 'bebidas',
   'dichos', 'puteadas', 'musica', 'tango',
+  'juegos', 'vacaciones', 'escuela-y-laburo', 'deportes',
+  'naturaleza', 'creencias', 'pantallas',
   'regiones', 'iconos', 'historia-nacimiento', 'historia-moderna',
 ];
 

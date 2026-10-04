@@ -110,8 +110,6 @@ export function loadOutline(paths = SECTION_PATHS) {
       if (!Array.isArray(u.tips) || u.tips.length === 0) errors.push(`${where}: needs at least one tip`);
 
       const unitId = ids.unit(u.slug);
-      // The unit that closes its section. It is built like any other — lessons,
-      // then the unit check — but it may not be a practice unit (below).
       courseOrder += 1;
       const unit = {
         id: unitId,

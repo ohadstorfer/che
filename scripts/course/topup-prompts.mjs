@@ -11,6 +11,7 @@
 //
 // --lean: only words with fewer than 4 sentences, each asked for what it lacks
 // plus one; older words listed bare; all of a unit's targets in one prompt.
+// Focus words are asked for all the same, three more each when they have four.
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 
 import { DRAFT_SCHEMA, FORMS_PER_REQUEST, generationPrompt, styleSpec, targetsFor } from './lib/generate.mjs';
@@ -54,8 +55,20 @@ for (const slug of slugs) {
     if (s.unit_id === unit.id && live.includes(s.status)) have.set(s.target_form_id, (have.get(s.target_form_id) ?? 0) + 1);
   }
   const focus = focusBy[slug] ?? null;
-  const extra = new Set(lean ? [] : (focus?.focus_words ?? []));
-  const targets = targetsFor(outline, unit).filter((t) => (have.get(t.id) ?? 0) < 4 || extra.has(t.form));
+  // With --lean, focus words still get sentences (three more when they already have four); a lean run without a focus file asks only for what is short.
+  const extra = new Set(focus?.focus_words ?? []);
+  const own = targetsFor(outline, unit);
+  let targets = own.filter((t) => (have.get(t.id) ?? 0) < 4 || extra.has(t.form));
+  // A focus word that is not one of this unit's own targets (a word from an earlier unit, a glue word, a name) cannot have a
+  // group here: it rides along in sentences aimed at the unit's own words, and the unit's thinnest groups carry it if none is short.
+  // Only a word she holds by this unit can ride: one taught later, or misspelt, loses every sentence it is in at the check.
+  const taught = new Set(outline.forms.filter((f) => f.unit_order <= unit.course_order).map((f) => f.form));
+  const notOwn = [...extra].filter((w) => !own.some((t) => t.form === w));
+  const riders = notOwn.filter((w) => taught.has(w));
+  const strangers = notOwn.filter((w) => !taught.has(w));
+  if (strangers.length) console.log(`${slug}: focus word(s) not taught by unit ${unit.course_order}, left out — ${strangers.join(', ')}`);
+  const thinnest = riders.length > 0 && !targets.length;
+  if (thinnest) targets = [...own].sort((x, y) => (have.get(x.id) ?? 0) - (have.get(y.id) ?? 0)).slice(0, 4);
   const dir = new URL(`../../.course-work/${slug}-topup/`, import.meta.url).pathname;
   rmSync(dir, { recursive: true, force: true });
   if (!targets.length) {
@@ -72,10 +85,10 @@ for (const slug of slugs) {
   const existing = known.filter((s) => s.unit_id === unit.id).map((s) => s.es);
   let n = 0;
   const perRequest = lean ? 12 : FORMS_PER_REQUEST;
-  const counts = new Map(targets.map((t) => [t.id, Math.max(2, 4 - (have.get(t.id) ?? 0) + 1)]));
+  const counts = new Map(targets.map((t) => [t.id, (have.get(t.id) ?? 0) >= 4 ? 3 : Math.max(2, 4 - (have.get(t.id) ?? 0) + 1)]));
   for (let i = 0; i < targets.length; i += perRequest, n++) {
-    const { system, user } = generationPrompt({ outline, unit, targets: targets.slice(i, i + perRequest), examples, existing, style, focus: focus?.focus ?? null, lean: lean ? { counts } : null });
+    const { system, user } = generationPrompt({ outline, unit, targets: targets.slice(i, i + perRequest), examples, existing, style, focus: focus?.focus ?? null, riders, lean: lean ? { counts } : null });
     writeFileSync(`${dir}batch-${n}.prompt.md`, `# SYSTEM\n${system}\n\n# TASK\n${user}\n\n${DRAFT_SCHEMA}\n`);
   }
-  console.log(`${slug}: ${targets.length} word(s) short — ${targets.map((t) => t.form).join(', ')}`);
+  console.log(`${slug}: ${targets.length} word(s) ${thinnest ? 'carrying the focus words' : 'asked for'} — ${targets.map((t) => t.form).join(', ')}`);
 }

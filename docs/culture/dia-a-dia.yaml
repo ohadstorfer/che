@@ -1,0 +1,113 @@
+section:
+  slug: "dia-a-dia"
+  title: "Everyday life"
+  emoji: "☂️"
+  summary: "The weather, the doctor and the road"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-clima"
+    title: "Talking about the weather"
+    summary: "What people say in the lift, and the storms with names"
+    pages:
+      - type: card
+        text: "The seasons are the other way round. Summer is December to March, and the cold months are June, July and August."
+      - type: choice
+        prompt: "It's 30 °C in Buenos Aires and everyone feels terrible. What does every porteño say?"
+        options:
+          - "“This is nothing, wait for February”"
+          - "“It's not the heat that kills you, it's the humidity”"
+          - "“At least it's not raining”"
+        correct: 1
+        explain: "**“Lo que mata es la humedad.”** It's said so often that it's a joke by now. A hot, wet, heavy day is **pesado**."
+      - type: card
+        text: "The weather report gives two numbers: the real temperature and the **sensación térmica**, how it feels on your skin. People only repeat the second one."
+      - type: card
+        text: "In a January heat wave, every air conditioner is on and whole barrios lose power. **“Se cortó la luz”**, the power went out, is a classic summer phrase."
+      - type: card
+        text: "Around August 30 comes the **tormenta de Santa Rosa**, a big storm named after the saint of that day. People wait for it, and the news reports if it came or not."
+      - type: choice
+        prompt: "Has it ever snowed in the city of Buenos Aires?"
+        options:
+          - "Yes, a little every winter"
+          - "No, never"
+          - "Yes, but almost never"
+        correct: 2
+        explain: "On July 9, 2007 the city turned white for the first time since 1918. People ran out to touch it. Everyone remembers where they were that day."
+      - type: card
+        text: "A **sudestada** is a strong wind from the southeast with days of rain. It pushes the river up, and the low barrios near the water get flooded."
+      - type: card
+        chip: "Pro tip"
+        text: "The weather starts every chat in a lift. **“¡Qué calor!”** How hot! **“¡Qué frío!”** How cold! **“Refrescó”**: it got cooler."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "al-medico"
+    title: "Seeing a doctor"
+    summary: "The guardia, the green cross and three ways to be covered"
+    pages:
+      - type: card
+        text: "Public hospitals are free for Argentines and permanent residents, and an emergency is free for anyone. They can be slow and crowded, but many of the best doctors work there."
+      - type: choice
+        prompt: "You feel very bad at two in the morning. Where do you go?"
+        options:
+          - "To the guardia of a hospital"
+          - "To the nearest pharmacy"
+          - "You wait and call a doctor at eight"
+        correct: 0
+        explain: "The **guardia** is the part of a hospital that takes people without an appointment, day and night. For an ambulance, call **107**."
+      - type: card
+        text: "There are three ways to be covered: the public hospital, an **obra social** (health cover that comes with your job) or a **prepaga** (a private plan you pay every month)."
+      - type: card
+        text: "A pharmacy has a green cross. At night and on Sundays one pharmacy in each area stays open: the **farmacia de turno**. The list is on the door of every closed one."
+      - type: choice
+        prompt: "Besides selling medicine, what can many pharmacies do for you?"
+        options:
+          - "Pull out a tooth"
+          - "Give you an injection"
+          - "Take an X-ray"
+        correct: 1
+        explain: "You buy the medicine and they give you the injection in a small room at the back. Many also take your blood pressure."
+      - type: card
+        text: "To see a doctor you need a **turno**, an appointment. And at any desk you may hear **“se cayó el sistema”**: the computers stopped. Everyone waits; nobody is surprised."
+      - type: card
+        text: "What to say: **“Me duele la cabeza”**, my head hurts. **“Tengo fiebre”**, I have a fever. **“Estoy resfriado”** (or **resfriada**), I have a cold."
+      - type: card
+        chip: "Did you know?"
+        text: "Tens of thousands of foreigners study medicine in Argentina, and more than half of them come from Brazil. In some classrooms you hear a lot of Portuguese."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "manejar"
+    title: "On the road"
+    summary: "Long roads, service stations and parking in the city"
+    pages:
+      - type: card
+        text: "The country is huge. Buenos Aires to Bariloche is about 1,600 km, close to twenty hours by car. Families do it anyway, with a termo and a mate."
+      - type: choice
+        prompt: "On a road between cities, what must every driver do by law, even at noon on a sunny day?"
+        options:
+          - "Drive with the lights on"
+          - "Stop every two hours"
+          - "Keep the windows closed"
+        correct: 0
+        explain: "Low lights on, day and night, on every **ruta**. A ruta is a road between towns; inside the city it's a **calle** or an **avenida**."
+      - type: card
+        text: "You don't fill the tank yourself. At the **estación de servicio** a worker does it. Gas for the car is **nafta**, and you say **“Llenalo, por favor”**: fill it up."
+      - type: choice
+        prompt: "Many service stations have a machine made just for travelers. What does it give?"
+        options:
+          - "Ice for the cooler"
+          - "Fresh orange juice"
+          - "Hot water for mate"
+        correct: 2
+        explain: "For a small price, or free, it fills your termo with water at the right temperature. Every road trip stops for it."
+      - type: card
+        text: "Park near a stadium or a concert and a man waves a cloth to guide you in. He is a **trapito**, and he expects a tip to “look after” your car."
+      - type: card
+        text: "A car stopped in the second lane with its warning lights on is in **doble fila**. Those lights are the **balizas**, and they mean: “I'm coming back in a minute.”"
+      - type: card
+        text: "Words for the car: **el auto**, **el baúl** (the trunk), **la goma** (the tire), **estacionar** (to park). A flat tire: **“Pinché una goma.”**"
+    vocabulary: []

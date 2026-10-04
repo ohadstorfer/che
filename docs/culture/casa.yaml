@@ -1,0 +1,109 @@
+section:
+  slug: "casa"
+  title: "Home"
+  emoji: "🏠"
+  summary: "Flats, neighbors and the shops on your block"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "dos-ambientes"
+    title: "A flat with two ambientes"
+    summary: "How homes are counted, numbered and kept dark"
+    pages:
+      - type: card
+        text: "Flats are not counted by bedrooms. They are counted in **ambientes**: rooms, and the living room is one of them. A **dos ambientes** is one bedroom and one living room."
+      - type: choice
+        prompt: "The smallest flat has one room where you sleep, eat and live. What is it called in an ad?"
+        options:
+          - "Monoambiente"
+          - "Medio ambiente"
+          - "Ambiente solo"
+        correct: 0
+        explain: "A **monoambiente**: one single room. The kitchen and the bathroom are never counted. (**Medio ambiente** means the environment, as in nature.)"
+      - type: card
+        text: "An address looks like this: **4° B**. Fourth floor, flat B. **PB** is the **planta baja**, the ground floor. So the first floor is one floor up from the street."
+      - type: card
+        text: "A **PH** is a flat inside an old, low house. No lift, but often a patio or a terrace of its own, and almost no monthly building fees. People love them."
+      - type: choice
+        prompt: "Next to the toilet there is a second, low bowl with its own taps. What is it for?"
+        options:
+          - "Washing your feet after the beach"
+          - "Washing yourself after using the toilet"
+          - "Washing small clothes by hand"
+        correct: 1
+        explain: "It's the **bidet**, and almost every bathroom in Argentina has one. Argentines who move abroad say it's one of the things they miss most."
+      - type: card
+        text: "Windows have **persianas**: heavy shutters that roll down on the outside. Pull them all the way down and the room is completely dark, even at noon."
+      - type: card
+        chip: "Pro tip"
+        text: "Two words to look for in an ad. **Al frente**: windows on the street, with light and bus noise. **Contrafrente**: at the back, darker but quiet."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-encargado"
+    title: "The encargado"
+    summary: "The person who runs your building, and the neighbors' meetings"
+    pages:
+      - type: card
+        text: "Most buildings have an **encargado**. He or she cleans, takes out the rubbish, receives your parcels and knows everything about everyone. Many of them live in the building."
+      - type: choice
+        prompt: "Besides rent, what else do you pay every month in a building?"
+        options:
+          - "A tax on people who rent"
+          - "A tip for the encargado"
+          - "Your share of the building's costs"
+        correct: 2
+        explain: "They're called **expensas**: the encargado's salary, the lift, the cleaning, the lights in the hall. Expensas can be high, so always ask **“¿Cuánto son las expensas?”** before you rent."
+      - type: card
+        text: "All the owners together are the **consorcio**. Their meetings are famous: three hours of arguing about the lift, the noise and whose bike is in the hall."
+      - type: card
+        text: "The intercom at the street door is the **portero eléctrico**. A friend rings and says **“¡Soy yo!”** It's me. Nobody says their name."
+      - type: choice
+        prompt: "Your friend rings from the street at night. In many buildings, what do you have to do?"
+        options:
+          - "Go down and open the door with your key"
+          - "Press a button in your flat"
+          - "Call the encargado to open"
+        correct: 0
+        explain: "For safety, many street doors only open with a key. So the answer to the intercom is **“¡Bajo!”**: I'm coming down."
+      - type: card
+        text: "In the lift, you say hello and goodbye to strangers. **“Buen día”** when you get in, **“hasta luego”** when you get out. Saying nothing is rude."
+      - type: card
+        text: "Old lifts have two metal doors that you close by hand. If one is left open, the lift can't move, and someone on another floor shouts **“¡Ascensor!”**"
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-cuadra"
+    title: "The shops on your block"
+    summary: "Small shops, how to ask, and what you get for free"
+    pages:
+      - type: card
+        text: "Many Argentines still buy food in small shops near home: the **verdulería** for fruit and vegetables, the **carnicería** for meat, the **panadería** for bread."
+      - type: choice
+        prompt: "It's ten at night and you need milk. Which shop on the block is probably still open?"
+        options:
+          - "The panadería"
+          - "The small supermarket"
+          - "The verdulería"
+        correct: 1
+        explain: "People call it **el chino**, because many are run by families who came from China. It's an everyday name, not an insult. **“Voy al chino”**: I'm going to the shop."
+      - type: card
+        text: "At the **fiambrería** you buy ham and cheese by weight, and you only say the number: **“cien de jamón, doscientos de queso”**. A hundred grams of ham, two hundred of cheese."
+      - type: card
+        text: "At the verdulería you usually don't choose the fruit yourself. You say what you want and when you'll eat it: **“para hoy”**, for today, means give me the ripe ones."
+      - type: choice
+        prompt: "By old custom, what does the verdulero add to your bag for free?"
+        options:
+          - "A lemon"
+          - "An onion"
+          - "A bunch of parsley"
+        correct: 2
+        explain: "**Perejil**, parsley. You just ask **“¿me das un poco de perejil?”** With prices going up, some shops now charge for it, and people complain about that."
+      - type: card
+        text: "The **dietética** sells nuts, seeds, flour and spices from big open bags, by weight. Every barrio has a few now."
+      - type: card
+        chip: "Pro tip"
+        text: "Every shop ends the same way. They ask **“¿Algo más?”** Anything else? You say **“Nada más, gracias. ¿Cuánto es?”**"
+    vocabulary: []

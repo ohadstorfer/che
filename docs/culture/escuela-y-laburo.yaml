@@ -1,0 +1,175 @@
+section:
+  slug: "escuela-y-laburo"
+  title: "School and work"
+  emoji: "🎒"
+  summary: "School rituals, university, how people work and how they protest"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-escuela"
+    title: "At school"
+    summary: "A white coat, half a day of class and exams in summer"
+    pages:
+      - type: card
+        text: "In public primary schools, children wear a white coat over their clothes: the **guardapolvo blanco**. Rich or poor, everyone looks the same. That was the idea."
+      - type: choice
+        prompt: "In which month does the school year start?"
+        options:
+          - "January"
+          - "March"
+          - "September"
+        correct: 1
+        explain: "School runs from March to December. The long holidays are in summer, and summer here is December to March."
+      - type: card
+        text: "Most children go to school for half a day: **turno mañana** or **turno tarde**, the morning or the afternoon group. A full day is **jornada completa**."
+      - type: card
+        text: "In primary school the teacher is **la seño**, short for *señorita*, even if she is sixty and married. In secondary school, every teacher is **profe**."
+      - type: card
+        text: "Each morning the flag goes up. The student with the best marks carries it at school events: the **abanderado** or **abanderada**. Families are very proud of it."
+      - type: choice
+        prompt: "A secondary student fails maths at the end of the year. What happens?"
+        options:
+          - "They repeat the whole year right away"
+          - "They pay for extra classes at the school"
+          - "They study in summer and take an exam again"
+        correct: 2
+        explain: "The phrase is **llevarse una materia**: to carry a subject with you into the holidays. **“Me llevé matemática”** means a summer with books."
+      - type: card
+        text: "Marks go from 1 to 10. You pass with a 6 or a 7, depending on the province. And skipping school for a day has its own name: **ratearse**."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "egresados"
+    title: "The last year of school"
+    summary: "A year of rituals before school ends"
+    pages:
+      - type: card
+        text: "The last year of secondary school is one long party. The students who are finishing are the **egresados**, and the whole year has rituals."
+      - type: card
+        text: "Each class designs its own hoodie, the **buzo de egresados**, with a name for the group on the front and everyone's nickname on the back. They wear it all year."
+      - type: choice
+        prompt: "How do many students arrive at school on the first day of their last year?"
+        options:
+          - "In their parents' cars, all in a line"
+          - "In suits and long dresses"
+          - "With no sleep, after a party that lasted all night"
+        correct: 2
+        explain: "It's the **UPD**, the *Último Primer Día*: the last first day. They party all night and walk into school at sunrise with drums and flags."
+      - type: card
+        text: "Then comes the **viaje de egresados**: one week away with the whole class and no parents. Families pay for it in small parts over two years."
+      - type: choice
+        prompt: "Where do most classes go for that trip?"
+        options:
+          - "To the beach in Mar del Plata"
+          - "To the mountains and lakes of Bariloche"
+          - "To the Iguazú falls"
+        correct: 1
+        explain: "**Bariloche**, in Patagonia: snow, trips by day and dancing every night. Whole planes and buses of 17-year-olds arrive all winter."
+      - type: card
+        text: "The year ends with the **fiesta de egresados**: a formal party with parents and grandparents at dinner. After midnight the adults go home, and the dancing goes on until morning."
+      - type: card
+        text: "The day the trip ends, parents wait for the bus at dawn. The children come back with no voice, no sleep and a bag of dirty clothes."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-facultad"
+    title: "University is free"
+    summary: "No fees, no campus and a very messy last day"
+    pages:
+      - type: card
+        text: "Public universities in Argentina charge nothing to study. The biggest is the **UBA**, the Universidad de Buenos Aires, with more than 300,000 students."
+      - type: choice
+        prompt: "The UBA has no entrance exam. What do you do instead?"
+        options:
+          - "A first year of general subjects"
+          - "An interview with three teachers"
+          - "Nothing: you wait for a free place"
+        correct: 0
+        explain: "It's the **CBC**, the *Ciclo Básico Común*. Anyone can start it. Passing all of it is the hard part."
+      - type: card
+        text: "People don't say university. They say **la facultad**, or **la facu**: **“Estoy en la facu.”** There is no campus life. Students live at home and take the bus."
+      - type: card
+        text: "Many students work and study at the same time, so a degree can take seven or eight years. The big exam at the end of each subject is a **final**."
+      - type: choice
+        prompt: "You see a young woman in the street covered in eggs, flour and paint. She's smiling. What happened?"
+        options:
+          - "Her team won the championship"
+          - "It's her birthday"
+          - "She just passed her last exam"
+        correct: 2
+        explain: "The verb is **recibirse**: to finish your degree. Friends and family wait outside the last exam with eggs, flour and anything that makes a mess."
+      - type: card
+        text: "After that, the title is used. Lawyers and doctors are called **doctor** or **doctora**. On papers you'll see **Lic.** and **Ing.** before a name."
+      - type: card
+        chip: "Did you know?"
+        text: "In 1918, students in **Córdoba** took over their university and won the right to help run it. The **Reforma Universitaria** was copied all over Latin America."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-laburo"
+    title: "Work"
+    summary: "Jobs with and without papers, and life at the office"
+    pages:
+      - type: card
+        text: "The everyday word for a job is **laburo**, and to work is **laburar**. **“Tengo mucho laburo”**: I have a lot of work. **“¿De qué laburás?”**: what do you do?"
+      - type: choice
+        prompt: "In June and in December, registered workers get something extra. What?"
+        options:
+          - "A week of holidays"
+          - "Half a month's salary"
+          - "A box of food and wine"
+        correct: 1
+        explain: "It's the **aguinaldo**: one extra salary a year, paid in two halves. People plan holidays and big purchases around it."
+      - type: card
+        text: "A job is **en blanco**, in white, when it is registered: aguinaldo, paid holidays, health cover. **En negro**, in black, means no papers. More than a third of workers are en negro."
+      - type: card
+        text: "People who work for themselves pay one small fixed tax every month, the **monotributo**. A client will ask: **“¿Me hacés factura?”** Can you give me an invoice?"
+      - type: choice
+        prompt: "It's your birthday and you work in an office. Who brings the **facturas** (sweet pastries) for everyone?"
+        options:
+          - "Your boss"
+          - "The person at the next desk"
+          - "You do"
+        correct: 2
+        explain: "The birthday person brings the pastries for the team. Arrive with empty hands and people will joke about it all day."
+      - type: card
+        text: "Unions, **sindicatos**, are strong. Each year they sit down with companies to raise salaries along with prices. Those talks are the **paritarias**, and they are always in the news."
+      - type: card
+        text: "After work, colleagues go for a drink: the **after office**, said in English. Wednesday and Thursday are the big days."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "paros-y-marchas"
+    title: "The day nothing runs"
+    summary: "Paros, piquetes and pots banged on balconies"
+    pages:
+      - type: card
+        text: "Protest is part of normal life. A **paro** is a strike: **paro de subte**, **paro de colectivos**, **paro bancario**. Locals check the news before they leave home."
+      - type: choice
+        prompt: "The unions call a **paro general**, a strike of everyone. What does Buenos Aires look like that day?"
+        options:
+          - "Like a normal day, only slower"
+          - "Like a Sunday: quiet streets, few buses"
+          - "Full of traffic, because everyone drives"
+        correct: 1
+        explain: "No trains, no subte, few buses, no banks, almost no flights. Many people work from home or don't work."
+      - type: card
+        text: "A **piquete** is a group of people who block a street or a road to protest. The blocked street is a **corte**. Radio and map apps list the day's cortes every morning."
+      - type: card
+        text: "A **marcha** is a march. Most of them end at **Plaza de Mayo** or at **Congreso**, with drums, flags and smoke from the choripán stands."
+      - type: card
+        text: "Most marches are calm and full of families. Still, traffic stops for hours, so on those days many people leave work early or stay home."
+      - type: choice
+        prompt: "It's nine at night. On every balcony, neighbors are hitting pots with spoons. What is it?"
+        options:
+          - "A protest"
+          - "A party for a football title"
+          - "A call for a lost dog"
+        correct: 0
+        explain: "A **cacerolazo**, from **cacerola**, cooking pot. You protest from your own window, and the noise travels from building to building."
+      - type: card
+        chip: "Pro tip"
+        text: "Two questions that save your day: **“¿Hay paro mañana?”** Is there a strike tomorrow? And **“¿Está cortado?”** Is the street blocked?"
+    vocabulary: []

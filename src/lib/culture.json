@@ -2810,6 +2810,764 @@
    ]
   },
   {
+   "slug": "familia",
+   "title": "Family and friends",
+   "emoji": "👨‍👩‍👧",
+   "summary": "Sunday lunch, nicknames, love and parties until sunrise",
+   "classes": [
+    {
+     "slug": "domingo-en-familia",
+     "title": "Sunday is for family",
+     "summary": "A lunch that ends at night, and a tupper to take home",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Sunday lunch belongs to the family. Everyone goes to the parents' or grandparents' house, for pasta or an asado. It starts around two and ends when it's dark."
+      },
+      {
+       "type": "card",
+       "text": "Families are close. Cousins, **primos**, grow up almost like brothers and sisters. And kids call their parents' best friends **tío** and **tía**: uncle and aunt."
+      },
+      {
+       "type": "choice",
+       "prompt": "At what age do many Argentines leave their parents' home?",
+       "options": [
+        "At 18, when they finish school",
+        "Around 21 or 22",
+        "In their late twenties, or later"
+       ],
+       "correct": 2,
+       "explain": "Rent is expensive, and most people study at a university in their own city while living at home. Nobody thinks it's strange."
+      },
+      {
+       "type": "card",
+       "text": "Grandparents are **abuelo** and **abuela**, or just **abu**. In Italian families, **nono** and **nona**. In Jewish families, **zeide** and **bobe**."
+      },
+      {
+       "type": "card",
+       "text": "You don't leave with empty hands. Mom or grandma fills a **tupper**, a plastic box, with what's left of lunch. The rule: the tupper comes back."
+      },
+      {
+       "type": "choice",
+       "prompt": "After a lunch like that, what do many families do for dinner on Sunday night?",
+       "options": [
+        "Order pizza or empanadas",
+        "Cook a second big meal",
+        "Go out to a parrilla"
+       ],
+       "correct": 0,
+       "explain": "Nobody wants to cook again. Sunday night is the big night for pizza and empanadas delivered to your door."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "Invited to a family lunch? Bring dessert or a bottle of wine, kiss everyone hello, grandma too, and say yes when they offer you more food."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "apodos",
+     "title": "Nobody uses your real name",
+     "summary": "Pancho, el Colo, la Negra and the waiter who calls you boss",
+     "pages": [
+      {
+       "type": "card",
+       "text": "A nickname is an **apodo**, and almost everyone has one. Some come with the name: Francisco is **Pancho**, José is **Pepe**, Ignacio is **Nacho**, Dolores is **Lola**."
+      },
+      {
+       "type": "card",
+       "text": "Other names are just cut short: **Fede**, **Mati**, **Sofi**, **Cami**, **Juli**, **Nico**, **Santi**. If your name is long, people will cut it in half."
+      },
+      {
+       "type": "choice",
+       "prompt": "A friend says: “This is **el Colo**.” What does el Colo look like?",
+       "options": [
+        "He's very tall",
+        "He has red hair",
+        "He has no hair"
+       ],
+       "correct": 1,
+       "explain": "From **colorado**, red. Looks become names: **Flaco** (thin), **Gordo** (fat), **Negra** (dark hair or skin), **Rulo** (curly). Between friends it's love. As a foreigner, don't copy it."
+      },
+      {
+       "type": "card",
+       "text": "Friends get new names from one funny moment. Fall asleep at one party, and you can be **el Dormido**, the sleeping one, for the next twenty years."
+      },
+      {
+       "type": "choice",
+       "prompt": "A waiter you've never seen calls you **jefe**, boss. Why?",
+       "options": [
+        "He thinks you're the one who pays",
+        "He's making fun of you",
+        "It's a friendly way to talk to a stranger"
+       ],
+       "correct": 2,
+       "explain": "Men call strangers **jefe**, **maestro** or **campeón**: boss, master, champion. It's warm, not serious. And a nice person is a **genio** or a **genia**."
+      },
+      {
+       "type": "card",
+       "text": "Someone with the same name as you is your **tocayo** or **tocaya**. Two Martíns meet, and one says **“¡Tocayo!”** It's a small instant friendship."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "Family nicknames last for life. A man of seventy can still be **el Nene**, the kid, and many people don't know their neighbor Cacho's real name."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "los-amigos",
+     "title": "Friends are family",
+     "summary": "The same group for thirty years, and how friends look after each other",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Friends are a second family. Many people keep the same group from school for life: **los chicos del colegio**, still together at forty, fifty and sixty."
+      },
+      {
+       "type": "choice",
+       "prompt": "Many groups of friends have one fixed plan every week. What is it usually?",
+       "options": [
+        "A film at the cinema",
+        "A dinner or a football game, always on the same day",
+        "A walk in the park on Sunday morning"
+       ],
+       "correct": 1,
+       "explain": "**El asado de los jueves**, the Thursday asado. Or **fútbol 5**, with five players per team, on Tuesdays, then pizza. The day is fixed and nobody books anything else."
+      },
+      {
+       "type": "card",
+       "text": "The verb is **juntarse**: to get together. **“¿Nos juntamos?”** needs no plan and no reason. And **“Caete a casa”** means: come over, any time."
+      },
+      {
+       "type": "card",
+       "text": "Friends say **te quiero**, I love you, to each other. Men too, with a long hug. Nobody finds it strange."
+      },
+      {
+       "type": "choice",
+       "prompt": "You lost your job and you feel terrible. What does a real friend say?",
+       "options": [
+        "“Te banco”",
+        "“Te aviso”",
+        "“Te debo una”"
+       ],
+       "correct": 0,
+       "explain": "**Bancar** a friend is to be with them when things go wrong. **“Te banco”**: I'm with you, whatever happens. It's the best thing a friend can say."
+      },
+      {
+       "type": "card",
+       "text": "When a friend moves abroad, there is a **despedida**: a goodbye party, usually an asado, with speeches and tears. Some people get three or four of them."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "To make friends, say yes to the first invitation, even if it starts at eleven at night. The second one comes much faster."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "amor",
+     "title": "Love and dating",
+     "summary": "The steps of a couple, the message with no answer and the big Sunday test",
+     "pages": [
+      {
+       "type": "card",
+       "text": "The steps: first you're **saliendo**, going out. Then you're **de novios**, an official couple. Then you **convivís**, you live together. Many couples never marry at all."
+      },
+      {
+       "type": "card",
+       "text": "Before all that there is the **casi algo**, the “almost something”: you see each other, you write every day, and nobody says what it is."
+      },
+      {
+       "type": "choice",
+       "prompt": "A friend is angry: **“¡Me clavó el visto!”** What did the other person do?",
+       "options": [
+        "Arrived an hour late to the date",
+        "Read the message and didn't answer",
+        "Told everyone about them"
+       ],
+       "correct": 1,
+       "explain": "**El visto** is the mark that shows a message was seen. **Clavar el visto** is to see it and say nothing. Friends will study it with you for hours."
+      },
+      {
+       "type": "card",
+       "text": "The real test is the family. When your partner invites you to Sunday lunch with parents, grandparents and cousins, it's serious. Everyone will ask you questions."
+      },
+      {
+       "type": "card",
+       "text": "**Novio** and **novia** have no age limit: a woman of sixty can introduce her **novio**. And couples kiss in the street, the park and the bus. Nobody looks."
+      },
+      {
+       "type": "choice",
+       "prompt": "In 2010 Argentina became the first country in Latin America to do something. What?",
+       "options": [
+        "Allow marriage between two men or two women",
+        "Make divorce legal",
+        "Give fathers a month off for a new baby"
+       ],
+       "correct": 0,
+       "explain": "The law is called **matrimonio igualitario**, equal marriage. It was a fast change: divorce had only been legal since 1987."
+      },
+      {
+       "type": "card",
+       "text": "Young couples celebrate every month together, not only every year: **“Cumplimos seis meses.”** We've been together six months."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "**“¿Estás saliendo con alguien?”** Are you seeing someone? It's a normal question from a new friend, an aunt or the person cutting your hair."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "casamientos-y-quince",
+     "title": "Weddings and fifteenth birthdays",
+     "summary": "The two biggest parties in a family, and what to give",
+     "pages": [
+      {
+       "type": "card",
+       "text": "A wedding is a **casamiento**. Only the one at the public office counts by law: **el civil**. Outside, friends throw rice. The big party often comes days later."
+      },
+      {
+       "type": "choice",
+       "prompt": "The wedding party starts at nine at night. When does it end?",
+       "options": [
+        "Around midnight",
+        "Around two in the morning",
+        "Around five or six in the morning"
+       ],
+       "correct": 2,
+       "explain": "A party that ends at two is a bad party. Grandparents stay until four. The last thing served is breakfast: coffee and medialunas."
+      },
+      {
+       "type": "card",
+       "text": "Dinner comes in parts, and between them everyone gets up to dance. Each block of dancing is a **tanda**. So you eat, dance, eat, dance."
+      },
+      {
+       "type": "card",
+       "text": "Late at night comes the **carnaval carioca**. Staff hand out funny hats, masks, whistles and foam, called **cotillón**, and the music gets fast and loud."
+      },
+      {
+       "type": "card",
+       "text": "Then the **mesa dulce** opens: a long table full of cakes and sweets, after midnight, for people who thought they could not eat more."
+      },
+      {
+       "type": "choice",
+       "prompt": "A girl's 15th birthday is the **fiesta de quince**, as big as a wedding. Who dances the first waltz with her?",
+       "options": [
+        "Her father",
+        "Her best friend",
+        "Her boyfriend"
+       ],
+       "correct": 0,
+       "explain": "Then the grandfathers, uncles and friends take turns. Today many girls ask for a trip with friends instead of the party."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "What to give at a wedding? Money is normal. Many invitations come with the couple's bank details, and nobody thinks that's rude."
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
+   "slug": "casa",
+   "title": "Home",
+   "emoji": "🏠",
+   "summary": "Flats, neighbors and the shops on your block",
+   "classes": [
+    {
+     "slug": "dos-ambientes",
+     "title": "A flat with two ambientes",
+     "summary": "How homes are counted, numbered and kept dark",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Flats are not counted by bedrooms. They are counted in **ambientes**: rooms, and the living room is one of them. A **dos ambientes** is one bedroom and one living room."
+      },
+      {
+       "type": "choice",
+       "prompt": "The smallest flat has one room where you sleep, eat and live. What is it called in an ad?",
+       "options": [
+        "Monoambiente",
+        "Medio ambiente",
+        "Ambiente solo"
+       ],
+       "correct": 0,
+       "explain": "A **monoambiente**: one single room. The kitchen and the bathroom are never counted. (**Medio ambiente** means the environment, as in nature.)"
+      },
+      {
+       "type": "card",
+       "text": "An address looks like this: **4° B**. Fourth floor, flat B. **PB** is the **planta baja**, the ground floor. So the first floor is one floor up from the street."
+      },
+      {
+       "type": "card",
+       "text": "A **PH** is a flat inside an old, low house. No lift, but often a patio or a terrace of its own, and almost no monthly building fees. People love them."
+      },
+      {
+       "type": "choice",
+       "prompt": "Next to the toilet there is a second, low bowl with its own taps. What is it for?",
+       "options": [
+        "Washing your feet after the beach",
+        "Washing yourself after using the toilet",
+        "Washing small clothes by hand"
+       ],
+       "correct": 1,
+       "explain": "It's the **bidet**, and almost every bathroom in Argentina has one. Argentines who move abroad say it's one of the things they miss most."
+      },
+      {
+       "type": "card",
+       "text": "Windows have **persianas**: heavy shutters that roll down on the outside. Pull them all the way down and the room is completely dark, even at noon."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "Two words to look for in an ad. **Al frente**: windows on the street, with light and bus noise. **Contrafrente**: at the back, darker but quiet."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "el-encargado",
+     "title": "The encargado",
+     "summary": "The person who runs your building, and the neighbors' meetings",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Most buildings have an **encargado**. He or she cleans, takes out the rubbish, receives your parcels and knows everything about everyone. Many of them live in the building."
+      },
+      {
+       "type": "choice",
+       "prompt": "Besides rent, what else do you pay every month in a building?",
+       "options": [
+        "A tax on people who rent",
+        "A tip for the encargado",
+        "Your share of the building's costs"
+       ],
+       "correct": 2,
+       "explain": "They're called **expensas**: the encargado's salary, the lift, the cleaning, the lights in the hall. Expensas can be high, so always ask **“¿Cuánto son las expensas?”** before you rent."
+      },
+      {
+       "type": "card",
+       "text": "All the owners together are the **consorcio**. Their meetings are famous: three hours of arguing about the lift, the noise and whose bike is in the hall."
+      },
+      {
+       "type": "card",
+       "text": "The intercom at the street door is the **portero eléctrico**. A friend rings and says **“¡Soy yo!”** It's me. Nobody says their name."
+      },
+      {
+       "type": "choice",
+       "prompt": "Your friend rings from the street at night. In many buildings, what do you have to do?",
+       "options": [
+        "Go down and open the door with your key",
+        "Press a button in your flat",
+        "Call the encargado to open"
+       ],
+       "correct": 0,
+       "explain": "For safety, many street doors only open with a key. So the answer to the intercom is **“¡Bajo!”**: I'm coming down."
+      },
+      {
+       "type": "card",
+       "text": "In the lift, you say hello and goodbye to strangers. **“Buen día”** when you get in, **“hasta luego”** when you get out. Saying nothing is rude."
+      },
+      {
+       "type": "card",
+       "text": "Old lifts have two metal doors that you close by hand. If one is left open, the lift can't move, and someone on another floor shouts **“¡Ascensor!”**"
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "la-cuadra",
+     "title": "The shops on your block",
+     "summary": "Small shops, how to ask, and what you get for free",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Many Argentines still buy food in small shops near home: the **verdulería** for fruit and vegetables, the **carnicería** for meat, the **panadería** for bread."
+      },
+      {
+       "type": "choice",
+       "prompt": "It's ten at night and you need milk. Which shop on the block is probably still open?",
+       "options": [
+        "The panadería",
+        "The small supermarket",
+        "The verdulería"
+       ],
+       "correct": 1,
+       "explain": "People call it **el chino**, because many are run by families who came from China. It's an everyday name, not an insult. **“Voy al chino”**: I'm going to the shop."
+      },
+      {
+       "type": "card",
+       "text": "At the **fiambrería** you buy ham and cheese by weight, and you only say the number: **“cien de jamón, doscientos de queso”**. A hundred grams of ham, two hundred of cheese."
+      },
+      {
+       "type": "card",
+       "text": "At the verdulería you usually don't choose the fruit yourself. You say what you want and when you'll eat it: **“para hoy”**, for today, means give me the ripe ones."
+      },
+      {
+       "type": "choice",
+       "prompt": "By old custom, what does the verdulero add to your bag for free?",
+       "options": [
+        "A lemon",
+        "An onion",
+        "A bunch of parsley"
+       ],
+       "correct": 2,
+       "explain": "**Perejil**, parsley. You just ask **“¿me das un poco de perejil?”** With prices going up, some shops now charge for it, and people complain about that."
+      },
+      {
+       "type": "card",
+       "text": "The **dietética** sells nuts, seeds, flour and spices from big open bags, by weight. Every barrio has a few now."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "Every shop ends the same way. They ask **“¿Algo más?”** Anything else? You say **“Nada más, gracias. ¿Cuánto es?”**"
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
+   "slug": "dia-a-dia",
+   "title": "Everyday life",
+   "emoji": "☂️",
+   "summary": "The weather, the doctor and the road",
+   "classes": [
+    {
+     "slug": "el-clima",
+     "title": "Talking about the weather",
+     "summary": "What people say in the lift, and the storms with names",
+     "pages": [
+      {
+       "type": "card",
+       "text": "The seasons are the other way round. Summer is December to March, and the cold months are June, July and August."
+      },
+      {
+       "type": "choice",
+       "prompt": "It's 30 °C in Buenos Aires and everyone feels terrible. What does every porteño say?",
+       "options": [
+        "“This is nothing, wait for February”",
+        "“It's not the heat that kills you, it's the humidity”",
+        "“At least it's not raining”"
+       ],
+       "correct": 1,
+       "explain": "**“Lo que mata es la humedad.”** It's said so often that it's a joke by now. A hot, wet, heavy day is **pesado**."
+      },
+      {
+       "type": "card",
+       "text": "The weather report gives two numbers: the real temperature and the **sensación térmica**, how it feels on your skin. People only repeat the second one."
+      },
+      {
+       "type": "card",
+       "text": "In a January heat wave, every air conditioner is on and whole barrios lose power. **“Se cortó la luz”**, the power went out, is a classic summer phrase."
+      },
+      {
+       "type": "card",
+       "text": "Around August 30 comes the **tormenta de Santa Rosa**, a big storm named after the saint of that day. People wait for it, and the news reports if it came or not."
+      },
+      {
+       "type": "choice",
+       "prompt": "Has it ever snowed in the city of Buenos Aires?",
+       "options": [
+        "Yes, a little every winter",
+        "No, never",
+        "Yes, but almost never"
+       ],
+       "correct": 2,
+       "explain": "On July 9, 2007 the city turned white for the first time since 1918. People ran out to touch it. Everyone remembers where they were that day."
+      },
+      {
+       "type": "card",
+       "text": "A **sudestada** is a strong wind from the southeast with days of rain. It pushes the river up, and the low barrios near the water get flooded."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "The weather starts every chat in a lift. **“¡Qué calor!”** How hot! **“¡Qué frío!”** How cold! **“Refrescó”**: it got cooler."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "al-medico",
+     "title": "Seeing a doctor",
+     "summary": "The guardia, the green cross and three ways to be covered",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Public hospitals are free for Argentines and permanent residents, and an emergency is free for anyone. They can be slow and crowded, but many of the best doctors work there."
+      },
+      {
+       "type": "choice",
+       "prompt": "You feel very bad at two in the morning. Where do you go?",
+       "options": [
+        "To the guardia of a hospital",
+        "To the nearest pharmacy",
+        "You wait and call a doctor at eight"
+       ],
+       "correct": 0,
+       "explain": "The **guardia** is the part of a hospital that takes people without an appointment, day and night. For an ambulance, call **107**."
+      },
+      {
+       "type": "card",
+       "text": "There are three ways to be covered: the public hospital, an **obra social** (health cover that comes with your job) or a **prepaga** (a private plan you pay every month)."
+      },
+      {
+       "type": "card",
+       "text": "A pharmacy has a green cross. At night and on Sundays one pharmacy in each area stays open: the **farmacia de turno**. The list is on the door of every closed one."
+      },
+      {
+       "type": "choice",
+       "prompt": "Besides selling medicine, what can many pharmacies do for you?",
+       "options": [
+        "Pull out a tooth",
+        "Give you an injection",
+        "Take an X-ray"
+       ],
+       "correct": 1,
+       "explain": "You buy the medicine and they give you the injection in a small room at the back. Many also take your blood pressure."
+      },
+      {
+       "type": "card",
+       "text": "To see a doctor you need a **turno**, an appointment. And at any desk you may hear **“se cayó el sistema”**: the computers stopped. Everyone waits; nobody is surprised."
+      },
+      {
+       "type": "card",
+       "text": "What to say: **“Me duele la cabeza”**, my head hurts. **“Tengo fiebre”**, I have a fever. **“Estoy resfriado”** (or **resfriada**), I have a cold."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "Tens of thousands of foreigners study medicine in Argentina, and more than half of them come from Brazil. In some classrooms you hear a lot of Portuguese."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "manejar",
+     "title": "On the road",
+     "summary": "Long roads, service stations and parking in the city",
+     "pages": [
+      {
+       "type": "card",
+       "text": "The country is huge. Buenos Aires to Bariloche is about 1,600 km, close to twenty hours by car. Families do it anyway, with a termo and a mate."
+      },
+      {
+       "type": "choice",
+       "prompt": "On a road between cities, what must every driver do by law, even at noon on a sunny day?",
+       "options": [
+        "Drive with the lights on",
+        "Stop every two hours",
+        "Keep the windows closed"
+       ],
+       "correct": 0,
+       "explain": "Low lights on, day and night, on every **ruta**. A ruta is a road between towns; inside the city it's a **calle** or an **avenida**."
+      },
+      {
+       "type": "card",
+       "text": "You don't fill the tank yourself. At the **estación de servicio** a worker does it. Gas for the car is **nafta**, and you say **“Llenalo, por favor”**: fill it up."
+      },
+      {
+       "type": "choice",
+       "prompt": "Many service stations have a machine made just for travelers. What does it give?",
+       "options": [
+        "Ice for the cooler",
+        "Fresh orange juice",
+        "Hot water for mate"
+       ],
+       "correct": 2,
+       "explain": "For a small price, or free, it fills your termo with water at the right temperature. Every road trip stops for it."
+      },
+      {
+       "type": "card",
+       "text": "Park near a stadium or a concert and a man waves a cloth to guide you in. He is a **trapito**, and he expects a tip to “look after” your car."
+      },
+      {
+       "type": "card",
+       "text": "A car stopped in the second lane with its warning lights on is in **doble fila**. Those lights are the **balizas**, and they mean: “I'm coming back in a minute.”"
+      },
+      {
+       "type": "card",
+       "text": "Words for the car: **el auto**, **el baúl** (the trunk), **la goma** (the tire), **estacionar** (to park). A flat tire: **“Pinché una goma.”**"
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
+   "slug": "bebidas",
+   "title": "Drinks",
+   "emoji": "🍷",
+   "summary": "Wine with ice, one beer for the whole table, fernet and vermut",
+   "classes": [
+    {
+     "slug": "el-vino",
+     "title": "Wine, the easy way",
+     "summary": "How wine is really drunk at a family table, and how to toast",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Wine is **vino**, and at a normal table it's red: **vino tinto**. Nobody smells it or talks about it for ten minutes. You pour and you eat."
+      },
+      {
+       "type": "choice",
+       "prompt": "It's a hot day at a family asado. What do many people put in their glass of red wine?",
+       "options": [
+        "A slice of orange",
+        "Ice and fizzy water",
+        "A spoon of sugar"
+       ],
+       "correct": 1,
+       "explain": "Wine with **soda** and **hielo**, ice. In an expensive restaurant people may look at you. At a family table it's the normal thing in summer."
+      },
+      {
+       "type": "card",
+       "text": "The grape that made Argentina famous is **Malbec**. In the dry sun and high land of Mendoza it gives a dark, soft red wine."
+      },
+      {
+       "type": "card",
+       "text": "Since 2013, wine is Argentina's national drink by law. Mate has a different title: the national infusion."
+      },
+      {
+       "type": "choice",
+       "prompt": "In old neighborhood restaurants, house wine comes to the table in a ceramic jug. What shape is the jug?",
+       "options": [
+        "A penguin",
+        "A cow",
+        "A football"
+       ],
+       "correct": 0,
+       "explain": "It's the **pingüino**, and the wine comes out of its beak. Nobody is sure why a penguin. Today people buy them as presents."
+      },
+      {
+       "type": "card",
+       "text": "For a big party, wine is bought in a **damajuana**: a round glass bottle of five liters with a handle, often in a basket."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "To toast, lift your glass and say **“¡Salud!”** Look the other person in the eyes. And don't toast with water: people say it brings bad luck."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "la-birra",
+     "title": "One beer, many glasses",
+     "summary": "How to order it, share it and buy it at the kiosco",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Beer is **cerveza**, and between friends it's **birra**, from Italian. **“¿Tomamos una birra?”** is an invitation to talk, more than to drink."
+      },
+      {
+       "type": "choice",
+       "prompt": "Four friends sit down at a bar and order beer. What usually comes to the table?",
+       "options": [
+        "Four small bottles",
+        "One big bottle and four glasses",
+        "One very big glass with four straws"
+       ],
+       "correct": 1,
+       "explain": "The classic size is the liter bottle, and it's for sharing. You fill the others' glasses before your own."
+      },
+      {
+       "type": "card",
+       "text": "The classic brand is **Quilmes**, with the colors of the flag on its label. It was born in 1888 in the city of Quilmes, just south of Buenos Aires."
+      },
+      {
+       "type": "card",
+       "text": "A small bottle for one person is a **porrón**. Beer from the tap is **tirada**, and a tall glass of it is a **pinta**, from the English *pint*."
+      },
+      {
+       "type": "choice",
+       "prompt": "You want to buy a liter of beer at the kiosco and the seller asks **“¿Tenés envase?”** What does he want?",
+       "options": [
+        "Your ID, to see your age",
+        "A bag to carry it",
+        "An empty bottle to swap"
+       ],
+       "correct": 2,
+       "explain": "The glass bottle, the **envase**, is used again and again. You bring an empty one or you pay extra. That's why homes keep empty bottles by the door."
+      },
+      {
+       "type": "card",
+       "text": "In the last ten years, small breweries opened in every barrio, selling their own beer: **cerveza artesanal**. The early evening, when it's cheaper, is the *happy hour*, said in English."
+      },
+      {
+       "type": "card",
+       "text": "The usual thing to eat with it is a **picada**: a board of cheese, salami, olives and bread in the middle of the table. Everyone picks from it with their hands."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "fernet-y-vermut",
+     "title": "Fernet and vermut",
+     "summary": "A bitter black drink for parties, and an old custom that came back",
+     "pages": [
+      {
+       "type": "card",
+       "text": "**Fernet** is a black, bitter drink made from herbs. In Italy it's a small glass after dinner, for the stomach. In Argentina it's the drink of every party, mixed with cola and lots of ice: **fernet con coca**."
+      },
+      {
+       "type": "card",
+       "text": "Argentina drinks about three quarters of all the fernet in the world. The only factory of the famous Italian brand outside Italy is here."
+      },
+      {
+       "type": "choice",
+       "prompt": "At a party with no tall glasses, what do friends often mix the fernet in?",
+       "options": [
+        "A cooking pot",
+        "A metal bucket",
+        "A big plastic bottle cut in half"
+       ],
+       "correct": 2,
+       "explain": "The bottom half of a cola bottle becomes one huge glass, and it goes from hand to hand, like a mate."
+      },
+      {
+       "type": "card",
+       "text": "The home of fernet is **Córdoba**. People there drink more of it than anywhere else, and they will tell you so."
+      },
+      {
+       "type": "card",
+       "text": "How much fernet, how much cola, how much foam on top: everyone has their own rule, and everyone says the others do it wrong."
+      },
+      {
+       "type": "choice",
+       "prompt": "The **hora del vermut** is an old custom: a drink and something small to eat. When is it?",
+       "options": [
+        "Before lunch or dinner",
+        "After midnight",
+        "With breakfast"
+       ],
+       "correct": 0,
+       "explain": "**Vermut** is a wine with herbs, sweet and a little bitter, served with soda and ice. With it come olives, cheese and salami. Grandfathers did it; now young bars do too."
+      },
+      {
+       "type": "card",
+       "text": "The fizzy water comes from a **sifón**: a thick bottle that shoots soda when you press a handle. For a century it has been on every table next to the wine."
+      },
+      {
+       "type": "card",
+       "text": "In many barrios the **sodero** still comes by truck once a week. He leaves full sifones and takes the empty ones. Families keep the same sodero for decades."
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
    "slug": "dichos",
    "title": "Dichos y refranes",
    "emoji": "💬",
@@ -3838,6 +4596,1633 @@
        "type": "card",
        "chip": "Pro tip",
        "text": "Its name stuck, too. When something is a total, unfair mess, Argentines sigh: **“esto es un cambalache.”**"
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
+   "slug": "juegos",
+   "title": "Games",
+   "emoji": "🃏",
+   "summary": "A card game for liars, football stickers and dream numbers",
+   "classes": [
+    {
+     "slug": "el-truco",
+     "title": "Truco",
+     "summary": "The national card game, and how partners talk without words",
+     "pages": [
+      {
+       "type": "card",
+       "text": "**Truco** is the national card game. People play it in bars, on the beach, at school breaks and after every asado, usually two against two."
+      },
+      {
+       "type": "choice",
+       "prompt": "What is the most important skill in truco?",
+       "options": [
+        "Counting fast",
+        "Lying well",
+        "Remembering every card"
+       ],
+       "correct": 1,
+       "explain": "You shout **“¡Truco!”** to raise the bet, even with terrible cards. The other team must decide if you're lying. **Mentir**, to lie, is part of the rules."
+      },
+      {
+       "type": "card",
+       "text": "It's played with Spanish cards, not hearts and clubs. The four suits are **espadas** (swords), **bastos** (wooden clubs), **oros** (gold coins) and **copas** (cups)."
+      },
+      {
+       "type": "card",
+       "text": "The strongest card is the 1 of swords: the **ancho de espada**. Nothing beats it."
+      },
+      {
+       "type": "choice",
+       "prompt": "In the middle of a game, your partner looks at you and lifts both eyebrows. What does it mean?",
+       "options": [
+        "“I have nothing, you play”",
+        "“They are lying”",
+        "“I have the best card”"
+       ],
+       "correct": 2,
+       "explain": "Partners talk with secret faces, the **señas**. Lifted eyebrows: the ancho de espada. A wink: the second best card. The trick is that the other team must not see."
+      },
+      {
+       "type": "card",
+       "text": "A game goes to 30 points. The first fifteen are the **malas**, the bad ones, and the last fifteen are the **buenas**. Points are counted with matches or dry beans."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "Truco gave words to everyday talk. **Retrucar** is to answer back fast in an argument. **Irse al mazo**, to go to the pile, is to give up."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "figuritas",
+     "title": "Figuritas",
+     "summary": "The sticker album that drives the whole country crazy",
+     "pages": [
+      {
+       "type": "card",
+       "text": "**Figuritas** are small stickers of football players that you collect in an album. Every World Cup, children and adults go a little crazy to fill theirs."
+      },
+      {
+       "type": "choice",
+       "prompt": "In 2022 there were not enough figuritas in the kioscos. What did the government do?",
+       "options": [
+        "It printed its own album",
+        "It called a meeting about it",
+        "It set a limit of one pack per child"
+       ],
+       "correct": 1,
+       "explain": "A real government meeting about football stickers, with the company that makes them and the kiosco owners. Three months later Argentina won the World Cup."
+      },
+      {
+       "type": "card",
+       "text": "Nobody fills an album alone. You swap. A friend shows you a pile, one by one, and you answer fast: **“late”** (I have it) or **“nola”** (I don't)."
+      },
+      {
+       "type": "card",
+       "text": "Those two words are **la tengo** and **no la tengo**, cut short. The sticker that almost nobody has is **la difícil**, the hard one."
+      },
+      {
+       "type": "choice",
+       "prompt": "At school, children also play to win each other's figuritas. How?",
+       "options": [
+        "They hide them and the others look for them",
+        "They throw them at a wall, and the closest one wins",
+        "They race to stick them in the album"
+       ],
+       "correct": 1,
+       "explain": "That game is **el espejito**. In another one, **la tapadita**, your figurita has to land on top of someone else's. The winner takes both."
+      },
+      {
+       "type": "card",
+       "text": "Adults do it too. In a World Cup year, offices have a list on the wall of who needs which number, and nobody finds that strange."
+      },
+      {
+       "type": "card",
+       "text": "On weekends, in some parks, people of all ages meet to swap figuritas. Parents say it's for the children. It's not always true."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "la-quiniela",
+     "title": "Dream numbers",
+     "summary": "The small daily lottery and its list of numbers",
+     "pages": [
+      {
+       "type": "card",
+       "text": "**La quiniela** is a lottery with several draws a day. The simple bet is a number from 00 to 99: you bet a little money at an **agencia**, a small lottery shop."
+      },
+      {
+       "type": "choice",
+       "prompt": "How do many players choose their number?",
+       "options": [
+        "From what they dreamed last night",
+        "From the price of the dollar",
+        "From the result of the last football game"
+       ],
+       "correct": 0,
+       "explain": "Every number has a meaning, and every dream has a number. The list hangs on the wall of every agencia."
+      },
+      {
+       "type": "card",
+       "text": "Some of the list: **00** is eggs, **14** is the drunk man, **15** is the pretty girl, **17** is bad luck, **32** is money."
+      },
+      {
+       "type": "choice",
+       "prompt": "One number is called **los dos patitos**, the two little ducks, because of how it looks. Which one?",
+       "options": [
+        "11",
+        "22",
+        "88"
+       ],
+       "correct": 1,
+       "explain": "Two 2s look like two ducks swimming. In the dream list, 22 is also **el loco**, the crazy man."
+      },
+      {
+       "type": "card",
+       "text": "The most famous is **48**: **il morto che parla**, “the dead man who talks”. The name is Italian, because the list came with the immigrants from Naples."
+      },
+      {
+       "type": "card",
+       "text": "People also play the number plate of a car that crashed, or the age of a famous person who just died. When something big happens, half the country bets on the same number."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "Tell a neighbor you dreamed of your dead grandfather talking, and you'll hear **“jugale al 48”**: bet on 48. It's a joke and real advice at once."
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
+   "slug": "vacaciones",
+   "title": "Summer and holidays",
+   "emoji": "🏖️",
+   "summary": "An empty city, a cold sea, carnival and weekend trips",
+   "classes": [
+    {
+     "slug": "enero",
+     "title": "January: everybody out",
+     "summary": "The city goes quiet and the road to the sea fills up",
+     "pages": [
+      {
+       "type": "card",
+       "text": "In January, Buenos Aires is half empty. No traffic, free seats on the subte, and paper signs on shop doors: **“Cerrado por vacaciones.”**"
+      },
+      {
+       "type": "choice",
+       "prompt": "Where did all those porteños go?",
+       "options": [
+        "To the mountains in the west",
+        "To the beaches of the Atlantic",
+        "To their families in Italy and Spain"
+       ],
+       "correct": 1,
+       "explain": "They call it **la Costa**: a long line of beach towns about 400 km away, in the province of Buenos Aires. The biggest is **Mar del Plata**."
+      },
+      {
+       "type": "card",
+       "text": "There's a verb for it: **veranear**, to spend the summer somewhere. Many families go back to the same town, and the same street, for decades."
+      },
+      {
+       "type": "card",
+       "text": "Holidays are counted in halves of a month. A **quincena** is fifteen days: **“Nos vamos la primera quincena de enero.”**"
+      },
+      {
+       "type": "choice",
+       "prompt": "What is the sea like on the Costa?",
+       "options": [
+        "Warm and flat, like a lake",
+        "Clear and blue, with white sand",
+        "Cold, rough and windy"
+       ],
+       "correct": 2,
+       "explain": "Few people go for the water. They go for the family, the friends, the nights and the same beach as every year."
+      },
+      {
+       "type": "card",
+       "text": "Each town has its own crowd. **Pinamar** and **Cariló** are expensive. **Villa Gesell** is for the young. **Mar del Plata** is for everyone, and its nickname is **La Feliz**: the happy one."
+      },
+      {
+       "type": "card",
+       "text": "The day one quincena ends and the next begins is famous for its traffic. The TV news shows the road to the Costa live, hour by hour."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "la-playa",
+     "title": "A day at the beach",
+     "summary": "The kit, the sellers, the games and the nights",
+     "pages": [
+      {
+       "type": "card",
+       "text": "The beach kit: a **reposera** (a folding chair), a **sombrilla** (a big umbrella), a **heladerita** (a small box that keeps drinks cold), and of course the termo and the mate."
+      },
+      {
+       "type": "card",
+       "text": "A **balneario** is a beach club. There, families rent a **carpa**, a small cloth tent, for the whole summer. Some have had the same carpa for three generations."
+      },
+      {
+       "type": "choice",
+       "prompt": "Sellers walk on the sand all day, shouting. What is the classic thing they sell?",
+       "options": [
+        "Churros",
+        "Empanadas",
+        "Hot coffee"
+       ],
+       "correct": 0,
+       "explain": "**“¡Churros, hay churros!”** Filled with dulce de leche and eaten with sandy fingers. Also **choclo**, corn, and ice cream."
+      },
+      {
+       "type": "card",
+       "text": "Beach games: **tejo**, where you throw flat discs as close as you can to a small one, and **paleta**, two wooden bats and a ball."
+      },
+      {
+       "type": "choice",
+       "prompt": "Suddenly the whole beach starts to clap in rhythm. What is happening?",
+       "options": [
+        "The sun is going down",
+        "A lost child was found",
+        "The lifeguards are going home"
+       ],
+       "correct": 1,
+       "explain": "An adult lifts the lost child onto their shoulders and walks. Everyone claps so the parents look, and the clapping follows the child along the beach."
+      },
+      {
+       "type": "card",
+       "text": "At night nobody stays in. Families walk on the **peatonal**, the street without cars, eat more churros and play old video games, the **fichines**."
+      },
+      {
+       "type": "card",
+       "text": "In summer, the stars of TV move to Mar del Plata too, and act in a theater there every night. Seeing a show is part of the holiday."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "carnaval",
+     "title": "Carnival, three ways",
+     "summary": "Feathers by the river, drums in the barrio and the mountains of Jujuy",
+     "pages": [
+      {
+       "type": "card",
+       "text": "**Carnaval** comes in February or March, with two public holidays. Argentina has three very different ones."
+      },
+      {
+       "type": "choice",
+       "prompt": "Which place has the biggest carnival in the country, with feathers and huge moving stages?",
+       "options": [
+        "Buenos Aires",
+        "Mendoza",
+        "Gualeguaychú, a small city by a river"
+       ],
+       "correct": 2,
+       "explain": "In **Gualeguaychú**, in Entre Ríos, groups compete every Saturday of January and February on a long avenue built just for it. It looks like Rio in a small size."
+      },
+      {
+       "type": "card",
+       "text": "In Buenos Aires, each barrio has a **murga**: neighbors of all ages in shiny suits who dance with high kicks behind big drums."
+      },
+      {
+       "type": "card",
+       "text": "They perform at a **corso**: a street closed for the night. Children run around with cans of white foam, and nobody goes home clean."
+      },
+      {
+       "type": "card",
+       "text": "Murga songs make fun of politicians and the news of the year. The last dictatorship took away the carnival holidays. They only came back in 2011."
+      },
+      {
+       "type": "choice",
+       "prompt": "In the mountain villages of Jujuy, how does carnival begin?",
+       "options": [
+        "They ring the church bells all night",
+        "They dig a small devil out of the ground",
+        "They throw water from the roofs"
+       ],
+       "correct": 1,
+       "explain": "The **diablito** was buried at the end of last year's carnival. Out he comes, and for about a week people dance, covered in flour and paper ribbons. Then they bury him again."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "The rest of the year has parties too. Hundreds of towns hold a **Fiesta Nacional** for what they make: the apple, the salami, the wheat, the flower, the trout."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "escapadas",
+     "title": "Short trips and winter",
+     "summary": "Islands near the city, Brazil in Spanish and a house for the day",
+     "pages": [
+      {
+       "type": "card",
+       "text": "A short trip of two or three days is an **escapada**. A Monday holiday makes a **finde largo**, a long weekend, and the roads fill up."
+      },
+      {
+       "type": "card",
+       "text": "The closest one is **Tigre**, less than an hour from Buenos Aires: hundreds of green islands and brown rivers. People live there in wooden houses with no streets."
+      },
+      {
+       "type": "choice",
+       "prompt": "How do the children of those islands get to school?",
+       "options": [
+        "By boat",
+        "By a long bridge",
+        "They study at home"
+       ],
+       "correct": 0,
+       "explain": "A school boat stops at each house, like a bus. There is also a shop boat, a doctor boat and a boat that takes the rubbish."
+      },
+      {
+       "type": "card",
+       "text": "A **quinta** is a house outside the city with a garden and a pool. Groups of friends rent one for a single day: asado, pool, football, home at night."
+      },
+      {
+       "type": "choice",
+       "prompt": "For warm sea, Argentines drive to Brazil. One Brazilian city gets so many that shops and menus are in Spanish. Which one?",
+       "options": [
+        "São Paulo",
+        "Florianópolis",
+        "Brasília"
+       ],
+       "correct": 1,
+       "explain": "People call it **Floripa**. In January, on some of its beaches, you hear more Argentine Spanish than Portuguese."
+      },
+      {
+       "type": "card",
+       "text": "In July, schools close for two weeks: the **vacaciones de invierno**. Families with money go to the snow. In the city, cinemas and children's theaters are full."
+      },
+      {
+       "type": "card",
+       "text": "Another classic is **Colonia**, in Uruguay, one hour by boat across the river: old stone streets, a lighthouse, lunch, and back the same night."
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
+   "slug": "escuela-y-laburo",
+   "title": "School and work",
+   "emoji": "🎒",
+   "summary": "School rituals, university, how people work and how they protest",
+   "classes": [
+    {
+     "slug": "la-escuela",
+     "title": "At school",
+     "summary": "A white coat, half a day of class and exams in summer",
+     "pages": [
+      {
+       "type": "card",
+       "text": "In public primary schools, children wear a white coat over their clothes: the **guardapolvo blanco**. Rich or poor, everyone looks the same. That was the idea."
+      },
+      {
+       "type": "choice",
+       "prompt": "In which month does the school year start?",
+       "options": [
+        "January",
+        "March",
+        "September"
+       ],
+       "correct": 1,
+       "explain": "School runs from March to December. The long holidays are in summer, and summer here is December to March."
+      },
+      {
+       "type": "card",
+       "text": "Most children go to school for half a day: **turno mañana** or **turno tarde**, the morning or the afternoon group. A full day is **jornada completa**."
+      },
+      {
+       "type": "card",
+       "text": "In primary school the teacher is **la seño**, short for *señorita*, even if she is sixty and married. In secondary school, every teacher is **profe**."
+      },
+      {
+       "type": "card",
+       "text": "Each morning the flag goes up. The student with the best marks carries it at school events: the **abanderado** or **abanderada**. Families are very proud of it."
+      },
+      {
+       "type": "choice",
+       "prompt": "A secondary student fails maths at the end of the year. What happens?",
+       "options": [
+        "They repeat the whole year right away",
+        "They pay for extra classes at the school",
+        "They study in summer and take an exam again"
+       ],
+       "correct": 2,
+       "explain": "The phrase is **llevarse una materia**: to carry a subject with you into the holidays. **“Me llevé matemática”** means a summer with books."
+      },
+      {
+       "type": "card",
+       "text": "Marks go from 1 to 10. You pass with a 6 or a 7, depending on the province. And skipping school for a day has its own name: **ratearse**."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "egresados",
+     "title": "The last year of school",
+     "summary": "A year of rituals before school ends",
+     "pages": [
+      {
+       "type": "card",
+       "text": "The last year of secondary school is one long party. The students who are finishing are the **egresados**, and the whole year has rituals."
+      },
+      {
+       "type": "card",
+       "text": "Each class designs its own hoodie, the **buzo de egresados**, with a name for the group on the front and everyone's nickname on the back. They wear it all year."
+      },
+      {
+       "type": "choice",
+       "prompt": "How do many students arrive at school on the first day of their last year?",
+       "options": [
+        "In their parents' cars, all in a line",
+        "In suits and long dresses",
+        "With no sleep, after a party that lasted all night"
+       ],
+       "correct": 2,
+       "explain": "It's the **UPD**, the *Último Primer Día*: the last first day. They party all night and walk into school at sunrise with drums and flags."
+      },
+      {
+       "type": "card",
+       "text": "Then comes the **viaje de egresados**: one week away with the whole class and no parents. Families pay for it in small parts over two years."
+      },
+      {
+       "type": "choice",
+       "prompt": "Where do most classes go for that trip?",
+       "options": [
+        "To the beach in Mar del Plata",
+        "To the mountains and lakes of Bariloche",
+        "To the Iguazú falls"
+       ],
+       "correct": 1,
+       "explain": "**Bariloche**, in Patagonia: snow, trips by day and dancing every night. Whole planes and buses of 17-year-olds arrive all winter."
+      },
+      {
+       "type": "card",
+       "text": "The year ends with the **fiesta de egresados**: a formal party with parents and grandparents at dinner. After midnight the adults go home, and the dancing goes on until morning."
+      },
+      {
+       "type": "card",
+       "text": "The day the trip ends, parents wait for the bus at dawn. The children come back with no voice, no sleep and a bag of dirty clothes."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "la-facultad",
+     "title": "University is free",
+     "summary": "No fees, no campus and a very messy last day",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Public universities in Argentina charge nothing to study. The biggest is the **UBA**, the Universidad de Buenos Aires, with more than 300,000 students."
+      },
+      {
+       "type": "choice",
+       "prompt": "The UBA has no entrance exam. What do you do instead?",
+       "options": [
+        "A first year of general subjects",
+        "An interview with three teachers",
+        "Nothing: you wait for a free place"
+       ],
+       "correct": 0,
+       "explain": "It's the **CBC**, the *Ciclo Básico Común*. Anyone can start it. Passing all of it is the hard part."
+      },
+      {
+       "type": "card",
+       "text": "People don't say university. They say **la facultad**, or **la facu**: **“Estoy en la facu.”** There is no campus life. Students live at home and take the bus."
+      },
+      {
+       "type": "card",
+       "text": "Many students work and study at the same time, so a degree can take seven or eight years. The big exam at the end of each subject is a **final**."
+      },
+      {
+       "type": "choice",
+       "prompt": "You see a young woman in the street covered in eggs, flour and paint. She's smiling. What happened?",
+       "options": [
+        "Her team won the championship",
+        "It's her birthday",
+        "She just passed her last exam"
+       ],
+       "correct": 2,
+       "explain": "The verb is **recibirse**: to finish your degree. Friends and family wait outside the last exam with eggs, flour and anything that makes a mess."
+      },
+      {
+       "type": "card",
+       "text": "After that, the title is used. Lawyers and doctors are called **doctor** or **doctora**. On papers you'll see **Lic.** and **Ing.** before a name."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "In 1918, students in **Córdoba** took over their university and won the right to help run it. The **Reforma Universitaria** was copied all over Latin America."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "el-laburo",
+     "title": "Work",
+     "summary": "Jobs with and without papers, and life at the office",
+     "pages": [
+      {
+       "type": "card",
+       "text": "The everyday word for a job is **laburo**, and to work is **laburar**. **“Tengo mucho laburo”**: I have a lot of work. **“¿De qué laburás?”**: what do you do?"
+      },
+      {
+       "type": "choice",
+       "prompt": "In June and in December, registered workers get something extra. What?",
+       "options": [
+        "A week of holidays",
+        "Half a month's salary",
+        "A box of food and wine"
+       ],
+       "correct": 1,
+       "explain": "It's the **aguinaldo**: one extra salary a year, paid in two halves. People plan holidays and big purchases around it."
+      },
+      {
+       "type": "card",
+       "text": "A job is **en blanco**, in white, when it is registered: aguinaldo, paid holidays, health cover. **En negro**, in black, means no papers. More than a third of workers are en negro."
+      },
+      {
+       "type": "card",
+       "text": "People who work for themselves pay one small fixed tax every month, the **monotributo**. A client will ask: **“¿Me hacés factura?”** Can you give me an invoice?"
+      },
+      {
+       "type": "choice",
+       "prompt": "It's your birthday and you work in an office. Who brings the **facturas** (sweet pastries) for everyone?",
+       "options": [
+        "Your boss",
+        "The person at the next desk",
+        "You do"
+       ],
+       "correct": 2,
+       "explain": "The birthday person brings the pastries for the team. Arrive with empty hands and people will joke about it all day."
+      },
+      {
+       "type": "card",
+       "text": "Unions, **sindicatos**, are strong. Each year they sit down with companies to raise salaries along with prices. Those talks are the **paritarias**, and they are always in the news."
+      },
+      {
+       "type": "card",
+       "text": "After work, colleagues go for a drink: the **after office**, said in English. Wednesday and Thursday are the big days."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "paros-y-marchas",
+     "title": "The day nothing runs",
+     "summary": "Paros, piquetes and pots banged on balconies",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Protest is part of normal life. A **paro** is a strike: **paro de subte**, **paro de colectivos**, **paro bancario**. Locals check the news before they leave home."
+      },
+      {
+       "type": "choice",
+       "prompt": "The unions call a **paro general**, a strike of everyone. What does Buenos Aires look like that day?",
+       "options": [
+        "Like a normal day, only slower",
+        "Like a Sunday: quiet streets, few buses",
+        "Full of traffic, because everyone drives"
+       ],
+       "correct": 1,
+       "explain": "No trains, no subte, few buses, no banks, almost no flights. Many people work from home or don't work."
+      },
+      {
+       "type": "card",
+       "text": "A **piquete** is a group of people who block a street or a road to protest. The blocked street is a **corte**. Radio and map apps list the day's cortes every morning."
+      },
+      {
+       "type": "card",
+       "text": "A **marcha** is a march. Most of them end at **Plaza de Mayo** or at **Congreso**, with drums, flags and smoke from the choripán stands."
+      },
+      {
+       "type": "card",
+       "text": "Most marches are calm and full of families. Still, traffic stops for hours, so on those days many people leave work early or stay home."
+      },
+      {
+       "type": "choice",
+       "prompt": "It's nine at night. On every balcony, neighbors are hitting pots with spoons. What is it?",
+       "options": [
+        "A protest",
+        "A party for a football title",
+        "A call for a lost dog"
+       ],
+       "correct": 0,
+       "explain": "A **cacerolazo**, from **cacerola**, cooking pot. You protest from your own window, and the noise travels from building to building."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "Two questions that save your day: **“¿Hay paro mañana?”** Is there a strike tomorrow? And **“¿Está cortado?”** Is the street blocked?"
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
+   "slug": "deportes",
+   "title": "Sports beyond fútbol",
+   "emoji": "🏇",
+   "summary": "A game with a duck, cloned horses, Pumas and the club on the corner",
+   "classes": [
+    {
+     "slug": "el-pato",
+     "title": "The national sport is not fútbol",
+     "summary": "A gaucho game on horses that started with a real duck",
+     "pages": [
+      {
+       "type": "card",
+       "text": "By law, Argentina's national sport is not football. Since 1953 it's **pato**, a game played on horses."
+      },
+      {
+       "type": "choice",
+       "prompt": "**Pato** means duck. Why does the game have that name?",
+       "options": [
+        "The first players were duck hunters",
+        "At the start, the ball was a duck, often alive, in a bag",
+        "The riders move their arms like wings"
+       ],
+       "correct": 1,
+       "explain": "Gauchos from two ranches fought for the duck and raced with it to their own house. Today it's a leather ball with six handles."
+      },
+      {
+       "type": "card",
+       "text": "Now two teams of four riders pass the ball and throw it through a ring high on a pole. It looks like basketball on horses."
+      },
+      {
+       "type": "card",
+       "text": "The ball often falls. A rider must pick it up from the ground without stopping, hanging off one side of the horse at full speed."
+      },
+      {
+       "type": "choice",
+       "prompt": "The old game was wild, and riders died. What did the Church do about it?",
+       "options": [
+        "It asked players to wear a cross",
+        "It moved the games to Sundays after mass",
+        "It refused to bury players who died in a game"
+       ],
+       "correct": 2,
+       "explain": "The government banned pato more than once in the 1800s too. In the 1930s it came back with rules, and nobody gets killed anymore."
+      },
+      {
+       "type": "card",
+       "text": "The Church's order came in 1796, and Buenos Aires banned the game in 1822. Gauchos kept playing anyway, far from the towns."
+      },
+      {
+       "type": "card",
+       "text": "The truth: most Argentines have never seen a game of pato. Every few years someone asks Congress to make football the national sport, and nothing changes."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "polo",
+     "title": "The best in the world at polo",
+     "summary": "Ten-goal players, special horses and a field in the city",
+     "pages": [
+      {
+       "type": "card",
+       "text": "In one sport Argentina is the best by far: **polo**. Nearly all the best players in the world are Argentine, and so are the best horses."
+      },
+      {
+       "type": "card",
+       "text": "Each player has a number from −2 to 10, the **handicap**. Only a few people in the world are a 10, and almost all of them are from here."
+      },
+      {
+       "type": "choice",
+       "prompt": "The star **Adolfo Cambiaso** loved one horse so much that he did something new. What?",
+       "options": [
+        "He made copies of her in a lab",
+        "He built her a house next to his",
+        "He stopped playing when she got old"
+       ],
+       "correct": 0,
+       "explain": "They are clones. In 2016 he won the biggest tournament in the world riding six copies of the same mare, **Cuartetera**."
+      },
+      {
+       "type": "card",
+       "text": "That tournament is the **Abierto de Palermo**, played every spring on a field in the middle of Buenos Aires. Anyone can buy a ticket."
+      },
+      {
+       "type": "choice",
+       "prompt": "You're left-handed and you want to play polo. What happens?",
+       "options": [
+        "You play on the left side of the field",
+        "You get a special horse",
+        "You must play with your right hand"
+       ],
+       "correct": 2,
+       "explain": "It's the rule, to avoid crashes between horses: everyone holds the stick in the right hand."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "Argentina's first Olympic gold medal ever was in polo, in Paris in 1924. The game had arrived fifty years earlier with British ranch owners."
+      },
+      {
+       "type": "card",
+       "text": "A player changes horse many times in one game, so each one brings eight or more. The best horses fly around the world with their riders."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "pumas-y-leonas",
+     "title": "Pumas, Leonas and bats",
+     "summary": "Why every national team has an animal name",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Argentine national teams have animal names. The rugby team is **Los Pumas**. The women's hockey team is **Las Leonas**, the lionesses."
+      },
+      {
+       "type": "choice",
+       "prompt": "Look at the Pumas' shirt. Which animal is really on it?",
+       "options": [
+        "A puma",
+        "A jaguar",
+        "A lion"
+       ],
+       "correct": 1,
+       "explain": "It's a yaguareté. On a tour in 1965, a journalist saw it, wrote “Pumas”, and the wrong name stayed forever."
+      },
+      {
+       "type": "card",
+       "text": "Las Leonas won two World Cups and four Olympic medals in a row. Their star, **Luciana Aymar**, was chosen best player in the world eight times."
+      },
+      {
+       "type": "choice",
+       "prompt": "One national football team is called **Los Murciélagos**, the bats. Why?",
+       "options": [
+        "They only play at night",
+        "They wear black",
+        "The players can't see"
+       ],
+       "correct": 2,
+       "explain": "It's football for blind players; only the goalkeeper can see. The ball makes a sound, and the crowd must be silent. They have been world champions more than once."
+      },
+      {
+       "type": "card",
+       "text": "Rugby is played in clubs, mostly by people who don't get paid for it. After the game comes the **tercer tiempo**, the third half: both teams eat together."
+      },
+      {
+       "type": "card",
+       "text": "In 2020 the Pumas beat New Zealand's All Blacks for the first time, after 35 years of trying. Players and fans cried on TV."
+      },
+      {
+       "type": "card",
+       "text": "Other teams have animal names too: **Los Leones** (men's hockey) and **Las Panteras** (women's volleyball). The handball team chose **Los Gladiadores**."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "fierros",
+     "title": "Fangio and the fierreros",
+     "summary": "Five titles, a strange trip to Cuba and Ford against Chevrolet",
+     "pages": [
+      {
+       "type": "card",
+       "text": "**Juan Manuel Fangio** won five Formula 1 world titles in the 1950s, with four different teams. Nobody won more for almost half a century."
+      },
+      {
+       "type": "choice",
+       "prompt": "In 1958 Fangio went to Cuba for a race and never started it. Why?",
+       "options": [
+        "His car was stolen from the hotel",
+        "He was kidnapped by Fidel Castro's rebels",
+        "He missed the boat from Miami"
+       ],
+       "correct": 1,
+       "explain": "They wanted the world's attention. They treated him well and let him go about a day later, after the race. He said later he had nothing against them."
+      },
+      {
+       "type": "card",
+       "text": "A fan of cars and engines is a **fierrero**, from **fierro**, iron. The most loved racing series is **Turismo Carretera**, run since 1937."
+      },
+      {
+       "type": "card",
+       "text": "There, the question is not Boca or River. It's **Ford or Chevrolet**. Families pick one, and the choice goes from father to child."
+      },
+      {
+       "type": "choice",
+       "prompt": "In 1981 the Argentine **Carlos Reutemann** lost the Formula 1 title in the last race. By how much?",
+       "options": [
+        "One point",
+        "Five points",
+        "Ten points"
+       ],
+       "correct": 0,
+       "explain": "One single point. Years later he became governor of his province, Santa Fe. Everyone called him by his nickname, **Lole**."
+      },
+      {
+       "type": "card",
+       "text": "In 2024, **Franco Colapinto** became the first Argentine in Formula 1 in 23 years. People got up at dawn on Sundays to watch him."
+      },
+      {
+       "type": "card",
+       "text": "From 2009, the famous Dakar race left Africa and crossed Argentina for ten years. Millions of people stood by the road to watch it pass."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "el-club",
+     "title": "The club on the corner",
+     "summary": "Who owns River, where kids spend the summer and a game with glass walls",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Every barrio has a **club**: a football field, a gym, a small bar and a room for parties. Children do sport there and old men play cards."
+      },
+      {
+       "type": "choice",
+       "prompt": "Who is the owner of a giant club like River Plate?",
+       "options": [
+        "A family from Buenos Aires",
+        "The city",
+        "Its members"
+       ],
+       "correct": 2,
+       "explain": "Argentine clubs belong to their **socios**, the members, who pay every month and vote for the president. Boca and River too."
+      },
+      {
+       "type": "card",
+       "text": "In summer the club is **la pileta**, the swimming pool. Children go to the **colonia**: a day camp with games and swimming while parents work."
+      },
+      {
+       "type": "card",
+       "text": "Old men play **bochas** there: heavy balls rolled along a long court, as close as possible to a small one. Italian immigrants brought the game."
+      },
+      {
+       "type": "card",
+       "text": "The sport of the moment is **pádel**: tennis for four, in a small court with glass walls. Argentina fell in love with it in the 1980s, long before most of Europe."
+      },
+      {
+       "type": "choice",
+       "prompt": "The Argentine **Fernando Belasteguín** was number one in the world at pádel. For how long?",
+       "options": [
+        "3 years",
+        "8 years",
+        "16 years"
+       ],
+       "correct": 2,
+       "explain": "Sixteen years in a row. For a long time almost every top player in the world was Argentine."
+      },
+      {
+       "type": "card",
+       "text": "The club bar has a **metegol**: football on a table, with players on metal bars. One rule everywhere: no spinning the bar. That's **molinete**, and the goal doesn't count."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "Asking about sport is easy small talk. **“¿Hacés algún deporte?”** Do you do any sport? **“Juego al pádel los martes.”** I play pádel on Tuesdays."
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
+   "slug": "naturaleza",
+   "title": "Animals and nature",
+   "emoji": "🦫",
+   "summary": "Carpinchos, a bird that builds ovens, whales and purple streets",
+   "classes": [
+    {
+     "slug": "el-carpincho",
+     "title": "The carpincho",
+     "summary": "The calm giant that took over a rich neighborhood",
+     "pages": [
+      {
+       "type": "card",
+       "text": "The **carpincho**, or capybara, is the biggest rodent in the world, a relative of mice and guinea pigs. An adult can weigh more than 60 kilos, like a very big dog."
+      },
+      {
+       "type": "card",
+       "text": "Carpinchos live in groups near rivers and lakes, in the warm northeast and in the wetlands around Buenos Aires. They eat grass and sleep a lot."
+      },
+      {
+       "type": "choice",
+       "prompt": "In 2021, carpinchos were in the news all over the world. Why?",
+       "options": [
+        "One swam across the river to Uruguay",
+        "They walked into a rich private barrio and stayed",
+        "They ate a whole field of yerba"
+       ],
+       "correct": 1,
+       "explain": "**Nordelta**, a barrio of big houses, was built on the land where they lived. They came back, ate the gardens and crossed the streets. Most of the country was on their side."
+      },
+      {
+       "type": "card",
+       "text": "They are calm with everyone. Birds stand on their backs and other animals sit next to them. On the internet they're called the friendliest animal in the world."
+      },
+      {
+       "type": "choice",
+       "prompt": "Carpinchos are very good at one sport. Which one?",
+       "options": [
+        "Running long distances",
+        "Jumping fences",
+        "Swimming"
+       ],
+       "correct": 2,
+       "explain": "Their feet are a bit like a duck's, and they can stay under water for minutes to hide from danger."
+      },
+      {
+       "type": "card",
+       "text": "The best place to see hundreds of them is the **Esteros del Iberá**, in Corrientes: a huge wetland full of birds, deer and **yacarés**, small relatives of the crocodile."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "That's why a carpincho is your guide in this app. Calm, friendly, good with everyone, and very Argentine."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "pajaros",
+     "title": "The national bird",
+     "summary": "A small brown builder, loud green parrots and a bird that lies",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Argentina's national bird is not a great eagle. It's the **hornero**: small, brown, and living in every plaza and garden."
+      },
+      {
+       "type": "choice",
+       "prompt": "**Hornero** comes from *horno*, oven. Why is the bird called that?",
+       "options": [
+        "It builds a round nest of mud, like an old oven",
+        "It lives near kitchens and eats bread",
+        "Its chest is red like fire"
+       ],
+       "correct": 0,
+       "explain": "A pair builds the nest from mud and straw in about two weeks: on a pole, a traffic light, a statue's head. It's a symbol of home and hard work."
+      },
+      {
+       "type": "card",
+       "text": "The noise in every park in Buenos Aires comes from **cotorras**: small green parrots. They build huge shared nests of sticks, high in the trees."
+      },
+      {
+       "type": "card",
+       "text": "The **benteveo** has a yellow chest and shouts its own name. Many people hear something else in its call: **“¡bicho feo!”**, ugly bug."
+      },
+      {
+       "type": "choice",
+       "prompt": "The **ñandú** is the big bird of the open country, as tall as a person. What can't it do?",
+       "options": [
+        "Run fast",
+        "Fly",
+        "Swim"
+       ],
+       "correct": 1,
+       "explain": "It runs at up to 60 km/h but never leaves the ground. And the father sits on the eggs and raises the chicks, not the mother."
+      },
+      {
+       "type": "card",
+       "text": "The **tero** screams when you come near its nest. But it screams far from the eggs, to send you the wrong way."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "So there's a saying for someone who talks about one thing to hide another: he's **como el tero**. He shouts in one place and has his eggs in another."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "ballenas-y-pinguinos",
+     "title": "Whales, penguins and a mistake from Canada",
+     "summary": "The wild coast of Patagonia",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Every year from June to December, hundreds of whales come to **Península Valdés**, in Patagonia, to have their babies. The whale is the **ballena franca**."
+      },
+      {
+       "type": "card",
+       "text": "On a beach near the city of Puerto Madryn, at high tide, the whales swim a few meters from the sand. You watch them standing up, with dry feet."
+      },
+      {
+       "type": "choice",
+       "prompt": "At **Punta Tombo** you can walk through a place where penguins make their nests. How many penguins come each year?",
+       "options": [
+        "About 500",
+        "About 20,000",
+        "Hundreds of thousands"
+       ],
+       "correct": 2,
+       "explain": "It's one of the biggest penguin colonies on the continent. The rule on the path: if a **pingüino** wants to cross, you stop and wait."
+      },
+      {
+       "type": "card",
+       "text": "Along the roads of Patagonia you see **guanacos**, wild cousins of the llama. They jump fences easily and, like llamas, they spit when they're angry."
+      },
+      {
+       "type": "choice",
+       "prompt": "In 1946, twenty animals were brought from Canada to Tierra del Fuego. Now there are more than 100,000 and nobody can stop them. Which animal?",
+       "options": [
+        "Wolves",
+        "Beavers",
+        "Brown bears"
+       ],
+       "correct": 1,
+       "explain": "The plan was to sell their fur. But the **castores** have no enemies there. They cut down trees and build dams, and whole forests have died."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "At Península Valdés, orcas throw themselves onto the beach to catch young sea lions, then slide back into the water. Very few orcas in the world hunt like that."
+      },
+      {
+       "type": "card",
+       "text": "Further south, in **Ushuaia**, boats take you past small islands covered in sea lions and seabirds, at the very end of the continent."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "yaguarete",
+     "title": "The biggest cat in the Americas",
+     "summary": "The yaguareté, thieves at the falls and the softest wool",
+     "pages": [
+      {
+       "type": "card",
+       "text": "The **yaguareté**, the jaguar, is the biggest cat in the Americas. It lives in the forests of the north, and only a few hundred are left in Argentina."
+      },
+      {
+       "type": "choice",
+       "prompt": "In 2016, new peso notes came out without presidents or heroes. What was on them?",
+       "options": [
+        "Animals of Argentina",
+        "Football players",
+        "Famous foods"
+       ],
+       "correct": 0,
+       "explain": "The yaguareté, the whale, the hornero, the guanaco, the condor. A few years later a new set brought back the faces of historical figures."
+      },
+      {
+       "type": "card",
+       "text": "In the wetlands of **Iberá**, the yaguareté was gone for seventy years. In 2021, the first ones were set free there again, and now cubs are born in the wild."
+      },
+      {
+       "type": "card",
+       "text": "At the Iguazú falls, the thieves are **coatíes**: animals with a long nose and a striped tail. They open bags and steal sandwiches. Don't feed them."
+      },
+      {
+       "type": "choice",
+       "prompt": "Can you see wild toucans in Argentina?",
+       "options": [
+        "No, only in zoos",
+        "Yes, in the forest of Misiones",
+        "Yes, in the parks of Buenos Aires"
+       ],
+       "correct": 1,
+       "explain": "The **tucán**, with its huge orange beak, flies around the Iguazú falls and the red-earth forest of Misiones."
+      },
+      {
+       "type": "card",
+       "text": "High in the Andes of the northwest lives the **vicuña**, a small wild cousin of the llama. Its wool is one of the finest and most expensive in the world."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "You don't have to kill a vicuña for its wool. Once a year, villagers form a human chain, bring the animals together, cut the wool and let them go."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "arboles",
+     "title": "Purple streets",
+     "summary": "The trees of Buenos Aires, and a tree that isn't one",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Every November, Buenos Aires turns purple. Thousands of **jacarandá** trees flower at the same time, and the pavements are covered in purple too."
+      },
+      {
+       "type": "card",
+       "text": "Most of the city's street trees and big parks are the work of one man: **Carlos Thays**, a French garden designer who arrived in 1889 and stayed for life."
+      },
+      {
+       "type": "choice",
+       "prompt": "The name of the **palo borracho** tree means “drunk stick”. What does it look like?",
+       "options": [
+        "Its branches hang down to the ground",
+        "It grows leaning to one side",
+        "Its trunk is fat like a bottle, with thorns"
+       ],
+       "correct": 2,
+       "explain": "The trunk keeps water inside and swells like a belly. In autumn it's covered in big pink flowers."
+      },
+      {
+       "type": "card",
+       "text": "The national flower is the red flower of the **ceibo**, a tree that grows along the rivers."
+      },
+      {
+       "type": "choice",
+       "prompt": "The **ombú** is the giant of the open country, with a huge trunk and wide shade. What is strange about it?",
+       "options": [
+        "It only grows in pairs",
+        "Its wood is soft and wet, and useless as wood",
+        "It has no leaves for most of the year"
+       ],
+       "correct": 1,
+       "explain": "Many say it's not a real tree but a giant plant. The trunk is full of water, so it can't be used for building or for fire. Its gift is shade."
+      },
+      {
+       "type": "card",
+       "text": "In Recoleta there's a giant fig tree more than 200 years old, the **Gran Gomero**. Its branches are so long that poles hold them up, and one is carried by a statue."
+      },
+      {
+       "type": "card",
+       "text": "In spring, the **plátanos** along the streets drop a yellow dust, and half the city sneezes. **“Es la alergia”**, people say with red eyes."
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
+   "slug": "creencias",
+   "title": "Luck and beliefs",
+   "emoji": "🍀",
+   "summary": "Saints of the road, the unlucky day and grandma's cures",
+   "classes": [
+    {
+     "slug": "gauchito-gil",
+     "title": "Red flags by the road",
+     "summary": "Gauchito Gil, the Difunta Correa and the saints the Church didn't choose",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Drive on any road in Argentina and you'll see them: small red houses, the size of a box, with red flags and candles around them."
+      },
+      {
+       "type": "choice",
+       "prompt": "Who are those little red houses for?",
+       "options": [
+        "A gaucho killed about 150 years ago",
+        "People who died in accidents on that road",
+        "A football club with a red shirt"
+       ],
+       "correct": 0,
+       "explain": "**Gauchito Gil**, from Corrientes. He's a saint of the people: the Church never named him one, but millions ask him for help."
+      },
+      {
+       "type": "card",
+       "text": "The story: he ran from the army and took from the rich. Before he was killed, he told the soldier: “Your son is very sick. Pray in my name and he'll live.” The boy lived."
+      },
+      {
+       "type": "card",
+       "text": "Drivers honk when they pass one, for a safe trip. People leave red ribbons, wine and cigarettes to say thanks."
+      },
+      {
+       "type": "card",
+       "text": "Other roadside houses are surrounded by bottles of water. Those are for the **Difunta Correa**, a woman who, the story says, died of thirst crossing the desert of San Juan."
+      },
+      {
+       "type": "choice",
+       "prompt": "The story says that when she was found, something amazing had happened. What?",
+       "options": [
+        "Flowers had grown around her",
+        "Her baby was still alive, drinking her milk",
+        "A spring of water had opened next to her"
+       ],
+       "correct": 1,
+       "explain": "So travelers leave water for her, so she is never thirsty again. Truck drivers are the ones who trust her most."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "Asking a saint for something with a promise in return is a **promesa**. **“Hice una promesa”** explains why your friend is walking 60 kilometers or has stopped eating sweets."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "martes-trece",
+     "title": "Tuesday the 13th",
+     "summary": "The unlucky day and the small rules for good luck",
+     "pages": [
+      {
+       "type": "card",
+       "text": "The unlucky day is not Friday the 13th. It's **martes 13**, Tuesday. The saying: **“Martes 13, no te cases ni te embarques.”** Don't get married and don't get on a boat."
+      },
+      {
+       "type": "card",
+       "text": "Never pass the salt from hand to hand. Put it down on the table and let the other person pick it up. People say hand to hand brings a fight."
+      },
+      {
+       "type": "choice",
+       "prompt": "At a café, where should you NOT leave your bag, if you believe in bad luck?",
+       "options": [
+        "On the chair next to you",
+        "On the table",
+        "On the floor"
+       ],
+       "correct": 2,
+       "explain": "People say a bag or wallet on the floor makes the money go away. Many cafés even have small hooks under the table."
+      },
+      {
+       "type": "card",
+       "text": "Bad luck is **mala suerte** or **yeta**. To keep it away, people say **“toco madera”** and touch wood, the same as in English."
+      },
+      {
+       "type": "card",
+       "text": "A red ribbon on a baby's wrist or on the mirror of a car is against **la envidia**: other people's envy, which is believed to bring harm."
+      },
+      {
+       "type": "choice",
+       "prompt": "Many women get the same small present at Christmas, to wear on New Year's night for luck. What is it?",
+       "options": [
+        "Red socks",
+        "Pink underwear",
+        "A yellow scarf"
+       ],
+       "correct": 1,
+       "explain": "A pink **bombacha**. It has to be new and it has to be a present. In December the shop windows are full of them."
+      },
+      {
+       "type": "card",
+       "text": "And if a broom touches your feet while someone is sweeping, the old people say you will never get married."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "empacho-y-ojeo",
+     "title": "Cures from grandma",
+     "summary": "What to do when the doctor can't help, by the aunt who knows",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Ate too much and your stomach hurts for days? Doctors have other names for it. Grandmas call it **empacho**, and they know someone who cures it."
+      },
+      {
+       "type": "choice",
+       "prompt": "How does that person check if you have empacho?",
+       "options": [
+        "She looks at your tongue with a candle",
+        "She measures the distance to your stomach with a ribbon",
+        "She puts a warm plate on your belly"
+       ],
+       "correct": 1,
+       "explain": "It's **curar con la cinta**. You hold one end of a ribbon on your stomach, and she measures it three times with her arm, elbow to hand. If the measure changes, you're **empachado**."
+      },
+      {
+       "type": "card",
+       "text": "The other method is **tirar el cuerito**: she pulls the skin on your lower back until it makes a small sound. Children hate it."
+      },
+      {
+       "type": "card",
+       "text": "Then there's **mal de ojo**, the evil eye: a strong headache that comes, people say, from someone's envy. The cure uses a plate of water, drops of oil and secret words."
+      },
+      {
+       "type": "choice",
+       "prompt": "The story says the secret words can only be taught on a special night. Which one?",
+       "options": [
+        "Christmas Eve",
+        "The first full moon of the year",
+        "The teacher's own birthday"
+       ],
+       "correct": 0,
+       "explain": "Most families say midnight on **Nochebuena**, usually from an older woman to a younger one in the family. Learned on any other day, people say, they don't work."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "People say the cure works from far away. You send your full name by WhatsApp, and an aunt in another city does the rest. Many people with university degrees do it."
+      },
+      {
+       "type": "card",
+       "text": "Ask them if they believe, and they'll answer with two words: **por las dudas**. Just in case."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "caminar-a-lujan",
+     "title": "Walking to Luján",
+     "summary": "A night on foot, promises to saints and a line for work",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Every October, hundreds of thousands of people walk about 60 kilometers from Buenos Aires to the town of **Luján**. They walk all night to reach its big church."
+      },
+      {
+       "type": "choice",
+       "prompt": "The church holds a small statue of the Virgin Mary. The story says that in 1630 it chose to stay there. How?",
+       "options": [
+        "It was found in the river after a flood",
+        "A white bird landed on it and stayed",
+        "The cart carrying it would not move until it was taken off"
+       ],
+       "correct": 2,
+       "explain": "The animals pulling the cart didn't move until that one box was put on the ground. People decided she wanted to stay. Today she is the patron saint of Argentina."
+      },
+      {
+       "type": "card",
+       "text": "On August 7, the line outside the church of **San Cayetano**, in Buenos Aires, is many blocks long. He's the saint of bread and work. Some people sleep there for days."
+      },
+      {
+       "type": "card",
+       "text": "All along the road to Luján, strangers give the walkers water, fruit and mate for free. Others wait at the side to rub tired feet."
+      },
+      {
+       "type": "card",
+       "text": "Football has its promesas too. “If we win the cup, I'll walk to Luján.” After a big title, plenty of fans really do it."
+      },
+      {
+       "type": "choice",
+       "prompt": "Most Argentines say they are Catholic. How many go to church every week?",
+       "options": [
+        "Most of them",
+        "About half",
+        "A small part"
+       ],
+       "correct": 2,
+       "explain": "For many, religion is family events more than Sunday mass: a baby's **bautismo** and a child's **primera comunión** are big parties with all the cousins."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "Argentina has the biggest Jewish community in Latin America, and millions of people with Syrian and Lebanese grandparents. Many came on the same boats, a century ago."
+      }
+     ],
+     "vocabulary": []
+    }
+   ]
+  },
+  {
+   "slug": "pantallas",
+   "title": "TV, films and laughs",
+   "emoji": "📺",
+   "summary": "Red news screens, lunches on TV, cult films and the jokes",
+   "classes": [
+    {
+     "slug": "la-tele",
+     "title": "On TV",
+     "summary": "A red screen, a lunch that started in 1968 and a famous question",
+     "pages": [
+      {
+       "type": "card",
+       "text": "The news channel everyone knows by sight is **Crónica TV**. Its style is giant white letters on a red screen and loud march music, for any news, big or tiny."
+      },
+      {
+       "type": "choice",
+       "prompt": "Which of these does Crónica really put on the screen in giant letters?",
+       "options": [
+        "“The Obelisco is tired”",
+        "“100 days to go until summer”",
+        "“The president had pizza”"
+       ],
+       "correct": 1,
+       "explain": "It counts the days to summer and to spring every year. The red screen with **ÚLTIMO MOMENTO**, breaking news, is now a classic joke image online."
+      },
+      {
+       "type": "card",
+       "text": "**Mirtha Legrand** has had lunch on TV since 1968. Famous people sit at her table, eat and answer her sharp questions. She was born in 1927 and was still on air at 99."
+      },
+      {
+       "type": "card",
+       "text": "For thirty years, the biggest show was **Marcelo Tinelli**'s: jokes, hidden cameras and a dance contest with famous people. The next morning, everyone at work talked about it."
+      },
+      {
+       "type": "card",
+       "text": "The other queen of TV is **Susana Giménez**, with decades of talk shows and phone games. The whole country knows her simply as Susana."
+      },
+      {
+       "type": "choice",
+       "prompt": "A guest once told Susana that a dinosaur from Patagonia was coming to a show in the city. What did she ask, in a line every Argentine knows?",
+       "options": [
+        "“Is it alive?”",
+        "“Does it bite?”",
+        "“How much is it?”"
+       ],
+       "correct": 0,
+       "explain": "People tell it as one word: **“¿Vivo?”** She says it was a joke. Today people say it when someone asks a question with an obvious answer."
+      },
+      {
+       "type": "card",
+       "text": "When the president speaks on all channels at the same time, it's a **cadena nacional**. Your show stops, and half the country complains."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "novelas",
+     "title": "Series that went around the world",
+     "summary": "Argentine novelas with fans in very far places",
+     "pages": [
+      {
+       "type": "card",
+       "text": "A daily TV series is a **novela**. For years, Argentina made them for teenagers with songs and a band: **Chiquititas**, **Rebelde Way**, **Floricienta**, **Casi Ángeles**."
+      },
+      {
+       "type": "choice",
+       "prompt": "The band from **Rebelde Way** filled big concert halls far from home. In which country?",
+       "options": [
+        "Japan",
+        "Israel",
+        "Canada"
+       ],
+       "correct": 1,
+       "explain": "Israeli teenagers learned Spanish from Argentine novelas. The same story was later made again in Mexico, India and other countries."
+      },
+      {
+       "type": "card",
+       "text": "The woman behind those shows is the producer **Cris Morena**. Many of today's Argentine actors and singers started as children in her novelas."
+      },
+      {
+       "type": "card",
+       "text": "**Natalia Oreiro** was born in Uruguay and became a star in Argentina with the novela **Muñeca brava**. Then the series was sold to dozens of countries."
+      },
+      {
+       "type": "choice",
+       "prompt": "In one country she is so loved that in 2021 she was made a citizen. Which one?",
+       "options": [
+        "Italy",
+        "Russia",
+        "Brazil"
+       ],
+       "correct": 1,
+       "explain": "In 2019 she sang in 13 Russian cities, twenty years after the series ended."
+      },
+      {
+       "type": "card",
+       "text": "The series adults love most is **Los simuladores**: four men who solve people's problems with huge, clever lies. Argentines can repeat whole scenes."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "Want to practice? Watch **El encargado**, a dark comedy about the man who runs a building in Buenos Aires. It's porteño Spanish at normal speed."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "cine",
+     "title": "Films everyone can repeat",
+     "summary": "The lines every family knows, and a street full of theaters",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Argentina makes a lot of films for its size, and two of them won the Oscar for best foreign film. But the ones people love are not always the ones with prizes."
+      },
+      {
+       "type": "card",
+       "text": "The film every family knows is **Esperando la carroza**, from 1985: a loud family argues about who has to take care of the grandmother."
+      },
+      {
+       "type": "choice",
+       "prompt": "In its most famous scene, a man cries about how poor his brother is. What did he see on the brother's table?",
+       "options": [
+        "Half a pizza",
+        "Three empanadas",
+        "One cold milanesa"
+       ],
+       "correct": 1,
+       "explain": "**“Tres empanadas”**, said with tears: three old empanadas for two people. He's not really sad, and he ate one himself. Argentines repeat it today when there's not enough of something."
+      },
+      {
+       "type": "card",
+       "text": "**Relatos salvajes**, from 2014, tells six short stories of normal people who lose control: in traffic, at a wedding, at a public office. Argentines saw themselves in it."
+      },
+      {
+       "type": "choice",
+       "prompt": "You go to see an American film for adults in a cinema in Buenos Aires. How is it shown?",
+       "options": [
+        "With Spanish voices",
+        "In English, with nothing to read",
+        "In English, with Spanish words on the screen"
+       ],
+       "correct": 2,
+       "explain": "Most films for adults are **subtituladas**. Children's films are **dobladas**, with Spanish voices. Good news if you're learning: you can read along."
+      },
+      {
+       "type": "card",
+       "text": "Buenos Aires has around 300 theaters, more than almost any city in the world. On **Avenida Corrientes**, the shows start late and the pizza places wait for the crowd after."
+      },
+      {
+       "type": "card",
+       "text": "**Nueve reinas**, from 2000: two small thieves, one day and one big trick. You never know who is lying to whom. Many people call it the best Argentine film."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "el-humor",
+     "title": "What makes Argentines laugh",
+     "summary": "Teasing, jokes about themselves and one day to be careful",
+     "pages": [
+      {
+       "type": "card",
+       "text": "Among friends, teasing is love. If your new friends make fun of your accent or your team, you're part of the group. If they are very polite to you, worry."
+      },
+      {
+       "type": "choice",
+       "prompt": "Argentines love to tell jokes about themselves. What are those jokes usually about?",
+       "options": [
+        "How much they eat",
+        "How late they are",
+        "How big their ego is"
+       ],
+       "correct": 2,
+       "explain": "A classic: “The best business? Buy an Argentine for what he's worth and sell him for what he says he's worth.” Told by Argentines, with pride."
+      },
+      {
+       "type": "card",
+       "text": "The most loved comedy group ever is **Les Luthiers**. For more than fifty years they played funny songs in elegant suits, on instruments they built from tins, tubes and bicycle parts."
+      },
+      {
+       "type": "card",
+       "text": "On TV, **Diego Capusotto** makes fun of rock stars, politicians and porteños in short, absurd videos. People repeat the lines of his invented characters as if they were real."
+      },
+      {
+       "type": "choice",
+       "prompt": "On December 28, be careful with what you read and what people tell you. Why?",
+       "options": [
+        "It's the day for jokes and fake news",
+        "It's the day everybody tells the truth",
+        "It's the day old debts must be paid"
+       ],
+       "correct": 0,
+       "explain": "It's the **Día de los Inocentes**. If you believe the lie, they say: **“¡Que la inocencia te valga!”** More or less: good luck with being so innocent."
+      },
+      {
+       "type": "card",
+       "text": "When something bad happens in the country, the jokes arrive in minutes. Laughing at a crisis is how people get through it."
+      },
+      {
+       "type": "card",
+       "chip": "Did you know?",
+       "text": "There's a phrase for all of it: **“Argentina, no lo entenderías.”** Argentina, you wouldn't understand. People post it under any photo of something crazy and local."
+      }
+     ],
+     "vocabulary": []
+    },
+    {
+     "slug": "la-radio",
+     "title": "The radio is always on",
+     "summary": "Football told like a poem, and the new radio on YouTube",
+     "pages": [
+      {
+       "type": "card",
+       "text": "In taxis, kitchens, shops and kioscos, the radio is on. Morning shows are like company: the same voices every day, for decades."
+      },
+      {
+       "type": "card",
+       "text": "The person who tells a football game live is the **relator**. A good one talks fast, invents poems as he talks and holds a **“gooool”** for ten seconds."
+      },
+      {
+       "type": "choice",
+       "prompt": "Some fans watch the game on TV in a special way. How?",
+       "options": [
+        "With the TV sound off and the radio on",
+        "Standing up for the whole game",
+        "With the screen covered during penalties"
+       ],
+       "correct": 0,
+       "explain": "They prefer their favorite relator on the radio. The voice and the picture don't always match, and nobody cares."
+      },
+      {
+       "type": "card",
+       "text": "The most famous radio moment: Maradona's second goal against England in 1986. The relator **Víctor Hugo Morales** cried and called him **barrilete cósmico**: a kite from space."
+      },
+      {
+       "type": "card",
+       "text": "Young people listen in a new way: on **streaming**. Channels on YouTube make live radio with cameras, all day, and fill big concert halls with their fans."
+      },
+      {
+       "type": "choice",
+       "prompt": "In 2025, a live stream had more viewers than many TV shows. What did it show?",
+       "options": [
+        "A chess game between two ministers",
+        "A man walking from Ushuaia to the north",
+        "Scientists looking at the bottom of the sea"
+       ],
+       "correct": 2,
+       "explain": "Argentine scientists sent a robot with a camera deep into the sea near Mar del Plata. People watched for hours and gave names to the animals, like a starfish with a big bottom."
+      },
+      {
+       "type": "card",
+       "chip": "Pro tip",
+       "text": "Radio is great practice for your ear. Put on a morning show while you make breakfast, and don't worry if you only understand half."
       }
      ],
      "vocabulary": []

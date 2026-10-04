@@ -26,12 +26,14 @@ units:
       es: "Me quedé sin batería, te llamo después."
       en: "My battery died, I'll call you later."
     tips:
-      - title: "El celu"
-        body: "The phone is **el celu** (short for *celular*). **Me quedé sin batería** — *my battery died*;
-          **se cortó** — *it cut out*; **mandame la ubicación** — *send me your location*."
-      - title: "La SUBE"
-        body: "The card for the bus and the subte is **la SUBE**, and you **cargás** it at a kiosco — the
-          same verb as charging a phone."
+      - title: "Me quedé sin batería"
+        body: "**Me quedé sin batería** — *my battery died*, literally *I was left without battery*. A call,
+          or the power at home, **se cortó** — *it cut out*. Without *sin*, **quedarse** is *to
+          stay*: *¿te quedaste en casa?*"
+      - title: "El celu, la SUBE"
+        body: "The card for the bus and the subte is **la SUBE**: you **cargás** it at a kiosco — the same
+          verb as charging **el celu**, the phone (short for **celular**). *Celular* is also the
+          phone number: *pasame tu celular* — *give me your number*."
     words:
       - lemma: "celular"
         pos: "noun"
@@ -57,10 +59,10 @@ units:
             bound: true
       - lemma: "cortarse"
         pos: "verb"
-        en: "to cut out"
+        en: "to cut out, to go out (power)"
         forms:
           - form: "se cortó"
-            en: "it cut out"
+            en: "it cut out, it went out"
             f: "3sg.pret.ind.clitic"
           - form: "cortó"
             f: "3sg.pret.ind"
@@ -74,6 +76,9 @@ units:
       - lemma: "llamada"
         pos: "noun"
         en: "call"
+      - lemma: "videollamada"
+        pos: "noun"
+        en: "video call"
   - ordinal: 2
     slug: "no-tengo-senal"
     title: "Sort out tech trouble"
@@ -86,19 +91,17 @@ units:
       es: "No tengo señal y se apagó el celu."
       en: "I've got no signal and my phone died."
     tips:
-      - title: "Se apagó, se colgó"
-        body: "A machine that fails on its own takes **se** and the preterite, like **se cortó**: **se
-          apagó** — *it switched off*; **se colgó** — *it froze*. Your friend **se quedó sin
-          batería**? Now you know why she didn't answer. When anything stops working, porteños say
-          it **no anda**: **no anda el wifi**, **no me anda el celu**. The universal fix: **apagalo
-          y prendelo**."
+      - title: "No anda, se apagó"
+        body: "When anything stops working, porteños say it **no anda**: *no anda el wifi*, *no me anda el
+          celu*. A machine that fails on its own takes **se**: **se apagó** — *it switched off*;
+          **se colgó** — *it froze*. The universal fix: **apagalo y prendelo**."
       - title: "Sin señal, sin datos"
         body: "**No tengo señal** — *no signal*; **me quedé sin datos** — *I ran out of data*. **¿Tenés
           wifi?** is the first question at any bar."
       - title: "Descargá, borrá"
         body: "Tech orders are plain vos commands: **descargá la app**, **borrá las fotos**. What you
           already did is preterite: **la descargué**, **las borré**. Day to day people say **bajá**
-          or **bajate** for *download*: **bajate la app, es gratis**. *Descargá* is what the screen
+          or **bajate** for *download*: **bajate la app, es gratis**. *Descargar* is what the screen
           says."
     words:
       - lemma: "apagarse"
@@ -121,6 +124,7 @@ units:
           - form: "colgó"
             f: "3sg.pret.ind"
             bound: true
+        note: "Also slang for a person: 'me colgué' = I got distracted, I forgot."
       - lemma: "quedarse"
         pos: "verb"
         forms:
@@ -160,8 +164,9 @@ units:
         pos: "verb"
         forms:
           - form: "anda"
-            en: "works (it works)"
+            en: "it works"
             f: "3sg.pres.ind"
+            note: "Also: how someone is doing — ¿cómo anda tu vieja? = how is your mom doing?"
       - lemma: "apagar"
         pos: "verb"
         forms:
@@ -200,7 +205,8 @@ units:
           you face to face."
       - title: "La denuncia"
         body: "To report it you **hacés la denuncia** at the **comisaría**, or online. The **policía**
-          rarely finds the phone; the denuncia is for the insurance and the new SIM."
+          rarely finds the phone; the denuncia is for the insurance. To block the line, call your
+          phone company. In an emergency, call **911**."
     words:
       - lemma: "chorro"
         pos: "noun"
@@ -214,7 +220,7 @@ units:
             f: "m.pl"
       - lemma: "ladrón"
         pos: "noun"
-        en: "robber"
+        en: "thief, robber"
       - lemma: "denuncia"
         pos: "noun"
         en: "police report, complaint"
@@ -237,7 +243,7 @@ units:
         register: "lunfardo"
   - ordinal: 4
     slug: "me-afanaron"
-    title: "Tell how you got conned"
+    title: "Say you got robbed or scammed"
     summary: "Me afanaron la billetera"
     grammar:
       - "robar"
@@ -247,27 +253,27 @@ units:
       es: "Me descuidé un minuto y me afanaron la billetera."
       en: "I looked away for a minute and my wallet got nicked."
     tips:
-      - title: "Me afanaron, nos robaron"
-        body: "Among friends it's **me afanaron** — *they nicked it* — with the same *they* that nobody
-          names. It moves with the victim: **te robaron**, **le robaron a mi vieja**, **nos robaron
-          la bici**. The **motochorro** does it from a motorbike. It is also what you say when you
-          were overcharged: **me afanaron con el taxi** — *the taxi ripped me off*."
+      - title: "Me afanaron"
+        body: "Among friends it's **me afanaron** — *they stole it* (slang). It is also what you say when
+          you were overcharged: *me afanaron con el taxi* — *the taxi overcharged me*. The
+          **motochorro** steals from a motorbike. The confession that comes with it: **me descuidé**
+          — *I wasn't careful*."
       - title: "El cuento del tío"
-        body: "**Me estafaron** — *I got scammed* — is quieter: a call from a fake bank, a **billete
-          trucho**, the **cuento del tío** — *the old con* — on your grandmother. First thing:
-          **bloqueá la tarjeta**. Then the denuncia, with the **cámaras** of the block if you're
-          lucky."
+        body: "**Me estafaron** — *I got scammed* : nobody grabs anything, they trick you. A fake call from
+          the bank, a **billete trucho**, or the **cuento del tío**: a caller pretends to be a
+          relative or an official and asks for money. First thing: **bloqueá la tarjeta**. Then the
+          denuncia; if you're lucky, the street **cámaras** recorded it."
       - title: "Me descuidé"
         body: "The confession that comes with it: **me descuidé** — *I let my guard down*. Porteños answer
           **¡qué garrón!**"
     words:
       - lemma: "afanar"
         pos: "verb"
-        en: "to nick, to swipe"
+        en: "to steal, to swipe"
         register: "lunfardo"
         forms:
           - form: "me afanaron"
-            en: "they nicked it (from me)"
+            en: "they stole it (from me), I got robbed"
             f: "3pl.pret.ind.clitic"
           - form: "afanaron"
             f: "3pl.pret.ind"
@@ -303,7 +309,7 @@ units:
         register: "lunfardo"
       - lemma: "trucho"
         pos: "adj"
-        en: "fake, dodgy"
+        en: "fake, shady"
         register: "lunfardo"
         forms:
           - form: "trucho"
@@ -312,7 +318,8 @@ units:
             f: "f.sg"
       - lemma: "cuento del tío"
         pos: "phrase"
-        en: "con trick"
+        en: "scam"
+        note: "A trick to get your money, often a stranger with a story."
       - lemma: "bloquear"
         pos: "verb"
         en: "to block, to freeze (a card)"
@@ -448,12 +455,13 @@ units:
         body: "Same order as *te lo devuelvo* — person first, thing second — with new verbs: **te lo
           presto** — *I'll lend it to you*; **te lo guardo** — *I'll keep it for you*; **te lo
           muestro** — *I'll show you*. The thing decides lo or la: *¿la bici?* **te la presto**."
-      - title: "Se lo digo"
-        body: "To him or her, *le lo* turns into **se lo** again: **se lo digo mañana** — *I'll tell her
-          tomorrow*. If it's **un secreto**: **no se lo digo a nadie, te lo prometo**."
+      - title: "Un secreto"
+        body: "A **secreto** stays between two people: **te guardo el secreto** — *I'll keep your secret*.
+          And you promise it: **no se lo digo a nadie, te lo prometo** — *I won't tell anyone, I
+          promise*."
       - title: "Te lo paso"
         body: "**Te lo paso** is *I'll send it to you* — a number, a photo, a file. And a loan comes back
-          **sin falta** — *without fail*."
+          **sin falta** — *for sure* (word for word, *without fail*)."
     words:
       - lemma: "prestar"
         pos: "verb"
@@ -481,7 +489,7 @@ units:
         pos: "verb"
         forms:
           - form: "paso"
-            en: "I pass on, I hand over"
+            en: "I pass, I'll send (you); I spend (time); I'll come by"
             f: "1sg.pres.ind"
       - lemma: "prometer"
         pos: "verb"
@@ -519,20 +527,21 @@ units:
       en: "I got a job at a company downtown."
     tips:
       - title: "Conseguir"
-        body: "**Conseguí laburo** — *I got a job*. *Conseguir* is the porteño verb for getting anything
-          that took effort: a *turno*, a table, a flat."
+        body: "**Conseguí laburo** — *I got a job*. *Conseguir* is the verb for getting anything that took
+          effort: a *turno*, a table, an apartment."
       - title: "Home office"
-        body: "Working from home is **hacer home office**, in English, and said the Spanish way."
+        body: "Working from home is **hacer home office**: English words, said with a Spanish accent. It
+          never means the room: *hoy hago home office* — *I'm working from home today*."
     words:
       - lemma: "conseguir"
         pos: "verb"
         en: "to get, to manage to get"
         forms:
           - form: "conseguí"
-            en: "I landed, I managed to get"
+            en: "I got, I managed to get"
             f: "1sg.pret.ind"
           - form: "conseguiste"
-            en: "you landed, you managed to get"
+            en: "you got, you managed to get"
             f: "2sg.pret.ind.vos"
       - lemma: "renunciar"
         pos: "verb"
@@ -556,6 +565,7 @@ units:
       - lemma: "home office"
         pos: "phrase"
         en: "working from home"
+        note: "False friend: in Argentina it means working from home, not a home office room."
       - lemma: "empezar"
         pos: "verb"
         forms:
@@ -564,11 +574,13 @@ units:
             f: "1sg.pret.ind"
       - lemma: "en blanco"
         pos: "phrase"
-        en: "on the books (a job)"
+        en: "registered, on the books (a job)"
+        note: "A job 'en blanco' is registered: taxes, pension, health insurance and paid holidays."
       - lemma: "en negro"
         pos: "phrase"
-        en: "off the books (a job)"
+        en: "unregistered, off the books (a job)"
         register: "informal"
+        note: "Very common in Argentina: paid cash, no contract, no benefits."
   - ordinal: 8
     slug: "me-contrataron"
     title: "Talk about hiring and firing"
@@ -586,8 +598,9 @@ units:
           **renunció** — *he quit*. Nobody says *fue despedido*: it's **lo echaron** — *they fired
           him* — and **me contrataron** — *they hired me*."
       - title: "El aguinaldo"
-        body: "Twice a year, in June and December, the **aguinaldo** arrives — half a month's extra pay. Ask
-          about it at the *entrevista*, along with the **licencia** — *paid leave*."
+        body: "Twice a year, in June and December, the **aguinaldo** arrives — half a month's extra pay.
+          Every job *en blanco* pays it by law. A **licencia** is *paid leave* for a reason (sick, a
+          new baby, exams). Your yearly holiday is **vacaciones**."
       - title: "El currículum"
         body: "You send **el currículum**; they ask about your **experiencia** and tell you about the
           **puesto** — *the position*. **Pagan bien** — *they pay well* — is what everyone wants to
@@ -597,7 +610,7 @@ units:
         pos: "verb"
         forms:
           - form: "consiguió"
-            en: "he landed, she managed to get"
+            en: "he got, she managed to get"
             f: "3sg.pret.ind.irregular"
       - lemma: "renunciar"
         pos: "verb"
@@ -646,9 +659,16 @@ units:
       - lemma: "aguinaldo"
         pos: "noun"
         en: "extra month's pay (paid in two halves)"
+        note: "Required by law, not a bonus for good work: half paid in June, half in December."
       - lemma: "licencia"
         pos: "noun"
         en: "leave (from work)"
+      - lemma: "tomar"
+        pos: "verb"
+        forms:
+          - form: "me tomaron"
+            en: "they hired me"
+            f: "3pl.pret.ind.clitic"
   - ordinal: 9
     slug: "practica-te-lo-presto"
     title: "Practice: tech, loans and new jobs"
@@ -682,6 +702,7 @@ units:
       - "devolveme"
       - "conseguí"
       - "estaba"
+      - "presto"
   - ordinal: 10
     slug: "manejar-en-baires"
     title: "Get around by car"
@@ -694,12 +715,14 @@ units:
       es: "No manejo en el centro, hay mucho tránsito."
       en: "I don't drive downtown, there's a lot of traffic."
     tips:
-      - title: "Manejar, estacionar"
-        body: "A porteño **maneja** (drives) an **auto** and spends half an hour trying to **estacionar**
-          (park). *Conducir* and *aparcar* are Spain's."
+      - title: "Manejar"
+        body: "A porteño **maneja** (drives) an *auto*. *Conducir* is only for forms and signs. Downtown,
+          the **tránsito** is often **imposible**, and so is finding a place to *estacionar*
+          (park)."
       - title: "La avenida"
-        body: "Buenos Aires is a grid of **avenidas** — Corrientes, Santa Fe, 9 de Julio — and every corner
-          has a **semáforo**. Cross when it's green: **cruzá**."
+        body: "Buenos Aires is a grid of streets cut by wide **avenidas** — Corrientes, Santa Fe, 9 de
+          Julio. On an avenida almost every corner has a **semáforo**. Cross when it's green:
+          **cruzá**."
     words:
       - lemma: "manejar"
         pos: "verb"
@@ -722,6 +745,9 @@ units:
       - lemma: "imposible"
         pos: "adj"
         en: "impossible"
+      - lemma: "contramano"
+        pos: "adv"
+        en: "the wrong way (against the traffic)"
   - ordinal: 11
     slug: "la-ruta"
     title: "Take the car out of town"
@@ -735,16 +761,17 @@ units:
       en: "I drove three hours on the highway."
     tips:
       - title: "Out of the city"
-        body: "Leaving Buenos Aires you take **la autopista**, then **la ruta**. First you **cargás nafta**
-          — *nafta*, never *gasolina* — and on the way you pay the **peaje**. **La General Paz** is
-          the ring road between the Capital and the conurbano. Porteños *agarran* a road rather than
-          *take* it: **agarrá la ruta**, **¿qué ruta agarramos?**"
+        body: "Leaving Buenos Aires you take **la autopista** (the fast road, with tolls), then **la ruta**
+          (the ordinary road between towns). First you **cargás nafta** — *nafta*, never *gasolina*
+          — and on the way you pay the **peaje**. **La General Paz** is the ring road between the
+          Capital and the conurbano. Porteños *agarran* a road rather than *take* it: **agarrá la
+          ruta**, **¿qué ruta agarramos?**"
       - title: "Manejé, ¿manejaste?"
         body: "*Manejar* in the past is regular: **manejé**, **¿manejaste vos?**. **Chocar** swaps *c* for
           *qu* before *é*: **choqué**. Run a red light and it's **una multa**."
       - title: "Papers and parking"
-        body: "Your driving licence is the **registro** — *¿tenés registro?*. A paid parking space or garage
-          is a **cochera**."
+        body: "Your driver's license is the **registro** — *¿tenés registro?*. Your own or rented parking
+          space is a **cochera**; a public paid parking lot is an *estacionamiento*."
     words:
       - lemma: "manejar"
         pos: "verb"
@@ -758,18 +785,15 @@ units:
           - form: "maneja"
             en: "drives (he/she drives)"
             f: "3sg.pres.ind"
-      - lemma: "ruta"
-        pos: "noun"
-        en: "highway, route"
       - lemma: "autopista"
         pos: "noun"
-        en: "motorway, expressway"
+        en: "highway, expressway"
       - lemma: "General Paz"
         pos: "propn"
         en: "the General Paz (ring road)"
       - lemma: "nafta"
         pos: "noun"
-        en: "petrol, gas"
+        en: "gas, gasoline"
       - lemma: "cargar"
         pos: "verb"
         forms:
@@ -784,7 +808,7 @@ units:
         en: "toll"
       - lemma: "multa"
         pos: "noun"
-        en: "traffic fine, penalty"
+        en: "fine, (traffic) ticket"
       - lemma: "chocar"
         pos: "verb"
         en: "to crash"
@@ -806,7 +830,7 @@ units:
             f: "2sg.imp.vos"
       - lemma: "registro"
         pos: "noun"
-        en: "driving licence"
+        en: "driver's license"
       - lemma: "cochera"
         pos: "noun"
         en: "garage, parking space"
@@ -814,8 +838,11 @@ units:
         pos: "verb"
         forms:
           - form: "agarramos"
-            en: "we take, we grab"
+            en: "we take, we took (a road)"
             f: "1pl.pres.ind"
+      - lemma: "estación de servicio"
+        pos: "phrase"
+        en: "gas station"
   - ordinal: 12
     slug: "salir-con-alguien"
     title: "Talk about going out with someone"
@@ -829,14 +856,14 @@ units:
       es: "Estoy saliendo con alguien del laburo."
       en: "I'm seeing someone from work."
     tips:
-      - title: "Salir con"
+      - title: "Salir con, cortar"
         body: "**Estoy saliendo con alguien** — *I'm seeing someone*. When it ends, porteños **cortan**:
-          **cortamos** — *we broke up*. Porteños say **con Juan cortamos** — literally *with Juan we
-          broke up* — for *Juan and I broke up*. Same with **con Sofi nos peleamos**: *Sofi and I
-          had a fight*."
+          **cortamos** — *we broke up*. With a name they say **con Santi cortamos** — *Santi and I
+          broke up* — and the same for a fight: **con Sofi nos peleamos**. **Nos peleamos** is *we
+          fight* and also *we had a fight*."
       - title: "Alguien, nadie"
         body: "**Alguien** is *someone*, **nadie** is *nobody* — and Spanish keeps the *no* as well: **no
-          vino nadie**."
+          vino nadie**. If *nadie* comes first, drop the *no*: **nadie me dijo nada**."
     words:
       - lemma: "salir"
         pos: "verb"
@@ -849,10 +876,10 @@ units:
         en: "to fight, to argue"
         forms:
           - form: "nos peleamos"
-            en: "we argued, we fell out"
+            en: "we argued, we had a fight"
             f: "1pl.pret.ind.clitic"
           - form: "se pelearon"
-            en: "they fell out"
+            en: "they argued, they had a fight"
             f: "3pl.pret.ind.clitic"
           - form: "peleamos"
             f: "1pl.pret.ind"
@@ -862,7 +889,7 @@ units:
             bound: true
       - lemma: "cortar"
         pos: "verb"
-        en: "to break up"
+        en: "to cut, to break up"
         forms:
           - form: "cortamos"
             en: "we broke up"
@@ -881,6 +908,7 @@ units:
       - lemma: "cita"
         pos: "noun"
         en: "date"
+        note: "For a doctor, bank or office appointment Argentines say turno, not cita."
       - lemma: "mismo"
         pos: "adj"
         en: "same"
@@ -915,7 +943,7 @@ units:
     words:
       - lemma: "conocerse"
         pos: "verb"
-        en: "to know each other, to meet"
+        en: "to meet, to know each other"
         forms:
           - form: "nos conocemos"
             en: "we know each other"
@@ -979,7 +1007,7 @@ units:
         pos: "noun"
         forms:
           - form: "novios"
-            en: "boyfriend and girlfriend, a couple"
+            en: "boyfriend and girlfriend, a couple; bride and groom"
             f: "m.pl"
       - lemma: "ex"
         pos: "noun"
@@ -990,6 +1018,14 @@ units:
       - lemma: "beso"
         pos: "noun"
         en: "kiss"
+        note: "'Chau, un beso' or 'besos' is a normal goodbye with friends and family, on the phone or in
+          texts."
+      - lemma: "te quiero"
+        pos: "phrase"
+        en: "I love you (also said to friends and relatives)"
+      - lemma: "te amo"
+        pos: "phrase"
+        en: "I love you (romantic)"
   - ordinal: 14
     slug: "me-cae-bien"
     title: "Say who you get along with"
@@ -1011,11 +1047,12 @@ units:
     words:
       - lemma: "caer"
         pos: "verb"
-        en: "to come across (to someone)"
+        en: "to fall; (caer bien/mal) to like, to not like someone"
         forms:
           - form: "me cae"
-            en: "(he) comes across to me"
+            en: "I like, I don't like"
             f: "3sg.pres.ind.clitic"
+            note: "With bien or mal: me cae bien = I like him, me cae mal = I don't like him."
           - form: "te cae"
             en: "(he) comes across to you"
             f: "3sg.pres.ind.clitic"
@@ -1023,14 +1060,17 @@ units:
             en: "(they) come across to me"
             f: "3pl.pres.ind.clitic"
           - form: "me cayó"
-            en: "(he) came across to me"
+            en: "I liked, I didn't like"
             f: "3sg.pret.ind.clitic.irregular"
+            note: "First impression, with bien or mal: me cayó bien = I liked her."
           - form: "cae"
             f: "3sg.pres.ind"
             bound: true
           - form: "caen"
             f: "3pl.pres.ind"
             bound: true
+        note: "Me cae bien Juan = I like Juan (as a person). Works like gustar: the person liked is the
+          subject."
       - lemma: "llevarse"
         pos: "verb"
         en: "to get along"
@@ -1062,26 +1102,35 @@ units:
           mis amigos?** The person being liked is the subject: *mis amigos **te caen** bien*."
       - title: "No lo aguanto"
         body: "The other end: **no lo aguanto** — *I can't stand him*; **es insoportable**; **es re falso**.
-          And the good end: **nos hicimos amigos** — *we became friends* — because **hay química**."
+          And the good end: **nos hicimos amigos** — *we became friends*. And **hay química** —
+          *there's chemistry* — is mostly said about a couple."
     words:
       - lemma: "caer"
         pos: "verb"
         forms:
           - form: "le cae"
-            en: "(he) comes across to him/her"
+            en: "he/she likes (someone) — with bien or mal"
             f: "3sg.pres.ind.clitic"
+            note: "Always with bien or mal: le cae bien = he/she likes him; le cae mal = he/she doesn't like
+              him."
           - form: "nos cae"
-            en: "(he) comes across to us"
+            en: "we like, we don't like"
             f: "3sg.pres.ind.clitic"
+            note: "With bien or mal."
           - form: "les cae"
-            en: "(he) comes across to them"
+            en: "they like (someone) — with bien or mal"
             f: "3sg.pres.ind.clitic"
+            note: "Always with bien or mal: le cae bien = he/she likes him; le cae mal = he/she doesn't like
+              him."
           - form: "te caen"
-            en: "(they) come across to you"
+            en: "you like, you don't like"
             f: "3pl.pres.ind.clitic"
+            note: "With bien or mal, about several people."
           - form: "le cayó"
-            en: "(he) came across to him/her"
+            en: "he/she liked (someone) — first impression, with bien or mal"
             f: "3sg.pret.ind.clitic.irregular"
+            note: "Always with bien or mal: le cae bien = he/she likes him; le cae mal = he/she doesn't like
+              him."
       - lemma: "llevarse"
         pos: "verb"
         forms:
@@ -1105,7 +1154,7 @@ units:
         en: "unbearable"
       - lemma: "hacerse"
         pos: "verb"
-        en: "to make yourself"
+        en: "to act (like), to pretend to be, to become"
         forms:
           - form: "nos hicimos"
             en: "we became (friends)"
@@ -1168,6 +1217,7 @@ units:
       - lemma: "casamiento"
         pos: "noun"
         en: "wedding"
+        note: "Argentines say casamiento much more than boda."
       - lemma: "embarazada"
         pos: "adj"
         en: "pregnant"
@@ -1192,16 +1242,21 @@ units:
         en: "honeymoon"
       - lemma: "por civil"
         pos: "phrase"
-        en: "at the registry office"
+        en: "in a civil ceremony, at city hall"
+        note: "The legal wedding is always at the Registro Civil; a church wedding and party are extra."
       - lemma: "padrino"
         pos: "noun"
-        en: "godfather; best man"
+        en: "godfather; wedding sponsor"
         forms:
           - form: "padrino"
             f: "m.sg"
           - form: "madrina"
-            en: "godmother; maid of honor"
+            en: "godmother; wedding sponsor"
             f: "f.sg"
+            note: "At Argentine weddings the madrina is usually the groom's mother, who walks him in; not a
+              'maid of honor'."
+        note: "At Argentine weddings the padrino is usually the bride's father, who walks her in; not a
+          'best man'."
       - lemma: "nene"
         pos: "noun"
         en: "little boy"
@@ -1211,6 +1266,9 @@ units:
           - form: "nena"
             en: "little girl"
             f: "f.sg"
+      - lemma: "civil"
+        pos: "noun"
+        en: "the legal wedding (the ceremony itself)"
   - ordinal: 17
     slug: "se-recibio"
     title: "Share the other big news"
@@ -1229,10 +1287,9 @@ units:
           *they got engaged* — **se jubiló** — *retired*. The sad one too: **se murió** — *died*.
           Ask **¿de qué te recibiste?** — *what did you graduate in?* And **se murió** is for
           talking among friends; to the family you say **falleció** — *passed away*."
-      - title: "Por civil, y el velorio"
-        body: "Porteños get married **por civil** — *at the registry office* — often with a **padrino** and
-          a **madrina**, then the **luna de miel**. When **nació una nena** or **un nene**, you
-          visit. At a **velorio** — *a wake* — you hug and say **te acompaño en el sentimiento**."
+      - title: "El velorio"
+        body: "When someone dies, family and friends meet at the **velorio** — *the wake*. You hug the
+          family and say **te acompaño en el sentimiento** — *I'm sorry for your loss*."
     words:
       - lemma: "recibirse"
         pos: "verb"
@@ -1302,8 +1359,11 @@ units:
       - title: "The future that guesses"
         body: "For plans porteños say *voy a*. The future tense is for **guessing**: **¿dónde estará?** —
           *where can he be?*; **estará en el laburo** — *he's probably at work*."
-      - title: "Será"
-        body: "**¿Qué hora será?** — *I wonder what time it is*. **Será** on its own shrugs: *could be*."
+      - title: "Capaz, a lo mejor"
+        body: "**Capaz**, **a lo mejor** and **quizás** all mean *maybe*; **seguro que** is *I bet*;
+          **supongo que** is *I guess*; **probablemente** is *probably*. All take the plain present:
+          **capaz está en la plaza**, **seguro que es Fede**. In Buenos Aires you will hear
+          **capaz** much more than **quizás**."
       - title: "Debe estar"
         body: "To state a guess, porteños mostly say **debe** + infinitive: **debe estar en el laburo** —
           *he must be at work*; **debe tener cuarenta**; **deben ser las ocho**. The future is more
@@ -1335,7 +1395,7 @@ units:
         pos: "verb"
         forms:
           - form: "será"
-            en: "will be, can be"
+            en: "will be, is probably"
             f: "3sg.fut.ind.irregular"
           - form: "serán"
             en: "it's probably, they must be"
@@ -1355,6 +1415,8 @@ units:
       - lemma: "capaz"
         pos: "adv"
         en: "maybe"
+        note: "As an adjective it means 'capable', but in Argentine speech it often means 'maybe': capaz
+          (que) llueve."
       - lemma: "quizás"
         pos: "adv"
         en: "perhaps"
@@ -1363,7 +1425,7 @@ units:
         en: "I bet, surely"
       - lemma: "deber"
         pos: "verb"
-        en: "must, to owe"
+        en: "to owe, should"
         forms:
           - form: "debe"
             en: "must (he/she must)"
@@ -1372,7 +1434,7 @@ units:
             en: "must (they must)"
             f: "3pl.pres.ind"
           - form: "debés"
-            en: "you must"
+            en: "you must (be), you probably"
             f: "2sg.pres.ind.vos"
       - lemma: "hacer"
         pos: "verb"
@@ -1390,11 +1452,12 @@ units:
         pos: "verb"
         forms:
           - form: "pasará"
-            en: "will happen, is probably wrong"
+            en: "will happen; I wonder (what's happening)"
             f: "3sg.fut.ind"
+            note: "Future often shows a guess: ¿Qué le pasará? = I wonder what's wrong with him."
       - lemma: "a lo mejor"
         pos: "phrase"
-        en: "for all I know, it may be"
+        en: "maybe"
       - lemma: "suponer"
         pos: "verb"
         en: "to suppose"
@@ -1418,7 +1481,9 @@ units:
       en: "I feel ill, I've got a cough and a temperature."
     tips:
       - title: "Me siento"
-        body: "**Me siento mal** — *I feel ill*; **¿cómo te sentís?** — *how do you feel?* On its own, **lo
+        body: "**Me siento mal** — *I feel sick*; **¿cómo te sentís?** — *how do you feel?* The vowel
+          changes with *yo*, not with *vos*: **me siento**, but **te sentís**. *Dormir* does the
+          same: **duermo**, but **dormís**; **dormí** is the past, *I slept*. On its own, **lo
           siento** is *I'm sorry*."
       - title: "La obra social"
         body: "Your health insurance is your **obra social**; the doctor writes a **receta** and you take
@@ -1443,15 +1508,18 @@ units:
       - lemma: "lo siento"
         pos: "phrase"
         en: "I'm sorry"
+        note: "For small mistakes Argentines usually say perdón; lo siento is for bad news or sympathy."
       - lemma: "tos"
         pos: "noun"
         en: "cough"
       - lemma: "receta"
         pos: "noun"
-        en: "prescription"
+        en: "prescription, recipe"
       - lemma: "obra social"
         pos: "phrase"
         en: "health insurance"
+        note: "Health insurance run by unions or the state, paid from your salary. Private plans are called
+          prepaga."
       - lemma: "análisis"
         pos: "noun"
         en: "tests (medical)"
@@ -1482,13 +1550,14 @@ units:
     tips:
       - title: "Se siente"
         body: "For someone else it's **se siente**: **mi abuela no se siente bien**. Where it hurts is
-          **dolor de** — **tengo dolor de cabeza** — *I've got a headache*."
+          **dolor de** — **tengo dolor de cabeza** — *I've got a headache*, the same as **me duele
+          la cabeza**."
       - title: "La prepaga"
         body: "Besides the public hospital and the *obra social*, lots of porteños pay a **prepaga** — a
           private health plan. Once a year: a **chequeo**, an *análisis de* **sangre**, **la
           presión** and **la vacuna** for the **gripe**."
       - title: "Reposo"
-        body: "The doctor's favourite order: **tenés que hacer reposo** — *you need bed rest*. And a
+        body: "The doctor's favorite order: **tenés que hacer reposo** — *you need bed rest*. And a
           **jarabe** for the cough. A plain **resfrío** — *a cold* — needs no doctor, just a
           **remedio** from the pharmacy. Anything serious, straight to the **guardia**."
     words:
@@ -1506,10 +1575,10 @@ units:
         en: "check-up"
       - lemma: "vacuna"
         pos: "noun"
-        en: "vaccine, jab"
+        en: "vaccine, shot"
       - lemma: "presión"
         pos: "noun"
-        en: "blood pressure"
+        en: "blood pressure, pressure"
       - lemma: "sangre"
         pos: "noun"
         en: "blood"
@@ -1548,7 +1617,8 @@ units:
     tips:
       - title: "Wonder, then guess"
         body: "**¿Qué le pasará?** wonders; **a lo mejor tiene gripe** guesses; **seguro que está cansado**
-          bets. The future to wonder, the present to guess."
+          bets. The future can guess on its own too: **Sofi estará en el subte** — *Sofi's probably
+          on the subway*."
       - title: "Nos, se"
         body: "**Nos conocemos**, **nos escribimos** — each other, us. **Se separaron**, **se pelean** —
           each other, them."
@@ -1566,6 +1636,9 @@ units:
       - "estará"
       - "me siento"
       - "era"
+      - "seguro que"
+      - "nos escribimos"
+      - "se pelean"
   - ordinal: 22
     slug: "sos-un-genio"
     title: "Thank people the porteño way"
@@ -1579,9 +1652,10 @@ units:
       en: "Thanks, you're a genius! You saved me."
     tips:
       - title: "Me salvaste"
-        body: "Porteño thanks praise the person: **sos un genio**, **me salvaste** — *you saved me*. For a
-          present: **¡qué detalle!** — *how thoughtful!* — or **¡te pasaste!** — *you shouldn't
-          have!* To a woman it is always **sos una genia**."
+        body: "Porteño thanks praise the person: **sos un genio**, **me salvaste** — *you saved me*. To a
+          woman it is always **sos una genia**. For a present: **¡qué detalle!** — *how thoughtful!*
+          — or **¡te pasaste!** — *this is too much, you did an amazing job!* Said in an angry
+          voice, the same words mean *you went too far*."
       - title: "Ni hablar"
         body: "The answers: *de nada*, **ni hablar** — *don't mention it* — or **lo hice de onda** — *I did
           it to be nice*. **Te agradezco** is warmer and a touch more formal: **te agradezco de
@@ -1589,7 +1663,7 @@ units:
     words:
       - lemma: "agradecer"
         pos: "verb"
-        en: "to thank"
+        en: "to thank, to be grateful for"
         forms:
           - form: "agradezco"
             en: "I thank"
@@ -1599,8 +1673,11 @@ units:
         en: "to save"
         forms:
           - form: "salvaste"
-            en: "you saved"
             f: "2sg.pret.ind.vos"
+            bound: true
+          - form: "me salvaste"
+            f: "2sg.pret.ind.vos.clitic"
+            en: "you saved me"
       - lemma: "pasarse"
         pos: "verb"
         en: "to overdo it, to go too far"
@@ -1617,6 +1694,7 @@ units:
           - form: "genia"
             en: "genius (said of a woman)"
             f: "f.sg"
+        note: "'¡Genio!' or '¡Sos un genio!' is a common casual way to say thanks."
       - lemma: "detalle"
         pos: "noun"
         en: "thoughtful touch, detail"
@@ -1628,10 +1706,11 @@ units:
         en: "truly, honestly"
       - lemma: "ni hablar"
         pos: "phrase"
-        en: "don't mention it"
+        en: "don't mention it, of course"
+        note: "Depending on context it can mean 'of course!' or 'no way!'."
       - lemma: "de onda"
         pos: "phrase"
-        en: "to be nice, as a favour"
+        en: "to be nice, as a favor"
       - lemma: "verdad"
         pos: "noun"
         en: "truth, true"
@@ -1648,13 +1727,12 @@ units:
       en: "Thanks a million, I owe you one."
     tips:
       - title: "Te debo una"
-        body: "**Te debo una** — *I owe you one*. The answer is **de nada**, or, more porteño, **no pasa
-          nada**."
-      - title: "Un montón"
-        body: "**Gracias por todo**, **mil gracias**, **gracias un montón** — the thanks gets bigger, the
-          grammar doesn't change. Outside the thanks it is everywhere: **un montón de** + noun is
-          *loads of* — **hay un montón de gente**, **tengo un montón de laburo** — and **me gusta un
-          montón**."
+        body: "**Te debo una** — *I owe you one*. The answer is **de nada**. **No pasa nada** — *it's fine,
+          no worries* — is the answer to *perdón*."
+      - title: "Mil gracias"
+        body: "**Gracias por todo** — *thanks for everything*; **mil gracias** — *thanks a million*;
+          **gracias otra vez** — *thanks again*. The thanks gets bigger, the grammar doesn't change.
+          You already know **un montón**: *gracias un montón*."
     words:
       - lemma: "deber"
         pos: "verb"
@@ -1701,20 +1779,23 @@ units:
     tips:
       - title: "Buena onda"
         body: "**Buena onda** is the porteño compliment for a person: easy, warm, *nice*. **Mala onda** is
-          the opposite. Both stay the same for everyone: *ella es buena onda*."
+          the opposite. **Buena onda** and **mala onda** never change: *ella es buena onda*.
+          **Simpático** is narrower — *friendly*, pleasant to talk to — and does change:
+          **simpática**."
       - title: "Pesado"
         body: "**Qué pesado** — *what a pain* — for someone who won't let it go. **Divertido** is *fun*,
-          **tímido** *shy*."
+          **tímido** *shy*. For a woman: **pesada**, **divertida**, **tímida**. With **estar** it is
+          just for now: *Nico está pesado hoy* — *Nico's being annoying today*."
     words:
       - lemma: "buena onda"
         pos: "phrase"
-        en: "nice, good vibes"
+        en: "nice, friendly"
       - lemma: "mala onda"
         pos: "phrase"
-        en: "unfriendly, bad vibes"
+        en: "unfriendly, not nice"
       - lemma: "pesado"
         pos: "adj"
-        en: "annoying, a pain"
+        en: "heavy; annoying, a pain"
         forms:
           - form: "pesado"
             f: "m.sg"
@@ -1752,8 +1833,9 @@ units:
           does; **trabajador** is *hard-working*. **Agrandado** is *full of himself*, **egoísta**
           *selfish* — and *egoísta* is the same for him and for her, like *inteligente*."
       - title: "Plural"
-        body: "Describe a group with **son** and an **-s**: **son re trabajadores**, **son medio
-          distraídos**. A mixed group takes the *-os* form."
+        body: "Describe a group with **son** and a plural ending (**-s**, or **-es** after a consonant):
+          **son re trabajadores**, **son medio distraídos**. A mixed group takes the masculine
+          form."
     words:
       - lemma: "generoso"
         pos: "adj"
@@ -1823,7 +1905,7 @@ units:
             f: "m.pl"
       - lemma: "agrandado"
         pos: "adj"
-        en: "full of himself, cocky"
+        en: "arrogant"
         register: "informal"
         forms:
           - form: "agrandado"
@@ -1852,8 +1934,8 @@ units:
     tips:
       - title: "Cebar"
         body: "One person **ceba** — pours the water from the **termo** — and passes the mate around the
-          **ronda**. You drink it all, through the **bombilla**, and hand it back to the one who
-          ceba."
+          **ronda**. You drink it all, through the **bombilla**, and hand it back to the
+          **cebador**, the person who pours."
       - title: "Gracias"
         body: "Saying **gracias** when you hand the mate back means *I'm done*. Say it on the first one and
           that's your last."
@@ -1870,18 +1952,21 @@ units:
           - form: "cebás"
             en: "you pour (the mate)"
             f: "2sg.pres.ind.vos"
+        note: "One person (the cebador) refills and hands the mate to each person in turn; you give it back
+          to them."
       - lemma: "ronda"
         pos: "noun"
         en: "round, circle"
       - lemma: "yerba"
         pos: "noun"
-        en: "mate leaves"
+        en: "yerba mate (the dried leaves)"
       - lemma: "termo"
         pos: "noun"
         en: "thermos"
       - lemma: "bombilla"
         pos: "noun"
         en: "metal straw (for mate)"
+        note: "Not a light bulb (that's 'lamparita'). It has a filter at the bottom; don't stir with it."
   - ordinal: 27
     slug: "te-convido-un-mate"
     title: "Make mate the right way"
@@ -1894,10 +1979,10 @@ units:
       en: "Can I offer you a mate with some biscuits?"
     tips:
       - title: "Calentá el agua, no la hiervas"
-        body: "The rules of the one who ceba: **calentá el agua** in the pava — *heat the water* — but **no
-          la hiervas**: water that **hierve** burns the yerba. **Yo cebo**, you drink. When there's
-          no taste left, **el mate está lavado** — *washed out* — and it's time to change the
-          yerba."
+        body: "The rules for the person who pours: **calentá el agua** in the pava — *heat the water* — but
+          **no la hiervas**: water that **hierve** burns the yerba. **Yo cebo**, you drink. When
+          there's no taste left, **el mate está lavado** — *washed out* — and it's time to change
+          the yerba."
       - title: "¿Te convido?"
         body: "**Convidar** is *to offer, to share what's yours*: **¿te convido un mate?**, **convidame
           uno**. Afternoon **merienda** means mate with **bizcochitos**, or **tortas fritas** when
@@ -1920,6 +2005,7 @@ units:
           - form: "calentá"
             en: "heat (it)"
             f: "2sg.imp.vos"
+        note: "Careful: 'calentarse' can mean to get angry or to get turned on."
       - lemma: "hervir"
         pos: "verb"
         en: "to boil"
@@ -1938,6 +2024,7 @@ units:
         forms:
           - form: "lavado"
             f: "m.sg"
+        note: "Mate is 'lavado' when the yerba has lost its flavor after many refills; time to change it."
       - lemma: "convidar"
         pos: "verb"
         en: "to offer, to share"
@@ -1964,17 +2051,20 @@ units:
         en: "mate tea (from a tea bag)"
       - lemma: "bizcochito"
         pos: "noun"
-        en: "small savory biscuit"
+        en: "small savory cracker"
         forms:
           - form: "bizcochitos"
             en: "small savory crackers"
             f: "m.pl"
+        note: "Usually 'bizcochitos de grasa': small flaky savory crackers eaten with mate."
       - lemma: "torta frita"
         pos: "phrase"
         en: "fried dough cake"
         forms:
           - form: "tortas fritas"
             f: "f.pl"
+        note: "Classic with mate, especially on rainy days."
       - lemma: "pava"
         pos: "noun"
         en: "kettle"
+        note: "The kettle for mate; water is heated until just before boiling, not boiled."

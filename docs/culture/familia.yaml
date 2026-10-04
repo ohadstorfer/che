@@ -1,0 +1,180 @@
+section:
+  slug: "familia"
+  title: "Family and friends"
+  emoji: "👨‍👩‍👧"
+  summary: "Sunday lunch, nicknames, love and parties until sunrise"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "domingo-en-familia"
+    title: "Sunday is for family"
+    summary: "A lunch that ends at night, and a tupper to take home"
+    pages:
+      - type: card
+        text: "Sunday lunch belongs to the family. Everyone goes to the parents' or grandparents' house, for pasta or an asado. It starts around two and ends when it's dark."
+      - type: card
+        text: "Families are close. Cousins, **primos**, grow up almost like brothers and sisters. And kids call their parents' best friends **tío** and **tía**: uncle and aunt."
+      - type: choice
+        prompt: "At what age do many Argentines leave their parents' home?"
+        options:
+          - "At 18, when they finish school"
+          - "Around 21 or 22"
+          - "In their late twenties, or later"
+        correct: 2
+        explain: "Rent is expensive, and most people study at a university in their own city while living at home. Nobody thinks it's strange."
+      - type: card
+        text: "Grandparents are **abuelo** and **abuela**, or just **abu**. In Italian families, **nono** and **nona**. In Jewish families, **zeide** and **bobe**."
+      - type: card
+        text: "You don't leave with empty hands. Mom or grandma fills a **tupper**, a plastic box, with what's left of lunch. The rule: the tupper comes back."
+      - type: choice
+        prompt: "After a lunch like that, what do many families do for dinner on Sunday night?"
+        options:
+          - "Order pizza or empanadas"
+          - "Cook a second big meal"
+          - "Go out to a parrilla"
+        correct: 0
+        explain: "Nobody wants to cook again. Sunday night is the big night for pizza and empanadas delivered to your door."
+      - type: card
+        chip: "Pro tip"
+        text: "Invited to a family lunch? Bring dessert or a bottle of wine, kiss everyone hello, grandma too, and say yes when they offer you more food."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "apodos"
+    title: "Nobody uses your real name"
+    summary: "Pancho, el Colo, la Negra and the waiter who calls you boss"
+    pages:
+      - type: card
+        text: "A nickname is an **apodo**, and almost everyone has one. Some come with the name: Francisco is **Pancho**, José is **Pepe**, Ignacio is **Nacho**, Dolores is **Lola**."
+      - type: card
+        text: "Other names are just cut short: **Fede**, **Mati**, **Sofi**, **Cami**, **Juli**, **Nico**, **Santi**. If your name is long, people will cut it in half."
+      - type: choice
+        prompt: "A friend says: “This is **el Colo**.” What does el Colo look like?"
+        options:
+          - "He's very tall"
+          - "He has red hair"
+          - "He has no hair"
+        correct: 1
+        explain: "From **colorado**, red. Looks become names: **Flaco** (thin), **Gordo** (fat), **Negra** (dark hair or skin), **Rulo** (curly). Between friends it's love. As a foreigner, don't copy it."
+      - type: card
+        text: "Friends get new names from one funny moment. Fall asleep at one party, and you can be **el Dormido**, the sleeping one, for the next twenty years."
+      - type: choice
+        prompt: "A waiter you've never seen calls you **jefe**, boss. Why?"
+        options:
+          - "He thinks you're the one who pays"
+          - "He's making fun of you"
+          - "It's a friendly way to talk to a stranger"
+        correct: 2
+        explain: "Men call strangers **jefe**, **maestro** or **campeón**: boss, master, champion. It's warm, not serious. And a nice person is a **genio** or a **genia**."
+      - type: card
+        text: "Someone with the same name as you is your **tocayo** or **tocaya**. Two Martíns meet, and one says **“¡Tocayo!”** It's a small instant friendship."
+      - type: card
+        chip: "Did you know?"
+        text: "Family nicknames last for life. A man of seventy can still be **el Nene**, the kid, and many people don't know their neighbor Cacho's real name."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "los-amigos"
+    title: "Friends are family"
+    summary: "The same group for thirty years, and how friends look after each other"
+    pages:
+      - type: card
+        text: "Friends are a second family. Many people keep the same group from school for life: **los chicos del colegio**, still together at forty, fifty and sixty."
+      - type: choice
+        prompt: "Many groups of friends have one fixed plan every week. What is it usually?"
+        options:
+          - "A film at the cinema"
+          - "A dinner or a football game, always on the same day"
+          - "A walk in the park on Sunday morning"
+        correct: 1
+        explain: "**El asado de los jueves**, the Thursday asado. Or **fútbol 5**, with five players per team, on Tuesdays, then pizza. The day is fixed and nobody books anything else."
+      - type: card
+        text: "The verb is **juntarse**: to get together. **“¿Nos juntamos?”** needs no plan and no reason. And **“Caete a casa”** means: come over, any time."
+      - type: card
+        text: "Friends say **te quiero**, I love you, to each other. Men too, with a long hug. Nobody finds it strange."
+      - type: choice
+        prompt: "You lost your job and you feel terrible. What does a real friend say?"
+        options:
+          - "“Te banco”"
+          - "“Te aviso”"
+          - "“Te debo una”"
+        correct: 0
+        explain: "**Bancar** a friend is to be with them when things go wrong. **“Te banco”**: I'm with you, whatever happens. It's the best thing a friend can say."
+      - type: card
+        text: "When a friend moves abroad, there is a **despedida**: a goodbye party, usually an asado, with speeches and tears. Some people get three or four of them."
+      - type: card
+        chip: "Pro tip"
+        text: "To make friends, say yes to the first invitation, even if it starts at eleven at night. The second one comes much faster."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "amor"
+    title: "Love and dating"
+    summary: "The steps of a couple, the message with no answer and the big Sunday test"
+    pages:
+      - type: card
+        text: "The steps: first you're **saliendo**, going out. Then you're **de novios**, an official couple. Then you **convivís**, you live together. Many couples never marry at all."
+      - type: card
+        text: "Before all that there is the **casi algo**, the “almost something”: you see each other, you write every day, and nobody says what it is."
+      - type: choice
+        prompt: "A friend is angry: **“¡Me clavó el visto!”** What did the other person do?"
+        options:
+          - "Arrived an hour late to the date"
+          - "Read the message and didn't answer"
+          - "Told everyone about them"
+        correct: 1
+        explain: "**El visto** is the mark that shows a message was seen. **Clavar el visto** is to see it and say nothing. Friends will study it with you for hours."
+      - type: card
+        text: "The real test is the family. When your partner invites you to Sunday lunch with parents, grandparents and cousins, it's serious. Everyone will ask you questions."
+      - type: card
+        text: "**Novio** and **novia** have no age limit: a woman of sixty can introduce her **novio**. And couples kiss in the street, the park and the bus. Nobody looks."
+      - type: choice
+        prompt: "In 2010 Argentina became the first country in Latin America to do something. What?"
+        options:
+          - "Allow marriage between two men or two women"
+          - "Make divorce legal"
+          - "Give fathers a month off for a new baby"
+        correct: 0
+        explain: "The law is called **matrimonio igualitario**, equal marriage. It was a fast change: divorce had only been legal since 1987."
+      - type: card
+        text: "Young couples celebrate every month together, not only every year: **“Cumplimos seis meses.”** We've been together six months."
+      - type: card
+        chip: "Pro tip"
+        text: "**“¿Estás saliendo con alguien?”** Are you seeing someone? It's a normal question from a new friend, an aunt or the person cutting your hair."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "casamientos-y-quince"
+    title: "Weddings and fifteenth birthdays"
+    summary: "The two biggest parties in a family, and what to give"
+    pages:
+      - type: card
+        text: "A wedding is a **casamiento**. Only the one at the public office counts by law: **el civil**. Outside, friends throw rice. The big party often comes days later."
+      - type: choice
+        prompt: "The wedding party starts at nine at night. When does it end?"
+        options:
+          - "Around midnight"
+          - "Around two in the morning"
+          - "Around five or six in the morning"
+        correct: 2
+        explain: "A party that ends at two is a bad party. Grandparents stay until four. The last thing served is breakfast: coffee and medialunas."
+      - type: card
+        text: "Dinner comes in parts, and between them everyone gets up to dance. Each block of dancing is a **tanda**. So you eat, dance, eat, dance."
+      - type: card
+        text: "Late at night comes the **carnaval carioca**. Staff hand out funny hats, masks, whistles and foam, called **cotillón**, and the music gets fast and loud."
+      - type: card
+        text: "Then the **mesa dulce** opens: a long table full of cakes and sweets, after midnight, for people who thought they could not eat more."
+      - type: choice
+        prompt: "A girl's 15th birthday is the **fiesta de quince**, as big as a wedding. Who dances the first waltz with her?"
+        options:
+          - "Her father"
+          - "Her best friend"
+          - "Her boyfriend"
+        correct: 0
+        explain: "Then the grandfathers, uncles and friends take turns. Today many girls ask for a trip with friends instead of the party."
+      - type: card
+        chip: "Pro tip"
+        text: "What to give at a wedding? Money is normal. Many invitations come with the couple's bank details, and nobody thinks that's rude."
+    vocabulary: []

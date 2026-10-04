@@ -42,7 +42,7 @@ units:
     words:
       - lemma: "contar"
         pos: "verb"
-        en: "to tell"
+        en: "to tell; to count"
         forms:
           - form: "conté"
             en: "I told (a story)"
@@ -79,19 +79,22 @@ units:
         en: "finally, at last"
       - lemma: "en serio"
         pos: "phrase"
-        en: "seriously, no kidding"
+        en: "seriously, really"
       - lemma: "enseguida"
         pos: "adv"
         en: "straight away, in a minute"
       - lemma: "historia"
         pos: "noun"
-        en: "story"
+        en: "story; history"
       - lemma: "un montón"
         pos: "phrase"
-        en: "a lot, a ton"
+        en: "a lot"
       - lemma: "uy"
         pos: "interj"
         en: "oh no, whoa"
+      - lemma: "no te puedo creer"
+        pos: "phrase"
+        en: "I can't believe it"
   - ordinal: 2
     slug: "contame"
     title: "Tell the whole story"
@@ -106,9 +109,10 @@ units:
     tips:
       - title: "How a porteño tells it"
         body: "**Contame** opens it; **de repente** is the twist, **por suerte** the relief, **al final**
-          the end. **Igual** — *anyway* — goes almost anywhere, and **o sea** is *I mean*."
+          the end. **Igual** is *anyway*, *still*: *estoy cansada, pero igual voy*. **O sea** is *I
+          mean* or *so*. **¿Qué contás?** is just a greeting: *what's new?*"
       - title: "¡Qué garrón!"
-        body: "When the story ends badly, the answer is **¡Qué garrón!** — *what a drag!* Informal, and
+        body: "When the story ends badly, the answer is **¡Qué garrón!** — *how annoying!* Informal, and
           everywhere."
     words:
       - lemma: "contar"
@@ -132,13 +136,13 @@ units:
         en: "luckily"
       - lemma: "igual"
         pos: "adv"
-        en: "anyway"
+        en: "anyway; the same"
       - lemma: "o sea"
         pos: "phrase"
         en: "I mean"
       - lemma: "garrón"
         pos: "noun"
-        en: "drag, bummer"
+        en: "annoying situation, bad luck"
         register: "informal"
       - lemma: "además"
         pos: "adv"
@@ -280,11 +284,13 @@ units:
       - title: "Quería, podía"
         body: "Wanting and being able are states, so back then they take the imperfect: **De chico quería
           ser maestro** — *as a kid I wanted to be a teacher*; **no podía salir solo** — *I wasn't
-          allowed out on my own*. **En esa época** — *back then* — sets the whole scene."
+          allowed out on my own*. **En esa época** — *back then* — sets the whole scene. At a
+          counter, **quería un cortado** is just a polite *I'd like a cortado*. With a person,
+          **querer a** is *to love*: *quería mucho a mi maestra*."
       - title: "La primaria"
-        body: "School here is **la primaria** (six to twelve) and then **la secundaria**. In a state school
-          everyone wears a white **guardapolvo** over their clothes, and the best part of the day is
-          the **recreo**. In primaria the teacher is **la maestra** or **el maestro**; from
+        body: "School here is **la primaria** (six to twelve) and then **la secundaria**. In a state primary
+          school everyone wears a white **guardapolvo** over their clothes, and the best part of the
+          day is the **recreo**. In primaria the teacher is **la maestra** or **el maestro**; from
           secundaria on it is **el profesor**, **la profe**. Each year of primaria is a **grado**:
           *primer grado*."
     words:
@@ -298,7 +304,7 @@ units:
         pos: "verb"
         forms:
           - form: "tenían"
-            en: "they had"
+            en: "they had, you guys had"
             f: "3pl.impf.ind"
           - form: "teníamos"
             en: "we had"
@@ -344,7 +350,7 @@ units:
         en: "high school"
       - lemma: "maestro"
         pos: "noun"
-        en: "schoolteacher"
+        en: "teacher, schoolteacher"
         forms:
           - form: "maestro"
             f: "m.sg"
@@ -356,9 +362,10 @@ units:
       - lemma: "guardapolvo"
         pos: "noun"
         en: "school smock"
+        note: "The white smock kids wear over their clothes in Argentine public schools."
       - lemma: "época"
         pos: "noun"
-        en: "era, period"
+        en: "time, era"
   - ordinal: 5
     slug: "siempre-jugabamos"
     title: "Say what you used to do"
@@ -403,6 +410,8 @@ units:
           - form: "tomaba"
             en: "drank, used to drink"
             f: "sg.impf.ind"
+            note: "tomar also means 'to take' (a bus, a train, a pill). Never use coger for 'take': it
+              is vulgar here."
           - form: "tomábamos"
             en: "we drank, we used to drink"
             f: "1pl.impf.ind"
@@ -443,9 +452,10 @@ units:
       en: "As a kid I loved riding my bike."
     tips:
       - title: "Me gustaba, me encantaba"
-        body: "*Gustar* and *encantar* go back like any -ar verb: **me gustaba**, **me encantaba** — *I
-          liked*, *I loved*. Several things take an **-n**: **me gustaban los dibujitos**. *Ellos*
-          too: **los pibes jugaban a la pelota en la vereda**."
+        body: "In the past, *gustar* and *encantar* work like any -ar verb: **me gustaba**, **me encantaba**
+          — *I liked*, *I loved*. Several things take an **-n**: **me gustaban los dibujitos**. The
+          same **-n** makes the *they* form of any verb: **los pibes jugaban a la pelota en la
+          vereda**."
       - title: "Ver keeps its e"
         body: "Only three verbs break the pattern: *ser* (**era**), *ir* (**iba**) and *ver*, which keeps
           its *e*: **veía**, **veías**. Set **antes** against **ahora** and the imperfect does the
@@ -482,7 +492,7 @@ units:
             en: "to ride, to go around"
             f: "inf"
           - form: "andaba"
-            en: "rode, used to ride, went around"
+            en: "was working (it); was (lately); rode, used to ride"
             f: "sg.impf.ind"
       - lemma: "bici"
         pos: "noun"
@@ -532,6 +542,7 @@ units:
       - lemma: "hamaca"
         pos: "noun"
         en: "swing"
+        note: "In Argentina a hamaca is a swing; a hammock is a hamaca paraguaya."
   - ordinal: 7
     slug: "estaba-lloviendo"
     title: "Set the scene of a story"
@@ -549,8 +560,9 @@ units:
         body: "The imperfect paints the scene, the preterite is what happens in it: **Estaba en el subte
           cuando me llamó Sofi** — *I was on the subway when Sofi called me*."
       - title: "Había, hacía"
-        body: "**Había** is *there was, there were*; **hacía calor** is *it was hot*. **Mientras** — *while*
-          — joins two things going on at once."
+        body: "**Había** is *there was, there were*; **hacía calor** is *it was hot*. **Estaba lloviendo** —
+          *it was raining* — puts you in the middle of it; **llovía** says the same, and can also
+          mean *it used to rain*. **Mientras** — *while* — joins two things going on at once."
     words:
       - lemma: "estar"
         pos: "verb"
@@ -574,7 +586,7 @@ units:
         pos: "verb"
         forms:
           - form: "hacía"
-            en: "it was (weather)"
+            en: "I used to do/make, he/she used to do/make; it was (weather)"
             f: "3sg.impf.ind"
       - lemma: "llover"
         pos: "verb"
@@ -588,6 +600,14 @@ units:
       - lemma: "mientras"
         pos: "conj"
         en: "while"
+      - lemma: "vacío"
+        pos: "adj"
+        en: "empty"
+        forms:
+          - form: "vacío"
+            f: "m.sg"
+          - form: "vacía"
+            f: "f.sg"
   - ordinal: 8
     slug: "sono-el-timbre"
     title: "Tell what interrupted you"
@@ -659,6 +679,9 @@ units:
           - form: "caminaba"
             en: "was walking, used to walk"
             f: "sg.impf.ind"
+          - form: "caminando"
+            en: "walking"
+            f: "ger"
       - lemma: "cocinar"
         pos: "verb"
         forms:
@@ -713,9 +736,10 @@ units:
       - "llegué"
       - "vino/venir"
       - "dijo"
+      - "íbamos"
   - ordinal: 10
     slug: "el-partido"
-    title: "Talk about football"
+    title: "Talk about soccer"
     summary: "¿Viste el partido?"
     grammar:
       - "deportes"
@@ -726,11 +750,12 @@ units:
       en: "We won two–one, what a game!"
     tips:
       - title: "Ganamos, perdimos"
-        body: "After a match it's **ganamos**, **perdimos** or **empatamos** — *we* won, even if you were on
-          the sofa. The first football question you will get in Argentina: **¿De qué equipo sos?** —
-          **Soy de Boca.** **Soy de River.** Which one, the course leaves to you."
+        body: "After a game it's **ganamos**, **perdimos** or **empatamos** — *we* won, even if you were on
+          the sofa. Fans always talk as part of the team: *Anoche ganamos tres a uno.*"
       - title: "El hincha"
-        body: "A fan is a **hincha**, and a **gol** is shouted, not said."
+        body: "A fan is **un hincha** or **una hincha**: the word is the same for a man or a woman. Say who
+          you support with **ser hincha de**: *Mi papá es re hincha de la selección* — my dad is a
+          huge fan of the national team."
       - title: "Dos a uno"
         body: "Scores are said with **a**: **ganamos dos a uno**, *empatamos cero a cero*. To score is
           **hacer un gol**: *Juan hizo dos goles*. And the pitch — and the whole stadium — is **la
@@ -750,10 +775,10 @@ units:
             f: "3sg.pret.ind"
       - lemma: "empatar"
         pos: "verb"
-        en: "to draw, to tie"
+        en: "to tie"
         forms:
           - form: "empatamos"
-            en: "we drew"
+            en: "we tied"
             f: "1pl.pret.ind"
       - lemma: "gol"
         pos: "noun"
@@ -804,14 +829,14 @@ units:
       en: "We won the final on penalties!"
     tips:
       - title: "Ellos ganaron"
-        body: "The other team is *they*: **ganaron**, **perdieron**, **empataron**. Yours is always *we*,
-          from the bar or the sofa: **¡salimos campeones!**"
+        body: "The other team is *they*: **ganaron**, **perdieron**, **empataron**. Yours is usually *we*,
+          from the bar or the sofa: **¡salimos campeones!** About your own team you can say either:
+          **ganamos** (we, the fans) or **ganaron** (they, the players)."
       - title: "Penales"
-        body: "A **final** that ends level goes to **penales**: the **arquero atajó** one, somebody
-          **metió** the last, and the whole city is out in the street in the **camiseta**. A great
-          goal is a **golazo**. Before the penales comes the **alargue** — *extra time*. What you
-          shout: **¡Vamos, Argentina!** and **¡Aguante!** with your team: *¡Aguante Boca!* And a
-          referee who gets everything wrong **no pega una**."
+        body: "A **final** that ends in a tie goes to the **alargue** — *extra time* — and then to
+          **penales**: the **arquero atajó** one and somebody **metió** the last. **Salir campeón**
+          is *to win the title*. **¡Aguante!** shows love for your team, win or lose: *¡Aguante
+          Argentina!*"
     words:
       - lemma: "ganar"
         pos: "verb"
@@ -829,7 +854,7 @@ units:
         pos: "verb"
         forms:
           - form: "empataron"
-            en: "they drew"
+            en: "they tied"
             f: "3pl.pret.ind"
       - lemma: "jugar"
         pos: "verb"
@@ -839,8 +864,8 @@ units:
             f: "3pl.pres.ind.irregular"
       - lemma: "final"
         pos: "noun"
-        en: "title match, last game of a cup"
-        note: "la final — the final of a tournament"
+        en: "final (of a tournament)"
+        note: "La final = the final match; el final = the end (of a movie, a story)."
       - lemma: "penal"
         pos: "noun"
         en: "penalty (kick)"
@@ -859,6 +884,7 @@ units:
       - lemma: "camiseta"
         pos: "noun"
         en: "(team) shirt, jersey"
+        note: "A team jersey or an undershirt; a regular T-shirt is a 'remera'."
       - lemma: "campeón"
         pos: "noun"
         en: "champion"
@@ -882,9 +908,10 @@ units:
           - form: "atajó"
             en: "saved (he/she saved)"
             f: "3sg.pret.ind"
+            note: "atajar also means to play as goalkeeper: ¿Quién ataja? = Who is in goal?"
       - lemma: "golazo"
         pos: "noun"
-        en: "great goal, screamer"
+        en: "great goal, amazing goal"
         register: "informal"
       - lemma: "aguante"
         pos: "interj"
@@ -910,15 +937,14 @@ units:
       en: "Which team do you root for?"
     tips:
       - title: "¿De qué cuadro sos?"
-        body: "The first question in a new friendship. A team is a **cuadro**, and you don't choose it, you
-          inherit it: **soy del mismo cuadro que mi viejo**. The answer is **soy de** or **soy
-          hincha de**: *Soy de Racing.* *Soy hincha de River.* **Hinchar por** is for one game or
-          the national team: **¿por quién hinchás?** — *Hincho por Argentina.*"
+        body: "The first question in a new friendship. A team is a **cuadro**, and you inherit it: *Soy de
+          Independiente, el cuadro de mi abuelo.* Answer with **soy de** or **soy hincha de**.
+          **Hinchar por** is for one game or the national team: *Hincho por la selección.*"
       - title: "El superclásico"
-        body: "The two biggest teams, **Boca** and **River**, playing each other is **el superclásico**; any
-          derby is a **clásico** — *Racing* against *Independiente*, for one. Boca fans are called
-          *bosteros* and River fans *gallinas*: insults they now wear with pride. The fans stand on
-          the **tribuna**. Which side you're on, the course leaves to you."
+        body: "**Boca** against **River** is **el superclásico**; any other big rivalry game is a
+          **clásico**. Boca fans are called *bosteros* and River fans *gallinas*: they say it about
+          themselves with pride, but from you it can be an insult. Which side you're on, the course
+          leaves to you."
       - title: "Hinchamos por el mismo"
         body: "**Hinchar por** runs in the family: **en casa hinchamos todos por el mismo cuadro**; **de
           chico hinchaba por otro, pero mi viejo no me dejó**. A fan **de toda la vida** never
@@ -937,19 +963,22 @@ units:
       - lemma: "cuadro"
         pos: "noun"
         en: "team (soccer)"
+        note: "Usually means 'painting, picture'; in soccer talk it means a team."
       - lemma: "hinchar"
         pos: "verb"
-        en: "to root for (a team)"
+        en: "to support (a team)"
         forms:
           - form: "hincho"
-            en: "I root for"
+            en: "I support"
             f: "1sg.pres.ind"
           - form: "hinchás"
-            en: "you root for"
+            en: "you support"
             f: "2sg.pres.ind.vos"
+        note: "Also means 'to annoy' in casual talk: '¡No hinches!' = stop bugging me."
       - lemma: "superclásico"
         pos: "noun"
-        en: "the big derby (the two biggest teams)"
+        en: "Boca vs. River game"
+        note: "Boca Juniors vs. River Plate, the biggest rivalry in Argentine soccer."
       - lemma: "clásico"
         pos: "noun"
         en: "derby, rivalry game"
@@ -978,13 +1007,14 @@ units:
         en: "club"
       - lemma: "estadio"
         pos: "noun"
-        en: "stadium building, ground"
+        en: "stadium"
+        note: "In everyday talk Argentines usually say 'la cancha'."
       - lemma: "hinchada"
         pos: "noun"
         en: "the fans, the supporters"
       - lemma: "cantito"
         pos: "noun"
-        en: "terrace chant"
+        en: "fan chant (at a game)"
         forms:
           - form: "cantito"
             f: "sg"
@@ -1015,6 +1045,7 @@ units:
         forms:
           - form: "popular"
             f: "f.sg"
+            en: "standing section"
   - ordinal: 13
     slug: "en-el-restaurante"
     title: "Eat out"
@@ -1033,7 +1064,8 @@ units:
           get in: **Una mesa para dos, por favor.** And water is **con gas** or **sin gas**: *Para
           tomar, un agua sin gas.*"
       - title: "Propina"
-        body: "The tip is **la propina**, usually ten per cent and in cash. **¿Compartimos?** — *shall we
+        body: "The tip is **la propina**, usually 10 percent and in cash. The bill may also have a small
+          charge per person, the *cubierto*: it is not the tip. **¿Compartimos?** — *shall we
           share?* — is how two people order one enormous *bife*."
     words:
       - lemma: "pedir"
@@ -1060,9 +1092,11 @@ units:
       - lemma: "propina"
         pos: "noun"
         en: "tip"
+        note: "In restaurants people usually leave about 10%, often in cash."
       - lemma: "bife"
         pos: "noun"
         en: "steak"
+        note: "Bife de chorizo is a sirloin steak, not sausage."
       - lemma: "papas fritas"
         pos: "phrase"
         en: "fries, chips"
@@ -1088,6 +1122,9 @@ units:
           - form: "recomendás"
             f: "2sg.pres.ind.vos"
             bound: true
+      - lemma: "vino tinto"
+        pos: "phrase"
+        en: "red wine"
   - ordinal: 14
     slug: "una-grande-de-muzza"
     title: "Order at the pizzería"
@@ -1123,11 +1160,7 @@ units:
             f: "3sg.pres.ind.irregular"
       - lemma: "reservar"
         pos: "verb"
-        en: "to book"
         forms:
-          - form: "reservé"
-            en: "I booked"
-            f: "1sg.pret.ind"
           - form: "reservar"
             f: "inf"
       - lemma: "pizzería"
@@ -1152,6 +1185,7 @@ units:
       - lemma: "provoleta"
         pos: "noun"
         en: "grilled provolone"
+        note: "Grilled provolone with oregano, a classic starter at an asado or parrilla."
       - lemma: "choripán"
         pos: "noun"
         en: "chorizo sandwich"
@@ -1176,7 +1210,8 @@ units:
         en: "spicy"
       - lemma: "para llevar"
         pos: "phrase"
-        en: "to take away"
+        en: "to go"
+        note: "Food you take with you: una pizza para llevar."
       - lemma: "delivery"
         pos: "noun"
         en: "home delivery"
@@ -1193,10 +1228,11 @@ units:
     tips:
       - title: "El asado"
         body: "An asado comes in order: first **chorizo** and **morcilla**, the **achuras**, then the cuts —
-          **vacío**, bife. A **choripán** is a chorizo in bread, the food of every stadium."
+          **vacío**, tira de asado. A **choripán** is a chorizo in bread, the food of every
+          stadium."
       - title: "¿Cómo la querés?"
-        body: "Meat comes **jugosa** — *pink, juicy* — **a punto** — *medium* — or well done. The
-          **parrilla** is both the grill and the restaurant."
+        body: "Meat comes **jugosa** — *rare* — **a punto** — *medium* — or well done. The **parrilla** is
+          both the grill and the restaurant."
     words:
       - lemma: "parrilla"
         pos: "noun"
@@ -1209,10 +1245,11 @@ units:
         en: "flank steak"
       - lemma: "achuras"
         pos: "noun"
-        en: "offal"
+        en: "offal, grilled organ meat"
         forms:
           - form: "achuras"
             f: "f.pl"
+        note: "At an asado: chinchulines, mollejas, riñones, often eaten first."
       - lemma: "jugoso"
         pos: "adj"
         en: "juicy, rare"
@@ -1221,6 +1258,8 @@ units:
             f: "m.sg"
           - form: "jugosa"
             f: "f.sg"
+        note: "Steak order: vuelta y vuelta (very rare), jugoso (rare), a punto (medium), cocido (well
+          done)."
       - lemma: "a punto"
         pos: "phrase"
         en: "medium (meat)"
@@ -1237,16 +1276,17 @@ units:
     tips:
       - title: "La parrillada"
         body: "For the table there's the **parrillada** — *a mixed grill* on its own little grill: chorizo,
-          morcilla, **mollejas**, **chinchulines** and a **tira de asado**. On your own: a **bife de
-          chorizo** or an **entraña**. The classic start is a **provoleta para compartir**; the
-          prized cuts are **ojo de bife** and **lomo**, with *papas fritas* or *ensalada* on the
-          side."
+          morcilla, **mollejas** — *sweetbreads: a soft gland, not bread* — **chinchulines** and a
+          **tira de asado**. On your own: a **bife de chorizo** or an **entraña**. The classic start
+          is a **provoleta para compartir**; the prized cuts are **ojo de bife** and **lomo**, with
+          *papas fritas* or *ensalada* on the side."
       - title: "¿Y la salsa?"
-        body: "On the table: **chimichurri** — oil, garlic, parsley, chilli — and **salsa criolla** — onion,
+        body: "On the table: **chimichurri** — oil, garlic, parsley, chili — and **salsa criolla** — onion,
           tomato, pepper. Ketchup is a crime. The meat is cooked **a la leña** at the good places."
       - title: "Bien cocido"
-        body: "Jugosa, a punto, or **bien cocido** — *well done*; **vuelta y vuelta** is barely warm. The
-          bill has a line for the **cubierto** — *the cover charge*: the bread and the cutlery."
+        body: "A bife comes jugoso, a punto, or **bien cocido** — *well done*; **vuelta y vuelta** is seared
+          on each side and almost raw inside. The bill has a line for the **cubierto** — *the cover
+          charge*: the bread and the cutlery."
     words:
       - lemma: "parrillada"
         pos: "noun"
@@ -1268,7 +1308,8 @@ units:
         en: "short ribs, rib strip"
       - lemma: "bife de chorizo"
         pos: "phrase"
-        en: "sirloin steak"
+        en: "strip steak, sirloin steak"
+        note: "A beef cut, not a sausage. The classic Argentine steak."
       - lemma: "entraña"
         pos: "noun"
         en: "skirt steak"
@@ -1290,6 +1331,8 @@ units:
       - lemma: "cubierto"
         pos: "noun"
         en: "cover charge"
+        note: "Per-person restaurant charge for bread and table service. 'Cubiertos' also means knives
+          and forks."
       - lemma: "lomo"
         pos: "noun"
         en: "tenderloin"
@@ -1313,8 +1356,9 @@ units:
         body: "**Tipo** before a time is *around*: **tipo ocho** — *around eight*, which in Buenos Aires
           means eight-fifteen at the earliest. **En punto** is *on the dot*, and rarer."
       - title: "Avisame"
-        body: "**Avisame cuando llegás** — *let me know when you get there*. **Te aviso** — *I'll let you
-          know*."
+        body: "**Avisame** — *let me know*: **dale, avisame mañana**. **Te aviso** — *I'll let you know*. To
+          meet up: **¿nos encontramos en la esquina?** — *should we meet on the corner?* — and **te
+          espero** — *I'll wait for you*."
       - title: "¿Cómo quedamos?"
         body: "A plan is closed with **¿Cómo quedamos?** — *so what's the plan?* The answer fixes the time
           and the place: **Quedamos tipo ocho en la esquina.** Or ask straight: *¿A qué hora nos
@@ -1334,7 +1378,7 @@ units:
         pos: "verb"
         forms:
           - form: "espero"
-            en: "I wait"
+            en: "I wait, I hope"
             f: "1sg.pres.ind"
           - form: "esperás"
             en: "you wait"
@@ -1343,6 +1387,7 @@ units:
         pos: "adv"
         en: "around, about"
         register: "informal"
+        note: "Casual: 'tipo seis' = around six. Also used as a filler, like English 'like'."
       - lemma: "puerta"
         pos: "noun"
         forms:
@@ -1437,6 +1482,7 @@ units:
       - lemma: "grupo"
         pos: "noun"
         en: "group, group chat"
+        note: "Often means the WhatsApp group. Slang: 'es (todo) grupo' = it's a lie."
       - lemma: "salida"
         pos: "noun"
         en: "exit, way out"
@@ -1495,15 +1541,18 @@ units:
       - lemma: "ñoquis"
         pos: "noun"
         en: "gnocchi"
+        note: "On the 29th of each month Argentines eat ñoquis with money under the plate for luck."
       - lemma: "pan dulce"
         pos: "phrase"
-        en: "panettone"
+        en: "Christmas fruit bread, panettone"
+        note: "Sweet bread with dried fruit eaten at Christmas and New Year's in Argentina."
       - lemma: "salud"
         pos: "interj"
-        en: "cheers"
+        en: "health; cheers; bless you"
       - lemma: "sidra"
         pos: "noun"
         en: "cider"
+        note: "Cheap sparkling cider is the classic drink for the Christmas and New Year's toast."
       - lemma: "brindis"
         pos: "noun"
         en: "toast (raising a glass)"
@@ -1535,8 +1584,8 @@ units:
           until the *mate* came out."
       - title: "What the family always did"
         body: "Traditions told from back then are imperfect: **nos juntábamos**, **festejábamos**,
-          **armábamos el arbolito** on the 8th of December. **Tenemos la costumbre de…** — *we have
-          the custom of…* — brings them into the present."
+          **armábamos el arbolito** on the 8th of December. **Es costumbre…** — *it's the custom
+          to…* — brings them into the present: *Es costumbre juntarnos en Navidad.*"
     words:
       - lemma: "juntarse"
         pos: "verb"
@@ -1583,12 +1632,13 @@ units:
       - lemma: "arbolito"
         pos: "noun"
         en: "Christmas tree"
+        note: "Literally 'little tree'. Slang: street money changers who buy and sell dollars."
       - lemma: "Reyes"
         pos: "propn"
         en: "Three Kings' Day"
   - ordinal: 21
     slug: "practica-la-sobremesa"
-    title: "Practice: late, out and at home"
+    title: "Practice: eating out, running late, family habits"
     summary: "Llegué tarde y ya pidieron"
     grammar:
       - "repaso.pedir"
@@ -1601,8 +1651,7 @@ units:
     tips:
       - title: "Pedimos, pidieron"
         body: "**Pedimos** keeps the *e*; **pidió** and **pidieron** turn it into *i*. **¿Qué pidieron?** —
-          **Una grande de muzza y dos porciones de provoleta**... and someone always asks **¿es
-          picante?**"
+          **Una grande de muzza y una provoleta para compartir.**"
       - title: "What we always did"
         body: "Habits from back then are imperfect: **los domingos nos juntábamos**, **festejábamos Reyes**.
           One night that went wrong is preterite: **el bondi tardó una hora y no te avisé**."
@@ -1633,8 +1682,8 @@ units:
       en: "I got really nervous in the exam."
     tips:
       - title: "Ponerse: to get (a feeling)"
-        body: "**Me puse nervioso** — *I got nervous*; **se puso contenta** — *she got happy*. The feeling
-          changes, so it's *ponerse*, in the preterite."
+        body: "**Me puse nervioso** — *I got nervous*; **se puso contenta** — *she was happy* (word for
+          word: she got happy). The feeling changes, so it's *ponerse*, in the preterite."
       - title: "Me enojé"
         body: "The feeling verbs keep their pronoun in the past too: **me enojé**, **te asustaste**, **se
           preocupó**."
@@ -1705,7 +1754,7 @@ units:
             bound: true
       - lemma: "preocuparse"
         pos: "verb"
-        en: "to get worried"
+        en: "to worry, to get worried"
         forms:
           - form: "me preocupé"
             en: "I got worried"
@@ -1735,11 +1784,12 @@ units:
             f: "f.sg"
       - lemma: "bronca"
         pos: "noun"
-        en: "anger"
+        en: "anger, annoyance"
         register: "informal"
+        note: "Me da bronca = it makes me mad. Very common everyday word."
       - lemma: "lástima"
         pos: "noun"
-        en: "pity"
+        en: "shame, pity"
       - lemma: "vergüenza"
         pos: "noun"
         en: "embarrassment, shame"
@@ -1757,9 +1807,10 @@ units:
     tips:
       - title: "Me olvidé de…"
         body: "**Me olvidé de su cumple** — *I forgot his birthday*. Like *me enojé* it keeps its pronoun,
-          and takes **de** before what you forgot. Same shape: **me aburrí**, **me calmé**, **me
-          enamoré** — of Buenos Aires, of course. For the others: **¿te olvidaste las llaves?**,
-          **se olvidó de llamar**, **nos olvidamos de reservar**."
+          and takes **de** before what you forgot. Left something behind? No *de*: **me olvidé las
+          llaves en casa**. For the others: **¿te olvidaste las llaves?**, **se olvidó de llamar**,
+          **nos olvidamos de reservar**. Same shape: **me aburrí**, **me calmé**, **me enamoré** —
+          of Buenos Aires, of course."
       - title: "Estaba or me puse?"
         body: "**Estaba nervioso** is how you were; **me puse nervioso** is the moment it hit you. **Me
           sentí re mal** — *I felt awful* — is one moment too. For *us*: **nos pusimos contentos**;
@@ -1878,9 +1929,10 @@ units:
             bound: true
       - lemma: "colorado"
         pos: "adj"
-        en: "red-faced"
+        en: "red (in the face); redhead"
         forms:
           - form: "colorado"
             f: "m.sg"
           - form: "colorada"
             f: "f.sg"
+        note: "'Ponerse colorado' = to blush. In Argentina 'colorado' also means a redhead."

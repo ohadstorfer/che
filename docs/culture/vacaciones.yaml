@@ -1,0 +1,141 @@
+section:
+  slug: "vacaciones"
+  title: "Summer and holidays"
+  emoji: "🏖️"
+  summary: "An empty city, a cold sea, carnival and weekend trips"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "enero"
+    title: "January: everybody out"
+    summary: "The city goes quiet and the road to the sea fills up"
+    pages:
+      - type: card
+        text: "In January, Buenos Aires is half empty. No traffic, free seats on the subte, and paper signs on shop doors: **“Cerrado por vacaciones.”**"
+      - type: choice
+        prompt: "Where did all those porteños go?"
+        options:
+          - "To the mountains in the west"
+          - "To the beaches of the Atlantic"
+          - "To their families in Italy and Spain"
+        correct: 1
+        explain: "They call it **la Costa**: a long line of beach towns about 400 km away, in the province of Buenos Aires. The biggest is **Mar del Plata**."
+      - type: card
+        text: "There's a verb for it: **veranear**, to spend the summer somewhere. Many families go back to the same town, and the same street, for decades."
+      - type: card
+        text: "Holidays are counted in halves of a month. A **quincena** is fifteen days: **“Nos vamos la primera quincena de enero.”**"
+      - type: choice
+        prompt: "What is the sea like on the Costa?"
+        options:
+          - "Warm and flat, like a lake"
+          - "Clear and blue, with white sand"
+          - "Cold, rough and windy"
+        correct: 2
+        explain: "Few people go for the water. They go for the family, the friends, the nights and the same beach as every year."
+      - type: card
+        text: "Each town has its own crowd. **Pinamar** and **Cariló** are expensive. **Villa Gesell** is for the young. **Mar del Plata** is for everyone, and its nickname is **La Feliz**: the happy one."
+      - type: card
+        text: "The day one quincena ends and the next begins is famous for its traffic. The TV news shows the road to the Costa live, hour by hour."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "la-playa"
+    title: "A day at the beach"
+    summary: "The kit, the sellers, the games and the nights"
+    pages:
+      - type: card
+        text: "The beach kit: a **reposera** (a folding chair), a **sombrilla** (a big umbrella), a **heladerita** (a small box that keeps drinks cold), and of course the termo and the mate."
+      - type: card
+        text: "A **balneario** is a beach club. There, families rent a **carpa**, a small cloth tent, for the whole summer. Some have had the same carpa for three generations."
+      - type: choice
+        prompt: "Sellers walk on the sand all day, shouting. What is the classic thing they sell?"
+        options:
+          - "Churros"
+          - "Empanadas"
+          - "Hot coffee"
+        correct: 0
+        explain: "**“¡Churros, hay churros!”** Filled with dulce de leche and eaten with sandy fingers. Also **choclo**, corn, and ice cream."
+      - type: card
+        text: "Beach games: **tejo**, where you throw flat discs as close as you can to a small one, and **paleta**, two wooden bats and a ball."
+      - type: choice
+        prompt: "Suddenly the whole beach starts to clap in rhythm. What is happening?"
+        options:
+          - "The sun is going down"
+          - "A lost child was found"
+          - "The lifeguards are going home"
+        correct: 1
+        explain: "An adult lifts the lost child onto their shoulders and walks. Everyone claps so the parents look, and the clapping follows the child along the beach."
+      - type: card
+        text: "At night nobody stays in. Families walk on the **peatonal**, the street without cars, eat more churros and play old video games, the **fichines**."
+      - type: card
+        text: "In summer, the stars of TV move to Mar del Plata too, and act in a theater there every night. Seeing a show is part of the holiday."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "carnaval"
+    title: "Carnival, three ways"
+    summary: "Feathers by the river, drums in the barrio and the mountains of Jujuy"
+    pages:
+      - type: card
+        text: "**Carnaval** comes in February or March, with two public holidays. Argentina has three very different ones."
+      - type: choice
+        prompt: "Which place has the biggest carnival in the country, with feathers and huge moving stages?"
+        options:
+          - "Buenos Aires"
+          - "Mendoza"
+          - "Gualeguaychú, a small city by a river"
+        correct: 2
+        explain: "In **Gualeguaychú**, in Entre Ríos, groups compete every Saturday of January and February on a long avenue built just for it. It looks like Rio in a small size."
+      - type: card
+        text: "In Buenos Aires, each barrio has a **murga**: neighbors of all ages in shiny suits who dance with high kicks behind big drums."
+      - type: card
+        text: "They perform at a **corso**: a street closed for the night. Children run around with cans of white foam, and nobody goes home clean."
+      - type: card
+        text: "Murga songs make fun of politicians and the news of the year. The last dictatorship took away the carnival holidays. They only came back in 2011."
+      - type: choice
+        prompt: "In the mountain villages of Jujuy, how does carnival begin?"
+        options:
+          - "They ring the church bells all night"
+          - "They dig a small devil out of the ground"
+          - "They throw water from the roofs"
+        correct: 1
+        explain: "The **diablito** was buried at the end of last year's carnival. Out he comes, and for about a week people dance, covered in flour and paper ribbons. Then they bury him again."
+      - type: card
+        chip: "Did you know?"
+        text: "The rest of the year has parties too. Hundreds of towns hold a **Fiesta Nacional** for what they make: the apple, the salami, the wheat, the flower, the trout."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "escapadas"
+    title: "Short trips and winter"
+    summary: "Islands near the city, Brazil in Spanish and a house for the day"
+    pages:
+      - type: card
+        text: "A short trip of two or three days is an **escapada**. A Monday holiday makes a **finde largo**, a long weekend, and the roads fill up."
+      - type: card
+        text: "The closest one is **Tigre**, less than an hour from Buenos Aires: hundreds of green islands and brown rivers. People live there in wooden houses with no streets."
+      - type: choice
+        prompt: "How do the children of those islands get to school?"
+        options:
+          - "By boat"
+          - "By a long bridge"
+          - "They study at home"
+        correct: 0
+        explain: "A school boat stops at each house, like a bus. There is also a shop boat, a doctor boat and a boat that takes the rubbish."
+      - type: card
+        text: "A **quinta** is a house outside the city with a garden and a pool. Groups of friends rent one for a single day: asado, pool, football, home at night."
+      - type: choice
+        prompt: "For warm sea, Argentines drive to Brazil. One Brazilian city gets so many that shops and menus are in Spanish. Which one?"
+        options:
+          - "São Paulo"
+          - "Florianópolis"
+          - "Brasília"
+        correct: 1
+        explain: "People call it **Floripa**. In January, on some of its beaches, you hear more Argentine Spanish than Portuguese."
+      - type: card
+        text: "In July, schools close for two weeks: the **vacaciones de invierno**. Families with money go to the snow. In the city, cinemas and children's theaters are full."
+      - type: card
+        text: "Another classic is **Colonia**, in Uruguay, one hour by boat across the river: old stone streets, a lighthouse, lunch, and back the same night."
+    vocabulary: []

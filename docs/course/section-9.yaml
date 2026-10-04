@@ -104,8 +104,9 @@ units:
       en: "If I were you, I'd talk to your boss."
     tips:
       - title: "Yo en tu lugar"
-        body: "**Yo en tu lugar** — *in your shoes* — is *yo que vos* with a straighter face. The advice
-          after it is still *would*: **yo en tu lugar, hablaría con él**, **yo me quedaría**."
+        body: "**Yo en tu lugar** — *in your place, if I were you* — means the same as *yo que vos*, a
+          little more serious. The advice after it is still *would*: **yo en tu lugar, hablaría con
+          él**, **yo me quedaría**."
       - title: "Asking back"
         body: "Throw it back at your friend with the vos ending, **-ías**: **¿vos qué le dirías?** — *what
           would you tell him?* **Tendrías que** is advice with gloves on: **tendrías que llamarlo**,
@@ -116,7 +117,7 @@ units:
     words:
       - lemma: "en tu lugar"
         pos: "phrase"
-        en: "in your shoes"
+        en: "in your place, if I were you"
       - lemma: "hablar"
         pos: "verb"
         forms:
@@ -172,7 +173,7 @@ units:
         pos: "verb"
         forms:
           - form: "tendrías"
-            en: "you'd have (to), you ought to"
+            en: "you would have; you should (tendrías que)"
             f: "2sg.cond.ind.vos.irregular"
   - ordinal: 3
     slug: "si-tuviera"
@@ -190,9 +191,9 @@ units:
         body: "Something that isn't true now: **si tuviera plata, viajaría** — *if I had money, I'd travel*.
           The *si* half uses a new form, **tuviera**, **fuera**, **pudiera**."
       - title: "Only after si"
-        body: "You meet this form after *si* and after *ojalá* — **ojalá pudiera** — and almost nowhere else
-          at this level. Mind the difference: **ojalá llueva** — *I hope it rains* (it can happen);
-          **ojalá pudiera ir** — *I wish I could go* (it is not real)."
+        body: "You meet the **-ra** form (*tuviera*, *pudiera*) after *si* (if) and after *ojalá* (I wish),
+          and almost nowhere else at this level. Mind the difference: **ojalá llueva** — *I hope it
+          rains* (it can happen); **ojalá pudiera ir** — *I wish I could go* (it is not real)."
     words:
       - lemma: "tener"
         pos: "verb"
@@ -258,7 +259,8 @@ units:
       - title: "We and you"
         body: "Dreaming together: **si tuviéramos plata, iríamos a Bariloche** — the *we* form carries an
           accent, **tuviéramos**. Asking a friend: **si pudieras, ¿dónde vivirías?** — *si pudieras*
-          is the vos form."
+          is the vos form. **Ganar** is *to win* and also *to earn*: *si ganara más* — *if I earned
+          more*."
     words:
       - lemma: "ganar"
         pos: "verb"
@@ -308,6 +310,7 @@ units:
           - form: "daría"
             en: "would give (I/he/she)"
             f: "sg.cond.ind"
+            note: "te daría una mano = I'd give you a hand"
       - lemma: "saber"
         pos: "verb"
         forms:
@@ -345,7 +348,10 @@ units:
     tips:
       - title: "Me gustaría"
         body: "**Me gustaría** — *I'd like* — is *gustar* in the conditional, with the same *me*: **me
-          gustaría ir**, **¿te gustaría venir?**. **Me encantaría** is the enthusiastic yes."
+          gustaría ir**, **¿te gustaría venir?**. **Me encantaría** is the enthusiastic yes. For
+          more than one thing, **-ían**: **nos encantarían unas empanadas**. To order or offer
+          something day to day, porteños say **quería** or **¿querés?**: *¿querés tomar unos
+          mates?*"
       - title: "Not for ordering"
         body: "*Me gustaría* is for wishes and plans. To order or to offer, porteños use **quería** and
           **¿querés?**: **quería dos entradas**, **¿querés unas medialunas?**, **¿querés tomar unos
@@ -390,7 +396,8 @@ units:
       - title: "The polite would"
         body: "The conditional takes the edge off a request: *¿me das una mano?* becomes **¿me darías una
           mano?**, *¿me ayudás?* becomes **¿me ayudarías?**. **¿Te molestaría…?** — *would you
-          mind…?* — works like *me gustaría*."
+          mind…?* — works like *me gustaría*. With friends the plain *¿me ayudás?* is already
+          polite; the **-ía** form is for bigger favors or people you don't know."
       - title: "Suggest, and say no nicely"
         body: "**Podríamos ir al cine** — *we could go to the movies*. **Nos convendría salir temprano** —
           *we'd better leave early*. Turning it down: **preferiría ir otro día**. Saying yes:
@@ -427,6 +434,7 @@ units:
           - form: "darías"
             en: "you would give"
             f: "2sg.cond.ind.vos"
+            note: "¿me darías una mano? = would you give me a hand?"
       - lemma: "ayudar"
         pos: "verb"
         forms:
@@ -459,15 +467,16 @@ units:
       en: "Sorry to bother you, you wouldn't have change, would you?"
     tips:
       - title: "Polite, still vos"
-        body: "Porteños say **vos** to everyone: the shop owner, a doctor, an old man on the bus. The
-          politeness lives in the words around it: **disculpá que te moleste**, **perdón por la
-          molestia**, **muy amable**."
+        body: "Porteños say **vos** to almost everyone: the shop owner, a doctor, an old man on the bus. You
+          may still hear **usted** sometimes, but **vos** is always fine for you. The politeness
+          lives in the words around it: **disculpá que te moleste**, **perdón por la molestia**,
+          **muy amable**."
       - title: "Quisiera, ¿no tendrás…?"
         body: "Day to day porteños soften a request with **quería**: **quería un turno para mañana**, **te
           quería pedir algo**. **Quisiera** — *I would like* — is the formal one, for the phone or
           an office: **quisiera un turno**; nobody orders food with it. To ask a stranger for
-          something, add **no** and the future: **¿no tendrás hora?** — *you would not have the
-          time?*"
+          something, add **no** and the future: **¿no tendrás hora?** — *you wouldn't happen to have
+          the time?*"
     words:
       - lemma: "disculpar"
         pos: "verb"
@@ -481,8 +490,11 @@ units:
         en: "to bother"
         forms:
           - form: "moleste"
-            en: "(that) I bother"
             f: "1sg.pres.subj"
+            bound: true
+          - form: "te moleste"
+            f: "1sg.pres.subj.clitic"
+            en: "(that) I bother you"
       - lemma: "molestia"
         pos: "noun"
         en: "bother, trouble"
@@ -509,7 +521,7 @@ units:
             f: "sg.impf.subj.irregular"
   - ordinal: 8
     slug: "como-no-dona-rosa"
-    title: "Talk to your older neighbours"
+    title: "Talk to your older neighbors"
     summary: "Cómo no, doña Rosa, te doy una mano"
     grammar:
       - "cortesia"
@@ -519,15 +531,15 @@ units:
       es: "Dejá, don Juan, te doy una mano con la bolsa."
       en: "Let me, Don Juan, I'll give you a hand with the bag."
     tips:
-      - title: "Don, doña"
-        body: "The old neighbour is **don José** or **doña Rosa** — first name, with respect. A **persona
-          mayor**, a **jubilado**, still gets **vos**, plus a **cómo no** (*of course*) and a
-          **permiso** as you squeeze past — *con permiso* exists, but porteños mostly say just
-          **permiso**, and you **pedís permiso** before going in: *entró sin pedir permiso*."
       - title: "Dejá, faltaba más"
         body: "Offer help with **te doy una mano**. If they try to carry the bags themselves: **dejá,
           dejá**. When they thank you: **no es nada** or **faltaba más** (*don't mention it*). And
           they may call you **querido** or **querida**."
+      - title: "Don, doña"
+        body: "The old neighbor is **don José** or **doña Rosa** — first name, with respect. A **persona
+          mayor**, a **jubilado**, still gets **vos**, plus a **cómo no** (*of course*) and a
+          **permiso** when you need to get past — *con permiso* exists, but porteños mostly say just
+          **permiso**, and you **pedís permiso** before going in: *entró sin pedir permiso*."
     words:
       - lemma: "don"
         pos: "noun"
@@ -537,7 +549,7 @@ units:
         en: "Mrs. (before a first name)"
       - lemma: "mayor"
         pos: "adj"
-        en: "elderly"
+        en: "elderly; older"
         forms:
           - form: "mayor"
             f: "sg"
@@ -545,7 +557,7 @@ units:
             f: "pl"
       - lemma: "jubilado"
         pos: "noun"
-        en: "retiree, pensioner"
+        en: "retired; retiree"
         forms:
           - form: "jubilado"
             f: "m.sg"
@@ -592,7 +604,7 @@ units:
         en: "to serve, to see (someone)"
         forms:
           - form: "atiende"
-            en: "he serves, she sees (patients)"
+            en: "serves (customers), sees (patients), runs (a shop)"
             f: "3sg.pres.ind.irregular"
   - ordinal: 9
     slug: "practica-si-ganara"
@@ -608,7 +620,7 @@ units:
     tips:
       - title: "Would, for everyone"
         body: "**Hablaría**, **me quedaría** (I, he, she) · **¿qué dirías?** (vos) · **iríamos**,
-          **podríamos** (we). Same *-ía* ending, a different last letter."
+          **podríamos** (we). Same *-ía*, then **-s** for vos and **-mos** for we."
       - title: "If we had"
         body: "**Si ganara**, **si viviera**, **si tuviéramos**: the *if* half takes *-ra*, the other half
           *-ía*. Politely, the *-ía* alone is enough: **¿te molestaría esperar?**"
@@ -626,7 +638,7 @@ units:
       - "podrías"
       - "conviene"
       - "te recomiendo"
-      - "tenía"
+      - "tuviera"
   - ordinal: 10
     slug: "en-cuotas"
     title: "Talk about money"
@@ -640,11 +652,11 @@ units:
       en: "I spent a lot this month and I can't make ends meet."
     tips:
       - title: "Cuotas"
-        body: "Argentines buy almost anything **en cuotas** — in instalments — and the first question at the
-          till is **¿en cuántas cuotas?**"
+        body: "Argentines buy almost anything **en cuotas** — in installments — and the first question at
+          the register is **¿en cuántas cuotas?**"
       - title: "No me alcanza"
-        body: "**No me alcanza** — *it's not enough*, *I can't make it last*. **Ahorrar** is to save,
-          **gastar** to spend: **gasté todo el sueldo**."
+        body: "**No me alcanza** — *I don't have enough* (usually money). Word for word: *it doesn't reach
+          for me*. **Ahorrar** is to save, **gastar** to spend: **gasté todo el sueldo**."
     words:
       - lemma: "gastar"
         pos: "verb"
@@ -683,11 +695,13 @@ units:
       en: "We're splitting it, so you owe me half."
     tips:
       - title: "Te debo, me debés"
-        body: "**Te debo mil pesos** — *I owe you*; **me debés la mitad** — *you owe me half*. Friends split
-          the bill **a medias**, and a **deuda** between friends gets paid **a fin de mes**."
+        body: "**Te debo diez mil pesos** — *I owe you*; **me debés la mitad** — *you owe me half*. Friends
+          split the bill **a medias**. A **deuda** is what you owe; if you are short, say **te pago
+          a fin de mes** — when you get paid."
       - title: "¿Débito o crédito?"
-        body: "The question at every till. **Crédito** usually means **cuotas**, and the good ones are **sin
-          interés**. Your savings sit in a **caja de ahorro**."
+        body: "The question at every register. **Crédito** usually means **cuotas**, and the good ones are
+          **sin interés**. A **caja de ahorro** (*savings account* by name) is really the everyday
+          bank account: your pay arrives there and your debit card uses it."
       - title: "¿Te alcanza?"
         body: "*No me alcanza* for you is **¿te alcanza?** — *do you have enough?*. **Cobré** — *I got
           paid*; **¿gastás mucho?**, **¿ahorrás algo?** — vos adds **-ás**. For everyone at work:
@@ -751,11 +765,13 @@ units:
       es: "Dicen que mañana va a llover."
       en: "They say it's going to rain tomorrow."
     tips:
-      - title: "Dicen que"
-        body: "**Dicen que** — *they say*, *apparently* — is how a porteño passes on anything heard
-          second-hand. **Parece que** does the same with a shrug."
+      - title: "Dicen que, parece que"
+        body: "**Parece que** — *it seems*, *apparently* — passes on news you are not sure of: **parece que
+          va a llover**. *Dicen que* does the same for what people say: *dicen que va a llover todo
+          el finde*. If it turns out to be false, **es mentira**."
       - title: "¿Viste la noticia?"
-        body: "**Leí en el diario que…**, **lo vi en la tele** — and **me llamó Sofi y me dijo que…**"
+        body: "Name your source first, then the news: **lo dijeron en la radio**, **lo vi en las redes**,
+          *lo leí en el diario*, *lo vi en la tele* — or *me llamó Sofi y me dijo que…*"
     words:
       - lemma: "llover"
         pos: "verb"
@@ -791,16 +807,19 @@ units:
       es: "El pronóstico dice que va a llover."
       en: "The forecast says it's going to rain."
     tips:
-      - title: "Dice, me contaron"
-        body: "One source: **mi vieja dice que…**. Several: **me contaron que…**, **me comentaron que…** —
-          *people told me*. Porteño news travels by word of mouth and by **audio**."
+      - title: "Me contaron"
+        body: "When several people told you, or you'd rather not say who, use **me contaron que…** or **me
+          comentaron que…**: *me contaron que te mudaste*. For one person: **Mati me comentó que
+          renunció**. Porteño news travels by word of mouth and by *audio*, a WhatsApp voice
+          message."
       - title: "¿Es cierto?"
-        body: "Before you pass it on: **¿es cierto?** — *is it true?* — or **es mentira** — *it's a lie*.
+        body: "Before you pass it on, ask **¿es cierto?** — *is it true?* **Cierto** changes with the noun:
+          *la noticia es cierta*. If the answer is **es mentira** — *it's not true* — stop there.
           **Lo leyó en las redes** — *she read it on social media* — is not a source."
-      - title: "¿Escuchaste?"
-        body: "**¿Escuchaste la radio?** — the vos past, like *leíste*. And a tip from someone who knows is
-          **un dato**: *me pasaron el dato*. Gossip opens with **¿viste que…?** — *did you hear
-          that…?*: **¿viste que Juan renunció?**"
+      - title: "¿Escuchaste? Me enteré"
+        body: "News starts with **¿escuchaste…?** or **¿te enteraste?** — *did you hear?*: *¿escuchaste lo
+          de Pablo?* The answer is **me enteré** — *I found out*: *me enteré ayer*. A useful piece
+          of news is **un dato**: *gracias por el dato*."
     words:
       - lemma: "decir"
         pos: "verb"
@@ -844,9 +863,10 @@ units:
             f: "m.sg"
           - form: "cierta"
             f: "f.sg"
+        note: "Means 'true'. For 'sure' say seguro: estoy seguro, never estoy cierto."
       - lemma: "dato"
         pos: "noun"
-        en: "piece of info, inside info"
+        en: "piece of info, tip"
       - lemma: "enterarse"
         pos: "verb"
         en: "to find out, to hear about"
@@ -865,7 +885,7 @@ units:
             bound: true
   - ordinal: 14
     slug: "practica-a-medias"
-    title: "Practice: the road, debts and hearsay"
+    title: "Practice: driving, money and news"
     summary: "Me debés la nafta"
     grammar:
       - "repaso.plata"
@@ -908,13 +928,15 @@ units:
       es: "El barrio cambió un montón."
       en: "The neighborhood changed a lot."
     tips:
-      - title: "Ya no"
-        body: "**Ya no** is *not anymore*: **ya no vivo ahí**. **Cada vez más** — *more and more*: **cada
-          vez más caro**; **cada vez menos** — *less and less*."
+      - title: "Ya no, sigue"
+        body: "**Ya no** is *not anymore*: **ya no vivo ahí**. Porteños say it even more with **no … más**:
+          *no vivo más ahí*. The opposite is **sigue** — *still*: *sigue roto*, *sigue lloviendo*.
+          **Cada vez más** — *more and more*: *cada vez más caro*; **cada vez menos** — *less and
+          less*."
       - title: "Creció"
         body: "**Crecer** is *to grow* — a city, a kid, a tree: **el barrio creció**, **crecí en Rosario** —
           *I grew up in Rosario*. Porteños also say **me crié**: *me crié en Flores* — *I grew up in
-          Flores*. The new towers are **edificios**."
+          Flores*. "
       - title: "Antes… ahora"
         body: "To say how things changed, set **antes** + the *-aba / -ía* past against **ahora** + the
           present: *antes era tranquilo, ahora hay mucho ruido*; *antes costaba poco, ahora es
@@ -969,8 +991,9 @@ units:
           an adjective: *estás cambiada*."
       - title: "Cada vez peor, de moda"
         body: "**Cada vez peor** and **cada vez mejor** — *worse and worse, better and better*. What's in is
-          **de moda**; what's gone **desapareció**: **desaparecieron los almacenes**, and where the
-          old house stood there's a **torre**. Ya no es **lo mismo**."
+          **de moda**; what's gone **desapareció**: **desaparecieron los almacenes** — *the corner
+          shops disappeared*, and where the old house stood there's a **torre** — *a high-rise*. Ya
+          no es **lo mismo** — *it's not the same anymore*."
     words:
       - lemma: "cambiar"
         pos: "verb"
@@ -983,7 +1006,7 @@ units:
             f: "3pl.pret.ind"
       - lemma: "cambiado"
         pos: "adj"
-        en: "transformed, not the same"
+        en: "changed, different"
         forms:
           - form: "cambiado"
             f: "m.sg"
@@ -991,7 +1014,7 @@ units:
             f: "f.sg"
       - lemma: "reconocer"
         pos: "verb"
-        en: "to admit, to recognise"
+        en: "to admit, to recognize"
         forms:
           - form: "reconocí"
             en: "I recognized"
@@ -1043,12 +1066,12 @@ units:
         en: "the same (thing)"
       - lemma: "torre"
         pos: "noun"
-        en: "tower block, high-rise"
+        en: "tower, high-rise"
         forms:
           - form: "torre"
             f: "sg"
           - form: "torres"
-            en: "tower blocks, high-rises"
+            en: "towers, high-rises"
             f: "pl"
       - lemma: "moderno"
         pos: "adj"
@@ -1071,15 +1094,14 @@ units:
       en: "Everything goes up every month."
     tips:
       - title: "Todo aumenta"
-        body: "In Buenos Aires prices **aumentan** so often that the word is small talk: **¿viste cómo
-          aumentó el café?** The **aumento** of your salary never quite keeps up with the
-          **inflación**."
+        body: "In Buenos Aires prices **aumentan** so often that it is small talk: *¿viste cómo aumentó el
+          café?* Your **aumento** — *raise* — never keeps up with the **inflación**. When something
+          costs too much: **está por las nubes** — *sky-high*; **sale un ojo de la cara** — *it
+          costs a fortune*."
       - title: "Subir, bajar, cobrar"
-        body: "Prices **suben** and, now and then, **bajan**. **¿Cuánto te cobraron?** — *how much did they
-          charge you?* **Cobrar** is also *to get paid*: **cobro el viernes** — *I get paid on
-          Friday*; **¿ya cobraste?** A **precio** is a price; *está a buen precio* — *it's a good
-          price*. When it isn't: **es un afano** — *it's a rip-off*; **está por las nubes** —
-          *sky-high*; **sale un ojo de la cara** — *it costs a fortune*."
+        body: "Prices **suben** — or **aumentan**, same thing — and, now and then, **bajan**. **Cobrar** has
+          two meanings. *To charge*: **¿cuánto te cobraron?** — *how much did they charge you?* And
+          *to get paid*: **¿ya cobraste?** — *did you get paid yet?*"
     words:
       - lemma: "aumentar"
         pos: "verb"
@@ -1128,6 +1150,9 @@ units:
         pos: "phrase"
         en: "a fortune"
         note: "literally an eye from your face: sale un ojo de la cara"
+      - lemma: "por ciento"
+        pos: "phrase"
+        en: "percent"
   - ordinal: 18
     slug: "no-me-alcanza"
     title: "Talk about bills and making it to payday"
@@ -1142,13 +1167,14 @@ units:
     tips:
       - title: "Aumentaron, bajaron"
         body: "Bills come in plural, and so do the verbs: **aumentaron la luz y el gas**, **aumentan las
-          tarifas**. Prices that **bajaron**? Nobody remembers. Porteños keep count: *el **boleto**
-          aumentó tres veces este año*."
+          tarifas**. The plural can also be a nameless *they*: **me aumentaron el alquiler** — *they
+          raised my rent*. Prices that **bajaron**? Nobody remembers. Porteños keep count: *el
+          **boleto** aumentó tres veces este año*."
       - title: "Llegar a fin de mes"
         body: "**Llegar a fin de mes** — *to make it to payday* — is the monthly sport: **no llego a fin de
-          mes**; **no me alcanza** — *I don't have enough*. You cut the **gastos**, compare
-          **marcas** at the **chino** (the corner supermarket), and notice when they **remarcaron**
-          everything overnight."
+          mes**. When the money runs short: **no me alcanza** — *it's not enough*. You cut the
+          **gastos**, compare **marcas** at the **chino** (the corner supermarket), and notice when
+          they **remarcaron** everything overnight."
     words:
       - lemma: "aumentar"
         pos: "verb"
@@ -1204,7 +1230,7 @@ units:
       - lemma: "chino"
         pos: "noun"
         en: "corner supermarket"
-        note: "porteños call the neighbourhood supermarket «el chino»: most are run by Chinese families"
+        note: "porteños call the neighborhood supermarket «el chino»: most are run by Chinese families"
         register: "informal"
       - lemma: "marca"
         pos: "noun"
@@ -1376,7 +1402,8 @@ units:
     tips:
       - title: "What people are like, and where places are"
         body: "People: **es medio vago**, **son re trabajadores**. Places: **quedan en zona norte**, **¿te
-          queda cerca?**"
+          queda cerca?** **Quedar** is also how clothes fit: **te queda bien**, **te queda chico**.
+          **Te queda de paso** — *it's on your way*."
       - title: "Tell it on"
         body: "**¿Qué le preguntaste?** — **le pregunté si venías**. What was said steps back a tense:
           *podés* → **podías**, *venís* → **venías**."
@@ -1398,7 +1425,7 @@ units:
       - "tenías"
   - ordinal: 22
     slug: "ponele"
-    title: "Talk like you're from here"
+    title: "Fill the gaps like a porteño"
     summary: "Ponele que sí"
     grammar:
       - "conectores"
@@ -1410,43 +1437,45 @@ units:
     tips:
       - title: "Fillers"
         body: "A porteño sentence breathes through its fillers: **ponele** — *let's say*; **digamos** —
-          *sort of*; **qué sé yo** — *I dunno*; **bah** — *well, I mean*: *son las ocho, bah,
-          ponele*. The ones you will hear most: **o sea** — *I mean*; **tipo** — *like, around*: *es
-          tipo a las nueve*; and **viste** at the end, for *you know*: *estaba cansado, viste*."
+          *sort of*; **qué sé yo** — *I don't know*; **bah** — *well, I mean*: *son las ocho, bah,
+          ponele* — or a shrug, *oh well*. The ones you will hear most: **o sea** — *I mean*;
+          **tipo** — *like, around*: *es tipo a las nueve*; and **viste** at the end, for *you
+          know*: *estaba cansado, viste*."
       - title: "Yes, no, and no way"
         body: "**¡Más vale!** — *of course!*; **sí o sí** — *no matter what*; **ni loco** — *no way* — and a
-          woman says **ni loca**: *¿volver con mi ex? Ni loca.* And when there's too much going on:
-          **estoy a full** — *I'm flat out*."
+          woman says **ni loca**: *¿volver con mi ex? Ni loca.* Before a verb **más vale** is *you'd
+          better*: **más vale llevar paraguas**, **más vale que llegues temprano** (subjunctive
+          after *que*). And when there's too much going on: **estoy a full** — *I'm really busy*."
       - title: "The words that glue a conversation"
         body: "**Por las dudas** — *just in case*; **de última** — *if all else fails*; **en serio** —
           *seriously*; **si querés** — *if you like*. Say them and you sound like you're from here."
     words:
       - lemma: "ponele"
         pos: "phrase"
-        en: "suppose, for instance"
+        en: "let's say, more or less"
         register: "informal"
       - lemma: "digamos"
         pos: "phrase"
         en: "so to speak, sort of"
       - lemma: "qué sé yo"
         pos: "phrase"
-        en: "I dunno, who knows"
+        en: "I don't know, who knows"
         register: "informal"
       - lemma: "bah"
         pos: "interj"
-        en: "meh, or rather"
+        en: "well, or rather"
         register: "informal"
       - lemma: "más vale"
         pos: "phrase"
-        en: "you bet, sure thing"
+        en: "of course; better (to)"
         register: "informal"
       - lemma: "sí o sí"
         pos: "phrase"
-        en: "no matter what, come what may"
+        en: "no matter what, for sure"
         register: "informal"
       - lemma: "ni loco"
         pos: "phrase"
-        en: "not a chance, not on your life"
+        en: "no way, not a chance"
         register: "informal"
         forms:
           - form: "ni loco"
@@ -1455,7 +1484,7 @@ units:
             f: "f.sg"
       - lemma: "a full"
         pos: "phrase"
-        en: "flat out, super busy"
+        en: "very busy; at full volume, at full speed"
         register: "informal"
       - lemma: "por las dudas"
         pos: "phrase"

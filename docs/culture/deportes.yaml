@@ -1,0 +1,177 @@
+section:
+  slug: "deportes"
+  title: "Sports beyond fútbol"
+  emoji: "🏇"
+  summary: "A game with a duck, cloned horses, Pumas and the club on the corner"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-pato"
+    title: "The national sport is not fútbol"
+    summary: "A gaucho game on horses that started with a real duck"
+    pages:
+      - type: card
+        text: "By law, Argentina's national sport is not football. Since 1953 it's **pato**, a game played on horses."
+      - type: choice
+        prompt: "**Pato** means duck. Why does the game have that name?"
+        options:
+          - "The first players were duck hunters"
+          - "At the start, the ball was a duck, often alive, in a bag"
+          - "The riders move their arms like wings"
+        correct: 1
+        explain: "Gauchos from two ranches fought for the duck and raced with it to their own house. Today it's a leather ball with six handles."
+      - type: card
+        text: "Now two teams of four riders pass the ball and throw it through a ring high on a pole. It looks like basketball on horses."
+      - type: card
+        text: "The ball often falls. A rider must pick it up from the ground without stopping, hanging off one side of the horse at full speed."
+      - type: choice
+        prompt: "The old game was wild, and riders died. What did the Church do about it?"
+        options:
+          - "It asked players to wear a cross"
+          - "It moved the games to Sundays after mass"
+          - "It refused to bury players who died in a game"
+        correct: 2
+        explain: "The government banned pato more than once in the 1800s too. In the 1930s it came back with rules, and nobody gets killed anymore."
+      - type: card
+        text: "The Church's order came in 1796, and Buenos Aires banned the game in 1822. Gauchos kept playing anyway, far from the towns."
+      - type: card
+        text: "The truth: most Argentines have never seen a game of pato. Every few years someone asks Congress to make football the national sport, and nothing changes."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "polo"
+    title: "The best in the world at polo"
+    summary: "Ten-goal players, special horses and a field in the city"
+    pages:
+      - type: card
+        text: "In one sport Argentina is the best by far: **polo**. Nearly all the best players in the world are Argentine, and so are the best horses."
+      - type: card
+        text: "Each player has a number from −2 to 10, the **handicap**. Only a few people in the world are a 10, and almost all of them are from here."
+      - type: choice
+        prompt: "The star **Adolfo Cambiaso** loved one horse so much that he did something new. What?"
+        options:
+          - "He made copies of her in a lab"
+          - "He built her a house next to his"
+          - "He stopped playing when she got old"
+        correct: 0
+        explain: "They are clones. In 2016 he won the biggest tournament in the world riding six copies of the same mare, **Cuartetera**."
+      - type: card
+        text: "That tournament is the **Abierto de Palermo**, played every spring on a field in the middle of Buenos Aires. Anyone can buy a ticket."
+      - type: choice
+        prompt: "You're left-handed and you want to play polo. What happens?"
+        options:
+          - "You play on the left side of the field"
+          - "You get a special horse"
+          - "You must play with your right hand"
+        correct: 2
+        explain: "It's the rule, to avoid crashes between horses: everyone holds the stick in the right hand."
+      - type: card
+        chip: "Did you know?"
+        text: "Argentina's first Olympic gold medal ever was in polo, in Paris in 1924. The game had arrived fifty years earlier with British ranch owners."
+      - type: card
+        text: "A player changes horse many times in one game, so each one brings eight or more. The best horses fly around the world with their riders."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "pumas-y-leonas"
+    title: "Pumas, Leonas and bats"
+    summary: "Why every national team has an animal name"
+    pages:
+      - type: card
+        text: "Argentine national teams have animal names. The rugby team is **Los Pumas**. The women's hockey team is **Las Leonas**, the lionesses."
+      - type: choice
+        prompt: "Look at the Pumas' shirt. Which animal is really on it?"
+        options:
+          - "A puma"
+          - "A jaguar"
+          - "A lion"
+        correct: 1
+        explain: "It's a yaguareté. On a tour in 1965, a journalist saw it, wrote “Pumas”, and the wrong name stayed forever."
+      - type: card
+        text: "Las Leonas won two World Cups and four Olympic medals in a row. Their star, **Luciana Aymar**, was chosen best player in the world eight times."
+      - type: choice
+        prompt: "One national football team is called **Los Murciélagos**, the bats. Why?"
+        options:
+          - "They only play at night"
+          - "They wear black"
+          - "The players can't see"
+        correct: 2
+        explain: "It's football for blind players; only the goalkeeper can see. The ball makes a sound, and the crowd must be silent. They have been world champions more than once."
+      - type: card
+        text: "Rugby is played in clubs, mostly by people who don't get paid for it. After the game comes the **tercer tiempo**, the third half: both teams eat together."
+      - type: card
+        text: "In 2020 the Pumas beat New Zealand's All Blacks for the first time, after 35 years of trying. Players and fans cried on TV."
+      - type: card
+        text: "Other teams have animal names too: **Los Leones** (men's hockey) and **Las Panteras** (women's volleyball). The handball team chose **Los Gladiadores**."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "fierros"
+    title: "Fangio and the fierreros"
+    summary: "Five titles, a strange trip to Cuba and Ford against Chevrolet"
+    pages:
+      - type: card
+        text: "**Juan Manuel Fangio** won five Formula 1 world titles in the 1950s, with four different teams. Nobody won more for almost half a century."
+      - type: choice
+        prompt: "In 1958 Fangio went to Cuba for a race and never started it. Why?"
+        options:
+          - "His car was stolen from the hotel"
+          - "He was kidnapped by Fidel Castro's rebels"
+          - "He missed the boat from Miami"
+        correct: 1
+        explain: "They wanted the world's attention. They treated him well and let him go about a day later, after the race. He said later he had nothing against them."
+      - type: card
+        text: "A fan of cars and engines is a **fierrero**, from **fierro**, iron. The most loved racing series is **Turismo Carretera**, run since 1937."
+      - type: card
+        text: "There, the question is not Boca or River. It's **Ford or Chevrolet**. Families pick one, and the choice goes from father to child."
+      - type: choice
+        prompt: "In 1981 the Argentine **Carlos Reutemann** lost the Formula 1 title in the last race. By how much?"
+        options:
+          - "One point"
+          - "Five points"
+          - "Ten points"
+        correct: 0
+        explain: "One single point. Years later he became governor of his province, Santa Fe. Everyone called him by his nickname, **Lole**."
+      - type: card
+        text: "In 2024, **Franco Colapinto** became the first Argentine in Formula 1 in 23 years. People got up at dawn on Sundays to watch him."
+      - type: card
+        text: "From 2009, the famous Dakar race left Africa and crossed Argentina for ten years. Millions of people stood by the road to watch it pass."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "el-club"
+    title: "The club on the corner"
+    summary: "Who owns River, where kids spend the summer and a game with glass walls"
+    pages:
+      - type: card
+        text: "Every barrio has a **club**: a football field, a gym, a small bar and a room for parties. Children do sport there and old men play cards."
+      - type: choice
+        prompt: "Who is the owner of a giant club like River Plate?"
+        options:
+          - "A family from Buenos Aires"
+          - "The city"
+          - "Its members"
+        correct: 2
+        explain: "Argentine clubs belong to their **socios**, the members, who pay every month and vote for the president. Boca and River too."
+      - type: card
+        text: "In summer the club is **la pileta**, the swimming pool. Children go to the **colonia**: a day camp with games and swimming while parents work."
+      - type: card
+        text: "Old men play **bochas** there: heavy balls rolled along a long court, as close as possible to a small one. Italian immigrants brought the game."
+      - type: card
+        text: "The sport of the moment is **pádel**: tennis for four, in a small court with glass walls. Argentina fell in love with it in the 1980s, long before most of Europe."
+      - type: choice
+        prompt: "The Argentine **Fernando Belasteguín** was number one in the world at pádel. For how long?"
+        options:
+          - "3 years"
+          - "8 years"
+          - "16 years"
+        correct: 2
+        explain: "Sixteen years in a row. For a long time almost every top player in the world was Argentine."
+      - type: card
+        text: "The club bar has a **metegol**: football on a table, with players on metal bars. One rule everywhere: no spinning the bar. That's **molinete**, and the goal doesn't count."
+      - type: card
+        chip: "Pro tip"
+        text: "Asking about sport is easy small talk. **“¿Hacés algún deporte?”** Do you do any sport? **“Juego al pádel los martes.”** I play pádel on Tuesdays."
+    vocabulary: []

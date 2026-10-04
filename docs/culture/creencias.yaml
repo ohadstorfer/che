@@ -1,0 +1,143 @@
+section:
+  slug: "creencias"
+  title: "Luck and beliefs"
+  emoji: "🍀"
+  summary: "Saints of the road, the unlucky day and grandma's cures"
+
+# Card classes (docs/culture-spec.md, "Card classes"): one idea per big card,
+# 2–3 guess-first questions, no word review.
+classes:
+  # ─────────────────────────────────────────────────────────────
+  - slug: "gauchito-gil"
+    title: "Red flags by the road"
+    summary: "Gauchito Gil, the Difunta Correa and the saints the Church didn't choose"
+    pages:
+      - type: card
+        text: "Drive on any road in Argentina and you'll see them: small red houses, the size of a box, with red flags and candles around them."
+      - type: choice
+        prompt: "Who are those little red houses for?"
+        options:
+          - "A gaucho killed about 150 years ago"
+          - "People who died in accidents on that road"
+          - "A football club with a red shirt"
+        correct: 0
+        explain: "**Gauchito Gil**, from Corrientes. He's a saint of the people: the Church never named him one, but millions ask him for help."
+      - type: card
+        text: "The story: he ran from the army and took from the rich. Before he was killed, he told the soldier: “Your son is very sick. Pray in my name and he'll live.” The boy lived."
+      - type: card
+        text: "Drivers honk when they pass one, for a safe trip. People leave red ribbons, wine and cigarettes to say thanks."
+      - type: card
+        text: "Other roadside houses are surrounded by bottles of water. Those are for the **Difunta Correa**, a woman who, the story says, died of thirst crossing the desert of San Juan."
+      - type: choice
+        prompt: "The story says that when she was found, something amazing had happened. What?"
+        options:
+          - "Flowers had grown around her"
+          - "Her baby was still alive, drinking her milk"
+          - "A spring of water had opened next to her"
+        correct: 1
+        explain: "So travelers leave water for her, so she is never thirsty again. Truck drivers are the ones who trust her most."
+      - type: card
+        chip: "Pro tip"
+        text: "Asking a saint for something with a promise in return is a **promesa**. **“Hice una promesa”** explains why your friend is walking 60 kilometers or has stopped eating sweets."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "martes-trece"
+    title: "Tuesday the 13th"
+    summary: "The unlucky day and the small rules for good luck"
+    pages:
+      - type: card
+        text: "The unlucky day is not Friday the 13th. It's **martes 13**, Tuesday. The saying: **“Martes 13, no te cases ni te embarques.”** Don't get married and don't get on a boat."
+      - type: card
+        text: "Never pass the salt from hand to hand. Put it down on the table and let the other person pick it up. People say hand to hand brings a fight."
+      - type: choice
+        prompt: "At a café, where should you NOT leave your bag, if you believe in bad luck?"
+        options:
+          - "On the chair next to you"
+          - "On the table"
+          - "On the floor"
+        correct: 2
+        explain: "People say a bag or wallet on the floor makes the money go away. Many cafés even have small hooks under the table."
+      - type: card
+        text: "Bad luck is **mala suerte** or **yeta**. To keep it away, people say **“toco madera”** and touch wood, the same as in English."
+      - type: card
+        text: "A red ribbon on a baby's wrist or on the mirror of a car is against **la envidia**: other people's envy, which is believed to bring harm."
+      - type: choice
+        prompt: "Many women get the same small present at Christmas, to wear on New Year's night for luck. What is it?"
+        options:
+          - "Red socks"
+          - "Pink underwear"
+          - "A yellow scarf"
+        correct: 1
+        explain: "A pink **bombacha**. It has to be new and it has to be a present. In December the shop windows are full of them."
+      - type: card
+        text: "And if a broom touches your feet while someone is sweeping, the old people say you will never get married."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "empacho-y-ojeo"
+    title: "Cures from grandma"
+    summary: "What to do when the doctor can't help, by the aunt who knows"
+    pages:
+      - type: card
+        text: "Ate too much and your stomach hurts for days? Doctors have other names for it. Grandmas call it **empacho**, and they know someone who cures it."
+      - type: choice
+        prompt: "How does that person check if you have empacho?"
+        options:
+          - "She looks at your tongue with a candle"
+          - "She measures the distance to your stomach with a ribbon"
+          - "She puts a warm plate on your belly"
+        correct: 1
+        explain: "It's **curar con la cinta**. You hold one end of a ribbon on your stomach, and she measures it three times with her arm, elbow to hand. If the measure changes, you're **empachado**."
+      - type: card
+        text: "The other method is **tirar el cuerito**: she pulls the skin on your lower back until it makes a small sound. Children hate it."
+      - type: card
+        text: "Then there's **mal de ojo**, the evil eye: a strong headache that comes, people say, from someone's envy. The cure uses a plate of water, drops of oil and secret words."
+      - type: choice
+        prompt: "The story says the secret words can only be taught on a special night. Which one?"
+        options:
+          - "Christmas Eve"
+          - "The first full moon of the year"
+          - "The teacher's own birthday"
+        correct: 0
+        explain: "Most families say midnight on **Nochebuena**, usually from an older woman to a younger one in the family. Learned on any other day, people say, they don't work."
+      - type: card
+        chip: "Did you know?"
+        text: "People say the cure works from far away. You send your full name by WhatsApp, and an aunt in another city does the rest. Many people with university degrees do it."
+      - type: card
+        text: "Ask them if they believe, and they'll answer with two words: **por las dudas**. Just in case."
+    vocabulary: []
+
+  # ─────────────────────────────────────────────────────────────
+  - slug: "caminar-a-lujan"
+    title: "Walking to Luján"
+    summary: "A night on foot, promises to saints and a line for work"
+    pages:
+      - type: card
+        text: "Every October, hundreds of thousands of people walk about 60 kilometers from Buenos Aires to the town of **Luján**. They walk all night to reach its big church."
+      - type: choice
+        prompt: "The church holds a small statue of the Virgin Mary. The story says that in 1630 it chose to stay there. How?"
+        options:
+          - "It was found in the river after a flood"
+          - "A white bird landed on it and stayed"
+          - "The cart carrying it would not move until it was taken off"
+        correct: 2
+        explain: "The animals pulling the cart didn't move until that one box was put on the ground. People decided she wanted to stay. Today she is the patron saint of Argentina."
+      - type: card
+        text: "On August 7, the line outside the church of **San Cayetano**, in Buenos Aires, is many blocks long. He's the saint of bread and work. Some people sleep there for days."
+      - type: card
+        text: "All along the road to Luján, strangers give the walkers water, fruit and mate for free. Others wait at the side to rub tired feet."
+      - type: card
+        text: "Football has its promesas too. “If we win the cup, I'll walk to Luján.” After a big title, plenty of fans really do it."
+      - type: choice
+        prompt: "Most Argentines say they are Catholic. How many go to church every week?"
+        options:
+          - "Most of them"
+          - "About half"
+          - "A small part"
+        correct: 2
+        explain: "For many, religion is family events more than Sunday mass: a baby's **bautismo** and a child's **primera comunión** are big parties with all the cousins."
+      - type: card
+        chip: "Did you know?"
+        text: "Argentina has the biggest Jewish community in Latin America, and millions of people with Syrian and Lebanese grandparents. Many came on the same boats, a century ago."
+    vocabulary: []
