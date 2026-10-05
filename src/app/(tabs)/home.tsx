@@ -19,6 +19,7 @@ import {
 
 import { AppHeader, Pulse } from '@/components/app-header';
 import { Guidebook } from '@/components/guidebook';
+import { RedoCard, type StepRect } from '@/components/redo-card';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { markBootReady } from '@/lib/boot';
@@ -207,6 +208,7 @@ const PathStep = memo(function PathStep({
   attempts,
   tone,
   onPress,
+  onRedo,
 }: {
   index: number;
   phase: Phase;
@@ -223,7 +225,15 @@ const PathStep = memo(function PathStep({
   /** A unit check tried and not passed yet: attempts so far, out of three. */
   attempts?: number;
   onPress?: () => void;
+  /**
+   * A done step she may do again: opens its card where the step is. One
+   * function for the whole road, so a done step doesn't render again whenever
+   * Home does.
+   */
+  onRedo?: (index: number, at: StepRect) => void;
 }) {
+  const node = useRef<View>(null);
+  const redo = () => node.current?.measureInWindow((x, y, width, height) => onRedo?.(index, { x, y, width, height }));
   // A step mounts wherever it already is and only moves when the path moves
   // under it. That is why the screen opens on her *old* position (see
   // `lastShown`) and advances a beat later: the move has to happen while she is
@@ -382,6 +392,17 @@ const PathStep = memo(function PathStep({
             onPress={onPress}
             accessibilityRole="button"
             accessibilityLabel={`Start: ${label}`}
+            hitSlop={8}
+            style={styles.nodeBox}>
+            {({ pressed }) => pill(pressed)}
+          </Pressable>
+        ) : onRedo && phase === 2 ? (
+          <Pressable
+            ref={node}
+            onPress={redo}
+            accessibilityRole="button"
+            accessibilityLabel={`${label}: done`}
+            accessibilityHint="Opens the option to do it again"
             hitSlop={8}
             style={styles.nodeBox}>
             {({ pressed }) => pill(pressed)}
@@ -795,6 +816,9 @@ export default function Home() {
   const jumpRef = useRef<JumpDirection>(null);
   /** The unit whose guidebook is open. */
   const [guide, setGuide] = useState<Unit | null>(null);
+  /** The done step whose card is open: its place on the road and on screen. */
+  const [redo, setRedo] = useState<{ index: number; at: StepRect } | null>(null);
+  const openRedo = useCallback((index: number, at: StepRect) => setRedo({ index, at }), []);
 
   /** Set once the real load has landed: a late read of the phone's copy must
    *  never paint over it. */
@@ -1105,6 +1129,7 @@ export default function Home() {
   };
 
   const phaseOf = (i: number): Phase => (i < current ? 2 : i === current ? 1 : 0);
+  const redoLesson = redo ? (path[redo.index] ?? null) : null;
   const unitStateOf = (lesson: PathLesson): UnitState => {
     const last = unitLastIndex.get(lesson.unit_id) ?? lesson.index;
     return current > last ? 'done' : current >= lesson.index ? 'current' : 'locked';
@@ -1320,6 +1345,8 @@ export default function Home() {
               tone={toneOf(lesson.unit)}
               label={`${lesson.title_en} · ${lesson.unit.title_en}`}
               onPress={lesson.index === current ? () => startLesson(lesson) : undefined}
+              // Any class behind her but the chat with Pancho, which is a live call every time.
+              onRedo={lesson.index < current && lesson.kind !== 'speak' ? openRedo : undefined}
             />
           </>
         )}
@@ -1346,6 +1373,16 @@ export default function Home() {
         tips={guide ? (data?.course.tipsByUnit.get(guide.id) ?? []) : []}
         onClose={() => setGuide(null)}
         jump={guideJump}
+      />
+      <RedoCard
+        at={redo?.at ?? null}
+        title={redoLesson ? (KIND_LABEL[redoLesson.kind] ?? `Lesson ${redoLesson.ordinal}`) : ''}
+        unit={redoLesson?.unit.title_en ?? ''}
+        onClose={() => setRedo(null)}
+        onRedo={() => {
+          setRedo(null);
+          if (redoLesson) startLesson(redoLesson);
+        }}
       />
       {/* Only once there is a road to jump along — not over the loading sun. */}
       {roadReady ? (
