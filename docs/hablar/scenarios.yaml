@@ -1408,3 +1408,51 @@ openers:
       es: "¿Qué sabés de Perón y Evita? Acá todavía se habla mucho de ellos, ¿viste?"
       en: "What do you know about Perón and Evita? People here still talk about them a lot, you know?"
       keyterms: [Perón, Evita, peronismo, dictadura, Malvinas, democracia, la crisis del 2001, dólar, inflación]
+    asi-somos:
+      es: "Dicen que los argentinos somos un poco agrandados. ¿Vos qué pensás?"
+      en: "They say we Argentines are a bit full of ourselves. What do you think?"
+      keyterms: [agrandado, agrandados, ego, quejarse, opinar, exagerar, dramático, humor, remarla]
+    familia:
+      es: "¿Con quién te juntás los domingos? ¿Con tu familia o con amigos?"
+      en: "Who do you get together with on Sundays? Family or friends?"
+      keyterms: [familia, domingo, amigos, apodo, sobrenombre, novio, novia, casamiento, fiesta de quince, juntarse]
+    casa:
+      es: "¿Cómo es tu casa? ¿Vivís en un departamento?"
+      en: "What's your home like? Do you live in a flat?"
+      keyterms: [departamento, dos ambientes, encargado, portero, edificio, alquiler, expensas, kiosco, verdulería, almacén]
+    dia-a-dia:
+      es: "¿Cómo está el tiempo hoy donde vivís? ¿Hace frío o calor?"
+      en: "What's the weather like today where you live? Is it cold or hot?"
+      keyterms: [el tiempo, frío, calor, humedad, lluvia, médico, turno, obra social, guardia, manejar, tránsito]
+    bebidas:
+      es: "¿Qué te gusta tomar cuando salís? ¿Vino, cerveza, fernet?"
+      en: "What do you like to drink when you go out? Wine, beer, fernet?"
+      keyterms: [vino, malbec, cerveza, birra, fernet, fernet con coca, vermut, brindar, salud, una copa]
+    juegos:
+      es: "¿Alguna vez jugaste al truco? ¿Te gustan los juegos de cartas?"
+      en: "Have you ever played truco? Do you like card games?"
+      keyterms: [truco, cartas, envido, quiero, figuritas, álbum, quiniela, lotería, jugar]
+    vacaciones:
+      es: "¿Adónde te gusta ir de vacaciones? ¿Sos más de playa o de montaña?"
+      en: "Where do you like to go on holiday? Are you more of a beach or a mountain person?"
+      keyterms: [vacaciones, verano, enero, playa, la costa, Mar del Plata, carpa, carnaval, fin de semana largo, escapada, montaña]
+    escuela-y-laburo:
+      es: "¿Vos estudiás o trabajás? ¿Qué hacés?"
+      en: "Do you study or work? What do you do?"
+      keyterms: [escuela, colegio, secundaria, viaje de egresados, facultad, la UBA, laburo, laburar, jefe, paro, sueldo]
+    deportes:
+      es: "Además del fútbol, ¿qué deporte te gusta? ¿Jugás a algo?"
+      en: "Apart from soccer, which sport do you like? Do you play anything?"
+      keyterms: [deporte, pato, polo, rugby, Los Pumas, Las Leonas, hockey, básquet, Fangio, automovilismo, club de barrio]
+    naturaleza:
+      es: "¿Alguna vez viste un carpincho? ¿Qué animal te gusta más?"
+      en: "Have you ever seen a capybara? Which animal do you like best?"
+      keyterms: [carpincho, carpinchos, hornero, animal, pájaro, nido, río, campo]
+    creencias:
+      es: "¿Creés en la mala suerte? ¿Tenés alguna cábala?"
+      en: "Do you believe in bad luck? Do you have a lucky ritual?"
+      keyterms: [suerte, mala suerte, cábala, martes 13, Gauchito Gil, mal de ojo, empacho, Luján, peregrinación, promesa]
+    pantallas:
+      es: "¿Qué series o películas mirás? ¿Viste alguna argentina?"
+      en: "Which series or films do you watch? Have you seen an Argentine one?"
+      keyterms: [serie, película, tele, programa, radio, humor, chiste, actor, Darín, El Eternauta]

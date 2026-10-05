@@ -24,7 +24,7 @@ export default function Welcome() {
       <View style={styles.hero}>
         <Animated.View entering={pop(250, reduced)} style={{ transformOrigin: 'bottom center' }}>
           <SpeechBubble tail="bottom" style={styles.bubble}>
-            <Text style={styles.hola}>¡Hola, che! Soy {MASCOT_NAME}.</Text>
+            <Text style={styles.hola}>¡Buenas! Soy {MASCOT_NAME}.</Text>
             <Text style={styles.holaEn}>Hi! I&apos;m {MASCOT_NAME}.</Text>
           </SpeechBubble>
         </Animated.View>
