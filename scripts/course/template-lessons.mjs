@@ -138,16 +138,22 @@ function migration() {
   for (const s of shapes) {
     const u = s.unit;
     lines.push(`-- ${u.slug}`);
-    const ids = [...s.rows.map((r) => r.id), ...s.retired.map((r) => r.id)];
     // Out of the way first: (unit_id, ordinal) is unique at every step.
     lines.push(`update public.lessons set ordinal = -5000 - ordinal where unit_id = ${q(u.id)} and ordinal > 0 and ordinal < 1000;`);
-    for (const r of s.retired) lines.push(`update public.lessons set status = 'retired', ordinal = 31000 + abs(ordinal) where id = ${q(r.id)};`);
+    for (const r of s.retired) lines.push(`update public.lessons set status = 'retired' where id = ${q(r.id)};`);
     for (const r of s.rows) {
       if (r.was) lines.push(`update public.lessons set kind = ${q(r.kind)}, title_en = ${q(r.title_en)}, ordinal = ${r.ordinal}, status = 'published' where id = ${q(r.id)};`);
       else lines.push(`insert into public.lessons (id, unit_id, ordinal, title_en, kind, status) values (${q(r.id)}, ${q(u.id)}, ${r.ordinal}, ${q(r.title_en)}, ${q(r.kind)}, 'published');`);
     }
-    // Rows the shape didn't name (drafts, old retired ones) go past the end.
-    lines.push(`update public.lessons set ordinal = 32000 + abs(ordinal) where unit_id = ${q(u.id)} and ordinal < 0 and id not in (${ids.map(q).join(', ')});`);
+    // Every other row of the unit (retired now or before, drafts) goes past the
+    // end, renumbered: through a free range first, since (unit_id, ordinal) is
+    // unique at every step and ordinal is a smallint.
+    const keep = s.rows.map((r) => q(r.id)).join(', ');
+    for (const base of ['-20000 - ', '20000 + ']) {
+      lines.push(
+        `update public.lessons l set ordinal = ${base}p.n from (select id, row_number() over (order by ordinal) as n from public.lessons where unit_id = ${q(u.id)} and id not in (${keep})) p where l.id = p.id;`,
+      );
+    }
   }
   return `-- The fixed unit shape for sections ${[...wanted].join(', ')} (scripts/course/template-lessons.mjs):
 -- ${TEMPLATE.join(' · ')}.

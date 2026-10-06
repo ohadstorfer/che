@@ -28,6 +28,8 @@ export type ScenarioVersion = {
   keyterms: string[];
   /** A unit's scene: the forms the unit taught, for Pancho to stay near. */
   words?: string[];
+  /** A scene for her first days (section 1): Pancho keeps to the words she has and to one-word answers. */
+  first_steps?: boolean;
 };
 export type ScenarioDoc = {
   id: string;

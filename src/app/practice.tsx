@@ -3,9 +3,11 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { ClassDoor, ClassWait } from '@/components/class-door';
 import { Exercise } from '@/components/exercises';
 import { LessonComplete } from '@/components/lesson-complete';
 import { StreakCelebration } from '@/components/streak-celebration';
@@ -299,44 +301,47 @@ export default function Practice() {
 
   const current = queue?.[index] ?? null;
 
-  // The clips for the exercise she is on and the two after it are fetched
-  // ahead of the press, so by the time she taps the speaker there is nothing
-  // left to load.
-  useEffect(() => {
-    if (!queue) return;
-    for (const item of queue.slice(index, index + 3)) {
-      for (const form of formsOf(item)) preloadAudio(form.audio_path);
-      if (item.sentence?.audio_path) preloadAudio(item.sentence.audio_path);
-    }
-  }, [queue, index]);
-
-  // Then the rest of the lesson, behind those, once.
-  const warmed = useRef(false);
-  const warmedFirst = useRef(false);
-  useEffect(() => {
-    if (!queue || warmed.current) return;
-    warmed.current = true;
-    for (const item of queue) for (const form of formsOf(item)) void preloadAudio(form.audio_path);
-  }, [queue]);
-
-  // The doorway also waits on the first recording, though never for long.
+  // The doorway waits on one thing besides the exercises: the recording of the
+  // very first screen, and never for long. A first screen with nothing to play
+  // (a tip) opens at once. Measured: holding the door for a clip two screens
+  // away, fetched alongside the rest of the lesson's, was most of the wait.
   const [firstReady, setFirstReady] = useState(false);
-  const firstClip = useMemo(
-    () =>
-      queue
-        ?.slice(0, 3)
-        .flatMap(formsOf)
-        .find((form) => form.audio_path)?.audio_path ?? null,
-    [queue],
-  );
+  const firstClip = useMemo(() => {
+    const first = queue?.[0];
+    if (!first) return null;
+    return formsOf(first).find((form) => form.audio_path)?.audio_path ?? first.sentence?.audio_path ?? null;
+  }, [queue]);
+  const warmedFirst = useRef(false);
   useEffect(() => {
     if (!firstClip || warmedFirst.current) return;
     warmedFirst.current = true;
     const open = () => setFirstReady(true);
     void preloadAudio(firstClip).then(open);
-    const giveUp = setTimeout(open, 2500);
+    const giveUp = setTimeout(open, 900);
     return () => clearTimeout(giveUp);
   }, [firstClip]);
+  /** The first screen has what it needs; the rest may load behind it. */
+  const doorOpen = !!queue && (!firstClip || firstReady);
+
+  // The clips for the exercise she is on and the two after it are fetched
+  // ahead of the press, so by the time she taps the speaker there is nothing
+  // left to load. Until the door is open only her own screen's are asked for,
+  // so the first clip doesn't share the line with the ones behind it.
+  useEffect(() => {
+    if (!queue) return;
+    for (const item of queue.slice(index, index + (doorOpen ? 3 : 1))) {
+      for (const form of formsOf(item)) preloadAudio(form.audio_path);
+      if (item.sentence?.audio_path) preloadAudio(item.sentence.audio_path);
+    }
+  }, [queue, index, doorOpen]);
+
+  // Then the rest of the lesson, behind those, once.
+  const warmed = useRef(false);
+  useEffect(() => {
+    if (!queue || !doorOpen || warmed.current) return;
+    warmed.current = true;
+    for (const item of queue) for (const form of formsOf(item)) void preloadAudio(form.audio_path);
+  }, [queue, doorOpen]);
 
   // Latency is measured from the moment an exercise is on screen.
   useEffect(() => {
@@ -574,8 +579,9 @@ export default function Practice() {
     );
   }
 
+  const doorLine = testMode ? 'Getting your test ready…' : undefined;
   if (gate === undefined) {
-    return <SafeAreaView style={styles.safe} />;
+    return <ClassDoor onClose={() => goBack('/home')} line={doorLine} />;
   }
   if (gate) {
     return (
@@ -603,13 +609,7 @@ export default function Practice() {
   }
 
   if (!queue || (queue.length > 0 && !!firstClip && !firstReady)) {
-    return (
-      <SafeAreaView style={styles.safe}>
-        <View style={styles.doneWrap}>
-          <ActivityIndicator size="large" color={colors.primary} />
-        </View>
-      </SafeAreaView>
-    );
+    return <ClassDoor onClose={() => goBack('/home')} line={doorLine} />;
   }
 
   if (queue.length === 0) {
@@ -686,25 +686,25 @@ export default function Practice() {
       {title ? <Text style={styles.kicker}>{title}</Text> : null}
       {profile.role !== 'student' ? <SimulateBar onSimulate={(c) => void simulate(c)} /> : null}
 
-      {staging ? (
-        <View style={styles.doneWrap}>
-          <ActivityIndicator size="large" color={colors.primary} />
-        </View>
-      ) : null}
+      {staging ? <ClassWait line="Getting the next part ready…" /> : null}
       {current && !staging && (
-        <AnswerActionsContext.Provider value={kind === 'placement' ? null : actions}>
-          <Exercise
-            key={`${current.form.id}-${index}`}
-            item={current}
-            allForms={allForms}
-            allSentences={allSentences}
-            lexicon={lexicon}
-            ladder={ladder}
-            hints={(kind !== 'lesson' && kind !== 'placement') || !!current.review}
-            onIntroDone={() => onIntroDone(current)}
-            onAnswered={(wrongIds, extra) => void onAnswered(current, wrongIds, extra)}
-          />
-        </AnswerActionsContext.Provider>
+        // Fades in once, as the class takes over from its empty frame; the
+        // exercises after the first change inside it.
+        <Animated.View entering={FadeIn.duration(200)} style={styles.stage}>
+          <AnswerActionsContext.Provider value={kind === 'placement' ? null : actions}>
+            <Exercise
+              key={`${current.form.id}-${index}`}
+              item={current}
+              allForms={allForms}
+              allSentences={allSentences}
+              lexicon={lexicon}
+              ladder={ladder}
+              hints={(kind !== 'lesson' && kind !== 'placement') || !!current.review}
+              onIntroDone={() => onIntroDone(current)}
+              onAnswered={(wrongIds, extra) => void onAnswered(current, wrongIds, extra)}
+            />
+          </AnswerActionsContext.Provider>
+        </Animated.View>
       )}
     </SafeAreaView>
   );
@@ -864,6 +864,7 @@ function TestResult({ outcome, plan, onDone }: { outcome: TestOutcome; plan: Tes
 const styles = StyleSheet.create({
   // Plain oat: the lesson sits on bare clay paper, not the app's wash.
   safe: { flex: 1, backgroundColor: colors.bg },
+  stage: { flex: 1 },
   header: {
     flexDirection: 'row',
     alignItems: 'center',

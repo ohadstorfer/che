@@ -19,7 +19,7 @@ import { supabase } from './supabase';
 // ---------------------------------------------------------------------------
 
 /** Units of the course open without paying (0-based unitIndex below this). */
-export const FREE_UNITS = 2;
+export const FREE_UNITS = 3;
 /** Chats with Pancho a free account gets, in total. hablar-start agrees. */
 export const FREE_CHATS = 3;
 

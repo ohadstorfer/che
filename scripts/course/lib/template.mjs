@@ -11,7 +11,7 @@
 export const TEMPLATE = ['lesson', 'lesson', 'slang', 'lesson', 'practice', 'culture', 'speak', 'review'];
 
 /** The sections (by ordinal) whose units have the shape. */
-export const TEMPLATE_SECTIONS = new Set([]);
+export const TEMPLATE_SECTIONS = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
 
 /** Teaching lessons in a unit. */
 export const TEACHING_LESSONS = TEMPLATE.filter((k) => k === 'lesson').length;

@@ -119,15 +119,40 @@ export async function loadSentenceRowsInReach(reach: SentenceReach): Promise<Sen
   for (const rows of await inBatches(blocks, BLOCKS_IN_FLIGHT, unitRows)) for (const r of rows) byId.set(r.id, r);
 
   const missing = [...new Set(reach.ids ?? [])].filter((id) => !byId.has(id));
-  const extra = await Promise.all(
-    chunks(missing, IDS_PER_QUERY).map((ids) =>
+  for (const r of await rowsById(missing)) byId.set(r.id, r);
+  return [...byId.values()].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+}
+
+/** How long an answer about a sentence asked for by id is kept. */
+const BY_ID_TTL_MS = 30 * 60 * 1000;
+/** Sentences asked for by id outside any block: the row, or null when it is
+ *  not published. A sentence she was shown and that was since retired is asked
+ *  about by every round she opens, and the answer is the same every time. */
+const askedById = new Map<string, { at: number; row: SentenceRow | null }>();
+
+async function rowsById(ids: string[]): Promise<SentenceRow[]> {
+  const now = Date.now();
+  const unasked = ids.filter((id) => {
+    const hit = askedById.get(id);
+    return !hit || now - hit.at >= BY_ID_TTL_MS;
+  });
+  const fetched = await Promise.all(
+    chunks(unasked, IDS_PER_QUERY).map((part) =>
       all<SentenceRow>(() =>
-        supabase.from('sentences').select(SENTENCE_COLUMNS).eq('status', 'published').in('id', ids).order('id'),
+        supabase.from('sentences').select(SENTENCE_COLUMNS).eq('status', 'published').in('id', part).order('id'),
       ),
     ),
   );
-  for (const rows of extra) for (const r of rows) byId.set(r.id, r);
-  return [...byId.values()].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  for (const id of unasked) askedById.set(id, { at: now, row: null });
+  for (const rows of fetched) for (const r of rows) askedById.set(r.id, { at: now, row: r });
+  return ids.flatMap((id) => askedById.get(id)?.row ?? []);
+}
+
+/** Published sentences by id, as the app uses them — for the few a round names
+ *  that her own load didn't bring (never shown to her, so with no record). */
+export async function loadSentencesById(ids: string[], forms: Form[]): Promise<Sentence[]> {
+  const formById = new Map(forms.map((f) => [f.id, f]));
+  return (await rowsById([...new Set(ids)])).map((r) => toSentence(r, formById));
 }
 
 type ShownRow = { sentence_id: string; shown_count: number; correct_count: number; last_shown_at: string | null };

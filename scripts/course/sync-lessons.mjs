@@ -37,6 +37,7 @@ import { uuid5 } from './lib/ids.mjs';
 import { GRAMMAR_TITLE } from './lib/lessons.mjs';
 import { FORMS_PER_LESSON, drillable, lessonCountFor } from './lib/outline.mjs';
 import { q, uuidArray } from './lib/sql.mjs';
+import { hasTemplate } from './lib/template.mjs';
 import { loadCourseRows } from './lib/vocabulary.mjs';
 
 const args = process.argv.slice(2);
@@ -61,8 +62,12 @@ function snapshotRows(date) {
 }
 
 const sectionOrdinal = new Map(rows.sections.map((s) => [s.id, s.ordinal]));
+// A section with the fixed unit shape (lib/template.mjs) has its lessons set by
+// course:template: the same eight whatever the unit teaches. This script sizes
+// lessons by words, so it leaves those sections alone.
+const shaped = new Set(rows.sections.filter((s) => hasTemplate(s.ordinal)).map((s) => s.id));
 const units = rows.units
-  .filter((u) => u.status === 'published')
+  .filter((u) => u.status === 'published' && !shaped.has(u.section_id))
   .sort((a, b) => sectionOrdinal.get(a.section_id) - sectionOrdinal.get(b.section_id) || a.ordinal - b.ordinal);
 const lemmaById = new Map(rows.lemmas.filter((l) => l.status !== 'retired').map((l) => [l.id, l]));
 const known = new Set(rows.lessons.map((l) => l.id));

@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { recapItems } from '../../../src/lib/lesson.ts';
+import { hasFixedShape, recapItems, resolveSlots } from '../../../src/lib/lesson.ts';
 import { MAX_RETRIES, MAX_ROUND_RETRIES, pickRetry, typedHere } from '../../../src/lib/round.ts';
-import { glueSeen } from '../../../src/lib/sentences.ts';
+import { glueSeen, toSentence } from '../../../src/lib/sentences.ts';
 import {
   earnedTail,
   exercisesFor,
@@ -20,7 +20,7 @@ import {
 import { gradeGap, gradeTyped, missedForms, selfGlossed, sentenceAnswerMatches, sentenceTiles } from '../../../src/lib/answers.ts';
 import { DEFAULT_LADDER, ladderFor } from '../../../src/lib/sentences.ts';
 import { conceptScores, conceptsOf, weakestConcept } from '../../../src/lib/concepts.ts';
-import { forms, formById, formOf, iso, learner, state, unitBySlug } from './fixture.mjs';
+import { forms, formById, formOf, iso, learner, state, unitBySlug, units } from './fixture.mjs';
 
 const PRODUCTION = ['word_build', 'typing', 'listen_build', 'sentence_build', 'sentence_listen', 'sentence_gap_typed'];
 
@@ -77,6 +77,63 @@ test('a unit recap asks its weakest forms once each, half of them to produce', (
       assert.equal(!!item.filler, !(st.due_at <= new Date().toISOString()), 'not-due words are filler');
     }
   }
+});
+
+test('a slang recap asks only slang she has met, up to the unit it is in', () => {
+  const slang = forms.filter((f) => ['informal', 'lunfardo', 'vulgar'].includes(f.register) && !f.is_glue && f.pos !== 'propn' && !f.bound);
+  assert.ok(slang.length >= 3, 'the fixture has slang');
+  const last = slang.reduce((a, b) => (a.unit_order > b.unit_order ? a : b));
+  const unit = [...new Set(forms.map((f) => f.unit_id))].map((id) => forms.find((f) => f.unit_id === id)).find((f) => f.unit_order === last.unit_order);
+  const plain = forms.filter((f) => f.register === 'neutral' && !f.is_glue && f.pos !== 'propn' && f.unit_order <= last.unit_order).slice(0, 8);
+  const data = learner([...slang, ...plain].map((f) => state(f, { lapses: 1 })));
+  const here = { id: unit.unit_id, section_id: unit.section_id, course_order: last.unit_order };
+  const items = recapItems(data, here, 'slang', 6, forms, glueSeen(data.sentences), new Date().toISOString());
+  assert.ok(items.length > 0);
+  const asked = items.filter((i) => !i.sentence || i.mode === 'sentence_gap').map((i) => i.form);
+  assert.ok(asked.every((f) => ['informal', 'lunfardo', 'vulgar'].includes(f.register)), asked.map((f) => `${f.form}:${f.register}`).join());
+  // Before any slang is taught, there is nothing to review (the lesson fills up from its unit: resolveSlots).
+  const first = Math.min(...slang.map((f) => f.unit_order));
+  assert.deepEqual(recapItems(data, { ...here, course_order: first - 1 }, 'slang', 6, forms, glueSeen(data.sentences), new Date().toISOString()), []);
+});
+
+test('a slang lesson with no slang to review yet is filled from its unit, never empty', () => {
+  const unit = unitBySlug('un-cafe-por-favor');
+  const unitForms = forms.filter((f) => f.unit_id === unit.id && !f.is_glue && f.pos !== 'propn' && f.register === 'neutral');
+  const data = learner(unitForms.map((f) => state(f)));
+  const slot = { id: 's1', lesson_id: 'l', ordinal: 1, kind: 'recap', form_id: null, sentence_id: null, tip_id: null, mode: null, review_count: 6, scope: 'slang' };
+  const { items } = resolveSlots(data, unit, [slot], [], false, new Date(), true);
+  assert.ok(items.length > 0 && items.length <= 6, `${items.length} items`);
+  assert.ok(items.every((i) => i.form.unit_id === unit.id));
+});
+
+test('in a unit with the fixed shape, another form of a word she has is only shown in a sentence', () => {
+  assert.ok(hasFixedShape(['lesson', 'lesson', 'slang', 'lesson', 'practice', 'culture', 'speak', 'review']));
+  assert.ok(hasFixedShape(['lesson', 'lesson', 'slang', 'lesson', 'practice', 'speak', 'review']));
+  assert.ok(!hasFixedShape(['lesson', 'lesson', 'lesson', 'practice', 'review']));
+  assert.ok(!hasFixedShape(['lesson', 'slang', 'lesson', 'review']));
+  // "sos" after "soy": the same word, met a unit later, with a sentence of its own.
+  const first = formOf('soy');
+  const second = forms.find((f) => f.lemma_id === first.lemma_id && f.form === 'sos');
+  const unit = units.find((u) => u.id === second.unit_id);
+  const known = forms.filter((f) => f.unit_order < unit.course_order);
+  assert.ok(known.includes(first));
+  const she = learner(known.map((f) => state(f)));
+  she.sentences.push(
+    toSentence(
+      { id: 'sos-1', unit_id: unit.id, es: '¿Sos vos?', en: 'Is it you?', en_alt: [], es_alt: [], tokens: [{ surface: '¿Sos', form_ids: [second.id] }, { surface: 'vos?', form_ids: [] }], target_form_id: second.id, kind: 'sentence', difficulty: 1, audio_path: null },
+      formById,
+    ),
+  );
+  const slot = { id: 's1', lesson_id: 'l', ordinal: 1, kind: 'teach', form_id: second.id, sentence_id: null, tip_id: null, mode: null, review_count: null, scope: null };
+  const light = resolveSlots(she, unit, [slot], [], false, new Date(), true).items;
+  const full = resolveSlots(she, unit, [slot], [], false, new Date(), false).items;
+  assert.deepEqual(light.map((i) => i.mode), ['sentence_intro'], 'met in the sentence and nothing more');
+  assert.equal(full.length, 2, 'outside the shape: the sentence, then a question');
+  assert.equal(full[0].mode, 'sentence_intro');
+  // A word she has no other form of is taught in full, in the shape too.
+  const stranger = learner(known.filter((f) => f.lemma_id !== first.lemma_id).map((f) => state(f)));
+  stranger.sentences.push(she.sentences.at(-1));
+  assert.equal(resolveSlots(stranger, unit, [slot], [], false, new Date(), true).items.length, 2);
 });
 
 test('mistakes are the forms whose latest commit in two weeks was a miss', () => {

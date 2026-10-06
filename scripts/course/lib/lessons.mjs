@@ -596,7 +596,10 @@ export function planLessons({
     }
     for (const slot of body) push(lesson, slot);
     const spent = screensOf(body);
-    push(lesson, { kind: 'recap', review_count: Math.min(LESSON_ITEMS.max - spent, Math.max(LESSON_ITEMS.min - spent, 3)), scope: 'slang' });
+    // Never none: a lesson its new words already fill still closes on two of the old ones.
+    const review = Math.max(2, Math.min(LESSON_ITEMS.max - spent, Math.max(LESSON_ITEMS.min - spent, 3)));
+    push(lesson, { kind: 'recap', review_count: review, scope: 'slang' });
+    if (spent + review > LESSON_ITEMS.max) warnings.push(`${unit.slug} slang lesson: ${spent + review} screens, over the ${LESSON_ITEMS.max} a lesson may run.`);
   };
 
   if (template) {

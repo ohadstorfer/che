@@ -25,7 +25,8 @@
 //            the last run left it), so new classes never move old ones.
 //            History and the provinces wait for section 6. The swearing
 //            section is only for a unit called `puteadas`. A class is used once.
-//   Speaking none in section 1 (no verbs yet); from section 2, every unit.
+//   Speaking every unit. In section 1 the chat is a first-steps one: a handful
+//            of one-word exchanges (supabase/functions/_shared/hablar-unit.ts).
 //
 //   npm run course:extras -- [<snapshot date>] [--sql <migration file>] [--plan <markdown file> [--why <units>]]
 //
@@ -65,7 +66,7 @@ const EXTRA_KINDS = ['slang', 'culture', 'speak'];
 const TITLE = { slang: 'Slang', culture: 'Culture', speak: 'Speaking' };
 /** The first section with slang and with a chat: section 1 is A1.1. */
 const FIRST_SLANG_SECTION = 2;
-const FIRST_SPEAK_SECTION = 2;
+const FIRST_SPEAK_SECTION = 1;
 
 const sections = snap('sections').filter((s) => s.status === 'published');
 const sectionById = new Map(sections.map((s) => [s.id, s]));

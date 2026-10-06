@@ -77,6 +77,18 @@ const LEVEL_NOTES: Record<Band, string> = {
   B2: "B2 (upper intermediate). Full range, but keep replies short and clear. Challenge them a little: ask for opinions and reasons.",
 };
 
+/**
+ * A unit chat in section 1: she has been learning for days, not weeks, and
+ * knows a few dozen words, most of them not verbs. The chat is a handful of
+ * tiny exchanges she can win, not a conversation.
+ */
+const FIRST_STEPS = `FIRST STEPS — this overrides everything above about how much to say. The learner is a total beginner in their first days of Spanish.
+- They know ONLY the words listed below. Every word you say must be on that list (plus names and "¿", "?"). Never use a verb form that is not on the list.
+- Each reply: one sentence of at most 6 words, then ONE question they can answer with a single word or a phrase from the list (yes/no, or a choice between two things: "¿Café o mate?").
+- Take any answer warmly, even one word, even in English: react with one or two words ("¡Dale!", "¡Bien!") and move on. Never correct, never explain, never ask them to say more.
+- If they seem lost, offer the two possible answers again, shorter.
+- After four exchanges, say goodbye in two or three words and close the conversation (with the closing marker, as always).`;
+
 /** The per-chat system block: level, then the scene. Stable for the whole chat. */
 export function sessionBlock(opts: {
   level: Band;
@@ -96,11 +108,13 @@ export function sessionBlock(opts: {
         (s.goals?.length
           ? `\nWhat the learner should get to do in this scene: ${s.goals.map((g) => g.es).join(" / ")}. Never read these out or mention them: steer the conversation so each one comes up and the learner has the chance to do it.`
           : "") +
-        // A unit's scene: the forms its unit taught.
-        (s.words?.length
-          ? `\nWords the learner knows from this unit: ${s.words.join(", ")}. Prefer these words` +
-            (beginner ? ", and stay close to them: any other word must be very common and easy to guess." : ".")
-          : ""),
+        // A unit's scene: the forms its unit taught — or, in her first days, every word she has.
+        (s.first_steps
+          ? `\n${FIRST_STEPS}\nThe words the learner knows, all of them: ${(s.words ?? []).join(", ")}.`
+          : s.words?.length
+            ? `\nWords the learner knows from this unit: ${s.words.join(", ")}. Prefer these words` +
+              (beginner ? ", and stay close to them: any other word must be very common and easy to guess." : ".")
+            : ""),
     );
   } else if (opts.culture) {
     lines.push(

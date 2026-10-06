@@ -59,3 +59,7 @@ export interface VocabUnit {
  */
 export const drillable = (f: Pick<VocabForm, 'is_glue' | 'pos' | 'bound'>) =>
   !f.is_glue && f.pos !== 'propn' && !f.bound;
+
+/** The registers that make a word slang: its card says so when she first meets it, and the slang lesson reviews it. */
+export const SLANG_REGISTERS = new Set(['informal', 'lunfardo', 'vulgar']);
+export const isSlang = (f: Pick<VocabForm, 'register'>) => SLANG_REGISTERS.has(f.register);

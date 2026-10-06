@@ -149,7 +149,8 @@ for (const [slug, entry] of Object.entries(doc.units ?? {})) {
   // The unit must still fit its three teaching lessons with the new words in.
   const teach = [...own.filter(drillable), ...added.words.filter(drillable)];
   const why = unit.review_form_ids.length ? null : overflow(teach, lightForms(teach, knownBefore(unit)));
-  if (why && added.words.length) errors.push(`${slug}: with the new words, ${why}`);
+  // (When publishing, the words are already in the unit: course:template --preview --staged is the check.)
+  if (why && added.words.length && !publishFile) errors.push(`${slug}: with the new words, ${why}`);
 }
 
 for (const w of warnings) console.warn(`warn  ${w}`);

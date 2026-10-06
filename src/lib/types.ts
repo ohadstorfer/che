@@ -78,7 +78,7 @@ export interface LessonSlot {
   mode: ExerciseMode | null;
   review_count: number | null;
   /** recap: the unit's forms, or its whole section's. */
-  scope?: 'unit' | 'section' | null;
+  scope?: 'unit' | 'section' | 'slang' | null;
 }
 
 // ---------------------------------------------------------------------------

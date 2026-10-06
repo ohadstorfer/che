@@ -27,6 +27,7 @@ import { Panel } from '@/components/ui';
 import { type Anchor, WordPopover, measureAnchor } from '@/components/word-popover';
 import { playAudio, stopAudio, type AudioFailure } from '@/lib/audio';
 import { clausesOf } from '@/lib/course-rules/shape';
+import { isSlang } from '@/lib/course-rules/vocabulary';
 import {
   builtAnswerMatches,
   clauseOf,
@@ -282,7 +283,7 @@ function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
   const phrase = isPhrase(form.form);
   return (
     <Frame
-      prompt={phrase ? '✨ New phrase' : '✨ New word'}
+      prompt={`✨ New ${isSlang(form) ? 'slang ' : ''}${phrase ? 'phrase' : 'word'}`}
       verdict={null}
       canCheck
       checkLabel="Got it"
@@ -1881,7 +1882,7 @@ function SentenceIntro({
   const tappable = word ? (id: string) => id === word.id : (id: string) => id !== item.form.id;
 
   const prompt = word
-    ? '✨ New word: what does the sentence say?'
+    ? `✨ New ${isSlang(word) ? 'slang ' : ''}word: what does the sentence say?`
     : item.isRetry
       ? '🔁 What does the sentence say?'
       : 'What does the sentence say?';

@@ -9,7 +9,9 @@ import {
   pickReviewSentences,
   rungFor,
   tooLongToBuild,
+  loadSentencesById,
 } from './sentences';
+import { isSlang } from './course-rules/vocabulary';
 import {
   GAP_MODES,
   type LearnerData,
@@ -130,19 +132,25 @@ export async function buildLesson(
   lessonId: string,
   { canonical = false }: BuildLessonOptions = {},
 ): Promise<LessonData> {
-  const [{ lesson, unit, tips }, slotRows] = await Promise.all([
-    lessonWithUnit(lessonId),
+  // The lesson and its unit come from the course on the phone. Her data and the
+  // slots are then asked for together: each is a trip to the server, and
+  // neither needs the other's answer to start.
+  const { lesson, unit, tips, shaped } = await lessonWithUnit(lessonId);
+  const [slotRows, learner] = await Promise.all([
     readLessonRows<LessonSlot>('lesson_slots', lessonId),
+    // Sentences as far as this lesson's unit.
+    loadLearner(userId, { throughOrder: unit.course_order, unitIds: [unit.id] }),
   ]);
-  // Sentences as far as this lesson's unit, and any a slot names by id.
-  const data = await loadLearner(userId, {
-    throughOrder: unit.course_order,
-    unitIds: [unit.id],
-    sentenceIds: slotRows.flatMap((s) => (s.sentence_id ? [s.sentence_id] : [])),
-  });
+  // A slot's sentence is nearly always its unit's, so already here; one from
+  // further off is fetched now.
+  const have = new Set(learner.sentences.map((s) => s.id));
+  const wanted = slotRows.flatMap((s) => (s.sentence_id && !have.has(s.sentence_id) ? [s.sentence_id] : []));
+  const data = wanted.length
+    ? { ...learner, sentences: [...learner.sentences, ...(await loadSentencesById(wanted, learner.forms))] }
+    : learner;
 
   return {
-    ...resolveSlots(data, unit, slotRows, tips, canonical),
+    ...resolveSlots(data, unit, slotRows, tips, canonical, new Date(), shaped),
     lesson,
     unit,
   };
@@ -150,12 +158,13 @@ export async function buildLesson(
 
 /** A lesson, its unit and the unit's tips — from the cached course when the
  *  lesson is on it, else (a draft staff are previewing) straight from the DB. */
-export async function lessonWithUnit(lessonId: string): Promise<{ lesson: Lesson; unit: Unit; tips: Tip[] }> {
+export async function lessonWithUnit(lessonId: string): Promise<{ lesson: Lesson; unit: Unit; tips: Tip[]; shaped: boolean }> {
   const course = await loadCourse().catch(() => null);
   const onPath = course?.path.find((l) => l.id === lessonId);
   if (onPath && course) {
     const { unit, section, index, unitIndex, sectionIndex, opensUnit, opensSection, ...lesson } = onPath;
-    return { lesson, unit, tips: course.tipsByUnit.get(unit.id) ?? [] };
+    const kinds = course.path.filter((l) => l.unit.id === unit.id).map((l) => l.kind);
+    return { lesson, unit, tips: course.tipsByUnit.get(unit.id) ?? [], shaped: hasFixedShape(kinds) };
   }
   const { data: lesson } = await supabase.from('lessons').select('*').eq('id', lessonId).single();
   if (!lesson) throw new Error(`lesson ${lessonId} not found`);
@@ -164,8 +173,17 @@ export async function lessonWithUnit(lessonId: string): Promise<{ lesson: Lesson
     supabase.from('tips').select('*').eq('unit_id', (lesson as Lesson).unit_id),
   ]);
   if (!unit) throw new Error(`unit for lesson ${lessonId} not found`);
-  return { lesson: lesson as Lesson, unit: unit as Unit, tips: (tipRows ?? []) as Tip[] };
+  return { lesson: lesson as Lesson, unit: unit as Unit, tips: (tipRows ?? []) as Tip[], shaped: false };
 }
+
+/**
+ * Whether a unit has the fixed shape (scripts/course/lib/template.mjs), read
+ * off the kinds of its lessons in order: two lessons, the slang lesson, a
+ * third, practice. Its lessons are planned for the lighter introduction below,
+ * and its slang lesson is a round of the course's own exercises.
+ */
+const SHAPE_OPENS = ['lesson', 'lesson', 'slang', 'lesson', 'practice'];
+export const hasFixedShape = (kinds: string[]) => SHAPE_OPENS.every((kind, i) => kinds[i] === kind);
 
 /** The slot resolution itself, apart from any loading — pure given its inputs. */
 export function resolveSlots(
@@ -175,6 +193,8 @@ export function resolveSlots(
   tips: Tip[],
   canonical: boolean,
   now = new Date(),
+  /** The unit has the fixed shape: another form of a word she has is only shown in a sentence. */
+  shaped = false,
 ): SessionData {
   const nowIso = now.toISOString();
   const ladder = data.ladder ?? DEFAULT_LADDER;
@@ -241,7 +261,13 @@ export function resolveSlots(
         const unitSentences = inReach.filter((s) => s.unit_id === unit.id && !readHere.has(s.id));
         const intro = pickIntroSentence(form, unitSentences, known());
         if (intro) items.push(sentenceItem(data, intro, 'sentence_intro', form, form));
-        const first = itemsForForm(form, null, deck, ladder)[0];
+        // Another form of a word she already has — "alta" after "alto",
+        // "hablás" after "hablo" — is met in that sentence and nothing more:
+        // the lesson was planned with one screen for it (lessons.mjs, a light
+        // teach). With no sentence to carry it, the question is how it is met.
+        const k = known();
+        const sibling = shaped && data.forms.some((f) => f.lemma_id === form.lemma_id && f.id !== form.id && k.has(f.id));
+        const first = intro && sibling ? undefined : itemsForForm(form, null, deck, ladder)[0];
         if (first) items.push(first);
         introduced.add(form.id);
         break;
@@ -302,7 +328,7 @@ export function resolveSlots(
       case 'recap': {
         const count = slot.review_count ?? 0;
         if (count <= 0) break;
-        const scope = slot.scope ?? 'unit';
+        const scope: RecapScope = slot.scope === 'section' || slot.scope === 'slang' ? slot.scope : 'unit';
         if (canonical) {
           items.push(
             tipItem({
@@ -316,7 +342,16 @@ export function resolveSlots(
           );
           break;
         }
-        items.push(...recapItems(data, unit, scope, count, deck, seen, nowIso, ladder));
+        const recap = recapItems(data, unit, scope, count, deck, seen, nowIso, ladder);
+        items.push(...recap);
+        // A slang lesson early on, before she has met that much slang (or any):
+        // the rest of its review is the unit's own words, so the lesson is
+        // never a screen or two long, or empty.
+        if (scope === 'slang' && recap.length < count) {
+          const asked = new Set(recap.map((i) => i.form.id));
+          const more = recapItems(data, unit, 'unit', count, deck, seen, nowIso, ladder).filter((i) => !asked.has(i.form.id));
+          items.push(...more.slice(0, count - recap.length));
+        }
         break;
       }
     }
@@ -417,6 +452,9 @@ const MEANING_MODES: ExerciseMode[] = ['sentence_meaning', 'sentence_meaning_til
 /** The gaps a recap may turn into a build to make its production quota. */
 const UPGRADABLE_GAPS: ExerciseMode[] = ['sentence_gap', 'sentence_gap_tiles'];
 
+/** What a recap draws on: the unit, its section so far, or the slang she has met so far (the slang lesson). */
+type RecapScope = 'unit' | 'section' | 'slang';
+
 /**
  * A recap slot — the body of a unit check (learning-engine-spec §3.2): `count`
  * screens over the weakest forms of the unit (or of its whole section) that she
@@ -429,7 +467,7 @@ const UPGRADABLE_GAPS: ExerciseMode[] = ['sentence_gap', 'sentence_gap_tiles'];
 export function recapItems(
   data: LearnerData,
   unit: Unit,
-  scope: 'unit' | 'section',
+  scope: RecapScope,
   count: number,
   deck: Form[],
   seen: Map<string, number>,
@@ -439,7 +477,9 @@ export function recapItems(
   const inScope = (f: Form) =>
     scope === 'unit'
       ? f.unit_id === unit.id
-      : (f.section_id == null || f.section_id === unit.section_id) && f.unit_order <= unit.course_order;
+      : scope === 'slang'
+        ? isSlang(f) && f.unit_order <= unit.course_order
+        : (f.section_id == null || f.section_id === unit.section_id) && f.unit_order <= unit.course_order;
 
   const weak: { form: Form; state: FormState }[] = [];
   for (const state of data.states) {

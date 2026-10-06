@@ -35,6 +35,7 @@ import {
   sectionSummaries,
 } from '@/lib/course';
 import { jumpAllowed } from '@/lib/placement';
+import { hasFixedShape } from '@/lib/lesson';
 import { FREE_UNITS, usePremium } from '@/lib/premium';
 import {
   enablePartnerReminders,
@@ -1088,6 +1089,14 @@ export default function Home() {
     return last;
   }, [path]);
 
+  // Units with the fixed shape: their slang lesson teaches course words, so it
+  // is a lesson like the others, not a round of the Words tab.
+  const shapedUnits = useMemo(() => {
+    const kinds = new Map<string, string[]>();
+    for (const l of path) kinds.set(l.unit.id, [...(kinds.get(l.unit.id) ?? []), l.kind]);
+    return new Set([...kinds].filter(([, k]) => hasFixedShape(k)).map(([id]) => id));
+  }, [path]);
+
   // Nothing to place: the launch splash has waited long enough.
   useEffect(() => {
     if (data && data.course.path.length === 0) markBootReady();
@@ -1177,7 +1186,7 @@ export default function Home() {
       ? router.push(`/story?lesson=${lesson.id}`)
       : lesson.kind === 'speak'
       ? router.push(`/hablar-brief?kind=unit&lesson=${lesson.id}`)
-      : lesson.kind === 'slang'
+      : lesson.kind === 'slang' && !shapedUnits.has(lesson.unit.id)
       ? router.push(`/argentine-round?lesson=${lesson.id}`)
       : lesson.kind === 'culture'
       ? router.push(`/culture-class?lesson=${lesson.id}`)

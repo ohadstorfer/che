@@ -40,6 +40,14 @@ const SCENE_SYSTEM = `You write the scene for a two-minute spoken role-play betw
 - opener: Pancho's first line, one or two short sentences that start the scene and end with an easy question the learner can answer with the unit's words.
 - keyterms: up to ten Spanish words or names likely to come up (for the speech recogniser).`;
 
+/** Added for a unit of section 1: the scene of someone in their first days. */
+const FIRST_STEPS_SCENE = `FIRST STEPS. This learner is a total beginner in their first days: they know ONLY the words listed under "Every word the learner knows". This changes the rules above:
+- Every Spanish word in the opener and the key phrases must be on that list. No other word, no verb form that is not there.
+- goals: exactly ONE, the smallest thing the unit lets them do (say hello, order one coffee).
+- key_phrases: exactly three, of one to four words each.
+- opener: one sentence of at most six words, then a question they can answer with ONE word or with a key phrase (yes/no, or a choice between two things: "¿Café o mate?").
+- setting_es is still one short sentence, as simple as the list allows; setting_en carries the meaning.`;
+
 const SCENE_SCHEMA = {
   type: "object",
   additionalProperties: false,
@@ -91,6 +99,8 @@ type Written = {
 };
 
 const UNIT_WORDS = 40;
+/** Section 1 teaches about three hundred forms: all of them fit. */
+const FIRST_STEPS_WORDS = 400;
 
 type Form = { form: string; gloss_en: string | null };
 const unitForms = (db: SupabaseClient, unitId: string) =>
@@ -119,11 +129,28 @@ export async function unitScenario(
   }
 
   const [{ data: unitRow }, { data: forms }, { data: sentences }] = await Promise.all([
-    db.from("units").select("title_en, summary_en, grammar_focus").eq("id", unit.id).maybeSingle(),
+    db.from("units").select("title_en, summary_en, grammar_focus, course_order, sections!inner(ordinal)").eq("id", unit.id).maybeSingle(),
     unitForms(db, unit.id),
     db.from("sentences").select("es, en").eq("unit_id", unit.id).eq("status", "published").limit(12),
   ]);
+  // In section 1 she has a few dozen words in all: the scene is written with
+  // every one of them in hand, and with nothing else.
+  // deno-lint-ignore no-explicit-any
+  const firstSteps = (unitRow as any)?.sections?.ordinal === 1;
+  let known: string[] = [];
+  if (firstSteps) {
+    const { data: upTo } = await db
+      .from("forms")
+      .select("form, units!inner(course_order, status)")
+      .eq("status", "published")
+      .eq("units.status", "published")
+      .lte("units.course_order", unitRow?.course_order ?? 0)
+      .limit(FIRST_STEPS_WORDS);
+    known = [...new Set((upTo ?? []).map((f) => f.form.trim()).filter(Boolean))];
+  }
   const input = [
+    firstSteps ? FIRST_STEPS_SCENE : "",
+    firstSteps ? `Every word the learner knows: ${known.join(", ")}` : "",
     `Level: ${level}. Grammar allowed: ${LEVEL_GRAMMAR[level]}`,
     `Unit goal (can-do): ${unitRow?.title_en ?? unit.title_en}`,
     unitRow?.summary_en ? `Unit summary: ${unitRow.summary_en}` : "",
@@ -170,7 +197,8 @@ export async function unitScenario(
     key_phrases: value.key_phrases.slice(0, 6).map((p) => ({ es: p.es, en: p.en, audio: null })),
     opener: { es: value.opener.es, en: value.opener.en, audio },
     keyterms: value.keyterms.slice(0, 10),
-    words: unitWords(forms),
+    words: firstSteps ? known : unitWords(forms),
+    ...(firstSteps ? { first_steps: true } : {}),
   };
   // Two learners opening the same new scene at once: the first one kept wins.
   const { error } = await db.from("unit_scenarios").insert({ unit_id: unit.id, level, scenario });
