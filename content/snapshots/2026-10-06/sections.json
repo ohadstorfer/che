@@ -1,0 +1,17 @@
+[
+{"cefr":"A1.1","id":1,"ordinal":1,"slug":"first-words","status":"published","title_en":"First words","updated_at":"2026-09-25 17:43:48.241104+00"},
+{"cefr":"A1.2","id":2,"ordinal":2,"slug":"everyday-things","status":"published","title_en":"Everyday things","updated_at":"2026-09-25 18:18:25.810405+00"},
+{"cefr":"A1.3","id":3,"ordinal":3,"slug":"out-and-about","status":"published","title_en":"Out and about","updated_at":"2026-10-03 21:25:29.313135+00"},
+{"cefr":"A2.1","id":4,"ordinal":4,"slug":"what-happened","status":"published","title_en":"Now and yesterday","updated_at":"2026-10-04 06:55:39.596555+00"},
+{"cefr":"A2.2","id":5,"ordinal":5,"slug":"when-i-was-a-kid","status":"published","title_en":"Stories and going out","updated_at":"2026-10-04 06:55:39.596555+00"},
+{"cefr":"A2.3","id":6,"ordinal":6,"slug":"plans-and-favours","status":"published","title_en":"Settling in","updated_at":"2026-10-04 06:55:39.596555+00"},
+{"cefr":"A2.4","id":7,"ordinal":7,"slug":"real-life","status":"published","title_en":"Real life","updated_at":"2026-10-03 20:44:52.719272+00"},
+{"cefr":"B1.1","id":8,"ordinal":8,"slug":"wishes-and-advice","status":"published","title_en":"Wishes and advice","updated_at":"2026-10-03 20:44:52.719272+00"},
+{"cefr":"B1.2","id":9,"ordinal":9,"slug":"if-i-were-you","status":"published","title_en":"What if","updated_at":"2026-10-04 06:55:39.596555+00"},
+{"cefr":"B1.3","id":10,"ordinal":10,"slug":"stories-and-opinions","status":"published","title_en":"Mishaps and stories","updated_at":"2026-10-04 06:55:39.596555+00"},
+{"cefr":"B2.1","id":11,"ordinal":11,"slug":"making-your-case","status":"published","title_en":"Making your case","updated_at":"2026-10-03 20:44:52.719272+00"},
+{"cefr":"B2.2","id":12,"ordinal":12,"slug":"between-the-lines","status":"published","title_en":"Between the lines","updated_at":"2026-10-03 21:32:43.613296+00"},
+{"cefr":"B2.3","id":13,"ordinal":13,"slug":"in-other-words","status":"published","title_en":"At work","updated_at":"2026-10-04 06:55:39.596555+00"},
+{"cefr":"B2.4","id":14,"ordinal":14,"slug":"news-and-the-street","status":"published","title_en":"The news and the city","updated_at":"2026-10-04 06:55:39.596555+00"},
+{"cefr":"B2.5","id":15,"ordinal":15,"slug":"like-a-local","status":"published","title_en":"Like a local","updated_at":"2026-10-03 20:44:52.719272+00"}
+]

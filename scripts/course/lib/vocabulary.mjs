@@ -4,9 +4,15 @@
 // the linter and the lesson builder see.
 import { queryLinked } from './db.mjs';
 import { ids } from './ids.mjs';
+import { hasTemplate } from './template.mjs';
 
-/** Lessons the outline doesn't hold: stories, and the speak · slang · culture classes every unit gets. */
+/**
+ * Lessons the outline doesn't hold: stories, and the speak · slang · culture
+ * classes every unit gets. A unit with the fixed shape (template.mjs) has a
+ * slang lesson that teaches course words, so that one is planned like the rest.
+ */
 const OFF_OUTLINE = new Set(['story', 'speak', 'slang', 'culture']);
+const offOutline = (lesson, template) => OFF_OUTLINE.has(lesson.kind) && !(template && lesson.kind === 'slang');
 
 const live = (r) => r.status !== 'retired';
 const byOrdinal = (a, b) => a.ordinal - b.ordinal;
@@ -14,11 +20,14 @@ const byOrdinal = (a, b) => a.ordinal - b.ordinal;
 /**
  * @param rows  the content tables as stored: sections, units, lessons, tips,
  *              lemmas, forms (with `position`).
+ * @param template  which sections (by ordinal) have the fixed shape; a preview
+ *              passes its own to plan a section as if it already had it.
  * @returns     { sections, units, lemmas, forms } like loadOutline().outline,
  *              without what was retired. Units carry their teaching and check
  *              lessons (not stories) and their tips in authored order.
  */
-export function outlineFromRows(rows) {
+export function outlineFromRows(rows, { template = hasTemplate } = {}) {
+  const sectionOrdinal = new Map(rows.sections.map((s) => [s.id, s.ordinal]));
   const sections = rows.sections
     .map(({ id, ordinal, slug, title_en, cefr, status }) => ({ id, ordinal, slug, title_en, cefr, status }))
     .sort(byOrdinal);
@@ -31,8 +40,10 @@ export function outlineFromRows(rows) {
         for (let k = 0; k < 64; k++) if (ids.tip(u.slug, k) === t.id) return k;
         return 64;
       };
+      const shaped = template(sectionOrdinal.get(u.section_id));
       return {
         id: u.id,
+        template: shaped,
         section_id: u.section_id,
         ordinal: u.ordinal,
         course_order: u.course_order,
@@ -46,7 +57,7 @@ export function outlineFromRows(rows) {
         sample: null,
         lessons: rows.lessons
           // Stories and a unit's extra classes (unit-extras.mjs) have no slots to plan.
-          .filter((l) => l.unit_id === u.id && live(l) && !OFF_OUTLINE.has(l.kind))
+          .filter((l) => l.unit_id === u.id && live(l) && !offOutline(l, shaped))
           .sort(byOrdinal)
           .map(({ id, unit_id, ordinal, title_en, kind, status }) => ({ id, unit_id, ordinal, title_en, kind, status })),
         tips: rows.tips

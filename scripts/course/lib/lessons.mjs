@@ -5,6 +5,7 @@
 // check. How hard the work is follows the section's level (`levelOf`). Pure;
 // the reviewer reorders the proposal in the dashboard.
 import { FORMS_PER_LESSON, drillable } from './outline.mjs';
+import { COST, LESSON_WORDS, dealWords, lightForms, overflow } from './template.mjs';
 
 /**
  * The course's levels, easiest first. A section's `cefr` ("B1.2") says which
@@ -118,9 +119,13 @@ const mentions = (bold, form) => [form.form, form.lemma].some((w) => w && bold.s
  */
 const TEACH_SCREENS = 2;
 
-/** What a slot costs the budget: one screen, unless it stands for several. */
+/**
+ * What a slot costs the budget: one screen, unless it stands for several. A
+ * `teach` marked `light` — another form of a word she has met (template.mjs) —
+ * is the one screen that shows it in a sentence.
+ */
 const itemsOf = (slot) =>
-  slot.kind === 'review' || slot.kind === 'recap' ? (slot.review_count ?? 0) : slot.kind === 'teach' ? TEACH_SCREENS : 1;
+  slot.kind === 'review' || slot.kind === 'recap' ? (slot.review_count ?? 0) : slot.kind === 'teach' ? (slot.light ? 1 : TEACH_SCREENS) : 1;
 const screensOf = (list) => list.reduce((n, slot) => n + itemsOf(slot), 0);
 
 /**
@@ -132,6 +137,8 @@ const screensOf = (list) => list.reduce((n, slot) => n + itemsOf(slot), 0);
  * @param level      the section's level, 0 for A1 (`levelOf`)
  * @param levelOfSentence  the level of the unit an earlier sentence was written for
  * @param owed       how much one earlier form is owed a comeback (`debt` is a sentence's sum)
+ * @param slang      ids of the unit's forms its slang lesson teaches (a unit with the
+ *                   fixed shape, `unit.template`); the teaching lessons leave them to it
  * @returns {{ slots, warnings }}
  */
 export function planLessons({
@@ -145,8 +152,12 @@ export function planLessons({
   grammar = null,
   level = 0,
   levelOfSentence = () => level,
+  slang = new Set(),
 }) {
   const warnings = [];
+  // The fixed shape (template.mjs): three teaching lessons whatever the unit
+  // teaches, a slang lesson between them, one practice, the check.
+  const template = unit.template === true;
   // From B2 the gap is typed, wherever a lesson asks for one.
   const gapAs = level >= 3 ? TYPED : 'sentence_gap';
   // Typing a word is production she can only do once the letters of the
@@ -155,12 +166,20 @@ export function planLessons({
   const formById = new Map(forms.map((f) => [f.id, f]));
   // A practice unit teaches nothing: its words are the earlier ones it reviews.
   const review = new Set(unit.review_form_ids ?? []);
-  const unitForms = review.size ? forms.filter((f) => review.has(f.id)) : forms.filter((f) => f.unit_id === unit.id && drillable(f));
-  const teaching = unit.lessons.filter((l) => l.kind === 'lesson' || l.kind === 'checkpoint');
+  const ownForms = forms.filter((f) => f.unit_id === unit.id && drillable(f));
+  const slangForms = template ? ownForms.filter((f) => slang.has(f.id)) : [];
+  const unitForms = review.size ? forms.filter((f) => review.has(f.id)) : ownForms.filter((f) => !slangForms.includes(f));
+  // A practice unit with the shape has teaching lessons like any other, and
+  // nothing to teach in them: they practise.
+  const practiceUnit = template && review.size > 0;
+  const teaching = practiceUnit ? [] : unit.lessons.filter((l) => l.kind === 'lesson' || l.kind === 'checkpoint');
   const check = unit.lessons.find((l) => l.kind === 'review');
   if (!teaching.length && !review.size) return { slots: [], warnings: [`${unit.slug}: no teaching lessons`] };
 
   const taught = new Set(forms.filter((f) => f.unit_order < unit.course_order && drillable(f)).map((f) => f.id));
+  // Forms taught the light way: another form of a word she already has.
+  const knownLemmas = new Set(forms.filter((f) => f.unit_order < unit.course_order && drillable(f)).map((f) => f.lemma_id));
+  const light = template ? lightForms([...unitForms, ...slangForms], knownLemmas) : new Map();
   const contentOf = (s) => [...new Set(s.tokens.flatMap((t) => t.form_ids))].filter((id) => formById.has(id) && drillable(formById.get(id)));
   const sayable = (s) => contentOf(s).every((id) => taught.has(id));
   const used = new Map(); // sentence id -> times used
@@ -194,6 +213,8 @@ export function planLessons({
       mode: slot.mode ?? null,
       review_count: slot.review_count ?? null,
       scope: slot.scope ?? null,
+      // Not a column: how many screens a teach slot plays as (`itemsOf`).
+      ...(slot.light ? { light: true } : {}),
     });
 
   // Forms over lessons, as even as they divide. A unit whose words don't fit at
@@ -201,7 +222,9 @@ export function planLessons({
   // sentences unsayable — but it says how many lessons it actually wants.
   const n = unitForms.length;
   const sizes = teaching.map((_, i) => Math.floor(n / teaching.length) + (i < n % teaching.length ? 1 : 0));
-  if (sizes.length && sizes[0] > FORMS_PER_LESSON) {
+  const tooBig = template && !review.size ? overflow(unitForms, light) : null;
+  if (tooBig) warnings.push(`${unit.slug}: ${tooBig} — the unit wants splitting in two.`);
+  if (!template && sizes.length && sizes[0] > FORMS_PER_LESSON) {
     warnings.push(
       `${unit.slug}: ${n} words over ${teaching.length} teaching lessons is ${sizes[0]} a lesson, past the ceiling of ` +
         `${FORMS_PER_LESSON}. The lessons still fit ${LESSON_ITEMS.max} screens, but the words past the ceiling are ` +
@@ -209,7 +232,7 @@ export function planLessons({
     );
   }
   let at = 0;
-  const chunks = sizes.map((size) => unitForms.slice(at, (at += size)));
+  const chunks = template && teaching.length ? dealWords(unitForms, light, teaching.length) : sizes.map((size) => unitForms.slice(at, (at += size)));
 
   // A tip opens the first lesson that teaches a word it shows in bold, so
   // "al lado de" is explained where it is taught and not four lessons early.
@@ -229,9 +252,47 @@ export function planLessons({
     if (i < chunks.length && li !== undefined) tipAt.set(li, tips[i]);
   }
 
-  teaching.forEach((lesson, li) => {
+  // Earlier sentences come back from inside the window (RECYCLE_BANDS): the
+  // ones owed the most, and of a few of those the longest — past A1, where
+  // the one owed the most is simply taken.
+  const near = (s) => levelOfSentence(s) > level - RECYCLE_BANDS;
+  const recycledHere = new Set(); // earlier sentences this unit already brought back
+  const take = (pool, worth, n) => {
+    const out = [];
+    const left = pool.filter((s) => !recycledHere.has(s.id) && worth(s) > 0).sort((a, b) => worth(b) - worth(a));
+    while (out.length < n && left.length) {
+      let at = 0;
+      for (let i = 1; i < Math.min(level ? PICK_AMONG : 1, left.length); i++) if (words(left[i]) > words(left[at])) at = i;
+      const [s] = left.splice(at, 1);
+      recycledHere.add(s.id);
+      out.push(s);
+    }
+    return out;
+  };
+  // An old word no sentence in the window carries can only come back in a
+  // sentence of its own: those are worth what such words are owed.
+  let carried = null; // forms the window's sentences carry
+  const stranded = (s) => {
+    carried ??= new Set([...sentences, ...earlier.filter(near)].flatMap(contentOf));
+    return contentOf(s).reduce((sum, id) => sum + (carried.has(id) ? 0 : owed(id)), 0);
+  };
+  const recycle = (n, old = 0) => {
+    // The nearest level that has such a sentence gives it.
+    const far = [];
+    for (let b = level - RECYCLE_BANDS; b >= 0 && far.length < old; b--) {
+      far.push(...take(earlier.filter((s) => levelOfSentence(s) === b), stranded, old - far.length));
+    }
+    return [...take(earlier.filter(near), debt, n - far.length), ...far];
+  };
+
+  const costOfChunk = (chunk) => chunk.reduce((sum, f) => sum + (light.get(f.id) ?? COST.full), 0);
+  const planTeaching = (lesson, li) => {
     // What always closes the lesson, reserved before anything else is spent.
-    const hasReview = li > 0 && unit.course_order > 1;
+    // With the shape a lesson can hold as much as LESSON_COST to teach, and one
+    // that full gives up its review: practice, the slang lesson and the check
+    // all bring old words back, and the new ones are what this lesson is for.
+    const crowded = template && costOfChunk(chunks[li]) > LESSON_ITEMS.max - 6;
+    const hasReview = li > 0 && unit.course_order > 1 && !crowded;
     const hasMatch = chunks.slice(0, li + 1).flat().length >= 4;
     const tail = (hasReview ? REVIEW_COUNT : 0) + (hasMatch ? 1 : 0);
 
@@ -286,7 +347,10 @@ export function planLessons({
           taughtHere.add(id);
         }
       }
-      ramp.push({ kind: 'teach', form_id: form.id });
+      // Another form of a word she has: shown in a sentence (the app picks
+      // it, src/lib/lesson.ts `case 'teach'`), then straight to the gap.
+      const isLight = light.has(form.id);
+      ramp.push({ kind: 'teach', form_id: form.id, ...(isLight ? { light: true } : {}) });
       taught.add(form.id);
       taughtHere.add(form.id);
       // Met for its meaning in the first sentence written for it — or, when
@@ -295,22 +359,30 @@ export function planLessons({
       const intro =
         byLevel.find((s) => s.target_form_id === form.id && fresh(s)) ??
         byLevel.find((s) => fresh(s) && contentOf(s).includes(form.id));
-      if (intro) drill(ramp, intro, 'sentence_meaning');
-      else warnings.push(`${unit.slug}: no sayable sentence introduces "${form.form}"`);
+      if (intro && !isLight) drill(ramp, intro, 'sentence_meaning');
+      else if (!intro) warnings.push(`${unit.slug}: no sayable sentence introduces "${form.form}"`);
       // Then the gap — and this is the screen a crowded lesson gives up first.
       // Teaching a word and meeting it are what the lesson is for; the gap is
       // practice, and practice is also what the unit check and SRS are for.
       // Giving it up keeps the lesson one sitting instead of letting the last
       // words of an oversized unit push it past twenty screens.
-      const rest = chunks[li].slice(chunks[li].indexOf(form) + 1).filter((f) => !taught.has(f.id)).length;
+      const rest = chunks[li].slice(chunks[li].indexOf(form) + 1).filter((f) => !taught.has(f.id));
+      // What the words still to come need at the least: a light one its gap too.
+      const restScreens = rest.reduce((sum, f) => sum + (light.get(f.id) ?? COST.full), 0);
+      // A light form has had no screen of the planner's yet: its gap is how
+      // it is drilled, so it is kept where a full form's would be given up —
+      // unless it only agrees ("alta" after "alto"), which being shown covers.
+      const mayDrop = !isLight || light.get(form.id) === COST.pattern;
       const next =
-        planned() + 1 + (TEACH_SCREENS + 1) * rest + production > LESSON_ITEMS.max
+        mayDrop && planned() + 1 + restScreens + production > LESSON_ITEMS.max
           ? undefined
-          : toDrill.find((s) => s.target_form_id === form.id && fresh(s));
+          : (toDrill.find((s) => s.target_form_id === form.id && fresh(s)) ??
+            (isLight ? toDrill.find((s) => fresh(s) && contentOf(s).includes(form.id)) : undefined));
       if (next) {
         drill(ramp, next, gapAs);
         gapped.push(next);
       }
+      if (isLight) continue;
       if (intro && next) read.push(intro);
       else if (intro) read.unshift(intro);
     }
@@ -359,6 +431,13 @@ export function planLessons({
         continue;
       }
       const again = metHere.filter((s) => room(s) && rungOf(s) < RAMP.length - 1).sort((a, b) => rungOf(a) - rungOf(b))[0];
+      // With the shape a unit keeps all its lessons however little it teaches:
+      // one with nothing of its own left brings back earlier units' sentences.
+      const back = !again && template ? recycle(1)[0] : undefined;
+      if (back) {
+        drill(want === 'sentence_build' && buildable(back) ? make : pads, back, want === 'sentence_build' && buildable(back) ? want : gapAs);
+        continue;
+      }
       if (!again) {
         warnings.push(
           `${unit.slug} lesson ${lesson.ordinal}: ${planned()} screens, wants ${LESSON_ITEMS.min} — ` +
@@ -376,7 +455,7 @@ export function planLessons({
     if (planned() > LESSON_ITEMS.max) {
       warnings.push(`${unit.slug} lesson ${lesson.ordinal}: ${planned()} screens, over the ${LESSON_ITEMS.max} a lesson may run.`);
     }
-  });
+  };
 
   // Practice lessons teach nothing new: they are the unit's words again, in
   // sentences she hasn't met yet, before the next unit leans on them. Each
@@ -388,49 +467,23 @@ export function planLessons({
   //   recycled  sentences of earlier units carrying words owed a comeback
   //   typed     sentences she has met, the word typed rather than picked
   //   tiles     the gapped sentences again, built — in reverse order
-  const practice = unit.lessons.filter((l) => l.kind === 'practice' && l.title_en !== GRAMMAR_TITLE);
-  const drills = unit.lessons.filter((l) => l.kind === 'practice' && l.title_en === GRAMMAR_TITLE);
+  const practice = unit.lessons.filter((l) => l.kind === 'practice' && (template || l.title_en !== GRAMMAR_TITLE));
+  const drills = template ? [] : unit.lessons.filter((l) => l.kind === 'practice' && l.title_en === GRAMMAR_TITLE);
   const rungs = new Map(); // sentence id -> highest rung reached in any lesson
-  for (const s of slots) {
-    if (s.sentence_id) rungs.set(s.sentence_id, Math.max(rungs.get(s.sentence_id) ?? 0, rungIndex(s.mode)));
-  }
-  // Earlier sentences come back from inside the window (RECYCLE_BANDS): the
-  // ones owed the most, and of a few of those the longest — past A1, where
-  // the one owed the most is simply taken.
-  const near = (s) => levelOfSentence(s) > level - RECYCLE_BANDS;
-  const recycledHere = new Set(); // earlier sentences this unit already brought back
-  const take = (pool, worth, n) => {
-    const out = [];
-    const left = pool.filter((s) => !recycledHere.has(s.id) && worth(s) > 0).sort((a, b) => worth(b) - worth(a));
-    while (out.length < n && left.length) {
-      let at = 0;
-      for (let i = 1; i < Math.min(level ? PICK_AMONG : 1, left.length); i++) if (words(left[i]) > words(left[at])) at = i;
-      const [s] = left.splice(at, 1);
-      recycledHere.add(s.id);
-      out.push(s);
+  const climbed = () => {
+    for (const s of slots) {
+      if (s.sentence_id) rungs.set(s.sentence_id, Math.max(rungs.get(s.sentence_id) ?? 0, rungIndex(s.mode)));
     }
-    return out;
   };
-  // An old word no sentence in the window carries can only come back in a
-  // sentence of its own: those are worth what such words are owed.
-  let carried = null; // forms the window's sentences carry
-  const stranded = (s) => {
-    carried ??= new Set([...sentences, ...earlier.filter(near)].flatMap(contentOf));
-    return contentOf(s).reduce((sum, id) => sum + (carried.has(id) ? 0 : owed(id)), 0);
-  };
-  const recycle = (n, old = 0) => {
-    // The nearest level that has such a sentence gives it.
-    const far = [];
-    for (let b = level - RECYCLE_BANDS; b >= 0 && far.length < old; b--) {
-      far.push(...take(earlier.filter((s) => levelOfSentence(s) === b), stranded, old - far.length));
-    }
-    return [...take(earlier.filter(near), debt, n - far.length), ...far];
-  };
-
-  practice.forEach((lesson, pi) => {
+  // With the shape, a unit's one practice is its grammar practice too: the
+  // sentences that carry the unit's grammar go first, its own and earlier ones.
+  const focus = template && grammar ? grammar.formIds : null;
+  const carriesFocus = (s) => !!focus && contentOf(s).some((id) => focus.has(id));
+  const planPractice = (lesson, pi, ownTip = null) => {
+    climbed();
     // A practice unit has no teaching lesson to show its tips: its practice
     // lessons open on them, one each.
-    const tip = review.size ? tips[pi] : null;
+    const tip = ownTip ?? (review.size ? tips[pi] : null);
     const head = [];
     if (tip) head.push({ kind: 'tip', tip_id: tip.id });
     head.push({ kind: 'review', review_count: REVIEW_COUNT });
@@ -444,12 +497,16 @@ export function planLessons({
 
     const gaps = [];
     for (let i = 0; i < PRACTICE_GAPS; i++) {
-      const s = owing(toPractise.filter((x) => fresh(x) && !inLesson.has(x.id)).slice(0, PICK_AMONG));
+      const open = toPractise.filter((x) => fresh(x) && !inLesson.has(x.id));
+      const s = owing((focus && open.some(carriesFocus) ? open.filter(carriesFocus) : open).slice(0, PICK_AMONG));
       if (!s) break;
       gaps.push(s);
       inLesson.add(s.id);
     }
-    const back = recycle(PRACTICE_RECYCLED + (PRACTICE_GAPS - gaps.length), pi === 0 ? PRACTICE_OLD : 0);
+    const wantBack = PRACTICE_RECYCLED + (PRACTICE_GAPS - gaps.length);
+    // Half of what comes back carries the grammar, where earlier units have it.
+    const onGrammar = focus ? take(earlier.filter((x) => near(x) && carriesFocus(x)), (x) => 1 + debt(x), Math.ceil(wantBack / 2)) : [];
+    const back = [...onGrammar, ...recycle(wantBack - onGrammar.length, pi === 0 ? PRACTICE_OLD : 0)];
     // Typed: what the teaching lessons showed, least practised first — one
     // more of them from B1.
     const met = toPractise
@@ -487,7 +544,62 @@ export function planLessons({
     for (const slot of head) push(lesson, slot);
     for (const slot of body) push(lesson, slot);
     push(lesson, { kind: 'match' });
-  });
+  };
+
+  // The slang lesson (a unit with the shape): its new Argentine words taught
+  // like any other — card, meaning, gap, then one of them typed or built — and
+  // the rest of the lesson is the slang she already knows, weakest first
+  // (`recap` with scope 'slang', src/lib/lesson.ts). A unit with no new slang
+  // word is that review alone.
+  const planSlang = (lesson) => {
+    const body = [];
+    const shown = [];
+    for (const form of slangForms) {
+      if (taught.has(form.id)) continue;
+      const isLight = light.has(form.id);
+      body.push({ kind: 'teach', form_id: form.id, ...(isLight ? { light: true } : {}) });
+      taught.add(form.id);
+      const own = byLevel.filter((s) => fresh(s) && (s.target_form_id === form.id || contentOf(s).includes(form.id)));
+      own.sort((a, b) => (b.target_form_id === form.id) - (a.target_form_id === form.id));
+      const [intro, next] = isLight ? [null, own[0]] : own;
+      if (!own.length) warnings.push(`${unit.slug}: no sayable sentence introduces "${form.form}"`);
+      for (const [s, mode] of [[intro, 'sentence_meaning'], [next, gapAs]]) {
+        if (!s) continue;
+        body.push({ kind: 'drill', sentence_id: s.id, mode });
+        use(s);
+        shown.push(s);
+      }
+    }
+    // One screen of production for each new word, the longest it can build.
+    for (const form of slangForms) {
+      const s = [...shown].reverse().find((x) => contentOf(x).includes(form.id) && buildable(x) && body.filter((b) => b.sentence_id === x.id).length < SHOWN_MAX);
+      if (s && !body.some((b) => b.sentence_id === s.id && b.mode === 'sentence_build')) {
+        body.push({ kind: 'drill', sentence_id: s.id, mode: typing && level ? TYPED : 'sentence_build' });
+      }
+    }
+    for (const slot of body) push(lesson, slot);
+    const spent = screensOf(body);
+    push(lesson, { kind: 'recap', review_count: Math.min(LESSON_ITEMS.max - spent, Math.max(LESSON_ITEMS.min - spent, 3)), scope: 'slang' });
+  };
+
+  if (template) {
+    // In the order she takes them: what a lesson may use is what the ones
+    // before it taught.
+    let li = 0;
+    let pi = 0;
+    for (const lesson of [...unit.lessons].sort((a, b) => a.ordinal - b.ordinal)) {
+      if (lesson.kind === 'slang') planSlang(lesson);
+      else if (practiceUnit ? lesson.kind === 'lesson' || lesson.kind === 'practice' : lesson.kind === 'practice') planPractice(lesson, pi++);
+      else if (lesson.kind === 'lesson' && chunks[li]?.length === 0 && li > 0) {
+        // Nothing left to teach: the lesson practises, on the tip it would have opened with.
+        planPractice(lesson, pi++, tipAt.get(li) ?? null);
+        li += 1;
+      } else if (lesson.kind === 'lesson') planTeaching(lesson, li++);
+    }
+  } else {
+    teaching.forEach((lesson, li) => planTeaching(lesson, li));
+    practice.forEach((lesson, pi) => planPractice(lesson, pi));
+  }
 
   // Grammar practice (docs/course/grammar-practice.yaml): the unit's grammar
   // on its own, in sentences from this unit and earlier ones that carry it.
@@ -571,13 +683,13 @@ export function planLessons({
     // the section so far, which is what it has been practising.
     push(check, {
       kind: 'recap',
-      review_count: Math.min(LESSON_ITEMS.max - builds.length, Math.max(LESSON_ITEMS.min - builds.length, unitForms.length)),
+      review_count: Math.min(LESSON_ITEMS.max - builds.length, Math.max(LESSON_ITEMS.min - builds.length, unitForms.length + slangForms.length)),
       scope: review.size ? 'section' : 'unit',
     });
     for (const s of builds) push(check, { kind: 'drill', sentence_id: s.id, mode: 'sentence_build' });
   }
 
-  for (const f of unitForms) {
+  for (const f of [...unitForms, ...slangForms]) {
     const count = sentences.filter((s) => contentOf(s).includes(f.id)).length;
     if (count < 3) warnings.push(`${unit.slug}: "${f.form}" has ${count} approved sentence(s); lessons want 3 or more`);
   }
@@ -630,8 +742,9 @@ export function lintLessons({ unit, slots, sentenceById, formById, level = 0, le
     const drills = own.filter((s) => s.kind === 'drill' && sentenceById.has(s.sentence_id));
     const carries = (slot, formId) => sentenceById.get(slot.sentence_id).tokens.some((t) => (t.form_ids ?? []).includes(formId));
     const screens = screensOf(own);
-    if (l.kind === 'lesson' && teach.length > FORMS_PER_LESSON) {
-      say('lesson.density', `${teach.length} new forms (the ceiling is ${FORMS_PER_LESSON})`);
+    const newWords = new Set(teach.map((s) => formById.get(s.form_id)?.lemma_id ?? s.form_id)).size;
+    if (unit.template ? newWords > LESSON_WORDS.max : l.kind === 'lesson' && teach.length > FORMS_PER_LESSON) {
+      say('lesson.density', unit.template ? `${newWords} new words (the ceiling is ${LESSON_WORDS.max})` : `${teach.length} new forms (the ceiling is ${FORMS_PER_LESSON})`);
     }
     if (screens < LESSON_ITEMS.min || screens > LESSON_ITEMS.max) {
       say('lesson.length', `${screens} screens (want ${LESSON_ITEMS.min}–${LESSON_ITEMS.max})`);
@@ -644,6 +757,8 @@ export function lintLessons({ unit, slots, sentenceById, formById, level = 0, le
     }
     // A word on a card and in no sentence after it has not been taught.
     for (const t of teach) {
+      // A light teach is itself the word in a sentence (src/lib/lesson.ts).
+      if (t.light) continue;
       const after = own.slice(own.indexOf(t) + 1).filter((s) => drills.includes(s));
       if (!after.some((s) => carries(s, t.form_id))) {
         say('lesson.unused', `${unit.slug} teaches "${formById.get(t.form_id)?.form ?? t.form_id}" and no sentence after it uses it`);

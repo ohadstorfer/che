@@ -8,7 +8,7 @@
 // as much as the words it carries that are owed one (`debt`). The planner
 // prefers such sentences wherever it has a choice, and every practice lesson
 // spends a few screens on earlier units' sentences picked for exactly this.
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { parse } from 'yaml';
 
 import { queryLinked } from './db.mjs';
@@ -23,6 +23,19 @@ const GAPS = [1, 3, 6, 12, 24];
 const GRAMMAR_PATH = new URL('../../../docs/course/grammar-practice.yaml', import.meta.url);
 
 export const loadGrammarPlan = () => parse(readFileSync(GRAMMAR_PATH, 'utf8'));
+
+const SLANG_PATH = new URL('../../../docs/course/slang-lessons.yaml', import.meta.url);
+
+/**
+ * The words each unit's slang lesson teaches (docs/course/slang-lessons.yaml):
+ * unit slug -> lemmas. They are course words of that unit like any other; the
+ * file only says which lesson meets them first.
+ */
+export function loadSlangPlan() {
+  if (!existsSync(SLANG_PATH)) return new Map();
+  const doc = parse(readFileSync(SLANG_PATH, 'utf8')) ?? {};
+  return new Map(Object.entries(doc.units ?? {}).map(([slug, words]) => [slug, new Set((words ?? []).map((w) => String(w).toLocaleLowerCase('es')))]));
+}
 
 /** Ids for what grammar-practice.yaml adds to a unit. */
 export const grammarIds = {
@@ -60,6 +73,7 @@ export function planCourse({
   outline = loadOutlineFromDb(),
   sentencesByUnit = loadPublishedSentences(),
   plan = loadGrammarPlan(),
+  slangPlan = loadSlangPlan(),
   include = [], // slugs planned though not yet published — the unit `publish` is about to publish
 } = {}) {
   const formById = new Map(outline.forms.map((f) => [f.id, f]));
@@ -128,7 +142,9 @@ export function planCourse({
 
     const sentences = sentencesByUnit.get(unit.id) ?? [];
     const level = levelByUnit.get(unit.id);
-    const planned = planLessons({ unit, forms: outline.forms, sentences, tips, earlier, debt, owed: debtOf, grammar, level, levelOfSentence });
+    const slangWords = slangPlan.get(unit.slug);
+    const slang = new Set(slangWords ? outline.forms.filter((f) => f.unit_id === unit.id && slangWords.has(f.lemma.toLocaleLowerCase('es'))).map((f) => f.id) : []);
+    const planned = planLessons({ unit, forms: outline.forms, sentences, tips, earlier, debt, owed: debtOf, grammar, level, levelOfSentence, slang });
     result.set(unit.id, planned);
 
     const sentenceById = new Map([...sentences, ...earlier].map((s) => [s.id, s]));
