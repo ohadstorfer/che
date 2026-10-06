@@ -65,6 +65,11 @@ const PRACTICE_GAPS = 3;
 const PRACTICE_RECYCLED = 4;
 const PRACTICE_TYPED = 2;
 
+/** Earlier units' sentences a teaching lesson of a unit with the fixed shape brings back, room allowing. */
+const TEACH_RECYCLED = 2;
+/** And the extra ones its single practice lesson does. */
+const SHAPED_PRACTICE_RECYCLED = 2;
+
 /** Typed gaps a teaching lesson holds from A2 on, for sentences it has shown for their meaning. */
 const TEACH_TYPED = 2;
 
@@ -411,6 +416,12 @@ export function planLessons({
     }
     const longer = owing(bySizeDesc.filter(fresh).slice(0, PICK_AMONG));
     if (longer && planned() < LESSON_ITEMS.max) drill(make, longer, 'sentence_build');
+    // With the shape a unit has one practice lesson where it had two or three,
+    // so its teaching lessons do part of that work: where there is room, a
+    // sentence or two from earlier units that carry words owed a comeback.
+    if (template) {
+      for (const back of recycle(Math.min(TEACH_RECYCLED, LESSON_ITEMS.max - planned()))) drill(pads, back, gapAs);
+    }
 
     // A lesson that still runs short is topped up from the unit's other
     // sentences — the ones that carry this lesson's words before the rest —
@@ -503,7 +514,7 @@ export function planLessons({
       gaps.push(s);
       inLesson.add(s.id);
     }
-    const wantBack = PRACTICE_RECYCLED + (PRACTICE_GAPS - gaps.length);
+    const wantBack = PRACTICE_RECYCLED + (template ? SHAPED_PRACTICE_RECYCLED : 0) + (PRACTICE_GAPS - gaps.length);
     // Half of what comes back carries the grammar, where earlier units have it.
     const onGrammar = focus ? take(earlier.filter((x) => near(x) && carriesFocus(x)), (x) => 1 + debt(x), Math.ceil(wantBack / 2)) : [];
     const back = [...onGrammar, ...recycle(wantBack - onGrammar.length, pi === 0 ? PRACTICE_OLD : 0)];
@@ -537,6 +548,12 @@ export function planLessons({
       body.push(mark(more, gapAs));
     }
     while (planned() > LESSON_ITEMS.max) body.pop();
+    // A practice unit's first lessons have met nothing yet to type: from A2
+    // one of their gaps is typed instead, as in a teaching lesson.
+    if (template && typing && level && !body.some((slot) => slot.mode === TYPED)) {
+      const last = body.findLast((slot) => slot.mode === 'sentence_gap');
+      if (last) last.mode = TYPED;
+    }
     spaceOut(body);
     if (planned() < LESSON_ITEMS.min) {
       warnings.push(`${unit.slug} ${lesson.title_en ?? `lesson ${lesson.ordinal}`}: ${planned()} screens, wants ${LESSON_ITEMS.min} — the unit is out of sentences.`);

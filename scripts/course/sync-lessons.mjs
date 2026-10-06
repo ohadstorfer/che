@@ -71,7 +71,8 @@ const known = new Set(rows.lessons.map((l) => l.id));
 const formsOf = new Map();
 for (const f of rows.forms) {
   const lemma = lemmaById.get(f.lemma_id);
-  if (f.status === 'retired' || !lemma) continue;
+  // A word added to a live unit as a draft (course:words --draft) has no lesson yet: course:lessons leaves it out too.
+  if (f.status === 'retired' || f.status === 'draft' || !lemma) continue;
   if (drillable({ is_glue: lemma.is_glue, pos: lemma.pos, bound: f.bound === true })) formsOf.set(f.unit_id, (formsOf.get(f.unit_id) ?? 0) + 1);
 }
 

@@ -5,6 +5,10 @@
 //   npm run course:topup-publish -- <file with one unit slug per line> [--dry-run] [--no-lessons]
 //
 // --no-lessons: leave the lessons rebuild to a later `course:lessons --all`.
+// --approved: save the sentences as approved, not published — for words still
+// in draft (course:words --draft): the app must not get a sentence before it
+// has the word. course:words --publish puts both live together. No lessons
+// are rebuilt: they are planned from published sentences only.
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 
@@ -19,7 +23,8 @@ if (!list) {
   process.exit(1);
 }
 const dryRun = rest.includes('--dry-run');
-const noLessons = rest.includes('--no-lessons');
+const approved = rest.includes('--approved');
+const noLessons = rest.includes('--no-lessons') || approved;
 const slugs = readFileSync(list, 'utf8').split('\n').map((s) => s.trim()).filter(Boolean);
 const outline = loadOutlineFromDb();
 const done = [];
@@ -31,7 +36,7 @@ function flush() {
     rejected: pending.flatMap((p) => p.rejected),
     known: pending.flatMap((p) => p.known),
     model: MODEL,
-    status: 'published',
+    status: approved ? 'approved' : 'published',
   });
   pending.length = 0;
 }

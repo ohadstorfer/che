@@ -45,10 +45,11 @@ export const grammarIds = {
 };
 
 /** Every published sentence of the course, by unit id. */
-export function loadPublishedSentences() {
+export function loadPublishedSentences({ staged = false } = {}) {
+  // `staged`: with the sentences kept as approved for words still in draft (a preview of the course once they are live).
   const rows = queryLinked(`
     select id, unit_id, es, tokens, target_form_id, difficulty, audio_path
-    from public.sentences where status = 'published'`);
+    from public.sentences where status ${staged ? "in ('published', 'approved')" : "= 'published'"}`);
   const byUnit = new Map();
   for (const s of rows) {
     const t = typeof s.tokens === 'string' ? JSON.parse(s.tokens) : s.tokens;
@@ -75,7 +76,13 @@ export function planCourse({
   plan = loadGrammarPlan(),
   slangPlan = loadSlangPlan(),
   include = [], // slugs planned though not yet published — the unit `publish` is about to publish
+  staged = false, // plan the draft words of live units too: a preview of the course once they are published
 } = {}) {
+  // A word added to a live unit as a draft (course:words --draft) is waiting
+  // for its sentences and its lesson: until it is published no lesson teaches
+  // it. The rest of this function never sees it.
+  const liveUnits = new Set(outline.units.filter((u) => u.status === 'published').map((u) => u.id));
+  if (!staged) outline = { ...outline, forms: outline.forms.filter((f) => !(f.status === 'draft' && liveUnits.has(f.unit_id))) };
   const formById = new Map(outline.forms.map((f) => [f.id, f]));
   const content = (s) =>
     [...new Set(s.tokens.flatMap((t) => t.form_ids ?? []))].filter((id) => formById.has(id) && drillable(formById.get(id)));

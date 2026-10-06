@@ -10,6 +10,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { parse } from 'yaml';
 
+import { loadSlangPlan } from './lib/course-plan.mjs';
 import { queryLinked } from './lib/db.mjs';
 import { ids } from './lib/ids.mjs';
 import { drillable } from './lib/outline.mjs';
@@ -41,8 +42,11 @@ const sentencesOf = (() => {
 if (args.includes('--list')) {
   const wanted = new Set((flag('--sections') ?? [...sectionOrdinal.values()].join(',')).split(',').map(Number));
   const known = new Set();
+  const slangPlan = loadSlangPlan();
   for (const unit of published) {
-    const own = outline.forms.filter((f) => f.unit_id === unit.id && drillable(f));
+    // The slang lesson's words are its own: the three teaching lessons don't carry them.
+    const slang = slangPlan.get(unit.slug) ?? new Set();
+    const own = outline.forms.filter((f) => f.unit_id === unit.id && drillable(f) && !slang.has(f.lemma.toLocaleLowerCase('es')));
     const light = lightForms(own, known);
     const why = unit.review_form_ids.length ? null : overflow(own, light);
     if (why && wanted.has(sectionOrdinal.get(unit.section_id))) {

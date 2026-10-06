@@ -1,0 +1,657 @@
+# New words for units that already exist (scripts/course/add-words.mjs):
+#
+#   npm run course:words -- --units           every unit, what it teaches, the room it has
+#   npm run course:words -- --check           checks this file
+#   npm run course:words -- --sql <file>      the migration, and slang-lessons.yaml
+#
+# `words` go in the unit's own lessons: plain words the 2026-10 vocabulary
+# research found the course never taught. `slang` are the Argentine words its
+# slang lesson teaches (at most two in sections 1–3), the most useful first and
+# only where the words known by then can say them. `why` is the reason a word
+# sits where it does. Once a word is in the database this file is history: it
+# is edited in the admin like any other.
+#
+# Left out on purpose: "qué tal" (the course's own rules say it is not how
+# people greet here: qué onda, todo bien), "nos vemos" (already taught, with
+# ver), and "promo" and "recargo" (the paying units of section 3 are full;
+# they go with prices in a later section).
+#
+# Tried and taken out again, because the judges found no natural sentences for
+# them at this level: el interior, matear (people say "tomar mate"), pequeño
+# (people say "chico"), quincho, microcentro, sándwich de miga, facha. And "hombre": the unit that
+# points people out comes before the articles, so every sentence was forced; it
+# goes to a later section.
+
+# New words for sections 1-3, by unit slug in course order.
+# words: plain words for the unit's own lessons. slang: the slang lesson's new words (at most 2).
+units:
+  # ───────────── Section 1 ─────────────
+
+  una-pizza-y-un-helado:
+    words:
+      - lemma: "hamburguesa"
+        pos: noun
+        en: "burger"
+        why: "the unit orders food by name with un/una and 'y'; a burger sits next to pizza and sándwich"
+    slang:
+      - lemma: "pancho"
+        pos: noun
+        en: "hot dog"
+        register: neutral
+        why: "very common street food; ordered exactly like the unit's other food: 'un pancho y una gaseosa, por favor'"
+
+  vos-y-sos:
+    slang:
+      - lemma: "capo"
+        pos: noun
+        en: "the best, a great person"
+        note: "\"Sos un capo\" is strong praise, often a way to say thanks."
+        register: informal
+        forms:
+          - { form: "capo", f: "m.sg" }
+          - { form: "capa", f: "f.sg", en: "the best (to a woman)" }
+        why: "heard every day; the unit teaches 'sos', so 'sos un capo', 'gracias, capo', 'vos sos una capa' are all sayable"
+
+  sos-turista:
+    slang:
+      - lemma: "mala mía"
+        pos: phrase
+        en: "my mistake"
+        note: "A quick, casual way to say something was your fault."
+        register: informal
+        why: "the unit teaches perdón and permiso; 'perdón, mala mía' is the natural next step, one fixed phrase"
+
+  no-entiendo:
+    words:
+      - lemma: "no importa"
+        pos: phrase
+        en: "it doesn't matter"
+        why: "the natural answer to 'no entiendo' and 'no sé, perdón' in this unit; a fixed phrase"
+      - lemma: "no hay problema"
+        pos: phrase
+        en: "no problem"
+        why: "a survival phrase said whole, like the others here: 'perdón, no entiendo. —No hay problema'"
+    slang:
+      - lemma: "bien ahí"
+        pos: interj
+        en: "nice one, well done"
+        register: informal
+        why: "a short reaction to good news: '¿hablás castellano? ¡Bien ahí!', 'sí, entiendo. —¡Bien ahí!'"
+      - lemma: "pucha"
+        pos: interj
+        en: "oh no"
+        note: "A soft, polite way to show you are sorry or let down."
+        register: informal
+        why: "one word in front of the unit's sentences: 'pucha, no entiendo', 'pucha, no sé', 'pucha, perdón'"
+
+  mas-despacio:
+    words:
+      - lemma: "por supuesto"
+        pos: phrase
+        en: "of course"
+        why: "the polite answer to this unit's requests: '¿me repetís más despacio? —Por supuesto'"
+    slang:
+      - lemma: "de vuelta"
+        pos: adv
+        en: "again"
+        note: "What people say here for \"again\"."
+        register: neutral
+        why: "the unit asks people to repeat: '¿me repetís de vuelta?', 'de vuelta, más despacio, por favor'"
+
+  la-familia:
+    slang:
+      - lemma: "una masa"
+        pos: phrase
+        en: "great (a great person or thing)"
+        note: "Does not change for a man or a woman: \"mi hermana es una masa\"."
+        register: informal
+        why: "the unit introduces people with 'mi … es …': 'mi hermano es una masa', 'mi perro es una masa'"
+
+  cuantos-anos-tenes:
+    words:
+      - lemma: "edad"
+        pos: noun
+        en: "age"
+        why: "the unit asks how old people are: '¿qué edad tenés?' is the other everyday way to ask"
+
+  tengo-hambre:
+    slang:
+      - lemma: "ufa"
+        pos: interj
+        en: "ugh"
+        note: "A sound for when you are annoyed or bored, like a sigh."
+        register: informal
+        why: "one word in front of this unit's complaints: 'ufa, tengo sueño', 'ufa, no tengo tiempo'"
+
+  cuanto-cuesta:
+    slang:
+      - lemma: "es un montón"
+        pos: phrase
+        en: "that's a lot"
+        register: informal
+        why: "heard every day; the natural reaction to a price: '¿mil pesos? Es un montón', 'es un montón de plata'"
+
+  # ───────────── Section 2 ─────────────
+  altos-y-morochos:
+    slang:
+      - lemma: "rulos"
+        pos: noun
+        en: "curls, curly hair"
+        register: neutral
+        forms:
+          - { form: "rulos", f: "m.pl" }
+        why: "the unit describes how people look; 'tiene rulos', 'es morocha y tiene rulos' use tener, already known"
+
+  casados-y-solteros:
+    slang:
+      - lemma: "pintón"
+        pos: adj
+        en: "good-looking"
+        register: informal
+        forms:
+          - { form: "pintón", f: "m.sg" }
+          - { form: "pintona", f: "f.sg" }
+        why: "the unit says who is lindo, simpático and soltero; 'tu hermano es pintón' is the same sentence shape"
+
+  donde-estan-las-llaves:
+    words:
+      - lemma: "computadora"
+        pos: noun
+        en: "computer"
+        note: "The full word. In everyday talk people say compu."
+        why: "compu is taught in this unit, so the full word can be met next to its short form"
+    slang:
+      - lemma: "nabo"
+        pos: noun
+        en: "fool (soft and friendly)"
+        note: "A soft word, often said about yourself: \"¡qué nabo!\"."
+        register: informal
+        forms:
+          - { form: "nabo", f: "m.sg" }
+          - { form: "naba", f: "f.sg" }
+        why: "what you say when you lose your things: '¿dónde están mis llaves? ¡Qué nabo!', 'soy un nabo'"
+
+  esta-arriba:
+    words:
+      - lemma: "moto"
+        pos: noun
+        en: "motorcycle"
+        why: "auto is taught here; 'la moto está abajo', 'la moto es mía' use the unit's own words"
+      - lemma: "bicicleta"
+        pos: noun
+        en: "bicycle"
+        why: "same place as auto and moto: '¿dónde está tu bicicleta? Está adentro'"
+    slang:
+      - lemma: "coso"
+        pos: noun
+        en: "thing (when you don't know the word)"
+        note: "For any object when you forget its name."
+        register: informal
+        why: "a learner's best friend in a unit about where things are: '¿dónde está el coso?', 'el coso está arriba', '¿es tuyo el coso?'"
+
+  hay-una-plaza:
+    slang:
+      - lemma: "una banda"
+        pos: phrase
+        en: "a lot"
+        note: "\"Una banda de gente\" is a lot of people."
+        register: informal
+        why: "gente and hay are taught here: 'hay una banda de gente en la plaza', 'en el bar hay una banda de gente'"
+      - lemma: "está bueno"
+        pos: phrase
+        en: "it's good, it's nice"
+        note: "For a thing or a place. About a person it means good-looking."
+        register: informal
+        forms:
+          - { form: "está bueno" }
+          - { form: "está buena" }
+          - { form: "está buenísimo", en: "it's great" }
+        why: "bueno is taught here and está is known; the everyday way to say a place is nice: 'el bar está bueno', 'la plaza está buena', 'hay un parque y está buenísimo'"
+
+  adonde-vas:
+    slang:
+      - lemma: "joda"
+        pos: noun
+        en: "party"
+        register: informal
+        forms:
+          - { form: "joda", f: "f.sg" }
+        why: "heard every day; the unit says where you are going: '¿adónde vas? —A una joda', 'vamos a la joda de Sofi'"
+
+  como-estas:
+    words:
+      - lemma: "cómo va"
+        pos: phrase
+        en: "how's it going?"
+        why: "the unit asks how people are; a second, casual way to ask next to '¿cómo estás?'"
+      - lemma: "todo tranqui"
+        pos: phrase
+        en: "all calm, all good"
+        why: "tranqui is taught in this unit and todo bien is known; the usual answer to '¿cómo va?'"
+    slang:
+      - lemma: "hecho pelota"
+        pos: adj
+        en: "very tired; very sad"
+        note: "Stronger than cansado."
+        register: informal
+        forms:
+          - { form: "hecho pelota", f: "m.sg" }
+          - { form: "hecha pelota", f: "f.sg" }
+        why: "the unit says how you feel with estar: 'estoy hecho pelota', 'no estoy triste, estoy hecha pelota'"
+
+  estoy-medio-nervioso:
+    words:
+      - lemma: "acá andamos"
+        pos: phrase
+        en: "getting by, not bad"
+        note: "A common answer when things are just OK."
+        why: "the unit is about being so-so; this answers '¿cómo estás?' the same way 'más o menos' does"
+    slang:
+      - lemma: "a mil"
+        pos: phrase
+        en: "very busy"
+        note: "Said with estar: \"estoy a mil\"."
+        register: informal
+        why: "ocupado is taught here; 'estoy a mil' is how people really say it, and mil is known"
+      - lemma: "denso"
+        pos: adj
+        en: "annoying, tiring (a person)"
+        note: "Someone who keeps asking or will not stop talking."
+        register: informal
+        forms:
+          - { form: "denso", f: "m.sg" }
+          - { form: "densa", f: "f.sg" }
+        why: "medio is taught here: 'mi vecino es medio denso', 'estoy enojada porque mi hermano es denso'"
+
+  esta-cerrado:
+    words:
+      - lemma: "bastante"
+        pos: adv
+        en: "quite; enough"
+        why: "goes in front of the unit's adjectives: 'el bar está bastante lleno'"
+      - lemma: "demasiado"
+        pos: adv
+        en: "too, too much"
+        why: "same place as bastante and muy: 'está demasiado lleno', 'está demasiado sucio'"
+    slang:
+      - lemma: "tacho"
+        pos: noun
+        en: "trash can"
+        note: "Any bin, at home or in the street."
+        register: neutral
+        why: "the unit says things are full or dirty: 'el tacho está lleno', '¿dónde hay un tacho?'"
+
+  que-haces:
+    slang:
+      - lemma: "qué hacés"
+        pos: interj
+        en: "hi, how's it going?"
+        note: "As a greeting it is not a real question. Answer \"todo bien, ¿y vos?\"."
+        register: informal
+        why: "the unit teaches '¿qué hacés?' as a question, so this is the moment to show it is also a greeting: '¡qué hacés, Juan! ¿Todo bien?'"
+
+  estudio-a-la-noche:
+    words:
+      - lemma: "universidad"
+        pos: noun
+        en: "university"
+        why: "estudiar is taught in this unit: 'estudio en la universidad'; the short everyday words facultad and facu come later, next to it"
+
+  me-ayudas:
+    slang:
+      - lemma: "no hay drama"
+        pos: phrase
+        en: "no problem, it's fine"
+        register: informal
+        why: "the unit asks for help; this is the friendly answer: '¿me ayudás? —Sí, no hay drama'"
+
+  mate-y-facturas:
+    slang:
+      - lemma: "milanga"
+        pos: noun
+        en: "breaded meat (short for milanesa)"
+        note: "A casual, warm word for milanesa."
+        register: informal
+        why: "milanesa is taught in this unit: 'me gusta mucho la milanga'"
+      - lemma: "manteca"
+        pos: noun
+        en: "butter"
+        note: "The Argentine word for butter."
+        register: neutral
+        why: "toast and butter go with mate and facturas; \"con\" and \"tostadas\" are known by now, so \"tostadas con manteca\" can be said"
+
+  nos-gustan-los-fideos:
+    slang:
+      - lemma: "choclo"
+        pos: noun
+        en: "corn"
+        note: "The Argentine word for corn as food."
+        register: neutral
+        why: "the unit names foods you like, verdura among them: 'me gusta el choclo', 'empanadas de choclo'"
+      - lemma: "ananá"
+        pos: noun
+        en: "pineapple"
+        note: "The Argentine word for pineapple."
+        register: neutral
+        why: "fruta is taught here, and it goes with words from the first units: 'nos gusta el ananá', 'un licuado de ananá'"
+
+  que-quieren-tomar:
+    slang:
+      - lemma: "fernet"
+        pos: noun
+        en: "a bitter drink, mixed with cola"
+        note: "A strong bitter drink. Almost always drunk with cola and ice."
+        register: neutral
+        why: "the unit orders drinks for the table, with hielo and soda: 'queremos un fernet con hielo'"
+
+  facu-y-laburo:
+    words:
+      - lemma: "cursar"
+        pos: verb
+        en: "to take (a class)"
+        forms:
+          - { form: "cursar", f: "inf" }
+          - { form: "curso", f: "1sg.pres.ind", en: "I take (a class)" }
+          - { form: "cursás", f: "2sg.pres.ind.vos", en: "you take (a class)" }
+        why: "materia and clase are taught here and -ar verbs are known: 'curso tres materias', 'tengo que cursar a la noche'"
+    slang:
+      - lemma: "bocho"
+        pos: noun
+        en: "a very smart person"
+        register: informal
+        why: "a unit about exams and classes: 'mi hermana es un bocho', 'el profesor es un bocho'"
+
+  leo-y-escribo:
+    slang:
+      - lemma: "birome"
+        pos: noun
+        en: "pen"
+        note: "The everyday word for a pen in Argentina."
+        register: neutral
+        why: "the unit is about writing: '¿tenés una birome?', 'necesito una birome para escribir'"
+
+  en-el-primer-piso:
+    slang:
+      - lemma: "funcar"
+        pos: verb
+        en: "to work (a machine)"
+        note: "Casual. For machines and plans, not for people at a job."
+        register: informal
+        forms:
+          - { form: "funca", f: "3sg.pres.ind", en: "it works" }
+          - { form: "funcan", f: "3pl.pres.ind", en: "they work" }
+        why: "the unit says what is wrong in the building: 'el ascensor no funca', 'el timbre no funca'"
+      - lemma: "pavada"
+        pos: noun
+        en: "a silly, small thing"
+        register: informal
+        why: "problema is taught here and this is its opposite: 'no es un problema, es una pavada'"
+
+  la-cama-y-el-sillon:
+    slang:
+      - lemma: "placard"
+        pos: noun
+        en: "closet"
+        note: "The built-in closet in a bedroom. Said \"pla-CAR\"."
+        register: neutral
+        why: "the unit says what is in each room: 'en la pieza hay una cama y un placard'"
+      - lemma: "estufa"
+        pos: noun
+        en: "heater"
+        note: "In Argentina it heats a room. It is not for cooking."
+        register: neutral
+        why: "same list of things in a room: 'en el living hay una estufa', 'tengo frío, ¿hay estufa?'"
+
+  # ───────────── Section 3 ─────────────
+  tengo-una-reserva:
+    words:
+      - lemma: "documento"
+        pos: noun
+        en: "ID"
+        note: "Your ID card. Hotels ask for \"documento o pasaporte\"."
+        why: "pasaporte is taught here and the front desk asks for one or the other"
+
+  esta-incluido:
+    slang:
+      - lemma: "frazada"
+        pos: noun
+        en: "blanket"
+        register: neutral
+        why: "the unit asks what the room has, like toallas: '¿hay otra frazada?', 'tengo frío, necesito una frazada'"
+
+  la-carniceria:
+    slang:
+      - lemma: "rotisería"
+        pos: noun
+        en: "shop that sells cooked food to take home"
+        register: neutral
+        why: "the unit finds the shops you need, and this one feeds you: 'la rotisería está al lado del almacén'"
+      - lemma: "tener pinta"
+        pos: phrase
+        en: "to look good"
+        register: informal
+        forms:
+          - { form: "tiene pinta", en: "it looks good" }
+          - { form: "tiene buena pinta", en: "it looks good" }
+        why: "tener is long known; it is what you say walking past the shops of the barrio: 'la rotisería tiene buena pinta'"
+
+  queres-podes-vas:
+    slang:
+      - lemma: "pochoclo"
+        pos: noun
+        en: "popcorn"
+        note: "The Buenos Aires word for popcorn."
+        register: neutral
+        why: "cine and comer are taught here: 'quiero comer pochoclo en el cine'"
+
+  preferis-salir:
+    words:
+      - lemma: "tener ganas de"
+        pos: phrase
+        en: "to feel like (doing something)"
+        forms:
+          - { form: "tengo ganas de", en: "I feel like" }
+          - { form: "tenés ganas de", en: "you feel like" }
+        why: "the unit chooses where to go out and the infinitives are known: 'tengo ganas de ir al teatro', '¿tenés ganas de salir?'"
+
+  pasa-toma:
+    words:
+      - lemma: "escuchame"
+        pos: interj
+        en: "listen"
+        note: "Said to get someone's attention before you tell them something."
+        why: "same pattern as dame, taught here, and decime and esperame from the unit before; people start sentences with it all day: 'escuchame, pasá y tomá algo'"
+    slang:
+      - lemma: "ponele onda"
+        pos: phrase
+        en: "come on, make an effort"
+        note: "Said to someone who is being lazy or negative."
+        register: informal
+        why: "poné is taught in this unit and the phrase is fixed: 'dale, ponele onda'"
+
+  dejame-aca:
+    words:
+      - lemma: "tocar el timbre"
+        pos: phrase
+        en: "to ring the bell"
+        note: "On a bondi you ring the bell to get off."
+        forms:
+          - { form: "tocar el timbre" }
+          - { form: "toco el timbre", en: "I ring the bell" }
+          - { form: "tocá el timbre", en: "ring the bell" }
+        why: "timbre is known and the unit tells people where to get off: 'tocá el timbre y bajate en la esquina'; ready for the bondi unit that comes next"
+
+  tomar-el-bondi:
+    words:
+      - lemma: "chofer"
+        pos: noun
+        en: "driver"
+        why: "the unit rides the bondi, where you ask the driver to tell you your stop: 'pregunto al chofer', 'el chofer es muy simpático'"
+
+  en-taxi:
+    slang:
+      - lemma: "baúl"
+        pos: noun
+        en: "trunk (of a car)"
+        register: neutral
+        why: "the unit takes a taxi to the airport with bags: '¿puedo usar el baúl?', 'la mochila está en el baúl'"
+      - lemma: "no te hagas problema"
+        pos: phrase
+        en: "don't worry about it"
+        register: informal
+        why: "a fixed phrase said whole; fits paying the driver: 'no te hagas problema, quedate con el vuelto'"
+
+  ayuda:
+    slang:
+      - lemma: "guarda"
+        pos: interj
+        en: "watch out!"
+        note: "\"Guarda con el perro\" is watch out for the dog."
+        register: informal
+        why: "cuidado is taught here and this is its casual twin: '¡guarda!', 'guarda con el auto'"
+      - lemma: "mala leche"
+        pos: noun
+        en: "bad luck"
+        note: "\"¡Qué mala leche!\" is what bad luck."
+        register: informal
+        why: "the unit is about things going wrong; mala and leche are both known: 'me robaron el celu. —¡Qué mala leche!'"
+
+  la-campera-nueva:
+    slang:
+      - lemma: "medias"
+        pos: noun
+        en: "socks"
+        note: "The only word for socks in Argentina."
+        register: neutral
+        forms:
+          - { form: "medias", f: "f.pl" }
+        why: "heard every day and the unit names clothes: '¿dónde están mis medias?', 'estas medias son re lindas' (the next units add colors)"
+
+  es-muy-chico:
+    slang:
+      - lemma: "recontra"
+        pos: adv
+        en: "really, very very"
+        note: "Stronger than re: \"recontra caro\"."
+        register: informal
+        why: "re was taught two units ago and this unit says how big, small or ugly things are: 'es recontra chico'"
+      - lemma: "fachero"
+        pos: adj
+        en: "good-looking, with style"
+        register: informal
+        forms:
+          - { form: "fachero", f: "m.sg" }
+          - { form: "fachera", f: "f.sg" }
+        why: "facha was the unit before; the opposite of feo, taught here: 'esa campera es re fachera'"
+
+  este-buzo:
+    slang:
+      - lemma: "pulóver"
+        pos: noun
+        en: "sweater"
+        register: neutral
+        why: "the unit names more clothes with colors: 'un pulóver gris'"
+
+  lo-llevo:
+    words:
+      - lemma: "hacer factura"
+        pos: phrase
+        en: "to give an invoice"
+        note: "Here factura is the paper that shows what you paid, not a pastry."
+        forms:
+          - { form: "me hacés factura", en: "can you give me an invoice" }
+        why: "said when you buy, right after 'lo llevo': 'lo llevo. ¿Me hacés factura?'"
+
+  me-cobras:
+    slang:
+      - lemma: "palo"
+        pos: noun
+        en: "a million pesos"
+        register: informal
+        forms:
+          - { form: "palo", f: "m.sg" }
+          - { form: "palos", f: "m.pl" }
+        why: "millón is taught in this unit and luca comes next; how people really say big prices: 'sale dos palos'"
+
+  debito-o-credito:
+    slang:
+      - lemma: "dólar blue"
+        pos: noun
+        en: "the unofficial dollar price"
+        note: "The street price of the dollar, in the news every day."
+        register: neutral
+        why: "dólar and cambiar are taught here: '¿a cuánto está el dólar blue?'"
+      - lemma: "me estás cargando"
+        pos: phrase
+        en: "are you joking?"
+        note: "Said when you can't believe something, like a price."
+        register: informal
+        why: "a fixed phrase for a price you can't believe, and lucas are taught here: '¿cien lucas? ¿Me estás cargando?'"
+
+  todos-los-dias:
+    words:
+      - lemma: "durante"
+        pos: prep
+        en: "during"
+        why: "the unit says when and how often: 'durante la semana ceno temprano'"
+
+  me-despierto-temprano:
+    slang:
+      - lemma: "ponete las pilas"
+        pos: phrase
+        en: "come on, get moving"
+        note: "Word for word: put your batteries in."
+        register: informal
+        why: "the unit gets people out of bed with apurate; same kind of push: 'ponete las pilas, son las ocho'"
+
+  que-te-gusta-hacer:
+    slang:
+      - lemma: "la Selección"
+        pos: noun
+        en: "the national team"
+        note: "The Argentina football team. When it plays, the country stops."
+        register: neutral
+        why: "heard every day; fútbol and cancha are taught here: 'me encanta la Selección', 'nos juntamos a ver la Selección'"
+
+  series-y-musica:
+    slang:
+      - lemma: "al mango"
+        pos: phrase
+        en: "very loud; as fast or as much as possible"
+        register: informal
+        why: "música is taught here: 'me gusta escuchar música al mango'"
+      - lemma: "prenderse"
+        pos: verb
+        en: "to join in"
+        note: "\"¿Te prendés?\" asks if you want to join a plan."
+        register: informal
+        forms:
+          - { form: "te prendés", f: "2sg.pres.ind.vos.clitic", en: "are you in, do you join" }
+          - { form: "me prendo", f: "1sg.pres.ind.clitic", en: "I'm in, I join" }
+        why: "reflexive verbs with me/te are known since the routine units; the way to invite someone to the unit's plans: 'miro una peli, ¿te prendés?'"
+
+  me-interesa:
+    words:
+      - lemma: "interesante"
+        pos: adj
+        en: "interesting"
+        why: "interesar is taught in this unit: 'me interesa el tenis, es muy interesante'"
+    slang:
+      - lemma: "copar"
+        pos: verb
+        en: "to really like"
+        note: "Works like gustar: \"me copa el tenis\"."
+        register: informal
+        forms:
+          - { form: "me copa", f: "3sg.pres.ind.clitic", en: "I really like (one thing)" }
+          - { form: "te copa", f: "3sg.pres.ind.clitic", en: "you really like (one thing)" }
+          - { form: "me copan", f: "3pl.pres.ind.clitic", en: "I really like (several things)" }
+        why: "the unit builds the gustar family (encanta, interesa); 'me copa' is its casual member: 'me copa el tenis', '¿te copa bailar?'"
+
+  me-encanta-viajar:
+    slang:
+      - lemma: "malla"
+        pos: noun
+        en: "swimsuit"
+        register: neutral
+        why: "playa and nadar are taught here: 'necesito una malla para ir a la playa'"

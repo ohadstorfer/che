@@ -5,6 +5,8 @@
 //   npm run course:template -- --preview [--sections 1,2,3]
 //       plans the lessons of those sections as if they had the shape, from the
 //       database, and says what doesn't fit. Nothing is written.
+//       --staged plans the words still in draft (course:words --draft) and
+//       their approved sentences too, as they will be once published.
 //       --splits <splits.yaml> plans it with those units split first
 //       (course:split), as they will be once that migration is in.
 //   npm run course:template -- --sql <migration.sql> [--sections 1,2,3]
@@ -15,7 +17,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { parse } from 'yaml';
 
-import { exposureReport, loadPublishedSentences, planCourse } from './lib/course-plan.mjs';
+import { exposureReport, loadPublishedSentences, loadSlangPlan, planCourse } from './lib/course-plan.mjs';
 import { lintLessons } from './lib/lessons.mjs';
 import { drillable } from './lib/outline.mjs';
 import { ids } from './lib/ids.mjs';
@@ -62,11 +64,16 @@ const road = rows.units
 const units = road.filter((u) => wanted.has(sectionOrdinal.get(u.section_id)));
 
 // Culture: a class for each unit from the start of the road, while they last
-// (the classes themselves are dealt by unit-extras.mjs).
-const culture = JSON.parse(readFileSync(new URL('../../src/lib/culture.json', import.meta.url), 'utf8'));
-const classes = culture.sections.filter((s) => s.slug !== 'puteadas').reduce((n, s) => n + s.classes.length, 0);
-const withCulture = new Set(road.slice(0, classes).map((u) => u.id));
+// (course:culture-plan deals them into src/lib/unit-extras.json, which the app
+// ships with), and the swearing classes with the unit they were planned for.
+const extras = JSON.parse(readFileSync(new URL('../../src/lib/unit-extras.json', import.meta.url), 'utf8'));
+const classes = extras.culture_units ?? 0;
+const withCulture = new Set([
+  ...road.slice(0, classes).map((u) => u.id),
+  ...road.filter((u) => extras.units[u.slug]?.culture?.section === 'puteadas').map((u) => u.id),
+]);
 const hasCulture = (u) => withCulture.has(u.id);
+if (!classes) console.warn('warn  no culture plan: run course:culture-plan first');
 
 const shapes = units.map((unit) => ({ unit, ...shapeUnit({ unit, lessons: rows.lessons, culture: hasCulture(unit) }) }));
 const fresh = shapes.flatMap((s) => s.rows.filter((r) => !r.was || r.was.status !== 'published'));
@@ -85,14 +92,18 @@ if (preview) {
     { ...rows, lessons: shapedLessons({ units, lessons: rows.lessons, hasCulture }) },
     { template: (ordinal) => wanted.has(ordinal) },
   );
-  const planned = planCourse({ outline, sentencesByUnit: sentencesByUnit ?? loadPublishedSentences() });
+  const staged = args.includes('--staged');
+  const planned = planCourse({ outline, sentencesByUnit: sentencesByUnit ?? loadPublishedSentences({ staged }), staged });
   const { result, formById, sentenceById, levelByUnit, levelOfSentence } = planned;
   const known = new Set();
   const byRule = new Map();
   const big = [];
   let problems = 0;
+  const slangPlan = loadSlangPlan();
   for (const unit of outline.units.filter((u) => u.status === 'published')) {
-    const own = outline.forms.filter((f) => f.unit_id === unit.id && drillable(f));
+    // The slang lesson's words are its own: the three teaching lessons don't carry them.
+    const slang = slangPlan.get(unit.slug) ?? new Set();
+    const own = outline.forms.filter((f) => f.unit_id === unit.id && drillable(f) && !slang.has(f.lemma.toLocaleLowerCase('es')));
     if (unit.template) {
       const why = overflow(own, lightForms(own, known));
       if (why && !unit.review_form_ids.length) big.push(`${unit.slug}: ${why}`);

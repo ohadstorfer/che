@@ -14,466 +14,810 @@
 # unit's existing tips that go with that part; `new_tips` are written for a
 # part that has none. Once a split is in the database this file is history:
 # the units are edited in the admin like any other.
+#
+# Applied so far: sections 1–3 (docs/course/splits-sections-1-3.yaml, migration
+# 20261006000001). This file is what is being applied now: sections 4–15.
 
-# --- Section 1 · A1.1 First words --------------------------------------------
-otro-cafe:
-  - words: [ otro, té, cerveza, gaseosa, licuado, tostada, tostado ]
-    title: "Order another drink and some toast"
-    tips: [ "Otro, never un otro", "Tostadas, un tostado" ]
-  - slug: "una-pizza-y-un-helado"
-    title: "Order something to eat"
-    summary: "Una pizza y un helado"
-    words: [ pan, sándwich, pizza, helado, torta, comida ]
-    tips: [ "Un or una" ]
-    sample: { es: "Una pizza y un helado, por favor.", en: "A pizza and an ice cream, please." }
+# --- Section 4 ------------------------------------------------
+el-cumple:
+  - words: [preparar, cocinar, jugar, leer, escribir, dormir, hablar, tele]
+    title: "Say what you're doing right now"
+    summary: "Estoy preparando la comida"
+    tips: ["-ando, -iendo"]
+    sample: { es: "Estoy preparando la comida y los chicos están jugando.", en: "I'm making the food and the kids are playing." }
+  - slug: "feliz-cumple"
+    title: "Get ready for a birthday"
+    summary: "Estoy organizando el cumple de Sofi"
+    words: [cumpleaños, cumple, cumplir, organizar, invitado, regalo, plan, pasado mañana]
+    tips: ["El cumple", "Voy a + verb"]
+    sample: { es: "Estoy organizando el cumple de Sofi.", en: "I'm organizing Sofi's birthday." }
 
-hola-che:
-  - words: [ hola, che, todo bien, qué onda, cómo andás, bien, mal ]
-    tips: [ "Che", "¿Cómo andás?" ]
-  - slug: "soy-sofi"
-    title: "Say yes, no and who you are"
-    summary: "Sí, soy Sofi. Dale, chau"
-    words: [ sí, no, yo, ser, dale, bueno, chau ]
-    tips: [ "Soy" ]
-    sample: { es: "No, no soy Juan, soy Martín.", en: "No, I'm not Juan, I'm Martín." }
+ahora-y-planes:
+  - words: [venir, quedar, invitar, juntada, asado, próximo, copado]
+    summary: "¿Venís a la juntada?"
+    tips: ["El próximo, la próxima"]
+    sample: { es: "¿Venís a la juntada del sábado?", en: "Are you coming to the get-together on Saturday?" }
+  - slug: "que-llevo-al-asado"
+    title: "Say what you're bringing to the asado"
+    summary: "¿Qué llevo al asado?"
+    words: [llevar, traer, vino, viste, quilombo, boludo]
+    tips: ["Llevar or traer", "Boludo and quilombo"]
+    sample: { es: "Yo llevo el vino. ¿Vos qué traés?", en: "I'll bring the wine. What are you bringing?" }
 
-no-entiendo:
-  - words: [ hablar, inglés, castellano, entender, saber, poco ]
-    tips: [ "Hablo, hablás" ]
-  - slug: "mas-despacio"
-    title: "Ask people to repeat and explain"
-    summary: "¿Me repetís más despacio?"
-    words: [ más, despacio, repetir, cómo se dice, qué, significar ]
-    tips: [ "Ask for help" ]
-    sample: { es: "No entiendo. ¿Me repetís más despacio, por favor?", en: "I don't understand. Can you say that again more slowly, please?" }
+ayer-labure:
+  - words: [laburar, ayer, estudiar, hablar, anoche]
+    tips: ["Not \"he trabajado\"", "Present or past: the stress"]
+  - slug: "que-paso-anoche"
+    title: "Say when you got here and what happened"
+    summary: "¿Qué pasó anoche?"
+    words: [llegar, tomar, comprar, pasar, pasado]
+    tips: ["Hace = ago"]
+    sample: { es: "Llegué hace una hora y compré pan.", en: "I got here an hour ago and bought bread." }
 
-de-todos-lados:
-  - words: [ brasileño, español, italiano, francés, alemán ]
-    summary: "Él es brasileño, ella es francesa"
-    tips: [ "Three kinds of ending" ]
-    sample: { es: "Él es brasileño y ella es francesa.", en: "He is Brazilian and she is French." }
-  - slug: "ella-es-canadiense"
-    title: "Say who is American, Canadian or Australian"
-    summary: "Ella es canadiense, él es yanqui"
-    words: [ estadounidense, canadiense, australiano, yanqui, paraguayo ]
-    tips: [ "Small letters" ]
-    sample: { es: "Ella es canadiense y él es paraguayo.", en: "She is Canadian and he is Paraguayan." }
+cenamos-afuera:
+  - words: [cenar, pagar, invitar, gastar]
+    title: "Say who paid for dinner"
+    tips: ["Pagué, llegué"]
+  - slug: "llegaron-tarde"
+    title: "Say what everyone did last night"
+    summary: "Llegaron tarde y cocinó Juan"
+    words: [cocinar, esperar, llegar, tomar, hablar, caminar]
+    tips: ["The -ar past for everyone"]
+    sample: { es: "Llegaron tarde, tomaron un vino y hablaron mucho.", en: "They got here late, had some wine and talked a lot." }
 
-tios-y-primos:
-  - words: [ tío, primo, sobrino, nieto, bebé ]
-    summary: "Mi tía, mi primo, mi sobrina"
-    tips: [ "Tío, tía" ]
-  - slug: "mi-mujer-y-mi-suegra"
-    title: "Talk about your wife, husband and in-laws"
-    summary: "Mi marido, mi suegra y mi gato"
-    words: [ mujer, marido, suegro, cuñado, gato ]
-    tips: [ "Mi mujer, mi marido" ]
-    sample: { es: "Mi mujer es de Rosario y mi suegra también.", en: "My wife is from Rosario and so is my mother-in-law." }
+comi-y-sali:
+  - words: [comer, salir, recién, levantarse]
+    tips: ["The past of -er and -ir", "Recién"]
+  - slug: "conoci-a-alguien"
+    title: "Say who you met and what you learned"
+    summary: "Conocí a Sofi en Rosario"
+    words: [conocer, vivir, aprender, escribir]
+    tips: ["Conocer, saber"]
+    sample: { es: "Conocí a Sofi en Rosario.", en: "I met Sofi in Rosario." }
 
-cuantos-anos-tenes:
-  - words: [ tener, cuánto, año, uno, dos, tres, cuatro, cinco ]
-    title: "Ask how old someone is"
-    tips: [ "Tengo, tenés, tiene" ]
-    sample: { es: "Mi hijo tiene cinco años. ¿Cuántos años tenés vos?", en: "My son is five. How old are you?" }
-  - slug: "tiene-ocho-anos"
-    title: "Count to ten"
-    summary: "Mi hijo tiene ocho años"
-    words: [ seis, siete, ocho, nueve, diez, cero ]
+naci-en:
+  - words: [nacer, criarse, vivir, vida, donde]
+    tips: ["Your story: nací, me crié, viví"]
+  - slug: "volvi-a-buenos-aires"
+    title: "Say who came back and what they learned"
+    summary: "Volví a Buenos Aires"
+    words: [volver, aprender, entender, conocer, salir, comer]
+    tips: ["-er and -ir, every person"]
+    sample: { es: "Mi hermano volvió a Rosario el año pasado.", en: "My brother went back to Rosario last year." }
+
+fui-a-la-cancha:
+  - words: [ir, ser, partido, recital]
+    title: "Say where you went and how it went"
+    tips: ["Fui, estuve, tuve", "¿Cómo te fue?"]
+  - slug: "como-estuvo"
+    title: "Say how it was and how long ago"
+    summary: "¿Cómo estuvo el recital?"
+    words: [estar, tener, hace cuánto, hace mucho, hace poco]
+    tips: ["¿Cómo estuvo?"]
+    sample: { es: "¿Cómo estuvo el partido? Estuvo muy bueno.", en: "How was the game? It was really good." }
+
+la-pasamos-barbaro:
+  - words: [pasarla, estar, tener, banda, increíble]
+    title: "Say what a great time you had"
+    tips: ["La pasé bárbaro", "Estuvimos, tuvimos, la pasamos"]
+    sample: { es: "La banda estuvo increíble y la pasamos bárbaro.", en: "The band was incredible and we had a great time." }
+  - slug: "ganamos-el-partido"
+    title: "Say who won and who lost"
+    summary: "Ganamos el partido"
+    words: [equipo, ganar, perder, divertido]
     new_tips:
-      - title: "Cero to diez"
-        body: "With **seis**, **siete**, **ocho**, **nueve** and **diez** you can count to ten. **Cero** is zero. The number goes before **años**: *Mi hijo tiene ocho años.*"
-    sample: { es: "Mi hijo tiene ocho años y mi hija tiene diez.", en: "My son is eight and my daughter is ten." }
-  - slug: "tengo-veinte-anos"
-    title: "Count to twenty"
-    summary: "Tengo veinte años"
-    words: [ once, doce, trece, catorce, quince, dieciséis, diecisiete, dieciocho, diecinueve, veinte ]
+      - title: "Ganamos, perdimos"
+        body: "**Ganamos** is both *we win* and *we won*; the rest of the sentence tells you which: *Ayer ganamos el partido*. With **perder** the two are different: *perdemos* is *we lose* and **perdimos** is *we lost*."
+    sample: { es: "Perdimos, pero el partido estuvo divertido.", en: "We lost, but the game was fun." }
+
+el-finde:
+  - words: [hacer, ver, primero, entonces, al final]
+    tips: ["The irregular past", "¿Viste?", "Después, entonces"]
+  - slug: "no-pude-ir"
+    title: "Say what you said and why you couldn't make it"
+    summary: "Dije que sí, pero al final no pude ir"
+    words: [decir, venir, poder, leer]
     new_tips:
-      - title: "Eleven to twenty"
-        body: "**Once**, **doce**, **trece**, **catorce** and **quince** are words to learn one by one. After that it gets easy: **dieci** plus the number, as one word: *dieciséis*, *diecisiete*. Then comes **veinte**: *Tengo veinte años.*"
-    sample: { es: "Tengo veinte años y mi hermana tiene diecisiete.", en: "I'm twenty and my sister is seventeen." }
+      - title: "No pude"
+        body: "**No pude** means you wanted to or tried, and it did not happen: *No pude ir al asado*. **Dije**, **vine** and **pude** have no accent, but **leer** is regular and keeps it: *leí, leíste*."
+    sample: { es: "Primero dije que sí, pero al final no pude ir.", en: "First I said yes, but in the end I couldn't go." }
 
-treinta-y-cuatro:
-  - words: [ veintiuno, veintidós, veintitrés, veinticuatro, veinticinco, veintiséis, veintisiete, veintiocho, veintinueve, treinta ]
-    title: "Count from twenty-one to thirty-nine"
-    tips: [ "Veinticinco, treinta y cuatro" ]
-  - slug: "cuarenta-y-cinco"
-    title: "Count to a hundred"
-    summary: "Mi papá tiene sesenta y dos años"
-    words: [ cuarenta, cincuenta, sesenta, setenta, ochenta, noventa, cien ]
-    tips: [ "Sesenta or setenta?" ]
-    sample: { es: "Mi mamá tiene sesenta años y mi abuela tiene noventa.", en: "My mom is sixty and my grandmother is ninety." }
+vinieron-todos:
+  - words: [venir, traer, postre, carbón, nadie, alguien]
+    tips: ["Traje, quise"]
+  - slug: "no-pudieron"
+    title: "Say what people tried, said and couldn't do"
+    summary: "Quise ir, pero no pude"
+    words: [querer, poder, decir, hacer, ver]
+    tips: ["More of the irregular past"]
+    sample: { es: "Dijeron que sí, pero al final no pudieron venir.", en: "They said yes, but in the end they couldn't come." }
 
-cuanto-sale:
-  - words: [ pagar, comprar, efectivo, tarjeta, mango ]
-    tips: [ "Pago, pagás, paga" ]
-  - slug: "quinientos-pesos"
-    title: "Say prices in the hundreds"
-    summary: "Sale quinientos pesos"
-    words: [ ciento, doscientos, trescientos, cuatrocientos, quinientos, seiscientos, setecientos, ochocientos, novecientos ]
-    tips: [ "Hundreds" ]
-    sample: { es: "¿Cuánto sale? —Sale ochocientos pesos.", en: "How much is it? —It's eight hundred pesos." }
+me-duele:
+  - words: [doler, cabeza, panza, espalda, garganta, pierna, pie, mano]
+    tips: ["Doler works like gustar"]
+  - slug: "saco-turno"
+    title: "Get help when you're sick"
+    summary: "Tengo fiebre y estoy engripado"
+    words: [muela, fiebre, engripado, remedio, descansar, turno, sacar, guardia]
+    tips: ["At the doctor's"]
+    sample: { es: "Tengo fiebre. Tengo que sacar turno.", en: "I have a fever. I need to make an appointment." }
 
-# --- Section 2 · A1.2 Everyday things -----------------------------------------
-altos-y-morochos:
-  - words: [alto, petiso, rubio, morocho, flaco, joven]
-    tips: ["Son altos, somos morochos", "Morocho, rubio, flaco"]
-  - slug: "casados-y-solteros"
-    title: "Say who is nice, married or single"
-    summary: "Mis hermanos son lindos y solteros"
-    words: [lindo, simpático, casado, soltero, mellizo]
-    tips: ["Soy soltero, son casados"]
-    sample: { es: "Mis hermanos son mellizos: son simpáticos y solteros.", en: "My brothers are twins: they're nice and single." }
+me-dolio:
+  - words: [doler, brazo, rodilla, dedo, quebrado, oído, ojo, dolor]
+    title: "Say what hurt"
+    tips: ["Me dolió"]
+    sample: { es: "Anoche me dolió mucho la rodilla.", en: "My knee hurt a lot last night." }
+  - slug: "una-pastilla"
+    title: "Get something for it at the pharmacy"
+    summary: "Tomé una pastilla para el resfrío"
+    words: [lastimarse, curita, pastilla, resfriado, resfrío, alergia]
+    tips: ["At the farmacia"]
+    sample: { es: "Estoy resfriado. ¿Tenés una pastilla?", en: "I have a cold. Do you have a pill?" }
 
-donde-estan-las-llaves:
-  - words: [estar, casa, celu, anteojos, llave, billetera, mochila, compu]
-    tips: ["Está, están", "En casa"]
-  - slug: "esta-arriba"
-    title: "Say where it is and whose it is"
-    summary: "El cargador está arriba"
-    words: [auto, cargador, arriba, abajo, adentro, mío, tuyo]
-    tips: ["Arriba, abajo, adentro"]
-    sample: { es: "Tu cargador está arriba, en mi mochila.", en: "Your charger is upstairs, in my backpack." }
+te-llamo:
+  - words: [llamar, mandar, dar, prestar, pasar a buscar, encontrar]
+    tips: ["Lo, la, le — where they go", "Se lo, se la"]
 
-hay-un-tren:
-  - words: [tren, estación, línea, taxi, avenida, por acá]
-    title: "Find a train or a taxi"
-    tips: ["¿Hay … por acá?"]
-  - slug: "hay-una-plaza"
-    title: "Find places around the city"
-    summary: "Hay gente en la plaza"
-    words: [plaza, parque, hospital, bar, gente, malo, bueno]
-    tips: ["Al parque, del subte", "Hay gente"]
-    sample: { es: "¿Hay un bar bueno por acá?", en: "Is there a good bar around here?" }
+te-llame:
+  - words: [llamar, mandar, recibir, foto, video]
+    tips: ["Lo, la, le in the past"]
+  - slug: "te-di-la-llave"
+    title: "Say what you gave, lent and showed"
+    summary: "Te di la llave ayer"
+    words: [dar, prestar, buscar, mostrar]
+    tips: ["Di, busqué", "Le di la llave a Sofi"]
+    sample: { es: "Le di la llave a Sofi y le mostré las fotos.", en: "I gave Sofi the key and showed her the photos." }
 
-como-estas:
-  - words: [estar, cansado, contento, triste, tranqui, feliz, por qué, porque]
-    title: "Say how you feel, and why"
-    tips: ["Estar, and four endings", "Estar, and ¿por qué?"]
-  - slug: "estoy-medio-nervioso"
-    title: "Say you're so-so, or what's wrong"
-    summary: "Más o menos, estoy medio nervioso"
-    words: [más o menos, medio, nervioso, aburrido, enojado, ocupado, enfermo]
-    tips: ["Medio"]
-    sample: { es: "¿Por qué estás enojado? — Porque mi hermano está enfermo.", en: "Why are you angry? — Because my brother is sick." }
+las-tareas:
+  - words: [lavar, plato, sacar, basura, tocar]
+    tips: ["Me toca"]
+  - slug: "limpio-y-ordeno"
+    title: "Say what you clean and tidy at home"
+    summary: "Hoy limpio el baño y hago las compras"
+    words: [limpiar, limpio, ordenar, compras]
+    tips: ["Limpio, limpia", "Las compras"]
+    sample: { es: "Yo limpio la cocina y vos hacés las compras.", en: "I'll clean the kitchen and you do the shopping." }
 
-esta-cerrado:
-  - words: [abierto, cerrado, lleno, libre, sucio]
-    tips: ["Things have a state too"]
-  - slug: "estas-listo"
-    title: "Say you're ready or in a hurry"
-    summary: "¿Estás lista? Estoy apurado"
-    words: [listo, apurado, preocupado, roto, caliente]
-    tips: ["¿Listo? Listo.", "Caliente"]
-    sample: { es: "Estoy apurada y mi celu está roto.", en: "I'm in a hurry and my phone is broken." }
+quien-lavo:
+  - words: [lavar, limpiar, sacar, ordenar, tocar]
+    tips: ["Me tocó", "Me tocó: I got"]
+  - slug: "barri-y-planche"
+    title: "Talk about sweeping, ironing and the mess"
+    summary: "Barrí la cocina con la escoba"
+    words: [barrer, escoba, planchar, lavarropas, trapo, mugre]
+    tips: ["El lavarropas"]
+    sample: { es: "Barrí la cocina y limpié la mesa con un trapo.", en: "I swept the kitchen and wiped the table with a cloth." }
 
-que-haces:
-  - words: [laburar, trabajar, centro, hacer]
-    tips: ["Laburar", "Every -ar verb"]
-  - slug: "estudio-a-la-noche"
-    title: "Say what you do at night"
-    summary: "A la noche estudio y tomo mate"
-    words: [estudiar, tomar, noche]
-    tips: ["A la noche, ¿qué hacés?"]
-    sample: { es: "Laburo en el centro y a la noche estudio.", en: "I work downtown and at night I study." }
-  - slug: "siempre-camino"
-    title: "Say what you always or never do"
-    summary: "Siempre camino, nunca tomo taxi"
-    words: [caminar, siempre, hablar, nunca]
+de-viaje:
+  - words: [viajar, irse, vacaciones, valija, mar, montaña]
+    tips: ["January, and e for y", "Fui a, me fui a"]
+  - slug: "ida-y-vuelta"
+    title: "Buy your ticket for the trip"
+    summary: "Un pasaje ida y vuelta, por favor"
+    words: [pasaje, ida y vuelta, micro, terminal, avión, vuelo, reservar]
+    tips: ["Micro, not colectivo"]
+    sample: { es: "Un pasaje ida y vuelta a Mar del Plata, por favor.", en: "A return ticket to Mar del Plata, please." }
+
+las-vacaciones:
+  - words: [alquilar, costa, carpa, arena, nadar, meterse, río]
+    title: "Tell what you did at the beach and the river"
+    tips: ["La costa, las sierras", "Con Juan fuimos"]
+  - slug: "paseamos-por-las-sierras"
+    title: "Tell about a trip to the hills and the countryside"
+    summary: "Paseamos por las sierras"
+    words: [viajar, sierra, campo, pasear, sacar, llover]
+    tips: ["The holiday is a we"]
+    sample: { es: "Paseamos por las sierras y sacamos muchas fotos.", en: "We walked around the hills and took lots of photos." }
+
+# --- Section 5 ------------------------------------------------
+menos-mal:
+  - words: [pasar, contar, historia, así que, por eso, enseguida]
+    tips: ["Así que, por eso"]
+  - slug: "no-te-puedo-creer"
+    title: "React to someone's story"
+    summary: "¡No te puedo creer! ¿En serio?"
+    words: [uy, en serio, no te puedo creer, menos mal, por fin, un montón]
+    tips: ["¡Menos mal!"]
+    sample: { es: "—Perdí el vuelo. —Uy, no te puedo creer. ¿En serio?", en: "—I missed my flight. —Oh no, I can't believe it. Really?" }
+
+contame:
+  - words: [contar, de repente, por suerte, igual, o sea, además]
+    tips: ["How a porteño tells it"]
+  - slug: "que-garron"
+    title: "Say if it was funny or a pain"
+    summary: "¡Qué garrón! Igual nos reímos un montón"
+    words: [garrón, chiste, gracioso, reírse]
+    tips: ["¡Qué garrón!"]
+    sample: { es: "Me contó un chiste re gracioso y me reí un montón.", en: "He told me a really funny joke and I laughed a lot." }
+
+en-la-primaria:
+  - words: [primaria, secundaria, maestro, recreo, guardapolvo, querer, poder]
+    tips: ["Quería, podía", "La primaria"]
+  - slug: "en-esa-epoca"
+    title: "Say how life was back then"
+    summary: "En esa época vivíamos todos juntos"
+    words: [época, ser, tener, vivir, ir]
+    tips: ["Ser, tener, vivir, ir — everyone"]
+    sample: { es: "En esa época mis abuelos vivían en el campo y no tenían tele.", en: "Back then my grandparents lived in the country and didn't have a TV." }
+
+me-encantaba:
+  - words: [gustar, encantar, mirar, ver, dibujitos, andar, bici]
+    tips: ["Me gustaba, me encantaba", "Ver keeps its e"]
+  - slug: "jugaban-a-la-pelota"
+    title: "Say what kids used to play"
+    summary: "Los pibes jugaban a la pelota en la plaza"
+    words: [jugar, pelota, escondidas, hamaca, pasar, dormir]
+    tips: ["-aba, -ía, and ver"]
+    sample: { es: "Pasábamos toda la tarde en la plaza: los pibes jugaban a la pelota y yo iba a la hamaca.", en: "We used to spend the whole afternoon in the square: the kids played ball and I went on the swing." }
+
+sono-el-timbre:
+  - words: [sonar, ducha, estar, entrar, empezar, luz, volver, caminar, cocinar, mojado]
+    tips: ["Right in the middle", "Era la una, eran las tres", "Going on, then it happened"]
+
+la-final:
+  - words: [ganar, perder, empatar, jugar, final, alargue, campeón, camiseta, aguante]
+    tips: ["Ellos ganaron"]
+  - slug: "por-penales"
+    title: "Talk about the goals and the penalties"
+    summary: "¡El arquero atajó el penal!"
+    words: [penal, arquero, atajar, meter, golazo, árbitro]
+    tips: ["Penales"]
+    sample: { es: "El arquero atajó un penal y después metió un golazo.", en: "The goalkeeper saved a penalty and then scored a great goal." }
+
+de-que-cuadro-sos:
+  - words: [cuadro, hinchar, club, superclásico, clásico, jugador, ídolo]
+    tips: ["¿De qué cuadro sos?", "El superclásico"]
+  - slug: "soy-socio-del-club"
+    title: "Talk about going to the stadium"
+    summary: "Soy socia del club de toda la vida"
+    words: [estadio, socio, de toda la vida, popular, tribuna, hinchada, cantito, bandera]
+    tips: ["Ser socio"]
+    sample: { es: "Soy socio del club y siempre voy a la popular con la hinchada.", en: "I'm a member of the club and I always go to the standing section with the fans." }
+
+en-el-restaurante:
+  - words: [restaurante, pedir, recomendar, bife, papas fritas, flan]
+    tips: ["Pedir"]
+  - slug: "con-gas-o-sin-gas"
+    title: "Order drinks, share a dish and leave a tip"
+    summary: "Un agua sin gas y un vino tinto, por favor"
+    words: [con gas, sin gas, vino tinto, compartir, propina]
+    tips: ["Propina"]
+    sample: { es: "Para tomar, un agua con gas y un vino tinto.", en: "To drink, a sparkling water and a red wine." }
+
+una-grande-de-muzza:
+  - words: [pedir, pizzería, muzza, porción, mitad, para llevar, delivery]
+    tips: ["Pide, pidieron", "La pizzería"]
+  - slug: "soy-vegetariana"
+    title: "Say what you can and can't eat"
+    summary: "Soy vegetariana. ¿La provoleta es picante?"
+    words: [vegetariano, picante, salado, provoleta, choripán, reservar]
     new_tips:
-      - title: "Siempre, nunca"
-        body: "**Siempre** (always) and **nunca** (never) go in front of the verb: *siempre camino al laburo*. With **nunca** there you need no *no*: *nunca tomo café*."
-    sample: { es: "Nunca hablamos inglés en casa.", en: "We never speak English at home." }
+      - title: "Salado, picante"
+        body: "**Salado** means *salty*, and also *savory*, the opposite of sweet: *¿algo dulce o algo salado?* Argentine food is almost never **picante**, so *spicy* here is very mild. If you don't eat meat, say **soy vegetariano** or **soy vegetariana**."
+    sample: { es: "Soy vegetariana, así que pedí una provoleta.", en: "I'm vegetarian, so I ordered a provoleta." }
 
-practico-castellano:
-  - words: [practicar, usar, palabra, idioma]
-    summary: "Practico castellano con mi vecina"
-    tips: ["More -ar verbs, same endings"]
-  - slug: "me-ayudas"
-    title: "Ask for help with your castellano"
-    summary: "¿Me ayudás? Necesito una palabra"
-    words: [necesitar, ayudar, preguntar, rápido]
-    tips: ["Más despacio"]
-    sample: { es: "Mi vecina habla rápido, pero me ayuda.", en: "My neighbor talks fast, but she helps me." }
-  - slug: "busco-una-palabra"
-    title: "Say what you look for, teach and miss"
-    summary: "Busco una palabra. Extraño a mi familia"
-    words: [buscar, enseñar, extrañar]
-    tips: ["Buscar, and personal a"]
-    sample: { es: "Mi vecina me enseña castellano.", en: "My neighbor teaches me Spanish." }
+la-parrillada:
+  - words: [parrillada, tira de asado, mollejas, chinchulines, bife de chorizo, entraña, ojo de bife, lomo]
+    tips: ["La parrillada"]
+  - slug: "bien-cocido"
+    title: "Say how you want it cooked"
+    summary: "Bien cocido y con chimichurri, por favor"
+    words: [bien cocido, vuelta y vuelta, chimichurri, salsa criolla, leña, cubierto]
+    tips: ["Bien cocido", "¿Y la salsa?"]
+    sample: { es: "Para mí, un ojo de bife vuelta y vuelta con papas fritas.", en: "For me, a ribeye, very rare, with fries." }
 
-que-quieren-tomar:
-  - words: [querer, mesa, carta, vaso, hielo, soda, picada, sal]
-    tips: ["Quiere, queremos, quieren", "Soda y picada"]
-  - slug: "nos-traes-un-tenedor"
-    title: "Ask for what's missing on the table"
-    summary: "¿Nos traés un tenedor y un cuchillo?"
-    words: [plato, cuchillo, tenedor, cuchara, cucharita, servilleta]
-    tips: ["¿Nos traés…?"]
-    sample: { es: "¿Nos traés otro plato y una servilleta, por favor?", en: "Can you bring us another plate and a napkin, please?" }
-
-facu-y-laburo:
-  - words: [facultad, facu, tarea, estudiar, examen, materia, clase, profesor]
-    title: "Talk about your studies"
-    summary: "Tengo que estudiar para la facu"
-    tips: ["Facu, and jobs without \"a\"", "Tener que, and que"]
-  - slug: "de-que-laburas"
-    title: "Talk about your job"
-    summary: "¿De qué laburás? Soy abogada"
-    words: [laburar, laburo, oficina, reunión, jefe, compañero, trabajar, médico, abogado]
-    tips: ["¿De qué laburás?"]
-    sample: { es: "Tengo que laburar: tengo una reunión con mi jefa.", en: "I have to work: I have a meeting with my boss." }
-
-es-enfermera:
-  - words: [enfermero, ingeniero, programador, empresa, periodista, cocinero, vendedor]
-    tips: ["No un, no una"]
-  - slug: "tiene-que-ayudar"
-    title: "Say what people have to do at work"
-    summary: "Es psicóloga, tiene que ayudar"
-    words: [contador, psicólogo, policía, persona, buscar, ayudar, practicar]
-    tips: ["Buscar", "Every person has to"]
-    sample: { es: "Mi hermano es policía y tiene que ayudar a la gente.", en: "My brother is a police officer and has to help people." }
-
-comes-vivis:
-  - words: [comer, vivir, solo, departamento]
-    title: "Say where you live and eat"
-    tips: ["Every -er and -ir verb"]
-  - slug: "leo-y-escribo"
-    title: "Read, write and learn"
-    summary: "Leo libros y aprendo castellano"
-    words: [leer, libro, escribir, mensaje, aprender]
+llegue-tarde:
+  - words: [avisar, esperar, tardar, en camino, se me hizo tarde]
+    tips: ["¿Por qué no me avisaste?", "Tardar"]
+  - slug: "confirmo-en-el-grupo"
+    title: "Set up a meeting and be on time"
+    summary: "¿Confirmás en el grupo? Y sean puntuales"
+    words: [confirmar, grupo, salida, encontrar, puntual, reloj]
     new_tips:
-      - title: "Leés, escribís"
-        body: "These follow *comer* and *vivir*. **Leer** and **aprender** are -er verbs: *leo, leés, lee*. **Escribir** is an -ir verb: *escribo, escribís, escribe*. Say both vowels in **leés**: *¿Leés muchos libros?*"
-    sample: { es: "¿Leés libros en castellano? Yo aprendo mucho.", en: "Do you read books in Spanish? I learn a lot." }
+      - title: "El grupo"
+        body: "Every plan lives in **el grupo**, the WhatsApp group. Someone asks **¿confirmás?** — *are you in?* — and you answer **confirmo**. A **salida** is an outing: a night out or a day trip with friends."
+    sample: { es: "¿Confirmás para la salida del sábado? Avisá en el grupo.", en: "Are you in for Saturday's outing? Let us know in the group." }
 
-vendo-diarios:
-  - words: [vender, diario, abrir, negocio, pibe, leer, revista]
-    tips: ["El negocio"]
-  - slug: "compartimos-todo"
-    title: "Say what you share, get and send"
-    summary: "Recibo mails y comparto mi departamento"
-    words: [compartir, recibir, mail, correr, escribir]
-    tips: ["Abre, recibe", "-er and -ir: different only in vos and nosotros"]
-    sample: { es: "Mis hermanos comparten un departamento y nunca escriben mails.", en: "My brothers share an apartment and never write emails." }
+me-puse-nervioso:
+  - words: [ponerse, nervioso, celoso, enojarse]
+    tips: ["Ponerse: to get (a feeling)", "Me puse, me enojé"]
+  - slug: "me-dio-verguenza"
+    title: "Say what scared or embarrassed you"
+    summary: "Me asusté y me dio mucha vergüenza"
+    words: [asustarse, preocuparse, vergüenza, bronca, lástima]
+    tips: ["Me dio miedo"]
+    sample: { es: "No me avisaste y me preocupé. Después me dio bronca.", en: "You didn't let me know and I got worried. Then it made me angry." }
 
-mi-edificio:
-  - words: [edificio, piso, planta baja, ascensor, escalera, terraza, patio, timbre]
-    tips: ["Tiene ascensor"]
-  - slug: "en-el-primer-piso"
-    title: "Say which floor, and what's wrong"
-    summary: "El encargado vive en el primer piso"
-    words: [primero, segundo, tercero, quinto, encargado, ruido, problema]
-    tips: ["Planta baja y pisos", "El encargado"]
-    sample: { es: "Vivo en el quinto piso y hay mucho ruido.", en: "I live on the fifth floor and there's a lot of noise." }
+me-olvide:
+  - words: [olvidarse, aburrirse, enamorarse, calmarse]
+    title: "Say what went wrong"
+    tips: ["Me olvidé de…"]
+  - slug: "me-senti-re-mal"
+    title: "Say how it made you feel"
+    summary: "Me sentí re mal y me puse colorada"
+    words: [sentirse, ponerse, colorado, asustarse, preocuparse]
+    tips: ["Estaba or me puse?", "Me olvidé, me sentí, nos pusimos"]
+    sample: { es: "Me olvidé de su cumple y me sentí re mal.", en: "I forgot her birthday and I felt awful." }
 
-mi-casa:
-  - words: [alquilar, depto, ambiente, pieza, cocina, baño, living, balcón]
-    tips: ["Depto, pieza, living", "Dos ambientes"]
-  - slug: "la-cama-y-el-sillon"
-    title: "Say what's in each room"
-    summary: "En el living hay un sillón y dos sillas"
-    words: [ventana, puerta, silla, sillón, cama, heladera, cosa]
-    new_tips:
-      - title: "Silla, sillón"
-        body: "A **silla** is a chair. A **sillón** is the big soft one: an armchair or a sofa. *En el living hay un sillón y dos sillas.*"
-    sample: { es: "Mi pieza tiene una cama, una silla y una ventana.", en: "My bedroom has a bed, a chair and a window." }
+# --- Sections 6 and 7 ------------------------------------------------
+# Section 6 (A2.3 "Settling in")
 
-la-hora:
-  - words: [hora, media, cuarto, ver]
-    tips: ["Telling the time"]
-  - slug: "los-dias-de-la-semana"
-    title: "Name the days of the week"
-    summary: "Nos vemos el lunes"
-    words: [día, semana, lunes, martes, miércoles, jueves, viernes, sábado, domingo]
-    tips: ["El lunes, los lunes"]
-    sample: { es: "¿Nos vemos el sábado o el domingo?", en: "Shall we meet on Saturday or Sunday?" }
+la-semana-que-viene:
+  - words: [ganas, que viene, viajar, descansar, seguro, pensar, visitar]
+    tips: ["Voy a…", "Tengo ganas, pienso ir"]
+  - slug: "algun-dia"
+    title: "Talk about plans for later on"
+    summary: "Algún día me voy a mudar al sur"
+    words: [pronto, dentro de poco, algún día, fin de año, mudarse, juntar, curso, anotarse]
+    tips: ["Voy a tener que"]
+    sample: { es: "A fin de año me voy a anotar en un curso.", en: "At the end of the year I'm going to sign up for a course." }
 
-# --- Section 3 · A1.3 Out and about -------------------------------------------
-tengo-una-reserva:
-  - words: [reserva, a nombre de, hotel, hostel, habitación, check-in, check-out, pasaporte, noche]
-    tips: ["Tengo una reserva", "Check-in, check-out"]
-  - slug: "esta-incluido"
-    title: "Ask what's included in your room"
-    summary: "¿El desayuno está incluido?"
-    words: [desayuno, incluido, toalla, wifi, habitación compartida, habitación privada, alquiler temporario]
-    tips: ["¿Está incluido?"]
-    sample: { es: "Quiero una habitación privada con desayuno incluido.", en: "I want a private room with breakfast included." }
+acampamos-en-el-sur:
+  - words: [recorrer, acampar, lago, hacer dedo, mochilero, kilómetro]
+    title: "Tell a backpacking story"
+    tips: ["Acampamos, recorrieron"]
+  - slug: "la-cordillera"
+    title: "Describe the mountains and valleys"
+    summary: "Hay nieve en la cordillera"
+    words: [cordillera, nieve, valle, bodega]
+    tips: ["La cordillera"]
+    sample: { es: "Acampamos al lado de un lago, con nieve en la cordillera.", en: "We camped next to a lake, with snow on the mountains." }
 
-el-barrio:
-  - words: [barrio, verdulería, panadería, farmacia, supermercado, súper, escuela]
-    title: "Name the places in your barrio"
-    summary: "La panadería y la farmacia del barrio"
-    new_tips:
-      - title: "Súper, verdulería"
-        body: "Nobody says the long word: the **supermercado** is just **el súper**. For fruit and vegetables you go to the **verdulería**, a small shop you find on almost every block: *Voy a la verdulería.*"
-  - slug: "esta-enfrente"
-    title: "Say where things are in the barrio"
-    summary: "La farmacia está enfrente, al lado del banco"
-    words: [banco, lado, enfrente, atrás, adelante, mucho]
-    tips: ["Where things are"]
-    sample: { es: "Hay una panadería al lado del banco.", en: "There's a bakery next to the bank." }
+el-depto-nuevo:
+  - words: [mudarse, extrañar, alquilar, pintar, flete, mueble, colchón, propio]
+    title: "Move in and set up a new place"
+    tips: ["Before and after the move"]
+  - slug: "el-contrato-de-alquiler"
+    title: "Deal with the rental paperwork"
+    summary: "El contrato, el depósito y la garantía"
+    words: [dueño, inmobiliaria, alquiler, expensas, contrato, depósito, garantía]
+    tips: ["Renting a place"]
+    sample: { es: "El dueño me pide un depósito y una garantía.", en: "The owner is asking me for a deposit and a guarantor." }
 
-a-la-vuelta:
-  - words: [derecha, izquierda, a la vuelta, vereda, quedar, lugar]
-    tips: ["A la derecha, a la izquierda", "A la vuelta"]
-  - slug: "la-carniceria"
-    title: "Find the shops you need"
-    summary: "La carnicería está al lado del almacén"
-    words: [carnicería, almacén, ferretería, peluquería, lavadero, librería]
-    tips: ["The shops of a barrio"]
-    sample: { es: "La carnicería está a la vuelta, al lado del almacén.", en: "The butcher's is around the corner, next to the corner shop." }
+me-das-una-mano:
+  - words: [dar una mano, acompañar, llevar, un toque, de paso]
+    tips: ["More favors, same question", "Un toque, de paso"]
+  - slug: "me-regas-las-plantas"
+    title: "Ask someone to look after your place"
+    summary: "¿Me regás las plantas?"
+    words: [cuidar, regar, planta, prender, apagar, subir]
+    tips: ["Prendé, apagá"]
+    sample: { es: "¿Me regás las plantas? Y de paso, apagá la luz.", en: "Can you water my plants? And while you're at it, turn off the light." }
 
-queres-podes-vas:
-  - words: [poder, hablar, salir, boliche, cine, hacer, comer, ver]
-    tips: ["Querer, poder, ir", "Voy a + verb"]
-  - slug: "quiero-aprender"
-    title: "Say what you want to learn, be and know"
-    summary: "Quiero aprender castellano"
-    words: [tener, ser, vivir, aprender, estar, escribir, entender, abrir, saber, si]
-    tips: ["Si"]
-    sample: { es: "Si querés aprender castellano, podés hablar conmigo.", en: "If you want to learn Spanish, you can talk with me." }
+hace-fresquito:
+  - words: [fresquito, calorcito, solcito, cosita, pedacito, besito, de mi parte]
+    title: "Make things small and sweet with -ito"
+    tips: ["-cito"]
+  - slug: "esta-calentito"
+    title: "Soften how and when with -ito"
+    summary: "El café está calentito"
+    words: [calentito, cortito, igualito, solito, tempranito, rapidito]
+    tips: ["-ito on everything"]
+    sample: { es: "Mañana salimos tempranito. ¿Vas solito?", en: "Tomorrow we're leaving nice and early. Are you going all by yourself?" }
 
-preferis-salir:
-  - words: [preferir, teatro, museo, fiesta, entrada, pileta, juntos]
-    tips: ["Prefiero, preferís"]
-  - slug: "vuelvo-temprano"
-    title: "Say when you start and when you're back"
-    summary: "Mañana empiezo temprano, pienso volver a las once"
-    words: [volver, empezar, pensar, creer]
-    tips: ["Pienso ir, creo que…"]
-    sample: { es: "Creo que la fiesta empieza a las diez, ¿vamos juntos?", en: "I think the party starts at ten, shall we go together?" }
+a-la-mesa:
+  - words: [a la mesa, buen provecho, servirse, comer, probar, tomar, agarrar]
+    tips: ["Buen provecho", "Ustedes at the table"]
+  - slug: "no-se-olviden"
+    title: "Hurry a group along"
+    summary: "Apúrense y no se olviden de nada"
+    words: [ir, sentarse, pasar, hacer, apurarse, olvidarse, dejar]
+    tips: ["No se olviden"]
+    sample: { es: "Vayan pasando, chicos. ¡Apúrense!", en: "Go on in, guys. Hurry up!" }
 
-dale-veni:
-  - words: [mirar, venir, escuchar, hablar, decir, andar, esperar, sentarse, fijarse]
-    tips: ["How a vos command is made"]
-  - slug: "pasa-toma"
-    title: "Have a friend over"
-    summary: "Pasá, hago unos mates"
-    words: [pasar, tomar, mate, momento, así, dar, hacer, poner]
-    tips: ["The short ones"]
-    sample: { es: "Pasá, sentate, hago unos mates.", en: "Come in, sit down, I'll make some mate." }
+migraciones:
+  - words: [residencia, consulta, ventanilla, requisito, copia, original, atender, presentar]
+    title: "Ask at the immigration window"
+    tips: ["Una consulta"]
+  - slug: "la-precaria"
+    title: "Get your residency papers together"
+    summary: "¿Cuánto demora la precaria?"
+    words: [antecedentes penales, apostilla, certificado, domicilio, precaria, demorar]
+    tips: ["What Migraciones asks for", "¿Cuánto demora?"]
+    sample: { es: "Presenté el certificado de domicilio y me dieron la precaria.", en: "I handed in my proof of address and they gave me the temporary permit." }
 
-segui-derecho:
-  - words: [seguir, derecho, doblar, cruzar, caminar, preguntar, parar]
-    tips: ["Directions in vos"]
-  - slug: "dejame-aca"
-    title: "Ask the way and get dropped off"
-    summary: "¿Cómo llego? Dejame en la esquina"
-    words: [bajarse, subirse, dejar, llegar, dirección, número, altura]
-    tips: ["Bajate, subite", "¿A qué altura?"]
-    sample: { es: "Dejame acá y decime la dirección.", en: "Drop me off here and tell me the address." }
+se-aceptan-tarjetas:
+  - words: [aceptar, tarjeta, hacer, envío, arreglar, local, atención, liquidación]
+    tips: ["On the door", "Se + one thing, se + several"]
+  - slug: "se-prohibe"
+    title: "Read what's allowed and what's not"
+    summary: "No se permiten mascotas"
+    words: [permitir, prohibir, buscar, recompensa]
+    tips: ["Out loud: ¿se puede?"]
+    sample: { es: "Acá no se permiten perros.", en: "Dogs aren't allowed here." }
 
-la-campera-nueva:
-  - words: [remera, zapatilla, campera, pantalón, jean, nuevo]
-    tips: ["Un pantalón, un jean"]
-  - slug: "es-muy-chico"
-    title: "Say if clothes are too big or too small"
-    summary: "Esta remera es muy chica"
-    words: [ropa, grande, chico, feo]
-    tips: ["Nuevo, nueva"]
-    sample: { es: "El jean nuevo es chico, quiero otro más grande.", en: "The new jeans are small, I want a bigger pair." }
+cien-gramos-de-jamon:
+  - words: [gramo, jamón, feta, fiambrería, un cuarto, cocido, crudo, litro, algo más, nada más]
+    title: "Order at the deli counter"
+    tips: ["Cien gramos, un cuarto", "¿Algo más?"]
+  - slug: "estan-maduras"
+    title: "Buy fruit and vegetables at the feria"
+    summary: "¿Las paltas están maduras?"
+    words: [feria, naranja, limón, zanahoria, palta, frutilla, maduro]
+    tips: ["Palta, frutilla"]
+    sample: { es: "Dame un kilo de naranjas y dos paltas maduras.", en: "Give me a kilo of oranges and two ripe avocados." }
 
-ropa-y-colores:
-  - words: [color, azul, rojo, negro]
-    tips: ["Colors match the noun", "The black one"]
-  - slug: "celeste-y-blanco"
-    title: "Name more colors"
-    summary: "Celeste y blanco, verde y rosa"
-    words: [blanco, verde, celeste, rosa, naranja]
-    tips: ["Celeste, rosa, naranja"]
-    sample: { es: "La remera no es azul, es celeste y blanca.", en: "The T-shirt isn't blue, it's light blue and white." }
+# Section 7 (A2.4 "Real life")
 
-este-buzo:
-  - words: [amarillo, gris, marrón, buzo, pollera, camisa, vestido, zapato, gorra]
-    title: "Name more clothes and colors"
-    summary: "Un buzo gris y una camisa amarilla"
-    tips: ["Colors that don't change"]
-  - slug: "lo-llevo"
-    title: "Shop for clothes"
-    summary: "¿Puedo probarme esto? Lo llevo"
-    words: [cómodo, cuál, talle, probarse, probar, probador, quedar, lo llevo, solo estoy mirando]
-    tips: ["Me queda bien", "Talle"]
-    sample: { es: "Este buzo es re cómodo y me queda bien, lo llevo.", en: "This hoodie is really comfortable and fits me well, I'll take it." }
+me-afanaron:
+  - words: [afanar, robar, motochorro, descuidarse, cámara]
+    title: "Say you got robbed"
+    tips: ["Me afanaron", "They took it — from whom?"]
+  - slug: "me-estafaron"
+    title: "Say you got scammed"
+    summary: "Me estafaron con un billete trucho"
+    words: [estafar, estafa, trucho, cuento del tío, bloquear]
+    tips: ["El cuento del tío"]
+    sample: { es: "Me estafaron por teléfono. Ya bloqueé la tarjeta.", en: "I got scammed over the phone. I've already blocked my card." }
 
-la-rutina:
-  - words: [levantarse, acostarse, bañarse, desayunar, almorzar]
-    tips: ["Me levanto, te levantás"]
-  - slug: "todos-los-dias"
-    title: "Say when and how often"
-    summary: "Los sábados ceno tarde"
-    words: [cenar, antes, después, finde, sábado, domingo, vez, todo]
-    new_tips:
-      - title: "Los sábados, todos los días"
-        body: "**Los sábados** means *on Saturdays* — every Saturday: *Los sábados me levanto tarde.* *Every day* is **todos los días**, and *once a week* is **una vez por semana**. **El finde** is the short way to say the weekend."
-    sample: { es: "Los domingos me levanto tarde y después desayuno.", en: "On Sundays I get up late and then I have breakfast." }
+la-ruta:
+  - words: [manejar, autopista, agarrar, nafta, cargar, estación de servicio, peaje]
+    tips: ["Out of the city", "Manejé, ¿manejaste?"]
+  - slug: "tenes-registro"
+    title: "Talk about crashes, fines and papers"
+    summary: "¿Tenés registro?"
+    words: [frenar, chocar, multa, registro, cochera]
+    tips: ["Papers and parking"]
+    sample: { es: "Choqué el auto en la autopista y encima me hicieron una multa.", en: "I crashed the car on the highway and got a fine on top of it." }
 
-me-despierto-temprano:
-  - words: [despertarse, levantarse, acostarse, despertador, cambiarse, irse, apurarse]
-    title: "Wake up, get ready and go"
-    summary: "Me despierto temprano, me cambio y me voy"
-    tips: ["Me despierto, se despiertan", "Me voy"]
-  - slug: "duermo-la-siesta"
-    title: "Talk about sleep, siesta and merienda"
-    summary: "A veces duermo la siesta"
-    words: [dormir, madrugar, siesta, a veces, generalmente, merendar, merienda]
-    tips: ["La siesta"]
-    sample: { es: "Generalmente duermo la siesta y después meriendo.", en: "I usually take a nap and then have an afternoon snack." }
+estamos-de-novios:
+  - words: [conocerse, escribirse, novio, ex, amor, beso, te quiero, te amo]
+    title: "Talk about being in love"
+    tips: ["Nos conocemos, se separaron"]
+  - slug: "se-separaron"
+    title: "Talk about fights and break-ups"
+    summary: "Se pelean todo el tiempo"
+    words: [pelearse, separarse, dejar, mentir, confiar]
+    tips: ["Estamos de novios", "Confiar en"]
+    sample: { es: "Mi ex me mintió. Ya no confío en nadie.", en: "My ex lied to me. I don't trust anyone anymore." }
 
-que-te-gusta-hacer:
-  - words: [encantar, fútbol, cancha, amigo, juntarse, avisar, jugar, bailar]
-    tips: ["Me gusta + doing something"]
-  - slug: "series-y-musica"
-    title: "Say what you like doing at home"
-    summary: "Me gusta cocinar y mirar series"
-    words: [cocinar, mirar, leer, serie, escuchar, película, música, peli]
-    new_tips:
-      - title: "Una peli"
-        body: "**Peli** is short for **película**, and it is what people really say: *¿Querés mirar una peli?* A show with many episodes is a **serie**: *Me encantan las series.*"
-    sample: { es: "Me encanta escuchar música y mirar una peli.", en: "I love listening to music and watching a movie." }
+no-lo-aguanto:
+  - words: [caer, llevarse, hacerse, química, amistad]
+    title: "Say who you get along with"
+    summary: "Tu hermano me cae re bien"
+    tips: ["Le cae, nos cae"]
+  - slug: "es-insoportable"
+    title: "Say who you can't stand"
+    summary: "A mi cuñado no lo aguanto"
+    words: [aguantar, insoportable, falso, hipócrita, respeto]
+    tips: ["No lo aguanto"]
+    sample: { es: "No lo aguanto: es re falso.", en: "I can't stand him: he's so fake." }
 
-me-interesa:
-  - words: [interesar, odiar, deporte, tenis, gimnasio]
-    summary: "Me interesa el tenis, odio el gimnasio"
-    tips: ["Le gusta, les interesa"]
-  - slug: "me-encanta-viajar"
-    title: "Say what you love doing on vacation"
-    summary: "Me encanta viajar, a él le gusta nadar"
-    words: [viajar, nadar, cantar, pasear, playa]
-    new_tips:
-      - title: "Salir a pasear"
-        body: "**Pasear** is to go out with no hurry and no plan, just to walk around and look: *Los domingos salimos a pasear.* With a dog it means to walk it: *Voy a pasear al perro.*"
-    sample: { es: "Me encanta viajar y pasear por la playa.", en: "I love travelling and strolling along the beach." }
+donde-estara:
+  - words: [estar, ser, tener, haber, hacer, venir, pasar]
+    title: "Wonder out loud"
+    tips: ["The future of guessing"]
+  - slug: "capaz-a-lo-mejor"
+    title: "Make a guess"
+    summary: "Capaz está en el laburo"
+    words: [capaz, a lo mejor, quizás, probablemente, seguro que, suponer, deber]
+    tips: ["Capaz, a lo mejor", "Debe estar"]
+    sample: { es: "Debe estar en el laburo. A lo mejor viene más tarde.", en: "He must be at work. Maybe he'll come later." }
 
-pasame-tu-numero:
-  - words: [teléfono, pasar, agendar, mandar, llamar, seguir, audio]
-    tips: ["¿Me pasás tu número?", "Te escribo"]
-  - slug: "chip-y-datos"
-    title: "Get a SIM and spell out your email"
-    summary: "Necesito un chip con datos"
-    words: [chip, datos, arroba, punto com, cómo se escribe]
-    tips: ["Chip y datos"]
-    sample: { es: "No tengo datos, ¿me pasás el wifi?", en: "I have no data, can you give me the wifi?" }
+es-medio-vago:
+  - words: [generoso, egoísta, vago, trabajador, serio, inteligente]
+    tips: ["Medio, re"]
+  - slug: "medio-agrandado"
+    title: "Describe someone's quirks"
+    summary: "Es macanudo, pero medio distraído"
+    words: [callado, tonto, distraído, agrandado, macanudo]
+    tips: ["The good and the bad", "Plural"]
+    sample: { es: "Mi compañero es re trabajador, pero medio agrandado.", en: "My coworker is really hard-working, but a bit full of himself." }
 
-clima:
-  - words: [sol, viento, lluvia, nublado, llover, paraguas, bárbaro]
-    tips: ["Weather with hacer"]
-  - slug: "en-verano"
-    title: "Talk about the seasons"
-    summary: "En enero es verano y hace calor"
-    words: [verano, invierno, otoño, primavera, enero, julio]
-    new_tips:
-      - title: "Seasons are flipped"
-        body: "Argentina is in the south, so the seasons are the other way round. **El verano** runs from late December to March, and **julio** is the middle of **el invierno**: *En enero hace calor.* Months have no capital letter."
-    sample: { es: "En julio es invierno y hace frío.", en: "In July it's winter and it's cold." }
+te-convido-un-mate:
+  - words: [cebar, pava, calentar, hervir, lavado]
+    summary: "Calentá el agua, no la hiervas"
+    tips: ["Calentá el agua, no la hiervas"]
+  - slug: "convidame-uno"
+    title: "Offer and share a mate"
+    summary: "¿Te convido un mate?"
+    words: [convidar, matero, mate cocido, bizcochito, torta frita]
+    tips: ["¿Te convido?"]
+    sample: { es: "¿Te convido un mate con bizcochitos?", en: "Can I offer you a mate with some biscuits?" }
 
-en-febrero:
-  - words: [mes, febrero, marzo, abril, mayo, junio, agosto, septiembre, octubre, noviembre, diciembre]
-    title: "Say the months of the year"
-    summary: "En febrero, en marzo, en abril"
-    tips: ["Months and degrees"]
-  - slug: "mucha-humedad"
-    title: "Talk about the heat and the date"
-    summary: "En febrero hay mucha humedad"
-    words: [mucho, humedad, grado, tormenta, último, fecha]
-    tips: ["Mucho calor, mucha humedad"]
-    sample: { es: "En febrero hay mucha humedad y hace treinta grados.", en: "In February it's very humid and it's thirty degrees." }
+# --- Sections 9 to 12 ------------------------------------------------
+como-no-dona-rosa:
+  - words: [don, doña, mayor, jubilado, cómo no, con permiso]
+    title: "Greet your older neighbors"
+    summary: "Cómo no, doña Rosa"
+    tips: ["Don, doña"]
+  - slug: "te-doy-una-mano"
+    title: "Offer an older neighbor a hand"
+    summary: "Dejá, don José, te doy una mano"
+    words: [dar una mano, dejar, faltaba más, no es nada, querido, atender]
+    tips: ["Dejá, faltaba más", "Warm, not formal"]
+    sample: { es: "Dejá, don Juan, te doy una mano con la bolsa.", en: "Let me, Don Juan, I'll give you a hand with the bag." }
+
+estas-cambiado:
+  - words: [cambiar, cambiado, reconocer, crecer, mejorar, empeorar]
+    title: "Say how someone has changed"
+    tips: ["Cambiaste, mejoró, empeoró"]
+  - slug: "ya-no-es-lo-mismo"
+    title: "Say how the neighborhood changed"
+    summary: "El barrio ya no es lo mismo"
+    words: [desaparecer, torre, moderno, de moda, lo mismo, cada vez peor, cada vez mejor]
+    tips: ["Cada vez peor, de moda"]
+    sample: { es: "Desaparecieron los almacenes y ahora hay torres modernas.", en: "The corner shops disappeared and now there are modern high-rises." }
+
+no-me-alcanza:
+  - words: [aumentar, bajar, gas, tarifa, servicio, remarcar]
+    title: "Complain about rising bills"
+    tips: ["Aumentaron, bajaron"]
+  - slug: "no-llego-a-fin-de-mes"
+    title: "Say the money doesn't stretch"
+    summary: "No llego a fin de mes"
+    words: [alcanzar, gasto, llegar a fin de mes, chino, marca]
+    tips: ["Llegar a fin de mes"]
+    sample: { es: "Aumentaron la luz y el gas, y no llego a fin de mes.", en: "Electricity and gas went up, and I can't make it to payday." }
+
+para-que-entres:
+  - words: [entrar, abrir, cerrar, encontrar, regar, comer]
+    tips: ["While I'm away", "The stems you know"]
+  - slug: "sin-que-se-escape"
+    title: "Warn a friend about the cat and the alarm"
+    summary: "Cerrá sin que se escape el gato"
+    words: [sin que, escaparse, pasar, ver, persiana, levantar, alarma, clave]
+    tips: ["Para que, sin que"]
+    sample: { es: "Abrí la puerta sin que se escape el gato.", en: "Open the door without the cat getting out." }
+
+el-tecnico:
+  - words: [andar, funcionar, aire, ventilador, control, pila, enchufe]
+    title: "Say what isn't working"
+    tips: ["Anda, andan, anduvo"]
+  - slug: "me-lo-podes-arreglar"
+    title: "Get something fixed"
+    summary: "¿Me lo podés arreglar?"
+    words: [arreglar, técnico, electricista, arreglo, quejarse, reclamo]
+    tips: ["Arreglar"]
+    sample: { es: "El aire no anda y el técnico no viene.", en: "The air conditioning isn't working and the repairman isn't coming." }
+
+tenes-razon:
+  - words: [opinar, tema, exacto, totalmente, sin duda, tal cual, coincidir]
+    title: "Ask for an opinion and agree"
+    tips: ["¿Vos qué opinás?"]
+  - slug: "nada-que-ver"
+    title: "Disagree with a friend"
+    summary: "Nada que ver, estás equivocado"
+    words: [al contrario, nada que ver, equivocado, exagerar, discusión]
+    tips: ["Picking a side"]
+    sample: { es: "Al contrario, para mí estás equivocado. ¡No exageres!", en: "On the contrary, I think you're wrong. Don't exaggerate!" }
+
+me-dan-asco:
+  - words: [dar, asco, risa, cucaracha, araña, bicho]
+    tips: ["Me da, me dan", "¿Te dio miedo?"]
+  - slug: "me-pico-un-mosquito"
+    title: "Tell the story of a bug in the house"
+    summary: "Grité, pegué un salto y la maté"
+    words: [gritar, saltar, pegué un salto, matar, volar, ojota, mosquito, picar, repelente]
+    tips: ["The summer visitor"]
+    sample: { es: "Pegué un salto y la maté con una ojota.", en: "I jumped and killed it with a flip-flop." }
+
+no-sabes-lo-que-me-contaron:
+  - words: [lo que, chisme, chusmear, chusma, no me digas, callarse, mirá vos, todo el mundo]
+    tips: ["Lo que", "The reactions"]
+  - slug: "le-metio-los-cuernos"
+    title: "Tell who cheated on whom"
+    summary: "Le metió los cuernos a escondidas"
+    words: [engañar, meter los cuernos, a escondidas, sospechar, descubrir, cortar, volver]
+    tips: ["Los cuernos"]
+    sample: { es: "Le metió los cuernos y todo el mundo lo sabe.", en: "He cheated on her and everybody knows." }
+
+te-doy-la-razon:
+  - words: [equivocarse, reconocer, dar la razón, en eso, pensándolo bien, a ver, cambiar, seguro]
+    tips: ["Me equivoqué", "A ver, pensándolo bien"]
+  - slug: "no-seas-cabeza-dura"
+    title: "Stand your ground in an argument"
+    summary: "No seas cabeza dura"
+    words: [discutir, defender, punto de vista, exagerado, cabeza dura]
+    tips: ["¡Nada que ver!"]
+    sample: { es: "No seas cabeza dura: es mi punto de vista.", en: "Don't be so stubborn: it's my point of view." }
+
+me-pone-nervioso-que:
+  - words: [poner, enojar, alegrar, olvidarse, cancelar, mentir, humor, a último momento, celos, colgado, me clavó el visto]
+    tips: ["Me pone, me enoja, me alegra", "Me clavó el visto"]
+
+deberias-tomarte-unos-dias:
+  - words: [deber, tomarse, estresado, quemado, franco, terapia]
+    title: "Tell a stressed friend to take a break"
+    tips: ["Deber, the whole family", "Terapia"]
+  - slug: "animate"
+    title: "Push a friend to face a problem"
+    summary: "¡Animate! Tenés que encarar el tema"
+    words: [animarse, encarar, paciencia, sincero, hacer caso, tener]
+    tips: ["Estaría bueno que…"]
+    sample: { es: "Animate y hacele caso a tu amiga: deberías ir a terapia.", en: "Go for it and listen to your friend: you should go to therapy." }
+
+estoy-al-horno:
+  - words: [al horno, bajón, al pedo, ni en pedo, en pedo, de pedo]
+    title: "Say you're in trouble, barrio style"
+    tips: ["Al horno, al pedo"]
+  - slug: "es-re-rata"
+    title: "Label people like the barrio does"
+    summary: "Ese chabón es re rata"
+    words: [rata, careta, grasa, manija, cana, hacer la gamba, mandar fruta]
+    tips: ["Rata, careta, grasa"]
+    sample: { es: "Ese chabón es re rata: nunca paga una birra.", en: "That guy is so cheap: he never pays for a beer." }
+
+puteadas:
+  - words: [la puta madre, la concha de la lora, mierda, de mierda, carajo, cagada, cagarse de risa, boludez, me chupa un huevo]
+    title: "Understand swearing at things"
+    tips: ["Understand first", "Swearing at things"]
+  - slug: "no-rompas"
+    title: "Understand the insults"
+    summary: "¡No rompas las bolas, pelotudo!"
+    words: [pelotudo, forro, hinchapelotas, no rompas las bolas, andá a cagar, hijo de puta]
+    tips: ["Swearing at people"]
+    sample: { es: "¡No rompas las bolas! Sos un hinchapelotas.", en: "Stop busting my balls! You're such a pain in the ass." }
+
+# --- Sections 13 to 15 ------------------------------------------------
+te-reenvio-el-archivo:
+  - words: [reenviar, archivo, asunto, planilla, link]
+    title: "Send a file by email"
+    tips: ["Te reenvío, te paso"]
+  - slug: "alguna-duda"
+    title: "Follow up on a work email"
+    summary: "Si tenés alguna duda, avisame"
+    words: [duda, revisar, pendiente, agendar, en copia]
+    tips: ["Cualquier duda…"]
+    sample: { es: "Revisé la planilla: si tenés alguna duda, avisame.", en: "I went through the spreadsheet: if you have any questions, let me know." }
+
+sobre-la-hora:
+  - words: [entregar, informe, presentación, borrador, corregir, sobre la hora]
+    title: "Hand in work at the last minute"
+    summary: "Entregamos el informe sobre la hora"
+    tips: ["Sobre la hora"]
+  - slug: "postergaron-la-fecha"
+    title: "Move a deadline"
+    summary: "Postergaron la fecha: entregamos el lunes"
+    words: [postergar, adelantar, avanzar, horas extra]
+    tips: ["Entregamos, entregaste"]
+    sample: { es: "Adelantaron la fecha, así que hoy hacemos horas extra.", en: "They moved the date up, so we're working overtime today." }
+
+me-la-jugue:
+  - words: [jugársela, pifiarla, romperla, pegarla, no la veo]
+    title: "Take a risk and say how it went"
+    tips: ["Me la jugué, la pifié, la rompe"]
+  - slug: "te-las-arreglas"
+    title: "Say how you cope, porteño style"
+    summary: "Tranqui, vos te las arreglás solo"
+    words: [agarrársela, tomárselas, bancársela, arreglárselas, cortarla, a las apuradas, a la larga]
+    tips: ["The la stays, the person changes", "A las apuradas, a la larga"]
+    sample: { es: "Hace calor y no hay aire, pero nos la bancamos.", en: "It's hot and there's no AC, but we put up with it." }
+
+me-pudri:
+  - words: [pudrirse, hartarse, basta, me saca de quicio, me saca]
+    title: "Say you've had enough"
+    tips: ["Me pudrí, me harté"]
+  - slug: "siempre-reniego"
+    title: "Complain about what wears you down"
+    summary: "Siempre reniego con el bondi: ¡qué estrés!"
+    words: [quejarse, renegar, agotado, muerto, estrés, caos]
+    tips: ["Me quejo, reniego"]
+    sample: { es: "Estoy renegando con el trámite del DNI y ya estoy agotada.", en: "I'm struggling with the ID paperwork and I'm already exhausted." }
+
+paro-docente:
+  - words: [docente, gremio, anunciar, haber, medida de fuerza, protesta, levantar]
+    title: "Follow a strike from start to end"
+    tips: ["Paro docente, paro general"]
+  - slug: "con-normalidad"
+    title: "Find out what is still running"
+    summary: "Levantaron el paro: todo funciona con normalidad"
+    words: [suspender, con normalidad, colectivero, desvío, embotellamiento, apagón, a pie]
+    tips: ["Levantaron el paro"]
+    sample: { es: "Suspendieron el servicio de subte, así que voy a pie.", en: "They suspended the subway service, so I'm going on foot." }
+
+fue-clausurado:
+  - words: [clausurar, aprobar, elegir, ley, obra]
+    tips: ["Fue clausurado, está clausurado", "Fue, fueron + a participle that agrees"]
+  - slug: "hubo-un-incendio"
+    title: "Follow an emergency in the news"
+    summary: "Los heridos fueron trasladados al hospital"
+    words: [incendio, bombero, herido, rescatar, trasladar]
+    tips: ["Hubo un incendio"]
+    sample: { es: "Hubo un incendio, pero todos fueron rescatados por los bomberos.", en: "There was a fire, but everyone was rescued by the firefighters." }
+
+las-elecciones:
+  - words: [votar, elección, voto, veda]
+    tips: ["Votar", "¿Dónde votás?"]
+  - slug: "mi-candidata-gano"
+    title: "Follow the election results"
+    summary: "Mi candidata ganó y ahora es presidenta"
+    words: [candidato, gobierno, presidente, debate, resultado, balotaje]
+    tips: ["Las elecciones"]
+    sample: { es: "Ya salieron los resultados: vamos a balotaje.", en: "The results are out: we're going to a runoff." }
+
+segun-el-diario:
+  - words: [según, noticiero, titular, fuente, al parecer, supuestamente, aparentemente, se ve que]
+    tips: ["Según", "Aparentemente, se ve que"]
+  - slug: "rumor-o-verso"
+    title: "Tell a rumor from the real story"
+    summary: "¿Es verdad o es un rumor?"
+    words: [rumor, verso, cadena, confirmar, desmentir, oficial, versión, compartir]
+    tips: ["¿Rumor o verso?"]
+    sample: { es: "Nadie lo confirmó, así que para mí es verso.", en: "Nobody confirmed it, so to me it's made up." }
+
+lo-lindo-de-la-ciudad:
+  - words: [lo lindo, lo feo, lo bueno, lo malo, lo mejor, lo peor, lo difícil, lo único]
+    title: "Say the good and the bad of the city"
+    tips: ["Lo + adjective"]
+  - slug: "tiene-sus-cosas"
+    title: "Weigh up life in the city"
+    summary: "Buenos Aires tiene sus cosas, pero yo la quiero"
+    words: [lo más, lo que más, lo que menos, tiene sus cosas, inseguridad, costo de vida, calidad de vida, a la vez, comparado con, no hay nada como]
+    tips: ["Lo que más, lo más", "Tiene sus cosas"]
+    sample: { es: "La ciudad tiene sus cosas, pero no hay nada como Buenos Aires.", en: "The city has its issues, but there's nothing like Buenos Aires." }
+
+no-es-que-no-me-guste:
+  - words: [interesar, importar, caer, querer, poder, insistir, compromiso]
+    title: "Explain why you can't make it"
+    tips: ["No es que…, es que…"]
+  - slug: "gracias-por-invitarme"
+    title: "Turn down an invitation"
+    summary: "Gracias por invitarme, pero la próxima voy"
+    words: [invitación, rechazar, decir que no, quedar mal, gracias por invitarme, la próxima, otro día]
+    tips: ["Saying no without quedar mal"]
+    sample: { es: "Gracias por invitarme, pero ya tengo un compromiso; la próxima voy.", en: "Thanks for inviting me, but I already have plans; I'll come next time." }
+
+si-hubiera-ahorrado:
+  - words: [ahorrar, ahorros, comprar, vender, invertir, aceptar, dejar, aprender, mudarse]
+    title: "Imagine a different past"
+    summary: "Ojalá hubiera ahorrado más"
+    tips: ["Hubiera, hubieras, hubiéramos, hubieran", "Would have, I wish I had"]
+  - slug: "a-esta-altura"
+    title: "Say what would be true now"
+    summary: "A esta altura ya estaríamos en Bariloche"
+    words: [estar, ser, tener, saber, haber, a esta altura, medicina]
+    tips: ["Then and now"]
+    sample: { es: "Si hubiéramos ahorrado, a esta altura tendríamos un depto.", en: "If we'd saved, by now we'd have an apartment." }
+
+me-hubiera-gustado:
+  - words: [tendríamos que haber, tendrían que haber, me hubiera gustado, arrepentirse, meter la pata, error, macana]
+    tips: ["Should have, would have liked", "Metí la pata"]
+  - slug: "te-lo-perdiste"
+    title: "Talk about a missed chance"
+    summary: "Dejé pasar la oportunidad"
+    words: [dejar pasar, te lo perdiste, volver atrás, lamentablemente]
+    tips: ["Te lo perdiste"]
+    sample: { es: "El recital estuvo buenísimo; lamentablemente, te lo perdiste.", en: "The concert was great; unfortunately, you missed out." }
+
+lo-que-paso-fue-que:
+  - words: [lo que pasó fue que, lo que quiero decir es que, quise decir, me expresé mal, me entendiste mal, malentendido, en el fondo]
+    tips: ["Lo que pasó fue que…", "Aclarar"]
+  - slug: "lo-mio-lo-tuyo"
+    title: "Say what's yours and what's fair"
+    summary: "Yo pago lo mío y vos lo tuyo"
+    words: [lo mío, lo tuyo, lo primero, lo justo, lo que sea, lo que vos digas]
+    tips: ["Lo mío, lo tuyo"]
+    sample: { es: "Cada uno paga lo suyo: yo lo mío y vos lo tuyo, es lo justo.", en: "Everyone pays their own: I pay mine and you pay yours, that's fair." }
+
+me-mori-de-risa:
+  - words: [reírse, morirse de risa, sonreír, sonrisa, comedia, sentido del humor]
+    tips: ["¿De qué te reís?"]
+  - slug: "me-hizo-sentir"
+    title: "Say what moved you to tears"
+    summary: "¿Lloraste con esa escena?"
+    words: [llorar, lágrima, tristeza, hacer sentir, escena]
+    tips: ["Hacer + infinitive, every person"]
+    sample: { es: "La última escena me hizo sentir mucha tristeza.", en: "The last scene made me feel very sad." }
+
+se-instalaron-en-la-boca:
+  - words: [escaparse, instalarse, guerra, pobreza, puerto, conventillo]
+    title: "Tell how your family got here"
+    tips: ["Se instalaron"]
+  - slug: "mis-raices"
+    title: "Trace your family's roots"
+    summary: "Mis abuelos eran gallegos y mantuvieron el idioma"
+    words: [gallego, raíz, ciudadanía, mantener, conservar, guardar]
+    tips: ["Gallego y la ciudadanía"]
+    sample: { es: "Tengo raíces en España: mi abuela era gallega.", en: "I have roots in Spain: my grandmother was Spanish." }
+
+gracias-por-todo:
+  - words: [al principio, costar, adaptarse, como en casa, de corazón, gracias por todo, decir]
+    title: "Look back on your time here"
+    tips: ["Al principio me costó"]
+  - slug: "que-andes-bien"
+    title: "Say goodbye like a porteño"
+    summary: "Fue un placer: seguimos en contacto"
+    words: [despedida, despedirse, brindar, extrañar, fue un placer, hasta la próxima, que andes bien, seguimos en contacto]
+    tips: ["Brindemos"]
+    sample: { es: "Brindemos: fue un placer, y los voy a extrañar.", en: "Let's toast: it was a pleasure, and I'm going to miss you all." }
