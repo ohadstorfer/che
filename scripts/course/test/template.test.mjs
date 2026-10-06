@@ -150,6 +150,8 @@ test('a unit with the shape teaches every word in three lessons, each one sittin
     assert.deepEqual(new Set(slots.filter((s) => s.kind === 'teach').map((s) => s.form_id)), new Set(own.map((f) => f.id)), `${unit.slug}: every word taught`);
     for (const l of unit.lessons) {
       const mine = slots.filter((s) => s.lesson_id === l.id);
+      // A slang lesson with no course word of its own is its cards: no slots.
+      if (l.kind === 'slang' && !mine.length) continue;
       const screens = screensOf(mine);
       assert.ok(screens >= LESSON_ITEMS.min && screens <= LESSON_ITEMS.max, `${unit.slug} ${l.kind} ${l.ordinal}: ${screens} screens`);
       const words = new Set(mine.filter((s) => s.kind === 'teach').map((s) => outline.forms.find((f) => f.id === s.form_id).lemma_id)).size;
@@ -197,10 +199,9 @@ test('the slang lesson teaches the words named for it and reviews the slang she 
   assert.equal(recap.scope, 'slang');
   const screens = screensOf(mine);
   assert.ok(screens >= LESSON_ITEMS.min && screens <= LESSON_ITEMS.max, `${screens} screens`);
-  // A unit with no slang word of its own: the lesson is the review alone.
+  // A unit with no slang word of its own: the lesson is its cards, and has no slots.
   const plain = planLessons({ unit, forms: outline.forms, sentences, tips: unit.tips });
-  const alone = plain.slots.filter((s) => s.lesson_id === lesson.id);
-  assert.deepEqual(alone.map((s) => [s.kind, s.scope, s.review_count]), [['recap', 'slang', LESSON_ITEMS.min]]);
+  assert.deepEqual(plain.slots.filter((s) => s.lesson_id === lesson.id), []);
 });
 
 test('a lesson with nothing to teach practises, and a practice unit practises in every lesson', () => {

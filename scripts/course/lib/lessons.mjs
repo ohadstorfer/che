@@ -563,12 +563,15 @@ export function planLessons({
     push(lesson, { kind: 'match' });
   };
 
-  // The slang lesson (a unit with the shape): its new Argentine words taught
-  // like any other — card, meaning, gap, then one of them typed or built — and
-  // the rest of the lesson is the slang she already knows, weakest first
-  // (`recap` with scope 'slang', src/lib/lesson.ts). A unit with no new slang
-  // word is that review alone.
+  // The slang lesson (a unit with the shape) opens on its cards: Argentine
+  // words from the Words tab, dealt by slang-cards.mjs and played by the app
+  // with no slots at all. Where the unit also teaches slang as course words
+  // (docs/course/slang-lessons.yaml), the lesson goes on to these slots: each
+  // word taught like any other — card, meaning, gap, then one of them typed or
+  // built — and a review of the slang she already knows, weakest first
+  // (`recap` with scope 'slang', src/lib/lesson.ts).
   const planSlang = (lesson) => {
+    if (!slangForms.length) return;
     const body = [];
     const shown = [];
     for (const form of slangForms) {
@@ -754,7 +757,8 @@ export function lintLessons({ unit, slots, sentenceById, formById, level = 0, le
     const own = slots.filter((s) => s.lesson_id === l.id);
     const say = (rule, what) => lint.push(`lesson ${l.ordinal}: ${rule} — ${what}`);
     if (!own.length) {
-      lint.push(`lesson ${l.ordinal} (${l.title_en}): empty`);
+      // A slang lesson with no course word of its own is its cards (slang-cards.mjs).
+      if (l.kind !== 'slang') lint.push(`lesson ${l.ordinal} (${l.title_en}): empty`);
       continue;
     }
     const teaching = l.kind === 'lesson' || l.kind === 'checkpoint';

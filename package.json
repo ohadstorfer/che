@@ -98,6 +98,7 @@
     "course:split": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/split-units.mjs",
     "course:words": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/add-words.mjs",
     "course:culture-plan": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/culture-plan.mjs",
+    "course:slang-cards": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/slang-cards.mjs",
     "course:sync-lessons": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/sync-lessons.mjs",
     "argentine:build": "node scripts/argentine/build.mjs",
     "argentine:check": "node scripts/argentine/check.mjs",

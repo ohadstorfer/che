@@ -28,7 +28,7 @@ import { goBack } from '@/lib/nav';
 import type { FinishResult } from '@/lib/round';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font } from '@/lib/theme';
-import { finishPathLesson, unitSlang } from '@/lib/unit-extras';
+import { finishPathLesson, unitSlang, unitSlangCourse } from '@/lib/unit-extras';
 
 // ---------------------------------------------------------------------------
 // One play of an Argentine pack (?pack=<slug>). The course's own exercises,
@@ -37,8 +37,10 @@ import { finishPathLesson, unitSlang } from '@/lib/unit-extras';
 // the way a lesson re-asks, without counting toward the score.
 //
 // A unit's slang class on the road (?lesson=<id>) is the same round over the
-// unit's three words (unit-extras.ts), taught the first-time way; finishing it
-// finishes the lesson and goes back to the path.
+// unit's cards (unit-extras.ts), taught the first-time way; finishing it
+// finishes the lesson and goes back to the path. Where the unit also teaches
+// slang as course words, the cards are the first half: the lesson goes on in
+// /practice, which drills those words and finishes it.
 // ---------------------------------------------------------------------------
 
 /** Each word once: the packs of a slang class share their theme's words. */
@@ -50,6 +52,8 @@ export default function ArgentineRound() {
   /** The unit's slang class, once its unit is known; null if it has none. */
   const [slang, setSlang] = useState<{ words: ArWord[]; packs: ArPack[] } | null | undefined>(undefined);
   const [ended, setEnded] = useState<{ result: FinishResult | null } | null>(null);
+  /** The lesson goes on in /practice after the cards: its unit teaches slang as course words. */
+  const [goesOn, setGoesOn] = useState(false);
   /** The unit couldn't be read at all, which says nothing about whether the class exists. */
   const [unreachable, setUnreachable] = useState(false);
   const [skipping, setSkipping] = useState(false);
@@ -79,14 +83,17 @@ export default function ArgentineRound() {
     let cancelled = false;
     lessonWithUnit(lessonId)
       .then(
-        ({ unit }) => unitSlang(unit.slug),
+        ({ unit }) => ({ found: unitSlang(unit.slug), course: unitSlangCourse(unit.slug) }),
         () => {
           if (!cancelled) setUnreachable(true);
-          return null;
+          return { found: null, course: false };
         },
       )
-      .then((found) => {
+      .then(({ found, course }) => {
         if (cancelled) return;
+        // No cards, but course words to drill: the lesson is all in /practice.
+        if (!found && course) return void router.replace(`/practice?lesson=${lessonId}`);
+        setGoesOn(course);
         setSlang(found);
         if (found) setQueue(buildPackRound(found.words, true));
       });
@@ -179,6 +186,8 @@ export default function ArgentineRound() {
     }
     const tries = firstTries.current;
     const score = tries.length ? Math.round((tries.filter(Boolean).length / tries.length) * 100) : 100;
+    // The second half, where there is one, finishes the lesson.
+    if (lessonId && goesOn) return void router.replace(`/practice?lesson=${lessonId}`);
     if (lessonId) return void finishPathLesson(lessonId, score).then((result) => setEnded({ result }));
     if (!pack) return;
     void savePackScore(pack.slug, score).then((saved) => setDone({ score, saved }));

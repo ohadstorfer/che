@@ -9,7 +9,8 @@ import plan from './unit-extras.json';
 // A unit's extra classes, as lessons on the road (kinds speak · slang ·
 // culture; 20260930000001_unit_extras.sql). Not every unit has all three:
 //   speak    a chat with Pancho about the unit (hablar kind 'unit')
-//   slang    three Argentine words, played like a Words pack
+//   slang    a few Argentine words on cards, played like a Words pack; in
+//            some units the lesson then drills slang the course teaches
 //   culture  a culture class, played like one from the Culture tab
 // Which words and which class a unit plays is planned once, by topic, by
 // scripts/course/unit-extras.mjs; this file only reads the plan.
@@ -17,6 +18,8 @@ import plan from './unit-extras.json';
 
 interface UnitExtras {
   slang?: string[];
+  /** The slang lesson also teaches course words: after the cards it goes on as a lesson. */
+  slang_course?: boolean;
   culture?: { section: string; class: string };
 }
 
@@ -34,6 +37,9 @@ export function unitSlang(unitSlug: string): { words: ArWord[]; packs: ArPack[] 
   if (!found.length) return null;
   return { words: found.map((f) => f.word), packs: [...new Set(found.map((f) => f.pack))] };
 }
+
+/** Whether a unit's slang lesson goes on, after its cards, to drill slang the course teaches (scripts/course/slang-cards.mjs). */
+export const unitSlangCourse = (unitSlug: string) => units[unitSlug]?.slang_course === true;
 
 /** A unit's culture class, if it still has one. */
 export function unitCulture(unitSlug: string) {
