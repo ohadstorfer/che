@@ -107,10 +107,10 @@ test('a slang lesson with no slang to review yet is filled from its unit, never 
 });
 
 test('in a unit with the fixed shape, another form of a word she has is only shown in a sentence', () => {
-  assert.ok(hasFixedShape(['lesson', 'lesson', 'slang', 'lesson', 'practice', 'culture', 'speak', 'review']));
-  assert.ok(hasFixedShape(['lesson', 'lesson', 'slang', 'lesson', 'practice', 'speak', 'review']));
+  assert.ok(hasFixedShape(['lesson', 'lesson', 'culture', 'lesson', 'slang', 'practice', 'speak', 'review']));
+  assert.ok(hasFixedShape(['lesson', 'lesson', 'lesson', 'slang', 'practice', 'speak', 'review']));
   assert.ok(!hasFixedShape(['lesson', 'lesson', 'lesson', 'practice', 'review']));
-  assert.ok(!hasFixedShape(['lesson', 'slang', 'lesson', 'review']));
+  assert.ok(!hasFixedShape(['lesson', 'lesson', 'slang', 'lesson', 'lesson', 'practice', 'speak', 'review']));
   // "sos" after "soy": the same word, met a unit later, with a sentence of its own.
   const first = formOf('soy');
   const second = forms.find((f) => f.lemma_id === first.lemma_id && f.form === 'sos');

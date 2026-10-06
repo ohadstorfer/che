@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Gives units the fixed shape (lib/template.mjs): Lesson · Lesson · Slang ·
-// Lesson · Practice · Culture · Speaking · Unit check.
+// Gives units the fixed shape (lib/template.mjs): Lesson · Lesson · Culture ·
+// Lesson · Slang · Practice · Speaking · Unit check.
 //
 //   npm run course:template -- --preview [--sections 1,2,3]
 //       plans the lessons of those sections as if they had the shape, from the
@@ -161,8 +161,7 @@ function migration() {
 -- Nothing is deleted and kept rows keep their ids. Then: npm run course:lessons -- --all
 
 create temporary table template_fresh (lesson_id uuid primary key) on commit drop;
-insert into template_fresh values
-${fresh.map((r) => `  (${q(r.id)})`).join(',\n')};
+${fresh.length ? `insert into template_fresh values\n${fresh.map((r) => `  (${q(r.id)})`).join(',\n')};` : '-- (no lesson is new: only the order changes)'}
 
 ${lines.join('\n')}
 

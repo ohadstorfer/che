@@ -161,7 +161,7 @@ export function planLessons({
 }) {
   const warnings = [];
   // The fixed shape (template.mjs): three teaching lessons whatever the unit
-  // teaches, a slang lesson between them, one practice, the check.
+  // teaches, then a slang lesson, one practice, the check.
   const template = unit.template === true;
   // From B2 the gap is typed, wherever a lesson asks for one.
   const gapAs = level >= 3 ? TYPED : 'sentence_gap';

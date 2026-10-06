@@ -68,14 +68,15 @@ export function shapeUnit({ unit, lessons, culture }) {
     else mint(uuid5(`lesson:${unit.slug}:${kind}`), kind, TITLE[kind]);
   };
 
+  // In the order of lib/template.mjs TEMPLATE.
   teach(1);
   teach(2);
-  extra('slang');
+  if (culture) extra('culture');
   teach(3);
+  extra('slang');
   const practice = practiceRows.find((l) => !taken.has(l.id));
   if (practice) keep(practice, 'practice', TITLE.practice);
   else mint(spare('practice'), 'practice', TITLE.practice);
-  if (culture) extra('culture');
   extra('speak');
   const check = live.filter((l) => l.kind === 'review').at(-1);
   if (check) keep(check, 'review', TITLE.review);

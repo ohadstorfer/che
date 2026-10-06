@@ -178,12 +178,15 @@ export async function lessonWithUnit(lessonId: string): Promise<{ lesson: Lesson
 
 /**
  * Whether a unit has the fixed shape (scripts/course/lib/template.mjs), read
- * off the kinds of its lessons in order: two lessons, the slang lesson, a
- * third, practice. Its lessons are planned for the lighter introduction below,
- * and its slang lesson is a round of the course's own exercises.
+ * off the kinds of its lessons in order: three lessons (a culture class
+ * between them where the unit has one), the slang lesson, practice. Its
+ * lessons are planned for the lighter introduction below.
  */
-const SHAPE_OPENS = ['lesson', 'lesson', 'slang', 'lesson', 'practice'];
-export const hasFixedShape = (kinds: string[]) => SHAPE_OPENS.every((kind, i) => kinds[i] === kind);
+const SHAPE_OPENS = ['lesson', 'lesson', 'lesson', 'slang', 'practice'];
+export const hasFixedShape = (kinds: string[]) => {
+  const own = kinds.filter((kind) => kind !== 'culture' && kind !== 'speak');
+  return SHAPE_OPENS.every((kind, i) => own[i] === kind);
+};
 
 /** The slot resolution itself, apart from any loading — pure given its inputs. */
 export function resolveSlots(
