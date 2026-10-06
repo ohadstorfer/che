@@ -172,7 +172,9 @@ export default function ArgentineRound() {
         saved={done.saved}
         title={pack.title}
         onAgain={() => router.replace(`/argentine-round?pack=${pack.slug}`)}
-        onDone={() => goBack('/words')}
+        // Past the pack's own page, which would only offer this pack again: back
+        // to where she picked it (its theme, or the hub), with the next one up.
+        onDone={() => (router.canDismiss() ? router.dismiss(2) : router.replace(`/argentine-theme?theme=${pack.theme}`))}
       />
     );
   }

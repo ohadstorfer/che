@@ -49,7 +49,8 @@ export function ExerciseFrame({
   actions,
   instant,
 }: {
-  prompt: string;
+  /** A string, or text nodes to sit inside the question's own Text. */
+  prompt: React.ReactNode;
   children: React.ReactNode;
   verdict: Verdict;
   canCheck?: boolean;

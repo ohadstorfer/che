@@ -88,7 +88,18 @@ Deno.serve(async (req) => {
   }
 
   const db = createClient(url, serviceRole, { auth: { persistSession: false } });
-  const key = await sha256(`v${PROMPT_VERSION}|${body.sentence_id ?? ""}|${body.form_id ?? ""}|${mode}|${answerKey(answer)}`);
+  // A sentence's own note (sentences.note_en) is on screen beside whatever is
+  // written here, so it is part of the question: an explanation written before
+  // the note existed, or under another wording of it, is not served again. A
+  // sentence without one keeps the key it always had.
+  let usageNote = "";
+  if (body.sentence_id) {
+    const { data: noted } = await db.from("sentences").select("note_en").eq("id", body.sentence_id).maybeSingle();
+    usageNote = String((noted as { note_en?: string | null } | null)?.note_en ?? "").trim();
+  }
+  const key = await sha256(
+    `v${PROMPT_VERSION}|${body.sentence_id ?? ""}|${body.form_id ?? ""}|${mode}|${answerKey(answer)}${usageNote ? `|note:${usageNote}` : ""}`,
+  );
 
   const { data: cached } = await db.from("explanations").select("body_md, flagged, served").eq("key", key).maybeSingle();
   if (cached && !cached.flagged) {
@@ -138,6 +149,9 @@ Deno.serve(async (req) => {
     `Accepted answers: ${expected.map((e) => `"${e}"`).join(" | ")}`,
     `Learner wrote: "${answer}"`,
     `Words in the exercise: ${words.map((w) => `${w.form} (${w.lemma}, ${w.pos}, "${w.gloss_en}", ${JSON.stringify(w.features)})`).join("; ")}`,
+    usageNote
+      ? `Usage note the learner already sees next to your explanation (agree with it and don't repeat it; a word it calls optional is not a mistake to leave out): ${usageNote}`
+      : "",
     unit ? `Unit: ${unit.title_en}; grammar: ${(unit.grammar_focus ?? []).join(", ")}` : "",
     (tips ?? []).length ? `Unit tips:\n${(tips ?? []).map((t) => `- ${t.title_en}: ${t.body_md}`).join("\n")}` : "",
   ]

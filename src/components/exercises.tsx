@@ -2164,14 +2164,19 @@ function SentenceBuild({
       }
       verdict={verdict}
       canCheck={used.length > 0}
-      onCheck={() =>
+      onCheck={() => {
+        const canonical = isCanonical(placed, asked, side);
         setVerdict({
           correct: sentenceAnswerMatches(placed, asked, { byEar, side }),
           answer: `${sentence.es} — ${sentence.en}`,
           // Right, but not the sentence as written: show that one too.
-          also: isCanonical(placed, asked, side) ? undefined : side === 'en' ? asked.en : asked.es,
-        })
-      }
+          also: canonical ? undefined : side === 'en' ? asked.en : asked.es,
+          // And why the written one has the word she left out, or missed. Not
+          // when she built it as written: there is nothing left to explain.
+          // The note is about the Spanish, so the English build doesn't carry it.
+          about: !canonical && side === 'es' ? (sentence.note_en ?? undefined) : undefined,
+        });
+      }}
       answer={placed.join(' ')}
       onContinue={() =>
         onAnswered(verdict?.correct ? [] : missedForms(asked, placed, allForms, { side, drilled: item.form.id }), {

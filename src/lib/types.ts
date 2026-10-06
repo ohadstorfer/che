@@ -240,6 +240,10 @@ export interface Sentence {
   en_alt: string[];
   /** Other Spanish accepted when the sentence is built from its English. */
   es_alt: string[];
+  /** Why the Spanish is written the way it is, where the English can't say:
+   *  "Argentines often put a “No,” before “de nada”". Shown once she has
+   *  answered — right another way, or wrong — never before. */
+  note_en?: string | null;
   audio_path: string | null;
   /** Who says `audio_path` — a row of `voices`. */
   voice_id: string | null;

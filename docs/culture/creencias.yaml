@@ -82,7 +82,7 @@ classes:
       - type: card
         text: "Ate too much and your stomach hurts for days? Doctors have other names for it. Grandmas call it **empacho**, and they know someone who cures it."
       - type: choice
-        prompt: "How does that person check if you have empacho?"
+        prompt: "How does that person check if you have [empacho]?"
         options:
           - "She looks at your tongue with a candle"
           - "She measures the distance to your stomach with a ribbon"
@@ -126,7 +126,7 @@ classes:
       - type: card
         text: "On August 7, the line outside the church of **San Cayetano**, in Buenos Aires, is many blocks long. He's the saint of bread and work. Some people sleep there for days."
       - type: card
-        text: "All along the road to Luján, strangers give the walkers water, fruit and mate for free. Others wait at the side to rub tired feet."
+        text: "All along the road to Luján, strangers give the walkers water, fruit and [mate] for free. Others wait at the side to rub tired feet."
       - type: card
         text: "Football has its promesas too. “If we win the cup, I'll walk to Luján.” After a big title, plenty of fans really do it."
       - type: choice

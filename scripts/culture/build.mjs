@@ -9,6 +9,8 @@ import { validate } from './validate.mjs';
 
 const DIR = 'docs/culture';
 const OUT = 'src/lib/culture.json';
+// What the bold Spanish means, for the tap-to-translate popover: `words` (span → meaning) and `names` (bold, nothing to translate).
+const GLOSSARY = 'docs/culture-glossary.yaml';
 
 // The order sections appear in the app. Anything not listed goes last.
 const ORDER = [
@@ -39,6 +41,7 @@ if (failed) process.exit(1);
 const rank = (s) => (ORDER.includes(s.slug) ? ORDER.indexOf(s.slug) : ORDER.length);
 sections.sort((a, b) => rank(a) - rank(b) || a.slug.localeCompare(b.slug));
 
-writeFileSync(OUT, JSON.stringify({ sections }, null, 1) + '\n');
+const glossary = parse(readFileSync(GLOSSARY, 'utf8')).words ?? {};
+writeFileSync(OUT, JSON.stringify({ sections, glossary }, null, 1) + '\n');
 const classes = sections.reduce((n, s) => n + s.classes.length, 0);
 console.log(`wrote ${OUT}: ${sections.length} sections, ${classes} classes`);

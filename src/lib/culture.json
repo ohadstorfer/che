@@ -122,7 +122,7 @@
       },
       {
        "type": "choice",
-       "prompt": "Your friends say: “Previa at Tomi's, then the boliche.” You get to Tomi's at nine. What do you find?",
+       "prompt": "Your friends say: “Previa at Tomi's, then the [boliche].” You get to Tomi's at nine. What do you find?",
        "options": [
         "Tomi alone, nothing ready yet",
         "The party already in full swing",
@@ -133,11 +133,11 @@
       },
       {
        "type": "card",
-       "text": "**La previa** is drinks at a friend's place before going out: cheaper, your own music, and you can hear each other. For plenty of people it's the best part. The boliche is just the excuse."
+       "text": "**La previa** is drinks at a friend's place before going out: cheaper, your own music, and you can hear each other. For plenty of people it's the best part. The [boliche] is just the excuse."
       },
       {
        "type": "choice",
-       "prompt": "It's 4 a.m. and the boliche is packed. Which of these will you almost never hear?",
+       "prompt": "It's 4 a.m. and the [boliche] is packed. Which of these will you almost never hear?",
        "options": [
         "Tango",
         "Cumbia",
@@ -148,7 +148,7 @@
       },
       {
        "type": "card",
-       "text": "And six a.m. isn't always the end. Some go on to an **after**, a party after the boliche closes. Everyone else heads for **café con medialunas** as the cafés open, then sleeps until lunch."
+       "text": "And six a.m. isn't always the end. Some go on to an **after**, a party after the [boliche] closes. Everyone else heads for **café con medialunas** as the cafés open, then sleeps until lunch."
       },
       {
        "type": "card",
@@ -223,7 +223,7 @@
       },
       {
        "type": "choice",
-       "prompt": "It's Nochebuena. Which of these is a classic on the table?",
+       "prompt": "It's [Nochebuena]. Which of these is a classic on the table?",
        "options": [
         "Veal in a creamy tuna sauce",
         "Roast turkey with gravy",
@@ -321,7 +321,7 @@
       },
       {
        "type": "choice",
-       "prompt": "The bondi is packed and the next stop is yours. What do you say to get to the door?",
+       "prompt": "The [bondi] is packed and the next stop is yours. What do you say to get to the door?",
        "options": [
         "“Permiso”",
         "“Lo siento”",
@@ -406,11 +406,11 @@
       },
       {
        "type": "card",
-       "text": "Cross the **General Paz** avenue and you're in the **conurbano**, a huge ring of suburbs where millions more live. People out there aren't porteños, and they call the city just **Capital**."
+       "text": "Cross the **General Paz** avenue and you're in the **conurbano**, a huge ring of suburbs where millions more live. People out there aren't [porteños], and they call the city just **Capital**."
       },
       {
        "type": "card",
-       "text": "Porteños call everywhere outside the metro area **el interior**. People from Córdoba or Mendoza don't love it: it makes the whole country sound like a backyard."
+       "text": "[Porteños] call everywhere outside the metro area **el interior**. People from Córdoba or Mendoza don't love it: it makes the whole country sound like a backyard."
       },
       {
        "type": "choice",
@@ -425,12 +425,12 @@
       },
       {
        "type": "card",
-       "text": "The stereotypes go both ways. The provinces say porteños are **agrandados**, people who think they are better than everyone, and talk too fast. Porteños joke that the provinces live slower. Both sides exaggerate, and both laugh."
+       "text": "The stereotypes go both ways. The provinces say [porteños] are **agrandados**, people who think they are better than everyone, and talk too fast. [Porteños] joke that the provinces live slower. Both sides exaggerate, and both laugh."
       },
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "Traveling around? Don't say you're touring “el interior”. Name the province: **“Estoy recorriendo Mendoza.”**"
+       "text": "Traveling around? Don't say you're touring “[el interior]”. Name the province: **“Estoy recorriendo Mendoza.”**"
       }
      ],
      "vocabulary": []
@@ -442,11 +442,11 @@
      "pages": [
       {
        "type": "card",
-       "text": "Ask porteños where they're from and you'll get a barrio, not a city: Boedo, Flores, Palermo. Each has its own cafés, its own club and its own pride."
+       "text": "Ask [porteños] where they're from and you'll get a barrio, not a city: Boedo, Flores, Palermo. Each has its own cafés, its own club and its own pride."
       },
       {
        "type": "card",
-       "text": "Porteños give an address as two streets that cross: **“Corrientes y Callao”**. Distance is counted in blocks: **“Son cinco cuadras”**, it's five blocks."
+       "text": "[Porteños] give an address as two streets that cross: **“Corrientes y Callao”**. Distance is counted in blocks: **“Son cinco cuadras”**, it's five blocks."
       },
       {
        "type": "card",
@@ -465,7 +465,7 @@
       },
       {
        "type": "card",
-       "text": "**San Telmo** is the old colonial south: cobblestones, balconies, antique shops. On Sundays, calle **Defensa** turns into a street market, with tango dancers on the corners."
+       "text": "**San Telmo** is the old colonial south: cobblestones, balconies, antique shops. On Sundays, [calle] **Defensa** turns into a street market, with tango dancers on the corners."
       },
       {
        "type": "card",
@@ -496,15 +496,15 @@
      "pages": [
       {
        "type": "card",
-       "text": "The city bus is the **colectivo**, but everyone calls it **bondi**. And porteños invented it."
+       "text": "The city bus is the **colectivo**, but everyone calls it **bondi**. And [porteños] invented it."
       },
       {
        "type": "card",
-       "text": "You can't pay cash on the bondi. Tap a **SUBE** card, sold at kioscos and subte stations. Many lines also take a bank card or phone. Tell the driver where you're going: **“Hasta Plaza Italia.”**"
+       "text": "You can't pay cash on the [bondi]. Tap a **SUBE** card, sold at kioscos and [subte] stations. Many lines also take a bank card or phone. Tell the driver where you're going: **“Hasta Plaza Italia.”**"
       },
       {
        "type": "choice",
-       "prompt": "How was the colectivo born, in 1928?",
+       "prompt": "How was the [colectivo] born, in 1928?",
        "options": [
         "Taxi drivers began sharing their cars",
         "The city bought old buses from London",
@@ -515,7 +515,7 @@
       },
       {
        "type": "card",
-       "text": "The bondi only stops if you ask. When your line comes, stick your arm out, or it drives right past you. To get off, press the **timbre** (the bell) before your stop and leave by the back door."
+       "text": "The [bondi] only stops if you ask. When your line comes, stick your arm out, or it drives right past you. To get off, press the **timbre** (the bell) before your stop and leave by the back door."
       },
       {
        "type": "card",
@@ -523,7 +523,7 @@
       },
       {
        "type": "card",
-       "text": "Taxis are black and yellow, and a free one shows a red **LIBRE** light. Porteños call the taxi a **tacho** and the driver a **tachero**."
+       "text": "Taxis are black and yellow, and a free one shows a red **LIBRE** light. [Porteños] call the taxi a **tacho** and the driver a **tachero**."
       },
       {
        "type": "choice",
@@ -539,7 +539,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "On the bondi and not sure where to get off? Ask the driver **“¿Me avisás cuando lleguemos a…?”** Most will call out your stop."
+       "text": "On the [bondi] and not sure where to get off? Ask the driver **“¿Me avisás cuando lleguemos a…?”** Most will call out your stop."
       }
      ],
      "vocabulary": []
@@ -551,7 +551,7 @@
      "pages": [
       {
        "type": "card",
-       "text": "The **Obelisco** went up in a rush in 1936, and plenty of porteños hated it."
+       "text": "The **Obelisco** went up in a rush in 1936, and plenty of [porteños] hated it."
       },
       {
        "type": "choice",
@@ -566,7 +566,7 @@
       },
       {
        "type": "card",
-       "text": "It stands on **Avenida 9 de Julio**, which porteños proudly call the widest avenue in the world. Crossing on foot usually takes more than one green light."
+       "text": "It stands on **Avenida 9 de Julio**, which [porteños] proudly call the widest avenue in the world. Crossing on foot usually takes more than one green light."
       },
       {
        "type": "card",
@@ -639,7 +639,7 @@
       },
       {
        "type": "card",
-       "text": "The thief to know is the **motochorro**, who snatches phones from the back of a motorbike. Porteños aren't paranoid, just alert. Keep your phone off café tables by the street."
+       "text": "The thief to know is the **motochorro**, who snatches phones from the back of a motorbike. [Porteños] aren't paranoid, just alert. Keep your phone off café tables by the street."
       },
       {
        "type": "card",
@@ -655,15 +655,15 @@
      "pages": [
       {
        "type": "card",
-       "text": "The **SUBE** is one blue card for the bus, the subte and the train. Get one on your first day and keep it in your pocket. You'll tap it several times a day."
+       "text": "The **SUBE** is one blue card for the bus, the [subte] and the train. Get one on your first day and keep it in your pocket. You'll tap it several times a day."
       },
       {
        "type": "card",
-       "text": "The card holds credit, your **saldo**. To add more, go to a kiosco with a SUBE sign and ask **“¿Me cargás la SUBE?”** Can you load my SUBE? Say how much. Subte stations have machines too."
+       "text": "The card holds credit, your **saldo**. To add more, go to a [kiosco] with a [SUBE] sign and ask **“¿Me cargás la SUBE?”** Can you load my [SUBE]? Say how much. [Subte] stations have machines too."
       },
       {
        "type": "choice",
-       "prompt": "The bus is here and your SUBE has no credit left. What happens when you tap?",
+       "prompt": "The bus is here and your [SUBE] has no credit left. What happens when you tap?",
        "options": [
         "It lets you ride and goes a little below zero",
         "It beeps red and you have to get off",
@@ -678,7 +678,7 @@
       },
       {
        "type": "choice",
-       "prompt": "Three friends get on a bondi with only one SUBE between them. Can they all ride?",
+       "prompt": "Three friends get on a [bondi] with only one [SUBE] between them. Can they all ride?",
        "options": [
         "Yes, one card can pay for all three",
         "No, each rider needs their own card",
@@ -689,11 +689,11 @@
       },
       {
        "type": "card",
-       "text": "Every subte turnstile also takes a contactless bank card or a phone, and more bus lines add this all the time. Not every bus has it yet, so the SUBE is still the safe choice."
+       "text": "Every [subte] turnstile also takes a contactless bank card or a phone, and more bus lines add this all the time. Not every bus has it yet, so the [SUBE] is still the safe choice."
       },
       {
        "type": "card",
-       "text": "The subte has six lines, each with a letter and a color: **A, B, C, D, E** and **H**. To change from one line to another, follow the signs that say **combinación**."
+       "text": "The [subte] has six lines, each with a letter and a color: **A, B, C, D, E** and **H**. To change from one line to another, follow the signs that say **combinación**."
       },
       {
        "type": "choice",
@@ -709,7 +709,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "The subte closes at night, but many bondis run until morning. Tired? Take a taxi or an app like Uber, Cabify or DiDi. And on any bus: **“¿Me avisás dónde me bajo?”** Can you tell me where to get off?"
+       "text": "The [subte] closes at night, but many bondis run until morning. Tired? Take a taxi or an app like Uber, Cabify or DiDi. And on any bus: **“¿Me avisás dónde me bajo?”** Can you tell me where to get off?"
       }
      ],
      "vocabulary": []
@@ -795,7 +795,7 @@
       },
       {
        "type": "choice",
-       "prompt": "The subte is packed at rush hour. Where do many locals carry their backpack?",
+       "prompt": "The [subte] is packed at rush hour. Where do many locals carry their backpack?",
        "options": [
         "On their chest, in front",
         "On their back, straps pulled tight",
@@ -921,7 +921,7 @@
       },
       {
        "type": "card",
-       "text": "Why vos? It's old Spanish. The usual story: **tú** took over in the rich colonial capitals, Lima and Mexico City. The Río de la Plata was a poor, far-off corner, and nobody updated it."
+       "text": "Why [vos]? It's old Spanish. The usual story: **tú** took over in the rich colonial capitals, Lima and Mexico City. The Río de la Plata was a poor, far-off corner, and nobody updated it."
       },
       {
        "type": "choice",
@@ -951,12 +951,12 @@
       },
       {
        "type": "card",
-       "text": "So politeness lives in the tone: **disculpá**, **¿me podrías…?**, **por favor**. A warm vos usually beats a stiff usted."
+       "text": "So politeness lives in the tone: **disculpá**, **¿me podrías…?**, **por favor**. A warm [vos] usually beats a stiff [usted]."
       },
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "You don't even need to say vos. The ending does the work: **¿Tenés cambio?** is the whole sentence. Short, friendly, local."
+       "text": "You don't even need to say [vos]. The ending does the work: **¿Tenés cambio?** is the whole sentence. Short, friendly, local."
       }
      ],
      "vocabulary": []
@@ -1002,7 +1002,7 @@
       },
       {
        "type": "card",
-       "text": "Then there's **che**: hey, dude, listen. Nobody knows for sure where it comes from. An old Spanish call for attention, **ce**? Guaraní? Mapudungun? Valencian? Pick a theory and defend it over a mate."
+       "text": "Then there's **che**: hey, dude, listen. Nobody knows for sure where it comes from. An old Spanish call for attention, **ce**? [Guaraní]? Mapudungun? Valencian? Pick a theory and defend it over a [mate]."
       },
       {
        "type": "choice",
@@ -1034,7 +1034,7 @@
       },
       {
        "type": "choice",
-       "prompt": "Who were the first people to write lunfardo down, in the late 1800s?",
+       "prompt": "Who were the first people to write [lunfardo] down, in the late 1800s?",
        "options": [
         "Tango poets, for their lyrics",
         "Police, who thought it was a thieves' code",
@@ -1045,7 +1045,7 @@
       },
       {
        "type": "card",
-       "text": "Then **tango** carried it onto the radio, and lunfardo went from the tenement patio to every living room in the country."
+       "text": "Then **tango** carried it onto the radio, and [lunfardo] went from the tenement patio to every living room in the country."
       },
       {
        "type": "card",
@@ -1053,7 +1053,7 @@
       },
       {
        "type": "card",
-       "text": "More lunfardo you'll hear every day: **guita**, money. **Pibe** and **piba**, a boy and a girl. **Morfar**, to eat. **Birra**, beer. **Fiaca**, the feeling of not wanting to do anything."
+       "text": "More [lunfardo] you'll hear every day: **guita**, money. **Pibe** and **piba**, a boy and a girl. **Morfar**, to eat. **Birra**, beer. **Fiaca**, the feeling of not wanting to do anything."
       },
       {
        "type": "choice",
@@ -1089,7 +1089,7 @@
      "pages": [
       {
        "type": "card",
-       "text": "Porteños love flipping words. Swap the syllables of **revés**, backwards, and you get **vesre**: the name of the game, played on itself."
+       "text": "[Porteños] love flipping words. Swap the syllables of **revés**, backwards, and you get **vesre**: the name of the game, played on itself."
       },
       {
        "type": "choice",
@@ -1108,7 +1108,7 @@
       },
       {
        "type": "choice",
-       "prompt": "At a party you say you're staying at “un telo re lindo en Palermo”. Everyone bursts out laughing. Why?",
+       "prompt": "At a party you say you're staying at “un [telo] [re lindo] en Palermo”. Everyone bursts out laughing. Why?",
        "options": [
         "A telo is a hotel rented by the hour",
         "Telo is slang for a cheap hostel",
@@ -1140,7 +1140,7 @@
      "pages": [
       {
        "type": "card",
-       "text": "Porteños don't just talk, they perform. Watch two friends argue about football across the street and you'll get the gist without hearing a word."
+       "text": "[Porteños] don't just talk, they perform. Watch two friends argue about football across the street and you'll get the gist without hearing a word."
       },
       {
        "type": "choice",
@@ -1174,7 +1174,7 @@
       },
       {
        "type": "card",
-       "text": "When they do type, they cut words short: **q** is que, **xq** is porque, **tmb** is también, **dsp** is después. And **tqm**, te quiero mucho, closes many family chats."
+       "text": "When they do type, they cut words short: **q** is que, **xq** is porque, **tmb** is también, **dsp** is después. And **tqm**, [te quiero] mucho, closes many family chats."
       },
       {
        "type": "choice",
@@ -1214,7 +1214,7 @@
       },
       {
        "type": "card",
-       "text": "What gets everyone through? The **merienda**: around five, a small meal of mate or coffee with toast or **facturas**. Skip it and you'll be starving by eight."
+       "text": "What gets everyone through? The **merienda**: around five, a small meal of [mate] or coffee with toast or **facturas**. Skip it and you'll be starving by eight."
       },
       {
        "type": "choice",
@@ -1264,7 +1264,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "To split the bill evenly, say **“¿Dividimos?”** Putting money together to buy something, like the meat for an asado or a gift, is **hacer una vaquita**."
+       "text": "To split the bill evenly, say **“¿Dividimos?”** Putting money together to buy something, like the meat for an [asado] or a gift, is **hacer una vaquita**."
       }
      ],
      "vocabulary": []
@@ -1280,7 +1280,7 @@
       },
       {
        "type": "choice",
-       "prompt": "A dozen empanadas arrive: four fillings, nothing written on them. How do you tell them apart?",
+       "prompt": "A dozen [empanadas] arrive: four fillings, nothing written on them. How do you tell them apart?",
        "options": [
         "By the pattern folded into the edge",
         "By a little dot of color on top",
@@ -1343,7 +1343,7 @@
       },
       {
        "type": "choice",
-       "prompt": "Porteños often put something on top of their slice of pizza. What is it?",
+       "prompt": "[Porteños] often put something on top of their slice of pizza. What is it?",
        "options": [
         "A slice of chickpea bread",
         "A fried egg, runny yolk",
@@ -1362,7 +1362,7 @@
       },
       {
        "type": "choice",
-       "prompt": "The play just ended and the pizzería is packed. What do porteños do?",
+       "prompt": "The play just ended and the pizzería is packed. What do [porteños] do?",
        "options": [
         "Eat a slice standing at the counter",
         "Take a number and wait an hour",
@@ -1439,7 +1439,7 @@
       },
       {
        "type": "choice",
-       "prompt": "When do whole neighborhoods cook giant pots of locro?",
+       "prompt": "When do whole neighborhoods cook giant pots of [locro]?",
        "options": [
         "On national holidays like 25 de mayo",
         "On the first frost of every winter",
@@ -1454,7 +1454,7 @@
       },
       {
        "type": "card",
-       "text": "Locro is no immigrant dish. It comes from the Andes, from long before Argentina existed. On the side comes a spicy red sauce of oil, paprika and green onion. Ask: **“¿Tenés picante?”**"
+       "text": "[Locro] is no immigrant dish. It comes from the Andes, from long before Argentina existed. On the side comes a spicy red sauce of oil, paprika and green onion. Ask: **“¿Tenés picante?”**"
       },
       {
        "type": "card",
@@ -1481,7 +1481,7 @@
      "pages": [
       {
        "type": "card",
-       "text": "**Helado** here has Italian roots, and Argentines will tell you it's the best outside Italy. Every neighborhood has a **heladería**, open late, and people eat helado even in winter."
+       "text": "**Helado** here has Italian roots, and Argentines will tell you it's the best outside Italy. Every neighborhood has a **heladería**, open late, and people eat [helado] even in winter."
       },
       {
        "type": "card",
@@ -1504,11 +1504,11 @@
       },
       {
        "type": "card",
-       "text": "A kilo takes up to four gustos, and it's gone before anyone mentions dieting. **Un cuarto** is for one person with self-control."
+       "text": "A kilo takes up to four [gustos], and it's gone before anyone mentions dieting. **Un cuarto** is for one person with self-control."
       },
       {
        "type": "card",
-       "text": "A heladería lives or dies by its **dulce de leche**, and the best ones offer it in several versions. With chocolate flakes, it's **dulce de leche granizado**."
+       "text": "A [heladería] lives or dies by its **dulce de leche**, and the best ones offer it in several versions. With chocolate flakes, it's **dulce de leche granizado**."
       },
       {
        "type": "choice",
@@ -1524,7 +1524,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "Order a dulce de leche, a sambayón, and one fruit flavor so you can say you ate something healthy."
+       "text": "Order a [dulce de leche], a [sambayón], and one fruit flavor so you can say you ate something healthy."
       }
      ],
      "vocabulary": []
@@ -1548,11 +1548,11 @@
       },
       {
        "type": "card",
-       "text": "Just don't call it caramel. Caramel is cooked sugar. Dulce de leche is mostly milk, and Argentines will correct you."
+       "text": "Just don't call it caramel. Caramel is cooked sugar. [Dulce de leche] is mostly milk, and Argentines will correct you."
       },
       {
        "type": "choice",
-       "prompt": "Legend says dulce de leche was invented by accident in 1829. How?",
+       "prompt": "Legend says [dulce de leche] was invented by accident in 1829. How?",
        "options": [
         "A maid forgot the milk on the stove",
         "A soldier left sugar in his canteen",
@@ -1563,7 +1563,7 @@
       },
       {
        "type": "card",
-       "text": "Cute story, almost certainly a legend. Uruguay, Chile, France and others claim dulce de leche too. Uruguay, loudly."
+       "text": "Cute story, almost certainly a legend. Uruguay, Chile, France and others claim [dulce de leche] too. Uruguay, loudly."
       },
       {
        "type": "card",
@@ -1594,11 +1594,11 @@
      "pages": [
       {
        "type": "card",
-       "text": "An **alfajor** is two soft cookies stuck together with a filling, usually dulce de leche, often dipped in chocolate. That's all it is, and the whole country loves it."
+       "text": "An **alfajor** is two soft cookies stuck together with a filling, usually [dulce de leche], often dipped in chocolate. That's all it is, and the whole country loves it."
       },
       {
        "type": "choice",
-       "prompt": "Where do the alfajor's name and ancestor come from?",
+       "prompt": "Where do the [alfajor]'s name and ancestor come from?",
        "options": [
         "Muslim Spain",
         "Colonial Peru",
@@ -1609,15 +1609,15 @@
       },
       {
        "type": "card",
-       "text": "The Spanish brought the name across the ocean, and here it became cookies plus dulce de leche. Argentina just, humbly, perfected it."
+       "text": "The Spanish brought the name across the ocean, and here it became cookies plus [dulce de leche]. Argentina just, humbly, perfected it."
       },
       {
        "type": "card",
-       "text": "Every region has its own. **De maicena** is the one your abuela makes: crumbly cornstarch cookies, dulce de leche, edges rolled in grated coconut."
+       "text": "Every region has its own. **De maicena** is the one your [abuela] makes: crumbly cornstarch cookies, [dulce de leche], edges rolled in grated coconut."
       },
       {
        "type": "card",
-       "text": "**Marplatense**: dipped in chocolate, the kiosco classic. **Santafesino**: crunchy layers, white sugar glaze. **Cordobés**: soft, glazed, often filled with fruit jam."
+       "text": "**Marplatense**: dipped in chocolate, the [kiosco] classic. **Santafesino**: crunchy layers, white sugar glaze. **Cordobés**: soft, glazed, often filled with fruit jam."
       },
       {
        "type": "choice",
@@ -1633,7 +1633,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "Skipped lunch? Ask for a **triple**: three cookies, two layers of dulce de leche. More alfajor per alfajor."
+       "text": "Skipped lunch? Ask for a **triple**: three cookies, two layers of [dulce de leche]. More [alfajor] per [alfajor]."
       }
      ],
      "vocabulary": []
@@ -1679,7 +1679,7 @@
       },
       {
        "type": "card",
-       "text": "**Jorgito** and **Guaymallén** are the everyday kiosco alfajores: cheap and much loved. Ask a table which alfajor is the best and the argument can last all afternoon."
+       "text": "**Jorgito** and **Guaymallén** are the everyday [kiosco] alfajores: cheap and much loved. Ask a table which [alfajor] is the best and the argument can last all afternoon."
       },
       {
        "type": "card",
@@ -1740,7 +1740,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "Going to a friend's for mate in the afternoon? Stop at the panadería for **una docena de facturas**. Nobody has ever said no."
+       "text": "Going to a friend's for [mate] in the afternoon? Stop at the [panadería] for **una docena de facturas**. Nobody has ever said no."
       }
      ],
      "vocabulary": []
@@ -1756,11 +1756,11 @@
       },
       {
        "type": "card",
-       "text": "**Flan** is egg custard with caramel. Here it rarely comes alone: with dulce de leche, with whipped cream, or both. Both is **mixto**: **“Un flan mixto, por favor.”**"
+       "text": "**Flan** is egg custard with caramel. Here it rarely comes alone: with [dulce de leche], with whipped cream, or both. Both is **mixto**: **“Un flan mixto, por favor.”**"
       },
       {
        "type": "choice",
-       "prompt": "The bodegón menu offers **postre vigilante**. What arrives?",
+       "prompt": "The [bodegón] menu offers **postre vigilante**. What arrives?",
        "options": [
         "Cheese with quince paste",
         "The long pastry from the bakery",
@@ -1790,7 +1790,7 @@
       },
       {
        "type": "card",
-       "text": "**Panqueques** here are thin crêpes rolled around dulce de leche. Some parrillas serve them **quemados**, with the sugar burnt crunchy on top."
+       "text": "**Panqueques** here are thin crêpes rolled around [dulce de leche]. Some parrillas serve them **quemados**, with the sugar burnt crunchy on top."
       },
       {
        "type": "card",
@@ -1819,7 +1819,7 @@
       },
       {
        "type": "choice",
-       "prompt": "Yerba looks a lot like green tea. Is it the same plant?",
+       "prompt": "[Yerba] looks a lot like green tea. Is it the same plant?",
        "options": [
         "Yes, it's a tea bush, just dried differently",
         "No, it's a different plant native to South America",
@@ -1830,15 +1830,15 @@
       },
       {
        "type": "card",
-       "text": "The gourd is also called a **mate**. And the verb is **tomar**, not beber: **¿Tomamos unos mates?** Shall we have some mate?"
+       "text": "The gourd is also called a **mate**. And the verb is **tomar**, not beber: **¿Tomamos unos mates?** Shall we have some [mate]?"
       },
       {
        "type": "card",
-       "text": "The **Guaraní** drank yerba long before the Spanish arrived. Later, **Jesuit** missions tamed the wild plant and grew it on plantations."
+       "text": "The **Guaraní** drank [yerba] long before the Spanish arrived. Later, **Jesuit** missions tamed the wild plant and grew it on plantations."
       },
       {
        "type": "choice",
-       "prompt": "In 1767 the Jesuits were expelled. What happened to their yerba plantations?",
+       "prompt": "In 1767 the Jesuits were expelled. What happened to their [yerba] plantations?",
        "options": [
         "Nobody managed to farm yerba for over a century",
         "Spain took them over and got rich",
@@ -1850,7 +1850,7 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "By law, since 2013, mate is Argentina's **infusión nacional**: the national infusion. (Wine has the title of national drink.) Not bad for a leaf you share with total strangers."
+       "text": "By law, since 2013, [mate] is Argentina's **infusión nacional**: the national infusion. (Wine has the title of national drink.) Not bad for a leaf you share with total strangers."
       },
       {
        "type": "card",
@@ -1871,11 +1871,11 @@
       },
       {
        "type": "card",
-       "text": "The classic mate is a dried gourd, but there are wooden, glass and steel ones too. The big one with a wide mouth, wrapped in leather, is the **mate camionero**: the trucker's mate."
+       "text": "The classic [mate] is a dried gourd, but there are wooden, glass and steel ones too. The big one with a wide mouth, wrapped in leather, is the **mate camionero**: the trucker's [mate]."
       },
       {
        "type": "choice",
-       "prompt": "You just bought a beautiful new gourd. What do you do before your first mate?",
+       "prompt": "You just bought a beautiful new gourd. What do you do before your first [mate]?",
        "options": [
         "Fill it with wet yerba and wait a day",
         "Scrub it well with hot soapy water",
@@ -1886,15 +1886,15 @@
       },
       {
        "type": "card",
-       "text": "The bombilla goes in once and stays put. It's not a spoon, and never, ever a stirring stick."
+       "text": "The [bombilla] goes in once and stays put. It's not a spoon, and never, ever a stirring stick."
       },
       {
        "type": "card",
-       "text": "Argentine termos come with a special spout, the **pico cebador**. It pours a thin, steady stream right next to the bombilla, without flooding the yerba."
+       "text": "Argentine termos come with a special spout, the **pico cebador**. It pours a thin, steady stream right next to the [bombilla], without flooding the [yerba]."
       },
       {
        "type": "choice",
-       "prompt": "You open a pack of yerba and it's full of little sticks. Good or bad?",
+       "prompt": "You open a pack of [yerba] and it's full of little sticks. Good or bad?",
        "options": [
         "Good: stems make it milder",
         "Bad: it's cheap, low-grade yerba",
@@ -1906,7 +1906,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "Pick your yerba brand carefully. People are fiercely loyal to theirs, and they'll happily tell you why yours is wrong."
+       "text": "Pick your [yerba] brand carefully. People are fiercely loyal to theirs, and they'll happily tell you why yours is wrong."
       }
      ],
      "vocabulary": []
@@ -1918,11 +1918,11 @@
      "pages": [
       {
        "type": "card",
-       "text": "**Cebar** is to pour the water and serve each mate. The person doing it is the **cebador**. **¿Quién ceba?** means: who's serving? A bad cebador hears about it all afternoon."
+       "text": "**Cebar** is to pour the water and serve each [mate]. The person doing it is the **cebador**. **¿Quién ceba?** means: who's serving? A bad [cebador] hears about it all afternoon."
       },
       {
        "type": "card",
-       "text": "Fill the gourd about ¾ with yerba. Cover it, flip it, shake, then tilt it. The yerba settles into a slope: the **montañita**, the little mountain."
+       "text": "Fill the gourd about ¾ with [yerba]. Cover it, flip it, shake, then tilt it. The [yerba] settles into a slope: the **montañita**, the little mountain."
       },
       {
        "type": "choice",
@@ -1937,11 +1937,11 @@
       },
       {
        "type": "card",
-       "text": "Pour into the low side, next to the bombilla, and keep the top of the montañita dry. Some cebadores do it differently, and that works too."
+       "text": "Pour into the low side, next to the [bombilla], and keep the top of the [montañita] dry. Some cebadores do it differently, and that works too."
       },
       {
        "type": "choice",
-       "prompt": "Who usually drinks the very first mate?",
+       "prompt": "Who usually drinks the very first [mate]?",
        "options": [
         "The cebador",
         "The guest of honor",
@@ -1952,11 +1952,11 @@
       },
       {
        "type": "card",
-       "text": "It even has a name: **el mate del zonzo**, the fool's mate. A small sacrifice, not a privilege."
+       "text": "It even has a name: **el mate del zonzo**, the fool's [mate]. A small sacrifice, not a privilege."
       },
       {
        "type": "card",
-       "text": "After many rounds the flavor fades and the mate is **lavado**: washed out. Time for fresh yerba."
+       "text": "After many rounds the flavor fades and the [mate] is **lavado**: washed out. Time for fresh [yerba]."
       }
      ],
      "vocabulary": []
@@ -1968,11 +1968,11 @@
      "pages": [
       {
        "type": "card",
-       "text": "One mate, one bombilla, one **ronda**. The cebador fills it and hands it to you. You drink all of it, until it gurgles."
+       "text": "One [mate], one [bombilla], one **ronda**. The [cebador] fills it and hands it to you. You drink all of it, until it gurgles."
       },
       {
        "type": "choice",
-       "prompt": "You finish your mate. Who do you hand it to?",
+       "prompt": "You finish your [mate]. Who do you hand it to?",
        "options": [
         "Back to the cebador",
         "The person on your left",
@@ -1983,11 +1983,11 @@
       },
       {
        "type": "card",
-       "text": "Only the cebador touches the yerba and the bombilla. Fixing someone's mate is like rearranging their kitchen while they cook."
+       "text": "Only the [cebador] touches the [yerba] and the [bombilla]. Fixing someone's [mate] is like rearranging their kitchen while they cook."
       },
       {
        "type": "choice",
-       "prompt": "You hand the mate back and say **“gracias”**. What happens next?",
+       "prompt": "You hand the [mate] back and say **“gracias”**. What happens next?",
        "options": [
         "You don't get another one",
         "You get the next one first",
@@ -1998,16 +1998,16 @@
       },
       {
        "type": "card",
-       "text": "Don't hold the mate while you tell a long story. Everyone's waiting and the water's getting cold. Someone will say **“¡No es un micrófono!”**"
+       "text": "Don't hold the [mate] while you tell a long story. Everyone's waiting and the water's getting cold. Someone will say **“¡No es un micrófono!”**"
       },
       {
        "type": "card",
-       "text": "Don't wipe the bombilla before you drink. Sharing it is the whole point, and wiping it reads as “you think I'm dirty”."
+       "text": "Don't wipe the [bombilla] before you drink. Sharing it is the whole point, and wiping it reads as “you think I'm dirty”."
       },
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "Got a cold? Don't share: say **“paso, estoy resfriado”** (or **resfriada**). Just don't feel like it? Say **“no, gracias”** the first time it comes your way. Nobody minds. Since the pandemic, many people bring their own mate too."
+       "text": "Got a cold? Don't share: say **“paso, estoy resfriado”** (or **resfriada**). Just don't feel like it? Say **“no, gracias”** the first time it comes your way. Nobody minds. Since the pandemic, many people bring their own [mate] too."
       }
      ],
      "vocabulary": []
@@ -2024,15 +2024,15 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "Old folklore says a mate could carry a message: sweet meant friendship, very hot meant passion, bitter meant indifference. Today bitter just means bitter: it's how most people drink it."
+       "text": "Old folklore says a [mate] could carry a message: sweet meant friendship, very hot meant passion, bitter meant indifference. Today bitter just means bitter: it's how most people drink it."
       },
       {
        "type": "card",
-       "text": "**Mate cocido** is the simple version: yerba in a tea bag, in a regular cup, often with milk. The drink of school breakfasts and the afternoon **merienda**."
+       "text": "**Mate cocido** is the simple version: [yerba] in a tea bag, in a regular cup, often with milk. The drink of school breakfasts and the afternoon **merienda**."
       },
       {
        "type": "choice",
-       "prompt": "On a road trip, who makes the mate?",
+       "prompt": "On a road trip, who makes the [mate]?",
        "options": [
         "The co-pilot",
         "The driver, at red lights",
@@ -2043,11 +2043,11 @@
       },
       {
        "type": "card",
-       "text": "Mate goes everywhere: the office, university, the park, the beach. **Matear** is to drink mate together, and the **matera** is the bag that carries the kit."
+       "text": "[Mate] goes everywhere: the office, university, the park, the beach. **Matear** is to drink [mate] together, and the **matera** is the bag that carries the kit."
       },
       {
        "type": "choice",
-       "prompt": "In the northeast, in 40 °C heat, what do many people drink instead of hot mate?",
+       "prompt": "In the northeast, in 40 °C heat, what do many people drink instead of hot [mate]?",
        "options": [
         "Mate with ice-cold water or juice",
         "Mate cocido with cold milk",
@@ -2058,7 +2058,7 @@
       },
       {
        "type": "card",
-       "text": "In Buenos Aires, though, hot mate never takes a vacation. Even at the beach in January, someone has the termo."
+       "text": "In Buenos Aires, though, hot [mate] never takes a vacation. Even at the beach in January, someone has the [termo]."
       }
      ],
      "vocabulary": []
@@ -2070,11 +2070,11 @@
      "pages": [
       {
        "type": "card",
-       "text": "Argentina doesn't own mate. **Uruguay**, **Paraguay** and southern **Brazil** drink it every day too, and each has its own way of doing it."
+       "text": "Argentina doesn't own [mate]. **Uruguay**, **Paraguay** and southern **Brazil** drink it every day too, and each has its own way of doing it."
       },
       {
        "type": "choice",
-       "prompt": "By most counts, which country drinks the most mate per person?",
+       "prompt": "By most counts, which country drinks the most [mate] per person?",
        "options": [
         "Uruguay",
         "Argentina",
@@ -2085,15 +2085,15 @@
       },
       {
        "type": "card",
-       "text": "The twist: Uruguay grows almost no yerba. Most of it comes from **Brazil**, ground fine, almost without stems. Stronger and more bitter."
+       "text": "The twist: Uruguay grows almost no [yerba]. Most of it comes from **Brazil**, ground fine, almost without stems. Stronger and more bitter."
       },
       {
        "type": "card",
-       "text": "In southern Brazil, the gaúchos drink **chimarrão**: bright green, powder-fine yerba in a big gourd called a **cuia**. Same ronda, different accent."
+       "text": "In southern Brazil, the gaúchos drink **chimarrão**: bright green, powder-fine [yerba] in a big gourd called a **cuia**. Same [ronda], different accent."
       },
       {
        "type": "choice",
-       "prompt": "Which country buys the most yerba from Argentina?",
+       "prompt": "Which country buys the most [yerba] from Argentina?",
        "options": [
         "Syria",
         "Uruguay",
@@ -2105,7 +2105,7 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "The link is people. Around 1900 many Syrians and Lebanese moved to Argentina, and some went back home and took mate with them. Today the **Druze** of Syria and Lebanon especially love it."
+       "text": "The link is people. Around 1900 many Syrians and Lebanese moved to Argentina, and some went back home and took [mate] with them. Today the **Druze** of Syria and Lebanon especially love it."
       }
      ],
      "vocabulary": []
@@ -2140,11 +2140,11 @@
       },
       {
        "type": "card",
-       "text": "Every asado has one **asador**, also called the **parrillero**, in charge of the fire and the meat. It's a role with a lot of pride. Everyone else keeps them company by the grill, drink in hand."
+       "text": "Every [asado] has one **asador**, also called the **parrillero**, in charge of the fire and the meat. It's a role with a lot of pride. Everyone else keeps them company by the grill, drink in hand."
       },
       {
        "type": "card",
-       "text": "An asado is also how Argentines celebrate almost anything: a birthday, a win, a new job, a Friday."
+       "text": "An [asado] is also how Argentines celebrate almost anything: a birthday, a win, a new job, a Friday."
       },
       {
        "type": "choice",
@@ -2159,12 +2159,12 @@
       },
       {
        "type": "card",
-       "text": "For lots of families it's a weekly date: **el asado del domingo**. Same backyard, same asador, same people."
+       "text": "For lots of families it's a weekly date: **el asado del domingo**. Same backyard, same [asador], same people."
       },
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "**Asado** is also the name of a cut: the ribs. So yes, you can eat asado at an asado."
+       "text": "**Asado** is also the name of a cut: the ribs. So yes, you can eat [asado] at an [asado]."
       }
      ],
      "vocabulary": []
@@ -2180,11 +2180,11 @@
       },
       {
        "type": "card",
-       "text": "A **quincho** is a roofed space with a parrilla and a long table: in the backyard of a house, or shared on the roof of an apartment building, where neighbors book it for the weekend."
+       "text": "A **quincho** is a roofed space with a [parrilla] and a long table: in the backyard of a house, or shared on the roof of an apartment building, where neighbors book it for the weekend."
       },
       {
        "type": "choice",
-       "prompt": "What's the secret of a good asado fire?",
+       "prompt": "What's the secret of a good [asado] fire?",
        "options": [
         "No flames under the meat at all",
         "Tall flames, for a crispy outside",
@@ -2199,7 +2199,7 @@
       },
       {
        "type": "choice",
-       "prompt": "What does the asador put on the meat before it hits the grill?",
+       "prompt": "What does the [asador] put on the meat before it hits the grill?",
        "options": [
         "Just coarse salt",
         "A garlic and pepper rub",
@@ -2210,11 +2210,11 @@
       },
       {
        "type": "card",
-       "text": "Then patience. The big cuts cook slowly, often for an hour and a half or more, and a good asador flips each one only once."
+       "text": "Then patience. The big cuts cook slowly, often for an hour and a half or more, and a good [asador] flips each one only once."
       },
       {
        "type": "card",
-       "text": "At a restaurant they ask **¿Qué punto?** **Jugoso** is rare to medium-rare, **a punto** is medium, **bien cocido** is well done. Tip: a punto here is often more cooked than you expect."
+       "text": "At a restaurant they ask **¿Qué punto?** **Jugoso** is rare to medium-rare, **a punto** is medium, **bien cocido** is well done. Tip: [a punto] here is often more cooked than you expect."
       }
      ],
      "vocabulary": []
@@ -2245,7 +2245,7 @@
       },
       {
        "type": "choice",
-       "prompt": "The morcilla is dark, soft and rich. What's it made with?",
+       "prompt": "The [morcilla] is dark, soft and rich. What's it made with?",
        "options": [
         "Pig's blood",
         "Chicken liver",
@@ -2256,11 +2256,11 @@
       },
       {
        "type": "card",
-       "text": "Then the **achuras**, the organ meats: **chinchulines**, crispy grilled intestines, and **mollejas**, sweetbreads, crispy outside and creamy inside. Try the mollejas with lemon."
+       "text": "Then the **achuras**, the organ meats: **chinchulines**, crispy grilled intestines, and **mollejas**, sweetbreads, crispy outside and creamy inside. Try the [mollejas] with lemon."
       },
       {
        "type": "card",
-       "text": "Finally the main event: **asado de tira** (short ribs), **vacío** (flank) and **entraña** (skirt steak). The asador decides the order. Your job: eat, and say **¡qué rico!**"
+       "text": "Finally the main event: **asado de tira** (short ribs), **vacío** (flank) and **entraña** (skirt steak). The [asador] decides the order. Your job: eat, and say **¡qué rico!**"
       },
       {
        "type": "card",
@@ -2276,15 +2276,15 @@
      "pages": [
       {
        "type": "card",
-       "text": "**Choripán**: a grilled chorizo split open in a crusty roll. That's it, and it's perfect. Everyone calls it **chori**."
+       "text": "**Choripán**: a grilled [chorizo] split open in a crusty roll. That's it, and it's perfect. Everyone calls it **chori**."
       },
       {
        "type": "card",
-       "text": "Ask for it **mariposa**, butterfly: the chorizo is split lengthwise and opened flat, so it cooks faster and gets crispy."
+       "text": "Ask for it **mariposa**, butterfly: the [chorizo] is split lengthwise and opened flat, so it cooks faster and gets crispy."
       },
       {
        "type": "choice",
-       "prompt": "It's 6 a.m. and the boliche just closed. Where's a classic place to get a chori?",
+       "prompt": "It's 6 a.m. and the [boliche] just closed. Where's a classic place to get a [chori]?",
        "options": [
         "A food stall by the river",
         "A 24-hour kiosco",
@@ -2295,7 +2295,7 @@
       },
       {
        "type": "card",
-       "text": "Chori is street food everywhere: outside football stadiums, at every festival, and at political rallies."
+       "text": "[Chori] is street food everywhere: outside football stadiums, at every festival, and at political rallies."
       },
       {
        "type": "choice",
@@ -2341,11 +2341,11 @@
       },
       {
        "type": "card",
-       "text": "Golden rule: don't tell the asador how to cook. Not “it needs more heat”, not “in my country we…”. And never touch the tongs."
+       "text": "Golden rule: don't tell the [asador] how to cook. Not “it needs more heat”, not “in my country we…”. And never touch the tongs."
       },
       {
        "type": "card",
-       "text": "Want to help? Ask **“¿Te ayudo en algo?”** and do exactly what you're told. Or just bring the asador a glass of wine."
+       "text": "Want to help? Ask **“¿Te ayudo en algo?”** and do exactly what you're told. Or just bring the [asador] a glass of wine."
       },
       {
        "type": "choice",
@@ -2360,11 +2360,11 @@
       },
       {
        "type": "card",
-       "text": "When the asador calls **“¡A comer!”** or **“¡A la mesa!”**, go right away. Letting the meat go cold while you finish a story is the real insult."
+       "text": "When the [asador] calls **“¡A comer!”** or **“¡A la mesa!”**, go right away. Letting the meat go cold while you finish a story is the real insult."
       },
       {
        "type": "card",
-       "text": "The asador cooked, so the others clear the table and wash up. Offer to help with the dishes: that's how you get invited back."
+       "text": "The [asador] cooked, so the others clear the table and wash up. Offer to help with the dishes: that's how you get invited back."
       }
      ],
      "vocabulary": []
@@ -2396,7 +2396,7 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "The town of **Viale**, in Entre Ríos, throws a national festival for asado con cuero every year."
+       "text": "The town of **Viale**, in Entre Ríos, throws a national festival for [asado con cuero] every year."
       },
       {
        "type": "card",
@@ -2415,7 +2415,7 @@
       },
       {
        "type": "card",
-       "text": "Chicken, onions, peppers, chorizo and a splash of wine, all stewing together: **pollo al disco**. One disco feeds a crowd, everyone standing around it with bread."
+       "text": "Chicken, onions, peppers, [chorizo] and a splash of wine, all stewing together: **pollo al disco**. One disco feeds a crowd, everyone standing around it with bread."
       }
      ],
      "vocabulary": []
@@ -2521,7 +2521,7 @@
       },
       {
        "type": "choice",
-       "prompt": "Why are River fans called “gallinas”?",
+       "prompt": "Why are River fans called “[gallinas]”?",
        "options": [
         "River was winning 2–0 in a big final and lost",
         "Their first stadium was a chicken farm",
@@ -2564,11 +2564,11 @@
       },
       {
        "type": "card",
-       "text": "Today the potrero is **fútbol 5**. Plenty of adults play a **picado** every week, with the same friends for years. Then beers."
+       "text": "Today the [potrero] is **fútbol 5**. Plenty of adults play a **picado** every week, with the same friends for years. Then beers."
       },
       {
        "type": "choice",
-       "prompt": "In a picado, you play the ball past your friend Nacho and everyone screams **“¡Caño!”**. What did you just do?",
+       "prompt": "In a [picado], you play the ball past your friend Nacho and everyone screams **“¡Caño!”**. What did you just do?",
        "options": [
         "Put the ball between his legs",
         "Hit the post",
@@ -2683,7 +2683,7 @@
       },
       {
        "type": "card",
-       "text": "People call him **el Diez**, the number ten, or just **el Diego**. He died on November 25, 2020. The wake was at the Casa Rosada, and huge crowds came to say goodbye."
+       "text": "People call him **el Diez**, the number ten, or just **el Diego**. He died on November 25, 2020. The wake was at the [Casa Rosada], and huge crowds came to say goodbye."
       },
       {
        "type": "card",
@@ -2856,7 +2856,7 @@
       },
       {
        "type": "card",
-       "text": "Uruguayans have their own complaint: Argentines, they say, think that mate, tango, dulce de leche and the asado are all Argentine. Uruguay says every one of them is Uruguayan too."
+       "text": "Uruguayans have their own complaint: Argentines, they say, think that [mate], tango, [dulce de leche] and the [asado] are all Argentine. Uruguay says every one of them is Uruguayan too."
       },
       {
        "type": "card",
@@ -3039,11 +3039,11 @@
       },
       {
        "type": "card",
-       "text": "The suitcase of an Argentine abroad carries yerba, dulce de leche and alfajores. And anyone who visits from home gets a shopping list first."
+       "text": "The suitcase of an Argentine abroad carries [yerba], [dulce de leche] and alfajores. And anyone who visits from home gets a shopping list first."
       },
       {
        "type": "card",
-       "text": "They look for each other. In every big city there's an Argentine bakery, a group that plays football on Sundays and someone making an asado on a very small balcony."
+       "text": "They look for each other. In every big city there's an Argentine bakery, a group that plays football on Sundays and someone making an [asado] on a very small balcony."
       },
       {
        "type": "choice",
@@ -3133,7 +3133,7 @@
      "pages": [
       {
        "type": "card",
-       "text": "Sunday lunch belongs to the family. Everyone goes to the parents' or grandparents' house, for pasta or an asado. It starts around two and ends when it's dark."
+       "text": "Sunday lunch belongs to the family. Everyone goes to the parents' or grandparents' house, for pasta or an [asado]. It starts around two and ends when it's dark."
       },
       {
        "type": "card",
@@ -3156,7 +3156,7 @@
       },
       {
        "type": "card",
-       "text": "You don't leave with empty hands. Mom or grandma fills a **tupper**, a plastic box, with what's left of lunch. The rule: the tupper comes back."
+       "text": "You don't leave with empty hands. Mom or grandma fills a **tupper**, a plastic box, with what's left of lunch. The rule: the [tupper] comes back."
       },
       {
        "type": "choice",
@@ -3192,7 +3192,7 @@
       },
       {
        "type": "choice",
-       "prompt": "A friend says: “This is **el Colo**.” What does el Colo look like?",
+       "prompt": "A friend says: “This is **el Colo**.” What does [el Colo] look like?",
        "options": [
         "He's very tall",
         "He has red hair",
@@ -3269,7 +3269,7 @@
       },
       {
        "type": "card",
-       "text": "When a friend moves abroad, there is a **despedida**: a goodbye party, usually an asado, with speeches and tears. Some people get three or four of them."
+       "text": "When a friend moves abroad, there is a **despedida**: a goodbye party, usually an [asado], with speeches and tears. Some people get three or four of them."
       },
       {
        "type": "card",
@@ -3519,7 +3519,7 @@
       },
       {
        "type": "card",
-       "text": "At the verdulería you usually don't choose the fruit yourself. You say what you want and when you'll eat it: **“para hoy”**, for today, means give me the ripe ones."
+       "text": "At the [verdulería] you usually don't choose the fruit yourself. You say what you want and when you'll eat it: **“para hoy”**, for today, means give me the ripe ones."
       },
       {
        "type": "choice",
@@ -3669,7 +3669,7 @@
      "pages": [
       {
        "type": "card",
-       "text": "The country is huge. Buenos Aires to Bariloche is about 1,600 km, close to twenty hours by car. Families do it anyway, with a termo and a mate."
+       "text": "The country is huge. Buenos Aires to Bariloche is about 1,600 km, close to twenty hours by car. Families do it anyway, with a [termo] and a [mate]."
       },
       {
        "type": "choice",
@@ -3731,7 +3731,7 @@
       },
       {
        "type": "choice",
-       "prompt": "It's a hot day at a family asado. What do many people put in their glass of red wine?",
+       "prompt": "It's a hot day at a family [asado]. What do many people put in their glass of red wine?",
        "options": [
         "A slice of orange",
         "Ice and fizzy water",
@@ -3746,7 +3746,7 @@
       },
       {
        "type": "card",
-       "text": "Since 2013, wine is Argentina's national drink by law. Mate has a different title: the national infusion."
+       "text": "Since 2013, wine is Argentina's national drink by law. [Mate] has a different title: the national infusion."
       },
       {
        "type": "choice",
@@ -3801,7 +3801,7 @@
       },
       {
        "type": "choice",
-       "prompt": "You want to buy a liter of beer at the kiosco and the seller asks **“¿Tenés envase?”** What does he want?",
+       "prompt": "You want to buy a liter of beer at the [kiosco] and the seller asks **“¿Tenés envase?”** What does he want?",
        "options": [
         "Your ID, to see your age",
         "A bag to carry it",
@@ -3832,11 +3832,11 @@
       },
       {
        "type": "card",
-       "text": "Argentina drinks about three quarters of all the fernet in the world. The only factory of the famous Italian brand outside Italy is here."
+       "text": "Argentina drinks about three quarters of all the [fernet] in the world. The only factory of the famous Italian brand outside Italy is here."
       },
       {
        "type": "choice",
-       "prompt": "At a party with no tall glasses, what do friends often mix the fernet in?",
+       "prompt": "At a party with no tall glasses, what do friends often mix the [fernet] in?",
        "options": [
         "A cooking pot",
         "A metal bucket",
@@ -3847,11 +3847,11 @@
       },
       {
        "type": "card",
-       "text": "The home of fernet is **Córdoba**. People there drink more of it than anywhere else, and they will tell you so."
+       "text": "The home of [fernet] is **Córdoba**. People there drink more of it than anywhere else, and they will tell you so."
       },
       {
        "type": "card",
-       "text": "How much fernet, how much cola, how much foam on top: everyone has their own rule, and everyone says the others do it wrong."
+       "text": "How much [fernet], how much cola, how much foam on top: everyone has their own rule, and everyone says the others do it wrong."
       },
       {
        "type": "choice",
@@ -3870,7 +3870,7 @@
       },
       {
        "type": "card",
-       "text": "In many barrios the **sodero** still comes by truck once a week. He leaves full sifones and takes the empty ones. Families keep the same sodero for decades."
+       "text": "In many barrios the **sodero** still comes by truck once a week. He leaves full sifones and takes the empty ones. Families keep the same [sodero] for decades."
       }
      ],
      "vocabulary": []
@@ -3990,7 +3990,7 @@
      "pages": [
       {
        "type": "card",
-       "text": "A **refrán** is an old proverb, and most came from Spain. What's Argentine is the timing: your abuela has one ready before you finish telling her the problem."
+       "text": "A **refrán** is an old proverb, and most came from Spain. What's Argentine is the timing: your [abuela] has one ready before you finish telling her the problem."
       },
       {
        "type": "card",
@@ -3998,7 +3998,7 @@
       },
       {
        "type": "choice",
-       "prompt": "After a bad breakup, your friend won't even go on a date. Abuela nods: **“El que se quema con leche, ve una vaca y…”** Burned by milk, you see a cow and…?",
+       "prompt": "After a bad breakup, your friend won't even go on a date. [Abuela] nods: **“El que se quema con leche, ve una vaca y…”** Burned by milk, you see a cow and…?",
        "options": [
         "**Llora**: cries",
         "**Corre**: runs",
@@ -4009,7 +4009,7 @@
       },
       {
        "type": "card",
-       "text": "New friends look a bit shady? Abuela raises an eyebrow: **“Decime con quién andás y te diré quién sos.”** Tell me who you hang out with, and I'll tell you who you are."
+       "text": "New friends look a bit shady? [Abuela] raises an eyebrow: **“Decime con quién andás y te diré quién sos.”** Tell me who you hang out with, and I'll tell you who you are."
       },
       {
        "type": "card",
@@ -4122,7 +4122,7 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "Some porteños use it like a comma: **“Fui al súper, boludo, y no había nada, boludo.”**"
+       "text": "Some [porteños] use it like a comma: **“Fui al súper, boludo, y no había nada, boludo.”**"
       },
       {
        "type": "card",
@@ -4130,7 +4130,7 @@
       },
       {
        "type": "choice",
-       "prompt": "Boludo has a longer cousin: **pelotudo**. Compared with boludo, how does it land?",
+       "prompt": "[Boludo] has a longer cousin: **pelotudo**. Compared with [boludo], how does it land?",
        "options": [
         "Softer, almost cute",
         "Harsher, rarely friendly",
@@ -4146,7 +4146,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "Say boludo only once your friends say it to you. Never to a waiter, a driver or someone you just met."
+       "text": "Say [boludo] only once your friends say it to you. Never to a waiter, a driver or someone you just met."
       }
      ],
      "vocabulary": []
@@ -4173,11 +4173,11 @@
       },
       {
        "type": "card",
-       "text": "It's old lunfardo, all over tango lyrics: the gil got scammed, the **vivo** did the scamming. Rude, but mild enough to tease friends with."
+       "text": "It's old [lunfardo], all over tango lyrics: the [gil] got scammed, the **vivo** did the scamming. Rude, but mild enough to tease friends with."
       },
       {
        "type": "card",
-       "text": "The **chanta** is all talk: brags, promises, never delivers. The plumber who says **“mañana paso”** for three weeks? Chanta."
+       "text": "The **chanta** is all talk: brags, promises, never delivers. The plumber who says **“mañana paso”** for three weeks? [Chanta]."
       },
       {
        "type": "card",
@@ -4205,7 +4205,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "With a stranger, none of these. When in doubt, laugh and keep quiet: no puteada is better than the wrong one."
+       "text": "With a stranger, none of these. When in doubt, laugh and keep quiet: no [puteada] is better than the wrong one."
       }
      ],
      "vocabulary": []
@@ -4265,7 +4265,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "Need a clean version? Say **¡miércoles!** (Wednesday) for mierda and **¡la pucha!** for la puta. Safe with kids, bosses and grandmas."
+       "text": "Need a clean version? Say **¡miércoles!** (Wednesday) for mierda and **¡la pucha!** for [la puta]. Safe with kids, bosses and grandmas."
       }
      ],
      "vocabulary": []
@@ -4374,7 +4374,7 @@
       },
       {
        "type": "choice",
-       "prompt": "Then came the 1982 Malvinas war against Britain. What happened to Argentine rock on the radio?",
+       "prompt": "Then came the 1982 [Malvinas] war against Britain. What happened to Argentine rock on the radio?",
        "options": [
         "It took over, because English songs were pulled",
         "It was banned completely until the war ended",
@@ -4424,7 +4424,7 @@
       },
       {
        "type": "card",
-       "text": "A **peña** is a folklore night: long tables, **empanadas**, wine and live music. Nobody just sits and watches. When a chacarera starts, people dance between the tables, then sit down and keep eating."
+       "text": "A **peña** is a folklore night: long tables, **empanadas**, wine and live music. Nobody just sits and watches. When a [chacarera] starts, people dance between the tables, then sit down and keep eating."
       },
       {
        "type": "choice",
@@ -4444,7 +4444,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "Invited to dance at a peña? Say **“¡Dale!”** and get up. Nobody expects a foreigner to dance well. Getting up is what counts."
+       "text": "Invited to dance at a [peña]? Say **“¡Dale!”** and get up. Nobody expects a foreigner to dance well. Getting up is what counts."
       }
      ],
      "vocabulary": []
@@ -4460,11 +4460,11 @@
       },
       {
        "type": "card",
-       "text": "At every wedding the DJ eventually puts on cumbia, and even your serious uncle turns out to be a **cumbiero**. You don't have to like it. You just have to dance."
+       "text": "At every wedding the DJ eventually puts on [cumbia], and even your serious uncle turns out to be a **cumbiero**. You don't have to like it. You just have to dance."
       },
       {
        "type": "choice",
-       "prompt": "**Gilda** became one of the biggest cumbia stars of the 90s. What was her job before?",
+       "prompt": "**Gilda** became one of the biggest [cumbia] stars of the 90s. What was her job before?",
        "options": [
         "Kindergarten teacher",
         "Radio DJ",
@@ -4487,7 +4487,7 @@
       },
       {
        "type": "choice",
-       "prompt": "In 2025 cuarteto got an honor that tango got back in 2009. Which one?",
+       "prompt": "In 2025 [cuarteto] got an honor that tango got back in 2009. Which one?",
        "options": [
         "A place on UNESCO's heritage list",
         "Its own Latin Grammy category",
@@ -4498,11 +4498,11 @@
       },
       {
        "type": "card",
-       "text": "**Rodrigo**, **el Potro**, took cuarteto to Buenos Aires and filled the Luna Park. He died young, in a car crash after a show. **“Soy cordobés”** and **“La mano de Dios”**, his song for Maradona, still close every party."
+       "text": "**Rodrigo**, **el Potro**, took [cuarteto] to Buenos Aires and filled the Luna Park. He died young, in a car crash after a show. **“Soy cordobés”** and **“La mano de Dios”**, his song for Maradona, still close every party."
       },
       {
        "type": "card",
-       "text": "And today? You'll hear **Los Palmeras**, from Santa Fe, with **“Bombón asesino”**, the cumbia of **Ke Personajes**, and the cuarteto of **La K'onga**."
+       "text": "And today? You'll hear **Los Palmeras**, from Santa Fe, with **“Bombón asesino”**, the [cumbia] of **Ke Personajes**, and the [cuarteto] of **La K'onga**."
       }
      ],
      "vocabulary": []
@@ -4563,7 +4563,7 @@
       },
       {
        "type": "card",
-       "text": "RKT is reggaetón plus cumbia villera, with huge bass. **L-Gante** made it explode, recording his first hits on a laptop the government gave out to schoolkids. He calls his style **cumbia 420**."
+       "text": "RKT is reggaetón plus [cumbia villera], with huge bass. **L-Gante** made it explode, recording his first hits on a laptop the government gave out to schoolkids. He calls his style **cumbia 420**."
       }
      ],
      "vocabulary": []
@@ -4675,7 +4675,7 @@
       },
       {
        "type": "choice",
-       "prompt": "Why is the bandoneón famously hard to play?",
+       "prompt": "Why is the [bandoneón] famously hard to play?",
        "options": [
         "Each button plays two different notes",
         "It's as heavy as a small piano",
@@ -4686,7 +4686,7 @@
       },
       {
        "type": "card",
-       "text": "Early tango was quick and playful, played on flute, violin and guitar. Many say the bandoneón slowed it down, and that's where tango got its famous sadness."
+       "text": "Early tango was quick and playful, played on flute, violin and guitar. Many say the [bandoneón] slowed it down, and that's where tango got its famous sadness."
       }
      ],
      "vocabulary": []
@@ -4702,7 +4702,7 @@
       },
       {
        "type": "choice",
-       "prompt": "At a traditional milonga, how do you ask someone to dance?",
+       "prompt": "At a traditional [milonga], how do you ask someone to dance?",
        "options": [
         "Walk to their table and offer your hand",
         "Catch their eye across the room and nod",
@@ -4713,7 +4713,7 @@
       },
       {
        "type": "card",
-       "text": "And if they look away? That's a no, and nobody got rejected in public. That's the whole point of the cabeceo."
+       "text": "And if they look away? That's a no, and nobody got rejected in public. That's the whole point of the [cabeceo]."
       },
       {
        "type": "card",
@@ -4737,7 +4737,7 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "The dinner shows with flying legs and a rose in someone's mouth? Porteños call that **tango for export**. At a milonga, the dance is small, close and improvised."
+       "text": "The dinner shows with flying legs and a rose in someone's mouth? [Porteños] call that **tango for export**. At a [milonga], the dance is small, close and improvised."
       },
       {
        "type": "card",
@@ -4827,7 +4827,7 @@
       },
       {
        "type": "card",
-       "text": "Then came the rebel: **Astor Piazzolla**. He grew up in New York, where his dad gave him a bandoneón as a kid."
+       "text": "Then came the rebel: **Astor Piazzolla**. He grew up in New York, where his dad gave him a [bandoneón] as a kid."
       },
       {
        "type": "choice",
@@ -4842,7 +4842,7 @@
       },
       {
        "type": "card",
-       "text": "Back in Buenos Aires he played bandoneón in the orquesta of **Aníbal Troilo**, the most loved bandleader of all, then studied classical music in Paris with **Nadia Boulanger**. She told him to stop hiding his tango."
+       "text": "Back in Buenos Aires he played [bandoneón] in the orquesta of **Aníbal Troilo**, the most loved bandleader of all, then studied classical music in Paris with **Nadia Boulanger**. She told him to stop hiding his tango."
       },
       {
        "type": "card",
@@ -4925,11 +4925,11 @@
      "pages": [
       {
        "type": "card",
-       "text": "**Truco** is the national card game. People play it in bars, on the beach, at school breaks and after every asado, usually two against two."
+       "text": "**Truco** is the national card game. People play it in bars, on the beach, at school breaks and after every [asado], usually two against two."
       },
       {
        "type": "choice",
-       "prompt": "What is the most important skill in truco?",
+       "prompt": "What is the most important skill in [truco]?",
        "options": [
         "Counting fast",
         "Lying well",
@@ -4964,7 +4964,7 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "Truco gave words to everyday talk. **Retrucar** is to answer back fast in an argument. **Irse al mazo**, to go to the pile, is to give up."
+       "text": "[Truco] gave words to everyday talk. **Retrucar** is to answer back fast in an argument. **Irse al mazo**, to go to the pile, is to give up."
       }
      ],
      "vocabulary": []
@@ -4980,7 +4980,7 @@
       },
       {
        "type": "choice",
-       "prompt": "In 2022 there were not enough figuritas in the kioscos. What did the government do?",
+       "prompt": "In 2022 there were not enough [figuritas] in the kioscos. What did the government do?",
        "options": [
         "It printed its own album",
         "It called a meeting about it",
@@ -4999,7 +4999,7 @@
       },
       {
        "type": "choice",
-       "prompt": "At school, children also play to win each other's figuritas. How?",
+       "prompt": "At school, children also play to win each other's [figuritas]. How?",
        "options": [
         "They hide them and the others look for them",
         "They throw them at a wall, and the closest one wins",
@@ -5014,7 +5014,7 @@
       },
       {
        "type": "card",
-       "text": "On weekends, in some parks, people of all ages meet to swap figuritas. Parents say it's for the children. It's not always true."
+       "text": "On weekends, in some parks, people of all ages meet to swap [figuritas]. Parents say it's for the children. It's not always true."
       }
      ],
      "vocabulary": []
@@ -5085,11 +5085,11 @@
      "pages": [
       {
        "type": "card",
-       "text": "In January, Buenos Aires is half empty. No traffic, free seats on the subte, and paper signs on shop doors: **“Cerrado por vacaciones.”**"
+       "text": "In January, Buenos Aires is half empty. No traffic, free seats on the [subte], and paper signs on shop doors: **“Cerrado por vacaciones.”**"
       },
       {
        "type": "choice",
-       "prompt": "Where did all those porteños go?",
+       "prompt": "Where did all those [porteños] go?",
        "options": [
         "To the mountains in the west",
         "To the beaches of the Atlantic",
@@ -5123,7 +5123,7 @@
       },
       {
        "type": "card",
-       "text": "The day one quincena ends and the next begins is famous for its traffic. The TV news shows the road to the Costa live, hour by hour."
+       "text": "The day one [quincena] ends and the next begins is famous for its traffic. The TV news shows the road to the Costa live, hour by hour."
       }
      ],
      "vocabulary": []
@@ -5135,11 +5135,11 @@
      "pages": [
       {
        "type": "card",
-       "text": "The beach kit: a **reposera** (a folding chair), a **sombrilla** (a big umbrella), a **heladerita** (a small box that keeps drinks cold), and of course the termo and the mate."
+       "text": "The beach kit: a **reposera** (a folding chair), a **sombrilla** (a big umbrella), a **heladerita** (a small box that keeps drinks cold), and of course the [termo] and the [mate]."
       },
       {
        "type": "card",
-       "text": "A **balneario** is a beach club. There, families rent a **carpa**, a small cloth tent, for the whole summer. Some have had the same carpa for three generations."
+       "text": "A **balneario** is a beach club. There, families rent a **carpa**, a small cloth tent, for the whole summer. Some have had the same [carpa] for three generations."
       },
       {
        "type": "choice",
@@ -5208,7 +5208,7 @@
       },
       {
        "type": "card",
-       "text": "Murga songs make fun of politicians and the news of the year. The last dictatorship took away the carnival holidays. They only came back in 2011."
+       "text": "[Murga] songs make fun of politicians and the news of the year. The last dictatorship took away the carnival holidays. They only came back in 2011."
       },
       {
        "type": "choice",
@@ -5255,7 +5255,7 @@
       },
       {
        "type": "card",
-       "text": "A **quinta** is a house outside the city with a garden and a pool. Groups of friends rent one for a single day: asado, pool, football, home at night."
+       "text": "A **quinta** is a house outside the city with a garden and a pool. Groups of friends rent one for a single day: [asado], pool, football, home at night."
       },
       {
        "type": "choice",
@@ -5398,7 +5398,7 @@
       },
       {
        "type": "choice",
-       "prompt": "The UBA has no entrance exam. What do you do instead?",
+       "prompt": "The [UBA] has no entrance exam. What do you do instead?",
        "options": [
         "A first year of general subjects",
         "An interview with three teachers",
@@ -5460,7 +5460,7 @@
       },
       {
        "type": "card",
-       "text": "A job is **en blanco**, in white, when it is registered: aguinaldo, paid holidays, health cover. **En negro**, in black, means no papers. More than a third of workers are en negro."
+       "text": "A job is **en blanco**, in white, when it is registered: [aguinaldo], paid holidays, health cover. **En negro**, in black, means no papers. More than a third of workers are [en negro]."
       },
       {
        "type": "card",
@@ -5514,7 +5514,7 @@
       },
       {
        "type": "card",
-       "text": "A **marcha** is a march. Most of them end at **Plaza de Mayo** or at **Congreso**, with drums, flags and smoke from the choripán stands."
+       "text": "A **marcha** is a march. Most of them end at **Plaza de Mayo** or at **Congreso**, with drums, flags and smoke from the [choripán] stands."
       },
       {
        "type": "card",
@@ -5588,11 +5588,11 @@
       },
       {
        "type": "card",
-       "text": "The Church's order came in 1796, and Buenos Aires banned the game in 1822. Gauchos kept playing anyway, far from the towns."
+       "text": "The Church's order came in 1796, and Buenos Aires banned the game in 1822. [Gauchos] kept playing anyway, far from the towns."
       },
       {
        "type": "card",
-       "text": "The truth: most Argentines have never seen a game of pato. Every few years someone asks Congress to make football the national sport, and nothing changes."
+       "text": "The truth: most Argentines have never seen a game of [pato]. Every few years someone asks Congress to make football the national sport, and nothing changes."
       }
      ],
      "vocabulary": []
@@ -5670,7 +5670,7 @@
       },
       {
        "type": "card",
-       "text": "Las Leonas won two World Cups and four Olympic medals in a row. Their star, **Luciana Aymar**, was chosen best player in the world eight times."
+       "text": "[Las Leonas] won two World Cups and four Olympic medals in a row. Their star, **Luciana Aymar**, was chosen best player in the world eight times."
       },
       {
        "type": "choice",
@@ -5782,7 +5782,7 @@
       },
       {
        "type": "choice",
-       "prompt": "The Argentine **Fernando Belasteguín** was number one in the world at pádel. For how long?",
+       "prompt": "The Argentine **Fernando Belasteguín** was number one in the world at [pádel]. For how long?",
        "options": [
         "3 years",
         "8 years",
@@ -5798,7 +5798,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "Asking about sport is easy small talk. **“¿Hacés algún deporte?”** Do you do any sport? **“Juego al pádel los martes.”** I play pádel on Tuesdays."
+       "text": "Asking about sport is easy small talk. **“¿Hacés algún deporte?”** Do you do any sport? **“Juego al pádel los martes.”** I play [pádel] on Tuesdays."
       }
      ],
      "vocabulary": []
@@ -5857,7 +5857,7 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "That's why a carpincho is your guide in this app. Calm, friendly, good with everyone, and very Argentine."
+       "text": "That's why a [carpincho] is your guide in this app. Calm, friendly, good with everyone, and very Argentine."
       }
      ],
      "vocabulary": []
@@ -6033,7 +6033,7 @@
       },
       {
        "type": "choice",
-       "prompt": "How does that person check if you have empacho?",
+       "prompt": "How does that person check if you have [empacho]?",
        "options": [
         "She looks at your tongue with a candle",
         "She measures the distance to your stomach with a ribbon",
@@ -6099,7 +6099,7 @@
       },
       {
        "type": "card",
-       "text": "All along the road to Luján, strangers give the walkers water, fruit and mate for free. Others wait at the side to rub tired feet."
+       "text": "All along the road to Luján, strangers give the walkers water, fruit and [mate] for free. Others wait at the side to rub tired feet."
       },
       {
        "type": "card",
@@ -6208,7 +6208,7 @@
       },
       {
        "type": "card",
-       "text": "**Natalia Oreiro** was born in Uruguay and became a star in Argentina with the novela **Muñeca brava**. Then the series was sold to dozens of countries."
+       "text": "**Natalia Oreiro** was born in Uruguay and became a star in Argentina with the [novela] **Muñeca brava**. Then the series was sold to dozens of countries."
       },
       {
        "type": "choice",
@@ -6309,7 +6309,7 @@
       },
       {
        "type": "card",
-       "text": "On TV, **Diego Capusotto** makes fun of rock stars, politicians and porteños in short, absurd videos. People repeat the lines of his invented characters as if they were real."
+       "text": "On TV, **Diego Capusotto** makes fun of rock stars, politicians and [porteños] in short, absurd videos. People repeat the lines of his invented characters as if they were real."
       },
       {
        "type": "choice",
@@ -6360,7 +6360,7 @@
       },
       {
        "type": "card",
-       "text": "The most famous radio moment: Maradona's second goal against England in 1986. The relator **Víctor Hugo Morales** cried and called him **barrilete cósmico**: a kite from space."
+       "text": "The most famous radio moment: Maradona's second goal against England in 1986. The [relator] **Víctor Hugo Morales** cried and called him **barrilete cósmico**: a kite from space."
       },
       {
        "type": "card",
@@ -6556,7 +6556,7 @@
      "pages": [
       {
        "type": "card",
-       "text": "You'll hear a cordobés before you see one. The **tonada** stretches the syllable before the stressed one: **“cordoobés”**. Porteños love imitating it. Cordobeses love telling them they do it badly."
+       "text": "You'll hear a [cordobés] before you see one. The **tonada** stretches the syllable before the stressed one: **“cordoobés”**. [Porteños] love imitating it. Cordobeses love telling them they do it badly."
       },
       {
        "type": "card",
@@ -6564,7 +6564,7 @@
       },
       {
        "type": "choice",
-       "prompt": "In Italy, fernet is a bitter shot after dinner. How does Córdoba drink it?",
+       "prompt": "In Italy, [fernet] is a bitter shot after dinner. How does Córdoba drink it?",
        "options": [
         "With Coca-Cola, in a tall glass",
         "Frozen, in tiny shot glasses",
@@ -6575,7 +6575,7 @@
       },
       {
        "type": "card",
-       "text": "Argentina drinks more fernet than any other country, and Córdoba leads the way: the province is said to drink around a third of it. Drink slowly."
+       "text": "Argentina drinks more [fernet] than any other country, and Córdoba leads the way: the province is said to drink around a third of it. Drink slowly."
       },
       {
        "type": "card",
@@ -6594,7 +6594,7 @@
       },
       {
        "type": "card",
-       "text": "Cordobeses are famous for their humor. Their signature word is **culiao**. Vulgar and an insult when angry, between friends it means “dude”. Wait until they call *you* culiao before you try it."
+       "text": "Cordobeses are famous for their humor. Their signature word is **culiao**. Vulgar and an insult when angry, between friends it means “dude”. Wait until they call *you* [culiao] before you try it."
       }
      ],
      "vocabulary": []
@@ -6610,7 +6610,7 @@
       },
       {
        "type": "card",
-       "text": "Up in **Misiones** the soil is bright red and the air is thick and humid. In the jungle stand the stone ruins of **Jesuit missions**, where thousands of Guaraní once lived."
+       "text": "Up in **Misiones** the soil is bright red and the air is thick and humid. In the jungle stand the stone ruins of **Jesuit missions**, where thousands of [Guaraní] once lived."
       },
       {
        "type": "choice",
@@ -6625,19 +6625,19 @@
       },
       {
        "type": "card",
-       "text": "On street corners and at bus stations, people sell warm **chipá**, small cheese breads made with cassava flour. In the heat, locals drink **tereré**: mate with ice-cold water or juice."
+       "text": "On street corners and at bus stations, people sell warm **chipá**, small cheese breads made with cassava flour. In the heat, locals drink **tereré**: [mate] with ice-cold water or juice."
       },
       {
        "type": "card",
-       "text": "The northeast is Guaraní land, and you can hear it. In **Corrientes**, Guaraní is an official language next to Spanish. A kid there is a **gurí**, not a pibe."
+       "text": "The northeast is [Guaraní] land, and you can hear it. In **Corrientes**, [Guaraní] is an official language next to Spanish. A kid there is a **gurí**, not a [pibe]."
       },
       {
        "type": "card",
-       "text": "The Litoral's music is **chamamé**: accordion, guitar, and couples dancing in a tight embrace. Every January, Corrientes throws a huge national chamamé festival."
+       "text": "The [Litoral]'s music is **chamamé**: accordion, guitar, and couples dancing in a tight embrace. Every January, Corrientes throws a huge national [chamamé] festival."
       },
       {
        "type": "choice",
-       "prompt": "At a chamamé dance, the man next to you throws his head back and lets out a long, piercing scream. What's happening?",
+       "prompt": "At a [chamamé] dance, the man next to you throws his head back and lets out a long, piercing scream. What's happening?",
        "options": [
         "He's letting out a yell of joy",
         "He's calling his friends over to dance",
@@ -6803,7 +6803,7 @@
       },
       {
        "type": "choice",
-       "prompt": "What was El Apóstol about?",
+       "prompt": "What was [El Apóstol] about?",
        "options": [
         "The president setting fire to Buenos Aires",
         "A gaucho crossing the pampa on foot",
@@ -6896,11 +6896,11 @@
      "pages": [
       {
        "type": "card",
-       "text": "In Argentina a ballpoint pen is a **birome**. **László Bíró**, a Hungarian journalist, patented it here in the 1940s with his partner **Juan Jorge Meyne**. Bi-ró plus Me-yne: birome."
+       "text": "In Argentina a ballpoint pen is a **birome**. **László Bíró**, a Hungarian journalist, patented it here in the 1940s with his partner **Juan Jorge Meyne**. Bi-ró plus Me-yne: [birome]."
       },
       {
        "type": "choice",
-       "prompt": "Who was the birome's first big customer?",
+       "prompt": "Who was the [birome]'s first big customer?",
        "options": [
         "The British air force",
         "The Argentine post office",
@@ -6946,7 +6946,7 @@
      "pages": [
       {
        "type": "card",
-       "text": "**Jorge Bergoglio** grew up in **Flores**, Buenos Aires, and as archbishop rode the subte. In 2013 he became **Pope Francis**, the first Pope from the Americas."
+       "text": "**Jorge Bergoglio** grew up in **Flores**, Buenos Aires, and as archbishop rode the [subte]. In 2013 he became **Pope Francis**, the first Pope from the Americas."
       },
       {
        "type": "choice",
@@ -7064,11 +7064,11 @@
       },
       {
        "type": "card",
-       "text": "The viceroy ruled from the fort, where the Casa Rosada stands today. Across the square sat the **Cabildo**, the town council, the voice of the locals. Its white building with arches is still there, now a museum."
+       "text": "The viceroy ruled from the fort, where the [Casa Rosada] stands today. Across the square sat the **Cabildo**, the town council, the voice of the locals. Its white building with arches is still there, now a museum."
       },
       {
        "type": "choice",
-       "prompt": "Look closely at the Cabildo today. What happened to it?",
+       "prompt": "Look closely at the [Cabildo] today. What happened to it?",
        "options": [
         "It lost arches to make room for avenues",
         "It was moved stone by stone from Córdoba",
@@ -7094,7 +7094,7 @@
       },
       {
        "type": "card",
-       "text": "Locals organized under **Santiago de Liniers** and threw the British out. In 1807 the British came back, bigger. Porteños fought street by street, and won again. Argentines call the two attacks the **invasiones inglesas**."
+       "text": "Locals organized under **Santiago de Liniers** and threw the British out. In 1807 the British came back, bigger. [Porteños] fought street by street, and won again. Argentines call the two attacks the **invasiones inglesas**."
       },
       {
        "type": "card",
@@ -7103,7 +7103,7 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "Two downtown streets remember it: **Reconquista** and **Defensa**. And porteños learned they could beat an empire without Spain. So why keep obeying a viceroy?"
+       "text": "Two downtown streets remember it: **Reconquista** and **Defensa**. And [porteños] learned they could beat an empire without Spain. So why keep obeying a viceroy?"
       }
      ],
      "vocabulary": []
@@ -7123,7 +7123,7 @@
       },
       {
        "type": "choice",
-       "prompt": "Every school drawing of that day shows the crowd outside the Cabildo holding the same thing. What?",
+       "prompt": "Every school drawing of that day shows the crowd outside the [Cabildo] holding the same thing. What?",
        "options": [
         "Umbrellas",
         "Torches",
@@ -7158,7 +7158,7 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "The dates are on the map too. **Avenida 9 de Julio** is the huge one with the Obelisco, and almost every town has a street called 25 de Mayo."
+       "text": "The dates are on the map too. **Avenida 9 de Julio** is the huge one with the [Obelisco], and almost every town has a street called [25 de Mayo]."
       }
      ],
      "vocabulary": []
@@ -7248,11 +7248,11 @@
       },
       {
        "type": "card",
-       "text": "Argentines still argue about him. A bloody tyrant, said liberals like **Sarmiento**, a writer and later president. A defender of the country against British and French fleets, say others. Don't raise it at an asado unless you have time."
+       "text": "Argentines still argue about him. A bloody tyrant, said liberals like **Sarmiento**, a writer and later president. A defender of the country against British and French fleets, say others. Don't raise it at an [asado] unless you have time."
       },
       {
        "type": "card",
-       "text": "Out on the pampa lived the **gauchos**: expert horsemen who worked cattle, with knife, poncho, mate and guitar. Governments treated them as vagrants and forced many into the army."
+       "text": "Out on the pampa lived the **gauchos**: expert horsemen who worked cattle, with knife, poncho, [mate] and guitar. Governments treated them as vagrants and forced many into the army."
       },
       {
        "type": "choice",
@@ -7469,7 +7469,7 @@
       },
       {
        "type": "card",
-       "text": "That night Perón spoke from the balcony of the Casa Rosada. Peronists still celebrate 17 October as the **Día de la Lealtad**, Loyalty Day. In 1946 he was elected president, and re-elected in 1951."
+       "text": "That night Perón spoke from the balcony of the [Casa Rosada]. Peronists still celebrate 17 October as the **Día de la Lealtad**, Loyalty Day. In 1946 he was elected president, and re-elected in 1951."
       },
       {
        "type": "card",
@@ -7525,7 +7525,7 @@
       },
       {
        "type": "choice",
-       "prompt": "In 1977, mothers of the disappeared met in Plaza de Mayo. Gatherings were banned, and police told them to move along. What did they do?",
+       "prompt": "In 1977, mothers of the disappeared met in [Plaza de Mayo]. Gatherings were banned, and police told them to move along. What did they do?",
        "options": [
         "Kept walking in pairs around the monument",
         "Moved their meetings into a church nearby",
@@ -7563,7 +7563,7 @@
       },
       {
        "type": "card",
-       "text": "Every 24 March, the **Día de la Memoria**, hundreds of thousands march to Plaza de Mayo with photos of the disappeared: **Memoria, Verdad y Justicia**."
+       "text": "Every 24 March, the **Día de la Memoria**, hundreds of thousands march to [Plaza de Mayo] with photos of the disappeared: **Memoria, Verdad y Justicia**."
       }
      ],
      "vocabulary": []
@@ -7579,7 +7579,7 @@
       },
       {
        "type": "card",
-       "text": "In 1982 the dictatorship faced a collapsing economy and growing protests. On **2 de abril** its troops landed on the islands, and crowds cheered in Plaza de Mayo. Britain sent a fleet."
+       "text": "In 1982 the dictatorship faced a collapsing economy and growing protests. On **2 de abril** its troops landed on the islands, and crowds cheered in [Plaza de Mayo]. Britain sent a fleet."
       },
       {
        "type": "choice",
@@ -7661,7 +7661,7 @@
       },
       {
        "type": "choice",
-       "prompt": "On 20 December President De la Rúa resigned and left the Casa Rosada by helicopter. Counting him, how many presidents did Argentina have in about twelve days?",
+       "prompt": "On 20 December President De la Rúa resigned and left the [Casa Rosada] by helicopter. Counting him, how many presidents did Argentina have in about twelve days?",
        "options": [
         "Five",
         "Two",
@@ -7770,7 +7770,7 @@
       },
       {
        "type": "choice",
-       "prompt": "On calle Florida, a man keeps muttering “Cambio, cambio.” Locals call him an **arbolito**, a little tree. Why, the story goes?",
+       "prompt": "On [calle] Florida, a man keeps muttering “Cambio, cambio.” Locals call him an **arbolito**, a little tree. Why, the story goes?",
        "options": [
         "He stands in the same spot all day, like a tree",
         "He hides behind street trees from the police",
@@ -7793,5 +7793,1144 @@
     }
    ]
   }
- ]
+ ],
+ "glossary": {
+  "un beso": "one kiss",
+  "saludás uno por uno": "you greet each person one by one",
+  "chau": "bye",
+  "todo bien": "All good?",
+  "qué hacés": "How's it going? (lit. what are you doing?)",
+  "todo bien y vos": "All good, and you?",
+  "hola soy sam": "Hi, I'm Sam.",
+  "a las nueve": "at nine",
+  "ya salgo": "I'm leaving now.",
+  "llego en cinco": "I'll be there in five.",
+  "vamos viendo": "let's see how it goes",
+  "qué llevo": "What should I bring?",
+  "no traigas nada": "Don't bring anything.",
+  "helado": "ice cream",
+  "bueno me voy yendo": "Well, I'm heading off.",
+  "irse a la francesa": "to leave without saying goodbye (lit. to leave the French way)",
+  "boliche": "nightclub",
+  "la previa": "pre-drinks at a friend's place",
+  "milongas": "tango dance halls",
+  "after": "after-party (once the club closes)",
+  "café con medialunas": "coffee with small croissants",
+  "un bar": "a bar",
+  "una birra": "a beer (slang)",
+  "estás más gordito": "You've put on a bit of weight.",
+  "gordo": "affectionate pet name (lit. fat, said to a man)",
+  "gorda": "affectionate pet name (lit. fat, said to a woman)",
+  "flaco": "dude, man (lit. skinny)",
+  "negro": "affectionate nickname (lit. black, dark)",
+  "flaca": "what you call a woman you don't know (lit. skinny)",
+  "flaco se te cayó esto": "Hey man, you dropped this!",
+  "cuánto pagaste": "How much did you pay?",
+  "tenés novio": "Do you have a boyfriend?",
+  "me hacés una gauchada": "Can you do me a favor?",
+  "gauchada": "a favor done for free",
+  "arbolito": "Christmas tree (lit. little tree)",
+  "día de la virgen": "Day of the Virgin (8 December holiday)",
+  "nochebuena": "Christmas Eve",
+  "vitel toné": "cold sliced veal in tuna sauce",
+  "pan dulce": "sweet Christmas bread with fruit",
+  "brindis": "toast (with raised glasses)",
+  "salud": "Cheers!",
+  "feliz navidad": "Merry Christmas!",
+  "reyes magos": "the Three Kings",
+  "20 de julio": "20 July",
+  "día del amigo": "Friend's Day",
+  "feliz día del amigo": "Happy Friend's Day!",
+  "21 de septiembre": "21 September",
+  "día del estudiante": "Students' Day",
+  "finde largo": "long weekend",
+  "feriado puente": "bridge day off (joins a holiday to the weekend)",
+  "que los cumplas feliz": "\"Happy birthday to you\" (the birthday song)",
+  "tirón de orejas": "ear tug (a birthday tradition)",
+  "feliz cumple": "happy birthday",
+  "yeta": "bad luck",
+  "permiso": "may I? (lit. permission)",
+  "pasá pasá": "Come in, come in.",
+  "perdón": "sorry, excuse me",
+  "lo siento": "I'm sorry (for sad news)",
+  "buen provecho": "enjoy your meal",
+  "provecho": "enjoy your meal",
+  "gracias": "thank you",
+  "estuvo riquísimo": "It was delicious.",
+  "las malvinas": "the islands English speakers call the Falklands",
+  "y vos": "And you?",
+  "américa": "the Americas (the whole continent)",
+  "estados unidos": "the United States",
+  "porteños": "people from Buenos Aires (lit. people of the port)",
+  "caba": "the Autonomous City of Buenos Aires (abbreviation)",
+  "conurbano": "the ring of suburbs around Buenos Aires",
+  "capital": "the city of Buenos Aires itself",
+  "el interior": "everywhere outside Buenos Aires (lit. the inland)",
+  "dios está en todas partes pero atiende en buenos aires": "God is everywhere, but his office is in Buenos Aires.",
+  "agrandados": "full of themselves, big-headed",
+  "estoy recorriendo mendoza": "I'm travelling around Mendoza.",
+  "corrientes y callao": "the corner of Corrientes and Callao",
+  "son cinco cuadras": "It's five blocks.",
+  "chapa": "corrugated metal sheets",
+  "caminito": "little path (a street named after a tango)",
+  "colectivo": "city bus",
+  "bondi": "city bus (slang)",
+  "sube": "public transport fare card",
+  "hasta plaza italia": "To Plaza Italia.",
+  "timbre": "bell, stop button",
+  "la cola": "the line, the queue",
+  "hay cola eh": "Hey, there's a line!",
+  "libre": "free, available",
+  "tacho": "taxi (slang)",
+  "tachero": "taxi driver (slang)",
+  "subte": "the Buenos Aires subway",
+  "me avisás cuando lleguemos a": "Can you tell me when we get to…?",
+  "obelisco": "the Obelisk (Buenos Aires landmark)",
+  "avenida 9 de julio": "9 July Avenue (named for Independence Day)",
+  "casa rosada": "the Pink House (the presidential palace)",
+  "plaza de mayo": "May Square (the main square of Buenos Aires)",
+  "madres de plaza de mayo": "the Mothers of May Square (mothers of the disappeared)",
+  "teatro colón": "the Columbus Theater (Buenos Aires' opera house)",
+  "el paraíso": "paradise (the cheapest seats, up top)",
+  "cortado": "espresso with a little milk",
+  "la ciudad de la furia": "the city of fury",
+  "lo hablo con mi psicóloga": "I'll talk about it with my psychologist.",
+  "paseaperros": "dog walker",
+  "la calle que nunca duerme": "the street that never sleeps",
+  "motochorro": "thief on a motorbike",
+  "ojo": "watch out (lit. eye)",
+  "ojo con el celu": "Careful with your phone!",
+  "saldo": "balance, credit",
+  "me cargás la sube": "Can you top up my transit card?",
+  "saldo negativo": "negative balance",
+  "este va a retiro": "Does this one go to Retiro?",
+  "tres hasta plaza italia": "Three, to Plaza Italia.",
+  "combinación": "transfer between lines",
+  "a catedral": "toward Catedral station",
+  "a congreso de tucumán": "toward Congreso de Tucumán station",
+  "me avisás dónde me bajo": "Can you tell me where to get off?",
+  "pasame tu alias": "Send me your payment handle.",
+  "alias": "short handle that stands for a bank account",
+  "te transfiero": "I'll transfer it to you.",
+  "transferencia": "bank transfer",
+  "en cuotas": "in monthly installments",
+  "cuotas": "monthly installments",
+  "12 cuotas sin interés": "12 interest-free installments",
+  "en un pago": "in one payment, all at once",
+  "descuento en efectivo": "discount for paying cash",
+  "hay descuento en efectivo": "Is there a discount for cash?",
+  "tenés más chico": "Do you have a smaller note?",
+  "me hacés precio": "Can you give me a better price?",
+  "feria": "street market",
+  "casa de cambio": "currency exchange office",
+  "mochila": "backpack",
+  "la mancha": "the stain (a pickpocket trick)",
+  "es tranquilo por acá de noche": "Is it calm around here at night?",
+  "radio taxi": "taxi booked by phone",
+  "cuidado": "Careful!",
+  "me robaron": "I was robbed.",
+  "me ayudás": "Can you help me?",
+  "comisaría": "police station",
+  "denuncia": "police report",
+  "un café": "a coffee (a small, strong espresso)",
+  "en jarrito": "in a taller cup",
+  "una lágrima": "hot milk with a drop of coffee (lit. a tear)",
+  "café": "coffee (a small espresso)",
+  "café con leche": "coffee with milk, about half and half",
+  "lágrima": "hot milk with a drop of coffee (lit. tear)",
+  "café con leche con medialunas": "coffee with milk and small croissants",
+  "de manteca": "made with butter",
+  "de grasa": "made with lard",
+  "submarino": "hot milk with a chocolate bar to melt in (lit. submarine)",
+  "soda": "sparkling water",
+  "tostado": "toasted ham and cheese sandwich",
+  "mozo": "waiter",
+  "disculpá": "excuse me",
+  "para acá o para llevar": "For here or to go?",
+  "me cobrás": "Can I pay? (lit. can you charge me?)",
+  "tú": "you (informal; not used in Argentina)",
+  "vos": "you (informal, singular)",
+  "vos sos": "you are",
+  "vos tenés": "you have",
+  "vos querés": "do you want?",
+  "ustedes": "you all (plural you)",
+  "vosotros": "you all (the form used in Spain)",
+  "oíd mortales": "\"Hear, mortals\" (first words of the anthem)",
+  "usted": "you (formal)",
+  "me podrías": "could you…?",
+  "por favor": "please",
+  "tenés cambio": "Do you have change?",
+  "yo": "I",
+  "calle": "street",
+  "me llamo": "my name is",
+  "rioplatense": "of the River Plate region (Buenos Aires and Uruguay)",
+  "che": "hey, dude",
+  "ce": "old call for attention, like \"hey\"",
+  "viste": "you know? (lit. did you see?)",
+  "hacía un frío viste": "It was so cold, you know?",
+  "conventillos": "tenement houses",
+  "lunfardo": "Buenos Aires street slang",
+  "me voy al laburo": "I'm off to work. (slang)",
+  "guita": "money (slang)",
+  "pibe": "boy, kid (slang)",
+  "piba": "girl (slang)",
+  "morfar": "to eat (slang)",
+  "birra": "beer (slang)",
+  "fiaca": "the feeling of not wanting to do anything",
+  "bonde": "tram (Brazilian Portuguese)",
+  "chamuyo": "smooth talk",
+  "chamuyar": "to sweet-talk",
+  "eso es puro chamuyo": "That's pure smooth talk.",
+  "mina": "woman, chick (slang)",
+  "academia porteña del lunfardo": "the Buenos Aires Academy of Street Slang",
+  "revés": "backwards, reverse",
+  "vesre": "slang made by swapping a word's syllables",
+  "quién garpa": "Who's paying? (slang)",
+  "gotán": "tango (syllables swapped)",
+  "dorima": "husband (syllables swapped)",
+  "telo": "pay-by-the-hour love hotel (slang)",
+  "re": "very, really",
+  "re lindo": "really nice",
+  "re lejos": "really far",
+  "te gustó re": "Did you like it?\" \"Totally!",
+  "posta": "for real",
+  "la posta": "the real story, the truth",
+  "montoncito": "the pinched-fingers gesture (lit. little bunch)",
+  "qué te pasa": "What's up with you?",
+  "más o menos": "so-so, more or less",
+  "ni idea": "no idea",
+  "audios": "voice notes",
+  "q": "that (texting shorthand)",
+  "xq": "because (texting shorthand)",
+  "tmb": "also (texting shorthand)",
+  "dsp": "later, afterwards (texting shorthand)",
+  "tqm": "love you lots (texting shorthand)",
+  "bue": "fine, if we must (unenthusiastic OK)",
+  "bueno": "OK, fine",
+  "bueee": "oh, come on",
+  "dale": "OK, sure, go ahead",
+  "vamos a las 8 dale": "Shall we go at 8?\" \"Sure.",
+  "merienda": "afternoon snack, around five",
+  "facturas": "sweet pastries",
+  "che venís a tomar unos mates": "Hey, are you coming over for some mate?",
+  "merendar": "to have an afternoon snack",
+  "merendamos": "Shall we have an afternoon snack?",
+  "me traés la cuenta": "Can you bring me the bill?",
+  "sobremesa": "the long chat at the table after a meal",
+  "la propina": "the tip",
+  "cubierto": "table charge",
+  "dividimos": "Shall we split it?",
+  "hacer una vaquita": "to chip in together (lit. to make a little cow)",
+  "empanadas": "filled pastry turnovers",
+  "docena": "dozen",
+  "repulgue": "the braided edge of a filled turnover",
+  "cuál es cuál": "Which is which?",
+  "carne": "beef",
+  "suave": "mild",
+  "picante": "spicy",
+  "pollo": "chicken",
+  "jamón y queso": "ham and cheese",
+  "humita": "creamy corn filling",
+  "verdura": "greens",
+  "una docena seis de carne tres de pollo y tres de humita": "A dozen: six beef, three chicken and three corn.",
+  "papa": "potato",
+  "cortada a cuchillo": "chopped by hand with a knife, not ground",
+  "con las piernas abiertas": "with your legs apart",
+  "muzza": "mozzarella pizza (slang)",
+  "al molde": "thick-crust, baked in a pan",
+  "a la piedra": "thin and crisp, stone-baked",
+  "media masa": "medium-thick crust",
+  "una grande de muzza": "a large mozzarella pizza",
+  "dos porciones": "two slices",
+  "fugazzeta": "onion and cheese pizza",
+  "rellena": "stuffed",
+  "fugazza": "onion pizza with no cheese",
+  "fainá": "chickpea flatbread",
+  "a caballo": "with something laid on top (lit. on horseback)",
+  "moscato": "cheap, sweet muscat wine",
+  "moscato pizza y fainá": "sweet muscat wine, pizza and chickpea flatbread",
+  "avenida corrientes": "Corrientes Avenue (the theater street)",
+  "de parado": "standing up",
+  "porción": "slice",
+  "la nona": "grandma (from Italian)",
+  "el nono": "grandpa (from Italian)",
+  "milanesa": "breaded beef or chicken cutlet",
+  "mila": "breaded cutlet (short form)",
+  "sánguche de milanesa": "breaded cutlet sandwich",
+  "milanesa a la napolitana": "breaded cutlet topped with ham, cheese and tomato sauce",
+  "tuco": "slow-simmered tomato sauce",
+  "ñoquis": "gnocchi",
+  "ñoqui": "someone with a public job who never shows up to work (lit. gnocchi)",
+  "guiso": "hearty home stew",
+  "guiso de lentejas": "lentil stew",
+  "locro": "thick stew of corn, beans, squash and meat",
+  "25 de mayo": "25 May (the 1810 revolution)",
+  "9 de julio": "9 July (Independence Day)",
+  "tupper": "plastic food container",
+  "tenés picante": "Do you have hot sauce?",
+  "carbonada": "stew of beef, squash, corn and sweet potato",
+  "humita en chala": "fresh corn paste cooked in the husk",
+  "chala": "corn husk",
+  "heladería": "ice cream shop",
+  "gustos": "flavors (lit. tastes)",
+  "caja": "cash register",
+  "puedo probar": "Can I taste it?",
+  "un cuarto de dulce de leche granizado y limón": "A quarter kilo of dulce de leche with chocolate flakes, and lemon.",
+  "un cuarto": "a quarter kilo (250 g)",
+  "medio kilo": "half a kilo",
+  "un kilo": "one kilo",
+  "dulce de leche": "thick milk caramel (lit. sweet of milk)",
+  "dulce de leche granizado": "milk caramel ice cream with chocolate flakes",
+  "sambayón": "egg-yolk and sweet wine custard (zabaglione)",
+  "clásico": "classic (the soft kind, for spreading)",
+  "repostero": "for baking (the firmer kind)",
+  "chocotorta": "no-bake cake of chocolate cookies and milk caramel",
+  "pastafrola": "lattice tart filled with quince or sweet potato paste",
+  "alfajor": "two soft cookies sandwiched around a filling",
+  "de maicena": "made with cornstarch",
+  "marplatense": "Mar del Plata style",
+  "santafesino": "Santa Fe style",
+  "cordobés": "Córdoba style",
+  "triple": "three cookies, two layers of filling",
+  "kiosco": "tiny corner shop for candy and drinks",
+  "24 hs": "open 24 hours",
+  "caramelos": "candies",
+  "la reja": "the window grille",
+  "me das un alfajor": "Can I have an alfajor (cookie sandwich)?",
+  "cuánto sale": "How much is it?",
+  "negro o blanco": "Dark or white (chocolate)?",
+  "mundial del alfajor": "the Alfajor World Cup",
+  "panadería": "bakery",
+  "una docena surtida": "a mixed dozen",
+  "media docena": "half a dozen",
+  "medialuna": "small croissant (lit. half-moon)",
+  "vigilante": "long sugar-topped pastry (lit. the cop)",
+  "bolas de fraile": "filled doughnut balls (lit. friar's balls)",
+  "sacramentos": "rolled sweet pastries (lit. sacraments)",
+  "cañoncitos": "cream-filled pastry tubes (lit. little cannons)",
+  "una docena de facturas": "a dozen sweet pastries",
+  "qué hay de postre": "What's for dessert?",
+  "bodegón": "old-school neighbourhood restaurant",
+  "flan": "egg custard with caramel",
+  "mixto": "with both toppings (dulce de leche and cream)",
+  "un flan mixto por favor": "A custard with both toppings, please.",
+  "postre vigilante": "cheese with quince or sweet potato paste (lit. policeman's dessert)",
+  "queso y dulce": "cheese with sweet fruit paste (lit. cheese and sweet)",
+  "budín de pan": "bread pudding",
+  "arroz con leche": "rice pudding",
+  "arroz con leche me quiero casar": "\"Rice pudding, I want to get married\" (children's song)",
+  "panqueques": "thin crêpes",
+  "quemados": "with the sugar burnt crunchy on top (lit. burnt)",
+  "un poquito nomás": "just a little bit",
+  "mate": "hot yerba infusion sipped through a metal straw; also the gourd",
+  "yerba": "dried, ground leaves used for mate",
+  "tomar": "to drink (lit. to take)",
+  "tomamos unos mates": "Shall we have some mate?",
+  "guaraní": "indigenous people of the region",
+  "infusión nacional": "national infusion",
+  "querés un mate": "Do you want a mate?",
+  "bombilla": "metal straw with a filter",
+  "termo": "thermos flask",
+  "mate camionero": "trucker's mate (a big leather-wrapped gourd)",
+  "curar el mate": "to cure (season) a new gourd",
+  "pico cebador": "pouring spout on a thermos",
+  "yerba con palo": "yerba with stems",
+  "sin palo": "without stems",
+  "cebar": "to pour the water and serve mate",
+  "cebador": "the person who pours and serves the mate",
+  "quién ceba": "Who's serving?",
+  "montañita": "little mountain (the slope of dry yerba)",
+  "quema la yerba": "burns the yerba",
+  "pava": "kettle",
+  "el mate del zonzo": "the fool's mate (the first, harsh one)",
+  "lavado": "washed out, flavourless",
+  "ronda": "round (the circle sharing the mate)",
+  "qué rico": "So good!",
+  "no es un micrófono": "\"It's not a microphone!\" (pass the mate on)",
+  "paso estoy resfriado": "I'll pass, I have a cold.",
+  "resfriada": "having a cold (feminine form)",
+  "no gracias": "No, thanks",
+  "amargo": "bitter, without sugar",
+  "mate dulce": "mate with sugar",
+  "mate cocido": "yerba brewed in a tea bag, in a cup",
+  "matear": "to drink mate together",
+  "matera": "bag that carries the mate kit",
+  "tereré": "cold mate with water or juice, ice and herbs",
+  "termo bajo el brazo": "the thermos under the arm",
+  "chimarrão": "Brazilian-style mate (Portuguese)",
+  "cuia": "big gourd for Brazilian mate (Portuguese)",
+  "asado": "barbecue; a grilled-meat get-together",
+  "hacemos un asado": "\"Shall we have a barbecue?\" (really: want to hang out?)",
+  "vení a la una": "Come at one.",
+  "asador": "the person in charge of the grill",
+  "parrillero": "grill master",
+  "asado de la losa": "barbecue celebrating a finished roof slab",
+  "el asado del domingo": "the Sunday barbecue",
+  "parrilla": "grill; also a steakhouse",
+  "vamos a una parrilla": "Let's go to a steakhouse.",
+  "quincho": "roofed barbecue area with a long table",
+  "brasas": "embers",
+  "leña": "firewood",
+  "carbón": "charcoal",
+  "sal gruesa": "coarse salt",
+  "sal parrillera": "grilling salt (coarse)",
+  "qué punto": "How would you like it cooked?",
+  "jugoso": "rare to medium-rare (lit. juicy)",
+  "a punto": "medium",
+  "bien cocido": "well done",
+  "picada": "snack board of cheese, cold cuts and olives",
+  "salame": "salami",
+  "chorizo": "grilling sausage",
+  "morcilla": "blood sausage",
+  "achuras": "organ meats, offal",
+  "chinchulines": "crispy grilled intestines",
+  "mollejas": "sweetbreads",
+  "asado de tira": "short ribs",
+  "vacío": "flank",
+  "entraña": "skirt steak",
+  "ensalada mixta": "lettuce, tomato and onion salad",
+  "papas fritas": "french fries",
+  "soy vegetariano": "I'm vegetarian.",
+  "vegetariana": "vegetarian (feminine form)",
+  "provoleta": "grilled provolone cheese",
+  "morrones": "bell peppers",
+  "choripán": "grilled sausage in a crusty roll",
+  "chori": "grilled sausage sandwich (short form)",
+  "mariposa": "butterflied: split and opened flat (lit. butterfly)",
+  "carritos de la costanera": "late-night grill stalls along the riverfront",
+  "choripaneros": "people who turn up for a free sausage sandwich (insult)",
+  "ají molido": "mild chili flakes",
+  "chimichurri": "parsley, oregano, garlic and vinegar sauce",
+  "salsa criolla": "tomato, onion and bell pepper relish",
+  "hielo": "ice",
+  "después dividimos": "We'll split it later.",
+  "te ayudo en algo": "Can I help with anything?",
+  "un aplauso para el asador": "A round of applause for the grill master!",
+  "a comer": "Time to eat!",
+  "a la mesa": "Come to the table!",
+  "cordero patagónico": "Patagonian lamb",
+  "cordero a la cruz": "lamb roasted on an iron cross",
+  "al asador": "roasted on a stake beside the fire",
+  "asado con cuero": "beef roasted with its hide on",
+  "vaquillona con cuero": "heifer roasted with its hide on",
+  "chivito": "young goat",
+  "cabrito": "young goat, kid",
+  "campo": "countryside",
+  "el disco": "the disc (a giant pan made from a plough disc)",
+  "disco de arado": "plough disc",
+  "pollo al disco": "chicken stewed in a plough-disc pan",
+  "de qué cuadro sos": "Which team do you support?",
+  "cuadro": "football club, team",
+  "los cinco grandes": "the big five (clubs)",
+  "superclásico": "the Boca–River derby (lit. super classic)",
+  "clásico de avellaneda": "the Avellaneda derby",
+  "socios": "club members",
+  "barra brava": "organised hard-core fans",
+  "de ninguno todavía vos de cuál sos": "None yet. Which one are you?",
+  "hincha": "fan, supporter",
+  "la hinchada": "the crowd of fans",
+  "la bombonera no tiembla late": "\"La Bombonera doesn't shake, it beats.\" (Boca's stadium)",
+  "brasil decime qué se siente": "\"Brazil, tell me how it feels\" (fan chant)",
+  "bosteros": "Boca fans (nickname, lit. dung people)",
+  "gallinas": "River fans (nickname, lit. chickens)",
+  "cábala": "lucky ritual, superstition",
+  "mufa": "jinx, bringer of bad luck",
+  "aguante": "die-hard loyalty, sticking it out",
+  "potrero": "dirt lot for street football",
+  "de potrero": "raised on street football (a compliment)",
+  "fútbol 5": "five-a-side football",
+  "picado": "casual pickup game",
+  "caño": "nutmeg: the ball through an opponent's legs (lit. pipe)",
+  "la cancha": "the stadium, the pitch",
+  "arquero": "goalkeeper",
+  "golazo": "great goal",
+  "cómo salió": "How did it end?",
+  "ganamos": "we won",
+  "perdimos": "we lost",
+  "empatamos": "we drew",
+  "el dt": "the coach (short for technical director)",
+  "hacés la previa": "you meet up beforehand to eat, drink and sing",
+  "gastada": "teasing, ribbing",
+  "descenso": "relegation",
+  "irse a la b": "to be relegated (lit. to go down to the B)",
+  "promedio": "points average over the last three seasons",
+  "el var": "the video assistant referee",
+  "fue penal": "Was it a penalty?",
+  "orsai": "offside (old-fashioned, from English)",
+  "la selección": "the national team",
+  "iglesia maradoniana": "Church of Maradona",
+  "el diez": "the number ten (Maradona)",
+  "malvinas": "the Falkland Islands",
+  "la mano de dios": "the Hand of God",
+  "día de la futbolista": "Day of the Woman Footballer",
+  "muchachos ahora nos volvimos a ilusionar": "\"Guys, now we've got our hopes up again\" (fan chant)",
+  "la scaloneta": "the national team under coach Scaloni (lit. the Scaloni van)",
+  "leprosos": "lepers (nickname of Newell's fans)",
+  "canallas": "scoundrels (nickname of Rosario Central fans)",
+  "pinchas": "Estudiantes fans (short for rat-stabbers)",
+  "pincharratas": "rat-stabbers (nickname of Estudiantes fans)",
+  "triperos": "Gimnasia fans (nickname, lit. tripe handlers)",
+  "ego": "self-importance",
+  "el pequeño argentino que todos llevamos dentro": "The little Argentine we all carry inside",
+  "dios es argentino": "God is Argentine.",
+  "agrandado": "big-headed, full of oneself",
+  "bajá un cambio": "\"Calm down\" (lit. shift down a gear)",
+  "este país": "This country…",
+  "la única salida es ezeiza": "\"The only way out is Ezeiza\" (the airport)",
+  "argentina no es para principiantes": "Argentina is not for beginners.",
+  "qué caro está todo": "Everything is so expensive!",
+  "opinólogo": "someone with an opinion on everything",
+  "arreglar el mundo": "to put the world to rights (lit. to fix the world)",
+  "sabés cuál es el problema de este país": "Do you know what this country's problem is?",
+  "discusión": "argument, heated debate",
+  "para mí": "for me, in my opinion",
+  "tal cual": "Exactly.",
+  "lo más": "the best thing ever",
+  "un desastre": "a disaster",
+  "me quiero morir": "\"I want to die\" (said over small mishaps)",
+  "me muero": "\"I'm dying\" (an exaggeration)",
+  "no sabés lo que me pasó": "You have no idea what happened to me.",
+  "bienvenido": "welcome",
+  "histeriquear": "to show interest, then go cold, again and again",
+  "de dónde sos": "Where are you from?",
+  "extrañar": "to miss",
+  "extraño el asado a mis amigos los domingos": "I miss the barbecues, my friends, Sundays.",
+  "zafar": "to get out of a problem at the last second",
+  "zafé": "That was close, but I'm fine.",
+  "rebusque": "side hustle",
+  "de esta también salimos": "We'll get through this one too.",
+  "primos": "cousins",
+  "tío": "uncle",
+  "tía": "aunt",
+  "abuelo": "grandfather",
+  "abuela": "grandmother",
+  "abu": "grandma or grandpa (short form)",
+  "nono": "grandpa (from Italian)",
+  "nona": "grandma (from Italian)",
+  "zeide": "grandpa (from Yiddish)",
+  "bobe": "grandma (from Yiddish)",
+  "apodo": "nickname",
+  "el colo": "the redhead (nickname)",
+  "colorado": "red; red-haired",
+  "negra": "dark-haired or dark-skinned woman (affectionate nickname)",
+  "rulo": "curly (nickname, lit. curl)",
+  "el dormido": "the sleeping one",
+  "jefe": "boss (friendly way to address a stranger)",
+  "maestro": "master (friendly way to address a stranger)",
+  "campeón": "champion (friendly way to address a stranger)",
+  "genio": "a great person (lit. genius)",
+  "genia": "a great person, said of a woman (lit. genius)",
+  "tocayo": "namesake",
+  "tocaya": "namesake (feminine form)",
+  "el nene": "the kid",
+  "los chicos del colegio": "the friends from school",
+  "el asado de los jueves": "the Thursday barbecue",
+  "juntarse": "to get together",
+  "nos juntamos": "Shall we get together?",
+  "caete por casa": "\"Come over any time\" (lit. drop by my place)",
+  "te quiero": "I love you",
+  "bancar": "to stand by someone (also: to wait, to put up with)",
+  "te banco": "I'm with you, whatever happens.",
+  "despedida": "goodbye party",
+  "grupo de whatsapp": "WhatsApp group",
+  "saliendo": "going out, dating",
+  "de novios": "an official couple",
+  "convivir": "to live together",
+  "casi algo": "an almost-relationship (lit. almost something)",
+  "el visto": "the \"seen\" mark on a message",
+  "clavar el visto": "to leave someone on read",
+  "novio": "boyfriend",
+  "novia": "girlfriend",
+  "pareja": "partner",
+  "matrimonio igualitario": "equal marriage (the same-sex marriage law)",
+  "cumplimos seis meses": "We've been together six months.",
+  "casamiento": "wedding",
+  "el civil": "the civil ceremony (the legally binding one)",
+  "tanda": "block of dancing at a party",
+  "carnaval carioca": "late-night party burst with hats, masks and whistles (lit. Rio carnival)",
+  "cotillón": "party props: funny hats, masks, whistles, foam",
+  "mesa dulce": "dessert table (lit. sweet table)",
+  "fiesta de quince": "a girl's big 15th birthday party",
+  "ambientes": "rooms (the living room counts)",
+  "dos ambientes": "one-bedroom flat (lit. two rooms)",
+  "monoambiente": "studio flat (one single room)",
+  "medio ambiente": "the environment (nature)",
+  "4° b": "fourth floor, flat B",
+  "pb": "ground floor (abbreviation)",
+  "planta baja": "ground floor",
+  "ph": "flat inside an old, low house",
+  "persianas": "heavy roll-down shutters",
+  "al frente": "facing the street",
+  "contrafrente": "at the back of the building",
+  "encargado": "building caretaker",
+  "expensas": "monthly building fees",
+  "cuánto son las expensas": "How much are the building fees?",
+  "consorcio": "the building's owners' association",
+  "portero eléctrico": "intercom, door buzzer",
+  "soy yo": "It's me!",
+  "bajo": "I'm coming down.",
+  "buen día": "Good morning",
+  "hasta luego": "See you later",
+  "ascensor": "lift, elevator",
+  "verdulería": "fruit and vegetable shop",
+  "carnicería": "butcher's shop",
+  "el chino": "the corner supermarket (lit. the Chinese one)",
+  "voy al chino": "I'm going to the shop.",
+  "fiambrería": "deli (cold cuts and cheese shop)",
+  "cien de jamón doscientos de queso": "A hundred grams of ham, two hundred of cheese.",
+  "para hoy": "for today (ripe, ready to eat)",
+  "perejil": "parsley",
+  "me das un poco de perejil": "Can I have a bit of parsley?",
+  "dietética": "health-food shop that sells by weight",
+  "algo más": "Anything else?",
+  "nada más gracias cuánto es": "Nothing else, thanks. How much is it?",
+  "lo que mata es la humedad": "It's the humidity that kills you.",
+  "pesado": "muggy, heavy",
+  "sensación térmica": "\"feels like\" temperature",
+  "se cortó la luz": "The power went out.",
+  "tormenta de santa rosa": "Saint Rose's storm (big storm around 30 August)",
+  "sudestada": "strong southeast wind with days of rain",
+  "qué calor": "How hot!",
+  "qué frío": "How cold!",
+  "refrescó": "It got cooler.",
+  "guardia": "emergency room (walk-in, open day and night)",
+  "obra social": "health cover that comes with your job",
+  "prepaga": "private health plan paid monthly",
+  "farmacia de turno": "on-duty pharmacy",
+  "turno": "appointment",
+  "se cayó el sistema": "The system is down.",
+  "me duele la cabeza": "My head hurts.",
+  "tengo fiebre": "I have a fever.",
+  "estoy resfriado": "I have a cold.",
+  "ruta": "road between towns, highway",
+  "estación de servicio": "gas station",
+  "nafta": "gasoline, petrol",
+  "llenalo por favor": "Fill it up, please.",
+  "trapito": "informal street parking attendant (lit. little rag)",
+  "doble fila": "double-parked (lit. double row)",
+  "balizas": "hazard lights",
+  "el auto": "the car",
+  "el baúl": "the trunk",
+  "la goma": "the tire",
+  "estacionar": "to park",
+  "pinché una goma": "I got a flat tire.",
+  "vino": "wine",
+  "vino tinto": "red wine",
+  "malbec": "red wine grape, Argentina's signature",
+  "pingüino": "penguin-shaped wine jug (lit. penguin)",
+  "damajuana": "five-litre glass wine bottle, demijohn",
+  "cerveza": "beer",
+  "tomamos una birra": "Shall we grab a beer?",
+  "porrón": "single-serve beer bottle",
+  "tirada": "draft, on tap",
+  "pinta": "pint, a tall glass of draft beer",
+  "tenés envase": "Do you have an empty bottle to return?",
+  "envase": "returnable glass bottle",
+  "cerveza artesanal": "craft beer",
+  "fernet": "bitter black herbal liquor",
+  "fernet con coca": "bitter herbal liquor with cola",
+  "hora del vermut": "aperitif hour (a drink and a snack before a meal)",
+  "vermut": "vermouth",
+  "sifón": "soda siphon",
+  "sodero": "soda delivery man",
+  "estoy al horno": "I'm doomed (lit. I'm in the oven)",
+  "al horno con papas": "completely doomed (lit. in the oven with potatoes)",
+  "me cayó la ficha": "it finally clicked (lit. the token dropped)",
+  "fichas": "tokens (for old public phones)",
+  "cospeles": "phone tokens",
+  "ponete las pilas": "Get going! (lit. put your batteries in)",
+  "qué garrón": "What a pain!",
+  "mandaste fruta": "you talked nonsense (lit. you sent fruit)",
+  "pateaste el tablero": "you broke the rules and started over (lit. you kicked the board)",
+  "tiraste la toalla": "you gave up (lit. you threw in the towel)",
+  "mandar fruta": "to talk nonsense as if you knew (lit. to send fruit)",
+  "patear el tablero": "to break the rules and start over (lit. to kick the board)",
+  "tirar la toalla": "to give up (lit. to throw in the towel)",
+  "le hacés la gamba": "you back her up (lit. you do the leg for her)",
+  "gamba": "leg (slang)",
+  "me hacés la gamba": "Will you back me up?",
+  "es re buena onda": "He/She is really nice, good vibes",
+  "mala onda": "bad vibes, unfriendly",
+  "qué buena onda": "How nice!",
+  "más contento que perro con dos colas": "happier than a dog with two tails",
+  "más que": "more … than",
+  "más largo que esperanza de pobre": "longer than a poor man's hope",
+  "es más pesado que collar de": "He's heavier than a necklace of…",
+  "más pesado que collar de melones": "a real pain (lit. heavier than a necklace of melons)",
+  "trucho": "fake (slang)",
+  "más trucho que billete de tres pesos": "faker than a three-peso bill",
+  "tiene más vueltas que una calesita": "can't make up their mind (lit. has more turns than a merry-go-round)",
+  "dar vueltas": "to go in circles and not decide",
+  "no des más vueltas": "Just decide! (lit. stop going in circles)",
+  "se cree la última del desierto": "He thinks he's the last … in the desert",
+  "la última coca-cola del desierto": "the last Coca-Cola in the desert (someone who thinks everybody wants them)",
+  "más aburrido que chupar un clavo": "more boring than sucking a nail",
+  "refrán": "proverb",
+  "y bueno a caballo regalado": "Oh well, a gift horse…",
+  "no se le miran los dientes": "…you don't look at its teeth (don't look a gift horse in the mouth)",
+  "el que se quema con leche ve una vaca y": "Whoever gets burned by milk sees a cow and…",
+  "llora": "cries",
+  "corre": "runs",
+  "sopla": "blows on it",
+  "decime con quién andás y te diré quién sos": "Tell me who you hang out with, and I'll tell you who you are.",
+  "del dicho al hecho hay mucho trecho": "Easier said than done (lit. from saying to doing, it's a long way)",
+  "más vale pájaro en mano que cien volando": "A bird in the hand is worth more than a hundred flying.",
+  "no hay mal que por bien no venga": "Every cloud has a silver lining (lit. there's no bad thing that doesn't bring something good)",
+  "es lo que hay": "It is what it is.",
+  "el que no llora no mama": "If you don't ask, you don't get (lit. the baby who doesn't cry doesn't get fed)",
+  "cambalache": "junk shop (title of a famous tango)",
+  "hecha la ley hecha la": "Once the law is made, so is the…",
+  "trampa": "loophole, trick",
+  "queja": "complaint",
+  "fiesta": "party",
+  "viveza criolla": "street smarts used to bend the rules (lit. local cunning)",
+  "vivo": "sly person who games the system",
+  "no te hagas el vivo": "Don't try to be clever / don't pull a fast one",
+  "atado con alambre": "held together with wire (a makeshift fix)",
+  "lo atamos con alambre": "We'll fix it with what we have (lit. we tie it with wire)",
+  "siempre que llovió paró": "Every time it rained, it stopped.",
+  "puteada": "swear word, insult",
+  "che boludo venís a almorzar": "Hey dude, are you coming to lunch?",
+  "boludo": "dude (between friends); idiot",
+  "qué hacés boludo": "What's up, man?",
+  "boluda": "dude (said to a woman); idiot",
+  "fui al súper boludo y no había nada boludo": "I went to the supermarket, dude, and there was nothing, dude.",
+  "pelotudo": "idiot, asshole (stronger, vulgar)",
+  "qué pelotudo": "What an idiot!",
+  "una boludez": "something silly or very easy",
+  "es una boludez": "It's nothing / it's dead easy",
+  "boludear": "to waste time, fool around",
+  "gil": "sucker, fool",
+  "no seas gil": "Don't be a sucker.",
+  "chanta": "someone who is all talk and never delivers",
+  "mañana paso": "I'll come by tomorrow",
+  "garca": "someone who screws people over (vulgar)",
+  "ortiva": "killjoy; snitch",
+  "careta": "a fake, a phony",
+  "forro": "asshole (vulgar; lit. condom)",
+  "hinchapelotas": "ball-breaker, pain in the ass (vulgar)",
+  "rompebolas": "ball-breaker, pain in the ass (vulgar)",
+  "la puta madre": "Damn it! (vulgar; lit. the whore mother)",
+  "la puta que lo parió": "Fucking hell! (lit. the whore who gave birth to him)",
+  "la re puta que lo parió": "Fucking hell! (strongest version)",
+  "la puta": "Damn… (vulgar; lit. the whore)",
+  "andá a cagar": "Get out of here! (vulgar; lit. go take a shit)",
+  "no jodas": "No way! You're kidding!",
+  "me estás jodiendo": "You're kidding me!",
+  "joder": "to joke; to bother",
+  "cagar": "to shit (vulgar)",
+  "cagarse de risa": "to laugh very hard (lit. to shit yourself laughing)",
+  "una cagada": "a screw-up; something crappy (vulgar)",
+  "me cagó": "He cheated me / screwed me over (vulgar)",
+  "la concha de tu madre": "your mother's cunt (very vulgar, a serious insult)",
+  "la concha de la lora": "Fuck! (very vulgar; lit. the parrot's cunt)",
+  "me chupa un huevo": "I don't give a fuck (lit. it sucks one of my balls)",
+  "me da igual": "it's all the same to me",
+  "pedo": "fart",
+  "ni en pedo voy a esa fiesta": "No way am I going to that party.",
+  "ni en pedo": "no way (lit. not even drunk)",
+  "en pedo": "drunk (vulgar)",
+  "al pedo": "pointless, for nothing (vulgar)",
+  "de pedo": "by pure luck (vulgar)",
+  "miércoles": "Shoot! (clean swear; lit. Wednesday)",
+  "la pucha": "Darn! (clean swear)",
+  "cobrá referí": "Call the foul, ref!",
+  "puto": "faggot (homophobic slur)",
+  "trolo": "faggot (homophobic slur)",
+  "mogólico": "retard (slur mocking disability)",
+  "negro de mierda": "racist slur (lit. shitty black)",
+  "bolita": "slur for a Bolivian",
+  "paragua": "slur for a Paraguayan",
+  "qué mirás bobo": "What are you looking at, fool?",
+  "bobo": "fool, silly (mild)",
+  "hijo de puta": "son of a bitch",
+  "qué hijo de puta": "What a genius! (lit. what a son of a bitch)",
+  "dale boludo": "Come on, you idiot!",
+  "quién te dio el registro": "Who gave you a license?",
+  "que la chupen": "they can suck it (vulgar)",
+  "qué bajón": "That's too bad / what a bummer",
+  "uh no": "Oh, no!",
+  "la balsa": "The Raft (song title)",
+  "rock nacional": "Argentine rock (lit. national rock)",
+  "el flaco": "Skinny (nickname)",
+  "muchacha (ojos de papel)": "Girl (Paper Eyes) (song title)",
+  "los dinosaurios": "The Dinosaurs (song title)",
+  "gracias totales": "Total thanks! (a very big thank you)",
+  "folklore": "Argentine folk music",
+  "bombo legüero": "deep folk drum of wood and hide",
+  "zamba": "slow folk dance and rhythm from the northwest",
+  "chacarera": "lively folk dance and rhythm from the northwest",
+  "chamamé": "accordion folk music from the northeast",
+  "la negra": "affectionate nickname (lit. the dark-skinned one)",
+  "gracias a la vida": "Thanks to Life (song title)",
+  "peña": "folk music night with food and wine",
+  "pañuelo": "handkerchief",
+  "las nueve lunas": "the nine moons",
+  "aquí cosquín": "Here is Cosquín!",
+  "cumbia": "popular dance music born in Colombia",
+  "bailantas": "working-class dance halls",
+  "cumbiero": "cumbia fan",
+  "maestra jardinera": "kindergarten teacher",
+  "no me arrepiento de este amor": "I Don't Regret This Love (song title)",
+  "ruta 12": "Route 12 (a highway)",
+  "cumbia villera": "cumbia from the poorest neighborhoods",
+  "cuarteto": "bouncy party music from Córdoba",
+  "tunga tunga": "the bouncy piano beat of cuarteto (imitates its sound)",
+  "el potro": "the Colt (nickname)",
+  "soy cordobés": "I'm from Córdoba (song title)",
+  "bombón asesino": "Killer Babe (song title; lit. killer bonbon)",
+  "el quinto escalón": "The Fifth Step (freestyle battle event)",
+  "rescate": "Rescue (name of a club)",
+  "recital": "concert, live show",
+  "rollingas": "fans of Rolling Stones-style rock",
+  "otra otra": "Encore! (lit. another, another)",
+  "una más y no jodemos más": "One more and we'll stop bothering you",
+  "misas": "masses (church services)",
+  "pogo": "mosh pit",
+  "si alguien se cae se lo levanta": "If someone falls, they get picked up.",
+  "rock chabón": "working-class barrio rock (lit. dude rock)",
+  "bengalas": "flares",
+  "arrabal": "the rough edge of town",
+  "candombe": "African-rooted drum rhythm",
+  "la cumparsita": "The Little Parade (tango title)",
+  "bandoneón": "small button squeezebox, the sound of tango",
+  "el fueye": "the bellows (musicians' name for the bandoneon)",
+  "milonga": "tango dance night; also a faster tango rhythm",
+  "cabeceo": "invitation to dance with a look and a nod",
+  "tandas": "sets of 3 or 4 songs",
+  "vals": "waltz",
+  "cortina": "short non-tango break between sets (lit. curtain)",
+  "abrazo": "embrace",
+  "el morocho del abasto": "the dark-haired guy from Abasto",
+  "pucho": "cigarette (slang)",
+  "cada día canta mejor": "He sings better every day.",
+  "sos gardel": "you're the best; you have all you need (lit. you're Gardel)",
+  "con un asado y amigos sos gardel": "With a barbecue and friends, you have all you need.",
+  "andá a cantarle a gardel": "Go tell someone who cares (lit. go sing it to Gardel)",
+  "orquesta típica": "traditional tango orchestra",
+  "clavel rojo": "red carnation",
+  "nuevo tango": "new tango (mixed with jazz and classical)",
+  "adiós nonino": "Goodbye, Grandpa (tango title)",
+  "el asesino del tango": "the murderer of tango",
+  "eso no es tango": "That's not tango.",
+  "el tango es un pensamiento triste que se baila": "Tango is a sad thought that is danced.",
+  "volver": "To Return (tango title)",
+  "que veinte años no es nada": "Twenty years is nothing",
+  "mi buenos aires querido": "My Beloved Buenos Aires (tango title)",
+  "lo mismo un burro que un gran profesor": "a donkey is the same as a great professor",
+  "laburo": "work, job (slang)",
+  "esto es un cambalache": "This is a total mess (lit. this is a junk shop)",
+  "truco": "the national card game (lit. trick)",
+  "mentir": "to lie",
+  "espadas": "swords (card suit)",
+  "bastos": "wooden clubs (card suit)",
+  "oros": "gold coins (card suit)",
+  "copas": "cups (card suit)",
+  "ancho de espada": "ace of swords (the top card)",
+  "señas": "secret signals to your partner",
+  "malas": "the bad ones (first fifteen points)",
+  "buenas": "the good ones (last fifteen points)",
+  "retrucar": "to answer back fast",
+  "irse al mazo": "to give up (lit. to go to the deck)",
+  "figuritas": "collectible stickers",
+  "late": "got it (I have that sticker)",
+  "nola": "don't have it (that sticker)",
+  "la tengo": "I have it",
+  "no la tengo": "I don't have it",
+  "la difícil": "the hard one (the rarest sticker)",
+  "el espejito": "the little mirror (a sticker game)",
+  "la tapadita": "sticker game where yours must land on top (lit. the little cover)",
+  "la quiniela": "numbers lottery",
+  "agencia": "small lottery shop",
+  "los dos patitos": "the two little ducks (number 22)",
+  "el loco": "the crazy man",
+  "il morto che parla": "the dead man who talks (Italian)",
+  "jugale al 48": "Bet on 48.",
+  "cerrado por vacaciones": "Closed for vacation",
+  "la costa": "the coast (the Atlantic beach towns)",
+  "veranear": "to spend the summer somewhere",
+  "quincena": "fifteen days, half a month",
+  "nos vamos la primera quincena de enero": "We're leaving for the first half of January.",
+  "la feliz": "the happy one (Mar del Plata's nickname)",
+  "reposera": "folding beach chair",
+  "sombrilla": "beach umbrella",
+  "heladerita": "small cooler",
+  "balneario": "beach club",
+  "carpa": "cloth beach tent",
+  "churros hay churros": "Churros, get your churros!",
+  "choclo": "corn on the cob",
+  "tejo": "beach game of throwing flat discs",
+  "paleta": "beach paddleball",
+  "peatonal": "pedestrian street",
+  "fichines": "arcade video games (slang)",
+  "carnaval": "Carnival",
+  "murga": "neighborhood carnival troupe",
+  "corso": "carnival parade on a closed street",
+  "diablito": "little devil",
+  "fiesta nacional": "national festival",
+  "escapada": "short getaway",
+  "quinta": "house outside the city with a garden and pool",
+  "floripa": "nickname for Florianópolis, Brazil",
+  "vacaciones de invierno": "winter school holidays",
+  "guardapolvo blanco": "white school smock",
+  "turno mañana": "morning shift (school)",
+  "turno tarde": "afternoon shift (school)",
+  "jornada completa": "full school day",
+  "la seño": "Miss (primary school teacher)",
+  "profe": "teacher (short form)",
+  "abanderado": "flag bearer (top student)",
+  "abanderada": "flag bearer (top student, female)",
+  "llevarse una materia": "to fail a subject and retake it in the holidays (lit. to take a subject with you)",
+  "me llevé matemática": "I failed math (and have to retake it)",
+  "ratearse": "to skip school",
+  "egresados": "graduating students",
+  "buzo de egresados": "graduating class hoodie",
+  "upd": "the last first day of school",
+  "viaje de egresados": "graduation trip",
+  "fiesta de egresados": "graduation party",
+  "uba": "University of Buenos Aires",
+  "cbc": "Common Basic Cycle (the university's entry year)",
+  "la facultad": "university (lit. the faculty)",
+  "la facu": "uni (short form)",
+  "estoy en la facu": "I'm at uni.",
+  "final": "end-of-subject exam",
+  "recibirse": "to graduate, finish your degree",
+  "doctor": "title for lawyers and doctors",
+  "doctora": "title for lawyers and doctors (female)",
+  "lic": "abbreviation for a university graduate's title",
+  "ing": "abbreviation for Engineer (title)",
+  "reforma universitaria": "University Reform (of 1918)",
+  "laburar": "to work (slang)",
+  "tengo mucho laburo": "I have a lot of work.",
+  "de qué laburás": "What do you do for work?",
+  "aguinaldo": "extra month's salary paid each year",
+  "en blanco": "on the books (lit. in white)",
+  "en negro": "off the books (lit. in black)",
+  "monotributo": "flat monthly tax for the self-employed",
+  "me hacés factura": "Can you give me an invoice?",
+  "sindicatos": "unions",
+  "paritarias": "yearly union wage talks",
+  "after office": "after-work drinks",
+  "paro": "strike",
+  "paro de subte": "subway strike",
+  "paro de colectivos": "bus strike",
+  "paro bancario": "bank strike",
+  "paro general": "general strike",
+  "piquete": "protest roadblock",
+  "corte": "street blockade",
+  "marcha": "protest march",
+  "congreso": "Congress (the national parliament)",
+  "cacerolazo": "pot-banging protest",
+  "cacerola": "cooking pot",
+  "hay paro mañana": "Is there a strike tomorrow?",
+  "está cortado": "Is the street blocked?",
+  "pato": "Argentina's national sport, played on horseback (lit. duck)",
+  "abierto de palermo": "the Palermo Open (polo tournament)",
+  "los pumas": "the Pumas (national rugby team)",
+  "las leonas": "the Lionesses (women's hockey team)",
+  "los murciélagos": "the Bats (blind football team)",
+  "tercer tiempo": "shared meal after the match (lit. third half)",
+  "los leones": "the Lions (men's hockey team)",
+  "las panteras": "the Panthers (women's volleyball team)",
+  "los gladiadores": "the Gladiators (handball team)",
+  "fierrero": "car and engine fanatic",
+  "fierro": "iron",
+  "turismo carretera": "Road Touring (classic car racing series)",
+  "club": "neighbourhood sports and social centre",
+  "la pileta": "the swimming pool",
+  "bochas": "bocce, lawn bowling",
+  "pádel": "padel, a racket sport for four",
+  "metegol": "table football, foosball",
+  "molinete": "spinning the bar in foosball (not allowed)",
+  "hacés algún deporte": "Do you do any sport?",
+  "juego al pádel los martes": "I play padel on Tuesdays.",
+  "carpincho": "capybara",
+  "esteros del iberá": "the Iberá Wetlands",
+  "yacarés": "caimans",
+  "hornero": "ovenbird (the national bird)",
+  "cotorras": "monk parakeets (small green parrots)",
+  "benteveo": "great kiskadee (yellow-chested bird)",
+  "bicho feo": "ugly bug",
+  "ñandú": "rhea (large flightless bird)",
+  "tero": "southern lapwing (a noisy bird)",
+  "como el tero": "like the lapwing: making noise in one place to hide another",
+  "difunta correa": "the Deceased Correa (folk saint)",
+  "promesa": "vow made to a saint (lit. promise)",
+  "hice una promesa": "I made a vow.",
+  "martes 13": "Tuesday the 13th (the unlucky day)",
+  "martes 13 no te cases ni te embarques": "Tuesday the 13th: don't get married and don't set sail.",
+  "mala suerte": "bad luck",
+  "toco madera": "touch wood (lit. I touch wood)",
+  "la envidia": "envy",
+  "bombacha": "women's underwear, panties",
+  "empacho": "indigestion (folk ailment)",
+  "curar con la cinta": "to cure with the ribbon (folk remedy)",
+  "empachado": "suffering from indigestion",
+  "tirar el cuerito": "to pull the skin on the back (folk remedy; lit. to pull the little hide)",
+  "mal de ojo": "the evil eye",
+  "por las dudas": "just in case",
+  "san cayetano": "Saint Cajetan (patron of bread and work)",
+  "bautismo": "baptism",
+  "primera comunión": "first communion",
+  "último momento": "breaking news (lit. latest moment)",
+  "cadena nacional": "government broadcast on all channels at once (lit. national chain)",
+  "novela": "soap opera, daily TV series",
+  "chiquititas": "Tiny Girls (kids' TV series)",
+  "casi ángeles": "Almost Angels (teen TV series)",
+  "muñeca brava": "Wild Doll (TV soap opera)",
+  "los simuladores": "The Pretenders (TV series)",
+  "el encargado": "The Building Manager (TV comedy)",
+  "esperando la carroza": "Waiting for the Hearse (1985 film)",
+  "tres empanadas": "three stuffed pastries (a famous film line)",
+  "relatos salvajes": "Wild Tales (2014 film)",
+  "subtituladas": "subtitled",
+  "dobladas": "dubbed",
+  "nueve reinas": "Nine Queens (2000 film)",
+  "día de los inocentes": "Day of the Innocents (prank day, 28 December)",
+  "que la inocencia te valga": "May your innocence serve you well! (said to a prank victim)",
+  "argentina no lo entenderías": "Argentina, you wouldn't understand.",
+  "relator": "live football commentator",
+  "gooool": "goooal!",
+  "barrilete cósmico": "cosmic kite",
+  "provincias": "provinces",
+  "micro": "long-distance bus",
+  "coche cama": "sleeper bus with reclining seats (lit. bed coach)",
+  "salame quintero": "country-style salami (lit. from the small farm)",
+  "y qué extrañás de allá": "And what do you miss from back home?",
+  "cerro de los siete colores": "Hill of the Seven Colours",
+  "coquean": "they chew coca leaves",
+  "primero de agosto": "the first of August",
+  "pachamama": "Mother Earth (Andean deity)",
+  "chicha": "corn beer",
+  "caña con ruda": "cane liquor with rue",
+  "desentierro del diablo": "the unearthing of the devil (start of carnival)",
+  "acequias": "open irrigation channels",
+  "bodegas": "wineries",
+  "un tinto": "a red wine",
+  "fiesta de la vendimia": "Grape Harvest Festival",
+  "siesta": "afternoon nap, midday break",
+  "tonada": "regional accent, lilt",
+  "cordoobés": "person from Córdoba, said in the stretched local accent",
+  "la docta": "the learned one (Córdoba's nickname)",
+  "baile de cuarteto": "dance night with Córdoba's own party music",
+  "culiao": "dude (vulgar; lit. ass-fucked); an insult when said in anger",
+  "litoral": "the north-eastern river region (lit. coast)",
+  "garganta del diablo": "the Devil's Throat (Iguazú waterfall)",
+  "chipá": "small cheese bread made with cassava flour",
+  "gurí": "kid (north-eastern word)",
+  "sapucai": "Guaraní yell of joy, grief or courage",
+  "liso": "small glass of draft beer (lit. smooth)",
+  "té galés": "Welsh tea (a full afternoon tea)",
+  "torta negra": "dense dark fruit cake (lit. black cake)",
+  "el fin del mundo": "the end of the world",
+  "tren del fin del mundo": "the End of the World Train",
+  "la sopa": "soup",
+  "libertad": "Freedom (a character's name)",
+  "dibujitos": "cartoons (lit. little drawings)",
+  "el apóstol": "The Apostle (1917 animated film)",
+  "papelitos": "bits of paper, confetti",
+  "tiren papelitos muchachos": "Throw the confetti, boys!",
+  "el eternauta": "The Eternaut (comic and TV series)",
+  "nadie se salva solo": "Nobody is saved alone.",
+  "alfonsina y el mar": "Alfonsina and the Sea (song)",
+  "rayuela": "Hopscotch (novel)",
+  "manuelita vivía en pehuajó": "Manuelita lived in Pehuajó.",
+  "birome": "ballpoint pen",
+  "día del inventor": "Inventor's Day",
+  "socio": "paying club member",
+  "generación dorada": "the Golden Generation (basketball team)",
+  "la historia oficial": "The Official Story (1985 film)",
+  "el secreto de sus ojos": "The Secret in Their Eyes (2009 film)",
+  "vemos una peli de darín": "Shall we watch a Darín movie?",
+  "pueblos originarios": "indigenous peoples (lit. original peoples)",
+  "12 de octubre": "12 October",
+  "santa maría del buen ayre": "Saint Mary of the Fair Wind",
+  "buen ayre": "fair wind, good air",
+  "virreinato": "viceroyalty",
+  "cabildo": "colonial town council",
+  "invasiones inglesas": "the British invasions (1806–07)",
+  "reconquista": "reconquest (a street name)",
+  "25 de mayo de 1810": "25 May 1810",
+  "primera junta": "the First Junta (first local government)",
+  "revolución de mayo": "the May Revolution",
+  "9 de julio de 1816": "9 July 1816",
+  "casa histórica": "the Historic House (where independence was declared)",
+  "feriados": "public holidays",
+  "escarapela": "rosette in the national colours",
+  "celeste": "sky blue",
+  "20 de junio": "20 June",
+  "día de la bandera": "Flag Day",
+  "cordillera": "mountain range (the Andes)",
+  "padre de la patria": "Father of the Nation",
+  "catedral": "cathedral",
+  "granaderos": "mounted grenadiers (ceremonial guard)",
+  "17 de agosto": "17 August",
+  "unitarios": "Unitarians: backers of one central government",
+  "federales": "Federalists: backers of provincial self-rule",
+  "caudillo": "regional strongman leader",
+  "mazorca": "Rosas's political police (lit. corn cob)",
+  "gauchos": "horsemen of the Argentine plains",
+  "10 de noviembre": "10 November",
+  "día de la tradición": "Tradition Day",
+  "los hermanos sean unidos porque esa es la ley primera": "Brothers should stay united, because that is the first law.",
+  "constitución": "constitution",
+  "gobernar es poblar": "to govern is to populate",
+  "11 de septiembre": "11 September",
+  "día del maestro": "Teachers' Day",
+  "conquista del desierto": "the Conquest of the Desert",
+  "genocidio": "genocide",
+  "italianos": "Italians",
+  "españoles": "Spaniards",
+  "gallego": "Spaniard (lit. Galician)",
+  "tanos": "Italians (slang)",
+  "turcos": "Arabs (slang; lit. Turks)",
+  "rusos": "Jews (slang; lit. Russians)",
+  "hotel de inmigrantes": "the Immigrants' Hotel",
+  "el granero del mundo": "the world's granary",
+  "voto cantado": "voting out loud (lit. sung vote)",
+  "ley sáenz peña": "the Sáenz Peña Law (1912 voting reform)",
+  "radicales": "Radicals (members of the UCR party)",
+  "los locos de la azotea": "the rooftop madmen",
+  "17 de octubre": "17 October",
+  "día de la lealtad": "Loyalty Day",
+  "descamisados": "the shirtless ones (Perón's supporters)",
+  "gorila": "anti-Peronist (insult; lit. gorilla)",
+  "la grieta": "the political divide (lit. the crack)",
+  "24 de marzo de 1976": "24 March 1976",
+  "esma": "Navy Mechanics School (secret detention centre)",
+  "los desaparecidos": "the disappeared",
+  "conadep": "National Commission on the Disappearance of Persons",
+  "abuelas de plaza de mayo": "the Grandmothers of Plaza de Mayo (searching for stolen grandchildren)",
+  "nieto restituido": "grandchild whose identity is restored",
+  "juicio a las juntas": "the Trial of the Juntas",
+  "señores jueces nunca más": "Your Honours: never again.",
+  "día de la memoria": "Day of Remembrance (24 March)",
+  "memoria verdad y justicia": "memory, truth and justice",
+  "islas malvinas": "the Malvinas islands (the Falklands, in English)",
+  "2 de abril": "2 April",
+  "conscriptos": "conscripts",
+  "los chicos de la guerra": "the kids of the war",
+  "estamos ganando": "we're winning",
+  "ex combatientes": "war veterans (lit. former combatants)",
+  "los caídos": "the fallen",
+  "las malvinas son argentinas": "The Malvinas are Argentine.",
+  "con la democracia se come se cura y se educa": "With democracy, people eat, heal and learn.",
+  "convertibilidad": "peso–dollar peg (lit. convertibility)",
+  "corralito": "freeze on bank withdrawals (lit. little pen)",
+  "que se vayan todos": "Out with all of them!",
+  "kirchnerismo": "the Kirchners' political movement",
+  "los k": "the Kirchner camp (headline shorthand)",
+  "la motosierra": "the chainsaw",
+  "libertario": "libertarian",
+  "vos qué pensás": "What do you think?",
+  "bajo el colchón": "under the mattress",
+  "u$s": "US dollars (abbreviation)",
+  "cepo": "currency controls (lit. clamp)",
+  "dólar blue": "black-market dollar rate",
+  "dólar coldplay": "special exchange rate for paying foreign bands",
+  "cueva": "unofficial exchange office (lit. cave)",
+  "a cuánto está el dólar": "What's the dollar at?",
+  "efectivo": "cash",
+  "efectivo o tarjeta": "Cash or card?"
+ }
 }

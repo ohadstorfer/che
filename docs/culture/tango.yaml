@@ -37,7 +37,7 @@ classes:
       - type: card
         text: "The sound of tango is the **bandoneón**, and it's German. The story goes it was meant for small churches with no organ. It crossed the ocean with immigrants, and went from hymns to tango bars."
       - type: choice
-        prompt: "Why is the bandoneón famously hard to play?"
+        prompt: "Why is the [bandoneón] famously hard to play?"
         options:
           - "Each button plays two different notes"
           - "It's as heavy as a small piano"
@@ -45,7 +45,7 @@ classes:
         correct: 0
         explain: "The note changes depending on whether the bellows open or close. Tango musicians call it **el fueye**: the bellows."
       - type: card
-        text: "Early tango was quick and playful, played on flute, violin and guitar. Many say the bandoneón slowed it down, and that's where tango got its famous sadness."
+        text: "Early tango was quick and playful, played on flute, violin and guitar. Many say the [bandoneón] slowed it down, and that's where tango got its famous sadness."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -56,7 +56,7 @@ classes:
       - type: card
         text: "A **milonga** is a tango dance night: tables around a wooden floor, a DJ or a live orquesta, every age dancing until late. Buenos Aires has one every night of the week."
       - type: choice
-        prompt: "At a traditional milonga, how do you ask someone to dance?"
+        prompt: "At a traditional [milonga], how do you ask someone to dance?"
         options:
           - "Walk to their table and offer your hand"
           - "Catch their eye across the room and nod"
@@ -64,7 +64,7 @@ classes:
         correct: 1
         explain: "That's the **cabeceo**: a look, a small nod. If they nod back, you go get them."
       - type: card
-        text: "And if they look away? That's a no, and nobody got rejected in public. That's the whole point of the cabeceo."
+        text: "And if they look away? That's a no, and nobody got rejected in public. That's the whole point of the [cabeceo]."
       - type: card
         text: "Music comes in **tandas**, sets of 3 or 4 songs: tango, **vals**, or **milonga**, which is also the name of a faster, happier rhythm. Then a short non-tango **cortina** plays, and everyone changes partners."
       - type: choice
@@ -79,7 +79,7 @@ classes:
         text: "Couples hold each other in the **abrazo**, the embrace, and move counterclockwise in a **ronda**, like cars on a track. No overtaking, no high kicks, and never teach your partner on the floor."
       - type: card
         chip: "Did you know?"
-        text: "The dinner shows with flying legs and a rose in someone's mouth? Porteños call that **tango for export**. At a milonga, the dance is small, close and improvised."
+        text: "The dinner shows with flying legs and a rose in someone's mouth? [Porteños] call that **tango for export**. At a [milonga], the dance is small, close and improvised."
       - type: card
         text: "One honest note: most Argentines don't dance tango. It's a small, devoted scene, with many foreigners in it. But almost everyone knows the songs."
     vocabulary: []
@@ -138,7 +138,7 @@ classes:
         correct: 1
         explain: "A **clavel rojo**, a red carnation, on the empty piano. Everyone in the room got the message. Musicians still say **“¡Pugliese, Pugliese, Pugliese!”** for good luck before a show."
       - type: card
-        text: "Then came the rebel: **Astor Piazzolla**. He grew up in New York, where his dad gave him a bandoneón as a kid."
+        text: "Then came the rebel: **Astor Piazzolla**. He grew up in New York, where his dad gave him a [bandoneón] as a kid."
       - type: choice
         prompt: "At 13, Piazzolla had a tiny part as a newspaper boy in a Gardel film shot in New York, and Gardel invited him on his 1935 tour. What happened?"
         options:
@@ -148,7 +148,7 @@ classes:
         correct: 0
         explain: "His father saved his life. That was Gardel's last tour: it ended in the plane crash in Medellín."
       - type: card
-        text: "Back in Buenos Aires he played bandoneón in the orquesta of **Aníbal Troilo**, the most loved bandleader of all, then studied classical music in Paris with **Nadia Boulanger**. She told him to stop hiding his tango."
+        text: "Back in Buenos Aires he played [bandoneón] in the orquesta of **Aníbal Troilo**, the most loved bandleader of all, then studied classical music in Paris with **Nadia Boulanger**. She told him to stop hiding his tango."
       - type: card
         text: "So he mixed tango with jazz and classical: **nuevo tango**. Think **Libertango** and **Adiós Nonino**. Traditionalists called him **el asesino del tango**, and **“eso no es tango”** followed him for years."
       - type: card

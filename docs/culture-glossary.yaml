@@ -1,0 +1,1408 @@
+# What the bold Spanish in the culture classes means (docs/culture-spec.md).
+# The app shows it when she taps a bold word or phrase in a card or a question.
+#   words: the span, folded (lower case, no quotes or punctuation) → its meaning here
+#   names: bold with nothing to translate — people, places, dates, English
+# `npm run culture:validate` warns about bold that is in neither list.
+words:
+  un beso: one kiss
+  saludás uno por uno: you greet each person one by one
+  chau: bye
+  todo bien: All good?
+  qué hacés: How's it going? (lit. what are you doing?)
+  todo bien y vos: All good, and you?
+  hola soy sam: Hi, I'm Sam.
+  a las nueve: at nine
+  ya salgo: I'm leaving now.
+  llego en cinco: I'll be there in five.
+  vamos viendo: let's see how it goes
+  qué llevo: What should I bring?
+  no traigas nada: Don't bring anything.
+  helado: ice cream
+  bueno me voy yendo: Well, I'm heading off.
+  irse a la francesa: to leave without saying goodbye (lit. to leave the French way)
+  boliche: nightclub
+  la previa: pre-drinks at a friend's place
+  milongas: tango dance halls
+  after: after-party (once the club closes)
+  café con medialunas: coffee with small croissants
+  un bar: a bar
+  una birra: a beer (slang)
+  estás más gordito: You've put on a bit of weight.
+  gordo: affectionate pet name (lit. fat, said to a man)
+  gorda: affectionate pet name (lit. fat, said to a woman)
+  flaco: dude, man (lit. skinny)
+  negro: affectionate nickname (lit. black, dark)
+  flaca: what you call a woman you don't know (lit. skinny)
+  flaco se te cayó esto: Hey man, you dropped this!
+  cuánto pagaste: How much did you pay?
+  tenés novio: Do you have a boyfriend?
+  me hacés una gauchada: Can you do me a favor?
+  gauchada: a favor done for free
+  arbolito: Christmas tree (lit. little tree)
+  día de la virgen: Day of the Virgin (8 December holiday)
+  nochebuena: Christmas Eve
+  vitel toné: cold sliced veal in tuna sauce
+  pan dulce: sweet Christmas bread with fruit
+  brindis: toast (with raised glasses)
+  salud: Cheers!
+  feliz navidad: Merry Christmas!
+  reyes magos: the Three Kings
+  20 de julio: 20 July
+  día del amigo: Friend's Day
+  feliz día del amigo: Happy Friend's Day!
+  21 de septiembre: 21 September
+  día del estudiante: Students' Day
+  finde largo: long weekend
+  feriado puente: bridge day off (joins a holiday to the weekend)
+  que los cumplas feliz: '"Happy birthday to you" (the birthday song)'
+  tirón de orejas: ear tug (a birthday tradition)
+  feliz cumple: happy birthday
+  yeta: bad luck
+  permiso: may I? (lit. permission)
+  pasá pasá: Come in, come in.
+  perdón: sorry, excuse me
+  lo siento: I'm sorry (for sad news)
+  buen provecho: enjoy your meal
+  provecho: enjoy your meal
+  gracias: thank you
+  estuvo riquísimo: It was delicious.
+  las malvinas: the islands English speakers call the Falklands
+  y vos: And you?
+  américa: the Americas (the whole continent)
+  estados unidos: the United States
+  porteños: people from Buenos Aires (lit. people of the port)
+  caba: the Autonomous City of Buenos Aires (abbreviation)
+  conurbano: the ring of suburbs around Buenos Aires
+  capital: the city of Buenos Aires itself
+  el interior: everywhere outside Buenos Aires (lit. the inland)
+  dios está en todas partes pero atiende en buenos aires: God is everywhere, but his office is in Buenos Aires.
+  agrandados: full of themselves, big-headed
+  estoy recorriendo mendoza: I'm travelling around Mendoza.
+  corrientes y callao: the corner of Corrientes and Callao
+  son cinco cuadras: It's five blocks.
+  chapa: corrugated metal sheets
+  caminito: little path (a street named after a tango)
+  colectivo: city bus
+  bondi: city bus (slang)
+  sube: public transport fare card
+  hasta plaza italia: To Plaza Italia.
+  timbre: bell, stop button
+  la cola: the line, the queue
+  hay cola eh: Hey, there's a line!
+  libre: free, available
+  tacho: taxi (slang)
+  tachero: taxi driver (slang)
+  subte: the Buenos Aires subway
+  me avisás cuando lleguemos a: Can you tell me when we get to…?
+  obelisco: the Obelisk (Buenos Aires landmark)
+  avenida 9 de julio: 9 July Avenue (named for Independence Day)
+  casa rosada: the Pink House (the presidential palace)
+  plaza de mayo: May Square (the main square of Buenos Aires)
+  madres de plaza de mayo: the Mothers of May Square (mothers of the disappeared)
+  teatro colón: the Columbus Theater (Buenos Aires' opera house)
+  el paraíso: paradise (the cheapest seats, up top)
+  cortado: espresso with a little milk
+  la ciudad de la furia: the city of fury
+  lo hablo con mi psicóloga: I'll talk about it with my psychologist.
+  paseaperros: dog walker
+  la calle que nunca duerme: the street that never sleeps
+  motochorro: thief on a motorbike
+  ojo: watch out (lit. eye)
+  ojo con el celu: Careful with your phone!
+  saldo: balance, credit
+  me cargás la sube: Can you top up my transit card?
+  saldo negativo: negative balance
+  este va a retiro: Does this one go to Retiro?
+  tres hasta plaza italia: Three, to Plaza Italia.
+  combinación: transfer between lines
+  a catedral: toward Catedral station
+  a congreso de tucumán: toward Congreso de Tucumán station
+  me avisás dónde me bajo: Can you tell me where to get off?
+  pasame tu alias: Send me your payment handle.
+  alias: short handle that stands for a bank account
+  te transfiero: I'll transfer it to you.
+  transferencia: bank transfer
+  en cuotas: in monthly installments
+  cuotas: monthly installments
+  12 cuotas sin interés: 12 interest-free installments
+  en un pago: in one payment, all at once
+  descuento en efectivo: discount for paying cash
+  hay descuento en efectivo: Is there a discount for cash?
+  tenés más chico: Do you have a smaller note?
+  me hacés precio: Can you give me a better price?
+  feria: street market
+  casa de cambio: currency exchange office
+  mochila: backpack
+  la mancha: the stain (a pickpocket trick)
+  es tranquilo por acá de noche: Is it calm around here at night?
+  radio taxi: taxi booked by phone
+  cuidado: Careful!
+  me robaron: I was robbed.
+  me ayudás: Can you help me?
+  comisaría: police station
+  denuncia: police report
+  un café: a coffee (a small, strong espresso)
+  en jarrito: in a taller cup
+  una lágrima: hot milk with a drop of coffee (lit. a tear)
+  café: coffee (a small espresso)
+  café con leche: coffee with milk, about half and half
+  lágrima: hot milk with a drop of coffee (lit. tear)
+  café con leche con medialunas: coffee with milk and small croissants
+  de manteca: made with butter
+  de grasa: made with lard
+  submarino: hot milk with a chocolate bar to melt in (lit. submarine)
+  soda: sparkling water
+  tostado: toasted ham and cheese sandwich
+  mozo: waiter
+  disculpá: excuse me
+  para acá o para llevar: For here or to go?
+  me cobrás: Can I pay? (lit. can you charge me?)
+  tú: you (informal; not used in Argentina)
+  vos: you (informal, singular)
+  vos sos: you are
+  vos tenés: you have
+  vos querés: do you want?
+  ustedes: you all (plural you)
+  vosotros: you all (the form used in Spain)
+  oíd mortales: '"Hear, mortals" (first words of the anthem)'
+  usted: you (formal)
+  me podrías: could you…?
+  por favor: please
+  tenés cambio: Do you have change?
+  yo: I
+  calle: street
+  me llamo: my name is
+  rioplatense: of the River Plate region (Buenos Aires and Uruguay)
+  che: hey, dude
+  ce: old call for attention, like "hey"
+  viste: you know? (lit. did you see?)
+  hacía un frío viste: It was so cold, you know?
+  conventillos: tenement houses
+  lunfardo: Buenos Aires street slang
+  me voy al laburo: I'm off to work. (slang)
+  guita: money (slang)
+  pibe: boy, kid (slang)
+  piba: girl (slang)
+  morfar: to eat (slang)
+  birra: beer (slang)
+  fiaca: the feeling of not wanting to do anything
+  bonde: tram (Brazilian Portuguese)
+  chamuyo: smooth talk
+  chamuyar: to sweet-talk
+  eso es puro chamuyo: That's pure smooth talk.
+  mina: woman, chick (slang)
+  academia porteña del lunfardo: the Buenos Aires Academy of Street Slang
+  revés: backwards, reverse
+  vesre: slang made by swapping a word's syllables
+  quién garpa: Who's paying? (slang)
+  gotán: tango (syllables swapped)
+  dorima: husband (syllables swapped)
+  telo: pay-by-the-hour love hotel (slang)
+  re: very, really
+  re lindo: really nice
+  re lejos: really far
+  te gustó re: Did you like it?" "Totally!
+  posta: for real
+  la posta: the real story, the truth
+  montoncito: the pinched-fingers gesture (lit. little bunch)
+  qué te pasa: What's up with you?
+  más o menos: so-so, more or less
+  ni idea: no idea
+  audios: voice notes
+  q: that (texting shorthand)
+  xq: because (texting shorthand)
+  tmb: also (texting shorthand)
+  dsp: later, afterwards (texting shorthand)
+  tqm: love you lots (texting shorthand)
+  bue: fine, if we must (unenthusiastic OK)
+  bueno: OK, fine
+  bueee: oh, come on
+  dale: OK, sure, go ahead
+  vamos a las 8 dale: Shall we go at 8?" "Sure.
+  merienda: afternoon snack, around five
+  facturas: sweet pastries
+  che venís a tomar unos mates: Hey, are you coming over for some mate?
+  merendar: to have an afternoon snack
+  merendamos: Shall we have an afternoon snack?
+  me traés la cuenta: Can you bring me the bill?
+  sobremesa: the long chat at the table after a meal
+  la propina: the tip
+  cubierto: table charge
+  dividimos: Shall we split it?
+  hacer una vaquita: to chip in together (lit. to make a little cow)
+  empanadas: filled pastry turnovers
+  docena: dozen
+  repulgue: the braided edge of a filled turnover
+  cuál es cuál: Which is which?
+  carne: beef
+  suave: mild
+  picante: spicy
+  pollo: chicken
+  jamón y queso: ham and cheese
+  humita: creamy corn filling
+  verdura: greens
+  una docena seis de carne tres de pollo y tres de humita: "A dozen: six beef, three chicken and three corn."
+  papa: potato
+  cortada a cuchillo: chopped by hand with a knife, not ground
+  con las piernas abiertas: with your legs apart
+  muzza: mozzarella pizza (slang)
+  al molde: thick-crust, baked in a pan
+  a la piedra: thin and crisp, stone-baked
+  media masa: medium-thick crust
+  una grande de muzza: a large mozzarella pizza
+  dos porciones: two slices
+  fugazzeta: onion and cheese pizza
+  rellena: stuffed
+  fugazza: onion pizza with no cheese
+  fainá: chickpea flatbread
+  a caballo: with something laid on top (lit. on horseback)
+  moscato: cheap, sweet muscat wine
+  moscato pizza y fainá: sweet muscat wine, pizza and chickpea flatbread
+  avenida corrientes: Corrientes Avenue (the theater street)
+  de parado: standing up
+  porción: slice
+  la nona: grandma (from Italian)
+  el nono: grandpa (from Italian)
+  milanesa: breaded beef or chicken cutlet
+  mila: breaded cutlet (short form)
+  sánguche de milanesa: breaded cutlet sandwich
+  milanesa a la napolitana: breaded cutlet topped with ham, cheese and tomato sauce
+  tuco: slow-simmered tomato sauce
+  ñoquis: gnocchi
+  ñoqui: someone with a public job who never shows up to work (lit. gnocchi)
+  guiso: hearty home stew
+  guiso de lentejas: lentil stew
+  locro: thick stew of corn, beans, squash and meat
+  25 de mayo: 25 May (the 1810 revolution)
+  9 de julio: 9 July (Independence Day)
+  tupper: plastic food container
+  tenés picante: Do you have hot sauce?
+  carbonada: stew of beef, squash, corn and sweet potato
+  humita en chala: fresh corn paste cooked in the husk
+  chala: corn husk
+  heladería: ice cream shop
+  gustos: flavors (lit. tastes)
+  caja: cash register
+  puedo probar: Can I taste it?
+  un cuarto de dulce de leche granizado y limón: A quarter kilo of dulce de leche with chocolate flakes, and lemon.
+  un cuarto: a quarter kilo (250 g)
+  medio kilo: half a kilo
+  un kilo: one kilo
+  dulce de leche: thick milk caramel (lit. sweet of milk)
+  dulce de leche granizado: milk caramel ice cream with chocolate flakes
+  sambayón: egg-yolk and sweet wine custard (zabaglione)
+  clásico: classic (the soft kind, for spreading)
+  repostero: for baking (the firmer kind)
+  chocotorta: no-bake cake of chocolate cookies and milk caramel
+  pastafrola: lattice tart filled with quince or sweet potato paste
+  alfajor: two soft cookies sandwiched around a filling
+  de maicena: made with cornstarch
+  marplatense: Mar del Plata style
+  santafesino: Santa Fe style
+  cordobés: Córdoba style
+  triple: three cookies, two layers of filling
+  kiosco: tiny corner shop for candy and drinks
+  24 hs: open 24 hours
+  caramelos: candies
+  la reja: the window grille
+  me das un alfajor: Can I have an alfajor (cookie sandwich)?
+  cuánto sale: How much is it?
+  negro o blanco: Dark or white (chocolate)?
+  mundial del alfajor: the Alfajor World Cup
+  panadería: bakery
+  una docena surtida: a mixed dozen
+  media docena: half a dozen
+  medialuna: small croissant (lit. half-moon)
+  vigilante: long sugar-topped pastry (lit. the cop)
+  bolas de fraile: filled doughnut balls (lit. friar's balls)
+  sacramentos: rolled sweet pastries (lit. sacraments)
+  cañoncitos: cream-filled pastry tubes (lit. little cannons)
+  una docena de facturas: a dozen sweet pastries
+  qué hay de postre: What's for dessert?
+  bodegón: old-school neighbourhood restaurant
+  flan: egg custard with caramel
+  mixto: with both toppings (dulce de leche and cream)
+  un flan mixto por favor: A custard with both toppings, please.
+  postre vigilante: cheese with quince or sweet potato paste (lit. policeman's dessert)
+  queso y dulce: cheese with sweet fruit paste (lit. cheese and sweet)
+  budín de pan: bread pudding
+  arroz con leche: rice pudding
+  arroz con leche me quiero casar: "\"Rice pudding, I want to get married\" (children's song)"
+  panqueques: thin crêpes
+  quemados: with the sugar burnt crunchy on top (lit. burnt)
+  un poquito nomás: just a little bit
+  mate: hot yerba infusion sipped through a metal straw; also the gourd
+  yerba: dried, ground leaves used for mate
+  tomar: to drink (lit. to take)
+  tomamos unos mates: Shall we have some mate?
+  guaraní: indigenous people of the region
+  infusión nacional: national infusion
+  querés un mate: Do you want a mate?
+  bombilla: metal straw with a filter
+  termo: thermos flask
+  mate camionero: trucker's mate (a big leather-wrapped gourd)
+  curar el mate: to cure (season) a new gourd
+  pico cebador: pouring spout on a thermos
+  yerba con palo: yerba with stems
+  sin palo: without stems
+  cebar: to pour the water and serve mate
+  cebador: the person who pours and serves the mate
+  quién ceba: Who's serving?
+  montañita: little mountain (the slope of dry yerba)
+  quema la yerba: burns the yerba
+  pava: kettle
+  el mate del zonzo: the fool's mate (the first, harsh one)
+  lavado: washed out, flavourless
+  ronda: round (the circle sharing the mate)
+  qué rico: So good!
+  no es un micrófono: "\"It's not a microphone!\" (pass the mate on)"
+  paso estoy resfriado: I'll pass, I have a cold.
+  resfriada: having a cold (feminine form)
+  no gracias: No, thanks
+  amargo: bitter, without sugar
+  mate dulce: mate with sugar
+  mate cocido: yerba brewed in a tea bag, in a cup
+  matear: to drink mate together
+  matera: bag that carries the mate kit
+  tereré: cold mate with water or juice, ice and herbs
+  termo bajo el brazo: the thermos under the arm
+  chimarrão: Brazilian-style mate (Portuguese)
+  cuia: big gourd for Brazilian mate (Portuguese)
+  asado: barbecue; a grilled-meat get-together
+  hacemos un asado: '"Shall we have a barbecue?" (really: want to hang out?)'
+  vení a la una: Come at one.
+  asador: the person in charge of the grill
+  parrillero: grill master
+  asado de la losa: barbecue celebrating a finished roof slab
+  el asado del domingo: the Sunday barbecue
+  parrilla: grill; also a steakhouse
+  vamos a una parrilla: Let's go to a steakhouse.
+  quincho: roofed barbecue area with a long table
+  brasas: embers
+  leña: firewood
+  carbón: charcoal
+  sal gruesa: coarse salt
+  sal parrillera: grilling salt (coarse)
+  qué punto: How would you like it cooked?
+  jugoso: rare to medium-rare (lit. juicy)
+  a punto: medium
+  bien cocido: well done
+  picada: snack board of cheese, cold cuts and olives
+  salame: salami
+  chorizo: grilling sausage
+  morcilla: blood sausage
+  achuras: organ meats, offal
+  chinchulines: crispy grilled intestines
+  mollejas: sweetbreads
+  asado de tira: short ribs
+  vacío: flank
+  entraña: skirt steak
+  ensalada mixta: lettuce, tomato and onion salad
+  papas fritas: french fries
+  soy vegetariano: I'm vegetarian.
+  vegetariana: vegetarian (feminine form)
+  provoleta: grilled provolone cheese
+  morrones: bell peppers
+  choripán: grilled sausage in a crusty roll
+  chori: grilled sausage sandwich (short form)
+  mariposa: "butterflied: split and opened flat (lit. butterfly)"
+  carritos de la costanera: late-night grill stalls along the riverfront
+  choripaneros: people who turn up for a free sausage sandwich (insult)
+  ají molido: mild chili flakes
+  chimichurri: parsley, oregano, garlic and vinegar sauce
+  salsa criolla: tomato, onion and bell pepper relish
+  hielo: ice
+  después dividimos: We'll split it later.
+  te ayudo en algo: Can I help with anything?
+  un aplauso para el asador: A round of applause for the grill master!
+  a comer: Time to eat!
+  a la mesa: Come to the table!
+  cordero patagónico: Patagonian lamb
+  cordero a la cruz: lamb roasted on an iron cross
+  al asador: roasted on a stake beside the fire
+  asado con cuero: beef roasted with its hide on
+  vaquillona con cuero: heifer roasted with its hide on
+  chivito: young goat
+  cabrito: young goat, kid
+  campo: countryside
+  el disco: the disc (a giant pan made from a plough disc)
+  disco de arado: plough disc
+  pollo al disco: chicken stewed in a plough-disc pan
+  de qué cuadro sos: Which team do you support?
+  cuadro: football club, team
+  los cinco grandes: the big five (clubs)
+  superclásico: the Boca–River derby (lit. super classic)
+  clásico de avellaneda: the Avellaneda derby
+  socios: club members
+  barra brava: organised hard-core fans
+  de ninguno todavía vos de cuál sos: None yet. Which one are you?
+  hincha: fan, supporter
+  la hinchada: the crowd of fans
+  la bombonera no tiembla late: "\"La Bombonera doesn't shake, it beats.\" (Boca's stadium)"
+  brasil decime qué se siente: '"Brazil, tell me how it feels" (fan chant)'
+  bosteros: Boca fans (nickname, lit. dung people)
+  gallinas: River fans (nickname, lit. chickens)
+  cábala: lucky ritual, superstition
+  mufa: jinx, bringer of bad luck
+  aguante: die-hard loyalty, sticking it out
+  potrero: dirt lot for street football
+  de potrero: raised on street football (a compliment)
+  fútbol 5: five-a-side football
+  picado: casual pickup game
+  caño: "nutmeg: the ball through an opponent's legs (lit. pipe)"
+  la cancha: the stadium, the pitch
+  arquero: goalkeeper
+  golazo: great goal
+  cómo salió: How did it end?
+  ganamos: we won
+  perdimos: we lost
+  empatamos: we drew
+  el dt: the coach (short for technical director)
+  hacés la previa: you meet up beforehand to eat, drink and sing
+  gastada: teasing, ribbing
+  descenso: relegation
+  irse a la b: to be relegated (lit. to go down to the B)
+  promedio: points average over the last three seasons
+  el var: the video assistant referee
+  fue penal: Was it a penalty?
+  orsai: offside (old-fashioned, from English)
+  la selección: the national team
+  iglesia maradoniana: Church of Maradona
+  el diez: the number ten (Maradona)
+  malvinas: the Falkland Islands
+  la mano de dios: the Hand of God
+  día de la futbolista: Day of the Woman Footballer
+  muchachos ahora nos volvimos a ilusionar: "\"Guys, now we've got our hopes up again\" (fan chant)"
+  la scaloneta: the national team under coach Scaloni (lit. the Scaloni van)
+  leprosos: lepers (nickname of Newell's fans)
+  canallas: scoundrels (nickname of Rosario Central fans)
+  pinchas: Estudiantes fans (short for rat-stabbers)
+  pincharratas: rat-stabbers (nickname of Estudiantes fans)
+  triperos: Gimnasia fans (nickname, lit. tripe handlers)
+  ego: self-importance
+  el pequeño argentino que todos llevamos dentro: The little Argentine we all carry inside
+  dios es argentino: God is Argentine.
+  agrandado: big-headed, full of oneself
+  bajá un cambio: '"Calm down" (lit. shift down a gear)'
+  este país: This country…
+  la única salida es ezeiza: '"The only way out is Ezeiza" (the airport)'
+  argentina no es para principiantes: Argentina is not for beginners.
+  qué caro está todo: Everything is so expensive!
+  opinólogo: someone with an opinion on everything
+  arreglar el mundo: to put the world to rights (lit. to fix the world)
+  sabés cuál es el problema de este país: Do you know what this country's problem is?
+  discusión: argument, heated debate
+  para mí: for me, in my opinion
+  tal cual: Exactly.
+  lo más: the best thing ever
+  un desastre: a disaster
+  me quiero morir: '"I want to die" (said over small mishaps)'
+  me muero: "\"I'm dying\" (an exaggeration)"
+  no sabés lo que me pasó: You have no idea what happened to me.
+  bienvenido: welcome
+  histeriquear: to show interest, then go cold, again and again
+  de dónde sos: Where are you from?
+  extrañar: to miss
+  extraño el asado a mis amigos los domingos: I miss the barbecues, my friends, Sundays.
+  zafar: to get out of a problem at the last second
+  zafé: That was close, but I'm fine.
+  rebusque: side hustle
+  de esta también salimos: We'll get through this one too.
+  primos: cousins
+  tío: uncle
+  tía: aunt
+  abuelo: grandfather
+  abuela: grandmother
+  abu: grandma or grandpa (short form)
+  nono: grandpa (from Italian)
+  nona: grandma (from Italian)
+  zeide: grandpa (from Yiddish)
+  bobe: grandma (from Yiddish)
+  apodo: nickname
+  el colo: the redhead (nickname)
+  colorado: red; red-haired
+  negra: dark-haired or dark-skinned woman (affectionate nickname)
+  rulo: curly (nickname, lit. curl)
+  el dormido: the sleeping one
+  jefe: boss (friendly way to address a stranger)
+  maestro: master (friendly way to address a stranger)
+  campeón: champion (friendly way to address a stranger)
+  genio: a great person (lit. genius)
+  genia: a great person, said of a woman (lit. genius)
+  tocayo: namesake
+  tocaya: namesake (feminine form)
+  el nene: the kid
+  los chicos del colegio: the friends from school
+  el asado de los jueves: the Thursday barbecue
+  juntarse: to get together
+  nos juntamos: Shall we get together?
+  caete por casa: '"Come over any time" (lit. drop by my place)'
+  te quiero: I love you
+  bancar: "to stand by someone (also: to wait, to put up with)"
+  te banco: I'm with you, whatever happens.
+  despedida: goodbye party
+  grupo de whatsapp: WhatsApp group
+  saliendo: going out, dating
+  de novios: an official couple
+  convivir: to live together
+  casi algo: an almost-relationship (lit. almost something)
+  el visto: the "seen" mark on a message
+  clavar el visto: to leave someone on read
+  novio: boyfriend
+  novia: girlfriend
+  pareja: partner
+  matrimonio igualitario: equal marriage (the same-sex marriage law)
+  cumplimos seis meses: We've been together six months.
+  casamiento: wedding
+  el civil: the civil ceremony (the legally binding one)
+  tanda: block of dancing at a party
+  carnaval carioca: late-night party burst with hats, masks and whistles (lit. Rio carnival)
+  cotillón: "party props: funny hats, masks, whistles, foam"
+  mesa dulce: dessert table (lit. sweet table)
+  fiesta de quince: a girl's big 15th birthday party
+  ambientes: rooms (the living room counts)
+  dos ambientes: one-bedroom flat (lit. two rooms)
+  monoambiente: studio flat (one single room)
+  medio ambiente: the environment (nature)
+  4° b: fourth floor, flat B
+  pb: ground floor (abbreviation)
+  planta baja: ground floor
+  ph: flat inside an old, low house
+  persianas: heavy roll-down shutters
+  al frente: facing the street
+  contrafrente: at the back of the building
+  encargado: building caretaker
+  expensas: monthly building fees
+  cuánto son las expensas: How much are the building fees?
+  consorcio: the building's owners' association
+  portero eléctrico: intercom, door buzzer
+  soy yo: It's me!
+  bajo: I'm coming down.
+  buen día: Good morning
+  hasta luego: See you later
+  ascensor: lift, elevator
+  verdulería: fruit and vegetable shop
+  carnicería: butcher's shop
+  el chino: the corner supermarket (lit. the Chinese one)
+  voy al chino: I'm going to the shop.
+  fiambrería: deli (cold cuts and cheese shop)
+  cien de jamón doscientos de queso: A hundred grams of ham, two hundred of cheese.
+  para hoy: for today (ripe, ready to eat)
+  perejil: parsley
+  me das un poco de perejil: Can I have a bit of parsley?
+  dietética: health-food shop that sells by weight
+  algo más: Anything else?
+  nada más gracias cuánto es: Nothing else, thanks. How much is it?
+  lo que mata es la humedad: It's the humidity that kills you.
+  pesado: muggy, heavy
+  sensación térmica: '"feels like" temperature'
+  se cortó la luz: The power went out.
+  tormenta de santa rosa: Saint Rose's storm (big storm around 30 August)
+  sudestada: strong southeast wind with days of rain
+  qué calor: How hot!
+  qué frío: How cold!
+  refrescó: It got cooler.
+  guardia: emergency room (walk-in, open day and night)
+  obra social: health cover that comes with your job
+  prepaga: private health plan paid monthly
+  farmacia de turno: on-duty pharmacy
+  turno: appointment
+  se cayó el sistema: The system is down.
+  me duele la cabeza: My head hurts.
+  tengo fiebre: I have a fever.
+  estoy resfriado: I have a cold.
+  ruta: road between towns, highway
+  estación de servicio: gas station
+  nafta: gasoline, petrol
+  llenalo por favor: Fill it up, please.
+  trapito: informal street parking attendant (lit. little rag)
+  doble fila: double-parked (lit. double row)
+  balizas: hazard lights
+  el auto: the car
+  el baúl: the trunk
+  la goma: the tire
+  estacionar: to park
+  pinché una goma: I got a flat tire.
+  vino: wine
+  vino tinto: red wine
+  malbec: red wine grape, Argentina's signature
+  pingüino: penguin-shaped wine jug (lit. penguin)
+  damajuana: five-litre glass wine bottle, demijohn
+  cerveza: beer
+  tomamos una birra: Shall we grab a beer?
+  porrón: single-serve beer bottle
+  tirada: draft, on tap
+  pinta: pint, a tall glass of draft beer
+  tenés envase: Do you have an empty bottle to return?
+  envase: returnable glass bottle
+  cerveza artesanal: craft beer
+  fernet: bitter black herbal liquor
+  fernet con coca: bitter herbal liquor with cola
+  hora del vermut: aperitif hour (a drink and a snack before a meal)
+  vermut: vermouth
+  sifón: soda siphon
+  sodero: soda delivery man
+  estoy al horno: I'm doomed (lit. I'm in the oven)
+  al horno con papas: completely doomed (lit. in the oven with potatoes)
+  me cayó la ficha: it finally clicked (lit. the token dropped)
+  fichas: tokens (for old public phones)
+  cospeles: phone tokens
+  ponete las pilas: Get going! (lit. put your batteries in)
+  qué garrón: What a pain!
+  mandaste fruta: you talked nonsense (lit. you sent fruit)
+  pateaste el tablero: you broke the rules and started over (lit. you kicked the board)
+  tiraste la toalla: you gave up (lit. you threw in the towel)
+  mandar fruta: to talk nonsense as if you knew (lit. to send fruit)
+  patear el tablero: to break the rules and start over (lit. to kick the board)
+  tirar la toalla: to give up (lit. to throw in the towel)
+  le hacés la gamba: you back her up (lit. you do the leg for her)
+  gamba: leg (slang)
+  me hacés la gamba: Will you back me up?
+  es re buena onda: He/She is really nice, good vibes
+  mala onda: bad vibes, unfriendly
+  qué buena onda: How nice!
+  más contento que perro con dos colas: happier than a dog with two tails
+  más que: more … than
+  más largo que esperanza de pobre: longer than a poor man's hope
+  es más pesado que collar de: He's heavier than a necklace of…
+  más pesado que collar de melones: a real pain (lit. heavier than a necklace of melons)
+  trucho: fake (slang)
+  más trucho que billete de tres pesos: faker than a three-peso bill
+  tiene más vueltas que una calesita: can't make up their mind (lit. has more turns than a merry-go-round)
+  dar vueltas: to go in circles and not decide
+  no des más vueltas: Just decide! (lit. stop going in circles)
+  se cree la última del desierto: He thinks he's the last … in the desert
+  la última coca-cola del desierto: the last Coca-Cola in the desert (someone who thinks everybody wants them)
+  más aburrido que chupar un clavo: more boring than sucking a nail
+  refrán: proverb
+  y bueno a caballo regalado: Oh well, a gift horse…
+  no se le miran los dientes: …you don't look at its teeth (don't look a gift horse in the mouth)
+  el que se quema con leche ve una vaca y: Whoever gets burned by milk sees a cow and…
+  llora: cries
+  corre: runs
+  sopla: blows on it
+  decime con quién andás y te diré quién sos: Tell me who you hang out with, and I'll tell you who you are.
+  del dicho al hecho hay mucho trecho: Easier said than done (lit. from saying to doing, it's a long way)
+  más vale pájaro en mano que cien volando: A bird in the hand is worth more than a hundred flying.
+  no hay mal que por bien no venga: Every cloud has a silver lining (lit. there's no bad thing that doesn't bring something good)
+  es lo que hay: It is what it is.
+  el que no llora no mama: If you don't ask, you don't get (lit. the baby who doesn't cry doesn't get fed)
+  cambalache: junk shop (title of a famous tango)
+  hecha la ley hecha la: Once the law is made, so is the…
+  trampa: loophole, trick
+  queja: complaint
+  fiesta: party
+  viveza criolla: street smarts used to bend the rules (lit. local cunning)
+  vivo: sly person who games the system
+  no te hagas el vivo: Don't try to be clever / don't pull a fast one
+  atado con alambre: held together with wire (a makeshift fix)
+  lo atamos con alambre: We'll fix it with what we have (lit. we tie it with wire)
+  siempre que llovió paró: Every time it rained, it stopped.
+  puteada: swear word, insult
+  che boludo venís a almorzar: Hey dude, are you coming to lunch?
+  boludo: dude (between friends); idiot
+  qué hacés boludo: What's up, man?
+  boluda: dude (said to a woman); idiot
+  fui al súper boludo y no había nada boludo: I went to the supermarket, dude, and there was nothing, dude.
+  pelotudo: idiot, asshole (stronger, vulgar)
+  qué pelotudo: What an idiot!
+  una boludez: something silly or very easy
+  es una boludez: It's nothing / it's dead easy
+  boludear: to waste time, fool around
+  gil: sucker, fool
+  no seas gil: Don't be a sucker.
+  chanta: someone who is all talk and never delivers
+  mañana paso: I'll come by tomorrow
+  garca: someone who screws people over (vulgar)
+  ortiva: killjoy; snitch
+  careta: a fake, a phony
+  forro: asshole (vulgar; lit. condom)
+  hinchapelotas: ball-breaker, pain in the ass (vulgar)
+  rompebolas: ball-breaker, pain in the ass (vulgar)
+  la puta madre: Damn it! (vulgar; lit. the whore mother)
+  la puta que lo parió: Fucking hell! (lit. the whore who gave birth to him)
+  la re puta que lo parió: Fucking hell! (strongest version)
+  la puta: Damn… (vulgar; lit. the whore)
+  andá a cagar: Get out of here! (vulgar; lit. go take a shit)
+  no jodas: No way! You're kidding!
+  me estás jodiendo: You're kidding me!
+  joder: to joke; to bother
+  cagar: to shit (vulgar)
+  cagarse de risa: to laugh very hard (lit. to shit yourself laughing)
+  una cagada: a screw-up; something crappy (vulgar)
+  me cagó: He cheated me / screwed me over (vulgar)
+  la concha de tu madre: your mother's cunt (very vulgar, a serious insult)
+  la concha de la lora: Fuck! (very vulgar; lit. the parrot's cunt)
+  me chupa un huevo: I don't give a fuck (lit. it sucks one of my balls)
+  me da igual: it's all the same to me
+  pedo: fart
+  ni en pedo voy a esa fiesta: No way am I going to that party.
+  ni en pedo: no way (lit. not even drunk)
+  en pedo: drunk (vulgar)
+  al pedo: pointless, for nothing (vulgar)
+  de pedo: by pure luck (vulgar)
+  miércoles: Shoot! (clean swear; lit. Wednesday)
+  la pucha: Darn! (clean swear)
+  cobrá referí: Call the foul, ref!
+  puto: faggot (homophobic slur)
+  trolo: faggot (homophobic slur)
+  mogólico: retard (slur mocking disability)
+  negro de mierda: racist slur (lit. shitty black)
+  bolita: slur for a Bolivian
+  paragua: slur for a Paraguayan
+  qué mirás bobo: What are you looking at, fool?
+  bobo: fool, silly (mild)
+  hijo de puta: son of a bitch
+  qué hijo de puta: What a genius! (lit. what a son of a bitch)
+  dale boludo: Come on, you idiot!
+  quién te dio el registro: Who gave you a license?
+  que la chupen: they can suck it (vulgar)
+  qué bajón: That's too bad / what a bummer
+  uh no: Oh, no!
+  la balsa: The Raft (song title)
+  rock nacional: Argentine rock (lit. national rock)
+  el flaco: Skinny (nickname)
+  muchacha (ojos de papel): Girl (Paper Eyes) (song title)
+  los dinosaurios: The Dinosaurs (song title)
+  gracias totales: Total thanks! (a very big thank you)
+  folklore: Argentine folk music
+  bombo legüero: deep folk drum of wood and hide
+  zamba: slow folk dance and rhythm from the northwest
+  chacarera: lively folk dance and rhythm from the northwest
+  chamamé: accordion folk music from the northeast
+  la negra: affectionate nickname (lit. the dark-skinned one)
+  gracias a la vida: Thanks to Life (song title)
+  peña: folk music night with food and wine
+  pañuelo: handkerchief
+  las nueve lunas: the nine moons
+  aquí cosquín: Here is Cosquín!
+  cumbia: popular dance music born in Colombia
+  bailantas: working-class dance halls
+  cumbiero: cumbia fan
+  maestra jardinera: kindergarten teacher
+  no me arrepiento de este amor: I Don't Regret This Love (song title)
+  ruta 12: Route 12 (a highway)
+  cumbia villera: cumbia from the poorest neighborhoods
+  cuarteto: bouncy party music from Córdoba
+  tunga tunga: the bouncy piano beat of cuarteto (imitates its sound)
+  el potro: the Colt (nickname)
+  soy cordobés: I'm from Córdoba (song title)
+  bombón asesino: Killer Babe (song title; lit. killer bonbon)
+  el quinto escalón: The Fifth Step (freestyle battle event)
+  rescate: Rescue (name of a club)
+  recital: concert, live show
+  rollingas: fans of Rolling Stones-style rock
+  otra otra: Encore! (lit. another, another)
+  una más y no jodemos más: One more and we'll stop bothering you
+  misas: masses (church services)
+  pogo: mosh pit
+  si alguien se cae se lo levanta: If someone falls, they get picked up.
+  rock chabón: working-class barrio rock (lit. dude rock)
+  bengalas: flares
+  arrabal: the rough edge of town
+  candombe: African-rooted drum rhythm
+  la cumparsita: The Little Parade (tango title)
+  bandoneón: small button squeezebox, the sound of tango
+  el fueye: the bellows (musicians' name for the bandoneon)
+  milonga: tango dance night; also a faster tango rhythm
+  cabeceo: invitation to dance with a look and a nod
+  tandas: sets of 3 or 4 songs
+  vals: waltz
+  cortina: short non-tango break between sets (lit. curtain)
+  abrazo: embrace
+  el morocho del abasto: the dark-haired guy from Abasto
+  pucho: cigarette (slang)
+  cada día canta mejor: He sings better every day.
+  sos gardel: you're the best; you have all you need (lit. you're Gardel)
+  con un asado y amigos sos gardel: With a barbecue and friends, you have all you need.
+  andá a cantarle a gardel: Go tell someone who cares (lit. go sing it to Gardel)
+  orquesta típica: traditional tango orchestra
+  clavel rojo: red carnation
+  nuevo tango: new tango (mixed with jazz and classical)
+  adiós nonino: Goodbye, Grandpa (tango title)
+  el asesino del tango: the murderer of tango
+  eso no es tango: That's not tango.
+  el tango es un pensamiento triste que se baila: Tango is a sad thought that is danced.
+  volver: To Return (tango title)
+  que veinte años no es nada: Twenty years is nothing
+  mi buenos aires querido: My Beloved Buenos Aires (tango title)
+  lo mismo un burro que un gran profesor: a donkey is the same as a great professor
+  laburo: work, job (slang)
+  esto es un cambalache: This is a total mess (lit. this is a junk shop)
+  truco: the national card game (lit. trick)
+  mentir: to lie
+  espadas: swords (card suit)
+  bastos: wooden clubs (card suit)
+  oros: gold coins (card suit)
+  copas: cups (card suit)
+  ancho de espada: ace of swords (the top card)
+  señas: secret signals to your partner
+  malas: the bad ones (first fifteen points)
+  buenas: the good ones (last fifteen points)
+  retrucar: to answer back fast
+  irse al mazo: to give up (lit. to go to the deck)
+  figuritas: collectible stickers
+  late: got it (I have that sticker)
+  nola: don't have it (that sticker)
+  la tengo: I have it
+  no la tengo: I don't have it
+  la difícil: the hard one (the rarest sticker)
+  el espejito: the little mirror (a sticker game)
+  la tapadita: sticker game where yours must land on top (lit. the little cover)
+  la quiniela: numbers lottery
+  agencia: small lottery shop
+  los dos patitos: the two little ducks (number 22)
+  el loco: the crazy man
+  il morto che parla: the dead man who talks (Italian)
+  jugale al 48: Bet on 48.
+  cerrado por vacaciones: Closed for vacation
+  la costa: the coast (the Atlantic beach towns)
+  veranear: to spend the summer somewhere
+  quincena: fifteen days, half a month
+  nos vamos la primera quincena de enero: We're leaving for the first half of January.
+  la feliz: the happy one (Mar del Plata's nickname)
+  reposera: folding beach chair
+  sombrilla: beach umbrella
+  heladerita: small cooler
+  balneario: beach club
+  carpa: cloth beach tent
+  churros hay churros: Churros, get your churros!
+  choclo: corn on the cob
+  tejo: beach game of throwing flat discs
+  paleta: beach paddleball
+  peatonal: pedestrian street
+  fichines: arcade video games (slang)
+  carnaval: Carnival
+  murga: neighborhood carnival troupe
+  corso: carnival parade on a closed street
+  diablito: little devil
+  fiesta nacional: national festival
+  escapada: short getaway
+  quinta: house outside the city with a garden and pool
+  floripa: nickname for Florianópolis, Brazil
+  vacaciones de invierno: winter school holidays
+  guardapolvo blanco: white school smock
+  turno mañana: morning shift (school)
+  turno tarde: afternoon shift (school)
+  jornada completa: full school day
+  la seño: Miss (primary school teacher)
+  profe: teacher (short form)
+  abanderado: flag bearer (top student)
+  abanderada: flag bearer (top student, female)
+  llevarse una materia: to fail a subject and retake it in the holidays (lit. to take a subject with you)
+  me llevé matemática: I failed math (and have to retake it)
+  ratearse: to skip school
+  egresados: graduating students
+  buzo de egresados: graduating class hoodie
+  upd: the last first day of school
+  viaje de egresados: graduation trip
+  fiesta de egresados: graduation party
+  uba: University of Buenos Aires
+  cbc: Common Basic Cycle (the university's entry year)
+  la facultad: university (lit. the faculty)
+  la facu: uni (short form)
+  estoy en la facu: I'm at uni.
+  final: end-of-subject exam
+  recibirse: to graduate, finish your degree
+  doctor: title for lawyers and doctors
+  doctora: title for lawyers and doctors (female)
+  lic: abbreviation for a university graduate's title
+  ing: abbreviation for Engineer (title)
+  reforma universitaria: University Reform (of 1918)
+  laburar: to work (slang)
+  tengo mucho laburo: I have a lot of work.
+  de qué laburás: What do you do for work?
+  aguinaldo: extra month's salary paid each year
+  en blanco: on the books (lit. in white)
+  en negro: off the books (lit. in black)
+  monotributo: flat monthly tax for the self-employed
+  me hacés factura: Can you give me an invoice?
+  sindicatos: unions
+  paritarias: yearly union wage talks
+  after office: after-work drinks
+  paro: strike
+  paro de subte: subway strike
+  paro de colectivos: bus strike
+  paro bancario: bank strike
+  paro general: general strike
+  piquete: protest roadblock
+  corte: street blockade
+  marcha: protest march
+  congreso: Congress (the national parliament)
+  cacerolazo: pot-banging protest
+  cacerola: cooking pot
+  hay paro mañana: Is there a strike tomorrow?
+  está cortado: Is the street blocked?
+  pato: Argentina's national sport, played on horseback (lit. duck)
+  abierto de palermo: the Palermo Open (polo tournament)
+  los pumas: the Pumas (national rugby team)
+  las leonas: the Lionesses (women's hockey team)
+  los murciélagos: the Bats (blind football team)
+  tercer tiempo: shared meal after the match (lit. third half)
+  los leones: the Lions (men's hockey team)
+  las panteras: the Panthers (women's volleyball team)
+  los gladiadores: the Gladiators (handball team)
+  fierrero: car and engine fanatic
+  fierro: iron
+  turismo carretera: Road Touring (classic car racing series)
+  club: neighbourhood sports and social centre
+  la pileta: the swimming pool
+  bochas: bocce, lawn bowling
+  pádel: padel, a racket sport for four
+  metegol: table football, foosball
+  molinete: spinning the bar in foosball (not allowed)
+  hacés algún deporte: Do you do any sport?
+  juego al pádel los martes: I play padel on Tuesdays.
+  carpincho: capybara
+  esteros del iberá: the Iberá Wetlands
+  yacarés: caimans
+  hornero: ovenbird (the national bird)
+  cotorras: monk parakeets (small green parrots)
+  benteveo: great kiskadee (yellow-chested bird)
+  bicho feo: ugly bug
+  ñandú: rhea (large flightless bird)
+  tero: southern lapwing (a noisy bird)
+  como el tero: "like the lapwing: making noise in one place to hide another"
+  difunta correa: the Deceased Correa (folk saint)
+  promesa: vow made to a saint (lit. promise)
+  hice una promesa: I made a vow.
+  martes 13: Tuesday the 13th (the unlucky day)
+  martes 13 no te cases ni te embarques: "Tuesday the 13th: don't get married and don't set sail."
+  mala suerte: bad luck
+  toco madera: touch wood (lit. I touch wood)
+  la envidia: envy
+  bombacha: women's underwear, panties
+  empacho: indigestion (folk ailment)
+  curar con la cinta: to cure with the ribbon (folk remedy)
+  empachado: suffering from indigestion
+  tirar el cuerito: to pull the skin on the back (folk remedy; lit. to pull the little hide)
+  mal de ojo: the evil eye
+  por las dudas: just in case
+  san cayetano: Saint Cajetan (patron of bread and work)
+  bautismo: baptism
+  primera comunión: first communion
+  último momento: breaking news (lit. latest moment)
+  cadena nacional: government broadcast on all channels at once (lit. national chain)
+  novela: soap opera, daily TV series
+  chiquititas: Tiny Girls (kids' TV series)
+  casi ángeles: Almost Angels (teen TV series)
+  muñeca brava: Wild Doll (TV soap opera)
+  los simuladores: The Pretenders (TV series)
+  el encargado: The Building Manager (TV comedy)
+  esperando la carroza: Waiting for the Hearse (1985 film)
+  tres empanadas: three stuffed pastries (a famous film line)
+  relatos salvajes: Wild Tales (2014 film)
+  subtituladas: subtitled
+  dobladas: dubbed
+  nueve reinas: Nine Queens (2000 film)
+  día de los inocentes: Day of the Innocents (prank day, 28 December)
+  que la inocencia te valga: May your innocence serve you well! (said to a prank victim)
+  argentina no lo entenderías: Argentina, you wouldn't understand.
+  relator: live football commentator
+  gooool: goooal!
+  barrilete cósmico: cosmic kite
+  provincias: provinces
+  micro: long-distance bus
+  coche cama: sleeper bus with reclining seats (lit. bed coach)
+  salame quintero: country-style salami (lit. from the small farm)
+  y qué extrañás de allá: And what do you miss from back home?
+  cerro de los siete colores: Hill of the Seven Colours
+  coquean: they chew coca leaves
+  primero de agosto: the first of August
+  pachamama: Mother Earth (Andean deity)
+  chicha: corn beer
+  caña con ruda: cane liquor with rue
+  desentierro del diablo: the unearthing of the devil (start of carnival)
+  acequias: open irrigation channels
+  bodegas: wineries
+  un tinto: a red wine
+  fiesta de la vendimia: Grape Harvest Festival
+  siesta: afternoon nap, midday break
+  tonada: regional accent, lilt
+  cordoobés: person from Córdoba, said in the stretched local accent
+  la docta: the learned one (Córdoba's nickname)
+  baile de cuarteto: dance night with Córdoba's own party music
+  culiao: dude (vulgar; lit. ass-fucked); an insult when said in anger
+  litoral: the north-eastern river region (lit. coast)
+  garganta del diablo: the Devil's Throat (Iguazú waterfall)
+  chipá: small cheese bread made with cassava flour
+  gurí: kid (north-eastern word)
+  sapucai: Guaraní yell of joy, grief or courage
+  liso: small glass of draft beer (lit. smooth)
+  té galés: Welsh tea (a full afternoon tea)
+  torta negra: dense dark fruit cake (lit. black cake)
+  el fin del mundo: the end of the world
+  tren del fin del mundo: the End of the World Train
+  la sopa: soup
+  libertad: Freedom (a character's name)
+  dibujitos: cartoons (lit. little drawings)
+  el apóstol: The Apostle (1917 animated film)
+  papelitos: bits of paper, confetti
+  tiren papelitos muchachos: Throw the confetti, boys!
+  el eternauta: The Eternaut (comic and TV series)
+  nadie se salva solo: Nobody is saved alone.
+  alfonsina y el mar: Alfonsina and the Sea (song)
+  rayuela: Hopscotch (novel)
+  manuelita vivía en pehuajó: Manuelita lived in Pehuajó.
+  birome: ballpoint pen
+  día del inventor: Inventor's Day
+  socio: paying club member
+  generación dorada: the Golden Generation (basketball team)
+  la historia oficial: The Official Story (1985 film)
+  el secreto de sus ojos: The Secret in Their Eyes (2009 film)
+  vemos una peli de darín: Shall we watch a Darín movie?
+  pueblos originarios: indigenous peoples (lit. original peoples)
+  12 de octubre: 12 October
+  santa maría del buen ayre: Saint Mary of the Fair Wind
+  buen ayre: fair wind, good air
+  virreinato: viceroyalty
+  cabildo: colonial town council
+  invasiones inglesas: the British invasions (1806–07)
+  reconquista: reconquest (a street name)
+  25 de mayo de 1810: 25 May 1810
+  primera junta: the First Junta (first local government)
+  revolución de mayo: the May Revolution
+  9 de julio de 1816: 9 July 1816
+  casa histórica: the Historic House (where independence was declared)
+  feriados: public holidays
+  escarapela: rosette in the national colours
+  celeste: sky blue
+  20 de junio: 20 June
+  día de la bandera: Flag Day
+  cordillera: mountain range (the Andes)
+  padre de la patria: Father of the Nation
+  catedral: cathedral
+  granaderos: mounted grenadiers (ceremonial guard)
+  17 de agosto: 17 August
+  unitarios: "Unitarians: backers of one central government"
+  federales: "Federalists: backers of provincial self-rule"
+  caudillo: regional strongman leader
+  mazorca: Rosas's political police (lit. corn cob)
+  gauchos: horsemen of the Argentine plains
+  10 de noviembre: 10 November
+  día de la tradición: Tradition Day
+  los hermanos sean unidos porque esa es la ley primera: Brothers should stay united, because that is the first law.
+  constitución: constitution
+  gobernar es poblar: to govern is to populate
+  11 de septiembre: 11 September
+  día del maestro: Teachers' Day
+  conquista del desierto: the Conquest of the Desert
+  genocidio: genocide
+  italianos: Italians
+  españoles: Spaniards
+  gallego: Spaniard (lit. Galician)
+  tanos: Italians (slang)
+  turcos: Arabs (slang; lit. Turks)
+  rusos: Jews (slang; lit. Russians)
+  hotel de inmigrantes: the Immigrants' Hotel
+  el granero del mundo: the world's granary
+  voto cantado: voting out loud (lit. sung vote)
+  ley sáenz peña: the Sáenz Peña Law (1912 voting reform)
+  radicales: Radicals (members of the UCR party)
+  los locos de la azotea: the rooftop madmen
+  17 de octubre: 17 October
+  día de la lealtad: Loyalty Day
+  descamisados: the shirtless ones (Perón's supporters)
+  gorila: anti-Peronist (insult; lit. gorilla)
+  la grieta: the political divide (lit. the crack)
+  24 de marzo de 1976: 24 March 1976
+  esma: Navy Mechanics School (secret detention centre)
+  los desaparecidos: the disappeared
+  conadep: National Commission on the Disappearance of Persons
+  abuelas de plaza de mayo: the Grandmothers of Plaza de Mayo (searching for stolen grandchildren)
+  nieto restituido: grandchild whose identity is restored
+  juicio a las juntas: the Trial of the Juntas
+  señores jueces nunca más: "Your Honours: never again."
+  día de la memoria: Day of Remembrance (24 March)
+  memoria verdad y justicia: memory, truth and justice
+  islas malvinas: the Malvinas islands (the Falklands, in English)
+  2 de abril: 2 April
+  conscriptos: conscripts
+  los chicos de la guerra: the kids of the war
+  estamos ganando: we're winning
+  ex combatientes: war veterans (lit. former combatants)
+  los caídos: the fallen
+  las malvinas son argentinas: The Malvinas are Argentine.
+  con la democracia se come se cura y se educa: With democracy, people eat, heal and learn.
+  convertibilidad: peso–dollar peg (lit. convertibility)
+  corralito: freeze on bank withdrawals (lit. little pen)
+  que se vayan todos: Out with all of them!
+  kirchnerismo: the Kirchners' political movement
+  los k: the Kirchner camp (headline shorthand)
+  la motosierra: the chainsaw
+  libertario: libertarian
+  vos qué pensás: What do you think?
+  bajo el colchón: under the mattress
+  u$s: US dollars (abbreviation)
+  cepo: currency controls (lit. clamp)
+  dólar blue: black-market dollar rate
+  dólar coldplay: special exchange rate for paying foreign bands
+  cueva: unofficial exchange office (lit. cave)
+  a cuánto está el dólar: What's the dollar at?
+  efectivo: cash
+  efectivo o tarjeta: Cash or card?
+names:
+  - "00"
+  - "107"
+  - "14"
+  - "15"
+  - "17"
+  - 194 people died
+  - 1940s
+  - 29th
+  - "32"
+  - "48"
+  - 8 december
+  - "911"
+  - a b c d e
+  - abasto
+  - aconcagua
+  - adolfo cambiaso
+  - alberto fernández
+  - alfonsina storni
+  - alfredo le pera
+  - andrés calamaro
+  - antarctica
+  - aníbal troilo
+  - argentina
+  - astor piazzolla
+  - bahía blanca
+  - bajofondo
+  - bariloche
+  - belgrano
+  - bidet
+  - bizarrap
+  - boca vs river
+  - brazil
+  - bypass
+  - bzrp music sessions
+  - callejeros
+  - caloi
+  - cami
+  - cariló
+  - carlos gardel
+  - carlos menem
+  - carlos reutemann
+  - charly garcía
+  - chubut
+  - clemente
+  - colonia
+  - corrientes
+  - cosquín
+  - cris morena
+  - cristina fernández de kirchner
+  - crónica tv
+  - cuartetera
+  - cumbia 420
+  - cuyo
+  - córdoba
+  - d'arienzo
+  - defensa
+  - di maría
+  - di sarli
+  - diaguitas
+  - dibu martínez
+  - diego capusotto
+  - diego maradona
+  - discépolo
+  - divididos
+  - domingo faustino sarmiento
+  - druze
+  - duki
+  - el ateneo grand splendid
+  - el biza
+  - el calafate
+  - el diego
+  - el indio solari
+  - elba selva
+  - enrique febbraro
+  - estudiantes
+  - evita
+  - fede
+  - felipe
+  - fernando belasteguín
+  - fito páez
+  - flores
+  - floricienta
+  - ford or chevrolet
+  - franco colapinto
+  - from the boats
+  - gaiman
+  - galtieri
+  - gauchito gil
+  - general belgrano
+  - general paz
+  - gilda
+  - gimnasia
+  - gotan project
+  - graf spee
+  - gualeguaychú
+  - guaraníes
+  - guaymallén
+  - guillermo vilas
+  - gustavo cerati
+  - h
+  - handicap
+  - havanna
+  - hipólito yrigoyen
+  - hotel
+  - huarpe
+  - héctor oesterheld
+  - isabel perón
+  - javier milei
+  - jesuit
+  - jesuit missions
+  - jorge bergoglio
+  - jorge luis borges
+  - jorge rafael videla
+  - jorgito
+  - josé de san martín
+  - josé hernández
+  - juan de dios filiberto
+  - juan de garay
+  - juan domingo perón
+  - juan jorge meyne
+  - juan manuel de rosas
+  - juan manuel fangio
+  - juan vucetich
+  - jujuy
+  - juli
+  - julio argentino roca
+  - julio cortázar
+  - julio strassera
+  - ke personajes
+  - l-gante
+  - la boca
+  - la k'onga
+  - la mona jiménez
+  - la perla del once
+  - la plata
+  - la quiaca
+  - les luthiers
+  - libertango
+  - litto nebbia
+  - ll
+  - lola
+  - lole
+  - los fabulosos cadillacs
+  - los gatos
+  - los palmeras
+  - los redondos
+  - luciana aymar
+  - luis agote
+  - luis alberto spinetta
+  - luis leloir
+  - luján
+  - lászló bíró
+  - madrid
+  - mafalda
+  - manolito
+  - mansfield
+  - mantecol
+  - manu ginóbili
+  - manuel belgrano
+  - mapuche
+  - mapuches
+  - mar del plata
+  - marcelo tinelli
+  - martín fierro
+  - maría becerra
+  - maría elena walsh
+  - mati
+  - mauricio macri
+  - medellín
+  - mendoza
+  - mercado pago
+  - mercedes sosa
+  - messi
+  - mirtha legrand
+  - misiones
+  - montiel
+  - nacho
+  - nadia boulanger
+  - nahuel huapi
+  - naples
+  - natalia oreiro
+  - necochea
+  - neuquén
+  - nicki nicole
+  - nico
+  - nordelta
+  - nápoli
+  - néstor kirchner
+  - olé olé olé olé charly charly
+  - one peso = one dollar
+  - palermo
+  - palermo hollywood
+  - palermo soho
+  - pancho
+  - paraguay
+  - paraná
+  - parque rivadavia
+  - patagonia
+  - pedro de mendoza
+  - pepe
+  - perito moreno
+  - pinamar
+  - polo
+  - pope francis
+  - potosí
+  - pugliese
+  - pugliese pugliese pugliese
+  - purmamarca
+  - qr
+  - querandíes
+  - quilmes
+  - quino
+  - ranqueles
+  - raúl alfonsín
+  - rebelde way
+  - recoleta cemetery
+  - rené favaloro
+  - república cromañón
+  - ricardo darín
+  - rkt
+  - rodrigo
+  - rosario
+  - salta
+  - san antonio de areco
+  - san miguel de tucumán
+  - san telmo
+  - santa fe
+  - santi
+  - santiago de liniers
+  - sarmiento
+  - sh
+  - shakira
+  - soda stereo
+  - sofi
+  - streaming
+  - susana giménez
+  - susanita
+  - tacuarembó
+  - talleres
+  - tango
+  - tango for export
+  - tanguito
+  - tehuelche
+  - tehuelches
+  - ten
+  - tigre
+  - tini
+  - tortoni
+  - toulouse
+  - trueno
+  - tucumán
+  - umberto eco
+  - uruguay
+  - ushuaia
+  - viale
+  - villa general belgrano
+  - villa gesell
+  - víctor hugo morales
+  - welsh
+  - wos
+  - y
+  - you're born into it
+  - yrigoyen
+  - zh

@@ -25,7 +25,7 @@ classes:
         correct: 0
         explain: "On **17 de octubre**, workers from the factory suburbs filled **Plaza de Mayo** and demanded him back. Some cooled their tired feet in the fountains, an image that became legend."
       - type: card
-        text: "That night Perón spoke from the balcony of the Casa Rosada. Peronists still celebrate 17 October as the **Día de la Lealtad**, Loyalty Day. In 1946 he was elected president, and re-elected in 1951."
+        text: "That night Perón spoke from the balcony of the [Casa Rosada]. Peronists still celebrate 17 October as the **Día de la Lealtad**, Loyalty Day. In 1946 he was elected president, and re-elected in 1951."
       - type: card
         text: "**Evita**, a young actress from a small town, married Perón. Her foundation built hospitals and schools, and she pushed the 1947 law that gave women the vote. She died in 1952, aged 33. Millions queued for days to say goodbye."
       - type: card
@@ -59,7 +59,7 @@ classes:
       - type: card
         text: "Families got no body and no answer. The victims are **los desaparecidos**, the disappeared. In 1984 the **CONADEP** commission documented about 9,000 cases. Human rights groups speak of 30,000. The regime hid its records, and the number is still disputed."
       - type: choice
-        prompt: "In 1977, mothers of the disappeared met in Plaza de Mayo. Gatherings were banned, and police told them to move along. What did they do?"
+        prompt: "In 1977, mothers of the disappeared met in [Plaza de Mayo]. Gatherings were banned, and police told them to move along. What did they do?"
         options:
           - "Kept walking in pairs around the monument"
           - "Moved their meetings into a church nearby"
@@ -83,7 +83,7 @@ classes:
       - type: card
         text: "It didn't end there. Laws from 1986–87 stopped most other trials, and in 1989–90 President Menem pardoned those convicted. In the 2000s the laws were struck down and trials began again. Over a thousand people have been convicted."
       - type: card
-        text: "Every 24 March, the **Día de la Memoria**, hundreds of thousands march to Plaza de Mayo with photos of the disappeared: **Memoria, Verdad y Justicia**."
+        text: "Every 24 March, the **Día de la Memoria**, hundreds of thousands march to [Plaza de Mayo] with photos of the disappeared: **Memoria, Verdad y Justicia**."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -94,7 +94,7 @@ classes:
       - type: card
         text: "The **Islas Malvinas** sit in the South Atlantic, off Patagonia. Britain has held them since 1833 and Argentina has claimed them ever since. The British call them the Falkland Islands. Here, always say **Malvinas**, never Falklands."
       - type: card
-        text: "In 1982 the dictatorship faced a collapsing economy and growing protests. On **2 de abril** its troops landed on the islands, and crowds cheered in Plaza de Mayo. Britain sent a fleet."
+        text: "In 1982 the dictatorship faced a collapsing economy and growing protests. On **2 de abril** its troops landed on the islands, and crowds cheered in [Plaza de Mayo]. Britain sent a fleet."
       - type: choice
         prompt: "Who made up most of Argentina's troops on the islands?"
         options:
@@ -146,7 +146,7 @@ classes:
       - type: card
         text: "December 2001: people rushed to pull out their savings, so the government capped withdrawals. That's the **corralito**. The middle class went out to the streets banging pots: the **cacerolazo**."
       - type: choice
-        prompt: "On 20 December President De la Rúa resigned and left the Casa Rosada by helicopter. Counting him, how many presidents did Argentina have in about twelve days?"
+        prompt: "On 20 December President De la Rúa resigned and left the [Casa Rosada] by helicopter. Counting him, how many presidents did Argentina have in about twelve days?"
         options:
           - "Five"
           - "Two"
@@ -217,7 +217,7 @@ classes:
       - type: card
         text: "For years buying dollars was capped (the **cepo**), so a parallel market grew: the **dólar blue**. At one point there were over a dozen dollar rates, even a **dólar Coldplay** for paying foreign bands to come and play."
       - type: choice
-        prompt: "On calle Florida, a man keeps muttering “Cambio, cambio.” Locals call him an **arbolito**, a little tree. Why, the story goes?"
+        prompt: "On [calle] Florida, a man keeps muttering “Cambio, cambio.” Locals call him an **arbolito**, a little tree. Why, the story goes?"
         options:
           - "He stands in the same spot all day, like a tree"
           - "He hides behind street trees from the police"

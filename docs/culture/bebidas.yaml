@@ -15,7 +15,7 @@ classes:
       - type: card
         text: "Wine is **vino**, and at a normal table it's red: **vino tinto**. Nobody smells it or talks about it for ten minutes. You pour and you eat."
       - type: choice
-        prompt: "It's a hot day at a family asado. What do many people put in their glass of red wine?"
+        prompt: "It's a hot day at a family [asado]. What do many people put in their glass of red wine?"
         options:
           - "A slice of orange"
           - "Ice and fizzy water"
@@ -25,7 +25,7 @@ classes:
       - type: card
         text: "The grape that made Argentina famous is **Malbec**. In the dry sun and high land of Mendoza it gives a dark, soft red wine."
       - type: card
-        text: "Since 2013, wine is Argentina's national drink by law. Mate has a different title: the national infusion."
+        text: "Since 2013, wine is Argentina's national drink by law. [Mate] has a different title: the national infusion."
       - type: choice
         prompt: "In old neighborhood restaurants, house wine comes to the table in a ceramic jug. What shape is the jug?"
         options:
@@ -61,7 +61,7 @@ classes:
       - type: card
         text: "A small bottle for one person is a **porrón**. Beer from the tap is **tirada**, and a tall glass of it is a **pinta**, from the English *pint*."
       - type: choice
-        prompt: "You want to buy a liter of beer at the kiosco and the seller asks **“¿Tenés envase?”** What does he want?"
+        prompt: "You want to buy a liter of beer at the [kiosco] and the seller asks **“¿Tenés envase?”** What does he want?"
         options:
           - "Your ID, to see your age"
           - "A bag to carry it"
@@ -82,9 +82,9 @@ classes:
       - type: card
         text: "**Fernet** is a black, bitter drink made from herbs. In Italy it's a small glass after dinner, for the stomach. In Argentina it's the drink of every party, mixed with cola and lots of ice: **fernet con coca**."
       - type: card
-        text: "Argentina drinks about three quarters of all the fernet in the world. The only factory of the famous Italian brand outside Italy is here."
+        text: "Argentina drinks about three quarters of all the [fernet] in the world. The only factory of the famous Italian brand outside Italy is here."
       - type: choice
-        prompt: "At a party with no tall glasses, what do friends often mix the fernet in?"
+        prompt: "At a party with no tall glasses, what do friends often mix the [fernet] in?"
         options:
           - "A cooking pot"
           - "A metal bucket"
@@ -92,9 +92,9 @@ classes:
         correct: 2
         explain: "The bottom half of a cola bottle becomes one huge glass, and it goes from hand to hand, like a mate."
       - type: card
-        text: "The home of fernet is **Córdoba**. People there drink more of it than anywhere else, and they will tell you so."
+        text: "The home of [fernet] is **Córdoba**. People there drink more of it than anywhere else, and they will tell you so."
       - type: card
-        text: "How much fernet, how much cola, how much foam on top: everyone has their own rule, and everyone says the others do it wrong."
+        text: "How much [fernet], how much cola, how much foam on top: everyone has their own rule, and everyone says the others do it wrong."
       - type: choice
         prompt: "The **hora del vermut** is an old custom: a drink and something small to eat. When is it?"
         options:
@@ -106,5 +106,5 @@ classes:
       - type: card
         text: "The fizzy water comes from a **sifón**: a thick bottle that shoots soda when you press a handle. For a century it has been on every table next to the wine."
       - type: card
-        text: "In many barrios the **sodero** still comes by truck once a week. He leaves full sifones and takes the empty ones. Families keep the same sodero for decades."
+        text: "In many barrios the **sodero** still comes by truck once a week. He leaves full sifones and takes the empty ones. Families keep the same [sodero] for decades."
     vocabulary: []

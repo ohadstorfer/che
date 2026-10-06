@@ -35,7 +35,7 @@ classes:
       - type: card
         text: "Under the 1976–83 dictatorship, rock was censored and harassed, so musicians sang in metaphors. For many kids, a concert was the only place they could feel free together."
       - type: choice
-        prompt: "Then came the 1982 Malvinas war against Britain. What happened to Argentine rock on the radio?"
+        prompt: "Then came the 1982 [Malvinas] war against Britain. What happened to Argentine rock on the radio?"
         options:
           - "It took over, because English songs were pulled"
           - "It was banned completely until the war ended"
@@ -68,7 +68,7 @@ classes:
         correct: 0
         explain: "She was arrested mid-concert in La Plata in 1979, along with the audience, and went into exile in Europe. She came back in 1982, still under the dictatorship, and packed theater after theater."
       - type: card
-        text: "A **peña** is a folklore night: long tables, **empanadas**, wine and live music. Nobody just sits and watches. When a chacarera starts, people dance between the tables, then sit down and keep eating."
+        text: "A **peña** is a folklore night: long tables, **empanadas**, wine and live music. Nobody just sits and watches. When a [chacarera] starts, people dance between the tables, then sit down and keep eating."
       - type: choice
         prompt: "The **zamba** is a slow dance for couples, with a white handkerchief. How do they use it?"
         options:
@@ -81,7 +81,7 @@ classes:
         text: "Every January, the small town of **Cosquín**, in the Córdoba hills, hosts the national folk festival: nine nights, **las nueve lunas**. Each night opens with a shout: **“¡Aquí Cosquín!”**"
       - type: card
         chip: "Pro tip"
-        text: "Invited to dance at a peña? Say **“¡Dale!”** and get up. Nobody expects a foreigner to dance well. Getting up is what counts."
+        text: "Invited to dance at a [peña]? Say **“¡Dale!”** and get up. Nobody expects a foreigner to dance well. Getting up is what counts."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -92,9 +92,9 @@ classes:
       - type: card
         text: "Rock fills stadiums, but **cumbia** fills the dance floor. Born in Colombia, it became deeply Argentine in the dance halls of the suburbs: the **bailantas**."
       - type: card
-        text: "At every wedding the DJ eventually puts on cumbia, and even your serious uncle turns out to be a **cumbiero**. You don't have to like it. You just have to dance."
+        text: "At every wedding the DJ eventually puts on [cumbia], and even your serious uncle turns out to be a **cumbiero**. You don't have to like it. You just have to dance."
       - type: choice
-        prompt: "**Gilda** became one of the biggest cumbia stars of the 90s. What was her job before?"
+        prompt: "**Gilda** became one of the biggest [cumbia] stars of the 90s. What was her job before?"
         options:
           - "Kindergarten teacher"
           - "Radio DJ"
@@ -108,7 +108,7 @@ classes:
       - type: card
         text: "In **Córdoba** the party sound is **cuarteto**, with a bouncy piano beat everyone calls **tunga tunga**. Its king, **La Mona Jiménez**, has played packed dances for decades."
       - type: choice
-        prompt: "In 2025 cuarteto got an honor that tango got back in 2009. Which one?"
+        prompt: "In 2025 [cuarteto] got an honor that tango got back in 2009. Which one?"
         options:
           - "A place on UNESCO's heritage list"
           - "Its own Latin Grammy category"
@@ -116,9 +116,9 @@ classes:
         correct: 0
         explain: "UNESCO added cuarteto to its list of Intangible Cultural Heritage. Not bad for music born in Córdoba's dance halls."
       - type: card
-        text: "**Rodrigo**, **el Potro**, took cuarteto to Buenos Aires and filled the Luna Park. He died young, in a car crash after a show. **“Soy cordobés”** and **“La mano de Dios”**, his song for Maradona, still close every party."
+        text: "**Rodrigo**, **el Potro**, took [cuarteto] to Buenos Aires and filled the Luna Park. He died young, in a car crash after a show. **“Soy cordobés”** and **“La mano de Dios”**, his song for Maradona, still close every party."
       - type: card
-        text: "And today? You'll hear **Los Palmeras**, from Santa Fe, with **“Bombón asesino”**, the cumbia of **Ke Personajes**, and the cuarteto of **La K'onga**."
+        text: "And today? You'll hear **Los Palmeras**, from Santa Fe, with **“Bombón asesino”**, the [cumbia] of **Ke Personajes**, and the [cuarteto] of **La K'onga**."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -159,7 +159,7 @@ classes:
         correct: 0
         explain: "DJs at **Rescate**, a club in San Martín, just outside the city, started mixing it. “RKT” is a short form of the club's name, and the sound kept it."
       - type: card
-        text: "RKT is reggaetón plus cumbia villera, with huge bass. **L-Gante** made it explode, recording his first hits on a laptop the government gave out to schoolkids. He calls his style **cumbia 420**."
+        text: "RKT is reggaetón plus [cumbia villera], with huge bass. **L-Gante** made it explode, recording his first hits on a laptop the government gave out to schoolkids. He calls his style **cumbia 420**."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────

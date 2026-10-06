@@ -58,7 +58,7 @@ classes:
       - type: card
         text: "The woman behind those shows is the producer **Cris Morena**. Many of today's Argentine actors and singers started as children in her novelas."
       - type: card
-        text: "**Natalia Oreiro** was born in Uruguay and became a star in Argentina with the novela **Muñeca brava**. Then the series was sold to dozens of countries."
+        text: "**Natalia Oreiro** was born in Uruguay and became a star in Argentina with the [novela] **Muñeca brava**. Then the series was sold to dozens of countries."
       - type: choice
         prompt: "In one country she is so loved that in 2021 she was made a citizen. Which one?"
         options:
@@ -125,7 +125,7 @@ classes:
       - type: card
         text: "The most loved comedy group ever is **Les Luthiers**. For more than fifty years they played funny songs in elegant suits, on instruments they built from tins, tubes and bicycle parts."
       - type: card
-        text: "On TV, **Diego Capusotto** makes fun of rock stars, politicians and porteños in short, absurd videos. People repeat the lines of his invented characters as if they were real."
+        text: "On TV, **Diego Capusotto** makes fun of rock stars, politicians and [porteños] in short, absurd videos. People repeat the lines of his invented characters as if they were real."
       - type: choice
         prompt: "On December 28, be careful with what you read and what people tell you. Why?"
         options:
@@ -159,7 +159,7 @@ classes:
         correct: 0
         explain: "They prefer their favorite relator on the radio. The voice and the picture don't always match, and nobody cares."
       - type: card
-        text: "The most famous radio moment: Maradona's second goal against England in 1986. The relator **Víctor Hugo Morales** cried and called him **barrilete cósmico**: a kite from space."
+        text: "The most famous radio moment: Maradona's second goal against England in 1986. The [relator] **Víctor Hugo Morales** cried and called him **barrilete cósmico**: a kite from space."
       - type: card
         text: "Young people listen in a new way: on **streaming**. Channels on YouTube make live radio with cameras, all day, and fill big concert halls with their fans."
       - type: choice

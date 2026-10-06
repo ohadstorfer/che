@@ -81,7 +81,7 @@ classes:
       - type: card
         text: "Public universities in Argentina charge nothing to study. The biggest is the **UBA**, the Universidad de Buenos Aires, with more than 300,000 students."
       - type: choice
-        prompt: "The UBA has no entrance exam. What do you do instead?"
+        prompt: "The [UBA] has no entrance exam. What do you do instead?"
         options:
           - "A first year of general subjects"
           - "An interview with three teachers"
@@ -123,7 +123,7 @@ classes:
         correct: 1
         explain: "It's the **aguinaldo**: one extra salary a year, paid in two halves. People plan holidays and big purchases around it."
       - type: card
-        text: "A job is **en blanco**, in white, when it is registered: aguinaldo, paid holidays, health cover. **En negro**, in black, means no papers. More than a third of workers are en negro."
+        text: "A job is **en blanco**, in white, when it is registered: [aguinaldo], paid holidays, health cover. **En negro**, in black, means no papers. More than a third of workers are [en negro]."
       - type: card
         text: "People who work for themselves pay one small fixed tax every month, the **monotributo**. A client will ask: **“¿Me hacés factura?”** Can you give me an invoice?"
       - type: choice
@@ -158,7 +158,7 @@ classes:
       - type: card
         text: "A **piquete** is a group of people who block a street or a road to protest. The blocked street is a **corte**. Radio and map apps list the day's cortes every morning."
       - type: card
-        text: "A **marcha** is a march. Most of them end at **Plaza de Mayo** or at **Congreso**, with drums, flags and smoke from the choripán stands."
+        text: "A **marcha** is a march. Most of them end at **Plaza de Mayo** or at **Congreso**, with drums, flags and smoke from the [choripán] stands."
       - type: card
         text: "Most marches are calm and full of families. Still, traffic stops for hours, so on those days many people leave work early or stay home."
       - type: choice

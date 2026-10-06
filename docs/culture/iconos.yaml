@@ -49,7 +49,7 @@ classes:
       - type: card
         text: "Argentines call cartoons **dibujitos**. And this country made the world's first animated feature film, **El Apóstol**, in 1917: long before *Snow White*."
       - type: choice
-        prompt: "What was El Apóstol about?"
+        prompt: "What was [El Apóstol] about?"
         options:
           - "The president setting fire to Buenos Aires"
           - "A gaucho crossing the pampa on foot"
@@ -112,9 +112,9 @@ classes:
     summary: "A Hungarian's pen, the first fingerprint case, a Nobel's sauce and a heart surgeon"
     pages:
       - type: card
-        text: "In Argentina a ballpoint pen is a **birome**. **László Bíró**, a Hungarian journalist, patented it here in the 1940s with his partner **Juan Jorge Meyne**. Bi-ró plus Me-yne: birome."
+        text: "In Argentina a ballpoint pen is a **birome**. **László Bíró**, a Hungarian journalist, patented it here in the 1940s with his partner **Juan Jorge Meyne**. Bi-ró plus Me-yne: [birome]."
       - type: choice
-        prompt: "Who was the birome's first big customer?"
+        prompt: "Who was the [birome]'s first big customer?"
         options:
           - "The British air force"
           - "The Argentine post office"
@@ -145,7 +145,7 @@ classes:
     summary: "A Pope who rode the subte, the Generación Dorada, Vilas and two Oscars"
     pages:
       - type: card
-        text: "**Jorge Bergoglio** grew up in **Flores**, Buenos Aires, and as archbishop rode the subte. In 2013 he became **Pope Francis**, the first Pope from the Americas."
+        text: "**Jorge Bergoglio** grew up in **Flores**, Buenos Aires, and as archbishop rode the [subte]. In 2013 he became **Pope Francis**, the first Pope from the Americas."
       - type: choice
         prompt: "Pope Francis was a card-carrying member of something very Argentine. What?"
         options:

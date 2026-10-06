@@ -15,7 +15,7 @@ classes:
       - type: card
         text: "**Mate** is hot water poured over **yerba**, dried and ground leaves. You sip it from a small gourd through a metal straw, then it gets refilled and passed on."
       - type: choice
-        prompt: "Yerba looks a lot like green tea. Is it the same plant?"
+        prompt: "[Yerba] looks a lot like green tea. Is it the same plant?"
         options:
           - "Yes, it's a tea bush, just dried differently"
           - "No, it's a different plant native to South America"
@@ -23,11 +23,11 @@ classes:
         correct: 1
         explain: "A totally different plant from tea, but it does have caffeine. That's why so many people start the day with it."
       - type: card
-        text: "The gourd is also called a **mate**. And the verb is **tomar**, not beber: **¿Tomamos unos mates?** Shall we have some mate?"
+        text: "The gourd is also called a **mate**. And the verb is **tomar**, not beber: **¿Tomamos unos mates?** Shall we have some [mate]?"
       - type: card
-        text: "The **Guaraní** drank yerba long before the Spanish arrived. Later, **Jesuit** missions tamed the wild plant and grew it on plantations."
+        text: "The **Guaraní** drank [yerba] long before the Spanish arrived. Later, **Jesuit** missions tamed the wild plant and grew it on plantations."
       - type: choice
-        prompt: "In 1767 the Jesuits were expelled. What happened to their yerba plantations?"
+        prompt: "In 1767 the Jesuits were expelled. What happened to their [yerba] plantations?"
         options:
           - "Nobody managed to farm yerba for over a century"
           - "Spain took them over and got rich"
@@ -36,7 +36,7 @@ classes:
         explain: "The way to sprout the seeds was lost. Yerba was picked wild again until around 1900, when growers learned how to do it once more. Most still comes from **Misiones** and **Corrientes**."
       - type: card
         chip: "Did you know?"
-        text: "By law, since 2013, mate is Argentina's **infusión nacional**: the national infusion. (Wine has the title of national drink.) Not bad for a leaf you share with total strangers."
+        text: "By law, since 2013, [mate] is Argentina's **infusión nacional**: the national infusion. (Wine has the title of national drink.) Not bad for a leaf you share with total strangers."
       - type: card
         chip: "Pro tip"
         text: "Someone holds up a gourd and asks **¿Querés un mate?** Say **dale**, sure. You just joined the round. And **¿Tomamos unos mates?** often just means: come over and talk."
@@ -50,9 +50,9 @@ classes:
       - type: card
         text: "The kit: a **mate** (the gourd), a **bombilla** (a metal straw with a filter at the bottom), a **termo** of hot water, and a pack of **yerba**."
       - type: card
-        text: "The classic mate is a dried gourd, but there are wooden, glass and steel ones too. The big one with a wide mouth, wrapped in leather, is the **mate camionero**: the trucker's mate."
+        text: "The classic [mate] is a dried gourd, but there are wooden, glass and steel ones too. The big one with a wide mouth, wrapped in leather, is the **mate camionero**: the trucker's [mate]."
       - type: choice
-        prompt: "You just bought a beautiful new gourd. What do you do before your first mate?"
+        prompt: "You just bought a beautiful new gourd. What do you do before your first [mate]?"
         options:
           - "Fill it with wet yerba and wait a day"
           - "Scrub it well with hot soapy water"
@@ -60,11 +60,11 @@ classes:
         correct: 0
         explain: "That's **curar el mate**, curing it. Only gourd and wooden mates need it. And never use soap: the gourd soaks it up, and so does your next mate."
       - type: card
-        text: "The bombilla goes in once and stays put. It's not a spoon, and never, ever a stirring stick."
+        text: "The [bombilla] goes in once and stays put. It's not a spoon, and never, ever a stirring stick."
       - type: card
-        text: "Argentine termos come with a special spout, the **pico cebador**. It pours a thin, steady stream right next to the bombilla, without flooding the yerba."
+        text: "Argentine termos come with a special spout, the **pico cebador**. It pours a thin, steady stream right next to the [bombilla], without flooding the [yerba]."
       - type: choice
-        prompt: "You open a pack of yerba and it's full of little sticks. Good or bad?"
+        prompt: "You open a pack of [yerba] and it's full of little sticks. Good or bad?"
         options:
           - "Good: stems make it milder"
           - "Bad: it's cheap, low-grade yerba"
@@ -73,7 +73,7 @@ classes:
         explain: "That's **yerba con palo** (with stems), the usual kind in Argentina: milder, and it lasts more rounds. **Sin palo**, just leaves, is stronger. First time? Buy con palo."
       - type: card
         chip: "Pro tip"
-        text: "Pick your yerba brand carefully. People are fiercely loyal to theirs, and they'll happily tell you why yours is wrong."
+        text: "Pick your [yerba] brand carefully. People are fiercely loyal to theirs, and they'll happily tell you why yours is wrong."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -82,9 +82,9 @@ classes:
     summary: "The montañita, the right water and the fool's first mate"
     pages:
       - type: card
-        text: "**Cebar** is to pour the water and serve each mate. The person doing it is the **cebador**. **¿Quién ceba?** means: who's serving? A bad cebador hears about it all afternoon."
+        text: "**Cebar** is to pour the water and serve each [mate]. The person doing it is the **cebador**. **¿Quién ceba?** means: who's serving? A bad [cebador] hears about it all afternoon."
       - type: card
-        text: "Fill the gourd about ¾ with yerba. Cover it, flip it, shake, then tilt it. The yerba settles into a slope: the **montañita**, the little mountain."
+        text: "Fill the gourd about ¾ with [yerba]. Cover it, flip it, shake, then tilt it. The [yerba] settles into a slope: the **montañita**, the little mountain."
       - type: choice
         prompt: "How hot should the water be?"
         options:
@@ -94,9 +94,9 @@ classes:
         correct: 0
         explain: "Boiling water **quema la yerba**: it burns it, and the mate turns harsh and bitter. Take the **pava**, the kettle, off the heat before it boils. Many electric kettles in Argentina even have a “mate” setting."
       - type: card
-        text: "Pour into the low side, next to the bombilla, and keep the top of the montañita dry. Some cebadores do it differently, and that works too."
+        text: "Pour into the low side, next to the [bombilla], and keep the top of the [montañita] dry. Some cebadores do it differently, and that works too."
       - type: choice
-        prompt: "Who usually drinks the very first mate?"
+        prompt: "Who usually drinks the very first [mate]?"
         options:
           - "The cebador"
           - "The guest of honor"
@@ -104,9 +104,9 @@ classes:
         correct: 0
         explain: "The first one is bitter, foamy and full of dust. The cebador drinks it so nobody else has to."
       - type: card
-        text: "It even has a name: **el mate del zonzo**, the fool's mate. A small sacrifice, not a privilege."
+        text: "It even has a name: **el mate del zonzo**, the fool's [mate]. A small sacrifice, not a privilege."
       - type: card
-        text: "After many rounds the flavor fades and the mate is **lavado**: washed out. Time for fresh yerba."
+        text: "After many rounds the flavor fades and the [mate] is **lavado**: washed out. Time for fresh [yerba]."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -115,9 +115,9 @@ classes:
     summary: "Mate etiquette, so you don't get it wrong"
     pages:
       - type: card
-        text: "One mate, one bombilla, one **ronda**. The cebador fills it and hands it to you. You drink all of it, until it gurgles."
+        text: "One [mate], one [bombilla], one **ronda**. The [cebador] fills it and hands it to you. You drink all of it, until it gurgles."
       - type: choice
-        prompt: "You finish your mate. Who do you hand it to?"
+        prompt: "You finish your [mate]. Who do you hand it to?"
         options:
           - "Back to the cebador"
           - "The person on your left"
@@ -125,9 +125,9 @@ classes:
         correct: 0
         explain: "Always back to the cebador, who refills it for the next person. The mate never skips the cebador."
       - type: card
-        text: "Only the cebador touches the yerba and the bombilla. Fixing someone's mate is like rearranging their kitchen while they cook."
+        text: "Only the [cebador] touches the [yerba] and the [bombilla]. Fixing someone's [mate] is like rearranging their kitchen while they cook."
       - type: choice
-        prompt: "You hand the mate back and say **“gracias”**. What happens next?"
+        prompt: "You hand the [mate] back and say **“gracias”**. What happens next?"
         options:
           - "You don't get another one"
           - "You get the next one first"
@@ -135,12 +135,12 @@ classes:
         correct: 0
         explain: "In a ronda, **gracias** means “I'm done”. Want more? Just hand it back, maybe with a **¡qué rico!**, so good!"
       - type: card
-        text: "Don't hold the mate while you tell a long story. Everyone's waiting and the water's getting cold. Someone will say **“¡No es un micrófono!”**"
+        text: "Don't hold the [mate] while you tell a long story. Everyone's waiting and the water's getting cold. Someone will say **“¡No es un micrófono!”**"
       - type: card
-        text: "Don't wipe the bombilla before you drink. Sharing it is the whole point, and wiping it reads as “you think I'm dirty”."
+        text: "Don't wipe the [bombilla] before you drink. Sharing it is the whole point, and wiping it reads as “you think I'm dirty”."
       - type: card
         chip: "Pro tip"
-        text: "Got a cold? Don't share: say **“paso, estoy resfriado”** (or **resfriada**). Just don't feel like it? Say **“no, gracias”** the first time it comes your way. Nobody minds. Since the pandemic, many people bring their own mate too."
+        text: "Got a cold? Don't share: say **“paso, estoy resfriado”** (or **resfriada**). Just don't feel like it? Say **“no, gracias”** the first time it comes your way. Nobody minds. Since the pandemic, many people bring their own [mate] too."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -152,11 +152,11 @@ classes:
         text: "Most people drink it **amargo**: bitter, no sugar. **Mate dulce** has sugar, and it's more common in some families and provinces. Purists will tease you. Lovingly."
       - type: card
         chip: "Did you know?"
-        text: "Old folklore says a mate could carry a message: sweet meant friendship, very hot meant passion, bitter meant indifference. Today bitter just means bitter: it's how most people drink it."
+        text: "Old folklore says a [mate] could carry a message: sweet meant friendship, very hot meant passion, bitter meant indifference. Today bitter just means bitter: it's how most people drink it."
       - type: card
-        text: "**Mate cocido** is the simple version: yerba in a tea bag, in a regular cup, often with milk. The drink of school breakfasts and the afternoon **merienda**."
+        text: "**Mate cocido** is the simple version: [yerba] in a tea bag, in a regular cup, often with milk. The drink of school breakfasts and the afternoon **merienda**."
       - type: choice
-        prompt: "On a road trip, who makes the mate?"
+        prompt: "On a road trip, who makes the [mate]?"
         options:
           - "The co-pilot"
           - "The driver, at red lights"
@@ -164,9 +164,9 @@ classes:
         correct: 0
         explain: "The co-pilot is the cebador, the one who serves. Keep them coming, and don't burn the driver."
       - type: card
-        text: "Mate goes everywhere: the office, university, the park, the beach. **Matear** is to drink mate together, and the **matera** is the bag that carries the kit."
+        text: "[Mate] goes everywhere: the office, university, the park, the beach. **Matear** is to drink [mate] together, and the **matera** is the bag that carries the kit."
       - type: choice
-        prompt: "In the northeast, in 40 °C heat, what do many people drink instead of hot mate?"
+        prompt: "In the northeast, in 40 °C heat, what do many people drink instead of hot [mate]?"
         options:
           - "Mate with ice-cold water or juice"
           - "Mate cocido with cold milk"
@@ -174,7 +174,7 @@ classes:
         correct: 0
         explain: "That's **tereré**: cold water or juice, ice and herbs. Huge in Paraguay and in hot provinces like Corrientes, Misiones, Chaco and Formosa."
       - type: card
-        text: "In Buenos Aires, though, hot mate never takes a vacation. Even at the beach in January, someone has the termo."
+        text: "In Buenos Aires, though, hot [mate] never takes a vacation. Even at the beach in January, someone has the [termo]."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -183,9 +183,9 @@ classes:
     summary: "Uruguay, southern Brazil and a surprise buyer far away"
     pages:
       - type: card
-        text: "Argentina doesn't own mate. **Uruguay**, **Paraguay** and southern **Brazil** drink it every day too, and each has its own way of doing it."
+        text: "Argentina doesn't own [mate]. **Uruguay**, **Paraguay** and southern **Brazil** drink it every day too, and each has its own way of doing it."
       - type: choice
-        prompt: "By most counts, which country drinks the most mate per person?"
+        prompt: "By most counts, which country drinks the most [mate] per person?"
         options:
           - "Uruguay"
           - "Argentina"
@@ -193,11 +193,11 @@ classes:
         correct: 0
         explain: "Uruguay, even more than Argentina. In Montevideo people carry the **termo bajo el brazo**, the thermos under the arm: to work, to the beach, along the waterfront."
       - type: card
-        text: "The twist: Uruguay grows almost no yerba. Most of it comes from **Brazil**, ground fine, almost without stems. Stronger and more bitter."
+        text: "The twist: Uruguay grows almost no [yerba]. Most of it comes from **Brazil**, ground fine, almost without stems. Stronger and more bitter."
       - type: card
-        text: "In southern Brazil, the gaúchos drink **chimarrão**: bright green, powder-fine yerba in a big gourd called a **cuia**. Same ronda, different accent."
+        text: "In southern Brazil, the gaúchos drink **chimarrão**: bright green, powder-fine [yerba] in a big gourd called a **cuia**. Same [ronda], different accent."
       - type: choice
-        prompt: "Which country buys the most yerba from Argentina?"
+        prompt: "Which country buys the most [yerba] from Argentina?"
         options:
           - "Syria"
           - "Uruguay"
@@ -206,5 +206,5 @@ classes:
         explain: "Syria, year after year, by a long way. Uruguay buys mostly from Brazil."
       - type: card
         chip: "Did you know?"
-        text: "The link is people. Around 1900 many Syrians and Lebanese moved to Argentina, and some went back home and took mate with them. Today the **Druze** of Syria and Lebanon especially love it."
+        text: "The link is people. Around 1900 many Syrians and Lebanese moved to Argentina, and some went back home and took [mate] with them. Today the **Druze** of Syria and Lebanon especially love it."
     vocabulary: []

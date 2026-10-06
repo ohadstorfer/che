@@ -13,9 +13,9 @@ classes:
     summary: "The national card game, and how partners talk without words"
     pages:
       - type: card
-        text: "**Truco** is the national card game. People play it in bars, on the beach, at school breaks and after every asado, usually two against two."
+        text: "**Truco** is the national card game. People play it in bars, on the beach, at school breaks and after every [asado], usually two against two."
       - type: choice
-        prompt: "What is the most important skill in truco?"
+        prompt: "What is the most important skill in [truco]?"
         options:
           - "Counting fast"
           - "Lying well"
@@ -38,7 +38,7 @@ classes:
         text: "A game goes to 30 points. The first fifteen are the **malas**, the bad ones, and the last fifteen are the **buenas**. Points are counted with matches or dry beans."
       - type: card
         chip: "Did you know?"
-        text: "Truco gave words to everyday talk. **Retrucar** is to answer back fast in an argument. **Irse al mazo**, to go to the pile, is to give up."
+        text: "[Truco] gave words to everyday talk. **Retrucar** is to answer back fast in an argument. **Irse al mazo**, to go to the pile, is to give up."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -49,7 +49,7 @@ classes:
       - type: card
         text: "**Figuritas** are small stickers of football players that you collect in an album. Every World Cup, children and adults go a little crazy to fill theirs."
       - type: choice
-        prompt: "In 2022 there were not enough figuritas in the kioscos. What did the government do?"
+        prompt: "In 2022 there were not enough [figuritas] in the kioscos. What did the government do?"
         options:
           - "It printed its own album"
           - "It called a meeting about it"
@@ -61,7 +61,7 @@ classes:
       - type: card
         text: "Those two words are **la tengo** and **no la tengo**, cut short. The sticker that almost nobody has is **la difícil**, the hard one."
       - type: choice
-        prompt: "At school, children also play to win each other's figuritas. How?"
+        prompt: "At school, children also play to win each other's [figuritas]. How?"
         options:
           - "They hide them and the others look for them"
           - "They throw them at a wall, and the closest one wins"
@@ -71,7 +71,7 @@ classes:
       - type: card
         text: "Adults do it too. In a World Cup year, offices have a list on the wall of who needs which number, and nobody finds that strange."
       - type: card
-        text: "On weekends, in some parks, people of all ages meet to swap figuritas. Parents say it's for the children. It's not always true."
+        text: "On weekends, in some parks, people of all ages meet to swap [figuritas]. Parents say it's for the children. It's not always true."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────

@@ -181,6 +181,7 @@ export interface SentenceRow {
   en: string;
   en_alt: string[];
   es_alt: string[];
+  note_en?: string | null;
   tokens: { surface: string; form_ids: string[]; gloss?: string }[];
   target_form_id: string;
   kind: string;

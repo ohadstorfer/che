@@ -116,11 +116,11 @@ classes:
     summary: "The province that sings when it talks, parties hard and jokes about everything"
     pages:
       - type: card
-        text: "You'll hear a cordobés before you see one. The **tonada** stretches the syllable before the stressed one: **“cordoobés”**. Porteños love imitating it. Cordobeses love telling them they do it badly."
+        text: "You'll hear a [cordobés] before you see one. The **tonada** stretches the syllable before the stressed one: **“cordoobés”**. [Porteños] love imitating it. Cordobeses love telling them they do it badly."
       - type: card
         text: "Córdoba's nickname is **La Docta**, the learned one. The Jesuits founded the country's oldest university here, and the city is still full of students from all over Argentina."
       - type: choice
-        prompt: "In Italy, fernet is a bitter shot after dinner. How does Córdoba drink it?"
+        prompt: "In Italy, [fernet] is a bitter shot after dinner. How does Córdoba drink it?"
         options:
           - "With Coca-Cola, in a tall glass"
           - "Frozen, in tiny shot glasses"
@@ -128,7 +128,7 @@ classes:
         correct: 0
         explain: "**Fernet con coca**, lots of ice and a proper foam on top: the drink of every party. Bitter the first time, addictive by the third."
       - type: card
-        text: "Argentina drinks more fernet than any other country, and Córdoba leads the way: the province is said to drink around a third of it. Drink slowly."
+        text: "Argentina drinks more [fernet] than any other country, and Córdoba leads the way: the province is said to drink around a third of it. Drink slowly."
       - type: card
         text: "Saturday night means a **baile de cuarteto**, Córdoba's own party music. Its biggest star is **La Mona Jiménez**. The crowd dances in a giant circle round the floor, and you just follow it."
       - type: choice
@@ -140,7 +140,7 @@ classes:
         correct: 0
         explain: "In 1939 the German warship **Graf Spee** was sunk by its own crew near Montevideo. The sailors were held in Argentina, and some stayed for good in this town, which German families had already founded."
       - type: card
-        text: "Cordobeses are famous for their humor. Their signature word is **culiao**. Vulgar and an insult when angry, between friends it means “dude”. Wait until they call *you* culiao before you try it."
+        text: "Cordobeses are famous for their humor. Their signature word is **culiao**. Vulgar and an insult when angry, between friends it means “dude”. Wait until they call *you* [culiao] before you try it."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -151,7 +151,7 @@ classes:
       - type: card
         text: "**Litoral** means coast, but none of it touches the sea. Its coasts are the banks of huge rivers: the **Paraná** and the **Uruguay**."
       - type: card
-        text: "Up in **Misiones** the soil is bright red and the air is thick and humid. In the jungle stand the stone ruins of **Jesuit missions**, where thousands of Guaraní once lived."
+        text: "Up in **Misiones** the soil is bright red and the air is thick and humid. In the jungle stand the stone ruins of **Jesuit missions**, where thousands of [Guaraní] once lived."
       - type: choice
         prompt: "Iguazú's falls sit on the border with Brazil. What share of them is on the Argentine side?"
         options:
@@ -161,13 +161,13 @@ classes:
         correct: 0
         explain: "Roughly 80% of the falls are Argentine. Brazilians will point out that their side has the better wide view. Both are right. The star is the **Garganta del Diablo**, a huge horseshoe of water right on the border."
       - type: card
-        text: "On street corners and at bus stations, people sell warm **chipá**, small cheese breads made with cassava flour. In the heat, locals drink **tereré**: mate with ice-cold water or juice."
+        text: "On street corners and at bus stations, people sell warm **chipá**, small cheese breads made with cassava flour. In the heat, locals drink **tereré**: [mate] with ice-cold water or juice."
       - type: card
-        text: "The northeast is Guaraní land, and you can hear it. In **Corrientes**, Guaraní is an official language next to Spanish. A kid there is a **gurí**, not a pibe."
+        text: "The northeast is [Guaraní] land, and you can hear it. In **Corrientes**, [Guaraní] is an official language next to Spanish. A kid there is a **gurí**, not a [pibe]."
       - type: card
-        text: "The Litoral's music is **chamamé**: accordion, guitar, and couples dancing in a tight embrace. Every January, Corrientes throws a huge national chamamé festival."
+        text: "The [Litoral]'s music is **chamamé**: accordion, guitar, and couples dancing in a tight embrace. Every January, Corrientes throws a huge national [chamamé] festival."
       - type: choice
-        prompt: "At a chamamé dance, the man next to you throws his head back and lets out a long, piercing scream. What's happening?"
+        prompt: "At a [chamamé] dance, the man next to you throws his head back and lets out a long, piercing scream. What's happening?"
         options:
           - "He's letting out a yell of joy"
           - "He's calling his friends over to dance"

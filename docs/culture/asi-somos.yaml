@@ -37,7 +37,7 @@ classes:
         correct: 1
         explain: "Never in the middle, the joke goes: the best football and the worst economy, the best friends and the worst traffic. Being a normal country would be the real insult."
       - type: card
-        text: "Uruguayans have their own complaint: Argentines, they say, think that mate, tango, dulce de leche and the asado are all Argentine. Uruguay says every one of them is Uruguayan too."
+        text: "Uruguayans have their own complaint: Argentines, they say, think that [mate], tango, [dulce de leche] and the [asado] are all Argentine. Uruguay says every one of them is Uruguayan too."
       - type: card
         text: "The soft side: the people with the famous ego are also the first to laugh at it. Nobody tells more jokes about Argentines than Argentines."
     vocabulary: []
@@ -159,9 +159,9 @@ classes:
         correct: 0
         explain: "A termo, the bottle of hot water for mate, works like a flag. (It could be a Uruguayan. They ask anyway.) Then comes **“¿De dónde sos?”** Where are you from? Ten minutes later they have friends in common."
       - type: card
-        text: "The suitcase of an Argentine abroad carries yerba, dulce de leche and alfajores. And anyone who visits from home gets a shopping list first."
+        text: "The suitcase of an Argentine abroad carries [yerba], [dulce de leche] and alfajores. And anyone who visits from home gets a shopping list first."
       - type: card
-        text: "They look for each other. In every big city there's an Argentine bakery, a group that plays football on Sundays and someone making an asado on a very small balcony."
+        text: "They look for each other. In every big city there's an Argentine bakery, a group that plays football on Sundays and someone making an [asado] on a very small balcony."
       - type: choice
         prompt: "A plane from Europe lands in Buenos Aires. What do many passengers do?"
         options:

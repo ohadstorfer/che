@@ -26,11 +26,11 @@ classes:
         text: "**Boludo** literally means big-balled: an idiot. But between friends it softened into “dude”. **¿Qué hacés, boludo?** is just “What's up, man?” To a woman it's **boluda**, and women say it to each other just as much."
       - type: card
         chip: "Did you know?"
-        text: "Some porteños use it like a comma: **“Fui al súper, boludo, y no había nada, boludo.”**"
+        text: "Some [porteños] use it like a comma: **“Fui al súper, boludo, y no había nada, boludo.”**"
       - type: card
         text: "Same word, said slowly with a stare, is still an insult. From a local friend it's warm. From a stranger with an accent, it can land like a slap."
       - type: choice
-        prompt: "Boludo has a longer cousin: **pelotudo**. Compared with boludo, how does it land?"
+        prompt: "[Boludo] has a longer cousin: **pelotudo**. Compared with [boludo], how does it land?"
         options:
           - "Softer, almost cute"
           - "Harsher, rarely friendly"
@@ -41,7 +41,7 @@ classes:
         text: "Two milder relatives you'll hear all day: **una boludez** is something silly or very easy, as in **es una boludez**. **Boludear** is to waste time or fool around."
       - type: card
         chip: "Pro tip"
-        text: "Say boludo only once your friends say it to you. Never to a waiter, a driver or someone you just met."
+        text: "Say [boludo] only once your friends say it to you. Never to a waiter, a driver or someone you just met."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -60,9 +60,9 @@ classes:
         correct: 2
         explain: "You got fooled, so you're the **gil**: the sucker. **No seas gil** means don't be a sucker."
       - type: card
-        text: "It's old lunfardo, all over tango lyrics: the gil got scammed, the **vivo** did the scamming. Rude, but mild enough to tease friends with."
+        text: "It's old [lunfardo], all over tango lyrics: the [gil] got scammed, the **vivo** did the scamming. Rude, but mild enough to tease friends with."
       - type: card
-        text: "The **chanta** is all talk: brags, promises, never delivers. The plumber who says **“mañana paso”** for three weeks? Chanta."
+        text: "The **chanta** is all talk: brags, promises, never delivers. The plumber who says **“mañana paso”** for three weeks? [Chanta]."
       - type: card
         text: "Three more you'll hear today. The **garca** cheats people or treats them badly. The **ortiva** spoils the fun, or tells on you. The **careta** is fake: acts very proper and hides what they really do."
       - type: choice
@@ -79,7 +79,7 @@ classes:
         text: "The friend who won't stop bugging you is an **hinchapelotas** (or **rompebolas**): a ball-breaker. Between friends it's a jokey complaint, not a war."
       - type: card
         chip: "Pro tip"
-        text: "With a stranger, none of these. When in doubt, laugh and keep quiet: no puteada is better than the wrong one."
+        text: "With a stranger, none of these. When in doubt, laugh and keep quiet: no [puteada] is better than the wrong one."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -118,7 +118,7 @@ classes:
         text: "The rest of the family: **en pedo** is drunk. **Al pedo** is pointless, for nothing. **De pedo** is by pure luck. Vulgar, but very common among friends."
       - type: card
         chip: "Pro tip"
-        text: "Need a clean version? Say **¡miércoles!** (Wednesday) for mierda and **¡la pucha!** for la puta. Safe with kids, bosses and grandmas."
+        text: "Need a clean version? Say **¡miércoles!** (Wednesday) for mierda and **¡la pucha!** for [la puta]. Safe with kids, bosses and grandmas."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────

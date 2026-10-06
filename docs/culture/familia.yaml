@@ -13,7 +13,7 @@ classes:
     summary: "A lunch that ends at night, and a tupper to take home"
     pages:
       - type: card
-        text: "Sunday lunch belongs to the family. Everyone goes to the parents' or grandparents' house, for pasta or an asado. It starts around two and ends when it's dark."
+        text: "Sunday lunch belongs to the family. Everyone goes to the parents' or grandparents' house, for pasta or an [asado]. It starts around two and ends when it's dark."
       - type: card
         text: "Families are close. Cousins, **primos**, grow up almost like brothers and sisters. And kids call their parents' best friends **tío** and **tía**: uncle and aunt."
       - type: choice
@@ -27,7 +27,7 @@ classes:
       - type: card
         text: "Grandparents are **abuelo** and **abuela**, or just **abu**. In Italian families, **nono** and **nona**. In Jewish families, **zeide** and **bobe**."
       - type: card
-        text: "You don't leave with empty hands. Mom or grandma fills a **tupper**, a plastic box, with what's left of lunch. The rule: the tupper comes back."
+        text: "You don't leave with empty hands. Mom or grandma fills a **tupper**, a plastic box, with what's left of lunch. The rule: the [tupper] comes back."
       - type: choice
         prompt: "After a lunch like that, what do many families do for dinner on Sunday night?"
         options:
@@ -51,7 +51,7 @@ classes:
       - type: card
         text: "Other names are just cut short: **Fede**, **Mati**, **Sofi**, **Cami**, **Juli**, **Nico**, **Santi**. If your name is long, people will cut it in half."
       - type: choice
-        prompt: "A friend says: “This is **el Colo**.” What does el Colo look like?"
+        prompt: "A friend says: “This is **el Colo**.” What does [el Colo] look like?"
         options:
           - "He's very tall"
           - "He has red hair"
@@ -103,7 +103,7 @@ classes:
         correct: 0
         explain: "**Bancar** a friend is to be with them when things go wrong. **“Te banco”**: I'm with you, whatever happens. (Bancar can also mean to wait, or to put up with something.)"
       - type: card
-        text: "When a friend moves abroad, there is a **despedida**: a goodbye party, usually an asado, with speeches and tears. Some people get three or four of them."
+        text: "When a friend moves abroad, there is a **despedida**: a goodbye party, usually an [asado], with speeches and tears. Some people get three or four of them."
       - type: card
         chip: "Pro tip"
         text: "Say yes to the first invitation, even if it starts at eleven at night. Soon someone adds you to the **grupo de WhatsApp**, and that's how you know you're one of them."

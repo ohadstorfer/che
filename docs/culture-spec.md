@@ -60,6 +60,15 @@ hear, say or do because of this?".
 - **Heavy topics get a transition.** No jump from a tragedy to a joke on the
   next tap.
 
+- **Every Spanish word is bold, wherever it is**: a card, a question, a
+  scenario. Bold Spanish is what she can tap for its meaning, so an unmarked
+  word ("The bondi is packed") is one she can't look up. What each bold span
+  means lives in `docs/culture-glossary.yaml`: `words` maps the span to its
+  meaning, `names` lists bold that has nothing to translate (people, places,
+  dates). A class can override a meaning with its own `glossary`.
+  A word that was already bold once goes in square brackets on later
+  mentions ("the [bondi] is packed"): still tappable, without shouting again.
+
 `npm run culture:validate` prints ⚠ warnings for vocabulary missing from the
 pages and for colliding glosses. Aim for zero.
 

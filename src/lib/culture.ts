@@ -69,6 +69,26 @@ export interface CultureSection {
 
 export const cultureSections = (data as { sections: CultureSection[] }).sections;
 
+/** What the bold Spanish in the classes means, by its folded spelling (docs/culture-glossary.yaml). */
+const glossary = (data as { glossary?: Record<string, string> }).glossary ?? {};
+
+/** A span as the glossary keys it: lower case, no quotes or punctuation. Kept in step with scripts/culture/build.mjs. */
+export const glossKey = (span: string) =>
+  span
+    .toLowerCase()
+    .replace(/[“”"¡!¿?.,;:…—]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+/** The meaning of a bold span, if it is Spanish she can be told about: the class's own words first, then the glossary. */
+export function glossFor(span: string, cls?: CultureClass): CultureWord | undefined {
+  const key = glossKey(span);
+  const own = cls && [...cls.vocabulary, ...(cls.glossary ?? [])].find((w) => glossKey(w.es) === key);
+  if (own) return own;
+  const en = glossary[key];
+  return en ? { es: span.replace(/^[“"]|[”"]$/g, ''), en } : undefined;
+}
+
 export function findClass(section: string, cls: string) {
   const s = cultureSections.find((x) => x.slug === section);
   const c = s?.classes.find((x) => x.slug === cls);

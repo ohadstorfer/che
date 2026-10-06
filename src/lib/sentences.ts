@@ -21,6 +21,7 @@ export interface SentenceRow {
   en: string;
   en_alt: string[] | null;
   es_alt: string[] | null;
+  note_en?: string | null;
   audio_path: string | null;
   voice_id: string | null;
   target_form_id: string;
@@ -28,7 +29,7 @@ export interface SentenceRow {
   tokens: { surface: string; form_ids: string[]; gloss?: string }[];
 }
 
-const SENTENCE_COLUMNS = 'id, unit_id, es, en, en_alt, es_alt, audio_path, voice_id, target_form_id, difficulty, tokens';
+const SENTENCE_COLUMNS = 'id, unit_id, es, en, en_alt, es_alt, note_en, audio_path, voice_id, target_form_id, difficulty, tokens';
 
 /** Every published sentence (~26k, 24 MB of JSON), downloaded once per app run
  *  and shared. Only the fallback when the bounded load below can't run. */
@@ -213,6 +214,7 @@ export function toSentence(
     en: r.en,
     en_alt: r.en_alt ?? [],
     es_alt: r.es_alt ?? [],
+    note_en: r.note_en ?? null,
     audio_path: r.audio_path,
     voice_id: r.voice_id ?? null,
     target_form_id: r.target_form_id,

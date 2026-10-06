@@ -92,7 +92,7 @@ classes:
       - type: card
         text: "At the **fiambrería** you buy ham and cheese by weight, and you only say the number: **“cien de jamón, doscientos de queso”**. A hundred grams of ham, two hundred of cheese."
       - type: card
-        text: "At the verdulería you usually don't choose the fruit yourself. You say what you want and when you'll eat it: **“para hoy”**, for today, means give me the ripe ones."
+        text: "At the [verdulería] you usually don't choose the fruit yourself. You say what you want and when you'll eat it: **“para hoy”**, for today, means give me the ripe ones."
       - type: choice
         prompt: "By old custom, what does the verdulero add to your bag for free?"
         options:

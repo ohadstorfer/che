@@ -2,10 +2,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Animated as RNAnimated,
   Easing,
+  type GestureResponderEvent,
   type ImageSourcePropType,
   Platform,
   Pressable,
@@ -21,12 +22,14 @@ import { ExerciseFrame, type Verdict } from '@/components/exercise-frame';
 import { Choices } from '@/components/exercises';
 import { PathLessonDone } from '@/components/path-lesson-done';
 import { Button, Panel } from '@/components/ui';
+import { type Anchor, WordPopover } from '@/components/word-popover';
 import { artFor, speakerArt } from '@/lib/culture-art';
 import {
   type CulturePage,
   type CultureWord,
   classKey,
   findClass,
+  glossFor,
   markClassDone,
   splitTitle,
 } from '@/lib/culture';
@@ -34,6 +37,7 @@ import { playAudio } from '@/lib/audio';
 import { lessonWithUnit } from '@/lib/lesson';
 import { goBack } from '@/lib/nav';
 import type { FinishResult } from '@/lib/round';
+import type { Form } from '@/lib/types';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, gradients, pastel, pastelGrad, PICKED, radius, shadow } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
@@ -117,7 +121,8 @@ const glossWords = (en: string) =>
       .filter((w) => w.length > 2 && !GLOSS_STOP.has(w)),
   );
 
-const stripMarks = (text: string) => text.replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\*([^*]+)\*/g, '$1');
+const stripMarks = (text: string) =>
+  text.replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\*([^*]+)\*/g, '$1').replace(/\[([^\]]+)\]/g, '$1');
 const wordCount = (text: string) => stripMarks(text).split(/\s+/).filter(Boolean).length;
 // A sentence ends at . ! ? followed by a capital, a digit or an opening mark — so "8 p.m. and you'll" stays whole.
 const sentencesOf = (text: string) =>
@@ -273,6 +278,12 @@ function ClassPlayer({ found, lessonId, unreachable }: { found: ReturnType<typeo
   const [done, setDone] = useState<Set<string> | null>(null);
   const [ended, setEnded] = useState<{ result: FinishResult | null } | null>(null);
   const [skipping, setSkipping] = useState(false);
+  const [peek, setPeek] = useState<{ word: CultureWord; anchor: Anchor } | null>(null);
+  const cls = found?.cls;
+  const gloss = useMemo<Gloss>(
+    () => ({ find: (span) => glossFor(span, cls), open: (word, anchor) => setPeek({ word, anchor }) }),
+    [cls],
+  );
   const finished = found !== null && index >= steps.length;
   const sectionSlug = found?.section.slug;
   const classSlug = found?.cls.slug;
@@ -334,15 +345,23 @@ function ClassPlayer({ found, lessonId, unreachable }: { found: ReturnType<typeo
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <Header section={found.section.slug} index={index} total={steps.length} />
-      <Enter key={index}>
-        <StepView
-          step={step}
-          section={found.section.slug}
-          words={[...found.cls.vocabulary, ...(found.cls.glossary ?? [])]}
-          onDone={next}
-          onBack={back}
-        />
-      </Enter>
+      <GlossContext.Provider value={gloss}>
+        <Enter key={index}>
+          <StepView
+            step={step}
+            section={found.section.slug}
+            words={[...found.cls.vocabulary, ...(found.cls.glossary ?? [])]}
+            onDone={next}
+            onBack={back}
+          />
+        </Enter>
+      </GlossContext.Provider>
+      <WordPopover
+        form={peek ? asForm(peek.word) : null}
+        anchor={peek?.anchor ?? null}
+        gloss={peek?.word.en}
+        onClose={() => setPeek(null)}
+      />
     </SafeAreaView>
   );
 }
@@ -461,26 +480,93 @@ function Enter({ children }: { children: React.ReactNode }) {
 }
 
 /** The feedback bar takes plain strings, so markdown is dropped there. */
-const plain = (text?: string) => text?.replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\*([^*]+)\*/g, '$1');
+const plain = (text?: string) => (text === undefined ? undefined : stripMarks(text));
 
-/** Light markdown: **bold** and *italic*, nothing else. Render inside a Text. */
+// ---------------------------------------------------------------------------
+// Tap a Spanish word for its meaning, as in the course's exercises: the bold
+// Spanish in a card or a question wears the same dotted rule, and opens the
+// same bubble over the word (WordPopover). What it means comes from the
+// culture glossary (lib/culture.ts, glossFor); bold that isn't Spanish — a
+// name, a date — has no entry and stays plain bold.
+// ---------------------------------------------------------------------------
+
+interface Gloss {
+  find: (span: string) => CultureWord | undefined;
+  open: (word: CultureWord, anchor: Anchor) => void;
+}
+
+const GlossContext = createContext<Gloss | null>(null);
+
+/** The bubble is built around a course word; a culture word fills the parts of one it reads. */
+const asForm = (word: CultureWord) =>
+  ({ form: word.es, gloss_en: '', gloss_note_en: word.note ?? null, audio_path: null }) as unknown as Form;
+
+/**
+ * Where the tapped word sits. A span inside a paragraph is not a view of its
+ * own on native, so it can't be measured: the bubble hangs off the line under
+ * her finger instead. On web the span is real, and the line of it she tapped
+ * is used — a phrase that wraps has one box per line.
+ */
+function anchorOf(e: GestureResponderEvent): Anchor {
+  const { pageX, pageY } = e.nativeEvent;
+  if (Platform.OS === 'web') {
+    const node = e.currentTarget as unknown as { getClientRects?: () => ArrayLike<DOMRect> };
+    for (const r of Array.from(node.getClientRects?.() ?? [])) {
+      if (pageY >= r.top && pageY <= r.bottom && pageX >= r.left - 1 && pageX <= r.right + 1) {
+        return { x: r.left, y: r.top, width: r.width, height: r.height };
+      }
+    }
+  }
+  return { x: pageX - 1, y: pageY - 16, width: 2, height: 32 };
+}
+
+/**
+ * Light markdown: **bold**, *italic* and [Spanish said in passing], nothing
+ * else. Bold Spanish and bracketed Spanish open their meaning; the brackets
+ * mark a word that was already bold once and shouldn't shout again. Render
+ * inside a Text.
+ */
 function Rich({ text, bold }: { text: string; bold?: object }) {
-  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean);
+  const gloss = useContext(GlossContext);
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\])/g).filter(Boolean);
+  const tappable = (i: number, label: string, word: CultureWord, style: object | null) => (
+    <Text
+      key={i}
+      onPress={(e) => gloss!.open(word, anchorOf(e))}
+      suppressHighlighting
+      accessibilityRole="button"
+      accessibilityHint="Shows what it means"
+      style={[style, styles.glossed]}>
+      {label}
+    </Text>
+  );
   return (
     <>
-      {parts.map((p, i) =>
-        p.startsWith('**') ? (
-          <Text key={i} style={bold ?? styles.bold}>
-            {p.slice(2, -2)}
-          </Text>
-        ) : p.startsWith('*') && p.length > 2 ? (
+      {parts.map((p, i) => {
+        if (p.startsWith('[')) {
+          const label = p.slice(1, -1);
+          const word = gloss?.find(label);
+          return word ? tappable(i, label, word, null) : label;
+        }
+        if (p.startsWith('**')) {
+          const label = p.slice(2, -2);
+          const word = gloss?.find(label);
+          return word ? (
+            tappable(i, label, word, bold ?? styles.bold)
+          ) : (
+            <Text key={i} style={bold ?? styles.bold}>
+              {label}
+            </Text>
+          );
+        }
+        return p.startsWith('*') && p.length > 2 ? (
           <Text key={i} style={styles.italic}>
             {p.slice(1, -1)}
           </Text>
         ) : (
           p
-        ),
-      )}
+        );
+      })}
     </>
   );
 }
@@ -1223,14 +1309,14 @@ function ChoiceStep({
   children?: React.ReactNode;
 }) {
   const [shown] = useState(() => {
-    const opts = options.map((label, i) => ({ id: String(i), label }));
+    const opts = options.map((label, i) => ({ id: String(i), label: plain(label) ?? label }));
     return keepOrder ? opts : shuffle(opts);
   });
   const [chosen, setChosen] = useState<string | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
   return (
     <ExerciseFrame
-      prompt={prompt}
+      prompt={<Rich text={prompt} bold={styles.promptBold} />}
       verdict={verdict}
       canCheck={chosen !== null}
       onCheck={() => setVerdict({ correct: chosen === String(correct), answer: plain(options[correct]), about: plain(explain) })}
@@ -1456,6 +1542,10 @@ const styles = StyleSheet.create({
 
   bold: { ...font.body[800], color: colors.ink },
   italic: { fontStyle: 'italic' },
+  // The course's mark for a word she may look up (exercises.tsx, tokenPeek), in rosa so it shows on a pastel card too.
+  glossed: { textDecorationLine: 'underline', textDecorationStyle: 'dotted', textDecorationColor: colors.primary },
+  // Bold in a question is Spanish: the question is already at full weight, so colour sets it apart.
+  promptBold: { color: colors.primaryDark },
 
 
   // Tinted and flat: raised clay cards are the things she taps.

@@ -23,9 +23,9 @@ classes:
         correct: 0
         explain: "The city, **CABA**, is its own district. The Provincia wraps around it, and its capital is a different city: **La Plata**."
       - type: card
-        text: "Cross the **General Paz** avenue and you're in the **conurbano**, a huge ring of suburbs where millions more live. People out there aren't porteños, and they call the city just **Capital**."
+        text: "Cross the **General Paz** avenue and you're in the **conurbano**, a huge ring of suburbs where millions more live. People out there aren't [porteños], and they call the city just **Capital**."
       - type: card
-        text: "Porteños call everywhere outside the metro area **el interior**. People from Córdoba or Mendoza don't love it: it makes the whole country sound like a backyard."
+        text: "[Porteños] call everywhere outside the metro area **el interior**. People from Córdoba or Mendoza don't love it: it makes the whole country sound like a backyard."
       - type: choice
         prompt: "The provinces have a famous saying about this: “God is everywhere…” How does it end?"
         options:
@@ -35,10 +35,10 @@ classes:
         correct: 0
         explain: "**“Dios está en todas partes, pero atiende en Buenos Aires.”** Everything important gets decided in the capital, and everyone else has to go and ask."
       - type: card
-        text: "The stereotypes go both ways. The provinces say porteños are **agrandados**, people who think they are better than everyone, and talk too fast. Porteños joke that the provinces live slower. Both sides exaggerate, and both laugh."
+        text: "The stereotypes go both ways. The provinces say [porteños] are **agrandados**, people who think they are better than everyone, and talk too fast. [Porteños] joke that the provinces live slower. Both sides exaggerate, and both laugh."
       - type: card
         chip: "Pro tip"
-        text: "Traveling around? Don't say you're touring “el interior”. Name the province: **“Estoy recorriendo Mendoza.”**"
+        text: "Traveling around? Don't say you're touring “[el interior]”. Name the province: **“Estoy recorriendo Mendoza.”**"
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -47,9 +47,9 @@ classes:
     summary: "La Boca, San Telmo, Palermo and a cemetery full of legends"
     pages:
       - type: card
-        text: "Ask porteños where they're from and you'll get a barrio, not a city: Boedo, Flores, Palermo. Each has its own cafés, its own club and its own pride."
+        text: "Ask [porteños] where they're from and you'll get a barrio, not a city: Boedo, Flores, Palermo. Each has its own cafés, its own club and its own pride."
       - type: card
-        text: "Porteños give an address as two streets that cross: **“Corrientes y Callao”**. Distance is counted in blocks: **“Son cinco cuadras”**, it's five blocks."
+        text: "[Porteños] give an address as two streets that cross: **“Corrientes y Callao”**. Distance is counted in blocks: **“Son cinco cuadras”**, it's five blocks."
       - type: card
         text: "**La Boca** sits where the Riachuelo meets the Río de la Plata. Its dockworkers built houses of wood and **chapa** (metal sheets), painted, the story goes, with paint left over from the shipyards."
       - type: choice
@@ -61,7 +61,7 @@ classes:
         correct: 0
         explain: "The tango **“Caminito”**, by **Juan de Dios Filiberto**, a composer from La Boca itself."
       - type: card
-        text: "**San Telmo** is the old colonial south: cobblestones, balconies, antique shops. On Sundays, calle **Defensa** turns into a street market, with tango dancers on the corners."
+        text: "**San Telmo** is the old colonial south: cobblestones, balconies, antique shops. On Sundays, [calle] **Defensa** turns into a street market, with tango dancers on the corners."
       - type: card
         text: "**Palermo** is the biggest barrio, so people keep inventing sub-barrios: **Palermo Soho**, **Palermo Hollywood**, even “Palermo Queens” for the barrio next door. The joke: soon everything will be “Palermo something”."
       - type: card
@@ -82,11 +82,11 @@ classes:
     summary: "The bondi, the sacred cola, and a surprisingly old subte"
     pages:
       - type: card
-        text: "The city bus is the **colectivo**, but everyone calls it **bondi**. And porteños invented it."
+        text: "The city bus is the **colectivo**, but everyone calls it **bondi**. And [porteños] invented it."
       - type: card
-        text: "You can't pay cash on the bondi. Tap a **SUBE** card, sold at kioscos and subte stations. Many lines also take a bank card or phone. Tell the driver where you're going: **“Hasta Plaza Italia.”**"
+        text: "You can't pay cash on the [bondi]. Tap a **SUBE** card, sold at kioscos and [subte] stations. Many lines also take a bank card or phone. Tell the driver where you're going: **“Hasta Plaza Italia.”**"
       - type: choice
-        prompt: "How was the colectivo born, in 1928?"
+        prompt: "How was the [colectivo] born, in 1928?"
         options:
           - "Taxi drivers began sharing their cars"
           - "The city bought old buses from London"
@@ -94,11 +94,11 @@ classes:
         correct: 0
         explain: "Taxi drivers short on customers charged each passenger a fixed fare along a route. Soon they stretched the cars to fit more seats."
       - type: card
-        text: "The bondi only stops if you ask. When your line comes, stick your arm out, or it drives right past you. To get off, press the **timbre** (the bell) before your stop and leave by the back door."
+        text: "The [bondi] only stops if you ask. When your line comes, stick your arm out, or it drives right past you. To get off, press the **timbre** (the bell) before your stop and leave by the back door."
       - type: card
         text: "At the stop, people line up along the wall: **la cola**. It's sacred. Cut it and the whole line will let you know: **“¡Hay cola, eh!”**"
       - type: card
-        text: "Taxis are black and yellow, and a free one shows a red **LIBRE** light. Porteños call the taxi a **tacho** and the driver a **tachero**."
+        text: "Taxis are black and yellow, and a free one shows a red **LIBRE** light. [Porteños] call the taxi a **tacho** and the driver a **tachero**."
       - type: choice
         prompt: "The **subte**, Buenos Aires' metro, opened in 1913. Which of these is younger?"
         options:
@@ -109,7 +109,7 @@ classes:
         explain: "Madrid's opened in 1919. The subte was the first metro in all of Latin America."
       - type: card
         chip: "Pro tip"
-        text: "On the bondi and not sure where to get off? Ask the driver **“¿Me avisás cuando lleguemos a…?”** Most will call out your stop."
+        text: "On the [bondi] and not sure where to get off? Ask the driver **“¿Me avisás cuando lleguemos a…?”** Most will call out your stop."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -118,7 +118,7 @@ classes:
     summary: "A monument almost torn down, a pink palace and a café with no rush"
     pages:
       - type: card
-        text: "The **Obelisco** went up in a rush in 1936, and plenty of porteños hated it."
+        text: "The **Obelisco** went up in a rush in 1936, and plenty of [porteños] hated it."
       - type: choice
         prompt: "A few years later, what did the city council vote to do with it?"
         options:
@@ -128,7 +128,7 @@ classes:
         correct: 0
         explain: "They voted to demolish it, and the mayor vetoed the decision. Today it's where the whole city goes to celebrate a World Cup, or to protest."
       - type: card
-        text: "It stands on **Avenida 9 de Julio**, which porteños proudly call the widest avenue in the world. Crossing on foot usually takes more than one green light."
+        text: "It stands on **Avenida 9 de Julio**, which [porteños] proudly call the widest avenue in the world. Crossing on foot usually takes more than one green light."
       - type: card
         text: "The president's office is the **Casa Rosada**. The popular story: President **Sarmiento** had it painted pink to mix the red and white of two rival parties."
       - type: card
@@ -175,7 +175,7 @@ classes:
         correct: 0
         explain: "An old theater, turned bookshop. The café sits right on the old stage."
       - type: card
-        text: "The thief to know is the **motochorro**, who snatches phones from the back of a motorbike. Porteños aren't paranoid, just alert. Keep your phone off café tables by the street."
+        text: "The thief to know is the **motochorro**, who snatches phones from the back of a motorbike. [Porteños] aren't paranoid, just alert. Keep your phone off café tables by the street."
       - type: card
         text: "A word you'll hear a lot in your first week: **¡Ojo!**, literally “eye!”. It means watch out. **“¡Ojo con el celu!”** Careful with your phone."
     vocabulary: []
@@ -186,11 +186,11 @@ classes:
     summary: "Loading it, tapping it, and reading the subte like a local"
     pages:
       - type: card
-        text: "The **SUBE** is one blue card for the bus, the subte and the train. Get one on your first day and keep it in your pocket. You'll tap it several times a day."
+        text: "The **SUBE** is one blue card for the bus, the [subte] and the train. Get one on your first day and keep it in your pocket. You'll tap it several times a day."
       - type: card
-        text: "The card holds credit, your **saldo**. To add more, go to a kiosco with a SUBE sign and ask **“¿Me cargás la SUBE?”** Can you load my SUBE? Say how much. Subte stations have machines too."
+        text: "The card holds credit, your **saldo**. To add more, go to a [kiosco] with a [SUBE] sign and ask **“¿Me cargás la SUBE?”** Can you load my [SUBE]? Say how much. [Subte] stations have machines too."
       - type: choice
-        prompt: "The bus is here and your SUBE has no credit left. What happens when you tap?"
+        prompt: "The bus is here and your [SUBE] has no credit left. What happens when you tap?"
         options:
           - "It lets you ride and goes a little below zero"
           - "It beeps red and you have to get off"
@@ -200,7 +200,7 @@ classes:
       - type: card
         text: "Not sure it's your bus? Ask before you get on: **“¿Este va a Retiro?”** Does this one go to Retiro? Then tell the driver your stop, wait for his nod, and tap. Longer trips cost more."
       - type: choice
-        prompt: "Three friends get on a bondi with only one SUBE between them. Can they all ride?"
+        prompt: "Three friends get on a [bondi] with only one [SUBE] between them. Can they all ride?"
         options:
           - "Yes, one card can pay for all three"
           - "No, each rider needs their own card"
@@ -208,9 +208,9 @@ classes:
         correct: 0
         explain: "Tell the driver **“Tres, hasta Plaza Italia”** (three, to Plaza Italia) and tap once for each person. Just check you have enough saldo first."
       - type: card
-        text: "Every subte turnstile also takes a contactless bank card or a phone, and more bus lines add this all the time. Not every bus has it yet, so the SUBE is still the safe choice."
+        text: "Every [subte] turnstile also takes a contactless bank card or a phone, and more bus lines add this all the time. Not every bus has it yet, so the [SUBE] is still the safe choice."
       - type: card
-        text: "The subte has six lines, each with a letter and a color: **A, B, C, D, E** and **H**. To change from one line to another, follow the signs that say **combinación**."
+        text: "The [subte] has six lines, each with a letter and a color: **A, B, C, D, E** and **H**. To change from one line to another, follow the signs that say **combinación**."
       - type: choice
         prompt: "You're on the platform of the D line. What tells you which way the train is going?"
         options:
@@ -221,7 +221,7 @@ classes:
         explain: "Signs show the end of the line: **“a Catedral”** or **“a Congreso de Tucumán”**. Before you go down, check which end is past your stop."
       - type: card
         chip: "Pro tip"
-        text: "The subte closes at night, but many bondis run until morning. Tired? Take a taxi or an app like Uber, Cabify or DiDi. And on any bus: **“¿Me avisás dónde me bajo?”** Can you tell me where to get off?"
+        text: "The [subte] closes at night, but many bondis run until morning. Tired? Take a taxi or an app like Uber, Cabify or DiDi. And on any bus: **“¿Me avisás dónde me bajo?”** Can you tell me where to get off?"
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -278,7 +278,7 @@ classes:
       - type: card
         text: "First habit: the phone. Don't use it at the edge of the sidewalk, next to the traffic. To read a map or answer a message, step into a doorway or a shop."
       - type: choice
-        prompt: "The subte is packed at rush hour. Where do many locals carry their backpack?"
+        prompt: "The [subte] is packed at rush hour. Where do many locals carry their backpack?"
         options:
           - "On their chest, in front"
           - "On their back, straps pulled tight"

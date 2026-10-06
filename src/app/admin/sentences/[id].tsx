@@ -45,7 +45,7 @@ export default function AdminSentence() {
   const [row, setRow] = useState<SentenceRow | null>(null);
   const [forms, setForms] = useState<Form[]>([]);
   const [reviews, setReviews] = useState<ReviewRow[]>([]);
-  const [draft, setDraft] = useState({ es: '', en: '', en_alt: '', es_alt: '' });
+  const [draft, setDraft] = useState({ es: '', en: '', en_alt: '', es_alt: '', note_en: '' });
   const [comment, setComment] = useState('');
   const [mode, setMode] = useState<ExerciseMode>('sentence_meaning');
   const [previewKey, setPreviewKey] = useState(0);
@@ -57,7 +57,7 @@ export default function AdminSentence() {
       const { data } = await supabase.from('sentences').select('*').eq('id', id).single();
       const s = data as SentenceRow;
       setRow(s);
-      setDraft({ es: s.es, en: s.en, en_alt: lines(s.en_alt ?? []), es_alt: lines(s.es_alt ?? []) });
+      setDraft({ es: s.es, en: s.en, en_alt: lines(s.en_alt ?? []), es_alt: lines(s.es_alt ?? []), note_en: s.note_en ?? '' });
       const [all, revs] = await Promise.all([loadForms(), loadReviews('sentences', s.id)]);
       setForms(all);
       setReviews(revs);
@@ -75,7 +75,7 @@ export default function AdminSentence() {
   if (!row) return <AdminScreen title="Sentence" back="/admin"><Muted>Loading…</Muted></AdminScreen>;
 
   const dirty =
-    draft.es !== row.es || draft.en !== row.en || draft.en_alt !== lines(row.en_alt ?? []) || draft.es_alt !== lines(row.es_alt ?? []);
+    draft.es !== row.es || draft.en !== row.en || draft.en_alt !== lines(row.en_alt ?? []) || draft.es_alt !== lines(row.es_alt ?? []) || draft.note_en !== (row.note_en ?? '');
 
   const save = async () => {
     const esChanged = draft.es.trim() !== row.es;
@@ -85,6 +85,7 @@ export default function AdminSentence() {
       en: draft.en.trim(),
       en_alt: unlines(draft.en_alt),
       es_alt: unlines(draft.es_alt),
+      note_en: draft.note_en.trim() || null,
       // New Spanish means new tokens: back through the linter first.
       ...(esChanged ? { status: 'draft' } : {}),
       // Each token's gloss is words of the old English. Dropped, the sentence
@@ -131,6 +132,7 @@ export default function AdminSentence() {
             <Field label="English" value={draft.en} onChange={(en) => setDraft({ ...draft, en })} />
             <Field label="Other English (one per line)" value={draft.en_alt} onChange={(en_alt) => setDraft({ ...draft, en_alt })} multiline />
             <Field label="Other accepted Spanish (one per line)" value={draft.es_alt} onChange={(es_alt) => setDraft({ ...draft, es_alt })} multiline />
+            <Field label="Note shown after she answers (why the Spanish has a word the English doesn't ask for)" value={draft.note_en} onChange={(note_en) => setDraft({ ...draft, note_en })} multiline />
           </Section>
 
           <Section title="Tokens">

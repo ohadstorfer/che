@@ -84,7 +84,7 @@ classes:
       - type: card
         text: "The **boliche**, the nightclub, opens around one. The dancing really starts at two or three. Getting home at six, with the sun up, is a normal Saturday."
       - type: choice
-        prompt: "Your friends say: “Previa at Tomi's, then the boliche.” You get to Tomi's at nine. What do you find?"
+        prompt: "Your friends say: “Previa at Tomi's, then the [boliche].” You get to Tomi's at nine. What do you find?"
         options:
           - "Tomi alone, nothing ready yet"
           - "The party already in full swing"
@@ -92,9 +92,9 @@ classes:
         correct: 0
         explain: "At nine most people haven't even had dinner. The previa, drinks at home before going out, gets going around eleven or midnight."
       - type: card
-        text: "**La previa** is drinks at a friend's place before going out: cheaper, your own music, and you can hear each other. For plenty of people it's the best part. The boliche is just the excuse."
+        text: "**La previa** is drinks at a friend's place before going out: cheaper, your own music, and you can hear each other. For plenty of people it's the best part. The [boliche] is just the excuse."
       - type: choice
-        prompt: "It's 4 a.m. and the boliche is packed. Which of these will you almost never hear?"
+        prompt: "It's 4 a.m. and the [boliche] is packed. Which of these will you almost never hear?"
         options:
           - "Tango"
           - "Cumbia"
@@ -102,7 +102,7 @@ classes:
         correct: 0
         explain: "Tango lives in the **milongas**, the tango dance halls, with their own crowd. The boliche runs on reggaetón, cumbia, electronic music and whatever everyone can shout along to."
       - type: card
-        text: "And six a.m. isn't always the end. Some go on to an **after**, a party after the boliche closes. Everyone else heads for **café con medialunas** as the cafés open, then sleeps until lunch."
+        text: "And six a.m. isn't always the end. Some go on to an **after**, a party after the [boliche] closes. Everyone else heads for **café con medialunas** as the cafés open, then sleeps until lunch."
       - type: card
         text: "Not into boliches? Most nights out are simpler: dinner at half past nine or ten, then **un bar** or **una birra**, a beer, with friends. At seven, restaurants are still empty."
     vocabulary: []
@@ -151,7 +151,7 @@ classes:
       - type: card
         text: "The **arbolito**, the Christmas tree, goes up on **8 December**, a public holiday (**Día de la Virgen**). The big night isn't the 25th: it's **Nochebuena**, the 24th, with a long dinner, often outdoors."
       - type: choice
-        prompt: "It's Nochebuena. Which of these is a classic on the table?"
+        prompt: "It's [Nochebuena]. Which of these is a classic on the table?"
         options:
           - "Veal in a creamy tuna sauce"
           - "Roast turkey with gravy"
@@ -217,7 +217,7 @@ classes:
       - type: card
         text: "Walking into someone's home, say **“Permiso”** at the door, even if they just invited you in. It means “with your permission”. The answer is **“Pasá, pasá”**: come in, come in."
       - type: choice
-        prompt: "The bondi is packed and the next stop is yours. What do you say to get to the door?"
+        prompt: "The [bondi] is packed and the next stop is yours. What do you say to get to the door?"
         options:
           - "“Permiso”"
           - "“Lo siento”"

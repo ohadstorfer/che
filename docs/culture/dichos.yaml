@@ -79,11 +79,11 @@ classes:
     summary: "The old sayings every abuela has ready for any occasion"
     pages:
       - type: card
-        text: "A **refrán** is an old proverb, and most came from Spain. What's Argentine is the timing: your abuela has one ready before you finish telling her the problem."
+        text: "A **refrán** is an old proverb, and most came from Spain. What's Argentine is the timing: your [abuela] has one ready before you finish telling her the problem."
       - type: card
         text: "And she only says half. You complain about the ugly sweater your aunt gave you: **“Y bueno, a caballo regalado…”** Everyone knows the rest: **no se le miran los dientes**. Don't look a gift horse in the mouth."
       - type: choice
-        prompt: "After a bad breakup, your friend won't even go on a date. Abuela nods: **“El que se quema con leche, ve una vaca y…”** Burned by milk, you see a cow and…?"
+        prompt: "After a bad breakup, your friend won't even go on a date. [Abuela] nods: **“El que se quema con leche, ve una vaca y…”** Burned by milk, you see a cow and…?"
         options:
           - "**Llora**: cries"
           - "**Corre**: runs"
@@ -91,7 +91,7 @@ classes:
         correct: 0
         explain: "You cry at the sight of a cow. Once hurt, you fear anything that reminds you of it."
       - type: card
-        text: "New friends look a bit shady? Abuela raises an eyebrow: **“Decime con quién andás y te diré quién sos.”** Tell me who you hang out with, and I'll tell you who you are."
+        text: "New friends look a bit shady? [Abuela] raises an eyebrow: **“Decime con quién andás y te diré quién sos.”** Tell me who you hang out with, and I'll tell you who you are."
       - type: card
         text: "Your friend swears, again, that he starts the gym on Monday. **Del dicho al hecho hay mucho trecho**: from saying to doing, it's a long way."
       - type: choice

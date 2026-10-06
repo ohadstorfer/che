@@ -1,9 +1,10 @@
 """Render Posta's app icon and its store/platform variants.
 
-The design is artboard "34 · Icon: face and mate, sticker" on the design
-canvas (https://claude.ai/artifact/G4beWfxvd6tkDrVbPWfjw2): a 440×440 green
-square, a lighter green hill, and the mate capybara with a bone sticker
-outline. The geometry below is copied from that artboard, in its 440-unit
+The design is artboard "45 · Icon: Salvia, like 34" on the design canvas
+(https://claude.ai/artifact/G4beWfxvd6tkDrVbPWfjw2): a 440×440 sage green
+square, a lighter sage hill, and the mate capybara with a cream sticker
+outline. (34 was the same drawing on the app's dark green, #3E5641 with a
+#5C7560 hill and a #F1EEE6 outline.) The geometry below is copied from that artboard, in its 440-unit
 coordinates, and redrawn at full resolution from the original Canva art
 (assets/images/mascot/canva/mate.jpg), cut out of its white background here.
 
@@ -27,9 +28,9 @@ from scipy import ndimage as nd
 ROOT = Path(__file__).resolve().parents[2]
 IMG = ROOT / "assets/images"
 
-GREEN = (62, 86, 65)  # #3E5641, the app's primary
-HILL = (92, 117, 96)  # #5C7560
-BONE = (241, 238, 230)  # #F1EEE6
+GREEN = (168, 213, 186)  # #A8D5BA, salvia
+HILL = (192, 226, 205)  # #C0E2CD
+BONE = (255, 249, 243)  # #FFF9F3
 
 FRAME = 440  # the artboard, in design units
 HILL_BOX = (-39, 162, 921, 470)  # left, top, width, height

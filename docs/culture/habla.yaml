@@ -15,7 +15,7 @@ classes:
       - type: card
         text: "Your textbook taught you **tú**. Forget it here. Argentines say **vos**: **vos sos**, **vos tenés**, **¿vos querés?** Say “tú tienes” and people understand you, then know at once that you learned from a textbook."
       - type: card
-        text: "Why vos? It's old Spanish. The usual story: **tú** took over in the rich colonial capitals, Lima and Mexico City. The Río de la Plata was a poor, far-off corner, and nobody updated it."
+        text: "Why [vos]? It's old Spanish. The usual story: **tú** took over in the rich colonial capitals, Lima and Mexico City. The Río de la Plata was a poor, far-off corner, and nobody updated it."
       - type: choice
         prompt: "So what did Argentine schools teach kids for decades?"
         options:
@@ -35,10 +35,10 @@ classes:
         correct: 2
         explain: "The waiter, the shop clerk, often even your friend's grandma: **vos**. Usted still shows up with older strangers and in formal settings, and more outside Buenos Aires, but vos is the normal default."
       - type: card
-        text: "So politeness lives in the tone: **disculpá**, **¿me podrías…?**, **por favor**. A warm vos usually beats a stiff usted."
+        text: "So politeness lives in the tone: **disculpá**, **¿me podrías…?**, **por favor**. A warm [vos] usually beats a stiff [usted]."
       - type: card
         chip: "Pro tip"
-        text: "You don't even need to say vos. The ending does the work: **¿Tenés cambio?** is the whole sentence. Short, friendly, local."
+        text: "You don't even need to say [vos]. The ending does the work: **¿Tenés cambio?** is the whole sentence. Short, friendly, local."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -69,7 +69,7 @@ classes:
       - type: card
         text: "The tune most likely arrived with the Italian immigrants around 1900. Their accents faded, but the melody stuck."
       - type: card
-        text: "Then there's **che**: hey, dude, listen. Nobody knows for sure where it comes from. An old Spanish call for attention, **ce**? Guaraní? Mapudungun? Valencian? Pick a theory and defend it over a mate."
+        text: "Then there's **che**: hey, dude, listen. Nobody knows for sure where it comes from. An old Spanish call for attention, **ce**? [Guaraní]? Mapudungun? Valencian? Pick a theory and defend it over a [mate]."
       - type: choice
         prompt: "Ernesto Guevara became world-famous as “Che”. Who gave him the nickname?"
         options:
@@ -91,7 +91,7 @@ classes:
       - type: card
         text: "Around 1900, Buenos Aires was packed with immigrants, mostly Italians and Spaniards, crammed into tenements called **conventillos**. Out of that mix came **lunfardo**, the city's street slang."
       - type: choice
-        prompt: "Who were the first people to write lunfardo down, in the late 1800s?"
+        prompt: "Who were the first people to write [lunfardo] down, in the late 1800s?"
         options:
           - "Tango poets, for their lyrics"
           - "Police, who thought it was a thieves' code"
@@ -99,11 +99,11 @@ classes:
         correct: 1
         explain: "Police officers and criminologists. Then it turned out bakers, clerks and grandmas talked like that too."
       - type: card
-        text: "Then **tango** carried it onto the radio, and lunfardo went from the tenement patio to every living room in the country."
+        text: "Then **tango** carried it onto the radio, and [lunfardo] went from the tenement patio to every living room in the country."
       - type: card
         text: "It's no museum piece. Everyone, from teenagers to bank managers, says **me voy al laburo**, I'm off to work. It comes from the Italian of the immigrants: *lavoro*, work."
       - type: card
-        text: "More lunfardo you'll hear every day: **guita**, money. **Pibe** and **piba**, a boy and a girl. **Morfar**, to eat. **Birra**, beer. **Fiaca**, the feeling of not wanting to do anything."
+        text: "More [lunfardo] you'll hear every day: **guita**, money. **Pibe** and **piba**, a boy and a girl. **Morfar**, to eat. **Birra**, beer. **Fiaca**, the feeling of not wanting to do anything."
       - type: choice
         prompt: "The city bus is the **bondi**. According to the usual story, where does the word come from?"
         options:
@@ -127,7 +127,7 @@ classes:
     summary: "Words backwards, words turned up, and the truth"
     pages:
       - type: card
-        text: "Porteños love flipping words. Swap the syllables of **revés**, backwards, and you get **vesre**: the name of the game, played on itself."
+        text: "[Porteños] love flipping words. Swap the syllables of **revés**, backwards, and you get **vesre**: the name of the game, played on itself."
       - type: choice
         prompt: "Flipped words sound like a party game, but one of these is completely everyday. Which?"
         options:
@@ -139,7 +139,7 @@ classes:
       - type: card
         text: "Another flip you'll hear constantly: **hotel** becomes **telo**. Remember that one. It matters."
       - type: choice
-        prompt: "At a party you say you're staying at “un telo re lindo en Palermo”. Everyone bursts out laughing. Why?"
+        prompt: "At a party you say you're staying at “un [telo] [re lindo] en Palermo”. Everyone bursts out laughing. Why?"
         options:
           - "A telo is a hotel rented by the hour"
           - "Telo is slang for a cheap hostel"
@@ -161,7 +161,7 @@ classes:
     summary: "Gestures you'll see and shortcuts you'll read"
     pages:
       - type: card
-        text: "Porteños don't just talk, they perform. Watch two friends argue about football across the street and you'll get the gist without hearing a word."
+        text: "[Porteños] don't just talk, they perform. Watch two friends argue about football across the street and you'll get the gist without hearing a word."
       - type: choice
         prompt: "Someone cuts in the bus line. A lady pinches her fingertips together, pointing up, and bobs her wrist. What's she saying?"
         options:
@@ -183,7 +183,7 @@ classes:
       - type: card
         text: "Argentines love **audios**: WhatsApp voice notes instead of typing. A three-minute audio just to say you're running late? Completely normal."
       - type: card
-        text: "When they do type, they cut words short: **q** is que, **xq** is porque, **tmb** is también, **dsp** is después. And **tqm**, te quiero mucho, closes many family chats."
+        text: "When they do type, they cut words short: **q** is que, **xq** is porque, **tmb** is también, **dsp** is después. And **tqm**, [te quiero] mucho, closes many family chats."
       - type: choice
         prompt: "You suggest a 7 a.m. Sunday run. Your friend replies: **“bue”**. How excited are they?"
         options:

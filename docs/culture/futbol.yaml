@@ -67,7 +67,7 @@ classes:
       - type: card
         text: "Every rival gets a nickname. River fans call Boca fans **bosteros** (bosta = dung). Boca fans call River fans **gallinas**: chickens."
       - type: choice
-        prompt: "Why are River fans called “gallinas”?"
+        prompt: "Why are River fans called “[gallinas]”?"
         options:
           - "River was winning 2–0 in a big final and lost"
           - "Their first stadium was a chicken farm"
@@ -97,9 +97,9 @@ classes:
       - type: card
         text: "Argentines say their football was born in the **potrero**: a dirt lot, two stones for goals, no rules. Calling a player **“de potrero”** is a big compliment."
       - type: card
-        text: "Today the potrero is **fútbol 5**. Plenty of adults play a **picado** every week, with the same friends for years. Then beers."
+        text: "Today the [potrero] is **fútbol 5**. Plenty of adults play a **picado** every week, with the same friends for years. Then beers."
       - type: choice
-        prompt: "In a picado, you play the ball past your friend Nacho and everyone screams **“¡Caño!”**. What did you just do?"
+        prompt: "In a [picado], you play the ball past your friend Nacho and everyone screams **“¡Caño!”**. What did you just do?"
         options:
           - "Put the ball between his legs"
           - "Hit the post"
@@ -175,7 +175,7 @@ classes:
         correct: 0
         explain: "The **Iglesia Maradoniana** started in Rosario in 1998 and counts its years from his birth, in 1960. June 22 is its Easter. Half joke, half not."
       - type: card
-        text: "People call him **el Diez**, the number ten, or just **el Diego**. He died on November 25, 2020. The wake was at the Casa Rosada, and huge crowds came to say goodbye."
+        text: "People call him **el Diez**, the number ten, or just **el Diego**. He died on November 25, 2020. The wake was at the [Casa Rosada], and huge crowds came to say goodbye."
       - type: card
         text: "Mexico 1986, quarter-final against England at the Azteca stadium, four years after the **Malvinas** (Falklands) war. Diego scores with his hand, **la Mano de Dios**, then dribbles past half their team. Argentina went on to win the cup."
       - type: choice

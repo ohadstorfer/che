@@ -49,9 +49,9 @@ classes:
       - type: card
         text: "In 1776 Spain made Buenos Aires the capital of a huge **Virreinato**: today's Argentina, Uruguay, Paraguay and Bolivia. Suddenly the smuggling port was a capital."
       - type: card
-        text: "The viceroy ruled from the fort, where the Casa Rosada stands today. Across the square sat the **Cabildo**, the town council, the voice of the locals. Its white building with arches is still there, now a museum."
+        text: "The viceroy ruled from the fort, where the [Casa Rosada] stands today. Across the square sat the **Cabildo**, the town council, the voice of the locals. Its white building with arches is still there, now a museum."
       - type: choice
-        prompt: "Look closely at the Cabildo today. What happened to it?"
+        prompt: "Look closely at the [Cabildo] today. What happened to it?"
         options:
           - "It lost arches to make room for avenues"
           - "It was moved stone by stone from Córdoba"
@@ -69,12 +69,12 @@ classes:
         correct: 0
         explain: "Viceroy Sobremonte ran away, and people never forgave him. The British caught the treasure in Luján anyway, and he ended up in Córdoba. The locals had to fight on their own."
       - type: card
-        text: "Locals organized under **Santiago de Liniers** and threw the British out. In 1807 the British came back, bigger. Porteños fought street by street, and won again. Argentines call the two attacks the **invasiones inglesas**."
+        text: "Locals organized under **Santiago de Liniers** and threw the British out. In 1807 the British came back, bigger. [Porteños] fought street by street, and won again. Argentines call the two attacks the **invasiones inglesas**."
       - type: card
         text: "The story every kid learns: neighbors poured boiling water and oil from the flat rooftops onto British soldiers. Some of it is polished legend. The street fighting was very real."
       - type: card
         chip: "Did you know?"
-        text: "Two downtown streets remember it: **Reconquista** and **Defensa**. And porteños learned they could beat an empire without Spain. So why keep obeying a viceroy?"
+        text: "Two downtown streets remember it: **Reconquista** and **Defensa**. And [porteños] learned they could beat an empire without Spain. So why keep obeying a viceroy?"
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -87,7 +87,7 @@ classes:
       - type: card
         text: "On **25 de mayo de 1810**, locals removed the viceroy and formed their own government, the **Primera Junta**. That's the **Revolución de Mayo**, and why the main square is **Plaza de Mayo**."
       - type: choice
-        prompt: "Every school drawing of that day shows the crowd outside the Cabildo holding the same thing. What?"
+        prompt: "Every school drawing of that day shows the crowd outside the [Cabildo] holding the same thing. What?"
         options:
           - "Umbrellas"
           - "Torches"
@@ -110,7 +110,7 @@ classes:
         text: "Both days are **feriados**. People pin a light-blue-and-white **escarapela** to their chest, and schoolkids act out 1810 in colonial costume, with mustaches drawn on in burnt cork."
       - type: card
         chip: "Did you know?"
-        text: "The dates are on the map too. **Avenida 9 de Julio** is the huge one with the Obelisco, and almost every town has a street called 25 de Mayo."
+        text: "The dates are on the map too. **Avenida 9 de Julio** is the huge one with the [Obelisco], and almost every town has a street called [25 de Mayo]."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -169,9 +169,9 @@ classes:
         correct: 0
         explain: "Wearing federal red was the safe choice. His enforcers, the **Mazorca**, terrorized anyone who looked like an opponent."
       - type: card
-        text: "Argentines still argue about him. A bloody tyrant, said liberals like **Sarmiento**, a writer and later president. A defender of the country against British and French fleets, say others. Don't raise it at an asado unless you have time."
+        text: "Argentines still argue about him. A bloody tyrant, said liberals like **Sarmiento**, a writer and later president. A defender of the country against British and French fleets, say others. Don't raise it at an [asado] unless you have time."
       - type: card
-        text: "Out on the pampa lived the **gauchos**: expert horsemen who worked cattle, with knife, poncho, mate and guitar. Governments treated them as vagrants and forced many into the army."
+        text: "Out on the pampa lived the **gauchos**: expert horsemen who worked cattle, with knife, poncho, [mate] and guitar. Governments treated them as vagrants and forced many into the army."
       - type: choice
         prompt: "So what turned the gaucho into a national hero?"
         options:

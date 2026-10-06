@@ -13,9 +13,9 @@ classes:
     summary: "The city goes quiet and the road to the sea fills up"
     pages:
       - type: card
-        text: "In January, Buenos Aires is half empty. No traffic, free seats on the subte, and paper signs on shop doors: **“Cerrado por vacaciones.”**"
+        text: "In January, Buenos Aires is half empty. No traffic, free seats on the [subte], and paper signs on shop doors: **“Cerrado por vacaciones.”**"
       - type: choice
-        prompt: "Where did all those porteños go?"
+        prompt: "Where did all those [porteños] go?"
         options:
           - "To the mountains in the west"
           - "To the beaches of the Atlantic"
@@ -37,7 +37,7 @@ classes:
       - type: card
         text: "Each town has its own crowd. **Pinamar** and **Cariló** are expensive. **Villa Gesell** is for the young. **Mar del Plata** is for everyone, and its nickname is **La Feliz**: the happy one."
       - type: card
-        text: "The day one quincena ends and the next begins is famous for its traffic. The TV news shows the road to the Costa live, hour by hour."
+        text: "The day one [quincena] ends and the next begins is famous for its traffic. The TV news shows the road to the Costa live, hour by hour."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -46,9 +46,9 @@ classes:
     summary: "The kit, the sellers, the games and the nights"
     pages:
       - type: card
-        text: "The beach kit: a **reposera** (a folding chair), a **sombrilla** (a big umbrella), a **heladerita** (a small box that keeps drinks cold), and of course the termo and the mate."
+        text: "The beach kit: a **reposera** (a folding chair), a **sombrilla** (a big umbrella), a **heladerita** (a small box that keeps drinks cold), and of course the [termo] and the [mate]."
       - type: card
-        text: "A **balneario** is a beach club. There, families rent a **carpa**, a small cloth tent, for the whole summer. Some have had the same carpa for three generations."
+        text: "A **balneario** is a beach club. There, families rent a **carpa**, a small cloth tent, for the whole summer. Some have had the same [carpa] for three generations."
       - type: choice
         prompt: "Sellers walk on the sand all day, shouting. What is the classic thing they sell?"
         options:
@@ -93,7 +93,7 @@ classes:
       - type: card
         text: "They perform at a **corso**: a street closed for the night. Children run around with cans of white foam, and nobody goes home clean."
       - type: card
-        text: "Murga songs make fun of politicians and the news of the year. The last dictatorship took away the carnival holidays. They only came back in 2011."
+        text: "[Murga] songs make fun of politicians and the news of the year. The last dictatorship took away the carnival holidays. They only came back in 2011."
       - type: choice
         prompt: "In the mountain villages of Jujuy, how does carnival begin?"
         options:
@@ -125,7 +125,7 @@ classes:
         correct: 0
         explain: "A school boat stops at each house, like a bus. There is also a shop boat, a doctor boat and a boat that takes the rubbish."
       - type: card
-        text: "A **quinta** is a house outside the city with a garden and a pool. Groups of friends rent one for a single day: asado, pool, football, home at night."
+        text: "A **quinta** is a house outside the city with a garden and a pool. Groups of friends rent one for a single day: [asado], pool, football, home at night."
       - type: choice
         prompt: "For warm sea, Argentines drive to Brazil. One Brazilian city gets so many that shops and menus are in Spanish. Which one?"
         options:

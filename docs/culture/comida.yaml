@@ -15,7 +15,7 @@ classes:
       - type: card
         text: "Argentines eat late. Breakfast is small and sweet, lunch is around one, dinner around **ten**. Book a restaurant for eight and you'll have the waiters all to yourself."
       - type: card
-        text: "What gets everyone through? The **merienda**: around five, a small meal of mate or coffee with toast or **facturas**. Skip it and you'll be starving by eight."
+        text: "What gets everyone through? The **merienda**: around five, a small meal of [mate] or coffee with toast or **facturas**. Skip it and you'll be starving by eight."
       - type: choice
         prompt: "A friend texts: **“Che, ¿venís a tomar unos mates?”** What should you expect?"
         options:
@@ -48,7 +48,7 @@ classes:
         explain: "Among friends, the bill usually gets split evenly. If the gap is big, someone may offer to split it by what each person had."
       - type: card
         chip: "Pro tip"
-        text: "To split the bill evenly, say **“¿Dividimos?”** Putting money together to buy something, like the meat for an asado or a gift, is **hacer una vaquita**."
+        text: "To split the bill evenly, say **“¿Dividimos?”** Putting money together to buy something, like the meat for an [asado] or a gift, is **hacer una vaquita**."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -59,7 +59,7 @@ classes:
       - type: card
         text: "Party for twenty or a lazy Sunday night, the answer is the same: **empanadas**, ordered by the **docena**, the dozen. Half-moons of dough, baked or fried, a different filling in each."
       - type: choice
-        prompt: "A dozen empanadas arrive: four fillings, nothing written on them. How do you tell them apart?"
+        prompt: "A dozen [empanadas] arrive: four fillings, nothing written on them. How do you tell them apart?"
         options:
           - "By the pattern folded into the edge"
           - "By a little dot of color on top"
@@ -99,7 +99,7 @@ classes:
       - type: card
         text: "Then there's the **fugazzeta**: a mountain of onion over cheese. Order it **rellena** and the cheese comes inside the dough too. Careful: a **fugazza** is onion only, no cheese."
       - type: choice
-        prompt: "Porteños often put something on top of their slice of pizza. What is it?"
+        prompt: "[Porteños] often put something on top of their slice of pizza. What is it?"
         options:
           - "A slice of chickpea bread"
           - "A fried egg, runny yolk"
@@ -111,7 +111,7 @@ classes:
       - type: card
         text: "**Avenida Corrientes**, the theater street, is also the pizza street. The famous pizzerías there stay packed until long after the last show."
       - type: choice
-        prompt: "The play just ended and the pizzería is packed. What do porteños do?"
+        prompt: "The play just ended and the pizzería is packed. What do [porteños] do?"
         options:
           - "Eat a slice standing at the counter"
           - "Take a number and wait an hour"
@@ -163,7 +163,7 @@ classes:
       - type: card
         text: "The king of them all is **locro**: white corn, beans, squash and several meats, cooked for hours until it's thick."
       - type: choice
-        prompt: "When do whole neighborhoods cook giant pots of locro?"
+        prompt: "When do whole neighborhoods cook giant pots of [locro]?"
         options:
           - "On national holidays like 25 de mayo"
           - "On the first frost of every winter"
@@ -173,7 +173,7 @@ classes:
       - type: card
         text: "Clubs, parishes and neighbors cook it in pots big enough to bathe in and sell it by the portion. Bring your own **tupper**, and come early."
       - type: card
-        text: "Locro is no immigrant dish. It comes from the Andes, from long before Argentina existed. On the side comes a spicy red sauce of oil, paprika and green onion. Ask: **“¿Tenés picante?”**"
+        text: "[Locro] is no immigrant dish. It comes from the Andes, from long before Argentina existed. On the side comes a spicy red sauce of oil, paprika and green onion. Ask: **“¿Tenés picante?”**"
       - type: card
         text: "The **carbonada** is beef, squash, corn and sweet potato, often with dried peaches. The showstopper version is served inside a whole baked pumpkin."
       - type: choice
@@ -192,7 +192,7 @@ classes:
     summary: "Italian roots, flavors called gustos, and ice cream by the kilo"
     pages:
       - type: card
-        text: "**Helado** here has Italian roots, and Argentines will tell you it's the best outside Italy. Every neighborhood has a **heladería**, open late, and people eat helado even in winter."
+        text: "**Helado** here has Italian roots, and Argentines will tell you it's the best outside Italy. Every neighborhood has a **heladería**, open late, and people eat [helado] even in winter."
       - type: card
         text: "Flavors are called **gustos**, and even the smallest cup gets two. Choosing them is serious business."
       - type: card
@@ -206,9 +206,9 @@ classes:
         correct: 0
         explain: "Helado comes to your door in a foam tub: **un cuarto** (250 g), **medio kilo** or **un kilo**. Any night, any season."
       - type: card
-        text: "A kilo takes up to four gustos, and it's gone before anyone mentions dieting. **Un cuarto** is for one person with self-control."
+        text: "A kilo takes up to four [gustos], and it's gone before anyone mentions dieting. **Un cuarto** is for one person with self-control."
       - type: card
-        text: "A heladería lives or dies by its **dulce de leche**, and the best ones offer it in several versions. With chocolate flakes, it's **dulce de leche granizado**."
+        text: "A [heladería] lives or dies by its **dulce de leche**, and the best ones offer it in several versions. With chocolate flakes, it's **dulce de leche granizado**."
       - type: choice
         prompt: "**Sambayón**, a classic flavor, has a surprising ingredient. What is it?"
         options:
@@ -219,5 +219,5 @@ classes:
         explain: "It's the Italian *zabaione*: egg yolks, sugar and sweet wine. A grown-up flavor."
       - type: card
         chip: "Pro tip"
-        text: "Order a dulce de leche, a sambayón, and one fruit flavor so you can say you ate something healthy."
+        text: "Order a [dulce de leche], a [sambayón], and one fruit flavor so you can say you ate something healthy."
     vocabulary: []

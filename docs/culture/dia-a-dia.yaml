@@ -85,7 +85,7 @@ classes:
     summary: "Long roads, service stations and parking in the city"
     pages:
       - type: card
-        text: "The country is huge. Buenos Aires to Bariloche is about 1,600 km, close to twenty hours by car. Families do it anyway, with a termo and a mate."
+        text: "The country is huge. Buenos Aires to Bariloche is about 1,600 km, close to twenty hours by car. Families do it anyway, with a [termo] and a [mate]."
       - type: choice
         prompt: "On a road between cities, what must every driver do by law, even at noon on a sunny day?"
         options:

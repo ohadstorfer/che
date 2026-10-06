@@ -15,9 +15,9 @@ classes:
       - type: card
         text: "**Dulce de leche** is milk and sugar cooked slowly for hours until thick and brown. On toast, in cakes, straight from the jar with a spoon at midnight."
       - type: card
-        text: "Just don't call it caramel. Caramel is cooked sugar. Dulce de leche is mostly milk, and Argentines will correct you."
+        text: "Just don't call it caramel. Caramel is cooked sugar. [Dulce de leche] is mostly milk, and Argentines will correct you."
       - type: choice
-        prompt: "Legend says dulce de leche was invented by accident in 1829. How?"
+        prompt: "Legend says [dulce de leche] was invented by accident in 1829. How?"
         options:
           - "A maid forgot the milk on the stove"
           - "A soldier left sugar in his canteen"
@@ -25,7 +25,7 @@ classes:
         correct: 0
         explain: "The story goes: a ranch in Cañuelas, the future governor Rosas meeting his rival Lavalle to sign a truce, and a maid so caught up in the drama she forgot the pot."
       - type: card
-        text: "Cute story, almost certainly a legend. Uruguay, Chile, France and others claim dulce de leche too. Uruguay, loudly."
+        text: "Cute story, almost certainly a legend. Uruguay, Chile, France and others claim [dulce de leche] too. Uruguay, loudly."
       - type: card
         text: "At the supermarket, **clásico** is soft, for toast and the spoon. **Repostero** is firmer, for baking: it holds its shape inside alfajores without dripping."
       - type: choice
@@ -46,9 +46,9 @@ classes:
     summary: "Two cookies, dulce de leche in the middle, and a very long trip"
     pages:
       - type: card
-        text: "An **alfajor** is two soft cookies stuck together with a filling, usually dulce de leche, often dipped in chocolate. That's all it is, and the whole country loves it."
+        text: "An **alfajor** is two soft cookies stuck together with a filling, usually [dulce de leche], often dipped in chocolate. That's all it is, and the whole country loves it."
       - type: choice
-        prompt: "Where do the alfajor's name and ancestor come from?"
+        prompt: "Where do the [alfajor]'s name and ancestor come from?"
         options:
           - "Muslim Spain"
           - "Colonial Peru"
@@ -56,11 +56,11 @@ classes:
         correct: 0
         explain: "The name comes from Andalusian Arabic. In al-Ándalus it was a honey, almond and spice sweet, and Andalucía still makes it today. The cookie sandwich came later, in the Americas."
       - type: card
-        text: "The Spanish brought the name across the ocean, and here it became cookies plus dulce de leche. Argentina just, humbly, perfected it."
+        text: "The Spanish brought the name across the ocean, and here it became cookies plus [dulce de leche]. Argentina just, humbly, perfected it."
       - type: card
-        text: "Every region has its own. **De maicena** is the one your abuela makes: crumbly cornstarch cookies, dulce de leche, edges rolled in grated coconut."
+        text: "Every region has its own. **De maicena** is the one your [abuela] makes: crumbly cornstarch cookies, [dulce de leche], edges rolled in grated coconut."
       - type: card
-        text: "**Marplatense**: dipped in chocolate, the kiosco classic. **Santafesino**: crunchy layers, white sugar glaze. **Cordobés**: soft, glazed, often filled with fruit jam."
+        text: "**Marplatense**: dipped in chocolate, the [kiosco] classic. **Santafesino**: crunchy layers, white sugar glaze. **Cordobés**: soft, glazed, often filled with fruit jam."
       - type: choice
         prompt: "Industry estimates count how many alfajores Argentines eat. How many a day?"
         options:
@@ -71,7 +71,7 @@ classes:
         explain: "Estimates start at about six million a day, and some recent ones are much higher. That's at least one for every eight people, every single day."
       - type: card
         chip: "Pro tip"
-        text: "Skipped lunch? Ask for a **triple**: three cookies, two layers of dulce de leche. More alfajor per alfajor."
+        text: "Skipped lunch? Ask for a **triple**: three cookies, two layers of [dulce de leche]. More [alfajor] per [alfajor]."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -102,7 +102,7 @@ classes:
         correct: 0
         explain: "**Havanna**, from Mar del Plata, is the expensive one: the box you bring as a gift."
       - type: card
-        text: "**Jorgito** and **Guaymallén** are the everyday kiosco alfajores: cheap and much loved. Ask a table which alfajor is the best and the argument can last all afternoon."
+        text: "**Jorgito** and **Guaymallén** are the everyday [kiosco] alfajores: cheap and much loved. Ask a table which [alfajor] is the best and the argument can last all afternoon."
       - type: card
         chip: "Did you know?"
         text: "There's even a **Mundial del Alfajor**, held in Buenos Aires. A “world” championship for a snack that almost only Argentina eats. Very Argentine."
@@ -142,7 +142,7 @@ classes:
         text: "Historians debate how much of this story is documented. But it's the one every baker will tell you."
       - type: card
         chip: "Pro tip"
-        text: "Going to a friend's for mate in the afternoon? Stop at the panadería for **una docena de facturas**. Nobody has ever said no."
+        text: "Going to a friend's for [mate] in the afternoon? Stop at the [panadería] for **una docena de facturas**. Nobody has ever said no."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -153,9 +153,9 @@ classes:
       - type: card
         text: "Sunday lunch is over and someone asks the big one: **¿qué hay de postre?** At home or at a **bodegón**, an old-school restaurant, the answer is a homemade classic."
       - type: card
-        text: "**Flan** is egg custard with caramel. Here it rarely comes alone: with dulce de leche, with whipped cream, or both. Both is **mixto**: **“Un flan mixto, por favor.”**"
+        text: "**Flan** is egg custard with caramel. Here it rarely comes alone: with [dulce de leche], with whipped cream, or both. Both is **mixto**: **“Un flan mixto, por favor.”**"
       - type: choice
-        prompt: "The bodegón menu offers **postre vigilante**. What arrives?"
+        prompt: "The [bodegón] menu offers **postre vigilante**. What arrives?"
         options:
           - "Cheese with quince paste"
           - "The long pastry from the bakery"
@@ -175,7 +175,7 @@ classes:
         correct: 0
         explain: "**“Arroz con leche, me quiero casar…”**: rice pudding, I want to get married. It's a circle game. The pudding just opens the song."
       - type: card
-        text: "**Panqueques** here are thin crêpes rolled around dulce de leche. Some parrillas serve them **quemados**, with the sugar burnt crunchy on top."
+        text: "**Panqueques** here are thin crêpes rolled around [dulce de leche]. Some parrillas serve them **quemados**, with the sugar burnt crunchy on top."
       - type: card
         chip: "Pro tip"
         text: "Too full for your host's flan? Say **“un poquito nomás”**, just a little bit. Saying no is not an option."

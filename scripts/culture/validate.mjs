@@ -147,12 +147,43 @@ function appears(es, text) {
   });
 }
 
-export function lint(doc) {
+/** A bold span as the glossary keys it. Kept in step with glossKey in src/lib/culture.ts. */
+export const glossKey = (span) =>
+  span.toLowerCase().replace(/[“”"¡!¿?.,;:…—]/g, ' ').replace(/\s+/g, ' ').trim();
+
+/** docs/culture-glossary.yaml: what bold Spanish means (`words`), and the bold that has nothing to translate (`names`). */
+function readGlossary() {
+  try {
+    const g = parse(readFileSync('docs/culture-glossary.yaml', 'utf8'));
+    return new Set([...Object.keys(g.words ?? {}), ...(g.names ?? [])].map(glossKey));
+  } catch {
+    return null;
+  }
+}
+
+/** Bold she reads before answering that the glossary has never heard of: she can't tap it for its meaning. */
+function unglossed(c, known) {
+  const own = new Set([...(c.vocabulary ?? []), ...(c.glossary ?? [])].map((w) => glossKey(w.es ?? '')));
+  const out = new Set();
+  for (const p of c.pages ?? [])
+    for (const t of [p.text, p.body, p.fun_fact, p.scenario, p.prompt, p.statement])
+      for (const m of (t ?? '').matchAll(/\*\*([^*]+)\*\*|\[([^\]]+)\]/g)) {
+        const span = m[1] ?? m[2];
+        const k = glossKey(span);
+        if (k && !known.has(k) && !own.has(k)) out.add(span);
+      }
+  return [...out];
+}
+
+export function lint(doc, known = readGlossary()) {
   const warnings = [];
   for (const c of doc?.classes ?? []) {
     const at = `class ${c.slug}`;
     const text = taughtText(c.pages ?? []);
     const vocab = c.vocabulary ?? [];
+    if (known)
+      for (const span of unglossed(c, known))
+        warnings.push(`${at}: "${span}" is marked but not in docs/culture-glossary.yaml (add its meaning to words, or list it under names)`);
     for (const v of vocab) {
       if (!str(v.es) || !str(v.en)) continue;
       if (!appears(v.es, text)) warnings.push(`${at}: vocabulary "${v.es}" never appears in the pages (explains don't count)`);
@@ -179,6 +210,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     ? process.argv.slice(2)
     : readdirSync(DIR).filter((f) => f.endsWith('.yaml')).map((f) => join(DIR, f));
   let failed = 0;
+  const known = readGlossary();
   for (const f of files) {
     const doc = parse(readFileSync(f, 'utf8'));
     const errors = validate(doc);
@@ -188,7 +220,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       console.log(`✗ ${f}`);
       for (const e of errors) console.log(`    ${e}`);
     } else console.log(`✓ ${f} — ${n} classes`);
-    for (const w of lint(doc)) console.log(`    ⚠ ${w}`);
+    for (const w of lint(doc, known)) console.log(`    ⚠ ${w}`);
   }
   process.exit(failed ? 1 : 0);
 }

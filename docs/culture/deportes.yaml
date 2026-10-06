@@ -35,9 +35,9 @@ classes:
         correct: 2
         explain: "The government banned pato more than once in the 1800s too. In the 1930s it came back with rules, and nobody gets killed anymore."
       - type: card
-        text: "The Church's order came in 1796, and Buenos Aires banned the game in 1822. Gauchos kept playing anyway, far from the towns."
+        text: "The Church's order came in 1796, and Buenos Aires banned the game in 1822. [Gauchos] kept playing anyway, far from the towns."
       - type: card
-        text: "The truth: most Argentines have never seen a game of pato. Every few years someone asks Congress to make football the national sport, and nothing changes."
+        text: "The truth: most Argentines have never seen a game of [pato]. Every few years someone asks Congress to make football the national sport, and nothing changes."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────
@@ -90,7 +90,7 @@ classes:
         correct: 1
         explain: "It's a yaguareté, a jaguar. On a tour in 1965, a journalist saw it, wrote “Pumas”, and the wrong name stayed forever."
       - type: card
-        text: "Las Leonas won two World Cups and four Olympic medals in a row. Their star, **Luciana Aymar**, was chosen best player in the world eight times."
+        text: "[Las Leonas] won two World Cups and four Olympic medals in a row. Their star, **Luciana Aymar**, was chosen best player in the world eight times."
       - type: choice
         prompt: "One national football team is called **Los Murciélagos**, the bats. Why?"
         options:
@@ -162,7 +162,7 @@ classes:
       - type: card
         text: "The sport of the moment is **pádel**: tennis for four, in a small court with glass walls. Argentina fell in love with it in the 1980s, long before most of Europe."
       - type: choice
-        prompt: "The Argentine **Fernando Belasteguín** was number one in the world at pádel. For how long?"
+        prompt: "The Argentine **Fernando Belasteguín** was number one in the world at [pádel]. For how long?"
         options:
           - "3 years"
           - "8 years"
@@ -173,5 +173,5 @@ classes:
         text: "The club bar has a **metegol**: football on a table, with players on metal bars. One rule everywhere: no spinning the bar. That's **molinete**, and the goal doesn't count."
       - type: card
         chip: "Pro tip"
-        text: "Asking about sport is easy small talk. **“¿Hacés algún deporte?”** Do you do any sport? **“Juego al pádel los martes.”** I play pádel on Tuesdays."
+        text: "Asking about sport is easy small talk. **“¿Hacés algún deporte?”** Do you do any sport? **“Juego al pádel los martes.”** I play [pádel] on Tuesdays."
     vocabulary: []
