@@ -556,6 +556,7 @@ export function recapItems(
       // makes up the production quota.
       if (tooLongToBuild(item.sentence, ladder) && clause === null) continue;
       item.mode = 'sentence_build';
+      item.byEar = undefined;
       if (clause !== null) item.clause = clause;
       production += 1;
     }

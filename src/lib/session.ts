@@ -34,6 +34,7 @@ import {
   rungFor,
   sentenceCap,
   tooLongToBuild,
+  tooLongToHear,
 } from './sentences';
 import { versioned } from './content-cache';
 import { all } from './fetch-all';
@@ -56,6 +57,10 @@ export interface SessionItem {
   /** Set on a build too long to ask for whole: the one clause she rebuilds, by
    *  index. The rest of the sentence is shown around it, already written. */
   clause?: number;
+  /** Set on a gap asked by ear: the recording stands where the English would,
+   *  and she fills the one word. How a sentence too long to rebuild from its
+   *  recording is still listened to. */
+  byEar?: boolean;
   /** Set on the exercise a new form is met in — the intro screen it replaces. */
   introduces?: Form;
   /** Drilled and logged, but never scheduled: padding, or a word a sentence
@@ -182,6 +187,17 @@ function merged(rows: LexiconRows): Form[] {
   return forms;
 }
 
+/** The level of the unit at `order` — the furthest she has got, or the round
+ *  goes. Null before her first unit, or with no course to hand. */
+function cefrAt(course: Awaited<ReturnType<typeof loadCourse>> | null, order: number) {
+  if (!course) return null;
+  const unit = course.units.reduce<(typeof course.units)[number] | null>(
+    (best, u) => (u.course_order <= Math.max(1, order) && (!best || u.course_order > best.course_order) ? u : best),
+    null,
+  );
+  return course.sections.find((s) => s.id === unit?.section_id)?.cefr ?? null;
+}
+
 /** What a round needs of the course beyond her own units (loadLearner). */
 export interface LearnerReach {
   /** course_order of the furthest unit the round may play — a lesson's unit,
@@ -259,6 +275,7 @@ export async function loadLearner(userId: string, reach: LearnerReach = {}): Pro
     placedThrough,
     glue: forms.filter((f) => f.is_glue),
     passed: passedScreens(sentences),
+    cefr: cefrAt(course, Math.max(reached, placedThrough, reach.throughOrder ?? 0)),
   });
   return {
     forms,
@@ -579,6 +596,18 @@ export function sentenceItem(
   // clause the drilled word is in, with the rest shown around it. Every route to
   // a sentence screen comes through here, so the decision is made once.
   const ladder = data.ladder ?? DEFAULT_LADDER;
+  // By ear the ceiling is lower, and it is the level's. A listening screen
+  // planned over it (a lesson's pinned slot) becomes the gap asked by ear; and
+  // a gap of a sentence that long is asked that way half the time, which is
+  // all the listening a long sentence gets.
+  const hearable = !!sentence.audio_path && sentence.tokens.some((t) => t.form_ids.includes(target.id));
+  let byEar: true | undefined;
+  if (mode === 'sentence_listen' && tooLongToHear(sentence, ladder)) {
+    mode = hearable ? gapMode(sentence, ladder) : 'sentence_build';
+    if (hearable) byEar = true;
+  } else if (GAP_MODES.includes(mode) && hearable && tooLongToHear(sentence, ladder) && Math.random() < 0.5) {
+    byEar = true;
+  }
   const clause =
     mode === 'sentence_build' && tooLongToBuild(sentence, ladder)
       ? (buildableClause(sentence, target.id, ladder) ?? undefined)
@@ -590,6 +619,7 @@ export function sentenceItem(
     direction: 'en_to_es',
     sentence,
     clause,
+    byEar,
     group,
     groupStates,
     introduces,
@@ -626,7 +656,7 @@ export function modeForRung(
   // Listening asks for the whole sentence at once, so it can't frame a build of
   // one clause: a sentence that long is rebuilt on the page, with the rest of it
   // in view.
-  if (tooLongToBuild(sentence, ladder)) return 'sentence_build';
+  if (tooLongToBuild(sentence, ladder) || tooLongToHear(sentence, ladder)) return 'sentence_build';
   return sentence.audio_path && Math.random() < 0.5 ? 'sentence_listen' : 'sentence_build';
 }
 
@@ -952,6 +982,9 @@ export function promotedMode(
       // A build of one clause has nowhere above it: the audio says the whole
       // sentence, which is the step she was spared.
       if (item.clause != null) return null;
+      // Nor has a sentence over the listening ceiling: by ear it would be a
+      // bigger step than any other on the ladder.
+      if (item.sentence && tooLongToHear(item.sentence, ladder)) return null;
       return item.sentence?.audio_path ? 'sentence_listen' : null;
     case 'multiple_choice':
     case 'true_false':
@@ -986,7 +1019,7 @@ export function promoteTail<T extends Promotable>(
       mode === 'sentence_build' && item.sentence && tooLongToBuild(item.sentence, ladder)
         ? (buildableClause(item.sentence, item.form.id, ladder) ?? undefined)
         : undefined;
-    return { ...item, mode, direction, clause, promoted: true };
+    return { ...item, mode, direction, clause, byEar: undefined, promoted: true };
   });
   return { queue: next, promoted };
 }

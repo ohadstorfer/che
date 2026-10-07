@@ -306,6 +306,11 @@ export interface Ladder {
   capShift: number;
   /** Tiles a build may ask her to order at once. */
   buildTiles: number;
+  /** Words a listening screen may ask her to rebuild from the recording alone
+   *  — set by the level she is at, not by how much she has played. */
+  listenTiles: number;
+  /** Whether a two-speaker exchange may be asked by ear. */
+  listenDialogues: boolean;
   /** All-correct first tries that promote the rest of a round; null = never. */
   tailAfter: number | null;
   /** course_order of the last unit a placement test skipped; 0 = none. */
@@ -343,6 +348,21 @@ export const BUILD_TILES_STEP = 10;
  *  three, with nothing between them, is a shuffle. */
 export const BUILD_CLAUSE_MAX = 2;
 
+// Rebuilding a sentence from its recording is harder than rebuilding it from
+// its English: she holds every word in her head, and nothing is on the page.
+// The build ceiling grows with every screen she passes, so a few units in it
+// let an eight-word, two-speaker exchange through to a beginner by ear. The
+// listening ceiling is the level's own, and below B1 a dialogue is never asked
+// whole. What is over it is still heard: the gap is asked by ear instead
+// (session.ts), one word out of a sentence she can read along with.
+/** Words a listening build asks for at most, by the level she has reached. */
+export const LISTEN_TILES: Record<string, number> = { A1: 5, A2: 7, B1: 9, B2: 12 };
+const LISTEN_TILES_TOP = 14;
+export const listenTileCeiling = (cefr: string | null | undefined) =>
+  LISTEN_TILES[String(cefr ?? 'A1').slice(0, 2).toUpperCase()] ?? LISTEN_TILES_TOP;
+/** From here on a two-speaker exchange may be asked by ear. */
+export const listensToDialogues = (cefr: string | null | undefined) => !/^A/i.test(String(cefr ?? 'A1'));
+
 export const buildTileCeiling = (passed: number, offset: LadderOffset = 0) =>
   Math.max(
     BUILD_TILES_MIN,
@@ -358,6 +378,8 @@ export const DEFAULT_LADDER: Ladder = {
   settledDays: 7,
   capShift: 0,
   buildTiles: BUILD_TILES_MIN,
+  listenTiles: LISTEN_TILES.A1,
+  listenDialogues: false,
   tailAfter: 6,
   placedThrough: 0,
   unlockedGlue: new Set(),
@@ -383,7 +405,8 @@ export function ladderFor(
     placedThrough = 0,
     glue = [],
     passed = 0,
-  }: { placedThrough?: number; glue?: { id: string; unit_order: number }[]; passed?: number } = {},
+    cefr = null,
+  }: { placedThrough?: number; glue?: { id: string; unit_order: number }[]; passed?: number; cefr?: string | null } = {},
 ): Ladder {
   const byOffset = {
     [-1]: { rungGapAt: 1, rungBuildAt: 3, gapTilesAt: 5, gapTypedAt: 8, settledDays: 10, capShift: -1, tailAfter: null },
@@ -394,6 +417,8 @@ export function ladderFor(
     offset,
     ...byOffset,
     buildTiles: buildTileCeiling(passed, offset),
+    listenTiles: listenTileCeiling(cefr),
+    listenDialogues: listensToDialogues(cefr),
     placedThrough,
     unlockedGlue: new Set(placedThrough > 0 ? glue.filter((g) => g.unit_order <= placedThrough).map((g) => g.id) : []),
   };
@@ -470,6 +495,13 @@ export const buildTilesOf = (s: Pick<Sentence, 'tokens'>) =>
  *  too many tiles for where she is, or more clauses than anyone builds. */
 export const tooLongToBuild = (s: Pick<Sentence, 'tokens'>, ladder: Ladder = DEFAULT_LADDER) =>
   buildTilesOf(s) > ladder.buildTiles || clauseCountOf(s) > BUILD_CLAUSE_MAX;
+
+/** Two people talking: each turn opens on a dash. */
+export const isDialogue = (s: Pick<Sentence, 'tokens'>) => s.tokens.filter((t) => t.surface.startsWith('—')).length >= 2;
+
+/** Whether the whole sentence is more than she is asked to rebuild by ear. */
+export const tooLongToHear = (s: Pick<Sentence, 'tokens'>, ladder: Ladder = DEFAULT_LADDER) =>
+  buildTilesOf(s) > ladder.listenTiles || (isDialogue(s) && !ladder.listenDialogues);
 
 /** The tiles a build of one clause would put on the table. */
 export const clauseTileCount = (s: Pick<Sentence, 'tokens'>, clause: number) => {

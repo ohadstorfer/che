@@ -1958,6 +1958,8 @@ function SentenceGap({
 }) {
   const sentence = item.sentence!;
   const target = item.form;
+  // By ear the recording asks the question: the English waits for the verdict.
+  const byEar = !!item.byEar && !!sentence.audio_path;
   const words = useWordPopover(lookupWith(lexicon, allForms));
   const [index] = useState(() => tokenIndexOf(sentence, target.id));
   const [options] = useState(() =>
@@ -1985,7 +1987,7 @@ function SentenceGap({
 
   return (
     <Frame
-      prompt={item.isRetry ? '🔁 Complete the sentence' : 'Complete the sentence'}
+      prompt={`${item.isRetry ? '🔁 ' : ''}${byEar ? 'Listen and complete the sentence' : 'Complete the sentence'}`}
       verdict={verdict}
       canCheck={fill === 'typed' ? !!typed : !!chosen}
       onCheck={check}
@@ -1999,18 +2001,22 @@ function SentenceGap({
       {/* The English is what she is asked, so it is what Mora says. The Spanish
           sits under it on its own ruled line, the way a build lays out its
           answer: this is the sentence she is completing, not reading. */}
-      <SpeechBubble>
-        <View style={styles.bubbleRow}>
-          <View style={styles.bubbleText}>
-            <Text style={styles.bubblePhraseEn}>{sentence.en}</Text>
+      {byEar ? (
+        <AudioPad path={sentence.audio_path!} />
+      ) : (
+        <SpeechBubble>
+          <View style={styles.bubbleRow}>
+            <View style={styles.bubbleText}>
+              <Text style={styles.bubblePhraseEn}>{sentence.en}</Text>
+            </View>
           </View>
-        </View>
-      </SpeechBubble>
+        </SpeechBubble>
+      )}
       <View style={styles.gapLine}>
         {/* Not before she answers — the recording says the missing word. Once
             the verdict is in it gives nothing away and is worth the most:
             she hears the sentence whole, with the word she just chose in it. */}
-        {verdict && sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
+        {verdict && sentence.audio_path && !byEar ? <PlayButton path={sentence.audio_path} /> : null}
         <SentenceLine
           sentence={sentence}
           onWord={canTap ? words.open : undefined}
@@ -2145,7 +2151,7 @@ function SentenceBuild({
   // the tiles, the marking and the blame all narrow together.
   const asked = item.clause != null && side === 'es' ? clauseOf(sentence, item.clause) : sentence;
   const words = useWordPopover(lookupWith(lexicon, allForms));
-  const [{ tiles }] = useState(() => sentenceTiles(asked, allForms, side));
+  const [{ tiles }] = useState(() => sentenceTiles(asked, allForms, side, byEar));
   const [used, setUsed] = useState<number[]>([]);
   const [verdict, setVerdict] = useState<Verdict>(null);
 

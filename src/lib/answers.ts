@@ -584,6 +584,7 @@ export function gapOptions(sentence: Sentence, target: Form, allForms: Form[], c
 
 /** How many spare tiles a bank carries beyond the answer. */
 const DECOYS = 4;
+const DECOYS_BY_EAR = 2;
 
 /** Punctuation a tile never carries: the Spanish side gets clean surfaces from
  *  its tokens, and the English has to be cleaned the same way or its commas
@@ -617,7 +618,7 @@ function englishTiles(sentence: Sentence): string[] {
  * in. A spare tile never shares a meaning with a word of the sentence: "bueno"
  * next to "Dale, chau." would be a second right answer.
  */
-export function sentenceTiles(sentence: Sentence, allForms: Form[], side: 'es' | 'en' = 'es') {
+export function sentenceTiles(sentence: Sentence, allForms: Form[], side: 'es' | 'en' = 'es', byEar = false) {
   // The English side has no tokens to break up and no forms of its own: its
   // tiles are its words, and its spares are other words of English the course
   // has glossed, which is the only pool there is.
@@ -637,7 +638,10 @@ export function sentenceTiles(sentence: Sentence, allForms: Form[], side: 'es' |
     const key = norm(f.form);
     if (key && !taken.has(key) && !spare.has(key)) spare.set(key, f.form);
   }
-  const decoys = [...spare.values()].slice(0, Math.min(DECOYS, Math.max(2, Math.ceil(answer.length / 2))));
+  // By ear the work is hearing the words, not ruling others out: two spares
+  // keep it from being a jigsaw, and one is enough beside a two-word answer.
+  const most = byEar ? Math.min(DECOYS_BY_EAR, Math.max(1, answer.length - 1)) : Math.min(DECOYS, Math.max(2, Math.ceil(answer.length / 2)));
+  const decoys = [...spare.values()].slice(0, most);
   return { answer, tiles: shuffle([...answer, ...decoys]) };
 }
 

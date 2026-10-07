@@ -15,6 +15,7 @@ import {
   rungFor,
   sentenceCap,
   tooLongToBuild,
+  tooLongToHear,
 } from '../../../src/lib/sentences.ts';
 import { clauseOf } from '../../../src/lib/answers.ts';
 import { exercisesFor } from '../../../src/lib/session.ts';
@@ -141,4 +142,17 @@ test('a clause narrows the sentence it is cut from', () => {
   // An alternative that cuts the same way lends its matching piece.
   const alt = { ...chain, es_alt: ['Che, ¿vos sos? ¡Hola! ¿Todo bien?', '¿Sos vos?'] };
   assert.deepEqual(clauseOf(alt, 0).es_alt, ['Che, ¿vos sos?']);
+});
+
+test('by ear the ceiling is the level, not how much she has played', () => {
+  const a1 = ladderFor(0, { passed: 9999, cefr: 'A1.1' });
+  const b1 = ladderFor(0, { passed: 9999, cefr: 'B1.2' });
+  const order = built('—¿Una cerveza o un jugo? —Una cerveza, gracias.');
+  assert.ok(!tooLongToBuild(order, a1), 'eight tiles she may build on the page');
+  assert.ok(tooLongToHear(order, a1), 'and never by ear at A1');
+  assert.ok(!tooLongToHear(built('¿Sos de acá?'), a1));
+  assert.ok(tooLongToHear(built('Yo soy de acá y vos no'), a1), 'six words is one over');
+  assert.ok(tooLongToHear(built('—¿Sos vos? —Sí.'), a1), 'a short exchange is still two voices');
+  assert.ok(!tooLongToHear(order, b1), 'B1 hears it whole');
+  assert.ok(tooLongToHear(order, ladderFor(0, { passed: 9999 })), 'with no level to go by, the lowest');
 });
