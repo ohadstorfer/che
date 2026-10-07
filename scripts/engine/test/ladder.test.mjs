@@ -14,6 +14,7 @@ import {
   ladderOffset,
   rungFor,
   sentenceCap,
+  buildsByClause,
   tooLongToBuild,
   tooLongToHear,
 } from '../../../src/lib/sentences.ts';
@@ -155,4 +156,13 @@ test('by ear the ceiling is the level, not how much she has played', () => {
   assert.ok(tooLongToHear(built('—¿Sos vos? —Sí.'), a1), 'a short exchange is still two voices');
   assert.ok(!tooLongToHear(order, b1), 'B1 hears it whole');
   assert.ok(tooLongToHear(order, ladderFor(0, { passed: 9999 })), 'with no level to go by, the lowest');
+});
+
+test('a dialogue is built one speaker\'s line at a time, however short it is', () => {
+  const order = built('—¿Un café? —Sí, gracias.');
+  const far = ladderFor(0, { passed: 9999, cefr: 'B2.1' });
+  assert.ok(!tooLongToBuild(order, far));
+  assert.ok(buildsByClause(order, far), 'four tiles, and still not one pile');
+  assert.ok(!buildsByClause(built('¿Un café? Sí, gracias.'), far), 'one voice saying both is one build');
+  assert.equal(buildableClause(order, 'f3', far), 1, 'the line the drilled word is in');
 });

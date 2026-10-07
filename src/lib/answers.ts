@@ -68,7 +68,9 @@ const sameWords = (a: string[], b: string[]) => a.length === b.length && a.every
 // Sentence tokens
 // ---------------------------------------------------------------------------
 
-const LEAD = /^[¿¡"“«(]+/u;
+// The dash that opens a speaker's turn is punctuation like any other: left on
+// the word it made a tile of "—Una" and a blank's answer of "—¿Una".
+const LEAD = /^[—¿¡"“«(]+/u;
 const TAIL = /[.,!?;:…"”»)]+$/u;
 
 /** Punctuation before a token's word — Spanish opens questions: "¿". */
@@ -101,6 +103,30 @@ export const outOfSentence = (tokens: SentenceToken[], index: number) => {
   const isName = t.form_ids.length === 0 && !t.glue;
   return startsSentence(tokens, index) && !isName ? word.charAt(0).toLocaleLowerCase('es') + word.slice(1) : word;
 };
+
+/**
+ * Whose turn each token is in: a dialogue is written as one sentence with a
+ * dash opening each speaker's line, "—¿Un café? —Sí, gracias." → [0, 0, 1, 1].
+ * All zeros for a sentence one person says.
+ */
+export function turnsOf(tokens: Pick<SentenceToken, 'surface'>[]): number[] {
+  let turn = -1;
+  return tokens.map((t, i) => {
+    if (t.surface.startsWith('—') || i === 0) turn++;
+    return turn;
+  });
+}
+
+/** How many speakers' lines a sentence holds. */
+export const turnCount = (tokens: Pick<SentenceToken, 'surface'>[]) => (turnsOf(tokens).at(-1) ?? 0) + 1;
+
+/** A dialogue's text cut into its turns, dashes off — its English, which has
+ *  no tokens. Null when it doesn't break into as many turns as the Spanish. */
+export function turnsOfText(text: string, count: number): string[] | null {
+  if (count < 2) return null;
+  const parts = text.split('—').map((p) => p.trim()).filter(Boolean);
+  return parts.length === count ? parts : null;
+}
 
 /** Where a form sits in the sentence; -1 if it is not there. */
 export const tokenIndexOf = (s: Sentence, formId: string) => s.tokens.findIndex((t) => t.form_ids.includes(formId));
@@ -589,7 +615,7 @@ const DECOYS_BY_EAR = 2;
 /** Punctuation a tile never carries: the Spanish side gets clean surfaces from
  *  its tokens, and the English has to be cleaned the same way or its commas
  *  would spell out the word order. */
-const TILE_PUNCT = /[.,!?¿¡;:()"“”«»]/gu;
+const TILE_PUNCT = /[.,!?¿¡;:()"“”«»—]/gu;
 
 /**
  * The English of a sentence, as tiles. Punctuation comes off, and a word that

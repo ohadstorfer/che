@@ -8,6 +8,7 @@ import {
   pickIntroSentence,
   pickReviewSentences,
   rungFor,
+  buildsByClause,
   tooLongToBuild,
   loadSentencesById,
 } from './sentences';
@@ -549,7 +550,7 @@ export function recapItems(
     // A typed gap is already a production screen — it is counted above, and
     // rewriting it into a build would spend the quota twice.
     if (UPGRADABLE_GAPS.includes(item.mode) && item.sentence && !hasLockedGlue(item.sentence, seen, ladder)) {
-      const clause = tooLongToBuild(item.sentence, ladder)
+      const clause = buildsByClause(item.sentence, ladder)
         ? buildableClause(item.sentence, item.form.id, ladder)
         : null;
       // Nothing small enough to build: this one stays a gap and the next item

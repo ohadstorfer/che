@@ -503,6 +503,12 @@ export const isDialogue = (s: Pick<Sentence, 'tokens'>) => s.tokens.filter((t) =
 export const tooLongToHear = (s: Pick<Sentence, 'tokens'>, ladder: Ladder = DEFAULT_LADDER) =>
   buildTilesOf(s) > ladder.listenTiles || (isDialogue(s) && !ladder.listenDialogues);
 
+/** Whether a build asks for one clause with the rest written out: a sentence
+ *  over the ceiling, and any dialogue — she answers one speaker's line, she
+ *  doesn't write both sides of a conversation from one pile of tiles. */
+export const buildsByClause = (s: Pick<Sentence, 'tokens'>, ladder: Ladder = DEFAULT_LADDER) =>
+  tooLongToBuild(s, ladder) || isDialogue(s);
+
 /** The tiles a build of one clause would put on the table. */
 export const clauseTileCount = (s: Pick<Sentence, 'tokens'>, clause: number) => {
   const of = clausesOfSentence(s);

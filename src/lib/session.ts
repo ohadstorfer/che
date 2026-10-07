@@ -33,6 +33,7 @@ import {
   pickReviewSentences,
   rungFor,
   sentenceCap,
+  buildsByClause,
   tooLongToBuild,
   tooLongToHear,
 } from './sentences';
@@ -609,7 +610,7 @@ export function sentenceItem(
     byEar = true;
   }
   const clause =
-    mode === 'sentence_build' && tooLongToBuild(sentence, ladder)
+    mode === 'sentence_build' && buildsByClause(sentence, ladder)
       ? (buildableClause(sentence, target.id, ladder) ?? undefined)
       : undefined;
   return {
@@ -1016,7 +1017,7 @@ export function promoteTail<T extends Promotable>(
       mode === 'word_build' || mode === 'typing' ? 'en_to_es' : item.direction;
     // Promoting into a build inherits the same clause ceiling a planned one gets.
     const clause =
-      mode === 'sentence_build' && item.sentence && tooLongToBuild(item.sentence, ladder)
+      mode === 'sentence_build' && item.sentence && buildsByClause(item.sentence, ladder)
         ? (buildableClause(item.sentence, item.form.id, ladder) ?? undefined)
         : undefined;
     return { ...item, mode, direction, clause, byEar: undefined, promoted: true };

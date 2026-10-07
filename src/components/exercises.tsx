@@ -52,6 +52,9 @@ import {
   meaningOf,
   type Note,
   startsSentence,
+  turnCount,
+  turnsOf,
+  turnsOfText,
 } from '@/lib/answers';
 import type { AnswerExtra, QueueItem } from '@/lib/round';
 import { DEFAULT_LADDER, type Ladder, RUNG_BUILD_AT } from '@/lib/sentences';
@@ -499,9 +502,17 @@ const SPEAKER_HEIGHT = 100;
 const TAIL = 11;
 const TAIL_RIM = 2;
 
-export function SpeechBubble({ children }: { children: React.ReactNode }) {
+export function SpeechBubble({
+  children,
+  replies,
+}: {
+  children: React.ReactNode;
+  /** The other speaker's lines, when what is said is a dialogue: each in a
+   *  bubble of its own on the far side, the way a chat lays two people out. */
+  replies?: React.ReactNode[];
+}) {
   const [speaker] = useState(() => SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
-  return (
+  const said = (
     <View style={styles.speechRow}>
       <Image
         source={speaker}
@@ -517,6 +528,56 @@ export function SpeechBubble({ children }: { children: React.ReactNode }) {
         <View style={[styles.tail, styles.tailFill]} pointerEvents="none" />
       </View>
     </View>
+  );
+  if (!replies?.length) return said;
+  return (
+    <View style={styles.dialogue}>
+      {said}
+      {replies.map((reply, i) => (
+        <View key={i} style={styles.replyWrap}>
+          <Panel style={[styles.bubble, styles.replyBubble]}>{reply}</Panel>
+          <View style={[styles.tail, styles.replyTail]} pointerEvents="none" />
+        </View>
+      ))}
+    </View>
+  );
+}
+
+/** A dialogue's English, one bubble a speaker; plain when it is one voice. */
+function EnglishBubble({ sentence }: { sentence: Sentence }) {
+  const turns = turnsOfText(sentence.en, turnCount(sentence.tokens));
+  const line = (text: string) => (
+    <View style={styles.bubbleRow}>
+      <View style={styles.bubbleText}>
+        <Text style={styles.bubblePhraseEn}>{text}</Text>
+      </View>
+    </View>
+  );
+  const replies = turns?.slice(1).map((text, i) => (
+    <Text key={i} style={styles.bubblePhraseEn}>
+      {text}
+    </Text>
+  ));
+  return <SpeechBubble replies={replies}>{line(turns ? turns[0] : sentence.en)}</SpeechBubble>;
+}
+
+/** A sentence read in a bubble: a dialogue gets one a speaker. */
+function SpanishBubble({ sentence, ...line }: React.ComponentProps<typeof SentenceLine>) {
+  const turns = turnCount(sentence.tokens);
+  const first = (
+    <View style={styles.bubbleRow}>
+      {sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
+      <SentenceLine sentence={sentence} {...line} turn={turns > 1 ? 0 : undefined} />
+    </View>
+  );
+  if (turns < 2) return <SpeechBubble>{first}</SpeechBubble>;
+  return (
+    <SpeechBubble
+      replies={Array.from({ length: turns - 1 }, (_, i) => (
+        <SentenceLine key={i} sentence={sentence} {...line} turn={i + 1} />
+      ))}>
+      {first}
+    </SpeechBubble>
   );
 }
 
@@ -547,6 +608,10 @@ function PromptBlock({ form, side }: { form: Form; side: 'es' | 'en' }) {
     </SpeechBubble>
   );
 }
+
+/** A dialogue offered as an answer: a line a speaker, the dashes off. */
+const turnLines = (label: string) =>
+  label.startsWith('—') ? label.split('—').map((p) => p.trim()).filter(Boolean).join('\n') : label;
 
 export function Choices({
   options,
@@ -592,7 +657,7 @@ export function Choices({
                 right && { color: colors.success, ...font.body[800] },
                 wrong && { color: colors.danger },
               ]}>
-              {opt.label}
+              {turnLines(opt.label)}
             </Text>
           </Pressable>
         );
@@ -807,11 +872,11 @@ function TrueFalse({
           { label: 'Yes', value: true, icon: 'checkmark' as const },
         ].map((opt) => (
           <Pressable
-            key={opt.label}
+            key={turnLines(opt.label)}
             disabled={verdict !== null}
             onPress={() => choose(opt.value)}
             accessibilityRole="button"
-            accessibilityLabel={opt.label}
+            accessibilityLabel={turnLines(opt.label)}
             accessibilityState={{ selected: picked === opt.value, disabled: verdict !== null }}
             style={({ pressed }) => [
               styles.bigChoice,
@@ -830,7 +895,7 @@ function TrueFalse({
                 styles.bigChoiceText,
                 { color: picked === opt.value ? colors.ink : colors.muted },
               ]}>
-              {opt.label}
+              {turnLines(opt.label)}
             </Text>
           </Pressable>
         ))}
@@ -1690,8 +1755,12 @@ export function SentenceLine({
   blank,
   onWord,
   tappable,
+  turn,
 }: {
   sentence: Sentence;
+  /** One speaker's line of a dialogue, by index, without its dash — for a
+   *  bubble of its own. Left out, a dialogue is laid out a line a speaker. */
+  turn?: number;
   /** Form id of the word to mark as new. */
   mark?: string;
   /** Tapping a word asks for its meaning, with where the word sits on screen
@@ -1711,15 +1780,23 @@ export function SentenceLine({
   const tapWord = (i: number, formId: string) =>
     measureAnchor(nodes.current[i], (a) => a && onWord?.(formId, a, sentence.tokens[i]?.gloss));
   const canTap = (id: string) => !!onWord && (tappable?.(id) ?? true);
+  const turns = turnsOf(sentence.tokens);
+  const rows = turn != null ? [turn] : [...new Set(turns)];
+  // In a bubble of its own the line needs no dash to say whose it is.
+  const shown = (text: string) => (turn != null ? text.replace(/^—\s*/, '') : text);
 
   return (
-    <View style={styles.bubbleText}>
-      <View style={styles.tokenRow}>
+    // A reply's bubble is as wide as what is said in it, so its line can't
+    // be the one that stretches.
+    <View style={turn ? styles.replyText : styles.bubbleText}>
+      {rows.map((row) => (
+      <View key={row} style={styles.tokenRow}>
         {sentence.tokens.map((t, i) => {
+          if (turns[i] !== row) return null;
           if (blank && i === blank.index) {
             // The blank keeps the word's punctuation on both sides of it —
             // Spanish opens a question as well as closing it: "¿____?".
-            const head = tokenHead(t);
+            const head = shown(tokenHead(t));
             const tail = tokenTail(t);
             return (
               <View key={i} style={[styles.tokenRow, styles.tokenTight]}>
@@ -1766,7 +1843,7 @@ export function SentenceLine({
                   { transform: [{ scale: pressed ? 0.96 : 1 }] },
                   webPress,
                 ]}>
-                <Text style={[styles.bubblePhrase, styles.tokenNewText]}>{t.surface}</Text>
+                <Text style={[styles.bubblePhrase, styles.tokenNewText]}>{shown(t.surface)}</Text>
               </Pressable>
             );
           }
@@ -1787,17 +1864,18 @@ export function SentenceLine({
                 hitSlop={6}
                 accessibilityHint="Shows what this word means"
                 style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.96 : 1 }] }, webPress]}>
-                <Text style={[styles.bubblePhrase, styles.tokenPeek]}>{t.surface}</Text>
+                <Text style={[styles.bubblePhrase, styles.tokenPeek]}>{shown(t.surface)}</Text>
               </Pressable>
             );
           }
           return (
             <Text key={i} style={styles.bubblePhrase}>
-              {t.surface}
+              {shown(t.surface)}
             </Text>
           );
         })}
       </View>
+      ))}
     </View>
   );
 }
@@ -1896,20 +1974,15 @@ function SentenceIntro({
       onContinue={() =>
         onAnswered(verdict?.correct ? [] : [(word ?? item.form).id], { hinted: words.peeked })
       }>
-      <SpeechBubble>
-        <View style={styles.bubbleRow}>
-          {/* The Spanish is already on screen and the answer is its English, so
-              hearing it gives nothing away — it binds the sound to the spelling,
-              which is the whole reason the sentence is read rather than shown. */}
-          {sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
-          <SentenceLine
-            sentence={sentence}
-            mark={word?.id}
-            onWord={word || canTap ? words.open : undefined}
-            tappable={tappable}
-          />
-        </View>
-      </SpeechBubble>
+      {/* The Spanish is already on screen and the answer is its English, so
+          hearing it gives nothing away — it binds the sound to the spelling,
+          which is the whole reason the sentence is read rather than shown. */}
+      <SpanishBubble
+        sentence={sentence}
+        mark={word?.id}
+        onWord={word || canTap ? words.open : undefined}
+        tappable={tappable}
+      />
       <WordBubble state={words.showing} onClose={words.close} />
       {word && !words.peeked.length ? (
         <Text style={styles.peekHint}>Tap the marked word to see what it means</Text>
@@ -2004,13 +2077,7 @@ function SentenceGap({
       {byEar ? (
         <AudioPad path={sentence.audio_path!} />
       ) : (
-        <SpeechBubble>
-          <View style={styles.bubbleRow}>
-            <View style={styles.bubbleText}>
-              <Text style={styles.bubblePhraseEn}>{sentence.en}</Text>
-            </View>
-          </View>
-        </SpeechBubble>
+        <EnglishBubble sentence={sentence} />
       )}
       <View style={styles.gapLine}>
         {/* Not before she answers — the recording says the missing word. Once
@@ -2109,7 +2176,7 @@ function GapBank({
                 right && { color: colors.success },
                 wrong && { color: colors.danger },
               ]}>
-              {opt.label}
+              {turnLines(opt.label)}
             </Text>
           </Pressable>
         );
@@ -2198,22 +2265,11 @@ function SentenceBuild({
         // place is one tap away. Losing both on the harder half of a coin
         // flip would make the same rung two different exercises.
         <>
-          <SpeechBubble>
-            <View style={styles.bubbleRow}>
-              {sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
-              <SentenceLine sentence={sentence} onWord={canTap ? words.open : undefined} />
-            </View>
-          </SpeechBubble>
+          <SpanishBubble sentence={sentence} onWord={canTap ? words.open : undefined} />
           <WordBubble state={words.showing} onClose={words.close} />
         </>
       ) : (
-        <SpeechBubble>
-          <View style={styles.bubbleRow}>
-            <View style={styles.bubbleText}>
-              <Text style={styles.bubblePhraseEn}>{sentence.en}</Text>
-            </View>
-          </View>
-        </SpeechBubble>
+        <EnglishBubble sentence={sentence} />
       )}
       {item.clause != null && side === 'es' ? <ClauseContext es={sentence.es} clause={item.clause} /> : null}
       <TileBuilder tiles={tiles} used={used} setUsed={setUsed} locked={verdict !== null} ruled />
@@ -2228,17 +2284,32 @@ function SentenceBuild({
  * the exercise this replaces.
  */
 function ClauseContext({ es, clause }: { es: string; clause: number }) {
+  // A dialogue keeps a line a speaker, so the part she owes sits where its
+  // speaker says it: under the question, or over the answer.
+  const parts = clausesOf(es);
+  const lines: number[][] = [];
+  parts.forEach((part, i) => {
+    if (i === 0 || part.startsWith('—')) lines.push([i]);
+    else lines.at(-1)!.push(i);
+  });
   return (
-    <View style={styles.clauseLine}>
-      {clausesOf(es).map((part, i) =>
-        i === clause ? (
-          <View key={i} style={styles.clauseSlot} />
-        ) : (
-          <Text key={i} style={styles.clauseWritten}>
-            {part}
-          </Text>
-        ),
-      )}
+    <View style={styles.clauseLines}>
+      {lines.map((line, n) => (
+        <View key={n} style={styles.clauseLine}>
+          {line.map((i) =>
+            i === clause ? (
+              <View key={i} style={styles.clauseRow}>
+                {parts[i].startsWith('—') ? <Text style={styles.clauseWritten}>—</Text> : null}
+                <View style={styles.clauseSlot} />
+              </View>
+            ) : (
+              <Text key={i} style={styles.clauseWritten}>
+                {parts[i]}
+              </Text>
+            ),
+          )}
+        </View>
+      ))}
     </View>
   );
 }
@@ -2251,7 +2322,9 @@ const styles = StyleSheet.create({
   // The sentence around a clause build: what is already written sits in the
   // ink of a finished sentence, and the part she owes is an empty rule of the
   // same height, so the line reads as one sentence with a hole in it.
+  clauseLines: { gap: 4 },
   clauseLine: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 8 },
+  clauseRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   clauseWritten: { ...font.display[700], fontSize: 20, lineHeight: 30, color: colors.ink },
   clauseSlot: {
     width: 72,
@@ -2317,6 +2390,20 @@ const styles = StyleSheet.create({
   bubbleWrap: { flex: 1 },
   bubble: { paddingVertical: 16, paddingHorizontal: 16, borderRadius: radius.md + 4 },
   bubbleRow: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  // The second speaker: a bubble on the far side, in the primary's wash so the
+  // two voices read apart at a glance, its tail pointing off to the right.
+  dialogue: { gap: 10 },
+  replyWrap: { alignSelf: 'flex-end', maxWidth: '82%', marginRight: TAIL },
+  replyBubble: { backgroundColor: colors.primarySoft },
+  replyText: { gap: 2 },
+  replyTail: {
+    right: -TAIL,
+    marginTop: -TAIL,
+    borderTopWidth: TAIL,
+    borderBottomWidth: TAIL,
+    borderLeftWidth: TAIL,
+    borderLeftColor: colors.primarySoft,
+  },
   bubbleText: { flex: 1, gap: 2 },
   // The apex sits at the element's left edge and halfway down its height, so
   // `top: 50%` with a matching negative margin points it at her mouth whatever
