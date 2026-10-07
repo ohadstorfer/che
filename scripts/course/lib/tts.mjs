@@ -164,24 +164,55 @@ export const CARRIER = {
  * figure to plan a recording budget from.
  */
 export async function synthesize({ text, voice, key, fetchImpl = fetch }) {
-  const res = await fetchImpl(`${API}/text-to-speech/${voice.provider_id}?output_format=mp3_44100_128`, {
-    method: 'POST',
-    headers: { 'xi-api-key': key, 'content-type': 'application/json' },
-    body: JSON.stringify({
-      text: spoken(text),
-      model_id: voice.model,
-      ...CARRIER,
-      voice_settings: { stability: 0.85, similarity_boost: 0.85, style: 0, use_speaker_boost: true },
-    }),
-  });
-  if (!res.ok) {
-    const detail = await res.text().catch(() => '');
-    throw new Error(`elevenlabs ${res.status}: ${detail.slice(0, 300)}`);
+  let best = null;
+  let cost = 0;
+  for (const body of takes(text)) {
+    const res = await fetchImpl(`${API}/text-to-speech/${voice.provider_id}?output_format=mp3_44100_128`, {
+      method: 'POST',
+      headers: { 'xi-api-key': key, 'content-type': 'application/json' },
+      body: JSON.stringify({
+        ...body,
+        model_id: voice.model,
+        voice_settings: { stability: 0.85, similarity_boost: 0.85, style: 0, use_speaker_boost: true },
+      }),
+    });
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      throw new Error(`elevenlabs ${res.status}: ${detail.slice(0, 300)}`);
+    }
+    cost += Number(res.headers.get('character-cost')) || 0;
+    const mp3 = Buffer.from(await res.arrayBuffer());
+    if (!best || mp3.length > best.length) best = mp3;
+    if (best.length >= MIN_BYTES) break;
   }
-  return {
-    mp3: Buffer.from(await res.arrayBuffer()),
-    cost: Number(res.headers.get('character-cost')) || 0,
-  };
+  return { mp3: best, cost };
+}
+
+/**
+ * The shortest clip that can be a word: 0.7 s at 128 kbps. The shortest real
+ * ones in the course ("él", "de", "una") are just over it.
+ */
+export const MIN_BYTES = 11000;
+
+/**
+ * The ways to ask for a line, in the order they are tried.
+ *
+ * `eleven_v4_turbo` answers a few dozen words with a fifth of a second of
+ * nothing, the same way every time: "inglés", "tono", "música", "audio",
+ * "guitarra", "río", "te". Most are words about sound, and inside the carrier
+ * the model seems to take them as a direction rather than a line. A clip
+ * shorter than a word can be is asked for again — capitalised, which is enough
+ * for nearly all of them, and then with no carrier, which has never failed —
+ * and the longest take is kept. A normal line stops at the first.
+ */
+function takes(text) {
+  const line = spoken(text);
+  const capital = line.charAt(0).toLocaleUpperCase('es') + line.slice(1);
+  return [
+    { text: line, ...CARRIER },
+    ...(capital === line ? [] : [{ text: capital, ...CARRIER }]),
+    { text: capital },
+  ];
 }
 
 /**

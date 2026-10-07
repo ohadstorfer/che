@@ -85,6 +85,7 @@
     "course:review": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/ai-review.mjs",
     "course:tts": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/tts.mjs",
     "course:tts-all": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/tts-all.mjs",
+    "course:tts-repair": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/tts-repair.mjs",
     "course:lessons": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/build-lessons.mjs",
     "course:extras": "node scripts/course/unit-extras.mjs",
     "course:sync-yaml": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/sync-yaml.mjs",
