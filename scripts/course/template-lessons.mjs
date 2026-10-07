@@ -182,7 +182,7 @@ where exists (
       and pl.unit_id = n.unit_id and pl.kind = 'review' and pl.status = 'published'
       and pl.id not in (select lesson_id from template_fresh)
   )
-  or exists (
+  or (exists (
     select 1
     from public.lesson_progress p
     join public.lessons pl on pl.id = p.lesson_id and pl.status = 'published'
@@ -192,6 +192,20 @@ where exists (
       and pl.kind not in ('speak', 'slang', 'culture', 'story')
       and (ps.ordinal, pu.ordinal) > (ns.ordinal, nu.ordinal)
   )
+  -- Being further on is not being past this unit: an account that passed a
+  -- lesson down the road, with units since put in before it, had their new
+  -- steps marked done over lessons it never played (2026-10-06). The unit's
+  -- own lessons must be done too.
+  and not exists (
+    select 1
+    from public.lessons ol
+    where ol.unit_id = n.unit_id and ol.status = 'published'
+      and ol.kind in ('lesson', 'practice', 'review')
+      and ol.id not in (select lesson_id from template_fresh)
+      and not exists (
+        select 1 from public.lesson_progress op
+        where op.user_id = x.user_id and op.lesson_id = ol.id and op.passed)
+  ))
 on conflict (user_id, lesson_id) do nothing;
 `;
 }
