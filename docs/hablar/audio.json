@@ -1,9 +1,33 @@
 {
+ "hablar/00371db21d6e214f93dd.mp3": {
+  "text": "¡Hola de nuevo! ¿Cómo te fue con lo que llevaste ayer?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:03.663Z"
+ },
+ "hablar/012ad652380f72d536cf.mp3": {
+  "text": "¿Me traés una copa de vino tinto?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:28.505Z"
+ },
+ "hablar/01f4192b2bdca4bd733a.mp3": {
+  "text": "¿Buscás algo? ¿Adónde tenés que ir?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:02.215Z"
+ },
  "hablar/0300d2d6fb7c9713679e.mp3": {
   "text": "Nada más, gracias.",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:44.311Z"
+ },
+ "hablar/0314091ab10a15dd0088.mp3": {
+  "text": "¿Vos también esperás el sesenta y cuatro? Dicen que hoy hay paro, ¿sabías?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:46.961Z"
  },
  "hablar/033f265b284836fc0404.mp3": {
   "text": "Además de Buenos Aires, ¿qué parte de Argentina te gustaría conocer?",
@@ -11,11 +35,35 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:37.060Z"
  },
+ "hablar/04a3af26c3794442fdff.mp3": {
+  "text": "¿Cuál es la forma más rápida de llegar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:29.771Z"
+ },
  "hablar/04e13af432eac4db4dd5.mp3": {
   "text": "Contame, ¿cuál fue la mejor decisión que tomaste en tu vida?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:47.201Z"
+ },
+ "hablar/0539bc09551b4443e598.mp3": {
+  "text": "¡Hola! ¿En qué te ayudo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:16.699Z"
+ },
+ "hablar/05b981a583af38612531.mp3": {
+  "text": "¿Tenés algo para la tos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/05caf66b8607cb64cad2.mp3": {
+  "text": "¿Hace mucho que tenés la peluquería?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
  },
  "hablar/06398a418801ff5d6c0c.mp3": {
   "text": "¡Hola! ¿Qué hiciste hoy?",
@@ -29,11 +77,71 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:24.920Z"
  },
+ "hablar/0795cdd169e570e4b00e.mp3": {
+  "text": "¿Me avisás dónde me bajo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:33.197Z"
+ },
+ "hablar/07a1fc139f25988b271d.mp3": {
+  "text": "¡Hola! ¿Pagás en efectivo o con tarjeta?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/083e59fdef0fbfeaefbe.mp3": {
+  "text": "¿Me elegís unas que estén para hoy?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:10.937Z"
+ },
+ "hablar/08fba2e002a0ea04ce79.mp3": {
+  "text": "No, no tengo la tarjeta del súper.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/09d087676f8f4a71ea9a.mp3": {
+  "text": "No, no encontré el café. ¿Dónde está?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/0a753d4b61529d62b91c.mp3": {
+  "text": "A ver si entendí: tres cuadras derecho y después a la izquierda.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:14.411Z"
+ },
+ "hablar/0a908640994d1af01a2d.mp3": {
+  "text": "¿Qué te parece el voseo? ¿Te cuesta usar vos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/0af802153d40220e093c.mp3": {
+  "text": "Por la experiencia que tengo, esperaba algo un poco más alto.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/0b3315156520632723d2.mp3": {
   "text": "¿Me traés una copa de vino tinto?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:54.450Z"
+ },
+ "hablar/0bb477f35c0f425c7f97.mp3": {
+  "text": "¡Hola! ¿Cómo andás?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/0c08055dd87df93aa4c7.mp3": {
+  "text": "Me quedé sin batería en el celular.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:17.846Z"
  },
  "hablar/0ce34cdf784c3f43d296.mp3": {
   "text": "¿Cuánto sale?",
@@ -41,11 +149,59 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:02.956Z"
  },
+ "hablar/0d37bfde5f178c853706.mp3": {
+  "text": "Dale, ¿a qué hora?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:36.498Z"
+ },
+ "hablar/0d96939b040c9dbe3546.mp3": {
+  "text": "¿Te molesta si te pago en efectivo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:36.937Z"
+ },
+ "hablar/0f34b33b8006577e7c6e.mp3": {
+  "text": "Che, ¿qué opinás de trabajar desde casa? ¿Te parece mejor o peor?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/10aaad40ad4445e636fc.mp3": {
   "text": "¿Qué música escuchás? ¿Conocés algo de rock nacional?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:13.657Z"
+ },
+ "hablar/1128126c7cae49ef286e.mp3": {
+  "text": "Dame dos alfajores y una gaseosa, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:59.980Z"
+ },
+ "hablar/12161c6874b03a780a87.mp3": {
+  "text": "Hagamos así: vamos a la costa y el próximo finde largo elijo yo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:46.048Z"
+ },
+ "hablar/121f940d9657f4b456b9.mp3": {
+  "text": "¡Hola! Sentate acá. ¿Te corto mucho o poco?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/1342ff45edf9461a6ed3.mp3": {
+  "text": "¿Alguna vez viste un carpincho? ¿Qué animal te gusta más?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/134cbe88051f27a5a744.mp3": {
+  "text": "¿Necesito receta?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:28.727Z"
  },
  "hablar/1385c7ce1f0f83659ef3.mp3": {
   "text": "Che, ¿qué opinás de trabajar desde casa? ¿Te parece mejor o peor?",
@@ -53,11 +209,41 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:38.726Z"
  },
+ "hablar/13f867be9e753e30ecf0.mp3": {
+  "text": "¿Qué te gusta tomar cuando salís? ¿Vino, cerveza, fernet?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/1504315f4b7588a74b6b.mp3": {
+  "text": "Bueno, son cuarenta y dos mil trescientos. ¿Débito o crédito?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/1663338818ea1c897dd2.mp3": {
+  "text": "El 25 de mayo es una fecha re importante acá. ¿Sabés qué pasó ese día?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/179ec69ec4aa85473d93.mp3": {
   "text": "¿Te puedo pagar con transferencia?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:06.469Z"
+ },
+ "hablar/18751a8c6f8a08f0bd92.mp3": {
+  "text": "¿Cuánto sale?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:51.813Z"
+ },
+ "hablar/18bf24b9c44c88f4d7f1.mp3": {
+  "text": "Voy a una juntada con amigos.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:14.017Z"
  },
  "hablar/1a65ebcafc692cb814f9.mp3": {
   "text": "¿Está cerca?",
@@ -65,11 +251,125 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:55.122Z"
  },
+ "hablar/1ba8eca365d3e981bad7.mp3": {
+  "text": "Me duele mucho la cabeza.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:20.755Z"
+ },
+ "hablar/1cd9702ebef36ade600d.mp3": {
+  "text": "¿Tiene lavarropas?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/1ece7cab301e16c391de.mp3": {
+  "text": "¿Tenés alfajores?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:43.277Z"
+ },
+ "hablar/1f56b738a585693149b5.mp3": {
+  "text": "¿Nos encontramos en la plaza?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:44.585Z"
+ },
+ "hablar/20841561bfc429da36f1.mp3": {
+  "text": "¡Buenas noches! ¿Ya sabés qué vas a pedir o te recomiendo algo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:16.910Z"
+ },
+ "hablar/2133c8d5174174280f37.mp3": {
+  "text": "Che, ¿alguna vez tomaste mate? ¿Te gustó?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/2150fe5d3ba907383f47.mp3": {
+  "text": "Dale, pero la próxima elegís vos.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:28.698Z"
+ },
  "hablar/21a4c77c6dc8c9721998.mp3": {
   "text": "¿Qué comida argentina probaste? ¿Empanadas, milanesas?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:58.445Z"
+ },
+ "hablar/21d23be41312c2fd75e6.mp3": {
+  "text": "Bueno, este es el living. Tiene mucha luz, ¿viste? ¿Qué te parece?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/223d18b78d1a60337b4d.mp3": {
+  "text": "¿Dónde me tengo que bajar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:13.655Z"
+ },
+ "hablar/239b1ec554092a2ea3f0.mp3": {
+  "text": "¿Cómo está el tiempo hoy donde vivís? ¿Hace frío o calor?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/23fef19a217202479398.mp3": {
+  "text": "¿Qué series o películas mirás? ¿Viste alguna argentina?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/24f8fcc61e8a204a617c.mp3": {
+  "text": "Perdón, en la góndola el yogur tenía otro precio.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/2505e1067eb4c47a3f9f.mp3": {
+  "text": "¡Uy, cuánta cosa! ¿Es para una fiesta?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:23.026Z"
+ },
+ "hablar/257dd925a2f039a36f82.mp3": {
+  "text": "¿Y el subte anda?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:54.212Z"
+ },
+ "hablar/25a8c9a9c076f28cc49d.mp3": {
+  "text": "Me encantaría seguir charlando, pero me están esperando.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:55.121Z"
+ },
+ "hablar/25ced42aa5b4b6f3d2b7.mp3": {
+  "text": "¿Se puede pagar en efectivo o necesito la SUBE?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:10.144Z"
+ },
+ "hablar/26791de2e6a2564655e2.mp3": {
+  "text": "¿Y? ¿Cómo está el bife? El mejor del barrio, ¿no?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:56.853Z"
+ },
+ "hablar/269b76e34feef9ee6f47.mp3": {
+  "text": "Para compartir, una provoleta.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:32.264Z"
+ },
+ "hablar/279ec9adb047605f02e7.mp3": {
+  "text": "¿Falta mucho?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:29.501Z"
  },
  "hablar/282b261023df6a313d37.mp3": {
   "text": "Che, ¿alguna vez tomaste mate? ¿Te gustó?",
@@ -77,11 +377,125 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:50.772Z"
  },
+ "hablar/2977c37efcb5861135c8.mp3": {
+  "text": "Voy a Defensa y Carlos Calvo, en San Telmo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/29b5f05d9d02a2ccc1f7.mp3": {
+  "text": "Yo no entiendo a la gente que trabaja desde casa. ¿A vos qué te gusta más, la oficina o tu casa?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/29be5c75e6113d270cb0.mp3": {
+  "text": "Si hubiera más carriles exclusivos, andaría mucho mejor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:25.326Z"
+ },
+ "hablar/2a947b373accd2d586ee.mp3": {
+  "text": "Si me traés otro, me olvido del tema.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:08.873Z"
+ },
+ "hablar/2afa2d440309aaada1cd.mp3": {
+  "text": "¿Te puedo pagar con Mercado Pago?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/2b690d5d68c692c4183f.mp3": {
+  "text": "Bueno, pasá. Este es el living. ¿Te gusta?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/2c37a62f90f0352b9915.mp3": {
+  "text": "¿Tenés cambio de diez mil?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:10.080Z"
+ },
+ "hablar/2ce57b37d7b08774480c.mp3": {
+  "text": "Podría pagar tres meses por adelantado.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/2d489fd4e74e75e889fa.mp3": {
   "text": "Perdón, ¿dónde queda la farmacia?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:51.671Z"
+ },
+ "hablar/2da86d15654515a60e6e.mp3": {
+  "text": "¿Podrías mandar a un plomero lo antes posible?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/2e3ed243394454567e32.mp3": {
+  "text": "¡Hola! ¿Y vos de dónde conocés a Martín?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:23.345Z"
+ },
+ "hablar/2e7dd0a4536d48819b2c.mp3": {
+  "text": "Tranqui, no me ofendo: ¿qué puteadas argentinas conocés?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/2ef2366d66f69cf7c919.mp3": {
+  "text": "Ayer me llevé tres paltas y dos estaban negras.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:07.568Z"
+ },
+ "hablar/2f4adedf21845a821dfb.mp3": {
+  "text": "¿Me das una bolsa?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:56.194Z"
+ },
+ "hablar/2fac94967488b494f0c5.mp3": {
+  "text": "Entiendo que están a full, pero esperé media hora.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:24.998Z"
+ },
+ "hablar/307ed5bf95d169f75575.mp3": {
+  "text": "¿La tenés en otro color?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/313a215fce640d2a053f.mp3": {
+  "text": "Contame, ¿cuál fue la mejor decisión que tomaste en tu vida?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/3250112b85f728951494.mp3": {
+  "text": "Si me lo cambiás, quedamos más que bien.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:29.348Z"
+ },
+ "hablar/32ea7a38deefc4a95723.mp3": {
+  "text": "¿Conocés algún dicho argentino? ¿Cuál te gusta más?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/3413b4da6b8655d5036d.mp3": {
+  "text": "¿Así que te mudaste a Buenos Aires? ¿Y qué te trajo por acá?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:43.661Z"
  },
  "hablar/359dfe5f45b545a8470b.mp3": {
   "text": "¿Cómo te va con el español? ¿Qué es lo más difícil para vos?",
@@ -89,17 +503,59 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:26.915Z"
  },
+ "hablar/36e07b15b9892baa5a66.mp3": {
+  "text": "¿Te parece que tendría que ir al médico?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/37005d64c08f402ee0ea.mp3": {
+  "text": "Hace cinco días que me duele la panza y casi no tengo hambre.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/3804c62adeb376646595.mp3": {
+  "text": "¡Hola! ¿Te puedo ayudar con algo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/390cf6dd871bde085580.mp3": {
+  "text": "El sábado fui a un asado en la casa de unos amigos.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:54.809Z"
+ },
  "hablar/396b9cf2125713702335.mp3": {
   "text": "Trabajo en una oficina.",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:21.825Z"
  },
+ "hablar/3a121f57cf375d07e342.mp3": {
+  "text": "No tengo efectivo. ¿Te puedo pagar con Mercado Pago?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/3a302f7f06aef6441527.mp3": {
   "text": "Soy de Estados Unidos.",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:18.305Z"
+ },
+ "hablar/3a9c084a42a0a1eeeee7.mp3": {
+  "text": "Che, ¿qué hacés los fines de semana?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/3aaf133a62401d52d1dd.mp3": {
+  "text": "Quiero un bife de chorizo a punto.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:24.833Z"
  },
  "hablar/3ae08308bfc06ff8cc4d.mp3": {
   "text": "¿Fuiste alguna vez a un asado? ¿Qué es lo que más te gusta comer?",
@@ -125,11 +581,47 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:36.362Z"
  },
+ "hablar/3bcf935b990159573342.mp3": {
+  "text": "En mi país también subió todo, no te creas.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:50.196Z"
+ },
  "hablar/3c65ad3757fc860e6461.mp3": {
   "text": "¿Se puede pagar con la SUBE?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:12.536Z"
+ },
+ "hablar/3d7daabde7ecc0df1357.mp3": {
+  "text": "¿No me hacés un precio?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:14.622Z"
+ },
+ "hablar/3f78bd7e0ee71064c811.mp3": {
+  "text": "¿Y a vos cómo te fue?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:58.701Z"
+ },
+ "hablar/3fd100fac3296f5fac20.mp3": {
+  "text": "Me encanta, pero se me va un poco del presupuesto.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/3fe1153b6e28ef6bdab1.mp3": {
+  "text": "Bueno, pero no me vas a negar que el viaje es un garrón.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/40e987f7d4fb0c7e5062.mp3": {
+  "text": "¿Vos sos de la familia de la novia o del novio? ¿Cómo terminaste acá?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:03.401Z"
  },
  "hablar/40ec5668e1b6b58a4831.mp3": {
   "text": "Hola, ¿estás buscando algo? ¿Te ayudo?",
@@ -137,11 +629,23 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:47.922Z"
  },
+ "hablar/410cfbdefb0dd797c9c2.mp3": {
+  "text": "¿La puedo cambiar por un talle más grande?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/419659d46bb23223df50.mp3": {
   "text": "Un alfajor de chocolate, por favor.",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:21:59.524Z"
+ },
+ "hablar/422a9e31b1e10ccf7b0f.mp3": {
+  "text": "Un café con leche, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:17.464Z"
  },
  "hablar/422e4356e15b3ce6bbf5.mp3": {
   "text": "¡Hola, che! ¿De dónde sos?",
@@ -149,17 +653,131 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:06.274Z"
  },
+ "hablar/424c77b181a744d55161.mp3": {
+  "text": "Nada más, gracias.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:39.934Z"
+ },
  "hablar/42c4508945081b20752f.mp3": {
   "text": "¿Me traés dos medialunas?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:21:40.588Z"
  },
+ "hablar/434ad2e3e731794cde80.mp3": {
+  "text": "Un alfajor de chocolate, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:47.721Z"
+ },
+ "hablar/435906d13a1f4d45cfe4.mp3": {
+  "text": "Si no se soluciona, voy a tener que dar de baja el servicio.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/436e3304888eac6f8e4e.mp3": {
+  "text": "¡Buen día! ¿Qué vas a cocinar hoy?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:44.249Z"
+ },
+ "hablar/4397795a3e3330e0c2af.mp3": {
+  "text": "No dudo de que la parrilla es buenísima, pero esto está pasado.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:01.067Z"
+ },
+ "hablar/440fe93dc1852678d46f.mp3": {
+  "text": "¿Qué está de estación ahora?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:31.653Z"
+ },
+ "hablar/4436818ab526ea0b28e8.mp3": {
+  "text": "Te entiendo, no quiero que tengas un problema por mi culpa.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/4539f73490356bdcc233.mp3": {
+  "text": "¿Y si me los cambiás por otros?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/4684a0b4abc43316673f.mp3": {
+  "text": "¿Te gusta el fútbol? ¿Mirás los partidos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/479e941d5c054b401a51.mp3": {
+  "text": "Muchas gracias por invitarme, es un placer.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/47e57df108cd6ea0343e.mp3": {
+  "text": "¡Hola! Pasá, pasá, estás en tu casa. ¿Llegaste bien?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/48be7aab596f7f8cc5d1.mp3": {
+  "text": "Estoy con tos desde el lunes y me duele la garganta.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:43.274Z"
+ },
+ "hablar/4c6c09d076007b54ed3c.mp3": {
+  "text": "Con tarjeta, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/4cf3fc1a943700785363.mp3": {
+  "text": "¡Buenas noches! ¿Son cuatro? ¿Ya saben qué van a pedir?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:36.094Z"
+ },
+ "hablar/4d54c2888db0a807f586.mp3": {
+  "text": "¡Buenas! Subí. ¿Adónde te llevo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/4d8e3699a14532dd46cc.mp3": {
+  "text": "Perdón, no me sale la transferencia.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:31.731Z"
+ },
+ "hablar/4e883ac6020908c8af2f.mp3": {
+  "text": "Si vamos en micro, nos ahorramos una banda de plata.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:41.741Z"
+ },
  "hablar/4ee9d89d70b2d126babc.mp3": {
   "text": "¿Dónde me tengo que bajar?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:17.792Z"
+ },
+ "hablar/4f6c65005c6e381a55d2.mp3": {
+  "text": "En mi país lo compro sin receta, no sabía que acá hacía falta.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/4fc48b63c7cd0a99d682.mp3": {
+  "text": "Y para el centro, unas empanadas.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:53.063Z"
  },
  "hablar/50eaf2f40196dc23ac25.mp3": {
   "text": "El 25 de mayo es una fecha re importante acá. ¿Sabés qué pasó ese día?",
@@ -173,6 +791,54 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:40.811Z"
  },
+ "hablar/53baac573ddd861cc2b0.mp3": {
+  "text": "¡Hola! ¿Qué hiciste hoy?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/553572276f4857afcdd8.mp3": {
+  "text": "Uh, mirá, este se vende solo con receta. ¿La tenés a mano?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/5636f9f48a11556cc4b5.mp3": {
+  "text": "Nos vemos a las ocho.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:40.724Z"
+ },
+ "hablar/576a52355b6ac96b094e.mp3": {
+  "text": "¿Cuánto sale el kilo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:35.652Z"
+ },
+ "hablar/58076510c57fe04c97ef.mp3": {
+  "text": "Si tuviera que elegir un punto débil, diría que me cuesta delegar.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/593414c7f2505934fa29.mp3": {
+  "text": "Trabajo en una oficina.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:15.563Z"
+ },
+ "hablar/5adcf25f13420c320d0f.mp3": {
+  "text": "¿Tienen tostados?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:25.691Z"
+ },
+ "hablar/5b54ff9a6062401fe9fe.mp3": {
+  "text": "Bueno, me voy antes de que suba otra vez.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:58.203Z"
+ },
  "hablar/5c1d29df3cc8a7b34c12.mp3": {
   "text": "¿Cuánto sale el kilo?",
   "voice": "tomas",
@@ -184,6 +850,12 @@
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:28.777Z"
+ },
+ "hablar/5daa610462ba92457abd.mp3": {
+  "text": "¡Buenas! ¿Buscabas algo en especial?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:19.217Z"
  },
  "hablar/5dced15915c45c8dc7ce.mp3": {
   "text": "¿Cuántas cuadras son?",
@@ -197,11 +869,23 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:25.329Z"
  },
+ "hablar/5ef157bc215a5939e75a.mp3": {
+  "text": "¿Alguna vez jugaste al truco? ¿Te gustan los juegos de cartas?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/5ef1823bddf668657ace.mp3": {
   "text": "¿Te gusta el fútbol? ¿Mirás los partidos?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:05.797Z"
+ },
+ "hablar/5f79abd509e100394648.mp3": {
+  "text": "Necesito que me des un día y un horario concretos.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
  },
  "hablar/60d155626b2ef3c37452.mp3": {
   "text": "¡Hola! Soy Pancho. ¿Cómo te llamás?",
@@ -209,11 +893,35 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:11.268Z"
  },
+ "hablar/60d4993eb732bbd60655.mp3": {
+  "text": "¿Y cómo cambió el barrio desde que vivís acá?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:51.171Z"
+ },
+ "hablar/6115c01bb0bfc6c761d6.mp3": {
+  "text": "Quiero que me cortes un poco de los costados.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/61212917ba9afb89530f.mp3": {
   "text": "¿Sobre qué tema cambiaste de opinión en los últimos años?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:42.582Z"
+ },
+ "hablar/617daa1a78e6e12bf85c.mp3": {
+  "text": "Yo prefiero Mendoza, pero si vos querés playa, lo charlamos.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:37.211Z"
+ },
+ "hablar/647d99814492c5023fc9.mp3": {
+  "text": "Traje un vino para compartir.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
  },
  "hablar/651426a2c9b55179dc61.mp3": {
   "text": "¡Hola! ¿Qué necesitás?",
@@ -221,11 +929,209 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:21:51.355Z"
  },
+ "hablar/6677bad7d6eb7b68fcc6.mp3": {
+  "text": "Voy a Plaza Italia. ¿Dónde me bajo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:25.556Z"
+ },
+ "hablar/6696c7b6831bf614f44a.mp3": {
+  "text": "Te lo pedí jugoso y me llegó bien cocido.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:05.125Z"
+ },
+ "hablar/676cdb5a854ad2e086cd.mp3": {
+  "text": "Acá tengo el ticket.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/67c8cf2523c260a17057.mp3": {
+  "text": "No tengo fiebre, pero a la noche me siento peor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/6879b282b4caa602e5fa.mp3": {
+  "text": "¡Hola! Soy Pancho. ¿Cómo te llamás?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:04.567Z"
+ },
+ "hablar/69121e625d347a55298e.mp3": {
+  "text": "En mi último laburo coordinaba un equipo de cinco personas.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/6a222bf42f60322a25a1.mp3": {
+  "text": "¿Cuánto tardamos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/6a9ce2ceb384abc8e6e7.mp3": {
+  "text": "¡Hola! Sentate. ¿Qué nos hacemos hoy?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/6b2a72832707b179ede4.mp3": {
+  "text": "Bueno, voy a buscar algo para tomar. ¡Un gusto!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:19.839Z"
+ },
+ "hablar/6b65218fd81f78306cfb.mp3": {
+  "text": "¿Qué música escuchás? ¿Conocés algo de rock nacional?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/6d52d6be3a10e0200ac9.mp3": {
+  "text": "Para ella, una provoleta y una ensalada mixta.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:44.828Z"
+ },
+ "hablar/6e14cdc397412d1620d6.mp3": {
+  "text": "¿Cuándo puede venir alguien a arreglarlo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/6ec59d889fdece3abf6c.mp3": {
+  "text": "¡Buenas! ¿Qué les traigo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:33.949Z"
+ },
+ "hablar/6f996ad549b10d1e03b0.mp3": {
+  "text": "¡Qué bueno! Yo también.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:39.426Z"
+ },
+ "hablar/7040e99ecdcc7f60ba46.mp3": {
+  "text": "Lo que más me sorprendió es que acá se cena re tarde.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:51.545Z"
+ },
+ "hablar/7077ab61976a88acbe27.mp3": {
+  "text": "¿Cuál es más barato, este o ese?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:04.144Z"
+ },
+ "hablar/70831a433111561f5070.mp3": {
+  "text": "¿Hay algo de venta libre que me alivie hasta que vea a un médico?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/708b86ce2582e0f24002.mp3": {
+  "text": "Lo conocí en el laburo hace un año.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:27.328Z"
+ },
+ "hablar/70d4eaa129af28aacc88.mp3": {
+  "text": "Bueno, contame un poco de vos. ¿Por qué te interesa este puesto?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/712d77a6feb1182f4d20.mp3": {
+  "text": "Muchas gracias por la invitación.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/71871a3149485cba4a7c.mp3": {
+  "text": "¿Podrías fijarte? Creo que estaba en oferta.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/71dd47b35633f7b44c25.mp3": {
+  "text": "La verdad es que no me copa mucho el boliche.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:16.389Z"
+ },
+ "hablar/72abbd560a733ad051a1.mp3": {
+  "text": "Está buenísimo. ¿Quién lo cocinó?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/737498f5e4209a09af3b.mp3": {
+  "text": "Hay una pérdida debajo de la pileta de la cocina.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/746ef00e720f8a876497.mp3": {
+  "text": "Uh, la semana pasada estaba mucho más barato.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:45.982Z"
+ },
+ "hablar/75779e0e6dd3711cd2fb.mp3": {
+  "text": "¿Está cerca?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:51.086Z"
+ },
+ "hablar/762d406b51b87181d5d4.mp3": {
+  "text": "Para mí el problema no son los autos, es que nadie respeta nada.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/771e94e5195cb1b85258.mp3": {
+  "text": "Trato hecho, vengo seguido.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:39.802Z"
+ },
+ "hablar/7793aefcf2d0fd3ccf08.mp3": {
+  "text": "Si querés, la semana que viene tomamos algo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:55.664Z"
+ },
  "hablar/784b413d0d8741cec135.mp3": {
   "text": "¿Alguna vez escuchaste tango? ¿Qué te parece?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:09.916Z"
+ },
+ "hablar/7857f4110edd48a852bb.mp3": {
+  "text": "¿Cuánto sale el alquiler por mes?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/79392dc5fcf3130421fe.mp3": {
+  "text": "Me llamo Sam, ¿y vos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:08.128Z"
+ },
+ "hablar/795142fc4c0341a8521a.mp3": {
+  "text": "Igual, hay que reconocer que el bondi te lleva a todos lados.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:17.112Z"
+ },
+ "hablar/7a7f37775199a4513ff9.mp3": {
+  "text": "Che, ¿sos más de alfajor de chocolate o de maicena?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
  },
  "hablar/7ae2f5e508801213e788.mp3": {
   "text": "Che, ¿cómo es tu barrio? ¿Te gusta?",
@@ -233,11 +1139,35 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:20.522Z"
  },
+ "hablar/7b52c4843c2332aa8bef.mp3": {
+  "text": "No sabés lo que me pasó una vez en Bariloche.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:07.203Z"
+ },
+ "hablar/7bddd5d9b3ae763b22e4.mp3": {
+  "text": "Quiero algo para el dolor, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:24.757Z"
+ },
+ "hablar/7c4d50c908d2a61b33b4.mp3": {
+  "text": "¡Che! ¿Qué hacés el sábado? ¿Tenés planes?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:29.017Z"
+ },
  "hablar/7c613343833ad8b456f7.mp3": {
   "text": "Si pudieras vivir en cualquier ciudad del mundo, ¿dónde vivirías?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:34.927Z"
+ },
+ "hablar/7c68367807dacab2e95d.mp3": {
+  "text": "¿Sabés si hay paro de colectivos hoy?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:50.636Z"
  },
  "hablar/7de6c345c33f5ce14a6e.mp3": {
   "text": "¿Tienen tostados?",
@@ -245,11 +1175,29 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:21:44.099Z"
  },
+ "hablar/7f30335f3d6ecfe31b66.mp3": {
+  "text": "Che, ¿cómo es tu barrio? ¿Te gusta?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/8060e3e56a797348677e.mp3": {
   "text": "¿Qué sabés de Perón y Evita? Acá todavía se habla mucho de ellos, ¿viste?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:49.542Z"
+ },
+ "hablar/81a8d4233d79509d8be3.mp3": {
+  "text": "¿Dónde puedo cargar la SUBE?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:17.187Z"
+ },
+ "hablar/82aabd9675812a19e96d.mp3": {
+  "text": "Tengo un turno a las cuatro y no llego.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:25.695Z"
  },
  "hablar/83140f855f86c90549e7.mp3": {
   "text": "¿Qué colectivo me lleva a La Boca?",
@@ -263,11 +1211,191 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:21:36.932Z"
  },
+ "hablar/8448555d54c2557a5eb6.mp3": {
+  "text": "¿Vos sos de acá?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:19.110Z"
+ },
+ "hablar/854b79e6ed96fca53b5f.mp3": {
+  "text": "¡Hola! ¿Encontraste todo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/8553b33eea5835d535b0.mp3": {
+  "text": "Si pudieras vivir en cualquier ciudad del mundo, ¿dónde vivirías?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/86de9156661ae75f52c1.mp3": {
+  "text": "Te pago en efectivo. ¿Tenés cambio?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/870f1f3062e8ece730b6.mp3": {
+  "text": "¡Hola! ¿De dónde sos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/873741dcf6e78c4d0ab2.mp3": {
   "text": "¿Dónde puedo cargar la SUBE?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:21.424Z"
+ },
+ "hablar/87a1bf37e8fa302e3d2d.mp3": {
+  "text": "¿Se puede ir caminando o es muy lejos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:10.471Z"
+ },
+ "hablar/89ea9b59e960da6f4059.mp3": {
+  "text": "Perdón, ¿por qué vamos por acá? El mapa me marca otro camino.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/8bcee6e514e110de56c6.mp3": {
+  "text": "Si no, paramos en un cajero y saco plata.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/8beaeb2725f177caece6.mp3": {
+  "text": "¡Cuarenta minutos esperando! ¿En tu país el transporte también es así?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:07.549Z"
+ },
+ "hablar/8c8a153837cf2202c071.mp3": {
+  "text": "Uy, qué cara de apuro. ¿Te puedo ayudar en algo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:21.664Z"
+ },
+ "hablar/8cc36beb384d9b8a0a76.mp3": {
+  "text": "Además del fútbol, ¿qué deporte te gusta? ¿Jugás a algo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/8d38f1f4b5c5cd7fed63.mp3": {
+  "text": "Mañana estoy en casa después de las cinco.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/8e12fbc3fae32a0ca168.mp3": {
+  "text": "Arriba dejalo largo, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/9016f41265ebb5114212.mp3": {
+  "text": "Hola, ¿cómo andás? ¿Pasó algo con el depto?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/90e76fa24257e9f3ed38.mp3": {
+  "text": "¿Cómo se toma?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:34.151Z"
+ },
+ "hablar/9119c13add97ee9fe8e6.mp3": {
+  "text": "¿Y si en vez de eso vamos a una peña?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:20.251Z"
+ },
+ "hablar/929b540513936337dc92.mp3": {
+  "text": "¿Cuál me recomendarías?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:27.859Z"
+ },
+ "hablar/92a3829d15090795b1b4.mp3": {
+  "text": "El calefón no anda desde ayer.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/92ab1d74842f4575c4fb.mp3": {
+  "text": "No pasa nada, ¿me lo podrías cambiar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:03.670Z"
+ },
+ "hablar/9318fe727c279db0eb3e.mp3": {
+  "text": "¿Qué colectivo me lleva a La Boca?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:06.242Z"
+ },
+ "hablar/93856dcce38fc391e71e.mp3": {
+  "text": "¿Qué costumbre argentina te sorprendió más? ¿El beso para saludar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/942a64eaea5648d5207a.mp3": {
+  "text": "Bueno, ¿qué hacemos el finde largo? ¿Mar del Plata o Mendoza?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:33.053Z"
+ },
+ "hablar/9442ad67012a3290d2ef.mp3": {
+  "text": "¿Qué trae el tostado?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:42.453Z"
+ },
+ "hablar/946444cc56a9f023cb5d.mp3": {
+  "text": "¿Buscás la calle Bulnes? Uh, este barrio cambió muchísimo. ¿Vos sos de acá?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:42.743Z"
+ },
+ "hablar/9555a48c3c5cadcaea15.mp3": {
+  "text": "En eso tenés razón, no te lo discuto.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:20.811Z"
+ },
+ "hablar/959939577a7482e2cb63.mp3": {
+  "text": "¿Cómo te va con el español? ¿Qué es lo más difícil para vos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/96fe06c340a42e3c5695.mp3": {
+  "text": "Si te llevo diez kilos, ¿cuánto me lo dejás?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:27.070Z"
+ },
+ "hablar/97a6c331a93971a556b7.mp3": {
+  "text": "Una gaseosa, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:02.277Z"
+ },
+ "hablar/997374396cfdc4695f65.mp3": {
+  "text": "¡Buenas! ¿Qué te gusta hacer?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/9a4c1fed5abb9c2101e9.mp3": {
+  "text": "¿Me traés dos medialunas?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:21.865Z"
  },
  "hablar/9b06afa231f4190d5099.mp3": {
   "text": "¡Buenas noches! ¿Ya sabés qué vas a pedir o te recomiendo algo?",
@@ -275,11 +1403,137 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:43.762Z"
  },
+ "hablar/9b4d3c307acd427ee3f2.mp3": {
+  "text": "¿Creés en la mala suerte? ¿Tenés alguna cábala?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/9be79bdd93c4d6753461.mp3": {
+  "text": "Te va a encantar, hay música en vivo y empanadas.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:25.125Z"
+ },
+ "hablar/9c2bd4543a4336555286.mp3": {
+  "text": "¡Che, el sábado vamos a un boliche en Palermo hasta las seis de la mañana! ¿Te sumás?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:12.778Z"
+ },
  "hablar/9ce8bbbc6ee64a41dc71.mp3": {
   "text": "¿Adónde vas? ¿Te puedo ayudar?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:05.506Z"
+ },
+ "hablar/9d3b457691dd1e4fd451.mp3": {
+  "text": "Dale, no pasa nada, gracias.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:19.267Z"
+ },
+ "hablar/9e002beb486037d9fc0a.mp3": {
+  "text": "¿Y a vos qué te gusta hacer?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:35.244Z"
+ },
+ "hablar/9e057f4ff902423eb966.mp3": {
+  "text": "¿Me traés la cuenta, por favor?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:29.418Z"
+ },
+ "hablar/9e80ab62ac3058d0ef72.mp3": {
+  "text": "Hagamos las paces y pasame el postre.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/a06640b3765090ce9069.mp3": {
+  "text": "Te pago en efectivo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/a183336f5b75a6963b43.mp3": {
+  "text": "¿Hay posibilidad de trabajar desde casa algunos días?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/a1a0a8c0413afe374bc7.mp3": {
+  "text": "¿Conocés Buenos Aires? ¿Qué barrio te gusta más?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/a31630e75ab3a42ba062.mp3": {
+  "text": "Dejame en la esquina, antes del semáforo, que me queda perfecto.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/a3d4f3d22bd8297ff97c.mp3": {
+  "text": "¿Siempre hay tanto tránsito a esta hora?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/a4b1d8f8dda1d8bdcecf.mp3": {
+  "text": "¿Me lo podrías mandar a casa mañana a la mañana?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:36.241Z"
+ },
+ "hablar/a4ed45c960e011de621e.mp3": {
+  "text": "¿Puedo pagar con tarjeta?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:46.290Z"
+ },
+ "hablar/a73338383cbb2386169b.mp3": {
+  "text": "Perdón que te interrumpa, pero ¿entonces doblo en la próxima?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:47.193Z"
+ },
+ "hablar/a85288633fd29afea3f3.mp3": {
+  "text": "Perdón que te corte, pero acá convendría doblar, ¿no?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/a85c93ae50b402d582f3.mp3": {
+  "text": "Sí, una bolsa, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/a99d878dd96c7c1759f0.mp3": {
+  "text": "La cuenta, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:11.257Z"
+ },
+ "hablar/ab1b4ad86dca6520e5b4.mp3": {
+  "text": "Hace tres días que no tengo internet y trabajo desde casa.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/ac0b97f10275cd221559.mp3": {
+  "text": "¿Adónde vas? ¿Te puedo ayudar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:02.440Z"
+ },
+ "hablar/ac79a7ee4249702fa6e0.mp3": {
+  "text": "No te hagas problema, son cosas que pasan.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:34.812Z"
  },
  "hablar/b02002ecc69545edff1a.mp3": {
   "text": "¡Hola! ¿Cómo andás?",
@@ -293,11 +1547,59 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:25.113Z"
  },
+ "hablar/b2861752d030ff7c53e9.mp3": {
+  "text": "¡Hola! ¿Qué necesitás?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:39.001Z"
+ },
  "hablar/b3c45b721b08d4bb0786.mp3": {
   "text": "¡Buenas! ¿Qué te gusta hacer?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:09.791Z"
+ },
+ "hablar/b492e7042048397840fc.mp3": {
+  "text": "¿Tienen papas fritas?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:07.420Z"
+ },
+ "hablar/b50491ad7214a3d29bf0.mp3": {
+  "text": "¿Cuántas cuadras son?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:58.403Z"
+ },
+ "hablar/b7139a1814651152474e.mp3": {
+  "text": "Quiero un bife de chorizo, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:58.160Z"
+ },
+ "hablar/b85605087a5b56782537.mp3": {
+  "text": "Los compré el martes y ya no se escucha el lado izquierdo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/b8eafc9a864469220cc4.mp3": {
+  "text": "Me gustaría quedarme un año más, si puedo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/b97c0072fe597d1f7694.mp3": {
+  "text": "No hay agua caliente en el depto.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/b9e33e434d93454168d0.mp3": {
+  "text": "Perdón, ¿dónde queda la farmacia?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:47.503Z"
  },
  "hablar/bc9182cab0addfe87397.mp3": {
   "text": "¿Querés ir al cine el sábado?",
@@ -305,17 +1607,71 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:28.869Z"
  },
+ "hablar/bca867ed3a3f12da10c4.mp3": {
+  "text": "Quiero un kilo de manzanas.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:27.770Z"
+ },
  "hablar/bd43e4a4d19d6ffed818.mp3": {
   "text": "¿Me das medio kilo de frutillas?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:37.365Z"
  },
+ "hablar/bd5b763c7a7038f96f1b.mp3": {
+  "text": "¡Hola! No tenés buena cara. ¿Qué te anda pasando?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/bd9d18b3262318b5bffc.mp3": {
+  "text": "No quiero que quede muy corto.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/bed2aad02940f0b9d9ea.mp3": {
+  "text": "Si no es ese precio, prefiero dejarlo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/bf587c69a427aa448faa.mp3": {
+  "text": "Perdón, ¿sabés cómo llego a Medrano y Corrientes?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:06.761Z"
+ },
+ "hablar/bfc40027097a8cd29752.mp3": {
+  "text": "No tengo más chico, perdón.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/bfe4d244ba88b014dd2c.mp3": {
+  "text": "¡Hola! ¿Qué vas a llevar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:55.862Z"
+ },
  "hablar/bff31f3448811a2bd5c4.mp3": {
   "text": "¡Buen día! ¿Qué te llevás hoy?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:28.907Z"
+ },
+ "hablar/c0bd5566668ef5093018.mp3": {
+  "text": "¿Te parece que llego caminando?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:33.593Z"
+ },
+ "hablar/c0f68d9b2bcc62e08f4e.mp3": {
+  "text": "Vine de vacaciones y me voy a quedar dos semanas.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
  },
  "hablar/c1694fc4d4cb32f49aa6.mp3": {
   "text": "¿Nos encontramos en la plaza?",
@@ -329,6 +1685,24 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:58.570Z"
  },
+ "hablar/c1e38e3520868dfdf5dc.mp3": {
+  "text": "¿Cuánto sale más o menos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/c23e3775825ab8ba017a.mp3": {
+  "text": "Che, ¿alguna vez viajaste a otro país? ¿Adónde fuiste?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/c26e019c286104f2ac95.mp3": {
+  "text": "Disculpá, pero yo había pedido un cortado.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:59.198Z"
+ },
  "hablar/c3ff0e634e4513a536fa.mp3": {
   "text": "¿Conocés algún dicho argentino? ¿Cuál te gusta más?",
   "voice": "tomas",
@@ -341,11 +1715,227 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:17.346Z"
  },
+ "hablar/c5cd8d9d2d883260dbb1.mp3": {
+  "text": "¡Buenas noches! ¿Qué vas a comer?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:54.462Z"
+ },
+ "hablar/c5e1b315fc44ee39a15a.mp3": {
+  "text": "Compré esta remera ayer y me queda chica.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/c637481b326f267a4712.mp3": {
+  "text": "Si me lo preguntabas hace un año, te decía que sí.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:15.902Z"
+ },
+ "hablar/c998d28af6fa8741ac0f.mp3": {
+  "text": "¡Buen día! ¿Qué te llevás hoy?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:23.505Z"
+ },
+ "hablar/c9c4f44b5ab217316b69.mp3": {
+  "text": "¿Viste cómo aumentó todo esta semana? ¿En tu país también pasa?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:41.812Z"
+ },
+ "hablar/ca61b79bbe4d3781a402.mp3": {
+  "text": "¿Cuánto sale el corte?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/cacaef9427ede98854fe.mp3": {
+  "text": "¿Sabés si en una guardia me harían la receta en el momento?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/cbb8d41cff315e2ba614.mp3": {
+  "text": "Si sigue así, voy a tener que dejar los alfajores.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:54.567Z"
+ },
+ "hablar/cbfc58505f5cd516bad7.mp3": {
+  "text": "Las milanesas están riquísimas.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/cc034e556dee68bb869b.mp3": {
+  "text": "Hola, ¿estás buscando algo? ¿Te ayudo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:43.616Z"
+ },
+ "hablar/cc4d6e952351def9047e.mp3": {
+  "text": "Te mando una foto por WhatsApp.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/cd5c711e94df1d73e31d.mp3": {
+  "text": "¿Con quién te juntás los domingos? ¿Con tu familia o con amigos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/cdfa5db7ed4385e95c70.mp3": {
+  "text": "Estaba todo riquísimo, gracias.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:50.093Z"
+ },
+ "hablar/cfafb1fd680cef9ab165.mp3": {
+  "text": "¿Adónde te gusta ir de vacaciones? ¿Sos más de playa o de montaña?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/cfed6eee32d9b08b5299.mp3": {
+  "text": "¡Buenas! ¿Qué te traigo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:12.649Z"
+ },
+ "hablar/d0a0cd55585034877333.mp3": {
+  "text": "Tengo que irme en diez minutos.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:11.859Z"
+ },
+ "hablar/d0adbc70536bc32ae05b.mp3": {
+  "text": "¿Cómo es tu casa? ¿Vivís en un departamento?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/d11b0e593688c22d5d18.mp3": {
+  "text": "¿Cada cuántas horas lo tomo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.818Z"
+ },
+ "hablar/d4a3f4f1c5f2188f2296.mp3": {
+  "text": "¿Querés ir al cine el sábado?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:32.854Z"
+ },
+ "hablar/d4a7de40d91bc1bfae74.mp3": {
+  "text": "Si agarráramos por Juan B. Justo, llegaríamos antes.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/d5001a90b82272532309.mp3": {
+  "text": "Preferiría que me devuelvan la plata.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/d50c909b8566804c2451.mp3": {
+  "text": "Voy a Thames y Gorriti, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/d59eb49d75ef24a249cb.mp3": {
+  "text": "¿Dónde puedo tomar un taxi por acá?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:38.163Z"
+ },
+ "hablar/d5f9d80798bb86fa0722.mp3": {
+  "text": "¡Hola! Uy, qué tos tenés. ¿Desde cuándo estás así?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:38.516Z"
+ },
+ "hablar/d653244e3fe65d81400c.mp3": {
+  "text": "Gracias, sos muy amable.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:41.860Z"
+ },
+ "hablar/d68db53982bead7396fb.mp3": {
+  "text": "Te agradezco un montón, sos un genio.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:59:58.752Z"
+ },
+ "hablar/d803f00c041a7727e254.mp3": {
+  "text": "A los costados, más corto.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/d814b1510baf10bceb2f.mp3": {
+  "text": "Débito, en un pago.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/d90c8ea792bd3c742240.mp3": {
+  "text": "Perdón por la demora, hoy estamos a full. ¿Todo bien con el café?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:16.440Z"
+ },
+ "hablar/d90ef82cad7a5eed9031.mp3": {
+  "text": "Mañana a la mañana estoy en casa.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/d9e98df95d9d98e6c6b6.mp3": {
+  "text": "¿Fuiste alguna vez a un asado? ¿Qué es lo que más te gusta comer?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/dad6b9291284d21e9b5c.mp3": {
   "text": "Para compartir, una provoleta.",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:58.215Z"
+ },
+ "hablar/db6f87a5c6377f35f0b5.mp3": {
+  "text": "Si querés, compartimos un taxi hasta el centro.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:58.064Z"
+ },
+ "hablar/dbb2b8eee7aa2754022d.mp3": {
+  "text": "¿A la derecha o a la izquierda?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:58:54.760Z"
+ },
+ "hablar/dbf047871f1cb0a8a2df.mp3": {
+  "text": "¿Las expensas están incluidas en el precio?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/dc5ff16dd5d913909291.mp3": {
+  "text": "¿Qué sabés de Perón y Evita? Acá todavía se habla mucho de ellos, ¿viste?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/dd4cacb05e856458b2f8.mp3": {
+  "text": "¿Cuánto es todo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:59.660Z"
  },
  "hablar/ddc4418a226b86466548.mp3": {
   "text": "¿Tenés alfajores?",
@@ -359,11 +1949,131 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:47.208Z"
  },
+ "hablar/e04dbc83c7d243061478.mp3": {
+  "text": "No me parece justo pagar el mes completo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/e0a83070a846913d3fbd.mp3": {
+  "text": "Qué mala suerte, justo hoy.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:01.765Z"
+ },
+ "hablar/e11c3325f8adf9d20907.mp3": {
+  "text": "Te veo mirando el mapa. ¿Adónde vas?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:00:21.690Z"
+ },
+ "hablar/e13d2757f0f3d559beac.mp3": {
+  "text": "¿Conocés a Mafalda? ¿Leíste alguna historieta?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/e34814ed4236528bd4e4.mp3": {
+  "text": "Mirá, no es por molestar, pero el café llegó frío.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:21.019Z"
+ },
+ "hablar/e3ba598e105410d30e7a.mp3": {
+  "text": "¿Qué me recomendás?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:20.369Z"
+ },
+ "hablar/e3f7ecd3a6c6666f84af.mp3": {
+  "text": "Me quedé en casa porque llovió.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:07.179Z"
+ },
+ "hablar/e4006ef718a2cfe0d645.mp3": {
+  "text": "El sábado fui a una feria en San Telmo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:31.142Z"
+ },
+ "hablar/e53bb63d033b187782f7.mp3": {
+  "text": "¿Las verduras las hacen en la misma parrilla?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:49.291Z"
+ },
+ "hablar/e6f60574e968481e6f82.mp3": {
+  "text": "Mirá, te entiendo, pero yo lo veo distinto.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:11.835Z"
+ },
+ "hablar/e7976c5746038e7db7f7.mp3": {
+  "text": "¿Me lo ponés para llevar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:54:07.869Z"
+ },
+ "hablar/e8078e3c50a895a75949.mp3": {
+  "text": "Prefiero que vayas por Córdoba, si no te molesta.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/e80fcbff7d082bc58e84.mp3": {
+  "text": "¿Me das medio kilo de frutillas?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:32.232Z"
+ },
  "hablar/e8663230d8c8fe2103e9.mp3": {
   "text": "Che, ¿alguna vez viajaste a otro país? ¿Adónde fuiste?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:30.602Z"
+ },
+ "hablar/e8f015f19a7d20bb4ffc.mp3": {
+  "text": "Bueno, con un postre de regalo quedamos a mano.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:04:12.915Z"
+ },
+ "hablar/e8fbfaa265a7dd442654.mp3": {
+  "text": "Dicen que los argentinos somos un poco agrandados. ¿Vos qué pensás?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/e94c80542983d85ba9fa.mp3": {
+  "text": "¿Vos estudiás o trabajás? ¿Qué hacés?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/e9bee0556683e45158e0.mp3": {
+  "text": "¿Puedo pagar con QR?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/eacf329acbe6da907d1b.mp3": {
+  "text": "¿Con la obra social me hacen algún descuento?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/eae9ef81313be75497c1.mp3": {
+  "text": "En eso te doy la razón.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/eb5aa9082c21221bf9e6.mp3": {
+  "text": "¡Buenas! ¿Adónde vamos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
  },
  "hablar/eb9c857fc16629e3a486.mp3": {
   "text": "Quiero un kilo de manzanas.",
@@ -371,11 +2081,65 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:22:32.544Z"
  },
+ "hablar/ec0b3372d7a5d91c4c0d.mp3": {
+  "text": "Soy de Estados Unidos.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:11.819Z"
+ },
+ "hablar/ecad8dae233765dbb466.mp3": {
+  "text": "Me vine porque quería aprender español en serio.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:47.353Z"
+ },
+ "hablar/ed12336965160ad898b7.mp3": {
+  "text": "Yo creo que desde casa se rinde más, y te explico por qué.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/ee181c095a5d23d2c39e.mp3": {
+  "text": "¡Che! ¿Qué hiciste el finde? ¿Saliste?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:49.438Z"
+ },
+ "hablar/ee5b170f01466eaa910e.mp3": {
+  "text": "Buenas tardes, gracias por comunicarte. ¿En qué te puedo ayudar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/ee9563791d3b26231ebb.mp3": {
+  "text": "Voy a hacer una ensalada para cuatro.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:48.388Z"
+ },
  "hablar/ef742a5eb96567dd75c4.mp3": {
   "text": "Quiero un bife de chorizo a punto.",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:50.753Z"
+ },
+ "hablar/f01f49526eea7146e641.mp3": {
+  "text": "En mi ciudad el transporte es más caro y pasa menos seguido.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:01:12.843Z"
+ },
+ "hablar/f0fad64e90457e2e1c4c.mp3": {
+  "text": "¿Viste lo que es el tránsito hoy? Entre los cortes y las obras, esta ciudad es un caos. ¿En tu país se maneja así?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/f1272e6d49f5fecb304e.mp3": {
+  "text": "Además de Buenos Aires, ¿qué parte de Argentina te gustaría conocer?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
  },
  "hablar/f17e218ee9453f698cbe.mp3": {
   "text": "Dale, ¿a qué hora?",
@@ -383,11 +2147,23 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:32.241Z"
  },
+ "hablar/f2086a3f3c0d87efc58b.mp3": {
+  "text": "¿Qué comida argentina probaste? ¿Empanadas, milanesas?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/f257c975e56f66593be3.mp3": {
   "text": "Che, ¿sos más de alfajor de chocolate o de maicena?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:02.085Z"
+ },
+ "hablar/f36f9f2d008d6f14df38.mp3": {
+  "text": "Me gusta mucho. ¿Cuándo me puedo mudar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
  },
  "hablar/f3c744d1686bf675a46c.mp3": {
   "text": "Che, ¿qué hacés los fines de semana?",
@@ -395,16 +2171,112 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:24:16.930Z"
  },
+ "hablar/f46f97e6b7ebce6db7ee.mp3": {
+  "text": "Dame medio kilo de tomates y un cuarto de cebolla.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:57:52.403Z"
+ },
+ "hablar/f58fa6c6dfbd0f34a898.mp3": {
+  "text": "Si firmo por dos años, ¿me lo dejarías en menos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/f66aebb866fc4ef6bd81.mp3": {
+  "text": "Dos de mis amigos son vegetarianos. ¿Qué nos recomendarías?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:03:40.805Z"
+ },
+ "hablar/f7a27cc6f51deb254e44.mp3": {
+  "text": "Mirá, Córdoba está imposible a esta hora, así que agarro por otro lado. ¿Tenés mucho apuro?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/f8a303a4f3dff495b4a9.mp3": {
   "text": "¿Me traés la cuenta, por favor?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:21:47.845Z"
  },
+ "hablar/f9308ef69308811c7759.mp3": {
+  "text": "Busco uno de dulce de leche con coco, pero no me acuerdo la marca.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:55:24.061Z"
+ },
+ "hablar/f96bc027bef9b662db1b.mp3": {
+  "text": "Vine a Buenos Aires para aprender español.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/f99bdbeac8bfc5fa8806.mp3": {
+  "text": "Cortame solo un poco, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/fa4cf414ac673ad5d91d.mp3": {
+  "text": "¿Me pasás tu número?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:56:59.295Z"
+ },
+ "hablar/fa89765387f86a615a6a.mp3": {
+  "text": "Dame también una caja de ibuprofeno.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
  "hablar/fb7558450e63fc81056d.mp3": {
   "text": "¿Conocés Buenos Aires? ¿Qué barrio te gusta más?",
   "voice": "tomas",
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:25:32.707Z"
+ },
+ "hablar/fc444123f32f4c2de20d.mp3": {
+  "text": "Para mí un cortado y para ella un té.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:37.936Z"
+ },
+ "hablar/fd2bc30f9bb9b8f6cc1a.mp3": {
+  "text": "¿Alguna vez escuchaste tango? ¿Qué te parece?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/fd48df31a584714fbc66.mp3": {
+  "text": "No me convence del todo, pero dale.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:50.408Z"
+ },
+ "hablar/fd845a39c2c93cd2e628.mp3": {
+  "text": "¿Por qué no vamos a la costanera el domingo que viene?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:02:03.482Z"
+ },
+ "hablar/fdb0814da45a0d6c25bd.mp3": {
+  "text": "Acá tenés: un café con leche y un tostado. ¿Algo más?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:54.451Z"
+ },
+ "hablar/fdec34800490e191d737.mp3": {
+  "text": "Lo demás lo pago con débito.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
+ },
+ "hablar/fe8712797001da1243e6.mp3": {
+  "text": "¿Sobre qué tema cambiaste de opinión en los últimos años?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T11:05:58.819Z"
  }
 }

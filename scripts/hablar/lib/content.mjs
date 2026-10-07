@@ -29,7 +29,7 @@ export const MAX_KEYTERMS = 100;
 
 /** Who records the static lines: the `tomas` row of public.voices
  *  (migration 20260918000007). Hard-coded so recording never has to read the DB. */
-export const TOMAS = { id: 'tomas', provider_id: 'QK4xDwo9ESPHA4JNUpX3', model: 'eleven_multilingual_v2' };
+export const TOMAS = { id: 'tomas', provider_id: 'QK4xDwo9ESPHA4JNUpX3', model: 'eleven_v4_turbo' };
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const str = (v) => typeof v === 'string' && v.trim().length > 0;

@@ -33,6 +33,7 @@ import {
   peekCourse,
   sectionAt,
   sectionSummaries,
+  stepDone,
 } from '@/lib/course';
 import { jumpAllowed } from '@/lib/placement';
 import { FREE_UNITS, usePremium } from '@/lib/premium';
@@ -56,6 +57,9 @@ interface HomeData {
   course: Course;
   /** Her step on the road: the first lesson she hasn't finished. */
   current: number;
+  /** Every lesson she has finished, by id. Not always the stretch behind her
+   *  step: a reshaped course can leave finished lessons ahead of it. */
+  done: ReadonlySet<string>;
   streak: Streak | null;
   /** Words she has met at all; the road's first step is only "start" until one. */
   known: number;
@@ -83,9 +87,13 @@ interface HomeSnapshot {
 // The path — a Duolingo-style trail of clay pills winding down the screen.
 // One pill per lesson of the course, in order: the ones she has finished
 // (manteca, with a tick), the current step (the wide rosa one that says
-// "Start", and the only tappable one), and the rest of the road locked ahead
-// of her, pressed flat into the page. Each unit opens with a banner naming
-// what it teaches.
+// "Start"), and the rest of the road locked ahead of her, pressed flat into
+// the page. Each unit opens with a banner naming what it teaches.
+//
+// Done is asked of the lessons she has finished, not worked out from where she
+// stands: a lesson ahead of her step that already counts (a reshaped course, a
+// credit from a migration) is drawn done, so the road never appears to leap
+// over steps it had been showing as locked.
 //
 // A node's whole look — size, colour, glyph, ring — is derived from one number,
 // its phase: 0 locked, 1 current, 2 done. That is what makes finishing a lesson
@@ -698,13 +706,16 @@ const JUMP_MARGIN = 60;
 // move to show when she wasn't watching.
 // ---------------------------------------------------------------------------
 interface Shown {
-  /** Lessons finished in path order — which is also the index of her step. */
+  /** The index of her step: the first lesson on the road she hasn't finished. */
   lessons: number;
   weekDone: string[];
   streak: StreakStatus | null;
 }
 
 let lastShown: Shown | null = null;
+/** The course `lastShown` was counted on. Her step is an index into it, so the
+ *  same number on a reshaped course is a different step. */
+let lastShownCourse: Course | null = null;
 /** Cached for the same reason: an unknown push status holds the whole road back
  *  a frame, and the return from a lesson is the one time that shows. */
 let lastPushStatus: PushStatus | null = null;
@@ -835,9 +846,11 @@ export default function Home() {
       if (!starts.has(l.section.id)) starts.set(l.section.id, l.index);
       return starts.get(l.section.id)!;
     });
+    const done = new Set(snap.done);
     setData({
       course,
-      current: currentIndex(course.path, new Set(snap.done)),
+      current: currentIndex(course.path, done),
+      done,
       streak: snap.streak,
       known: snap.known,
       weekDone: snap.weekDone,
@@ -1018,6 +1031,10 @@ export default function Home() {
       streak: streakStatus(data.streak, localDateStr()),
     };
     const from = shownRef.current;
+    // A course published while this screen stood has moved every index: her
+    // step may be the same lesson under a new number.
+    const reshaped = lastShownCourse != null && lastShownCourse !== data.course;
+    lastShownCourse = data.course;
     // A cold start has nothing to move from, so the screen simply opens where
     // she is — every node mounts in its phase and no animation runs.
     if (!from) {
@@ -1025,11 +1042,13 @@ export default function Home() {
       show(next);
       return;
     }
-    // The real status, landing on a road drawn from the phone's copy. Nothing
-    // she did on this screen changed it, so nothing animates: a step finished
-    // elsewhere is put in place, and the header simply takes the true count.
-    if (shownFromCache.current && !data.cached) {
-      shownFromCache.current = false;
+    // The real status, landing on a road drawn from the phone's copy — or the
+    // same status counted on a reshaped course. Nothing she did on this screen
+    // changed it, so nothing animates: a step finished elsewhere is put in
+    // place, and the header simply takes the true count.
+    const settling = shownFromCache.current && !data.cached;
+    if (settling) shownFromCache.current = false;
+    if (settling || reshaped) {
       if (sameShown(from, next)) return;
       const moved = next.lessons !== from.lessons;
       show(next, moved || !isAdvance(from, next));
@@ -1087,6 +1106,10 @@ export default function Home() {
     for (const l of path) last.set(l.unit_id, l.index);
     return last;
   }, [path]);
+  const done = data?.done;
+  /** What the rows are drawn from; a new object whenever either changes, so
+   *  the list renders its rows again. */
+  const drawn = useMemo(() => ({ shown, done }), [shown, done]);
 
   // Nothing to place: the launch splash has waited long enough.
   useEffect(() => {
@@ -1102,7 +1125,7 @@ export default function Home() {
   // opens on the section she is in, or on one she picked there; a section still
   // ahead is never walked into from a stale link, its road opens once she gets
   // there.
-  const summaries = data ? sectionSummaries(data.course, current) : [];
+  const summaries = data ? sectionSummaries(data.course, current, data.done) : [];
   const hereSection = data ? sectionAt(data.course, current) : null;
   const asked = summaries.find((x) => String(x.section.id) === askedSection && x.state !== 'locked');
   const viewed = asked ?? summaries.find((x) => x.section.id === hereSection?.id) ?? null;
@@ -1128,16 +1151,22 @@ export default function Home() {
     return { length: above + STEP_PITCH, offset: listTop - PATH_TOP + yOf(lesson.index) - above, index: i };
   };
 
-  const phaseOf = (i: number): Phase => (i < current ? 2 : i === current ? 1 : 0);
+  // Her step is hers until the advance has played, even though the lesson she
+  // just finished is already among the done: `current` is what is shown.
+  const isDone = (lesson: PathLesson) => stepDone(lesson, current, done);
+  const phaseOf = (lesson: PathLesson): Phase => (lesson.index === current ? 1 : isDone(lesson) ? 2 : 0);
   const redoLesson = redo ? (path[redo.index] ?? null) : null;
   const unitStateOf = (lesson: PathLesson): UnitState => {
     const last = unitLastIndex.get(lesson.unit_id) ?? lesson.index;
     return current > last ? 'done' : current >= lesson.index ? 'current' : 'locked';
   };
-  /** How far through a unit she is, from the unit's first step on the road. */
+  /** How far through a unit she is, from the unit's first step on the road:
+   *  its finished lessons, wherever in it they sit. */
   const unitProgressOf = (lesson: PathLesson) => {
-    const total = (unitLastIndex.get(lesson.unit_id) ?? lesson.index) - lesson.index + 1;
-    return { total, done: Math.min(Math.max(current - lesson.index, 0), total) };
+    const last = unitLastIndex.get(lesson.unit_id) ?? lesson.index;
+    let finished = 0;
+    for (let i = lesson.index; i <= last; i++) if (isDone(path[i])) finished++;
+    return { total: last - lesson.index + 1, done: finished };
   };
 
   // Land with the step in view, path history above it — on her old step if a
@@ -1239,7 +1268,7 @@ export default function Home() {
         ref={scrollRef}
         data={roadReady ? road : NO_PATH}
         keyExtractor={(lesson) => `${epoch}:${lesson.id}`}
-        extraData={shown}
+        extraData={drawn}
         getItemLayout={rowLayout}
         // A section is a few hundred rows; only the ones near the screen are
         // mounted. Rows are exact, so a jump anywhere lands without measuring.
@@ -1336,7 +1365,7 @@ export default function Home() {
             ) : null}
             <PathStep
               index={lesson.index}
-              phase={phaseOf(lesson.index)}
+              phase={phaseOf(lesson)}
               reduced={reduced}
               breathe={focused}
               kind={lesson.kind}
@@ -1345,8 +1374,8 @@ export default function Home() {
               tone={toneOf(lesson.unit)}
               label={`${lesson.title_en} · ${lesson.unit.title_en}`}
               onPress={lesson.index === current ? () => startLesson(lesson) : undefined}
-              // Any class behind her but the chat with Pancho, which is a live call every time.
-              onRedo={lesson.index < current && lesson.kind !== 'speak' ? openRedo : undefined}
+              // Any finished class but the chat with Pancho, which is a live call every time.
+              onRedo={isDone(lesson) && lesson.kind !== 'speak' ? openRedo : undefined}
             />
           </>
         )}

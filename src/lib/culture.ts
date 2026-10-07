@@ -73,6 +73,9 @@ export const cultureSections = (data as { sections: CultureSection[] }).sections
 const glossary = (data as { glossary?: Record<string, string> }).glossary ?? {};
 
 /** A span as the glossary keys it: lower case, no quotes or punctuation. Kept in step with scripts/culture/build.mjs. */
+/** Where each glossary entry's recording is, by the same key (docs/culture/audio.json). */
+const glossaryAudio = (data as { audio?: Record<string, string> }).audio ?? {};
+
 export const glossKey = (span: string) =>
   span
     .toLowerCase()
@@ -86,7 +89,7 @@ export function glossFor(span: string, cls?: CultureClass): CultureWord | undefi
   const own = cls && [...cls.vocabulary, ...(cls.glossary ?? [])].find((w) => glossKey(w.es) === key);
   if (own) return own;
   const en = glossary[key];
-  return en ? { es: span.replace(/^[“"]|[”"]$/g, ''), en } : undefined;
+  return en ? { es: span.replace(/^[“"]|[”"]$/g, ''), en, audio: glossaryAudio[key] } : undefined;
 }
 
 export function findClass(section: string, cls: string) {

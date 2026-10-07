@@ -1,0 +1,6824 @@
+{
+ "culture/00278286be5c2aab4f5b.mp3": {
+  "text": "¿Hacés algún deporte?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/00848adecb59386f7b6e.mp3": {
+  "text": "padre de la patria",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/00b02515c4935c259d55.mp3": {
+  "text": "gallego",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/00c1d9562b1a063b59fa.mp3": {
+  "text": "siempre que llovió, paró",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/00e56f6d68d0cfd41dc6.mp3": {
+  "text": "no me arrepiento de este amor",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/01337f4cb2c1f21302fb.mp3": {
+  "text": "comisaría",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:55.438Z"
+ },
+ "culture/01373f11b11aa4481fe5.mp3": {
+  "text": "gamba",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/01705b009dc70c6c2464.mp3": {
+  "text": "malas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/017f17bb02b50070ef85.mp3": {
+  "text": "¿Qué punto?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/018be41384f4be329ab7.mp3": {
+  "text": "bastos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/0191b3e75288418864aa.mp3": {
+  "text": "los locos de la azotea",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/019c56db2684014bca40.mp3": {
+  "text": "tuco",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/01d63f37d0fd1254d7db.mp3": {
+  "text": "abanderado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/01df4c120819d018ed05.mp3": {
+  "text": "la docta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/02353fe54583f4866ac1.mp3": {
+  "text": "socio",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/026bd05821b2e1323c60.mp3": {
+  "text": "¡Aquí Cosquín!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/029ef17b45bf655b37a2.mp3": {
+  "text": "sopla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/0358669cb4a7d24908c1.mp3": {
+  "text": "un desastre",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/036927ccb701f949d246.mp3": {
+  "text": "pateaste el tablero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/04b680f958388c716944.mp3": {
+  "text": "¡Soy yo!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/04e118dcde9d04d1a8b5.mp3": {
+  "text": "revés",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/059456ae15b9fafa9a10.mp3": {
+  "text": "¡uh, no!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/059e827d95dc71b3907f.mp3": {
+  "text": "¡miércoles!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/05ad24eae9746c41638a.mp3": {
+  "text": "sacramentos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/05e6dde4ad91a59fc5d9.mp3": {
+  "text": "atado con alambre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/061b6f7b12804f63e021.mp3": {
+  "text": "De esta también salimos.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/061e5f32599bc9e4c9a8.mp3": {
+  "text": "carritos de la costanera",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/069ca9e212dc6afeb269.mp3": {
+  "text": "los desaparecidos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/06a7a7de724eb1075c2f.mp3": {
+  "text": "como el tero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/06d663813af9311049f4.mp3": {
+  "text": "disculpá",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:33.222Z"
+ },
+ "culture/06dba54ee636e2de5816.mp3": {
+  "text": "corralito",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/07418d7189fbed66f9f4.mp3": {
+  "text": "heladería",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/0753281402646b453986.mp3": {
+  "text": "caña con ruda",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/0795cdd169e570e4b00e.mp3": {
+  "text": "¿Me avisás dónde me bajo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:33.759Z"
+ },
+ "culture/08248750e1a83ceb8c68.mp3": {
+  "text": "vaquillona con cuero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/086ca78e88615e188a40.mp3": {
+  "text": "—¿Vamos a las 8? —Dale.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/08c7c2ecef262c853553.mp3": {
+  "text": "¿Querés un mate?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/08cccc84846e7529afec.mp3": {
+  "text": "culiao",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/08d465fed75cd4dcbf07.mp3": {
+  "text": "cuia",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/08e6718cf99976e66281.mp3": {
+  "text": "verdura",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/09472b972543f2b47f32.mp3": {
+  "text": "quincho",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/0a071dafd8b345028755.mp3": {
+  "text": "la previa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:02.321Z"
+ },
+ "culture/0a0badf8e306f192944a.mp3": {
+  "text": "9 de julio de 1816",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/0a1e260a8c3dea75f944.mp3": {
+  "text": "adiós nonino",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/0a63202ad42ce1dd1228.mp3": {
+  "text": "vos sos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:41.577Z"
+ },
+ "culture/0a6fc8ec82604c404d89.mp3": {
+  "text": "paro bancario",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/0aad5c8bf51f65939b99.mp3": {
+  "text": "a congreso de tucumán",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:33.249Z"
+ },
+ "culture/0b050ce06816257232f9.mp3": {
+  "text": "no jodas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/0b2c55d3d74e4afd9c7c.mp3": {
+  "text": "arroz con leche me quiero casar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/0b4e8625ae2625625223.mp3": {
+  "text": "trapito",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/0b8330e8a7cdd8db8e72.mp3": {
+  "text": "puteada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/0b9ca8bc751da57b4793.mp3": {
+  "text": "truco",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/0bb8bfde2cab585a169e.mp3": {
+  "text": "kiosco",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/0bbdf715fcbd64ebb3d9.mp3": {
+  "text": "tostado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:37:07.718Z"
+ },
+ "culture/0c497c0c471e4b7e7483.mp3": {
+  "text": "bueno, me voy yendo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:59.057Z"
+ },
+ "culture/0c81a641c930a9e10c55.mp3": {
+  "text": "la propina",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/0c9d2fe8ac97ee7cd0a5.mp3": {
+  "text": "tirada",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/0cb34b868c5d3376c676.mp3": {
+  "text": "reposera",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/0cd197d703b78b99bcf1.mp3": {
+  "text": "piba",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:14.454Z"
+ },
+ "culture/0d0f7560742e887cbad1.mp3": {
+  "text": "uba",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/0d1dc88b2b2fdaa0e1d9.mp3": {
+  "text": "sodero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/0d4bdbe0d62104fcb01a.mp3": {
+  "text": "el fin del mundo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/0d5f0e8a3593f900fe4a.mp3": {
+  "text": "litoral",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/0d88d09c5988b62f318d.mp3": {
+  "text": "la calle que nunca duerme",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:22.801Z"
+ },
+ "culture/0da8441a01f8f0751a56.mp3": {
+  "text": "el flaco",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/0dbf56c677b6376d103a.mp3": {
+  "text": "lo atamos con alambre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/0de0521ede5db057f8a6.mp3": {
+  "text": "chicha",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/0e6e8881cd0688d8c451.mp3": {
+  "text": "fugazzeta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/0eb1fb0136d4e711a8d3.mp3": {
+  "text": "¿me podrías…?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:53.358Z"
+ },
+ "culture/0f2ea2c9ddba23f1da03.mp3": {
+  "text": "contrafrente",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/0f43e8573741a97bd5cf.mp3": {
+  "text": "bosteros",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/0f6b6102e22d3440104c.mp3": {
+  "text": "barrilete cósmico",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/0f89b623303444702a7c.mp3": {
+  "text": "puto",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/0f8c4a3af6e91a14e37f.mp3": {
+  "text": "zafé",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/0f971aed38871542f78c.mp3": {
+  "text": "flaco se te cayó esto",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:13.524Z"
+ },
+ "culture/0fa9205ec7a923ddf44e.mp3": {
+  "text": "ph",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/102adc0809a0ad8dead4.mp3": {
+  "text": "tengo fiebre",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/10bafb48ae538f245377.mp3": {
+  "text": "Es más pesado que collar de…",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/10fc25c08bae7149e790.mp3": {
+  "text": "abierto de palermo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/11178a49ee2329c99b58.mp3": {
+  "text": "la facultad",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/11421d08c971854089a8.mp3": {
+  "text": "mañana paso",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/11898ee32f78817de2c2.mp3": {
+  "text": "salsa criolla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/12d67686761ed8374d96.mp3": {
+  "text": "campo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/12f397416a23454b1678.mp3": {
+  "text": "Memoria, Verdad y Justicia",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/1315d7527ba5199f009c.mp3": {
+  "text": "pelotudo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/13279831d74db752f45f.mp3": {
+  "text": "esperando la carroza",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/13405290f1a58328303c.mp3": {
+  "text": "cortina",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/1341fbc564111eb93050.mp3": {
+  "text": "la tengo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/1345842cb52e77819c4d.mp3": {
+  "text": "las leonas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/137decdae7acbd35486a.mp3": {
+  "text": "lágrima",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:37:01.715Z"
+ },
+ "culture/13f23b46c63c35426578.mp3": {
+  "text": "viaje de egresados",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/1444c5189ac55625ddd9.mp3": {
+  "text": "la balsa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/1484262a7d1fc8cf23c5.mp3": {
+  "text": "lunfardo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:09.552Z"
+ },
+ "culture/14cfd731efceef22154b.mp3": {
+  "text": "el que no llora no mama",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/15961293d2693a96e7e5.mp3": {
+  "text": "chacarera",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/15bfac0d9380c246fb75.mp3": {
+  "text": "¿Vemos una peli de Darín?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/15dfcfab9e4490cded1c.mp3": {
+  "text": "media masa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/16097491d77d54097f94.mp3": {
+  "text": "porteños",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:49.492Z"
+ },
+ "culture/163e7395b8e948c39311.mp3": {
+  "text": "chala",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/168df5bc7bf15d561b5c.mp3": {
+  "text": "¿Qué llevo?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:56.299Z"
+ },
+ "culture/16916e64ca219474d92c.mp3": {
+  "text": "tirar el cuerito",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/169d5a8a5f9ff29bdc73.mp3": {
+  "text": "bonde",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:19.930Z"
+ },
+ "culture/16b816795127589cabcc.mp3": {
+  "text": "las malvinas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:45.204Z"
+ },
+ "culture/17004109147722f82360.mp3": {
+  "text": "yerba con palo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/175d8bf8e145a901b611.mp3": {
+  "text": "carpa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/1803155728eaf3851f92.mp3": {
+  "text": "copas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/1809d6aa8a9f10b55e3e.mp3": {
+  "text": "convertibilidad",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/18b934a31bc77fbc6718.mp3": {
+  "text": "agencia",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/18ce1015270bc4732815.mp3": {
+  "text": "extrañar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/190403bf4ed380913dbb.mp3": {
+  "text": "esteros del iberá",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/190f7e90e57810a6851c.mp3": {
+  "text": "fiesta de egresados",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/1996e5b98511a918970d.mp3": {
+  "text": "cacerola",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/1a09d7f3a80d1c3beaf8.mp3": {
+  "text": "Che, boludo, ¿venís a almorzar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/1a403458427096847a46.mp3": {
+  "text": "2 de abril",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/1a61cda7a335181ed119.mp3": {
+  "text": "cotorras",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/1a9f481e67d827e74042.mp3": {
+  "text": "refrán",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/1af2964e0ed41cb9eba1.mp3": {
+  "text": "las panteras",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/1c31a91d7e5ed96bb9c9.mp3": {
+  "text": "dios es argentino",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/1cef6b99d4f5f50cdab8.mp3": {
+  "text": "cordero a la cruz",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/1d85f0c6a1fab8f0c3f3.mp3": {
+  "text": "audios",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/1dc2cb3659f1f11c2744.mp3": {
+  "text": "perdón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:39.332Z"
+ },
+ "culture/1de76ce7ce9d7a885c84.mp3": {
+  "text": "asado de tira",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/1e2249155ddfe08fefe6.mp3": {
+  "text": "golazo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/1e42330c720cf74b75d5.mp3": {
+  "text": "la quiniela",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/1efb1bdda89b3417e28a.mp3": {
+  "text": "tengo mucho laburo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/1f0d663a17109ec02660.mp3": {
+  "text": "¿Me ayudás?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:54.826Z"
+ },
+ "culture/1f15f9c8551ae46004fc.mp3": {
+  "text": "Cumplimos seis meses.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/1f2c39da6ce0a3f3eacd.mp3": {
+  "text": "una grande de muzza",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/1f3363f641495a33c505.mp3": {
+  "text": "café con medialunas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:05.466Z"
+ },
+ "culture/1fc0e180ba0c980b2145.mp3": {
+  "text": "¿Me hacés precio?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:45.588Z"
+ },
+ "culture/1fc7dc178ac0db01d780.mp3": {
+  "text": "abuelas de plaza de mayo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/1fe6f8135985f1665edd.mp3": {
+  "text": "marplatense",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/2003dc65d90ff2c17338.mp3": {
+  "text": "termo bajo el brazo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/20325672b96b4a83ea0f.mp3": {
+  "text": "de parado",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/20d6daca189543abfd74.mp3": {
+  "text": "10 de noviembre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/20d955d48fea46e443de.mp3": {
+  "text": "after office",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/2140af5e90bbb4ac94cb.mp3": {
+  "text": "¿Qué hacés?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:50.296Z"
+ },
+ "culture/215a4a43329cd5a1b1ff.mp3": {
+  "text": "club",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/21e02efa003c279d9833.mp3": {
+  "text": "Estoy recorriendo Mendoza.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:56.481Z"
+ },
+ "culture/22192520632c8a45eb70.mp3": {
+  "text": "la reja",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/22ae198080e1c410de40.mp3": {
+  "text": "caja",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/22fb0bee618cf797367e.mp3": {
+  "text": "día del inventor",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/231ffdbe1b5d40c8c4c6.mp3": {
+  "text": "estación de servicio",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/2326d183c48993337993.mp3": {
+  "text": "Y bueno, a caballo regalado…",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/234831d311eb871c7804.mp3": {
+  "text": "¿Tenés envase?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/2353fc0b4586044555a7.mp3": {
+  "text": "aguante",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/239e811c4a30492f4e59.mp3": {
+  "text": "a catedral",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:32.083Z"
+ },
+ "culture/23e647c99a9cfa909b8d.mp3": {
+  "text": "cien de jamón, doscientos de queso",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/23ec330933f0f82fe603.mp3": {
+  "text": "cordero patagónico",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/242aaf2fba5f02446242.mp3": {
+  "text": "sube",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:03.488Z"
+ },
+ "culture/243a68a10f970b50ed23.mp3": {
+  "text": "malvinas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/2444642999de04d93dc2.mp3": {
+  "text": "marcha",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/245bac14ed3216697dd1.mp3": {
+  "text": "fiesta de la vendimia",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/245cf27905726bbcf9a2.mp3": {
+  "text": "turno mañana",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/24818a92dbc3c26584a3.mp3": {
+  "text": "un tinto",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/257d94880acf5fc230b1.mp3": {
+  "text": "nieto restituido",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/259635c9c44eb154d738.mp3": {
+  "text": "las malvinas son argentinas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/25cfb976e7ac2037f218.mp3": {
+  "text": "santafesino",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/2621fc291cff35f803a0.mp3": {
+  "text": "tres empanadas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/262fb6e835be0c2a674b.mp3": {
+  "text": "¿viste?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:05.186Z"
+ },
+ "culture/2630278da48dbc1db4fd.mp3": {
+  "text": "tiren papelitos muchachos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/2662e4fe82341ca7b52d.mp3": {
+  "text": "con las piernas abiertas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/26b3ea5303837f687d8d.mp3": {
+  "text": "descuento en efectivo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:42.453Z"
+ },
+ "culture/26d6ed0edf4d827dce3c.mp3": {
+  "text": "bien cocido",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/26f0b908c88727362d1c.mp3": {
+  "text": "los gladiadores",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/26ffddf59aa5843668dd.mp3": {
+  "text": "de manteca",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:37:04.136Z"
+ },
+ "culture/27131247f5d26b06258d.mp3": {
+  "text": "El que se quema con leche, ve una vaca y…",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/278660ecd1d9a4b6b260.mp3": {
+  "text": "tú",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:37.274Z"
+ },
+ "culture/278a58cec1afef6efad8.mp3": {
+  "text": "colectivo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:01.508Z"
+ },
+ "culture/27cd25b559505e323cf2.mp3": {
+  "text": "la goma",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/287fb8c174ecbd6f52d7.mp3": {
+  "text": "más … que",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/2895fb7a500784593a87.mp3": {
+  "text": "mandaste fruta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/28cb674c45dff02c2dfe.mp3": {
+  "text": "de grasa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:37:04.579Z"
+ },
+ "culture/2937c9966cb64057452e.mp3": {
+  "text": "benteveo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/296e9a40ae8da3b17c65.mp3": {
+  "text": "¡Feliz Día del Amigo!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:28.282Z"
+ },
+ "culture/2974a5e722c4831c9651.mp3": {
+  "text": "primera comunión",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/29765049283588fa9a89.mp3": {
+  "text": "gastada",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/29a40be745a367d8d6ad.mp3": {
+  "text": "bombilla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/29b453f97c2b3037de1b.mp3": {
+  "text": "de dónde sos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/29d743a0fbb31821d1af.mp3": {
+  "text": "morcilla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/29fc5db3493381d4b4db.mp3": {
+  "text": "lo hablo con mi psicóloga",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:21.607Z"
+ },
+ "culture/2a34dcddb814e0a85dbb.mp3": {
+  "text": "¿Hay paro mañana?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/2a687a6f7f30b2d61a6e.mp3": {
+  "text": "en pedo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/2ab8fd9a33a91ee7d379.mp3": {
+  "text": "siesta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/2ae06904817ed4616b2d.mp3": {
+  "text": "metegol",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/2ae1563c11a635938063.mp3": {
+  "text": "turno",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/2ae782d43fa033883413.mp3": {
+  "text": "empatamos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/2af7345ffa998a0bdf87.mp3": {
+  "text": "xq",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/2bbe46285ef235a40eb7.mp3": {
+  "text": "joder",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/2c51bd04a600e28b8dbf.mp3": {
+  "text": "ají molido",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/2c736d62ce2c1caac86e.mp3": {
+  "text": "abanderada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/2c8b7a63efeb7329a08e.mp3": {
+  "text": "refrescó",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/2c924ca0ea6897fe6dd6.mp3": {
+  "text": "corte",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/2ca3f094eb6a282ab99f.mp3": {
+  "text": "los dinosaurios",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/2cbc6ac7f6a6bf5ec419.mp3": {
+  "text": "¡A la mesa!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/2cbe27d5fcc24b43adb0.mp3": {
+  "text": "mate",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/2cd1b1a3bc7bd27004a6.mp3": {
+  "text": "fernet con coca",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/2cef5e20db2a504cbbe5.mp3": {
+  "text": "retrucar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/2d34e116a68736df2bff.mp3": {
+  "text": "la concha de tu madre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/2d43396c7b05826135e6.mp3": {
+  "text": "maestro",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/2d80fac91e5b501c45f3.mp3": {
+  "text": "cumbia villera",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/2d894597297e27413561.mp3": {
+  "text": "negro de mierda",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/2dc7099b46b72ff5a33e.mp3": {
+  "text": "te quiero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/2e35f6f7f497cd7f3a7b.mp3": {
+  "text": "locro",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/2e3eaaac3f85f3ebbdfb.mp3": {
+  "text": "saldo negativo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:28.110Z"
+ },
+ "culture/2e8c54d8aafb9da8ed71.mp3": {
+  "text": "milanesa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/2f169525f962c5984899.mp3": {
+  "text": "llevarse una materia",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/2f431874c5ece07cab3b.mp3": {
+  "text": "coquean",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/2f90a91f13e0c5dcac02.mp3": {
+  "text": "tereré",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/300c92dfa8f496d00729.mp3": {
+  "text": "Brasil, decime qué se siente",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/302db94ae65e02145ad6.mp3": {
+  "text": "llora",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/30c6c8a49c5f1c53446f.mp3": {
+  "text": "vamos viendo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:55.715Z"
+ },
+ "culture/31f4ee81d65849f3cf30.mp3": {
+  "text": "triple",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/327e70a5f5206749a3c8.mp3": {
+  "text": "me traés la cuenta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/32ab0e3e5cf222a795a4.mp3": {
+  "text": "es una boludez",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/32cd22ffc70b1d32ef46.mp3": {
+  "text": "chocotorta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/32d30b402a6fc204d7e2.mp3": {
+  "text": "brindis",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:23.030Z"
+ },
+ "culture/330e14031a2340b13f5d.mp3": {
+  "text": "jefe",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/337b267aa7ed822aac5c.mp3": {
+  "text": "después dividimos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/33e5f1c5d0ae8f1af95f.mp3": {
+  "text": "el auto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/34069aa6c0a9602e6bda.mp3": {
+  "text": "tercer tiempo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/34ddce6c66520ee52f96.mp3": {
+  "text": "al asador",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/34ec6941a8182c18ed1e.mp3": {
+  "text": "triperos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/351d8a55601242626f51.mp3": {
+  "text": "alfonsina y el mar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/355accc4bdf29440a3b1.mp3": {
+  "text": "descamisados",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/3619817922cc46351ea4.mp3": {
+  "text": "mazorca",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/3637bc266b7581bfc366.mp3": {
+  "text": "achuras",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/3656006958a2e3a01ee3.mp3": {
+  "text": "fernet",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/3668e85f3046b8714047.mp3": {
+  "text": "cuánto son las expensas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/36bbcb40ab26d3d4eddf.mp3": {
+  "text": "mandar fruta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/37082a0c1f5883eb8cbd.mp3": {
+  "text": "bondi",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:01.958Z"
+ },
+ "culture/370ba67037a631527cf9.mp3": {
+  "text": "la facu",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/3747cbc33f22390301bd.mp3": {
+  "text": "Hacía un frío, ¿viste?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:06.957Z"
+ },
+ "culture/376dea45e92cb1212d99.mp3": {
+  "text": "¡Otra, otra!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/37771c3280eb1f00df75.mp3": {
+  "text": "20 de junio",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/37a3b09fda23bb80f640.mp3": {
+  "text": "más vale pájaro en mano que cien volando",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/37ae1f8a2994474b6661.mp3": {
+  "text": "subtituladas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/37b0f480c2640410b888.mp3": {
+  "text": "facturas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/37d6ffc298b546b9f455.mp3": {
+  "text": "que la inocencia te valga",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/380767ead411f7d3d24d.mp3": {
+  "text": "flaca",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:13.187Z"
+ },
+ "culture/3822df9ba8c694b4d4fe.mp3": {
+  "text": "¡qué buena onda!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/388abbc60fdcf7797139.mp3": {
+  "text": "Llenalo, por favor",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/39266cd580b2d29e2967.mp3": {
+  "text": "¿En cuotas?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:39.242Z"
+ },
+ "culture/394ecb422c81c65e11db.mp3": {
+  "text": "te banco",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/3992b92c68c7eb82ce71.mp3": {
+  "text": "discusión",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/39d3c465d3c4fd45b66e.mp3": {
+  "text": "santa maría del buen ayre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/39ee6754074075a2da2d.mp3": {
+  "text": "Cerrado por vacaciones.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/3a0a3a4a771f87e3ce09.mp3": {
+  "text": "gauchada",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:17.760Z"
+ },
+ "culture/3a29917086a822beff7e.mp3": {
+  "text": "perejil",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/3a5535f91ac5abef8824.mp3": {
+  "text": "quemados",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/3add674c2ce2156ab860.mp3": {
+  "text": "torta negra",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/3b13d811303d78639fdd.mp3": {
+  "text": "avenida corrientes",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/3b3e739d076fd94c8008.mp3": {
+  "text": "el secreto de sus ojos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/3b511fd68b35f0c316f1.mp3": {
+  "text": "garca",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/3b96a4d2e2f13e6522d7.mp3": {
+  "text": "¿Me das un alfajor?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/3cba7aafcbc93ef38e30.mp3": {
+  "text": "el fueye",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/3cce65ea39dde152c571.mp3": {
+  "text": "morfar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:15.738Z"
+ },
+ "culture/3cf3f4c05d683318b84c.mp3": {
+  "text": "la bombonera no tiembla late",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/3cfe813d93beb6a81c7c.mp3": {
+  "text": "bajo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/3d02d202ee112714b88f.mp3": {
+  "text": "rellena",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/3d1a013a77a82f7c339d.mp3": {
+  "text": "casamiento",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/3d4168e9d1bc384cc5e7.mp3": {
+  "text": "apodo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/3d56dde0eabcc88cb1d2.mp3": {
+  "text": "unitarios",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/3d63c55dd609cd98d718.mp3": {
+  "text": "la hinchada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/3d99514fe74c7a17eace.mp3": {
+  "text": "perdimos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/3dcb384809c9500631bd.mp3": {
+  "text": "peatonal",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/3dd072cb104c888bbbe2.mp3": {
+  "text": "mate dulce",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/3e19ef3e92b832b02b2f.mp3": {
+  "text": "turno tarde",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/3e5ec532ea5712632ad9.mp3": {
+  "text": "día de la tradición",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/3e7a2fc4b402ae2bbbff.mp3": {
+  "text": "guiso de lentejas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/3e98bde563f56f5dada0.mp3": {
+  "text": "bombón asesino",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/3ec41e9abb1a0f4e43d4.mp3": {
+  "text": "tonada",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/3ee408747f3e3848fbe6.mp3": {
+  "text": "cagarse de risa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/3f24310c05904b4dd6de.mp3": {
+  "text": "folklore",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/3f2bfb2082ef8a61271b.mp3": {
+  "text": "Ni en pedo voy a esa fiesta.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/3f33eaf89f8cb66a5334.mp3": {
+  "text": "mufa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/3f5cfb03bae3d419f7ef.mp3": {
+  "text": "pan dulce",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:21.976Z"
+ },
+ "culture/3f5dd6fcdc9f322e9ef9.mp3": {
+  "text": "potrero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/3f5f519930c06e543cb5.mp3": {
+  "text": "casi ángeles",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/3f61d7a74be30c4c5e1c.mp3": {
+  "text": "clásico",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/3f7ce9936fcd5a8568fb.mp3": {
+  "text": "irse a la b",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/3f82501777b1f70887a6.mp3": {
+  "text": "¡qué bajón!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/4034bba847b6fbdb159f.mp3": {
+  "text": "¡Qué garrón!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/40456b022351ec275252.mp3": {
+  "text": "damajuana",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/40d5c254070015982eb8.mp3": {
+  "text": "vals",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/40f42d317da46d396ba0.mp3": {
+  "text": "ratearse",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/4112b0345e89f9868617.mp3": {
+  "text": "Pasá, pasá",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:39.324Z"
+ },
+ "culture/41ddbb49a6a1ad0587bd.mp3": {
+  "text": "manuelita vivía en pehuajó",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/41e0bc6ccdeaa9a92794.mp3": {
+  "text": "final",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/41f17ea2e75c5d69e52b.mp3": {
+  "text": "cortado",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:19.416Z"
+ },
+ "culture/42296a3092e07838bff9.mp3": {
+  "text": "estoy al horno",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/4230367368585ba06c0d.mp3": {
+  "text": "maestra jardinera",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/42491db71df3627d8acd.mp3": {
+  "text": "radio taxi",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:52.221Z"
+ },
+ "culture/425763e54a1bdf8b3daf.mp3": {
+  "text": "¡bicho feo!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/426cf4840d6ef20ebcf1.mp3": {
+  "text": "disco de arado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/428bb1253720d39b67f7.mp3": {
+  "text": "genio",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/42bb2160e7f15d903f92.mp3": {
+  "text": "chorizo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/42bc95a8713b08941c9c.mp3": {
+  "text": "relator",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/435285f87c9a8198c139.mp3": {
+  "text": "25 de mayo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/4374595bbc6bc620661c.mp3": {
+  "text": "alfajor",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/437f7be4a9485342448c.mp3": {
+  "text": "ambientes",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/4399976b87bf5b6aa13e.mp3": {
+  "text": "plaza de mayo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:16.109Z"
+ },
+ "culture/43c7583f1c4750791dad.mp3": {
+  "text": "buen provecho",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:42.111Z"
+ },
+ "culture/43d966826afd4cabb150.mp3": {
+  "text": "obelisco",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:13.933Z"
+ },
+ "culture/43db6f05116ca169d588.mp3": {
+  "text": "nola",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/43e5a464da874428bb83.mp3": {
+  "text": "novia",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/446337c81768feeacff9.mp3": {
+  "text": "Me robaron.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:52.898Z"
+ },
+ "culture/44a0ecca6837cdfb5506.mp3": {
+  "text": "más pesado que collar de melones",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/44abc1f432c5e3dbffe9.mp3": {
+  "text": "al pedo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/45e4a2e942a25b03c434.mp3": {
+  "text": "dibujitos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/45f26008153fba61644f.mp3": {
+  "text": "bancar",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/4617fb8f21fefcd9b2a9.mp3": {
+  "text": "docena",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/46882113f6179a8ec7ee.mp3": {
+  "text": "dólar coldplay",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/46b49f3e665c7112571d.mp3": {
+  "text": "cepo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/46b82c9eb2b93883cf2d.mp3": {
+  "text": "superclásico",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/46c3f529c4b1f69e7962.mp3": {
+  "text": "entraña",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/47242fc3640fd7844fd0.mp3": {
+  "text": "picada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/472654389fef30718764.mp3": {
+  "text": "merendamos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/473405a20c5cdb1958fc.mp3": {
+  "text": "¡Ascensor!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/4743db17cef0fd265d76.mp3": {
+  "text": "más aburrido que chupar un clavo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/479d9f271524231a6eb9.mp3": {
+  "text": "la nona",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/484bd624ffaf151ffeb2.mp3": {
+  "text": "Ponete las pilas.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/486d33263860053beb7f.mp3": {
+  "text": "profe",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/48bc3fde7aaee7ef8d38.mp3": {
+  "text": "quinta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/490041608c3ae8e1b485.mp3": {
+  "text": "jornada completa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/490ac2fc107a6793cce1.mp3": {
+  "text": "despedida",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/494bc026452460453f01.mp3": {
+  "text": "caba",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:50.466Z"
+ },
+ "culture/496933ba009a8d5a73f4.mp3": {
+  "text": "submarino",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:37:06.093Z"
+ },
+ "culture/49954dc4378622d1cf91.mp3": {
+  "text": "—¿Te gustó? —¡Re!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/49db1b765f196f5c891c.mp3": {
+  "text": "desentierro del diablo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/49fd658f1fac2931c0e9.mp3": {
+  "text": "matear",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/4a5128d8bc5fed8fc12e.mp3": {
+  "text": "sos gardel",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/4ac691d9f1c0a46ed158.mp3": {
+  "text": "generación dorada",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/4ad9bd334370ac06352b.mp3": {
+  "text": "¿Me hacés factura?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/4afb418c052a6014f682.mp3": {
+  "text": "¿Qué hacés, boludo?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/4b461d98c68aab7b547a.mp3": {
+  "text": "grupo de whatsapp",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/4bbafe9a597b90f45071.mp3": {
+  "text": "¡Ojo con el celu!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:25.538Z"
+ },
+ "culture/4bc06c1e04173d86ab8f.mp3": {
+  "text": "ley sáenz peña",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/4c536241f3ba172d30f4.mp3": {
+  "text": "novio",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/4c6fa9371bc59f342600.mp3": {
+  "text": "¡Dale!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/4cc4cc30761a66c39618.mp3": {
+  "text": "dsp",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/4d7a8cdd93cc4651e523.mp3": {
+  "text": "zamba",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/4da13d1c4127c38ebc90.mp3": {
+  "text": "chimichurri",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/4dce5bb985de3d07ed46.mp3": {
+  "text": "el disco",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/4e0d05423b1d70b6553e.mp3": {
+  "text": "molinete",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/4e11939f7f16a856f930.mp3": {
+  "text": "bochas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/4e4d5392f4f461b39096.mp3": {
+  "text": "moscato, pizza y fainá",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/4eb35b3d47cea1bda46e.mp3": {
+  "text": "¡Flaco!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:10.632Z"
+ },
+ "culture/4f85a7a55daeb035f9e0.mp3": {
+  "text": "los cinco grandes",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/4fa130e3d79c37ba8ec1.mp3": {
+  "text": "cumbia",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/501042cc7fb6e3af8991.mp3": {
+  "text": "mate camionero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/502289fe2e5f19acf0fa.mp3": {
+  "text": "a caballo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/5024416692154ab1743b.mp3": {
+  "text": "milongas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:03.808Z"
+ },
+ "culture/505e09a87be87687efcf.mp3": {
+  "text": "día de la virgen",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:19.100Z"
+ },
+ "culture/510148c5b10094a8a14f.mp3": {
+  "text": "¡Qué caro está todo!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/512e8d90b8e405f1b885.mp3": {
+  "text": "por favor",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:52.411Z"
+ },
+ "culture/514b134cd801ee195b32.mp3": {
+  "text": "patear el tablero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/5179477d33af4f5e7c25.mp3": {
+  "text": "cabrito",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/526a36e95cd86277c55d.mp3": {
+  "text": "rescate",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/52723866c5090e2b7464.mp3": {
+  "text": "chamuyo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:21.173Z"
+ },
+ "culture/5310a89fe27d3d6ea608.mp3": {
+  "text": "peña",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/533fb553ef8afb8bef07.mp3": {
+  "text": "en jarrito",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:58.135Z"
+ },
+ "culture/5347377d45d46bf7c342.mp3": {
+  "text": "planta baja",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/53b0a1d41f92a9a587b0.mp3": {
+  "text": "estamos ganando",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/53e2fdafec92a729993e.mp3": {
+  "text": "¡Hay cola, eh!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:07.084Z"
+ },
+ "culture/542b3b62681b8f2dd336.mp3": {
+  "text": "libertad",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/545eb133233fa3d2dcb8.mp3": {
+  "text": "bueee",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/548acf7f65eca8c3efec.mp3": {
+  "text": "día de la lealtad",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/54d87b35fdca337e3a6a.mp3": {
+  "text": "upd",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/54e4d45f9114c9231d99.mp3": {
+  "text": "hay descuento en efectivo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:44.417Z"
+ },
+ "culture/5550ce2fb316dfb34894.mp3": {
+  "text": "el baúl",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/5599d314ac3b76fa7660.mp3": {
+  "text": "rulo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/55bfbcaf85637381bd3e.mp3": {
+  "text": "pincharratas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/5665589360954685d465.mp3": {
+  "text": "paso, estoy resfriado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/567be73d161ec22205a8.mp3": {
+  "text": "día de la futbolista",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/567f91418b0d287b2d03.mp3": {
+  "text": "el encargado",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/56bf9544378c7bb0ec8a.mp3": {
+  "text": "estacionar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/580d99816705789c6c7f.mp3": {
+  "text": "de novios",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/5867d0cdb449a3bd0694.mp3": {
+  "text": "dulce de leche granizado",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/58a783652a78b3bcac5e.mp3": {
+  "text": "ñandú",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/58be5ebff7f340c1d6c1.mp3": {
+  "text": "repostero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/58c5b288bc6ffabea8e3.mp3": {
+  "text": "gracias",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:43.081Z"
+ },
+ "culture/58d501e49a858c33cfbe.mp3": {
+  "text": "pato",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/59093c01af193ebd65ce.mp3": {
+  "text": "late",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/591c7fcd7e3df1a4c60d.mp3": {
+  "text": "cordobés",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/594180e36a22ca77d7a2.mp3": {
+  "text": "9 de julio",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/59d4ff96279ca630176c.mp3": {
+  "text": "milonga",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/5a5c23a9456ba4d9e67c.mp3": {
+  "text": "ustedes",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:46.568Z"
+ },
+ "culture/5a6f4c109d1208a01150.mp3": {
+  "text": "¿Efectivo o tarjeta?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/5a80768de31bd2cd14fb.mp3": {
+  "text": "motochorro",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:24.219Z"
+ },
+ "culture/5adbd582fbdd4b95303e.mp3": {
+  "text": "doctora",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/5bab62a334a8bf72ee2f.mp3": {
+  "text": "gotán",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/5bd6da4fa4530142ec81.mp3": {
+  "text": "tanos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/5be38830d628c2cc34c3.mp3": {
+  "text": "escarapela",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/5c08e3804a73a7f386df.mp3": {
+  "text": "chamuyar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/5c1f8d433f99177fa7eb.mp3": {
+  "text": "guardapolvo blanco",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/5c2af6ebd6209ac7ad1d.mp3": {
+  "text": "finde largo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:32.382Z"
+ },
+ "culture/5c34a9ab5d9bdc73c5a3.mp3": {
+  "text": "pinta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/5c7d2dfc9eeee47b91aa.mp3": {
+  "text": "¡Estás más gordito!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:08.140Z"
+ },
+ "culture/5c8c40aa275054414350.mp3": {
+  "text": "pedo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/5cc45795be2ed02afbc6.mp3": {
+  "text": "ruta 12",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/5cc5d104f7cc028cae11.mp3": {
+  "text": "la seño",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/5d00897bb4b5cbb347d6.mp3": {
+  "text": "farmacia de turno",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/5d7c0ff4f75fb3eb3690.mp3": {
+  "text": "pastafrola",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/5dc0df26ab6996b3e34d.mp3": {
+  "text": "campeón",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/5df5e457f1dddd4acb9e.mp3": {
+  "text": "Nos vamos la primera quincena de enero.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/5e3bf28df49e5391ec58.mp3": {
+  "text": "brasas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/5e40f0c96c04688edb86.mp3": {
+  "text": "moscato",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/5e8a4a6324650d9ccd19.mp3": {
+  "text": "gorila",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/5ed6f71d90c946daa276.mp3": {
+  "text": "tqm",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/5f04c0552d2974bc7311.mp3": {
+  "text": "permiso",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:37.526Z"
+ },
+ "culture/5f1ec48f6cb96f5e9e55.mp3": {
+  "text": "mariposa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/5fb4b273e7a1eb19d6d3.mp3": {
+  "text": "empacho",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/5fb6a65eef84a4b1bd81.mp3": {
+  "text": "¿Cuánto sale?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/600946b72dd65319561d.mp3": {
+  "text": "11 de septiembre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/602f515555194d333a9c.mp3": {
+  "text": "parrillero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/606a3a051f2633111ad3.mp3": {
+  "text": "sensación térmica",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/60b4b8c404c812594f59.mp3": {
+  "text": "consorcio",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/610731a223a160a615d4.mp3": {
+  "text": "voy al chino",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/610ba6ae256012e939f9.mp3": {
+  "text": "vigilante",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/615d70bf74cdfbd6639b.mp3": {
+  "text": "son cinco cuadras",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:58.947Z"
+ },
+ "culture/6196a10a118e91b13b41.mp3": {
+  "text": "cospeles",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/61debe5d886920b2f3e1.mp3": {
+  "text": "clavel rojo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/620afee0b37d64a22f71.mp3": {
+  "text": "se cayó el sistema",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/627e92a763c2f9370f26.mp3": {
+  "text": "vitel toné",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:21.403Z"
+ },
+ "culture/62f7b90bbb38392164f3.mp3": {
+  "text": "los pumas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/63038392106133cfa1af.mp3": {
+  "text": "bautismo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/630ab6559d4785321161.mp3": {
+  "text": "oros",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/635e66a14fd4bcc07275.mp3": {
+  "text": "¿Dividimos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/6446b923506233818617.mp3": {
+  "text": "dólar blue",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/6498d64e39fdf851118d.mp3": {
+  "text": "paritarias",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/64be78478dfadf54d76b.mp3": {
+  "text": "¡Qué calor!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/64fa938f153def09fc8e.mp3": {
+  "text": "barra brava",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/6529d7e583887a2768f9.mp3": {
+  "text": "nafta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/659c49eb7acb897a3a4e.mp3": {
+  "text": "mochila",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:49.546Z"
+ },
+ "culture/65a0d0b5419227a291bc.mp3": {
+  "text": "abrazo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/65a862e5036ea0ec9527.mp3": {
+  "text": "la única salida es ezeiza",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/662caccd840c1373d6e9.mp3": {
+  "text": "Argentina no es para principiantes.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/66721536f5930a8b435d.mp3": {
+  "text": "bobo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/669bbfca266403e9cdde.mp3": {
+  "text": "libertario",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/66a5e4c50a97cc9bcd98.mp3": {
+  "text": "dar vueltas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/66c5ac15795df2e7c0b9.mp3": {
+  "text": "panqueques",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/66d3ae50fb4b9041451b.mp3": {
+  "text": "el visto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/66d6ecb69256d796bf03.mp3": {
+  "text": "cueva",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/66ebbc7697a6e1ae774b.mp3": {
+  "text": "vos tenés",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:43.931Z"
+ },
+ "culture/6710bb2ec034c1ec38fd.mp3": {
+  "text": "casa rosada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:14.230Z"
+ },
+ "culture/679f3731406459b96f3e.mp3": {
+  "text": "careta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/67d735a2767023358f66.mp3": {
+  "text": "bodegón",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/67de525a9d7226e58450.mp3": {
+  "text": "asador",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/69458ed5e823f6c33591.mp3": {
+  "text": "pinchas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/697fac3a45a16035986f.mp3": {
+  "text": "hijo de puta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/69c9fc37feec43c42760.mp3": {
+  "text": "el diez",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/6a1d394ca48504179a58.mp3": {
+  "text": "tunga tunga",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/6a20a0920f448ce30d7f.mp3": {
+  "text": "reforma universitaria",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/6a343e641b127beae1da.mp3": {
+  "text": "ancho de espada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/6a38a7e0a4d35f740f3e.mp3": {
+  "text": "re lejos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/6af30cf6d2a4707e16cd.mp3": {
+  "text": "verdulería",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/6affc9c1a8c628ee304c.mp3": {
+  "text": "la mano de dios",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/6b6fb9e2fe1ded1b45e4.mp3": {
+  "text": "tomar",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/6bbf70608366c083c76d.mp3": {
+  "text": "ronda",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/6bec3ab5078e125f6725.mp3": {
+  "text": "para hoy",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/6c21998acae0fb97639a.mp3": {
+  "text": "paragua",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/6ca3d0c1c85d5f731c8a.mp3": {
+  "text": "nuevo tango",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/6cb89ff9ff16109805a6.mp3": {
+  "text": "arreglar el mundo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/6ccff9241bfe74ff8ab4.mp3": {
+  "text": "sambayón",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/6cec2cf1d5dc026a6de5.mp3": {
+  "text": "bueno",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/6cf7b5fc399baab5ff96.mp3": {
+  "text": "arbolito",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:18.743Z"
+ },
+ "culture/6d11e36997fa6f991c18.mp3": {
+  "text": "aguinaldo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/6d2b99aa75eb9c3537ad.mp3": {
+  "text": "cordoobés",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/6d54ef96edd8123d88c2.mp3": {
+  "text": "Señores jueces: nunca más.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/6d8b6276767985a00f63.mp3": {
+  "text": "¿Quién te dio el registro?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/6d95ad999c643450b309.mp3": {
+  "text": "pibe",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:13.196Z"
+ },
+ "culture/6dd75267196309af642e.mp3": {
+  "text": "persianas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/6dd994ec9d6796dd473b.mp3": {
+  "text": "iglesia maradoniana",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/6de3a1cd075957014fed.mp3": {
+  "text": "cábala",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/6e823601dfcbd8711acb.mp3": {
+  "text": "del dicho al hecho hay mucho trecho",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/6eb7c06c9a8619587fe1.mp3": {
+  "text": "lavado",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/6efdf84db2f109dfdf2c.mp3": {
+  "text": "los chicos del colegio",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/6f0feba4fc1abbab35d7.mp3": {
+  "text": "estoy resfriado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/6f18a4cd9d02ab8d736b.mp3": {
+  "text": "una cagada",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/6f76f474c59d07b12b8f.mp3": {
+  "text": "el granero del mundo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/6f9766ebecfa9ff78d89.mp3": {
+  "text": "saldo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:26.813Z"
+ },
+ "culture/6fadc3d026b84b1bd104.mp3": {
+  "text": "combinación",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:30.766Z"
+ },
+ "culture/6fb52a29a1f6f28ed460.mp3": {
+  "text": "al frente",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/7010eefeaefef9e4499a.mp3": {
+  "text": "denuncia",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:55.938Z"
+ },
+ "culture/70251a48a2e3c723db09.mp3": {
+  "text": "la motosierra",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/7035f0519086f9575c6b.mp3": {
+  "text": "¿Qué mirás, bobo?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/7059b6310f9fa5628449.mp3": {
+  "text": "chiquititas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/70a0b0ce433ec9e5f0c9.mp3": {
+  "text": "día del maestro",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/70bb4b47c54d9ecc0ce6.mp3": {
+  "text": "re",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/70c78dfb04e18541b771.mp3": {
+  "text": "piquete",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/7120b601bc6a83b5a111.mp3": {
+  "text": "tren del fin del mundo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/712886c8da48090b6d6f.mp3": {
+  "text": "milanesa a la napolitana",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/717952752e1ea8b94e68.mp3": {
+  "text": "las nueve lunas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/71aaafe59c334734df1b.mp3": {
+  "text": "la grieta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/72231ea81783019c1329.mp3": {
+  "text": "rusos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/7246de1a39b15f0d95b9.mp3": {
+  "text": "mollejas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/725263ea8ff73052cb92.mp3": {
+  "text": "¿Algo más?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/727cd860ce488105413d.mp3": {
+  "text": "papelitos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/72f117381737f8a2d1a8.mp3": {
+  "text": "¡Salud!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:24.471Z"
+ },
+ "culture/730fb3f05a61b8a8fbcf.mp3": {
+  "text": "4° b",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/7367feddc4afa2b57306.mp3": {
+  "text": "¿Para acá o para llevar?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/737af9e4d4ee0038b15b.mp3": {
+  "text": "¿A cuánto está el dólar?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/739f6a8c99a84671ad4e.mp3": {
+  "text": "casi algo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/7425d66ec9247936b388.mp3": {
+  "text": "¿vos querés?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:44.481Z"
+ },
+ "culture/7434dc04f1558fd9271b.mp3": {
+  "text": "Una docena: seis de carne, tres de pollo y tres de humita.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/74527b794c671060a39d.mp3": {
+  "text": "los k",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/745685822858c9d6eb5f.mp3": {
+  "text": "paleta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/75fa51c3177e45cdb322.mp3": {
+  "text": "humita",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/7605702db5f88491834e.mp3": {
+  "text": "cebador",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/76779368d29fb47c49c3.mp3": {
+  "text": "soy cordobés",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/7690124e77a581e2a4fe.mp3": {
+  "text": "carpincho",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/76b45b89229439ae9fce.mp3": {
+  "text": "leprosos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/779c036513e2ebfa88a3.mp3": {
+  "text": "floripa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/77b844991626f6c619c5.mp3": {
+  "text": "ni en pedo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/77ed7814d9905920632e.mp3": {
+  "text": "¡No es un micrófono!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/781729d1056886472842.mp3": {
+  "text": "gallinas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/785e03e0fb86d3a5fcb4.mp3": {
+  "text": "tejo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/786ba3efd641e0252d89.mp3": {
+  "text": "nono",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/78c8cd66a4dddb83dbc5.mp3": {
+  "text": "laburo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/7937f888ba346afa134f.mp3": {
+  "text": "orquesta típica",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/794a6df76f68740f05a7.mp3": {
+  "text": "me llevé matemática",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/799e90d68fb189dfd4ea.mp3": {
+  "text": "corre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/79b65ce50294f5a66e4a.mp3": {
+  "text": "capital",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:52.239Z"
+ },
+ "culture/79e3161d2ca8379f1069.mp3": {
+  "text": "salame",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/79f6ce095373d750cc90.mp3": {
+  "text": "montoncito",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/7a476c589ecefcd90571.mp3": {
+  "text": "un café",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:57.354Z"
+ },
+ "culture/7aaaec3b70292174846e.mp3": {
+  "text": "teatro colón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:17.163Z"
+ },
+ "culture/7b18db17b8b0d70291d5.mp3": {
+  "text": "gordo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:09.406Z"
+ },
+ "culture/7b27cbc1763b4831d3bc.mp3": {
+  "text": "bajo el colchón",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/7b3399d3b040444afca7.mp3": {
+  "text": "libre",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:07.641Z"
+ },
+ "culture/7b41e40af6622ec6239e.mp3": {
+  "text": "misas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/7b6dd030c7d9e07dc3b6.mp3": {
+  "text": "último momento",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/7b700f34013d8393ad4d.mp3": {
+  "text": "No te hagas el vivo.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/7ba06abf477b76aff14c.mp3": {
+  "text": "agrandado",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/7ba55695f2b548d7072c.mp3": {
+  "text": "corso",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/7be4c0224770b99f48dc.mp3": {
+  "text": "más contento que perro con dos colas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/7c0ccd34618360758221.mp3": {
+  "text": "españoles",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/7c1d6262be682bc651e9.mp3": {
+  "text": "no des más vueltas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/7c2804fb818dd7760845.mp3": {
+  "text": "queja",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/7c38e84fe6449c56cd32.mp3": {
+  "text": "¿Tenés picante?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/7c9021f258f584ff71a0.mp3": {
+  "text": "sudestada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/7d4b2decf43a2623c843.mp3": {
+  "text": "mal de ojo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/7d9ec172bce811e314ee.mp3": {
+  "text": "candombe",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/7deced917d32387d815b.mp3": {
+  "text": "que los cumplas feliz",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:34.088Z"
+ },
+ "culture/7e0474047512acccd5ac.mp3": {
+  "text": "el paraíso",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:18.816Z"
+ },
+ "culture/7e0ab3a3352b8cfabc2e.mp3": {
+  "text": "postre vigilante",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/7e464e100ff8df1fdd30.mp3": {
+  "text": "¿De qué cuadro sos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/7e4f93df30ae7b7acf80.mp3": {
+  "text": "asado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/7e666a64642e70f0d71c.mp3": {
+  "text": "¿Todo bien?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:49.788Z"
+ },
+ "culture/7ef2584a710d5e407585.mp3": {
+  "text": "nadie se salva solo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/7f251f7deec7c1118086.mp3": {
+  "text": "monoambiente",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/7f32ca6bc5e2b7d225c0.mp3": {
+  "text": "alias",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:35.836Z"
+ },
+ "culture/7f5b2a35a8a0215ddf60.mp3": {
+  "text": "muzza",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/7f8bdf6e3e7f95b0b1fc.mp3": {
+  "text": "Tal cual.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/7fe14263ede421c5222d.mp3": {
+  "text": "espadas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/80334b17a9c5a97b1b7e.mp3": {
+  "text": "jugoso",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/809dc8ae75a8f77a1df7.mp3": {
+  "text": "kirchnerismo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/80fb3396acd9ce5f6c90.mp3": {
+  "text": "Oíd, mortales",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:49.279Z"
+ },
+ "culture/812c329efa74e1d0e023.mp3": {
+  "text": "Este país…",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/81321a4d9aef3387e7f8.mp3": {
+  "text": "merendar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/81553b7987a752df18c5.mp3": {
+  "text": "baile de cuarteto",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/8157cea4c388e74fd923.mp3": {
+  "text": "¿Negro o blanco?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/81cfb60d766bd659ffac.mp3": {
+  "text": "día de la bandera",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/81dca14172eef82767f3.mp3": {
+  "text": "el asado de los jueves",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/82e9baca757b02de775d.mp3": {
+  "text": "montañita",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/82fdf735079dde0545e9.mp3": {
+  "text": "¡Cobrá, referí!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/832174fb156ee67c9002.mp3": {
+  "text": "un bar",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:06.804Z"
+ },
+ "culture/832bed5480693e87541b.mp3": {
+  "text": "la última coca-cola del desierto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/83ea6c29c366c975783e.mp3": {
+  "text": "¿Es tranquilo por acá de noche?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:50.273Z"
+ },
+ "culture/83ee71945d40772b3439.mp3": {
+  "text": "tocaya",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/8438d5ef9dd10d44b6ec.mp3": {
+  "text": "pico cebador",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/843ea9a96efa6d94eb8f.mp3": {
+  "text": "hornero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/848a7c2033d90db52e6d.mp3": {
+  "text": "che",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:02.484Z"
+ },
+ "culture/84a491f102da6410948c.mp3": {
+  "text": "¡Qué frío!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/84be0b1c21c5b913815f.mp3": {
+  "text": "medio ambiente",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/858cc13d871d04a1943c.mp3": {
+  "text": "vegetariana",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/864776248ca1eebbb888.mp3": {
+  "text": "egresados",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/8650c3d792624efb7cde.mp3": {
+  "text": "No sabés lo que me pasó.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/86c6e0aba717146f82f7.mp3": {
+  "text": "carnaval carioca",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/86ed535b157d3775933b.mp3": {
+  "text": "balizas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/87086f1c7c2524515ee2.mp3": {
+  "text": "opinólogo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/87402b14ec2f47d1e635.mp3": {
+  "text": "cordillera",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/876bdcb0e55af35a5b94.mp3": {
+  "text": "corrientes y callao",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:58.207Z"
+ },
+ "culture/878a1b84b9763bd53f21.mp3": {
+  "text": "islas malvinas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/8861244c3d0bebd7f9b1.mp3": {
+  "text": "constitución",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/886e64b9910fb49939d6.mp3": {
+  "text": "tía",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/88b7ec89eb8ffe0e6d31.mp3": {
+  "text": "cabeceo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/88e9ed86fe95431f995c.mp3": {
+  "text": "tiene más vueltas que una calesita",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/8914aa8d19438f5f8d43.mp3": {
+  "text": "mentir",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/89299eb5b512a35ad6b7.mp3": {
+  "text": "expensas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/899c2d11810126ff5635.mp3": {
+  "text": "voto cantado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/89f64b6c69fe244832fb.mp3": {
+  "text": "tío",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/89f64fd639eac9192065.mp3": {
+  "text": "Juego al pádel los martes.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/8a1ef52148224cf30c94.mp3": {
+  "text": "Extraño el asado, a mis amigos, los domingos.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/8a3af1b234d81ac60427.mp3": {
+  "text": "una lágrima",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:58.718Z"
+ },
+ "culture/8a5045de21cc64b982d5.mp3": {
+  "text": "hielo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/8a9250a8f342c424e447.mp3": {
+  "text": "la puta…",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/8ad664abf06e73ff782a.mp3": {
+  "text": "balneario",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/8b0c6f5b86e581f485bc.mp3": {
+  "text": "¿Tenés novio?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:15.926Z"
+ },
+ "culture/8b9adbc686bbe31957c3.mp3": {
+  "text": "rebusque",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/8bc9ede5e793ce470d48.mp3": {
+  "text": "Vení a la una.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/8c06cc695c573ba81d0f.mp3": {
+  "text": "bajá un cambio",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/8c2effcbe7822e7d22ba.mp3": {
+  "text": "vesre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/8d48f7d24dcf6db7b32b.mp3": {
+  "text": "¿Nos juntamos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/8dc4590cb1bce58bbc79.mp3": {
+  "text": "café",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:59.877Z"
+ },
+ "culture/8de264f34f178356aec1.mp3": {
+  "text": "mila",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/8e8115d86818ed24f77c.mp3": {
+  "text": "Con un asado y amigos, sos Gardel.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/8ec46087493bd7feb75f.mp3": {
+  "text": "panadería",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/8f6392945e6d04aad695.mp3": {
+  "text": "pava",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/8faa7e850be94f2ffbf3.mp3": {
+  "text": "jugale al 48",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/8ff0f26d095e4f3792b4.mp3": {
+  "text": "los murciélagos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/903c935937eb4d1d1b83.mp3": {
+  "text": "me cagó",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/9065efe9dd702db967ec.mp3": {
+  "text": "rompebolas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/9085aa0859b7a6c4eaa4.mp3": {
+  "text": "me cayó la ficha",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/911bab8cb4eea00d8392.mp3": {
+  "text": "me duele la cabeza",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/91e08977f8644397dbf4.mp3": {
+  "text": "al molde",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/920512c1a751a26b8b46.mp3": {
+  "text": "gauchos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/924720929dbc511f5979.mp3": {
+  "text": "yo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:55.938Z"
+ },
+ "culture/92b44df6b94abc90ceb9.mp3": {
+  "text": "mogólico",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/938f0554707c18bcdcc5.mp3": {
+  "text": "canallas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/9444181274b74150bf4e.mp3": {
+  "text": "rioplatense",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:00.968Z"
+ },
+ "culture/945a1d740f61864a5608.mp3": {
+  "text": "sombrilla",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/94611724336e9855bcb0.mp3": {
+  "text": "17 de agosto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/9467bcdffa9ae2e81730.mp3": {
+  "text": "más largo que esperanza de pobre",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/946a719a32adfd0d9ada.mp3": {
+  "text": "¡Dale, boludo!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/947d8507b2e0948c3b7e.mp3": {
+  "text": "américa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:47.707Z"
+ },
+ "culture/94aabfb2539301613ac0.mp3": {
+  "text": "boludear",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/94bead44f0286f14aa25.mp3": {
+  "text": "Argentina, no lo entenderías.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/94f4faed89f7003fca76.mp3": {
+  "text": "bobe",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/952330ee65c7d4e802ad.mp3": {
+  "text": "la cancha",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/95250f0321a02362c92c.mp3": {
+  "text": "por las dudas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/9551420d8e3ded3361fc.mp3": {
+  "text": "no traigas nada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:58.133Z"
+ },
+ "culture/95636c08962bde9cfb91.mp3": {
+  "text": "bue",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/956943c50189e694b27a.mp3": {
+  "text": "escapada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/957ae75188cc9e9e502d.mp3": {
+  "text": "queso y dulce",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/9581254ec342ae0e9398.mp3": {
+  "text": "¿Y vos?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:46.727Z"
+ },
+ "culture/95d72ab0680fb678e98b.mp3": {
+  "text": "¿Sabés cuál es el problema de este país?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/95ebb7e6c84f3df00769.mp3": {
+  "text": "gurí",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/95fab63d9736ecfd4af1.mp3": {
+  "text": "el loco",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/9680d6c3addb3b1a5448.mp3": {
+  "text": "turismo carretera",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/96e4d3d043916f5bf851.mp3": {
+  "text": "feliz cumple",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:35.811Z"
+ },
+ "culture/97841526fef90a2eaad4.mp3": {
+  "text": "choclo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/97d0e4c89b316fc3db37.mp3": {
+  "text": "transferencia",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:38.092Z"
+ },
+ "culture/97ebc5389b30246fb20d.mp3": {
+  "text": "la difícil",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/985e151c5c511eceee4c.mp3": {
+  "text": "ce",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:03.828Z"
+ },
+ "culture/986a57c5437b9d5b2c90.mp3": {
+  "text": "provincias",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/986eea118a6eb58a5cea.mp3": {
+  "text": "hasta luego",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/9876bd9252780a8c87d5.mp3": {
+  "text": "tirar la toalla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/989a568f505ae6eb4c0c.mp3": {
+  "text": "Se cree la última … del desierto.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/992dcce86bf9d783a35a.mp3": {
+  "text": "pesado",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/998513e7443f13de5109.mp3": {
+  "text": "la selección",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/99bdda591bb029be8a3e.mp3": {
+  "text": "lo mismo un burro que un gran profesor",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/99d91afce52473d80967.mp3": {
+  "text": "reyes magos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:25.640Z"
+ },
+ "culture/99f98bf6c7afffe5edeb.mp3": {
+  "text": "fiesta de quince",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/9a23f60feea256a17c63.mp3": {
+  "text": "cabildo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/9a2e1a224a47a486103e.mp3": {
+  "text": "mala onda",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/9a8df3687fc9415a1633.mp3": {
+  "text": "Lic.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/9a8ee93cb4385f30f19c.mp3": {
+  "text": "genia",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/9aa5579ec67f912b5053.mp3": {
+  "text": "más o menos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/9ab1ca13c4812f8415d8.mp3": {
+  "text": "paro de subte",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/9ac9ea1076b04c358b04.mp3": {
+  "text": "infusión nacional",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/9c27a73d52841dd5b97f.mp3": {
+  "text": "ruta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/9c29db2ed53b54fc2441.mp3": {
+  "text": "sifón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/9c5ba5383ff4b803b217.mp3": {
+  "text": "toco madera",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/9cb2fe432097b9169273.mp3": {
+  "text": "birome",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/9cbb7f4ea25b2f5d5c53.mp3": {
+  "text": "flan",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/9cd2b5dfde26ea08f5c1.mp3": {
+  "text": "arquero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/9cebec699258f7f1589b.mp3": {
+  "text": "ensalada mixta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/9d20e3fbc63a0aaa6a77.mp3": {
+  "text": "cebar",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/9d2d13fa6cad3db83d07.mp3": {
+  "text": "¡La puta madre!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/9d8bdaae5896607fe9ac.mp3": {
+  "text": "el potro",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/9d9ba230220c771a85c5.mp3": {
+  "text": "promedio",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/9df37c0a9f945958b821.mp3": {
+  "text": "conurbano",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:51.433Z"
+ },
+ "culture/9df5977c85e470ac16dc.mp3": {
+  "text": "madres de plaza de mayo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:16.806Z"
+ },
+ "culture/9e2ea872699d241c49b7.mp3": {
+  "text": "irse al mazo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/9e4530af6f8c3a92df49.mp3": {
+  "text": "choripán",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/9e7eeffc2564a7f22ae1.mp3": {
+  "text": "25 de mayo de 1810",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/9e81df815444657158bb.mp3": {
+  "text": "De ninguno todavía. ¿Vos de cuál sos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/9e91e3b3583973025d93.mp3": {
+  "text": "sindicatos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/9e9aedda1dc75a2d3025.mp3": {
+  "text": "chau",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:47.090Z"
+ },
+ "culture/9eca6a7de3020dcfea6b.mp3": {
+  "text": "tirón de orejas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:34.982Z"
+ },
+ "culture/9ece2d1255fa9ee787fa.mp3": {
+  "text": "difunta correa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/9ed87ab7ff629ce41459.mp3": {
+  "text": "pb",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/9efb10d2049ad3ce3413.mp3": {
+  "text": "fierro",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/9f38d978762e60fd68d5.mp3": {
+  "text": "¿Y qué extrañás de allá?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/9f57db895135bffdebe0.mp3": {
+  "text": "pucho",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/9f76982a623b65bb9bee.mp3": {
+  "text": "zafar",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/9fb655862bb937d300d6.mp3": {
+  "text": "se cortó la luz",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/a00dba38c6416cf67855.mp3": {
+  "text": "obra social",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/a01f155671303d598be9.mp3": {
+  "text": "la scaloneta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/a02e518310bc61cc490a.mp3": {
+  "text": "21 de septiembre",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:29.916Z"
+ },
+ "culture/a04dad0ab8de7cb32ce3.mp3": {
+  "text": "yerba",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/a08f9e68385d6db1656e.mp3": {
+  "text": "feriado puente",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:33.135Z"
+ },
+ "culture/a0d60ba867380a227502.mp3": {
+  "text": "mi buenos aires querido",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/a0f5678eec5a95440cd4.mp3": {
+  "text": "conquista del desierto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/a0f9d061137695978aed.mp3": {
+  "text": "caminito",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:00.804Z"
+ },
+ "culture/a14483d43a7dc34cd44f.mp3": {
+  "text": "churros hay churros",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/a19d77b1a12ebd0bef05.mp3": {
+  "text": "Decime con quién andás y te diré quién sos.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/a1b17ebfa45a28239ec0.mp3": {
+  "text": "de pedo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/a1ea9c295a2271b552d8.mp3": {
+  "text": "soda",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:37:07.347Z"
+ },
+ "culture/a23b2358dcc5f3199144.mp3": {
+  "text": "gracias a la vida",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/a2416d7aa6e03fade682.mp3": {
+  "text": "Pinché una goma.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/a26f019ff22eecd4af0d.mp3": {
+  "text": "¡Cuidado!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:52.792Z"
+ },
+ "culture/a29ca48fe8f5d7cac5f8.mp3": {
+  "text": "abuelo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/a3005b0bb12c88ead180.mp3": {
+  "text": "descenso",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/a300ff3e3f3c4b59f05e.mp3": {
+  "text": "buenas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/a35765ca785e4ab7a684.mp3": {
+  "text": "bienvenido",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/a3a390e9c5bfeb4216d9.mp3": {
+  "text": "¿Tomamos una birra?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/a4c5da53438a000ff27a.mp3": {
+  "text": "paro de colectivos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/a521daf006374bb32983.mp3": {
+  "text": "Martes 13, no te cases ni te embarques.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/a54b62ae1dc5d8ec5944.mp3": {
+  "text": "doble fila",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/a54b8889062a20302092.mp3": {
+  "text": "resfriada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/a572e4472381e38ef12f.mp3": {
+  "text": "dobladas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/a5ac8899ad8f9861fc6a.mp3": {
+  "text": "24 hs",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/a5aed4c4ee52ac85a1a5.mp3": {
+  "text": "timbre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:04.705Z"
+ },
+ "culture/a5c3dde8a0bc0db2f348.mp3": {
+  "text": "¿Te ayudo en algo?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/a6d116a5641d97012384.mp3": {
+  "text": "el apóstol",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/a6fed2d86651a0a8dc47.mp3": {
+  "text": "¿Puedo probar?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/a72cd18119b61f8bd32f.mp3": {
+  "text": "pollo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/a7babe2373b333d066c3.mp3": {
+  "text": "bolita",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/a80990d9eb61c5ac00d5.mp3": {
+  "text": "una docena de facturas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/a876ed194925528f0483.mp3": {
+  "text": "cambalache",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/a8ab8b714f5ccff2deb4.mp3": {
+  "text": "a punto",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/a8ae449f815f6054cfb3.mp3": {
+  "text": "mate cocido",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/a9283195af50cc38cff6.mp3": {
+  "text": "me voy al laburo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:10.496Z"
+ },
+ "culture/a952ee374e2113bc6d35.mp3": {
+  "text": "cada día canta mejor",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/a99a86f02f210c0082ad.mp3": {
+  "text": "sapucai",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/a9fcece7d6f497d26a9e.mp3": {
+  "text": "birra",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:17.298Z"
+ },
+ "culture/aa036b3aaa39f039d3b7.mp3": {
+  "text": "no seas gil",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/aa1dd1c562d942fcf601.mp3": {
+  "text": "¿Tenés cambio?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:55.086Z"
+ },
+ "culture/aa28f1ffd5c4e885e19e.mp3": {
+  "text": "mina",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/aa59a1fae45c8fbdc8ec.mp3": {
+  "text": "granaderos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/aa8d6ddaaad70695af23.mp3": {
+  "text": "promesa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/aaa0418e2f818fd57043.mp3": {
+  "text": "vino tinto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/ab6119178a4e57ea6917.mp3": {
+  "text": "forro",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/ab969a26170dd361ea99.mp3": {
+  "text": "orsai",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/abab22529dd4691fe063.mp3": {
+  "text": "fiaca",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:18.425Z"
+ },
+ "culture/ac4e419a90423da3aca7.mp3": {
+  "text": "cuarteto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/ac82c830acc77a9e64ef.mp3": {
+  "text": "cañoncitos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/acb7e3293b0738bbcec9.mp3": {
+  "text": "el eternauta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/acde95862da475aa3de4.mp3": {
+  "text": "pueblos originarios",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/ad2993c8b74b7f7d382c.mp3": {
+  "text": "buen ayre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/ad328e39484b241b578d.mp3": {
+  "text": "el var",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/ad34f5ebdf24ef3f2e1b.mp3": {
+  "text": "12 de octubre",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/ad3df6adc5fc2f0a8502.mp3": {
+  "text": "murga",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/ad647eff721d8e51f366.mp3": {
+  "text": "matera",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/adc53a24c3dd1802a622.mp3": {
+  "text": "catedral",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/add0a74e09579cd40ddc.mp3": {
+  "text": "cortada a cuchillo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/add23c6757870e5eba53.mp3": {
+  "text": "¿De qué laburás?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/ae44c6dd9321881ba2fc.mp3": {
+  "text": "más trucho que billete de tres pesos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/aeab4de9a946df19d1dc.mp3": {
+  "text": "saludás uno por uno",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:47.139Z"
+ },
+ "culture/af4a3e383743546a90b7.mp3": {
+  "text": "en blanco",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/af7b0c7ade7580a2530e.mp3": {
+  "text": "¿fue penal?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/afdaeba099526c86aabb.mp3": {
+  "text": "le hacés la gamba",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/b0237e5e07db1f30129e.mp3": {
+  "text": "chivito",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/b0298a02e1aed29ee830.mp3": {
+  "text": "el colo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/b02b976a2f40ccd671be.mp3": {
+  "text": "academia porteña del lunfardo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/b093d82a85be386b89fc.mp3": {
+  "text": "feriados",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/b0acdb4132a842748c47.mp3": {
+  "text": "Muchachos, ahora nos volvimos a ilusionar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/b0b1fcb08673f8bc6b0d.mp3": {
+  "text": "revolución de mayo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/b0ef1fc11c2b5425a42d.mp3": {
+  "text": "tiraste la toalla",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/b15748f7c4d804e0972a.mp3": {
+  "text": "rock nacional",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/b164591339c6b1f5dc49.mp3": {
+  "text": "quema la yerba",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/b16d5e98306ed186a9de.mp3": {
+  "text": "viveza criolla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/b1708986959d758df6a6.mp3": {
+  "text": "un beso",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:47.414Z"
+ },
+ "culture/b22f03358867fa0df353.mp3": {
+  "text": "colorado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/b2442a84b316a5be59d8.mp3": {
+  "text": "¡qué rico!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/b25b386d291566966157.mp3": {
+  "text": "me quiero morir",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/b274fd87983354f4d37f.mp3": {
+  "text": "quincena",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/b2b989b85673dce90ae6.mp3": {
+  "text": "el quinto escalón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/b2c438ae9fea24439e0e.mp3": {
+  "text": "la ciudad de la furia",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:20.023Z"
+ },
+ "culture/b34d61ce7ee88b6cabd2.mp3": {
+  "text": "ego",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/b36378f910b9e1a8da72.mp3": {
+  "text": "los dos patitos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/b36fe5fd3fcf84b7ffe5.mp3": {
+  "text": "veranear",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/b37012394d0fde2c9873.mp3": {
+  "text": "la sopa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/b3902dc41bb5d618276c.mp3": {
+  "text": "rayuela",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/b3c82a5c29ebd1c756ed.mp3": {
+  "text": "volver",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/b41eb1d8437eeb8fb212.mp3": {
+  "text": "cumbiero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/b4bde1ac93553478e945.mp3": {
+  "text": "pogo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/b506b980629a3d416239.mp3": {
+  "text": "mesa dulce",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/b5477871f19c209eb977.mp3": {
+  "text": "a las nueve",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:53.066Z"
+ },
+ "culture/b5c5df6b2ef7e40401db.mp3": {
+  "text": "empanadas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/b5db70c1cebb49491a9c.mp3": {
+  "text": "invasiones inglesas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/b72293e91480be26adea.mp3": {
+  "text": "fiesta nacional",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/b76d609e2595342d19e6.mp3": {
+  "text": "no la tengo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/b8041d8b45cf1b6f2aed.mp3": {
+  "text": "Los hermanos sean unidos, porque esa es la ley primera.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/b85a34ea61d4885a786f.mp3": {
+  "text": "Nada más, gracias. ¿Cuánto es?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/b860702adec3e879842c.mp3": {
+  "text": "chamamé",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/b8aeffe619f2f028558f.mp3": {
+  "text": "convivir",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/b8b42c0e38b9f3256128.mp3": {
+  "text": "tacho",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:08.737Z"
+ },
+ "culture/b8cf7fb885578ef6f5ef.mp3": {
+  "text": "dulce de leche",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/b914e0a2eb936c2e3f08.mp3": {
+  "text": "medialuna",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/b92ac78dc4f1e25b48d3.mp3": {
+  "text": "vivo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/b9617488b020ef57e842.mp3": {
+  "text": "soy vegetariano",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/b96afb8091471da45141.mp3": {
+  "text": "cuadro",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/b97c0bad878ef294f990.mp3": {
+  "text": "¡Ojo!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:24.738Z"
+ },
+ "culture/b998a59fcedc895dd40f.mp3": {
+  "text": "bodegas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/b9b2a4b6c35cbcc2bb6c.mp3": {
+  "text": "una boludez",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/b9cb410529e309754e95.mp3": {
+  "text": "tupper",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/b9fecd53ad123fcf0a61.mp3": {
+  "text": "la pileta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/ba6a277e2516df4e6992.mp3": {
+  "text": "prepaga",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/baa17522242da457e91d.mp3": {
+  "text": "hinchapelotas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/bae295f4e6c6f5eed3a8.mp3": {
+  "text": "Un flan mixto, por favor.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/bb9e3f93fd6198d1056d.mp3": {
+  "text": "nochebuena",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:20.474Z"
+ },
+ "culture/bbd5e8ba4a54779ca0c7.mp3": {
+  "text": "casa histórica",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/bbe31f3922eb90639646.mp3": {
+  "text": "media docena",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/bbfe58c45e153320ac05.mp3": {
+  "text": "picante",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/bc4314536ea8075c6942.mp3": {
+  "text": "suave",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/bc8f93d935ffaccafef4.mp3": {
+  "text": "¿Posta?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/bca3451a4d834627456e.mp3": {
+  "text": "la costa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/bd5ef68a441c3eafbab9.mp3": {
+  "text": "vino",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/bd7b51cad5a9f5ec6638.mp3": {
+  "text": "la cumparsita",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/bd96fa87891c1ff14ec0.mp3": {
+  "text": "una más, y no jodemos más",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/bddbf1b7f46ad5e38126.mp3": {
+  "text": "bombo legüero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/bdedd1cec760357a984e.mp3": {
+  "text": "humita en chala",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/be2a33f0c2490dcd06ba.mp3": {
+  "text": "u$s",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/be4607f73e68d8bed62b.mp3": {
+  "text": "subte",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:10.481Z"
+ },
+ "culture/be5cb113b1b19c96d3c4.mp3": {
+  "text": "trucho",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/beb8e547f5cd1e5b1dbf.mp3": {
+  "text": "liso",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/bedaf3ba59f4406c25d3.mp3": {
+  "text": "vacío",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/bf4e42b0cb325c6dffc1.mp3": {
+  "text": "¡qué hijo de puta!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/bf5e95a65208429eafee.mp3": {
+  "text": "encargado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/bfac300c1b0586195d45.mp3": {
+  "text": "chinchulines",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/bfeba4ca944895d6f648.mp3": {
+  "text": "mozo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:32.970Z"
+ },
+ "culture/bff4bdce463efe2f8fa7.mp3": {
+  "text": "dos porciones",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/bff4f696ae196234e89f.mp3": {
+  "text": "yeta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:36.744Z"
+ },
+ "culture/c067f4bbe024051ad2b3.mp3": {
+  "text": "boludo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/c0cc08b6c37cffd37c28.mp3": {
+  "text": "gooool",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/c0efbb7f9642cc0e4d78.mp3": {
+  "text": "tero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/c16c3efbbeff20b8194e.mp3": {
+  "text": "¿Tomamos unos mates?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/c16cee52dcb433a1357f.mp3": {
+  "text": "20 de julio",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:27.237Z"
+ },
+ "culture/c1b4858a9c6cfeaa2a23.mp3": {
+  "text": "salame quintero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/c1c0e3c305ab6b2f4675.mp3": {
+  "text": "el interior",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:53.094Z"
+ },
+ "culture/c21633613f782a531bf5.mp3": {
+  "text": "porrón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/c223c4b3869274fccd73.mp3": {
+  "text": "mala suerte",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/c2275f99d1eadd156f60.mp3": {
+  "text": "federales",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/c232d065e00297d616ab.mp3": {
+  "text": "¿Me avisás cuando lleguemos a…?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:11.514Z"
+ },
+ "culture/c235a022a9a55c3d3c05.mp3": {
+  "text": "carnicería",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/c267bf111f359d210b2a.mp3": {
+  "text": "cotillón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/c27747c79a306b01b694.mp3": {
+  "text": "congreso",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/c2a2c4a0956759d9aafd.mp3": {
+  "text": "la feliz",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/c2ab1ecd2fea85ee6eb2.mp3": {
+  "text": "ni idea",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/c2d8acab5f83de3d48c7.mp3": {
+  "text": "qué pelotudo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/c2eea8aa437210020e7b.mp3": {
+  "text": "¿Me hacés una gauchada?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:16.135Z"
+ },
+ "culture/c39b9d527c938b125e1c.mp3": {
+  "text": "té galés",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/c3d65988b884b0db5804.mp3": {
+  "text": "agrandados",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:54.846Z"
+ },
+ "culture/c3fb5e5040abea1e4983.mp3": {
+  "text": "quién garpa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/c40e500742cb1cef94ea.mp3": {
+  "text": "hacés la previa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/c4259bb10e52b0f496e2.mp3": {
+  "text": "la posta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/c4586b44f032aaf3c839.mp3": {
+  "text": "reconquista",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/c4a8e2f3882006e9a7e9.mp3": {
+  "text": "virreinato",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/c4dccff67e6c04d7a2fc.mp3": {
+  "text": "dietética",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/c50066dbce98af91c14b.mp3": {
+  "text": "pareja",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/c513d1066f1a5c213834.mp3": {
+  "text": "chanta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/c55caae73d8a8188469e.mp3": {
+  "text": "arroz con leche",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/c56321752ea09a5ad7ac.mp3": {
+  "text": "día de la memoria",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/c56ec0ff2301b0ae7360.mp3": {
+  "text": "ya salgo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:53.314Z"
+ },
+ "culture/c5b404ffbad0e6e03c7f.mp3": {
+  "text": "llego en cinco",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:55.454Z"
+ },
+ "culture/c5d4c1725fe7b27b88e9.mp3": {
+  "text": "conventillos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:07.811Z"
+ },
+ "culture/c5d9736c3e82267ec0af.mp3": {
+  "text": "un cuarto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/c62562be3dd91e01ffc2.mp3": {
+  "text": "17 de octubre",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/c6438a2ee84153442dbf.mp3": {
+  "text": "recibirse",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/c682c838a1aad5be12e7.mp3": {
+  "text": "un aplauso para el asador",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/c69cd89e2f777b77987f.mp3": {
+  "text": "chapa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:59.187Z"
+ },
+ "culture/c6a494c5041858c9bd9a.mp3": {
+  "text": "Un cuarto de dulce de leche granizado y limón.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/c6c5354209fa2f25e6d6.mp3": {
+  "text": "budín de pan",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/c6dd5cd2e3b1bb9e5865.mp3": {
+  "text": "vacaciones de invierno",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/c74eef580fafe54c71f8.mp3": {
+  "text": "tandas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/c7b0a52ecd316346af1d.mp3": {
+  "text": "diablito",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/c7b4494ecbc5617b1437.mp3": {
+  "text": "curar con la cinta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/c82203f502fedb7c311e.mp3": {
+  "text": "señas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/c8b95de78e94105dbe2b.mp3": {
+  "text": "estados unidos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:47.877Z"
+ },
+ "culture/c8cb515845d54becd2dc.mp3": {
+  "text": "gorda",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:10.566Z"
+ },
+ "culture/c9738a0a48c259af5108.mp3": {
+  "text": "heladerita",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/c987eda52ce54f3623ee.mp3": {
+  "text": "me llamo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:59.022Z"
+ },
+ "culture/c9c2f791eec1a639bacd.mp3": {
+  "text": "negra",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/c9cb8d01add2c5f6dbdc.mp3": {
+  "text": "fierrero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/ca617ad6a28f8a26d083.mp3": {
+  "text": "eso es puro chamuyo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/ca95983498030a388fa6.mp3": {
+  "text": "cacerolazo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/cadd56f373499dc44341.mp3": {
+  "text": "los caídos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/caeefd05ae87ac7d6877.mp3": {
+  "text": "cagar",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/caf53bdb8164fa82a550.mp3": {
+  "text": "picado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/cb3c4c8bbb30eccb4601.mp3": {
+  "text": "bengalas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/cb9fe91724aaa358006f.mp3": {
+  "text": "cubierto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/cbb46030e0fc9ffd1e8a.mp3": {
+  "text": "bailantas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/cc0c7d0bf2633fa97137.mp3": {
+  "text": "la cola",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:06.045Z"
+ },
+ "culture/cc3086ce6924c0340096.mp3": {
+  "text": "caramelos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/cc3bba2255d1b25dfd1e.mp3": {
+  "text": "¿Tenés más chico?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:44.885Z"
+ },
+ "culture/cc703ac75600e2ea2c53.mp3": {
+  "text": "gustos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/cca6b9ce0492eae64af2.mp3": {
+  "text": "¿qué hay de postre?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/ccff9f78e91d14741ddc.mp3": {
+  "text": "tanda",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/cd68725f6c32bd7fa35e.mp3": {
+  "text": "paro general",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/cd74f1e3807c01caa91e.mp3": {
+  "text": "vamos a una parrilla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/cd7565012f1e4322cdcd.mp3": {
+  "text": "parrilla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/cd775d6fe3a4dec9c7eb.mp3": {
+  "text": "coche cama",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/cde863b46ddae300f4da.mp3": {
+  "text": "zeide",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/ce20db2ec0ebc7903a80.mp3": {
+  "text": "fichas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/ce6128d0479c1da4783d.mp3": {
+  "text": "helado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:59.619Z"
+ },
+ "culture/ce87105c51218cfb742c.mp3": {
+  "text": "paro",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/ce97cee4b19e732d6e24.mp3": {
+  "text": "me das un poco de perejil",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/cea406adae5853c62b95.mp3": {
+  "text": "dios está en todas partes pero atiende en buenos aires",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:55.343Z"
+ },
+ "culture/ceeaee36e4c32da78d73.mp3": {
+  "text": "con la democracia se come, se cura y se educa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/cf0e9876f938ec9ad60a.mp3": {
+  "text": "no hay mal que por bien no venga",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/cf2ed1e1fcf3870190c9.mp3": {
+  "text": "al horno con papas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/cf51f2f18f9e5eab6514.mp3": {
+  "text": "lo que mata es la humedad",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/cfc774ada1a8ef871c17.mp3": {
+  "text": "cbc",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/cfcbcdfafff9046c26e2.mp3": {
+  "text": "lo más",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/cfea753389fd7f39fb7c.mp3": {
+  "text": "el tango es un pensamiento triste que se baila",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/cff74eeaab2d5d3f8853.mp3": {
+  "text": "efectivo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/d016789e28355e46aa69.mp3": {
+  "text": "dos ambientes",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/d01d0147a4a47a705866.mp3": {
+  "text": "Hola, soy Sam.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:52.543Z"
+ },
+ "culture/d03548c36e49ece27f78.mp3": {
+  "text": "irse a la francesa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:00.826Z"
+ },
+ "culture/d0475b9d2498682b00f9.mp3": {
+  "text": "¿Este va a Retiro?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:29.405Z"
+ },
+ "culture/d060a4621a4346b5ba86.mp3": {
+  "text": "carbonada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/d065de2efa65b5ca348b.mp3": {
+  "text": "clavar el visto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/d07af25ebd5a9ac1ba6d.mp3": {
+  "text": "feria",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:47.130Z"
+ },
+ "culture/d0f954fa838d0053f6f0.mp3": {
+  "text": "me da igual",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/d10b141564df37882535.mp3": {
+  "text": "envase",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/d1e351e230b2ea0f4b9e.mp3": {
+  "text": "esto es un cambalache.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/d282b3278db346a1a8b6.mp3": {
+  "text": "de maicena",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/d2d7e7ccbeeab7f9db93.mp3": {
+  "text": "cadena nacional",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/d2e571da470d4e4d97c0.mp3": {
+  "text": "acequias",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/d336113de84c9e73768f.mp3": {
+  "text": "garganta del diablo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/d3d932d0f00d4df3ecfc.mp3": {
+  "text": "nona",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/d3dd4944a8a2369f441c.mp3": {
+  "text": "los chicos de la guerra",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/d403cfc2a1afb138a63f.mp3": {
+  "text": "te transfiero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:36.396Z"
+ },
+ "culture/d48fb22e3c507a472643.mp3": {
+  "text": "los simuladores",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/d497582e6043871107d7.mp3": {
+  "text": "bombacha",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/d4ab1bd52595432ca7b2.mp3": {
+  "text": "qué te pasa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/d4d623a11532f86ae7be.mp3": {
+  "text": "morrones",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/d4e1a9a210b4894371b0.mp3": {
+  "text": "en un pago",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:42.125Z"
+ },
+ "culture/d54bb7c3aefefca90275.mp3": {
+  "text": "fútbol 5",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/d5608ff17c5ea352d162.mp3": {
+  "text": "no se le miran los dientes",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/d5a50bfacddb50ac235c.mp3": {
+  "text": "san cayetano",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/d5f1261f74ed91d97644.mp3": {
+  "text": "lo siento",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:40.253Z"
+ },
+ "culture/d606853599b8ab199a3e.mp3": {
+  "text": "termo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/d650768f08a450b75b13.mp3": {
+  "text": "porción",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/d6d0de8535a3fe3305db.mp3": {
+  "text": "no, gracias",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/d6d20ae021327a8100bb.mp3": {
+  "text": "primera junta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/d6edd8507d279d8195c7.mp3": {
+  "text": "caete por casa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/d77151123a83fe98b3eb.mp3": {
+  "text": "es re buena onda",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/d77b10003c8faa843fa7.mp3": {
+  "text": "buen día",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/d780cb7f5a51a8827098.mp3": {
+  "text": "a la piedra",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/d7d0e7f88af4949a7558.mp3": {
+  "text": "chori",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/d811cde503f10bb82e08.mp3": {
+  "text": "rock chabón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/d868e5334320bebad2d9.mp3": {
+  "text": "la historia oficial",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/d87f0a0697f0b94f83e4.mp3": {
+  "text": "guardia",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/d912aee2d207d8fbe5ef.mp3": {
+  "text": "vos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:41.267Z"
+ },
+ "culture/d92ef1faee9a447d1ffe.mp3": {
+  "text": "la envidia",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/d9542bb48b68bc09247a.mp3": {
+  "text": "asado con cuero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/d99d24a5fa6408f3ee0d.mp3": {
+  "text": "muchacha (ojos de papel)",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/d9c3ea5921b4f7c07bf6.mp3": {
+  "text": "la re puta que lo parió",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/d9cf1bac3ef74c58e0e5.mp3": {
+  "text": "caudillo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/d9eef6594f5e668381de.mp3": {
+  "text": "amargo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/da4b15ed84b07f81f1df.mp3": {
+  "text": "la puta que lo parió",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/da6efb16a6454b9c7367.mp3": {
+  "text": "me estás jodiendo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/da726c65723d49007082.mp3": {
+  "text": "il morto che parla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/db3b3c2ec97ff80effa6.mp3": {
+  "text": "eso no es tango",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/db5f486e7eca32575582.mp3": {
+  "text": "clásico de avellaneda",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/db83653464117cbd115e.mp3": {
+  "text": "trampa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/dc29281b1b8e6e08c3dc.mp3": {
+  "text": "de potrero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/dc8ba734f9f73aa18fb9.mp3": {
+  "text": "vermut",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/dc8edd0f1e186323132b.mp3": {
+  "text": "la mancha",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:49.643Z"
+ },
+ "culture/dc975773858d8d610343.mp3": {
+  "text": "papa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/dca06e3b7f7bba5cf4f2.mp3": {
+  "text": "tachero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:10.037Z"
+ },
+ "culture/dcbdf06c56550d5406bb.mp3": {
+  "text": "Hecha la ley, hecha la…",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/dccc98cc31841aa9f45f.mp3": {
+  "text": "el dormido",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/dce7efa4f18e35a53d32.mp3": {
+  "text": "fugazza",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/dd584c78d7c6485309fe.mp3": {
+  "text": "¡Gracias… totales!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/de0a3eda44f7e92dde37.mp3": {
+  "text": "me muero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/de9b7339e7ee91709569.mp3": {
+  "text": "genocidio",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/dea19ca430076fc06749.mp3": {
+  "text": "ñoquis",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/dea521e04976cca348c8.mp3": {
+  "text": "ganamos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/ded3c0ea6acff1e8e274.mp3": {
+  "text": "cerveza artesanal",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/def91588f7b501e4e034.mp3": {
+  "text": "un kilo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/defbf18b67c91a24aefc.mp3": {
+  "text": "¿Me cobrás?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:36.382Z"
+ },
+ "culture/df16f284a12c626aef01.mp3": {
+  "text": "conadep",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/df63e8816f60cf66e61f.mp3": {
+  "text": "Hasta Plaza Italia.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:04.145Z"
+ },
+ "culture/e03ee6d7c7100fd997a6.mp3": {
+  "text": "¿Está cortado?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/e0581d43b5e648782336.mp3": {
+  "text": "curar el mate",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/e0d003e092b0cb6cc558.mp3": {
+  "text": "para mí…",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/e1973d8cf18b68cc0890.mp3": {
+  "text": "gobernar es poblar",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/e1a6cbadab07467c181a.mp3": {
+  "text": "sobremesa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/e1b3ecb5f624d7740ae1.mp3": {
+  "text": "ortiva",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/e1c6e6882ce936e4f565.mp3": {
+  "text": "una docena surtida",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/e1e26086a9807a381706.mp3": {
+  "text": "empachado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/e27b8a256759da2a9787.mp3": {
+  "text": "micro",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/e2a7e8cfd35e4c7777b9.mp3": {
+  "text": "¡Feliz Navidad!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:24.931Z"
+ },
+ "culture/e2d35093bfdda4b8ee9f.mp3": {
+  "text": "hacer una vaquita",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/e32f6848af82ffaf7542.mp3": {
+  "text": "q",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/e33bd7c1dc01e75e2f03.mp3": {
+  "text": "boluda",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/e33ee47bd13b2499d08b.mp3": {
+  "text": "el civil",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/e34b6ce136646223c403.mp3": {
+  "text": "el espejito",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/e3acbc8ff572daa62be4.mp3": {
+  "text": "Estoy en la facu.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/e3cb99662638d404a1c7.mp3": {
+  "text": "trolo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/e3f102e50af7e94dad68.mp3": {
+  "text": "conscriptos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/e473ba37652529193bd0.mp3": {
+  "text": "el chino",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/e481074d9723bb831ee9.mp3": {
+  "text": "socios",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/e53d6f97d05e9b7b8351.mp3": {
+  "text": "turcos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/e562a85c85060509b39a.mp3": {
+  "text": "cerro de los siete colores",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/e575d3c0dfcb3649af5e.mp3": {
+  "text": "vosotros",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:47.147Z"
+ },
+ "culture/e57da127a3b2e1d5e6b2.mp3": {
+  "text": "avenida 9 de julio",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:13.378Z"
+ },
+ "culture/e5bbacbce6eb527e38d8.mp3": {
+  "text": "hice una promesa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/e5ef72ec75e3fcf5f097.mp3": {
+  "text": "tres hasta plaza italia",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:30.387Z"
+ },
+ "culture/e63fb3ae05674e037566.mp3": {
+  "text": "los leones",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/e64ee3685b1f8a2a9c48.mp3": {
+  "text": "que se vayan todos",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/e6b0df2c274bd77e643a.mp3": {
+  "text": "monotributo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/e6d3b04c85570b0bac19.mp3": {
+  "text": "muñeca brava",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/e6d5ebd6a6522975ee4a.mp3": {
+  "text": "en negro",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/e6f1e180cd0bad92a579.mp3": {
+  "text": "papas fritas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/e736ad9793e158d6b0e9.mp3": {
+  "text": "el morocho del abasto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/e8b548adee909618543b.mp3": {
+  "text": "gil",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/e8be1dd279c6b5bf38a8.mp3": {
+  "text": "figuritas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/e8de00ec7f426bc2f43b.mp3": {
+  "text": "telo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/e94f60b792a1c9db7209.mp3": {
+  "text": "día del estudiante",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:31.227Z"
+ },
+ "culture/e96532fffeedf5740070.mp3": {
+  "text": "juntarse",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/e9ac0c7aee88d4bf727f.mp3": {
+  "text": "boliche",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:01.695Z"
+ },
+ "culture/e9ca98116be598962e35.mp3": {
+  "text": "repulgue",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/e9e5df3c96e23c683e02.mp3": {
+  "text": "pañuelo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/e9f74072337facc47e9e.mp3": {
+  "text": "Todo bien, ¿y vos?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:34:50.551Z"
+ },
+ "culture/ea1514e8fc0a41a6e758.mp3": {
+  "text": "el pequeño argentino que todos llevamos dentro",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/ea3b5684c5ead78d3bff.mp3": {
+  "text": "día del amigo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:27.910Z"
+ },
+ "culture/ea4de247ccbf1b604828.mp3": {
+  "text": "Che, ¿venís a tomar unos mates?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/ea8a321d5835593e37a1.mp3": {
+  "text": "laburar",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/ea937c134728af963991.mp3": {
+  "text": "esma",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/eae46149f6127de2450c.mp3": {
+  "text": "arrabal",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/eb251fd34c2dd06b9fd6.mp3": {
+  "text": "el nono",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/eb4809b7a04c10168a29.mp3": {
+  "text": "Pasame tu alias.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:34.829Z"
+ },
+ "culture/eb87394025c09ca243e7.mp3": {
+  "text": "cuotas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:39.669Z"
+ },
+ "culture/eb916c880874bbd300df.mp3": {
+  "text": "carne",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/eb9462820f2ac5612d16.mp3": {
+  "text": "24 de marzo de 1976",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/eba81c820e38c239588d.mp3": {
+  "text": "ex combatientes",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/ebb6838c117e1f4e8a92.mp3": {
+  "text": "abuela",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/ebb873378767f57d13a3.mp3": {
+  "text": "portero eléctrico",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/ecefa585e4e25bd8cb49.mp3": {
+  "text": "tmb",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/ed09394aafa89da2122c.mp3": {
+  "text": "hotel de inmigrantes",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/ed524bb582ece4d9ecd6.mp3": {
+  "text": "novela",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/ed53658365fffebc52dd.mp3": {
+  "text": "leña",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/edfbee73f33cc135e896.mp3": {
+  "text": "¿Cuál es cuál?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/edfc22093bb92f2b99a4.mp3": {
+  "text": "abu",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/ee12ffe8dbd4b7653ade.mp3": {
+  "text": "me chupa un huevo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/ee159dd7249b28b2d620.mp3": {
+  "text": "fichines",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/ee30cb5bcda6d498a785.mp3": {
+  "text": "malbec",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/ee6fce266c384bf0e410.mp3": {
+  "text": "provecho",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:42.541Z"
+ },
+ "culture/ee95c2aaf0a586c2c40d.mp3": {
+  "text": "doctor",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/eef27a76d7d5bb348a7f.mp3": {
+  "text": "¿Cómo salió?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/ef09b8d1f2e479ad7b9e.mp3": {
+  "text": "Ing.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/ef371c17e8d68304cd39.mp3": {
+  "text": "sin palo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/ef4998cf77c3f41701cc.mp3": {
+  "text": "una birra",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:06.972Z"
+ },
+ "culture/eff50c4ab64203c32d69.mp3": {
+  "text": "asado de la losa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f0333e9cf900d05ccd0c.mp3": {
+  "text": "bandoneón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/f0e469f5607ffec58a6b.mp3": {
+  "text": "pollo al disco",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f1708b0f814cbd0c12f0.mp3": {
+  "text": "celeste",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/f19882d74a7a05e18b5b.mp3": {
+  "text": "el dt",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f1a975f071cbe6465f5b.mp3": {
+  "text": "que la chupen",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/f1acc0898526d6b6f120.mp3": {
+  "text": "pádel",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/f1c0dc5c76aeb28a5bb6.mp3": {
+  "text": "andá a cantarle a gardel",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/f1d1898cdfedf843bede.mp3": {
+  "text": "merienda",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/f21c2a3e119a18b68284.mp3": {
+  "text": "chipá",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/f22cdd32fb94a2fd3fc5.mp3": {
+  "text": "choripaneros",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f2358a93f0f2667d4b5e.mp3": {
+  "text": "la concha de la lora",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/f27f3317d1e3106942ab.mp3": {
+  "text": "juicio a las juntas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/f2b41200853cb779363f.mp3": {
+  "text": "¿Quién ceba?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f2f3c73b91c59e20654c.mp3": {
+  "text": "radicales",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/f3349b268fbc8d0fc51d.mp3": {
+  "text": "saliendo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/f385c57cb546ce0d1457.mp3": {
+  "text": "hincha",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f39263457087a0f30c2b.mp3": {
+  "text": "primero de agosto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/f3ba630a21af256ebeba.mp3": {
+  "text": "el asado del domingo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f3fb4d31260ece8e081a.mp3": {
+  "text": "¿Hacemos un asado?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f406cb8bb75fe3b09bc1.mp3": {
+  "text": "guaraní",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/f4081c4ee3bee08b5e9d.mp3": {
+  "text": "fiambrería",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/f4145e8a8258eeb73f49.mp3": {
+  "text": "un poquito nomás",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/f42df39f679b06a919d1.mp3": {
+  "text": "dorima",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/f432ef43eeec825857a7.mp3": {
+  "text": "buzo de egresados",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/f463ab4070ecddb49fa1.mp3": {
+  "text": "usted",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:49.742Z"
+ },
+ "culture/f478923a0266d3b1f1cc.mp3": {
+  "text": "histeriquear",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/f4c127f68de934468ece.mp3": {
+  "text": "italianos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/f4d64dd0d3fd3177785e.mp3": {
+  "text": "día de los inocentes",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/f4e58d688e2962578caa.mp3": {
+  "text": "martes 13",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/f4fadf0540371a862518.mp3": {
+  "text": "medio kilo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/f5f25b546d8f7e0e0e01.mp3": {
+  "text": "carbón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f5fefb448262cc4e2efb.mp3": {
+  "text": "guiso",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/f66d69a792616cbd02d8.mp3": {
+  "text": "si alguien se cae se lo levanta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/f67adfaa1643b4807e35.mp3": {
+  "text": "el mate del zonzo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f69310e3e9c1e6ec53e3.mp3": {
+  "text": "sánguche de milanesa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/f6b871d7abf5004bbc8c.mp3": {
+  "text": "cuánto pagaste",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:14.697Z"
+ },
+ "culture/f6d4471056d2dacf281a.mp3": {
+  "text": "rollingas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/f6eb6af93ab2ef7b4ed0.mp3": {
+  "text": "bolas de fraile",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/f6f24da4f09bee2a3bc0.mp3": {
+  "text": "recital",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/f7139f7e3830515bdf2b.mp3": {
+  "text": "café con leche",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:37:00.782Z"
+ },
+ "culture/f73fe2eeb5fe5b3f21e3.mp3": {
+  "text": "¿Vos qué pensás?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:41.348Z"
+ },
+ "culture/f7a807aa3d9327fded38.mp3": {
+  "text": "¡la pucha!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/f8834e7786b31323bf9f.mp3": {
+  "text": "que veinte años no es nada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/f894a54ab16a11df2299.mp3": {
+  "text": "matrimonio igualitario",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/f8c81b4019d46e2e6201.mp3": {
+  "text": "la negra",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/f8e7031c90613041f5e7.mp3": {
+  "text": "sal gruesa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f8f237d09137cd98fb07.mp3": {
+  "text": "¡Caño!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f96f85df32ab66fb4bae.mp3": {
+  "text": "sal parrillera",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/f9c118ae92dd9570e98f.mp3": {
+  "text": "mixto",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/f9fafbba028c588f0d54.mp3": {
+  "text": "jamón y queso",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/f9fba14c8041761dee08.mp3": {
+  "text": "tormenta de santa rosa",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/fa1787b2146d5151c50c.mp3": {
+  "text": "hora del vermut",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/fa48935e4f03c72cee17.mp3": {
+  "text": "café con leche con medialunas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:37:03.253Z"
+ },
+ "culture/fadfdea442896c0ff066.mp3": {
+  "text": "calle",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:39:57.734Z"
+ },
+ "culture/fb0fe45e8d09c18a17b8.mp3": {
+  "text": "el nene",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/fb1242d3ff2f3be9faf8.mp3": {
+  "text": "pingüino",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/fbb238c2d24efa275c3d.mp3": {
+  "text": "Fui al súper, boludo, y no había nada, boludo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/fbb746a30312ef947e84.mp3": {
+  "text": "negro",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:11.930Z"
+ },
+ "culture/fbbcc26d7951be76a42c.mp3": {
+  "text": "paseaperros",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:22.039Z"
+ },
+ "culture/fbe0a20167d1d0760d13.mp3": {
+  "text": "la tapadita",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/fc3b02bdcc0b81df6150.mp3": {
+  "text": "mundial del alfajor",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/fc6bc81148bbab4088d1.mp3": {
+  "text": "after",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:04.301Z"
+ },
+ "culture/fccb9682a5778ebb3f84.mp3": {
+  "text": "carnaval",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/fcecacef1e6691ba8428.mp3": {
+  "text": "¡Andá a cagar!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/fd5b630653c097443f00.mp3": {
+  "text": "casa de cambio",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:47.550Z"
+ },
+ "culture/fd7627c1629767d1495d.mp3": {
+  "text": "chimarrão",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/fda6c4b17f7163d2ba2a.mp3": {
+  "text": "yacarés",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/fda6f9f20560c9543097.mp3": {
+  "text": "cerveza",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/fe28efa5b43e2303c82f.mp3": {
+  "text": "primos",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/fe322dd80acbfd4edf67.mp3": {
+  "text": "re lindo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.595Z"
+ },
+ "culture/fe3a04e28b25869226ae.mp3": {
+  "text": "¿Me cargás la SUBE?",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:27.573Z"
+ },
+ "culture/fe42848233af8940c854.mp3": {
+  "text": "relatos salvajes",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/fe8aca5c719d87884893.mp3": {
+  "text": "nueve reinas",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/fe8e2f55b3461424497b.mp3": {
+  "text": "12 cuotas sin interés",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:36:41.008Z"
+ },
+ "culture/fec38dbea28fc6bc6c22.mp3": {
+  "text": "fainá",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/ff0d4c5e2cf5c2f539dd.mp3": {
+  "text": "¿Me hacés la gamba?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/ff3c2f7656d8a2ea0d58.mp3": {
+  "text": "el asesino del tango",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:58.724Z"
+ },
+ "culture/ff54d199ce2f3f0647aa.mp3": {
+  "text": "¡Tocayo!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/ff620e9d8308dbd51791.mp3": {
+  "text": "provoleta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/ff80c21c2974ae05162f.mp3": {
+  "text": "es lo que hay",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/ff962060f25b42f1f321.mp3": {
+  "text": "¡A comer!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:34.750Z"
+ },
+ "culture/ff97dd20ea6de69bfd76.mp3": {
+  "text": "fiesta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:44:31.834Z"
+ },
+ "culture/ffb1219e49bddd373f87.mp3": {
+  "text": "ñoqui",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:43:06.596Z"
+ },
+ "culture/ffba7217ea15b0ac5651.mp3": {
+  "text": "pachamama",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/ffe0c499029a8790092e.mp3": {
+  "text": "guita",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:40:11.974Z"
+ },
+ "culture/fffb8761413c21cf4e93.mp3": {
+  "text": "Estuvo riquísimo.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:35:44.835Z"
+ }
+}

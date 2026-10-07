@@ -15,12 +15,22 @@
 //
 // Uploads go through the Supabase CLI, like every other script here, so no
 // service key has to live on this machine.
-import { execFileSync } from 'node:child_process';
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { dirname } from 'node:path';
 
+import { uploadFolders } from './lib/clips.mjs';
 import { queryLinked } from './lib/db.mjs';
 import { q } from './lib/sql.mjs';
 import { apiKey, assignVoices, clipPath, speakerGender, synthesize } from './lib/tts.mjs';
+
+/** Runs `job` over `items`, `atOnce` at a time. */
+async function pooled(items, atOnce, job) {
+  const queue = [...items.entries()];
+  const worker = async () => {
+    for (let next = queue.shift(); next; next = queue.shift()) await job(next[1], next[0]);
+  };
+  await Promise.all(Array.from({ length: atOnce }, worker));
+}
 
 const [slug, ...args] = process.argv.slice(2);
 const flags = new Set(args);
@@ -138,14 +148,16 @@ const failed = [];
  *  which overstates it. The only figure worth planning a budget from. */
 let spent = 0;
 
-for (const [i, clip] of clips.entries()) {
+// Three at once is what the ElevenLabs plan allows.
+await pooled(clips, 3, async (clip, i) => {
   const voice = speaker.get(clip.id);
   const label = `${i + 1}/${clips.length} ${voice.id.padEnd(7)} ${clip.text}`;
   try {
     const { mp3, cost } = await synthesize({ text: clip.text, voice, key });
     spent += cost;
     const path = clipPath(clip.kind, clip.id, voice.id, stamp);
-    const local = `${dir}${path.replace('/', '-')}`;
+    const local = `${dir}${path}`;
+    mkdirSync(dirname(local), { recursive: true });
     writeFileSync(local, mp3);
     done.push({ ...clip, voice, path, local });
     console.log(`  ${label} — ${(mp3.length / 1024).toFixed(0)} kB`);
@@ -153,7 +165,7 @@ for (const [i, clip] of clips.entries()) {
     failed.push({ ...clip, error: err.message });
     console.log(`  ${label} — FAILED: ${err.message}`);
   }
-}
+});
 
 if (failed.length) console.log(`\n${failed.length} clip(s) failed; the rest are being uploaded`);
 if (done.length === 0) process.exit(1);
@@ -165,22 +177,9 @@ if (done.length === 0) process.exit(1);
 // remember the miss.
 
 console.log(`\nuploading ${done.length} clip(s)…`);
-const uploaded = [];
-for (const clip of done) {
-  try {
-    execFileSync(
-      'npx',
-      ['--yes', 'supabase@2', 'storage', 'cp', clip.local, `ss:///audio/${clip.path}`,
-       '--linked', '--experimental', '--content-type', 'audio/mpeg',
-       // Every clip has its own name, so it never changes once written.
-       '--cache-control', 'max-age=31536000'],
-      { stdio: ['ignore', 'ignore', 'inherit'] },
-    );
-    uploaded.push(clip);
-  } catch {
-    console.log(`  upload FAILED: ${clip.path}`);
-  }
-}
+const arrived = await uploadFolders(dir, done.map((c) => c.path));
+const uploaded = done.filter((c) => arrived.has(c.path));
+for (const c of done) if (!arrived.has(c.path)) console.log(`  upload FAILED: ${c.path}`);
 
 if (uploaded.length === 0) {
   console.error('nothing uploaded — rows left untouched');
@@ -197,5 +196,9 @@ console.log(`${spent} credit(s) spent`);
 if (failed.length) {
   console.log(`${failed.length} still missing — run again to retry:`);
   for (const f of failed) console.log(`  ${f.text}: ${f.error}`);
+  process.exit(1);
+}
+if (uploaded.length < done.length) {
+  console.log(`${done.length - uploaded.length} recorded but not uploaded — run again to retry`);
   process.exit(1);
 }

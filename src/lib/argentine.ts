@@ -25,11 +25,15 @@ export interface ArWord {
   note: string;
   /** Two or three words shown beside the translation when it alone could mislead: "Cheer of support". */
   tag?: string;
-  example: { es: string; en: string };
+  example: { es: string; en: string; audio?: string };
   /** The word as it appears in the example — what the blank is cut out of. */
   gap: string;
   /** 1 everyone says it · 2 common · 3 less common, still understood. */
   level: 1 | 2 | 3;
+  /** Storage path of the recording, once it exists (npm run argentine:tts). */
+  audio?: string;
+  /** Who says it and its example — a row of `voices`. */
+  voice?: string;
 }
 
 export interface ArPack {
@@ -126,8 +130,8 @@ export function toForm(w: ArWord): Form {
     unit_order: 0,
     is_glue: false,
     register: 'informal',
-    audio_path: null,
-    voice_id: null,
+    audio_path: w.audio ?? null,
+    voice_id: w.audio ? (w.voice ?? null) : null,
   };
 }
 
@@ -168,8 +172,8 @@ export function toSentence(w: ArWord): Sentence {
     en: w.example.en,
     en_alt: [],
     es_alt: [],
-    audio_path: null,
-    voice_id: null,
+    audio_path: w.example.audio ?? null,
+    voice_id: w.example.audio ? (w.voice ?? null) : null,
     target_form_id: id,
     difficulty: 0,
     tokens,

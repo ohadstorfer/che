@@ -4,6 +4,8 @@
 //
 //   npm run argentine:build
 //
+// Recordings come from docs/argentine/audio.json (npm run argentine:tts).
+//
 // Words are grouped by theme, most useful first (level 1 → 3, then `rank` 1 → 3
 // with unranked words after them, then alphabetical), and each theme is dealt
 // into packs of about PACK_SIZE words:
@@ -14,6 +16,8 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { parse } from 'yaml';
 
+import { loadManifest } from '../course/lib/clips.mjs';
+import { MANIFEST, clipsOf } from './audio.mjs';
 import { checkWord } from './check.mjs';
 import { PACK_SIZE, THEMES } from './themes.mjs';
 
@@ -59,6 +63,10 @@ const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'
 /** Where a word with no `rank` sorts within its level: after every ranked one. */
 const UNRANKED = 9;
 
+/** The clips that exist (argentine:tts). A word not recorded yet ships silent. */
+const recorded = loadManifest(MANIFEST);
+const heard = (path) => (recorded[path] ? { audio: path } : {});
+
 const packs = [];
 for (const theme of THEMES) {
   const list = words
@@ -86,17 +94,22 @@ for (const theme of THEMES) {
       emoji: theme.emoji,
       about: theme.about,
       vulgar: !!theme.vulgar,
-      words: ws.map((w) => ({
-        id: w.id,
-        es: w.es,
-        pos: w.pos,
-        en: w.en,
-        note: w.note,
-        ...(w.tag ? { tag: w.tag } : {}),
-        example: { es: w.example.es, en: w.example.en },
-        gap: w.gap,
-        level: w.level,
-      })),
+      words: ws.map((w) => {
+        const clips = clipsOf(w);
+        return {
+          id: w.id,
+          es: w.es,
+          pos: w.pos,
+          en: w.en,
+          note: w.note,
+          ...(w.tag ? { tag: w.tag } : {}),
+          example: { es: w.example.es, en: w.example.en, ...heard(clips.example) },
+          gap: w.gap,
+          level: w.level,
+          ...heard(clips.word),
+          ...(recorded[clips.word] || recorded[clips.example] ? { voice: clips.voice.id } : {}),
+        };
+      }),
     });
   });
 }

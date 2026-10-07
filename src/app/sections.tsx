@@ -44,6 +44,8 @@ const webPress =
 interface Data {
   course: Course;
   current: number;
+  /** Lessons she has finished, by id. */
+  done: ReadonlySet<string>;
 }
 
 export default function SectionsScreen() {
@@ -76,11 +78,11 @@ export default function SectionsScreen() {
   useEffect(() => {
     if (!profile) return;
     Promise.all([loadCourse(), loadProgress(profile.id)]).then(([course, done]) =>
-      setData({ course, current: currentIndex(course.path, done) }),
+      setData({ course, current: currentIndex(course.path, done), done }),
     );
   }, [profile]);
 
-  const summaries = data ? sectionSummaries(data.course, data.current) : [];
+  const summaries = data ? sectionSummaries(data.course, data.current, data.done) : [];
   const here = summaries.find((s) => s.state === 'current') ?? null;
 
   // A section ahead can be tested into when the test stays one sitting long:

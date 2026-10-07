@@ -5,13 +5,16 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import type { ArWord } from '@/lib/argentine';
 import { clay, colors, font, gradients, press } from '@/lib/theme';
+import { PlayButton } from '@/components/exercises';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
 // The "new word" screen of an Argentine pack. Deliberately quiet: the word,
 // one short English translation (with an optional two-word tag when the
 // translation alone could mislead), a thin line, then the word in a sentence.
-// No long note and no mascot: the sentence does the explaining.
+// No long note and no mascot: the sentence does the explaining. The word says
+// itself on arrival, as in the course; the sentence waits to be tapped, so the
+// two never talk over each other.
 // ---------------------------------------------------------------------------
 
 const INK = colors.ink;
@@ -86,6 +89,11 @@ function Example({ word }: { word: ArWord }) {
         )}
       </Text>
       <Text style={styles.exEn}>{word.example.en}</Text>
+      {word.example.audio ? (
+        <View style={styles.exPlay}>
+          <PlayButton path={word.example.audio} autoPlay={false} />
+        </View>
+      ) : null}
     </View>
   );
 }
@@ -95,9 +103,14 @@ export function WordIntro({ word, onDone }: { word: ArWord; onDone: () => void }
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Enter>
-          <FitText style={[styles.word, wordSize(word.es, 76)]} lines={2}>
-            {word.es}
-          </FitText>
+          <View style={styles.wordRow}>
+            <View style={{ flex: 1 }}>
+              <FitText style={[styles.word, wordSize(word.es, 76)]} lines={2}>
+                {word.es}
+              </FitText>
+            </View>
+            {word.audio ? <PlayButton path={word.audio} /> : null}
+          </View>
           <View style={styles.enRow}>
             <Text style={styles.en}>{word.en}</Text>
             {word.tag ? <Text style={styles.tag}>{word.tag}</Text> : null}
@@ -126,6 +139,7 @@ const styles = StyleSheet.create({
   },
   buttonText: { ...font.body[800], fontSize: 18, color: colors.onPrimary },
 
+  wordRow: { flexDirection: 'row', alignItems: 'center', gap: 16 },
   word: { ...font.display[800], color: INK },
   enRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', columnGap: 12, rowGap: 4, marginTop: 12 },
   en: { ...font.display[700], fontSize: 30, lineHeight: 34, color: INK },
@@ -140,4 +154,5 @@ const styles = StyleSheet.create({
     textDecorationStyle: 'solid',
   },
   exEn: { ...font.body[500], fontSize: 18, lineHeight: 25, color: colors.muted, textAlign: 'center' },
+  exPlay: { marginTop: 12 },
 });

@@ -32,7 +32,7 @@ import {
   webPress,
 } from '@/components/hablar-ui';
 import { Button } from '@/components/ui';
-import { type ActiveRecording, canRecord, readyClip, type RecordedClip, startRecording, warmMic } from '@/lib/audio';
+import { type ActiveRecording, armMic, canRecord, disarmMic, readyClip, type RecordedClip, startRecording, warmMic } from '@/lib/audio';
 import { useAuth } from '@/lib/auth';
 import {
   conversationTitle,
@@ -362,6 +362,19 @@ export default function HablarChat() {
     hold(true);
     return () => hold(false);
   }, [panchoTurn, hold]);
+
+  // Her turn: a recorder waits for the tap, so the mic opens at once (armMic).
+  // A beat after Pancho's voice ends, so the switch never lands between two of
+  // his sentences.
+  const herTurn = (phase === 'idle' || phase === 'draft' || phase === 'retry') && !playing;
+  useEffect(() => {
+    if (!herTurn) return;
+    const t = setTimeout(armMic, 150);
+    return () => {
+      clearTimeout(t);
+      disarmMic();
+    };
+  }, [herTurn]);
 
   useEffect(
     () => () => {

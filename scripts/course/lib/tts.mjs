@@ -150,9 +150,8 @@ export const CARRIER = {
 /**
  * One clip, as mp3 bytes.
  *
- * `eleven_multilingual_v2` is the model that speaks the voices' own accent;
- * the turbo and flash models trade that away for latency this job does not
- * care about — nothing here is live, the clip is heard days later off a CDN.
+ * The model is the voice's own (`voices.model`): `eleven_v4_turbo`, which holds
+ * the voices' accent where the v2 turbo and flash models traded it away.
  *
  * The settings favour being understood over sounding interesting: style at zero
  * so nothing is performed, speaker boost on for a phone speaker in a noisy

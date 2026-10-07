@@ -5,6 +5,8 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'yaml';
 
+import { loadManifest } from '../course/lib/clips.mjs';
+import { MANIFEST, clipOf, spokenByKey } from './audio.mjs';
 import { validate } from './validate.mjs';
 
 const DIR = 'docs/culture';
@@ -42,6 +44,13 @@ const rank = (s) => (ORDER.includes(s.slug) ? ORDER.indexOf(s.slug) : ORDER.leng
 sections.sort((a, b) => rank(a) - rank(b) || a.slug.localeCompare(b.slug));
 
 const glossary = parse(readFileSync(GLOSSARY, 'utf8')).words ?? {};
-writeFileSync(OUT, JSON.stringify({ sections, glossary }, null, 1) + '\n');
+// The recordings that exist (culture:tts), by glossary key. A span not recorded yet has no ▶️.
+const recorded = loadManifest(MANIFEST);
+const audio = {};
+for (const [key, text] of spokenByKey(sections, glossary)) {
+  const { path } = clipOf(text);
+  if (recorded[path]) audio[key] = path;
+}
+writeFileSync(OUT, JSON.stringify({ sections, glossary, audio }, null, 1) + '\n');
 const classes = sections.reduce((n, s) => n + s.classes.length, 0);
 console.log(`wrote ${OUT}: ${sections.length} sections, ${classes} classes`);

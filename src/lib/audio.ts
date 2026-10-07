@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import { supabase } from './supabase';
 
 // Che ships as an iOS and Android app; the web build is a fallback. On the
@@ -78,34 +78,151 @@ export function warmMic(): void {
     .then(({ audio }) => audio.getRecordingPermissionsAsync())
     .then((perm) => {
       if (perm.granted) micAllowed = true;
+      arm();
     })
     .catch(() => {});
 }
 
-async function startNativeRecording(): Promise<ActiveRecording> {
-  const { audio, AudioModule, createRecordingOptions, File } = await nativeKit();
-  const { RecordingPresets } = audio;
+type NativeRecorder = InstanceType<NativeKit['AudioModule']['AudioRecorder']>;
 
+/** The audio session in recording mode and a recorder prepared on it: all that is left is to start. */
+async function prepareRecorder(): Promise<NativeRecorder> {
+  const { audio, AudioModule, createRecordingOptions } = await nativeKit();
+  await setAudioSession('play-and-record', true);
+  const recorder = new AudioModule.AudioRecorder(
+    createRecordingOptions({
+      ...audio.RecordingPresets.HIGH_QUALITY,
+      numberOfChannels: 1,
+      bitRate: 64000,
+      isMeteringEnabled: true,
+    }),
+  );
+  try {
+    await recorder.prepareToRecordAsync();
+  } catch (err) {
+    recorder.release();
+    throw err;
+  }
+  return recorder;
+}
+
+/** Let go of a recorder that never got used (or must not be), and the empty file it made. */
+function discard(recorder: NativeRecorder): void {
+  void (async () => {
+    await recorder.stop().catch(() => {});
+    const uri = recorder.uri;
+    recorder.release();
+    try {
+      if (uri) new (await nativeKit()).File(uri).delete();
+    } catch {}
+  })();
+}
+
+// Switching the audio session and preparing a recorder take a few hundred
+// milliseconds on a phone: started on the tap, her first word is lost. A screen
+// where she is about to speak arms the mic instead, so the tap only has to
+// start a recorder that is already waiting. Nothing is captured (and the
+// phone's mic light stays off) until she taps.
+let wantArmed = false;
+let armed: { recorder: Promise<NativeRecorder | null>; watch: ReturnType<typeof setInterval> } | null = null;
+
+function arm(): void {
+  if (armed || !wantArmed || !micAllowed) return;
+  const recorder = prepareRecorder().catch(() => null);
+  // iOS starts a prepared recorder by itself when an interruption (a call,
+  // an alarm) ends. Nothing records without her tap: catch it and start over.
+  const watch = setInterval(() => {
+    void recorder.then((r) => {
+      if (!r || armed?.recorder !== recorder || !r.getStatus().isRecording) return;
+      unarm();
+      arm();
+    });
+  }, 1000);
+  armed = { recorder, watch };
+}
+
+/** Drop the waiting recorder, if any. The session is left as it is. */
+function unarm(): void {
+  const a = armed;
+  if (!a) return;
+  armed = null;
+  clearInterval(a.watch);
+  void a.recorder.then((r) => r && discard(r));
+}
+
+/** The waiting recorder, handed over to the tap. */
+function takeArmed(): Promise<NativeRecorder | null> {
+  const a = armed;
+  if (!a) return Promise.resolve(null);
+  armed = null;
+  clearInterval(a.watch);
+  return a.recorder;
+}
+
+/**
+ * It's her turn to speak: have a recorder waiting, so the mic opens the
+ * instant she taps. Only once the mic is allowed — this never asks. Call
+ * `disarmMic` when it stops being her turn or the screen goes away.
+ */
+export function armMic(): void {
+  if (Platform.OS === 'web') return;
+  wantArmed = true;
+  arm();
+}
+
+export function disarmMic(): void {
+  if (Platform.OS === 'web' || !wantArmed) return;
+  wantArmed = false;
+  if (armed) void setAudioSession('playback');
+}
+
+// A recorder left waiting while the app is away could be started by the
+// system, or hold the audio session other apps want: armed only in front.
+if (Platform.OS !== 'web') {
+  AppState.addEventListener('change', (state) => {
+    if (state === 'active') arm();
+    else if (armed) void setAudioSession('playback');
+  });
+}
+
+/** The slow way, on the tap itself: nothing was waiting (first use, or she cut in while Pancho spoke). */
+async function freshRecording(audio: NativeKit['audio']): Promise<NativeRecorder> {
   if (!micAllowed) {
     const perm = await audio.requestRecordingPermissionsAsync();
     if (!perm.granted) throw micRefused();
     micAllowed = true;
   }
-  await setAudioSession('play-and-record');
-
-  const recorder = new AudioModule.AudioRecorder(
-    createRecordingOptions({ ...RecordingPresets.HIGH_QUALITY, numberOfChannels: 1, bitRate: 64000, isMeteringEnabled: true }),
-  );
+  let recorder: NativeRecorder;
   try {
-    await recorder.prepareToRecordAsync();
+    recorder = await prepareRecorder();
     recorder.record();
   } catch (err) {
-    recorder.release();
     await setAudioSession('playback');
     // Maybe the mic was taken away in Settings: ask again next time.
     micAllowed = false;
     throw err;
   }
+  return recorder;
+}
+
+async function startNativeRecording(): Promise<ActiveRecording> {
+  // Taken inside the tap, before anything else can let it go.
+  const taken = takeArmed();
+  const { audio, File } = await nativeKit();
+
+  let waiting = await taken;
+  if (waiting) {
+    // Waiting since before the tap: this is the whole cost of starting.
+    try {
+      if (waiting.getStatus().isRecording) throw new Error('already recording');
+      waiting.record();
+      if (!waiting.getStatus().isRecording) throw new Error('did not start');
+    } catch {
+      discard(waiting);
+      waiting = null;
+    }
+  }
+  const recorder = waiting ?? (await freshRecording(audio));
 
   // The loudest moment so far, sampled on our own clock so the quiet check
   // doesn't depend on anyone drawing the wave.
@@ -125,7 +242,9 @@ async function startNativeRecording(): Promise<ActiveRecording> {
     await recorder.stop().catch(() => {});
     const uri = recorder.uri;
     recorder.release();
-    await setAudioSession('playback');
+    // Her turn again already (a cancelled recording): stay ready for the next tap.
+    if (wantArmed) arm();
+    else await setAudioSession('playback');
     return uri;
   };
 
@@ -322,10 +441,13 @@ let unlocked = false;
 // and is what recording needs. Safari 16.4 and up; everywhere else the
 // property is absent and there is nothing to declare.
 //
-// The phones get the same two modes through expo-audio. Recording mode on an
-// iPhone sends playback to the earpiece, so it's only on while the mic is.
-export async function setAudioSession(type: 'playback' | 'play-and-record'): Promise<void> {
+// The phones get the same two modes through expo-audio. Recording mode puts
+// Bluetooth headphones on their low-quality call profile, so it's only on
+// while the mic is open or armed (armMic), never while Pancho speaks.
+export async function setAudioSession(type: 'playback' | 'play-and-record', keepArmed = false): Promise<void> {
   if (!isWeb) {
+    // Leaving recording mode disables a waiting recorder: let it go first.
+    if (type === 'playback' && !keepArmed) unarm();
     const { setAudioModeAsync } = await import('expo-audio');
     await setAudioModeAsync({ playsInSilentMode: true, allowsRecording: type === 'play-and-record' }).catch(() => {});
     return;

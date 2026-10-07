@@ -8,9 +8,14 @@ import type { Lesson, LessonKind, Section, Tip, Unit } from './types';
 //
 // The path is one ordered road of lessons: section by section, unit by unit,
 // lesson by lesson. Where she stands on it is simply the first lesson she has
-// no progress row for — only that one is tappable, so the road is walked in
-// order and "lessons finished" and "index of the current step" are the same
-// number.
+// no progress row for — only that one starts a new lesson, so the road is
+// walked in order.
+//
+// What she has finished is not always the stretch behind her, though. A
+// reshaped course (units split, lessons reordered) or a credit handed out by a
+// migration can leave finished lessons ahead of her step. So "finished" is
+// always asked of the set of lesson ids, never worked out from her index: a
+// step ahead that is done is drawn done, and the road walks past it.
 // ---------------------------------------------------------------------------
 
 export interface PathLesson extends Lesson {
@@ -162,7 +167,7 @@ export async function loadProgress(userId: string): Promise<Set<string>> {
 
 /** Where she stands: the first lesson on the road she hasn't finished.
  *  Equal to `path.length` once the whole course is done. */
-export function currentIndex(path: PathLesson[], done: Set<string>): number {
+export function currentIndex(path: PathLesson[], done: ReadonlySet<string>): number {
   const i = path.findIndex((l) => !done.has(l.id));
   return i === -1 ? path.length : i;
 }
@@ -188,8 +193,27 @@ export interface SectionSummary {
   state: SectionState;
 }
 
-/** Every section that has something to walk, with how far she is through it. */
-export function sectionSummaries(course: Course, current: number): SectionSummary[] {
+/**
+ * Whether a step is drawn done while she stands on `current`: anything behind
+ * her, and any finished lesson ahead. Never her own step — the lesson she has
+ * just finished is already among the done while the road still shows her on
+ * it, until the move to the next one has played.
+ */
+export function stepDone(lesson: PathLesson, current: number, done: ReadonlySet<string> | undefined): boolean {
+  return lesson.index !== current && (lesson.index < current || !!done?.has(lesson.id));
+}
+
+/** How many of these lessons she has finished. */
+export function doneCount(lessons: readonly PathLesson[], done: ReadonlySet<string>): number {
+  let n = 0;
+  for (const l of lessons) if (done.has(l.id)) n++;
+  return n;
+}
+
+/** Every section that has something to walk, with how far she is through it.
+ *  `current` says which section she is in; `done` says how much of each is
+ *  finished, which can include lessons past her step. */
+export function sectionSummaries(course: Course, current: number, done: ReadonlySet<string>): SectionSummary[] {
   const out: SectionSummary[] = [];
   for (const section of course.sections) {
     const own = course.path.filter((l) => l.section.id === section.id);
@@ -202,7 +226,7 @@ export function sectionSummaries(course: Course, current: number): SectionSummar
       firstIndex,
       lastIndex,
       lessons: own.length,
-      done: Math.max(0, Math.min(current, lastIndex + 1) - firstIndex),
+      done: doneCount(own, done),
       state: current > lastIndex ? 'done' : current >= firstIndex ? 'current' : 'locked',
     });
   }
