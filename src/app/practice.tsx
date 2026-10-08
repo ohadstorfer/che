@@ -13,7 +13,7 @@ import { LessonComplete } from '@/components/lesson-complete';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
 import { type AnswerActions, AnswerActionsContext } from '@/components/wrong-answer-actions';
-import { answerWords, meaningOf } from '@/lib/answers';
+import { answerWords, shownMeaning } from '@/lib/answers';
 import { preloadAudio } from '@/lib/audio';
 import { useAuth } from '@/lib/auth';
 import { conceptsOf } from '@/lib/concepts';
@@ -811,7 +811,7 @@ function CheckNotYet({
           {missed.slice(0, 6).map((f) => (
             <View key={f.id} style={styles.missedRow}>
               <Text style={styles.missedEs}>{f.form}</Text>
-              <Text style={styles.missedEn}>{meaningOf(f)}</Text>
+              <Text style={styles.missedEn}>{shownMeaning(f).text}</Text>
             </View>
           ))}
         </Panel>

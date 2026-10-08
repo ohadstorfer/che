@@ -50,6 +50,8 @@ import {
   gradeTyped,
   labelOf,
   meaningOf,
+  senseOf,
+  shownMeaning,
   type Note,
   startsSentence,
   turnCount,
@@ -295,7 +297,12 @@ function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
       <Panel style={styles.bigCard}>
         <Text style={phrase ? styles.esPhraseHero : styles.esHero}>{form.form}</Text>
         <View style={styles.divider} />
-        <Text style={phrase ? styles.enPhrase : styles.enBig}>{meaningOf(form)}</Text>
+        {/* Where the word is taught the hint always shows: this is the one
+            screen that can say everything the gloss does. */}
+        <Text style={phrase ? styles.enPhrase : styles.enBig}>{senseOf(form, meaningOf(form)).main}</Text>
+        {senseOf(form, meaningOf(form)).hint ? (
+          <Text style={[styles.meaningHint, { textAlign: 'center' }]}>{senseOf(form, meaningOf(form)).hint}</Text>
+        ) : null}
         {/* The aside lives here, where the word is being taught — it explains
             what the gloss can only name ("mate" → the drink). */}
         {form.gloss_note_en ? <Text style={styles.glossNote}>{form.gloss_note_en}</Text> : null}
@@ -601,7 +608,10 @@ function PromptBlock({ form, side }: { form: Form; side: 'es' | 'en' }) {
           {side === 'es' ? (
             <Text style={phrase ? styles.bubblePhrase : styles.bubbleWord}>{form.form}</Text>
           ) : (
-            <Text style={phrase ? styles.bubblePhraseEn : styles.bubbleEn}>{meaningOf(form)}</Text>
+            <>
+              <Text style={phrase ? styles.bubblePhraseEn : styles.bubbleEn}>{shownMeaning(form).text}</Text>
+              {shownMeaning(form).hint ? <Text style={styles.meaningHint}>{shownMeaning(form).hint}</Text> : null}
+            </>
           )}
         </View>
       </View>
@@ -732,7 +742,7 @@ function Listen({
 }) {
   const { form } = item;
   const [options] = useState(() =>
-    pickOptions(form, allForms, 'gloss_en').map((c) => ({ id: c.id, label: meaningOf(c) })),
+    pickOptions(form, allForms, 'gloss_en').map((c) => ({ id: c.id, label: shownMeaning(c).text })),
   );
   const [chosen, setChosen] = useState<string | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
@@ -823,8 +833,8 @@ function TrueFalse({
   // Half the time we show the real meaning, half an imposter's.
   const [{ shown, isTrue }] = useState(() => {
     const imposter = pickImposter(form, allForms);
-    if (!imposter || Math.random() < 0.5) return { shown: meaningOf(form), isTrue: true };
-    return { shown: meaningOf(imposter), isTrue: false };
+    if (!imposter || Math.random() < 0.5) return { shown: shownMeaning(form).text, isTrue: true };
+    return { shown: shownMeaning(imposter).text, isTrue: false };
   });
 
   const choose = (value: boolean) => {
@@ -1733,8 +1743,13 @@ function Matching({
                 <FitText
                   style={[styles.matchText, isMatched && { color: colors.success }]}
                   lines={2}>
-                  {meaningOf(c)}
+                  {shownMeaning(c).text}
                 </FitText>
+                {shownMeaning(c).hint ? (
+                  <Text style={[styles.matchHint, isMatched && { color: colors.success }]} numberOfLines={1}>
+                    {shownMeaning(c).hint}
+                  </Text>
+                ) : null}
               </Pressable>
             );
           })}
@@ -2498,6 +2513,8 @@ const styles = StyleSheet.create({
   // The aside sits a step down from the gloss it explains: lighter, smaller,
   // and never bold — it is context, not the thing being learnt.
   glossNote: { ...font.body[500], fontSize: 14, color: colors.muted, lineHeight: 19 },
+  // What sets a meaning apart from another word's: "plural" under "you".
+  meaningHint: { ...font.body[500], fontSize: 14, color: colors.muted, lineHeight: 19 },
   peekHint: { ...font.body[600], fontSize: 14, color: colors.muted, textAlign: 'center' },
 
   playWrap: { alignItems: 'center', gap: 6 },
@@ -2649,5 +2666,6 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
   matchText: { ...font.body[800], fontSize: 16, color: colors.ink, textAlign: 'center' },
+  matchHint: { ...font.body[500], fontSize: 12.5, color: colors.muted, textAlign: 'center', marginTop: 1 },
 
 });

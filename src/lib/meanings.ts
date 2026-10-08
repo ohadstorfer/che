@@ -1,4 +1,4 @@
-import { glossSenses, norm, senseKey, senses } from './answers';
+import { glossSenses, norm, senseKey, senseOf, splitSense } from './answers';
 import type { Form, Sentence } from './types';
 
 // ---------------------------------------------------------------------------
@@ -7,13 +7,13 @@ import type { Form, Sentence } from './types';
 // A gloss is a dictionary entry: "well, fine, good". No screen can print it
 // whole — "Type it in Spanish: thanks, thank you" is a riddle — and no one
 // sense of it is right everywhere: `bien hecho` is "well done", `estoy bien` is
-// "I'm fine". So the meaning a screen shows is not authored. Every sentence
-// token carries what it means in that sentence (`course:gloss` aligns it with
-// the English), and a word's meanings are whatever its sentences say, ranked
-// by how she has met them. A new sentence can add a meaning ("pretty bad" for
-// `mal`); nobody has to remember to write it down. The dictionary gloss only
-// vets them: a rendering that shares no word with it ("there" for the `che` of
-// "Hi there") stays in its sentence.
+// "I'm fine". So the meaning a screen shows is picked, not printed. Every
+// sentence token carries what it means in that sentence (`course:gloss` aligns
+// it with the English), and of a word's senses the one shown is the one its
+// sentences use, ranked by how she has met them, in the sentence's own words
+// ("are you" for `sos`). The dictionary gloss vets them: a rendering that is
+// not one of its senses ("there" for the `che` of "Hi there", "you don't know"
+// for the `sabés` of "No sabés") stays in its sentence (standsAlone).
 //
 // Pure, so it can be tested on its own (scripts/course/test/meanings.test.mjs).
 // ---------------------------------------------------------------------------
@@ -107,11 +107,13 @@ export function meaningsFromSentences(
  *  half the translations of anything. */
 const FILLER = new Set(['a', 'an', 'the', 'to', 'of', 'it', 'that', 'this', 'there']);
 
-/** A translation's words, contractions opened: "you're" → you, are. */
-const englishWords = (text: string) =>
+/** Every word of a translation, contractions opened: "you're" → you, are. */
+const allWords = (text: string) =>
   text
     .toLowerCase()
     .replace(/[‘’`´]/g, "'")
+    .replace(/\bcan(?:'t|not)\b/g, 'can not')
+    .replace(/\bwon't\b/g, 'will not')
     .replace(/n't\b/g, ' not')
     .replace(/'m\b/g, ' am')
     .replace(/'re\b/g, ' are')
@@ -120,25 +122,104 @@ const englishWords = (text: string) =>
     .replace(/'ve\b/g, ' have')
     .replace(/'d\b/g, ' would')
     .split(/[^a-z]+/)
-    .filter((w) => w && !FILLER.has(w));
+    .filter(Boolean);
+
+/** What a rendering says, however it is put: "we're", "we are" and "are we"
+ *  are one thing, and so are "you know" and "do you know". */
+const sayingKey = (text: string) =>
+  allWords(text)
+    .filter((w) => w !== 'do' && w !== 'does')
+    .sort()
+    .join(' ') || senseKey(text);
+
+/** A translation's words that carry meaning — the filler dropped. */
+const englishWords = (text: string) => allWords(text).filter((w) => !FILLER.has(w));
+
+/** What a sentence may put around a word's meaning without changing it: who
+ *  does it ("he came"), an article ("a bike"), a question's "do" ("do you
+ *  work"). Not "did": "¿Sabés que…?" is "Did you know…?", and `sabés` is not
+ *  past. */
+const FREE = new Set(['i', 'you', 'he', 'she', 'it', 'we', 'they', 'the', 'a', 'an', 'some', 'do', 'does']);
+
+/** A sense's words, one slot each; "he/she went" has a slot either word fills.
+ *  Its notes are not part of it: "works (he/she works)" is "works". */
+const slotsOf = (sense: string) =>
+  sense
+    .replace(/\([^)]*\)/g, ' ')
+    .split(/\s+/)
+    .flatMap((piece) => (piece.includes('/') ? [piece.split('/').map(allWords)] : allWords(piece).map((w) => [[w]])))
+    .filter((slot) => slot.some((alt) => alt.length));
 
 /**
  * Whether a sentence's rendering of a word can stand for the word on its own.
  * A translation renders a sentence, not each word: "Hola, che" is "Hi there",
- * "¡Sos vos!" is "It's you!" — right for the sentence, but "there" is not what
- * `che` means, and a prompt asking for "it's" wants `es`, not `sos`. So a
- * meaning leaves its sentence only when it shares a word with the word's
- * dictionary gloss: "you're" and "are you" for `sos` ("you are"), "pretty bad"
- * for `mal` ("bad, badly"). The rest still show where they belong — in
- * the popover of their own sentence.
+ * "¡Sos vos!" is "It's you!", and "No sabés" is "You don't know" — where the
+ * English "don't" has nowhere to go but onto `sabés`. Right for the sentence;
+ * on a card, `sabés` would mean "you don't know".
+ *
+ * So a rendering leaves its sentence only when it is one of the dictionary
+ * gloss's senses, whole, with nothing added but what a sentence adds without
+ * changing the meaning (`FREE`): "you're" and "are you" for `sos` ("you
+ * are"), "do you know" for `sabés` ("you know"), "he came" for `vino` ("came
+ * (he/she came)"). A word more — "you don't know", "I have to", "seventh
+ * birthday" — or a word less — "are" for `sos`, "park" for `estacionar` ("to
+ * park") — and it stays where it belongs, in the popover of its own sentence.
+ *
+ * It used to be enough to share one word with the gloss, which is how "not"
+ * got onto a hundred verbs. The cost of asking for the whole sense is that a
+ * sentence can no longer teach a meaning the gloss never listed ("pretty bad"
+ * for `mal`): a meaning worth a card is worth writing in the gloss.
  */
-export function standsAlone(meaning: string, gloss: string) {
-  const dictionary = new Set(englishWords(gloss));
-  return englishWords(meaning).some((w) => dictionary.has(w));
+export const standsAlone = (meaning: string, gloss: string) => senseBehind(meaning, gloss) != null;
+
+/** The sense of the gloss a rendering stands for (`standsAlone`), or null. */
+export function senseBehind(meaning: string, gloss: string) {
+  const words = allWords(meaning);
+  const onlyFree = words.every((w) => FREE.has(w));
+  const found = glossSenses(gloss).find((sense) => {
+    const slots = slotsOf(sense);
+    if (!slots.length) return false;
+    // Which of the rendering's words the sense accounts for.
+    const used = words.map(() => false);
+    for (const slot of slots) {
+      if (!slot.some((alt) => alt.length > 0 && take(words, used, alt))) return false;
+    }
+    const extra = words.filter((_, i) => !used[i]);
+    if (!extra.length) return true;
+    if (!extra.every((w) => FREE.has(w))) return false;
+    // Nothing but small words has nothing to hang another on: "I do" is not
+    // `yo`, "do you" is not `vos`.
+    if (onlyFree) return false;
+    // And one left hanging at the end is a sentence cut short: "we had a"
+    // (great time), "what a" (day), "neither do" (I).
+    return used[words.length - 1] || !DANGLING.has(words[words.length - 1]);
+  });
+  return found ?? null;
+}
+
+/** How a question opens in English. */
+const ASKS = new Set(['do', 'does', 'did', 'am', 'is', 'are', 'was', 'were', 'can', 'could', 'will', 'would', 'have', 'has', 'had', 'should']);
+
+/** Small words that need something after them. */
+const DANGLING = new Set(['the', 'a', 'an', 'some', 'do', 'does']);
+
+/** Marks `alt`'s words as used in `words`, each once, the last one free first;
+ *  false (and nothing marked) if one is missing. */
+function take(words: string[], used: boolean[], alt: string[]) {
+  const mine: number[] = [];
+  for (const w of alt) {
+    let at = words.length - 1;
+    while (at >= 0 && (words[at] !== w || used[at] || mine.includes(at))) at--;
+    if (at < 0) return false;
+    mine.push(at);
+  }
+  for (const i of mine) used[i] = true;
+  return true;
 }
 
 /** 2 when a meaning is one of the gloss's senses, in the same words in the same
- *  order ("you're" is "you are"); 1 when it shares a word; 0 otherwise. */
+ *  order ("you're" is "you are"); 1 when it can stand for the word some other
+ *  way ("are you"); 0 otherwise. */
 export function closeness(meaning: string, gloss: string) {
   const words = englishWords(meaning).join(' ');
   if (glossSenses(gloss).some((s) => englishWords(s).join(' ') === words)) return 2;
@@ -194,8 +275,7 @@ export function popoverMeanings(form: { form: string; gloss_en: string }, inCont
   if (!here) return dictionary.map((text) => ({ text }));
   const rest = dictionary.filter((t) => senseKey(t) !== senseKey(here));
   // A rendering that is one of the senses word for word is the word's meaning,
-  // whatever `standsAlone` makes of it: it compares content words, and `un`
-  // ("a, an") rendered "a" has none on either side.
+  // whatever `standsAlone` makes of it.
   if (rest.length < dictionary.length || standsAlone(here, form.gloss_en)) return [{ text: here }];
   return rest.length ? [{ text: here, here: true }, ...rest.map((text) => ({ text }))] : [{ text: here }];
 }
@@ -218,12 +298,26 @@ export function withMeanings(forms: Form[], sentences: Sentence[], reached = 0, 
   const fromSentences = meaningsFromSentences(sentences, (id, m) => closeness(m, glossById.get(id) ?? ''), base);
   const meaningsOf = (f: Form) => (fromSentences.get(f.id) ?? []).filter((m) => standsAlone(m, f.gloss_en));
 
-  // Who answers to each piece of English.
+  // Who answers to each piece of English — however a sentence happened to
+  // put it (`sayingKey`). `somos` and `estamos` are both "we are"; that one
+  // sentence wrote "are we" for `estamos` does not make it the only word for
+  // that, and a card saying so would teach a difference that isn't there.
   const owners = new Map<string, Form[]>();
   for (const f of forms) {
     if (f.is_glue) continue;
-    const keys = new Set([...senses(f.gloss_en), ...meaningsOf(f).map(senseKey)]);
+    const keys = new Set([...glossSenses(f.gloss_en), ...meaningsOf(f)].map(sayingKey));
     for (const key of keys) owners.set(key, [...(owners.get(key) ?? []), f]);
+  }
+
+  // And to each piece with its brackets off: `ustedes` ("you (plural)") and
+  // `vos` ("you") both read "you" on a tile.
+  const bareOwners = new Map<string, Form[]>();
+  for (const f of forms) {
+    // A bound form ("levanto", only ever met inside "me levanto") is never
+    // asked for on its own, so it is nobody's look-alike.
+    if (f.is_glue || f.bound) continue;
+    const keys = new Set([...glossSenses(f.gloss_en), ...meaningsOf(f)].map((m) => senseKey(splitSense(m).main)));
+    for (const key of keys) bareOwners.set(key, [...(bareOwners.get(key) ?? []), f]);
   }
 
   return forms.map((f) => {
@@ -233,21 +327,28 @@ export function withMeanings(forms: Form[], sentences: Sentence[], reached = 0, 
     // favor" is "And some bread, please", but `pan` on its own is "bread". A
     // rendering that is a dictionary sense behind an article shows as that
     // sense; `meanings_en` keeps it as written, so it is still a right answer.
+    //
+    // Nor is a question's word order: most of what a learner reads `vendés` in
+    // is a question ("¿Vendés…?" — "Do you sell…?"), but the word is "you
+    // sell", and a card that says "do you sell" teaches the word as a question.
+    // So a rendering that asks shows as the sense it stands for.
     const plain = (text: string) => {
       const bare = senseKey(text.replace(/^\s*(the|a|an|some)\s+/i, ''));
-      return dictionary.find((d) => senseKey(d) === bare) ?? text;
+      const sense = dictionary.find((d) => senseKey(d) === bare);
+      if (sense) return sense;
+      const [first] = allWords(text);
+      const asked = ASKS.has(first) ? senseBehind(text, f.gloss_en) : null;
+      return asked && allWords(asked)[0] !== first ? asked : text;
     };
     const candidates = [...new Set([...meanings.map(plain), ...dictionary])];
     if (!candidates.length) return f;
     const limit = Math.max(reached, f.unit_order);
-    const shared = (text: string) =>
-      (owners.get(senseKey(text)) ?? []).some(
-        (o) =>
-          o.id !== f.id &&
-          o.unit_order <= limit &&
-          // The other gender of the same word is the same answer, not a rival.
-          !(o.lemma_id === f.lemma_id && o.pos === f.pos && o.gloss_en === f.gloss_en),
-      );
+    const rival = (o: Form) =>
+      o.id !== f.id &&
+      o.unit_order <= limit &&
+      // The other gender of the same word is the same answer, not a rival.
+      !(o.lemma_id === f.lemma_id && o.pos === f.pos && o.gloss_en === f.gloss_en);
+    const shared = (text: string) => (owners.get(sayingKey(text)) ?? []).some(rival);
     // The word is not its own meaning. A sentence that renders `medialuna` as
     // "medialuna" would make every prompt print its own answer, so the
     // dictionary gloss ("croissant") stands in. A word that has nothing else —
@@ -259,6 +360,16 @@ export function withMeanings(forms: Form[], sentences: Sentence[], reached = 0, 
       candidates.find((c) => !itself(c)) ??
       glossSenses(f.gloss_en)[0] ??
       candidates[0];
-    return { ...f, meaning_en: meaning, meanings_en: meanings };
+    // What a screen prints of it: the brackets off, and what they said only
+    // if a word she could know by now reads the same without them.
+    const { main, hint } = senseOf(f, meaning);
+    const clashes = hint != null && (bareOwners.get(senseKey(main)) ?? []).some(rival);
+    return {
+      ...f,
+      meaning_en: meaning,
+      meanings_en: meanings,
+      meaning_shown_en: main,
+      meaning_hint_en: clashes ? hint : null,
+    };
   });
 }

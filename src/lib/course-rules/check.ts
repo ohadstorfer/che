@@ -2,6 +2,7 @@
 // than a file: the outline validator, the linter, the generator and the admin's
 // editors all run these.
 
+import { SENSE_BREAK } from '../answers';
 import type { FormFeatures } from '../types';
 import { generateVariants, uncoveredTokens } from './accept';
 import { CLITIC_LEMMAS, REGIONAL, REGIONAL_PHRASES, SENSES, TUTEO, TUTEO_AMBIGUOUS, bare, fold, registerRank } from './rules';
@@ -188,7 +189,7 @@ export function boundCandidates(
  */
 export const senses = (gloss: string | null | undefined) =>
   String(gloss ?? '')
-    .split(/[,;]/)
+    .split(SENSE_BREAK)
     .map((s) => s.trim().toLowerCase())
     .filter(Boolean);
 

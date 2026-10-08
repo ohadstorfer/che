@@ -124,6 +124,12 @@ export interface Form {
   meaning_en?: string;
   /** Every meaning its sentences give it ("fine", "well"), most familiar first. */
   meanings_en?: string[];
+  /** `meaning_en` as it is printed: the gloss's brackets off ("they told",
+   *  not "they told (a story)"). See `shownMeaning` (answers.ts). */
+  meaning_shown_en?: string;
+  /** What the brackets said, when another word she knows would read the same
+   *  without it: "plural" for `ustedes`, next to `vos`. */
+  meaning_hint_en?: string | null;
   /** The aside that explains the word rather than translating it — "the drink"
    *  for mate. Shown where the word is taught or revealed, never where it is
    *  asked: on a tile or an option it would hand over the answer. */

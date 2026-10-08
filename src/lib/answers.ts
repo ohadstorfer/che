@@ -135,17 +135,111 @@ export const tokenIndexOf = (s: Sentence, formId: string) => s.tokens.findIndex(
 // Meaning
 // ---------------------------------------------------------------------------
 
-type Glossed = Pick<Form, 'id' | 'form' | 'gloss_en'> & Partial<Pick<Form, 'meaning_en' | 'meanings_en'>>;
+type Glossed = Pick<Form, 'id' | 'form' | 'gloss_en'> &
+  Partial<Pick<Form, 'meaning_en' | 'meanings_en' | 'meaning_shown_en' | 'meaning_hint_en'>>;
 
 /** How two meanings are compared: "Well done" and "well done" are one meaning. */
 export const senseKey = (s: string) => s.trim().toLowerCase();
 
+/** Where one sense of a gloss ends and the next begins: a comma or semicolon,
+ *  but not one inside a note — "would go (I, he/she)" is one sense. */
+export const SENSE_BREAK = /[,;](?![^()]*\))/;
+
 /** A gloss's senses as written: "OK, sure, go ahead" → ["OK", "sure", "go ahead"]. */
 export const glossSenses = (gloss: string) =>
   gloss
-    .split(/[,;]/)
+    .split(SENSE_BREAK)
     .map((s) => s.trim())
     .filter(Boolean);
+
+/** Bracketed words at the front of a sense that say what kind of word it is,
+ *  rather than being part of what it means: "(that) they see", "(noun) work". */
+const MARKERS = new Set(['that', 'if', 'noun', 'he said', 'caer bien/mal']);
+
+/**
+ * A sense as a screen shows it: what it means, and the aside that tells it
+ * from another word that means the same. "they told (a story)" is "they told"
+ * with the hint "a story"; "(that) they see" is "they see" with "that"; "you
+ * (pl.) are" is "you are" with "plural". A bracket that is a word of the
+ * meaning the English may leave out stays in it: "repeat (it) to me" is
+ * "repeat it to me", "(traffic) ticket" is "traffic ticket".
+ *
+ * A gloss is written to be read whole, in a dictionary; a tile that prints
+ * "(noun) work" reads like one. So the hint is only shown when the meaning
+ * alone would leave two words looking the same (meanings.ts, withMeanings).
+ */
+export function splitSense(text: string): { main: string; hint: string | null } {
+  const hints: string[] = [];
+  let main = text.trim();
+  const dash = main.match(/^(.*?\S)\s+—\s+(.+)$/);
+  if (dash) {
+    main = dash[1];
+    hints.push(dash[2].trim());
+  }
+  const trail = main.match(/^(.*\S)\s*\(([^()]*)\)$/);
+  // "where (to)" is "where to": a word of the meaning, not an aside.
+  if (trail && trail[2].trim().toLowerCase() !== 'to') {
+    main = trail[1];
+    hints.unshift(trail[2].trim());
+  }
+  const lead = main.match(/^\(([^()]*)\)\s*(\S.*)$/);
+  if (lead && MARKERS.has(lead[1].trim().toLowerCase())) {
+    main = lead[2];
+    hints.unshift(lead[1].trim());
+  }
+  main = main
+    .replace(/\s*\((pl\.|plural)\)/gi, () => {
+      hints.unshift('plural');
+      return '';
+    })
+    .replace(/\(([^()]*)\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+  // A sense that is nothing but its aside keeps it.
+  if (!main) return { main: text.trim(), hint: null };
+  return { main, hint: hints.filter(Boolean).join(' · ') || null };
+}
+
+/**
+ * `splitSense` for a form, with the hint worded for a learner. A gloss marks a
+ * subjunctive the way a dictionary does — "(that) they see", "you come (that
+ * you come)" — which says nothing to someone who has not been told what "that"
+ * is doing there. What she has been taught is where the form goes: after
+ * "quiero que", after "cuando". So the hint names the Spanish it follows, which
+ * is also the cue that brings the form to mind. And a hint that only says the
+ * meaning again with its subject ("cooks (he/she cooks)") is cut to the
+ * subject.
+ */
+export function senseOf(form: Pick<Form, 'features'>, sense: string): { main: string; hint: string | null } {
+  const { main, hint } = splitSense(sense);
+  if (!hint) return { main, hint };
+  const f = form.features ?? {};
+  const lower = hint.toLowerCase();
+  if (f.mood === 'subj') {
+    const after = /^don't\b/.test(lower)
+      ? 'no'
+      : /^so that\b/.test(lower)
+        ? 'para que'
+        : /^when\b/.test(lower)
+          ? 'cuando'
+          : /^if\b/.test(lower)
+            ? 'si'
+            : /^(that|subjunctive)\b/.test(lower)
+              ? f.tense === 'impf'
+                ? 'quería que'
+                : 'quiero que'
+              : null;
+    if (after) return { main, hint: `after “${after}”` };
+  }
+  // "he/she cooks" under "cooks": only who does it is news.
+  const said = new Set(main.toLowerCase().split(/[^a-z']+/).filter(Boolean));
+  const words = hint.split(/\s+/);
+  const extra = words.filter((w) => !said.has(w.toLowerCase().replace(/[^a-z']/g, '')));
+  if (extra.length && extra.length < words.length && extra.every((w) => /^(I|you|he|she|it|we|they)([/,](I|you|he|she|it|we|they))*,?$/i.test(w))) {
+    return { main, hint: extra.join(' ').replace(/,$/, '') };
+  }
+  return { main, hint };
+}
 
 /** A gloss's senses as compared: "well, fine, good" → ["well", "fine", "good"].
  *  Split the same way as the outline validator's overlap warning (outline.mjs). */
@@ -160,6 +254,19 @@ export const senses = (gloss: string) => glossSenses(gloss).map(senseKey);
  */
 export const meaningOf = (f: Glossed) => f.meaning_en ?? glossSenses(f.gloss_en)[0] ?? f.gloss_en;
 
+/**
+ * `meaningOf` as a screen prints it: without the gloss's brackets ("they
+ * told", not "they told (a story)"), and with the hint that sets it apart
+ * only when another word she knows would otherwise read the same ("you" +
+ * "plural" for `ustedes`, next to `vos`). Grading still goes by `meaningOf`:
+ * the stored answers and the pronouns a verb accepts are keyed on the sense
+ * as written.
+ */
+export const shownMeaning = (f: Glossed): { text: string; hint: string | null } =>
+  f.meaning_shown_en != null
+    ? { text: f.meaning_shown_en, hint: f.meaning_hint_en ?? null }
+    : { text: meaningOf(f), hint: null };
+
 /** Every English a form answers to: its gloss's senses and its sentences'. */
 export const sensesOf = (f: Glossed) => [
   ...new Set([
@@ -170,7 +277,7 @@ export const sensesOf = (f: Glossed) => [
 ];
 
 /** What a form shows on the side of an option or tile: its Spanish, or its meaning. */
-export const labelOf = (f: Glossed, field: 'gloss_en' | 'form') => (field === 'form' ? f.form : meaningOf(f));
+export const labelOf = (f: Glossed, field: 'gloss_en' | 'form') => (field === 'form' ? f.form : shownMeaning(f).text);
 
 /**
  * A word whose English is the word itself — mate, cortado, empanada. No
@@ -655,7 +762,7 @@ export function sentenceTiles(sentence: Sentence, allForms: Form[], side: 'es' |
   for (const f of shuffle(allForms)) {
     if (f.pos === 'propn' || isPhrase(f.form) || own.some((o) => sharesMeaning(o, f))) continue;
     if (side === 'en') {
-      for (const w of wordsOf(meaningOf(f).replace(TILE_PUNCT, ' '))) {
+      for (const w of wordsOf(shownMeaning(f).text.replace(TILE_PUNCT, ' '))) {
         const key = norm(w);
         if (key && !taken.has(key) && !spare.has(key)) spare.set(key, w.toLocaleLowerCase('en'));
       }
