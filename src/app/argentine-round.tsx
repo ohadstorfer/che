@@ -118,7 +118,7 @@ export default function ArgentineRound() {
   }, [pack, userId, first]);
 
   if (lessonId) {
-    if (ended) return <PathLessonDone result={ended.result} />;
+    if (ended) return <PathLessonDone lessonId={lessonId} result={ended.result} />;
     if (slang === null) {
       // The road can hold a class this build has no words for (the plan ships in
       // the app, the road in the database). It is skipped rather than left as a

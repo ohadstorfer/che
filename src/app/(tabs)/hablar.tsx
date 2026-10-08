@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { type ImageSourcePropType, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Animated, type ImageSourcePropType, Platform, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
 import { PanchoAvatar, Sheet, StartButton, webPress } from '@/components/hablar-ui';
 import { AppHeader, useStreakWeek } from '@/components/app-header';
@@ -25,6 +25,7 @@ import { FREE_CHATS, usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, type PastelName, pastel, pastelGrad, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
+import { OutlinedHeadline, useSlap } from '@/components/sticker';
 
 // ---------------------------------------------------------------------------
 // Speaking — one short chat a day with Pancho (docs/hablar-hld.md §2.1).
@@ -32,7 +33,8 @@ import { FitText } from '@/components/fit-text';
 // The top card is the day: Pancho's pick with one Start button while the chat
 // is still there to take, Resume while one is open, and once it's used, what
 // she got out of it and tomorrow's pick. Below, everything
-// else she could talk about instead — a scenario, or talking about anything.
+// else she could talk about instead: the scenarios as pastel postcards, the capybara of each
+// standing on its card and breaking out of the top, on alternating sides.
 // The level switch opens at the level of her last chat (her course level on a
 // first visit) and shows every scenario at that level, the ones written for
 // it first. The brief's chip can still move it before she starts.
@@ -120,6 +122,7 @@ export default function Hablar() {
     <View style={styles.safe}>
       <AppHeader title="Speaking" status={streak} weekDone={weekDone} />
       <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+        <OutlinedHeadline small="Talk to" big="Pancho" style={styles.headline} />
 
         {freeLeft != null && today.state === 'free' ? (
           <Pressable
@@ -152,17 +155,19 @@ export default function Hablar() {
 
         {today.state !== 'done' ? (
           <View style={styles.section}>
-            <View style={styles.list}>
+            <View style={styles.pickLabel}>
+              <Text style={styles.pickLabelText}>Or pick a scenario</Text>
+            </View>
+            <View style={styles.cards}>
               {byFit.map((s, i) => {
                 const v = scenarioAt(s, band);
                 return (
-                  <Row
+                  <Postcard
                     key={s.id}
+                    index={i}
                     art={scenarioArt(s.id)}
-                    tone={i}
                     title={s.title_en}
                     sub={`With ${v.role_en}`}
-                    label={s.title_en}
                     onPress={() => openDoor('scenario', s.id)}
                   />
                 );
@@ -260,7 +265,7 @@ function PanchoSays({ line }: { line: string }) {
  */
 function CallCard({ onAnswer }: { onAnswer: () => void }) {
   return (
-    <Hero tone="sage">
+    <Hero tone="butter">
       <View style={styles.call}>
         <View style={styles.callKicker}>
           <View style={styles.aiChip}>
@@ -360,7 +365,48 @@ function Tomorrow({ scenario, band }: { scenario: Scenario; band: Band }) {
   );
 }
 
-/** A scenario as a clay row: pastel circle with its art, name, who Pancho plays, level. */
+/** The art's hard sticker shadow, where it can follow the picture's own outline
+ *  (a CSS filter on web and Android); iOS would shade the image's whole box. */
+const artShadow = (side: 'left' | 'right') =>
+  (Platform.OS === 'ios' ? null : { filter: `drop-shadow(${side === 'left' ? -2 : 2}px 3px 0px ${colors.ink})` }) as object | null;
+
+/** A scenario as a postcard: its pastel, its name, who Pancho plays, and its capybara on one side. */
+function Postcard({ index, art, title, sub, onPress }: { index: number; art: ImageSourcePropType; title: string; sub: string; onPress: () => void }) {
+  const side = index % 2 ? 'left' : 'right';
+  const slap = useSlap(index + 1, side === 'right' ? '-1deg' : '1deg');
+  return (
+    <Animated.View style={slap}>
+      <Pressable
+        onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel={`${title}. ${sub}`}
+        style={({ pressed }) => [
+          styles.card,
+          side === 'right' ? styles.cardTextLeft : styles.cardTextRight,
+          { backgroundColor: ROW_TONES[index % ROW_TONES.length], transform: [{ scale: pressed ? press.scale : 1 }] },
+          webPress,
+        ]}>
+        <FitText style={styles.cardTitle} lines={2}>
+          {title}
+        </FitText>
+        <FitText style={styles.cardSub} lines={2}>
+          {sub}
+        </FitText>
+      </Pressable>
+      {/* Beside the card, not inside it: on iOS a card's outline is drawn over its own children. */}
+      <Image
+        source={art}
+        style={[styles.cardArt, side === 'right' ? styles.cardArtRight : styles.cardArtLeft, artShadow(side)]}
+        contentFit="contain"
+        contentPosition="bottom"
+        accessible={false}
+        pointerEvents="none"
+      />
+    </Animated.View>
+  );
+}
+
+/** A scenario as a compact row (the sheet's list): pastel circle with its art, name, who Pancho plays, level. */
 function Row({
   art,
   tone,
@@ -415,6 +461,7 @@ const styles = StyleSheet.create({
   freeLeftText: { ...font.body[700], flexShrink: 1, fontSize: 13, lineHeight: 18, color: colors.muted },
   freeLeftLink: { ...font.body[800], color: colors.primary },
   safe: { flex: 1 },
+  headline: { width: '78%', marginTop: -6, marginBottom: 4 },
   container: { padding: 20, gap: 16, maxWidth: 560, width: '100%', alignSelf: 'center', paddingBottom: 40 },
 
   hero: { padding: 20, gap: 16, borderRadius: radius.xl, overflow: 'hidden', boxShadow: clay.surface },
@@ -516,6 +563,31 @@ const styles = StyleSheet.create({
   freeSub: { ...font.body[700], fontSize: 13, lineHeight: 17, color: colors.onPastel, opacity: 0.85 },
 
   list: { gap: 12 },
+
+  // Talking about anything -------------------------------------------------
+  // The postcards ----------------------------------------------------------
+  // The gap leaves room for each capybara's head, which stands above its card.
+  /** A small sticker label between the day's card and the postcards. */
+  pickLabel: {
+    alignSelf: 'flex-start',
+    marginTop: 10,
+    paddingVertical: 7,
+    paddingHorizontal: 14,
+    borderRadius: radius.pill,
+    backgroundColor: colors.card,
+    boxShadow: clay.chip,
+    transform: [{ rotate: '-2deg' }],
+  },
+  pickLabelText: { ...font.display[900], fontSize: 14, letterSpacing: 0.6, textTransform: 'uppercase', color: colors.ink },
+  cards: { gap: 30, paddingTop: 20 },
+  card: { minHeight: 100, justifyContent: 'center', gap: 4, paddingVertical: 14, borderRadius: 20, boxShadow: clay.surface },
+  cardTextLeft: { paddingLeft: 18, paddingRight: 116 },
+  cardTextRight: { paddingLeft: 116, paddingRight: 18 },
+  cardTitle: { ...font.display[900], fontSize: 24, lineHeight: 25, letterSpacing: -0.3, color: colors.onPastel },
+  cardSub: { ...font.body[700], fontSize: 14, lineHeight: 18, color: colors.onPastel, opacity: 0.85 },
+  cardArt: { position: 'absolute', bottom: 0, width: 92, height: 122 },
+  cardArtRight: { right: 12 },
+  cardArtLeft: { left: 12, transform: [{ scaleX: -1 }] },
   row: {
     flexDirection: 'row',
     alignItems: 'center',

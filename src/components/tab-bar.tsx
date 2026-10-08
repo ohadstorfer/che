@@ -11,7 +11,7 @@ import {
   View,
   type ViewStyle,
 } from 'react-native';
-import { clay, colors, font, PICKED, press } from '@/lib/theme';
+import { clay, colors, font, pastel, press } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
@@ -21,9 +21,8 @@ import { FitText } from '@/components/fit-text';
 // hairline on top — on iOS Safari its labels end up clipped by the browser
 // chrome, and it reads as browser furniture rather than part of the app.
 //
-// This one is a floating clay pill lifted clear of the home indicator. The
-// active tab is marked by a soft ink-outlined pill (the same "picked" look as a
-// chosen answer) that *slides* between tabs, with the tab's icon turning solid,
+// This one is a floating sticker lifted clear of the home indicator. The
+// active tab is marked by a butter pill outlined in ink that *slides* between tabs, with the tab's icon turning solid,
 // so the selection reads as a place you moved to rather than a colour that blinked.
 // ---------------------------------------------------------------------------
 
@@ -181,8 +180,9 @@ const styles = StyleSheet.create({
     bottom: BAR_PAD,
     left: 0,
     borderRadius: 28,
-    borderWidth: 1.5,
-    ...PICKED,
+    borderWidth: 2.5,
+    borderColor: colors.ink,
+    backgroundColor: pastel.butter,
   },
   tab: {
     flex: 1,

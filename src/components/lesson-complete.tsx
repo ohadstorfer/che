@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
-  useAnimatedProps,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -27,8 +26,8 @@ import { clay, colors, font, gradients, pastel } from '@/lib/theme';
 // the check draws itself — the badge is the "done", the stroke is the proof.
 // The words follow 90ms apart, so the eye reads them as a sequence.
 //
-// The burst plays once; nothing loops. This screen is seen after every lesson,
-// so it has to stay short enough not to feel like a toll.
+// The burst plays once; nothing loops. It is the end of the day's first lesson
+// only — the ones after it end on her standing in the unit (unit-progress.tsx).
 //
 // Nothing here is on a timer. She leaves when she taps — either home, or into
 // the streak celebration if this was the first lesson of the day.
@@ -43,7 +42,10 @@ const STEP = 90;
 const BADGE = 112;
 const LAND = 260; // when the badge has landed and the burst fires
 const CHECK = 'M36 58 L51 73 L78 43';
-const CHECK_LEN = 64;
+// The check's stroke runs from x=31 to x=83; the wipe that draws it starts and
+// ends just outside that.
+const WIPE_FROM = 28;
+const WIPE_TO = 88;
 
 // Rotated so it doesn't read as boilerplate on lesson thirty.
 const CHEERS = ['Nice work!', 'Nailed it!', 'Great job!', 'Well done!', 'Look at you!'];
@@ -62,8 +64,6 @@ const BITS = Array.from({ length: 12 }, (_, i) => {
     pill: i % 2 === 0,
   };
 });
-
-const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 function useEntrance(delay: number, travel: number) {
   const reduced = useReducedMotion();
@@ -144,7 +144,15 @@ export function LessonComplete({
     opacity: ripple.value === 0 ? 0 : 0.5 * (1 - ripple.value),
     transform: [{ scale: 1 + 0.7 * ripple.value }],
   }));
-  const checkProps = useAnimatedProps(() => ({ strokeDashoffset: CHECK_LEN * (1 - draw.value) }));
+  // The check is drawn by a wipe, left to right, which is the way its stroke
+  // runs: a window slides across while the check inside it stays put. It was a
+  // dash offset set through animated props, and on the phone that never drew.
+  const wipeStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: WIPE_FROM + (WIPE_TO - WIPE_FROM) * draw.value - BADGE }],
+  }));
+  const checkStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: BADGE - WIPE_FROM - (WIPE_TO - WIPE_FROM) * draw.value }],
+  }));
 
   const eyebrow = useEntrance(LAND + 40, 10);
   const title = useEntrance(LAND + 40 + STEP, 10);
@@ -158,18 +166,20 @@ export function LessonComplete({
         <Animated.View pointerEvents="none" style={[styles.ripple, rippleStyle]} />
         <Animated.View style={[styles.badge, badgeStyle]}>
           <LinearGradient colors={gradients.deep} style={[StyleSheet.absoluteFill, styles.badgeFace]} />
-          <Svg width={BADGE} height={BADGE} viewBox={`0 0 ${BADGE} ${BADGE}`}>
-            <AnimatedPath
-              d={CHECK}
-              stroke={colors.onPrimary}
-              strokeWidth={10}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-              strokeDasharray={CHECK_LEN}
-              animatedProps={checkProps}
-            />
-          </Svg>
+          <Animated.View style={[styles.wipe, wipeStyle]}>
+            <Animated.View style={checkStyle}>
+              <Svg width={BADGE} height={BADGE} viewBox={`0 0 ${BADGE} ${BADGE}`}>
+                <Path
+                  d={CHECK}
+                  stroke={colors.onPrimary}
+                  strokeWidth={10}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              </Svg>
+            </Animated.View>
+          </Animated.View>
         </Animated.View>
       </View>
 
@@ -207,6 +217,7 @@ const styles = StyleSheet.create({
   // Rounded on the gradient itself, not clipped on the badge: clipping would
   // swallow the clay shadow too.
   badgeFace: { borderRadius: BADGE / 2 },
+  wipe: { width: BADGE, height: BADGE, overflow: 'hidden' },
   ripple: {
     position: 'absolute',
     width: BADGE,

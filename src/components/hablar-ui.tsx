@@ -611,7 +611,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: ON_ROSA_DISC,
-    boxShadow: 'inset 0 2px 0 rgba(255, 255, 255, 0.3)',
+    boxShadow: 'none',
   },
   startText: { ...font.body[800], fontSize: 18, color: colors.onPrimary },
 

@@ -52,6 +52,7 @@ import { fetchStreakWeek } from '@/lib/streak-week';
 import { clay, colors, font, gradients, pastel, pastelGrad, path, press, radius } from '@/lib/theme';
 import type { LessonKind, Section, Streak, Unit } from '@/lib/types';
 import { FitText } from '@/components/fit-text';
+import { FlagSun } from '@/components/sticker';
 
 interface HomeData {
   course: Course;
@@ -143,6 +144,12 @@ const BREATHE_MS = 1300;
 /** Horizontal S-curve: one full wave every 8 steps. Shallow enough that the
  *  wide current pill never runs off a narrow phone at the top of a swing. */
 const swing = (i: number) => Math.round(Math.sin((i * Math.PI) / 4) * 56);
+/** The flag's sun sits in the hollow of every bend: where the road swings
+ *  furthest right the sun hangs off the left edge, and the other way round.
+ *  A little over half of it shows; the screen's edge cuts the rest. */
+const SUN = 264;
+const SUN_SHOWN = SUN * 0.55;
+const bendOf = (i: number): 'left' | 'right' | null => (i % 8 === 2 ? 'left' : i % 8 === 6 ? 'right' : null);
 
 /** What the current pill says under "Start": the lesson, or what kind of step it is. */
 const KIND_LABEL: Partial<Record<LessonKind, string>> = {
@@ -388,8 +395,15 @@ const PathStep = memo(function PathStep({
     </Animated.View>
   );
 
+  const bend = bendOf(index);
+
   return (
     <View style={styles.step}>
+      {bend ? (
+        <View style={[styles.sunClip, bend === 'left' ? styles.sunLeft : styles.sunRight]} pointerEvents="none">
+          <FlagSun size={SUN} style={bend === 'left' ? { right: 0 } : { left: 0 }} />
+        </View>
+      ) : null}
       <View
         style={[
           styles.stepNode,
@@ -1576,12 +1590,14 @@ const styles = StyleSheet.create({
     marginBottom: BANNER_GAP,
     borderRadius: radius.xl,
     overflow: 'hidden',
+    // Over the sun of a bend that starts in the same row.
+    zIndex: 1,
     boxShadow: clay.surface,
   },
   bannerClay: {
     ...FILL,
     borderRadius: radius.xl,
-    boxShadow: 'inset 2px 3px 0 rgba(255,255,255,0.4), inset -3px -5px 10px rgba(120,70,40,0.10)',
+    boxShadow: 'none',
   },
   /** The text stops short of the carpincho's pod. */
   bannerBody: { flex: 1, justifyContent: 'space-between', padding: 20, paddingRight: 150 },
@@ -1595,14 +1611,14 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 16,
     borderRadius: radius.pill,
-    boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.12)',
+    boxShadow: 'none',
     overflow: 'hidden',
   },
   bannerFill: {
     height: '100%',
     borderRadius: radius.pill,
     overflow: 'hidden',
-    boxShadow: 'inset 0 2px 0 rgba(255,255,255,0.35)',
+    boxShadow: 'none',
   },
   bannerCount: { ...font.body[800], fontSize: 13, fontVariant: ['tabular-nums'] },
   /** The soft white disc the carpincho stands in, half off the corner. */
@@ -1662,6 +1678,10 @@ const styles = StyleSheet.create({
   pathEnd: { paddingBottom: 6 },
   step: { alignItems: 'center', alignSelf: 'stretch', marginBottom: STEP_GAP },
   stepNode: { alignItems: 'center' },
+  /** A window as wide as the part of the sun that shows, flush with the screen's edge (the list's 20pt padding undone). */
+  sunClip: { position: 'absolute', top: (BOX - SUN) / 2, width: SUN_SHOWN, height: SUN, overflow: 'hidden' },
+  sunLeft: { left: -20 },
+  sunRight: { right: -20 },
   /** Fixed whatever the node's phase — the current step grows inside it,
    *  so the road's spacing never shifts under an animation. */
   nodeBox: { width: BOX_W, height: BOX, alignItems: 'center', justifyContent: 'center' },
@@ -1712,7 +1732,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.18)',
-    boxShadow: 'inset 0 2px 0 rgba(255, 255, 255, 0.3)',
+    boxShadow: 'none',
   },
   /** Nudged right: a play triangle's weight sits left of its box. */
   play: { marginLeft: 3 },

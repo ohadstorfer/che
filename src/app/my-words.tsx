@@ -551,7 +551,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 10,
     backgroundColor: colors.card,
-    boxShadow: '0 10px 22px -10px rgba(120,70,40,0.35)',
+    boxShadow: clay.surface,
   },
   rowFirst: { borderTopLeftRadius: radius.lg, borderTopRightRadius: radius.lg, paddingTop: 12 },
   rowLast: { borderBottomLeftRadius: radius.lg, borderBottomRightRadius: radius.lg, paddingBottom: 12 },

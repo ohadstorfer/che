@@ -1560,7 +1560,7 @@ function fmt(ms: number) {
 }
 
 /** The dock's lift: a warm shade cast upward over the thread. */
-const DOCK_SHADOW = 'inset 0 3px 0 rgba(255, 255, 255, 0.7), 0 -10px 24px -12px rgba(120, 70, 40, 0.3)';
+const DOCK_SHADOW = `0 -2.5px 0 ${colors.ink}`;
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },

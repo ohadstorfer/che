@@ -39,7 +39,7 @@ import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
 // AppHeader — the one header every tab shares: the tab's name (or, on Course,
-// a clay pill naming her section), her streak in durazno and the avatar that
+// a sticker pill naming her section), her streak on a butter sticker and the avatar that
 // leads to her account, with this week's seven days beneath.
 // It sits outside each tab's scroller, so it holds its place while the page
 // runs past underneath.
@@ -460,7 +460,7 @@ const styles = StyleSheet.create({
   inner: { gap: 16, maxWidth: 560, width: "100%", alignSelf: "center" },
   top: { flexDirection: "row", alignItems: "center", gap: 10 },
   title: {
-    ...font.display[800],
+    ...font.display[900],
     flex: 1,
     fontSize: 34,
     lineHeight: 40,
@@ -481,7 +481,7 @@ const styles = StyleSheet.create({
     boxShadow: clay.surface,
   },
   pillText: {
-    ...font.body[800],
+    ...font.display[900],
     flexShrink: 1,
     fontSize: 14,
     color: colors.ink,
@@ -489,17 +489,20 @@ const styles = StyleSheet.create({
   chip: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 6,
-    height: 44,
-    paddingHorizontal: 14,
+    gap: 4,
+    height: 40,
+    paddingLeft: 10,
+    paddingRight: 14,
     borderRadius: radius.pill,
-    backgroundColor: pastel.peach,
+    backgroundColor: pastel.butter,
     boxShadow: clay.surface,
+    // A sticker, slapped on a little crooked.
+    transform: [{ rotate: "3deg" }],
   },
   flame: { width: 20, height: 20 },
   chipText: {
-    ...font.body[800],
-    fontSize: 15,
+    ...font.display[900],
+    fontSize: 18,
     color: colors.onPastel,
     fontVariant: ["tabular-nums"],
   },

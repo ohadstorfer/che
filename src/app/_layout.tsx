@@ -4,7 +4,7 @@ import {
   Figtree_700Bold,
   Figtree_800ExtraBold,
 } from '@expo-google-fonts/figtree';
-import { Gabarito_600SemiBold, Gabarito_700Bold, Gabarito_800ExtraBold } from '@expo-google-fonts/gabarito';
+import { Gabarito_600SemiBold, Gabarito_700Bold, Gabarito_800ExtraBold, Gabarito_900Black } from '@expo-google-fonts/gabarito';
 import { useFonts } from 'expo-font';
 import { DefaultTheme, Stack, ThemeProvider, usePathname } from 'expo-router';
 import { useEffect } from 'react';
@@ -48,6 +48,7 @@ export default function RootLayout() {
     Gabarito_600SemiBold,
     Gabarito_700Bold,
     Gabarito_800ExtraBold,
+    Gabarito_900Black,
   });
 
   // On the web, keep the app inside whatever the keyboard leaves visible.

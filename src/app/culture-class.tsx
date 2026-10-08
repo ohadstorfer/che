@@ -19,7 +19,7 @@ import { useReducedMotion } from 'react-native-reanimated';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ExerciseFrame, type Verdict } from '@/components/exercise-frame';
-import { Choices } from '@/components/exercises';
+import { Choices, PlayButton } from '@/components/exercises';
 import { PathLessonDone } from '@/components/path-lesson-done';
 import { Button, Panel } from '@/components/ui';
 import { type Anchor, WordPopover } from '@/components/word-popover';
@@ -295,7 +295,7 @@ function ClassPlayer({ found, lessonId, unreachable }: { found: ReturnType<typeo
   }, [finished, sectionSlug, classSlug, lessonId]);
 
   if (!found) {
-    if (lessonId && ended) return <PathLessonDone result={ended.result} />;
+    if (lessonId && ended) return <PathLessonDone lessonId={lessonId} result={ended.result} />;
     // The road can hold a class this build has no pages for (the plan ships in
     // the app, the road in the database). It is skipped rather than left as a
     // step she can never finish.
@@ -327,7 +327,7 @@ function ClassPlayer({ found, lessonId, unreachable }: { found: ReturnType<typeo
 
   if (finished && lessonId) {
     // A beat of nothing while the lesson is saved: the path must know it's done before she returns to it.
-    return ended ? <PathLessonDone result={ended.result} /> : <SafeAreaView style={styles.safe} />;
+    return ended ? <PathLessonDone lessonId={lessonId} result={ended.result} /> : <SafeAreaView style={styles.safe} />;
   }
 
   if (finished) {
@@ -361,6 +361,7 @@ function ClassPlayer({ found, lessonId, unreachable }: { found: ReturnType<typeo
         anchor={peek?.anchor ?? null}
         gloss={peek?.word.en}
         onClose={() => setPeek(null)}
+        audio={(path) => <PlayButton path={path} />}
       />
     </SafeAreaView>
   );
@@ -499,7 +500,7 @@ const GlossContext = createContext<Gloss | null>(null);
 
 /** The bubble is built around a course word; a culture word fills the parts of one it reads. */
 const asForm = (word: CultureWord) =>
-  ({ form: word.es, gloss_en: '', gloss_note_en: word.note ?? null, audio_path: null }) as unknown as Form;
+  ({ form: word.es, gloss_en: '', gloss_note_en: word.note ?? null, audio_path: word.audio ?? null }) as unknown as Form;
 
 /**
  * Where the tapped word sits. A span inside a paragraph is not a view of its

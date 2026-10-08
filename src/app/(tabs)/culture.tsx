@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Animated, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { AppHeader, useStreakWeek } from '@/components/app-header';
 import { type CultureSection, cultureSections, sectionTone, splitTitle, useCultureDone } from '@/lib/culture';
@@ -9,15 +9,16 @@ import { tileArt } from '@/lib/culture-art';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, gradients, pastelGrad, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
+import { OutlinedHeadline, tiltAt, useSlap } from '@/components/sticker';
 
 // ---------------------------------------------------------------------------
 // Culture — one tile per subject, and nothing else. The classes live one tap
 // further in (culture-section); here she only picks what she's in the mood for.
 //
-// A subject she has started puts a peach "continue" card on top, so the next
-// class is one tap away instead of two.
+// The "continue" card for a subject she has started is switched off
+// (SHOW_RESUME); flip it to bring the card back.
 //
-// Tiles sit two to a row; an odd one out at the end takes the full width
+// Tiles are stickers, two to a row, each leaning its own way; an odd one out at the end takes the full width
 // rather than leaving a hole. The five pastel tones are dealt in order, so no
 // two neighbours — beside or above — share a colour.
 // ---------------------------------------------------------------------------
@@ -31,12 +32,15 @@ const webPress =
       } as object)
     : null;
 
-/** The art's drop shadow, where one can follow the picture's own outline: a CSS
+/** The art's hard sticker shadow, where one can follow the picture's own outline: a CSS
  *  filter on web and Android. iOS's view shadow shades the image's whole box —
  *  a grey rectangle behind the object — so there it goes without. */
 const artShadow = (
-  Platform.OS === 'ios' ? null : { filter: 'drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.18))' }
+  Platform.OS === 'ios' ? null : { filter: `drop-shadow(2px 3px 0px ${colors.ink})` }
 ) as object | null;
+
+/** The "continue" card above the tiles is switched off; flip to bring it back. */
+const SHOW_RESUME = false;
 
 export default function Culture() {
   useStatusBarColor(colors.bg);
@@ -55,15 +59,9 @@ export default function Culture() {
       <AppHeader title="Culture" status={streak} weekDone={weekDone} />
       <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
         {/* What this tab is: the country around the language. */}
-        <View style={styles.introBlock}>
-          <Text style={styles.kicker}>Beyond the language</Text>
-          <Text style={styles.heading} accessibilityRole="header">
-            Get to know Argentina
-          </Text>
-          <Text style={styles.intro}>Learn about Argentine culture.</Text>
-        </View>
+        <OutlinedHeadline small="Get to know" big="Argentina" style={styles.headline} />
 
-        {resume ? <Resume {...resume} /> : null}
+        {SHOW_RESUME && resume ? <Resume {...resume} /> : null}
 
         <View style={styles.grid}>
           {cultureSections.map((section, i) => {
@@ -110,15 +108,16 @@ function Tile({ section, index, done, wide }: { section: CultureSection; index: 
   const { eyebrow, title } = splitTitle(section.title);
   const total = section.classes.length;
   const started = done > 0;
+  const slap = useSlap(index, tiltAt(index));
 
   return (
+    <Animated.View style={[styles.slot, wide && styles.tileWide, slap]}>
     <Pressable
       onPress={() => router.push(`/culture-section?section=${section.slug}`)}
       accessibilityRole="button"
       accessibilityLabel={`${section.title}, ${total} classes${started ? `, ${done} done` : ''}`}
       style={({ pressed }) => [
         styles.tile,
-        wide && styles.tileWide,
         { backgroundColor: tone.bg, transform: [{ scale: pressed ? press.scale : 1 }] },
         webPress,
       ]}>
@@ -140,17 +139,14 @@ function Tile({ section, index, done, wide }: { section: CultureSection; index: 
         </View>
       </View>
     </Pressable>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
-  container: { padding: 20, paddingTop: 14, gap: 18, maxWidth: 560, width: '100%', alignSelf: 'center', paddingBottom: 40 },
-  introBlock: { gap: 6, paddingHorizontal: 2, paddingTop: 4 },
-  /** Durazno, darkened until it reads as text on the oat. */
-  kicker: { ...font.body[800], fontSize: 13, letterSpacing: 1.4, textTransform: 'uppercase', color: '#A8502C' },
-  heading: { ...font.display[800], fontSize: 40, lineHeight: 42, letterSpacing: -1, color: colors.ink },
-  intro: { ...font.body[600], fontSize: 16, lineHeight: 22, color: colors.muted },
+  container: { padding: 20, paddingTop: 14, gap: 20, maxWidth: 560, width: '100%', alignSelf: 'center', paddingBottom: 40 },
+  headline: { marginTop: 6, marginBottom: 2 },
 
   resume: {
     height: 188,
@@ -187,12 +183,16 @@ const styles = StyleSheet.create({
   },
   resumeGoText: { ...font.body[800], fontSize: 16, color: colors.onPrimary },
 
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  tile: {
-    width: '46%', // two per row; flexGrow shares out the rest of the row
+  grid: { flexDirection: 'row', flexWrap: 'wrap', columnGap: 16, rowGap: 18 },
+  // The slot holds the tile's place in the grid, its lean and its entrance.
+  slot: {
+    width: '44%', // two per row; flexGrow shares out the rest of the row
     flexGrow: 1,
-    minHeight: 136,
-    borderRadius: 30,
+  },
+  tile: {
+    flex: 1,
+    minHeight: 140,
+    borderRadius: 20,
     padding: 14,
     paddingTop: 78, // clears the art in the corner
     overflow: 'hidden',
@@ -207,9 +207,9 @@ const styles = StyleSheet.create({
   artTall: { right: 2, top: 4, width: 112, height: 98 },
   tileText: { gap: 6, maxWidth: '100%' },
   eyebrow: { ...font.body[800], fontSize: 12, opacity: 0.8, marginBottom: -4 },
-  tileTitle: { ...font.display[800], fontSize: 18, lineHeight: 20 },
+  tileTitle: { ...font.display[900], fontSize: 20, lineHeight: 21 },
   tileFoot: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   count: { ...font.body[800], fontSize: 12, fontVariant: ['tabular-nums'] },
-  track: { flex: 1, height: 8, borderRadius: 6, overflow: 'hidden', backgroundColor: colors.trough, boxShadow: clay.trough },
+  track: { flex: 1, height: 9, borderRadius: 6, overflow: 'hidden', backgroundColor: colors.trough, boxShadow: clay.trough },
   fill: { height: '100%', borderRadius: 6 },
 });

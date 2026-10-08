@@ -61,7 +61,9 @@ import {
 import type { AnswerExtra, QueueItem } from '@/lib/round';
 import { DEFAULT_LADDER, type Ladder, RUNG_BUILD_AT } from '@/lib/sentences';
 import { SETTLED_DAYS, buildTiles, wordPool } from '@/lib/session';
-import { clay, colors, font, pastel, PICKED, radius } from '@/lib/theme';
+import { clay, colors, font, OUTLINE, pastel, PICKED, radius } from '@/lib/theme';
+import { FlagSun } from '@/components/sticker';
+import Svg, { Path as SvgPath } from 'react-native-svg';
 import type { Form, Sentence, Tip } from '@/lib/types';
 import { FitText } from '@/components/fit-text';
 
@@ -507,7 +509,11 @@ let nextSpeaker = 0;
 const SPEAKER_WIDTH = 84;
 const SPEAKER_HEIGHT = 100;
 const TAIL = 11;
-const TAIL_RIM = 2;
+/** The speaking bubble's tail is drawn, so its two slanted sides can carry the bubble's outline. */
+const TAIL_W = TAIL + 4;
+const TAIL_H = TAIL * 2 + 8;
+/** The sun behind the capybara. */
+const SPEAKER_SUN = 150;
 
 export function SpeechBubble({
   children,
@@ -521,18 +527,32 @@ export function SpeechBubble({
   const [speaker] = useState(() => SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
   const said = (
     <View style={styles.speechRow}>
-      <Image
-        source={speaker}
-        style={styles.speaker}
-        contentFit="contain"
-        contentPosition={{ left: 0 }}
-        accessible={false}
-      />
+      <View>
+        <FlagSun size={SPEAKER_SUN} style={styles.speakerSun} />
+        <Image
+          source={speaker}
+          style={styles.speaker}
+          contentFit="contain"
+          contentPosition={{ left: 0 }}
+          accessible={false}
+        />
+      </View>
       <View style={styles.bubbleWrap}>
         <Panel style={styles.bubble}>{children}</Panel>
-        {/* After the panel, so they paint over its border rather than under it. */}
-        <View style={[styles.tail, styles.tailEdge]} pointerEvents="none" />
-        <View style={[styles.tail, styles.tailFill]} pointerEvents="none" />
+        {/* After the panel, so it paints over the outline where the two join. */}
+        <View style={styles.speechTail} pointerEvents="none">
+          <Svg width={TAIL_W} height={TAIL_H}>
+            <SvgPath d={`M ${TAIL_W} 4 L 3 ${TAIL_H / 2} L ${TAIL_W} ${TAIL_H - 4} Z`} fill={pastel.butter} />
+            <SvgPath
+              d={`M ${TAIL_W} 4 L 3 ${TAIL_H / 2} L ${TAIL_W} ${TAIL_H - 4}`}
+              fill="none"
+              stroke={colors.ink}
+              strokeWidth={OUTLINE}
+              strokeLinejoin="round"
+              strokeLinecap="butt"
+            />
+          </Svg>
+        </View>
       </View>
     </View>
   );
@@ -878,8 +898,8 @@ function TrueFalse({
         {[
           // Her answer, not the verdict: an ink outline either way — salvia
           // and coral are kept for the result sheet that grades it.
-          { label: 'No', value: false, icon: 'close' as const },
           { label: 'Yes', value: true, icon: 'checkmark' as const },
+          { label: 'No', value: false, icon: 'close' as const },
         ].map((opt) => (
           <Pressable
             key={turnLines(opt.label)}
@@ -2402,14 +2422,28 @@ const styles = StyleSheet.create({
   // same for every one.
   speechRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   speaker: { width: SPEAKER_WIDTH, height: SPEAKER_HEIGHT, transform: [{ scaleX: -1 }] },
-  bubbleWrap: { flex: 1 },
-  bubble: { paddingVertical: 16, paddingHorizontal: 16, borderRadius: radius.md + 4 },
+  speakerSun: { left: (SPEAKER_WIDTH - SPEAKER_SUN) / 2, top: (SPEAKER_HEIGHT - SPEAKER_SUN) / 2 },
+  // The bubble is a butter sticker, a little crooked; the tail leans with it.
+  bubbleWrap: { flex: 1, transform: [{ rotate: '-1.5deg' }] },
+  // Its outline is a real border, not the theme's spread shadow: the tail has to
+  // paint over the outline where they join, and a later sibling reliably covers
+  // a border but not, on iOS, a shadow.
+  bubble: {
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    // Tight enough that a one-line bubble still has a straight edge for the tail to join.
+    borderRadius: 18,
+    backgroundColor: pastel.butter,
+    borderWidth: OUTLINE,
+    borderColor: colors.ink,
+    boxShadow: `3px 4px 0 ${colors.ink}`,
+  },
   bubbleRow: { flexDirection: 'row', alignItems: 'center', gap: 14 },
-  // The second speaker: a bubble on the far side, in the primary's wash so the
+  // The second speaker: a bubble on the far side, in lavender so the
   // two voices read apart at a glance, its tail pointing off to the right.
   dialogue: { gap: 10 },
   replyWrap: { alignSelf: 'flex-end', maxWidth: '82%', marginRight: TAIL },
-  replyBubble: { backgroundColor: colors.primarySoft },
+  replyBubble: { backgroundColor: pastel.lav },
   replyText: { gap: 2 },
   replyTail: {
     right: -TAIL,
@@ -2417,7 +2451,7 @@ const styles = StyleSheet.create({
     borderTopWidth: TAIL,
     borderBottomWidth: TAIL,
     borderLeftWidth: TAIL,
-    borderLeftColor: colors.primarySoft,
+    borderLeftColor: pastel.lav,
   },
   bubbleText: { flex: 1, gap: 2 },
   // The apex sits at the element's left edge and halfway down its height, so
@@ -2431,23 +2465,9 @@ const styles = StyleSheet.create({
     borderTopColor: 'transparent',
     borderBottomColor: 'transparent',
   },
-  tailEdge: {
-    left: -TAIL,
-    marginTop: -TAIL,
-    borderTopWidth: TAIL,
-    borderBottomWidth: TAIL,
-    borderRightWidth: TAIL,
-    // The panel has no rim any more — it is clay — so the edge is clay too.
-    borderRightColor: colors.card,
-  },
-  tailFill: {
-    left: -(TAIL - TAIL_RIM) + 1,
-    marginTop: -(TAIL - TAIL_RIM),
-    borderTopWidth: TAIL - TAIL_RIM,
-    borderBottomWidth: TAIL - TAIL_RIM,
-    borderRightWidth: TAIL - TAIL_RIM,
-    borderRightColor: colors.card,
-  },
+  // Its base reaches just inside the bubble's border, covering it between the two sides.
+  // Centred by layout, not by a percentage and a negative margin: on iOS that pair left it low, on the corner's curve.
+  speechTail: { position: 'absolute', top: 0, bottom: 0, left: -TAIL_W + OUTLINE, width: TAIL_W, justifyContent: 'center', zIndex: 1 },
   bubbleWord: { ...font.display[800], fontSize: 32, color: colors.ink, letterSpacing: -0.4 },
   bubbleEn: { ...font.display[800], fontSize: 26, color: colors.ink, letterSpacing: -0.3 },
   bubblePhrase: { ...font.display[700], fontSize: 22, lineHeight: 30, color: colors.ink },

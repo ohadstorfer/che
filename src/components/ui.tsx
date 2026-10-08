@@ -165,7 +165,7 @@ export function Button({
 /** Full-size buttons are rounded squares, not pills — they read as a key to press. */
 const BUTTON_RADIUS = 18;
 
-const CLAY_BUTTON_INSET = 'inset 0 3px 0 rgba(255,255,255,0.28), inset 0 -5px 10px rgba(80,10,30,0.25)';
+const CLAY_BUTTON_INSET = 'none';
 
 // ---------------------------------------------------------------------------
 // Card container

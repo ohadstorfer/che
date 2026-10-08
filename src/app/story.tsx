@@ -8,7 +8,7 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ExerciseFrame, type Verdict } from '@/components/exercise-frame';
 import { Choices, Exercise, PlayButton, SentenceLine, WordBubble, useWordPopover } from '@/components/exercises';
-import { LessonComplete } from '@/components/lesson-complete';
+import { LessonEnd } from '@/components/unit-progress';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
@@ -152,8 +152,10 @@ export default function Story() {
     }
     return (
       <SafeAreaView style={styles.safe}>
-        <LessonComplete
-          streak={celebrate || finished.current_streak <= 0 ? null : finished.current_streak}
+        <LessonEnd
+          lessonId={lessonId}
+          streak={finished.current_streak}
+          celebrate={celebrate}
           onNext={() => (celebrate ? setCelebrating(true) : backToCourse())}
         />
       </SafeAreaView>

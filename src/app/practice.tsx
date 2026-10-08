@@ -9,9 +9,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ClassDoor, ClassWait } from '@/components/class-door';
 import { Exercise } from '@/components/exercises';
-import { LessonComplete } from '@/components/lesson-complete';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
+import { LessonEnd } from '@/components/unit-progress';
 import { type AnswerActions, AnswerActionsContext } from '@/components/wrong-answer-actions';
 import { answerWords, shownMeaning } from '@/lib/answers';
 import { preloadAudio } from '@/lib/audio';
@@ -571,8 +571,10 @@ export default function Practice() {
     }
     return (
       <SafeAreaView style={styles.safe}>
-        <LessonComplete
-          streak={celebrate || finished.streak <= 0 ? null : finished.streak}
+        <LessonEnd
+          lessonId={preview ? null : lessonId}
+          streak={finished.streak}
+          celebrate={celebrate}
           onNext={() => (celebrate ? setCelebrating(true) : backToCourse())}
         />
       </SafeAreaView>

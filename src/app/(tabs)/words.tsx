@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
   safe: { flex: 1 },
   container: {
     flex: 1,
-    padding: 20,
     maxWidth: 560,
     width: '100%',
     alignSelf: 'center',

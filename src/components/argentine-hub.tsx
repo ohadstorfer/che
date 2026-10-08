@@ -2,13 +2,14 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { Platform, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { Animated, Platform, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 
 import { type ArPack, arPacks, arThemes, packTone, packsOf } from '@/lib/argentine';
 import { themeObject } from '@/lib/argentine-art';
 import { type PackScore, useShowAdult } from '@/lib/argentine-scores';
 import { clay, colors, font, gradients, pastel, pastelGrad, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
+import { OutlinedHeadline, tiltAt, useSlap } from '@/components/sticker';
 
 // ---------------------------------------------------------------------------
 // The Argentine half of the Words tab: how far she has got, the one pack to
@@ -16,10 +17,12 @@ import { FitText } from '@/components/fit-text';
 // (argentine-theme); nothing is locked. The rude theme stays out of sight —
 // and out of the totals — until she turns it on.
 //
-// Theme cards are clay, like every other card in the app; each theme's
-// pastel lives only in the panel its picture sits in, so sixteen of them
-// read as a set rather than a wall. packTone deals the pastels in order, so
-// no two neighbours in the grid — across or down — share one.
+// Theme cards are stickers in the theme's own pastel, each leaning its own
+// way. packTone deals the pastels in order, so no two neighbours in the grid —
+// across or down — share one.
+//
+// The progress bar and the "keep going" card are switched off (SHOW_PROGRESS,
+// SHOW_KEEP); flip them to bring either back.
 // ---------------------------------------------------------------------------
 
 const webPress =
@@ -35,8 +38,11 @@ const webPress =
  *  filter on web and Android. iOS's view shadow shades the image's whole box —
  *  a grey rectangle behind the object — so there it goes without. */
 const artShadow = (
-  Platform.OS === 'ios' ? null : { filter: 'drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.18))' }
+  Platform.OS === 'ios' ? null : { filter: `drop-shadow(2px 3px 0px ${colors.ink})` }
 ) as object | null;
+
+const SHOW_PROGRESS = false;
+const SHOW_KEEP = false;
 
 export function ArgentineHub({ scores }: { scores: Record<string, PackScore> }) {
   const [adult, setAdult] = useShowAdult();
@@ -52,57 +58,15 @@ export function ArgentineHub({ scores }: { scores: Record<string, PackScore> }) 
     <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
       <Banner learned={learned} total={total} />
 
-      {next ? <KeepGoing pack={next} /> : null}
-
-      <View style={styles.sectionHead}>
-        <Text style={styles.sectionTitle}>Themes</Text>
-      </View>
+      {SHOW_KEEP && next ? <KeepGoing pack={next} /> : null}
 
       <View style={styles.grid}>
-        {themes.map((theme) => {
-          const packs = packsOf(theme.slug);
-          const done = packs.filter((p) => scores[p.slug]).length;
-          const words = packs.reduce((n, p) => n + p.words.length, 0);
-          const tone = packTone(theme.slug);
-          return (
-            <Pressable
-              key={theme.slug}
-              onPress={() => router.push(`/argentine-theme?theme=${theme.slug}`)}
-              accessibilityRole="button"
-              accessibilityLabel={`${theme.title}, ${packs.length} packs${done ? `, ${done} done` : ''}`}
-              style={({ pressed }) => [styles.tile, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
-              {/* The theme's pastel is a panel the picture sits in; the card stays clay. */}
-              <View style={[styles.tilePanel, { backgroundColor: tone.bg }]}>
-                <Image source={themeObject(theme.slug)} style={[styles.tileArt, artShadow]} contentFit="contain" accessible={false} />
-              </View>
-              <View style={styles.tileText}>
-                <FitText style={styles.tileTitle} lines={2}>
-                  {theme.title}
-                </FitText>
-                {done ? (
-                  <View style={{ gap: 5 }}>
-                    <FitText style={styles.tileMeta} lines={1}>
-                      {done === packs.length ? 'All done ✓' : `${done} of ${packs.length} packs`}
-                    </FitText>
-                    <View style={styles.tileTrack}>
-                      <LinearGradient
-                        colors={gradients.progress}
-                        style={[styles.tileFill, { width: `${(done / packs.length) * 100}%` }]}
-                      />
-                    </View>
-                  </View>
-                ) : (
-                  <FitText style={styles.tileMeta} lines={1}>
-                    {words} words
-                  </FitText>
-                )}
-              </View>
-            </Pressable>
-          );
-        })}
+        {themes.map((theme, i) => (
+          <ThemeTile key={theme.slug} theme={theme} index={i} scores={scores} />
+        ))}
         {/* An odd one out keeps its half: without a partner it would stretch
             across the row and read as a different kind of card. */}
-        {themes.length % 2 ? <View style={[styles.tile, styles.filler]} /> : null}
+        {themes.length % 2 ? <View style={[styles.slot, styles.filler]} /> : null}
       </View>
 
       {rude ? (
@@ -131,20 +95,58 @@ export function ArgentineHub({ scores }: { scores: Record<string, PackScore> }) 
   );
 }
 
+function ThemeTile({ theme, index, scores }: { theme: (typeof arThemes)[number]; index: number; scores: Record<string, PackScore> }) {
+  const packs = packsOf(theme.slug);
+  const done = packs.filter((p) => scores[p.slug]).length;
+  const words = packs.reduce((n, p) => n + p.words.length, 0);
+  const tone = packTone(theme.slug);
+  const slap = useSlap(index, tiltAt(index));
+  return (
+    <Animated.View style={[styles.slot, slap]}>
+      <Pressable
+        onPress={() => router.push(`/argentine-theme?theme=${theme.slug}`)}
+        accessibilityRole="button"
+        accessibilityLabel={`${theme.title}, ${packs.length} packs${done ? `, ${done} done` : ''}`}
+        style={({ pressed }) => [styles.tile, { backgroundColor: tone.bg, transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
+        <View style={styles.tilePanel}>
+          <Image source={themeObject(theme.slug)} style={[styles.tileArt, artShadow]} contentFit="contain" accessible={false} />
+        </View>
+        <View style={styles.tileText}>
+          <FitText style={styles.tileTitle} lines={2}>
+            {theme.title}
+          </FitText>
+          {done ? (
+            <View style={{ gap: 6 }}>
+              <FitText style={styles.tileMeta} lines={1}>
+                {done === packs.length ? 'All done ✓' : `${done} of ${packs.length} packs`}
+              </FitText>
+              <View style={styles.tileTrack}>
+                <View style={[styles.tileFill, { width: `${(done / packs.length) * 100}%` }]} />
+              </View>
+            </View>
+          ) : (
+            <FitText style={styles.tileMeta} lines={1}>
+              {words} words
+            </FitText>
+          )}
+        </View>
+      </Pressable>
+    </Animated.View>
+  );
+}
+
 /**
  * What this half is, said the way the Culture tab says what it is: a kicker, a
- * heading and one line, straight on the oat — then her progress as one bar, so
- * the themes come sooner.
+ * the outlined headline and one line, straight on the oat. Her progress as one
+ * bar is switched off (SHOW_PROGRESS).
  */
 function Banner({ learned, total }: { learned: number; total: number }) {
   const pct = total ? Math.round((learned / total) * 100) : 0;
   return (
     <View style={styles.intro}>
-      <Text style={styles.kicker}>Argentine slang</Text>
-      <Text style={styles.heading} accessibilityRole="header">
-        Talk like a local
-      </Text>
+      <OutlinedHeadline small="Talk like a" big="Local" style={styles.headline} />
       <Text style={styles.lead}>The words locals actually use.</Text>
+      {SHOW_PROGRESS ? (
       <View style={styles.progress} accessibilityLabel={`${learned} of ${total} words learned`}>
         <View style={styles.track}>
           <LinearGradient
@@ -156,6 +158,7 @@ function Banner({ learned, total }: { learned: number; total: number }) {
           {learned} of {total}
         </Text>
       </View>
+      ) : null}
     </View>
   );
 }
@@ -206,14 +209,14 @@ function KeepGoing({ pack }: { pack: ArPack }) {
 
 
 const styles = StyleSheet.create({
-  container: { gap: 18, paddingBottom: 32 },
+  // The side padding is the scroller's own, not its parent's: a scroller clips
+  // at its edge, and the tiles' outlines and shadows reach past their boxes.
+  container: { gap: 20, padding: 20, paddingBottom: 32 },
 
   // The same header as the Culture tab.
   intro: { gap: 6, paddingHorizontal: 2, paddingTop: 4 },
-  /** Durazno, darkened until it reads as text on the oat. */
-  kicker: { ...font.body[800], fontSize: 16, letterSpacing: 1.6, textTransform: 'uppercase', color: '#A8502C' },
-  heading: { ...font.display[800], fontSize: 40, lineHeight: 42, letterSpacing: -1, color: colors.ink },
-  lead: { ...font.body[600], fontSize: 16, lineHeight: 22, color: colors.muted },
+  headline: { width: '72%', marginBottom: 2 },
+  lead: { ...font.body[700], fontSize: 16, lineHeight: 22, color: colors.muted },
 
   progress: { flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 10 },
   progressOf: { ...font.body[800], fontSize: 13, color: colors.muted, fontVariant: ['tabular-nums'] },
@@ -256,36 +259,35 @@ const styles = StyleSheet.create({
   },
   keepGoFace: { borderRadius: 24 },
 
-  sectionHead: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between', marginTop: 2 },
-  sectionTitle: { ...font.display[800], fontSize: 21, lineHeight: 25, letterSpacing: -0.2, color: colors.ink },
-
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  // A clay card with the theme's pastel as a panel on top, the picture
-  // centered in it; name and count underneath.
-  tile: {
-    width: '46%', // two per row; flexGrow shares out the rest
+  grid: { flexDirection: 'row', flexWrap: 'wrap', columnGap: 16, rowGap: 18 },
+  // The slot holds the tile's place in the grid, its lean and its entrance.
+  slot: {
+    width: '44%', // two per row; flexGrow shares out the rest
     flexGrow: 1,
+  },
+  // A sticker in the theme's pastel: the picture on top, name and count underneath.
+  tile: {
+    flex: 1,
     padding: 8,
     paddingBottom: 14,
-    gap: 10,
-    borderRadius: 30,
-    backgroundColor: colors.card,
+    gap: 6,
+    borderRadius: 20,
     boxShadow: clay.surface,
   },
-  filler: { opacity: 0, boxShadow: undefined },
-  tilePanel: { height: 104, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
+  filler: { opacity: 0 },
+  tilePanel: { height: 100, alignItems: 'center', justifyContent: 'center' },
   tileArt: { width: 116, height: 88 },
   tileText: { gap: 3, paddingHorizontal: 6 },
-  tileTitle: { ...font.display[800], fontSize: 18, lineHeight: 20, color: colors.ink },
-  tileMeta: { ...font.body[700], fontSize: 13, color: colors.muted, fontVariant: ['tabular-nums'] },
+  tileTitle: { ...font.display[900], fontSize: 20, lineHeight: 21, color: colors.onPastel },
+  tileMeta: { ...font.body[800], fontSize: 13, color: colors.onPastel, opacity: 0.8, fontVariant: ['tabular-nums'] },
   tileTrack: {
-    height: 7,
+    height: 9,
     borderRadius: radius.pill,
     backgroundColor: colors.trough,
     boxShadow: clay.trough,
     overflow: 'hidden',
   },
-  tileFill: { height: '100%', borderRadius: radius.pill },
+  tileFill: { height: '100%', backgroundColor: colors.progress },
 
   adultRow: {
     flexDirection: 'row',
