@@ -502,13 +502,13 @@ units:
         pos: "verb"
         forms:
           - form: "tendrás"
-            en: "you'd have (polite ¿no tendrás…?)"
+            en: "you'd have (polite question)"
             f: "2sg.fut.ind.vos.irregular"
       - lemma: "saber"
         pos: "verb"
         forms:
           - form: "sabrás"
-            en: "you'd know (polite ¿no sabrás…?)"
+            en: "you'd know (polite question)"
             f: "2sg.fut.ind.vos.irregular"
       - lemma: "muy amable"
         pos: "phrase"

@@ -932,7 +932,7 @@ units:
         register: "informal"
         forms:
           - form: "laburo"
-            en: "I work; (noun) work, job"
+            en: "I work; work (the job), job"
             f: "1sg.pres.ind"
           - form: "laburás"
             en: "you work"
@@ -953,7 +953,7 @@ units:
         en: "to work"
         forms:
           - form: "trabajo"
-            en: "I work; (noun) job, work"
+            en: "I work; job, work (the job)"
             f: "1sg.pres.ind"
           - form: "trabajás"
             en: "you work"
@@ -2258,7 +2258,7 @@ units:
         en: "problem"
       - lemma: "primero"
         pos: "adj"
-        en: "first (floor, place in a row)"
+        en: "first (floor or place)"
         forms:
           - form: "primero"
             f: "m.sg"

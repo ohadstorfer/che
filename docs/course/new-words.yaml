@@ -102,7 +102,7 @@ units:
     slang:
       - lemma: "una masa"
         pos: phrase
-        en: "great (a great person or thing)"
+        en: "great (person or thing)"
         note: "Does not change for a man or a woman: \"mi hermana es una masa\"."
         register: informal
         why: "the unit introduces people with 'mi … es …': 'mi hermano es una masa', 'mi perro es una masa'"

@@ -1022,7 +1022,7 @@ units:
           texts."
       - lemma: "te quiero"
         pos: "phrase"
-        en: "I love you (also said to friends and relatives)"
+        en: "I love you (friends and family too)"
       - lemma: "te amo"
         pos: "phrase"
         en: "I love you (romantic)"

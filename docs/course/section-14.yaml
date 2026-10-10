@@ -1066,7 +1066,7 @@ units:
             en: "I would be, he would be"
             f: "sg.cond.ind"
           - form: "estarías"
-            en: "you would be (somewhere, some way)"
+            en: "you would be (place or state)"
             f: "2sg.cond.ind.vos"
       - lemma: "mudarse"
         pos: "verb"
