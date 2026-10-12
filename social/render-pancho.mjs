@@ -7,6 +7,7 @@ import fs from 'fs'; import path from 'path';
 import {REELS} from './src/pancho/reels.mjs';
 import {VERSUS} from './src/versus/reels.mjs';
 import {CELEBS} from './src/celeb/reels.mjs';
+import {ONBOARDING} from './src/onboarding/reels.mjs';
 const args = process.argv.slice(2);
 const si = args.indexOf('--stills');
 const stills = si >= 0 ? args[si + 1].split(',').map(Number) : null;
@@ -15,7 +16,9 @@ const to = ti >= 0 ? args[ti + 1] : null;
 const only = args.find((a, i) => !a.startsWith('--') && (si < 0 || i !== si + 1) && (ti < 0 || i !== ti + 1)) || '';
 const serveUrl = await bundle({entryPoint: path.resolve('src/index.ts'), publicDir: path.resolve('public')});
 fs.mkdirSync('out/stills', {recursive: true});
-for (const {id} of [...REELS, ...VERSUS, ...CELEBS].filter(r => r.id.startsWith(only))) {
+// The bundle is a copy of public/ in the temp folder, and nothing clears it for us: without this every run leaves ~70 MB behind.
+try {
+for (const {id} of [...REELS, ...VERSUS, ...CELEBS, ...ONBOARDING].filter(r => r.id.startsWith(only))) {
   const composition = await selectComposition({serveUrl, id});
   if (stills) for (const frame of stills) await renderStill({composition, serveUrl, frame, output: `out/stills/${id}-${String(frame).padStart(4, '0')}.jpg`, imageFormat: 'jpeg', jpegQuality: 80});
   else await renderMedia({composition, serveUrl, codec: 'h264', outputLocation: `out/${id}.mp4`});
@@ -26,3 +29,4 @@ for (const {id} of [...REELS, ...VERSUS, ...CELEBS].filter(r => r.id.startsWith(
     fs.renameSync(`out/${id}.mp4`, file); console.log('saved', file);
   }
 }
+} finally { fs.rmSync(serveUrl, {recursive: true, force: true}); }

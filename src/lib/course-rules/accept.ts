@@ -19,11 +19,14 @@ import type { VocabForm } from './vocabulary';
 
 /** Alternatives past this many are noise for the reviewer. */
 const MAX_VARIANTS = 24;
+/** Room kept for the sentence in another word order, and that order's own variants. */
+const MAX_REORDERED = 12;
 
 /** English that says whether the person is a man or a woman. */
 const GENDER_CUES = /\b(he|she|him|her|his|hers|himself|herself|man|woman|boy|girl|guy|lady|mr|mrs|ms)\b/i;
 
-type T = Token<VocabForm>;
+/** `postposed`: a subject a reordering put after its verb ("que me llame Fede"). */
+type T = Token<VocabForm> & { postposed?: boolean };
 
 const isName = (t: T) => t.forms.length > 0 && t.forms.every((f) => f.pos === 'propn');
 const personalVerb = (t: T) => t.forms.find((f) => f.pos === 'verb' && f.features?.person)?.features ?? null;
@@ -115,6 +118,26 @@ function otherGender(word: string, gender: string) {
  * @returns           alternative Spanish sentences, `es` itself not included
  */
 export function generateVariants(tokens: T[], en: string, vocabulary: { forms: VocabForm[] }): string[] {
+  const out = slotVariants(tokens, en, vocabulary);
+  const orders = reorderings(tokens);
+  if (!orders.length) return out;
+  // The other orders, each with what the rules above make of it ("Yo no puedo
+  // hoy"). They come after the sentence's own variants, and past their limit:
+  // an order is a different answer, not one more of the same.
+  const wordsKey = (text: string) => text.toLocaleLowerCase('es').split(/[^\p{L}\p{N}]+/u).filter(Boolean).join(' ');
+  const seen = new Set([tokens.map((t) => t.surface).join(' '), ...out].map(wordsKey));
+  const add = (text: string) => {
+    const k = wordsKey(text);
+    if (seen.has(k) || out.length >= MAX_VARIANTS + MAX_REORDERED) return;
+    seen.add(k);
+    out.push(text);
+  };
+  for (const order of orders) add(order.map((t) => t.surface).join(' '));
+  for (const order of orders) for (const v of slotVariants(order, en, vocabulary)) add(v);
+  return out;
+}
+
+function slotVariants(tokens: T[], en: string, vocabulary: { forms: VocabForm[] }): string[] {
   const optional = optionalTokens(tokens);
   // A name said to someone — at the start or after a comma, and closed by
   // punctuation ("Sofi, ¿…", "Mucho gusto, Lucía.") — says who the listener is;
@@ -207,7 +230,7 @@ export function generateVariants(tokens: T[], en: string, vocabulary: { forms: V
     // "¿Es uruguayo tu profesor?" already has its subject, after the verb.
     const namedAfter = () => {
       for (let k = v + 1; k < tokens.length && !clauseStart(tokens, k); k++)
-        if (tokens[k].forms.some((x) => x.pos === 'noun') && tokens[k - 1].forms.some((x) => x.pos === 'det')) return true;
+        if ((tokens[k].forms.some((x) => x.pos === 'noun') && tokens[k - 1].forms.some((x) => x.pos === 'det')) || tokens[k].postposed) return true;
       return false;
     };
     const lemma =
@@ -290,6 +313,187 @@ export function generateVariants(tokens: T[], en: string, vocabulary: { forms: V
       walk(k + 1, [...picks, { original: slots[k].original, choice, swappable: slots[k].swappable }]);
   };
   walk(0, []);
+  return out;
+}
+
+// ---------------------------------------------------------------------------
+// Word order
+//
+// Spanish lets a few things sit in more than one place with nothing changed
+// that an English prompt could ask for: "Hoy no puedo" is "No puedo hoy", and
+// "Quiero que Fede me llame" is "Quiero que me llame Fede". A sentence built
+// from tiles in either order is right. Only these two moves are made, and each
+// only where it is safe — every other order of the tiles is still wrong.
+// ---------------------------------------------------------------------------
+
+/** Adverbs of when that open or close their clause equally well. Not "ya",
+ *  "siempre" or "nunca": where those go changes what is said, or the "no". */
+const TIME_ADVERBS = new Set(['hoy', 'mañana', 'ayer', 'anoche', 'ahora']);
+
+/** Words that make "when" more than the one adverb — "hoy a la noche", "mañana
+ *  temprano", "ahora mismo", "ya no" — so it can't be moved on its own. */
+const TIME_WORDS = new Set([
+  ...TIME_ADVERBS, 'noche', 'tarde', 'mediodía', 'madrugada', 'día', 'temprano', 'mismo', 'ya', 'todavía', 'siempre',
+  'nunca', 'antes', 'después', 'luego', 'recién', 'pasado',
+]);
+
+/** What opens a clause with a subject of its own: "que Fede venga", "cuando llegue Fede". */
+const SUBORDINATORS = new Set(['que', 'cuando', 'si', 'porque']);
+
+/** Verbs a name after them is not the subject of: "Creo que es Fede", "se llama Fede". */
+const NAMING_VERBS = new Set(['ser', 'estar', 'llamarse', 'parecer', 'parecerse', 'decir', 'decirse']);
+
+/** Verbs that take a description, not an object: "es celoso", "está ocupado". */
+const COPULAS = new Set(['ser', 'estar', 'parecer', 'poner', 'ponerse', 'quedar', 'quedarse', 'sentir', 'sentirse', 'andar', 'seguir']);
+
+/** A clause's longest stretch that is still safe to move things across. */
+const MAX_CLAUSE_TOKENS = 8;
+/** What may follow the verb when its subject goes after it: "haga las compras". */
+const MAX_AFTER_VERB = 3;
+/** Orders a sentence gets at most: each move alone, and two together. */
+const MAX_ORDERS = 6;
+
+const has = (t: T, pos: string) => t.forms.some((f) => f.pos === pos);
+const finiteVerb = (t: T) => t.forms.find((f) => f.pos === 'verb' && !f.features?.verb_form) ?? null;
+const tailOf = (t: T) => split(t.surface).tail;
+const leadOf = (t: T) => split(t.surface).lead;
+
+/** The token with other punctuation around it, and its first letter set. */
+function reshape(t: T, { lead, tail, capital }: { lead?: string; tail?: string; capital?: boolean }): T {
+  const p = split(t.surface);
+  const core = capital == null || isName(t) ? p.core : capital ? upper(p.core) : lower(p.core);
+  return { ...t, surface: `${lead ?? p.lead}${core}${tail ?? p.tail}`, core: t.core === p.core ? core : t.core };
+}
+
+/** [start, end] of each stretch between punctuation: "Hoy no puedo," · "quiero … compras." */
+function stretches(tokens: T[]): [number, number][] {
+  const out: [number, number][] = [];
+  let start = 0;
+  tokens.forEach((t, i) => {
+    if (tailOf(t) || i === tokens.length - 1) {
+      out.push([start, i]);
+      start = i + 1;
+    }
+  });
+  return out;
+}
+
+/** Index of the verb that `i` leads up to — past "no" and object pronouns — or -1. */
+function verbFrom(tokens: T[], i: number, end: number) {
+  if (i <= end && fold(tokens[i].core) === 'no') i++;
+  while (i <= end && isClitic(tokens[i]) && !finiteVerb(tokens[i])) i++;
+  return i <= end && finiteVerb(tokens[i]) ? i : -1;
+}
+
+/** `tokens` with the stretch [start, end] laid out in `order`, punctuation and capitals put right. */
+function relaid(tokens: T[], start: number, end: number, order: number[], postposed?: number): T[] {
+  const lead = leadOf(tokens[start]);
+  const tail = tailOf(tokens[end]);
+  const opens = start === 0 || SENTENCE_END.test(tailOf(tokens[start - 1])) || lead.includes('—');
+  const moved = order.map((k, n) =>
+    reshape(k === postposed ? { ...tokens[k], postposed: true } : tokens[k], {
+      lead: n === 0 ? lead : k === start ? '' : undefined,
+      tail: n === order.length - 1 ? tail : k === end ? '' : undefined,
+      capital: opens && n === 0 ? true : opens && k === start ? false : undefined,
+    }),
+  );
+  return [...tokens.slice(0, start), ...moved, ...tokens.slice(end + 1)];
+}
+
+const range = (from: number, to: number) => Array.from({ length: Math.max(0, to - from + 1) }, (_, k) => from + k);
+
+/**
+ * "Hoy no puedo" ↔ "No puedo hoy": an adverb of when, alone at one end of a
+ * clause that is nothing but a verb and what goes with it, may stand at the
+ * other. Not across a "que" or an "y" (whose "when" would it be?), not when
+ * the time is said in more words ("hoy a la noche"), and not after a
+ * preposition or an article ("hasta mañana", "la mañana").
+ */
+function movedAdverb(tokens: T[], start: number, end: number): T[] | null {
+  if (end - start < 1 || end - start + 1 > MAX_CLAUSE_TOKENS) return null;
+  const inside = tokens.slice(start, end + 1);
+  // An hour is a time too: "a las cinco hoy" is not where "hoy" goes.
+  if (inside.some((t) => has(t, 'conj') || has(t, 'num'))) return null;
+  if (inside.filter((t) => TIME_WORDS.has(fold(t.core))).length !== 1) return null;
+  if (inside.filter((t) => finiteVerb(t)).length !== 1) return null;
+  const movable = (t: T) => TIME_ADVERBS.has(fold(t.core)) && has(t, 'adv');
+  if (movable(tokens[start]) && verbFrom(tokens, start + 1, end) >= 0) {
+    return relaid(tokens, start, end, [...range(start + 1, end), start]);
+  }
+  if (
+    movable(tokens[end]) &&
+    !leadOf(tokens[end]) &&
+    verbFrom(tokens, start, end - 1) >= 0 &&
+    !has(tokens[end - 1], 'prep') &&
+    !has(tokens[end - 1], 'det')
+  ) {
+    return relaid(tokens, start, end, [end, ...range(start, end - 1)]);
+  }
+  return null;
+}
+
+/**
+ * "que Fede me llame" ↔ "que me llame Fede": in a clause opened by que, cuando,
+ * si or porque, a name that is the subject may follow its verb. With a short
+ * object it goes after that too, or between: "que haga las compras Belén",
+ * "que haga Belén las compras". Back in front only where the name closes the
+ * clause right after a verb it can be the subject of.
+ */
+function movedSubject(tokens: T[], start: number, end: number): T[][] {
+  const out: T[][] = [];
+  const subjectOf = (v: number) => {
+    const f = finiteVerb(tokens[v])?.features;
+    return !!f && f.number !== 'pl' && f.person !== 1 && f.person !== 2 && f.mood !== 'imp';
+  };
+  const plainName = (t: T) => isName(t) && !t.core.includes(' ') && !leadOf(t);
+  for (let i = start; i < end; i++) {
+    if (!SUBORDINATORS.has(fold(tokens[i].core)) || !has(tokens[i], 'conj')) continue;
+    // Subject first: que NAME (no) (me) VERB …
+    if (plainName(tokens[i + 1]) && i + 1 < end) {
+      const v = verbFrom(tokens, i + 2, end);
+      if (v < 0 || !subjectOf(v)) continue;
+      const rest = tokens.slice(v + 1, end + 1);
+      const plain = (t: T) =>
+        !isName(t) && !subjectPronoun(t) && !has(t, 'conj') && !finiteVerb(t) && !TIME_WORDS.has(fold(t.core));
+      if (rest.length > MAX_AFTER_VERB || !rest.every(plain)) continue;
+      // "que Rocío está enojada": what follows says how she is, and the name
+      // after it ("que está enojada Rocío") is an afterthought, not an order.
+      if (rest.length && tokens[v].forms.some((f) => f.pos === 'verb' && COPULAS.has(f.lemma))) continue;
+      out.push(relaid(tokens, start, end, [...range(start, i), ...range(i + 2, end), i + 1], i + 1));
+      if (rest.length && (has(rest[0], 'det') || fold(rest[0].core) === 'a')) {
+        out.push(relaid(tokens, start, end, [...range(start, i), ...range(i + 2, v), i + 1, ...range(v + 1, end)], i + 1));
+      }
+      continue;
+    }
+    // Subject last: que (no) (me) VERB NAME, and the clause ends there.
+    const v = verbFrom(tokens, i + 1, end);
+    if (v < 0 || v + 1 !== end || !plainName(tokens[end]) || !subjectOf(v)) continue;
+    const verb = finiteVerb(tokens[v])!;
+    const clitics = tokens.slice(i + 1, v).map((t) => fold(t.core));
+    if (NAMING_VERBS.has(verb.lemma) || fold(tokens[v].core).includes(' ') || (verb.lemma === 'llamar' && clitics.some((c) => ['se', 'lo', 'la', 'le'].includes(c)))) continue;
+    out.push(relaid(tokens, start, end, [...range(start, i), end, ...range(i + 1, v)]));
+  }
+  return out;
+}
+
+const orderKey = (tokens: T[]) => tokens.map((t) => fold(t.core)).join(' ');
+
+/** The sentence in its other accepted word orders — itself not included. */
+export function reorderings(tokens: T[]): T[][] {
+  const moves = (ts: T[]) =>
+    stretches(ts).flatMap(([s, e]) => [...[movedAdverb(ts, s, e)].filter((x): x is T[] => !!x), ...movedSubject(ts, s, e)]);
+  const seen = new Set([orderKey(tokens)]);
+  const out: T[][] = [];
+  const take = (list: T[][]) =>
+    list.filter((ts) => {
+      if (seen.has(orderKey(ts)) || out.length >= MAX_ORDERS) return false;
+      seen.add(orderKey(ts));
+      out.push(ts);
+      return true;
+    });
+  const first = take(moves(tokens));
+  // Two moves in one sentence: "No puedo hoy, quiero que haga las compras Belén."
+  for (const ts of first) take(moves(ts));
   return out;
 }
 

@@ -100,9 +100,17 @@ export function topicOf(kind: string, topicId: string | null, level: Band, store
   return { scenario: null, culture: null, goals: [] };
 }
 
-/** Public URL of a pre-recorded clip in the course's `audio` bucket. */
-export const publicAudioUrl = (supabaseUrl: string, path: string | null | undefined) =>
-  path ? `${supabaseUrl}/storage/v1/object/public/audio/${path}` : null;
+/**
+ * Public URL of a pre-recorded clip. The recorded course lives under AUDIO_URL
+ * (the app's EXPO_PUBLIC_AUDIO_URL) when that is set; the openers written here
+ * at run time (hablar-unit.ts) stay in the Supabase `audio` bucket, which is
+ * the only storage a function can write to.
+ */
+export const publicAudioUrl = (supabaseUrl: string, path: string | null | undefined) => {
+  if (!path) return null;
+  const root = path.startsWith("hablar/units/") ? null : Deno.env.get("AUDIO_URL")?.replace(/\/*$/, "");
+  return `${root || `${supabaseUrl}/storage/v1/object/public/audio`}/${path}`;
+};
 
 // ---------------------------------------------------------------------------
 // The clock (§4.5 step 2). The server decides; the client timer is a display.
@@ -274,22 +282,48 @@ export const nextUserIdx = (maxIdx: number | null | undefined) => {
 // Speech-to-text hints
 // ---------------------------------------------------------------------------
 
-const VOSEO: Record<Band, string[]> = {
-  A1: ["sos", "tenés", "querés", "podés", "vivís", "hablás", "sabés", "che", "dale", "acá"],
-  A2: ["sos", "tenés", "querés", "podés", "fuiste", "hiciste", "decime", "mirá", "che", "dale"],
-  B1: ["sos", "tenés", "querés", "podrías", "contame", "fijate", "laburo", "bondi", "posta", "che"],
-  B2: ["sos", "tenés", "querés", "contame", "fijate", "laburo", "bondi", "posta", "boludo", "che"],
-};
+// Scribe leans toward the keyterms it is given, so they are the words she is
+// likely to say next: what Pancho just asked, then the scene's own phrases and
+// words. Measured on real learner clips (2026-10-11): with these, "Bate, por
+// favor" after "¿Café o mate?" is heard as "Mate, por favor". Everyday words
+// are left out — boosted, they get heard where they were not said ("Con
+// medialuna" came back as "¿Cómo te llamas?" with cómo/te/llamás boosted).
+const TOO_COMMON = new Set(
+  ("el la los las un una unos unas de del al y o u que qué en con por para es no sí si me te se lo le mi tu su a e yo vos " +
+    "muy más ya hay hola cómo como bien eso esto esta este pero porque ah eh").split(" "),
+);
+const MAX_KEYTERMS = 100; // past a hundred Scribe bills every clip as twenty seconds
 
-/** Scribe keyterms: the topic's own words, then the voseo forms of the level. Short, unique, at most 50. */
-export function sttKeyterms(topic: Topic | null, level: Band): string[] {
-  const own = topic?.scenario?.keyterms ?? topic?.culture?.opener.keyterms ?? [];
+/** Is the term worth boosting: it has a word in it that is not an everyday one. */
+function boostable(term: string): boolean {
+  const words = term.split(/\s+/);
+  if (term.length > 50 || words.length > 5) return false;
+  return words.some((w) => w.length > 2 && !TOO_COMMON.has(w.toLowerCase()));
+}
+
+/**
+ * Scribe keyterms for her next line: the words of Pancho's last line, the
+ * scene's key phrases and keyterms, then the words the unit taught. Unique
+ * (whatever the capitals), at most a hundred.
+ */
+export function sttKeyterms(topic: Topic | null, _level: Band, tomasBefore?: string | null): string[] {
+  const scene = topic?.scenario;
+  const candidates = [
+    ...wordsOf(tomasBefore ?? ""),
+    ...(scene?.key_phrases ?? []).flatMap((p) => wordsOf(p.es)),
+    ...(scene?.keyterms ?? topic?.culture?.opener.keyterms ?? []),
+    ...(scene?.words ?? []),
+  ];
   const out: string[] = [];
-  for (const t of [...own, ...VOSEO[level]]) {
+  const seen = new Set<string>();
+  for (const t of candidates) {
     const k = t.trim();
-    if (k && k.length <= 50 && k.split(/\s+/).length <= 5 && !out.includes(k)) out.push(k);
+    if (!k || !boostable(k) || seen.has(k.toLowerCase())) continue;
+    seen.add(k.toLowerCase());
+    out.push(k);
+    if (out.length === MAX_KEYTERMS) break;
   }
-  return out.slice(0, 50);
+  return out;
 }
 
 /** Known things STT invents on silence (Whisper-style hallucinations). */
@@ -574,34 +608,150 @@ export type Transcript = {
   audioSeconds: number | null;
   /** "en" when she said the line in English (only looked for with `english`). */
   language: "es" | "en";
-  /** Speech-to-text requests made: 2 when the line went through a second pass. */
+  /** Speech-to-text requests made. */
   calls: number;
+  /** The line can't be made out well enough to answer or correct (only with `doubt: "ask"`): ask her to say it again. */
+  unclear?: boolean;
 };
 type ScribeOptions = { key: string; audio: Blob; filename: string; keyterms: string[] };
+/** One hearing of a clip: the text, and each word with how sure Scribe was of it (log probability, 0 = certain). */
+export type Hearing = { text: string; audioSeconds: number | null; words: { w: string; lp: number }[] };
+
+// How sure Scribe has to be of a line for it to stand. From the clips of
+// 2026-10-11: invented words ("Soy un gemero", "Ponme de alguna") sit below
+// these, plain lines above.
+const SURE_MIN = -0.9;
+const UNSURE_MEAN = -0.5;
+/** Below this, Scribe was guessing at the word. */
+const SHAKY_WORD = -0.5;
+/** How alike two stretches must sound (share of letters in common) for one to be the other misheard. */
+const ALIKE = 0.5;
+
+/** Letters and digits only, accents off: "No, media luna" and "No medialuna" are the same line. */
+const bare = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
+
+/** Letter-level edit distance. */
+function letterDistance(a: string, b: string): number {
+  return wordDistance([...a], [...b]);
+}
+
+/** Where two word lists part ways: each stretch of `a` (as [from, to) indexes) and the words `b` has in its place. */
+function stretches(a: string[], b: string[]): { from: number; to: number; other: string[] }[] {
+  // Longest common subsequence, then walk it.
+  const lcs = Array.from({ length: a.length + 1 }, () => new Array<number>(b.length + 1).fill(0));
+  for (let i = a.length - 1; i >= 0; i--) {
+    for (let j = b.length - 1; j >= 0; j--) {
+      lcs[i][j] = a[i] === b[j] ? lcs[i + 1][j + 1] + 1 : Math.max(lcs[i + 1][j], lcs[i][j + 1]);
+    }
+  }
+  const out: { from: number; to: number; other: string[] }[] = [];
+  let i = 0, j = 0, open: { from: number; to: number; other: string[] } | null = null;
+  while (i < a.length || j < b.length) {
+    if (i < a.length && j < b.length && a[i] === b[j]) {
+      open = null;
+      i++, j++;
+      continue;
+    }
+    if (!open) out.push(open = { from: i, to: i, other: [] });
+    if (j < b.length && (i === a.length || lcs[i][j + 1] >= lcs[i + 1][j])) open.other.push(b[j++]);
+    else open.to = ++i;
+  }
+  return out;
+}
+
+/** Sounds she makes while thinking; Scribe writes them one time and not the next. */
+const FILLERS = new Set(["eh", "ehh", "em", "mm", "mmm", "ah", "oh", "este"]);
+
+/**
+ * Can the hinted hearing of a clip be believed? Scribe is heard twice, with
+ * the keyterms (`hinted`) and without (`plain`). The keyterms pull a mumbled
+ * word toward the right one ("Bate, por favor" → "Mate, por favor"), and now
+ * and then put a word that was never said ("Sí, por favor" → "Café, por
+ * favor"); the plain hearing is too loose to be the answer itself (on a short
+ * clip it wanders into other languages), but where the two part ways is where
+ * the doubt is. The hinted line stands when every such place is one of:
+ *  - small: figures, a short word, or two stretches that sound alike (del/el, Lio/Leo);
+ *  - a keyterm put where the plain hearing was guessing;
+ *  - words that are no keyterm (so the hints did not put them) and that Scribe was sure of.
+ * Otherwise, or when Scribe was guessing at the hinted line itself, it does
+ * not: she is asked to say it again.
+ */
+export function hearingHolds(hinted: Hearing, plain: Hearing | null, keyterms: string[]): boolean {
+  if (!hinted.words.length) return true; // silence is somebody else's question
+  const h = hinted.words.filter((x) => !FILLERS.has(x.w));
+  // A little word is often half-swallowed and still right; a long one Scribe doubts is likely made up.
+  if (h.some((x) => x.w.length > 3 && x.lp < SURE_MIN) || (h.length && mean(h.map((x) => x.lp)) < UNSURE_MEAN)) return false;
+  if (!plain || bare(hinted.text) === bare(plain.text)) return true;
+  const p = plain.words.filter((x) => !FILLERS.has(x.w));
+  // The plain hearing got nothing: only a full line survives that.
+  if (!p.length) return h.length >= 3;
+  const known = new Set(keyterms.flatMap(wordsOf).map(bare));
+  const short = (ws: string[]) => ws.length <= 1 && ws.join("").length <= 3;
+  /** The hinted hearing's own words for a stretch (the first match is close enough for a confidence check). */
+  const now = (ws: string[]) => ws.map((w) => h.find((x) => x.w === w)!);
+  return stretches(p.map((x) => x.w), h.map((x) => x.w)).every((d) => {
+    const was = p.slice(d.from, d.to);
+    const a = was.map((x) => x.w).join("");
+    const b = d.other.join("");
+    if (/\d/.test(a + b)) return true;
+    if (short(was.map((x) => x.w)) && short(d.other)) return true;
+    if (a && b && 1 - letterDistance(a, b) / Math.max(a.length, b.length) >= ALIKE) return true;
+    // No keyterm here: the hints did not put these words, Scribe heard them. Sure of them, they stand.
+    if (!d.other.some((w) => known.has(w))) return d.other.length > 0 && now(d.other).every((x) => x.lp >= SHAKY_WORD);
+    return was.some((x) => x.lp < SHAKY_WORD);
+  });
+}
 
 /**
  * Speech to text with Scribe v2, forced to Spanish, bytes sent as they came
- * (§4.4 step 3). With `english`, a line said in English is given back as
- * English: a forced transcript with nothing Spanish in it is heard again with
- * the language left to Scribe, and that second transcript is kept only if it
- * reads as English — a beginner's accented Spanish is never handed to language
- * detection alone.
+ * (§4.4 step 3).
+ *
+ * With `english`, a line said in English is given back as English: a forced
+ * transcript with nothing Spanish in it is heard again with the language left
+ * to Scribe, and that second transcript is kept only if it reads as English —
+ * a beginner's accented Spanish is never handed to language detection alone.
+ *
+ * With `doubt`, the clip is heard twice at once, with and without the
+ * keyterms. The hinted hearing is the transcript; with "ask", one that
+ * `hearingHolds` won't vouch for comes back `unclear`. With "take" it is given
+ * anyway (she was already asked once, or the app is too old to ask) and the
+ * second hearing is not made.
  */
-export async function transcribe(opts: ScribeOptions & { english?: boolean }): Promise<Transcript> {
-  const forced = await scribe(opts, "es");
-  if (!opts.english) return { ...forced, language: "es", calls: 1 };
-  if (looksEnglish(forced.text)) return { ...forced, language: "en", calls: 1 };
-  if (!wantsLanguageRetry(forced.text, opts.keyterms)) return { ...forced, language: "es", calls: 1 };
-  // A failed second pass is not worth losing the line over.
-  const free = await scribe(opts, null).catch((err) => {
-    console.error("stt second pass failed", err);
-    return null;
-  });
-  return free && looksEnglish(free.text) ? { ...free, language: "en", calls: 2 } : { ...forced, language: "es", calls: 2 };
+export async function transcribe(
+  opts: ScribeOptions & { english?: boolean; doubt?: "ask" | "take" },
+): Promise<Transcript> {
+  const twice = opts.doubt === "ask" && opts.keyterms.length > 0;
+  const [hinted, plain] = await Promise.all([
+    scribe(opts, "es"),
+    // A failed second hearing is not worth losing the line over.
+    twice
+      ? scribe({ ...opts, keyterms: [] }, "es").catch((err) => {
+        console.error("stt plain pass failed", err);
+        return null;
+      })
+      : Promise.resolve(null),
+  ]);
+  let calls = twice ? 2 : 1;
+  const es = (h: Hearing): Transcript => ({ text: h.text, audioSeconds: h.audioSeconds, language: "es", calls });
+  const en = (h: Hearing): Transcript => ({ text: h.text, audioSeconds: h.audioSeconds, language: "en", calls });
+
+  if (opts.english) {
+    if (looksEnglish(hinted.text)) return en(hinted);
+    if (wantsLanguageRetry(hinted.text, opts.keyterms)) {
+      calls++;
+      const free = await scribe(opts, null).catch((err) => {
+        console.error("stt second pass failed", err);
+        return null;
+      });
+      if (free && looksEnglish(free.text)) return en(free);
+    }
+  }
+  return { ...es(hinted), ...(opts.doubt === "ask" && !hearingHolds(hinted, plain, opts.keyterms) ? { unclear: true } : {}) };
 }
 
 /** One Scribe request; `language` null leaves the language to Scribe. */
-async function scribe(opts: ScribeOptions, language: "es" | null): Promise<{ text: string; audioSeconds: number | null }> {
+async function scribe(opts: ScribeOptions, language: "es" | null): Promise<Hearing> {
   const form = new FormData();
   form.append("model_id", "scribe_v2");
   form.append("file", opts.audio, opts.filename);
@@ -622,9 +772,16 @@ async function scribe(opts: ScribeOptions, language: "es" | null): Promise<{ tex
     throw new Error(`elevenlabs stt ${res.status}: ${detail.slice(0, 300)}`);
   }
   const body = await res.json();
-  const words = Array.isArray(body.words) ? body.words : [];
+  // deno-lint-ignore no-explicit-any
+  const words: any[] = Array.isArray(body.words) ? body.words : [];
   const last = words.length ? Number(words[words.length - 1].end) : NaN;
-  return { text: String(body.text ?? "").trim(), audioSeconds: Number.isFinite(last) ? last : null };
+  return {
+    text: String(body.text ?? "").trim(),
+    audioSeconds: Number.isFinite(last) ? last : null,
+    words: words
+      .filter((w) => w?.type === "word" && bare(String(w.text ?? "")))
+      .map((w) => ({ w: bare(String(w.text)), lp: Number.isFinite(Number(w.logprob)) ? Number(w.logprob) : 0 })),
+  };
 }
 
 /** File extension for a recorded clip, from its MIME type. */

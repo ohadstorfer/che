@@ -3,44 +3,38 @@
 //
 //   npm run course:tts-repair [-- --dry-run]
 //
-// A clip under MIN_BYTES is not speech: it is the fifth of a second of nothing
+// A clip under its minimum size (`minBytes`) is not speech: it is the fifth of a second of nothing
 // the model returns for some words (see `takes` in lib/tts.mjs). The size is
-// read from storage, so nothing is downloaded. Course clips are re-recorded
+// read from the bucket's listing, so nothing is downloaded. Course clips are re-recorded
 // here, in the voice they already have, under a new name. Clips that ship in
 // the bundle are named for their text, so those are removed — file and
 // manifest line — and the recorder for that content makes them again.
-import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 
-import { uploadFolders } from './lib/clips.mjs';
+import { clipSizes, removeClips, uploadFolders } from './lib/clips.mjs';
 import { queryLinked } from './lib/db.mjs';
 import { q } from './lib/sql.mjs';
-import { MIN_BYTES, apiKey, clipPath, synthesize } from './lib/tts.mjs';
+import { apiKey, clipPath, minBytes, synthesize } from './lib/tts.mjs';
 
 const dryRun = process.argv.includes('--dry-run');
 const BUNDLED = ['argentine', 'culture', 'hablar'];
 const root = new URL('../../', import.meta.url).pathname;
 const dir = `${root}.course-work/tts/_repair/`;
 
-const short = queryLinked(`
-  with c as (
-    select 'form' as kind, id, form as text, audio_path, voice_id from public.forms where status = 'published'
-    union all
-    select 'sentence', id, es, audio_path, voice_id from public.sentences where status = 'published')
-  select c.* from c join storage.objects o on o.bucket_id = 'audio' and o.name = c.audio_path
-   where (o.metadata->>'size')::int < ${MIN_BYTES}`);
+const sizes = await clipSizes(['cards', 'sentences', ...BUNDLED]);
 
-const sizes = new Map(
-  queryLinked(
-    `select name, (metadata->>'size')::int as size from storage.objects
-      where bucket_id = 'audio' and (${BUNDLED.map((d) => `name like '${d}/%'`).join(' or ')})`,
-  ).map((o) => [o.name, o.size]),
-);
+// A row whose clip is not in the bucket at all is not this script's to fix.
+const short = queryLinked(`
+  select 'form' as kind, id, form as text, audio_path, voice_id from public.forms where status = 'published' and audio_path is not null
+  union all
+  select 'sentence', id, es, audio_path, voice_id from public.sentences where status = 'published' and audio_path is not null`,
+).filter((c) => sizes.get(c.audio_path) < minBytes(c.text));
+
 const manifests = BUNDLED.map((d) => {
   const file = `${root}docs/${d}/audio.json`;
   const manifest = JSON.parse(readFileSync(file, 'utf8'));
-  return { d, file, manifest, bad: Object.keys(manifest).filter((p) => (sizes.get(p) ?? 0) < MIN_BYTES) };
+  return { d, file, manifest, bad: Object.keys(manifest).filter((p) => (sizes.get(p) ?? 0) < minBytes(manifest[p].text)) };
 });
 
 console.log(`course: ${short.length} clip(s) too short`);
@@ -66,7 +60,7 @@ if (short.length) {
   for (const c of short) {
     const { mp3, cost } = await synthesize({ text: c.text, voice: voices.get(c.voice_id), key });
     spent += cost;
-    if (mp3.length < MIN_BYTES) {
+    if (mp3.length < minBytes(c.text)) {
       console.log(`  STILL SHORT: ${c.text} (${mp3.length} bytes) — left as it was`);
       continue;
     }
@@ -90,11 +84,7 @@ if (short.length) {
 
 for (const m of manifests) {
   if (!m.bad.length) continue;
-  execFileSync(
-    'npx',
-    ['--yes', 'supabase@2', 'storage', 'rm', ...m.bad.map((p) => `ss:///audio/${p}`), '--linked', '--experimental', '--yes'],
-    { stdio: ['ignore', 'ignore', 'inherit'] },
-  );
+  await removeClips(m.bad);
   for (const p of m.bad) delete m.manifest[p];
   writeFileSync(m.file, JSON.stringify(m.manifest, null, 1) + '\n');
   console.log(`${m.d}: ${m.bad.length} removed — now run: npm run ${m.d}:tts && npm run ${m.d}:build`);

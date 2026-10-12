@@ -117,3 +117,22 @@ test('a stored phrase for the meaning is right, and names the word being drilled
   assert.equal(gradeTyped('de buenos aires', porteña, deck, 'a porteño').correct, false, 'only for that meaning');
   assert.equal(gradeTyped('porteña', porteña, deck, 'from Buenos Aires').note, undefined, 'the word itself needs no note');
 });
+
+// Reported from the app: the prompt read "that we go", and "que vayamos" was wrong.
+test('a subjunctive typed with the word it is said after is right', () => {
+  const vayamos = { ...get('hola'), id: 'x-vayamos', form: 'vayamos', lemma: 'ir', pos: 'verb', gloss_en: 'that we go', features: { mood: 'subj', person: 1, number: 'pl', tense: 'pres' }, alt: [], accepts: [] };
+  const mientas = { ...vayamos, id: 'x-mientas', form: 'mientas', lemma: 'mentir', gloss_en: "you lie (don't lie)", features: { mood: 'subj', person: 2, number: 'sg', tense: 'pres', voseo: true } };
+  const lex = [...deck, vayamos, mientas];
+  for (const typed of ['vayamos', 'que vayamos', 'Que vayamos', 'nosotros vayamos', 'que nosotros vayamos', 'que vayámos'])
+    assert.equal(gradeTyped(typed, vayamos, lex, 'that we go').correct, true, typed);
+  assert.equal(gradeTyped('que vayamos', vayamos, lex, 'we go').correct, true, 'whatever sense the prompt showed');
+  for (const typed of ['que vamos', 'que', 'vayamos que', 'no vayamos', 'cuando vayamos', 'que que vayamos', 'que vos vayamos'])
+    assert.equal(gradeTyped(typed, vayamos, lex, 'that we go').correct, false, typed);
+  // The cue the gloss names, and no other.
+  assert.equal(gradeTyped('no mientas', mientas, lex, 'you lie').correct, true);
+  assert.equal(gradeTyped('que vos mientas', mientas, lex, 'you lie').correct, true);
+  assert.equal(gradeTyped('no vos mientas', mientas, lex, 'you lie').correct, false);
+  assert.equal(gradeTyped('cuando mientas', mientas, lex, 'you lie').correct, false);
+  // An indicative takes no "que".
+  assert.equal(gradeTyped('que soy', get('soy'), deck).correct, false);
+});

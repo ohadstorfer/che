@@ -64,7 +64,7 @@ units:
             en: "go (that I, that he/she go)"
             f: "sg.pres.subj.irregular"
           - form: "vayamos"
-            en: "that we go"
+            en: "we go (that we go)"
             f: "1pl.pres.subj.irregular"
       - lemma: "hacer"
         pos: "verb"

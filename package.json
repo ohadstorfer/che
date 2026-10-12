@@ -1,8 +1,9 @@
 {
   "name": "che",
-  "main": "expo-router/entry",
+  "main": "index.ts",
   "version": "1.0.0",
   "dependencies": {
+    "@bacons/apple-targets": "^5.0.0",
     "@expo-google-fonts/figtree": "^0.4.1",
     "@expo-google-fonts/gabarito": "^0.4.2",
     "@expo/ui": "~57.0.11",
@@ -35,6 +36,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.2",
+    "react-native-android-widget": "^0.22.1",
     "react-native-gesture-handler": "~2.32.0",
     "react-native-purchases": "^10.10.2",
     "react-native-reanimated": "4.5.1",
@@ -104,6 +106,7 @@
     "course:slang-cards": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/slang-cards.mjs",
     "course:sync-lessons": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/course/sync-lessons.mjs",
     "argentine:build": "node scripts/argentine/build.mjs",
+    "widget:words": "node scripts/widget/build-words.mjs",
     "argentine:tts": "node scripts/argentine/tts.mjs",
     "argentine:check": "node scripts/argentine/check.mjs",
     "hablar:validate": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/test/register.mjs scripts/hablar/validate.mjs",

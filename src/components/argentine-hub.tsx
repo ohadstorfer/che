@@ -144,7 +144,8 @@ function Banner({ learned, total }: { learned: number; total: number }) {
   const pct = total ? Math.round((learned / total) * 100) : 0;
   return (
     <View style={styles.intro}>
-      <OutlinedHeadline small="Talk like a" big="Local" style={styles.headline} />
+      {/* Lettered at the size of Culture's "Get to know / Argentina". */}
+      <OutlinedHeadline small="Talk like a" big="Local" sizeLike="Argentina" style={styles.headline} />
       <Text style={styles.lead}>The words locals actually use.</Text>
       {SHOW_PROGRESS ? (
       <View style={styles.progress} accessibilityLabel={`${learned} of ${total} words learned`}>
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
 
   // The same header as the Culture tab.
   intro: { gap: 6, paddingHorizontal: 2, paddingTop: 4 },
-  headline: { width: '72%', marginBottom: 2 },
+  headline: { marginBottom: 2 },
   lead: { ...font.body[700], fontSize: 16, lineHeight: 22, color: colors.muted },
 
   progress: { flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 10 },

@@ -136,7 +136,7 @@ units:
     tips:
       - title: "Otro, never un otro"
         body: "To order the same again, say **otro**: *Otro café, por favor.* For a word that takes *una*,
-          it's **otra**: *Otra cerveza.* It already means \"another\", so nothing goes in front."
+          it's **otra**: *Otra birra.* It already means \"another\", so nothing goes in front."
       - title: "Un or una"
         body: "The little word matches the thing, not you: **un** té, **un** helado, but **una** torta,
           **una** pizza. Learn each new word with its *un* or *una* and you'll never have to guess.
@@ -158,11 +158,13 @@ units:
       - lemma: "té"
         pos: "noun"
         en: "tea"
-      - lemma: "cerveza"
+      - lemma: "birra"
         pos: "noun"
         en: "beer"
+        register: "informal"
+        note: "The everyday word for beer in Argentina; 'cerveza' is the one on menus and labels."
         forms:
-          - form: "cerveza"
+          - form: "birra"
             f: "f.sg"
       - lemma: "gaseosa"
         pos: "noun"
@@ -535,7 +537,7 @@ units:
     review:
       - "otro"
       - "tostada"
-      - "cerveza"
+      - "birra"
       - "buen día"
       - "de nada"
       - "claro"

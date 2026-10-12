@@ -16,6 +16,7 @@ import { usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { supabase } from '@/lib/supabase';
 import { clay, colors, pastel, pastelGrad, type PastelName, press, radius, type } from '@/lib/theme';
+import { clearWidget } from '@/lib/widget';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
@@ -51,6 +52,7 @@ export default function AccountScreen() {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    clearWidget();
     resetTo('/welcome');
   };
 
@@ -65,6 +67,7 @@ export default function AccountScreen() {
     }
     // The user is gone on the server; this just clears the phone's session.
     await supabase.auth.signOut().catch(() => {});
+    clearWidget();
     resetTo('/welcome');
   };
 

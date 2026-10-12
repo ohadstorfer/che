@@ -210,6 +210,8 @@ export default function HablarChat() {
     timer: ReturnType<typeof setTimeout>;
   } | null>(null);
   const reRecordTurn = useRef<string | null>(null);
+  /** The server couldn't make out her last recording and she was asked to say it again: the next one is taken as heard. */
+  const askedAgain = useRef(false);
   /** Total seconds the clock was stopped this chat. The server keeps the max it has seen, so this is cumulative. */
   const pausedTotal = useRef(0);
   /** What is stopping the clock right now (the app is away, it's Pancho's turn), and since when. */
@@ -241,10 +243,13 @@ export default function HablarChat() {
         });
         setUnlimited(!!started.unlimited);
         if (started.deadline_at) setDeadline(new Date(started.deadline_at).getTime());
+        // Keyed by its turn, as after a reload: the player keeps a clip's bytes
+        // under its key, and one shared key replayed the last chat's opener.
+        const openerKey = started.opener.turn_id ?? `opener-${sessionId}`;
         setMessages([
           {
             role: 'tomas',
-            key: 'opener',
+            key: openerKey,
             turnId: started.opener.turn_id,
             text: started.opener.text,
             textEn: started.opener.text_en,
@@ -256,7 +261,7 @@ export default function HablarChat() {
         // brief put his line on the phone, when it could.
         const openerPath = versionOf(kind, started.topic_id, started.level)?.opener.audio;
         if (started.opener.audio_url)
-          void play('opener', async () => readyClip(openerPath) ?? resolveAudio(started.opener.audio_url));
+          void play(openerKey, async () => readyClip(openerPath) ?? resolveAudio(started.opener.audio_url));
         return;
       }
       const loaded = await loadConversation(sessionId).catch(() => null);
@@ -446,7 +451,7 @@ export default function HablarChat() {
       clip = await active.stop();
     } catch {
       setPhase('idle');
-      return say('No te escuché.');
+      return say("I didn't hear you. Try again.");
     }
     if (!clip.size) {
       setPhase('idle');
@@ -456,7 +461,7 @@ export default function HablarChat() {
     if (check !== 'ok') {
       setPhase('idle');
       return say(
-        check === 'short' ? 'No te escuché. Mantené el mic un poco más.' : 'No te escuché. Hablá un poco más fuerte.',
+        check === 'short' ? "I didn't hear you. Speak a little longer." : "I didn't hear you. Speak a little louder.",
       );
     }
     // A re-record replaces the draft for the same turn.
@@ -603,6 +608,7 @@ export default function HablarChat() {
     if (!line || !('clip' in line)) setPhase('waiting');
     let fatal = false;
     let empty = false;
+    let unclear = false;
     let done: DoneEvent | null = null;
     abort.current = new AbortController();
     const handlers = {
@@ -610,6 +616,7 @@ export default function HablarChat() {
         heard = true;
         // Sent: the next recording is a new turn, not a re-record of this one.
         reRecordTurn.current = null;
+        askedAgain.current = false;
         addTurn(turnId, text);
         setPhase('waiting');
       },
@@ -669,9 +676,10 @@ export default function HablarChat() {
     try {
       const args = { session_id: sessionId, turn_id: turnId, paused_seconds: takePaused() };
       const out = line && !heard
-        ? await speak({ ...args, ...line }, handlers, abort.current.signal)
+        ? await speak({ ...args, ...line, unclear: askedAgain.current ? 'take' : 'ask' }, handlers, abort.current.signal)
         : await reply(args, handlers, abort.current.signal);
       empty = out === 'empty';
+      unclear = out === 'unclear';
     } catch (e) {
       // 409 "time_up" / "ended" closes the chat; a 409 with retry:true means
       // the same turn is still being answered, so it's worth another try.
@@ -707,7 +715,14 @@ export default function HablarChat() {
     if (empty) {
       dropTurn(turnId);
       setPhase('idle');
-      return say('No te escuché.');
+      return say("I didn't hear you. Try again.");
+    }
+    if (unclear) {
+      // Better to ask once than to correct a line she never said.
+      askedAgain.current = true;
+      dropTurn(turnId);
+      setPhase('idle');
+      return say("I didn't catch that. Say it again?");
     }
     if (!d) {
       // One quiet retry with the same turn_id: the server replays a turn it
@@ -1869,15 +1884,18 @@ const styles = StyleSheet.create({
   },
   notice: {
     position: 'absolute',
-    top: -44,
+    // Sits on top of the dock whatever its own height: a long line wraps to two.
+    bottom: '100%',
+    marginBottom: 10,
     alignSelf: 'center',
-    paddingHorizontal: 14,
-    paddingVertical: 8,
+    maxWidth: '92%',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
     borderRadius: radius.pill,
     backgroundColor: colors.ink,
     boxShadow: clay.float,
   },
-  noticeText: { ...font.body[700], color: colors.bg, fontSize: 14 },
+  noticeText: { ...font.body[700], color: colors.bg, fontSize: 17, lineHeight: 22, textAlign: 'center' },
 
   sheetBig: {
     ...font.display[700],

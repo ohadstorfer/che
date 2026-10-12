@@ -1027,7 +1027,7 @@ units:
     tips:
       - title: "Chabón, mina"
         body: "A **chabón** is a guy, a **mina** a woman — among friends; both sound rude to strangers.
-          Someone great at what they do is a **groso**; a **birra** is a beer."
+          Someone great at what they do is a **groso**."
       - title: "Trucho, zarpado"
         body: "**Trucho** — *fake, dodgy*: *un billete trucho*. **Zarpado** — *over the top*, for good or
           bad. **Bardo** — *a mess, trouble*: *se armó un bardo*."
@@ -1052,11 +1052,7 @@ units:
             f: "f.sg"
       - lemma: "birra"
         pos: "noun"
-        en: "beer"
-        register: "lunfardo"
         forms:
-          - form: "birra"
-            f: "f.sg"
           - form: "birras"
             en: "beers"
             f: "f.pl"

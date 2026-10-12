@@ -21,7 +21,8 @@ import type { Form, Section, Sentence, Unit } from './types';
 //    so the test never downloads the course.
 //  - jump (a later section or unit on the path): runs to the end of its span
 //    and passes at about 85%; she lands on the target unit. A short span has
-//    every unit sampled; a longer one (a whole section) a spread of them.
+//    every unit sampled; a longer one (a section, or several from the map of
+//    sections) a spread of them.
 // ---------------------------------------------------------------------------
 
 export type TestMode = 'placement' | 'jump';
@@ -131,9 +132,17 @@ export function planTest(data: LearnerData, units: Unit[]): SessionItem[] {
 
 export async function buildTest(userId: string, units: Unit[]): Promise<SessionData> {
   const last = units.at(-1);
-  // Sentences as far as the last unit the test samples.
-  const sampled = sampleUnits(units, maxUnitsInTest()).at(-1);
-  const data = await loadLearner(userId, { throughOrder: sampled?.course_order ?? 0 });
+  // Only the sentences of the units the test samples, a unit at a time: a
+  // jump over several sections must not pull the course in between down.
+  let data = await loadLearner(userId);
+  const have = new Set(data.sentences.map((s) => s.unit_id));
+  const missing = sampleUnits(units, maxUnitsInTest()).filter((u) => !have.has(u.id)).map((u) => u.id);
+  if (missing.length > 0) {
+    const rows = await loadUnitSentenceRows(missing).catch(() => []);
+    const known = new Set(data.sentences.map((s) => s.id));
+    const fresh = rows.filter((r) => !known.has(r.id)).map((r) => toSentence(r, data.formById));
+    if (fresh.length > 0) data = { ...data, sentences: [...data.sentences, ...fresh] };
+  }
   const items = planTest(data, units);
   return {
     items,

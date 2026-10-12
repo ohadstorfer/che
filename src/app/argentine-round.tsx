@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ExerciseFrame } from '@/components/exercise-frame';
 import { Exercise } from '@/components/exercises';
 import { PathLessonDone } from '@/components/path-lesson-done';
+import { SlangOpener } from '@/components/slang-opener';
 import { Button } from '@/components/ui';
 import { WordIntro } from '@/components/word-intro';
 import {
@@ -27,7 +28,7 @@ import { lessonWithUnit } from '@/lib/lesson';
 import { goBack } from '@/lib/nav';
 import type { FinishResult } from '@/lib/round';
 import { useStatusBarColor } from '@/lib/status-bar-color';
-import { clay, colors, font } from '@/lib/theme';
+import { clay, colors, font, pastel } from '@/lib/theme';
 import { finishPathLesson, unitSlang, unitSlangCourse } from '@/lib/unit-extras';
 
 // ---------------------------------------------------------------------------
@@ -66,8 +67,11 @@ export default function ArgentineRound() {
   /** First tries on graded screens: how the score is worked out. */
   const firstTries = useRef<boolean[]>([]);
   const retried = useRef(new Set<number>());
+  /** Past the opener: the butter screen that says this round is slang. */
+  const [started, setStarted] = useState(false);
+  const opening = !started && !done && !ended && !!queue?.length;
 
-  useStatusBarColor(colors.bg);
+  useStatusBarColor(opening ? pastel.butter : colors.bg);
 
   // Wrong answers come from the pack, its theme, then any clean word; the gap
   // draws from the same words as they appear in their examples.
@@ -210,25 +214,27 @@ export default function ArgentineRound() {
   };
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={[styles.safe, opening && styles.opening]} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
         <Pressable onPress={() => goBack(lessonId ? '/home' : '/words')} hitSlop={12} accessibilityLabel="Close">
-          <Ionicons name="close" size={26} color={colors.muted} />
+          <Ionicons name="close" size={26} color={opening ? colors.ink : colors.muted} />
         </Pressable>
         <View style={styles.progressTrack}>
           <View
             style={[
               styles.progressFill,
-              { width: `${Math.max((index / queue.length) * 100, 3)}%` },
+              { width: `${opening ? 0 : Math.max((index / queue.length) * 100, 3)}%` },
             ]}
           />
         </View>
-        <Text style={styles.counter}>
-          {index + 1}/{queue.length}
+        <Text style={[styles.counter, opening && { color: colors.ink }]}>
+          {opening ? 0 : index + 1}/{queue.length}
         </Text>
       </View>
 
-      {current.kind === 'intro' ? (
+      {opening ? (
+        <SlangOpener onStart={() => setStarted(true)} />
+      ) : current.kind === 'intro' ? (
         <WordIntro
           key={`intro-${index}`}
           word={current.word}
@@ -307,6 +313,7 @@ function Finish({
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
+  opening: { backgroundColor: pastel.butter },
   header: {
     flexDirection: 'row',
     alignItems: 'center',

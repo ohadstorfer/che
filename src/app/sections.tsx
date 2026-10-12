@@ -16,7 +16,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '@/lib/auth';
 import { type Course, currentIndex, loadCourse, loadProgress, sectionSummaries, type SectionSummary } from '@/lib/course';
 import { goBack } from '@/lib/nav';
-import { jumpAllowed } from '@/lib/placement';
 import { SECTION_CAN_DO } from '@/lib/sections';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, gradients, pastelGrad, path, press, radius } from '@/lib/theme';
@@ -28,8 +27,8 @@ import { FitText } from '@/components/fit-text';
 // Home holds a single section; this is where she sees all of them and moves
 // between them. The section she is in is the one card in salvia clay, with what
 // it lets her say in a speech bubble and the only primary button on the screen.
-// Finished sections open straight onto their road; the ones ahead stay locked
-// unless a jump test can reach them in one sitting.
+// Finished sections open straight onto their road; the ones ahead stay locked,
+// each with a jump test that lands her at its start.
 // ---------------------------------------------------------------------------
 
 const webPress =
@@ -85,14 +84,15 @@ export default function SectionsScreen() {
   const summaries = data ? sectionSummaries(data.course, data.current, data.done) : [];
   const here = summaries.find((s) => s.state === 'current') ?? null;
 
-  // A section ahead can be tested into when the test stays one sitting long:
-  // the same rule as a jump from the path (learning-engine-spec §7).
+  // Any section ahead can be tested into, however far: the test samples a
+  // spread of the units in between, so it stays one sitting long
+  // (learning-engine-spec §7).
   const jumpTarget = (s: SectionSummary) => {
     if (!here || s.state !== 'locked' || !data) return null;
     const hereUnit = data.course.path[data.current]?.unit;
     const target = s.units[0];
     if (!hereUnit || !target) return null;
-    return jumpAllowed(data.course.units, hereUnit.course_order, target) ? target : null;
+    return target.course_order > hereUnit.course_order ? target : null;
   };
 
   const open = (s: SectionSummary) =>

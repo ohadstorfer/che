@@ -9,7 +9,9 @@
 //  - JSON { session_id, turn_id, paused_seconds? }: a line already stored (a
 //    draft from hablar-transcribe, or a retry after a dropped stream).
 // Either way the server answers the text it transcribed, never text from the
-// client. Silence comes back as plain JSON { status: "empty" }, not a stream.
+// client. Silence comes back as plain JSON { status: "empty" }, not a stream;
+// so does a line that can't be made out, as { status: "unclear" }, to an app
+// that sent `unclear=ask` (it asks her to say it again, then sends `take`).
 // The response is an SSE stream:
 //
 //   transcript {"turn_id","text"}                          the line, as stored (multipart only)
@@ -453,6 +455,14 @@ async function answerStored(req: Request, env: Env, db: SupabaseClient): Promise
 }
 
 /**
+ * The app's `unclear` field: "ask" when it can ask her to say a line again,
+ * "take" on the recording after it did. Apps from before the field send none.
+ */
+function doubtOf(form: FormData): "ask" | "take" {
+  return form.get("unclear") === "ask" ? "ask" : "take";
+}
+
+/**
  * Multipart `{ audio | text, session_id, turn_id, paused_seconds? }`: the line
  * and its answer in one request. The line is stored as hablar-transcribe stores
  * it, then answered on the same stream, which opens with `transcript` — one
@@ -503,9 +513,11 @@ async function speak(req: Request, env: Env, db: SupabaseClient): Promise<Respon
       audio: audio as Blob,
       existing: existing as Turn | null,
       sttCount: count ?? 0,
+      doubt: doubtOf(form),
     });
   if ("error" in out) return out.error;
   if ("empty" in out) return json({ text: "", turn_id: turnId, status: "empty" });
+  if ("unclear" in out) return json({ text: "", turn_id: turnId, status: "unclear" });
   return answer({ env, db, userId: who.userId, session, user: out.turn, stored, transcript: true });
 }
 

@@ -1907,6 +1907,12 @@
   "model": "eleven_multilingual_v2",
   "recorded_at": "2026-09-27T16:23:58.215Z"
  },
+ "hablar/db63ff516c855521821f.mp3": {
+  "text": "¿Qué te gusta tomar cuando salís? ¿Vino, birra, fernet?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T14:43:56.276Z"
+ },
  "hablar/db6f87a5c6377f35f0b5.mp3": {
   "text": "Si querés, compartimos un taxi hasta el centro.",
   "voice": "tomas",

@@ -332,7 +332,7 @@ export function reply(
   args: { session_id: string; turn_id: string; paused_seconds?: number },
   on: ReplyHandlers,
   signal?: AbortSignal,
-): Promise<'streamed' | 'empty'> {
+): Promise<TurnOutcome> {
   return streamTurn(
     JSON.stringify({
       session_id: args.session_id,
@@ -344,18 +344,30 @@ export function reply(
   );
 }
 
+/** How a turn came back: answered on the stream, nothing heard, or heard but not made out. */
+export type TurnOutcome = 'streamed' | 'empty' | 'unclear';
+
 /**
  * Her line and Pancho's answer in one request: the recording (or what she
  * typed) goes straight to hablar-reply, which transcribes it, stores it and
  * answers on the same stream, opening with `transcript`. Resolves 'empty' when
- * nothing usable was heard. Safe to send again with the same turn_id: the
+ * nothing usable was heard, 'unclear' when it was heard but can't be made out
+ * (only with `unclear: 'ask'`). Safe to send again with the same turn_id: the
  * server neither transcribes nor answers twice.
  */
 export async function speak(
-  args: { clip?: RecordedClip; text?: string; session_id: string; turn_id: string; paused_seconds?: number },
+  args: {
+    clip?: RecordedClip;
+    text?: string;
+    session_id: string;
+    turn_id: string;
+    paused_seconds?: number;
+    /** A recording the server can't make out: 'ask' has it say so ('unclear'), 'take' has it answer its best guess. */
+    unclear?: 'ask' | 'take';
+  },
   on: ReplyHandlers,
   signal?: AbortSignal,
-): Promise<'streamed' | 'empty'> {
+): Promise<TurnOutcome> {
   const form = new FormData();
   if (args.clip) {
     const { clip } = args;
@@ -365,6 +377,7 @@ export async function speak(
   form.append('session_id', args.session_id);
   form.append('turn_id', args.turn_id);
   if (args.paused_seconds) form.append('paused_seconds', String(args.paused_seconds));
+  if (args.clip && args.unclear) form.append('unclear', args.unclear);
   return streamTurn(form, on, signal);
 }
 
@@ -399,7 +412,7 @@ export function warm(...names: ('hablar-start' | 'hablar-reply')[]): void {
  * a network failure or a non-2xx status. React Native's own fetch has no
  * readable body, so the phones use expo/fetch.
  */
-async function streamTurn(body: string | FormData, on: ReplyHandlers, signal?: AbortSignal): Promise<'streamed' | 'empty'> {
+async function streamTurn(body: string | FormData, on: ReplyHandlers, signal?: AbortSignal): Promise<TurnOutcome> {
   const anon = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? '';
   const { data: auth } = await supabase.auth.getSession();
   const token = auth.session?.access_token ?? anon;
@@ -423,7 +436,7 @@ async function streamTurn(body: string | FormData, on: ReplyHandlers, signal?: A
   // Nothing usable was heard: a plain answer, not a stream.
   if ((res.headers.get('content-type') ?? '').includes('application/json')) {
     const out = (await res.json().catch(() => null)) as { status?: string } | null;
-    if (out?.status === 'empty') return 'empty';
+    if (out?.status === 'empty' || out?.status === 'unclear') return out.status;
     throw new HablarError(res.status, out as Record<string, unknown> | null);
   }
 
@@ -517,6 +530,8 @@ export async function end(args: {
     session_id: args.session_id,
     reason: args.reason,
     paused_seconds: args.paused_seconds ?? 0,
+    // The day the streak is credited to is the phone's, as for every other lesson.
+    local_date: localDateStr(),
   });
   const summary: HablarSummary = { ...(res?.summary ?? {}) };
   if (res?.streak?.current_streak) {

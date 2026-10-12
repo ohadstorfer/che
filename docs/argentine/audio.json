@@ -665,6 +665,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:41:09.670Z"
  },
+ "argentine/0efb1942a31b92c6514c.mp3": {
+  "text": "linyera",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/0efb46683fe8dca049c7.mp3": {
   "text": "Te zarpaste con el chiste sobre su mamá.",
   "voice": "tomas",
@@ -767,6 +773,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:50:23.786Z"
  },
+ "argentine/115dffc0a2789521aac7.mp3": {
+  "text": "playo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/11b2bb139d3e1a02211f.mp3": {
   "text": "Ponete las ojotas, que la arena quema.",
   "voice": "malena",
@@ -778,12 +790,6 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:17.217Z"
- },
- "argentine/12281a0237fc43999fb3.mp3": {
-  "text": "frutilla",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:47:31.344Z"
  },
  "argentine/122c547ca03e8f1f479f.mp3": {
   "text": "piantado",
@@ -856,12 +862,6 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:47.781Z"
- },
- "argentine/132e6893a6ab80bf3fef.mp3": {
-  "text": "toallón",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:49:16.165Z"
  },
  "argentine/13552f027cff91f6751f.mp3": {
   "text": "atajada",
@@ -1061,12 +1061,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:36.810Z"
  },
- "argentine/1a24dfb9bb40563918d1.mp3": {
-  "text": "vainilla",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:08.777Z"
- },
  "argentine/1a5804010a93d900d5aa.mp3": {
   "text": "la Scaloneta",
   "voice": "malena",
@@ -1253,6 +1247,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:47:31.344Z"
  },
+ "argentine/1ec612647d0ede434605.mp3": {
+  "text": "toallón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:49:16.165Z"
+ },
  "argentine/1ecd03c585da9f8da545.mp3": {
   "text": "No seas vueltero y elegí un restaurante de una vez.",
   "voice": "malena",
@@ -1433,6 +1433,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:01.203Z"
  },
+ "argentine/23989f15cc1b19f12f25.mp3": {
+  "text": "yerra",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/239abbec1d13f5b24022.mp3": {
   "text": "Nos cagamos de risa con el video.",
   "voice": "malena",
@@ -1451,12 +1457,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:47:31.343Z"
  },
- "argentine/23e410c02560603599c9.mp3": {
-  "text": "zapallito",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:08.777Z"
- },
  "argentine/240d7ca5aef69ed6f63e.mp3": {
   "text": "Pasá el lampazo por la cocina, que está mojada.",
   "voice": "tomas",
@@ -1474,6 +1474,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:36.810Z"
+ },
+ "argentine/2494d689ff532c6a2234.mp3": {
+  "text": "gallina",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/24c8997ab4a8a723a8ff.mp3": {
   "text": "tentarse",
@@ -1546,12 +1552,6 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:47:31.343Z"
- },
- "argentine/265090d9dd786713488b.mp3": {
-  "text": "manyar",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:36.810Z"
  },
  "argentine/266ff743e875f1a76a99.mp3": {
   "text": "Dejá de bardear a tu hermana.",
@@ -1661,6 +1661,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:43.134Z"
  },
+ "argentine/28bdec25c86a3f6f59a9.mp3": {
+  "text": "tropilla",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:51:36.810Z"
+ },
  "argentine/28c6092f12603789f97b.mp3": {
   "text": "coger",
   "voice": "tomas",
@@ -1690,18 +1696,6 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:47:31.343Z"
- },
- "argentine/296540cb5673c020fe42.mp3": {
-  "text": "payada",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:36.810Z"
- },
- "argentine/29a40be745a367d8d6ad.mp3": {
-  "text": "bombilla",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:43.134Z"
  },
  "argentine/29c98e9d587d8ac3e91a.mp3": {
   "text": "panchería",
@@ -1750,6 +1744,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:47.780Z"
+ },
+ "argentine/2aa55521cef72d43a3d6.mp3": {
+  "text": "bombilla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/2ab9749336c5f484fcf5.mp3": {
   "text": "Pasala, morfón, que estoy solo.",
@@ -1822,6 +1822,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:53:05.794Z"
+ },
+ "argentine/2c4a580f06b243e30ea5.mp3": {
+  "text": "zapatillas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:49:16.165Z"
  },
  "argentine/2c6dc5face3e2ca7593c.mp3": {
   "text": "Pedime un chopp bien frío, por favor.",
@@ -2014,12 +2020,6 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:08.777Z"
- },
- "argentine/3158e10a0c76623ca55e.mp3": {
-  "text": "lleca",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:52:12.288Z"
  },
  "argentine/319eb18b3b88945351d0.mp3": {
   "text": "morrón",
@@ -2351,6 +2351,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:57.000Z"
  },
+ "argentine/37607bed5b2d09d6fca9.mp3": {
+  "text": "mollejas",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/37c22232cc534a709983.mp3": {
   "text": "Los vecinos culean a los gritos todas las noches.",
   "voice": "malena",
@@ -2501,6 +2507,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:47.781Z"
  },
+ "argentine/3c2b7cbb7c81ae9c4dbe.mp3": {
+  "text": "frutilla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:47:31.344Z"
+ },
  "argentine/3c7a49521b9142a55bb5.mp3": {
   "text": "Me quedé sin batería en el celu.",
   "voice": "malena",
@@ -2585,6 +2597,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:53:05.794Z"
  },
+ "argentine/3dc840d9f5bc6a6e022a.mp3": {
+  "text": "Es un bar muy cheto, una birra sale una fortuna.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T14:43:48.788Z"
+ },
  "argentine/3dca3cc3862ef2119f55.mp3": {
   "text": "No le hagas caso, siempre está metiendo púa.",
   "voice": "tomas",
@@ -2638,12 +2656,6 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:12.288Z"
- },
- "argentine/3f63954c5ac60a438e38.mp3": {
-  "text": "hebilla",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:49:16.165Z"
  },
  "argentine/3f7d1699bf740f248149.mp3": {
   "text": "hasta las pelotas",
@@ -2704,6 +2716,12 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:43.134Z"
+ },
+ "argentine/407b26650374f2bc4655.mp3": {
+  "text": "yuta",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/409cbc50a4fdfe395758.mp3": {
   "text": "Dale, andá y encarala, que te está mirando.",
@@ -3107,12 +3125,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:49:16.165Z"
  },
- "argentine/482e5cc4bc3a234464dd.mp3": {
-  "text": "rayado",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:49:49.848Z"
- },
  "argentine/4834a3a740106f886050.mp3": {
   "text": "atorrar",
   "voice": "tomas",
@@ -3166,6 +3178,12 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:50:23.786Z"
+ },
+ "argentine/48d1b75fab1f46da63f9.mp3": {
+  "text": "chamuyo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:41:40.717Z"
  },
  "argentine/48e57f74444492718913.mp3": {
   "text": "Tu primo está medio deschavetado, se tiró al río vestido.",
@@ -3497,12 +3515,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:17.217Z"
  },
- "argentine/517dbd14c22c0522a1b5.mp3": {
-  "text": "linyera",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:46:57.000Z"
- },
  "argentine/52135cf1bfbbbc3e1cf5.mp3": {
   "text": "¡Qué hacés, Juan! ¿Todo bien?",
   "voice": "malena",
@@ -3520,12 +3532,6 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:17.217Z"
- },
- "argentine/52723866c5090e2b7464.mp3": {
-  "text": "chamuyo",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:41:40.717Z"
  },
  "argentine/52baa45306bd409316e8.mp3": {
   "text": "vereda",
@@ -3761,12 +3767,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:47.781Z"
  },
- "argentine/5a4900b0c8ff0aa934bd.mp3": {
-  "text": "pollera",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:43.134Z"
- },
  "argentine/5a80768de31bd2cd14fb.mp3": {
   "text": "motochorro",
   "voice": "tomas",
@@ -3803,18 +3803,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:49:16.165Z"
  },
- "argentine/5acf78d6e4e8e0c3d260.mp3": {
-  "text": "millonario",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:01.203Z"
- },
- "argentine/5aeacced692b8d84ad8e.mp3": {
-  "text": "gatillar",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:47:31.343Z"
- },
  "argentine/5b050623f8c56ffb800a.mp3": {
   "text": "Antes de salir, andá a hacer pis.",
   "voice": "tomas",
@@ -3826,6 +3814,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:17.217Z"
+ },
+ "argentine/5b534108667823c8bcbf.mp3": {
+  "text": "escobillón",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/5b5f4dc26cd938c5656e.mp3": {
   "text": "Me hice una tostada con palta y huevo.",
@@ -3875,17 +3869,17 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:12.288Z"
  },
+ "argentine/5bef2f676e13bcbd1fe9.mp3": {
+  "text": "canilla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/5bf1d1d46e57007731ee.mp3": {
   "text": "Anoche en el boliche chapó con tres chicos.",
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:50:23.786Z"
- },
- "argentine/5c08e3804a73a7f386df.mp3": {
-  "text": "chamuyar",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:49:49.848Z"
  },
  "argentine/5c230b9d2cc83eeca548.mp3": {
   "text": "Se hace el canchero, pero está re nervioso.",
@@ -4031,12 +4025,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:43.134Z"
  },
- "argentine/60687909ab36fce3d84e.mp3": {
-  "text": "canilla",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:43.134Z"
- },
  "argentine/606f4522fd0c939719a6.mp3": {
   "text": "Los domingos mi vieja hace ñoquis con tuco.",
   "voice": "malena",
@@ -4168,6 +4156,12 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:47:31.343Z"
+ },
+ "argentine/63783ef9ba326c9dfccb.mp3": {
+  "text": "gatillar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/637e9d362099ac60b994.mp3": {
   "text": "¿Cebás vos? A mí siempre me sale lavado.",
@@ -4306,6 +4300,12 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:43.134Z"
+ },
+ "argentine/66c0eae984551653e1c8.mp3": {
+  "text": "payana",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/66d6ecb69256d796bf03.mp3": {
   "text": "cueva",
@@ -4451,6 +4451,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:01.203Z"
  },
+ "argentine/69e47019e3e9e61ff102.mp3": {
+  "text": "yorugua",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/6a09b6572f8a153377af.mp3": {
   "text": "¿Tenés prepaga u obra social?",
   "voice": "malena",
@@ -4517,6 +4523,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:12.288Z"
  },
+ "argentine/6acea93140460fd4bff6.mp3": {
+  "text": "playero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:48:43.134Z"
+ },
  "argentine/6b01b34f2d065bde8b97.mp3": {
   "text": "chota",
   "voice": "tomas",
@@ -4528,6 +4540,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:36.810Z"
+ },
+ "argentine/6c77245b12070731e870.mp3": {
+  "text": "millonario",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:51:01.203Z"
  },
  "argentine/6c83ac833246a2d6cca4.mp3": {
   "text": "SUBE",
@@ -4552,6 +4570,12 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:49:16.165Z"
+ },
+ "argentine/6ce9ece0989dccdb85b2.mp3": {
+  "text": "yuyo",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/6cf57966d3b65d09b28b.mp3": {
   "text": "Vivo en el partido de San Isidro.",
@@ -4649,6 +4673,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:47.780Z"
  },
+ "argentine/6e5ae71bd569343f6326.mp3": {
+  "text": "bagayo",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/6e663edb97090ca2c118.mp3": {
   "text": "¿Me traés una soda con hielo?",
   "voice": "malena",
@@ -4702,6 +4732,12 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:36.810Z"
+ },
+ "argentine/6f50d11772a0b29095a9.mp3": {
+  "text": "zapallito",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:48:08.777Z"
  },
  "argentine/6f708a5047ad0c894559.mp3": {
   "text": "Como viven con los viejos, van a un telo.",
@@ -4835,6 +4871,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:50:23.786Z"
  },
+ "argentine/71b63d77ba326866c3da.mp3": {
+  "text": "castellano",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:41:36.918Z"
+ },
  "argentine/7212a226ac4c2bc109cf.mp3": {
   "text": "Se me cayó la hebilla y tengo el pelo en la cara.",
   "voice": "tomas",
@@ -4852,12 +4894,6 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:49:49.848Z"
- },
- "argentine/7246de1a39b15f0d95b9.mp3": {
-  "text": "mollejas",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:47:31.343Z"
  },
  "argentine/72661b1e2207f626c301.mp3": {
   "text": "El sábado hacemos un asado en el quincho del edificio.",
@@ -5021,6 +5057,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:57.000Z"
  },
+ "argentine/763a804dffd201f37eef.mp3": {
+  "text": "canyengue",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/768a2816f76661414aca.mp3": {
   "text": "Le escribo todos los días y no me da bola.",
   "voice": "tomas",
@@ -5116,6 +5158,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:01.203Z"
+ },
+ "argentine/78b540939064b033e6e4.mp3": {
+  "text": "Se tomó la birra de un saque.",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T14:43:48.787Z"
  },
  "argentine/78c8cd66a4dddb83dbc5.mp3": {
   "text": "laburo",
@@ -5393,12 +5441,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:41:03.577Z"
  },
- "argentine/7e34b530f525ffec5898.mp3": {
-  "text": "playo",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:49:16.165Z"
- },
  "argentine/7e48d9b93351f4f771f8.mp3": {
   "text": "lompa",
   "voice": "malena",
@@ -5591,6 +5633,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:47.780Z"
  },
+ "argentine/830befb7d12e42d53e03.mp3": {
+  "text": "vainilla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/835eb18ef994151af247.mp3": {
   "text": "bailanta",
   "voice": "tomas",
@@ -5711,12 +5759,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:36.810Z"
  },
- "argentine/8617a932f5b41baa43e7.mp3": {
-  "text": "gallina",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:01.203Z"
- },
  "argentine/862b10bcb4121fe201db.mp3": {
   "text": "de onda",
   "voice": "tomas",
@@ -5753,23 +5795,11 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:12.288Z"
  },
- "argentine/874c9126f49eae0047a1.mp3": {
-  "text": "villero",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:53:05.794Z"
- },
  "argentine/874e2eb4d286e939873b.mp3": {
   "text": "Colgamos la hamaca paraguaya entre los dos árboles.",
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:49:16.165Z"
- },
- "argentine/875846bac03db82d6fff.mp3": {
-  "text": "yuyo",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:36.810Z"
  },
  "argentine/875c84bfe84ff3282e66.mp3": {
   "text": "chabón",
@@ -5957,6 +5987,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:47.780Z"
  },
+ "argentine/8b5df5d7ce959d54a99e.mp3": {
+  "text": "Compré castañas de cajú para picar con la birra.",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T14:43:48.788Z"
+ },
  "argentine/8b687bb410c198eb3ac8.mp3": {
   "text": "Vino a la reunión con una cara de culo terrible.",
   "voice": "malena",
@@ -6119,6 +6155,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:43.134Z"
  },
+ "argentine/8f705819387cb462601c.mp3": {
+  "text": "rayado",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:49:49.848Z"
+ },
  "argentine/8f9b0be97c8b8d774758.mp3": {
   "text": "calorón",
   "voice": "malena",
@@ -6136,12 +6178,6 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:47.780Z"
- },
- "argentine/8ff7d4c4a150af6766f9.mp3": {
-  "text": "gayola",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:36.810Z"
  },
  "argentine/900f4541a707ae83aae1.mp3": {
   "text": "Me afanaron el celu en el bondi.",
@@ -6250,6 +6286,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:17.217Z"
+ },
+ "argentine/92379198651d6b146e02.mp3": {
+  "text": "payada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/923bb8ddea8da5f5fb17.mp3": {
   "text": "Hoy estoy re colgado, me olvidé las llaves otra vez.",
@@ -6719,12 +6761,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:08.777Z"
  },
- "argentine/9b1f4b7d7b2474588941.mp3": {
-  "text": "joya",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:46:17.217Z"
- },
  "argentine/9b62306e6acc21541bb2.mp3": {
   "text": "Anotalo en el anotador que está al lado del teléfono.",
   "voice": "tomas",
@@ -6959,12 +6995,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:17.217Z"
  },
- "argentine/a04dad0ab8de7cb32ce3.mp3": {
-  "text": "yerba",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:08.777Z"
- },
  "argentine/a05c0eeb70b8af55a725.mp3": {
   "text": "botón",
   "voice": "malena",
@@ -7079,6 +7109,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:50:23.786Z"
  },
+ "argentine/a2c8d75d3a93a47db82a.mp3": {
+  "text": "lleca",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/a2cd4c39b5897d8aa9ad.mp3": {
   "text": "Con el mate comimos un budín inglés.",
   "voice": "malena",
@@ -7151,23 +7187,11 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:08.777Z"
  },
- "argentine/a463b522a50a6a53a9ed.mp3": {
-  "text": "funyi",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:36.810Z"
- },
  "argentine/a47f21bffbc90835a55a.mp3": {
   "text": "RRPP",
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:50:23.786Z"
- },
- "argentine/a481dfaa8da144c73653.mp3": {
-  "text": "canyengue",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:36.810Z"
  },
  "argentine/a4950e59cb9dc53df07f.mp3": {
   "text": "ya fue",
@@ -7390,6 +7414,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:17.217Z"
+ },
+ "argentine/ab0747f0f64c195cf50b.mp3": {
+  "text": "joya",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/ab0841ace4410522c798.mp3": {
   "text": "Si perdemos hoy, nos vamos a la B.",
@@ -7703,12 +7733,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:53:05.794Z"
  },
- "argentine/b09ebb2f18a349140bdb.mp3": {
-  "text": "yorugua",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:52:12.288Z"
- },
  "argentine/b0c497d62117fbd551f6.mp3": {
   "text": "En Tucumán escuchamos una baguala con caja.",
   "voice": "tomas",
@@ -7810,6 +7834,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:49:16.165Z"
+ },
+ "argentine/b26737ccceccc439c937.mp3": {
+  "text": "manyar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/b2c392e7aaf3162da7ac.mp3": {
   "text": "franco",
@@ -7919,6 +7949,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:53:05.794Z"
  },
+ "argentine/b4453e922ffffde2f38c.mp3": {
+  "text": "malla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/b4509e55ccb97faffc8b.mp3": {
   "text": "El wifi no anda, ¿lo reiniciás?",
   "voice": "tomas",
@@ -8014,12 +8050,6 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:08.777Z"
- },
- "argentine/b5ddc12b097db984af98.mp3": {
-  "text": "yerra",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:36.810Z"
  },
  "argentine/b62008c4d3334d6833e2.mp3": {
   "text": "culear",
@@ -8158,12 +8188,6 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:08.777Z"
- },
- "argentine/b84e9361ca7473712b9f.mp3": {
-  "text": "escobillón",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:49:16.165Z"
  },
  "argentine/b853dd5d81c524c0cb21.mp3": {
   "text": "suprema",
@@ -8531,6 +8555,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:12.288Z"
  },
+ "argentine/bfa0ae4150b900ff9f24.mp3": {
+  "text": "hebilla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/bfa6c6f2fa55df0cea26.mp3": {
   "text": "pedorro",
   "voice": "tomas",
@@ -8549,23 +8579,11 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:08.777Z"
  },
- "argentine/bff4f696ae196234e89f.mp3": {
-  "text": "yeta",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:36.810Z"
- },
  "argentine/bff56066265b114b6fbd.mp3": {
   "text": "plazo fijo",
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:47:31.343Z"
- },
- "argentine/c040232a1b0caf1b780b.mp3": {
-  "text": "villa",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:43.134Z"
  },
  "argentine/c067f4bbe024051ad2b3.mp3": {
   "text": "boludo",
@@ -8639,12 +8657,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:43.134Z"
  },
- "argentine/c1c072ac6fa9bd42dbbc.mp3": {
-  "text": "castellano",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:41:36.918Z"
- },
  "argentine/c1c0e3c305ab6b2f4675.mp3": {
   "text": "el interior",
   "voice": "malena",
@@ -8680,6 +8692,12 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:36.810Z"
+ },
+ "argentine/c263138d3c035b14c374.mp3": {
+  "text": "villa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/c2655413ecc37fdab67a.mp3": {
   "text": "chusma",
@@ -8735,12 +8753,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:41:23.716Z"
  },
- "argentine/c3b7482f9f8fb6a784f3.mp3": {
-  "text": "zapatillas",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:49:16.165Z"
- },
  "argentine/c3c79382488f408f85c2.mp3": {
   "text": "Lo escracharon en las redes por lo que dijo.",
   "voice": "malena",
@@ -8752,12 +8764,6 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:49:49.848Z"
- },
- "argentine/c3d58f66210fc9875b8d.mp3": {
-  "text": "falluto",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:36.810Z"
  },
  "argentine/c3ddb65391bec98db7a2.mp3": {
   "text": "Bajo al chino a comprar pan y leche.",
@@ -8867,12 +8873,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:57.000Z"
  },
- "argentine/c69ee926df47a1ea3e59.mp3": {
-  "text": "tropilla",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:51:36.810Z"
- },
  "argentine/c6d529ee6adc6389f00a.mp3": {
   "text": "Con este calor me pongo una musculosa y listo.",
   "voice": "tomas",
@@ -8932,6 +8932,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:36.810Z"
+ },
+ "argentine/c8629db3488b6f167105.mp3": {
+  "text": "parrilla",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:48:08.777Z"
  },
  "argentine/c8a70ce9db258dbe447f.mp3": {
   "text": "cristinista",
@@ -9016,6 +9022,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:01.203Z"
+ },
+ "argentine/cab3188b65ef5fd275a4.mp3": {
+  "text": "villero",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:53:05.794Z"
  },
  "argentine/cab4ef4e484b01f4a6a2.mp3": {
   "text": "canasto",
@@ -9148,12 +9160,6 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:51:36.810Z"
- },
- "argentine/cd7565012f1e4322cdcd.mp3": {
-  "text": "parrilla",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:08.777Z"
  },
  "argentine/cd9e864b17e941e5289f.mp3": {
   "text": "hacer la gamba",
@@ -9298,6 +9304,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:47.781Z"
+ },
+ "argentine/d09c9fb1dbd4f038c848.mp3": {
+  "text": "funyi",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/d0a27ea02a310f46189b.mp3": {
   "text": "Se armó un bardo bárbaro en la salida del boliche.",
@@ -9815,12 +9827,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:47:31.343Z"
  },
- "argentine/d9cd4b65092c1ff54119.mp3": {
-  "text": "malla",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:43.134Z"
- },
  "argentine/d9eef6594f5e668381de.mp3": {
   "text": "amargo",
   "voice": "malena",
@@ -9941,12 +9947,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:57.000Z"
  },
- "argentine/dc2a61f2b5c6c7c0606f.mp3": {
-  "text": "yuta",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:43.134Z"
- },
  "argentine/dc3d4d9a7648e97c5ff4.mp3": {
   "text": "chapar",
   "voice": "tomas",
@@ -9958,6 +9958,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:50:23.786Z"
+ },
+ "argentine/dc751ac88de12dbbbf4f.mp3": {
+  "text": "chamuyero",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:46:17.217Z"
  },
  "argentine/dca06e3b7f7bba5cf4f2.mp3": {
   "text": "tachero",
@@ -10144,6 +10150,12 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:47:31.344Z"
+ },
+ "argentine/e1630f2375f3b38d936d.mp3": {
+  "text": "gayola",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/e1b3ecb5f624d7740ae1.mp3": {
   "text": "ortiva",
@@ -10463,6 +10475,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:17.217Z"
  },
+ "argentine/e8af6bfcd0a03cfd7428.mp3": {
+  "text": "yerba",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/e8b548adee909618543b.mp3": {
   "text": "gil",
   "voice": "malena",
@@ -10492,12 +10510,6 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:17.217Z"
- },
- "argentine/e90f45f5c38bca6dbf22.mp3": {
-  "text": "payana",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:49:16.165Z"
  },
  "argentine/e93afb6e2b9ec7c4c8fa.mp3": {
   "text": "¡Aguante la Selección!",
@@ -10625,6 +10637,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:49:16.165Z"
  },
+ "argentine/ebbee0f23d7a9abcc599.mp3": {
+  "text": "yeta",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
+ },
  "argentine/ebd727d9066bc9f003ca.mp3": {
   "text": "Vení que te beso la nana y se te pasa.",
   "voice": "malena",
@@ -10660,12 +10678,6 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:41:04.870Z"
- },
- "argentine/ecdb16af9369e310b484.mp3": {
-  "text": "playero",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:48:43.134Z"
  },
  "argentine/ecfec3026bad5584e300.mp3": {
   "text": "valija",
@@ -10721,12 +10733,6 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:43.134Z"
  },
- "argentine/ede05351e9de806273e9.mp3": {
-  "text": "chamuyero",
-  "voice": "tomas",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:46:17.217Z"
- },
  "argentine/edf186ec484f2ee576b0.mp3": {
   "text": "Me chorearon el celular en el subte.",
   "voice": "malena",
@@ -10762,12 +10768,6 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:46:17.217Z"
- },
- "argentine/eeddd8e960fd8d9fba93.mp3": {
-  "text": "bagayo",
-  "voice": "malena",
-  "model": "eleven_v4_turbo",
-  "recorded_at": "2026-10-07T10:53:05.794Z"
  },
  "argentine/ef0c3fc300034fc49e6d.mp3": {
   "text": "tapera",
@@ -10876,6 +10876,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:47:31.344Z"
+ },
+ "argentine/f268d3390f7d2606bcc4.mp3": {
+  "text": "falluto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-11T11:59:28.542Z"
  },
  "argentine/f2b67ce58c739be89c42.mp3": {
   "text": "cero",
@@ -11213,6 +11219,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:48:08.777Z"
  },
+ "argentine/fa4f9e06b0c3e417836a.mp3": {
+  "text": "chamuyar",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:49:49.848Z"
+ },
  "argentine/fa6a06767fe2042516a1.mp3": {
   "text": "Mi abuelo era tano y hacía los ñoquis caseros.",
   "voice": "tomas",
@@ -11296,6 +11308,12 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:41:17.835Z"
+ },
+ "argentine/fc82d89a90fd5fc086f0.mp3": {
+  "text": "pollera",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-07T10:48:43.134Z"
  },
  "argentine/fc84f81a4a9b25169567.mp3": {
   "text": "prenderse",

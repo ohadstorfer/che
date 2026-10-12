@@ -1425,7 +1425,7 @@ openers:
       en: "What's the weather like today where you live? Is it cold or hot?"
       keyterms: [el tiempo, frío, calor, humedad, lluvia, médico, turno, obra social, guardia, manejar, tránsito]
     bebidas:
-      es: "¿Qué te gusta tomar cuando salís? ¿Vino, cerveza, fernet?"
+      es: "¿Qué te gusta tomar cuando salís? ¿Vino, birra, fernet?"
       en: "What do you like to drink when you go out? Wine, beer, fernet?"
       keyterms: [vino, malbec, cerveza, birra, fernet, fernet con coca, vermut, brindar, salud, una copa]
     juegos:

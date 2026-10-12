@@ -147,6 +147,8 @@ export const CARRIER = {
   next_text: ' Vamos a escucharla otra vez.',
 };
 
+const VOICE_SETTINGS = { stability: 0.85, similarity_boost: 0.85, style: 0, use_speaker_boost: true };
+
 /**
  * One clip, as mp3 bytes.
  *
@@ -164,6 +166,7 @@ export const CARRIER = {
  * figure to plan a recording budget from.
  */
 export async function synthesize({ text, voice, key, fetchImpl = fetch }) {
+  if (needsSentence(text)) return cutFromSentence({ text, voice, key, fetchImpl });
   let best = null;
   let cost = 0;
   for (const body of takes(text)) {
@@ -173,7 +176,7 @@ export async function synthesize({ text, voice, key, fetchImpl = fetch }) {
       body: JSON.stringify({
         ...body,
         model_id: voice.model,
-        voice_settings: { stability: 0.85, similarity_boost: 0.85, style: 0, use_speaker_boost: true },
+        voice_settings: VOICE_SETTINGS,
       }),
     });
     if (!res.ok) {
@@ -195,6 +198,13 @@ export async function synthesize({ text, voice, key, fetchImpl = fetch }) {
 export const MIN_BYTES = 11000;
 
 /**
+ * The shortest a clip of this text can be and still be speech. A word cut out
+ * of a sentence has no silence around it, so "ya" is a quarter of a second and
+ * right.
+ */
+export const minBytes = (text) => (needsSentence(text) ? 4000 : MIN_BYTES);
+
+/**
  * The ways to ask for a line, in the order they are tried.
  *
  * `eleven_v4_turbo` answers a few dozen words with a fifth of a second of
@@ -213,6 +223,88 @@ function takes(text) {
     ...(capital === line ? [] : [{ text: capital, ...CARRIER }]),
     { text: capital },
   ];
+}
+
+/**
+ * A word on its own whose `ll` or `y` is the rioplatense "sh".
+ *
+ * Said alone, the model reads these the way most of the Spanish-speaking world
+ * does: "llame" with a soft y, "vaya" like "vaia". Neither the carrier context,
+ * nor the larger model, nor IPA, nor spelling it "shame" changes that. Inside a
+ * spoken sentence the same voice says "shame" every time — so these words are
+ * recorded in one and cut out of it.
+ */
+export const needsSentence = (text) => !/\s/.test(text.trim()) && /ll|y[aeiouáéíóúü]/i.test(text);
+
+/**
+ * The colon is what makes the word cuttable. Without it "dijo ella" is said in
+ * one breath and the clip opens on the end of "dijo"; with it there is a
+ * quarter of a second of silence before the word, and the comma leaves as much
+ * after. Ending the sentence at the word instead leaves more, and loses the sh
+ * one time in ten.
+ */
+const SENTENCE = ['Ella dijo: ', ', y listo.'];
+
+/** What is kept either side of the word's own timings, in seconds: silence, both. */
+const LEAD = 0.08;
+const TAIL = 0.12;
+
+async function cutFromSentence({ text, voice, key, fetchImpl }) {
+  const word = text.trim().replace(/^[¡¿]+|[.!?…,]+$/g, '');
+  const res = await fetchImpl(`${API}/text-to-speech/${voice.provider_id}/with-timestamps?output_format=mp3_44100_128`, {
+    method: 'POST',
+    headers: { 'xi-api-key': key, 'content-type': 'application/json' },
+    body: JSON.stringify({ text: `${SENTENCE[0]}${word}${SENTENCE[1]}`, model_id: voice.model, voice_settings: VOICE_SETTINGS }),
+  });
+  if (!res.ok) {
+    const detail = await res.text().catch(() => '');
+    throw new Error(`elevenlabs ${res.status}: ${detail.slice(0, 300)}`);
+  }
+  const cost = Number(res.headers.get('character-cost')) || 0;
+  const { audio_base64, alignment } = await res.json();
+  const at = alignment.characters.join('').indexOf(word, SENTENCE[0].length - 1);
+  if (at < 0) throw new Error(`"${word}" is not in the timings of its own sentence`);
+  const from = alignment.character_start_times_seconds[at] - LEAD;
+  const to = alignment.character_end_times_seconds[at + word.length - 1] + TAIL;
+  return { mp3: cutMp3(Buffer.from(audio_base64, 'base64'), from, to), cost };
+}
+
+/** A frame of 44.1 kHz MPEG-1 Layer III is 1152 samples. */
+const FRAME_SECONDS = 1152 / 44100;
+const BITRATES = [0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320];
+
+/**
+ * The stretch of an mp3 between two times, without decoding it.
+ *
+ * An mp3 is a row of frames that each stand nearly alone, so the cut is made
+ * between frames and nothing is encoded a second time. "Nearly": a frame may
+ * keep some of its data in the one before it, which is why the cut starts a
+ * frame early — that frame is there to be borrowed from, and a decoder that
+ * cannot use it plays it as silence. The cut is good to a frame, 26 ms, and the
+ * margins around the word are wider than that.
+ */
+export function cutMp3(mp3, from, to) {
+  let at = 0;
+  if (mp3.subarray(0, 3).toString('latin1') === 'ID3')
+    at = 10 + ((mp3[6] & 0x7f) << 21 | (mp3[7] & 0x7f) << 14 | (mp3[8] & 0x7f) << 7 | (mp3[9] & 0x7f));
+  const frames = [];
+  while (at + 4 <= mp3.length) {
+    if (mp3[at] !== 0xff || (mp3[at + 1] & 0xfe) !== 0xfa) {
+      at++;
+      continue;
+    }
+    const kbps = BITRATES[mp3[at + 2] >> 4];
+    if (!kbps || ((mp3[at + 2] >> 2) & 3) !== 0) throw new Error('not a 44.1 kHz mp3');
+    const size = Math.floor((144000 * kbps) / 44100) + ((mp3[at + 2] >> 1) & 1);
+    const frame = mp3.subarray(at, at + size);
+    // The encoder's own note about the file, which is not sound.
+    const note = frames.length === 0 && /Xing|Info/.test(frame.subarray(0, 48).toString('latin1'));
+    if (!note) frames.push(frame);
+    at += size;
+  }
+  const first = Math.max(0, Math.floor(from / FRAME_SECONDS) - 1);
+  const last = Math.min(frames.length, Math.ceil(to / FRAME_SECONDS) + 1);
+  return Buffer.concat(frames.slice(first, last));
 }
 
 /**

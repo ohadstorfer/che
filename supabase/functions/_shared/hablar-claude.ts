@@ -5,7 +5,10 @@
 import Anthropic from "npm:@anthropic-ai/sdk@0.92.0";
 
 export { Anthropic };
-export const MODEL = "claude-sonnet-5";
+export const MODEL = "claude-haiku-4-5";
+// Haiku 4.5 has no effort setting (a request that sends one is refused) and
+// does not think unless asked to; the Sonnets and Opuses take "low" here.
+const LOW_EFFORT = MODEL.includes("haiku") ? {} : { effort: "low" };
 
 export type CallUsage = { input_tokens?: number | null; output_tokens?: number | null; cache_read_input_tokens?: number | null };
 
@@ -22,7 +25,7 @@ export async function structured<T>(
     model: MODEL,
     max_tokens: opts.maxTokens ?? 2000,
     // deno-lint-ignore no-explicit-any
-    ...({ output_config: { effort: "low", format: { type: "json_schema", schema: opts.schema } } } as any),
+    ...({ output_config: { ...LOW_EFFORT, format: { type: "json_schema", schema: opts.schema } } } as any),
     system: cachedSystem(opts.system),
     messages: [{ role: "user", content: opts.input }],
   });
@@ -41,7 +44,7 @@ export async function structured<T>(
 /**
  * `structured`, streamed and without thinking, for the one call that sits in
  * front of the learner: `onText` sees the JSON as it grows, so a field can be
- * shown the moment it is complete. Left unset, thinking on this model runs
+ * shown the moment it is complete. Left unset, thinking on a Sonnet runs
  * adaptive, and the wait before the first character is what the learner feels.
  */
 export async function streamedStructured<T>(

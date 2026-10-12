@@ -182,12 +182,20 @@ service-role client). The Anthropic, ElevenLabs and service-role keys live only 
 2. Reject a body over 1.5 MB (≈ 45 s of audio). The client already drops clips < 0.6 s or silent.
 3. Send the **bytes as they are** to Scribe (no transcoding; both mp4/AAC and webm/Opus are accepted):
    `model_id=scribe_v2, language_code=es, tag_audio_events=false, no_verbatim=false,
-   temperature=0, keyterms=[scenario phrases + voseo forms at this level]`. A turn whose forced-Spanish
+   temperature=0, keyterms=[the words of Pancho's last line, then the scene's key phrases, keyterms
+   and unit words; everyday words left out; ≤ 100]` (2026-10-11; before: scenario phrases + voseo
+   forms). A turn whose forced-Spanish
    transcript has nothing Spanish in it is sent once more without `language_code`; that transcript is
    kept only if it reads as English, and the turn is stored with `meta.lang = 'en'` so Pancho gives the
    Spanish for it and the feedback is a "note" (no `enable_logging=false`: zero-retention mode is Enterprise-only and returns 403).
 4. Empty text, or a known silence hallucination ("gracias por ver…") → `{ text: '' }`, and the client
    says "No te escuché".
+   **Doubt (2026-10-11, `hablar-reply` only):** an app that sends `unclear=ask` has the clip heard
+   twice at once, with and without keyterms. The hinted hearing is the transcript; if `hearingHolds`
+   (`_shared/hablar.ts`) won't vouch for it (the two hearings part ways where the hints may have put
+   a word, or Scribe doubted a long word) the answer is `{ status: 'unclear' }`, nothing is stored,
+   and the client says "I didn't catch that. Say it again?". The next recording goes up with
+   `unclear=take` and is answered as heard. Measured on 98 real clips: about one line in ten is asked again.
 5. **purpose=turn:** insert the user turn as a **draft** (`text`, `audio_path`, `status='draft'`)
    and return the text for the confirm bubble. A re-record replaces the draft for the same `turn_id`.
    **purpose=dilo:** normalize both texts (the `answerKey` from `explain-answer`) and compare with

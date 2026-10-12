@@ -34,13 +34,15 @@ function Line({ text, size, y, stroke, spacing = 0 }: { text: string; size: numb
 
 /**
  * A tab's headline: a small line over a big one, in butter with a thick ink
- * outline, tilted. Read out as one heading.
+ * outline, tilted. Read out as one heading. Each line is as large as fits the
+ * width; `sizeLike` sizes the big line as if it were that longer word, so two
+ * tabs' headlines can share one letter size.
  */
-export function OutlinedHeadline({ small, big, style }: { small: string; big: string; style?: StyleProp<ViewStyle> }) {
+export function OutlinedHeadline({ small, big, sizeLike, style }: { small: string; big: string; sizeLike?: string; style?: StyleProp<ViewStyle> }) {
   const a = small.toUpperCase();
   const b = big.toUpperCase();
   const sizeA = fit(a, 88, 0.56);
-  const sizeB = fit(b, 210, 0.6);
+  const sizeB = fit(sizeLike && sizeLike.length > b.length ? sizeLike : b, 210, 0.6);
   const height = Math.round(sizeA * 1.02 + sizeB * 1.02 + 14);
   return (
     <View

@@ -4,6 +4,7 @@ import { weekDates } from './dates';
 import { readSnapshot, writeSnapshot } from './snapshot';
 import { supabase } from './supabase';
 import type { Streak } from './types';
+import { syncWidget } from './widget';
 
 // ---------------------------------------------------------------------------
 // Her streak row and this week's finished days — one copy for every tab.
@@ -31,6 +32,7 @@ const emit = () => listeners.forEach((l) => l());
 export function publishStreakWeek(userId: string, value: StreakWeek) {
   current = { userId, value, fresh: true };
   writeSnapshot('streak-week', userId, value);
+  syncWidget(value.streak);
   emit();
 }
 

@@ -51,8 +51,10 @@ export function loadSentenceRows(): Promise<SentenceRow[]> {
 
 /** Units per block: ~70 sentences a unit, so a block is one page. */
 export const SENTENCE_BLOCK_UNITS = 8;
-/** Blocks fetched at once. */
-const BLOCKS_IN_FLIGHT = 4;
+/** Blocks fetched at once. A class far along the road asks for dozens the
+ *  first time (unit 270 is 34 blocks), each about a second on the wire: four at
+ *  a time made that first class a twelve-second wait. */
+const BLOCKS_IN_FLIGHT = 12;
 /** Ids per `in` filter, to keep the request URL short. */
 const IDS_PER_QUERY = 150;
 

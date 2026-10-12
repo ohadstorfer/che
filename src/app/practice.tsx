@@ -8,6 +8,7 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ClassDoor, ClassWait } from '@/components/class-door';
+import { PageColorContext } from '@/components/exercise-frame';
 import { Exercise } from '@/components/exercises';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
@@ -693,19 +694,22 @@ export default function Practice() {
         // Fades in once, as the class takes over from its empty frame; the
         // exercises after the first change inside it.
         <Animated.View entering={FadeIn.duration(200)} style={styles.stage}>
-          <AnswerActionsContext.Provider value={kind === 'placement' ? null : actions}>
-            <Exercise
-              key={`${current.form.id}-${index}`}
-              item={current}
-              allForms={allForms}
-              allSentences={allSentences}
-              lexicon={lexicon}
-              ladder={ladder}
-              hints={(kind !== 'lesson' && kind !== 'placement') || !!current.review}
-              onIntroDone={() => onIntroDone(current)}
-              onAnswered={(wrongIds, extra) => void onAnswered(current, wrongIds, extra)}
-            />
-          </AnswerActionsContext.Provider>
+          {/* This page is flat oat, so an exercise too tall for it can fade into it. */}
+          <PageColorContext.Provider value={colors.bg}>
+            <AnswerActionsContext.Provider value={kind === 'placement' ? null : actions}>
+              <Exercise
+                key={`${current.form.id}-${index}`}
+                item={current}
+                allForms={allForms}
+                allSentences={allSentences}
+                lexicon={lexicon}
+                ladder={ladder}
+                hints={(kind !== 'lesson' && kind !== 'placement') || !!current.review}
+                onIntroDone={() => onIntroDone(current)}
+                onAnswered={(wrongIds, extra) => void onAnswered(current, wrongIds, extra)}
+              />
+            </AnswerActionsContext.Provider>
+          </PageColorContext.Provider>
         </Animated.View>
       )}
     </SafeAreaView>

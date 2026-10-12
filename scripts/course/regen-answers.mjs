@@ -10,16 +10,22 @@
 // - Sentences with the very same English accept each other: "Of course I'll
 //   help you" is "Obvio que te ayudo" and "Claro que te ayudo" both.
 //
-//   node --import ./scripts/test/register.mjs scripts/course/regen-answers.mjs [--dry-run]
+//   node --import ./scripts/test/register.mjs scripts/course/regen-answers.mjs [--dry-run] [--word-order]
+//
+// --word-order does one thing instead: to each sentence that can be said in
+// another order ("Hoy no puedo" / "No puedo hoy", "que Fede me llame" / "que me
+// llame Fede" — accept.ts, reorderings) it adds those orders and their
+// variants. Every answer already stored stays, and no other sentence is touched.
 import { queryLinked } from './lib/db.mjs';
 import { q, textArray } from './lib/sql.mjs';
 import { availableForms } from './lib/outline.mjs';
 import { buildIndex, tokenize } from './lib/tokenize.mjs';
 import { loadOutlineFromDb } from './lib/vocabulary.mjs';
-import { generateVariants } from '../../src/lib/course-rules/accept.ts';
+import { generateVariants, reorderings } from '../../src/lib/course-rules/accept.ts';
 import { answerKey } from '../../src/lib/course-rules/check.ts';
 
 const dryRun = process.argv.includes('--dry-run');
+const wordOrder = process.argv.includes('--word-order');
 /** Past this many, alternatives are noise. */
 const MAX_ALTS = 40;
 
@@ -106,9 +112,10 @@ for (const s of sentences) {
   const cross = twins.flatMap((t) => [t.es, ...own.get(t.id)]);
   const taken = new Set([answerKey(s.es)]);
   const next = [];
-  for (const alt of [...own.get(s.id), ...cross]) {
+  if (wordOrder && !reorderings(tokenize(s.es, indexFor(unitById.get(s.unit_id)))).length) continue;
+  for (const alt of wordOrder ? [...(s.es_alt ?? []), ...variantsOf(s.es, s)] : [...own.get(s.id), ...cross]) {
     const k = answerKey(alt);
-    if (taken.has(k) || next.length >= MAX_ALTS) continue;
+    if (taken.has(k) || (next.length >= MAX_ALTS && !(wordOrder && next.length < (s.es_alt ?? []).length))) continue;
     taken.add(k);
     next.push(alt);
   }
@@ -116,14 +123,16 @@ for (const s of sentences) {
   const before = s.es_alt ?? [];
   if (JSON.stringify(before) === JSON.stringify(next)) continue;
   changed++;
-  if (examples.length < 15 && twins.length)
+  if (examples.length < 15 && (twins.length || wordOrder))
     examples.push(`${s.es} | ${s.en}\n    was: ${before.join(' · ') || '—'}\n    now: ${next.join(' · ') || '—'}`);
   updates.push(`update public.sentences set es_alt = ${textArray(next)} where id = ${q(s.id)} and es = ${q(s.es)};`);
 }
 
 console.log(`${sentences.length} sentences · ${changed} change · ${crossed} share their English with another`);
-console.log(`dropped ${stats.dropped} broken authored answers:`, stats.reasons);
-console.log(droppedExamples.join('\n'));
+if (!wordOrder) {
+  console.log(`dropped ${stats.dropped} broken authored answers:`, stats.reasons);
+  console.log(droppedExamples.join('\n'));
+}
 console.log('\n' + examples.join('\n'));
 if (dryRun) {
   console.log('\n--dry-run: nothing written');

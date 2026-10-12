@@ -7,7 +7,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { assignVoices, speakerGender } from '../lib/tts.mjs';
+import { assignVoices, cutMp3, needsSentence, speakerGender } from '../lib/tts.mjs';
 
 // A pocket lexicon in the shape the database hands over: forms by id, each with
 // the `features.gender` the real rows carry.
@@ -100,4 +100,29 @@ test('a line with no voice of its gender is still read', () => {
   const onlyWomen = [{ id: 'malena', gender: 'female' }];
   const got = assignVoices([{ id: 'a', sortKey: 'a', gender: 'm' }], onlyWomen);
   assert.equal(got.get('a').id, 'malena');
+});
+
+// --- words that are cut out of a sentence -----------------------------------
+
+test('a lone word with the rioplatense sh is recorded inside a sentence', () => {
+  for (const w of ['llame', 'vaya', 'yo', 'calle', 'Reyes', '¡Tocayo!', 'funyi']) assert.ok(needsSentence(w), w);
+  // "y", "hoy" and "muy" have no sh, and a sentence already is one.
+  for (const w of ['y', 'hoy', 'muy', 'mate', 'Me llamo Sofi.']) assert.ok(!needsSentence(w), w);
+});
+
+test('an mp3 is cut between frames, a frame early', () => {
+  // 128 kbps at 44.1 kHz: frames of 417 bytes, each numbered in its last byte.
+  const frame = (n) => {
+    const f = Buffer.alloc(417);
+    f.set([0xff, 0xfb, 0x90, 0xc4]);
+    f[416] = n;
+    return f;
+  };
+  const tag = Buffer.from([0x49, 0x44, 0x33, 4, 0, 0, 0, 0, 0, 5, 1, 2, 3, 4, 5]);
+  const mp3 = Buffer.concat([tag, ...Array.from({ length: 40 }, (_, n) => frame(n))]);
+  const seconds = 1152 / 44100;
+  const cut = cutMp3(mp3, 10 * seconds, 20 * seconds);
+  assert.equal(cut.length % 417, 0);
+  assert.equal(cut[416], 9);
+  assert.equal(cut.at(-1), 20);
 });

@@ -30,6 +30,11 @@ import type { Form } from '@/lib/types';
 export type Anchor = { x: number; y: number; width: number; height: number };
 
 const WIDTH = 240;
+/** A phrase gets a wider bubble than a word, so it wraps into two calm lines
+ *  rather than a ragged column beside the play button. */
+const WIDTH_PHRASE = 300;
+/** Past this many characters the Spanish is a phrase, not a word. */
+const PHRASE_FROM = 16;
 /** Keep the bubble off the screen edges even when the word is at one. */
 const MARGIN = 12;
 /** The gap between the word and the bubble, big enough for the tail. */
@@ -138,14 +143,17 @@ export function WordPopover({
 
   const { form: shown, anchor: at, gloss: inContext } = held;
   const centre = at.x + at.width / 2;
-  const left = Math.min(Math.max(centre - WIDTH / 2, MARGIN), Math.max(MARGIN, screen.width - WIDTH - MARGIN));
+  // Never wider than the screen less its margins: on a narrow phone the
+  // Spanish wraps onto another line instead of running off the bubble.
+  const width = Math.min(shown.form.length > PHRASE_FROM ? WIDTH_PHRASE : WIDTH, screen.width - MARGIN * 2);
+  const left = Math.min(Math.max(centre - width / 2, MARGIN), Math.max(MARGIN, screen.width - width - MARGIN));
   // Above the word by default — that is where her eye already is. Below only
   // when there is no room, which is the top line of a tall sentence.
   const below = at.y < MIN_ABOVE;
 
   // The tail tracks the word even when a screen edge pushed the bubble off the
   // word's centre, so it still points at what it explains.
-  const tailLeft = Math.min(Math.max(centre - left, radius.md + TAIL_HALF), WIDTH - radius.md - TAIL_HALF);
+  const tailLeft = Math.min(Math.max(centre - left, radius.md + TAIL_HALF), width - radius.md - TAIL_HALF);
 
   // Anchored by whichever edge touches the word, so the bubble grows away from
   // it however many meanings the word turns out to have.
@@ -166,7 +174,7 @@ export function WordPopover({
       <Pressable style={StyleSheet.absoluteFill} onPress={onClose} accessibilityLabel="Close" />
       <Animated.View
         pointerEvents="box-none"
-        style={[styles.wrap, place, { left, width: WIDTH, transformOrigin: origin }, motion]}>
+        style={[styles.wrap, place, { left, width, transformOrigin: origin }, motion]}>
         <View style={styles.bubble}>
           <View style={styles.head}>
             {shown.audio_path && audio ? audio(shown.audio_path) : null}
@@ -217,7 +225,9 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 8,
   },
-  es: { ...font.display[800], fontSize: 18, color: colors.ink },
+  // Shrinks to what the play button leaves it and wraps there: a row's text
+  // otherwise keeps its one-line width and is cut off at the bubble's edge.
+  es: { ...font.display[800], flexShrink: 1, fontSize: 18, lineHeight: 23, color: colors.ink },
   row: {
     flexDirection: 'row',
     alignItems: 'baseline',

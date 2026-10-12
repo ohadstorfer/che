@@ -20,6 +20,8 @@ import {
   shouldCloseSoon,
   shouldWrapUp,
   exchangeOf,
+  type Hearing,
+  hearingHolds,
   sttKeyterms,
   topicOf,
   wantsLanguageRetry,
@@ -163,7 +165,7 @@ Deno.test("content: every scenario resolves at every level, keyterms are bounded
       assertEquals(t.goals.length >= 2, true);
       assertEquals(Object.keys(s.versions).includes(t.scenario!.band), true);
       const k = sttKeyterms(t, level);
-      assertEquals(k.length <= 50 && k.every((x) => x.length <= 50), true);
+      assertEquals(k.length <= 100 && k.every((x) => x.length <= 50), true);
     }
   }
   assertEquals(topicOf("scenario", "nope", "A1"), null);
@@ -199,4 +201,56 @@ Deno.test("end marker: stripped across deltas, text kept otherwise", () => {
   assertEquals(run(["Chau [FIN]", " extra"]), { out: "Chau ", found: true });
   assertEquals(run(["Hola [", "casa] bien"]), { out: "Hola [casa] bien", found: false });
   assertEquals(run(["Termina en [F"]), { out: "Termina en [F", found: false });
+});
+
+Deno.test("keyterms: what Pancho just asked first, the scene's words after, never an everyday word", () => {
+  const scene = {
+    ...topicOf("scenario", "cafe", "A1")!.scenario!,
+    keyterms: ["hola", "cómo", "te", "llamás", "me llamo", "por favor"],
+    key_phrases: [{ es: "Quiero un café.", en: "I want a coffee.", audio: null }],
+    words: ["medialuna", "Mate", "una", "y", "tostada"],
+  };
+  const k = sttKeyterms(topicOf("unit", "u", "A1", scene), "A1", "¡Dale! Café. ¿Con medialuna o tostada?");
+  assertEquals(k, ["dale", "café", "medialuna", "tostada", "quiero", "llamás", "me llamo", "por favor", "Mate"]);
+  // A free chat has only his line to go by.
+  assertEquals(sttKeyterms(topicOf("free", null, "B1"), "B1", "¿Y qué hacés los fines de semana?"), ["hacés", "fines", "semana"]);
+  assertEquals(sttKeyterms(topicOf("free", null, "B1"), "B1"), []);
+});
+
+const heard = (line: string, lp: number | number[] = -0.05): Hearing => {
+  const words = line.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "").match(/[\p{L}\p{N}]+/gu) ?? [];
+  return { text: line, audioSeconds: 1, words: words.map((w, i) => ({ w, lp: Array.isArray(lp) ? lp[i] : lp })) };
+};
+
+Deno.test("a hinted hearing holds when the plain one agrees, or differs only in small things", () => {
+  const kt = ["mate", "café", "medialuna", "tostada", "chau"];
+  assertEquals(hearingHolds(heard("Mate, por favor"), null, kt), true);
+  assertEquals(hearingHolds(heard("Con medialuna"), heard("Con media luna."), kt), true);
+  assertEquals(hearingHolds(heard("Después el café, por favor"), heard("Después del café, por favor"), kt), true);
+  assertEquals(hearingHolds(heard("No, yo soy Lio"), heard("No, yo soy Leo"), kt), true);
+  assertEquals(hearingHolds(heard("Aquí. Eh, mil pesos"), heard("Aquí. $1.000 pesos"), kt), true);
+  // A thinking sound written one time and not the other.
+  assertEquals(hearingHolds(heard("Sí, medialuna, eh, joya"), heard("Sí, medialuna, joya"), kt), true);
+});
+
+Deno.test("a keyterm holds where the plain hearing sounded alike or was guessing", () => {
+  const kt = ["mate", "café", "medialuna", "tostada", "castellano"];
+  assertEquals(hearingHolds(heard("Mate, por favor"), heard("Bate, por favor"), kt), true);
+  assertEquals(hearingHolds(heard("Sí, entiendo castellano"), heard("Sí, entiendo que se cano", [-0.1, -0.1, -0.9, -1.8, -1.2]), kt), true);
+  assertEquals(hearingHolds(heard("Café, por favor, y una tostada"), heard("Pe por favor, eh, una tostada", [-0.8, -0.1, -0.1, -0.1, -0.1, -0.1]), kt), true);
+});
+
+Deno.test("a hinted hearing does not hold when the hints may have put a word she never said", () => {
+  const kt = ["mate", "café", "medialuna", "tostada", "chau"];
+  // Sure of "sí" without the hints, "café" with them: which was it?
+  assertEquals(hearingHolds(heard("Café, por favor"), heard("Sí, por favor"), kt), false);
+  assertEquals(hearingHolds(heard("Chau"), heard("No"), kt), false);
+  // Nothing heard without the hints, a word or two with them.
+  assertEquals(hearingHolds(heard("Chau"), heard(""), kt), false);
+  assertEquals(hearingHolds(heard("Quiero un café con leche"), heard(""), kt), true);
+  // A long word Scribe itself doubted, whatever the other hearing says.
+  assertEquals(hearingHolds(heard("Soy un gemero", [-0.1, -0.2, -1.2]), heard("Soy un gemero", [-0.1, -0.2, -1.3]), kt), false);
+  assertEquals(hearingHolds(heard("Ponme de alguna, por favor", [-0.3, -0.2, -0.95, -0.1, -0.1]), null, kt), false);
+  // Silence is not doubt: it has its own answer.
+  assertEquals(hearingHolds(heard(""), heard(""), kt), true);
 });

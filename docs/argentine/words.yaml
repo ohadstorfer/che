@@ -1293,7 +1293,7 @@ words:
     en: fancy, rich
     note: 'Snobby, upper-class. Can be a noun: "los chetos de Recoleta".'
     example:
-      es: Es un bar muy cheto, una cerveza sale una fortuna.
+      es: Es un bar muy cheto, una birra sale una fortuna.
       en: It's a really fancy bar, a beer costs a fortune.
     gap: cheto
     theme: gente
@@ -2777,7 +2777,7 @@ words:
     en: cashew
     note: What Argentines call cashews. Spain says "anacardo".
     example:
-      es: Compré castañas de cajú para picar con la cerveza.
+      es: Compré castañas de cajú para picar con la birra.
       en: I bought cashews to eat with the beer.
     gap: castañas de cajú
     theme: comida
@@ -9618,7 +9618,7 @@ words:
     en: in one go
     note: All at once, without stopping.
     example:
-      es: Se tomó la cerveza de un saque.
+      es: Se tomó la birra de un saque.
       en: He drank the beer in one go.
     gap: de un saque
     theme: expresiones

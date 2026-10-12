@@ -25,7 +25,9 @@ import {
 import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
 export const MAX_AUDIO_BYTES = 1.5 * 1024 * 1024; // ≈ 45 s of audio
-export const MAX_STT_PER_CHAT = 80;
+// Speech-to-text requests, not recordings: a line is heard twice (with and
+// without keyterms) the first time she says it, three times when it may be English.
+export const MAX_STT_PER_CHAT = 200;
 const MAX_TYPED_CHARS = 300;
 const MAX_TURNS_PER_CHAT = 80;
 
@@ -48,6 +50,8 @@ export type DraftOutcome =
   | { turn: TurnRow }
   /** Nothing usable was heard. */
   | { empty: true }
+  /** Something was said, but not clearly enough to answer or correct: she is asked to say it again. */
+  | { unclear: true }
   /** Refused; send this as-is. */
   | { error: Response };
 
@@ -80,30 +84,53 @@ export async function spokenDraft(opts: {
   existing: TurnRow | null;
   /** Speech-to-text calls this chat has made so far. */
   sttCount: number;
+  /**
+   * What to do with a clip that can't be made out: "ask" her to say it again
+   * (the app said it can), or "take" the best guess (she was asked already).
+   * Left out by apps from before the question existed: the best guess.
+   */
+  doubt?: "ask" | "take";
 }): Promise<DraftOutcome> {
   const { env, db, session, turnId, audio, existing } = opts;
   if (opts.sttCount >= MAX_STT_PER_CHAT) return { error: json({ error: "too many recordings" }, { status: 429 }) };
   const shut = closed(session) ?? foreign(existing, session);
   if (shut) return { error: shut };
 
+  // What Pancho just said is the best hint of what she says next; read while the clip is.
+  const lastLine = db
+    .from("conversation_turns")
+    .select("text")
+    .eq("conversation_id", session.id)
+    .eq("role", "tomas")
+    .not("idx", "is", null)
+    .order("idx", { ascending: false })
+    .limit(1)
+    .maybeSingle();
   const bytes = await audio.arrayBuffer();
   const mime = audio.type || "application/octet-stream";
   const ext = audioExt(mime);
   const hash = await sha256(bytes);
   if (existing && (existing.status === "final" || existing.meta?.audio_sha === hash)) return { turn: existing };
+  const tomasBefore = ((await lastLine).data as { text: string } | null)?.text ?? null;
 
   const t0 = Date.now();
   let text = "";
   let audioSeconds: number | null = null;
   let language: "es" | "en" = "es";
   let calls = 1;
+  let unclear: boolean | undefined;
   try {
-    ({ text, audioSeconds, language, calls } = await transcribe({
+    ({ text, audioSeconds, language, calls, unclear } = await transcribe({
       key: env.elevenKey,
       audio: new Blob([bytes], { type: mime }),
       filename: `turn.${ext}`,
-      keyterms: sttKeyterms(topicOf(session.kind, session.topic_id, session.level, session.scenario), session.level),
+      keyterms: sttKeyterms(
+        topicOf(session.kind, session.topic_id, session.level, session.scenario),
+        session.level,
+        tomasBefore,
+      ),
       english: true,
+      doubt: opts.doubt ?? "take",
     }));
   } catch (err) {
     console.error(err);
@@ -123,6 +150,10 @@ export async function spokenDraft(opts: {
   if (isSilenceHallucination(text)) {
     background(usage);
     return { empty: true };
+  }
+  if (unclear) {
+    background(usage);
+    return { unclear: true };
   }
 
   const audioPath = `${opts.userId}/${session.id}/${turnId}.${ext}`;

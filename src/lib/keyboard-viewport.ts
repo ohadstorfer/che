@@ -22,6 +22,32 @@ import { Platform } from 'react-native';
 // inside the space the keyboard leaves, and the ScrollViews that were already
 // there start scrolling, because now there is something to scroll.
 // ---------------------------------------------------------------------------
+/** No keyboard is shorter than this, and no resting gap between the two
+ *  viewports is as tall (a home-screen PWA on iOS rests ~60pt shy). */
+const WEB_KEYBOARD_MIN = 150;
+
+/**
+ * Tells `onChange` when the on-screen keyboard comes up or goes down on the
+ * web, where React Native's `Keyboard` module never fires. Read off the same
+ * viewport the fit below works from, so the two always agree. Returns the
+ * unsubscribe; does nothing off the web.
+ */
+export function watchWebKeyboard(onChange: (up: boolean) => void) {
+  if (Platform.OS !== 'web' || typeof window === 'undefined') return () => {};
+  const viewport = window.visualViewport;
+  if (!viewport) return () => {};
+  let last = false;
+  const read = () => {
+    const up = window.innerHeight - viewport.height > WEB_KEYBOARD_MIN;
+    if (up === last) return;
+    last = up;
+    onChange(up);
+  };
+  read();
+  viewport.addEventListener('resize', read);
+  return () => viewport.removeEventListener('resize', read);
+}
+
 export function useKeyboardViewportFit() {
   useEffect(() => {
     if (Platform.OS !== 'web' || typeof window === 'undefined') return;
@@ -35,8 +61,7 @@ export function useKeyboardViewportFit() {
       // come up short of the screen too (a home-screen PWA on iOS reports it
       // ~60pt shy of the bottom edge), and fitting to it then leaves a strip
       // of bare body under the app that cuts the tab bar's shadow flat.
-      // No keyboard is shorter than 150pt, and no resting gap is that tall.
-      const keyboard = window.innerHeight - viewport.height > 150;
+      const keyboard = window.innerHeight - viewport.height > WEB_KEYBOARD_MIN;
       if (!keyboard) {
         // Back to the stylesheet's four pinned edges.
         root.style.bottom = '';

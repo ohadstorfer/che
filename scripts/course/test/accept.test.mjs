@@ -128,3 +128,41 @@ test('an English that leaves out a word the Spanish needs fails the build', () =
     [],
   );
 });
+
+// Reported from the app: three right answers marked wrong (two here; the typed
+// one is in accepts.test.mjs).
+test('an adverb of when may open or close its clause', () => {
+  const last = outline.units.at(-1).slug;
+  const all = (es, en) => build(last, 'x', { es, en }).sentences[0].es_alt;
+  const shopping = all('Hoy no puedo, quiero que Belén haga las compras.', "I can't today, I want Belén to do the shopping.");
+  assert.ok(shopping.includes('No puedo hoy, quiero que Belén haga las compras.'));
+  assert.deepEqual(all('Nos vemos mañana.', 'See you tomorrow.'), ['Mañana nos vemos.']);
+  assert.ok(all('¿Mañana venís?', 'Are you coming tomorrow?').includes('¿Venís mañana?'));
+  // Not out of a set phrase, a longer time, or across a "que".
+  assert.deepEqual(all('Hasta mañana.', 'See you tomorrow.'), []);
+  assert.ok(!all('Hoy a la noche vamos al cine.', 'Tonight we are going to the movies.').some((a) => /hoy\.$/.test(a)));
+  assert.ok(!all('Hoy quiero que Belén cocine.', 'Today I want Belén to cook.').some((a) => /hoy\.$/.test(a)));
+  // No other order comes with it.
+  assert.ok(!shopping.some((a) => /^(Puedo|Hoy puedo|No hoy)/.test(a)));
+});
+
+test('a named subject may follow its verb in a subordinate clause', () => {
+  const last = outline.units.at(-1).slug;
+  const all = (es, en) => build(last, 'x', { es, en }).sentences[0].es_alt;
+  assert.deepEqual(all('Quiero que Fede me llame.', 'I want Fede to call me.'), [
+    'Yo quiero que Fede me llame.',
+    'Quiero que me llame Fede.',
+    'Yo quiero que me llame Fede.',
+  ]);
+  assert.ok(all('Quiero que me llame Fede.', 'I want Fede to call me.').includes('Quiero que Fede me llame.'));
+  assert.ok(all('Cuando Fede llegue, comemos.', 'When Fede arrives, we eat.').includes('Cuando llegue Fede, comemos.'));
+  const shopping = all('Hoy no puedo, quiero que Belén haga las compras.', "I can't today, I want Belén to do the shopping.");
+  assert.ok(shopping.includes('Hoy no puedo, quiero que haga las compras Belén.'));
+  assert.ok(shopping.includes('No puedo hoy, quiero que haga Belén las compras.'));
+  // A name after "es" or "se llama" is not its subject, and stays where it is.
+  assert.ok(!all('Creo que es Fede.', "I think it's Fede.").some((a) => /Fede es/.test(a)));
+  assert.ok(!all('Sé que se llama Fede.', 'I know his name is Fede.').some((a) => /Fede se llama/.test(a)));
+  // Nor a clitic away from its verb, or the name out of its clause.
+  const call = all('Quiero que Fede me llame.', 'I want Fede to call me.');
+  assert.ok(!call.some((a) => /\bme Fede|Fede quiero|llame me/i.test(a)));
+});

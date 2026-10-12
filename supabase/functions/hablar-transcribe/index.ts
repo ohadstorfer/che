@@ -164,6 +164,6 @@ async function typedTurn(env: Env, userId: string, form: FormData, raw: string) 
 
 function draftJson(out: DraftOutcome, turnId: string): Response {
   if ("error" in out) return out.error;
-  if ("empty" in out) return json({ text: "", turn_id: turnId, status: "empty" });
+  if ("empty" in out || "unclear" in out) return json({ text: "", turn_id: turnId, status: "empty" });
   return json({ text: out.turn.text, turn_id: out.turn.id, status: out.turn.status });
 }

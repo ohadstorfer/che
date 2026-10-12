@@ -794,12 +794,12 @@ units:
       - "medio.atenuador"
     register_max: "informal"
     sample:
-      es: "El bar está lleno y la cerveza está caliente."
+      es: "El bar está lleno y la birra está caliente."
       en: "The bar is packed and the beer is warm."
     tips:
       - title: "Estar for how things are"
         body: "*Estar* isn't only for people: things have a state right now too. **El bar está cerrado**,
-          **el bondi está lleno**, **la cerveza está caliente**. The word matches the thing: *el
+          **el bondi está lleno**, **la birra está caliente**. The word matches the thing: *el
           bar* está llen**o**, *la plaza* está llen**a**."
       - title: "¿Listo? Listo."
         body: "**Listo** is *ready* — *¿estás lista?* — and on its own it closes any deal: *Listo, dale.*

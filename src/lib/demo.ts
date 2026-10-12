@@ -455,7 +455,9 @@ function finishLesson(args: {
     return `${t.getFullYear()}-${`${t.getMonth() + 1}`.padStart(2, '0')}-${`${t.getDate()}`.padStart(2, '0')}`;
   })();
 
-  if (streak.last_practice_date !== today) {
+  if (streak.last_practice_date && streak.last_practice_date > today) {
+    // A day already behind her: the streak has moved past it.
+  } else if (streak.last_practice_date !== today) {
     if (streak.last_practice_date === yesterday) {
       streak.current_streak += 1;
       streak.recoverable_streak = 0;
@@ -469,7 +471,7 @@ function finishLesson(args: {
     streak.recoverable_streak = 0;
   }
   streak.longest_streak = Math.max(streak.longest_streak, streak.current_streak);
-  streak.last_practice_date = today;
+  if (!streak.last_practice_date || streak.last_practice_date < today) streak.last_practice_date = today;
 
   return [
     {

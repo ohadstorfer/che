@@ -1,12 +1,14 @@
 import { prefetchPackScores } from './argentine-scores';
 import { arThemes } from './argentine';
 import { themeArt, themeObject } from './argentine-art';
+import { currentIndex, loadCourse, loadProgress } from './course';
 import { cultureSections, prefetchCultureDone } from './culture';
 import { tileArt } from './culture-art';
 import { scenarios } from './hablar';
 import { freeChatArt, scenarioArt, tomasArt } from './hablar-art';
 import { loadHablarHome } from './hablar-home';
 import { preloadImages } from './preload-images';
+import { loadSentenceRowsInReach } from './sentences';
 import { loadLexicon } from './session';
 
 // ---------------------------------------------------------------------------
@@ -41,4 +43,19 @@ export function prefetchTabs(userId: string, limited: boolean) {
   void prefetchPackScores().catch(() => {});
   // The lexicon is what My words is built from; content-cache keeps it after.
   void loadLexicon().catch(() => {});
+  void warmSentences(userId).catch(() => {});
+}
+
+/**
+ * The sentences of every unit up to hers, onto the phone. A class needs all of
+ * them (lesson.ts, loadLearner), and they are kept once fetched — but someone
+ * who starts far along (placed there, a new phone, a publish that touched many
+ * units) would otherwise wait for dozens of blocks on the class's loading
+ * screen. Here they arrive while she is still looking at the road.
+ */
+async function warmSentences(userId: string) {
+  const [course, done] = await Promise.all([loadCourse(), loadProgress(userId)]);
+  const here = course.path[Math.min(currentIndex(course.path, done), course.path.length - 1)]?.unit;
+  if (!here) return;
+  await loadSentenceRowsInReach({ throughOrder: here.course_order, units: course.units });
 }

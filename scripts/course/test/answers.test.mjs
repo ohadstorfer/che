@@ -201,3 +201,34 @@ test('a form accepts its alternative spellings', () => {
   const okay = { ...byForm('también'), alt: ['tambien nomas'] };
   assert.equal(gradeTyped('tambien nomas', okay, forms).correct, true);
 });
+
+// Reported from the app: both orders are Spanish, and both were marked wrong.
+test('a sentence built in its other word order is right; any other order is still wrong', () => {
+  const last = outline.units.at(-1).slug;
+  const { sentences, errors } = buildContent(outline, {
+    [last]: {
+      sentences: {
+        shopping: { es: 'Hoy no puedo, quiero que Belén haga las compras.', en: "I can't today, I want Belén to do the shopping.", target: 'haga' },
+        call: { es: 'Quiero que Fede me llame.', en: 'I want Fede to call me.', target: 'llame' },
+      },
+    },
+  });
+  // The targets belong to an earlier unit; nothing here turns on them.
+  assert.deepEqual(errors.filter((e) => !/target/.test(e)), []);
+  const shopping = sentences.find((s) => s.es.startsWith('Hoy'));
+  const call = sentences.find((s) => s.es.startsWith('Quiero'));
+  const built = (text, s) => sentenceAnswerMatches(text.split(' '), s);
+  assert.ok(built('Hoy no puedo quiero que Belén haga las compras', shopping));
+  assert.ok(built('No puedo hoy quiero que Belén haga las compras', shopping));
+  assert.ok(built('Quiero que Fede me llame', call));
+  assert.ok(built('Quiero que me llame Fede', call));
+  for (const wrong of [
+    'Puedo no hoy quiero que Belén haga las compras',
+    'No hoy puedo quiero que Belén haga las compras',
+    'No puedo quiero hoy que Belén haga las compras',
+    'Hoy no puedo quiero que las compras haga Belén',
+    'Hoy no puedo que quiero Belén haga las compras',
+  ]) assert.ok(!built(wrong, shopping), wrong);
+  for (const wrong of ['Quiero que me Fede llame', 'Quiero Fede que me llame', 'Fede quiero que me llame', 'Que quiero Fede me llame', 'Quiero que llame me Fede'])
+    assert.ok(!built(wrong, call), wrong);
+});

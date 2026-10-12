@@ -36,10 +36,15 @@ function micRefused(): Error {
 }
 
 // Level of the mic as the phones report it, in dBFS. Speech at arm's length
-// sits around -30 to -10; a quiet room around -50 and below.
-const FLOOR_DB = -50;
-const QUIET_DB = -48;
-const toLevel = (db: number) => Math.max(0, Math.min(1, (db - FLOOR_DB) / 42));
+// sits around -30 to -10; a quiet room around -50 and below. The wave starts
+// under that, so a soft voice or a low-gain mic still moves it.
+const FLOOR_DB = -60;
+// Only a mic that picked up nothing at all is turned away here. A soft voice
+// or a low-gain mic reads well under a "normal" level and is still heard fine
+// by the recogniser, which is the one to say whether there was speech in it:
+// at -48 this check kept refusing lines she had said out loud.
+const QUIET_DB = -70;
+const toLevel = (db: number) => Math.max(0, Math.min(1, (db - FLOOR_DB) / 52));
 
 // Everything a recording needs that doesn't depend on the tap, loaded once:
 // the modules, and whether the mic is already allowed. A tap then goes straight
@@ -376,10 +381,17 @@ export async function uploadAudio(
 // The bucket is public (migration 0011), so a clip's address is derived from
 // its path with no request at all — no signing round trip before a download,
 // and the URL is stable, which is what lets it be cached under its own name.
-const publicRoot = supabase.storage.from('audio').getPublicUrl('').data.publicUrl;
+//
+// The recorded course is over a gigabyte, so it is served from its own bucket
+// behind a CDN: EXPO_PUBLIC_AUDIO_URL is that root, with the same folders
+// under it. The openers a function writes at run time (hablar/units/) stay in
+// Supabase, the only storage a function can write to.
+const supabaseRoot = supabase.storage.from('audio').getPublicUrl('').data.publicUrl;
+const courseRoot = process.env.EXPO_PUBLIC_AUDIO_URL?.replace(/\/*$/, '/') || supabaseRoot;
 
 export function getAudioUrl(path: string): string {
-  return publicRoot + path.split('/').map(encodeURIComponent).join('/');
+  const root = path.startsWith('hablar/units/') ? supabaseRoot : courseRoot;
+  return root + path.split('/').map(encodeURIComponent).join('/');
 }
 
 // ---------------------------------------------------------------------------

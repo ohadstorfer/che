@@ -13,6 +13,12 @@
       "bundleIdentifier": "com.posta.app",
       "supportsTablet": false,
       "usesAppleSignIn": true,
+      "appleTeamId": "683UA9HZYT",
+      "entitlements": {
+        "com.apple.security.application-groups": [
+          "group.com.posta.app"
+        ]
+      },
       "config": {
         "usesNonExemptEncryption": false
       }
@@ -66,7 +72,42 @@
           "defaultChannel": "default"
         }
       ],
-      "expo-build-properties"
+      "expo-build-properties",
+      "@bacons/apple-targets",
+      [
+        "react-native-android-widget",
+        {
+          "fonts": [
+            "./targets/widget/assets/Gabarito_900Black.ttf",
+            "./targets/widget/assets/Figtree_700Bold.ttf",
+            "./targets/widget/assets/Figtree_800ExtraBold.ttf"
+          ],
+          "widgets": [
+            {
+              "name": "PostaSmall",
+              "label": "Posta",
+              "description": "Your streak and the Argentine word of the day.",
+              "minWidth": "110dp",
+              "minHeight": "110dp",
+              "targetCellWidth": 2,
+              "targetCellHeight": 2,
+              "resizeMode": "horizontal|vertical",
+              "updatePeriodMillis": 1800000
+            },
+            {
+              "name": "PostaMedium",
+              "label": "Posta, wide",
+              "description": "Your streak and the Argentine word of the day, with an example.",
+              "minWidth": "250dp",
+              "minHeight": "110dp",
+              "targetCellWidth": 4,
+              "targetCellHeight": 2,
+              "resizeMode": "horizontal|vertical",
+              "updatePeriodMillis": 1800000
+            }
+          ]
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

@@ -4,6 +4,8 @@ import type { PropsWithChildren } from 'react';
 // On the web a bundled image is `{ uri, width, height }`.
 const SPLASH_ICON = (require('@/assets/images/splash-icon.png') as { uri: string }).uri;
 
+const AUDIO_ORIGIN = process.env.EXPO_PUBLIC_AUDIO_URL ? new URL(process.env.EXPO_PUBLIC_AUDIO_URL).origin : null;
+
 // Custom HTML shell for web: PWA manifest, iOS home-screen metadata, fonts.
 export default function Root({ children }: PropsWithChildren) {
   return (
@@ -17,6 +19,9 @@ export default function Root({ children }: PropsWithChildren) {
         />
         <title>Posta</title>
         <link rel="manifest" href="/manifest.json" />
+        {/* The first clip of a session otherwise waits on a handshake with the
+            audio host; opening the connection with the page takes that off it. */}
+        {AUDIO_ORIGIN ? <link rel="preconnect" href={AUDIO_ORIGIN} crossOrigin="anonymous" /> : null}
         {/* On iOS up to 18 (and Android), this is the colour of the strip iOS
             reserves above the app under the `default` status bar style,
             re-read whenever it changes — screens claim their own through

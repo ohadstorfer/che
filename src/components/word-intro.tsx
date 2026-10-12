@@ -46,7 +46,7 @@ function Enter({ children, delay = 0, style }: { children: React.ReactNode; dela
   );
 }
 
-function GotIt({ onPress }: { onPress: () => void }) {
+function GotIt({ onPress, label = 'Got it' }: { onPress: () => void; label?: string }) {
   const bottom = useSafeAreaInsets().bottom;
   return (
     <View style={[styles.footer, { paddingBottom: 20 + bottom }]}>
@@ -65,7 +65,7 @@ function GotIt({ onPress }: { onPress: () => void }) {
             : null,
         ]}>
         <LinearGradient colors={gradients.deep} style={[StyleSheet.absoluteFill, { borderRadius: 28 }]} pointerEvents="none" />
-        <Text style={styles.buttonText}>Got it</Text>
+        <Text style={styles.buttonText}>{label}</Text>
       </Pressable>
     </View>
   );
@@ -77,28 +77,27 @@ function Example({ word }: { word: ArWord }) {
   const at = text.toLocaleLowerCase('es').indexOf(word.gap.toLocaleLowerCase('es'));
   return (
     <View style={{ gap: 8 }}>
-      <Text style={styles.exEs}>
-        {at < 0 ? (
-          text
-        ) : (
-          <>
-            {text.slice(0, at)}
-            <Text style={styles.pick}>{text.slice(at, at + word.gap.length)}</Text>
-            {text.slice(at + word.gap.length)}
-          </>
-        )}
-      </Text>
+      {/* The same row as the word above: text on the left, its sound on the right. */}
+      <View style={styles.exRow}>
+        <Text style={styles.exEs}>
+          {at < 0 ? (
+            text
+          ) : (
+            <>
+              {text.slice(0, at)}
+              <Text style={styles.pick}>{text.slice(at, at + word.gap.length)}</Text>
+              {text.slice(at + word.gap.length)}
+            </>
+          )}
+        </Text>
+        {word.example.audio ? <PlayButton path={word.example.audio} autoPlay={false} /> : null}
+      </View>
       <Text style={styles.exEn}>{word.example.en}</Text>
-      {word.example.audio ? (
-        <View style={styles.exPlay}>
-          <PlayButton path={word.example.audio} autoPlay={false} />
-        </View>
-      ) : null}
     </View>
   );
 }
 
-export function WordIntro({ word, onDone }: { word: ArWord; onDone: () => void }) {
+export function WordIntro({ word, onDone, doneLabel }: { word: ArWord; onDone: () => void; doneLabel?: string }) {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -121,7 +120,7 @@ export function WordIntro({ word, onDone }: { word: ArWord; onDone: () => void }
           <Example word={word} />
         </Enter>
       </ScrollView>
-      <GotIt onPress={onDone} />
+      <GotIt onPress={onDone} label={doneLabel} />
     </View>
   );
 }
@@ -147,12 +146,12 @@ const styles = StyleSheet.create({
 
   rule: { height: StyleSheet.hairlineWidth * 2, backgroundColor: colors.border, marginTop: 32, marginBottom: 30 },
 
-  exEs: { ...font.body[600], fontSize: 24, lineHeight: 31, color: INK, textAlign: 'center' },
+  exRow: { flexDirection: 'row', alignItems: 'center', gap: 16 },
+  exEs: { ...font.body[600], flex: 1, fontSize: 24, lineHeight: 31, color: INK },
   pick: {
     textDecorationLine: 'underline',
     textDecorationColor: colors.accent,
     textDecorationStyle: 'solid',
   },
-  exEn: { ...font.body[500], fontSize: 18, lineHeight: 25, color: colors.muted, textAlign: 'center' },
-  exPlay: { marginTop: 12 },
+  exEn: { ...font.body[500], fontSize: 18, lineHeight: 25, color: colors.muted },
 });

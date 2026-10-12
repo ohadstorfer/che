@@ -9,7 +9,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, Text, TextInput, type TextStyle, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   Easing,
@@ -64,6 +64,7 @@ import { SETTLED_DAYS, buildTiles, wordPool } from '@/lib/session';
 import { clay, colors, font, OUTLINE, pastel, PICKED, radius } from '@/lib/theme';
 import { FlagSun } from '@/components/sticker';
 import Svg, { Path as SvgPath } from 'react-native-svg';
+import { type TipBlock, type TipSpan, tipLayout, tipSpans } from '@/lib/tip-layout';
 import type { Form, Sentence, Tip } from '@/lib/types';
 import { FitText } from '@/components/fit-text';
 
@@ -317,13 +318,13 @@ function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
 // ---------------------------------------------------------------------------
 // TipCard — a grammar note between exercises. It asks nothing and grades
 // nothing; it is there so the rule arrives just before the questions that lean
-// on it. Tips are short by design, so a single panel of prose is enough, with
-// the two bits of emphasis the course writes in: **bold** and *italic* — and a
-// table of forms, written as Markdown pipe rows (`| yo | soy |`), for the
-// pattern tips that show a whole paradigm at once.
+// on it. Tips are written as prose with the odd table, and no two are shaped
+// alike, so the layout is read off each one (tip-layout.ts): the first
+// sentence large, Spanish with its English as a pair, a Spanish sentence given
+// as an example on a butter sticker, a paradigm as a real table.
 // ---------------------------------------------------------------------------
 function TipCard({ tip, onDone }: { tip: Tip; onDone: () => void }) {
-  const blocks = tip.body_md.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+  const blocks = useMemo(() => tipLayout(tip.body_md), [tip.body_md]);
   return (
     <Frame
       prompt={`💡 ${tip.title_en}`}
@@ -332,35 +333,78 @@ function TipCard({ tip, onDone }: { tip: Tip; onDone: () => void }) {
       checkLabel="Got it"
       onCheck={onDone}
       onContinue={onDone}>
-      <Panel style={styles.tip}>
-        {blocks.map((block, i) => {
-          const lines = block.split(/\n/).map((l) => l.trim());
-          if (lines.every((l) => l.startsWith('|'))) return <TipTable key={i} rows={lines.map(tableCells)} />;
-          return (
-            <Text key={i} style={styles.tipText}>
-              {inlineMarkdown(block.replace(/\s*\n\s*/g, ' '))}
-            </Text>
-          );
-        })}
-      </Panel>
+      <View style={styles.tip}>
+        {blocks.map((block, i) => (
+          <TipPart key={i} block={block} />
+        ))}
+      </View>
     </Frame>
   );
 }
 
-/** The cells of a pipe row: `| yo | **soy** |` → ['yo', '**soy**']. */
-const tableCells = (line: string) => line.replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
+function TipPart({ block }: { block: TipBlock }) {
+  switch (block.kind) {
+    case 'lead':
+      return <Text style={styles.tipLead}>{tipInline(block.spans)}</Text>;
+    case 'text':
+      return <Text style={styles.tipText}>{tipInline(block.spans)}</Text>;
+    case 'examples':
+      return (
+        <View style={[styles.tipSticker, styles.tipExamples]}>
+          {block.lines.map((line, i) => (
+            <Text key={i} style={[styles.tipRowPad, styles.tipEs, i > 0 && styles.tipRowInk]}>
+              {line}
+            </Text>
+          ))}
+        </View>
+      );
+    case 'pairs':
+      return (
+        <View style={styles.tipSticker}>
+          {block.rows.map((row, i) => (
+            <View key={i} style={[styles.tipRowPad, i > 0 && styles.tipRowInk]}>
+              <Text style={styles.tipEs}>{row.es}</Text>
+              {row.en ? <Text style={styles.tipEn}>{row.en}</Text> : null}
+            </View>
+          ))}
+        </View>
+      );
+    case 'table':
+      return <TipTable head={block.head} rows={block.rows} />;
+  }
+}
 
-/** A small paradigm: the first column names the person, the rest are forms.
- *  Wide tables (five forms across) drop a size so they still fit a phone. */
-function TipTable({ rows }: { rows: string[][] }) {
-  const wide = Math.max(...rows.map((r) => r.length)) > 4;
+const bare = (cell: string) => cell.replace(/\*/g, '');
+
+/**
+ * A paradigm. The letters get as large as the columns allow; a column of
+ * labels (yo, vos…) steps back; and where only part of a word is marked — the
+ * ending that changed — that part is highlighted rather than recoloured, so
+ * the eye lands on the two letters that matter.
+ */
+function TipTable({ head, rows }: { head: string[] | null; rows: string[][] }) {
+  const cols = Math.max(...rows.map((r) => r.length), head?.length ?? 0);
+  const longest = Math.max(...rows.flat().map((c) => bare(c).length));
+  const size = longest > 16 ? 16 : cols <= 2 ? 22 : cols === 3 ? 19 : cols === 4 ? 16 : 13;
+  const text = { fontSize: size, lineHeight: Math.round(size * 1.3) };
+  const labels = rows.every((r) => !r[0]?.includes('**') && bare(r[0] ?? '').length <= 16);
+  const pad = cols > 4 ? 10 : 16;
   return (
-    <View style={styles.tipTable}>
+    <View style={styles.tipSticker}>
+      {head ? (
+        <View style={[styles.tipRow, styles.tipHeadRow, { paddingHorizontal: pad }]}>
+          {Array.from({ length: cols }, (_, c) => (
+            <Text key={c} style={[styles.tipCell, styles.tipHead, cols > 4 && styles.tipHeadTight]}>
+              {bare(head[c] ?? '')}
+            </Text>
+          ))}
+        </View>
+      ) : null}
       {rows.map((cells, r) => (
-        <View key={r} style={[styles.tipRow, r > 0 && styles.tipRowRule]}>
-          {cells.map((cell, c) => (
-            <Text key={c} style={[styles.tipCell, wide && styles.tipCellWide, c === 0 && styles.tipCellHead]}>
-              {inlineMarkdown(cell)}
+        <View key={r} style={[styles.tipRow, (r > 0 || head) && styles.tipRowRule, { paddingHorizontal: pad }]}>
+          {Array.from({ length: cols }, (_, c) => (
+            <Text key={c} style={[styles.tipCell, text, c === 0 && labels && styles.tipCellLabel]}>
+              {tipCell(cells[c] ?? '')}
             </Text>
           ))}
         </View>
@@ -369,12 +413,27 @@ function TipTable({ rows }: { rows: string[][] }) {
   );
 }
 
+/** A cell's marks: a wholly marked form is the irregular one; a marked part is the ending. */
+function tipCell(cell: string): React.ReactNode[] {
+  const spans = tipSpans(cell);
+  const whole = spans.length === 1;
+  return spans.map((span, i) =>
+    span.kind === 'strong' ? (
+      <Text key={i} style={whole ? styles.tipStrong : styles.tipMark}>
+        {span.text}
+      </Text>
+    ) : (
+      span.text
+    ),
+  );
+}
+
 /** `**bold**` and `*italic*` as nested Text; everything else as written. */
-function inlineMarkdown(text: string): React.ReactNode[] {
-  return text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean).map((part, i) => {
-    if (part.startsWith('**')) return <Text key={i} style={styles.tipStrong}>{part.slice(2, -2)}</Text>;
-    if (part.startsWith('*')) return <Text key={i} style={styles.tipEm}>{part.slice(1, -1)}</Text>;
-    return part;
+function tipInline(spans: TipSpan[]): React.ReactNode[] {
+  return spans.map((span, i) => {
+    if (span.kind === 'strong') return <Text key={i} style={styles.tipStrong}>{span.text}</Text>;
+    if (span.kind === 'em') return <Text key={i} style={styles.tipEm}>{span.text}</Text>;
+    return span.text;
   });
 }
 
@@ -626,16 +685,33 @@ function PromptBlock({ form, side }: { form: Form; side: 'es' | 'en' }) {
         {audio ? <PlayButton path={audio} /> : null}
         <View style={styles.bubbleText}>
           {side === 'es' ? (
-            <Text style={phrase ? styles.bubblePhrase : styles.bubbleWord}>{form.form}</Text>
+            <BubbleText style={phrase ? styles.bubblePhrase : styles.bubbleWord}>{form.form}</BubbleText>
           ) : (
             <>
-              <Text style={phrase ? styles.bubblePhraseEn : styles.bubbleEn}>{shownMeaning(form).text}</Text>
+              <BubbleText style={phrase ? styles.bubblePhraseEn : styles.bubbleEn}>
+                {shownMeaning(form).text}
+              </BubbleText>
               {shownMeaning(form).hint ? <Text style={styles.meaningHint}>{shownMeaning(form).hint}</Text> : null}
             </>
           )}
         </View>
       </View>
     </SpeechBubble>
+  );
+}
+
+/**
+ * What the bubble says. A phrase wraps like speech; a single word never does —
+ * the bubble is narrow, beside the capybara and the play button, and a word
+ * that runs out of room breaks wherever the edge happens to fall
+ * ("termotanqu / e"). One word is one line, shrunk until it fits.
+ */
+function BubbleText({ style, children }: { style: TextStyle; children: string }) {
+  if (isPhrase(children)) return <Text style={style}>{children}</Text>;
+  return (
+    <FitText lines={1} minScale={0.5} style={style}>
+      {children}
+    </FitText>
   );
 }
 
@@ -793,7 +869,15 @@ function Listen({
 }
 
 /** The tap-to-listen panel used by the two audio-first exercises. */
-export function AudioPad({ path }: { path: string }) {
+export function AudioPad({
+  path,
+  compact,
+}: {
+  path: string;
+  /** A build has an answer line and a bank of tiles to fit under it, so there
+   *  the pad lies down: the button and its hint side by side, half the height. */
+  compact?: boolean;
+}) {
   const { playing, problem, play } = useClip(path);
   const reduced = useReducedMotion();
 
@@ -805,23 +889,25 @@ export function AudioPad({ path }: { path: string }) {
       onPress={play}
       style={({ pressed }) => [
         styles.audioPad,
+        compact && styles.audioPadCompact,
         { transform: [{ scale: pressed ? 0.99 : 1 }] },
         webPress,
       ]}>
       <View
         style={[
           styles.audioPadCircle,
+          compact && styles.audioPadCircleCompact,
           playing && styles.playButtonOn,
           problem && styles.playButtonDead,
         ]}>
-        {playing && !reduced ? <Pulse inset={7} /> : null}
+        {playing && !reduced ? <Pulse inset={compact ? 6 : 7} /> : null}
         <Ionicons
           name={problem ? 'volume-mute' : playing ? 'volume-high' : 'play'}
-          size={30}
+          size={compact ? 24 : 30}
           color={colors.onPrimary}
         />
       </View>
-      <Text style={[styles.audioPadHint, problem && styles.audioProblem]}>
+      <Text style={[styles.audioPadHint, compact && styles.audioPadHintCompact, problem && styles.audioProblem]}>
         {problem ? AUDIO_PROBLEM[problem] : playing ? 'Playing…' : 'Tap to listen'}
       </Text>
     </Pressable>
@@ -944,6 +1030,13 @@ function TrueFalse({
 // independent from its twin.
 // ---------------------------------------------------------------------------
 const TILE_ROW = 58;
+/** A long sentence deals more tiles than the screen has rows for at full size,
+ *  and a bank that runs under the Check button looks finished when it is not.
+ *  Past this many, every tile is cut a size smaller — on the line and in the
+ *  bank alike, so a word is the same object wherever it sits. Still 44 high:
+ *  the smallest thing a thumb hits without aiming. */
+const DENSE_FROM = 9;
+const TILE_ROW_DENSE = 50;
 
 // A tapped word travels to where it landed instead of teleporting: the tile
 // under her finger is the same object that appears on the line, so she never
@@ -990,7 +1083,7 @@ function offsetRect(node: any): Rect {
   return { x, y, width: node.offsetWidth, height: node.offsetHeight };
 }
 
-function FlyingTile({ flight, onDone }: { flight: Flight; onDone: () => void }) {
+function FlyingTile({ flight, dense, onDone }: { flight: Flight; dense: boolean; onDone: () => void }) {
   const t = useSharedValue(0);
   const dx = flight.to.x - flight.from.x;
   const dy = flight.to.y - flight.from.y;
@@ -1015,6 +1108,7 @@ function FlyingTile({ flight, onDone }: { flight: Flight; onDone: () => void }) 
       pointerEvents="none"
       style={[
         styles.tile,
+        dense && styles.tileDense,
         styles.tileFlying,
         {
           left: flight.from.x,
@@ -1024,7 +1118,7 @@ function FlyingTile({ flight, onDone }: { flight: Flight; onDone: () => void }) 
         },
         fly,
       ]}>
-      <Text style={styles.tileText}>{flight.text}</Text>
+      <Text style={[styles.tileText, dense && styles.tileTextDense]}>{flight.text}</Text>
     </Animated.View>
   );
 }
@@ -1044,6 +1138,10 @@ export function TileBuilder({
   ruled: boolean;
 }) {
   const reduced = useReducedMotion();
+  const dense = tiles.length >= DENSE_FROM;
+  const row = dense ? TILE_ROW_DENSE : TILE_ROW;
+  const tileStyle = dense ? styles.tileDense : null;
+  const textStyle = dense ? styles.tileTextDense : null;
   const rootRef = useRef<View>(null);
   // Bank tiles are keyed `b<tile>`, tiles on the line `t<tile>`, and the line
   // itself `area` — the drop zone a tile has to stay inside to count. Keyed by
@@ -1367,17 +1465,21 @@ export function TileBuilder({
   }));
 
   return (
-    <View ref={rootRef} style={{ gap: 18 }}>
+    <View ref={rootRef} style={{ gap: dense ? 14 : 18 }}>
       <View
         ref={hold('area')}
-        style={[styles.answerArea, ruled ? styles.answerAreaRuled : styles.answerAreaBoxed]}>
+        style={[
+          styles.answerArea,
+          ruled ? styles.answerAreaRuled : styles.answerAreaBoxed,
+          ruled && { minHeight: row * 2 + 4 },
+        ]}>
         {ruled ? (
           <>
-            <View style={[styles.answerRule, { top: TILE_ROW }]} />
-            <View style={[styles.answerRule, { top: TILE_ROW * 2 }]} />
+            <View style={[styles.answerRule, { top: row }]} />
+            <View style={[styles.answerRule, { top: row * 2 }]} />
           </>
         ) : null}
-        <View style={styles.answerTiles}>
+        <View style={[styles.answerTiles, dense && styles.tilesDense]}>
           {used.length === 0 && !ruled ? (
             <Text style={styles.answerPlaceholder}>tap the tiles…</Text>
           ) : null}
@@ -1399,6 +1501,7 @@ export function TileBuilder({
                   }}
                   style={({ pressed }) => [
                     styles.tile,
+                    tileStyle,
                     flying && styles.tileInFlight,
                     // Held off the line: out of the flow but still mounted, so
                     // the drag it is carrying can finish.
@@ -1408,7 +1511,7 @@ export function TileBuilder({
                     dragTouch,
                   ]}>
                   {/* First on the line, a word takes its capital again. */}
-                  <Text style={[styles.tileText, flying && { opacity: 0 }]}>
+                  <Text style={[styles.tileText, textStyle, flying && { opacity: 0 }]}>
                     {tileIndex === firstOnLine
                       ? tiles[tileIndex].charAt(0).toLocaleUpperCase('es') + tiles[tileIndex].slice(1)
                       : tiles[tileIndex]}
@@ -1420,7 +1523,7 @@ export function TileBuilder({
         </View>
       </View>
 
-      <View style={styles.tileBank}>
+      <View style={[styles.tileBank, dense && styles.tilesDense]}>
         {tiles.map((tile, i) => {
           // A word on its way home has already left the line, but its place in
           // the bank stays greyed until it has actually landed there.
@@ -1436,12 +1539,13 @@ export function TileBuilder({
                 }}
                 style={({ pressed }) => [
                   styles.tile,
+                  tileStyle,
                   gone && styles.tileTaken,
                   { transform: [{ scale: pressed && !gone ? 0.94 : 1 }] },
                   webPress,
                   dragTouch,
                 ]}>
-                <Text style={[styles.tileText, gone && { opacity: 0 }]}>{tile}</Text>
+                <Text style={[styles.tileText, textStyle, gone && { opacity: 0 }]}>{tile}</Text>
               </Pressable>
             </GestureDetector>
           );
@@ -1452,6 +1556,7 @@ export function TileBuilder({
         <FlyingTile
           key={flight.id}
           flight={flight}
+          dense={dense}
           onDone={() => setFlight((f) => (f?.id === flight.id ? null : f))}
         />
       ) : null}
@@ -1463,6 +1568,7 @@ export function TileBuilder({
           pointerEvents="none"
           style={[
             styles.tile,
+            tileStyle,
             styles.tileFlying,
             styles.tileHeld,
             {
@@ -1473,7 +1579,7 @@ export function TileBuilder({
             },
             ghost,
           ]}>
-          <Text style={styles.tileText}>{tiles[drag.tile]}</Text>
+          <Text style={[styles.tileText, textStyle]}>{tiles[drag.tile]}</Text>
         </Animated.View>
       ) : null}
     </View>
@@ -1574,7 +1680,7 @@ function ListenBuild({
         })
       }
       onContinue={() => onAnswer(!!verdict?.correct, verdict?.correct ? {} : { answer: joined })}>
-      <AudioPad path={form.audio_path!} />
+      <AudioPad path={form.audio_path!} compact />
       <TileBuilder
         tiles={tiles}
         used={used}
@@ -2293,7 +2399,7 @@ function SentenceBuild({
         })
       }>
       {byEar && sentence.audio_path ? (
-        <AudioPad path={sentence.audio_path} />
+        <AudioPad path={sentence.audio_path} compact />
       ) : side === 'en' ? (
         // Reading a sentence in Spanish, like the rung this replaces: the
         // recording binds the sound to the spelling, and a word she cannot
@@ -2468,22 +2574,37 @@ const styles = StyleSheet.create({
   // Its base reaches just inside the bubble's border, covering it between the two sides.
   // Centred by layout, not by a percentage and a negative margin: on iOS that pair left it low, on the corner's curve.
   speechTail: { position: 'absolute', top: 0, bottom: 0, left: -TAIL_W + OUTLINE, width: TAIL_W, justifyContent: 'center', zIndex: 1 },
-  bubbleWord: { ...font.display[800], fontSize: 32, color: colors.ink, letterSpacing: -0.4 },
-  bubbleEn: { ...font.display[800], fontSize: 26, color: colors.ink, letterSpacing: -0.3 },
+  // Line heights are spelled out because a single word is fitted to one line
+  // (BubbleText), and the fit is judged against the line's height.
+  bubbleWord: { ...font.display[800], fontSize: 32, lineHeight: 38, color: colors.ink, letterSpacing: -0.4 },
+  bubbleEn: { ...font.display[800], fontSize: 26, lineHeight: 32, color: colors.ink, letterSpacing: -0.3 },
   bubblePhrase: { ...font.display[700], fontSize: 22, lineHeight: 30, color: colors.ink },
   bubblePhraseEn: { ...font.display[700], fontSize: 20, lineHeight: 28, color: colors.ink },
 
   // Tips ---------------------------------------------------------------------
-  tip: { gap: 12, paddingVertical: 20, paddingHorizontal: 20 },
-  tipText: { ...font.body[600], fontSize: 17, lineHeight: 26, color: colors.ink },
+  // No panel around the whole tip: the prose sits on the page, and only what
+  // is worth a second look (examples, pairs, a table) is a sticker.
+  tip: { gap: 16 },
+  tipLead: { ...font.body[700], fontSize: 21, lineHeight: 29, color: colors.ink },
+  tipText: { ...font.body[600], fontSize: 18, lineHeight: 27, color: colors.ink },
   tipStrong: { ...font.body[800], color: colors.primaryDark },
   tipEm: { fontStyle: 'italic' },
-  tipTable: { borderRadius: radius.sm, backgroundColor: colors.trough, boxShadow: clay.trough, overflow: 'hidden' },
-  tipRow: { flexDirection: 'row', paddingVertical: 7, paddingHorizontal: 10, columnGap: 8 },
-  tipRowRule: { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: colors.border },
-  tipCell: { ...font.body[600], flex: 1, fontSize: 15, lineHeight: 21, color: colors.ink },
-  tipCellWide: { fontSize: 13, lineHeight: 18 },
-  tipCellHead: { ...font.body[800], color: colors.muted },
+  /** The changed ending inside a form: highlighted, the way she would mark it herself. */
+  tipMark: { ...font.body[800], backgroundColor: pastel.butter },
+  // The outline and shadow are drawn outside the box, so it keeps clear of the next block.
+  tipSticker: { borderRadius: 22, backgroundColor: colors.card, boxShadow: clay.surface, overflow: 'hidden', marginBottom: 4 },
+  tipExamples: { backgroundColor: pastel.butter },
+  tipRowPad: { paddingVertical: 14, paddingHorizontal: 18 },
+  tipRowInk: { borderTopWidth: OUTLINE, borderTopColor: colors.ink },
+  tipEs: { ...font.display[800], fontSize: 23, lineHeight: 28, letterSpacing: -0.3, color: colors.ink },
+  tipEn: { ...font.body[600], fontSize: 16, lineHeight: 22, color: colors.muted, marginTop: 3 },
+  tipRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 10, columnGap: 8 },
+  tipRowRule: { borderTopWidth: 2, borderTopColor: colors.border },
+  tipHeadRow: { backgroundColor: colors.stone, paddingVertical: 9 },
+  tipHead: { ...font.body[800], fontSize: 12.5, lineHeight: 16, letterSpacing: 0.8, textTransform: 'uppercase', color: colors.muted },
+  tipHeadTight: { fontSize: 10.5, letterSpacing: 0.2 },
+  tipCell: { ...font.body[700], flex: 1, color: colors.ink },
+  tipCellLabel: { ...font.body[600], color: colors.muted },
 
   // Sentences ----------------------------------------------------------------
   // Words are laid out one Text each so a single one can be marked or blanked;
@@ -2561,6 +2682,10 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
     boxShadow: clay.button,
   },
+  audioPadCompact: { flexDirection: 'row', justifyContent: 'center', paddingVertical: 14, gap: 14 },
+  audioPadCircleCompact: { width: 56, height: 56, paddingLeft: 3 },
+  // Beside the button a long line (a recording that will not load) has to wrap.
+  audioPadHintCompact: { flexShrink: 1 },
   audioPadHint: { ...font.body[700], fontSize: 15, color: colors.muted },
   audioProblem: { ...font.body[600], fontSize: 13, color: colors.muted, textAlign: 'center' },
 
@@ -2663,6 +2788,10 @@ const styles = StyleSheet.create({
     boxShadow: clay.trough,
   },
   tileText: { ...font.body[800], fontSize: 19, color: colors.ink },
+  // The smaller cut a long sentence is dealt in (DENSE_FROM).
+  tileDense: { minWidth: 46, height: 44, paddingHorizontal: 12, borderRadius: 16 },
+  tileTextDense: { fontSize: 17 },
+  tilesDense: { gap: 6 },
 
   // Matching -----------------------------------------------------------------
   matchGrid: { flexDirection: 'row', gap: 10 },

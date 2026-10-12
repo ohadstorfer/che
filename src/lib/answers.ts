@@ -465,6 +465,24 @@ const ARTICLES: Record<string, string[]> = {
 };
 
 /**
+ * The words a subjunctive is said after. It never stands alone, and its English
+ * says so: the gloss is "(that) we go", the prompt's hint "after “quiero que”".
+ * A learner who types the "que" has written what she was shown — and the same
+ * for the other cues a gloss names: "(don't) lie" is "no mientas", "(so that)
+ * you open" is "para que abras", "when"/"if" are "cuando"/"si".
+ */
+function subjunctiveCues(english: string): string[][] {
+  const en = english.toLowerCase().replace(/[’‘]/g, "'");
+  return [
+    ['que'],
+    ...(/\bdon't\b/.test(en) ? [['no']] : []),
+    ...(/\bso that\b/.test(en) ? [['para', 'que']] : []),
+    ...(/\bwhen\b/.test(en) ? [['cuando']] : []),
+    ...(/\bif\b/.test(en) ? [['si']] : []),
+  ];
+}
+
+/**
  * Word sequences Spanish may put before a form typed on its own, and still be
  * the same answer. English can't ask for a word without them — "I am" has its
  * pronoun, "croissant" wants an article in a sentence — so a learner who types
@@ -474,12 +492,26 @@ const ARTICLES: Record<string, string[]> = {
  *     pronoun is follows the English: "he/she is" takes él or ella, not
  *     usted; "you (pl.) are" takes ustedes. Not an imperative: nobody says
  *     "vos sentate".
+ *   - A subjunctive takes the word it is said after, with or without its
+ *     subject: "que vayamos", "que nosotros vayamos" (`subjunctiveCues`).
  *   - A noun takes the article that agrees with it: "la medialuna", "un café"
  *     once `café` has a gender. Not a feminine noun that starts with a or ha,
  *     which may take `el` (el agua) — its stored answers cover it.
  */
-export function companions(form: Pick<Form, 'form' | 'pos' | 'lemma' | 'features'>, meaning: string): string[][] {
+export function companions(
+  form: Pick<Form, 'form' | 'pos' | 'lemma' | 'features'> & Partial<Pick<Form, 'gloss_en'>>,
+  meaning: string,
+): string[][] {
   const f = form.features ?? {};
+  if (form.pos === 'verb' && f.mood === 'subj' && !f.verb_form) {
+    // With its subject or clitic too, as any verb: "que nosotros vayamos".
+    const bare = f.person && f.number ? companions({ ...form, features: { ...f, mood: undefined } }, meaning) : [];
+    const cues = subjunctiveCues(`${meaning}; ${form.gloss_en ?? ''}`);
+    // "no" sits right before the verb and its clitic: "no te vayas", never "no vos vayas".
+    const clitics = new Set(Object.values(CLITICS));
+    const after = (cue: string[]) => (cue[0] === 'no' ? bare.filter((b) => b.every((w) => clitics.has(w))) : bare);
+    return [...bare, ...cues.flatMap((cue) => [cue, ...after(cue).map((b) => [...cue, ...b])])];
+  }
   if (form.pos === 'verb' && f.person && f.number && f.mood !== 'imp' && !f.verb_form) {
     const key = `${f.person}${f.number}`;
     const english = senseKey(meaning).split(/[^a-z]+/);

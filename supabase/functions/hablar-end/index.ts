@@ -47,7 +47,7 @@ Deno.serve(async (req) => {
   const who = await caller(req, env);
   if (!who) return json({ error: "not authenticated" }, { status: 401 });
 
-  let body: { session_id?: string; reason?: string; paused_seconds?: number };
+  let body: { session_id?: string; reason?: string; paused_seconds?: number; local_date?: string };
   try {
     body = await req.json();
   } catch {
@@ -159,8 +159,14 @@ Deno.serve(async (req) => {
   const streak = (async () => {
     const today = localDate(await profileTimezone(db, who.userId));
     if (today !== session.local_date && !lessonId) return { credited: false, row: null };
+    // The streak counts in the phone's days (every other lesson sends them), so
+    // hers wins when she sends it: a profile with no timezone would put a chat
+    // on yesterday in the middle of today's practice. Only a date a real clock
+    // could show right now is believed.
+    const sent = typeof body.local_date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(body.local_date) ? body.local_date : null;
+    const near = sent !== null && Math.abs(Date.parse(`${sent}T12:00:00Z`) - Date.now()) <= 38 * 3600_000;
     const { data, error } = await who.asUser.rpc("finish_lesson", {
-      p_local_date: today,
+      p_local_date: near ? sent : today,
       ...(lessonId ? { p_lesson_id: lessonId } : {}),
     });
     if (error) {

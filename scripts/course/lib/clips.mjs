@@ -13,7 +13,7 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node
 import { dirname } from 'node:path';
 import { promisify } from 'node:util';
 
-import { apiKey, spoken, synthesize } from './tts.mjs';
+import { apiKey, needsSentence, spoken, synthesize } from './tts.mjs';
 
 const run = promisify(execFile);
 const sha = (s) => createHash('sha256').update(s).digest('hex');
@@ -35,9 +35,15 @@ export const VOICES = [
  */
 export const voiceFor = (text) => VOICES[parseInt(sha(text.trim()).slice(0, 2), 16) % VOICES.length];
 
-/** Where a line's clip lives in the `audio` bucket. */
+/**
+ * Where a line's clip lives in the audio bucket.
+ *
+ * A word that is cut out of a sentence (needsSentence) is named for that too:
+ * it replaced a recording of the same word by the same voice, and the old name
+ * is cached for a year.
+ */
 export const clipPath = (folder, text, voice = voiceFor(text)) =>
-  `${folder}/${sha(`${voice.id}|${voice.model}|${text.trim()}`).slice(0, 20)}.mp3`;
+  `${folder}/${sha(`${voice.id}|${voice.model}|${text.trim()}${needsSentence(text) ? '|cut' : ''}`).slice(0, 20)}.mp3`;
 
 export const loadManifest = (file) => (existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : {});
 
@@ -47,31 +53,57 @@ const sortKeys = (o) => Object.fromEntries(Object.keys(o).sort().map((k) => [k, 
 const AT_ONCE = 3;
 const BATCH = 150;
 
+// The clips live in S3, not in Supabase storage: a course of them is over a
+// gigabyte. The app reads them through EXPO_PUBLIC_AUDIO_URL, same paths.
+const BUCKET = process.env.AUDIO_S3_BUCKET ?? 'posta-audio';
+const aws = (args, opts) =>
+  run('aws', args, { maxBuffer: 256 * 1024 * 1024, env: { AWS_PROFILE: 'posta', ...process.env }, ...opts });
+
 /**
  * Uploads clips sitting under `root` at their bucket paths, a whole top folder
- * per CLI call — a call per clip is four seconds each, which is days over a
+ * per CLI call — a call per clip is seconds each, which is days over a
  * course. Returns the paths the CLI says arrived.
  */
 export async function uploadFolders(root, paths) {
   const arrived = new Set();
   for (const folder of new Set(paths.map((p) => p.split('/')[0]))) {
-    // A second and third go: the CLI's connection drops now and then, and the
-    // clips are already paid for.
+    // A second and third go: a connection drops now and then, and the clips
+    // are already paid for.
     for (let attempt = 1; attempt <= 3; attempt++) try {
-      const { stdout } = await run('npx', [
-        '--yes', 'supabase@2', 'storage', 'cp', '-r', `${root}${folder}`, 'ss:///audio/',
-        '--linked', '--experimental', '--jobs', '8', '--content-type', 'audio/mpeg',
+      const { stdout } = await aws([
+        's3', 'cp', '--recursive', `${root}${folder}`, `s3://${BUCKET}/${folder}`,
+        '--no-progress', '--content-type', 'audio/mpeg',
         // Every clip has its own name, so it never changes once written.
-        '--cache-control', 'max-age=31536000',
-      ], { maxBuffer: 64 * 1024 * 1024 });
-      const report = JSON.parse(stdout.trim().split('\n').findLast((l) => l.startsWith('{')));
-      for (const u of report.uploaded ?? []) arrived.add(u.to.replace(/^\/audio\//, ''));
+        '--cache-control', 'public, max-age=31536000, immutable',
+      ]);
+      for (const m of stdout.matchAll(/ to s3:\/\/[^/]+\/(\S+)/g)) arrived.add(m[1]);
       break;
     } catch (err) {
       console.log(`  upload of ${folder}/ FAILED (try ${attempt} of 3): ${String(err.message).slice(0, 300)}`);
     }
   }
   return arrived;
+}
+
+/** path -> bytes, for every clip in the bucket under these top folders. */
+export async function clipSizes(folders) {
+  const sizes = new Map();
+  for (const folder of folders) {
+    const { stdout } = await aws([
+      's3api', 'list-objects-v2', '--bucket', BUCKET, '--prefix', `${folder}/`,
+      '--query', 'Contents[].[Key,Size]', '--output', 'text',
+    ]);
+    for (const line of stdout.split('\n')) {
+      const [key, size] = line.split('\t');
+      if (size) sizes.set(key, Number(size));
+    }
+  }
+  return sizes;
+}
+
+/** Takes clips out of the bucket. */
+export async function removeClips(paths) {
+  for (const p of paths) await aws(['s3', 'rm', `s3://${BUCKET}/${p}`, '--only-show-errors']);
 }
 
 /**

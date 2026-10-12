@@ -1,11 +1,13 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useEffect, useRef, useState } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import {
   Animated,
   Easing,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -14,7 +16,8 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui';
-import { clay, colors, font, radius } from '@/lib/theme';
+import { watchWebKeyboard } from '@/lib/keyboard-viewport';
+import { clay, colors, font, press, radius } from '@/lib/theme';
 
 /** Set once an exercise has been checked; `answer` is shown when she missed it,
  *  `also` when she got it right another way than the one written, `note` when
@@ -29,6 +32,11 @@ export type Verdict = {
   note?: string;
   about?: string;
 } | null;
+
+/** The colour of the page the frame sits on (six-digit hex), set by a screen
+ *  whose page is one flat colour: an exercise too tall for it then fades into
+ *  the page at the cut edge. Left unset, the cut edge only gets its arrow. */
+export const PageColorContext = createContext<string | undefined>(undefined);
 
 // ---------------------------------------------------------------------------
 // ExerciseFrame — the shape every exercise shares: a question at the top, the
@@ -66,6 +74,7 @@ export function ExerciseFrame({
   /** Graded on the tap itself (yes/no), so there is no button to wait on. */
   instant?: boolean;
 }) {
+  const fade = useContext(PageColorContext);
   // The screen leaves its bottom edge alone so this bar can own it: a panel
   // that stops short of the edge reads as a card that failed to land. The inset
   // goes on the padding instead, which keeps the button clear of the home
@@ -73,7 +82,43 @@ export function ExerciseFrame({
   const inset = useSafeAreaInsets().bottom;
   // With the keyboard up the home indicator is under it, so its inset would
   // only leave a gap between the button and the keys.
-  const keyboard = useKeyboardUp();
+  const scroll = useRef<ScrollView>(null);
+  // Refs as well as state: the layout that follows the keyboard can arrive
+  // before the render that knows about it.
+  const keyboardUp = useRef(false);
+  const viewHeight = useRef(0);
+  const contentHeight = useRef(0);
+  const offset = useRef(0);
+  const [more, setMore] = useState(false);
+
+  // More of the exercise lies under the fold. A few points of slack, so a
+  // rounding error never draws the hint over a screen that fits.
+  const measure = () => {
+    const hidden = contentHeight.current - viewHeight.current - offset.current;
+    setMore(viewHeight.current > 0 && hidden > MORE_SLACK);
+  };
+
+  // A typed answer's field is the last thing in the body, and the keyboard
+  // takes the half of the screen it was sitting in. Focusing it scrolled
+  // nothing, because the screen had not shrunk yet; by the time it has, nobody
+  // asks again — so the field stayed under the fold until the first keystroke
+  // made the system go and look for the caret. The frame asks instead, the
+  // moment it knows how much room the keyboard left.
+  const revealField = () => {
+    if (!keyboardUp.current || contentHeight.current <= viewHeight.current) return;
+    scroll.current?.scrollToEnd({ animated: true });
+  };
+
+  const keyboard = useKeyboardUp((up) => {
+    keyboardUp.current = up;
+  });
+  // If the screen had already resized by the time the keyboard was announced.
+  useEffect(() => {
+    if (!keyboard) return;
+    const frame = requestAnimationFrame(revealField);
+    return () => cancelAnimationFrame(frame);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyboard]);
   const bottom = keyboard ? 0 : inset;
 
   // The keyboard would sit over the answer the moment it lands, so it goes
@@ -87,24 +132,44 @@ export function ExerciseFrame({
     // On iOS the keyboard covers the screen instead of shrinking it, so the
     // docked button would end up underneath it; Android resizes on its own.
     <KeyboardAvoidingView style={styles.frame} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <ScrollView
-        contentContainerStyle={styles.body}
-        keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}>
-        {badge ? (
-          <View style={styles.badge}>
-            <Ionicons name="trending-up" size={13} color={colors.accent} />
-            <Text style={styles.badgeText}>{badge}</Text>
-          </View>
-        ) : null}
-        <Text style={styles.prompt}>{prompt}</Text>
-        {children}
-      </ScrollView>
+      <View style={styles.scroll}>
+        <ScrollView
+          ref={scroll}
+          // With the keyboard up every point counts: the field, what it is
+          // answering and the button all have to share what is left.
+          contentContainerStyle={[styles.body, keyboard && styles.bodyTight]}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          scrollEventThrottle={32}
+          onScroll={(e) => {
+            offset.current = e.nativeEvent.contentOffset.y;
+            measure();
+          }}
+          onLayout={(e) => {
+            viewHeight.current = e.nativeEvent.layout.height;
+            measure();
+            revealField();
+          }}
+          onContentSizeChange={(_, height) => {
+            contentHeight.current = height;
+            measure();
+          }}>
+          {badge ? (
+            <View style={styles.badge}>
+              <Ionicons name="trending-up" size={13} color={colors.accent} />
+              <Text style={styles.badgeText}>{badge}</Text>
+            </View>
+          ) : null}
+          <Text style={styles.prompt}>{prompt}</Text>
+          {children}
+        </ScrollView>
+        <MoreBelow show={more} fade={fade} onPress={() => scroll.current?.scrollToEnd({ animated: true })} />
+      </View>
 
       {verdict ? (
         <FeedbackBar verdict={verdict} onContinue={onContinue} bottom={bottom} actions={actions} />
       ) : instant ? null : (
-        <View style={[styles.footer, { paddingBottom: 20 + bottom }]}>
+        <View style={[styles.footer, { paddingBottom: (keyboard ? 12 : 20) + bottom }]}>
           {note ? (
             <Text style={styles.note}>{note}</Text>
           ) : (
@@ -116,21 +181,70 @@ export function ExerciseFrame({
   );
 }
 
-function useKeyboardUp() {
+/** How much of the body may sit under the fold before it counts as hidden. */
+const MORE_SLACK = 6;
+const FADE_HEIGHT = 44;
+
+function useKeyboardUp(onChange: (up: boolean) => void) {
   const [up, setUp] = useState(false);
+  const changed = useRef(onChange);
+  changed.current = onChange;
   useEffect(() => {
-    if (Platform.OS === 'web') return;
+    const set = (next: boolean) => {
+      changed.current(next);
+      setUp(next);
+    };
+    // Each exercise mounts a frame of its own, and a keyboard that never went
+    // down between two of them announces nothing to the second.
+    if (Platform.OS !== 'web' && Keyboard.isVisible()) set(true);
+    // The web has no `Keyboard` events; the visual viewport says the same thing.
+    if (Platform.OS === 'web') return watchWebKeyboard(set);
     // iOS announces the keyboard before it moves, Android only once it has.
     const show = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
     const hide = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
-    const a = Keyboard.addListener(show, () => setUp(true));
-    const b = Keyboard.addListener(hide, () => setUp(false));
+    const a = Keyboard.addListener(show, () => set(true));
+    const b = Keyboard.addListener(hide, () => set(false));
     return () => {
       a.remove();
       b.remove();
     };
   }, []);
   return up;
+}
+
+// ---------------------------------------------------------------------------
+// MoreBelow — an exercise taller than the screen scrolls, and a row of tiles
+// cut flush by the button below reads as the end of the list, not as a list
+// that goes on. So the cut edge fades into the page, and an arrow sits on it
+// that takes her down. It stays mounted and only fades: it comes and goes as
+// she scrolls, and popping in and out under her thumb would be noise.
+// ---------------------------------------------------------------------------
+function MoreBelow({ show, fade, onPress }: { show: boolean; fade?: string; onPress: () => void }) {
+  const shown = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.timing(shown, {
+      toValue: show ? 1 : 0,
+      duration: show ? 180 : 120,
+      easing: Easing.bezier(0.23, 1, 0.32, 1),
+      useNativeDriver: true,
+    }).start();
+  }, [show, shown]);
+
+  return (
+    <Animated.View style={[styles.more, { opacity: shown }]} pointerEvents={show ? 'box-none' : 'none'}>
+      {fade ? (
+        <LinearGradient colors={[`${fade}00`, fade]} style={StyleSheet.absoluteFill} pointerEvents="none" />
+      ) : null}
+      <Pressable
+        onPress={onPress}
+        hitSlop={10}
+        accessibilityRole="button"
+        accessibilityLabel="Scroll down to see the rest"
+        style={({ pressed }) => [styles.moreButton, { transform: [{ scale: pressed ? press.scale : 1 }] }]}>
+        <Ionicons name="chevron-down" size={16} color={colors.ink} />
+      </Pressable>
+    </Animated.View>
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -228,7 +342,28 @@ function FeedbackBar({
 
 const styles = StyleSheet.create({
   frame: { flex: 1, width: '100%', maxWidth: 560, alignSelf: 'center' },
+  scroll: { flex: 1 },
   body: { padding: 20, paddingBottom: 28, gap: 18, flexGrow: 1 },
+  bodyTight: { paddingBottom: 12 },
+  more: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: FADE_HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  moreButton: {
+    width: 30,
+    height: 30,
+    marginBottom: 4,
+    borderRadius: radius.pill,
+    backgroundColor: colors.card,
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: clay.trough,
+  },
   prompt: { ...font.display[800], fontSize: 24, lineHeight: 29, color: colors.ink, letterSpacing: -0.4 },
   footer: { padding: 20, paddingTop: 12, gap: 10 },
   note: { ...font.body[600], fontSize: 15, color: colors.muted, textAlign: 'center', paddingVertical: 16 },
