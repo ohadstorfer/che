@@ -35,13 +35,13 @@ interface Art {
 }
 
 const POSES = {
-  waving: { source: require('../../assets/images/capybara/capybara-saludando-figure.png'), ratio: 257 / 384 },
+  waving: { source: require('../../assets/images/capybara/widget-saludando.png'), ratio: 257 / 384 },
   sideEye: { source: require('../../assets/images/capybara/capybara-sideeye-figure.png'), ratio: 426 / 520 },
   sad: { source: require('../../assets/images/capybara/capybara-sad-figure.png'), ratio: 321 / 460 },
   begging: { source: require('../../assets/images/capybara/capybara-begging-figure.png'), ratio: 257 / 475 },
   crying: { source: require('../../assets/images/capybara/capybara-crying-figure.png'), ratio: 376 / 463 },
   collapsed: { source: require('../../assets/images/capybara/capybara-collapsed-figure.png'), ratio: 367 / 435 },
-  goal: { source: require('../../assets/images/capybara/capybara-futbol-gol-figure.png'), ratio: 312 / 384 },
+  goal: { source: require('../../assets/images/capybara/widget-futbol-gol.png'), ratio: 312 / 384 },
 } satisfies Record<string, Art>;
 
 /** Each scene twice: whole for the wide widget, its right-hand square for the small one. */
