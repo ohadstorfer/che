@@ -3,7 +3,8 @@
 // rule (App Store 5.1.1(v), Google Play's account-deletion policy) that any app
 // with sign-up lets you delete the account from inside the app.
 //
-// Order matters: the Hablar recordings go first, through the Storage API (a
+// Order matters: the Hablar recordings and feedback screenshots go first,
+// through the Storage API (a
 // cascade on storage.objects would leave the files behind), then the auth
 // user. Every table keyed to her cascades from auth.users, her `entitlements`
 // row included. A store subscription is not ours to cancel: the app tells her
@@ -56,14 +57,17 @@ Deno.serve(async (req) => {
     return json({ error: "staff accounts are deleted from the dashboard" }, { status: 403 });
   }
 
-  try {
-    const files = await listAll(db, "hablar", userId);
-    for (let i = 0; i < files.length; i += 100) {
-      const { error } = await db.storage.from("hablar").remove(files.slice(i, i + 100));
-      if (error) throw error;
+  // Her files: the Hablar recordings and the screenshots she sent with feedback.
+  for (const bucket of ["hablar", "feedback"]) {
+    try {
+      const files = await listAll(db, bucket, userId);
+      for (let i = 0; i < files.length; i += 100) {
+        const { error } = await db.storage.from(bucket).remove(files.slice(i, i + 100));
+        if (error) throw error;
+      }
+    } catch (e) {
+      return json({ error: `${bucket} files: ${(e as Error).message}` }, { status: 500 });
     }
-  } catch (e) {
-    return json({ error: `recordings: ${(e as Error).message}` }, { status: 500 });
   }
 
   const { error } = await db.auth.admin.deleteUser(userId);
