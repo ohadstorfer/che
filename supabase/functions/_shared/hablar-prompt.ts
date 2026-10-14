@@ -139,6 +139,10 @@ export const SIMPLIFY_NOTE =
 export const ENGLISH_NOTE =
   "[Nota para Pancho: esta línea la dijo en inglés. Respondé en español simple: primero cómo se dice en español lo que quiso decir, en una frase corta que pueda repetir, y después seguí con la escena.]";
 
+/** For Pancho: words of her line the recogniser may have misheard. */
+export const unsureNote = (words: string[]) =>
+  `[Nota para Pancho: el reconocimiento de voz no está seguro de ${words.map((w) => `«${w}»`).join(", ")}. Puede que haya dicho otra palabra que suena parecido: si con una así la frase tiene sentido ("Pablo francés" después de "¿Hablás francés?" es "Hablo francés"), respondé a eso, sin mencionarlo. Si no queda claro qué quiso decir, preguntale.]`;
+
 /** The last user message of a reply call: her line, then the notes for this turn. */
 export function turnText(line: string, notes: string[]): string {
   return [line, ...notes.filter(Boolean)].join("\n\n");
@@ -159,6 +163,7 @@ Rules for what counts as an error:
 - A line that is correct but unnatural is not an error. Only when it is clearly unnatural (see "unnatural") does the learner get the natural version, in "better".
 - The transcript can mishear. Never correct spelling or sound-alike words (vos/voz, hay/ahí, a ver/haber, hola/ola), numbers written as digits, or names. If one odd word breaks an otherwise fine sentence, assume it was misheard.
 - If the transcript is garbled or empty of real content, set has_error false, verdict "unclear", corrected equal to the line, spans empty, why_en and better empty.
+- The input may list words the recogniser was unsure of: they may not be what the learner said. Never correct one of them and never base a correction on one. If the line only makes sense with a sound-alike word in place of an unsure one ("Pablo francés" after "¿Hablás francés?" is surely "Hablo francés"), grade the rest of the line as usual; if nothing else is wrong, set has_error false and verdict "unclear", corrected equal to the line, spans empty, why_en and better empty.
 
 Fields:
 - has_error: true only if there is at least one real grammar or vocabulary mistake by the rules above.
@@ -185,6 +190,7 @@ Line: "Sí, también me gusta nadar en la piscina" → has_error false, verdict 
 Line: "Can I pay by card?" → has_error false, verdict "note", severity "none", corrected "Can I pay by card?", spans [], why_en "", unnatural false, better "¿Puedo pagar con tarjeta?", better_en "Can I pay by card?".
 Line: "Eh… sí, este, me gusta mucho" → has_error false, verdict "correct", severity "none", corrected "Eh… sí, este, me gusta mucho", spans [], why_en "", unnatural false, better "", better_en "".
 Line: "Soy de Canadá" → has_error false, verdict "correct", severity "none", corrected "Soy de Canadá", spans [], why_en "", unnatural false, better "", better_en "".
+Pancho: "¿Hablás francés?", line: "Pablo francés", unsure: "Pablo" → has_error false, verdict "unclear", severity "none", corrected "Pablo francés", spans [], why_en "", unnatural false, better "", better_en "".
 Line: "Yo la que mesa por si tan" → has_error false, verdict "unclear", severity "none", corrected "Yo la que mesa por si tan", spans [], why_en "", unnatural false, better "", better_en "".
 
 Keep "corrected" faithful: never rewrite a correct line into a nicer one there. When a line has several errors, fix all of them in "corrected" and list each span, but explain only the most serious one in "why_en".`;
@@ -239,6 +245,8 @@ export function feedbackInput(opts: {
   line: string;
   /** She said the line in English. */
   english?: boolean;
+  /** Words the recogniser may have misheard. */
+  unsure?: string[];
 }): string {
   return [
     `Level: ${opts.level}`,
@@ -246,6 +254,7 @@ export function feedbackInput(opts: {
     opts.tomasBefore ? `Pancho had just said: "${opts.tomasBefore}"` : "",
     `Learner's line: "${opts.line}"`,
     opts.english ? "The learner said this line in English." : "",
+    opts.unsure?.length ? `The recogniser was unsure of: ${opts.unsure.map((w) => `"${w}"`).join(", ")}` : "",
   ]
     .filter(Boolean)
     .join("\n");

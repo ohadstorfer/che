@@ -187,6 +187,8 @@ export interface HablarSummary {
   /** Filled client-side from `end`'s `streak` (first close only; a repeat returns null). */
   streak?: number;
   previous_streak?: number;
+  /** A comeback chat: the frozen run one more round buys back. */
+  recoverable_streak?: number;
   xp?: number;
 }
 
@@ -526,7 +528,7 @@ export async function end(args: {
   reason: 'user' | 'time';
   paused_seconds?: number;
 }): Promise<HablarSummary> {
-  const res = await call<{ summary?: HablarSummary; streak?: { current_streak?: number; previous_streak?: number } | null }>('hablar-end', {
+  const res = await call<{ summary?: HablarSummary; streak?: { current_streak?: number; previous_streak?: number; recoverable_streak?: number } | null }>('hablar-end', {
     session_id: args.session_id,
     reason: args.reason,
     paused_seconds: args.paused_seconds ?? 0,
@@ -537,6 +539,7 @@ export async function end(args: {
   if (res?.streak?.current_streak) {
     summary.streak = res.streak.current_streak;
     summary.previous_streak = res.streak.previous_streak ?? 0;
+    if (res.streak.recoverable_streak) summary.recoverable_streak = res.streak.recoverable_streak;
   }
   summaryCache.set(args.session_id, summary);
   return summary;

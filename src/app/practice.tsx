@@ -1,4 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -11,6 +12,7 @@ import { ClassDoor, ClassWait, SLOW_MS } from '@/components/class-door';
 import { POSE } from '@/components/mascot';
 import { PageColorContext } from '@/components/exercise-frame';
 import { Exercise } from '@/components/exercises';
+import { StreakAlmost } from '@/components/streak-almost';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
 import { LessonEnd } from '@/components/unit-progress';
@@ -49,7 +51,7 @@ import {
   withIntros,
 } from '@/lib/round';
 import { type SessionData, buildFreeSession, buildMistakesSession, buildSession, buildWordsSession } from '@/lib/session';
-import { streakStatus } from '@/lib/streak';
+import { lapsedRun, streakStatus } from '@/lib/streak';
 import { supabase } from '@/lib/supabase';
 import { clay, colors, font, gradients, press, radius } from '@/lib/theme';
 import { useStatusBarColor } from '@/lib/status-bar-color';
@@ -62,6 +64,11 @@ const LOAD_TIMEOUT_MS = 20_000;
 /** How long the gate's answer is waited for. A streak that can't be read is
  *  not a reason to keep her from the class. */
 const GATE_TIMEOUT_MS = 4000;
+
+/** What stops her at the door: a frozen run, a comeback one round in, or a run lost yesterday. */
+type Gate = { kind: 'frozen' | 'oneMore' | 'lapsed'; lost: number };
+const gateTitle = (g: Gate) =>
+  g.kind === 'frozen' ? 'Your mate went cold' : g.kind === 'oneMore' ? 'Almost!' : `Your ${g.lost} day streak ended`;
 /** Once Pancho has come out to say the class is on its way, he stays this
  *  long: a figure that pops in and is gone in the same breath reads as a
  *  glitch, where the empty frame before him reads as nothing at all. */
@@ -161,7 +168,7 @@ export default function Practice() {
   /** A frozen streak stops her at the door: what she lost, and the way back.
    *  `undefined` while the answer is in flight — the doorway holds still until
    *  it lands, so the loading clip can't flash in front of the gate. */
-  const [gate, setGate] = useState<{ lost: number; oneMore: boolean } | null | undefined>(undefined);
+  const [gate, setGate] = useState<Gate | null | undefined>(undefined);
 
   // Depend on the id, not on the profile object: every auth event hands back a
   // freshly-fetched profile, and rebuilding the queue underneath her
@@ -323,7 +330,7 @@ export default function Practice() {
     // Answered once: by the streak, or by the clock if it doesn't come — a
     // gate that turned up after the class had started would land on top of it.
     let answered = false;
-    const answer = (next: { lost: number; oneMore: boolean } | null) => {
+    const answer = (next: Gate | null) => {
       if (answered) return;
       answered = true;
       clearTimeout(giveUp);
@@ -332,10 +339,21 @@ export default function Practice() {
     const giveUp = setTimeout(() => answer(null), GATE_TIMEOUT_MS);
     timed('gate', Promise.resolve(supabase.from('streaks').select('*').eq('user_id', userId).maybeSingle())).then(
       ({ data }) => {
-        const st = streakStatus((data as Streak) ?? null);
-        if (st.kind === 'frozen') answer({ lost: st.lost, oneMore: false });
-        else if (st.kind === 'recovering') answer({ lost: st.lost, oneMore: true });
-        else answer(null);
+        const row = (data as Streak) ?? null;
+        const st = streakStatus(row);
+        if (st.kind === 'frozen') return answer({ kind: 'frozen', lost: st.lost });
+        if (st.kind === 'recovering') return answer({ kind: 'oneMore', lost: st.lost });
+        // A run lost yesterday is said once, on the first round after it.
+        const lapsed = lapsedRun(row);
+        if (lapsed == null) return answer(null);
+        const key = `streak-lapsed-told:${row?.last_practice_date}`;
+        AsyncStorage.getItem(key)
+          .then((told) => {
+            if (told) return answer(null);
+            answer({ kind: 'lapsed', lost: lapsed });
+            AsyncStorage.setItem(key, '1').catch(() => {});
+          })
+          .catch(() => answer(null));
       },
       () => answer(null),
     );
@@ -493,7 +511,7 @@ export default function Practice() {
     const own = new Set(w.session.sections[w.stage]?.units.map((u) => u.id));
     w.results.set(
       w.stage,
-      sectionPassed(round.testAnswers.current.filter((a) => own.has(a.unitId)).map((a) => a.correct)),
+      sectionPassed(round.testAnswers.current.filter((a) => own.has(a.unitId)).map((a) => a.credit)),
     );
     const to = nextStage(w.session.sections.length, w.session.start, w.results);
     if (to == null) return void finish();
@@ -609,24 +627,13 @@ export default function Practice() {
       finished.oneMore != null || (finished.streak > 0 && finished.streak !== finished.previous);
     if (celebrating) {
       if (finished.oneMore != null) {
-        const lost = finished.oneMore;
         return (
-          <SafeAreaView style={styles.safe}>
-            <View style={styles.doneWrap}>
-              <View style={styles.gatePanel}>
-                <Text style={styles.gateTitle}>Almost!</Text>
-                <Image
-                  source={require('@/assets/videos/frozen-pitas.webp')}
-                  style={styles.gateClip}
-                  contentFit="contain"
-                  accessible={false}
-                />
-                <Text style={styles.gateBody}>One more lesson and you get your {lost} day streak back.</Text>
-                <Button title="One more lesson" onPress={() => router.replace('/practice?again=1')} />
-                <Button title="Back home" variant="ghost" onPress={backToCourse} />
-              </View>
-            </View>
-          </SafeAreaView>
+          <StreakAlmost
+            lost={finished.oneMore}
+            moreLabel="One more lesson"
+            onMore={() => router.replace('/practice?again=1')}
+            onHome={backToCourse}
+          />
         );
       }
       return (
@@ -660,18 +667,20 @@ export default function Practice() {
       <SafeAreaView style={styles.safe}>
         <View style={styles.doneWrap}>
           <View style={styles.gatePanel}>
-            <Text style={styles.gateTitle}>{gate.oneMore ? 'Almost!' : 'Your streak is frozen!'}</Text>
+            <Text style={styles.gateTitle}>{gateTitle(gate)}</Text>
             <Image
-              source={require('@/assets/videos/frozen-pitas.webp')}
+              source={require('@/assets/images/mate-frozen-figure.png')}
               style={styles.gateClip}
               contentFit="contain"
               accessible={false}
             />
-            {gate.oneMore ? null : <Text style={styles.gateSub}>Your {gate.lost} day streak is on ice</Text>}
+            {gate.kind === 'frozen' ? <Text style={styles.gateSub}>Your {gate.lost} day streak is on ice</Text> : null}
             <Text style={styles.gateBody}>
-              {gate.oneMore
-                ? `One more lesson and you get your ${gate.lost} day streak back.`
-                : 'To get it back, finish two lessons in a row today.'}
+              {gate.kind === 'oneMore'
+                ? `One more lesson today and your ${gate.lost} day streak is back.`
+                : gate.kind === 'lapsed'
+                  ? `It needed two lessons on the same day. You're on a new streak now: this lesson makes it 2 days.`
+                  : 'Finish two lessons today to get it back.'}
             </Text>
             <Button title="Let's go" onPress={() => setGate(null)} />
           </View>

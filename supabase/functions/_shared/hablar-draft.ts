@@ -26,7 +26,7 @@ import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
 export const MAX_AUDIO_BYTES = 1.5 * 1024 * 1024; // ≈ 45 s of audio
 // Speech-to-text requests, not recordings: a line is heard twice (with and
-// without keyterms) the first time she says it, three times when it may be English.
+// without keyterms), three times when it may be English.
 export const MAX_STT_PER_CHAT = 200;
 const MAX_TYPED_CHARS = 300;
 const MAX_TURNS_PER_CHAT = 80;
@@ -119,8 +119,9 @@ export async function spokenDraft(opts: {
   let language: "es" | "en" = "es";
   let calls = 1;
   let unclear: boolean | undefined;
+  let unsure: string[] | undefined;
   try {
-    ({ text, audioSeconds, language, calls, unclear } = await transcribe({
+    ({ text, audioSeconds, language, calls, unclear, unsure } = await transcribe({
       key: env.elevenKey,
       audio: new Blob([bytes], { type: mime }),
       filename: `turn.${ext}`,
@@ -165,7 +166,13 @@ export async function spokenDraft(opts: {
     text,
     audio_path: audioPath,
     // `lang: "en"`: she said it in English; hablar-reply tells Pancho and the feedback.
-    meta: { audio_sha: hash, audio_seconds: audioSeconds, ...(language === "en" ? { lang: "en" } : {}) },
+    // `unsure`: words the recogniser may have misheard; hablar-reply keeps them out of the correction.
+    meta: {
+      audio_sha: hash,
+      audio_seconds: audioSeconds,
+      ...(language === "en" ? { lang: "en" } : {}),
+      ...(language === "es" && unsure?.length ? { unsure } : {}),
+    },
   }).select("*").single();
   if (error || !data) {
     console.error("draft upsert failed", error?.message);

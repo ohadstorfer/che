@@ -270,7 +270,7 @@ struct PostaWidgetView: View {
   var body: some View {
     PostaFace(entry: entry, wide: family == .systemMedium)
       .widgetURL(link)
-      .containerBackground(for: .widget) { PostaScene(entry: entry) }
+      .containerBackground(for: .widget) { PostaScene(entry: entry, wide: family == .systemMedium) }
   }
 
   /** The word opens its card; everything else opens the app where today's round is one tap away. */
@@ -284,10 +284,11 @@ struct PostaWidgetView: View {
 /** The scene behind everything, held to the bottom right corner where Pancho stands. */
 struct PostaScene: View {
   let entry: PostaEntry
+  let wide: Bool
 
   var body: some View {
     GeometryReader { geo in
-      Image(Look.of(entry.day).scene)
+      Image(Look.of(entry.day).scene + (wide ? "" : "-small"))
         .resizable()
         .aspectRatio(contentMode: .fill)
         .frame(width: geo.size.width, height: geo.size.height, alignment: .bottomTrailing)

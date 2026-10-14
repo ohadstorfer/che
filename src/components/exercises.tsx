@@ -37,6 +37,7 @@ import {
   isPhrase,
   meaningOptions,
   missedForms,
+  nearMiss,
   type Option,
   pickImposter,
   pickOptions,
@@ -255,9 +256,9 @@ function ExerciseBody({
         />
       );
     case 'sentence_build':
-      return <SentenceBuild item={item} allForms={allForms} onAnswered={onAnswered} />;
+      return <SentenceBuild item={item} allForms={allForms} onAnswered={onAnswered} lexicon={lexicon} />;
     case 'sentence_listen':
-      return <SentenceBuild item={item} allForms={allForms} onAnswered={onAnswered} byEar />;
+      return <SentenceBuild item={item} allForms={allForms} onAnswered={onAnswered} lexicon={lexicon} byEar />;
     case 'listen':
       return <Listen item={item} allForms={allForms} onAnswer={single} />;
     case 'true_false':
@@ -2508,7 +2509,8 @@ function SentenceBuild({
   // the tiles, the marking and the blame all narrow together.
   const asked = item.clause != null && side === 'es' ? clauseOf(sentence, item.clause) : sentence;
   const words = useWordPopover(lookupWith(lexicon, allForms));
-  const [{ tiles }] = useState(() => sentenceTiles(asked, allForms, side, byEar));
+  const testing = !!item.placementUnit;
+  const [{ tiles }] = useState(() => sentenceTiles(asked, allForms, side, byEar, testing));
   const [used, setUsed] = useState<number[]>([]);
   const [verdict, setVerdict] = useState<Verdict>(null);
 
@@ -2545,6 +2547,10 @@ function SentenceBuild({
         onAnswered(verdict?.correct ? [] : missedForms(asked, placed, allForms, { side, drilled: item.form.id }), {
           answer: placed.join(' '),
           ...(side === 'en' ? { hinted: words.peeked } : {}),
+          // A test counts one small word left out as half a miss.
+          ...(testing && !verdict?.correct && lexicon && nearMiss(placed, asked, lexicon, { byEar, side })
+            ? { credit: 0.5 }
+            : {}),
         })
       }>
       {byEar && sentence.audio_path ? (
@@ -2980,10 +2986,12 @@ const styles = StyleSheet.create({
     backgroundColor: pastel.butter,
     boxShadow: clay.float,
   },
-  // Where a tile came from: a pressed-in hollow of its shape.
+  // Where a tile came from: a pressed-in hollow of its shape. Sunk below the
+  // page with a faint rim, never white with an ink outline — that reads as a
+  // blank tile still waiting to be used.
   tileTaken: {
-    backgroundColor: colors.trough,
-    boxShadow: clay.trough,
+    backgroundColor: colors.stone,
+    boxShadow: clay.flat,
   },
   tileText: { ...font.body[800], fontSize: 19, color: colors.ink },
   // The smaller cut a long sentence is dealt in (DENSE_FROM).

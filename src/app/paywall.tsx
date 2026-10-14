@@ -249,21 +249,23 @@ export default function Paywall() {
 
       <View style={styles.footer}>
         {error ? <Text style={styles.error}>{error}</Text> : null}
-        <Button
-          title={plan?.trialDays ? `Start my free ${trialWord(plan.trialDays)}` : 'Continue'}
-          onPress={() => void buy('main', plan)}
-          loading={busy === 'buy'}
-          disabled={!plan || !!busy}
-        />
-        {testerUnlock ? (
+        <View style={styles.actions}>
           <Button
-            title="Unlock as a tester"
-            variant="secondary"
-            onPress={() => void unlockTester()}
-            loading={busy === 'tester'}
-            disabled={!!busy}
+            title={plan?.trialDays ? `Start my free ${trialWord(plan.trialDays)}` : 'Continue'}
+            onPress={() => void buy('main', plan)}
+            loading={busy === 'buy'}
+            disabled={!plan || !!busy}
           />
-        ) : null}
+          {testerUnlock ? (
+            <Button
+              title="Unlock as a tester"
+              variant="secondary"
+              onPress={() => void unlockTester()}
+              loading={busy === 'tester'}
+              disabled={!!busy}
+            />
+          ) : null}
+        </View>
         {plan ? (
           <Text style={styles.terms}>
             {plan.trialDays
@@ -302,26 +304,29 @@ export default function Paywall() {
 function PlanCard({ plan, selected, badge, onPress }: { plan: Plan; selected: boolean; badge: boolean; onPress: () => void }) {
   const name = plan.period === 'year' ? 'Yearly' : plan.period === 'week' ? 'Weekly' : 'Monthly';
   const per = `a ${perPeriod(plan)}${plan.trialDays ? ` · ${trialWord(plan.trialDays)} free` : ''}`;
+  // The badge is the card's sibling, drawn after it: as a child, iOS paints the card's outline across it.
   return (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="radio"
-      accessibilityState={{ selected }}
-      style={({ pressed }) => [
-        styles.plan,
-        selected ? styles.planSelected : styles.planFlat,
-        { transform: [{ scale: pressed ? press.scale : 1 }] },
-        webPress,
-      ]}>
+    <View style={styles.planSlot}>
+      <Pressable
+        onPress={onPress}
+        accessibilityRole="radio"
+        accessibilityState={{ selected }}
+        style={({ pressed }) => [
+          styles.plan,
+          selected ? styles.planSelected : styles.planFlat,
+          { transform: [{ scale: pressed ? press.scale : 1 }] },
+          webPress,
+        ]}>
+        <Text style={styles.planName}>{name}</Text>
+        <Text style={styles.planPrice}>{plan.priceString}</Text>
+        <Text style={styles.planPer}>{per}</Text>
+      </Pressable>
       {badge ? (
-        <View style={styles.badge}>
+        <View style={styles.badge} pointerEvents="none">
           <Text style={styles.badgeText}>Best value</Text>
         </View>
       ) : null}
-      <Text style={styles.planName}>{name}</Text>
-      <Text style={styles.planPrice}>{plan.priceString}</Text>
-      <Text style={styles.planPer}>{per}</Text>
-    </Pressable>
+    </View>
   );
 }
 
@@ -423,11 +428,12 @@ const styles = StyleSheet.create({
   sub: { ...type.body, fontSize: 16, lineHeight: 22, color: colors.muted, textAlign: 'center', marginTop: 6 },
 
   plans: { flexDirection: 'row', gap: 14, marginTop: 40 },
+  planSlot: { flex: 1 },
   plan: { flex: 1, alignItems: 'center', gap: 4, paddingTop: 30, paddingBottom: 22, paddingHorizontal: 10, borderRadius: radius.lg },
   planSelected: { backgroundColor: pastel.butter, boxShadow: clay.surface },
   planFlat: { backgroundColor: colors.card, boxShadow: clay.flat },
   badge: { position: 'absolute', top: -14, alignSelf: 'center', backgroundColor: colors.primary, borderRadius: radius.pill, paddingHorizontal: 12, paddingVertical: 5, boxShadow: clay.chip },
-  badgeText: { ...font.body[800], fontSize: 12.5, color: colors.onPrimary },
+  badgeText: { ...font.body[800], fontSize: 12.5, lineHeight: 16, color: colors.onPrimary },
   planName: { ...font.body[800], fontSize: 14, letterSpacing: 1, textTransform: 'uppercase', color: colors.muted },
   planPrice: { ...font.display[900], fontSize: 30, lineHeight: 34, letterSpacing: -0.6, color: colors.ink },
   planPer: { ...font.body[700], fontSize: 14, color: colors.muted, textAlign: 'center' },
@@ -444,6 +450,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   terms: { ...font.body[600], fontSize: 12.5, lineHeight: 17, color: colors.muted, textAlign: 'center' },
+  actions: { gap: 18 },
   legal: { flexDirection: 'row', justifyContent: 'center', gap: 8 },
   legalLink: { ...font.body[600], fontSize: 12.5, color: colors.muted, textDecorationLine: 'underline', paddingVertical: 4 },
   legalDot: { ...font.body[600], fontSize: 12.5, color: colors.faint, paddingVertical: 4 },

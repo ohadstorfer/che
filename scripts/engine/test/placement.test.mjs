@@ -16,8 +16,10 @@ import {
   stageQuestions,
   startStage,
   testOutcome,
+  testedUnits,
 } from '../../../src/lib/placement.ts';
-import { learner, units } from './fixture.mjs';
+import { nearMiss, sentenceTiles } from '../../../src/lib/answers.ts';
+import { formById, forms, learner, units } from './fixture.mjs';
 
 const published = units.filter((u) => u.status === 'published');
 const [u1, u2, u3] = units;
@@ -31,7 +33,7 @@ test('a test samples units: two questions each, four for a single unit, at most 
     const own = items.filter((i) => i.placementUnit === u.id);
     assert.ok(own.length >= 1 && own.length <= 2, `${u.slug}: ${own.length}`);
   }
-  assert.ok(items.every((i) => ['sentence_build', 'sentence_gap', 'typing', 'word_build'].includes(i.mode)));
+  assert.ok(items.every((i) => ['sentence_build', 'sentence_gap', 'sentence_gap_typed', 'typing', 'word_build'].includes(i.mode)));
   const single = planTest(data, [published[0]]);
   assert.ok(single.length >= 3 && single.length <= 4, `single unit asks ${single.length}`);
   // A long span is sampled, not cut off: its questions reach the far end.
@@ -40,6 +42,19 @@ test('a test samples units: two questions each, four for a single unit, at most 
   const asked = new Set(long.map((i) => i.placementUnit));
   assert.ok(asked.size <= 10);
   assert.ok(units.slice(-5).some((u) => asked.has(u.id)), 'the end of the span is sampled');
+});
+
+test('a jump over several sections asks the last one before where she lands', () => {
+  // Three sections of 30 units: a jump from the first to the fourth.
+  const span = Array.from({ length: 90 }, (_, i) => ({ id: `u${i}`, course_order: i + 1, section_id: Math.floor(i / 30) + 1 }));
+  const asked = testedUnits(span);
+  assert.equal(asked.length, 10);
+  assert.ok(asked.every((u) => u.section_id === 3), 'only the section right before the target');
+  // The end of the section she is in, too short on its own, is topped up from just before it.
+  const short = span.slice(55, 63);
+  assert.deepEqual(testedUnits(short).map((u) => u.id), short.map((u) => u.id));
+  const mixed = span.slice(50, 65);
+  assert.deepEqual(testedUnits(mixed), sampleUnits(span.slice(55, 65), 10));
 });
 
 test('sampleUnits spreads evenly, in order, without repeats', () => {
@@ -52,7 +67,7 @@ test('sampleUnits spreads evenly, in order, without repeats', () => {
 });
 
 test('placement lands on the first unit with a miss; a clean run lands past the span', () => {
-  const a = (unitId, correct, formIds = []) => ({ unitId, correct, formIds });
+  const a = (unitId, correct, formIds = []) => ({ unitId, correct, credit: correct ? 1 : 0, formIds });
   let o = testOutcome('placement', [a(u1.id, true, ['x']), a(u1.id, true), a(u2.id, false, ['y']), a(u2.id, true)], [u1, u2, u3], u3.course_order + 1);
   assert.equal(o.throughOrder, u2.course_order);
   assert.ok(o.passed);
@@ -65,7 +80,7 @@ test('placement lands on the first unit with a miss; a clean run lands past the 
 });
 
 test('a jump passes at about 85% and lands on its target', () => {
-  const a = (unitId, correct) => ({ unitId, correct, formIds: [] });
+  const a = (unitId, correct, credit = correct ? 1 : 0) => ({ unitId, correct, credit, formIds: [] });
   let o = testOutcome('jump', [a(u1.id, true), a(u1.id, false), a(u2.id, true), a(u2.id, true)], [u1, u2], u3.course_order);
   assert.deepEqual([o.passed, o.throughOrder], [true, u3.course_order]);
   o = testOutcome('jump', [a(u1.id, false), a(u1.id, true), a(u2.id, false), a(u2.id, true)], [u1, u2], u3.course_order);
@@ -76,6 +91,9 @@ test('a jump passes at about 85% and lands on its target', () => {
   assert.ok(testOutcome('jump', twenty(3), [u1], u2.course_order).passed, '3 misses in 20 pass');
   assert.ok(!testOutcome('jump', twenty(4), [u1], u2.course_order).passed, '4 misses in 20 do not');
   assert.ok(!testOutcome('jump', [], [u1], u2.course_order).passed, 'nothing answered is not a pass');
+  // Two near misses weigh one miss: 2 misses and 2 near misses in 20 pass.
+  const near = Array.from({ length: 20 }, (_, i) => (i < 2 ? a(u1.id, false) : i < 4 ? a(u1.id, false, 0.5) : a(u1.id, true)));
+  assert.ok(testOutcome('jump', near, [u1], u2.course_order).passed);
 });
 
 test('a jump may be short anywhere, or long inside one section', () => {
@@ -111,13 +129,21 @@ function walk(count, start, knows, maxStages) {
 }
 
 test('a section passes with at most one miss and at least two right', () => {
-  assert.ok(sectionPassed([true, true, true]));
-  assert.ok(sectionPassed([true, false, true]));
-  assert.ok(!sectionPassed([true, false, false]));
-  assert.ok(sectionPassed([true, true]));
-  assert.ok(!sectionPassed([true, false]), 'one right of two proves nothing');
-  assert.ok(!sectionPassed([true]));
+  assert.ok(sectionPassed([1, 1, 1]));
+  assert.ok(sectionPassed([1, 0, 1]));
+  assert.ok(!sectionPassed([1, 0, 0]));
+  assert.ok(sectionPassed([1, 1]));
+  assert.ok(!sectionPassed([1, 0]), 'one right of two proves nothing');
+  assert.ok(!sectionPassed([1]));
   assert.ok(!sectionPassed([]));
+});
+
+test('a near miss is half a miss: two of them make one', () => {
+  assert.ok(sectionPassed([1, 0.5, 1]), 'one small word left out no longer fails a section with a miss to spare');
+  assert.ok(sectionPassed([1, 0.5, 0.5]));
+  assert.ok(sectionPassed([1, 1, 0]));
+  assert.ok(!sectionPassed([1, 0.5, 0]), 'a near miss and a miss are more than one');
+  assert.ok(!sectionPassed([0.5, 0.5, 0.5]));
 });
 
 test('the walk goes up while she passes and stops at the first section she fails', () => {
@@ -160,7 +186,7 @@ test('the walk starts at the level she gave', () => {
 test('the outcome lands on the first unit of the section she is placed in', () => {
   const sections = placementSections({ sections: [], units }).map((s) => s.units);
   assert.equal(sections.length, 3);
-  const a = (unitId, correct, formIds = []) => ({ unitId, correct, formIds });
+  const a = (unitId, correct, formIds = []) => ({ unitId, correct, credit: correct ? 1 : 0, formIds });
   const answers = [a(sections[0][0].id, true, ['x']), a(sections[1][0].id, false, ['y'])];
   let o = placementOutcome(sections, new Map([[0, true], [1, false]]), answers);
   assert.deepEqual([o.passed, o.throughOrder], [true, sections[1][0].course_order]);
@@ -184,4 +210,36 @@ test('a section is asked three questions, from units spread across it', () => {
   const bare = stageQuestions({ ...data, sentences: [] }, placementSections({ sections: [], units })[2].units);
   assert.equal(bare.length, 3);
   assert.ok(bare.every((i) => !i.sentence));
+});
+
+test('a word is typed into a sentence when one has it, not from its English alone', () => {
+  const data = learner();
+  const items = planTest(data, published);
+  for (const item of items.filter((i) => i.mode === 'typing')) {
+    const built = new Set(items.filter((i) => i.sentence).map((i) => i.sentence.id));
+    const has = data.sentences.some(
+      (s) => s.unit_id === item.placementUnit && !built.has(s.id) && s.tokens.some((t) => t.form_ids.includes(item.form.id)),
+    );
+    assert.ok(!has, `"${item.form.form}" asked bare though a sentence has it`);
+  }
+  for (const item of items.filter((i) => i.mode === 'sentence_gap_typed')) {
+    assert.ok(item.sentence.tokens.some((t) => t.form_ids.includes(item.form.id)), 'the gap is the word asked');
+  }
+});
+
+test("a test's tiles include the sentence's own words in another form", () => {
+  const sentence = learner().sentences.find((s) => s.es === 'Soy Sofi.');
+  for (let i = 0; i < 30; i++) {
+    const { tiles } = sentenceTiles(sentence, forms, 'es', false, true);
+    assert.ok(tiles.some((t) => ['sos', 'es', 'somos', 'son'].includes(t)), tiles.join(', '));
+  }
+});
+
+test('a near miss is one small word left out — nothing else', () => {
+  const sentence = learner().sentences.find((s) => s.es === 'Un café y una medialuna.');
+  assert.ok(nearMiss(['un', 'café', 'una', 'medialuna'], sentence, formById), 'the "y" left out');
+  assert.ok(!nearMiss(['un', 'y', 'una', 'medialuna'], sentence, formById), 'a content word left out');
+  assert.ok(!nearMiss(['un', 'café', 'y', 'una', 'medialuna', 'chau'], sentence, formById), 'a spare tile added');
+  assert.ok(!nearMiss(['un', 'café', 'y', 'una', 'medialunas'], sentence, formById), 'a word in the wrong form');
+  assert.ok(!nearMiss(['café', 'una', 'medialuna'], sentence, formById), 'two words left out');
 });

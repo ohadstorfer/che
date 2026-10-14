@@ -9,6 +9,7 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { ExerciseFrame, type Verdict } from '@/components/exercise-frame';
 import { Choices, Exercise, PlayButton, SentenceLine, WordBubble, useWordPopover } from '@/components/exercises';
 import { LessonEnd } from '@/components/unit-progress';
+import { StreakAlmost } from '@/components/streak-almost';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
@@ -138,7 +139,11 @@ export default function Story() {
   if (!profile) return null;
 
   if (finished) {
-    const celebrate = finished.current_streak > 0 && finished.current_streak !== finished.previous_streak;
+    // A comeback's first round: what's at stake, not a cheer for day 1.
+    const oneMore = finished.recoverable_streak > 0 ? finished.recoverable_streak : null;
+    const celebrate =
+      oneMore != null || (finished.current_streak > 0 && finished.current_streak !== finished.previous_streak);
+    if (celebrating && oneMore != null) return <StreakAlmost lost={oneMore} onMore={backToCourse} />;
     if (celebrating) {
       return (
         <SafeAreaView style={styles.safe}>

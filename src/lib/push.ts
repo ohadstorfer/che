@@ -65,6 +65,7 @@ function iosNeedsInstall(): boolean {
  * and tapping the prompt again repairs whichever it was.
  */
 export async function getPushStatus(): Promise<PushStatus> {
+  if (enabling) await enabling.catch(() => {});
   if (Platform.OS !== 'web') return getNativePushStatus();
   if (!supported()) return iosNeedsInstall() ? 'needs_install' : 'unsupported';
   if (Notification.permission === 'denied') return 'denied';
@@ -90,7 +91,20 @@ async function vapidPublicKey(): Promise<string> {
   return data.publicKey;
 }
 
-export async function enablePush(userId: string): Promise<PushStatus> {
+/** A subscription on its way. Ready starts one and goes straight to Home,
+ *  whose status check would otherwise ask before the row is there. */
+let enabling: Promise<PushStatus> | null = null;
+
+export function enablePush(userId: string): Promise<PushStatus> {
+  const p = subscribe(userId);
+  enabling = p;
+  void p.catch(() => {}).finally(() => {
+    if (enabling === p) enabling = null;
+  });
+  return p;
+}
+
+async function subscribe(userId: string): Promise<PushStatus> {
   if (Platform.OS !== 'web') return enableNativePush(userId);
   if (!supported()) return iosNeedsInstall() ? 'needs_install' : 'unsupported';
 

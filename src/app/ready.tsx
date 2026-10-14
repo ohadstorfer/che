@@ -198,26 +198,29 @@ function Choice({
   tag: string | null;
   onPress: () => void;
 }) {
+  // The tag is the card's sibling, drawn after it: as a child, iOS paints the card's outline across it.
   return (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="button"
-      accessibilityLabel={`${title}. ${sub}`}
-      style={({ pressed }) => [styles.choice, { backgroundColor: tone, transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
-      <View style={styles.choiceCoin}>
-        <MaterialCommunityIcons name={icon as keyof typeof MaterialCommunityIcons.glyphMap} size={26} color={colors.onPastel} />
-      </View>
-      <View style={{ flex: 1 }}>
-        <Text style={styles.choiceTitle}>{title}</Text>
-        <Text style={styles.choiceSub}>{sub}</Text>
-      </View>
-      <MaterialCommunityIcons name="chevron-right" size={26} color={colors.onPastel} />
+    <View>
+      <Pressable
+        onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel={`${title}. ${sub}`}
+        style={({ pressed }) => [styles.choice, { backgroundColor: tone, transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
+        <View style={styles.choiceCoin}>
+          <MaterialCommunityIcons name={icon as keyof typeof MaterialCommunityIcons.glyphMap} size={26} color={colors.onPastel} />
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.choiceTitle}>{title}</Text>
+          <Text style={styles.choiceSub}>{sub}</Text>
+        </View>
+        <MaterialCommunityIcons name="chevron-right" size={26} color={colors.onPastel} />
+      </Pressable>
       {tag ? (
-        <View style={styles.tag}>
+        <View style={styles.tag} pointerEvents="none">
           <Text style={styles.tagText}>{tag}</Text>
         </View>
       ) : null}
-    </Pressable>
+    </View>
   );
 }
 

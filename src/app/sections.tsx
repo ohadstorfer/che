@@ -27,12 +27,13 @@ import { FitText } from '@/components/fit-text';
 // Home holds a single section; this is where she sees all of them and moves
 // between them. The section she is in is the one card in salvia clay, with what
 // it lets her say in a speech bubble and the only primary button on the screen.
-// Finished sections open straight onto their road; the ones ahead stay locked,
-// each with a jump test that lands her at its start.
+// Finished sections are manteca, the ones ahead pressed-flat locked oat, so the
+// colour alone says where she is. Every one ahead offers the jump test that
+// lands her at its start, however far: the test samples a spread of the units
+// she would skip, so it stays one sitting long.
 // ---------------------------------------------------------------------------
 
-// Finished sections each wear a pastel, in turn; the current one is salvia, so it is left out.
-const TINTS = [pastel.peach, pastel.butter, pastel.lav, pastel.sky];
+const TINT = { done: pastel.butter, locked: path.lockedFace } as const;
 
 const webPress =
   Platform.OS === 'web'
@@ -85,10 +86,19 @@ export default function SectionsScreen() {
   }, [profile]);
 
   const summaries = data ? sectionSummaries(data.course, data.current, data.done) : [];
-  const here = summaries.find((s) => s.state === 'current') ?? null;
 
   const open = (s: SectionSummary) =>
     leave(() => router.dismissTo({ pathname: '/home', params: { section: String(s.section.id) } }));
+
+  // Jumping ahead (learning-engine-spec §7): any section still ahead, unlike
+  // Home's one-sitting hop — the test spreads its questions over the whole span.
+  const hereUnit = data && data.current < data.course.path.length ? data.course.path[data.current].unit : null;
+  const jumpTarget = (s: SectionSummary) => {
+    const start = s.units[0];
+    return s.state === 'locked' && hereUnit && start && start.course_order > hereUnit.course_order ? start : null;
+  };
+  // The test takes the sheet's place, so finishing or leaving it lands on Course.
+  const jump = (unitId: string) => leave(() => router.replace(`/practice?test=jump&to=${unitId}`));
 
   return (
     <Animated.View style={[styles.sheet, sheet]}>
@@ -113,13 +123,17 @@ export default function SectionsScreen() {
           </View>
         ) : (
           <ScrollView contentContainerStyle={styles.list} showsVerticalScrollIndicator={false}>
-            {summaries.map((s) => (
-              <SectionCard
-                key={s.section.id}
-                summary={s}
-                onOpen={() => open(s)}
-              />
-            ))}
+            {summaries.map((s) => {
+              const target = jumpTarget(s);
+              return (
+                <SectionCard
+                  key={s.section.id}
+                  summary={s}
+                  onOpen={() => open(s)}
+                  onJump={target ? () => jump(target.id) : undefined}
+                />
+              );
+            })}
           </ScrollView>
         )}
       </View>
@@ -130,9 +144,11 @@ export default function SectionsScreen() {
 function SectionCard({
   summary,
   onOpen,
+  onJump,
 }: {
   summary: SectionSummary;
   onOpen: () => void;
+  onJump?: () => void;
 }) {
   const { section, units, lessons, done, state } = summary;
   const current = state === 'current';
@@ -141,7 +157,8 @@ function SectionCard({
   const range = first == null ? '' : first === last ? `Unit ${first}` : `Units ${first} to ${last}`;
   const canDo = SECTION_CAN_DO[section.slug];
   const share = lessons ? done / lessons : 0;
-  const tint = current ? undefined : TINTS[(section.ordinal - 1) % TINTS.length];
+  const locked = state === 'locked';
+  const tint = current ? undefined : TINT[state];
 
   const label = `Section ${section.ordinal}, ${section.title_en}. ${range}. ${
     state === 'done' ? 'Finished' : `${done} of ${lessons} lessons done`
@@ -162,13 +179,13 @@ function SectionCard({
 
       <View style={styles.cardHead}>
         <View style={styles.cardTitles}>
-          <Text style={[styles.eyebrow, (current || tint) && styles.onPastelMuted]}>SECTION {section.ordinal}</Text>
-          <FitText style={styles.title} lines={1}>
+          <Text style={[styles.eyebrow, (current || tint) && !locked && styles.onPastelMuted]}>SECTION {section.ordinal}</Text>
+          <FitText style={[styles.title, locked && styles.lockedText]} lines={1}>
             {section.title_en}
           </FitText>
         </View>
-        <View style={[styles.chip, (current || tint) && styles.chipCurrent]}>
-          <Text style={[styles.chipText, (current || tint) && styles.onPastel]}>{range}</Text>
+        <View style={[styles.chip, (current || tint) && styles.chipCurrent, locked && styles.chipLocked]}>
+          <Text style={[styles.chipText, (current || tint) && !locked && styles.onPastel]}>{range}</Text>
         </View>
       </View>
 
@@ -182,12 +199,28 @@ function SectionCard({
           {state === 'done' ? (
             <Ionicons name="checkmark-circle" size={22} color={colors.success} />
           ) : (
-            <Text style={[styles.count, (current || tint) && styles.onPastel]}>
+            <Text style={[styles.count, (current || tint) && !locked && styles.onPastel]}>
               {done}/{lessons}
             </Text>
           )}
         </View>
       )}
+
+      {onJump ? (
+        <View style={styles.lockedRow}>
+          <Ionicons name="lock-closed" size={14} color={path.lockedGlyph} />
+          <Text style={styles.lockedLabel}>Already know this?</Text>
+          <Pressable
+            onPress={onJump}
+            hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel={`Jump to section ${section.ordinal}`}
+            style={({ pressed }) => [styles.jump, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
+            <Text style={styles.jumpText}>Jump here</Text>
+            <Ionicons name="arrow-forward" size={13} color={colors.primaryDark} />
+          </Pressable>
+        </View>
+      ) : null}
 
       {current ? (
         <View style={styles.continue}>
@@ -276,6 +309,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.trough,
   },
   chipCurrent: { backgroundColor: colors.chip, boxShadow: clay.surface },
+  // Locked: the chip lies flat on the oat, like the locked steps on the road.
+  chipLocked: { backgroundColor: colors.card, boxShadow: clay.flat },
   chipText: { ...font.body[800], fontSize: 12, color: colors.muted },
 
   progressRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },

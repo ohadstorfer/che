@@ -29,6 +29,7 @@ type LearnerRow = {
   user_id: string;
   anchor_at: string;
   current_streak: number;
+  recoverable_streak: number;
   last_practice_date: string | null;
   last_completed_at: string | null;
   last_round_started_at: string | null;
@@ -207,6 +208,7 @@ Deno.serve(async (req) => {
       timezone,
       anchorAt: row.anchor_at,
       streak: row.current_streak,
+      banked: row.recoverable_streak ?? 0,
       lastPracticeDate: row.last_practice_date,
       lastCompletedAt: row.last_completed_at,
       lastRoundStartedAt: row.last_round_started_at,

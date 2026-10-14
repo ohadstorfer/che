@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { LessonEnd } from '@/components/unit-progress';
+import { StreakAlmost } from '@/components/streak-almost';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { backToCourse } from '@/lib/nav';
 import type { FinishResult } from '@/lib/round';
@@ -16,8 +17,11 @@ import type { FinishResult } from '@/lib/round';
 export function PathLessonDone({ lessonId, result }: { lessonId: string; result: FinishResult | null }) {
   const [celebrating, setCelebrating] = useState(false);
   const streak = result?.current_streak ?? 0;
-  const celebrate = !!result && streak > 0 && streak !== result.previous_streak;
+  // A comeback's first round: what's at stake, not a cheer for day 1.
+  const oneMore = result && result.recoverable_streak > 0 ? result.recoverable_streak : null;
+  const celebrate = !!result && (oneMore != null || (streak > 0 && streak !== result.previous_streak));
 
+  if (celebrating && oneMore != null) return <StreakAlmost lost={oneMore} onMore={backToCourse} />;
   if (celebrating && result) {
     return (
       <SafeAreaView style={styles.safe}>

@@ -61,6 +61,16 @@ export async function enableNativePush(userId: string): Promise<PushStatus> {
   if (status === 'denied') return 'denied';
   if (status !== 'granted') return 'off';
   const t = await token();
+  // The token may still be on an account that was signed in on this phone
+  // before; the server moves it to this one (claim_push_device).
+  const claimed = await supabase.rpc('claim_push_device', {
+    p_token: t,
+    p_platform: Platform.OS === 'ios' ? 'ios' : 'android',
+    p_timezone: deviceTimezone(),
+    p_reminder_time: REMINDER_TIME,
+  });
+  if (!claimed.error) return 'enabled';
+  // Not deployed yet: the plain upsert, which covers a token no one else has.
   const { error } = await supabase.from('push_subscriptions').upsert(
     {
       user_id: userId,

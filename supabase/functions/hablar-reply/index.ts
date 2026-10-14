@@ -82,6 +82,7 @@ import {
   sessionBlock,
   SIMPLIFY_NOTE,
   turnText,
+  unsureNote,
   WRAP_UP_NOTE,
   type Feedback,
 } from "../_shared/hablar-prompt.ts";
@@ -186,6 +187,9 @@ async function runTurn(opts: {
   const wrapUp = shouldWrapUp(elapsed, exchange, session.level);
   const closeSoon = !wrapUp && shouldCloseSoon(elapsed, exchange, session.level);
   const english = user.meta?.lang === "en";
+  const unsure = Array.isArray(user.meta?.unsure)
+    ? (user.meta.unsure as unknown[]).filter((w): w is string => typeof w === "string")
+    : [];
   const tomasId = crypto.randomUUID();
 
   // History: every sent line before this one, oldest first.
@@ -205,6 +209,7 @@ async function runTurn(opts: {
 
   const notes = [
     english ? ENGLISH_NOTE : "",
+    unsure.length ? unsureNote(unsure) : "",
     session.hint_turns.includes(userIdx) && session.hint_turns.includes(userIdx - 2) ? SIMPLIFY_NOTE : "",
     wrapUp ? WRAP_UP_NOTE : "",
     closeSoon ? CLOSE_SOON_NOTE : "",
@@ -241,7 +246,7 @@ async function runTurn(opts: {
   const feedbackDone = streamedStructured<Feedback>(client, {
     system: FEEDBACK_SYSTEM,
     schema: FEEDBACK_SCHEMA as unknown as Record<string, unknown>,
-    input: feedbackInput({ level: session.level, tomasBefore, line: user.text, english }),
+    input: feedbackInput({ level: session.level, tomasBefore, line: user.text, english, unsure }),
     onText: (soFar) => {
       if (verdictSent) return;
       const verdict = earlyVerdict(soFar, user.text);

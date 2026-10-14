@@ -27,6 +27,7 @@ import Animated, {
   withRepeat,
   withSequence,
   withTiming,
+  Keyframe,
   ZoomIn,
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -298,7 +299,7 @@ function Question({
       <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
         <Says line={line} small={answered && line.length > 36} reduced={reduced} />
         {hint ? <Text style={styles.hint}>{hint}</Text> : null}
-        <View style={{ gap: 10 }}>{children}</View>
+        <View style={{ gap: 18 }}>{children}</View>
       </ScrollView>
       <View style={styles.footer}>
         <Button title="Continue" onPress={onNext} disabled={!answered} />
@@ -585,7 +586,7 @@ function StruggleStep({
       <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
         <Says line={last ? last.react : q.en} small={!!last} reduced={reduced} />
         <Text style={styles.hint}>Pick all that apply</Text>
-        <View style={{ gap: 10 }} accessibilityLabel={q.en}>
+        <View style={{ gap: 18 }} accessibilityLabel={q.en}>
           {q.options.map((o, i) => (
             <Animated.View key={o.value} entering={rise(i + 1, reduced)}>
               <Choice label={o.label} tone={o.tone} art={o.art} multi selected={picked.includes(o.value)} onPress={() => toggle(o.value)} />
@@ -641,6 +642,22 @@ const DAYS = ['Mon', 'Tue', 'Wed'];
 /** When each word gives way to the next, in ms: a day apart, as it would be. */
 const WORD_CUTS = [2300, 3500];
 
+// The screen plays out as the canvas does: the reminder lands, the word of the
+// day a beat later, and once the words have turned over, the phone's question.
+const NOTE_IN = new Keyframe({
+  0: { opacity: 0, transform: [{ translateY: -14 }, { scale: 0.96 }] },
+  100: { opacity: 1, transform: [{ translateY: 0 }, { scale: 1 }], easing: EASE_OUT },
+});
+const ASK_IN = new Keyframe({
+  0: { opacity: 0, transform: [{ translateY: 10 }] },
+  100: { opacity: 1, transform: [{ translateY: 0 }], easing: EASE_OUT },
+});
+/** A notification arriving: down from the top, as the phone shows one. */
+const noteIn = (ms: number, reduced: boolean) => (reduced ? FadeIn.duration(200) : NOTE_IN.delay(ms).duration(420));
+const ASK_AT = 4300;
+/** Allow starts calling once the question has settled. */
+const NUDGE_AT = 4700;
+
 /** A notification as the lock screen draws it: frosted, the app's icon, a line. */
 function Ping({ title, when, children }: { title: string; when: string; children: React.ReactNode }) {
   return (
@@ -657,13 +674,28 @@ function Ping({ title, when, children }: { title: string; when: string; children
   );
 }
 
+/** The ring around Allow: it breathes in time with the arrow. */
+function PulseRing({ reduced }: { reduced: boolean }) {
+  const o = useSharedValue(1);
+  useEffect(() => {
+    if (reduced) return;
+    o.value = withDelay(
+      NUDGE_AT,
+      withRepeat(withSequence(withTiming(0.3, { duration: 700, easing: Easing.inOut(Easing.ease) }), withTiming(1, { duration: 700, easing: Easing.inOut(Easing.ease) })), -1),
+    );
+    return () => cancelAnimation(o);
+  }, [reduced, o]);
+  const pulse = useAnimatedStyle(() => ({ opacity: o.value }));
+  return <Animated.View style={[styles.promptRing, pulse]} pointerEvents="none" />;
+}
+
 /** The arrow under Allow: it starts bobbing once she has had time to read. */
 function BobArrow({ reduced }: { reduced: boolean }) {
   const y = useSharedValue(0);
   useEffect(() => {
     if (reduced) return;
     y.value = withDelay(
-      4700,
+      NUDGE_AT,
       withRepeat(withSequence(withTiming(-6, { duration: 550, easing: Easing.inOut(Easing.ease) }), withTiming(0, { duration: 550, easing: Easing.inOut(Easing.ease) })), -1),
     );
     return () => cancelAnimation(y);
@@ -703,12 +735,12 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
       <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
         <Says line="Let me send you notifications, so Spanish becomes a habit." reduced={reduced} />
         <View style={{ flex: 1, minHeight: 16 }} />
-        <Animated.View entering={rise(2, reduced)}>
+        <Animated.View entering={noteIn(300, reduced)}>
           <Ping title="Time for your Spanish" when="now">
             <Text style={styles.pingBody}>{reminderLine(answers)}</Text>
           </Ping>
         </Animated.View>
-        <Animated.View entering={rise(3, reduced)} style={{ marginTop: 8 }}>
+        <Animated.View entering={noteIn(1100, reduced)} style={{ marginTop: 8 }}>
           <Ping title="Word of the day" when={DAYS[day]}>
             <Animated.Text key={day} entering={day === 0 ? undefined : FadeIn.duration(260)} style={styles.pingBody} numberOfLines={1}>
               {word}: {gloss}
@@ -719,7 +751,7 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
         {/* The phone's own question, drawn, with Allow pointed out: what she
             is about to see, and which button keeps him knocking. Its Allow
             asks for real, the same as Continue. */}
-        <Animated.View entering={rise(4, reduced)} style={styles.prompt}>
+        <Animated.View entering={reduced ? FadeIn.duration(200) : ASK_IN.delay(ASK_AT).duration(380)} style={styles.prompt}>
           <View style={styles.promptCard}>
             <Text style={styles.promptTitle} accessible={false}>
               “Posta” Would Like to Send You Notifications
@@ -734,7 +766,7 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
                 accessibilityLabel="Allow notifications"
                 style={({ pressed }) => [styles.promptAllowWrap, { transform: [{ scale: pressed ? 0.96 : 1 }] }]}>
                 <Text style={[styles.promptButton, styles.promptAllow]}>Allow</Text>
-                <View style={styles.promptRing} pointerEvents="none" />
+                <PulseRing reduced={reduced} />
               </Pressable>
             </View>
           </View>

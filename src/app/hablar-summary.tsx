@@ -7,6 +7,7 @@ import { ActivityIndicator, Animated, Easing, Pressable, ScrollView, StyleSheet,
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Diff, DiloButton, PanchoAvatar, webPress } from '@/components/hablar-ui';
+import { StreakAlmost } from '@/components/streak-almost';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button } from '@/components/ui';
 import {
@@ -76,7 +77,7 @@ export default function HablarSummaryScreen() {
   const rose = !!summary?.streak && summary.streak !== (summary.previous_streak ?? 0);
   const close = () => {
     if (!rose || !summary) return leave();
-    const { streak: _s, previous_streak: _p, ...rest } = summary;
+    const { streak: _s, previous_streak: _p, recoverable_streak: _r, ...rest } = summary;
     if (sessionId) summaryCache.set(sessionId, rest);
     setCelebrating(true);
   };
@@ -98,6 +99,10 @@ export default function HablarSummaryScreen() {
     );
   }
 
+  // A comeback's first round: what's at stake, not a cheer for day 1.
+  if (celebrating && summary?.recoverable_streak) {
+    return <StreakAlmost lost={summary.recoverable_streak} onMore={leave} moreLabel="Got it" />;
+  }
   if (celebrating && summary?.streak) {
     return (
       <SafeAreaView style={styles.safe}>

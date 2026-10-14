@@ -124,7 +124,9 @@ function notify(id: string) {
 
 /** A tester's message into her own thread. Returns the stored row. */
 export async function sendFeedback(body: string, attachments: Attachment[], context: FeedbackContext): Promise<FeedbackMessage> {
-  if (!(await startGuest())) throw new Error('Could not connect. Check your internet and try again.');
+  // Signed out (welcome, onboarding), she gets a guest account to write from;
+  // that needs anonymous sign-ins on in Supabase (lib/guest.ts).
+  if (!(await startGuest())) throw new Error('Could not start a session. Sign in, or check your internet, and try again.');
   const { data: s } = await supabase.auth.getSession();
   const userId = s.session?.user.id;
   if (!userId) throw new Error('Could not connect. Check your internet and try again.');

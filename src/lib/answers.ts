@@ -354,6 +354,31 @@ export function sentenceAnswerMatches(
   return acceptedAnswers(sentence, opts).some((answer) => sameWords(got, answer));
 }
 
+/**
+ * A wrong build that is one small word short of an accepted answer — "Sos de
+ * acá" for "¿Sos de por acá?". A test gives it half credit: leaving out a
+ * preposition or an article is a slip, not a level she hasn't reached. A
+ * content word left out, a spare tile added or a word in the wrong form is
+ * still a miss.
+ */
+export function nearMiss(
+  placed: string[],
+  sentence: Sentence,
+  lexicon: Map<string, Form>,
+  opts: { byEar?: boolean; side?: 'es' | 'en' } = {},
+) {
+  if (opts.side === 'en') return false;
+  const got = placed.flatMap(answerWords);
+  const small = (t: SentenceToken) =>
+    !!t.glue || (t.form_ids.length > 0 && t.form_ids.every((id) => lexicon.get(id)?.is_glue));
+  const glue = new Set(sentence.tokens.filter(small).flatMap((t) => answerWords(t.surface)));
+  return acceptedAnswers(sentence, opts).some(
+    (answer) =>
+      answer.length === got.length + 1 &&
+      answer.some((w, i) => glue.has(w) && sameWords([...answer.slice(0, i), ...answer.slice(i + 1)], got)),
+  );
+}
+
 /** Whether a rebuilt answer is the written sentence itself, rather than one of
  *  its alternatives — when it isn't, the feedback shows the written one too. */
 export const isCanonical = (placed: string[], sentence: Sentence, side: 'es' | 'en' = 'es') =>
@@ -750,6 +775,8 @@ export function gapOptions(sentence: Sentence, target: Form, allForms: Form[], c
 /** How many spare tiles a bank carries beyond the answer. */
 const DECOYS = 4;
 const DECOYS_BY_EAR = 2;
+/** How many of a test's spares may be other forms of the sentence's words. */
+const SIBLING_DECOYS = 2;
 
 /** Punctuation a tile never carries: the Spanish side gets clean surfaces from
  *  its tokens, and the English has to be cleaned the same way or its commas
@@ -783,16 +810,34 @@ function englishTiles(sentence: Sentence): string[] {
  * in. A spare tile never shares a meaning with a word of the sentence: "bueno"
  * next to "Dale, chau." would be a second right answer.
  */
-export function sentenceTiles(sentence: Sentence, allForms: Form[], side: 'es' | 'en' = 'es', byEar = false) {
+export function sentenceTiles(
+  sentence: Sentence,
+  allForms: Form[],
+  side: 'es' | 'en' = 'es',
+  byEar = false,
+  /** A test: spares include other forms of the sentence's own words. */
+  hard = false,
+) {
   // The English side has no tokens to break up and no forms of its own: its
   // tiles are its words, and its spares are other words of English the course
   // has glossed, which is the only pool there is.
   const answer = side === 'en' ? englishTiles(sentence) : sentence.tokens.flatMap((_, i) => wordsOf(outOfSentence(sentence.tokens, i)));
-  const taken = new Set(answer.map(norm));
+  const taken = new Set([...answer.map(norm), ...acceptedAnswers(sentence, { byEar, side }).flat()]);
   const own = formsIn(sentence, new Map(allForms.map((f) => [f.id, f])));
+  // In a test, the first spares are the sentence's own words in another form —
+  // `quiero` beside `querés` — so the tiles can't be put in order from the
+  // English alone: the conjugation has to be known. Never one an accepted
+  // answer uses, and never one that shares a meaning (the check below).
+  const siblings = new Set(
+    hard && side === 'es'
+      ? allForms.filter((f) => own.some((o) => !o.is_glue && o.lemma_id === f.lemma_id && o.id !== f.id))
+      : [],
+  );
+  let fromSiblings = 0;
   const spare = new Map<string, string>();
-  for (const f of shuffle(allForms)) {
+  for (const f of [...shuffle([...siblings]), ...shuffle(allForms)]) {
     if (f.pos === 'propn' || isPhrase(f.form) || own.some((o) => sharesMeaning(o, f))) continue;
+    if (siblings.has(f) && fromSiblings >= SIBLING_DECOYS) continue;
     if (side === 'en') {
       for (const w of wordsOf(shownMeaning(f).text.replace(TILE_PUNCT, ' '))) {
         const key = norm(w);
@@ -801,7 +846,9 @@ export function sentenceTiles(sentence: Sentence, allForms: Form[], side: 'es' |
       continue;
     }
     const key = norm(f.form);
-    if (key && !taken.has(key) && !spare.has(key)) spare.set(key, f.form);
+    if (!key || taken.has(key) || spare.has(key)) continue;
+    spare.set(key, f.form);
+    if (siblings.has(f)) fromSiblings += 1;
   }
   // By ear the work is hearing the words, not ruling others out: two spares
   // keep it from being a jigsaw, and one is enough beside a two-word answer.

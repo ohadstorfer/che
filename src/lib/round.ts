@@ -41,6 +41,8 @@ export interface AnswerExtra {
   note?: Note;
   /** Forms whose meaning she peeked at in this exercise. */
   hinted?: string[];
+  /** A test's credit for a wrong answer that was nearly right (0 to 1). */
+  credit?: number;
 }
 
 /** A missed form comes back later in the round, at most this many times. */
@@ -429,6 +431,7 @@ export function useRound(userId: string | undefined) {
         testAnswers.current.push({
           unitId: item.placementUnit,
           correct: wrong.size === 0,
+          credit: wrong.size === 0 ? 1 : (extra.credit ?? 0),
           formIds: drilled.map((f) => f.id),
         });
       }
@@ -505,7 +508,8 @@ export function useRound(userId: string | undefined) {
     await ready.current;
     // The round's score is one of the things a class is built from.
     learnerChanged();
-    const { data, error } = await supabase.rpc('finish_lesson', {
+    const args = {
+      // Fixed once: a retry after midnight still counts on the day she finished.
       p_local_date: localDateStr(),
       p_lesson_id: lessonRef.current,
       p_score: answered > 0 ? Math.round((100 * (answered - wrong)) / answered) : null,
@@ -513,9 +517,18 @@ export function useRound(userId: string | undefined) {
       p_answered: answered,
       p_first_try_wrong: wrong,
       p_retries: retriesGranted.current,
-    });
-    if (error) console.warn('finish_lesson failed', error);
-    return ((data as FinishResult[] | null)?.[0] ?? null) as FinishResult | null;
+    };
+    // A dropped connection would lose the day without a word. Retried only with
+    // a round id: finish_lesson counts a round once, so a call that landed and
+    // lost its answer can't count twice (and buy back a frozen run on its own).
+    const waits = args.p_round_id ? [0, 1500, 4000, 8000] : [0];
+    for (const [i, wait] of waits.entries()) {
+      if (wait) await new Promise((r) => setTimeout(r, wait));
+      const { data, error } = await supabase.rpc('finish_lesson', args);
+      if (!error) return ((data as FinishResult[] | null)?.[0] ?? null) as FinishResult | null;
+      console.warn(`finish_lesson failed (try ${i + 1} of ${waits.length})`, error);
+    }
+    return null;
   }, []);
 
   const score = () => {

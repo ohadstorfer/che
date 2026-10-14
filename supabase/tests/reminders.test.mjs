@@ -178,3 +178,23 @@ test('every template has its own id and something to say', () => {
   assert.equal(new Set(TEMPLATES.map((t) => t.id)).size, TEMPLATES.length);
   for (const t of TEMPLATES) assert.ok(t.body({ streak: 5, idle: 1, practised: true }).length > 10);
 });
+
+test('on a comeback day, one round in, the evening save asks for the second', () => {
+  const comeback = learner({ streak: 1, banked: 22, lastPracticeDate: '2026-10-14', lastCompletedAt: iso('2026-10-14', '12:00') });
+  assert.equal(skip(comeback, '2026-10-14', '18:30'), 'recovering');
+  const save = decide(comeback, at('2026-10-14', '21:00')).send;
+  assert.equal(save.slot, 'save');
+  assert.ok(save.template.startsWith('recover_'));
+  assert.match(save.body, /22-day/);
+  const after = learner({ ...comeback, recent: [sent('save', save.template, '2026-10-14', '21:00')] });
+  assert.equal(skip(after, '2026-10-14', '22:45'), 'recovering');
+  assert.equal(skip(comeback, '2026-10-14', '23:00'), 'recovering');
+});
+
+test('a run left banked from an earlier day is no reason to remind', () => {
+  // Only one round on the comeback day: the next day the banked run is gone.
+  const lapsed = learner({ streak: 1, banked: 22, lastPracticeDate: '2026-10-13' });
+  const save = decide(lapsed, at('2026-10-14', '21:00')).send;
+  assert.ok(!save || !save.template.startsWith('recover_'));
+  assert.equal(skip(learner({ banked: 0, lastPracticeDate: '2026-10-14' }), '2026-10-14', '21:00'), 'done-today');
+});

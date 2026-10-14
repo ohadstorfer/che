@@ -42,3 +42,15 @@ function dayBefore(date: string): string {
   const [y, m, d] = date.split('-').map(Number);
   return localDateStr(new Date(y, m - 1, d - 1));
 }
+
+/**
+ * A run lost on a comeback day: she came back, finished one round, and the day
+ * ended before the second. finish_lesson leaves the old run banked until her
+ * next round clears it, so for that one day the row says what was lost. Nothing
+ * else in the app would ever tell her — the chip just turns back into a 1.
+ */
+export function lapsedRun(streak: Streak | null, today = localDateStr()): number | null {
+  if (!streak?.last_practice_date || streak.last_practice_date === today) return null;
+  const banked = streak.recoverable_streak ?? 0;
+  return banked > 0 ? banked : null;
+}

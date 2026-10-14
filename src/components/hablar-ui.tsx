@@ -152,22 +152,26 @@ export function Pill({
 }) {
   const fg = active ? colors.onPrimary : tone === 'soft' ? colors.primaryDark : colors.ink;
   return (
-    <Pressable
-      onPress={onPress}
-      hitSlop={6}
-      accessibilityRole="button"
-      accessibilityLabel={accessibilityLabel}
-      style={({ pressed }) => [
-        styles.pill,
-        tone === 'soft' && { backgroundColor: colors.primarySoft, boxShadow: 'none' },
-        active && { backgroundColor: colors.primary, boxShadow: clay.button },
-        { transform: [{ scale: pressed ? 0.94 : 1 }] },
-        webPress,
-      ]}>
-      {busy ? <ActivityIndicator size="small" color={fg} /> : <MaterialCommunityIcons name={icon} size={17} color={fg} />}
-      {label ? <Text style={[styles.pillText, { color: fg }]}>{label}</Text> : null}
+    // The badge is the pill's sibling, drawn after it: as a child, iOS paints the pill's outline across it.
+    <View>
+      <Pressable
+        onPress={onPress}
+        hitSlop={6}
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel}
+        style={({ pressed }) => [
+          styles.pill,
+          tone === 'soft' && { backgroundColor: colors.primarySoft, boxShadow: 'none' },
+          active && { backgroundColor: colors.primary, boxShadow: clay.button },
+          { transform: [{ scale: pressed ? 0.94 : 1 }] },
+          webPress,
+        ]}>
+        {busy ? <ActivityIndicator size="small" color={fg} /> : <MaterialCommunityIcons name={icon} size={17} color={fg} />}
+        {label ? <Text style={[styles.pillText, { color: fg }]}>{label}</Text> : null}
+      </Pressable>
       {badge ? (
         <View
+          pointerEvents="none"
           style={[
             styles.badge,
             badge === 'ok' && { backgroundColor: colors.success },
@@ -177,7 +181,7 @@ export function Pill({
           {badge === 'ok' ? <MaterialCommunityIcons name="check" size={10} color={colors.onPrimary} /> : null}
         </View>
       ) : null}
-    </Pressable>
+    </View>
   );
 }
 

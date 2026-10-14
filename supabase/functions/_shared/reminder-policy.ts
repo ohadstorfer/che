@@ -8,7 +8,9 @@
 //     she is free today is when she was free yesterday.
 //   - A save reminder late in the evening, only when a live streak is about
 //     to freeze.
-//   - Never more than those two in a day, and nothing once she has practised.
+//   - Never more than those two in a day, and nothing once she has practised,
+//     except on a comeback day: one round in, the frozen run still needs a
+//     second before midnight, so the evening save goes out for that.
 //   - Fewer the longer she stays away, then one message saying the reminders
 //     will stop, then silence until she comes back on her own.
 //   - The words are picked by the bandit from "A Sleeping, Recovering Bandit
@@ -27,6 +29,8 @@ export type Learner = {
   /** When her first device signed up for reminders: the anchor until she has practised. */
   anchorAt: string;
   streak: number;
+  /** A frozen run she has started buying back today: one more round saves it. */
+  banked?: number;
   lastPracticeDate: string | null;
   /** The first round she finished on the last day she practised. */
   lastCompletedAt: string | null;
@@ -69,7 +73,7 @@ const SCORE_CAP = RECENCY_PENALTY;
 /** Weight of the prior (the average over both cases) in each rate estimate. */
 const PRIOR_WEIGHT = 20;
 
-type Context = { streak: number; idle: number; practised: boolean };
+type Context = { streak: number; idle: number; practised: boolean; banked: number };
 
 type Template = {
   id: string;
@@ -115,6 +119,11 @@ export const TEMPLATES: Template[] = [
     body: () => "Your first round takes three minutes. ¿Arrancamos?" },
   { id: "first_real", slot: "routine", when: (c) => !c.practised,
     body: () => "Ready to hear how Argentines really talk? Round one is waiting." },
+  // The evening of a comeback day: one round done, one more buys the run back.
+  { id: "recover_one_more", slot: "save", when: (c) => c.banked > 0,
+    body: (c) => `One more round before midnight and your ${c.banked}-day streak is back 🔥` },
+  { id: "recover_pancho", slot: "save", when: (c) => c.banked > 0,
+    body: (c) => `Halfway there. Pancho is holding your ${c.banked}-day streak until midnight.` },
   // The evening save.
   { id: "save_midnight", slot: "save", when: alive,
     body: (c) => `Your ${c.streak}-day streak freezes at midnight. One round keeps it going 🔥` },
@@ -135,8 +144,15 @@ export function decide(
   const here = localParts(learner.timezone, now);
   // `>=`, not `===`: the app writes the phone's date, which can be a day ahead
   // of the timezone on the subscription.
-  if (learner.lastPracticeDate && learner.lastPracticeDate >= here.date) return { skip: "done-today" };
+  const banked = learner.lastPracticeDate === here.date ? (learner.banked ?? 0) : 0;
+  if (learner.lastPracticeDate && learner.lastPracticeDate >= here.date && banked === 0) return { skip: "done-today" };
   if (minutesSince(learner.lastRoundStartedAt, now) < IN_A_ROUND_MINUTES) return { skip: "in-a-round" };
+  if (banked > 0) {
+    if (learner.recent.some((s) => minutesSince(s.sent_at, now) < MIN_GAP_MINUTES)) return { skip: "throttled" };
+    const saved = learner.recent.some((s) => s.local_date === here.date && s.slot === "save");
+    if (saved || here.minutes < SAVE_FROM || here.minutes >= SAVE_UNTIL) return { skip: "recovering" };
+    return pick("save", { streak: learner.streak, idle: 0, practised: true, banked }, learner, now, stats, random);
+  }
 
   const practised = learner.lastPracticeDate !== null;
   const since = learner.lastPracticeDate ?? localParts(learner.timezone, new Date(learner.anchorAt)).date;
@@ -167,7 +183,18 @@ export function decide(
     return { send: { slot, template: FAREWELL, eligible: [FAREWELL], body: FAREWELL_BODY } };
   }
 
-  const context: Context = { streak: learner.streak, idle, practised };
+  return pick(slot, { streak: learner.streak, idle, practised, banked: 0 }, learner, now, stats, random);
+}
+
+/** The template for this slot, by the bandit. */
+function pick(
+  slot: Slot,
+  context: Context,
+  learner: Learner,
+  now: Date,
+  stats: Map<string, TemplateStats>,
+  random: () => number,
+): Decision {
   const eligible = TEMPLATES.filter((t) => t.slot === slot && t.when(context));
   if (eligible.length === 0) return { skip: "no-template" };
 

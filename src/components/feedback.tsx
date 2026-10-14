@@ -6,9 +6,7 @@ import { router, usePathname } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AppState,
-  KeyboardAvoidingView,
   Modal,
-  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -20,6 +18,7 @@ import {
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, {
   Easing,
+  useAnimatedKeyboard,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -271,7 +270,10 @@ function Bubble({
         accessibilityRole="button"
         accessibilityLabel={unread ? `Feedback, ${unread} new ${unread === 1 ? 'reply' : 'replies'}` : 'Send feedback'}
         style={[styles.bubble, style]}>
-        <Ionicons name="chatbubble-ellipses" size={24} color={colors.ink} />
+        {/* The face carries the outline; the dot is its sibling so iOS doesn't paint the outline across it. */}
+        <View style={styles.bubbleFace}>
+          <Ionicons name="chatbubble-ellipses" size={24} color={colors.ink} />
+        </View>
         {unread > 0 ? (
           <View style={styles.dot}>
             <Text style={styles.dotText}>{unread > 9 ? '9+' : unread}</Text>
@@ -326,6 +328,18 @@ function FeedbackSheet({
 
   const progress = useSharedValue(0);
   const drag = useSharedValue(0);
+  // The keyboard, followed frame by frame: the sheet stands on it and gives
+  // up height from the top, so the header stays on screen. (A
+  // KeyboardAvoidingView inside the Modal lifted it twice on iOS.)
+  const keyboard = useAnimatedKeyboard();
+  const top = insets.top + 12;
+  const keyboardStyle = useAnimatedStyle(() => {
+    const kb = keyboard.height.get();
+    return { height: Math.min(sheetH, screenH - top - kb), marginBottom: kb };
+  });
+  const composerStyle = useAnimatedStyle(() => ({
+    paddingBottom: 12 + Math.max(0, insets.bottom - keyboard.height.get()),
+  }));
 
   // In with the drawer curve; out faster, since closing is the app answering.
   useEffect(() => {
@@ -457,11 +471,8 @@ function FeedbackSheet({
         <Animated.View style={[StyleSheet.absoluteFill, styles.scrim, scrimStyle]}>
           <Pressable style={StyleSheet.absoluteFill} onPress={onClose} accessibilityLabel="Close feedback" />
         </Animated.View>
-        <KeyboardAvoidingView
-          style={[styles.dock, { paddingTop: insets.top + 12 }]}
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-          pointerEvents="box-none">
-          <Animated.View style={[styles.sheet, { height: sheetH }, sheetStyle]}>
+        <View style={[styles.dock, { paddingTop: top }]} pointerEvents="box-none">
+          <Animated.View style={[styles.sheet, keyboardStyle, sheetStyle]}>
             <GestureDetector gesture={dismiss}>
               <View style={styles.head}>
                 <View style={styles.grabber} />
@@ -527,7 +538,7 @@ function FeedbackSheet({
               )}
             </ScrollView>
 
-            <View style={[styles.composer, { paddingBottom: 12 + insets.bottom }]}>
+            <Animated.View style={[styles.composer, composerStyle]}>
               {attachments.length ? (
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.attachments}>
                   {attachments.map((a, i) => (
@@ -580,9 +591,9 @@ function FeedbackSheet({
                   <Ionicons name="arrow-up" size={20} color={canSend ? colors.onPrimary : colors.faint} />
                 </Pressable>
               </View>
-            </View>
+            </Animated.View>
           </Animated.View>
-        </KeyboardAvoidingView>
+        </View>
 
         {viewing ? <Lightbox uri={viewing} onClose={() => setViewing(null)} /> : null}
       </GestureHandlerRootView>
@@ -680,6 +691,9 @@ const styles = StyleSheet.create({
     zIndex: 1000,
     width: SIZE,
     height: SIZE,
+  },
+  bubbleFace: {
+    flex: 1,
     borderRadius: SIZE / 2,
     alignItems: 'center',
     justifyContent: 'center',

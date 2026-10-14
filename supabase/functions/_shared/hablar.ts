@@ -612,10 +612,17 @@ export type Transcript = {
   calls: number;
   /** The line can't be made out well enough to answer or correct (only with `doubt: "ask"`): ask her to say it again. */
   unclear?: boolean;
+  /** Words of the line Scribe may have misheard (only with `doubt`): not hers to be corrected on. */
+  unsure?: string[];
 };
 type ScribeOptions = { key: string; audio: Blob; filename: string; keyterms: string[] };
 /** One hearing of a clip: the text, and each word with how sure Scribe was of it (log probability, 0 = certain). */
-export type Hearing = { text: string; audioSeconds: number | null; words: { w: string; lp: number }[] };
+export type Hearing = {
+  text: string;
+  audioSeconds: number | null;
+  /** `w` bare (for comparing), `raw` as written in the line. */
+  words: { w: string; raw: string; lp: number }[];
+};
 
 // How sure Scribe has to be of a line for it to stand. From the clips of
 // 2026-10-11: invented words ("Soy un gemero", "Ponme de alguna") sit below
@@ -704,6 +711,26 @@ export function hearingHolds(hinted: Hearing, plain: Hearing | null, keyterms: s
 }
 
 /**
+ * The words of the hinted hearing that may not be what she said: the ones
+ * Scribe was guessing at, and the ones the plain hearing heard differently
+ * ("Pablo francés" after "¿Hablás francés?"). Passed on so a misheard word is
+ * never corrected as her mistake. At most six, as written in the line.
+ */
+export function unsureWords(hinted: Hearing, plain: Hearing | null): string[] {
+  const h = hinted.words.filter((x) => !FILLERS.has(x.w));
+  const differs = new Set<string>();
+  if (plain && plain.words.length && bare(hinted.text) !== bare(plain.text)) {
+    const p = plain.words.filter((x) => !FILLERS.has(x.w));
+    for (const d of stretches(p.map((x) => x.w), h.map((x) => x.w))) for (const w of d.other) differs.add(w);
+  }
+  const out: string[] = [];
+  for (const x of h) {
+    if ((x.lp < SHAKY_WORD || differs.has(x.w)) && x.raw && !out.includes(x.raw)) out.push(x.raw);
+  }
+  return out.slice(0, 6);
+}
+
+/**
  * Speech to text with Scribe v2, forced to Spanish, bytes sent as they came
  * (§4.4 step 3).
  *
@@ -713,15 +740,15 @@ export function hearingHolds(hinted: Hearing, plain: Hearing | null, keyterms: s
  * a beginner's accented Spanish is never handed to language detection alone.
  *
  * With `doubt`, the clip is heard twice at once, with and without the
- * keyterms. The hinted hearing is the transcript; with "ask", one that
- * `hearingHolds` won't vouch for comes back `unclear`. With "take" it is given
- * anyway (she was already asked once, or the app is too old to ask) and the
- * second hearing is not made.
+ * keyterms. The hinted hearing is the transcript, and the words it may have
+ * misheard come back as `unsure`. With "ask", a line `hearingHolds` won't
+ * vouch for comes back `unclear`; with "take" it is given anyway (she was
+ * already asked once, or the app is too old to ask).
  */
 export async function transcribe(
   opts: ScribeOptions & { english?: boolean; doubt?: "ask" | "take" },
 ): Promise<Transcript> {
-  const twice = opts.doubt === "ask" && opts.keyterms.length > 0;
+  const twice = !!opts.doubt && opts.keyterms.length > 0;
   const [hinted, plain] = await Promise.all([
     scribe(opts, "es"),
     // A failed second hearing is not worth losing the line over.
@@ -747,7 +774,12 @@ export async function transcribe(
       if (free && looksEnglish(free.text)) return en(free);
     }
   }
-  return { ...es(hinted), ...(opts.doubt === "ask" && !hearingHolds(hinted, plain, opts.keyterms) ? { unclear: true } : {}) };
+  const unsure = opts.doubt ? unsureWords(hinted, plain) : [];
+  return {
+    ...es(hinted),
+    ...(opts.doubt === "ask" && !hearingHolds(hinted, plain, opts.keyterms) ? { unclear: true } : {}),
+    ...(unsure.length ? { unsure } : {}),
+  };
 }
 
 /** One Scribe request; `language` null leaves the language to Scribe. */
@@ -780,7 +812,11 @@ async function scribe(opts: ScribeOptions, language: "es" | null): Promise<Heari
     audioSeconds: Number.isFinite(last) ? last : null,
     words: words
       .filter((w) => w?.type === "word" && bare(String(w.text ?? "")))
-      .map((w) => ({ w: bare(String(w.text)), lp: Number.isFinite(Number(w.logprob)) ? Number(w.logprob) : 0 })),
+      .map((w) => ({
+        w: bare(String(w.text)),
+        raw: String(w.text).trim().replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, ""),
+        lp: Number.isFinite(Number(w.logprob)) ? Number(w.logprob) : 0,
+      })),
   };
 }
 

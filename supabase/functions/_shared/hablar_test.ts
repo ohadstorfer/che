@@ -22,6 +22,7 @@ import {
   exchangeOf,
   type Hearing,
   hearingHolds,
+  unsureWords,
   sttKeyterms,
   topicOf,
   wantsLanguageRetry,
@@ -219,7 +220,7 @@ Deno.test("keyterms: what Pancho just asked first, the scene's words after, neve
 
 const heard = (line: string, lp: number | number[] = -0.05): Hearing => {
   const words = line.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "").match(/[\p{L}\p{N}]+/gu) ?? [];
-  return { text: line, audioSeconds: 1, words: words.map((w, i) => ({ w, lp: Array.isArray(lp) ? lp[i] : lp })) };
+  return { text: line, audioSeconds: 1, words: words.map((w, i) => ({ w, raw: w, lp: Array.isArray(lp) ? lp[i] : lp })) };
 };
 
 Deno.test("a hinted hearing holds when the plain one agrees, or differs only in small things", () => {
@@ -253,4 +254,13 @@ Deno.test("a hinted hearing does not hold when the hints may have put a word she
   assertEquals(hearingHolds(heard("Ponme de alguna, por favor", [-0.3, -0.2, -0.95, -0.1, -0.1]), null, kt), false);
   // Silence is not doubt: it has its own answer.
   assertEquals(hearingHolds(heard(""), heard(""), kt), true);
+});
+
+Deno.test("unsure words: the ones Scribe guessed at, and the ones the plain hearing heard otherwise", () => {
+  assertEquals(unsureWords(heard("Pablo francés", [-0.7, -0.1]), heard("Pablo francés", [-0.6, -0.1])), ["pablo"]);
+  assertEquals(unsureWords(heard("Mate, por favor"), heard("Bate, por favor")), ["mate"]);
+  assertEquals(unsureWords(heard("Quiero café, por favor"), heard("Quiero café, por favor")), []);
+  assertEquals(unsureWords(heard("Quiero café"), null), []);
+  // Thinking sounds are never the question.
+  assertEquals(unsureWords(heard("Eh, quiero café", [-1.5, -0.1, -0.1]), null), []);
 });

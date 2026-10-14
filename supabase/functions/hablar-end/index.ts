@@ -157,16 +157,20 @@ Deno.serve(async (req) => {
   // unit chat finished on a later day still finishes its lesson, credited to
   // that day.
   const streak = (async () => {
-    const today = localDate(await profileTimezone(db, who.userId));
-    if (today !== session.local_date && !lessonId) return { credited: false, row: null };
     // The streak counts in the phone's days (every other lesson sends them), so
-    // hers wins when she sends it: a profile with no timezone would put a chat
-    // on yesterday in the middle of today's practice. Only a date a real clock
-    // could show right now is believed.
+    // hers wins when she sends it: a profile with no timezone, or one left
+    // behind by a trip, would put a chat on the wrong day. Only a date a real
+    // clock could show right now is believed.
     const sent = typeof body.local_date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(body.local_date) ? body.local_date : null;
     const near = sent !== null && Math.abs(Date.parse(`${sent}T12:00:00Z`) - Date.now()) <= 38 * 3600_000;
+    const profileToday = localDate(await profileTimezone(db, who.userId));
+    const today = near ? sent : profileToday;
+    // The chat's day was set at start in the profile's timezone; it is still
+    // today if either clock agrees (a chat across midnight UTC, or a trip).
+    const sameDay = session.local_date === profileToday || session.local_date === today;
+    if (!sameDay && !lessonId) return { credited: false, row: null };
     const { data, error } = await who.asUser.rpc("finish_lesson", {
-      p_local_date: near ? sent : today,
+      p_local_date: today,
       ...(lessonId ? { p_lesson_id: lessonId } : {}),
     });
     if (error) {

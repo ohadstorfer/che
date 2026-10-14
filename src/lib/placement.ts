@@ -20,9 +20,10 @@ import type { Form, Section, Sentence, Unit } from './types';
 //    she failed. Each section's sentences are fetched as the walk gets there,
 //    so the test never downloads the course.
 //  - jump (a later section or unit on the path): runs to the end of its span
-//    and passes at about 85%; she lands on the target unit. A short span has
-//    every unit sampled; a longer one (a section, or several from the map of
-//    sections) a spread of them.
+//    and passes at about 85%; she lands on the target unit. Its questions come
+//    from just before where she lands: a short span has every unit asked; a
+//    longer one a spread of its last section — knowing section 9 vouches for
+//    5, so a jump from 3 to 10 asks 9, not a thin spread of 3 to 9.
 // ---------------------------------------------------------------------------
 
 export type TestMode = 'placement' | 'jump';
@@ -44,6 +45,20 @@ export const maxUnitsInTest = () => Math.floor(TEST_MAX_ITEMS / ITEMS_PER_UNIT);
 export function sampleUnits<T>(list: T[], count: number): T[] {
   if (list.length <= count) return list;
   return Array.from({ length: count }, (_, k) => list[Math.floor(((2 * k + 1) * list.length) / (2 * count))]);
+}
+
+/**
+ * The units a jump's questions come from, in order: a spread of the span's last
+ * section — the one right before where she lands. When that is too short for a
+ * full test (the end of the section she is in), the units just before it top
+ * it up.
+ */
+export function testedUnits(units: Unit[]): Unit[] {
+  const last = units.at(-1);
+  if (!last) return [];
+  const max = maxUnitsInTest();
+  const tail = units.filter((u) => u.section_id === last.section_id);
+  return sampleUnits(tail.length >= max ? tail : units.slice(-max), max);
 }
 
 /**
@@ -76,7 +91,6 @@ export function unitQuestions(data: LearnerData, unit: Unit, count: number, deck
   const words = shuffle(
     data.forms.filter((f) => f.unit_id === unit.id && drillable(f) && !isPhrase(f.form) && !selfGlossed(f)),
   );
-  const verb = words.find((f) => f.pos === 'verb') ?? words[0];
   const out: SessionItem[] = [];
   const usedSentences = new Set<string>();
 
@@ -89,8 +103,22 @@ export function unitQuestions(data: LearnerData, unit: Unit, count: number, deck
     out.push(tag(sentenceItem(data, s, 'sentence_build', target)));
   }
 
-  const typing = (form: Form): SessionItem =>
-    tag({ form, state: data.stateByForm.get(form.id) ?? null, mode: 'typing', direction: 'en_to_es' });
+  // A word is typed into a sentence when one has it: on its own, its English
+  // can be read two ways ("stands" — on your feet, or the tribuna), and the
+  // test would be grading a guess at which one was meant.
+  const sentenceWith = (form: Form) =>
+    sentences.find((x) => !usedSentences.has(x.id) && x.tokens.some((t) => t.form_ids.includes(form.id)));
+  const verb =
+    words.find((f) => f.pos === 'verb' && sentenceWith(f)) ??
+    words.find((f) => sentenceWith(f)) ??
+    words.find((f) => f.pos === 'verb') ??
+    words[0];
+  const typing = (form: Form): SessionItem => {
+    const s = sentenceWith(form);
+    if (!s) return tag({ form, state: data.stateByForm.get(form.id) ?? null, mode: 'typing', direction: 'en_to_es' });
+    usedSentences.add(s.id);
+    return tag(sentenceItem(data, s, 'sentence_gap_typed', form));
+  };
   const gap = () => {
     const s = sentences.find((x) => !usedSentences.has(x.id) && targetOf(data, x));
     if (!s) return null;
@@ -123,7 +151,7 @@ export function unitQuestions(data: LearnerData, unit: Unit, count: number, deck
 /** The whole test over `units` (already in course order). Units with nothing
  *  to ask are left out. */
 export function planTest(data: LearnerData, units: Unit[]): SessionItem[] {
-  const span = sampleUnits(units, maxUnitsInTest());
+  const span = testedUnits(units);
   const last = span.at(-1);
   const deck = last ? deckUpTo(data, last.course_order) : [];
   const perUnit = span.length === 1 ? ITEMS_SINGLE_UNIT : ITEMS_PER_UNIT;
@@ -132,11 +160,11 @@ export function planTest(data: LearnerData, units: Unit[]): SessionItem[] {
 
 export async function buildTest(userId: string, units: Unit[]): Promise<SessionData> {
   const last = units.at(-1);
-  // Only the sentences of the units the test samples, a unit at a time: a
-  // jump over several sections must not pull the course in between down.
+  // Only the sentences of the units the test asks, a unit at a time: a jump
+  // over several sections must not pull the course in between down.
   let data = await loadLearner(userId);
   const have = new Set(data.sentences.map((s) => s.unit_id));
-  const missing = sampleUnits(units, maxUnitsInTest()).filter((u) => !have.has(u.id)).map((u) => u.id);
+  const missing = testedUnits(units).filter((u) => !have.has(u.id)).map((u) => u.id);
   if (missing.length > 0) {
     const rows = await loadUnitSentenceRows(missing).catch(() => []);
     const known = new Set(data.sentences.map((s) => s.id));
@@ -160,6 +188,10 @@ export async function buildTest(userId: string, units: Unit[]): Promise<SessionD
 export interface TestAnswer {
   unitId: string;
   correct: boolean;
+  /** What the answer is worth: 1 right, 0 wrong, and a half for a near miss —
+   *  one small word left out of a sentence. Partial credit, as Duolingo's
+   *  placement gives it: a slip mustn't weigh like not knowing the sentence. */
+  credit: number;
   /** The content forms the question drilled. */
   formIds: string[];
 }
@@ -202,7 +234,7 @@ export function testOutcome(mode: TestMode, answers: TestAnswer[], units: Unit[]
   const failed = failedFormIds;
 
   if (mode === 'jump') {
-    const total = answers.filter((a) => !a.correct).length;
+    const total = answers.reduce((sum, a) => sum + (1 - a.credit), 0);
     const passed = answers.length > 0 && total <= jumpMissesAllowed(answers.length);
     return {
       passed,
@@ -234,11 +266,12 @@ export const PLACEMENT_MISSES_ALLOWED = 1;
 export const PLACEMENT_MAX_ITEMS = 24;
 export const placementMaxStages = () => Math.floor(PLACEMENT_MAX_ITEMS / PLACEMENT_PER_SECTION);
 
-/** Whether a section's answers pass it: at most one miss, and at least two
- *  right — a section that could only be asked one question proves nothing. */
-export function sectionPassed(correct: boolean[]): boolean {
-  const right = correct.filter(Boolean).length;
-  return correct.length - right <= PLACEMENT_MISSES_ALLOWED && right >= 2;
+/** Whether a section's answers pass it, by their credit: at most one miss
+ *  (two near misses make one), and at least two answers' worth right — a
+ *  section that could only be asked one question proves nothing. */
+export function sectionPassed(credits: number[]): boolean {
+  const right = credits.reduce((sum, c) => sum + c, 0);
+  return credits.length - right <= PLACEMENT_MISSES_ALLOWED && right >= 2;
 }
 
 /** Sections asked so far, by index in the course: whether she passed each. */
