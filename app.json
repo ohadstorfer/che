@@ -2,6 +2,7 @@
   "expo": {
     "name": "Posta",
     "slug": "posta",
+    "owner": "swellyo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -33,7 +34,6 @@
       },
       "predictiveBackGestureEnabled": false,
       "permissions": [
-        "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
       "blockedPermissions": [
@@ -124,7 +124,36 @@
       "reactCompiler": true
     },
     "extra": {
-      "router": {}
+      "router": {},
+      "eas": {
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "bundleIdentifier": "app.posta.ios.widget",
+                  "targetName": "PostaWidget",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.app.posta.ios"
+                    ]
+                  }
+                },
+                {
+                  "bundleIdentifier": "app.posta.ios.widget",
+                  "targetName": "PostaWidget",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.app.posta.ios"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "projectId": "1fc7cd1b-48b6-4c12-9c09-e7b7953f0910"
+      }
     }
   }
 }
