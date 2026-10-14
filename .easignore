@@ -1,7 +1,10 @@
 # What EAS Build uploads. Same as .gitignore, plus the folders the app never
 # imports: course sources and snapshots, the Remotion videos, docs and the
-# server side. Without them the archive drops from ~550 MB to ~100 MB.
+# server side, and the git history itself. Builds run with EAS_NO_VCS=1
+# (npm run build:ios), so this file is the whole list: ~550 MB down to ~80 MB.
 # (When .easignore exists EAS stops reading .gitignore, so its rules are here too.)
+
+.git/
 
 # --- from .gitignore
 node_modules/
@@ -40,3 +43,4 @@ supabase/
 scripts/
 .agents/
 .claude/
+reports/

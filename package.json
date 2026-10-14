@@ -127,7 +127,9 @@
     "postinstall": "patch-package",
     "store:test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test supabase/tests/store.test.mjs",
     "reminders:test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test supabase/tests/reminders.test.mjs",
-    "feedback:test": "node supabase/tests/feedback.test.mjs"
+    "feedback:test": "node supabase/tests/feedback.test.mjs",
+    "build:ios": "EAS_NO_VCS=1 eas build -p ios --profile production",
+    "build:android": "EAS_NO_VCS=1 eas build -p android --profile production"
   },
   "private": true
 }
