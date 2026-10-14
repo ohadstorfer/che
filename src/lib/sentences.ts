@@ -1,7 +1,9 @@
 import { shuffle } from './answers';
 import { clauseOfSurface, wordsIn } from './course-rules/shape';
-import { cached, stampHash, versioned } from './content-cache';
+import { cached, onContentCleared, stampHash, versioned } from './content-cache';
 import { all } from './fetch-all';
+import { learnerChanged } from './learner-ready';
+import { timed } from './load-timing';
 import { supabase } from './supabase';
 import type { Form, Sentence, SentenceToken } from './types';
 
@@ -118,13 +120,39 @@ export async function loadSentenceRowsInReach(reach: SentenceReach): Promise<Sen
     ...blocksThrough(reach.units, reach.throughOrder),
     ...[...new Set(reach.unitIds ?? [])].filter((id) => !inCourse.has(id)).map((id) => [id]),
   ];
-  const byId = new Map<string, SentenceRow>();
-  for (const rows of await inBatches(blocks, BLOCKS_IN_FLIGHT, unitRows)) for (const r of rows) byId.set(r.id, r);
-
+  const fetched = await inBatches(blocks, BLOCKS_IN_FLIGHT, unitRows);
+  // The same blocks as last time — every class she opens on a unit — are the
+  // same rows in the same order, so the merge and the sort are not done again.
+  let merged = lastMerge;
+  if (!merged || !sameItems(merged.blocks, fetched)) {
+    const byId = new Map<string, SentenceRow>();
+    for (const rows of fetched) for (const r of rows) byId.set(r.id, r);
+    merged = lastMerge = { blocks: fetched, byId, extra: [], rows: inIdOrder([...byId.values()]) };
+  }
+  const { byId } = merged;
   const missing = [...new Set(reach.ids ?? [])].filter((id) => !byId.has(id));
-  for (const r of await rowsById(missing)) byId.set(r.id, r);
-  return [...byId.values()].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  const extra = (await rowsById(missing)).filter((r) => !byId.has(r.id));
+  if (!sameItems(merged.extra, extra)) {
+    merged.extra = extra;
+    merged.rows = inIdOrder([...byId.values(), ...extra]);
+  }
+  return merged.rows;
 }
+
+const inIdOrder = (rows: SentenceRow[]) => rows.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+const sameItems = <T>(a: readonly T[], b: readonly T[]) => a.length === b.length && a.every((x, i) => x === b[i]);
+
+/** The last reach put together: its blocks as fetched, and the rows asked for
+ *  by id on top. Callers read `rows` and never change it. */
+let lastMerge: {
+  blocks: SentenceRow[][];
+  byId: Map<string, SentenceRow>;
+  extra: SentenceRow[];
+  rows: SentenceRow[];
+} | null = null;
+onContentCleared(() => {
+  lastMerge = null;
+});
 
 /** How long an answer about a sentence asked for by id is kept. */
 const BY_ID_TTL_MS = 30 * 60 * 1000;
@@ -158,12 +186,16 @@ export async function loadSentencesById(ids: string[], forms: Form[]): Promise<S
   return (await rowsById([...new Set(ids)])).map((r) => toSentence(r, formById));
 }
 
-type ShownRow = { sentence_id: string; shown_count: number; correct_count: number; last_shown_at: string | null };
+export type ShownRow = { sentence_id: string; shown_count: number; correct_count: number; last_shown_at: string | null };
 
 /** Her record of every sentence she has been shown. */
 export const loadSentenceStates = (userId: string) =>
   // Paged: far past the 1,000 rows PostgREST sends at once.
-  all<ShownRow>(() => supabase.from('sentence_states').select('*').eq('user_id', userId).order('sentence_id'));
+  all<ShownRow>(
+    () => supabase.from('sentence_states').select(SHOWN_COLUMNS).eq('user_id', userId).order('sentence_id'),
+    { remember: `sentence_states:${userId}`, label: 'shown' },
+  );
+const SHOWN_COLUMNS = 'sentence_id, shown_count, correct_count, last_shown_at';
 
 /**
  * The published sentences with her record for each. `forms` is the lexicon the
@@ -184,10 +216,62 @@ export async function loadSentences(
   const rows = reach
     ? await loadSentenceRowsInReach({ ...reach, ids: [...(reach.ids ?? []), ...shown.map((s) => s.sentence_id)] })
     : await loadSentenceRows();
-  const formById = new Map(forms.map((f) => [f.id, f]));
-  const shownBy = new Map(shown.map((s) => [s.sentence_id, s]));
-  return rows.map((r) => toSentence(r, formById, shownBy.get(r.id)));
+  return timed('shape', () => sentencesOf(rows, forms, shown), (list) => `${list.length} sentences`);
 }
+
+/** The rows as her sentences: each with her record for it, if she has one.
+ *  `forms` should be the lexicon as loaded — the very array — for the shapes
+ *  to be found again (shapesFor). */
+export function sentencesOf(rows: SentenceRow[], forms: Form[], shown: ShownRow[]): Sentence[] {
+  const shownBy = new Map(shown.map((s) => [s.sentence_id, s]));
+  const shapeOf = shapesFor(forms);
+  return rows.map((r) => withRecord(shapeOf(r), shownBy.get(r.id)));
+}
+
+/** Shapes every row ahead of the class that will want them, with `each`
+ *  deciding the pace (slices.ts). */
+export function warmShapes(
+  rows: SentenceRow[],
+  forms: Form[],
+  each: <T>(items: readonly T[], work: (item: T) => void) => Promise<void>,
+) {
+  return each(rows, shapesFor(forms));
+}
+
+type SentenceShape = Omit<Sentence, 'shown'>;
+
+/**
+ * Everything of a sentence but her record, per row, for one lexicon — worked
+ * out the first time a row is asked for and kept while the row and the
+ * lexicon are. Both are the content cache's own objects, the same from one
+ * class to the next, so a class reshapes only rows it hasn't met; a publish
+ * brings new ones, and the old go with them.
+ */
+const shapes = new WeakMap<Form[], (r: SentenceRow) => SentenceShape>();
+function shapesFor(forms: Form[]) {
+  let shapeOf = shapes.get(forms);
+  if (!shapeOf) {
+    const formById = new Map(forms.map((f) => [f.id, f]));
+    const kept = new WeakMap<SentenceRow, SentenceShape>();
+    shapeOf = (r) => {
+      let shape = kept.get(r);
+      if (!shape) kept.set(r, (shape = shapeOfRow(r, formById)));
+      return shape;
+    };
+    shapes.set(forms, shapeOf);
+  }
+  return shapeOf;
+}
+
+/** A sentence of her own from a shape: a new object every time, because a
+ *  round writes `shown` on the one it holds (recordShown). The tokens and the
+ *  lists inside are the shape's, shared and never changed. */
+const withRecord = (shape: SentenceShape, st?: ShownRow | Sentence['shown'] | null): Sentence => ({
+  ...shape,
+  shown: st
+    ? { shown_count: st.shown_count, correct_count: st.correct_count, last_shown_at: st.last_shown_at }
+    : null,
+});
 
 /** A stored sentence as the app uses it: tokens split into content forms
  *  (drilled), glue (in view, never graded) and names (dropped), plus her record
@@ -197,6 +281,10 @@ export function toSentence(
   formById: Map<string, Form>,
   st?: { shown_count: number; correct_count: number; last_shown_at: string | null } | null,
 ): Sentence {
+  return withRecord(shapeOfRow(r, formById), st);
+}
+
+function shapeOfRow(r: SentenceRow, formById: Map<string, Form>): SentenceShape {
   const tokens: SentenceToken[] = r.tokens.map((t) => {
     const content: string[] = [];
     let glue: string | undefined;
@@ -223,9 +311,6 @@ export function toSentence(
     difficulty: r.difficulty,
     tokens,
     form_ids: [...new Set(tokens.flatMap((t) => t.form_ids))],
-    shown: st
-      ? { shown_count: st.shown_count, correct_count: st.correct_count, last_shown_at: st.last_shown_at }
-      : null,
   };
 }
 
@@ -467,8 +552,13 @@ export function sentenceCap(sentences: Sentence[], failedYesterday: number, ladd
 export function glueSeen(sentences: Sentence[]): Map<string, number> {
   const seen = new Map<string, number>();
   for (const s of sentences) {
+    // Most of what is loaded she has never passed, and it adds nothing: a glue
+    // word that isn't here has been seen no times (hasLockedGlue). This runs
+    // after every answer too (round.ts), over every sentence in reach.
+    const passes = passesOf(s);
+    if (!passes) continue;
     const glue = new Set(s.tokens.flatMap((t) => (t.glue ? [t.glue] : [])));
-    for (const g of glue) seen.set(g, (seen.get(g) ?? 0) + passesOf(s));
+    for (const g of glue) seen.set(g, (seen.get(g) ?? 0) + passes);
   }
   return seen;
 }
@@ -587,11 +677,21 @@ export function pickReviewSentences(
   const pool = sentences.filter((s) => s.form_ids.length > 0 && carriedBy(s, eligible) && rested(s));
   const remaining = new Set(dueIds);
   const easyFirst = cap < INTRO_IN_SENTENCE_MIN_CAP;
+  // The pool is every sentence she can read — thousands, far along — and each
+  // pick below goes through it. Only the ones holding a due word can ever be
+  // picked, and how hard a sentence is doesn't change between picks.
+  const candidates = pool.filter((s) => s.form_ids.some((id) => dueIds.has(id)));
+  const hardness = new Map<Sentence, number>();
+  const difficultyOf = (s: Sentence) => {
+    let d = hardness.get(s);
+    if (d === undefined) hardness.set(s, (d = difficulty(s, seen, ladder)));
+    return d;
+  };
   const out: Sentence[] = [];
   while (out.length < max) {
     let best: Sentence | null = null;
     let bestCount = 0;
-    for (const s of shuffle(pool)) {
+    for (const s of shuffle(candidates)) {
       if (out.includes(s)) continue;
       const count = s.form_ids.filter((id) => remaining.has(id)).length;
       if (count === 0) continue;
@@ -601,8 +701,8 @@ export function pickReviewSentences(
         continue;
       }
       const cmp = easyFirst
-        ? difficulty(s, seen, ladder) - difficulty(best, seen, ladder) || bestCount - count || byFreshness(s, best)
-        : bestCount - count || difficulty(s, seen, ladder) - difficulty(best, seen, ladder) || byFreshness(s, best);
+        ? difficultyOf(s) - difficultyOf(best) || bestCount - count || byFreshness(s, best)
+        : bestCount - count || difficultyOf(s) - difficultyOf(best) || byFreshness(s, best);
       if (cmp < 0) {
         best = s;
         bestCount = count;
@@ -619,7 +719,7 @@ export function pickReviewSentences(
   // A lesson's review slot asks for exactly its due words, so it opts out.
   if (pad && out.length < max) {
     const spare = shuffle(pool.filter((s) => !out.includes(s))).sort(
-      (a, b) => difficulty(a, seen, ladder) - difficulty(b, seen, ladder) || byFreshness(a, b),
+      (a, b) => difficultyOf(a) - difficultyOf(b) || byFreshness(a, b),
     );
     out.push(...spare.slice(0, max - out.length));
   }
@@ -638,6 +738,7 @@ export function recordShown(userId: string, sentence: Sentence, correct: boolean
     last_shown_at: new Date().toISOString(),
   };
   sentence.shown = next;
+  learnerChanged();
   supabase
     .from('sentence_states')
     .upsert({ sentence_id: sentence.id, user_id: userId, ...next }, { onConflict: 'sentence_id,user_id' })

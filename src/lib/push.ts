@@ -7,10 +7,11 @@ import { supabase } from './supabase';
 //
 // The sending side already lives in Supabase and doesn't care what the app
 // looks like: a pg_cron job calls the `send-reminder` edge function every 15
-// minutes, and from 08:00 local it nudges every device of a learner who hasn't
-// finished a round today — until `streaks.last_practice_date` becomes today,
-// which `finish_lesson` writes. So this file has one job: get a device onto
-// `push_subscriptions` in the shape that function reads.
+// minutes, and for a learner who hasn't finished a round today it sends at
+// most two reminders — one around the time she practised last, one in the
+// evening if her streak is about to freeze — and fewer the longer she stays
+// away (supabase/functions/_shared/reminder-policy.ts). So this file has one
+// job: get a device onto `push_subscriptions` in the shape that function reads.
 //
 // One row per device, one channel per row (a check constraint enforces it):
 //   web     web_push_endpoint + web_push_p256dh + web_push_auth
@@ -19,8 +20,8 @@ import { supabase } from './supabase';
 
 export type PushStatus = 'unsupported' | 'needs_install' | 'denied' | 'enabled' | 'off';
 
-/** What `send-reminder` gates on is the fixed 08:00 start; the column is still
- *  required, and it's what the partner sync writes. */
+/** `send-reminder` works out the hour from when she practises and no longer
+ *  reads this; the column is still required, and the partner sync writes it. */
 export const REMINDER_TIME = '08:00';
 
 export const deviceTimezone = () => {

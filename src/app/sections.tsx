@@ -18,7 +18,7 @@ import { type Course, currentIndex, loadCourse, loadProgress, sectionSummaries, 
 import { goBack } from '@/lib/nav';
 import { SECTION_CAN_DO } from '@/lib/sections';
 import { useStatusBarColor } from '@/lib/status-bar-color';
-import { clay, colors, font, gradients, pastelGrad, path, press, radius } from '@/lib/theme';
+import { clay, colors, font, gradients, pastel, pastelGrad, path, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
@@ -30,6 +30,9 @@ import { FitText } from '@/components/fit-text';
 // Finished sections open straight onto their road; the ones ahead stay locked,
 // each with a jump test that lands her at its start.
 // ---------------------------------------------------------------------------
+
+// Finished sections each wear a pastel, in turn; the current one is salvia, so it is left out.
+const TINTS = [pastel.peach, pastel.butter, pastel.lav, pastel.sky];
 
 const webPress =
   Platform.OS === 'web'
@@ -84,17 +87,6 @@ export default function SectionsScreen() {
   const summaries = data ? sectionSummaries(data.course, data.current, data.done) : [];
   const here = summaries.find((s) => s.state === 'current') ?? null;
 
-  // Any section ahead can be tested into, however far: the test samples a
-  // spread of the units in between, so it stays one sitting long
-  // (learning-engine-spec §7).
-  const jumpTarget = (s: SectionSummary) => {
-    if (!here || s.state !== 'locked' || !data) return null;
-    const hereUnit = data.course.path[data.current]?.unit;
-    const target = s.units[0];
-    if (!hereUnit || !target) return null;
-    return target.course_order > hereUnit.course_order ? target : null;
-  };
-
   const open = (s: SectionSummary) =>
     leave(() => router.dismissTo({ pathname: '/home', params: { section: String(s.section.id) } }));
 
@@ -125,11 +117,7 @@ export default function SectionsScreen() {
               <SectionCard
                 key={s.section.id}
                 summary={s}
-                onOpen={s.state === 'locked' ? undefined : () => open(s)}
-                jump={(() => {
-                  const target = jumpTarget(s);
-                  return target ? () => router.push(`/practice?test=jump&to=${target.id}`) : undefined;
-                })()}
+                onOpen={() => open(s)}
               />
             ))}
           </ScrollView>
@@ -142,23 +130,21 @@ export default function SectionsScreen() {
 function SectionCard({
   summary,
   onOpen,
-  jump,
 }: {
   summary: SectionSummary;
-  onOpen?: () => void;
-  jump?: () => void;
+  onOpen: () => void;
 }) {
   const { section, units, lessons, done, state } = summary;
   const current = state === 'current';
-  const locked = state === 'locked';
   const first = units[0]?.course_order;
   const last = units[units.length - 1]?.course_order;
   const range = first == null ? '' : first === last ? `Unit ${first}` : `Units ${first} to ${last}`;
   const canDo = SECTION_CAN_DO[section.slug];
   const share = lessons ? done / lessons : 0;
+  const tint = current ? undefined : TINTS[(section.ordinal - 1) % TINTS.length];
 
   const label = `Section ${section.ordinal}, ${section.title_en}. ${range}. ${
-    state === 'done' ? 'Finished' : locked ? 'Locked' : `${done} of ${lessons} lessons done`
+    state === 'done' ? 'Finished' : `${done} of ${lessons} lessons done`
   }`;
   const body = (
     <>
@@ -176,33 +162,17 @@ function SectionCard({
 
       <View style={styles.cardHead}>
         <View style={styles.cardTitles}>
-          <Text style={[styles.eyebrow, current && styles.onPastelMuted]}>SECTION {section.ordinal}</Text>
-          <FitText style={[styles.title, locked && styles.lockedText]} lines={1}>
+          <Text style={[styles.eyebrow, (current || tint) && styles.onPastelMuted]}>SECTION {section.ordinal}</Text>
+          <FitText style={styles.title} lines={1}>
             {section.title_en}
           </FitText>
         </View>
-        <View style={[styles.chip, current && styles.chipCurrent]}>
-          <Text style={[styles.chipText, current && styles.onPastel]}>{range}</Text>
+        <View style={[styles.chip, (current || tint) && styles.chipCurrent]}>
+          <Text style={[styles.chipText, (current || tint) && styles.onPastel]}>{range}</Text>
         </View>
       </View>
 
-      {locked ? (
-        <View style={styles.lockedRow}>
-          <Ionicons name="lock-closed" size={15} color={path.lockedGlyph} />
-          <Text style={styles.lockedLabel}>{section.cefr} · {units.length} units</Text>
-          {jump ? (
-            <Pressable
-              onPress={jump}
-              hitSlop={8}
-              accessibilityRole="button"
-              accessibilityLabel={`Jump to section ${section.ordinal}`}
-              style={({ pressed }) => [styles.jump, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
-              <Ionicons name="play-skip-forward" size={12} color={colors.primaryDark} />
-              <Text style={styles.jumpText}>Jump here</Text>
-            </Pressable>
-          ) : null}
-        </View>
-      ) : (
+      {(
         <View style={styles.progressRow}>
           <View style={styles.track}>
             <View style={[styles.fill, { width: `${Math.max(share, done > 0 ? 0.04 : 0) * 100}%` }]}>
@@ -212,7 +182,7 @@ function SectionCard({
           {state === 'done' ? (
             <Ionicons name="checkmark-circle" size={22} color={colors.success} />
           ) : (
-            <Text style={[styles.count, current && styles.onPastel]}>
+            <Text style={[styles.count, (current || tint) && styles.onPastel]}>
               {done}/{lessons}
             </Text>
           )}
@@ -229,15 +199,6 @@ function SectionCard({
     </>
   );
 
-  // A locked section isn't something to open, and its card holds a button of
-  // its own (the jump), so it is a plain card rather than a pressable one.
-  if (!onOpen) {
-    return (
-      <View style={[styles.card, locked && styles.cardLocked]} accessible={!jump} accessibilityLabel={label}>
-        {body}
-      </View>
-    );
-  }
   return (
     <Pressable
       onPress={onOpen}
@@ -246,6 +207,7 @@ function SectionCard({
       style={({ pressed }) => [
         styles.card,
         current && styles.cardCurrent,
+        tint ? { backgroundColor: tint } : null,
         { transform: [{ scale: pressed ? press.scale : 1 }] },
         webPress,
       ]}>
@@ -279,8 +241,6 @@ const styles = StyleSheet.create({
     boxShadow: clay.surface,
   },
   cardCurrent: { backgroundColor: pastelGrad.sage[1] },
-  /** Pressed flat into the page: no lift, nothing to open. */
-  cardLocked: { backgroundColor: path.lockedFace, boxShadow: clay.flat },
 
   bubbleRow: { flexDirection: 'row' },
   bubble: {

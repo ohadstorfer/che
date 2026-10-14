@@ -7,7 +7,8 @@ import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { ClassDoor, ClassWait } from '@/components/class-door';
+import { ClassDoor, ClassWait, SLOW_MS } from '@/components/class-door';
+import { POSE } from '@/components/mascot';
 import { PageColorContext } from '@/components/exercise-frame';
 import { Exercise } from '@/components/exercises';
 import { StreakCelebration } from '@/components/streak-celebration';
@@ -20,6 +21,7 @@ import { useAuth } from '@/lib/auth';
 import { conceptsOf } from '@/lib/concepts';
 import { currentIndex, loadCourse, loadProgress } from '@/lib/course';
 import { LessonLockedError, buildLesson } from '@/lib/lesson';
+import { timed, timingEnd, timingStart } from '@/lib/load-timing';
 import { backToCourse, goBack } from '@/lib/nav';
 import { DEFAULT_LADDER, type Ladder } from '@/lib/sentences';
 import { loadAnswers } from '@/lib/onboarding';
@@ -52,6 +54,18 @@ import { supabase } from '@/lib/supabase';
 import { clay, colors, font, gradients, press, radius } from '@/lib/theme';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import type { Form, Section, Sentence, Streak, Unit } from '@/lib/types';
+
+/** How long a class may take to load before it is called off. A class far
+ *  along with nothing on the phone yet is dozens of sentence blocks; what has
+ *  arrived by then is kept, so trying again picks up where this left off. */
+const LOAD_TIMEOUT_MS = 20_000;
+/** How long the gate's answer is waited for. A streak that can't be read is
+ *  not a reason to keep her from the class. */
+const GATE_TIMEOUT_MS = 4000;
+/** Once Pancho has come out to say the class is on its way, he stays this
+ *  long: a figure that pops in and is gone in the same breath reads as a
+ *  glitch, where the empty frame before him reads as nothing at all. */
+const WAIT_SHOWN_MS = 400;
 
 /** Score a unit check needs (learning-engine-spec §3). Mirrors finish_lesson. */
 const UNIT_PASS_SCORE = 80;
@@ -160,6 +174,8 @@ export default function Practice() {
   /** The next section of a placement is on its way. */
   const [staging, setStaging] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
+  /** Counts her tries at a class that wouldn't load; a new one loads again. */
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     if (!userId) return;
@@ -228,7 +244,18 @@ export default function Practice() {
       return { data: { ...free, items: free.items.map((it) => ({ ...it, filler: true })) }, kind: 'free' };
     };
 
-    load().then(({ data, kind: k, plan: p, walk: w }) => {
+    timingStart('class');
+    // A load that never answers is a load that failed: she is told, and can
+    // try again, rather than left looking at the doorway.
+    const calledOff = setTimeout(() => {
+      if (cancelled) return;
+      cancelled = true;
+      console.warn('lesson took too long to load');
+      setLoadFailed(true);
+      setQueue([]);
+    }, LOAD_TIMEOUT_MS);
+    timed('build', load()).then(({ data, kind: k, plan: p, walk: w }) => {
+      clearTimeout(calledOff);
       if (cancelled) return;
       walk.current = w ?? null;
       const q = withIntros(data.items);
@@ -251,22 +278,28 @@ export default function Practice() {
       setAllSentences(data.sentences);
       setLadder(data.ladder ?? DEFAULT_LADDER);
     }).catch((e) => {
+      clearTimeout(calledOff);
       if (cancelled) return;
       if (e instanceof LessonLockedError) router.replace('/paywall?from=lesson');
       else {
         console.warn('lesson failed to load', e);
-        // A test that can't be built says so rather than spinning for good.
-        if (testMode) {
-          setLoadFailed(true);
-          setQueue([]);
-        }
+        // Whatever it was, it says so rather than spinning for good.
+        setLoadFailed(true);
+        setQueue([]);
       }
     });
     return () => {
       cancelled = true;
+      clearTimeout(calledOff);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, lessonId, testMode, params.to, params.mode, params.concept, isAgain]);
+  }, [userId, lessonId, testMode, params.to, params.mode, params.concept, isAgain, attempt]);
+
+  const tryAgain = () => {
+    setLoadFailed(false);
+    setQueue(null);
+    setAttempt((n) => n + 1);
+  };
 
   // Replacing the route with new params remounts the screen, which resets state
   // on its own; this is the belt-and-braces for when the screen is reused.
@@ -287,17 +320,29 @@ export default function Practice() {
       setGate(null);
       return;
     }
-    supabase
-      .from('streaks')
-      .select('*')
-      .eq('user_id', userId)
-      .maybeSingle()
-      .then(({ data }) => {
+    // Answered once: by the streak, or by the clock if it doesn't come — a
+    // gate that turned up after the class had started would land on top of it.
+    let answered = false;
+    const answer = (next: { lost: number; oneMore: boolean } | null) => {
+      if (answered) return;
+      answered = true;
+      clearTimeout(giveUp);
+      setGate(next);
+    };
+    const giveUp = setTimeout(() => answer(null), GATE_TIMEOUT_MS);
+    timed('gate', Promise.resolve(supabase.from('streaks').select('*').eq('user_id', userId).maybeSingle())).then(
+      ({ data }) => {
         const st = streakStatus((data as Streak) ?? null);
-        if (st.kind === 'frozen') setGate({ lost: st.lost, oneMore: false });
-        else if (st.kind === 'recovering') setGate({ lost: st.lost, oneMore: true });
-        else setGate(null);
-      });
+        if (st.kind === 'frozen') answer({ lost: st.lost, oneMore: false });
+        else if (st.kind === 'recovering') answer({ lost: st.lost, oneMore: true });
+        else answer(null);
+      },
+      () => answer(null),
+    );
+    return () => {
+      answered = true;
+      clearTimeout(giveUp);
+    };
   }, [userId, isAgain, preview]);
 
   const current = queue?.[index] ?? null;
@@ -317,12 +362,36 @@ export default function Practice() {
     if (!firstClip || warmedFirst.current) return;
     warmedFirst.current = true;
     const open = () => setFirstReady(true);
-    void preloadAudio(firstClip).then(open);
+    void timed('first clip', preloadAudio(firstClip)).then(open);
     const giveUp = setTimeout(open, 900);
     return () => clearTimeout(giveUp);
   }, [firstClip]);
   /** The first screen has what it needs; the rest may load behind it. */
   const doorOpen = !!queue && (!firstClip || firstReady);
+  useEffect(() => {
+    if (doorOpen && gate !== undefined) timingEnd();
+  }, [doorOpen, gate]);
+
+  // The doorway stands while anything it waits on is out — and, if that came
+  // back just after Pancho did, a moment more (WAIT_SHOWN_MS).
+  const waiting = gate === undefined || (!gate && !doorOpen);
+  const waitingSince = useRef<number | null>(null);
+  const [lingering, setLingering] = useState(false);
+  useEffect(() => {
+    if (waiting) {
+      waitingSince.current ??= Date.now();
+      return;
+    }
+    const since = waitingSince.current;
+    waitingSince.current = null;
+    if (since == null) return;
+    const waited = Date.now() - since;
+    const owed = SLOW_MS + WAIT_SHOWN_MS - waited;
+    if (waited < SLOW_MS || owed <= 0) return;
+    setLingering(true);
+    const done = setTimeout(() => setLingering(false), owed);
+    return () => clearTimeout(done);
+  }, [waiting]);
 
   // The clips for the exercise she is on and the two after it are fetched
   // ahead of the press, so by the time she taps the speaker there is nothing
@@ -583,7 +652,7 @@ export default function Practice() {
   }
 
   const doorLine = testMode ? 'Getting your test ready…' : undefined;
-  if (gate === undefined) {
+  if (gate === undefined || lingering) {
     return <ClassDoor onClose={() => goBack('/home')} line={doorLine} />;
   }
   if (gate) {
@@ -615,6 +684,20 @@ export default function Practice() {
     return <ClassDoor onClose={() => goBack('/home')} line={doorLine} />;
   }
 
+  if (loadFailed) {
+    return (
+      <SafeAreaView style={styles.safe}>
+        <Animated.View entering={FadeIn.duration(180)} style={styles.doneWrap}>
+          <Image source={POSE.sip} style={styles.failedFigure} contentFit="contain" accessible={false} />
+          <Text style={styles.doneTitle}>{plan || testMode ? "Couldn't load the test" : "Couldn't load your class"}</Text>
+          <Text style={styles.doneHint}>Check your connection and try again.</Text>
+          <Button title="Try again" onPress={tryAgain} />
+          <Button title="Back home" variant="ghost" onPress={backToCourse} />
+        </Animated.View>
+      </SafeAreaView>
+    );
+  }
+
   if (queue.length === 0) {
     return (
       <SafeAreaView style={styles.safe}>
@@ -624,14 +707,10 @@ export default function Practice() {
             {kind === 'mistakes'
               ? 'No mistakes to go over'
               : plan
-                ? loadFailed
-                  ? "Couldn't load the test"
-                  : 'Nothing to test here yet'
+                ? 'Nothing to test here yet'
                 : 'Nothing to practise right now'}
           </Text>
-          <Text style={styles.doneHint}>
-            {loadFailed ? 'Check your connection and try again.' : 'Take a lesson on the path and come back.'}
-          </Text>
+          <Text style={styles.doneHint}>Take a lesson on the path and come back.</Text>
           <Button title="Back home" onPress={backToCourse} />
         </View>
       </SafeAreaView>
@@ -968,6 +1047,7 @@ const styles = StyleSheet.create({
   },
   resultIconSoft: { backgroundColor: colors.card, boxShadow: clay.surface },
   doneEmoji: { fontSize: 64 },
+  failedFigure: { width: 132, height: 132 },
   doneTitle: { ...font.display[800], fontSize: 26, letterSpacing: -0.3, color: colors.ink, textAlign: 'center' },
   doneHint: { ...font.body[600], fontSize: 15, color: colors.muted, textAlign: 'center' },
 });

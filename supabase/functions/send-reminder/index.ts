@@ -1,34 +1,38 @@
 // Edge function: POST /functions/v1/send-reminder
 // Triggered by pg_cron every 15 minutes (see migrations/20260427000002_cron.sql).
-// Sends a recurring nudge every ~30 minutes from the user's reminder_time
-// (no earlier than 08:00 local) until they complete today's class
-// (streaks.last_practice_date == today). Two delivery channels:
+// For each learner who hasn't practised today it asks the reminder policy
+// (_shared/reminder-policy.ts) whether a reminder is due now and which one:
+// at most a routine one around her usual time and a save one in the evening,
+// fewer the longer she stays away. Every device of hers gets the same message,
+// over one of two delivery channels:
 // - Expo Push (native iOS/Android via Expo)
 // - Web Push (PWA, including iOS 16.4+ home-screen)
 
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import webpush from "npm:web-push@3.6.7";
 import { json } from "../_shared/cors.ts";
+import { decide, localParts, type Learner, type Sent, type Slot, type TemplateStats } from "../_shared/reminder-policy.ts";
 
 type PushSub = {
   id: string;
   user_id: string;
   expo_push_token: string | null;
   platform: "ios" | "android" | "web";
-  reminder_time: string;
   timezone: string;
-  notifications_enabled: boolean;
-  last_sent_at: string | null;
-  last_text_index: number;
+  updated_at: string;
   web_push_endpoint: string | null;
   web_push_p256dh: string | null;
   web_push_auth: string | null;
 };
 
-type Streak = {
+type LearnerRow = {
   user_id: string;
+  anchor_at: string;
   current_streak: number;
   last_practice_date: string | null;
+  last_completed_at: string | null;
+  last_round_started_at: string | null;
+  recent: Sent[];
 };
 
 type ExpoMessage = {
@@ -38,27 +42,20 @@ type ExpoMessage = {
   sound: "default";
   data: Record<string, unknown>;
   channelId?: string;
+  ttl: number;
 };
 
-type Pick = { sub: PushSub; nextIdx: number; body: string };
+type Pick = { sub: PushSub; body: string };
+type Send = { user_id: string; local_date: string; slot: Slot; template: string; eligible: string[] };
 
 const EXPO_PUSH_URL = "https://exp.host/--/api/v2/push/send";
-const MIN_GAP_MINUTES = 25;
-const EARLIEST_LOCAL = "08:00";
 const BATCH_SIZE = 100;
 const PAGE = 1000; // PostgREST's row cap per request
 const ID_CHUNK = 200; // ids per `.in()` filter, which travels in the URL
 
-const MESSAGES = [
-  "Hora de practicar tu español 💪",
-  "5 minutos y armás tu racha 🔥",
-  "Tu cerebro te lo va a agradecer 🧠",
-  "¿Listo para una más? 🎯",
-  "Quedamos a un ejercicio del logro de hoy ✨",
-  "Dale, vos podés 🚀",
-  "Un ratito de español ☕",
-  "Sumá un día más a tu racha 📈",
-];
+// A reminder is about now. If the phone is off for longer than this, it is
+// better lost than delivered at the wrong hour.
+const TTL_SECONDS = 60 * 60;
 
 const VAPID_PUBLIC = Deno.env.get("VAPID_PUBLIC_KEY") ?? "";
 const VAPID_PRIVATE = Deno.env.get("VAPID_PRIVATE_KEY") ?? "";
@@ -146,7 +143,7 @@ Deno.serve(async (req) => {
     const { data: page, error: subsErr } = await supabase
       .from("push_subscriptions")
       .select(
-        "id,user_id,expo_push_token,platform,reminder_time,timezone,notifications_enabled,last_sent_at,last_text_index,web_push_endpoint,web_push_p256dh,web_push_auth",
+        "id,user_id,expo_push_token,platform,timezone,updated_at,web_push_endpoint,web_push_p256dh,web_push_auth",
       )
       .eq("notifications_enabled", true)
       .order("id")
@@ -166,71 +163,95 @@ Deno.serve(async (req) => {
     return json({ ok: true, sent: 0, total: 0, traceId });
   }
 
-  const userIds = [...new Set(candidates.map((s) => s.user_id))];
-  // Ids go in the URL, so ask in chunks: thousands at once overflow it.
-  const streakByUser = new Map<string, Streak>();
-  for (const ids of chunks(userIds, ID_CHUNK)) {
-    const { data: streaks, error: streaksErr } = await supabase
-      .from("streaks")
-      .select("user_id,current_streak,last_practice_date")
-      .in("user_id", ids);
-    if (streaksErr) warn("streaks query error", { error: streaksErr.message });
-    for (const s of streaks ?? []) streakByUser.set(s.user_id, s as Streak);
+  const learners: LearnerRow[] = [];
+  for (let from = 0; ; from += PAGE) {
+    const { data: page, error: learnersErr } = await supabase
+      .rpc("reminder_learners")
+      .order("user_id")
+      .range(from, from + PAGE - 1);
+    if (learnersErr) {
+      err("db error fetching learners", { error: learnersErr.message });
+      await flush();
+      return json({ error: `db error: ${learnersErr.message}` }, { status: 500 });
+    }
+    learners.push(...((page ?? []) as LearnerRow[]));
+    if ((page ?? []).length < PAGE) break;
   }
-  log("streaks loaded", { users: userIds.length, rows: streakByUser.size });
+
+  // Without the stats every template scores the same, which is still a fair
+  // way to pick one — so a failure here doesn't hold the reminders back.
+  const stats = new Map<string, TemplateStats>();
+  const { data: statRows, error: statsErr } = await supabase.rpc("reminder_template_stats");
+  if (statsErr) warn("template stats error", { error: statsErr.message });
+  for (const r of statRows ?? []) {
+    stats.set(r.template, {
+      chosen: r.chosen, chosenWon: r.chosen_won, passed: r.passed, passedWon: r.passed_won,
+    });
+  }
+  log("learners loaded", { learners: learners.length, templatesWithStats: stats.size });
+
+  const subsByUser = new Map<string, PushSub[]>();
+  for (const s of candidates) subsByUser.set(s.user_id, [...(subsByUser.get(s.user_id) ?? []), s]);
 
   const now = new Date();
-  const due: PushSub[] = [];
+  const picks: Pick[] = [];
+  const sends = new Map<string, Send>();
   const skipReasons: Record<string, number> = {};
-  const bumpSkip = (k: string) => { skipReasons[k] = (skipReasons[k] ?? 0) + 1; };
 
-  for (const s of candidates) {
-    const todayLocal = todayInTz(s.timezone, now);
-    const streak = streakByUser.get(s.user_id);
-    const localNow = localTimeInTz(s.timezone, now);
-    const earliest = EARLIEST_LOCAL;
-    const gapMs = s.last_sent_at ? now.getTime() - new Date(s.last_sent_at).getTime() : null;
-    const channel = s.expo_push_token ? "expo" : s.web_push_endpoint ? "web" : "none";
-
-    if (streak?.last_practice_date === todayLocal) {
-      bumpSkip("done-today");
+  for (const row of learners) {
+    const subs = subsByUser.get(row.user_id);
+    if (!subs) continue;
+    // The device she used last knows best where she is.
+    const timezone = subs.reduce((a, b) => (b.updated_at > a.updated_at ? b : a)).timezone;
+    const learner: Learner = {
+      timezone,
+      anchorAt: row.anchor_at,
+      streak: row.current_streak,
+      lastPracticeDate: row.last_practice_date,
+      lastCompletedAt: row.last_completed_at,
+      lastRoundStartedAt: row.last_round_started_at,
+      recent: row.recent ?? [],
+    };
+    const decision = decide(learner, now, stats);
+    if ("skip" in decision) {
+      skipReasons[decision.skip] = (skipReasons[decision.skip] ?? 0) + 1;
       continue;
     }
-    if (localNow < earliest) {
-      bumpSkip("before-earliest");
-      continue;
-    }
-    if (gapMs !== null && gapMs < MIN_GAP_MINUTES * 60_000) {
-      bumpSkip("throttled");
-      continue;
-    }
+    const { slot, template, eligible, body } = decision.send;
     console.log(`[send-reminder ${traceId}] due`, {
-      sub: s.id, user: s.user_id, channel, localNow, earliest, tz: s.timezone,
-      lastTextIdx: s.last_text_index, streakDays: streak?.current_streak ?? 0,
+      user: row.user_id, devices: subs.length, tz: timezone, slot, template, streakDays: row.current_streak,
     });
     event("due", {
-      userId: s.user_id,
-      subId: s.id,
-      detail: {
-        channel, localNow, earliest, tz: s.timezone,
-        lastTextIdx: s.last_text_index, streakDays: streak?.current_streak ?? 0,
-      },
+      userId: row.user_id,
+      detail: { devices: subs.length, tz: timezone, slot, template, streakDays: row.current_streak },
     });
-    due.push(s);
+    sends.set(row.user_id, {
+      user_id: row.user_id, local_date: localParts(timezone, now).date, slot, template, eligible,
+    });
+    for (const sub of subs) picks.push({ sub, body });
   }
 
-  log("filter complete", { candidates: candidates.length, due: due.length, skipReasons });
+  log("filter complete", { learners: learners.length, due: sends.size, skipReasons });
 
-  if (due.length === 0) {
+  if (picks.length === 0) {
     log("nobody due — exit", { ms: Date.now() - startedAt });
     await flush();
     return json({ ok: true, sent: 0, total: candidates.length, skipReasons, traceId });
   }
 
-  const picks: Pick[] = due.map((s) => {
-    const nextIdx = (s.last_text_index + 1) % MESSAGES.length;
-    return { sub: s, nextIdx, body: pickBody(nextIdx, streakByUser.get(s.user_id)) };
-  });
+  // Recorded before anything goes out, and nothing goes out unrecorded: a
+  // send the policy can't see would be repeated on every run.
+  const sentAt = now.toISOString();
+  for (const chunk of chunks([...sends.values()], PAGE)) {
+    const { error: insErr } = await supabase
+      .from("notification_sends")
+      .insert(chunk.map((s) => ({ ...s, sent_at: sentAt })));
+    if (insErr) {
+      err("failed to record sends", { error: insErr.message });
+      await flush();
+      return json({ error: `db error: ${insErr.message}`, traceId }, { status: 500 });
+    }
+  }
 
   const expoPicks = picks.filter((p) => p.sub.expo_push_token);
   const webPicks = picks.filter((p) => p.sub.web_push_endpoint);
@@ -248,6 +269,7 @@ Deno.serve(async (req) => {
       body: p.body,
       sound: "default",
       channelId: "default",
+      ttl: TTL_SECONDS,
       data: { url: "posta://" },
     }));
     for (let i = 0; i < messages.length; i += BATCH_SIZE) {
@@ -318,7 +340,7 @@ Deno.serve(async (req) => {
                 keys: { p256dh: p.sub.web_push_p256dh!, auth: p.sub.web_push_auth! },
               },
               payload,
-              { TTL: 60 * 60 },
+              { TTL: TTL_SECONDS },
             );
             sentSubIds.add(p.sub.id);
             const statusCode = (result as { statusCode?: number })?.statusCode;
@@ -351,27 +373,17 @@ Deno.serve(async (req) => {
     }
   }
 
-  if (sentSubIds.size > 0) {
-    const sentAt = now.toISOString();
-    log("updating last_sent_at + last_text_index", { count: sentSubIds.size });
-    // Everyone sent shares sentAt, and nextIdx has only MESSAGES.length
-    // values, so one update per (nextIdx, id chunk) instead of one per user.
-    const idsByIdx = new Map<number, string[]>();
-    for (const p of picks) {
-      if (!sentSubIds.has(p.sub.id)) continue;
-      idsByIdx.set(p.nextIdx, [...(idsByIdx.get(p.nextIdx) ?? []), p.sub.id]);
-    }
-    let failed = 0;
-    for (const [nextIdx, ids] of idsByIdx) {
-      for (const chunk of chunks(ids, ID_CHUNK)) {
-        const { error: upErr } = await supabase
-          .from("push_subscriptions")
-          .update({ last_sent_at: sentAt, last_text_index: nextIdx })
-          .in("id", chunk);
-        if (upErr) failed += chunk.length;
-      }
-    }
-    if (failed > 0) warn("update errors", { failed, total: sentSubIds.size });
+  // A learner none of whose devices could be reached wasn't reminded: forget
+  // the send, so the next run tries again while it is still the right time.
+  const reached = new Set(picks.filter((p) => sentSubIds.has(p.sub.id)).map((p) => p.sub.user_id));
+  const missed = [...sends.keys()].filter((id) => !reached.has(id));
+  for (const chunk of chunks(missed, ID_CHUNK)) {
+    const { error: delErr } = await supabase
+      .from("notification_sends")
+      .delete()
+      .eq("sent_at", sentAt)
+      .in("user_id", chunk);
+    if (delErr) warn("failed to forget missed sends", { error: delErr.message });
   }
 
   if (expiredSubIds.length > 0) {
@@ -390,7 +402,8 @@ Deno.serve(async (req) => {
     sent: sentSubIds.size,
     pruned: expiredSubIds.length,
     candidates: candidates.length,
-    due: due.length,
+    due: sends.size,
+    reached: reached.size,
     expo: expoPicks.length,
     web: webPicks.length,
     skipReasons,
@@ -414,38 +427,4 @@ function tryHostname(url: string | null | undefined): string | null {
   } catch {
     return null;
   }
-}
-
-function todayInTz(timezone: string, now: Date): string {
-  try {
-    return new Intl.DateTimeFormat("en-CA", {
-      timeZone: timezone,
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }).format(now);
-  } catch {
-    return now.toISOString().slice(0, 10);
-  }
-}
-
-function localTimeInTz(timezone: string, now: Date): string {
-  try {
-    return new Intl.DateTimeFormat("en-GB", {
-      timeZone: timezone,
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    }).format(now);
-  } catch {
-    return now.toISOString().slice(11, 16);
-  }
-}
-
-function pickBody(nextIdx: number, streak: Streak | undefined): string {
-  if (streak?.current_streak && nextIdx % 3 === 2) {
-    const d = streak.current_streak;
-    return `¡No pierdas tu racha de ${d} día${d === 1 ? "" : "s"}! 🔥`;
-  }
-  return MESSAGES[nextIdx];
 }

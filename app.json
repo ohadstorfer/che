@@ -10,13 +10,13 @@
     "backgroundColor": "#F7EFE6",
     "primaryColor": "#B44A60",
     "ios": {
-      "bundleIdentifier": "com.posta.app",
+      "bundleIdentifier": "app.posta.ios",
       "supportsTablet": false,
       "usesAppleSignIn": true,
       "appleTeamId": "683UA9HZYT",
       "entitlements": {
         "com.apple.security.application-groups": [
-          "group.com.posta.app"
+          "group.app.posta.ios"
         ]
       },
       "config": {
@@ -24,7 +24,7 @@
       }
     },
     "android": {
-      "package": "com.posta.app",
+      "package": "app.posta.android",
       "adaptiveIcon": {
         "backgroundColor": "#F7EFE6",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -72,6 +72,14 @@
           "defaultChannel": "default"
         }
       ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Posta lets you attach screenshots from your photos when you send feedback.",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ],
       "expo-build-properties",
       "@bacons/apple-targets",
       [
@@ -107,7 +115,9 @@
             }
           ]
         }
-      ]
+      ],
+      "expo-iap",
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true,

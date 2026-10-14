@@ -14,7 +14,7 @@ import {
 } from './answers';
 import { conceptScores, conceptsOf, weakestConcept } from './concepts';
 import { addDays, localDateStr } from './dates';
-import { type GlossTallies, withMeanings } from './meanings';
+import { type GlossTallies, clearMeaningMemos, withMeanings } from './meanings';
 import { loadCourse } from './course';
 import {
   DEFAULT_LADDER,
@@ -37,7 +37,10 @@ import {
   tooLongToBuild,
   tooLongToHear,
 } from './sentences';
-import { versioned } from './content-cache';
+import { contentSources, contentVersion, onContentCleared, versioned } from './content-cache';
+import { holdLearner, takeLearner } from './learner-ready';
+import { timed } from './load-timing';
+import { hurrySlices } from './slices';
 import { all } from './fetch-all';
 import { supabase } from './supabase';
 import type { ExerciseMode, Form, FormState, Sentence, Tip } from './types';
@@ -173,6 +176,9 @@ async function fetchLexiconRows(): Promise<LexiconRows> {
   return { forms, answers };
 }
 
+// What meanings.ts keeps of the content's strings goes when staff edit it.
+onContentCleared(clearMeaningMemos);
+
 // Merged once per set of rows, which every caller in a run shares.
 const lexicons = new WeakMap<LexiconRows, Form[]>();
 function merged(rows: LexiconRows): Form[] {
@@ -210,9 +216,14 @@ export interface LearnerReach {
   sentenceIds?: string[];
 }
 
+/** Her word records as a class reads them: every column but whose they are,
+ *  which the query already says — on thousands of rows, a seventh of the load.
+ *  `updated_at` is what round.ts counts a word's days from. */
+const STATE_COLUMNS = 'id, form_id, state, ease_factor, interval_days, repetitions, lapses, due_at, introduced_on, updated_at';
+
 /** Every published sentence's share of a word's meanings (meanings.ts), summed
  *  by the database. Once per app run and shared. */
-const loadGlossTallies = () =>
+export const loadGlossTallies = () =>
   versioned('tallies', (v) => v.tallies, async () => {
     const { data, error } = await supabase.rpc('form_gloss_tallies');
     if (error || !data || typeof data !== 'object') throw new Error(error?.message ?? 'no gloss tallies');
@@ -227,21 +238,68 @@ const loadGlossTallies = () =>
  *  KB of it. Should that load fail (the server is older than the app, say),
  *  it falls back to every sentence, as it always did. */
 export async function loadLearner(userId: string, reach: LearnerReach = {}): Promise<LearnerData> {
+  // Anything still being got ready behind the road now has someone waiting.
+  hurrySlices();
+  // Read a moment ago for this very class (prefetch.ts)? Then that is it —
+  // still on its way, perhaps, if she was quick.
+  const ready = await timed(
+    'learner',
+    takeLearner<LearnerData>(learnerKey(userId, reach)).catch(() => null),
+    (got) => (got ? 'read ahead' : 'not read ahead'),
+  );
+  return ready ?? readLearner(userId, reach);
+}
+
+/** Reads her data for a class she hasn't opened yet and holds it for the
+ *  `loadLearner` that asks for the same (learner-ready.ts). */
+export function readLearnerAhead(
+  userId: string,
+  reach: LearnerReach = {},
+  /** Work to do before the read — held too, so a class that asks meanwhile
+   *  waits for both rather than starting over. */
+  first?: () => Promise<unknown>,
+): Promise<LearnerData> {
+  const data = (async () => {
+    await first?.().catch(() => {});
+    return readLearner(userId, reach);
+  })();
+  holdLearner(learnerKey(userId, reach), data);
+  return data;
+}
+
+const learnerKey = (userId: string, reach: LearnerReach) =>
+  JSON.stringify([userId, reach.throughOrder ?? null, reach.unitIds ?? [], reach.sentenceIds ?? []]);
+
+async function readLearner(userId: string, reach: LearnerReach): Promise<LearnerData> {
+  const rows = (list: unknown[]) => `${list.length} rows`;
+  void timed('version', contentVersion());
   const [lexicon, { data: stateRows }, { data: roundRows }, { data: profile }, shown, course, tallies] = await Promise.all([
-    loadLexicon(),
+    timed('lexicon', loadLexicon()),
     // Paged (all): her states are past PostgREST's 1,000 rows.
-    all<FormState>(() => supabase.from('form_states').select('*').eq('user_id', userId).order('form_id')).then((data) => ({ data })),
-    supabase
-      .from('rounds')
-      .select('score, finished_at')
-      .eq('user_id', userId)
-      .not('finished_at', 'is', null)
-      .order('finished_at', { ascending: false })
-      .limit(OFFSET_WINDOW),
-    supabase.from('profiles').select('placed_through').eq('user_id', userId).maybeSingle(),
-    loadSentenceStates(userId),
-    loadCourse().catch(() => null),
-    loadGlossTallies().catch(() => null),
+    timed(
+      'states',
+      all<Omit<FormState, 'user_id'>>(
+        () => supabase.from('form_states').select(STATE_COLUMNS).eq('user_id', userId).order('form_id'),
+        { remember: `form_states:${userId}`, label: 'states' },
+      ),
+      rows,
+    ).then((data) => ({ data: data.map((s) => ({ ...s, user_id: userId })) })),
+    timed(
+      'rounds',
+      Promise.resolve(
+        supabase
+          .from('rounds')
+          .select('score, finished_at')
+          .eq('user_id', userId)
+          .not('finished_at', 'is', null)
+          .order('finished_at', { ascending: false })
+          .limit(OFFSET_WINDOW),
+      ),
+    ),
+    timed('profile', Promise.resolve(supabase.from('profiles').select('placed_through').eq('user_id', userId).maybeSingle())),
+    timed('shown', loadSentenceStates(userId), rows),
+    timed('course', loadCourse().catch(() => null)),
+    timed('tallies', loadGlossTallies().catch(() => null)),
   ]);
   const states = (stateRows ?? []) as FormState[];
   const placedThrough = (profile as { placed_through?: number } | null)?.placed_through ?? 0;
@@ -252,17 +310,26 @@ export async function loadLearner(userId: string, reach: LearnerReach = {}): Pro
   // placement put her past, and the one this round plays.
   let sentences: Sentence[] | null = null;
   if (course && tallies) {
-    sentences = await loadSentences(
-      userId,
-      lexicon,
-      {
-        throughOrder: Math.max(reached, placedThrough, reach.throughOrder ?? 0),
-        units: course.units,
-        unitIds: reach.unitIds,
-        ids: reach.sentenceIds,
-      },
-      shown,
-    ).catch(() => null);
+    // Blocks already in memory, read off the phone, or fetched: the last is
+    // what a class ahead of where she is waits on.
+    const before = { ...contentSources };
+    sentences = await timed(
+      'sentences',
+      loadSentences(
+        userId,
+        lexicon,
+        {
+          throughOrder: Math.max(reached, placedThrough, reach.throughOrder ?? 0),
+          units: course.units,
+          unitIds: reach.unitIds,
+          ids: reach.sentenceIds,
+        },
+        shown,
+      ).catch(() => null),
+      () =>
+        `${contentSources.network - before.network} net, ${contentSources.disk - before.disk} disk, ` +
+        `${contentSources.memory - before.memory} memory`,
+    );
   }
   const bounded = sentences != null;
   sentences ??= await loadSentences(userId, lexicon, undefined, shown);
@@ -270,7 +337,8 @@ export async function loadLearner(userId: string, reach: LearnerReach = {}): Pro
   // What each word means comes from its sentences and how she has met them, so
   // it is worked out here, where both are to hand, every time her data loads.
   // The sentences she hasn't got add to it through `tallies`.
-  const forms = withMeanings(lexicon, sentences, reached, bounded ? (tallies ?? undefined) : undefined);
+  const reachable = sentences;
+  const forms = timed('meanings', () => withMeanings(lexicon, reachable, reached, bounded ? (tallies ?? undefined) : undefined));
   const scores = ((roundRows ?? []) as { score: number | null }[]).flatMap((r) => (r.score == null ? [] : [r.score]));
   const ladder = ladderFor(ladderOffset(scores), {
     placedThrough,

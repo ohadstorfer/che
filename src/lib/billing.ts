@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import type { Billing, Catalog } from './billing-shared';
+import { type Billing, type Catalog, PRODUCTS } from './billing-shared';
 
 // ---------------------------------------------------------------------------
 // Billing on the web. There is no store here: in development a mock stands in
 // so the paywall can be walked end to end in a browser; in production nothing
 // is for sale, and premium comes only from the server (a subscription bought
-// on a phone, via the RevenueCat webhook — see premium.tsx).
+// on a phone, checked with its store by verify-purchase — see premium.tsx).
 // ---------------------------------------------------------------------------
 
 const MOCK = __DEV__;
@@ -14,16 +14,14 @@ const KEY = 'che.mock-premium';
 
 const MOCK_CATALOG: Catalog = {
   main: {
-    hardPaywall: false,
     plans: [
-      { id: '$rc_annual', period: 'year', price: 59.99, priceString: '$59.99', perMonthString: '$4.99', trialDays: 7, introPrice: null, currency: 'USD' },
-      { id: '$rc_monthly', period: 'month', price: 12.99, priceString: '$12.99', perMonthString: '$12.99', trialDays: null, introPrice: null, currency: 'USD' },
+      { id: PRODUCTS.annual, period: 'year', price: 99, priceString: '$99.00', perMonthString: '$8.25', trialDays: 7, introPrice: null, currency: 'USD' },
+      { id: PRODUCTS.monthly, period: 'month', price: 14.99, priceString: '$14.99', perMonthString: '$14.99', trialDays: null, introPrice: null, currency: 'USD' },
     ],
   },
   winback: {
-    hardPaywall: false,
     plans: [
-      { id: '$rc_annual', period: 'year', price: 59.99, priceString: '$59.99', perMonthString: '$4.99', trialDays: null, introPrice: { price: 35.99, priceString: '$35.99' }, currency: 'USD' },
+      { id: PRODUCTS.winback, period: 'year', price: 99, priceString: '$99.00', perMonthString: '$8.25', trialDays: null, introPrice: { price: 59, priceString: '$59.00' }, currency: 'USD' },
     ],
   },
 };
@@ -48,6 +46,12 @@ export const billing: Billing = {
     return 'purchased';
   },
   async restore() {
+    return MOCK && (await AsyncStorage.getItem(KEY)) === '1';
+  },
+  async sync() {
+    return MOCK && (await AsyncStorage.getItem(KEY)) === '1';
+  },
+  async adopt() {
     return MOCK && (await AsyncStorage.getItem(KEY)) === '1';
   },
   async isPremium() {

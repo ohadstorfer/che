@@ -14,14 +14,15 @@ import { clay, colors, font, radius } from '@/lib/theme';
 // class's own frame — the way out, the empty bar, the button at the bottom —
 // with nothing in the middle yet, so the first exercise arrives into a room
 // that is already there. Most classes open in under a second, and a loading
-// screen that long is only a flash between two others.
+// screen that long is only a flash between two others. (Far along the road
+// they take longer — docs/class-loading.md has the numbers.)
 //
 // A wait that does drag (a weak signal) gets Pancho and a line after a
 // second, so it reads as something happening rather than something stuck.
 // ---------------------------------------------------------------------------
 
 /** How long the middle stays empty before the wait is admitted to. */
-const SLOW_MS = 1000;
+export const SLOW_MS = 1000;
 
 /** The middle of the frame: empty, then Pancho once the wait has gone on. */
 export function ClassWait({ line = 'Getting your class ready…' }: { line?: string }) {

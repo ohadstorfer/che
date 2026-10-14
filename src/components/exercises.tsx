@@ -1,4 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import {
   createContext,
@@ -64,7 +65,7 @@ import { SETTLED_DAYS, buildTiles, wordPool } from '@/lib/session';
 import { clay, colors, font, OUTLINE, pastel, PICKED, radius } from '@/lib/theme';
 import { FlagSun } from '@/components/sticker';
 import Svg, { Path as SvgPath } from 'react-native-svg';
-import { type TipBlock, type TipSpan, tipLayout, tipSpans } from '@/lib/tip-layout';
+import { type TipBlock, type TipSpan, tipSpans, tipSteps } from '@/lib/tip-layout';
 import type { Form, Sentence, Tip } from '@/lib/types';
 import { FitText } from '@/components/fit-text';
 
@@ -324,20 +325,43 @@ function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
 // as an example on a butter sticker, a paradigm as a real table.
 // ---------------------------------------------------------------------------
 function TipCard({ tip, onDone }: { tip: Tip; onDone: () => void }) {
-  const blocks = useMemo(() => tipLayout(tip.body_md), [tip.body_md]);
+  const steps = useMemo(() => tipSteps(tip.body_md), [tip.body_md]);
+  const [at, setAt] = useState(0);
+  const reduced = useReducedMotion();
+  const last = at >= steps.length - 1;
+  // Each step arrives rather than swaps: without it the text changes under an
+  // unmoved button and the tap seems to have done nothing.
+  const shown = useSharedValue(1);
+  const arrive = useAnimatedStyle(() => ({
+    opacity: shown.get(),
+    transform: [{ translateY: reduced ? 0 : (1 - shown.get()) * 8 }],
+  }));
+  const next = () => {
+    if (last) return onDone();
+    shown.set(0);
+    shown.set(withTiming(1, { duration: 220, easing: Easing.bezier(0.23, 1, 0.32, 1) }));
+    setAt(at + 1);
+  };
   return (
     <Frame
       prompt={`💡 ${tip.title_en}`}
       verdict={null}
       canCheck
-      checkLabel="Got it"
-      onCheck={onDone}
-      onContinue={onDone}>
-      <View style={styles.tip}>
-        {blocks.map((block, i) => (
-          <TipPart key={i} block={block} />
+      checkLabel={last ? 'Got it' : 'Next'}
+      onCheck={next}
+      onContinue={next}>
+      {steps.length > 1 ? (
+        <View style={styles.tipDots} accessibilityLabel={`Part ${at + 1} of ${steps.length}`}>
+          {steps.map((_, i) => (
+            <View key={i} style={[styles.tipDot, i <= at && styles.tipDotOn]} />
+          ))}
+        </View>
+      ) : null}
+      <Animated.View style={[styles.tip, arrive]}>
+        {(steps[at] ?? []).map((block, i) => (
+          <TipPart key={`${at}-${i}`} block={block} />
         ))}
-      </View>
+      </Animated.View>
     </Frame>
   );
 }
@@ -445,31 +469,46 @@ function useClip(path: string | null) {
   // A clip that will not sound has to say so. Silence on its own reads as a
   // broken button, and there is no console to look at on her phone.
   const [problem, setProblem] = useState<AudioFailure | null>(null);
+  // How fast the clip that is sounding was asked for, so a slow button can say it is the one playing.
+  const [rate, setRate] = useState(1);
   const live = useRef(false);
   const set = (value: boolean) => {
     live.current = value;
     setPlaying(value);
   };
 
-  const play = useCallback(() => {
-    if (!path) return;
-    setProblem(null);
-    // playAudio stops whatever was sounding first, which reports back through
-    // the old onEnd — so this order matters: claim the state last.
-    playAudio(path, (reason) => {
-      set(false);
-      // 'blocked' only means the browser wants a tap first, which the button
-      // already asks for — not something to complain about.
-      if (reason && reason !== 'blocked') setProblem(reason);
-    });
-    set(true);
-  }, [path]);
+  const run = useCallback(
+    (at: number) => {
+      if (!path) return;
+      setProblem(null);
+      setRate(at);
+      // playAudio stops whatever was sounding first, which reports back through
+      // the old onEnd — so this order matters: claim the state last.
+      playAudio(
+        path,
+        (reason) => {
+          set(false);
+          // 'blocked' only means the browser wants a tap first, which the button
+          // already asks for — not something to complain about.
+          if (reason && reason !== 'blocked') setProblem(reason);
+        },
+        at,
+      );
+      set(true);
+    },
+    [path],
+  );
+  const play = useCallback(() => run(1), [run]);
+  const slow = useCallback(() => run(SLOW_RATE), [run]);
 
   // Leaving the exercise takes its sound with it.
   useEffect(() => () => void (live.current && stopAudio()), []);
 
-  return { playing, problem, play };
+  return { playing, problem, play, slow, rate };
 }
+
+/** The slow way to hear a clip: three quarters of the speed, pitch kept. */
+const SLOW_RATE = 0.75;
 
 const AUDIO_PROBLEM: Record<AudioFailure, string> = {
   blocked: 'Tap to listen',
@@ -622,7 +661,20 @@ export function SpeechBubble({
       {replies.map((reply, i) => (
         <View key={i} style={styles.replyWrap}>
           <Panel style={[styles.bubble, styles.replyBubble]}>{reply}</Panel>
-          <View style={[styles.tail, styles.replyTail]} pointerEvents="none" />
+          {/* Drawn like the first speaker's tail, mirrored: its two slanted sides carry the outline. */}
+          <View style={[styles.speechTail, styles.replySpeechTail]} pointerEvents="none">
+            <Svg width={TAIL_W} height={TAIL_H}>
+              <SvgPath d={`M 0 4 L ${TAIL_W - 3} ${TAIL_H / 2} L 0 ${TAIL_H - 4} Z`} fill={pastel.lav} />
+              <SvgPath
+                d={`M 0 4 L ${TAIL_W - 3} ${TAIL_H / 2} L 0 ${TAIL_H - 4}`}
+                fill="none"
+                stroke={colors.ink}
+                strokeWidth={OUTLINE}
+                strokeLinejoin="round"
+                strokeLinecap="butt"
+              />
+            </Svg>
+          </View>
         </View>
       ))}
     </View>
@@ -664,6 +716,85 @@ function SpanishBubble({ sentence, ...line }: React.ComponentProps<typeof Senten
       ))}>
       {first}
     </SpeechBubble>
+  );
+}
+
+function useSpeaker() {
+  const [speaker] = useState(() => SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
+  return speaker;
+}
+
+/**
+ * A sentence as the star of the screen: a butter card with the capybara
+ * peeking over its top edge, the way the bubble has him beside it. `center`
+ * puts him in the middle (a sentence being read), otherwise he leans from the
+ * left (a sentence being completed).
+ */
+function PhraseCard({ center, children }: { center?: boolean; children: React.ReactNode }) {
+  const speaker = useSpeaker();
+  return (
+    <View style={[styles.phraseCard, center && { paddingTop: 44 }]}>
+      <View pointerEvents="none" style={[styles.phraseCardPeek, center && { left: '50%', marginLeft: -59 }]}>
+        <FlagSun size={144} style={{ left: -13, top: -6 }} />
+        <Image
+          source={speaker}
+          style={{ position: 'absolute', left: 3, bottom: 0, width: 112, height: 112, transform: [{ scaleX: -1 }] }}
+          contentFit="contain"
+          accessible={false}
+        />
+      </View>
+      {children}
+    </View>
+  );
+}
+
+/** The bars of the wave: fixed, so it never changes between visits. */
+const WAVE = [10, 22, 30, 16, 34, 26, 12, 28, 36, 20, 14, 24, 32, 18, 26, 34, 14, 22, 30, 12, 26, 18, 10];
+
+/**
+ * Listen's player: play, a long wave, and a tortoise for the slow take. It
+ * says the clip once on arrival, like the pad it replaces. No clock — she is
+ * not timing anything.
+ */
+function ListenPlayer({ path }: { path: string }) {
+  const { playing, problem, play, slow, rate } = useClip(path);
+  const reduced = useReducedMotion();
+
+  useEffect(() => play(), [play]);
+
+  const slowOn = playing && rate !== 1;
+  return (
+    <View style={styles.player}>
+      <Pressable
+        onPress={play}
+        accessibilityLabel={problem ? AUDIO_PROBLEM[problem] : 'Listen'}
+        style={({ pressed }) => [
+          styles.playerPlay,
+          playing && !slowOn && styles.playButtonOn,
+          problem && styles.playButtonDead,
+          { transform: [{ scale: pressed ? 0.94 : 1 }] },
+          webPress,
+        ]}>
+        {playing && !slowOn && !reduced ? <Pulse inset={5} /> : null}
+        <Ionicons name={problem ? 'volume-mute' : playing && !slowOn ? 'volume-high' : 'play'} size={24} color={colors.onPrimary} />
+      </Pressable>
+      <View style={styles.playerWave} accessible={false}>
+        {WAVE.map((h, i) => (
+          <View key={i} style={[styles.playerBar, { height: h, opacity: playing ? 1 : 0.85 }]} />
+        ))}
+      </View>
+      <Pressable
+        onPress={slow}
+        accessibilityLabel="Play slowly"
+        style={({ pressed }) => [
+          styles.playerSlow,
+          slowOn && { backgroundColor: colors.primarySoft },
+          { transform: [{ scale: pressed ? 0.94 : 1 }] },
+          webPress,
+        ]}>
+        <MaterialCommunityIcons name="tortoise" size={26} color={colors.primary} />
+      </Pressable>
+    </View>
   );
 }
 
@@ -736,7 +867,7 @@ export function Choices({
   side?: boolean;
 }) {
   return (
-    <View style={side ? styles.choicesSide : { gap: 10 }}>
+    <View style={side ? styles.choicesSide : styles.choicesList}>
       {options.map((opt) => {
         const picked = chosen === opt.id;
         const right = revealed && opt.id === correctId;
@@ -856,7 +987,7 @@ function Listen({
         })
       }
       onContinue={() => onAnswer(!!verdict?.correct)}>
-      <AudioPad path={form.audio_path!} />
+      <ListenPlayer path={form.audio_path!} />
       <Choices
         options={options}
         correctId={form.id}
@@ -1792,18 +1923,11 @@ function Matching({
       const next = new Set(matched).add(id);
       setMatched(next);
       setSelected(null);
-      if (next.size === group.length) {
-        const wrong = [...missed];
-        setVerdict({
-          correct: wrong.length === 0,
-          // The pairs she got wrong, each with its aside — the reveal is the
-          // one place in this exercise where a note can't give anything away.
-          answer: group
-            .filter((c) => missed.has(c.id))
-            .map((c) => `${c.form} = ${meaningOf(c)}${c.gloss_note_en ? ` (${c.gloss_note_en})` : ''}`)
-            .join('\n'),
-        });
-      }
+      // Every pair is matched, so whatever she got wrong on the way she has
+      // already put right, and the red flash told her at the time. The sheet
+      // has nothing left to correct; the words she confused still go to the
+      // round through `missed`.
+      if (next.size === group.length) setVerdict({ correct: true });
     } else {
       // A wrong pairing marks both words involved — she confused them.
       setMissed(new Set([...missed, id, selected]));
@@ -1897,6 +2021,7 @@ export function SentenceLine({
   onWord,
   tappable,
   turn,
+  large,
 }: {
   sentence: Sentence;
   /** One speaker's line of a dialogue, by index, without its dash — for a
@@ -1914,7 +2039,10 @@ export function SentenceLine({
   tappable?: (formId: string) => boolean;
   /** Token to replace with a blank, and what she has put in it so far. */
   blank?: { index: number; filled?: string; tone?: 'right' | 'wrong' };
+  /** The sentence as the star of a card: bigger, and centred. */
+  large?: boolean;
 }) {
+  const phrase = large ? styles.cardPhrase : styles.bubblePhrase;
   // Measured on tap, never cached: a word only reflows when the sentence
   // rewraps, which fires no layout event, so a remembered rect goes stale.
   const nodes = useRef<Record<number, unknown>>({});
@@ -1931,7 +2059,7 @@ export function SentenceLine({
     // be the one that stretches.
     <View style={turn ? styles.replyText : styles.bubbleText}>
       {rows.map((row) => (
-      <View key={row} style={styles.tokenRow}>
+      <View key={row} style={[styles.tokenRow, large && styles.tokenRowCentered]}>
         {sentence.tokens.map((t, i) => {
           if (turns[i] !== row) return null;
           if (blank && i === blank.index) {
@@ -1941,7 +2069,7 @@ export function SentenceLine({
             const tail = tokenTail(t);
             return (
               <View key={i} style={[styles.tokenRow, styles.tokenTight]}>
-                {head ? <Text style={styles.bubblePhrase}>{head}</Text> : null}
+                {head ? <Text style={phrase}>{head}</Text> : null}
                 <View
                   style={[
                     styles.gap,
@@ -1952,6 +2080,7 @@ export function SentenceLine({
                   <Text
                     style={[
                       styles.gapText,
+                      large && styles.cardGapText,
                       blank.tone === 'right' && { color: colors.success },
                       blank.tone === 'wrong' && { color: colors.dangerInk },
                     ]}>
@@ -1963,7 +2092,7 @@ export function SentenceLine({
                       : ' '}
                   </Text>
                 </View>
-                {tail ? <Text style={styles.bubblePhrase}>{tail}</Text> : null}
+                {tail ? <Text style={phrase}>{tail}</Text> : null}
               </View>
             );
           }
@@ -1984,7 +2113,7 @@ export function SentenceLine({
                   { transform: [{ scale: pressed ? 0.96 : 1 }] },
                   webPress,
                 ]}>
-                <Text style={[styles.bubblePhrase, styles.tokenNewText]}>{shown(t.surface)}</Text>
+                <Text style={[phrase, styles.tokenNewText]}>{shown(t.surface)}</Text>
               </Pressable>
             );
           }
@@ -2005,12 +2134,12 @@ export function SentenceLine({
                 hitSlop={6}
                 accessibilityHint="Shows what this word means"
                 style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.96 : 1 }] }, webPress]}>
-                <Text style={[styles.bubblePhrase, styles.tokenPeek]}>{shown(t.surface)}</Text>
+                <Text style={[phrase, styles.tokenPeek]}>{shown(t.surface)}</Text>
               </Pressable>
             );
           }
           return (
-            <Text key={i} style={styles.bubblePhrase}>
+            <Text key={i} style={phrase}>
               {shown(t.surface)}
             </Text>
           );
@@ -2101,7 +2230,7 @@ function SentenceIntro({
   const tappable = word ? (id: string) => id === word.id : (id: string) => id !== item.form.id;
 
   const prompt = word
-    ? `✨ New ${isSlang(word) ? 'slang ' : ''}word: what does the sentence say?`
+    ? `New ${isSlang(word) ? 'slang' : 'word'} · what does it say?`
     : item.isRetry
       ? '🔁 What does the sentence say?'
       : 'What does the sentence say?';
@@ -2118,12 +2247,25 @@ function SentenceIntro({
       {/* The Spanish is already on screen and the answer is its English, so
           hearing it gives nothing away — it binds the sound to the spelling,
           which is the whole reason the sentence is read rather than shown. */}
-      <SpanishBubble
-        sentence={sentence}
-        mark={word?.id}
-        onWord={word || canTap ? words.open : undefined}
-        tappable={tappable}
-      />
+      {turnCount(sentence.tokens) < 2 ? (
+        <PhraseCard center>
+          {sentence.audio_path ? <PlayButton path={sentence.audio_path} big /> : null}
+          <SentenceLine
+            large
+            sentence={sentence}
+            mark={word?.id}
+            onWord={word || canTap ? words.open : undefined}
+            tappable={tappable}
+          />
+        </PhraseCard>
+      ) : (
+        <SpanishBubble
+          sentence={sentence}
+          mark={word?.id}
+          onWord={word || canTap ? words.open : undefined}
+          tappable={tappable}
+        />
+      )}
       <WordBubble state={words.showing} onClose={words.close} />
       {word && !words.peeked.length ? (
         <Text style={styles.peekHint}>Tap the marked word to see what it means</Text>
@@ -2174,6 +2316,8 @@ function SentenceGap({
   const target = item.form;
   // By ear the recording asks the question: the English waits for the verdict.
   const byEar = !!item.byEar && !!sentence.audio_path;
+  // One voice, read: the card. A dialogue, or one heard, keeps its bubbles.
+  const oneCard = !byEar && turnCount(sentence.tokens) < 2;
   const words = useWordPopover(lookupWith(lexicon, allForms));
   const [index] = useState(() => tokenIndexOf(sentence, target.id));
   const [options] = useState(() =>
@@ -2215,26 +2359,31 @@ function SentenceGap({
       {/* The English is what she is asked, so it is what Mora says. The Spanish
           sits under it on its own ruled line, the way a build lays out its
           answer: this is the sentence she is completing, not reading. */}
-      {byEar ? (
-        <AudioPad path={sentence.audio_path!} />
+      {oneCard ? (
+        // The Spanish with its gap, the English a size down beneath it, all on one card.
+        <PhraseCard>
+          {verdict && sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
+          <SentenceLine
+            large
+            sentence={sentence}
+            onWord={canTap ? words.open : undefined}
+            blank={{ index, filled, tone: verdict ? (correct ? 'right' : 'wrong') : undefined }}
+          />
+          <Text style={styles.phraseCardEn}>{sentence.en}</Text>
+        </PhraseCard>
       ) : (
-        <EnglishBubble sentence={sentence} />
+        <>
+          {byEar ? <AudioPad path={sentence.audio_path!} /> : <EnglishBubble sentence={sentence} />}
+          <View style={styles.gapLine}>
+            {verdict && sentence.audio_path && !byEar ? <PlayButton path={sentence.audio_path} /> : null}
+            <SentenceLine
+              sentence={sentence}
+              onWord={canTap ? words.open : undefined}
+              blank={{ index, filled, tone: verdict ? (correct ? 'right' : 'wrong') : undefined }}
+            />
+          </View>
+        </>
       )}
-      <View style={styles.gapLine}>
-        {/* Not before she answers — the recording says the missing word. Once
-            the verdict is in it gives nothing away and is worth the most:
-            she hears the sentence whole, with the word she just chose in it. */}
-        {verdict && sentence.audio_path && !byEar ? <PlayButton path={sentence.audio_path} /> : null}
-        <SentenceLine
-          sentence={sentence}
-          onWord={canTap ? words.open : undefined}
-          blank={{
-            index,
-            filled,
-            tone: verdict ? (correct ? 'right' : 'wrong') : undefined,
-          }}
-        />
-      </View>
       <WordBubble state={words.showing} onClose={words.close} />
       {fill === 'typed' ? (
         <TextInput
@@ -2551,14 +2700,8 @@ const styles = StyleSheet.create({
   replyWrap: { alignSelf: 'flex-end', maxWidth: '82%', marginRight: TAIL },
   replyBubble: { backgroundColor: pastel.lav },
   replyText: { gap: 2 },
-  replyTail: {
-    right: -TAIL,
-    marginTop: -TAIL,
-    borderTopWidth: TAIL,
-    borderBottomWidth: TAIL,
-    borderLeftWidth: TAIL,
-    borderLeftColor: pastel.lav,
-  },
+  // The first speaker's tail sits on the left edge; hers is the same shape on the right.
+  replySpeechTail: { left: undefined, right: -TAIL_W + OUTLINE },
   bubbleText: { flex: 1, gap: 2 },
   // The apex sits at the element's left edge and halfway down its height, so
   // `top: 50%` with a matching negative margin points it at her mouth whatever
@@ -2579,12 +2722,64 @@ const styles = StyleSheet.create({
   bubbleWord: { ...font.display[800], fontSize: 32, lineHeight: 38, color: colors.ink, letterSpacing: -0.4 },
   bubbleEn: { ...font.display[800], fontSize: 26, lineHeight: 32, color: colors.ink, letterSpacing: -0.3 },
   bubblePhrase: { ...font.display[700], fontSize: 22, lineHeight: 30, color: colors.ink },
+  cardPhrase: { ...font.display[800], fontSize: 30, lineHeight: 38, color: colors.ink, letterSpacing: -0.3 },
+  cardGapText: { fontSize: 30, lineHeight: 40 },
+  tokenRowCentered: { justifyContent: 'center' },
+  // The sentence as the star: a butter sticker, the capybara peeking over its edge.
+  phraseCard: {
+    marginTop: 64,
+    borderRadius: 30,
+    backgroundColor: pastel.butter,
+    paddingTop: 36,
+    paddingBottom: 22,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    gap: 4,
+    boxShadow: clay.surface,
+  },
+  phraseCardPeek: { position: 'absolute', left: 14, top: -84, width: 118, height: 112 },
+  phraseCardEn: { ...font.body[700], fontSize: 15, lineHeight: 20, color: colors.muted, textAlign: 'center', marginTop: 4 },
+  phraseCardSpeak: { position: 'absolute', right: 14, top: 14 },
+  // Listen: one pill, play at one end, the slow button at the other.
+  player: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    padding: 14,
+    borderRadius: radius.pill,
+    backgroundColor: pastel.butter,
+    boxShadow: clay.surface,
+  },
+  playerPlay: {
+    width: 54,
+    height: 54,
+    borderRadius: 99,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 3,
+    boxShadow: clay.button,
+  },
+  playerWave: { flex: 1, minWidth: 0, height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  playerBar: { width: 4, borderRadius: 3, backgroundColor: colors.ink },
+  playerSlow: {
+    width: 46,
+    height: 46,
+    borderRadius: 99,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: clay.button,
+  },
   bubblePhraseEn: { ...font.display[700], fontSize: 20, lineHeight: 28, color: colors.ink },
 
   // Tips ---------------------------------------------------------------------
   // No panel around the whole tip: the prose sits on the page, and only what
   // is worth a second look (examples, pairs, a table) is a sticker.
   tip: { gap: 16 },
+  tipDots: { flexDirection: 'row', gap: 6, paddingLeft: 2 },
+  tipDot: { width: 22, height: 7, borderRadius: radius.pill, backgroundColor: colors.stone, boxShadow: clay.trough },
+  tipDotOn: { backgroundColor: colors.primary },
   tipLead: { ...font.body[700], fontSize: 21, lineHeight: 29, color: colors.ink },
   tipText: { ...font.body[600], fontSize: 18, lineHeight: 27, color: colors.ink },
   tipStrong: { ...font.body[800], color: colors.primaryDark },
@@ -2701,6 +2896,9 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 18,
   },
+  // The thick outline and hard shadow eat most of a small gap, so the options
+  // look glued at 10. 18 leaves visible paper between them.
+  choicesList: { gap: 18 },
   choicesSide: { flexDirection: 'row', gap: 12 },
   choiceSide: { flex: 1, minHeight: 88, borderRadius: radius.lg - 4, alignItems: 'center', justifyContent: 'center' },
   choiceTextSide: { ...font.display[800], fontSize: 22 },

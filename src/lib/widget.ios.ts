@@ -12,7 +12,7 @@ import type { Streak } from './types';
 // a crying Pancho into a goal celebration without waiting for the next hour.
 // ---------------------------------------------------------------------------
 
-const GROUP = 'group.com.posta.app';
+const GROUP = 'group.app.posta.ios';
 const KEY = 'streak';
 
 let storage: ExtensionStorage | null = null;

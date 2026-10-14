@@ -57,14 +57,14 @@ function useReducedMotion() {
 // --- Pancho -------------------------------------------------------------------
 
 /** Pancho is the waving capybara, cropped to head and shoulders in a manteca clay circle. */
-export function PanchoAvatar({ size = 34 }: { size?: number }) {
+export function PanchoAvatar({ size = 34, drop = 0 }: { size?: number; /** Sits him lower in the circle, as a share of its size. */ drop?: number }) {
   return (
     <View
       style={[styles.avatar, { width: size, height: size, borderRadius: size / 2 }]}
       accessibilityLabel="Pancho">
       <Image
         source={tomasArt}
-        style={{ width: size * 0.95, height: size * 1.35, marginTop: size * 0.08 }}
+        style={{ width: size * 0.95, height: size * 1.35, marginTop: size * (0.08 + drop) }}
         contentFit="contain"
         accessible={false}
       />

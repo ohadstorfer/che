@@ -12,13 +12,12 @@ import { MASTERED, type PackScore, usePackScores } from '@/lib/argentine-scores'
 import { goBack } from '@/lib/nav';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { type PastelName, clay, colors, font, pastel, pastelGrad, press, radius } from '@/lib/theme';
-import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
-// One Argentine theme (?theme=<slug>): its packs as a short path, easiest
-// first. Nothing is locked — any pack opens — but the first one she hasn't
-// played is "Up next" and carries the screen's one button, so there is never
-// a question of where to tap. The rail fills in as she goes.
+// One Argentine theme (?theme=<slug>): its packs as an album of stickers,
+// easiest first, each showing its words and no title. Nothing is locked — any
+// pack opens — but the first one she hasn't played is butter with a START tab,
+// so there is never a question of where to tap.
 // ---------------------------------------------------------------------------
 
 const webPress =
@@ -84,18 +83,19 @@ export default function ArgentineTheme() {
           <Text style={[styles.heroAbout, { color: tone.ink }]}>{theme.about}</Text>
         </View>
 
-        <View>
+        <View style={styles.album}>
           {packs.map((pack, i) => (
-            <Step
+            <Sticker
               key={pack.slug}
               pack={pack}
-              number={i + 1}
+              index={i}
               score={scores[pack.slug]}
               status={statusOf(scores[pack.slug], pack === next)}
-              last={i === packs.length - 1}
-              // The rail below a step is filled once she has played it.
-              railDone={!!scores[pack.slug]}
             />
+          ))}
+          {/* Empty cells finish the last row, so its stickers keep the width of the others. */}
+          {Array.from({ length: (COLS - (packs.length % COLS)) % COLS }, (_, i) => (
+            <View key={`pad${i}`} style={styles.cell} />
           ))}
         </View>
       </ScrollView>
@@ -103,100 +103,63 @@ export default function ArgentineTheme() {
   );
 }
 
-function Step({
-  pack,
-  number,
-  score,
-  status,
-  last,
-  railDone,
-}: {
-  pack: ArPack;
-  number: number;
-  score?: PackScore;
-  status: Status;
-  last: boolean;
-  railDone: boolean;
-}) {
+const COLS = 3;
+const TILT = [-1.5, 1.2, -1, 1.5, -1.2, 1];
+// Packs to play are butter; the ones she has played turn peach or salvia, in turn.
+const DONE = [pastel.peach, pastel.sage];
+
+/**
+ * A pack as a sticker in the album: its words inside it as little pills, none
+ * of them the title. Nothing is locked. Every pack to play is butter, the
+ * next one with a START tab; played ones turn peach or salvia.
+ */
+function Sticker({ pack, index, score, status }: { pack: ArPack; index: number; score?: PackScore; status: Status }) {
   const open = () => router.push(`/argentine-pack?pack=${pack.slug}`);
-  const preview = pack.words.map((w) => w.es);
+  const played = status === 'mastered' || status === 'played';
+  const bg = played ? DONE[index % DONE.length] : pastel.butter;
+  const words = pack.words.map((w) => w.es);
 
   return (
-    <View style={styles.step}>
-      <View style={styles.rail}>
-        <Marker status={status} number={number} score={score} />
-        {last ? null : <View style={[styles.railLine, railDone && styles.railLineDone]} />}
-      </View>
-
-      {status === 'next' ? (
-        <View style={styles.nextCard}>
-          <View style={{ gap: 3 }}>
-            <Text style={styles.nextEyebrow}>Up next</Text>
-            <Text style={styles.nextTitle}>{pack.name}</Text>
-            <FitText style={styles.stepWords} lines={1}>
-              {preview.slice(0, 4).join(' · ')}
-              {preview.length > 4 ? ` · +${preview.length - 4}` : ''}
-            </FitText>
-          </View>
-          <Button title={`Start · ${pack.words.length} words`} onPress={open} />
+    // The outer press target is plain and unrotated, so the badge and the tab
+    // can hang off the sticker's edge without the sticker's own clipping.
+    <Pressable
+      onPress={open}
+      accessibilityRole="button"
+      accessibilityLabel={`${pack.name}: ${words.join(', ')}${score ? `, best ${score.best}%` : status === 'next' ? ', up next' : ', new'}`}
+      style={({ pressed }) => [styles.cell, { transform: [{ scale: pressed ? 0.97 : 1 }] }, webPress]}>
+      <View
+        style={[
+          styles.sticker,
+          { backgroundColor: bg, transform: [{ rotate: `${TILT[index % TILT.length]}deg` }] },
+        ]}>
+        <View style={styles.tags}>
+          {words.map((w) => (
+            <View key={w} style={styles.tag}>
+              <Text style={styles.tagText} numberOfLines={1}>
+                {w}
+              </Text>
+            </View>
+          ))}
         </View>
-      ) : (
-        <Pressable
-          onPress={open}
-          accessibilityRole="button"
-          accessibilityLabel={`${pack.name}${score ? `, best ${score.best}%` : ', new'}`}
-          style={({ pressed }) => [styles.stepBody, { transform: [{ scale: pressed ? 0.98 : 1 }] }, webPress]}>
-          <View style={styles.stepTop}>
-            <Text style={styles.stepTitle}>{pack.name}</Text>
-            <Chip status={status} score={score} />
-          </View>
-          <FitText style={styles.stepWords} lines={1}>
-            {preview.slice(0, 4).join(' · ')}
-          </FitText>
-        </Pressable>
-      )}
-    </View>
+      </View>
+
+      {status === 'mastered' ? (
+        <View style={styles.badge}>
+          <Ionicons name="checkmark" size={16} color="#fff" />
+        </View>
+      ) : status === 'played' && score ? (
+        <View style={[styles.badge, styles.badgeScore]}>
+          <Text style={styles.badgeText}>{score.best}%</Text>
+        </View>
+      ) : null}
+      {status === 'next' ? (
+        <View style={styles.startTab}>
+          <Text style={styles.startText}>START</Text>
+        </View>
+      ) : null}
+    </Pressable>
   );
 }
-
-/** The circle on the rail: a check once mastered, her best score once
- *  played, a lit outline for the next one, a plain number otherwise. */
-function Marker({ status, number, score }: { status: Status; number: number; score?: PackScore }) {
-  if (status === 'mastered') {
-    return (
-      <View style={[styles.marker, styles.markerDone]}>
-        <Ionicons name="checkmark" size={22} color={colors.onPastel} />
-      </View>
-    );
-  }
-  if (status === 'played' && score) {
-    return (
-      <View style={[styles.marker, styles.markerPlayed]}>
-        <Text style={styles.ringText}>{score.best}</Text>
-      </View>
-    );
-  }
-  if (status === 'next') {
-    return (
-      <View style={[styles.marker, styles.markerNext]}>
-        <Text style={[styles.markerText, { color: colors.primary }]}>{number}</Text>
-      </View>
-    );
-  }
-  return (
-    <View style={[styles.marker, styles.markerNew]}>
-      <Text style={styles.markerText}>{number}</Text>
-    </View>
-  );
-}
-
-function Chip({ status, score }: { status: Status; score?: PackScore }) {
-  if (status === 'mastered' && score) return <Text style={[styles.chip, styles.chipGood]}>Mastered · {score.best}%</Text>;
-  if (status === 'played' && score) return <Text style={[styles.chip, styles.chipWarm]}>{score.best}% · replay</Text>;
-  return <Text style={[styles.chip, styles.chipNew]}>New</Text>;
-}
-
-const MARKER = 40;
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
@@ -221,57 +184,52 @@ const styles = StyleSheet.create({
   heroTitle: { ...font.display[800], fontSize: 30, lineHeight: 32, letterSpacing: -0.5, maxWidth: '68%' },
   heroAbout: { ...font.body[600], opacity: 0.85, fontSize: 14, lineHeight: 19, maxWidth: '62%' },
 
-  step: { flexDirection: 'row', gap: 14 },
-  rail: { width: MARKER, alignItems: 'center' },
-  railLine: { width: 4, flex: 1, minHeight: 14, borderRadius: 2, backgroundColor: colors.trough },
-  railLineDone: { backgroundColor: pastel.butter },
-  marker: {
-    width: MARKER,
-    height: MARKER,
-    borderRadius: MARKER / 2,
-    alignItems: 'center',
+  album: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', rowGap: 30, paddingTop: 10 },
+  cell: { width: '30%', overflow: 'visible' },
+  sticker: {
+    height: 150,
+    padding: 10,
+    borderRadius: 22,
     justifyContent: 'center',
-    overflow: 'hidden',
-  },
-  markerDone: { backgroundColor: pastel.butter, boxShadow: clay.surface },
-  markerNew: { backgroundColor: colors.stone, boxShadow: clay.flat },
-  markerNext: {
-    backgroundColor: colors.card,
-    borderWidth: 3,
-    borderColor: colors.primary,
-    boxShadow: `0 0 0 5px ${colors.primarySoft}, ${clay.surface}`,
-  },
-  markerPlayed: { backgroundColor: colors.card, borderWidth: 2, borderColor: colors.primary, boxShadow: clay.surface },
-  markerText: { ...font.display[800], fontSize: 15, color: colors.muted },
-  ringText: { ...font.body[800], fontSize: 11, color: colors.primaryDark, fontVariant: ['tabular-nums'] },
-
-  stepBody: { flex: 1, gap: 3, paddingTop: 8, paddingBottom: 22, minHeight: 44 },
-  stepTop: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
-  stepTitle: { ...font.body[800], fontSize: 17, color: colors.ink, flexShrink: 1 },
-  stepWords: { ...font.body[600], fontSize: 14, color: colors.muted },
-
-  nextCard: {
-    flex: 1,
-    gap: 12,
-    padding: 14,
-    marginBottom: 18,
-    borderRadius: radius.lg,
-    backgroundColor: colors.card,
     boxShadow: clay.surface,
   },
-  nextEyebrow: { ...font.body[800], fontSize: 12, letterSpacing: 0.8, textTransform: 'uppercase', color: colors.primary },
-  nextTitle: { ...font.display[800], fontSize: 20, color: colors.ink },
-
-  chip: {
-    ...font.body[800],
-    fontSize: 12,
-    borderRadius: radius.pill,
-    paddingHorizontal: 9,
+  // The words sit inside the sticker as small white pills, wrapped and centred.
+  tags: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignContent: 'center', gap: 5 },
+  tag: {
+    maxWidth: '100%',
+    paddingHorizontal: 8,
     paddingVertical: 3,
-    overflow: 'hidden',
-    fontVariant: ['tabular-nums'],
+    borderRadius: 99,
+    backgroundColor: '#fff',
+    boxShadow: `0 0 0 1.5px ${colors.ink}`,
   },
-  chipGood: { color: colors.success, backgroundColor: colors.successSoft },
-  chipWarm: { color: colors.dangerInk, backgroundColor: colors.accentSoft },
-  chipNew: { color: colors.muted, backgroundColor: colors.trough },
+  tagText: { ...font.body[800], fontSize: 12, color: colors.ink },
+  badge: {
+    position: 'absolute',
+    right: -7,
+    top: -9,
+    zIndex: 2,
+    minWidth: 26,
+    height: 26,
+    paddingHorizontal: 4,
+    borderRadius: 13,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: `0 0 0 2px ${colors.ink}`,
+  },
+  badgeScore: { paddingHorizontal: 6 },
+  badgeText: { ...font.body[800], fontSize: 11, lineHeight: 14, color: '#fff', fontVariant: ['tabular-nums'] },
+  startTab: {
+    position: 'absolute',
+    bottom: -13,
+    alignSelf: 'center',
+    zIndex: 2,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 99,
+    backgroundColor: colors.primary,
+    boxShadow: `0 0 0 2px ${colors.ink}`,
+  },
+  startText: { ...font.body[800], fontSize: 11, lineHeight: 14, letterSpacing: 0.5, color: '#fff' },
 });

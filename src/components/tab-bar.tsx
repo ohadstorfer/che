@@ -11,6 +11,7 @@ import {
   View,
   type ViewStyle,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { clay, colors, font, pastel, press } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
 
@@ -56,6 +57,10 @@ const pressTransition =
 
 export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const [rowWidth, setRowWidth] = useState(0);
+  // Lift off the bottom edge by what the device reserves there, less 4pt, and never under 14pt: a home
+  // indicator (iPhone ~34pt), Android gesture bar (~24pt) or 3-button bar (~48pt) all get clear air,
+  // and the web, with no inset, still gets a gap.
+  const lift = Math.max(useSafeAreaInsets().bottom - 4, 14);
 
   // Tracks the focused index as a float so the pill can be interpolated to any
   // point between slots mid-slide.
@@ -76,7 +81,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const slotWidth = (rowWidth - BAR_PAD * 2) / Math.max(state.routes.length, 1);
 
   return (
-    <View style={styles.dock}>
+    <View style={[styles.dock, { paddingBottom: lift }]}>
       <View
         style={styles.bar}
         onLayout={(e) => setRowWidth(e.nativeEvent.layout.width)}
@@ -157,14 +162,13 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 }
 
 const styles = StyleSheet.create({
-  // No safe-area inset under the bar: the card sits 12pt off the bottom edge
-  // and the home indicator draws over it, exactly as it does over a native tab
-  // bar. Padding the dock by `insets.bottom` would stack the indicator's 34pt
-  // on top of that and strand the bar halfway up the screen.
+  // The bottom padding is set in `TabBar` from the safe-area inset (see `lift`);
+  // the 14pt here is only the floor. The full inset would strand the bar halfway
+  // up the screen, and none of it left the bar tight against the rounded corners.
   dock: {
     paddingHorizontal: 14,
     paddingTop: 6,
-    paddingBottom: 12,
+    paddingBottom: 14,
     backgroundColor: 'transparent',
   },
   bar: {

@@ -2,6 +2,7 @@ import { useCallback, useRef } from 'react';
 
 import type { Note } from './answers';
 import { localDateStr } from './dates';
+import { learnerChanged } from './learner-ready';
 import { type TestAnswer } from './placement';
 import { recordShown, DEFAULT_LADDER, glueSeen, type Ladder } from './sentences';
 import { type SessionItem, earnedTail, promoteTail } from './session';
@@ -220,6 +221,8 @@ export function useRound(userId: string | undefined) {
       ]);
 
       if (opts.queue.length > 0 && live.current) {
+        // From here her records move with every answer.
+        learnerChanged();
         ready.current = supabase
           .from('rounds')
           .insert({
@@ -500,6 +503,8 @@ export function useRound(userId: string | undefined) {
     const { answered, wrong } = firstTries.current;
     if (!live.current) return null;
     await ready.current;
+    // The round's score is one of the things a class is built from.
+    learnerChanged();
     const { data, error } = await supabase.rpc('finish_lesson', {
       p_local_date: localDateStr(),
       p_lesson_id: lessonRef.current,

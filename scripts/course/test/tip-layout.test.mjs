@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { tipLayout } from '../../../src/lib/tip-layout.ts';
+import { tipLayout, tipSteps } from '../../../src/lib/tip-layout.ts';
 
 const kinds = (body) => tipLayout(body).map((b) => b.kind);
 const plain = (block) => block.spans.map((s) => s.text).join('');
@@ -55,4 +55,15 @@ test('a table glued to its paragraph, with no blank line, is still a table', () 
   const blocks = tipLayout('Swap the vowel.\n| yo (now) | vos |\n| llamo | **llames** |\n| vengo | **vengas** |\n*Ir* is the odd one out.');
   assert.deepEqual(blocks.map((b) => b.kind), ['lead', 'table', 'text']);
   assert.deepEqual(blocks[1].head, ['yo (now)', 'vos']);
+});
+
+test('steps: a paragraph each, a table with the paragraph that introduces it', () => {
+  assert.deepEqual(tipSteps('One idea.').map((s) => s.map((b) => b.kind)), [['lead']]);
+  const three = tipSteps('**Quién** asks *who*: *¿Quién es él?*\n\nWhose? Use **de**.\n\nA **pibe** is a young guy.');
+  assert.deepEqual(three.map((s) => s[0].kind), ['lead', 'lead', 'lead']);
+  const table = tipSteps('Three forms:\n\n| yo | **soy** |\n| vos | **sos** |\n\nUse **vos** with everyone.');
+  assert.deepEqual(table.map((s) => s.map((b) => b.kind)), [['lead', 'table'], ['lead']]);
+  // Glued to its paragraph, and a table that opens the tip.
+  assert.deepEqual(tipSteps('Swap the vowel.\n| yo | vos |\n| llamo | **llames** |\n*Ir* is the odd one out.').map((s) => s.length), [2, 1]);
+  assert.deepEqual(tipSteps('| yo | **soy** |\n| vos | **sos** |\n\nBoth are *ser*.\n\nAnother idea.').map((s) => s.map((b) => b.kind)), [['table', 'text'], ['lead']]);
 });

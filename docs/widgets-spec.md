@@ -105,7 +105,7 @@ day's rhythm, word included, until the status changes.
   moves through the day, and into a frozen run, without the app being opened.
 - The app's only job is to hand over the streak row. `publishStreakWeek()`
   calls `syncWidget()` (`src/lib/widget.ios.ts`), which writes it to the app
-  group `group.com.posta.app` and reloads the widget, so finishing a round
+  group `group.app.posta.ios` and reloads the widget, so finishing a round
   shows "practiced" at once. Signing out clears it.
 - The word list is bundled inside the widget (`targets/widget/assets/words.json`,
   built by `npm run widget:words` from `src/lib/argentine.json`): everyday
@@ -120,7 +120,7 @@ day's rhythm, word included, until the status changes.
 - A round finished on another device does not show until the app next opens
   on this one.
 - Shipping needs the App Group capability on the app's identifier and a new
-  identifier for the widget (`com.posta.app.PostaWidget`). EAS Build and
+  identifier for the widget (`app.posta.ios.PostaWidget`). EAS Build and
   Xcode's automatic signing both create these.
 
 ## How it is built (Android)

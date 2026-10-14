@@ -195,3 +195,33 @@ export function tipLayout(body: string): TipBlock[] {
   }
   return blocks;
 }
+
+/**
+ * A tip as the steps it is read in: one idea a screen, so a new idea never
+ * runs on from the last. Each paragraph is a step and opens with its own
+ * lead. A table stays with the paragraph that introduces it, or with the one
+ * after it when it opens the tip; the prose after a table is a new step.
+ */
+export function tipSteps(body: string): TipBlock[][] {
+  const steps: { prose: boolean; parts: string[] }[] = [];
+  for (const paragraph of body.split(/\n{2,}/)) {
+    let run: { rows: boolean; lines: string[] } | undefined;
+    const runs: { rows: boolean; lines: string[] }[] = [];
+    for (const line of paragraph.split(/\n/).map((l) => l.trim()).filter(Boolean)) {
+      const rows = line.startsWith('|');
+      if (!run || run.rows !== rows) runs.push((run = { rows, lines: [] }));
+      run.lines.push(line);
+    }
+    for (const r of runs) {
+      const last = steps[steps.length - 1];
+      const part = r.lines.join(r.rows ? '\n' : ' ');
+      if (last && (r.rows || !last.prose)) {
+        last.parts.push(part);
+        last.prose ||= !r.rows;
+      } else {
+        steps.push({ prose: !r.rows, parts: [part] });
+      }
+    }
+  }
+  return steps.map((s) => tipLayout(s.parts.join('\n\n')));
+}

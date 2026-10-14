@@ -27,6 +27,7 @@ import {
   sentenceItem,
 } from './session';
 import { loadCourse } from './course';
+import { timed } from './load-timing';
 import { supabase } from './supabase';
 import type { ExerciseMode, Form, FormState, Lesson, LessonSlot, Sentence, Tip, Unit } from './types';
 
@@ -103,8 +104,9 @@ export class LessonLockedError extends Error {
  * The rows of a lesson that sit behind the premium lock: its slots, or a
  * story's lines. An empty read is asked about, not guessed at — it may be a
  * draft with nothing in it yet. When the server says locked, it may only be
- * behind the store: a purchase whose webhook hasn't landed. sync-entitlement
- * asks RevenueCat directly, and if she has paid, the rows are read again.
+ * behind the store: a purchase the server hasn't been told about. The store
+ * on this phone is asked (billing.sync), and if she has paid, the rows are
+ * read again.
  */
 export async function readLessonRows<T>(table: 'lesson_slots' | 'story_lines', lessonId: string): Promise<T[]> {
   const read = async () => {
@@ -121,10 +123,10 @@ export async function readLessonRows<T>(table: 'lesson_slots' | 'story_lines', l
   const { data: locked, error } = await supabase.rpc('lesson_locked', { p_lesson: lessonId });
   if (error) throw error;
   if (!locked) return rows;
-  const { data: synced } = await supabase.functions
-    .invoke<{ premium: boolean }>('sync-entitlement', { body: {} })
-    .catch(() => ({ data: null }));
-  if (!synced?.premium) throw new LessonLockedError(lessonId);
+  // Asked for only here: the store has no place in a lesson that opens.
+  const { billing } = await import('./billing');
+  const synced = await billing.sync().catch(() => false);
+  if (!synced) throw new LessonLockedError(lessonId);
   return read();
 }
 
@@ -138,7 +140,7 @@ export async function buildLesson(
   // neither needs the other's answer to start.
   const { lesson, unit, tips, shaped } = await lessonWithUnit(lessonId);
   const [slotRows, learner] = await Promise.all([
-    readLessonRows<LessonSlot>('lesson_slots', lessonId),
+    timed('slots', readLessonRows<LessonSlot>('lesson_slots', lessonId), (list) => `${list.length}`),
     // Sentences as far as this lesson's unit.
     loadLearner(userId, { throughOrder: unit.course_order, unitIds: [unit.id] }),
   ]);
@@ -151,7 +153,7 @@ export async function buildLesson(
     : learner;
 
   return {
-    ...resolveSlots(data, unit, slotRows, tips, canonical, new Date(), shaped),
+    ...timed('resolve', () => resolveSlots(data, unit, slotRows, tips, canonical, new Date(), shaped)),
     lesson,
     unit,
   };

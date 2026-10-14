@@ -710,9 +710,9 @@ export function stopAudio(): void {
 /**
  * Play a clip. `onEnd` fires when it finishes, is cut short by another clip,
  * or gives up — in that last case with the reason, so a button can say so
- * instead of going quiet.
+ * instead of going quiet. `rate` slows it (0.75) for ears that need it.
  */
-export function playAudio(path: string, onEnd?: OnEnd): void {
+export function playAudio(path: string, onEnd?: OnEnd, rate = 1): void {
   stopAudio();
   const mine = generation;
   playingPath = path;
@@ -720,7 +720,7 @@ export function playAudio(path: string, onEnd?: OnEnd): void {
   const warm = clips.get(path);
   // A warmed clip starts inside the press itself, which is the fastest path
   // and the one Safari is happiest with.
-  if (warm) return start(warm, onEnd);
+  if (warm) return start(warm, onEnd, rate);
 
   void clipUrl(path, true).then((url) => {
     if (generation !== mine) return; // something else took over while it loaded
@@ -731,11 +731,11 @@ export function playAudio(path: string, onEnd?: OnEnd): void {
       onEnd?.(reason);
       return;
     }
-    start(url, onEnd);
+    start(url, onEnd, rate);
   });
 }
 
-function start(url: string, onEnd?: OnEnd): void {
+function start(url: string, onEnd?: OnEnd, rate = 1): void {
   if (isWeb) {
     const el = player();
     const entry: Playing = {
@@ -756,6 +756,9 @@ function start(url: string, onEnd?: OnEnd): void {
     el.onended = () => done();
     el.onerror = () => done('failed');
     current = entry;
+    // load() puts the rate back to the default, so the default is what carries it.
+    el.defaultPlaybackRate = rate;
+    el.playbackRate = rate;
     el.src = url;
     // Without this an element that has already finished once refuses to start
     // again — the old single-element version's bug.
@@ -790,6 +793,7 @@ function start(url: string, onEnd?: OnEnd): void {
       onEnd?.(failed ? 'failed' : undefined);
     });
     current = entry;
+    if (rate !== 1) p.setPlaybackRate(rate);
     p.play();
   });
 }

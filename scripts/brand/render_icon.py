@@ -1,8 +1,8 @@
 """Render Posta's app icon and its store/platform variants.
 
 The design is artboard "45 · Icon: Salvia, like 34" on the design canvas
-(https://claude.ai/artifact/G4beWfxvd6tkDrVbPWfjw2): a 440×440 sage green
-square, a lighter sage hill, and the mate capybara with a cream sticker
+(https://claude.ai/artifact/G4beWfxvd6tkDrVbPWfjw2), recoloured: a 440×440
+butter square, a lighter butter hill, and the mate capybara with a cream sticker
 outline. (34 was the same drawing on the app's dark green, #3E5641 with a
 #5C7560 hill and a #F1EEE6 outline.) The geometry below is copied from that artboard, in its 440-unit
 coordinates, and redrawn at full resolution from the original Canva art
@@ -12,7 +12,7 @@ coordinates, and redrawn at full resolution from the original Canva art
 
 Writes:
   assets/images/icon.png                       1024 iOS / store icon (no alpha)
-  assets/images/android-icon-background.png    adaptive icon: green + hill
+  assets/images/android-icon-background.png    adaptive icon: butter + hill
   assets/images/android-icon-foreground.png    adaptive icon: the capybara
   assets/images/android-icon-monochrome.png    themed icon: line art only
   assets/images/splash-icon.png                splash: rounded icon
@@ -28,8 +28,8 @@ from scipy import ndimage as nd
 ROOT = Path(__file__).resolve().parents[2]
 IMG = ROOT / "assets/images"
 
-GREEN = (168, 213, 186)  # #A8D5BA, salvia
-HILL = (192, 226, 205)  # #C0E2CD
+GREEN = (255, 224, 138)  # #FFE08A, manteca (was salvia, #A8D5BA)
+HILL = (255, 235, 179)  # #FFEBB3 (was #C0E2CD)
 BONE = (255, 249, 243)  # #FFF9F3
 
 FRAME = 440  # the artboard, in design units
@@ -65,7 +65,7 @@ def disk(r: int) -> np.ndarray:
 
 
 def layers(art: Image.Image, origin: float, extent: float, px: int):
-    """Background (green + hill) and foreground (capybara + sticker) for the
+    """Background (butter + hill) and foreground (capybara + sticker) for the
     design-unit window [origin, origin + extent] drawn at `px` pixels."""
     k = px / extent
     to = lambda v: (v - origin) * k  # noqa: E731

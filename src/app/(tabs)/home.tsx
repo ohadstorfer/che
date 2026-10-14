@@ -825,6 +825,9 @@ export default function Home() {
   /** The list's content height, once it has one. On native the road is placed
    *  only after this: iOS clamps a scroll issued before the content is sized. */
   const contentH = useRef(0);
+  /** She has scrolled the road standing herself, so it is no longer pinned
+   *  back onto her step as its layout settles (place). */
+  const dragged = useRef(false);
   /** Which section's road is standing — a different one is placed afresh. */
   const lastRoadKey = useRef<string | null>(null);
   /** When it landed — the hold that keeps her old status readable counts from
@@ -1137,11 +1140,10 @@ export default function Home() {
 
   // One section at a time (the sections screen holds the whole map). The road
   // opens on the section she is in, or on one she picked there; a section still
-  // ahead is never walked into from a stale link, its road opens once she gets
-  // there.
+  // ahead opens too: she may look at any road, though its steps stay out of reach.
   const summaries = data ? sectionSummaries(data.course, current, data.done) : [];
   const hereSection = data ? sectionAt(data.course, current) : null;
-  const asked = summaries.find((x) => String(x.section.id) === askedSection && x.state !== 'locked');
+  const asked = summaries.find((x) => String(x.section.id) === askedSection);
   const viewed = asked ?? summaries.find((x) => x.section.id === hereSection?.id) ?? null;
   const road = viewed ? path.filter((l) => l.section.id === viewed.section.id) : path;
   const nextSection = viewed ? (summaries[summaries.indexOf(viewed) + 1] ?? null) : null;
@@ -1151,6 +1153,7 @@ export default function Home() {
   if (lastRoadKey.current !== roadKey) {
     lastRoadKey.current = roadKey;
     placed.current = false;
+    dragged.current = false;
     contentH.current = 0;
   }
   const openSection = (id: number) => router.setParams({ section: String(id) });
@@ -1203,6 +1206,10 @@ export default function Home() {
       // is still stuck at the top — the moment the pin holds (or she starts
       // scrolling herself) they stand down.
       const repin = () => {
+        // The phones can't be asked where the view stands, so there it is her
+        // finger that calls the repeats off: a road she has started to scroll
+        // is hers, and pinning it again would throw her back to her step.
+        if (dragged.current) return;
         const node = scrollNode();
         if (!node || node.scrollTop < 40) scrollToStep(step, false);
       };
@@ -1310,6 +1317,9 @@ export default function Home() {
             setJump(next);
           }
         }}
+        onScrollBeginDrag={() => {
+          dragged.current = true;
+        }}
         onContentSizeChange={(_, h) => {
           contentH.current = h;
           place();
@@ -1398,7 +1408,7 @@ export default function Home() {
             <View style={styles.pathEnd}>
               <SectionEnd
                 next={nextSection}
-                onOpen={nextSection && nextSection.state !== 'locked' ? () => openSection(nextSection.section.id) : undefined}
+                onOpen={nextSection ? () => openSection(nextSection.section.id) : undefined}
                 onJump={
                   nextSection?.state === 'locked' && nextSection.units[0] && canJumpTo(nextSection.units[0])
                     ? () => jumpTo(nextSection.units[0])

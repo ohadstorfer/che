@@ -1,149 +1,325 @@
+import type { ProductSubscription, Purchase } from 'expo-iap';
 import { Platform } from 'react-native';
-import Purchases, {
-  type CustomerInfo,
-  type PurchasesOffering,
-  type PurchasesPackage,
-} from 'react-native-purchases';
 
 import {
   type Billing,
   type Catalog,
-  ENTITLEMENT,
-  type Offer,
-  type Plan,
+  isoDays,
+  type Period,
   periodDays,
   periodOf,
-  WINBACK_OFFERING,
+  perMonth,
+  type Plan,
+  PRODUCTS,
 } from './billing-shared';
+import { supabase } from './supabase';
 
 // ---------------------------------------------------------------------------
-// Billing on the phones: RevenueCat over StoreKit / Play Billing.
-// Keys are public SDK keys (safe to ship): EXPO_PUBLIC_REVENUECAT_IOS_KEY and
-// EXPO_PUBLIC_REVENUECAT_ANDROID_KEY. Without one, nothing can be bought and
-// the app runs as the free tier.
+// Billing on the phones: StoreKit and Play Billing, through expo-iap, with no
+// service in between.
+//
+// The store takes the money; the server says who has Premium. Every purchase
+// the store hands over — bought just now, restored, or renewed while the app
+// was closed — goes to the verify-purchase function, which checks it with the
+// store and writes her `entitlements` row. Only then is the purchase finished
+// (acknowledged): one that never reached the server comes back at the next
+// launch, and Play refunds what nobody acknowledges in three days.
+//
+// Each purchase carries her Posta user id (Apple's appAccountToken, Play's
+// obfuscated account id), so the stores' own notifications, months later,
+// still say whose subscription it is.
 // ---------------------------------------------------------------------------
 
-const apiKey =
-  Platform.OS === 'ios'
-    ? process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY
-    : process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY;
+type Iap = typeof import('expo-iap');
 
-let configured = false;
-function ensure(): boolean {
-  if (!apiKey) return false;
-  if (!configured) {
-    Purchases.configure({ apiKey });
-    configured = true;
-  }
-  return true;
+// A development build made before expo-iap was added has no native module,
+// and importing it would throw at launch. Without it the app is the free tier.
+let iap: Iap | null = null;
+try {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  iap = require('expo-iap') as Iap;
+} catch {
+  iap = null;
 }
 
-const active = (info: CustomerInfo) => ENTITLEMENT in info.entitlements.active;
+const IDS: string[] = Object.values(PRODUCTS);
+const store = Platform.OS === 'ios' ? 'apple' : 'google';
 
-/** Keeps the last offerings so a purchase can find its package again. */
-const packages = new Map<string, PurchasesPackage>();
-const key = (offer: 'main' | 'winback', id: string) => `${offer}:${id}`;
+let userId: string | null = null;
+const listeners = new Set<(premium: boolean) => void>();
+/** The last products fetched, so a purchase can find its offer again. */
+const offerTokens = new Map<string, string>();
+const known = new Set<string>();
 
-async function toOffer(
-  offering: PurchasesOffering | null | undefined,
-  which: 'main' | 'winback',
-): Promise<Offer | null> {
-  if (!offering || offering.availablePackages.length === 0) return null;
-  const pkgs = offering.availablePackages;
-  for (const p of pkgs) packages.set(key(which, p.identifier), p);
+let connecting: Promise<boolean> | null = null;
+function connect(): Promise<boolean> {
+  if (!iap) return Promise.resolve(false);
+  const lib = iap;
+  connecting ??= lib
+    .initConnection()
+    .then((ok) => {
+      if (!ok) connecting = null;
+      // Purchases that arrive on their own: a renewal, one approved by a
+      // parent, one the server couldn't be reached for last time.
+      else lib.purchaseUpdatedListener((purchase) => void settle(purchase));
+      return ok;
+    })
+    .catch(() => {
+      connecting = null;
+      return false;
+    });
+  return connecting;
+}
 
-  // Apple answers trial eligibility per product; Play only ever lists the
-  // phases she is still eligible for, so there the intro price is the answer.
-  let eligible: Record<string, boolean> = {};
-  if (Platform.OS === 'ios') {
-    const ids = pkgs.map((p) => p.product.identifier);
-    const res = await Purchases.checkTrialOrIntroductoryPriceEligibility(ids).catch(() => ({}));
-    eligible = Object.fromEntries(
-      Object.entries(res).map(([id, e]) => [
-        id,
-        (e as { status: number }).status !== Purchases.INTRO_ELIGIBILITY_STATUS.INTRO_ELIGIBILITY_STATUS_INELIGIBLE,
-      ]),
-    );
+/** Whose purchase the store says it is; null when it carries no account. */
+function owner(purchase: Purchase): string | null {
+  const id =
+    'appAccountToken' in purchase
+      ? purchase.appAccountToken
+      : 'obfuscatedAccountIdAndroid' in purchase
+        ? purchase.obfuscatedAccountIdAndroid
+        : null;
+  return id ? id.toLowerCase() : null;
+}
+
+const inFlight = new Map<string, Promise<boolean | null>>();
+
+/**
+ * Has the server check a purchase and, once it has, finishes it with the
+ * store. True: she has Premium. False: checked, and it opens nothing (it has
+ * lapsed). Null: the server couldn't be asked, so the purchase is left
+ * unfinished for the store to hand over again.
+ */
+function settle(purchase: Purchase): Promise<boolean | null> {
+  let run = inFlight.get(purchase.id);
+  if (!run) {
+    run = verify(purchase).finally(() => inFlight.delete(purchase.id));
+    inFlight.set(purchase.id, run);
+  }
+  return run;
+}
+
+async function verify(purchase: Purchase): Promise<boolean | null> {
+  if (!iap || !IDS.includes(purchase.productId)) return null;
+  if (purchase.purchaseState !== 'purchased' || !purchase.purchaseToken) return null;
+  const { data, error } = await supabase.functions
+    .invoke<{ premium: boolean }>('verify-purchase', { body: { store, token: purchase.purchaseToken } })
+    .catch(() => ({ data: null, error: true }));
+  if (error || !data) return null;
+  await iap.finishTransaction({ purchase, isConsumable: false }).catch(() => {});
+  if (data.premium) for (const l of listeners) l(true);
+  return data.premium;
+}
+
+/** The running subscriptions the store on this phone holds. */
+async function held(): Promise<Purchase[]> {
+  if (!iap || !(await connect())) return [];
+  const all = await iap.getAvailablePurchases({ onlyIncludeActiveItemsIOS: true });
+  return all.filter((p) => IDS.includes(p.productId) && p.purchaseState === 'purchased');
+}
+
+/** Hers, or bought outside the app (an offer code) and so nobody's yet. */
+const hers = (purchase: Purchase) => {
+  const id = owner(purchase);
+  return !id || id === userId;
+};
+
+async function claim(purchases: Purchase[]): Promise<boolean> {
+  const results = await Promise.all(purchases.map(settle));
+  return results.some((premium) => premium === true);
+}
+
+const IOS_PERIOD: Record<string, Period> = { year: 'year', month: 'month', week: 'week' };
+
+interface Intro {
+  free: boolean;
+  days: number;
+  price: number;
+  priceString: string;
+}
+
+function iosIntro(product: Extract<ProductSubscription, { platform: 'ios' }>): Intro | null {
+  const offer = product.subscriptionOffers?.find((o) => o.type === 'introductory');
+  if (offer?.period) {
+    return {
+      free: offer.paymentMode === 'free-trial',
+      days: periodDays(offer.period.unit, offer.period.value) * Math.max(offer.periodCount ?? 1, 1),
+      price: offer.price,
+      priceString: offer.displayPrice,
+    };
+  }
+  const mode = product.introductoryPricePaymentModeIOS;
+  if (!mode || mode === 'empty') return null;
+  return {
+    free: mode === 'free-trial',
+    days: periodDays(product.introductoryPriceSubscriptionPeriodIOS ?? '', Number(product.introductoryPriceNumberOfPeriodsIOS) || 1),
+    price: Number(product.introductoryPriceAsAmountIOS) || 0,
+    priceString: product.introductoryPriceIOS ?? '',
+  };
+}
+
+function plan(product: ProductSubscription, introEligible: boolean): Plan | null {
+  if (product.platform === 'ios') {
+    const price = product.price ?? 0;
+    const unit = product.subscriptionPeriodUnitIOS ?? 'month';
+    // A year sold as twelve months is still the yearly plan.
+    const period: Period = unit === 'month' && product.subscriptionPeriodNumberIOS === '12' ? 'year' : (IOS_PERIOD[unit] ?? 'month');
+    const intro = introEligible ? iosIntro(product) : null;
+    return {
+      id: product.id,
+      period,
+      price,
+      priceString: product.displayPrice,
+      perMonthString: period === 'year' ? perMonth(price, product.currency) : period === 'month' ? product.displayPrice : null,
+      trialDays: intro?.free && intro.days > 0 ? intro.days : null,
+      introPrice: intro && !intro.free && intro.price > 0 ? { price: intro.price, priceString: intro.priceString } : null,
+      currency: product.currency,
+    };
   }
 
-  const plans: Plan[] = pkgs.map((p) => {
-    const product = p.product;
-    const intro = product.introPrice;
-    const canIntro = eligible[product.identifier] ?? true;
-    const isTrial = !!intro && intro.price === 0 && canIntro;
-    const isDiscount = !!intro && intro.price > 0 && canIntro;
-    return {
-      id: p.identifier,
-      period: periodOf(product.subscriptionPeriod, p.packageType),
-      price: product.price,
-      priceString: product.priceString,
-      perMonthString: product.pricePerMonthString ?? null,
-      trialDays: isTrial ? periodDays(intro.periodUnit, intro.periodNumberOfUnits * Math.max(intro.cycles, 1)) : null,
-      introPrice: isDiscount ? { price: intro.price, priceString: intro.priceString } : null,
-      currency: product.currencyCode,
-    };
-  });
-  // Annual first: it is the one the paywall leads with.
-  const rank = { year: 0, month: 1, week: 2, lifetime: 3 } as const;
-  plans.sort((a, b) => rank[a.period] - rank[b.period]);
-  return { plans, hardPaywall: offering.metadata?.hard_paywall === true };
+  // Play lists a base plan and the offers on it she can still take; each is a
+  // run of phases ending in the regular price. The one with the most phases
+  // is the one with a trial or a cheaper start.
+  const offers = product.subscriptionOffers
+    .filter((o) => o.offerTokenAndroid && o.pricingPhasesAndroid?.pricingPhaseList.length)
+    .sort((a, b) => b.pricingPhasesAndroid!.pricingPhaseList.length - a.pricingPhasesAndroid!.pricingPhaseList.length);
+  const offer = offers[0];
+  if (!offer) return null;
+  offerTokens.set(product.id, offer.offerTokenAndroid!);
+  const phases = offer.pricingPhasesAndroid!.pricingPhaseList;
+  const regular = phases[phases.length - 1];
+  const first = phases.length > 1 ? phases[0] : null;
+  const price = Number(regular.priceAmountMicros) / 1_000_000;
+  const period = periodOf(regular.billingPeriod);
+  const firstPrice = first ? Number(first.priceAmountMicros) / 1_000_000 : 0;
+  const firstDays = first ? isoDays(first.billingPeriod) * Math.max(first.billingCycleCount, 1) : 0;
+  return {
+    id: product.id,
+    period,
+    price,
+    priceString: regular.formattedPrice,
+    perMonthString: period === 'year' ? perMonth(price, regular.priceCurrencyCode) : period === 'month' ? regular.formattedPrice : null,
+    trialDays: first && firstPrice === 0 && firstDays > 0 ? firstDays : null,
+    introPrice: first && firstPrice > 0 ? { price: firstPrice, priceString: first.formattedPrice } : null,
+    currency: regular.priceCurrencyCode,
+  };
+}
+
+/** Apple answers once per subscription group: has she ever had an intro offer in it. */
+async function introEligibility(products: ProductSubscription[]): Promise<Map<string, boolean>> {
+  const out = new Map<string, boolean>();
+  if (!iap || Platform.OS !== 'ios') return out;
+  const groups = new Set(products.map((p) => (p.platform === 'ios' ? p.subscriptionGroupIdIOS : null)).filter((g): g is string => !!g));
+  for (const group of groups) out.set(group, await iap.isEligibleForIntroOfferIOS(group).catch(() => true));
+  return out;
 }
 
 export const billing: Billing = {
   get available() {
-    return !!apiKey;
+    return !!iap;
   },
 
-  async identify(userId) {
-    if (!ensure()) return;
-    await Purchases.logIn(userId).catch(() => {});
+  async identify(id) {
+    userId = id.toLowerCase();
+    await connect();
   },
 
   async forget() {
-    if (!ensure()) return;
-    if (await Purchases.isAnonymous().catch(() => true)) return;
-    await Purchases.logOut().catch(() => {});
+    userId = null;
   },
 
   async catalog(): Promise<Catalog> {
-    if (!ensure()) return { main: null, winback: null };
-    const offerings = await Purchases.getOfferings();
-    const [main, winback] = await Promise.all([
-      toOffer(offerings.current, 'main'),
-      toOffer(offerings.all[WINBACK_OFFERING], 'winback'),
-    ]);
-    return { main, winback };
+    if (!iap || !(await connect())) return { main: null, winback: null };
+    const fetched = ((await iap.fetchProducts({ skus: IDS, type: 'subs' })) ?? []) as ProductSubscription[];
+    const eligible = await introEligibility(fetched);
+    const plans = new Map<string, Plan>();
+    for (const product of fetched) {
+      const group = product.platform === 'ios' ? product.subscriptionGroupIdIOS : null;
+      const p = plan(product, (group ? eligible.get(group) : undefined) ?? true);
+      if (!p) continue;
+      plans.set(p.id, p);
+      known.add(p.id);
+    }
+    // Annual first: it is the one the paywall leads with.
+    const main = [plans.get(PRODUCTS.annual), plans.get(PRODUCTS.monthly)].filter((p): p is Plan => !!p);
+    const winback = plans.get(PRODUCTS.winback);
+    return {
+      main: main.length ? { plans: main } : null,
+      winback: winback ? { plans: [winback] } : null,
+    };
   },
 
-  async purchase(planId, offer) {
-    if (!ensure()) return { error: 'Purchases are not set up in this build.' };
-    const pkg = packages.get(key(offer, planId));
-    if (!pkg) return { error: 'That plan is no longer available. Try again.' };
+  async purchase(planId) {
+    if (!iap || !(await connect())) return { error: 'Purchases are not available on this device.' };
+    if (!userId) return { error: 'Sign in to subscribe.' };
+    if (!known.has(planId)) return { error: 'That plan is no longer available. Try again.' };
+    const offerToken = offerTokens.get(planId);
     try {
-      const { customerInfo } = await Purchases.purchasePackage(pkg);
-      return active(customerInfo) ? 'purchased' : 'pending';
+      const out = await iap.requestPurchase({
+        type: 'subs',
+        request: {
+          apple: { sku: planId, appAccountToken: userId, andDangerouslyFinishTransactionAutomatically: false },
+          google: {
+            skus: [planId],
+            obfuscatedAccountId: userId,
+            subscriptionOffers: offerToken ? [{ sku: planId, offerToken }] : [],
+          },
+        },
+      });
+      const bought = (Array.isArray(out) ? out : out ? [out] : []).find((p) => p.productId === planId);
+      // Waiting on someone else (a parent, the bank): it arrives through the
+      // listener when it is approved.
+      if (!bought || bought.purchaseState === 'pending') return 'pending';
+      const premium = await settle(bought);
+      if (premium) return 'purchased';
+      return {
+        error:
+          premium === null
+            ? 'Your purchase went through, but we couldn’t confirm it yet. Posta will unlock as soon as it can; you won’t be charged again.'
+            : 'The purchase did not go through.',
+      };
     } catch (e) {
-      const err = e as { userCancelled?: boolean | null; code?: string; message?: string };
-      if (err.userCancelled || err.code === Purchases.PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR) return 'cancelled';
-      if (err.code === Purchases.PURCHASES_ERROR_CODE.PAYMENT_PENDING_ERROR) return 'pending';
+      const err = e as { code?: string; message?: string };
+      if (err.code === iap.ErrorCode.UserCancelled) return 'cancelled';
+      if (err.code === iap.ErrorCode.DeferredPayment || err.code === iap.ErrorCode.Pending) return 'pending';
+      // The store already has it: what's missing is our side of it.
+      if (err.code === iap.ErrorCode.AlreadyOwned && (await claim(await held().catch(() => [])))) return 'purchased';
       return { error: err.message ?? 'The purchase did not go through.' };
     }
   },
 
   async restore() {
-    if (!ensure()) return false;
-    return active(await Purchases.restorePurchases());
+    if (!iap || !(await connect())) return false;
+    await iap.restorePurchases().catch(() => {});
+    // Asked for by hand, so it also takes over a subscription bought under
+    // another Posta account with this same store account.
+    return claim(await held());
+  },
+
+  async sync() {
+    if (!userId) return false;
+    return claim((await held()).filter(hers));
+  },
+
+  async adopt(guestId) {
+    if (!userId) return false;
+    // Bought under the guest's id; the server moves it to whoever claims it
+    // with a store receipt, which only this phone's store account can give.
+    const guest = guestId.toLowerCase();
+    return claim((await held()).filter((p) => owner(p) === guest));
   },
 
   async isPremium() {
-    if (!ensure()) return false;
-    return active(await Purchases.getCustomerInfo());
+    if (!userId) return false;
+    const mine = (await held()).filter(hers);
+    // One bought outside the app is nobody's until the server has seen it.
+    const unclaimed = mine.filter((p) => !owner(p));
+    if (unclaimed.length) void claim(unclaimed);
+    return mine.some((p) => owner(p) === userId);
   },
 
   onChange(listener) {
-    if (!ensure()) return () => {};
-    const handler = (info: CustomerInfo) => listener(active(info));
-    Purchases.addCustomerInfoUpdateListener(handler);
-    return () => Purchases.removeCustomerInfoUpdateListener(handler);
+    listeners.add(listener);
+    return () => listeners.delete(listener);
   },
 };

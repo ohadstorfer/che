@@ -122,7 +122,7 @@ The real differences are in the **learner model**:
 | Streak | Freeze, repair, wager | Streak with a *recoverable* run: a missed day banks it, two rounds on the comeback day buy it back (`finish_lesson`, `src/lib/streak.ts`) | **≈** Che's "two classes" is a free, effort-based repair. |
 | XP / leagues / gems | Core | None (`course-spec.md` §8: not in v1) | **Δ** Deliberate. Note Mogavi 2022: XP and leagues also drive farming. |
 | Hearts / Energy | Energy since 2025; mistakes review free | None | **Δ** Good: Duolingo's own reason for dropping hearts was beginners running out mid-lesson. |
-| Notifications | Bandit over templates with a recency penalty (h = 15 d); reward = lesson within 2 h | Round-robin `MESSAGES` index per subscription, streak text every 3rd, 25-minute minimum gap (`supabase/functions/send-reminder/index.ts:46`, `:50`) | **≈** Round-robin already avoids repeats. A bandit needs far more users than Che has. |
+| Notifications | Bandit over templates with a recency penalty (h = 15 d); reward = lesson within 2 h. Reminder 23.5 h after the last session, a late streak saver, and a stop after about a week unanswered | The same shape (`supabase/functions/_shared/reminder-policy.ts`): one routine reminder half an hour before her last practice time, one evening save for a live streak, days 1–4 and 6 away, a farewell on day 8, then silence. Templates picked by the paper's score, penalty and softmax | **≈** With Che's volume the score stays at zero until it clears its 95% interval, so in practice the recency penalty rotates the templates. |
 | Social | Friends, leagues | Partner reminders (`20260514000001_partner_reminders.sql`) | **≈** |
 
 ---

@@ -567,6 +567,9 @@ export const demoClient = {
       return Promise.resolve({ data: [...groups.values()].sort((a, b) => b.reports - a.reports), error: null });
     }
     if (name.startsWith('staff_')) return Promise.resolve({ data: [], error: null });
+    // The feedback bubble, open, over the demo course (components/feedback.tsx).
+    if (name === 'feedback_access') return Promise.resolve({ data: { open: true, unread: 0 }, error: null });
+    if (name.startsWith('feedback_')) return Promise.resolve({ data: [], error: null });
     if (name === 'apply_placement') {
       return Promise.resolve({ data: applyPlacement(args as Parameters<typeof applyPlacement>[0]), error: null });
     }
@@ -585,6 +588,7 @@ export const demoClient = {
       upload: async () => ({ data: null, error: null }),
       remove: async () => ({ data: null, error: null }),
       getPublicUrl: () => ({ data: { publicUrl: '' } }),
+      createSignedUrls: async () => ({ data: [], error: null }),
     }),
   },
 

@@ -4,15 +4,17 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { useAuth } from './auth';
 import { billing } from './billing';
 import type { Catalog } from './billing-shared';
+import { isGuest } from './guest';
 import { supabase } from './supabase';
 
 // ---------------------------------------------------------------------------
 // Premium — who has paid, and what the free tier allows.
 //
-// Premium is true if either source says so: the store on this phone
-// (RevenueCat), or the server's `entitlements` row that RevenueCat's webhook
-// keeps (so a subscription bought on the phone also opens the web app, and
-// the edge functions can check it). Staff are never gated.
+// Premium is true if either source says so: the store on this phone, or the
+// server's `entitlements` row, written once a purchase has been checked with
+// its store and kept in step by the stores' notifications (so a subscription
+// bought on the phone also opens the web app, and the edge functions can
+// check it). Staff are never gated.
 //
 // The free tier (docs: monetization flow 7): the first units of the course,
 // a few chats with Pancho, and the paywall again at the moments she wants more.
@@ -33,7 +35,7 @@ interface PremiumValue {
   limited: boolean;
   staff: boolean;
   catalog: Catalog | null;
-  /** The store says: no free tier at all right now. */
+  /** The server says: no free tier at all right now (app_config). */
   hardPaywall: boolean;
   refresh: () => Promise<void>;
   /** After a purchase: open everything at once, before the store round-trips. */
@@ -69,6 +71,12 @@ async function serverPremium(userId: string): Promise<boolean> {
   return !!data.active && (!data.expires_at || new Date(data.expires_at).getTime() > Date.now());
 }
 
+/** `hard_paywall` in app_config: flipped from the dashboard, no app update. */
+async function serverHardPaywall(): Promise<boolean> {
+  const { data } = await supabase.from('app_config').select('value').eq('key', 'hard_paywall').maybeSingle();
+  return data?.value === true;
+}
+
 export function PremiumProvider({ children }: { children: React.ReactNode }) {
   const { session, profile } = useAuth();
   const userId = session?.user.id ?? null;
@@ -76,7 +84,19 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
   const [status, setStatus] = useState<Status>('loading');
   const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [testerUnlock, setTesterUnlock] = useState(false);
+  const [hardPaywall, setHardPaywall] = useState(false);
   const granted = useRef(false);
+  // The guest she was on this phone (lib/guest.ts), until she has an account:
+  // if she then signs in to one she already had, what the guest bought is
+  // claimed for it. Linking an account to the guest keeps the same id, so
+  // nothing needs claiming then.
+  const guest = useRef<string | null>(null);
+  const guestNow = isGuest(session);
+  useEffect(() => {
+    if (!userId) return;
+    if (guestNow) guest.current = userId;
+    else if (guest.current === userId) guest.current = null;
+  }, [userId, guestNow]);
 
   const refresh = useCallback(async () => {
     if (!userId) return;
@@ -85,6 +105,10 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
       serverPremium(userId).catch(() => false),
     ]);
     setStatus(store || server || granted.current ? 'premium' : 'free');
+    // The store has her subscription and the server doesn't: a renewal or a
+    // purchase whose word never arrived. The lessons are locked by the server,
+    // so it is told now.
+    if (store && !server) void billing.sync().catch(() => false);
   }, [userId]);
 
   useEffect(() => {
@@ -95,13 +119,19 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     let alive = true;
+    const from = guest.current && guest.current !== userId ? guest.current : null;
     (async () => {
       await billing.identify(userId);
       if (!alive) return;
+      if (from) {
+        guest.current = null;
+        await billing.adopt(from).catch(() => false);
+      }
       await refresh();
       // Fetched now so the paywall opens with its prices already on it.
-      const [c, tester] = await Promise.all([
+      const [c, hard, tester] = await Promise.all([
         billing.catalog().catch(() => null),
+        serverHardPaywall().catch(() => false),
         supabase.functions
           .invoke<{ enabled: boolean }>('tester-premium', { body: { check: true } })
           .then(({ data }) => !!data?.enabled)
@@ -109,6 +139,7 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
       ]);
       if (!alive) return;
       setCatalog(c);
+      setHardPaywall(hard);
       setTesterUnlock(tester);
     })();
     const off = billing.onChange((premium) => {
@@ -143,14 +174,14 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
       limited: status === 'free' && !staff,
       staff,
       catalog,
-      hardPaywall: !!catalog?.main?.hardPaywall,
+      hardPaywall,
       refresh,
       grant,
       testerUnlock,
       unlockAsTester,
       paywall,
     }),
-    [status, staff, catalog, refresh, grant, testerUnlock, unlockAsTester, paywall],
+    [status, staff, catalog, hardPaywall, refresh, grant, testerUnlock, unlockAsTester, paywall],
   );
 
   return <PremiumContext.Provider value={value}>{children}</PremiumContext.Provider>;

@@ -1,26 +1,34 @@
 // ---------------------------------------------------------------------------
-// Billing — the shape both platforms speak. The phones sell through
-// RevenueCat (billing.native.ts); the web has no store, so it gets a mock in
-// development and nothing to buy in production (billing.ts).
+// Billing — the shape both platforms speak. The phones sell through the
+// stores themselves, StoreKit and Play Billing (billing.native.ts); the web
+// has no store, so it gets a mock in development and nothing to buy in
+// production (billing.ts).
 //
-// Store setup this expects (RevenueCat dashboard):
-//   · entitlement  `premium`
-//   · offering     current (`default`): an annual package with a 7-day free
-//                  trial, and a monthly package
-//   · offering     `winback`: an annual package whose first year is cheaper
-//                  (an intro price, or a cheaper product) — the one-time offer
-//                  shown when the first paywall is closed
-//   · metadata     `{ "hard_paywall": true }` on the current offering closes
-//                  the free tier without an app update
+// Store setup this expects, the same product ids in App Store Connect and in
+// Play Console (all three subscriptions, in one subscription group on Apple):
+//   · PRODUCTS.annual   yearly, with a 7-day free trial as its introductory
+//                       offer
+//   · PRODUCTS.monthly  monthly
+//   · PRODUCTS.winback  yearly, whose first year is cheaper (an introductory
+//                       price paid up front) — the one-time offer shown when
+//                       the first paywall is closed
+// On Play each is a subscription with one base plan; the trial and the cheaper
+// first year are offers on that base plan.
+//
+// Who has paid is the server's to say: verify-purchase checks each purchase
+// with its store and writes `entitlements`.
 // ---------------------------------------------------------------------------
 
-export const ENTITLEMENT = 'premium';
-export const WINBACK_OFFERING = 'winback';
+export const PRODUCTS = {
+  annual: 'posta_premium_annual',
+  monthly: 'posta_premium_monthly',
+  winback: 'posta_premium_annual_offer',
+} as const;
 
 export type Period = 'year' | 'month' | 'week' | 'lifetime';
 
 export interface Plan {
-  /** The package identifier, what `purchase` takes. */
+  /** The store's product id, what `purchase` takes. */
   id: string;
   period: Period;
   price: number;
@@ -36,7 +44,6 @@ export interface Plan {
 
 export interface Offer {
   plans: Plan[];
-  hardPaywall: boolean;
 }
 
 export interface Catalog {
@@ -49,30 +56,54 @@ export type PurchaseOutcome = 'purchased' | 'cancelled' | 'pending' | { error: s
 export interface Billing {
   /** Whether this build can take money at all. */
   available: boolean;
-  /** Ties purchases to the Supabase user, so the webhook knows whose they are. */
+  /** Ties purchases to the Supabase user, so the stores' notifications say whose they are. */
   identify(userId: string): Promise<void>;
   forget(): Promise<void>;
   catalog(): Promise<Catalog>;
   purchase(planId: string, offer: 'main' | 'winback'): Promise<PurchaseOutcome>;
-  /** Resolves to whether premium is active afterwards. */
+  /** Asks the store again and claims what it holds for this account. Resolves
+   *  to whether premium is active afterwards. */
   restore(): Promise<boolean>;
+  /** Sends the server what the store on this phone already holds for her,
+   *  without asking the store anything. Resolves to whether she has premium. */
+  sync(): Promise<boolean>;
+  /** Claims for this account what she bought as a guest (`guestId`) before
+   *  signing in to an account she already had. Resolves to whether premium is
+   *  active afterwards. */
+  adopt(guestId: string): Promise<boolean>;
+  /** The store on this phone holds a running subscription of hers. */
   isPremium(): Promise<boolean>;
   onChange(listener: (premium: boolean) => void): () => void;
 }
 
-/** "P1W" → 7, "P3D" → 3; RevenueCat's own period units, for the intro phase. */
+/** ("week", 1) → 7, ("day", 3) → 3: the length of an intro phase. */
 export function periodDays(unit: string, count: number): number {
   const u = unit.toUpperCase();
   const per = u.startsWith('D') ? 1 : u.startsWith('W') ? 7 : u.startsWith('M') ? 30 : u.startsWith('Y') ? 365 : 0;
   return per * count;
 }
 
-export function periodOf(iso: string | null | undefined, packageType?: string): Period {
-  if (packageType === 'LIFETIME') return 'lifetime';
-  if (!iso) return packageType === 'ANNUAL' ? 'year' : packageType === 'WEEKLY' ? 'week' : 'month';
+/** Play's billing periods, ISO 8601: "P1Y" → year, "P1W" → week. */
+export function periodOf(iso: string | null | undefined): Period {
+  if (!iso) return 'month';
   if (/Y$/.test(iso) || iso === 'P12M') return 'year';
   if (/W$/.test(iso) || iso === 'P7D') return 'week';
   return 'month';
+}
+
+/** "P1W" → 7, "P3D" → 3, "P1M" → 30. */
+export function isoDays(iso: string): number {
+  const m = /^P(\d+)([DWMY])$/.exec(iso);
+  return m ? periodDays(m[2], Number(m[1])) : 0;
+}
+
+/** "$8.25": a yearly price as what it comes to each month. */
+export function perMonth(price: number, currency: string): string | null {
+  try {
+    return new Intl.NumberFormat(undefined, { style: 'currency', currency }).format(price / 12);
+  } catch {
+    return null;
+  }
 }
 
 /** How much the annual plan saves against paying monthly for a year. */

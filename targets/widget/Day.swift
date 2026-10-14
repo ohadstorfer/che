@@ -9,7 +9,7 @@ import Foundation
 // rules mirror `streakStatus()` in src/lib/streak.ts.
 // ---------------------------------------------------------------------------
 
-let appGroup = "group.com.posta.app"
+let appGroup = "group.app.posta.ios"
 
 /** Her streak row as the app last saw it. */
 struct StreakRow: Codable {

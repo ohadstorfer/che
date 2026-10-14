@@ -49,8 +49,7 @@ We share data only with the services that make the app work, and only what each 
 | Supabase | Database, sign-in and file storage | Your account, progress, transcripts and recordings |
 | Anthropic (Claude) | Pancho's replies, feedback and explanations | The text of your Hablar conversations and answers |
 | ElevenLabs | Turns your voice into text, and Pancho's voice | Your voice recordings (Hablar) |
-| RevenueCat | Manages subscriptions | Your Posta user ID (not your email) and your purchase status |
-| Apple / Google | Payments and push notifications | Purchase details, and your device's push token |
+| Apple / Google | Payments and push notifications | Purchase details tagged with your Posta user ID (not your email), and your device's push token |
 
 These providers process data on our behalf and may store it in the United States or other countries.
 

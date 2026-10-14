@@ -5,7 +5,7 @@
 import Anthropic from "npm:@anthropic-ai/sdk@0.92.0";
 
 export { Anthropic };
-export const MODEL = "claude-haiku-4-5";
+export const MODEL = "claude-sonnet-5";
 // Haiku 4.5 has no effort setting (a request that sends one is refused) and
 // does not think unless asked to; the Sonnets and Opuses take "low" here.
 const LOW_EFFORT = MODEL.includes("haiku") ? {} : { effort: "low" };

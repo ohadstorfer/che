@@ -4,9 +4,9 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Animated, type ImageSourcePropType, Platform, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Animated, type ImageSourcePropType, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { PanchoAvatar, Sheet, StartButton, webPress } from '@/components/hablar-ui';
+import { PanchoAvatar, StartButton, webPress } from '@/components/hablar-ui';
 import { AppHeader, useStreakWeek } from '@/components/app-header';
 import { useAuth } from '@/lib/auth';
 import {
@@ -19,7 +19,7 @@ import {
   scenarioAt,
   scenarios,
 } from '@/lib/hablar';
-import { freeChatArt, levelDistance, pickScenario, scenarioArt } from '@/lib/hablar-art';
+import { levelDistance, pickScenario, scenarioArt } from '@/lib/hablar-art';
 import { forgetHablarLatest, loadHablarHome, peekHablarHome } from '@/lib/hablar-home';
 import { FREE_CHATS, usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
@@ -59,7 +59,6 @@ const todayOf = (latest: ConversationRow | null, staff: boolean): Today =>
     : { state: 'free' };
 
 export default function Hablar() {
-  const { height } = useWindowDimensions();
   useStatusBarColor(colors.bg);
   const { status: streak, weekDone } = useStreakWeek();
   // Staff have no daily limit (hablar-start agrees), so a finished chat never locks the tab.
@@ -73,8 +72,6 @@ export default function Hablar() {
   const kept = peekHablarHome(userId, limited);
   const [today, setToday] = useState<Today>(() => (kept ? todayOf(kept.latest, staff) : { state: 'loading' }));
   const [past, setPast] = useState<ConversationRow[]>(() => kept?.past ?? []);
-  /** Pancho's call was answered: the sheet asking what to talk about is up. */
-  const [choosing, setChoosing] = useState(false);
   /** Her saved level; null until read. It is changed on the brief, not here. */
   const [level, setLevel] = useState<Band | null>(() => kept?.level ?? null);
   const [used, setUsed] = useState<number | null>(() => kept?.used ?? null);
@@ -122,7 +119,7 @@ export default function Hablar() {
     <View style={styles.safe}>
       <AppHeader title="Speaking" status={streak} weekDone={weekDone} />
       <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
-        <OutlinedHeadline small="Talk to" big="Pancho" style={styles.headline} />
+        <OutlinedHeadline small="Speaking practice with" big="AI argentino" style={styles.headline} />
 
         {freeLeft != null && today.state === 'free' ? (
           <Pressable
@@ -148,7 +145,7 @@ export default function Hablar() {
         ) : today.state === 'open' ? (
           <ResumeCard conversation={today.conversation} />
         ) : pick ? (
-          <CallCard onAnswer={() => setChoosing(true)} />
+          <CallCard onAnswer={() => openDoor('free')} />
         ) : null}
 
         {today.state === 'done' && pick ? <Tomorrow scenario={pick} band={band} /> : null}
@@ -177,53 +174,6 @@ export default function Hablar() {
         ) : null}
 
       </ScrollView>
-
-      {/* Answering Pancho: say what to talk about — anything, or a scenario. */}
-      <Sheet open={choosing} onClose={() => setChoosing(false)}>
-        <View style={styles.askHead}>
-          <PanchoAvatar size={48} />
-          <Text style={styles.askTitle} accessibilityRole="header">
-            ¡Hola! What do you want to talk about?
-          </Text>
-        </View>
-        <ScrollView style={{ maxHeight: height * 0.62 }} contentContainerStyle={styles.askList}>
-          <Pressable
-            onPress={() => {
-              setChoosing(false);
-              openDoor('free');
-            }}
-            accessibilityRole="button"
-            style={({ pressed }) => [styles.freeRow, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
-            <LinearGradient colors={pastelGrad.lav} style={StyleSheet.absoluteFill} pointerEvents="none" />
-            <View style={styles.freeArt}>
-              <Image source={freeChatArt} style={styles.rowImage} contentFit="contain" accessible={false} />
-            </View>
-            <View style={styles.rowText}>
-              <Text style={styles.freeTitle}>Talk about anything</Text>
-              <Text style={styles.freeSub}>No script. Pancho follows your lead.</Text>
-            </View>
-            <Ionicons name="chevron-forward" size={18} color={colors.onPastel} />
-          </Pressable>
-          <Text style={styles.askLabel}>OR PICK A SCENARIO</Text>
-          {byFit.map((s, i) => {
-            const v = scenarioAt(s, band);
-            return (
-              <Row
-                key={s.id}
-                art={scenarioArt(s.id)}
-                tone={i}
-                title={s.title_en}
-                sub={`With ${v.role_en}`}
-                label={s.title_en}
-                onPress={() => {
-                  setChoosing(false);
-                  openDoor('scenario', s.id);
-                }}
-              />
-            );
-          })}
-        </ScrollView>
-      </Sheet>
     </View>
   );
 }
@@ -261,30 +211,28 @@ function PanchoSays({ line }: { line: string }) {
 
 /**
  * Pancho "calling": what this tab is, said as plainly as a phone ringing — an
- * AI who talks like a porteño, out loud. Answering asks what to talk about.
+ * AI who talks like a porteño, out loud. Answering goes straight to a free chat;
+ * the scenarios are right below for anyone who wants a situation instead.
  */
 function CallCard({ onAnswer }: { onAnswer: () => void }) {
   return (
     <Hero tone="butter">
       <View style={styles.call}>
-        <View style={styles.callKicker}>
-          <View style={styles.aiChip}>
-            <Ionicons name="sparkles" size={12} color={colors.onPastel} />
-            <Text style={styles.aiChipText}>AI</Text>
+        <View style={styles.callRow}>
+          <View>
+            <PanchoAvatar size={64} drop={0.05} />
+            <View style={styles.aiChip}>
+              <MaterialCommunityIcons name="star-four-points" size={14} color={colors.ink} />
+              <Text style={styles.aiChipText}>AI</Text>
+            </View>
           </View>
-          <Text style={styles.heroEyebrow}>Voice chat · Buenos Aires</Text>
+          <View style={styles.callCol}>
+            <Text style={styles.callTitle} accessibilityRole="header">
+              Pancho is calling…
+            </Text>
+            <Text style={styles.callText}>Talk about anything.</Text>
+          </View>
         </View>
-        <View style={styles.rings}>
-          <View style={[styles.ring, styles.ringOuter]} />
-          <View style={[styles.ring, styles.ringInner]} />
-          <PanchoAvatar size={92} />
-        </View>
-        <Text style={styles.callTitle} accessibilityRole="header">
-          Pancho is calling…
-        </Text>
-        <Text style={styles.callText}>
-          An AI who talks like a porteño. Pick up and practice your Spanish out loud.
-        </Text>
       </View>
       <StartButton label="Answer" icon="phone" onPress={onAnswer} />
     </Hero>
@@ -406,43 +354,6 @@ function Postcard({ index, art, title, sub, onPress }: { index: number; art: Ima
   );
 }
 
-/** A scenario as a compact row (the sheet's list): pastel circle with its art, name, who Pancho plays, level. */
-function Row({
-  art,
-  tone,
-  title,
-  sub,
-  label,
-  onPress,
-}: {
-  art: ImageSourcePropType;
-  tone: number;
-  title: string;
-  sub: string;
-  label: string;
-  onPress: () => void;
-}) {
-  return (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="button"
-      accessibilityLabel={label}
-      style={({ pressed }) => [styles.row, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
-      <View style={[styles.rowArt, { backgroundColor: ROW_TONES[tone % ROW_TONES.length] }]}>
-        <Image source={art} style={styles.rowImage} contentFit="contain" accessible={false} />
-      </View>
-      <View style={styles.rowText}>
-        <FitText style={styles.rowTitle} lines={1}>
-          {title}
-        </FitText>
-        <FitText style={styles.rowSub} lines={2}>
-          {sub}
-        </FitText>
-      </View>
-    </Pressable>
-  );
-}
-
 const styles = StyleSheet.create({
   // The free-chats count: a small clay pill, as in the header row.
   freeLeft: {
@@ -461,7 +372,7 @@ const styles = StyleSheet.create({
   freeLeftText: { ...font.body[700], flexShrink: 1, fontSize: 13, lineHeight: 18, color: colors.muted },
   freeLeftLink: { ...font.body[800], color: colors.primary },
   safe: { flex: 1 },
-  headline: { width: '78%', marginTop: -6, marginBottom: 4 },
+  headline: { width: '94%', marginTop: -6, marginBottom: 4 },
   container: { padding: 20, gap: 16, maxWidth: 560, width: '100%', alignSelf: 'center', paddingBottom: 40 },
 
   hero: { padding: 20, gap: 16, borderRadius: radius.xl, overflow: 'hidden', boxShadow: clay.surface },
@@ -471,40 +382,27 @@ const styles = StyleSheet.create({
   heroTitle: { ...font.display[800], fontSize: 28, lineHeight: 31, letterSpacing: -0.6, color: colors.onPastel },
   heroBody: { flexDirection: 'row', alignItems: 'flex-end', gap: 8 },
 
-  call: { alignItems: 'center', gap: 12 },
-  callKicker: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  call: { paddingTop: 8 },
+  // A white sticker pill, tilted, stuck over the top of Pancho's circle: who is on the line.
   aiChip: {
+    position: 'absolute',
+    top: -17,
+    left: 2,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
-    height: 26,
+    gap: 6,
     paddingHorizontal: 10,
-    borderRadius: 13,
-    backgroundColor: colors.chip,
-    boxShadow: clay.surface,
+    paddingVertical: 3,
+    borderRadius: 99,
+    backgroundColor: '#fff',
+    boxShadow: clay.chip,
+    transform: [{ rotate: '-3deg' }],
   },
-  aiChipText: { ...font.body[800], fontSize: 12, letterSpacing: 0.3, color: colors.onPastel },
-  rings: { width: 132, height: 132, alignItems: 'center', justifyContent: 'center' },
-  ring: { position: 'absolute', borderRadius: 999 },
-  ringOuter: { top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(255, 255, 255, 0.35)' },
-  ringInner: { top: 14, left: 14, right: 14, bottom: 14, backgroundColor: 'rgba(255, 255, 255, 0.5)' },
-  callTitle: {
-    ...font.display[800],
-    fontSize: 30,
-    lineHeight: 32,
-    letterSpacing: -0.5,
-    color: colors.onPastel,
-    textAlign: 'center',
-  },
-  callText: {
-    ...font.body[700],
-    maxWidth: 290,
-    fontSize: 15,
-    lineHeight: 20,
-    color: colors.onPastel,
-    opacity: 0.85,
-    textAlign: 'center',
-  },
+  aiChipText: { ...font.display[900], fontSize: 15, color: colors.ink },
+  callRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  callCol: { flex: 1, gap: 3 },
+  callTitle: { ...font.display[800], fontSize: 24, lineHeight: 26, letterSpacing: -0.4, color: colors.onPastel },
+  callText: { ...font.body[700], fontSize: 16, lineHeight: 21, color: colors.onPastel, opacity: 0.85 },
 
   says: { flexDirection: 'row', alignItems: 'flex-end', gap: 12 },
   saysCol: { flex: 1, gap: 4, alignItems: 'flex-start' },
@@ -544,23 +442,6 @@ const styles = StyleSheet.create({
 
   section: { gap: 12 },
   sectionTitle: { ...font.display[800], fontSize: 20, lineHeight: 24, letterSpacing: -0.1, color: colors.ink },
-  askHead: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 14 },
-  askTitle: { ...font.display[800], flex: 1, fontSize: 22, lineHeight: 25, letterSpacing: -0.3, color: colors.ink },
-  askList: { gap: 10, paddingBottom: 4 },
-  askLabel: { ...font.body[800], fontSize: 12, letterSpacing: 1, color: colors.muted, marginTop: 6 },
-  freeRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    minHeight: 84,
-    padding: 14,
-    borderRadius: 30,
-    overflow: 'hidden',
-    boxShadow: clay.surface,
-  },
-  freeArt: { width: 56, height: 56, borderRadius: 28, overflow: 'hidden', alignItems: 'center', backgroundColor: colors.pod },
-  freeTitle: { ...font.display[800], fontSize: 19, lineHeight: 22, color: colors.onPastel },
-  freeSub: { ...font.body[700], fontSize: 13, lineHeight: 17, color: colors.onPastel, opacity: 0.85 },
 
   list: { gap: 12 },
 

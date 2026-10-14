@@ -1,9 +1,11 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, usePathname } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { Platform, Pressable, ScrollView, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { playAudio } from '@/lib/audio';
+import { loadInbox } from '@/lib/feedback';
 import { colors, font, press, radius } from '@/lib/theme';
 import type { ContentStatus } from '@/lib/types';
 
@@ -28,6 +30,7 @@ const NAV = [
   { href: '/admin/words', label: 'Words', icon: 'book-outline' },
   { href: '/admin/answers', label: 'Answers', icon: 'checkmark-done-outline' },
   { href: '/admin/engine', label: 'Engine', icon: 'pulse-outline' },
+  { href: '/admin/feedback', label: 'Feedback', icon: 'chatbubbles-outline' },
 ] as const;
 
 export function AdminScreen({
@@ -45,6 +48,13 @@ export function AdminScreen({
   children: React.ReactNode;
 }) {
   const path = usePathname();
+  // Testers' unread messages, counted on the Feedback tab from every page.
+  const [unread, setUnread] = useState(0);
+  useEffect(() => {
+    loadInbox()
+      .then((threads) => setUnread(threads.reduce((n, t) => n + t.unread, 0)))
+      .catch(() => {});
+  }, [path]);
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <View style={styles.bar}>
@@ -61,6 +71,11 @@ export function AdminScreen({
                 style={({ pressed }) => [styles.navItem, active && styles.navItemActive, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
                 <Ionicons name={n.icon} size={16} color={active ? colors.onPrimary : colors.muted} />
                 <Text style={[styles.navText, active && styles.navTextActive]}>{n.label}</Text>
+                {n.href === '/admin/feedback' && unread > 0 ? (
+                  <View style={[styles.navCount, active && styles.navCountActive]}>
+                    <Text style={[styles.navCountText, active && { color: colors.primary }]}>{unread}</Text>
+                  </View>
+                ) : null}
               </Pressable>
             );
           })}
@@ -232,6 +247,9 @@ const styles = StyleSheet.create({
   navItemActive: { backgroundColor: colors.primary },
   navText: { fontSize: 14, ...font.body[600], color: colors.muted },
   navTextActive: { color: colors.onPrimary },
+  navCount: { minWidth: 18, height: 18, paddingHorizontal: 5, borderRadius: 9, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.primary },
+  navCountActive: { backgroundColor: colors.onPrimary },
+  navCountText: { fontSize: 11, ...font.body[800], color: colors.onPrimary },
   page: { padding: 24, gap: 20, maxWidth: 1100, width: '100%', alignSelf: 'center' },
   head: { flexDirection: 'row', alignItems: 'center', gap: 12, flexWrap: 'wrap' },
   back: { width: 36, height: 36, borderRadius: radius.pill, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card },

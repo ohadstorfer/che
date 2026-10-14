@@ -4,10 +4,10 @@
 // with sign-up lets you delete the account from inside the app.
 //
 // Order matters: the Hablar recordings go first, through the Storage API (a
-// cascade on storage.objects would leave the files behind), then her
-// RevenueCat customer (when REVENUECAT_SECRET_KEY is set), then the auth user.
-// Every table keyed to her cascades from auth.users. A store subscription is
-// not ours to cancel: the app tells her to cancel it in the store.
+// cascade on storage.objects would leave the files behind), then the auth
+// user. Every table keyed to her cascades from auth.users, her `entitlements`
+// row included. A store subscription is not ours to cancel: the app tells her
+// to cancel it in the store.
 //
 // Staff accounts are refused: course edits reference their author without a
 // cascade, and deleting a reviewer is a job for the dashboard, not a button.
@@ -64,15 +64,6 @@ Deno.serve(async (req) => {
     }
   } catch (e) {
     return json({ error: `recordings: ${(e as Error).message}` }, { status: 500 });
-  }
-
-  // Best effort: a RevenueCat hiccup must not leave her unable to leave.
-  const rcKey = Deno.env.get("REVENUECAT_SECRET_KEY");
-  if (rcKey) {
-    await fetch(`https://api.revenuecat.com/v1/subscribers/${encodeURIComponent(userId)}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${rcKey}` },
-    }).catch(() => {});
   }
 
   const { error } = await db.auth.admin.deleteUser(userId);

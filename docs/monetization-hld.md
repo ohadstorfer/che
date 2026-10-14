@@ -621,11 +621,14 @@ Server-side enforcement (do not trust the client) on: `audio_path` exposure, exp
 | Web checkout (Stripe), sold outside the app | ~$93 | See the decision below |
 | Apple standard 30% | ~$69 | Only past $1M/yr proceeds |
 
-**Use RevenueCat.** Free to **$2,500 monthly tracked revenue**, then 1%. Hand-rolling App Store Server
-Notifications V2 and Play RTDN is a weekend of SDK work followed by a permanent tail of edge cases —
-grace periods, billing retry, refunds, family sharing, mid-period upgrades, restore on a new device.
-It also provides the entitlement webhook §9.1 needs, so `subscriptions`/`billing_events` get populated
-from RevenueCat rather than Stripe.
+**No RevenueCat: the stores directly** (decided 2026-10-13, reversing the earlier "use RevenueCat").
+The app sells through StoreKit and Play Billing with `expo-iap`; `verify-purchase` checks each purchase
+with its store and writes `entitlements`; App Store Server Notifications V2 (`apple-notifications`) and
+Play real-time developer notifications (`google-notifications`) keep it in step. What that costs is the
+tail RevenueCat would have carried — grace periods, billing retry, refunds, restore on another account
+are handled in `supabase/functions/_shared`; family sharing and mid-period plan changes are not handled
+specially — and its dashboards. What it saves is the 1% past $2,500 monthly tracked revenue and a third
+party in the purchase path.
 
 **Open decision — sell on the web as well?** You may legally sell a subscription on your own site and
 have users sign in on native; you simply cannot *link out* to it from inside the app (except on the US
@@ -656,7 +659,7 @@ surviving a refund wave.
 | **0 — Now** | Onboarding §4 incl. the two-clip hook. Email capture. Funnel instrumentation (§11). **`eas.json` + a TestFlight build early** — store setup is slow and serialises everything after it. No billing. | — |
 | **1 — Presale** | Founding lifetime $249, capped 100, Stripe Payment Link, manual `tier` grant. Funds the ElevenLabs backlog. | Hook screen converting to signup |
 | **2 — Content — THE MAIN JOB** | **Build out the full main course (§3.1 section 1).** Publish the 118 drafted lessons, extend beyond them, and get audio coverage from ~8% to complete on everything published. Record units 7–10 (~3,500 credits) and onward. First dialogues and one phone-call scene. Sections 2–4 (Palabras, Cultura, Expresiones) start only once the spine is real. | — |
-| **3 — Billing** | Entitlements (§9.1), **RevenueCat + IAP products in App Store Connect and Play Console**, paywall screen (§8), T0/T1 triggers, real-speed audio takes. **Native recording via `expo-audio`.** Privacy labels, Terms, Privacy Policy, Restore Purchases. Budget for **at least one App Store rejection round**. | Content gate above |
+| **3 — Billing** | Entitlements (§9.1), **IAP products in App Store Connect and Play Console, sold with `expo-iap` and verified by our own edge functions**, paywall screen (§8), T0/T1 triggers, real-speed audio takes. **Native recording via `expo-audio`.** Privacy labels, Terms, Privacy Policy, Restore Purchases. Budget for **at least one App Store rejection round**. | Content gate above |
 | **4 — Tuning** | T2 win-back, Listening Gym, shadowing, monthly drop cadence, trial + price tests. **Voice calls (§5.4)** — after the course and audio are real, never before. | Paid live, ≥100 payers |
 
 Phase 2 is now the long pole and it is **content production, not engineering** — which is the right
@@ -718,7 +721,7 @@ Metrics that decide things:
    capped at 100 to fund audio.
 7. **The email list is the free tier.** Education is the most back-loaded category measured; without
    win-back, every non-buyer is lost permanently.
-8. **Stripe on the PWA at ~95% net.** Native and RevenueCat stay optional and later.
+8. **Stripe on the PWA at ~95% net.** Native stays optional and later.
 9. **The long pole is content production, not code.**
 
 ## 14. Open questions

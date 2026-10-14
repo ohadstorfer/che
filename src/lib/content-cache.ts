@@ -191,6 +191,10 @@ function writeStored(name: string, version: string, data: unknown) {
     .catch(() => {});
 }
 
+/** How many pieces have come from where, since launch — what the class's
+ *  timing line reads to say whether a wait was the network (load-timing.ts). */
+export const contentSources = { memory: 0, disk: 0, network: 0 };
+
 /**
  * `name`'s content at `version`: from memory, the phone, or `fetch` — in that
  * order. `version` null means it couldn't be had; then whatever the phone
@@ -199,11 +203,16 @@ function writeStored(name: string, version: string, data: unknown) {
 export function stored<T>(name: string, version: string | null, fetch: () => Promise<T>): Promise<T> {
   const hit = memo.get(name);
   if (hit && (version != null ? hit.version === version : Date.now() - hit.at < TTL_MS)) {
+    contentSources.memory += 1;
     return hit.value as Promise<T>;
   }
   const value = (async () => {
     const onDisk = await readStored(name, version);
-    if (onDisk) return onDisk.data as T;
+    if (onDisk) {
+      contentSources.disk += 1;
+      return onDisk.data as T;
+    }
+    contentSources.network += 1;
     const data = await fetch();
     if (version != null) writeStored(name, version, data);
     return data;
@@ -245,4 +254,13 @@ export function clearContentCache() {
   memo.clear();
   peeked.clear();
   version = null;
+  for (const forget of cleared) forget();
+}
+
+const cleared: (() => void)[] = [];
+
+/** What else to forget then: whatever a module worked out from the content
+ *  and kept (meanings.ts's answers, sentences.ts's row list). */
+export function onContentCleared(forget: () => void) {
+  cleared.push(forget);
 }

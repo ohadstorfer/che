@@ -103,26 +103,80 @@ export function meaningsFromSentences(
   return ranked;
 }
 
+// ---------------------------------------------------------------------------
+// The helpers below answer from the course's own strings — a gloss, a
+// rendering — and a class asks each the same thing thousands of times: every
+// word's meanings are vetted against its gloss on every load, and `closeness`
+// sits inside a sort. They are pure, so an answer is worked out once and kept
+// (docs/class-loading.md). `clearMeaningMemos` drops them when staff edit
+// content, so strings no longer in the course don't pile up.
+// ---------------------------------------------------------------------------
+
+const memos: Map<string, unknown>[] = [];
+
+function memo<R>(fn: (a: string) => R): (a: string) => R {
+  const kept = new Map<string, R>();
+  memos.push(kept);
+  return (a) => {
+    if (!kept.has(a)) kept.set(a, fn(a));
+    return kept.get(a) as R;
+  };
+}
+
+function memo2<R>(fn: (a: string, b: string) => R): (a: string, b: string) => R {
+  const kept = new Map<string, R>();
+  memos.push(kept);
+  return (a, b) => {
+    const key = `${a}\u0000${b}`;
+    if (!kept.has(key)) kept.set(key, fn(a, b));
+    return kept.get(key) as R;
+  };
+}
+
+/**
+ * Works the helpers' answers out ahead of the class that will ask for them,
+ * with `each` deciding the pace (slices.ts) — so the first class of a launch
+ * finds them kept, and the road she is on meanwhile isn't held up by it.
+ */
+export function warmMeanings(
+  forms: Pick<Form, 'id' | 'gloss_en'>[],
+  tallies: GlossTallies,
+  each: <T>(items: readonly T[], work: (item: T) => void) => Promise<void>,
+) {
+  return each(forms, (f) => {
+    for (const [text] of tallies[f.id] ?? []) closeness(text, f.gloss_en);
+  });
+}
+
+/** Forget every kept answer. */
+export function clearMeaningMemos() {
+  for (const kept of memos) kept.clear();
+}
+
 /** Words too common to tie a translation to a word: "it" and "that" are in
  *  half the translations of anything. */
 const FILLER = new Set(['a', 'an', 'the', 'to', 'of', 'it', 'that', 'this', 'there']);
 
-/** Every word of a translation, contractions opened: "you're" → you, are. */
-const allWords = (text: string) =>
-  text
-    .toLowerCase()
-    .replace(/[‘’`´]/g, "'")
-    .replace(/\bcan(?:'t|not)\b/g, 'can not')
-    .replace(/\bwon't\b/g, 'will not')
-    .replace(/n't\b/g, ' not')
-    .replace(/'m\b/g, ' am')
-    .replace(/'re\b/g, ' are')
-    .replace(/'s\b/g, ' is')
-    .replace(/'ll\b/g, ' will')
-    .replace(/'ve\b/g, ' have')
-    .replace(/'d\b/g, ' would')
-    .split(/[^a-z]+/)
-    .filter(Boolean);
+/** Every word of a translation, contractions opened: "you're" → you, are.
+ *  Kept, and so frozen: every caller reads the one list. */
+const allWords = memo((text: string): readonly string[] =>
+  Object.freeze(
+    text
+      .toLowerCase()
+      .replace(/[‘’`´]/g, "'")
+      .replace(/\bcan(?:'t|not)\b/g, 'can not')
+      .replace(/\bwon't\b/g, 'will not')
+      .replace(/n't\b/g, ' not')
+      .replace(/'m\b/g, ' am')
+      .replace(/'re\b/g, ' are')
+      .replace(/'s\b/g, ' is')
+      .replace(/'ll\b/g, ' will')
+      .replace(/'ve\b/g, ' have')
+      .replace(/'d\b/g, ' would')
+      .split(/[^a-z]+/)
+      .filter(Boolean),
+  ),
+);
 
 /** What a rendering says, however it is put: "we're", "we are" and "are we"
  *  are one thing, and so are "you know" and "do you know". */
@@ -143,12 +197,13 @@ const FREE = new Set(['i', 'you', 'he', 'she', 'it', 'we', 'they', 'the', 'a', '
 
 /** A sense's words, one slot each; "he/she went" has a slot either word fills.
  *  Its notes are not part of it: "works (he/she works)" is "works". */
-const slotsOf = (sense: string) =>
+const slotsOf = memo((sense: string): readonly (readonly string[])[][] =>
   sense
     .replace(/\([^)]*\)/g, ' ')
     .split(/\s+/)
     .flatMap((piece) => (piece.includes('/') ? [piece.split('/').map(allWords)] : allWords(piece).map((w) => [[w]])))
-    .filter((slot) => slot.some((alt) => alt.length));
+    .filter((slot) => slot.some((alt) => alt.length)),
+);
 
 /**
  * Whether a sentence's rendering of a word can stand for the word on its own.
@@ -173,7 +228,7 @@ const slotsOf = (sense: string) =>
 export const standsAlone = (meaning: string, gloss: string) => senseBehind(meaning, gloss) != null;
 
 /** The sense of the gloss a rendering stands for (`standsAlone`), or null. */
-export function senseBehind(meaning: string, gloss: string) {
+export const senseBehind = memo2((meaning: string, gloss: string): string | null => {
   const words = allWords(meaning);
   const onlyFree = words.every((w) => FREE.has(w));
   const found = glossSenses(gloss).find((sense) => {
@@ -195,7 +250,7 @@ export function senseBehind(meaning: string, gloss: string) {
     return used[words.length - 1] || !DANGLING.has(words[words.length - 1]);
   });
   return found ?? null;
-}
+});
 
 /** How a question opens in English. */
 const ASKS = new Set(['do', 'does', 'did', 'am', 'is', 'are', 'was', 'were', 'can', 'could', 'will', 'would', 'have', 'has', 'had', 'should']);
@@ -205,7 +260,7 @@ const DANGLING = new Set(['the', 'a', 'an', 'some', 'do', 'does']);
 
 /** Marks `alt`'s words as used in `words`, each once, the last one free first;
  *  false (and nothing marked) if one is missing. */
-function take(words: string[], used: boolean[], alt: string[]) {
+function take(words: readonly string[], used: boolean[], alt: readonly string[]) {
   const mine: number[] = [];
   for (const w of alt) {
     let at = words.length - 1;
@@ -220,11 +275,11 @@ function take(words: string[], used: boolean[], alt: string[]) {
 /** 2 when a meaning is one of the gloss's senses, in the same words in the same
  *  order ("you're" is "you are"); 1 when it can stand for the word some other
  *  way ("are you"); 0 otherwise. */
-export function closeness(meaning: string, gloss: string) {
+export const closeness = memo2((meaning: string, gloss: string): number => {
   const words = englishWords(meaning).join(' ');
   if (glossSenses(gloss).some((s) => englishWords(s).join(' ') === words)) return 2;
   return standsAlone(meaning, gloss) ? 1 : 0;
-}
+});
 
 /**
  * Whether an English rendering is just the word again. "the mate", "some
@@ -296,7 +351,13 @@ export function popoverMeanings(form: { form: string; gloss_en: string }, inCont
 export function withMeanings(forms: Form[], sentences: Sentence[], reached = 0, base?: GlossTallies): Form[] {
   const glossById = new Map(forms.map((f) => [f.id, f.gloss_en]));
   const fromSentences = meaningsFromSentences(sentences, (id, m) => closeness(m, glossById.get(id) ?? ''), base);
-  const meaningsOf = (f: Form) => (fromSentences.get(f.id) ?? []).filter((m) => standsAlone(m, f.gloss_en));
+  // Asked three times of every form below, so worked out once.
+  const vetted = new Map<string, string[]>();
+  const meaningsOf = (f: Form) => {
+    let own = vetted.get(f.id);
+    if (!own) vetted.set(f.id, (own = (fromSentences.get(f.id) ?? []).filter((m) => standsAlone(m, f.gloss_en))));
+    return own;
+  };
 
   // Who answers to each piece of English — however a sentence happened to
   // put it (`sayingKey`). `somos` and `estamos` are both "we are"; that one

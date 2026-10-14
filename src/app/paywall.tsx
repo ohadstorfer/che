@@ -1,7 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
-import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useEffect, useRef, useState } from 'react';
@@ -17,16 +16,19 @@ import Animated, {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EASE_OUT, IconButton, rise } from '@/components/onboarding-ui';
+import { POSE } from '@/components/mascot';
 import { Button } from '@/components/ui';
+import { useAuth } from '@/lib/auth';
 import { billing } from '@/lib/billing';
-import { annualSaving, type Offer, type Plan, winbackDiscount } from '@/lib/billing-shared';
+import { type Offer, type Plan, winbackDiscount } from '@/lib/billing-shared';
+import { isGuest } from '@/lib/guest';
 import { success, tap } from '@/lib/haptics';
 import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
 import { resetTo } from '@/lib/nav';
-import { buildPlan, formatDate, loadAnswers, markWinbackShown, winbackShown } from '@/lib/onboarding';
+import { loadAnswers, nameTail, markWinbackShown, winbackShown } from '@/lib/onboarding';
 import { FREE_CHATS, type PaywallSource, usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
-import { clay, colors, font, pastel, pastelGrad, type PastelName, press, radius, type } from '@/lib/theme';
+import { clay, colors, font, pastel, press, radius, type } from '@/lib/theme';
 import { scheduleTrialReminder } from '@/lib/trial-reminder';
 
 // ---------------------------------------------------------------------------
@@ -59,6 +61,7 @@ export default function Paywall() {
   const params = useLocalSearchParams<{ from?: string }>();
   const from = (params.from ?? 'home') as PaywallSource;
   const { catalog, hardPaywall, grant, refresh, testerUnlock, unlockAsTester } = usePremium();
+  const { session } = useAuth();
   const main = catalog?.main ?? null;
   const locked = hardPaywall || from === 'gate';
 
@@ -77,10 +80,7 @@ export default function Paywall() {
       if (!alive) return;
       if (from === 'lesson') return setHeadline({ title: 'Keep going', sub: "You've finished the free units. Unlock the whole course." });
       if (from === 'hablar') return setHeadline({ title: 'Keep talking with Pancho', sub: `You've used your ${FREE_CHATS} free chats. Talk with him every day.` });
-      if (answers) {
-        const plan = buildPlan(answers);
-        return setHeadline({ title: 'Start your plan for free', sub: `${plan.headline} by ${formatDate(plan.date)}.` });
-      }
+      if (answers) return setHeadline({ title: `Pick your plan${nameTail(answers)}.`, sub: 'For less than a medialuna a day.' });
       setHeadline({ title: 'Posta Premium', sub: 'Everything in Posta, every day.' });
     });
     return () => {
@@ -100,11 +100,12 @@ export default function Paywall() {
   }, [main, selected]);
 
   const plan = main?.plans.find((p) => p.id === selected) ?? null;
-  const saving = main ? annualSaving(main.plans) : null;
-
+  
   // Out of onboarding the welcome screen is still underneath, so the app
   // starts fresh; from inside the app, it goes back to the Course that's there.
-  const home = () => (from === 'onboarding' ? resetTo('/home') : router.dismissTo('/home'));
+  // A guest who closes it still gets Ready, where she saves her account.
+  const home = () =>
+    from === 'onboarding' ? resetTo(isGuest(session) ? '/ready' : '/home') : router.dismissTo('/home');
   const leave = () => {
     if (from === 'onboarding' || from === 'gate' || !router.canGoBack()) home();
     else router.back();
@@ -172,7 +173,12 @@ export default function Paywall() {
     setStage('done');
   };
 
-  if (stage === 'done') return <Welcome trial={purchasedTrial} reduced={reduced} onGo={home} />;
+  // Out of onboarding she picks where to start (ready.tsx); anywhere else the
+  // short welcome hands her back to what she was doing.
+  useEffect(() => {
+    if (stage === 'done' && from === 'onboarding') resetTo('/ready');
+  }, [stage, from]);
+  if (stage === 'done') return from === 'onboarding' ? null : <Welcome trial={purchasedTrial} reduced={reduced} onGo={home} />;
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
@@ -194,11 +200,9 @@ export default function Paywall() {
       </View>
 
       <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
-        <Animated.View entering={rise(0, reduced)} style={styles.heroWrap}>
-          <LinearGradient colors={pastelGrad.peach} style={styles.hero}>
-            <View style={styles.pod} />
-            <Image source={require('@/assets/images/capybara/capybara-mate-sorbiendo-figure.webp')} style={styles.heroArt} contentFit="contain" accessible={false} />
-          </LinearGradient>
+        <Animated.View entering={rise(0, reduced)} style={styles.hero}>
+          <View style={styles.heroPod} />
+          <Image source={POSE.gol} style={styles.heroArt} contentFit="contain" accessible={false} />
         </Animated.View>
         {headline ? (
           <>
@@ -213,25 +217,14 @@ export default function Paywall() {
           <View style={{ height: 70 }} />
         )}
 
-        {plan?.trialDays ? (
-          <Animated.View entering={rise(3, reduced)}>
-            <TrialTimeline days={plan.trialDays} />
-          </Animated.View>
-        ) : (
-          <Animated.View entering={rise(3, reduced)}>
-            <Benefits />
-          </Animated.View>
-        )}
-
-        <Animated.View entering={rise(4, reduced)} style={{ gap: 10, marginTop: 22 }} accessibilityRole="radiogroup">
+        <Animated.View entering={rise(3, reduced)} style={styles.plans} accessibilityRole="radiogroup">
           {main ? (
             main.plans.map((p) => (
               <PlanCard
                 key={p.id}
                 plan={p}
                 selected={selected === p.id}
-                badge={p.period === 'year' ? (p.trialDays ? `${p.trialDays} DAYS FREE` : saving ? `SAVE ${saving}%` : null) : null}
-                saving={p.period === 'year' ? saving : null}
+                badge={p.period === 'year' && main.plans.length > 1}
                 onPress={() => {
                   tap();
                   setSelected(p.id);
@@ -247,16 +240,11 @@ export default function Paywall() {
           ) : (
             <>
               <View style={styles.skeleton} />
-              <View style={[styles.skeleton, { height: 64 }]} />
+              <View style={styles.skeleton} />
             </>
           )}
         </Animated.View>
 
-        {plan?.trialDays ? (
-          <Animated.View entering={rise(5, reduced)} style={{ marginTop: 22 }}>
-            <Benefits />
-          </Animated.View>
-        ) : null}
       </ScrollView>
 
       <View style={styles.footer}>
@@ -309,78 +297,11 @@ export default function Paywall() {
   );
 }
 
-// --- the free week, drawn as the three days that matter ---------------------
+// --- a plan, as a sticker -------------------------------------------------------
 
-function TrialTimeline({ days }: { days: number }) {
-  const rows = [
-    { icon: 'lock-open-variant', when: 'Today', what: 'Full access to all of Posta: every lesson, every chat.' },
-    { icon: 'bell-ring-outline', when: `Day ${Math.max(1, days - 2)}`, what: "We'll remind you that your trial is ending." },
-    { icon: 'star-four-points', when: `Day ${days}`, what: 'Your subscription starts. Cancel before and pay nothing.' },
-  ];
-  return (
-    <View style={styles.timeline}>
-      {rows.map((r, i) => {
-        const last = i === rows.length - 1;
-        return (
-          <View key={r.when} style={styles.tRow}>
-            <View style={styles.tRail}>
-              <View style={[styles.tIcon, i === 0 && styles.tIconNow]}>
-                <MaterialCommunityIcons
-                  name={r.icon as keyof typeof MaterialCommunityIcons.glyphMap}
-                  size={16}
-                  color={colors.onPastel}
-                />
-              </View>
-              {!last ? <View style={[styles.tLine, i === 0 && { backgroundColor: colors.primary }]} /> : null}
-            </View>
-            <View style={{ flex: 1, paddingBottom: last ? 0 : 16 }}>
-              <Text style={styles.tWhen}>{r.when}</Text>
-              <Text style={styles.tWhat}>{r.what}</Text>
-            </View>
-          </View>
-        );
-      })}
-    </View>
-  );
-}
-
-function Benefits() {
-  const rows: { icon: string; title: string; sub: string; tone: PastelName }[] = [
-    { icon: 'road-variant', title: 'The whole course', sub: 'Every section, from hola to lunfardo', tone: 'sage' },
-    { icon: 'microphone-outline', title: 'A daily chat with Pancho', sub: 'Five minutes of real talk, with feedback', tone: 'lav' },
-    { icon: 'brain', title: 'Reviews that stick', sub: 'Words come back right before you forget them', tone: 'sky' },
-  ];
-  return (
-    <View style={{ gap: 14 }}>
-      {rows.map((r) => (
-        <View key={r.title} style={styles.benefit}>
-          <View style={[styles.benefitIcon, { backgroundColor: pastel[r.tone] }]}>
-            <MaterialCommunityIcons name={r.icon as keyof typeof MaterialCommunityIcons.glyphMap} size={20} color={colors.onPastel} />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.benefitTitle}>{r.title}</Text>
-            <Text style={styles.benefitSub}>{r.sub}</Text>
-          </View>
-        </View>
-      ))}
-    </View>
-  );
-}
-
-function PlanCard({
-  plan,
-  selected,
-  badge,
-  saving,
-  onPress,
-}: {
-  plan: Plan;
-  selected: boolean;
-  badge: string | null;
-  saving: number | null;
-  onPress: () => void;
-}) {
-  const yearly = plan.period === 'year';
+function PlanCard({ plan, selected, badge, onPress }: { plan: Plan; selected: boolean; badge: boolean; onPress: () => void }) {
+  const name = plan.period === 'year' ? 'Yearly' : plan.period === 'week' ? 'Weekly' : 'Monthly';
+  const per = `a ${perPeriod(plan)}${plan.trialDays ? ` · ${trialWord(plan.trialDays)} free` : ''}`;
   return (
     <Pressable
       onPress={onPress}
@@ -388,28 +309,18 @@ function PlanCard({
       accessibilityState={{ selected }}
       style={({ pressed }) => [
         styles.plan,
-        selected && styles.planSelected,
+        selected ? styles.planSelected : styles.planFlat,
         { transform: [{ scale: pressed ? press.scale : 1 }] },
         webPress,
       ]}>
-      {/* The chosen plan is molded in manteca clay. */}
-      {selected ? <LinearGradient colors={pastelGrad.butter} style={styles.planFill} /> : null}
       {badge ? (
         <View style={styles.badge}>
-          <Text style={styles.badgeText}>{badge}</Text>
+          <Text style={styles.badgeText}>Best value</Text>
         </View>
       ) : null}
-      <View style={[styles.radio, selected && styles.radioOn]}>{selected ? <View style={styles.radioDot} /> : null}</View>
-      <View style={{ flex: 1 }}>
-        <Text style={styles.planName}>{yearly ? 'Yearly' : plan.period === 'week' ? 'Weekly' : 'Monthly'}</Text>
-        <Text style={[styles.planSub, selected && styles.onPastelSoft]}>
-          {yearly ? `${plan.priceString} a year${saving ? ` · save ${saving}%` : ''}` : 'Billed monthly'}
-        </Text>
-      </View>
-      <View style={{ alignItems: 'flex-end' }}>
-        <Text style={styles.planPrice}>{yearly && plan.perMonthString ? plan.perMonthString : plan.priceString}</Text>
-        <Text style={[styles.planPer, selected && styles.onPastelSoft]}>/ month</Text>
-      </View>
+      <Text style={styles.planName}>{name}</Text>
+      <Text style={styles.planPrice}>{plan.priceString}</Text>
+      <Text style={styles.planPer}>{per}</Text>
     </Pressable>
   );
 }
@@ -505,59 +416,22 @@ const styles = StyleSheet.create({
   topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 12, paddingTop: 4, minHeight: 44 },
   restore: { ...font.body[700], fontSize: 15, color: colors.muted, paddingHorizontal: 8 },
   body: { paddingHorizontal: 24, paddingBottom: 24, maxWidth: 520, width: '100%', alignSelf: 'center' },
-  heroWrap: { marginTop: 4, borderRadius: radius.xl, boxShadow: clay.surface },
-  hero: { height: 150, borderRadius: radius.xl, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
-  pod: { position: 'absolute', width: 132, height: 132, borderRadius: 66, backgroundColor: colors.pod },
-  heroArt: { width: 124, height: 124 },
+  hero: { height: 176, alignItems: 'center', justifyContent: 'flex-end', marginTop: 4 },
+  heroPod: { position: 'absolute', bottom: 0, width: 150, height: 150, borderRadius: 75, backgroundColor: pastel.peach, boxShadow: clay.surface },
+  heroArt: { width: 138, height: 172, marginBottom: 0 },
   title: { ...type.display, fontSize: 30, lineHeight: 34, color: colors.ink, textAlign: 'center', marginTop: 18 },
-  sub: { ...type.body, fontSize: 16, lineHeight: 22, color: colors.muted, textAlign: 'center', marginTop: 6, marginBottom: 22 },
+  sub: { ...type.body, fontSize: 16, lineHeight: 22, color: colors.muted, textAlign: 'center', marginTop: 6 },
 
-  timeline: { backgroundColor: colors.card, borderRadius: radius.lg, padding: 18, boxShadow: clay.surface },
-  tRow: { flexDirection: 'row', gap: 14 },
-  tRail: { alignItems: 'center', width: 34 },
-  tIcon: { width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center', backgroundColor: pastel.lav, boxShadow: clay.surface },
-  tIconNow: { backgroundColor: pastel.butter },
-  tLine: { flex: 1, width: 3, marginVertical: 4, borderRadius: 2, backgroundColor: colors.trough },
-  tWhen: { ...font.body[800], fontSize: 15, color: colors.ink, marginTop: 6 },
-  tWhat: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.muted, marginTop: 1 },
-
-  benefit: { flexDirection: 'row', alignItems: 'center', gap: 14 },
-  benefitIcon: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', boxShadow: clay.surface },
-  benefitTitle: { ...font.body[700], fontSize: 16, color: colors.ink },
-  benefitSub: { ...font.body[600], fontSize: 14, color: colors.muted, marginTop: 1 },
-
-  plan: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 14,
-    backgroundColor: colors.card,
-    borderRadius: radius.lg,
-    paddingHorizontal: 18,
-    paddingVertical: 18,
-    boxShadow: clay.surface,
-  },
-  planSelected: { backgroundColor: pastel.butter },
-  planFill: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: radius.lg },
-  onPastelSoft: { color: colors.onPastel, opacity: 0.8 },
-  badge: {
-    position: 'absolute',
-    top: -12,
-    right: 16,
-    backgroundColor: pastel.peach,
-    borderRadius: radius.pill,
-    paddingHorizontal: 11,
-    paddingVertical: 5,
-    boxShadow: clay.surface,
-  },
-  badgeText: { ...font.body[800], fontSize: 11, letterSpacing: 0.6, color: colors.onPastel },
-  radio: { width: 24, height: 24, borderRadius: 12, backgroundColor: colors.trough, boxShadow: clay.trough, alignItems: 'center', justifyContent: 'center' },
-  radioOn: { backgroundColor: colors.card },
-  radioDot: { width: 12, height: 12, borderRadius: 6, backgroundColor: colors.primary },
-  planName: { ...font.display[800], fontSize: 18, color: colors.ink, letterSpacing: -0.2 },
-  planSub: { ...font.body[600], fontSize: 13.5, color: colors.muted, marginTop: 2 },
-  planPrice: { ...font.display[800], fontSize: 20, color: colors.ink, letterSpacing: -0.3 },
-  planPer: { ...font.body[700], fontSize: 12, color: colors.muted },
-  skeleton: { height: 76, borderRadius: radius.lg, backgroundColor: colors.trough },
+  plans: { flexDirection: 'row', gap: 14, marginTop: 40 },
+  plan: { flex: 1, alignItems: 'center', gap: 4, paddingTop: 30, paddingBottom: 22, paddingHorizontal: 10, borderRadius: radius.lg },
+  planSelected: { backgroundColor: pastel.butter, boxShadow: clay.surface },
+  planFlat: { backgroundColor: colors.card, boxShadow: clay.flat },
+  badge: { position: 'absolute', top: -14, alignSelf: 'center', backgroundColor: colors.primary, borderRadius: radius.pill, paddingHorizontal: 12, paddingVertical: 5, boxShadow: clay.chip },
+  badgeText: { ...font.body[800], fontSize: 12.5, color: colors.onPrimary },
+  planName: { ...font.body[800], fontSize: 14, letterSpacing: 1, textTransform: 'uppercase', color: colors.muted },
+  planPrice: { ...font.display[900], fontSize: 30, lineHeight: 34, letterSpacing: -0.6, color: colors.ink },
+  planPer: { ...font.body[700], fontSize: 14, color: colors.muted, textAlign: 'center' },
+  skeleton: { flex: 1, height: 120, borderRadius: radius.lg, backgroundColor: colors.trough },
   unavailable: { ...type.body, color: colors.muted, textAlign: 'center', paddingVertical: 12 },
 
   footer: {

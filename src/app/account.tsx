@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { IconButton, rise } from '@/components/onboarding-ui';
 import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
+import { isGuest } from '@/lib/guest';
 import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
 import { goBack, resetTo } from '@/lib/nav';
 import { usePremium } from '@/lib/premium';
@@ -25,6 +26,10 @@ import { FitText } from '@/components/fit-text';
 // the delete to live inside the app (App Store 5.1.1(v), Google Play's
 // account-deletion policy). It asks once, in place, saying exactly what goes
 // and that a store subscription has to be cancelled in the store.
+//
+// A guest (lib/guest.ts) has no way back in once signed out, so she gets no
+// Sign out: she is asked to save her account instead, or to sign in to the
+// one she already has.
 // ---------------------------------------------------------------------------
 
 const MANAGE_URL =
@@ -72,6 +77,7 @@ export default function AccountScreen() {
   };
 
   const premium = status === 'premium';
+  const guest = isGuest(session);
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
@@ -90,7 +96,7 @@ export default function AccountScreen() {
               {profile?.display_name || 'You'}
             </FitText>
             <FitText style={styles.email} lines={1}>
-              {session?.user.email ?? ''}
+              {guest ? 'Not saved yet' : (session?.user.email ?? '')}
             </FitText>
           </LinearGradient>
         </Animated.View>
@@ -121,7 +127,14 @@ export default function AccountScreen() {
         </Animated.View>
 
         <Animated.View entering={rise(2, reduced)} style={styles.actions}>
-          <Button title="Sign out" variant="secondary" onPress={() => void signOut()} />
+          {guest ? (
+            <>
+              <Button title="Save your progress" onPress={() => router.push('/save-account?from=account')} />
+              <Button title="I already have an account" variant="ghost" onPress={() => router.push('/login')} />
+            </>
+          ) : (
+            <Button title="Sign out" variant="secondary" onPress={() => void signOut()} />
+          )}
         </Animated.View>
 
         {staff ? null : !confirming ? (
@@ -221,7 +234,7 @@ const styles = StyleSheet.create({
   rowLabel: { ...type.body, color: colors.ink, flex: 1 },
   rowDetail: { ...type.label, color: colors.primary },
   divider: { height: 1, backgroundColor: colors.trough, marginLeft: 64 },
-  actions: { marginTop: 8 },
+  actions: { marginTop: 8, gap: 10 },
   deleteLink: { alignSelf: 'center', paddingVertical: 12, paddingHorizontal: 16 },
   deleteLinkText: { ...type.label, color: colors.dangerInk },
   confirm: { padding: 18, gap: 10 },

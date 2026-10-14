@@ -12,6 +12,7 @@ import { Platform, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { BootSplash } from '@/components/boot-splash';
+import { FeedbackLayer } from '@/components/feedback';
 import { ScreenBackground } from '@/components/ui';
 import { AuthProvider, useAuth } from '@/lib/auth';
 import { useBootReady } from '@/lib/boot';
@@ -99,8 +100,11 @@ export default function RootLayout() {
                   {/* Her words rise from the bottom, over the road, and close back down. */}
                   <Stack.Screen name="my-words" options={{ animation: 'slide_from_bottom' }} />
                   <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />
+                  <Stack.Screen name="ready" options={{ gestureEnabled: false }} />
                 </Stack>
               </ThemeProvider>
+              {/* The testers' feedback bubble, over every screen but under the splash. */}
+              <FeedbackLayer />
             </>
           ) : null}
           {/* One place in the tree from the first render on, so the splash

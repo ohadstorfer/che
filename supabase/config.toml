@@ -5,6 +5,11 @@ enabled = true
 site_url = "che://"
 additional_redirect_urls = ["http://localhost:8081", "http://localhost:19006"]
 enable_signup = true
+# Onboarding sells before it asks for an account: she is a guest until then
+# (src/lib/guest.ts), and Apple, Google or an email are linked onto that
+# same user afterwards. Both also need switching on in the dashboard.
+enable_anonymous_sign_ins = true
+enable_manual_linking = true
 
 [auth.email]
 enable_signup = true
@@ -19,5 +24,8 @@ verify_jwt = false
 [functions.hablar-retention]
 verify_jwt = false
 
-[functions.revenuecat-webhook]
+[functions.apple-notifications]
+verify_jwt = false
+
+[functions.google-notifications]
 verify_jwt = false

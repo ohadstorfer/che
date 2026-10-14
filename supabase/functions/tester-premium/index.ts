@@ -48,6 +48,9 @@ Deno.serve(async (req) => {
     active: true,
     product_id: "tester",
     store: "TESTER",
+    // A lapsed store purchase this row held is let go of.
+    store_ref: null,
+    store_signed_at: null,
     period_type: null,
     expires_at: null,
     last_event: "TESTER",
