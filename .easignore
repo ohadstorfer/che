@@ -1,0 +1,42 @@
+# What EAS Build uploads. Same as .gitignore, plus the folders the app never
+# imports: course sources and snapshots, the Remotion videos, docs and the
+# server side. Without them the archive drops from ~550 MB to ~100 MB.
+# (When .easignore exists EAS stops reading .gitignore, so its rules are here too.)
+
+# --- from .gitignore
+node_modules/
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.env
+.env*.local
+ios/
+android/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+.DS_Store
+*.pem
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.kotlin/
+.metro-health-check*
+*.tsbuildinfo
+*.log
+.vercel
+.course-work/
+
+# --- not part of the app build
+content/
+social/
+docs/
+research_notes/
+supabase/
+scripts/
+.agents/
+.claude/
