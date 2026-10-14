@@ -34,6 +34,7 @@
     "expo-status-bar": "~57.0.1",
     "expo-symbols": "~57.0.2",
     "expo-system-ui": "~57.0.2",
+    "expo-updates": "~57.0.26",
     "expo-video": "~57.0.5",
     "expo-web-browser": "~57.0.2",
     "react": "19.2.3",
@@ -129,7 +130,8 @@
     "reminders:test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test supabase/tests/reminders.test.mjs",
     "feedback:test": "node supabase/tests/feedback.test.mjs",
     "build:ios": "EAS_NO_VCS=1 eas build -p ios --profile production",
-    "build:android": "EAS_NO_VCS=1 eas build -p android --profile production"
+    "build:android": "EAS_NO_VCS=1 eas build -p android --profile production",
+    "update": "EAS_NO_VCS=1 eas update --channel production --environment production"
   },
   "private": true
 }

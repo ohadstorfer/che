@@ -4,6 +4,12 @@
     "slug": "posta",
     "owner": "swellyo",
     "version": "1.0.0",
+    "runtimeVersion": {
+      "policy": "fingerprint"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/1fc7cd1b-48b6-4c12-9c09-e7b7953f0910"
+    },
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "posta",
