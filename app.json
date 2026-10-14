@@ -14,7 +14,7 @@
       "bundleIdentifier": "app.posta.ios",
       "supportsTablet": false,
       "usesAppleSignIn": true,
-      "appleTeamId": "683UA9HZYT",
+      "appleTeamId": "5AANVGL84P",
       "entitlements": {
         "com.apple.security.application-groups": [
           "group.app.posta.ios"
