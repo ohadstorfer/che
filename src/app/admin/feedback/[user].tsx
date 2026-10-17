@@ -1,7 +1,9 @@
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Linking, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AdminScreen, Muted, SmallButton, adminStyles } from '@/components/admin';
 import {
@@ -34,6 +36,7 @@ export default function AdminFeedbackThread() {
   const [draft, setDraft] = useState('');
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [viewing, setViewing] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     if (!user) return;
@@ -110,7 +113,7 @@ export default function AdminFeedbackThread() {
                   {m.images.map((p) => {
                     const url = urls.get(p);
                     return (
-                      <Pressable key={p} onPress={() => url && Linking.openURL(url)} accessibilityLabel="Open screenshot">
+                      <Pressable key={p} onPress={() => url && setViewing(url)} accessibilityLabel="Open screenshot">
                         {url ? (
                           <Image source={{ uri: url }} style={[styles.shot, shotShape(m.context)]} contentFit="cover" />
                         ) : (
@@ -150,6 +153,7 @@ export default function AdminFeedbackThread() {
         <SmallButton label={sending ? 'Sending…' : 'Send'} icon="send" tone="primary" disabled={sending || !draft.trim()} onPress={reply} />
       </View>
       {error ? <Text style={{ color: colors.dangerInk }}>{error}</Text> : null}
+      <ShotViewer url={viewing} onClose={() => setViewing(null)} />
     </AdminScreen>
   );
 }
@@ -157,6 +161,37 @@ export default function AdminFeedbackThread() {
 /** "/practice · v1.0.0 · iPhone 15 · iOS 18.2" */
 function describe(c: FeedbackContext) {
   return [c.route, c.app ? `v${c.app}` : null, c.device, c.os ?? c.platform, c.screen].filter(Boolean).join(' · ');
+}
+
+/** A screenshot full screen, in the app: pinch to zoom (iOS), tap or ✕ to close. */
+function ShotViewer({ url, onClose }: { url: string | null; onClose: () => void }) {
+  const { width, height } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
+  return (
+    <Modal visible={!!url} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
+      <View style={styles.viewer}>
+        <ScrollView
+          maximumZoomScale={4}
+          minimumZoomScale={1}
+          centerContent
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ width, height }}>
+          <Pressable onPress={onClose} style={{ width, height }} accessibilityLabel="Close screenshot">
+            {url ? <Image source={{ uri: url }} style={{ width, height }} contentFit="contain" /> : null}
+          </Pressable>
+        </ScrollView>
+        <Pressable
+          onPress={onClose}
+          hitSlop={12}
+          accessibilityRole="button"
+          accessibilityLabel="Close"
+          style={({ pressed }) => [styles.close, { top: insets.top + 8 }, pressed && { transform: [{ scale: 0.94 }] }]}>
+          <MaterialCommunityIcons name="close" size={22} color="#fff" />
+        </Pressable>
+      </View>
+    </Modal>
+  );
 }
 
 /** The thumbnail in the shape of her screen ("435×725"), so cover crops nothing. */
@@ -170,6 +205,17 @@ const styles = StyleSheet.create({
   mine: { alignSelf: 'flex-end', alignItems: 'flex-end' },
   theirs: { alignSelf: 'flex-start', alignItems: 'flex-start' },
   shot: { width: 150, height: 325, borderRadius: radius.sm, borderWidth: 1, borderColor: colors.border },
+  viewer: { flex: 1, backgroundColor: 'rgba(0,0,0,0.94)' },
+  close: {
+    position: 'absolute',
+    right: 16,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.16)',
+  },
   bubble: { paddingHorizontal: 14, paddingVertical: 10, borderRadius: 16 },
   bubbleMine: { backgroundColor: colors.primary, borderBottomRightRadius: 5 },
   bubbleTheirs: { backgroundColor: pastel.butter, borderBottomLeftRadius: 5 },
