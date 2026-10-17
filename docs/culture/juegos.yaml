@@ -67,7 +67,7 @@ classes:
           - "They throw them at a wall, and the closest one wins"
           - "They race to stick them in the album"
         correct: 1
-        explain: "That game is **el espejito**. In another one, **la tapadita**, your figurita has to land on top of someone else's. The winner takes both."
+        explain: "That game is **el punto**. In another one, **la tapadita**, your figurita has to land on top of someone else's. The winner takes both."
       - type: card
         text: "Adults do it too. In a World Cup year, offices have a list on the wall of who needs which number, and nobody finds that strange."
       - type: card

@@ -149,8 +149,6 @@ export interface TryIt {
   en: string;
   /** Indexes of the words that change. */
   targets: number[];
-  /** A beginner is shown which words to tap. */
-  marked: boolean;
   head: string;
   start: string;
   done: string;
@@ -162,15 +160,15 @@ export function tryIt(a: Pick<Answers, 'why' | 'level'>): TryIt {
   const local = ar.split(' ');
   const targets = book.map((_, i) => i).filter((i) => book[i] !== local[i]);
   const n = targets.length;
-  // One instruction at every level: how many words to find, and where they're from.
-  const start = `${n} of these words are different in Argentina. Tap them.`;
+  // One line at every level: how many words give the textbook away.
+  const start = `${n} of these words are different in Argentina.`;
   const copy = {
     none: { head: 'Make it Argentine.', start, done: '¡Eso! Your first Argentine sentence.' },
     basics: { head: 'Make it Argentine.', start, done: '¡Eso! That’s how we say it here.' },
     spanish: { head: 'Which words give you away?', start, done: '¡Eso! Nobody will ask where you learned it.' },
     conversational: { head: 'Which words give you away?', start, done: '¡Eso! Now you sound like you live here.' },
   }[a.level];
-  return { book, local, en, targets, marked: a.level === 'none', ...copy };
+  return { book, local, en, targets, ...copy };
 }
 
 // --- struggle: what got in the way ------------------------------------------

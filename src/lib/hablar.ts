@@ -113,7 +113,7 @@ export function resolveAudio(ref?: string | null): string | null {
 
 // --- types on the wire ---------------------------------------------------------
 
-/** 'unit': a unit's Speaking lesson on the road — its own scene, outside the day's one chat. */
+/** 'unit': a unit's Speaking lesson on the road — its own scene, outside the day's three chats. */
 export type HablarKind = 'scenario' | 'culture' | 'free' | 'unit';
 
 export interface StartResult {
@@ -130,6 +130,10 @@ export interface StartResult {
   /** null for a staff chat: no clock. */
   deadline_at: string | null;
   unlimited?: boolean;
+  /** Lines she may say in this chat (TAB_MESSAGES); null for a unit chat. */
+  message_limit?: number | null;
+  /** The Speaking tab's chats left today after this one; null for unit and staff chats. */
+  chats_left_today?: number | null;
   opener: { turn_id?: string; text: string; text_en: string; audio_url: string | null };
   key_phrases: { es: string; en: string; audio_url: string | null }[];
 }
@@ -151,7 +155,6 @@ export interface Feedback {
 
 /** A tick, the fix, the Argentine way to say it ("note"), or nothing (a garbled line). */
 export type Verdict = 'correct' | 'error' | 'note' | 'unclear';
-const VERDICTS: Verdict[] = ['correct', 'error', 'note', 'unclear'];
 
 export const verdictOf = (fb: Pick<Feedback, 'has_error' | 'verdict'>): Verdict =>
   fb.has_error ? 'error' : fb.verdict ?? 'correct';
@@ -178,7 +181,6 @@ export interface HablarSummary {
   /** Lines she said. */
   turns?: number;
   corrections?: SummaryCorrection[];
-  phrases?: { es: string; en?: string }[];
   went_well?: string | null;
   streak_credited?: boolean;
   /** A unit chat: its scene's title, and whether it finished its lesson on the road. */
@@ -208,15 +210,12 @@ export interface DoneEvent {
 export interface ReplyHandlers {
   /** The line as the server stored it (speak only): it opens the stream. */
   onTranscript?: (text: string) => void;
-  /** The verdict on her line, ahead of the full feedback: right or wrong, and the fixed line. */
-  onCorrection?: (verdict: { has_error: boolean; verdict?: Verdict; corrected: string }) => void;
   onText: (seq: number, delta: string) => void;
   /** The rioplatense guard rewrote part of an already-shown sentence: replace `from` with `to`. */
   onTextFix: (seq: number, from: string, to: string) => void;
   onAudio: (seq: number, mp3Base64: string) => void;
-  onFeedback: (fb: Feedback) => void;
   onDone: (done: DoneEvent) => void;
-  /** stage 'claude' + retry → call reply again with the same turn_id; 'tts' / 'feedback' are soft. */
+  /** stage 'claude' + retry → call reply again with the same turn_id; 'tts' is soft. */
   onError: (err: { stage: string; retry: boolean; seq?: number }) => void;
 }
 
@@ -256,14 +255,26 @@ async function call<T>(name: string, body: Record<string, unknown> | FormData): 
 
 // --- the five functions -------------------------------------------------------
 
-/** §4.3. A second chat on the same local day comes back as `{ doneToday }`. */
+/**
+ * What a start can be refused with (hablar-start): a chat already open (go
+ * back into it), a unit chat already had (its summary), the day's chats used,
+ * Pancho's break from unit chats, or the free chats used up.
+ */
+export type StartRefusal =
+  | { open: string }
+  | { doneToday: true; summaryId: string | null }
+  | { dailyLimit: true }
+  | { courseBreak: true }
+  | { paywall: true };
+
+/** §4.3. A chat, or why not (StartRefusal). */
 export async function start(args: {
   kind: HablarKind;
   topic_id?: string | null;
   /** A unit chat: its Speaking lesson. */
   lesson_id?: string | null;
   level: Band;
-}): Promise<StartResult | { doneToday: true; summaryId: string | null } | { paywall: true }> {
+}): Promise<StartResult | StartRefusal> {
   try {
     const res = await call<StartResult>('hablar-start', {
       kind: args.kind,
@@ -274,8 +285,13 @@ export async function start(args: {
     startCache.set(res.session_id, res);
     return res;
   } catch (e) {
-    if (e instanceof HablarError && e.status === 409) {
+    if (e instanceof HablarError && e.status === 409 && e.body?.retry !== true) {
+      if (e.body?.error === 'open' && typeof e.body.session_id === 'string') return { open: e.body.session_id };
       return { doneToday: true, summaryId: (e.body?.summary_id as string) ?? null };
+    }
+    if (e instanceof HablarError && e.status === 429) {
+      if (e.body?.error === 'daily_limit') return { dailyLimit: true };
+      if (e.body?.error === 'course_break') return { courseBreak: true };
     }
     // The free chats are used up (hablar-start checks the entitlement too).
     if (e instanceof HablarError && e.status === 402) return { paywall: true };
@@ -457,13 +473,6 @@ async function streamTurn(body: string | FormData, on: ReplyHandlers, signal?: A
       case 'transcript':
         on.onTranscript?.(String(payload.text ?? ''));
         break;
-      case 'correction':
-        on.onCorrection?.({
-          has_error: payload.has_error === true,
-          verdict: VERDICTS.find((v) => v === payload.verdict),
-          corrected: String(payload.corrected ?? ''),
-        });
-        break;
       case 'text':
         on.onText(Number(payload.seq ?? 0), String(payload.delta ?? ''));
         break;
@@ -472,9 +481,6 @@ async function streamTurn(body: string | FormData, on: ReplyHandlers, signal?: A
         break;
       case 'audio':
         on.onAudio(Number(payload.seq ?? 0), String(payload.mp3 ?? ''));
-        break;
-      case 'feedback':
-        on.onFeedback(payload as unknown as Feedback);
         break;
       case 'done':
         on.onDone(payload as unknown as DoneEvent);
@@ -562,7 +568,9 @@ export interface ConversationRow {
   /** Staff chat: no clock, no daily limit. */
   unlimited: boolean;
   /** A unit chat: the scene it ran. */
-  scenario?: { title_en?: string; role_es?: string } | null;
+  scenario?: { title_en?: string; role_es?: string; role_en?: string } | null;
+  /** A unit chat: its Speaking lesson on the road. */
+  lesson_id?: string | null;
 }
 
 export interface TurnRow {
@@ -579,7 +587,7 @@ export interface TurnRow {
 }
 
 const CONVERSATION_COLS =
-  'id, local_date, kind, topic_id, level, started_at, ended_at, paused_seconds, hints_used, goals_done, summary, unlimited, scenario';
+  'id, local_date, kind, topic_id, level, started_at, ended_at, paused_seconds, hints_used, goals_done, summary, unlimited, scenario, lesson_id';
 
 /** The day's chat, or the last one: a unit chat on the road is never the day's chat. */
 export async function latestConversation(): Promise<ConversationRow | null> {
@@ -587,6 +595,45 @@ export async function latestConversation(): Promise<ConversationRow | null> {
     .from('conversations')
     .select(CONVERSATION_COLS)
     .neq('kind', 'unit')
+    .order('started_at', { ascending: false })
+    .limit(1);
+  return ((rows ?? [])[0] as ConversationRow | undefined) ?? null;
+}
+
+/**
+ * Today's Speaking-tab chats, newest first: how many of the day's three are
+ * used, and the one still open. Staff chats are left out (they count toward nothing).
+ */
+export async function todaysChats(): Promise<ConversationRow[]> {
+  const { data: rows } = await supabase
+    .from('conversations')
+    .select(CONVERSATION_COLS)
+    .eq('local_date', localDateStr())
+    .neq('kind', 'unit')
+    .eq('unlimited', false)
+    .order('started_at', { ascending: false });
+  return (rows ?? []) as ConversationRow[];
+}
+
+/** Unit chats started today: Pancho takes a break after COURSE_CHATS_PER_DAY. */
+export async function unitChatsToday(): Promise<number> {
+  const { count } = await supabase
+    .from('conversations')
+    .select('id', { count: 'exact', head: true })
+    .eq('local_date', localDateStr())
+    .eq('kind', 'unit')
+    .eq('unlimited', false);
+  return count ?? 0;
+}
+
+/** The chat she had for a Speaking lesson on the road, the latest if more than one. */
+export async function unitChat(lessonId: string): Promise<ConversationRow | null> {
+  const { data: rows } = await supabase
+    .from('conversations')
+    .select(CONVERSATION_COLS)
+    .eq('kind', 'unit')
+    .eq('lesson_id', lessonId)
+    .not('ended_at', 'is', null)
     .order('started_at', { ascending: false })
     .limit(1);
   return ((rows ?? [])[0] as ConversationRow | undefined) ?? null;
@@ -628,14 +675,34 @@ export function tomasAudioPath(userId: string, sessionId: string, userTurnId: st
 
 export const isToday = (c: ConversationRow) => c.local_date === localDateStr();
 
+// --- the limits, as the server has them (supabase/functions/_shared/hablar.ts) ---
+
+/** Speaking-tab chats a day. */
+export const CHATS_PER_DAY = 3;
+/** Lines she says in a Speaking-tab chat; Pancho's answer to the last one closes it. */
+export const TAB_MESSAGES = 8;
+/** Lines in a unit chat at most: Pancho closes it by then. */
+export const UNIT_MESSAGES = 10;
+/** Unit chats in a day before Pancho needs a break. */
+export const COURSE_CHATS_PER_DAY = 3;
+
+/** The lines a chat allows her: eight on the Speaking tab, none counted in a unit chat. */
+export const messageLimitOf = (kind: HablarKind | undefined) => (kind === 'unit' ? null : TAB_MESSAGES);
+/** What the brief promises about a chat's length. */
+export const chatLength = (kind: HablarKind) => (kind === 'unit' ? `Up to ${UNIT_MESSAGES} messages` : `${TAB_MESSAGES} messages`);
+
+/** Whole hours until local midnight, at least one: when the day's chats come back. */
+export function hoursToMidnight(now = new Date()): number {
+  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  return Math.max(1, Math.ceil((midnight.getTime() - now.getTime()) / 3_600_000));
+}
+
 /**
- * The hard stop by level, as the server's CLOCK has it (supabase/functions/_shared/hablar.ts):
- * four minutes for A1 and A2, three above. A chat just started counts down to the server's own
- * `deadline_at`; this is for the brief, and for a chat loaded back from the tables.
+ * The server's backstop clock: ten minutes of her own time at every level
+ * (CLOCK). Chats are measured in lines now and the app shows no timer, but a
+ * chat loaded back from the tables still locks the mic when it runs out.
  */
-export const chatSeconds = (level: string | null | undefined) => (level === 'A1' || level === 'A2' ? 240 : 180);
-/** What the brief promises: Pancho usually closes about a minute before the hard stop. */
-export const chatLength = (level: string | null | undefined) => `About ${chatSeconds(level) / 60 - 1} min`;
+export const chatSeconds = (_level: string | null | undefined) => 600;
 /** The hard stop, plus whatever time the clock was stopped (the app in the background, Pancho's turn). */
 export const deadlineOf = (c: ConversationRow) =>
   new Date(new Date(c.started_at).getTime() + (chatSeconds(c.level) + (c.paused_seconds ?? 0)) * 1000).toISOString();

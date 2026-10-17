@@ -125,48 +125,48 @@ private struct Look {
     case .sideEye:
       Look(
         scene: "scene-afternoon", pose: "pancho-sideeye",
-        small: Stand(height: 204, right: 10, bottom: -6), medium: Stand(height: 312, right: 44, bottom: -8),
-        line: ("¿Y? ¿Hoy nada?", "¿Y? ¿Hoy no practicás?"))
+        small: Stand(height: 204, right: 18, bottom: -17), medium: Stand(height: 312, right: 44, bottom: -8),
+        line: ("So… nothing?", "So… no practice today?"))
     case .sad:
       Look(
         scene: "scene-sunset", pose: "pancho-sad",
         small: Stand(height: 204, right: 22, bottom: -8), medium: Stand(height: 308, right: 66, bottom: -6),
-        line: ("Te espero, eh.", "Se me enfrió el mate."))
+        line: ("Still waiting.", "Still waiting…"))
     case .begging:
       Look(
         scene: "scene-dusk", pose: "pancho-begging",
         small: Stand(height: 204, right: 36, bottom: -8), medium: Stand(height: 312, right: 92, bottom: -6),
-        line: ("Dale, porfa.", "Dale, porfa. Son 2 minutos."))
+        line: ("Please?", "Please?\nJust 2 minutes."))
     case .crying:
       Look(
         scene: "scene-fire", pose: "pancho-crying",
         small: Stand(height: 206, right: 16, bottom: -8), medium: Stand(height: 312, right: 50, bottom: -6),
-        line: ("¡Me matás!", "¡Me estás matando!"))
+        line: ("You’re killing me!", "You’re killing me!"))
     case .lastHour:
       Look(
         scene: "scene-night", pose: "pancho-collapsed",
         small: Stand(height: 196, right: 30, bottom: 4), medium: Stand(height: 280, right: 56, bottom: 22),
-        line: ("Chau, racha.", "Chau, racha de \(day.count) día\(day.count == 1 ? "" : "s")."), dark: true)
+        line: ("Bye, streak.", "Bye-bye,\n\(day.count)-day streak."), dark: true)
     case .practiced:
       Look(
         scene: "scene-goal", pose: "pancho-goal",
         small: Stand(height: 232, right: 60, bottom: -40), medium: Stand(height: 372, right: 44, bottom: -70),
-        line: ("¡Golazo!", "¡Golazo! Hasta mañana."))
+        line: ("Goooal!", "Goooal! See you tomorrow."))
     case .frozen:
       Look(
         scene: "scene-ice", pose: "pancho-sad",
         small: Stand(height: 150, right: 50, bottom: 24), medium: Stand(height: 262, right: 96, bottom: 30),
-        line: ("¡Me congelé!", "Tu racha se congeló."), dark: true)
+        line: ("I’m frozen!", "Your streak froze."), dark: true)
     case .recovering:
       Look(
         scene: "scene-thaw", pose: "pancho-begging",
         small: Stand(height: 204, right: 36, bottom: -8), medium: Stand(height: 312, right: 92, bottom: -6),
-        line: ("¡Una más!", "Una más y la salvás."))
+        line: ("One more!", "One more saves it."))
     case .fresh:
       Look(
         scene: "scene-morning", pose: "pancho-waving",
         small: Stand(height: 216, right: 30, bottom: -22), medium: Stand(height: 318, right: 82, bottom: -34),
-        line: ("¿Arrancamos?", "¿Arrancamos? Son 2 minutos."))
+        line: ("Shall we?", "Shall we? Just 2 minutes."))
     }
   }
 }

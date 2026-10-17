@@ -19,7 +19,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { type RecordedClip, startRecording } from '@/lib/audio';
-import { type Band, BANDS, type DiffPart, type DiloStatus, LEVEL_NAMES, LEVEL_NOTES, newTurnId, transcribe } from '@/lib/hablar';
+import { type Band, BANDS, CHATS_PER_DAY, type DiffPart, type DiloStatus, LEVEL_NAMES, LEVEL_NOTES, newTurnId, transcribe } from '@/lib/hablar';
 import { tomasArt } from '@/lib/hablar-art';
 import { checkClip, MAX_RECORD_MS, stopAll } from '@/lib/hablar-audio';
 import { clay, colors, font, gradients, pastel, press, radius } from '@/lib/theme';
@@ -27,7 +27,7 @@ import { clay, colors, font, gradients, pastel, press, radius } from '@/lib/them
 // ---------------------------------------------------------------------------
 // Pieces shared by the Hablar screens: Pancho's avatar, the pill buttons under
 // each message, the bottom sheet, the level chip, the big mic, the rosa
-// start button.
+// start button, the day's chats as three little speech bubbles.
 // ---------------------------------------------------------------------------
 
 /** The dimmed page behind a sheet: warm ink, not black. */
@@ -44,7 +44,7 @@ export const webPress =
     ? ({ transitionProperty: 'transform', transitionDuration: `${press.duration}ms`, transitionTimingFunction: EASE_OUT } as unknown as ViewStyle)
     : undefined;
 
-function useReducedMotion() {
+export function useReducedMotion() {
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
     void AccessibilityInfo.isReduceMotionEnabled().then(setReduced).catch(() => {});
@@ -104,7 +104,7 @@ export function StartButton({
   return (
     <Pressable
       onPress={onPress}
-      disabled={disabled}
+      disabled={!!disabled}
       accessibilityRole="button"
       accessibilityState={accessibilityState}
       style={({ pressed }) => [
@@ -455,9 +455,9 @@ export function MicButton({
       ) : null}
       <Pressable
         onPress={onPress}
-        disabled={disabled || busy}
+        disabled={!!(disabled || busy)}
         accessibilityRole="button"
-        accessibilityLabel={recording ? 'Enviar' : 'Grabar'}
+        accessibilityLabel={recording ? 'Send' : 'Record'}
         style={({ pressed }) => [
           styles.mic,
           { width: size, height: size, borderRadius: size / 2 },
@@ -482,9 +482,9 @@ export function MicButton({
 // --- Decilo: say the better version again ------------------------------------------
 
 const DILO_TEXT: Record<DiloStatus, string> = {
-  ok: '¡Bien dicho!',
-  almost: 'Casi. Probá otra vez.',
-  again: 'Otra vez: escuchá bien la frase.',
+  ok: 'Nicely said!',
+  almost: 'Almost. Try again.',
+  again: 'Listen to the line again, then try.',
 };
 
 /**
@@ -541,7 +541,7 @@ export function DiloButton({ sessionId, target }: { sessionId: string; target: s
         onPress={toggle}
         disabled={state === 'checking'}
         accessibilityRole="button"
-        accessibilityLabel={state === 'recording' ? 'Parar' : 'Decilo'}
+        accessibilityLabel={state === 'recording' ? 'Stop' : 'Say it'}
         style={({ pressed }) => [
           styles.dilo,
           state === 'recording' && { backgroundColor: colors.accent },
@@ -554,11 +554,11 @@ export function DiloButton({ sessionId, target }: { sessionId: string; target: s
         ) : (
           <MaterialCommunityIcons name={state === 'recording' ? 'stop' : 'microphone'} size={18} color={colors.onPrimary} />
         )}
-        <Text style={styles.diloText}>{state === 'recording' ? 'Parar' : 'Decilo'}</Text>
+        <Text style={styles.diloText}>{state === 'recording' ? 'Stop' : 'Say it'}</Text>
       </Pressable>
       {result ? (
         <Text style={[styles.diloResult, { color: tone }]}>
-          {result === 'unheard' ? 'No te escuché.' : result === 'error' ? 'No funcionó. Probá de nuevo.' : DILO_TEXT[result]}
+          {result === 'unheard' ? "I didn't hear you." : result === 'error' ? "That didn't work. Try again." : DILO_TEXT[result]}
         </Text>
       ) : null}
     </View>
@@ -567,7 +567,7 @@ export function DiloButton({ sessionId, target }: { sessionId: string; target: s
 
 // --- "Pancho está pensando…" ------------------------------------------------------
 
-export function ThinkingDots() {
+export function ThinkingDots({ color }: { color?: string } = {}) {
   const t = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     const loop = Animated.loop(Animated.timing(t, { toValue: 3, duration: 1200, easing: Easing.linear, useNativeDriver: true }));
@@ -581,6 +581,7 @@ export function ThinkingDots() {
           key={i}
           style={[
             styles.dot,
+            color ? { backgroundColor: color } : null,
             {
               opacity: t.interpolate({
                 inputRange: [0, i, i + 0.5, i + 1, 3],
@@ -595,7 +596,39 @@ export function ThinkingDots() {
   );
 }
 
+/**
+ * The day's Speaking-tab chats as three little speech bubbles: salvia with a
+ * tick for each one used, empty for each left. The Speaking tab's pill
+ * wears the regular size; the end of a chat, the small one.
+ */
+export function DayPips({ used, small = false }: { used: number; small?: boolean }) {
+  return (
+    <View style={[styles.pips, small && styles.pipsSmall]} accessible={false}>
+      {Array.from({ length: CHATS_PER_DAY }, (_, i) => (
+        <View key={i} style={[styles.pip, small && styles.pipSmall, i < used && styles.pipUsed]}>
+          {i < used && !small ? <Ionicons name="checkmark" size={13} color={colors.ink} /> : null}
+        </View>
+      ))}
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
+  pips: { flexDirection: 'row', gap: 6 },
+  pipsSmall: { gap: 4 },
+  // A speech bubble: its tail is the one tight corner, bottom left.
+  pip: {
+    width: 22,
+    height: 19,
+    borderRadius: 9,
+    borderBottomLeftRadius: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.card,
+    boxShadow: clay.trough,
+  },
+  pipSmall: { width: 14, height: 12, borderRadius: 6, borderBottomLeftRadius: 2, boxShadow: `0 0 0 1.5px ${colors.ink}` },
+  pipUsed: { backgroundColor: pastel.sage },
   avatar: { backgroundColor: pastel.butter, alignItems: 'center', overflow: 'hidden', boxShadow: clay.surface },
 
   start: {

@@ -737,6 +737,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:43:34.750Z"
  },
+ "culture/1e22b99f55617783df14.mp3": {
+  "text": "subtitulada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-14T18:34:13.696Z"
+ },
  "culture/1e42330c720cf74b75d5.mp3": {
   "text": "la quiniela",
   "voice": "tomas",
@@ -1996,6 +2002,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:37:06.093Z"
+ },
+ "culture/4977b11d6f2a67e289a2.mp3": {
+  "text": "el punto",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-14T18:34:13.695Z"
  },
  "culture/49954dc4378622d1cf91.mp3": {
   "text": "—¿Te gustó? —¡Re!",
@@ -3953,6 +3965,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:43:06.596Z"
  },
+ "culture/9b80ee683721794d9afa.mp3": {
+  "text": "doblada",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-14T18:34:13.696Z"
+ },
  "culture/9c27a73d52841dd5b97f.mp3": {
   "text": "ruta",
   "voice": "malena",
@@ -5038,6 +5056,12 @@
   "voice": "malena",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:45:28.485Z"
+ },
+ "culture/c3aeaf377d8a61f21147.mp3": {
+  "text": "estaciones de servicio",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-10-14T18:34:13.696Z"
  },
  "culture/c3d65988b884b0db5804.mp3": {
   "text": "agrandados",

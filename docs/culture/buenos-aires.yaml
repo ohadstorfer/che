@@ -265,7 +265,7 @@ classes:
         text: "Visiting? The rules for foreign cards and for changing money have changed many times. Before you travel, check what rate your card gets right now. Bring some cash too, and change it at a bank or a **casa de cambio**."
       - type: card
         chip: "Pro tip"
-        text: "At a restaurant, the tip is about 10% and people usually leave it in cash on the table, even when they pay the bill by card."
+        text: "At a restaurant, the tip is about 10% and people usually leave it in cash on the table, even when they pay the bill by card. By law the place must also let you tip by card or QR."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────

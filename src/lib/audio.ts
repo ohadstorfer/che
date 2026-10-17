@@ -619,6 +619,27 @@ async function nativeClip(path: string): Promise<string> {
   }
 }
 
+// One fetch that dies is not yet a phone with no signal. iOS drops a web app's
+// open connections while it is away, and the first request after it comes
+// back can fail on the dead one ("Load failed") on perfectly good Wi-Fi.
+// Worse, a clip is marked immutable for a year, so a copy that went bad in
+// Safari's own cache (a download cut off half way) is handed back forever
+// and never asked for again: one word — "che" on a tester's iPhone — said
+// "No connection" every time while every other word played. So a failed
+// fetch is tried twice more, past the browser's cache, before it counts. The
+// clip is kept in our own store anyway, so that cache buys nothing here.
+const RETRY_WAITS = [400, 1200];
+
+async function fetchClip(url: string): Promise<Response | null> {
+  let res = await fetch(url).catch(() => null);
+  for (const wait of RETRY_WAITS) {
+    if (res) break;
+    await new Promise((go) => setTimeout(go, wait));
+    res = await fetch(url, { cache: 'reload' }).catch(() => null);
+  }
+  return res;
+}
+
 /** The clip, ready to hand to the element. Fetches it if this is the first ask. */
 function clipUrl(path: string, urgent = false): Promise<string | null> {
   const have = clips.get(path);
@@ -647,7 +668,7 @@ function clipUrl(path: string, urgent = false): Promise<string | null> {
       await takeSlot();
       held = true;
     }
-    const res = await fetch(getAudioUrl(path)).catch(() => null);
+    const res = await fetchClip(getAudioUrl(path));
     // No response at all is a phone with no signal; a response that is not OK
     // is a recording that is genuinely gone. She should be told which.
     if (!res) return fail(path, 'offline');
@@ -772,7 +793,9 @@ function start(url: string, onEnd?: OnEnd, rate = 1): void {
   }
 
   void import('expo-audio').then(({ createAudioPlayer }) => {
-    const p = createAudioPlayer(url);
+    // Kept active: a pause would switch the session off under a recording that
+    // starts right after (see the Hablar player in hablar-audio.ts).
+    const p = createAudioPlayer(url, { keepAudioSessionActive: true });
     const entry: Playing = {
       onEnd,
       stop: () => {

@@ -24,8 +24,8 @@ await db.exec(`
   create function auth.role() returns text language sql stable as
     $$ select coalesce(nullif(current_setting('test.role', true), ''), 'authenticated') $$;
   create schema storage;
-  create table storage.buckets (id text primary key, name text, public boolean);
-  create table storage.objects (id uuid primary key default gen_random_uuid(), bucket_id text, name text);
+  create table storage.buckets (id text primary key, name text, public boolean, file_size_limit bigint, allowed_mime_types text[]);
+  create table storage.objects (id uuid primary key default gen_random_uuid(), bucket_id text, name text, created_at timestamptz default now());
   create function storage.foldername(name text) returns text[] language sql immutable as
     $$ select (string_to_array(name, '/'))[1:array_length(string_to_array(name, '/'), 1) - 1] $$;
   alter table storage.objects enable row level security;
@@ -34,7 +34,8 @@ await db.exec(`
 await db.exec(readFileSync(`${MIG}/20260427000001_init.sql`, 'utf8').replace(/create extension[^;]*;/i, ''));
 await db.exec(readFileSync(`${MIG}/20260913000001_course_schema.sql`, 'utf8'));
 await db.exec(readFileSync(`${MIG}/20261014000002_feedback.sql`, 'utf8'));
-ok('feedback migration applies');
+await db.exec(readFileSync(`${MIG}/20261015000020_feedback_abuse.sql`, 'utf8'));
+ok('feedback migrations apply');
 await db.exec(`
   grant select, insert, update, delete on all tables in schema public to anon, authenticated;
   grant select, insert on storage.objects to authenticated;
@@ -130,5 +131,29 @@ await assert.rejects(as(ana, () => db.exec(`insert into storage.objects (bucket_
 assert.equal((await as(beto, () => one(`select count(*)::int as n from storage.objects where bucket_id = 'feedback'`))).n, 0);
 assert.equal((await as(admin, () => one(`select count(*)::int as n from storage.objects where bucket_id = 'feedback'`))).n, 1);
 ok('screenshots go under her own id, and only she and staff can read them');
+
+const bucket = await one(`select file_size_limit, allowed_mime_types from storage.buckets where id = 'feedback'`);
+assert.equal(Number(bucket.file_size_limit), 10 * 1024 * 1024);
+assert.ok(bucket.allowed_mime_types.includes('image/jpeg') && !bucket.allowed_mime_types.includes('application/octet-stream'));
+await as(admin, () => db.exec(`update feedback_settings set mode = 'off'`));
+await assert.rejects(as(ana, () => db.exec(`insert into storage.objects (bucket_id, name) values ('feedback', '${ana}/closed.jpg')`)), /row-level security/);
+await as(admin, () => db.exec(`update feedback_settings set mode = 'testers'`));
+for (let i = 0; i < 29; i++) await as(ana, () => db.exec(`insert into storage.objects (bucket_id, name) values ('feedback', '${ana}/s${i}.jpg')`));
+await assert.rejects(as(ana, () => db.exec(`insert into storage.objects (bucket_id, name) values ('feedback', '${ana}/one-too-many.jpg')`)), /row-level security/);
+ok('screenshots: images up to 10 MB, only while the bubble is open, 30 an hour');
+
+// --- abuse -----------------------------------------------------------------------
+const mine = async (uid) => (await one(`select count(*)::int as n from feedback_messages where author_id = '${uid}'`)).n;
+while ((await mine(beto)) < 30) await say(beto, beto, 'again');
+await assert.rejects(say(beto, beto, 'one too many'), /Too many messages/);
+for (let i = 0; i < 31; i++) await say(admin, beto, 'staff is never limited', ', true');
+ok('a tester writes at most 30 messages an hour; staff replies are not counted');
+
+await db.exec(`update feedback_messages set notified_at = null`);
+const claim = (id) => one(`update feedback_messages set notified_at = now() where id = '${id}' and notified_at is null returning id`);
+const first = (await one(`select id from feedback_messages limit 1`)).id;
+assert.ok(await claim(first));
+assert.equal(await claim(first), undefined);
+ok('a message is claimed for its push once');
 
 console.log('feedback schema: all good');

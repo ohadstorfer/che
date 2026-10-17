@@ -136,8 +136,16 @@ function disk(): Promise<ContentDisk | null> {
     }
     try {
       const { Directory, File, Paths } = await import('expo-file-system');
-      const dir = new Directory(Paths.document, 'content');
+      // The cache folder, not documents: iOS backs documents up to iCloud, and
+      // content the app can fetch again doesn't belong there. The system may
+      // clear the cache when the phone runs short, which reads as "nothing
+      // saved". The copy builds before this one kept in documents is dropped.
+      const dir = new Directory(Paths.cache, 'content');
       if (!dir.exists) dir.create({ intermediates: true, idempotent: true });
+      try {
+        const old = new Directory(Paths.document, 'content');
+        if (old.exists) old.delete();
+      } catch {}
       const fileOf = (name: string) => new File(dir, `${name.replace(/[^\w.-]/g, '_')}.json`);
       return {
         read: async (name) => {
@@ -206,6 +214,7 @@ export function stored<T>(name: string, version: string | null, fetch: () => Pro
     contentSources.memory += 1;
     return hit.value as Promise<T>;
   }
+  let outdated = false;
   const value = (async () => {
     const onDisk = await readStored(name, version);
     if (onDisk) {
@@ -213,14 +222,28 @@ export function stored<T>(name: string, version: string | null, fetch: () => Pro
       return onDisk.data as T;
     }
     contentSources.network += 1;
-    const data = await fetch();
+    let data: T;
+    try {
+      data = await fetch();
+    } catch (error) {
+      // The fetch failed: the copy the phone holds, though a version behind,
+      // beats none — and beats what a caller does with nothing (session.ts
+      // falls back to the whole course).
+      const old = version != null ? await readAny(name) : null;
+      if (!old) throw error;
+      outdated = true;
+      return old.data as T;
+    }
     if (version != null) writeStored(name, version, data);
     return data;
   })();
   memo.set(name, { version, at: Date.now(), value });
-  value.catch(() => {
+  // A failure, or an old copy standing in, is not remembered: the next load
+  // asks again.
+  const forget = () => {
     if (memo.get(name)?.value === value) memo.delete(name);
-  });
+  };
+  value.then(() => outdated && forget(), forget);
   return value;
 }
 

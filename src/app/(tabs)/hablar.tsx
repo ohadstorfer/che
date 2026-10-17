@@ -6,20 +6,21 @@ import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { Animated, type ImageSourcePropType, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { PanchoAvatar, StartButton, webPress } from '@/components/hablar-ui';
+import { DayPips, PanchoAvatar, StartButton, webPress } from '@/components/hablar-ui';
 import { AppHeader, useStreakWeek } from '@/components/app-header';
 import { useAuth } from '@/lib/auth';
 import {
   type Band,
+  CHATS_PER_DAY,
   type ConversationRow,
   conversationTitle,
   end,
+  hoursToMidnight,
   isToday,
-  type Scenario,
   scenarioAt,
   scenarios,
 } from '@/lib/hablar';
-import { levelDistance, pickScenario, scenarioArt } from '@/lib/hablar-art';
+import { levelDistance, pickScenario, scenarioArt, tomasArt } from '@/lib/hablar-art';
 import { forgetHablarLatest, loadHablarHome, peekHablarHome } from '@/lib/hablar-home';
 import { FREE_CHATS, usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
@@ -28,11 +29,14 @@ import { FitText } from '@/components/fit-text';
 import { OutlinedHeadline, useSlap } from '@/components/sticker';
 
 // ---------------------------------------------------------------------------
-// Speaking — one short chat a day with Pancho (docs/hablar-hld.md §2.1).
+// Speaking — three short chats a day with Pancho (docs/hablar-hld.md §2.1,
+// the "Chat limits UX" canvas).
 //
-// The top card is the day: Pancho's pick with one Start button while the chat
-// is still there to take, Resume while one is open, and once it's used, what
-// she got out of it and tomorrow's pick. Below, everything
+// Under the headline, a pill counts the day: three little bubbles, ticked as
+// the chats are used, and how many are left (when they come back, once none
+// are). The top card is the day: Pancho calling while a chat is there to
+// take, Resume while one is open, and once all three are used, what she got
+// out of them and the course, which has no daily limit. Below, everything
 // else she could talk about instead: the scenarios as pastel postcards, the capybara of each
 // standing on its card and breaking out of the top, on alternating sides.
 // The level switch opens at the level of her last chat (her course level on a
@@ -44,19 +48,22 @@ type Today =
   | { state: 'loading' }
   | { state: 'free' }
   | { state: 'open'; conversation: ConversationRow }
-  | { state: 'done'; conversation: ConversationRow };
+  | { state: 'done'; chats: ConversationRow[] };
 
 
 /** Scenario rows deal their icon circles through these, so neighbours differ. */
 const ROW_TONES = [pastel.peach, pastel.sage, pastel.lav, pastel.sky, pastel.butter] as const;
 
-/** The top card for her latest chat: Resume while one is open today, its
- *  summary once it's done, the day's pick otherwise. */
-const todayOf = (latest: ConversationRow | null, staff: boolean): Today =>
-  // Staff chats don't use up the day: a finished one leaves the door open.
-  latest && isToday(latest) && !((latest.unlimited || staff) && latest.ended_at)
-    ? { state: latest.ended_at ? 'done' : 'open', conversation: latest }
-    : { state: 'free' };
+/**
+ * The top card: Resume while a chat is open today; what the day gave her once
+ * it's used — all three chats, or the last of her free ones; Pancho calling
+ * otherwise. Staff chats count toward nothing, so they never use up the day.
+ */
+const todayOf = (latest: ConversationRow | null, today: ConversationRow[], staff: boolean, freeLeft: number | null): Today => {
+  if (latest && isToday(latest) && !latest.ended_at) return { state: 'open', conversation: latest };
+  if (!staff && today.length && (today.length >= CHATS_PER_DAY || freeLeft === 0)) return { state: 'done', chats: today };
+  return { state: 'free' };
+};
 
 export default function Hablar() {
   useStatusBarColor(colors.bg);
@@ -66,16 +73,22 @@ export default function Hablar() {
   const userId = session?.user.id;
   const staff = profile?.role === 'admin' || profile?.role === 'reviewer';
   // A free account has a few chats in all; null until counted.
-  const { limited, paywall } = usePremium();
+  const { limited, paywall, status } = usePremium();
   // Opens on what was read last — or read ahead while she was on Course
   // (lib/prefetch.ts) — and refreshes on focus.
   const kept = peekHablarHome(userId, limited);
-  const [today, setToday] = useState<Today>(() => (kept ? todayOf(kept.latest, staff) : { state: 'loading' }));
+  /** Her latest chat and today's; null until read. */
+  const [day, setDay] = useState<{ latest: ConversationRow | null; today: ConversationRow[] } | null>(() =>
+    kept ? { latest: kept.latest, today: kept.today } : null,
+  );
   const [past, setPast] = useState<ConversationRow[]>(() => kept?.past ?? []);
   /** Her saved level; null until read. It is changed on the brief, not here. */
   const [level, setLevel] = useState<Band | null>(() => kept?.level ?? null);
   const [used, setUsed] = useState<number | null>(() => kept?.used ?? null);
   const freeLeft = limited && used != null ? Math.max(0, FREE_CHATS - used) : null;
+  const today: Today = day ? todayOf(day.latest, day.today, staff, freeLeft) : { state: 'loading' };
+  // The day's count is shown to premium only: a free account's binding limit is its free chats (the pill below).
+  const usedToday = status === 'premium' && !staff && day ? Math.min(CHATS_PER_DAY, day.today.length) : null;
 
   useFocusEffect(
     useCallback(() => {
@@ -95,17 +108,17 @@ export default function Hablar() {
         setPast(home.past);
         setLevel(home.level);
         setUsed(home.used);
-        setToday(todayOf(latest, staff));
+        setDay({ latest, today: home.today });
       })();
       return () => {
         alive = false;
       };
-    }, [staff, userId, limited]),
+    }, [userId, limited]),
   );
 
   const openDoor = (kind: 'scenario' | 'free', topic?: string) => {
     if (today.state === 'open') return router.push(`/hablar-chat?session=${today.conversation.id}`);
-    if (today.state === 'done') return router.push(`/hablar-summary?session=${today.conversation.id}`);
+    if (today.state === 'done') return router.push(`/hablar-summary?session=${today.chats[0].id}`);
     if (freeLeft === 0) return paywall('hablar');
     router.push(`/hablar-brief?kind=${kind}${topic ? `&topic=${topic}` : ''}&level=${band}`);
   };
@@ -120,6 +133,8 @@ export default function Hablar() {
       <AppHeader title="Speaking" status={streak} weekDone={weekDone} />
       <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
         <OutlinedHeadline small="Speaking practice with" big="AI argentino" style={styles.headline} />
+
+        {usedToday != null ? <DayPill used={usedToday} /> : null}
 
         {freeLeft != null && today.state === 'free' ? (
           <Pressable
@@ -141,14 +156,14 @@ export default function Hablar() {
         {today.state === 'loading' ? (
           <View style={[styles.hero, styles.heroLoading]} />
         ) : today.state === 'done' ? (
-          <DoneCard conversation={today.conversation} />
+          <DoneCard chats={today.chats} />
         ) : today.state === 'open' ? (
           <ResumeCard conversation={today.conversation} />
         ) : pick ? (
           <CallCard onAnswer={() => openDoor('free')} />
         ) : null}
 
-        {today.state === 'done' && pick ? <Tomorrow scenario={pick} band={band} /> : null}
+        {today.state === 'done' ? <CourseRow /> : null}
 
         {today.state !== 'done' ? (
           <View style={styles.section}>
@@ -252,20 +267,40 @@ function ResumeCard({ conversation }: { conversation: ConversationRow }) {
   );
 }
 
-/** Today's chat is used: what it gave her and a way into the summary. */
-function DoneCard({ conversation }: { conversation: ConversationRow }) {
-  const summary = conversation.summary;
+/**
+ * The day's chats, as a pill under the headline: a bubble for each of the
+ * three, ticked once used, and how many are left — or, once none are, when
+ * they come back.
+ */
+function DayPill({ used }: { used: number }) {
+  const left = CHATS_PER_DAY - used;
+  const label = left > 0 ? `${left} ${left === 1 ? 'chat' : 'chats'} left today` : `New chats in ${hoursToMidnight()} h`;
+  return (
+    <View style={styles.dayPill} accessible accessibilityLabel={`${used} of ${CHATS_PER_DAY} chats used today. ${label}.`}>
+      <DayPips used={used} />
+      <Text style={styles.dayPillText}>{label}</Text>
+    </View>
+  );
+}
+
+/** The day's chats are used: what they gave her and a way into the last one's summary. */
+function DoneCard({ chats }: { chats: ConversationRow[] }) {
+  const sum = (of: (c: ConversationRow) => number) => chats.reduce((n, c) => n + of(c), 0);
+  const turns = sum((c) => c.summary?.turns ?? 0);
+  const fixes = sum((c) => c.summary?.corrections?.length ?? 0);
   const stats: [string, string][] = [
-    [String(summary?.turns ?? 0), (summary?.turns ?? 0) === 1 ? 'answer' : 'answers'],
-    [String(summary?.phrases?.length ?? 0), 'new phrases'],
-    [String(summary?.corrections?.length ?? 0), (summary?.corrections?.length ?? 0) === 1 ? 'fix' : 'fixes'],
+    [String(turns), turns === 1 ? 'answer' : 'answers'],
+    [String(fixes), fixes === 1 ? 'fix' : 'fixes'],
   ];
   return (
     <Hero tone="sage">
       <View style={styles.heroBody}>
         <View style={[styles.heroHead, { flex: 1 }]}>
           <Text style={styles.heroEyebrow}>Done for today</Text>
-          <Text style={styles.heroTitle}>¡Bien ahí!{'\n'}A real chat, out loud.</Text>
+          <Text style={styles.heroTitle}>
+            Nicely done!{'\n'}
+            {chats.length === 1 ? 'A real chat' : `${chats.length} chats`}, out loud.
+          </Text>
         </View>
         <View style={styles.doneArtPod}>
           <Image source={scenarioArt('conocer')} style={styles.doneArt} contentFit="contain" accessible={false} />
@@ -282,34 +317,31 @@ function DoneCard({ conversation }: { conversation: ConversationRow }) {
       <StartButton
         icon={null}
         label="See what Pancho noticed"
-        onPress={() => router.push(`/hablar-summary?session=${conversation.id}`)}
+        onPress={() => router.push(`/hablar-summary?session=${chats[0].id}`)}
       />
     </Hero>
   );
 }
 
-/** What's waiting tomorrow, and how long until it opens. */
-function Tomorrow({ scenario, band }: { scenario: Scenario; band: Band }) {
-  const v = scenarioAt(scenario, band);
-  const now = new Date();
-  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-  const hours = Math.max(1, Math.ceil((midnight.getTime() - now.getTime()) / 3_600_000));
+/** Where to go once the day's chats are used: the course, whose chats with Pancho have no daily limit. */
+function CourseRow() {
   return (
-    <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Tomorrow</Text>
-      <View style={styles.tomorrow}>
-        <View style={[styles.rowArt, { backgroundColor: pastel.butter }]}>
-          <Image source={scenarioArt(scenario.id)} style={styles.rowImage} contentFit="contain" accessible={false} />
-        </View>
-        <View style={styles.rowText}>
-          <Text style={styles.rowTitle}>{scenario.title_en}</Text>
-          <FitText style={styles.rowSub} lines={1}>
-            {`With ${v.role_en}`}
-          </FitText>
-        </View>
-        <Text style={styles.tomorrowIn}>in {hours} h</Text>
+    <Pressable
+      onPress={() => router.navigate('/home')}
+      accessibilityRole="button"
+      accessibilityLabel="Keep talking in the course. Every unit ends with a chat with Pancho."
+      style={({ pressed }) => [styles.row, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
+      <View style={[styles.rowArt, { backgroundColor: pastel.butter }]}>
+        <Image source={tomasArt} style={styles.rowImage} contentFit="contain" accessible={false} />
       </View>
-    </View>
+      <View style={styles.rowText}>
+        <Text style={styles.rowTitle}>Keep talking in the course</Text>
+        <FitText style={styles.rowSub} lines={2}>
+          Every unit ends with a chat with Pancho
+        </FitText>
+      </View>
+      <Ionicons name="chevron-forward" size={18} color={colors.primary} />
+    </Pressable>
   );
 }
 
@@ -355,6 +387,22 @@ function Postcard({ index, art, title, sub, onPress }: { index: number; art: Ima
 }
 
 const styles = StyleSheet.create({
+  // The day's chats: a clay pill at the headline's right, as the free-chats count was.
+  dayPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    gap: 10,
+    minHeight: 36,
+    paddingLeft: 10,
+    paddingRight: 14,
+    paddingVertical: 6,
+    borderRadius: radius.pill,
+    backgroundColor: colors.card,
+    boxShadow: clay.surface,
+    marginBottom: -4,
+  },
+  dayPillText: { ...font.body[800], fontSize: 13, lineHeight: 18, color: colors.ink, fontVariant: ['tabular-nums'] },
   // The free-chats count: a small clay pill, as in the header row.
   freeLeft: {
     flexDirection: 'row',
@@ -492,27 +540,4 @@ const styles = StyleSheet.create({
   rowText: { flex: 1, gap: 3, alignItems: 'flex-start' },
   rowTitle: { ...font.body[800], fontSize: 16, lineHeight: 20, color: colors.ink },
   rowSub: { ...font.body[600], fontSize: 13, lineHeight: 17, color: colors.muted },
-
-  tomorrow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    minHeight: 76,
-    padding: 12,
-    paddingRight: 16,
-    borderRadius: 30,
-    backgroundColor: colors.card,
-    boxShadow: clay.surface,
-  },
-  tomorrowIn: {
-    ...font.body[800],
-    fontSize: 12,
-    color: colors.onPastel,
-    backgroundColor: pastel.butter,
-    borderRadius: radius.pill,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    overflow: 'hidden',
-    fontVariant: ['tabular-nums'],
-  },
 });

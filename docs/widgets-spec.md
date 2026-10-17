@@ -39,12 +39,12 @@ only while `streaks.last_practice_date` is not today.
 | From | State | Pancho | Scene | Line (small / medium) |
 | --- | --- | --- | --- | --- |
 | 08:00 | Word | waving | sunburst, morning sun | Quilombo · mess, chaos |
-| 14:00 | Side-eye | side-eye | clouds over hills | ¿Y? ¿Hoy nada? / ¿Y? ¿Hoy no practicás? |
-| 17:00 | Sad | sad, empty mate | sun setting on the horizon | Te espero, eh. / Se me enfrió el mate. |
-| 20:00 | Begging | on his knees | moon, stars, Buenos Aires skyline | Dale, porfa. / Dale, porfa. Son 2 minutos. |
-| 22:00 | Crying | bawling | flames rising | ¡Me matás! / ¡Me estás matando! |
-| 23:00 | Last hour | collapsed, ghost leaving | night sky, a gravestone for the streak | Chau, racha. / Chau, racha de 12 días. |
-| any time, after a round | Practiced | goal celebration | pitch stripes and confetti | ¡Golazo! / ¡Golazo! Hasta mañana. |
+| 14:00 | Side-eye | side-eye | clouds over hills | So… nothing? / So… no practice today? |
+| 17:00 | Sad | sad, empty mate | sun setting on the horizon | Still waiting. / Still waiting… |
+| 20:00 | Begging | on his knees | moon, stars, Buenos Aires skyline | Please? / Please? Just 2 minutes. |
+| 22:00 | Crying | bawling | flames rising | You’re killing me! / You’re killing me! |
+| 23:00 | Last hour | collapsed, ghost leaving | night sky, a gravestone for the streak | Bye, streak. / Bye-bye, 12-day streak. |
+| any time, after a round | Practiced | goal celebration | pitch stripes and confetti | Goooal! / Goooal! See you tomorrow. |
 
 - 08:00 matches the hour push reminders already start (`REMINDER_TIME` in
   `src/lib/push.ts`). Between midnight and 08:00 the widget shows the new day's
@@ -52,6 +52,8 @@ only while `streaks.last_practice_date` is not today.
 - "Practiced" holds until midnight, then the next day's word appears.
 - The streak chip is the app header's chip: oat with a grey flame until today's
   round is done, butter with a lit flame after.
+- Pancho's lines are in English (since 2026-10-16), the same on iOS and
+  Android; only the word of the day and its example are Spanish.
 - Small-widget lines stay at 14 characters or fewer so they fit on one line.
 
 ## Streak states that override the day
@@ -61,9 +63,9 @@ day's rhythm, word included, until the status changes.
 
 | Status | When | Chip | Pancho and scene | Line (small / medium) |
 | --- | --- | --- | --- | --- |
-| `frozen` | A day was missed; the old run is still recoverable | icy, snowflake, old count struck through | sad Pancho (tear, empty mate) in a block of ice, snowy night | ¡Me congelé! / Tu racha se congeló. |
-| `recovering` | One round done today; one more buys the run back before midnight | snowflake, old count struck through, today's count | begging, ice melting under a sun | ¡Una más! / Una más y la salvás. |
-| `none` | New user, or no run to mourn | grey flame, 0 | waving, sunburst | ¿Arrancamos? / ¿Arrancamos? Son 2 minutos. |
+| `frozen` | A day was missed; the old run is still recoverable | icy, snowflake, old count struck through | sad Pancho (tear, empty mate) in a block of ice, snowy night | I’m frozen! / Your streak froze. |
+| `recovering` | One round done today; one more buys the run back before midnight | snowflake, old count struck through, today's count | begging, ice melting under a sun | One more! / One more saves it. |
+| `none` | New user, or no run to mourn | grey flame, 0 | waving, sunburst | Shall we? / Shall we? Just 2 minutes. |
 
 - There is no separate "lost streak" state. In the app a missed day is
   `frozen`; if the learner comes back and does not finish the second round by
@@ -140,8 +142,9 @@ day's rhythm, word included, until the status changes.
 
 ## Not designed yet
 
-- Whether the nudge lines stay in Spanish for absolute beginners or get an
-  English version.
+- Whether the word of the day also shows on the later widgets (side-eye
+  through last hour, and frozen, recovering, new). Both versions are on the
+  mockups canvas for comparison.
 - A signed-out user.
 - Whether `frozen` and `recovering` escalate through the day or stay as one state each.
 - Art: the scenes are simple flat shapes, and the frozen Pancho is the sad pose under a drawn ice block. The sad, begging, crying and collapsed Pancho poses were generated for

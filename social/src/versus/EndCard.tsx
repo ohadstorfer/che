@@ -71,6 +71,7 @@ export const EndCard: React.FC<{frame: number; soon?: boolean}> = ({frame, soon 
       <Img src={staticFile('posta-icon.png')} style={{width: 172, height: 172, borderRadius: 38, boxShadow: '0 22px 40px -18px rgba(58,42,32,0.55)'}} />
       <div style={{display: 'flex', flexDirection: 'column', gap: 12}}>
         <div style={{fontWeight: 900, fontSize: 106, lineHeight: 1, color: C.rosa}}>Posta</div>
+        {/* TODO: the app is "Posta: Argentinian Spanish" since 2026-10-15. Update this line and re-render when the user says so. */}
         <div style={{fontWeight: 800, fontSize: 52, lineHeight: 1, whiteSpace: 'nowrap'}}>Learn Argentine Spanish</div>
       </div>
     </div>

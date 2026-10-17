@@ -180,6 +180,7 @@ export const StickerEnd: React.FC<{frame: number; soon?: boolean; outro?: {video
       <div style={{display: 'flex', flexDirection: 'column', gap: 10}}>
         <div style={{fontFamily: BODY, fontWeight: 800, fontSize: 32, lineHeight: 1, letterSpacing: 4, textTransform: 'uppercase', color: C.ink, opacity: 0.75}}>Learn more in</div>
         <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 108, lineHeight: 0.92, color: C.rosa}}>Posta</div>
+        {/* TODO: the app is "Posta: Argentinian Spanish" since 2026-10-15. Update this line and re-render when the user says so. */}
         <div style={{fontFamily: DISPLAY, fontWeight: 800, fontSize: 46, lineHeight: 1, whiteSpace: 'nowrap'}}>Learn Argentine Spanish</div>
       </div>
     </div>

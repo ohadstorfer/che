@@ -25,6 +25,18 @@ export interface StoreState {
   signedAt: string;
   /** The Posta user id the app attached to the purchase, when it did. */
   accountId: string | null;
+  /** Apple's sandbox (TestFlight, App Review) or a Play test purchase. */
+  sandbox: boolean;
+}
+
+/** What Posta sells (src/lib/billing-shared.ts PRODUCTS). Anything else in the
+ *  store, now or added later, opens nothing until it is listed here, or in
+ *  STORE_PRODUCT_IDS (comma-separated), which replaces this list. */
+export const PRODUCT_IDS = ["posta_premium_annual", "posta_premium_monthly", "posta_premium_annual_offer"];
+
+export function sellable(productId: string, listed = typeof Deno === "undefined" ? undefined : Deno.env.get("STORE_PRODUCT_IDS")): boolean {
+  const ids = listed ? listed.split(",").map((s) => s.trim()).filter(Boolean) : PRODUCT_IDS;
+  return ids.includes(productId);
 }
 
 export interface EntitlementRow {
@@ -57,10 +69,12 @@ export function ownerOf(state: StoreState, holder: EntitlementRow | null, claima
 
 /**
  * What to do with a store's word. `holder` is the row that has this purchase
- * now, `own` the row of the account it would go to.
+ * now, `own` the row of the account it would go to, `newest` the date of the
+ * newest word the ledger (store_purchases) has about it, account or not.
  *
- *  · Older than what we already wrote for this purchase: ignored. This is
- *    what stops a transaction signed before a refund from undoing the refund.
+ *  · Older than what we already know about this purchase: ignored. This is
+ *    what stops a transaction signed before a refund from undoing the refund,
+ *    also once the account that saw the refund is gone.
  *  · Not active: recorded only on the row that holds this purchase. An old
  *    subscription restored from the store must not switch off a newer one.
  *  · Active, and held by another account: it moves. One store purchase opens
@@ -72,10 +86,13 @@ export function decide(
   own: EntitlementRow | null,
   userId: string | null,
   now = Date.now(),
+  newest: string | null = null,
 ): Decision {
   if (!userId) return { write: false, reason: "no user", premium: false };
   const mine = holder?.user_id === userId;
-  if (holder?.store_signed_at && new Date(holder.store_signed_at).getTime() > new Date(state.signedAt).getTime()) {
+  const signed = new Date(state.signedAt).getTime();
+  const later = (at: string | null | undefined) => !!at && new Date(at).getTime() > signed;
+  if (later(holder?.store_signed_at) || later(newest)) {
     return { write: false, reason: "stale", premium: mine ? live(holder, now) : live(own, now) };
   }
   if (!state.active) {
@@ -96,6 +113,19 @@ export interface Applied {
  * refuses, so a notification answers non-2xx and the store sends it again.
  */
 export async function applyState(db: SupabaseClient, state: StoreState, event: string, claimant: string | null = null): Promise<Applied> {
+  // Noted first, account or not, so a refund is remembered even when the
+  // account that held the purchase is gone.
+  const { data: newest, error: noteError } = await db.rpc("note_store_word", {
+    p_store: state.store,
+    p_ref: state.ref,
+    p_signed_at: state.signedAt,
+    p_active: state.active,
+    p_sandbox: state.sandbox,
+  });
+  if (noteError) throw new Error(noteError.message);
+  // A product Posta doesn't sell opens nothing (a lapse of one is still recorded).
+  if (state.active && !sellable(state.productId)) return { userId: null, premium: false, ignored: "unknown product" };
+
   const refs = state.linkedRef ? [state.ref, state.linkedRef] : [state.ref];
   const { data: held, error: heldError } = await db
     .from("entitlements")
@@ -118,7 +148,7 @@ export async function applyState(db: SupabaseClient, state: StoreState, event: s
     own = data as EntitlementRow | null;
   }
 
-  const decision = decide(state, holder, own, userId);
+  const decision = decide(state, holder, own, userId, Date.now(), newest as string | null);
   if (!decision.write) return { userId, premium: decision.premium, ignored: decision.reason };
 
   const now = new Date().toISOString();
@@ -138,6 +168,7 @@ export async function applyState(db: SupabaseClient, state: StoreState, event: s
     period_type: state.periodType,
     expires_at: state.expiresAt,
     store_signed_at: state.signedAt,
+    sandbox: state.sandbox,
     last_event: event,
     updated_at: now,
   });

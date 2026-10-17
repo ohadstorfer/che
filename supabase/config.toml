@@ -21,6 +21,9 @@ verify_jwt = false
 [functions.vapid-public]
 verify_jwt = false
 
+[functions.waitlist]
+verify_jwt = false
+
 [functions.hablar-retention]
 verify_jwt = false
 

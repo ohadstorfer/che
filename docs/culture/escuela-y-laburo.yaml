@@ -123,7 +123,7 @@ classes:
         correct: 1
         explain: "It's the **aguinaldo**: one extra salary a year, paid in two halves. People plan holidays and big purchases around it."
       - type: card
-        text: "A job is **en blanco**, in white, when it is registered: [aguinaldo], paid holidays, health cover. **En negro**, in black, means no papers. More than a third of workers are [en negro]."
+        text: "A job is **en blanco**, in white, when it is registered: [aguinaldo], paid holidays, health cover. **En negro**, in black, means no papers. About four in ten workers are [en negro]."
       - type: card
         text: "People who work for themselves pay one small fixed tax every month, the **monotributo**. A client will ask: **“¿Me hacés factura?”** Can you give me an invoice?"
       - type: choice

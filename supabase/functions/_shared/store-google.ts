@@ -19,6 +19,8 @@ export interface PlaySubscription {
   subscriptionState?: string;
   linkedPurchaseToken?: string;
   acknowledgementState?: string;
+  /** Present only on a test purchase (a license tester's). */
+  testPurchase?: unknown;
   externalAccountIdentifiers?: { obfuscatedExternalAccountId?: string };
   lineItems?: {
     productId: string;
@@ -103,6 +105,7 @@ export function playState(sub: PlaySubscription, purchaseToken: string, now = Da
     // Asked just now, so it is the newest word there is.
     signedAt: new Date(now).toISOString(),
     accountId: sub.externalAccountIdentifiers?.obfuscatedExternalAccountId?.toLowerCase() ?? null,
+    sandbox: sub.testPurchase != null,
   };
 }
 

@@ -35,6 +35,8 @@ export const pastel = {
   lav: '#C9B8F0',
   sky: '#A9D6F5',
   flame: '#FF8A5B',
+  /** The flame before today's round: the widget's unlit ash. */
+  flameOff: '#D9CBBB',
 } as const;
 
 export const pastelGrad = {

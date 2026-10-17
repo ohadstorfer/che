@@ -4,7 +4,8 @@
 // Called by the app right after it writes a feedback message
 // (src/lib/feedback.ts). A tester's message goes to every admin's devices;
 // a staff reply goes to the tester's. Only the message's own author can ask,
-// and only while it is fresh, so nobody can replay a message into pushes.
+// only while it is fresh, and only once: the first ask claims notified_at
+// (migration 20261015000020), so nobody can replay a message into pushes.
 //
 // A reply is a message she asked for, not a reminder: it goes to every device
 // on push_subscriptions, whether or not reminders are switched on there.
@@ -61,6 +62,14 @@ Deno.serve(async (req) => {
     .maybeSingle();
   if (!msg || msg.author_id !== callerId) return json({ error: "not your message" }, { status: 403 });
   if (Date.now() - new Date(msg.created_at).getTime() > FRESH_MS) return json({ sent: 0, stale: true });
+  const { data: claimed, error: claimError } = await db
+    .from("feedback_messages")
+    .update({ notified_at: new Date().toISOString() })
+    .eq("id", id)
+    .is("notified_at", null)
+    .select("id");
+  if (claimError) return json({ error: "could not claim the message" }, { status: 500 });
+  if (!claimed?.length) return json({ sent: 0, already: true });
 
   const text = (msg.body as string).trim();
   const preview = text ? (text.length > PREVIEW ? `${text.slice(0, PREVIEW - 1)}…` : text) : "📷 Sent a screenshot";

@@ -23,6 +23,11 @@ const realClient = createClient(url, anonKey, {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
+    // Google answers with a one-time code, not the tokens themselves. On
+    // Android the posta:// callback is an intent any app could also claim;
+    // the code is useless to it without the verifier kept on this phone.
+    // (Apple and email sign in without a redirect, so this changes nothing there.)
+    ...(Platform.OS !== 'web' ? { flowType: 'pkce' as const } : {}),
   },
 });
 

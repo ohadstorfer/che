@@ -10,6 +10,7 @@ import { DefaultTheme, Stack, ThemeProvider, usePathname } from 'expo-router';
 import { useEffect } from 'react';
 import { Platform, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 import { BootSplash } from '@/components/boot-splash';
 import { FeedbackLayer } from '@/components/feedback';
@@ -69,6 +70,9 @@ export default function RootLayout() {
     // Gestures — the tiles she drags into order — do nothing at all, and say
     // nothing about why, unless this sits above everything that uses them.
     <GestureHandlerRootView style={{ flex: 1 }}>
+      {/* The keyboard's height, frame by frame, on iOS and Android alike —
+          Android 15 no longer shrinks the screen for it, so nothing else says. */}
+      <KeyboardProvider>
       {/* Above the font gate: her session is read from storage while the
           fonts load, not after. */}
       <AuthProvider>
@@ -113,6 +117,7 @@ export default function RootLayout() {
         </View>
         </PremiumProvider>
       </AuthProvider>
+      </KeyboardProvider>
     </GestureHandlerRootView>
   );
 }

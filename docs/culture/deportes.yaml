@@ -90,7 +90,7 @@ classes:
         correct: 1
         explain: "It's a yaguareté, a jaguar. On a tour in 1965, a journalist saw it, wrote “Pumas”, and the wrong name stayed forever."
       - type: card
-        text: "[Las Leonas] won two World Cups and four Olympic medals in a row. Their star, **Luciana Aymar**, was chosen best player in the world eight times."
+        text: "[Las Leonas] won two World Cups and six Olympic medals. Their star, **Luciana Aymar**, was chosen best player in the world eight times."
       - type: choice
         prompt: "One national football team is called **Los Murciélagos**, the bats. Why?"
         options:

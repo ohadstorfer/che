@@ -3,9 +3,9 @@
 //
 // Body: { session_id, reason: 'user'|'time', paused_seconds? }. Idempotent: a
 // chat that already has a summary gets the same one back. The summary is built
-// from what is stored — the top 3 corrections from the
-// feedback already on the turns, nothing re-graded — plus one structured call
-// for "phrases worth keeping" and "what went well". The three corrected lines
+// here: every line she said is graded now (nothing is graded during the chat),
+// one call per line with the cached grading prompt, and the top 3 corrections
+// are kept; then one structured call for "what went well". The three corrected lines
 // are recorded in Pancho's voice for ▶️ and Decilo.
 //
 // The chat credits the day's streak through finish_lesson (the same RPC a
@@ -32,7 +32,15 @@ import {
   TTS_MODEL,
   type Usage,
 } from "../_shared/hablar.ts";
-import { LEVEL_GRAMMAR, SUMMARY_SCHEMA, SUMMARY_SYSTEM, type Feedback } from "../_shared/hablar-prompt.ts";
+import {
+  cleanFeedback,
+  FEEDBACK_SCHEMA,
+  FEEDBACK_SYSTEM,
+  feedbackInput,
+  SUMMARY_SCHEMA,
+  SUMMARY_SYSTEM,
+  type Feedback,
+} from "../_shared/hablar-prompt.ts";
 import { Anthropic, MODEL, structured } from "../_shared/hablar-claude.ts";
 
 const SEVERITY_RANK: Record<string, number> = { meaning: 0, target: 1, minor: 2, none: 3 };
@@ -67,13 +75,45 @@ Deno.serve(async (req) => {
       : db.from("conversations").update({ ended_at: endedAt, end_reason: reason }).eq("id", session.id).is("ended_at", null),
     db
       .from("conversation_turns")
-      .select("id, idx, role, status, text, feedback")
+      .select("id, idx, role, status, text, feedback, meta")
       .eq("conversation_id", session.id)
       .not("idx", "is", null)
       .order("idx"),
   ]);
   const turns = (rows ?? []).filter((t) => t.role === "tomas" || t.status === "final");
   const userTurns = turns.filter((t) => t.role === "user");
+
+  const usage: Usage[] = [];
+  const client = new Anthropic({ apiKey: env.anthropicKey, ...CLAUDE_OPTIONS });
+
+  // Grade every line not graded yet (older chats were graded turn by turn).
+  // The first call writes the grading prompt to the cache; the rest read it.
+  const grade = async (t: (typeof userTurns)[number]) => {
+    const i = turns.indexOf(t);
+    const tomasBefore = turns.slice(0, i).reverse().find((x) => x.role === "tomas")?.text ?? null;
+    const meta = (t.meta ?? {}) as { lang?: string; unsure?: unknown };
+    const english = meta.lang === "en";
+    const unsure = Array.isArray(meta.unsure) ? meta.unsure.filter((w): w is string => typeof w === "string") : [];
+    try {
+      const { value, usage: u, ms } = await structured<Feedback>(client, {
+        system: FEEDBACK_SYSTEM,
+        schema: FEEDBACK_SCHEMA as unknown as Record<string, unknown>,
+        input: feedbackInput({ level: session.level, tomasBefore, line: t.text, english, unsure }),
+      });
+      usage.push(claudeUsage({ conversation_id: session.id, turn_id: t.id, model: MODEL, stage: "feedback", ms }, u));
+      if (!value) return;
+      t.feedback = cleanFeedback(value, t.text, english);
+      const { error } = await db.from("conversation_turns").update({ feedback: t.feedback }).eq("id", t.id);
+      if (error) console.error("feedback save failed", error.message);
+    } catch (err) {
+      console.error("grading failed", err);
+    }
+  };
+  const ungraded = userTurns.filter((t) => !t.feedback && t.text);
+  if (ungraded.length) {
+    await grade(ungraded[0]);
+    await Promise.all(ungraded.slice(1).map(grade));
+  }
 
   // Top 3 corrections: what blocks meaning first, then the level's targets, then the rest; earlier first.
   const corrections = userTurns
@@ -92,14 +132,10 @@ Deno.serve(async (req) => {
       audio_path: null as string | null,
     }));
 
-  const usage: Usage[] = [];
-  const client = new Anthropic({ apiKey: env.anthropicKey, ...CLAUDE_OPTIONS });
-
   const extras = (async () => {
-    if (!userTurns.length) return { phrases: [] as { es: string; en: string }[], went_well: null as string | null };
+    if (!userTurns.length) return { went_well: null as string | null };
     const input = [
       `Level: ${session.level}`,
-      `Grammar the level allows (for the phrases): ${LEVEL_GRAMMAR[session.level]}`,
       "Conversation:",
       ...turns.map((t) => `${t.role === "tomas" ? "Pancho" : "Learner"}: ${t.text}`),
       corrections.length
@@ -107,17 +143,17 @@ Deno.serve(async (req) => {
         : "The learner made no corrected mistakes.",
     ].join("\n");
     try {
-      const { value, usage: u, ms } = await structured<{ phrases: { es: string; en: string }[]; went_well: string }>(client, {
+      const { value, usage: u, ms } = await structured<{ went_well: string }>(client, {
         system: SUMMARY_SYSTEM,
         schema: SUMMARY_SCHEMA as unknown as Record<string, unknown>,
         input,
         maxTokens: 2000,
       });
       usage.push(claudeUsage({ conversation_id: session.id, model: MODEL, stage: "summary", ms }, u));
-      return { phrases: (value?.phrases ?? []).slice(0, 5), went_well: value?.went_well ?? null };
+      return { went_well: value?.went_well ?? null };
     } catch (err) {
       console.error("summary call failed", err);
-      return { phrases: [], went_well: null };
+      return { went_well: null };
     }
   })();
 
@@ -186,7 +222,7 @@ Deno.serve(async (req) => {
     };
   })();
 
-  const [{ phrases, went_well }, , credit] = await Promise.all([extras, recordings, streak]);
+  const [{ went_well }, , credit] = await Promise.all([extras, recordings, streak]);
 
   const summary = {
     kind: session.kind,
@@ -197,7 +233,6 @@ Deno.serve(async (req) => {
     reason: session.end_reason ?? reason,
     turns: userTurns.length,
     corrections,
-    phrases,
     went_well,
     streak_credited: credit.credited,
     ...(session.kind === "unit" ? { title: session.scenario?.title_en ?? null, lesson_done: Boolean(lessonId && credit.credited) } : {}),

@@ -145,7 +145,12 @@ let fileSeq = 0;
 async function native(): Promise<NativePlayer> {
   if (!nativePlayer) {
     const { createAudioPlayer } = await import('expo-audio');
-    const p = createAudioPlayer(null, { updateInterval: 250 });
+    // keepAudioSessionActive: on iOS, a pause or a finished clip otherwise
+    // switches the whole audio session off 100 ms later — expo-audio checks
+    // only for other players, not for a recorder. Tapping the mic pauses this
+    // player (stopAll), so from the second turn on her recording died a tenth
+    // of a second in and came back as silence ("I didn't hear you").
+    const p = createAudioPlayer(null, { updateInterval: 250, keepAudioSessionActive: true });
     p.addListener('playbackStatusUpdate', (status) => {
       if (!status.didJustFinish) return;
       const fn = nativeEnded;

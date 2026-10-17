@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { useAuth } from './auth';
 import { billing } from './billing';
 import type { Catalog } from './billing-shared';
+import { clearContentCache } from './content-cache';
 import { isGuest } from './guest';
 import { supabase } from './supabase';
 
@@ -82,6 +83,18 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
   const userId = session?.user.id ?? null;
   const staff = profile?.role === 'admin' || profile?.role === 'reviewer';
   const [status, setStatus] = useState<Status>('loading');
+  // The server hides a locked unit's sentences from a free account, and the
+  // phone keeps sentence blocks by content_version's stamps, which say whether
+  // a unit was locked for her. Those stamps are kept a few minutes: when she
+  // pays (or lapses) they are asked again now, so her next class fetches the
+  // blocks it can now read instead of the ones it couldn't.
+  const settled = useRef<Status>('loading');
+  useEffect(() => {
+    if (status === 'loading') return;
+    const was = settled.current;
+    settled.current = status;
+    if (was !== 'loading' && was !== status) clearContentCache();
+  }, [status]);
   const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [testerUnlock, setTesterUnlock] = useState(false);
   const [hardPaywall, setHardPaywall] = useState(false);

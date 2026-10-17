@@ -14,8 +14,9 @@ web-build/
 expo-env.d.ts
 .env
 .env*.local
-ios/
-android/
+# Anchored: a bare ios/ also dropped assets/images/widget/ios/, so the widget scenes never reached the build.
+/ios/
+/android/
 *.jks
 *.p8
 *.p12

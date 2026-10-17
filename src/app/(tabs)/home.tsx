@@ -23,6 +23,8 @@ import { RedoCard, type StepRect } from '@/components/redo-card';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { markBootReady } from '@/lib/boot';
+import { COURSE_CHATS_PER_DAY, type ConversationRow, hoursToMidnight, unitChat, unitChatsToday } from '@/lib/hablar';
+import { tomasArt } from '@/lib/hablar-art';
 import { localDateStr } from '@/lib/dates';
 import {
   type Course,
@@ -223,6 +225,7 @@ const PathStep = memo(function PathStep({
   attempts,
   tone,
   onPress,
+  onPressAt,
   onRedo,
 }: {
   index: number;
@@ -240,6 +243,8 @@ const PathStep = memo(function PathStep({
   /** A unit check tried and not passed yet: attempts so far, out of three. */
   attempts?: number;
   onPress?: () => void;
+  /** Instead of `onPress`: her step, when what it opens is a card at the step (Pancho resting). */
+  onPressAt?: (index: number, at: StepRect) => void;
   /**
    * A done step she may do again: opens its card where the step is. One
    * function for the whole road, so a done step doesn't render again whenever
@@ -409,9 +414,14 @@ const PathStep = memo(function PathStep({
           styles.stepNode,
           { transform: [{ translateX: swing(index) }] },
         ]}>
-        {onPress ? (
+        {onPress || onPressAt ? (
           <Pressable
-            onPress={onPress}
+            ref={node}
+            onPress={
+              onPressAt
+                ? () => node.current?.measureInWindow((x, y, width, height) => onPressAt(index, { x, y, width, height }))
+                : onPress
+            }
             accessibilityRole="button"
             accessibilityLabel={`Start: ${label}`}
             hitSlop={8}
@@ -1128,6 +1138,42 @@ export default function Home() {
    *  the list renders its rows again. */
   const drawn = useMemo(() => ({ shown, done }), [shown, done]);
 
+  // The chat with Pancho on the road (the "Chat limits UX" canvas). Each is
+  // had once: a done one opens a card with how it went. On a day she
+  // has had COURSE_CHATS_PER_DAY of them, her chat step rests until tomorrow
+  // and its card offers the next lesson. Above the early return: hooks.
+  const redoChatId = redo && path[redo.index]?.kind === 'speak' ? path[redo.index].id : null;
+  /** The chat the open card is about: undefined while it is read, null if she never had it (she jumped past). */
+  const [doneChat, setDoneChat] = useState<ConversationRow | null | undefined>(undefined);
+  useEffect(() => {
+    setDoneChat(undefined);
+    if (!redoChatId) return;
+    let alive = true;
+    unitChat(redoChatId).then(
+      (c) => alive && setDoneChat(c),
+      () => alive && setDoneChat(null),
+    );
+    return () => {
+      alive = false;
+    };
+  }, [redoChatId]);
+  const stepKind = path[shown?.lessons ?? 0]?.kind;
+  const [courseBreak, setCourseBreak] = useState(false);
+  useEffect(() => {
+    if (!focused || stepKind !== 'speak') return;
+    let alive = true;
+    unitChatsToday().then(
+      (n) => alive && setCourseBreak(n >= COURSE_CHATS_PER_DAY),
+      () => {},
+    );
+    return () => {
+      alive = false;
+    };
+  }, [focused, stepKind]);
+  /** Her chat step, resting, whose card is open. */
+  const [resting, setResting] = useState<{ index: number; at: StepRect } | null>(null);
+  const openResting = useCallback((index: number, at: StepRect) => setResting({ index, at }), []);
+
   // Nothing to place: the launch splash has waited long enough.
   useEffect(() => {
     if (data && data.course.path.length === 0) markBootReady();
@@ -1173,6 +1219,16 @@ export default function Home() {
   const isDone = (lesson: PathLesson) => stepDone(lesson, current, done);
   const phaseOf = (lesson: PathLesson): Phase => (lesson.index === current ? 1 : isDone(lesson) ? 2 : 0);
   const redoLesson = redo ? (path[redo.index] ?? null) : null;
+  /** " Your next one is at the end of Unit 4.": the next chat with Pancho on the road, if there is one. */
+  const nextChatOf = (index: number) => {
+    const next = path.find((l) => l.index > index && l.kind === 'speak');
+    return next ? ` Your next one is at the end of Unit ${next.unitIndex + 1}.` : '';
+  };
+  const restingLesson = resting ? (path[resting.index] ?? null) : null;
+  /** While Pancho rests: the first lesson after his step still to do (another chat would rest too). */
+  const skipTo = restingLesson
+    ? (path.find((l) => l.index > restingLesson.index && l.kind !== 'speak' && !isDone(l)) ?? null)
+    : null;
   const unitStateOf = (lesson: PathLesson): UnitState => {
     const last = unitLastIndex.get(lesson.unit_id) ?? lesson.index;
     return current > last ? 'done' : current >= lesson.index ? 'current' : 'locked';
@@ -1397,9 +1453,10 @@ export default function Home() {
               attempts={data?.checkAttempts.get(lesson.id)}
               tone={toneOf(lesson.unit)}
               label={`${lesson.title_en} · ${lesson.unit.title_en}`}
-              onPress={lesson.index === current ? () => startLesson(lesson) : undefined}
-              // Any finished class but the chat with Pancho, which is a live call every time.
-              onRedo={isDone(lesson) && lesson.kind !== 'speak' ? openRedo : undefined}
+              onPress={lesson.index === current && !(lesson.kind === 'speak' && courseBreak) ? () => startLesson(lesson) : undefined}
+              onPressAt={lesson.index === current && lesson.kind === 'speak' && courseBreak ? openResting : undefined}
+              // Any finished class; the chat with Pancho opens how it went instead (it is had once).
+              onRedo={isDone(lesson) ? openRedo : undefined}
             />
           </>
         )}
@@ -1427,15 +1484,54 @@ export default function Home() {
         onClose={() => setGuide(null)}
         jump={guideJump}
       />
+      {redoLesson?.kind === 'speak' ? (
+        // Shown once the chat is read, so the card opens whole rather than changing under her.
+        <RedoCard
+          at={doneChat !== undefined ? (redo?.at ?? null) : null}
+          eyebrow="DONE · AI CHAT"
+          title={doneChat?.scenario?.title_en ?? redoLesson.unit.title_en}
+          unit={doneChat?.summary?.went_well?.replace(/\*/g, '') ?? redoLesson.unit.title_en}
+          note={`Each chat with Pancho happens once, like a real one.${nextChatOf(redoLesson.index)}`}
+          action="See how it went"
+          onClose={() => setRedo(null)}
+          onRedo={
+            doneChat
+              ? () => {
+                  setRedo(null);
+                  router.push(`/hablar-summary?session=${doneChat.id}`);
+                }
+              : undefined
+          }
+        />
+      ) : (
+        <RedoCard
+          at={redo?.at ?? null}
+          title={redoLesson ? (KIND_LABEL[redoLesson.kind] ?? `Lesson ${redoLesson.ordinal}`) : ''}
+          unit={redoLesson?.unit.title_en ?? ''}
+          onClose={() => setRedo(null)}
+          onRedo={() => {
+            setRedo(null);
+            if (redoLesson) startLesson(redoLesson);
+          }}
+        />
+      )}
       <RedoCard
-        at={redo?.at ?? null}
-        title={redoLesson ? (KIND_LABEL[redoLesson.kind] ?? `Lesson ${redoLesson.ordinal}`) : ''}
-        unit={redoLesson?.unit.title_en ?? ''}
-        onClose={() => setRedo(null)}
-        onRedo={() => {
-          setRedo(null);
-          if (redoLesson) startLesson(redoLesson);
-        }}
+        at={resting?.at ?? null}
+        eyebrow={restingLesson ? `AI CHAT · UNIT ${restingLesson.unitIndex + 1}` : 'AI CHAT'}
+        title="Pancho needs a break"
+        unit={`You've had ${COURSE_CHATS_PER_DAY} chats with him today. That's a lot of talking! Skip this one for now. It'll wait for you tomorrow.`}
+        art={tomasArt}
+        opensIn={`Opens again in ${hoursToMidnight()} h`}
+        action="Skip to next lesson"
+        onClose={() => setResting(null)}
+        onRedo={
+          skipTo
+            ? () => {
+                setResting(null);
+                startLesson(skipTo);
+              }
+            : undefined
+        }
       />
       {/* Only once there is a road to jump along — not over the loading sun. */}
       {roadReady ? (

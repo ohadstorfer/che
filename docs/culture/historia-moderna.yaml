@@ -179,7 +179,7 @@ classes:
       - type: card
         text: "Supporters of Macri value statistics people could trust again, more open trade and new roads and public works. Critics point to a record loan from the IMF, and to inflation and poverty that were higher when he left."
       - type: card
-        text: "In 2019 Peronism returned with **Alberto Fernández** (2019–2023), and Cristina Kirchner as vice-president. Then came the pandemic. Supporters value the emergency aid and the vaccines. Critics point to a very long lockdown and inflation that passed 200% a year."
+        text: "In 2019 Peronism returned with **Alberto Fernández** (2019–2023), and Cristina Kirchner as vice-president. Then came the pandemic. Supporters value the emergency aid and the vaccines. Critics point to a very long lockdown and inflation that passed 150% a year."
       - type: choice
         prompt: "In the 2023 campaign, the economist **Javier Milei** carried one object at his rallies. Which one?"
         options:

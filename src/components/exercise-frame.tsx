@@ -5,7 +5,6 @@ import {
   Animated,
   Easing,
   Keyboard,
-  KeyboardAvoidingView,
   Platform,
   Pressable,
   ScrollView,
@@ -13,6 +12,8 @@ import {
   Text,
   View,
 } from 'react-native';
+import { KeyboardController, KeyboardEvents, useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
+import Reanimated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui';
@@ -37,6 +38,12 @@ export type Verdict = {
  *  whose page is one flat colour: an exercise too tall for it then fades into
  *  the page at the cut edge. Left unset, the cut edge only gets its arrow. */
 export const PageColorContext = createContext<string | undefined>(undefined);
+
+/** True while the keyboard is up and the exercise did not fit above it: the
+ *  capybara steps out of the way then, so the field and the button can stay
+ *  in view. It holds until the keyboard goes down — the room he gives back is
+ *  what made it fit, and bringing him back would only push it out again. */
+export const TightContext = createContext(false);
 
 // ---------------------------------------------------------------------------
 // ExerciseFrame — the shape every exercise shares: a question at the top, the
@@ -90,12 +97,16 @@ export function ExerciseFrame({
   const contentHeight = useRef(0);
   const offset = useRef(0);
   const [more, setMore] = useState(false);
+  const [tight, setTight] = useState(false);
 
   // More of the exercise lies under the fold. A few points of slack, so a
   // rounding error never draws the hint over a screen that fits.
   const measure = () => {
     const hidden = contentHeight.current - viewHeight.current - offset.current;
     setMore(viewHeight.current > 0 && hidden > MORE_SLACK);
+    if (keyboardUp.current && viewHeight.current > 0 && contentHeight.current - viewHeight.current > MORE_SLACK) {
+      setTight(true);
+    }
   };
 
   // A typed answer's field is the last thing in the body, and the keyboard
@@ -104,18 +115,27 @@ export function ExerciseFrame({
   // asks again — so the field stayed under the fold until the first keystroke
   // made the system go and look for the caret. The frame asks instead, the
   // moment it knows how much room the keyboard left.
-  const revealField = () => {
+  // While the keyboard is still rising the frame shrinks a little every
+  // frame, and keeping to the end without animating is what keeps up with it.
+  const revealField = (animated = true) => {
     if (!keyboardUp.current || contentHeight.current <= viewHeight.current) return;
-    scroll.current?.scrollToEnd({ animated: true });
+    scroll.current?.scrollToEnd({ animated });
   };
 
   const keyboard = useKeyboardUp((up) => {
     keyboardUp.current = up;
+    if (!up) setTight(false);
   });
+  // The keyboard's height as it moves (negative: it is measured upwards). The
+  // frame reaches the bottom of the screen, so that is exactly how much of it
+  // the keyboard covers, and the frame gives up that much from the bottom —
+  // the docked button rides on top of the keys, on iOS and Android alike.
+  const { height: keyboardHeight } = useReanimatedKeyboardAnimation();
+  const lift = useAnimatedStyle(() => ({ paddingBottom: Math.max(0, -keyboardHeight.get()) }));
   // If the screen had already resized by the time the keyboard was announced.
   useEffect(() => {
     if (!keyboard) return;
-    const frame = requestAnimationFrame(revealField);
+    const frame = requestAnimationFrame(() => revealField());
     return () => cancelAnimationFrame(frame);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyboard]);
@@ -129,9 +149,10 @@ export function ExerciseFrame({
   };
 
   return (
-    // On iOS the keyboard covers the screen instead of shrinking it, so the
-    // docked button would end up underneath it; Android resizes on its own.
-    <KeyboardAvoidingView style={styles.frame} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    // The keyboard covers the screen instead of shrinking it (on Android too,
+    // since 15 draws edge to edge), so the docked button would end up under it.
+    <Reanimated.View style={[styles.frame, lift]}>
+      <TightContext.Provider value={tight}>
       <View style={styles.scroll}>
         <ScrollView
           ref={scroll}
@@ -148,7 +169,7 @@ export function ExerciseFrame({
           onLayout={(e) => {
             viewHeight.current = e.nativeEvent.layout.height;
             measure();
-            revealField();
+            revealField(false);
           }}
           onContentSizeChange={(_, height) => {
             contentHeight.current = height;
@@ -165,6 +186,7 @@ export function ExerciseFrame({
         </ScrollView>
         <MoreBelow show={more} fade={fade} onPress={() => scroll.current?.scrollToEnd({ animated: true })} />
       </View>
+      </TightContext.Provider>
 
       {verdict ? (
         <FeedbackBar verdict={verdict} onContinue={onContinue} bottom={bottom} actions={actions} />
@@ -177,7 +199,7 @@ export function ExerciseFrame({
           )}
         </View>
       )}
-    </KeyboardAvoidingView>
+    </Reanimated.View>
   );
 }
 
@@ -196,14 +218,12 @@ function useKeyboardUp(onChange: (up: boolean) => void) {
     };
     // Each exercise mounts a frame of its own, and a keyboard that never went
     // down between two of them announces nothing to the second.
-    if (Platform.OS !== 'web' && Keyboard.isVisible()) set(true);
-    // The web has no `Keyboard` events; the visual viewport says the same thing.
+    // The web has no keyboard events; the visual viewport says the same thing.
     if (Platform.OS === 'web') return watchWebKeyboard(set);
-    // iOS announces the keyboard before it moves, Android only once it has.
-    const show = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
-    const hide = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
-    const a = Keyboard.addListener(show, () => set(true));
-    const b = Keyboard.addListener(hide, () => set(false));
+    if (KeyboardController.isVisible()) set(true);
+    // Announced before it moves, on both platforms.
+    const a = KeyboardEvents.addListener('keyboardWillShow', () => set(true));
+    const b = KeyboardEvents.addListener('keyboardWillHide', () => set(false));
     return () => {
       a.remove();
       b.remove();

@@ -74,22 +74,22 @@ interface Look {
 function lookOf(day: WidgetDay): Look {
   const looks: Record<WidgetMoment, Look> = {
     word: { scene: 'morning', pose: 'waving', small: [205, 8, -26], medium: [366, 94, -40] },
-    sideEye: { scene: 'afternoon', pose: 'sideEye', small: [235, 12, -8], medium: [360, 50, -10], line: ['¿Y? ¿Hoy nada?', '¿Y? ¿Hoy no practicás?'] },
-    sad: { scene: 'sunset', pose: 'sad', small: [236, 26, -10], medium: [354, 76, -8], line: ['Te espero, eh.', 'Se me enfrió el mate.'] },
-    begging: { scene: 'dusk', pose: 'begging', small: [236, 42, -10], medium: [360, 106, -8], line: ['Dale, porfa.', 'Dale, porfa. Son 2 minutos.'] },
-    crying: { scene: 'fire', pose: 'crying', small: [238, 18, -10], medium: [360, 58, -8], line: ['¡Me matás!', '¡Me estás matando!'] },
+    sideEye: { scene: 'afternoon', pose: 'sideEye', small: [235, 21, -20], medium: [360, 50, -10], line: ['So… nothing?', 'So… no practice today?'] },
+    sad: { scene: 'sunset', pose: 'sad', small: [236, 26, -10], medium: [354, 76, -8], line: ['Still waiting.', 'Still waiting…'] },
+    begging: { scene: 'dusk', pose: 'begging', small: [236, 42, -10], medium: [360, 106, -8], line: ['Please?', 'Please?\nJust 2 minutes.'] },
+    crying: { scene: 'fire', pose: 'crying', small: [238, 18, -10], medium: [360, 58, -8], line: ['You’re killing me!', 'You’re killing me!'] },
     lastHour: {
       scene: 'night',
       pose: 'collapsed',
       small: [226, 34, 4],
       medium: [322, 64, 24],
-      line: ['Chau, racha.', `Chau, racha de ${day.count} día${day.count === 1 ? '' : 's'}.`],
+      line: ['Bye, streak.', `Bye-bye,\n${day.count}-day streak.`],
       dark: true,
     },
-    practiced: { scene: 'goal', pose: 'goal', small: [268, 68, -46], medium: [428, 50, -80], line: ['¡Golazo!', '¡Golazo! Hasta mañana.'] },
-    frozen: { scene: 'ice', pose: 'sad', small: [172, 58, 28], medium: [302, 110, 34], line: ['¡Me congelé!', 'Tu racha se congeló.'], dark: true },
-    recovering: { scene: 'thaw', pose: 'begging', small: [236, 42, -10], medium: [360, 106, -8], line: ['¡Una más!', 'Una más y la salvás.'] },
-    fresh: { scene: 'morning', pose: 'waving', small: [250, 34, -26], medium: [366, 94, -40], line: ['¿Arrancamos?', '¿Arrancamos? Son 2 minutos.'] },
+    practiced: { scene: 'goal', pose: 'goal', small: [268, 68, -46], medium: [428, 50, -80], line: ['Goooal!', 'Goooal! See you tomorrow.'] },
+    frozen: { scene: 'ice', pose: 'sad', small: [172, 58, 28], medium: [302, 110, 34], line: ['I’m frozen!', 'Your streak froze.'], dark: true },
+    recovering: { scene: 'thaw', pose: 'begging', small: [236, 42, -10], medium: [360, 106, -8], line: ['One more!', 'One more saves it.'] },
+    fresh: { scene: 'morning', pose: 'waving', small: [250, 34, -26], medium: [366, 94, -40], line: ['Shall we?', 'Shall we? Just 2 minutes.'] },
   };
   return looks[day.moment];
 }

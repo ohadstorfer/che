@@ -15,6 +15,7 @@ import {
   isSilenceHallucination,
   logUsage,
   looksEnglish,
+  messageCap,
   sessionElapsed,
   sttKeyterms,
   topicOf,
@@ -29,6 +30,7 @@ export const MAX_AUDIO_BYTES = 1.5 * 1024 * 1024; // ≈ 45 s of audio
 // without keyterms), three times when it may be English.
 export const MAX_STT_PER_CHAT = 200;
 const MAX_TYPED_CHARS = 300;
+/** Lines of any kind, drafts included: the backstop under every chat's own cap. */
 const MAX_TURNS_PER_CHAT = 80;
 
 /** A conversation_turns row, as far as the drafts care. */
@@ -66,6 +68,23 @@ function closed(session: Session): Response | null {
   return null;
 }
 
+/**
+ * A Speaking-tab chat takes eight lines (messageCap): a ninth is refused
+ * before anything is heard, with 429 `message_limit`, which the app reads as
+ * the chat being over. A re-record of the draft in hand is not a new line.
+ */
+export async function overCap(db: SupabaseClient, session: Session): Promise<Response | null> {
+  const cap = messageCap(session);
+  if (cap === null) return null;
+  const { count } = await db
+    .from("conversation_turns")
+    .select("id", { count: "exact", head: true })
+    .eq("conversation_id", session.id)
+    .eq("role", "user")
+    .eq("status", "final");
+  return (count ?? 0) >= cap ? json({ error: "message_limit", limit: cap }, { status: 429 }) : null;
+}
+
 function foreign(existing: TurnRow | null, session: Session): Response | null {
   if (existing && (existing.conversation_id !== session.id || existing.role !== "user")) {
     return json({ error: "turn_id belongs to something else" }, { status: 409 });
@@ -93,7 +112,8 @@ export async function spokenDraft(opts: {
 }): Promise<DraftOutcome> {
   const { env, db, session, turnId, audio, existing } = opts;
   if (opts.sttCount >= MAX_STT_PER_CHAT) return { error: json({ error: "too many recordings" }, { status: 429 }) };
-  const shut = closed(session) ?? foreign(existing, session);
+  const shut = closed(session) ?? foreign(existing, session) ??
+    (existing?.status === "final" ? null : await overCap(db, session));
   if (shut) return { error: shut };
 
   // What Pancho just said is the best hint of what she says next; read while the clip is.
@@ -207,6 +227,8 @@ export async function typedDraft(opts: {
   if (existing) {
     if (existing.status === "final") return { turn: existing };
   } else {
+    const full = await overCap(db, session);
+    if (full) return { error: full };
     const { count } = await db
       .from("conversation_turns")
       .select("id", { count: "exact", head: true })

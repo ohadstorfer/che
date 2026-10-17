@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "363217349467",
+    "project_id": "posta-eea17",
+    "storage_bucket": "posta-eea17.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363217349467:android:d8b69e494733a156c8887e",
+        "android_client_info": {
+          "package_name": "app.posta.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACniu6mPwFiCUkEmpgmvjIjZY44EbINi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

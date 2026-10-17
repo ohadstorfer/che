@@ -12,8 +12,18 @@
 // in window coordinates, which is the only thing it needs anyway.
 // ---------------------------------------------------------------------------
 
+import { Image } from 'expo-image';
 import { useEffect, useRef, useState } from 'react';
-import { Dimensions, Modal, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Dimensions,
+  type ImageSourcePropType,
+  Modal,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -43,6 +53,10 @@ const TAIL_GAP = 9;
 const TAIL_HALF = 9;
 /** Below the word only when there is less room above than a bubble needs. */
 const MIN_ABOVE = 150;
+/** The picture's height, and the room above the word a bubble with one needs:
+ *  it is twice as tall, so it would otherwise reach under the status bar. */
+const PICTURE = 96;
+const MIN_ABOVE_PICTURE = 320;
 
 /** Fast in, faster out: the eye is already on the word, and the bubble is
  *  opened often enough that any wait would be felt. */
@@ -81,6 +95,7 @@ export function WordPopover({
   gloss,
   onClose,
   audio,
+  image,
 }: {
   /** The word to explain; null closes the popover. */
   form: Form | null;
@@ -91,6 +106,8 @@ export function WordPopover({
   /** Rendered next to the Spanish when the word has a clip — passed in so this
    *  component stays free of the audio player and its hooks. */
   audio?: (path: string) => React.ReactNode;
+  /** What the word looks like, for a thing she may never have seen. */
+  image?: ImageSourcePropType;
 }) {
   const reduced = useReducedMotion();
   const [screen, setScreen] = useState(() => Dimensions.get('window'));
@@ -103,7 +120,7 @@ export function WordPopover({
   // dropped with a console warning and the bubble simply appears. A shared
   // value behaves the same on both platforms.
   const progress = useSharedValue(0);
-  const last = useRef<{ form: Form; anchor: Anchor; gloss?: string } | null>(null);
+  const last = useRef<{ form: Form; anchor: Anchor; gloss?: string; image?: ImageSourcePropType } | null>(null);
 
   const open = !!form && !!anchor;
   useEffect(() => {
@@ -137,11 +154,11 @@ export function WordPopover({
 
   // The word and its place are held through the exit: `form` is already null
   // by then, and a bubble that empties before it fades reads as a glitch.
-  if (form && anchor) last.current = { form, anchor, gloss };
+  if (form && anchor) last.current = { form, anchor, gloss, image };
   const held = last.current;
   if (!mounted || !held) return null;
 
-  const { form: shown, anchor: at, gloss: inContext } = held;
+  const { form: shown, anchor: at, gloss: inContext, image: picture } = held;
   const centre = at.x + at.width / 2;
   // Never wider than the screen less its margins: on a narrow phone the
   // Spanish wraps onto another line instead of running off the bubble.
@@ -149,7 +166,7 @@ export function WordPopover({
   const left = Math.min(Math.max(centre - width / 2, MARGIN), Math.max(MARGIN, screen.width - width - MARGIN));
   // Above the word by default — that is where her eye already is. Below only
   // when there is no room, which is the top line of a tall sentence.
-  const below = at.y < MIN_ABOVE;
+  const below = at.y < (picture ? MIN_ABOVE_PICTURE : MIN_ABOVE);
 
   // The tail tracks the word even when a screen edge pushed the bubble off the
   // word's centre, so it still points at what it explains.
@@ -176,6 +193,11 @@ export function WordPopover({
         pointerEvents="box-none"
         style={[styles.wrap, place, { left, width, transformOrigin: origin }, motion]}>
         <View style={styles.bubble}>
+          {/* Part of the bubble, not an entrance of its own: it arrives with
+              the meaning, since it is the meaning. */}
+          {picture ? (
+            <Image source={picture} style={styles.picture} contentFit="contain" accessible={false} />
+          ) : null}
           <View style={styles.head}>
             {shown.audio_path && audio ? audio(shown.audio_path) : null}
             <Text style={styles.es}>{shown.form}</Text>
@@ -217,6 +239,7 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
     boxShadow: clay.float,
   },
+  picture: { height: PICTURE, marginTop: 12, marginHorizontal: 14 },
   head: {
     flexDirection: 'row',
     alignItems: 'center',

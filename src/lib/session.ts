@@ -4,7 +4,6 @@ import {
   isPhrase,
   labelOf,
   matchable,
-  meaningOf,
   norm,
   selfGlossed,
   sharesMeaning,
@@ -230,13 +229,22 @@ export const loadGlossTallies = () =>
     return data as GlossTallies;
   });
 
+/** How long a failed load waits before its one more try. */
+const RETRY_MS = 1000;
+
+/** A load tried once more, a moment later, before it counts as failed. What
+ *  the bounded sentence load needs is small; what replaces it when it fails
+ *  is the whole course, so a blip on the network shouldn't decide that. */
+const twice = <T>(load: () => Promise<T>): Promise<T> =>
+  load().catch(() => new Promise((resolve) => setTimeout(resolve, RETRY_MS)).then(load));
+
 /** The published lexicon, her SM-2 states, the published sentences in reach,
  *  and the ladder her recent rounds and any placement have earned her.
  *
  *  Sentences load only as far as she has got, or the round goes (`reach`) —
  *  not the whole course, which is 24 MB for a learner who needs a few hundred
  *  KB of it. Should that load fail (the server is older than the app, say),
- *  it falls back to every sentence, as it always did. */
+ *  it is tried once more, then falls back to every sentence, as it always did. */
 export async function loadLearner(userId: string, reach: LearnerReach = {}): Promise<LearnerData> {
   // Anything still being got ready behind the road now has someone waiting.
   hurrySlices();
@@ -298,8 +306,8 @@ async function readLearner(userId: string, reach: LearnerReach): Promise<Learner
     ),
     timed('profile', Promise.resolve(supabase.from('profiles').select('placed_through').eq('user_id', userId).maybeSingle())),
     timed('shown', loadSentenceStates(userId), rows),
-    timed('course', loadCourse().catch(() => null)),
-    timed('tallies', loadGlossTallies().catch(() => null)),
+    timed('course', twice(loadCourse).catch(() => null)),
+    timed('tallies', twice(loadGlossTallies).catch(() => null)),
   ]);
   const states = (stateRows ?? []) as FormState[];
   const placedThrough = (profile as { placed_through?: number } | null)?.placed_through ?? 0;
@@ -315,16 +323,18 @@ async function readLearner(userId: string, reach: LearnerReach): Promise<Learner
     const before = { ...contentSources };
     sentences = await timed(
       'sentences',
-      loadSentences(
-        userId,
-        lexicon,
-        {
-          throughOrder: Math.max(reached, placedThrough, reach.throughOrder ?? 0),
-          units: course.units,
-          unitIds: reach.unitIds,
-          ids: reach.sentenceIds,
-        },
-        shown,
+      twice(() =>
+        loadSentences(
+          userId,
+          lexicon,
+          {
+            throughOrder: Math.max(reached, placedThrough, reach.throughOrder ?? 0),
+            units: course.units,
+            unitIds: reach.unitIds,
+            ids: reach.sentenceIds,
+          },
+          shown,
+        ),
       ).catch(() => null),
       () =>
         `${contentSources.network - before.network} net, ${contentSources.disk - before.disk} disk, ` +
@@ -476,8 +486,10 @@ export function pickDirection(form: Form, mode: ExerciseMode, seen: boolean): Se
     // Phrases she has already met get built in both directions; a first
     // meeting, and every single word, always produces Spanish. Building the
     // English side needs an English side worth building — a one-word gloss
-    // would break into letters instead of words.
-    if (!isPhrase(form.form) || !isPhrase(meaningOf(form)) || !seen) return 'en_to_es';
+    // would break into letters instead of words. Judged on the English the
+    // screen builds (WordBuild), which drops the brackets: "great (person)"
+    // is two words, but what she would build is "great".
+    if (!isPhrase(form.form) || !isPhrase(labelOf(form, 'gloss_en')) || !seen) return 'en_to_es';
     return Math.random() < 0.4 ? 'es_to_en' : 'en_to_es';
   }
   return Math.random() < 0.5 ? 'es_to_en' : 'en_to_es';

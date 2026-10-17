@@ -1,9 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import * as Clipboard from 'expo-clipboard';
-import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Animated,
@@ -19,46 +17,47 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Image } from 'expo-image';
 
 import {
-  Diff,
+  DayPips,
   type IconName,
   MicButton,
   Sheet,
   ThinkingDots,
-  PanchoAvatar,
   RosaFill,
+  useReducedMotion,
   webPress,
 } from '@/components/hablar-ui';
 import { Button } from '@/components/ui';
 import { type ActiveRecording, armMic, canRecord, disarmMic, readyClip, type RecordedClip, startRecording, warmMic } from '@/lib/audio';
 import { useAuth } from '@/lib/auth';
 import {
+  CHATS_PER_DAY,
   conversationTitle,
   type DoneEvent,
   deadlineOf,
   end,
-  type Feedback,
-  type Verdict,
-  verdictOf,
   bandOf,
   findScenario,
   scenarioAt,
   HablarError,
+  type HablarKind,
   hint,
   type HintResult,
   loadConversation,
+  messageLimitOf,
   newTurnId,
   reply,
   resolveAudio,
   signedHablarUrl,
   speak,
   startCache,
+  todaysChats,
   tomasAudioPath,
   translate,
   warm,
-  wordDiff,
 } from '@/lib/hablar';
 import {
   checkClip,
@@ -76,22 +75,29 @@ import {
   whenIdle,
 } from '@/lib/hablar-audio';
 import { tap } from '@/lib/haptics';
+import { usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
-import { clay, colors, font, gradients, pastel, press, radius } from '@/lib/theme';
+import { clay, colors, font, pastel, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
-// The conversation (§2.3–2.4). Turn-based: she records and taps to send. The
-// recording goes to hablar-reply, which transcribes it and answers on the same
-// stream: her line lands, then the verdict on it, then Pancho — his reply is
-// held back (text and voice) until the correction is on screen, or for at most
-// HOLD_MS, so the thread always reads in that order and nothing jumps under
-// him. (A draft left over from an older build still shows for review after a reload.)
+// The conversation (§2.3–2.4), as a call: Pancho big on the rosa, and only
+// what he just said under him — her own lines aren't shown, and nothing is
+// corrected while they talk (Pancho just says it back right, the way a
+// porteño would; every line is graded once, for the summary). Turn-based and
+// voice only: she taps the mic, talks, taps again. The recording goes to
+// hablar-reply, which transcribes it and answers on the same stream. (A draft
+// left over from an older build still shows for review after a reload.)
 //
-// The server owns the clock. The timer here is a display: it counts down to
-// `deadline_at`, stops while the app is in the background and while it is
-// Pancho's turn (her line is being answered, or he is speaking), and reports
-// those paused seconds with the next request so the server can extend the deadline.
+// A chat is measured in lines: eight on the Speaking tab (the server counts
+// them too). Two before the end a pill over the dock says how many are left;
+// Pancho's answer to the last one closes the chat, and the dock then says how
+// many of the day's chats are left. A unit chat has no count to show.
+//
+// The server also keeps a clock, only as a backstop for a chat left running.
+// It isn't shown; it stops while the app is in the background and while it is
+// Pancho's turn (her line is being answered, or he is speaking), and the
+// paused seconds go up with the next request so the server can extend it.
 // ---------------------------------------------------------------------------
 
 type PanchoMsg = {
@@ -109,16 +115,12 @@ type PanchoMsg = {
   audioPath?: string | null;
   streaming?: boolean;
   failed?: boolean;
-  /** Not shown yet: waiting for the correction above it (see HOLD_MS). */
-  held?: boolean;
 };
 
 type UserMsg = {
   role: 'user';
   key: string;
   text: string;
-  feedback: Feedback | null;
-  pending: boolean;
 };
 type Msg = PanchoMsg | UserMsg;
 
@@ -137,8 +139,6 @@ type Phase =
   | 'gone';
 
 const HINTS_PER_CHAT = 3;
-/** Longest Pancho waits for the correction once his reply has started coming in. */
-const HOLD_MS = 1200;
 
 /** The scenario version a chat runs: the one of its level (hablar-start stores the version's band). */
 const versionOf = (kind: string | undefined, topicId: string | null | undefined, level: string | null | undefined) => {
@@ -146,9 +146,12 @@ const versionOf = (kind: string | undefined, topicId: string | null | undefined,
   return s ? scenarioAt(s, bandOf(level)) : undefined;
 };
 const WAVE_BARS = 18;
+/** The call's Pancho, until he gets art of his own for it. */
+const callArt = require('@/assets/images/splash-pancho.png');
 
 export default function HablarChat() {
-  useStatusBarColor(colors.bg);
+  useStatusBarColor(colors.primary);
+  const insets = useSafeAreaInsets();
   const { session: sessionParam } = useLocalSearchParams<{
     session?: string;
   }>();
@@ -163,15 +166,21 @@ export default function HablarChat() {
   messagesRef.current = messages;
   const [draft, setDraft] = useState<{ turnId: string; text: string } | null>(null);
   /** Writing instead of speaking — the only way in where the mic can't record. */
-  const [typing, setTyping] = useState(!canRecord);
+  /** Voice only: typing is just for a build that can't record. */
+  const typing = !canRecord;
   const [typed, setTyped] = useState('');
   const [title, setTitle] = useState<{ text: string; role: string | null }>({
     text: '',
     role: null,
   });
   const [deadline, setDeadline] = useState<number>(0);
-  /** Staff chat: no clock (deadline stays 0, the timer is hidden). */
+  /** Staff chat: no clock (deadline stays 0) and no day's count. */
   const [unlimited, setUnlimited] = useState(false);
+  /** What kind of chat this is: a unit chat has no line count. Unknown until boot. */
+  const [kind, setKind] = useState<HablarKind | null>(null);
+  /** The Speaking tab's chats left today, shown once the chat is over; null where it doesn't apply. */
+  const [chatsLeft, setChatsLeft] = useState<number | null>(null);
+  const { status: plan } = usePremium();
   const [notice, setNotice] = useState<string | null>(null);
   const [wrapUp, setWrapUp] = useState(false);
 
@@ -187,17 +196,13 @@ export default function HablarChat() {
   const [hintsUsed, setHintsUsed] = useState(0);
   const [showEn, setShowEn] = useState<Set<string>>(new Set());
   const [translating, setTranslating] = useState<string | null>(null);
-  /** Older Pancho messages she tapped to show their ▶ / 🐢 / EN row. */
-  const [revealed, setRevealed] = useState<Set<string>>(new Set());
 
   const [sheet, setSheet] = useState<
-    | { kind: 'message'; key: string }
     | { kind: 'end' }
     | null
   >(null);
 
   const playing = usePlaying();
-  const scroll = useRef<ScrollView>(null);
   /**
    * The recording in progress. The button turns to "recording" on the tap
    * itself; the recorder catches up a moment later (`rec` stays null until
@@ -216,7 +221,7 @@ export default function HablarChat() {
   const pausedTotal = useRef(0);
   /** What is stopping the clock right now (the app is away, it's Pancho's turn), and since when. */
   const holds = useRef({ n: 0, since: 0 });
-  /** When the clock stopped, while it is: the timer shows the time left as of then. */
+  /** When the clock stopped, while it is (the backstop doesn't run out while stopped). */
   const [heldAt, setHeldAt] = useState<number | null>(null);
   const abort = useRef<AbortController | null>(null);
 
@@ -237,6 +242,7 @@ export default function HablarChat() {
       const started = startCache.get(sessionId);
       if (started) {
         const kind = started.kind ?? 'scenario';
+        setKind(kind);
         setTitle({
           text: conversationTitle(kind, started.topic_id, started.title),
           role: versionOf(kind, started.topic_id, started.level)?.role_es ?? started.role_es ?? null,
@@ -270,6 +276,7 @@ export default function HablarChat() {
       const { conversation, turns } = loaded;
       if (conversation.ended_at) return router.replace(`/hablar-summary?session=${sessionId}`);
       const scenario = versionOf(conversation.kind, conversation.topic_id, conversation.level);
+      setKind(conversation.kind);
       setTitle({
         text: conversationTitle(conversation.kind, conversation.topic_id, conversation.scenario?.title_en),
         role: scenario?.role_es ?? conversation.scenario?.role_es ?? null,
@@ -298,8 +305,6 @@ export default function HablarChat() {
             role: 'user',
             key: t.id,
             text: t.text,
-            feedback: t.feedback,
-            pending: false,
           });
         }
       });
@@ -405,7 +410,6 @@ export default function HablarChat() {
   }, [deadline, heldAt]);
 
   // Keep the newest message in view.
-  const toBottom = () => requestAnimationFrame(() => scroll.current?.scrollToEnd({ animated: true }));
 
   // --- finishing ----------------------------------------------------------------
   const finishing = useRef(false);
@@ -531,15 +535,15 @@ export default function HablarChat() {
   // --- the turn -----------------------------------------------------------------
   const patch = (key: string, fn: (m: Msg) => Msg) => setMessages((ms) => ms.map((m) => (m.key === key ? fn(m) : m)));
 
-  /** Her line and Pancho's answer, side by side in the thread; his stays hidden until released. */
+  /** Her line and Pancho's answer, side by side in the thread. */
   const addTurn = (turnId: string, text: string) =>
     setMessages((ms) =>
       ms.some((m) => m.key === turnId)
         ? ms.map((m) => (m.key === turnId ? ({ ...m, text } as UserMsg) : m))
         : [
             ...ms,
-            { role: 'user', key: turnId, text, feedback: null, pending: true },
-            { role: 'tomas', key: `${turnId}-tomas`, userTurnId: turnId, text: '', streaming: true, held: true },
+            { role: 'user', key: turnId, text },
+            { role: 'tomas', key: `${turnId}-tomas`, userTurnId: turnId, text: '', streaming: true },
           ],
     );
 
@@ -559,25 +563,6 @@ export default function HablarChat() {
   ): Promise<void> => {
     const tkey = `${turnId}-tomas`;
     let heard = !line; // the server has her line (a stored turn always has)
-
-    // Pancho waits for the correction: everything of his goes through `held`
-    // until the verdict lands, or HOLD_MS after his reply starts coming in. A
-    // retry whose correction is already on screen doesn't wait.
-    let holding = !messagesRef.current.some((m) => m.key === turnId && m.role === 'user' && m.feedback);
-    const waiting: (() => void)[] = [];
-    let holdTimer: ReturnType<typeof setTimeout> | null = null;
-    const release = () => {
-      if (!holding) return;
-      holding = false;
-      if (holdTimer) clearTimeout(holdTimer);
-      patch(tkey, (m) => ({ ...m, held: false }) as PanchoMsg);
-      for (const fn of waiting.splice(0)) fn();
-    };
-    const held = (fn: () => void) => {
-      if (!holding) return fn();
-      waiting.push(fn);
-      holdTimer ??= setTimeout(release, HOLD_MS);
-    };
 
     // Text arrives a few characters at a time: one render per frame, not per delta.
     let pendingText = '';
@@ -620,57 +605,34 @@ export default function HablarChat() {
         addTurn(turnId, text);
         setPhase('waiting');
       },
-      onCorrection: (v: { has_error: boolean; verdict?: Verdict; corrected: string }) => {
-        patch(turnId, (m) =>
-          (m as UserMsg).feedback
+      onText: (_seq: number, delta: string) => {
+        setPhase((p) => (p === 'waiting' ? 'streaming' : p));
+        pendingText += delta;
+        frame ??= requestAnimationFrame(flushText);
+      },
+      onTextFix: (_seq: number, from: string, to: string) => {
+        if (!from) return;
+        flushText();
+        patch(tkey, (m) => {
+          const at = m.text.lastIndexOf(from);
+          return at < 0
             ? m
-            : ({ ...m, feedback: { ...v, why_en: '', better: '' }, pending: false } as UserMsg),
-        );
-        release();
+            : {
+                ...m,
+                text: m.text.slice(0, at) + to + m.text.slice(at + from.length),
+              };
+        });
       },
-      onText: (_seq: number, delta: string) =>
-        held(() => {
-          setPhase((p) => (p === 'waiting' ? 'streaming' : p));
-          pendingText += delta;
-          frame ??= requestAnimationFrame(flushText);
-        }),
-      onTextFix: (_seq: number, from: string, to: string) =>
-        held(() => {
-          if (!from) return;
-          flushText();
-          patch(tkey, (m) => {
-            const at = m.text.lastIndexOf(from);
-            return at < 0
-              ? m
-              : {
-                  ...m,
-                  text: m.text.slice(0, at) + to + m.text.slice(at + from.length),
-                };
-          });
-        }),
-      onAudio: (seq: number, mp3: string) => held(() => streamChunk(tkey, seq, mp3)),
-      onFeedback: (fb: Feedback) => {
-        patch(turnId, (m) => ({ ...m, feedback: fb, pending: false }) as UserMsg);
-        release();
-      },
+      onAudio: (seq: number, mp3: string) => streamChunk(tkey, seq, mp3),
       onDone: (d: DoneEvent) => {
         done = d;
-        release();
         flushText();
-        // Pancho is done talking: she can answer now, while a slower
-        // correction may still be on its way down the same stream.
         settle(d);
       },
       onError: (err: { stage: string; retry: boolean; seq?: number }) => {
         // A failed reply sends no `done`, which retries below. A sentence
-        // without voice or a missing correction is not worth interrupting her for.
-        if (err.stage === 'tts' && err.seq !== undefined) {
-          const seq = err.seq;
-          held(() => streamSkip(tkey, seq));
-        } else if (err.stage === 'feedback') {
-          patch(turnId, (m) => ({ ...m, pending: false }) as UserMsg);
-          release();
-        }
+        // without voice is not worth interrupting her for.
+        if (err.stage === 'tts' && err.seq !== undefined) streamSkip(tkey, err.seq);
       },
     };
     try {
@@ -690,6 +652,14 @@ export default function HablarChat() {
       )
         fatal = true;
       if ((e as Error)?.name === 'AbortError') return;
+      // Her lines for this chat are used (the server counts them too): the chat is over.
+      if (e instanceof HablarError && e.status === 429 && e.body?.error === 'message_limit') {
+        streamEnd(tkey);
+        dropTurn(turnId);
+        reRecordTurn.current = null;
+        setPhase('ended');
+        return;
+      }
       if (!heard && e instanceof HablarError && e.status === 429) {
         streamEnd(tkey);
         dropTurn(turnId);
@@ -700,10 +670,9 @@ export default function HablarChat() {
           setTyped((t) => t || text);
           return say("That's all the lines this chat can take.");
         }
-        return say('That was the last recording for this chat. Type instead.');
+        return say('That was the last recording for this chat.');
       }
     }
-    release();
     flushText();
     const d = done as DoneEvent | null;
     if (!d) streamEnd(tkey); // otherwise settle() already did
@@ -742,11 +711,8 @@ export default function HablarChat() {
       setPhase('retry');
       return;
     }
-    // The stream is closed, so a correction that never came won't.
-    patch(turnId, (m) => ({ ...m, pending: false }) as UserMsg);
     if (d.ended) {
-      // Let him finish his goodbye, then the summary. Called once the stream
-      // has closed, so the last line's correction is already saved for it.
+      // Let him finish his goodbye, then the summary (which grades her lines).
       whenIdle(() => setTimeout(() => void finish('time'), 1200));
       if (!nowPlaying()) setTimeout(() => void finish('time'), 2500);
     }
@@ -758,7 +724,6 @@ export default function HablarChat() {
     reRecordTurn.current = null;
     setHintState({ data: null, level: 0, loading: false });
     addTurn(turnId, text);
-    toBottom();
     void runReply(turnId, 0, line);
   };
 
@@ -797,7 +762,6 @@ export default function HablarChat() {
       const data = await hint(sessionId);
       setHintsUsed((n) => n + 1);
       setHintState({ data, level: 1, loading: false });
-      toBottom();
     } catch (e) {
       setHintState((h) => ({ ...h, loading: false }));
       if (e instanceof HablarError && e.status === 429) {
@@ -840,25 +804,28 @@ export default function HablarChat() {
     if (!ok) say("Couldn't play that.");
   };
 
-  // Stable across renders, so a row that didn't change doesn't redraw while
-  // Pancho's reply streams into the one that did.
-  const toggleReveal = useStable((key: string) =>
-    setRevealed((s) => {
-      const next = new Set(s);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      return next;
-    }),
-  );
-  const playMsg = useStable((m: PanchoMsg, slow: boolean) => void onPlay(m, slow));
-  const translateMsg = useStable((m: PanchoMsg) => void onTranslate(m));
-  const openMessage = useStable((key: string) => setSheet({ kind: 'message', key }));
-
   // --- derived ----------------------------------------------------------------------
-  const sheetMsg = sheet && 'key' in sheet ? (messages.find((m) => m.key === sheet.key) as Msg | undefined) : undefined;
   const busy = phase === 'waiting' || phase === 'streaming' || phase === 'transcribing';
-  const micLocked = timeUp && phase !== 'recording' && phase !== 'draft';
-  const lastPanchoKey = [...messages].reverse().find((m) => m.role === 'tomas')?.key;
+  // Lines left in a Speaking-tab chat: hers in the thread, a line on its way included.
+  const limit = messageLimitOf(kind ?? undefined);
+  const linesLeft = limit === null || kind === null ? null : Math.max(0, limit - messages.filter((m) => m.role === 'user').length);
+  /** All her lines are said, and nothing of the last one is still in flight (a chat loaded back after the end). */
+  const outOfLines = linesLeft === 0 && !busy && phase !== 'recording';
+  const micLocked = (timeUp || outOfLines) && phase !== 'recording' && phase !== 'draft';
+  const over = phase === 'ended' || phase === 'ending' || micLocked;
+
+  // Once the chat is over: how many of the day's chats are left (premium only;
+  // a free account's limit is its free chats, which the tab shows).
+  useEffect(() => {
+    if (!over || kind === null || kind === 'unit' || unlimited || plan !== 'premium') return;
+    let alive = true;
+    void todaysChats()
+      .then((today) => alive && setChatsLeft(Math.max(0, CHATS_PER_DAY - today.length)))
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [over, kind, unlimited, plan]);
 
   // --- screens that replace the chat ----------------------------------------------
   if (phase === 'gone') {
@@ -880,152 +847,126 @@ export default function HablarChat() {
         }>
         {Platform.OS !== 'web' ? <Button title="Open Settings" onPress={() => void Linking.openSettings()} /> : null}
         <Button
-          title="Type instead"
-          variant="secondary"
-          onPress={() => {
-            setTyping(true);
-            setPhase('idle');
-          }}
-        />
-        <Button
           title="Try again"
           onPress={() => {
             setPhase('idle');
             void startRec();
           }}
         />
-        <Button title="End chat" variant="ghost" onPress={() => void finish('user')} />
+        <Button title="End call" variant="ghost" onPress={() => void finish('user')} />
       </FullMessage>
     );
   }
 
+  const current = [...messages].reverse().find((m): m is PanchoMsg => m.role === 'tomas');
+  const thinking = phase === 'waiting' || (phase === 'streaming' && !current?.text);
+  const currentPlaying = current && playing?.key === current.key;
+  const currentEn = current && showEn.has(current.key) ? current.textEn : null;
+
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'bottom', 'left', 'right']}>
-      {/* On iOS the keyboard covers the screen instead of shrinking it. */}
+    <SafeAreaView style={[styles.safe, styles.callBg]} edges={['top', 'left', 'right']}>
+      {/* On iOS the keyboard covers the screen instead of shrinking it (typing is only for builds that can't record). */}
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      {/* Header: back · Pancho · scenario · timer · ⋮ */}
-      <View style={styles.header}>
-        <Pressable
-          onPress={() => setSheet({ kind: 'end' })}
-          hitSlop={4}
-          accessibilityRole="button"
-          accessibilityLabel="Volver"
-          style={({ pressed }) => [styles.headerIcon, { transform: [{ scale: pressed ? 0.94 : 1 }] }, webPress]}>
-          <Ionicons name="chevron-back" size={24} color={colors.ink} />
-        </Pressable>
-        <PanchoAvatar size={40} />
-        <View style={styles.headerTitle}>
-          <FitText style={styles.headerName} lines={1}>
-            {title.text}
-          </FitText>
-          <FitText style={styles.headerRole} lines={1}>
-            {title.role ? `Pancho · ${title.role}` : 'Pancho'}
-          </FitText>
+      {/* The call: Pancho, big, and only what he just said. */}
+      <View style={styles.call}>
+        <View style={styles.header}>
+          <Pressable
+            onPress={() => setSheet({ kind: 'end' })}
+            hitSlop={4}
+            accessibilityRole="button"
+            accessibilityLabel="Back"
+            style={({ pressed }) => [styles.headerIcon, { transform: [{ scale: pressed ? 0.94 : 1 }] }, webPress]}>
+            <Ionicons name="chevron-back" size={24} color={colors.onPrimary} />
+          </Pressable>
+          <View style={styles.headerTitle}>
+            <Text style={styles.callLabel}>Call</Text>
+            <FitText style={styles.headerName} lines={1}>
+              Pancho
+            </FitText>
+            <FitText style={styles.headerRole} lines={1}>
+              {title.role ? `${title.text} · ${title.role}` : title.text}
+            </FitText>
+          </View>
+          <View style={styles.headerIcon} />
         </View>
-        {unlimited ? null : (
-          <ChatTimer deadline={deadline} heldAt={heldAt} />
-        )}
-        <Pressable
-          onPress={() => setSheet({ kind: 'end' })}
-          hitSlop={4}
-          accessibilityRole="button"
-          accessibilityLabel="More"
-          style={({ pressed }) => [styles.headerIcon, { transform: [{ scale: pressed ? 0.94 : 1 }] }, webPress]}>
-          <MaterialCommunityIcons name="dots-vertical" size={22} color={colors.ink} />
-        </Pressable>
-      </View>
 
-      <ScrollView
-        ref={scroll}
-        style={{ flex: 1 }}
-        contentContainerStyle={styles.thread}
-        onContentSizeChange={() => scroll.current?.scrollToEnd({ animated: true })}
-        showsVerticalScrollIndicator={false}>
-        {messages.map((m) =>
-          m.role === 'tomas' ? (
-            m.held ? null : (
-              <PanchoRow
-                key={m.key}
-                m={m}
-                isLast={m.key === lastPanchoKey}
-                revealed={revealed.has(m.key)}
-                english={showEn.has(m.key)}
-                translating={translating === m.key}
-                playing={playing?.key === m.key ? (playing.slow ? 'slow' : 'normal') : null}
-                onToggle={toggleReveal}
-                onPlay={playMsg}
-                onTranslate={translateMsg}
-              />
-            )
-          ) : (
-            <UserRow key={m.key} m={m} onCopy={openMessage} />
-          ),
-        )}
+        <View style={styles.stage}>
+          <Talking active={!!currentPlaying || phase === 'streaming'}>
+            <Image source={callArt} style={styles.callArt} contentFit="contain" accessibilityLabel="Pancho" />
+          </Talking>
 
-        {phase === 'transcribing' ? (
-          <Appear key="transcribing">
-            <View style={styles.userRow}>
-              <View style={styles.listening} accessibilityLabel="Escuchando lo que dijiste">
-                <ThinkingDots />
+          <ScrollView
+            style={styles.lineScroll}
+            contentContainerStyle={styles.lineWrap}
+            showsVerticalScrollIndicator={false}>
+            {thinking ? (
+              <View style={styles.thinking} accessibilityLabel="Pancho is thinking">
+                <ThinkingDots color={colors.onPrimary} />
               </View>
+            ) : current ? (
+              <Appear key={current.key}>
+                <Text style={styles.line} accessibilityLiveRegion="polite">
+                  {current.text}
+                </Text>
+                {current.failed ? <Text style={styles.lineSub}>The connection dropped.</Text> : null}
+                {currentEn ? <Text style={styles.lineSub}>{currentEn}</Text> : null}
+              </Appear>
+            ) : null}
+          </ScrollView>
+
+          {current && !current.streaming && !current.failed && !thinking ? (
+            <View style={styles.lineTools}>
+              <CallPill
+                icon={currentPlaying ? 'stop' : 'replay'}
+                label={currentPlaying ? 'Stop' : 'Replay'}
+                active={!!currentPlaying}
+                onPress={() => void onPlay(current, false)}
+              />
+              <CallPill
+                icon="translate"
+                label="English"
+                active={!!currentEn}
+                busy={translating === current.key}
+                onPress={() => void onTranslate(current)}
+              />
             </View>
-          </Appear>
-        ) : null}
+          ) : null}
+        </View>
 
         {draft ? (
           <Appear key={`draft-${draft.turnId}-${draft.text}`}>
-            <View style={styles.userRow}>
-              <Text style={styles.draftLabel}>¿Dijiste esto?</Text>
-              <View style={styles.draftBubble}>
-                <Text style={styles.draftText}>{draft.text}</Text>
-              </View>
+            <View style={styles.floatCard}>
+              <Text style={styles.draftLabel}>Did you say this?</Text>
+              <Text style={styles.draftText}>{draft.text}</Text>
               <View style={styles.draftActions}>
                 <Pressable
                   onPress={toggleMic}
                   disabled={micLocked}
                   accessibilityRole="button"
-                  style={({ pressed }) => [
-                    styles.redo,
-                    { transform: [{ scale: pressed ? press.scale : 1 }] },
-                    webPress,
-                  ]}>
+                  style={({ pressed }) => [styles.redo, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
                   <MaterialCommunityIcons name="refresh" size={17} color={colors.ink} />
-                  <Text style={styles.redoText}>Grabar de nuevo</Text>
+                  <Text style={styles.redoText}>Record again</Text>
                 </Pressable>
                 <Pressable
                   onPress={send}
                   accessibilityRole="button"
-                  style={({ pressed }) => [
-                    styles.sendBtn,
-                    { transform: [{ scale: pressed ? press.scale : 1 }] },
-                    webPress,
-                  ]}>
+                  style={({ pressed }) => [styles.sendBtn, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
                   <RosaFill round={22} />
-                  <Text style={styles.sendText}>Enviar</Text>
+                  <Text style={styles.sendText}>Send</Text>
                   <MaterialCommunityIcons name="send" size={16} color={colors.onPrimary} />
                 </Pressable>
               </View>
             </View>
           </Appear>
-        ) : null}
-
-        {hintState.data && hintState.level > 0 ? (
+        ) : hintState.data && hintState.level > 0 ? (
           <Appear key="hint">
-            <View style={styles.hintCard}>
+            <View style={[styles.hintCard, styles.floatCard]}>
               <View style={styles.hintHead}>
                 <MaterialCommunityIcons name="lightbulb-on-outline" size={16} color={colors.onPastel} />
-                <Text style={styles.hintLabel}>Pista</Text>
+                <Text style={styles.hintLabel}>Hint</Text>
                 <View style={styles.hintSteps}>
                   {[1, 2, 3].map((n) => (
-                    <View
-                      key={n}
-                      style={[
-                        styles.hintStep,
-                        n <= hintState.level && {
-                          backgroundColor: colors.onPastel,
-                        },
-                      ]}
-                    />
+                    <View key={n} style={[styles.hintStep, n <= hintState.level && { backgroundColor: colors.onPastel }]} />
                   ))}
                 </View>
                 <Pressable
@@ -1049,58 +990,59 @@ export default function HablarChat() {
             </View>
           </Appear>
         ) : null}
-      </ScrollView>
+      </View>
 
       {/* Bottom dock */}
-      <View style={styles.bar}>
+      <View style={[styles.bar, { paddingBottom: 8 + insets.bottom }]}>
         {notice ? (
           <View style={styles.notice}>
             <Text style={styles.noticeText}>{notice}</Text>
+          </View>
+        ) : linesLeft !== null && linesLeft > 0 && linesLeft <= 2 && !over ? (
+          // The heads-up, two lines before the end, where a notice would be.
+          <View style={styles.linesLeft} pointerEvents="none">
+            <Appear key={linesLeft}>
+              <View style={styles.linesLeftPill} accessibilityLiveRegion="polite">
+                <MaterialCommunityIcons name="chat" size={18} color={colors.ink} />
+                <Text style={styles.linesLeftText}>
+                  {linesLeft} {linesLeft === 1 ? 'message' : 'messages'} left
+                </Text>
+              </View>
+            </Appear>
           </View>
         ) : null}
 
         {phase === 'retry' ? (
           <View style={styles.barStack}>
-            <Text style={styles.caption}>Se cortó la conexión.</Text>
-            <Button title="Reintentar" onPress={retry} />
+            <Text style={styles.caption}>The connection dropped.</Text>
+            <Button title="Try again" onPress={retry} />
           </View>
-        ) : phase === 'ended' || phase === 'ending' || micLocked ? (
+        ) : over ? (
           <View style={styles.barStack}>
             <Text style={styles.caption}>
-              {phase === 'ended' && !timeUp ? 'Pancho cerró la charla.' : 'Se terminó el tiempo.'}
+              {timeUp && phase !== 'ended' && !outOfLines ? "Time's up." : 'Pancho ended the call.'}
             </Text>
-            <Button title="Ver resumen" loading={phase === 'ending'} onPress={() => void finish('time')} />
+            <Button title="See summary" loading={phase === 'ending'} onPress={() => void finish('time')} />
+            {chatsLeft !== null ? (
+              <View style={styles.dayLeft} accessible accessibilityLabel={`${chatsLeft} ${chatsLeft === 1 ? 'chat' : 'chats'} left today`}>
+                <DayPips used={CHATS_PER_DAY - chatsLeft} small />
+                <Text style={styles.dayLeftText}>
+                  {chatsLeft === 0 ? 'No chats left today' : `${chatsLeft} ${chatsLeft === 1 ? 'chat' : 'chats'} left today`}
+                </Text>
+              </View>
+            ) : null}
           </View>
         ) : typing && phase !== 'recording' ? (
+          // Only where the phone can't record: the call is voice only.
           <>
             <View style={styles.typeRow}>
-              <Pressable
-                onPress={() => void onHint()}
-                disabled={busy || phase === 'boot' || hintState.loading}
-                hitSlop={4}
-                accessibilityRole="button"
-                accessibilityLabel={`Hint, ${Math.max(0, HINTS_PER_CHAT - hintsUsed)} left`}
-                style={({ pressed }) => [
-                  styles.typeCircle,
-                  { backgroundColor: pastel.butter },
-                  (busy || phase === 'boot') && { opacity: 0.4 },
-                  { transform: [{ scale: pressed ? 0.94 : 1 }] },
-                  webPress,
-                ]}>
-                {hintState.loading ? (
-                  <ActivityIndicator size="small" color={colors.ink} />
-                ) : (
-                  <MaterialCommunityIcons name="lightbulb-on-outline" size={22} color={colors.ink} />
-                )}
-              </Pressable>
               <TextInput
                 value={typed}
                 onChangeText={setTyped}
-                placeholder="Escribile a Pancho…"
+                placeholder="Write to Pancho in Spanish…"
                 placeholderTextColor={colors.muted}
                 multiline
                 maxLength={300}
-                autoFocus={canRecord}
                 autoCorrect={false}
                 accessibilityLabel="Your message to Pancho"
                 style={styles.typeInput}
@@ -1122,22 +1064,6 @@ export default function HablarChat() {
                 <Ionicons name="arrow-up" size={22} color={colors.onPrimary} />
               </Pressable>
             </View>
-            {canRecord ? (
-              <Pressable
-                onPress={() => setTyping(false)}
-                hitSlop={8}
-                accessibilityRole="button"
-                style={({ pressed }) => [styles.typeSwitch, { opacity: pressed ? 0.6 : 1 }, webPress]}>
-                <MaterialCommunityIcons name="microphone-outline" size={16} color={colors.muted} />
-                <Text style={styles.caption}>
-                  {phase === 'waiting' || phase === 'streaming' ? 'Pancho está hablando…' : 'Hablar en vez de escribir'}
-                </Text>
-              </Pressable>
-            ) : (
-              <Text style={styles.caption}>
-                {phase === 'waiting' || phase === 'streaming' ? 'Pancho está hablando…' : 'Escribí en español'}
-              </Text>
-            )}
           </>
         ) : (
           <>
@@ -1159,19 +1085,15 @@ export default function HablarChat() {
                 onPress={toggleMic}
               />
               {phase === 'recording' ? (
-                <SideButton
-                  icon="close"
-                  label="Cancel"
-                  onPress={cancelRecording}
-                  accessibilityLabel="Cancel recording"
-                />
+                <SideButton icon="close" label="Cancel" onPress={cancelRecording} accessibilityLabel="Cancel recording" />
               ) : (
                 <SideButton
-                  icon="keyboard-outline"
-                  label="Type"
+                  icon="phone-hangup"
+                  label="End"
+                  tone="danger"
                   disabled={phase === 'boot'}
-                  onPress={() => setTyping(true)}
-                  accessibilityLabel="Type instead of speaking"
+                  onPress={() => setSheet({ kind: 'end' })}
+                  accessibilityLabel="End the call"
                 />
               )}
             </View>
@@ -1180,14 +1102,14 @@ export default function HablarChat() {
             ) : (
               <Text style={styles.caption}>
                 {phase === 'transcribing'
-                  ? 'Escuchando lo que dijiste…'
+                  ? 'Listening…'
                   : phase === 'waiting' || phase === 'streaming'
-                    ? 'Pancho está hablando…'
+                    ? 'Pancho is talking…'
                     : phase === 'draft'
-                      ? 'Revisá el texto y enviá'
+                      ? 'Check it and send'
                       : wrapUp
-                        ? 'Pancho está cerrando la charla'
-                        : 'Tocá para hablar'}
+                        ? 'Pancho is wrapping up'
+                        : 'Tap to talk'}
               </Text>
             )}
           </>
@@ -1196,145 +1118,25 @@ export default function HablarChat() {
 
       </KeyboardAvoidingView>
 
-      {/* long-press on her message */}
-      <Sheet open={sheet?.kind === 'message'} onClose={() => setSheet(null)}>
-        {sheetMsg ? (
-          <>
-            <Text style={styles.sheetBig}>{sheetMsg.text}</Text>
-            <Button
-              title="Copy text"
-              variant="secondary"
-              onPress={() => {
-                void Clipboard.setStringAsync(sheetMsg.text).catch(() => {});
-                setSheet(null);
-                say('Copied.');
-              }}
-            />
-          </>
-        ) : null}
-      </Sheet>
-
       {/* Volver / ⋮ → end */}
-      <Sheet open={sheet?.kind === 'end'} onClose={() => setSheet(null)} title="End the chat?">
+      <Sheet open={sheet?.kind === 'end'} onClose={() => setSheet(null)} title="End the call?">
         <Text style={styles.sheetBody}>
-          You'll see your summary, and today's chat is used up.
+          {kind === 'unit' || unlimited
+            ? "You'll see your summary."
+            : `You'll see your summary. It counts as one of today's ${CHATS_PER_DAY} chats.`}
         </Text>
         <Button
-          title="Terminar charla"
+          title="End call"
           onPress={() => {
             setSheet(null);
             void finish('user');
           }}
         />
-        <Button title="Seguir hablando" variant="ghost" onPress={() => setSheet(null)} />
+        <Button title="Keep talking" variant="ghost" onPress={() => setSheet(null)} />
       </Sheet>
     </SafeAreaView>
   );
 }
-
-/** A callback that keeps its identity across renders but always runs the latest closure. */
-function useStable<A extends unknown[], R>(fn: (...args: A) => R): (...args: A) => R {
-  const ref = useRef(fn);
-  ref.current = fn;
-  return useCallback((...args: A) => ref.current(...args), []);
-}
-
-/** One of Pancho's messages. Memoized: while one streams, the rest of the thread stays still. */
-const PanchoRow = memo(function PanchoRow({
-  m,
-  isLast,
-  revealed,
-  english,
-  translating,
-  playing,
-  onToggle,
-  onPlay,
-  onTranslate,
-}: {
-  m: PanchoMsg;
-  isLast: boolean;
-  revealed: boolean;
-  english: boolean;
-  translating: boolean;
-  playing: 'normal' | 'slow' | null;
-  onToggle: (key: string) => void;
-  onPlay: (m: PanchoMsg, slow: boolean) => void;
-  onTranslate: (m: PanchoMsg) => void;
-}) {
-  const tools = !m.streaming && !m.failed && (isLast || revealed);
-  return (
-    <Appear>
-      <View style={styles.tomasRow}>
-        <PanchoAvatar size={28} />
-        <Pressable
-          onPress={() => !isLast && onToggle(m.key)}
-          accessibilityHint={isLast ? undefined : 'Shows play and translate'}
-          style={[styles.tomasBubble, tools && styles.tomasBubbleTools]}>
-          {m.streaming && !m.text ? (
-            <View style={styles.thinking}>
-              <Text style={styles.thinkingText}>Pancho está pensando</Text>
-              <ThinkingDots />
-            </View>
-          ) : (
-            <Text style={styles.tomasText}>{m.text}</Text>
-          )}
-          {m.failed ? <Text style={styles.failed}>Se cortó la conexión.</Text> : null}
-          {english && m.textEn ? <Text style={styles.english}>{m.textEn}</Text> : null}
-          {tools ? (
-            <View style={styles.tools}>
-              <Tool active={playing === 'normal'} onPress={() => onPlay(m, false)} accessibilityLabel="Play">
-                <MaterialCommunityIcons name={playing === 'normal' ? 'stop' : 'play'} size={20} color={colors.primary} />
-              </Tool>
-              <Tool active={playing === 'slow'} onPress={() => onPlay(m, true)} accessibilityLabel="Play slowly">
-                <MaterialCommunityIcons name={playing === 'slow' ? 'stop' : 'tortoise'} size={20} color={colors.primary} />
-              </Tool>
-              <Tool
-                active={english}
-                onPress={() => onTranslate(m)}
-                accessibilityLabel={english ? 'Hide translation' : 'Translate'}>
-                {translating ? (
-                  <ActivityIndicator size="small" color={colors.primary} />
-                ) : (
-                  <Text style={styles.toolText}>EN</Text>
-                )}
-              </Tool>
-            </View>
-          ) : null}
-        </Pressable>
-      </View>
-    </Appear>
-  );
-});
-
-/** One of her messages, with the correction and the local way to say it under it. */
-const UserRow = memo(function UserRow({
-  m,
-  onCopy,
-}: {
-  m: UserMsg;
-  onCopy: (key: string) => void;
-}) {
-  const fb = m.feedback;
-  return (
-    <Appear>
-      <View style={styles.userRow}>
-        <Pressable onLongPress={() => onCopy(m.key)} accessibilityHint="Long-press to copy" style={styles.userBubble}>
-          <LinearGradient colors={gradients.deep} style={styles.userFill} pointerEvents="none" />
-          <Text style={styles.userText}>{m.text}</Text>
-        </Pressable>
-        {m.pending ? (
-          <View style={styles.checking} accessibilityLabel="Checking what you said">
-            <ThinkingDots />
-          </View>
-        ) : fb ? (
-          <Appear>
-            <Correction said={m.text} feedback={fb} />
-          </Appear>
-        ) : null}
-      </View>
-    </Appear>
-  );
-});
 
 /** Messages rise into place: 200ms, ease-out, a few points of travel. */
 function Appear({ children }: { children: React.ReactNode }) {
@@ -1365,91 +1167,65 @@ function Appear({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** ▶ / 🐢 / EN inside Pancho's bubble. */
-function Tool({
+/** Pancho, a touch bigger and back while he talks: a slow breath, not a bounce. */
+function Talking({ active, children }: { active: boolean; children: React.ReactNode }) {
+  const reduced = useReducedMotion();
+  const t = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    if (!active || reduced) {
+      Animated.timing(t, { toValue: 0, duration: 200, easing: Easing.bezier(0.23, 1, 0.32, 1), useNativeDriver: true }).start();
+      return;
+    }
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(t, { toValue: 1, duration: 600, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
+        Animated.timing(t, { toValue: 0, duration: 600, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
+      ]),
+    );
+    loop.start();
+    return () => loop.stop();
+  }, [active, reduced, t]);
+  return (
+    <Animated.View style={{ transform: [{ scale: t.interpolate({ inputRange: [0, 1], outputRange: [1, 1.025] }) }] }}>
+      {children}
+    </Animated.View>
+  );
+}
+
+/** Replay / English under Pancho's line, on the call's color. */
+function CallPill({
+  icon,
+  label,
   active,
+  busy,
   onPress,
-  accessibilityLabel,
-  children,
 }: {
+  icon: IconName;
+  label: string;
   active?: boolean;
+  busy?: boolean;
   onPress: () => void;
-  accessibilityLabel: string;
-  children: React.ReactNode;
 }) {
   return (
     <Pressable
       onPress={onPress}
+      disabled={busy}
       accessibilityRole="button"
-      accessibilityLabel={accessibilityLabel}
+      accessibilityLabel={label}
       accessibilityState={{ selected: !!active }}
       style={({ pressed }) => [
-        styles.tool,
-        active && { backgroundColor: colors.primarySoft },
-        { transform: [{ scale: pressed ? 0.94 : 1 }] },
+        styles.pill,
+        active && styles.pillActive,
+        { transform: [{ scale: pressed ? 0.96 : 1 }] },
         webPress,
       ]}>
-      {children}
+      {busy ? (
+        <ActivityIndicator size="small" color={active ? colors.primary : colors.onPrimary} />
+      ) : (
+        <MaterialCommunityIcons name={icon} size={18} color={active ? colors.primary : colors.onPrimary} />
+      )}
+      <Text style={[styles.pillText, active && { color: colors.primary }]}>{label}</Text>
     </Pressable>
-  );
-}
-
-/**
- * The correction, always open under her message: what she said with the fix
- * struck through and filled in, and why — or a quiet tick when it was right.
- * A line that is no mistake but not right either (an English word, a tú form)
- * gets the way to say it instead of the tick; a garbled one gets nothing.
- *
- * When her line would sound foreign in Argentina — and only then; the server
- * decides, strictly — the Argentine way to say it sits in the same card, under
- * a line.
- */
-function Correction({ said, feedback }: { said: string; feedback: Feedback }) {
-  const verdict = verdictOf(feedback);
-  if (verdict === 'unclear') return null;
-  if (verdict === 'note') {
-    // Until the full feedback lands there is no better line to show yet.
-    if (!feedback.better) return null;
-    return (
-      <View style={styles.correct} accessibilityLabel={`Try: ${feedback.better}`}>
-        <Text style={styles.noteText}>Try: {feedback.better}</Text>
-      </View>
-    );
-  }
-  const tick = (
-    <View style={styles.correct} accessibilityLabel="Correct">
-      <MaterialCommunityIcons name="check-bold" size={14} color={colors.success} />
-      <Text style={styles.correctText}>Correct</Text>
-    </View>
-  );
-  if (verdict === 'correct') {
-    if (!feedback.better) return tick;
-    return (
-      <View style={[styles.correction, styles.correctionPlain]}>
-        <View style={{ marginHorizontal: -4 }}>{tick}</View>
-        <Local feedback={feedback} />
-      </View>
-    );
-  }
-  return (
-    <View style={styles.correction} accessibilityLabel={`Correction: ${feedback.corrected}`}>
-      <Diff parts={wordDiff(said, feedback.corrected)} size={17} />
-      {feedback.why_en ? <Text style={styles.correctionWhy}>{feedback.why_en}</Text> : null}
-      {feedback.better ? <Local feedback={feedback} /> : null}
-    </View>
-  );
-}
-
-/** Under the line in the correction card: the Argentine way to say it. Arrives with the full feedback, so it fades in. */
-function Local({ feedback }: { feedback: Feedback }) {
-  return (
-    <Appear>
-      <View style={styles.local} accessibilityLabel={`A more Argentine way to say it: ${feedback.better}`}>
-        <Text style={styles.localLabel}>A more Argentine way to say it:</Text>
-        <Text style={styles.localText}>{feedback.better}</Text>
-        {feedback.better_en ? <Text style={styles.correctionWhy}>{feedback.better_en}</Text> : null}
-      </View>
-    </Appear>
   );
 }
 
@@ -1465,7 +1241,7 @@ function SideButton({
 }: {
   icon: IconName;
   label: string;
-  tone?: 'plain' | 'accent';
+  tone?: 'plain' | 'accent' | 'danger';
   busy?: boolean;
   disabled?: boolean;
   onPress: () => void;
@@ -1475,7 +1251,7 @@ function SideButton({
   return (
     <Pressable
       onPress={onPress}
-      disabled={disabled || busy}
+      disabled={!!(disabled || busy)}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
       style={({ pressed }) => [
@@ -1484,11 +1260,16 @@ function SideButton({
         { transform: [{ scale: pressed ? 0.94 : 1 }] },
         webPress,
       ]}>
-      <View style={[styles.sideCircle, tone === 'accent' && { backgroundColor: pastel.butter }]}>
+      <View
+        style={[
+          styles.sideCircle,
+          tone === 'accent' && { backgroundColor: pastel.butter },
+          tone === 'danger' && { backgroundColor: colors.danger },
+        ]}>
         {busy ? (
           <ActivityIndicator size="small" color={fg} />
         ) : (
-          <MaterialCommunityIcons name={icon} size={22} color={fg} />
+          <MaterialCommunityIcons name={icon} size={22} color={tone === 'danger' ? colors.onPrimary : fg} />
         )}
       </View>
       <Text style={styles.sideLabel}>{label}</Text>
@@ -1521,24 +1302,6 @@ function FullMessage({
   );
 }
 
-/** The countdown chip. Ticks on its own, so the chat around it stays still. */
-function ChatTimer({ deadline, heldAt }: { deadline: number; heldAt: number | null }) {
-  const [now, setNow] = useState(Date.now());
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 500);
-    return () => clearInterval(id);
-  }, []);
-  // Stopped: the time left when it stopped, until the deadline moves by the length of the stop.
-  const remaining = deadline ? Math.max(0, deadline - (heldAt ?? now)) : 5 * 60_000;
-  const low = remaining <= 30_000;
-  return (
-    <View style={[styles.timer, low && styles.timerLow]} accessibilityLabel={`Quedan ${fmt(remaining)}`}>
-      <MaterialCommunityIcons name="timer-outline" size={15} color={low ? colors.dangerInk : colors.ink} />
-      <Text style={[styles.timerText, low && { color: colors.dangerInk }]}>{fmt(remaining)}</Text>
-    </View>
-  );
-}
-
 /** The waveform and seconds while she records. Its own component: it redraws
  *  12 times a second, and the whole chat used to redraw with it. */
 function RecordingMeter({ since, level }: { since: number; level: () => number }) {
@@ -1564,7 +1327,7 @@ function RecordingMeter({ since, level }: { since: number; level: () => number }
           <View key={i} style={[styles.waveBar, { height: 4 + l * 20 }]} />
         ))}
       </View>
-      <Text style={[styles.caption, { color: colors.dangerInk }]}>{fmt(seconds * 1000)} · tocá para enviar</Text>
+      <Text style={[styles.caption, { color: colors.dangerInk }]}>{fmt(seconds * 1000)} · tap to send</Text>
     </View>
   );
 }
@@ -1579,6 +1342,44 @@ const DOCK_SHADOW = `0 -2.5px 0 ${colors.ink}`;
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
+  callBg: { backgroundColor: colors.primary },
+  call: { flex: 1, maxWidth: 640, width: '100%', alignSelf: 'center' },
+  callLabel: { ...font.body[700], fontSize: 13, color: colors.onPrimary, opacity: 0.75, textAlign: 'center' },
+  stage: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 24, paddingBottom: 24, gap: 14 },
+  callArt: { width: 240, height: 240 },
+  lineScroll: { flexGrow: 0, maxHeight: 220, alignSelf: 'stretch' },
+  lineWrap: { alignItems: 'center', paddingVertical: 4 },
+  line: {
+    ...font.display[800],
+    fontSize: 24,
+    lineHeight: 31,
+    letterSpacing: -0.2,
+    color: colors.onPrimary,
+    textAlign: 'center',
+  },
+  lineSub: {
+    ...font.body[600],
+    fontSize: 16,
+    lineHeight: 22,
+    color: colors.onPrimary,
+    opacity: 0.8,
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  lineTools: { flexDirection: 'row', gap: 10 },
+  pill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    height: 40,
+    paddingHorizontal: 16,
+    borderRadius: radius.pill,
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.55)',
+  },
+  pillActive: { backgroundColor: colors.onPrimary, borderColor: colors.onPrimary },
+  pillText: { ...font.body[800], fontSize: 14, color: colors.onPrimary },
+  floatCard: { marginHorizontal: 16, marginBottom: 14, gap: 8, padding: 16, borderRadius: radius.lg, backgroundColor: colors.card },
 
   header: {
     flexDirection: 'row',
@@ -1597,155 +1398,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  headerTitle: { flex: 1, minWidth: 0, marginLeft: 4 },
+  headerTitle: { flex: 1, minWidth: 0, alignItems: 'center' },
   headerName: {
     ...font.display[800],
     fontSize: 19,
     lineHeight: 22,
     letterSpacing: -0.2,
-    color: colors.ink,
+    color: colors.onPrimary,
+    textAlign: 'center',
   },
-  headerRole: { ...font.body[700], fontSize: 13, color: colors.muted },
-  timer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: radius.pill,
-    backgroundColor: colors.card,
-    boxShadow: clay.surface,
-  },
-  timerLow: { backgroundColor: colors.dangerSoft },
-  timerText: {
-    ...font.body[800],
-    fontSize: 15,
-    color: colors.ink,
-    fontVariant: ['tabular-nums'],
-  },
-
-  thread: {
-    padding: 16,
-    gap: 14,
-    maxWidth: 640,
-    width: '100%',
-    alignSelf: 'center',
-    paddingBottom: 24,
-  },
-  tomasRow: {
-    flexDirection: 'row',
-    gap: 8,
-    alignItems: 'flex-end',
-    paddingRight: 40,
-  },
-  // Pancho speaks in clay: 26 26 26 8, the tail at his side.
-  tomasBubble: {
-    flexShrink: 1,
-    backgroundColor: colors.card,
-    borderRadius: 26,
-    borderBottomLeftRadius: 8,
-    paddingHorizontal: 17,
-    paddingVertical: 12,
-    gap: 6,
-    boxShadow: clay.surface,
-  },
-  tomasBubbleTools: { paddingBottom: 4 },
-  tomasText: { ...font.body[600], fontSize: 19, lineHeight: 27, color: colors.ink },
-  english: {
-    ...font.body[500],
-    fontSize: 15,
-    lineHeight: 21,
-    color: colors.muted,
-    fontStyle: 'italic',
-  },
-  failed: { ...font.body[700], fontSize: 13, color: colors.dangerInk },
+  headerRole: { ...font.body[700], fontSize: 13, color: colors.onPrimary, opacity: 0.75, textAlign: 'center' },
   thinking: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
     minHeight: 24,
   },
-  thinkingText: { ...font.body[500], fontSize: 15, color: colors.muted, fontStyle: 'italic' },
-  tools: { flexDirection: 'row', gap: 2, marginLeft: -8 },
-  tool: {
-    height: 36,
-    minWidth: 44,
-    paddingHorizontal: 8,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  toolText: { ...font.body[800], fontSize: 14, color: colors.primary },
 
-  userRow: { alignItems: 'flex-end', gap: 8, paddingLeft: 48 },
-  // Hers is rosa clay, the mirror of his: the tail on her side.
-  userBubble: {
-    backgroundColor: colors.primary,
-    borderRadius: 26,
-    borderBottomRightRadius: 8,
-    paddingHorizontal: 17,
-    paddingVertical: 12,
-    boxShadow: clay.button,
-  },
-  userFill: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, borderRadius: 26, borderBottomRightRadius: 8 },
-  checking: {
-    height: 30,
-    paddingHorizontal: 12,
-    justifyContent: 'center',
-    borderRadius: radius.pill,
-    backgroundColor: colors.trough,
-    boxShadow: clay.trough,
-  },
-  correct: { flexDirection: 'row', alignItems: 'center', gap: 5, paddingHorizontal: 4 },
-  correctText: { ...font.body[800], fontSize: 13, color: colors.success },
-  noteText: { ...font.body[700], fontSize: 14, lineHeight: 20, color: colors.muted, flexShrink: 1 },
-  correction: {
-    gap: 6,
-    paddingHorizontal: 14,
-    paddingVertical: 11,
-    borderRadius: 18,
-    borderTopRightRadius: 6,
-    backgroundColor: colors.dangerSoft,
-  },
-  correctionWhy: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.muted },
   /** A correct line that still gets the Argentine way: the card without the red. */
-  correctionPlain: { backgroundColor: colors.card, boxShadow: clay.surface },
-  local: {
-    gap: 3,
-    marginTop: 4,
-    paddingTop: 9,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: colors.border,
-  },
-  localLabel: { ...font.body[700], fontSize: 12, lineHeight: 16, color: colors.muted },
-  localText: { ...font.body[700], fontSize: 17, lineHeight: 24, color: colors.ink },
-  listening: {
-    height: 46,
-    paddingHorizontal: 18,
-    justifyContent: 'center',
-    borderRadius: 26,
-    borderBottomRightRadius: 8,
-    borderWidth: 1.5,
-    borderStyle: 'dashed',
-    borderColor: colors.primary,
-    backgroundColor: colors.card,
-  },
-  userText: { ...font.body[600], fontSize: 19, lineHeight: 27, color: colors.onPrimary },
 
   draftLabel: {
     ...font.body[800],
     fontSize: 13,
     color: colors.muted,
-  },
-  draftBubble: {
-    borderRadius: 26,
-    borderTopRightRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 11,
-    borderWidth: 1.5,
-    borderStyle: 'dashed',
-    borderColor: colors.primary,
-    backgroundColor: colors.card,
   },
   draftText: { ...font.body[600], fontSize: 19, lineHeight: 27, color: colors.ink },
   draftActions: { flexDirection: 'row', gap: 8 },
@@ -1843,13 +1518,6 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     color: colors.ink,
   },
-  typeSwitch: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-    minHeight: 32,
-  },
   side: { width: 72, alignItems: 'center', gap: 4 },
   sideCircle: {
     width: 48,
@@ -1896,15 +1564,23 @@ const styles = StyleSheet.create({
     boxShadow: clay.float,
   },
   noticeText: { ...font.body[700], color: colors.bg, fontSize: 17, lineHeight: 22, textAlign: 'center' },
-
-  sheetBig: {
-    ...font.display[700],
-    fontSize: 21,
-    lineHeight: 27,
-    color: colors.ink,
+  // "2 messages left": a manteca sticker in the notice's place over the dock.
+  linesLeft: { position: 'absolute', bottom: '100%', marginBottom: 14, alignSelf: 'center' },
+  linesLeftPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: radius.pill,
+    backgroundColor: pastel.butter,
+    boxShadow: clay.surface,
   },
+  linesLeftText: { ...font.body[800], fontSize: 16, lineHeight: 21, color: colors.ink, fontVariant: ['tabular-nums'] },
+  dayLeft: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
+  dayLeftText: { ...font.body[800], fontSize: 13, color: colors.muted, fontVariant: ['tabular-nums'] },
+
   sheetBody: { ...font.body[600], fontSize: 15, lineHeight: 22, color: colors.muted },
-  sheetGood: { ...font.body[800], fontSize: 15, color: colors.success },
 
   full: {
     flex: 1,

@@ -118,5 +118,6 @@ export function appleState(tx: AppleTransaction, renewal: AppleRenewal | null, n
     periodType: tx.offerType === 1 ? (tx.offerDiscountType === "FREE_TRIAL" ? "TRIAL" : "INTRO") : "NORMAL",
     signedAt: new Date(Math.max(tx.signedDate, renewal?.signedDate ?? 0)).toISOString(),
     accountId: tx.appAccountToken?.toLowerCase() ?? null,
+    sandbox: tx.environment !== "Production",
   };
 }

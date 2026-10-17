@@ -94,6 +94,22 @@ test('a failed fetch is not remembered', async () => {
   assert.equal(await stored('piece', 'v1', flaky), 'ok');
 });
 
+test('a failed fetch falls back to the phone\'s older copy, and asks again next time', async () => {
+  clearContentCache();
+  setContentDisk(fakeDisk(new Map([['piece', JSON.stringify({ format: CONTENT_FORMAT, version: 'v1', data: 'old' })]])));
+  let n = 0;
+  const flaky = async () => {
+    if (n++ === 0) throw new Error('offline');
+    return 'new';
+  };
+  // v2 is current, but the network failed: the v1 copy stands in.
+  assert.equal(await stored('piece', 'v2', flaky), 'old');
+  await flush();
+  // Not remembered as current: the next load fetches v2.
+  assert.equal(await stored('piece', 'v2', flaky), 'new');
+  assert.equal(n, 2);
+});
+
 test('stamp hashes are stable and short', () => {
   assert.equal(stampHash(['u1', 'u2']), stampHash(['u1', 'u2']));
   assert.notEqual(stampHash(['u1', 'u2']), stampHash(['u2', 'u1']));

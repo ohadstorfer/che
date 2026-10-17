@@ -467,6 +467,8 @@ console.log('\nall migration checks passed');
     '20260505000002_web_push.sql',
     '20260505000003_web_endpoint_unique_constraint.sql',
     '20260514000001_partner_reminders.sql',
+    '20261014000005_claim_push_device.sql',
+    '20261015000040_push_device_claim.sql',
   ]) {
     await pushDb.exec(readFileSync(`${MIG}/${f}`, 'utf8'));
   }
@@ -527,5 +529,50 @@ console.log('\nall migration checks passed');
   // And nobody else's.
   r = await asUser(me, `select count(*)::int as n from push_subscriptions where user_id not in ('${me}', '${partner}')`);
   assert.equal(r.rows[0].n, 0);
+
+  // A partner reads and writes the other's rows only through sync_partner_reminder.
+  r = await asUser(me, `select count(*)::int as n from push_subscriptions where user_id = '${partner}'`);
+  assert.equal(r.rows[0].n, 0);
+  r = await asUser(me, `update push_subscriptions set expo_push_token = 'ExponentPushToken[mine]' where user_id = '${partner}' returning id`);
+  assert.equal(r.rows.length, 0);
+  ok("a partner can neither read nor rewrite the other's push rows");
+
+  // claim_push_device: a phone's row moves to a new account only with its install secret.
+  const stranger = '66666666-6666-4666-8666-666666666666';
+  await pushDb.exec(`insert into auth.users values ('${stranger}')`);
+  const claim = (uid, token, secret) =>
+    asUser(uid, `select claim_push_device('${token}', 'ios', 'UTC', '08:00'${secret === undefined ? '' : `, ${secret === null ? 'null' : `'${secret}'`}`})`);
+  const ownerOf = async (token) =>
+    (await pushDb.query(`select user_id, device_secret_hash from push_subscriptions where expo_push_token = '${token}'`)).rows[0];
+  const SECRET = 'a'.repeat(64);
+
+  await claim(me, 'ExponentPushToken[new]', SECRET);
+  let row = await ownerOf('ExponentPushToken[new]');
+  assert.equal(row.user_id, me);
+  assert.ok(row.device_secret_hash);
+  await assert.rejects(claim(stranger, 'ExponentPushToken[new]'), /another account/);
+  await assert.rejects(claim(stranger, 'ExponentPushToken[new]', 'b'.repeat(64)), /another account/);
+  assert.equal((await ownerOf('ExponentPushToken[new]')).user_id, me);
+  ok('a token alone, or a wrong secret, does not take a phone over');
+
+  await claim(stranger, 'ExponentPushToken[new]', SECRET);
+  assert.equal((await ownerOf('ExponentPushToken[new]')).user_id, stranger);
+  ok('the same install signing in to another account moves its row');
+
+  // A row from before the secret (the 4-argument call old builds make) moves on
+  // the token, and the first claim with a secret seals it.
+  await claim(me, 'ExponentPushToken[old]');
+  assert.equal((await ownerOf('ExponentPushToken[old]')).device_secret_hash, null);
+  await claim(stranger, 'ExponentPushToken[old]', SECRET);
+  row = await ownerOf('ExponentPushToken[old]');
+  assert.equal(row.user_id, stranger);
+  assert.ok(row.device_secret_hash);
+  await assert.rejects(claim(me, 'ExponentPushToken[old]'), /another account/);
+  ok('old builds keep registering, and an unsealed row is sealed by its first secret');
+
+  // The owner re-registering after a reinstall (a new secret) keeps the row.
+  await claim(stranger, 'ExponentPushToken[old]', 'c'.repeat(64));
+  assert.equal((await ownerOf('ExponentPushToken[old]')).user_id, stranger);
+  ok("the owner's own claim always passes and takes the new secret");
   console.log('\nall notification checks passed');
 }

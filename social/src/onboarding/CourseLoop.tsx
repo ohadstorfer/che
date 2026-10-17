@@ -56,7 +56,7 @@ const Chat: Scene = ({f, v}) => {
     {/* she is talking: the dashed bubble, with her voice in it */}
     <div style={{position: 'absolute', right: 60, top: 634, height: 160, padding: '0 60px', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: 13, borderRadius: '80px 80px 22px 80px',
       border: `5px dashed ${C.rosa}`, background: C.card, transformOrigin: '100% 100%', opacity: tween(f, REC + 2, 6) * (1 - tween(f, SAID, 4)), transform: `scale(${0.94 + 0.06 * tween(f, REC + 2, 8)})`}}>
-      <Bars f={f} n={7} w={13} h={72} color={C.rosa} />
+      <Bars f={f} n={7} w={13} h={72} color={C.rosa} speed={0.3} />
     </div>
     {/* her line */}
     <div style={{position: 'absolute', right: 60, top: 634, ...text, color: '#fff', background: C.rosa, padding: '36px 52px', borderRadius: '80px 80px 22px 80px', boxShadow: STICKER,
@@ -70,7 +70,7 @@ const Chat: Scene = ({f, v}) => {
 
     {/* the mic: rosa at rest, durazno with a ring while it listens */}
     <div style={{position: 'absolute', left: 445, top: 1074, width: 190, height: 190, ...rise(f, 5, 40)}}>
-      <Mic size={190} listening={recording} since={f - REC} scale={press(f, REC - 3, 6, 0.06) * press(f, SAID - 3, 6, 0.06)} />
+      <Mic size={190} listening={recording} since={f - REC} period={60} scale={press(f, REC - 3, 6, 0.06) * press(f, SAID - 3, 6, 0.06)} />
     </div>
   </>;
 };
@@ -99,7 +99,7 @@ const Slang: Scene = ({f, v}) => {
 // One question for every learner (the user, 2026-10-11): the asado, and the answer is all of them.
 const QUIZ = {q: 'When do Argentines have an asado?', options: ['Every Sunday', 'Every birthday', 'Every holiday', 'All of the above']};
 const Culture: Scene = ({f}) => {
-  const MOVE = 96, PICK = 111, RIGHT = 120; // the question and the four answers are read first; then the finger sets off, picks the last, and it is right
+  const MOVE = 48, PICK = 61, RIGHT = 68; // the answers land, the finger sets off at once and picks the last, and it is right while the scene still has time to show it
   const picked = tween(f, PICK + 2, 5), right = tween(f, RIGHT, 8);
   const go = tween(f, MOVE, 12, INOUT);
   const pop = spring({frame: f - RIGHT, fps: FPS, config: {damping: 9, stiffness: 190, mass: 0.7}});

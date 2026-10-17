@@ -600,15 +600,14 @@ words:
   - es: grupo
     pos: noun
     en: a lie, nonsense
-    tag: Old-fashioned
-    note: "\"Es grupo\" means it's a lie, not \"group\". Old lunfardo, mostly older people; today people say \"es mentira\" or \"es verso\"."
+    note: "\"Es grupo\" means it's a lie, not \"group\". Old lunfardo that is still everywhere, young people included: \"¿posta o grupo?\", true or made up?"
     example:
       es: Eso es puro grupo, no le creas.
       en: That's all lies, don't believe him.
     gap: grupo
     theme: charla
     vulgar: false
-    level: 3
+    level: 2
   - es: joya
     pos: adj
     en: great, sounds good
@@ -1598,7 +1597,7 @@ words:
     note: Someone who rats people out. In old lunfardo it also meant a cop.
     example:
       es: No le cuentes nada, que es un botón.
-      en: Don't tell him anything, he tells everyone.
+      en: Don't tell him anything, he's a snitch.
     gap: botón
     theme: gente
     vulgar: false

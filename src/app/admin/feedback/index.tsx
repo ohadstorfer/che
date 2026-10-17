@@ -86,6 +86,7 @@ export default function AdminFeedback() {
   return (
     <AdminScreen
       title="Feedback"
+      back="/account"
       subtitle={threads ? `${threads.length} conversations · ${unread} unread` : 'Loading…'}>
       {error ? <Text style={{ color: colors.dangerInk }}>{error}</Text> : null}
 

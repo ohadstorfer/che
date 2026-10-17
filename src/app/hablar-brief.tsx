@@ -12,6 +12,7 @@ import {
   bandOf,
   bandsOf,
   chatLength,
+  COURSE_CHATS_PER_DAY,
   findScenario,
   getDefaultLevel,
   type HablarKind,
@@ -30,10 +31,10 @@ import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, pastel, radius } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
-// The brief (§2.2): what she's walking into, before the clock starts. Every
+// The brief (§2.2): what she's walking into, before the chat starts. Every
 // tutor studied shows one — it's what removes the "what do I even say?"
 // freeze. One pastel sticker holds what it is: Pancho, the title and the three
-// facts (how long, tap to talk, hints). How hard it should be is decided at
+// facts (how many messages, tap to talk, hints). How hard it should be is decided at
 // the bottom, over the button: easier / harder around the level's name, which
 // swaps the scenario's version in place. One button; the chat starts when she presses
 // it, and the level she plays becomes the Speaking tab's default.
@@ -87,9 +88,19 @@ export default function HablarBrief() {
     try {
       const res = await start({ kind, topic_id: scenario?.id ?? null, lesson_id: lessonId ?? null, level: played });
       if ('paywall' in res) return void router.replace(lessonId ? '/paywall?from=lesson' : '/paywall?from=hablar');
+      // A chat of hers is still open (or this unit's is): back into it.
+      if ('open' in res) return void router.replace(`/hablar-chat?session=${res.open}`);
+      // A unit chat is had once: what came of it.
       if ('doneToday' in res) {
         if (res.summaryId) router.replace(`/hablar-summary?session=${res.summaryId}`);
         else router.dismissTo('/hablar');
+        return;
+      }
+      // The day's chats are used: the tab says so, and when they come back.
+      if ('dailyLimit' in res) return void router.dismissTo('/hablar');
+      if ('courseBreak' in res) {
+        setError(`Pancho needs a break: you've had ${COURSE_CHATS_PER_DAY} chats with him today. This one opens again tomorrow.`);
+        setStarting(false);
         return;
       }
       if (!lessonId) setDefaultLevel(isBand(res.level) ? res.level : played);
@@ -134,7 +145,7 @@ export default function HablarBrief() {
             {title}
           </Text>
           <View style={styles.rules}>
-            <Rule icon="timer-outline" text={chatLength(played)} />
+            <Rule icon="chat-outline" text={chatLength(kind)} />
             <Rule icon="microphone-outline" text="Tap to talk" />
             <Rule icon="lightbulb-on-outline" text="3 hints" />
           </View>

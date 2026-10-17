@@ -287,6 +287,9 @@ export function AppHeader({
       : status.kind === "alive" || status.kind === "recovering"
         ? status.days
         : 0;
+  // Lit only once today's round is in — until then the chip waits in cream
+  // with an ash flame, the same as the widget.
+  const lit = status?.kind === "alive" && status.today;
 
   return (
     <View style={[styles.header, { paddingTop: 12 + insets.top }]}>
@@ -348,16 +351,18 @@ export function AppHeader({
             </View>
           ) : (
             <View
-              style={styles.chip}
+              style={[styles.chip, !lit && styles.chipUnlit]}
               accessible
-              accessibilityLabel={`${days} day streak`}
+              accessibilityLabel={
+                lit ? `${days} day streak` : `${days} day streak. Not practised today`
+              }
             >
-              {/* A flame filled in its own orange, outlined in ink so it holds on the durazno. */}
+              {/* A flame filled in its own orange, outlined in ink so it holds on the butter. */}
               <View style={styles.flame}>
                 <Ionicons
                   name="flame"
                   size={20}
-                  color={pastel.flame}
+                  color={lit ? pastel.flame : pastel.flameOff}
                   style={StyleSheet.absoluteFill}
                 />
                 <Ionicons
@@ -499,6 +504,8 @@ const styles = StyleSheet.create({
     // A sticker, slapped on a little crooked.
     transform: [{ rotate: "3deg" }],
   },
+  /** Today still open: cream instead of butter, like the widget's chip. */
+  chipUnlit: { backgroundColor: colors.card },
   flame: { width: 20, height: 20 },
   chipText: {
     ...font.display[900],

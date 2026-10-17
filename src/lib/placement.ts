@@ -14,8 +14,8 @@ import type { Form, Section, Sentence, Unit } from './types';
 //
 //  - placement (onboarding): walks the course a section at a time, from the
 //    level she said she has. A section is three questions from three units
-//    spread across it; passing it (at most one miss) moves up a section,
-//    failing it stops the walk — or, when it was the first one asked, walks
+//    spread across it; passing it (at most one miss, and at most two in the
+//    whole walk) moves up a section, failing it stops the walk — or, when it was the first one asked, walks
 //    down until one passes. She lands on the first unit of the lowest section
 //    she failed. Each section's sentences are fetched as the walk gets there,
 //    so the test never downloads the course.
@@ -272,6 +272,23 @@ export const placementMaxStages = () => Math.floor(PLACEMENT_MAX_ITEMS / PLACEME
 export function sectionPassed(credits: number[]): boolean {
   const right = credits.reduce((sum, c) => sum + c, 0);
   return credits.length - right <= PLACEMENT_MISSES_ALLOWED && right >= 2;
+}
+
+/** Misses the whole walk up forgives: a slip in every section is not knowing
+ *  them, so the one that goes past this ends the walk there. */
+export const PLACEMENT_WALK_MISSES_ALLOWED = 2;
+
+/**
+ * Whether the section just asked passes: by its own answers, and on the way up
+ * by the walk's too — every answer so far, this section's included. A walk down
+ * from a failed first section is past the limit already, so there only the
+ * section's own answers count.
+ */
+export function stagePassed(own: number[], all: number[], results: WalkResults): boolean {
+  if (!sectionPassed(own)) return false;
+  const walkingUp = [...results.values()].every(Boolean);
+  const missed = all.reduce((sum, c) => sum + (1 - c), 0);
+  return !walkingUp || missed <= PLACEMENT_WALK_MISSES_ALLOWED + 1e-9;
 }
 
 /** Sections asked so far, by index in the course: whether she passed each. */

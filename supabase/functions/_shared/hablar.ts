@@ -113,7 +113,26 @@ export const publicAudioUrl = (supabaseUrl: string, path: string | null | undefi
 };
 
 // ---------------------------------------------------------------------------
+// Limits (the "Chat limits UX" canvas, 20261016000001_hablar_chat_limits.sql).
+// A Speaking-tab chat is three a day and eight lines long; a unit chat is had
+// once, outside the day's count, with a high cap on how many fit in a day.
+// ---------------------------------------------------------------------------
+
+/** Speaking-tab chats a day (the database's day_slot check agrees). */
+export const CHATS_PER_DAY = 3;
+/** Lines she says in a Speaking-tab chat; Pancho's answer to the last one closes it. */
+export const TAB_MESSAGES = 8;
+/** Unit chats a day before Pancho "needs a break". */
+export const COURSE_CHATS_PER_DAY = 3;
+
+/** The lines a chat allows her: eight on the Speaking tab; a unit chat runs on the exchange nudges alone. */
+export const messageCap = (s: { kind: string }): number | null => (s.kind === "unit" ? null : TAB_MESSAGES);
+
+// ---------------------------------------------------------------------------
 // The clock (§4.5 step 2). The server decides; the client timer is a display.
+// Since the chat limits a chat is measured in lines, and the clock is only a
+// backstop for one left running: ten minutes of her own time (Pancho's turn
+// and the app in the background don't count). The app no longer shows it.
 // ---------------------------------------------------------------------------
 
 /** A chat's clock, in seconds of chat time, and the exchange count that nudges Pancho to close. */
@@ -127,9 +146,10 @@ export type Clock = {
   /** The same nudge as `closeSoon`, by exchanges: a chat shouldn't drag even with time left. */
   closeSoonExchanges: number;
 };
-const SHORT: Clock = { closeSoon: 100, wrap: 150, stop: 180, closeSoonExchanges: 6 };
-// Beginners speak slowly and Pancho answers them slowly: on the short clock they got three or four turns.
-const LONG: Clock = { closeSoon: 170, wrap: 210, stop: 240, closeSoonExchanges: 8 };
+const BACKSTOP = { closeSoon: 480, wrap: 540, stop: 600 };
+const SHORT: Clock = { ...BACKSTOP, closeSoonExchanges: 6 };
+// Beginners speak slowly: a unit chat nudges them to close two exchanges later.
+const LONG: Clock = { ...BACKSTOP, closeSoonExchanges: 8 };
 /** The only place the numbers live on the server (the app's chatSeconds mirrors `stop`). */
 export const CLOCK: Record<Band, Clock> = { A1: LONG, A2: LONG, B1: SHORT, B2: SHORT };
 /** A level's clock; an unknown level gets the short one. */
@@ -170,22 +190,25 @@ export function mergePaused(stored: number, reported: unknown): number {
 }
 
 // Pancho decides when the chat ends (the END_MARKER on his goodbye). These
-// nudge him when he hasn't: by time, or by exchanges — the only nudge a
-// clockless staff chat gets, and what keeps a beginner's longer chat from dragging.
+// nudge him when he hasn't: by the chat's line cap (a Speaking-tab chat), by
+// exchanges (a unit chat, and what keeps a beginner's chat from dragging), or
+// by the backstop clock.
 const WRAP_EXCHANGES = 10;
+/** How many lines before the cap Pancho is told to start closing (the app shows "2 messages left"). */
+export const CLOSE_SOON_BEFORE_CAP = 2;
 
 /** The learner's nth line, from its idx (opener 0, learner lines 1, 3, 5…). */
 export const exchangeOf = (userIdx: number) => Math.ceil(userIdx / 2);
 
-/** Must this reply close the chat? At the level's wrap time, or after ten exchanges. */
-export function shouldWrapUp(elapsed: number, exchange: number, level: Band): boolean {
-  return elapsed >= clockOf(level).wrap || exchange >= WRAP_EXCHANGES;
+/** Must this reply close the chat? At her last line (`cap`), after ten exchanges, or at the backstop's wrap time. */
+export function shouldWrapUp(elapsed: number, exchange: number, level: Band, cap: number | null = null): boolean {
+  return elapsed >= clockOf(level).wrap || exchange >= (cap ?? WRAP_EXCHANGES);
 }
 
-/** Should Pancho be told it's about time to close? By time, or by exchanges (six; eight for a beginner). */
-export function shouldCloseSoon(elapsed: number, exchange: number, level: Band): boolean {
+/** Should Pancho be told it's about time to close? Two lines before the cap; else by exchanges (six; eight for a beginner); or by time. */
+export function shouldCloseSoon(elapsed: number, exchange: number, level: Band, cap: number | null = null): boolean {
   const clock = clockOf(level);
-  return elapsed >= clock.closeSoon || exchange >= clock.closeSoonExchanges;
+  return elapsed >= clock.closeSoon || exchange >= (cap === null ? clock.closeSoonExchanges : cap - CLOSE_SOON_BEFORE_CAP);
 }
 
 // ---------------------------------------------------------------------------
@@ -488,6 +511,7 @@ export type Usage = {
   input_tokens?: number | null;
   output_tokens?: number | null;
   cache_read_tokens?: number | null;
+  cache_write_tokens?: number | null;
   audio_seconds?: number | null;
   tts_chars?: number | null;
   ms?: number | null;
@@ -495,8 +519,13 @@ export type Usage = {
 
 /** Usage rows from an Anthropic response's usage block. */
 export function claudeUsage(
-  base: Omit<Usage, "provider" | "input_tokens" | "output_tokens" | "cache_read_tokens">,
-  usage: { input_tokens?: number | null; output_tokens?: number | null; cache_read_input_tokens?: number | null } | undefined,
+  base: Omit<Usage, "provider" | "input_tokens" | "output_tokens" | "cache_read_tokens" | "cache_write_tokens">,
+  usage: {
+    input_tokens?: number | null;
+    output_tokens?: number | null;
+    cache_read_input_tokens?: number | null;
+    cache_creation_input_tokens?: number | null;
+  } | undefined,
 ): Usage {
   return {
     ...base,
@@ -504,6 +533,7 @@ export function claudeUsage(
     input_tokens: usage?.input_tokens ?? null,
     output_tokens: usage?.output_tokens ?? null,
     cache_read_tokens: usage?.cache_read_input_tokens ?? null,
+    cache_write_tokens: usage?.cache_creation_input_tokens ?? null,
   };
 }
 

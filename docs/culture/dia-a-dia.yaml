@@ -95,7 +95,7 @@ classes:
         correct: 0
         explain: "Low lights on, day and night, on every **ruta**. A ruta is a road between towns; inside the city it's a street or an avenue."
       - type: card
-        text: "You don't fill the tank yourself. At the **estación de servicio** a worker does it. Gas for the car is **nafta**, and you say **“Llenalo, por favor”**: fill it up."
+        text: "You usually don't fill the tank yourself. Self-service has been allowed since 2025, but at most **estaciones de servicio** a worker still does it. Gas for the car is **nafta**, and you say **“Llenalo, por favor”**: fill it up."
       - type: choice
         prompt: "Many service stations have a machine made just for travelers. What does it give?"
         options:

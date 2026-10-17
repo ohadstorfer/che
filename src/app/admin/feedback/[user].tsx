@@ -112,9 +112,9 @@ export default function AdminFeedbackThread() {
                     return (
                       <Pressable key={p} onPress={() => url && Linking.openURL(url)} accessibilityLabel="Open screenshot">
                         {url ? (
-                          <Image source={{ uri: url }} style={styles.shot} contentFit="cover" />
+                          <Image source={{ uri: url }} style={[styles.shot, shotShape(m.context)]} contentFit="cover" />
                         ) : (
-                          <View style={[styles.shot, { backgroundColor: colors.stone }]} />
+                          <View style={[styles.shot, shotShape(m.context), { backgroundColor: colors.stone }]} />
                         )}
                       </Pressable>
                     );
@@ -157,6 +157,12 @@ export default function AdminFeedbackThread() {
 /** "/practice · v1.0.0 · iPhone 15 · iOS 18.2" */
 function describe(c: FeedbackContext) {
   return [c.route, c.app ? `v${c.app}` : null, c.device, c.os ?? c.platform, c.screen].filter(Boolean).join(' · ');
+}
+
+/** The thumbnail in the shape of her screen ("435×725"), so cover crops nothing. */
+function shotShape(c: FeedbackContext | null) {
+  const [w, h] = (c?.screen ?? '').split('×').map(Number);
+  return w > 0 && h > 0 ? { height: undefined, aspectRatio: w / h } : null;
 }
 
 const styles = StyleSheet.create({

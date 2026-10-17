@@ -38,7 +38,7 @@ import {
   nextStage,
   placementOutcome,
   placementStage,
-  sectionPassed,
+  stagePassed,
   testOutcome,
 } from '@/lib/placement';
 import {
@@ -108,6 +108,9 @@ interface Walk {
   stage: number;
   cutShort: boolean;
 }
+
+/** A placement opened by someone who has finished a lesson: it sends her home. */
+class PlacementClosedError extends Error {}
 
 export default function Practice() {
   // The gradient is inverted — pale at the top edge — so the strip above
@@ -195,6 +198,9 @@ export default function Practice() {
         const [course, done] = await Promise.all([loadCourse(), loadProgress(userId)]);
         const units = course.units;
         if (testMode === 'placement') {
+          // Only before her first lesson: once she is on the road, a jump test
+          // from where she stands is the way ahead.
+          if (done.size > 0) throw new PlacementClosedError();
           // Starts at the level she gave in onboarding, and fetches a section's
           // sentences only when the walk gets to it.
           const answers = await loadAnswers();
@@ -288,6 +294,7 @@ export default function Practice() {
       clearTimeout(calledOff);
       if (cancelled) return;
       if (e instanceof LessonLockedError) router.replace('/paywall?from=lesson');
+      else if (e instanceof PlacementClosedError) router.replace('/home');
       else {
         console.warn('lesson failed to load', e);
         // Whatever it was, it says so rather than spinning for good.
@@ -509,9 +516,14 @@ export default function Practice() {
   const nextSection = async (w: Walk, asked: QueueItem[]) => {
     if (stagingNow.current || finishing.current) return;
     const own = new Set(w.session.sections[w.stage]?.units.map((u) => u.id));
+    const answers = round.testAnswers.current;
     w.results.set(
       w.stage,
-      sectionPassed(round.testAnswers.current.filter((a) => own.has(a.unitId)).map((a) => a.credit)),
+      stagePassed(
+        answers.filter((a) => own.has(a.unitId)).map((a) => a.credit),
+        answers.map((a) => a.credit),
+        w.results,
+      ),
     );
     const to = nextStage(w.session.sections.length, w.session.start, w.results);
     if (to == null) return void finish();

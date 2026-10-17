@@ -5,7 +5,9 @@
 // Metro picks this file on native and native-push.ts on web, so
 // expo-notifications is never bundled for the browser.
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
+import * as ExpoCrypto from 'expo-crypto';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
@@ -36,6 +38,19 @@ async function token(): Promise<string> {
   return (await Notifications.getExpoPushTokenAsync({ projectId })).data;
 }
 
+/** This install's own secret, sent with every claim of its push token: the
+ *  server moves the token's row to another account only with it, so knowing
+ *  a token alone doesn't take a phone's reminders over (claim_push_device). */
+const SECRET_KEY = 'posta.push-device-secret';
+
+async function deviceSecret(): Promise<string> {
+  const kept = await AsyncStorage.getItem(SECRET_KEY).catch(() => null);
+  if (kept) return kept;
+  const made = Array.from(ExpoCrypto.getRandomBytes(32), (b) => b.toString(16).padStart(2, '0')).join('');
+  await AsyncStorage.setItem(SECRET_KEY, made);
+  return made;
+}
+
 export async function getNativePushStatus(): Promise<PushStatus> {
   if (!Device.isDevice) return 'unsupported';
   const { status } = await Notifications.getPermissionsAsync();
@@ -62,26 +77,15 @@ export async function enableNativePush(userId: string): Promise<PushStatus> {
   if (status !== 'granted') return 'off';
   const t = await token();
   // The token may still be on an account that was signed in on this phone
-  // before; the server moves it to this one (claim_push_device).
-  const claimed = await supabase.rpc('claim_push_device', {
+  // before; the server moves it to this one when this install's secret
+  // matches (claim_push_device).
+  const { error } = await supabase.rpc('claim_push_device', {
     p_token: t,
     p_platform: Platform.OS === 'ios' ? 'ios' : 'android',
     p_timezone: deviceTimezone(),
     p_reminder_time: REMINDER_TIME,
+    p_device_secret: await deviceSecret(),
   });
-  if (!claimed.error) return 'enabled';
-  // Not deployed yet: the plain upsert, which covers a token no one else has.
-  const { error } = await supabase.from('push_subscriptions').upsert(
-    {
-      user_id: userId,
-      platform: Platform.OS === 'ios' ? 'ios' : 'android',
-      expo_push_token: t,
-      reminder_time: REMINDER_TIME,
-      timezone: deviceTimezone(),
-      notifications_enabled: true,
-    },
-    { onConflict: 'expo_push_token' },
-  );
   if (error) throw error;
   return 'enabled';
 }

@@ -1,6 +1,6 @@
 import { useVideoPlayer, type VideoSource, VideoView } from 'expo-video';
 import { useFocusEffect } from 'expo-router';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { clay, colors } from '@/lib/theme';
@@ -86,22 +86,43 @@ export function ClipCard({
     }, [player, reduced]),
   );
 
+  // Sized to the space it is given, both ways: on a short screen (a OnePlus at
+  // 435×725) a full-width card is taller than its slot and covers the title.
+  const [space, setSpace] = useState<{ width: number; height: number } | null>(null);
+  const width = space ? Math.min(space.width, MAX_WIDTH, space.height * RATIO) : undefined;
+
   return (
-    // The sticker shadow sits on the outer frame, the clipping on the inner one:
-    // on iOS a shadow on a view that clips is clipped with it.
-    <View style={styles.frame} accessible accessibilityRole="image" accessibilityLabel={label}>
-      <View style={styles.clip}>
-        <VideoView player={player} style={StyleSheet.absoluteFill} contentFit="cover" nativeControls={false} allowsPictureInPicture={false} />
+    <View style={styles.space} onLayout={(e) => setSpace(e.nativeEvent.layout)}>
+      {/* The sticker shadow sits on the outer frame, the clipping on the inner
+          one: on iOS a shadow on a view that clips is clipped with it. */}
+      <View style={[styles.frame, width != null && { width }]} accessible accessibilityRole="image" accessibilityLabel={label}>
+        <View style={styles.clip}>
+          {/* A TextureView, not Android's default SurfaceView: it keeps to the
+              rounded corners, and the feedback screenshot can see it (a
+              SurfaceView comes out as a black box). */}
+          <VideoView
+            player={player}
+            style={StyleSheet.absoluteFill}
+            contentFit="cover"
+            nativeControls={false}
+            allowsPictureInPicture={false}
+            surfaceType="textureView"
+          />
+        </View>
       </View>
     </View>
   );
 }
 
+const MAX_WIDTH = 342;
+const RATIO = 342 / 428;
+
 const styles = StyleSheet.create({
+  space: { flex: 1, justifyContent: 'center' },
   frame: {
     width: '100%',
-    maxWidth: 342,
-    aspectRatio: 342 / 428,
+    maxWidth: MAX_WIDTH,
+    aspectRatio: RATIO,
     alignSelf: 'center',
     borderRadius: 34,
     backgroundColor: colors.bg,

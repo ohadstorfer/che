@@ -157,9 +157,9 @@ export const Loop: React.FC<{total: number; Take: React.FC<{f: number}>; at?: (f
 };
 
 // --- the chat's pieces (src/app/hablar-chat.tsx) ---------------------------------
-/** A voice: bars that move with the frame. `live` 0 = at rest. */
-export const Bars: React.FC<{f: number; n: number; w: number; h: number; color: string; live?: number}> = ({f, n, w, h, color, live = 1}) => <>
-  {Array.from({length: n}, (_, k) => <div key={k} style={{width: w, height: h, borderRadius: Math.ceil(w / 2), background: color, transform: `scaleY(${0.3 + 0.7 * live * Math.abs(Math.sin(f * 0.55 + k * 1.9))})`}} />)}
+/** A voice: bars that move with the frame. `live` 0 = at rest; `speed` scales how fast they move (1 = talking pace). */
+export const Bars: React.FC<{f: number; n: number; w: number; h: number; color: string; live?: number; speed?: number}> = ({f, n, w, h, color, live = 1, speed = 1}) => <>
+  {Array.from({length: n}, (_, k) => <div key={k} style={{width: w, height: h, borderRadius: Math.ceil(w / 2), background: color, transform: `scaleY(${0.3 + 0.7 * live * Math.abs(Math.sin(f * 0.55 * speed + k * 1.9))})`}} />)}
 </>;
 /** Pancho, head and shoulders, on his butter disc. */
 export const Avatar: React.FC<{size: number}> = ({size}) => (
@@ -167,9 +167,9 @@ export const Avatar: React.FC<{size: number}> = ({size}) => (
     <Img src={staticFile('pancho/saludando.png')} style={{height: Math.round(size * 1.73), marginTop: Math.round(size * 0.06)}} />
   </div>
 );
-/** The mic, filling its parent: rosa at rest; durazno, with a ring going out, while it listens. `since` counts frames from when it began to. */
-export const Mic: React.FC<{size: number; listening: boolean; since: number; scale: number}> = ({size, listening, since, scale}) => {
-  const ring = (since % 30) / 30;
+/** The mic, filling its parent: rosa at rest; durazno, with a ring going out, while it listens. `since` counts frames from when it began to; `period` is one ring's length in frames. */
+export const Mic: React.FC<{size: number; listening: boolean; since: number; scale: number; period?: number}> = ({size, listening, since, scale, period = 30}) => {
+  const ring = (since % period) / period;
   return <>
     {listening ? <div style={{position: 'absolute', inset: 0, borderRadius: size / 2, background: C.accent, opacity: 0.45 * (1 - ring), transform: `scale(${1 + 0.45 * ring})`}} /> : null}
     <div style={{position: 'absolute', inset: 0, borderRadius: size / 2, background: listening ? C.accent : C.rosa, boxShadow: STICKER, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: `scale(${scale})`}}>

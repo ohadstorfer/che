@@ -68,7 +68,7 @@ per edit (migration `20260929000004`). The call answers in ~5 ms warm.
 
 1. **Memory** — if the entry for `name` is already in memory with this `version`, use it. (No
    30-minute expiry any more for versioned entries; the version is the expiry.)
-2. **Disk** — else read `<documents>/content/<name>.json`. If its `version` matches (or no version
+2. **Disk** — else read `<cache>/content/<name>.json`. If its `version` matches (or no version
    could be had — offline, signed out, demo), use it.
 3. **Network** — else `fetch()`, keep in memory, and write to disk (fire-and-forget) when a version
    is known.
@@ -77,7 +77,14 @@ per edit (migration `20260929000004`). The call answers in ~5 ms warm.
 up a publish within ~10 minutes (5 cron + 5 memo) and an app reopened after hours re-checks on its
 first load. Failure → `null` → step 2's "no version" rule, then the old 30-minute memory expiry.
 
-Disk is `expo-file-system` (already used for audio clips in `audio.ts`) on the phones, and
+4. **Fetch failed** — if the phone holds the piece at an older version, that copy is used and not
+   remembered, so the next load asks again. Only with no copy at all does the failure reach the
+   caller.
+
+Disk is `expo-file-system` (already used for audio clips in `audio.ts`) on the phones, in the
+cache folder (`<cache>/content/`, not documents: iOS backs documents up to iCloud, and content the
+app can fetch again doesn't belong there; builds before 2026-10-15 kept it in documents, and that
+copy is deleted on first use), and
 IndexedDB (database `content`, store `files`) on the web — localStorage's few MB can't hold the
 course and the lexicon, and without a copy the PWA paged the whole course down on every launch.
 Node tests have no disk (they hand one in with `setContentDisk`). Files carry a `format` number;
@@ -128,7 +135,11 @@ A content fix refreshes only the affected block, for learners who have it.
 - Offline: saved blocks open; progress writes still need a connection.
 - Signed out / demo backend: no version → disk if present, else network with the old expiry.
 - App update with a new row shape: `CONTENT_FORMAT` bump invalidates every file.
-- Storage failure (full disk, OS cleared files): behaves as if nothing were saved.
+- Storage failure (full disk, OS cleared the cache): behaves as if nothing were saved.
+- A failed fetch (weak network): the phone's older copy of that piece if it has one (§2.2 step 4);
+  the course, the tallies and the sentence load are each tried once more a second later
+  (`twice` in `session.ts`). Only then does the class fall back to every sentence, the 24 MB
+  download — which a network blip used to trigger directly.
 - Course reshaped (unit added mid-course): block membership changes → new name → new file.
 
 ## 5. Not in scope (later, if wanted)

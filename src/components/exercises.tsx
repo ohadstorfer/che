@@ -22,7 +22,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 
-import { ExerciseFrame, type Verdict } from '@/components/exercise-frame';
+import { ExerciseFrame, TightContext, type Verdict } from '@/components/exercise-frame';
 import { WrongAnswerActions } from '@/components/wrong-answer-actions';
 import { Panel } from '@/components/ui';
 import { type Anchor, WordPopover, measureAnchor } from '@/components/word-popover';
@@ -614,6 +614,20 @@ const TAIL_H = TAIL * 2 + 8;
 /** The sun behind the capybara. */
 const SPEAKER_SUN = 150;
 
+/**
+ * 1 while the capybara is in, 0 once the keyboard has left no room for him
+ * (see `TightContext`). He fades and his space closes together, in step with
+ * the keyboard, so the field slides up rather than jumping.
+ */
+function useMakeRoom() {
+  const tight = useContext(TightContext);
+  const shown = useSharedValue(tight ? 0 : 1);
+  useEffect(() => {
+    shown.set(withTiming(tight ? 0 : 1, { duration: 200, easing: Easing.out(Easing.cubic) }));
+  }, [tight, shown]);
+  return shown;
+}
+
 export function SpeechBubble({
   children,
   replies,
@@ -624,9 +638,17 @@ export function SpeechBubble({
   replies?: React.ReactNode[];
 }) {
   const [speaker] = useState(() => SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
+  // Out of the way, he gives the bubble his width, so a long line wraps less.
+  const shown = useMakeRoom();
+  const speakerRoom = useAnimatedStyle(() => ({
+    opacity: shown.get(),
+    width: SPEAKER_WIDTH * shown.get(),
+    marginRight: -12 * (1 - shown.get()),
+  }));
+  const tailRoom = useAnimatedStyle(() => ({ opacity: shown.get() }));
   const said = (
     <View style={styles.speechRow}>
-      <View>
+      <Animated.View style={speakerRoom} pointerEvents="none">
         <FlagSun size={SPEAKER_SUN} style={styles.speakerSun} />
         <Image
           source={speaker}
@@ -635,11 +657,11 @@ export function SpeechBubble({
           contentPosition={{ left: 0 }}
           accessible={false}
         />
-      </View>
+      </Animated.View>
       <View style={styles.bubbleWrap}>
         <Panel style={styles.bubble}>{children}</Panel>
         {/* After the panel, so it paints over the outline where the two join. */}
-        <View style={styles.speechTail} pointerEvents="none">
+        <Animated.View style={[styles.speechTail, tailRoom]} pointerEvents="none">
           <Svg width={TAIL_W} height={TAIL_H}>
             <SvgPath d={`M ${TAIL_W} 4 L 3 ${TAIL_H / 2} L ${TAIL_W} ${TAIL_H - 4} Z`} fill={pastel.butter} />
             <SvgPath
@@ -651,7 +673,7 @@ export function SpeechBubble({
               strokeLinecap="butt"
             />
           </Svg>
-        </View>
+        </Animated.View>
       </View>
     </View>
   );
@@ -720,6 +742,10 @@ function SpanishBubble({ sentence, ...line }: React.ComponentProps<typeof Senten
   );
 }
 
+/** The capybara beside a read card's play button, and the sun behind him. */
+const PHRASE_FIGURE = 88;
+const PHRASE_SUN = 120;
+
 function useSpeaker() {
   const [speaker] = useState(() => SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
   return speaker;
@@ -728,24 +754,73 @@ function useSpeaker() {
 /**
  * A sentence as the star of the screen: a butter card with the capybara
  * peeking over its top edge, the way the bubble has him beside it. `center`
- * puts him in the middle (a sentence being read), otherwise he leans from the
- * left (a sentence being completed).
+ * is a sentence being read: he sits inside the card instead, beside its play
+ * button (`beside`), so he costs no height of his own. Otherwise he leans from
+ * the left (a sentence being completed).
  */
-function PhraseCard({ center, children }: { center?: boolean; children: React.ReactNode }) {
+function PhraseCard({
+  center,
+  beside,
+  children,
+}: {
+  center?: boolean;
+  beside?: React.ReactNode;
+  children: React.ReactNode;
+}) {
   const speaker = useSpeaker();
+  if (center) {
+    return (
+      <View style={[styles.phraseCard, styles.phraseCardCentered]}>
+        {/* The play button stays on the sentence's centre line; he stands just left of it, facing it. */}
+        <View style={styles.phraseCardHead}>
+          <View pointerEvents="none" style={styles.phraseCardBeside}>
+            <FlagSun size={PHRASE_SUN} color={colors.card} opacity={0.7} style={styles.phraseCardSun} />
+            <Image source={speaker} style={styles.phraseCardFigure} contentFit="contain" accessible={false} />
+          </View>
+          {beside}
+        </View>
+        {children}
+      </View>
+    );
+  }
+  return <PeekCard speaker={speaker}>{children}</PeekCard>;
+}
+
+/** PhraseCard's leaning capybara: how big he is, how far he sinks into the
+ *  card, and so how much of him stands above it. The card's top margin is that,
+ *  less the bit that may reach into the gap under the prompt. */
+const PEEK = 84;
+const PEEK_SINK = 24;
+const PEEK_MARGIN = PEEK - PEEK_SINK - 20;
+const PEEK_PAD = 32;
+
+/** PhraseCard's leaning capybara. Short of room, he goes and the card moves up
+ *  into the space he leaned over, closing to a read card's top. */
+function PeekCard({ speaker, children }: { speaker: number; children: React.ReactNode }) {
+  const shown = useMakeRoom();
+  const room = useAnimatedStyle(() => ({ marginTop: 8 + (PEEK_MARGIN - 8) * shown.get() }));
+  const cardRoom = useAnimatedStyle(() => ({ paddingTop: 22 + (PEEK_PAD - 22) * shown.get() }));
+  const peekRoom = useAnimatedStyle(() => ({ opacity: shown.get() }));
   return (
-    <View style={[styles.phraseCard, center && { paddingTop: 44 }]}>
-      <View pointerEvents="none" style={[styles.phraseCardPeek, center && { left: '50%', marginLeft: -59 }]}>
-        <FlagSun size={144} style={{ left: -13, top: -6 }} />
+    <Animated.View style={room}>
+      <Animated.View style={[styles.phraseCard, styles.peekCard, cardRoom]}>
+        {/* The sun stays inside, behind the card's outline. */}
+        <Animated.View pointerEvents="none" style={[styles.phraseCardPeek, peekRoom]}>
+          <FlagSun size={PEEK * 1.29} style={{ left: -PEEK * 0.12, top: -PEEK * 0.05 }} />
+        </Animated.View>
+        {children}
+      </Animated.View>
+      {/* He comes after the card, so its outline (a shadow, painted over the
+          card's own children) runs behind him instead of through him. */}
+      <Animated.View pointerEvents="none" style={[styles.phraseCardPeek, styles.peekFigure, peekRoom]}>
         <Image
           source={speaker}
-          style={{ position: 'absolute', left: 3, bottom: 0, width: 112, height: 112, transform: [{ scaleX: -1 }] }}
+          style={{ position: 'absolute', left: 3, bottom: 0, width: PEEK, height: PEEK, transform: [{ scaleX: -1 }] }}
           contentFit="contain"
           accessible={false}
         />
-      </View>
-      {children}
-    </View>
+      </Animated.View>
+    </Animated.View>
   );
 }
 
@@ -1732,12 +1807,15 @@ function WordBuild({
   const toSpanish = item.direction === 'en_to_es';
   const field = toSpanish ? 'form' : 'gloss_en';
   const target = labelOf(form, field);
+  // Whether she builds from words or from letters goes by what she builds, not
+  // by the Spanish: "una masa" means "great", one word, so its tiles are letters.
+  const byWords = isPhrase(target);
 
   const [{ tiles }] = useState(() => buildTiles(target, wordPool(form, allForms, field)));
   const [used, setUsed] = useState<number[]>([]);
   const [verdict, setVerdict] = useState<Verdict>(null);
 
-  const joined = used.map((i) => tiles[i]).join(phrase ? ' ' : '');
+  const joined = used.map((i) => tiles[i]).join(byWords ? ' ' : '');
   const prompt = phrase
     ? toSpanish
       ? 'Translate this phrase'
@@ -1770,7 +1848,7 @@ function WordBuild({
         used={used}
         setUsed={setUsed}
         locked={verdict !== null}
-        ruled={phrase}
+        ruled={byWords}
       />
     </Frame>
   );
@@ -2058,7 +2136,7 @@ export function SentenceLine({
   return (
     // A reply's bubble is as wide as what is said in it, so its line can't
     // be the one that stretches.
-    <View style={turn ? styles.replyText : styles.bubbleText}>
+    <View style={turn ? styles.replyText : large ? styles.cardText : styles.bubbleText}>
       {rows.map((row) => (
       <View key={row} style={[styles.tokenRow, large && styles.tokenRowCentered]}>
         {sentence.tokens.map((t, i) => {
@@ -2249,8 +2327,7 @@ function SentenceIntro({
           hearing it gives nothing away — it binds the sound to the spelling,
           which is the whole reason the sentence is read rather than shown. */}
       {turnCount(sentence.tokens) < 2 ? (
-        <PhraseCard center>
-          {sentence.audio_path ? <PlayButton path={sentence.audio_path} big /> : null}
+        <PhraseCard center beside={sentence.audio_path ? <PlayButton path={sentence.audio_path} big /> : null}>
           <SentenceLine
             large
             sentence={sentence}
@@ -2612,6 +2689,11 @@ function ClauseContext({ es, clause }: { es: string; clause: number }) {
 
 /** The ink pick's own shade: a drop in its colour and a faint lit edge. */
 
+/** Answers lie flat: outlined, without the hard shadow every other sticker
+ *  has — on a stack of answers it read as a thick bottom border. A held tile
+ *  still lifts (clay.float); that lift is what says it is picked up. */
+const FLAT = `0 0 0 ${OUTLINE}px ${colors.ink}`;
+
 const styles = StyleSheet.create({
   bigCard: { alignItems: 'center', gap: 10, paddingVertical: 26 },
 
@@ -2730,20 +2812,42 @@ const styles = StyleSheet.create({
   bubblePhrase: { ...font.display[700], fontSize: 22, lineHeight: 30, color: colors.ink },
   cardPhrase: { ...font.display[800], fontSize: 30, lineHeight: 38, color: colors.ink, letterSpacing: -0.3 },
   cardGapText: { fontSize: 30, lineHeight: 40 },
+  // In the card the line takes the card's whole width. Shrunk to fit its words
+  // (the card centres its children), pixel rounding could leave the row a hair
+  // too narrow and push the last word to a second line, over the English under
+  // it — "Él es mi / abuelo." when the whole sentence had room.
+  cardText: { alignSelf: 'stretch', gap: 2 },
   tokenRowCentered: { justifyContent: 'center' },
   // The sentence as the star: a butter sticker, the capybara peeking over its edge.
   phraseCard: {
-    marginTop: 64,
+    marginTop: PEEK_MARGIN,
     borderRadius: 30,
     backgroundColor: pastel.butter,
-    paddingTop: 36,
+    paddingTop: PEEK_PAD,
     paddingBottom: 22,
     paddingHorizontal: 20,
     alignItems: 'center',
     gap: 4,
     boxShadow: clay.surface,
   },
-  phraseCardPeek: { position: 'absolute', left: 14, top: -84, width: 118, height: 112 },
+  phraseCardPeek: { position: 'absolute', left: 14, top: -(PEEK - PEEK_SINK), width: PEEK + 6, height: PEEK },
+  peekCard: { marginTop: 0 },
+  peekFigure: { zIndex: 1 },
+  // Read, not completed: nothing pokes out above, so the card starts right under the prompt.
+  phraseCardCentered: { marginTop: 8, paddingTop: 14 },
+  phraseCardHead: { alignSelf: 'stretch', minHeight: PHRASE_FIGURE, alignItems: 'center', justifyContent: 'center' },
+  // Anchored to the centre line, then pushed left past the big play button's half-width (33) and a gap.
+  phraseCardBeside: {
+    position: 'absolute',
+    right: '50%',
+    marginRight: 33 + 10,
+    top: 0,
+    width: PHRASE_FIGURE,
+    height: PHRASE_FIGURE,
+  },
+  phraseCardSun: { left: (PHRASE_FIGURE - PHRASE_SUN) / 2, top: (PHRASE_FIGURE - PHRASE_SUN) / 2 },
+  // The art looks left; mirrored, he looks at the button.
+  phraseCardFigure: { width: PHRASE_FIGURE, height: PHRASE_FIGURE, transform: [{ scaleX: -1 }] },
   phraseCardEn: { ...font.body[700], fontSize: 15, lineHeight: 20, color: colors.muted, textAlign: 'center', marginTop: 4 },
   phraseCardSpeak: { position: 'absolute', right: 14, top: 14 },
   // Listen: one pill, play at one end, the slow button at the other.
@@ -2891,20 +2995,18 @@ const styles = StyleSheet.create({
   audioProblem: { ...font.body[600], fontSize: 13, color: colors.muted, textAlign: 'center' },
 
   // Choices ------------------------------------------------------------------
-  // Clay chips. The border stays, transparent, so a state's rim never shifts
-  // the layout.
+  // The border stays, transparent, so a state's rim never shifts the layout.
   choice: {
     backgroundColor: colors.card,
     borderWidth: 1.5,
     borderColor: 'transparent',
     borderRadius: radius.md,
-    boxShadow: clay.surface,
+    boxShadow: FLAT,
     paddingVertical: 16,
     paddingHorizontal: 18,
   },
-  // The thick outline and hard shadow eat most of a small gap, so the options
-  // look glued at 10. 18 leaves visible paper between them.
-  choicesList: { gap: 18 },
+  // The outline eats into a small gap, so the options look glued at 10.
+  choicesList: { gap: 14 },
   choicesSide: { flexDirection: 'row', gap: 12 },
   choiceSide: { flex: 1, minHeight: 88, borderRadius: radius.lg - 4, alignItems: 'center', justifyContent: 'center' },
   choiceTextSide: { ...font.display[800], fontSize: 22 },
@@ -2924,7 +3026,7 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
     borderWidth: 2,
     backgroundColor: colors.card,
-    boxShadow: clay.surface,
+    boxShadow: FLAT,
   },
   bigChoiceText: { ...font.body[800], fontSize: 17 },
 
@@ -2972,7 +3074,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: clay.surface,
+    boxShadow: FLAT,
   },
   // An empty slot while its tile is in the air: the outline stays so nothing
   // reflows mid-flight, but it reads as a gap rather than as a tile.
@@ -3008,7 +3110,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: 'transparent',
     backgroundColor: colors.card,
-    boxShadow: clay.surface,
+    boxShadow: FLAT,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 12,

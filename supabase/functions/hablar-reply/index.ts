@@ -15,18 +15,16 @@
 // The response is an SSE stream:
 //
 //   transcript {"turn_id","text"}                          the line, as stored (multipart only)
-//   correction {"has_error","verdict","corrected"}        the verdict, as soon as it is written
 //   text      {"seq":n,"delta":"Jaja, "}                 reply text as it's written
 //   text_fix  {"seq":n,"from":"…","to":"…"}              sentence n was rewritten by the guard
 //   audio     {"seq":n,"text":"…","mp3":"<base64>"}      one per sentence, in order
-//   done      {"turn_id","tomas_turn_id","wrap_up","ended","audio_path"}
-//   feedback  {has_error,verdict,severity,corrected,spans,why_en,better,better_en}   usually before done, may come after
-//   error     {"stage":"claude|tts|feedback","retry":bool,"seq"?}
+//   done      {"turn_id","tomas_turn_id","wrap_up","ended","audio_path"}   ended on her last line (8 on the Speaking tab)
+//   error     {"stage":"claude|tts","retry":bool,"seq"?}
 //
-// Two Claude calls run in parallel: the streamed reply (cached persona + the
-// chat's level/scene block + history) and the streamed feedback, which never
-// holds the reply up: `done` goes out as soon as the reply's audio has, and a
-// slower feedback follows it on the same stream. Pancho ends the chat himself by
+// One Claude call per turn: the streamed reply (cached persona + the chat's
+// level/scene block + history). Her line is not graded here: Pancho only
+// recasts a mistake in his reply, and hablar-end grades every line at once for
+// the summary. Pancho ends the chat himself by
 // closing his goodbye with END_MARKER, which is stripped before anything is
 // sent or spoken. Each finished sentence goes through the rioplatense guard
 // and then to ElevenLabs; several can be in TTS at once, but audio is sent in
@@ -54,6 +52,7 @@ import {
   isUuid,
   loadSession,
   logUsage,
+  messageCap,
   nextUserIdx,
   recordPause,
   serviceClient,
@@ -74,9 +73,6 @@ import {
   CLOSE_SOON_NOTE,
   END_MARKER,
   ENGLISH_NOTE,
-  FEEDBACK_SCHEMA,
-  FEEDBACK_SYSTEM,
-  feedbackInput,
   GUARD_SYSTEM,
   PERSONA,
   sessionBlock,
@@ -84,9 +80,8 @@ import {
   turnText,
   unsureNote,
   WRAP_UP_NOTE,
-  type Feedback,
 } from "../_shared/hablar-prompt.ts";
-import { Anthropic, earlyVerdict, MODEL, plain, sameWords, streamedStructured } from "../_shared/hablar-claude.ts";
+import { Anthropic, MODEL, plain } from "../_shared/hablar-claude.ts";
 import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
 const HISTORY_TURNS = 20;
@@ -110,8 +105,6 @@ async function replay(sse: SseWriter, db: SupabaseClient, user: Turn, tomas: Tur
     const { data } = await db.storage.from("hablar").download(tomas.audio_path);
     if (data) sse.send("audio", { seq: 0, text: tomas.text, mp3: toBase64(new Uint8Array(await data.arrayBuffer())) });
   }
-  const { data: fresh } = await db.from("conversation_turns").select("feedback").eq("id", user.id).maybeSingle();
-  if (fresh?.feedback) sse.send("feedback", fresh.feedback);
   sse.send("done", {
     turn_id: user.id,
     tomas_turn_id: tomas.id,
@@ -121,36 +114,6 @@ async function replay(sse: SseWriter, db: SupabaseClient, user: Turn, tomas: Tur
     replay: true,
   });
   sse.close();
-}
-
-/** Only what the schema promised. */
-function cleanFeedback(raw: Feedback, line: string, english = false): Feedback {
-  // A line said in English is never a mistake: she is shown the Spanish for it.
-  if (english && raw.verdict !== "unclear") raw = { ...raw, has_error: false, verdict: "note" };
-  const spans = (raw.spans ?? []).filter((s) => s && typeof s.from === "string" && typeof s.to === "string");
-  const corrected = String(raw.corrected || line);
-  // A tick only for a line that is right as it stands: an English word, a tú
-  // form or a garbled transcript is not an error, but it is not "Correct" either.
-  let quiet: Feedback["verdict"] = raw.verdict === "note" || raw.verdict === "unclear" ? raw.verdict : "correct";
-  let better = raw.verdict === "unclear" ? "" : String(raw.better ?? "").trim();
-  // A suggestion that is her own words again says nothing — and when only an
-  // accent differs (andas / andás), it was the recogniser's guess, not her stress.
-  if (better && sameWords(better, corrected)) better = "";
-  if (quiet === "note" && !better) quiet = "correct";
-  // Outside a note, the Argentine way is shown only when her line really sounds foreign.
-  const unnatural = Boolean(raw.unnatural) && Boolean(better);
-  if (quiet !== "note" && !unnatural) better = "";
-  return {
-    has_error: Boolean(raw.has_error),
-    verdict: raw.has_error ? "error" : quiet,
-    severity: raw.has_error ? (raw.severity === "none" ? "minor" : raw.severity) : "none",
-    corrected,
-    spans: raw.has_error ? spans : [],
-    why_en: raw.has_error ? String(raw.why_en ?? "") : "",
-    unnatural,
-    better,
-    better_en: better ? String(raw.better_en ?? "") : "",
-  };
 }
 
 /** A tiny semaphore: at most n TTS requests in flight. */
@@ -184,8 +147,10 @@ async function runTurn(opts: {
   const usage: Usage[] = [];
   const elapsed = sessionElapsed(session);
   const exchange = exchangeOf(userIdx);
-  const wrapUp = shouldWrapUp(elapsed, exchange, session.level);
-  const closeSoon = !wrapUp && shouldCloseSoon(elapsed, exchange, session.level);
+  // A Speaking-tab chat closes on her eighth line, and is told to start closing two before.
+  const cap = messageCap(session);
+  const wrapUp = shouldWrapUp(elapsed, exchange, session.level, cap);
+  const closeSoon = !wrapUp && shouldCloseSoon(elapsed, exchange, session.level, cap);
   const english = user.meta?.lang === "en";
   const unsure = Array.isArray(user.meta?.unsure)
     ? (user.meta.unsure as unknown[]).filter((w): w is string => typeof w === "string")
@@ -205,7 +170,6 @@ async function runTurn(opts: {
   const opener = history.find((t) => t.idx === 0)?.text ??
     (await db.from("conversation_turns").select("text").eq("conversation_id", session.id).eq("idx", 0).maybeSingle())
       .data?.text ?? "";
-  const tomasBefore = [...history].reverse().find((t) => t.role === "tomas")?.text ?? null;
 
   const notes = [
     english ? ENGLISH_NOTE : "",
@@ -237,40 +201,6 @@ async function runTurn(opts: {
       cache_control: { type: "ephemeral" as const },
     },
   ];
-
-  // ----- feedback, in parallel -----
-  // Streamed, so the verdict (right or wrong, and the fixed line) goes out the
-  // moment it is written — usually before Pancho's first sentence. The why and
-  // the better phrasing follow in the full `feedback`.
-  let verdictSent = false;
-  const feedbackDone = streamedStructured<Feedback>(client, {
-    system: FEEDBACK_SYSTEM,
-    schema: FEEDBACK_SCHEMA as unknown as Record<string, unknown>,
-    input: feedbackInput({ level: session.level, tomasBefore, line: user.text, english, unsure }),
-    onText: (soFar) => {
-      if (verdictSent) return;
-      const verdict = earlyVerdict(soFar, user.text);
-      if (!verdict) return;
-      verdictSent = true;
-      sse.send(
-        "correction",
-        english && verdict.verdict !== "unclear" ? { has_error: false, verdict: "note", corrected: user.text } : verdict,
-      );
-    },
-  })
-    .then(async ({ value, usage: u, ms }) => {
-      usage.push(claudeUsage({ conversation_id: session.id, turn_id: user.id, model: MODEL, stage: "feedback", ms }, u));
-      if (!value) throw new Error("no feedback");
-      const fb = cleanFeedback(value, user.text, english);
-      sse.send("feedback", fb);
-      // Saved before the stream closes, so the summary (built once it has) sees it.
-      const { error } = await db.from("conversation_turns").update({ feedback: fb }).eq("id", user.id);
-      if (error) console.error("feedback save failed", error.message);
-    })
-    .catch((err) => {
-      console.error("feedback failed", err);
-      sse.send("error", { stage: "feedback", retry: false });
-    });
 
   // ----- sentence pipe: guard → TTS → audio in order -----
   // Not waited on here: the reply starts streaming while the voice id loads.
@@ -352,9 +282,9 @@ async function runTurn(opts: {
     const stream = client.messages.stream({
       model: MODEL,
       // Backstop for the prompt's 40-word limit (~70–80 tokens of Spanish).
-      max_tokens: 150,
+      max_tokens: 200,
       // deno-lint-ignore no-explicit-any
-      ...({ thinking: { type: "disabled" } } as any),
+      ...({ thinking: { type: "disabled" }, output_config: { effort: "low" } } as any),
       system,
       messages,
     });
@@ -372,7 +302,6 @@ async function runTurn(opts: {
     await db.from("conversation_turns").update({ status: "draft", idx: null }).eq("id", user.id);
     sse.send("error", { stage: "claude", retry: true });
     sse.close();
-    await feedbackDone;
     await logUsage(db, usage);
     return;
   }
@@ -402,7 +331,6 @@ async function runTurn(opts: {
   });
   if (insertErr) console.error("tomas turn insert failed", insertErr.message);
 
-  // The learner can answer now; a feedback still in flight follows on the stream.
   sse.send("done", { turn_id: user.id, tomas_turn_id: tomasId, wrap_up: wrapUp, ended, audio_path: audioPath });
   const upload = audioPath
     ? db.storage.from("hablar").upload(audioPath, new Blob([concatBytes(clips)], { type: "audio/mpeg" }), {
@@ -410,10 +338,9 @@ async function runTurn(opts: {
       upsert: true,
     }).then(({ error }) => error && console.error("reply mp3 upload failed", error.message))
     : Promise.resolve();
-  await Promise.race([feedbackDone, sleep(15_000)]);
   sse.close();
 
-  await Promise.all([upload, feedbackDone]);
+  await upload;
   await logUsage(db, usage);
 }
 
@@ -582,6 +509,11 @@ async function answer(opts: {
         .limit(1)
         .maybeSingle();
       userIdx = nextUserIdx(top?.idx ?? 0);
+      // Past the chat's last line: the draft stays a draft, and the app ends the chat.
+      const cap = messageCap(session);
+      if (cap !== null && exchangeOf(userIdx) > cap) {
+        return json({ error: "message_limit", limit: cap }, { status: 429 });
+      }
       const { data: claimed, error } = await db
         .from("conversation_turns")
         .update({ status: "final", idx: userIdx })

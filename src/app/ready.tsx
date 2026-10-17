@@ -10,7 +10,7 @@ import { MASCOT_NAME, POSE } from '@/components/mascot';
 import { EASE_OUT, rise } from '@/components/onboarding-ui';
 import { SaveButtons } from '@/components/save-account';
 import { useAuth } from '@/lib/auth';
-import { loadCourse, type PathLesson } from '@/lib/course';
+import { loadCourse, loadProgress, type PathLesson } from '@/lib/course';
 import { isGuest } from '@/lib/guest';
 import { tap } from '@/lib/haptics';
 import { resetTo } from '@/lib/nav';
@@ -91,6 +91,16 @@ export default function Ready() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answers, userId]);
 
+  // The placement is for someone who hasn't started: an account with lessons
+  // done already moves on with jump tests from the path.
+  const [started, setStarted] = useState(false);
+  useEffect(() => {
+    if (!userId) return;
+    void loadProgress(userId)
+      .then((done) => setStarted(done.size > 0))
+      .catch(() => {});
+  }, [userId]);
+
   const speaker = answers ? speaksSpanish(answers.level) : false;
 
   const startLesson = async () => {
@@ -166,16 +176,18 @@ export default function Ready() {
                 onPress={() => void startLesson()}
               />
             </Animated.View>
-            <Animated.View entering={rise(4, reduced)}>
-              <Choice
-                icon="target"
-                tone={pastel.lav}
-                title="Find my level"
-                sub="A 5-minute test. Skip what you already know."
-                tag={answers && speaker ? 'For you' : null}
-                onPress={takeTest}
-              />
-            </Animated.View>
+            {started ? null : (
+              <Animated.View entering={rise(4, reduced)}>
+                <Choice
+                  icon="target"
+                  tone={pastel.lav}
+                  title="Find my level"
+                  sub="A 5-minute test. Skip what you already know."
+                  tag={answers && speaker ? 'For you' : null}
+                  onPress={takeTest}
+                />
+              </Animated.View>
+            )}
           </View>
         )}
       </SafeAreaView>

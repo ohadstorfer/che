@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import { AccessibilityInfo, Animated, Easing, Platform, StyleSheet } from 'react-native';
 
 import { preloadImages } from '@/lib/preload-images';
-import { colors } from '@/lib/theme';
+import { pastel } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
-// BootSplash — the capybara on the oat while the first screen gets ready
+// BootSplash — Pancho with his mate on manteca while the first screen gets ready
 // underneath (lib/boot.ts). It is the same picture, size and place as the
 // native splash, so on the phones the hand-off can't be seen. On the web he is
 // in the page itself (+html.tsx), there from the first frame, before the
@@ -18,9 +18,16 @@ import { colors } from '@/lib/theme';
 // still missing fills in where it belongs.
 // ---------------------------------------------------------------------------
 
-const ICON = require('@/assets/images/splash-icon.png');
-/** The native splash's `imageWidth` in app.json. */
-const SIZE = 180;
+// The native splash's pictures and `imageWidth`s in app.json. Android 12+ shows
+// its picture inside a circle, so it gets him smaller, on a square that fits it.
+const ICON =
+  Platform.OS === 'android'
+    ? require('@/assets/images/splash-pancho-android.png')
+    : require('@/assets/images/splash-pancho.png');
+// Both are squares (the native splash always draws a square), Pancho centred in them.
+const SIZE = Platform.OS === 'android' ? { width: 192, height: 192 } : { width: 260, height: 260 };
+/** The splash's manteca: app.json `backgroundColor` is the same #FFE08A. */
+const SPLASH_BG = pastel.butter;
 const MAX_HOLD_MS = 3000;
 /** Half a breath; the web's CSS keyframes run the same 2.2s cycle. */
 const BREATHE_MS = 1100;
@@ -144,7 +151,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.bg,
+    backgroundColor: SPLASH_BG,
   },
-  icon: { width: SIZE, height: SIZE },
+  icon: SIZE,
 });

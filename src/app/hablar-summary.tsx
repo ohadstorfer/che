@@ -30,7 +30,7 @@ import { clay, colors, font, pastel, pastelGrad, radius } from '@/lib/theme';
 // ---------------------------------------------------------------------------
 // The summary (§2.5), and History's view of an old chat. Generic summaries are
 // the top complaint about these apps, so this one is concrete and short:
-// the top corrections (each with Decilo), phrases worth keeping, one
+// the top corrections (each with Decilo) and one
 // specific line on what went well. The full transcript folds away below.
 // ---------------------------------------------------------------------------
 
@@ -114,7 +114,6 @@ export default function HablarSummaryScreen() {
   const s = summary ?? {};
 
   const corrections = (s.corrections ?? []).slice(0, 3);
-  const phrases = (s.phrases ?? []).slice(0, 5);
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
@@ -132,7 +131,7 @@ export default function HablarSummaryScreen() {
           <View style={styles.pod}>
             <PanchoAvatar size={64} />
           </View>
-          <Text style={styles.title}>¡Bien ahí!</Text>
+          <Text style={styles.title}>Well done!</Text>
           {conversation ? (
             <Text style={styles.heroMeta}>
               {conversationTitle(
@@ -159,17 +158,6 @@ export default function HablarSummaryScreen() {
                   {c.audio_path ? <PlayClip path={c.audio_path} id={`summary-${i}`} /> : null}
                   {sessionId ? <View style={{ flex: 1 }}><DiloButton sessionId={sessionId} target={c.corrected} /></View> : null}
                 </View>
-              </View>
-            ))}
-          </Card>
-        ) : null}
-
-        {phrases.length ? (
-          <Card title="Phrases worth keeping">
-            {phrases.map((p, i) => (
-              <View key={i}>
-                <Text style={styles.phraseEs}>{p.es}</Text>
-                {p.en ? <Text style={styles.small}>{p.en}</Text> : null}
               </View>
             ))}
           </Card>
@@ -216,7 +204,7 @@ export default function HablarSummaryScreen() {
           </View>
         ) : null}
 
-        <Button title="Listo" onPress={close} />
+        <Button title="Done" onPress={close} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -335,7 +323,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   divider: { borderTopWidth: 1, borderTopColor: colors.border, paddingTop: 12 },
-  phraseEs: { ...font.display[700], fontSize: 18, color: colors.ink },
   well: {
     flexDirection: 'row',
     gap: 10,

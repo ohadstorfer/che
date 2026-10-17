@@ -37,7 +37,7 @@ classes:
       - type: card
         text: "The reason is the **sobremesa**: the long chat after the meal, over coffee. It often lasts longer than the meal itself, and nobody rushes you."
       - type: card
-        text: "The tip, **la propina**, is about 10%, usually left in cash. It is not on the bill. The **cubierto** you see there is a table charge, not the tip."
+        text: "The tip, **la propina**, is about 10%, often in cash, though by law you can also tip by card or QR. The **cubierto** on the bill is a table charge, not the tip."
       - type: choice
         prompt: "Six friends, one bill. You only had a salad, Tomi had the steak. How does the table usually pay?"
         options:

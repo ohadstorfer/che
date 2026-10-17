@@ -16,9 +16,9 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import Animated, {
   Easing,
-  useAnimatedKeyboard,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -331,14 +331,15 @@ function FeedbackSheet({
   // The keyboard, followed frame by frame: the sheet stands on it and gives
   // up height from the top, so the header stays on screen. (A
   // KeyboardAvoidingView inside the Modal lifted it twice on iOS.)
-  const keyboard = useAnimatedKeyboard();
+  // (Measured upwards, so it runs from 0 to minus the keyboard's height.)
+  const { height: keyboard } = useReanimatedKeyboardAnimation();
   const top = insets.top + 12;
   const keyboardStyle = useAnimatedStyle(() => {
-    const kb = keyboard.height.get();
+    const kb = -keyboard.get();
     return { height: Math.min(sheetH, screenH - top - kb), marginBottom: kb };
   });
   const composerStyle = useAnimatedStyle(() => ({
-    paddingBottom: 12 + Math.max(0, insets.bottom - keyboard.height.get()),
+    paddingBottom: 12 + Math.max(0, insets.bottom + keyboard.get()),
   }));
 
   // In with the drawer curve; out faster, since closing is the app answering.

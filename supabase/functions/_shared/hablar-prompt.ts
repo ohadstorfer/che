@@ -7,6 +7,7 @@
 // turn (the wrap-up note) goes at the end of the last user message.
 
 import type { Band, Scenario, CultureOpener } from "./hablar.ts";
+import { sameWords } from "./hablar-claude.ts";
 
 /** Pancho's last reply ends with this; hablar-reply strips it and ends the chat. */
 export const END_MARKER = "[FIN]";
@@ -152,7 +153,7 @@ export function turnText(line: string, notes: string[]): string {
 // Feedback: one structured call per learner line, in parallel with the reply.
 // ---------------------------------------------------------------------------
 
-export const FEEDBACK_SYSTEM = `You grade one spoken line from a learner of Argentine (rioplatense) Spanish whose first language is English, inside a role-play conversation. The line is a speech-to-text transcript. Your output fills the correction shown under the learner's message and, rarely, a more Argentine way to say it shown below the correction. It is shown to the learner as-is, right under their message, so be exact and kind.
+export const FEEDBACK_SYSTEM = `You grade one spoken line from a learner of Argentine (rioplatense) Spanish whose first language is English, inside a role-play conversation. The line is a speech-to-text transcript. Your output fills the correction shown for this line in the end-of-chat summary and, rarely, a more Argentine way to say it shown below the correction. It is shown to the learner as-is, so be exact and kind.
 
 Rules for what counts as an error:
 - Grade grammar and word choice only. Ignore punctuation, capital letters and missing written accents (the transcript decides those, not the learner). Ignore pronunciation. Ignore filler words (eh, este, bueno) and false starts.
@@ -201,7 +202,6 @@ export const FEEDBACK_SCHEMA = {
   required: ["has_error", "verdict", "severity", "corrected", "spans", "why_en", "unnatural", "better", "better_en"],
   properties: {
     has_error: { type: "boolean" },
-    // Right after has_error: the two together are the early verdict (earlyVerdict).
     verdict: { type: "string", enum: ["correct", "error", "note", "unclear"] },
     severity: { type: "string", enum: ["none", "meaning", "target", "minor"] },
     corrected: { type: "string" },
@@ -260,6 +260,36 @@ export function feedbackInput(opts: {
     .join("\n");
 }
 
+/** Only what the schema promised. */
+export function cleanFeedback(raw: Feedback, line: string, english = false): Feedback {
+  // A line said in English is never a mistake: she is shown the Spanish for it.
+  if (english && raw.verdict !== "unclear") raw = { ...raw, has_error: false, verdict: "note" };
+  const spans = (raw.spans ?? []).filter((s) => s && typeof s.from === "string" && typeof s.to === "string");
+  const corrected = String(raw.corrected || line);
+  // A tick only for a line that is right as it stands: an English word, a tú
+  // form or a garbled transcript is not an error, but it is not "Correct" either.
+  let quiet: Feedback["verdict"] = raw.verdict === "note" || raw.verdict === "unclear" ? raw.verdict : "correct";
+  let better = raw.verdict === "unclear" ? "" : String(raw.better ?? "").trim();
+  // A suggestion that is her own words again says nothing — and when only an
+  // accent differs (andas / andás), it was the recogniser's guess, not her stress.
+  if (better && sameWords(better, corrected)) better = "";
+  if (quiet === "note" && !better) quiet = "correct";
+  // Outside a note, the Argentine way is shown only when her line really sounds foreign.
+  const unnatural = Boolean(raw.unnatural) && Boolean(better);
+  if (quiet !== "note" && !unnatural) better = "";
+  return {
+    has_error: Boolean(raw.has_error),
+    verdict: raw.has_error ? "error" : quiet,
+    severity: raw.has_error ? (raw.severity === "none" ? "minor" : raw.severity) : "none",
+    corrected,
+    spans: raw.has_error ? spans : [],
+    why_en: raw.has_error ? String(raw.why_en ?? "") : "",
+    unnatural,
+    better,
+    better_en: better ? String(raw.better_en ?? "") : "",
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Guard: one sentence that slipped into tú or another region's words.
 // ---------------------------------------------------------------------------
@@ -295,24 +325,14 @@ export const TRANSLATE_SCHEMA = {
 // Summary: the two parts of the end screen that need a model.
 // ---------------------------------------------------------------------------
 
-export const SUMMARY_SYSTEM = `You write two small parts of the end-of-chat summary for a learner of Argentine (rioplatense) Spanish who just talked with Pancho, a porteño. Be concrete — generic summaries are what learners hate most.
-- phrases: 3 to 5 phrases worth keeping, taken from Pancho's lines or from the improved versions of the learner's lines. Short (at most 8 words), useful, rioplatense with voseo, using only the grammar the learner's level allows (given in the input), each with its meaning in plain, simple English. Prefer phrases the learner can reuse.
+export const SUMMARY_SYSTEM = `You write one small part of the end-of-chat summary for a learner of Argentine (rioplatense) Spanish who just talked with Pancho, a porteño. Be concrete — generic summaries are what learners hate most.
 - went_well: one line in English, at most 20 words, naming something specific the learner did well, quoting their Spanish in *asterisks* (e.g. "You used *querés* and *tenés* correctly."). Only quote words the learner said correctly and in the vos form — never a line that was corrected, never a tú form. If they said almost nothing, encourage them to say more next time, kindly.`;
 
 export const SUMMARY_SCHEMA = {
   type: "object",
   additionalProperties: false,
-  required: ["phrases", "went_well"],
+  required: ["went_well"],
   properties: {
-    phrases: {
-      type: "array",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        required: ["es", "en"],
-        properties: { es: { type: "string" }, en: { type: "string" } },
-      },
-    },
     went_well: { type: "string" },
   },
 } as const;

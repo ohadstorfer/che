@@ -22,6 +22,9 @@ Two cuts, because the sources come in two kinds:
   warm             Photographs of dark food on a dark backdrop, where there is
                    no gradient wall to stop at. What separates them is hue.
 
+  plain            Drawings on pure white with no drop shadow, whose subject
+                   may be white too (a cup, a glass of milk).
+
 Requires Pillow + numpy + scipy (dev-only; the generated PNGs are committed).
 """
 import os
@@ -37,7 +40,7 @@ OUT_DIR = os.path.join(ROOT, 'assets/images')
 MAX_DIM = 384
 
 
-def flood_cut(a, wall=16.0, shade=80.0, min_blob=0.002):
+def flood_cut(a, wall=16.0, shade=80.0, min_blob=0.002, judge=True):
     """Mask an outlined illustration sitting on a flat card."""
     h, w, _ = a.shape
 
@@ -79,6 +82,22 @@ def flood_cut(a, wall=16.0, shade=80.0, min_blob=0.002):
         seen = ndimage.median(dist, holes, range(1, n + 1))
         subj &= ~np.isin(holes, [i + 1 for i, d in enumerate(seen) if d < shade])
 
+    if not judge:
+        # The card also shows through closed loops — inside a bag's strap,
+        # between a ball's handles — where no flood from the border can reach.
+        # Those pockets are the card's exact white; a white cup or smock is
+        # drawn off-white and textured, so it stays.
+        lab, n = ndimage.label(grad < wall)
+        edge = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
+        ids = [i for i in range(1, n + 1) if i not in set(edge.tolist())]
+        if ids:
+            sizes = ndimage.sum(np.ones_like(grad), lab, ids)
+            ids = [i for i, sz in zip(ids, sizes) if sz >= 0.0005 * h * w]
+        pockets = [i for i in ids
+                   if np.median(dist[lab == i]) <= 2.5 and np.percentile(dist[lab == i], 90) <= 4.0]
+        if pockets:
+            subj &= ~np.isin(lab, pockets)
+
     lab, n = ndimage.label(subj)
     if n:
         ids = range(1, n + 1)
@@ -88,12 +107,18 @@ def flood_cut(a, wall=16.0, shade=80.0, min_blob=0.002):
         # judge each piece by what it looks like and not only by its size.
         shade_like = ndimage.median(dist, lab, ids)
         keep = [i + 1 for i, (sz, d) in enumerate(zip(sizes, shade_like))
-                if sz >= min_blob * h * w and d >= shade]
-        if keep:
+                if sz >= min_blob * h * w and (d >= shade or not judge)]
+        if keep and judge:
             # Garnish scattered across the card — a stray parsley leaf, a
             # sesame seed — belongs to the photo, not to the character. One
             # figure standing on the path should be one object.
             keep = [max(keep, key=lambda i: sizes[i - 1])]
+        elif keep:
+            # A plain drawing can be two things side by side — a bottle and
+            # its glass, a gourd and its jug. Keep every piece of real size;
+            # crumbs still go.
+            big = max(sizes[i - 1] for i in keep)
+            keep = [i for i in keep if sizes[i - 1] >= 0.12 * big]
         subj = np.isin(lab, keep)
 
     # The flood stops a pixel short of the outline; give that back.
@@ -138,8 +163,14 @@ def cutout(src, name, mode='flood'):
 
     if mode == 'warm':
         alpha = circle_of(warm_cut(a))
+    elif mode == 'plain':
+        # A drawing on pure white with no drop shadow, whose subject can be
+        # white itself — a cup, a glass of milk. Judging pieces by how far they
+        # are from the card would throw the cup away with the shadow.
+        mask = flood_cut(a, shade=12.0, judge=False)
     else:
         mask = flood_cut(a)
+    if mode != 'warm':
         # Let a blur carry the edge so it doesn't read as cut with scissors.
         alpha = ndimage.gaussian_filter(mask.astype(np.float32), 1.5)
         alpha = np.clip((alpha - 0.35) / 0.45, 0, 1)

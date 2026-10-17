@@ -775,7 +775,7 @@
       {
        "type": "card",
        "chip": "Pro tip",
-       "text": "At a restaurant, the tip is about 10% and people usually leave it in cash on the table, even when they pay the bill by card."
+       "text": "At a restaurant, the tip is about 10% and people usually leave it in cash on the table, even when they pay the bill by card. By law the place must also let you tip by card or QR."
       }
      ],
      "vocabulary": []
@@ -1248,7 +1248,7 @@
       },
       {
        "type": "card",
-       "text": "The tip, **la propina**, is about 10%, usually left in cash. It is not on the bill. The **cubierto** you see there is a table charge, not the tip."
+       "text": "The tip, **la propina**, is about 10%, often in cash, though by law you can also tip by card or QR. The **cubierto** on the bill is a table charge, not the tip."
       },
       {
        "type": "choice",
@@ -1628,7 +1628,7 @@
         "Around six hundred thousand"
        ],
        "correct": 0,
-       "explain": "Estimates start at about six million a day, and some recent ones are much higher. That's at least one for every eight people, every single day."
+       "explain": "Estimates went from about six million a day in 2022 to around twelve million in 2026. That's about one for every four people, every single day."
       },
       {
        "type": "card",
@@ -1684,7 +1684,7 @@
       {
        "type": "card",
        "chip": "Did you know?",
-       "text": "There's even a **Mundial del Alfajor**, held in Buenos Aires. A “world” championship for a snack that almost only Argentina eats. Very Argentine."
+       "text": "There's even a **Mundial del Alfajor**, held in Buenos Aires. A “world” championship for a snack Argentina eats more of than anywhere else. Very Argentine."
       }
      ],
      "vocabulary": []
@@ -3684,7 +3684,7 @@
       },
       {
        "type": "card",
-       "text": "You don't fill the tank yourself. At the **estación de servicio** a worker does it. Gas for the car is **nafta**, and you say **“Llenalo, por favor”**: fill it up."
+       "text": "You usually don't fill the tank yourself. Self-service has been allowed since 2025, but at most **estaciones de servicio** a worker still does it. Gas for the car is **nafta**, and you say **“Llenalo, por favor”**: fill it up."
       },
       {
        "type": "choice",
@@ -5006,7 +5006,7 @@
         "They race to stick them in the album"
        ],
        "correct": 1,
-       "explain": "That game is **el espejito**. In another one, **la tapadita**, your figurita has to land on top of someone else's. The winner takes both."
+       "explain": "That game is **el punto**. In another one, **la tapadita**, your figurita has to land on top of someone else's. The winner takes both."
       },
       {
        "type": "card",
@@ -5460,7 +5460,7 @@
       },
       {
        "type": "card",
-       "text": "A job is **en blanco**, in white, when it is registered: [aguinaldo], paid holidays, health cover. **En negro**, in black, means no papers. More than a third of workers are [en negro]."
+       "text": "A job is **en blanco**, in white, when it is registered: [aguinaldo], paid holidays, health cover. **En negro**, in black, means no papers. About four in ten workers are [en negro]."
       },
       {
        "type": "card",
@@ -5670,7 +5670,7 @@
       },
       {
        "type": "card",
-       "text": "[Las Leonas] won two World Cups and four Olympic medals in a row. Their star, **Luciana Aymar**, was chosen best player in the world eight times."
+       "text": "[Las Leonas] won two World Cups and six Olympic medals. Their star, **Luciana Aymar**, was chosen best player in the world eight times."
       },
       {
        "type": "choice",
@@ -6248,14 +6248,14 @@
       },
       {
        "type": "choice",
-       "prompt": "In its most famous scene, a man cries about how poor his brother is. What did he see on the brother's table?",
+       "prompt": "In its most famous scene, a man moans about how poor his sister is. What did he see on her table?",
        "options": [
         "Half a pizza",
         "Three empanadas",
         "One cold milanesa"
        ],
        "correct": 1,
-       "explain": "**“Tres empanadas”**, said with tears: three old empanadas for two people. He's not really sad, and he ate one himself. Argentines repeat it today when there's not enough of something."
+       "explain": "**“Tres empanadas”**, said as if it broke his heart: three old empanadas for two people. He's not really sad, and he chews one himself as he says it. Argentines repeat it today when there's not enough of something."
       },
       {
        "type": "card",
@@ -6263,14 +6263,14 @@
       },
       {
        "type": "choice",
-       "prompt": "You go to see an American film for adults in a cinema in Buenos Aires. How is it shown?",
+       "prompt": "Cinema listings say **subtitulada** or **doblada** next to each time. Which one keeps the English voices?",
        "options": [
-        "With Spanish voices",
-        "In English, with nothing to read",
-        "In English, with Spanish words on the screen"
+        "Doblada",
+        "Subtitulada",
+        "Both of them"
        ],
-       "correct": 2,
-       "explain": "Most films for adults are **subtituladas**. Children's films are **dobladas**, with Spanish voices. Good news if you're learning: you can read along."
+       "correct": 1,
+       "explain": "**Subtitulada** keeps the English, with Spanish words on the screen. **Doblada** has Spanish voices. Most films now arrive dubbed, and subtitled times are mostly in the city centre. Learning? Either one helps."
       },
       {
        "type": "card",
@@ -7013,7 +7013,7 @@
       },
       {
        "type": "card",
-       "text": "Their descendants are still here. Today **12 de octubre** is no longer the “Día de la Raza” but the Day of Respect for Cultural Diversity."
+       "text": "Their descendants are still here. In 2010 **12 de octubre** was renamed the Day of Respect for Cultural Diversity. Since 2024 the government calls it “Día de la Raza” again, and the name is still argued about."
       },
       {
        "type": "choice",
@@ -7711,7 +7711,7 @@
       },
       {
        "type": "card",
-       "text": "In 2019 Peronism returned with **Alberto Fernández** (2019–2023), and Cristina Kirchner as vice-president. Then came the pandemic. Supporters value the emergency aid and the vaccines. Critics point to a very long lockdown and inflation that passed 200% a year."
+       "text": "In 2019 Peronism returned with **Alberto Fernández** (2019–2023), and Cristina Kirchner as vice-president. Then came the pandemic. Supporters value the emergency aid and the vaccines. Critics point to a very long lockdown and inflation that passed 150% a year."
       },
       {
        "type": "choice",
@@ -8107,7 +8107,7 @@
   "vigilante": "long sugar-topped pastry (lit. the cop)",
   "bolas de fraile": "filled doughnut balls (lit. friar's balls)",
   "sacramentos": "rolled sweet pastries (lit. sacraments)",
-  "cañoncitos": "cream-filled pastry tubes (lit. little cannons)",
+  "cañoncitos": "dulce de leche–filled pastry tubes (lit. little cannons)",
   "una docena de facturas": "a dozen sweet pastries",
   "qué hay de postre": "What's for dessert?",
   "bodegón": "old-school neighbourhood restaurant",
@@ -8404,6 +8404,7 @@
   "estoy resfriado": "I have a cold.",
   "ruta": "road between towns, highway",
   "estación de servicio": "gas station",
+  "estaciones de servicio": "gas stations",
   "nafta": "gasoline, petrol",
   "llenalo por favor": "Fill it up, please.",
   "trapito": "informal street parking attendant (lit. little rag)",
@@ -8638,7 +8639,7 @@
   "la tengo": "I have it",
   "no la tengo": "I don't have it",
   "la difícil": "the hard one (the rarest sticker)",
-  "el espejito": "the little mirror (a sticker game)",
+  "el punto": "the point (a sticker game)",
   "la tapadita": "sticker game where yours must land on top (lit. the little cover)",
   "la quiniela": "numbers lottery",
   "agencia": "small lottery shop",
@@ -8783,8 +8784,8 @@
   "esperando la carroza": "Waiting for the Hearse (1985 film)",
   "tres empanadas": "three stuffed pastries (a famous film line)",
   "relatos salvajes": "Wild Tales (2014 film)",
-  "subtituladas": "subtitled",
-  "dobladas": "dubbed",
+  "subtitulada": "subtitled",
+  "doblada": "dubbed",
   "nueve reinas": "Nine Queens (2000 film)",
   "día de los inocentes": "Day of the Innocents (prank day, 28 December)",
   "que la inocencia te valga": "May your innocence serve you well! (said to a prank victim)",
@@ -9543,6 +9544,7 @@
   "estoy resfriado": "culture/6f0feba4fc1abbab35d7.mp3",
   "ruta": "culture/9c27a73d52841dd5b97f.mp3",
   "estación de servicio": "culture/231ffdbe1b5d40c8c4c6.mp3",
+  "estaciones de servicio": "culture/c3aeaf377d8a61f21147.mp3",
   "nafta": "culture/6529d7e583887a2768f9.mp3",
   "llenalo por favor": "culture/388abbc60fdcf7797139.mp3",
   "trapito": "culture/0b4e8625ae2625625223.mp3",
@@ -9777,7 +9779,7 @@
   "la tengo": "culture/1341fbc564111eb93050.mp3",
   "no la tengo": "culture/b76d609e2595342d19e6.mp3",
   "la difícil": "culture/97ebc5389b30246fb20d.mp3",
-  "el espejito": "culture/e34b6ce136646223c403.mp3",
+  "el punto": "culture/4977b11d6f2a67e289a2.mp3",
   "la tapadita": "culture/fbe0a20167d1d0760d13.mp3",
   "la quiniela": "culture/1e42330c720cf74b75d5.mp3",
   "agencia": "culture/18b934a31bc77fbc6718.mp3",
@@ -9922,8 +9924,8 @@
   "esperando la carroza": "culture/13279831d74db752f45f.mp3",
   "tres empanadas": "culture/2621fc291cff35f803a0.mp3",
   "relatos salvajes": "culture/fe42848233af8940c854.mp3",
-  "subtituladas": "culture/37ae1f8a2994474b6661.mp3",
-  "dobladas": "culture/a572e4472381e38ef12f.mp3",
+  "subtitulada": "culture/1e22b99f55617783df14.mp3",
+  "doblada": "culture/9b80ee683721794d9afa.mp3",
   "nueve reinas": "culture/fe8aca5c719d87884893.mp3",
   "día de los inocentes": "culture/f4d64dd0d3fd3177785e.mp3",
   "que la inocencia te valga": "culture/37d6ffc298b546b9f455.mp3",

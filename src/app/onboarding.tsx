@@ -1,10 +1,10 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
+import { useVideoPlayer, VideoView } from 'expo-video';
 import * as WebBrowser from 'expo-web-browser';
 import { useEffect, useRef, useState } from 'react';
 import {
-  ActivityIndicator,
   BackHandler,
   KeyboardAvoidingView,
   Platform,
@@ -13,6 +13,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import Animated, {
@@ -34,7 +35,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle, G, Line, Path } from 'react-native-svg';
 
 import { MASCOT_NAME, MascotSays, pop, type Pose, POSE, SpeechBubble } from '@/components/mascot';
-import { ClipCard } from '@/components/clip-card';
 import { EASE_OUT, IconButton, ProgressBar, rise, slide } from '@/components/onboarding-ui';
 import { type Provider, SocialButtons } from '@/components/social-buttons';
 import { Button, Field } from '@/components/ui';
@@ -55,7 +55,6 @@ import {
   mainWhy,
   MINUTES,
   type Level,
-  type Minutes,
   nameTail,
   reminderLine,
   resetWinbackShown,
@@ -88,8 +87,8 @@ import { clay, colors, font, pastel, radius, type } from '@/lib/theme';
 // line of conversation, not a form field.
 // ---------------------------------------------------------------------------
 
-type Step = 'name' | 'level' | 'why' | 'try' | 'struggle' | 'achieve' | 'goal' | 'notify' | 'building' | 'plan' | 'pledge' | 'account';
-const STEPS: Step[] = ['name', 'level', 'why', 'try', 'struggle', 'achieve', 'goal', 'notify', 'building', 'plan', 'pledge', 'account'];
+type Step = 'name' | 'level' | 'why' | 'try' | 'struggle' | 'achieve' | 'goal' | 'notify' | 'building' | 'pledge' | 'account';
+const STEPS: Step[] = ['name', 'level', 'why', 'try', 'struggle', 'achieve', 'goal', 'notify', 'building', 'pledge', 'account'];
 /** Steps that count on the progress bar; the builder and what follows sit past it. */
 const COUNTED = STEPS.indexOf('building');
 
@@ -118,7 +117,7 @@ export default function Onboarding() {
   const next = () => go(STEPS[Math.min(index + 1, STEPS.length - 1)]);
   const back = () => {
     if (index === 0) return router.canGoBack() ? router.back() : router.replace('/welcome');
-    // The builder is a moment, not a place: back from the plan skips it.
+    // The builder is a moment, not a place: back from the pledge skips it.
     const prev = STEPS[index - 1] === 'building' ? STEPS[index - 2] : STEPS[index - 1];
     go(prev, -1);
   };
@@ -239,19 +238,16 @@ export default function Onboarding() {
             />
           ) : step === 'building' ? (
             <Building
+              answers={complete}
               reduced={reduced}
-              why={complete.why}
-              minutes={complete.minutes}
-              onDone={() => {
-                // Her guest account, made while she reads the plan: the
+              onReady={() => {
+                // Her guest account, made while she reads the result: the
                 // paywall after the pledge sells to it (lib/guest.ts).
                 void saveAnswers(complete).then(() => startGuest());
                 success();
-                go('plan');
               }}
+              onNext={next}
             />
-          ) : step === 'plan' ? (
-            <CourseStep answers={complete} reduced={reduced} onNext={next} />
           ) : step === 'pledge' ? (
             <Pledge answers={complete} reduced={reduced} onNext={() => void afterPledge()} />
           ) : (
@@ -479,34 +475,17 @@ function Underline({ marked }: { marked: boolean }) {
 }
 
 function TryItStep({ line, reduced, onNext }: { line: TryIt; reduced: boolean; onNext: () => void }) {
-  const [got, setGot] = useState<number[]>([]);
-  const [miss, setMiss] = useState(false);
-  const left = line.targets.filter((k) => !got.includes(k));
-  const done = left.length === 0;
-  const says = done
-    ? line.done
-    : miss
-      ? 'Same word here. Try another.'
-      : left.length === line.targets.length
-        ? line.start
-        : left.length === 1
-          ? '¡Eso! Just one more.'
-          : `¡Eso! ${left.length} to go.`;
+  // Not a test: Pancho says how many words give the textbook away, and one
+  // press turns them all into the Buenos Aires ones together.
+  const [done, setDone] = useState(false);
+  const says = done ? line.done : line.start;
   const length = Math.max(line.book.join(' ').length, line.local.join(' ').length);
   const size = length <= 22 ? 38 : length <= 30 ? 33 : 28;
   const text = { fontSize: size, lineHeight: size + 12 };
 
-  const press = (k: number) => {
-    if (done || got.includes(k)) return;
-    if (!line.targets.includes(k)) {
-      tap();
-      return setMiss(true);
-    }
-    setMiss(false);
-    const next = [...got, k];
-    setGot(next);
-    if (next.length === line.targets.length) success();
-    else tap();
+  const reveal = () => {
+    setDone(true);
+    success();
   };
 
   return (
@@ -517,42 +496,32 @@ function TryItStep({ line, reduced, onNext }: { line: TryIt; reduced: boolean; o
         <View style={styles.tryMiddle}>
           <Animated.View entering={rise(1, reduced)} style={styles.tryCard} accessibilityLabel={done ? line.local.join(' ') : line.book.join(' ')}>
             {line.book.map((word, k) => {
-              const fixed = got.includes(k);
-              const target = line.targets.includes(k);
+              const order = line.targets.indexOf(k);
+              const fixed = done && order >= 0;
               return (
-                <Pressable
+                <View
                   key={k}
-                  onPress={() => press(k)}
-                  disabled={done}
-                  accessibilityRole="button"
-                  accessibilityLabel={fixed ? `${line.local[k]}, changed from ${word}` : word}
-                  style={({ pressed }) => [
-                    styles.tryWord,
-                    fixed && [styles.tryWordFixed, { transform: [{ rotate: WORD_TILT[line.targets.indexOf(k) % 4] }] }],
-                    !fixed && { transform: [{ scale: pressed ? 0.94 : 1 }] },
-                  ]}>
+                  style={[styles.tryWord, fixed && [styles.tryWordFixed, { transform: [{ rotate: WORD_TILT[order % 4] }] }]]}>
                   {fixed ? (
-                    <Animated.Text entering={reduced ? undefined : ZoomIn.duration(260).easing(EASE_OUT)} style={[styles.tryText, text]}>
+                    // One after another, left to right, so the eye follows the sentence changing.
+                    <Animated.Text
+                      entering={reduced ? undefined : ZoomIn.duration(260).delay(order * 90).easing(EASE_OUT)}
+                      style={[styles.tryText, text]}>
                       {line.local[k]}
                     </Animated.Text>
                   ) : (
                     <Text style={[styles.tryText, text]}>{word}</Text>
                   )}
-                  {!fixed && !done ? <Underline marked={line.marked && target} /> : null}
-                </Pressable>
+                  {!done && order >= 0 ? <Underline marked /> : null}
+                </View>
               );
             })}
           </Animated.View>
           <Text style={styles.tryEn}>{line.en}</Text>
-          <View style={[styles.tryCount, done && { backgroundColor: pastel.sage }]} accessibilityLiveRegion="polite">
-            <Text style={styles.tryCountText}>
-              {line.targets.length - left.length} of {line.targets.length} words changed
-            </Text>
-          </View>
         </View>
       </ScrollView>
       <View style={styles.footer}>
-        <Button title="Continue" onPress={onNext} disabled={!done} />
+        <Button title={done ? 'Continue' : 'Make it Argentine'} onPress={done ? onNext : reveal} />
       </View>
     </View>
   );
@@ -781,120 +750,159 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
   );
 }
 
-// --- building: the plan on the grill ----------------------------------------
+// --- building: her course builds while it plays -------------------------------
+//
+// The course clip (che/social/src/onboarding/CourseLoop.tsx) plays at 1.75× while
+// a rosa line draws around it, once through: the line closes as the culture scene
+// leaves and the result lands as the clip ends. It runs on the clip's own clock,
+// so a clip that starts late never lands "ready" in the middle of a scene.
 
-// How long each step takes, in ms. Uneven on purpose: the middle one has the
-// most to do, and a row of identical beats reads as a fake progress bar.
-const BUILD_STEPS = [1200, 1800, 1400];
-const HOLD = 500;
-const RING = 128;
-const CIRC = 2 * Math.PI * RING;
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+/** Where each part of the build starts, in seconds of clip: the lesson done,
+ *  Pancho asking, her line landing, the fix, the first and the third slang card,
+ *  the culture scene arriving, and its answer turning green. */
+const BUILD_BEATS = [0, 2.56, 5.15, 7.82, 9.98, 12.22, 15.42, 17.22, 19.9];
+/** The line closes and the check lands: the culture scene is about to leave. */
+const BUILD_CLOSED = 23.5;
+/** The result: the clip (23.67 s) has played through. */
+const BUILD_READY = 23.6;
+const BUILD_RATE = 1.75;
+/** Wall time after which the result shows whatever the clip did (the clip takes 13.5 s). */
+const BUILD_HOLD_MAX = 18000;
 
-function Building({ reduced, why, minutes, onDone }: { reduced: boolean; why: Answers['why']; minutes: Minutes; onDone: () => void }) {
-  const lines = [
-    'Matching your level',
-    why === 'trip' ? 'Picking phrases for your trip' : why === 'moving' ? 'Picking phrases for daily life' : 'Picking the phrases you need',
-    `Pacing your plan to ${minutes} min a day`,
-  ];
-  const [done, setDone] = useState(0);
-  const finished = useRef(onDone);
-  finished.current = onDone;
+/** Within one part: fast as it starts, slowing all the way to its end without
+ *  stopping, so the next part's kick (about 4× the speed it ended on) is what
+ *  marks the change. A stronger ease stalls halfway and the kick looks late. */
+const partEase = (x: number) => 0.45 * x + 0.55 * (1 - Math.pow(1 - x, 2.5));
 
-  // The ring fills with the steps: each segment ends as its check lands.
-  const total = BUILD_STEPS.reduce((s, x) => s + x, 0);
-  const progress = useSharedValue(0);
-  useEffect(() => {
-    let at = 0;
-    const ts = BUILD_STEPS.map((ms, i) => {
-      at += ms;
-      return setTimeout(() => setDone(i + 1), at);
-    });
-    ts.push(setTimeout(() => finished.current(), total + HOLD));
-    let sum = 0;
-    progress.value = withSequence(
-      ...BUILD_STEPS.map((ms) => {
-        sum += ms;
-        return withTiming(sum / total, { duration: ms, easing: EASE_OUT });
-      }),
-    );
-    return () => ts.forEach(clearTimeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const ringProps = useAnimatedProps(() => ({ strokeDashoffset: CIRC * (1 - progress.value) }));
-
-  return (
-    <View style={styles.building}>
-      <View style={styles.ringWrap}>
-        <Svg width={280} height={280} style={{ position: 'absolute', transform: [{ rotate: '-90deg' }] }}>
-          <Circle cx={140} cy={140} r={RING} stroke={colors.trough} strokeWidth={12} fill="none" />
-          <AnimatedCircle
-            cx={140}
-            cy={140}
-            r={RING}
-            stroke={colors.primary}
-            strokeWidth={12}
-            strokeLinecap="round"
-            fill="none"
-            strokeDasharray={CIRC}
-            animatedProps={ringProps}
-          />
-        </Svg>
-        <View style={styles.ringFace}>
-          <Image source={POSE.asado} style={styles.buildingArt} contentFit="contain" accessibilityLabel={`${MASCOT_NAME} grilling at an asado`} />
-        </View>
-        <Animated.View entering={pop(250, reduced)} style={styles.ringBubble}>
-          <SpeechBubble style={{ paddingVertical: 8, paddingHorizontal: 12 }}>
-            <Text style={{ ...font.body[700], fontSize: 15, color: colors.ink }}>Un toque…</Text>
-          </SpeechBubble>
-        </Animated.View>
-      </View>
-      <Text style={styles.buildingTitle} accessibilityLiveRegion="polite">
-        {MASCOT_NAME} is cooking your plan…
-      </Text>
-      <View style={{ gap: 16, alignSelf: 'stretch', paddingHorizontal: 16 }}>
-        {lines.map((l, i) => (
-          <View key={l} style={styles.buildRow}>
-            <View style={styles.buildIcon}>
-              {i < done ? (
-                <Animated.View entering={reduced ? FadeIn.duration(120) : ZoomIn.duration(220).easing(EASE_OUT)} style={styles.buildCheck}>
-                  <MaterialCommunityIcons name="check" size={15} color={colors.onPrimary} />
-                </Animated.View>
-              ) : i === done ? (
-                <ActivityIndicator size="small" color={colors.primary} />
-              ) : (
-                <View style={styles.buildDot} />
-              )}
-            </View>
-            <Text style={[styles.buildText, i > done && { color: colors.faint }]}>{l}</Text>
-          </View>
-        ))}
-      </View>
-    </View>
-  );
+/** A loader's rhythm: each part gets its share of the line, by its length in the clip. */
+function buildProgress(t: number) {
+  if (t >= BUILD_CLOSED) return 1;
+  const ends = [...BUILD_BEATS, BUILD_CLOSED];
+  for (let k = 0; k < BUILD_BEATS.length; k++) {
+    const a = ends[k];
+    const b = ends[k + 1];
+    if (t < b) return (a + (b - a) * partEase(Math.max(0, (t - a) / (b - a)))) / BUILD_CLOSED;
+  }
+  return 1;
 }
 
-// --- your course: the clip of her own course, then on ---------------------------
+/** The clip's card, and how far the line stands off it. */
+const CLIP_W = 304;
+const CLIP_RATIO = 4 / 5;
+const RIM_GAP = 10;
+const RIM_WIDTH = 6;
+const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-function CourseStep({ answers, reduced, onNext }: { answers: Answers; reduced: boolean; onNext: () => void }) {
-  const [seen, setSeen] = useState(false);
-  const [failed, setFailed] = useState(false);
+/** A rounded rectangle from top centre, clockwise, and its length. */
+function rimPath(w: number, h: number, r: number, o: number) {
+  const x = o;
+  const y = o;
+  const right = x + w;
+  const bottom = y + h;
+  const d = [
+    `M ${x + w / 2} ${y}`,
+    `H ${right - r}`,
+    `A ${r} ${r} 0 0 1 ${right} ${y + r}`,
+    `V ${bottom - r}`,
+    `A ${r} ${r} 0 0 1 ${right - r} ${bottom}`,
+    `H ${x + r}`,
+    `A ${r} ${r} 0 0 1 ${x} ${bottom - r}`,
+    `V ${y + r}`,
+    `A ${r} ${r} 0 0 1 ${x + r} ${y}`,
+    'Z',
+  ].join(' ');
+  return { d, length: 2 * (w - 2 * r) + 2 * (h - 2 * r) + 2 * Math.PI * r };
+}
+
+function Building({ answers, reduced, onReady, onNext }: { answers: Answers; reduced: boolean; onReady: () => void; onNext: () => void }) {
   const name = answers.name?.trim();
   const m = courseMoments(answers);
+  const [failed, setFailed] = useState(false);
+  const [closed, setClosed] = useState(false);
+  const [ready, setReady] = useState(false);
+  const readied = useRef(onReady);
+  readied.current = onReady;
+
+  const player = useVideoPlayer(COURSE_CLIP[answers.why], (p) => {
+    p.muted = true;
+    p.loop = true;
+    p.playbackRate = BUILD_RATE;
+    p.timeUpdateEventInterval = 0.05;
+    if (!reduced) p.play();
+  });
+
+  // On a short phone the card shrinks so the headline and the button still fit.
+  const { width: screenW, height: screenH } = useWindowDimensions();
+  const cardW = Math.max(200, Math.min(CLIP_W, screenW - 2 * (RIM_GAP + RIM_WIDTH + 30), (screenH - 330) * CLIP_RATIO));
+  const cardH = cardW / CLIP_RATIO;
+  const radiusIn = Math.round(cardW * 0.092);
+  const box = { w: cardW + 2 * RIM_GAP, h: cardH + 2 * RIM_GAP };
+  const rim = rimPath(box.w, box.h, radiusIn + RIM_GAP, RIM_WIDTH / 2);
+  const svgW = box.w + RIM_WIDTH;
+  const svgH = box.h + RIM_WIDTH;
+
+  const progress = useSharedValue(0);
+  const rimProps = useAnimatedProps(() => ({ strokeDashoffset: rim.length * (1 - progress.value), opacity: progress.value > 0.002 ? 1 : 0 }));
+
+  useEffect(() => {
+    let last = 0;
+    let done = false;
+    const begun = Date.now();
+    // Each reading moves the line on to where it should be by the next one.
+    const at = (t: number) => {
+      if (done) return;
+      last = Math.max(last, t);
+      progress.value = withTiming(buildProgress(last), { duration: 60, easing: Easing.linear });
+      if (last >= BUILD_CLOSED) setClosed(true);
+      if (last >= BUILD_READY) {
+        done = true;
+        setReady(true);
+        readied.current();
+      }
+    };
+    // The clip's clock while it plays; the wall clock, at the clip's pace, when
+    // it can't (reduced motion, no clip). A clip that loops has played past ready.
+    const sub = player.addListener('timeUpdate', ({ currentTime }) => {
+      if (reduced || failed) return;
+      at(currentTime < last - 1 ? 99 : currentTime);
+    });
+    const wall = setInterval(() => {
+      const t = ((Date.now() - begun) / 1000) * BUILD_RATE;
+      if (Date.now() - begun > BUILD_HOLD_MAX) at(99);
+      else if (reduced || failed) at(t);
+    }, 50);
+    const status = player.addListener('statusChange', ({ status: st }) => {
+      if (st === 'error') setFailed(true);
+    });
+    return () => {
+      sub.remove();
+      status.remove();
+      clearInterval(wall);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [player, reduced, failed]);
+
   return (
     <View style={{ flex: 1 }}>
-      <View style={styles.courseHead}>
-        <Animated.Text entering={rise(0, reduced)} style={styles.courseTitle} accessibilityRole="header">
-          {name ? `${name}, your course is ready.` : 'Your course is ready.'}
-        </Animated.Text>
-        <Animated.Text entering={rise(1, reduced)} style={styles.courseSub}>
-          Argentine Spanish, {answers.minutes} minutes a day.
-        </Animated.Text>
-      </View>
-      <View style={styles.courseClip}>
+      <View style={styles.buildMiddle}>
+        <View style={styles.buildHead}>
+          {/* Both headlines share one place, so nothing moves when one becomes the other. */}
+          <View>
+            <Animated.Text
+              key={ready ? 'ready' : 'building'}
+              entering={reduced ? FadeIn.duration(150) : FadeIn.duration(260)}
+              style={styles.courseTitle}
+              accessibilityRole="header"
+              accessibilityLiveRegion="polite">
+              {ready ? (name ? `${name}, your course is ready.` : 'Your course is ready.') : 'Building your course…'}
+            </Animated.Text>
+          </View>
+          <Text style={[styles.courseSub, !ready && { opacity: 0 }]}>Argentine Spanish, {answers.minutes} minutes a day.</Text>
+        </View>
+
         {failed ? (
-          // No connection, or the clip isn't there: the same three moments, still.
-          <Animated.View entering={rise(2, reduced)} style={styles.moments}>
+          // No connection, or the clip isn't there: the same moments, still.
+          <Animated.View entering={rise(1, reduced)} style={[styles.moments, { paddingHorizontal: 24 }]}>
             <Moment tag="DAY 1" tone={pastel.peach} text={m.first} />
             <Moment tag="DAY 3 · FIRST CHAT" tone={pastel.lav}>
               <Text style={styles.momentText}>
@@ -904,18 +912,50 @@ function CourseStep({ answers, reduced, onNext }: { answers: Answers; reduced: b
             <Moment tag="WEEK 2 · CULTURE" tone={pastel.sky} text={m.custom} />
           </Animated.View>
         ) : (
-          <ClipCard
-            source={COURSE_CLIP[answers.why]}
-            label="Four moments from your course: a lesson done, a chat where Pancho fixes one word, three street words, and a question about the culture"
-            reduced={reduced}
-            onEnded={() => setSeen(true)}
-            onError={() => setFailed(true)}
-          />
+          <View style={{ width: svgW, height: svgH, alignSelf: 'center' }}>
+            <View
+              style={[styles.buildClip, { left: RIM_WIDTH / 2 + RIM_GAP, top: RIM_WIDTH / 2 + RIM_GAP, width: cardW, height: cardH, borderRadius: radiusIn }]}
+              accessible
+              accessibilityRole="image"
+              accessibilityLabel="Your course: a lesson done, a chat where Pancho fixes one word, three street words, and a question about the culture">
+              {/* A TextureView keeps to the rounded corners (see ClipCard). */}
+              <VideoView
+                player={player}
+                style={StyleSheet.absoluteFill}
+                contentFit="cover"
+                nativeControls={false}
+                allowsPictureInPicture={false}
+                surfaceType="textureView"
+              />
+            </View>
+            <Svg width={svgW} height={svgH} style={StyleSheet.absoluteFill} pointerEvents="none">
+              <Path d={rim.d} stroke="rgba(58,42,32,0.10)" strokeWidth={RIM_WIDTH} fill="none" />
+              <AnimatedPath
+                d={rim.d}
+                stroke={colors.primary}
+                strokeWidth={RIM_WIDTH}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+                strokeDasharray={[rim.length, rim.length]}
+                animatedProps={rimProps}
+              />
+            </Svg>
+            {closed ? (
+              // Lands like a sticker: from 0.9, with an ease-out.
+              <Animated.View
+                entering={reduced ? FadeIn.duration(150) : ZoomIn.duration(300).easing(EASE_OUT)}
+                style={[styles.buildDone, { right: -4, top: -4 }]}>
+                <MaterialCommunityIcons name="check" size={22} color={colors.onPrimary} />
+              </Animated.View>
+            ) : null}
+          </View>
         )}
       </View>
+
       <View style={styles.footer}>
-        {seen || failed ? (
-          <Animated.View entering={reduced ? FadeIn.duration(200) : rise(0)}>
+        {ready ? (
+          <Animated.View entering={reduced ? FadeIn.duration(200) : rise(0).delay(280)}>
             <Button title="Continue" onPress={onNext} />
           </Animated.View>
         ) : (
@@ -1208,8 +1248,6 @@ const styles = StyleSheet.create({
   underline: { position: 'absolute', left: 3, right: 3, bottom: 0 },
   sun: { position: 'absolute', right: -120, top: 250, opacity: 0.55 },
   tryEn: { ...font.body[700], fontSize: 17, lineHeight: 23, color: colors.muted, textAlign: 'center' },
-  tryCount: { alignSelf: 'center', paddingHorizontal: 16, paddingVertical: 6, borderRadius: radius.pill, backgroundColor: pastel.butter, boxShadow: clay.surface, transform: [{ rotate: '-3deg' }] },
-  tryCountText: { ...font.display[900], fontSize: 17, lineHeight: 24, color: colors.ink, fontVariant: ['tabular-nums'] },
 
   // a choice
   choice: { flexDirection: 'row', alignItems: 'center', gap: 14, minHeight: 64, paddingVertical: 13, paddingHorizontal: 16, borderRadius: 28, backgroundColor: colors.card, boxShadow: clay.surface },
@@ -1268,23 +1306,24 @@ const styles = StyleSheet.create({
   promptArrow: { position: 'absolute', left: '75%', top: '100%', marginTop: 10, marginLeft: -13 },
 
   // building
-  building: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32, maxWidth: 440, width: '100%', alignSelf: 'center' },
-  ringWrap: { width: 280, height: 280, alignItems: 'center', justifyContent: 'center' },
-  ringFace: { width: 236, height: 236, borderRadius: 118, backgroundColor: colors.card, boxShadow: clay.surface, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' },
-  buildingArt: { width: 200, height: 200, marginTop: 18 },
-  ringBubble: { position: 'absolute', right: -14, top: 2, transformOrigin: 'bottom left' },
-  buildingTitle: { ...type.title, fontSize: 24, letterSpacing: -0.4, color: colors.ink, marginTop: 26, marginBottom: 22 },
-  buildRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  buildIcon: { width: 24, height: 24, alignItems: 'center', justifyContent: 'center' },
-  buildCheck: { width: 22, height: 22, borderRadius: 11, backgroundColor: colors.success, alignItems: 'center', justifyContent: 'center' },
-  buildDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.trough },
-  buildText: { ...font.body[600], fontSize: 16, color: colors.ink },
+  // The headline sits right above the clip, and the two are centred together.
+  buildMiddle: { flex: 1, justifyContent: 'center', gap: 22, maxWidth: 520, width: '100%', alignSelf: 'center' },
+  buildHead: { alignItems: 'center', gap: 8, paddingHorizontal: 26 },
+  buildClip: { position: 'absolute', overflow: 'hidden', backgroundColor: colors.bg },
+  buildDone: {
+    position: 'absolute',
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    backgroundColor: colors.success,
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: `0 0 0 3px ${colors.bg}`,
+  },
 
   // your course
-  courseHead: { alignItems: 'center', gap: 8, paddingTop: 12, paddingHorizontal: 26, maxWidth: 520, width: '100%', alignSelf: 'center' },
   courseTitle: { ...type.display, fontSize: 30, lineHeight: 33, letterSpacing: -0.7, color: colors.ink, textAlign: 'center' },
   courseSub: { ...font.body[600], fontSize: 16.5, lineHeight: 22, color: colors.muted, textAlign: 'center' },
-  courseClip: { flex: 1, justifyContent: 'center', paddingHorizontal: 24, paddingVertical: 18, maxWidth: 520, width: '100%', alignSelf: 'center' },
   moments: { gap: 16 },
   moment: { paddingHorizontal: 20, paddingVertical: 16, borderRadius: radius.lg, boxShadow: clay.surface },
   momentTag: { ...font.body[800], fontSize: 12, letterSpacing: 1.1, color: colors.onPastel, opacity: 0.65 },

@@ -99,7 +99,7 @@ function Chip({
   return (
     <Pressable
       onPress={onPress}
-      disabled={disabled}
+      disabled={!!disabled}
       hitSlop={6}
       style={({ pressed }) => [
         styles.chip,

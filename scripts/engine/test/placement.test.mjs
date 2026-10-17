@@ -13,6 +13,7 @@ import {
   planTest,
   sampleUnits,
   sectionPassed,
+  stagePassed,
   stageQuestions,
   startStage,
   testOutcome,
@@ -144,6 +145,26 @@ test('a near miss is half a miss: two of them make one', () => {
   assert.ok(sectionPassed([1, 1, 0]));
   assert.ok(!sectionPassed([1, 0.5, 0]), 'a near miss and a miss are more than one');
   assert.ok(!sectionPassed([0.5, 0.5, 0.5]));
+});
+
+test('on the way up, the walk forgives two misses in all', () => {
+  // A miss in each of three sections: the third section fails, and she lands at its start.
+  const results = new Map();
+  const asked = [];
+  for (const own of [[1, 0, 1], [0, 1, 1], [1, 0, 1]]) {
+    asked.push(...own);
+    results.set(results.size, stagePassed(own, asked, results));
+  }
+  assert.deepEqual([...results.values()], [true, true, false]);
+  assert.equal(placedStage(15, results), 2);
+  assert.ok(stagePassed([1, 1, 1], [1, 0, 1, 1, 0.5, 1, 1, 1, 1], new Map([[0, true], [1, true]])), 'a miss and a half');
+  assert.ok(!stagePassed([1, 0, 0], [1, 0, 0], new Map()), 'a failed section fails whatever the total');
+});
+
+test('walking down, only the section asked counts', () => {
+  const results = new Map([[3, false]]);
+  assert.ok(stagePassed([1, 0, 1], [0, 0, 1, 1, 0, 1], results));
+  assert.ok(!stagePassed([1, 0, 0], [0, 0, 1, 1, 0, 0], results));
 });
 
 test('the walk goes up while she passes and stops at the first section she fails', () => {

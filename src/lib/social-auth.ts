@@ -87,8 +87,9 @@ export async function signInWithGoogle(): Promise<SocialResult> {
   return finishFromUrl(res.url);
 }
 
-/** The callback carries either a PKCE code or the tokens themselves, in the
- *  query or the fragment, depending on how the project's auth flow is set. */
+/** The callback carries a PKCE code (lib/supabase.ts asks for that flow on
+ *  phones). Tokens in the URL are still read, for a link a build from before
+ *  the switch started. */
 async function finishFromUrl(url: string, { linking = false } = {}): Promise<SocialResult> {
   const params = new URLSearchParams(url.split(/[?#]/).slice(1).join('&'));
   const failed = params.get('error_description') ?? params.get('error');

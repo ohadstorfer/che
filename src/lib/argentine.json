@@ -1513,6 +1513,22 @@
      "voice": "tomas"
     },
     {
+     "id": "grupo",
+     "es": "grupo",
+     "pos": "noun",
+     "en": "a lie, nonsense",
+     "note": "\"Es grupo\" means it's a lie, not \"group\". Old lunfardo that is still everywhere, young people included: \"¿posta o grupo?\", true or made up?",
+     "example": {
+      "es": "Eso es puro grupo, no le creas.",
+      "en": "That's all lies, don't believe him.",
+      "audio": "argentine/008c3bf01b27987efc5f.mp3"
+     },
+     "gap": "grupo",
+     "level": 2,
+     "audio": "argentine/b49642855b5023d6b393.mp3",
+     "voice": "tomas"
+    },
+    {
      "id": "guarangada",
      "es": "guarangada",
      "pos": "noun",
@@ -1561,7 +1577,18 @@
      "level": 2,
      "audio": "argentine/deb616164c112f075791.mp3",
      "voice": "tomas"
-    },
+    }
+   ]
+  },
+  {
+   "slug": "charla-17",
+   "theme": "charla",
+   "name": "Going deeper III",
+   "title": "Everyday talk · Going deeper III",
+   "emoji": "💬",
+   "about": "Fillers, reactions and the little words every conversation runs on.",
+   "vulgar": false,
+   "words": [
     {
      "id": "nomas",
      "es": "nomás",
@@ -1577,18 +1604,7 @@
      "level": 2,
      "audio": "argentine/40063e5ab2cfc994e549.mp3",
      "voice": "tomas"
-    }
-   ]
-  },
-  {
-   "slug": "charla-17",
-   "theme": "charla",
-   "name": "Going deeper III",
-   "title": "Everyday talk · Going deeper III",
-   "emoji": "💬",
-   "about": "Fillers, reactions and the little words every conversation runs on.",
-   "vulgar": false,
-   "words": [
+    },
     {
      "id": "olvidate",
      "es": "olvidate",
@@ -1654,7 +1670,18 @@
      "level": 2,
      "audio": "argentine/486a5f306262e4ca3388.mp3",
      "voice": "malena"
-    },
+    }
+   ]
+  },
+  {
+   "slug": "charla-18",
+   "theme": "charla",
+   "name": "Rare gems",
+   "title": "Everyday talk · Rare gems",
+   "emoji": "💬",
+   "about": "Fillers, reactions and the little words every conversation runs on.",
+   "vulgar": false,
+   "words": [
     {
      "id": "sonaste",
      "es": "sonaste",
@@ -1670,18 +1697,7 @@
      "level": 2,
      "audio": "argentine/cf85e475aabf0b1ff031.mp3",
      "voice": "tomas"
-    }
-   ]
-  },
-  {
-   "slug": "charla-18",
-   "theme": "charla",
-   "name": "Rare gems",
-   "title": "Everyday talk · Rare gems",
-   "emoji": "💬",
-   "about": "Fillers, reactions and the little words every conversation runs on.",
-   "vulgar": false,
-   "words": [
+    },
     {
      "id": "tranca",
      "es": "tranca",
@@ -1713,23 +1729,6 @@
      "gap": "calce",
      "level": 3,
      "audio": "argentine/a03891f2e445def312ff.mp3",
-     "voice": "tomas"
-    },
-    {
-     "id": "grupo",
-     "es": "grupo",
-     "pos": "noun",
-     "en": "a lie, nonsense",
-     "note": "\"Es grupo\" means it's a lie, not \"group\". Old lunfardo, mostly older people; today people say \"es mentira\" or \"es verso\".",
-     "tag": "Old-fashioned",
-     "example": {
-      "es": "Eso es puro grupo, no le creas.",
-      "en": "That's all lies, don't believe him.",
-      "audio": "argentine/008c3bf01b27987efc5f.mp3"
-     },
-     "gap": "grupo",
-     "level": 3,
-     "audio": "argentine/b49642855b5023d6b393.mp3",
      "voice": "tomas"
     },
     {
@@ -2525,7 +2524,7 @@
      "note": "Someone who rats people out. In old lunfardo it also meant a cop.",
      "example": {
       "es": "No le cuentes nada, que es un botón.",
-      "en": "Don't tell him anything, he tells everyone.",
+      "en": "Don't tell him anything, he's a snitch.",
       "audio": "argentine/ef4154597e8ad9bc3175.mp3"
      },
      "gap": "botón",

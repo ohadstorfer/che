@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Azure Pancho</title>
+<style>
+  :root { --bg: #faf8f5; --card: #fff; --ink: #1d1b19; --muted: #77716a; --line: #ebe6df; --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 17px; margin: 4px 0 2px; }
+  .sub { color: var(--muted); font-size: 13px; margin: 0 0 16px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  label { font-size: 12px; color: var(--muted); display: block; margin: 12px 0 6px; }
+  button { font: inherit; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 10px; padding: 7px 12px; cursor: pointer; transition: transform 160ms var(--ease-out), background-color 150ms ease; }
+  button:active { transform: scale(0.97); }
+  button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  button:disabled { opacity: .5; cursor: default; }
+  .sample { font-size: 13px; padding: 5px 10px; }
+  textarea { width: 100%; font: inherit; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); resize: vertical; min-height: 70px; }
+  .go-row { margin-top: 10px; }
+  .go-row button { flex: 1; padding: 10px; }
+  #go { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .hint { color: var(--muted); font-weight: 400; }
+  .tune { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; }
+  .slider { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
+  .slider span { width: 56px; font-size: 13px; }
+  .slider input { flex: 1; accent-color: var(--ink); }
+  .slider b { width: 56px; text-align: right; font-size: 13px; font-weight: 600; }
+  #log { margin-top: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .clip { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; display: flex; gap: 10px; align-items: center;
+          transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out); }
+  @starting-style { .clip { opacity: 0; transform: translateY(6px); } }
+  .clip .t { flex: 1; }
+  .meta { font-size: 12px; color: var(--muted); }
+  .err { color: #b3261e; font-size: 13px; margin-top: 8px; }
+  @media (prefers-reduced-motion: reduce) { .clip { transition: opacity 200ms ease; } @starting-style { .clip { transform: none; } } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Azure Pancho</h1>
+  <p class="sub">Azure's Argentine voices, at the chat's speeds. Nothing is saved.</p>
+
+  <label>Voice</label>
+  <div class="row" id="voices">
+    <button data-voice="es-AR-TomasNeural" class="on">Tomás</button>
+    <button data-voice="es-AR-ElenaNeural">Elena</button>
+  </div>
+
+  <label>Speed</label>
+  <div class="row" id="speeds">
+    <button data-speed="0.75" class="on">Beginner · 0.75</button>
+    <button data-speed="0.9">Advanced · 0.9</button>
+    <button data-speed="1">Local · 1.0</button>
+  </div>
+
+  <label>Porteño tuning <span class="hint">— wider melody, small pause after Che / Mirá / Bueno…, no dead air</span></label>
+  <div class="tune">
+    <div class="slider"><span>Melody</span><input type="range" id="range" min="0" max="60" step="5" value="25"><b id="range-v">+25%</b></div>
+    <div class="slider"><span>Pitch</span><input type="range" id="pitch" min="-10" max="10" step="1" value="0"><b id="pitch-v">0%</b></div>
+    <div class="slider"><span>Pause</span><input type="range" id="pause" min="0" max="400" step="50" value="150"><b id="pause-v">150 ms</b></div>
+  </div>
+
+  <label>Try a Pancho line</label>
+  <div class="row" id="samples"></div>
+
+  <textarea id="text" placeholder="Escribí lo que dice Pancho…"></textarea>
+  <div class="row go-row">
+    <button id="go">▶︎ Tuned</button>
+    <button id="plain">▶︎ Plain</button>
+    <button id="ab">A/B · plain then tuned</button>
+  </div>
+  <div class="err" id="err"></div>
+  <div id="log"></div>
+</div>
+<script>
+const SAMPLES = [
+  '¡Buenas! ¿Qué te traigo?',
+  'Perdón por la demora, hoy estamos a full. ¿Todo bien con el café?',
+  '¡Che, qué bueno verte! ¿Cómo andás?',
+  'Mirá, no es por molestar, pero el café llegó frío.',
+  'Uh, qué macana. Bueno, ¿y vos de dónde sos?',
+  'Dale, nos vemos el finde. ¡Chau, cuidate!',
+  'Está re lindo el día para tomar unos mates en la plaza, ¿no?',
+  'No te hagas problema, son cosas que pasan.',
+];
+const $ = (s) => document.querySelector(s);
+let voice = 'es-AR-TomasNeural', speed = 0.75, player = null;
+
+function pick(group, attr, set) {
+  group.querySelectorAll('button').forEach((b) => b.onclick = () => {
+    group.querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b)); set(b.dataset[attr]);
+  });
+}
+pick($('#voices'), 'voice', (v) => voice = v);
+pick($('#speeds'), 'speed', (v) => speed = Number(v));
+
+for (const s of SAMPLES) {
+  const b = document.createElement('button'); b.className = 'sample'; b.textContent = s.length > 34 ? s.slice(0, 32) + '…' : s; b.title = s;
+  b.onclick = () => { $('#text').value = s; speak(); }; $('#samples').append(b);
+}
+
+function play(url) {
+  return new Promise((done) => { if (player) player.pause(); player = new Audio(url); player.onended = player.onerror = done; player.play().catch(done); });
+}
+const val = (id) => Number($('#' + id).value);
+for (const [id, fmt] of [['range', (v) => (v >= 0 ? '+' : '') + v + '%'], ['pitch', (v) => (v > 0 ? '+' : '') + v + '%'], ['pause', (v) => v + ' ms']]) {
+  const show = () => $('#' + id + '-v').textContent = fmt(val(id)); $('#' + id).oninput = show; show();
+}
+const tune = () => ({ range: val('range'), pitch: val('pitch'), pauses: val('pause') > 0, pauseMs: val('pause') });
+
+async function fetchClip(text, tuned) {
+  const res = await fetch('/api/speak', { method: 'POST', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ text, voice, speed, tune: tuned ? tune() : null }) });
+  if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.status);
+  return { url: URL.createObjectURL(await res.blob()), ms: res.headers.get('x-ms') };
+}
+
+function addRow(text, label, clip) {
+  const row = document.createElement('div'); row.className = 'clip';
+  const t = document.createElement('div'); t.className = 't';
+  t.innerHTML = '<div></div><div class="meta"></div>';
+  t.firstChild.textContent = text;
+  t.lastChild.textContent = `${label} · ${voice.replace('es-AR-', '').replace('Neural', '')} · ${speed} · ${text.length} chars · ${clip.ms} ms`;
+  const p = document.createElement('button'); p.textContent = '▶︎'; p.onclick = () => play(clip.url);
+  row.append(t, p); $('#log').prepend(row);
+}
+
+async function run(mode) {
+  const text = $('#text').value.trim(); if (!text) return;
+  document.querySelectorAll('.go-row button').forEach((b) => b.disabled = true); $('#err').textContent = '';
+  try {
+    if (mode === 'ab') {
+      const [a, b] = await Promise.all([fetchClip(text, false), fetchClip(text, true)]);
+      const t = tune(); addRow(text, 'Plain', a); addRow(text, `Tuned (melody +${t.range}%, pitch ${t.pitch}%, pause ${t.pauseMs} ms)`, b);
+      await play(a.url); await new Promise((r) => setTimeout(r, 400)); await play(b.url);
+    } else {
+      const c = await fetchClip(text, mode === 'tuned'); const t = tune();
+      addRow(text, mode === 'tuned' ? `Tuned (melody +${t.range}%, pitch ${t.pitch}%, pause ${t.pauseMs} ms)` : 'Plain', c); play(c.url);
+    }
+  } catch (err) { $('#err').textContent = '⚠︎ ' + err.message; }
+  document.querySelectorAll('.go-row button').forEach((b) => b.disabled = false);
+}
+const speak = () => run('tuned');
+$('#plain').onclick = () => run('plain');
+$('#ab').onclick = () => run('ab');
+$('#go').onclick = speak;
+$('#text').onkeydown = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); speak(); } };
+</script>
+</body>
+</html>

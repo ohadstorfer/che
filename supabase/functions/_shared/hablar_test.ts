@@ -1,9 +1,11 @@
 import { assertEquals } from "jsr:@std/assert@1";
 import {
   bandOf,
+  CHATS_PER_DAY,
   CLOCK,
   clockOf,
   CONTENT,
+  COURSE_CHATS_PER_DAY,
   deadlineAt,
   diloCompare,
   effectivePaused,
@@ -13,6 +15,7 @@ import {
   looksEnglish,
   looksSpanish,
   mergePaused,
+  messageCap,
   nearestBand,
   nextUserIdx,
   resolveLevel,
@@ -24,6 +27,7 @@ import {
   hearingHolds,
   unsureWords,
   sttKeyterms,
+  TAB_MESSAGES,
   topicOf,
   wantsLanguageRetry,
 } from "./hablar.ts";
@@ -45,21 +49,19 @@ Deno.test("pauses are capped at 15 minutes and at the wall time itself", () => {
   assertEquals(elapsedSeconds(start, 99_999, at(1200)), 300);
 });
 
-Deno.test("deadline moves with the pauses, and beginners get a minute more", () => {
-  assertEquals(deadlineAt(start, 0, "B1", at(10)), "2026-09-25T12:03:00.000Z");
-  assertEquals(deadlineAt(start, 90, "B2", at(200)), "2026-09-25T12:04:30.000Z");
-  assertEquals(deadlineAt(start, 0, "A1", at(10)), "2026-09-25T12:04:00.000Z");
-  assertEquals(deadlineAt(start, 90, "A2", at(200)), "2026-09-25T12:05:30.000Z");
+Deno.test("deadline moves with the pauses: the backstop is ten minutes at every level", () => {
+  assertEquals(deadlineAt(start, 0, "B1", at(10)), "2026-09-25T12:10:00.000Z");
+  assertEquals(deadlineAt(start, 90, "B2", at(200)), "2026-09-25T12:11:30.000Z");
+  assertEquals(deadlineAt(start, 0, "A1", at(10)), "2026-09-25T12:10:00.000Z");
 });
 
-Deno.test("the clock by level: four minutes for A1/A2, three for B1/B2", () => {
+Deno.test("the clock is a backstop; beginners are nudged two exchanges later", () => {
   for (const level of ["A1", "A2"] as const) {
-    assertEquals(CLOCK[level], { closeSoon: 170, wrap: 210, stop: 240, closeSoonExchanges: 8 });
+    assertEquals(CLOCK[level], { closeSoon: 480, wrap: 540, stop: 600, closeSoonExchanges: 8 });
   }
   for (const level of ["B1", "B2"] as const) {
-    assertEquals(CLOCK[level], { closeSoon: 100, wrap: 150, stop: 180, closeSoonExchanges: 6 });
+    assertEquals(CLOCK[level], { closeSoon: 480, wrap: 540, stop: 600, closeSoonExchanges: 6 });
   }
-  // A row with no usable level keeps the clock every chat had before.
   assertEquals(clockOf(null), CLOCK.B1);
   assertEquals(clockOf("C1"), CLOCK.B1);
 });
@@ -71,25 +73,35 @@ Deno.test("pause reports only grow, and cap", () => {
   assertEquals(mergePaused(30, undefined), 30);
 });
 
-Deno.test("B1/B2: wrap up at 2:30 or after ten exchanges; nudge at 1:40 or six", () => {
-  assertEquals(shouldWrapUp(149, 9, "B1"), false);
-  assertEquals(shouldWrapUp(150, 1, "B2"), true);
+Deno.test("a unit chat: wrap up after ten exchanges; nudge at six (eight for a beginner)", () => {
+  assertEquals(shouldWrapUp(60, 9, "B1"), false);
   assertEquals(shouldWrapUp(0, 10, "B1"), true);
-  assertEquals(shouldCloseSoon(99, 5, "B1"), false);
-  assertEquals(shouldCloseSoon(100, 1, "B2"), true);
-  assertEquals(shouldCloseSoon(0, 6, "B1"), true);
-});
-
-Deno.test("A1/A2: wrap up at 3:30 or after ten exchanges; nudge at 2:50 or eight", () => {
-  assertEquals(shouldWrapUp(209, 9, "A1"), false);
-  assertEquals(shouldWrapUp(210, 1, "A2"), true);
   assertEquals(shouldWrapUp(0, 10, "A1"), true);
-  assertEquals(shouldCloseSoon(169, 7, "A1"), false);
-  assertEquals(shouldCloseSoon(170, 1, "A2"), true);
-  // With time left, a beginner's chat is still nudged to a close at eight exchanges.
-  assertEquals(shouldCloseSoon(60, 8, "A1"), true);
+  assertEquals(shouldCloseSoon(60, 5, "B1"), false);
+  assertEquals(shouldCloseSoon(0, 6, "B2"), true);
+  assertEquals(shouldCloseSoon(60, 7, "A1"), false);
+  assertEquals(shouldCloseSoon(60, 8, "A2"), true);
   assertEquals(exchangeOf(1), 1);
   assertEquals(exchangeOf(11), 6);
+});
+
+Deno.test("a Speaking-tab chat: eight lines, the nudge two before the last", () => {
+  const cap = messageCap({ kind: "scenario" });
+  assertEquals(cap, TAB_MESSAGES);
+  assertEquals(TAB_MESSAGES, 8);
+  assertEquals(messageCap({ kind: "free" }), 8);
+  assertEquals(messageCap({ kind: "unit" }), null);
+  assertEquals(shouldCloseSoon(0, 5, "A1", cap), false);
+  assertEquals(shouldCloseSoon(0, 6, "A1", cap), true);
+  assertEquals(shouldWrapUp(0, 7, "B1", cap), false);
+  assertEquals(shouldWrapUp(0, 8, "B1", cap), true);
+  // The backstop still closes a chat left running.
+  assertEquals(shouldWrapUp(540, 2, "A1", cap), true);
+});
+
+Deno.test("the day: three Speaking-tab chats, and three unit chats", () => {
+  assertEquals(CHATS_PER_DAY, 3);
+  assertEquals(COURSE_CHATS_PER_DAY, 3);
 });
 
 Deno.test("level: band of the section, and the override chip", () => {

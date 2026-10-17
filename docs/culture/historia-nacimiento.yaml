@@ -15,7 +15,7 @@ classes:
       - type: card
         text: "Long before the Spanish, this land was full of peoples: **guaraníes** in the northeast, **diaguitas** in the northwest valleys, **tehuelches** in Patagonia, **querandíes** on the pampa. Argentines call them **pueblos originarios**."
       - type: card
-        text: "Their descendants are still here. Today **12 de octubre** is no longer the “Día de la Raza” but the Day of Respect for Cultural Diversity."
+        text: "Their descendants are still here. In 2010 **12 de octubre** was renamed the Day of Respect for Cultural Diversity. Since 2024 the government calls it “Día de la Raza” again, and the name is still argued about."
       - type: choice
         prompt: "Buenos Aires means “good airs”. Where did the name really come from?"
         options:

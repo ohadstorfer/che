@@ -1,8 +1,8 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as WebBrowser from 'expo-web-browser';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import Animated, { useReducedMotion } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { IconButton, rise } from '@/components/onboarding-ui';
 import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
+import { loadInbox } from '@/lib/feedback';
 import { isGuest } from '@/lib/guest';
 import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
 import { goBack, resetTo } from '@/lib/nav';
@@ -54,6 +55,17 @@ export default function AccountScreen() {
   const [confirming, setConfirming] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Testers' unread messages, shown on the Feedback row.
+  const [unread, setUnread] = useState(0);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (!staff) return;
+      loadInbox()
+        .then((threads) => setUnread(threads.reduce((n, t) => n + t.unread, 0)))
+        .catch(() => {});
+    }, [staff]),
+  );
 
   const signOut = async () => {
     await supabase.auth.signOut();
@@ -122,6 +134,14 @@ export default function AccountScreen() {
             <>
               <View style={styles.divider} />
               <Row icon="construct-outline" tone="peach" label="Course dashboard" onPress={() => router.push('/admin')} />
+              <View style={styles.divider} />
+              <Row
+                icon="chatbubbles-outline"
+                tone="sky"
+                label="Feedback"
+                detail={unread > 0 ? `${unread} unread` : undefined}
+                onPress={() => router.push('/admin/feedback')}
+              />
             </>
           ) : null}
         </Animated.View>

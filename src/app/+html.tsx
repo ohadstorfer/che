@@ -2,7 +2,7 @@ import { ScrollViewStyleReset } from 'expo-router/html';
 import type { PropsWithChildren } from 'react';
 
 // On the web a bundled image is `{ uri, width, height }`.
-const SPLASH_ICON = (require('@/assets/images/splash-icon.png') as { uri: string }).uri;
+const SPLASH_ICON = (require('@/assets/images/splash-pancho.png') as { uri: string }).uri;
 
 const AUDIO_ORIGIN = process.env.EXPO_PUBLIC_AUDIO_URL ? new URL(process.env.EXPO_PUBLIC_AUDIO_URL).origin : null;
 
@@ -70,7 +70,7 @@ export default function Root({ children }: PropsWithChildren) {
             __html:
               'body{background-color:#F7EFE6}' +
               '#boot-splash{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1000;display:flex;' +
-              'align-items:center;justify-content:center;background-color:#F7EFE6}' +
+              'align-items:center;justify-content:center;background-color:#FFE08A}' +
               '#boot-splash img{display:block;animation:boot-breathe 2.2s ease-in-out infinite}' +
               '@keyframes boot-breathe{50%{transform:scale(1.04)}}' +
               '@media (prefers-reduced-motion:reduce){#boot-splash img{animation:none}}' +
@@ -87,7 +87,7 @@ export default function Root({ children }: PropsWithChildren) {
             picture, size and breath as the native splash. */}
         <div id="boot-splash">
           <div id="boot-splash-lift">
-            <img src={SPLASH_ICON} width={180} height={180} alt="" />
+            <img src={SPLASH_ICON} width={260} height={260} alt="" />
           </div>
         </div>
       </body>

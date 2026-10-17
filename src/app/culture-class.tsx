@@ -23,7 +23,7 @@ import { Choices, PlayButton } from '@/components/exercises';
 import { PathLessonDone } from '@/components/path-lesson-done';
 import { Button, Panel } from '@/components/ui';
 import { type Anchor, WordPopover } from '@/components/word-popover';
-import { artFor, speakerArt } from '@/lib/culture-art';
+import { artFor, glossArt, speakerArt } from '@/lib/culture-art';
 import {
   type CulturePage,
   type CultureWord,
@@ -360,6 +360,7 @@ function ClassPlayer({ found, lessonId, unreachable }: { found: ReturnType<typeo
         form={peek ? asForm(peek.word) : null}
         anchor={peek?.anchor ?? null}
         gloss={peek?.word.en}
+        image={peek ? glossArt(peek.word.es) : undefined}
         onClose={() => setPeek(null)}
         audio={(path) => <PlayButton path={path} />}
       />

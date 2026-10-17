@@ -25,15 +25,15 @@ import { FitText } from '@/components/fit-text';
 // The course as a map of sections, the way Duolingo lays it out: one card per
 // section with how far she is through it and which units it spans. The path on
 // Home holds a single section; this is where she sees all of them and moves
-// between them. The section she is in is the one card in salvia clay, with what
-// it lets her say in a speech bubble and the only primary button on the screen.
-// Finished sections are manteca, the ones ahead pressed-flat locked oat, so the
+// between them. The section she is in is the one card in manteca, with what it
+// lets her say in a speech bubble and the only primary button on the screen.
+// Finished sections are salvia, the ones ahead pressed-flat locked oat, so the
 // colour alone says where she is. Every one ahead offers the jump test that
 // lands her at its start, however far: the test samples a spread of the units
 // she would skip, so it stays one sitting long.
 // ---------------------------------------------------------------------------
 
-const TINT = { done: pastel.butter, locked: path.lockedFace } as const;
+const TINT = { done: pastelGrad.sage[1], locked: path.lockedFace } as const;
 
 const webPress =
   Platform.OS === 'web'
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     boxShadow: clay.surface,
   },
-  cardCurrent: { backgroundColor: pastelGrad.sage[1] },
+  cardCurrent: { backgroundColor: pastel.butter },
 
   bubbleRow: { flexDirection: 'row' },
   bubble: {

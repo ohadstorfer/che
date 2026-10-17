@@ -7,7 +7,8 @@ import type { Streak } from '@/lib/types';
 // The row itself is written lazily — nothing touches it on the day she skips —
 // so its meaning depends on how old `last_practice_date` is:
 //
-//   alive       practised today or yesterday; the count is simply true.
+//   alive       practised today or yesterday; the count is simply true. `today`
+//               says which — the chip stays unlit until today's round is in.
 //   frozen      the run outlived its last practice day. The row still holds
 //               the old count (nothing has reset it yet), which is exactly the
 //               number the header shows struck through.
@@ -18,7 +19,7 @@ import type { Streak } from '@/lib/types';
 // ---------------------------------------------------------------------------
 export type StreakStatus =
   | { kind: 'none' }
-  | { kind: 'alive'; days: number }
+  | { kind: 'alive'; days: number; today: boolean }
   | { kind: 'frozen'; lost: number }
   | { kind: 'recovering'; lost: number; days: number };
 
@@ -31,9 +32,9 @@ export function streakStatus(streak: Streak | null, today = localDateStr()): Str
     const banked = streak.recoverable_streak ?? 0;
     return banked > 0
       ? { kind: 'recovering', lost: banked, days: streak.current_streak }
-      : { kind: 'alive', days: streak.current_streak };
+      : { kind: 'alive', days: streak.current_streak, today: true };
   }
-  if (last === dayBefore(today)) return { kind: 'alive', days: streak.current_streak };
+  if (last === dayBefore(today)) return { kind: 'alive', days: streak.current_streak, today: false };
   return streak.current_streak > 0 ? { kind: 'frozen', lost: streak.current_streak } : { kind: 'none' };
 }
 

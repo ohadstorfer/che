@@ -68,7 +68,7 @@ classes:
           - "Around sixty thousand"
           - "Around six hundred thousand"
         correct: 0
-        explain: "Estimates start at about six million a day, and some recent ones are much higher. That's at least one for every eight people, every single day."
+        explain: "Estimates went from about six million a day in 2022 to around twelve million in 2026. That's about one for every four people, every single day."
       - type: card
         chip: "Pro tip"
         text: "Skipped lunch? Ask for a **triple**: three cookies, two layers of [dulce de leche]. More [alfajor] per [alfajor]."
@@ -105,7 +105,7 @@ classes:
         text: "**Jorgito** and **Guaymallén** are the everyday [kiosco] alfajores: cheap and much loved. Ask a table which [alfajor] is the best and the argument can last all afternoon."
       - type: card
         chip: "Did you know?"
-        text: "There's even a **Mundial del Alfajor**, held in Buenos Aires. A “world” championship for a snack that almost only Argentina eats. Very Argentine."
+        text: "There's even a **Mundial del Alfajor**, held in Buenos Aires. A “world” championship for a snack Argentina eats more of than anywhere else. Very Argentine."
     vocabulary: []
 
   # ─────────────────────────────────────────────────────────────

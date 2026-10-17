@@ -119,7 +119,11 @@ export function Button({
   return (
     <Pressable
       onPress={onPress}
-      disabled={disabled || loading}
+      // Strictly true or false. Android disables the native view when this is
+      // true, and only enables it again when it is false — `false || undefined`
+      // is undefined, which left Check disabled after an answer was picked, and
+      // a disabled view takes no taps of its own: only the label answered.
+      disabled={!!(disabled || loading)}
       style={({ pressed }) => [
         styles.button,
         small && styles.buttonSmall,

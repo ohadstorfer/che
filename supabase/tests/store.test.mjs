@@ -20,7 +20,7 @@ await import('reflect-metadata');
 const x509 = await import('@peculiar/x509');
 const { appleState, verifyAppleJws } = await import('../functions/_shared/store-apple.ts');
 const { playState } = await import('../functions/_shared/store-google.ts');
-const { decide, ownerOf } = await import('../functions/_shared/entitlement.ts');
+const { decide, ownerOf, sellable } = await import('../functions/_shared/entitlement.ts');
 
 const b64url = (bytes) => Buffer.from(bytes).toString('base64url');
 const sha256 = async (buf) => Buffer.from(await crypto.subtle.digest('SHA-256', buf)).toString('hex');
@@ -223,6 +223,30 @@ test('a transaction signed before the refund cannot undo the refund', () => {
   assert.deepEqual(decide(state(), refunded, refunded, A, NOW), { write: false, reason: 'stale', premium: false });
   // Nor hand it to someone else.
   assert.deepEqual(decide(state(), refunded, null, B, NOW), { write: false, reason: 'stale', premium: false });
+});
+
+test('a refund outlives the account that saw it', () => {
+  // The refunded account was deleted, so no row holds the purchase; the
+  // ledger still has the refund, newer than the transaction sent again.
+  const refundedAt = new Date(NOW + DAY).toISOString();
+  assert.deepEqual(decide(state(), null, null, B, NOW, refundedAt), { write: false, reason: 'stale', premium: false });
+  // The same word the ledger already has is not stale (restoring again).
+  assert.deepEqual(decide(state(), null, null, B, NOW, state().signedAt), { write: true, userId: B, release: null });
+});
+
+test('sandbox purchases are marked, real ones are not', () => {
+  assert.equal(appleState(TX, null, NOW).sandbox, true);
+  assert.equal(appleState({ ...TX, environment: 'Production' }, null, NOW).sandbox, false);
+  const live = { subscriptionState: 'SUBSCRIPTION_STATE_ACTIVE', lineItems: [{ productId: 'p', expiryTime: new Date(NOW + DAY).toISOString() }] };
+  assert.equal(playState(live, 'tok', NOW).sandbox, false);
+  assert.equal(playState({ ...live, testPurchase: {} }, 'tok', NOW).sandbox, true);
+});
+
+test('only what Posta sells opens Premium', () => {
+  assert.equal(sellable('posta_premium_annual', undefined), true);
+  assert.equal(sellable('posta_premium_annual_offer', undefined), true);
+  assert.equal(sellable('lifetime_unlock', undefined), false);
+  assert.equal(sellable('lifetime_unlock', 'posta_premium_annual, lifetime_unlock'), true);
 });
 
 test('an expiry is recorded on the row that holds the purchase, and nowhere else', () => {

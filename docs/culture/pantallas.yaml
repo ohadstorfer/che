@@ -84,23 +84,23 @@ classes:
       - type: card
         text: "The film every family knows is **Esperando la carroza**, from 1985: a loud family argues about who has to take care of the grandmother."
       - type: choice
-        prompt: "In its most famous scene, a man cries about how poor his brother is. What did he see on the brother's table?"
+        prompt: "In its most famous scene, a man moans about how poor his sister is. What did he see on her table?"
         options:
           - "Half a pizza"
           - "Three empanadas"
           - "One cold milanesa"
         correct: 1
-        explain: "**“Tres empanadas”**, said with tears: three old empanadas for two people. He's not really sad, and he ate one himself. Argentines repeat it today when there's not enough of something."
+        explain: "**“Tres empanadas”**, said as if it broke his heart: three old empanadas for two people. He's not really sad, and he chews one himself as he says it. Argentines repeat it today when there's not enough of something."
       - type: card
         text: "**Relatos salvajes**, from 2014, tells six short stories of normal people who lose control: in traffic, at a wedding, at a public office. Argentines saw themselves in it."
       - type: choice
-        prompt: "You go to see an American film for adults in a cinema in Buenos Aires. How is it shown?"
+        prompt: "Cinema listings say **subtitulada** or **doblada** next to each time. Which one keeps the English voices?"
         options:
-          - "With Spanish voices"
-          - "In English, with nothing to read"
-          - "In English, with Spanish words on the screen"
-        correct: 2
-        explain: "Most films for adults are **subtituladas**. Children's films are **dobladas**, with Spanish voices. Good news if you're learning: you can read along."
+          - "Doblada"
+          - "Subtitulada"
+          - "Both of them"
+        correct: 1
+        explain: "**Subtitulada** keeps the English, with Spanish words on the screen. **Doblada** has Spanish voices. Most films now arrive dubbed, and subtitled times are mostly in the city centre. Learning? Either one helps."
       - type: card
         text: "Buenos Aires has around 300 theaters, more than almost any city in the world. On **Avenida Corrientes**, the shows start late and the pizza places wait for the crowd after."
       - type: card
