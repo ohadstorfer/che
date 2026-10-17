@@ -1109,6 +1109,14 @@ function TrueFalse({
           </Text>
           {verdict ? null : <Text style={styles.guessMark}>?</Text>}
         </View>
+        {/* Struck out, the guess alone teaches nothing: what the word really
+            means goes under it, whether she caught the imposter or not. */}
+        {verdict && !isTrue ? (
+          <View style={styles.guessReal}>
+            <Ionicons name="arrow-down" size={16} color={colors.success} />
+            <Text style={styles.guessRealText}>{shownMeaning(form).text}</Text>
+          </View>
+        ) : null}
       </Panel>
 
       <View style={styles.ratingRow}>
@@ -2373,7 +2381,10 @@ function SentenceGap({
         </PhraseCard>
       ) : (
         <>
-          {byEar ? <AudioPad path={sentence.audio_path!} /> : <EnglishBubble sentence={sentence} />}
+          {/* Lying down, the pad leaves the four answers and the button room to
+              fit on the phone without scrolling: a choice under the fold is a
+              choice she never weighs. */}
+          {byEar ? <AudioPad path={sentence.audio_path!} compact /> : <EnglishBubble sentence={sentence} />}
           <View style={styles.gapLine}>
             {verdict && sentence.audio_path && !byEar ? <PlayButton path={sentence.audio_path} /> : null}
             <SentenceLine
@@ -2665,6 +2676,19 @@ const styles = StyleSheet.create({
   guessFalse: { borderStyle: 'solid', borderColor: colors.danger, backgroundColor: colors.dangerSoft },
   guessText: { ...font.display[700], fontSize: 21, color: colors.ink, textAlign: 'center', flexShrink: 1 },
   guessTextFalse: { textDecorationLine: 'line-through', textDecorationColor: colors.danger },
+  guessReal: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    maxWidth: '100%',
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: radius.sm,
+    borderWidth: 2,
+    borderColor: colors.success,
+    backgroundColor: colors.successSoft,
+  },
+  guessRealText: { ...font.display[700], fontSize: 21, color: colors.ink, textAlign: 'center', flexShrink: 1 },
   guessMark: { ...font.display[800], fontSize: 21, color: colors.primary },
   enPhrase: { ...font.display[700], fontSize: 20, color: colors.ink, textAlign: 'center' },
   // Room between the prompt and the sentence — space, not a line.

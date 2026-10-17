@@ -1,7 +1,8 @@
 import { Image } from 'expo-image';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Linking, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Modal, Platform, Pressable, Share, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AdminScreen, Muted, SmallButton, adminStyles } from '@/components/admin';
 import {
@@ -34,6 +35,8 @@ export default function AdminFeedbackThread() {
   const [draft, setDraft] = useState('');
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  /** The screenshot open full screen, by its storage path. */
+  const [viewing, setViewing] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     if (!user) return;
@@ -110,7 +113,7 @@ export default function AdminFeedbackThread() {
                   {m.images.map((p) => {
                     const url = urls.get(p);
                     return (
-                      <Pressable key={p} onPress={() => url && Linking.openURL(url)} accessibilityLabel="Open screenshot">
+                      <Pressable key={p} onPress={() => url && setViewing(p)} accessibilityLabel="Open screenshot">
                         {url ? (
                           <Image source={{ uri: url }} style={styles.shot} contentFit="cover" />
                         ) : (
@@ -150,8 +153,70 @@ export default function AdminFeedbackThread() {
         <SmallButton label={sending ? 'Sending…' : 'Send'} icon="send" tone="primary" disabled={sending || !draft.trim()} onPress={reply} />
       </View>
       {error ? <Text style={{ color: colors.dangerInk }}>{error}</Text> : null}
+
+      {viewing && urls.get(viewing) ? (
+        <Viewer path={viewing} url={urls.get(viewing)!} onClose={() => setViewing(null)} />
+      ) : null}
     </AdminScreen>
   );
+}
+
+/**
+ * A screenshot full screen, inside the app rather than off to the browser,
+ * with a way to keep it: the phone's share sheet (Save Image) on a device, a
+ * plain download on the web.
+ */
+function Viewer({ path, url, onClose }: { path: string; url: string; onClose: () => void }) {
+  const insets = useSafeAreaInsets();
+  const [saving, setSaving] = useState(false);
+  const [problem, setProblem] = useState<string | null>(null);
+
+  const download = async () => {
+    setSaving(true);
+    setProblem(null);
+    try {
+      await saveImage(url, path.split('/').pop() || 'screenshot.png');
+    } catch (e) {
+      setProblem((e as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <Modal visible transparent animationType="fade" onRequestClose={onClose} supportedOrientations={['portrait', 'landscape']}>
+      <View style={[styles.viewer, { paddingTop: insets.top + 8, paddingBottom: insets.bottom + 12 }]}>
+        <View style={styles.viewerBar}>
+          <SmallButton label="Close" icon="close" onPress={onClose} />
+          <SmallButton label={saving ? 'Saving…' : 'Download'} icon="download-outline" tone="primary" disabled={saving} onPress={download} />
+        </View>
+        <Pressable style={{ flex: 1 }} onPress={onClose} accessibilityLabel="Close screenshot">
+          <Image source={{ uri: url }} style={{ flex: 1 }} contentFit="contain" />
+        </Pressable>
+        {problem ? <Text style={styles.viewerProblem}>{problem}</Text> : null}
+      </View>
+    </Modal>
+  );
+}
+
+async function saveImage(url: string, name: string) {
+  if (Platform.OS === 'web') {
+    // A signed URL is on another origin, where `download` is ignored: fetch it
+    // and hand the browser the bytes instead.
+    const blob = await (await fetch(url)).blob();
+    const href = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = href;
+    a.download = name;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(href), 1000);
+    return;
+  }
+  const { File, Paths } = await import('expo-file-system');
+  const file = new File(Paths.cache, name.replace(/[^\w.-]/g, '_'));
+  const got = await File.downloadFileAsync(url, file, { idempotent: true });
+  // iOS shares the file itself; Android's sheet only takes text, so the link.
+  await Share.share(Platform.OS === 'ios' ? { url: got.uri } : { message: url });
 }
 
 /** "/practice · v1.0.0 · iPhone 15 · iOS 18.2" */
@@ -169,6 +234,9 @@ const styles = StyleSheet.create({
   bubbleTheirs: { backgroundColor: pastel.butter, borderBottomLeftRadius: 5 },
   text: { ...font.body[600], fontSize: 15, lineHeight: 21, color: colors.ink },
   meta: { fontSize: 12, color: colors.muted },
+  viewer: { flex: 1, backgroundColor: 'rgba(30, 22, 16, 0.94)', paddingHorizontal: 12, gap: 10 },
+  viewerBar: { flexDirection: 'row', justifyContent: 'space-between' },
+  viewerProblem: { color: colors.onPrimary, textAlign: 'center' },
   composer: { flexDirection: 'row', alignItems: 'flex-end', gap: 8 },
   input: {
     flex: 1,
