@@ -90,10 +90,10 @@ import { FitText } from '@/components/fit-text';
 // hablar-reply, which transcribes it and answers on the same stream. (A draft
 // left over from an older build still shows for review after a reload.)
 //
-// A chat is measured in lines: eight on the Speaking tab (the server counts
+// A chat is measured in lines: eight, in a unit chat too (the server counts
 // them too). Two before the end a pill over the dock says how many are left;
 // Pancho's answer to the last one closes the chat, and the dock then says how
-// many of the day's chats are left. A unit chat has no count to show.
+// many of the day's chats are left.
 //
 // The server also keeps a clock, only as a backstop for a chat left running.
 // It isn't shown; it stops while the app is in the background and while it is
@@ -186,7 +186,7 @@ export default function HablarChat() {
   const [unlimited, setUnlimited] = useState(false);
   /** What kind of chat this is: a unit chat has no line count. Unknown until boot. */
   const [kind, setKind] = useState<HablarKind | null>(null);
-  /** The Speaking tab's chats left today, shown once the chat is over; null where it doesn't apply. */
+  /** The day's chats left (Course and Speaking together), shown once the chat is over; null where it doesn't apply. */
   const [chatsLeft, setChatsLeft] = useState<number | null>(null);
   const { status: plan } = usePremium();
   const [notice, setNotice] = useState<string | null>(null);
@@ -822,10 +822,11 @@ export default function HablarChat() {
   const micLocked = (timeUp || outOfLines) && phase !== 'recording' && phase !== 'draft';
   const over = phase === 'ended' || phase === 'ending' || micLocked;
 
-  // Once the chat is over: how many of the day's chats are left (premium only;
-  // a free account's limit is its free chats, which the tab shows).
+  // Once the chat is over: how many of the day's chats are left, Course and
+  // Speaking together (premium only; a free account's limit is its free chats,
+  // which the tab shows).
   useEffect(() => {
-    if (!over || kind === null || kind === 'unit' || unlimited || plan !== 'premium') return;
+    if (!over || kind === null || unlimited || plan !== 'premium') return;
     let alive = true;
     void todaysChats()
       .then((today) => alive && setChatsLeft(Math.max(0, CHATS_PER_DAY - today.length)))
@@ -1129,7 +1130,7 @@ export default function HablarChat() {
       {/* Volver / ⋮ → end */}
       <Sheet open={sheet?.kind === 'end'} onClose={() => setSheet(null)} title="End the call?">
         <Text style={styles.sheetBody}>
-          {kind === 'unit' || unlimited
+          {unlimited
             ? "You'll see your summary."
             : `You'll see your summary. It counts as one of today's ${CHATS_PER_DAY} chats.`}
         </Text>

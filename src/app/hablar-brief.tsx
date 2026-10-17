@@ -12,7 +12,7 @@ import {
   bandOf,
   bandsOf,
   chatLength,
-  COURSE_CHATS_PER_DAY,
+  CHATS_PER_DAY,
   findScenario,
   getDefaultLevel,
   type HablarKind,
@@ -99,7 +99,7 @@ export default function HablarBrief() {
       // The day's chats are used: the tab says so, and when they come back.
       if ('dailyLimit' in res) return void router.dismissTo('/hablar');
       if ('courseBreak' in res) {
-        setError(`Pancho needs a break: you've had ${COURSE_CHATS_PER_DAY} chats with him today. This one opens again tomorrow.`);
+        setError(`Pancho needs a break: you've had ${CHATS_PER_DAY} chats with him today, in Course and Speaking. This one opens again tomorrow.`);
         setStarting(false);
         return;
       }

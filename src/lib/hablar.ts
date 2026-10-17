@@ -113,7 +113,7 @@ export function resolveAudio(ref?: string | null): string | null {
 
 // --- types on the wire ---------------------------------------------------------
 
-/** 'unit': a unit's Speaking lesson on the road — its own scene, outside the day's three chats. */
+/** 'unit': a unit's Speaking lesson on the road — its own scene; one of the day's three chats. */
 export type HablarKind = 'scenario' | 'culture' | 'free' | 'unit';
 
 export interface StartResult {
@@ -130,9 +130,9 @@ export interface StartResult {
   /** null for a staff chat: no clock. */
   deadline_at: string | null;
   unlimited?: boolean;
-  /** Lines she may say in this chat (TAB_MESSAGES); null for a unit chat. */
+  /** Lines she may say in this chat (TAB_MESSAGES). */
   message_limit?: number | null;
-  /** The Speaking tab's chats left today after this one; null for unit and staff chats. */
+  /** The day's chats left after this one, Course and Speaking together; null for staff. */
   chats_left_today?: number | null;
   opener: { turn_id?: string; text: string; text_en: string; audio_url: string | null };
   key_phrases: { es: string; en: string; audio_url: string | null }[];
@@ -601,27 +601,25 @@ export async function latestConversation(): Promise<ConversationRow | null> {
 }
 
 /**
- * Today's Speaking-tab chats, newest first: how many of the day's three are
- * used, and the one still open. Staff chats are left out (they count toward nothing).
+ * Today's chats, Course and Speaking together, newest first: how many of the
+ * day's three are used. Staff chats are left out (they count toward nothing).
  */
 export async function todaysChats(): Promise<ConversationRow[]> {
   const { data: rows } = await supabase
     .from('conversations')
     .select(CONVERSATION_COLS)
     .eq('local_date', localDateStr())
-    .neq('kind', 'unit')
     .eq('unlimited', false)
     .order('started_at', { ascending: false });
   return (rows ?? []) as ConversationRow[];
 }
 
-/** Unit chats started today: Pancho takes a break after COURSE_CHATS_PER_DAY. */
-export async function unitChatsToday(): Promise<number> {
+/** Chats started today, Course and Speaking together: Pancho takes a break after CHATS_PER_DAY. */
+export async function chatsTodayCount(): Promise<number> {
   const { count } = await supabase
     .from('conversations')
     .select('id', { count: 'exact', head: true })
     .eq('local_date', localDateStr())
-    .eq('kind', 'unit')
     .eq('unlimited', false);
   return count ?? 0;
 }
@@ -677,19 +675,15 @@ export const isToday = (c: ConversationRow) => c.local_date === localDateStr();
 
 // --- the limits, as the server has them (supabase/functions/_shared/hablar.ts) ---
 
-/** Speaking-tab chats a day. */
+/** Chats a day, Course and Speaking together. */
 export const CHATS_PER_DAY = 3;
-/** Lines she says in a Speaking-tab chat; Pancho's answer to the last one closes it. */
+/** Lines she says in a chat (a unit chat too); Pancho's answer to the last one closes it. */
 export const TAB_MESSAGES = 8;
-/** Lines in a unit chat at most: Pancho closes it by then. */
-export const UNIT_MESSAGES = 10;
-/** Unit chats in a day before Pancho needs a break. */
-export const COURSE_CHATS_PER_DAY = 3;
 
-/** The lines a chat allows her: eight on the Speaking tab, none counted in a unit chat. */
-export const messageLimitOf = (kind: HablarKind | undefined) => (kind === 'unit' ? null : TAB_MESSAGES);
+/** The lines a chat allows her: eight, whatever its kind. */
+export const messageLimitOf = (_kind: HablarKind | undefined): number | null => TAB_MESSAGES;
 /** What the brief promises about a chat's length. */
-export const chatLength = (kind: HablarKind) => (kind === 'unit' ? `Up to ${UNIT_MESSAGES} messages` : `${TAB_MESSAGES} messages`);
+export const chatLength = (_kind: HablarKind) => `${TAB_MESSAGES} messages`;
 
 /** Whole hours until local midnight, at least one: when the day's chats come back. */
 export function hoursToMidnight(now = new Date()): number {

@@ -12,7 +12,7 @@ import { chatsUsed } from './premium';
 
 export interface HablarHome {
   latest: ConversationRow | null;
-  /** Today's Speaking-tab chats, newest first (staff chats left out). */
+  /** Today's chats, Course and Speaking together, newest first (staff chats left out). */
   today: ConversationRow[];
   past: ConversationRow[];
   /** Free chats used so far; null when she isn't on the free tier. */

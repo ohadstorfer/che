@@ -59,7 +59,7 @@ All the tutors studied show this. It removes the "what do I say?" freeze.
   it plays at once.
 - **Goals strip** under the header (scenarios only): goals tick off as Claude reports them done.
 - **One turn**:
-  1. Tap 🎙️ → record (max 45 s) → tap to stop.
+  1. Tap 🎙️ → record (max 20 s) → tap to stop.
   2. Client check: too short (< 0.6 s) or too quiet → "No te escuché" and nothing is sent.
   3. The **transcript shows as a draft bubble** with **Enviar** and **Grabar de nuevo**. This matters:
      accented speech gets misheard, and silence can come back as invented text.
@@ -179,7 +179,7 @@ service-role client). The Anthropic, ElevenLabs and service-role keys live only 
 
 1. JWT → session owner. `now < deadline + 30 s` (grace for the turn in flight). `turn_id` already
    exists → return its stored text (idempotent retry).
-2. Reject a body over 1.5 MB (≈ 45 s of audio). The client already drops clips < 0.6 s or silent.
+2. Reject a body over 0.9 MB (≈ 26 s of audio; the app stops at 20 s). The client already drops clips < 0.6 s or silent.
 3. Send the **bytes as they are** to Scribe (no transcoding; both mp4/AAC and webm/Opus are accepted):
    `model_id=scribe_v2, language_code=es, tag_audio_events=false, no_verbatim=false,
    temperature=0, keyterms=[the words of Pancho's last line, then the scene's key phrases, keyterms

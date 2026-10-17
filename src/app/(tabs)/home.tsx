@@ -23,7 +23,7 @@ import { RedoCard, type StepRect } from '@/components/redo-card';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { markBootReady } from '@/lib/boot';
-import { COURSE_CHATS_PER_DAY, type ConversationRow, hoursToMidnight, unitChat, unitChatsToday } from '@/lib/hablar';
+import { CHATS_PER_DAY, chatsTodayCount, type ConversationRow, hoursToMidnight, unitChat } from '@/lib/hablar';
 import { tomasArt } from '@/lib/hablar-art';
 import { localDateStr } from '@/lib/dates';
 import {
@@ -1140,7 +1140,7 @@ export default function Home() {
 
   // The chat with Pancho on the road (the "Chat limits UX" canvas). Each is
   // had once: a done one opens a card with how it went. On a day she
-  // has had COURSE_CHATS_PER_DAY of them, her chat step rests until tomorrow
+  // has had CHATS_PER_DAY chats (Course and Speaking together), her chat step rests until tomorrow
   // and its card offers the next lesson. Above the early return: hooks.
   const redoChatId = redo && path[redo.index]?.kind === 'speak' ? path[redo.index].id : null;
   /** The chat the open card is about: undefined while it is read, null if she never had it (she jumped past). */
@@ -1162,8 +1162,8 @@ export default function Home() {
   useEffect(() => {
     if (!focused || stepKind !== 'speak') return;
     let alive = true;
-    unitChatsToday().then(
-      (n) => alive && setCourseBreak(n >= COURSE_CHATS_PER_DAY),
+    chatsTodayCount().then(
+      (n) => alive && setCourseBreak(n >= CHATS_PER_DAY),
       () => {},
     );
     return () => {
@@ -1519,7 +1519,7 @@ export default function Home() {
         at={resting?.at ?? null}
         eyebrow={restingLesson ? `AI CHAT · UNIT ${restingLesson.unitIndex + 1}` : 'AI CHAT'}
         title="Pancho needs a break"
-        unit={`You've had ${COURSE_CHATS_PER_DAY} chats with him today. That's a lot of talking! Skip this one for now. It'll wait for you tomorrow.`}
+        unit={`You've had ${CHATS_PER_DAY} chats with him today, in Course and Speaking. That's a lot of talking! Skip this one for now. It'll wait for you tomorrow.`}
         art={tomasArt}
         opensIn={`Opens again in ${hoursToMidnight()} h`}
         action="Skip to next lesson"

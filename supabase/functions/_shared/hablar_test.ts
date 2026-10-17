@@ -5,7 +5,6 @@ import {
   CLOCK,
   clockOf,
   CONTENT,
-  COURSE_CHATS_PER_DAY,
   deadlineAt,
   diloCompare,
   effectivePaused,
@@ -90,7 +89,7 @@ Deno.test("a Speaking-tab chat: eight lines, the nudge two before the last", () 
   assertEquals(cap, TAB_MESSAGES);
   assertEquals(TAB_MESSAGES, 8);
   assertEquals(messageCap({ kind: "free" }), 8);
-  assertEquals(messageCap({ kind: "unit" }), null);
+  assertEquals(messageCap({ kind: "unit" }), 8);
   assertEquals(shouldCloseSoon(0, 5, "A1", cap), false);
   assertEquals(shouldCloseSoon(0, 6, "A1", cap), true);
   assertEquals(shouldWrapUp(0, 7, "B1", cap), false);
@@ -99,9 +98,8 @@ Deno.test("a Speaking-tab chat: eight lines, the nudge two before the last", () 
   assertEquals(shouldWrapUp(540, 2, "A1", cap), true);
 });
 
-Deno.test("the day: three Speaking-tab chats, and three unit chats", () => {
+Deno.test("the day: three chats, Course and Speaking together", () => {
   assertEquals(CHATS_PER_DAY, 3);
-  assertEquals(COURSE_CHATS_PER_DAY, 3);
 });
 
 Deno.test("level: band of the section, and the override chip", () => {

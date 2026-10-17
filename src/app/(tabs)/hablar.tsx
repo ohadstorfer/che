@@ -323,21 +323,21 @@ function DoneCard({ chats }: { chats: ConversationRow[] }) {
   );
 }
 
-/** Where to go once the day's chats are used: the course, whose chats with Pancho have no daily limit. */
+/** Where to go once the day's chats are used: the course's other lessons (its chats share the day's three). */
 function CourseRow() {
   return (
     <Pressable
       onPress={() => router.navigate('/home')}
       accessibilityRole="button"
-      accessibilityLabel="Keep talking in the course. Every unit ends with a chat with Pancho."
+      accessibilityLabel="Keep learning in the course. Pancho is back tomorrow."
       style={({ pressed }) => [styles.row, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
       <View style={[styles.rowArt, { backgroundColor: pastel.butter }]}>
         <Image source={tomasArt} style={styles.rowImage} contentFit="contain" accessible={false} />
       </View>
       <View style={styles.rowText}>
-        <Text style={styles.rowTitle}>Keep talking in the course</Text>
+        <Text style={styles.rowTitle}>Keep learning in the course</Text>
         <FitText style={styles.rowSub} lines={2}>
-          Every unit ends with a chat with Pancho
+          Your lessons are open. Pancho is back tomorrow.
         </FitText>
       </View>
       <Ionicons name="chevron-forward" size={18} color={colors.primary} />

@@ -114,19 +114,22 @@ export const publicAudioUrl = (supabaseUrl: string, path: string | null | undefi
 
 // ---------------------------------------------------------------------------
 // Limits (the "Chat limits UX" canvas, 20261016000001_hablar_chat_limits.sql).
-// A Speaking-tab chat is three a day and eight lines long; a unit chat is had
-// once, outside the day's count, with a high cap on how many fit in a day.
+// A Speaking-tab chat is three a day; a unit chat is had once, outside the
+// day's count, with a high cap on how many fit in a day. Every chat is eight
+// lines long (a unit chat too, since 2026-10-18: cost per chat is bounded).
 // ---------------------------------------------------------------------------
 
-/** Speaking-tab chats a day (the database's day_slot check agrees). */
+/**
+ * Chats a day, Course and Speaking together (since 2026-10-18): a unit chat
+ * and a Speaking-tab chat each take one. The database's day_slot check holds
+ * the Speaking tab's share; hablar-start counts both kinds.
+ */
 export const CHATS_PER_DAY = 3;
-/** Lines she says in a Speaking-tab chat; Pancho's answer to the last one closes it. */
+/** Lines she says in a chat (any kind); Pancho's answer to the last one closes it. */
 export const TAB_MESSAGES = 8;
-/** Unit chats a day before Pancho "needs a break". */
-export const COURSE_CHATS_PER_DAY = 3;
 
-/** The lines a chat allows her: eight on the Speaking tab; a unit chat runs on the exchange nudges alone. */
-export const messageCap = (s: { kind: string }): number | null => (s.kind === "unit" ? null : TAB_MESSAGES);
+/** The lines a chat allows her: eight, whatever its kind. Null would mean no cap. */
+export const messageCap = (_s: { kind: string }): number | null => TAB_MESSAGES;
 
 // ---------------------------------------------------------------------------
 // The clock (§4.5 step 2). The server decides; the client timer is a display.

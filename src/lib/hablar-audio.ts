@@ -435,4 +435,4 @@ export async function checkClip(clip: RecordedClip, elapsedMs: number): Promise<
 }
 
 /** Longest turn she can record; the recorder stops itself here. */
-export const MAX_RECORD_MS = 45_000;
+export const MAX_RECORD_MS = 20_000;

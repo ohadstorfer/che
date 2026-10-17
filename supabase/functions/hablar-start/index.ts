@@ -7,17 +7,16 @@
 // still load through topicOf.
 //
 // The limits (20261016000001_hablar_chat_limits.sql, staff excepted from all):
-//  - The Speaking tab: CHATS_PER_DAY chats per local day, one open at a time.
-//    A start while one is open gets 409 `open` with that session; past the
-//    day's last gets 429 `daily_limit`. The database gives each chat its slot
+//  - CHATS_PER_DAY chats per local day, Course and Speaking together.
+//  - The Speaking tab: one open at a time. A start while one is open gets 409
+//    `open` with that session; past the day's last gets 429 `daily_limit`. The database gives each chat its slot
 //    of the day, so the limit holds even if two starts race. Each chat takes
 //    TAB_MESSAGES lines (hablar-draft.ts, hablar-reply).
-//  - A unit chat is none of the day's business, and doesn't count toward the
-//    free chats; the lesson decides whether she may open it, the way the road
-//    does. It is had once: an open one is resumed (409 `open`), and one she
-//    spoke in is done (409 `chat_done`, with its summary). Past
-//    COURSE_CHATS_PER_DAY unit chats in a day,
-//    429 `course_break`.
+//  - A unit chat doesn't count toward the free chats; the lesson decides
+//    whether she may open it, the way the road does. It is had once: an open
+//    one is resumed (409 `open`), and one she spoke in is done (409
+//    `chat_done`, with its summary). Past the day's last chat, 429
+//    `course_break`.
 //
 // The opener is pre-recorded and bundled, so no model or TTS call happens
 // here; its text is written in as turn 0. A unit chat's scene is the unit's,
@@ -31,7 +30,6 @@ import {
   caller,
   CHATS_PER_DAY,
   clockOf,
-  COURSE_CHATS_PER_DAY,
   deadlineAt,
   freeOpener,
   isUuid,
@@ -161,10 +159,10 @@ Deno.serve(async (req) => {
     deadline_at: unlimited ? null : deadlineAt(session.started_at, 0, level),
     limit_seconds: unlimited ? null : clockOf(level).stop,
     unlimited,
-    // Lines she may say: eight on the Speaking tab; a unit chat has no count to show.
-    message_limit: unit ? null : TAB_MESSAGES,
-    // The Speaking tab's chats left today after this one; null where no day's count applies.
-    chats_left_today: unit || unlimited ? null : Math.max(0, CHATS_PER_DAY - (session.day_slot ?? CHATS_PER_DAY)),
+    // Lines she may say: eight, in a unit chat too.
+    message_limit: TAB_MESSAGES,
+    // The day's chats left after this one (Course and Speaking together); null for staff.
+    chats_left_today: unlimited ? null : Math.max(0, CHATS_PER_DAY - (await chatsToday(db, who.userId, today))),
     opener: { turn_id: openerTurnId, text: opener.es, text_en: opener.en, audio_url: audioUrl },
     goals: [],
     key_phrases: (topic.scenario?.key_phrases ?? []).map((p) => ({
@@ -178,24 +176,39 @@ Deno.serve(async (req) => {
   });
 });
 
-/**
- * Why a Speaking-tab chat can't start today, if it can't: one is still open
- * (409, resume it), or the day's chats are used (429). Null when it can.
- */
-async function dayRefusal(db: SupabaseClient, userId: string, today: string): Promise<Response | null> {
-  const { data } = await db
+/** Her chats today, Course and Speaking together; staff chats count toward nothing. */
+async function chatsToday(db: SupabaseClient, userId: string, today: string): Promise<number> {
+  const { count } = await db
     .from("conversations")
-    .select("id, ended_at")
+    .select("id", { count: "exact", head: true })
     .eq("user_id", userId)
     .eq("local_date", today)
-    .not("day_slot", "is", null)
-    .order("started_at", { ascending: false });
+    .eq("unlimited", false);
+  return count ?? 0;
+}
+
+/**
+ * Why a Speaking-tab chat can't start today, if it can't: one is still open
+ * (409, resume it), or the day's chats are used, unit chats included (429).
+ * Null when it can.
+ */
+async function dayRefusal(db: SupabaseClient, userId: string, today: string): Promise<Response | null> {
+  const [{ data }, used] = await Promise.all([
+    db
+      .from("conversations")
+      .select("id, ended_at")
+      .eq("user_id", userId)
+      .eq("local_date", today)
+      .not("day_slot", "is", null)
+      .order("started_at", { ascending: false }),
+    chatsToday(db, userId, today),
+  ]);
   const rows = (data ?? []) as { id: string; ended_at: string | null }[];
   const open = rows.find((r) => !r.ended_at);
   if (open) return json({ error: "open", session_id: open.id, ended: false }, { status: 409 });
-  if (rows.length >= CHATS_PER_DAY) {
+  if (used >= CHATS_PER_DAY) {
     return json(
-      { error: "daily_limit", daily_limit: true, limit: CHATS_PER_DAY, used: rows.length, summary_id: rows[0]?.id ?? null },
+      { error: "daily_limit", daily_limit: true, limit: CHATS_PER_DAY, used, summary_id: rows[0]?.id ?? null },
       { status: 429 },
     );
   }
@@ -206,10 +219,10 @@ async function dayRefusal(db: SupabaseClient, userId: string, today: string): Pr
  * Why this unit chat can't start, if it can't: it is open (409, resume it),
  * it was had already (409 `chat_done`: a chat she said something in — one
  * left with nothing said can be had again, or she'd be stuck on the road), or
- * Pancho has had his fill of unit chats today (429 `course_break`).
+ * the day's chats are used, Speaking ones included (429 `course_break`).
  */
 async function unitRefusal(db: SupabaseClient, userId: string, lessonId: string, today: string): Promise<Response | null> {
-  const [{ data }, { count: todays }] = await Promise.all([
+  const [{ data }, todays] = await Promise.all([
     db
       .from("conversations")
       .select("id, ended_at, summary")
@@ -218,13 +231,7 @@ async function unitRefusal(db: SupabaseClient, userId: string, lessonId: string,
       .eq("lesson_id", lessonId)
       .eq("unlimited", false)
       .order("started_at", { ascending: false }),
-    db
-      .from("conversations")
-      .select("id", { count: "exact", head: true })
-      .eq("user_id", userId)
-      .eq("kind", "unit")
-      .eq("unlimited", false)
-      .eq("local_date", today),
+    chatsToday(db, userId, today),
   ]);
   const rows = (data ?? []) as { id: string; ended_at: string | null; summary: { turns?: number } | null }[];
   const open = rows.find((r) => !r.ended_at);
@@ -245,8 +252,8 @@ async function unitRefusal(db: SupabaseClient, userId: string, lessonId: string,
       return json({ error: "chat_done", chat_done: true, summary_id: r.id, session_id: r.id, ended: true }, { status: 409 });
     }
   }
-  if ((todays ?? 0) >= COURSE_CHATS_PER_DAY) {
-    return json({ error: "course_break", course_break: true, limit: COURSE_CHATS_PER_DAY }, { status: 429 });
+  if (todays >= CHATS_PER_DAY) {
+    return json({ error: "course_break", course_break: true, limit: CHATS_PER_DAY }, { status: 429 });
   }
   return null;
 }

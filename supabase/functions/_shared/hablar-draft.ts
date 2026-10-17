@@ -25,7 +25,7 @@ import {
 } from "./hablar.ts";
 import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
-export const MAX_AUDIO_BYTES = 1.5 * 1024 * 1024; // ≈ 45 s of audio
+export const MAX_AUDIO_BYTES = 0.9 * 1024 * 1024; // ≈ 26 s of audio: the app stops at 20 s
 // Speech-to-text requests, not recordings: a line is heard twice (with and
 // without keyterms), three times when it may be English.
 export const MAX_STT_PER_CHAT = 200;
@@ -69,7 +69,7 @@ function closed(session: Session): Response | null {
 }
 
 /**
- * A Speaking-tab chat takes eight lines (messageCap): a ninth is refused
+ * A chat takes eight lines (messageCap): a ninth is refused
  * before anything is heard, with 429 `message_limit`, which the app reads as
  * the chat being over. A re-record of the draft in hand is not a new line.
  */
