@@ -52,7 +52,8 @@ Deno.serve(async (req) => {
     try {
       tx = await verifyAppleJws<AppleTransaction>(body.token);
     } catch (e) {
-      return json({ error: `not an App Store transaction: ${(e as Error).message}` }, { status: 400 });
+      console.error("Apple transaction refused", (e as Error).message);
+      return json({ error: "not an App Store transaction" }, { status: 400 });
     }
     if (tx.bundleId !== (Deno.env.get("APPLE_BUNDLE_ID") ?? APPLE_BUNDLE_ID)) return json({ error: "another app's purchase" }, { status: 400 });
     state = appleState(tx, null);
@@ -69,7 +70,8 @@ Deno.serve(async (req) => {
       }
     } catch (e) {
       // Play was unreachable: the app keeps the purchase and asks again.
-      return json({ error: (e as Error).message }, { status: 502 });
+      console.error("Play unreachable", (e as Error).message);
+      return json({ error: "store unreachable, try again" }, { status: 502 });
     }
   } else {
     return json({ error: "store must be apple or google" }, { status: 400 });
@@ -80,6 +82,7 @@ Deno.serve(async (req) => {
     const { premium } = await applyState(db, state, "VERIFY", userId);
     return json({ premium });
   } catch (e) {
-    return json({ error: (e as Error).message }, { status: 500 });
+    console.error("entitlements write failed", (e as Error).message);
+    return json({ error: "could not save the purchase" }, { status: 500 });
   }
 });

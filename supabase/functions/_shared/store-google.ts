@@ -81,11 +81,14 @@ export async function playSubscription(account: ServiceAccount, packageName: str
  * that far.
  */
 export async function playAcknowledge(account: ServiceAccount, packageName: string, productId: string, purchaseToken: string): Promise<void> {
-  await fetch(`${API}/${packageName}/purchases/subscriptions/${encodeURIComponent(productId)}/tokens/${encodeURIComponent(purchaseToken)}:acknowledge`, {
+  // Not fatal: the app acknowledges too, and the next notification tries
+  // again. Logged, so a purchase heading for an automatic refund is seen.
+  const res = await fetch(`${API}/${packageName}/purchases/subscriptions/${encodeURIComponent(productId)}/tokens/${encodeURIComponent(purchaseToken)}:acknowledge`, {
     method: "POST",
     headers: { Authorization: `Bearer ${await playAccessToken(account)}`, "Content-Type": "application/json" },
     body: "{}",
-  }).catch(() => {});
+  }).catch((e: Error) => e);
+  if (res instanceof Error || !res.ok) console.error("Play acknowledge failed", res instanceof Error ? res.message : res.status);
 }
 
 /** What Play's answer means for her access right now; null when it has no product. */

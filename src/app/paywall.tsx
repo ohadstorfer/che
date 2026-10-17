@@ -273,15 +273,7 @@ export default function Paywall() {
               : `${plan.priceString}/${perPeriod(plan)}. Renews automatically. Cancel anytime.`}
           </Text>
         ) : null}
-        <View style={styles.legal}>
-          <Text style={styles.legalLink} onPress={() => void WebBrowser.openBrowserAsync(TERMS_URL)}>
-            Terms
-          </Text>
-          <Text style={styles.legalDot}>·</Text>
-          <Text style={styles.legalLink} onPress={() => void WebBrowser.openBrowserAsync(PRIVACY_URL)}>
-            Privacy
-          </Text>
-        </View>
+        <Legal />
       </View>
 
       {stage === 'offer' && catalog?.winback ? (
@@ -326,6 +318,22 @@ function PlanCard({ plan, selected, badge, onPress }: { plan: Plan; selected: bo
           <Text style={styles.badgeText}>Best value</Text>
         </View>
       ) : null}
+    </View>
+  );
+}
+
+// --- the links the stores ask for wherever she can buy --------------------------
+
+function Legal() {
+  return (
+    <View style={styles.legal}>
+      <Text style={styles.legalLink} onPress={() => void WebBrowser.openBrowserAsync(TERMS_URL)}>
+        Terms
+      </Text>
+      <Text style={styles.legalDot}>·</Text>
+      <Text style={styles.legalLink} onPress={() => void WebBrowser.openBrowserAsync(PRIVACY_URL)}>
+        Privacy
+      </Text>
     </View>
   );
 }
@@ -383,6 +391,7 @@ function WinbackSheet({
               {firstYear} for the first year, then {regular.priceString}/year. Cancel anytime.
             </Text>
           ) : null}
+          <Legal />
         </SafeAreaView>
       </Animated.View>
     </View>
