@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
+import { useVideoPlayer, VideoView } from 'expo-video';
 
 import {
   DayPips,
@@ -146,8 +147,15 @@ const versionOf = (kind: string | undefined, topicId: string | null | undefined,
   return s ? scenarioAt(s, bandOf(level)) : undefined;
 };
 const WAVE_BARS = 18;
-/** The call's Pancho, until he gets art of his own for it. */
-const callArt = require('@/assets/images/splash-pancho.png');
+/** The call's Pancho: the onboarding mate loop cut out as a sticker on the
+ *  call's pink (social/out/pancho-loop), and its first frame as the still. */
+const CALL_CLIP = require('@/assets/videos/pancho-call.mp4');
+const CALL_STILL = require('@/assets/images/pancho-call-still.png');
+/** Seconds where he is back in the still pose: the start, just before the
+ *  pour, just after it. On his turn the clip stops at the next one. */
+const REST = [0, 3.8, 10.8];
+/** Her turn starts here, a beat before the pour, so he pours at once. */
+const POUR_FROM = 3.5;
 
 export default function HablarChat() {
   useStatusBarColor(colors.primary);
@@ -892,7 +900,7 @@ export default function HablarChat() {
 
         <View style={styles.stage}>
           <Talking active={!!currentPlaying || phase === 'streaming'}>
-            <Image source={callArt} style={styles.callArt} contentFit="contain" accessibilityLabel="Pancho" />
+            <CallPancho busy={panchoTurn} />
           </Talking>
 
           <ScrollView
@@ -1164,6 +1172,59 @@ function Appear({ children }: { children: React.ReactNode }) {
       }}>
       {children}
     </Animated.View>
+  );
+}
+
+/** Pancho sipping and pouring on her turn. On his (thinking or speaking) the
+ *  clip runs on to the next resting pose and stops there, so he never pours
+ *  while he talks. */
+function CallPancho({ busy }: { busy: boolean }) {
+  const reduced = useReducedMotion();
+  const player = useVideoPlayer(CALL_CLIP, (p) => {
+    p.muted = true;
+    p.loop = true;
+    p.audioMixingMode = 'mixWithOthers';
+    p.timeUpdateEventInterval = 0.1;
+  });
+  const busyRef = useRef(busy);
+  busyRef.current = busy;
+
+  useEffect(() => {
+    if (reduced) return player.pause();
+    if (busy) return;
+    // Stopped on a resting pose: every rest is the same pose, so skip to the pour.
+    if (!player.playing) player.currentTime = POUR_FROM;
+    player.play();
+  }, [busy, reduced, player]);
+
+  useEffect(() => {
+    let last = 0;
+    const sub = player.addListener('timeUpdate', ({ currentTime }) => {
+      const prev = last;
+      last = currentTime;
+      if (!busyRef.current || !player.playing) return;
+      const wrapped = currentTime < prev;
+      const hit = REST.find((s) => (wrapped ? s > prev || s <= currentTime : s > prev && s <= currentTime));
+      if (hit === undefined) return;
+      player.pause();
+      player.currentTime = hit;
+    });
+    return () => sub.remove();
+  }, [player]);
+
+  return (
+    <View style={styles.callArt} accessible accessibilityRole="image" accessibilityLabel="Pancho, drinking mate">
+      {/* The still sits underneath until the first frame is up. */}
+      <Image source={CALL_STILL} style={StyleSheet.absoluteFill} contentFit="contain" />
+      <VideoView
+        player={player}
+        style={StyleSheet.absoluteFill}
+        contentFit="contain"
+        nativeControls={false}
+        allowsPictureInPicture={false}
+        surfaceType="textureView"
+      />
+    </View>
   );
 }
 
