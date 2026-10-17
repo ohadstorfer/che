@@ -130,7 +130,13 @@
         }
       ],
       "expo-iap",
-      "expo-video"
+      "expo-video",
+      [
+        "expo-secure-store",
+        {
+          "faceIDPermission": false
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
