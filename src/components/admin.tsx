@@ -35,6 +35,7 @@ export function AdminScreen({
   subtitle,
   back,
   actions,
+  detail,
   children,
 }: {
   title: string;
@@ -42,9 +43,31 @@ export function AdminScreen({
   /** Where the back arrow goes when there is nothing to pop back to; none on the top-level pages. */
   back?: string;
   actions?: React.ReactNode;
+  /** A page about one thing (a tester's thread): the top bar is just back, its name and actions, no nav. */
+  detail?: boolean;
   children: React.ReactNode;
 }) {
   const path = usePathname();
+  const goBack = () => (router.canGoBack() ? router.back() : router.replace((back ?? '/admin') as never));
+  if (detail) {
+    return (
+      <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
+        <View style={[styles.bar, styles.detailBar]}>
+          <Pressable onPress={goBack} hitSlop={8} style={({ pressed }) => [styles.back, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]} accessibilityLabel="Back">
+            <Ionicons name="arrow-back" size={20} color={colors.ink} />
+          </Pressable>
+          <View style={{ flex: 1, flexShrink: 1, minWidth: 0 }}>
+            <Text style={styles.detailTitle} numberOfLines={1}>{title}</Text>
+            {subtitle ? <Text style={styles.detailSubtitle} numberOfLines={1}>{subtitle}</Text> : null}
+          </View>
+          {actions ? <View style={styles.actions}>{actions}</View> : null}
+        </View>
+        <ScrollView contentContainerStyle={styles.page} keyboardShouldPersistTaps="handled">
+          {children}
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <View style={styles.bar}>
@@ -69,7 +92,7 @@ export function AdminScreen({
       <ScrollView contentContainerStyle={styles.page} keyboardShouldPersistTaps="handled">
         <View style={styles.head}>
           {back ? (
-            <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace(back as never))} hitSlop={8} style={styles.back} accessibilityLabel="Back">
+            <Pressable onPress={goBack} hitSlop={8} style={styles.back} accessibilityLabel="Back">
               <Ionicons name="arrow-back" size={20} color={colors.muted} />
             </Pressable>
           ) : null}
@@ -226,6 +249,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
     flexWrap: 'wrap',
   },
+  detailBar: { gap: 12, paddingHorizontal: 16, flexWrap: 'nowrap' },
+  detailTitle: { ...font.display[800], fontSize: 18, color: colors.ink, letterSpacing: -0.2 },
+  detailSubtitle: { fontSize: 13, color: colors.muted },
   brand: { fontSize: 15, ...font.body[800], color: colors.primaryDark, letterSpacing: 0.2 },
   nav: { flexDirection: 'row', gap: 4, flexWrap: 'wrap' },
   navItem: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 12, paddingVertical: 7, borderRadius: radius.pill },

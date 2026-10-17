@@ -92,6 +92,7 @@ export default function AdminFeedbackThread() {
         .filter(Boolean)
         .join(' · ')}
       back="/admin/feedback"
+      detail
       actions={
         who ? (
           <SmallButton
