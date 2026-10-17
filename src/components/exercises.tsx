@@ -2065,7 +2065,11 @@ export function SentenceLine({
   return (
     // A reply's bubble is as wide as what is said in it, so its line can't
     // be the one that stretches.
-    <View style={turn ? styles.replyText : styles.bubbleText}>
+    // On a card the line spans the card's width: the bubble's flex:1 and a
+    // centred parent's fit-to-content width had Yoga size a wrapping row for
+    // one line, so "¿Sos ____?" broke in two and its second line sat on top
+    // of the English beneath it.
+    <View style={turn ? styles.replyText : large ? styles.cardText : styles.bubbleText}>
       {rows.map((row) => (
       <View key={row} style={[styles.tokenRow, large && styles.tokenRowCentered]}>
         {sentence.tokens.map((t, i) => {
@@ -2724,6 +2728,7 @@ const styles = StyleSheet.create({
   replyWrap: { alignSelf: 'flex-end', maxWidth: '82%', marginRight: TAIL },
   replyBubble: { backgroundColor: pastel.lav },
   replyText: { gap: 2 },
+  cardText: { alignSelf: 'stretch', gap: 2 },
   // The first speaker's tail sits on the left edge; hers is the same shape on the right.
   replySpeechTail: { left: undefined, right: -TAIL_W + OUTLINE },
   bubbleText: { flex: 1, gap: 2 },
