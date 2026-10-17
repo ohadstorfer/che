@@ -1,9 +1,9 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useVideoPlayer, VideoView } from 'expo-video';
+import { useVideoPlayer, type VideoPlayer, VideoView } from 'expo-video';
 import * as WebBrowser from 'expo-web-browser';
-import { useEffect, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import {
   BackHandler,
   KeyboardAvoidingView,
@@ -102,6 +102,15 @@ export default function Onboarding() {
     if (replay) void resetWinbackShown();
   }, [replay]);
   const reduced = useReducedMotion();
+  const pancho = useVideoPlayer(PANCHO_CLIP, (p) => {
+    p.muted = true;
+    p.loop = true;
+    p.audioMixingMode = 'mixWithOthers';
+  });
+  useEffect(() => {
+    if (reduced) pancho.pause();
+    else pancho.play();
+  }, [pancho, reduced]);
   const [step, setStep] = useState<Step>('name');
   const [dir, setDir] = useState<1 | -1>(1);
   const [a, setA] = useState<Partial<Answers>>({ minutes: 10, name: '' });
@@ -148,6 +157,7 @@ export default function Onboarding() {
   const showChrome = step !== 'building';
 
   return (
+    <PanchoPlayer.Provider value={reduced ? null : pancho}>
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={[styles.header, !showChrome && { opacity: 0 }]} pointerEvents={showChrome ? 'auto' : 'none'}>
@@ -256,6 +266,7 @@ export default function Onboarding() {
         </Animated.View>
       </KeyboardAvoidingView>
     </SafeAreaView>
+    </PanchoPlayer.Provider>
   );
 }
 
@@ -370,11 +381,31 @@ function Choice({
 /** His figure and a bubble whose words change in place: no pop on every
  *  keystroke or tap, the way MascotSays (keyed by its line) would. */
 const PANCHO = require('@/assets/images/onboarding/pancho-mate.png');
+/** The same figure, slowly sipping and pouring (social/out/pancho-loop). One
+ *  player for the whole flow, so the loop carries on from screen to screen. */
+const PANCHO_CLIP = require('@/assets/videos/onboarding/pancho-mate.mp4');
+const PanchoPlayer = createContext<VideoPlayer | null>(null);
 
 function Says({ pose, line, small }: { pose?: Pose; line: string; small?: boolean; reduced?: boolean }) {
+  const player = useContext(PanchoPlayer);
   return (
     <View style={styles.saysRow}>
-      <Image source={pose ? POSE[pose] : PANCHO} style={styles.saysArt} contentFit="contain" accessibilityLabel={`${MASCOT_NAME} the carpincho`} />
+      {pose || !player ? (
+        <Image source={pose ? POSE[pose] : PANCHO} style={styles.saysArt} contentFit="contain" accessibilityLabel={`${MASCOT_NAME} the carpincho`} />
+      ) : (
+        <View style={styles.saysArt} accessible accessibilityRole="image" accessibilityLabel={`${MASCOT_NAME} the carpincho, drinking mate`}>
+          {/* The still sits underneath until the first frame is up. */}
+          <Image source={PANCHO} style={StyleSheet.absoluteFill} contentFit="contain" />
+          <VideoView
+            player={player}
+            style={StyleSheet.absoluteFill}
+            contentFit="contain"
+            nativeControls={false}
+            allowsPictureInPicture={false}
+            surfaceType="textureView"
+          />
+        </View>
+      )}
       <View style={styles.saysBubble}>
         <SpeechBubble>
           <Text style={[styles.saysText, small && styles.saysTextSmall]} accessibilityRole="header" accessibilityLiveRegion="polite">
