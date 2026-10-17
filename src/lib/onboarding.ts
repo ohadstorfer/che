@@ -206,9 +206,9 @@ export function struggleQuestion(level: Level): { en: string; options: StruggleO
       ],
     };
   return {
-    en: 'What trips you up with Argentines?',
+    en: 'What do you struggle with the most?',
     options: [
-      { value: 'follow', label: 'They talk fast, I get lost', art: 'gramophone', tone: pastel.lav, react: 'It’s the sh and the slang. We train your ear.' },
+      { value: 'follow', label: 'Following fast speech', art: 'gramophone', tone: pastel.lav, react: 'It’s the sh and the slang. We train your ear.' },
       { value: 'wrong', label: 'I sound like a textbook', art: 'book', tone: pastel.peach, react: 'It’s vos, the sh and about 30 words.' },
       { value: 'slang', label: 'The slang loses me', art: 'shout', tone: pastel.butter, react: 'Lunfardo has its own section.' },
       { value: 'english', label: 'They switch to English', art: 'chat', tone: pastel.sky, react: 'They stop when you answer with vos.' },

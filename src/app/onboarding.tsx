@@ -526,39 +526,43 @@ function TryItStep({ line, reduced, onNext }: { line: TryIt; reduced: boolean; o
         <Says line={says} small={says.length > 44} reduced={reduced} />
         <View style={styles.tryMiddle}>
           <Animated.View entering={rise(1, reduced)} style={styles.tryCard} accessibilityLabel={done ? line.local.join(' ') : line.book.join(' ')}>
-            {line.book.map((word, k) => {
-              const order = line.targets.indexOf(k);
-              const fixed = done && order >= 0;
-              return (
-                <View
-                  key={k}
-                  style={[styles.tryWord, fixed && [styles.tryWordFixed, { transform: [{ rotate: WORD_TILT[order % 4] }] }]]}>
-                  {fixed ? (
-                    // One after another, left to right, so the eye follows the sentence changing.
-                    <Animated.Text
-                      entering={reduced ? undefined : ZoomIn.duration(260).delay(order * 90).easing(EASE_OUT)}
-                      style={[styles.tryText, text]}>
-                      {line.local[k]}
-                    </Animated.Text>
-                  ) : (
-                    <Text style={[styles.tryText, text]}>{word}</Text>
-                  )}
-                  {!done && order >= 0 ? <Underline marked /> : null}
-                </View>
-              );
-            })}
+            <View style={styles.tryWords}>
+              {line.book.map((word, k) => {
+                const order = line.targets.indexOf(k);
+                const fixed = done && order >= 0;
+                return (
+                  <View
+                    key={k}
+                    style={[styles.tryWord, fixed && [styles.tryWordFixed, { transform: [{ rotate: WORD_TILT[order % 4] }] }]]}>
+                    {fixed ? (
+                      // One after another, left to right, so the eye follows the sentence changing.
+                      <Animated.Text
+                        entering={reduced ? undefined : ZoomIn.duration(260).delay(order * 90).easing(EASE_OUT)}
+                        style={[styles.tryText, text]}>
+                        {line.local[k]}
+                      </Animated.Text>
+                    ) : (
+                      <Text style={[styles.tryText, text]}>{word}</Text>
+                    )}
+                    {!done && order >= 0 ? <Underline marked /> : null}
+                  </View>
+                );
+              })}
+            </View>
+            <Text style={styles.tryEn}>{line.en}</Text>
+            {/* The action is the card's own bottom edge, so it can't be missed. */}
+            <Pressable
+              onPress={done ? onNext : reveal}
+              accessibilityRole="button"
+              style={({ pressed }) => [styles.tryStrip, pressed && { opacity: 0.88 }]}>
+              <Text style={styles.tryStripText}>{done ? 'Continue' : 'Make it Argentine'}</Text>
+            </Pressable>
           </Animated.View>
-          <Text style={styles.tryEn}>{line.en}</Text>
         </View>
       </ScrollView>
-      <View style={styles.footer}>
-        <Button title={done ? 'Continue' : 'Make it Argentine'} onPress={done ? onNext : reveal} />
-      </View>
     </View>
   );
 }
-
-// --- struggle: what got in the way, as many as apply ---------------------------
 
 function StruggleStep({
   level,
@@ -1027,6 +1031,8 @@ function Pledge({ answers, reduced, onNext }: { answers: Answers; reduced: boole
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.pledgeBody}>
+        {/* Half the free space above the deal, the rest above Pancho, so it sits lower on tall phones. */}
+        <View style={{ flex: 0.5 }} />
         <Animated.Text entering={rise(0, reduced)} style={styles.pledgeTitle} accessibilityRole="header">
           The deal{nameTail(answers)}.
         </Animated.Text>
@@ -1171,7 +1177,8 @@ const styles = StyleSheet.create({
 
   // try it
   tryMiddle: { flex: 1, justifyContent: 'center', gap: 22, paddingVertical: 12 },
-  tryCard: {
+  tryCard: { borderRadius: radius.lg, backgroundColor: colors.card, boxShadow: clay.surface },
+  tryWords: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
@@ -1180,18 +1187,34 @@ const styles = StyleSheet.create({
     rowGap: 14,
     paddingHorizontal: 18,
     paddingTop: 26,
-    paddingBottom: 24,
-    borderRadius: radius.lg,
-    backgroundColor: colors.card,
-    boxShadow: clay.surface,
-    transform: [{ rotate: '-1deg' }],
+    paddingBottom: 18,
   },
+  tryStrip: {
+    minHeight: 58,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.primary,
+    borderBottomLeftRadius: radius.lg,
+    borderBottomRightRadius: radius.lg,
+  },
+  tryStripText: { ...font.display[800], fontSize: 18, color: colors.onPrimary },
   tryWord: { minHeight: 46, justifyContent: 'center', paddingHorizontal: 3 },
   tryWordFixed: { paddingHorizontal: 11, borderRadius: 13, backgroundColor: pastel.sage, boxShadow: clay.chip },
   tryText: { ...font.display[900], color: colors.ink, letterSpacing: -0.6 },
   underline: { position: 'absolute', left: 3, right: 3, bottom: 0 },
   sun: { position: 'absolute', right: -120, top: 250, opacity: 0.55 },
-  tryEn: { ...font.body[700], fontSize: 17, lineHeight: 23, color: colors.muted, textAlign: 'center' },
+  tryEn: {
+    ...font.body[700],
+    fontSize: 16,
+    lineHeight: 22,
+    color: colors.muted,
+    textAlign: 'center',
+    marginHorizontal: 22,
+    paddingTop: 14,
+    paddingBottom: 18,
+    borderTopWidth: 2,
+    borderTopColor: 'rgba(58,42,32,0.12)',
+  },
 
   // a choice
   choice: { flexDirection: 'row', alignItems: 'center', gap: 14, minHeight: 64, paddingVertical: 13, paddingHorizontal: 16, borderRadius: 28, backgroundColor: colors.card, boxShadow: clay.surface },
