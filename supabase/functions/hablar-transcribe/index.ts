@@ -117,7 +117,7 @@ Deno.serve(async (req) => {
       }));
     } catch (err) {
       console.error(err);
-      return json({ error: "stt_failed", retry: true, detail: String(err).slice(0, 300) }, { status: 502 });
+      return json({ error: "stt_failed", retry: true }, { status: 502 });
     }
     background(logUsage(db, [{
       conversation_id: session.id,

@@ -7,7 +7,7 @@
 // through the Storage API (a
 // cascade on storage.objects would leave the files behind), then the auth
 // user. Every table keyed to her cascades from auth.users, her `entitlements`
-// row included. A store subscription is not ours to cancel: the app tells her
+// row included, except the reminder debug log, deleted here by hand. A store subscription is not ours to cancel: the app tells her
 // to cancel it in the store.
 //
 // Staff accounts are refused: course edits reference their author without a
@@ -66,11 +66,20 @@ Deno.serve(async (req) => {
         if (error) throw error;
       }
     } catch (e) {
-      return json({ error: `${bucket} files: ${(e as Error).message}` }, { status: 500 });
+      console.error(`delete-account: ${bucket} files`, (e as Error).message);
+      return json({ error: "could not delete the account" }, { status: 500 });
     }
   }
 
+  // Her reminder log: notification_events keeps a user_id without a foreign
+  // key (send-reminder writes it as a debug trail), so it doesn't cascade.
+  const { error: eventsErr } = await db.from("notification_events").delete().eq("user_id", userId);
+  if (eventsErr) console.error("delete-account: notification_events", eventsErr.message);
+
   const { error } = await db.auth.admin.deleteUser(userId);
-  if (error) return json({ error: error.message }, { status: 500 });
+  if (error) {
+    console.error("delete-account: deleteUser", error.message);
+    return json({ error: "could not delete the account" }, { status: 500 });
+  }
   return json({ deleted: true });
 });

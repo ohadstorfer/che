@@ -56,6 +56,9 @@ Deno.serve(async (req) => {
     last_event: "TESTER",
     updated_at: new Date().toISOString(),
   });
-  if (error) return json({ error: error.message }, { status: 500 });
+  if (error) {
+    console.error("tester-premium: entitlements upsert", error.message);
+    return json({ error: "could not unlock" }, { status: 500 });
+  }
   return json({ premium: true });
 });
