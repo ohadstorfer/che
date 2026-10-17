@@ -32,11 +32,11 @@ import Animated, {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle, G, Line, Path } from 'react-native-svg';
 
-import { MASCOT_NAME, MascotSays, pop, type Pose, POSE, SpeechBubble } from '@/components/mascot';
+import { MASCOT_NAME, pop, type Pose, POSE, SpeechBubble } from '@/components/mascot';
 import { ClipCard } from '@/components/clip-card';
 import { EASE_OUT, IconButton, ProgressBar, rise, slide } from '@/components/onboarding-ui';
 import { type Provider, SocialButtons } from '@/components/social-buttons';
-import { Button, Field } from '@/components/ui';
+import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { startGuest } from '@/lib/guest';
 import { success, tap } from '@/lib/haptics';
@@ -957,9 +957,7 @@ function Pledge({ answers, reduced, onNext }: { answers: Answers; reduced: boole
 // --- account: what keeps the plan ------------------------------------------
 
 function explain(message: string): string {
-  if (/already registered|already exists/i.test(message)) return 'That email already has an account. Sign in instead.';
-  if (/password should be at least/i.test(message)) return 'The password needs at least 6 characters.';
-  if (/provider is not enabled|unsupported provider/i.test(message)) return 'That sign-in option isn’t switched on yet. Use email for now.';
+  if (/provider is not enabled|unsupported provider/i.test(message)) return 'That sign-in option isn’t working right now. Try the other one.';
   if (/network|fetch/i.test(message)) return 'No connection. Try again.';
   return message;
 }
@@ -967,7 +965,6 @@ function explain(message: string): string {
 const toPaywall = () => router.replace('/paywall?from=onboarding');
 
 function Account({ answers, reduced }: { answers: Answers; reduced: boolean }) {
-  const [mode, setMode] = useState<'social' | 'email'>('social');
   const [busy, setBusy] = useState<Provider | null>(null);
   const [error, setError] = useState<string | null>(null);
   const plan = buildPlan(answers);
@@ -979,7 +976,7 @@ function Account({ answers, reduced }: { answers: Answers; reduced: boolean }) {
     setError(null);
     const res: SocialResult = which === 'apple' ? await signInWithApple() : await signInWithGoogle();
     if (res.status === 'ok') {
-      // Email sign-ups carry the answers in their metadata; so do these.
+      // The answers go on the account, so the plan is there on any phone.
       await supabase.auth.updateUser({ data: { onboarding: answers } }).catch(() => {});
       setBusy(null);
       return toPaywall();
@@ -987,8 +984,6 @@ function Account({ answers, reduced }: { answers: Answers; reduced: boolean }) {
     setBusy(null);
     if (res.status === 'error') setError(explain(res.message));
   };
-
-  if (mode === 'email') return <EmailAccount answers={answers} reduced={reduced} onBack={() => setMode('social')} />;
 
   return (
     <View style={{ flex: 1 }}>
@@ -1007,9 +1002,6 @@ function Account({ answers, reduced }: { answers: Answers; reduced: boolean }) {
       <View style={[styles.footer, { gap: 12 }]}>
         {error ? <Text style={[styles.error, { textAlign: 'center' }]}>{error}</Text> : null}
         <SocialButtons busy={busy} onPress={(which) => void social(which)} />
-        <Pressable onPress={() => setMode('email')} hitSlop={8} style={styles.switch} accessibilityRole="button">
-          <Text style={styles.switchLink}>Use email instead</Text>
-        </Pressable>
         <Text style={styles.legal}>
           By continuing you agree to the{' '}
           <Text style={styles.legalLink} onPress={() => void WebBrowser.openBrowserAsync(TERMS_URL)}>
@@ -1023,85 +1015,6 @@ function Account({ answers, reduced }: { answers: Answers; reduced: boolean }) {
         </Text>
       </View>
     </View>
-  );
-}
-
-function EmailAccount({ answers, reduced, onBack }: { answers: Answers; reduced: boolean; onBack: () => void }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [notice, setNotice] = useState<string | null>(null);
-  const [busy, setBusy] = useState(false);
-  const passwordRef = useRef<TextInput>(null);
-  const cleanEmail = email.trim().toLowerCase();
-  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail) && password.length >= 6;
-
-  const submit = async () => {
-    if (!valid || busy) return;
-    tap();
-    setBusy(true);
-    setError(null);
-    const { data, error: err } = await supabase.auth.signUp({
-      email: cleanEmail,
-      password,
-      options: { data: { onboarding: answers } },
-    });
-    setBusy(false);
-    if (err) return setError(explain(err.message));
-    if (!data.session) return setNotice('We sent you an email to confirm the account. Then sign in.');
-    toPaywall();
-  };
-
-  return (
-    <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-      <Animated.View entering={rise(0, reduced)} style={{ marginLeft: -8, marginBottom: 18 }}>
-        <MascotSays pose="tango" es="¡No lo pierdas!" en="Save your plan and I'll keep it safe for you." size="sm" reduced={reduced} />
-      </Animated.View>
-      <View style={{ gap: 16 }}>
-        <Field
-          label="Email"
-          value={email}
-          onChangeText={(t) => {
-            setEmail(t);
-            if (error) setError(null);
-          }}
-          autoCapitalize="none"
-          autoComplete="email"
-          keyboardType="email-address"
-          textContentType="emailAddress"
-          returnKeyType="next"
-          onSubmitEditing={() => passwordRef.current?.focus()}
-          editable={!busy}
-        />
-        <Field
-          ref={passwordRef}
-          label="Password"
-          value={password}
-          onChangeText={(t) => {
-            setPassword(t);
-            if (error) setError(null);
-          }}
-          secureTextEntry
-          autoComplete="new-password"
-          textContentType="newPassword"
-          returnKeyType="go"
-          onSubmitEditing={submit}
-          editable={!busy}
-          hint="At least 6 characters."
-        />
-        {error ? <Text style={styles.error}>{error}</Text> : null}
-        {notice ? <Text style={styles.notice}>{notice}</Text> : null}
-        <Button title="Create account" onPress={submit} loading={busy} disabled={!valid} />
-        <Pressable onPress={onBack} hitSlop={8} style={styles.switch} accessibilityRole="button">
-          <Text style={styles.switchLink}>Other ways to sign up</Text>
-        </Pressable>
-        <Pressable onPress={() => router.replace('/login')} hitSlop={8} style={styles.switch}>
-          <Text style={styles.switchText}>
-            Already have an account? <Text style={styles.switchLink}>Sign in</Text>
-          </Text>
-        </Pressable>
-      </View>
-    </ScrollView>
   );
 }
 
@@ -1270,8 +1183,4 @@ const styles = StyleSheet.create({
   legalLink: { color: colors.primaryDark, textDecorationLine: 'underline' },
 
   error: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.dangerInk },
-  notice: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.primaryDark },
-  switch: { alignSelf: 'center', paddingVertical: 6 },
-  switchText: { ...font.body[600], fontSize: 15, color: colors.muted },
-  switchLink: { ...font.body[800], color: colors.primary, fontSize: 15 },
 });

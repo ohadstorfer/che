@@ -26,7 +26,7 @@ import { clay, colors, font, pastel, press, radius, type } from '@/lib/theme';
 // wears the "For you" tag.
 //
 // A guest (lib/guest.ts: the paywall comes before the account) saves her
-// account here first, with Apple, Google or email; the choices follow once
+// account here first, with Apple or Google; the choices follow once
 // she has, or once she says "Not now".
 //
 // It is also where the onboarding answers reach her account: the name she
@@ -146,7 +146,6 @@ export default function Ready() {
           <Animated.View entering={rise(3, reduced)} style={styles.save}>
             <SaveButtons
               answers={answers}
-              onEmail={() => router.push('/save-account?mode=email')}
               onLater={() => setLater(true)}
               onDone={(res) => {
                 // An account she already had, with its own course to go back to.

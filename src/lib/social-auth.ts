@@ -16,8 +16,8 @@ import { supabase } from './supabase';
 // session in place, 'cancel' when she backed out (say nothing), or an error
 // message worth showing.
 //
-// The save* calls are for a guest (lib/guest.ts): they add Apple, Google or
-// an email to the account she already has, so her user id — and with it
+// The save* calls are for a guest (lib/guest.ts): they add Apple or Google
+// to the account she already has, so her user id — and with it
 // everything she bought as a guest — stays hers. When that Apple ID or Google
 // account already has a Posta account, she is signed in to that one instead
 // ('switched'), and premium.tsx claims the guest's purchase for it.
@@ -30,10 +30,8 @@ export type SaveResult =
   /** Signed in to an account she already had. `returning`: it had been
    *  through onboarding, so it has a course of its own to go back to. */
   | { status: 'switched'; returning: boolean }
-  /** The project asks to confirm email changes: the link in her inbox finishes it. */
-  | { status: 'confirm' }
   | { status: 'cancel' }
-  | { status: 'error'; message: string; code?: string };
+  | { status: 'error'; message: string };
 
 /** The sheet exists on this device: iOS 13+, not the web or Android. */
 export async function appleAvailable(): Promise<boolean> {
@@ -171,16 +169,4 @@ export async function saveWithGoogle(): Promise<SaveResult> {
   if (done.status === 'ok') return { status: 'saved' };
   if (done.status === 'error' && signInInstead(done)) return instead();
   return done.status === 'cancel' ? done : { status: 'error', message: done.message };
-}
-
-/**
- * Email and password onto the guest account. Both go in one call: Supabase
- * refuses a password for a guest that has no email yet. With email
- * confirmation off (the project's setting) she is a full account at once.
- */
-export async function saveWithEmail(email: string, password: string): Promise<SaveResult> {
-  const { data, error } = await supabase.auth.updateUser({ email, password });
-  if (error) return { status: 'error', message: error.message, code: error.code };
-  if (data.user?.email?.toLowerCase() !== email.toLowerCase()) return { status: 'confirm' };
-  return { status: 'saved' };
 }
