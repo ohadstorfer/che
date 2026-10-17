@@ -2,17 +2,22 @@ project_id = "qbzjaseetusewxnfgpes"
 
 [auth]
 enabled = true
-site_url = "che://"
-additional_redirect_urls = ["http://localhost:8081", "http://localhost:19006"]
+site_url = "posta://"
+# posta://auth-callback is where Google sends her back in the app
+# (src/lib/social-auth.ts, Linking.createURL('auth-callback')).
+additional_redirect_urls = ["posta://auth-callback", "http://localhost:8081", "http://localhost:19006"]
 enable_signup = true
 # Onboarding sells before it asks for an account: she is a guest until then
-# (src/lib/guest.ts), and Apple, Google or an email are linked onto that
-# same user afterwards. Both also need switching on in the dashboard.
+# (src/lib/guest.ts), and Apple or Google is linked onto that same user
+# afterwards. Both also need switching on in the dashboard.
 enable_anonymous_sign_ins = true
 enable_manual_linking = true
 
+# Apple and Google are the only ways in: no email sign-up. Apple and Google
+# themselves are set up in the dashboard (their keys are not kept here), so
+# check them there before any `config push`.
 [auth.email]
-enable_signup = true
+enable_signup = false
 enable_confirmations = false
 
 [functions.send-reminder]

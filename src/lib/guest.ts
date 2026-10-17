@@ -10,8 +10,8 @@ import { supabase } from './supabase';
 // the end of the questions she gets an anonymous Supabase user — a real
 // auth.users row, with every table working as for anyone else.
 //
-// Signing in afterwards (the Ready screen, or Account later) adds Apple,
-// Google or an email to that same user (social-auth.ts, save*), so nothing
+// Signing in afterwards (the Ready screen, or Account later) adds Apple
+// or Google to that same user (social-auth.ts, save*), so nothing
 // she did or bought as a guest moves. A guest who never signs in keeps the
 // account on this phone only; Restore on the paywall still finds a
 // subscription in the store.
