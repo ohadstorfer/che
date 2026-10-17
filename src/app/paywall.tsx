@@ -371,27 +371,26 @@ function WinbackSheet({
           <Animated.View entering={reduced ? undefined : ZoomIn.delay(160).duration(320).easing(EASE_OUT)} style={styles.gift}>
             <MaterialCommunityIcons name="gift-outline" size={30} color={colors.onPastel} />
           </Animated.View>
-          <Text style={styles.offerEyebrow}>ONE-TIME WELCOME OFFER</Text>
-          <Text style={styles.offerTitle}>{discount}% off your first year</Text>
-          <View style={styles.offerPriceRow}>
+          <View
+            style={styles.offerPriceRow}
+            accessible
+            accessibilityLabel={`${firstYear} for your first year${regular ? `, instead of ${regular.priceString}` : ''}${discount ? `, ${discount}% off` : ''}`}>
             {regular ? <Text style={styles.offerOld}>{regular.priceString}</Text> : null}
             <Text style={styles.offerNew}>{firstYear}</Text>
-            <Text style={styles.offerPer}>for your first year</Text>
           </View>
-          <Text style={styles.offerNote}>You won&apos;t see this price again after you close this.</Text>
+          <Text style={styles.offerPer}>for your first year · only now</Text>
           {error ? <Text style={styles.error}>{error}</Text> : null}
-          <View style={{ alignSelf: 'stretch', gap: 4, marginTop: 10 }}>
-            <Button title="Claim my offer" onPress={onClaim} loading={busy} />
+          <View style={{ alignSelf: 'stretch', gap: 2, marginTop: 14 }}>
+            <Button title="Claim offer" onPress={onClaim} loading={busy} />
             <Pressable onPress={onDecline} hitSlop={8} style={styles.decline} accessibilityRole="button" disabled={busy}>
-              <Text style={styles.declineText}>No thanks, continue for free</Text>
+              <Text style={styles.declineText}>No thanks</Text>
             </Pressable>
           </View>
-          {offer && regular ? (
-            <Text style={styles.terms}>
-              {firstYear} for the first year, then {regular.priceString}/year. Cancel anytime.
-            </Text>
-          ) : null}
-          <Legal />
+          {/* Apple wants the renewal price, cancel info and Terms/Privacy where people buy: one quiet line. */}
+          <View style={styles.offerFine}>
+            {offer && regular ? <Text style={styles.terms}>Then {regular.priceString}/year. Cancel anytime.</Text> : null}
+            <Legal />
+          </View>
         </SafeAreaView>
       </Animated.View>
     </View>
@@ -490,13 +489,11 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     boxShadow: clay.surface,
   },
-  offerEyebrow: { ...type.label, fontSize: 12, letterSpacing: 1.2, color: colors.muted },
-  offerTitle: { ...type.display, fontSize: 28, lineHeight: 32, color: colors.ink, textAlign: 'center' },
-  offerPriceRow: { flexDirection: 'row', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', justifyContent: 'center', marginTop: 4 },
-  offerOld: { ...font.body[600], fontSize: 17, color: colors.faint, textDecorationLine: 'line-through' },
-  offerNew: { ...font.display[800], fontSize: 24, color: colors.ink },
-  offerPer: { ...font.body[600], fontSize: 14, color: colors.muted },
-  offerNote: { ...font.body[600], fontSize: 13, color: colors.muted, textAlign: 'center', marginTop: 4 },
+  offerPriceRow: { flexDirection: 'row', alignItems: 'baseline', gap: 8, justifyContent: 'center', marginTop: 8 },
+  offerOld: { ...font.display[700], fontSize: 22, color: colors.muted, textDecorationLine: 'line-through' },
+  offerNew: { ...font.display[900], fontSize: 40, lineHeight: 44, color: colors.ink },
+  offerPer: { ...font.body[600], fontSize: 16, color: colors.muted },
+  offerFine: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', columnGap: 6 },
   decline: { alignSelf: 'center', paddingVertical: 12 },
   declineText: { ...font.body[700], fontSize: 15, color: colors.muted },
 

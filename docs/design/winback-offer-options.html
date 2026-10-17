@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welcome Offer Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@700;800;900&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --oat: #F7EFE6; --canvas: #EFE4D8; --surface: #FFF9F3; --line: #E6D8C8;
+    --ink: #3A2A20; --muted: #7A6556; --rosa: #B44A60; --rosa-dark: #8A3347;
+    --peach: #FFB38A; --butter: #FFE08A; --mint: #CFE8D4;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #2b2420; font-family: Figtree, system-ui, sans-serif; color: var(--ink); padding: 32px 16px 64px; }
+  header { max-width: 1180px; margin: 0 auto 28px; color: #F7EFE6; }
+  header h1 { font: 800 28px Gabarito, sans-serif; }
+  header p { color: #cdbfb2; margin-top: 6px; font-size: 15px; line-height: 1.5; max-width: 720px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; max-width: 1180px; margin: 0 auto; }
+  .col { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+  .label { color: #F7EFE6; font: 700 18px Gabarito, sans-serif; }
+  .why { color: #cdbfb2; font-size: 13px; max-width: 340px; text-align: center; line-height: 1.45; }
+
+  /* phone */
+  .phone { width: 340px; height: 700px; border-radius: 46px; background: var(--oat); position: relative; overflow: hidden; border: 10px solid #111; }
+  .behind { position: absolute; inset: 0; padding: 70px 24px; text-align: center; }
+  .behind .blob { width: 170px; height: 170px; border-radius: 50%; background: #c98d6e; margin: 0 auto 18px; border: 3px solid var(--ink); }
+  .behind h2 { font: 800 26px Gabarito, sans-serif; }
+  .scrim { position: absolute; inset: 0; background: rgba(58,42,32,.45); }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--surface); border-radius: 28px 28px 0 0; border-top: 2.5px solid var(--ink); padding: 10px 22px 26px; display: flex; flex-direction: column; align-items: center; animation: up .42s cubic-bezier(.23,1,.32,1) both; }
+  @keyframes up { from { transform: translateY(100%); } }
+  @media (prefers-reduced-motion: reduce) { .sheet { animation: none; } }
+  .grab { width: 40px; height: 5px; border-radius: 3px; background: var(--line); margin-bottom: 18px; }
+
+  .btn { width: 100%; height: 56px; border-radius: 18px; background: var(--rosa); color: #fff; font: 700 18px Figtree, sans-serif; border: 2.5px solid var(--ink); box-shadow: 0 5px 0 var(--ink); cursor: pointer; transition: transform 140ms ease-out, box-shadow 140ms ease-out; }
+  .btn:active { transform: translateY(3px) scale(.98); box-shadow: 0 2px 0 var(--ink); }
+  .skip { background: none; border: 0; color: var(--muted); font: 600 15px Figtree, sans-serif; padding: 14px; cursor: pointer; }
+  .fine { font-size: 11.5px; color: var(--muted); text-align: center; line-height: 1.5; }
+  .fine a { color: var(--muted); }
+
+  /* A — price is the headline */
+  .gift { width: 64px; height: 64px; border-radius: 50%; background: var(--peach); border: 2.5px solid var(--ink); box-shadow: 0 4px 0 var(--ink); display: grid; place-items: center; font-size: 28px; margin-bottom: 16px; }
+  .a-title { font: 900 34px/1.05 Gabarito, sans-serif; text-align: center; }
+  .a-title s { color: var(--muted); font-weight: 700; font-size: 22px; text-decoration-thickness: 2px; margin-right: 6px; }
+  .a-sub { color: var(--muted); font-size: 16px; margin: 8px 0 22px; }
+
+  /* B — ticket */
+  .ticket { width: 100%; display: flex; border: 2.5px solid var(--ink); border-radius: 20px; background: var(--butter); box-shadow: 0 5px 0 var(--ink); margin: 4px 0 22px; overflow: hidden; transform: rotate(-1.5deg); }
+  .ticket .off { padding: 18px 14px; background: var(--rosa); color: #fff; font: 900 34px/1 Gabarito, sans-serif; display: grid; place-items: center; text-align: center; border-right: 2.5px dashed var(--ink); min-width: 104px; }
+  .ticket .off small { display: block; font: 700 13px Figtree, sans-serif; margin-top: 4px; letter-spacing: .5px; }
+  .ticket .body { padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 2px; }
+  .ticket .body b { font: 800 24px Gabarito, sans-serif; }
+  .ticket .body span { color: var(--ink); opacity: .7; font-size: 14px; }
+  .b-title { font: 800 24px Gabarito, sans-serif; margin-bottom: 14px; }
+
+  /* C — Pancho says it */
+  .pancho { display: flex; gap: 12px; align-items: flex-end; width: 100%; margin-bottom: 18px; }
+  .pancho .face { width: 76px; height: 76px; border-radius: 50%; border: 2.5px solid var(--ink); background: #c98d6e center/cover; flex: none; }
+  .bubble { position: relative; background: #fff; border: 2.5px solid var(--ink); border-radius: 20px 20px 20px 6px; padding: 14px 16px; font: 800 20px/1.2 Gabarito, sans-serif; box-shadow: 0 4px 0 var(--ink); }
+  .chip { display: inline-flex; gap: 8px; align-items: baseline; background: var(--mint); border: 2px solid var(--ink); border-radius: 999px; padding: 8px 16px; margin-bottom: 22px; font: 800 22px Gabarito, sans-serif; }
+  .chip s { color: var(--muted); font-size: 16px; font-weight: 700; }
+  .chip em { font: 600 14px Figtree, sans-serif; font-style: normal; color: var(--muted); }
+
+  .now { max-width: 1180px; margin: 40px auto 0; color: #cdbfb2; font-size: 14px; line-height: 1.6; }
+  .now b { color: #F7EFE6; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Welcome offer: three simpler versions</h1>
+  <p>Today the sheet has 7 lines of text. Each version below has at most 4. The fine print stays, because Apple requires the renewal price, cancel info, and Terms/Privacy links where people buy. It's one small line now.</p>
+</header>
+
+<div class="grid">
+  <!-- A -->
+  <div class="col">
+    <div class="label">A · Price is the headline</div>
+    <div class="phone">
+      <div class="behind"><div class="blob"></div><h2>Pick your plan, Ohad.</h2></div>
+      <div class="scrim"></div>
+      <div class="sheet">
+        <div class="grab"></div>
+        <div class="gift">🎁</div>
+        <div class="a-title"><s>$99</s>$59</div>
+        <div class="a-sub">for your first year · only now</div>
+        <button class="btn">Claim offer</button>
+        <button class="skip">No thanks</button>
+        <p class="fine">Then $99/year. Cancel anytime. <a href="#">Terms</a> · <a href="#">Privacy</a></p>
+      </div>
+    </div>
+    <p class="why">Cuts the eyebrow, the "40% off" headline and the "won't see again" note. "Only now" carries the urgency in two words.</p>
+  </div>
+
+  <!-- B -->
+  <div class="col">
+    <div class="label">B · Coupon ticket</div>
+    <div class="phone">
+      <div class="behind"><div class="blob"></div><h2>Pick your plan, Ohad.</h2></div>
+      <div class="scrim"></div>
+      <div class="sheet">
+        <div class="grab"></div>
+        <div class="b-title">Wait, a gift for you</div>
+        <div class="ticket">
+          <div class="off">40%<small>OFF</small></div>
+          <div class="body"><b>$59 first year</b><span>instead of $99 · one time</span></div>
+        </div>
+        <button class="btn">Claim offer</button>
+        <button class="skip">No thanks</button>
+        <p class="fine">Then $99/year. Cancel anytime. <a href="#">Terms</a> · <a href="#">Privacy</a></p>
+      </div>
+    </div>
+    <p class="why">The ticket says it all at a glance, and it matches the onboarding ticket style. A bit more playful.</p>
+  </div>
+
+  <!-- C -->
+  <div class="col">
+    <div class="label">C · Pancho says it</div>
+    <div class="phone">
+      <div class="behind"><div class="blob"></div><h2>Pick your plan, Ohad.</h2></div>
+      <div class="scrim"></div>
+      <div class="sheet">
+        <div class="grab"></div>
+        <div class="pancho">
+          <div class="face" style="background-image:url('../../assets/images/capybara-avatar.png')"></div>
+          <div class="bubble">Che, wait! Your first year for $59.</div>
+        </div>
+        <div class="chip"><s>$99</s>$59 <em>first year</em></div>
+        <button class="btn">Claim offer</button>
+        <button class="skip">No thanks</button>
+        <p class="fine">Then $99/year. Cancel anytime. <a href="#">Terms</a> · <a href="#">Privacy</a></p>
+      </div>
+    </div>
+    <p class="why">Uses the mascot like the rest of onboarding, so it feels like Pancho, not a sales banner.</p>
+  </div>
+</div>
+
+<p class="now"><b>All three:</b> "Claim my offer" → "Claim offer", and "No thanks, continue for free" → "No thanks". The sheet still slides up, and the button still presses down when you tap it. Tap a button here to feel the press.</p>
+</body>
+</html>
