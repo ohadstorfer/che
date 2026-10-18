@@ -63,6 +63,7 @@ export function ExerciseFrame({
   badge,
   actions,
   instant,
+  art,
 }: {
   /** A string, or text nodes to sit inside the question's own Text. */
   prompt: React.ReactNode;
@@ -80,6 +81,8 @@ export function ExerciseFrame({
   actions?: React.ReactNode;
   /** Graded on the tap itself (yes/no), so there is no button to wait on. */
   instant?: boolean;
+  /** Art at the end of the question's line (the capybara), instead of a row of its own. */
+  art?: React.ReactNode;
 }) {
   const fade = useContext(PageColorContext);
   // The screen leaves its bottom edge alone so this bar can own it: a panel
@@ -181,7 +184,14 @@ export function ExerciseFrame({
               <Text style={styles.badgeText}>{badge}</Text>
             </View>
           ) : null}
-          <Text style={styles.prompt}>{prompt}</Text>
+          {art ? (
+            <View style={styles.promptRow}>
+              <Text style={[styles.prompt, styles.promptBeside]}>{prompt}</Text>
+              {art}
+            </View>
+          ) : (
+            <Text style={styles.prompt}>{prompt}</Text>
+          )}
           {children}
         </ScrollView>
         <MoreBelow show={more} fade={fade} onPress={() => scroll.current?.scrollToEnd({ animated: true })} />
@@ -385,6 +395,9 @@ const styles = StyleSheet.create({
     boxShadow: clay.trough,
   },
   prompt: { ...font.display[800], fontSize: 24, lineHeight: 29, color: colors.ink, letterSpacing: -0.4 },
+  // Over what follows, so art that reaches down onto the card is drawn on top of it.
+  promptRow: { flexDirection: 'row', alignItems: 'center', gap: 8, zIndex: 2 },
+  promptBeside: { flex: 1 },
   footer: { padding: 20, paddingTop: 12, gap: 10 },
   note: { ...font.body[600], fontSize: 15, color: colors.muted, textAlign: 'center', paddingVertical: 16 },
   badge: {

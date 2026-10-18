@@ -752,11 +752,10 @@ function useSpeaker() {
 }
 
 /**
- * A sentence as the star of the screen: a butter card with the capybara
- * peeking over its top edge, the way the bubble has him beside it. `center`
- * is a sentence being read: he sits inside the card instead, beside its play
- * button (`beside`), so he costs no height of his own. Otherwise he leans from
- * the left (a sentence being completed).
+ * A sentence as the star of the screen: a butter card. `center` is a sentence
+ * being read: the capybara sits inside the card, beside its play button
+ * (`beside`), so he costs no height of his own. Otherwise (a sentence being
+ * completed) he is beside the prompt (TitlePancho) and the card is plain.
  */
 function PhraseCard({
   center,
@@ -783,43 +782,23 @@ function PhraseCard({
       </View>
     );
   }
-  return <PeekCard speaker={speaker}>{children}</PeekCard>;
+  return <View style={[styles.phraseCard, styles.phraseCardPlain]}>{children}</View>;
 }
 
-/** PhraseCard's leaning capybara: how big he is, how far he sinks into the
- *  card, and so how much of him stands above it. The card's top margin is that,
- *  less the bit that may reach into the gap under the prompt. */
-const PEEK = 84;
-const PEEK_SINK = 24;
-const PEEK_MARGIN = PEEK - PEEK_SINK - 20;
-const PEEK_PAD = 32;
+/** The capybara at the end of the prompt's line on a sentence being completed:
+ *  he takes the room the title leaves instead of a row of his own over the
+ *  card. He stands over the card's top edge, above its sentence, so the row
+ *  barely grows.
+ *  Short of room (the keyboard), he fades the way the bubble's capybara does. */
+const TITLE_ART = 116;
 
-/** PhraseCard's leaning capybara. Short of room, he goes and the card moves up
- *  into the space he leaned over, closing to a read card's top. */
-function PeekCard({ speaker, children }: { speaker: number; children: React.ReactNode }) {
+function TitlePancho() {
+  const speaker = useSpeaker();
   const shown = useMakeRoom();
-  const room = useAnimatedStyle(() => ({ marginTop: 8 + (PEEK_MARGIN - 8) * shown.get() }));
-  const cardRoom = useAnimatedStyle(() => ({ paddingTop: 22 + (PEEK_PAD - 22) * shown.get() }));
-  const peekRoom = useAnimatedStyle(() => ({ opacity: shown.get() }));
+  const fade = useAnimatedStyle(() => ({ opacity: shown.get() }));
   return (
-    <Animated.View style={room}>
-      <Animated.View style={[styles.phraseCard, styles.peekCard, cardRoom]}>
-        {/* The sun stays inside, behind the card's outline. */}
-        <Animated.View pointerEvents="none" style={[styles.phraseCardPeek, peekRoom]}>
-          <FlagSun size={PEEK * 1.29} style={{ left: -PEEK * 0.12, top: -PEEK * 0.05 }} />
-        </Animated.View>
-        {children}
-      </Animated.View>
-      {/* He comes after the card, so its outline (a shadow, painted over the
-          card's own children) runs behind him instead of through him. */}
-      <Animated.View pointerEvents="none" style={[styles.phraseCardPeek, styles.peekFigure, peekRoom]}>
-        <Image
-          source={speaker}
-          style={{ position: 'absolute', left: 3, bottom: 0, width: PEEK, height: PEEK, transform: [{ scaleX: -1 }] }}
-          contentFit="contain"
-          accessible={false}
-        />
-      </Animated.View>
+    <Animated.View pointerEvents="none" style={[styles.titleArt, fade]}>
+      <Image source={speaker} style={styles.titleArtImage} contentFit="contain" accessible={false} />
     </Animated.View>
   );
 }
@@ -2424,6 +2403,7 @@ function SentenceGap({
   return (
     <Frame
       prompt={`${item.isRetry ? '🔁 ' : ''}${byEar ? 'Listen and complete the sentence' : 'Complete the sentence'}`}
+      art={oneCard ? <TitlePancho /> : undefined}
       verdict={verdict}
       canCheck={fill === 'typed' ? !!typed : !!chosen}
       onCheck={check}
@@ -2820,19 +2800,21 @@ const styles = StyleSheet.create({
   tokenRowCentered: { justifyContent: 'center' },
   // The sentence as the star: a butter sticker, the capybara peeking over its edge.
   phraseCard: {
-    marginTop: PEEK_MARGIN,
+    marginTop: 8,
     borderRadius: 30,
     backgroundColor: pastel.butter,
-    paddingTop: PEEK_PAD,
+    paddingTop: 22,
     paddingBottom: 22,
     paddingHorizontal: 20,
     alignItems: 'center',
     gap: 4,
     boxShadow: clay.surface,
   },
-  phraseCardPeek: { position: 'absolute', left: 14, top: -(PEEK - PEEK_SINK), width: PEEK + 6, height: PEEK },
-  peekCard: { marginTop: 0 },
-  peekFigure: { zIndex: 1 },
+  phraseCardPlain: { marginTop: 10 },
+  // He reaches up into the scroll's top padding (20), and down over the card's top edge to just above
+  // its sentence (the gap 18, the card's 10 and its padding 22), standing on the card like a sticker.
+  titleArt: { width: TITLE_ART, height: TITLE_ART, marginTop: -20, marginBottom: -48, marginRight: -8 },
+  titleArtImage: { width: TITLE_ART, height: TITLE_ART },
   // Read, not completed: nothing pokes out above, so the card starts right under the prompt.
   phraseCardCentered: { marginTop: 8, paddingTop: 14 },
   phraseCardHead: { alignSelf: 'stretch', minHeight: PHRASE_FIGURE, alignItems: 'center', justifyContent: 'center' },
@@ -2969,9 +2951,10 @@ const styles = StyleSheet.create({
   playButtonBig: { padding: 18 },
   playButtonOn: { backgroundColor: colors.primaryDark },
   pulse: { position: 'absolute', borderRadius: 99, borderWidth: 2, borderColor: colors.primary },
+  // Butter, like the sentence card: what she is asked about is always the yellow card.
   audioPad: {
     borderRadius: radius.xl,
-    backgroundColor: colors.card,
+    backgroundColor: pastel.butter,
     boxShadow: clay.surface,
     paddingVertical: 30,
     alignItems: 'center',
