@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,6 +12,7 @@ import { ClassDoor, ClassWait, SLOW_MS } from '@/components/class-door';
 import { POSE } from '@/components/mascot';
 import { PageColorContext } from '@/components/exercise-frame';
 import { Exercise } from '@/components/exercises';
+import { type Cheer, cheerFor, LessonCheer } from '@/components/lesson-cheer';
 import { StreakAlmost } from '@/components/streak-almost';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
@@ -25,6 +26,7 @@ import { currentIndex, loadCourse, loadProgress } from '@/lib/course';
 import { LessonLockedError, buildLesson } from '@/lib/lesson';
 import { timed, timingEnd, timingStart } from '@/lib/load-timing';
 import { backToCourse, goBack } from '@/lib/nav';
+import { success } from '@/lib/haptics';
 import { DEFAULT_LADDER, type Ladder } from '@/lib/sentences';
 import { loadAnswers } from '@/lib/onboarding';
 import {
@@ -503,9 +505,36 @@ export default function Practice() {
     advance(queue);
   };
 
+  // Answers in a row, for the mid-lesson cheers. Tips and intros aren't
+  // answers, so they neither count nor break a run. Tests and the unit check
+  // stay quiet: those are measuring her, not coaching her.
+  const inRow = useRef({ run: 0, comeback: false, lastAt: -10, shown: 0 });
+  const [cheer, setCheer] = useState<Cheer | null>(null);
+  const clearCheer = useCallback(() => setCheer(null), []);
+  const countAnswer = (item: QueueItem, right: boolean, next: QueueItem[]) => {
+    if (item.mode === 'tip' || item.mode === 'sentence_intro' || plan || kind === 'placement' || kind === 'unit_check') return;
+    const r = inRow.current;
+    if (!right) {
+      r.run = 0;
+      r.comeback = true;
+      return;
+    }
+    r.run += 1;
+    const pick = cheerFor(r.run, r.comeback, r.shown);
+    // Never on the last question (the end screen has that moment), and at
+    // most one every 3 questions.
+    if (!pick || index + 1 >= next.length || index - r.lastAt < 3) return;
+    r.lastAt = index;
+    r.shown += 1;
+    if (pick === 'back') r.comeback = false;
+    success();
+    setCheer({ kind: pick, count: r.run, id: Date.now() });
+  };
+
   const onAnswered = async (item: QueueItem, wrongFormIds: string[], extra?: AnswerExtra) => {
     if (!queue) return;
     const next = await round.answer(item, index, queue, wrongFormIds, extra);
+    countAnswer(item, wrongFormIds.length === 0, next);
     // A placement asks a section at a time: at the end of one, the walk
     // decides whether there is another to ask.
     if (walk.current && index + 1 >= next.length) return void nextSection(walk.current, next);
@@ -812,6 +841,7 @@ export default function Practice() {
           </PageColorContext.Provider>
         </Animated.View>
       )}
+      <LessonCheer cheer={cheer} onDone={clearCheer} />
     </SafeAreaView>
   );
 }
