@@ -1411,12 +1411,16 @@
   "como-estuvo": {
    "slang": [
     "aguante"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "pedir-un-cafe"
+   }
   },
   "la-pasamos-barbaro": {
    "culture": {
-    "section": "futbol",
-    "class": "hablar-de-futbol"
+    "section": "costumbres",
+    "class": "el-beso"
    },
    "slang": [
     "dt"
@@ -1425,17 +1429,25 @@
   "ganamos-el-partido": {
    "slang": [
     "entretiempo"
-   ]
+   ],
+   "culture": {
+    "section": "habla",
+    "class": "vos-sos-vos"
+   }
   },
   "practica-como-estuvo": {
    "slang": [
     "hinchada"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "que-decir"
+   }
   },
   "el-finde": {
    "culture": {
-    "section": "vacaciones",
-    "class": "enero"
+    "section": "familia",
+    "class": "apodos"
    },
    "slang": [
     "picado"
@@ -1444,40 +1456,52 @@
   "no-pude-ir": {
    "slang": [
     "superclasico"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "barrios"
+   }
   },
   "vinieron-todos": {
    "slang": [
     "piquete"
    ],
    "culture": {
-    "section": "familia",
-    "class": "los-amigos"
+    "section": "alfajores",
+    "class": "dulce-de-leche"
    }
   },
   "no-pudieron": {
    "slang": [
     "ajuste"
-   ]
+   ],
+   "culture": {
+    "section": "familia",
+    "class": "domingo-en-familia"
+   }
   },
   "mas-alto-que": {
    "slang": [
     "grieta"
-   ]
+   ],
+   "culture": {
+    "section": "dia-a-dia",
+    "class": "el-clima"
+   }
   },
   "el-mas-tranquilo": {
    "slang": [
     "kirchnerismo"
    ],
    "culture": {
-    "section": "buenos-aires",
-    "class": "iconos-de-la-ciudad"
+    "section": "alfajores",
+    "class": "marcas-y-kioscos"
    }
   },
   "me-duele": {
    "culture": {
-    "section": "creencias",
-    "class": "empacho-y-ojeo"
+    "section": "casa",
+    "class": "la-cuadra"
    },
    "slang": [
     "peronista"
@@ -1486,22 +1510,34 @@
   "saco-turno": {
    "slang": [
     "gremio"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "pagar"
+   }
   },
   "me-dolio": {
    "slang": [
     "chacra"
-   ]
+   ],
+   "culture": {
+    "section": "naturaleza",
+    "class": "el-carpincho"
+   }
   },
   "una-pastilla": {
    "slang": [
     "yuyo"
-   ]
+   ],
+   "culture": {
+    "section": "alfajores",
+    "class": "que-es-un-alfajor"
+   }
   },
   "practica-quien-vino": {
    "culture": {
-    "section": "bebidas",
-    "class": "el-vino"
+    "section": "buenos-aires",
+    "class": "la-sube"
    },
    "slang": [
     "ortiva"
@@ -1510,113 +1546,169 @@
   "te-llamo": {
    "slang": [
     "telo"
-   ]
+   ],
+   "culture": {
+    "section": "musica",
+    "class": "rock-nacional"
+   }
   },
   "te-llame": {
    "slang": [
     "calza"
-   ]
+   ],
+   "culture": {
+    "section": "escuela-y-laburo",
+    "class": "la-facultad"
+   }
   },
   "te-di-la-llave": {
    "slang": [
     "cochera"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "que-es-el-mate"
+   }
   },
   "no-se": {
    "slang": [
     "corpino"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "herencia-italiana"
+   }
   },
   "las-tareas": {
    "slang": [
     "jogging"
    ],
    "culture": {
-    "section": "comida",
-    "class": "empanadas"
+    "section": "alfajores",
+    "class": "facturas"
    }
   },
   "limpio-y-ordeno": {
    "slang": [
     "mesa-de-luz"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "horarios-y-mesa"
+   }
   },
   "quien-lavo": {
    "slang": [
     "mesada"
-   ]
+   ],
+   "culture": {
+    "section": "iconos",
+    "class": "escritores"
+   }
   },
   "barri-y-planche": {
    "slang": [
     "musculosa"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "vida-portena"
+   }
   },
   "de-viaje": {
    "slang": [
     "repasador"
-   ]
+   ],
+   "culture": {
+    "section": "casa",
+    "class": "el-encargado"
+   }
   },
   "ida-y-vuelta": {
    "slang": [
     "toallon"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "la-hora-argentina"
+   }
   },
   "las-vacaciones": {
    "slang": [
     "velador"
    ],
    "culture": {
-    "section": "vacaciones",
-    "class": "la-playa"
+    "section": "buenos-aires",
+    "class": "portenos"
    }
   },
   "paseamos-por-las-sierras": {
    "slang": [
     "colita"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "salir-de-noche"
+   }
   },
   "practica-las-vacaciones": {
    "slang": [
     "colorado"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "moverse"
+   }
   },
   "menos-mal": {
    "slang": [
     "gamba"
    ],
    "culture": {
-    "section": "pantallas",
-    "class": "novelas"
+    "section": "buenos-aires",
+    "class": "calle-con-cuidado"
    }
   },
   "no-te-puedo-creer": {
    "slang": [
     "pera"
-   ]
+   ],
+   "culture": {
+    "section": "naturaleza",
+    "class": "pajaros"
+   }
   },
   "contame": {
    "slang": [
     "pina"
-   ]
+   ],
+   "culture": {
+    "section": "tango",
+    "class": "nacido-en-el-arrabal"
+   }
   },
   "que-garron": {
    "slang": [
     "cansador"
-   ]
+   ],
+   "culture": {
+    "section": "deportes",
+    "class": "el-club"
+   }
   },
   "cuando-era-chico": {
    "slang": [
     "embolarse"
    ],
    "culture": {
-    "section": "iconos",
-    "class": "mafalda"
+    "section": "juegos",
+    "class": "el-truco"
    }
   },
   "en-la-primaria": {
    "culture": {
-    "section": "escuela-y-laburo",
-    "class": "la-escuela"
+    "section": "habla",
+    "class": "manos-y-chat"
    },
    "slang": [
     "tentarse"
@@ -1625,65 +1717,97 @@
   "en-esa-epoca": {
    "slang": [
     "bardear"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "el-calendario"
+   }
   },
   "siempre-jugabamos": {
    "slang": [
     "chorear"
-   ]
+   ],
+   "culture": {
+    "section": "alfajores",
+    "class": "postres-caseros"
+   }
   },
   "me-encantaba": {
    "slang": [
     "clavar"
    ],
    "culture": {
-    "section": "iconos",
-    "class": "historietas-y-pantallas"
+    "section": "asado",
+    "class": "el-ritual"
    }
   },
   "jugaban-a-la-pelota": {
    "slang": [
     "mandarse"
-   ]
+   ],
+   "culture": {
+    "section": "musica",
+    "class": "cumbia-y-cuarteto"
+   }
   },
   "estaba-lloviendo": {
    "slang": [
     "pararse"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "la-hinchada"
+   }
   },
   "sono-el-timbre": {
    "slang": [
     "pegar-onda"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "hablar-de-futbol"
+   }
   },
   "practica-en-esa-epoca": {
    "slang": [
     "zarparse"
-   ]
+   ],
+   "culture": {
+    "section": "vacaciones",
+    "class": "enero"
+   }
   },
   "el-partido": {
    "slang": [
     "alargue"
-   ]
+   ],
+   "culture": {
+    "section": "familia",
+    "class": "los-amigos"
+   }
   },
   "la-final": {
    "slang": [
     "atajada"
    ],
    "culture": {
-    "section": "futbol",
-    "class": "messi-y-qatar"
+    "section": "buenos-aires",
+    "class": "iconos-de-la-ciudad"
    }
   },
   "por-penales": {
    "slang": [
     "manguear"
-   ]
+   ],
+   "culture": {
+    "section": "creencias",
+    "class": "empacho-y-ojeo"
+   }
   },
   "de-que-cuadro-sos": {
    "culture": {
-    "section": "futbol",
-    "class": "de-que-cuadro-sos"
+    "section": "bebidas",
+    "class": "el-vino"
    },
    "slang": [
     "bostero"
@@ -1692,22 +1816,34 @@
   "soy-socio-del-club": {
    "slang": [
     "encarar"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "empanadas"
+   }
   },
   "en-el-restaurante": {
    "slang": [
     "levantar"
-   ]
+   ],
+   "culture": {
+    "section": "vacaciones",
+    "class": "la-playa"
+   }
   },
   "con-gas-o-sin-gas": {
    "slang": [
     "porron"
-   ]
+   ],
+   "culture": {
+    "section": "pantallas",
+    "class": "novelas"
+   }
   },
   "una-grande-de-muzza": {
    "culture": {
-    "section": "comida",
-    "class": "pizza-portena"
+    "section": "iconos",
+    "class": "mafalda"
    },
    "slang": [
     "tirar-onda"
@@ -1716,102 +1852,154 @@
   "soy-vegetariana": {
    "slang": [
     "botines"
-   ]
+   ],
+   "culture": {
+    "section": "escuela-y-laburo",
+    "class": "la-escuela"
+   }
   },
   "la-parrilla": {
    "slang": [
     "cano"
    ],
    "culture": {
-    "section": "asado",
-    "class": "chori-y-salsas"
+    "section": "iconos",
+    "class": "historietas-y-pantallas"
    }
   },
   "la-parrillada": {
    "slang": [
     "gallina"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "messi-y-qatar"
+   }
   },
   "bien-cocido": {
    "slang": [
     "gambeta"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "de-que-cuadro-sos"
+   }
   },
   "tipo-ocho": {
    "slang": [
     "la-scaloneta"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "pizza-portena"
+   }
   },
   "llegue-tarde": {
    "slang": [
     "barra-brava"
-   ]
+   ],
+   "culture": {
+    "section": "asado",
+    "class": "chori-y-salsas"
+   }
   },
   "confirmo-en-el-grupo": {
    "slang": [
     "cacerolazo"
-   ]
-  },
-  "las-fiestas": {
-   "slang": [
-    "casta"
    ],
    "culture": {
     "section": "costumbres",
     "class": "navidad-en-verano"
    }
   },
-  "en-lo-de-la-abuela": {
+  "las-fiestas": {
    "slang": [
-    "facho"
-   ]
-  },
-  "practica-la-sobremesa": {
-   "slang": [
-    "kirchnerista"
-   ]
-  },
-  "me-puse-nervioso": {
-   "slang": [
-    "liberal"
+    "casta"
    ],
    "culture": {
     "section": "vacaciones",
     "class": "carnaval"
    }
   },
+  "en-lo-de-la-abuela": {
+   "slang": [
+    "facho"
+   ],
+   "culture": {
+    "section": "regiones",
+    "class": "patagonia"
+   }
+  },
+  "practica-la-sobremesa": {
+   "slang": [
+    "kirchnerista"
+   ],
+   "culture": {
+    "section": "regiones",
+    "class": "el-interior"
+   }
+  },
+  "me-puse-nervioso": {
+   "slang": [
+    "liberal"
+   ],
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "antes-de-buenos-aires"
+   }
+  },
   "me-dio-verguenza": {
    "slang": [
     "zurdo"
-   ]
+   ],
+   "culture": {
+    "section": "juegos",
+    "class": "figuritas"
+   }
   },
   "me-olvide": {
    "slang": [
     "romperla"
-   ]
+   ],
+   "culture": {
+    "section": "musica",
+    "class": "folklore"
+   }
   },
   "me-senti-re-mal": {
    "slang": [
     "ponerle-onda"
-   ]
+   ],
+   "culture": {
+    "section": "tango",
+    "class": "la-milonga"
+   }
   },
   "la-semana-que-viene": {
    "slang": [
     "bajar-un-cambio"
-   ]
+   ],
+   "culture": {
+    "section": "dichos",
+    "class": "mas-que"
+   }
   },
   "algun-dia": {
    "slang": [
     "caer-la-ficha"
-   ]
+   ],
+   "culture": {
+    "section": "vacaciones",
+    "class": "escapadas"
+   }
   },
   "recorrer-el-pais": {
    "slang": [
     "dar-manija"
    ],
    "culture": {
-    "section": "regiones",
-    "class": "patagonia"
+    "section": "historia-nacimiento",
+    "class": "virreinato-e-invasiones"
    }
   },
   "acampamos-en-el-sur": {
@@ -1819,101 +2007,149 @@
     "estar-hasta-las-manos"
    ],
    "culture": {
-    "section": "regiones",
-    "class": "el-interior"
+    "section": "asado",
+    "class": "el-orden"
    }
   },
   "la-cordillera": {
    "slang": [
     "hacer-la-gamba"
-   ]
+   ],
+   "culture": {
+    "section": "bebidas",
+    "class": "la-birra"
+   }
   },
   "me-mude": {
    "slang": [
     "hacerse-el-vivo"
-   ]
+   ],
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "mayo-y-julio"
+   }
   },
   "el-depto-nuevo": {
    "slang": [
     "hacerse-la-pelicula"
-   ]
+   ],
+   "culture": {
+    "section": "escuela-y-laburo",
+    "class": "el-laburo"
+   }
   },
   "el-contrato-de-alquiler": {
    "slang": [
     "tirar-fruta"
-   ]
+   ],
+   "culture": {
+    "section": "dia-a-dia",
+    "class": "manejar"
+   }
   },
   "practica-antes-y-ahora": {
    "slang": [
     "una-bocha"
-   ]
+   ],
+   "culture": {
+    "section": "regiones",
+    "class": "cuyo"
+   }
   },
   "donde-queda": {
    "slang": [
     "a-full"
    ],
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "antes-de-buenos-aires"
+    "section": "familia",
+    "class": "amor"
    }
   },
   "zona-norte": {
    "slang": [
     "ahre"
-   ]
+   ],
+   "culture": {
+    "section": "musica",
+    "class": "trap-y-rkt"
+   }
   },
   "las-figuritas": {
    "slang": [
     "bardo"
    ],
    "culture": {
-    "section": "juegos",
-    "class": "figuritas"
+    "section": "familia",
+    "class": "casamientos-y-quince"
    }
   },
   "te-acordas": {
    "slang": [
     "berreta"
-   ]
+   ],
+   "culture": {
+    "section": "dia-a-dia",
+    "class": "al-medico"
+   }
   },
   "me-haces-un-favor": {
    "slang": [
     "boludez"
    ],
    "culture": {
-    "section": "musica",
-    "class": "folklore"
+    "section": "habla",
+    "class": "vesre-re-posta"
    }
   },
   "me-das-una-mano": {
    "slang": [
     "buena-onda"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "la-ronda"
+   }
   },
   "me-regas-las-plantas": {
    "slang": [
     "bueno-nada"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "cebar"
+   }
   },
   "un-ratito": {
    "slang": [
     "chamuyo"
-   ]
+   ],
+   "culture": {
+    "section": "tango",
+    "class": "orquestas-y-piazzolla"
+   }
   },
   "hace-fresquito": {
    "slang": [
     "mira-vos"
-   ]
+   ],
+   "culture": {
+    "section": "iconos",
+    "class": "inventos-y-nobeles"
+   }
   },
   "esta-calentito": {
    "slang": [
     "no-da"
-   ]
+   ],
+   "culture": {
+    "section": "creencias",
+    "class": "martes-trece"
+   }
   },
   "pasen-pasen": {
    "culture": {
-    "section": "tango",
-    "class": "la-milonga"
+    "section": "regiones",
+    "class": "cordoba"
    },
    "slang": [
     "amigovio"
@@ -1922,46 +2158,70 @@
   "a-la-mesa": {
    "slang": [
     "paja"
-   ]
+   ],
+   "culture": {
+    "section": "pantallas",
+    "class": "la-tele"
+   }
   },
   "no-se-olviden": {
    "slang": [
     "pedorro"
-   ]
+   ],
+   "culture": {
+    "section": "habla",
+    "class": "lunfardo"
+   }
   },
   "hay-que": {
    "slang": [
     "ponele"
-   ]
+   ],
+   "culture": {
+    "section": "dichos",
+    "class": "expresiones-del-dia"
+   }
   },
   "hay-que-sacar-turno": {
    "slang": [
     "que-se-yo"
-   ]
+   ],
+   "culture": {
+    "section": "habla",
+    "class": "sho-y-che"
+   }
   },
   "el-tramite": {
    "slang": [
     "acomodado"
    ],
    "culture": {
-    "section": "dichos",
-    "class": "mas-que"
+    "section": "historia-nacimiento",
+    "class": "san-martin-y-belgrano"
    }
   },
   "migraciones": {
    "slang": [
     "zarpado"
-   ]
+   ],
+   "culture": {
+    "section": "casa",
+    "class": "dos-ambientes"
+   }
   },
   "la-precaria": {
    "slang": [
     "buchon"
-   ]
+   ],
+   "culture": {
+    "section": "historia-moderna",
+    "class": "pensar-en-dolares"
+   }
   },
   "se-alquila": {
    "culture": {
-    "section": "vacaciones",
-    "class": "escapadas"
+    "section": "escuela-y-laburo",
+    "class": "egresados"
    },
    "slang": [
     "chamuyero"
@@ -1970,46 +2230,70 @@
   "se-aceptan-tarjetas": {
    "slang": [
     "farandula"
-   ]
+   ],
+   "culture": {
+    "section": "asi-somos",
+    "class": "sobrevivir"
+   }
   },
   "se-prohibe": {
    "slang": [
     "gordi"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "mate-de-todos-los-dias"
+   }
   },
   "en-la-verduleria": {
    "slang": [
     "bizcochuelo"
    ],
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "virreinato-e-invasiones"
+    "section": "pantallas",
+    "class": "la-radio"
    }
   },
   "cien-gramos-de-jamon": {
    "slang": [
     "nona"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "guisos-y-helado"
+   }
   },
   "estan-maduras": {
    "slang": [
     "bondiola"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "el-diez"
+   }
   },
   "practica-la-feria": {
    "slang": [
     "cebador"
-   ]
+   ],
+   "culture": {
+    "section": "deportes",
+    "class": "pumas-y-leonas"
+   }
   },
   "el-celu": {
    "slang": [
     "changa"
-   ]
+   ],
+   "culture": {
+    "section": "asi-somos",
+    "class": "la-queja"
+   }
   },
   "no-tengo-senal": {
    "culture": {
-    "section": "asado",
-    "class": "el-orden"
+    "section": "musica",
+    "class": "en-vivo"
    },
    "slang": [
     "cueva"
@@ -2018,12 +2302,16 @@
   "me-robaron": {
    "slang": [
     "laburante"
-   ]
+   ],
+   "culture": {
+    "section": "tango",
+    "class": "las-letras"
+   }
   },
   "me-afanaron": {
    "culture": {
-    "section": "bebidas",
-    "class": "la-birra"
+    "section": "deportes",
+    "class": "fierros"
    },
    "slang": [
     "cebolla-de-verdeo"
@@ -2032,17 +2320,25 @@
   "me-estafaron": {
    "slang": [
     "chaucha"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "sin-filtro"
+   }
   },
   "te-lo-devuelvo": {
    "slang": [
     "chocolatin"
-   ]
+   ],
+   "culture": {
+    "section": "asado",
+    "class": "sos-invitado"
+   }
   },
   "te-lo-presto": {
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "mayo-y-julio"
+    "section": "asado",
+    "class": "el-fuego"
    },
    "slang": [
     "humita"
@@ -2053,27 +2349,35 @@
     "matear"
    ],
    "culture": {
-    "section": "escuela-y-laburo",
-    "class": "el-laburo"
+    "section": "deportes",
+    "class": "el-pato"
    }
   },
   "me-contrataron": {
    "slang": [
     "pan-lactal"
-   ]
+   ],
+   "culture": {
+    "section": "creencias",
+    "class": "caminar-a-lujan"
+   }
   },
   "practica-te-lo-presto": {
    "slang": [
     "pastafrola"
-   ]
+   ],
+   "culture": {
+    "section": "iconos",
+    "class": "iconos-de-hoy"
+   }
   },
   "manejar-en-baires": {
    "slang": [
     "banquina"
    ],
    "culture": {
-    "section": "dia-a-dia",
-    "class": "manejar"
+    "section": "asi-somos",
+    "class": "el-ego"
    }
   },
   "la-ruta": {
@@ -2082,52 +2386,76 @@
    ],
    "culture": {
     "section": "regiones",
-    "class": "cuyo"
+    "class": "litoral"
    }
   },
   "tenes-registro": {
    "slang": [
     "tapa"
-   ]
+   ],
+   "culture": {
+    "section": "regiones",
+    "class": "noroeste"
+   }
   },
   "salir-con-alguien": {
    "slang": [
     "zapallito"
-   ]
+   ],
+   "culture": {
+    "section": "deportes",
+    "class": "polo"
+   }
   },
   "estamos-de-novios": {
    "slang": [
     "zapallo-anco"
    ],
    "culture": {
-    "section": "familia",
-    "class": "amor"
+    "section": "historia-nacimiento",
+    "class": "unitarios-federales-y-gauchos"
    }
   },
   "se-separaron": {
    "slang": [
     "morfi"
-   ]
+   ],
+   "culture": {
+    "section": "asi-somos",
+    "class": "todos-opinan"
+   }
   },
   "me-cae-bien": {
    "slang": [
     "cordon"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "mate-en-el-barrio"
+   }
   },
   "no-lo-aguanto": {
    "slang": [
     "goma"
-   ]
+   ],
+   "culture": {
+    "section": "escuela-y-laburo",
+    "class": "paros-y-marchas"
+   }
   },
   "es-insoportable": {
    "slang": [
     "gomeria"
-   ]
+   ],
+   "culture": {
+    "section": "asado",
+    "class": "asados-del-pais"
+   }
   },
   "se-caso": {
    "culture": {
-    "section": "musica",
-    "class": "trap-y-rkt"
+    "section": "bebidas",
+    "class": "fernet-y-vermut"
    },
    "slang": [
     "lomo-de-burro"
@@ -2138,72 +2466,104 @@
     "abrochadora"
    ],
    "culture": {
-    "section": "familia",
-    "class": "casamientos-y-quince"
+    "section": "pantallas",
+    "class": "el-humor"
    }
   },
   "donde-estara": {
    "slang": [
     "banadera"
-   ]
+   ],
+   "culture": {
+    "section": "creencias",
+    "class": "gauchito-gil"
+   }
   },
   "capaz-a-lo-mejor": {
    "slang": [
     "bolsa-de-dormir"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "helado"
+   }
   },
   "me-siento-mal": {
    "slang": [
     "bordo"
    ],
    "culture": {
-    "section": "dia-a-dia",
-    "class": "al-medico"
+    "section": "historia-nacimiento",
+    "class": "desierto-e-inmigrantes"
    }
   },
   "como-se-siente": {
    "slang": [
     "broche"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "mas-alla-de-buenos-aires"
+   }
   },
   "practica-a-lo-mejor": {
    "slang": [
     "calefon"
-   ]
+   ],
+   "culture": {
+    "section": "historia-moderna",
+    "class": "golpes-peron-y-evita"
+   }
   },
   "sos-un-genio": {
    "slang": [
     "chomba"
    ],
    "culture": {
-    "section": "habla",
-    "class": "vesre-re-posta"
+    "section": "historia-moderna",
+    "class": "la-ultima-dictadura"
    }
   },
   "te-debo-una": {
    "slang": [
     "cucha"
-   ]
+   ],
+   "culture": {
+    "section": "historia-moderna",
+    "class": "democracia-y-crisis"
+   }
   },
   "buena-onda": {
    "slang": [
     "garrafa"
-   ]
+   ],
+   "culture": {
+    "section": "historia-moderna",
+    "class": "de-2003-a-hoy"
+   }
   },
   "es-medio-vago": {
    "slang": [
     "mamadera"
-   ]
+   ],
+   "culture": {
+    "section": "tango",
+    "class": "gardel"
+   }
   },
   "medio-agrandado": {
    "slang": [
     "quincho"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "la-tabla-y-el-descenso"
+   }
   },
   "quien-ceba": {
    "culture": {
-    "section": "mate",
-    "class": "la-ronda"
+    "section": "historia-nacimiento",
+    "class": "granero-del-mundo"
    },
    "slang": [
     "rinonera"
@@ -2211,8 +2571,8 @@
   },
   "te-convido-un-mate": {
    "culture": {
-    "section": "mate",
-    "class": "cebar"
+    "section": "dichos",
+    "class": "refranes"
    },
    "slang": [
     "taco"
@@ -2221,27 +2581,43 @@
   "convidame-uno": {
    "slang": [
     "telgopor"
-   ]
+   ],
+   "culture": {
+    "section": "dichos",
+    "class": "filosofia-criolla"
+   }
   },
   "quiero-que-vengas": {
    "slang": [
     "termotanque"
-   ]
+   ],
+   "culture": {
+    "section": "pantallas",
+    "class": "cine"
+   }
   },
   "necesito-que-me-ayudes": {
    "slang": [
     "pupo"
-   ]
+   ],
+   "culture": {
+    "section": "historia-moderna",
+    "class": "malvinas"
+   }
   },
   "que-te-vaya-bien": {
    "slang": [
     "chocho"
-   ]
+   ],
+   "culture": {
+    "section": "juegos",
+    "class": "la-quiniela"
+   }
   },
   "que-te-mejores": {
    "culture": {
-    "section": "tango",
-    "class": "orquestas-y-piazzolla"
+    "section": "historia-nacimiento",
+    "class": "los-barcos"
    },
    "slang": [
     "estar-en-otra"
@@ -2250,91 +2626,127 @@
   "cuando-llegues": {
    "slang": [
     "mufa"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "los-chiches"
+   }
   },
   "cuando-vuelvas": {
    "slang": [
     "bochar"
-   ]
+   ],
+   "culture": {
+    "section": "asi-somos",
+    "class": "el-drama"
+   }
   },
   "practica-cuando-vuelvas": {
    "slang": [
     "buchonear"
-   ]
+   ],
+   "culture": {
+    "section": "asi-somos",
+    "class": "argentinos-afuera"
+   }
   },
   "no-creo": {
    "slang": [
     "ghostear"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "pedir-un-cafe"
+   }
   },
   "puede-ser-que": {
    "slang": [
     "chongo"
    ],
    "culture": {
-    "section": "iconos",
-    "class": "inventos-y-nobeles"
+    "section": "costumbres",
+    "class": "el-beso"
    }
   },
   "no-te-preocupes": {
    "slang": [
     "empedarse"
-   ]
+   ],
+   "culture": {
+    "section": "habla",
+    "class": "vos-sos-vos"
+   }
   },
   "no-seas-asi": {
    "slang": [
     "patovica"
    ],
    "culture": {
-    "section": "creencias",
-    "class": "martes-trece"
+    "section": "costumbres",
+    "class": "que-decir"
    }
   },
   "te-recomiendo": {
    "slang": [
     "fulbito"
-   ]
+   ],
+   "culture": {
+    "section": "familia",
+    "class": "apodos"
+   }
   },
   "te-aconsejo": {
    "slang": [
     "gol-en-contra"
    ],
    "culture": {
-    "section": "regiones",
-    "class": "cordoba"
+    "section": "buenos-aires",
+    "class": "barrios"
    }
   },
   "practica-te-aconsejo": {
    "slang": [
     "irse-a-la-b"
-   ]
+   ],
+   "culture": {
+    "section": "alfajores",
+    "class": "dulce-de-leche"
+   }
   },
   "que-bueno": {
    "slang": [
     "metegol"
    ],
    "culture": {
-    "section": "pantallas",
-    "class": "la-tele"
+    "section": "familia",
+    "class": "domingo-en-familia"
    }
   },
   "me-preocupa": {
    "slang": [
     "gorila"
-   ]
+   ],
+   "culture": {
+    "section": "dia-a-dia",
+    "class": "el-clima"
+   }
   },
   "que-significa": {
    "slang": [
     "piquetero"
-   ]
+   ],
+   "culture": {
+    "section": "alfajores",
+    "class": "marcas-y-kioscos"
+   }
   },
   "lunfardo": {
    "slang": [
     "noqui"
    ],
    "culture": {
-    "section": "habla",
-    "class": "lunfardo"
+    "section": "casa",
+    "class": "la-cuadra"
    }
   },
   "es-un-afano": {
@@ -2342,48 +2754,68 @@
     "cara-o-ceca"
    ],
    "culture": {
-    "section": "dichos",
-    "class": "expresiones-del-dia"
+    "section": "buenos-aires",
+    "class": "pagar"
    }
   },
   "practica-es-un-afano": {
    "slang": [
     "de-un-saque"
-   ]
+   ],
+   "culture": {
+    "section": "naturaleza",
+    "class": "el-carpincho"
+   }
   },
   "saludos-a-tu-vieja": {
    "slang": [
     "nomas"
    ],
    "culture": {
-    "section": "habla",
-    "class": "sho-y-che"
+    "section": "alfajores",
+    "class": "que-es-un-alfajor"
    }
   },
   "cuidate": {
    "slang": [
     "pisar-el-palito"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "la-sube"
+   }
   },
   "yo-que-vos": {
    "slang": [
     "pudrirse-todo"
-   ]
+   ],
+   "culture": {
+    "section": "musica",
+    "class": "rock-nacional"
+   }
   },
   "yo-en-tu-lugar": {
    "slang": [
     "si-te-digo-te-miento"
-   ]
+   ],
+   "culture": {
+    "section": "escuela-y-laburo",
+    "class": "la-facultad"
+   }
   },
   "si-tuviera": {
    "slang": [
     "mandar-al-frente"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "que-es-el-mate"
+   }
   },
   "si-ganara": {
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "san-martin-y-belgrano"
+    "section": "comida",
+    "class": "herencia-italiana"
    },
    "slang": [
     "a-los-pedos"
@@ -2392,22 +2824,34 @@
   "me-gustaria": {
    "slang": [
     "macana"
-   ]
+   ],
+   "culture": {
+    "section": "alfajores",
+    "class": "facturas"
+   }
   },
   "preferiria": {
    "slang": [
     "literal"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "horarios-y-mesa"
+   }
   },
   "usted": {
    "slang": [
     "caloron"
-   ]
+   ],
+   "culture": {
+    "section": "iconos",
+    "class": "escritores"
+   }
   },
   "como-no-dona-rosa": {
    "culture": {
-    "section": "casa",
-    "class": "dos-ambientes"
+    "section": "buenos-aires",
+    "class": "vida-portena"
    },
    "slang": [
     "chimento"
@@ -2416,88 +2860,124 @@
   "te-doy-una-mano": {
    "slang": [
     "epa"
-   ]
+   ],
+   "culture": {
+    "section": "casa",
+    "class": "el-encargado"
+   }
   },
   "practica-si-ganara": {
    "slang": [
     "flor-de"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "la-hora-argentina"
+   }
   },
   "en-cuotas": {
    "slang": [
     "atenti"
    ],
    "culture": {
-    "section": "historia-moderna",
-    "class": "pensar-en-dolares"
+    "section": "buenos-aires",
+    "class": "portenos"
    }
   },
   "a-medias": {
    "slang": [
     "boleta"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "salir-de-noche"
+   }
   },
   "dicen-que": {
    "slang": [
     "de-diez"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "moverse"
+   }
   },
   "me-contaron": {
    "slang": [
     "espeso"
    ],
    "culture": {
-    "section": "escuela-y-laburo",
-    "class": "egresados"
+    "section": "buenos-aires",
+    "class": "calle-con-cuidado"
    }
   },
   "practica-a-medias": {
    "slang": [
     "fija"
-   ]
+   ],
+   "culture": {
+    "section": "naturaleza",
+    "class": "pajaros"
+   }
   },
   "cada-vez-mas": {
    "slang": [
     "desprolijo"
    ],
    "culture": {
-    "section": "asi-somos",
-    "class": "sobrevivir"
+    "section": "tango",
+    "class": "nacido-en-el-arrabal"
    }
   },
   "estas-cambiado": {
    "slang": [
     "olvidate"
-   ]
+   ],
+   "culture": {
+    "section": "deportes",
+    "class": "el-club"
+   }
   },
   "ya-no-es-lo-mismo": {
    "slang": [
     "opa"
-   ]
+   ],
+   "culture": {
+    "section": "juegos",
+    "class": "el-truco"
+   }
   },
   "todo-aumenta": {
    "slang": [
     "pifie"
    ],
    "culture": {
-    "section": "mate",
-    "class": "mate-de-todos-los-dias"
+    "section": "habla",
+    "class": "manos-y-chat"
    }
   },
   "no-me-alcanza": {
    "slang": [
     "pirulo"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "el-calendario"
+   }
   },
   "no-llego-a-fin-de-mes": {
    "slang": [
     "sonaste"
-   ]
+   ],
+   "culture": {
+    "section": "alfajores",
+    "class": "postres-caseros"
+   }
   },
   "me-pregunto": {
    "culture": {
-    "section": "pantallas",
-    "class": "la-radio"
+    "section": "asado",
+    "class": "el-ritual"
    },
    "slang": [
     "tranca"
@@ -2506,12 +2986,16 @@
   "me-dijo-que": {
    "slang": [
     "batero"
-   ]
+   ],
+   "culture": {
+    "section": "musica",
+    "class": "cumbia-y-cuarteto"
+   }
   },
   "practica-me-dijo": {
    "culture": {
-    "section": "comida",
-    "class": "guisos-y-helado"
+    "section": "futbol",
+    "class": "la-hinchada"
    },
    "slang": [
     "tincho"
@@ -2520,22 +3004,34 @@
   "ponele": {
    "slang": [
     "atorrante"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "hablar-de-futbol"
+   }
   },
   "se-me-cayo": {
    "slang": [
     "boton"
-   ]
+   ],
+   "culture": {
+    "section": "vacaciones",
+    "class": "enero"
+   }
   },
   "se-me-quemo": {
    "slang": [
     "cartonero"
-   ]
+   ],
+   "culture": {
+    "section": "familia",
+    "class": "los-amigos"
+   }
   },
   "para-que": {
    "culture": {
-    "section": "futbol",
-    "class": "el-diez"
+    "section": "buenos-aires",
+    "class": "iconos-de-la-ciudad"
    },
    "slang": [
     "chapa"
@@ -2544,22 +3040,34 @@
   "para-que-entres": {
    "slang": [
     "ciruja"
-   ]
+   ],
+   "culture": {
+    "section": "creencias",
+    "class": "empacho-y-ojeo"
+   }
   },
   "sin-que-se-escape": {
    "slang": [
     "concheto"
-   ]
+   ],
+   "culture": {
+    "section": "bebidas",
+    "class": "el-vino"
+   }
   },
   "ya-habia": {
    "slang": [
     "conductor"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "empanadas"
+   }
   },
   "nunca-habia": {
    "culture": {
-    "section": "deportes",
-    "class": "pumas-y-leonas"
+    "section": "vacaciones",
+    "class": "la-playa"
    },
    "slang": [
     "cumpa"
@@ -2568,31 +3076,43 @@
   "practica-nunca-habia": {
    "slang": [
     "encarador"
-   ]
+   ],
+   "culture": {
+    "section": "pantallas",
+    "class": "novelas"
+   }
   },
   "no-anda": {
    "slang": [
     "entrador"
    ],
    "culture": {
-    "section": "asi-somos",
-    "class": "la-queja"
+    "section": "iconos",
+    "class": "mafalda"
    }
   },
   "el-tecnico": {
    "slang": [
     "fana"
-   ]
+   ],
+   "culture": {
+    "section": "escuela-y-laburo",
+    "class": "la-escuela"
+   }
   },
   "me-lo-podes-arreglar": {
    "slang": [
     "fisura"
-   ]
+   ],
+   "culture": {
+    "section": "iconos",
+    "class": "historietas-y-pantallas"
+   }
   },
   "el-consorcio": {
    "culture": {
-    "section": "musica",
-    "class": "en-vivo"
+    "section": "futbol",
+    "class": "messi-y-qatar"
    },
    "slang": [
     "grasa"
@@ -2601,27 +3121,43 @@
   "se-tapo-la-pileta": {
    "slang": [
     "guarango"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "de-que-cuadro-sos"
+   }
   },
   "de-acuerdo": {
    "slang": [
     "kiosquero"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "pizza-portena"
+   }
   },
   "tenes-razon": {
    "slang": [
     "linyera"
-   ]
+   ],
+   "culture": {
+    "section": "asado",
+    "class": "chori-y-salsas"
+   }
   },
   "nada-que-ver": {
    "slang": [
     "mino"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "navidad-en-verano"
+   }
   },
   "practica-tenes-razon": {
    "culture": {
-    "section": "tango",
-    "class": "las-letras"
+    "section": "vacaciones",
+    "class": "carnaval"
    },
    "slang": [
     "neri"
@@ -2630,12 +3166,16 @@
   "el-cajero": {
    "slang": [
     "seco"
-   ]
+   ],
+   "culture": {
+    "section": "regiones",
+    "class": "patagonia"
+   }
   },
   "que-susto": {
    "culture": {
-    "section": "deportes",
-    "class": "fierros"
+    "section": "regiones",
+    "class": "el-interior"
    },
    "slang": [
     "patota"
@@ -2644,17 +3184,25 @@
   "me-dan-asco": {
    "slang": [
     "plomo"
-   ]
+   ],
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "antes-de-buenos-aires"
+   }
   },
   "me-pico-un-mosquito": {
    "slang": [
     "potro"
-   ]
+   ],
+   "culture": {
+    "section": "juegos",
+    "class": "figuritas"
+   }
   },
   "costumbres": {
    "culture": {
-    "section": "costumbres",
-    "class": "sin-filtro"
+    "section": "musica",
+    "class": "folklore"
    },
    "slang": [
     "rugbier"
@@ -2665,24 +3213,32 @@
     "traga"
    ],
    "culture": {
-    "section": "asado",
-    "class": "sos-invitado"
+    "section": "tango",
+    "class": "la-milonga"
    }
   },
   "acabo-de": {
    "slang": [
     "trapito"
-   ]
+   ],
+   "culture": {
+    "section": "dichos",
+    "class": "mas-que"
+   }
   },
   "deje-de-fumar": {
    "slang": [
     "vueltero"
-   ]
+   ],
+   "culture": {
+    "section": "vacaciones",
+    "class": "escapadas"
+   }
   },
   "practica-un-aplauso": {
    "culture": {
-    "section": "asado",
-    "class": "el-fuego"
+    "section": "historia-nacimiento",
+    "class": "virreinato-e-invasiones"
    },
    "slang": [
     "chanchito"
@@ -2691,22 +3247,34 @@
   "no-sabes-lo-que-me-contaron": {
    "slang": [
     "changarin"
-   ]
+   ],
+   "culture": {
+    "section": "asado",
+    "class": "el-orden"
+   }
   },
   "le-metio-los-cuernos": {
    "slang": [
     "feriado-puente"
-   ]
+   ],
+   "culture": {
+    "section": "bebidas",
+    "class": "la-birra"
+   }
   },
   "queria-que-vinieras": {
    "slang": [
     "gratarola"
-   ]
+   ],
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "mayo-y-julio"
+   }
   },
   "mis-viejos-querian": {
    "culture": {
-    "section": "deportes",
-    "class": "el-pato"
+    "section": "escuela-y-laburo",
+    "class": "el-laburo"
    },
    "slang": [
     "lavacopas"
@@ -2715,12 +3283,16 @@
   "aunque-llueva": {
    "slang": [
     "monotributista"
-   ]
+   ],
+   "culture": {
+    "section": "dia-a-dia",
+    "class": "manejar"
+   }
   },
   "aunque-no-tenga-ganas": {
    "culture": {
-    "section": "creencias",
-    "class": "caminar-a-lujan"
+    "section": "regiones",
+    "class": "cuyo"
    },
    "slang": [
     "paritaria"
@@ -2729,12 +3301,16 @@
   "llevo-dos-anos": {
    "slang": [
     "plazo-fijo"
-   ]
+   ],
+   "culture": {
+    "section": "familia",
+    "class": "amor"
+   }
   },
   "llevo-un-ano-aprendiendo": {
    "culture": {
-    "section": "iconos",
-    "class": "iconos-de-hoy"
+    "section": "musica",
+    "class": "trap-y-rkt"
    },
    "slang": [
     "posnet"
@@ -2743,12 +3319,16 @@
   "practica-aunque-sea": {
    "slang": [
     "rebusque"
-   ]
+   ],
+   "culture": {
+    "section": "familia",
+    "class": "casamientos-y-quince"
+   }
   },
   "como-si-nada": {
    "culture": {
-    "section": "asi-somos",
-    "class": "el-ego"
+    "section": "dia-a-dia",
+    "class": "al-medico"
    },
    "slang": [
     "senar"
@@ -2757,12 +3337,16 @@
   "no-te-hagas-el-gil": {
    "slang": [
     "vaquita"
-   ]
+   ],
+   "culture": {
+    "section": "habla",
+    "class": "vesre-re-posta"
+   }
   },
   "el-que-quieras": {
    "culture": {
-    "section": "regiones",
-    "class": "litoral"
+    "section": "mate",
+    "class": "la-ronda"
    },
    "slang": [
     "matambre"
@@ -2771,65 +3355,97 @@
   "el-de-la-vidriera": {
    "slang": [
     "lagrima"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "cebar"
+   }
   },
   "practica-a-la-mesa": {
    "slang": [
     "sorrentinos"
-   ]
+   ],
+   "culture": {
+    "section": "tango",
+    "class": "orquestas-y-piazzolla"
+   }
   },
   "si-hubiera-sabido": {
    "slang": [
     "bodegon"
-   ]
+   ],
+   "culture": {
+    "section": "iconos",
+    "class": "inventos-y-nobeles"
+   }
   },
   "si-hubieramos-salido": {
    "slang": [
     "alcaucil"
    ],
    "culture": {
-    "section": "regiones",
-    "class": "noroeste"
+    "section": "creencias",
+    "class": "martes-trece"
    }
   },
   "por-un-lado": {
    "slang": [
     "castana-de-caju"
-   ]
+   ],
+   "culture": {
+    "section": "regiones",
+    "class": "cordoba"
+   }
   },
   "la-ventaja-es-que": {
    "slang": [
     "chipa"
-   ]
+   ],
+   "culture": {
+    "section": "pantallas",
+    "class": "la-tele"
+   }
   },
   "practica-migraciones": {
    "slang": [
     "cubanito"
    ],
    "culture": {
-    "section": "deportes",
-    "class": "polo"
+    "section": "habla",
+    "class": "lunfardo"
    }
   },
   "te-doy-la-razon": {
    "slang": [
     "morcipan"
-   ]
+   ],
+   "culture": {
+    "section": "dichos",
+    "class": "expresiones-del-dia"
+   }
   },
   "no-seas-cabeza-dura": {
    "slang": [
     "a-caballo"
-   ]
+   ],
+   "culture": {
+    "section": "habla",
+    "class": "sho-y-che"
+   }
   },
   "un-depto-que-tenga": {
    "slang": [
     "azucar-impalpable"
-   ]
+   ],
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "san-martin-y-belgrano"
+   }
   },
   "conoces-a-alguien-que": {
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "unitarios-federales-y-gauchos"
+    "section": "casa",
+    "class": "dos-ambientes"
    },
    "slang": [
     "bizcocho"
@@ -2838,12 +3454,20 @@
   "me-da-bronca": {
    "slang": [
     "budin-ingles"
-   ]
+   ],
+   "culture": {
+    "section": "historia-moderna",
+    "class": "pensar-en-dolares"
+   }
   },
   "me-pone-nervioso-que": {
    "slang": [
     "cuernito"
-   ]
+   ],
+   "culture": {
+    "section": "escuela-y-laburo",
+    "class": "egresados"
+   }
   },
   "deberias": {
    "slang": [
@@ -2851,28 +3475,40 @@
    ],
    "culture": {
     "section": "asi-somos",
-    "class": "todos-opinan"
+    "class": "sobrevivir"
    }
   },
   "deberias-tomarte-unos-dias": {
    "slang": [
     "flauta"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "mate-de-todos-los-dias"
+   }
   },
   "animate": {
    "slang": [
     "grisin"
-   ]
+   ],
+   "culture": {
+    "section": "pantallas",
+    "class": "la-radio"
+   }
   },
   "practica-alguien-que-sepa": {
    "slang": [
     "lemon-pie"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "guisos-y-helado"
+   }
   },
   "dijo-que-vendria": {
    "culture": {
-    "section": "mate",
-    "class": "mate-en-el-barrio"
+    "section": "futbol",
+    "class": "el-diez"
    },
    "slang": [
     "minuta"
@@ -2881,74 +3517,110 @@
   "dijo-que-pasaria": {
    "slang": [
     "napo"
-   ]
+   ],
+   "culture": {
+    "section": "deportes",
+    "class": "pumas-y-leonas"
+   }
   },
   "a-menos-que": {
    "slang": [
     "pebete"
-   ]
+   ],
+   "culture": {
+    "section": "asi-somos",
+    "class": "la-queja"
+   }
   },
   "con-tal-de-que": {
    "slang": [
     "pipon"
    ],
    "culture": {
-    "section": "escuela-y-laburo",
-    "class": "paros-y-marchas"
+    "section": "musica",
+    "class": "en-vivo"
    }
   },
   "practica-se-aceptan-tarjetas": {
    "slang": [
     "pizzanesa"
-   ]
+   ],
+   "culture": {
+    "section": "tango",
+    "class": "las-letras"
+   }
   },
   "voy-entendiendo": {
    "slang": [
     "prepizza"
-   ]
+   ],
+   "culture": {
+    "section": "deportes",
+    "class": "fierros"
+   }
   },
   "ando-buscando": {
    "slang": [
     "rabas"
    ],
    "culture": {
-    "section": "asado",
-    "class": "asados-del-pais"
+    "section": "costumbres",
+    "class": "sin-filtro"
    }
   },
   "practica-no-lo-aguanto": {
    "slang": [
     "vainilla"
-   ]
+   ],
+   "culture": {
+    "section": "asado",
+    "class": "sos-invitado"
+   }
   },
   "que-novedad": {
    "slang": [
     "vigilante"
-   ]
+   ],
+   "culture": {
+    "section": "asado",
+    "class": "el-fuego"
+   }
   },
   "ni-ahi": {
    "slang": [
     "aguaviva"
-   ]
+   ],
+   "culture": {
+    "section": "deportes",
+    "class": "el-pato"
+   }
   },
   "ese-chabon": {
    "slang": [
     "yuta"
    ],
    "culture": {
-    "section": "bebidas",
-    "class": "fernet-y-vermut"
+    "section": "creencias",
+    "class": "caminar-a-lujan"
    }
   },
   "estoy-al-horno": {
    "slang": [
     "bicisenda"
-   ]
+   ],
+   "culture": {
+    "section": "iconos",
+    "class": "iconos-de-hoy"
+   }
   },
   "es-re-rata": {
    "slang": [
     "cabotaje"
-   ]
+   ],
+   "culture": {
+    "section": "asi-somos",
+    "class": "el-ego"
+   }
   },
   "puteadas": {
    "culture": {
@@ -2962,31 +3634,43 @@
   "no-rompas": {
    "slang": [
     "combi"
-   ]
+   ],
+   "culture": {
+    "section": "regiones",
+    "class": "noroeste"
+   }
   },
   "me-estas-cargando": {
    "slang": [
     "cortada"
    ],
    "culture": {
-    "section": "pantallas",
-    "class": "el-humor"
+    "section": "deportes",
+    "class": "polo"
    }
   },
   "caiste": {
    "slang": [
     "cubierta"
-   ]
+   ],
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "unitarios-federales-y-gauchos"
+   }
   },
   "me-pidio-que": {
    "slang": [
     "diariero"
-   ]
+   ],
+   "culture": {
+    "section": "asi-somos",
+    "class": "todos-opinan"
+   }
   },
   "me-encargo-que": {
    "culture": {
-    "section": "creencias",
-    "class": "gauchito-gil"
+    "section": "mate",
+    "class": "mate-en-el-barrio"
    },
    "slang": [
     "fierro"
@@ -2995,12 +3679,16 @@
   "me-pregunto-si": {
    "slang": [
     "fotomulta"
-   ]
+   ],
+   "culture": {
+    "section": "escuela-y-laburo",
+    "class": "paros-y-marchas"
+   }
   },
   "fijate-si-tienen": {
    "culture": {
-    "section": "comida",
-    "class": "helado"
+    "section": "asado",
+    "class": "asados-del-pais"
    },
    "slang": [
     "grua"
@@ -3009,42 +3697,70 @@
   "practica-como-no": {
    "slang": [
     "la-general-paz"
-   ]
+   ],
+   "culture": {
+    "section": "bebidas",
+    "class": "fernet-y-vermut"
+   }
   },
   "cualquier-cosa-avisame": {
    "slang": [
     "guino"
-   ]
+   ],
+   "culture": {
+    "section": "pantallas",
+    "class": "el-humor"
+   }
   },
   "te-reenvio-el-archivo": {
    "slang": [
     "pancheria"
-   ]
+   ],
+   "culture": {
+    "section": "creencias",
+    "class": "gauchito-gil"
+   }
   },
   "alguna-duda": {
    "slang": [
     "parador"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "helado"
+   }
   },
   "la-entrega": {
    "slang": [
     "paragolpes"
-   ]
+   ],
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "desierto-e-inmigrantes"
+   }
   },
   "sobre-la-hora": {
    "slang": [
     "playero"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "mas-alla-de-buenos-aires"
+   }
   },
   "postergaron-la-fecha": {
    "slang": [
     "polirrubro"
-   ]
+   ],
+   "culture": {
+    "section": "historia-moderna",
+    "class": "golpes-peron-y-evita"
+   }
   },
   "merezco-un-aumento": {
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "desierto-e-inmigrantes"
+    "section": "historia-moderna",
+    "class": "la-ultima-dictadura"
    },
    "slang": [
     "sodero"
@@ -3053,37 +3769,61 @@
   "se-merece-el-ascenso": {
    "slang": [
     "villa"
-   ]
+   ],
+   "culture": {
+    "section": "historia-moderna",
+    "class": "democracia-y-crisis"
+   }
   },
   "resulta-que": {
    "slang": [
     "acolchado"
-   ]
+   ],
+   "culture": {
+    "section": "historia-moderna",
+    "class": "de-2003-a-hoy"
+   }
   },
   "para-colmo": {
    "slang": [
     "alfiler-de-gancho"
-   ]
+   ],
+   "culture": {
+    "section": "tango",
+    "class": "gardel"
+   }
   },
   "se-la-cree": {
    "slang": [
     "alicate"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "la-tabla-y-el-descenso"
+   }
   },
   "me-la-jugue": {
    "slang": [
     "anotador"
-   ]
+   ],
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "granero-del-mundo"
+   }
   },
   "te-las-arreglas": {
    "slang": [
     "antiparras"
-   ]
+   ],
+   "culture": {
+    "section": "dichos",
+    "class": "refranes"
+   }
   },
   "practica-me-la-jugue": {
    "culture": {
-    "section": "futbol",
-    "class": "mas-alla-de-buenos-aires"
+    "section": "dichos",
+    "class": "filosofia-criolla"
    },
    "slang": [
     "borcego"
@@ -3092,127 +3832,187 @@
   "estoy-podrido": {
    "slang": [
     "cama-marinera"
-   ]
+   ],
+   "culture": {
+    "section": "pantallas",
+    "class": "cine"
+   }
   },
   "me-pudri": {
    "slang": [
     "canasto"
-   ]
+   ],
+   "culture": {
+    "section": "historia-moderna",
+    "class": "malvinas"
+   }
   },
   "siempre-reniego": {
    "slang": [
     "chiche"
-   ]
+   ],
+   "culture": {
+    "section": "juegos",
+    "class": "la-quiniela"
+   }
   },
   "practica-me-pudri": {
    "slang": [
     "cortadora-de-pasto"
-   ]
+   ],
+   "culture": {
+    "section": "historia-nacimiento",
+    "class": "los-barcos"
+   }
   },
   "como-te-decia": {
    "slang": [
     "escobillon"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "los-chiches"
+   }
   },
   "te-la-hago-corta": {
    "slang": [
     "flor-de-la-ducha"
-   ]
+   ],
+   "culture": {
+    "section": "asi-somos",
+    "class": "el-drama"
+   }
   },
   "hay-paro": {
    "slang": [
     "gomera"
    ],
    "culture": {
-    "section": "historia-moderna",
-    "class": "golpes-peron-y-evita"
+    "section": "asi-somos",
+    "class": "argentinos-afuera"
    }
   },
   "paro-docente": {
    "slang": [
     "hamaca-paraguaya"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "pedir-un-cafe"
+   }
   },
   "con-normalidad": {
    "slang": [
     "licuadora"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "el-beso"
+   }
   },
   "fue-construido": {
    "slang": [
     "mecha"
    ],
    "culture": {
-    "section": "historia-moderna",
-    "class": "la-ultima-dictadura"
+    "section": "habla",
+    "class": "vos-sos-vos"
    }
   },
   "fue-clausurado": {
    "slang": [
     "mucama"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "que-decir"
+   }
   },
   "hubo-un-incendio": {
    "slang": [
     "pata-de-rana"
-   ]
+   ],
+   "culture": {
+    "section": "familia",
+    "class": "apodos"
+   }
   },
   "las-elecciones": {
    "slang": [
     "ph"
    ],
    "culture": {
-    "section": "historia-moderna",
-    "class": "democracia-y-crisis"
+    "section": "buenos-aires",
+    "class": "barrios"
    }
   },
   "mi-candidata-gano": {
    "slang": [
     "piloto"
-   ]
+   ],
+   "culture": {
+    "section": "alfajores",
+    "class": "dulce-de-leche"
+   }
   },
   "practica-el-cuarto-oscuro": {
    "slang": [
     "piluso"
-   ]
+   ],
+   "culture": {
+    "section": "familia",
+    "class": "domingo-en-familia"
+   }
   },
   "segun-el-diario": {
    "slang": [
     "playo"
    ],
    "culture": {
-    "section": "historia-moderna",
-    "class": "de-2003-a-hoy"
+    "section": "dia-a-dia",
+    "class": "el-clima"
    }
   },
   "rumor-o-verso": {
    "slang": [
     "polera"
-   ]
+   ],
+   "culture": {
+    "section": "alfajores",
+    "class": "marcas-y-kioscos"
+   }
   },
   "practica-me-afanaron": {
    "slang": [
     "tapado"
-   ]
+   ],
+   "culture": {
+    "section": "casa",
+    "class": "la-cuadra"
+   }
   },
   "el-tango": {
    "slang": [
     "brushing"
    ],
    "culture": {
-    "section": "tango",
-    "class": "gardel"
+    "section": "buenos-aires",
+    "class": "pagar"
    }
   },
   "tocas-la-guitarra": {
    "slang": [
     "chicato"
-   ]
+   ],
+   "culture": {
+    "section": "naturaleza",
+    "class": "el-carpincho"
+   }
   },
   "practica-la-parrillada": {
    "culture": {
-    "section": "futbol",
-    "class": "la-tabla-y-el-descenso"
+    "section": "alfajores",
+    "class": "que-es-un-alfajor"
    },
    "slang": [
     "chueco"
@@ -3221,42 +4021,70 @@
   "lo-lindo-de-la-ciudad": {
    "slang": [
     "claritos"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "la-sube"
+   }
   },
   "tiene-sus-cosas": {
    "slang": [
     "cogote"
-   ]
+   ],
+   "culture": {
+    "section": "musica",
+    "class": "rock-nacional"
+   }
   },
   "no-es-que": {
    "slang": [
     "estar-fuerte"
-   ]
+   ],
+   "culture": {
+    "section": "escuela-y-laburo",
+    "class": "la-facultad"
+   }
   },
   "no-es-que-no-me-guste": {
    "slang": [
     "gomita"
-   ]
+   ],
+   "culture": {
+    "section": "mate",
+    "class": "que-es-el-mate"
+   }
   },
   "gracias-por-invitarme": {
    "slang": [
     "hebilla"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "herencia-italiana"
+   }
   },
   "si-hubiera-ahorrado": {
    "slang": [
     "lomazo"
-   ]
+   ],
+   "culture": {
+    "section": "alfajores",
+    "class": "facturas"
+   }
   },
   "a-esta-altura": {
    "slang": [
     "nana"
-   ]
+   ],
+   "culture": {
+    "section": "comida",
+    "class": "horarios-y-mesa"
+   }
   },
   "tendria-que-haber": {
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "granero-del-mundo"
+    "section": "iconos",
+    "class": "escritores"
    },
    "slang": [
     "pis"
@@ -3265,51 +4093,79 @@
   "me-hubiera-gustado": {
    "slang": [
     "planchita"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "vida-portena"
+   }
   },
   "te-lo-perdiste": {
    "slang": [
     "rengo"
-   ]
+   ],
+   "culture": {
+    "section": "casa",
+    "class": "el-encargado"
+   }
   },
   "practica-me-hubiera-gustado": {
    "slang": [
     "rodete"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "la-hora-argentina"
+   }
   },
   "lo-que-pasa-es-que": {
    "slang": [
     "detonado"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "portenos"
+   }
   },
   "lo-que-paso-fue-que": {
    "slang": [
     "cruzado"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "salir-de-noche"
+   }
   },
   "lo-mio-lo-tuyo": {
    "slang": [
     "del-tomate"
-   ]
+   ],
+   "culture": {
+    "section": "buenos-aires",
+    "class": "moverse"
+   }
   },
   "como-dice-el-dicho": {
    "slang": [
     "embalado"
    ],
    "culture": {
-    "section": "dichos",
-    "class": "refranes"
+    "section": "buenos-aires",
+    "class": "calle-con-cuidado"
    }
   },
   "cada-loco-con-su-tema": {
    "slang": [
     "enroscarse"
-   ]
+   ],
+   "culture": {
+    "section": "naturaleza",
+    "class": "pajaros"
+   }
   },
   "practica-cada-loco-con-su-tema": {
    "culture": {
-    "section": "dichos",
-    "class": "filosofia-criolla"
+    "section": "tango",
+    "class": "nacido-en-el-arrabal"
    },
    "slang": [
     "estar-de-la-cabeza"
@@ -3320,34 +4176,50 @@
     "fusilado"
    ],
    "culture": {
-    "section": "pantallas",
-    "class": "cine"
+    "section": "deportes",
+    "class": "el-club"
    }
   },
   "me-mori-de-risa": {
    "slang": [
     "mambeado"
-   ]
+   ],
+   "culture": {
+    "section": "juegos",
+    "class": "el-truco"
+   }
   },
   "me-hizo-sentir": {
    "slang": [
     "palida"
-   ]
+   ],
+   "culture": {
+    "section": "habla",
+    "class": "manos-y-chat"
+   }
   },
   "cuanto-mas": {
    "slang": [
     "rayado"
-   ]
+   ],
+   "culture": {
+    "section": "costumbres",
+    "class": "el-calendario"
+   }
   },
   "cuanto-antes-lleguemos": {
    "slang": [
     "sacado"
-   ]
+   ],
+   "culture": {
+    "section": "alfajores",
+    "class": "postres-caseros"
+   }
   },
   "practica-me-mori-de-risa": {
    "culture": {
-    "section": "historia-moderna",
-    "class": "malvinas"
+    "section": "asado",
+    "class": "el-ritual"
    },
    "slang": [
     "tildado"
@@ -3356,22 +4228,34 @@
   "sin-ofender": {
    "slang": [
     "embarrarla"
-   ]
+   ],
+   "culture": {
+    "section": "musica",
+    "class": "cumbia-y-cuarteto"
+   }
   },
   "no-te-lo-tomes-a-mal": {
    "slang": [
     "botonear"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "la-hinchada"
+   }
   },
   "me-cayo-la-ficha": {
    "slang": [
     "cranear"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "hablar-de-futbol"
+   }
   },
   "me-hace-ruido": {
    "culture": {
-    "section": "juegos",
-    "class": "la-quiniela"
+    "section": "vacaciones",
+    "class": "enero"
    },
    "slang": [
     "curtir"
@@ -3380,31 +4264,43 @@
   "practica-me-hace-ruido": {
    "slang": [
     "deschavar"
-   ]
+   ],
+   "culture": {
+    "section": "familia",
+    "class": "los-amigos"
+   }
   },
   "mis-abuelos-italianos": {
    "slang": [
     "embocar"
    ],
    "culture": {
-    "section": "historia-nacimiento",
-    "class": "los-barcos"
+    "section": "buenos-aires",
+    "class": "iconos-de-la-ciudad"
    }
   },
   "se-instalaron-en-la-boca": {
    "slang": [
     "fichar"
-   ]
+   ],
+   "culture": {
+    "section": "creencias",
+    "class": "empacho-y-ojeo"
+   }
   },
   "mis-raices": {
    "slang": [
     "fundirse"
-   ]
+   ],
+   "culture": {
+    "section": "bebidas",
+    "class": "el-vino"
+   }
   },
   "practica-se-instalaron": {
    "culture": {
-    "section": "mate",
-    "class": "los-chiches"
+    "section": "comida",
+    "class": "empanadas"
    },
    "slang": [
     "garronear"
@@ -3413,12 +4309,16 @@
   "me-emocione": {
    "slang": [
     "ligar"
-   ]
+   ],
+   "culture": {
+    "section": "vacaciones",
+    "class": "la-playa"
+   }
   },
   "se-emociono": {
    "culture": {
-    "section": "asi-somos",
-    "class": "el-drama"
+    "section": "pantallas",
+    "class": "novelas"
    },
    "slang": [
     "manotear"
@@ -3427,27 +4327,39 @@
   "practica-se-emociono": {
    "slang": [
     "mufar"
-   ]
+   ],
+   "culture": {
+    "section": "iconos",
+    "class": "mafalda"
+   }
   },
   "gracias-por-todo": {
    "slang": [
     "patinarse"
    ],
    "culture": {
-    "section": "asi-somos",
-    "class": "argentinos-afuera"
+    "section": "escuela-y-laburo",
+    "class": "la-escuela"
    }
   },
   "que-andes-bien": {
    "slang": [
     "pispear"
-   ]
+   ],
+   "culture": {
+    "section": "iconos",
+    "class": "historietas-y-pantallas"
+   }
   },
   "ya-sos-de-aca": {
    "slang": [
     "quemar"
-   ]
+   ],
+   "culture": {
+    "section": "futbol",
+    "class": "messi-y-qatar"
+   }
   }
  },
- "culture_units": 138
+ "culture_units": 466
 }

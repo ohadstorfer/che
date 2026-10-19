@@ -15,6 +15,7 @@ import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { BootSplash } from '@/components/boot-splash';
 import { FeedbackLayer } from '@/components/feedback';
 import { ScreenBackground } from '@/components/ui';
+import { AnalyticsProvider, AnalyticsTracker } from '@/lib/analytics';
 import { AuthProvider, useAuth } from '@/lib/auth';
 import { useBootReady } from '@/lib/boot';
 import { useKeyboardViewportFit } from '@/lib/keyboard-viewport';
@@ -73,9 +74,12 @@ export default function RootLayout() {
       {/* The keyboard's height, frame by frame, on iOS and Android alike —
           Android 15 no longer shrinks the screen for it, so nothing else says. */}
       <KeyboardProvider>
+      {/* Session replay and screen views (PostHog), from the first frame. */}
+      <AnalyticsProvider>
       {/* Above the font gate: her session is read from storage while the
           fonts load, not after. */}
       <AuthProvider>
+        <AnalyticsTracker />
         <PremiumProvider>
         {/* The icon's gradient is painted once, edge to edge, and every screen
             sits on it transparently — so it never seams at the status bar and
@@ -117,6 +121,7 @@ export default function RootLayout() {
         </View>
         </PremiumProvider>
       </AuthProvider>
+      </AnalyticsProvider>
       </KeyboardProvider>
     </GestureHandlerRootView>
   );
