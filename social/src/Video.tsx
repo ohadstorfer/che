@@ -36,7 +36,7 @@ const End: React.FC = () => {
   const s = spring({frame, fps: FPS, config: {damping: 12}});
   return <AbsoluteFill style={{background: '#3E5641', alignItems: 'center', justifyContent: 'center', fontFamily: FONT, color: '#F1EEE6', textAlign: 'center', padding: 70}}>
     <Img src={staticFile('cap.png')} style={{height: 520, transform: `scale(${0.8 + 0.2 * s})`}} />
-    <div style={{fontSize: 66, fontWeight: 900, lineHeight: 1.1, marginTop: 30}}>Want to learn<br />Argentine Spanish?</div>
+    <div style={{fontSize: 66, fontWeight: 900, lineHeight: 1.1, marginTop: 30}}>Want to learn<br />Argentinian Spanish?</div>
     <div style={{fontSize: 44, fontWeight: 600, marginTop: 24, opacity: 0.9}}>Learn it in the app</div>
     <div style={{display: 'flex', alignItems: 'center', gap: 24, marginTop: 44, background: '#F1EEE6', color: '#2B3C2E', borderRadius: 40, padding: '20px 44px'}}>
       <Img src={staticFile('icon.png')} style={{width: 96, height: 96, borderRadius: 22}} />

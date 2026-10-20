@@ -1,4 +1,4 @@
-// "Can you understand …?" reels: a real clip of a famous Argentine, played once plain,
+// "Can you understand …?" reels: a real clip of a famous Argentinian, played once plain,
 // then slowly line by line with the words explained (each word lit as it is said: `say` is
 // [start, end, the word's number in the line]), then the key line once more at full speed (`again`).
 // Times are seconds in the source clip. The clips themselves live outside the repo
@@ -36,7 +36,7 @@ export const CELEBS = [
   },
   {
     id: 'celeb-03-messi-suarez-pichi',
-    who: 'Messi & Suárez',
+    who: 'Messi',
     source: 'celeb/pichi-meas-sentado.mp4', // the later part of the same chat (te levantás, el chorrete) is celeb/suarez-meas-sentado.mp4
     full: [0.4, 9.7],
     lines: [
@@ -46,6 +46,9 @@ export const CELEBS = [
       {from: 5.7, to: 6.9, es: ['¿Qué, ', ['meás'], ' ', ['sentado'], '?'], en: 'What, you pee sitting down?',
         say: [[5.92, 6.08, 0], [6.12, 6.24, 1], [6.26, 6.56, 2]],
         words: [{word: 'meás', means: 'you pee', note: 'vos form of “mear”'}, {word: 'sentado', means: 'sitting down', note: 'from “sentarse”'}]},
+      {from: 8.9, to: 9.6, es: [['Yo también'], '.'], en: 'Me too.',
+        say: [[9, 9.06, 0], [9.1, 9.34, 1]],
+        words: [{word: 'yo también', means: 'me too', note: 'short reply, no verb needed'}, {word: 'también', means: 'also, too', note: 'the opposite: “tampoco”'}]},
     ],
     again: {line: 1, from: 5.8, to: 6.75},
   },
@@ -126,7 +129,8 @@ export const CELEBS = [
   },
   {
     id: 'celeb-09-susana-vivo',
-    who: 'Susana',
+    day: 2,
+    who: 'this lady',
     source: 'celeb/vivo.mp4',
     full: [0, 4.5],
     lines: [
@@ -141,6 +145,7 @@ export const CELEBS = [
   },
   {
     id: 'celeb-10-atiendo-boludos',
+    day: 3,
     who: 'this inspector',
     source: 'celeb/atiendo-boludos.mp4',
     full: [0.1, 6.65],
@@ -150,12 +155,13 @@ export const CELEBS = [
         words: [{word: 'línea', means: 'route', note: 'a bus line'}, {word: 'colectivos', means: 'buses', note: 'Argentina’s word for bus'}]},
       {from: 4.55, to: 6.64, es: [['Atiendo'], ' ', ['boludos'], '. ¿No te das cuenta que atiendo boludos?'], en: 'I serve idiots. Don’t you see I serve idiots?',
         say: [[4.78, 5.08, 0], [5.12, 5.54, 1], [5.58, 5.66, 2], [5.68, 5.74, 3], [5.76, 5.84, 4], [5.88, 6.04, 5], [6.08, 6.1, 6], [6.12, 6.38, 7], [6.42, 6.62, 8]],
-        words: [{word: 'atiendo', means: 'I serve', note: 'from “atender”: to deal with'}, {word: 'boludos', means: 'idiots', note: 'the classic Argentine insult'}]},
+        words: [{word: 'atiendo', means: 'I serve', note: 'from “atender”: to deal with'}, {word: 'boludos', means: 'idiots', note: 'the classic Argentinian insult'}]},
     ],
     again: {line: 1, from: 4.68, to: 6.64},
   },
   {
     id: 'celeb-11-julio-aja',
+    day: 4,
     who: 'Julio',
     source: 'celeb/aja-las-pelotas.mp4',
     full: [0, 9.35],
@@ -171,13 +177,14 @@ export const CELEBS = [
   },
   {
     id: 'celeb-12-bici-arbol',
+    day: 5,
     who: 'this dad',
     source: 'celeb/bici-arbol.mp4',
     full: [0, 16.9], // the whole video, as asked
     lines: [
       {from: 11.6, to: 12.9, es: ['¡Qué ', ['choto'], ' que ', ['sos'], '!'], en: 'You’re so useless!',
         say: [[11.82, 11.96, 0], [12.08, 12.5, 1], [12.56, 12.66, 2], [12.74, 12.88, 3]],
-        words: [{word: 'choto', means: 'useless', note: 'rude, very Argentine'}, {word: 'sos', means: 'you are', note: 'vos form · textbook: eres'}]},
+        words: [{word: 'choto', means: 'useless', note: 'rude, very Argentinian'}, {word: 'sos', means: 'you are', note: 'vos form · textbook: eres'}]},
       {from: 12.9, to: 15.0, es: ['El único árbol que hay te lo ', ['venís'], ' a ', ['tragar'], '.'], en: 'The only tree here and you crash right into it.',
         say: [[12.9, 12.98, 0], [13.04, 13.38, 1], [13.44, 13.74, 2], [13.8, 13.84, 3], [13.88, 13.98, 4], [14.04, 14.12, 5], [14.14, 14.2, 6], [14.24, 14.42, 7], [14.44, 14.48, 8], [14.54, 14.86, 9]],
         words: [{word: 'venís', means: 'you come', note: 'vos form · textbook: vienes'}, {word: 'tragar', means: 'to swallow', note: 'here: to crash into'}]},
@@ -186,6 +193,7 @@ export const CELEBS = [
   },
   {
     id: 'celeb-13-jugo-feo',
+    day: 1,
     who: 'this kid',
     source: 'celeb/jugo-feo.mp4',
     full: [0, 8.3], // the whole video, as asked
@@ -193,8 +201,8 @@ export const CELEBS = [
       {from: 0.4, to: 1.6, es: ['Este ', ['jugo'], ' está ', ['feo'], '.'], en: 'This juice tastes bad.',
         say: [[0.6, 0.7, 0], [0.72, 0.9, 1], [0.9, 1.05, 2], [1.12, 1.48, 3]],
         words: [{word: 'jugo', means: 'juice', note: 'Spain says “zumo”'}, {word: 'feo', means: 'bad', note: 'for taste: “está feo”'}]},
-      {from: 2.45, to: 4.4, es: ['¿Qué ', ['hacés'], ' ahí?\n', ['Hice pis'], ' yo.'], en: 'What are you doing there? I peed.',
-        say: [[2.58, 2.68, 0], [2.78, 2.96, 1], [2.96, 3.08, 2], [3.4, 3.52, 3], [3.64, 3.9, 4], [3.9, 4.1, 5]],
+      {from: 2.45, to: 4.4, es: ['¿Qué ', ['hacés'], '?\nAhí ', ['hice pis'], ' yo.'], en: 'What are you doing? I peed there.',
+        say: [[2.58, 2.68, 0], [2.78, 2.96, 1], [3.16, 3.3, 2], [3.4, 3.52, 3], [3.64, 3.9, 4], [3.9, 4.1, 5]],
         words: [{word: 'hacés', means: 'are you doing', note: 'vos form · textbook: haces'}, {word: 'hice pis', means: 'I peed', note: '“hacer pis” = to pee'}]},
     ],
     again: {line: 1, from: 2.48, to: 4.4},
@@ -232,3 +240,25 @@ CELEBS.push({...CELEBS[0], id: 'celeb-01-messi-bobo-captions', look: 'captions',
 CELEBS.push({...CELEBS.find(r => r.id === 'celeb-02-milei-pelotudos'), id: 'celeb-02-milei-pelotudos-host', live: true, full: [0, 12.2],
   host: {video: 'celeb/host-milei-pelotudos.mp4', intro: [0, 5.48], lines: [[5.48, 13.72], [13.72, 16.6]],
     outro: {video: 'celeb/host-milei-pelotudos-outro.mp4', from: 0, to: 7.2}}});
+
+// Day 1 with the host (Martina's voice, her.jpg): she talks after the plain play and after each slow line.
+CELEBS.push({...CELEBS.find(r => r.id === 'celeb-13-jugo-feo'), id: 'celeb-13-jugo-feo-host',
+  host: {video: 'celeb/host-jugo-talk.mp4', intro: [0, 6], lines: [[6, 13.36], [13.36, 22.4]],
+    outro: {video: 'celeb/host-jugo-outro.mp4', from: 0, to: 7.19}}});
+
+// Day series, added 2026-10-18 from pasted links (cropped to the video area; clips in posta-videos/sources/memes/).
+CELEBS.push(
+  {"id":"celeb-15-pizza-quemando","day":6,"who":"this man","source":"celeb/pizza-quemando.mp4","full":[0,9.5],"lines":[{"from":4.3,"to":5.55,"es":[["Dale"]," que me cago ",["quemando"],"."],"en":"Come on, this is burning me!","say":[[4.42,4.58,0],[4.64,4.7,1],[4.74,4.84,2],[4.86,5.02,3],[5.08,5.46,4]],"words":[{"word":"dale","means":"come on","note":"also “okay” or “deal”"},{"word":"quemando","means":"burning","note":"the tray is hot"}]},{"from":6.6,"to":9.5,"es":["¡Y ",["sacame"]," foto!\n¡Qué ",["pelotuda"]," que sos!"],"en":"Then take my picture! What an idiot you are!","say":[[6.7,6.8,0],[6.86,7.26,1],[7.38,8.02,2],[8.26,8.34,3],[8.46,9.1,4],[9.2,9.26,5],[9.34,9.46,6]],"words":[{"word":"sacame","means":"take for me","note":"vos command · textbook: sácame"},{"word":"pelotuda","means":"idiot (fem.)","note":"a strong insult"}]}],"again":{"line":1,"from":6.6,"to":9.5}},
+  {"id":"celeb-16-yogurisimo","day":7,"who":"this girl","source":"celeb/yogurisimo.mp4","full":[0,6.23],"lines":[{"from":2.3,"to":4.1,"es":["¿",["Acá"]," ",["hacen"]," Yogurísimo?"],"en":"Do you make Yogurísimo here?","say":[[2.4,2.64,0],[2.66,2.86,1],[3,4,2]],"words":[{"word":"acá","means":"here","note":"textbook: aquí"},{"word":"hacen","means":"do you make","note":"to “ustedes” · no vosotros"}]},{"from":4.1,"to":6.23,"es":["No, hacemos ",["guardabarros"]," de Falcon, ",["pelotuda"],"."],"en":"No, we make Falcon fenders, you idiot.","say":[[4.2,4.3,0],[4.48,4.8,1],[4.82,5.32,2],[5.34,5.42,3],[5.44,5.76,4],[5.84,6.2,5]],"words":[{"word":"guardabarros","means":"car fenders","note":"Falcon: a classic Ford"},{"word":"pelotuda","means":"idiot (fem.)","note":"a strong insult"}]}],"again":{"line":1,"from":4.1,"to":6.23}},
+  {"id":"celeb-17-messi-cenar","day":8,"who":"this guy","source":"celeb/messi-cenar.mp4","full":[0,7.1],"lines":[{"from":1.8,"to":2.85,"es":["¿Te puedo dar un ",["beso"]," ",["en la boca"],"?"],"en":"Can I give you a kiss on the mouth?","say":[[1.95,1.99,0],[2.04,2.1,1],[2.1,2.14,2],[2.16,2.2,3],[2.22,2.38,4],[2.39,2.41,5],[2.42,2.48,6],[2.5,2.7,7]],"words":[{"word":"beso","means":"kiss","note":"a small one: “besito”"},{"word":"en la boca","means":"on the mouth","note":"cheek: “en la mejilla”"}]}],"again":{"line":0,"from":1.7,"to":3}},
+  {"id":"celeb-18-hijo-drogarse","day":9,"who":"this mom","source":"celeb/hijo-drogarse.mp4","full":[0,9.7],"lines":[{"from":4.5,"to":6.5,"es":["¿Pero ",["sabe"]," ",["para qué"],"?"],"en":"But do you know what for?","say":[[4.64,5.86,0],[5.9,6.08,1],[6.14,6.28,2],[6.34,6.42,3]],"words":[{"word":"sabe","means":"do you know","note":"usted form · vos: sabés"},{"word":"para qué","means":"what for","note":"purpose · “por qué” = why"}]},{"from":6.4,"to":8.3,"es":["Simplemente para ",["drogarse"],", ",["¿eh?"]],"en":"Simply to get high, huh?","say":[[6.52,6.98,0],[7,7.14,1],[7.16,7.64,2],[7.64,8,3]],"words":[{"word":"drogarse","means":"to take drugs","note":"reflexive: “se”"},{"word":"¿eh?","means":"huh? right?","note":"a tag at the end"}]}],"again":{"line":1,"from":6.4,"to":8.3}},
+  {"id":"celeb-19-no-autorizada","day":10,"who":"this woman","source":"celeb/no-autorizada.mp4","full":[0,7.1],"lines":[{"from":1.4,"to":2.8,"es":["No, no ",["le puedo decir"]," mi ",["nombre"]],"en":"No, I can’t tell you my name","say":[[1.5,1.6,0],[1.66,1.74,1],[1.76,1.86,2],[1.94,2.1,3],[2.14,2.38,4],[2.44,2.52,5],[2.56,2.76,6]],"words":[{"word":"le puedo decir","means":"I can tell you","note":"“le” = to you (usted)"},{"word":"nombre","means":"name","note":"last name: “apellido”"}]},{"from":2.75,"to":5,"es":["Porque no estoy ",["autorizada"]," a decir ",["nada más"],"."],"en":"Because I’m not allowed to say anything more.","say":[[2.8,2.94,0],[3.04,3.1,1],[3.14,3.3,2],[3.34,3.9,3],[3.96,4.02,4],[4.04,4.38,5],[4.54,4.74,6],[4.82,5.02,7]],"words":[{"word":"autorizada","means":"allowed (fem.)","note":"ends in -a: she is a woman"},{"word":"nada más","means":"nothing more","note":"also “that’s all”"}]},{"from":4.7,"to":5.9,"es":["Se llama ",["Rosa"],"."],"en":"Her name is Rosa.","say":[[4.76,4.84,0],[4.84,5.12,1],[5.2,5.42,2]],"words":[{"word":"se llama","means":"is called","note":"literally “calls itself”"},{"word":"Rosa","means":"a name","note":"also the colour pink"}]}],"again":{"line":2,"from":4.7,"to":6}},
+  {"id":"celeb-20-sordomudo","day":11,"who":"this lady","source":"celeb/sordomudo.mp4","full":[0,10.2],"lines":[{"from":0.1,"to":1.95,"es":["El ",["chico"]," que escribió es ",["sordomudo"],"."],"en":"The boy who wrote is deaf-mute.","say":[[0.22,0.32,0],[0.34,0.54,1],[0.58,0.66,2],[0.68,1,3],[1.04,1.12,4],[1.16,1.8,5]],"words":[{"word":"chico","means":"boy","note":"Argentina: also “pibe”"},{"word":"sordomudo","means":"deaf-mute","note":"old word · today: “sordo”"}]},{"from":8.6,"to":10.1,"es":["¿Está ",["ahí"]," ",["escuchándome"],"?"],"en":"Are you there listening to me?","say":[[8.74,9.04,0],[9.06,9.18,1],[9.22,9.96,2]],"words":[{"word":"ahí","means":"there","note":"here: “are you there?”"},{"word":"escuchándome","means":"listening to me","note":"“me” sticks to the end"}]}],"again":{"line":1,"from":8.6,"to":10.1}},
+  {"id":"celeb-21-hormiguita","day":12,"who":"this teacher","source":"celeb/hormiguita.mp4","full":[12.9,18.2],"lines":[{"from":12.9,"to":16.6,"es":["La ",["hormiguita"]," ",["se perdió"],"."],"en":"The little ant got lost.","say":[[13.04,13.14,0],[13.16,14.18,1],[14.34,14.44,2],[14.66,15.42,3],[15.66,15.76,2],[15.96,16.54,3]],"words":[{"word":"hormiguita","means":"little ant","note":"diminutive: -ita"},{"word":"se perdió","means":"got lost","note":"perder → se perdió"}]},{"from":16.6,"to":17.6,"es":[["Sos"]," un ",["culiao"],"."],"en":"You’re a jerk.","say":[[16.68,16.84,0],[16.94,17.02,1],[17.06,17.42,2]],"words":[{"word":"sos","means":"you are","note":"vos form · textbook: eres"},{"word":"culiao","means":"jerk","note":"very rude · from “culiado”"}]}],"again":{"line":1,"from":16.55,"to":17.7}},
+);
+
+// Day 3 with the host: one clip per piece (a generic intro shared by all Day reels, a hold per line); her closing line is the one made for Day 1.
+CELEBS.push({...CELEBS.find(r => r.id === 'celeb-10-atiendo-boludos'), id: 'celeb-10-atiendo-boludos-host',
+  host: {videos: {intro: 'celeb/host-intro-generic.mp4', lines: ['celeb/host-atiendo-l1.mp4', 'celeb/host-atiendo-l2.mp4']},
+    intro: [0, 3.24], lines: [[0, 5], [0, 5.44]],
+    outro: {video: 'celeb/host-jugo-outro.mp4', from: 0, to: 7.19}}});

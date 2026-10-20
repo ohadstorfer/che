@@ -97,7 +97,7 @@ const Slang: Scene = ({f, v}) => {
 
 // --- 3 · the culture -----------------------------------------------------------
 // One question for every learner (the user, 2026-10-11): the asado, and the answer is all of them.
-const QUIZ = {q: 'When do Argentines have an asado?', options: ['Every Sunday', 'Every birthday', 'Every holiday', 'All of the above']};
+const QUIZ = {q: 'When do Argentinians have an asado?', options: ['Every Sunday', 'Every birthday', 'Every holiday', 'All of the above']};
 const Culture: Scene = ({f}) => {
   const MOVE = 48, PICK = 61, RIGHT = 68; // the answers land, the finger sets off at once and picks the last, and it is right while the scene still has time to show it
   const picked = tween(f, PICK + 2, 5), right = tween(f, RIGHT, 8);
@@ -191,9 +191,9 @@ const Course: Scene = ({f}) => {
 // about a second after its last cue, and `pace` slows the whole scene a little more. `hold` (a rest before leaving) is 0.
 const SCENES: {small: string; big: string; bigFirst?: boolean; dur: number; pace: number; hold: number; Body: Scene}[] = [
   // the whole course first, then what is in it (the user, 2026-10-11)
-  {small: 'A full Argentine', big: 'Spanish course', dur: 130, pace: 1.2, hold: 0, Body: Course},
+  {small: 'A full Argentinian', big: 'Spanish course', dur: 130, pace: 1.2, hold: 0, Body: Course},
   {small: 'practice', big: 'AI speaking', bigFirst: true, dur: 172, pace: 1.25, hold: 0, Body: Chat},
-  {small: 'Real Argentine', big: 'slang', dur: 130, pace: 1.2, hold: 0, Body: Slang},
+  {small: 'Real Argentinian', big: 'slang', dur: 130, pace: 1.2, hold: 0, Body: Slang},
   {small: 'lessons', big: 'Culture', bigFirst: true, dur: 166, pace: 1.2, hold: 0, Body: Culture},
 ];
 /** How long a scene is on stage, in the clip's frames. */

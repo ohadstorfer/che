@@ -166,7 +166,7 @@ export const PanchoReel: React.FC<{reel: Reel; clips: Clips}> = ({reel, clips}) 
       const a = tween(lf, 8, 12), b = tween(lf, 16, 12), c = tween(lf, 26, 12);
       return <div style={{position: 'absolute', left: 0, right: 0, top: 1215, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{fontFamily: DISPLAY, fontWeight: 800, fontSize: 96, lineHeight: 1.02, color: C.ink, textAlign: 'center', opacity: a, transform: `translateY(${(1 - a) * 22}px)`}}>Nos vemos<br />en <span style={{color: C.rosa}}>Posta</span></div>
-        <div style={{fontFamily: BODY, fontWeight: 600, fontSize: 44, color: C.muted, marginTop: 22, opacity: b, transform: `translateY(${(1 - b) * 16}px)`}}>Argentine Spanish, the way it’s spoken</div>
+        <div style={{fontFamily: BODY, fontWeight: 600, fontSize: 44, color: C.muted, marginTop: 22, opacity: b, transform: `translateY(${(1 - b) * 16}px)`}}>Argentinian Spanish, the way it’s spoken</div>
         <div style={{display: 'flex', alignItems: 'center', gap: 20, marginTop: 40, background: C.rosa, color: '#fff', fontFamily: DISPLAY, fontWeight: 700, fontSize: 46, padding: '20px 40px 20px 22px', borderRadius: 999,
           boxShadow: 'inset 0 3px 0 rgba(255,255,255,0.28), inset 0 -5px 10px rgba(80,10,30,0.25), 0 16px 26px -10px rgba(160,50,75,0.6)', opacity: c, transform: `translateY(${(1 - c) * 16}px) scale(${0.96 + 0.04 * c})`}}>
           <Img src={staticFile('posta-icon.png')} style={{width: 76, height: 76, borderRadius: 38}} />Follow for more</div>

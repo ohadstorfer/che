@@ -32,8 +32,9 @@ console.log('request', sent.request_id);
 for (let i = 0; i < 180; i++) {
   await new Promise(r => setTimeout(r, 5000));
   const out = await (await fetch(`${API}/predictions/${sent.request_id}/result`, {headers: {'x-api-key': key}})).json();
-  if (out.status === 'failed') throw new Error(`failed: ${JSON.stringify(out).slice(0, 400)}`);
-  if (out.status !== 'completed') continue;
+  const status = out.status ?? out.detail?.status;
+  if (status === 'failed') throw new Error(`failed: ${JSON.stringify(out).slice(0, 400)}`);
+  if (status !== 'completed') continue;
   const url = [out.outputs, out.output?.video, out.output, out.url].flat().find(u => typeof u === 'string' && u.startsWith('http'));
   if (!url) throw new Error(`no file url in the result: ${JSON.stringify(out).slice(0, 400)}`);
   fs.writeFileSync(output, Buffer.from(await (await fetch(url)).arrayBuffer()));

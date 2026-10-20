@@ -72,7 +72,7 @@ export const EndCard: React.FC<{frame: number; soon?: boolean}> = ({frame, soon 
       <div style={{display: 'flex', flexDirection: 'column', gap: 12}}>
         <div style={{fontWeight: 900, fontSize: 106, lineHeight: 1, color: C.rosa}}>Posta</div>
         {/* TODO: the app is "Posta: Argentinian Spanish" since 2026-10-15. Update this line and re-render when the user says so. */}
-        <div style={{fontWeight: 800, fontSize: 52, lineHeight: 1, whiteSpace: 'nowrap'}}>Learn Argentine Spanish</div>
+        <div style={{fontWeight: 800, fontSize: 52, lineHeight: 1, whiteSpace: 'nowrap'}}>Learn Argentinian Spanish</div>
       </div>
     </div>
 

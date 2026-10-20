@@ -33,10 +33,12 @@ export const fit = (text: string, max: number, width: number, perChar = 0.56) =>
 
 // `say` is when each word is spoken: [start, end, the word's number in the line], in clip seconds.
 export type Line = {from: number; to: number; es: (string | string[])[]; en: string; say?: number[][]; words: {word: string; means: string; note: string}[]};
-export type Celeb = {id: string; who: string; source: string; full: number[]; lines: Line[]; again: {line: number; from: number; to: number}; live?: boolean;
+export type Celeb = {id: string; who: string; source: string; full: number[]; lines: Line[]; again: {line: number; from: number; to: number}; live?: boolean; day?: number;
   // A person reacting, filmed on a green screen: she peeks into the photo after the plain play
   // (`intro`) and after each slow line (`lines`), while the clip waits. Times are seconds in her video.
-  host?: {video: string; intro: number[]; lines: number[][]; outro?: {video: string; from: number; to: number}};
+  host?: {video?: string; intro: number[]; lines: number[][]; outro?: {video: string; from: number; to: number};
+    // One clip per piece: with `videos`, each piece plays from its own file (times start at 0 in each).
+    videos?: {intro: string; lines: string[]}};
   // 'captions' is the creator-captions look (CaptionsReel); without it, the sticker look.
   look?: string};
 
@@ -107,11 +109,15 @@ const stamp = (frame: number, from: number): React.CSSProperties => {
 };
 
 // Two lines, tilted: a small one in flame and a big one in butter, both outlined in ink.
-const Headline: React.FC<{frame: number; small: string; big: string}> = ({frame, small, big}) =>
-  <div style={{position: 'absolute', left: 60, top: 226, width: 960, display: 'flex', flexDirection: 'column', gap: 4, transform: 'rotate(-3deg)'}}>
-    <div style={stamp(frame, 0)}><Outlined text={small} size={fit(small, 88, 940)} fill={C.flame} stroke={16} /></div>
-    <div style={stamp(frame, 5)}><Outlined text={big} size={fit(big, 210, 940, 0.6)} fill={C.butter} stroke={22} spacing={-4} /></div>
+const Headline: React.FC<{frame: number; small: string; big: string; big2?: string}> = ({frame, small, big, big2}) => {
+  // Three lines (the series title) sit a little higher and smaller so they stay above the photo.
+  const bigSize = big2 ? Math.min(fit(big, 112, 940, 0.6), fit(big2, 112, 940, 0.6)) : fit(big, 210, 940, 0.6);
+  return <div style={{position: 'absolute', left: 60, top: big2 ? 192 : 226, width: 960, display: 'flex', flexDirection: 'column', gap: big2 ? 0 : 4, transform: 'rotate(-3deg)'}}>
+    <div style={stamp(frame, 0)}><Outlined text={small} size={fit(small, big2 ? 96 : 88, 940)} fill={C.flame} stroke={big2 ? 14 : 16} /></div>
+    <div style={stamp(frame, 5)}><Outlined text={big} size={bigSize} fill={C.butter} stroke={big2 ? 18 : 22} spacing={-4} /></div>
+    {big2 && <div style={stamp(frame, 9)}><Outlined text={big2} size={bigSize} fill={C.butter} stroke={18} spacing={-4} /></div>}
   </div>;
+};
 
 const WordSticker: React.FC<{frame: number; at: number; tone: string; tilt: number; word: string; means: string; note: string}> = ({frame, at, tone, tilt, word, means, note}) =>
   <div style={{flex: '1 1 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, padding: '26px 16px 28px', borderRadius: 40, background: tone, ...STICKER, ...slap(frame, at, tilt)}}>
@@ -140,7 +146,7 @@ const LineCard: React.FC<{frame: number; line: Line; clipTime: number}> = ({fram
   </div>;
 };
 
-// The sun from the Argentine flag, as a pale mark in the background: a disc with sixteen straight
+// The sun from the Argentinian flag, as a pale mark in the background: a disc with sixteen straight
 // rays and sixteen wavy ones. It turns very slowly and never reacts to the voices.
 const Sun: React.FC<{left: number; top: number; size: number; frame: number}> = ({left, top, size, frame}) =>
   <svg viewBox="-100 -100 200 200" width={size} height={size} style={{position: 'absolute', left, top, opacity: 0.34, transform: `rotate(${frame * 0.03}deg)`}}>
@@ -171,7 +177,7 @@ export const StickerEnd: React.FC<{frame: number; soon?: boolean; outro?: {video
 
     <div style={{position: 'absolute', left: 60, top: 420 - up, width: 960, display: 'flex', flexDirection: 'column', gap: 2, transform: 'rotate(-3deg)'}}>
       <div style={stamp(frame, 0)}><Outlined text="Want to understand" size={82} fill={C.flame} stroke={16} /></div>
-      <div style={stamp(frame, 5)}><Outlined text="Argentine" size={170} fill={C.butter} stroke={22} spacing={-3} /></div>
+      <div style={stamp(frame, 5)}><Outlined text="Argentinian" size={140} fill={C.butter} stroke={22} spacing={-3} /></div>
       <div style={stamp(frame, 9)}><Outlined text="Spanish?" size={170} fill={C.butter} stroke={22} spacing={-3} /></div>
     </div>
 
@@ -181,7 +187,7 @@ export const StickerEnd: React.FC<{frame: number; soon?: boolean; outro?: {video
         <div style={{fontFamily: BODY, fontWeight: 800, fontSize: 32, lineHeight: 1, letterSpacing: 4, textTransform: 'uppercase', color: C.ink, opacity: 0.75}}>Learn more in</div>
         <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 108, lineHeight: 0.92, color: C.rosa}}>Posta</div>
         {/* TODO: the app is "Posta: Argentinian Spanish" since 2026-10-15. Update this line and re-render when the user says so. */}
-        <div style={{fontFamily: DISPLAY, fontWeight: 800, fontSize: 46, lineHeight: 1, whiteSpace: 'nowrap'}}>Learn Argentine Spanish</div>
+        <div style={{fontFamily: DISPLAY, fontWeight: 800, fontSize: 46, lineHeight: 1, whiteSpace: 'nowrap'}}>Learn Argentinian Spanish</div>
       </div>
     </div>
 
@@ -209,7 +215,9 @@ export const CelebReel: React.FC<{reel: Celeb}> = ({reel}) => {
       <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 40, lineHeight: 1, color: C.ink}}>Posta</div>
     </div>
 
-    {frame < t.full + t.intro && <Headline frame={frame} small="Can you understand" big={`${reel.who}?`} />}
+    {frame < t.full + t.intro && (reel.day
+      ? <Headline frame={frame} small={`Day ${reel.day} of`} big="Understanding" big2="Argentinians" />
+      : <Headline frame={frame} small="Can you understand" big={`${reel.who}?`} />)}
     {line >= 0 && <Headline frame={frame - t.starts[0]} small="Again," big="slowly." />}
     {inAgain && <Headline frame={frame - t.againAt} small="Now you" big="hear it." />}
 
@@ -217,8 +225,8 @@ export const CelebReel: React.FC<{reel: Celeb}> = ({reel}) => {
     <div style={{position: 'absolute', left: 80, top: 560, width: 920, height: 600, boxSizing: 'border-box', border: `16px solid ${C.card}`, borderRadius: 40, overflow: 'hidden', background: '#1E1612', boxShadow: `12px 14px 0 ${C.ink}`,
       transform: `rotate(${2 + (1 - photo) * 5}deg) scale(${0.92 + 0.08 * photo})`, opacity: Math.min(1, photo * 2)}}>
       <Sequence durationInFrames={t.full} layout="none"><Clip src={reel.source} from={reel.full[0]} /></Sequence>
-      {reel.host && <Sequence from={t.full} durationInFrames={t.intro} layout="none"><Still src={reel.source} at={reel.full[1]} /><Host src={reel.host.video} from={reel.host.intro[0]} frames={t.intro} /></Sequence>}
-      {reel.host && reel.lines.map((l, i) => <Sequence key={`host-${i}`} from={t.starts[i] + t.lines[i]} durationInFrames={t.holds[i]} layout="none"><Still src={reel.source} at={l.to} /><Host src={reel.host!.video} from={reel.host!.lines[i][0]} frames={t.holds[i]} /></Sequence>)}
+      {reel.host && <Sequence from={t.full} durationInFrames={t.intro} layout="none"><Still src={reel.source} at={reel.full[1]} /><Host src={(reel.host.videos?.intro ?? reel.host.video)!} from={reel.host.intro[0]} frames={t.intro} /></Sequence>}
+      {reel.host && reel.lines.map((l, i) => <Sequence key={`host-${i}`} from={t.starts[i] + t.lines[i]} durationInFrames={t.holds[i]} layout="none"><Still src={reel.source} at={l.to} /><Host src={(reel.host!.videos?.lines[i] ?? reel.host!.video)!} from={reel.host!.lines[i][0]} frames={t.holds[i]} /></Sequence>)}
       <Sequence from={t.againAt} durationInFrames={t.again} layout="none"><Clip src={reel.source} from={reel.again.from} /></Sequence>
       {reel.lines.map((l, i) => <Sequence key={i} from={t.starts[i]} durationInFrames={t.lines[i]} layout="none"><Clip src={reel.source} from={l.from} rate={SLOW} /></Sequence>)}
     </div>

@@ -1,5 +1,5 @@
 // "X vs Y": two Panchos side by side. The left one says his word, the right one
-// answers with the Argentine one, pair after pair. Everything is timed from the
+// answers with the Argentinian one, pair after pair. Everything is timed from the
 // recorded clips (versus-vo.mjs), so a new script needs no keyframing.
 import React from 'react';
 import {AbsoluteFill, Audio, Easing, Img, Sequence, continueRender, delayRender, interpolate, spring, staticFile, useCurrentFrame} from 'remotion';

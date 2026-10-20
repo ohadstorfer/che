@@ -10,7 +10,7 @@ export type Video = {
 };
 
 export const VIDEOS: Video[] = [
-  {id: '01-texting', title: 'Argentine Texting Essentials 🇦🇷', layout: 'equals', bgIdea: 'Messi celebrating / walking with the Cup',
+  {id: '01-texting', title: 'Argentinian Texting Essentials 🇦🇷', layout: 'equals', bgIdea: 'Messi celebrating / walking with the Cup',
     tint: '#0b2a4a', lines: [
     {l: 'XQ', r: 'Porque'}, {l: 'TMB', r: 'También'}, {l: 'XFA', r: 'Por favor'}, {l: 'NTP', r: 'No te preocupes'},
     {l: 'TQM', r: 'Te quiero mucho'}, {l: 'AHRE', r: 'Just kidding'}, {l: 'BLDO', r: 'Boludo'}, {l: 'HDP', r: 'Hijo de puta'}]},
@@ -18,7 +18,7 @@ export const VIDEOS: Video[] = [
     tint: '#3a1450', lines: [
     {l: 'Copado', r: 'Cool'}, {l: 'Groso', r: 'Awesome'}, {l: 'Bárbaro', r: 'Great'}, {l: 'De diez', r: 'Perfect (a 10)'},
     {l: 'Re bueno', r: 'Really good'}, {l: 'Está joya', r: "It's gold"}]},
-  {id: '03-puteadas', title: 'Argentine Swear Words 🤬 Mild → Heavy', layout: 'stack', bgIdea: 'Milei shouting / angry fan in the stands',
+  {id: '03-puteadas', title: 'Argentinian Swear Words 🤬 Mild → Heavy', layout: 'stack', bgIdea: 'Milei shouting / angry fan in the stands',
     tint: '#4a0f0f', lines: [
     {l: 'Boludo', r: 'Dude (friendly!)'}, {l: 'Pelotudo', r: 'Idiot'}, {l: 'La puta madre', r: 'Damn it!'},
     {l: 'Hijo de puta', r: 'Son of a b*tch'}, {l: 'Andá a cagar', r: 'Get lost'}]},
@@ -30,7 +30,7 @@ export const VIDEOS: Video[] = [
     tint: '#4a1e0a', lines: [
     {l: 'Choripán', r: 'Sausage sandwich'}, {l: 'Chinchulines', r: 'Small intestines'}, {l: 'Morcilla', r: 'Blood sausage'},
     {l: 'Vacío', r: 'Flank steak'}, {l: 'Bien cocido', r: 'Well done'}, {l: 'Jugoso', r: 'Medium rare'}]},
-  {id: '06-futbol', title: 'What Argentines Yell at Football ⚽', layout: 'stack', bgIdea: 'Messi goal / crowd singing',
+  {id: '06-futbol', title: 'What Argentinians Yell at Football ⚽', layout: 'stack', bgIdea: 'Messi goal / crowd singing',
     tint: '#0b2a4a', lines: [
     {l: '¡Golazo!', r: 'What a goal!'}, {l: 'La rompió', r: 'He crushed it'}, {l: 'Crack', r: 'Superstar'},
     {l: '¡Dale, campeón!', r: 'Come on, champ!'}, {l: 'Muchachos', r: 'Lads (the anthem!)'}]},
@@ -38,7 +38,7 @@ export const VIDEOS: Video[] = [
     tint: '#1c3a1c', lines: [
     {l: 'Cebar', r: 'To prepare & serve mate'}, {l: 'Yerba', r: 'The herb'}, {l: 'Bombilla', r: 'Metal straw'},
     {l: 'Termo', r: 'Thermos'}, {l: 'Lavado', r: 'Washed out (no flavor)'}, {l: 'Amargo', r: 'Unsweetened'}]},
-  {id: '08-money', title: 'Argentine Money Slang 💸', layout: 'equals', bgIdea: 'Wad of pesos / Buenos Aires cueva',
+  {id: '08-money', title: 'Argentinian Money Slang 💸', layout: 'equals', bgIdea: 'Wad of pesos / Buenos Aires cueva',
     tint: '#1e3320', lines: [
     {l: 'Guita', r: 'Money'}, {l: 'Plata', r: 'Money'}, {l: 'Mango', r: 'One peso'},
     {l: 'Una luca', r: '1,000 pesos'}, {l: 'Estoy pelado', r: "I'm broke"}, {l: 'Está carísimo', r: "It's so expensive"}]},

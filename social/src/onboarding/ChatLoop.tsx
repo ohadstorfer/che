@@ -81,10 +81,10 @@ const Take: React.FC<{f: number}> = ({f}) => {
         <div style={{...TEXT, display: 'flex', alignItems: 'center', color: C.ink}}>
           <Diff before="¿Y" removed="tú eres" fixed="vos sos" after="de acá?" struck={tween(f, STRIKE, 8)} added={tween(f, ADD, 10)} room={270} />
         </div>
-        {/* the Argentine way to say it, under a line in the same card */}
+        {/* the Argentinian way to say it, under a line in the same card */}
         <div style={{height: grown * LOCAL_H, overflow: 'hidden'}}>
           <div style={{marginTop: 20, paddingTop: 20, borderTop: `3px solid ${C.line}`}}>
-            <div style={{fontFamily: BODY, fontWeight: 700, fontSize: 38, lineHeight: '46px', color: C.muted, opacity: tween(f, GROW + 4, 8)}}>A more Argentine way to say it:</div>
+            <div style={{fontFamily: BODY, fontWeight: 700, fontSize: 38, lineHeight: '46px', color: C.muted, opacity: tween(f, GROW + 4, 8)}}>A more Argentinian way to say it:</div>
             <div style={{fontFamily: BODY, fontWeight: 800, fontSize: 72, lineHeight: '84px', color: C.ink, transformOrigin: '0% 60%', ...slap(f, LOCAL)}}>¿Y vos?</div>
           </div>
         </div>
