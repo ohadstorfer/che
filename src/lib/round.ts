@@ -6,8 +6,8 @@ import { learnerChanged } from './learner-ready';
 import { type TestAnswer } from './placement';
 import { recordShown, DEFAULT_LADDER, glueSeen, type Ladder } from './sentences';
 import { type SessionItem, earnedTail, promoteTail } from './session';
+import { send, sendOnce, wakeOutbox, within, type Landed } from './outbox';
 import { initialEase, schedule } from './srs';
-import { supabase } from './supabase';
 import type { Form, FormState, Rating, Sentence } from './types';
 
 // ---------------------------------------------------------------------------
@@ -141,6 +141,26 @@ export interface FinishResult {
   attempts: number | null;
 }
 
+/** How the end of a round went. `saved` false: the server couldn't be
+ *  reached in time — the round is kept on the phone and goes up on its own
+ *  (outbox.ts), and asking again waits for that same write. */
+export interface FinishOutcome {
+  result: FinishResult | null;
+  saved: boolean;
+}
+
+/** How long a new word's row is waited for before the round goes on with its
+ *  own copy (the row goes up behind it). */
+const CREATE_WAIT_MS = 4000;
+/** How long the end of a round is waited for before she is told it isn't
+ *  saved yet. */
+const FINISH_WAIT_MS = 15_000;
+
+/** What writes to the same row share, so they land in the order made. */
+export const roundKey = (id: string) => `round:${id}`;
+const dayKey = (date: string) => `day:${date}`;
+const formKey = (formId: string) => `form:${formId}`;
+
 export function useRound(userId: string | undefined) {
   const roundId = useRef<string>('');
   const kind = useRef<RoundKind>('practice');
@@ -168,8 +188,10 @@ export function useRound(userId: string | undefined) {
   const testAnswers = useRef<TestAnswer[]>([]);
   const missedForms = useRef(new Map<string, Form>());
   const shownAt = useRef(Date.now());
-  /** The round's own row. Logs reference it, so they wait for it to land. */
-  const ready = useRef<PromiseLike<unknown>>(Promise.resolve());
+  /** The day the round counts on, fixed when it begins. */
+  const day = useRef('');
+  /** The round's end, once asked for: asking again waits for the same write. */
+  const ending = useRef<Promise<Landed> | null>(null);
 
   const countPending = (items: QueueItem[]) => {
     const map = new Map<string, number>();
@@ -210,6 +232,8 @@ export function useRound(userId: string | undefined) {
       testAnswers.current = [];
       missedForms.current = new Map();
       shownAt.current = Date.now();
+      day.current = localDateStr();
+      ending.current = null;
 
       // Filler is what the round padded itself with, plus every word a sentence
       // carries that SM-2 didn't ask for today: drilled and logged, schedule
@@ -225,28 +249,34 @@ export function useRound(userId: string | undefined) {
       if (opts.queue.length > 0 && live.current) {
         // From here her records move with every answer.
         learnerChanged();
-        ready.current = supabase
-          .from('rounds')
-          .insert({
-            id: roundId.current,
-            user_id: userId,
-            kind: opts.kind,
-            lesson_id: opts.lessonId ?? null,
-            local_date: localDateStr(),
-            planned_items: opts.queue.filter((i) => graded(i)).length,
-            ladder_offset: ladder.current.offset,
-          })
-          .then(
-            () => {},
-            () => {},
-          );
-        supabase
-          .from('daily_sessions')
-          .upsert(
-            { user_id: userId, session_date: localDateStr(), total_cards: opts.queue.length },
-            { onConflict: 'user_id,session_date' },
-          )
-          .then(() => {});
+        // Logs reference the round's row, and finish_lesson counts a round
+        // once only by it, so it is sent until it lands.
+        void send(
+          {
+            kind: 'insert',
+            table: 'rounds',
+            rows: {
+              id: roundId.current,
+              user_id: userId,
+              kind: opts.kind,
+              lesson_id: opts.lessonId ?? null,
+              local_date: day.current,
+              planned_items: opts.queue.filter((i) => graded(i)).length,
+              ladder_offset: ladder.current.offset,
+            },
+            duplicateOk: true,
+          },
+          { key: roundKey(roundId.current) },
+        );
+        void send(
+          {
+            kind: 'upsert',
+            table: 'daily_sessions',
+            rows: { user_id: userId, session_date: day.current, total_cards: opts.queue.length },
+            onConflict: 'user_id,session_date',
+          },
+          { key: dayKey(day.current) },
+        );
       }
     },
     [userId],
@@ -277,22 +307,37 @@ export function useRound(userId: string | undefined) {
         });
         return;
       }
-      const { data } = await supabase
-        .from('form_states')
-        .upsert(
-          {
-            form_id: form.id,
-            user_id: userId,
-            state: 'learning',
-            ease_factor: initialEase(form),
-            due_at: new Date().toISOString(),
-            introduced_on: localDateStr(),
-          },
-          { onConflict: 'form_id,user_id' },
-        )
-        .select()
-        .single();
-      if (data) liveStates.current.set(form.id, data as FormState);
+      const now = new Date().toISOString();
+      const fresh = {
+        form_id: form.id,
+        user_id: userId,
+        state: 'learning' as const,
+        ease_factor: initialEase(form),
+        due_at: now,
+        introduced_on: localDateStr(),
+      };
+      // The row as the server keeps it, when it answers in time. Otherwise
+      // (no network, or a slow one) the round goes on with the same row as a
+      // new one would be, and the write goes up behind it — her answers on
+      // the word wait for it.
+      const landed = await within(
+        sendOnce(
+          { kind: 'upsert', table: 'form_states', rows: fresh, onConflict: 'form_id,user_id', returning: true },
+          { key: formKey(form.id) },
+        ),
+        CREATE_WAIT_MS,
+      );
+      const row = landed?.ok ? (landed.data as FormState | null) : null;
+      // `updated_at` as the server would stamp it: a word's days count from it.
+      const local: FormState & { updated_at: string } = {
+        ...fresh,
+        id: `local-${form.id}`,
+        interval_days: 0,
+        repetitions: 0,
+        lapses: 0,
+        updated_at: now,
+      };
+      liveStates.current.set(form.id, row ?? local);
     },
     [userId],
   );
@@ -319,30 +364,34 @@ export function useRound(userId: string | undefined) {
 
     const wrongs = tally.wrongs + Math.min(1, tally.promotedWrongs);
     const unscheduled = fillerForms.current.has(formId);
-    const log = (rating: Rating, next: Partial<FormState> | null) =>
-      !live.current
-        ? undefined
-        : ready.current.then(() => supabase
-        .from('srs_commits')
-        .insert({
-          user_id: userId,
-          form_id: formId,
-          round_id: roundId.current || null,
-          seen: tally.attempts,
-          wrong: wrongs,
-          rating,
-          scheduled: !unscheduled,
-          elapsed_days: elapsedDays(state),
-          prev_interval: state.interval_days,
-          prev_ease: state.ease_factor,
-          prev_due_at: state.due_at,
-          prev_state: state.state,
-          next_interval: next?.interval_days ?? state.interval_days,
-          next_ease: next?.ease_factor ?? state.ease_factor,
-          next_due_at: next?.due_at ?? state.due_at,
-          next_state: next?.state ?? state.state,
-        })
-        .then(() => {}));
+    const log = (rating: Rating, next: Partial<FormState> | null) => {
+      if (!live.current) return;
+      void send(
+        {
+          kind: 'insert',
+          table: 'srs_commits',
+          rows: {
+            user_id: userId,
+            form_id: formId,
+            round_id: roundId.current || null,
+            seen: tally.attempts,
+            wrong: wrongs,
+            rating,
+            scheduled: !unscheduled,
+            elapsed_days: elapsedDays(state),
+            prev_interval: state.interval_days,
+            prev_ease: state.ease_factor,
+            prev_due_at: state.due_at,
+            prev_state: state.state,
+            next_interval: next?.interval_days ?? state.interval_days,
+            next_ease: next?.ease_factor ?? state.ease_factor,
+            next_due_at: next?.due_at ?? state.due_at,
+            next_state: next?.state ?? state.state,
+          },
+        },
+        { needs: [roundKey(roundId.current)] },
+      );
+    };
 
     // A form SM-2 did not ask for today keeps its schedule when she gets it
     // right: passing a word early says little. Getting it wrong is different —
@@ -362,11 +411,17 @@ export function useRound(userId: string | undefined) {
     liveStates.current.set(formId, { ...state, ...next });
     log(rating, next);
     if (!live.current) return;
-    supabase
-      .from('form_states')
-      .update({ ...next, updated_at: new Date().toISOString() })
-      .eq('id', state.id)
-      .then(() => {});
+    // By word, not by the row's id: a word met with no connection has no id
+    // from the server yet.
+    void send(
+      {
+        kind: 'update',
+        table: 'form_states',
+        values: { ...next, updated_at: new Date().toISOString() },
+        match: { user_id: userId, form_id: formId },
+      },
+      { key: formKey(formId) },
+    );
   };
 
   /**
@@ -393,12 +448,15 @@ export function useRound(userId: string | undefined) {
         recordShown(userId, item.sentence, passed);
         sentenceScreens.current += 1;
         if (!passed) sentenceFails.current += 1;
-        supabase
-          .from('daily_sessions')
-          .update({ sentence_screens: sentenceScreens.current, sentence_fails: sentenceFails.current })
-          .eq('user_id', userId)
-          .eq('session_date', localDateStr())
-          .then(() => {});
+        void send(
+          {
+            kind: 'update',
+            table: 'daily_sessions',
+            values: { sentence_screens: sentenceScreens.current, sentence_fails: sentenceFails.current },
+            match: { user_id: userId, session_date: day.current },
+          },
+          { key: dayKey(day.current) },
+        );
       }
 
       const drilled = formsOf(item);
@@ -424,7 +482,9 @@ export function useRound(userId: string | undefined) {
           latency_ms: latency,
           answer: wrong.size > 0 || noted ? (extra.answer ?? null) : null,
         }));
-        if (rows.length && live.current) ready.current.then(() => supabase.from('review_logs').insert(rows).then(() => {}));
+        if (rows.length && live.current) {
+          void send({ kind: 'insert', table: 'review_logs', rows }, { needs: [roundKey(roundId.current)] });
+        }
       }
 
       if (item.placementUnit) {
@@ -493,7 +553,10 @@ export function useRound(userId: string | undefined) {
         next = promoted.queue;
         promotedCount.current = promoted.promoted;
         if (promoted.promoted > 0 && live.current) {
-          supabase.from('rounds').update({ promoted: promoted.promoted }).eq('id', roundId.current).then(() => {});
+          void send(
+            { kind: 'update', table: 'rounds', values: { promoted: promoted.promoted }, match: { id: roundId.current } },
+            { key: roundKey(roundId.current) },
+          );
         }
       }
       return next;
@@ -502,33 +565,39 @@ export function useRound(userId: string | undefined) {
   );
 
   /** Records the round, credits the day, and (for a lesson) moves the path. */
-  const finish = useCallback(async (): Promise<FinishResult | null> => {
-    const { answered, wrong } = firstTries.current;
-    if (!live.current) return null;
-    await ready.current;
+  const finish = useCallback(async (): Promise<FinishOutcome> => {
+    if (!live.current) return { result: null, saved: true };
     // The round's score is one of the things a class is built from.
     learnerChanged();
-    const args = {
-      // Fixed once: a retry after midnight still counts on the day she finished.
-      p_local_date: localDateStr(),
-      p_lesson_id: lessonRef.current,
-      p_score: answered > 0 ? Math.round((100 * (answered - wrong)) / answered) : null,
-      p_round_id: roundId.current || null,
-      p_answered: answered,
-      p_first_try_wrong: wrong,
-      p_retries: retriesGranted.current,
-    };
-    // A dropped connection would lose the day without a word. Retried only with
-    // a round id: finish_lesson counts a round once, so a call that landed and
-    // lost its answer can't count twice (and buy back a frozen run on its own).
-    const waits = args.p_round_id ? [0, 1500, 4000, 8000] : [0];
-    for (const [i, wait] of waits.entries()) {
-      if (wait) await new Promise((r) => setTimeout(r, wait));
-      const { data, error } = await supabase.rpc('finish_lesson', args);
-      if (!error) return ((data as FinishResult[] | null)?.[0] ?? null) as FinishResult | null;
-      console.warn(`finish_lesson failed (try ${i + 1} of ${waits.length})`, error);
+    if (!ending.current) {
+      const { answered, wrong } = firstTries.current;
+      const args = {
+        // Fixed once: a retry after midnight still counts on the day she finished.
+        p_local_date: localDateStr(),
+        p_lesson_id: lessonRef.current,
+        p_score: answered > 0 ? Math.round((100 * (answered - wrong)) / answered) : null,
+        p_round_id: roundId.current || null,
+        p_answered: answered,
+        p_first_try_wrong: wrong,
+        p_retries: retriesGranted.current,
+      };
+      // A dropped connection would lose the day without a word, so it is sent
+      // until it lands. Only after the round's row has: finish_lesson counts a
+      // round once by that row, so a call that landed and lost its answer
+      // can't count twice (and buy back a frozen run on its own).
+      ending.current = send(
+        { kind: 'rpc', fn: 'finish_lesson', args },
+        { needs: [roundKey(roundId.current), dayKey(day.current)] },
+      );
+    } else wakeOutbox();
+    const landed = await within(ending.current, FINISH_WAIT_MS);
+    if (!landed) return { result: null, saved: false };
+    // Refused outright: asking again sends it anew.
+    if (!landed.ok) {
+      ending.current = null;
+      return { result: null, saved: false };
     }
-    return null;
+    return { result: ((landed.data as FinishResult[] | null)?.[0] ?? null) as FinishResult | null, saved: true };
   }, []);
 
   const score = () => {

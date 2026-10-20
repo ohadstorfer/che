@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { type Billing, type Catalog, PRODUCTS } from './billing-shared';
+import { type Billing, type Catalog, normalizeCode, PRODUCTS } from './billing-shared';
 
 // ---------------------------------------------------------------------------
 // Billing on the web. There is no store here: in development a mock stands in
@@ -41,6 +41,14 @@ export const billing: Billing = {
   async purchase() {
     if (!MOCK) return { error: 'Subscriptions are sold in the Posta app for iPhone and Android.' };
     await wait(900);
+    await AsyncStorage.setItem(KEY, '1');
+    for (const l of listeners) l(true);
+    return 'purchased';
+  },
+  async redeem(code) {
+    if (!MOCK) return { error: 'Codes are redeemed in the Posta app for iPhone and Android.' };
+    await wait(700);
+    if (normalizeCode(code ?? '') !== 'POSTA50') return { error: 'That code isn’t valid.' };
     await AsyncStorage.setItem(KEY, '1');
     for (const l of listeners) l(true);
     return 'purchased';

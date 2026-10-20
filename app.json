@@ -137,7 +137,15 @@
           "faceIDPermission": false
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      [
+        "@sentry/react-native",
+        {
+          "url": "https://sentry.io/",
+          "organization": "picawave",
+          "project": "posta"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
@@ -150,15 +158,6 @@
           "experimental": {
             "ios": {
               "appExtensions": [
-                {
-                  "bundleIdentifier": "app.posta.ios.widget",
-                  "targetName": "PostaWidget",
-                  "entitlements": {
-                    "com.apple.security.application-groups": [
-                      "group.app.posta.ios"
-                    ]
-                  }
-                },
                 {
                   "bundleIdentifier": "app.posta.ios.widget",
                   "targetName": "PostaWidget",

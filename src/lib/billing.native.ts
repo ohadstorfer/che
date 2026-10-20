@@ -4,6 +4,7 @@ import { Platform } from 'react-native';
 import {
   type Billing,
   type Catalog,
+  CODE_OFFER_TAG,
   isoDays,
   type Period,
   periodDays,
@@ -11,6 +12,7 @@ import {
   perMonth,
   type Plan,
   PRODUCTS,
+  type PurchaseOutcome,
 } from './billing-shared';
 import { supabase } from './supabase';
 
@@ -180,8 +182,10 @@ function plan(product: ProductSubscription, introEligible: boolean): Plan | null
   // Play lists a base plan and the offers on it she can still take; each is a
   // run of phases ending in the regular price. The one with the most phases
   // is the one with a trial or a cheaper start.
+  // Offers kept for discount codes are never what the paywall shows.
   const offers = product.subscriptionOffers
     .filter((o) => o.offerTokenAndroid && o.pricingPhasesAndroid?.pricingPhaseList.length)
+    .filter((o) => !isCodeOffer(o.offerTagsAndroid))
     .sort((a, b) => b.pricingPhasesAndroid!.pricingPhaseList.length - a.pricingPhasesAndroid!.pricingPhaseList.length);
   const offer = offers[0];
   if (!offer) return null;
@@ -205,6 +209,17 @@ function plan(product: ProductSubscription, introEligible: boolean): Plan | null
   };
 }
 
+const isCodeOffer = (tags: string[] | null | undefined) => !!tags?.some((t) => t.startsWith(CODE_OFFER_TAG));
+
+/** The token of the Play offer tagged `tag` on a product, for a code. */
+async function codeOfferToken(productId: string, tag: string): Promise<string | null> {
+  if (!iap) return null;
+  const fetched = ((await iap.fetchProducts({ skus: [productId], type: 'subs' })) ?? []) as ProductSubscription[];
+  const product = fetched.find((p) => p.id === productId);
+  if (!product || product.platform === 'ios') return null;
+  return product.subscriptionOffers.find((o) => o.offerTagsAndroid?.includes(tag))?.offerTokenAndroid ?? null;
+}
+
 /** Apple answers once per subscription group: has she ever had an intro offer in it. */
 async function introEligibility(products: ProductSubscription[]): Promise<Map<string, boolean>> {
   const out = new Map<string, boolean>();
@@ -212,6 +227,56 @@ async function introEligibility(products: ProductSubscription[]): Promise<Map<st
   const groups = new Set(products.map((p) => (p.platform === 'ios' ? p.subscriptionGroupIdIOS : null)).filter((g): g is string => !!g));
   for (const group of groups) out.set(group, await iap.isEligibleForIntroOfferIOS(group).catch(() => true));
   return out;
+}
+
+/** What redeem-code answers. */
+type CodeVerdict =
+  | { ok: true; productId: string; offerTag: string; granted?: undefined }
+  // An access code: the server opened Premium itself, nothing to buy.
+  | { ok: true; granted: true }
+  | { ok: false; reason: 'unknown' | 'expired' | 'used' };
+
+const CODE_ERRORS: Record<'unknown' | 'expired' | 'used', string> = {
+  unknown: 'That code isn’t valid.',
+  expired: 'That code has expired.',
+  used: 'That code has already been used up.',
+};
+
+/** Buys a plan with the Play offer `offerToken` (none on iOS). */
+async function buy(planId: string, offerToken: string | undefined): Promise<PurchaseOutcome> {
+  if (!iap || !userId) return { error: 'Purchases are not available on this device.' };
+  try {
+    const out = await iap.requestPurchase({
+      type: 'subs',
+      request: {
+        apple: { sku: planId, appAccountToken: userId, andDangerouslyFinishTransactionAutomatically: false },
+        google: {
+          skus: [planId],
+          obfuscatedAccountId: userId,
+          subscriptionOffers: offerToken ? [{ sku: planId, offerToken }] : [],
+        },
+      },
+    });
+    const bought = (Array.isArray(out) ? out : out ? [out] : []).find((p) => p.productId === planId);
+    // Waiting on someone else (a parent, the bank): it arrives through the
+    // listener when it is approved.
+    if (!bought || bought.purchaseState === 'pending') return 'pending';
+    const premium = await settle(bought);
+    if (premium) return 'purchased';
+    return {
+      error:
+        premium === null
+          ? 'Your purchase went through, but we couldn’t confirm it yet. Posta will unlock as soon as it can; you won’t be charged again.'
+          : 'The purchase did not go through.',
+    };
+  } catch (e) {
+    const err = e as { code?: string; message?: string };
+    if (err.code === iap.ErrorCode.UserCancelled) return 'cancelled';
+    if (err.code === iap.ErrorCode.DeferredPayment || err.code === iap.ErrorCode.Pending) return 'pending';
+    // The store already has it: what's missing is our side of it.
+    if (err.code === iap.ErrorCode.AlreadyOwned && (await claim(await held().catch(() => [])))) return 'purchased';
+    return { error: err.message ?? 'The purchase did not go through.' };
+  }
 }
 
 export const billing: Billing = {
@@ -253,39 +318,35 @@ export const billing: Billing = {
     if (!iap || !(await connect())) return { error: 'Purchases are not available on this device.' };
     if (!userId) return { error: 'Sign in to subscribe.' };
     if (!known.has(planId)) return { error: 'That plan is no longer available. Try again.' };
-    const offerToken = offerTokens.get(planId);
-    try {
-      const out = await iap.requestPurchase({
-        type: 'subs',
-        request: {
-          apple: { sku: planId, appAccountToken: userId, andDangerouslyFinishTransactionAutomatically: false },
-          google: {
-            skus: [planId],
-            obfuscatedAccountId: userId,
-            subscriptionOffers: offerToken ? [{ sku: planId, offerToken }] : [],
-          },
-        },
-      });
-      const bought = (Array.isArray(out) ? out : out ? [out] : []).find((p) => p.productId === planId);
-      // Waiting on someone else (a parent, the bank): it arrives through the
-      // listener when it is approved.
-      if (!bought || bought.purchaseState === 'pending') return 'pending';
-      const premium = await settle(bought);
-      if (premium) return 'purchased';
-      return {
-        error:
-          premium === null
-            ? 'Your purchase went through, but we couldn’t confirm it yet. Posta will unlock as soon as it can; you won’t be charged again.'
-            : 'The purchase did not go through.',
-      };
-    } catch (e) {
-      const err = e as { code?: string; message?: string };
-      if (err.code === iap.ErrorCode.UserCancelled) return 'cancelled';
-      if (err.code === iap.ErrorCode.DeferredPayment || err.code === iap.ErrorCode.Pending) return 'pending';
-      // The store already has it: what's missing is our side of it.
-      if (err.code === iap.ErrorCode.AlreadyOwned && (await claim(await held().catch(() => [])))) return 'purchased';
-      return { error: err.message ?? 'The purchase did not go through.' };
+    return buy(planId, offerTokens.get(planId));
+  },
+
+  async redeem(code) {
+    if (!iap || !(await connect())) return { error: 'Codes are not available on this device.' };
+    if (!userId) return { error: 'Sign in to use a code.' };
+    if (Platform.OS === 'ios') {
+      // Apple's own sheet takes the code and the money. What it bought
+      // arrives here or through the listener, carrying no account of ours.
+      try {
+        const redeemed = await iap.openRedeemOfferCode();
+        if (redeemed && IDS.includes(redeemed.productId)) {
+          const premium = await settle(redeemed);
+          if (premium) return 'purchased';
+        }
+      } catch (e) {
+        return { error: (e as Error).message || 'The code sheet could not open. Try again.' };
+      }
+      return (await claim((await held()).filter(hers))) ? 'purchased' : 'cancelled';
     }
+    const { data, error } = await supabase.functions
+      .invoke<CodeVerdict>('redeem-code', { body: { code } })
+      .catch(() => ({ data: null, error: true }));
+    if (error || !data) return { error: 'Could not check the code. Check your connection and try again.' };
+    if (!data.ok) return { error: CODE_ERRORS[data.reason] };
+    if (data.granted) return 'purchased';
+    const token = await codeOfferToken(data.productId, data.offerTag).catch(() => null);
+    if (!token) return { error: 'That code can’t be used with this account.' };
+    return buy(data.productId, token);
   },
 
   async restore() {

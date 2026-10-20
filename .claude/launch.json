@@ -4,8 +4,22 @@
     {
       "name": "azure-pancho",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["scripts/hablar/azure-try/server.mjs"],
+      "runtimeArgs": [
+        "scripts/hablar/azure-try/server.mjs"
+      ],
       "port": 8791
+    },
+    {
+      "name": "web-paywall",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "expo",
+        "start",
+        "--web",
+        "--port",
+        "8093"
+      ],
+      "port": 8093
     }
   ]
 }

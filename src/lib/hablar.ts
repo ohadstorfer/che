@@ -424,6 +424,16 @@ export function warm(...names: ('hablar-start' | 'hablar-reply')[]): void {
   }
 }
 
+/** How long a turn may go without a byte — her line going up, or his answer
+ *  coming down — before it counts as a dropped connection. A connection that
+ *  stalls without closing would otherwise leave the turn waiting for good. */
+const STALL_MS = 30_000;
+
+/** The stream went quiet for STALL_MS. Not an AbortError: the chat retries it. */
+export class StalledError extends Error {
+  name = 'StalledError';
+}
+
 /**
  * A plain POST whose body is read and split into SSE events by hand:
  * `functions.invoke` can't stream. Resolves when the stream closes; rejects on
@@ -431,12 +441,44 @@ export function warm(...names: ('hablar-start' | 'hablar-reply')[]): void {
  * readable body, so the phones use expo/fetch.
  */
 async function streamTurn(body: string | FormData, on: ReplyHandlers, signal?: AbortSignal): Promise<TurnOutcome> {
+  const own = new AbortController();
+  const leave = () => own.abort();
+  if (signal?.aborted) own.abort();
+  signal?.addEventListener('abort', leave);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let stalled: (e: StalledError) => void = () => {};
+  const stall = new Promise<never>((_, reject) => (stalled = reject));
+  stall.catch(() => {});
+  /** Starts the quiet clock again: something just arrived. */
+  const heard = () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      stalled(new StalledError('hablar stream stalled'));
+      own.abort();
+    }, STALL_MS);
+  };
+  try {
+    heard();
+    return await streamWith(body, on, own.signal, <T>(p: Promise<T>) => Promise.race([p, stall]), heard);
+  } finally {
+    clearTimeout(timer);
+    signal?.removeEventListener('abort', leave);
+  }
+}
+
+async function streamWith(
+  body: string | FormData,
+  on: ReplyHandlers,
+  signal: AbortSignal,
+  orStall: <T>(p: Promise<T>) => Promise<T>,
+  heard: () => void,
+): Promise<TurnOutcome> {
   const anon = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? '';
   const { data: auth } = await supabase.auth.getSession();
   const token = auth.session?.access_token ?? anon;
 
   const streamingFetch = (Platform.OS === 'web' ? fetch : expoFetch) as typeof fetch;
-  const res = await streamingFetch(`${functionsBase()}/hablar-reply`, {
+  const res = await orStall(streamingFetch(`${functionsBase()}/hablar-reply`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -447,7 +489,8 @@ async function streamTurn(body: string | FormData, on: ReplyHandlers, signal?: A
     },
     body,
     signal,
-  });
+  }));
+  heard();
   if (!res.ok || !res.body) {
     throw new HablarError(res.status, await res.json().catch(() => null));
   }
@@ -496,7 +539,8 @@ async function streamTurn(body: string | FormData, on: ReplyHandlers, signal?: A
   };
 
   for (;;) {
-    const { value, done } = await reader.read();
+    const { value, done } = await orStall(reader.read());
+    heard();
     if (value) buffer += decoder.decode(value, { stream: true });
     // Events end at a blank line; tolerate \r\n from proxies.
     buffer = buffer.replace(/\r\n/g, '\n');
@@ -647,8 +691,9 @@ export async function history(limit = 20): Promise<ConversationRow[]> {
   return (rows ?? []) as ConversationRow[];
 }
 
+/** Null when there is no such chat; rejects when it couldn't be asked. */
 export async function loadConversation(id: string): Promise<{ conversation: ConversationRow; turns: TurnRow[] } | null> {
-  const [{ data: conv }, { data: turns }] = await Promise.all([
+  const [{ data: conv, error }, { data: turns, error: turnsError }] = await Promise.all([
     supabase.from('conversations').select(CONVERSATION_COLS).eq('id', id).maybeSingle(),
     supabase
       .from('conversation_turns')
@@ -656,6 +701,7 @@ export async function loadConversation(id: string): Promise<{ conversation: Conv
       .eq('conversation_id', id)
       .order('idx', { ascending: true }),
   ]);
+  if (error || turnsError) throw error ?? turnsError;
   if (!conv) return null;
   return { conversation: conv as ConversationRow, turns: (turns ?? []) as TurnRow[] };
 }

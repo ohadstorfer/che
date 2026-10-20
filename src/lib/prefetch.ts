@@ -32,9 +32,16 @@ import type { LessonSlot } from './types';
 
 let started: string | null = null;
 
+/**
+ * Once per launch — or again, if a piece of it failed (no network at launch):
+ * the next call, when she comes back to the app, tries the whole of it again.
+ */
 export function prefetchTabs(userId: string, limited: boolean) {
   if (started === userId) return;
   started = userId;
+  const failed = () => {
+    if (started === userId) started = null;
+  };
 
   // Speaking's rows and Culture's tiles first — they are the most picture-heavy
   // first screens — then Words' themes.
@@ -46,21 +53,21 @@ export function prefetchTabs(userId: string, limited: boolean) {
     ...arThemes.flatMap((t) => [themeObject(t.slug), themeArt(t.slug)]),
   ]);
 
-  void loadHablarHome(userId, limited).catch(() => {});
-  void prefetchCultureDone().catch(() => {});
-  void prefetchPackScores().catch(() => {});
+  void loadHablarHome(userId, limited).catch(failed);
+  void prefetchCultureDone().catch(failed);
+  void prefetchPackScores().catch(failed);
   // The lexicon is what My words is built from; content-cache keeps it after.
-  void loadLexicon().catch(() => {});
+  void loadLexicon().catch(failed);
   // How many pages her records took last time, so the first class of this
   // launch asks for them all at once (fetch-all.ts).
   recallPages([`form_states:${userId}`, `sentence_states:${userId}`]);
   // The class she is on: found, then read ahead — unless she has opened one
   // already, which has then done all of this for itself.
-  learnerComing(
-    warmSentences(userId).then((next) => {
-      if (next && !learnerAsked()) void warmClass(userId, next).catch(() => {});
-    }),
-  );
+  const coming = warmSentences(userId).then((next) => {
+    if (next && !learnerAsked()) void warmClass(userId, next).catch(() => {});
+  });
+  coming.catch(failed);
+  learnerComing(coming);
 }
 
 /**

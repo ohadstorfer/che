@@ -53,6 +53,18 @@ export interface Catalog {
 
 export type PurchaseOutcome = 'purchased' | 'cancelled' | 'pending' | { error: string };
 
+/** Play offers tagged with this are for discount codes only: the paywall
+ *  never shows them, and redeem-code says which one a code opens. */
+export const CODE_OFFER_TAG = 'code-';
+
+/** The App Store's own page for an offer code, with the code filled in. */
+export const APPLE_APP_ID = '6817374310';
+export const appleRedeemUrl = (code: string) =>
+  `https://apps.apple.com/redeem?ctx=offercodes&id=${APPLE_APP_ID}&code=${encodeURIComponent(code)}`;
+
+/** "posta50 " → "POSTA50": how codes are typed is not how they are kept. */
+export const normalizeCode = (code: string) => code.trim().toUpperCase().replace(/\s+/g, '');
+
 export interface Billing {
   /** Whether this build can take money at all. */
   available: boolean;
@@ -61,6 +73,10 @@ export interface Billing {
   forget(): Promise<void>;
   catalog(): Promise<Catalog>;
   purchase(planId: string, offer: 'main' | 'winback'): Promise<PurchaseOutcome>;
+  /** A discount code. On iOS Apple's own redeem sheet takes it (the code
+   *  passed here is ignored: Apple's sheet is where it is typed); on Android
+   *  redeem-code checks it and the plan is bought with the offer it opens. */
+  redeem(code?: string): Promise<PurchaseOutcome>;
   /** Asks the store again and claims what it holds for this account. Resolves
    *  to whether premium is active afterwards. */
   restore(): Promise<boolean>;

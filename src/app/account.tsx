@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { IconButton, rise } from '@/components/onboarding-ui';
 import { Button } from '@/components/ui';
+import { HiddenFromReplay } from '@/lib/analytics';
 import { useAuth } from '@/lib/auth';
 import { loadInbox } from '@/lib/feedback';
 import { isGuest } from '@/lib/guest';
@@ -47,7 +48,16 @@ const webPress =
       } as unknown as ViewStyle)
     : undefined;
 
+// Her email and plan: never seen in session replays.
 export default function AccountScreen() {
+  return (
+    <HiddenFromReplay>
+      <Account />
+    </HiddenFromReplay>
+  );
+}
+
+function Account() {
   useStatusBarColor(colors.bg);
   const reduced = useReducedMotion();
   const { session, profile } = useAuth();

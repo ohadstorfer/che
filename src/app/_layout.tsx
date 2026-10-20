@@ -1,3 +1,6 @@
+// First import: Sentry starts before anything else can throw.
+import { CrashReportUser, wrapRoot } from '@/lib/sentry';
+
 import {
   Figtree_500Medium,
   Figtree_600SemiBold,
@@ -6,8 +9,8 @@ import {
 } from '@expo-google-fonts/figtree';
 import { Gabarito_600SemiBold, Gabarito_700Bold, Gabarito_800ExtraBold, Gabarito_900Black } from '@expo-google-fonts/gabarito';
 import { useFonts } from 'expo-font';
-import { DefaultTheme, Stack, ThemeProvider, usePathname } from 'expo-router';
-import { useEffect } from 'react';
+import { DefaultTheme, router, Stack, ThemeProvider, usePathname } from 'expo-router';
+import { useEffect, useRef } from 'react';
 import { Platform, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
@@ -21,6 +24,8 @@ import { useBootReady } from '@/lib/boot';
 import { useKeyboardViewportFit } from '@/lib/keyboard-viewport';
 import { prefetchTabs } from '@/lib/prefetch';
 import { PremiumProvider, usePremium } from '@/lib/premium';
+import { listenForFreeUnitReminder } from '@/lib/free-unit-reminder';
+import { firstAutoShow, winbackOfferUntil } from '@/lib/winback-offer';
 import { colors } from '@/lib/theme';
 
 // React Navigation paints its own opaque screen background (#f2f2f2 by
@@ -40,7 +45,9 @@ const navigationTheme = {
   },
 };
 
-export default function RootLayout() {
+export default wrapRoot(RootLayout);
+
+function RootLayout() {
   // Every screen is set in these; drawing before they land would flash the
   // system font and then reflow.
   const [fontsLoaded, fontError] = useFonts({
@@ -80,6 +87,7 @@ export default function RootLayout() {
           fonts load, not after. */}
       <AuthProvider>
         <AnalyticsTracker />
+        <CrashReportUser />
         <PremiumProvider>
         {/* The icon's gradient is painted once, edge to edge, and every screen
             sits on it transparently — so it never seams at the status bar and
@@ -152,6 +160,24 @@ function BootGate({ fontsReady }: { fontsReady: boolean }) {
     const t = setTimeout(() => prefetchTabs(userId, limited), PREFETCH_DELAY_MS);
     return () => clearTimeout(t);
   }, [hold, userId, limited]);
+
+  // The day-30 win-back offer is hers this week (the server says so): the
+  // first time she opens the app on her own, on the Course, it shows itself.
+  const askedOffer = useRef<string | null>(null);
+  useEffect(() => {
+    if (hold || !userId || !limited || pathname !== '/home' || askedOffer.current === userId) return;
+    askedOffer.current = userId;
+    void (async () => {
+      if (!(await winbackOfferUntil()) || !(await firstAutoShow(userId))) return;
+      router.push('/paywall?from=winback&offer=winback');
+    })().catch(() => {});
+  }, [hold, userId, limited, pathname]);
+
+  // The day-1 notification (hard paywall): tapping it opens the free week.
+  useEffect(() => {
+    if (hold || !userId) return;
+    return listenForFreeUnitReminder(() => router.push('/free-unit'));
+  }, [hold, userId]);
 
   return <BootSplash hold={hold} />;
 }

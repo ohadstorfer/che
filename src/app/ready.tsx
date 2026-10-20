@@ -1,6 +1,6 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Platform, Pressable, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import Animated, { useReducedMotion, ZoomIn } from 'react-native-reanimated';
@@ -70,6 +70,8 @@ export default function Ready() {
   const [busy, setBusy] = useState(false);
   const [later, setLater] = useState(false);
   const saving = isGuest(session) && !later;
+  // Out of the free week (free-unit.tsx): its one unit is the first, so no level test.
+  const { pass } = useLocalSearchParams<{ pass?: string }>();
 
   useEffect(() => {
     void loadAnswers().then(setAnswers);
@@ -175,7 +177,7 @@ export default function Ready() {
                 onPress={() => void startLesson()}
               />
             </Animated.View>
-            {started ? null : (
+            {started || pass ? null : (
               <Animated.View entering={rise(4, reduced)}>
                 <Choice
                   icon="target"

@@ -597,7 +597,7 @@ function freeSlot(): void {
 /** path -> file uri, for the clips already on the phone. */
 const onDevice = new Map<string, string>();
 
-async function nativeClip(path: string): Promise<string> {
+async function nativeClip(path: string): Promise<string | null> {
   const { Directory, File, Paths } = await import('expo-file-system');
   const dir = new Directory(Paths.cache, 'clips');
   const file = new File(dir, path.replace(/[^\w.-]/g, '_'));
@@ -605,17 +605,31 @@ async function nativeClip(path: string): Promise<string> {
     onDevice.set(path, file.uri);
     return file.uri;
   }
+  let part: InstanceType<typeof File>;
   try {
     if (!dir.exists) dir.create({ intermediates: true, idempotent: true });
     // Into a temporary name first, so a cut-off download never passes for a clip.
-    const part = new File(dir, `${file.name}.part`);
-    const got = await File.downloadFileAsync(getAudioUrl(path), part, { idempotent: true });
+    part = new File(dir, `${file.name}.part`);
+  } catch {
+    // Nowhere to save it: let the player stream it, as it always could.
+    return getAudioUrl(path);
+  }
+  let got: InstanceType<typeof File>;
+  try {
+    got = await File.downloadFileAsync(getAudioUrl(path), part, { idempotent: true });
+  } catch (e) {
+    // The download itself failed: a status means the recording isn't there;
+    // no answer at all is a phone with no signal. She should be told which —
+    // streaming it instead would only fail as "couldn't play it".
+    return fail(path, /\b4\d\d\b/.test(String((e as Error)?.message ?? e)) ? 'missing' : 'offline');
+  }
+  try {
     got.move(file);
     onDevice.set(path, file.uri);
     return file.uri;
   } catch {
-    // Could not save it: let the player stream it, as it always could.
-    return getAudioUrl(path);
+    // Downloaded but couldn't be kept: play the download where it is.
+    return got.uri;
   }
 }
 

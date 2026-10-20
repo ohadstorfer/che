@@ -181,7 +181,7 @@ export default function Story() {
   const next = async () => {
     if (pending) return setAsking(pending);
     if (done) {
-      setFinished(await round.finish());
+      setFinished((await round.finish()).result);
       return;
     }
     words.close();

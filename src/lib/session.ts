@@ -11,6 +11,8 @@ import {
   tokenIndexOf,
   wordsOf,
 } from './answers';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { conceptScores, conceptsOf, weakestConcept } from './concepts';
 import { addDays, localDateStr } from './dates';
 import { type GlossTallies, clearMeaningMemos, withMeanings } from './meanings';
@@ -278,10 +280,55 @@ export function readLearnerAhead(
 const learnerKey = (userId: string, reach: LearnerReach) =>
   JSON.stringify([userId, reach.throughOrder ?? null, reach.unitIds ?? [], reach.sentenceIds ?? []]);
 
+/** What her ladder is built from: her recent round scores and how far a
+ *  placement put her. */
+interface Level {
+  scores: number[];
+  placedThrough: number;
+}
+
+const levelKey = (userId: string) => `level:${userId}`;
+
+/**
+ * Her level, read from the server and kept on the phone. Should the read fail
+ * (twice), the copy on the phone stands in — her level as of her last class,
+ * not a beginner's — and only with no copy at all do the defaults.
+ */
+async function readLevel(userId: string): Promise<Level> {
+  const read = async (): Promise<Level> => {
+    const [rounds, profile] = await Promise.all([
+      supabase
+        .from('rounds')
+        .select('score, finished_at')
+        .eq('user_id', userId)
+        .not('finished_at', 'is', null)
+        .order('finished_at', { ascending: false })
+        .limit(OFFSET_WINDOW),
+      supabase.from('profiles').select('placed_through').eq('user_id', userId).maybeSingle(),
+    ]);
+    const error = rounds.error ?? profile.error;
+    if (error) throw new Error(error.message);
+    return {
+      scores: ((rounds.data ?? []) as { score: number | null }[]).flatMap((r) => (r.score == null ? [] : [r.score])),
+      placedThrough: (profile.data as { placed_through?: number } | null)?.placed_through ?? 0,
+    };
+  };
+  try {
+    const level = await twice(read);
+    AsyncStorage.setItem(levelKey(userId), JSON.stringify(level)).catch(() => {});
+    return level;
+  } catch {
+    const kept = await AsyncStorage.getItem(levelKey(userId))
+      .then((text) => (text ? (JSON.parse(text) as Level) : null))
+      .catch(() => null);
+    return kept && Array.isArray(kept.scores) ? kept : { scores: [], placedThrough: 0 };
+  }
+}
+
 async function readLearner(userId: string, reach: LearnerReach): Promise<LearnerData> {
   const rows = (list: unknown[]) => `${list.length} rows`;
   void timed('version', contentVersion());
-  const [lexicon, { data: stateRows }, { data: roundRows }, { data: profile }, shown, course, tallies] = await Promise.all([
+  const [lexicon, { data: stateRows }, level, shown, course, tallies] = await Promise.all([
     timed('lexicon', loadLexicon()),
     // Paged (all): her states are past PostgREST's 1,000 rows.
     timed(
@@ -292,55 +339,46 @@ async function readLearner(userId: string, reach: LearnerReach): Promise<Learner
       ),
       rows,
     ).then((data) => ({ data: data.map((s) => ({ ...s, user_id: userId })) })),
-    timed(
-      'rounds',
-      Promise.resolve(
-        supabase
-          .from('rounds')
-          .select('score, finished_at')
-          .eq('user_id', userId)
-          .not('finished_at', 'is', null)
-          .order('finished_at', { ascending: false })
-          .limit(OFFSET_WINDOW),
-      ),
-    ),
-    timed('profile', Promise.resolve(supabase.from('profiles').select('placed_through').eq('user_id', userId).maybeSingle())),
+    timed('level', readLevel(userId)),
     timed('shown', loadSentenceStates(userId), rows),
     timed('course', twice(loadCourse).catch(() => null)),
     timed('tallies', twice(loadGlossTallies).catch(() => null)),
   ]);
+  // Without the course there is no knowing which sentences are in reach — and
+  // every sentence instead is 24 MB, which a connection that couldn't bring
+  // the course won't bring either. The class says it couldn't load.
+  if (!course) throw new Error('course did not load');
   const states = (stateRows ?? []) as FormState[];
-  const placedThrough = (profile as { placed_through?: number } | null)?.placed_through ?? 0;
+  const { placedThrough, scores } = level;
   const orderOf = new Map(lexicon.map((f) => [f.id, f.unit_order]));
   const reached = Math.max(0, ...states.map((s) => orderOf.get(s.form_id) ?? 0));
 
   // Everything up to the furthest of: the unit she has reached, the one a
   // placement put her past, and the one this round plays.
-  let sentences: Sentence[] | null = null;
-  if (course && tallies) {
-    // Blocks already in memory, read off the phone, or fetched: the last is
-    // what a class ahead of where she is waits on.
-    const before = { ...contentSources };
-    sentences = await timed(
-      'sentences',
-      twice(() =>
-        loadSentences(
-          userId,
-          lexicon,
-          {
-            throughOrder: Math.max(reached, placedThrough, reach.throughOrder ?? 0),
-            units: course.units,
-            unitIds: reach.unitIds,
-            ids: reach.sentenceIds,
-          },
-          shown,
-        ),
-      ).catch(() => null),
-      () =>
-        `${contentSources.network - before.network} net, ${contentSources.disk - before.disk} disk, ` +
-        `${contentSources.memory - before.memory} memory`,
-    );
-  }
+  // Blocks already in memory, read off the phone, or fetched: the last is
+  // what a class ahead of where she is waits on. This goes without the
+  // tallies too: they only add the sentences she hasn't got to her words'
+  // meanings.
+  const before = { ...contentSources };
+  let sentences: Sentence[] | null = await timed(
+    'sentences',
+    twice(() =>
+      loadSentences(
+        userId,
+        lexicon,
+        {
+          throughOrder: Math.max(reached, placedThrough, reach.throughOrder ?? 0),
+          units: course.units,
+          unitIds: reach.unitIds,
+          ids: reach.sentenceIds,
+        },
+        shown,
+      ),
+    ).catch(() => null),
+    () =>
+      `${contentSources.network - before.network} net, ${contentSources.disk - before.disk} disk, ` +
+      `${contentSources.memory - before.memory} memory`,
+  );
   const bounded = sentences != null;
   sentences ??= await loadSentences(userId, lexicon, undefined, shown);
 
@@ -349,7 +387,6 @@ async function readLearner(userId: string, reach: LearnerReach): Promise<Learner
   // The sentences she hasn't got add to it through `tallies`.
   const reachable = sentences;
   const forms = timed('meanings', () => withMeanings(lexicon, reachable, reached, bounded ? (tallies ?? undefined) : undefined));
-  const scores = ((roundRows ?? []) as { score: number | null }[]).flatMap((r) => (r.score == null ? [] : [r.score]));
   const ladder = ladderFor(ladderOffset(scores), {
     placedThrough,
     glue: forms.filter((f) => f.is_glue),
@@ -744,7 +781,9 @@ export function modeForRung(
 /** For home: how many words she has met at all. */
 export async function getPracticeCounts(userId: string) {
   // Counted by the database: fetching the rows to count them capped at 1,000.
-  const { count } = await supabase.from('form_states').select('form_id', { count: 'exact', head: true }).eq('user_id', userId);
+  const { count, error } = await supabase.from('form_states').select('form_id', { count: 'exact', head: true }).eq('user_id', userId);
+  // A count that couldn't be had is not zero.
+  if (error) throw new Error(error.message);
   return { known: count ?? 0 };
 }
 

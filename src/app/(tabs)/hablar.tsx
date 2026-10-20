@@ -22,7 +22,7 @@ import {
 } from '@/lib/hablar';
 import { levelDistance, pickScenario, scenarioArt, tomasArt } from '@/lib/hablar-art';
 import { forgetHablarLatest, loadHablarHome, peekHablarHome } from '@/lib/hablar-home';
-import { FREE_CHATS, usePremium } from '@/lib/premium';
+import { usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, type PastelName, pastel, pastelGrad, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
@@ -73,7 +73,7 @@ export default function Hablar() {
   const userId = session?.user.id;
   const staff = profile?.role === 'admin' || profile?.role === 'reviewer';
   // A free account has a few chats in all; null until counted.
-  const { limited, paywall, status } = usePremium();
+  const { limited, paywall, status, freeChats } = usePremium();
   // Opens on what was read last — or read ahead while she was on Course
   // (lib/prefetch.ts) — and refreshes on focus.
   const kept = peekHablarHome(userId, limited);
@@ -85,7 +85,7 @@ export default function Hablar() {
   /** Her saved level; null until read. It is changed on the brief, not here. */
   const [level, setLevel] = useState<Band | null>(() => kept?.level ?? null);
   const [used, setUsed] = useState<number | null>(() => kept?.used ?? null);
-  const freeLeft = limited && used != null ? Math.max(0, FREE_CHATS - used) : null;
+  const freeLeft = limited && used != null ? Math.max(0, freeChats - used) : null;
   const today: Today = day ? todayOf(day.latest, day.today, staff, freeLeft) : { state: 'loading' };
   // The day's count is shown to premium only: a free account's binding limit is its free chats (the pill below).
   const usedToday = status === 'premium' && !staff && day ? Math.min(CHATS_PER_DAY, day.today.length) : null;

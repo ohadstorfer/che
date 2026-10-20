@@ -10,11 +10,12 @@ import { colors } from '@/lib/theme';
 
 export default function TabsLayout() {
   const { session, loading } = useAuth();
-  const { limited, hardPaywall } = usePremium();
+  const { limited, hardPaywall, pass } = usePremium();
   if (!loading && !session) return <Redirect href="/welcome" />;
-  // The store can switch the free tier off (offering metadata `hard_paywall`):
-  // then a free account sees the paywall, with no way around it.
-  if (limited && hardPaywall) return <Redirect href="/paywall?from=gate" />;
+  // The server can switch the free tier off (`hard_paywall` in app_config):
+  // then a free account sees the paywall, with no way around it — leaving the
+  // app and coming back included — except during her free week.
+  if (limited && hardPaywall && pass?.state !== 'active') return <Redirect href="/paywall?from=gate" />;
 
   return (
     // Opaque wrapper: the tab screens are flat oat `bg`, but the zone behind

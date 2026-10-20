@@ -26,6 +26,8 @@ import { currentIndex, loadCourse, loadProgress } from '@/lib/course';
 import { LessonLockedError, buildLesson } from '@/lib/lesson';
 import { timed, timingEnd, timingStart } from '@/lib/load-timing';
 import { backToCourse, goBack } from '@/lib/nav';
+import { maybeAskForReview } from '@/lib/review-prompt';
+import { type Landed, send, wakeOutbox, within } from '@/lib/outbox';
 import { success } from '@/lib/haptics';
 import { DEFAULT_LADDER, type Ladder } from '@/lib/sentences';
 import { loadAnswers } from '@/lib/onboarding';
@@ -49,6 +51,7 @@ import {
   type QueueItem,
   type RoundKind,
   formsOf,
+  roundKey,
   useRound,
   withIntros,
 } from '@/lib/round';
@@ -66,6 +69,9 @@ const LOAD_TIMEOUT_MS = 20_000;
 /** How long the gate's answer is waited for. A streak that can't be read is
  *  not a reason to keep her from the class. */
 const GATE_TIMEOUT_MS = 4000;
+/** How long a passed test's placement is waited for before she is told it
+ *  isn't saved yet. */
+const PLACE_WAIT_MS = 15_000;
 
 /** What stops her at the door: a frozen run, a comeback one round in, or a run lost yesterday. */
 type Gate = { kind: 'frozen' | 'oneMore' | 'lapsed'; lost: number };
@@ -119,7 +125,7 @@ export default function Practice() {
   // matches `bg` here like everywhere else (iOS 26 freezes one strip colour
   // per session; every screen having a pale top is what makes it fit).
   useStatusBarColor(colors.bg);
-  const { profile } = useAuth();
+  const { profile, session: authSession } = useAuth();
   // What this round is:
   //   ?lesson=<id>            a lesson off the path (a unit check when it is
   //                           the unit's review lesson)
@@ -181,11 +187,17 @@ export default function Practice() {
   const userId = profile?.id;
   const round = useRound(userId);
   const finishing = useRef(false);
+  /** This round was a unit check she passed: the moment to ask for a review. */
+  const passedCheck = useRef(false);
+  /** A passed test's placement, once sent: asking again waits for the same write. */
+  const placeSent = useRef<Promise<Landed> | null>(null);
   /** The placement walk: which sections she has passed, and the one on screen. */
   const walk = useRef<Walk | null>(null);
   /** The next section of a placement is on its way. */
   const [staging, setStaging] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
+  /** The round is over but couldn't be saved yet: 'saving' while she asks again. */
+  const [unsaved, setUnsaved] = useState<'failed' | 'saving' | null>(null);
   /** Counts her tries at a class that wouldn't load; a new one loads again. */
   const [attempt, setAttempt] = useState(0);
 
@@ -193,6 +205,7 @@ export default function Practice() {
     if (!userId) return;
     let cancelled = false;
     finishing.current = false;
+    placeSent.current = null;
     walk.current = null;
 
     const load = async (): Promise<{ data: SessionData; kind: RoundKind; plan?: TestPlan; walk?: Walk }> => {
@@ -327,6 +340,7 @@ export default function Practice() {
     setQueue(null);
     setStaging(false);
     setLoadFailed(false);
+    setUnsaved(null);
   }, [lessonId, isAgain, testMode, params.mode]);
 
   // The gate is read once, on the way in.
@@ -462,18 +476,36 @@ export default function Practice() {
           )
         : testOutcome(plan.mode, round.testAnswers.current, plan.units, plan.targetOrder);
       if (outcome.passed) {
-        const { error } = await supabase.rpc('apply_placement', {
-          p_round_id: round.roundId.current,
-          p_through_order: outcome.throughOrder,
-          p_passed_form_ids: outcome.passedFormIds,
-          p_failed_form_ids: outcome.failedFormIds,
-        });
-        if (error) console.warn('apply_placement failed', error);
+        // Kept and sent again like the round's end (outbox.ts): a placement
+        // the server never got must not be shown as done.
+        placeSent.current ??= send(
+          {
+            kind: 'rpc',
+            fn: 'apply_placement',
+            args: {
+              p_round_id: round.roundId.current,
+              p_through_order: outcome.throughOrder,
+              p_passed_form_ids: outcome.passedFormIds,
+              p_failed_form_ids: outcome.failedFormIds,
+            },
+          },
+          { needs: [roundKey(round.roundId.current)] },
+        );
+        wakeOutbox();
+        const placed = await within(placeSent.current, PLACE_WAIT_MS);
+        if (!placed) return notSaved();
+        // Refused outright (and logged): the round still ends, as it always did.
+        if (!placed.ok) placeSent.current = null;
       }
-      result = await round.finish();
+      const ended = await round.finish();
+      if (!ended.saved) return notSaved();
+      result = ended.result;
       setVerdict({ kind: 'test', outcome, plan: { ...plan, cutShort: w?.cutShort } });
     } else {
-      result = await round.finish();
+      const ended = await round.finish();
+      if (!ended.saved) return notSaved();
+      result = ended.result;
+      passedCheck.current = kind === 'unit_check' && !!result?.passed;
       if (kind === 'unit_check' && result && !result.passed) {
         setVerdict({
           kind: 'check',
@@ -483,11 +515,33 @@ export default function Practice() {
         });
       }
     }
+    setUnsaved(null);
     setFinished({
       streak: result?.current_streak ?? 0,
       previous: result?.previous_streak ?? 0,
       oneMore: result && result.recoverable_streak > 0 ? result.recoverable_streak : undefined,
     });
+  };
+
+  // Not the end screen: that would say the lesson counted when it hasn't yet.
+  // The round stays on the phone and goes up by itself once it can (outbox.ts).
+  const notSaved = () => {
+    setUnsaved('failed');
+  };
+
+  /** Asks again. The round's end is the same write, so it never counts twice;
+   *  a passed test's placement is asked for again too (it is safe to repeat). */
+  const saveAgain = () => {
+    if (unsaved !== 'failed') return;
+    setUnsaved('saving');
+    finishing.current = false;
+    void finish();
+  };
+
+  /** Home from the end screens; after a passed unit check, the store's review sheet may follow. */
+  const doneToCourse = () => {
+    if (passedCheck.current) void maybeAskForReview(authSession?.user.created_at);
+    backToCourse();
   };
 
   const advance = (nextQueue: QueueItem[]) => {
@@ -682,7 +736,7 @@ export default function Practice() {
           <StreakCelebration
             previous={finished.previous}
             streak={finished.streak}
-            onDone={backToCourse}
+            onDone={doneToCourse}
           />
         </SafeAreaView>
       );
@@ -693,8 +747,25 @@ export default function Practice() {
           lessonId={preview ? null : lessonId}
           streak={finished.streak}
           celebrate={celebrate}
-          onNext={() => (celebrate ? setCelebrating(true) : backToCourse())}
+          onNext={() => (celebrate ? setCelebrating(true) : doneToCourse())}
         />
+      </SafeAreaView>
+    );
+  }
+
+  if (unsaved) {
+    const test = !!plan || kind === 'placement';
+    return (
+      <SafeAreaView style={styles.safe}>
+        <Animated.View entering={FadeIn.duration(180)} style={styles.doneWrap}>
+          <Image source={POSE.sip} style={styles.failedFigure} contentFit="contain" accessible={false} />
+          <Text style={styles.doneTitle}>{test ? "Couldn't save your test" : "Couldn't save your lesson"}</Text>
+          <Text style={styles.doneHint}>
+            Check your connection and try again. It's kept on this phone and will save once you're back online.
+          </Text>
+          <Button title="Try again" loading={unsaved === 'saving'} onPress={saveAgain} />
+          <Button title="Back home" variant="ghost" onPress={backToCourse} />
+        </Animated.View>
       </SafeAreaView>
     );
   }

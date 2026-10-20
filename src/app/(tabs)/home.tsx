@@ -7,6 +7,7 @@ import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useStat
 import {
   AccessibilityInfo,
   Animated,
+  AppState,
   Easing,
   FlatList,
   Platform,
@@ -38,7 +39,8 @@ import {
   stepDone,
 } from '@/lib/course';
 import { jumpAllowed } from '@/lib/placement';
-import { FREE_UNITS, usePremium } from '@/lib/premium';
+import { usePremium } from '@/lib/premium';
+import { prefetchTabs } from '@/lib/prefetch';
 import {
   enablePartnerReminders,
   enablePush,
@@ -780,7 +782,7 @@ export default function Home() {
   const { session } = useAuth();
   const userId = session?.user.id;
   const focused = useIsFocused();
-  const { limited, paywall } = usePremium();
+  const { limited, paywall, freeUnits } = usePremium();
   /** The section she opened from the sections screen; none means hers. */
   const { section: askedSection } = useLocalSearchParams<{ section?: string }>();
   // The header sits straight on the oat, so the strip iOS reserves above it
@@ -936,9 +938,23 @@ export default function Home() {
       // unmounted comes back already standing on her old status, and the
       // advance still has to wait for her to have looked at it.
       if (placed.current) placedAt.current = Date.now();
-      load();
+      // A load that fails keeps what is on screen (the phone's copy).
+      load().catch(() => {});
     }, [load]),
   );
+
+  // Back in front: the road is read again, so what failed for want of a
+  // network a while ago doesn't stay failed until she leaves the tab.
+  useEffect(() => {
+    if (!focused) return;
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state !== 'active') return;
+      load().catch(() => {});
+      // The other tabs, if getting them ready failed at launch.
+      if (userId) prefetchTabs(userId, limited);
+    });
+    return () => sub.remove();
+  }, [focused, load, userId, limited]);
 
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
@@ -1274,10 +1290,11 @@ export default function Home() {
     }
   };
 
-  // The free tier is the first units of the road; a step past them opens the
-  // paywall instead, at the moment she is reaching for more.
+  // What is free is the first units of the road (the free tier's, or the free
+  // week's one); a step past them opens the paywall instead, at the moment
+  // she is reaching for more.
   const startLesson = (lesson: PathLesson) =>
-    limited && lesson.unitIndex >= FREE_UNITS
+    limited && lesson.unitIndex >= freeUnits
       ? paywall('lesson')
       : lesson.kind === 'story'
       ? router.push(`/story?lesson=${lesson.id}`)

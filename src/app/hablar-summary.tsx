@@ -40,7 +40,9 @@ export default function HablarSummaryScreen() {
   const [conversation, setConversation] = useState<ConversationRow | null>(null);
   const [turns, setTurns] = useState<TurnRow[]>([]);
   const [summary, setSummary] = useState<HablarSummary | null>(sessionId ? (summaryCache.get(sessionId) ?? null) : null);
-  const [state, setState] = useState<'loading' | 'ready' | 'missing'>('loading');
+  const [state, setState] = useState<'loading' | 'ready' | 'missing' | 'offline'>('loading');
+  /** Counts her tries after the summary couldn't be reached; a new one loads again. */
+  const [attempt, setAttempt] = useState(0);
   const [showTranscript, setShowTranscript] = useState(false);
   const [celebrating, setCelebrating] = useState(false);
 
@@ -48,7 +50,14 @@ export default function HablarSummaryScreen() {
     if (!sessionId) return setState('missing');
     let alive = true;
     (async () => {
-      const loaded = await loadConversation(sessionId).catch(() => null);
+      // No connection is not "no such chat": she is told so, and can ask again.
+      let loaded: Awaited<ReturnType<typeof loadConversation>>;
+      try {
+        loaded = await loadConversation(sessionId);
+      } catch {
+        if (alive) setState(summary ? 'ready' : 'offline');
+        return;
+      }
       if (!alive) return;
       if (!loaded) return setState(summary ? 'ready' : 'missing');
       const { conversation: c, turns: t } = loaded;
@@ -59,6 +68,7 @@ export default function HablarSummaryScreen() {
       let s = summary ?? c.summary;
       if (!s) s = await end({ session_id: c.id, reason: 'time' }).catch(() => null);
       if (!alive) return;
+      if (!s) return setState('offline');
       setSummary(s);
       setState('ready');
     })();
@@ -66,7 +76,7 @@ export default function HablarSummaryScreen() {
       alive = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionId]);
+  }, [sessionId, attempt]);
 
   // A unit chat was opened from the road (or from History): back to wherever that was.
   const leave = () => (conversation?.kind === 'unit' ? goBack('/home') : router.dismissTo('/hablar'));
@@ -87,6 +97,21 @@ export default function HablarSummaryScreen() {
       <SafeAreaView style={[styles.safe, styles.center]}>
         <ActivityIndicator color={colors.primary} />
         <Text style={styles.muted}>Pancho is writing up your chat…</Text>
+      </SafeAreaView>
+    );
+  }
+  if (state === 'offline') {
+    return (
+      <SafeAreaView style={[styles.safe, styles.center]}>
+        <Text style={styles.muted}>Couldn't load your summary. Check your connection and try again.</Text>
+        <Button
+          title="Try again"
+          onPress={() => {
+            setState('loading');
+            setAttempt((n) => n + 1);
+          }}
+        />
+        <Button title="Back to Speaking" variant="ghost" onPress={leave} />
       </SafeAreaView>
     );
   }

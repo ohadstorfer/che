@@ -1007,18 +1007,6 @@ export default function HablarChat() {
           <View style={styles.notice}>
             <Text style={styles.noticeText}>{notice}</Text>
           </View>
-        ) : linesLeft !== null && linesLeft > 0 && linesLeft <= 2 && !over ? (
-          // The heads-up, two lines before the end, where a notice would be.
-          <View style={styles.linesLeft} pointerEvents="none">
-            <Appear key={linesLeft}>
-              <View style={styles.linesLeftPill} accessibilityLiveRegion="polite">
-                <MaterialCommunityIcons name="chat" size={18} color={colors.ink} />
-                <Text style={styles.linesLeftText}>
-                  {linesLeft} {linesLeft === 1 ? 'message' : 'messages'} left
-                </Text>
-              </View>
-            </Appear>
-          </View>
         ) : null}
 
         {phase === 'retry' ? (
@@ -1626,19 +1614,6 @@ const styles = StyleSheet.create({
     boxShadow: clay.float,
   },
   noticeText: { ...font.body[700], color: colors.bg, fontSize: 17, lineHeight: 22, textAlign: 'center' },
-  // "2 messages left": a manteca sticker in the notice's place over the dock.
-  linesLeft: { position: 'absolute', bottom: '100%', marginBottom: 14, alignSelf: 'center' },
-  linesLeftPill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    paddingHorizontal: 18,
-    paddingVertical: 10,
-    borderRadius: radius.pill,
-    backgroundColor: pastel.butter,
-    boxShadow: clay.surface,
-  },
-  linesLeftText: { ...font.body[800], fontSize: 16, lineHeight: 21, color: colors.ink, fontVariant: ['tabular-nums'] },
   dayLeft: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
   dayLeftText: { ...font.body[800], fontSize: 13, color: colors.muted, fontVariant: ['tabular-nums'] },
 

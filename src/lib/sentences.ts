@@ -4,6 +4,7 @@ import { cached, onContentCleared, stampHash, versioned } from './content-cache'
 import { all } from './fetch-all';
 import { learnerChanged } from './learner-ready';
 import { timed } from './load-timing';
+import { send } from './outbox';
 import { supabase } from './supabase';
 import type { Form, Sentence, SentenceToken } from './types';
 
@@ -739,8 +740,15 @@ export function recordShown(userId: string, sentence: Sentence, correct: boolean
   };
   sentence.shown = next;
   learnerChanged();
-  supabase
-    .from('sentence_states')
-    .upsert({ sentence_id: sentence.id, user_id: userId, ...next }, { onConflict: 'sentence_id,user_id' })
-    .then(() => {});
+  // Kept and sent again if the network isn't there (outbox.ts); a later
+  // showing of the same sentence goes up after this one.
+  void send(
+    {
+      kind: 'upsert',
+      table: 'sentence_states',
+      rows: { sentence_id: sentence.id, user_id: userId, ...next },
+      onConflict: 'sentence_id,user_id',
+    },
+    { key: `sentence:${sentence.id}` },
+  );
 }

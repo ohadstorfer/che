@@ -65,6 +65,10 @@ export async function fetchStreakWeek(userId: string): Promise<StreakWeek> {
       .lte('session_date', week[6])
       .not('completed_at', 'is', null),
   ]);
+  // A read that failed is not a lost streak: nothing is published, and the
+  // caller keeps what it showed.
+  const failed = streakRes.error ?? weekRes.error;
+  if (failed) throw new Error(failed.message);
   const value: StreakWeek = {
     streak: (streakRes.data as Streak) ?? null,
     weekDone: (weekRes.data ?? []).map((r: { session_date: string }) => r.session_date),

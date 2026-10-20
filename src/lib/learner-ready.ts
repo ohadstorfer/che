@@ -15,6 +15,10 @@
  *  phone changes it in that time without `learnerChanged`; another device of
  *  hers could, as it could a second before any class opens. */
 const FRESH_MS = 2 * 60 * 1000;
+/** How long a class waits for a read ahead still being set up. Past it the
+ *  class reads for itself: a setup stuck on a dead request must not hold
+ *  every class — and every try again — behind it. */
+const COMING_WAIT_MS = 5000;
 
 let held: { key: string; at: number; value: Promise<unknown> } | null = null;
 /** A read ahead is being set up: finding which class she is on, off the phone. */
@@ -54,7 +58,11 @@ export function holdLearner(key: string, value: Promise<unknown>) {
  *  here on: a round writes on what it holds. Null otherwise, and then the
  *  caller reads for itself. Throws if the read that was held fails. */
 export async function takeLearner<T>(key: string): Promise<T | null> {
-  if (coming) await coming;
+  if (coming) {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    await Promise.race([coming, new Promise((r) => (timer = setTimeout(r, COMING_WAIT_MS)))]);
+    clearTimeout(timer);
+  }
   const mine = held;
   if (mine && mine.key === key) {
     held = null;

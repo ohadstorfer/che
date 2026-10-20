@@ -22,6 +22,10 @@ const VERSION_TTL_MS = 5 * 60 * 1000;
 /** How long a refusal is kept — signed out, offline — so a screen that loads
  *  several pieces doesn't ask several times. */
 const NO_VERSION_TTL_MS = 30 * 1000;
+/** How long a load waits for the version before going on without one — the
+ *  phone's copy as it is. On a connection that hangs rather than fails, the
+ *  copy on the phone shouldn't wait for it. */
+const VERSION_WAIT_MS = 4000;
 /** Bump when the shape of a stored row changes, so old files are skipped. */
 export const CONTENT_FORMAT = 1;
 
@@ -253,7 +257,12 @@ export function versioned<T>(
   pick: (v: ContentVersion) => string | null,
   fetch: () => Promise<T>,
 ): Promise<T> {
-  return contentVersion().then((v) => stored(name, v ? pick(v) : null, fetch));
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const late = new Promise<null>((resolve) => (timer = setTimeout(() => resolve(null), VERSION_WAIT_MS)));
+  return Promise.race([contentVersion(), late]).then((v) => {
+    clearTimeout(timer);
+    return stored(name, v ? pick(v) : null, fetch);
+  });
 }
 
 /**
