@@ -131,8 +131,11 @@ const STEP_PITCH = BOX + STEP_GAP;
 const PATH_TOP = 24;
 /** A unit's banner is a fixed-height row too, so it folds into the arithmetic. */
 const BANNER_H = 176;
+/** Room between the last step of one unit and the next unit's banner, so the
+ *  units read as apart rather than as one long road. */
+const BANNER_TOP = 40;
 const BANNER_GAP = 22;
-const BANNER_PITCH = BANNER_H + BANNER_GAP;
+const BANNER_PITCH = BANNER_TOP + BANNER_H + BANNER_GAP;
 /** Where step `i` sits, given the banners standing above it. The section's
  *  name lives in the header's pill, so nothing else stands on the road. */
 const stepY = (i: number, bannersAbove: number) => PATH_TOP + bannersAbove * BANNER_PITCH + i * STEP_PITCH;
@@ -1710,6 +1713,7 @@ const styles = StyleSheet.create({
   // Unit banners -------------------------------------------------------------
   banner: {
     height: BANNER_H,
+    marginTop: BANNER_TOP,
     marginBottom: BANNER_GAP,
     borderRadius: radius.xl,
     overflow: 'hidden',
