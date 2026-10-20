@@ -197,7 +197,7 @@ export function mergePaused(stored: number, reported: unknown): number {
 // exchanges (a unit chat, and what keeps a beginner's chat from dragging), or
 // by the backstop clock.
 const WRAP_EXCHANGES = 10;
-/** How many lines before the cap Pancho is told to start closing (the app shows "2 messages left"). */
+/** How many lines before the cap Pancho is told to start closing. */
 export const CLOSE_SOON_BEFORE_CAP = 2;
 
 /** The learner's nth line, from its idx (opener 0, learner lines 1, 3, 5…). */

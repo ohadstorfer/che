@@ -24,6 +24,7 @@
 // and a TTS call.
 
 import { json, preflight } from "../_shared/cors.ts";
+import { reported, reportError } from "../_shared/posthog.ts";
 import { speakingUnit, unitScenario } from "../_shared/hablar-unit.ts";
 import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 import {
@@ -44,10 +45,7 @@ import {
   type Line,
 } from "../_shared/hablar.ts";
 
-/** Chats a free account gets, in total. */
-const FREE_CHATS = 3;
-
-Deno.serve(async (req) => {
+Deno.serve(reported("hablar-start", async (req) => {
   const early = preflight(req);
   if (early) return early;
   if (req.method !== "POST") return json({ error: "POST only" }, { status: 405 });
@@ -74,22 +72,25 @@ Deno.serve(async (req) => {
   if (kind === "unit" && !unit) return json({ error: "no such lesson" }, { status: 404 });
   const topicId = kind === "free" ? null : unit ? unit.id : String(body.topic_id ?? "");
 
-  const [tz, { data: courseCefr }, { data: profile }, { data: premium }, { count }] = await Promise.all([
+  const [tz, { data: courseCefr }, { data: profile }, { data: premium }, { count }, { data: allowed }] = await Promise.all([
     profileTimezone(db, who.userId),
     db.rpc("hablar_level", { p_user: who.userId }),
     db.from("profiles").select("role").eq("user_id", who.userId).maybeSingle(),
     db.rpc("is_premium", { p_user: who.userId }),
     db.from("conversations").select("id", { count: "exact", head: true }).eq("user_id", who.userId).neq("kind", "unit"),
+    db.rpc("free_chats_allowed", { p_user: who.userId }),
   ]);
   // Staff test freely: no clock, no daily limit.
   const unlimited = profile?.role === "admin" || profile?.role === "reviewer";
 
-  // The free tier gets FREE_CHATS chats in all; after that, premium only
-  // (the app's lib/premium.tsx agrees, and shows the paywall on this 402).
+  // A free account gets free_chats_allowed() chats in all: 3 in the free tier,
+  // or the free week's one with the hard paywall (migration 20261019000040);
+  // after that, premium only. The app's lib/premium.tsx agrees, and shows the
+  // paywall on this 402.
   if (unit) {
     const { data: open } = await db.rpc("lesson_open_to", { p_user: who.userId, p_lesson: lessonId });
     if (!open) return json({ error: "paywall", paywall: true }, { status: 402 });
-  } else if (!unlimited && !premium && (count ?? 0) >= FREE_CHATS) {
+  } else if (!unlimited && !premium && (count ?? 0) >= (typeof allowed === "number" ? allowed : 0)) {
     return json({ error: "paywall", paywall: true }, { status: 402 });
   }
   const today = localDate(tz);
@@ -133,6 +134,7 @@ Deno.serve(async (req) => {
       return json({ error: "could not start", retry: true }, { status: 409 });
     }
     console.error("conversation insert failed", error.message);
+    reportError("hablar-start", new Error(error.message), { user_id: who.userId, stage: "conversation_insert", code: error.code });
     return json({ error: "could not start" }, { status: 500 });
   }
 
@@ -174,7 +176,7 @@ Deno.serve(async (req) => {
     role_es: stored?.role_es ?? null,
     key_words: topic.culture ? (topic.culture.opener.keyterms ?? []).slice(0, 3) : [],
   });
-});
+}));
 
 /** Her chats today, Course and Speaking together; staff chats count toward nothing. */
 async function chatsToday(db: SupabaseClient, userId: string, today: string): Promise<number> {

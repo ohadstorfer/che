@@ -22,10 +22,18 @@ export interface PlaySubscription {
   /** Present only on a test purchase (a license tester's). */
   testPurchase?: unknown;
   externalAccountIdentifiers?: { obfuscatedExternalAccountId?: string };
+  /** The order behind the latest charge (renewals end in ..0, ..1, …). */
+  latestOrderId?: string;
+  startTime?: string;
   lineItems?: {
     productId: string;
     expiryTime?: string;
     offerPhase?: { freeTrial?: unknown; introductoryPrice?: unknown };
+    /** Newer than the top-level latestOrderId, which Play is retiring. */
+    latestSuccessfulOrderId?: string;
+    offerDetails?: { basePlanId?: string; offerId?: string; offerTags?: string[] };
+    /** The base plan's price; a trial or a cheaper first period is not in it. */
+    autoRenewingPlan?: { autoRenewEnabled?: boolean; recurringPrice?: { currencyCode?: string; units?: string; nanos?: number } };
   }[];
 }
 

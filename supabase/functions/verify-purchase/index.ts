@@ -19,13 +19,15 @@
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { json, preflight } from "../_shared/cors.ts";
 import { applyState, type StoreState } from "../_shared/entitlement.ts";
+import { reported, reportError } from "../_shared/posthog.ts";
+import { appleVerifyEvents, playVerifyEvents, recordRevenue } from "../_shared/revenue.ts";
 import { type AppleTransaction, appleState, verifyAppleJws } from "../_shared/store-apple.ts";
-import { playAcknowledge, playState, playSubscription, serviceAccount } from "../_shared/store-google.ts";
+import { playAcknowledge, type PlaySubscription, playState, playSubscription, serviceAccount } from "../_shared/store-google.ts";
 
 const APPLE_BUNDLE_ID = "app.posta.ios";
 const GOOGLE_PACKAGE_NAME = "app.posta.android";
 
-Deno.serve(async (req) => {
+Deno.serve(reported("verify-purchase", async (req) => {
   const early = preflight(req);
   if (early) return early;
   if (req.method !== "POST") return json({ error: "POST only" }, { status: 405 });
@@ -47,8 +49,9 @@ Deno.serve(async (req) => {
   if (typeof body.token !== "string" || !body.token) return json({ error: "no token" }, { status: 400 });
 
   let state: StoreState | null = null;
+  let tx: AppleTransaction | null = null;
+  let sub: PlaySubscription | null = null;
   if (body.store === "apple") {
-    let tx: AppleTransaction;
     try {
       tx = await verifyAppleJws<AppleTransaction>(body.token);
     } catch (e) {
@@ -62,7 +65,7 @@ Deno.serve(async (req) => {
     if (!account) return json({ error: "Google Play is not configured" }, { status: 500 });
     const packageName = Deno.env.get("GOOGLE_PACKAGE_NAME") ?? GOOGLE_PACKAGE_NAME;
     try {
-      const sub = await playSubscription(account, packageName, body.token);
+      sub = await playSubscription(account, packageName, body.token);
       state = sub && playState(sub, body.token);
       if (!sub || !state) return json({ error: "Play does not know this purchase" }, { status: 400 });
       if (state.active && sub.acknowledgementState === "ACKNOWLEDGEMENT_STATE_PENDING") {
@@ -71,6 +74,7 @@ Deno.serve(async (req) => {
     } catch (e) {
       // Play was unreachable: the app keeps the purchase and asks again.
       console.error("Play unreachable", (e as Error).message);
+      reportError("verify-purchase", e, { user_id: userId, store: "google", stage: "play" });
       return json({ error: "store unreachable, try again" }, { status: 502 });
     }
   } else {
@@ -79,10 +83,13 @@ Deno.serve(async (req) => {
 
   try {
     const db = createClient(url, serviceRole, { auth: { persistSession: false } });
-    const { premium } = await applyState(db, state, "VERIFY", userId);
+    const { premium, before } = await applyState(db, state, "VERIFY", userId);
+    const events = tx ? appleVerifyEvents(tx, before) : sub ? playVerifyEvents(sub, state) : [];
+    await recordRevenue(db, userId, events, { source: "verify" });
     return json({ premium });
   } catch (e) {
     console.error("entitlements write failed", (e as Error).message);
+    reportError("verify-purchase", e, { user_id: userId, store: body.store, stage: "entitlements" });
     return json({ error: "could not save the purchase" }, { status: 500 });
   }
-});
+}));

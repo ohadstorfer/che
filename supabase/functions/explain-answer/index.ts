@@ -18,8 +18,10 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import { json, preflight } from "../_shared/cors.ts";
 import { offendingSpanish } from "../_shared/rioplatense.ts";
 
-// Short, bounded explanations: Sonnet at low effort is plenty.
-const MODEL = "claude-sonnet-5";
+// Short, bounded explanations: Haiku 5.5 at low effort is plenty, at about a
+// twentieth of Sonnet's price (docs/unit-economics.md). The rioplatense check
+// below still guards what it writes.
+const MODEL = "claude-haiku-5-5";
 const DAILY_LIMIT = 30;
 // Part of the cache key: bump it when SYSTEM changes, so learners stop getting
 // explanations written under the old rules.
@@ -165,8 +167,9 @@ Deno.serve(async (req) => {
     const response = await client.messages.create({
       model: MODEL,
       max_tokens: 4000,
+      // She waits for it on screen: no thinking first, like Pancho's guard.
       // deno-lint-ignore no-explicit-any
-      ...({ output_config: { effort: "low" } } as any),
+      ...({ thinking: { type: "disabled" }, output_config: { effort: "low" } } as any),
       system: SYSTEM,
       messages: [{ role: "user", content: context }],
     });

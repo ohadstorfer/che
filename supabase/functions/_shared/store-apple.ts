@@ -34,6 +34,17 @@ export interface AppleTransaction {
   /** 1 introductory · 2 promotional · 3 offer code · 4 win-back */
   offerType?: number;
   offerDiscountType?: "FREE_TRIAL" | "PAY_AS_YOU_GO" | "PAY_UP_FRONT";
+  /** The offer's id: a promotional or win-back offer's, or an offer code's
+   *  reference name. */
+  offerIdentifier?: string;
+  /** "PURCHASE" (a buy, a resubscription) | "RENEWAL". */
+  transactionReason?: string;
+  /** What she paid for this transaction, in milliunits of `currency`. */
+  price?: number;
+  currency?: string;
+  /** "PURCHASED" | "FAMILY_SHARED". */
+  inAppOwnershipType?: string;
+  purchaseDate?: number;
   environment: string;
   signedDate: number;
 }
@@ -48,6 +59,8 @@ export interface AppleRenewal {
 export interface AppleNotification {
   notificationType: string;
   subtype?: string;
+  /** The same on every retry of one notification. */
+  notificationUUID?: string;
   data?: {
     bundleId?: string;
     environment?: string;

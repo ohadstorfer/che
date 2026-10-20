@@ -42,10 +42,11 @@ import {
   type Feedback,
 } from "../_shared/hablar-prompt.ts";
 import { Anthropic, MODEL, structured } from "../_shared/hablar-claude.ts";
+import { reported, reportError } from "../_shared/posthog.ts";
 
 const SEVERITY_RANK: Record<string, number> = { meaning: 0, target: 1, minor: 2, none: 3 };
 
-Deno.serve(async (req) => {
+Deno.serve(reported("hablar-end", async (req) => {
   const early = preflight(req);
   if (early) return early;
   if (req.method !== "POST") return json({ error: "POST only" }, { status: 405 });
@@ -107,6 +108,7 @@ Deno.serve(async (req) => {
       if (error) console.error("feedback save failed", error.message);
     } catch (err) {
       console.error("grading failed", err);
+      reportError("hablar-end", err, { user_id: who.userId, session_id: session.id, stage: "feedback" });
     }
   };
   const ungraded = userTurns.filter((t) => !t.feedback && t.text);
@@ -153,6 +155,7 @@ Deno.serve(async (req) => {
       return { went_well: value?.went_well ?? null };
     } catch (err) {
       console.error("summary call failed", err);
+      reportError("hablar-end", err, { user_id: who.userId, session_id: session.id, stage: "summary" });
       return { went_well: null };
     }
   })();
@@ -182,6 +185,7 @@ Deno.serve(async (req) => {
         });
       } catch (err) {
         console.error("correction clip failed", err);
+        reportError("hablar-end", err, { user_id: who.userId, session_id: session.id, stage: "tts" });
       }
     }));
   })();
@@ -211,6 +215,7 @@ Deno.serve(async (req) => {
     });
     if (error) {
       console.error("finish_lesson failed", error.message);
+      reportError("hablar-end", new Error(error.message), { user_id: who.userId, session_id: session.id, stage: "finish_lesson", code: error.code });
       return { credited: false, row: null };
     }
     const row = (data as Record<string, unknown>[] | null)?.[0] ?? null;
@@ -241,4 +246,4 @@ Deno.serve(async (req) => {
   background(logUsage(db, usage));
 
   return json({ summary, streak: credit.row });
-});
+}));

@@ -19,6 +19,7 @@
 // purpose=dilo compares what she said with the fixed line; no model call.
 
 import { json, preflight } from "../_shared/cors.ts";
+import { reported, reportError } from "../_shared/posthog.ts";
 import {
   type DraftOutcome,
   MAX_AUDIO_BYTES as MAX_BYTES,
@@ -43,7 +44,7 @@ import {
   transcribe,
 } from "../_shared/hablar.ts";
 
-Deno.serve(async (req) => {
+Deno.serve(reported("hablar-transcribe", async (req) => {
   const early = preflight(req);
   if (early) return early;
   if (req.method !== "POST") return json({ error: "POST only" }, { status: 405 });
@@ -117,6 +118,7 @@ Deno.serve(async (req) => {
       }));
     } catch (err) {
       console.error(err);
+      reportError("hablar-transcribe", err, { user_id: who.userId, session_id: session.id, stage: "stt" });
       return json({ error: "stt_failed", retry: true }, { status: 502 });
     }
     background(logUsage(db, [{
@@ -144,7 +146,7 @@ Deno.serve(async (req) => {
     sttCount: count ?? 0,
   });
   return draftJson(out, turnId as string);
-});
+}));
 
 /** A line she typed instead of saying: stored as a draft turn like a transcript. */
 async function typedTurn(env: Env, userId: string, form: FormData, raw: string) {

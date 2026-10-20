@@ -19,6 +19,8 @@
 
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { applyState } from "../_shared/entitlement.ts";
+import { reported, reportError } from "../_shared/posthog.ts";
+import { playEvents, recordRevenue } from "../_shared/revenue.ts";
 import { playAcknowledge, playState, playSubscription, serviceAccount } from "../_shared/store-google.ts";
 
 interface PlayMessage {
@@ -26,13 +28,13 @@ interface PlayMessage {
   testNotification?: unknown;
   subscriptionNotification?: { notificationType: number; purchaseToken: string };
   /** A refund or chargeback. productType 1 is a subscription. */
-  voidedPurchaseNotification?: { purchaseToken: string; productType?: number };
+  voidedPurchaseNotification?: { purchaseToken: string; orderId?: string; productType?: number; refundType?: number };
 }
 
 const ok = (body: unknown = { ok: true }) =>
   new Response(JSON.stringify(body), { headers: { "Content-Type": "application/json" } });
 
-Deno.serve(async (req) => {
+Deno.serve(reported("google-notifications", async (req) => {
   if (req.method !== "POST") return new Response("POST only", { status: 405 });
   const secret = Deno.env.get("GOOGLE_PUBSUB_TOKEN") ?? "";
   if (!secret || new URL(req.url).searchParams.get("token") !== secret) {
@@ -40,8 +42,10 @@ Deno.serve(async (req) => {
   }
 
   let message: PlayMessage;
+  let messageId: string | undefined;
   try {
-    const { message: envelope } = (await req.json()) as { message?: { data?: string } };
+    const { message: envelope } = (await req.json()) as { message?: { data?: string; messageId?: string } };
+    messageId = envelope?.messageId;
     message = JSON.parse(atob(envelope?.data ?? "")) as PlayMessage;
   } catch {
     // Acknowledged all the same: Pub/Sub would send a broken message forever.
@@ -65,14 +69,21 @@ Deno.serve(async (req) => {
       auth: { persistSession: false },
     });
     const event = voided ? "VOIDED" : `PLAY:${message.subscriptionNotification!.notificationType}`;
-    const { userId, ignored } = await applyState(db, state, event);
+    const { userId, ignored, before } = await applyState(db, state, event);
     if (userId && state.active && sub.acknowledgementState === "ACKNOWLEDGEMENT_STATE_PENDING") {
       await playAcknowledge(account, packageName, state.productId, purchaseToken);
+    }
+    if (ignored !== "unknown product") {
+      const notice = voided
+        ? { type: "voided" as const, messageId, orderId: voided.orderId, refundType: voided.refundType }
+        : { type: message.subscriptionNotification!.notificationType, messageId };
+      await recordRevenue(db, userId, playEvents(notice, sub, state, before), { source: "notification", notification: event });
     }
     return ok(ignored ? { ok: true, ignored } : { ok: true });
   } catch (e) {
     console.error("google notification failed", (e as Error).message);
+    reportError("google-notifications", e, { notification: voided ? "VOIDED" : message.subscriptionNotification?.notificationType });
     // Non-2xx makes Pub/Sub send it again.
     return new Response("failed", { status: 500 });
   }
-});
+}));

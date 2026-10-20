@@ -37,3 +37,15 @@ verify_jwt = false
 
 [functions.google-notifications]
 verify_jwt = false
+
+[functions.winback-email]
+verify_jwt = false
+
+[functions.email-unsubscribe]
+verify_jwt = false
+
+[functions.cost-alert]
+verify_jwt = false
+
+[functions.launch-email]
+verify_jwt = false

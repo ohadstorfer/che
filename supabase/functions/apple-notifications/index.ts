@@ -18,6 +18,8 @@
 
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { applyState } from "../_shared/entitlement.ts";
+import { reported, reportError } from "../_shared/posthog.ts";
+import { appleEvents, recordRevenue } from "../_shared/revenue.ts";
 import {
   type AppleNotification,
   type AppleRenewal,
@@ -29,7 +31,7 @@ import {
 const ok = (body: unknown = { ok: true }) =>
   new Response(JSON.stringify(body), { headers: { "Content-Type": "application/json" } });
 
-Deno.serve(async (req) => {
+Deno.serve(reported("apple-notifications", async (req) => {
   if (req.method !== "POST") return new Response("POST only", { status: 405 });
 
   let note: AppleNotification;
@@ -54,11 +56,16 @@ Deno.serve(async (req) => {
   });
   try {
     const event = note.subtype ? `${note.notificationType}:${note.subtype}` : note.notificationType;
-    const { ignored } = await applyState(db, appleState(tx, renewal), event);
+    const { ignored, userId, before } = await applyState(db, appleState(tx, renewal), event);
+    // Also when the word was stale: it still happened, at its own time.
+    if (ignored !== "unknown product") {
+      await recordRevenue(db, userId, appleEvents(note, tx, before), { source: "notification", notification: event });
+    }
     return ok(ignored ? { ok: true, ignored } : { ok: true });
   } catch (e) {
     console.error("entitlements write failed", (e as Error).message);
+    reportError("apple-notifications", e, { notification: note.notificationType, stage: "entitlements" });
     // Non-2xx makes Apple send it again, which is what a failed write wants.
     return new Response("write failed", { status: 500 });
   }
-});
+}));

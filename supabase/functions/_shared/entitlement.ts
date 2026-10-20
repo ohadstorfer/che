@@ -46,6 +46,7 @@ export interface EntitlementRow {
   store_ref: string | null;
   expires_at: string | null;
   store_signed_at: string | null;
+  period_type?: string | null;
 }
 
 export type Decision =
@@ -106,6 +107,9 @@ export interface Applied {
   userId: string | null;
   premium: boolean;
   ignored?: string;
+  /** The row that held this purchase before this word was written (what it
+   *  was: a trial turning paid shows here). */
+  before?: EntitlementRow | null;
 }
 
 /**
@@ -129,7 +133,7 @@ export async function applyState(db: SupabaseClient, state: StoreState, event: s
   const refs = state.linkedRef ? [state.ref, state.linkedRef] : [state.ref];
   const { data: held, error: heldError } = await db
     .from("entitlements")
-    .select("user_id, active, store, store_ref, expires_at, store_signed_at")
+    .select("user_id, active, store, store_ref, expires_at, store_signed_at, period_type")
     .eq("store", state.store)
     .in("store_ref", refs);
   if (heldError) throw new Error(heldError.message);
@@ -141,7 +145,7 @@ export async function applyState(db: SupabaseClient, state: StoreState, event: s
   if (userId && !own) {
     const { data, error } = await db
       .from("entitlements")
-      .select("user_id, active, store, store_ref, expires_at, store_signed_at")
+      .select("user_id, active, store, store_ref, expires_at, store_signed_at, period_type")
       .eq("user_id", userId)
       .maybeSingle();
     if (error) throw new Error(error.message);
@@ -149,7 +153,7 @@ export async function applyState(db: SupabaseClient, state: StoreState, event: s
   }
 
   const decision = decide(state, holder, own, userId, Date.now(), newest as string | null);
-  if (!decision.write) return { userId, premium: decision.premium, ignored: decision.reason };
+  if (!decision.write) return { userId, premium: decision.premium, ignored: decision.reason, before: holder };
 
   const now = new Date().toISOString();
   if (decision.release) {
@@ -176,5 +180,5 @@ export async function applyState(db: SupabaseClient, state: StoreState, event: s
   // store: nothing to write to, and sending it again would not help.
   if (error?.code === "23503") return { userId: null, premium: false, ignored: "no user" };
   if (error) throw new Error(error.message);
-  return { userId: decision.userId, premium: state.active };
+  return { userId: decision.userId, premium: state.active, before: holder };
 }

@@ -84,6 +84,7 @@ import {
   WRAP_UP_NOTE,
 } from "../_shared/hablar-prompt.ts";
 import { Anthropic, MODEL, plain, REPLY_MODEL, REPLY_THINKING } from "../_shared/hablar-claude.ts";
+import { reported, reportError } from "../_shared/posthog.ts";
 import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
 const HISTORY_TURNS = 20;
@@ -148,6 +149,7 @@ async function runTurn(opts: {
   const client = new Anthropic({ apiKey: env.anthropicKey, ...CLAUDE_OPTIONS });
   const usage: Usage[] = [];
   const elapsed = sessionElapsed(session);
+  const ids = { user_id: opts.userId, session_id: session.id };
   const exchange = exchangeOf(userIdx);
   // A Speaking-tab chat closes on her eighth line, and is told to start closing two before.
   const cap = messageCap(session);
@@ -208,6 +210,7 @@ async function runTurn(opts: {
   // Not waited on here: the reply starts streaming while the voice id loads.
   const voice = tomasVoice(db).catch((err) => {
     console.error(err);
+    reportError("hablar-reply", err, { ...ids, stage: "voice" });
     return null;
   });
   const slot = limiter(TTS_PARALLEL);
@@ -236,6 +239,7 @@ async function runTurn(opts: {
           }
         } catch (err) {
           console.error("guard rewrite failed", err);
+          reportError("hablar-reply", err, { ...ids, stage: "guard" });
         }
       }
       const voiceId = await voice;
@@ -256,6 +260,7 @@ async function runTurn(opts: {
           return mp3;
         } catch (err) {
           console.error(err);
+          reportError("hablar-reply", err, { ...ids, stage: "tts" });
           return null;
         }
       });
@@ -300,6 +305,7 @@ async function runTurn(opts: {
     if (rest) enqueue(rest);
   } catch (err) {
     console.error("reply failed", err);
+    reportError("hablar-reply", err, { ...ids, stage: "claude" });
     // Give the turn back so the retry can claim it again straight away.
     await db.from("conversation_turns").update({ status: "draft", idx: null }).eq("id", user.id);
     sse.send("error", { stage: "claude", retry: true });
@@ -349,7 +355,7 @@ async function runTurn(opts: {
   await logUsage(db, usage);
 }
 
-Deno.serve(async (req) => {
+Deno.serve(reported("hablar-reply", async (req) => {
   const early = preflight(req);
   if (early) return early;
   if (req.method !== "POST") return json({ error: "POST only" }, { status: 405 });
@@ -359,7 +365,7 @@ Deno.serve(async (req) => {
   const db = serviceClient(env);
   const spoken = (req.headers.get("content-type") ?? "").includes("multipart/form-data");
   return spoken ? speak(req, env, db) : answerStored(req, env, db);
-});
+}));
 
 /** JSON `{ session_id, turn_id }`: answer a line already stored (a draft, a retry, a replay). */
 async function answerStored(req: Request, env: Env, db: SupabaseClient): Promise<Response> {
@@ -541,6 +547,7 @@ async function answer(opts: {
   background(
     runTurn({ env, db, sse, session, topic, user, userIdx, userId: opts.userId }).catch((err) => {
       console.error("turn failed", err);
+      reportError("hablar-reply", err, { user_id: opts.userId, session_id: session.id, stage: "turn" });
       sse.send("error", { stage: "claude", retry: true });
       sse.close();
     }),

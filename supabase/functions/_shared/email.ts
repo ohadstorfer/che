@@ -1,6 +1,5 @@
 // Email through Resend (https://resend.com/docs/api-reference/emails/send-email).
-// Nothing calls this yet: it is here so the first function that needs to send
-// a mail only has to import it. The key is the RESEND_API_KEY secret, a
+// winback-email sends with it. The key is the RESEND_API_KEY secret, a
 // sending-only key; it never goes in the app.
 //
 // Mail goes out from postaspanish.com, which has to be verified in Resend
@@ -21,6 +20,8 @@ export interface Email {
   replyTo?: string;
   /** Resend keeps a key for 24 h and sends a retried request only once. */
   idempotencyKey?: string;
+  /** Extra mail headers, e.g. List-Unsubscribe. */
+  headers?: Record<string, string>;
 }
 
 export type SendResult = { ok: true; id: string } | { ok: false; error: string };
@@ -47,6 +48,7 @@ export async function sendEmail(email: Email): Promise<SendResult> {
         html: email.html,
         text: email.text,
         reply_to: email.replyTo,
+        headers: email.headers,
       }),
     });
     const body = (await res.json().catch(() => ({}))) as { id?: string; message?: string };

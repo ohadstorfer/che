@@ -21,3 +21,4 @@ expo-env.d.ts
 
 # Firebase Android config: has a Google API key. Kept local; EAS still uploads it (.easignore does not list it).
 /google-services.json
+supabase/review-code.local.sql
