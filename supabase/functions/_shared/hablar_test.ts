@@ -19,6 +19,7 @@ import {
   nextUserIdx,
   resolveLevel,
   MarkerStripper,
+  soundsLikeGoodbye,
   shouldCloseSoon,
   shouldWrapUp,
   exchangeOf,
@@ -223,6 +224,9 @@ Deno.test("keyterms: what Pancho just asked first, the scene's words after, neve
   };
   const k = sttKeyterms(topicOf("unit", "u", "A1", scene), "A1", "¡Dale! Café. ¿Con medialuna o tostada?");
   assertEquals(k, ["dale", "café", "medialuna", "tostada", "quiero", "llamás", "me llamo", "por favor", "Mate"]);
+  // A name in a key phrase is a model, not what she'll say: it isn't boosted.
+  const intro = { ...scene, keyterms: [], words: [], key_phrases: [{ es: "Me llamo Sam, ¿y vos?", en: "", audio: null }] };
+  assertEquals(sttKeyterms(topicOf("unit", "u", "A1", intro), "A1"), ["llamo"]);
   // A free chat has only his line to go by.
   assertEquals(sttKeyterms(topicOf("free", null, "B1"), "B1", "¿Y qué hacés los fines de semana?"), ["hacés", "fines", "semana"]);
   assertEquals(sttKeyterms(topicOf("free", null, "B1"), "B1"), []);
@@ -273,4 +277,17 @@ Deno.test("unsure words: the ones Scribe guessed at, and the ones the plain hear
   assertEquals(unsureWords(heard("Quiero café"), null), []);
   // Thinking sounds are never the question.
   assertEquals(unsureWords(heard("Eh, quiero café", [-1.5, -0.1, -0.1]), null), []);
+});
+
+Deno.test("a goodbye without the marker: the last sentence takes leave and asks nothing", () => {
+  // Said by Haiku in the 2026-10-20 simulations, with no [FIN].
+  assertEquals(soundsLikeGoodbye("Dale, la próxima me contás más de la señora del pan. ¡Chau, nos vemos!"), true);
+  assertEquals(soundsLikeGoodbye("¡Qué bueno que estás tranquila! Bueno, ¡gracias por charlar conmigo! Chau, ¡hasta luego!"), true);
+  assertEquals(soundsLikeGoodbye("Bueno, me tengo que ir. ¡Un gusto! Nos vemos."), true);
+  // Still talking: a question, or a goodbye that isn't the last sentence.
+  assertEquals(soundsLikeGoodbye("¿Chau? ¿Ya te vas?"), false);
+  assertEquals(soundsLikeGoodbye("Nos vemos el sábado, entonces. ¿A qué hora te paso a buscar?"), false);
+  assertEquals(soundsLikeGoodbye("Chau, nos vemos. Che, antes de irte, ¿querés un café?"), false);
+  assertEquals(soundsLikeGoodbye("¡Qué lindo, te trae pan! ¿Y de qué hablan?"), false);
+  assertEquals(soundsLikeGoodbye(""), false);
 });

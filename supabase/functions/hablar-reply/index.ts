@@ -45,6 +45,7 @@ import {
   clockOf,
   concatBytes,
   exchangeOf,
+  GOODBYE_FROM_EXCHANGE,
   MarkerStripper,
   sessionElapsed,
   GRACE_SECONDS,
@@ -59,6 +60,7 @@ import {
   sessionRow,
   shouldCloseSoon,
   shouldWrapUp,
+  soundsLikeGoodbye,
   synthesize,
   TALK_SPEED,
   tomasVoice,
@@ -81,7 +83,7 @@ import {
   unsureNote,
   WRAP_UP_NOTE,
 } from "../_shared/hablar-prompt.ts";
-import { Anthropic, MODEL, plain } from "../_shared/hablar-claude.ts";
+import { Anthropic, MODEL, plain, REPLY_MODEL, REPLY_THINKING } from "../_shared/hablar-claude.ts";
 import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
 const HISTORY_TURNS = 20;
@@ -280,11 +282,11 @@ async function runTurn(opts: {
   const t0 = Date.now();
   try {
     const stream = client.messages.stream({
-      model: MODEL,
+      model: REPLY_MODEL,
       // Backstop for the prompt's 40-word limit (~70–80 tokens of Spanish).
       max_tokens: 200,
       // deno-lint-ignore no-explicit-any
-      ...({ thinking: { type: "disabled" }, output_config: { effort: "low" } } as any),
+      ...({ thinking: REPLY_THINKING, output_config: { effort: "low" } } as any),
       system,
       messages,
     });
@@ -293,7 +295,7 @@ async function runTurn(opts: {
     }
     take(endMark.flush());
     const final = await stream.finalMessage();
-    usage.push(claudeUsage({ conversation_id: session.id, turn_id: tomasId, model: MODEL, stage: "reply", ms: Date.now() - t0 }, final.usage));
+    usage.push(claudeUsage({ conversation_id: session.id, turn_id: tomasId, model: REPLY_MODEL, stage: "reply", ms: Date.now() - t0 }, final.usage));
     const rest = splitter.flush();
     if (rest) enqueue(rest);
   } catch (err) {
@@ -316,7 +318,10 @@ async function runTurn(opts: {
   const text = sentences.join(" ");
   const clips = audio.filter((a): a is Uint8Array<ArrayBuffer> => !!a);
   const audioPath = clips.length ? `${opts.userId}/${session.id}/${user.id}-tomas.mp3` : null;
-  const ended = wrapUp || endMark.found || sessionElapsed(session) >= clockOf(session.level).stop;
+  // A goodbye that forgot the marker ends the chat too, once it has had a few exchanges.
+  const goodbye = !endMark.found && exchange >= GOODBYE_FROM_EXCHANGE && soundsLikeGoodbye(replyText);
+  if (goodbye) console.log("goodbye without marker", { conversation: session.id, exchange });
+  const ended = wrapUp || endMark.found || goodbye || sessionElapsed(session) >= clockOf(session.level).stop;
 
   const { error: insertErr } = await db.from("conversation_turns").insert({
     id: tomasId,

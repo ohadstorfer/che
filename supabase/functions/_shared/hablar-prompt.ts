@@ -326,7 +326,9 @@ export const TRANSLATE_SCHEMA = {
 // ---------------------------------------------------------------------------
 
 export const SUMMARY_SYSTEM = `You write one small part of the end-of-chat summary for a learner of Argentine (rioplatense) Spanish who just talked with Pancho, a porteño. Be concrete — generic summaries are what learners hate most.
-- went_well: one line in English, at most 20 words, naming something specific the learner did well, quoting their Spanish in *asterisks* (e.g. "You used *querés* and *tenés* correctly."). Only quote words the learner said correctly and in the vos form — never a line that was corrected, never a tú form. If they said almost nothing, encourage them to say more next time, kindly.`;
+- went_well: one line in English, at most 20 words, naming something specific the learner did well in THIS conversation, quoting their own Spanish in *asterisks* — words they actually said, copied from their lines. Only quote words they said correctly — never a line that was corrected, never a tú form.
+- It is praise only: no advice, no "next time", no "try…", and nothing about grammar the learner didn't use. Name what they did, as plainly as it happened (they answered with whole sentences, said who their family is, ordered for themselves).
+- If they said almost nothing, encourage them to say a little more next time, kindly — the only case where you look ahead.`;
 
 export const SUMMARY_SCHEMA = {
   type: "object",

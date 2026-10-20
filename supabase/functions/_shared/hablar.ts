@@ -336,7 +336,7 @@ export function sttKeyterms(topic: Topic | null, _level: Band, tomasBefore?: str
   const scene = topic?.scenario;
   const candidates = [
     ...wordsOf(tomasBefore ?? ""),
-    ...(scene?.key_phrases ?? []).flatMap((p) => wordsOf(p.es)),
+    ...(scene?.key_phrases ?? []).flatMap((p) => phraseWords(p.es)),
     ...(scene?.keyterms ?? topic?.culture?.opener.keyterms ?? []),
     ...(scene?.words ?? []),
   ];
@@ -385,6 +385,17 @@ const SPANISH = new Set(
     "cuándo donde dónde quién cuál cuánto este esta esto ese esa eso acá allá ahora hoy ayer mañana también tampoco ya todo " +
     "nada algo mucho poco bueno dale che claro entiendo sé no me ok okay uno dos tres cuatro cinco seis diez").split(" "),
 );
+/**
+ * A key phrase's words, without the names in it: a phrase like "Me llamo Sam,
+ * ¿y vos?" is a model, and boosting "Sam" made Scribe hear "soy Ohad" as
+ * "sum sam ohad" (2026-10-20). A name is a capitalised word that doesn't open
+ * the phrase.
+ */
+const phraseWords = (text: string) =>
+  (text.normalize("NFC").replace(/’/g, "'").match(/[\p{L}']+/gu) ?? [])
+    .filter((w, i) => i === 0 || w[0] === w[0].toLowerCase())
+    .map((w) => w.toLowerCase());
+
 const wordsOf = (text: string) => text.normalize("NFC").toLowerCase().replace(/’/g, "'").match(/[\p{L}']+/gu) ?? [];
 
 /** Is the line English? At least half its words are plainly English, and more of them than are plainly Spanish. */
@@ -878,6 +889,22 @@ export function concatBytes(parts: Uint8Array[]): Uint8Array<ArrayBuffer> {
 // ---------------------------------------------------------------------------
 // End marker: Pancho ends his goodbye with it; it is never shown or spoken.
 // ---------------------------------------------------------------------------
+
+/** Her lines before a goodbye without the marker counts as the end (no "chau" in the first exchanges). */
+export const GOODBYE_FROM_EXCHANGE = 3;
+
+/**
+ * Pancho said goodbye but forgot the END_MARKER: the reply's last sentence
+ * takes leave (chau, nos vemos, hasta luego…) and asks nothing. Left alone,
+ * the chat would go on past his goodbye.
+ */
+export function soundsLikeGoodbye(reply: string): boolean {
+  const text = reply.trim();
+  if (!text || text.endsWith("?")) return false;
+  const sentences = text.split(/(?<=[.!?…])\s+/).filter(Boolean);
+  const last = sentences[sentences.length - 1] ?? "";
+  return /\b(chau|nos vemos|hasta luego|hasta la próxima|hasta mañana|nos hablamos)\b/i.test(last);
+}
 
 /**
  * Takes the streamed reply a delta at a time and passes on everything but the

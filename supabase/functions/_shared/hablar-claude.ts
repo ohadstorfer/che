@@ -9,6 +9,18 @@ export { Anthropic };
 // and the ones that sit in front of the learner turn thinking off. It also
 // refuses temperature/top_p and an assistant prefill, so none is sent.
 export const MODEL = "claude-haiku-5-5";
+// A unit's scene is written once and kept for every learner after, so it is
+// written and checked by the strongest model: one bad scene spoils every chat
+// played on it.
+export const SCENE_MODEL = "claude-opus-5-5";
+// What Pancho says, turn by turn. On Haiku he repeated questions, slipped
+// above the level and sounded stiff; in a blind comparison of ten chats
+// (2026-10-20) Sonnet had a third of the problems for ~$0.015 more a chat.
+// Corrections, hints and the summary stay on MODEL.
+export const REPLY_MODEL = "claude-sonnet-5-5";
+// Sonnet 5.5 refuses thinking "disabled": "between_tools" is how it answers
+// without thinking first (allowed at effort high or below).
+export const REPLY_THINKING = { type: "between_tools" };
 const LOW_EFFORT = { effort: "low" };
 
 export type CallUsage = {
@@ -24,14 +36,21 @@ export const cachedSystem = (text: string) => [{ type: "text" as const, text, ca
 /** One JSON object that matches `schema`, or null (refusal, cut off, or unparseable). */
 export async function structured<T>(
   client: Anthropic,
-  opts: { system: string; schema: Record<string, unknown>; input: string; maxTokens?: number },
+  opts: {
+    system: string;
+    schema: Record<string, unknown>;
+    input: string;
+    maxTokens?: number;
+    model?: string;
+    effort?: "low" | "medium" | "high";
+  },
 ): Promise<{ value: T | null; usage: CallUsage | undefined; ms: number }> {
   const t0 = Date.now();
   const response = await client.messages.create({
-    model: MODEL,
+    model: opts.model ?? MODEL,
     max_tokens: opts.maxTokens ?? 2000,
     // deno-lint-ignore no-explicit-any
-    ...({ output_config: { ...LOW_EFFORT, format: { type: "json_schema", schema: opts.schema } } } as any),
+    ...({ output_config: { effort: opts.effort ?? LOW_EFFORT.effort, format: { type: "json_schema", schema: opts.schema } } } as any),
     system: cachedSystem(opts.system),
     messages: [{ role: "user", content: opts.input }],
   });
