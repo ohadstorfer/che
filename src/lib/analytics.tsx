@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Application from 'expo-application';
 import { usePathname } from 'expo-router';
 import { PostHogMaskView, PostHogProvider, usePostHog } from 'posthog-react-native';
 import { type ReactNode, useEffect } from 'react';
@@ -72,5 +74,41 @@ export function AnalyticsTracker() {
     if (ENABLED) posthog.screen(pathname);
   }, [posthog, pathname]);
 
+  // Where she installed from, once, after she is known (see installSource).
+  useEffect(() => {
+    if (ENABLED && !loading && userId) void sendInstallSource(posthog);
+  }, [posthog, userId, loading]);
+
   return null;
+}
+
+const SOURCE_SENT = 'posta.install-source-sent';
+const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'] as const;
+
+/**
+ * Android only: the Play install referrer carries the utm_* of the link she
+ * came through (postaspanish.com/get passes them on, see posta-site/get).
+ * Sent once per install as `install_source`, and kept on her person as the
+ * first touch ($set_once), so every later event can be split by channel.
+ * A plain Play search reads utm_source=google-play&utm_medium=organic.
+ * iOS gives an app nothing like it: App Store Connect counts those campaigns.
+ */
+async function sendInstallSource(posthog: ReturnType<typeof usePostHog>) {
+  if (Platform.OS !== 'android') return;
+  try {
+    if (await AsyncStorage.getItem(SOURCE_SENT)) return;
+    const raw = await Application.getInstallReferrerAsync();
+    const params = new URLSearchParams(raw);
+    const tags: Record<string, string> = {};
+    for (const key of UTM_KEYS) {
+      const value = params.get(key);
+      if (value) tags[key] = value.slice(0, 80);
+    }
+    const first = Object.fromEntries(Object.entries(tags).map(([k, v]) => [`initial_${k}`, v]));
+    posthog.capture('install_source', { ...tags, referrer: raw.slice(0, 200), $set_once: first });
+    await AsyncStorage.setItem(SOURCE_SENT, '1');
+  } catch {
+    // No referrer (sideloaded, an emulator without Play): nothing to send, and
+    // asked again next launch.
+  }
 }
