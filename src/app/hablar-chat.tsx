@@ -15,8 +15,10 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  useWindowDimensions,
   View,
 } from 'react-native';
+import Reanimated, { Easing as REasing, FadeIn } from 'react-native-reanimated';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { useVideoPlayer, VideoView } from 'expo-video';
@@ -160,6 +162,7 @@ const POUR_FROM = 3.5;
 export default function HablarChat() {
   useStatusBarColor(colors.primary);
   const insets = useSafeAreaInsets();
+  const { height: windowHeight } = useWindowDimensions();
   const { session: sessionParam } = useLocalSearchParams<{
     session?: string;
   }>();
@@ -610,6 +613,8 @@ export default function HablarChat() {
         // Sent: the next recording is a new turn, not a re-record of this one.
         reRecordTurn.current = null;
         askedAgain.current = false;
+        // The hint was for the line she just answered (sendTurn clears it the same way).
+        setHintState({ data: null, level: 0, loading: false });
         addTurn(turnId, text);
         setPhase('waiting');
       },
@@ -868,9 +873,12 @@ export default function HablarChat() {
   }
 
   const current = [...messages].reverse().find((m): m is PanchoMsg => m.role === 'tomas');
-  const thinking = phase === 'waiting' || (phase === 'streaming' && !current?.text);
+  // His line shows once it is whole: centered text that grows as it streams re-centers under the eye.
+  const thinking = phase === 'waiting' || (phase === 'streaming' && !!current?.streaming);
   const currentPlaying = current && playing?.key === current.key;
   const currentEn = current && showEn.has(current.key) ? current.textEn : null;
+  const artSize = windowHeight < 750 ? 200 : 240;
+  const artTop = Math.round(Math.min(96, Math.max(12, windowHeight * 0.08)));
 
   return (
     <SafeAreaView style={[styles.safe, styles.callBg]} edges={['top', 'left', 'right']}>
@@ -899,9 +907,10 @@ export default function HablarChat() {
           <View style={styles.headerIcon} />
         </View>
 
-        <View style={styles.stage}>
+        {/* Pancho sits at a fixed height: whatever the line, card or dock below does, he never moves. */}
+        <View style={[styles.stage, { paddingTop: artTop }]}>
           <Talking active={!!currentPlaying || phase === 'streaming'}>
-            <CallPancho busy={panchoTurn} />
+            <CallPancho busy={panchoTurn} size={artSize} />
           </Talking>
 
           <ScrollView
@@ -914,9 +923,7 @@ export default function HablarChat() {
               </View>
             ) : current ? (
               <Appear key={current.key}>
-                <Text style={styles.line} accessibilityLiveRegion="polite">
-                  {current.text}
-                </Text>
+                <FlowLine text={current.text} />
                 {current.failed ? <Text style={styles.lineSub}>The connection dropped.</Text> : null}
                 {currentEn ? <Text style={styles.lineSub}>{currentEn}</Text> : null}
               </Appear>
@@ -1164,10 +1171,33 @@ function Appear({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * Pancho's line, word by word: a quick stagger of fades over the finished
+ * text, so the layout is final before anything shows and no word moves.
+ */
+function FlowLine({ text }: { text: string }) {
+  const reduced = useReducedMotion();
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  // About a second end to end, however long the line.
+  const step = Math.min(45, 900 / Math.max(1, words.length));
+  return (
+    <View style={styles.flow} accessible accessibilityLabel={text} accessibilityLiveRegion="polite">
+      {words.map((w, i) => (
+        <Reanimated.Text
+          key={i}
+          entering={reduced ? undefined : FadeIn.delay(Math.round(i * step)).duration(220).easing(REasing.bezier(0.23, 1, 0.32, 1))}
+          style={styles.line}>
+          {w}
+        </Reanimated.Text>
+      ))}
+    </View>
+  );
+}
+
 /** Pancho sipping and pouring on her turn. On his (thinking or speaking) the
  *  clip runs on to the next resting pose and stops there, so he never pours
  *  while he talks. */
-function CallPancho({ busy }: { busy: boolean }) {
+function CallPancho({ busy, size }: { busy: boolean; size: number }) {
   const reduced = useReducedMotion();
   const player = useVideoPlayer(CALL_CLIP, (p) => {
     p.muted = true;
@@ -1202,7 +1232,7 @@ function CallPancho({ busy }: { busy: boolean }) {
   }, [player]);
 
   return (
-    <View style={styles.callArt} accessible accessibilityRole="image" accessibilityLabel="Pancho, drinking mate">
+    <View style={{ width: size, height: size }} accessible accessibilityRole="image" accessibilityLabel="Pancho, drinking mate">
       {/* The still sits underneath until the first frame is up. */}
       <Image source={CALL_STILL} style={StyleSheet.absoluteFill} contentFit="contain" />
       <VideoView
@@ -1395,9 +1425,9 @@ const styles = StyleSheet.create({
   callBg: { backgroundColor: colors.primary },
   call: { flex: 1, maxWidth: 640, width: '100%', alignSelf: 'center' },
   callLabel: { ...font.body[700], fontSize: 13, color: colors.onPrimary, opacity: 0.75, textAlign: 'center' },
-  stage: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 24, paddingBottom: 24, gap: 14 },
-  callArt: { width: 240, height: 240 },
-  lineScroll: { flexGrow: 0, maxHeight: 220, alignSelf: 'stretch' },
+  stage: { flex: 1, alignItems: 'center', paddingHorizontal: 24, paddingBottom: 16, gap: 14 },
+  lineScroll: { flexGrow: 0, flexShrink: 1, alignSelf: 'stretch' },
+  flow: { alignSelf: 'stretch', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 6 },
   lineWrap: { alignItems: 'center', paddingVertical: 4 },
   line: {
     ...font.display[800],
