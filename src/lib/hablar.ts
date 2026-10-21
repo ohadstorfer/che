@@ -140,6 +140,8 @@ export interface StartResult {
 
 /** The feedback event on a learner turn (§3.2). */
 export interface Feedback {
+  /** Her line as graded: the transcript, with her own forms where the speech hints had smoothed them. */
+  heard?: string;
   has_error: boolean;
   /** What she is told. Missing on turns stored before it existed: read it with `verdictOf`. */
   verdict?: Verdict;
@@ -213,7 +215,8 @@ export interface ReplyHandlers {
   onText: (seq: number, delta: string) => void;
   /** The rioplatense guard rewrote part of an already-shown sentence: replace `from` with `to`. */
   onTextFix: (seq: number, from: string, to: string) => void;
-  onAudio: (seq: number, mp3Base64: string) => void;
+  /** One sentence's voice, with the sentence it says. */
+  onAudio: (seq: number, mp3Base64: string, text: string) => void;
   onDone: (done: DoneEvent) => void;
   /** stage 'claude' + retry → call reply again with the same turn_id; 'tts' is soft. */
   onError: (err: { stage: string; retry: boolean; seq?: number }) => void;
@@ -523,7 +526,7 @@ async function streamWith(
         on.onTextFix(Number(payload.seq ?? 0), String(payload.from ?? ''), String(payload.to ?? ''));
         break;
       case 'audio':
-        on.onAudio(Number(payload.seq ?? 0), String(payload.mp3 ?? ''));
+        on.onAudio(Number(payload.seq ?? 0), String(payload.mp3 ?? ''), String(payload.text ?? ''));
         break;
       case 'done':
         on.onDone(payload as unknown as DoneEvent);
@@ -626,8 +629,8 @@ export interface TurnRow {
   text_en: string | null;
   audio_path: string | null;
   feedback: Feedback | null;
-  /** The opener carries `{ opener: true, audio_url }`. */
-  meta?: { opener?: boolean; audio_url?: string | null } | null;
+  /** The opener carries `{ opener: true, audio_url }`; the reply that closed the chat, `ended: true`. */
+  meta?: { opener?: boolean; audio_url?: string | null; ended?: boolean } | null;
 }
 
 const CONVERSATION_COLS =
@@ -742,10 +745,10 @@ export function hoursToMidnight(now = new Date()): number {
  * (CLOCK). Chats are measured in lines now and the app shows no timer, but a
  * chat loaded back from the tables still locks the mic when it runs out.
  */
-export const chatSeconds = (_level: string | null | undefined) => 600;
+export const CHAT_SECONDS = 600;
 /** The hard stop, plus whatever time the clock was stopped (the app in the background, Pancho's turn). */
 export const deadlineOf = (c: ConversationRow) =>
-  new Date(new Date(c.started_at).getTime() + (chatSeconds(c.level) + (c.paused_seconds ?? 0)) * 1000).toISOString();
+  new Date(new Date(c.started_at).getTime() + (CHAT_SECONDS + (c.paused_seconds ?? 0)) * 1000).toISOString();
 
 /** A human title for a conversation, for History and the summary header. */
 export function conversationTitle(kind: HablarKind, topicId: string | null | undefined, title?: string | null): string {

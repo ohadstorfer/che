@@ -66,6 +66,7 @@ import {
   checkClip,
   MAX_RECORD_MS,
   nowPlaying,
+  onSentence,
   play,
   playSlow,
   prime,
@@ -78,6 +79,7 @@ import {
   whenIdle,
 } from '@/lib/hablar-audio';
 import { tap } from '@/lib/haptics';
+import { goBack } from '@/lib/nav';
 import { usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, pastel, press, radius } from '@/lib/theme';
@@ -176,8 +178,7 @@ export default function HablarChat() {
   const messagesRef = useRef(messages);
   messagesRef.current = messages;
   const [draft, setDraft] = useState<{ turnId: string; text: string } | null>(null);
-  /** Writing instead of speaking — the only way in where the mic can't record. */
-  /** Voice only: typing is just for a build that can't record. */
+  /** Writing instead of speaking: the call is voice only, so just for a build that can't record. */
   const typing = !canRecord;
   const [typed, setTyped] = useState('');
   const [title, setTitle] = useState<{ text: string; role: string | null }>({
@@ -187,7 +188,7 @@ export default function HablarChat() {
   const [deadline, setDeadline] = useState<number>(0);
   /** Staff chat: no clock (deadline stays 0) and no day's count. */
   const [unlimited, setUnlimited] = useState(false);
-  /** What kind of chat this is: a unit chat has no line count. Unknown until boot. */
+  /** What kind of chat this is (every kind takes eight lines). Unknown until boot. */
   const [kind, setKind] = useState<HablarKind | null>(null);
   /** The day's chats left (Course and Speaking together), shown once the chat is over; null where it doesn't apply. */
   const [chatsLeft, setChatsLeft] = useState<number | null>(null);
@@ -214,6 +215,18 @@ export default function HablarChat() {
   >(null);
 
   const playing = usePlaying();
+  /**
+   * A reply's text follows its voice: while it is spoken as it streams, only
+   * the sentences he has started saying show (upTo -1: none yet, so he is
+   * still thinking). Null once he's done or stopped: the whole line shows.
+   */
+  const [voiced, setVoiced] = useState<{ key: string; upTo: number } | null>(null);
+  /** Each streamed reply's sentences, as their voice arrived. */
+  const sentences = useRef(new Map<string, string[]>());
+  useEffect(() => {
+    onSentence((key, seq) => setVoiced((v) => (seq !== null ? { key, upTo: seq } : v?.key === key ? null : v)));
+    return () => onSentence(null);
+  }, []);
   /**
    * The recording in progress. The button turns to "recording" on the tap
    * itself; the recorder catches up a moment later (`rec` stays null until
@@ -319,8 +332,24 @@ export default function HablarChat() {
           });
         }
       });
-      setMessages(msgs);
+      // Pancho said goodbye and the app closed before the summary: the chat is
+      // over (the server takes no more lines), so it opens on "See summary".
+      const lastTomas = [...turns].reverse().find((t) => t.role === 'tomas');
+      if (lastTomas?.meta?.ended) {
+        setMessages(msgs);
+        return setPhase('ended');
+      }
       setDraft(pendingDraft);
+      // Her last line went up but Pancho never answered it (the app or the
+      // server went mid-turn): it shows as a dropped answer, and "Try again"
+      // asks the server for it, which answers a sent line that has no reply.
+      const lastSent = [...turns].reverse().find((t) => t.status !== 'draft');
+      if (lastSent?.role === 'user') {
+        msgs.push({ role: 'tomas', key: `${lastSent.id}-tomas`, userTurnId: lastSent.id, text: '', failed: true });
+        setMessages(msgs);
+        return setPhase('retry');
+      }
+      setMessages(msgs);
       setPhase(pendingDraft ? 'draft' : 'idle');
     })();
     return () => {
@@ -419,8 +448,6 @@ export default function HablarChat() {
     const id = setTimeout(() => setTimeUp(true), left);
     return () => clearTimeout(id);
   }, [deadline, heldAt]);
-
-  // Keep the newest message in view.
 
   // --- finishing ----------------------------------------------------------------
   const finishing = useRef(false);
@@ -599,6 +626,8 @@ export default function HablarChat() {
       setPhase(d.ended ? 'ended' : 'idle');
     };
     streamStart(tkey);
+    sentences.current.set(tkey, []);
+    setVoiced({ key: tkey, upTo: -1 });
     if (heard) patch(tkey, (m) => ({ ...m, text: '', streaming: true, failed: false }) as PanchoMsg);
     // A recording shows "listening" until its transcript is back; anything else is already in the thread.
     if (!line || !('clip' in line)) setPhase('waiting');
@@ -636,7 +665,11 @@ export default function HablarChat() {
               };
         });
       },
-      onAudio: (seq: number, mp3: string) => streamChunk(tkey, seq, mp3),
+      onAudio: (seq: number, mp3: string, text: string) => {
+        const said = sentences.current.get(tkey);
+        if (said) said[seq] = text;
+        streamChunk(tkey, seq, mp3);
+      },
       onDone: (d: DoneEvent) => {
         done = d;
         flushText();
@@ -873,9 +906,16 @@ export default function HablarChat() {
   }
 
   const current = [...messages].reverse().find((m): m is PanchoMsg => m.role === 'tomas');
-  // His line shows once it is whole: centered text that grows as it streams re-centers under the eye.
-  const thinking = phase === 'waiting' || (phase === 'streaming' && !!current?.streaming);
+  // His line shows as he says it, a sentence at a time, so she can read along;
+  // the words still being written wait for their voice.
+  const live = !!current && voiced?.key === current.key;
+  const shownText = live
+    ? (sentences.current.get(current.key) ?? []).slice(0, voiced.upTo + 1).filter(Boolean).join(' ')
+    : (current?.text ?? '');
+  const thinking = phase === 'waiting' || (live && !shownText);
   const currentPlaying = current && playing?.key === current.key;
+  const playingSlow = !!currentPlaying && !!playing?.slow;
+  const playingNormal = !!currentPlaying && !playing?.slow;
   const currentEn = current && showEn.has(current.key) ? current.textEn : null;
   const artSize = windowHeight < 750 ? 200 : 240;
   const artTop = Math.round(Math.min(96, Math.max(12, windowHeight * 0.08)));
@@ -887,8 +927,9 @@ export default function HablarChat() {
       {/* The call: Pancho, big, and only what he just said. */}
       <View style={styles.call}>
         <View style={styles.header}>
+          {/* Back leaves the call open (Speaking offers Resume); ending it is the red button. A call that is over goes to its summary. */}
           <Pressable
-            onPress={() => setSheet({ kind: 'end' })}
+            onPress={() => (over ? void finish('time') : goBack(kind === 'unit' ? '/home' : '/hablar'))}
             hitSlop={4}
             accessibilityRole="button"
             accessibilityLabel="Back"
@@ -923,7 +964,7 @@ export default function HablarChat() {
               </View>
             ) : current ? (
               <Appear key={current.key}>
-                <FlowLine text={current.text} />
+                <FlowLine text={shownText} />
                 {current.failed ? <Text style={styles.lineSub}>The connection dropped.</Text> : null}
                 {currentEn ? <Text style={styles.lineSub}>{currentEn}</Text> : null}
               </Appear>
@@ -933,10 +974,16 @@ export default function HablarChat() {
           {current && !current.streaming && !current.failed && !thinking ? (
             <View style={styles.lineTools}>
               <CallPill
-                icon={currentPlaying ? 'stop' : 'replay'}
-                label={currentPlaying ? 'Stop' : 'Replay'}
-                active={!!currentPlaying}
+                icon={playingNormal ? 'stop' : 'replay'}
+                label={playingNormal ? 'Stop' : 'Replay'}
+                active={playingNormal}
                 onPress={() => void onPlay(current, false)}
+              />
+              <CallPill
+                icon={playingSlow ? 'stop' : 'tortoise'}
+                label={playingSlow ? 'Stop' : 'Slow'}
+                active={playingSlow}
+                onPress={() => void onPlay(current, true)}
               />
               <CallPill
                 icon="translate"
@@ -1024,7 +1071,7 @@ export default function HablarChat() {
         ) : over ? (
           <View style={styles.barStack}>
             <Text style={styles.caption}>
-              {timeUp && phase !== 'ended' && !outOfLines ? "Time's up." : 'Pancho ended the call.'}
+              {timeUp && phase !== 'ended' && !outOfLines ? 'The call is over.' : 'Pancho ended the call.'}
             </Text>
             <Button title="See summary" loading={phase === 'ending'} onPress={() => void finish('time')} />
             {chatsLeft !== null ? (
@@ -1122,7 +1169,7 @@ export default function HablarChat() {
 
       </KeyboardAvoidingView>
 
-      {/* Volver / ⋮ → end */}
+      {/* The End button → end */}
       <Sheet open={sheet?.kind === 'end'} onClose={() => setSheet(null)} title="End the call?">
         <Text style={styles.sheetBody}>
           {unlimited
@@ -1178,14 +1225,20 @@ function Appear({ children }: { children: React.ReactNode }) {
 function FlowLine({ text }: { text: string }) {
   const reduced = useReducedMotion();
   const words = text.trim().split(/\s+/).filter(Boolean);
-  // About a second end to end, however long the line.
-  const step = Math.min(45, 900 / Math.max(1, words.length));
+  // The words already on screen stay put; a sentence that joins them fades in from its own first word.
+  const shown = useRef(0);
+  const from = Math.min(shown.current, words.length);
+  useEffect(() => {
+    shown.current = words.length;
+  });
+  // About a second end to end, however long the sentence.
+  const step = Math.min(45, 900 / Math.max(1, words.length - from));
   return (
     <View style={styles.flow} accessible accessibilityLabel={text} accessibilityLiveRegion="polite">
       {words.map((w, i) => (
         <Reanimated.Text
           key={i}
-          entering={reduced ? undefined : FadeIn.delay(Math.round(i * step)).duration(220).easing(REasing.bezier(0.23, 1, 0.32, 1))}
+          entering={reduced ? undefined : FadeIn.delay(Math.round(Math.max(0, i - from) * step)).duration(220).easing(REasing.bezier(0.23, 1, 0.32, 1))}
           style={styles.line}>
           {w}
         </Reanimated.Text>
@@ -1383,14 +1436,16 @@ function FullMessage({
 }
 
 /** The waveform and seconds while she records. Its own component: it redraws
- *  12 times a second, and the whole chat used to redraw with it. */
+ *  12 times a second, and the whole chat used to redraw with it. The last
+ *  seconds before the recorder sends by itself count down, with a tap on the
+ *  first, so the cut never comes as a surprise. */
 function RecordingMeter({ since, level }: { since: number; level: () => number }) {
-  const [seconds, setSeconds] = useState(0);
+  const [elapsed, setElapsed] = useState(0);
   const [levels, setLevels] = useState<number[]>(() => Array(WAVE_BARS).fill(0));
   const read = useRef(level);
   read.current = level;
   useEffect(() => {
-    const id = setInterval(() => setSeconds(Math.floor((Date.now() - since) / 1000)), 250);
+    const id = setInterval(() => setElapsed(Date.now() - since), 250);
     const wave = setInterval(() => {
       const l = read.current();
       setLevels((ls) => [...ls.slice(1), l]);
@@ -1400,6 +1455,11 @@ function RecordingMeter({ since, level }: { since: number; level: () => number }
       clearInterval(wave);
     };
   }, [since]);
+  const left = Math.max(0, Math.ceil((MAX_RECORD_MS - elapsed) / 1000));
+  const closing = left <= COUNTDOWN_S;
+  useEffect(() => {
+    if (closing) tap();
+  }, [closing]);
   return (
     <View style={styles.recRow}>
       <View style={styles.wave} accessible={false}>
@@ -1407,10 +1467,17 @@ function RecordingMeter({ since, level }: { since: number; level: () => number }
           <View key={i} style={[styles.waveBar, { height: 4 + l * 20 }]} />
         ))}
       </View>
-      <Text style={[styles.caption, { color: colors.dangerInk }]}>{fmt(seconds * 1000)} · tap to send</Text>
+      <Text
+        style={[styles.caption, { color: colors.dangerInk, fontVariant: ['tabular-nums'] }]}
+        accessibilityLiveRegion={closing ? 'polite' : 'none'}>
+        {closing ? `Sending in ${left}s · tap to send now` : `${fmt(Math.floor(elapsed / 1000) * 1000)} · tap to send`}
+      </Text>
     </View>
   );
 }
+
+/** The last seconds of a recording, counted down before it sends itself. */
+const COUNTDOWN_S = 5;
 
 function fmt(ms: number) {
   const s = Math.ceil(ms / 1000);

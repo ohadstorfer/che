@@ -137,8 +137,14 @@ Deno.serve(async (req) => {
     return json({ starter: value.starter.replace(/[\s.…]+$/, ""), full: value.full, full_en: value.full_en, hints_left: MAX_HINTS - counted.hints_used });
   } catch (err) {
     console.error("hint failed", err);
-    // Not her fault: give the hint back.
-    await db.from("conversations").update({ hints_used: session.hints_used }).eq("id", session.id);
+    // Not her fault: give the hint back, and take this turn off hint_turns so
+    // it doesn't count toward Pancho simplifying. Only while the count is
+    // still the one taken here: if another hint was counted since, leave it.
+    await db
+      .from("conversations")
+      .update({ hints_used: session.hints_used, hint_turns: session.hint_turns })
+      .eq("id", session.id)
+      .eq("hints_used", counted.hints_used);
     return json({ error: "no hint", retry: true }, { status: 502 });
   }
 });

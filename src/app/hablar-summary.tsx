@@ -20,6 +20,7 @@ import {
   signedHablarUrl,
   summaryCache,
   type TurnRow,
+  verdictOf,
   wordDiff,
 } from '@/lib/hablar';
 import { play, stopAll, usePlaying } from '@/lib/hablar-audio';
@@ -30,8 +31,10 @@ import { clay, colors, font, pastel, pastelGrad, radius } from '@/lib/theme';
 // ---------------------------------------------------------------------------
 // The summary (§2.5), and History's view of an old chat. Generic summaries are
 // the top complaint about these apps, so this one is concrete and short:
-// the top corrections (each with Decilo) and one
-// specific line on what went well. The full transcript folds away below.
+// the top corrections (each with Decilo), the lines that were right but not
+// how it's said here (English, tú, a word from Spain: the Argentine way, with
+// Decilo too), and one specific line on what went well. The full transcript
+// folds away below.
 // ---------------------------------------------------------------------------
 
 export default function HablarSummaryScreen() {
@@ -66,7 +69,12 @@ export default function HablarSummaryScreen() {
       setConversation(c);
       setTurns(t);
       let s = summary ?? c.summary;
-      if (!s) s = await end({ session_id: c.id, reason: 'time' }).catch(() => null);
+      if (!s) {
+        s = await end({ session_id: c.id, reason: 'time' }).catch(() => null);
+        // Closing it graded her lines: read them again for the Argentine way.
+        const graded = s ? await loadConversation(c.id).catch(() => null) : null;
+        if (alive && graded) setTurns(graded.turns);
+      }
       if (!alive) return;
       if (!s) return setState('offline');
       setSummary(s);
@@ -139,6 +147,13 @@ export default function HablarSummaryScreen() {
   const s = summary ?? {};
 
   const corrections = (s.corrections ?? []).slice(0, 3);
+  // Right, but not how it's said here: an English line, a tú form, a word from Spain.
+  const fixed = new Set(corrections.map((c) => c.turn_id));
+  const notes = turns
+    .filter((t) => t.role === 'user' && t.status !== 'draft' && !fixed.has(t.id))
+    .flatMap((t) => (t.feedback && verdictOf(t.feedback) === 'note' && t.feedback.better ? [{ said: t.feedback.heard || t.text, ...t.feedback }] : []))
+    .filter((n, i, all) => all.findIndex((m) => m.better === n.better) === i)
+    .slice(0, 3);
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
@@ -179,10 +194,28 @@ export default function HablarSummaryScreen() {
               <View key={i} style={[styles.correction, i > 0 && styles.divider]}>
                 <Diff parts={wordDiff(c.said, c.corrected)} size={17} />
                 {c.why_en ? <Text style={styles.small}>{c.why_en}</Text> : null}
+                {c.better ? (
+                  <Text style={styles.small}>
+                    More natural: <Text style={styles.betterInline}>{c.better}</Text>
+                  </Text>
+                ) : null}
                 <View style={styles.correctionActions}>
                   {c.audio_path ? <PlayClip path={c.audio_path} id={`summary-${i}`} /> : null}
                   {sessionId ? <View style={{ flex: 1 }}><DiloButton sessionId={sessionId} target={c.corrected} /></View> : null}
                 </View>
+              </View>
+            ))}
+          </Card>
+        ) : null}
+
+        {notes.length ? (
+          <Card title="The Argentine way">
+            {notes.map((n, i) => (
+              <View key={i} style={[styles.correction, i > 0 && styles.divider]}>
+                <Text style={styles.small}>You said: {n.said}</Text>
+                <Text style={styles.better}>{n.better}</Text>
+                {n.better_en ? <Text style={styles.small}>{n.better_en}</Text> : null}
+                {sessionId ? <DiloButton sessionId={sessionId} target={n.better} /> : null}
               </View>
             ))}
           </Card>
@@ -218,7 +251,7 @@ export default function HablarSummaryScreen() {
                       </View>
                     ) : (
                       <View key={t.id} style={styles.tUser}>
-                        <Text style={styles.tUserText}>{t.text}</Text>
+                        <Text style={styles.tUserText}>{t.feedback?.heard || t.text}</Text>
                         {t.feedback?.has_error ? (
                           <Text style={styles.tFix}>→ {t.feedback.corrected}</Text>
                         ) : null}
@@ -315,6 +348,8 @@ const styles = StyleSheet.create({
   heroMeta: { ...font.body[800], fontSize: 13, color: colors.onPastel, opacity: 0.8, textAlign: 'center' },
   muted: { ...font.body[600], fontSize: 15, color: colors.muted },
   small: { ...font.body[600], fontSize: 13, lineHeight: 18, color: colors.muted },
+  better: { ...font.body[800], fontSize: 17, lineHeight: 23, color: colors.ink },
+  betterInline: { ...font.body[800], color: colors.ink },
   rewards: { flexDirection: 'row', gap: 8, marginTop: 8 },
   reward: {
     flexDirection: 'row',

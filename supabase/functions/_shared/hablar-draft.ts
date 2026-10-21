@@ -10,14 +10,12 @@ import { json } from "./cors.ts";
 import {
   audioExt,
   background,
-  clockOf,
-  GRACE_SECONDS,
   isSilenceHallucination,
   logUsage,
   looksEnglish,
-  messageCap,
-  sessionElapsed,
+  pastLastLine,
   sttKeyterms,
+  TAB_MESSAGES,
   topicOf,
   transcribe,
   type Env,
@@ -62,27 +60,53 @@ async function sha256(bytes: ArrayBuffer) {
   return [...digest].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+/**
+ * The chat takes no new line: it ended, or it is past its last line's time
+ * (pastLastLine, the bound hablar-reply answers by too). A line already sent
+ * is checked before this, so a retry of it is replayed rather than refused.
+ */
 function closed(session: Session): Response | null {
   if (session.ended_at) return json({ error: "ended" }, { status: 409 });
-  if (sessionElapsed(session) >= clockOf(session.level).stop + GRACE_SECONDS) return json({ error: "time_up" }, { status: 409 });
+  if (pastLastLine(session)) return json({ error: "time_up" }, { status: 409 });
   return null;
 }
 
 /**
- * A chat takes eight lines (messageCap): a ninth is refused
+ * Pancho said goodbye: his latest line closed the chat (`meta.ended`). The chat
+ * only gets its ended_at when the app calls hablar-end, so an app closed during
+ * the goodbye leaves it open; this keeps new lines out all the same. Refused
+ * like a closed chat, so the app goes to the summary.
+ */
+export const panchoEnded = (last: { meta?: Record<string, unknown> | null } | null | undefined): Response | null =>
+  last?.meta?.ended === true ? json({ error: "ended" }, { status: 409 }) : null;
+
+/** Pancho's latest line in the chat, for panchoEnded. */
+export async function lastPanchoLine(db: SupabaseClient, sessionId: string) {
+  const { data } = await db
+    .from("conversation_turns")
+    .select("text, meta")
+    .eq("conversation_id", sessionId)
+    .eq("role", "tomas")
+    .not("idx", "is", null)
+    .order("idx", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  return data as { text: string; meta: Record<string, unknown> | null } | null;
+}
+
+/**
+ * A chat takes eight lines (TAB_MESSAGES): a ninth is refused
  * before anything is heard, with 429 `message_limit`, which the app reads as
  * the chat being over. A re-record of the draft in hand is not a new line.
  */
 export async function overCap(db: SupabaseClient, session: Session): Promise<Response | null> {
-  const cap = messageCap(session);
-  if (cap === null) return null;
   const { count } = await db
     .from("conversation_turns")
     .select("id", { count: "exact", head: true })
     .eq("conversation_id", session.id)
     .eq("role", "user")
     .eq("status", "final");
-  return (count ?? 0) >= cap ? json({ error: "message_limit", limit: cap }, { status: 429 }) : null;
+  return (count ?? 0) >= TAB_MESSAGES ? json({ error: "message_limit", limit: TAB_MESSAGES }, { status: 429 }) : null;
 }
 
 function foreign(existing: TurnRow | null, session: Session): Response | null {
@@ -111,27 +135,26 @@ export async function spokenDraft(opts: {
   doubt?: "ask" | "take";
 }): Promise<DraftOutcome> {
   const { env, db, session, turnId, audio, existing } = opts;
+  const mine = foreign(existing, session);
+  if (mine) return { error: mine };
+  // Sent already: a retry, answered or replayed by hablar-reply. Nothing is
+  // heard again, and a chat that has closed since doesn't refuse it.
+  if (existing?.status === "final") return { turn: existing };
   if (opts.sttCount >= MAX_STT_PER_CHAT) return { error: json({ error: "too many recordings" }, { status: 429 }) };
-  const shut = closed(session) ?? foreign(existing, session) ??
-    (existing?.status === "final" ? null : await overCap(db, session));
+  const shut = closed(session) ?? await overCap(db, session);
   if (shut) return { error: shut };
 
   // What Pancho just said is the best hint of what she says next; read while the clip is.
-  const lastLine = db
-    .from("conversation_turns")
-    .select("text")
-    .eq("conversation_id", session.id)
-    .eq("role", "tomas")
-    .not("idx", "is", null)
-    .order("idx", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const lastLine = lastPanchoLine(db, session.id);
   const bytes = await audio.arrayBuffer();
   const mime = audio.type || "application/octet-stream";
   const ext = audioExt(mime);
   const hash = await sha256(bytes);
-  if (existing && (existing.status === "final" || existing.meta?.audio_sha === hash)) return { turn: existing };
-  const tomasBefore = ((await lastLine).data as { text: string } | null)?.text ?? null;
+  if (existing?.meta?.audio_sha === hash) return { turn: existing };
+  const last = await lastLine;
+  const said = panchoEnded(last);
+  if (said) return { error: said };
+  const tomasBefore = last?.text ?? null;
 
   const t0 = Date.now();
   let text = "";
@@ -140,8 +163,9 @@ export async function spokenDraft(opts: {
   let calls = 1;
   let unclear: boolean | undefined;
   let unsure: string[] | undefined;
+  let plain: string | undefined;
   try {
-    ({ text, audioSeconds, language, calls, unclear, unsure } = await transcribe({
+    ({ text, audioSeconds, language, calls, unclear, unsure, plain } = await transcribe({
       key: env.elevenKey,
       audio: new Blob([bytes], { type: mime }),
       filename: `turn.${ext}`,
@@ -187,11 +211,13 @@ export async function spokenDraft(opts: {
     audio_path: audioPath,
     // `lang: "en"`: she said it in English; hablar-reply tells Pancho and the feedback.
     // `unsure`: words the recogniser may have misheard; hablar-reply keeps them out of the correction.
+    // `plain`: the line heard without the keyterms, where it differs; the grading reads her own forms from it.
     meta: {
       audio_sha: hash,
       audio_seconds: audioSeconds,
       ...(language === "en" ? { lang: "en" } : {}),
       ...(language === "es" && unsure?.length ? { unsure } : {}),
+      ...(language === "es" && plain ? { plain } : {}),
     },
   }).select("*").single();
   if (error || !data) {
@@ -221,14 +247,17 @@ export async function typedDraft(opts: {
   const text = opts.raw.replace(/\s+/g, " ").trim();
   if (!text) return { error: json({ error: "text is empty" }, { status: 400 }) };
   if (text.length > MAX_TYPED_CHARS) return { error: json({ error: "text too long" }, { status: 413 }) };
-  const shut = closed(session) ?? foreign(existing, session);
+  const mine = foreign(existing, session);
+  if (mine) return { error: mine };
+  // Sent already: a retry, answered or replayed by hablar-reply.
+  if (existing?.status === "final") return { turn: existing };
+  const shut = closed(session);
   if (shut) return { error: shut };
-
-  if (existing) {
-    if (existing.status === "final") return { turn: existing };
-  } else {
-    const full = await overCap(db, session);
-    if (full) return { error: full };
+  // Read together: each is a round trip before the line is stored.
+  const [last, full] = await Promise.all([lastPanchoLine(db, session.id), existing ? null : overCap(db, session)]);
+  const said = panchoEnded(last) ?? full;
+  if (said) return { error: said };
+  if (!existing) {
     const { count } = await db
       .from("conversation_turns")
       .select("id", { count: "exact", head: true })

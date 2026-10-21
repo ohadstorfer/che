@@ -116,6 +116,8 @@ interface Clip {
   playing: boolean;
   /** The stream has sent `done`: no more sentences will come. */
   complete: boolean;
+  /** A reply still being spoken as it streams (not a replay): its sentences are announced. */
+  live?: boolean;
 }
 
 const clips = new Map<string, Clip>();
@@ -254,11 +256,13 @@ function pump(key: string) {
   while (clip.bytes.has(clip.next) && clip.bytes.get(clip.next) === null) clip.next += 1;
   const bytes = clip.bytes.get(clip.next);
   if (!bytes) return maybeFinished(key, clip);
+  const seq = clip.next;
   clip.next += 1;
   clip.playing = true;
   void sourceOf([bytes]).then(({ url, release }) => {
     // Overtaken while the file was written: stopAll already let this clip go.
     if (!clip.playing || now?.key !== key) return release();
+    if (clip.live) sentenceListener?.(key, seq);
     void startOn(url, 1, () => {
       release();
       clip.playing = false;
@@ -270,8 +274,24 @@ function pump(key: string) {
 function maybeFinished(key: string, clip: Clip) {
   if (now?.key !== key || now.slow || clip.playing) return;
   if (!clip.complete || clip.bytes.has(clip.next)) return; // more coming, or arrived but not played
+  endLive(key, clip);
   setNow(null);
   onIdle?.();
+}
+
+/**
+ * While a reply streams, its text can follow its voice: this hears the seq of
+ * each sentence as it starts, and `null` once the reply is done or stopped.
+ */
+let sentenceListener: ((key: string, seq: number | null) => void) | null = null;
+export function onSentence(fn: ((key: string, seq: number | null) => void) | null) {
+  sentenceListener = fn;
+}
+
+function endLive(key: string, clip: Clip) {
+  if (!clip.live) return;
+  clip.live = false;
+  sentenceListener?.(key, null);
 }
 
 /** Called once a reply's audio has fully drained (used to leave after the goodbye). */
@@ -291,7 +311,7 @@ function b64ToBytes(b64: string): Uint8Array {
 export function streamStart(key: string): void {
   stopAll();
   clips.delete(key); // a retry replays the whole turn
-  clipFor(key);
+  clipFor(key).live = true;
   setNow({ key, slow: false });
 }
 
@@ -324,7 +344,10 @@ export function streamEnd(key: string): void {
 
 /** Stop and skip whatever is playing. */
 export function stopAll(): void {
-  for (const clip of clips.values()) clip.playing = false;
+  for (const [key, clip] of clips) {
+    clip.playing = false;
+    endLive(key, clip);
+  }
   halt();
   stopAudio();
   if (now) setNow(null);

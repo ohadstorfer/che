@@ -90,9 +90,18 @@ const FIRST_STEPS = `FIRST STEPS — this overrides everything above about how m
 - If they seem lost, offer the two possible answers again, shorter.
 - After four exchanges, say goodbye in two or three words and close the conversation (with the closing marker, as always).`;
 
-/** The per-chat system block: level, then the scene. Stable for the whole chat. */
+/**
+ * The per-chat system block: level, then the scene. Stable for the whole chat.
+ *
+ * A Speaking-tab scenario gives Pancho the place and his role, and its phrases
+ * only as ideas: a list of things to get through made him steer every chat to
+ * them, whatever she wanted to talk about. A unit's scene keeps its goals, as
+ * chances to use what the unit taught, never as a script.
+ */
 export function sessionBlock(opts: {
   level: Band;
+  /** A unit's Speaking lesson (its goals stay, softly), not a Speaking-tab scenario. */
+  unit?: boolean;
   scenario?: Scenario | null;
   culture?: { id: string; opener: CultureOpener } | null;
   opener: string;
@@ -104,10 +113,11 @@ export function sessionBlock(opts: {
   if (opts.scenario) {
     const s = opts.scenario;
     lines.push(
-      `# Scenario: ${s.title_es}\nSetting (what the learner was told): ${s.setting_es}\nYou are ${s.role_es}. Stay in that role and lead the scene from start to finish, one natural step at a time.\n` +
-        `Useful phrases the learner was shown: ${s.key_phrases.map((p) => p.es).join(" / ")}` +
-        (s.goals?.length
-          ? `\nWhat the learner should get to do in this scene: ${s.goals.map((g) => g.es).join(" / ")}. Never read these out or mention them: steer the conversation so each one comes up and the learner has the chance to do it.`
+      `# Scenario: ${s.title_es}\nSetting: ${s.setting_es}\nYou are ${s.role_es}. Stay in that role and lead the scene, one natural step at a time, the way it would really go. ` +
+        `If the learner takes the talk somewhere else, go with them for a while as that person would, then bring it back to the scene when it fits naturally.\n` +
+        `Phrases that fit this scene, as ideas for where it can go, not a script: ${s.key_phrases.map((p) => p.es).join(" / ")}` +
+        (opts.unit && s.goals?.length
+          ? `\nThis scene is a chance for the learner to practise: ${s.goals.map((g) => g.es).join(" / ")}. Treat these as ideas, not a checklist: let each come up when it fits the conversation, never force one, and don't hold the chat open for them. Never read them out or mention them.`
           : "") +
         // A unit's scene: the forms its unit taught — or, in her first days, every word she has.
         (s.first_steps
@@ -164,21 +174,23 @@ Rules for what counts as an error:
 - A line that is correct but unnatural is not an error. Only when it is clearly unnatural (see "unnatural") does the learner get the natural version, in "better".
 - The transcript can mishear. Never correct spelling or sound-alike words (vos/voz, hay/ahí, a ver/haber, hola/ola), numbers written as digits, or names. If one odd word breaks an otherwise fine sentence, assume it was misheard.
 - If the transcript is garbled or empty of real content, set has_error false, verdict "unclear", corrected equal to the line, spans empty, why_en and better empty.
-- The input may list words the recogniser was unsure of: they may not be what the learner said. Never correct one of them and never base a correction on one. If the line only makes sense with a sound-alike word in place of an unsure one ("Pablo francés" after "¿Hablás francés?" is surely "Hablo francés"), grade the rest of the line as usual; if nothing else is wrong, set has_error false and verdict "unclear", corrected equal to the line, spans empty, why_en and better empty.
+- The input may give the line a second time, as heard WITHOUT hints. The recogniser is given words of the scene (Pancho's last line, its phrases) as hints, and they pull the learner's own forms toward those: "tienes" comes out as "tenés", "yo tiene" as "yo tengo". That second line differs from the line only in such words. Where it has the SAME word in another form — another person, tense, number or gender, or the tú form of a vos one (tiene/tengo, tienes/tenés, quieres/querés, tú/vos, trabajo/trabajé, buena/bueno) — that form is what the learner said: put it in "heard" and grade it like any other word. Everything else stays as in the line: a different word altogether (mate/bate, hablo/Pablo), and forms that don't share their stem, which are different words here too (ser/estar, es/está, voy/fui, soy/es). When in doubt, keep the line's word.
+- The input may list words the recogniser was unsure of: they may not be what the learner said. Never correct one of them and never base a correction on one — except a word you took in "heard" from the hearing without hints, by the rule above, which is graded as said. If the line only makes sense with a sound-alike word in place of an unsure one ("Pablo francés" after "¿Hablás francés?" is surely "Hablo francés"), grade the rest of the line as usual; if nothing else is wrong, set has_error false and verdict "unclear", corrected equal to the line, spans empty, why_en and better empty.
 
 Fields:
+- heard: the learner's line as they said it: the line, with only the forms taken from the hearing without hints (rule above). Identical to the line when there is no such hearing, or nothing to take from it. Never fix, add, drop or move anything here. Every field below is about "heard".
 - has_error: true only if there is at least one real grammar or vocabulary mistake by the rules above.
 - verdict: what the learner is told about the line. "error" when has_error is true. Otherwise "correct" only for a line that is right as it stands, in Spanish and in the Argentine way; "note" when it is not a mistake but has an English word, a tú or usted form, or a word from another country (the learner is shown "better" instead of a tick); "unclear" for a garbled transcript (the learner is shown nothing).
 - severity: the most serious error: "meaning" (blocks or changes the meaning), "target" (voseo verb forms, gender/number agreement, ser/estar, the tense the context needs, articles), "minor" (anything else). "none" when has_error is false.
-- corrected: the learner's line with ONLY the errors fixed — keep their words, order and style. Identical to the line when there is no error.
-- spans: each change from the line to corrected, in order, as { "from": exact words from the learner's line, "to": the replacement }. Keep each span as short as possible (a word or two). Empty when there is no error.
+- corrected: "heard" with ONLY the errors fixed — keep their words, order and style. Identical to "heard" when there is no error.
+- spans: each change from "heard" to corrected, in order, as { "from": exact words from "heard", "to": the replacement }. Keep each span as short as possible (a word or two). Empty when there is no error.
 - why_en: when there is an error, one or two short sentences in plain English explaining the main fix, quoting Spanish words in *asterisks*. At most 40 words, no greeting, no praise. Empty string when there is no error.
 - unnatural: true ONLY when both hold: (1) the learner's line, with its errors fixed, would still sound clearly odd, stiff or foreign to someone in Buenos Aires — a word-for-word translation from English, a phrasing nobody there uses; and (2) you are certain "better" is a much more natural way to say the same thing — a big, obvious difference, not polish. If a porteño could say the corrected line as it is, it is false, even when another phrasing would be a little nicer. Dropping "yo", adding "por favor", "che" or "re", or swapping in lunfardo is never enough. When in doubt, false. It does not change the verdict.
 - better: when the verdict is "note", the line the Argentine way (the vos form, the Argentine word, the Spanish for the English). Otherwise ONLY when unnatural is true: how a porteño would naturally say the same thing. Always rioplatense Spanish with voseo, using ONLY the grammar the learner's level allows (given with the line); at A1 that means present tense only, even when the learner reached for a past or future. An empty string in every other case.
 - better_en: what "better" means, in plain, simple English (no idioms or slang). Empty string when better is empty.
 - corrected and why_en never push the learner toward a tense above their level: if an A1 learner uses a past tense correctly, it is not an error.
 
-Examples (level A1 unless noted):
+Examples (level A1 unless noted; "heard" equals the line unless shown):
 Line: "Yo quiero un café con leche y dos medialuna" → has_error true, verdict "error", severity "target", corrected "Yo quiero un café con leche y dos medialunas", spans [{"from":"medialuna","to":"medialunas"}], why_en "After *dos* the noun is plural: *dos medialunas*.", unnatural false, better "", better_en "".
 Line: "¿Tú tienes la cuenta?" → has_error false, verdict "note", severity "none", corrected "¿Tú tienes la cuenta?", spans [], why_en "", unnatural false, better "¿Vos tenés la cuenta?", better_en "Do you have the check?".
 Line: "Yo es de Canadá" → has_error true, verdict "error", severity "target", corrected "Yo soy de Canadá", spans [{"from":"es","to":"soy"}], why_en "With *yo*, *ser* is *soy*: *yo soy de Canadá*.", unnatural false, better "", better_en "".
@@ -191,6 +203,8 @@ Line: "Sí, también me gusta nadar en la piscina" → has_error false, verdict 
 Line: "Can I pay by card?" → has_error false, verdict "note", severity "none", corrected "Can I pay by card?", spans [], why_en "", unnatural false, better "¿Puedo pagar con tarjeta?", better_en "Can I pay by card?".
 Line: "Eh… sí, este, me gusta mucho" → has_error false, verdict "correct", severity "none", corrected "Eh… sí, este, me gusta mucho", spans [], why_en "", unnatural false, better "", better_en "".
 Line: "Soy de Canadá" → has_error false, verdict "correct", severity "none", corrected "Soy de Canadá", spans [], why_en "", unnatural false, better "", better_en "".
+Pancho: "¿Tenés hermanos?", line: "Sí, tengo dos hermanos", without hints: "Sí, tiene dos hermanos", unsure: "tengo" → heard "Sí, tiene dos hermanos", has_error true, verdict "error", severity "target", corrected "Sí, tengo dos hermanos", spans [{"from":"tiene","to":"tengo"}], why_en "Talking about yourself, *tener* is *tengo*: *tengo dos hermanos*.", unnatural false, better "", better_en "".
+Pancho: "¿Café o mate?", line: "Mate, por favor", without hints: "Bate, por favor", unsure: "Mate" → heard "Mate, por favor" (bate is another word, not a form of mate), has_error false, verdict "correct", severity "none", corrected "Mate, por favor", spans [], why_en "", unnatural false, better "", better_en "".
 Pancho: "¿Hablás francés?", line: "Pablo francés", unsure: "Pablo" → has_error false, verdict "unclear", severity "none", corrected "Pablo francés", spans [], why_en "", unnatural false, better "", better_en "".
 Line: "Yo la que mesa por si tan" → has_error false, verdict "unclear", severity "none", corrected "Yo la que mesa por si tan", spans [], why_en "", unnatural false, better "", better_en "".
 
@@ -199,8 +213,10 @@ Keep "corrected" faithful: never rewrite a correct line into a nicer one there. 
 export const FEEDBACK_SCHEMA = {
   type: "object",
   additionalProperties: false,
-  required: ["has_error", "verdict", "severity", "corrected", "spans", "why_en", "unnatural", "better", "better_en"],
+  required: ["heard", "has_error", "verdict", "severity", "corrected", "spans", "why_en", "unnatural", "better", "better_en"],
   properties: {
+    // First: what she said is settled before it is graded.
+    heard: { type: "string" },
     has_error: { type: "boolean" },
     verdict: { type: "string", enum: ["correct", "error", "note", "unclear"] },
     severity: { type: "string", enum: ["none", "meaning", "target", "minor"] },
@@ -226,6 +242,8 @@ export const FEEDBACK_SCHEMA = {
 export type Verdict = "correct" | "error" | "note" | "unclear";
 
 export type Feedback = {
+  /** Her line as graded: the transcript, with her own forms where the hints had smoothed them. */
+  heard?: string;
   has_error: boolean;
   verdict: Verdict;
   severity: "none" | "meaning" | "target" | "minor";
@@ -247,12 +265,15 @@ export function feedbackInput(opts: {
   english?: boolean;
   /** Words the recogniser may have misheard. */
   unsure?: string[];
+  /** The line as heard without the keyterms, where that differs. */
+  plain?: string;
 }): string {
   return [
     `Level: ${opts.level}`,
     `Grammar the level allows (for "better"): ${LEVEL_GRAMMAR[opts.level]}`,
     opts.tomasBefore ? `Pancho had just said: "${opts.tomasBefore}"` : "",
     `Learner's line: "${opts.line}"`,
+    opts.plain ? `Heard without hints: "${opts.plain}"` : "",
     opts.english ? "The learner said this line in English." : "",
     opts.unsure?.length ? `The recogniser was unsure of: ${opts.unsure.map((w) => `"${w}"`).join(", ")}` : "",
   ]
@@ -260,12 +281,33 @@ export function feedbackInput(opts: {
     .join("\n");
 }
 
+const spoken = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+
+/**
+ * Is `heard` her line with at most some words swapped for the hearing without
+ * hints? Same number of words, and each one in one of the two hearings: the
+ * grader may choose between what was heard, never write a word of its own.
+ */
+export function heardHolds(heard: string, line: string, plain?: string): boolean {
+  const h = spoken(heard);
+  const l = spoken(line);
+  if (h.join(" ") === l.join(" ")) return true;
+  if (!plain || h.length !== l.length) return false;
+  const p = new Set(spoken(plain));
+  return h.every((w, i) => w === l[i] || p.has(w));
+}
+
 /** Only what the schema promised. */
-export function cleanFeedback(raw: Feedback, line: string, english = false): Feedback {
+export function cleanFeedback(raw: Feedback, line: string, english = false, plain?: string): Feedback {
   // A line said in English is never a mistake: she is shown the Spanish for it.
   if (english && raw.verdict !== "unclear") raw = { ...raw, has_error: false, verdict: "note" };
+  const heard = english || !raw.heard?.trim() ? line : raw.heard.trim();
+  // A "heard" that isn't what was heard: nothing built on it is shown (she is shown nothing, as for a garbled line).
+  if (!heardHolds(heard, line, plain)) {
+    return { heard: line, has_error: false, verdict: "unclear", severity: "none", corrected: line, spans: [], why_en: "", unnatural: false, better: "", better_en: "" };
+  }
   const spans = (raw.spans ?? []).filter((s) => s && typeof s.from === "string" && typeof s.to === "string");
-  const corrected = String(raw.corrected || line);
+  const corrected = String(raw.corrected || heard);
   // A tick only for a line that is right as it stands: an English word, a tú
   // form or a garbled transcript is not an error, but it is not "Correct" either.
   let quiet: Feedback["verdict"] = raw.verdict === "note" || raw.verdict === "unclear" ? raw.verdict : "correct";
@@ -278,6 +320,7 @@ export function cleanFeedback(raw: Feedback, line: string, english = false): Fee
   const unnatural = Boolean(raw.unnatural) && Boolean(better);
   if (quiet !== "note" && !unnatural) better = "";
   return {
+    heard,
     has_error: Boolean(raw.has_error),
     verdict: raw.has_error ? "error" : quiet,
     severity: raw.has_error ? (raw.severity === "none" ? "minor" : raw.severity) : "none",

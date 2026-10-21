@@ -114,7 +114,13 @@ Deno.serve(reported("hablar-transcribe", async (req) => {
         key: env.elevenKey,
         audio: new Blob([bytes], { type: mime }),
         filename: `dilo.${ext}`,
-        keyterms: [target.split(/\s+/).slice(0, 5).join(" ")],
+        // No keyterms: they pull a mumbled word toward them and now and then
+        // put one that was never said, so the line she is checked against
+        // would lean the check to "ok" ("Quiero un medialuna" heard as "una").
+        // A plain hearing can only miss in the other direction, and she just
+        // says it again. One call, as before: a second, hinted hearing would
+        // double the cost and the check could not use it anyway.
+        keyterms: [],
       }));
     } catch (err) {
       console.error(err);

@@ -18,7 +18,7 @@
 //   text      {"seq":n,"delta":"Jaja, "}                 reply text as it's written
 //   text_fix  {"seq":n,"from":"…","to":"…"}              sentence n was rewritten by the guard
 //   audio     {"seq":n,"text":"…","mp3":"<base64>"}      one per sentence, in order
-//   done      {"turn_id","tomas_turn_id","wrap_up","ended","audio_path"}   ended on her last line (8 on the Speaking tab)
+//   done      {"turn_id","tomas_turn_id","wrap_up","ended","audio_path"}   ended on her last line (the eighth)
 //   error     {"stage":"claude|tts","retry":bool,"seq"?}
 //
 // One Claude call per turn: the streamed reply (cached persona + the chat's
@@ -33,7 +33,7 @@
 // turn_id replays the stored result as one burst.
 
 import { json, preflight } from "../_shared/cors.ts";
-import { MAX_AUDIO_BYTES, spokenDraft, type TurnRow, typedDraft } from "../_shared/hablar-draft.ts";
+import { lastPanchoLine, MAX_AUDIO_BYTES, panchoEnded, spokenDraft, type TurnRow, typedDraft } from "../_shared/hablar-draft.ts";
 import { offendingWords } from "../_shared/rioplatense.ts";
 import { SentenceSplitter } from "../_shared/sentences.ts";
 import { sseStream, toBase64, type SseWriter } from "../_shared/sse.ts";
@@ -48,13 +48,12 @@ import {
   GOODBYE_FROM_EXCHANGE,
   MarkerStripper,
   sessionElapsed,
-  GRACE_SECONDS,
   hablarEnv,
   isUuid,
   loadSession,
   logUsage,
-  messageCap,
   nextUserIdx,
+  pastLastLine,
   recordPause,
   serviceClient,
   sessionRow,
@@ -62,6 +61,7 @@ import {
   shouldWrapUp,
   soundsLikeGoodbye,
   synthesize,
+  TAB_MESSAGES,
   TALK_SPEED,
   tomasVoice,
   topicOf,
@@ -89,8 +89,14 @@ import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
 const HISTORY_TURNS = 20;
 const TTS_PARALLEL = 3;
-const LATE_SECONDS = 120; // a draft recorded in the grace period may still be sent a little later
+// Said when the model wrote nothing (or only END_MARKER): asks for her line
+// again, or, when the chat has to end anyway, closes it.
 const FALLBACK_LINE = "Perdón, se me cortó. ¿Me lo repetís?";
+const FALLBACK_GOODBYE = "Bueno, me tengo que ir. ¡Chau, nos vemos!";
+// How long a run holds a turn (`meta.answering_at` on her line) before another
+// request may answer it instead. Longer than the slowest turn: two Claude tries
+// (45 s each), a guard rewrite, and TTS at 10 s a sentence.
+const ANSWER_LEASE_SECONDS = 200;
 
 type Turn = TurnRow;
 
@@ -99,6 +105,12 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 async function storedReply(db: SupabaseClient, turnId: string): Promise<Turn | null> {
   const { data } = await db.from("conversation_turns").select("*").eq("reply_to", turnId).maybeSingle();
   return (data as Turn) ?? null;
+}
+
+/** A run is answering this turn right now (it took it less than ANSWER_LEASE_SECONDS ago). */
+function beingAnswered(user: Turn, now = Date.now()): boolean {
+  const at = Date.parse(String(user.meta?.answering_at ?? ""));
+  return Number.isFinite(at) && now - at < ANSWER_LEASE_SECONDS * 1000;
 }
 
 /** A turn already answered, sent again as one burst. */
@@ -151,10 +163,9 @@ async function runTurn(opts: {
   const elapsed = sessionElapsed(session);
   const ids = { user_id: opts.userId, session_id: session.id };
   const exchange = exchangeOf(userIdx);
-  // A Speaking-tab chat closes on her eighth line, and is told to start closing two before.
-  const cap = messageCap(session);
-  const wrapUp = shouldWrapUp(elapsed, exchange, session.level, cap);
-  const closeSoon = !wrapUp && shouldCloseSoon(elapsed, exchange, session.level, cap);
+  // A chat closes on her eighth line, and is told to start closing two before.
+  const wrapUp = shouldWrapUp(elapsed, exchange);
+  const closeSoon = !wrapUp && shouldCloseSoon(elapsed, exchange);
   const english = user.meta?.lang === "en";
   const unsure = Array.isArray(user.meta?.unsure)
     ? (user.meta.unsure as unknown[]).filter((w): w is string => typeof w === "string")
@@ -201,7 +212,7 @@ async function runTurn(opts: {
     { type: "text" as const, text: PERSONA, cache_control: { type: "ephemeral" as const } },
     {
       type: "text" as const,
-      text: sessionBlock({ level: session.level, scenario: topic.scenario, culture: topic.culture, opener }),
+      text: sessionBlock({ level: session.level, unit: session.kind === "unit", scenario: topic.scenario, culture: topic.culture, opener }),
       cache_control: { type: "ephemeral" as const },
     },
   ];
@@ -310,12 +321,22 @@ async function runTurn(opts: {
     await db.from("conversation_turns").update({ status: "draft", idx: null }).eq("id", user.id);
     sse.send("error", { stage: "claude", retry: true });
     sse.close();
+    // Sentences already in TTS still cost: wait for them before the usage is
+    // written. Their audio goes nowhere (sending after close does nothing).
+    await emitChain;
     await logUsage(db, usage);
     return;
   }
-  if (!replyText.trim()) {
-    sse.send("text", { seq: deltaSeq++, delta: FALLBACK_LINE });
-    enqueue(FALLBACK_LINE);
+  // The chat ends on this reply whatever he says: her last line, or the backstop clock.
+  const mustEnd = wrapUp || sessionElapsed(session) >= clockOf(session.level).stop;
+  // Nothing to say (or only the marker): a line of our own instead. It asks her
+  // to say hers again, so the marker doesn't end the chat; a chat that ends
+  // anyway gets a goodbye, not a question nobody can answer.
+  const fallback = !replyText.trim();
+  if (fallback) {
+    const line = mustEnd ? FALLBACK_GOODBYE : FALLBACK_LINE;
+    sse.send("text", { seq: deltaSeq++, delta: line });
+    enqueue(line);
   }
 
   await emitChain;
@@ -325,9 +346,9 @@ async function runTurn(opts: {
   const clips = audio.filter((a): a is Uint8Array<ArrayBuffer> => !!a);
   const audioPath = clips.length ? `${opts.userId}/${session.id}/${user.id}-tomas.mp3` : null;
   // A goodbye that forgot the marker ends the chat too, once it has had a few exchanges.
-  const goodbye = !endMark.found && exchange >= GOODBYE_FROM_EXCHANGE && soundsLikeGoodbye(replyText);
+  const goodbye = !fallback && !endMark.found && exchange >= GOODBYE_FROM_EXCHANGE && soundsLikeGoodbye(replyText);
   if (goodbye) console.log("goodbye without marker", { conversation: session.id, exchange });
-  const ended = wrapUp || endMark.found || goodbye || sessionElapsed(session) >= clockOf(session.level).stop;
+  const ended = mustEnd || (endMark.found && !fallback) || goodbye;
 
   const { error: insertErr } = await db.from("conversation_turns").insert({
     id: tomasId,
@@ -340,7 +361,29 @@ async function runTurn(opts: {
     reply_to: user.id,
     meta: { wrap_up: wrapUp, ended },
   });
-  if (insertErr) console.error("tomas turn insert failed", insertErr.message);
+  if (insertErr) {
+    // Not saved, so nothing of this run is kept: no mp3 (the path is the stored
+    // reply's, and would overwrite its voice) and no id the app could ask about.
+    // Another run that answered the same line first wins: the app is pointed at
+    // its reply, which a reload shows.
+    console.error("tomas turn insert failed", insertErr.message);
+    const first = insertErr.code === "23505" ? await storedReply(db, user.id) : null;
+    if (first) {
+      sse.send("done", {
+        turn_id: user.id,
+        tomas_turn_id: first.id,
+        wrap_up: Boolean(first.meta?.wrap_up),
+        ended: Boolean(first.meta?.ended),
+        audio_path: first.audio_path,
+      });
+    } else {
+      reportError("hablar-reply", new Error(`tomas turn insert failed: ${insertErr.message}`), { ...ids, stage: "save" });
+      sse.send("done", { turn_id: user.id, wrap_up: wrapUp, ended, audio_path: null });
+    }
+    sse.close();
+    await logUsage(db, usage);
+    return;
+  }
 
   sse.send("done", { turn_id: user.id, tomas_turn_id: tomasId, wrap_up: wrapUp, ended, audio_path: audioPath });
   const upload = audioPath
@@ -486,9 +529,10 @@ async function answer(opts: {
     if (opts.transcript) sse.send("transcript", { turn_id: user!.id, text: user!.text });
   };
 
-  // Already answered, or being answered by an earlier request: replay.
+  // Already answered, or being answered by an earlier request: replay. A line
+  // sent before runs took the turn (no `answering_at`) is waited for as well.
   let answered = opts.stored;
-  if (!answered && user.status === "final") {
+  if (!answered && user.status === "final" && (beingAnswered(user) || !user.meta?.answering_at)) {
     for (let i = 0; i < 25 && !answered; i++) {
       await sleep(1000);
       answered = await storedReply(db, user.id);
@@ -502,32 +546,40 @@ async function answer(opts: {
   }
 
   if (session.ended_at) return json({ error: "ended" }, { status: 409 });
-  if (sessionElapsed(session) >= clockOf(session.level).stop + GRACE_SECONDS + LATE_SECONDS) {
-    return json({ error: "time_up" }, { status: 409 });
+  // Pancho said goodbye; the app went before it could call hablar-end.
+  if (user.status === "final") {
+    const said = panchoEnded(await lastPanchoLine(db, session.id));
+    if (said) return said;
   }
+  // The same bound hablar-draft stores her line by: a line it took is answered.
+  if (pastLastLine(session)) return json({ error: "time_up" }, { status: 409 });
   if (!user.text.trim()) return json({ error: "empty turn" }, { status: 400 });
 
-  // Claim the draft: it becomes final and gets its place in the chat.
+  // Claim the draft: it becomes final and gets its place in the chat. This run
+  // takes the turn with it (`answering_at`), so a retry waits for the reply
+  // instead of writing a second one.
   let userIdx = user.idx ?? -1;
   if (user.status === "draft") {
     for (let attempt = 0; attempt < 3; attempt++) {
       const { data: top } = await db
         .from("conversation_turns")
-        .select("idx")
+        .select("idx, role, meta")
         .eq("conversation_id", session.id)
         .not("idx", "is", null)
         .order("idx", { ascending: false })
         .limit(1)
         .maybeSingle();
+      // The chat's last line is Pancho's goodbye: nothing goes after it.
+      const said = top?.role === "tomas" ? panchoEnded(top) : null;
+      if (said) return said;
       userIdx = nextUserIdx(top?.idx ?? 0);
       // Past the chat's last line: the draft stays a draft, and the app ends the chat.
-      const cap = messageCap(session);
-      if (cap !== null && exchangeOf(userIdx) > cap) {
-        return json({ error: "message_limit", limit: cap }, { status: 429 });
+      if (exchangeOf(userIdx) > TAB_MESSAGES) {
+        return json({ error: "message_limit", limit: TAB_MESSAGES }, { status: 429 });
       }
       const { data: claimed, error } = await db
         .from("conversation_turns")
-        .update({ status: "final", idx: userIdx })
+        .update({ status: "final", idx: userIdx, meta: { ...user.meta, answering_at: new Date().toISOString() } })
         .eq("id", user.id)
         .eq("status", "draft")
         .select("*")
@@ -539,6 +591,23 @@ async function answer(opts: {
       break;
     }
     if (user.status !== "final") return json({ error: "could not claim the turn", retry: true }, { status: 409 });
+  } else {
+    // Sent, not answered, and no run holds it any more (it died, or it never
+    // took it): this one takes it over. Taken in the update itself, so two
+    // retries at once can't both win; while a run still holds it, the app
+    // tries again later and gets the reply replayed.
+    const staleBefore = new Date(Date.now() - ANSWER_LEASE_SECONDS * 1000).toISOString();
+    const { data: taken, error } = await db
+      .from("conversation_turns")
+      .update({ meta: { ...user.meta, answering_at: new Date().toISOString() } })
+      .eq("id", user.id)
+      .eq("status", "final")
+      .or(`meta->>answering_at.is.null,meta->>answering_at.lt."${staleBefore}"`)
+      .select("*")
+      .maybeSingle();
+    if (error) return json({ error: "could not claim the turn" }, { status: 500 });
+    if (!taken) return json({ error: "turn is being answered", retry: true }, { status: 409 });
+    user = taken as Turn;
   }
   if (userIdx < 1) return json({ error: "turn has no place in the chat" }, { status: 409 });
 

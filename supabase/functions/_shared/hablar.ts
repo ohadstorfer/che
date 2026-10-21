@@ -128,9 +128,6 @@ export const CHATS_PER_DAY = 3;
 /** Lines she says in a chat (any kind); Pancho's answer to the last one closes it. */
 export const TAB_MESSAGES = 8;
 
-/** The lines a chat allows her: eight, whatever its kind. Null would mean no cap. */
-export const messageCap = (_s: { kind: string }): number | null => TAB_MESSAGES;
-
 // ---------------------------------------------------------------------------
 // The clock (§4.5 step 2). The server decides; the client timer is a display.
 // Since the chat limits a chat is measured in lines, and the clock is only a
@@ -138,7 +135,7 @@ export const messageCap = (_s: { kind: string }): number | null => TAB_MESSAGES;
 // and the app in the background don't count). The app no longer shows it.
 // ---------------------------------------------------------------------------
 
-/** A chat's clock, in seconds of chat time, and the exchange count that nudges Pancho to close. */
+/** A chat's clock, in seconds of chat time. */
 export type Clock = {
   /** Pancho is told it's about time to close. */
   closeSoon: number;
@@ -146,18 +143,13 @@ export type Clock = {
   wrap: number;
   /** The hard stop. */
   stop: number;
-  /** The same nudge as `closeSoon`, by exchanges: a chat shouldn't drag even with time left. */
-  closeSoonExchanges: number;
 };
-const BACKSTOP = { closeSoon: 480, wrap: 540, stop: 600 };
-const SHORT: Clock = { ...BACKSTOP, closeSoonExchanges: 6 };
-// Beginners speak slowly: a unit chat nudges them to close two exchanges later.
-const LONG: Clock = { ...BACKSTOP, closeSoonExchanges: 8 };
-/** The only place the numbers live on the server (the app's chatSeconds mirrors `stop`). */
-export const CLOCK: Record<Band, Clock> = { A1: LONG, A2: LONG, B1: SHORT, B2: SHORT };
-/** A level's clock; an unknown level gets the short one. */
-export const clockOf = (level: string | null | undefined): Clock => CLOCK[level as Band] ?? SHORT;
+/** The only place the numbers live on the server (the app's CHAT_SECONDS mirrors `stop`). The same at every level. */
+export const CLOCK: Clock = { closeSoon: 480, wrap: 540, stop: 600 };
+/** A level's clock: the same at every level since chats are measured in lines. */
+export const clockOf = (_level?: string | null): Clock => CLOCK;
 export const GRACE_SECONDS = 30; // a turn already being recorded at the hard stop still counts
+export const LATE_SECONDS = 120; // and a line recorded in the grace period may still be sent a little later
 export const PAUSE_CAP_SECONDS = 900; // at most 15 min of background time
 export const MAX_HINTS = 3;
 
@@ -192,26 +184,30 @@ export function mergePaused(stored: number, reported: unknown): number {
   return Math.max(0, Math.min(next, PAUSE_CAP_SECONDS));
 }
 
+/**
+ * Too late for another line: past the hard stop, its grace and the late
+ * allowance. Storing her line (hablar-draft) and answering it (hablar-reply)
+ * check this one bound, so a line that is taken also gets its answer.
+ */
+export const pastLastLine = (s: { level: string; started_at: string; paused_seconds: number; unlimited?: boolean }) =>
+  sessionElapsed(s) >= clockOf(s.level).stop + GRACE_SECONDS + LATE_SECONDS;
+
 // Pancho decides when the chat ends (the END_MARKER on his goodbye). These
-// nudge him when he hasn't: by the chat's line cap (a Speaking-tab chat), by
-// exchanges (a unit chat, and what keeps a beginner's chat from dragging), or
-// by the backstop clock.
-const WRAP_EXCHANGES = 10;
+// nudge him when he hasn't: by the chat's line cap, or by the backstop clock.
 /** How many lines before the cap Pancho is told to start closing. */
 export const CLOSE_SOON_BEFORE_CAP = 2;
 
 /** The learner's nth line, from its idx (opener 0, learner lines 1, 3, 5…). */
 export const exchangeOf = (userIdx: number) => Math.ceil(userIdx / 2);
 
-/** Must this reply close the chat? At her last line (`cap`), after ten exchanges, or at the backstop's wrap time. */
-export function shouldWrapUp(elapsed: number, exchange: number, level: Band, cap: number | null = null): boolean {
-  return elapsed >= clockOf(level).wrap || exchange >= (cap ?? WRAP_EXCHANGES);
+/** Must this reply close the chat? At her last line (TAB_MESSAGES), or at the backstop's wrap time. */
+export function shouldWrapUp(elapsed: number, exchange: number): boolean {
+  return elapsed >= CLOCK.wrap || exchange >= TAB_MESSAGES;
 }
 
-/** Should Pancho be told it's about time to close? Two lines before the cap; else by exchanges (six; eight for a beginner); or by time. */
-export function shouldCloseSoon(elapsed: number, exchange: number, level: Band, cap: number | null = null): boolean {
-  const clock = clockOf(level);
-  return elapsed >= clock.closeSoon || exchange >= (cap === null ? clock.closeSoonExchanges : cap - CLOSE_SOON_BEFORE_CAP);
+/** Should Pancho be told it's about time to close? Two lines before the cap, or by time. */
+export function shouldCloseSoon(elapsed: number, exchange: number): boolean {
+  return elapsed >= CLOCK.closeSoon || exchange >= TAB_MESSAGES - CLOSE_SOON_BEFORE_CAP;
 }
 
 // ---------------------------------------------------------------------------
@@ -658,6 +654,12 @@ export type Transcript = {
   unclear?: boolean;
   /** Words of the line Scribe may have misheard (only with `doubt`): not hers to be corrected on. */
   unsure?: string[];
+  /**
+   * The line with the words the keyterms may have pulled as heard without
+   * them, when there are any (only with `doubt`; see `smoothedLine`). The
+   * grading reads it, the reply doesn't.
+   */
+  plain?: string;
 };
 type ScribeOptions = { key: string; audio: Blob; filename: string; keyterms: string[] };
 /** One hearing of a clip: the text, and each word with how sure Scribe was of it (log probability, 0 = certain). */
@@ -775,6 +777,52 @@ export function unsureWords(hinted: Hearing, plain: Hearing | null): string[] {
 }
 
 /**
+ * The keyterms lean toward the forms Pancho used, so a form she said wrong
+ * can come back right: "Sí, tiene dos hermanos" after "¿Tenés hermanos?" is
+ * heard as "Sí, tengo…" with the hints, and as she said it without. This is
+ * the hinted line with each such word as heard without the hints: only word
+ * for word, where the hinted word is a keyterm (elsewhere the two
+ * hearings just differ, and the doubt is the `unsure` list's), and where
+ * Scribe was sure of the other word. Word for word means one word, or two side
+ * by side (vos tenés / tú tienes). A final s alone is left: it is swallowed
+ * too often to tell. Undefined when no word qualifies. The grading decides
+ * whether each is really her form of the same word (tiene/tengo) or another
+ * word (bate/mate).
+ */
+export function smoothedLine(hinted: Hearing, plain: Hearing | null, keyterms: string[]): string | undefined {
+  if (!plain?.words.length) return undefined;
+  const h = hinted.words.filter((x) => !FILLERS.has(x.w));
+  const p = plain.words.filter((x) => !FILLERS.has(x.w));
+  const known = new Set(keyterms.flatMap(wordsOf).map(bare));
+  const swap = new Map<number, string>();
+  for (const d of stretches(h.map((x) => x.w), p.map((x) => x.w))) {
+    // Word for word: one, or two side by side (vos tenés / tú tienes).
+    const n = d.to - d.from;
+    if (n !== d.other.length || n > 2) continue;
+    for (let k = 0; k < n; k++) {
+      const said = h[d.from + k];
+      const other = p.find((x) => x.w === d.other[k]);
+      if (!other?.raw || !known.has(said.w)) continue;
+      if (other.w + "s" === said.w || said.w + "s" === other.w) continue;
+      if (other.lp < SHAKY_WORD) continue;
+      swap.set(d.from + k, other.raw);
+    }
+  }
+  if (!swap.size) return undefined;
+  // Back into the line as written: each hinted word in turn, the swapped ones
+  // replaced. A word not found as written: just the words, never one dropped.
+  let out = "";
+  let at = 0;
+  for (const [i, x] of h.entries()) {
+    const k = hinted.text.indexOf(x.raw, at);
+    if (k < 0) return h.map((y, j) => swap.get(j) ?? y.raw).join(" ");
+    out += hinted.text.slice(at, k) + (swap.get(i) ?? x.raw);
+    at = k + x.raw.length;
+  }
+  return (out + hinted.text.slice(at)).trim();
+}
+
+/**
  * Speech to text with Scribe v2, forced to Spanish, bytes sent as they came
  * (§4.4 step 3).
  *
@@ -819,8 +867,10 @@ export async function transcribe(
     }
   }
   const unsure = opts.doubt ? unsureWords(hinted, plain) : [];
+  const smoothed = opts.doubt ? smoothedLine(hinted, plain, opts.keyterms) : undefined;
   return {
     ...es(hinted),
+    ...(smoothed ? { plain: smoothed } : {}),
     ...(opts.doubt === "ask" && !hearingHolds(hinted, plain, opts.keyterms) ? { unclear: true } : {}),
     ...(unsure.length ? { unsure } : {}),
   };
@@ -893,17 +943,34 @@ export function concatBytes(parts: Uint8Array[]): Uint8Array<ArrayBuffer> {
 /** Her lines before a goodbye without the marker counts as the end (no "chau" in the first exchanges). */
 export const GOODBYE_FROM_EXCHANGE = 3;
 
+/** Words a goodbye may open with: "¡Bueno, chau!", "Dale, nos vemos.", "Gracias por charlar, ¡chau!". */
+const GOODBYE_LEAD =
+  /^(?:(?:(?:bueno|bien|dale|listo|genial|perfecto|joya|buenísimo|che|ok|okey|un gusto)\b|gracias\b(?:[^,!.…]*[,!.…])?)[\s,!.…¡]*)+/i;
+const LEAVE_TAKING = /^(?:chau|nos vemos|hasta luego|hasta la próxima|hasta mañana|nos hablamos)(?=$|[\s,!.…])/i;
+/** After the leave-taking, words that make it a mention ("chau es lo que decís"), not a goodbye. */
+const MENTION_NEXT = /^(?:se|es|son|significa|quiere|o|como|cuando|para|sirve|suena|viene)\b/i;
+
 /**
  * Pancho said goodbye but forgot the END_MARKER: the reply's last sentence
  * takes leave (chau, nos vemos, hasta luego…) and asks nothing. Left alone,
- * the chat would go on past his goodbye.
+ * the chat would go on past his goodbye. The leave-taking has to open the
+ * sentence (after a "bueno" or a "gracias") and be most of it: a word only
+ * mentioned ("Para irte, decís chau.") doesn't end the chat.
  */
 export function soundsLikeGoodbye(reply: string): boolean {
   const text = reply.trim();
   if (!text || text.endsWith("?")) return false;
   const sentences = text.split(/(?<=[.!?…])\s+/).filter(Boolean);
-  const last = sentences[sentences.length - 1] ?? "";
-  return /\b(chau|nos vemos|hasta luego|hasta la próxima|hasta mañana|nos hablamos)\b/i.test(last);
+  const last = (sentences[sentences.length - 1] ?? "")
+    .replace(/["“”«»']/g, "")
+    .replace(/^[\s¡]+/, "")
+    .replace(GOODBYE_LEAD, "");
+  const leave = LEAVE_TAKING.exec(last);
+  if (!leave) return false;
+  // "Chau, Ana." or "¡Nos vemos!" ends there; "Nos vemos el sábado." has a short tail.
+  const tail = last.slice(leave[0].length).trim();
+  if (!tail || /^[,!.…]/.test(tail)) return true;
+  return !MENTION_NEXT.test(tail) && tail.split(/\s+/).length <= 3;
 }
 
 /**

@@ -4,19 +4,22 @@ import {
   CHATS_PER_DAY,
   CLOCK,
   clockOf,
+  CLOSE_SOON_BEFORE_CAP,
   CONTENT,
   deadlineAt,
   diloCompare,
   effectivePaused,
   elapsedSeconds,
+  GRACE_SECONDS,
   isSilenceHallucination,
+  LATE_SECONDS,
   localDate,
   looksEnglish,
   looksSpanish,
   mergePaused,
-  messageCap,
   nearestBand,
   nextUserIdx,
+  pastLastLine,
   resolveLevel,
   MarkerStripper,
   soundsLikeGoodbye,
@@ -25,6 +28,7 @@ import {
   exchangeOf,
   type Hearing,
   hearingHolds,
+  smoothedLine,
   unsureWords,
   sttKeyterms,
   TAB_MESSAGES,
@@ -55,15 +59,9 @@ Deno.test("deadline moves with the pauses: the backstop is ten minutes at every 
   assertEquals(deadlineAt(start, 0, "A1", at(10)), "2026-09-25T12:10:00.000Z");
 });
 
-Deno.test("the clock is a backstop; beginners are nudged two exchanges later", () => {
-  for (const level of ["A1", "A2"] as const) {
-    assertEquals(CLOCK[level], { closeSoon: 480, wrap: 540, stop: 600, closeSoonExchanges: 8 });
-  }
-  for (const level of ["B1", "B2"] as const) {
-    assertEquals(CLOCK[level], { closeSoon: 480, wrap: 540, stop: 600, closeSoonExchanges: 6 });
-  }
-  assertEquals(clockOf(null), CLOCK.B1);
-  assertEquals(clockOf("C1"), CLOCK.B1);
+Deno.test("the clock is a backstop, the same at every level", () => {
+  assertEquals(CLOCK, { closeSoon: 480, wrap: 540, stop: 600 });
+  for (const level of ["A1", "A2", "B1", "B2", null, "C1"]) assertEquals(clockOf(level), CLOCK);
 });
 
 Deno.test("pause reports only grow, and cap", () => {
@@ -73,30 +71,31 @@ Deno.test("pause reports only grow, and cap", () => {
   assertEquals(mergePaused(30, undefined), 30);
 });
 
-Deno.test("a unit chat: wrap up after ten exchanges; nudge at six (eight for a beginner)", () => {
-  assertEquals(shouldWrapUp(60, 9, "B1"), false);
-  assertEquals(shouldWrapUp(0, 10, "B1"), true);
-  assertEquals(shouldWrapUp(0, 10, "A1"), true);
-  assertEquals(shouldCloseSoon(60, 5, "B1"), false);
-  assertEquals(shouldCloseSoon(0, 6, "B2"), true);
-  assertEquals(shouldCloseSoon(60, 7, "A1"), false);
-  assertEquals(shouldCloseSoon(60, 8, "A2"), true);
+Deno.test("every chat: eight lines, the nudge two before the last", () => {
+  assertEquals(TAB_MESSAGES, 8);
+  assertEquals(CLOSE_SOON_BEFORE_CAP, 2);
+  assertEquals(shouldCloseSoon(0, 5), false);
+  assertEquals(shouldCloseSoon(0, 6), true);
+  assertEquals(shouldWrapUp(0, 7), false);
+  assertEquals(shouldWrapUp(0, 8), true);
+  // The backstop still closes a chat left running.
+  assertEquals(shouldCloseSoon(480, 1), true);
+  assertEquals(shouldWrapUp(540, 2), true);
   assertEquals(exchangeOf(1), 1);
   assertEquals(exchangeOf(11), 6);
 });
 
-Deno.test("a Speaking-tab chat: eight lines, the nudge two before the last", () => {
-  const cap = messageCap({ kind: "scenario" });
-  assertEquals(cap, TAB_MESSAGES);
-  assertEquals(TAB_MESSAGES, 8);
-  assertEquals(messageCap({ kind: "free" }), 8);
-  assertEquals(messageCap({ kind: "unit" }), 8);
-  assertEquals(shouldCloseSoon(0, 5, "A1", cap), false);
-  assertEquals(shouldCloseSoon(0, 6, "A1", cap), true);
-  assertEquals(shouldWrapUp(0, 7, "B1", cap), false);
-  assertEquals(shouldWrapUp(0, 8, "B1", cap), true);
-  // The backstop still closes a chat left running.
-  assertEquals(shouldWrapUp(540, 2, "A1", cap), true);
+Deno.test("a line recorded in the grace period may come in a little late", () => {
+  const chat = (elapsed: number) => ({
+    level: "B1",
+    started_at: new Date(Date.now() - elapsed * 1000).toISOString(),
+    paused_seconds: 0,
+  });
+  const bound = CLOCK.stop + GRACE_SECONDS + LATE_SECONDS;
+  assertEquals(pastLastLine(chat(CLOCK.stop + GRACE_SECONDS + 10)), false);
+  assertEquals(pastLastLine(chat(bound - 5)), false);
+  assertEquals(pastLastLine(chat(bound + 5)), true);
+  assertEquals(pastLastLine({ ...chat(bound + 5), unlimited: true }), false);
 });
 
 Deno.test("the day: three chats, Course and Speaking together", () => {
@@ -290,4 +289,55 @@ Deno.test("a goodbye without the marker: the last sentence takes leave and asks 
   assertEquals(soundsLikeGoodbye("Chau, nos vemos. Che, antes de irte, ¿querés un café?"), false);
   assertEquals(soundsLikeGoodbye("¡Qué lindo, te trae pan! ¿Y de qué hablan?"), false);
   assertEquals(soundsLikeGoodbye(""), false);
+});
+
+Deno.test("a goodbye opens the last sentence; a leave-taking word only mentioned is not one", () => {
+  assertEquals(soundsLikeGoodbye("¡Bueno, chau!"), true);
+  assertEquals(soundsLikeGoodbye("Me encantó. Dale, nos vemos."), true);
+  assertEquals(soundsLikeGoodbye("¡Gracias! Chau, hasta luego."), true);
+  assertEquals(soundsLikeGoodbye("Gracias por charlar, ¡chau!"), true);
+  assertEquals(soundsLikeGoodbye("Bueno, nos vemos el sábado."), true);
+  assertEquals(soundsLikeGoodbye("Un gusto. Hasta la próxima, Ana."), true);
+  // Mentioned, not said: the chat goes on.
+  assertEquals(soundsLikeGoodbye("Para irte, decís chau."), false);
+  assertEquals(soundsLikeGoodbye("Muy bien. Acá decimos chau, no adiós."), false);
+  assertEquals(soundsLikeGoodbye("Cuando te vas, decís «nos vemos» o «hasta luego»."), false);
+  assertEquals(soundsLikeGoodbye("Claro. Chau es lo que decís cuando te vas."), false);
+  assertEquals(soundsLikeGoodbye("“Chau” se dice todo el tiempo."), false);
+  assertEquals(soundsLikeGoodbye("Gracias por decir chau, Ana."), false);
+});
+
+/** A hearing with its words as written (accents, capitals), as Scribe gives them. */
+const written = (line: string, lp: number | Record<string, number> = -0.05): Hearing => {
+  const raws = line.split(/\s+/).map((r) => r.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, "")).filter(Boolean);
+  const bare = (r: string) => r.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "");
+  return { text: line, audioSeconds: 1, words: raws.map((raw) => ({ w: bare(raw), raw, lp: typeof lp === "number" ? lp : lp[raw] ?? -0.05 })) };
+};
+
+Deno.test("the line for grading: her own form where a keyterm took its place", () => {
+  const kt = ["tenés", "hermanos"];
+  assertEquals(smoothedLine(written("Sí, tengo dos hermanos."), written("Sí, tiene dos hermanos."), ["tengo", ...kt]), "Sí, tiene dos hermanos.");
+  // ¿Tú tienes…? heard as Pancho's vos.
+  assertEquals(smoothedLine(written("¿Y vos tenés hermanos?"), written("¿Y tú tienes hermanos?"), ["vos", ...kt]), "¿Y tú tienes hermanos?");
+});
+
+Deno.test("the line for grading: nothing where the hints can't be why", () => {
+  const kt = ["tenés", "hermanos", "medialunas", "mate"];
+  // Same hearing either way.
+  assertEquals(smoothedLine(written("Sí, tengo dos."), written("Sí, tengo dos."), kt), undefined);
+  // No second hearing.
+  assertEquals(smoothedLine(written("Sí, tengo dos."), null, kt), undefined);
+  // The hinted word is no keyterm: the hearings just differ (unsure's job).
+  assertEquals(smoothedLine(written("Ayer fui al cine."), written("Ayer voy al cine."), kt), undefined);
+  // A final s alone.
+  assertEquals(smoothedLine(written("Dos medialunas."), written("Dos medialuna."), kt), undefined);
+  // Two words for one: not a form of the same word.
+  assertEquals(smoothedLine(written("Con medialunas."), written("Con media lunas."), kt), undefined);
+  // Scribe wasn't sure of the other word.
+  assertEquals(smoothedLine(written("Mate, por favor."), written("Bate, por favor.", { Bate: -0.9 }), kt), undefined);
+});
+
+Deno.test("the line for grading never drops a word it can't place", () => {
+  const h: Hearing = { text: "Si tengo dos", audioSeconds: 1, words: [{ w: "si", raw: "Sí", lp: -0.05 }, { w: "tengo", raw: "tengo", lp: -0.05 }, { w: "dos", raw: "dos", lp: -0.05 }] };
+  assertEquals(smoothedLine(h, written("Sí, tiene dos"), ["tengo"]), "Sí tiene dos");
 });
