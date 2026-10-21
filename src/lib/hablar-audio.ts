@@ -219,7 +219,11 @@ async function startOn(url: string, rate: number, onEnd: () => void): Promise<vo
   try {
     p.replace({ uri: url });
     p.shouldCorrectPitch = true;
-    p.setPlaybackRate(rate, 'high');
+    // 'medium' is iOS's time-domain stretch, the one made for speech. 'high'
+    // (spectral, for music) left 🐢 so faint it could hardly be heard; at the
+    // normal rate nothing is stretched, so it never showed there. Android
+    // ignores the quality.
+    p.setPlaybackRate(rate, 'medium');
     p.play();
   } catch {
     nativeEnded = null;

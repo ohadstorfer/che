@@ -34,7 +34,7 @@ import {
   webPress,
 } from '@/components/hablar-ui';
 import { Button } from '@/components/ui';
-import { type ActiveRecording, armMic, canRecord, disarmMic, readyClip, type RecordedClip, startRecording, warmMic } from '@/lib/audio';
+import { type ActiveRecording, armMic, canRecord, disarmMic, readyClip, rearmMic, type RecordedClip, startRecording, warmMic } from '@/lib/audio';
 import { useAuth } from '@/lib/auth';
 import {
   CHATS_PER_DAY,
@@ -160,6 +160,8 @@ const CALL_STILL = require('@/assets/images/pancho-call-still.png');
 const REST = [0, 3.8, 10.8];
 /** Her turn starts here, a beat before the pour, so he pours at once. */
 const POUR_FROM = 3.5;
+/** How long before the clip's end it loops itself: more than the 0.1 s between time updates. */
+const LOOP_EARLY_S = 0.25;
 
 export default function HablarChat() {
   useStatusBarColor(colors.primary);
@@ -417,6 +419,12 @@ export default function HablarChat() {
   // A beat after Pancho's voice ends, so the switch never lands between two of
   // his sentences.
   const herTurn = (phase === 'idle' || phase === 'draft' || phase === 'retry') && !playing;
+  const herTurnRef = useRef(herTurn);
+  herTurnRef.current = herTurn;
+  /** Pancho's video started or stopped: on iOS that cuts off a waiting recorder, so a new one is made. */
+  const onVideoPlaying = useCallback(() => {
+    if (herTurnRef.current) rearmMic();
+  }, []);
   useEffect(() => {
     if (!herTurn) return;
     const t = setTimeout(armMic, 150);
@@ -951,7 +959,7 @@ export default function HablarChat() {
         {/* Pancho sits at a fixed height: whatever the line, card or dock below does, he never moves. */}
         <View style={[styles.stage, { paddingTop: artTop }]}>
           <Talking active={!!currentPlaying || phase === 'streaming'}>
-            <CallPancho busy={panchoTurn} size={artSize} />
+            <CallPancho busy={panchoTurn} size={artSize} onPlayingChange={onVideoPlaying} />
           </Talking>
 
           <ScrollView
@@ -1249,8 +1257,15 @@ function FlowLine({ text }: { text: string }) {
 
 /** Pancho sipping and pouring on her turn. On his (thinking or speaking) the
  *  clip runs on to the next resting pose and stops there, so he never pours
- *  while he talks. */
-function CallPancho({ busy, size }: { busy: boolean; size: number }) {
+ *  while he talks.
+ *
+ *  On iOS every start or stop of a video puts the audio session back to movie
+ *  playback, which silences a recorder waiting for her tap. So the clip loops
+ *  itself a moment before its end (a seek while it plays, which stops
+ *  nothing) instead of reaching the end, where the player pauses before it
+ *  loops; and each start or stop is reported (`onPlayingChange`) so the
+ *  chat can prepare a new recorder. */
+function CallPancho({ busy, size, onPlayingChange }: { busy: boolean; size: number; onPlayingChange?: () => void }) {
   const reduced = useReducedMotion();
   const player = useVideoPlayer(CALL_CLIP, (p) => {
     p.muted = true;
@@ -1269,9 +1284,21 @@ function CallPancho({ busy, size }: { busy: boolean; size: number }) {
     player.play();
   }, [busy, reduced, player]);
 
+  const changed = useRef(onPlayingChange);
+  changed.current = onPlayingChange;
+  useEffect(() => {
+    const sub = player.addListener('playingChange', () => changed.current?.());
+    return () => sub.remove();
+  }, [player]);
+
   useEffect(() => {
     let last = 0;
     const sub = player.addListener('timeUpdate', ({ currentTime }) => {
+      // Back to the start just before the end: the player never pauses there.
+      if (player.playing && player.duration > 0 && currentTime >= player.duration - LOOP_EARLY_S) {
+        player.currentTime = 0;
+        currentTime = 0;
+      }
       const prev = last;
       last = currentTime;
       if (!busyRef.current || !player.playing) return;

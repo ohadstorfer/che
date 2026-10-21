@@ -175,6 +175,20 @@ export function armMic(): void {
   arm();
 }
 
+/**
+ * The waiting recorder may have been cut off: on iOS a video starting or
+ * pausing (expo-video, even a muted one) puts the audio session back to
+ * movie playback, and a recorder prepared before that records silence. Let
+ * it go, and prepare a new one once that switch has landed.
+ */
+export function rearmMic(): void {
+  if (Platform.OS === 'web' || !wantArmed) return;
+  unarm();
+  setTimeout(arm, REARM_AFTER_MS);
+}
+/** expo-video switches the session on a queue of its own: usually within a few ms, up to ~70 the first time. */
+const REARM_AFTER_MS = 150;
+
 export function disarmMic(): void {
   if (Platform.OS === 'web' || !wantArmed) return;
   wantArmed = false;
