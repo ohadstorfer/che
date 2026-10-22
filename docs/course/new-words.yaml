@@ -16,6 +16,10 @@
 # ver), and "promo" and "recargo" (the paying units of section 3 are full;
 # they go with prices in a later section).
 #
+# "una masa" (la-familia) was retired on 2026-10-22: the owner says it is not
+# used (migration 20261022000010). Its slang slot now teaches "nono / nona"
+# (grandpa / grandma; migrations 20261022000020 and 20261022000030).
+#
 # Tried and taken out again, because the judges found no natural sentences for
 # them at this level: el interior, matear (people say "tomar mate"), pequeño
 # (people say "chico"), quincho, microcentro, sándwich de miga, facha. And "hombre": the unit that
