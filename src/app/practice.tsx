@@ -564,35 +564,46 @@ export default function Practice() {
   // stay quiet: those are measuring her, not coaching her.
   const inRow = useRef({ run: 0, comeback: false, lastAt: -10, shown: 0 });
   const [cheer, setCheer] = useState<Cheer | null>(null);
-  const clearCheer = useCallback(() => setCheer(null), []);
+  /** The step to the next exercise, held while a cheer is up: the next screen
+   *  (and its clip) waits until the cheer has gone. */
+  const afterCheer = useRef<(() => void) | null>(null);
+  const clearCheer = useCallback(() => {
+    setCheer(null);
+    const go = afterCheer.current;
+    afterCheer.current = null;
+    go?.();
+  }, []);
+  /** Counts the answer; true when it earned a cheer. */
   const countAnswer = (item: QueueItem, right: boolean, next: QueueItem[]) => {
-    if (item.mode === 'tip' || item.mode === 'sentence_intro' || plan || kind === 'placement' || kind === 'unit_check') return;
+    if (item.mode === 'tip' || item.mode === 'sentence_intro' || plan || kind === 'placement' || kind === 'unit_check') return false;
     const r = inRow.current;
     if (!right) {
       r.run = 0;
       r.comeback = true;
-      return;
+      return false;
     }
     r.run += 1;
     const pick = cheerFor(r.run, r.comeback, r.shown);
     // Never on the last question (the end screen has that moment), and at
     // most one every 3 questions.
-    if (!pick || index + 1 >= next.length || index - r.lastAt < 3) return;
+    if (!pick || index + 1 >= next.length || index - r.lastAt < 3) return false;
     r.lastAt = index;
     r.shown += 1;
     if (pick === 'back') r.comeback = false;
     success();
     setCheer({ kind: pick, count: r.run, id: Date.now() });
+    return true;
   };
 
   const onAnswered = async (item: QueueItem, wrongFormIds: string[], extra?: AnswerExtra) => {
     if (!queue) return;
     const next = await round.answer(item, index, queue, wrongFormIds, extra);
-    countAnswer(item, wrongFormIds.length === 0, next);
+    const cheered = countAnswer(item, wrongFormIds.length === 0, next);
     // A placement asks a section at a time: at the end of one, the walk
     // decides whether there is another to ask.
     if (walk.current && index + 1 >= next.length) return void nextSection(walk.current, next);
-    advance(next);
+    if (cheered) afterCheer.current = () => advance(next);
+    else advance(next);
   };
 
   const stagingNow = useRef(false);

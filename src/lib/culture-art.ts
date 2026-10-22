@@ -41,6 +41,23 @@ const O = {
   phone: require('@/assets/images/objects/habla-figure.webp'),
   birome: require('@/assets/images/objects/iconos-figure.webp'),
   andes: require('@/assets/images/objects/regiones-figure.webp'),
+  ego: require('@/assets/images/objects/asi-somos-figure.webp'),
+  ravioles: require('@/assets/images/objects/familia-figure.webp'),
+  portero: require('@/assets/images/objects/casa-figure.webp'),
+  paraguas: require('@/assets/images/objects/dia-a-dia-figure.webp'),
+  cintaRoja: require('@/assets/images/objects/creencias-figure.webp'),
+  tele: require('@/assets/images/objects/pantallas-figure.webp'),
+  deportes: require('@/assets/images/objects/deportes-figure.webp'),
+  vino: require('@/assets/images/objects/vino-tinto-figure.webp'),
+  birra: require('@/assets/images/objects/birra-figure.webp'),
+  fernet: require('@/assets/images/objects/fernet-figure.webp'),
+  naipes: require('@/assets/images/objects/palos-figure.webp'),
+  figuritas: require('@/assets/images/objects/figuritas-figure.webp'),
+  sombrilla: require('@/assets/images/objects/sombrilla-figure.webp'),
+  carpa: require('@/assets/images/objects/carpa-figure.webp'),
+  guardapolvo: require('@/assets/images/objects/guardapolvo-figure.webp'),
+  hornero: require('@/assets/images/objects/hornero-figure.webp'),
+  pato: require('@/assets/images/objects/pato-figure.webp'),
 } satisfies Record<string, ImageSourcePropType>;
 
 const bySection: Record<string, ImageSourcePropType[]> = {
@@ -60,6 +77,18 @@ const bySection: Record<string, ImageSourcePropType[]> = {
   habla: [O.phone],
   iconos: [O.birome],
   regiones: [O.andes],
+  'asi-somos': [O.ego],
+  familia: [O.ravioles],
+  casa: [O.portero],
+  'dia-a-dia': [O.paraguas],
+  creencias: [O.cintaRoja],
+  pantallas: [O.tele],
+  deportes: [O.deportes, O.pato],
+  bebidas: [O.vino, O.birra, O.fernet],
+  juegos: [O.naipes, O.figuritas],
+  vacaciones: [O.sombrilla, O.carpa],
+  'escuela-y-laburo': [O.guardapolvo],
+  naturaleza: [O.hornero],
 };
 
 const general = [O.mate, O.empanadas, O.cafe];
