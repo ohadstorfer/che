@@ -7,7 +7,16 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { assignVoices, cutMp3, needsSentence, speakerGender } from '../lib/tts.mjs';
+import {
+  assignVoices,
+  castDialogue,
+  castLabel,
+  cutMp3,
+  joinMp3,
+  needsSentence,
+  recordedAs,
+  speakerGender,
+} from '../lib/tts.mjs';
 
 // A pocket lexicon in the shape the database hands over: forms by id, each with
 // the `features.gender` the real rows carry.
@@ -125,4 +134,60 @@ test('an mp3 is cut between frames, a frame early', () => {
   assert.equal(cut.length % 417, 0);
   assert.equal(cut[416], 9);
   assert.equal(cut.at(-1), 20);
+});
+
+test('clips are joined frame to frame, without their tags or the encoder note', () => {
+  const frame = (n, note = '') => {
+    const f = Buffer.alloc(417);
+    f.set([0xff, 0xfb, 0x90, 0xc4]);
+    f.write(note, 36, 'latin1');
+    f[416] = n;
+    return f;
+  };
+  const tag = Buffer.from([0x49, 0x44, 0x33, 4, 0, 0, 0, 0, 0, 5, 1, 2, 3, 4, 5]);
+  const clip = (from) => Buffer.concat([tag, frame(99, 'Info'), frame(from), frame(from + 1)]);
+  const joined = joinMp3([clip(1), clip(3)]);
+  assert.equal(joined.length, 4 * 417);
+  assert.deepEqual([1, 2, 3, 4].map((n, i) => joined[i * 417 + 416]), [1, 2, 3, 4]);
+});
+
+// --- dialogues: two people, two voices --------------------------------------
+
+const dialogue = (text, s1, s2) => castLabel(castDialogue('id', text, { es: text, s1, s2 }, VOICES));
+
+test('a dialogue between a man and a woman is Tomás and Malena, in the order the text says', () => {
+  assert.equal(dialogue('—Tomás, ¿cómo va? —Bien, ¿y vos?', null, 'm'), 'malena+tomas');
+  assert.equal(dialogue('—¿Estás cansada? —Sí, medio.', null, 'f'), 'tomas+malena');
+  assert.equal(dialogue('—Gracias, querida. —No es nada.', 'm', null), 'tomas+malena');
+  assert.equal(dialogue('—Encantada, Nico. —Igualmente, Juli.', 'f', 'm'), 'malena+tomas');
+});
+
+test('two men or two women get two different voices', () => {
+  assert.equal(dialogue('—Hola, Fede. —Hola, Mati.', 'm', 'm'), 'tomas+agustin');
+  assert.equal(dialogue('—¿Un mate, Ana? —Sí, sos una capa.', 'f', 'f'), 'malena+martina');
+});
+
+test('a dialogue the text says nothing about is still a man and a woman, the same on every run', () => {
+  const text = '—¿Un café? —Dale.';
+  const ids = Array.from({ length: 40 }, (_, i) => `s${i}`);
+  const casts = ids.map((id) => castLabel(castDialogue(id, text, undefined, VOICES)));
+  assert.ok(casts.every((c) => c === 'tomas+malena' || c === 'malena+tomas'));
+  assert.ok(casts.includes('tomas+malena') && casts.includes('malena+tomas'));
+  assert.deepEqual(ids.map((id) => castLabel(castDialogue(id, text, undefined, VOICES))), casts);
+});
+
+test('a cast read from other words is ignored, and one line is not a dialogue', () => {
+  const stale = castDialogue('id', '—¿Un mate? —Dale.', { es: '—¿Un café? —Dale.', s1: 'm', s2: 'm' }, VOICES);
+  assert.ok(!castLabel(stale).includes('agustin'));
+  assert.equal(castDialogue('id', 'Hola, ¿qué tal?', undefined, VOICES), null);
+  assert.equal(castDialogue('id', '—Hola.', undefined, VOICES), null);
+});
+
+test('a dialogue recorded in one voice is due again; one recorded as cast is not', () => {
+  const speakers = castDialogue('id', '—Hola, Fede. —Hola, Mati.', { es: '—Hola, Fede. —Hola, Mati.', s1: 'm', s2: 'm' }, VOICES);
+  assert.ok(!recordedAs({ audio_path: 'sentences/id-tomas-1.mp3', voice_id: 'tomas' }, speakers[0], speakers));
+  assert.ok(recordedAs({ audio_path: 'sentences/id-tomas+agustin-2.mp3', voice_id: 'tomas' }, speakers[0], speakers));
+  // A one-voice sentence is judged by its voice, as before.
+  assert.ok(recordedAs({ audio_path: 'x', voice_id: 'tomas' }, VOICES[1], null));
+  assert.ok(!recordedAs({ audio_path: 'x', voice_id: 'malena' }, VOICES[1], null));
 });

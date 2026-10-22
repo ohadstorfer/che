@@ -21,7 +21,18 @@ import { dirname } from 'node:path';
 import { uploadFolders } from './lib/clips.mjs';
 import { queryLinked } from './lib/db.mjs';
 import { q } from './lib/sql.mjs';
-import { apiKey, assignVoices, clipPath, speakerGender, synthesize } from './lib/tts.mjs';
+import {
+  apiKey,
+  assignVoices,
+  castDialogue,
+  castLabel,
+  clipPath,
+  loadDialogueCast,
+  recordedAs,
+  speakerGender,
+  synthesize,
+  synthesizeDialogue,
+} from './lib/tts.mjs';
 
 /** Runs `job` over `items`, `atOnce` at a time. */
 async function pooled(items, atOnce, job) {
@@ -100,11 +111,21 @@ const sentences = wantSentences
 // every word in one voice and every sentence in the other.
 const speaker = new Map([...assignVoices(words, voices), ...assignVoices(sentences, voices)]);
 
+// A dialogue is two people, each in a voice of their own (castDialogue); the
+// row's voice is whoever speaks first.
+const cast = loadDialogueCast();
+const speakers = new Map(
+  sentences.map((s) => [s.id, castDialogue(s.id, s.text, cast[s.id], voices)]).filter(([, v]) => v),
+);
+for (const [id, [first]] of speakers) speaker.set(id, first);
+/** Who a clip's name says is in it. */
+const label = (c) => (speakers.has(c.id) ? castLabel(speakers.get(c.id)) : speaker.get(c.id).id);
+
 // A clip is due if it has no recording, or if the one it has is in the wrong
 // voice — which happens when the casting rules learn something, as they did
 // when names got a gender. Re-recording exactly those keeps the course true to
 // the rules without a --force that would pay for every clip again.
-const miscast = (c) => c.audio_path && c.voice_id && speaker.get(c.id).id !== c.voice_id;
+const miscast = (c) => c.audio_path && !recordedAs(c, speaker.get(c.id), speakers.get(c.id));
 const clips = [...words, ...sentences].filter((c) => force || !c.audio_path || miscast(c));
 const recast = clips.filter((c) => !force && miscast(c)).length;
 const already = words.length + sentences.length - clips.length;
@@ -128,7 +149,7 @@ if (dryRun) {
     // `cast` marks a line the text itself decided, so a reviewer can see the
     // rule working rather than take the split on trust.
     const why = c.gender ? `cast ${c.gender}` : '';
-    console.log(`  ${speaker.get(c.id).id.padEnd(7)} ${c.kind.padEnd(8)} ${c.text.padEnd(34)} ${why}`);
+    console.log(`  ${label(c).padEnd(7)} ${c.kind.padEnd(8)} ${c.text.padEnd(34)} ${why}`);
   }
   console.log(`\n--dry-run: ${[...tally].map(([v, n]) => `${v} ${n}`).join(', ')} — nothing called, nothing written`);
   process.exit(0);
@@ -151,19 +172,21 @@ let spent = 0;
 // Three at once is what the ElevenLabs plan allows.
 await pooled(clips, 3, async (clip, i) => {
   const voice = speaker.get(clip.id);
-  const label = `${i + 1}/${clips.length} ${voice.id.padEnd(7)} ${clip.text}`;
+  const line = `${i + 1}/${clips.length} ${label(clip).padEnd(7)} ${clip.text}`;
   try {
-    const { mp3, cost } = await synthesize({ text: clip.text, voice, key });
+    const { mp3, cost } = speakers.has(clip.id)
+      ? await synthesizeDialogue({ text: clip.text, speakers: speakers.get(clip.id), key })
+      : await synthesize({ text: clip.text, voice, key });
     spent += cost;
-    const path = clipPath(clip.kind, clip.id, voice.id, stamp);
+    const path = clipPath(clip.kind, clip.id, label(clip), stamp);
     const local = `${dir}${path}`;
     mkdirSync(dirname(local), { recursive: true });
     writeFileSync(local, mp3);
     done.push({ ...clip, voice, path, local });
-    console.log(`  ${label} — ${(mp3.length / 1024).toFixed(0)} kB`);
+    console.log(`  ${line} — ${(mp3.length / 1024).toFixed(0)} kB`);
   } catch (err) {
     failed.push({ ...clip, error: err.message });
-    console.log(`  ${label} — FAILED: ${err.message}`);
+    console.log(`  ${line} — FAILED: ${err.message}`);
   }
 });
 

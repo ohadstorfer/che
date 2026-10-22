@@ -2,7 +2,9 @@
 // Records the whole course in one go: every published word and sentence, in
 // every published unit, that has no clip yet or has one in the wrong voice.
 //
-//   npm run course:tts-all [-- --dry-run]
+//   npm run course:tts-all [-- --dry-run] [--dialogues]
+//
+//   --dialogues  only the two-person lines (castDialogue), nothing else
 //
 // The casting is course:tts's, unit by unit (assignVoices), so a clip gets the
 // speaker it would get there. What differs is the plumbing. course:tts asks the
@@ -17,9 +19,21 @@ import { dirname } from 'node:path';
 import { uploadFolders } from './lib/clips.mjs';
 import { queryLinked } from './lib/db.mjs';
 import { q } from './lib/sql.mjs';
-import { apiKey, assignVoices, clipPath, speakerGender, synthesize } from './lib/tts.mjs';
+import {
+  apiKey,
+  assignVoices,
+  castDialogue,
+  castLabel,
+  clipPath,
+  loadDialogueCast,
+  recordedAs,
+  speakerGender,
+  synthesize,
+  synthesizeDialogue,
+} from './lib/tts.mjs';
 
 const dryRun = process.argv.includes('--dry-run');
+const onlyDialogues = process.argv.includes('--dialogues');
 /** Three requests at once is what the ElevenLabs plan allows. */
 const AT_ONCE = 3;
 const BATCH = 300;
@@ -52,6 +66,9 @@ const by = (rows) => Map.groupBy(rows, (r) => r.unit_id);
 const wordsOf = by(allWords);
 const sentencesOf = by(allSentences);
 
+// A dialogue is two people, each in a voice of their own — see castDialogue.
+const cast = loadDialogueCast();
+
 const due = [];
 let total = 0;
 for (const unit of units) {
@@ -70,8 +87,10 @@ for (const unit of units) {
   // Balanced separately, as in course:tts.
   const speaker = new Map([...assignVoices(words, voices), ...assignVoices(sentences, voices)]);
   for (const c of [...words, ...sentences]) {
-    const voice = speaker.get(c.id);
-    if (!c.audio_path || (c.voice_id && voice.id !== c.voice_id)) due.push({ ...c, voice, slug: unit.slug });
+    const speakers = c.kind === 'sentence' ? castDialogue(c.id, c.text, cast[c.id], voices) : null;
+    const voice = speakers?.[0] ?? speaker.get(c.id);
+    if (onlyDialogues && !speakers) continue;
+    if (!c.audio_path || !recordedAs(c, voice, speakers)) due.push({ ...c, voice, speakers, slug: unit.slug });
   }
 }
 
@@ -104,9 +123,11 @@ for (let at = 0; at < due.length && !outOfCredits; at += BATCH) {
     for (let clip = queue.shift(); clip && !outOfCredits; clip = queue.shift()) {
       for (let attempt = 1; ; attempt++) {
         try {
-          const { mp3, cost } = await synthesize({ text: clip.text, voice: clip.voice, key });
+          const { mp3, cost } = clip.speakers
+            ? await synthesizeDialogue({ text: clip.text, speakers: clip.speakers, key })
+            : await synthesize({ text: clip.text, voice: clip.voice, key });
           spent += cost;
-          const path = clipPath(clip.kind, clip.id, clip.voice.id, stamp);
+          const path = clipPath(clip.kind, clip.id, clip.speakers ? castLabel(clip.speakers) : clip.voice.id, stamp);
           mkdirSync(dirname(`${dir}${path}`), { recursive: true });
           writeFileSync(`${dir}${path}`, mp3);
           made.push({ ...clip, path });

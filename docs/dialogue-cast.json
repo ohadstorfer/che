@@ -1,0 +1,612 @@
+{
+  "00afbe5e-ef72-567a-abef-89765b84ed1e": {
+    "es": "—¿Vos sos Ana? —Sí, ¿y vos?",
+    "s1": null,
+    "s2": "f"
+  },
+  "044de748-c048-58bc-b8c8-a71eb863ee60": {
+    "es": "—¿Estás ocupada? —No, todo bien.",
+    "s1": null,
+    "s2": "f"
+  },
+  "0733c00d-5c89-54ff-b40f-c7ebe4d9b239": {
+    "es": "—Soy estudiante de Marta. —Ah, encantada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "094acedc-d733-588f-892a-278fc17a367d": {
+    "es": "—¿Sos Martín? —Sí, soy yo.",
+    "s1": null,
+    "s2": "m"
+  },
+  "0a3015a9-9fb3-5d8b-b07f-fee9580d8e19": {
+    "es": "—¿Estás nervioso por el examen? —Ni ahí, estudié un montón.",
+    "s1": null,
+    "s2": "m"
+  },
+  "15137e5e-a03a-5a32-9efb-947f1c96c345": {
+    "es": "—Encantado, soy profe de Santi. —Igualmente.",
+    "s1": "m",
+    "s2": null
+  },
+  "154a34c1-8c63-53b3-b939-ef6112b33d74": {
+    "es": "—¿Un mate, Ana? —Sí, gracias, sos una capa.",
+    "s1": "f",
+    "s2": "f"
+  },
+  "1791182e-dc97-5155-8b13-9489c5f75a16": {
+    "es": "—¿Jugamos al fútbol mañana? —Ni loco, estoy muerto.",
+    "s1": null,
+    "s2": "m"
+  },
+  "1807d6eb-1e51-581c-a798-8b981ed88b5b": {
+    "es": "—¿Sos ordenado? —Más o menos.",
+    "s1": null,
+    "s2": "m"
+  },
+  "21e9c831-c4a3-5eaf-889a-3ec028c87cf2": {
+    "es": "—¿Vivís con tu novio? —No, vivo sola.",
+    "s1": null,
+    "s2": "f"
+  },
+  "2569d96c-3621-59bb-8e3b-bd2b6540f4e7": {
+    "es": "—¿Cómo va? —Estoy cansada, pero contenta.",
+    "s1": null,
+    "s2": "f"
+  },
+  "256e9955-1268-5113-8af6-3e3780a6f8b7": {
+    "es": "—Gracias, Ana. —De nada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "27366be7-26c0-5585-b9c9-f7c10a5cdc16": {
+    "es": "—¿Un café? —No, gracias, estoy apurada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "2a74f9af-61e0-5e19-8f17-3854b40fc05f": {
+    "es": "—Gracias por la ayuda, vecino. —Faltaba más.",
+    "s1": null,
+    "s2": "m"
+  },
+  "2c6f143d-7a01-5337-ad4b-65e01b0e25cd": {
+    "es": "—¿Estás cansado? —Ni ahí.",
+    "s1": null,
+    "s2": "m"
+  },
+  "2cc4005c-590c-55ad-b6cd-4005b8d87201": {
+    "es": "—Hola, ¿cómo va? —¿Qué hacés, Martín?",
+    "s1": "m",
+    "s2": null
+  },
+  "2cd69694-7bfd-5c47-8f04-2b0ec5fc9e55": {
+    "es": "—¿Volvés con tu ex? —Ni loca, para nada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "2f72da72-f018-5543-af21-960dbcd41115": {
+    "es": "—¿Sos gallego? —No, soy italiano.",
+    "s1": null,
+    "s2": "m"
+  },
+  "3449b4fd-2360-52f6-8129-141aee3f4b0d": {
+    "es": "—¿Qué onda, Juan? —Acá andamos, más o menos.",
+    "s1": null,
+    "s2": "m"
+  },
+  "3581e6fc-f510-5dc7-a942-1fb339b9d13d": {
+    "es": "—Juli, ¿estás lista? —Sí, dale.",
+    "s1": null,
+    "s2": "f"
+  },
+  "3bf274b2-d44b-566c-9e59-b4978fdfa2f4": {
+    "es": "—¿De qué laburás? —Tengo un laburo de moza.",
+    "s1": null,
+    "s2": "f"
+  },
+  "4068a7e6-5865-53bc-8c1a-f0ad6d2860fa": {
+    "es": "—Hola, Fede, ¿todo bien? —Hola, Mati, todo bien.",
+    "s1": "m",
+    "s2": "m"
+  },
+  "41e30510-0470-53fc-914f-a541ae9a5186": {
+    "es": "—¿Otra medialuna? —No, gracias, estoy llena.",
+    "s1": null,
+    "s2": "f"
+  },
+  "449797b0-0612-5a3a-8d88-43b7b926c78b": {
+    "es": "—¿Cuántos años tenés, abuela? —Setenta y tres.",
+    "s1": null,
+    "s2": "f"
+  },
+  "44fa0c97-3b64-5b65-a82f-d56a8adcdf26": {
+    "es": "—¿Vos sos sobrino de Diego? —Sí, soy Juan.",
+    "s1": null,
+    "s2": "m"
+  },
+  "471af026-cb9e-5757-a18e-7e4d72cbe961": {
+    "es": "—¿Por qué estás colorado? —Me dio vergüenza.",
+    "s1": null,
+    "s2": "m"
+  },
+  "489a6cc5-001d-56dc-83fe-25ba4c66f1bc": {
+    "es": "—¿Te enojaste? —No, estoy cansada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "4a4cd8d5-cdc5-512a-b881-f90606f5a449": {
+    "es": "—¿Estás nerviosa? —No, todo bien.",
+    "s1": null,
+    "s2": "f"
+  },
+  "4e942c1c-5688-5ebf-8409-9e8395934e55": {
+    "es": "—¿Sos soltero? —No, soy casado.",
+    "s1": null,
+    "s2": "m"
+  },
+  "4f13b843-d221-550f-b37b-e659b425c908": {
+    "es": "—¿Qué hacés, Fede? —Acá andamos.",
+    "s1": null,
+    "s2": "m"
+  },
+  "52f6e8bd-503b-53bd-a5e4-5233a47c614f": {
+    "es": "—Mamá, ¿dónde estás? —Estoy acá, en Rosario.",
+    "s1": null,
+    "s2": "f"
+  },
+  "53dd2214-5291-519d-a31b-729aa6247115": {
+    "es": "—¿Sos Pablo? —Ah, no, soy Mati.",
+    "s1": null,
+    "s2": "m"
+  },
+  "5439bab7-2062-5d4c-b667-b5903c2d72df": {
+    "es": "—¿Lo viste? —Sí, pero me hice el gil.",
+    "s1": null,
+    "s2": "m"
+  },
+  "5d9136cf-3134-5138-8e17-36a904e10035": {
+    "es": "—¿Por qué no viniste? —Estoy engripado.",
+    "s1": null,
+    "s2": "m"
+  },
+  "5e017dce-9588-5de9-b4cc-9f84f4df9937": {
+    "es": "—Un gusto, Pablo. —Igualmente.",
+    "s1": null,
+    "s2": "m"
+  },
+  "5e5f3611-50f2-5384-b880-77a9b7424865": {
+    "es": "—Gracias, Belén. —¡Faltaba más!",
+    "s1": null,
+    "s2": "f"
+  },
+  "5fb92816-2edb-53cb-a391-43078dee4839": {
+    "es": "—Che, Santi, ¿y Belén? —Mal, Cami.",
+    "s1": "f",
+    "s2": "m"
+  },
+  "635707e8-b120-510b-a592-87c745156534": {
+    "es": "—¿Sos Juli? —No, soy Mica.",
+    "s1": null,
+    "s2": "f"
+  },
+  "66d6b9bf-4cdf-5056-8f89-04c258d4de0e": {
+    "es": "—¿Trabajás? —No, soy jubilada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "675b89f3-8f50-557c-b5e1-bdf3c2f1cf0e": {
+    "es": "—Gracias por subir las compras. —No es nada, doña Marta.",
+    "s1": "f",
+    "s2": null
+  },
+  "6a90ee3b-c284-5410-b784-3568dbe47e33": {
+    "es": "—¿Qué onda, Pablo? —Mal, Diego, mal.",
+    "s1": "m",
+    "s2": "m"
+  },
+  "6cb0e284-af56-542f-8712-22dcdda40ad9": {
+    "es": "—¿Vivís por acá? —Sí, soy enfermera en el hospital.",
+    "s1": null,
+    "s2": "f"
+  },
+  "6d9bc997-77bf-547d-9195-b473fbd6fa06": {
+    "es": "—Hola, Juli, ¿y Nico? —Bien, Mica, gracias.",
+    "s1": "f",
+    "s2": "f"
+  },
+  "6de19576-ff44-508e-a523-897f3242e745": {
+    "es": "—¿Por qué no viniste? —Estuve engripada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "6fd587c1-9c33-5c88-b7f5-848aebc61df1": {
+    "es": "—¿Sos mamá de Cami? —No, soy suegra.",
+    "s1": null,
+    "s2": "f"
+  },
+  "70d3ae60-06a0-5f33-bb44-f129a94803c8": {
+    "es": "—¿Cómo estás? —Medio cansada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "73178410-cc95-5a61-b632-59dcedcb5dd0": {
+    "es": "—¿Por qué estás tan agotado? —Tuve mucho laburo.",
+    "s1": null,
+    "s2": "m"
+  },
+  "732f4d97-f6a8-5416-a7bc-aeccc967fb46": {
+    "es": "—Pablo, ¿un café? —Sí, gracias, sos un capo.",
+    "s1": "m",
+    "s2": "m"
+  },
+  "75783ebe-b8ba-5330-a481-2b0343731c59": {
+    "es": "—¿Seguís enojada? —No, ya pudimos aclarar el malentendido.",
+    "s1": null,
+    "s2": "f"
+  },
+  "769ae2d4-47e4-5a0d-aac9-7cae961d2c1f": {
+    "es": "—¿Estás ocupado? —No, dale.",
+    "s1": null,
+    "s2": "m"
+  },
+  "797cd149-b260-5691-98ff-1aea220e0642": {
+    "es": "—Perdón, ¿sos profe? —Sí, soy Nico.",
+    "s1": null,
+    "s2": "m"
+  },
+  "7e0bd539-a5c6-5e79-90bf-7b43604dbbea": {
+    "es": "—¿Sos tanguera? —Recién empiezo, tomé dos clases.",
+    "s1": null,
+    "s2": "f"
+  },
+  "7e6f1ad9-d519-5866-8de7-d21dee25fca1": {
+    "es": "—¿Cómo estás? —Mal, estoy cansado y enfermo.",
+    "s1": null,
+    "s2": "m"
+  },
+  "7ee284aa-fbbc-5b01-9a62-8ae7d96f3afe": {
+    "es": "—¡Felices fiestas, vecina! —Igualmente, ¡feliz Navidad!",
+    "s1": null,
+    "s2": "f"
+  },
+  "7f0cf891-a3d0-5984-9e80-c76b82a75202": {
+    "es": "—Perdón, pasé sin decir permiso. —No es nada, querido.",
+    "s1": "m",
+    "s2": null
+  },
+  "7f282cd1-d5b0-5dd7-9800-92bdac108812": {
+    "es": "—¿Estás de acuerdo con el aumento? —Ni loca.",
+    "s1": null,
+    "s2": "f"
+  },
+  "7fc90645-2cdc-51bd-8755-611f854da296": {
+    "es": "—Buenas noches, Martín. —Joya, hasta mañana.",
+    "s1": null,
+    "s2": "m"
+  },
+  "8370dbe2-2095-5a9e-a645-5f8210b41708": {
+    "es": "—¿Ustedes tienen hijos? —Sí, nosotras tenemos tres.",
+    "s1": null,
+    "s2": "f"
+  },
+  "866e1310-d3f0-5f22-bd96-65bbcc7c1576": {
+    "es": "—¿Estás cansada? —Sí, medio.",
+    "s1": null,
+    "s2": "f"
+  },
+  "8753fe8e-42da-5cd6-bfc3-239958e530c5": {
+    "es": "—¿Sos casada? —Sí, él es mi marido.",
+    "s1": null,
+    "s2": "f"
+  },
+  "87a8465f-807a-51a2-8e27-84ae6ce3fdfd": {
+    "es": "—¿Cómo andás, Juan? —Todo bien.",
+    "s1": null,
+    "s2": "m"
+  },
+  "8941ea83-4cf3-510c-ad31-ba2a026841b2": {
+    "es": "—Un gusto, soy de Brasil. —Igualmente, bienvenido.",
+    "s1": "m",
+    "s2": null
+  },
+  "8af4feb9-8f02-523b-a3cd-94f2b56eef49": {
+    "es": "—¿Cuántos exámenes tenés? —Dos, y estoy nervioso.",
+    "s1": null,
+    "s2": "m"
+  },
+  "8b414c29-2270-513d-9a7d-c7c60673c970": {
+    "es": "—¿Sofi? —No, soy Juan.",
+    "s1": null,
+    "s2": "m"
+  },
+  "8cfacd53-68a6-5940-a47f-ad660ca4280d": {
+    "es": "—¿Otro mate? —Dale, sos un capo.",
+    "s1": "m",
+    "s2": null
+  },
+  "91dc9348-36a8-5420-8173-711e2e004421": {
+    "es": "—Buen día, Mati, ¿todo bien? —Joya, gracias.",
+    "s1": null,
+    "s2": "m"
+  },
+  "933a3e7a-b040-516b-b252-dc22b8c6b104": {
+    "es": "—¿Por qué estás tan orgulloso? —Porque ganamos el partido.",
+    "s1": null,
+    "s2": "m"
+  },
+  "940cc817-8f1c-5be9-b05d-e4ca2db41eeb": {
+    "es": "—¡Gracias, Sofi! —¡Faltaba más!",
+    "s1": null,
+    "s2": "f"
+  },
+  "9532e835-4415-5151-8d40-2fc6ef3cc331": {
+    "es": "—¿Puedo pasar al baño? —Faltaba más, querido.",
+    "s1": "m",
+    "s2": null
+  },
+  "95cf44cc-a534-505f-9c63-2ef0651f3ca0": {
+    "es": "—¿De dónde sos? —Soy español.",
+    "s1": null,
+    "s2": "m"
+  },
+  "9662cadf-8fbd-5491-bac1-8beb6cb9f1dd": {
+    "es": "—¿Estás celosa? —No, para nada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "97a46cd2-f933-5f53-a83a-3258eeba575f": {
+    "es": "—¿Vos sos argentina? —No, yo soy de Montevideo.",
+    "s1": null,
+    "s2": "f"
+  },
+  "98fdf133-84d4-5acc-a3ee-6610fbbde21b": {
+    "es": "—¿Cómo están ustedes? —Cansadas, pero felices.",
+    "s1": null,
+    "s2": "f"
+  },
+  "9b0a4c99-ffe6-564e-be0f-f8282052546a": {
+    "es": "—¿Te gusta el depto? —Para nada, ni loca vivo ahí.",
+    "s1": null,
+    "s2": "f"
+  },
+  "9cecb8a0-4c4a-5230-8ce7-5d51282491e1": {
+    "es": "—¿Querés probar el picante? —Ni loco, el que se quema con leche, ve una vaca y llora.",
+    "s1": null,
+    "s2": "m"
+  },
+  "a1c00b30-2afa-5ebb-887d-07acf2ed156a": {
+    "es": "—Che, Diego, ¿otro mate? —No, gracias, todo bien.",
+    "s1": null,
+    "s2": "m"
+  },
+  "a283b674-e645-5231-8be4-c7c45afed82e": {
+    "es": "—Encantada, Nico. —Igualmente, Juli.",
+    "s1": "f",
+    "s2": "m"
+  },
+  "a5839127-e39c-5b42-9918-3f4b24ae7684": {
+    "es": "—Gracias, querida. —No es nada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "a68bc837-60ff-5e73-9dba-6f7dfe69884b": {
+    "es": "—¿Otra empanada? —No, estoy lleno.",
+    "s1": null,
+    "s2": "m"
+  },
+  "aa3e298b-0c3b-52da-a6f5-99ff4be1ce74": {
+    "es": "—¿Cómo andás, Lucía? —Bien, gracias.",
+    "s1": null,
+    "s2": "f"
+  },
+  "b28acf96-3638-5887-a576-a00acf22d15f": {
+    "es": "—¿Cuántas facturas, Fede? —Ocho.",
+    "s1": null,
+    "s2": "m"
+  },
+  "b4a6fca2-1ce5-574d-8b8e-fcbf1f6ec372": {
+    "es": "—¿Qué leés? —El diario, busco laburo de mozo.",
+    "s1": null,
+    "s2": "m"
+  },
+  "b5894986-ec33-5f57-883f-b94527bcb255": {
+    "es": "—¿Te enojaste? —No, me puse un poco celosa.",
+    "s1": null,
+    "s2": "f"
+  },
+  "b677c429-086a-5d7e-bb08-dd739f0c8aa9": {
+    "es": "—¿Estás bien? —Sí, pero medio aburrida.",
+    "s1": null,
+    "s2": "f"
+  },
+  "b7b79451-d603-565e-ba65-6ff0311399fb": {
+    "es": "—¿Sos contador? —No, soy ingeniero.",
+    "s1": null,
+    "s2": "m"
+  },
+  "b852f410-a63b-5beb-a3f6-448cd091bfdf": {
+    "es": "—¿Salimos esta noche? —No, estoy agotada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "b937084f-4938-54ff-93fd-df1583a3054c": {
+    "es": "—¿Qué hacés, Juan? —Bien, a mil.",
+    "s1": null,
+    "s2": "m"
+  },
+  "bbe21c05-5fa6-5d32-bbab-3a6c1450ce51": {
+    "es": "—Mucho gusto. —Encantada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "bf74f61d-e507-50a1-946d-8abf644ef29b": {
+    "es": "—¿Sos profe? —No, soy estudiante extranjero.",
+    "s1": null,
+    "s2": "m"
+  },
+  "bfc0779d-7f92-5bee-802b-e4c5e6b5194e": {
+    "es": "—¿Vas a la fiesta? —Ni loco, va mi ex.",
+    "s1": null,
+    "s2": "m"
+  },
+  "bfd60056-f494-5a1a-a24c-ff60493782bc": {
+    "es": "—¿Por qué no viniste? —Es que estaba enfermo.",
+    "s1": null,
+    "s2": "m"
+  },
+  "c30fd391-91f3-563c-a5a1-8e301735da70": {
+    "es": "—Soy Pablo, profe de Juan. —Encantado, Pablo.",
+    "s1": "m",
+    "s2": "m"
+  },
+  "c7b183d4-2d79-5c0b-8763-15994c408b2e": {
+    "es": "—¿Qué onda, Sofi? —Todo bien.",
+    "s1": null,
+    "s2": "f"
+  },
+  "c88ffad5-cd0a-5103-bccc-a8e5b158697c": {
+    "es": "—¿Sos celoso? —No, para nada.",
+    "s1": null,
+    "s2": "m"
+  },
+  "cad18c81-516b-507b-a513-4ae6549f5013": {
+    "es": "—¿Qué hacés, Lucía? —Hola, estoy apurada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "cd9717f2-299a-56cf-8201-5afcb5c54fb4": {
+    "es": "—Santi, ¿estás listo? —No, estoy medio nervioso.",
+    "s1": null,
+    "s2": "m"
+  },
+  "d0326d54-8662-522c-a0d7-eccaa73a8d83": {
+    "es": "—¿Me cuidás las plantas? —Cómo no, doña Rosa.",
+    "s1": "f",
+    "s2": null
+  },
+  "d1005565-cf6b-5478-8791-252cb1de6ae3": {
+    "es": "—¿Otra medialuna? —No, estoy lleno.",
+    "s1": null,
+    "s2": "m"
+  },
+  "d5dde2e5-5fe4-5f69-8343-6e24fd673d01": {
+    "es": "—¿Vos sos uruguaya? —No, yo soy de Rosario.",
+    "s1": null,
+    "s2": "f"
+  },
+  "d6653063-249c-5a92-912e-c519051f6df9": {
+    "es": "—¿Gimnasio a las seis? —Ni loca, a esa hora duermo.",
+    "s1": null,
+    "s2": "f"
+  },
+  "d6656fd9-982a-538c-92b0-074eb70c2723": {
+    "es": "—Mucho gusto, soy Diego. —Igualmente, yo soy Mica.",
+    "s1": "m",
+    "s2": "f"
+  },
+  "d9a6f779-52e0-53b8-ad18-e5201739edc9": {
+    "es": "—¿Estás bien? —No, estoy hecho pelota.",
+    "s1": null,
+    "s2": "m"
+  },
+  "d9cdb1a9-3b3d-5338-a227-ab1f238af1a6": {
+    "es": "—Mucho gusto, soy Fede. —Encantada, yo soy Cami.",
+    "s1": "m",
+    "s2": "f"
+  },
+  "dd419d4b-db98-5e0c-b995-2da309162e62": {
+    "es": "—¿Todo bien? —No, estoy engripada.",
+    "s1": null,
+    "s2": "f"
+  },
+  "ddcea319-8246-5bd0-8977-328cb205536d": {
+    "es": "—¿De dónde sos? —Soy paraguayo, ¿y vos?",
+    "s1": null,
+    "s2": "m"
+  },
+  "e035a9e1-d1ec-5ad6-ba92-a4de13adace8": {
+    "es": "—¿Sos de Inglaterra? —No, soy alemán.",
+    "s1": null,
+    "s2": "m"
+  },
+  "e196e792-80b8-5a13-b92a-ae5f4c251353": {
+    "es": "—¿Sos inglés? —No, yanqui.",
+    "s1": null,
+    "s2": "m"
+  },
+  "e28498bc-4bda-5a13-ba1c-f85bf4cd0d8c": {
+    "es": "—Perdón, ¿vos sos Sofi? —Sí, soy yo.",
+    "s1": null,
+    "s2": "f"
+  },
+  "e2b0fc74-d1c2-5192-9a8a-73875015d217": {
+    "es": "—¿Estás cansado? —En realidad, no.",
+    "s1": null,
+    "s2": "m"
+  },
+  "e6a0c519-74cb-5460-b54d-291829f9e57b": {
+    "es": "—¿Ascensor o escalera? —Escalera, estoy apurado.",
+    "s1": null,
+    "s2": "m"
+  },
+  "e85645ca-e1d3-564a-809f-49b76ab57a2d": {
+    "es": "—¡Gracias, Mati! —De nada.",
+    "s1": null,
+    "s2": "m"
+  },
+  "e8a57b29-b965-5b94-9160-98733ac41f31": {
+    "es": "—Gracias por el cargador. —De nada, Mati.",
+    "s1": "m",
+    "s2": null
+  },
+  "ea60e830-2728-5765-82fe-576bf33cb489": {
+    "es": "—¿Te pusiste nervioso? —Sí, re nervioso.",
+    "s1": null,
+    "s2": "m"
+  },
+  "ea85939b-b107-5522-88d1-48d8217a1cce": {
+    "es": "—Yo soy alemán, ¿y vos? —Chileno.",
+    "s1": "m",
+    "s2": "m"
+  },
+  "ec222e9b-92c8-5713-accb-66427de0015a": {
+    "es": "—¿Te vas solo a Bariloche? —Sí, me la juego.",
+    "s1": null,
+    "s2": "m"
+  },
+  "eea991fc-7636-5f4b-b43c-2bae78b75e14": {
+    "es": "—Permiso, doña Elena. —Pasá, querido, pasá.",
+    "s1": "m",
+    "s2": "f"
+  },
+  "f497d8f0-5473-53f7-92d0-6c077c4e2389": {
+    "es": "—¿Sos estudiante extranjera? —No, soy profe.",
+    "s1": null,
+    "s2": "f"
+  },
+  "f7ba5953-ae2f-5eb5-9d81-f282bb1566e7": {
+    "es": "—¿Sofi? —No, Lucía.",
+    "s1": null,
+    "s2": "f"
+  },
+  "fbae0ca1-1462-576c-afce-f1114925af81": {
+    "es": "—¿Qué hiciste? —Nada, me quedé helado.",
+    "s1": null,
+    "s2": "m"
+  },
+  "fbe3a614-55b6-5efe-ab87-b19ff59fc8e8": {
+    "es": "—¿Viajaste solo? —No, con mi novia.",
+    "s1": null,
+    "s2": "m"
+  },
+  "fcf7c3c7-3d26-5e9a-b04b-df650c63ff96": {
+    "es": "—¿Por qué estás contenta? —Porque tengo un gato.",
+    "s1": null,
+    "s2": "f"
+  },
+  "fcf9f3c8-98f2-55bd-9b07-ead30c720bc0": {
+    "es": "—¿Cuántas materias tenés? —Seis, y estoy cansado.",
+    "s1": null,
+    "s2": "m"
+  }
+}

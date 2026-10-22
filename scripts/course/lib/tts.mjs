@@ -4,6 +4,8 @@
 // The vendor is ElevenLabs (docs/course-spec.md §0). Nothing here writes to the
 // database or to storage — tts.mjs does that — so every decision below can be
 // read and tested on its own.
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 
 const API = 'https://api.elevenlabs.io/v1';
 
@@ -102,6 +104,79 @@ export function assignVoices(clips, voices) {
     give(clip, voices.reduce((a, b) => (said.get(b.id) < said.get(a.id) ? b : a)));
   }
   return out;
+}
+
+/**
+ * The second man and the second woman: they speak only in a dialogue between
+ * two people of the same gender, so they are not in public.voices and never in
+ * the rota. Both from the ElevenLabs library, both labelled `argentine`.
+ */
+export const SECOND_VOICES = {
+  male: { id: 'agustin', provider_id: 'ByVRQtaK1WDOvTmP1PKO', model: 'eleven_v4_turbo', gender: 'male' },
+  female: { id: 'martina', provider_id: 'oq8K6jJPiW08295EbH2y', model: 'eleven_v4_turbo', gender: 'female' },
+};
+
+/** A dialogue's turns, dashes off: "—¿Un café? —Sí, gracias." → two. One line is not a dialogue. */
+export function dialogueTurns(text) {
+  const turns = text.split('—').map((t) => t.trim()).filter(Boolean);
+  return text.trim().startsWith('—') && turns.length >= 2 ? turns : null;
+}
+
+/** Who has been cast in which dialogue (docs/dialogue-cast.json), by sentence id. */
+export const loadDialogueCast = () =>
+  JSON.parse(readFileSync(new URL('../../../docs/dialogue-cast.json', import.meta.url), 'utf8'));
+
+/**
+ * The voice of each speaker in a dialogue — two people, so never one voice.
+ *
+ * `cast` is the reading of the line (docs/dialogue-cast.json): `s1` and `s2` are
+ * `m`, `f` or null, null where the text commits that speaker to nothing. A
+ * cast read from different words than the sentence has now says nothing — the
+ * line was edited since — and is ignored.
+ *
+ * A man and a woman wherever the text allows it, Tomás and Malena; a man and a
+ * man is Tomás and Agustín, a woman and a woman Malena and Martina. Where the
+ * text leaves both open, who speaks first is the sentence id's to decide, so it
+ * is half and half across the course and the same on every run.
+ */
+export function castDialogue(id, text, cast, voices) {
+  const turns = dialogueTurns(text);
+  if (!turns) return null;
+  const main = { m: voices.find((v) => v.gender === 'male'), f: voices.find((v) => v.gender === 'female') };
+  const other = { m: 'f', f: 'm' };
+  let { s1, s2 } = cast?.es === text ? cast : { s1: null, s2: null };
+  if (!s1 && !s2) s1 = parseInt(createHash('sha256').update(id).digest('hex').slice(0, 2), 16) % 2 ? 'm' : 'f';
+  s1 ??= other[s2];
+  s2 ??= other[s1];
+  const second = s1 === s2 ? SECOND_VOICES[VOICE_GENDER[s2]] : main[s2];
+  // Speakers take turns, so a third line is the first speaker's again.
+  return turns.map((_, i) => (i % 2 ? second : main[s1]));
+}
+
+/** What a dialogue's clip name says about who speaks in it: "tomas+malena". */
+export const castLabel = (speakers) => speakers.map((v) => v.id).join('+');
+
+/**
+ * Whether a sentence's clip is the one its casting asks for. A dialogue's
+ * casting is in its clip's name, since the row has room for one voice.
+ */
+export const recordedAs = (row, voice, speakers) =>
+  speakers ? (row.audio_path ?? '').includes(`-${castLabel(speakers)}-`) : !row.voice_id || row.voice_id === voice.id;
+
+/**
+ * A dialogue as one clip: each turn in its own speaker's voice, end to end. A
+ * clip ends on its own breath of silence and the next opens on one, which is
+ * the pause between two people.
+ */
+export async function synthesizeDialogue({ text, speakers, key, fetchImpl = fetch }) {
+  let cost = 0;
+  const clips = [];
+  for (const [i, turn] of dialogueTurns(text).entries()) {
+    const take = await synthesize({ text: turn, voice: speakers[i], key, fetchImpl });
+    cost += take.cost;
+    clips.push(take.mp3);
+  }
+  return { mp3: joinMp3(clips), cost };
 }
 
 /**
@@ -284,6 +359,24 @@ const BITRATES = [0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 3
  * margins around the word are wider than that.
  */
 export function cutMp3(mp3, from, to) {
+  const frames = framesOf(mp3);
+  const first = Math.max(0, Math.floor(from / FRAME_SECONDS) - 1);
+  const last = Math.min(frames.length, Math.ceil(to / FRAME_SECONDS) + 1);
+  return Buffer.concat(frames.slice(first, last));
+}
+
+/**
+ * Clips one after the other, as one mp3.
+ *
+ * The same frames, end to end — which is all an mp3 is once the tag in front
+ * and the encoder's note are gone. The note matters most: it counts the frames
+ * of the clip it came from, and a player that trusts it stops at the end of the
+ * first speaker.
+ */
+export const joinMp3 = (clips) => Buffer.concat(clips.flatMap(framesOf));
+
+/** An mp3's sound frames: the ID3 tag in front and the encoder's note left out. */
+function framesOf(mp3) {
   let at = 0;
   if (mp3.subarray(0, 3).toString('latin1') === 'ID3')
     at = 10 + ((mp3[6] & 0x7f) << 21 | (mp3[7] & 0x7f) << 14 | (mp3[8] & 0x7f) << 7 | (mp3[9] & 0x7f));
@@ -302,9 +395,7 @@ export function cutMp3(mp3, from, to) {
     if (!note) frames.push(frame);
     at += size;
   }
-  const first = Math.max(0, Math.floor(from / FRAME_SECONDS) - 1);
-  const last = Math.min(frames.length, Math.ceil(to / FRAME_SECONDS) + 1);
-  return Buffer.concat(frames.slice(first, last));
+  return frames;
 }
 
 /**
