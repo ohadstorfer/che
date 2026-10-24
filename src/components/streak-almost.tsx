@@ -26,7 +26,7 @@ export function StreakAlmost({
     <SafeAreaView style={styles.safe}>
       <View style={styles.wrap}>
         <View style={styles.panel}>
-          <Text style={styles.title}>Almost!</Text>
+          <Text style={styles.title}>One more to go!</Text>
           <Image
             source={require('@/assets/images/mate-frozen-figure.png')}
             style={styles.art}

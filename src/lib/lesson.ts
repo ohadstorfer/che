@@ -273,7 +273,14 @@ export function resolveSlots(
         // teach). With no sentence to carry it, the question is how it is met.
         const k = known();
         const sibling = shaped && data.forms.some((f) => f.lemma_id === form.lemma_id && f.id !== form.id && k.has(f.id));
-        const first = intro && sibling ? undefined : itemsForForm(form, null, deck, ladder)[0];
+        // The question after meeting it has her make it: the meeting was
+        // already a recognising screen, and the lesson's meaning and gap
+        // screens are more of the same. Building the word from its letters
+        // right away is what makes it hers (Duolingo's "now you try"). A word
+        // with nothing to build — no recording for a loanword — keeps its
+        // first question.
+        const asked = intro && sibling ? [] : itemsForForm(form, null, deck, ladder);
+        const first = asked.find((i) => i.mode === 'word_build' || i.mode === 'listen_build') ?? asked[0];
         if (first) items.push(first);
         introduced.add(form.id);
         break;

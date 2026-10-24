@@ -14,6 +14,7 @@ import { Platform, Pressable, StyleSheet, Text, TextInput, type TextStyle, View 
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   Easing,
+  FadeInDown,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -26,6 +27,8 @@ import { ExerciseFrame, TightContext, type Verdict } from '@/components/exercise
 import { WrongAnswerActions } from '@/components/wrong-answer-actions';
 import { Panel } from '@/components/ui';
 import { type Anchor, WordPopover, measureAnchor } from '@/components/word-popover';
+import { tap, warn } from '@/lib/haptics';
+import { answerFeedback } from '@/lib/sfx';
 import { playAudio, stopAudio, type AudioFailure } from '@/lib/audio';
 import { clausesOf } from '@/lib/course-rules/shape';
 import { isSlang } from '@/lib/course-rules/vocabulary';
@@ -36,6 +39,8 @@ import {
   isCanonical,
   isPhrase,
   meaningOptions,
+  norm,
+  wordsOf,
   missedForms,
   nearMiss,
   type Option,
@@ -88,6 +93,10 @@ const ItemContext = createContext<QueueItem | null>(null);
  *  new enough to her to be worth marking "Harder". */
 const LadderContext = createContext<Ladder>(DEFAULT_LADDER);
 
+/** The whole lexicon, where an answer's other forms — the best wrong answers
+ *  there are — are found. The deck alone rarely holds them. */
+const LexiconContext = createContext<Map<string, Form> | undefined>(undefined);
+
 type Answered = (wrongFormIds: string[], extra?: AnswerExtra) => void;
 type Single = (correct: boolean, extra?: AnswerExtra) => void;
 
@@ -137,8 +146,9 @@ const NOTE_TEXT: Record<Note, (expected: string) => string> = {
 /**
  * Whether the words of a sentence may be tapped for their meaning (§6.4).
  * Every word can be — function words included, since `de` and `el` are exactly
- * where a beginner stalls — but not on a lesson's new material, and not in a
- * placement test, where the whole point is to find out what she already knows.
+ * where a beginner stalls — lessons too, the way Duolingo lets any word be
+ * peeked at; not in a placement test, where the whole point is to find out
+ * what she already knows.
  *
  * What a tap costs is decided separately, in `round.ts`: an id reported as
  * hinted only counts against her if it is one of the forms this item grades,
@@ -177,6 +187,7 @@ export function Exercise({
   return (
     <ItemContext.Provider value={item}>
       <LadderContext.Provider value={ladder}>
+        <LexiconContext.Provider value={lexicon}>
         <ExerciseBody
           item={item}
           allForms={allForms}
@@ -186,6 +197,7 @@ export function Exercise({
           hints={!!hints}
           lexicon={lexicon}
         />
+        </LexiconContext.Provider>
       </LadderContext.Provider>
     </ItemContext.Provider>
   );
@@ -970,11 +982,12 @@ function MultipleChoice({
   const { form } = item;
   const askSpanish = item.direction === 'es_to_en';
   const answerField = askSpanish ? 'gloss_en' : 'form';
+  const lexicon = useContext(LexiconContext);
   // Randomised content is generated exactly once per exercise: a `useMemo`
   // may legitimately re-run, and a reshuffle mid-answer would grade her
   // against options she never saw.
   const [options] = useState(() =>
-    pickOptions(form, allForms, answerField).map((c) => ({ id: c.id, label: labelOf(c, answerField) })),
+    pickOptions(form, allForms, answerField, lexicon?.values()).map((c) => ({ id: c.id, label: labelOf(c, answerField) })),
   );
   const [chosen, setChosen] = useState<string | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
@@ -998,6 +1011,8 @@ function MultipleChoice({
           correct: chosen === form.id,
           answer: labelOf(form, answerField),
           about: form.gloss_note_en ?? undefined,
+          // Asked from the English, the Spanish is the answer: hear it now.
+          audio: askSpanish ? undefined : (form.audio_path ?? undefined),
         })
       }
       onContinue={() => onAnswer(!!verdict?.correct)}>
@@ -1023,21 +1038,24 @@ function Listen({
   onAnswer: Single;
 }) {
   const { form } = item;
+  const lexicon = useContext(LexiconContext);
   const [options] = useState(() =>
-    pickOptions(form, allForms, 'gloss_en').map((c) => ({ id: c.id, label: shownMeaning(c).text })),
+    pickOptions(form, allForms, 'gloss_en', lexicon?.values()).map((c) => ({ id: c.id, label: shownMeaning(c).text })),
   );
   const [chosen, setChosen] = useState<string | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
 
   return (
     <Frame
-      prompt="What does what you hear mean?"
+      prompt="What does it mean?"
       verdict={verdict}
       canCheck={!!chosen}
       onCheck={() =>
         setVerdict({
           correct: chosen === form.id,
           answer: `${form.form} — ${meaningOf(form)}`,
+          // Right by ear, she still hasn't seen it written: show her.
+          note: chosen === form.id ? `${form.form} — ${meaningOf(form)}` : undefined,
           about: form.gloss_note_en ?? undefined,
         })
       }
@@ -1064,39 +1082,59 @@ export function AudioPad({
    *  the pad lies down: the button and its hint side by side, half the height. */
   compact?: boolean;
 }) {
-  const { playing, problem, play } = useClip(path);
+  const { playing, problem, play, slow, rate } = useClip(path);
   const reduced = useReducedMotion();
 
   // She should hear it before reading anything, so it plays itself on arrival.
   useEffect(() => play(), [play]);
 
+  const slowOn = playing && rate !== 1;
   return (
-    <Pressable
-      onPress={play}
-      style={({ pressed }) => [
-        styles.audioPad,
-        compact && styles.audioPadCompact,
-        { transform: [{ scale: pressed ? 0.99 : 1 }] },
-        webPress,
-      ]}>
-      <View
-        style={[
-          styles.audioPadCircle,
-          compact && styles.audioPadCircleCompact,
-          playing && styles.playButtonOn,
-          problem && styles.playButtonDead,
+    <View style={styles.audioPadWrap}>
+      <Pressable
+        onPress={play}
+        accessibilityLabel={problem ? AUDIO_PROBLEM[problem] : 'Listen'}
+        style={({ pressed }) => [
+          styles.audioPad,
+          compact && styles.audioPadCompact,
+          { transform: [{ scale: pressed ? 0.99 : 1 }] },
+          webPress,
         ]}>
-        {playing && !reduced ? <Pulse inset={compact ? 6 : 7} /> : null}
-        <Ionicons
-          name={problem ? 'volume-mute' : playing ? 'volume-high' : 'play'}
-          size={compact ? 24 : 30}
-          color={colors.onPrimary}
-        />
-      </View>
-      <Text style={[styles.audioPadHint, compact && styles.audioPadHintCompact, problem && styles.audioProblem]}>
-        {problem ? AUDIO_PROBLEM[problem] : playing ? 'Playing…' : 'Tap to listen'}
-      </Text>
-    </Pressable>
+        <View
+          style={[
+            styles.audioPadCircle,
+            compact && styles.audioPadCircleCompact,
+            playing && !slowOn && styles.playButtonOn,
+            problem && styles.playButtonDead,
+          ]}>
+          {playing && !slowOn && !reduced ? <Pulse inset={compact ? 6 : 7} /> : null}
+          <Ionicons
+            name={problem ? 'volume-mute' : playing && !slowOn ? 'volume-high' : 'play'}
+            size={compact ? 24 : 30}
+            color={colors.onPrimary}
+          />
+        </View>
+        <Text style={[styles.audioPadHint, compact && styles.audioPadHintCompact, problem && styles.audioProblem]}>
+          {problem ? AUDIO_PROBLEM[problem] : playing ? 'Playing…' : 'Tap to listen'}
+        </Text>
+      </Pressable>
+      {/* The slow take, like Listen's player: a sentence by ear is where a
+          learner most needs to hear it again at three quarters. */}
+      <Pressable
+        onPress={slow}
+        accessibilityLabel="Play slowly"
+        hitSlop={6}
+        style={({ pressed }) => [
+          styles.playerSlow,
+          styles.audioPadSlow,
+          compact && styles.audioPadSlowCompact,
+          slowOn && { backgroundColor: colors.primarySoft },
+          { transform: [{ scale: pressed ? 0.94 : 1 }] },
+          webPress,
+        ]}>
+        <MaterialCommunityIcons name="tortoise" size={24} color={colors.primary} />
+      </Pressable>
+    </View>
   );
 }
 
@@ -1109,6 +1147,9 @@ export function AudioPad({
 // it used to read. One tap answers: with two choices, a Check button is only a
 // second tap.
 // ---------------------------------------------------------------------------
+/** The real meaning, dropping in over the struck guess. */
+const REAL_MEANING = FadeInDown.duration(240).easing(Easing.bezier(0.23, 1, 0.32, 1));
+
 function TrueFalse({
   item,
   allForms,
@@ -1119,12 +1160,13 @@ function TrueFalse({
   onAnswer: Single;
 }) {
   const { form } = item;
+  const lexicon = useContext(LexiconContext);
   const [picked, setPicked] = useState<boolean | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
 
   // Half the time we show the real meaning, half an imposter's.
   const [{ shown, isTrue }] = useState(() => {
-    const imposter = pickImposter(form, allForms);
+    const imposter = pickImposter(form, allForms, lexicon?.values());
     if (!imposter || Math.random() < 0.5) return { shown: shownMeaning(form).text, isTrue: true };
     return { shown: shownMeaning(imposter).text, isTrue: false };
   });
@@ -1134,7 +1176,7 @@ function TrueFalse({
     setPicked(value);
     setVerdict({
       correct: value === isTrue,
-      answer: isTrue ? undefined : `«${form.form}» es «${meaningOf(form)}»`,
+      // The real meaning goes up on the card itself, over the struck guess.
       about: form.gloss_note_en ?? undefined,
     });
   };
@@ -1149,6 +1191,13 @@ function TrueFalse({
         <Text style={styles.esBig}>{form.form}</Text>
         {form.audio_path ? <PlayButton path={form.audio_path} /> : null}
         <Text style={styles.guessMeans}>means</Text>
+        {/* A guess that was wrong is struck out, and what the word really
+            means arrives above it — the answer where the eye already is. */}
+        {verdict && !isTrue ? (
+          <Animated.View entering={REAL_MEANING} style={[styles.guess, styles.guessTrue]}>
+            <Text style={styles.guessText}>{shownMeaning(form).text}</Text>
+          </Animated.View>
+        ) : null}
         {/* Once answered the guess shows what it was: confirmed, or struck out. */}
         <View
           style={[
@@ -1790,7 +1839,10 @@ function WordBuild({
   // by the Spanish: "una masa" means "great", one word, so its tiles are letters.
   const byWords = isPhrase(target);
 
-  const [{ tiles }] = useState(() => buildTiles(target, wordPool(form, allForms, field)));
+  // A word's tiles are its letters and a few spare letters; only a phrase
+  // takes spare words, and finding them reads every form of her deck — not
+  // worth doing for tiles that would never use them.
+  const [{ tiles }] = useState(() => buildTiles(target, byWords ? wordPool(form, allForms, field) : []));
   const [used, setUsed] = useState<number[]>([]);
   const [verdict, setVerdict] = useState<Verdict>(null);
 
@@ -1817,6 +1869,7 @@ function WordBuild({
           ),
           answer: target,
           about: form.gloss_note_en ?? undefined,
+          audio: toSpanish ? (form.audio_path ?? undefined) : undefined,
         })
       }
       answer={joined}
@@ -1848,8 +1901,9 @@ function ListenBuild({
 }) {
   const { form } = item;
   const phrase = isPhrase(form.form);
+  // Spare words for a phrase only, as in WordBuild: a word's tiles are letters.
   const [{ tiles }] = useState(() =>
-    buildTiles(form.form, wordPool(form, allForms, 'form')),
+    buildTiles(form.form, phrase ? wordPool(form, allForms, 'form') : []),
   );
   const [used, setUsed] = useState<number[]>([]);
   const [verdict, setVerdict] = useState<Verdict>(null);
@@ -1881,6 +1935,102 @@ function ListenBuild({
   );
 }
 
+// ---------------------------------------------------------------------------
+// SpanishInput — the field a word is typed into, and the letters an English
+// keyboard doesn't have on its face: á é í ó ú ü ñ, one tap each, put in where
+// the caret is. Duolingo's row, for the same reason: holding a key down for
+// its accent is a trick most learners never find.
+//
+// The keyboard is told this is not prose and not a login: no autocorrect, no
+// spell check, no suggestion bar (it would spell the answer — "gaseosa" as she
+// types "gas"), and no Paste / AutoFill bubble over the field.
+// ---------------------------------------------------------------------------
+const ACCENTS = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ'];
+
+function SpanishInput({
+  value,
+  onChangeText,
+  placeholder,
+  verdict,
+  onSubmit,
+}: {
+  value: string;
+  onChangeText: (text: string) => void;
+  placeholder: string;
+  verdict: Verdict;
+  onSubmit: () => void;
+}) {
+  const input = useRef<TextInput>(null);
+  const selection = useRef({ start: value.length, end: value.length });
+  const editable = verdict === null;
+
+  const insert = (letter: string) => {
+    const { start, end } = selection.current;
+    const at = Math.min(start, value.length);
+    const next = value.slice(0, at) + letter + value.slice(Math.min(end, value.length));
+    selection.current = { start: at + 1, end: at + 1 };
+    tap();
+    onChangeText(next);
+    // The caret goes after the letter, wherever it was put in; without this it
+    // jumps to the end of the field.
+    requestAnimationFrame(() => input.current?.setSelection?.(at + 1, at + 1));
+  };
+
+  return (
+    <View style={styles.spanishInput}>
+      <TextInput
+        ref={input}
+        value={value}
+        onChangeText={onChangeText}
+        onSelectionChange={(e) => {
+          selection.current = e.nativeEvent.selection;
+        }}
+        autoCapitalize="none"
+        autoCorrect={false}
+        spellCheck={false}
+        autoComplete="off"
+        textContentType="none"
+        importantForAutofill="no"
+        // The edit menu a tap on the field raises — Paste, AutoFill — has
+        // nothing to offer an answer she is meant to spell herself.
+        contextMenuHidden
+        // Android: the keyboard's suggestion strip is off only for this kind.
+        keyboardType={Platform.OS === 'android' ? 'visible-password' : 'default'}
+        autoFocus
+        placeholder={placeholder}
+        placeholderTextColor={colors.faint}
+        editable={editable}
+        returnKeyType="done"
+        onSubmitEditing={onSubmit}
+        style={[
+          styles.typingInput,
+          verdict?.correct === true && { borderColor: colors.success, backgroundColor: colors.successSoft },
+          verdict?.correct === false && { borderColor: colors.danger, backgroundColor: colors.dangerSoft },
+        ]}
+      />
+      {editable ? (
+        <View style={styles.accentRow}>
+          {ACCENTS.map((letter) => (
+            <Pressable
+              key={letter}
+              onPress={() => insert(letter)}
+              accessibilityRole="button"
+              accessibilityLabel={`Type ${letter}`}
+              hitSlop={4}
+              style={({ pressed }) => [
+                styles.accentKey,
+                { transform: [{ scale: pressed ? 0.94 : 1 }] },
+                webPress,
+              ]}>
+              <Text style={styles.accentText}>{letter}</Text>
+            </Pressable>
+          ))}
+        </View>
+      ) : null}
+    </View>
+  );
+}
+
 function Typing({
   item,
   allForms,
@@ -1902,6 +2052,7 @@ function Typing({
       correct: g.correct,
       answer: form.form,
       note: g.note ? NOTE_TEXT[g.note](g.expected) : undefined,
+      audio: form.audio_path ?? undefined,
     });
   };
 
@@ -1916,27 +2067,12 @@ function Typing({
         onAnswer(!!verdict?.correct, { answer: input.trim(), note: graded?.note })
       }>
       <PromptBlock form={form} side="en" />
-      <TextInput
+      <SpanishInput
         value={input}
         onChangeText={setInput}
-        autoCapitalize="none"
-        autoCorrect={false}
-        autoFocus
         placeholder="your answer…"
-        placeholderTextColor={colors.faint}
-        editable={verdict === null}
-        onSubmitEditing={check}
-        style={[
-          styles.typingInput,
-          verdict?.correct === true && {
-            borderColor: colors.success,
-            backgroundColor: colors.successSoft,
-          },
-          verdict?.correct === false && {
-            borderColor: colors.danger,
-            backgroundColor: colors.dangerSoft,
-          },
-        ]}
+        verdict={verdict}
+        onSubmit={() => input.trim() && check()}
       />
     </Frame>
   );
@@ -1945,8 +2081,13 @@ function Typing({
 // ---------------------------------------------------------------------------
 // Uní los pares — four words drilled on one screen. This one grades each pair
 // as she taps it: waiting to check eight taps at once would be cruel, and the
-// instant red flash is the whole point of the format.
+// instant red flash is the whole point of the format. Either column can be
+// tapped first, and the last pair ends the screen by itself — there is
+// nothing left to check, so a Continue there would be a tap for its own sake.
 // ---------------------------------------------------------------------------
+/** Long enough to see the last pair go green, short enough not to wait on. */
+const MATCH_DONE_MS = 650;
+
 function Matching({
   item,
   onAnswered,
@@ -1958,62 +2099,78 @@ function Matching({
   const [left] = useState(() => [...group].sort(() => Math.random() - 0.5));
   const [right] = useState(() => [...group].sort(() => Math.random() - 0.5));
 
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<{ side: 'left' | 'right'; id: string } | null>(null);
   const [matched, setMatched] = useState<Set<string>>(new Set());
   const [missed, setMissed] = useState<Set<string>>(new Set());
-  const [flashWrong, setFlashWrong] = useState<string | null>(null);
-  const [verdict, setVerdict] = useState<Verdict>(null);
+  const [flashWrong, setFlashWrong] = useState<string[]>([]);
+  const finished = useRef(false);
 
-  const pickLeft = (id: string) => {
-    if (matched.has(id) || verdict) return;
+  useEffect(() => {
+    if (matched.size !== group.length || finished.current) return;
+    finished.current = true;
+    // Every pair is matched, so whatever she got wrong on the way she has
+    // already put right, and the red flash told her at the time. The words she
+    // confused still go to the round through `missed`.
+    answerFeedback(true);
+    const t = setTimeout(() => onAnswered([...missed]), MATCH_DONE_MS);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [matched]);
+
+  const pick = (side: 'left' | 'right', id: string) => {
+    if (matched.has(id) || finished.current) return;
     // The left column is the Spanish, so a tap there is a chance to hear the
     // word — the right column is its English and stays silent, the same rule
     // PromptBlock follows. Nothing is given away: the word is already legible,
     // and what is being asked is which meaning it goes with.
-    const audio = group.find((f) => f.id === id)?.audio_path;
-    if (audio) playAudio(audio);
-    setSelected(selected === id ? null : id);
-  };
-
-  const pickRight = (id: string) => {
-    if (matched.has(id) || !selected || verdict) return;
-    if (id === selected) {
+    if (side === 'left') {
+      const audio = group.find((f) => f.id === id)?.audio_path;
+      if (audio) playAudio(audio);
+    }
+    // Nothing chosen yet, or another word in the same column: that is the pick.
+    if (!selected || selected.side === side) {
+      setSelected(selected?.side === side && selected.id === id ? null : { side, id });
+      return;
+    }
+    setSelected(null);
+    if (id === selected.id) {
       const next = new Set(matched).add(id);
+      // The last pair's tap is the chime and the buzz of the whole screen.
+      if (next.size < group.length) tap();
       setMatched(next);
-      setSelected(null);
-      // Every pair is matched, so whatever she got wrong on the way she has
-      // already put right, and the red flash told her at the time. The sheet
-      // has nothing left to correct; the words she confused still go to the
-      // round through `missed`.
-      if (next.size === group.length) setVerdict({ correct: true });
     } else {
       // A wrong pairing marks both words involved — she confused them.
-      setMissed(new Set([...missed, id, selected]));
-      setFlashWrong(id);
-      setTimeout(() => setFlashWrong(null), 450);
-      setSelected(null);
+      warn();
+      setMissed(new Set([...missed, id, selected.id]));
+      setFlashWrong([`${side}:${id}`, `${selected.side}:${selected.id}`]);
+      setTimeout(() => setFlashWrong([]), 450);
     }
   };
+  const isPicked = (side: 'left' | 'right', id: string) => selected?.side === side && selected.id === id;
+  const flashes = (side: 'left' | 'right', id: string) => flashWrong.includes(`${side}:${id}`);
 
   return (
     <Frame
       prompt="Match each word to its meaning"
-      verdict={verdict}
+      verdict={null}
       note={`${matched.size} of ${group.length} matched`}
       onContinue={() => onAnswered([...missed])}>
       <View style={styles.matchGrid}>
         <View style={styles.matchColumn}>
           {left.map((c) => {
             const isMatched = matched.has(c.id);
-            const isSelected = selected === c.id;
             return (
               <Pressable
                 key={c.id}
-                onPress={() => pickLeft(c.id)}
+                onPress={() => pick('left', c.id)}
                 disabled={isMatched}
                 style={({ pressed }) => [
                   styles.matchCell,
-                  isSelected && styles.matchCellPicked,
+                  isPicked('left', c.id) && styles.matchCellPicked,
+                  flashes('left', c.id) && {
+                    borderColor: colors.danger,
+                    backgroundColor: colors.dangerSoft,
+                  },
                   isMatched && styles.matchCellDone,
                   { transform: [{ scale: pressed && !isMatched ? 0.97 : 1 }] },
                   webPress,
@@ -2036,11 +2193,12 @@ function Matching({
             return (
               <Pressable
                 key={c.id}
-                onPress={() => pickRight(c.id)}
+                onPress={() => pick('right', c.id)}
                 disabled={isMatched}
                 style={({ pressed }) => [
                   styles.matchCell,
-                  flashWrong === c.id && {
+                  isPicked('right', c.id) && styles.matchCellPicked,
+                  flashes('right', c.id) && {
                     borderColor: colors.danger,
                     backgroundColor: colors.dangerSoft,
                   },
@@ -2346,6 +2504,19 @@ function SentenceIntro({
 /** How many words the tile bank offers when the blank is filled from tiles. */
 const GAP_TILES = 8;
 
+/** The English with the answer blanked, where English uses the Spanish word
+ *  as it is ("a medialuna") instead of translating it. A word that only looks
+ *  the same — "a", "me", "come" — is left alone: its translation is in the
+ *  English too ("to", "eats"), which is how it can be told apart. */
+function blankIn(english: string, answer: string, target: Form) {
+  const own = new Set(wordsOf(answer).map(norm).filter(Boolean));
+  const said = new Set(wordsOf(english.replace(/[^\p{L}\p{M}'’\s]/gu, ' ')).map(norm));
+  if (own.size === 0 || ![...own].every((w) => said.has(w))) return english;
+  const meaning = wordsOf(shownMeaning(target).text.replace(/\([^)]*\)/g, ' ')).map(norm);
+  if (meaning.some((w) => said.has(w) && !own.has(w))) return english;
+  return english.replace(/[\p{L}\p{M}'’]+/gu, (w) => (own.has(norm(w)) ? '___' : w));
+}
+
 /**
  * The sentence with one word blanked out, filled three ways. Which one she
  * gets is the gap's flavour (session.ts, `gapMode`): four choices on a
@@ -2378,7 +2549,7 @@ function SentenceGap({
   const words = useWordPopover(lookupWith(lexicon, allForms));
   const [index] = useState(() => tokenIndexOf(sentence, target.id));
   const [options] = useState(() =>
-    fill === 'typed' ? [] : gapOptions(sentence, target, allForms, fill === 'tiles' ? GAP_TILES : 4),
+    fill === 'typed' ? [] : gapOptions(sentence, target, allForms, fill === 'tiles' ? GAP_TILES : 4, lexicon?.values()),
   );
   const [chosen, setChosen] = useState<string | null>(null);
   const [input, setInput] = useState('');
@@ -2386,6 +2557,11 @@ function SentenceGap({
   const [verdict, setVerdict] = useState<Verdict>(null);
 
   const answer = index >= 0 ? tokenWord(sentence.tokens[index]) : target.form;
+  // The English is what makes the gap one answer and not any word that fits
+  // ("¿Tenés ___?"). But a word English borrowed whole — "a medialuna" — would
+  // be the answer printed under the question, so until the verdict that word
+  // is blanked in the English too.
+  const english = verdict ? sentence.en : blankIn(sentence.en, answer, target);
   const typed = input.trim();
   const filled = fill === 'typed' ? typed || undefined : options.find((o) => o.id === chosen)?.label;
   const correct = fill === 'typed' ? !!graded?.correct : chosen === target.id;
@@ -2397,6 +2573,8 @@ function SentenceGap({
       correct: g ? g.correct : chosen === target.id,
       answer: `${answer} — ${sentence.en}`,
       note: g?.note ? NOTE_TEXT[g.note](g.expected) : undefined,
+      // The whole sentence, gap filled — said by the result sheet, after its chime.
+      audio: sentence.audio_path ?? undefined,
     });
   };
 
@@ -2420,20 +2598,20 @@ function SentenceGap({
       {oneCard ? (
         // The Spanish with its gap, the English a size down beneath it, all on one card.
         <PhraseCard>
-          {verdict && sentence.audio_path ? <PlayButton path={sentence.audio_path} /> : null}
+          {verdict && sentence.audio_path ? <PlayButton path={sentence.audio_path} autoPlay={false} /> : null}
           <SentenceLine
             large
             sentence={sentence}
             onWord={canTap ? words.open : undefined}
             blank={{ index, filled, tone: verdict ? (correct ? 'right' : 'wrong') : undefined }}
           />
-          <Text style={styles.phraseCardEn}>{sentence.en}</Text>
+          <Text style={styles.phraseCardEn}>{english}</Text>
         </PhraseCard>
       ) : (
         <>
-          {byEar ? <AudioPad path={sentence.audio_path!} /> : <EnglishBubble sentence={sentence} />}
+          {byEar ? <AudioPad path={sentence.audio_path!} /> : <EnglishBubble sentence={{ ...sentence, en: english }} />}
           <View style={styles.gapLine}>
-            {verdict && sentence.audio_path && !byEar ? <PlayButton path={sentence.audio_path} /> : null}
+            {verdict && sentence.audio_path && !byEar ? <PlayButton path={sentence.audio_path} autoPlay={false} /> : null}
             <SentenceLine
               sentence={sentence}
               onWord={canTap ? words.open : undefined}
@@ -2444,21 +2622,12 @@ function SentenceGap({
       )}
       <WordBubble state={words.showing} onClose={words.close} />
       {fill === 'typed' ? (
-        <TextInput
+        <SpanishInput
           value={input}
           onChangeText={setInput}
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoFocus
           placeholder="the missing word…"
-          placeholderTextColor={colors.faint}
-          editable={verdict === null}
-          onSubmitEditing={check}
-          style={[
-            styles.typingInput,
-            verdict?.correct === true && { borderColor: colors.success, backgroundColor: colors.successSoft },
-            verdict?.correct === false && { borderColor: colors.danger, backgroundColor: colors.dangerSoft },
-          ]}
+          verdict={verdict}
+          onSubmit={() => typed && check()}
         />
       ) : fill === 'tiles' ? (
         <GapBank
@@ -2567,7 +2736,7 @@ function SentenceBuild({
   const asked = item.clause != null && side === 'es' ? clauseOf(sentence, item.clause) : sentence;
   const words = useWordPopover(lookupWith(lexicon, allForms));
   const testing = !!item.placementUnit;
-  const [{ tiles }] = useState(() => sentenceTiles(asked, allForms, side, byEar, testing));
+  const [{ tiles }] = useState(() => sentenceTiles(asked, allForms, side, byEar, testing, testing ? undefined : lexicon?.values()));
   const [used, setUsed] = useState<number[]>([]);
   const [verdict, setVerdict] = useState<Verdict>(null);
 
@@ -2597,6 +2766,8 @@ function SentenceBuild({
           // when she built it as written: there is nothing left to explain.
           // The note is about the Spanish, so the English build doesn't carry it.
           about: !canonical && side === 'es' ? (sentence.note_en ?? undefined) : undefined,
+          // Built from the English, the Spanish is hers now: hear how it goes.
+          audio: side === 'es' && !byEar ? (sentence.audio_path ?? undefined) : undefined,
         });
       }}
       answer={placed.join(' ')}
@@ -2971,6 +3142,10 @@ const styles = StyleSheet.create({
     boxShadow: clay.button,
   },
   audioPadCompact: { flexDirection: 'row', justifyContent: 'center', paddingVertical: 14, gap: 14 },
+  audioPadWrap: { position: 'relative' },
+  // In the pad's corner, clear of the button and its hint.
+  audioPadSlow: { position: 'absolute', right: 14, bottom: 14 },
+  audioPadSlowCompact: { bottom: undefined, top: '50%', marginTop: -23 },
   audioPadCircleCompact: { width: 56, height: 56, paddingLeft: 3 },
   // Beside the button a long line (a recording that will not load) has to wrap.
   audioPadHintCompact: { flexShrink: 1 },
@@ -3013,6 +3188,19 @@ const styles = StyleSheet.create({
   },
   bigChoiceText: { ...font.body[800], fontSize: 17 },
 
+  spanishInput: { gap: 10 },
+  accentRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 8 },
+  accentKey: {
+    minWidth: 40,
+    height: 40,
+    paddingHorizontal: 10,
+    borderRadius: radius.sm,
+    backgroundColor: colors.card,
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: FLAT,
+  },
+  accentText: { ...font.body[800], fontSize: 18, color: colors.ink },
   typingInput: {
     backgroundColor: colors.card,
     borderWidth: 1.5,

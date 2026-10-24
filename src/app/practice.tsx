@@ -4,18 +4,28 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { BackHandler, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import Animated, {
+  Easing,
+  FadeIn,
+  FadeInRight,
+  SlideInDown,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ClassDoor, ClassWait, SLOW_MS } from '@/components/class-door';
 import { POSE } from '@/components/mascot';
 import { PageColorContext } from '@/components/exercise-frame';
 import { Exercise } from '@/components/exercises';
-import { type Cheer, cheerFor, LessonCheer } from '@/components/lesson-cheer';
+import { type Cheer, cheerFor, LessonCheer, makeCheer } from '@/components/lesson-cheer';
 import { StreakAlmost } from '@/components/streak-almost';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
+import type { RoundStatsData } from '@/components/round-stats';
+import { PerfectLesson } from '@/components/perfect-lesson';
 import { LessonEnd } from '@/components/unit-progress';
 import { type AnswerActions, AnswerActionsContext } from '@/components/wrong-answer-actions';
 import { answerWords, shownMeaning } from '@/lib/answers';
@@ -25,10 +35,12 @@ import { conceptsOf } from '@/lib/concepts';
 import { currentIndex, loadCourse, loadProgress } from '@/lib/course';
 import { LessonLockedError, buildLesson } from '@/lib/lesson';
 import { timed, timingEnd, timingStart } from '@/lib/load-timing';
+import { markLessonFinished } from '@/lib/just-finished';
 import { backToCourse, goBack } from '@/lib/nav';
 import { maybeAskForReview } from '@/lib/review-prompt';
 import { type Landed, send, wakeOutbox, within } from '@/lib/outbox';
 import { success } from '@/lib/haptics';
+import { warmSfx } from '@/lib/sfx';
 import { DEFAULT_LADDER, type Ladder } from '@/lib/sentences';
 import { loadAnswers } from '@/lib/onboarding';
 import {
@@ -76,7 +88,7 @@ const PLACE_WAIT_MS = 15_000;
 /** What stops her at the door: a frozen run, a comeback one round in, or a run lost yesterday. */
 type Gate = { kind: 'frozen' | 'oneMore' | 'lapsed'; lost: number };
 const gateTitle = (g: Gate) =>
-  g.kind === 'frozen' ? 'Your mate went cold' : g.kind === 'oneMore' ? 'Almost!' : `Your ${g.lost} day streak ended`;
+  g.kind === 'frozen' ? 'Your mate went cold' : g.kind === 'oneMore' ? 'One more to go!' : `Your ${g.lost} day streak ended`;
 /** Once Pancho has come out to say the class is on its way, he stays this
  *  long: a figure that pops in and is gone in the same breath reads as a
  *  glitch, where the empty frame before him reads as nothing at all. */
@@ -166,6 +178,8 @@ export default function Practice() {
     previous: number;
     /** Set mid-comeback: the banked run one more class would recover. */
     oneMore?: number;
+    /** How the round went, for the end screen's tiles. */
+    stats: RoundStatsData;
   } | null>(null);
   /** A unit check she didn't pass yet, or a test's outcome — said before the
    *  usual finish screens. Cleared once she has read it. */
@@ -176,6 +190,8 @@ export default function Practice() {
   >(null);
   /** Set by Keep going on the finish screen, when there is a streak to show. */
   const [celebrating, setCelebrating] = useState(false);
+  /** A round with no misses opens its end on PerfectLesson; set once she has gone past it. */
+  const [perfectSeen, setPerfectSeen] = useState(false);
   /** A frozen streak stops her at the door: what she lost, and the way back.
    *  `undefined` while the answer is in flight — the doorway holds still until
    *  it lands, so the loading clip can't flash in front of the gate. */
@@ -324,6 +340,9 @@ export default function Practice() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, lessonId, testMode, params.to, params.mode, params.concept, isAgain, attempt]);
 
+  // The answer sounds are loaded with the class, so the first one isn't late.
+  useEffect(() => warmSfx(), []);
+
   const tryAgain = () => {
     setLoadFailed(false);
     setQueue(null);
@@ -336,6 +355,7 @@ export default function Practice() {
     setFinished(null);
     setVerdict(null);
     setCelebrating(false);
+    setPerfectSeen(false);
     setIndex(0);
     setQueue(null);
     setStaging(false);
@@ -506,6 +526,8 @@ export default function Practice() {
       if (!ended.saved) return notSaved();
       result = ended.result;
       passedCheck.current = kind === 'unit_check' && !!result?.passed;
+      // Saved, so the road can count it before it reads her progress again.
+      if (lessonId && !preview && (kind === 'lesson' || passedCheck.current)) markLessonFinished(lessonId);
       if (kind === 'unit_check' && result && !result.passed) {
         setVerdict({
           kind: 'check',
@@ -520,6 +542,12 @@ export default function Practice() {
       streak: result?.current_streak ?? 0,
       previous: result?.previous_streak ?? 0,
       oneMore: result && result.recoverable_streak > 0 ? result.recoverable_streak : undefined,
+      stats: {
+        accuracy: round.score(),
+        seconds: round.elapsed(),
+        words: round.wordsAsked(),
+        newWords: new Set(queue?.filter((it) => it.isIntro || it.introduces).map((it) => (it.introduces ?? it.form).id)).size,
+      },
     });
   };
 
@@ -583,7 +611,7 @@ export default function Practice() {
       return false;
     }
     r.run += 1;
-    const pick = cheerFor(r.run, r.comeback, r.shown);
+    const pick = cheerFor(r.run, r.comeback);
     // Never on the last question (the end screen has that moment), and at
     // most one every 3 questions.
     if (!pick || index + 1 >= next.length || index - r.lastAt < 3) return false;
@@ -591,7 +619,7 @@ export default function Practice() {
     r.shown += 1;
     if (pick === 'back') r.comeback = false;
     success();
-    setCheer({ kind: pick, count: r.run, id: Date.now() });
+    setCheer(makeCheer(pick, r.run));
     return true;
   };
 
@@ -704,6 +732,30 @@ export default function Practice() {
     [userId],
   );
 
+  // Leaving mid-class loses it, so after the first answer the close button
+  // asks first — and so does Android's back button, which would otherwise
+  // drop her out without a word. (iOS's swipe back is off on this screen.)
+  const [quitting, setQuitting] = useState(false);
+  const midClass = !!queue && queue.length > 0 && !finished && !unsaved && !loadFailed && gate === null;
+  const close = () => {
+    if (midClass && index > 0) setQuitting(true);
+    else goBack('/home');
+  };
+  const closeRef = useRef(close);
+  closeRef.current = close;
+  const quittingRef = useRef(quitting);
+  quittingRef.current = quitting;
+  useEffect(() => {
+    if (Platform.OS !== 'android' || !midClass) return;
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      // With the sheet up, back is "Keep going" — what a sheet's back always is.
+      if (quittingRef.current) setQuitting(false);
+      else closeRef.current();
+      return true;
+    });
+    return () => sub.remove();
+  }, [midClass]);
+
   if (!profile) return null;
 
   if (finished && verdict) {
@@ -731,6 +783,9 @@ export default function Practice() {
     // streak then hands over to the full celebration; any other just goes home.
     const celebrate =
       finished.oneMore != null || (finished.streak > 0 && finished.streak !== finished.previous);
+    if (finished.stats.accuracy === 100 && !perfectSeen && !plan && kind !== 'placement') {
+      return <PerfectLesson onNext={() => setPerfectSeen(true)} />;
+    }
     if (celebrating) {
       if (finished.oneMore != null) {
         return (
@@ -758,6 +813,7 @@ export default function Practice() {
           lessonId={preview ? null : lessonId}
           streak={finished.streak}
           celebrate={celebrate}
+          stats={finished.stats}
           onNext={() => (celebrate ? setCelebrating(true) : doneToCourse())}
         />
       </SafeAreaView>
@@ -788,6 +844,11 @@ export default function Practice() {
   if (gate) {
     return (
       <SafeAreaView style={styles.safe}>
+        <View style={styles.header}>
+          <Pressable onPress={() => goBack('/home')} hitSlop={12} accessibilityLabel="Close">
+            <Ionicons name="close" size={26} color={colors.muted} />
+          </Pressable>
+        </View>
         <View style={styles.doneWrap}>
           <View style={styles.gatePanel}>
             <Text style={styles.gateTitle}>{gateTitle(gate)}</Text>
@@ -873,14 +934,10 @@ export default function Practice() {
     // result panel are meant to sit against it, not float above it.
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
-        <Pressable onPress={() => goBack('/home')} hitSlop={12} accessibilityLabel="Close">
+        <Pressable onPress={close} hitSlop={12} accessibilityLabel="Close">
           <Ionicons name="close" size={26} color={colors.muted} />
         </Pressable>
-        <View style={styles.progressTrack}>
-          <View style={[styles.progressFill, { width: `${Math.max(progress * 100, 3)}%` }]}>
-            <LinearGradient colors={gradients.progress} style={StyleSheet.absoluteFill} />
-          </View>
-        </View>
+        <ProgressBar progress={progress} />
         {placing ? (
           <Pressable
             onPress={stopPlacement}
@@ -908,23 +965,111 @@ export default function Practice() {
           {/* This page is flat oat, so an exercise too tall for it can fade into it. */}
           <PageColorContext.Provider value={colors.bg}>
             <AnswerActionsContext.Provider value={kind === 'placement' ? null : actions}>
-              <Exercise
+              {/* Each exercise slides in from where the class is heading, so a
+                  new question reads as the next one rather than the screen
+                  blinking. The first rides the stage's own fade instead. */}
+              <Animated.View
                 key={`${current.form.id}-${index}`}
+                entering={index === 0 ? undefined : NEXT_EXERCISE}
+                style={styles.stage}>
+              <Exercise
                 item={current}
                 allForms={allForms}
                 allSentences={allSentences}
                 lexicon={lexicon}
                 ladder={ladder}
-                hints={(kind !== 'lesson' && kind !== 'placement') || !!current.review}
+                hints={kind !== 'placement'}
                 onIntroDone={() => onIntroDone(current)}
                 onAnswered={(wrongIds, extra) => void onAnswered(current, wrongIds, extra)}
               />
+              </Animated.View>
             </AnswerActionsContext.Provider>
           </PageColorContext.Provider>
         </Animated.View>
       )}
       <LessonCheer cheer={cheer} onDone={clearCheer} />
+      <QuitSheet
+        open={quitting}
+        test={!!plan || kind === 'placement'}
+        onStay={() => setQuitting(false)}
+        onQuit={() => {
+          setQuitting(false);
+          goBack('/home');
+        }}
+      />
     </SafeAreaView>
+  );
+}
+
+/** Strong ease-out: the movement is spent where the eye is already looking. */
+const EASE_OUT = Easing.bezier(0.23, 1, 0.32, 1);
+/** The next exercise, arriving: a short travel from the right and a fade. */
+const NEXT_EXERCISE = FadeInRight.duration(240).easing(EASE_OUT);
+
+// ---------------------------------------------------------------------------
+// The class's progress bar. It grows to each new answer instead of snapping,
+// so the step forward is something she sees happen.
+// ---------------------------------------------------------------------------
+function ProgressBar({ progress }: { progress: number }) {
+  const shown = useSharedValue(progress);
+  useEffect(() => {
+    shown.set(withTiming(progress, { duration: 420, easing: EASE_OUT }));
+  }, [progress, shown]);
+  const fill = useAnimatedStyle(() => ({ width: `${Math.max(shown.get() * 100, 3)}%` }));
+  return (
+    <View
+      style={styles.progressTrack}
+      accessibilityRole="progressbar"
+      accessibilityValue={{ min: 0, max: 100, now: Math.round(progress * 100) }}>
+      <Animated.View style={[styles.progressFill, fill]}>
+        <LinearGradient colors={gradients.progress} style={StyleSheet.absoluteFill} />
+      </Animated.View>
+    </View>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// "Leave the class?" — raised by the close button (or Android's back) once she
+// has answered something, because leaving throws the class away. Staying is
+// the big button; leaving is there, plainly, under it.
+// ---------------------------------------------------------------------------
+function QuitSheet({
+  open,
+  test,
+  onStay,
+  onQuit,
+}: {
+  open: boolean;
+  test: boolean;
+  onStay: () => void;
+  onQuit: () => void;
+}) {
+  const inset = useSafeAreaInsets().bottom;
+  // Drawn over the class inside the screen itself, not in a native Modal: a
+  // Modal still closing as the screen goes away can stay behind on iOS as an
+  // invisible layer that swallows every touch in the app.
+  if (!open) return null;
+  return (
+    <View style={[StyleSheet.absoluteFill, styles.quitLayer]}>
+        <View style={styles.quitDock}>
+          <Animated.View entering={FadeIn.duration(200)} style={[StyleSheet.absoluteFill, styles.quitScrim]}>
+            <Pressable style={StyleSheet.absoluteFill} onPress={onStay} accessibilityLabel="Keep going" />
+          </Animated.View>
+          <Animated.View
+            entering={SlideInDown.duration(300).easing(Easing.bezier(0.32, 0.72, 0, 1))}
+            style={[styles.quitSheet, { paddingBottom: 20 + inset }]}>
+            <Image source={POSE.sip} style={styles.quitFigure} contentFit="contain" accessible={false} />
+            <Text style={styles.quitTitle}>Wait, don&apos;t go!</Text>
+            <Text style={styles.quitBody}>
+              {test
+                ? "If you leave now, this test won't count."
+                : "If you leave now, you'll lose your progress in this lesson."}
+            </Text>
+            <Button title="Keep going" onPress={onStay} />
+            <Button title={test ? 'Leave the test' : 'End lesson'} variant="ghost" onPress={onQuit} />
+          </Animated.View>
+        </View>
+    </View>
   );
 }
 
@@ -1119,6 +1264,27 @@ const styles = StyleSheet.create({
   },
 
   doneWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 24 },
+
+  // Leave the class? --------------------------------------------------------
+  // Over the header too: the SafeAreaView's own top inset is under it.
+  quitLayer: { zIndex: 10, elevation: 10 },
+  quitDock: { flex: 1, justifyContent: 'flex-end' },
+  quitScrim: { backgroundColor: 'rgba(58, 42, 32, 0.38)' },
+  quitSheet: {
+    width: '100%',
+    maxWidth: 560,
+    alignSelf: 'center',
+    alignItems: 'stretch',
+    gap: 10,
+    padding: 24,
+    backgroundColor: colors.bg,
+    borderTopLeftRadius: radius.xl,
+    borderTopRightRadius: radius.xl,
+    boxShadow: clay.float,
+  },
+  quitFigure: { width: 104, height: 104, alignSelf: 'center' },
+  quitTitle: { ...font.display[800], fontSize: 24, letterSpacing: -0.3, color: colors.ink, textAlign: 'center' },
+  quitBody: { ...font.body[600], fontSize: 15, lineHeight: 21, color: colors.muted, textAlign: 'center', marginBottom: 8 },
 
   // The staff simulate bar ---------------------------------------------------
   simBar: {

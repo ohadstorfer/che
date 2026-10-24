@@ -11,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { LessonComplete } from '@/components/lesson-complete';
+import { RoundStats, type RoundStatsData } from '@/components/round-stats';
 import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { loadCourse, loadProgress } from '@/lib/course';
@@ -115,7 +116,15 @@ function Pip({ done, fresh }: { done: boolean; fresh: boolean }) {
   );
 }
 
-export function UnitProgress({ standing, onNext }: { standing: UnitStanding; onNext: () => void }) {
+export function UnitProgress({
+  standing,
+  stats,
+  onNext,
+}: {
+  standing: UnitStanding;
+  stats?: RoundStatsData;
+  onNext: () => void;
+}) {
   const reduced = useReducedMotion();
   const { title, steps, done, total } = standing;
   const left = total - done;
@@ -130,7 +139,7 @@ export function UnitProgress({ standing, onNext }: { standing: UnitStanding; onN
   const count = useEntrance(STEP, 10);
   const row = useEntrance(STEP * 2, 10);
   const line = useEntrance(STEP * 3, 10);
-  const action = useEntrance(STEP * 4, 10);
+  const action = useEntrance(STEP * (stats ? 6 : 4), 10);
 
   const words = left === 0 ? 'Unit complete!' : left === 1 ? 'Just 1 left!' : `Only ${left} left!`;
 
@@ -158,6 +167,8 @@ export function UnitProgress({ standing, onNext }: { standing: UnitStanding; onN
 
       <Animated.Text style={[styles.words, line]}>{words}</Animated.Text>
 
+      {stats ? <RoundStats stats={stats} delay={STEP * 4} /> : null}
+
       <Animated.View style={[styles.actions, action]}>
         <Button title="Keep going" onPress={onNext} />
       </Animated.View>
@@ -175,19 +186,22 @@ export function LessonEnd({
   lessonId,
   streak,
   celebrate,
+  stats,
   onNext,
 }: {
   lessonId?: string | null;
   streak: number;
   /** This lesson moved the streak: the celebration follows. */
   celebrate: boolean;
+  /** How the round went: tiles under the headline, on either screen. */
+  stats?: RoundStatsData;
   onNext: () => void;
 }) {
   const standing = useUnitStanding(lessonId, !celebrate);
   // A blank beat while her progress is read, rather than one screen swapped for another.
   if (standing === undefined) return null;
-  if (standing) return <UnitProgress standing={standing} onNext={onNext} />;
-  return <LessonComplete streak={celebrate || streak <= 0 ? null : streak} onNext={onNext} />;
+  if (standing) return <UnitProgress standing={standing} stats={stats} onNext={onNext} />;
+  return <LessonComplete streak={celebrate || streak <= 0 ? null : streak} stats={stats} onNext={onNext} />;
 }
 
 const styles = StyleSheet.create({

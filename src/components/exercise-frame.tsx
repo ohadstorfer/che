@@ -17,7 +17,9 @@ import Reanimated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui';
+import { playAudio, stopAudio } from '@/lib/audio';
 import { watchWebKeyboard } from '@/lib/keyboard-viewport';
+import { answerFeedback } from '@/lib/sfx';
 import { clay, colors, font, press, radius } from '@/lib/theme';
 
 /** Set once an exercise has been checked; `answer` is shown when she missed it,
@@ -32,6 +34,9 @@ export type Verdict = {
   also?: string;
   note?: string;
   about?: string;
+  /** The Spanish she just produced or chose, said once the verdict is in —
+   *  right or wrong, the sound is bound to the answer while she reads it. */
+  audio?: string;
 } | null;
 
 /** The colour of the page the frame sits on (six-digit hex), set by a screen
@@ -194,7 +199,9 @@ export function ExerciseFrame({
           )}
           {children}
         </ScrollView>
-        <MoreBelow show={more} fade={fade} onPress={() => scroll.current?.scrollToEnd({ animated: true })} />
+        {/* Once the result sheet is up it covers the cut edge, and an arrow
+            drawn over the options would point at nothing she can reach. */}
+        <MoreBelow show={more && !verdict} fade={fade} onPress={() => scroll.current?.scrollToEnd({ animated: true })} />
       </View>
       </TightContext.Provider>
 
@@ -212,6 +219,11 @@ export function ExerciseFrame({
     </Reanimated.View>
   );
 }
+
+/** What a right answer is called, one picked per answer. */
+const PRAISE = ['Correct!', 'Nice!', 'Great job!', 'Exactly!', 'You got it!'];
+/** The chime's own length, near enough: the word waits for it. */
+const SAY_AFTER_MS = 380;
 
 /** How much of the body may sit under the fold before it counts as hidden. */
 const MORE_SLACK = 6;
@@ -296,6 +308,34 @@ function FeedbackBar({
 }) {
   const [height, setHeight] = useState(0);
   const enter = useRef(new Animated.Value(0)).current;
+  /** The sentence this sheet is saying, if it has started. */
+  const said = useRef(false);
+  // Continue never waits on the sentence: it is cut off on the tap itself and
+  // the class moves on. Cut here and not when the sheet unmounts — by then the
+  // next exercise has already started its own clip, and that is what a stop
+  // would silence.
+  const next = () => {
+    if (said.current) stopAudio();
+    said.current = false;
+    onContinue();
+  };
+  // Varied, so the hundredth right answer still sounds like someone noticed.
+  const [praise] = useState(() => PRAISE[Math.floor(Math.random() * PRAISE.length)]);
+
+  // The answer lands: the chime and the tap at once, then the Spanish said a
+  // beat later, once the chime has had its moment instead of talking over it.
+  useEffect(() => {
+    answerFeedback(verdict.correct);
+    if (!verdict.audio) return;
+    const path = verdict.audio;
+    const t = setTimeout(() => {
+      said.current = true;
+      playAudio(path);
+    }, SAY_AFTER_MS);
+    return () => clearTimeout(t);
+    // The sheet mounts once per verdict.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!height) return;
@@ -339,7 +379,7 @@ function FeedbackBar({
           <Ionicons name={good ? 'checkmark' : 'close'} size={18} color={colors.onPrimary} />
         </View>
         <Text style={[styles.feedbackTitle, { color: tint }]}>
-          {good ? 'Correct!' : 'Almost!'}
+          {good ? praise : 'Incorrect'}
         </Text>
       </View>
 
@@ -365,7 +405,7 @@ function FeedbackBar({
 
       {actions}
 
-      <Button title={good ? 'Continue' : 'Got it'} variant={good ? 'right' : 'wrong'} onPress={onContinue} />
+      <Button title={good ? 'Continue' : 'Got it'} variant={good ? 'right' : 'wrong'} onPress={next} />
     </Animated.View>
   );
 }

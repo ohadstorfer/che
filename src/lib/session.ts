@@ -107,9 +107,9 @@ const settled = (state: FormState | null, ladder: Ladder = DEFAULT_LADDER) =>
   (state?.interval_days ?? 0) >= ladder.settledDays;
 
 // Hard ceiling on the screens a round plans — the matching block included.
-// (Re-asks of missed words can still run past it; a mistake earning another
-// look is not the round getting longer, it's the round working.)
-export const MAX_SESSION_ITEMS = 18;
+// Two under the 16 no round may run past (round.ts, ROUND_SCREENS_MAX), so the
+// re-asks of missed words fit inside it.
+export const MAX_SESSION_ITEMS = 14;
 
 // Floor on the same count. A practice round on a quiet day is padded up to it
 // with words she has already met, closest to falling due first, flagged
@@ -850,12 +850,28 @@ export async function buildSession(userId: string): Promise<SessionData> {
     },
   );
   const onTheTable = new Set(sentenceGroups.flatMap((g) => g.map((i) => i.sentence!.id)));
-  let dueGroups = due
-    .filter(({ form }) => !covered.has(form.id))
-    .map(({ form, state }) => typedGap(itemsForForm(form, state, deck, ladder), form, data, onTheTable, seen, ladder))
-    // A word with no exercise of its own — a silent loanword — is left to its
-    // sentences rather than shown as an empty group.
-    .filter((g) => g.length);
+  // Only as many words as could ever fit are built. Every group is at least
+  // one screen and the round holds MAX_SESSION_ITEMS of them, and the valve
+  // below drops words from the end — so a word past that many is built only
+  // to be thrown away. With hundreds due (a learner back after a break), that
+  // building — each one looking through every sentence for a typed gap — was
+  // most of the wait for the round.
+  let dueGroups: SessionItem[][] = timed(
+    'due words',
+    () => {
+      const groups: SessionItem[][] = [];
+      for (const { form, state } of due) {
+        if (groups.length >= MAX_SESSION_ITEMS) break;
+        if (covered.has(form.id)) continue;
+        const group = typedGap(itemsForForm(form, state, deck, ladder), form, data, onTheTable, seen, ladder);
+        // A word with no exercise of its own — a silent loanword — is left to
+        // its sentences rather than shown as an empty group.
+        if (group.length) groups.push(group);
+      }
+      return groups;
+    },
+    () => `${due.length} due`,
+  );
 
   // Fit the round under MAX_SESSION_ITEMS, gentlest valve first: every word
   // loses its third angle, then drops to a single production angle, and only

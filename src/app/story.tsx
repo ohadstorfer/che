@@ -14,6 +14,7 @@ import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { LessonLockedError, lessonWithUnit, readLessonRows } from '@/lib/lesson';
+import { markLessonFinished } from '@/lib/just-finished';
 import { backToCourse, goBack } from '@/lib/nav';
 import { type AnswerExtra, type FinishResult, type QueueItem, useRound } from '@/lib/round';
 import { type LearnerData, deckUpTo, drillable, loadLearner, sentenceItem } from '@/lib/session';
@@ -181,7 +182,9 @@ export default function Story() {
   const next = async () => {
     if (pending) return setAsking(pending);
     if (done) {
-      setFinished((await round.finish()).result);
+      const ended = await round.finish();
+      if (ended.saved && lessonId) markLessonFinished(lessonId);
+      setFinished(ended.result);
       return;
     }
     words.close();

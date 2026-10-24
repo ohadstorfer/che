@@ -48,11 +48,18 @@ export interface AnswerExtra {
 /** A missed form comes back later in the round, at most this many times. */
 export const MAX_RETRIES = 2;
 
-/**
- * Re-asks a whole round may add. Each one is a screen past the planned 16, so
- * a shaky lesson tops out near 19 instead of running on to 25.
- */
+/** Re-asks a whole round may make. */
 export const MAX_ROUND_RETRIES = 3;
+
+/**
+ * The most screens any round runs to, re-asks included: a lesson is planned to
+ * at most 16 (scripts/course/lib/lessons.mjs, LESSON_ITEMS) and a practice
+ * round to 14, and a mistake never takes either past this. A round with room
+ * grows by its re-ask; a full one makes room by giving up a review of an older
+ * word still to come — the word she just missed matters more today, and the
+ * other one simply stays due — or, with nothing to give up, skips the re-ask.
+ */
+export const ROUND_SCREENS_MAX = 16;
 
 /**
  * The word a mistake brings back, if any: one per mistake, however many words
@@ -149,9 +156,6 @@ export interface FinishOutcome {
   saved: boolean;
 }
 
-/** How long a new word's row is waited for before the round goes on with its
- *  own copy (the row goes up behind it). */
-const CREATE_WAIT_MS = 4000;
 /** How long the end of a round is waited for before she is told it isn't
  *  saved yet. */
 const FINISH_WAIT_MS = 15_000;
@@ -188,6 +192,9 @@ export function useRound(userId: string | undefined) {
   const testAnswers = useRef<TestAnswer[]>([]);
   const missedForms = useRef(new Map<string, Form>());
   const shownAt = useRef(Date.now());
+  /** When the round's first exercise went up, and when its last answer came in. */
+  const startedAt = useRef<number | null>(null);
+  const lastAnswerAt = useRef<number | null>(null);
   /** The day the round counts on, fixed when it begins. */
   const day = useRef('');
   /** The round's end, once asked for: asking again waits for the same write. */
@@ -232,6 +239,8 @@ export function useRound(userId: string | undefined) {
       testAnswers.current = [];
       missedForms.current = new Map();
       shownAt.current = Date.now();
+      startedAt.current = null;
+      lastAnswerAt.current = null;
       day.current = localDateStr();
       ending.current = null;
 
@@ -285,6 +294,8 @@ export function useRound(userId: string | undefined) {
   /** Call when a new exercise comes on screen, for its latency. */
   const shown = useCallback(() => {
     shownAt.current = Date.now();
+    // The round's clock starts on its first screen (begin clears it).
+    startedAt.current ??= shownAt.current;
   }, []);
 
   // A word she has just met gets its SRS state, so the exercises that follow
@@ -316,18 +327,12 @@ export function useRound(userId: string | undefined) {
         due_at: now,
         introduced_on: localDateStr(),
       };
-      // The row as the server keeps it, when it answers in time. Otherwise
-      // (no network, or a slow one) the round goes on with the same row as a
-      // new one would be, and the write goes up behind it — her answers on
-      // the word wait for it.
-      const landed = await within(
-        sendOnce(
-          { kind: 'upsert', table: 'form_states', rows: fresh, onConflict: 'form_id,user_id', returning: true },
-          { key: formKey(form.id) },
-        ),
-        CREATE_WAIT_MS,
-      );
-      const row = landed?.ok ? (landed.data as FormState | null) : null;
+      // The round goes on at once with the row as a new one is, and the write
+      // goes up behind it — her answers on the word wait for it (outbox.ts,
+      // by the word's key). Waiting for the server's copy first held the next
+      // screen for a whole round trip, on every new word: a third of a second
+      // on good Wi-Fi, up to four seconds on a phone network, after she had
+      // already pressed Continue.
       // `updated_at` as the server would stamp it: a word's days count from it.
       const local: FormState & { updated_at: string } = {
         ...fresh,
@@ -337,7 +342,16 @@ export function useRound(userId: string | undefined) {
         lapses: 0,
         updated_at: now,
       };
-      liveStates.current.set(form.id, row ?? local);
+      liveStates.current.set(form.id, local);
+      // The server's copy, when it answers in time, takes the local one's
+      // place — unless the round has already moved the word on from it.
+      void sendOnce(
+        { kind: 'upsert', table: 'form_states', rows: fresh, onConflict: 'form_id,user_id', returning: true },
+        { key: formKey(form.id) },
+      ).then((landed) => {
+        const row = landed?.ok ? (landed.data as FormState | null) : null;
+        if (row && liveStates.current.get(form.id) === local) liveStates.current.set(form.id, row);
+      });
     },
     [userId],
   );
@@ -442,6 +456,7 @@ export function useRound(userId: string | undefined) {
         await createState(item.introduces);
       }
       const latency = Math.max(0, Date.now() - shownAt.current);
+      lastAnswerAt.current = Date.now();
 
       if (item.sentence && live.current) {
         const passed = wrongFormIds.length === 0;
@@ -523,9 +538,22 @@ export function useRound(userId: string | undefined) {
         results.current.set(form.id, tally);
       }
 
-      const retry = allowRetries.current
-        ? pickRetry(item, drilled, wrong, (id) => retries.current.get(id) ?? 0, retriesGranted.current)
-        : undefined;
+      // Where a re-ask would go in a round already at its ceiling: the last
+      // screen still to come that only reviews an older word.
+      let spare = -1;
+      if (queue.length >= ROUND_SCREENS_MAX) {
+        for (let i = queue.length - 1; i > index; i -= 1) {
+          const q = queue[i];
+          if ((q.filler || q.review) && !q.isIntro && !q.isRetry && !q.group && q.mode !== 'tip') {
+            spare = i;
+            break;
+          }
+        }
+      }
+      const retry =
+        allowRetries.current && (queue.length < ROUND_SCREENS_MAX || spare >= 0)
+          ? pickRetry(item, drilled, wrong, (id) => retries.current.get(id) ?? 0, retriesGranted.current)
+          : undefined;
       const retryItems: QueueItem[] = !retry
         ? []
         : [retry].map((form) => {
@@ -545,6 +573,15 @@ export function useRound(userId: string | undefined) {
       for (const form of drilled) commitIfDone(form.id);
 
       let next = retryItems.length ? [...queue, ...retryItems] : queue;
+      if (retryItems.length && spare >= 0) {
+        // The review given up no longer counts on its word coming round again.
+        const given = queue[spare];
+        next = next.filter((_, i) => i !== spare);
+        for (const form of formsOf(given)) {
+          pending.current.set(form.id, Math.max(0, (pending.current.get(form.id) ?? 0) - 1));
+          commitIfDone(form.id);
+        }
+      }
 
       // The adaptive tail: a clean start makes the rest of the round harder.
       if (!tailDone.current && earnedTail(firstResults.current, ladder.current) && kind.current !== 'placement') {
@@ -605,6 +642,15 @@ export function useRound(userId: string | undefined) {
     return answered > 0 ? Math.round((100 * (answered - wrong)) / answered) : null;
   };
 
+  /** Seconds from the first exercise on screen to the last answer. */
+  const elapsed = () =>
+    startedAt.current != null && lastAnswerAt.current != null
+      ? Math.max(0, (lastAnswerAt.current - startedAt.current) / 1000)
+      : 0;
+
+  /** The words the round graded. */
+  const wordsAsked = () => results.current.size;
+
   return {
     begin,
     extend,
@@ -614,6 +660,8 @@ export function useRound(userId: string | undefined) {
     answer,
     finish,
     score,
+    elapsed,
+    wordsAsked,
     roundId,
     testAnswers,
     missedForms,

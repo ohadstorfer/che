@@ -30,11 +30,34 @@ export function shuffle<T>(arr: T[]): T[] {
 const ENYE = '\u0001';
 
 /**
+ * Every key `norm` has worked out. An option picker compares each form of her
+ * deck — a couple of thousand in a practice round — against the answer, and
+ * each comparison folded both words again: five passes over the string, a few
+ * times per form. That was most of what the next exercise cost to put on
+ * screen after Continue (a third of a second, measured in a debug build). The
+ * words are the same few thousand every time, so each is folded once.
+ */
+const normed = new Map<string, string>();
+const NORMED_MAX = 50_000;
+
+/**
  * Case-, accent- and punctuation-insensitive key for comparing words. ñ is a
  * letter of its own, not an n with an accent: "año" and "ano" are different
  * words, and folding them together once accepted one for the other.
  */
-export const norm = (s: string) =>
+export const norm = (s: string) => {
+  const known = normed.get(s);
+  if (known !== undefined) return known;
+  const key = fold(s);
+  // Let go of the lot now and then rather than track which keys are old: it
+  // refills in one screen, and her typing can't grow it without end.
+  if (normed.size >= NORMED_MAX) normed.clear();
+  normed.set(s, key);
+  return key;
+};
+
+/** The folding itself, as `norm` describes it. */
+const fold = (s: string) =>
   s
     .normalize('NFC')
     .toLowerCase()
@@ -292,9 +315,30 @@ export const selfGlossed = (f: Glossed) => norm(meaningOf(f)) === norm(f.form);
 export const sharesMeaning = (a: Glossed, b: Glossed) => {
   if (a.id === b.id) return false;
   if (norm(a.form) === norm(b.form)) return true;
-  const theirs = sensesOf(b);
-  return sensesOf(a).some((s) => theirs.includes(s));
+  const theirs = senseSet(b);
+  for (const s of senseSet(a)) if (theirs.has(s)) return true;
+  return false;
 };
+
+/**
+ * `sensesOf` as a set, kept with the form it was read from. The pickers ask
+ * `sharesMeaning` of every form in her deck against the answer, and splitting
+ * both glosses again each time was the other half of what the next exercise
+ * waited on. A form's meanings are never edited in place — a new meaning comes
+ * as a new object — but the fields are checked anyway, so one that was would
+ * be read again rather than answered from a stale copy.
+ */
+type Senses = { gloss: string; meaning?: string; meanings?: string[]; set: Set<string> };
+const sensesKept = new WeakMap<Glossed, Senses>();
+function senseSet(f: Glossed): Set<string> {
+  const kept = sensesKept.get(f);
+  if (kept && kept.gloss === f.gloss_en && kept.meaning === f.meaning_en && kept.meanings === f.meanings_en) {
+    return kept.set;
+  }
+  const set = new Set(sensesOf(f));
+  sensesKept.set(f, { gloss: f.gloss_en, meaning: f.meaning_en, meanings: f.meanings_en, set });
+  return set;
+}
 
 /** Forms that answer a form's English as well as it does: itself, and any form
  *  of the same lemma glossed identically ("argentina" for "Argentinian"). */
@@ -679,6 +723,55 @@ export function missedForms(
 
 export type Option = { id: string; label: string };
 
+/**
+ * Other forms of the same word — the conjugation, the plural — that make the
+ * best wrong answers there are: picking between `ganemos` and `ganamos` is the
+ * grammar the sentence teaches, where picking between `ganemos` and `pagar` is
+ * only reading the English. Drawn from the whole lexicon when there is one,
+ * since the form she is being tested against needn't be one she has drilled.
+ * Same shape only (a word against words), never a form that reads the same once
+ * accents are off, and the ones in the same person and number first — those
+ * differ in nothing but the tense or mood, which is the point being tested.
+ */
+export function siblingsOf(target: Form, pool: Iterable<Form>): Form[] {
+  const size = wordsOf(target.form).length;
+  const out: Form[] = [];
+  const seen = new Set([norm(target.form)]);
+  for (const f of pool) {
+    if (f.lemma_id !== target.lemma_id || f.id === target.id || f.is_glue || f.bound) continue;
+    if (wordsOf(f.form).length !== size || seen.has(norm(f.form))) continue;
+    if (readsTheSame(target, f)) continue;
+    seen.add(norm(f.form));
+    out.push(f);
+  }
+  const t = target.features ?? {};
+  const samePerson = (f: Form) =>
+    t.person != null && f.features?.person === t.person && f.features?.number === t.number;
+  return shuffle(out).sort((a, b) => Number(samePerson(b)) - Number(samePerson(a)));
+}
+
+/** A meaning without its brackets: "we win (that we win)" and "we win" read
+ *  the same. The pronoun stays — "you win" against "we win" is the question. */
+const bareMeaning = (f: Form) => norm(shownMeaning(f).text.replace(/\([^)]*\)/g, ' '));
+
+/**
+ * Two forms of one word that English can't tell apart, so neither can be the
+ * wrong answer to the other: the preterite and the imperfect ("fue" and "era"
+ * are both "was"), a form with a person against one without ("tuve" "I had",
+ * "tenía" "had" — which is "I had" too), or any two whose meanings read the
+ * same once the brackets are off. Forms that differ only in mood stay apart — "disfrutás" and "disfrutes"
+ * are both "you enjoy", and which one a sentence wants is the grammar.
+ */
+function readsTheSame(a: Form, b: Form) {
+  const x = a.features ?? {};
+  const y = b.features ?? {};
+  const pastPair = new Set([x.tense, y.tense]);
+  if (x.tense !== y.tense && pastPair.has('pret') && pastPair.has('impf')) return true;
+  if ((x.person == null) !== (y.person == null) && !x.verb_form && !y.verb_form) return true;
+  const onlyMood = x.mood !== y.mood && x.tense === y.tense && x.person === y.person && x.number === y.number;
+  return !onlyMood && bareMeaning(a) === bareMeaning(b);
+}
+
 /** Options shown for a phrase — three reads better than four at that length. */
 export const SENTENCE_CHOICES = 3;
 /** Forms in a matching block, and options for a single word. */
@@ -714,6 +807,20 @@ export function meaningOptions(sentence: Sentence, all: Sentence[], allForms: Fo
         !sameGist(sentence, s, formById),
     ),
   );
+  // The nearest sentences first: ones that share her sentence's words — its
+  // new word above all — and run about as long. A random pair of others is
+  // answered by spotting one name or one cognate, without reading anything.
+  const lemmas = new Set(formsIn(sentence, formById).filter((f) => !f.is_glue).map((f) => f.lemma_id));
+  const targetLemma = formById.get(sentence.target_form_id)?.lemma_id;
+  const length = wordsOf(sentence.es).length;
+  const nearness = (s: Sentence) => {
+    const theirs = new Set(formsIn(s, formById).filter((f) => !f.is_glue).map((f) => f.lemma_id));
+    let shared = 0;
+    for (const l of theirs) if (lemmas.has(l)) shared += 1;
+    const target = targetLemma && theirs.has(targetLemma) ? 3 : 0;
+    return shared * 2 + target - Math.abs(wordsOf(s.es).length - length) * 0.25;
+  };
+  others.sort((a, b) => nearness(b) - nearness(a));
   const distinct = new Map<string, Sentence>();
   for (const s of others) {
     const k = answerWords(s.en).join(' ');
@@ -730,15 +837,33 @@ export function meaningOptions(sentence: Sentence, all: Sentence[], allForms: Fo
  * sentence another accepted answer. `target` is the form the gap tests — a due
  * word in the sentence, not necessarily the one it was written for.
  */
-export function gapOptions(sentence: Sentence, target: Form, allForms: Form[], count = 4): Option[] {
+export function gapOptions(
+  sentence: Sentence,
+  target: Form,
+  allForms: Form[],
+  count = 4,
+  /** The whole lexicon, where the answer's other forms are found. */
+  lexicon?: Iterable<Form>,
+): Option[] {
   const index = tokenIndexOf(sentence, target.id);
   const answer = index >= 0 ? outOfSentence(sentence.tokens, index) : target.form;
   const size = wordsOf(answer).length;
   const accepted = acceptedAnswers(sentence);
 
+  // The sentence around the gap is the same for every candidate, so it is
+  // read into words once; a candidate then costs only its own words, and only
+  // an accepted answer of the length it would make is compared at all. Every
+  // form of her deck is asked this before the screen can be drawn.
+  const around = (from: number, to: number) =>
+    sentence.tokens.slice(from, to).flatMap((t) => answerWords(tokenWord(t)));
+  const before = index >= 0 ? around(0, index) : [];
+  const after = index >= 0 ? around(index + 1, sentence.tokens.length) : [];
   const fitsTooWell = (f: Form) => {
     if (index < 0) return false;
-    const filled = sentence.tokens.flatMap((t, i) => answerWords(i === index ? f.form : tokenWord(t)));
+    const own = answerWords(f.form);
+    const length = before.length + own.length + after.length;
+    if (!accepted.some((a) => a.length === length)) return false;
+    const filled = [...before, ...own, ...after];
     return accepted.some((a) => sameWords(filled, a));
   };
   const usable = allForms.filter(
@@ -752,24 +877,43 @@ export function gapOptions(sentence: Sentence, target: Form, allForms: Form[], c
   );
   // A decoy of the same part of speech is a real question; "casa" in a verb's
   // gap is a giveaway. So is the only two-word option in a phrase's gap.
-  const rank = (f: Form) => Number(wordsOf(f.form).length === size) * 2 + Number(f.pos === target.pos);
-  const decoys = shuffle(usable).sort((a, b) => rank(b) - rank(a));
-  const sameShape = decoys.filter((f) => wordsOf(f.form).length === size);
+  // Ranked once per form, not once per comparison: the sort compares her whole
+  // deck tens of thousands of times, and each rank splits the form into words.
+  const shaped = new Set(usable.filter((f) => wordsOf(f.form).length === size));
+  const rank = (f: Form) => Number(shaped.has(f)) * 2 + Number(f.pos === target.pos);
+  const decoys = shuffle(usable)
+    .map((f) => ({ f, rank: rank(f) }))
+    .sort((a, b) => b.rank - a.rank)
+    .map(({ f }) => f);
+  const sameShape = decoys.filter((f) => shaped.has(f));
   // Same shape first — a two-word option among one-word ones is the answer in
   // plain sight — but a bank asked for eight and given five is barely a bank,
   // so other shapes top it up rather than being refused outright.
   const pool =
-    sameShape.length >= count - 1 ? sameShape : [...sameShape, ...decoys.filter((f) => !sameShape.includes(f))];
+    sameShape.length >= count - 1 ? sameShape : [...sameShape, ...decoys.filter((f) => !shaped.has(f))];
 
-  const seen = new Set<string>();
+  // Up to two of the answer's own other forms (three in a bank of tiles) —
+  // never one that would make the sentence another accepted answer. These may
+  // share the answer's meaning: `disfrutás` and `disfrutes` both say "you
+  // enjoy", and choosing the one the sentence needs is the whole question.
+  const most = count > 4 ? 3 : Math.min(2, count - 2);
+  const siblings = siblingsOf(target, lexicon ?? allForms)
+    .filter((f) => norm(f.form) !== norm(answer) && !fitsTooWell(f))
+    .slice(0, Math.max(0, most));
+
+  const seen = new Set<string>([norm(answer), ...siblings.map((f) => norm(f.form))]);
   const picked: Form[] = [];
   for (const f of pool) {
+    if (picked.length + siblings.length >= count - 1) break;
     if (seen.has(norm(f.form))) continue;
     seen.add(norm(f.form));
     picked.push(f);
-    if (picked.length === count - 1) break;
   }
-  return shuffle([{ id: target.id, label: answer }, ...picked.map((f) => ({ id: f.id, label: f.form }))]);
+  return shuffle([
+    { id: target.id, label: answer },
+    ...siblings.map((f) => ({ id: f.id, label: f.form })),
+    ...picked.map((f) => ({ id: f.id, label: f.form })),
+  ]);
 }
 
 /** How many spare tiles a bank carries beyond the answer. */
@@ -817,6 +961,9 @@ export function sentenceTiles(
   byEar = false,
   /** A test: spares include other forms of the sentence's own words. */
   hard = false,
+  /** The whole lexicon, where those other forms are found. Outside a test one
+   *  of them still joins the spares, so the conjugation has to be read. */
+  lexicon?: Iterable<Form>,
 ) {
   // The English side has no tokens to break up and no forms of its own: its
   // tiles are its words, and its spares are other words of English the course
@@ -829,15 +976,27 @@ export function sentenceTiles(
   // English alone: the conjugation has to be known. Never one an accepted
   // answer uses, and never one that shares a meaning (the check below).
   const siblings = new Set(
-    hard && side === 'es'
-      ? allForms.filter((f) => own.some((o) => !o.is_glue && o.lemma_id === f.lemma_id && o.id !== f.id))
+    side === 'es' && (hard || lexicon)
+      ? [...(lexicon ?? allForms)].filter(
+          (f) => !f.is_glue && !f.bound && own.some((o) => !o.is_glue && o.lemma_id === f.lemma_id && o.id !== f.id),
+        )
       : [],
   );
+  const mostSiblings = hard ? SIBLING_DECOYS : 1;
+  // By lemma, not by object: the deck holds its own copy of a lexicon form.
+  const isSibling = (f: Form) => (hard || !!lexicon) && own.some((o) => !o.is_glue && o.lemma_id === f.lemma_id && o.id !== f.id);
+  // By ear the work is hearing the words, not ruling others out: two spares
+  // keep it from being a jigsaw, and one is enough beside a two-word answer.
+  const most = byEar ? Math.min(DECOYS_BY_EAR, Math.max(1, answer.length - 1)) : Math.min(DECOYS, Math.max(2, Math.ceil(answer.length / 2)));
   let fromSiblings = 0;
   const spare = new Map<string, string>();
   for (const f of [...shuffle([...siblings]), ...shuffle(allForms)]) {
+    // The spares are the first few found, so the rest of her deck needn't be
+    // looked at once they are: it was every form, each checked against every
+    // word of the sentence, before the screen could be drawn.
+    if (spare.size >= most) break;
     if (f.pos === 'propn' || isPhrase(f.form) || own.some((o) => sharesMeaning(o, f))) continue;
-    if (siblings.has(f) && fromSiblings >= SIBLING_DECOYS) continue;
+    if (isSibling(f) && fromSiblings >= mostSiblings) continue;
     if (side === 'en') {
       for (const w of wordsOf(shownMeaning(f).text.replace(TILE_PUNCT, ' '))) {
         const key = norm(w);
@@ -848,11 +1007,8 @@ export function sentenceTiles(
     const key = norm(f.form);
     if (!key || taken.has(key) || spare.has(key)) continue;
     spare.set(key, f.form);
-    if (siblings.has(f)) fromSiblings += 1;
+    if (isSibling(f)) fromSiblings += 1;
   }
-  // By ear the work is hearing the words, not ruling others out: two spares
-  // keep it from being a jigsaw, and one is enough beside a two-word answer.
-  const most = byEar ? Math.min(DECOYS_BY_EAR, Math.max(1, answer.length - 1)) : Math.min(DECOYS, Math.max(2, Math.ceil(answer.length / 2)));
   const decoys = [...spare.values()].slice(0, most);
   return { answer, tiles: shuffle([...answer, ...decoys]) };
 }
@@ -863,14 +1019,40 @@ export function sentenceTiles(
 // would let her answer on shape alone. No option shares a meaning with the
 // answer or with another option: two options that both mean "well" are two
 // right answers, or a coin toss.
-export function pickOptions(correct: Form, allForms: Form[], field: 'gloss_en' | 'form') {
+//
+// The answer's own other forms go first, up to two: "you enjoy" against
+// `disfrutás`, `disfrutamos` and `disfrutar` asks who is enjoying, which is
+// what the ending says — against `comprás` and `ir` it asks nothing a glance
+// at the first letters doesn't answer.
+export function pickOptions(
+  correct: Form,
+  allForms: Form[],
+  field: 'gloss_en' | 'form',
+  /** The whole lexicon, where the answer's other forms are found. */
+  lexicon?: Iterable<Form>,
+) {
   const count = isPhrase(correct.form) ? SENTENCE_CHOICES : MATCH_SIZE;
   const usable = allForms.filter((f) => f.id === correct.id || !sharesMeaning(f, correct));
   const sameShape = usable.filter((f) => isPhrase(f.form) === isPhrase(correct.form));
   const samePos = sameShape.filter((f) => f.pos === correct.pos);
   const pool = samePos.length >= count ? samePos : sameShape.length >= count ? sameShape : usable;
+  // A sibling that reads the same in English once the brackets are off
+  // (`ganamos` "we win" beside `ganemos` "we win (that we win)") is a second
+  // right answer, and one glossed as itself (`medialunas`) gives the game away.
+  const said = bareMeaning(correct);
+  const siblings = siblingsOf(correct, lexicon ?? allForms).filter(
+    (f) => labelOf(f, field).trim() && bareMeaning(f) !== said && !selfGlossed(f),
+  );
   const chosen: Form[] = [correct];
+  let fromSiblings = 0;
+  for (const f of siblings) {
+    if (fromSiblings === 2) break;
+    if (chosen.some((c) => norm(labelOf(c, field)) === norm(labelOf(f, field)) || sharesMeaning(c, f))) continue;
+    chosen.push(f);
+    fromSiblings += 1;
+  }
   for (const f of shuffle(pool)) {
+    if (chosen.length === count) break;
     if (chosen.some((c) => c.id === f.id || norm(labelOf(c, field)) === norm(labelOf(f, field)) || sharesMeaning(c, f))) {
       continue;
     }
@@ -881,7 +1063,18 @@ export function pickOptions(correct: Form, allForms: Form[], field: 'gloss_en' |
 }
 
 /** A plausible wrong meaning for the true/false exercise — never a synonym. */
-export function pickImposter(correct: Form, allForms: Form[]): Form | null {
+//  Most often the meaning of another form of the same word — "disfrutamos"
+//  shown as "you enjoy" is a claim only the ending can settle.
+export function pickImposter(correct: Form, allForms: Form[], lexicon?: Iterable<Form>): Form | null {
+  const said = bareMeaning(correct);
+  const sibling = siblingsOf(correct, lexicon ?? allForms).find(
+    (f) =>
+      shownMeaning(f).text.trim() &&
+      bareMeaning(f) !== said &&
+      !selfGlossed(f) &&
+      !sharesMeaning(f, correct),
+  );
+  if (sibling && Math.random() < 0.6) return sibling;
   const sameShape = allForms.filter((f) => isPhrase(f.form) === isPhrase(correct.form));
   const pool = sameShape.length > 1 ? sameShape : allForms;
   const others = pool.filter((f) => f.id !== correct.id && !sharesMeaning(f, correct));

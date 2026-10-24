@@ -16,3 +16,8 @@ export const thud = () => {
 export const success = () => {
   if (native) void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
 };
+
+/** A wrong answer: the "no" buzz, short enough not to scold. */
+export const warn = () => {
+  if (native) void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error).catch(() => {});
+};
