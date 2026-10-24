@@ -2,7 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, useFocusEffect } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as WebBrowser from 'expo-web-browser';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import Animated, { useReducedMotion } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { IconButton, rise } from '@/components/onboarding-ui';
 import { Button } from '@/components/ui';
 import { HiddenFromReplay } from '@/lib/analytics';
+import { versionLabel } from '@/lib/app-updates';
 import { useAuth } from '@/lib/auth';
 import { loadInbox } from '@/lib/feedback';
 import { isGuest } from '@/lib/guest';
@@ -67,6 +68,10 @@ function Account() {
   const [error, setError] = useState<string | null>(null);
   // Testers' unread messages, shown on the Feedback row.
   const [unread, setUnread] = useState(0);
+  const [version, setVersion] = useState<string | null>(null);
+  useEffect(() => {
+    void versionLabel().then(setVersion);
+  }, []);
 
   useFocusEffect(
     useCallback(() => {
@@ -196,6 +201,9 @@ function Account() {
             </View>
           </Animated.View>
         )}
+
+        {/* Which build, and which update on top of it: how to tell from the phone whether one has arrived. */}
+        {version ? <Text style={styles.version}>{version}</Text> : null}
       </ScrollView>
     </SafeAreaView>
   );
@@ -272,4 +280,5 @@ const styles = StyleSheet.create({
   confirmBody: { ...type.body, color: colors.muted },
   error: { ...type.body, color: colors.dangerInk },
   confirmButtons: { gap: 10, marginTop: 6 },
+  version: { ...type.label, color: colors.faint, textAlign: 'center', marginTop: 8 },
 });

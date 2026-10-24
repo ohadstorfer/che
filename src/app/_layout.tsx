@@ -16,6 +16,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 import { BootSplash } from '@/components/boot-splash';
+import { applyUpdateOnLaunch } from '@/lib/app-updates';
 import { FeedbackLayer } from '@/components/feedback';
 import { ScreenBackground } from '@/components/ui';
 import { AnalyticsProvider, AnalyticsTracker } from '@/lib/analytics';
@@ -145,6 +146,9 @@ const PREFETCH_DELAY_MS = 400;
  * paywall, a deep link) has nothing to wait for. Once it lets go, the other
  * tabs are made ready behind Course (lib/prefetch.ts).
  */
+// Asked as the JS starts, so a new update can be in place before the splash goes.
+applyUpdateOnLaunch();
+
 function BootGate({ fontsReady }: { fontsReady: boolean }) {
   const { session, loading } = useAuth();
   const { limited } = usePremium();
