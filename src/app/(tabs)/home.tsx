@@ -20,6 +20,7 @@ import {
 
 import { AppHeader, Pulse } from '@/components/app-header';
 import { Guidebook } from '@/components/guidebook';
+import { PlacementCard } from '@/components/placement-card';
 import { RedoCard, type StepRect } from '@/components/redo-card';
 import { Button, Panel } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
@@ -50,6 +51,7 @@ import {
 } from '@/lib/push';
 import { getPracticeCounts } from '@/lib/session';
 import { useStatusBarColor } from '@/lib/status-bar-color';
+import { takeFinishedLesson } from '@/lib/just-finished';
 import { readSnapshot, writeSnapshot } from '@/lib/snapshot';
 import { streakStatus, type StreakStatus } from '@/lib/streak';
 import { fetchStreakWeek } from '@/lib/streak-week';
@@ -941,6 +943,17 @@ export default function Home() {
       // unmounted comes back already standing on her old status, and the
       // advance still has to wait for her to have looked at it.
       if (placed.current) placedAt.current = Date.now();
+      // A lesson that has just been saved moves the road now, not after the
+      // read below comes back (just-finished.ts): the advance starts from here
+      // and the read, landing on the same status, changes nothing.
+      const finished = takeFinishedLesson();
+      if (finished) {
+        setData((d) => {
+          if (!d || d.done.has(finished)) return d;
+          const done = new Set(d.done).add(finished);
+          return { ...d, done, current: currentIndex(d.course.path, done) };
+        });
+      }
       // A load that fails keeps what is on screen (the phone's copy).
       load().catch(() => {});
     }, [load]),
@@ -1427,13 +1440,7 @@ export default function Home() {
             ) : null}
 
             {data && data.current === 0 && data.known === 0 && !noCourse ? (
-              <Panel style={styles.placement}>
-                <Text style={styles.sectionTitle}>Already know some Spanish?</Text>
-                <Text style={styles.mutedText}>
-                  A short test finds where you should start, so you don&apos;t sit through what you know.
-                </Text>
-                <Button title="Take the placement test" variant="secondary" onPress={() => router.push('/practice?test=placement')} />
-              </Panel>
+              <PlacementCard userId={userId} />
             ) : null}
             <View style={styles.pathTop} />
           </View>
@@ -1772,7 +1779,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.primarySoft,
   },
-  placement: { gap: 10 },
   attempts: {
     position: 'absolute',
     right: -8,

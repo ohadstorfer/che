@@ -22,7 +22,7 @@ import {
   start,
   warm,
 } from '@/lib/hablar';
-import { preloadAudio } from '@/lib/audio';
+import { audioPathOf, preloadAudio } from '@/lib/audio';
 import { freeChatArt, scenarioArt } from '@/lib/hablar-art';
 import { loadCourse } from '@/lib/course';
 import { prime } from '@/lib/hablar-audio';
@@ -104,6 +104,10 @@ export default function HablarBrief() {
         return;
       }
       if (!lessonId) setDefaultLevel(isBand(res.level) ? res.level : played);
+      // An opener only known now (a unit's, a free chat's): onto the phone
+      // before the chat opens, as a scenario's is. Streamed from the web the
+      // phone often never sounded it, and she was left to speak first.
+      await Promise.race([preloadAudio(audioPathOf(res.opener?.audio_url)), new Promise((r) => setTimeout(r, 2500))]);
       router.replace(`/hablar-chat?session=${res.session_id}`);
     } catch {
       setError("Couldn't start the chat. Check your connection and try again.");

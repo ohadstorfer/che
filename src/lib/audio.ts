@@ -408,6 +408,13 @@ export function getAudioUrl(path: string): string {
   return root + path.split('/').map(encodeURIComponent).join('/');
 }
 
+/** One of our clips' public URLs back to its path, so it can be put on the phone like any clip. Null for anything else. */
+export function audioPathOf(url: string | null | undefined): string | null {
+  if (!url) return null;
+  const root = [supabaseRoot, courseRoot].find((r) => url.startsWith(r));
+  return root ? decodeURIComponent(url.slice(root.length)) : null;
+}
+
 // ---------------------------------------------------------------------------
 // Playback.
 //

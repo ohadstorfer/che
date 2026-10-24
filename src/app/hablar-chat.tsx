@@ -34,7 +34,7 @@ import {
   webPress,
 } from '@/components/hablar-ui';
 import { Button } from '@/components/ui';
-import { type ActiveRecording, armMic, canRecord, disarmMic, readyClip, rearmMic, type RecordedClip, startRecording, warmMic } from '@/lib/audio';
+import { type ActiveRecording, armMic, audioPathOf, canRecord, disarmMic, readyClip, rearmMic, type RecordedClip, startRecording, warmMic } from '@/lib/audio';
 import { useAuth } from '@/lib/auth';
 import {
   CHATS_PER_DAY,
@@ -152,7 +152,8 @@ const versionOf = (kind: string | undefined, topicId: string | null | undefined,
 };
 const WAVE_BARS = 18;
 /** The call's Pancho: the onboarding mate loop cut out as a sticker on the
- *  call's pink (social/out/pancho-loop), and its first frame as the still. */
+ *  call's salvia (social/out/pancho-loop), and its first frame as the still.
+ *  The salvia is baked in, so it must stay `pastel.sage` to blend. */
 const CALL_CLIP = require('@/assets/videos/pancho-call.mp4');
 const CALL_STILL = require('@/assets/images/pancho-call-still.png');
 /** Seconds where he is back in the still pose: the start, just before the
@@ -163,8 +164,11 @@ const POUR_FROM = 3.5;
 /** How long before the clip's end it loops itself: more than the 0.1 s between time updates. */
 const LOOP_EARLY_S = 0.25;
 
+/** The call's backdrop: the salvia pastel, with ink on it. Actions on it (mic, send) stay rosa. */
+const CALL_BG = pastel.sage;
+
 export default function HablarChat() {
-  useStatusBarColor(colors.primary);
+  useStatusBarColor(CALL_BG);
   const insets = useSafeAreaInsets();
   const { height: windowHeight } = useWindowDimensions();
   const { session: sessionParam } = useLocalSearchParams<{
@@ -291,7 +295,8 @@ export default function HablarChat() {
         setPhase('idle');
         // Pancho speaks first. The context was woken in the Empezar tap; the
         // brief put his line on the phone, when it could.
-        const openerPath = versionOf(kind, started.topic_id, started.level)?.opener.audio;
+        const openerPath =
+          versionOf(kind, started.topic_id, started.level)?.opener.audio ?? audioPathOf(started.opener.audio_url);
         if (started.opener.audio_url)
           void play(openerKey, async () => readyClip(openerPath) ?? resolveAudio(started.opener.audio_url));
         return;
@@ -925,8 +930,9 @@ export default function HablarChat() {
   const playingSlow = !!currentPlaying && !!playing?.slow;
   const playingNormal = !!currentPlaying && !playing?.slow;
   const currentEn = current && showEn.has(current.key) ? current.textEn : null;
-  const artSize = windowHeight < 750 ? 200 : 240;
-  const artTop = Math.round(Math.min(96, Math.max(12, windowHeight * 0.08)));
+  const artSize = windowHeight < 750 ? 220 : Math.min(360, Math.round(windowHeight * 0.36));
+  /** A draft or hint card takes the space above the dock: the bubble may then reach down over Pancho. */
+  const card = !!draft || !!(hintState.data && hintState.level > 0);
 
   return (
     <SafeAreaView style={[styles.safe, styles.callBg]} edges={['top', 'left', 'right']}>
@@ -942,10 +948,9 @@ export default function HablarChat() {
             accessibilityRole="button"
             accessibilityLabel="Back"
             style={({ pressed }) => [styles.headerIcon, { transform: [{ scale: pressed ? 0.94 : 1 }] }, webPress]}>
-            <Ionicons name="chevron-back" size={24} color={colors.onPrimary} />
+            <Ionicons name="chevron-back" size={24} color={colors.ink} />
           </Pressable>
           <View style={styles.headerTitle}>
-            <Text style={styles.callLabel}>Call</Text>
             <FitText style={styles.headerName} lines={1}>
               Pancho
             </FitText>
@@ -956,50 +961,61 @@ export default function HablarChat() {
           <View style={styles.headerIcon} />
         </View>
 
-        {/* Pancho sits at a fixed height: whatever the line, card or dock below does, he never moves. */}
-        <View style={[styles.stage, { paddingTop: artTop }]}>
+        {/* Pancho sits on the dock, under everything else: a card or notice may cover him, but he never moves. */}
+        <View style={styles.panchoSeat} pointerEvents="none">
           <Talking active={!!currentPlaying || phase === 'streaming'}>
             <CallPancho busy={panchoTurn} size={artSize} onPlayingChange={onVideoPlaying} />
           </Talking>
+        </View>
 
-          <ScrollView
-            style={styles.lineScroll}
-            contentContainerStyle={styles.lineWrap}
-            showsVerticalScrollIndicator={false}>
-            {thinking ? (
-              <View style={styles.thinking} accessibilityLabel="Pancho is thinking">
-                <ThinkingDots color={colors.onPrimary} />
+        {/* His line in a speech bubble right above his head; while he thinks, only dots in the same spot. */}
+        <View style={[styles.stage, { paddingBottom: card ? 16 : artSize + 18 }]}>
+          {thinking ? (
+            <Appear key="thinking">
+              <View style={[styles.bubble, styles.bubbleDots]} accessible accessibilityLabel="Pancho is thinking">
+                <View style={styles.bubbleDotsScale}>
+                  <ThinkingDots color={colors.ink} />
+                </View>
+                <View style={[styles.bubbleTail, styles.bubbleTailDots]} />
               </View>
-            ) : current ? (
-              <Appear key={current.key}>
-                <FlowLine text={shownText} />
-                {current.failed ? <Text style={styles.lineSub}>The connection dropped.</Text> : null}
-                {currentEn ? <Text style={styles.lineSub}>{currentEn}</Text> : null}
-              </Appear>
-            ) : null}
-          </ScrollView>
+            </Appear>
+          ) : current ? (
+            <View style={styles.bubble}>
+              <ScrollView
+                style={styles.lineScroll}
+                contentContainerStyle={styles.lineWrap}
+                showsVerticalScrollIndicator={false}>
+                <Appear key={current.key}>
+                  <FlowLine text={shownText} />
+                  {current.failed ? <Text style={styles.lineSub}>The connection dropped.</Text> : null}
+                  {currentEn ? <Text style={styles.lineSub}>{currentEn}</Text> : null}
+                </Appear>
+              </ScrollView>
 
-          {current && !current.streaming && !current.failed && !thinking ? (
-            <View style={styles.lineTools}>
-              <CallPill
-                icon={playingNormal ? 'stop' : 'replay'}
-                label={playingNormal ? 'Stop' : 'Replay'}
-                active={playingNormal}
-                onPress={() => void onPlay(current, false)}
-              />
-              <CallPill
-                icon={playingSlow ? 'stop' : 'tortoise'}
-                label={playingSlow ? 'Stop' : 'Slow'}
-                active={playingSlow}
-                onPress={() => void onPlay(current, true)}
-              />
-              <CallPill
-                icon="translate"
-                label="English"
-                active={!!currentEn}
-                busy={translating === current.key}
-                onPress={() => void onTranslate(current)}
-              />
+              {!current.streaming && !current.failed ? (
+                <View style={styles.lineTools}>
+                  <CallPill
+                    icon={playingNormal ? 'stop' : 'replay'}
+                    label={playingNormal ? 'Stop' : 'Replay'}
+                    active={playingNormal}
+                    onPress={() => void onPlay(current, false)}
+                  />
+                  <CallPill
+                    icon={playingSlow ? 'stop' : 'tortoise'}
+                    label={playingSlow ? 'Stop' : 'Slow'}
+                    active={playingSlow}
+                    onPress={() => void onPlay(current, true)}
+                  />
+                  <CallPill
+                    icon="translate"
+                    label="English"
+                    active={!!currentEn}
+                    busy={translating === current.key}
+                    onPress={() => void onTranslate(current)}
+                  />
+                </View>
+              ) : null}
+              <View style={styles.bubbleTail} />
             </View>
           ) : null}
         </View>
@@ -1061,16 +1077,18 @@ export default function HablarChat() {
             </View>
           </Appear>
         ) : null}
+        {/* Over the stage, just above the dock, so the dock's buttons never cover it. */}
+        {notice ? (
+          <View style={styles.noticeWrap} pointerEvents="none">
+            <View style={styles.notice}>
+              <Text style={styles.noticeText}>{notice}</Text>
+            </View>
+          </View>
+        ) : null}
       </View>
 
       {/* Bottom dock */}
       <View style={[styles.bar, { paddingBottom: 8 + insets.bottom }]}>
-        {notice ? (
-          <View style={styles.notice}>
-            <Text style={styles.noticeText}>{notice}</Text>
-          </View>
-        ) : null}
-
         {phase === 'retry' ? (
           <View style={styles.barStack}>
             <Text style={styles.caption}>The connection dropped.</Text>
@@ -1352,7 +1370,7 @@ function Talking({ active, children }: { active: boolean; children: React.ReactN
   );
 }
 
-/** Replay / English under Pancho's line, on the call's color. */
+/** Replay / Slow / English along the bottom of Pancho's bubble. */
 function CallPill({
   icon,
   label,
@@ -1380,11 +1398,11 @@ function CallPill({
         webPress,
       ]}>
       {busy ? (
-        <ActivityIndicator size="small" color={active ? colors.primary : colors.onPrimary} />
+        <ActivityIndicator size="small" color={colors.primary} />
       ) : (
-        <MaterialCommunityIcons name={icon} size={18} color={active ? colors.primary : colors.onPrimary} />
+        <MaterialCommunityIcons name={icon} size={18} color={colors.primary} />
       )}
-      <Text style={[styles.pillText, active && { color: colors.primary }]}>{label}</Text>
+      <Text style={styles.pillText}>{label}</Text>
     </Pressable>
   );
 }
@@ -1516,11 +1534,35 @@ const DOCK_SHADOW = `0 -2.5px 0 ${colors.ink}`;
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
-  callBg: { backgroundColor: colors.primary },
+  callBg: { backgroundColor: CALL_BG },
   call: { flex: 1, maxWidth: 640, width: '100%', alignSelf: 'center' },
-  callLabel: { ...font.body[700], fontSize: 13, color: colors.onPrimary, opacity: 0.75, textAlign: 'center' },
-  stage: { flex: 1, alignItems: 'center', paddingHorizontal: 24, paddingBottom: 16, gap: 14 },
-  lineScroll: { flexGrow: 0, flexShrink: 1, alignSelf: 'stretch' },
+  stage: { flex: 1, justifyContent: 'flex-end', paddingHorizontal: 20, paddingTop: 16 },
+  panchoSeat: { position: 'absolute', left: 0, right: 0, bottom: 0, alignItems: 'center' },
+  bubble: {
+    flexShrink: 1,
+    gap: 8,
+    paddingTop: 16,
+    paddingHorizontal: 18,
+    paddingBottom: 8,
+    borderRadius: 26,
+    backgroundColor: colors.card,
+    boxShadow: clay.float,
+  },
+  bubbleDots: { alignSelf: 'center', height: 56, paddingTop: 0, paddingBottom: 0, paddingHorizontal: 24, justifyContent: 'center' },
+  /** The bubble's tail, pointing down at Pancho: a turned square with the outline on its two lower sides. */
+  bubbleTail: {
+    position: 'absolute',
+    left: '34%',
+    bottom: -11,
+    width: 22,
+    height: 22,
+    backgroundColor: colors.card,
+    transform: [{ rotate: '45deg' }],
+    boxShadow: `2.5px 2.5px 0 0 ${colors.ink}`,
+  },
+  bubbleTailDots: { left: 24 },
+  bubbleDotsScale: { transform: [{ scale: 1.4 }] },
+  lineScroll: { flexGrow: 0, flexShrink: 1 },
   flow: { alignSelf: 'stretch', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 6 },
   lineWrap: { alignItems: 'center', paddingVertical: 4 },
   line: {
@@ -1528,31 +1570,35 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 31,
     letterSpacing: -0.2,
-    color: colors.onPrimary,
+    color: colors.ink,
     textAlign: 'center',
   },
   lineSub: {
     ...font.body[600],
     fontSize: 16,
     lineHeight: 22,
-    color: colors.onPrimary,
-    opacity: 0.8,
+    color: colors.muted,
     textAlign: 'center',
     marginTop: 10,
   },
-  lineTools: { flexDirection: 'row', gap: 10 },
+  lineTools: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 4,
+    paddingTop: 8,
+    borderTopWidth: 2,
+    borderTopColor: colors.border,
+  },
   pill: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
     height: 40,
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     borderRadius: radius.pill,
-    borderWidth: 1.5,
-    borderColor: 'rgba(255,255,255,0.55)',
   },
-  pillActive: { backgroundColor: colors.onPrimary, borderColor: colors.onPrimary },
-  pillText: { ...font.body[800], fontSize: 14, color: colors.onPrimary },
+  pillActive: { backgroundColor: colors.primarySoft },
+  pillText: { ...font.body[800], fontSize: 14, color: colors.primary },
   floatCard: { marginHorizontal: 16, marginBottom: 14, gap: 8, padding: 16, borderRadius: radius.lg, backgroundColor: colors.card },
 
   header: {
@@ -1578,16 +1624,10 @@ const styles = StyleSheet.create({
     fontSize: 19,
     lineHeight: 22,
     letterSpacing: -0.2,
-    color: colors.onPrimary,
+    color: colors.ink,
     textAlign: 'center',
   },
-  headerRole: { ...font.body[700], fontSize: 13, color: colors.onPrimary, opacity: 0.75, textAlign: 'center' },
-  thinking: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    minHeight: 24,
-  },
+  headerRole: { ...font.body[700], fontSize: 13, color: colors.muted, textAlign: 'center' },
 
   /** A correct line that still gets the Argentine way: the card without the red. */
 
@@ -1724,13 +1764,9 @@ const styles = StyleSheet.create({
     color: colors.muted,
     fontVariant: ['tabular-nums'],
   },
+  noticeWrap: { position: 'absolute', left: 16, right: 16, bottom: 12, alignItems: 'center', zIndex: 10, elevation: 10 },
   notice: {
-    position: 'absolute',
-    // Sits on top of the dock whatever its own height: a long line wraps to two.
-    bottom: '100%',
-    marginBottom: 10,
-    alignSelf: 'center',
-    maxWidth: '92%',
+    maxWidth: '100%',
     paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: radius.pill,
