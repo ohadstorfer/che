@@ -89,8 +89,7 @@
         "expo-image-picker",
         {
           "photosPermission": "Posta lets you attach screenshots from your photos when you send feedback.",
-          "cameraPermission": false,
-          "microphonePermission": false
+          "cameraPermission": false
         }
       ],
       "expo-build-properties",
