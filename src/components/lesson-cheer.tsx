@@ -4,7 +4,7 @@
 // doesn't see the same one again for a long while. It hides itself after a
 // moment or on a tap.
 import { Image } from 'expo-image';
-import { useEffect, useRef } from 'react';
+import { createContext, useEffect, useRef } from 'react';
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import Animated, { interpolate, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withTiming, type SharedValue } from 'react-native-reanimated';
 
@@ -13,6 +13,10 @@ import { ART, BITS, type CheerDesign, type CheerWhen, dealCheer, type Scene, typ
 import { clay, colors, font, pastel } from '@/lib/theme';
 
 export type Cheer = { design: CheerDesign; count: number; id: number };
+
+/** True while a cheer covers the lesson: the exercise behind it is already the
+ *  next one, and waits to grab the keyboard until the cheer has gone. */
+export const CheerUpContext = createContext(false);
 
 /** How long a full screen stays before it hands back to the lesson. */
 const HOLD = 1900;

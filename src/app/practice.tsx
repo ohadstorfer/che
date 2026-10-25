@@ -20,7 +20,7 @@ import { ClassDoor, ClassWait, SLOW_MS } from '@/components/class-door';
 import { POSE } from '@/components/mascot';
 import { PageColorContext } from '@/components/exercise-frame';
 import { Exercise } from '@/components/exercises';
-import { type Cheer, cheerFor, LessonCheer, makeCheer } from '@/components/lesson-cheer';
+import { type Cheer, cheerFor, CheerUpContext, LessonCheer, makeCheer } from '@/components/lesson-cheer';
 import { StreakAlmost } from '@/components/streak-almost';
 import { StreakCelebration } from '@/components/streak-celebration';
 import { Button, Panel } from '@/components/ui';
@@ -29,7 +29,7 @@ import { PerfectLesson } from '@/components/perfect-lesson';
 import { LessonEnd } from '@/components/unit-progress';
 import { type AnswerActions, AnswerActionsContext } from '@/components/wrong-answer-actions';
 import { answerWords, shownMeaning } from '@/lib/answers';
-import { preloadAudio } from '@/lib/audio';
+import { holdAudio, preloadAudio, releaseAudio } from '@/lib/audio';
 import { useAuth } from '@/lib/auth';
 import { conceptsOf } from '@/lib/concepts';
 import { currentIndex, loadCourse, loadProgress } from '@/lib/course';
@@ -356,6 +356,10 @@ export default function Practice() {
     setVerdict(null);
     setCelebrating(false);
     setPerfectSeen(false);
+    // A new round counts its runs from nothing (the screen may be reused).
+    inRow.current = { run: 0, comeback: false, lastAt: -10, shown: 0 };
+    setCheer(null);
+    releaseAudio(false);
     setIndex(0);
     setQueue(null);
     setStaging(false);
@@ -592,15 +596,15 @@ export default function Practice() {
   // stay quiet: those are measuring her, not coaching her.
   const inRow = useRef({ run: 0, comeback: false, lastAt: -10, shown: 0 });
   const [cheer, setCheer] = useState<Cheer | null>(null);
-  /** The step to the next exercise, held while a cheer is up: the next screen
-   *  (and its clip) waits until the cheer has gone. */
-  const afterCheer = useRef<(() => void) | null>(null);
+  /** The next exercise goes up behind a cheer at once, so the old one is never
+   *  seen again as the cheer leaves; its clip is held until the cheer has gone
+   *  (audio.ts). */
   const clearCheer = useCallback(() => {
     setCheer(null);
-    const go = afterCheer.current;
-    afterCheer.current = null;
-    go?.();
+    releaseAudio();
   }, []);
+  // Leaving mid-cheer drops the held clip rather than playing it over whatever comes next.
+  useEffect(() => () => releaseAudio(false), []);
   /** Counts the answer; true when it earned a cheer. */
   const countAnswer = (item: QueueItem, right: boolean, next: QueueItem[]) => {
     if (item.mode === 'tip' || item.mode === 'sentence_intro' || plan || kind === 'placement' || kind === 'unit_check') return false;
@@ -630,8 +634,8 @@ export default function Practice() {
     // A placement asks a section at a time: at the end of one, the walk
     // decides whether there is another to ask.
     if (walk.current && index + 1 >= next.length) return void nextSection(walk.current, next);
-    if (cheered) afterCheer.current = () => advance(next);
-    else advance(next);
+    if (cheered) holdAudio();
+    advance(next);
   };
 
   const stagingNow = useRef(false);
@@ -965,6 +969,7 @@ export default function Practice() {
           {/* This page is flat oat, so an exercise too tall for it can fade into it. */}
           <PageColorContext.Provider value={colors.bg}>
             <AnswerActionsContext.Provider value={kind === 'placement' ? null : actions}>
+            <CheerUpContext.Provider value={cheer !== null}>
               {/* Each exercise slides in from where the class is heading, so a
                   new question reads as the next one rather than the screen
                   blinking. The first rides the stage's own fade instead. */}
@@ -983,6 +988,7 @@ export default function Practice() {
                 onAnswered={(wrongIds, extra) => void onAnswered(current, wrongIds, extra)}
               />
               </Animated.View>
+            </CheerUpContext.Provider>
             </AnswerActionsContext.Provider>
           </PageColorContext.Provider>
         </Animated.View>

@@ -24,6 +24,7 @@ import Animated, {
 import { scheduleOnRN } from 'react-native-worklets';
 
 import { ExerciseFrame, TightContext, type Verdict } from '@/components/exercise-frame';
+import { CheerUpContext } from '@/components/lesson-cheer';
 import { WrongAnswerActions } from '@/components/wrong-answer-actions';
 import { Panel } from '@/components/ui';
 import { type Anchor, WordPopover, measureAnchor } from '@/components/word-popover';
@@ -1962,6 +1963,16 @@ function SpanishInput({
 }) {
   const input = useRef<TextInput>(null);
   const selection = useRef({ start: value.length, end: value.length });
+  // Behind a cheer the keyboard would come up over it: it waits, and comes up
+  // as the cheer goes.
+  const cheerUp = useContext(CheerUpContext);
+  const coveredAtStart = useRef(cheerUp);
+  useEffect(() => {
+    if (!cheerUp && coveredAtStart.current) {
+      coveredAtStart.current = false;
+      input.current?.focus();
+    }
+  }, [cheerUp]);
   const editable = verdict === null;
 
   const insert = (letter: string) => {
@@ -1996,7 +2007,7 @@ function SpanishInput({
         contextMenuHidden
         // Android: the keyboard's suggestion strip is off only for this kind.
         keyboardType={Platform.OS === 'android' ? 'visible-password' : 'default'}
-        autoFocus
+        autoFocus={!coveredAtStart.current}
         placeholder={placeholder}
         placeholderTextColor={colors.faint}
         editable={editable}

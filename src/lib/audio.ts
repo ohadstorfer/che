@@ -753,8 +753,36 @@ let playingPath: string | null = null;
 /** Bumped by every play and stop, so a slow fetch knows it has been overtaken. */
 let generation = 0;
 
+/** A clip asked for while the sound is held, waiting for the release. */
+let held = false;
+let pending: { path: string; onEnd?: OnEnd; rate: number } | null = null;
+
+/**
+ * Holds every clip asked for from now until `releaseAudio`: the latest one
+ * waits and plays on the release. For a screen that is put up behind a
+ * cover (the mid-lesson cheer) and must stay quiet until it shows.
+ */
+export function holdAudio(): void {
+  held = true;
+}
+
+/** Lets sound through again and plays the clip that waited — or, with `play`
+ *  false, drops it. */
+export function releaseAudio(play = true): void {
+  held = false;
+  const p = pending;
+  pending = null;
+  if (p && play) playAudio(p.path, p.onEnd, p.rate);
+  else p?.onEnd?.();
+}
+
 /** Ends whatever is playing, telling its button that it stopped. */
 export function stopAudio(): void {
+  if (pending) {
+    const p = pending;
+    pending = null;
+    p.onEnd?.();
+  }
   generation += 1;
   const playing = current;
   current = null;
@@ -769,6 +797,12 @@ export function stopAudio(): void {
  * instead of going quiet. `rate` slows it (0.75) for ears that need it.
  */
 export function playAudio(path: string, onEnd?: OnEnd, rate = 1): void {
+  if (held) {
+    // What is sounding already (the last answer's sentence) is left to finish.
+    pending?.onEnd?.();
+    pending = { path, onEnd, rate };
+    return;
+  }
   stopAudio();
   const mine = generation;
   playingPath = path;
