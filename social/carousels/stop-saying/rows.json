@@ -1,0 +1,8 @@
+[
+  {"id": "G1", "top": "Stop saying these", "bottom": "Say this in Argentina", "topic": "Everyday words"},
+  {"id": "G2", "top": "Stop saying these", "bottom": "Say this in Argentina", "topic": "Food edition"},
+  {"id": "G3", "top": "Stop saying tú", "bottom": "Say vos in Argentina", "topic": "Vos edition"},
+  {"id": "G4", "top": "Stop saying these", "bottom": "Say this in Argentina", "topic": "Small talk edition"},
+  {"id": "G5", "top": "Stop saying these", "bottom": "Say this in Argentina", "topic": "City edition"},
+  {"id": "G6", "top": "Stop saying these", "bottom": "Say this in Argentina", "topic": "Home edition"}
+]

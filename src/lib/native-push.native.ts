@@ -64,18 +64,18 @@ export async function getNativePushStatus(): Promise<PushStatus> {
       .select('notifications_enabled')
       .eq('expo_push_token', t)
       .maybeSingle();
-    return data?.notifications_enabled ? 'enabled' : 'off';
+    if (data?.notifications_enabled) return 'enabled';
+    // No row of hers for this phone, though the phone already said yes: the
+    // row is still on the account signed in here before (a guest, a second
+    // account), and nothing else would ever move it. Take it over now.
+    await claim(t);
+    return 'enabled';
   } catch {
     return 'off';
   }
 }
 
-export async function enableNativePush(userId: string): Promise<PushStatus> {
-  if (!Device.isDevice) return 'unsupported';
-  const { status } = await Notifications.requestPermissionsAsync();
-  if (status === 'denied') return 'denied';
-  if (status !== 'granted') return 'off';
-  const t = await token();
+async function claim(t: string) {
   // The token may still be on an account that was signed in on this phone
   // before; the server moves it to this one when this install's secret
   // matches (claim_push_device).
@@ -87,5 +87,13 @@ export async function enableNativePush(userId: string): Promise<PushStatus> {
     p_device_secret: await deviceSecret(),
   });
   if (error) throw error;
+}
+
+export async function enableNativePush(userId: string): Promise<PushStatus> {
+  if (!Device.isDevice) return 'unsupported';
+  const { status } = await Notifications.requestPermissionsAsync();
+  if (status === 'denied') return 'denied';
+  if (status !== 'granted') return 'off';
+  await claim(await token());
   return 'enabled';
 }
