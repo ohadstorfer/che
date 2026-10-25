@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useRef } from 'react';
 import { Animated, Easing, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -7,6 +8,7 @@ import type { ArWord } from '@/lib/argentine';
 import { clay, colors, font, gradients, press } from '@/lib/theme';
 import { PlayButton } from '@/components/exercises';
 import { FitText } from '@/components/fit-text';
+import { WORD_ART_CACHE, packArt } from '@/lib/word-art';
 
 // ---------------------------------------------------------------------------
 // The "new word" screen of an Argentine pack. Deliberately quiet: the word,
@@ -98,10 +100,21 @@ function Example({ word }: { word: ArWord }) {
 }
 
 export function WordIntro({ word, onDone, doneLabel }: { word: ArWord; onDone: () => void; doneLabel?: string }) {
+  const art = packArt(word.es);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Enter>
+          {/* A word for a thing shows the thing; the rest keep the quiet card. */}
+          {art ? (
+            <Image
+              source={art}
+              style={styles.art}
+              contentFit="contain"
+              cachePolicy={WORD_ART_CACHE}
+              accessibilityIgnoresInvertColors
+            />
+          ) : null}
           <View style={styles.wordRow}>
             <View style={{ flex: 1 }}>
               <FitText style={[styles.word, wordSize(word.es, 76)]} lines={2}>
@@ -138,6 +151,7 @@ const styles = StyleSheet.create({
   },
   buttonText: { ...font.body[800], fontSize: 18, color: colors.onPrimary },
 
+  art: { width: 128, height: 112, marginBottom: 20 },
   wordRow: { flexDirection: 'row', alignItems: 'center', gap: 16 },
   word: { ...font.display[800], color: INK },
   enRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', columnGap: 12, rowGap: 4, marginTop: 12 },

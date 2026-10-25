@@ -30,6 +30,7 @@ import type { FinishResult } from '@/lib/round';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, pastel } from '@/lib/theme';
 import { finishPathLesson, unitSlang, unitSlangCourse } from '@/lib/unit-extras';
+import { preloadPackArt } from '@/lib/word-art';
 
 // ---------------------------------------------------------------------------
 // One play of an Argentine pack (?pack=<slug>). The course's own exercises,
@@ -62,6 +63,10 @@ export default function ArgentineRound() {
   const userId = profile?.id;
 
   const [queue, setQueue] = useState<PackItem[] | null>(null);
+  // Load the round's pictures while the opener is up, before the first card.
+  useEffect(() => {
+    if (queue) preloadPackArt(queue.flatMap((it) => (it.kind === 'intro' ? [it.word.es] : [])));
+  }, [queue]);
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState<{ score: number; saved: PackScore } | null>(null);
   /** First tries on graded screens: how the score is worked out. */

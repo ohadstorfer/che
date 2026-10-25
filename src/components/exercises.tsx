@@ -10,7 +10,16 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Platform, Pressable, StyleSheet, Text, TextInput, type TextStyle, View } from 'react-native';
+import {
+  type ImageSourcePropType,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  type TextStyle,
+  View,
+} from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   Easing,
@@ -74,6 +83,7 @@ import { FlagSun } from '@/components/sticker';
 import Svg, { Path as SvgPath } from 'react-native-svg';
 import { type TipBlock, type TipSpan, tipSpans, tipSteps } from '@/lib/tip-layout';
 import type { Form, Sentence, Tip } from '@/lib/types';
+import { WORD_ART_CACHE, courseArt } from '@/lib/word-art';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
@@ -304,6 +314,7 @@ const dragTouch = Platform.OS === 'web' ? ({ touchAction: 'none' } as object) : 
 
 function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
   const phrase = isPhrase(form.form);
+  const art = courseArt(form.lemma_id);
   return (
     <Frame
       prompt={`✨ New ${isSlang(form) ? 'slang ' : ''}${phrase ? 'phrase' : 'word'}`}
@@ -313,6 +324,18 @@ function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
       onCheck={onDone}
       onContinue={onDone}>
       <Panel style={styles.bigCard}>
+        {/* A thing she can picture gets its picture: the meaning lands before
+            she reads the English. Abstract words have none and the card is
+            as it always was. */}
+        {art ? (
+          <Image
+            source={art}
+            style={styles.introArt}
+            contentFit="contain"
+            cachePolicy={WORD_ART_CACHE}
+            accessibilityIgnoresInvertColors
+          />
+        ) : null}
         <Text style={phrase ? styles.esPhraseHero : styles.esHero}>{form.form}</Text>
         <View style={styles.divider} />
         {/* Where the word is taught the hint always shows: this is the one
@@ -552,7 +575,18 @@ function Pulse({ inset }: { inset: number }) {
   );
 }
 
-export function PlayButton({ path, big, autoPlay = true }: { path: string; big?: boolean; autoPlay?: boolean }) {
+export function PlayButton({
+  path,
+  big,
+  small,
+  autoPlay = true,
+}: {
+  path: string;
+  big?: boolean;
+  /** Inline at the end of a sentence, where a full-size button would outweigh the words. */
+  small?: boolean;
+  autoPlay?: boolean;
+}) {
   const { playing, problem, play } = useClip(path);
   const reduced = useReducedMotion();
 
@@ -573,6 +607,7 @@ export function PlayButton({ path, big, autoPlay = true }: { path: string; big?:
         style={({ pressed }) => [
           styles.playButton,
           big && styles.playButtonBig,
+          small && styles.playButtonSmall,
           // The colour shift carries the state on its own, for anyone who has
           // motion turned off.
           playing && styles.playButtonOn,
@@ -583,7 +618,7 @@ export function PlayButton({ path, big, autoPlay = true }: { path: string; big?:
         {playing && !reduced ? <Pulse inset={big ? 6 : 4} /> : null}
         <Ionicons
           name={problem ? 'volume-mute' : 'volume-high'}
-          size={big ? 30 : 20}
+          size={big ? 30 : small ? 16 : 20}
           color={colors.onPrimary}
         />
       </Pressable>
@@ -773,13 +808,32 @@ function useSpeaker() {
 function PhraseCard({
   center,
   beside,
+  figure,
   children,
 }: {
   center?: boolean;
   beside?: React.ReactNode;
+  /** The thing a new word names. It leads the card in place of him, and the
+   *  sentence brings its own play button (`SentenceLine`'s `trailing`). */
+  figure?: ImageSourcePropType;
   children: React.ReactNode;
 }) {
   const speaker = useSpeaker();
+  if (center && figure) {
+    return (
+      <View style={[styles.phraseCard, styles.phraseCardCentered]}>
+        {/* The meaning lands first, then the sentence says it. */}
+        <Image
+          source={figure}
+          style={styles.phraseCardHero}
+          contentFit="contain"
+          cachePolicy={WORD_ART_CACHE}
+          accessible={false}
+        />
+        {children}
+      </View>
+    );
+  }
   if (center) {
     return (
       <View style={[styles.phraseCard, styles.phraseCardCentered]}>
@@ -2249,6 +2303,7 @@ export function SentenceLine({
   tappable,
   turn,
   large,
+  trailing,
 }: {
   sentence: Sentence;
   /** One speaker's line of a dialogue, by index, without its dash — for a
@@ -2268,6 +2323,8 @@ export function SentenceLine({
   blank?: { index: number; filled?: string; tone?: 'right' | 'wrong' };
   /** The sentence as the star of a card: bigger, and centred. */
   large?: boolean;
+  /** Sits after the last word, on its line: a play button that belongs to the sentence. */
+  trailing?: React.ReactNode;
 }) {
   const phrase = large ? styles.cardPhrase : styles.bubblePhrase;
   // Measured on tap, never cached: a word only reflows when the sentence
@@ -2371,6 +2428,7 @@ export function SentenceLine({
             </Text>
           );
         })}
+        {row === rows[rows.length - 1] ? trailing : null}
       </View>
       ))}
     </View>
@@ -2418,6 +2476,7 @@ export function WordBubble({ state, onClose }: { state: Showing | null; onClose:
       gloss={state?.gloss}
       onClose={onClose}
       audio={(path) => <PlayButton path={path} />}
+      image={state ? courseArt(state.form.lemma_id) : undefined}
     />
   );
 }
@@ -2446,6 +2505,8 @@ function SentenceIntro({
 }) {
   const sentence = item.sentence!;
   const word = item.introduces;
+  // This is where a word is taught now, so its picture comes with it.
+  const art = word ? courseArt(word.lemma_id) : undefined;
   const words = useWordPopover(lookupWith(lexicon, allForms));
   const [options] = useState(() => meaningOptions(sentence, allSentences, allForms));
   const [chosen, setChosen] = useState<string | null>(null);
@@ -2456,8 +2517,10 @@ function SentenceIntro({
   // except the one whose meaning is the answer.
   const tappable = word ? (id: string) => id === word.id : (id: string) => id !== item.form.id;
 
+  // A form of more than one word ("sobre gustos no hay nada escrito") is a phrase, not a word.
+  const isPhrase = !!word && /\s/.test(word.form.trim());
   const prompt = word
-    ? `New ${isSlang(word) ? 'slang' : 'word'} · what does it say?`
+    ? `New ${isSlang(word) ? (isPhrase ? 'slang phrase' : 'slang') : isPhrase ? 'phrase' : 'word'} · what does it say?`
     : item.isRetry
       ? '🔁 What does the sentence say?'
       : 'What does the sentence say?';
@@ -2474,14 +2537,35 @@ function SentenceIntro({
       {/* The Spanish is already on screen and the answer is its English, so
           hearing it gives nothing away — it binds the sound to the spelling,
           which is the whole reason the sentence is read rather than shown. */}
+      {/* The picture takes the capybara's place on the card; a dialogue has
+          no capybara, so there it sits over the bubble. */}
+      {art && turnCount(sentence.tokens) >= 2 ? (
+        <Image
+          source={art}
+          style={styles.teachArt}
+          contentFit="contain"
+          cachePolicy={WORD_ART_CACHE}
+          accessibilityIgnoresInvertColors
+        />
+      ) : null}
       {turnCount(sentence.tokens) < 2 ? (
-        <PhraseCard center beside={sentence.audio_path ? <PlayButton path={sentence.audio_path} big /> : null}>
+        <PhraseCard
+          center
+          figure={art}
+          beside={sentence.audio_path && !art ? <PlayButton path={sentence.audio_path} big /> : null}>
           <SentenceLine
             large
             sentence={sentence}
             mark={word?.id}
             onWord={word || canTap ? words.open : undefined}
             tappable={tappable}
+            trailing={
+              art && sentence.audio_path ? (
+                <View style={styles.trailingPlay}>
+                  <PlayButton path={sentence.audio_path} small />
+                </View>
+              ) : undefined
+            }
           />
         </PhraseCard>
       ) : (
@@ -2873,6 +2957,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.trough,
     marginBottom: 6,
   },
+  introArt: { width: 132, height: 112, marginBottom: 4 },
+  teachArt: { width: 148, height: 124, alignSelf: 'center' },
   // The Spanish leads — it is the form she is being tested on — and the meaning
   // sits under a rule, in the primary's deep tone.
   esHero: {
@@ -3012,6 +3098,9 @@ const styles = StyleSheet.create({
   phraseCardSun: { left: (PHRASE_FIGURE - PHRASE_SUN) / 2, top: (PHRASE_FIGURE - PHRASE_SUN) / 2 },
   // The art looks left; mirrored, he looks at the button.
   phraseCardFigure: { width: PHRASE_FIGURE, height: PHRASE_FIGURE, transform: [{ scaleX: -1 }] },
+  phraseCardHero: { width: 176, height: 132, marginBottom: 4 },
+  // Sits on the sentence's last line, centred on the words rather than their baseline.
+  trailingPlay: { alignSelf: 'center', marginLeft: 4 },
   phraseCardEn: { ...font.body[700], fontSize: 15, lineHeight: 20, color: colors.muted, textAlign: 'center', marginTop: 4 },
   phraseCardSpeak: { position: 'absolute', right: 14, top: 14 },
   // Listen: one pill, play at one end, the slow button at the other.
@@ -3131,6 +3220,7 @@ const styles = StyleSheet.create({
   playButton: { backgroundColor: colors.primary, borderRadius: radius.pill, padding: 13, boxShadow: clay.button },
   playButtonDead: { backgroundColor: colors.muted, boxShadow: clay.flat },
   playButtonBig: { padding: 18 },
+  playButtonSmall: { padding: 9 },
   playButtonOn: { backgroundColor: colors.primaryDark },
   pulse: { position: 'absolute', borderRadius: 99, borderWidth: 2, borderColor: colors.primary },
   // Butter, like the sentence card: what she is asked about is always the yellow card.

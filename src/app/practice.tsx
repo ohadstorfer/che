@@ -73,6 +73,7 @@ import { supabase } from '@/lib/supabase';
 import { clay, colors, font, gradients, press, radius } from '@/lib/theme';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import type { Form, Section, Sentence, Streak, Unit } from '@/lib/types';
+import { preloadCourseArt } from '@/lib/word-art';
 
 /** How long a class may take to load before it is called off. A class far
  *  along with nothing on the phone yet is dozens of sentence blocks; what has
@@ -166,6 +167,14 @@ export default function Practice() {
   const testMode: TestMode | null = params.test === 'placement' || params.test === 'jump' ? params.test : null;
 
   const [queue, setQueue] = useState<QueueItem[] | null>(null);
+  // The round knows which words it teaches: load their pictures now, so each
+  // arrives with its card instead of a frame after it.
+  useEffect(() => {
+    if (!queue) return;
+    preloadCourseArt(
+      queue.flatMap((it) => [it.introduces?.lemma_id, it.isIntro ? it.form.lemma_id : undefined]).filter((id) => id != null),
+    );
+  }, [queue]);
   const [allForms, setAllForms] = useState<Form[]>([]);
   const [lexicon, setLexicon] = useState<Map<string, Form>>(() => new Map());
   const [allSentences, setAllSentences] = useState<Sentence[]>([]);
