@@ -1,6 +1,6 @@
 import { assertEquals, assertStringIncludes } from "jsr:@std/assert@1";
 import { topicOf } from "./hablar.ts";
-import { cleanFeedback, ENGLISH_NOTE, type Feedback, feedbackInput, heardHolds, PERSONA, sessionBlock, turnText, WRAP_UP_NOTE } from "./hablar-prompt.ts";
+import { cleanFeedback, ENGLISH_NOTE, type Feedback, feedbackInput, heardHolds, PERSONA, quotesHold, sessionBlock, turnText, WRAP_UP_NOTE } from "./hablar-prompt.ts";
 import { unitWords } from "./hablar-unit.ts";
 
 const cafe = topicOf("scenario", "cafe", "A1")!.scenario!;
@@ -111,4 +111,95 @@ Deno.test("no heard (an older grading), or an English line: the line itself", ()
   const en = cleanFeedback(graded({ heard: "Can I pay", has_error: false, verdict: "note", better: "¿Puedo pagar?" }), "Can I pay by card?", true);
   assertEquals(en.heard, "Can I pay by card?");
   assertEquals(en.verdict, "note");
+});
+
+const err = (o: Partial<Feedback>): Feedback => graded({ has_error: true, verdict: "error", severity: "target", why_en: "x", ...o });
+
+Deno.test("a fix of a word the recogniser doubted is dropped, and the line is not an error", () => {
+  const line = "Sí, tenga hambre";
+  const f = cleanFeedback(err({ heard: line, corrected: "Sí, tengo hambre", spans: [{ from: "tenga", to: "tengo" }] }), line, false, undefined, ["tenga"]);
+  assertEquals(f.has_error, false);
+  assertEquals(f.verdict, "unclear");
+  assertEquals(f.corrected, line);
+});
+
+Deno.test("an accent-only fix is not an error; a real fix beside it stays", () => {
+  const accent = cleanFeedback(err({ heard: "Mira, es lindo", corrected: "Mirá, es lindo", spans: [{ from: "Mira", to: "Mirá" }] }), "Mira, es lindo");
+  assertEquals(accent.has_error, false);
+  const both = cleanFeedback(
+    err({ heard: "Mira, yo tiene dos", corrected: "Mirá, yo tengo dos", spans: [{ from: "Mira", to: "Mirá" }, { from: "tiene", to: "tengo" }] }),
+    "Mira, yo tiene dos",
+  );
+  // Beside a real fix, the accent is part of the correction ("vos te llevás", not "vos te llevas").
+  assertEquals(both.has_error, true);
+  assertEquals(both.corrected, "Mirá, yo tengo dos");
+  const vos = cleanFeedback(
+    err({ heard: "¿Tú te llevas bien?", corrected: "¿Vos te llevás bien?", spans: [{ from: "Tú", to: "Vos" }, { from: "llevas", to: "llevás" }] }),
+    "¿Tú te llevas bien?",
+  );
+  assertEquals(vos.corrected, "¿Vos te llevás bien?");
+});
+
+Deno.test("an error whose corrected line is her line again is not shown", () => {
+  const f = cleanFeedback(err({ heard: "Tengo dos hijo", corrected: "Tengo dos hijo", spans: [] }), "Tengo dos hijo");
+  assertEquals(f.has_error, false);
+});
+
+Deno.test("went-well quotes must be her words, outside what a correction fixed", () => {
+  const lines = [{ heard: "Soy de Canadá", fixed: [] }, { heard: "Quiero dos medialuna", fixed: ["medialuna"] }];
+  assertEquals(quotesHold("You said *Soy de Canadá* clearly.", lines), true);
+  assertEquals(quotesHold("You ordered *dos medialuna*.", lines), false);
+  assertEquals(quotesHold("You said *Soy de Ohio*.", lines), false);
+  assertEquals(quotesHold("You kept going without quoting.", lines), true);
+  // Part of a corrected stretch is still the mistake.
+  assertEquals(quotesHold("You said *El sábado fui*.", [{ heard: "El sábado fui al cine", fixed: ["fui al cine"] }]), false);
+});
+
+Deno.test("a heard line without her false starts and fillers still holds", () => {
+  assertEquals(heardHolds("Dos café, por favor.", "Dos caf- café, por favor."), true);
+  assertEquals(heardHolds("Sí, me gusta mucho.", "Sí, me gus- gusta, eh, mucho."), true);
+  // A cut that isn't the start of the next word is a word of hers.
+  assertEquals(heardHolds("Quiero café.", "Quiero mate- café."), false);
+});
+
+Deno.test("a dropped fix goes back as a whole word, never inside another one", () => {
+  const heard = "Hola, quiero el cuenta y un café grandes";
+  const f = cleanFeedback(
+    err({ heard, corrected: "Hola, quiero la cuenta y un café grande", spans: [{ from: "el", to: "la" }, { from: "grandes", to: "grande" }] }),
+    heard, false, undefined, ["el"],
+  );
+  assertEquals(f.has_error, true);
+  assertEquals(f.corrected, "Hola, quiero el cuenta y un café grande");
+});
+
+Deno.test("a doubted word the fix keeps doesn't drop the fix", () => {
+  const heard = "Yo quiero a ordenar";
+  const f = cleanFeedback(err({ heard, corrected: "Yo quiero ordenar", spans: [{ from: "quiero a ordenar", to: "quiero ordenar" }] }), heard, false, undefined, ["quiero"]);
+  assertEquals(f.has_error, true);
+});
+
+Deno.test("a why written for a dropped fix is not shown with the one left", () => {
+  const heard = "Sí, tenga hambre y quiero dos medialuna";
+  const f = cleanFeedback(
+    err({ heard, corrected: "Sí, tengo hambre y quiero dos medialunas", severity: "meaning", why_en: "With *yo*, *tener* is *tengo*.", spans: [{ from: "tenga", to: "tengo" }, { from: "medialuna", to: "medialunas" }] }),
+    heard, false, undefined, ["tenga"],
+  );
+  assertEquals(f.has_error, true);
+  assertEquals(f.why_en, "");
+  assertEquals(f.severity, "minor");
+  assertEquals(f.corrected, "Sí, tenga hambre y quiero dos medialunas");
+});
+
+Deno.test("a clean quote of a line with a false start or a filler holds", () => {
+  assertEquals(quotesHold("*Dos café, por favor*", [{ heard: "Dos caf- café, por favor.", fixed: [] }]), true);
+  assertEquals(quotesHold("*Sí, me gusta*", [{ heard: "Sí, eh, me gusta", fixed: [] }]), true);
+  assertEquals(heardHolds("Café, por favor.", "Café- café, por favor."), true);
+});
+
+Deno.test("a first-steps scene with beats gives Pancho the plan; one without says nothing about it", () => {
+  const scene = { ...cafe, first_steps: true, words: ["café", "mate"], beats: [{ es: "¿Agua o jugo?", en: "Water or juice?" }, { es: "¿Una medialuna?", en: "A croissant?" }] };
+  const block = sessionBlock({ level: "A1", unit: true, scenario: scene, opener: "¿Café o mate?" });
+  assertStringIncludes(block, 'A plan for the chat after your opener, one step per exchange: 1. "¿Agua o jugo?" 2. "¿Una medialuna?"');
+  const plainBlock = sessionBlock({ level: "A1", unit: true, scenario: { ...scene, beats: undefined }, opener: "¿Café o mate?" });
+  assertEquals(plainBlock.includes("A plan for the chat"), false);
 });

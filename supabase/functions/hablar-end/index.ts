@@ -39,6 +39,7 @@ import {
   FEEDBACK_SCHEMA,
   FEEDBACK_SYSTEM,
   feedbackInput,
+  quotesHold,
   SUMMARY_SCHEMA,
   SUMMARY_SYSTEM,
   type Feedback,
@@ -88,6 +89,8 @@ Deno.serve(reported("hablar-end", async (req) => {
 
   const usage: Usage[] = [];
   const client = new Anthropic({ apiKey: env.anthropicKey, ...CLAUDE_OPTIONS });
+  // A unit chat's phrases are what its unit taught: never graded as mistakes.
+  const phrases = ((session as { scenario?: { key_phrases?: { es: string }[] } }).scenario?.key_phrases ?? []).map((p) => p.es);
 
   // Grade every line not graded yet (older chats were graded turn by turn).
   // The first call writes the grading prompt to the cache; the rest read it.
@@ -102,11 +105,11 @@ Deno.serve(reported("hablar-end", async (req) => {
       const { value, usage: u, ms } = await structured<Feedback>(client, {
         system: FEEDBACK_SYSTEM,
         schema: FEEDBACK_SCHEMA as unknown as Record<string, unknown>,
-        input: feedbackInput({ level: session.level, tomasBefore, line: t.text, english, unsure, plain }),
+        input: feedbackInput({ level: session.level, tomasBefore, line: t.text, english, unsure, plain, phrases }),
       });
       usage.push(claudeUsage({ conversation_id: session.id, turn_id: t.id, model: MODEL, stage: "feedback", ms }, u));
       if (!value) return;
-      t.feedback = cleanFeedback(value, t.text, english, plain);
+      t.feedback = cleanFeedback(value, t.text, english, plain, unsure);
       const { error } = await db.from("conversation_turns").update({ feedback: t.feedback }).eq("id", t.id);
       if (error) console.error("feedback save failed", error.message);
     } catch (err) {
@@ -143,20 +146,38 @@ Deno.serve(reported("hablar-end", async (req) => {
     const input = [
       `Level: ${session.level}`,
       "Conversation:",
-      ...turns.map((t) => `${t.role === "tomas" ? "Pancho" : "Learner"}: ${(t.role === "user" && (t.feedback as Feedback | null)?.heard) || t.text}`),
+      ...turns.map((t) => {
+        const f = t.role === "user" ? (t.feedback as Feedback | null) : null;
+        const off = f?.has_error || f?.verdict === "note" || f?.verdict === "unclear";
+        return `${t.role === "tomas" ? "Pancho" : `Learner${off ? " (had a mistake)" : ""}`}: ${f?.heard || t.text}`;
+      }),
       corrections.length
         ? `Corrections shown to the learner:\n${corrections.map((c) => `- "${c.said}" → "${c.corrected}"${c.better ? ` (natural: "${c.better}")` : ""}`).join("\n")}`
         : "The learner made no corrected mistakes.",
     ].join("\n");
-    try {
-      const { value, usage: u, ms } = await structured<{ went_well: string }>(client, {
-        system: SUMMARY_SYSTEM,
-        schema: SUMMARY_SCHEMA as unknown as Record<string, unknown>,
-        input,
-        maxTokens: 2000,
+    // Her lines, and the words in them a correction fixed: what "went well" may quote.
+    // A line shown as a note (a tú form, a word from Spain) isn't praised either.
+    const said = userTurns
+      .filter((t) => !["note", "unclear"].includes((t.feedback as Feedback | null)?.verdict ?? ""))
+      .map((t) => {
+        const f = t.feedback as Feedback | null;
+        return { heard: f?.heard || (t.text as string), fixed: f?.has_error ? f.spans.map((s) => s.from) : [] };
       });
-      usage.push(claudeUsage({ conversation_id: session.id, model: MODEL, stage: "summary", ms }, u));
-      return { went_well: value?.went_well ?? null };
+    try {
+      // Praise that quotes what she didn't say (or said wrong) is written
+      // once more, then left out.
+      let wentWell: string | null = null;
+      for (let attempt = 0; attempt < 2 && !wentWell; attempt++) {
+        const { value, usage: u, ms } = await structured<{ went_well: string }>(client, {
+          system: SUMMARY_SYSTEM,
+          schema: SUMMARY_SCHEMA as unknown as Record<string, unknown>,
+          input: attempt ? `${input}\n\nQuote only words copied exactly from a Learner line with no mistake.` : input,
+          maxTokens: 2000,
+        });
+        usage.push(claudeUsage({ conversation_id: session.id, model: MODEL, stage: "summary", ms }, u));
+        if (value?.went_well && quotesHold(value.went_well, said)) wentWell = value.went_well;
+      }
+      return { went_well: wentWell };
     } catch (err) {
       console.error("summary call failed", err);
       reportError("hablar-end", err, { user_id: who.userId, session_id: session.id, stage: "summary" });

@@ -30,6 +30,11 @@ export type ScenarioVersion = {
   words?: string[];
   /** A scene for her first days (section 1): Pancho keeps to the words she has and to one-word answers. */
   first_steps?: boolean;
+  /**
+   * A first-days scene's next steps after the opener, in her words: a scene
+   * of one question runs out after one answer, and Pancho would drift.
+   */
+  beats?: { es: string; en: string; answers?: string[] }[];
 };
 export type ScenarioDoc = {
   id: string;
