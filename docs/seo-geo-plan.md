@@ -22,7 +22,7 @@ Fecha: 2026-10-25. Complementa [aso.md](aso.md), que ya cubre el SEO dentro de l
 | # | Problema | Por qué importa |
 |---|---|---|
 | 1 | **La web tiene una sola página de contenido** (la landing). | Solo puede rankear para "argentinian spanish app". No hay nada para las miles de búsquedas de slang, voseo, cultura. Es el hueco más grande. |
-| 2 | No está verificada en **Google Search Console** ni en **Bing Webmaster Tools**. | Sin eso no sabés qué búsquedas te traen, y Bing alimenta Copilot y (en parte) ChatGPT. |
+| 2 | ~~Search Console y Bing~~: ya estaban los dos, con el sitemap leído sin errores. | Bing alimenta Copilot y (en parte) ChatGPT. |
 | 3 | El schema de la Organización no tiene **`sameAs`** (Instagram, TikTok, YouTube, App Store, Play). | Así Google y los LLM entienden que "Posta" la app = @postaspanish = la ficha de la store. "Posta" solo es ambiguo (apps de correo). |
 | 4 | `apple-itunes-app` con id `0000000000` comentado; no hay links reales a las stores. | Se arregla el día del lanzamiento. |
 | 5 | La web no tiene analytics. | No vas a ver el tráfico que llega desde chatgpt.com, perplexity.ai, etc. |
@@ -31,6 +31,8 @@ Fecha: 2026-10-25. Complementa [aso.md](aso.md), que ya cubre el SEO dentro de l
 **El hallazgo clave: el nicho está vacío también en Google y en la IA.** Buscando "best app to learn Argentinian Spanish" aparecen Porteño Spanish (un diccionario viejo), Mergeek, y páginas de vendedores (Talkpal, SpeakShark) que arman listas donde ellos salen primeros. En r/Spanish la respuesta típica es "no existe una app para eso". No hay ningún contenido serio y neutral. El primero que lo publique se queda con la respuesta.
 
 ## 3. Fase 0: el día del lanzamiento (1 día de trabajo)
+
+**Hecho y online el 2026-10-25:** robots.txt con los bots de IA nombrados (punto 3), `sameAs` con Instagram/TikTok/YouTube en el schema (punto 4, sin las stores todavía), `llms.txt` (punto 7), fecha del sitemap. Lo que depende de las stores quedó anotado en [launch-day.md](launch-day.md). Search Console y Bing Webmaster Tools ya tenían el sitio y el sitemap desde el 2026-10-14 (Google: 2 páginas indexadas; la otra es una redirección y un duplicado, normal). El 2026-10-25 se pidió que relean la home en los dos. **Falta:** elegir analytics (punto 6).
 
 1. **Google Search Console**: verificar por DNS, mandar el sitemap.
 2. **Bing Webmaster Tools**: importar desde Search Console (es un click), mandar el sitemap, activar **IndexNow** (avisa a Bing al instante cuando cambia una página). Bing tiene un reporte de "AI Performance" con las citas en Copilot.

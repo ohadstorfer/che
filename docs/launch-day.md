@@ -28,6 +28,15 @@ Google Play (use it in bios and reels).
 If only one store is live, fill only that link: the other badge stays as a
 picture.
 
+Before that deploy, also point search engines and AI assistants at the stores
+(see `docs/seo-geo-plan.md`, phase 0):
+
+- `index.html`: uncomment `apple-itunes-app` and set `app-id=6817374310`.
+- `index.html`, the `MobileApplication` JSON-LD: add both store links to
+  `sameAs`, and `"installUrl"` with the same two links.
+- `llms.txt`: replace "Coming soon to the App Store and Google Play" with the
+  two store links.
+
 ## 2. The waitlist mail
 
 One mail, only to people who left an email. Code: `supabase/functions/launch-email`
