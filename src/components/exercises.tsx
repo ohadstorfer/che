@@ -680,11 +680,15 @@ function useMakeRoom() {
 export function SpeechBubble({
   children,
   replies,
+  bare,
 }: {
   children: React.ReactNode;
   /** The other speaker's lines, when what is said is a dialogue: each in a
    *  bubble of its own on the far side, the way a chat lays two people out. */
   replies?: React.ReactNode[];
+  /** No capybara: two chat bubbles, each as wide as what is said in it, the
+   *  first one's tail pointing off the left edge. */
+  bare?: boolean;
 }) {
   const [speaker] = useState(() => SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
   // Out of the way, he gives the bubble his width, so a long line wraps less.
@@ -697,20 +701,23 @@ export function SpeechBubble({
   const tailRoom = useAnimatedStyle(() => ({ opacity: shown.get() }));
   const said = (
     <View style={styles.speechRow}>
-      <Animated.View style={speakerRoom} pointerEvents="none">
-        <FlagSun size={SPEAKER_SUN} style={styles.speakerSun} />
-        <Image
-          source={speaker}
-          style={styles.speaker}
-          contentFit="contain"
-          contentPosition={{ left: 0 }}
-          accessible={false}
-        />
-      </Animated.View>
-      <View style={styles.bubbleWrap}>
+      {bare ? null : (
+        <Animated.View style={speakerRoom} pointerEvents="none">
+          <FlagSun size={SPEAKER_SUN} style={styles.speakerSun} />
+          <Image
+            source={speaker}
+            style={styles.speaker}
+            contentFit="contain"
+            contentPosition={{ left: 0 }}
+            accessible={false}
+          />
+        </Animated.View>
+      )}
+      <View style={[styles.bubbleWrap, bare && styles.bareWrap]}>
         <Panel style={styles.bubble}>{children}</Panel>
-        {/* After the panel, so it paints over the outline where the two join. */}
-        <Animated.View style={[styles.speechTail, tailRoom]} pointerEvents="none">
+        {/* After the panel, so it paints over the outline where the two join.
+            With no capybara to make room for, it never has to fade. */}
+        <Animated.View style={[styles.speechTail, !bare && tailRoom]} pointerEvents="none">
           <Svg width={TAIL_W} height={TAIL_H}>
             <SvgPath d={`M ${TAIL_W} 4 L 3 ${TAIL_H / 2} L ${TAIL_W} ${TAIL_H - 4} Z`} fill={pastel.butter} />
             <SvgPath
@@ -818,12 +825,13 @@ function GapBubbles({
         {...line}
         sentence={sentence}
         turn={i}
+        hug
         under={text ? <Text style={styles.bubbleEnUnder}>{text}</Text> : undefined}
       />
     );
   };
   return (
-    <SpeechBubble replies={Array.from({ length: turns - 1 }, (_, i) => <View key={i}>{said(i + 1)}</View>)}>
+    <SpeechBubble bare replies={Array.from({ length: turns - 1 }, (_, i) => <View key={i}>{said(i + 1)}</View>)}>
       <View style={styles.bubbleRow}>
         {play && sentence.audio_path ? <PlayButton path={sentence.audio_path} autoPlay={false} /> : null}
         {said(0)}
@@ -2387,8 +2395,12 @@ export function SentenceLine({
   large,
   trailing,
   under,
+  hug,
 }: {
   sentence: Sentence;
+  /** In a bubble as wide as its line (`SpeechBubble`'s `bare`): the line sizes
+   *  the bubble instead of stretching to fill it. */
+  hug?: boolean;
   /** One speaker's line of a dialogue, by index, without its dash — for a
    *  bubble of its own. Left out, a dialogue is laid out a line a speaker. */
   turn?: number;
@@ -2427,7 +2439,7 @@ export function SentenceLine({
   return (
     // A reply's bubble is as wide as what is said in it, so its line can't
     // be the one that stretches.
-    <View style={turn ? styles.replyText : large ? styles.cardText : styles.bubbleText}>
+    <View style={hug ? styles.hugText : turn ? styles.replyText : large ? styles.cardText : styles.bubbleText}>
       {rows.map((row) => (
       <View key={row} style={[styles.tokenRow, large && styles.tokenRowCentered]}>
         {sentence.tokens.map((t, i) => {
@@ -2444,6 +2456,7 @@ export function SentenceLine({
                   style={[
                     styles.gap,
                     !blank.filled && styles.gapEmpty,
+                    blank.field && blank.filled ? styles.gapTyping : null,
                     blank.tone === 'right' && styles.gapRight,
                     blank.tone === 'wrong' && styles.gapWrong,
                   ]}>
@@ -2782,6 +2795,7 @@ function SentenceGap({
     <Frame
       prompt={`${item.isRetry ? '🔁 ' : ''}${byEar ? 'Listen and complete the sentence' : 'Complete the sentence'}`}
       art={oneCard ? <TitlePancho /> : undefined}
+      badgeBeside
       verdict={verdict}
       canCheck={fill === 'typed' ? !!typed : !!chosen}
       onCheck={check}
@@ -3111,6 +3125,8 @@ const styles = StyleSheet.create({
   speakerSun: { left: (SPEAKER_WIDTH - SPEAKER_SUN) / 2, top: (SPEAKER_HEIGHT - SPEAKER_SUN) / 2 },
   // The bubble is a butter sticker, a little crooked; the tail leans with it.
   bubbleWrap: { flex: 1, transform: [{ rotate: '-1.5deg' }] },
+  // Bare, the first bubble is as wide as its line, its tail clear of the page edge.
+  bareWrap: { flex: 0, alignSelf: 'flex-start', maxWidth: '82%', marginLeft: TAIL },
   // Its outline is a real border, not the theme's spread shadow: the tail has to
   // paint over the outline where they join, and a later sibling reliably covers
   // a border but not, on iOS, a shadow.
@@ -3131,6 +3147,7 @@ const styles = StyleSheet.create({
   replyWrap: { alignSelf: 'flex-end', maxWidth: '82%', marginRight: TAIL },
   replyBubble: { backgroundColor: pastel.lav },
   replyText: { gap: 2 },
+  hugText: { flexShrink: 1, gap: 2 },
   // The first speaker's tail sits on the left edge; hers is the same shape on the right.
   replySpeechTail: { left: undefined, right: -TAIL_W + OUTLINE },
   bubbleText: { flex: 1, gap: 2 },
@@ -3299,6 +3316,7 @@ const styles = StyleSheet.create({
   gapText: { ...font.display[800], fontSize: 22, lineHeight: 30, color: colors.ink },
   // Typed into the blank: drawn as the word it will be, as wide as what is
   // typed, and never narrower than the slot, so a tap anywhere on it lands.
+  // In the primary while it is still hers to change; ink once it is graded.
   gapInput: {
     ...font.display[800],
     fontSize: 22,
@@ -3306,9 +3324,10 @@ const styles = StyleSheet.create({
     minWidth: 56,
     paddingVertical: 0,
     paddingHorizontal: 0,
-    color: colors.ink,
+    color: colors.primaryDark,
     textAlign: 'center',
   },
+  gapTyping: { borderBottomColor: colors.primary },
   cardGapInput: { fontSize: 30, height: 40 },
   // A bubble's English, under its Spanish line: there to make the gap one
   // answer, so a step quieter than what she is completing.

@@ -66,6 +66,7 @@ export function ExerciseFrame({
   note,
   checkLabel = 'Check',
   badge,
+  badgeBeside,
   actions,
   instant,
   art,
@@ -82,6 +83,9 @@ export function ExerciseFrame({
   checkLabel?: string;
   /** A small label above the question — "Harder". */
   badge?: string;
+  /** The label at the end of the question's line instead of over it, where
+   *  there is no art there: a row saved, for a screen the keyboard shares. */
+  badgeBeside?: boolean;
   /** Extra controls in the result panel, under the answer (report, why). */
   actions?: React.ReactNode;
   /** Graded on the tap itself (yes/no), so there is no button to wait on. */
@@ -183,16 +187,21 @@ export function ExerciseFrame({
             contentHeight.current = height;
             measure();
           }}>
-          {badge ? (
+          {badge && !(badgeBeside && !art) ? (
             <View style={styles.badge}>
               <Ionicons name="trending-up" size={13} color={colors.accent} />
               <Text style={styles.badgeText}>{badge}</Text>
             </View>
           ) : null}
-          {art ? (
+          {art || (badge && badgeBeside) ? (
             <View style={styles.promptRow}>
               <Text style={[styles.prompt, styles.promptBeside]}>{prompt}</Text>
-              {art}
+              {art ?? (
+                <View style={[styles.badge, styles.badgeBeside]}>
+                  <Ionicons name="trending-up" size={13} color={colors.accent} />
+                  <Text style={styles.badgeText}>{badge}</Text>
+                </View>
+              )}
             </View>
           ) : (
             <Text style={styles.prompt}>{prompt}</Text>
@@ -451,6 +460,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.accentSoft,
     marginBottom: -8,
   },
+  badgeBeside: { alignSelf: 'center', marginBottom: 0 },
   badgeText: { ...font.body[800], fontSize: 12, letterSpacing: 0.4, color: colors.accent, textTransform: 'uppercase' },
   feedbackNote: { ...font.body[700], fontSize: 15, lineHeight: 21, color: colors.inkOnWash },
 
