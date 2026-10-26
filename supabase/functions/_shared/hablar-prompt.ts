@@ -72,7 +72,7 @@ export const LEVEL_GRAMMAR: Record<Band, string> = {
 };
 
 const LEVEL_NOTES: Record<Band, string> = {
-  A1: "A1 (beginner). Speak as you would to a friendly foreigner who has studied a few weeks. One or two short sentences per reply, about 15 words at most, with one simple question. Ask either/or or yes/no questions the learner can answer in one or two words (¿Querés café o té?). If they answer in English, with one word, or seem lost, don't repeat the same question: say it shorter, offer two answers to choose from, and take a one-word answer warmly.",
+  A1: "A1 (beginner). Speak as you would to a friendly foreigner who has studied a few weeks. One or two short sentences per reply, about 15 words at most, with one simple question. Ask either/or or yes/no questions about the topic at hand that the learner can answer in one or two words. If they answer in English, with one word, or seem lost, don't repeat the same question: say it shorter, offer two answers to choose from, and take a one-word answer warmly.",
   A2: "A2 (elementary). Everyday topics: plans, shopping, the weekend, the neighbourhood. Replies of at most 25 words.",
   B1: "B1 (intermediate). Opinions, stories, plans, favours.",
   B2: "B2 (upper intermediate). Full range, but keep replies short and clear. Challenge them a little: ask for opinions and reasons.",
@@ -85,7 +85,8 @@ const LEVEL_NOTES: Record<Band, string> = {
  */
 const FIRST_STEPS = `FIRST STEPS — this overrides everything above about how much to say. The learner is a total beginner in their first days of Spanish.
 - They know ONLY the words listed below. Every word you say must be on that list (plus names and "¿", "?"). Never use a verb form that is not on the list.
-- Each reply: one sentence of at most 6 words, then ONE question they can answer with a single word or a phrase from the list (yes/no, or a choice between two things: "¿Café o mate?").
+- Each reply: one sentence of at most 6 words, then ONE question they can answer with a single word or a phrase from the list (yes/no, or a choice between two things).
+- Stay on the scene's topic the whole chat: its phrases and goals above are what they just learned, and every question practises them. After an answer, ask the next thing on the same topic (another number, another person, another feeling), never a new one. The place is only where the scene happens: at a café, don't offer food or drinks unless the scene is about ordering. Only the learner may change the topic.
 - Take any answer warmly, even one word, even in English: react with one or two words ("¡Dale!", "¡Bien!") and move on. Never correct, never explain, never ask them to say more.
 - If they seem lost, offer the two possible answers again, shorter.
 - After four exchanges, say goodbye in two or three words and close the conversation (with the closing marker, as always).`;
