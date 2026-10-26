@@ -38,6 +38,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(ROOT, 'assets/images')
 # Big enough to stay sharp at 3x on the ~95pt slot the path gives a figure.
 MAX_DIM = 384
+# A plain drawing's smaller pieces, as a share of its biggest, that still
+# count as part of it. Word pictures lower it: their "Zzz" and snowflakes
+# say what the picture means.
+KEEP_PIECES = 0.12
 
 
 def flood_cut(a, wall=16.0, shade=80.0, min_blob=0.002, judge=True):
@@ -118,7 +122,7 @@ def flood_cut(a, wall=16.0, shade=80.0, min_blob=0.002, judge=True):
             # its glass, a gourd and its jug. Keep every piece of real size;
             # crumbs still go.
             big = max(sizes[i - 1] for i in keep)
-            keep = [i for i in keep if sizes[i - 1] >= 0.12 * big]
+            keep = [i for i in keep if sizes[i - 1] >= KEEP_PIECES * big]
         subj = np.isin(lab, keep)
 
     # The flood stops a pixel short of the outline; give that back.

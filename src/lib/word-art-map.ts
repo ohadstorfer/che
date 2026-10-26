@@ -404,6 +404,277 @@ const a399 = require('@/assets/images/words/horse.webp');
 const a400 = require('@/assets/images/words/fedora.webp');
 const a401 = require('@/assets/images/words/dictionary.webp');
 const a402 = require('@/assets/images/words/truck.webp');
+const a403 = require('@/assets/images/words/obelisco-buenos-aires.webp');
+const a404 = require('@/assets/images/words/small-town.webp');
+const a405 = require('@/assets/images/words/city-skyline.webp');
+const a406 = require('@/assets/images/words/office-building.webp');
+const a407 = require('@/assets/images/words/school-building.webp');
+const a408 = require('@/assets/images/words/supermarket-building.webp');
+const a409 = require('@/assets/images/words/bank-building.webp');
+const a410 = require('@/assets/images/words/airport-building.webp');
+const a411 = require('@/assets/images/words/museum-building.webp');
+const a412 = require('@/assets/images/words/cinema-building.webp');
+const a413 = require('@/assets/images/words/hotel-building.webp');
+const a414 = require('@/assets/images/words/bakery-shop.webp');
+const a415 = require('@/assets/images/words/greengrocer-shop.webp');
+const a416 = require('@/assets/images/words/butcher-shop.webp');
+const a417 = require('@/assets/images/words/hair-salon.webp');
+const a418 = require('@/assets/images/words/hardware-store.webp');
+const a419 = require('@/assets/images/words/bookstore.webp');
+const a420 = require('@/assets/images/words/nightclub.webp');
+const a421 = require('@/assets/images/words/gym-room.webp');
+const a422 = require('@/assets/images/words/university-building.webp');
+const a423 = require('@/assets/images/words/restaurant-building.webp');
+const a424 = require('@/assets/images/words/pizzeria.webp');
+const a425 = require('@/assets/images/words/countryside.webp');
+const a426 = require('@/assets/images/words/police-station.webp');
+const a427 = require('@/assets/images/words/bathroom.webp');
+const a428 = require('@/assets/images/words/living-room.webp');
+const a429 = require('@/assets/images/words/bedroom.webp');
+const a430 = require('@/assets/images/words/beach-coast.webp');
+const a431 = require('@/assets/images/words/hills.webp');
+const a432 = require('@/assets/images/words/valley.webp');
+const a433 = require('@/assets/images/words/port.webp');
+const a434 = require('@/assets/images/words/bus-station.webp');
+const a435 = require('@/assets/images/words/city-street.webp');
+const a436 = require('@/assets/images/words/cafe-bar.webp');
+const a437 = require('@/assets/images/words/garage.webp');
+const a438 = require('@/assets/images/words/dance-floor.webp');
+const a439 = require('@/assets/images/words/night-sky.webp');
+const a440 = require('@/assets/images/words/morning-sun.webp');
+const a441 = require('@/assets/images/words/afternoon-sunset.webp');
+const a442 = require('@/assets/images/words/midday-sun.webp');
+const a443 = require('@/assets/images/words/windy.webp');
+const a444 = require('@/assets/images/words/autumn.webp');
+const a445 = require('@/assets/images/words/summer.webp');
+const a446 = require('@/assets/images/words/spring.webp');
+const a447 = require('@/assets/images/words/winter.webp');
+const a448 = require('@/assets/images/words/pancho-sleepy.webp');
+const a449 = require('@/assets/images/words/pancho-cold.webp');
+const a450 = require('@/assets/images/words/pancho-hungry.webp');
+const a451 = require('@/assets/images/words/pancho-scared.webp');
+const a452 = require('@/assets/images/words/pancho-hot.webp');
+const a453 = require('@/assets/images/words/pancho-thirsty.webp');
+const a454 = require('@/assets/images/words/pancho-startled.webp');
+const a455 = require('@/assets/images/words/pancho-laughing.webp');
+const a456 = require('@/assets/images/words/pancho-disgusted.webp');
+const a457 = require('@/assets/images/words/pancho-angry.webp');
+const a458 = require('@/assets/images/words/pancho-embarrassed.webp');
+const a459 = require('@/assets/images/words/pancho-sad.webp');
+const a460 = require('@/assets/images/words/pancho-happy.webp');
+const a461 = require('@/assets/images/words/pancho-exhausted.webp');
+const a462 = require('@/assets/images/words/pancho-stressed.webp');
+const a463 = require('@/assets/images/words/pancho-smiling.webp');
+const a464 = require('@/assets/images/words/pancho-crying.webp');
+const a465 = require('@/assets/images/words/pancho-surprised.webp');
+const a466 = require('@/assets/images/words/pancho-lazy.webp');
+const a467 = require('@/assets/images/words/pancho-bored.webp');
+const a468 = require('@/assets/images/words/pancho-sick-cold.webp');
+const a469 = require('@/assets/images/words/pancho-fever.webp');
+const a470 = require('@/assets/images/words/pancho-coughing.webp');
+const a471 = require('@/assets/images/words/pancho-resting-in-bed.webp');
+const a472 = require('@/assets/images/words/pancho-napping.webp');
+const a473 = require('@/assets/images/words/pancho-hugging.webp');
+const a474 = require('@/assets/images/words/pancho-blowing-kiss.webp');
+const a475 = require('@/assets/images/words/pancho-waving.webp');
+const a476 = require('@/assets/images/words/pancho-clapping.webp');
+const a477 = require('@/assets/images/words/pancho-talking.webp');
+const a478 = require('@/assets/images/words/pancho-leaving-door.webp');
+const a479 = require('@/assets/images/words/pancho-paying.webp');
+const a480 = require('@/assets/images/words/pancho-shopping.webp');
+const a481 = require('@/assets/images/words/pancho-walking.webp');
+const a482 = require('@/assets/images/words/pancho-phone-call.webp');
+const a483 = require('@/assets/images/words/pancho-exercising.webp');
+const a484 = require('@/assets/images/words/pancho-traveling.webp');
+const a485 = require('@/assets/images/words/pancho-on-vacation.webp');
+const a486 = require('@/assets/images/words/pancho-backpacking.webp');
+const a487 = require('@/assets/images/words/pancho-dancing-tango.webp');
+const a488 = require('@/assets/images/words/pancho-singing.webp');
+const a489 = require('@/assets/images/words/pancho-kicking-ball.webp');
+const a490 = require('@/assets/images/words/pancho-goalkeeper.webp');
+const a491 = require('@/assets/images/words/pancho-referee.webp');
+const a492 = require('@/assets/images/words/pancho-holding-trophy.webp');
+const a493 = require('@/assets/images/words/pancho-doctor.webp');
+const a494 = require('@/assets/images/words/pancho-cook.webp');
+const a495 = require('@/assets/images/words/pancho-police.webp');
+const a496 = require('@/assets/images/words/pancho-firefighter.webp');
+const a497 = require('@/assets/images/words/pancho-waiter.webp');
+const a498 = require('@/assets/images/words/pancho-programmer.webp');
+const a499 = require('@/assets/images/words/pancho-teacher.webp');
+const a500 = require('@/assets/images/words/pancho-student.webp');
+const a501 = require('@/assets/images/words/pancho-tourist.webp');
+const a502 = require('@/assets/images/words/pancho-taking-photo.webp');
+const a503 = require('@/assets/images/words/pancho-pointing-head.webp');
+const a504 = require('@/assets/images/words/pancho-pointing-back.webp');
+const a505 = require('@/assets/images/words/pancho-pointing-foot.webp');
+const a506 = require('@/assets/images/words/pancho-pointing-leg.webp');
+const a507 = require('@/assets/images/words/pancho-pointing-belly.webp');
+const a508 = require('@/assets/images/words/pancho-pointing-hand.webp');
+const a509 = require('@/assets/images/words/pancho-pointing-knee.webp');
+const a510 = require('@/assets/images/words/pancho-pointing-finger.webp');
+const a511 = require('@/assets/images/words/pancho-pointing-arm.webp');
+const a512 = require('@/assets/images/words/pancho-pointing-eye.webp');
+const a513 = require('@/assets/images/words/pancho-pointing-ear.webp');
+const a514 = require('@/assets/images/words/pancho-pointing-face.webp');
+const a515 = require('@/assets/images/words/pancho-pointing-left.webp');
+const a516 = require('@/assets/images/words/pancho-pointing-right.webp');
+const a517 = require('@/assets/images/words/number-1.webp');
+const a518 = require('@/assets/images/words/number-3.webp');
+const a519 = require('@/assets/images/words/number-2.webp');
+const a520 = require('@/assets/images/words/number-5.webp');
+const a521 = require('@/assets/images/words/number-4.webp');
+const a522 = require('@/assets/images/words/number-10.webp');
+const a523 = require('@/assets/images/words/number-9.webp');
+const a524 = require('@/assets/images/words/number-8.webp');
+const a525 = require('@/assets/images/words/number-0.webp');
+const a526 = require('@/assets/images/words/number-6.webp');
+const a527 = require('@/assets/images/words/number-7.webp');
+const a528 = require('@/assets/images/words/number-12.webp');
+const a529 = require('@/assets/images/words/number-18.webp');
+const a530 = require('@/assets/images/words/number-19.webp');
+const a531 = require('@/assets/images/words/number-17.webp');
+const a532 = require('@/assets/images/words/number-14.webp');
+const a533 = require('@/assets/images/words/number-20.webp');
+const a534 = require('@/assets/images/words/number-15.webp');
+const a535 = require('@/assets/images/words/number-16.webp');
+const a536 = require('@/assets/images/words/number-13.webp');
+const a537 = require('@/assets/images/words/number-11.webp');
+const a538 = require('@/assets/images/words/number-25.webp');
+const a539 = require('@/assets/images/words/number-30.webp');
+const a540 = require('@/assets/images/words/number-26.webp');
+const a541 = require('@/assets/images/words/number-23.webp');
+const a542 = require('@/assets/images/words/number-28.webp');
+const a543 = require('@/assets/images/words/number-24.webp');
+const a544 = require('@/assets/images/words/number-21.webp');
+const a545 = require('@/assets/images/words/number-27.webp');
+const a546 = require('@/assets/images/words/number-22.webp');
+const a547 = require('@/assets/images/words/number-29.webp');
+const a548 = require('@/assets/images/words/number-60.webp');
+const a549 = require('@/assets/images/words/number-50.webp');
+const a550 = require('@/assets/images/words/number-90.webp');
+const a551 = require('@/assets/images/words/number-80.webp');
+const a552 = require('@/assets/images/words/number-40.webp');
+const a553 = require('@/assets/images/words/number-70.webp');
+const a554 = require('@/assets/images/words/number-100.webp');
+const a555 = require('@/assets/images/words/number-1000.webp');
+const a556 = require('@/assets/images/words/pancho-relaxed.webp');
+const a557 = require('@/assets/images/words/pancho-busy.webp');
+const a558 = require('@/assets/images/words/pancho-nervous.webp');
+const a559 = require('@/assets/images/words/pancho-sick.webp');
+const a560 = require('@/assets/images/words/pancho-dirty.webp');
+const a561 = require('@/assets/images/words/pancho-in-a-hurry.webp');
+const a562 = require('@/assets/images/words/pancho-worried.webp');
+const a563 = require('@/assets/images/words/pancho-working.webp');
+const a564 = require('@/assets/images/words/pancho-drinking.webp');
+const a565 = require('@/assets/images/words/pancho-studying.webp');
+const a566 = require('@/assets/images/words/pancho-asking.webp');
+const a567 = require('@/assets/images/words/pancho-missing-someone.webp');
+const a568 = require('@/assets/images/words/pancho-teaching.webp');
+const a569 = require('@/assets/images/words/pancho-searching.webp');
+const a570 = require('@/assets/images/words/pancho-eating.webp');
+const a571 = require('@/assets/images/words/pancho-reading.webp');
+const a572 = require('@/assets/images/words/pancho-writing.webp');
+const a573 = require('@/assets/images/words/pancho-opening-door.webp');
+const a574 = require('@/assets/images/words/pancho-running.webp');
+const a575 = require('@/assets/images/words/pancho-looking.webp');
+const a576 = require('@/assets/images/words/pancho-closing-door.webp');
+const a577 = require('@/assets/images/words/pancho-around-the-corner.webp');
+const a578 = require('@/assets/images/words/pancho-listening.webp');
+const a579 = require('@/assets/images/words/pancho-sitting-down.webp');
+const a580 = require('@/assets/images/words/pancho-calling.webp');
+const a581 = require('@/assets/images/words/pancho-lost.webp');
+const a582 = require('@/assets/images/words/pancho-tasting.webp');
+const a583 = require('@/assets/images/words/pancho-trying-on.webp');
+const a584 = require('@/assets/images/words/pancho-breakfast.webp');
+const a585 = require('@/assets/images/words/pancho-lunch.webp');
+const a586 = require('@/assets/images/words/pancho-going-to-bed.webp');
+const a587 = require('@/assets/images/words/pancho-getting-out-of-bed.webp');
+const a588 = require('@/assets/images/words/pancho-dinner.webp');
+const a589 = require('@/assets/images/words/pancho-waking-up.webp');
+const a590 = require('@/assets/images/words/pancho-sleeping.webp');
+const a591 = require('@/assets/images/words/pancho-snack.webp');
+const a592 = require('@/assets/images/words/pancho-early-riser.webp');
+const a593 = require('@/assets/images/words/pancho-dancing.webp');
+const a594 = require('@/assets/images/words/pancho-playing-ball.webp');
+const a595 = require('@/assets/images/words/pancho-cooking.webp');
+const a596 = require('@/assets/images/words/pancho-swimming.webp');
+const a597 = require('@/assets/images/words/pancho-in-pain.webp');
+const a598 = require('@/assets/images/words/pancho-resting.webp');
+const a599 = require('@/assets/images/words/pancho-hurt.webp');
+const a600 = require('@/assets/images/words/pancho-broken-arm.webp');
+const a601 = require('@/assets/images/words/pancho-sneezing.webp');
+const a602 = require('@/assets/images/words/pancho-washing.webp');
+const a603 = require('@/assets/images/words/pancho-cleaning.webp');
+const a604 = require('@/assets/images/words/pancho-clean.webp');
+const a605 = require('@/assets/images/words/pancho-ironing.webp');
+const a606 = require('@/assets/images/words/pancho-sweeping.webp');
+const a607 = require('@/assets/images/words/pancho-wet.webp');
+const a608 = require('@/assets/images/words/pancho-saving-goal.webp');
+const a609 = require('@/assets/images/words/pancho-cheering-football.webp');
+const a610 = require('@/assets/images/words/pancho-jealous.webp');
+const a611 = require('@/assets/images/words/pancho-calm.webp');
+const a612 = require('@/assets/images/words/pancho-blushing.webp');
+const a613 = require('@/assets/images/words/pancho-moving-house.webp');
+const a614 = require('@/assets/images/words/pancho-hitchhiking.webp');
+const a615 = require('@/assets/images/words/pancho-painting.webp');
+const a616 = require('@/assets/images/words/pancho-beside-box.webp');
+const a617 = require('@/assets/images/words/pancho-going-up-stairs.webp');
+const a618 = require('@/assets/images/words/pancho-fixing.webp');
+const a619 = require('@/assets/images/words/pancho-going-down-stairs.webp');
+const a620 = require('@/assets/images/words/pancho-graduating.webp');
+const a621 = require('@/assets/images/words/pancho-shy.webp');
+const a622 = require('@/assets/images/words/pancho-pouring-mate.webp');
+const a623 = require('@/assets/images/words/pancho-having-fun.webp');
+const a624 = require('@/assets/images/words/pancho-confused.webp');
+const a625 = require('@/assets/images/words/pancho-shouting.webp');
+const a626 = require('@/assets/images/words/pancho-falling.webp');
+const a627 = require('@/assets/images/words/pancho-lifting.webp');
+const a628 = require('@/assets/images/words/pancho-jumping.webp');
+const a629 = require('@/assets/images/words/pancho-suspicious.webp');
+const a630 = require('@/assets/images/words/pancho-tired.webp');
+const a631 = require('@/assets/images/words/pancho-working-out.webp');
+const a632 = require('@/assets/images/words/pancho-excited.webp');
+const a633 = require('@/assets/images/words/pancho-fed-up.webp');
+const a634 = require('@/assets/images/words/pancho-building.webp');
+const a635 = require('@/assets/images/words/pancho-laughing-hard.webp');
+const a636 = require('@/assets/images/words/pancho-idea.webp');
+const a637 = require('@/assets/images/words/pancho-stunned.webp');
+const a638 = require('@/assets/images/words/pancho-relieved.webp');
+const a639 = require('@/assets/images/words/pancho-grateful.webp');
+const a640 = require('@/assets/images/words/pancho-proud.webp');
+const a641 = require('@/assets/images/words/pancho-moved.webp');
+const a642 = require('@/assets/images/words/pancho-waving-goodbye.webp');
+const a643 = require('@/assets/images/words/sun-hot.webp');
+const a644 = require('@/assets/images/words/pancho-grumpy.webp');
+const a645 = require('@/assets/images/words/pancho-broke.webp');
+const a646 = require('@/assets/images/words/bodegon-restaurant.webp');
+const a647 = require('@/assets/images/words/pancho-drinking-mate.webp');
+const a648 = require('@/assets/images/words/pancho-full.webp');
+const a649 = require('@/assets/images/words/pancho-driving.webp');
+const a650 = require('@/assets/images/words/corner-shop.webp');
+const a651 = require('@/assets/images/words/tire-shop.webp');
+const a652 = require('@/assets/images/words/takeout-shop.webp');
+const a653 = require('@/assets/images/words/hot-dog-stand.webp');
+const a654 = require('@/assets/images/words/pancho-pointing-cheek.webp');
+const a655 = require('@/assets/images/words/pancho-pointing-chin.webp');
+const a656 = require('@/assets/images/words/pancho-punching.webp');
+const a657 = require('@/assets/images/words/pancho-pointing-nose.webp');
+const a658 = require('@/assets/images/words/pancho-furious.webp');
+const a659 = require('@/assets/images/words/pancho-in-love.webp');
+const a660 = require('@/assets/images/words/pancho-grabbing.webp');
+const a661 = require('@/assets/images/words/pancho-standing-up.webp');
+const a662 = require('@/assets/images/words/pancho-watching-balcony.webp');
+const a663 = require('@/assets/images/words/pancho-goalkeeper-saving.webp');
+const a664 = require('@/assets/images/words/pancho-dribbling.webp');
+const a665 = require('@/assets/images/words/pancho-cheering.webp');
+const a666 = require('@/assets/images/words/pancho-juggling-ball.webp');
+const a667 = require('@/assets/images/words/small-farm.webp');
+const a668 = require('@/assets/images/words/ranch-estancia.webp');
+const a669 = require('@/assets/images/words/country-store.webp');
+const a670 = require('@/assets/images/words/dairy-farm.webp');
+const a671 = require('@/assets/images/words/abandoned-house.webp');
+const a672 = require('@/assets/images/words/jail.webp');
+const a673 = require('@/assets/images/words/pancho-shushing.webp');
 
 /** Course words, by lemma id. */
 export const courseWordArt: Record<string, ImageSourcePropType> = {
@@ -776,6 +1047,318 @@ export const courseWordArt: Record<string, ImageSourcePropType> = {
   "5a548f20-5d8b-5da4-8469-66cc143f7f60": a321,
   "17cb36a6-58f1-5530-996b-57498f84ebc6": a322,
   "0db3c814-6196-5a7b-80be-9e3d92bca545": a323,
+  "ec593ed5-eb75-5a96-a526-4a95cc82f615": a22,
+  "d25bd223-c48d-502d-93da-18f5e994912a": a23,
+  "8473f4b7-6356-5abc-90d2-b17c862476b7": a24,
+  "a1e0e95b-f544-534c-967f-9f53c1141f54": a26,
+  "b254eeae-2899-5f57-9333-c29a9afdb163": a25,
+  "7f9b834c-f6ff-5797-bf9f-ae1a800bd678": a21,
+  "c20dce4b-1b97-56ec-9bc5-69cc8d4a25c7": a27,
+  "324c257d-b10b-5a7c-812d-c75a256ec064": a32,
+  "8daa9b92-f17c-5b3b-ba8c-50f88939b24b": a29,
+  "307876fa-4ee1-508f-a1b4-c636f8dd077b": a30,
+  "97e22cba-0fa4-5f2c-a2da-a36d4243f4ea": a28,
+  "3b7c64ae-6122-5f81-bea9-c59ac8928ad9": a403,
+  "b1a0245b-51cd-5cbb-bba1-3764536b6c12": a404,
+  "6c852b4d-ad4b-5b0c-9107-0afb5bbfdfda": a405,
+  "e9186ac5-2a39-519e-a7d0-3b76e062ff21": a406,
+  "89f91aaa-acdd-50f9-aeb5-2f64a6269d82": a407,
+  "b5e8ab2c-cf02-5207-9d2c-a6fe400493d7": a407,
+  "543e6c60-ed76-57b3-8b73-2184d0a5a249": a408,
+  "27121a1f-e80b-5da8-8b93-594b5a86df7e": a408,
+  "c16b8fb3-0aae-53c3-9bd8-1746835659c4": a409,
+  "26484a1f-31be-5c9b-b60f-ebe8d55a3f6a": a410,
+  "880b598e-8f9a-5f31-9478-1e2c8d2111f4": a411,
+  "2e23c1e2-c8ff-5a8c-a953-ebb55f2082df": a412,
+  "64765dfc-e71d-5245-992d-364355909536": a413,
+  "497a75f3-0beb-54c0-8805-bb275b2b7aea": a414,
+  "a9d48784-96d2-5a38-8ae9-9870344ffbeb": a415,
+  "9e0942d2-738c-5634-bfc9-c06e7b3abcac": a416,
+  "889267ab-4e47-5fb4-a1b2-2555474131e2": a417,
+  "98b959ab-6aea-510e-a3e8-912f3e7d9a0b": a418,
+  "d9f065f6-f0a0-598b-8bd4-cd13fbedf450": a419,
+  "5e449b33-c537-537c-9c28-c101fabe0e96": a420,
+  "a450c7b2-2a58-5e68-a9a7-71d008c9b42b": a421,
+  "41a11fdb-5b81-5e5d-849f-c18984fce912": a422,
+  "b2335641-69d0-554b-b32b-858a4c1e2ac0": a422,
+  "8a260486-3e73-5aea-8677-9f4b0267999e": a422,
+  "6b492ef1-8304-5d71-b5b1-c4c358bbc151": a423,
+  "0e980bdb-7c80-587f-8828-52c8d2303ac5": a424,
+  "ce5d781e-1b61-558d-8374-d80bba79dcf1": a425,
+  "4df4e1b0-c2e1-5185-970c-9d2fd4de4958": a426,
+  "a2d6f72a-59af-5048-920c-1183d33c6f0f": a105,
+  "3abfd0ae-07bf-5fe1-82fc-80db22e3629b": a105,
+  "8448dc4c-c4d2-5376-8551-a2a8db433439": a427,
+  "de8ab76c-4e58-568d-ba11-4ba7b7d52854": a428,
+  "7d46349b-9b51-53e6-a2fd-9838641527f3": a429,
+  "47977d35-d8fe-5297-8ba0-66513e077eef": a429,
+  "2a16ed90-cbe0-5832-94c2-069443488584": a430,
+  "308eaf55-3fd5-5c8b-9257-bc7118781e69": a431,
+  "2b3e76ec-1db4-59b0-9463-226ed2f7158e": a432,
+  "98724acc-8420-560f-945d-3ffb63d9d6e3": a433,
+  "999ff68e-9b2f-5266-818e-a49117382b73": a434,
+  "eedf24a2-c11b-5c29-92f6-ac1c2a523cb7": a435,
+  "13408ae2-eea4-526e-838e-e3ae7aec7ed8": a436,
+  "1911f135-ed15-5083-a743-7b16cfd2ca91": a66,
+  "0ce69091-dd5e-58e5-ae62-7235b0ab6157": a437,
+  "13cf88ba-fa09-5560-b100-dbd6e6688ce5": a438,
+  "44e7b844-e1ba-5ffd-8503-c04e3680b9fe": a439,
+  "55b049dd-fa06-57c7-8e77-c6ecfd37d493": a440,
+  "b1232e89-57d2-5482-a9bc-c877bd56586a": a441,
+  "1f5dfd78-bc63-5da3-ac84-425e82fe27e5": a442,
+  "c0577e7c-5df4-5d0d-a287-cf2f98161043": a443,
+  "b88853df-fd04-5368-9adb-2510e319bf13": a444,
+  "e3fc3292-1ee5-5ef4-82dc-275cd01ad6f4": a445,
+  "8ec50844-fc29-5ac5-95e5-dbb45d9a27cb": a446,
+  "a805c6a1-2444-55cd-86fd-d10d8bf7510a": a447,
+  "bb0f6a4b-be8f-51db-81b3-65c2863a5b83": a448,
+  "ff6fb10d-5a0c-559f-a106-ffd081edff1a": a449,
+  "f9db21af-8442-5aa0-8f23-d10ce062f90d": a450,
+  "446bca9c-9f92-54f5-9a50-18358769f96d": a451,
+  "c05568ee-13a0-599e-baed-012d06b832b9": a452,
+  "6eb2d5c0-83a8-54a5-8334-ad76d74ad368": a453,
+  "d600a088-a6c1-548d-98d7-c21c2ba95b0f": a454,
+  "e5ad4e93-96eb-5ed8-bdd5-3c59124ba23d": a455,
+  "06ebc734-f5ad-5ff9-a8a7-519cd0a5eaf3": a456,
+  "ff68ca09-4ba1-5a29-9cca-2c2691dadddd": a457,
+  "5ab445eb-f3c5-5b2f-a1ae-fca6abad3e6b": a458,
+  "f780c866-998d-546c-a379-a7f0d80f4f7b": a459,
+  "91556c82-fd32-5efc-b10e-6e89c50b7a04": a459,
+  "9f6ca070-91f4-5d64-a90f-bb864c81c156": a459,
+  "c6e8136e-ef74-5e02-b905-dc3ddd8ebc0e": a460,
+  "076ad18c-88d1-58b2-af19-b58d0f502154": a460,
+  "3aae4fdf-0cdb-5b63-affe-128ca6ab7d2d": a460,
+  "c8becd82-8e8e-5642-b4e5-e2bfff042e29": a461,
+  "acc06399-48ef-5890-a10e-423a0e6d551f": a461,
+  "2180c63c-f427-5cda-8f82-388e0a26c043": a462,
+  "dd143eae-ffc7-56bb-bb33-a819169794bb": a463,
+  "b42bfd87-bc00-5b98-9851-b019c3a8122e": a464,
+  "e5f2a1cd-dbba-53cc-9dc2-754446217194": a465,
+  "adb198a3-f827-53dd-8ff7-5fe98bca310f": a466,
+  "75298309-4e8c-56a6-953b-63dfc7d3dfc0": a467,
+  "d3edeabd-c052-5a79-a1c8-816817027942": a468,
+  "efe01254-5255-54c8-96bb-fcdb1045fc47": a468,
+  "7686d4cb-2347-56b7-a9c9-438aff6a97a6": a469,
+  "8ba23c1b-b3b1-5bc0-bec0-a76740954294": a470,
+  "804fa2b1-7d38-5731-96b2-c0bc34386d64": a471,
+  "943e66fd-6999-5b7b-bb5b-01b5e887185e": a472,
+  "19015a56-d379-52e0-a38a-a0b579a78f14": a473,
+  "a677158a-d385-5a6f-88af-ecd7c5bd217f": a474,
+  "991b8bc8-f62d-5269-91a4-f1201e44541f": a474,
+  "b9a0c5b2-bece-53a8-bc74-3f32fb99f132": a475,
+  "972d3d5d-d3d0-5fab-be6c-e457f04eff68": a475,
+  "5c9e322b-7ad8-5940-b281-908af20a94ba": a475,
+  "b6dd9dc8-a9a3-5784-86ab-e01ce786482e": a476,
+  "641f1589-1d62-5296-b620-ef338064e7e2": a477,
+  "b9446739-a0bd-574f-9dab-10075b457108": a478,
+  "1142f00c-d24d-59a2-926f-8f80c5a787b7": a479,
+  "b3a15f68-a07c-5f20-8b7a-ff5a502172c7": a480,
+  "c805c5b8-6272-5330-bc99-bb4eb88ec083": a481,
+  "323f21aa-5d62-5c68-9324-48332e4a4c7f": a482,
+  "ab3b22fd-ab09-50ac-b861-c32616f4317b": a483,
+  "883012e3-e935-5a32-b4cb-cf44e3c29c7e": a484,
+  "6e666c77-ffc0-52a5-ad30-81f75ef079e1": a485,
+  "92038d88-a4f5-5fe9-86d9-7e96cec9c23f": a486,
+  "6c075be3-d073-5715-a771-15391184508e": a487,
+  "60deac20-90e5-5ac5-94b1-2871a868ffba": a488,
+  "523b2b62-e907-5814-86b8-cdf5f94d26fa": a489,
+  "793d56c5-197a-503a-81a4-b60e47ff8656": a490,
+  "7ce4dffa-8f50-5c78-9266-2475d965a3a5": a491,
+  "6fb63075-38ac-55a5-8552-30e29471ba2c": a492,
+  "0e336b6c-e192-5078-9fc5-786dd01ea037": a493,
+  "5ec427ca-8683-5622-94fa-1b4a95004af2": a494,
+  "daebd94b-0da1-52b3-82f2-e8bc49aeee96": a495,
+  "fab04a4b-6a67-5abe-96f5-1bf199f55451": a496,
+  "c53a5d91-0985-55ad-a41d-0070062e028c": a497,
+  "61402ff0-2dbe-5eaa-8a9e-4533ebf36607": a498,
+  "f8ca03d3-c1f8-58a9-b4ae-2715f8f05fee": a499,
+  "ea525474-947f-5ec0-a18d-08497bdd35f1": a499,
+  "6d5f2186-6dbb-5f63-8b22-85d4c716b240": a499,
+  "8d3b998f-050a-5272-bfde-9ac3222b986d": a500,
+  "1f764302-52de-55ae-92a3-23aeeb606e62": a501,
+  "5ee77b2a-4ebd-5b11-a1f1-5197b4248d83": a502,
+  "47113433-b58e-568f-bfe9-8a76d8f87105": a503,
+  "3847b44d-08ed-5a08-a53a-9b5450d8785f": a504,
+  "b71b1c80-efa8-56cc-808e-4f18042e596d": a505,
+  "04573d13-732e-5de4-9f92-274a45a567b9": a506,
+  "365a8915-7bec-5518-ad91-600504416d24": a507,
+  "2f28eb63-12e0-50ce-b75c-662d6fe160dd": a508,
+  "d5b96173-656f-5bb3-a670-d586380d02a0": a509,
+  "e7a2cdb6-e979-5e8e-bfd9-17ed77f5d6ca": a510,
+  "d6413836-b10b-5c7c-8416-5531d746b12f": a511,
+  "01832479-ae09-5ed8-943f-f3ae830e2bb4": a512,
+  "a05dc6bd-56cf-5b81-b1de-1ba3fce43728": a513,
+  "4dc8baeb-72ea-5401-b3f3-c4022523d4e0": a514,
+  "755845bc-9043-5961-ba7d-81e7cca25024": a515,
+  "b7f54a0b-0422-563a-afd5-a2c9d1da25df": a516,
+  "49a756a4-cb19-5e80-b773-8a559e6d8648": a517,
+  "b1a12c6a-bf1b-57bd-a3c2-37abd8ebaadf": a518,
+  "d3a7435e-be3f-5f8c-b8ed-d89a72b74562": a519,
+  "28ed5de8-a8bc-533d-8916-6a3c1973a7a4": a520,
+  "f4cfa377-ba57-5a9b-a884-a0466cfac48f": a521,
+  "645d89cf-ef83-56c8-8374-3d7e8ba8af10": a522,
+  "00c26552-b6bd-5e39-ad6c-fd6f0e3ed149": a523,
+  "5cb15bb3-4e57-5eb9-8046-b9be12bc6cda": a524,
+  "4729bb25-1cc4-52f2-b948-fdd2b1075d6d": a525,
+  "2cd83f6a-47b5-5149-a23c-a356b1d53578": a526,
+  "0145ae2f-7a62-52a8-8153-a01425fe2c9c": a527,
+  "fec212ae-c59c-5612-8fde-26f4e3ed72e1": a528,
+  "cb58c24f-2084-5e43-ab2a-680cfe60a1c7": a529,
+  "b600e213-6c6d-51a7-9b1f-e2e333d1444a": a530,
+  "91131281-6d56-5ea8-b77a-03a680036431": a531,
+  "69825771-f8f7-5e10-a2f9-d02d18e7966b": a532,
+  "e2f53151-77f1-5afc-980d-04c00dc23164": a533,
+  "f9abb8e0-2f78-5210-8f49-da8eaca6b7cf": a534,
+  "fff5ad77-7e2a-5816-b39c-1aad046d6eb6": a535,
+  "8550ce2d-65c5-5f3d-9738-291a60e4b3cc": a536,
+  "8a81abc2-2772-5224-bf1b-9871d5057cce": a537,
+  "dcdc5bbd-ce78-57d0-9987-08feecfdf1a2": a538,
+  "24e943f4-9c36-5800-8e6c-2233010f7de2": a539,
+  "402284de-60ef-5500-b4c0-6b2de2a43f9e": a540,
+  "745916aa-a6b4-5978-a44b-67e7741b2c04": a541,
+  "22e7485f-49e1-5abc-a17b-ab9766fc28bf": a542,
+  "47c77290-9cd7-540f-aadc-b7d488428eb6": a543,
+  "8c4c8dd2-39c2-5041-8308-82e109fc6d03": a544,
+  "84dc9ca3-acc2-5e84-bd72-13da4c42f48d": a545,
+  "cf67ce7c-0b89-586a-8211-10f0ef67e73a": a546,
+  "e275c0e9-6f63-5e7f-b1aa-775310935f72": a547,
+  "50c437f0-f7c9-5968-959f-a19c2bf080e0": a548,
+  "b7203b95-9ac5-59b7-8f9b-2b03d74c3edb": a549,
+  "be49ab71-902f-558f-bb15-ea2ebd6cc44e": a550,
+  "4036a898-fe51-52c1-b139-9558d05a3fa8": a551,
+  "f6ab73c9-399b-5132-86de-a282ea4e2331": a552,
+  "676b1e8f-0162-5ddb-b259-ca5234d25785": a553,
+  "513bf79d-dea4-5a7a-bc06-3dc5cfe16ea1": a554,
+  "f714661a-98c8-5c08-9d21-e6126269333d": a555,
+  "e712568e-0b65-5aa1-a556-f1d889e32cd6": a556,
+  "f3caa7e8-2434-510e-8dce-045bbfd71f93": a467,
+  "114f9ff4-9e04-5f35-9e95-979b1dfff82d": a457,
+  "653a0ddb-e935-59b3-bf5e-881f3f1eeef6": a557,
+  "ef2e6b9d-a86a-5a8b-8774-290492a77fb6": a557,
+  "9729cd97-2d7d-5e2d-9479-ab5a10a0c614": a558,
+  "5c931e87-263e-50da-9a0c-1f5549ed9f0e": a559,
+  "30259db4-373f-5053-95b4-0dc0bf6518b6": a560,
+  "4632171a-f4d8-5641-8bbe-5044a1bd98d1": a561,
+  "d65b1295-5378-5ae3-8a0d-0994d78f64c6": a562,
+  "35fb151d-daab-586a-aecd-501be8ddcddc": a563,
+  "4828f42f-f984-5603-9cb1-36d5c1c4c737": a563,
+  "4471441b-1d77-5fcb-9156-a5ba329d7478": a564,
+  "93d43d04-745d-5b8c-a9d4-0fdfe5ee6a5f": a565,
+  "58a2c539-917f-5d58-8c6d-bd482ea8f0f0": a481,
+  "0045585c-2be1-55f0-9e6c-79fa7b70fa27": a566,
+  "47fc0bfe-b38b-506a-b459-43bf8cad35db": a567,
+  "44df588e-7a27-59e6-bb80-d358a941f5a5": a568,
+  "96017a62-2307-592a-a291-e1327b58aa1f": a569,
+  "a93634b7-5b70-5ddb-851d-34115955647b": a570,
+  "ca3f016a-a945-5ed9-892d-a6cc3e208529": a571,
+  "c82073fd-0c65-5d66-9bd2-81cef66b47e0": a572,
+  "f8570cab-35e9-52e7-bcd7-70aa3b0a7a15": a573,
+  "0850fe22-dc77-5348-8c90-28f454455c1b": a574,
+  "a6a9f7ca-4b38-59ef-bb3a-6f5780e92de5": a575,
+  "cf89a85b-0b32-5e39-a7d9-b7d98c03d822": a576,
+  "d6b9781f-b41c-507d-8eb5-263252c79c1f": a577,
+  "26012c0b-feb3-5194-aef0-83e4f75a3885": a578,
+  "a4378858-a972-5026-a1b0-f37d665f3fa1": a579,
+  "3d944fc7-47a9-520b-a01d-55b3f3417234": a575,
+  "e3139f5f-e574-5c58-a1da-4f7659096ba8": a580,
+  "1ee7723a-5cab-5b32-930c-29f8e025752e": a581,
+  "6ec70951-1127-531f-9b4b-68c3860266e9": a581,
+  "0d018b02-7307-5cbd-9f30-761b5d52acda": a582,
+  "98297458-2a7e-5e4b-9bd1-f1df649461da": a583,
+  "4ed7aec9-8e6a-50c2-8813-afe9ba38ef04": a584,
+  "c129e869-74c4-5040-8f20-cb031738f77d": a585,
+  "6cfbf35c-fb8d-5ff3-bf54-66d8cc5e7e70": a586,
+  "b8809084-2009-56cb-9664-3f482fcdae1e": a587,
+  "1f009685-1d6f-515d-8b02-ca9f5e859b94": a588,
+  "5a6bffa6-cb96-5e2d-9d05-634b4067eb86": a589,
+  "a035154f-88e9-50e0-a6ae-2b07912a82ba": a561,
+  "a72ffe32-9177-5008-a0ba-e09718e4b437": a590,
+  "a0b14968-e84b-5ad3-80a5-785ca14464dd": a591,
+  "54ba3715-d9cc-598f-a7a3-4c9dacb183ea": a592,
+  "1a95987f-1c98-585f-9c79-ffb7bb8a0afa": a593,
+  "3827d4cf-2695-5300-9375-8a063e956f02": a594,
+  "17932fc4-190e-5aa9-b740-c269fc2e1e5d": a595,
+  "ad51b76b-2dbe-5d30-9019-dfe7c00e3d19": a481,
+  "3160b7bf-3120-5115-8c3b-35a2853900ea": a596,
+  "2edb1c21-1985-500f-acd0-85aadbcaedda": a488,
+  "38a914b8-d94e-5d0f-a2c4-3933a80209bf": a484,
+  "d0e935e1-90ff-57f9-8b8b-1c4c4880b1f2": a595,
+  "fa2e805f-ba02-5ebc-9ac5-b516e71f3672": a556,
+  "1fc1b2ae-9677-59fb-9d39-420a6991015c": a597,
+  "619f737b-b79f-5475-98ea-71bf68a5fe3c": a559,
+  "4e69eb74-724b-5698-8d55-5c0ef15e2034": a598,
+  "7d3d8bab-0320-5336-9569-f0c17a07c4ad": a599,
+  "098a6794-7fa8-5a20-9da1-26e1ee1b2864": a600,
+  "062e4d1e-d0b4-5f68-bd48-d1fc3d1d8e10": a601,
+  "2736b4e5-f42f-5d2d-b5ec-9fd5a04371d3": a602,
+  "ec312e04-f566-57cb-948a-840d29b6b8bf": a603,
+  "367be81a-7559-5b44-b33f-636a3358692e": a604,
+  "4b564dcd-abde-5429-a7fa-36d81060fe75": a605,
+  "ab522121-6de0-5b73-9f31-04329ecd8e0e": a606,
+  "b00bccd0-4cd2-5ae7-93d6-8f252369b163": a455,
+  "58e7831b-38e5-575d-878f-eea5bf0ba026": a607,
+  "ae1204d6-6eb2-56ff-8607-fb36bc2742d9": a608,
+  "2c42c582-ffb5-5e43-b0d8-386a86329b33": a609,
+  "4777463c-0260-5d8d-b2ff-5fd478cd382f": a562,
+  "fa1217f8-be39-5e46-a09b-9a2d53f1cfb8": a610,
+  "bf1ce02e-59a1-5378-873f-5a6105f8bbef": a457,
+  "14e74fcc-db52-5738-beaa-2b8f08eb9cf6": a451,
+  "6e85179a-cc31-5186-b232-ecb1366c5984": a611,
+  "890021d4-1959-52ca-b995-a4b4194f82d4": a467,
+  "f5c8dfa1-8d3c-5c8d-82b2-2c521481e829": a612,
+  "26a14ddd-6de5-5990-8a75-c484445301dd": a613,
+  "4d0f193a-55e1-5a6d-b49a-bbf847a91ffc": a614,
+  "85e241e9-b128-5667-bcd9-50c90d676097": a615,
+  "325c7e37-6de8-5884-93d9-adb7e3d00758": a616,
+  "5f9f27e0-83cf-5d60-9531-c7222d5c21a6": a617,
+  "4755c8f7-da3c-56b7-a249-4a6752ba3222": a618,
+  "8a7c9e70-09f7-51c8-8272-db503b9d1f6a": a619,
+  "f6e3f210-4264-5462-89c6-7514b51b699f": a620,
+  "45360c93-453a-5434-a5b2-229b4cc9e113": a621,
+  "bbfb8af9-f995-5c87-8fa8-1f727357dcee": a466,
+  "82c284da-dd28-5d9c-8a30-15927ce060e8": a622,
+  "2cfc54e3-c2db-543a-b329-d0b233bf8e36": a623,
+  "54d78104-b1b2-5422-84d9-dbb0c5924dfb": a460,
+  "a700f740-9908-5a1a-9100-56c151895c49": a465,
+  "10e3aa20-05b7-56a6-beac-a39b0564b1ba": a624,
+  "41be71fe-77ac-5cd7-aa75-94e2c5e0273b": a570,
+  "6298ba68-ee7e-55a6-b973-8fa26a116f7b": a625,
+  "30a73722-3e4d-586f-8df8-535189352cb1": a626,
+  "b6fb4c1e-cdec-5483-a618-a15ec27390cf": a607,
+  "bae8b5db-108c-56e3-a9fa-4edbee5566ef": a627,
+  "3d549064-1460-500f-8876-ebe8621ca101": a451,
+  "82b1682b-7475-5c68-8b1f-82ee75e1e1f4": a628,
+  "e2ba4785-18eb-56c2-ab23-77b3de3267f2": a628,
+  "ca980bf1-16f4-532f-86d3-a76d61ce0566": a475,
+  "b2e4c2ee-79fc-5a5a-a585-7d415235ebb0": a476,
+  "d5f2fc4b-e727-532a-9d85-8ef62895e5c3": a629,
+  "c795496b-0958-5de5-b42b-bc726e69c53a": a630,
+  "68b413c1-0d16-5792-ae33-c467f76d864c": a631,
+  "1e6ce853-05c2-5e5a-9e45-d7bba320b424": a590,
+  "caa55a70-3969-554e-bfad-d7317c8a44cd": a462,
+  "87768c48-4d9e-560e-bf24-06a7e5cef540": a632,
+  "0f447a3a-7756-50e1-976c-f60775a4b53e": a457,
+  "e788b5b0-0743-5ae5-b648-f877c5812892": a633,
+  "289e657a-1b75-52be-946c-cbcf122daa71": a630,
+  "564c9084-e9f0-5260-86da-0850431c1cd6": a633,
+  "181e763a-edd1-5d4a-af19-ce5e77cfe76b": a630,
+  "e2dccc69-cef6-5fe3-a7e6-03d5d78260f5": a481,
+  "be9135ee-cfe8-5f06-823a-7cf404414540": a634,
+  "adcc3050-4892-5ec1-a50b-746eb6b59f97": a464,
+  "208c3382-ada9-589e-975f-d0d43bcc7feb": a455,
+  "8e9ea4c1-0158-5974-bdef-e0a54d0a8b6c": a463,
+  "cb6562ea-b67f-5566-b00c-e61cd22e52ec": a635,
+  "9bf7e26c-0709-5698-aa20-0bc1913a6e23": a636,
+  "54784e5b-7b6f-5863-8664-1a299a9dfd8f": a637,
+  "6748308a-26c2-5e3c-8fac-6579456f33f5": a638,
+  "da05e458-1b70-5351-8d97-09e0334be11f": a637,
+  "edd6d145-4452-5209-99c6-34b6dd862ac2": a639,
+  "8af766da-0dfd-50b1-831f-bdaea8e15038": a640,
+  "ceb47f7d-04a1-5a72-9c37-3a0d89fd015c": a641,
+  "1e954eef-33f0-5a2e-98e8-ceb4aaa8d61b": a473,
+  "1a84547b-2dc9-50b8-a5ac-0d127eed8717": a642,
+  "55058060-f8cf-59be-887b-d9f90f6d8f5c": a673,
+  "a8271c1c-52e1-516b-914f-04d2924de744": a673,
 };
 
 /** Argentine pack words, by their Spanish. */
@@ -952,4 +1535,81 @@ export const packWordArt: Record<string, ImageSourcePropType> = {
   "funyi": a400,
   "mataburros": a401,
   "mionca": a402,
+  "chau": a642,
+  "calorón": a643,
+  "chinchudo": a644,
+  "seco": a645,
+  "estar pato": a645,
+  "bodegón": a646,
+  "matear": a647,
+  "pipón": a648,
+  "manejar": a649,
+  "almacén": a650,
+  "Capital": a403,
+  "chino": a650,
+  "gomería": a651,
+  "rotisería": a652,
+  "microcentro": a405,
+  "panchería": a653,
+  "polirrubro": a650,
+  "cochera": a437,
+  "departamento": a105,
+  "living": a428,
+  "pieza": a429,
+  "panza": a507,
+  "cachete": a654,
+  "gamba": a506,
+  "pera": a655,
+  "piña": a656,
+  "nana": a599,
+  "ñata": a657,
+  "marote": a503,
+  "bronca": a457,
+  "calentarse": a457,
+  "chocho": a460,
+  "detonado": a461,
+  "embolarse": a467,
+  "fiaca": a466,
+  "hecho pelota": a461,
+  "quemado": a461,
+  "tentarse": a635,
+  "cruzado": a644,
+  "embalado": a632,
+  "fusilado": a461,
+  "mambeado": a462,
+  "sacado": a658,
+  "camote": a659,
+  "julepe": a451,
+  "metejón": a659,
+  "laburar": a563,
+  "charlar": a477,
+  "agarrar": a660,
+  "cebar": a622,
+  "morfar": a570,
+  "pararse": a661,
+  "balconear": a662,
+  "manotear": a660,
+  "boliche": a420,
+  "arquero": a663,
+  "atajada": a663,
+  "gambeta": a664,
+  "hinchar": a665,
+  "jueguito": a666,
+  "chacra": a667,
+  "estancia": a668,
+  "pulpería": a669,
+  "tambo": a670,
+  "tapera": a671,
+  "cabrero": a457,
+  "apiolarse": a636,
+  "atorrar": a590,
+  "gayola": a672,
+  "sabiola": a503,
+  "lorca": a643,
+  "ñoba": a427,
+  "zabeca": a503,
+  "caer la ficha": a636,
+  "estar en la lona": a645,
+  "prendérsele la lamparita": a636,
+  "cagarse de risa": a635,
 };

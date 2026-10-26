@@ -21,6 +21,7 @@ import {
   View,
 } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { KeyboardExtender } from 'react-native-keyboard-controller';
 import Animated, {
   Easing,
   FadeInDown,
@@ -786,6 +787,47 @@ function SpanishBubble({ sentence, ...line }: React.ComponentProps<typeof Senten
         <SentenceLine key={i} sentence={sentence} {...line} turn={i + 1} />
       ))}>
       {first}
+    </SpeechBubble>
+  );
+}
+
+/**
+ * A dialogue being completed, said once: each speaker's line in their own
+ * bubble, the Spanish with its gap and the English a size down beneath it. The
+ * English is what makes the gap one answer, so it sits by the line it belongs
+ * to rather than in bubbles of its own over a second copy of the Spanish.
+ */
+function GapBubbles({
+  sentence,
+  english,
+  play,
+  ...line
+}: React.ComponentProps<typeof SentenceLine> & {
+  /** The English as shown, its borrowed answer blanked until the verdict. */
+  english: string;
+  /** The recording, offered once she has answered. */
+  play?: boolean;
+}) {
+  const turns = turnCount(sentence.tokens);
+  const en = turnsOfText(english, turns);
+  // A translation that won't split a line a speaker goes whole under the last.
+  const said = (i: number) => {
+    const text = en ? en[i] : i === turns - 1 ? english : null;
+    return (
+      <SentenceLine
+        {...line}
+        sentence={sentence}
+        turn={i}
+        under={text ? <Text style={styles.bubbleEnUnder}>{text}</Text> : undefined}
+      />
+    );
+  };
+  return (
+    <SpeechBubble replies={Array.from({ length: turns - 1 }, (_, i) => <View key={i}>{said(i + 1)}</View>)}>
+      <View style={styles.bubbleRow}>
+        {play && sentence.audio_path ? <PlayButton path={sentence.audio_path} autoPlay={false} /> : null}
+        {said(0)}
+      </View>
     </SpeechBubble>
   );
 }
@@ -1996,25 +2038,53 @@ function ListenBuild({
 // the caret is. Duolingo's row, for the same reason: holding a key down for
 // its accent is a trick most learners never find.
 //
+// The row only comes when the answer has one of those letters: on "abuela" it
+// was seven buttons with nothing to do, and testers took them for a glitch.
+// (Accents are forgiven when graded anyway, so its showing up is a small hint
+// at most.) On iOS it rides on the keyboard itself, as its accessory bar, so
+// it reads as extra keys and goes when the keyboard does.
+//
 // The keyboard is told this is not prose and not a login: no autocorrect, no
 // spell check, no suggestion bar (it would spell the answer — "gaseosa" as she
 // types "gas"), and no Paste / AutoFill bubble over the field.
 // ---------------------------------------------------------------------------
 const ACCENTS = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ'];
+const NEEDS_ACCENT = /[áéíóúüñ]/i;
 
-function SpanishInput({
+type SpanishFieldProps = {
+  value: string;
+  onChangeText: (text: string) => void;
+  placeholder?: string;
+  verdict: Verdict;
+  onSubmit: () => void;
+  /** What she is meant to type: the row is only offered if it has a letter from it. */
+  answer: string;
+  /** Typed into a sentence's blank (`SentenceLine`'s `blank.field`) rather than
+   *  a field of its own: drawn as the blank's word, `large` on a card. */
+  inline?: 'bubble' | 'large';
+};
+
+function SpanishInput(props: SpanishFieldProps) {
+  const { field, accents } = useSpanishField(props);
+  return (
+    <View style={styles.spanishInput}>
+      {field}
+      {accents}
+    </View>
+  );
+}
+
+/** The field she types Spanish into and the accent keys that go with it, apart,
+ *  so the field can sit in a sentence's blank while the keys stay below it. */
+function useSpanishField({
   value,
   onChangeText,
   placeholder,
   verdict,
   onSubmit,
-}: {
-  value: string;
-  onChangeText: (text: string) => void;
-  placeholder: string;
-  verdict: Verdict;
-  onSubmit: () => void;
-}) {
+  answer,
+  inline,
+}: SpanishFieldProps) {
   const input = useRef<TextInput>(null);
   const selection = useRef({ start: value.length, end: value.length });
   // Behind a cheer the keyboard would come up over it: it waits, and comes up
@@ -2028,6 +2098,8 @@ function SpanishInput({
     }
   }, [cheerUp]);
   const editable = verdict === null;
+  const letters = editable && NEEDS_ACCENT.test(answer.normalize('NFC'));
+  const onKeyboard = letters && Platform.OS === 'ios';
 
   const insert = (letter: string) => {
     const { start, end } = selection.current;
@@ -2041,8 +2113,25 @@ function SpanishInput({
     requestAnimationFrame(() => input.current?.setSelection?.(at + 1, at + 1));
   };
 
-  return (
-    <View style={styles.spanishInput}>
+  const keys = ACCENTS.map((letter) => (
+    <Pressable
+      key={letter}
+      onPress={() => insert(letter)}
+      accessibilityRole="button"
+      accessibilityLabel={`Type ${letter}`}
+      hitSlop={4}
+      style={({ pressed }) => [
+        styles.accentKey,
+        onKeyboard && styles.accentKeyDocked,
+        { transform: [{ scale: pressed ? 0.94 : 1 }] },
+        webPress,
+      ]}>
+      <Text style={styles.accentText}>{letter}</Text>
+    </Pressable>
+  ));
+
+  return {
+    field: (
       <TextInput
         ref={input}
         value={value}
@@ -2067,33 +2156,25 @@ function SpanishInput({
         editable={editable}
         returnKeyType="done"
         onSubmitEditing={onSubmit}
-        style={[
-          styles.typingInput,
-          verdict?.correct === true && { borderColor: colors.success, backgroundColor: colors.successSoft },
-          verdict?.correct === false && { borderColor: colors.danger, backgroundColor: colors.dangerSoft },
-        ]}
+        style={
+          inline
+            ? [styles.gapInput, inline === 'large' && styles.cardGapInput]
+            : [
+                styles.typingInput,
+                verdict?.correct === true && { borderColor: colors.success, backgroundColor: colors.successSoft },
+                verdict?.correct === false && { borderColor: colors.danger, backgroundColor: colors.dangerSoft },
+              ]
+        }
       />
-      {editable ? (
-        <View style={styles.accentRow}>
-          {ACCENTS.map((letter) => (
-            <Pressable
-              key={letter}
-              onPress={() => insert(letter)}
-              accessibilityRole="button"
-              accessibilityLabel={`Type ${letter}`}
-              hitSlop={4}
-              style={({ pressed }) => [
-                styles.accentKey,
-                { transform: [{ scale: pressed ? 0.94 : 1 }] },
-                webPress,
-              ]}>
-              <Text style={styles.accentText}>{letter}</Text>
-            </Pressable>
-          ))}
-        </View>
-      ) : null}
-    </View>
-  );
+    ),
+    accents: onKeyboard ? (
+      <KeyboardExtender>
+        <View style={styles.accentBar}>{keys}</View>
+      </KeyboardExtender>
+    ) : letters ? (
+      <View style={styles.accentRow}>{keys}</View>
+    ) : null,
+  };
 }
 
 function Typing({
@@ -2138,6 +2219,7 @@ function Typing({
         placeholder="your answer…"
         verdict={verdict}
         onSubmit={() => input.trim() && check()}
+        answer={form.form}
       />
     </Frame>
   );
@@ -2304,6 +2386,7 @@ export function SentenceLine({
   turn,
   large,
   trailing,
+  under,
 }: {
   sentence: Sentence;
   /** One speaker's line of a dialogue, by index, without its dash — for a
@@ -2319,12 +2402,15 @@ export function SentenceLine({
   /** Which words answer to a tap. Defaults to all of them; a screen that must
    *  hold one word back — the one under test — says so here. */
   tappable?: (formId: string) => boolean;
-  /** Token to replace with a blank, and what she has put in it so far. */
-  blank?: { index: number; filled?: string; tone?: 'right' | 'wrong' };
+  /** Token to replace with a blank, and what she has put in it so far. A
+   *  `field` is typed into in the blank itself, in place of the word. */
+  blank?: { index: number; filled?: string; tone?: 'right' | 'wrong'; field?: React.ReactNode };
   /** The sentence as the star of a card: bigger, and centred. */
   large?: boolean;
   /** Sits after the last word, on its line: a play button that belongs to the sentence. */
   trailing?: React.ReactNode;
+  /** Under the line, in the same block: its English, in a bubble. */
+  under?: React.ReactNode;
 }) {
   const phrase = large ? styles.cardPhrase : styles.bubblePhrase;
   // Measured on tap, never cached: a word only reflows when the sentence
@@ -2361,6 +2447,7 @@ export function SentenceLine({
                     blank.tone === 'right' && styles.gapRight,
                     blank.tone === 'wrong' && styles.gapWrong,
                   ]}>
+                  {blank.field ?? (
                   <Text
                     style={[
                       styles.gapText,
@@ -2375,6 +2462,7 @@ export function SentenceLine({
                         : blank.filled
                       : ' '}
                   </Text>
+                  )}
                 </View>
                 {tail ? <Text style={phrase}>{tail}</Text> : null}
               </View>
@@ -2431,6 +2519,7 @@ export function SentenceLine({
         {row === rows[rows.length - 1] ? trailing : null}
       </View>
       ))}
+      {under}
     </View>
   );
 }
@@ -2514,8 +2603,10 @@ function SentenceIntro({
 
   // On a screen that introduces a word, only that word answers to a tap — the
   // rest is material she is meant to already have. Otherwise every word does,
-  // except the one whose meaning is the answer.
-  const tappable = word ? (id: string) => id === word.id : (id: string) => id !== item.form.id;
+  // the one being practised included: a peek is better than being stuck (and
+  // than a picture she can't reach), and it is paid for — a peeked word is
+  // reported as hinted, which caps its rating (round.ts).
+  const tappable = word ? (id: string) => id === word.id : () => true;
 
   // A form of more than one word ("sobre gustos no hay nada escrito") is a phrase, not a word.
   const isPhrase = !!word && /\s/.test(word.form.trim());
@@ -2660,6 +2751,7 @@ function SentenceGap({
   const typed = input.trim();
   const filled = fill === 'typed' ? typed || undefined : options.find((o) => o.id === chosen)?.label;
   const correct = fill === 'typed' ? !!graded?.correct : chosen === target.id;
+  const tone = verdict ? (correct ? 'right' : 'wrong') : undefined;
 
   const check = () => {
     const g = fill === 'typed' ? gradeGap(typed, target, allForms) : null;
@@ -2672,6 +2764,19 @@ function SentenceGap({
       audio: sentence.audio_path ?? undefined,
     });
   };
+
+  // Typed, she writes in the blank itself: the word goes where it will be
+  // read, and there is no second box to look back and forth from. Once graded
+  // the blank shows the word as written, in the verdict's colour.
+  const spanish = useSpanishField({
+    value: input,
+    onChangeText: setInput,
+    verdict,
+    onSubmit: () => typed && check(),
+    answer,
+    inline: oneCard ? 'large' : 'bubble',
+  });
+  const blank = { index, filled, tone, field: fill === 'typed' && !verdict ? spanish.field : undefined } as const;
 
   return (
     <Frame
@@ -2687,43 +2792,33 @@ function SentenceGap({
           ...(fill === 'typed' ? { answer: typed, note: graded?.note } : {}),
         })
       }>
-      {/* The English is what she is asked, so it is what Mora says. The Spanish
-          sits under it on its own ruled line, the way a build lays out its
-          answer: this is the sentence she is completing, not reading. */}
       {oneCard ? (
         // The Spanish with its gap, the English a size down beneath it, all on one card.
         <PhraseCard>
           {verdict && sentence.audio_path ? <PlayButton path={sentence.audio_path} autoPlay={false} /> : null}
-          <SentenceLine
-            large
-            sentence={sentence}
-            onWord={canTap ? words.open : undefined}
-            blank={{ index, filled, tone: verdict ? (correct ? 'right' : 'wrong') : undefined }}
-          />
+          <SentenceLine large sentence={sentence} onWord={canTap ? words.open : undefined} blank={blank} />
           <Text style={styles.phraseCardEn}>{english}</Text>
         </PhraseCard>
-      ) : (
+      ) : byEar ? (
+        // Heard, the recording is the question and the Spanish its ruled line.
         <>
-          {byEar ? <AudioPad path={sentence.audio_path!} /> : <EnglishBubble sentence={{ ...sentence, en: english }} />}
+          <AudioPad path={sentence.audio_path!} />
           <View style={styles.gapLine}>
-            {verdict && sentence.audio_path && !byEar ? <PlayButton path={sentence.audio_path} autoPlay={false} /> : null}
-            <SentenceLine
-              sentence={sentence}
-              onWord={canTap ? words.open : undefined}
-              blank={{ index, filled, tone: verdict ? (correct ? 'right' : 'wrong') : undefined }}
-            />
+            <SentenceLine sentence={sentence} onWord={canTap ? words.open : undefined} blank={blank} />
           </View>
         </>
+      ) : (
+        <GapBubbles
+          sentence={sentence}
+          english={english}
+          play={!!verdict}
+          onWord={canTap ? words.open : undefined}
+          blank={blank}
+        />
       )}
       <WordBubble state={words.showing} onClose={words.close} />
       {fill === 'typed' ? (
-        <SpanishInput
-          value={input}
-          onChangeText={setInput}
-          placeholder="the missing word…"
-          verdict={verdict}
-          onSubmit={() => typed && check()}
-        />
+        spanish.accents
       ) : fill === 'tiles' ? (
         <GapBank
           options={options}
@@ -3202,6 +3297,22 @@ const styles = StyleSheet.create({
   gapRight: { borderBottomColor: colors.success },
   gapWrong: { borderBottomColor: colors.danger },
   gapText: { ...font.display[800], fontSize: 22, lineHeight: 30, color: colors.ink },
+  // Typed into the blank: drawn as the word it will be, as wide as what is
+  // typed, and never narrower than the slot, so a tap anywhere on it lands.
+  gapInput: {
+    ...font.display[800],
+    fontSize: 22,
+    height: 30,
+    minWidth: 56,
+    paddingVertical: 0,
+    paddingHorizontal: 0,
+    color: colors.ink,
+    textAlign: 'center',
+  },
+  cardGapInput: { fontSize: 30, height: 40 },
+  // A bubble's English, under its Spanish line: there to make the gap one
+  // answer, so a step quieter than what she is completing.
+  bubbleEnUnder: { ...font.body[700], fontSize: 15, lineHeight: 20, color: colors.muted, marginTop: 4 },
   gapLine: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -3302,6 +3413,18 @@ const styles = StyleSheet.create({
     boxShadow: FLAT,
   },
   accentText: { ...font.body[800], fontSize: 18, color: colors.ink },
+  // In the keyboard: one more row of keys, spaced like the keyboard's own.
+  accentBar: { flexDirection: 'row', gap: 6, paddingHorizontal: 6, paddingVertical: 6 },
+  // Drawn like the system's keys, not the app's buttons: they belong to the keyboard.
+  accentKeyDocked: {
+    flex: 1,
+    minWidth: 0,
+    paddingHorizontal: 0,
+    height: 42,
+    borderRadius: 8,
+    backgroundColor: '#FFFFFF',
+    boxShadow: '0 1px 0 rgba(0, 0, 0, 0.3)',
+  },
   typingInput: {
     backgroundColor: colors.card,
     borderWidth: 1.5,
