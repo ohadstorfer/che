@@ -308,8 +308,15 @@ function takes(text) {
  * nor the larger model, nor IPA, nor spelling it "shame" changes that. Inside a
  * spoken sentence the same voice says "shame" every time — so these words are
  * recorded in one and cut out of it.
+ *
+ * So are the words the model reads as an English abbreviation even inside the
+ * carrier: "mil" came back as "million", twice.
  */
-export const needsSentence = (text) => !/\s/.test(text.trim()) && /ll|y[aeiouáéíóúü]/i.test(text);
+const ABBREVIATIONS = new Set(['mil']);
+
+export const needsSentence = (text) =>
+  !/\s/.test(text.trim()) &&
+  (/ll|y[aeiouáéíóúü]/i.test(text) || ABBREVIATIONS.has(text.trim().replace(/[.!?…,]+$/, '').toLocaleLowerCase('es')));
 
 /**
  * The colon is what makes the word cuttable. Without it "dijo ella" is said in
