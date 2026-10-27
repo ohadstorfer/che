@@ -11,6 +11,7 @@ import {
   useState,
 } from 'react';
 import {
+  type ImageSourcePropType,
   Platform,
   Pressable,
   StyleSheet,
@@ -24,6 +25,7 @@ import { KeyboardExtender, useKeyboardState } from 'react-native-keyboard-contro
 import Animated, {
   Easing,
   FadeInDown,
+  FadeInRight,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -81,6 +83,7 @@ import Svg, { Path as SvgPath } from 'react-native-svg';
 import { type TipBlock, type TipSpan, tipSpans, tipSteps } from '@/lib/tip-layout';
 import type { Form, Sentence, Tip } from '@/lib/types';
 import { WORD_ART_CACHE, courseArt } from '@/lib/word-art';
+import { articleOf } from '@/lib/article';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
@@ -346,6 +349,46 @@ function Intro({ form, onDone }: { form: Form; onDone: () => void }) {
         {form.gloss_note_en ? <Text style={styles.glossNote}>{form.gloss_note_en}</Text> : null}
         {form.audio_path ? <PlayButton path={form.audio_path} big /> : null}
       </Panel>
+    </Frame>
+  );
+}
+
+/**
+ * A new word that has a picture is met on its own first: the thing, its name
+ * — with its article, so the gender comes with it — and what it means, the
+ * word saying itself on arrival. Only then the sentence, without the picture:
+ * on the sentence's card it read as the picture of the whole sentence ("Un
+ * helado de chocolate" under a chocolate bar).
+ */
+function WordPicture({ form, art, onDone }: { form: Form; art: ImageSourcePropType; onDone: () => void }) {
+  const phrase = isPhrase(form.form);
+  const article = phrase ? null : articleOf(form);
+  const sense = senseOf(form, meaningOf(form));
+  return (
+    <Frame
+      prompt={`New ${isSlang(form) ? 'slang ' : ''}${phrase ? 'phrase' : 'word'}`}
+      verdict={null}
+      canCheck
+      checkLabel="Continue"
+      onCheck={onDone}
+      onContinue={onDone}>
+      <View style={styles.meet}>
+        <Image
+          source={art}
+          style={styles.meetArt}
+          contentFit="contain"
+          cachePolicy={WORD_ART_CACHE}
+          accessibilityIgnoresInvertColors
+        />
+        <Text style={phrase ? styles.esPhraseHero : styles.esHero}>
+          {/* The article is part of what she learns, not the word: quieter. */}
+          {article ? <Text style={styles.meetArticle}>{article} </Text> : null}
+          {form.form}
+        </Text>
+        <Text style={styles.meetEn}>{sense.main}</Text>
+        {sense.hint ? <Text style={[styles.meaningHint, { textAlign: 'center' }]}>{sense.hint}</Text> : null}
+        {form.audio_path ? <PlayButton path={form.audio_path} big /> : null}
+      </View>
     </Frame>
   );
 }
@@ -1213,6 +1256,7 @@ export function AudioPad({
 // second tap.
 // ---------------------------------------------------------------------------
 /** The real meaning, dropping in over the struck guess. */
+const MEET_SENTENCE = FadeInRight.duration(240).easing(Easing.bezier(0.23, 1, 0.32, 1));
 const REAL_MEANING = FadeInDown.duration(240).easing(Easing.bezier(0.23, 1, 0.32, 1));
 
 function TrueFalse({
@@ -2580,6 +2624,9 @@ function SentenceIntro({
   const [options] = useState(() => meaningOptions(sentence, allSentences, allForms));
   const [chosen, setChosen] = useState<string | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
+  // So its picture comes first, on a screen of its own (WordPicture).
+  const art = word ? courseArt(word.lemma_id) : undefined;
+  const [met, setMet] = useState(!art);
 
   // On a screen that introduces a word, only that word answers to a tap — the
   // rest is material she is meant to already have. Otherwise every word does,
@@ -2587,6 +2634,8 @@ function SentenceIntro({
   // than a picture she can't reach), and it is paid for — a peeked word is
   // reported as hinted, which caps its rating (round.ts).
   const tappable = word ? (id: string) => id === word.id : () => true;
+
+  if (word && art && !met) return <WordPicture form={word} art={art} onDone={() => setMet(true)} />;
 
   // A form of more than one word ("sobre gustos no hay nada escrito") is a phrase, not a word.
   const isPhrase = !!word && /\s/.test(word.form.trim());
@@ -2597,51 +2646,54 @@ function SentenceIntro({
       : 'What does the sentence say?';
 
   return (
-    <Frame
-      prompt={prompt}
-      // One voice, read: the card, and him by the prompt as on a gap's card. A
-      // dialogue's first bubble has him already.
-      art={turnCount(sentence.tokens) < 2 ? <TitlePancho /> : undefined}
-      verdict={verdict}
-      canCheck={!!chosen}
-      onCheck={() => setVerdict({ correct: chosen === sentence.id, answer: sentence.en })}
-      onContinue={() =>
-        onAnswered(verdict?.correct ? [] : [(word ?? item.form).id], { hinted: words.peeked })
-      }>
-      {/* The Spanish is already on screen and the answer is its English, so
-          hearing it gives nothing away — it binds the sound to the spelling,
-          which is the whole reason the sentence is read rather than shown. */}
-      {turnCount(sentence.tokens) < 2 ? (
-        <PhraseCard center beside={sentence.audio_path ? <PlayButton path={sentence.audio_path} big /> : null}>
-          <SentenceLine
-            large
+    // After its picture the sentence comes in as the next screen would.
+    <Animated.View entering={art ? MEET_SENTENCE : undefined} style={styles.meetStage}>
+      <Frame
+        prompt={prompt}
+        // One voice, read: the card, and him by the prompt as on a gap's card. A
+        // dialogue's first bubble has him already.
+        art={turnCount(sentence.tokens) < 2 ? <TitlePancho /> : undefined}
+        verdict={verdict}
+        canCheck={!!chosen}
+        onCheck={() => setVerdict({ correct: chosen === sentence.id, answer: sentence.en })}
+        onContinue={() =>
+          onAnswered(verdict?.correct ? [] : [(word ?? item.form).id], { hinted: words.peeked })
+        }>
+        {/* The Spanish is already on screen and the answer is its English, so
+            hearing it gives nothing away — it binds the sound to the spelling,
+            which is the whole reason the sentence is read rather than shown. */}
+        {turnCount(sentence.tokens) < 2 ? (
+          <PhraseCard center beside={sentence.audio_path ? <PlayButton path={sentence.audio_path} big /> : null}>
+            <SentenceLine
+              large
+              sentence={sentence}
+              mark={word?.id}
+              onWord={word || canTap ? words.open : undefined}
+              tappable={tappable}
+            />
+          </PhraseCard>
+        ) : (
+          <SpanishBubble
             sentence={sentence}
             mark={word?.id}
             onWord={word || canTap ? words.open : undefined}
             tappable={tappable}
           />
-        </PhraseCard>
-      ) : (
-        <SpanishBubble
-          sentence={sentence}
-          mark={word?.id}
-          onWord={word || canTap ? words.open : undefined}
-          tappable={tappable}
-        />
-      )}
-      <WordBubble state={words.showing} onClose={words.close} />
-      {word && !words.peeked.length ? (
-        <Text style={styles.peekHint}>Tap the marked word to see what it means</Text>
-      ) : null}
+        )}
+        <WordBubble state={words.showing} onClose={words.close} />
+        {word && !words.peeked.length ? (
+          <Text style={styles.peekHint}>Tap the marked word to see what it means</Text>
+        ) : null}
 
-      <Choices
-        options={options}
-        correctId={sentence.id}
-        chosen={chosen}
-        revealed={verdict !== null}
-        onPick={setChosen}
-      />
-    </Frame>
+        <Choices
+          options={options}
+          correctId={sentence.id}
+          chosen={chosen}
+          revealed={verdict !== null}
+          onPick={setChosen}
+        />
+      </Frame>
+    </Animated.View>
   );
 }
 
@@ -3002,6 +3054,11 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   introArt: { width: 132, height: 112, marginBottom: 4 },
+  meetStage: { flex: 1 },
+  meet: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12, paddingVertical: 12 },
+  meetArt: { width: 220, height: 184, maxWidth: '100%', marginBottom: 8 },
+  meetArticle: { ...font.display[700], fontSize: 26, color: colors.muted },
+  meetEn: { ...font.body[600], fontSize: 20, color: colors.muted, textAlign: 'center', marginTop: -4 },
   // The Spanish leads — it is the form she is being tested on — and the meaning
   // sits under a rule, in the primary's deep tone.
   esHero: {
