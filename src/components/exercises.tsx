@@ -11,7 +11,6 @@ import {
   useState,
 } from 'react';
 import {
-  type ImageSourcePropType,
   Platform,
   Pressable,
   StyleSheet,
@@ -21,7 +20,7 @@ import {
   View,
 } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { KeyboardExtender } from 'react-native-keyboard-controller';
+import { KeyboardExtender, useKeyboardState } from 'react-native-keyboard-controller';
 import Animated, {
   Easing,
   FadeInDown,
@@ -50,8 +49,6 @@ import {
   isCanonical,
   isPhrase,
   meaningOptions,
-  norm,
-  wordsOf,
   missedForms,
   nearMiss,
   type Option,
@@ -80,7 +77,6 @@ import type { AnswerExtra, QueueItem } from '@/lib/round';
 import { DEFAULT_LADDER, type Ladder, RUNG_BUILD_AT } from '@/lib/sentences';
 import { SETTLED_DAYS, buildTiles, wordPool } from '@/lib/session';
 import { clay, colors, font, OUTLINE, pastel, PICKED, radius } from '@/lib/theme';
-import { FlagSun } from '@/components/sticker';
 import Svg, { Path as SvgPath } from 'react-native-svg';
 import { type TipBlock, type TipSpan, tipSpans, tipSteps } from '@/lib/tip-layout';
 import type { Form, Sentence, Tip } from '@/lib/types';
@@ -653,15 +649,14 @@ const SPEAKERS = [
 ];
 let nextSpeaker = 0;
 
-/** Every capybara is fitted into the same box, so the bubble beside it never shifts. */
-const SPEAKER_WIDTH = 84;
-const SPEAKER_HEIGHT = 100;
+/** Every capybara is fitted into the same box, so the bubble beside it never
+ *  shifts. No sun behind him: he is the figure, a bigger one in its place. */
+const SPEAKER_WIDTH = 104;
+const SPEAKER_HEIGHT = 124;
 const TAIL = 11;
 /** The speaking bubble's tail is drawn, so its two slanted sides can carry the bubble's outline. */
 const TAIL_W = TAIL + 4;
 const TAIL_H = TAIL * 2 + 8;
-/** The sun behind the capybara. */
-const SPEAKER_SUN = 150;
 
 /**
  * 1 while the capybara is in, 0 once the keyboard has left no room for him
@@ -703,7 +698,6 @@ export function SpeechBubble({
     <View style={styles.speechRow}>
       {bare ? null : (
         <Animated.View style={speakerRoom} pointerEvents="none">
-          <FlagSun size={SPEAKER_SUN} style={styles.speakerSun} />
           <Image
             source={speaker}
             style={styles.speaker}
@@ -840,10 +834,6 @@ function GapBubbles({
   );
 }
 
-/** The capybara beside a read card's play button, and the sun behind him. */
-const PHRASE_FIGURE = 88;
-const PHRASE_SUN = 120;
-
 function useSpeaker() {
   const [speaker] = useState(() => SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
   return speaker;
@@ -851,72 +841,42 @@ function useSpeaker() {
 
 /**
  * A sentence as the star of the screen: a butter card. `center` is a sentence
- * being read: the capybara sits inside the card, beside its play button
- * (`beside`), so he costs no height of his own. Otherwise (a sentence being
- * completed) he is beside the prompt (TitlePancho) and the card is plain.
+ * being read: its play button (`beside`) over it, on its centre line.
+ * Otherwise (a sentence being completed) the card is plain. Either way the
+ * capybara is beside the prompt (TitlePancho), standing on the card's edge.
  */
 function PhraseCard({
   center,
   beside,
-  figure,
   children,
 }: {
   center?: boolean;
   beside?: React.ReactNode;
-  /** The thing a new word names. It leads the card in place of him, and the
-   *  sentence brings its own play button (`SentenceLine`'s `trailing`). */
-  figure?: ImageSourcePropType;
   children: React.ReactNode;
 }) {
-  const speaker = useSpeaker();
-  if (center && figure) {
-    return (
-      <View style={[styles.phraseCard, styles.phraseCardCentered]}>
-        {/* The meaning lands first, then the sentence says it. */}
-        <Image
-          source={figure}
-          style={styles.phraseCardHero}
-          contentFit="contain"
-          cachePolicy={WORD_ART_CACHE}
-          accessible={false}
-        />
-        {children}
-      </View>
-    );
-  }
-  if (center) {
-    return (
-      <View style={[styles.phraseCard, styles.phraseCardCentered]}>
-        {/* The play button stays on the sentence's centre line; he stands just left of it, facing it. */}
-        <View style={styles.phraseCardHead}>
-          <View pointerEvents="none" style={styles.phraseCardBeside}>
-            <FlagSun size={PHRASE_SUN} color={colors.card} opacity={0.7} style={styles.phraseCardSun} />
-            <Image source={speaker} style={styles.phraseCardFigure} contentFit="contain" accessible={false} />
-          </View>
-          {beside}
-        </View>
-        {children}
-      </View>
-    );
-  }
-  return <View style={[styles.phraseCard, styles.phraseCardPlain]}>{children}</View>;
+  return (
+    <View style={[styles.phraseCard, center ? styles.phraseCardCentered : styles.phraseCardPlain]}>
+      {center && beside ? <View style={styles.phraseCardHead}>{beside}</View> : null}
+      {children}
+    </View>
+  );
 }
 
 /** The capybara at the end of the prompt's line on a sentence being completed:
  *  he takes the room the title leaves instead of a row of his own over the
  *  card. He stands over the card's top edge, above its sentence, so the row
  *  barely grows.
- *  Short of room (the keyboard), he fades the way the bubble's capybara does. */
+ *  He stays when the keyboard is up: the bubble's capybara fades to give
+ *  the line his width, but this one is in the title's row and takes no room
+ *  the field or the card could use. */
 const TITLE_ART = 116;
 
 function TitlePancho() {
   const speaker = useSpeaker();
-  const shown = useMakeRoom();
-  const fade = useAnimatedStyle(() => ({ opacity: shown.get() }));
   return (
-    <Animated.View pointerEvents="none" style={[styles.titleArt, fade]}>
+    <View pointerEvents="none" style={styles.titleArt}>
       <Image source={speaker} style={styles.titleArtImage} contentFit="contain" accessible={false} />
-    </Animated.View>
+    </View>
   );
 }
 
@@ -2108,6 +2068,9 @@ function useSpanishField({
   const editable = verdict === null;
   const letters = editable && NEEDS_ACCENT.test(answer.normalize('NFC'));
   const onKeyboard = letters && Platform.OS === 'ios';
+  // Docked keys are a row of the keyboard: with it down they would be left
+  // stuck to the bottom of the screen on their own.
+  const keyboardShown = useKeyboardState((s) => s.isVisible);
 
   const insert = (letter: string) => {
     const { start, end } = selection.current;
@@ -2176,9 +2139,11 @@ function useSpanishField({
       />
     ),
     accents: onKeyboard ? (
-      <KeyboardExtender>
-        <View style={styles.accentBar}>{keys}</View>
-      </KeyboardExtender>
+      keyboardShown ? (
+        <KeyboardExtender>
+          <View style={styles.accentBar}>{keys}</View>
+        </KeyboardExtender>
+      ) : null
     ) : letters ? (
       <View style={styles.accentRow}>{keys}</View>
     ) : null,
@@ -2607,8 +2572,10 @@ function SentenceIntro({
 }) {
   const sentence = item.sentence!;
   const word = item.introduces;
-  // This is where a word is taught now, so its picture comes with it.
-  const art = word ? courseArt(word.lemma_id) : undefined;
+  // The new word's picture is in the bubble a tap on it opens, never on the
+  // sentence: on the card it reads as the picture of the whole sentence, and
+  // the wrong meanings name the same word, so it pointed at them as much as
+  // at the right one ("Un helado de chocolate" under a chocolate bar).
   const words = useWordPopover(lookupWith(lexicon, allForms));
   const [options] = useState(() => meaningOptions(sentence, allSentences, allForms));
   const [chosen, setChosen] = useState<string | null>(null);
@@ -2632,6 +2599,9 @@ function SentenceIntro({
   return (
     <Frame
       prompt={prompt}
+      // One voice, read: the card, and him by the prompt as on a gap's card. A
+      // dialogue's first bubble has him already.
+      art={turnCount(sentence.tokens) < 2 ? <TitlePancho /> : undefined}
       verdict={verdict}
       canCheck={!!chosen}
       onCheck={() => setVerdict({ correct: chosen === sentence.id, answer: sentence.en })}
@@ -2641,35 +2611,14 @@ function SentenceIntro({
       {/* The Spanish is already on screen and the answer is its English, so
           hearing it gives nothing away — it binds the sound to the spelling,
           which is the whole reason the sentence is read rather than shown. */}
-      {/* The picture takes the capybara's place on the card; a dialogue has
-          no capybara, so there it sits over the bubble. */}
-      {art && turnCount(sentence.tokens) >= 2 ? (
-        <Image
-          source={art}
-          style={styles.teachArt}
-          contentFit="contain"
-          cachePolicy={WORD_ART_CACHE}
-          accessibilityIgnoresInvertColors
-        />
-      ) : null}
       {turnCount(sentence.tokens) < 2 ? (
-        <PhraseCard
-          center
-          figure={art}
-          beside={sentence.audio_path && !art ? <PlayButton path={sentence.audio_path} big /> : null}>
+        <PhraseCard center beside={sentence.audio_path ? <PlayButton path={sentence.audio_path} big /> : null}>
           <SentenceLine
             large
             sentence={sentence}
             mark={word?.id}
             onWord={word || canTap ? words.open : undefined}
             tappable={tappable}
-            trailing={
-              art && sentence.audio_path ? (
-                <View style={styles.trailingPlay}>
-                  <PlayButton path={sentence.audio_path} small />
-                </View>
-              ) : undefined
-            }
           />
         </PhraseCard>
       ) : (
@@ -2702,19 +2651,6 @@ function SentenceIntro({
 // fits the grammar would do.
 /** How many words the tile bank offers when the blank is filled from tiles. */
 const GAP_TILES = 8;
-
-/** The English with the answer blanked, where English uses the Spanish word
- *  as it is ("a medialuna") instead of translating it. A word that only looks
- *  the same — "a", "me", "come" — is left alone: its translation is in the
- *  English too ("to", "eats"), which is how it can be told apart. */
-function blankIn(english: string, answer: string, target: Form) {
-  const own = new Set(wordsOf(answer).map(norm).filter(Boolean));
-  const said = new Set(wordsOf(english.replace(/[^\p{L}\p{M}'’\s]/gu, ' ')).map(norm));
-  if (own.size === 0 || ![...own].every((w) => said.has(w))) return english;
-  const meaning = wordsOf(shownMeaning(target).text.replace(/\([^)]*\)/g, ' ')).map(norm);
-  if (meaning.some((w) => said.has(w) && !own.has(w))) return english;
-  return english.replace(/[\p{L}\p{M}'’]+/gu, (w) => (own.has(norm(w)) ? '___' : w));
-}
 
 /**
  * The sentence with one word blanked out, filled three ways. Which one she
@@ -2757,10 +2693,9 @@ function SentenceGap({
 
   const answer = index >= 0 ? tokenWord(sentence.tokens[index]) : target.form;
   // The English is what makes the gap one answer and not any word that fits
-  // ("¿Tenés ___?"). But a word English borrowed whole — "a medialuna" — would
-  // be the answer printed under the question, so until the verdict that word
-  // is blanked in the English too.
-  const english = verdict ? sentence.en : blankIn(sentence.en, answer, target);
+  // ("¿Tenés ___?"), so it is never blanked: a word the English spells out —
+  // "a medialuna", "drink mate" — never gets a gap (session.ts, `fairGap`).
+  const english = sentence.en;
   const typed = input.trim();
   const filled = fill === 'typed' ? typed || undefined : options.find((o) => o.id === chosen)?.label;
   const correct = fill === 'typed' ? !!graded?.correct : chosen === target.id;
@@ -3067,7 +3002,6 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   introArt: { width: 132, height: 112, marginBottom: 4 },
-  teachArt: { width: 148, height: 124, alignSelf: 'center' },
   // The Spanish leads — it is the form she is being tested on — and the meaning
   // sits under a rule, in the primary's deep tone.
   esHero: {
@@ -3122,7 +3056,6 @@ const styles = StyleSheet.create({
   // same for every one.
   speechRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   speaker: { width: SPEAKER_WIDTH, height: SPEAKER_HEIGHT, transform: [{ scaleX: -1 }] },
-  speakerSun: { left: (SPEAKER_WIDTH - SPEAKER_SUN) / 2, top: (SPEAKER_HEIGHT - SPEAKER_SUN) / 2 },
   // The bubble is a butter sticker, a little crooked; the tail leans with it.
   bubbleWrap: { flex: 1, transform: [{ rotate: '-1.5deg' }] },
   // Bare, the first bubble is as wide as its line, its tail clear of the page edge.
@@ -3195,24 +3128,11 @@ const styles = StyleSheet.create({
   // its sentence (the gap 18, the card's 10 and its padding 22), standing on the card like a sticker.
   titleArt: { width: TITLE_ART, height: TITLE_ART, marginTop: -20, marginBottom: -48, marginRight: -8 },
   titleArtImage: { width: TITLE_ART, height: TITLE_ART },
-  // Read, not completed: nothing pokes out above, so the card starts right under the prompt.
-  phraseCardCentered: { marginTop: 8, paddingTop: 14 },
-  phraseCardHead: { alignSelf: 'stretch', minHeight: PHRASE_FIGURE, alignItems: 'center', justifyContent: 'center' },
-  // Anchored to the centre line, then pushed left past the big play button's half-width (33) and a gap.
-  phraseCardBeside: {
-    position: 'absolute',
-    right: '50%',
-    marginRight: 33 + 10,
-    top: 0,
-    width: PHRASE_FIGURE,
-    height: PHRASE_FIGURE,
-  },
-  phraseCardSun: { left: (PHRASE_FIGURE - PHRASE_SUN) / 2, top: (PHRASE_FIGURE - PHRASE_SUN) / 2 },
-  // The art looks left; mirrored, he looks at the button.
-  phraseCardFigure: { width: PHRASE_FIGURE, height: PHRASE_FIGURE, transform: [{ scaleX: -1 }] },
-  phraseCardHero: { width: 176, height: 132, marginBottom: 4 },
+  // Read: the capybara stands on its top edge like the completed card's, at the
+  // right, clear of the play button on the centre line.
+  phraseCardCentered: { marginTop: 10, paddingTop: 18 },
+  phraseCardHead: { alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', marginBottom: 6 },
   // Sits on the sentence's last line, centred on the words rather than their baseline.
-  trailingPlay: { alignSelf: 'center', marginLeft: 4 },
   phraseCardEn: { ...font.body[700], fontSize: 15, lineHeight: 20, color: colors.muted, textAlign: 'center', marginTop: 4 },
   phraseCardSpeak: { position: 'absolute', right: 14, top: 14 },
   // Listen: one pill, play at one end, the slow button at the other.

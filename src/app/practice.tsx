@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { BackHandler, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { BackHandler, Keyboard, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
   FadeIn,
@@ -751,6 +751,8 @@ export default function Practice() {
   const [quitting, setQuitting] = useState(false);
   const midClass = !!queue && queue.length > 0 && !finished && !unsaved && !loadFailed && gate === null;
   const close = () => {
+    // A typed answer's keyboard would stay up over the sheet's buttons.
+    Keyboard.dismiss();
     if (midClass && index > 0) setQuitting(true);
     else goBack('/home');
   };

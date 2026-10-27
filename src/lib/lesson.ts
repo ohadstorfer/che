@@ -424,10 +424,10 @@ function reviewItems(
     if (!target) continue;
     // Same rule as the practice round: the gap tests its word, tiles test every
     // word, and reading for meaning tests nothing hard enough to count.
-    const mode = modeForRung(rungFor(sentence, seen, ladder), sentence, ladder);
-    if (GAP_MODES.includes(mode)) covered.add(target.id);
-    else if (!MEANING_MODES.includes(mode)) for (const id of sentence.form_ids) covered.add(id);
-    out.push({ ...sentenceItem(data, sentence, mode, target), review: true });
+    const item = sentenceItem(data, sentence, modeForRung(rungFor(sentence, seen, ladder), sentence, ladder), target);
+    if (GAP_MODES.includes(item.mode)) covered.add(item.form.id);
+    else if (!MEANING_MODES.includes(item.mode)) for (const id of sentence.form_ids) covered.add(id);
+    out.push({ ...item, review: true });
   }
 
   // Due words no sentence took: one production screen each — recognition alone
@@ -534,10 +534,11 @@ export function recapItems(
       sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && chosenIds.has(f.id) && !used.has(f.id));
     if (!target) continue;
     const mode = modeForRung(atLeast(rungFor(sentence, seen, ladder), 'gap'), sentence, ladder);
-    const tests = GAP_MODES.includes(mode) ? [target.id] : sentence.form_ids.filter((id) => chosenIds.has(id));
+    const item = sentenceItem(data, sentence, mode, target);
+    const tests = GAP_MODES.includes(item.mode) ? [item.form.id] : sentence.form_ids.filter((id) => chosenIds.has(id));
     if (tests.some((id) => used.has(id))) continue;
     for (const id of tests) used.add(id);
-    out.push({ ...sentenceItem(data, sentence, mode, target), review: true });
+    out.push({ ...item, review: true });
     if (out.length >= count) break;
   }
 

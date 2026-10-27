@@ -9,6 +9,7 @@ import {
   sharesMeaning,
   shuffle,
   tokenIndexOf,
+  tokenWord,
   wordsOf,
 } from './answers';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -691,6 +692,38 @@ export function matchingBlock(forms: Form[]): SessionItem | null {
   return { form: group[0], state: null, mode: 'matching', direction: 'es_to_en', group };
 }
 
+/** Whether the English under a gap spells out the word that fills it:
+ *  "Tomamos ___" over "We drink mate". */
+function spelledInEnglish(sentence: Sentence, form: Form) {
+  const index = tokenIndexOf(sentence, form.id);
+  const own = wordsOf(index >= 0 ? tokenWord(sentence.tokens[index]) : form.form)
+    .map(norm)
+    .filter(Boolean);
+  const said = new Set(wordsOf(sentence.en.replace(/[^\p{L}\p{M}'’\s]/gu, ' ')).map(norm));
+  return own.length > 0 && own.every((w) => said.has(w));
+}
+
+/** Whether a word can be the blank: the English under it doesn't answer it. */
+const fairBlank = (sentence: Sentence, form: Form) => !selfGlossed(form) && !spelledInEnglish(sentence, form);
+
+/**
+ * The word a gap blanks, and whether it stays a gap. A word the English spells
+ * out — chocolate, empanada, mate, bar, "no" — is the answer printed under
+ * the question, and hiding it there too leaves one any noun answers ("¿Tenés
+ * ___?" / "Do you have any ___?"). So the gap moves to another word of the
+ * sentence, the one she is most overdue on; with none, the sentence is built
+ * instead, which still tests that word along with the rest.
+ */
+function fairGap(data: LearnerData, sentence: Sentence, mode: ExerciseMode, target: Form) {
+  if (!GAP_MODES.includes(mode) || fairBlank(sentence, target)) return { mode, target };
+  const dueAt = (f: Form) => data.stateByForm.get(f.id)?.due_at ?? '\uffff';
+  const other = [sentence.target_form_id, ...sentence.form_ids]
+    .map((id) => data.formById.get(id))
+    .filter((f): f is Form => !!f && drillable(f) && tokenIndexOf(sentence, f.id) >= 0 && fairBlank(sentence, f))
+    .sort((a, b) => (dueAt(a) < dueAt(b) ? -1 : dueAt(a) > dueAt(b) ? 1 : 0))[0];
+  return other ? { mode, target: other } : { mode: 'sentence_build' as ExerciseMode, target };
+}
+
 /** A sentence exercise drills every form inside the sentence — `group`, the
  *  same way a matching block drills its four — keyed on the word it is for. */
 export function sentenceItem(
@@ -700,6 +733,7 @@ export function sentenceItem(
   target: Form,
   introduces?: Form,
 ): SessionItem {
+  ({ mode, target } = fairGap(data, sentence, mode, target));
   const group: Form[] = [];
   const groupStates: FormState[] = [];
   for (const id of sentence.form_ids) {
@@ -843,10 +877,15 @@ export async function buildSession(userId: string): Promise<SessionData> {
       const gapForm = dueIds.has(target.id)
         ? target
         : (sentence.form_ids.map((id) => data.formById.get(id)).find((f) => f && dueIds.has(f.id)) ?? target);
+      // Booked off the item: a gap the English would answer moves to another
+      // word, or becomes a build (`fairGap`).
       const mode = modeForRung(rungFor(sentence, seen, ladder), sentence, ladder);
-      if (GAP_MODES.includes(mode)) covered.add(gapForm.id);
-      if (mode === 'sentence_build' || mode === 'sentence_listen') for (const id of sentence.form_ids) covered.add(id);
-      return [[sentenceItem(data, sentence, mode, gapForm)]];
+      const item = sentenceItem(data, sentence, mode, gapForm);
+      if (GAP_MODES.includes(item.mode)) covered.add(item.form.id);
+      if (item.mode === 'sentence_build' || item.mode === 'sentence_listen') {
+        for (const id of sentence.form_ids) covered.add(id);
+      }
+      return [[item]];
     },
   );
   const onTheTable = new Set(sentenceGroups.flatMap((g) => g.map((i) => i.sentence!.id)));
@@ -955,8 +994,8 @@ const GAP_SCAFFOLD_MIN = 3;
  *     the fast ladder (`rungGapAt` is 0 there) and for any unit a placement
  *     let her skip;
  *   - at least `GAP_SCAFFOLD_MIN` words are left standing around the blank;
- *   - the word is not its own English, or the sentence's translation under the
- *     blank spells out the answer (see `loanwordExercises`);
+ *   - the word is not its own English, and the sentence's translation under
+ *     the blank doesn't spell out the answer (`fairBlank`);
  *   - the sentence is not already on the round's table;
  *   - and the word has been recognised on an earlier screen in its own group,
  *     so a typed gap is never the first thing a round asks.
@@ -984,6 +1023,7 @@ export function typedGap(
         passesOfSentence(s) >= 1 &&
         s.form_ids.includes(form.id) &&
         tokenIndexOf(s, form.id) >= 0 &&
+        fairBlank(s, form) &&
         scaffoldOf(s, form) >= GAP_SCAFFOLD_MIN &&
         !hasLockedGlue(s, seen, ladder),
     )
@@ -1101,7 +1141,11 @@ export function promotedMode(
   switch (item.mode) {
     case 'sentence_meaning':
     case 'sentence_meaning_tiles':
-      return item.sentence && item.sentence.tokens.some((t) => t.form_ids.includes(item.form.id))
+      // Not over a word the English spells out: it would answer the blank
+      // (`fairGap`), and a promotion keeps the word it was for.
+      return item.sentence &&
+        item.sentence.tokens.some((t) => t.form_ids.includes(item.form.id)) &&
+        fairBlank(item.sentence, item.form)
         ? 'sentence_gap'
         : null;
     case 'sentence_gap':

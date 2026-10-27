@@ -14,6 +14,7 @@ import {
   modeForRung,
   promoteTail,
   promotedMode,
+  sentenceItem,
   tierOf,
   typedGap,
 } from '../../../src/lib/session.ts';
@@ -551,4 +552,35 @@ test('a mistake brings back one word, its own first, and a round stops re-asking
   assert.equal(pickRetry({ form: a }, [a, b], new Set(['a', 'b']), tired, 0), b);
   // The round has used its re-asks.
   assert.equal(pickRetry({ form: a }, [a], new Set(['a']), none, MAX_ROUND_RETRIES), undefined);
+});
+
+test('a gap never blanks a word its English spells out: it moves, or the sentence is built', () => {
+  const data = learner();
+  const both = data.sentences.find((s) => s.es === '¿Mate o café?');
+  const mate = formOf('mate');
+  const cafe = formOf('café');
+
+  // "¿___ o café?" over "Mate or coffee?" hands the answer over: the gap goes to café.
+  const moved = sentenceItem(data, both, 'sentence_gap_typed', mate);
+  assert.equal(moved.mode, 'sentence_gap_typed');
+  assert.equal(moved.form.id, cafe.id);
+  // A word the English doesn't spell keeps its gap.
+  assert.equal(sentenceItem(data, both, 'sentence_gap', cafe).form.id, cafe.id);
+  // Anything that isn't a gap is left as it was.
+  assert.equal(sentenceItem(data, both, 'sentence_meaning', mate).form.id, mate.id);
+
+  // With no other word to blank, she builds the sentence instead.
+  const alone = {
+    ...both,
+    tokens: both.tokens.map((t) => (t.form_ids.includes(cafe.id) ? { ...t, form_ids: [] } : t)),
+    form_ids: [mate.id],
+  };
+  const built = sentenceItem(data, alone, 'sentence_gap', mate);
+  assert.equal(built.mode, 'sentence_build');
+  assert.equal(built.form.id, mate.id);
+
+  // Nor does the tail promote a meaning screen over it into that gap.
+  const meaning = (form) => ({ form, state: null, mode: 'sentence_meaning', direction: 'es_to_en', sentence: both });
+  assert.equal(promotedMode(meaning(mate), new Map()), null);
+  assert.equal(promotedMode(meaning(cafe), new Map()), 'sentence_gap');
 });

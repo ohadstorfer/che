@@ -723,6 +723,9 @@ export function missedForms(
 
 export type Option = { id: string; label: string };
 
+/** A superlative's ending, on a `norm`ed form: lindísimo, buenísimas. */
+const SUPERLATIVE = /isim[oa]s?$/;
+
 /**
  * Other forms of the same word — the conjugation, the plural — that make the
  * best wrong answers there are: picking between `ganemos` and `ganamos` is the
@@ -732,14 +735,19 @@ export type Option = { id: string; label: string };
  * Same shape only (a word against words), never a form that reads the same once
  * accents are off, and the ones in the same person and number first — those
  * differ in nothing but the tense or mood, which is the point being tested.
+ * Not a superlative of a plain word, or the plain word of one: `lindísimo`
+ * against `lindo` is a different meaning ("really cute"), not grammar, and
+ * reads to her as the same answer twice.
  */
 export function siblingsOf(target: Form, pool: Iterable<Form>): Form[] {
   const size = wordsOf(target.form).length;
   const out: Form[] = [];
   const seen = new Set([norm(target.form)]);
+  const superlative = SUPERLATIVE.test(norm(target.form));
   for (const f of pool) {
     if (f.lemma_id !== target.lemma_id || f.id === target.id || f.is_glue || f.bound) continue;
     if (wordsOf(f.form).length !== size || seen.has(norm(f.form))) continue;
+    if (SUPERLATIVE.test(norm(f.form)) !== superlative) continue;
     if (readsTheSame(target, f)) continue;
     seen.add(norm(f.form));
     out.push(f);
@@ -892,11 +900,13 @@ export function gapOptions(
   const pool =
     sameShape.length >= count - 1 ? sameShape : [...sameShape, ...decoys.filter((f) => !shaped.has(f))];
 
-  // Up to two of the answer's own other forms (three in a bank of tiles) —
-  // never one that would make the sentence another accepted answer. These may
-  // share the answer's meaning: `disfrutás` and `disfrutes` both say "you
-  // enjoy", and choosing the one the sentence needs is the whole question.
-  const most = count > 4 ? 3 : Math.min(2, count - 2);
+  // One of the answer's own other forms (three in a bank of tiles) — never one
+  // that would make the sentence another accepted answer. These may share the
+  // answer's meaning: `disfrutás` and `disfrutes` both say "you enjoy", and
+  // choosing the one the sentence needs is the whole question. Only one among
+  // four choices: with two, three of the four read alike and the screen looks
+  // like a trick rather than a question.
+  const most = count > 4 ? 3 : Math.min(1, count - 2);
   const siblings = siblingsOf(target, lexicon ?? allForms)
     .filter((f) => norm(f.form) !== norm(answer) && !fitsTooWell(f))
     .slice(0, Math.max(0, most));

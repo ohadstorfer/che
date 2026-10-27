@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { LayoutChangeEvent, StyleSheet, Text, TextProps, TextStyle } from 'react-native';
 
 type Props = TextProps & {
@@ -19,6 +19,8 @@ export function FitText({ lines = 1, minScale = 0.6, style, children, onLayout, 
   const lineHeight = flat.lineHeight ?? size * 1.2;
   const [scale, setScale] = useState(1);
   const [settled, setSettled] = useState(false);
+  /** How wide it was when it settled. */
+  const settledWidth = useRef(0);
 
   // New words: measure again from full size.
   useLayoutEffect(() => {
@@ -28,11 +30,27 @@ export function FitText({ lines = 1, minScale = 0.6, style, children, onLayout, 
 
   const handleLayout = (e: LayoutChangeEvent) => {
     onLayout?.(e);
-    const h = e.nativeEvent.layout.height;
-    if (settled) return;
+    const { width: w, height: h } = e.nativeEvent.layout;
     const tooTall = h > lines * lineHeight * scale + 1;
+    if (settled) {
+      // The first measure can come while its box is still narrow — a screen
+      // sliding in, a capybara stepping aside — and a word squeezed into that
+      // breaks over lines and shrinks to the floor ("please" at half size in
+      // a bubble with room for it ten times). More room later: start over.
+      if (scale < 1 && w > settledWidth.current + 1) {
+        setScale(1);
+        setSettled(false);
+      } else if (tooTall && scale > minScale) {
+        setScale(Math.max(minScale, scale - 0.06));
+        setSettled(false);
+      }
+      return;
+    }
     if (tooTall && scale > minScale) setScale(Math.max(minScale, scale - 0.06));
-    else setSettled(true);
+    else {
+      settledWidth.current = w;
+      setSettled(true);
+    }
   };
 
   const fitted: TextStyle =

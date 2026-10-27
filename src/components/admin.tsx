@@ -4,6 +4,7 @@ import { Platform, Pressable, ScrollView, StyleSheet, Text, View, type ViewStyle
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { playAudio } from '@/lib/audio';
+import { resetTo } from '@/lib/nav';
 import { colors, font, press, radius } from '@/lib/theme';
 import type { ContentStatus } from '@/lib/types';
 
@@ -71,7 +72,7 @@ export function AdminScreen({
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <View style={styles.bar}>
-        <Pressable onPress={() => router.dismissTo('/home')} hitSlop={8} accessibilityLabel="Back to the app">
+        <Pressable onPress={() => resetTo('/home')} hitSlop={8} accessibilityLabel="Back to the app">
           <Text style={styles.brand}>che · admin</Text>
         </Pressable>
         <View style={styles.nav}>
@@ -88,6 +89,13 @@ export function AdminScreen({
             );
           })}
         </View>
+        <Pressable
+          onPress={() => resetTo('/home')}
+          hitSlop={8}
+          style={({ pressed }) => [styles.back, styles.close, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}
+          accessibilityLabel="Close admin">
+          <Ionicons name="close" size={20} color={colors.ink} />
+        </Pressable>
       </View>
       <ScrollView contentContainerStyle={styles.page} keyboardShouldPersistTaps="handled">
         <View style={styles.head}>
@@ -243,12 +251,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 20,
     paddingHorizontal: 24,
+    paddingRight: 64,
     paddingVertical: 10,
     backgroundColor: colors.card,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
     flexWrap: 'wrap',
   },
+  // Pinned to the top-right corner so it stays put however the nav wraps.
+  close: { position: 'absolute', top: 6, right: 16, backgroundColor: colors.bg },
   detailBar: { gap: 12, paddingHorizontal: 16, flexWrap: 'nowrap' },
   detailTitle: { ...font.display[800], fontSize: 18, color: colors.ink, letterSpacing: -0.2 },
   detailSubtitle: { fontSize: 13, color: colors.muted },

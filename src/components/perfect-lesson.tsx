@@ -84,9 +84,6 @@ export function PerfectLesson({ onNext }: { onNext: () => void }) {
           <In delay={1250}>
             <Text style={styles.line}>Not a single mistake.</Text>
           </In>
-          <In delay={1330}>
-            <Text style={styles.es}>¡De diez!</Text>
-          </In>
         </Pressable>
 
         <In delay={1450} style={styles.actions}>
@@ -111,7 +108,6 @@ const styles = StyleSheet.create({
   banner: { backgroundColor: colors.primary, borderRadius: 18, paddingHorizontal: 22, paddingVertical: 10, boxShadow: clay.float },
   bannerText: { ...font.display[900], fontSize: 38, lineHeight: 42, color: colors.onPrimary, textAlign: 'center' },
   line: { ...font.body[800], fontSize: 18, color: colors.ink, textAlign: 'center' },
-  es: { ...font.display[800], fontSize: 16, color: colors.primaryDark, textAlign: 'center', opacity: 0.85 },
   actions: { alignSelf: 'center', width: '100%', maxWidth: 320, paddingHorizontal: 24, paddingBottom: 16 },
 });
 
