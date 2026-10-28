@@ -497,9 +497,35 @@ export interface Graded {
  * accepts. The four-choice and tile versions of this screen already refuse
  * both (`gapOptions` drops anything that shares the answer's meaning or would
  * make the sentence read as written); typing it should not be the one way in.
+ *
+ * Except the one thing those screens refuse to offer for the same reason: a
+ * word that makes the sentence one of its accepted answers. "¿Cuánto cuestan?"
+ * is as right as "¿Cuánto salen?" when the sentence lists it, so it is
+ * accepted, with the note naming the word the blank was for. By ear only what
+ * was said counts.
  */
-export function gradeGap(input: string, form: Form, allForms: Form[]): Graded {
-  return gradeWord(input, form, allForms, meaningOf(form), { only: true });
+export function gradeGap(
+  input: string,
+  form: Form,
+  allForms: Form[],
+  sentence?: Sentence,
+  { byEar = false }: { byEar?: boolean } = {},
+): Graded {
+  const graded = gradeWord(input, form, allForms, meaningOf(form), { only: true });
+  if (graded.correct || !sentence || byEar) return graded;
+  const index = tokenIndexOf(sentence, form.id);
+  if (index < 0) return graded;
+  const { before, after } = gapSides(sentence, index);
+  const got = [...before, ...answerWords(input), ...after];
+  const fits = acceptedAnswers(sentence).some((a) => sameWords(got, a));
+  return fits ? { correct: true, note: 'synonym', expected: tokenWord(sentence.tokens[index]) } : graded;
+}
+
+/** The sentence's words on either side of a gap at token `index`. */
+function gapSides(sentence: Sentence, index: number) {
+  const around = (from: number, to: number) =>
+    sentence.tokens.slice(from, to).flatMap((t) => answerWords(tokenWord(t)));
+  return { before: around(0, index), after: around(index + 1, sentence.tokens.length) };
 }
 
 export function gradeTyped(input: string, form: Form, allForms: Form[], meaning = meaningOf(form)): Graded {
@@ -862,10 +888,7 @@ export function gapOptions(
   // read into words once; a candidate then costs only its own words, and only
   // an accepted answer of the length it would make is compared at all. Every
   // form of her deck is asked this before the screen can be drawn.
-  const around = (from: number, to: number) =>
-    sentence.tokens.slice(from, to).flatMap((t) => answerWords(tokenWord(t)));
-  const before = index >= 0 ? around(0, index) : [];
-  const after = index >= 0 ? around(index + 1, sentence.tokens.length) : [];
+  const { before, after } = index >= 0 ? gapSides(sentence, index) : { before: [], after: [] };
   const fitsTooWell = (f: Form) => {
     if (index < 0) return false;
     const own = answerWords(f.form);

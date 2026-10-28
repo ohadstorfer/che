@@ -2754,7 +2754,7 @@ function SentenceGap({
   const tone = verdict ? (correct ? 'right' : 'wrong') : undefined;
 
   const check = () => {
-    const g = fill === 'typed' ? gradeGap(typed, target, allForms) : null;
+    const g = fill === 'typed' ? gradeGap(typed, target, allForms, sentence, { byEar }) : null;
     setGraded(g);
     setVerdict({
       correct: g ? g.correct : chosen === target.id,

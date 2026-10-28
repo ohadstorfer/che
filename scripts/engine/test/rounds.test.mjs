@@ -391,6 +391,29 @@ test('a blank accepts the word that fits the sentence, and nothing else', () => 
   );
 });
 
+test('a blank accepts a word that makes the sentence one of its accepted answers', () => {
+  const salen = { id: 'salen', form: 'salen', gloss_en: 'cost; they go out', lemma_id: 'salir', pos: 'verb', features: {} };
+  const cuanto = { id: 'cuanto', form: 'cuánto', gloss_en: 'how much', lemma_id: 'cuanto', pos: 'adv', features: {} };
+  const deck = [salen, cuanto, ...forms];
+  const sentence = {
+    id: 's',
+    es: '¿Cuánto salen?',
+    es_alt: ['¿Cuánto cuestan?'],
+    en: 'How much are they?',
+    en_alt: [],
+    tokens: [
+      { surface: '¿Cuánto', form_ids: ['cuanto'] },
+      { surface: 'salen?', form_ids: ['salen'] },
+    ],
+  };
+
+  assert.deepEqual(gradeGap('cuestan', salen, deck, sentence), { correct: true, note: 'synonym', expected: 'salen' });
+  assert.equal(gradeGap('salen', salen, deck, sentence).note, undefined, 'the word itself takes no note');
+  assert.equal(gradeGap('cuesta', salen, deck, sentence).correct, false, 'only what makes an accepted answer');
+  assert.equal(gradeGap('cuestan', salen, deck, sentence, { byEar: true }).correct, false, 'by ear, only what was said');
+  assert.equal(gradeGap('cuestan', salen, deck).correct, false, 'no sentence, no alternatives');
+});
+
 test('a failed English build blames the word the round is drilling', () => {
   const data = learner();
   const deck = forms.filter((f) => !f.is_glue && f.pos !== 'propn');
