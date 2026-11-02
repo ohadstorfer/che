@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
+import { usePostHog } from 'posthog-react-native';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BackHandler, Keyboard, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
@@ -77,8 +78,9 @@ import { preloadCourseArt } from '@/lib/word-art';
 
 /** How long a class may take to load before it is called off. A class far
  *  along with nothing on the phone yet is dozens of sentence blocks; what has
- *  arrived by then is kept, so trying again picks up where this left off. */
-const LOAD_TIMEOUT_MS = 20_000;
+ *  arrived by then is kept, so trying again picks up where this left off.
+ *  Long enough for a stuck read to be asked again (deadline-fetch.ts). */
+const LOAD_TIMEOUT_MS = 25_000;
 /** How long the gate's answer is waited for. A streak that can't be read is
  *  not a reason to keep her from the class. */
 const GATE_TIMEOUT_MS = 4000;
@@ -211,6 +213,7 @@ export default function Practice() {
   // mid-session would swap out the exercise she is answering.
   const userId = profile?.id;
   const round = useRound(userId);
+  const posthog = usePostHog();
   const finishing = useRef(false);
   /** This round was a unit check she passed: the moment to ask for a review. */
   const passedCheck = useRef(false);
@@ -297,6 +300,7 @@ export default function Practice() {
       return { data: { ...free, items: free.items.map((it) => ({ ...it, filler: true })) }, kind: 'free' };
     };
 
+    const loadMode = testMode ?? (lessonId ? 'lesson' : (params.mode ?? 'practice'));
     timingStart('class');
     // A load that never answers is a load that failed: she is told, and can
     // try again, rather than left looking at the doorway.
@@ -304,6 +308,7 @@ export default function Practice() {
       if (cancelled) return;
       cancelled = true;
       console.warn('lesson took too long to load');
+      posthog.capture('class_load_failed', { reason: 'timeout', mode: loadMode, attempt });
       setLoadFailed(true);
       setQueue([]);
     }, LOAD_TIMEOUT_MS);
@@ -337,6 +342,12 @@ export default function Practice() {
       else if (e instanceof PlacementClosedError) router.replace('/home');
       else {
         console.warn('lesson failed to load', e);
+        posthog.capture('class_load_failed', {
+          reason: 'error',
+          mode: loadMode,
+          attempt,
+          message: String((e as Error)?.message ?? e).slice(0, 120),
+        });
         // Whatever it was, it says so rather than spinning for good.
         setLoadFailed(true);
         setQueue([]);

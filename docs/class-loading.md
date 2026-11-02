@@ -278,7 +278,8 @@ A read of the loading path from her side, and what was done about each thing.
 | was | now | where |
 |---|---|---|
 | A class that failed to load stayed on the doorway for good (only tests said so) | Every kind of round says "Couldn't load your class", with **Try again** and **Back home** | `practice.tsx` (`loadFailed`, `tryAgain`) |
-| A request that never answered: the same | The load is called off after 20 s (`LOAD_TIMEOUT_MS`) and shows the same screen; blocks that did arrive are kept, so trying again resumes | `practice.tsx` |
+| A request that never answered: the same | The load is called off after 25 s (`LOAD_TIMEOUT_MS`) and shows the same screen; blocks that did arrive are kept, so trying again resumes | `practice.tsx` |
+| One stuck read among a class's dozen failed the class, because a read waited as long as the load (2026-11-02: replies stuck 12–19 s, server answered in ms) | Reads are asked again after 6 s, twice, the last try waiting the full 20 s; writes still go once. A failed load is sent to PostHog as `class_load_failed` | `deadline-fetch.ts`, `practice.tsx` |
 | A streak gate that never answered held the doorway | Answered by the clock after 4 s (`GATE_TIMEOUT_MS`), and a late answer is dropped rather than landing on the class | `practice.tsx` |
 | A tap during the warm-up started a second full load beside it | The warm-up's read is **held** and the class takes it — still on its way if she was quick | `learner-ready.ts`, `session.ts` (`loadLearner` / `readLearnerAhead`) |
 | The warm-up read her records and threw them away; the class read them again | One read: taken once, for the same class, within 2 minutes, and not after anything of hers was written (`learnerChanged` in `round.ts`, `recordShown`) | same |
