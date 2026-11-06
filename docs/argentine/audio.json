@@ -4661,6 +4661,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:47:31.343Z"
  },
+ "argentine/6deab1e16af088432077.mp3": {
+  "text": "gil",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-11-06T22:02:08.043Z"
+ },
  "argentine/6e0beaae74bbc090601e.mp3": {
   "text": "orto",
   "voice": "malena",
