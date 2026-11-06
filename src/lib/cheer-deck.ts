@@ -67,6 +67,8 @@ export const BITS = {
   bombo: require('@/assets/images/objects/musica-bombo-figure.webp'),
   cotillon: require('@/assets/images/objects/cotillon-figure.webp'),
   caramelos: require('@/assets/images/objects/caramelos-figure.webp'),
+  torta: require('@/assets/images/objects/chocotorta-figure.webp'),
+  colectivo: require('@/assets/images/objects/buenos-aires-colectivo-figure.webp'),
 } as const;
 export type BitName = keyof typeof BITS;
 
@@ -86,10 +88,13 @@ export interface CheerDesign {
   words?: string[];
   /** `food` / `balloons`: what falls or floats. */
   bits?: BitName[];
+  /** More things behind him on top of `deco`: the streak milestones layer two or three. */
+  more?: Deco[];
 }
 
-type Row = Omit<CheerDesign, 'id' | 'when'>;
-const r = (scene: Scene, deco: Deco, layout: Layout, tint: Tint, art: Art, title: string, line?: string, extra?: Pick<CheerDesign, 'words' | 'bits'>): Row => ({
+export type CheerRow = Omit<CheerDesign, 'id' | 'when'>;
+type Row = CheerRow;
+export const r = (scene: Scene, deco: Deco, layout: Layout, tint: Tint, art: Art, title: string, line?: string, extra?: Pick<CheerDesign, 'words' | 'bits' | 'more'>): Row => ({
   scene,
   deco,
   layout,
