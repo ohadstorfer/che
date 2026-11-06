@@ -310,9 +310,10 @@ function takes(text) {
  * recorded in one and cut out of it.
  *
  * So are the words the model reads as an English abbreviation even inside the
- * carrier: "mil" came back as "million", twice.
+ * carrier: "mil" came back as "million", twice. And the ones it does not read
+ * as a word at all: "mufa" came back as a sigh, then as a hum (2026-11-06).
  */
-const ABBREVIATIONS = new Set(['mil']);
+const ABBREVIATIONS = new Set(['mil', 'mufa']);
 
 export const needsSentence = (text) =>
   !/\s/.test(text.trim()) &&
