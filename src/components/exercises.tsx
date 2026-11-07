@@ -82,7 +82,7 @@ import { clay, colors, font, OUTLINE, pastel, PICKED, radius } from '@/lib/theme
 import Svg, { Path as SvgPath } from 'react-native-svg';
 import { type TipBlock, type TipSpan, tipSpans, tipSteps } from '@/lib/tip-layout';
 import type { Form, Sentence, Tip } from '@/lib/types';
-import { WORD_ART_CACHE, courseArt } from '@/lib/word-art';
+import { WORD_ART_CACHE, courseArt, markArtShown, pickCardArt } from '@/lib/word-art';
 import { articleOf } from '@/lib/article';
 import { FitText } from '@/components/fit-text';
 
@@ -364,6 +364,7 @@ function WordPicture({ form, art, onDone }: { form: Form; art: ImageSourcePropTy
   const phrase = isPhrase(form.form);
   const article = phrase ? null : articleOf(form);
   const sense = senseOf(form, meaningOf(form));
+  useEffect(() => markArtShown(form.lemma_id), [form.lemma_id]);
   return (
     <Frame
       prompt={`New ${isSlang(form) ? 'slang ' : ''}${phrase ? 'phrase' : 'word'}`}
@@ -919,6 +920,44 @@ function TitlePancho() {
   return (
     <View pointerEvents="none" style={styles.titleArt}>
       <Image source={speaker} style={styles.titleArtImage} contentFit="contain" accessible={false} />
+    </View>
+  );
+}
+
+/** In the capybara's place, the picture of a word in the sentence — never the
+ *  one being asked about (the gap's answer, the word being met), which would
+ *  give it away. With several, one not shown yet this class (`pickCardArt`).
+ *  No word with a picture: the capybara, as before. */
+function TitleArt({
+  sentence,
+  skip,
+  lookup,
+}: {
+  sentence: Sentence;
+  skip: (formId: string) => boolean;
+  lookup: (id: string) => Form | undefined;
+}) {
+  const [lemma] = useState(() =>
+    pickCardArt(
+      sentence.tokens.flatMap((t) =>
+        t.form_ids.some(skip) ? [] : t.form_ids.flatMap((id) => lookup(id)?.lemma_id ?? []),
+      ),
+    ),
+  );
+  useEffect(() => {
+    if (lemma) markArtShown(lemma);
+  }, [lemma]);
+  const art = lemma ? courseArt(lemma) : undefined;
+  if (!art) return <TitlePancho />;
+  return (
+    <View pointerEvents="none" style={styles.titleArt}>
+      <Image
+        source={art}
+        style={styles.titleArtImage}
+        contentFit="contain"
+        cachePolicy={WORD_ART_CACHE}
+        accessible={false}
+      />
     </View>
   );
 }
@@ -2652,7 +2691,11 @@ function SentenceIntro({
         prompt={prompt}
         // One voice, read: the card, and him by the prompt as on a gap's card. A
         // dialogue's first bubble has him already.
-        art={turnCount(sentence.tokens) < 2 ? <TitlePancho /> : undefined}
+        art={
+          turnCount(sentence.tokens) < 2 ? (
+            <TitleArt sentence={sentence} skip={(id) => id === word?.id} lookup={lookupWith(lexicon, allForms)} />
+          ) : undefined
+        }
         verdict={verdict}
         canCheck={!!chosen}
         onCheck={() => setVerdict({ correct: chosen === sentence.id, answer: sentence.en })}
@@ -2781,7 +2824,15 @@ function SentenceGap({
   return (
     <Frame
       prompt={`${item.isRetry ? '🔁 ' : ''}${byEar ? 'Listen and complete the sentence' : 'Complete the sentence'}`}
-      art={oneCard ? <TitlePancho /> : undefined}
+      art={
+        oneCard ? (
+          <TitleArt
+            sentence={sentence}
+            skip={(id) => id === target.id || (index >= 0 && sentence.tokens[index].form_ids.includes(id))}
+            lookup={lookupWith(lexicon, allForms)}
+          />
+        ) : undefined
+      }
       badgeBeside
       verdict={verdict}
       canCheck={fill === 'typed' ? !!typed : !!chosen}
