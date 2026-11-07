@@ -1,5 +1,5 @@
 // "Argentinian word of the day" quiz reel (9:16), one per day from wordquiz.mjs:
-// big series intro → the word → 3 rounds (a line, three meanings, the Drake reels' 3-second countdown, the right one turns green)
+// big series intro → the word → what it means (English) → an example with its translation → 3 rounds (a line, three meanings, the Drake reels' 3-second countdown, the right one turns green)
 // → "Follow for more words each day". The app's sticker look: oat paper, ink outlines with hard shadows, butter outlined headline, rosa.
 // Laid out on a 360×640 board scaled ×3, the same board as the artifact draft it came from.
 import React from 'react';
@@ -7,6 +7,7 @@ import {AbsoluteFill, Audio, Easing, Img, Sequence, continueRender, delayRender,
 
 export type WordQuiz = {
   id: string; day: number; word: string; marks: string[]; hook: string;
+  meanings: string[]; explain: string; example: {es: string[]; en: string[]};
   rounds: {say: string; options: [string, string, string]; answer: number}[];
 };
 
@@ -28,13 +29,15 @@ if (typeof document !== 'undefined') {
 // Timeline in frames.
 const INTRO = 66;   // "Argentinian word of the day" — also the cover, so it is complete on frame 0
 const WORD = 72;    // the word and its hook
+const MEAN = 105;   // what it means, in plain English
+const EX = 105;     // one example line (or a two-line exchange) with its translation
 const ASK_AT = 18;  // the countdown starts once the line and the options are in
 const ASK = 90;     // 3-second countdown
 const ROUND = 150;  // the answer stays up for the rest
 const FOLLOW = 90;
 export const wordQuizTimeline = (rounds = 3) => {
-  const word = INTRO, first = INTRO + WORD, follow = first + rounds * ROUND;
-  return {word, first, follow, total: follow + FOLLOW};
+  const word = INTRO, meaning = word + WORD, example = meaning + MEAN, first = example + EX, follow = first + rounds * ROUND;
+  return {word, meaning, example, first, follow, total: follow + FOLLOW};
 };
 
 const OUT = Easing.bezier(0.23, 1, 0.32, 1);
@@ -118,6 +121,50 @@ const Word: React.FC<{q: WordQuiz; f: number; t: number}> = ({q, f, t}) => (
   </AbsoluteFill>
 );
 
+/** **bold** in the carousel's lines, as an ink word on a butter swatch. */
+const Bold: React.FC<{text: string}> = ({text}) => <>{text.split('**').map((t, k) => k % 2
+  ? <span key={k} style={{background: BUTTER, borderRadius: '0.18em', padding: '0 0.1em', boxShadow: `0 0 0 1.5px ${INK}`}}>{t}</span> : t)}</>;
+
+const Meaning: React.FC<{q: WordQuiz; f: number; t: number}> = ({q, f, t}) => {
+  const size = Math.min(84, wordSize(q.word));
+  return <AbsoluteFill>
+    <TopBar day={q.day} />
+    <Sun x={150} y={70} size={260} f={t} />
+    <div style={{position: 'absolute', left: 0, right: 0, top: 96, display: 'grid', justifyItems: 'center', textAlign: 'center'}}>
+      <Chip bg={SURFACE} style={{fontSize: 13, ...up(f, 0)}}>IT MEANS</Chip>
+      <div style={{...outlined(size, Math.round(size * 0.15)), marginTop: 18, ...slap(f, 2, -3)}}>{q.word.toUpperCase()}</div>
+    </div>
+    <div style={{position: 'absolute', left: 30, right: 30, top: 250, display: 'grid', gap: 12, justifyItems: 'center'}}>
+      {q.meanings.map((m, k) => <div key={k} style={{padding: '10px 18px', fontFamily: DISPLAY, fontWeight: 900, fontSize: 25, lineHeight: 1.1, textAlign: 'center',
+        background: k ? SURFACE : BUTTER, borderRadius: 16, boxShadow: STICK, transform: `rotate(${[-2, 1.5, -1][k]}deg)`, ...popIn(f, 14 + k * 8)}}>{m}</div>)}
+    </div>
+    <div style={{position: 'absolute', left: 28, right: 28, top: 500, fontFamily: UI, fontWeight: 700, fontSize: 18, lineHeight: 1.35, textAlign: 'center', ...up(f, 44)}}>
+      <Bold text={q.explain} />
+    </div>
+  </AbsoluteFill>;
+};
+
+const Example: React.FC<{q: WordQuiz; f: number}> = ({q, f}) => {
+  const two = q.example.es.length > 1;
+  return <AbsoluteFill>
+    <TopBar day={q.day} />
+    <div style={{position: 'absolute', left: 0, right: 0, top: 96, display: 'grid', justifyItems: 'center'}}>
+      <Chip bg={SURFACE} style={{fontSize: 13, ...up(f, 0)}}>EXAMPLE</Chip>
+    </div>
+    <div style={{position: 'absolute', left: 20, right: 20, top: two ? 170 : 210, display: 'grid', gap: 22}}>
+      {q.example.es.map((es, k) => {
+        const right = two && k === 1;
+        return <div key={k} style={{justifySelf: two ? (right ? 'end' : 'start') : 'center', maxWidth: two ? 270 : 320, textAlign: two ? (right ? 'right' : 'left') : 'center', ...popIn(f, 6 + k * 20)}}>
+          <div style={{display: 'inline-block', padding: '16px 18px', fontFamily: DISPLAY, fontWeight: 800, fontSize: two ? 27 : 30, lineHeight: 1.2, textAlign: 'left',
+            background: right ? BUTTER : SURFACE, borderRadius: 20, boxShadow: STICK}}><Marked text={es} marks={q.marks} /></div>
+          <div style={{fontFamily: UI, fontWeight: 700, fontSize: 19, lineHeight: 1.3, color: INK2, marginTop: 12, padding: '0 6px', ...up(f, 24 + k * 20)}}>{q.example.en[k]}</div>
+        </div>;
+      })}
+    </div>
+    <Img src={staticFile('pancho/sideeye.png')} style={{position: 'absolute', right: -6, bottom: 30, width: 110, transform: `translateY(${-5 * Math.sin(f / 9)}px)`}} />
+  </AbsoluteFill>;
+};
+
 const Round: React.FC<{q: WordQuiz; i: number; f: number}> = ({q, i, f}) => {
   const r = q.rounds[i];
   const revealed = f >= ASK_AT + ASK;
@@ -159,7 +206,9 @@ export const WordQuizReel: React.FC<{q: WordQuiz}> = ({q}) => {
   const tl = wordQuizTimeline(q.rounds.length);
   let scene: React.ReactNode;
   if (frame < tl.word) scene = <Intro q={q} f={frame} />;
-  else if (frame < tl.first) scene = <Word q={q} f={frame - tl.word} t={frame} />;
+  else if (frame < tl.meaning) scene = <Word q={q} f={frame - tl.word} t={frame} />;
+  else if (frame < tl.example) scene = <Meaning q={q} f={frame - tl.meaning} t={frame} />;
+  else if (frame < tl.first) scene = <Example q={q} f={frame - tl.example} />;
   else if (frame < tl.follow) scene = <Round q={q} i={Math.floor((frame - tl.first) / ROUND)} f={(frame - tl.first) % ROUND} />;
   else scene = <Follow f={frame - tl.follow} t={frame} />;
 
@@ -168,7 +217,7 @@ export const WordQuizReel: React.FC<{q: WordQuiz}> = ({q}) => {
 
     {/* the two 30 s cumbias made for all our videos (2026-11-06), alternating day by day */}
     <Audio src={staticFile(`music/cumbia-2026-${q.day % 2 ? 'a' : 'b'}.mp3`)} loop volume={f => interpolate(f, [0, 10, tl.total - 25, tl.total], [0, 0.21, 0.21, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})} />
-    {[tl.word, tl.follow].map(at => <Sequence key={at} from={at} durationInFrames={12}><Audio src={staticFile('sfx/whoosh.wav')} volume={0.6} /></Sequence>)}
+    {[tl.word, tl.meaning, tl.example, tl.follow].map(at => <Sequence key={at} from={at} durationInFrames={12}><Audio src={staticFile('sfx/whoosh.wav')} volume={0.6} /></Sequence>)}
     {q.rounds.map((_, i) => {
       const at = tl.first + i * ROUND;
       return <React.Fragment key={i}>

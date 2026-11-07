@@ -10,6 +10,20 @@ export const WORD_QUIZZES = [
       "posta"
     ],
     "hook": "You’ll hear it 100 times a day in Buenos Aires",
+    "meanings": [
+      "To swear it’s true",
+      "It’s true",
+      "The real story"
+    ],
+    "explain": "Someone tells you something hard to believe? Answer with **one word**.",
+    "example": {
+      "es": [
+        "¿Posta que no venís?"
+      ],
+      "en": [
+        "You’re really not coming?"
+      ]
+    },
     "rounds": [
       {
         "say": "Me caso en mayo. —¿Posta?",
@@ -48,6 +62,22 @@ export const WORD_QUIZZES = [
       "dale"
     ],
     "hook": "The most useful word you’ll learn in Argentina",
+    "meanings": [
+      "OK! Sure!",
+      "Come on!",
+      "Go ahead"
+    ],
+    "explain": "The most common way to say **yes** to a plan.",
+    "example": {
+      "es": [
+        "¿Nos vemos a las ocho?",
+        "Dale."
+      ],
+      "en": [
+        "See you at eight?",
+        "Sure."
+      ]
+    },
     "rounds": [
       {
         "say": "¿Pedimos pizza? —¡Dale!",
@@ -86,6 +116,19 @@ export const WORD_QUIZZES = [
       "che"
     ],
     "hook": "Say it once and you already sound Argentine",
+    "meanings": [
+      "Hey!",
+      "Hey, listen"
+    ],
+    "explain": "Use **che** to get someone’s **attention**.",
+    "example": {
+      "es": [
+        "Che, ¿y tu hermana?"
+      ],
+      "en": [
+        "Hey, what about your sister?"
+      ]
+    },
     "rounds": [
       {
         "say": "Che, ¿tenés hora?",
@@ -128,6 +171,20 @@ export const WORD_QUIZZES = [
       "boludez"
     ],
     "hook": "The most Argentine word there is",
+    "meanings": [
+      "Between friends",
+      "To play dumb",
+      "Messing around"
+    ],
+    "explain": "With friends, **boludo** is like **dude**. Totally friendly.",
+    "example": {
+      "es": [
+        "Boludo, no sabés lo que pasó."
+      ],
+      "en": [
+        "Dude, you won’t believe what happened."
+      ]
+    },
     "rounds": [
       {
         "say": "¿Qué hacés, boludo?",
@@ -195,7 +252,21 @@ export const WORD_QUIZZES = [
         ],
         "answer": 0
       }
-    ]
+    ],
+    "meanings": [
+      "A mess",
+      "Chaos",
+      "Trouble"
+    ],
+    "explain": "A messy room, a messy desk: it’s a **quilombo**.",
+    "example": {
+      "es": [
+        "Qué quilombo tenés en el escritorio."
+      ],
+      "en": [
+        "Your desk is such a mess."
+      ]
+    }
   },
   {
     "id": "wotd-tipo",
@@ -205,6 +276,20 @@ export const WORD_QUIZZES = [
       "tipo"
     ],
     "hook": "Argentines drop it into almost every sentence",
+    "meanings": [
+      "Like…",
+      "Around",
+      "A guy"
+    ],
+    "explain": "Just like English **like**, it fills a pause.",
+    "example": {
+      "es": [
+        "Tipo, no sé."
+      ],
+      "en": [
+        "Like, I don’t know."
+      ]
+    },
     "rounds": [
       {
         "say": "Nos vemos tipo ocho.",
@@ -243,6 +328,20 @@ export const WORD_QUIZZES = [
       "onda"
     ],
     "hook": "How Argentines talk about vibes",
+    "meanings": [
+      "What’s up?",
+      "Good vibes",
+      "Bad vibes"
+    ],
+    "explain": "**¿Qué onda?** is a casual hello.",
+    "example": {
+      "es": [
+        "¿Qué onda, todo bien?"
+      ],
+      "en": [
+        "What’s up, all good?"
+      ]
+    },
     "rounds": [
       {
         "say": "¿Qué onda?",
@@ -282,6 +381,20 @@ export const WORD_QUIZZES = [
       "toquecito"
     ],
     "hook": "The tiny word Argentines use for everything",
+    "meanings": [
+      "A sec",
+      "A little",
+      "A bit of"
+    ],
+    "explain": "**Un toque** = a moment, quickly.",
+    "example": {
+      "es": [
+        "Vení un toque."
+      ],
+      "en": [
+        "Come here a sec."
+      ]
+    },
     "rounds": [
       {
         "say": "Esperá un toque.",
@@ -326,6 +439,20 @@ export const WORD_QUIZZES = [
       "bancar"
     ],
     "hook": "One verb, four very different meanings",
+    "meanings": [
+      "To back someone",
+      "To stand",
+      "Hold on"
+    ],
+    "explain": "**Te banco** = I’ve got your back.",
+    "example": {
+      "es": [
+        "Mis amigos me bancan."
+      ],
+      "en": [
+        "My friends support me."
+      ]
+    },
     "rounds": [
       {
         "say": "Te banco a muerte.",
@@ -367,6 +494,20 @@ export const WORD_QUIZZES = [
       "copate"
     ],
     "hook": "How Argentines say something is cool",
+    "meanings": [
+      "Cool",
+      "A nice person",
+      "I’m into it"
+    ],
+    "explain": "**Copado** = cool, nice, great.",
+    "example": {
+      "es": [
+        "Es un lugar re copado."
+      ],
+      "en": [
+        "It’s a really cool place."
+      ]
+    },
     "rounds": [
       {
         "say": "¡Qué copado!",
@@ -408,6 +549,20 @@ export const WORD_QUIZZES = [
       "jodiendo"
     ],
     "hook": "Argentina’s favorite word for fun",
+    "meanings": [
+      "A party",
+      "Just kidding",
+      "No way"
+    ],
+    "explain": "**La joda** = partying, a night out.",
+    "example": {
+      "es": [
+        "Hay joda en lo de Juan."
+      ],
+      "en": [
+        "There’s a party at Juan’s."
+      ]
+    },
     "rounds": [
       {
         "say": "¿Vamos de joda?",
@@ -450,6 +605,20 @@ export const WORD_QUIZZES = [
       "zarpó"
     ],
     "hook": "For when normal words aren’t enough",
+    "meanings": [
+      "Amazing",
+      "Out of line",
+      "Too far"
+    ],
+    "explain": "**Zarpado** = amazing, insane (in a good way).",
+    "example": {
+      "es": [
+        "Fue un recital zarpado."
+      ],
+      "en": [
+        "It was an insane concert."
+      ]
+    },
     "rounds": [
       {
         "say": "La comida está zarpada.",
@@ -493,6 +662,20 @@ export const WORD_QUIZZES = [
       "flasheá"
     ],
     "hook": "The Argentine verb for a wild imagination",
+    "meanings": [
+      "Got it wrong",
+      "Blown away",
+      "You’re dreaming"
+    ],
+    "explain": "**Flashear** = to get the wrong idea, to imagine things.",
+    "example": {
+      "es": [
+        "Flasheé que era hoy."
+      ],
+      "en": [
+        "I thought it was today."
+      ]
+    },
     "rounds": [
       {
         "say": "Flasheé, perdón.",
@@ -535,6 +718,20 @@ export const WORD_QUIZZES = [
       "laburante"
     ],
     "hook": "How Argentines talk about work",
+    "meanings": [
+      "A job",
+      "To work",
+      "Hard work"
+    ],
+    "explain": "**Laburo** = job, work.",
+    "example": {
+      "es": [
+        "Estoy buscando laburo."
+      ],
+      "en": [
+        "I’m looking for a job."
+      ]
+    },
     "rounds": [
       {
         "say": "Conseguí laburo.",
@@ -575,6 +772,20 @@ export const WORD_QUIZZES = [
       "fiaquera"
     ],
     "hook": "The word for that lazy Sunday feeling",
+    "meanings": [
+      "Feeling lazy",
+      "What a drag",
+      "A lazy person"
+    ],
+    "explain": "**Fiaca** = laziness, not feeling like doing anything.",
+    "example": {
+      "es": [
+        "Tengo una fiaca…"
+      ],
+      "en": [
+        "I feel so lazy…"
+      ]
+    },
     "rounds": [
       {
         "say": "Tengo fiaca de salir.",
@@ -617,6 +828,20 @@ export const WORD_QUIZZES = [
       "chamuyera"
     ],
     "hook": "Argentines are experts at this",
+    "meanings": [
+      "Flirting",
+      "All talk",
+      "A smooth talker"
+    ],
+    "explain": "**Chamuyar** = to flirt, to sweet-talk.",
+    "example": {
+      "es": [
+        "La chamuyó toda la noche."
+      ],
+      "en": [
+        "He flirted with her all night."
+      ]
+    },
     "rounds": [
       {
         "say": "Me está chamuyando.",
@@ -655,6 +880,20 @@ export const WORD_QUIZZES = [
       "cualquiera"
     ],
     "hook": "It doesn’t mean what you learned in class",
+    "meanings": [
+      "Nonsense",
+      "Talking nonsense",
+      "Totally off"
+    ],
+    "explain": "Alone, **cualquiera** = ridiculous, makes no sense.",
+    "example": {
+      "es": [
+        "Lo que dice es cualquiera."
+      ],
+      "en": [
+        "What he says makes no sense."
+      ]
+    },
     "rounds": [
       {
         "say": "¿Dos horas de cola? Cualquiera.",
@@ -693,6 +932,20 @@ export const WORD_QUIZZES = [
       "ya fue"
     ],
     "hook": "The Argentine way to say “forget it”",
+    "meanings": [
+      "Forget it",
+      "Whatever, let’s go",
+      "It’s over"
+    ],
+    "explain": "**Ya fue** = forget it, never mind.",
+    "example": {
+      "es": [
+        "Ya fue, no importa."
+      ],
+      "en": [
+        "Forget it, it doesn’t matter."
+      ]
+    },
     "rounds": [
       {
         "say": "Perdimos el bondi. Ya fue.",
@@ -731,6 +984,20 @@ export const WORD_QUIZZES = [
       "pedo"
     ],
     "hook": "The rudest word you’ll use every day",
+    "meanings": [
+      "Drunk",
+      "No way",
+      "For nothing"
+    ],
+    "explain": "**En pedo** = drunk.",
+    "example": {
+      "es": [
+        "¡Estás en pedo!"
+      ],
+      "en": [
+        "You’re drunk!"
+      ]
+    },
     "rounds": [
       {
         "say": "Ni en pedo pago eso.",
@@ -769,6 +1036,20 @@ export const WORD_QUIZZES = [
       "ni"
     ],
     "hook": "The tiny word Argentines use to say no",
+    "meanings": [
+      "Not at all",
+      "I’d never do it",
+      "Not a chance"
+    ],
+    "explain": "**Ni ahí** = not at all, not even close.",
+    "example": {
+      "es": [
+        "Ni ahí me gusta."
+      ],
+      "en": [
+        "I don’t like it at all."
+      ]
+    },
     "rounds": [
       {
         "say": "Ni idea.",
@@ -807,6 +1088,19 @@ export const WORD_QUIZZES = [
       "re"
     ],
     "hook": "The two letters that make you sound Argentine",
+    "meanings": [
+      "Very",
+      "Really"
+    ],
+    "explain": "**Re** before an adjective = very.",
+    "example": {
+      "es": [
+        "Estoy re cansado."
+      ],
+      "en": [
+        "I’m very tired."
+      ]
+    },
     "rounds": [
       {
         "say": "Está re bueno.",
@@ -845,6 +1139,20 @@ export const WORD_QUIZZES = [
       "viste"
     ],
     "hook": "Argentines end half their sentences with this",
+    "meanings": [
+      "You know?",
+      "I told you",
+      "Did you hear?"
+    ],
+    "explain": "At the end of a sentence, **¿viste?** = you know?",
+    "example": {
+      "es": [
+        "Hacía frío, ¿viste?"
+      ],
+      "en": [
+        "It was cold, you know?"
+      ]
+    },
     "rounds": [
       {
         "say": "Es caro, ¿viste?",
@@ -887,6 +1195,20 @@ export const WORD_QUIZZES = [
       "bardearon"
     ],
     "hook": "Like quilombo, but younger",
+    "meanings": [
+      "A mess",
+      "Trouble",
+      "To insult"
+    ],
+    "explain": "**Bardo** = a mess, a problem.",
+    "example": {
+      "es": [
+        "Tengo un bardo en el laburo."
+      ],
+      "en": [
+        "I have a big problem at work."
+      ]
+    },
     "rounds": [
       {
         "say": "Es un bardo.",
@@ -925,6 +1247,20 @@ export const WORD_QUIZZES = [
       "garrón"
     ],
     "hook": "For when life goes wrong",
+    "meanings": [
+      "How annoying",
+      "A bad time",
+      "For free"
+    ],
+    "explain": "**Qué garrón** = what bad luck, how annoying.",
+    "example": {
+      "es": [
+        "Se canceló. Qué garrón."
+      ],
+      "en": [
+        "It was cancelled. How annoying."
+      ]
+    },
     "rounds": [
       {
         "say": "Qué garrón, llueve.",
@@ -966,6 +1302,19 @@ export const WORD_QUIZZES = [
       "pibas"
     ],
     "hook": "You’ll hear it on every corner in Argentina",
+    "meanings": [
+      "A kid",
+      "My friends"
+    ],
+    "explain": "**Pibe / piba** = kid, young person.",
+    "example": {
+      "es": [
+        "Hay pibes jugando a la pelota."
+      ],
+      "en": [
+        "Some kids are playing football."
+      ]
+    },
     "rounds": [
       {
         "say": "Salgo con los pibes.",
@@ -1008,6 +1357,20 @@ export const WORD_QUIZZES = [
       "mangueó"
     ],
     "hook": "It’s not the fruit",
+    "meanings": [
+      "Money",
+      "Worth nothing",
+      "To ask for free"
+    ],
+    "explain": "**Mango** = a peso, money.",
+    "example": {
+      "es": [
+        "Estoy sin un mango."
+      ],
+      "en": [
+        "I have no money at all."
+      ]
+    },
     "rounds": [
       {
         "say": "No tengo un mango.",
@@ -1049,6 +1412,20 @@ export const WORD_QUIZZES = [
       "giladas"
     ],
     "hook": "The classic Argentine insult",
+    "meanings": [
+      "A fool",
+      "Easy to fool",
+      "Looking foolish"
+    ],
+    "explain": "**Gil** = a fool.",
+    "example": {
+      "es": [
+        "Qué gil que soy."
+      ],
+      "en": [
+        "I’m such a fool."
+      ]
+    },
     "rounds": [
       {
         "say": "¡No seas gil!",
@@ -1094,6 +1471,20 @@ export const WORD_QUIZZES = [
       "cagar"
     ],
     "hook": "Rude, yes. But you’ll hear it every day",
+    "meanings": [
+      "To yell at",
+      "To cheat",
+      "Extremely"
+    ],
+    "explain": "**Cagar a pedos** = to yell at someone.",
+    "example": {
+      "es": [
+        "Mi vieja me cagó a pedos."
+      ],
+      "en": [
+        "My mom yelled at me."
+      ]
+    },
     "rounds": [
       {
         "say": "Me cagó a pedos.",
@@ -1139,6 +1530,20 @@ export const WORD_QUIZZES = [
       "mandá"
     ],
     "hook": "A simple verb with secret meanings",
+    "meanings": [
+      "To go for it",
+      "To make a mistake",
+      "Making it up"
+    ],
+    "explain": "**Mandarse** = to go ahead and do it.",
+    "example": {
+      "es": [
+        "Me mandé y le hablé."
+      ],
+      "en": [
+        "I took a chance and talked to her."
+      ]
+    },
     "rounds": [
       {
         "say": "Me mandé una macana.",
@@ -1178,6 +1583,20 @@ export const WORD_QUIZZES = [
       "bajoneada"
     ],
     "hook": "For sad days and hungry nights",
+    "meanings": [
+      "How sad",
+      "Feeling down",
+      "Late-night hunger"
+    ],
+    "explain": "**Qué bajón** = how sad, what a shame.",
+    "example": {
+      "es": [
+        "Qué bajón, no vino nadie."
+      ],
+      "en": [
+        "How sad, nobody came."
+      ]
+    },
     "rounds": [
       {
         "say": "Estoy de bajón.",
@@ -1216,6 +1635,20 @@ export const WORD_QUIZZES = [
       "ponele"
     ],
     "hook": "One word for “let’s say”",
+    "meanings": [
+      "Let’s say",
+      "I guess",
+      "It’s certain"
+    ],
+    "explain": "**Ponele** = let’s say, for example.",
+    "example": {
+      "es": [
+        "Ponele que vamos."
+      ],
+      "en": [
+        "Let’s say we go."
+      ]
+    },
     "rounds": [
       {
         "say": "Vení, ponele, a las ocho.",
@@ -1257,6 +1690,20 @@ export const WORD_QUIZZES = [
       "truchas"
     ],
     "hook": "When something isn’t what it looks like",
+    "meanings": [
+      "Fake",
+      "Bad quality",
+      "Not honest"
+    ],
+    "explain": "**Trucho** = fake.",
+    "example": {
+      "es": [
+        "Es un billete trucho."
+      ],
+      "en": [
+        "It’s a fake bill."
+      ]
+    },
     "rounds": [
       {
         "say": "Esa cartera es trucha.",
@@ -1295,6 +1742,20 @@ export const WORD_QUIZZES = [
       "tranqui"
     ],
     "hook": "The word that calms every Argentine",
+    "meanings": [
+      "Don’t worry",
+      "Calm, quiet",
+      "Easygoing"
+    ],
+    "explain": "**Tranqui** = relax, don’t worry.",
+    "example": {
+      "es": [
+        "Tranqui, no pasa nada."
+      ],
+      "en": [
+        "Relax, it’s OK."
+      ]
+    },
     "rounds": [
       {
         "say": "Tranqui, yo pago.",
@@ -1338,6 +1799,20 @@ export const WORD_QUIZZES = [
       "hinchás"
     ],
     "hook": "From football to your annoying cousin",
+    "meanings": [
+      "To annoy",
+      "To support",
+      "A fan"
+    ],
+    "explain": "**Hinchar** = to annoy someone.",
+    "example": {
+      "es": [
+        "Me hincha todo el día."
+      ],
+      "en": [
+        "He bothers me all day."
+      ]
+    },
     "rounds": [
       {
         "say": "Dejá de hinchar.",
@@ -1381,6 +1856,20 @@ export const WORD_QUIZZES = [
       "rajan"
     ],
     "hook": "How to leave fast in Argentina",
+    "meanings": [
+      "Get out",
+      "To leave fast",
+      "To fire"
+    ],
+    "explain": "**Rajá** = get out of here.",
+    "example": {
+      "es": [
+        "Rajá, que viene mi vieja."
+      ],
+      "en": [
+        "Go, my mom is coming."
+      ]
+    },
     "rounds": [
       {
         "say": "¡Rajá de acá!",
@@ -1421,6 +1910,20 @@ export const WORD_QUIZZES = [
       "canchera"
     ],
     "hook": "It’s not just a football field",
+    "meanings": [
+      "The stadium",
+      "Experience",
+      "Cool, confident"
+    ],
+    "explain": "**La cancha** = the field, the stadium.",
+    "example": {
+      "es": [
+        "Hoy hay cancha."
+      ],
+      "en": [
+        "There’s a game today."
+      ]
+    },
     "rounds": [
       {
         "say": "Vamos a la cancha.",
@@ -1460,6 +1963,20 @@ export const WORD_QUIZZES = [
       "pintó"
     ],
     "hook": "A small word for plans, looks and feelings",
+    "meanings": [
+      "What’s the plan?",
+      "To feel like it",
+      "To look good"
+    ],
+    "explain": "**¿Qué pinta?** = what are we doing?",
+    "example": {
+      "es": [
+        "¿Qué pinta esta noche?"
+      ],
+      "en": [
+        "What are we doing tonight?"
+      ]
+    },
     "rounds": [
       {
         "say": "¿Qué pinta hoy?",
@@ -1502,6 +2019,20 @@ export const WORD_QUIZZES = [
       "colgar"
     ],
     "hook": "For when your brain leaves the room",
+    "meanings": [
+      "To forget",
+      "Losing track",
+      "Distracted"
+    ],
+    "explain": "**Colgarse** = to forget to do something.",
+    "example": {
+      "es": [
+        "Me colgué con el turno."
+      ],
+      "en": [
+        "I forgot about the appointment."
+      ]
+    },
     "rounds": [
       {
         "say": "Perdón, me colgué.",
@@ -1545,6 +2076,20 @@ export const WORD_QUIZZES = [
       "cortar"
     ],
     "hook": "Cut it out, literally",
+    "meanings": [
+      "Stop it",
+      "To break up",
+      "To hang up"
+    ],
+    "explain": "**Cortala** = stop it.",
+    "example": {
+      "es": [
+        "Cortala con el celu."
+      ],
+      "en": [
+        "Stop using your phone."
+      ]
+    },
     "rounds": [
       {
         "say": "¡Cortala!",
@@ -1589,6 +2134,20 @@ export const WORD_QUIZZES = [
       "andás"
     ],
     "hook": "The verb Argentines use for everything",
+    "meanings": [
+      "How are you?",
+      "It works",
+      "Go away"
+    ],
+    "explain": "**¿Cómo andás?** = how are you?",
+    "example": {
+      "es": [
+        "Ando bien, ¿y vos?"
+      ],
+      "en": [
+        "I’m good, and you?"
+      ]
+    },
     "rounds": [
       {
         "say": "¿Cómo andás?",
@@ -1627,6 +2186,22 @@ export const WORD_QUIZZES = [
       "ahí"
     ],
     "hook": "A small word with a lot of jobs",
+    "meanings": [
+      "Getting by",
+      "Maybe",
+      "Very close"
+    ],
+    "explain": "**Ahí ando** = not great, not bad.",
+    "example": {
+      "es": [
+        "¿Y el laburo?",
+        "Ahí va."
+      ],
+      "en": [
+        "How’s work?",
+        "It’s going OK."
+      ]
+    },
     "rounds": [
       {
         "say": "¿Cómo estás? —Ahí ando.",
@@ -1665,6 +2240,19 @@ export const WORD_QUIZZES = [
       "medio"
     ],
     "hook": "How Argentines say things without saying them",
+    "meanings": [
+      "Kind of",
+      "Sort of"
+    ],
+    "explain": "**Medio** + adjective = kind of, a bit.",
+    "example": {
+      "es": [
+        "Es medio raro."
+      ],
+      "en": [
+        "It’s a bit strange."
+      ]
+    },
     "rounds": [
       {
         "say": "Estoy medio cansado.",
@@ -1703,6 +2291,20 @@ export const WORD_QUIZZES = [
       "nada"
     ],
     "hook": "It means nothing. That’s the point",
+    "meanings": [
+      "So, yeah…",
+      "Never mind",
+      "Not at all"
+    ],
+    "explain": "**Y nada** fills the gaps when you tell a story.",
+    "example": {
+      "es": [
+        "Y nada, eso."
+      ],
+      "en": [
+        "So yeah, that’s it."
+      ]
+    },
     "rounds": [
       {
         "say": "Y nada, me fui.",
@@ -1745,6 +2347,20 @@ export const WORD_QUIZZES = [
       "zafar"
     ],
     "hook": "The survival verb of Argentina",
+    "meanings": [
+      "To get out of it",
+      "Good enough",
+      "To get by"
+    ],
+    "explain": "**Zafar** = to escape a problem.",
+    "example": {
+      "es": [
+        "Zafé del examen."
+      ],
+      "en": [
+        "I got out of the exam."
+      ]
+    },
     "rounds": [
       {
         "say": "¡Zafé!",
@@ -1785,6 +2401,20 @@ export const WORD_QUIZZES = [
       "bolazo"
     ],
     "hook": "Round, rude and everywhere",
+    "meanings": [
+      "Attention",
+      "Naked",
+      "A big lie"
+    ],
+    "explain": "**Dar bola** = to pay attention.",
+    "example": {
+      "es": [
+        "Estaba en bolas."
+      ],
+      "en": [
+        "He was naked."
+      ]
+    },
     "rounds": [
       {
         "say": "No me da bola.",
@@ -1824,6 +2454,20 @@ export const WORD_QUIZZES = [
       "flaca"
     ],
     "hook": "You don’t have to be thin for this one",
+    "meanings": [
+      "Hey, man",
+      "Some guy",
+      "My partner"
+    ],
+    "explain": "**Flaco** = man, to call someone.",
+    "example": {
+      "es": [
+        "El flaco del kiosco."
+      ],
+      "en": [
+        "The guy from the kiosk."
+      ]
+    },
     "rounds": [
       {
         "say": "¿Qué hacés, flaco?",
@@ -1862,6 +2506,20 @@ export const WORD_QUIZZES = [
       "pucho"
     ],
     "hook": "It starts with a cigarette",
+    "meanings": [
+      "A cigarette",
+      "I don’t care",
+      "At the last moment"
+    ],
+    "explain": "**Pucho** = cigarette.",
+    "example": {
+      "es": [
+        "Salgo a fumar un pucho."
+      ],
+      "en": [
+        "I’m going out for a cigarette."
+      ]
+    },
     "rounds": [
       {
         "say": "¿Tenés un pucho?",
