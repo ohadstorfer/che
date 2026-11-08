@@ -64,6 +64,15 @@ Deno.serve(async (req) => {
   }
   await db.from("promo_redemptions").upsert({ code, user_id: userId }, { onConflict: "code,user_id", ignoreDuplicates: true });
 
+  // A creator's code (migration 20261107000020): she came with it. The first
+  // code an account gives is the one that counts.
+  const { data: creator } = await db.from("creators").select("id").eq("code", code).eq("status", "active").maybeSingle();
+  if (creator) {
+    await db
+      .from("creator_referrals")
+      .upsert({ user_id: userId, creator_id: creator.id, source: "paywall" }, { onConflict: "user_id", ignoreDuplicates: true });
+  }
+
   if (row.grants_days) {
     // A real subscription, or the days this code already gave her, are left
     // as they are: typing it again doesn't start the clock over.

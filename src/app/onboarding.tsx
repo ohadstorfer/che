@@ -39,6 +39,9 @@ import { EASE_OUT, IconButton, ProgressBar, rise, slide } from '@/components/onb
 import { type Provider, SocialButtons } from '@/components/social-buttons';
 import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
+import { normalizeCode } from '@/lib/billing-shared';
+import { checkCreatorCode, loadCreatorCode, saveCreatorCode } from '@/lib/creator-code';
+import { trackStep } from '@/lib/funnel';
 import { startGuest } from '@/lib/guest';
 import { success, tap } from '@/lib/haptics';
 import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
@@ -87,8 +90,8 @@ import { clay, colors, font, pastel, radius, type } from '@/lib/theme';
 // line of conversation, not a form field.
 // ---------------------------------------------------------------------------
 
-type Step = 'name' | 'level' | 'why' | 'try' | 'struggle' | 'achieve' | 'goal' | 'notify' | 'building' | 'pledge' | 'account';
-const STEPS: Step[] = ['name', 'level', 'why', 'try', 'struggle', 'achieve', 'goal', 'notify', 'building', 'pledge', 'account'];
+type Step = 'name' | 'level' | 'why' | 'try' | 'struggle' | 'achieve' | 'goal' | 'notify' | 'code' | 'building' | 'pledge' | 'account';
+const STEPS: Step[] = ['name', 'level', 'why', 'try', 'struggle', 'achieve', 'goal', 'notify', 'code', 'building', 'pledge', 'account'];
 /** Steps that count on the progress bar; the builder and what follows sit past it. */
 const COUNTED = STEPS.indexOf('building');
 
@@ -117,6 +120,10 @@ export default function Onboarding() {
   // The daily goal starts on 10 so the button works at once, but he only
   // replies once she has actually touched it.
   const [goalTouched, setGoalTouched] = useState(false);
+
+  useEffect(() => {
+    trackStep(step);
+  }, [step]);
 
   const index = STEPS.indexOf(step);
   const go = (to: Step, d: 1 | -1 = 1) => {
@@ -246,6 +253,8 @@ export default function Onboarding() {
                 next();
               }}
             />
+          ) : step === 'code' ? (
+            <CodeStep reduced={reduced} onNext={next} />
           ) : step === 'building' ? (
             <Building
               answers={complete}
@@ -465,6 +474,109 @@ function NameStep({
           style={styles.skip}>
           <Text style={styles.skipText}>Skip</Text>
         </Pressable>
+      </View>
+    </View>
+  );
+}
+
+// --- a creator's code: did someone send her? (lib/creator-code.ts) ----------
+
+/** What the code opens: on Android the creator offer on the paywall; on iOS
+ *  nothing yet (no App Store offer codes until the app is approved). */
+const CODE_PERK = Platform.OS === 'android' ? 'Your first month is free.' : null;
+
+function CodeStep({ reduced, onNext }: { reduced: boolean; onNext: () => void }) {
+  const [open, setOpen] = useState(false);
+  const [code, setCode] = useState('');
+  const [found, setFound] = useState<string | null>(null);
+  const [checking, setChecking] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    void loadCreatorCode().then((c) => {
+      if (!c) return;
+      setCode(c.code);
+      setFound(c.name);
+      setOpen(true);
+    });
+  }, []);
+
+  const valid = normalizeCode(code).length >= 3;
+  const check = async () => {
+    if (!valid || checking) return;
+    tap();
+    setChecking(true);
+    setError(null);
+    const name = await checkCreatorCode(code);
+    setChecking(false);
+    if (name === undefined) return setError('Couldn’t check the code. Check your connection.');
+    if (!name) return setError('That code isn’t valid.');
+    success();
+    setFound(name);
+    await saveCreatorCode({ code: normalizeCode(code), name });
+  };
+  const skip = () => {
+    tap();
+    void saveCreatorCode(null);
+    onNext();
+  };
+
+  const line = found
+    ? `Thanks to ${found}!${CODE_PERK ? ` ${CODE_PERK}` : ''}`
+    : open
+      ? 'Type the code from the video.'
+      : 'Did a creator send you here?';
+
+  return (
+    <View style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
+        <Says pose={found ? 'gol' : undefined} line={line} reduced={reduced} />
+        {open ? (
+          <Animated.View entering={rise(1, reduced)} style={styles.nameCard}>
+            <Text style={styles.nameLabel}>Creator code</Text>
+            <TextInput
+              value={code}
+              onChangeText={(v) => {
+                setCode(v.slice(0, 20));
+                setError(null);
+                if (found) {
+                  setFound(null);
+                  void saveCreatorCode(null);
+                }
+              }}
+              placeholder="e.g. MARTI"
+              placeholderTextColor={colors.faint}
+              autoCapitalize="characters"
+              autoCorrect={false}
+              autoFocus={!found}
+              returnKeyType="done"
+              onSubmitEditing={() => void check()}
+              style={styles.nameInput}
+              accessibilityLabel="Creator code"
+            />
+            {error ? <Text style={styles.codeError}>{error}</Text> : null}
+          </Animated.View>
+        ) : null}
+      </ScrollView>
+      <View style={[styles.footer, { gap: 4 }]}>
+        {found ? (
+          <Button title="Continue" onPress={onNext} />
+        ) : open ? (
+          <Button title="Apply code" onPress={() => void check()} loading={checking} disabled={!valid || checking} />
+        ) : (
+          <Button
+            title="Yes, I have a code"
+            onPress={() => {
+              tap();
+              setOpen(true);
+            }}
+          />
+        )}
+        {found ? null : (
+          <Pressable onPress={skip} hitSlop={6} accessibilityRole="button" style={styles.skip}>
+            <Text style={styles.skipText}>{open ? 'Skip' : 'No, I found Posta myself'}</Text>
+          </Pressable>
+        )}
       </View>
     </View>
   );
@@ -1174,6 +1286,7 @@ const styles = StyleSheet.create({
   },
   skip: { alignSelf: 'center', minHeight: 44, justifyContent: 'center', paddingHorizontal: 16 },
   skipText: { ...font.body[800], fontSize: 15, color: colors.muted },
+  codeError: { ...font.body[700], fontSize: 14, color: colors.danger, marginTop: 8 },
 
   // try it
   tryMiddle: { flex: 1, justifyContent: 'center', gap: 22, paddingVertical: 12 },

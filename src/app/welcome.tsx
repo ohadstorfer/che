@@ -18,6 +18,7 @@ import { POSE } from '@/components/mascot';
 import { EASE_OUT, rise } from '@/components/onboarding-ui';
 import { FlagSun, OutlinedHeadline } from '@/components/sticker';
 import { Button } from '@/components/ui';
+import { trackStep } from '@/lib/funnel';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, pastel } from '@/lib/theme';
 
@@ -75,7 +76,8 @@ export default function Welcome() {
   // Onboarding is loaded while the words land, so "Get started" moves at once.
   useEffect(() => {
     router.prefetch(next);
-  }, [next]);
+    if (!replay) trackStep('welcome');
+  }, [next, replay]);
 
   // One tap, one onboarding: further taps are ignored until she is back here.
   const leaving = useRef(false);

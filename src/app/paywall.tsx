@@ -39,6 +39,7 @@ import { success, tap } from '@/lib/haptics';
 import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
 import { resetTo } from '@/lib/nav';
 import { track } from '@/lib/funnel';
+import { type CreatorCode, loadCreatorCode } from '@/lib/creator-code';
 import { formatDate, loadAnswers, nameTail, markWinbackShown, winbackShown } from '@/lib/onboarding';
 import { cancelFreeUnitReminder, scheduleFreeUnitReminder } from '@/lib/free-unit-reminder';
 import { type PaywallSource, usePremium } from '@/lib/premium';
@@ -105,6 +106,12 @@ function Paywall() {
   // A discount code: Android types it here; iOS types it in Apple's own sheet.
   const [codeOpen, setCodeOpen] = useState(false);
   const [codeError, setCodeError] = useState<string | null>(null);
+  // A creator's code from onboarding (lib/creator-code.ts): on Android the
+  // annual plan is bought with the creator offer, the first month free.
+  const [creator, setCreator] = useState<CreatorCode | null>(null);
+  useEffect(() => {
+    if (Platform.OS === 'android') void loadCreatorCode().then(setCreator);
+  }, []);
 
   // The plan she just built is the thing on offer; say so in its own words.
   useEffect(() => {
@@ -164,6 +171,7 @@ function Paywall() {
   }, [main, selected]);
 
   const plan = main?.plans.find((p) => p.id === selected) ?? null;
+  const creatorOffer = !!creator && billing.available && plan?.period === 'year';
   
   // Out of onboarding the welcome screen is still underneath, so the app
   // starts fresh at Ready, bought or not: a guest saves her account there, and
@@ -254,6 +262,23 @@ function Paywall() {
     else setCodeError(message);
   };
 
+  // The annual plan with a creator's code: the creator offer through
+  // redeem-code. If the store has no such offer, the plan as it is.
+  const buyWithCreator = async () => {
+    if (!creator || busy) return;
+    tap();
+    setBusy('code');
+    setError(null);
+    track('checkout_started', { from, offer: 'creator', plan: 'year', trial: true });
+    const out = await billing.redeem(creator.code);
+    setBusy(null);
+    track('checkout_ended', { from, offer: 'creator', result: typeof out === 'object' ? 'error' : out });
+    if (opened(out) || out === 'cancelled') return;
+    if (out === 'pending') return setError('Your purchase is waiting for approval. We’ll unlock Posta as soon as it goes through.');
+    setCreator(null);
+    void buy('main', plan);
+  };
+
   const haveCode = () => {
     if (Platform.OS === 'ios') return void redeem();
     tap();
@@ -340,6 +365,14 @@ function Paywall() {
           <View style={{ height: 70 }} />
         )}
 
+        {creator ? (
+          <Animated.View entering={rise(3, reduced)} style={styles.creatorChip}>
+            <Text style={styles.creatorChipText}>
+              {creator.name}’s code: your first month free on the yearly plan
+            </Text>
+          </Animated.View>
+        ) : null}
+
         <Animated.View entering={rise(3, reduced)} style={styles.plans} accessibilityRole="radiogroup">
           {main ? (
             main.plans.map((p) => (
@@ -385,9 +418,9 @@ function Paywall() {
         {error ? <Text style={styles.error}>{error}</Text> : null}
         <View style={styles.actions}>
           <Button
-            title={plan?.trialDays ? `Start my free ${trialWord(plan.trialDays)}` : 'Continue'}
-            onPress={() => void buy('main', plan)}
-            loading={busy === 'buy'}
+            title={creatorOffer ? 'Start my free month' : plan?.trialDays ? `Start my free ${trialWord(plan.trialDays)}` : 'Continue'}
+            onPress={() => void (creatorOffer ? buyWithCreator() : buy('main', plan))}
+            loading={busy === 'buy' || (creatorOffer && busy === 'code')}
             disabled={!plan || !!busy}
           />
           {freeWeek ? (
@@ -714,6 +747,16 @@ const styles = StyleSheet.create({
   decline: { alignSelf: 'center', paddingVertical: 12 },
   declineText: { ...font.body[700], fontSize: 15, color: colors.muted },
 
+  creatorChip: {
+    alignSelf: 'center',
+    marginTop: 14,
+    marginBottom: -4,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: radius.pill,
+    backgroundColor: pastel.butter,
+  },
+  creatorChipText: { ...font.body[800], fontSize: 14, color: colors.ink, textAlign: 'center' },
   haveCode: { alignSelf: 'center', marginTop: 22, paddingVertical: 6, paddingHorizontal: 8, minHeight: 32, justifyContent: 'center' },
   haveCodeText: { ...font.body[700], fontSize: 15, color: colors.muted, textDecorationLine: 'underline' },
   sheetSlot: { position: 'absolute', left: 0, right: 0, bottom: 0 },
