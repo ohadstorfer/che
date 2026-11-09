@@ -1,0 +1,5246 @@
+{
+ "ex": [
+  {
+   "en": "Can you open the trunk?",
+   "es": "¿Abrís el baúl?",
+   "form": "abrís",
+   "lemma": "abrir"
+  },
+  {
+   "en": "You never open my emails.",
+   "es": "Nunca abrís mis mails.",
+   "form": "abrís",
+   "lemma": "abrir"
+  },
+  {
+   "en": "Can you let me in? I'm downstairs.",
+   "es": "¿Me abrís? Estoy abajo.",
+   "form": "abrís",
+   "lemma": "abrir"
+  },
+  {
+   "en": "Are you opening the shop tomorrow?",
+   "es": "¿Abrís el negocio mañana?",
+   "form": "abrís",
+   "lemma": "abrir"
+  },
+  {
+   "en": "Why don't you open the book?",
+   "es": "¿Por qué no abrís el libro?",
+   "form": "abrís",
+   "lemma": "abrir"
+  },
+  {
+   "en": "My keys don't work, can you let me in?",
+   "es": "Mis llaves no funcan, ¿me abrís?",
+   "form": "abrís",
+   "lemma": "abrir"
+  },
+  {
+   "en": "What are you looking for?",
+   "es": "¿Qué andás buscando?",
+   "form": "andás",
+   "lemma": "andar"
+  },
+  {
+   "en": "Do you have the car today?",
+   "es": "¿Andás con auto hoy?",
+   "form": "andás",
+   "lemma": "andar"
+  },
+  {
+   "en": "Hey, are you downtown?",
+   "es": "Che, ¿andás por el centro?",
+   "form": "andás",
+   "lemma": "andar"
+  },
+  {
+   "en": "What are you doing around here?",
+   "es": "¿Qué andás haciendo por acá?",
+   "form": "andás",
+   "lemma": "andar"
+  },
+  {
+   "en": "Are you still wearing that jacket?",
+   "es": "¿Todavía andás con esa campera?",
+   "form": "andás",
+   "lemma": "andar"
+  },
+  {
+   "en": "Are you tired? You look kind of off.",
+   "es": "¿Andás cansada? Te veo medio mal.",
+   "form": "andás",
+   "lemma": "andar"
+  },
+  {
+   "en": "Will you let them know?",
+   "es": "¿Les avisás vos?",
+   "form": "avisás",
+   "lemma": "avisar"
+  },
+  {
+   "en": "OK, will you let me know?",
+   "es": "Dale, ¿me avisás?",
+   "form": "avisás",
+   "lemma": "avisar"
+  },
+  {
+   "en": "You never let anyone know.",
+   "es": "Vos nunca avisás.",
+   "form": "avisás",
+   "lemma": "avisar"
+  },
+  {
+   "en": "You never let anyone know.",
+   "es": "Vos nunca avisás.",
+   "form": "avisás",
+   "lemma": "avisar"
+  },
+  {
+   "en": "Will you let me know tomorrow?",
+   "es": "¿Me avisás mañana?",
+   "form": "avisás",
+   "lemma": "avisar"
+  },
+  {
+   "en": "You never let me know anything.",
+   "es": "Nunca me avisás nada.",
+   "form": "avisás",
+   "lemma": "avisar"
+  },
+  {
+   "en": "Teacher, can you help me?",
+   "es": "Profe, ¿me ayudás?",
+   "form": "me ayudás",
+   "lemma": "ayudar"
+  },
+  {
+   "en": "Can you help me sweep?",
+   "es": "¿Me ayudás a barrer?",
+   "form": "me ayudás",
+   "lemma": "ayudar"
+  },
+  {
+   "en": "Can you help me paint?",
+   "es": "¿Me ayudás a pintar?",
+   "form": "me ayudás",
+   "lemma": "ayudar"
+  },
+  {
+   "en": "—Can you help me? —Of course!",
+   "es": "—¿Me ayudás? —¡Obvio!",
+   "form": "me ayudás",
+   "lemma": "ayudar"
+  },
+  {
+   "en": "Can you help me cook?",
+   "es": "¿Me ayudás a cocinar?",
+   "form": "me ayudás",
+   "lemma": "ayudar"
+  },
+  {
+   "en": "Can you help me, please?",
+   "es": "¿Me ayudás, por favor?",
+   "form": "me ayudás",
+   "lemma": "ayudar"
+  },
+  {
+   "en": "Will you pick her up?",
+   "es": "¿La buscás vos?",
+   "form": "buscás",
+   "lemma": "buscar"
+  },
+  {
+   "en": "Who are you looking for?",
+   "es": "¿A quién buscás?",
+   "form": "buscás",
+   "lemma": "buscar"
+  },
+  {
+   "en": "What word are you looking for?",
+   "es": "¿Qué palabra buscás?",
+   "form": "buscás",
+   "lemma": "buscar"
+  },
+  {
+   "en": "Will you pick me up at nine?",
+   "es": "¿Me buscás a las nueve?",
+   "form": "buscás",
+   "lemma": "buscar"
+  },
+  {
+   "en": "Can you pick me up at the airport?",
+   "es": "¿Me buscás en el aeropuerto?",
+   "form": "buscás",
+   "lemma": "buscar"
+  },
+  {
+   "en": "Are you looking for a Spanish teacher?",
+   "es": "¿Buscás una profe de castellano?",
+   "form": "buscás",
+   "lemma": "buscar"
+  },
+  {
+   "en": "Do you eat organ meats?",
+   "es": "¿Comés achuras?",
+   "form": "comés",
+   "lemma": "comer"
+  },
+  {
+   "en": "Do you always eat alone?",
+   "es": "¿Siempre comés sola?",
+   "form": "comés",
+   "lemma": "comer"
+  },
+  {
+   "en": "Why don't you eat meat?",
+   "es": "¿Por qué no comés carne?",
+   "form": "comés",
+   "lemma": "comer"
+  },
+  {
+   "en": "Are you eating less meat now?",
+   "es": "¿Ahora comés menos carne?",
+   "form": "comés",
+   "lemma": "comer"
+  },
+  {
+   "en": "Are you eating alone or with us?",
+   "es": "¿Comés solo o con nosotros?",
+   "form": "comés",
+   "lemma": "comer"
+  },
+  {
+   "en": "Do you eat at the office or at home?",
+   "es": "¿Comés en la oficina o en casa?",
+   "form": "comés",
+   "lemma": "comer"
+  },
+  {
+   "en": "Are you buying pastries?",
+   "es": "¿Comprás facturas?",
+   "form": "comprás",
+   "lemma": "comprar"
+  },
+  {
+   "en": "Hey, can you buy butter today?",
+   "es": "Che, ¿comprás manteca hoy?",
+   "form": "comprás",
+   "lemma": "comprar"
+  },
+  {
+   "en": "You buy bread and I pay.",
+   "es": "Vos comprás pan y yo pago.",
+   "form": "comprás",
+   "lemma": "comprar"
+  },
+  {
+   "en": "How many alfajores are you buying?",
+   "es": "¿Cuántos alfajores comprás?",
+   "form": "comprás",
+   "lemma": "comprar"
+  },
+  {
+   "en": "You can't buy anything with a thousand pesos.",
+   "es": "Con una luca no comprás nada.",
+   "form": "comprás",
+   "lemma": "comprar"
+  },
+  {
+   "en": "Are you buying two? They're three thousand.",
+   "es": "¿Comprás dos? Salen tres mil.",
+   "form": "comprás",
+   "lemma": "comprar"
+  },
+  {
+   "en": "Do you know the neighborhood?",
+   "es": "¿Conocés el barrio?",
+   "form": "conocés",
+   "lemma": "conocer"
+  },
+  {
+   "en": "Do you know that saying?",
+   "es": "¿Conocés ese dicho?",
+   "form": "conocés",
+   "lemma": "conocer"
+  },
+  {
+   "en": "Have you been to this valley?",
+   "es": "¿Conocés este valle?",
+   "form": "conocés",
+   "lemma": "conocer"
+  },
+  {
+   "en": "Do you know a gas fitter?",
+   "es": "¿Conocés un gasista?",
+   "form": "conocés",
+   "lemma": "conocer"
+  },
+  {
+   "en": "Do you know your neighbor?",
+   "es": "¿Conocés a tu vecino?",
+   "form": "conocés",
+   "lemma": "conocer"
+  },
+  {
+   "en": "Do you know this milonga?",
+   "es": "¿Conocés esta milonga?",
+   "form": "conocés",
+   "lemma": "conocer"
+  },
+  {
+   "en": "Hey, what's new?",
+   "es": "Che, ¿qué contás?",
+   "form": "contás",
+   "lemma": "contar"
+  },
+  {
+   "en": "And what's new with you?",
+   "es": "¿Y vos qué contás?",
+   "form": "contás",
+   "lemma": "contar"
+  },
+  {
+   "en": "Will you tell me what happened?",
+   "es": "¿Me contás qué pasó?",
+   "form": "contás",
+   "lemma": "contar"
+  },
+  {
+   "en": "Will you tell me about the trip?",
+   "es": "¿Me contás del viaje?",
+   "form": "contás",
+   "lemma": "contar"
+  },
+  {
+   "en": "Will you tell me one of your jokes?",
+   "es": "¿Me contás uno de tus chistes?",
+   "form": "contás",
+   "lemma": "contar"
+  },
+  {
+   "en": "Can you tell me a short story?",
+   "es": "¿Me contás una historia corta?",
+   "form": "contás",
+   "lemma": "contar"
+  },
+  {
+   "en": "What do you think?",
+   "es": "¿Vos qué creés?",
+   "form": "creés",
+   "lemma": "creer"
+  },
+  {
+   "en": "Do you think he's coming?",
+   "es": "¿Creés que viene?",
+   "form": "creés",
+   "lemma": "creer"
+  },
+  {
+   "en": "And what do you think?",
+   "es": "¿Y vos qué creés?",
+   "form": "creés",
+   "lemma": "creer"
+  },
+  {
+   "en": "Do you think it's expensive?",
+   "es": "¿Creés que es caro?",
+   "form": "creés",
+   "lemma": "creer"
+  },
+  {
+   "en": "Do you think it opens today?",
+   "es": "¿Creés que abre hoy?",
+   "form": "creés",
+   "lemma": "creer"
+  },
+  {
+   "en": "You think you're so cool?",
+   "es": "¿Te creés muy canchera?",
+   "form": "creés",
+   "lemma": "creer"
+  },
+  {
+   "en": "Can you give me a hand?",
+   "es": "¿Me das una mano?",
+   "form": "das",
+   "lemma": "dar"
+  },
+  {
+   "en": "Can you give me a cigarette?",
+   "es": "¿Me das un pucho?",
+   "form": "das",
+   "lemma": "dar"
+  },
+  {
+   "en": "Can I have half?",
+   "es": "¿Me das la mitad?",
+   "form": "das",
+   "lemma": "dar"
+  },
+  {
+   "en": "Can you give me the key?",
+   "es": "¿Me das la llave?",
+   "form": "das",
+   "lemma": "dar"
+  },
+  {
+   "en": "Will you give me a kiss?",
+   "es": "¿Me das un besito?",
+   "form": "das",
+   "lemma": "dar"
+  },
+  {
+   "en": "Can you give me more sugar?",
+   "es": "¿Me das más azúcar?",
+   "form": "das",
+   "lemma": "dar"
+  },
+  {
+   "en": "If you say thanks, you don't drink any more.",
+   "es": "Si decís gracias, no tomás más.",
+   "form": "decís",
+   "lemma": "decir"
+  },
+  {
+   "en": "Do I tell him or do you tell him?",
+   "es": "¿Se lo digo yo o se lo decís vos?",
+   "form": "decís",
+   "lemma": "decir"
+  },
+  {
+   "en": "My uncle pours the mate until you say thanks.",
+   "es": "Mi tío ceba hasta que decís gracias.",
+   "form": "decís",
+   "lemma": "decir"
+  },
+  {
+   "en": "If you say thanks, you're out of the round.",
+   "es": "Si decís gracias, salís de la ronda.",
+   "form": "decís",
+   "lemma": "decir"
+  },
+  {
+   "en": "Can you tell the waiter that a fork is missing?",
+   "es": "¿Le decís al mozo que falta un tenedor?",
+   "form": "decís",
+   "lemma": "decir"
+  },
+  {
+   "en": "What do you say if we go to the beach on Saturday?",
+   "es": "¿Qué decís si el sábado vamos a la playa?",
+   "form": "decís",
+   "lemma": "decir"
+  },
+  {
+   "en": "Will you leave it here for me?",
+   "es": "¿Me lo dejás acá?",
+   "form": "dejás",
+   "lemma": "dejar"
+  },
+  {
+   "en": "Will you leave me the key?",
+   "es": "¿Me dejás la llave?",
+   "form": "dejás",
+   "lemma": "dejar"
+  },
+  {
+   "en": "Where do you leave the car?",
+   "es": "¿Dónde dejás el auto?",
+   "form": "dejás",
+   "lemma": "dejar"
+  },
+  {
+   "en": "Where do you leave the keys?",
+   "es": "¿Dónde dejás las llaves?",
+   "form": "dejás",
+   "lemma": "dejar"
+  },
+  {
+   "en": "How much do you leave as a tip?",
+   "es": "¿Cuánto dejás de propina?",
+   "form": "dejás",
+   "lemma": "dejar"
+  },
+  {
+   "en": "Are you leaving the waiter a tip?",
+   "es": "¿Le dejás propina al mozo?",
+   "form": "dejás",
+   "lemma": "dejar"
+  },
+  {
+   "en": "Do you take naps?",
+   "es": "¿Dormís la siesta?",
+   "form": "dormís",
+   "lemma": "dormir"
+  },
+  {
+   "en": "Do you take naps?",
+   "es": "¿Dormís la siesta?",
+   "form": "dormís",
+   "lemma": "dormir"
+  },
+  {
+   "en": "Do you sleep with your phone?",
+   "es": "¿Dormís con el celu?",
+   "form": "dormís",
+   "lemma": "dormir"
+  },
+  {
+   "en": "How many hours do you sleep?",
+   "es": "¿Cuántas horas dormís?",
+   "form": "dormís",
+   "lemma": "dormir"
+  },
+  {
+   "en": "Do you sleep well in that bed?",
+   "es": "¿Dormís bien en esa cama?",
+   "form": "dormís",
+   "lemma": "dormir"
+  },
+  {
+   "en": "—Do you sleep well? —No, I have a cough.",
+   "es": "—¿Dormís bien? —No, tengo tos.",
+   "form": "dormís",
+   "lemma": "dormir"
+  },
+  {
+   "en": "What time do you start?",
+   "es": "¿A qué hora empezás?",
+   "form": "empezás",
+   "lemma": "empezar"
+  },
+  {
+   "en": "What time do you start?",
+   "es": "¿A qué hora empezás?",
+   "form": "empezás",
+   "lemma": "empezar"
+  },
+  {
+   "en": "You start tomorrow, good luck!",
+   "es": "Mañana empezás, ¡éxitos!",
+   "form": "empezás",
+   "lemma": "empezar"
+  },
+  {
+   "en": "Are you starting, or should I?",
+   "es": "¿Vos empezás o empiezo yo?",
+   "form": "empezás",
+   "lemma": "empezar"
+  },
+  {
+   "en": "Why do you start so late?",
+   "es": "¿Por qué empezás tan tarde?",
+   "form": "empezás",
+   "lemma": "empezar"
+  },
+  {
+   "en": "Are you starting at the new job today?",
+   "es": "¿Empezás hoy en el laburo nuevo?",
+   "form": "empezás",
+   "lemma": "empezar"
+  },
+  {
+   "en": "Do you understand English?",
+   "es": "¿Entendés inglés?",
+   "form": "entendés",
+   "lemma": "entender"
+  },
+  {
+   "en": "You understand English, right?",
+   "es": "Entendés inglés, ¿no?",
+   "form": "entendés",
+   "lemma": "entender"
+  },
+  {
+   "en": "You don't understand me, Santi.",
+   "es": "No me entendés, Santi.",
+   "form": "entendés",
+   "lemma": "entender"
+  },
+  {
+   "en": "Do you get what I mean? —Partly.",
+   "es": "¿Me entendés? —En parte.",
+   "form": "entendés",
+   "lemma": "entender"
+  },
+  {
+   "en": "—Do you understand? —Yes, I do.",
+   "es": "—¿Entendés? —Sí, entiendo.",
+   "form": "entendés",
+   "lemma": "entender"
+  },
+  {
+   "en": "Hey, you don't understand either?",
+   "es": "Che, ¿vos tampoco entendés?",
+   "form": "entendés",
+   "lemma": "entender"
+  },
+  {
+   "en": "Can you wait a sec?",
+   "es": "¿Me esperás un toque?",
+   "form": "esperás",
+   "lemma": "esperar"
+  },
+  {
+   "en": "Can you wait for me for a bit?",
+   "es": "¿Me esperás un ratito?",
+   "form": "esperás",
+   "lemma": "esperar"
+  },
+  {
+   "en": "Will you wait for me a moment?",
+   "es": "¿Me esperás un momento?",
+   "form": "esperás",
+   "lemma": "esperar"
+  },
+  {
+   "en": "Will you wait for me at the supermarket door?",
+   "es": "¿Me esperás en la puerta del súper?",
+   "form": "esperás",
+   "lemma": "esperar"
+  },
+  {
+   "en": "Will you wait for me at the door of the milonga?",
+   "es": "¿Me esperás en la puerta de la milonga?",
+   "form": "esperás",
+   "lemma": "esperar"
+  },
+  {
+   "en": "If you get there first, will you wait for me at the bar?",
+   "es": "Si llegás primero, ¿me esperás en el bar?",
+   "form": "esperás",
+   "lemma": "esperar"
+  },
+  {
+   "en": "Are you sick?",
+   "es": "¿Estás enfermo?",
+   "form": "estás",
+   "lemma": "estar"
+  },
+  {
+   "en": "Are you sick of it?",
+   "es": "¿Estás podrida?",
+   "form": "estás",
+   "lemma": "estar"
+  },
+  {
+   "en": "Are you tired?",
+   "es": "¿Estás cansado?",
+   "form": "estás",
+   "lemma": "estar"
+  },
+  {
+   "en": "Are you angry?",
+   "es": "¿Estás enojada?",
+   "form": "estás",
+   "lemma": "estar"
+  },
+  {
+   "en": "Are you busy?",
+   "es": "¿Estás ocupado?",
+   "form": "estás",
+   "lemma": "estar"
+  },
+  {
+   "en": "Are you lost?",
+   "es": "¿Estás perdido?",
+   "form": "estás",
+   "lemma": "estar"
+  },
+  {
+   "en": "Do you study English?",
+   "es": "¿Estudiás inglés?",
+   "form": "estudiás",
+   "lemma": "estudiar"
+  },
+  {
+   "en": "Why do you study Spanish?",
+   "es": "¿Por qué estudiás castellano?",
+   "form": "estudiás",
+   "lemma": "estudiar"
+  },
+  {
+   "en": "Do you always study in the park?",
+   "es": "¿Siempre estudiás en el parque?",
+   "form": "estudiás",
+   "lemma": "estudiar"
+  },
+  {
+   "en": "How long have you been studying Spanish?",
+   "es": "¿Hace cuánto estudiás castellano?",
+   "form": "estudiás",
+   "lemma": "estudiar"
+  },
+  {
+   "en": "—Are you still studying? —No, I got tired of it.",
+   "es": "—¿Todavía estudiás? —No, me cansé.",
+   "form": "estudiás",
+   "lemma": "estudiar"
+  },
+  {
+   "en": "—What do you study at college? —English.",
+   "es": "—¿Qué estudiás en la facu? —Inglés.",
+   "form": "estudiás",
+   "lemma": "estudiar"
+  },
+  {
+   "en": "With the subway you save time.",
+   "es": "Con el subte ganás tiempo.",
+   "form": "ganás",
+   "lemma": "ganar"
+  },
+  {
+   "en": "The more you work, the more you earn.",
+   "es": "Cuanto más laburás, más ganás.",
+   "form": "ganás",
+   "lemma": "ganar"
+  },
+  {
+   "en": "You save an hour? Even better.",
+   "es": "¿Ganás una hora? Mejor todavía.",
+   "form": "ganás",
+   "lemma": "ganar"
+  },
+  {
+   "en": "You don't gain anything if you leave at rush hour.",
+   "es": "No ganás nada si salís en hora pico.",
+   "form": "ganás",
+   "lemma": "ganar"
+  },
+  {
+   "en": "The sooner you leave, the more time you save.",
+   "es": "Cuanto antes salgas, más tiempo ganás.",
+   "form": "ganás",
+   "lemma": "ganar"
+  },
+  {
+   "en": "You save twenty minutes by train? Even better.",
+   "es": "¿En tren ganás veinte minutos? Mejor todavía.",
+   "form": "ganás",
+   "lemma": "ganar"
+  },
+  {
+   "en": "Do you speak English?",
+   "es": "¿Hablás inglés?",
+   "form": "hablás",
+   "lemma": "hablar"
+  },
+  {
+   "en": "Are you serious?",
+   "es": "¿Hablás en serio?",
+   "form": "hablás",
+   "lemma": "hablar"
+  },
+  {
+   "en": "Do you talk to your ex?",
+   "es": "¿Hablás con tu ex?",
+   "form": "hablás",
+   "lemma": "hablar"
+  },
+  {
+   "en": "Do you speak Spanish?",
+   "es": "¿Hablás castellano?",
+   "form": "hablás",
+   "lemma": "hablar"
+  },
+  {
+   "en": "You speak good English.",
+   "es": "Hablás bien inglés.",
+   "form": "hablás",
+   "lemma": "hablar"
+  },
+  {
+   "en": "What language do you speak?",
+   "es": "¿Qué idioma hablás?",
+   "form": "hablás",
+   "lemma": "hablar"
+  },
+  {
+   "en": "What are you doing today?",
+   "es": "¿Qué hacés hoy?",
+   "form": "hacés",
+   "lemma": "hacer"
+  },
+  {
+   "en": "Are you in therapy?",
+   "es": "¿Hacés terapia?",
+   "form": "hacés",
+   "lemma": "hacer"
+  },
+  {
+   "en": "Do you play sports?",
+   "es": "¿Hacés deporte?",
+   "form": "hacés",
+   "lemma": "hacer"
+  },
+  {
+   "en": "Hi, how's it going?",
+   "es": "Hola, ¿qué hacés?",
+   "form": "hacés",
+   "lemma": "hacer"
+  },
+  {
+   "en": "Will you do the grocery shopping?",
+   "es": "¿Hacés las compras?",
+   "form": "hacés",
+   "lemma": "hacer"
+  },
+  {
+   "en": "Can you do me a favor?",
+   "es": "¿Me hacés un favor?",
+   "form": "hacés",
+   "lemma": "hacer"
+  },
+  {
+   "en": "Let me know if you're going.",
+   "es": "Avisame si vas.",
+   "form": "vas",
+   "lemma": "ir"
+  },
+  {
+   "en": "I'll go if you go.",
+   "es": "Voy si vas vos.",
+   "form": "vas",
+   "lemma": "ir"
+  },
+  {
+   "en": "Are you going to keep your word?",
+   "es": "¿Vas a cumplir?",
+   "form": "vas",
+   "lemma": "ir"
+  },
+  {
+   "en": "Are you going to the wake?",
+   "es": "¿Vas al velorio?",
+   "form": "vas",
+   "lemma": "ir"
+  },
+  {
+   "en": "Are you going to pick him up?",
+   "es": "¿Lo vas a buscar?",
+   "form": "vas",
+   "lemma": "ir"
+  },
+  {
+   "en": "Are you going to the party?",
+   "es": "¿Vas a la fiesta?",
+   "form": "vas",
+   "lemma": "ir"
+  },
+  {
+   "en": "Are you going home?",
+   "es": "¿Te vas a casa?",
+   "form": "te vas",
+   "lemma": "irse"
+  },
+  {
+   "en": "Are you leaving for work?",
+   "es": "¿Te vas al laburo?",
+   "form": "te vas",
+   "lemma": "irse"
+  },
+  {
+   "en": "Are you leaving at six?",
+   "es": "¿Te vas a las seis?",
+   "form": "te vas",
+   "lemma": "irse"
+  },
+  {
+   "en": "What time are you leaving?",
+   "es": "¿A qué hora te vas?",
+   "form": "te vas",
+   "lemma": "irse"
+  },
+  {
+   "en": "Are you leaving without having an afternoon snack?",
+   "es": "¿Te vas sin merendar?",
+   "form": "te vas",
+   "lemma": "irse"
+  },
+  {
+   "en": "Are you getting used to it?",
+   "es": "¿Te vas acostumbrando?",
+   "form": "te vas",
+   "lemma": "irse"
+  },
+  {
+   "en": "Will you play with me?",
+   "es": "¿Jugás conmigo?",
+   "form": "jugás",
+   "lemma": "jugar"
+  },
+  {
+   "en": "Do you play tennis?",
+   "es": "¿Jugás al tenis?",
+   "form": "jugás",
+   "lemma": "jugar"
+  },
+  {
+   "en": "Do you play soccer?",
+   "es": "¿Jugás al fútbol?",
+   "form": "jugás",
+   "lemma": "jugar"
+  },
+  {
+   "en": "Do you play the lottery?",
+   "es": "¿Jugás a la lotería?",
+   "form": "jugás",
+   "lemma": "jugar"
+  },
+  {
+   "en": "Where do you play soccer?",
+   "es": "¿Dónde jugás al fútbol?",
+   "form": "jugás",
+   "lemma": "jugar"
+  },
+  {
+   "en": "Are you arrogant because you play soccer well?",
+   "es": "¿Te la creés porque jugás bien al fútbol?",
+   "form": "jugás",
+   "lemma": "jugar"
+  },
+  {
+   "en": "You're not working anymore?",
+   "es": "¿Ya no laburás?",
+   "form": "laburás",
+   "lemma": "laburar"
+  },
+  {
+   "en": "Do you work nights?",
+   "es": "¿Laburás de noche?",
+   "form": "laburás",
+   "lemma": "laburar"
+  },
+  {
+   "en": "Do you work in an unregistered job?",
+   "es": "¿Laburás en negro?",
+   "form": "laburás",
+   "lemma": "laburar"
+  },
+  {
+   "en": "Are you working on Thursday?",
+   "es": "¿El jueves laburás?",
+   "form": "laburás",
+   "lemma": "laburar"
+  },
+  {
+   "en": "Are you working late today?",
+   "es": "¿Laburás tarde hoy?",
+   "form": "laburás",
+   "lemma": "laburar"
+  },
+  {
+   "en": "What time do you work?",
+   "es": "¿A qué hora laburás?",
+   "form": "laburás",
+   "lemma": "laburar"
+  },
+  {
+   "en": "Do you read your emails?",
+   "es": "¿Leés tus mails?",
+   "form": "leés",
+   "lemma": "leer"
+  },
+  {
+   "en": "Do you read the newspaper?",
+   "es": "¿Leés el diario?",
+   "form": "leés",
+   "lemma": "leer"
+  },
+  {
+   "en": "Which paper do you read?",
+   "es": "¿Qué diario leés?",
+   "form": "leés",
+   "lemma": "leer"
+  },
+  {
+   "en": "Are you reading the magazine?",
+   "es": "¿Leés la revista?",
+   "form": "leés",
+   "lemma": "leer"
+  },
+  {
+   "en": "Do you read newspapers from Uruguay?",
+   "es": "¿Leés diarios de Uruguay?",
+   "form": "leés",
+   "lemma": "leer"
+  },
+  {
+   "en": "Do you read magazines or newspapers?",
+   "es": "¿Leés revistas o diarios?",
+   "form": "leés",
+   "lemma": "leer"
+  },
+  {
+   "en": "Will you call him?",
+   "es": "¿Lo llamás vos?",
+   "form": "llamás",
+   "lemma": "llamar"
+  },
+  {
+   "en": "Will you call me tomorrow?",
+   "es": "¿Me llamás mañana?",
+   "form": "llamás",
+   "lemma": "llamar"
+  },
+  {
+   "en": "Why don't you call me?",
+   "es": "¿Por qué no me llamás?",
+   "form": "llamás",
+   "lemma": "llamar"
+  },
+  {
+   "en": "What time will you call me?",
+   "es": "¿A qué hora me llamás?",
+   "form": "llamás",
+   "lemma": "llamar"
+  },
+  {
+   "en": "Will you call me when you get there?",
+   "es": "¿Me llamás cuando llegues?",
+   "form": "llamás",
+   "lemma": "llamar"
+  },
+  {
+   "en": "Will you call me when you get back?",
+   "es": "¿Me llamás cuando vuelvas?",
+   "form": "llamás",
+   "lemma": "llamar"
+  },
+  {
+   "en": "Will you make it on time?",
+   "es": "¿Llegás a tiempo?",
+   "form": "llegás",
+   "lemma": "llegar"
+  },
+  {
+   "en": "Are you getting here early?",
+   "es": "¿Llegás temprano?",
+   "form": "llegás",
+   "lemma": "llegar"
+  },
+  {
+   "en": "You always arrive late.",
+   "es": "Siempre llegás tarde.",
+   "form": "llegás",
+   "lemma": "llegar"
+  },
+  {
+   "en": "You always show up at the last minute.",
+   "es": "Siempre llegás a último momento.",
+   "form": "llegás",
+   "lemma": "llegar"
+  },
+  {
+   "en": "I hope you get here early tomorrow.",
+   "es": "A ver si llegás temprano mañana.",
+   "form": "llegás",
+   "lemma": "llegar"
+  },
+  {
+   "en": "Take a taxi so you get there on time.",
+   "es": "Tomá un taxi así llegás a tiempo.",
+   "form": "llegás",
+   "lemma": "llegar"
+  },
+  {
+   "en": "Can you give me a ride home?",
+   "es": "¿Me llevás a casa?",
+   "form": "me llevás",
+   "lemma": "llevar"
+  },
+  {
+   "en": "Can you take me home?",
+   "es": "¿Me llevás a casa?",
+   "form": "me llevás",
+   "lemma": "llevar"
+  },
+  {
+   "en": "How long have you been here?",
+   "es": "¿Cuánto llevás acá?",
+   "form": "llevás",
+   "lemma": "llevar"
+  },
+  {
+   "en": "Can you take me downtown?",
+   "es": "¿Me llevás al centro?",
+   "form": "me llevás",
+   "lemma": "llevar"
+  },
+  {
+   "en": "Hey, have you been here long?",
+   "es": "Che, ¿llevás mucho acá?",
+   "form": "llevás",
+   "lemma": "llevar"
+  },
+  {
+   "en": "Have you been waiting long?",
+   "es": "¿Llevás mucho esperando?",
+   "form": "llevás",
+   "lemma": "llevar"
+  },
+  {
+   "en": "Are you the one sending it to him?",
+   "es": "¿Se lo mandás vos?",
+   "form": "mandás",
+   "lemma": "mandar"
+  },
+  {
+   "en": "Can you send me a voice message?",
+   "es": "¿Me mandás un audio?",
+   "form": "mandás",
+   "lemma": "mandar"
+  },
+  {
+   "en": "Can you send me the homework?",
+   "es": "¿Me mandás la tarea?",
+   "form": "mandás",
+   "lemma": "mandar"
+  },
+  {
+   "en": "Will you send him a message?",
+   "es": "¿Le mandás un mensaje?",
+   "form": "mandás",
+   "lemma": "mandar"
+  },
+  {
+   "en": "Can you send me the location?",
+   "es": "¿Me mandás la ubicación?",
+   "form": "mandás",
+   "lemma": "mandar"
+  },
+  {
+   "en": "Can you send me the receipt?",
+   "es": "¿Me mandás el comprobante?",
+   "form": "mandás",
+   "lemma": "mandar"
+  },
+  {
+   "en": "When are you moving?",
+   "es": "¿Cuándo te mudás?",
+   "form": "te mudás",
+   "lemma": "mudarse"
+  },
+  {
+   "en": "Are you moving alone or with friends?",
+   "es": "¿Te mudás solo o con amigos?",
+   "form": "te mudás",
+   "lemma": "mudarse"
+  },
+  {
+   "en": "If you're moving in January, I'll help you with the move.",
+   "es": "Si te mudás en enero, te ayudo con la mudanza.",
+   "form": "te mudás",
+   "lemma": "mudarse"
+  },
+  {
+   "en": "—Are you moving? —On the one hand, I think it is worth it.",
+   "es": "—¿Te mudás? —Por un lado, me parece que conviene.",
+   "form": "te mudás",
+   "lemma": "mudarse"
+  },
+  {
+   "en": "What do you need?",
+   "es": "¿Qué necesitás?",
+   "form": "necesitás",
+   "lemma": "necesitar"
+  },
+  {
+   "en": "What do you need?",
+   "es": "¿Qué necesitás?",
+   "form": "necesitás",
+   "lemma": "necesitar"
+  },
+  {
+   "en": "Do you need anything?",
+   "es": "¿Necesitás algo?",
+   "form": "necesitás",
+   "lemma": "necesitar"
+  },
+  {
+   "en": "Do you need help?",
+   "es": "¿Necesitás ayuda?",
+   "form": "necesitás",
+   "lemma": "necesitar"
+  },
+  {
+   "en": "Do you need money?",
+   "es": "¿Necesitás plata?",
+   "form": "necesitás",
+   "lemma": "necesitar"
+  },
+  {
+   "en": "Do you need help?",
+   "es": "¿Necesitás ayuda?",
+   "form": "necesitás",
+   "lemma": "necesitar"
+  },
+  {
+   "en": "Are you paying in dollars?",
+   "es": "¿Pagás en dólares?",
+   "form": "pagás",
+   "lemma": "pagar"
+  },
+  {
+   "en": "Are you paying with debit?",
+   "es": "¿Pagás con débito?",
+   "form": "pagás",
+   "lemma": "pagar"
+  },
+  {
+   "en": "You pay for your coffee.",
+   "es": "Vos pagás tu café.",
+   "form": "pagás",
+   "lemma": "pagar"
+  },
+  {
+   "en": "Are you paying with credit?",
+   "es": "¿Pagás con crédito?",
+   "form": "pagás",
+   "lemma": "pagar"
+  },
+  {
+   "en": "Are you paying cash?",
+   "es": "¿Pagás en efectivo?",
+   "form": "pagás",
+   "lemma": "pagar"
+  },
+  {
+   "en": "Are you paying? Thanks.",
+   "es": "¿Pagás vos? Gracias.",
+   "form": "pagás",
+   "lemma": "pagar"
+  },
+  {
+   "en": "Can you pass me the salt?",
+   "es": "¿Me pasás la sal?",
+   "form": "me pasás",
+   "lemma": "pasar"
+  },
+  {
+   "en": "Can you pass me the bread?",
+   "es": "¿Me pasás el pan?",
+   "form": "me pasás",
+   "lemma": "pasar"
+  },
+  {
+   "en": "Can you pass me the water?",
+   "es": "¿Me pasás el agua?",
+   "form": "me pasás",
+   "lemma": "pasar"
+  },
+  {
+   "en": "Can you pass me a glass?",
+   "es": "¿Me pasás un vaso?",
+   "form": "me pasás",
+   "lemma": "pasar"
+  },
+  {
+   "en": "Can you send me your alias?",
+   "es": "¿Me pasás tu alias?",
+   "form": "me pasás",
+   "lemma": "pasar"
+  },
+  {
+   "en": "Can you give me your alias?",
+   "es": "¿Me pasás tu alias?",
+   "form": "me pasás",
+   "lemma": "pasar"
+  },
+  {
+   "en": "Are you ordering dessert?",
+   "es": "¿Vos pedís postre?",
+   "form": "pedís",
+   "lemma": "pedir"
+  },
+  {
+   "en": "What are you ordering for dessert?",
+   "es": "¿Qué pedís de postre?",
+   "form": "pedís",
+   "lemma": "pedir"
+  },
+  {
+   "en": "Can you ask the waiter for the menu?",
+   "es": "¿Le pedís la carta al mozo?",
+   "form": "pedís",
+   "lemma": "pedir"
+  },
+  {
+   "en": "—What are you ordering? —The usual.",
+   "es": "—¿Qué pedís? —Lo de siempre.",
+   "form": "pedís",
+   "lemma": "pedir"
+  },
+  {
+   "en": "Are you ordering the milanesa or the chicken?",
+   "es": "¿Vos pedís la milanesa o el pollo?",
+   "form": "pedís",
+   "lemma": "pedir"
+  },
+  {
+   "en": "I'll order the wine and you order the dessert.",
+   "es": "Yo pido el vino y vos pedís el postre.",
+   "form": "pedís",
+   "lemma": "pedir"
+  },
+  {
+   "en": "Can you pick me up?",
+   "es": "¿Me podés buscar?",
+   "form": "podés",
+   "lemma": "poder"
+  },
+  {
+   "en": "Can you help me?",
+   "es": "¿Me podés ayudar?",
+   "form": "podés",
+   "lemma": "poder"
+  },
+  {
+   "en": "Can you call me?",
+   "es": "¿Me podés llamar?",
+   "form": "podés",
+   "lemma": "poder"
+  },
+  {
+   "en": "Can you give it to me?",
+   "es": "¿Me lo podés dar?",
+   "form": "podés",
+   "lemma": "poder"
+  },
+  {
+   "en": "Can you go tomorrow?",
+   "es": "¿Podés ir mañana?",
+   "form": "podés",
+   "lemma": "poder"
+  },
+  {
+   "en": "Can you go out today?",
+   "es": "¿Hoy podés salir?",
+   "form": "podés",
+   "lemma": "poder"
+  },
+  {
+   "en": "Why do you ask?",
+   "es": "¿Por qué preguntás?",
+   "form": "preguntás",
+   "lemma": "preguntar"
+  },
+  {
+   "en": "Can you ask, please?",
+   "es": "¿Preguntás vos, por favor?",
+   "form": "preguntás",
+   "lemma": "preguntar"
+  },
+  {
+   "en": "Can you ask where the station is?",
+   "es": "¿Preguntás dónde está la estación?",
+   "form": "preguntás",
+   "lemma": "preguntar"
+  },
+  {
+   "en": "Are you asking me where I'm from? Rosario.",
+   "es": "¿Me preguntás de dónde soy? De Rosario.",
+   "form": "preguntás",
+   "lemma": "preguntar"
+  },
+  {
+   "en": "When you pour the mate, do you ask bitter or sweet?",
+   "es": "Cuando cebás, ¿preguntás amargo o dulce?",
+   "form": "preguntás",
+   "lemma": "preguntar"
+  },
+  {
+   "en": "If you want, I'll go.",
+   "es": "Si querés, voy.",
+   "form": "querés",
+   "lemma": "querer"
+  },
+  {
+   "en": "Do you want to dance?",
+   "es": "¿Querés bailar?",
+   "form": "querés",
+   "lemma": "querer"
+  },
+  {
+   "en": "Do you want dessert?",
+   "es": "¿Querés postre?",
+   "form": "querés",
+   "lemma": "querer"
+  },
+  {
+   "en": "Which ones do you want?",
+   "es": "¿Cuáles querés?",
+   "form": "querés",
+   "lemma": "querer"
+  },
+  {
+   "en": "Do you want a coffee?",
+   "es": "¿Querés un café?",
+   "form": "querés",
+   "lemma": "querer"
+  },
+  {
+   "en": "Do you want blood sausage?",
+   "es": "¿Querés morcilla?",
+   "form": "querés",
+   "lemma": "querer"
+  },
+  {
+   "en": "Do you know how to drive?",
+   "es": "¿Sabés manejar?",
+   "form": "sabés",
+   "lemma": "saber"
+  },
+  {
+   "en": "Do you know the lyrics?",
+   "es": "¿Sabés la letra?",
+   "form": "sabés",
+   "lemma": "saber"
+  },
+  {
+   "en": "I don't know, do you know?",
+   "es": "No sé, ¿vos sabés?",
+   "form": "sabés",
+   "lemma": "saber"
+  },
+  {
+   "en": "Mica, do you know or not?",
+   "es": "Mica, ¿sabés o no?",
+   "form": "sabés",
+   "lemma": "saber"
+  },
+  {
+   "en": "Do you know if it opens today?",
+   "es": "¿Sabés si abre hoy?",
+   "form": "sabés",
+   "lemma": "saber"
+  },
+  {
+   "en": "Do you know how you say it?",
+   "es": "¿Sabés cómo se dice?",
+   "form": "sabés",
+   "lemma": "saber"
+  },
+  {
+   "en": "Will you take the dog out?",
+   "es": "¿Sacás al perro?",
+   "form": "sacás",
+   "lemma": "sacar"
+  },
+  {
+   "en": "Hey, can you answer a question for me?",
+   "es": "Che, ¿me sacás una duda?",
+   "form": "sacás",
+   "lemma": "sacar"
+  },
+  {
+   "en": "While you're at it, can you take out the trash?",
+   "es": "De paso, ¿sacás la basura?",
+   "form": "sacás",
+   "lemma": "sacar"
+  },
+  {
+   "en": "Will you take the dog out to the square?",
+   "es": "¿Sacás al perro a la plaza?",
+   "form": "sacás",
+   "lemma": "sacar"
+  },
+  {
+   "en": "You never take out the trash, Fede.",
+   "es": "Nunca sacás la basura, Fede.",
+   "form": "sacás",
+   "lemma": "sacar"
+  },
+  {
+   "en": "Why do you never take out the trash?",
+   "es": "¿Por qué nunca sacás la basura?",
+   "form": "sacás",
+   "lemma": "sacar"
+  },
+  {
+   "en": "Are you going out on the weekend?",
+   "es": "¿Salís el finde?",
+   "form": "salís",
+   "lemma": "salir"
+  },
+  {
+   "en": "Are you going out with Fede?",
+   "es": "¿Salís con Fede?",
+   "form": "salís",
+   "lemma": "salir"
+  },
+  {
+   "en": "Are you going out today? —It depends.",
+   "es": "¿Salís hoy? —Depende.",
+   "form": "salís",
+   "lemma": "salir"
+  },
+  {
+   "en": "You don't go out on Saturdays anymore?",
+   "es": "¿Ya no salís los sábados?",
+   "form": "salís",
+   "lemma": "salir"
+  },
+  {
+   "en": "Are you going out with your friends on the weekend?",
+   "es": "¿Salís con tus amigas el finde?",
+   "form": "salís",
+   "lemma": "salir"
+  },
+  {
+   "en": "—Do you go out a lot? —Every now and then.",
+   "es": "—¿Salís mucho? —De vez en cuando.",
+   "form": "salís",
+   "lemma": "salir"
+  },
+  {
+   "en": "Are you still angry?",
+   "es": "¿Seguís enojado?",
+   "form": "seguís",
+   "lemma": "seguir"
+  },
+  {
+   "en": "Are you still stressed?",
+   "es": "¿Seguís estresada?",
+   "form": "seguís",
+   "lemma": "seguir"
+  },
+  {
+   "en": "Do you still have a fever?",
+   "es": "¿Seguís con fiebre?",
+   "form": "seguís",
+   "lemma": "seguir"
+  },
+  {
+   "en": "Are you still working at the bank?",
+   "es": "¿Seguís laburando en el banco?",
+   "form": "seguís",
+   "lemma": "seguir"
+  },
+  {
+   "en": "Are you still living in San Telmo?",
+   "es": "¿Seguís viviendo en San Telmo?",
+   "form": "seguís",
+   "lemma": "seguir"
+  },
+  {
+   "en": "Are you still seeing that guy?",
+   "es": "¿Seguís saliendo con ese pibe?",
+   "form": "seguís",
+   "lemma": "seguir"
+  },
+  {
+   "en": "Are you younger?",
+   "es": "¿Sos más chico?",
+   "form": "sos",
+   "lemma": "ser"
+  },
+  {
+   "en": "Are you from out of town?",
+   "es": "¿Sos de afuera?",
+   "form": "sos",
+   "lemma": "ser"
+  },
+  {
+   "en": "Who are you?",
+   "es": "¿Quién sos vos?",
+   "form": "sos",
+   "lemma": "ser"
+  },
+  {
+   "en": "You're very kind.",
+   "es": "Sos muy amable.",
+   "form": "sos",
+   "lemma": "ser"
+  },
+  {
+   "en": "You're Lucía, right?",
+   "es": "Sos Lucía, ¿no?",
+   "form": "sos",
+   "lemma": "ser"
+  },
+  {
+   "en": "You're no fun!",
+   "es": "¡Sos una amarga!",
+   "form": "sos",
+   "lemma": "ser"
+  },
+  {
+   "en": "Do you have your phone?",
+   "es": "¿Tenés el celu?",
+   "form": "tenés",
+   "lemma": "tener"
+  },
+  {
+   "en": "Do you have private health insurance?",
+   "es": "¿Tenés prepaga?",
+   "form": "tenés",
+   "lemma": "tener"
+  },
+  {
+   "en": "Do you have tomatoes?",
+   "es": "¿Tenés tomates?",
+   "form": "tenés",
+   "lemma": "tener"
+  },
+  {
+   "en": "Do you have a card?",
+   "es": "¿Tenés tarjeta?",
+   "form": "tenés",
+   "lemma": "tener"
+  },
+  {
+   "en": "Do you have onions?",
+   "es": "¿Tenés cebolla?",
+   "form": "tenés",
+   "lemma": "tener"
+  },
+  {
+   "en": "Do you have a meeting?",
+   "es": "¿Tenés reunión?",
+   "form": "tenés",
+   "lemma": "tener"
+  },
+  {
+   "en": "You never drink mate.",
+   "es": "Nunca tomás mate.",
+   "form": "tomás",
+   "lemma": "tomar"
+  },
+  {
+   "en": "You don't drink coffee anymore?",
+   "es": "¿Ya no tomás café?",
+   "form": "tomás",
+   "lemma": "tomar"
+  },
+  {
+   "en": "Are you having a smoothie?",
+   "es": "¿Tomás un licuado?",
+   "form": "tomás",
+   "lemma": "tomar"
+  },
+  {
+   "en": "You always drink coffee.",
+   "es": "Siempre tomás café.",
+   "form": "tomás",
+   "lemma": "tomar"
+  },
+  {
+   "en": "Do you think I'm dumb?",
+   "es": "¿Me tomás por tonta?",
+   "form": "tomás",
+   "lemma": "tomar"
+  },
+  {
+   "en": "—Do you drink coffee? —Sometimes.",
+   "es": "—¿Tomás café? —A veces.",
+   "form": "tomás",
+   "lemma": "tomar"
+  },
+  {
+   "en": "Are you bringing the computer?",
+   "es": "¿Traés la compu?",
+   "form": "traés",
+   "lemma": "traer"
+  },
+  {
+   "en": "Can you bring me sugar?",
+   "es": "¿Me traés azúcar?",
+   "form": "traés",
+   "lemma": "traer"
+  },
+  {
+   "en": "Can you bring some beers?",
+   "es": "¿Traés unas birras?",
+   "form": "traés",
+   "lemma": "traer"
+  },
+  {
+   "en": "Can you bring me the menu?",
+   "es": "¿Me traés la carta?",
+   "form": "traés",
+   "lemma": "traer"
+  },
+  {
+   "en": "Are you bringing the guitar?",
+   "es": "¿Traés la guitarra?",
+   "form": "traés",
+   "lemma": "traer"
+  },
+  {
+   "en": "Can you bring me the menu?",
+   "es": "¿Me traés la carta?",
+   "form": "traés",
+   "lemma": "traer"
+  },
+  {
+   "en": "Are you coming with me?",
+   "es": "¿Venís conmigo?",
+   "form": "venís",
+   "lemma": "venir"
+  },
+  {
+   "en": "—Are you coming? —Maybe.",
+   "es": "—¿Venís? —Capaz.",
+   "form": "venís",
+   "lemma": "venir"
+  },
+  {
+   "en": "Are you coming next time?",
+   "es": "¿Venís la próxima?",
+   "form": "venís",
+   "lemma": "venir"
+  },
+  {
+   "en": "I mean, are you coming or not?",
+   "es": "O sea, ¿venís o no?",
+   "form": "venís",
+   "lemma": "venir"
+  },
+  {
+   "en": "Are you coming to the pre-party?",
+   "es": "¿Venís a la previa?",
+   "form": "venís",
+   "lemma": "venir"
+  },
+  {
+   "en": "I mean, are you coming or not?",
+   "es": "O sea, ¿venís o no?",
+   "form": "venís",
+   "lemma": "venir"
+  },
+  {
+   "en": "Can you see me now or not?",
+   "es": "¿Me ves ahora o no?",
+   "form": "ves",
+   "lemma": "ver"
+  },
+  {
+   "en": "I can see you, can you see me?",
+   "es": "Yo te veo, ¿vos me ves?",
+   "form": "ves",
+   "lemma": "ver"
+  },
+  {
+   "en": "What downside do you see?",
+   "es": "¿Qué desventaja le ves?",
+   "form": "ves",
+   "lemma": "ver"
+  },
+  {
+   "en": "Can you see that building? I live there.",
+   "es": "¿Ves ese edificio? Yo vivo ahí.",
+   "form": "ves",
+   "lemma": "ver"
+  },
+  {
+   "en": "Can you see Juan? He's on the corner.",
+   "es": "¿Ves a Juan? Está en la esquina.",
+   "form": "ves",
+   "lemma": "ver"
+  },
+  {
+   "en": "How long has it been since you saw your grandma?",
+   "es": "¿Hace cuánto que no ves a tu abuela?",
+   "form": "ves",
+   "lemma": "ver"
+  },
+  {
+   "en": "Are you traveling tomorrow?",
+   "es": "¿Viajás mañana?",
+   "form": "viajás",
+   "lemma": "viajar"
+  },
+  {
+   "en": "Are you traveling all by yourself?",
+   "es": "¿Viajás solita?",
+   "form": "viajás",
+   "lemma": "viajar"
+  },
+  {
+   "en": "Who are you traveling with?",
+   "es": "¿Con quién viajás?",
+   "form": "viajás",
+   "lemma": "viajar"
+  },
+  {
+   "en": "Are you traveling with Pablo?",
+   "es": "¿Viajás con Pablo?",
+   "form": "viajás",
+   "lemma": "viajar"
+  },
+  {
+   "en": "Are you traveling alone, Mica?",
+   "es": "¿Viajás sola, Mica?",
+   "form": "viajás",
+   "lemma": "viajar"
+  },
+  {
+   "en": "What date are you traveling?",
+   "es": "¿En qué fecha viajás?",
+   "form": "viajás",
+   "lemma": "viajar"
+  },
+  {
+   "en": "You live really far away!",
+   "es": "¡Vivís lejísimos!",
+   "form": "vivís",
+   "lemma": "vivir"
+  },
+  {
+   "en": "What floor do you live on?",
+   "es": "¿En qué piso vivís?",
+   "form": "vivís",
+   "lemma": "vivir"
+  },
+  {
+   "en": "What area do you live in?",
+   "es": "¿En qué zona vivís?",
+   "form": "vivís",
+   "lemma": "vivir"
+  },
+  {
+   "en": "Do you live far from here?",
+   "es": "¿Vivís lejos de acá?",
+   "form": "vivís",
+   "lemma": "vivir"
+  },
+  {
+   "en": "Do you live in the neighborhood?",
+   "es": "¿Vivís en el barrio?",
+   "form": "vivís",
+   "lemma": "vivir"
+  },
+  {
+   "en": "What street do you live on?",
+   "es": "¿En qué calle vivís?",
+   "form": "vivís",
+   "lemma": "vivir"
+  },
+  {
+   "en": "Are you coming back soon?",
+   "es": "¿Volvés pronto?",
+   "form": "volvés",
+   "lemma": "volver"
+  },
+  {
+   "en": "Are you coming back in August?",
+   "es": "¿Volvés en agosto?",
+   "form": "volvés",
+   "lemma": "volver"
+  },
+  {
+   "en": "Are you coming back late today?",
+   "es": "¿Volvés tarde hoy?",
+   "form": "volvés",
+   "lemma": "volver"
+  },
+  {
+   "en": "Mom, are you coming back tonight?",
+   "es": "Mamá, ¿volvés a la noche?",
+   "form": "volvés",
+   "lemma": "volver"
+  },
+  {
+   "en": "—When are you coming back? —In June.",
+   "es": "—¿Cuándo volvés? —En junio.",
+   "form": "volvés",
+   "lemma": "volver"
+  },
+  {
+   "en": "I miss you, when are you coming back?",
+   "es": "Te extraño, ¿cuándo volvés?",
+   "form": "volvés",
+   "lemma": "volver"
+  }
+ ],
+ "verbs": [
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "eras",
+   "gloss": "you were",
+   "lemma": "ser",
+   "n": 3970
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "fueras",
+   "gloss": "(that) you were",
+   "lemma": "ser",
+   "n": 3970
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "sé",
+   "gloss": "be (an order: sé sincero = be honest)",
+   "lemma": "ser",
+   "n": 3970
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "seas",
+   "gloss": "you be (don't be)",
+   "lemma": "ser",
+   "n": 3970
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "ser",
+   "gloss": "to be",
+   "lemma": "ser",
+   "n": 3970
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "serías",
+   "gloss": "you would be",
+   "lemma": "ser",
+   "n": 3970
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "sos",
+   "gloss": "you are",
+   "lemma": "ser",
+   "n": 3970
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "estabas",
+   "gloss": "you were",
+   "lemma": "estar",
+   "n": 2774
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "estar",
+   "gloss": "to be (how, where)",
+   "lemma": "estar",
+   "n": 2774
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "estarías",
+   "gloss": "you would be (place or state)",
+   "lemma": "estar",
+   "n": 2774
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "estás",
+   "gloss": "you are",
+   "lemma": "estar",
+   "n": 2774
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "estés",
+   "gloss": "you are (that you be)",
+   "lemma": "estar",
+   "n": 2774
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "estuviste",
+   "gloss": "you were (somewhere)",
+   "lemma": "estar",
+   "n": 2774
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "fut",
+    "voseo": true
+   },
+   "form": "tendrás",
+   "gloss": "you'd have (polite question)",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "tendrías",
+   "gloss": "you would have; you should (tendrías que)",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "tendrías que",
+   "gloss": "you should, you ought to",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "tené",
+   "gloss": "have",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "tener",
+   "gloss": "to have (to)",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "clitic": true,
+    "verb_form": "inf"
+   },
+   "form": "tenerte",
+   "gloss": "to have (in yourself, with yourself)",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "tenés",
+   "gloss": "you have",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "tenés que",
+   "gloss": "you have to",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "tengas",
+   "gloss": "you have (that you have)",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "tenías",
+   "gloss": "you had",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "tuvieras",
+   "gloss": "you had (if you had)",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "tuviste",
+   "gloss": "you had",
+   "lemma": "tener",
+   "n": 2205
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "fuiste",
+   "gloss": "you went",
+   "lemma": "ir",
+   "n": 1676
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "ibas",
+   "gloss": "you went, you used to go",
+   "lemma": "ir",
+   "n": 1676
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "ir",
+   "gloss": null,
+   "lemma": "ir",
+   "n": 1676
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "irías",
+   "gloss": "you would go",
+   "lemma": "ir",
+   "n": 1676
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "vas",
+   "gloss": "you go, you're going",
+   "lemma": "ir",
+   "n": 1676
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "vayas",
+   "gloss": "you go (that you go)",
+   "lemma": "ir",
+   "n": 1676
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "haber",
+   "gloss": "to have (done)",
+   "lemma": "haber",
+   "n": 1160
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "habías",
+   "gloss": "you had",
+   "lemma": "haber",
+   "n": 1160
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "hubieras",
+   "gloss": "(if) you had; you would have",
+   "lemma": "haber",
+   "n": 1160
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "querés",
+   "gloss": "you want",
+   "lemma": "querer",
+   "n": 936
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "querías",
+   "gloss": "you wanted",
+   "lemma": "querer",
+   "n": 936
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "quieras",
+   "gloss": "(that) you want",
+   "lemma": "querer",
+   "n": 936
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "quisiste",
+   "gloss": "you wanted, you tried",
+   "lemma": "querer",
+   "n": 936
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "hacé",
+   "gloss": "do, make",
+   "lemma": "hacer",
+   "n": 770
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "hacer",
+   "gloss": null,
+   "lemma": "hacer",
+   "n": 770
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "hacés",
+   "gloss": "you do",
+   "lemma": "hacer",
+   "n": 770
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "hagas",
+   "gloss": "you do (that you do)",
+   "lemma": "hacer",
+   "n": 770
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "harías",
+   "gloss": "you would do",
+   "lemma": "hacer",
+   "n": 770
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "hicieras",
+   "gloss": "(that) you did",
+   "lemma": "hacer",
+   "n": 770
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "hiciste",
+   "gloss": "you did, you made",
+   "lemma": "hacer",
+   "n": 770
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "decime",
+   "gloss": "tell me",
+   "lemma": "decir",
+   "n": 631
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "decímelo",
+   "gloss": "tell me (it)",
+   "lemma": "decir",
+   "n": 631
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "decir",
+   "gloss": "to say, to tell",
+   "lemma": "decir",
+   "n": 631
+  },
+  {
+   "f": {
+    "clitic": true,
+    "verb_form": "inf"
+   },
+   "form": "decirle",
+   "gloss": "to tell him, to tell her",
+   "lemma": "decir",
+   "n": 631
+  },
+  {
+   "f": {
+    "clitic": true,
+    "verb_form": "inf"
+   },
+   "form": "decirles",
+   "gloss": "to say to them, to tell them",
+   "lemma": "decir",
+   "n": 631
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "decís",
+   "gloss": "you say",
+   "lemma": "decir",
+   "n": 631
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "digas",
+   "gloss": "you say (don't say)",
+   "lemma": "decir",
+   "n": 631
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "dijeras",
+   "gloss": "(that) you said",
+   "lemma": "decir",
+   "n": 631
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "dijiste",
+   "gloss": "you said, you told",
+   "lemma": "decir",
+   "n": 631
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "dirías",
+   "gloss": "you would say",
+   "lemma": "decir",
+   "n": 631
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "salgas",
+   "gloss": "you leave (when you leave)",
+   "lemma": "salir",
+   "n": 628
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "salieras",
+   "gloss": "(that) you went out",
+   "lemma": "salir",
+   "n": 628
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "salir",
+   "gloss": null,
+   "lemma": "salir",
+   "n": 628
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "salís",
+   "gloss": "you go out",
+   "lemma": "salir",
+   "n": 628
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "saliste",
+   "gloss": "you went out, you left",
+   "lemma": "salir",
+   "n": 628
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "llegar",
+   "gloss": null,
+   "lemma": "llegar",
+   "n": 623
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "llegás",
+   "gloss": "you arrive",
+   "lemma": "llegar",
+   "n": 623
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "llegaste",
+   "gloss": "you arrived, you got here",
+   "lemma": "llegar",
+   "n": 623
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "llegues",
+   "gloss": "you get there (when you get there)",
+   "lemma": "llegar",
+   "n": 623
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "podés",
+   "gloss": "you can",
+   "lemma": "poder",
+   "n": 619
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "podías",
+   "gloss": "you could, you were able to",
+   "lemma": "poder",
+   "n": 619
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "podrías",
+   "gloss": "could you",
+   "lemma": "poder",
+   "n": 619
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "pudieras",
+   "gloss": "you could (if you could)",
+   "lemma": "poder",
+   "n": 619
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "pudiste",
+   "gloss": "you could, you managed to",
+   "lemma": "poder",
+   "n": 619
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "puedas",
+   "gloss": "you can (when you can)",
+   "lemma": "poder",
+   "n": 619
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "vendrías",
+   "gloss": "you would come",
+   "lemma": "venir",
+   "n": 587
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "vengas",
+   "gloss": "you come (that you come)",
+   "lemma": "venir",
+   "n": 587
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "vení",
+   "gloss": "come",
+   "lemma": "venir",
+   "n": 587
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "venías",
+   "gloss": "you were coming, you used to come",
+   "lemma": "venir",
+   "n": 587
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "venir",
+   "gloss": "to come",
+   "lemma": "venir",
+   "n": 587
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "venís",
+   "gloss": "you come",
+   "lemma": "venir",
+   "n": 587
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "vinieras",
+   "gloss": "(that) you came",
+   "lemma": "venir",
+   "n": 587
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "viniste",
+   "gloss": "you came",
+   "lemma": "venir",
+   "n": 587
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "laburar",
+   "gloss": null,
+   "lemma": "laburar",
+   "n": 487
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "laburás",
+   "gloss": "you work",
+   "lemma": "laburar",
+   "n": 487
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "laburaste",
+   "gloss": "you worked",
+   "lemma": "laburar",
+   "n": 487
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "veas",
+   "gloss": "you see (so that you see)",
+   "lemma": "ver",
+   "n": 409
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "veías",
+   "gloss": "you saw, you used to see",
+   "lemma": "ver",
+   "n": 409
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "ver",
+   "gloss": "to see",
+   "lemma": "ver",
+   "n": 409
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "ves",
+   "gloss": "you see",
+   "lemma": "ver",
+   "n": 409
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "viste",
+   "gloss": "you saw, you watched",
+   "lemma": "ver",
+   "n": 409
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "tomá",
+   "gloss": "here, take this",
+   "lemma": "tomar",
+   "n": 397
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "tomar",
+   "gloss": null,
+   "lemma": "tomar",
+   "n": 397
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "tomás",
+   "gloss": "you drink",
+   "lemma": "tomar",
+   "n": 397
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "tomaste",
+   "gloss": "you drank, you took",
+   "lemma": "tomar",
+   "n": 397
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "tomes",
+   "gloss": "you take, you drink (that you take)",
+   "lemma": "tomar",
+   "n": 397
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "hablá",
+   "gloss": "speak, talk",
+   "lemma": "hablar",
+   "n": 392
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "hablar",
+   "gloss": null,
+   "lemma": "hablar",
+   "n": 392
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "hablás",
+   "gloss": "you speak",
+   "lemma": "hablar",
+   "n": 392
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "hablaste",
+   "gloss": "you spoke, you talked",
+   "lemma": "hablar",
+   "n": 392
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "saber",
+   "gloss": "to know",
+   "lemma": "saber",
+   "n": 377
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "sabés",
+   "gloss": "you know",
+   "lemma": "saber",
+   "n": 377
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "sabías",
+   "gloss": "you knew",
+   "lemma": "saber",
+   "n": 377
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "fut",
+    "voseo": true
+   },
+   "form": "sabrás",
+   "gloss": "you'd know (polite question)",
+   "lemma": "saber",
+   "n": 377
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "sabrías",
+   "gloss": "you would know",
+   "lemma": "saber",
+   "n": 377
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "sepas",
+   "gloss": "you know (so that you know)",
+   "lemma": "saber",
+   "n": 377
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "supieras",
+   "gloss": "(that) you knew",
+   "lemma": "saber",
+   "n": 377
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "pedir",
+   "gloss": null,
+   "lemma": "pedir",
+   "n": 368
+  },
+  {
+   "f": {
+    "clitic": true,
+    "verb_form": "inf"
+   },
+   "form": "pedirle",
+   "gloss": "to ask him, to ask her",
+   "lemma": "pedir",
+   "n": 368
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "pedís",
+   "gloss": "you order, you ask for",
+   "lemma": "pedir",
+   "n": 368
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "pediste",
+   "gloss": "you ordered, you asked for",
+   "lemma": "pedir",
+   "n": 368
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "pidas",
+   "gloss": "you order (that you order)",
+   "lemma": "pedir",
+   "n": 368
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "llamá",
+   "gloss": "call (someone)",
+   "lemma": "llamar",
+   "n": 351
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "llamame",
+   "gloss": "call me",
+   "lemma": "llamar",
+   "n": 351
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "llamar",
+   "gloss": null,
+   "lemma": "llamar",
+   "n": 351
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "llamaras",
+   "gloss": "(that) you called",
+   "lemma": "llamar",
+   "n": 351
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "llamás",
+   "gloss": "you call, you'll call",
+   "lemma": "llamar",
+   "n": 351
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "llamaste",
+   "gloss": "you called",
+   "lemma": "llamar",
+   "n": 351
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "llames",
+   "gloss": "you call (that you call)",
+   "lemma": "llamar",
+   "n": 351
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "comer",
+   "gloss": null,
+   "lemma": "comer",
+   "n": 335
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "comés",
+   "gloss": "you eat",
+   "lemma": "comer",
+   "n": 335
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "comías",
+   "gloss": "you ate, you used to eat",
+   "lemma": "comer",
+   "n": 335
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "comiste",
+   "gloss": "you ate",
+   "lemma": "comer",
+   "n": 335
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "pagar",
+   "gloss": "to pay",
+   "lemma": "pagar",
+   "n": 326
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "pagás",
+   "gloss": "you pay",
+   "lemma": "pagar",
+   "n": 326
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "pagaste",
+   "gloss": "you paid",
+   "lemma": "pagar",
+   "n": 326
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "pagues",
+   "gloss": "you pay (that you pay)",
+   "lemma": "pagar",
+   "n": 326
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "vivas",
+   "gloss": "you live (that you live)",
+   "lemma": "vivir",
+   "n": 320
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "vivías",
+   "gloss": "you lived",
+   "lemma": "vivir",
+   "n": 320
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "vivir",
+   "gloss": null,
+   "lemma": "vivir",
+   "n": 320
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "vivís",
+   "gloss": "you live",
+   "lemma": "vivir",
+   "n": 320
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "viviste",
+   "gloss": "you lived",
+   "lemma": "vivir",
+   "n": 320
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "comprá",
+   "gloss": "buy",
+   "lemma": "comprar",
+   "n": 317
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "comprar",
+   "gloss": "to buy",
+   "lemma": "comprar",
+   "n": 317
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "comprás",
+   "gloss": "you buy",
+   "lemma": "comprar",
+   "n": 317
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "compraste",
+   "gloss": "you bought",
+   "lemma": "comprar",
+   "n": 317
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "dame",
+   "gloss": "give me",
+   "lemma": "dar",
+   "n": 307
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "dar",
+   "gloss": "to give",
+   "lemma": "dar",
+   "n": 307
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "darías",
+   "gloss": "you would give",
+   "lemma": "dar",
+   "n": 307
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "das",
+   "gloss": "you give",
+   "lemma": "dar",
+   "n": 307
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "des",
+   "gloss": "you give (that you give)",
+   "lemma": "dar",
+   "n": 307
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "diste",
+   "gloss": "you gave",
+   "lemma": "dar",
+   "n": 307
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "traeme",
+   "gloss": "bring me",
+   "lemma": "traer",
+   "n": 294
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "traer",
+   "gloss": null,
+   "lemma": "traer",
+   "n": 294
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "traés",
+   "gloss": "you bring",
+   "lemma": "traer",
+   "n": 294
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "traigas",
+   "gloss": "you bring (that you bring)",
+   "lemma": "traer",
+   "n": 294
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "trajeras",
+   "gloss": "(that) you brought; (to) bring",
+   "lemma": "traer",
+   "n": 294
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "trajiste",
+   "gloss": "you brought",
+   "lemma": "traer",
+   "n": 294
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "me pasás",
+   "gloss": "can you give me, can you send me",
+   "lemma": "pasar",
+   "n": 285
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "pasá",
+   "gloss": "come in",
+   "lemma": "pasar",
+   "n": 285
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "pasame",
+   "gloss": "pass me",
+   "lemma": "pasar",
+   "n": 285
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "pasámelo",
+   "gloss": "pass it to me, send it to me",
+   "lemma": "pasar",
+   "n": 285
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "pasar",
+   "gloss": "to pass, to come by",
+   "lemma": "pasar",
+   "n": 285
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "pasarías",
+   "gloss": "you would stop by",
+   "lemma": "pasar",
+   "n": 285
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "pasás",
+   "gloss": null,
+   "lemma": "pasar",
+   "n": 285
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "necesitás",
+   "gloss": "you need",
+   "lemma": "necesitar",
+   "n": 264
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "esperá",
+   "gloss": "wait",
+   "lemma": "esperar",
+   "n": 259
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "esperame",
+   "gloss": "wait for me",
+   "lemma": "esperar",
+   "n": 259
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "esperar",
+   "gloss": "to wait",
+   "lemma": "esperar",
+   "n": 259
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "esperás",
+   "gloss": "you wait",
+   "lemma": "esperar",
+   "n": 259
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "esperaste",
+   "gloss": "you waited",
+   "lemma": "esperar",
+   "n": 259
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "esperes",
+   "gloss": "you wait (that you wait)",
+   "lemma": "esperar",
+   "n": 259
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "estudiar",
+   "gloss": null,
+   "lemma": "estudiar",
+   "n": 221
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "estudiaras",
+   "gloss": "(that) you studied",
+   "lemma": "estudiar",
+   "n": 221
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "estudiás",
+   "gloss": "you study",
+   "lemma": "estudiar",
+   "n": 221
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "estudiaste",
+   "gloss": "you studied",
+   "lemma": "estudiar",
+   "n": 221
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "buscame",
+   "gloss": "pick me up, come get me",
+   "lemma": "buscar",
+   "n": 212
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "buscar",
+   "gloss": null,
+   "lemma": "buscar",
+   "n": 212
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "buscás",
+   "gloss": "you look for, you pick up",
+   "lemma": "buscar",
+   "n": 212
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "buscaste",
+   "gloss": "you looked for",
+   "lemma": "buscar",
+   "n": 212
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "busques",
+   "gloss": "you look for (that you look for)",
+   "lemma": "buscar",
+   "n": 212
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "mandale",
+   "gloss": "send (to him, to her)",
+   "lemma": "mandar",
+   "n": 203
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "mandame",
+   "gloss": "send me",
+   "lemma": "mandar",
+   "n": 203
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "mandás",
+   "gloss": "you send",
+   "lemma": "mandar",
+   "n": 203
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "mandáselo",
+   "gloss": "send it to him, send it to her",
+   "lemma": "mandar",
+   "n": 203
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "mandaste",
+   "gloss": "you sent",
+   "lemma": "mandar",
+   "n": 203
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "mandes",
+   "gloss": "you send (that you send)",
+   "lemma": "mandar",
+   "n": 203
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "avisame",
+   "gloss": "let me know",
+   "lemma": "avisar",
+   "n": 198
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "avisaras",
+   "gloss": "(that) you let know",
+   "lemma": "avisar",
+   "n": 198
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "avisás",
+   "gloss": "you let know",
+   "lemma": "avisar",
+   "n": 198
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "avisaste",
+   "gloss": "you let know",
+   "lemma": "avisar",
+   "n": 198
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "avises",
+   "gloss": "you let know (that you let me know)",
+   "lemma": "avisar",
+   "n": 198
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "volvé",
+   "gloss": "come back",
+   "lemma": "volver",
+   "n": 192
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "volver",
+   "gloss": "to come back, to go back",
+   "lemma": "volver",
+   "n": 192
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "volvés",
+   "gloss": "you come back",
+   "lemma": "volver",
+   "n": 192
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "volviste",
+   "gloss": "you came back",
+   "lemma": "volver",
+   "n": 192
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "vuelvas",
+   "gloss": "you come back (when you come back)",
+   "lemma": "volver",
+   "n": 192
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "ayudame",
+   "gloss": "help me",
+   "lemma": "ayudar",
+   "n": 185
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "ayudar",
+   "gloss": null,
+   "lemma": "ayudar",
+   "n": 185
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "cond",
+    "voseo": true
+   },
+   "form": "ayudarías",
+   "gloss": "you would help",
+   "lemma": "ayudar",
+   "n": 185
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "ayudás",
+   "gloss": null,
+   "lemma": "ayudar",
+   "n": 185
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "ayudes",
+   "gloss": "you help (that you help)",
+   "lemma": "ayudar",
+   "n": 185
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "me ayudás",
+   "gloss": "you help me",
+   "lemma": "ayudar",
+   "n": 185
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "dejá",
+   "gloss": "leave it, let me",
+   "lemma": "dejar",
+   "n": 176
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "dejame",
+   "gloss": "leave me, let me",
+   "lemma": "dejar",
+   "n": 176
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "dejás",
+   "gloss": "you leave",
+   "lemma": "dejar",
+   "n": 176
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "dejaste",
+   "gloss": "you left, you quit",
+   "lemma": "dejar",
+   "n": 176
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "dejes",
+   "gloss": "you leave, you let",
+   "lemma": "dejar",
+   "n": 176
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "llover",
+   "gloss": null,
+   "lemma": "llover",
+   "n": 173
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "perdiste",
+   "gloss": "you lost",
+   "lemma": "perder",
+   "n": 170
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "pierdas",
+   "gloss": "you lose (don't lose)",
+   "lemma": "perder",
+   "n": 170
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "andá",
+   "gloss": "go",
+   "lemma": "andar",
+   "n": 159
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "andar",
+   "gloss": "to ride, to go around",
+   "lemma": "andar",
+   "n": 159
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "andás",
+   "gloss": "you're, you've been (lately)",
+   "lemma": "andar",
+   "n": 159
+  },
+  {
+   "f": {
+    "clitic": true,
+    "verb_form": "inf"
+   },
+   "form": "mudarme",
+   "gloss": "to move (myself)",
+   "lemma": "mudarse",
+   "n": 155
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "mudás",
+   "gloss": null,
+   "lemma": "mudarse",
+   "n": 155
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "mudaste",
+   "gloss": null,
+   "lemma": "mudarse",
+   "n": 155
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "mudes",
+   "gloss": null,
+   "lemma": "mudarse",
+   "n": 155
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "te mudás",
+   "gloss": "you're moving (house)",
+   "lemma": "mudarse",
+   "n": 155
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "te mudaste",
+   "gloss": "you moved (house)",
+   "lemma": "mudarse",
+   "n": 155
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "te mudes",
+   "gloss": "you move (when you move house)",
+   "lemma": "mudarse",
+   "n": 155
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "entender",
+   "gloss": "to understand",
+   "lemma": "entender",
+   "n": 155
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "entendés",
+   "gloss": "you understand",
+   "lemma": "entender",
+   "n": 155
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "entendiste",
+   "gloss": "you understood, you got it",
+   "lemma": "entender",
+   "n": 155
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "entiendas",
+   "gloss": "you understand (so that you understand)",
+   "lemma": "entender",
+   "n": 155
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "empezar",
+   "gloss": "to start",
+   "lemma": "empezar",
+   "n": 148
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "empezás",
+   "gloss": "you start",
+   "lemma": "empezar",
+   "n": 148
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "empieces",
+   "gloss": "you start (when you start)",
+   "lemma": "empezar",
+   "n": 148
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "dormir",
+   "gloss": null,
+   "lemma": "dormir",
+   "n": 148
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "dormís",
+   "gloss": "you sleep",
+   "lemma": "dormir",
+   "n": 148
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "dormiste",
+   "gloss": "you slept",
+   "lemma": "dormir",
+   "n": 148
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "duermas",
+   "gloss": "you sleep (that you sleep)",
+   "lemma": "dormir",
+   "n": 148
+  },
+  {
+   "f": {
+    "clitic": true,
+    "irregular": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "te fuiste",
+   "gloss": "you went off, you went away",
+   "lemma": "irse",
+   "n": 148
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "te vas",
+   "gloss": "you're leaving",
+   "lemma": "irse",
+   "n": 148
+  },
+  {
+   "f": {
+    "clitic": true,
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "te vayas",
+   "gloss": "you go away (don't go)",
+   "lemma": "irse",
+   "n": 148
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "llevá",
+   "gloss": "take",
+   "lemma": "llevar",
+   "n": 146
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "llevame",
+   "gloss": "take me",
+   "lemma": "llevar",
+   "n": 146
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "llevar",
+   "gloss": "to take (along)",
+   "lemma": "llevar",
+   "n": 146
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "llevás",
+   "gloss": "you've been (for a time)",
+   "lemma": "llevar",
+   "n": 146
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "lleves",
+   "gloss": "you bring along (that you bring)",
+   "lemma": "llevar",
+   "n": 146
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "me llevás",
+   "gloss": "you give me a ride, you take me",
+   "lemma": "llevar",
+   "n": 146
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "nos llevás",
+   "gloss": "you give us a lift, you take us",
+   "lemma": "llevar",
+   "n": 146
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "conocer",
+   "gloss": "to know (a person or place), to meet",
+   "lemma": "conocer",
+   "n": 139
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "conocés",
+   "gloss": "you know",
+   "lemma": "conocer",
+   "n": 139
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "conociste",
+   "gloss": "you met",
+   "lemma": "conocer",
+   "n": 139
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "conozcas",
+   "gloss": "you meet, you know (that you meet)",
+   "lemma": "conocer",
+   "n": 139
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "viajar",
+   "gloss": null,
+   "lemma": "viajar",
+   "n": 138
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "viajás",
+   "gloss": "you travel",
+   "lemma": "viajar",
+   "n": 138
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "viajaste",
+   "gloss": "you traveled",
+   "lemma": "viajar",
+   "n": 138
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "impf",
+    "voseo": true
+   },
+   "form": "jugabas",
+   "gloss": "you played, you used to play",
+   "lemma": "jugar",
+   "n": 138
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "jugar",
+   "gloss": null,
+   "lemma": "jugar",
+   "n": 138
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "jugás",
+   "gloss": "you play",
+   "lemma": "jugar",
+   "n": 138
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "leas",
+   "gloss": "you read (so that you read)",
+   "lemma": "leer",
+   "n": 136
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "leer",
+   "gloss": null,
+   "lemma": "leer",
+   "n": 136
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "leés",
+   "gloss": "you read",
+   "lemma": "leer",
+   "n": 136
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "leíste",
+   "gloss": "you read",
+   "lemma": "leer",
+   "n": 136
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "poné",
+   "gloss": "put",
+   "lemma": "poner",
+   "n": 133
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "pongas",
+   "gloss": "you put (that you put)",
+   "lemma": "poner",
+   "n": 133
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "sacar",
+   "gloss": null,
+   "lemma": "sacar",
+   "n": 129
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "sacás",
+   "gloss": "you take out",
+   "lemma": "sacar",
+   "n": 129
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "sacaste",
+   "gloss": "you took out",
+   "lemma": "sacar",
+   "n": 129
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "saques",
+   "gloss": "you take out (don't take out)",
+   "lemma": "sacar",
+   "n": 129
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "creer",
+   "gloss": null,
+   "lemma": "creer",
+   "n": 122
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "creés",
+   "gloss": "you think, you believe",
+   "lemma": "creer",
+   "n": 122
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "mirá",
+   "gloss": "look",
+   "lemma": "mirar",
+   "n": 121
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "mirar",
+   "gloss": null,
+   "lemma": "mirar",
+   "n": 121
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "contame",
+   "gloss": "tell me",
+   "lemma": "contar",
+   "n": 121
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "contás",
+   "gloss": "you tell",
+   "lemma": "contar",
+   "n": 121
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "contaste",
+   "gloss": "you told (a story)",
+   "lemma": "contar",
+   "n": 121
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "cuentes",
+   "gloss": "you tell (don't tell)",
+   "lemma": "contar",
+   "n": 121
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "seguí",
+   "gloss": "keep going, go on; I kept, I continued (past)",
+   "lemma": "seguir",
+   "n": 117
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "seguime",
+   "gloss": "follow me",
+   "lemma": "seguir",
+   "n": 117
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "seguís",
+   "gloss": "you keep on, you still",
+   "lemma": "seguir",
+   "n": 117
+  },
+  {
+   "f": {
+    "irregular": true,
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "sigas",
+   "gloss": "you keep, you continue",
+   "lemma": "seguir",
+   "n": 117
+  },
+  {
+   "f": {
+    "mood": "subj",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "abras",
+   "gloss": "you open (so that you open)",
+   "lemma": "abrir",
+   "n": 117
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "abrí",
+   "gloss": "open",
+   "lemma": "abrir",
+   "n": 117
+  },
+  {
+   "f": {
+    "verb_form": "inf"
+   },
+   "form": "abrir",
+   "gloss": "to open",
+   "lemma": "abrir",
+   "n": 117
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "abrís",
+   "gloss": "you open",
+   "lemma": "abrir",
+   "n": 117
+  },
+  {
+   "f": {
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "preguntá",
+   "gloss": "ask",
+   "lemma": "preguntar",
+   "n": 116
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "preguntale",
+   "gloss": "ask him, ask her",
+   "lemma": "preguntar",
+   "n": 116
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "preguntás",
+   "gloss": "you ask",
+   "lemma": "preguntar",
+   "n": 116
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "preguntaste",
+   "gloss": "you asked",
+   "lemma": "preguntar",
+   "n": 116
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pres",
+    "voseo": true
+   },
+   "form": "ganás",
+   "gloss": "you earn, you win; ganás tiempo = you save time",
+   "lemma": "ganar",
+   "n": 112
+  },
+  {
+   "f": {
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "quedaste",
+   "gloss": null,
+   "lemma": "quedarse",
+   "n": 109
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "imp",
+    "number": "sg",
+    "person": 2,
+    "voseo": true
+   },
+   "form": "quedate",
+   "gloss": "keep (it), stay",
+   "lemma": "quedarse",
+   "n": 109
+  },
+  {
+   "f": {
+    "clitic": true,
+    "mood": "ind",
+    "number": "sg",
+    "person": 2,
+    "tense": "pret",
+    "voseo": true
+   },
+   "form": "te quedaste",
+   "gloss": "you were left, you stayed",
+   "lemma": "quedarse",
+   "n": 109
+  }
+ ]
+}
