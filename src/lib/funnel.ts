@@ -21,7 +21,8 @@ export type FunnelEvent =
   | 'checkout_started'
   | 'checkout_ended'
   | 'restore'
-  | 'free_pass_claimed';
+  | 'free_pass_claimed'
+  | 'notification_opened';
 
 const ENABLED = process.env.EXPO_PUBLIC_DEMO !== '1';
 
@@ -73,4 +74,15 @@ export function trackStep(step: OnboardingStep): void {
   void deviceId()
     .then((device_id) => supabase.from('onboarding_steps').insert({ device_id, step, platform: Platform.OS }))
     .catch(() => {});
+}
+
+/**
+ * Her onboarding answers on her account (auth user metadata, `onboarding`),
+ * once the guest exists, so they can be read next to her funnel and progress
+ * instead of living only on the phone. The Apple/Google sign-in path already
+ * writes the same key.
+ */
+export function keepAnswers(answers: object): void {
+  if (!ENABLED) return;
+  void Promise.resolve(supabase.auth.updateUser({ data: { onboarding: answers } })).catch(() => {});
 }

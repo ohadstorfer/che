@@ -32,7 +32,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { EASE_OUT, IconButton, rise } from '@/components/onboarding-ui';
 import { POSE } from '@/components/mascot';
 import { Button } from '@/components/ui';
-import { HiddenFromReplay } from '@/lib/analytics';
 import { billing } from '@/lib/billing';
 import { appleRedeemUrl, normalizeCode, type Offer, type Plan, type PurchaseOutcome, winbackDiscount } from '@/lib/billing-shared';
 import { success, tap } from '@/lib/haptics';
@@ -73,17 +72,10 @@ const webPress =
 const perPeriod = (p: Plan) => (p.period === 'year' ? 'year' : p.period === 'week' ? 'week' : 'month');
 const trialWord = (days: number) => (days === 7 ? 'week' : `${days} days`);
 
-// Prices, codes and her purchase (the code and offer sheets included): never
-// seen in session replays.
-export default function PaywallScreen() {
-  return (
-    <HiddenFromReplay>
-      <Paywall />
-    </HiddenFromReplay>
-  );
-}
-
-function Paywall() {
+// Recorded in session replays like any other screen, so we can see how she
+// reads the plans and where she stops. The store's own payment sheet is drawn
+// by Google/Apple outside the app and never appears in a replay.
+export default function Paywall() {
   useStatusBarColor(colors.bg);
   const reduced = useReducedMotion();
   const params = useLocalSearchParams<{ from?: string; code?: string; offer?: string }>();

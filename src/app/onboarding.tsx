@@ -3,6 +3,7 @@ import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useVideoPlayer, type VideoPlayer, VideoView } from 'expo-video';
 import * as WebBrowser from 'expo-web-browser';
+import { usePostHog } from 'posthog-react-native';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import {
   BackHandler,
@@ -41,7 +42,7 @@ import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { normalizeCode } from '@/lib/billing-shared';
 import { checkCreatorCode, loadCreatorCode, saveCreatorCode } from '@/lib/creator-code';
-import { trackStep } from '@/lib/funnel';
+import { keepAnswers, trackStep } from '@/lib/funnel';
 import { startGuest } from '@/lib/guest';
 import { success, tap } from '@/lib/haptics';
 import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
@@ -120,6 +121,7 @@ export default function Onboarding() {
   // The daily goal starts on 10 so the button works at once, but he only
   // replies once she has actually touched it.
   const [goalTouched, setGoalTouched] = useState(false);
+  const posthog = usePostHog();
 
   useEffect(() => {
     trackStep(step);
@@ -262,7 +264,23 @@ export default function Onboarding() {
               onReady={() => {
                 // Her guest account, made while she reads the result: the
                 // paywall after the pledge sells to it (lib/guest.ts).
-                void saveAnswers(complete).then(() => startGuest());
+                void saveAnswers(complete)
+                  .then(() => startGuest())
+                  .then((ok) => {
+                    if (!ok) return;
+                    keepAnswers(complete);
+                    // On her PostHog person too (no name), so replays and
+                    // funnels can be split by level, reason and goal.
+                    const props = {
+                      onboarding_level: complete.level,
+                      onboarding_why: complete.why,
+                      onboarding_whys: (complete.whys ?? []).join(','),
+                      onboarding_minutes: complete.minutes,
+                      onboarding_struggle: (complete.struggle ?? []).join(','),
+                      onboarding_reminder: !!complete.reminder,
+                    };
+                    posthog?.capture('onboarding_answers', { ...props, $set: props });
+                  });
                 success();
               }}
               onNext={next}
@@ -827,6 +845,7 @@ function BobArrow({ reduced }: { reduced: boolean }) {
 }
 
 function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: boolean; onDone: (granted: boolean) => void }) {
+  const posthog = usePostHog();
   const [busy, setBusy] = useState(false);
   const words = WORDS_OF_DAY[answers.level];
   // The word card stays and its word changes: the next day's comes in as the
@@ -843,6 +862,9 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
     if (busy) return;
     setBusy(true);
     const granted = await askNotifyPermission();
+    // The answer lives only on the phone otherwise: kept on her PostHog person
+    // (and as an event) so the replay's person panel says whether she allowed it.
+    posthog?.capture('notify_permission', { granted, $set: { notifications_allowed: granted } });
     setBusy(false);
     onDone(granted);
   };

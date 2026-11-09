@@ -1,11 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Application from 'expo-application';
 import { usePathname } from 'expo-router';
+import * as SecureStore from 'expo-secure-store';
 import { PostHogMaskView, PostHogProvider, usePostHog } from 'posthog-react-native';
 import { type ReactNode, useEffect } from 'react';
 import { Platform } from 'react-native';
 
 import { useAuth } from '@/lib/auth';
+import { listenForNotificationTaps } from '@/lib/notification-taps';
 
 // PostHog's project token is write-only — it can send events, never read
 // them — so it ships in the app like the web snippet would.
@@ -15,6 +17,23 @@ const POSTHOG_HOST = 'https://us.i.posthog.com';
 // Native only: replay needs the iOS/Android plugin, and the browser build is
 // just for testing. Demo builds are screenshots, not learners.
 const ENABLED = Platform.OS !== 'web' && process.env.EXPO_PUBLIC_DEMO !== '1';
+
+// The founder's own sessions aren't recorded. Once he signs in on a phone it
+// stays unrecorded, signed out too. Read synchronously because PostHog only
+// looks at enableSessionReplay at setup, and flags loading later can start a
+// recording that was merely stopped.
+const NOT_RECORDED_EMAIL = 'ohad.storfer@gmail.com';
+const NOT_RECORDED_KEY = 'posta.not-recorded';
+
+function notRecordedHere() {
+  try {
+    return SecureStore.getItem(NOT_RECORDED_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+const REPLAY = ENABLED && !notRecordedHere();
 
 /**
  * Session replay, screen views and JS errors. Lessons aren't masked: what she
@@ -31,7 +50,7 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
       options={{
         host: POSTHOG_HOST,
         disabled: !ENABLED,
-        enableSessionReplay: ENABLED,
+        enableSessionReplay: REPLAY,
         sessionReplayConfig: {
           maskAllTextInputs: false,
           maskAllImages: false,
@@ -61,6 +80,14 @@ export function AnalyticsTracker() {
   const pathname = usePathname();
   const { session, loading } = useAuth();
   const userId = session?.user.id;
+  const email = session?.user.email;
+
+  // The launch that finds out it's him: stop now, and never start here again.
+  useEffect(() => {
+    if (!ENABLED || email !== NOT_RECORDED_EMAIL) return;
+    void posthog.stopSessionRecording();
+    void SecureStore.setItemAsync(NOT_RECORDED_KEY, '1').catch(() => {});
+  }, [posthog, email]);
 
   // Not while her session is still being read, or every launch would start
   // a fresh anonymous person before she's recognised.
@@ -73,6 +100,12 @@ export function AnalyticsTracker() {
   useEffect(() => {
     if (ENABLED) posthog.screen(pathname);
   }, [posthog, pathname]);
+
+  // Taps on our notifications, once she is known (the funnel row needs her id).
+  useEffect(() => {
+    if (!ENABLED || loading || !userId) return;
+    return listenForNotificationTaps((event, props) => posthog.capture(event, props));
+  }, [posthog, userId, loading]);
 
   // Where she installed from, once, after she is known (see installSource).
   useEffect(() => {
