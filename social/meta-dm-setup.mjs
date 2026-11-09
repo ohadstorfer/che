@@ -47,7 +47,7 @@ if (!page) throw new Error(`No Posta page among: ${pages.map((p) => p.name).join
 await call("POST", `${page.id}/subscribed_apps`, { access_token: page.access_token, subscribed_fields: "feed" });
 
 const verify = randomBytes(18).toString("base64url");
-const set = spawnSync("npx", ["supabase@2", "secrets", "set",
+const set = spawnSync("npx", ["--yes", "supabase@2", "secrets", "set",
   `META_DM_TOKEN=${page.access_token}`, `META_APP_SECRET=${appSecret}`, `META_VERIFY_TOKEN=${verify}`], { stdio: "inherit" });
 if (set.status !== 0) process.exit(set.status ?? 1);
 
