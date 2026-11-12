@@ -22,8 +22,10 @@ export async function scheduleFreeUnitReminder(): Promise<void> {
     await Notifications.scheduleNotificationAsync({
       identifier: ID,
       content: {
-        title: 'Try Posta free for a week',
-        body: 'Your first unit and a chat with Pancho. No card needed.',
+        // "No card needed" sits in the title: on a locked screen the body is
+        // often cut or hidden.
+        title: 'Try Posta free for a week. No card needed',
+        body: 'Your first unit and a chat with Pancho.',
         data: { freeUnit: true },
       },
       trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: new Date(Date.now() + AFTER_MS) },
