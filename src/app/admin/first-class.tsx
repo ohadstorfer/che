@@ -52,7 +52,7 @@ import type { Form, Sentence } from '@/lib/types';
 type Part = 'class' | 'slang' | 'culture' | 'pancho';
 
 const PARTS: Record<Part, { label: string; color: string }> = {
-  class: { label: 'CLASS', color: colors.primary },
+  class: { label: 'EXERCISE', color: colors.primary },
   slang: { label: 'SLANG', color: pastel.butter },
   culture: { label: 'CULTURE', color: pastel.sky },
   pancho: { label: 'SPEAKING', color: pastel.sage },
@@ -287,6 +287,10 @@ const TIP_FACT: Fact = {
 
 // --- the bar: one track, a piece per run of a part, each in its colour --------
 
+/** The first piece never starts empty: a sliver is already filled, so the bar
+ *  reads as "you've begun" from the first screen. */
+const HEAD_START = 0.15;
+
 function PartBar({ at }: { at: number }) {
   const runs: { part: Part; from: number; size: number }[] = [];
   SCREENS.forEach((s, i) => {
@@ -303,7 +307,7 @@ function PartBar({ at }: { at: number }) {
         accessibilityValue={{ min: 0, max: SCREENS.length, now: at }}>
         {runs.map((r) => (
           <View key={r.from} style={styles.barPiece}>
-            <BarFill color={PARTS[r.part].color} share={Math.min(Math.max((at - r.from) / r.size, 0), 1)} />
+            <BarFill color={PARTS[r.part].color} share={Math.max(Math.min(Math.max((at - r.from) / r.size, 0), 1), r.from === 0 ? HEAD_START : 0)} />
           </View>
         ))}
       </View>
@@ -327,7 +331,7 @@ function BarFill({ color, share }: { color: string; share: number }) {
   return <Animated.View style={[styles.barFill, { backgroundColor: color }, fill]} />;
 }
 
-/** The part's name, stuck on when the part starts: CLASS, SLANG, CULTURE, SPEAKING. */
+/** The part's name, stuck on when the part starts: EXERCISE, SLANG, CULTURE, SPEAKING. */
 function PartChip({ part }: { part: Part }) {
   const reduced = useReducedMotion();
   return (
@@ -597,7 +601,7 @@ function CallStep({ onDone }: { onDone: () => void }) {
 // --- 9. lesson complete -------------------------------------------------------
 
 const STAMPS: { part: Part; label: string; icon: React.ComponentProps<typeof Ionicons>['name'] }[] = [
-  { part: 'class', label: 'Class', icon: 'school' },
+  { part: 'class', label: 'Exercise', icon: 'school' },
   { part: 'slang', label: 'Slang', icon: 'chatbubbles' },
   { part: 'culture', label: 'Culture', icon: 'earth' },
   { part: 'pancho', label: 'Speaking', icon: 'call' },
