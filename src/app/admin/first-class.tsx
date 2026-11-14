@@ -55,7 +55,7 @@ const PARTS: Record<Part, { label: string; color: string }> = {
   class: { label: 'CLASS', color: colors.primary },
   slang: { label: 'SLANG', color: pastel.butter },
   culture: { label: 'CULTURE', color: pastel.sky },
-  pancho: { label: 'PANCHO', color: pastel.sage },
+  pancho: { label: 'SPEAKING', color: pastel.sage },
 };
 
 type ScreenId =
@@ -214,7 +214,7 @@ export default function FirstClass() {
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
-        <Pressable onPress={close} hitSlop={12} accessibilityLabel="Close">
+        <Pressable onPress={close} hitSlop={12} accessibilityLabel="Close" style={{ marginTop: -4 }}>
           <Ionicons name="close" size={26} color={colors.muted} />
         </Pressable>
         <PartBar at={at} />
@@ -294,16 +294,26 @@ function PartBar({ at }: { at: number }) {
     if (last && last.part === s.part) last.size++;
     else runs.push({ part: s.part, from: i, size: 1 });
   });
+  const current = SCREENS[Math.min(at, SCREENS.length - 1)].part;
   return (
-    <View
-      style={styles.bar}
-      accessibilityRole="progressbar"
-      accessibilityValue={{ min: 0, max: SCREENS.length, now: at }}>
-      {runs.map((r) => (
-        <View key={r.from} style={[styles.barPiece, { flex: 1 }]}>
-          <BarFill color={PARTS[r.part].color} share={Math.min(Math.max((at - r.from) / r.size, 0), 1)} />
-        </View>
-      ))}
+    <View style={styles.barWrap}>
+      <View
+        style={styles.bar}
+        accessibilityRole="progressbar"
+        accessibilityValue={{ min: 0, max: SCREENS.length, now: at }}>
+        {runs.map((r) => (
+          <View key={r.from} style={styles.barPiece}>
+            <BarFill color={PARTS[r.part].color} share={Math.min(Math.max((at - r.from) / r.size, 0), 1)} />
+          </View>
+        ))}
+      </View>
+      <View style={styles.barLabels} importantForAccessibility="no-hide-descendants">
+        {runs.map((r) => (
+          <Text key={r.from} style={[styles.barLabel, r.part === current && styles.barLabelOn]} numberOfLines={1}>
+            {PARTS[r.part].label}
+          </Text>
+        ))}
+      </View>
     </View>
   );
 }
@@ -317,7 +327,7 @@ function BarFill({ color, share }: { color: string; share: number }) {
   return <Animated.View style={[styles.barFill, { backgroundColor: color }, fill]} />;
 }
 
-/** The part's name, stuck on when the part starts: CLASS, SLANG, CULTURE, PANCHO. */
+/** The part's name, stuck on when the part starts: CLASS, SLANG, CULTURE, SPEAKING. */
 function PartChip({ part }: { part: Part }) {
   const reduced = useReducedMotion();
   return (
@@ -590,7 +600,7 @@ const STAMPS: { part: Part; label: string; icon: React.ComponentProps<typeof Ion
   { part: 'class', label: 'Class', icon: 'school' },
   { part: 'slang', label: 'Slang', icon: 'chatbubbles' },
   { part: 'culture', label: 'Culture', icon: 'earth' },
-  { part: 'pancho', label: 'Pancho', icon: 'call' },
+  { part: 'pancho', label: 'Speaking', icon: 'call' },
 ];
 const TILT = ['-7deg', '5deg', '6deg', '-5deg'];
 
@@ -645,7 +655,7 @@ const styles = StyleSheet.create({
   stage: { flex: 1 },
   header: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 14,
     paddingHorizontal: 20,
     paddingVertical: 12,
@@ -654,7 +664,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   bar: {
-    flex: 1,
     height: 18,
     flexDirection: 'row',
     gap: 3,
@@ -663,7 +672,18 @@ const styles = StyleSheet.create({
     boxShadow: clay.trough,
     overflow: 'hidden',
   },
-  barPiece: { backgroundColor: colors.trough, overflow: 'hidden' },
+  barWrap: { flex: 1, gap: 6 },
+  barPiece: { flex: 1, backgroundColor: colors.trough, overflow: 'hidden' },
+  barLabels: { flexDirection: 'row', gap: 3 },
+  barLabel: {
+    flex: 1,
+    textAlign: 'center',
+    ...font.body[800],
+    fontSize: 10,
+    letterSpacing: 0.8,
+    color: colors.muted,
+  },
+  barLabelOn: { color: colors.ink },
   barFill: { height: '100%' },
   chip: {
     alignSelf: 'center',
