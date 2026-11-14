@@ -934,6 +934,52 @@
       "unit_order": 1,
       "unit_ordinal": 1,
       "voice_id": "tomas"
+    },
+    {
+      "alt": [],
+      "audio_path": "cards/91232a84-b055-5e03-8ed2-651c79f5b376-tomas-1791371392273.mp3",
+      "bound": false,
+      "features": {},
+      "form": "che",
+      "gloss_en": "hey",
+      "gloss_note_en": "to get attention",
+      "id": "91232a84-b055-5e03-8ed2-651c79f5b376",
+      "is_glue": false,
+      "lemma": "che",
+      "lemma_id": "552b34c8-bcae-5a12-824d-f534ef44db31",
+      "pos": "interj",
+      "register": "informal",
+      "section_id": 1,
+      "unit_id": "cc27542c-c983-52aa-88c4-8fe075eb0a0f",
+      "unit_order": 4,
+      "unit_ordinal": 4,
+      "voice_id": "tomas"
+    },
+    {
+      "alt": [],
+      "audio_path": "cards/e7322589-dc0d-5f10-9391-65b3ab21afc2-tomas-1791372772839.mp3",
+      "bound": false,
+      "features": {
+        "mood": "ind",
+        "number": "sg",
+        "person": 2,
+        "tense": "pres",
+        "voseo": true
+      },
+      "form": "tenés",
+      "gloss_en": "you have",
+      "gloss_note_en": null,
+      "id": "e7322589-dc0d-5f10-9391-65b3ab21afc2",
+      "is_glue": false,
+      "lemma": "tener",
+      "lemma_id": "1d52b7a7-a8b5-5d03-8874-200849c89160",
+      "pos": "verb",
+      "register": "neutral",
+      "section_id": 1,
+      "unit_id": "b28a06e8-ef82-54f0-bbf4-5314e84a7ece",
+      "unit_order": 25,
+      "unit_ordinal": 25,
+      "voice_id": "tomas"
     }
   ],
   "sentences": [
@@ -1509,6 +1555,49 @@
         }
       ],
       "unit_id": "ecf3c9a9-33e3-5e2e-b2b7-aa09f082c128",
+      "voice_id": "tomas"
+    },
+    {
+      "audio_path": "sentences/2e1e0e3c-0847-520b-b36f-af53f7070321-tomas-1791373299657.mp3",
+      "difficulty": 2,
+      "en": "Hey, do you have medialunas?",
+      "en_alt": [
+        "Hey, have you got any medialunas?",
+        "Hey, do you have croissants?"
+      ],
+      "es": "Che, ¿tenés medialunas?",
+      "es_alt": [
+        "Che, ¿vos tenés medialunas?",
+        "¿Tenés medialunas?",
+        "¿Vos tenés medialunas?"
+      ],
+      "id": "2e1e0e3c-0847-520b-b36f-af53f7070321",
+      "note_en": null,
+      "target_form_id": "362f3213-c426-54c2-9702-c788da937db5",
+      "tokens": [
+        {
+          "form_ids": [
+            "91232a84-b055-5e03-8ed2-651c79f5b376"
+          ],
+          "gloss": "hey",
+          "surface": "Che,"
+        },
+        {
+          "form_ids": [
+            "e7322589-dc0d-5f10-9391-65b3ab21afc2"
+          ],
+          "gloss": "do you have",
+          "surface": "¿tenés"
+        },
+        {
+          "form_ids": [
+            "362f3213-c426-54c2-9702-c788da937db5"
+          ],
+          "gloss": "medialunas",
+          "surface": "medialunas?"
+        }
+      ],
+      "unit_id": "f1fa7454-72a3-546d-8f72-4aab149bbbbe",
       "voice_id": "tomas"
     }
   ]

@@ -93,11 +93,12 @@ const NEXT = FadeInRight.duration(240).easing(EASE_OUT);
 // --- content ------------------------------------------------------------------
 
 const ID = {
-  cortado: '495df4cb-c037-5679-aa48-1c6b79f02ad6',
+  caféConLeche: '928bee92-a24f-5bcc-a825-d51cc7bf068a',
   medialuna: '61df6d82-e066-542f-b158-5524f130294e',
-  me: 'be20724b-3be1-5bcc-801e-f13718511443',
-  das: 'e057e89e-3024-5bdb-ba47-9dfef6ad3b2d',
-  un: '060197a5-9154-5a14-ac6d-8a8ffa3e9f6b',
+  che: '91232a84-b055-5e03-8ed2-651c79f5b376',
+  tenés: 'e7322589-dc0d-5f10-9391-65b3ab21afc2',
+  medialunas: '362f3213-c426-54c2-9702-c788da937db5',
+  cheTenésMedialunas: '2e1e0e3c-0847-520b-b36f-af53f7070321',
   cafeConMedialuna: '96de3eee-afab-511a-9d87-c0f68c2f35bb',
   querésUnCafé: '299d346b-881a-5ef3-a8e1-b3ca97fb52cf',
   algoMás: 'be99423e-6489-5a9f-878f-500251f4e8a3',
@@ -123,28 +124,10 @@ function useContent() {
     const sentence = (id: string) => sentences.find((s) => s.id === id)!;
     const form = (id: string) => byId.get(id)!;
 
-    // "¿Me das un cortado?" isn't a course sentence yet: put together from
-    // course forms, with no recording.
+    // A course sentence with Tomás's recording. Marked as already seen: a
+    // brand-new build wears the "Harder" badge, wrong on a first class.
     const build: Sentence = {
-      id: 'first-class:me-das-un-cortado',
-      unit_id: '',
-      es: '¿Me das un cortado?',
-      en: 'Can I get a cortado?',
-      en_alt: ['Can you give me a cortado?', 'Could I have a cortado?'],
-      es_alt: [],
-      audio_path: null,
-      voice_id: null,
-      target_form_id: ID.cortado,
-      difficulty: 1,
-      tokens: [
-        { surface: '¿Me', form_ids: [], glue: ID.me },
-        { surface: 'das', form_ids: [ID.das] },
-        { surface: 'un', form_ids: [], glue: ID.un },
-        { surface: 'cortado?', form_ids: [ID.cortado] },
-      ],
-      form_ids: [ID.das, ID.cortado],
-      // As if already seen: a brand-new build wears the "Harder" badge, which
-      // is wrong on a learner's very first class.
+      ...sentence(ID.cheTenésMedialunas),
       shown: { shown_count: 9, correct_count: 9, last_shown_at: null },
     };
 
@@ -156,7 +139,7 @@ function useContent() {
       forms,
       lexicon: byId,
       sentences,
-      cortado: form(ID.cortado),
+      caféConLeche: form(ID.caféConLeche),
       querés: sentence(ID.querésUnCafé),
       algoMás: sentence(ID.algoMás),
       medialuna: item({
@@ -167,11 +150,11 @@ function useContent() {
         introduces: form(ID.medialuna),
       }),
       build: item({
-        form: form(ID.cortado),
+        form: form(ID.che),
         mode: 'sentence_build',
         direction: 'en_to_es',
         sentence: build,
-        group: [form(ID.das), form(ID.cortado)],
+        group: [form(ID.che), form(ID.tenés), form(ID.medialunas)],
       }),
       daleGap: slangGap(DALE),
       reGap: slangGap(RE),
@@ -242,7 +225,7 @@ function ScreenView({ id, content, onNext }: { id: ScreenId; content: ReturnType
   );
   switch (id) {
     case 'order':
-      return <OrderStep cortado={content.cortado} onDone={onNext} />;
+      return <OrderStep word={content.caféConLeche} onDone={onNext} />;
     case 'vos':
       return <VosStep audio={content.querés.audio_path} onDone={onNext} />;
     case 'medialuna':
@@ -345,12 +328,12 @@ function PartChip({ part }: { part: Part }) {
 
 // --- 1. listen: what did Pancho order? -----------------------------------------
 
-function OrderStep({ cortado, onDone }: { cortado: Form; onDone: () => void }) {
+function OrderStep({ word, onDone }: { word: Form; onDone: () => void }) {
   const options = useMemo(
     () =>
       [
-        { id: 'cortado', label: 'Espresso with a little milk' },
-        { id: 'leche', label: 'A big coffee with milk' },
+        { id: 'right', label: 'A coffee with milk' },
+        { id: 'chocolate', label: 'A hot chocolate' },
         { id: 'agua', label: 'A glass of water' },
         { id: 'te', label: 'A cup of tea' },
       ].sort(() => Math.random() - 0.5),
@@ -365,15 +348,15 @@ function OrderStep({ cortado, onDone }: { cortado: Form; onDone: () => void }) {
       canCheck={!!chosen}
       onCheck={() =>
         setVerdict({
-          correct: chosen === 'cortado',
-          answer: 'cortado: espresso with a little milk',
-          note: 'cortado: espresso with a little milk',
-          about: cortado.gloss_note_en ?? undefined,
+          correct: chosen === 'right',
+          answer: 'café con leche: a coffee with milk',
+          note: 'café con leche: a coffee with milk',
+          about: word.gloss_note_en ?? undefined,
         })
       }
       onContinue={onDone}>
-      <AudioPad path={cortado.audio_path!} />
-      <Choices options={options} correctId="cortado" chosen={chosen} revealed={verdict !== null} onPick={setChosen} />
+      <AudioPad path={word.audio_path!} />
+      <Choices options={options} correctId="right" chosen={chosen} revealed={verdict !== null} onPick={setChosen} />
     </ExerciseFrame>
   );
 }
@@ -445,7 +428,7 @@ function WaiterStep({ algoMás, onDone }: { algoMás: string | null; onDone: () 
   const [replied, setReplied] = useState(false);
   return (
     <ExerciseFrame
-      prompt="Your cortado arrives. The waiter asks:"
+      prompt="Your café con leche arrives. The waiter asks:"
       verdict={null}
       canCheck={replied}
       checkLabel="What’s “dale”?"
@@ -496,21 +479,21 @@ const SCRIPT: Turn[] = [
     en: 'Hi there! What can I get you?',
     audio: CALL_OPENER_AUDIO,
     replies: [
-      { es: '¿Me das un cortado?', en: 'Can I get a cortado?' },
       { es: 'Un café con leche, por favor.', en: 'A coffee with milk, please.' },
+      { es: 'Un café, por favor.', en: 'A coffee, please.' },
     ],
   },
   {
     es: 'Dale. ¿Algo más?',
     en: 'OK. Anything else?',
     replies: [
+      { es: 'Che, ¿tenés medialunas?', en: 'Hey, do you have medialunas?' },
       { es: 'Una medialuna, por favor.', en: 'A medialuna, please.' },
-      { es: 'No, nada más, gracias.', en: 'No, that’s all, thanks.' },
     ],
   },
   {
-    es: '¡Dale! Acá las medialunas están re ricas.',
-    en: 'Sure! The medialunas here are really good.',
+    es: '¡Sí! Acá las medialunas están re ricas.',
+    en: 'Yes! The medialunas here are really good.',
     replies: [{ es: '¡Genial! ¿Cuánto dejo de propina?', en: 'Great! How much should I tip?' }],
   },
   {
