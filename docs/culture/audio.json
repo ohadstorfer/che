@@ -2873,6 +2873,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:43:34.750Z"
  },
+ "culture/6deab1e16af088432077.mp3": {
+  "text": "gil",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-11-06T22:02:59.957Z"
+ },
  "culture/6e823601dfcbd8711acb.mp3": {
   "text": "del dicho al hecho hay mucho trecho",
   "voice": "malena",
@@ -6502,6 +6508,12 @@
   "voice": "tomas",
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:44:02.595Z"
+ },
+ "culture/f4bd3d4f1467b5284b8e.mp3": {
+  "text": "mufa",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-11-06T22:02:59.969Z"
  },
  "culture/f4c127f68de934468ece.mp3": {
   "text": "italianos",

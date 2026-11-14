@@ -39,3 +39,23 @@ export const packArt = (es: string): ImageSourcePropType | undefined => packWord
 
 export const preloadCourseArt = (lemmaIds: string[]) => preloadWordArt(lemmaIds.map(courseArt));
 export const preloadPackArt = (words: string[]) => preloadWordArt(words.map(packArt));
+
+// ---------------------------------------------------------------------------
+// Which pictures this class has already shown. A sentence card puts one of its
+// words' pictures where the capybara stands (exercises.tsx, `TitleArt`); when
+// it has several, the one she hasn't seen yet this class wins ("plaza" over
+// "estudiar" once "estudiar" was shown). A round clears it as it starts.
+// ---------------------------------------------------------------------------
+const shownThisClass = new Set<string>();
+
+export const resetShownArt = () => shownThisClass.clear();
+export const markArtShown = (lemmaId: string) => {
+  shownThisClass.add(lemmaId);
+};
+
+/** The word whose picture a card shows: one not seen this class if any, else
+ *  the first; undefined when no word has a picture. */
+export function pickCardArt(lemmaIds: string[]): string | undefined {
+  const pictured = [...new Set(lemmaIds)].filter((id) => courseArt(id));
+  return pictured.find((id) => !shownThisClass.has(id)) ?? pictured[0];
+}

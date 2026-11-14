@@ -2294,18 +2294,6 @@ words:
     theme: plata
     vulgar: false
     level: 2
-  - es: estar pato
-    pos: phrase
-    en: to have no money
-    note: 'Old-fashioned way to say you have no money. Today people say "estar seco" or "no tener un mango".'
-    example:
-      es: No puedo salir hoy, estoy pato hasta que cobre.
-      en: I can't go out today, I have no money until I get paid.
-    gap: estoy pato
-    theme: plata
-    vulgar: false
-    level: 3
-    tag: Old-fashioned
   - es: feriado puente
     pos: noun
     en: extra holiday for a long weekend

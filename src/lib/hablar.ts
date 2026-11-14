@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ExpoCrypto from 'expo-crypto';
 import { fetch as expoFetch } from 'expo/fetch';
-import { FunctionsHttpError } from '@supabase/supabase-js';
+import { FunctionRegion, FunctionsHttpError } from '@supabase/supabase-js';
 import { Platform } from 'react-native';
 
 import { getAudioUrl, type RecordedClip } from './audio';
@@ -240,7 +240,7 @@ export function newTurnId(): string {
 }
 
 async function call<T>(name: string, body: Record<string, unknown> | FormData): Promise<T> {
-  const { data: out, error } = await supabase.functions.invoke(name, { body });
+  const { data: out, error } = await supabase.functions.invoke(name, { body, region: FunctionRegion.UsWest2 });
   if (error) {
     if (error instanceof FunctionsHttpError) {
       const res = error.context as Response;
@@ -415,6 +415,14 @@ async function appendClip(form: FormData, clip: RecordedClip, turnId: string) {
 }
 
 const functionsBase = () => `${process.env.EXPO_PUBLIC_SUPABASE_URL ?? ''}/functions/v1`;
+/**
+ * The Hablar functions run next to the database (us-west-2), not in the edge
+ * region nearest the phone: a turn reads and writes the database several times
+ * in a row, and from Europe each of those crossed the ocean (~150 ms). One
+ * long trip for the request beats several for its reads.
+ */
+const HABLAR_REGION = 'us-west-2';
+const functionUrl = (name: string) => `${functionsBase()}/${name}?forceFunctionRegion=${HABLAR_REGION}`;
 
 /**
  * Boot an edge function ahead of the request that needs it: a cold one costs
@@ -423,7 +431,7 @@ const functionsBase = () => `${process.env.EXPO_PUBLIC_SUPABASE_URL ?? ''}/funct
  */
 export function warm(...names: ('hablar-start' | 'hablar-reply')[]): void {
   for (const name of names) {
-    void fetch(`${functionsBase()}/${name}`, { method: 'OPTIONS' }).catch(() => {});
+    void fetch(functionUrl(name), { method: 'OPTIONS' }).catch(() => {});
   }
 }
 
@@ -481,7 +489,7 @@ async function streamWith(
   const token = auth.session?.access_token ?? anon;
 
   const streamingFetch = (Platform.OS === 'web' ? fetch : expoFetch) as typeof fetch;
-  const res = await orStall(streamingFetch(`${functionsBase()}/hablar-reply`, {
+  const res = await orStall(streamingFetch(functionUrl('hablar-reply'), {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,

@@ -29,6 +29,12 @@ verify_jwt = false
 [functions.waitlist]
 verify_jwt = false
 
+[functions.free-guide]
+verify_jwt = false
+
+[functions.meta-comments]
+verify_jwt = false
+
 [functions.hablar-retention]
 verify_jwt = false
 
@@ -45,6 +51,9 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.cost-alert]
+verify_jwt = false
+
+[functions.social-queue]
 verify_jwt = false
 
 [functions.launch-email]

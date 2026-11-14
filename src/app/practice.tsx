@@ -74,7 +74,7 @@ import { supabase } from '@/lib/supabase';
 import { clay, colors, font, gradients, press, radius } from '@/lib/theme';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import type { Form, Section, Sentence, Streak, Unit } from '@/lib/types';
-import { preloadCourseArt } from '@/lib/word-art';
+import { preloadCourseArt, resetShownArt } from '@/lib/word-art';
 
 /** How long a class may take to load before it is called off. A class far
  *  along with nothing on the phone yet is dozens of sentence blocks; what has
@@ -171,14 +171,25 @@ export default function Practice() {
   const [queue, setQueue] = useState<QueueItem[] | null>(null);
   // The round knows which words it teaches: load their pictures now, so each
   // arrives with its card instead of a frame after it.
+  // A new class starts with no picture seen (word-art.ts, `pickCardArt`).
   useEffect(() => {
     if (!queue) return;
+    resetShownArt();
     preloadCourseArt(
       queue.flatMap((it) => [it.introduces?.lemma_id, it.isIntro ? it.form.lemma_id : undefined]).filter((id) => id != null),
     );
   }, [queue]);
   const [allForms, setAllForms] = useState<Form[]>([]);
   const [lexicon, setLexicon] = useState<Map<string, Form>>(() => new Map());
+  // And the pictures a sentence card may show in the capybara's place.
+  useEffect(() => {
+    if (!queue || !lexicon.size) return;
+    preloadCourseArt(
+      queue.flatMap((it) =>
+        (it.sentence?.tokens ?? []).flatMap((t) => t.form_ids.flatMap((id) => lexicon.get(id)?.lemma_id ?? [])),
+      ),
+    );
+  }, [queue, lexicon]);
   const [allSentences, setAllSentences] = useState<Sentence[]>([]);
   const [ladder, setLadder] = useState<Ladder>(DEFAULT_LADDER);
   const [index, setIndex] = useState(0);

@@ -6,6 +6,7 @@ import { useAuth } from './auth';
 import { billing } from './billing';
 import type { Catalog } from './billing-shared';
 import { clearContentCache } from './content-cache';
+import { claimCreatorCode } from './creator-code';
 import { isGuest } from './guest';
 import { supabase } from './supabase';
 
@@ -165,6 +166,12 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
     if (guestNow) guest.current = userId;
     else if (guest.current === userId) guest.current = null;
   }, [userId, guestNow]);
+
+  // A creator's code typed in onboarding, noted for whichever account she is
+  // now (the guest, or the one she signed in to). Once per account per phone.
+  useEffect(() => {
+    if (userId) void claimCreatorCode(userId);
+  }, [userId]);
 
   /** The last check couldn't reach the store or the server. */
   const unsure = useRef(false);

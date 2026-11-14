@@ -16,6 +16,8 @@ import {ChatLoop, TOTAL as CHAT_TOTAL} from './onboarding/ChatLoop';
 import {AhaLoop, FRAMES as AHA_TOTAL} from './onboarding/AhaLoop';
 import {CourseLoop, FRAMES as COURSE_TOTAL} from './onboarding/CourseLoop';
 import {COURSES} from './onboarding/reels.mjs';
+import {WordQuizReel, wordQuizTimeline} from './carousel/WordQuizReel';
+import {WORD_QUIZZES} from './carousel/wordquiz.mjs';
 
 // Clips are recorded by pancho-vo.mjs / versus-vo.mjs; a reel with no recording yet is skipped.
 const clipsFor = (dir: string, id: string) => { try { return require(`./${dir}/${id}.json`); } catch { return null; } };
@@ -29,5 +31,6 @@ const Root: React.FC = () => React.createElement(React.Fragment, null,
   React.createElement(Composition, {id: 'onb-core', component: CoreLoop, durationInFrames: CORE_TOTAL, fps: FPS, width: ONB_W, height: ONB_H}),
   React.createElement(Composition, {id: 'onb-chat', component: ChatLoop, durationInFrames: CHAT_TOTAL, fps: FPS, width: ONB_W, height: ONB_H}),
   React.createElement(Composition, {id: 'onb-aha', component: AhaLoop, durationInFrames: AHA_TOTAL, fps: FPS, width: ONB_W, height: ONB_H}),
-  COURSES.map((c: any) => React.createElement(Composition, {key: c.id, id: c.id, component: CourseLoop as any, durationInFrames: COURSE_TOTAL, fps: FPS, width: ONB_W, height: ONB_H, defaultProps: {why: c.why, tier: c.tier}})));
+  COURSES.map((c: any) => React.createElement(Composition, {key: c.id, id: c.id, component: CourseLoop as any, durationInFrames: COURSE_TOTAL, fps: FPS, width: ONB_W, height: ONB_H, defaultProps: {why: c.why, tier: c.tier}})),
+  WORD_QUIZZES.map((q: any) => React.createElement(Composition, {key: q.id, id: q.id, component: WordQuizReel as any, durationInFrames: wordQuizTimeline(q.rounds.length).total, fps: 30, width: 1080, height: 1920, defaultProps: {q}})));
 registerRoot(Root);

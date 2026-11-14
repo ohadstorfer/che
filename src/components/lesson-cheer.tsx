@@ -6,10 +6,14 @@
 import { Image } from 'expo-image';
 import { createContext, useEffect, useRef } from 'react';
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { interpolate, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withTiming, type SharedValue } from 'react-native-reanimated';
 
 import { Burst, Confetti, DRAWER, In, OUT, Pictures, Rain, Rays, Rings, Slap, Sparkles, Stamp, Stripes, Ticker } from '@/components/cheer-bits';
-import { ART, BITS, type CheerDesign, type CheerWhen, dealCheer, type Scene, type Tint } from '@/lib/cheer-deck';
+import { Flame } from '@/components/flame';
+import { Button } from '@/components/ui';
+import { ART, BITS, type CheerDesign, type CheerRow, type CheerWhen, dealCheer, type Deco, type Scene, type Tint } from '@/lib/cheer-deck';
+import { success, thud } from '@/lib/haptics';
 import { clay, colors, font, pastel } from '@/lib/theme';
 
 export type Cheer = { design: CheerDesign; count: number; id: number };
@@ -42,7 +46,7 @@ export const makeCheer = (when: CheerWhen, count: number): Cheer => ({
 
 export function LessonCheer({ cheer, onDone }: { cheer: Cheer | null; onDone: () => void }) {
   if (!cheer) return null;
-  return <FullScreen key={cheer.id} cheer={cheer} onDone={onDone} />;
+  return <CheerScreen key={cheer.id} design={cheer.design} count={cheer.count} onDone={onDone} />;
 }
 
 // --- colour ---------------------------------------------------------------------
@@ -228,9 +232,25 @@ function Slat({ k, n, t, top, h, width, bg }: { k: number; n: number; t: SharedV
 
 // --- the screen -------------------------------------------------------------------
 
-function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
-  const c = cheer.design;
-  const n = cheer.count;
+/**
+ * One cheer, full screen. `streak` is the end-of-round streak reward drawn by
+ * the same engine: it stays until "Let's go!" instead of leaving on its own,
+ * reads the run as days, and a `milestone` lands with a heavier tap.
+ */
+export function CheerScreen({
+  design: c,
+  count: n,
+  onDone,
+  streak,
+  milestone,
+}: {
+  design: CheerRow;
+  count: number;
+  onDone: () => void;
+  streak?: boolean;
+  milestone?: boolean;
+}) {
+  const insets = useSafeAreaInsets();
   const look = LOOK[c.tint];
   const reduced = useReducedMotion();
   const { width, height } = useWindowDimensions();
@@ -250,6 +270,11 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
   useEffect(() => {
     const slow = c.scene === 'sun' || c.scene === 'iris' || c.scene === 'blinds' || c.scene === 'tilt';
     t.value = reduced ? withTiming(1, { duration: 180 }) : withTiming(1, { duration: slow ? 560 : 440, easing: DRAWER });
+    if (streak) {
+      // The tap lands with the words, not before the colour is in.
+      const tap = setTimeout(() => (milestone ? (thud(), setTimeout(success, 140)) : success()), reduced ? 0 : 420);
+      return () => clearTimeout(tap);
+    }
     const timer = setTimeout(leave, HOLD + (c.words?.length ?? 0) * 120);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -284,9 +309,17 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
     </In>
   );
   const chip = (s: string, delay: number, tilt = -3) => (
-    <Slap delay={delay} tilt={tilt} style={styles.chip}>
+    <Slap delay={delay} tilt={tilt} style={[styles.chip, streak && styles.chipRow]}>
+      {streak ? <Flame size={20} still /> : null}
       <Text style={styles.chipText}>{s}</Text>
     </Slap>
+  );
+  /** The run, as the streak says it: "12 days in a row". */
+  const days = n === 1 ? 'day' : 'days';
+  const countView = (delay: number, size?: number) => (
+    <In delay={delay}>
+      <Text style={[styles.count, { color: look.ink }, size ? { fontSize: size, lineHeight: size * 1.02 } : String(n).length > 3 && { fontSize: 96, lineHeight: 100 }]}>{n}</Text>
+    </In>
   );
 
   let body: React.ReactNode;
@@ -294,10 +327,9 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
     case 'count':
       body = (
         <>
-          <In delay={D + 60}>
-            <Text style={[styles.count, { color: look.ink }]}>{n}</Text>
-          </In>
+          {countView(D + 60)}
           {text(title, 36, D + 160)}
+          {streak ? small(line, D + 220) : null}
           {art(D + 260, 150)}
         </>
       );
@@ -312,9 +344,10 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
               </Stamp>
             ))}
           </View>
-          {text(title, 32, D + 160 + (c.words?.length ?? 1) * 110)}
+          {streak ? countView(D + 120 + (c.words?.length ?? 1) * 110, 84) : null}
+          {text(title, streak ? 26 : 32, D + 160 + (c.words?.length ?? 1) * 110)}
           {small(line, D + 220 + (c.words?.length ?? 1) * 110)}
-          {art(D + 260 + (c.words?.length ?? 1) * 110, 150)}
+          {art(D + 260 + (c.words?.length ?? 1) * 110, streak ? 130 : 150)}
         </>
       );
       break;
@@ -323,7 +356,7 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
         <>
           {art(D)}
           {text(title, titleSize(title, 42), D + 90)}
-          {chip(`${n} in a row`, D + 220)}
+          {chip(streak ? `${n} ${days}` : `${n} in a row`, D + 220)}
         </>
       );
       break;
@@ -337,6 +370,7 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
             <Text style={[styles.caption, { fontSize: titleSize(title, 28) }]}>{title}</Text>
           </Slap>
           {small(line, D + 300)}
+          {streak ? chip(String(n), D + 400, 4) : null}
         </>
       );
       break;
@@ -349,7 +383,7 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
           </Slap>
           {art(D + 120, 170)}
           {small(line, D + 220)}
-          {chip(title, D + 320, 3)}
+          {chip(streak ? `${n} ${title}` : title, D + 320, 3)}
         </>
       );
       break;
@@ -362,11 +396,12 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
             <View style={[styles.ribbon, { backgroundColor: ribbon,  right: 30, transform: [{ rotate: '-16deg' }] }]} />
             <View style={styles.medal}>
               <View style={styles.medalRim} />
-              <Text style={styles.medalCount}>{n}</Text>
-              <Text style={styles.medalLabel}>in a row</Text>
+              <Text style={[styles.medalCount, String(n).length > 3 && { fontSize: 46 }]}>{n}</Text>
+              <Text style={styles.medalLabel}>{streak ? `${days} in a row` : 'in a row'}</Text>
             </View>
           </Slap>
           {text(title, titleSize(title, 44), D + 320)}
+          {streak ? small(line, D + 380) : null}
         </>
       );
       break;
@@ -376,9 +411,12 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
           {art(D)}
           {text(title, titleSize(title), D + 90)}
           {small(line, D + 180)}
+          {streak ? chip(`${n} ${days} in a row`, D + 300) : null}
         </>
       );
   }
+
+  const layers: Deco[] = [c.deco, ...(c.more ?? [])];
 
   return (
     <Animated.View style={[StyleSheet.absoluteFill, styles.full, whole]} accessibilityViewIsModal accessibilityLiveRegion="assertive">
@@ -386,16 +424,16 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
 
       {/* What moves behind him comes in with the colour, not ahead of it. */}
       <Animated.View style={[StyleSheet.absoluteFill, decoIn]} pointerEvents="none">
-        {c.deco === 'rays' ? <Rays size={Math.max(width, height) * 1.3} color={look.soft} /> : null}
-        {c.deco === 'rain' ? <Rain width={width} height={height} /> : null}
-        {c.deco === 'confetti' ? <Confetti width={width} height={height} /> : null}
-        {c.deco === 'burst' ? <Burst cx={width / 2} cy={mid} delay={D} /> : null}
-        {c.deco === 'rings' ? <Rings cx={width / 2} cy={mid} color={look.soft} /> : null}
-        {c.deco === 'sparkles' ? <Sparkles width={width} height={height} color={c.tint === 'night' ? pastel.butter : '#FFFFFF'} /> : null}
-        {c.deco === 'stripes' ? <Stripes width={width} height={height} color={look.soft} /> : null}
-        {c.deco === 'food' ? <Pictures sources={bits} width={width} height={height} /> : null}
-        {c.deco === 'balloons' ? <Pictures sources={bits} width={width} height={height} rise /> : null}
-        {c.deco === 'ticker' ? (
+        {layers.includes('rays') ? <Rays size={Math.max(width, height) * 1.3} color={look.soft} /> : null}
+        {layers.includes('rain') ? <Rain width={width} height={height} /> : null}
+        {layers.includes('confetti') ? <Confetti width={width} height={height} /> : null}
+        {layers.includes('burst') ? <Burst cx={width / 2} cy={mid} delay={D} /> : null}
+        {layers.includes('rings') ? <Rings cx={width / 2} cy={mid} color={look.soft} /> : null}
+        {layers.includes('sparkles') ? <Sparkles width={width} height={height} color={c.tint === 'night' ? pastel.butter : '#FFFFFF'} /> : null}
+        {layers.includes('stripes') ? <Stripes width={width} height={height} color={look.soft} /> : null}
+        {layers.includes('food') ? <Pictures sources={bits} width={width} height={height} /> : null}
+        {layers.includes('balloons') ? <Pictures sources={bits} width={width} height={height} rise /> : null}
+        {layers.includes('ticker') ? (
           <>
             <Ticker word={c.words?.[0] ?? 'YES'} y={height * 0.09} width={width} tilt={-6} />
             <Ticker word={c.words?.[0] ?? 'YES'} y={height * 0.84} width={width} tilt={5} reverse />
@@ -403,10 +441,22 @@ function FullScreen({ cheer, onDone }: { cheer: Cheer; onDone: () => void }) {
         ) : null}
       </Animated.View>
 
-      <Pressable style={styles.content} onPress={leave} accessibilityRole="button" accessibilityLabel={`${title}. Keep going`}>
-        {body}
-        <Text style={[styles.tap, { color: look.ink }]}>Tap to keep going</Text>
-      </Pressable>
+      {streak ? (
+        <>
+          <View style={[styles.content, { paddingBottom: insets.bottom + 96 }]} accessible accessibilityLabel={`${title}. ${n} ${days} in a row`}>
+            {body}
+          </View>
+          <In delay={reduced ? 0 : 1100} style={[styles.action, { bottom: insets.bottom + 20 }]}>
+            {/* On rosa the rosa button would vanish, so it turns to card there. */}
+            <Button title="Let’s go!" variant={c.tint === 'rosa' ? 'secondary' : 'primary'} onPress={onDone} />
+          </In>
+        </>
+      ) : (
+        <Pressable style={styles.content} onPress={leave} accessibilityRole="button" accessibilityLabel={`${title}. Keep going`}>
+          {body}
+          <Text style={[styles.tap, { color: look.ink }]}>Tap to keep going</Text>
+        </Pressable>
+      )}
     </Animated.View>
   );
 }
@@ -465,6 +515,8 @@ const styles = StyleSheet.create({
     boxShadow: clay.surface,
   },
   chipText: { ...font.display[900], fontSize: 26, color: colors.ink },
+  chipRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  action: { position: 'absolute', left: 24, right: 24 },
   door: { position: 'absolute', top: 0, bottom: 0 },
   polaroid: {
     backgroundColor: colors.card,

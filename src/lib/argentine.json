@@ -2006,7 +2006,7 @@
      },
      "gap": "gil",
      "level": 1,
-     "audio": "argentine/e8b548adee909618543b.mp3",
+     "audio": "argentine/6deab1e16af088432077.mp3",
      "voice": "malena"
     },
     {
@@ -3622,7 +3622,18 @@
      "level": 1,
      "audio": "argentine/66d6ecb69256d796bf03.mp3",
      "voice": "malena"
-    },
+    }
+   ]
+  },
+  {
+   "slug": "plata-6",
+   "theme": "plata",
+   "name": "Everyday",
+   "title": "Money & work · Everyday",
+   "emoji": "💸",
+   "about": "Cash, jobs, prices and getting by.",
+   "vulgar": false,
+   "words": [
     {
      "id": "laburante",
      "es": "laburante",
@@ -3638,18 +3649,7 @@
      "level": 1,
      "audio": "argentine/29205ad21407aa29cb22.mp3",
      "voice": "tomas"
-    }
-   ]
-  },
-  {
-   "slug": "plata-6",
-   "theme": "plata",
-   "name": "Going deeper I",
-   "title": "Money & work · Going deeper I",
-   "emoji": "💸",
-   "about": "Cash, jobs, prices and getting by.",
-   "vulgar": false,
-   "words": [
+    },
     {
      "id": "chanchito",
      "es": "chanchito",
@@ -3715,7 +3715,18 @@
      "level": 2,
      "audio": "argentine/e00e6a164bcbf71ee70c.mp3",
      "voice": "malena"
-    },
+    }
+   ]
+  },
+  {
+   "slug": "plata-7",
+   "theme": "plata",
+   "name": "Going deeper I",
+   "title": "Money & work · Going deeper I",
+   "emoji": "💸",
+   "about": "Cash, jobs, prices and getting by.",
+   "vulgar": false,
+   "words": [
     {
      "id": "lavacopas",
      "es": "lavacopas",
@@ -3731,18 +3742,7 @@
      "level": 2,
      "audio": "argentine/058560dba79abcad863f.mp3",
      "voice": "tomas"
-    }
-   ]
-  },
-  {
-   "slug": "plata-7",
-   "theme": "plata",
-   "name": "Going deeper II",
-   "title": "Money & work · Going deeper II",
-   "emoji": "💸",
-   "about": "Cash, jobs, prices and getting by.",
-   "vulgar": false,
-   "words": [
+    },
     {
      "id": "monotributista",
      "es": "monotributista",
@@ -3807,7 +3807,18 @@
      "level": 2,
      "audio": "argentine/91feacd6f2fae4970629.mp3",
      "voice": "tomas"
-    },
+    }
+   ]
+  },
+  {
+   "slug": "plata-8",
+   "theme": "plata",
+   "name": "Going deeper II",
+   "title": "Money & work · Going deeper II",
+   "emoji": "💸",
+   "about": "Cash, jobs, prices and getting by.",
+   "vulgar": false,
+   "words": [
     {
      "id": "rebusque",
      "es": "rebusque",
@@ -3823,18 +3834,7 @@
      "level": 2,
      "audio": "argentine/8b9adbc686bbe31957c3.mp3",
      "voice": "malena"
-    }
-   ]
-  },
-  {
-   "slug": "plata-8",
-   "theme": "plata",
-   "name": "Going deeper III",
-   "title": "Money & work · Going deeper III",
-   "emoji": "💸",
-   "about": "Cash, jobs, prices and getting by.",
-   "vulgar": false,
-   "words": [
+    },
     {
      "id": "seco",
      "es": "seco",
@@ -3898,7 +3898,18 @@
      "level": 2,
      "audio": "argentine/1d275322df8acfd83f8e.mp3",
      "voice": "tomas"
-    },
+    }
+   ]
+  },
+  {
+   "slug": "plata-9",
+   "theme": "plata",
+   "name": "Rare gems",
+   "title": "Money & work · Rare gems",
+   "emoji": "💸",
+   "about": "Cash, jobs, prices and getting by.",
+   "vulgar": false,
+   "words": [
     {
      "id": "verdes",
      "es": "verdes",
@@ -3914,18 +3925,7 @@
      "level": 2,
      "audio": "argentine/937e63e39410d886cf18.mp3",
      "voice": "malena"
-    }
-   ]
-  },
-  {
-   "slug": "plata-9",
-   "theme": "plata",
-   "name": "Rare gems",
-   "title": "Money & work · Rare gems",
-   "emoji": "💸",
-   "about": "Cash, jobs, prices and getting by.",
-   "vulgar": false,
-   "words": [
+    },
     {
      "id": "amarrocar",
      "es": "amarrocar",
@@ -3957,23 +3957,6 @@
      "gap": "canuto",
      "level": 3,
      "audio": "argentine/3dd57ab9b09e8325ceea.mp3",
-     "voice": "tomas"
-    },
-    {
-     "id": "estar-pato",
-     "es": "estar pato",
-     "pos": "phrase",
-     "en": "to have no money",
-     "note": "Old-fashioned way to say you have no money. Today people say \"estar seco\" or \"no tener un mango\".",
-     "tag": "Old-fashioned",
-     "example": {
-      "es": "No puedo salir hoy, estoy pato hasta que cobre.",
-      "en": "I can't go out today, I have no money until I get paid.",
-      "audio": "argentine/4b515efb3e0b2a5535c9.mp3"
-     },
-     "gap": "estoy pato",
-     "level": 3,
-     "audio": "argentine/b50dc5b8d917b0c3e539.mp3",
      "voice": "tomas"
     },
     {
@@ -9421,7 +9404,7 @@
      },
      "gap": "mufa",
      "level": 1,
-     "audio": "argentine/3f33eaf89f8cb66a5334.mp3",
+     "audio": "argentine/f4bd3d4f1467b5284b8e.mp3",
      "voice": "malena"
     },
     {

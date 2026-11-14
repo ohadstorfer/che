@@ -11,6 +11,7 @@ import { EASE_OUT, rise } from '@/components/onboarding-ui';
 import { SaveButtons } from '@/components/save-account';
 import { useAuth } from '@/lib/auth';
 import { loadCourse, loadProgress, type PathLesson } from '@/lib/course';
+import { trackStep } from '@/lib/funnel';
 import { isGuest } from '@/lib/guest';
 import { tap } from '@/lib/haptics';
 import { resetTo } from '@/lib/nav';
@@ -74,6 +75,7 @@ export default function Ready() {
   const { pass } = useLocalSearchParams<{ pass?: string }>();
 
   useEffect(() => {
+    trackStep('ready');
     void loadAnswers().then(setAnswers);
   }, []);
 
