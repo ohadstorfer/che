@@ -300,7 +300,7 @@ function PartBar({ at }: { at: number }) {
       accessibilityRole="progressbar"
       accessibilityValue={{ min: 0, max: SCREENS.length, now: at }}>
       {runs.map((r) => (
-        <View key={r.from} style={[styles.barPiece, { flex: r.size }]}>
+        <View key={r.from} style={[styles.barPiece, { flex: 1 }]}>
           <BarFill color={PARTS[r.part].color} share={Math.min(Math.max((at - r.from) / r.size, 0), 1)} />
         </View>
       ))}
