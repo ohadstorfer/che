@@ -80,10 +80,10 @@ const SCREENS: { id: ScreenId; part: Part }[] = [
   { id: 'waiter', part: 'slang' },
   { id: 'dale', part: 'slang' },
   { id: 'dale-gap', part: 'slang' },
-  { id: 'tip-guess', part: 'culture' },
-  { id: 'tip-card', part: 'culture' },
   { id: 're', part: 'slang' },
   { id: 're-gap', part: 'slang' },
+  { id: 'tip-guess', part: 'culture' },
+  { id: 'tip-card', part: 'culture' },
   { id: 'call', part: 'pancho' },
 ];
 
