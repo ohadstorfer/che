@@ -31,6 +31,10 @@ export default function AdminHome() {
           <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>Replay onboarding</Text>
           <Muted>Questions, plan and paywall, as a new learner sees them. Your account is not changed.</Muted>
         </RowLink>
+        <RowLink onPress={() => router.push('/admin/first-class')}>
+          <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>First class prototype</Text>
+          <Muted>“At the café”: class, slang, culture and a Pancho call in one short lesson. Nothing is saved.</Muted>
+        </RowLink>
       </Section>
 
       <Section title="Needs attention">

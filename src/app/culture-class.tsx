@@ -73,7 +73,7 @@ interface Story {
   bigWord?: { es: string; en: string; tag?: string };
 }
 
-interface Fact {
+export interface Fact {
   art: ImageSourcePropType;
   text: string;
   /** The date or year worth showing huge, when the fact has one. */
@@ -1085,7 +1085,7 @@ const CARD_TONES = [pastel.butter, pastel.sky, pastel.peach, pastel.sage, pastel
  * The fun fact, on a card of its own so it lands instead of hanging off the end
  * of a paragraph. A card class tells its whole story on these.
  */
-function FactCard({ fact, onDone, onBack }: { fact: Fact; onDone: () => void; onBack?: () => void }) {
+export function FactCard({ fact, onDone, onBack }: { fact: Fact; onDone: () => void; onBack?: () => void }) {
   const bottom = useSafeAreaInsets().bottom;
   const tap = useSideTap(onDone, onBack);
   // The biggest size fits about 22 words above the art; a longer card steps down one.
@@ -1290,7 +1290,7 @@ function Complete({
 // ---------------------------------------------------------------------------
 
 /** One answer from a list. Options are shuffled unless their order means something. */
-function ChoiceStep({
+export function ChoiceStep({
   prompt,
   options,
   correct,
