@@ -42,7 +42,7 @@ import type { Form, Sentence } from '@/lib/types';
 //
 // Content is real: the course rows (forms + sentences, their recordings) are a
 // snapshot of the database in first-class.json, the slang words come from
-// argentine.json, the tip card from culture.json. Nothing is graded or saved.
+// argentine.json, the asado question and card from culture.json. Nothing is graded or saved.
 // ---------------------------------------------------------------------------
 
 type Part = 'class' | 'slang' | 'culture' | 'pancho';
@@ -60,8 +60,8 @@ type ScreenId =
   | 'build'
   | 'slang'
   | 'culture-intro'
-  | 'tip-guess'
-  | 'tip-card'
+  | 'asado-guess'
+  | 'asado-card'
   | 'call';
 
 const SCREENS: { id: ScreenId; part: Part }[] = [
@@ -70,8 +70,8 @@ const SCREENS: { id: ScreenId; part: Part }[] = [
   { id: 'build', part: 'class' },
   { id: 'slang', part: 'slang' },
   { id: 'culture-intro', part: 'culture' },
-  { id: 'tip-guess', part: 'culture' },
-  { id: 'tip-card', part: 'culture' },
+  { id: 'asado-guess', part: 'culture' },
+  { id: 'asado-card', part: 'culture' },
   { id: 'call', part: 'pancho' },
 ];
 
@@ -266,29 +266,30 @@ function ScreenView({
       return <SlangRound onDone={onNext} onProgress={onProgress} onOpening={onOpening} />;
     case 'culture-intro':
       return <CultureOpener onStart={onNext} />;
-    case 'tip-guess':
+    case 'asado-guess':
+      // culture.json · asado / "More than a barbecue", its first question.
       return (
         <ChoiceStep
-          prompt="How much do you tip at a café in Argentina?"
-          options={['About 10%, often in cash', 'Nothing. Tipping is rude here', '20%, like in the US']}
-          correct={0}
-          explain="Tipping is normal here, just smaller than in the US."
+          prompt="The invite says **“Vení a la una.”** Come at one. When will you probably eat?"
+          options={['Right at one', 'An hour or two later', 'Around dinner time']}
+          correct={1}
+          explain="The fire is slow, and so is everything else. Have a drink by the grill and eat when the asador, the grill cook, says so."
           onDone={onNext}
         />
       );
-    case 'tip-card':
-      return <FactCard fact={TIP_FACT} onDone={onNext} />;
+    case 'asado-card':
+      return <FactCard fact={ASADO_FACT} onDone={onNext} />;
     case 'call':
       return <CallStep admin={admin} onDone={onNext} />;
   }
 }
 
-const TIP_FACT: Fact = {
-  art: require('@/assets/images/objects/cafe-con-medialunas-figure.webp'),
-  // culture.json · buenos-aires / pagar, its Pro tip card.
-  text: 'The tip, **la propina**, is about 10%. People usually leave it in cash on the table, even when they pay the bill by card. By law the place must also let you tip by card or QR.',
+const ASADO_FACT: Fact = {
+  art: require('@/assets/images/objects/asado-figure.webp'),
+  // culture.json · asado / "More than a barbecue", its opening card.
+  text: 'An **asado** is grilled meat, sure. But mostly it’s an excuse to spend the whole day together. **¿Hacemos un asado?** really means: want to hang out?',
   hero: null,
-  chip: 'Pro tip',
+  chip: 'More than a barbecue',
   bg: pastel.butter,
 };
 
@@ -584,7 +585,7 @@ function Complete({ onAgain, onClose, onFinish }: { onAgain?: () => void; onClos
       <ScrollView contentContainerStyle={styles.doneBody}>
         <Text style={styles.doneKicker}>LESSON COMPLETE</Text>
         <Text style={styles.doneTitle}>Your first class: at the café</Text>
-        <Text style={styles.doneLine}>You ordered, spoke like a porteño, learned the slang and the tip. All in four minutes.</Text>
+        <Text style={styles.doneLine}>You ordered, spoke like a porteño, learned the slang and what an asado really is. All in four minutes.</Text>
         <View style={styles.stamps}>
           {STAMPS.map((s, i) => (
             <Animated.View
