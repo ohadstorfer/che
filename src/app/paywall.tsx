@@ -1,6 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useEffect, useRef, useState } from 'react';
@@ -30,7 +29,6 @@ import Animated, {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EASE_OUT, IconButton, rise } from '@/components/onboarding-ui';
-import { POSE } from '@/components/mascot';
 import { Button } from '@/components/ui';
 import { billing } from '@/lib/billing';
 import { appleRedeemUrl, normalizeCode, type Offer, type Plan, type PurchaseOutcome, winbackDiscount } from '@/lib/billing-shared';
@@ -39,7 +37,7 @@ import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
 import { resetTo } from '@/lib/nav';
 import { track } from '@/lib/funnel';
 import { type CreatorCode, loadCreatorCode } from '@/lib/creator-code';
-import { formatDate, loadAnswers, markWinbackShown, winbackShown } from '@/lib/onboarding';
+import { formatDate, markWinbackShown, winbackShown } from '@/lib/onboarding';
 import { cancelFreeUnitReminder, scheduleFreeUnitReminder } from '@/lib/free-unit-reminder';
 import { type PaywallSource, usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
@@ -104,7 +102,7 @@ export default function Paywall() {
   const reduced = useReducedMotion();
   const params = useLocalSearchParams<{ from?: string; code?: string; offer?: string }>();
   const from = (params.from ?? 'home') as PaywallSource;
-  const { catalog, hardPaywall, configReady, pass, freeChats, grant, refresh, testerUnlock, unlockAsTester } = usePremium();
+  const { catalog, hardPaywall, configReady, pass, grant, refresh, testerUnlock, unlockAsTester } = usePremium();
   const main = catalog?.main ?? null;
   // With the hard paywall there is no way out (the gate, and right after
   // onboarding until the server has said which it is). The free week is offered
@@ -117,7 +115,6 @@ export default function Paywall() {
   const [busy, setBusy] = useState<'buy' | 'restore' | 'tester' | 'code' | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [canClose, setCanClose] = useState(from !== 'onboarding');
-  const [headline, setHeadline] = useState<{ title: string; sub: string } | null>(null);
   const [purchasedTrial, setPurchasedTrial] = useState(0);
   // A discount code: Android types it here; iOS types it in Apple's own sheet.
   const [codeOpen, setCodeOpen] = useState(false);
@@ -128,22 +125,6 @@ export default function Paywall() {
   useEffect(() => {
     if (Platform.OS === 'android') void loadCreatorCode().then(setCreator);
   }, []);
-
-  // The plan she just built is the thing on offer; say so in its own words.
-  useEffect(() => {
-    let alive = true;
-    void loadAnswers().then((answers) => {
-      if (!alive) return;
-      if (from === 'lesson') return setHeadline({ title: 'Keep going.', sub: "You've finished the free units. Unlock the whole course." });
-      if (from === 'hablar') return setHeadline({ title: 'Keep talking with Pancho.', sub: `You've used your free ${freeChats === 1 ? 'chat' : 'chats'}. Talk with him every day.` });
-      const name = answers?.name?.trim();
-      if (name) return setHeadline({ title: `${name}, your plan is ready.`, sub: 'The slang, the vos and the real accent, from lesson one.' });
-      setHeadline({ title: 'Your plan is ready.', sub: 'The slang, the vos and the real accent, from lesson one.' });
-    });
-    return () => {
-      alive = false;
-    };
-  }, [from, freeChats]);
 
   // The first showing holds the close button back a moment, never longer.
   useEffect(() => {
@@ -391,18 +372,6 @@ export default function Paywall() {
               {line}
             </Text>
           ))}
-        </Animated.View>
-        <Animated.View entering={rise(1, reduced)} style={styles.leadRow}>
-          <Text style={styles.sub}>
-            {headline ? (
-              <>
-                <Text style={styles.subLead}>{headline.title}</Text> {headline.sub}
-              </>
-            ) : null}
-          </Text>
-          <View style={styles.pod}>
-            <Image source={POSE.cafe} style={styles.podArt} contentFit="contain" accessible={false} />
-          </View>
         </Animated.View>
 
         {creator ? (
@@ -796,11 +765,7 @@ const styles = StyleSheet.create({
   body: { paddingHorizontal: 20, paddingTop: 8, paddingBottom: 28, maxWidth: 520, width: '100%', alignSelf: 'center' },
   hero: { ...font.display[900], fontSize: 31, lineHeight: 35, letterSpacing: -0.8, color: colors.ink },
   heroLast: { color: colors.primary },
-  leadRow: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 14 },
   sub: { ...type.body, flex: 1, fontSize: 16, lineHeight: 22, color: colors.muted },
-  subLead: { ...font.body[800], color: colors.ink },
-  pod: { width: 88, height: 88, borderRadius: 44, backgroundColor: pastel.peach, boxShadow: clay.surface, alignItems: 'center' },
-  podArt: { position: 'absolute', bottom: -4, width: 96, height: 96 },
   h2: { ...font.display[900], fontSize: 22, lineHeight: 27, letterSpacing: -0.3, color: colors.ink, marginTop: 30, marginBottom: 14 },
 
   plans: { gap: 20, marginTop: 34 },
