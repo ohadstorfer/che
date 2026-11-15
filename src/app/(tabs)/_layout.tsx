@@ -1,16 +1,22 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Redirect } from 'expo-router';
+import { Redirect, useIsFocused } from 'expo-router';
 import { Tabs } from 'expo-router/js-tabs';
 import { View } from 'react-native';
 
 import { TabBar } from '@/components/tab-bar';
+import { WelcomeTour } from '@/components/welcome-tour';
 import { useAuth } from '@/lib/auth';
 import { usePremium } from '@/lib/premium';
 import { colors } from '@/lib/theme';
+import { useWelcomeTourActive } from '@/lib/welcome-tour';
 
 export default function TabsLayout() {
   const { session, loading } = useAuth();
   const { limited, hardPaywall, pass } = usePremium();
+  // The welcome tour after the first purchase plays over the tabs, and only
+  // while they are on screen: a lesson opened on top finishes first.
+  const tourActive = useWelcomeTourActive();
+  const focused = useIsFocused();
   if (!loading && !session) return <Redirect href="/welcome" />;
   // The server can switch the free tier off (`hard_paywall` in app_config):
   // then a free account sees the paywall, with no way around it — leaving the
@@ -72,6 +78,7 @@ export default function TabsLayout() {
         }}
       />
     </Tabs>
+      {tourActive && focused ? <WelcomeTour /> : null}
     </View>
   );
 }

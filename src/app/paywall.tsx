@@ -46,6 +46,7 @@ import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, pastel, press, radius, type } from '@/lib/theme';
 import { scheduleTrialReminder } from '@/lib/trial-reminder';
 import { winbackOfferUntil } from '@/lib/winback-offer';
+import { queueWelcomeTour } from '@/lib/welcome-tour';
 
 // ---------------------------------------------------------------------------
 // Paywall — flow 7: ask right after onboarding, with a free week on the
@@ -219,6 +220,8 @@ export default function Paywall() {
     if (typeof out === 'object') return setError(out.error);
     success();
     grant();
+    // Her first purchase: the welcome tour waits for the tabs (once, ever).
+    void queueWelcomeTour();
     void cancelFreeUnitReminder();
     setPurchasedTrial(!!p.trialDays);
     if (p.trialDays) void scheduleTrialReminder(p.trialDays);
@@ -230,6 +233,7 @@ export default function Paywall() {
     if (out !== 'purchased') return false;
     success();
     grant();
+    void queueWelcomeTour();
     void cancelFreeUnitReminder();
     setPurchasedTrial(false);
     setCodeOpen(false);

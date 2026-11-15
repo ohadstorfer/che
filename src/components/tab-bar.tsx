@@ -14,6 +14,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { clay, colors, font, pastel, press } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
+import { reportTabBar } from '@/lib/welcome-tour';
 
 // ---------------------------------------------------------------------------
 // TabBar
@@ -57,6 +58,7 @@ const pressTransition =
 
 export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const [rowWidth, setRowWidth] = useState(0);
+  const barRef = useRef<View>(null);
   // Lift off the bottom edge by what the device reserves there, less 4pt, and never under 14pt: a home
   // indicator (iPhone ~34pt), Android gesture bar (~24pt) or 3-button bar (~48pt) all get clear air,
   // and the web, with no inset, still gets a gap.
@@ -83,8 +85,15 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   return (
     <View style={[styles.dock, { paddingBottom: lift }]}>
       <View
+        ref={barRef}
         style={styles.bar}
-        onLayout={(e) => setRowWidth(e.nativeEvent.layout.width)}
+        onLayout={(e) => {
+          setRowWidth(e.nativeEvent.layout.width);
+          // The welcome tour cuts a hole over one tab, so it needs to know
+          // where the bar is on screen (lib/welcome-tour.ts).
+          const count = state.routes.length;
+          barRef.current?.measureInWindow((x, y, width, height) => reportTabBar({ x, y, width, height, pad: BAR_PAD, count }));
+        }}
         accessibilityRole="tablist">
         {slotWidth > 0 && (
           <Animated.View

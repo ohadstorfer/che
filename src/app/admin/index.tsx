@@ -31,6 +31,10 @@ export default function AdminHome() {
           <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>Replay onboarding</Text>
           <Muted>Questions, plan and paywall, as a new learner sees them. Your account is not changed.</Muted>
         </RowLink>
+        <RowLink onPress={() => router.push('/admin/welcome-tour')}>
+          <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>Replay welcome tour</Text>
+          <Muted>The four-tab tour shown once after the first purchase. Also posta://admin/welcome-tour.</Muted>
+        </RowLink>
       </Section>
 
       <Section title="Needs attention">

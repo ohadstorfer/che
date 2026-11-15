@@ -10,7 +10,7 @@ import { MASCOT_NAME, POSE } from '@/components/mascot';
 import { EASE_OUT, rise } from '@/components/onboarding-ui';
 import { SaveButtons } from '@/components/save-account';
 import { useAuth } from '@/lib/auth';
-import { loadCourse, loadProgress, type PathLesson } from '@/lib/course';
+import { lessonHref, loadCourse, loadProgress } from '@/lib/course';
 import { trackStep } from '@/lib/funnel';
 import { isGuest } from '@/lib/guest';
 import { tap } from '@/lib/haptics';
@@ -39,18 +39,6 @@ const webPress =
   Platform.OS === 'web'
     ? ({ transitionProperty: 'transform', transitionDuration: `${press.duration}ms`, transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)' } as unknown as ViewStyle)
     : undefined;
-
-/** Where a lesson opens, by kind: the same routes the Course screen uses. */
-const lessonHref = (l: PathLesson) =>
-  l.kind === 'story'
-    ? `/story?lesson=${l.id}`
-    : l.kind === 'speak'
-      ? `/hablar-brief?kind=unit&lesson=${l.id}`
-      : l.kind === 'slang'
-        ? `/argentine-round?lesson=${l.id}`
-        : l.kind === 'culture'
-          ? `/culture-class?lesson=${l.id}`
-          : `/practice?lesson=${l.id}`;
 
 const CONFETTI: { left: number; top: number; w: number; tone: string; rot: number }[] = [
   { left: 8, top: 14, w: 16, tone: pastel.peach, rot: -24 },
