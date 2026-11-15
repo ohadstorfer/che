@@ -1,8 +1,11 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { useCallback, useState } from 'react';
-import { Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import { useCallback, useRef, useState } from 'react';
+import { Modal, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import { KeyboardChatScrollView, KeyboardStickyView } from 'react-native-keyboard-controller';
+import type Reanimated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AdminScreen, Muted, SmallButton, adminStyles } from '@/components/admin';
@@ -18,7 +21,7 @@ import {
   sendReply,
   setTester,
 } from '@/lib/feedback';
-import { colors, font, pastel, radius } from '@/lib/theme';
+import { clay, colors, font, pastel, press, radius } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
 // One tester's thread: everything she sent, with the screenshots and where she
@@ -27,6 +30,8 @@ import { colors, font, pastel, radius } from '@/lib/theme';
 // ---------------------------------------------------------------------------
 
 const POLL_MS = 10_000;
+/** Same sender within this long → one run: one timestamp under the last bubble. */
+const RUN_MS = 5 * 60_000;
 
 export default function AdminFeedbackThread() {
   const { user } = useLocalSearchParams<{ user: string }>();
@@ -37,6 +42,12 @@ export default function AdminFeedbackThread() {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [viewing, setViewing] = useState<string | null>(null);
+  const insets = useSafeAreaInsets();
+  const scroll = useRef<Reanimated.ScrollView>(null);
+  // Follow new messages only while the end is in view; reading older ones,
+  // a poll or a reply must not yank the thread down.
+  const atEnd = useRef(true);
+  const firstFill = useRef(true);
 
   const load = useCallback(async () => {
     if (!user) return;
@@ -68,12 +79,15 @@ export default function AdminFeedbackThread() {
       const saved = await sendReply(user, draft);
       setMessages((m) => [...(m ?? []), saved]);
       setDraft('');
+      atEnd.current = true; // your own message always scrolls into view
     } catch (e) {
       setError((e as Error).message);
     } finally {
       setSending(false);
     }
   };
+
+  const canSend = !sending && !!draft.trim();
 
   const toggleTester = async () => {
     if (!who) return;
@@ -93,6 +107,7 @@ export default function AdminFeedbackThread() {
         .join(' · ')}
       back="/admin/feedback"
       detail
+      fill
       actions={
         who ? (
           <SmallButton
@@ -103,61 +118,125 @@ export default function AdminFeedbackThread() {
           />
         ) : null
       }>
-      {!messages ? (
-        <Muted>Loading…</Muted>
-      ) : (
-        <View style={{ gap: 14 }}>
-          {messages.map((m) => (
-            <View key={m.id} style={[styles.message, m.from_staff ? styles.mine : styles.theirs]}>
-              {m.images.length ? (
-                <View style={adminStyles.wrap}>
-                  {m.images.map((p) => {
-                    const url = urls.get(p);
-                    return (
-                      <Pressable key={p} onPress={() => url && setViewing(url)} accessibilityLabel="Open screenshot">
-                        {url ? (
-                          <Image source={{ uri: url }} style={[styles.shot, shotShape(m.context)]} contentFit="cover" />
-                        ) : (
-                          <View style={[styles.shot, shotShape(m.context), { backgroundColor: colors.stone }]} />
-                        )}
-                      </Pressable>
-                    );
-                  })}
+      <KeyboardChatScrollView
+        ref={scroll}
+        style={{ flex: 1 }}
+        contentContainerStyle={styles.thread}
+        offset={insets.bottom}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
+        onEndVisible={(v) => {
+          atEnd.current = v;
+        }}
+        onContentSizeChange={() => {
+          if (!messages?.length) return;
+          if (firstFill.current || atEnd.current) scroll.current?.scrollToEnd({ animated: !firstFill.current });
+          firstFill.current = false;
+        }}>
+        {!messages ? (
+          <Muted>Loading…</Muted>
+        ) : (
+          messages.map((m, i) => {
+            const prev = messages[i - 1];
+            const next = messages[i + 1];
+            const newDay = !prev || dayKey(prev.created_at) !== dayKey(m.created_at);
+            const endsRun =
+              !next ||
+              next.from_staff !== m.from_staff ||
+              +new Date(next.created_at) - +new Date(m.created_at) > RUN_MS ||
+              dayKey(next.created_at) !== dayKey(m.created_at);
+            const startsRun = newDay || !prev || prev.from_staff !== m.from_staff;
+            return (
+              <View key={m.id}>
+                {newDay ? <Text style={styles.day}>{dayLabel(m.created_at)}</Text> : null}
+                <View style={[styles.message, m.from_staff ? styles.mine : styles.theirs, startsRun && { marginTop: 10 }]}>
+                  {m.images.length ? (
+                    <View style={adminStyles.wrap}>
+                      {m.images.map((p) => {
+                        const url = urls.get(p);
+                        return (
+                          <Pressable key={p} onPress={() => url && setViewing(url)} accessibilityLabel="Open screenshot">
+                            {url ? (
+                              <Image source={{ uri: url }} style={[styles.shot, shotShape(m.context)]} contentFit="cover" />
+                            ) : (
+                              <View style={[styles.shot, shotShape(m.context), { backgroundColor: colors.stone }]} />
+                            )}
+                          </Pressable>
+                        );
+                      })}
+                    </View>
+                  ) : null}
+                  {m.body ? (
+                    <View style={[styles.bubble, m.from_staff ? styles.bubbleMine : styles.bubbleTheirs]}>
+                      <Text selectable style={[styles.text, m.from_staff && { color: colors.onPrimary }]}>
+                        {m.body}
+                      </Text>
+                    </View>
+                  ) : null}
+                  {endsRun || m.context ? (
+                    <Text style={[styles.meta, m.from_staff && { textAlign: 'right' }]}>
+                      {[endsRun ? timeLabel(m.created_at) : null, m.context ? describe(m.context) : null].filter(Boolean).join(' · ')}
+                    </Text>
+                  ) : null}
                 </View>
-              ) : null}
-              {m.body ? (
-                <View style={[styles.bubble, m.from_staff ? styles.bubbleMine : styles.bubbleTheirs]}>
-                  <Text selectable style={[styles.text, m.from_staff && { color: colors.onPrimary }]}>
-                    {m.body}
-                  </Text>
-                </View>
-              ) : null}
-              <Text style={styles.meta}>
-                {new Date(m.created_at).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
-                {m.context ? ` · ${describe(m.context)}` : ''}
-              </Text>
-            </View>
-          ))}
-        </View>
-      )}
+              </View>
+            );
+          })
+        )}
+      </KeyboardChatScrollView>
 
-      <View style={styles.composer}>
-        <TextInput
-          value={draft}
-          onChangeText={setDraft}
-          placeholder="Reply…"
-          placeholderTextColor={colors.faint}
-          multiline
-          maxLength={4000}
-          style={styles.input}
-        />
-        <SmallButton label={sending ? 'Sending…' : 'Send'} icon="send" tone="primary" disabled={sending || !draft.trim()} onPress={reply} />
-      </View>
-      {error ? <Text style={{ color: colors.dangerInk }}>{error}</Text> : null}
+      {/* Rides the keyboard; its safe-area padding tucks under it when open. */}
+      <KeyboardStickyView offset={{ closed: 0, opened: insets.bottom }}>
+        <View style={[styles.composer, { paddingBottom: 10 + insets.bottom }]}>
+          {error ? <Text style={styles.error}>{error}</Text> : null}
+          <View style={styles.inputRow}>
+            <TextInput
+              value={draft}
+              onChangeText={setDraft}
+              placeholder="Reply…"
+              placeholderTextColor={colors.faint}
+              multiline
+              maxLength={4000}
+              style={styles.input}
+            />
+            <Pressable
+              onPress={reply}
+              disabled={!canSend}
+              accessibilityRole="button"
+              accessibilityLabel="Send"
+              style={({ pressed }) => [
+                styles.send,
+                !canSend && styles.sendOff,
+                { transform: [{ scale: pressed && canSend ? press.scale : 1 }] },
+              ]}>
+              <Ionicons name="arrow-up" size={20} color={canSend ? colors.onPrimary : colors.faint} />
+            </Pressable>
+          </View>
+        </View>
+      </KeyboardStickyView>
       <ShotViewer url={viewing} onClose={() => setViewing(null)} />
     </AdminScreen>
   );
 }
+
+const dayKey = (iso: string) => new Date(iso).toDateString();
+
+/** "Today", "Yesterday", "Tue 4 Nov". */
+function dayLabel(iso: string) {
+  const d = new Date(iso);
+  const today = new Date();
+  const yesterday = new Date(Date.now() - 86_400_000);
+  if (d.toDateString() === today.toDateString()) return 'Today';
+  if (d.toDateString() === yesterday.toDateString()) return 'Yesterday';
+  return d.toLocaleDateString([], {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: d.getFullYear() === today.getFullYear() ? undefined : 'numeric',
+  });
+}
+
+const timeLabel = (iso: string) => new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
 /** "/practice · v1.0.0 · iPhone 15 · iOS 18.2" */
 function describe(c: FeedbackContext) {
@@ -202,7 +281,9 @@ function shotShape(c: FeedbackContext | null) {
 }
 
 const styles = StyleSheet.create({
-  message: { maxWidth: 640, gap: 6 },
+  thread: { paddingHorizontal: 16, paddingTop: 8, paddingBottom: 16, gap: 4, maxWidth: 760, width: '100%', alignSelf: 'center' },
+  day: { ...font.body[600], fontSize: 12, color: colors.muted, textAlign: 'center', marginTop: 18, marginBottom: 4 },
+  message: { maxWidth: '82%', gap: 4 },
   mine: { alignSelf: 'flex-end', alignItems: 'flex-end' },
   theirs: { alignSelf: 'flex-start', alignItems: 'flex-start' },
   shot: { width: 150, height: 325, borderRadius: radius.sm, borderWidth: 1, borderColor: colors.border },
@@ -222,19 +303,38 @@ const styles = StyleSheet.create({
   bubbleTheirs: { backgroundColor: pastel.butter, borderBottomLeftRadius: 5 },
   text: { ...font.body[600], fontSize: 15, lineHeight: 21, color: colors.ink },
   meta: { fontSize: 12, color: colors.muted },
-  composer: { flexDirection: 'row', alignItems: 'flex-end', gap: 8 },
+  composer: {
+    paddingHorizontal: 12,
+    paddingTop: 10,
+    gap: 8,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+    backgroundColor: colors.bg,
+  },
+  error: { fontSize: 13, color: colors.dangerInk, paddingHorizontal: 4 },
+  inputRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 8, maxWidth: 760, width: '100%', alignSelf: 'center' },
   input: {
     flex: 1,
-    minHeight: 44,
-    maxHeight: 200,
+    minHeight: 40,
+    maxHeight: 140,
+    paddingHorizontal: 14,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 20,
     backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radius.sm,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    boxShadow: clay.flat,
     fontSize: 15,
     ...font.body[600],
     color: colors.ink,
   },
+  send: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.primary,
+    boxShadow: clay.chip,
+  },
+  sendOff: { backgroundColor: colors.stone, boxShadow: 'none' },
 });

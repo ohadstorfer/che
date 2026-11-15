@@ -4,6 +4,7 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Easing, Img, Sequence, continueRender, delayRender, interpolate, spring, staticFile, useCurrentFrame} from 'remotion';
 import {EndCard, END_FRAMES} from './EndCard';
+import {LinkEnd} from './LinkEnd';
 import {Puppet, blink, Rig} from './Puppet';
 
 export const FPS = 30;
@@ -15,7 +16,7 @@ export type Clips = Record<string, Clip>;
 type Side = {word: string; flags: string; sprite: string; height: number; voice: string; rig: Rig};
 // `steady` keeps both the same size all the way through; without it the one talking steps up and the other steps back.
 // `live` drops "Coming soon to" from the ending, for when the app is on the stores.
-export type Versus = {id: string; left: Side; right: Side; sound?: boolean; steady?: boolean; live?: boolean;
+export type Versus = {id: string; left: Side; right: Side; sound?: boolean; steady?: boolean; live?: boolean; titleTop?: number; bg?: string; floor?: number; linkEnd?: boolean; endTitle?: string; endTitleSize?: number;
   pairs: {left: string; right: string; english: string; sayLeft: string; sayRight: string}[]};
 
 // The app's Arcilla theme (src/lib/theme.ts); coral and blue tell the two sides apart.
@@ -62,7 +63,7 @@ export const fit = (text: string, max: number, width: number) => Math.min(max, M
 // Each drawing runs off its own side of the frame (it was cut there), so everything
 // pivots on that outer bottom corner and the cut edge never comes into view.
 const BLEED = 40;
-const Capy: React.FC<{side: Side; at: 'l' | 'r'; amp: number; mouth: string; talking: number; listening: number; enter: number; steady?: boolean}> = ({side, at, amp, mouth, talking, listening, enter, steady}) => {
+const Capy: React.FC<{side: Side; at: 'l' | 'r'; amp: number; mouth: string; talking: number; listening: number; enter: number; steady?: boolean; floor?: number}> = ({side, at, amp, mouth, talking, listening, enter, steady, floor = 96}) => {
   const frame = useCurrentFrame();
   const dir = at === 'l' ? 1 : -1; // lean toward the other one
   const phase = at === 'l' ? 0 : 1.9;
@@ -74,7 +75,8 @@ const Capy: React.FC<{side: Side; at: 'l' | 'r'; amp: number; mouth: string; tal
   const wave = hello + 1.6 * Math.sin(frame / 19 + phase) - talking * 3 - amp * 3;
   // The one talking steps up, the one listening steps back (unless the reel is `steady`).
   const size = steady ? 1 : 1 + 0.12 * talking - 0.1 * listening;
-  return <div style={{position: 'absolute', bottom: 96, [at === 'l' ? 'left' : 'right']: -BLEED, zIndex: talking > listening ? 1 : 0,
+  const extra = side.rig.body ? (side.rig.size[0] - side.rig.body) * side.height / side.rig.size[1] : 0; // the redrawn elbow stays off screen
+  return <div style={{position: 'absolute', bottom: floor, [at === 'l' ? 'left' : 'right']: -BLEED - extra, zIndex: talking > listening ? 1 : 0,
     transformOrigin: at === 'l' ? '0% 100%' : '100% 100%',
     transform: `translateY(${(1 - enter) * 70 - amp * 8}px) scale(${size}) scale(${1 - amp * 0.01 - breathe * 0.5}, ${1 + amp * 0.02 + breathe})`,
     opacity: Math.min(1, enter * 1.6), filter: `drop-shadow(0 14px 16px rgba(40,70,50,0.28))`}}>
@@ -103,21 +105,26 @@ export const VersusReel: React.FC<{reel: Versus; clips: Clips}> = ({reel, clips}
     mouthL = mouthOf(pair.lVo, l); mouthR = mouthOf(pair.rVo, r);
   }
 
-  const head = (delay: number) => { const s = pop(frame - delay); return {opacity: tween(frame, delay, 6), transform: `translateY(${(1 - s) * -30}px) scale(${0.92 + 0.08 * s})`}; };
+  // No entrance (2026-11-06): the first frame is the cover Facebook and X show, so the title and both Panchos are there from frame 0.
+  const head = (_delay: number) => ({});
 
   return <AbsoluteFill style={{background: `linear-gradient(180deg, ${C.sageTop}, ${C.sageBottom})`, overflow: 'hidden', fontFamily: DISPLAY}}>
+    {reel.bg ? <Img src={staticFile(reel.bg)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover'}} /> : <>
     <div style={{position: 'absolute', width: 760, height: 760, borderRadius: 380, left: -250, top: 640 + Math.sin(frame / 50) * 12, background: 'rgba(255,255,255,0.28)'}} />
     <div style={{position: 'absolute', width: 700, height: 700, borderRadius: 350, right: -230, top: 720 + Math.cos(frame / 60) * 12, background: 'rgba(255,255,255,0.2)'}} />
-    <div style={{position: 'absolute', left: 60, right: 60, bottom: 70, height: 70, borderRadius: '50%', background: 'rgba(40,70,50,0.22)', filter: 'blur(12px)'}} />
+    </>}
+    <div style={{position: 'absolute', left: 60, right: 60, bottom: (reel.floor ?? (reel.bg ? 30 : 96)) - 26, height: 70, borderRadius: '50%', background: 'rgba(40,70,50,0.22)', filter: 'blur(12px)'}} />
 
     {/* X vs Y */}
-    <div style={{position: 'absolute', top: 200, left: 0, right: 0, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: 66}}>
+    <div style={{position: 'absolute', top: reel.titleTop ?? 200, left: 0, right: 0, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: 66, zIndex: 1}}>
       {(['l', 'r'] as const).map(at => {
         const side = at === 'l' ? reel.left : reel.right, talking = at === 'l' ? talkL : talkR;
         // Long title words (ESPAÑA vs ARGENTINA) shrink together, in equal columns so the VS tile stays centred.
-        const size = Math.min(fit(reel.left.word, 158, 370), fit(reel.right.word, 158, 370));
+        // A word may be two lines ('TOURIST\nSPANISH'); it is sized by its longest line.
+        const line = (w: string) => w.split('\n').reduce((a, b) => a.length >= b.length ? a : b);
+        const size = Math.min(fit(line(reel.left.word), 158, 370), fit(line(reel.right.word), 158, 370));
         return <div key={at} style={{order: at === 'l' ? 0 : 2, width: size < 158 ? 410 : undefined, marginInline: size < 158 ? -13 : undefined, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 26, ...head(at === 'l' ? 2 : 10)}}>
-          <Word text={side.word} size={size} side={at} style={{transform: `skewX(-8deg) scale(${1 + talking * 0.07})`}} />
+          <Word text={side.word} size={size} side={at} style={{whiteSpace: 'pre', textAlign: 'center', transform: `skewX(-8deg) scale(${1 + talking * 0.07})`}} />
           <div style={{fontSize: 82, lineHeight: 1, filter: 'drop-shadow(0 5px 5px rgba(40,60,45,0.3))'}}>{side.flags}</div>
         </div>;
       })}
@@ -125,8 +132,8 @@ export const VersusReel: React.FC<{reel: Versus; clips: Clips}> = ({reel, clips}
         boxShadow: 'inset 3px 4px 0 rgba(255,255,255,0.7), 0 18px 30px -14px rgba(40,70,50,0.55)', ...head(6)}}>VS</div>
     </div>
 
-    <Capy side={reel.left} at="l" amp={ampL} mouth={mouthL} talking={talkL} listening={talkR} enter={tween(frame, 0, 16)} steady={reel.steady} />
-    <Capy side={reel.right} at="r" amp={ampR} mouth={mouthR} talking={talkR} listening={talkL} enter={tween(frame, 5, 16)} steady={reel.steady} />
+    <Capy side={reel.left} at="l" amp={ampL} mouth={mouthL} talking={talkL} listening={talkR} enter={1} steady={reel.steady} floor={reel.floor ?? (reel.bg ? 30 : 96)} />
+    <Capy side={reel.right} at="r" amp={ampR} mouth={mouthR} talking={talkR} listening={talkL} enter={1} steady={reel.steady} floor={reel.floor ?? (reel.bg ? 30 : 96)} />
 
     {/* this pair: the meaning above their heads, each word on its speaker */}
     {pair ? (() => {
@@ -136,11 +143,11 @@ export const VersusReel: React.FC<{reel: Versus; clips: Clips}> = ({reel, clips}
         const s = pop(frame - from);
         return <div style={{position: 'absolute', top: 1330, left: at === 'l' ? '25.5%' : '74.5%', opacity: tween(frame, from, 5) * out,
           transform: `translateX(-50%) skewX(-8deg) scale(${0.86 + 0.14 * s}) rotate(${(1 - s) * (at === 'l' ? -5 : 5)}deg)`, zIndex: 2}}>
-          <Word text={text} size={fit(text, 122, 500)} side={at} />
+          <Word text={text} size={fit(text, 122, 450)} side={at} />
         </div>;
       };
       return <>
-        <div style={{position: 'absolute', top: 640, left: 0, right: 0, display: 'flex', justifyContent: 'center', opacity: en * out, transform: `translateY(${(1 - en) * 16}px)`, zIndex: 2}}>
+        <div style={{position: 'absolute', top: reel.titleTop ? reel.titleTop - 150 : 640, left: 0, right: 0, display: 'flex', justifyContent: 'center', opacity: en * out, transform: `translateY(${(1 - en) * 16}px)`, zIndex: 2}}>
           <div style={{fontWeight: 800, fontStyle: 'italic', fontSize: 78, lineHeight: 1, color: '#fff', WebkitTextStroke: `11px ${C.ink}`, paintOrder: 'stroke fill', transform: 'skewX(-8deg)'}}>({pair.english})</div>
         </div>
         {word('l', pair.left, pair.lVo)}
@@ -148,7 +155,7 @@ export const VersusReel: React.FC<{reel: Versus; clips: Clips}> = ({reel, clips}
       </>;
     })() : null}
 
-    {inOutro ? <EndCard frame={frame - tl.outro} soon={!reel.live} /> : null}
+    {reel.linkEnd ? <Sequence from={tl.outro}><LinkEnd title={reel.endTitle} titleSize={reel.endTitleSize} /></Sequence> : inOutro ? <EndCard frame={frame - tl.outro} soon={!reel.live} /> : null}
 
     {reel.sound === false ? null : tl.pairs.flatMap(p => [[p.lVo, clips[`l${p.i}`]], [p.rVo, clips[`r${p.i}`]]] as [number, Clip][])
       .map(([at, c]) => <Sequence key={c.src} from={at} durationInFrames={c.env.length + 4}><Audio src={staticFile(c.src)} /></Sequence>)}

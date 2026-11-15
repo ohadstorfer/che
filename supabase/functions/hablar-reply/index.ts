@@ -21,10 +21,11 @@
 //   done      {"turn_id","tomas_turn_id","wrap_up","ended","audio_path"}   ended on her last line (the eighth)
 //   error     {"stage":"claude|tts","retry":bool,"seq"?}
 //
-// One Claude call per turn: the streamed reply (cached persona + the chat's
-// level/scene block + history). Her line is not graded here: Pancho only
-// recasts a mistake in his reply, and hablar-end grades every line at once for
-// the summary. Pancho ends the chat himself by
+// One Claude call per turn for the reply: the streamed answer (cached persona +
+// the chat's level/scene block + history). Pancho only recasts a mistake in
+// his reply; her line is graded for the summary by a second call (Haiku,
+// hablar-grade.ts) that runs alongside it and is never shown during the chat,
+// so hablar-end has only the summary left to write. Pancho ends the chat himself by
 // closing his goodbye with END_MARKER, which is stripped before anything is
 // sent or spoken. Each finished sentence goes through the rioplatense guard
 // and then to ElevenLabs; several can be in TTS at once, but audio is sent in
@@ -33,7 +34,16 @@
 // turn_id replays the stored result as one burst.
 
 import { json, preflight } from "../_shared/cors.ts";
-import { lastPanchoLine, MAX_AUDIO_BYTES, panchoEnded, spokenDraft, type TurnRow, typedDraft } from "../_shared/hablar-draft.ts";
+import {
+  lastPanchoLine,
+  MAX_AUDIO_BYTES,
+  panchoEnded,
+  type PlacedLine,
+  recentLines,
+  spokenDraft,
+  type TurnRow,
+  typedDraft,
+} from "../_shared/hablar-draft.ts";
 import { offendingWords } from "../_shared/rioplatense.ts";
 import { SentenceSplitter } from "../_shared/sentences.ts";
 import { sseStream, toBase64, type SseWriter } from "../_shared/sse.ts";
@@ -84,6 +94,7 @@ import {
   WRAP_UP_NOTE,
 } from "../_shared/hablar-prompt.ts";
 import { Anthropic, MODEL, plain, REPLY_MODEL, REPLY_THINKING } from "../_shared/hablar-claude.ts";
+import { gradeLine, scenePhrases } from "../_shared/hablar-grade.ts";
 import { reported, reportError } from "../_shared/posthog.ts";
 import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 
@@ -156,6 +167,8 @@ async function runTurn(opts: {
   user: Turn;
   userIdx: number;
   userId: string;
+  /** The chat's latest lines, read before the turn was claimed (they don't change under it). */
+  recent?: PlacedLine[] | null;
 }) {
   const { env, db, sse, session, topic, user, userIdx } = opts;
   const client = new Anthropic({ apiKey: env.anthropicKey, ...CLAUDE_OPTIONS });
@@ -173,15 +186,17 @@ async function runTurn(opts: {
   const tomasId = crypto.randomUUID();
 
   // History: every sent line before this one, oldest first.
-  const { data: rows } = await db
-    .from("conversation_turns")
-    .select("idx, role, status, text, meta")
-    .eq("conversation_id", session.id)
-    .not("idx", "is", null)
-    .lt("idx", userIdx)
-    .order("idx", { ascending: false })
-    .limit(HISTORY_TURNS);
-  const history = ((rows ?? []) as Turn[]).filter((t) => t.role === "tomas" || t.status === "final").reverse();
+  const rows = opts.recent
+    ? opts.recent.filter((t) => (t.idx ?? 0) < userIdx).slice(0, HISTORY_TURNS)
+    : (await db
+      .from("conversation_turns")
+      .select("idx, role, status, text, meta")
+      .eq("conversation_id", session.id)
+      .not("idx", "is", null)
+      .lt("idx", userIdx)
+      .order("idx", { ascending: false })
+      .limit(HISTORY_TURNS)).data ?? [];
+  const history = (rows as PlacedLine[]).filter((t) => t.role === "tomas" || t.status === "final").reverse();
   const opener = history.find((t) => t.idx === 0)?.text ??
     (await db.from("conversation_turns").select("text").eq("conversation_id", session.id).eq("idx", 0).maybeSingle())
       .data?.text ?? "";
@@ -208,6 +223,34 @@ async function runTurn(opts: {
       }],
     },
   ];
+  // Her line graded for the summary, alongside the reply: neither waits on
+  // the other, and hablar-end is left with only the summary to write.
+  const graded = user.feedback || !user.text.trim()
+    ? Promise.resolve()
+    : gradeLine({
+      client,
+      db,
+      session,
+      turn: user,
+      tomasBefore: [...history].reverse().find((t) => t.role === "tomas")?.text ?? opener,
+      phrases: scenePhrases(session),
+      usage,
+    }).then(
+      (feedback) => feedback ? undefined : markUngraded(),
+      (err) => {
+        console.error("grading failed", err);
+        reportError("hablar-reply", err, { ...ids, stage: "feedback" });
+        return markUngraded();
+      },
+    );
+  // hablar-end waits a moment for a grading still running; this tells it none is.
+  async function markUngraded() {
+    const { error } = await db.from("conversation_turns")
+      .update({ meta: { ...user.meta, grade_failed: true } })
+      .eq("id", user.id);
+    if (error) console.error("grade_failed mark failed", error.message);
+  }
+
   const system = [
     { type: "text" as const, text: PERSONA, cache_control: { type: "ephemeral" as const } },
     {
@@ -323,7 +366,7 @@ async function runTurn(opts: {
     sse.close();
     // Sentences already in TTS still cost: wait for them before the usage is
     // written. Their audio goes nowhere (sending after close does nothing).
-    await emitChain;
+    await Promise.all([emitChain, graded]);
     await logUsage(db, usage);
     return;
   }
@@ -381,6 +424,7 @@ async function runTurn(opts: {
       sse.send("done", { turn_id: user.id, wrap_up: wrapUp, ended, audio_path: null });
     }
     sse.close();
+    await graded;
     await logUsage(db, usage);
     return;
   }
@@ -394,7 +438,7 @@ async function runTurn(opts: {
     : Promise.resolve();
   sse.close();
 
-  await upload;
+  await Promise.all([upload, graded]);
   await logUsage(db, usage);
 }
 
@@ -423,13 +467,14 @@ async function answerStored(req: Request, env: Env, db: SupabaseClient): Promise
   // is a round trip before Pancho can start talking. Nothing read is used until
   // the caller is known and owns the session; the turn is checked against it below.
   const turnId = isUuid(body.turn_id) ? body.turn_id : null;
-  const [who, row, { data: turnRow }, stored] = await Promise.all([
+  const [who, row, { data: turnRow }, stored, recent] = await Promise.all([
     caller(req, env),
     sessionRow(db, body.session_id),
     turnId
       ? db.from("conversation_turns").select("*").eq("id", turnId).maybeSingle()
       : Promise.resolve({ data: null }),
     turnId ? storedReply(db, turnId) : Promise.resolve(null),
+    recentLines(db, body.session_id),
   ]);
   if (!who) return json({ error: "not authenticated" }, { status: 401 });
   if (!turnId) return json({ error: "turn_id must be a uuid" }, { status: 400 });
@@ -437,7 +482,7 @@ async function answerStored(req: Request, env: Env, db: SupabaseClient): Promise
   if (!session) return json({ error: "no such session" }, { status: 404 });
   // Not waited on: nothing below needs the write, only the value on `session`.
   background(recordPause(db, session, body.paused_seconds));
-  return answer({ env, db, userId: who.userId, session, user: turnRow as Turn | null, stored });
+  return answer({ env, db, userId: who.userId, session, user: turnRow as Turn | null, stored, recent });
 }
 
 /**
@@ -477,13 +522,16 @@ async function speak(req: Request, env: Env, db: SupabaseClient): Promise<Respon
   }
 
   const sessionId = form.get("session_id");
-  const [session, { count }, { data: existing }, stored] = await Promise.all([
+  // Read together, the chat's latest lines included (the cap, Pancho's last
+  // line, the turn's place and the history all come from them).
+  const [session, { count }, { data: existing }, stored, recent] = await Promise.all([
     loadSession(db, sessionId, who.userId),
     typeof typed !== "string" && isUuid(sessionId)
       ? db.from("hablar_usage").select("id", { count: "exact", head: true }).eq("conversation_id", sessionId).eq("stage", "stt")
       : Promise.resolve({ count: 0 }),
     db.from("conversation_turns").select("*").eq("id", turnId).maybeSingle(),
     storedReply(db, turnId),
+    recentLines(db, sessionId),
   ]);
   if (!session) return json({ error: "no such session" }, { status: 404 });
   background(recordPause(db, session, form.get("paused_seconds")));
@@ -500,11 +548,12 @@ async function speak(req: Request, env: Env, db: SupabaseClient): Promise<Respon
       existing: existing as Turn | null,
       sttCount: count ?? 0,
       doubt: doubtOf(form),
+      recent,
     });
   if ("error" in out) return out.error;
   if ("empty" in out) return json({ text: "", turn_id: turnId, status: "empty" });
   if ("unclear" in out) return json({ text: "", turn_id: turnId, status: "unclear" });
-  return answer({ env, db, userId: who.userId, session, user: out.turn, stored, transcript: true });
+  return answer({ env, db, userId: who.userId, session, user: out.turn, stored, transcript: true, recent });
 }
 
 async function answer(opts: {
@@ -516,6 +565,8 @@ async function answer(opts: {
   stored: Turn | null;
   /** Open the stream with the line itself (the one-request path). */
   transcript?: boolean;
+  /** The chat's latest lines, read with the request (recentLines). */
+  recent?: PlacedLine[] | null;
 }): Promise<Response> {
   const { env, db, session } = opts;
   const topic = topicOf(session.kind, session.topic_id, session.level, session.scenario);
@@ -559,16 +610,24 @@ async function answer(opts: {
   // takes the turn with it (`answering_at`), so a retry waits for the reply
   // instead of writing a second one.
   let userIdx = user.idx ?? -1;
+  // Good for the history only while nothing moved since it was read: a place
+  // taken meanwhile (a retry of the claim) means the chat changed under it.
+  let freshRecent = opts.recent ?? null;
   if (user.status === "draft") {
     for (let attempt = 0; attempt < 3; attempt++) {
-      const { data: top } = await db
-        .from("conversation_turns")
-        .select("idx, role, meta")
-        .eq("conversation_id", session.id)
-        .not("idx", "is", null)
-        .order("idx", { ascending: false })
-        .limit(1)
-        .maybeSingle();
+      if (attempt > 0) freshRecent = null;
+      // The first try places it after the lines read with the request; a
+      // retry (the place was taken meanwhile) reads the chat's end again.
+      const top = attempt === 0 && opts.recent
+        ? opts.recent[0] ?? null
+        : (await db
+          .from("conversation_turns")
+          .select("idx, role, meta")
+          .eq("conversation_id", session.id)
+          .not("idx", "is", null)
+          .order("idx", { ascending: false })
+          .limit(1)
+          .maybeSingle()).data;
       // The chat's last line is Pancho's goodbye: nothing goes after it.
       const said = top?.role === "tomas" ? panchoEnded(top) : null;
       if (said) return said;
@@ -614,7 +673,7 @@ async function answer(opts: {
   const sse = sseStream();
   lead(sse);
   background(
-    runTurn({ env, db, sse, session, topic, user, userIdx, userId: opts.userId }).catch((err) => {
+    runTurn({ env, db, sse, session, topic, user, userIdx, userId: opts.userId, recent: freshRecent }).catch((err) => {
       console.error("turn failed", err);
       reportError("hablar-reply", err, { user_id: opts.userId, session_id: session.id, stage: "turn" });
       sse.send("error", { stage: "claude", retry: true });

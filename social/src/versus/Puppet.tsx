@@ -10,6 +10,7 @@ export type Rig = {
   eye: [number, number, number, number]; // centre x, centre y, radius x, radius y
   fur: string; // the colour around the eye, for the eyelid
   hand?: {cutX: number; cutY: number; pivot: [number, number]}; // a raised hand: everything right of cutX and above cutY
+  body?: number; // the body's width when an arm sticks out past it on the outer side (ar-arm); VersusReel pushes that part off screen
 };
 // The mouth drawings (cut-cast.py), and which one each letter of a clip's `mouth` string shows.
 const MOUTHS = ['closed', 'half', 'a', 'e', 'i', 'o', 'u'] as const;

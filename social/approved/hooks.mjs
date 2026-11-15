@@ -57,3 +57,15 @@ export const REELS = [
   {id: 'celeb-20-sordomudo', who: 'a lady', active: false, title: 'Can you understand this Argentine?', hooks: ['Can you understand this call?', 'Day 11 of understanding Argentinians']},
   {id: 'celeb-21-hormiguita', who: 'a teacher', active: false, title: 'Can you understand this Argentine?', hooks: ['Can you understand this teacher?', 'Day 12 of understanding Argentinians']},
 ];
+
+// 2026-11-07: the user approved every Pancho version in posta-videos/celeb except celeb-03 (pichi), which keeps its host version.
+// Same hooks as the host versions, minus the "Day N" lines (the Pancho reels open with "Only 1%"). Order = the order they go out.
+const PANCHO = ['02', '10', '05', '13', '08', '16', '14', '12', '04', '09', '07', '15', '17', '11', '18', '19', '20', '21'];
+const ONLY = 'Only 1% of Spanish learners understand this… can you?';
+for (const n of PANCHO) {
+  const base = REELS.find(r => r.id.startsWith(`celeb-${n}-`));
+  const slug = base.id.replace(/-(blur-host|host-blur|host|blur)$/, '');
+  REELS.push({...base, id: `${slug}-pancho`, active: true, hooks: base.hooks.map(h => (/^Day \d+/.test(h) ? ONLY : h))});
+}
+// Their host versions step aside.
+for (const r of REELS) if (/^celeb-0[47]-.*-blur-host$/.test(r.id)) r.active = false;

@@ -9,20 +9,22 @@ export const FPS = 30;
 export const VOICES = {
   tomas: 'QK4xDwo9ESPHA4JNUpX3', // Pancho's voice in the app (Argentina)
   mexico: 'QmPfzE500cXXHM9uQKGc', // "Isaac", from the ElevenLabs voice library
+  gringo: 'nPczCjzI2devNBz1zQrb', // "Brian", ElevenLabs premade American voice, for the tourist (picked unheard 2026-11-05)
   spain: 'ozbKZapo4Cy6jU7KTHtp', // "Álvaro", from the ElevenLabs voice library (Spain)
+  chile: 'Tm8bVnJtlhPQUOb8KzSd', // "Fer - Chilean, Laid-back & Natural", voice library, for the boxing reels (picked unheard 2026-11-06)
 };
 
 /** Records `text` to `file`, and the time of every letter to `file`.json; returns the characters billed (0 if both were already there). */
-export async function say(voice, text, file, {force = false, context} = {}) {
+export async function say(voice, text, file, {force = false, context, lang = 'es', stability = 0.65} = {}) {
   if (fs.existsSync(file) && fs.existsSync(file + '.json') && !force) return 0;
   const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${VOICES[voice]}/with-timestamps?output_format=mp3_44100_128`, {
     method: 'POST',
     headers: {'xi-api-key': key, 'content-type': 'application/json'},
     body: JSON.stringify({
-      text, model_id: 'eleven_v4', language_code: 'es',
+      text, model_id: 'eleven_v4', ...(lang ? {language_code: lang} : {}), // lang null: the model hears the language itself (English with Spanish words)
       // Context the model reads and never says: keeps short lines Spanish and in voice.
       ...(context ? {previous_text: context[0], next_text: context[1]} : {}),
-      voice_settings: {stability: 0.65, similarity_boost: 0.85, style: 0.1, use_speaker_boost: true},
+      voice_settings: {stability, similarity_boost: 0.85, style: 0.1, use_speaker_boost: true},
     }),
   });
   if (!res.ok) throw new Error(`elevenlabs ${res.status}: ${(await res.text()).slice(0, 300)}`);

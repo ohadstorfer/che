@@ -33,7 +33,7 @@ const TU_PRES = {
   volver: 'vuelves', perder: 'pierdes', entender: 'entiendes', empezar: 'empiezas', dormir: 'duermes',
   jugar: 'juegas', contar: 'cuentas', seguir: 'sigues',
 };
-const STEM_CHANGE = new Set(['querer', 'poder', 'tener', 'venir', 'decir', 'pedir', 'volver', 'perder',
+export const STEM_CHANGE = new Set(['querer', 'poder', 'tener', 'venir', 'decir', 'pedir', 'volver', 'perder',
   'entender', 'empezar', 'dormir', 'jugar', 'contar', 'seguir']);
 const TU_IMP = { tener: 'ten', venir: 'ven', hacer: 'haz', decir: 'di', poner: 'pon', salir: 'sal', ir: 've', ser: 'sé', dar: 'da' };
 

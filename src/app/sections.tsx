@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Platform, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import Animated, {
   Easing,
@@ -85,6 +85,22 @@ export default function SectionsScreen() {
     );
   }, [profile]);
 
+  // The list opens on the section she is in, not on section 1: once the
+  // current card and the scroll view have been measured, jump there with no
+  // animation (the sheet is still dropping in), with a sliver of the section
+  // before it showing above so it reads as a place in a list.
+  const scrollRef = useRef<ScrollView>(null);
+  const placed = useRef(false);
+  const geo = useRef<{ card?: number; content?: number; view?: number }>({});
+  const place = (k: 'card' | 'content' | 'view', v: number) => {
+    geo.current[k] = v;
+    const { card, content, view } = geo.current;
+    if (placed.current || card == null || content == null || view == null) return;
+    placed.current = true;
+    const y = Math.max(0, Math.min(card - 40, content - view));
+    if (y > 0) scrollRef.current?.scrollTo({ y, animated: false });
+  };
+
   const summaries = data ? sectionSummaries(data.course, data.current, data.done) : [];
 
   const open = (s: SectionSummary) =>
@@ -122,7 +138,12 @@ export default function SectionsScreen() {
             <ActivityIndicator color={colors.primary} />
           </View>
         ) : (
-          <ScrollView contentContainerStyle={styles.list} showsVerticalScrollIndicator={false}>
+          <ScrollView
+            ref={scrollRef}
+            contentContainerStyle={styles.list}
+            showsVerticalScrollIndicator={false}
+            onLayout={(e) => place('view', e.nativeEvent.layout.height)}
+            onContentSizeChange={(_, h) => place('content', h)}>
             {summaries.map((s) => {
               const target = jumpTarget(s);
               return (
@@ -131,6 +152,7 @@ export default function SectionsScreen() {
                   summary={s}
                   onOpen={() => open(s)}
                   onJump={target ? () => jump(target.id) : undefined}
+                  onLayout={s.state === 'current' ? (y) => place('card', y) : undefined}
                 />
               );
             })}
@@ -145,10 +167,13 @@ function SectionCard({
   summary,
   onOpen,
   onJump,
+  onLayout,
 }: {
   summary: SectionSummary;
   onOpen: () => void;
   onJump?: () => void;
+  /** Where the card sits in the list, for opening the list on it. */
+  onLayout?: (y: number) => void;
 }) {
   const { section, units, lessons, done, state } = summary;
   const current = state === 'current';
@@ -235,6 +260,7 @@ function SectionCard({
   return (
     <Pressable
       onPress={onOpen}
+      onLayout={onLayout ? (e) => onLayout(e.nativeEvent.layout.y) : undefined}
       accessibilityRole="button"
       accessibilityLabel={label}
       style={({ pressed }) => [

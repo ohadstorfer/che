@@ -2,6 +2,18 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "posta-site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8094",
+        "--directory",
+        "/Users/ohadstorfer/che/posta-site"
+      ],
+      "port": 8094
+    },
+    {
       "name": "azure-pancho",
       "runtimeExecutable": "node",
       "runtimeArgs": [
@@ -32,6 +44,75 @@
         "8081"
       ],
       "port": 8081
+    },
+    {
+      "name": "metro-8082",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "expo",
+        "start",
+        "--dev-client",
+        "--port",
+        "8082"
+      ],
+      "port": 8082
+    },
+    {
+      "name": "metro-8085",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "expo",
+        "start",
+        "--dev-client",
+        "--port",
+        "8085"
+      ],
+      "port": 8085
+    },
+    {
+      "name": "word-reels",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8097",
+        "--directory",
+        "/private/tmp/claude-501/-Users-ohadstorfer-che-che/94c92ad4-e1d9-46e0-9675-a02c7844a60d/scratchpad/wordreels"
+      ],
+      "port": 8097
+    },
+    {
+      "name": "reel-templates",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8098",
+        "--directory",
+        "/private/tmp/claude-501/-Users-ohadstorfer--claude-spares-spare-D27JeQ/1fd7fa5f-02bd-47d2-8bce-dd1abe529379/scratchpad/reels"
+      ],
+      "port": 8098
+    },
+    {
+      "name": "posta-library",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "social/library-server.mjs"
+      ],
+      "port": 4580
+    },
+    {
+      "name": "metro-tour",
+      "cwd": "/Users/ohadstorfer/che/che/.claude/worktrees/welcome-tour-755fa5",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "expo",
+        "start",
+        "--dev-client",
+        "--port",
+        "8083"
+      ],
+      "port": 8083
     }
   ]
 }

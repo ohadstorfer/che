@@ -18,7 +18,7 @@ subprocess.run(SIM + ['status_bar', 'booted', 'override', '--time', '9:41', '--b
 try:
     for name, route in SHOTS.items():
         subprocess.run(SIM + ['openurl', 'booted', f'posta:///{route}'], check=True)
-        time.sleep(3.5)  # the tab's entrance has to finish
+        time.sleep(7)  # the tab's entrance has to finish
         subprocess.run(SIM + ['io', 'booted', 'screenshot', f'/tmp/posta-{name}.png'], check=True, capture_output=True)
         Image.open(f'/tmp/posta-{name}.png').convert('RGB').resize((W, H), Image.LANCZOS).save(f'public/end/{name}.jpg', quality=85)
         print('saved', f'public/end/{name}.jpg')

@@ -25,8 +25,10 @@ waitlist" turns into "Get the app", and the QR code shows.
 `postaspanish.com/get` starts sending iPhones to the App Store and Androids to
 Google Play (use it in bios and reels).
 
-If only one store is live, fill only that link: the other badge stays as a
-picture.
+If only one store is live, fill only that link: the other badge opens the
+waitlist, and `postaspanish.com/links` (the Instagram bio page, email only)
+shows its store button as the waitlist. Filling the second link turns both into
+plain store links.
 
 Before that deploy, also point search engines and AI assistants at the stores
 (see `docs/seo-geo-plan.md`, phase 0):
