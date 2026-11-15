@@ -17,7 +17,6 @@ import { POSE, pop } from '@/components/mascot';
 import { StickerFigure } from '@/components/sticker';
 import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
-import { currentIndex, lessonHref, loadCourse, loadProgress } from '@/lib/course';
 import { tap } from '@/lib/haptics';
 import { clay, colors, font, pastel, press, radius } from '@/lib/theme';
 import { finishWelcomeTour, useTabBarRect } from '@/lib/welcome-tour';
@@ -28,7 +27,7 @@ import { finishWelcomeTour, useTabBarRect } from '@/lib/welcome-tour';
 // Right after her first purchase, Pancho walks her round the four tabs. Each
 // step really switches to its tab, so the real screen sits behind the dimmed
 // overlay, and a hole is cut over that tab in the bar with a soft butter glow
-// breathing around it. The last step opens her next lesson.
+// breathing around it. Finishing or skipping lands her on the Course tab.
 //
 // Design: canvas "Onboarding flow" → "14 Welcome tour, after the first
 // purchase" (w01–w05).
@@ -59,14 +58,13 @@ const STEPS: TabStep[] = [
     tab: 0,
     route: '/home',
     title: 'This is your road.',
-    body: 'Every unit mixes four kinds of lessons, about 5 minutes each:',
+    body: 'Every unit mixes four kinds of lessons, each has its own grammar and vocabulary topic.',
     chips: [
-      { label: 'Classes', tone: pastel.sky },
+      { label: 'Exercise', tone: pastel.sky },
       { label: 'Culture', tone: pastel.sage },
       { label: 'Slang', tone: pastel.peach },
-      { label: 'Speaking with me', tone: pastel.lav },
+      { label: 'Speaking', tone: pastel.lav },
     ],
-    after: 'Next up: lesson 2, the café, part two.',
   },
   {
     tab: 1,
@@ -91,7 +89,7 @@ const STEPS: TabStep[] = [
 export function WelcomeTour() {
   const reduced = useReducedMotion();
   const insets = useSafeAreaInsets();
-  const { session, profile } = useAuth();
+  const { profile } = useAuth();
   const bar = useTabBarRect();
   // 0 is Pancho's hello; 1–4 are the tabs.
   const [step, setStep] = useState(0);
@@ -158,24 +156,16 @@ export function WelcomeTour() {
     transform: [{ translateX: holeX.value }, { scale: reduced ? 1 : 1 + 0.12 * breath.value }],
   }));
 
+  // Skip, Got it! and "I'll explore on my own" all land her back on the
+  // Course tab, wherever the tour had taken her.
   const finish = () => {
     tap();
     finishWelcomeTour();
-  };
-
-  const startLesson = async () => {
-    tap();
-    finishWelcomeTour();
-    const userId = session?.user.id;
     router.navigate('/home');
-    if (!userId) return;
-    const [course, done] = await Promise.all([loadCourse(), loadProgress(userId)]).catch(() => [null, null] as const);
-    const next = course && done ? course.path[currentIndex(course.path, done)] : null;
-    if (next) router.push(lessonHref(next) as Parameters<typeof router.push>[0]);
   };
 
   const next = () => {
-    if (step === STEPS.length) return void startLesson();
+    if (step === STEPS.length) return finish();
     tap();
     setStep(step + 1);
   };
