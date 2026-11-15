@@ -44,10 +44,8 @@ export type Verdict = {
  *  the page at the cut edge. Left unset, the cut edge only gets its arrow. */
 export const PageColorContext = createContext<string | undefined>(undefined);
 
-/** True while the keyboard is up and the exercise did not fit above it: the
- *  capybara steps out of the way then, so the field and the button can stay
- *  in view. It holds until the keyboard goes down — the room he gives back is
- *  what made it fit, and bringing him back would only push it out again. */
+/** Would hide the capybara while the keyboard is up. No longer set (the
+ *  picture vanishing read as a glitch); the body scrolls to the field instead. */
 export const TightContext = createContext(false);
 
 // ---------------------------------------------------------------------------
@@ -116,9 +114,8 @@ export function ExerciseFrame({
   const measure = () => {
     const hidden = contentHeight.current - viewHeight.current - offset.current;
     setMore(viewHeight.current > 0 && hidden > MORE_SLACK);
-    if (keyboardUp.current && viewHeight.current > 0 && contentHeight.current - viewHeight.current > MORE_SLACK) {
-      setTight(true);
-    }
+    // The capybara no longer steps out when the keyboard leaves no room: losing
+    // the picture read as a glitch. The body scrolls to the field instead.
   };
 
   // A typed answer's field is the last thing in the body, and the keyboard

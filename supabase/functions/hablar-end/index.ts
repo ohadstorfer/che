@@ -4,9 +4,9 @@
 // Body: { session_id, reason: 'user'|'time', paused_seconds? }. Idempotent: a
 // chat that already has a summary gets the same one back, and two calls at
 // once (a retry while the first is still grading) credit the streak once. The summary is built
-// here: every line she said is graded now (nothing is graded during the chat),
-// one call per line with the cached grading prompt, and the top 3 corrections
-// are kept; then one structured call for "what went well". The three corrected lines
+// here: hablar-reply graded each line while Pancho answered it (hablar-grade.ts);
+// a line still ungraded is graded now, and the top 3 corrections are kept;
+// then one structured call for "what went well". The three corrected lines
 // are recorded in Pancho's voice for ▶️ and Decilo.
 //
 // The chat credits the day's streak through finish_lesson (the same RPC a
@@ -22,32 +22,27 @@ import {
   caller,
   claudeUsage,
   hablarEnv,
-  loadSession,
   localDate,
   logUsage,
   profileTimezone,
   recordPause,
   serviceClient,
+  sessionRow,
   synthesize,
   TALK_SPEED,
   tomasVoice,
   TTS_MODEL,
   type Usage,
 } from "../_shared/hablar.ts";
-import {
-  cleanFeedback,
-  FEEDBACK_SCHEMA,
-  FEEDBACK_SYSTEM,
-  feedbackInput,
-  quotesHold,
-  SUMMARY_SCHEMA,
-  SUMMARY_SYSTEM,
-  type Feedback,
-} from "../_shared/hablar-prompt.ts";
+import { quotesHold, SUMMARY_SCHEMA, SUMMARY_SYSTEM, type Feedback } from "../_shared/hablar-prompt.ts";
 import { Anthropic, MODEL, structured } from "../_shared/hablar-claude.ts";
+import { gradeLine, scenePhrases } from "../_shared/hablar-grade.ts";
 import { reported, reportError } from "../_shared/posthog.ts";
 
 const SEVERITY_RANK: Record<string, number> = { meaning: 0, target: 1, minor: 2, none: 3 };
+/** How long to wait for a line hablar-reply is still grading, and how often to look. */
+const GRADING_WAIT_MS = 6000;
+const GRADING_POLL_MS = 400;
 
 Deno.serve(reported("hablar-end", async (req) => {
   const early = preflight(req);
@@ -56,17 +51,20 @@ Deno.serve(reported("hablar-end", async (req) => {
 
   const env = hablarEnv();
   if (!env) return json({ error: "function is not configured" }, { status: 500 });
-  const who = await caller(req, env);
-  if (!who) return json({ error: "not authenticated" }, { status: 401 });
-
-  let body: { session_id?: string; reason?: string; paused_seconds?: number; local_date?: string };
-  try {
-    body = await req.json();
-  } catch {
-    return json({ error: "invalid JSON" }, { status: 400 });
-  }
   const db = serviceClient(env);
-  const session = await loadSession(db, body.session_id, who.userId);
+
+  // The auth check, the body and the session together: each is a round trip.
+  // Nothing read is used until the caller is known and owns the session.
+  type Body = { session_id?: string; reason?: string; paused_seconds?: number; local_date?: string };
+  const read = req.json().then((b) => (b && typeof b === "object" ? b : {}) as Body, () => null);
+  const [who, body, row] = await Promise.all([
+    caller(req, env),
+    read,
+    read.then((b) => (b ? sessionRow(db, b.session_id) : null)),
+  ]);
+  if (!who) return json({ error: "not authenticated" }, { status: 401 });
+  if (!body) return json({ error: "invalid JSON" }, { status: 400 });
+  const session = row && row.user_id === who.userId ? row : null;
   if (!session) return json({ error: "no such session" }, { status: 404 });
   if (session.summary) return json({ summary: session.summary, streak: null });
   const reason = body.reason === "time" ? "time" : "user";
@@ -89,38 +87,50 @@ Deno.serve(reported("hablar-end", async (req) => {
 
   const usage: Usage[] = [];
   const client = new Anthropic({ apiKey: env.anthropicKey, ...CLAUDE_OPTIONS });
-  // A unit chat's phrases are what its unit taught: never graded as mistakes.
-  const phrases = ((session as { scenario?: { key_phrases?: { es: string }[] } }).scenario?.key_phrases ?? []).map((p) => p.es);
+  const phrases = scenePhrases(session);
 
-  // Grade every line not graded yet (older chats were graded turn by turn).
-  // The first call writes the grading prompt to the cache; the rest read it.
+  // hablar-reply grades each line while Pancho answers it. Its last line may
+  // still be in grading (the goodbye is barely over): wait for that a moment
+  // rather than grade it twice.
+  const inFlight = (t: (typeof userTurns)[number]) => {
+    const meta = t.meta as Record<string, unknown> | null;
+    if (meta?.grade_failed) return false;
+    const at = Date.parse(String(meta?.answering_at ?? ""));
+    return Number.isFinite(at) && Date.now() - at < GRADING_WAIT_MS * 3;
+  };
+  const missing = () => userTurns.filter((t) => !t.feedback && t.text);
+  for (let waited = 0; waited < GRADING_WAIT_MS && missing().some(inFlight); waited += GRADING_POLL_MS) {
+    await new Promise((r) => setTimeout(r, GRADING_POLL_MS));
+    const ids = missing().map((t) => t.id);
+    const { data: fresh } = await db.from("conversation_turns").select("id, feedback, meta").in("id", ids);
+    for (const f of fresh ?? []) {
+      const t = userTurns.find((x) => x.id === f.id);
+      if (!t) continue;
+      if (f.feedback) t.feedback = f.feedback;
+      t.meta = f.meta;
+    }
+  }
+
+  // Whatever is still ungraded (its grading failed, or an older build's chat)
+  // is graded now. With several, the first call writes the grading prompt to
+  // the cache and the rest read it.
   const grade = async (t: (typeof userTurns)[number]) => {
     const i = turns.indexOf(t);
     const tomasBefore = turns.slice(0, i).reverse().find((x) => x.role === "tomas")?.text ?? null;
-    const meta = (t.meta ?? {}) as { lang?: string; unsure?: unknown; plain?: unknown };
-    const english = meta.lang === "en";
-    const unsure = Array.isArray(meta.unsure) ? meta.unsure.filter((w): w is string => typeof w === "string") : [];
-    const plain = typeof meta.plain === "string" && !english ? meta.plain : undefined;
     try {
-      const { value, usage: u, ms } = await structured<Feedback>(client, {
-        system: FEEDBACK_SYSTEM,
-        schema: FEEDBACK_SCHEMA as unknown as Record<string, unknown>,
-        input: feedbackInput({ level: session.level, tomasBefore, line: t.text, english, unsure, plain, phrases }),
-      });
-      usage.push(claudeUsage({ conversation_id: session.id, turn_id: t.id, model: MODEL, stage: "feedback", ms }, u));
-      if (!value) return;
-      t.feedback = cleanFeedback(value, t.text, english, plain, unsure);
-      const { error } = await db.from("conversation_turns").update({ feedback: t.feedback }).eq("id", t.id);
-      if (error) console.error("feedback save failed", error.message);
+      const feedback = await gradeLine({ client, db, session, turn: t, tomasBefore, phrases, usage });
+      if (feedback) t.feedback = feedback;
     } catch (err) {
       console.error("grading failed", err);
       reportError("hablar-end", err, { user_id: who.userId, session_id: session.id, stage: "feedback" });
     }
   };
-  const ungraded = userTurns.filter((t) => !t.feedback && t.text);
-  if (ungraded.length) {
+  const ungraded = missing();
+  if (ungraded.length > 2) {
     await grade(ungraded[0]);
     await Promise.all(ungraded.slice(1).map(grade));
+  } else {
+    await Promise.all(ungraded.map(grade));
   }
 
   // Top 3 corrections: what blocks meaning first, then the level's targets, then the rest; earlier first.

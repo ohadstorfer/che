@@ -37,6 +37,7 @@ export function AdminScreen({
   back,
   actions,
   detail,
+  fill,
   children,
 }: {
   title: string;
@@ -46,6 +47,8 @@ export function AdminScreen({
   actions?: React.ReactNode;
   /** A page about one thing (a tester's thread): the top bar is just back, its name and actions, no nav. */
   detail?: boolean;
+  /** The page brings its own scrolling (a chat thread): children fill the space under the bar. */
+  fill?: boolean;
   children: React.ReactNode;
 }) {
   const path = usePathname();
@@ -63,9 +66,13 @@ export function AdminScreen({
           </View>
           {actions ? <View style={styles.actions}>{actions}</View> : null}
         </View>
-        <ScrollView contentContainerStyle={styles.page} keyboardShouldPersistTaps="handled">
-          {children}
-        </ScrollView>
+        {fill ? (
+          <View style={{ flex: 1 }}>{children}</View>
+        ) : (
+          <ScrollView contentContainerStyle={styles.page} keyboardShouldPersistTaps="handled">
+            {children}
+          </ScrollView>
+        )}
       </SafeAreaView>
     );
   }

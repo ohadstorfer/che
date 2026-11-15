@@ -11,6 +11,7 @@ import {
   audioExt,
   background,
   isSilenceHallucination,
+  isUuid,
   logUsage,
   looksEnglish,
   pastLastLine,
@@ -94,6 +95,37 @@ export async function lastPanchoLine(db: SupabaseClient, sessionId: string) {
   return data as { text: string; meta: Record<string, unknown> | null } | null;
 }
 
+/** A placed line of the chat (idx set), as `recentLines` reads it. */
+export type PlacedLine = Pick<TurnRow, "idx" | "role" | "status" | "text" | "meta">;
+
+/**
+ * Enough of the chat's latest placed lines to hold all of them: eight of hers,
+ * Pancho's answers and the opener make 17. Read once per turn and reused (the
+ * cap, Pancho's last line, the turn's place, the history), since each read is
+ * a round trip before Pancho can start talking. Newest first.
+ */
+export const RECENT_LINES = 24;
+export async function recentLines(db: SupabaseClient, sessionId: unknown): Promise<PlacedLine[] | null> {
+  if (!isUuid(sessionId)) return null;
+  const { data, error } = await db
+    .from("conversation_turns")
+    .select("idx, role, status, text, meta")
+    .eq("conversation_id", sessionId)
+    .not("idx", "is", null)
+    .order("idx", { ascending: false })
+    .limit(RECENT_LINES);
+  return error ? null : (data as PlacedLine[]);
+}
+
+/** Pancho's latest line among `recent` (lastPanchoLine without the read). */
+export const lastPanchoOf = (recent: PlacedLine[]) => recent.find((t) => t.role === "tomas") ?? null;
+
+/** overCap without the read: her sent lines among `recent`. */
+export const overCapOf = (recent: PlacedLine[]): Response | null =>
+  recent.filter((t) => t.role === "user" && t.status === "final").length >= TAB_MESSAGES
+    ? json({ error: "message_limit", limit: TAB_MESSAGES }, { status: 429 })
+    : null;
+
 /**
  * A chat takes eight lines (TAB_MESSAGES): a ninth is refused
  * before anything is heard, with 429 `message_limit`, which the app reads as
@@ -133,19 +165,22 @@ export async function spokenDraft(opts: {
    * Left out by apps from before the question existed: the best guess.
    */
   doubt?: "ask" | "take";
+  /** The chat's latest lines, already read (recentLines): spares the cap and last-line reads. */
+  recent?: PlacedLine[] | null;
 }): Promise<DraftOutcome> {
   const { env, db, session, turnId, audio, existing } = opts;
+  const recent = opts.recent ?? null;
   const mine = foreign(existing, session);
   if (mine) return { error: mine };
   // Sent already: a retry, answered or replayed by hablar-reply. Nothing is
   // heard again, and a chat that has closed since doesn't refuse it.
   if (existing?.status === "final") return { turn: existing };
   if (opts.sttCount >= MAX_STT_PER_CHAT) return { error: json({ error: "too many recordings" }, { status: 429 }) };
-  const shut = closed(session) ?? await overCap(db, session);
+  const shut = closed(session) ?? (recent ? overCapOf(recent) : await overCap(db, session));
   if (shut) return { error: shut };
 
   // What Pancho just said is the best hint of what she says next; read while the clip is.
-  const lastLine = lastPanchoLine(db, session.id);
+  const lastLine = recent ? Promise.resolve(lastPanchoOf(recent)) : lastPanchoLine(db, session.id);
   const bytes = await audio.arrayBuffer();
   const mime = audio.type || "application/octet-stream";
   const ext = audioExt(mime);
@@ -209,6 +244,8 @@ export async function spokenDraft(opts: {
     status: "draft",
     text,
     audio_path: audioPath,
+    // A re-record under the same turn_id: a grade of the words before is not this line's.
+    feedback: null,
     // `lang: "en"`: she said it in English; hablar-reply tells Pancho and the feedback.
     // `unsure`: words the recogniser may have misheard; hablar-reply keeps them out of the correction.
     // `plain`: the line heard without the keyterms, where it differs; the grading reads her own forms from it.
@@ -273,6 +310,7 @@ export async function typedDraft(opts: {
     status: "draft",
     text,
     audio_path: null,
+    feedback: null,
     meta: { typed: true, ...(looksEnglish(text) ? { lang: "en" } : {}) },
   }).select("*").single();
   if (error || !data) {

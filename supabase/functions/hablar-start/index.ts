@@ -52,15 +52,16 @@ Deno.serve(reported("hablar-start", async (req) => {
 
   const env = hablarEnv();
   if (!env) return json({ error: "function is not configured" }, { status: 500 });
-  const who = await caller(req, env);
+  // Every read below is a round trip to the database, so they go in as few
+  // rounds as the checks allow: the caller with the body, then everything
+  // about her and the lesson at once, then the day's refusal with the scene.
+  type Body = { kind?: string; topic_id?: string | null; lesson_id?: string | null; level_override?: string | null };
+  const [who, body] = await Promise.all([
+    caller(req, env),
+    req.json().then((b) => (b && typeof b === "object" ? b : {}) as Body, () => null),
+  ]);
   if (!who) return json({ error: "not authenticated" }, { status: 401 });
-
-  let body: { kind?: string; topic_id?: string | null; lesson_id?: string | null; level_override?: string | null };
-  try {
-    body = await req.json();
-  } catch {
-    return json({ error: "invalid JSON" }, { status: 400 });
-  }
+  if (!body) return json({ error: "invalid JSON" }, { status: 400 });
   const kind = String(body.kind ?? "");
   if (!["scenario", "free", "unit"].includes(kind)) {
     return json({ error: "kind must be scenario, free or unit" }, { status: 400 });
@@ -68,11 +69,11 @@ Deno.serve(reported("hablar-start", async (req) => {
 
   const db = serviceClient(env);
   const lessonId = kind === "unit" ? String(body.lesson_id ?? "") : null;
-  const unit = lessonId && isUuid(lessonId) ? await speakingUnit(db, lessonId) : null;
-  if (kind === "unit" && !unit) return json({ error: "no such lesson" }, { status: 404 });
-  const topicId = kind === "free" ? null : unit ? unit.id : String(body.topic_id ?? "");
+  const isLesson = !!lessonId && isUuid(lessonId);
 
-  const [tz, { data: courseCefr }, { data: profile }, { data: premium }, { count }, { data: allowed }] = await Promise.all([
+  const [unit, { data: open }, tz, { data: courseCefr }, { data: profile }, { data: premium }, { count }, { data: allowed }] = await Promise.all([
+    isLesson ? speakingUnit(db, lessonId!) : Promise.resolve(null),
+    isLesson ? db.rpc("lesson_open_to", { p_user: who.userId, p_lesson: lessonId }) : Promise.resolve({ data: null }),
     profileTimezone(db, who.userId),
     db.rpc("hablar_level", { p_user: who.userId }),
     db.from("profiles").select("role").eq("user_id", who.userId).maybeSingle(),
@@ -80,6 +81,8 @@ Deno.serve(reported("hablar-start", async (req) => {
     db.from("conversations").select("id", { count: "exact", head: true }).eq("user_id", who.userId).neq("kind", "unit"),
     db.rpc("free_chats_allowed", { p_user: who.userId }),
   ]);
+  if (kind === "unit" && !unit) return json({ error: "no such lesson" }, { status: 404 });
+  const topicId = kind === "free" ? null : unit ? unit.id : String(body.topic_id ?? "");
   // Staff test freely: no clock, no daily limit.
   const unlimited = profile?.role === "admin" || profile?.role === "reviewer";
 
@@ -88,19 +91,25 @@ Deno.serve(reported("hablar-start", async (req) => {
   // after that, premium only. The app's lib/premium.tsx agrees, and shows the
   // paywall on this 402.
   if (unit) {
-    const { data: open } = await db.rpc("lesson_open_to", { p_user: who.userId, p_lesson: lessonId });
     if (!open) return json({ error: "paywall", paywall: true }, { status: 402 });
   } else if (!unlimited && !premium && (count ?? 0) >= (typeof allowed === "number" ? allowed : 0)) {
     return json({ error: "paywall", paywall: true }, { status: 402 });
   }
   const today = localDate(tz);
-  if (!unlimited) {
-    const refused = unit ? await unitRefusal(db, who.userId, lessonId!, today) : await dayRefusal(db, who.userId, today);
-    if (refused) return refused;
-  }
   // A unit chat is pitched at the unit's own level, not wherever she is now.
   const asked = resolveLevel(unit ? unit.cefr : courseCefr as string | null, body.level_override);
-  const stored = unit ? await unitScenario(db, env, unit, asked) : null;
+  // The scene is read alongside the refusal. When the scene is missing it is
+  // written even for a start that is then refused, but that is rare (every
+  // unit has its scenes) and the scene is kept for everyone after.
+  const [refused, stored] = await Promise.all([
+    unlimited
+      ? Promise.resolve(null)
+      : unit
+      ? unitRefusal(db, who.userId, lessonId!, today)
+      : dayRefusal(db, who.userId, today),
+    unit ? unitScenario(db, env, unit, asked) : Promise.resolve(null),
+  ]);
+  if (refused) return refused;
   if (unit && !stored) return json({ error: "could not write the scene" }, { status: 503 });
   const topic = topicOf(kind, topicId, asked, stored);
   if (!topic) return json({ error: "no such topic" }, { status: 404 });
@@ -140,7 +149,7 @@ Deno.serve(reported("hablar-start", async (req) => {
 
   const openerTurnId = crypto.randomUUID();
   const audioUrl = publicAudioUrl(env.url, opener.audio);
-  await db.from("conversation_turns").insert({
+  const [, chatsUsed] = await Promise.all([db.from("conversation_turns").insert({
     id: openerTurnId,
     conversation_id: session.id,
     idx: 0,
@@ -149,7 +158,7 @@ Deno.serve(reported("hablar-start", async (req) => {
     text: opener.es,
     text_en: opener.en,
     meta: { opener: true, audio_url: audioUrl },
-  });
+  }), unlimited ? Promise.resolve(0) : chatsToday(db, who.userId, today)]);
 
   return json({
     session_id: session.id,
@@ -164,7 +173,7 @@ Deno.serve(reported("hablar-start", async (req) => {
     // Lines she may say: eight, in a unit chat too.
     message_limit: TAB_MESSAGES,
     // The day's chats left after this one (Course and Speaking together); null for staff.
-    chats_left_today: unlimited ? null : Math.max(0, CHATS_PER_DAY - (await chatsToday(db, who.userId, today))),
+    chats_left_today: unlimited ? null : Math.max(0, CHATS_PER_DAY - chatsUsed),
     opener: { turn_id: openerTurnId, text: opener.es, text_en: opener.en, audio_url: audioUrl },
     goals: [],
     key_phrases: (topic.scenario?.key_phrases ?? []).map((p) => ({

@@ -1,10 +1,13 @@
-// Email through Resend (https://resend.com/docs/api-reference/emails/send-email).
-// winback-email sends with it. The key is the RESEND_API_KEY secret, a
+// Email through Resend (https://resend.com/docs/api-reference/emails/send-email)
+// or Amazon SES (_shared/email-ses.ts). EMAIL_PROVIDER picks one: "resend"
+// (default) or "ses"; a single call can override it with provider. The key is the RESEND_API_KEY secret, a
 // sending-only key; it never goes in the app.
 //
 // Mail goes out from postaspanish.com, which has to be verified in Resend
 // first (Domains), or Resend refuses anything not sent to the account's own
 // address.
+
+import { sendViaSes } from "./email-ses.ts";
 
 const RESEND_URL = "https://api.resend.com/emails";
 const DEFAULT_FROM = "Posta <hola@postaspanish.com>";
@@ -22,11 +25,20 @@ export interface Email {
   idempotencyKey?: string;
   /** Extra mail headers, e.g. List-Unsubscribe. */
   headers?: Record<string, string>;
+  /** Overrides EMAIL_PROVIDER for this one mail. */
+  provider?: "resend" | "ses";
 }
 
 export type SendResult = { ok: true; id: string } | { ok: false; error: string };
 
 export async function sendEmail(email: Email): Promise<SendResult> {
+  if (!email.html && !email.text) return { ok: false, error: "html or text is required" };
+  const provider = email.provider ?? (Deno.env.get("EMAIL_PROVIDER") === "ses" ? "ses" : "resend");
+  if (provider === "ses") return sendViaSes(email, email.from ?? DEFAULT_FROM);
+  return sendViaResend(email);
+}
+
+async function sendViaResend(email: Email): Promise<SendResult> {
   const key = Deno.env.get("RESEND_API_KEY");
   if (!key) return { ok: false, error: "RESEND_API_KEY is not set" };
   if (!email.html && !email.text) return { ok: false, error: "html or text is required" };

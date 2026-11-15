@@ -1,8 +1,9 @@
 // Edge function: POST /functions/v1/waitlist
 // Body: {"name": "...", "contact": "<email or phone>", "bot-field": ""}
 //
-// The postaspanish.com waitlist form (posta-site/script.js, its endpoint in
-// posta-site/config.js). Public: no account, so verify_jwt is off. A filled
+// The postaspanish.com waitlist forms (posta-site/script.js, its endpoint in
+// posta-site/config.js) and the bio page (posta-site/links.js). Both send only
+// an email now; name is optional. Public: no account, so verify_jwt is off. A filled
 // honeypot gets a quiet 200 and nothing is saved; signing up twice with the
 // same contact is a success too.
 
@@ -22,8 +23,8 @@ Deno.serve(async (req) => {
 
   const name = typeof body.name === "string" ? body.name.trim().slice(0, 120) : "";
   const contact = typeof body.contact === "string" ? body.contact.trim().slice(0, 200) : "";
-  if (!name || !(EMAIL.test(contact) || PHONE.test(contact))) {
-    return json({ error: "a name and an email or phone number are required" }, { status: 400 });
+  if (!EMAIL.test(contact) && !PHONE.test(contact)) {
+    return json({ error: "an email or phone number is required" }, { status: 400 });
   }
 
   const url = Deno.env.get("SUPABASE_URL");
@@ -32,7 +33,7 @@ Deno.serve(async (req) => {
 
   const db = createClient(url, serviceRole, { auth: { persistSession: false } });
   const { error } = await db.from("waitlist").insert({
-    name,
+    name: name || null,
     contact,
     user_agent: req.headers.get("user-agent")?.slice(0, 300) ?? null,
   });

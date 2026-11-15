@@ -14,12 +14,12 @@ const esc = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 /** "maría josé  " → "María": the first word, capitalised. Empty when there is none. */
-export function firstName(name: string): string {
-  const first = name.trim().split(/\s+/)[0] ?? "";
+export function firstName(name: string | null): string {
+  const first = (name ?? "").trim().split(/\s+/)[0] ?? "";
   return first ? first[0].toLocaleUpperCase() + first.slice(1) : "";
 }
 
-export function launchEmail(name: string): { subject: string; html: string; text: string } {
+export function launchEmail(name: string | null): { subject: string; html: string; text: string } {
   const who = firstName(name);
   const subject = "Posta is out. ¿Arrancamos?";
   const preview = "You joined the waitlist, so you hear it first: Posta is on the App Store and Google Play.";
