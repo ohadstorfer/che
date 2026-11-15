@@ -91,9 +91,6 @@ const ID = {
   medialunaGracias: 'c2268e3e-a367-5746-bba2-28619fa7f2b7',
 };
 
-/** The opener of the Hablar café scene (hablar.json, cafe · A1), in Tomás's voice. */
-const CALL_OPENER_AUDIO = 'hablar/cfed6eee32d9b08b5299.mp3';
-
 const allWords = arPacks.flatMap((p) => p.words);
 const arWord = (id: string) => allWords.find((w) => w.id === id)!;
 const packOf = (id: string) => arPacks.find((p) => p.words.some((w) => w.id === id))!;
@@ -457,25 +454,25 @@ function SlangRound({
 
 type Turn = { es: string; en: string; audio?: string; replies: { es: string; en: string }[] };
 
-// Two turns, short enough for a first day: every reply is words she has just
-// met in this class (café con leche, medialuna, dale). Pancho's lines after
-// the first have no recording yet: they are read.
+// Pancho as a friend who calls her, two turns short enough for a first day:
+// the first reply is the class's café and medialuna, the second the slang
+// part's "dale", and his goodbye the culture part's asado ("Vení a la una").
+// None of these lines has a recording yet: they are read, not heard.
 const SCRIPT: Turn[] = [
   {
-    es: '¡Buenas! ¿Qué te traigo?',
-    en: 'Hi there! What can I get you?',
-    audio: CALL_OPENER_AUDIO,
+    es: '¡Hola! ¿Qué hacés?',
+    en: 'Hi! What are you up to?',
     replies: [
-      { es: 'Un café con leche, por favor.', en: 'A coffee with milk, please.' },
-      { es: 'Una medialuna, por favor.', en: 'A medialuna, please.' },
+      { es: 'Acá, tomando un café.', en: 'Just here, having a coffee.' },
+      { es: 'Comiendo una medialuna.', en: 'Eating a medialuna.' },
     ],
   },
   {
-    es: '¡Dale! Che, ¿hacemos un asado el domingo?',
-    en: 'Sure! Hey, want to do an asado on Sunday?',
+    es: '¡Qué rico! Che, el domingo hago un asado. ¿Venís?',
+    en: 'Yum! Hey, I’m having an asado on Sunday. Are you coming?',
     replies: [
       { es: '¡Sí, dale!', en: 'Yes, sure!' },
-      { es: '¡Dale, gracias!', en: 'Sure, thanks!' },
+      { es: '¡Dale! ¿A qué hora?', en: 'Sure! What time?' },
     ],
   },
   {
@@ -532,7 +529,7 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
   const bottom = useSafeAreaInsets().bottom;
   return (
     <View style={styles.call}>
-      <Text style={styles.callTop}>Calling Pancho · at the café · {clock}</Text>
+      <Text style={styles.callTop}>Calling Pancho · {clock}</Text>
       <View style={styles.callMiddle}>
         <PanchoAvatar size={168} drop={0.04} />
         <Animated.View key={turn} entering={FadeInDown.duration(260).easing(EASE_OUT)} style={styles.callLine}>
