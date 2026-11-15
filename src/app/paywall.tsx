@@ -164,8 +164,12 @@ export default function Paywall() {
     setStage('offer');
   }, [offerUntil, catalog]);
 
+  // The yearly plan comes first and is chosen for her until she picks one
+  // herself — even if the store lists the monthly plan a moment before it.
+  const picked = useRef(false);
   useEffect(() => {
-    if (!selected && main?.plans[0]) setSelected(main.plans[0].id);
+    const first = main?.plans[0];
+    if (first && !picked.current && selected !== first.id) setSelected(first.id);
   }, [main, selected]);
 
   const plan = main?.plans.find((p) => p.id === selected) ?? null;
@@ -392,6 +396,7 @@ export default function Paywall() {
                 save={p.period === 'year' ? saving(main.plans) : null}
                 onPress={() => {
                   tap();
+                  picked.current = true;
                   setSelected(p.id);
                 }}
               />
