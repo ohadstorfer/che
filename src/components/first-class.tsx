@@ -473,11 +473,13 @@ const SCRIPT: Turn[] = [
   {
     es: '¡Sí! Acá las medialunas están re ricas.',
     en: 'Yes! The medialunas here are really good.',
-    replies: [{ es: '¡Genial! ¿Cuánto dejo de propina?', en: 'Great! How much should I tip?' }],
+    // The culture part's two asado lines, used for real: the invite, and lunch
+    // that starts well after "a la una".
+    replies: [{ es: '¡Genial! Che, ¿hacemos un asado el domingo?', en: 'Great! Hey, want to do an asado on Sunday?' }],
   },
   {
-    es: 'Lo que quieras… pero un diez por ciento está bien. ¡Chau!',
-    en: 'Up to you… but ten percent is fine. Bye!',
+    es: '¡Dale! Vení a la una… y comemos tipo tres. ¡Chau!',
+    en: 'Sure! Come at one… and we’ll eat around three. Bye!',
     replies: [],
   },
 ];
