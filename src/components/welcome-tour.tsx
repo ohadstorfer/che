@@ -69,8 +69,8 @@ const STEPS: TabStep[] = [
   {
     tab: 1,
     route: '/words',
-    title: 'Your words and slang.',
-    body: 'Every word you learn, with its photo. Plus slang packs: what Argentines really say.',
+    title: 'Argentinian words and slang',
+    body: 'Learn and practice local expressions',
   },
   {
     tab: 2,
