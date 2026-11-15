@@ -87,7 +87,7 @@ const ID = {
   tenés: 'e7322589-dc0d-5f10-9391-65b3ab21afc2',
   medialunas: '362f3213-c426-54c2-9702-c788da937db5',
   cheTenésMedialunas: '2e1e0e3c-0847-520b-b36f-af53f7070321',
-  cafeConMedialuna: '96de3eee-afab-511a-9d87-c0f68c2f35bb',
+  medialunaGracias: 'c2268e3e-a367-5746-bba2-28619fa7f2b7',
 };
 
 /** The opener of the Hablar café scene (hablar.json, cafe · A1), in Tomás's voice. */
@@ -125,16 +125,22 @@ function useContent() {
 
     const item = (i: Omit<QueueItem, 'state'>): QueueItem => ({ ...i, state: null });
 
+    // The first question of all is an easy read: its wrong answers come only
+    // from the short lines, so all three options stay a few words long — and
+    // never the next screen's sentence, which would give that one away.
+    const short = sentences.filter((s) => s.id !== ID.cheTenésMedialunas && s.es.split(/\s+/).length <= 5);
+
     return {
       forms,
       lexicon: byId,
       sentences,
+      short,
       caféConLeche: form(ID.caféConLeche),
       medialuna: item({
         form: form(ID.medialuna),
         mode: 'sentence_intro',
         direction: 'es_to_en',
-        sentence: sentence(ID.cafeConMedialuna),
+        sentence: sentence(ID.medialunaGracias),
         introduces: form(ID.medialuna),
       }),
       build: item({
@@ -237,11 +243,11 @@ function ScreenView({
   onProgress: (share: number) => void;
   onOpening: (opening: boolean) => void;
 }) {
-  const exercise = (item: QueueItem, forms: Form[] = content.forms) => (
+  const exercise = (item: QueueItem, sentences: Sentence[] = content.sentences) => (
     <Exercise
       item={item}
-      allForms={forms}
-      allSentences={content.sentences}
+      allForms={content.forms}
+      allSentences={sentences}
       lexicon={content.lexicon}
       onIntroDone={onNext}
       onAnswered={() => onNext()}
@@ -251,7 +257,7 @@ function ScreenView({
     case 'order':
       return <OrderStep word={content.caféConLeche} onDone={onNext} />;
     case 'medialuna':
-      return exercise(content.medialuna);
+      return exercise(content.medialuna, content.short);
     case 'build':
       return exercise(content.build);
     case 'slang':
