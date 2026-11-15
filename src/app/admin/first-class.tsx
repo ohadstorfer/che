@@ -21,7 +21,7 @@ import { AudioPad, Choices, Exercise, PlayButton } from '@/components/exercises'
 import { PanchoAvatar } from '@/components/hablar-ui';
 import { Button } from '@/components/ui';
 import { WordIntro } from '@/components/word-intro';
-import { SlangOpener } from '@/components/slang-opener';
+import { CultureOpener, SlangOpener } from '@/components/slang-opener';
 import { type ArWord, type PackItem, arPacks, buildPackRound, decoyWords, toForm as arForm, toGapForm } from '@/lib/argentine';
 import { playAudio, stopAudio } from '@/lib/audio';
 import fixture from '@/lib/first-class.json';
@@ -59,6 +59,7 @@ type ScreenId =
   | 'medialuna'
   | 'build'
   | 'slang'
+  | 'culture-intro'
   | 'tip-guess'
   | 'tip-card'
   | 'call';
@@ -69,6 +70,7 @@ const SCREENS: { id: ScreenId; part: Part }[] = [
   { id: 'medialuna', part: 'class' },
   { id: 'build', part: 'class' },
   { id: 'slang', part: 'slang' },
+  { id: 'culture-intro', part: 'culture' },
   { id: 'tip-guess', part: 'culture' },
   { id: 'tip-card', part: 'culture' },
   { id: 'call', part: 'pancho' },
@@ -163,7 +165,9 @@ export default function FirstClass() {
   /** The slang class's opener is up: the whole page turns butter, as it does in a real slang class. */
   const [butter, setButter] = useState(false);
   const screen = SCREENS[at];
-  useStatusBarColor(butter ? pastel.butter : colors.bg);
+  // The page takes the opener's colour while one is up: butter for slang, sky for culture.
+  const tint = screen.id === 'culture-intro' ? pastel.sky : butter ? pastel.butter : null;
+  useStatusBarColor(tint ?? colors.bg);
 
   const next = () => {
     stopAudio();
@@ -188,19 +192,19 @@ export default function FirstClass() {
 
   if (done) return <Complete onAgain={restart} onClose={close} />;
 
-  // The slang class opens with its own SLANG screen, so it gets no chip.
-  const startsPart = (at === 0 || SCREENS[at - 1].part !== screen.part) && screen.id !== 'slang';
+  // Slang and culture open with their own screens, so they get no chip.
+  const startsPart = (at === 0 || SCREENS[at - 1].part !== screen.part) && screen.id !== 'slang' && screen.id !== 'culture-intro';
 
   return (
-    <SafeAreaView style={[styles.safe, butter && { backgroundColor: pastel.butter }]} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={[styles.safe, tint ? { backgroundColor: tint } : null]} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
         <Pressable onPress={close} hitSlop={12} accessibilityLabel="Close" style={{ marginTop: -4 }}>
-          <Ionicons name="close" size={26} color={butter ? colors.ink : colors.muted} />
+          <Ionicons name="close" size={26} color={tint ? colors.ink : colors.muted} />
         </Pressable>
         <PartBar at={at + sub} />
       </View>
       {startsPart ? <PartChip key={`chip-${at}-${run}`} part={screen.part} /> : null}
-      <PageColorContext.Provider value={butter ? pastel.butter : colors.bg}>
+      <PageColorContext.Provider value={tint ?? colors.bg}>
         <Animated.View key={`${screen.id}-${run}`} entering={at === 0 ? FadeIn.duration(200) : NEXT} style={styles.stage}>
           <ScreenView id={screen.id} content={content} onNext={next} onProgress={setSub} onOpening={setButter} />
         </Animated.View>
@@ -243,6 +247,8 @@ function ScreenView({
       return exercise(content.build);
     case 'slang':
       return <SlangRound onDone={onNext} onProgress={onProgress} onOpening={onOpening} />;
+    case 'culture-intro':
+      return <CultureOpener onStart={onNext} />;
     case 'tip-guess':
       return (
         <ChoiceStep

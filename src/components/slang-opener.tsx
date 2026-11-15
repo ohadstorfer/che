@@ -8,26 +8,28 @@ import { useSlap } from '@/components/sticker';
 import { colors, font, press } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
-// The first screen of a slang round. The whole screen turns butter and says
+// The first screen of a slang round (and, in sky, of a culture class). The whole screen turns butter and says
 // one thing: this is slang, not a lesson. A pastel as a page is otherwise off
 // limits (theme.ts keeps them for decoration), which is exactly why it reads
 // as a different mode. One headline, one picture, one button.
 // ---------------------------------------------------------------------------
 
-const WORD = 'SLANG';
 const W = 340;
 const H = 132;
-const SIZE = 112;
 const STROKE = 9;
 
-/** SLANG, cut out like a sticker: cream letters, an ink outline, a hard ink shadow. */
-function Headline() {
+/** SLANG fills the width at 112; a longer word (CULTURE) shrinks until its shadow still fits. */
+const sizeFor = (word: string) => (word.length <= 5 ? 112 : Math.round(520 / word.length));
+
+/** The word, cut out like a sticker: cream letters, an ink outline, a hard ink shadow. */
+function Headline({ word }: { word: string }) {
+  const size = sizeFor(word);
   const shared = {
     x: W / 2,
     y: 100,
     textAnchor: 'middle' as const,
     fontFamily: 'Gabarito_900Black',
-    fontSize: SIZE,
+    fontSize: size,
     letterSpacing: -3,
   };
   const ink = { fill: colors.ink, stroke: colors.ink, strokeWidth: STROKE, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const };
@@ -35,13 +37,13 @@ function Headline() {
     <Svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
       {/* The shadow, the outline, then the letters: three copies of one word. */}
       <SvgText {...shared} {...ink} x={W / 2 + 5} y={107}>
-        {WORD}
+        {word}
       </SvgText>
       <SvgText {...shared} {...ink}>
-        {WORD}
+        {word}
       </SvgText>
       <SvgText {...shared} fill={colors.card}>
-        {WORD}
+        {word}
       </SvgText>
     </Svg>
   );
@@ -63,15 +65,24 @@ function useRise(delay: number) {
 }
 
 export function SlangOpener({ onStart }: { onStart: () => void }) {
+  return <ModeOpener word="SLANG" sub="exercise" onStart={onStart} />;
+}
+
+/** A culture class's first screen: the same sticker and gaucho, in its own words. Its page is sky. */
+export function CultureOpener({ onStart }: { onStart: () => void }) {
+  return <ModeOpener word="CULTURE" sub="class" onStart={onStart} />;
+}
+
+function ModeOpener({ word, sub, onStart }: { word: string; sub: string; onStart: () => void }) {
   const bottom = useSafeAreaInsets().bottom;
   const slap = useSlap(0, '-4deg');
   const rise = useRise(160);
   return (
     <View style={styles.screen}>
       <View style={styles.body}>
-        <Animated.View style={[styles.title, slap]} accessible accessibilityRole="header" accessibilityLabel="Slang exercise">
-          <Headline />
-          <Text style={styles.sub}>exercise</Text>
+        <Animated.View style={[styles.title, slap]} accessible accessibilityRole="header" accessibilityLabel={`${word[0]}${word.slice(1).toLowerCase()} ${sub}`}>
+          <Headline word={word} />
+          <Text style={styles.sub}>{sub}</Text>
         </Animated.View>
         <Animated.View style={rise}>
           <Image

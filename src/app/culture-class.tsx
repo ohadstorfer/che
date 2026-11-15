@@ -21,6 +21,7 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { ExerciseFrame, type Verdict } from '@/components/exercise-frame';
 import { Choices, PlayButton } from '@/components/exercises';
 import { PathLessonDone } from '@/components/path-lesson-done';
+import { CultureOpener } from '@/components/slang-opener';
 import { Button, Panel } from '@/components/ui';
 import { type Anchor, WordPopover } from '@/components/word-popover';
 import { artFor, glossArt, speakerArt } from '@/lib/culture-art';
@@ -270,7 +271,9 @@ export default function CultureClass() {
 }
 
 function ClassPlayer({ found, lessonId, unreachable }: { found: ReturnType<typeof findClass>; lessonId?: string; unreachable?: boolean }) {
-  useStatusBarColor(colors.bg);
+  /** Past the opener: the sky screen that says this is a culture class, as slang has its butter one. */
+  const [started, setStarted] = useState(false);
+  useStatusBarColor(found && !started ? pastel.sky : colors.bg);
   const [steps] = useState(() =>
     found ? buildSteps(found.section.slug, found.cls.title, found.cls.pages, found.cls.vocabulary) : [],
   );
@@ -334,6 +337,15 @@ function ClassPlayer({ found, lessonId, unreachable }: { found: ReturnType<typeo
     return (
       <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
         <Complete found={found} done={done} />
+      </SafeAreaView>
+    );
+  }
+
+  if (!started) {
+    return (
+      <SafeAreaView style={[styles.safe, { backgroundColor: pastel.sky }]} edges={['top', 'left', 'right']}>
+        <Header section={found.section.slug} index={0} total={steps.length} />
+        <CultureOpener onStart={() => setStarted(true)} />
       </SafeAreaView>
     );
   }
