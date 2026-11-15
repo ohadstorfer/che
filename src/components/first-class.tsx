@@ -84,9 +84,9 @@ const ID = {
   caféConLeche: '928bee92-a24f-5bcc-a825-d51cc7bf068a',
   medialuna: '61df6d82-e066-542f-b158-5524f130294e',
   che: '91232a84-b055-5e03-8ed2-651c79f5b376',
-  tenés: 'e7322589-dc0d-5f10-9391-65b3ab21afc2',
+  querés: '94890c85-b399-59cf-bb96-6552de128c40',
   medialunas: '362f3213-c426-54c2-9702-c788da937db5',
-  cheTenésMedialunas: '2e1e0e3c-0847-520b-b36f-af53f7070321',
+  cheQuerésMedialunas: '2e1e0e3c-0847-520b-b36f-af53f7070321',
   medialunaGracias: 'c2268e3e-a367-5746-bba2-28619fa7f2b7',
 };
 
@@ -116,10 +116,12 @@ function useContent() {
     const sentence = (id: string) => sentences.find((s) => s.id === id)!;
     const form = (id: string) => byId.get(id)!;
 
-    // A course sentence with Tomás's recording. Marked as already seen: a
-    // brand-new build wears the "Harder" badge, wrong on a first class.
+    // A course sentence, changed here from "tenés" to "querés": its recording
+    // says "tenés", so it is read, not heard, until it is re-recorded. Marked
+    // as already seen: a brand-new build wears the "Harder" badge, wrong on a
+    // first class.
     const build: Sentence = {
-      ...sentence(ID.cheTenésMedialunas),
+      ...sentence(ID.cheQuerésMedialunas),
       shown: { shown_count: 9, correct_count: 9, last_shown_at: null },
     };
 
@@ -128,7 +130,7 @@ function useContent() {
     // The first question of all is an easy read: its wrong answers come only
     // from the short lines, so all three options stay a few words long — and
     // never the next screen's sentence, which would give that one away.
-    const short = sentences.filter((s) => s.id !== ID.cheTenésMedialunas && s.es.split(/\s+/).length <= 5);
+    const short = sentences.filter((s) => s.id !== ID.cheQuerésMedialunas && s.es.split(/\s+/).length <= 5);
 
     return {
       forms,
@@ -148,7 +150,7 @@ function useContent() {
         mode: 'sentence_build',
         direction: 'en_to_es',
         sentence: build,
-        group: [form(ID.che), form(ID.tenés), form(ID.medialunas)],
+        group: [form(ID.che), form(ID.querés), form(ID.medialunas)],
       }),
     };
   }, []);

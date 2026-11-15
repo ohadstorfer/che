@@ -1558,18 +1558,19 @@
       "voice_id": "tomas"
     },
     {
-      "audio_path": "sentences/2e1e0e3c-0847-520b-b36f-af53f7070321-tomas-1791373299657.mp3",
+      "audio_path": null,
       "difficulty": 2,
-      "en": "Hey, do you have medialunas?",
+      "en": "Hey, do you want medialunas?",
       "en_alt": [
-        "Hey, have you got any medialunas?",
-        "Hey, do you have croissants?"
+        "Hey, would you like medialunas?",
+        "Hey, want some medialunas?",
+        "Hey, do you want croissants?"
       ],
-      "es": "Che, ¿tenés medialunas?",
+      "es": "Che, ¿querés medialunas?",
       "es_alt": [
-        "Che, ¿vos tenés medialunas?",
-        "¿Tenés medialunas?",
-        "¿Vos tenés medialunas?"
+        "Che, ¿vos querés medialunas?",
+        "¿Querés medialunas?",
+        "¿Vos querés medialunas?"
       ],
       "id": "2e1e0e3c-0847-520b-b36f-af53f7070321",
       "note_en": null,
@@ -1584,10 +1585,10 @@
         },
         {
           "form_ids": [
-            "e7322589-dc0d-5f10-9391-65b3ab21afc2"
+            "94890c85-b399-59cf-bb96-6552de128c40"
           ],
-          "gloss": "do you have",
-          "surface": "¿tenés"
+          "gloss": "do you want",
+          "surface": "¿querés"
         },
         {
           "form_ids": [
