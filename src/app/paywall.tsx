@@ -36,7 +36,7 @@ import { success, tap } from '@/lib/haptics';
 import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
 import { resetTo } from '@/lib/nav';
 import { track } from '@/lib/funnel';
-import { type CreatorCode, loadCreatorCode } from '@/lib/creator-code';
+import { checkCreatorCode, type CreatorCode, loadCreatorCode, saveCreatorCode } from '@/lib/creator-code';
 import { formatDate, markWinbackShown, winbackShown } from '@/lib/onboarding';
 import { cancelFreeUnitReminder, scheduleFreeUnitReminder } from '@/lib/free-unit-reminder';
 import { type PaywallSource, usePremium } from '@/lib/premium';
@@ -284,11 +284,37 @@ export default function Paywall() {
     void buy('main', plan);
   };
 
+  // "Have a code?": one field for both kinds. A creator's code (the step
+  // onboarding used to ask, lib/creator-code.ts) is kept for her account; on
+  // Android it also opens the creator offer. Any other code is the store's:
+  // Android redeems it here, iOS opens the App Store's page with it filled in.
   const haveCode = () => {
-    if (Platform.OS === 'ios') return void redeem();
+    if (busy) return;
     tap();
     setCodeError(null);
     setCodeOpen(true);
+  };
+  const applyCode = async (raw: string) => {
+    if (busy) return;
+    const code = normalizeCode(raw);
+    setBusy('code');
+    setCodeError(null);
+    const name = await checkCreatorCode(code);
+    setBusy(null);
+    if (name) {
+      success();
+      await saveCreatorCode({ code, name });
+      setCreator({ code, name });
+      setCodeOpen(false);
+      return;
+    }
+    if (Platform.OS === 'android' && billing.available) return void redeem(code);
+    if (name === undefined) return setCodeError('Couldn’t check the code. Check your connection.');
+    if (Platform.OS === 'ios' && billing.available) {
+      setCodeOpen(false);
+      return void Linking.openURL(appleRedeemUrl(code));
+    }
+    setCodeError('That code isn’t valid.');
   };
 
   // A link with a code in it (posta://redeem?code=…): iOS goes to the App
@@ -381,7 +407,7 @@ export default function Paywall() {
         {creator ? (
           <Animated.View entering={rise(2, reduced)} style={styles.creatorChip}>
             <Text style={styles.creatorChipText}>
-              {creator.name}’s code: your first month free on the yearly plan
+              {Platform.OS === 'android' ? `${creator.name}’s code: your first month free on the yearly plan` : `Thanks to ${creator.name}! Your code is saved.`}
             </Text>
           </Animated.View>
         ) : null}
@@ -414,16 +440,6 @@ export default function Paywall() {
             </>
           )}
         </Animated.View>
-
-        {billing.available && main ? (
-          <Pressable onPress={haveCode} hitSlop={8} style={styles.haveCode} accessibilityRole="button" disabled={!!busy}>
-            {busy === 'code' && Platform.OS === 'ios' ? (
-              <ActivityIndicator color={colors.muted} />
-            ) : (
-              <Text style={styles.haveCodeText}>Have a code?</Text>
-            )}
-          </Pressable>
-        ) : null}
 
         {plan?.trialDays ? <TrialSteps plan={plan} /> : null}
 
@@ -482,7 +498,7 @@ export default function Paywall() {
               : `${plan.priceString}/${perPeriod(plan)}. Renews automatically. Cancel anytime.`}
           </Text>
         ) : null}
-        <Legal onRestore={billing.available ? restore : undefined} restoring={busy === 'restore'} />
+        <Legal onRestore={billing.available ? restore : undefined} restoring={busy === 'restore'} onCode={haveCode} />
       </View>
 
       {stage === 'offer' && catalog?.winback ? (
@@ -504,7 +520,7 @@ export default function Paywall() {
           reduced={reduced}
           busy={busy === 'code'}
           error={codeError}
-          onApply={(code) => void redeem(code)}
+          onApply={(code) => void applyCode(code)}
           onClose={() => !busy && setCodeOpen(false)}
         />
       ) : null}
@@ -592,7 +608,7 @@ function TrialSteps({ plan }: { plan: Plan }) {
 
 // --- the links the stores ask for wherever she can buy --------------------------
 
-function Legal({ onRestore, restoring }: { onRestore?: () => void; restoring?: boolean } = {}) {
+function Legal({ onRestore, restoring, onCode }: { onRestore?: () => void; restoring?: boolean; onCode?: () => void } = {}) {
   return (
     <View style={styles.legal}>
       <Text style={styles.legalLink} onPress={() => void WebBrowser.openBrowserAsync(TERMS_URL)}>
@@ -612,6 +628,14 @@ function Legal({ onRestore, restoring }: { onRestore?: () => void; restoring?: b
               Already subscribed? Restore
             </Text>
           )}
+        </>
+      ) : null}
+      {onCode ? (
+        <>
+          <Text style={styles.legalDot}>·</Text>
+          <Text style={[styles.legalLink, styles.legalCode]} onPress={onCode} accessibilityRole="button">
+            Have a code?
+          </Text>
         </>
       ) : null}
     </View>
@@ -864,8 +888,7 @@ const styles = StyleSheet.create({
     backgroundColor: pastel.butter,
   },
   creatorChipText: { ...font.body[800], fontSize: 14, color: colors.ink, textAlign: 'center' },
-  haveCode: { alignSelf: 'center', marginTop: 16, paddingVertical: 6, paddingHorizontal: 8, minHeight: 32, justifyContent: 'center' },
-  haveCodeText: { ...font.body[700], fontSize: 15, color: colors.muted, textDecorationLine: 'underline' },
+  legalCode: { ...font.body[800], color: colors.primary },
   sheetSlot: { position: 'absolute', left: 0, right: 0, bottom: 0 },
   codeSheet: {
     backgroundColor: colors.bg,

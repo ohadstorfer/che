@@ -22,8 +22,7 @@ const STROKE = 9;
 const sizeFor = (word: string) => (word.length <= 5 ? 112 : Math.round(520 / word.length));
 
 /** The word, cut out like a sticker: cream letters, an ink outline, a hard ink shadow. */
-function Headline({ word }: { word: string }) {
-  const size = sizeFor(word);
+export function Headline({ word, size = sizeFor(word) }: { word: string; size?: number }) {
   const shared = {
     x: W / 2,
     y: 100,

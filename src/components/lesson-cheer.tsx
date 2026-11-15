@@ -243,12 +243,15 @@ export function CheerScreen({
   onDone,
   streak,
   milestone,
+  cta = 'Let’s go!',
 }: {
   design: CheerRow;
   count: number;
   onDone: () => void;
   streak?: boolean;
   milestone?: boolean;
+  /** The streak screen's button. */
+  cta?: string;
 }) {
   const insets = useSafeAreaInsets();
   const look = LOOK[c.tint];
@@ -448,7 +451,7 @@ export function CheerScreen({
           </View>
           <In delay={reduced ? 0 : 1100} style={[styles.action, { bottom: insets.bottom + 20 }]}>
             {/* On rosa the rosa button would vanish, so it turns to card there. */}
-            <Button title="Let’s go!" variant={c.tint === 'rosa' ? 'secondary' : 'primary'} onPress={onDone} />
+            <Button title={cta} variant={c.tint === 'rosa' ? 'secondary' : 'primary'} onPress={onDone} />
           </In>
         </>
       ) : (

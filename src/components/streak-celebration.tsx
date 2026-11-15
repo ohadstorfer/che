@@ -15,6 +15,7 @@ export function StreakCelebration({
   streak,
   onDone,
   design,
+  cta,
 }: {
   /** The count before this round. Callers pass it; the screen shows only today's. */
   previous?: number;
@@ -22,8 +23,10 @@ export function StreakCelebration({
   onDone: () => void;
   /** A given screen instead of the deal, for the admin gallery. */
   design?: StreakDesign;
+  /** The button, when not "Let’s go!" (onboarding's day 1 says Continue). */
+  cta?: string;
 }) {
   // Dealt once: a re-render must not swap the screen under her.
   const [dealt] = useState(() => design ?? dealStreak(streak));
-  return <CheerScreen design={dealt} count={streak} onDone={onDone} streak milestone={!!dealt.milestone} />;
+  return <CheerScreen design={dealt} count={streak} onDone={onDone} streak milestone={!!dealt.milestone} cta={cta} />;
 }

@@ -35,19 +35,21 @@ import Animated, {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle, G, Line, Path } from 'react-native-svg';
 
+import { FirstClassLesson } from '@/components/first-class';
+import { FirstClassOpener } from '@/components/first-class-opener';
 import { MASCOT_NAME, MascotSays, pop, type Pose, POSE, SpeechBubble } from '@/components/mascot';
 import { EASE_OUT, IconButton, ProgressBar, rise, slide } from '@/components/onboarding-ui';
 import { type Provider, SocialButtons } from '@/components/social-buttons';
+import { StreakCelebration } from '@/components/streak-celebration';
 import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
-import { normalizeCode } from '@/lib/billing-shared';
-import { checkCreatorCode, loadCreatorCode, saveCreatorCode } from '@/lib/creator-code';
-import { keepAnswers, trackStep } from '@/lib/funnel';
+import { r } from '@/lib/cheer-deck';
+import { localDateStr } from '@/lib/dates';
+import { keepAnswers, type OnboardingStep, trackStep } from '@/lib/funnel';
 import { startGuest } from '@/lib/guest';
 import { success, tap } from '@/lib/haptics';
 import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
 import {
-  achieveRows,
   ART,
   type Art,
   type Answers,
@@ -64,8 +66,6 @@ import {
   resetWinbackShown,
   saveAnswers,
   speaksSpanish,
-  type Struggle,
-  struggleQuestion,
   type TryIt,
   tryIt,
   type Why,
@@ -91,10 +91,22 @@ import { clay, colors, font, pastel, radius, type } from '@/lib/theme';
 // line of conversation, not a form field.
 // ---------------------------------------------------------------------------
 
-type Step = 'name' | 'level' | 'why' | 'try' | 'struggle' | 'achieve' | 'goal' | 'notify' | 'code' | 'building' | 'pledge' | 'account';
-const STEPS: Step[] = ['name', 'level', 'why', 'try', 'struggle', 'achieve', 'goal', 'notify', 'code', 'building', 'pledge', 'account'];
-/** Steps that count on the progress bar; the builder and what follows sit past it. */
-const COUNTED = STEPS.indexOf('building');
+type Step = 'name' | 'level' | 'why' | 'try' | 'goal' | 'building' | 'intro' | 'class' | 'streak' | 'notify' | 'account';
+const STEPS: Step[] = ['name', 'level', 'why', 'try', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'account'];
+/** The questions, on the progress bar. The builder, the first class and its
+ *  streak are moments with their own screens; the account sits past the bar. */
+const BAR: Step[] = ['name', 'level', 'why', 'try', 'goal', 'notify'];
+/** Full-screen steps: no back button or bar above them. */
+const BARE: Step[] = ['intro', 'class', 'streak'];
+/** Where back goes, where it isn't simply the step before: a moment (the
+ *  builder, the class, the streak) is never gone back into. */
+const BACK: Partial<Record<Step, Step>> = { intro: 'goal', class: 'intro', streak: 'intro', notify: 'intro' };
+/** The steps the funnel table knows (its check constraint); the new ones wait for a migration. */
+const TRACKED = new Set<Step>(['name', 'level', 'why', 'try', 'goal', 'building', 'notify', 'account']);
+
+/** Day 1 of her streak, at the end of the first class: the cheer engine's
+ *  polaroid on lavender, Pancho with his guitar, confetti behind. */
+const DAY_ONE = { ...r('doors', 'confetti', 'polaroid', 'lav', 'musica', 'Day 1!', 'Every streak starts with one.'), id: 'onboarding-day-1' };
 
 export default function Onboarding() {
   useStatusBarColor(colors.bg);
@@ -124,7 +136,7 @@ export default function Onboarding() {
   const posthog = usePostHog();
 
   useEffect(() => {
-    trackStep(step);
+    if (TRACKED.has(step)) trackStep(step as OnboardingStep);
   }, [step]);
 
   const index = STEPS.indexOf(step);
@@ -135,17 +147,25 @@ export default function Onboarding() {
   const next = () => go(STEPS[Math.min(index + 1, STEPS.length - 1)]);
   const back = () => {
     if (index === 0) return router.canGoBack() ? router.back() : router.replace('/welcome');
-    // The builder is a moment, not a place: back from the pledge skips it.
-    const prev = STEPS[index - 1] === 'building' ? STEPS[index - 2] : STEPS[index - 1];
-    go(prev, -1);
+    go(BACK[step] ?? STEPS[index - 1], -1);
   };
 
   // Paywall first, account after: she is a guest by now, or signed in (staff
   // replaying it). If no guest could be made — anonymous sign-ins switched
   // off, no connection — the account step comes first, as it used to.
-  const afterPledge = async () => {
+  const afterNotify = async () => {
     if (session || (await startGuest())) router.replace('/paywall?from=onboarding');
     else next();
+  };
+
+  // The class done: that's her first day of practice, so the streak starts
+  // here (bump_streak, the same row every round writes). Her guest account was
+  // made while "Building your course" played; startGuest just returns it.
+  const classDone = () => {
+    void startGuest()
+      .then((ok) => (ok ? supabase.rpc('bump_streak', { p_today: localDateStr() }) : null))
+      .catch(() => {});
+    go('streak');
   };
 
   const choose = <K extends keyof Answers>(key: K, value: Answers[K]) => {
@@ -164,6 +184,24 @@ export default function Onboarding() {
   const entering = slide(dir, reduced);
   const complete = a as Answers;
   const showChrome = step !== 'building';
+  const bar = BAR.indexOf(step);
+
+  // The first class and the two screens around it fill the screen themselves.
+  if (BARE.includes(step)) {
+    return (
+      <Animated.View key={step} entering={entering} style={{ flex: 1, backgroundColor: step === 'intro' ? pastel.lav : colors.bg }}>
+        {step === 'intro' ? (
+          <SafeAreaView style={{ flex: 1 }} edges={['top']}>
+            <FirstClassOpener onStart={() => go('class')} onSkip={() => go('notify')} />
+          </SafeAreaView>
+        ) : step === 'class' ? (
+          <FirstClassLesson onFinish={classDone} onClose={back} />
+        ) : (
+          <StreakCelebration streak={1} design={DAY_ONE} cta="Continue" onDone={() => go('notify')} />
+        )}
+      </Animated.View>
+    );
+  }
 
   return (
     <PanchoPlayer.Provider value={reduced ? null : pancho}>
@@ -171,7 +209,7 @@ export default function Onboarding() {
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={[styles.header, !showChrome && { opacity: 0 }]} pointerEvents={showChrome ? 'auto' : 'none'}>
           <IconButton icon="chevron-back" label="Back" onPress={back} />
-          {index < COUNTED ? <ProgressBar value={(index + 1) / (COUNTED + 1)} /> : <View style={{ flex: 1 }} />}
+          {bar >= 0 ? <ProgressBar value={(bar + 1) / BAR.length} /> : <View style={{ flex: 1 }} />}
           <View style={{ width: 36 }} />
         </View>
 
@@ -214,16 +252,6 @@ export default function Onboarding() {
             </Question>
           ) : step === 'try' ? (
             <TryItStep line={tryIt(complete)} reduced={reduced} onNext={next} />
-          ) : step === 'struggle' ? (
-            <StruggleStep
-              level={complete.level}
-              picked={a.struggle ?? []}
-              reduced={reduced}
-              onChange={(struggle) => setA((cur) => ({ ...cur, struggle }))}
-              onNext={next}
-            />
-          ) : step === 'achieve' ? (
-            <AchieveStep answers={complete} reduced={reduced} onNext={next} />
           ) : step === 'goal' ? (
             <Question
               line={goalTouched ? (MINUTES.find((o) => o.value === a.minutes)?.react ?? '') : 'How much time a day?'}
@@ -251,19 +279,25 @@ export default function Onboarding() {
               answers={complete}
               reduced={reduced}
               onDone={(reminder) => {
-                setA((cur) => ({ ...cur, reminder }));
-                next();
+                // Asked after the class now, so the answers saved while the
+                // course was building get the reminder added here.
+                const answers = { ...complete, reminder };
+                setA(answers);
+                void saveAnswers(answers);
+                keepAnswers(answers);
+                posthog?.capture('onboarding_reminder', { reminder, $set: { onboarding_reminder: reminder } });
+                void afterNotify();
               }}
             />
-          ) : step === 'code' ? (
-            <CodeStep reduced={reduced} onNext={next} />
           ) : step === 'building' ? (
             <Building
               answers={complete}
               reduced={reduced}
               onReady={() => {
                 // Her guest account, made while she reads the result: the
-                // paywall after the pledge sells to it (lib/guest.ts).
+                // class's streak and the paywall at the end go to it
+                // (lib/guest.ts). The reminder answer comes later, after the
+                // class (the notifications step adds it).
                 void saveAnswers(complete)
                   .then(() => startGuest())
                   .then((ok) => {
@@ -276,8 +310,6 @@ export default function Onboarding() {
                       onboarding_why: complete.why,
                       onboarding_whys: (complete.whys ?? []).join(','),
                       onboarding_minutes: complete.minutes,
-                      onboarding_struggle: (complete.struggle ?? []).join(','),
-                      onboarding_reminder: !!complete.reminder,
                     };
                     posthog?.capture('onboarding_answers', { ...props, $set: props });
                   });
@@ -285,8 +317,6 @@ export default function Onboarding() {
               }}
               onNext={next}
             />
-          ) : step === 'pledge' ? (
-            <Pledge answers={complete} reduced={reduced} onNext={() => void afterPledge()} />
           ) : (
             <Account answers={complete} reduced={reduced} />
           )}
@@ -497,109 +527,6 @@ function NameStep({
   );
 }
 
-// --- a creator's code: did someone send her? (lib/creator-code.ts) ----------
-
-/** What the code opens: on Android the creator offer on the paywall; on iOS
- *  nothing yet (no App Store offer codes until the app is approved). */
-const CODE_PERK = Platform.OS === 'android' ? 'Your first month is free.' : null;
-
-function CodeStep({ reduced, onNext }: { reduced: boolean; onNext: () => void }) {
-  const [open, setOpen] = useState(false);
-  const [code, setCode] = useState('');
-  const [found, setFound] = useState<string | null>(null);
-  const [checking, setChecking] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    void loadCreatorCode().then((c) => {
-      if (!c) return;
-      setCode(c.code);
-      setFound(c.name);
-      setOpen(true);
-    });
-  }, []);
-
-  const valid = normalizeCode(code).length >= 3;
-  const check = async () => {
-    if (!valid || checking) return;
-    tap();
-    setChecking(true);
-    setError(null);
-    const name = await checkCreatorCode(code);
-    setChecking(false);
-    if (name === undefined) return setError('Couldn’t check the code. Check your connection.');
-    if (!name) return setError('That code isn’t valid.');
-    success();
-    setFound(name);
-    await saveCreatorCode({ code: normalizeCode(code), name });
-  };
-  const skip = () => {
-    tap();
-    void saveCreatorCode(null);
-    onNext();
-  };
-
-  const line = found
-    ? `Thanks to ${found}!${CODE_PERK ? ` ${CODE_PERK}` : ''}`
-    : open
-      ? 'Type the code from the video.'
-      : 'Did a creator send you here?';
-
-  return (
-    <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-        <Says pose={found ? 'gol' : undefined} line={line} reduced={reduced} />
-        {open ? (
-          <Animated.View entering={rise(1, reduced)} style={styles.nameCard}>
-            <Text style={styles.nameLabel}>Creator code</Text>
-            <TextInput
-              value={code}
-              onChangeText={(v) => {
-                setCode(v.slice(0, 20));
-                setError(null);
-                if (found) {
-                  setFound(null);
-                  void saveCreatorCode(null);
-                }
-              }}
-              placeholder="e.g. MARTI"
-              placeholderTextColor={colors.faint}
-              autoCapitalize="characters"
-              autoCorrect={false}
-              autoFocus={!found}
-              returnKeyType="done"
-              onSubmitEditing={() => void check()}
-              style={styles.nameInput}
-              accessibilityLabel="Creator code"
-            />
-            {error ? <Text style={styles.codeError}>{error}</Text> : null}
-          </Animated.View>
-        ) : null}
-      </ScrollView>
-      <View style={[styles.footer, { gap: 4 }]}>
-        {found ? (
-          <Button title="Continue" onPress={onNext} />
-        ) : open ? (
-          <Button title="Apply code" onPress={() => void check()} loading={checking} disabled={!valid || checking} />
-        ) : (
-          <Button
-            title="Yes, I have a code"
-            onPress={() => {
-              tap();
-              setOpen(true);
-            }}
-          />
-        )}
-        {found ? null : (
-          <Pressable onPress={skip} hitSlop={6} accessibilityRole="button" style={styles.skip}>
-            <Text style={styles.skipText}>{open ? 'Skip' : 'No, I found Posta myself'}</Text>
-          </Pressable>
-        )}
-      </View>
-    </View>
-  );
-}
-
 // --- try it: the one demo. She makes a textbook line sound like Buenos Aires --
 
 const WORD_TILT = ['-3deg', '2.5deg', '-2deg', '3deg'];
@@ -690,82 +617,6 @@ function TryItStep({ line, reduced, onNext }: { line: TryIt; reduced: boolean; o
           </Animated.View>
         </View>
       </ScrollView>
-    </View>
-  );
-}
-
-function StruggleStep({
-  level,
-  picked,
-  reduced,
-  onChange,
-  onNext,
-}: {
-  level: Level;
-  picked: Struggle[];
-  reduced: boolean;
-  onChange: (picked: Struggle[]) => void;
-  onNext: () => void;
-}) {
-  const q = struggleQuestion(level);
-  const last = q.options.find((o) => o.value === picked[picked.length - 1]);
-  const toggle = (v: Struggle) => {
-    tap();
-    // "Nothing" stands alone: picking it clears the rest, and the rest clear it.
-    if (picked.includes(v)) return onChange(picked.filter((x) => x !== v));
-    onChange(v === 'none' ? ['none'] : [...picked.filter((x) => x !== 'none'), v]);
-  };
-  return (
-    <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
-        <Says line={last ? last.react : q.en} small={!!last} reduced={reduced} />
-        <Text style={styles.hint}>Pick all that apply</Text>
-        <View style={{ gap: 18 }} accessibilityLabel={q.en}>
-          {q.options.map((o, i) => (
-            <Animated.View key={o.value} entering={rise(i + 1, reduced)}>
-              <Choice label={o.label} tone={o.tone} art={o.art} multi selected={picked.includes(o.value)} onPress={() => toggle(o.value)} />
-            </Animated.View>
-          ))}
-        </View>
-      </ScrollView>
-      <View style={styles.footer}>
-        <Button title="Continue" onPress={onNext} disabled={picked.length === 0} />
-      </View>
-    </View>
-  );
-}
-
-// --- achieve: three stickers, results in her words -------------------------------
-
-const ACHIEVE_TILT = ['-1.2deg', '0.9deg', '-0.7deg'];
-
-function AchieveStep({ answers, reduced, onNext }: { answers: Answers; reduced: boolean; onNext: () => void }) {
-  const rows = achieveRows(answers);
-  return (
-    <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
-        <Says line={`Here’s what you can achieve${nameTail(answers)}.`} reduced={reduced} />
-        <View style={styles.achieveList}>
-          {rows.map((r, i) => (
-            <Animated.View
-              key={r.text}
-              entering={rise(i + 2, reduced)}
-              style={[styles.achieveRow, { backgroundColor: r.tone, transform: [{ rotate: ACHIEVE_TILT[i] }] }]}>
-              <View style={styles.achieveCoin}>
-                {r.art ? (
-                  <Image source={ART[r.art]} style={styles.achieveArt} contentFit="contain" accessible={false} />
-                ) : (
-                  <Text style={styles.achieveGlyph}>{r.glyph}</Text>
-                )}
-              </View>
-              <Text style={styles.achieveText}>{r.text}</Text>
-            </Animated.View>
-          ))}
-        </View>
-      </ScrollView>
-      <View style={styles.footer}>
-        <Button title="That’s what I want" onPress={onNext} />
-      </View>
     </View>
   );
 }
@@ -1140,59 +991,6 @@ function Moment({ tag, tone, text, children }: { tag: string; tone: string; text
     <View style={[styles.moment, { backgroundColor: tone }]}>
       <Text style={styles.momentTag}>{tag}</Text>
       {children ?? <Text style={styles.momentText}>{text}</Text>}
-    </View>
-  );
-}
-
-// --- the deal: two stickers, what she gives and what he gives -------------------
-
-const GIVE: Record<Why, string> = {
-  trip: 'Spanish for your trip',
-  moving: 'Spanish for your move',
-  love: 'Spanish for the family',
-  people: 'Spanish for your people',
-  culture: 'The Spanish behind the culture',
-};
-
-const FROM: Record<Level, string> = {
-  none: 'From zero.',
-  basics: 'From the basics you have.',
-  spanish: 'From the Spanish you know.',
-  conversational: 'From the Spanish you already speak.',
-};
-
-function Pledge({ answers, reduced, onNext }: { answers: Answers; reduced: boolean; onNext: () => void }) {
-  return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.pledgeBody}>
-        {/* Half the free space above the deal, the rest above Pancho, so it sits lower on tall phones. */}
-        <View style={{ flex: 0.5 }} />
-        <Animated.Text entering={rise(0, reduced)} style={styles.pledgeTitle} accessibilityRole="header">
-          The deal{nameTail(answers)}.
-        </Animated.Text>
-        <View style={styles.pledgeStack}>
-          <Animated.View entering={rise(2, reduced)} style={[styles.deal, { backgroundColor: pastel.lav, transform: [{ rotate: '-1deg' }] }]}>
-            <Text style={styles.dealLabel}>YOU GIVE</Text>
-            <Text style={styles.dealBig}>{answers.minutes} minutes a day</Text>
-            <Text style={styles.dealSub}>Every day.</Text>
-          </Animated.View>
-          <Animated.View entering={rise(3, reduced)} style={styles.dealArrow}>
-            <MaterialCommunityIcons name="swap-vertical" size={22} color={colors.ink} />
-          </Animated.View>
-          <Animated.View entering={rise(4, reduced)} style={[styles.deal, { backgroundColor: pastel.sage, transform: [{ rotate: '0.8deg' }] }]}>
-            <Text style={styles.dealLabel}>I GIVE</Text>
-            <Text style={styles.dealBig}>{GIVE[answers.why]}</Text>
-            <Text style={styles.dealSub}>{FROM[answers.level]} The way it’s spoken here.</Text>
-          </Animated.View>
-        </View>
-        <View style={{ flex: 1 }} />
-        <Animated.View entering={rise(5, reduced)} style={{ alignItems: 'center' }}>
-          <Image source={POSE.wave} style={styles.pledgeArt} contentFit="contain" accessibilityLabel={`${MASCOT_NAME} the carpincho, waving`} />
-        </Animated.View>
-      </View>
-      <View style={styles.footer}>
-        <Button title="I’m committed!" onPress={onNext} />
-      </View>
     </View>
   );
 }
