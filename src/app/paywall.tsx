@@ -15,6 +15,7 @@ import {
   Text,
   TextInput,
   View,
+  useWindowDimensions,
   type ViewStyle,
 } from 'react-native';
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
@@ -103,6 +104,9 @@ const RESTORE_COOLDOWN = 15000;
 export default function Paywall() {
   useStatusBarColor(colors.bg);
   const reduced = useReducedMotion();
+  // Below a Max (the 17 Pro and smaller), "What you'll unlock" sits a little
+  // closer to the timeline so its title peeks over the button.
+  const short = useWindowDimensions().height < 900;
   const params = useLocalSearchParams<{ from?: string; code?: string; offer?: string }>();
   const from = (params.from ?? 'home') as PaywallSource;
   const { catalog, hardPaywall, configReady, pass, grant, refresh, testerUnlock, unlockAsTester } = usePremium();
@@ -472,7 +476,7 @@ export default function Paywall() {
 
         {plan?.trialDays ? <TrialSteps plan={plan} /> : null}
 
-        <Text style={styles.h2}>What you’ll unlock</Text>
+        <Text style={[styles.h2, short && styles.unlockHeadShort]}>What you’ll unlock</Text>
         <View style={styles.unlock}>
           {PERKS.map((k) => (
             <View key={k.t} style={styles.perk}>
@@ -852,6 +856,7 @@ const styles = StyleSheet.create({
   stepLine: { width: 3, flex: 1, minHeight: 14, borderRadius: 2, backgroundColor: colors.ink, marginVertical: 2 },
   stepText: { flex: 1, gap: 2, paddingTop: 1, paddingBottom: 14 },
   trialHead: { marginTop: 26 },
+  unlockHeadShort: { marginTop: 18 },
   stepWhen: { ...font.body[800], fontSize: 16, lineHeight: 20, color: colors.ink },
   stepWhat: { ...font.body[700], fontSize: 14, lineHeight: 19, color: colors.inkOnWash },
 
