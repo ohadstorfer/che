@@ -570,7 +570,7 @@ function TrialSteps({ plan }: { plan: Plan }) {
   ];
   return (
     <View style={styles.trial}>
-      <Text style={styles.h2}>Try it for {days} days free</Text>
+      <Text style={[styles.h2, styles.trialHead]}>Try it for {days} days free</Text>
       <View>
         {steps.map((s, i) => (
           <View key={s.when} style={styles.step}>
@@ -774,7 +774,7 @@ const styles = StyleSheet.create({
   sub: { ...type.body, flex: 1, fontSize: 16, lineHeight: 22, color: colors.muted },
   h2: { ...font.display[900], fontSize: 22, lineHeight: 27, letterSpacing: -0.3, color: colors.ink, marginTop: 30, marginBottom: 14 },
 
-  plans: { gap: 16, marginTop: 16 },
+  plans: { gap: 16, marginTop: 20 },
   plan: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingTop: 18, paddingBottom: 14, paddingHorizontal: 18, borderRadius: radius.lg },
   planSelected: { backgroundColor: pastel.butter, boxShadow: clay.surface },
   planFlat: { backgroundColor: colors.card, boxShadow: clay.flat },
@@ -793,6 +793,7 @@ const styles = StyleSheet.create({
   stepDot: { width: 46, height: 46, borderRadius: 23, alignItems: 'center', justifyContent: 'center', boxShadow: clay.trough },
   stepLine: { width: 3, flex: 1, minHeight: 14, borderRadius: 2, backgroundColor: colors.ink, marginVertical: 2 },
   stepText: { flex: 1, gap: 2, paddingTop: 2, paddingBottom: 14 },
+  trialHead: { marginTop: 20 },
   stepWhen: { ...font.body[800], fontSize: 16, lineHeight: 21, color: colors.ink },
   stepWhat: { ...font.body[700], fontSize: 15, lineHeight: 21, color: colors.inkOnWash },
 
