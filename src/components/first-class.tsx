@@ -27,6 +27,7 @@ import { playAudio, stopAudio } from '@/lib/audio';
 import fixture from '@/lib/first-class.json';
 import { start as startHablar } from '@/lib/hablar';
 import { success, tap } from '@/lib/haptics';
+import type { Level } from '@/lib/onboarding';
 import type { QueueItem } from '@/lib/round';
 import { type SentenceRow, toSentence } from '@/lib/sentences';
 import { useStatusBarColor } from '@/lib/status-bar-color';
@@ -163,11 +164,14 @@ export type FirstClassPart = Part;
 export function FirstClassLesson({
   part,
   admin,
+  level = 'none',
   onFinish,
   onClose,
 }: {
   /** Opens the class at that part (slang, culture, pancho), for reviewing it. */
   part?: string;
+  /** Her answer in onboarding: how fast Pancho talks on the call. */
+  level?: Level;
   /** Staff replaying it: Play again, Back to admin and the live AI call. */
   admin?: boolean;
   /** The lesson-complete screen's Continue. */
@@ -223,7 +227,7 @@ export function FirstClassLesson({
       {startsPart ? <PartChip key={`chip-${at}-${run}`} part={screen.part} /> : null}
       <PageColorContext.Provider value={tint ?? colors.bg}>
         <Animated.View key={`${screen.id}-${run}`} entering={at === 0 ? FadeIn.duration(200) : NEXT} style={styles.stage}>
-          <ScreenView id={screen.id} content={content} admin={!!admin} onNext={next} onProgress={setSub} onOpening={setButter} />
+          <ScreenView id={screen.id} content={content} admin={!!admin} level={level} onNext={next} onProgress={setSub} onOpening={setButter} />
         </Animated.View>
       </PageColorContext.Provider>
     </SafeAreaView>
@@ -234,6 +238,7 @@ function ScreenView({
   id,
   content,
   admin,
+  level,
   onNext,
   onProgress,
   onOpening,
@@ -241,6 +246,7 @@ function ScreenView({
   id: ScreenId;
   content: ReturnType<typeof useContent>;
   admin: boolean;
+  level: Level;
   onNext: () => void;
   onProgress: (share: number) => void;
   onOpening: (opening: boolean) => void;
@@ -280,7 +286,7 @@ function ScreenView({
     case 'asado-card':
       return <FactCard fact={ASADO_FACT} onDone={onNext} />;
     case 'call':
-      return <CallStep admin={admin} onDone={onNext} />;
+      return <CallStep admin={admin} rate={TALK_RATE[level]} onDone={onNext} />;
   }
 }
 
@@ -451,7 +457,9 @@ function SlangRound({
 
 type Turn = { es: string; en: string; audio?: string; replies: { es: string; en: string }[] };
 
-// Pancho's lines after the first have no recording yet: they are read.
+// Two turns, short enough for a first day: every reply is words she has just
+// met in this class (café con leche, medialuna, dale). Pancho's lines after
+// the first have no recording yet: they are read.
 const SCRIPT: Turn[] = [
   {
     es: '¡Buenas! ¿Qué te traigo?',
@@ -459,32 +467,31 @@ const SCRIPT: Turn[] = [
     audio: CALL_OPENER_AUDIO,
     replies: [
       { es: 'Un café con leche, por favor.', en: 'A coffee with milk, please.' },
-      { es: 'Un café, por favor.', en: 'A coffee, please.' },
-    ],
-  },
-  {
-    es: 'Dale. ¿Algo más?',
-    en: 'OK. Anything else?',
-    replies: [
-      { es: 'Che, ¿tenés medialunas?', en: 'Hey, do you have medialunas?' },
       { es: 'Una medialuna, por favor.', en: 'A medialuna, please.' },
     ],
   },
   {
-    es: '¡Sí! Acá las medialunas están re ricas.',
-    en: 'Yes! The medialunas here are really good.',
-    // The culture part's two asado lines, used for real: the invite, and lunch
-    // that starts well after "a la una".
-    replies: [{ es: '¡Genial! Che, ¿hacemos un asado el domingo?', en: 'Great! Hey, want to do an asado on Sunday?' }],
+    es: '¡Dale! Che, ¿hacemos un asado el domingo?',
+    en: 'Sure! Hey, want to do an asado on Sunday?',
+    replies: [
+      { es: '¡Sí, dale!', en: 'Yes, sure!' },
+      { es: '¡Dale, gracias!', en: 'Sure, thanks!' },
+    ],
   },
   {
-    es: '¡Dale! Vení a la una… y comemos tipo tres. ¡Chau!',
-    en: 'Sure! Come at one… and we’ll eat around three. Bye!',
+    es: '¡Genial! Vení a la una… y comemos tipo tres. ¡Chau!',
+    en: 'Great! Come at one… and we’ll eat around three. Bye!',
     replies: [],
   },
 ];
 
-function CallStep({ admin, onDone }: { admin: boolean; onDone: () => void }) {
+/** How fast Pancho talks for her level: Hablar's own speeds (TALK_SPEED, in
+ *  supabase/functions/_shared/hablar.ts), A1–A2 slow, B1 a little under
+ *  native, only "conversational" at full speed. The clip is recorded at
+ *  natural speed and slowed on the phone, pitch kept. */
+const TALK_RATE: Record<Level, number> = { none: 0.75, basics: 0.75, spanish: 0.9, conversational: 1 };
+
+function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDone: () => void }) {
   const [turn, setTurn] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [live, setLive] = useState(false);
@@ -496,8 +503,8 @@ function CallStep({ admin, onDone }: { admin: boolean; onDone: () => void }) {
     return () => clearInterval(t);
   }, []);
   useEffect(() => {
-    if (line.audio) playAudio(line.audio);
-  }, [line.audio]);
+    if (line.audio) playAudio(line.audio, undefined, rate);
+  }, [line.audio, rate]);
 
   const say = () => {
     tap();
@@ -531,14 +538,18 @@ function CallStep({ admin, onDone }: { admin: boolean; onDone: () => void }) {
         <Animated.View key={turn} entering={FadeInDown.duration(260).easing(EASE_OUT)} style={styles.callLine}>
           <View style={styles.lineRow}>
             <Text style={styles.callEs}>{line.es}</Text>
-            {line.audio ? <PlayButton path={line.audio} small autoPlay={false} /> : null}
+            {line.audio ? <PlayButton path={line.audio} small autoPlay={false} speed={rate} /> : null}
           </View>
           <Text style={styles.callEn}>{line.en}</Text>
         </Animated.View>
       </View>
       <View style={[styles.callDock, { paddingBottom: 20 + bottom }]}>
         {over ? (
-          <Button title="End call" onPress={onDone} />
+          <>
+            {/* The call above is scripted; the real one isn't, and says so. */}
+            <Text style={styles.callReal}>In the app, you speak and Pancho answers. No script. Talk about anything.</Text>
+            <Button title="End call" onPress={onDone} />
+          </>
         ) : (
           <>
             <Text style={styles.callHint}>Say one out loud, then tap it</Text>
@@ -695,6 +706,7 @@ const styles = StyleSheet.create({
     boxShadow: clay.float,
   },
   callHint: { ...font.body[800], fontSize: 13, letterSpacing: 0.4, color: colors.muted, textAlign: 'center' },
+  callReal: { ...font.body[800], fontSize: 15, lineHeight: 21, color: colors.ink, textAlign: 'center', paddingHorizontal: 8 },
   micNote: { ...font.body[600], fontSize: 12, color: colors.muted, textAlign: 'center' },
   liveLink: { ...font.body[800], fontSize: 13, color: colors.primaryDark, textAlign: 'center', paddingVertical: 6 },
 

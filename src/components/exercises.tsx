@@ -582,7 +582,7 @@ function useClip(path: string | null) {
   // Leaving the exercise takes its sound with it.
   useEffect(() => () => void (live.current && stopAudio()), []);
 
-  return { playing, problem, play, slow, rate };
+  return { playing, problem, play, slow, rate, run };
 }
 
 /** The slow way to hear a clip: three quarters of the speed, pitch kept. */
@@ -621,14 +621,18 @@ export function PlayButton({
   big,
   small,
   autoPlay = true,
+  speed = 1,
 }: {
   path: string;
+  /** Below 1 for a learner's level (the first class's call); 1 is natural. */
+  speed?: number;
   big?: boolean;
   /** Inline at the end of a sentence, where a full-size button would outweigh the words. */
   small?: boolean;
   autoPlay?: boolean;
 }) {
-  const { playing, problem, play } = useClip(path);
+  const { playing, problem, run } = useClip(path);
+  const play = useCallback(() => run(speed), [run, speed]);
   const reduced = useReducedMotion();
 
   // It says itself on arrival, the way a teacher would say the word before

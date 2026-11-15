@@ -228,7 +228,7 @@ export default function Onboarding() {
             <FirstClassOpener onStart={() => go('class')} onSkip={afterClass} />
           </SafeAreaView>
         ) : step === 'class' ? (
-          <FirstClassLesson onFinish={classDone} onClose={back} />
+          <FirstClassLesson level={a.level} onFinish={classDone} onClose={back} />
         ) : (
           <StreakCelebration streak={1} design={DAY_ONE} cta="Continue" onDone={afterClass} />
         )}
