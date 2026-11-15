@@ -99,7 +99,8 @@ const packOf = (id: string) => arPacks.find((p) => p.words.some((w) => w.id === 
 // Those lines have no recording yet, so they are read, not heard.
 const DALE: ArWord = {
   ...arWord('dale'),
-  example: { es: '¿Un café con leche? Dale, ya te lo traigo.', en: 'A coffee with milk? OK, I’ll bring it right away.' },
+  // Short on purpose: a first day reads three words, not a waiter's whole reply.
+  example: { es: '¿Un café? ¡Dale!', en: 'A coffee? Sure!' },
   gap: 'Dale',
 };
 // The pack's own example is about the cinema; here it is the café's. It has no
