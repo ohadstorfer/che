@@ -465,7 +465,7 @@ export default function Paywall() {
         {error ? <Text style={styles.error}>{error}</Text> : null}
         <View style={styles.actions}>
           <Button
-            title={creatorOffer ? 'Start my free month' : plan?.trialDays ? 'Start free trial' : 'Continue'}
+            title={creatorOffer ? 'Start my free month' : plan?.trialDays ? `Start ${plan.trialDays}-day free trial` : 'Continue'}
             onPress={() => void (creatorOffer ? buyWithCreator() : buy('main', plan))}
             loading={busy === 'buy' || (creatorOffer && busy === 'code')}
             disabled={!plan || !!busy}
