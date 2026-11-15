@@ -75,8 +75,8 @@ const STEPS: TabStep[] = [
   {
     tab: 2,
     route: '/culture',
-    title: 'How life works here.',
-    body: 'Mate, asado, tipping, saying hi with a kiss. Guess first, then learn why.',
+    title: 'Learn Spanish through culture',
+    body: 'Mate, asado, tipping, saying hi with a kiss.\nFun classes about the Argentinian culture',
   },
   {
     tab: 3,
