@@ -45,6 +45,7 @@ import { listenForFeedbackPush } from '@/lib/feedback-push';
 import { success, tap } from '@/lib/haptics';
 import { captureCurrentScreen } from '@/lib/screen-capture';
 import { clay, colors, font, pastel, press, radius } from '@/lib/theme';
+import { useWelcomeTourOn } from '@/lib/welcome-tour';
 
 // ---------------------------------------------------------------------------
 // Feedback — a bubble over the whole app, and the chat it opens.
@@ -133,7 +134,9 @@ export function FeedbackLayer() {
   const read = useCallback(() => setAccess((a) => (a.unread ? { ...a, unread: 0 } : a)), []);
   const pressBubble = useCallback(() => openSheet(true), [openSheet]);
 
-  const visible = access.open && !pathname.startsWith('/admin') && !sheetOpen;
+  // The welcome tour dims everything; the bubble would float over it.
+  const touring = useWelcomeTourOn();
+  const visible = access.open && !pathname.startsWith('/admin') && !sheetOpen && !touring;
 
   return (
     <>

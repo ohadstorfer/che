@@ -73,6 +73,12 @@ export function useWelcomeTourActive(): boolean {
   return useSyncExternalStore(subscribe, () => active);
 }
 
+/** Whether the tour is on screen right now, without picking up a queued one
+ *  (the feedback bubble steps aside while it plays). */
+export function useWelcomeTourOn(): boolean {
+  return useSyncExternalStore(subscribe, () => active);
+}
+
 export function reportTabBar(rect: TabBarRect): void {
   if (bar && bar.x === rect.x && bar.y === rect.y && bar.width === rect.width && bar.height === rect.height) return;
   bar = rect;
