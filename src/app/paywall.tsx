@@ -843,7 +843,8 @@ const styles = StyleSheet.create({
   tagHot: { backgroundColor: colors.primary },
   tagText: { ...font.body[800], fontSize: 13, lineHeight: 17, color: colors.ink },
 
-  trial: { marginTop: 0 },
+  // The last step keeps its 20 of padding; pull the next heading up a little.
+  trial: { marginTop: 0, marginBottom: -12 },
   step: { flexDirection: 'row', gap: 16 },
   stepRail: { width: 46, alignItems: 'center' },
   stepDot: { width: 46, height: 46, borderRadius: 23, alignItems: 'center', justifyContent: 'center', boxShadow: clay.trough },
