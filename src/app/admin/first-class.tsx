@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
@@ -17,24 +17,19 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { ChoiceStep, type Fact, FactCard } from '@/app/culture-class';
 import { ExerciseFrame, PageColorContext, type Verdict } from '@/components/exercise-frame';
-import { AudioPad, Choices, Exercise, PlayButton, SpeechBubble } from '@/components/exercises';
+import { AudioPad, Choices, Exercise, PlayButton } from '@/components/exercises';
 import { PanchoAvatar } from '@/components/hablar-ui';
 import { Button } from '@/components/ui';
 import { WordIntro } from '@/components/word-intro';
-import {
-  type ArWord,
-  arPacks,
-  decoyWords,
-  toForm as arForm,
-  toGapForm,
-  toSentence as arSentence,
-} from '@/lib/argentine';
+import { SlangOpener } from '@/components/slang-opener';
+import { type ArWord, type PackItem, arPacks, buildPackRound, decoyWords, toForm as arForm, toGapForm } from '@/lib/argentine';
 import { playAudio, stopAudio } from '@/lib/audio';
 import fixture from '@/lib/first-class.json';
 import { start as startHablar } from '@/lib/hablar';
 import { success, tap } from '@/lib/haptics';
 import type { QueueItem } from '@/lib/round';
 import { type SentenceRow, toSentence } from '@/lib/sentences';
+import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, pastel, radius } from '@/lib/theme';
 import type { Form, Sentence } from '@/lib/types';
 
@@ -63,13 +58,9 @@ type ScreenId =
   | 'vos'
   | 'medialuna'
   | 'build'
-  | 'waiter'
-  | 'dale'
-  | 'dale-gap'
+  | 'slang'
   | 'tip-guess'
   | 'tip-card'
-  | 're'
-  | 're-gap'
   | 'call';
 
 const SCREENS: { id: ScreenId; part: Part }[] = [
@@ -77,11 +68,7 @@ const SCREENS: { id: ScreenId; part: Part }[] = [
   { id: 'vos', part: 'class' },
   { id: 'medialuna', part: 'class' },
   { id: 'build', part: 'class' },
-  { id: 'waiter', part: 'slang' },
-  { id: 'dale', part: 'slang' },
-  { id: 'dale-gap', part: 'slang' },
-  { id: 're', part: 'slang' },
-  { id: 're-gap', part: 'slang' },
+  { id: 'slang', part: 'slang' },
   { id: 'tip-guess', part: 'culture' },
   { id: 'tip-card', part: 'culture' },
   { id: 'call', part: 'pancho' },
@@ -101,7 +88,6 @@ const ID = {
   cheTenésMedialunas: '2e1e0e3c-0847-520b-b36f-af53f7070321',
   cafeConMedialuna: '96de3eee-afab-511a-9d87-c0f68c2f35bb',
   querésUnCafé: '299d346b-881a-5ef3-a8e1-b3ca97fb52cf',
-  algoMás: 'be99423e-6489-5a9f-878f-500251f4e8a3',
 };
 
 /** The opener of the Hablar café scene (hablar.json, cafe · A1), in Tomás's voice. */
@@ -111,7 +97,13 @@ const allWords = arPacks.flatMap((p) => p.words);
 const arWord = (id: string) => allWords.find((w) => w.id === id)!;
 const packOf = (id: string) => arPacks.find((p) => p.words.some((w) => w.id === id))!;
 
-const DALE = arWord('dale');
+// The cards' own examples are a plan and a film; here both are the café's.
+// Those lines have no recording yet, so they are read, not heard.
+const DALE: ArWord = {
+  ...arWord('dale'),
+  example: { es: '¿Un café con leche? Dale, ya te lo traigo.', en: 'A coffee with milk? OK, I’ll bring it right away.' },
+  gap: 'Dale',
+};
 // The pack's own example is about the cinema; here it is the café's. It has no
 // recording yet, so the line is read, not heard.
 const RE: ArWord = { ...arWord('re'), example: { es: '¡La medialuna está re rica!', en: 'The medialuna is really tasty!' }, gap: 're' };
@@ -132,8 +124,6 @@ function useContent() {
     };
 
     const item = (i: Omit<QueueItem, 'state'>): QueueItem => ({ ...i, state: null });
-    const slangGap = (w: ArWord) =>
-      item({ form: toGapForm(w), mode: 'sentence_gap', direction: 'en_to_es', sentence: arSentence(w) });
 
     return {
       forms,
@@ -141,7 +131,6 @@ function useContent() {
       sentences,
       caféConLeche: form(ID.caféConLeche),
       querés: sentence(ID.querésUnCafé),
-      algoMás: sentence(ID.algoMás),
       medialuna: item({
         form: form(ID.medialuna),
         mode: 'sentence_intro',
@@ -156,10 +145,6 @@ function useContent() {
         sentence: build,
         group: [form(ID.che), form(ID.tenés), form(ID.medialunas)],
       }),
-      daleGap: slangGap(DALE),
-      reGap: slangGap(RE),
-      daleDecoys: decoyWords(packOf('dale')).map(toGapForm),
-      reDecoys: decoyWords(packOf('re')).map(toGapForm),
     };
   }, []);
 }
@@ -168,19 +153,30 @@ function useContent() {
 
 export default function FirstClass() {
   const content = useContent();
-  const [at, setAt] = useState(0);
+  // ?part=slang (or culture, pancho) opens the class at that part, for reviewing it.
+  const { part } = useLocalSearchParams<{ part?: string }>();
+  const [at, setAt] = useState(() => Math.max(SCREENS.findIndex((x) => x.part === part), 0));
   const [done, setDone] = useState(false);
   const [run, setRun] = useState(0);
+  /** How far into the current screen she is, where one screen is a whole round (the slang class). */
+  const [sub, setSub] = useState(0);
+  /** The slang class's opener is up: the whole page turns butter, as it does in a real slang class. */
+  const [butter, setButter] = useState(false);
   const screen = SCREENS[at];
+  useStatusBarColor(butter ? pastel.butter : colors.bg);
 
   const next = () => {
     stopAudio();
+    setSub(0);
+    setButter(false);
     if (at + 1 < SCREENS.length) setAt(at + 1);
     else setDone(true);
   };
   const restart = () => {
     stopAudio();
     setAt(0);
+    setSub(0);
+    setButter(false);
     setDone(false);
     setRun((r) => r + 1);
   };
@@ -192,27 +188,40 @@ export default function FirstClass() {
 
   if (done) return <Complete onAgain={restart} onClose={close} />;
 
-  const startsPart = at === 0 || SCREENS[at - 1].part !== screen.part;
+  // The slang class opens with its own SLANG screen, so it gets no chip.
+  const startsPart = (at === 0 || SCREENS[at - 1].part !== screen.part) && screen.id !== 'slang';
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={[styles.safe, butter && { backgroundColor: pastel.butter }]} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
         <Pressable onPress={close} hitSlop={12} accessibilityLabel="Close" style={{ marginTop: -4 }}>
-          <Ionicons name="close" size={26} color={colors.muted} />
+          <Ionicons name="close" size={26} color={butter ? colors.ink : colors.muted} />
         </Pressable>
-        <PartBar at={at} />
+        <PartBar at={at + sub} />
       </View>
       {startsPart ? <PartChip key={`chip-${at}-${run}`} part={screen.part} /> : null}
-      <PageColorContext.Provider value={colors.bg}>
+      <PageColorContext.Provider value={butter ? pastel.butter : colors.bg}>
         <Animated.View key={`${screen.id}-${run}`} entering={at === 0 ? FadeIn.duration(200) : NEXT} style={styles.stage}>
-          <ScreenView id={screen.id} content={content} onNext={next} />
+          <ScreenView id={screen.id} content={content} onNext={next} onProgress={setSub} onOpening={setButter} />
         </Animated.View>
       </PageColorContext.Provider>
     </SafeAreaView>
   );
 }
 
-function ScreenView({ id, content, onNext }: { id: ScreenId; content: ReturnType<typeof useContent>; onNext: () => void }) {
+function ScreenView({
+  id,
+  content,
+  onNext,
+  onProgress,
+  onOpening,
+}: {
+  id: ScreenId;
+  content: ReturnType<typeof useContent>;
+  onNext: () => void;
+  onProgress: (share: number) => void;
+  onOpening: (opening: boolean) => void;
+}) {
   const exercise = (item: QueueItem, forms: Form[] = content.forms) => (
     <Exercise
       item={item}
@@ -232,12 +241,8 @@ function ScreenView({ id, content, onNext }: { id: ScreenId; content: ReturnType
       return exercise(content.medialuna);
     case 'build':
       return exercise(content.build);
-    case 'waiter':
-      return <WaiterStep algoMás={content.algoMás.audio_path} onDone={onNext} />;
-    case 'dale':
-      return <WordIntro word={DALE} onDone={onNext} />;
-    case 'dale-gap':
-      return exercise(content.daleGap, content.daleDecoys);
+    case 'slang':
+      return <SlangRound onDone={onNext} onProgress={onProgress} onOpening={onOpening} />;
     case 'tip-guess':
       return (
         <ChoiceStep
@@ -250,10 +255,6 @@ function ScreenView({ id, content, onNext }: { id: ScreenId; content: ReturnType
       );
     case 'tip-card':
       return <FactCard fact={TIP_FACT} onDone={onNext} />;
-    case 're':
-      return <WordIntro word={RE} onDone={onNext} />;
-    case 're-gap':
-      return exercise(content.reGap, content.reDecoys);
     case 'call':
       return <CallStep onDone={onNext} />;
   }
@@ -281,13 +282,13 @@ function PartBar({ at }: { at: number }) {
     if (last && last.part === s.part) last.size++;
     else runs.push({ part: s.part, from: i, size: 1 });
   });
-  const current = SCREENS[Math.min(at, SCREENS.length - 1)].part;
+  const current = SCREENS[Math.min(Math.floor(at), SCREENS.length - 1)].part;
   return (
     <View style={styles.barWrap}>
       <View
         style={styles.bar}
         accessibilityRole="progressbar"
-        accessibilityValue={{ min: 0, max: SCREENS.length, now: at }}>
+        accessibilityValue={{ min: 0, max: SCREENS.length, now: Math.floor(at) }}>
         {runs.map((r) => (
           <View key={r.from} style={styles.barPiece}>
             <BarFill color={PARTS[r.part].color} share={Math.max(Math.min(Math.max((at - r.from) / r.size, 0), 1), r.from === 0 ? HEAD_START : 0)} />
@@ -422,49 +423,64 @@ function VosStep({ audio, onDone }: { audio: string | null; onDone: () => void }
   );
 }
 
-// --- 5. the waiter: "¿Algo más?" … "Dale." -------------------------------------
+// --- the slang class -------------------------------------------------------------
+// A unit's slang class as the road plays it (argentine-round.tsx, first time):
+// the butter SLANG opener, each card introduced, then its meaning asked, then
+// the gaps. A miss comes back once at the end. Nothing is scored or saved.
 
-function WaiterStep({ algoMás, onDone }: { algoMás: string | null; onDone: () => void }) {
-  const [replied, setReplied] = useState(false);
-  return (
-    <ExerciseFrame
-      prompt="Your café con leche arrives. The waiter asks:"
-      verdict={null}
-      canCheck={replied}
-      checkLabel="What’s “dale”?"
-      onCheck={onDone}
-      onContinue={onDone}>
-      <SpeechBubble>
-        <View style={styles.lineRow}>
-          <Text style={styles.lineEs}>¿Algo más?</Text>
-          {algoMás ? <PlayButton path={algoMás} small /> : null}
-        </View>
-        <Text style={styles.lineEn}>Anything else?</Text>
-      </SpeechBubble>
-      {replied ? (
-        <Animated.View entering={FadeInDown.duration(240).easing(EASE_OUT)} style={{ gap: 14 }}>
-          <View style={[styles.mine, { alignSelf: 'flex-end' }]}>
-            <Text style={styles.mineText}>No, nada más, gracias.</Text>
-          </View>
-          <SpeechBubble>
-            <View style={styles.lineRow}>
-              <Text style={styles.lineEs}>¡Dale!</Text>
-              {DALE.audio ? <PlayButton path={DALE.audio} small /> : null}
-            </View>
-          </SpeechBubble>
-        </Animated.View>
-      ) : (
-        <Pressable
-          onPress={() => {
-            tap();
-            setReplied(true);
-          }}
-          style={({ pressed }) => [styles.reply, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
-          <Text style={styles.replyEs}>No, nada más, gracias.</Text>
-          <Text style={styles.replyEn}>No, that’s all, thanks.</Text>
-        </Pressable>
-      )}
-    </ExerciseFrame>
+const SLANG_WORDS = [DALE, RE];
+const uniqueWords = (words: ArWord[]) => [...new Map(words.map((w) => [w.id, w])).values()];
+
+function SlangRound({
+  onDone,
+  onProgress,
+  onOpening,
+}: {
+  onDone: () => void;
+  onProgress: (share: number) => void;
+  onOpening: (opening: boolean) => void;
+}) {
+  const [queue, setQueue] = useState<PackItem[]>(() => buildPackRound(SLANG_WORDS, true));
+  const [index, setIndex] = useState(0);
+  const [started, setStarted] = useState(false);
+  const retried = useRef(new Set<number>());
+  const decoys = useMemo(() => uniqueWords(SLANG_WORDS.flatMap((w) => decoyWords(packOf(w.id)))), []);
+  const forms = useMemo(() => decoys.map(arForm), [decoys]);
+  const gapForms = useMemo(() => decoys.map(toGapForm), [decoys]);
+
+  useEffect(() => {
+    onOpening(!started);
+  }, [started, onOpening]);
+  useEffect(() => {
+    onProgress(started ? index / queue.length : 0);
+  }, [started, index, queue.length, onProgress]);
+
+  if (!started) return <SlangOpener onStart={() => setStarted(true)} />;
+
+  const current = queue[index];
+  const next = (q: PackItem[]) => (index + 1 < q.length ? setIndex(index + 1) : onDone());
+  const onAnswered = (wrongIds: string[]) => {
+    if (current.kind !== 'exercise') return;
+    let q = queue;
+    if (wrongIds.length > 0 && !current.item.isRetry && !retried.current.has(index)) {
+      retried.current.add(index);
+      q = [...queue, { kind: 'exercise', item: { ...current.item, isRetry: true } }];
+      setQueue(q);
+    }
+    next(q);
+  };
+
+  return current.kind === 'intro' ? (
+    <WordIntro key={`intro-${index}`} word={current.word} onDone={() => next(queue)} />
+  ) : (
+    <Exercise
+      key={`${current.item.form.id}-${index}`}
+      item={current.item}
+      allForms={current.item.mode === 'sentence_gap' ? gapForms : forms}
+      allSentences={[]}
+      onIntroDone={() => next(queue)}
+      onAnswered={onAnswered}
+    />
   );
 }
 
