@@ -1,5 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useEffect, useRef, useState } from 'react';
@@ -24,6 +25,8 @@ import Animated, {
   SlideOutDown,
   useAnimatedStyle,
   useReducedMotion,
+  useSharedValue,
+  withTiming,
   ZoomIn,
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -375,6 +378,24 @@ export default function Paywall() {
     setStage('done');
   };
 
+  // "There's more below": a fade over the bottom edge while content remains, and
+  // the scroll bar flashed once, the iOS way, when the page first overflows.
+  const scroller = useRef<ScrollView>(null);
+  const dims = useRef({ view: 0, content: 0, y: 0 });
+  const flashed = useRef(false);
+  const more = useSharedValue(0);
+  const measure = (next: Partial<typeof dims.current>) => {
+    const d = Object.assign(dims.current, next);
+    if (!d.view || !d.content) return;
+    const left = d.content - d.view - d.y > 12;
+    more.value = withTiming(left ? 1 : 0, { duration: 180 });
+    if (left && !flashed.current && d.y < 4) {
+      flashed.current = true;
+      setTimeout(() => scroller.current?.flashScrollIndicators(), 700);
+    }
+  };
+  const fadeStyle = useAnimatedStyle(() => ({ opacity: more.value }));
+
   // Out of onboarding she picks where to start (ready.tsx); anywhere else the
   // short welcome hands her back to what she was doing.
   useEffect(() => {
@@ -394,7 +415,14 @@ export default function Paywall() {
         )}
       </View>
 
-      <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
+      <View style={styles.scrollWrap}>
+        <ScrollView
+          ref={scroller}
+          contentContainerStyle={styles.body}
+          scrollEventThrottle={32}
+          onLayout={(e) => measure({ view: e.nativeEvent.layout.height })}
+          onContentSizeChange={(_, h) => measure({ content: h })}
+          onScroll={(e) => measure({ y: e.nativeEvent.contentOffset.y })}>
         {/* Three lines, each always on one line: it shrinks before it wraps. */}
         <Animated.View entering={rise(0, reduced)} accessibilityRole="header" accessible accessibilityLabel={HERO.join(' ')}>
           {HERO.map((line, i) => (
@@ -459,7 +487,12 @@ export default function Paywall() {
             <Ionicons name="arrow-forward" size={17} color={colors.primary} />
           </Pressable>
         </View>
-      </ScrollView>
+        </ScrollView>
+        {/* More below: the page fades out above the button, and stops fading at the end. */}
+        <Animated.View pointerEvents="none" style={[styles.fade, fadeStyle]}>
+          <LinearGradient colors={[`${colors.bg}00`, colors.bg]} style={StyleSheet.absoluteFill} />
+        </Animated.View>
+      </View>
 
       <View style={styles.footer}>
         {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -829,6 +862,8 @@ const styles = StyleSheet.create({
   skeleton: { flex: 1, height: 120, borderRadius: radius.lg, backgroundColor: colors.trough },
   unavailable: { ...type.body, color: colors.muted, textAlign: 'center', paddingVertical: 12 },
 
+  scrollWrap: { flex: 1 },
+  fade: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 56 },
   footer: {
     paddingHorizontal: 24,
     paddingTop: 12,
