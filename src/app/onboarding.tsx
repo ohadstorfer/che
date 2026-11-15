@@ -994,7 +994,8 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
 
   const player = useVideoPlayer(COURSE_CLIP[answers.why], (p) => {
     p.muted = true;
-    p.loop = true;
+    // Once through, then it rests on its first frame (the Course tab).
+    p.loop = false;
     p.playbackRate = BUILD_RATE;
     p.timeUpdateEventInterval = 0.05;
     if (!reduced) p.play();
@@ -1030,7 +1031,7 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
       }
     };
     // The clip's clock while it plays; the wall clock, at the clip's pace, when
-    // it can't (reduced motion, no clip). A clip that loops has played past ready.
+    // it can't (reduced motion, no clip). A clip back at its start has played past ready.
     const sub = player.addListener('timeUpdate', ({ currentTime }) => {
       if (reduced || failed) return;
       at(currentTime < last - 1 ? 99 : currentTime);
@@ -1043,9 +1044,14 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
     const status = player.addListener('statusChange', ({ status: st }) => {
       if (st === 'error') setFailed(true);
     });
+    const end = player.addListener('playToEnd', () => {
+      player.pause();
+      player.currentTime = 0;
+    });
     return () => {
       sub.remove();
       status.remove();
+      end.remove();
       clearInterval(wall);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
