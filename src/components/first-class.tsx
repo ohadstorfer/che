@@ -461,7 +461,7 @@ type Turn = { es: string; en: string; audio?: string; replies: { es: string; en:
 
 // Pancho as a friend who calls her, two turns short enough for a first day:
 // the first reply is the class's café and medialuna, the second the slang
-// part's "dale", and his goodbye the culture part's asado ("Vení a la una").
+// part's "dale", and the asado he invites her to is the culture part's.
 // None of these lines has a recording yet: they are read, not heard.
 const SCRIPT: Turn[] = [
   {
@@ -477,12 +477,12 @@ const SCRIPT: Turn[] = [
     en: 'Yum! Hey, I’m having an asado on Sunday. Are you coming?',
     replies: [
       { es: '¡Sí, dale!', en: 'Yes, sure!' },
-      { es: '¡Dale! ¿A qué hora?', en: 'Sure! What time?' },
+      { es: '¡Dale, gracias!', en: 'Sure, thanks!' },
     ],
   },
   {
-    es: '¡Genial! Vení a la una… y comemos tipo tres. ¡Chau!',
-    en: 'Great! Come at one… and we’ll eat around three. Bye!',
+    es: '¡Genial! ¡Nos vemos el domingo! ¡Chau!',
+    en: 'Great! See you on Sunday! Bye!',
     replies: [],
   },
 ];
