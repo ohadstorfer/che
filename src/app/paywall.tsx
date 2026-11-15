@@ -610,7 +610,7 @@ function Legal({ onRestore, restoring }: { onRestore?: () => void; restoring?: b
             <ActivityIndicator size="small" color={colors.muted} />
           ) : (
             <Text style={styles.legalLink} onPress={onRestore} accessibilityRole="button">
-              Already subscribed? Restore
+              Subscribed? Restore
             </Text>
           )}
         </>
