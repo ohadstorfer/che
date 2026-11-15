@@ -35,6 +35,10 @@ export default function AdminHome() {
           <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>First class prototype</Text>
           <Muted>“At the café”: class, slang, culture and a Pancho call in one short lesson. Nothing is saved.</Muted>
         </RowLink>
+        <RowLink onPress={() => router.push('/admin/welcome-tour')}>
+          <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>Replay welcome tour</Text>
+          <Muted>The four-tab tour shown once after the first purchase. Also posta://admin/welcome-tour.</Muted>
+        </RowLink>
       </Section>
 
       <Section title="Needs attention">

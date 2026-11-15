@@ -1,3 +1,4 @@
+import { Image, type ImageSource } from 'expo-image';
 import { useEffect, useRef, useState } from 'react';
 import { AccessibilityInfo, Animated, Easing, Platform, View, type StyleProp, type ViewStyle } from 'react-native';
 import Svg, { Circle, G, Path, Text as SvgText } from 'react-native-svg';
@@ -116,4 +117,48 @@ export function useSlap(index = 0, tilt = '0deg') {
     opacity: reduced ? 1 : t.interpolate({ inputRange: [0, 0.5, 1], outputRange: [0, 1, 1] }),
     transform: [{ rotate: tilt }, { scale: reduced ? 1 : t.interpolate({ inputRange: [0, 1], outputRange: [0.9, 1] }) }],
   };
+}
+
+/** The die-cut ring: copies of the figure, tinted white, nudged out in a circle. */
+const RING = Array.from({ length: 16 }, (_, i) => (i / 16) * Math.PI * 2);
+
+/**
+ * A cut-out figure (Pancho) as a sticker: a white die-cut border hugging its
+ * shape. Art has no outline of its own and RN has no drop-shadow filter, so
+ * the border is the figure itself, tinted white, drawn in a ring behind it.
+ * `style` places and sizes it; the border grows `outline` points past that box.
+ */
+export function StickerFigure({
+  source,
+  outline = 2,
+  style,
+  accessibilityLabel,
+}: {
+  source: ImageSource | number;
+  outline?: number;
+  style?: StyleProp<ViewStyle>;
+  accessibilityLabel?: string;
+}) {
+  return (
+    <View
+      style={style}
+      pointerEvents="none"
+      accessible={!!accessibilityLabel}
+      accessibilityLabel={accessibilityLabel}
+      accessibilityRole={accessibilityLabel ? 'image' : undefined}>
+      {RING.map((a) => (
+        <Image
+          key={a}
+          source={source}
+          tintColor="#FFFFFF"
+          contentFit="contain"
+          style={[
+            { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 },
+            { transform: [{ translateX: Math.cos(a) * outline }, { translateY: Math.sin(a) * outline }] },
+          ]}
+        />
+      ))}
+      <Image source={source} contentFit="contain" style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 }} />
+    </View>
+  );
 }

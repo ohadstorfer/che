@@ -21,6 +21,7 @@ export type FunnelEvent =
   | 'checkout_started'
   | 'checkout_ended'
   | 'restore'
+  | 'paywall_learn_more'
   | 'free_pass_claimed'
   | 'notification_opened';
 

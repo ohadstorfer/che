@@ -238,3 +238,15 @@ export function sectionAt(course: Course, index: number): Section | null {
   const lesson = course.path[Math.min(index, course.path.length - 1)];
   return lesson?.section ?? null;
 }
+
+/** Where a lesson opens, by kind: the same routes the Course screen uses. */
+export const lessonHref = (l: PathLesson) =>
+  l.kind === 'story'
+    ? `/story?lesson=${l.id}`
+    : l.kind === 'speak'
+      ? `/hablar-brief?kind=unit&lesson=${l.id}`
+      : l.kind === 'slang'
+        ? `/argentine-round?lesson=${l.id}`
+        : l.kind === 'culture'
+          ? `/culture-class?lesson=${l.id}`
+          : `/practice?lesson=${l.id}`;
