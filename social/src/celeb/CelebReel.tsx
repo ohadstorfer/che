@@ -34,24 +34,34 @@ export const fit = (text: string, max: number, width: number, perChar = 0.56) =>
 // `say` is when each word is spoken: [start, end, the word's number in the line], in clip seconds.
 export type Line = {from: number; to: number; es: (string | string[])[]; en: string; say?: number[][]; words: {word: string; means: string; note: string}[]};
 export type Celeb = {id: string; who: string; source: string; full: number[]; lines: Line[]; again: {line: number; from: number; to: number}; live?: boolean; day?: number;
+  // A custom part-1 headline: two small lines and one big one. It replaces "Can you understand" and "Day N".
+  hook?: [string, string, string];
+  // Without a host: seconds the clip waits, stopped, after the plain play (blur look shows "Did you catch that?").
+  pause?: number;
   // A person reacting, filmed on a green screen: she peeks into the photo after the plain play
   // (`intro`) and after each slow line (`lines`), while the clip waits. Times are seconds in her video.
   host?: {video?: string; intro: number[]; lines: number[][]; outro?: {video: string; from: number; to: number};
     // One clip per piece: with `videos`, each piece plays from its own file (times start at 0 in each).
     videos?: {intro: string; lines: string[]}};
+  // The short cut: the host only opens and closes, no holds between the slow lines and no last play.
+  short?: boolean;
+  // Pancho instead of the host: he lip-syncs to her clips (for the blur look; mouths from pancho-mouths.mjs).
+  pancho?: boolean;
   // 'captions' is the creator-captions look (CaptionsReel); without it, the sticker look.
-  look?: string};
+  look?: string;
+  // Blur look only: where things sit, as designed in the "Pancho en los Reels" artifact (1080x1920 px). See BlurLayout in BlurReel.tsx.
+  layout?: any};
 
 /** Where each part starts and how long it runs, in frames. */
 export const celebTimeline = (reel: Celeb) => {
   const full = f(reel.full[1] - reel.full[0]);
   const lines = reel.lines.map(l => f((l.to - l.from) / SLOW));
   // With a host the clip waits after the plain play and after each line while she talks.
-  const intro = reel.host ? f(reel.host.intro[1] - reel.host.intro[0]) : 0;
-  const holds = reel.lines.map((_, i) => reel.host ? f(reel.host.lines[i][1] - reel.host.lines[i][0]) : 0);
+  const intro = reel.host ? f(reel.host.intro[1] - reel.host.intro[0]) : f(reel.pause ?? 0);
+  const holds = reel.lines.map((_, i) => reel.host && !reel.short ? f(reel.host.lines[i][1] - reel.host.lines[i][0]) : 0);
   const starts: number[] = []; let at = full + intro;
   lines.forEach((n, i) => { starts.push(at); at += n + holds[i]; });
-  const againAt = at, again = f(reel.again.to - reel.again.from);
+  const againAt = at, again = reel.short ? 0 : f(reel.again.to - reel.again.from);
   const endAt = againAt + again;
   return {full, intro, lines, holds, starts, againAt, again, endAt, end: endFrames(reel), total: endAt + endFrames(reel)};
 };
@@ -109,12 +119,16 @@ const stamp = (frame: number, from: number): React.CSSProperties => {
 };
 
 // Two lines, tilted: a small one in flame and a big one in butter, both outlined in ink.
-const Headline: React.FC<{frame: number; small: string; big: string; big2?: string}> = ({frame, small, big, big2}) => {
+// With `small2` (a hook), two small lines lead into one big line.
+const Headline: React.FC<{frame: number; small: string; small2?: string; big: string; big2?: string}> = ({frame, small, small2, big, big2}) => {
   // Three lines (the series title) sit a little higher and smaller so they stay above the photo.
-  const bigSize = big2 ? Math.min(fit(big, 112, 940, 0.6), fit(big2, 112, 940, 0.6)) : fit(big, 210, 940, 0.6);
-  return <div style={{position: 'absolute', left: 60, top: big2 ? 192 : 226, width: 960, display: 'flex', flexDirection: 'column', gap: big2 ? 0 : 4, transform: 'rotate(-3deg)'}}>
-    <div style={stamp(frame, 0)}><Outlined text={small} size={fit(small, big2 ? 96 : 88, 940)} fill={C.flame} stroke={big2 ? 14 : 16} /></div>
-    <div style={stamp(frame, 5)}><Outlined text={big} size={bigSize} fill={C.butter} stroke={big2 ? 18 : 22} spacing={-4} /></div>
+  const three = !!(big2 || small2);
+  const smallSize = small2 ? Math.min(fit(small, 80, 940), fit(small2, 80, 940)) : fit(small, big2 ? 96 : 88, 940);
+  const bigSize = big2 ? Math.min(fit(big, 112, 940, 0.6), fit(big2, 112, 940, 0.6)) : fit(big, small2 ? 160 : 210, 940, 0.6);
+  return <div style={{position: 'absolute', left: 60, top: three ? 192 : 226, width: 960, display: 'flex', flexDirection: 'column', gap: three ? 0 : 4, transform: 'rotate(-3deg)'}}>
+    <div style={stamp(frame, 0)}><Outlined text={small} size={smallSize} fill={C.flame} stroke={three ? 14 : 16} /></div>
+    {small2 && <div style={stamp(frame, 4)}><Outlined text={small2} size={smallSize} fill={C.flame} stroke={14} /></div>}
+    <div style={stamp(frame, small2 ? 9 : 5)}><Outlined text={big} size={bigSize} fill={C.butter} stroke={big2 ? 18 : 22} spacing={-4} /></div>
     {big2 && <div style={stamp(frame, 9)}><Outlined text={big2} size={bigSize} fill={C.butter} stroke={18} spacing={-4} /></div>}
   </div>;
 };
@@ -210,12 +224,9 @@ export const CelebReel: React.FC<{reel: Celeb}> = ({reel}) => {
   return <AbsoluteFill style={{background: `linear-gradient(180deg, ${C.skyTop}, ${C.skyBottom})`, overflow: 'hidden', color: C.ink}}>
     <Sun left={560} top={1240} size={820} frame={frame} />
 
-    <div style={{position: 'absolute', left: 60, top: 124, display: 'flex', alignItems: 'center', gap: 16}}>
-      <Img src={staticFile('posta-icon.png')} style={{width: 60, height: 60, borderRadius: 16}} />
-      <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 40, lineHeight: 1, color: C.ink}}>Posta</div>
-    </div>
-
-    {frame < t.full + t.intro && (reel.day
+    {frame < t.full + t.intro && (reel.hook
+      ? <Headline frame={frame} small={reel.hook[0]} small2={reel.hook[1]} big={reel.hook[2]} />
+      : reel.day
       ? <Headline frame={frame} small={`Day ${reel.day} of`} big="Understanding" big2="Argentinians" />
       : <Headline frame={frame} small="Can you understand" big={`${reel.who}?`} />)}
     {line >= 0 && <Headline frame={frame - t.starts[0]} small="Again," big="slowly." />}

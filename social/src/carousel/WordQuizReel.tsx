@@ -53,8 +53,6 @@ const slap = (f: number, at: number, rot = -4): React.CSSProperties => {const t 
 const outlined = (size: number, stroke: number): React.CSSProperties => ({
   fontFamily: DISPLAY, fontWeight: 900, fontSize: size, lineHeight: 0.92, color: BUTTER, WebkitTextStroke: `${stroke}px ${INK}`, paintOrder: 'stroke fill', letterSpacing: '-0.02em', whiteSpace: 'nowrap',
 } as React.CSSProperties);
-/** The headline word as large as fits the 320-wide column. */
-const wordSize = (w: string) => Math.min(130, Math.floor(310 / (w.length * 0.82)));
 
 const RAYS = Array.from({length: 16}, (_, k) => k * 22.5);
 const Sun: React.FC<{x: number; y: number; size: number; f: number}> = ({x, y, size, f}) => (
@@ -64,13 +62,20 @@ const Sun: React.FC<{x: number; y: number; size: number; f: number}> = ({x, y, s
 );
 
 const Chip: React.FC<{children: React.ReactNode; style?: React.CSSProperties; bg?: string}> = ({children, style, bg = BUTTER}) => (
-  <span style={{display: 'inline-block', fontFamily: DISPLAY, fontWeight: 800, fontSize: 12, letterSpacing: '0.08em', padding: '5px 10px', borderRadius: 99, background: bg, boxShadow: CHIP, ...style}}>{children}</span>
+  <span style={{display: 'inline-block', fontFamily: DISPLAY, fontWeight: 800, fontSize: 10, letterSpacing: '0.08em', padding: '4px 8px', borderRadius: 99, background: bg, boxShadow: CHIP, ...style}}>{children}</span>
 );
 
-const TopBar: React.FC<{day: number}> = ({day}) => (
-  <div style={{position: 'absolute', left: 20, right: 20, top: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+// TikTok / Reels safe zone (2026-11-09): x60–930, y280–1400 of 1080×1920 → on the 360 board x20–310, y93–467.
+// Everything that matters sits in this box; only the sun decoration bleeds out.
+const SAFE = {left: 20, top: 93, width: 290, height: 374};
+const Safe: React.FC<{children: React.ReactNode; style?: React.CSSProperties}> = ({children, style}) => (
+  <div style={{position: 'absolute', ...SAFE, padding: '4px 10px 4px 4px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', ...style}}>{children}</div>
+);
+
+const TopBar: React.FC<{day: number; right?: React.ReactNode}> = ({day, right}) => (
+  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', flex: 'none'}}>
     <Chip>WORD OF THE DAY</Chip>
-    <span style={{fontFamily: DISPLAY, fontWeight: 800, fontSize: 13, color: INK2, letterSpacing: '0.06em'}}>DAY {day}</span>
+    {right ?? <span style={{fontFamily: DISPLAY, fontWeight: 800, fontSize: 11, color: INK2, letterSpacing: '0.06em'}}>DAY {day}</span>}
   </div>
 );
 
@@ -88,80 +93,94 @@ const Marked: React.FC<{text: string; marks: string[]}> = ({text, marks}) => {
   return <>{out}</>;
 };
 
-/** The Drake reels' countdown: a rosa ring that empties over 3 s (coral in the last second), the number popping each second. */
+/** The Drake reels' countdown: a rosa ring that empties over 3 s (coral in the last second), the number popping each second. 60 wide. */
 const Ring: React.FC<{f: number}> = ({f}) => {
   const n = Math.max(1, 3 - Math.floor(f / FPS));
   const left = Math.max(0, 1 - f / ASK);
-  const r = 38, c = 2 * Math.PI * r;
+  const r = 24, c = 2 * Math.PI * r;
   const s = 0.72 + 0.28 * pop(f % FPS);
-  return <div style={{position: 'relative', width: 96, height: 96}}>
-    <svg width="96" height="96" viewBox="0 0 96 96" style={{position: 'absolute', inset: 0, transform: 'rotate(-90deg)'}}>
-      <circle cx="48" cy="48" r={r} fill="none" stroke={TRACK} strokeWidth="9" />
-      <circle cx="48" cy="48" r={r} fill="none" stroke={n === 1 ? CORAL : ROSA} strokeWidth="9" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - left)} />
+  return <div style={{position: 'relative', width: 60, height: 60}}>
+    <svg width="60" height="60" viewBox="0 0 60 60" style={{position: 'absolute', inset: 0, transform: 'rotate(-90deg)'}}>
+      <circle cx="30" cy="30" r={r} fill="none" stroke={TRACK} strokeWidth="6" />
+      <circle cx="30" cy="30" r={r} fill="none" stroke={n === 1 ? CORAL : ROSA} strokeWidth="6" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - left)} />
     </svg>
-    <div style={{position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', fontFamily: DISPLAY, fontWeight: 900, fontSize: 50, color: INK, transform: `scale(${s})`}}>{n}</div>
+    <div style={{position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', fontFamily: DISPLAY, fontWeight: 900, fontSize: 30, color: INK, transform: `scale(${s})`}}>{n}</div>
   </div>;
 };
 
+const Peek: React.FC<{f: number; src?: string; w?: number; style?: React.CSSProperties}> = ({f, src = 'pancho/sideeye.png', w = 62, style}) => (
+  <Img src={staticFile(src)} style={{width: w, transform: `translateY(${-3 * Math.sin(f / 9)}px)`, ...style}} />
+);
+
 const Intro: React.FC<{q: WordQuiz; f: number}> = ({q, f}) => (
-  <AbsoluteFill style={{display: 'grid', justifyItems: 'center', alignContent: 'center', textAlign: 'center', gap: 4}}>
-    <Sun x={30} y={170} size={300} f={f} />
-    <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 34, lineHeight: 1, letterSpacing: '0.02em', position: 'relative'}}>ARGENTINIAN</div>
-    <div style={{...outlined(62, 9), lineHeight: 0.95, transform: 'rotate(-4deg)', marginTop: 6, position: 'relative'}}>WORD OF<br />THE DAY</div>
-    <Chip style={{marginTop: 26, fontSize: 15, padding: '7px 14px', justifySelf: 'center', position: 'relative'}}>DAY {q.day}</Chip>
+  <AbsoluteFill>
+    <Sun x={45} y={175} size={250} f={f} />
+    <Safe style={{alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
+      <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 28, lineHeight: 1, letterSpacing: '0.02em'}}>ARGENTINIAN</div>
+      <div style={{...outlined(52, 8), lineHeight: 0.95, transform: 'rotate(-4deg)', marginTop: 8}}>WORD OF<br />THE DAY</div>
+      <Chip style={{marginTop: 22, fontSize: 13, padding: '6px 12px'}}>DAY {q.day}</Chip>
+    </Safe>
   </AbsoluteFill>
 );
 
-const Word: React.FC<{q: WordQuiz; f: number; t: number}> = ({q, f, t}) => (
-  <AbsoluteFill style={{display: 'grid', placeItems: 'center', alignContent: 'center', textAlign: 'center'}}>
-    <TopBar day={q.day} />
-    <Sun x={30} y={120} size={300} f={t} />
-    <div style={{...outlined(wordSize(q.word), Math.round(wordSize(q.word) * 0.15)), ...slap(f, 4)}}>{q.word.toUpperCase()}</div>
-    <div style={{fontFamily: UI, fontWeight: 700, fontSize: 20, lineHeight: 1.3, maxWidth: 270, marginTop: 22, ...up(f, 20)}}>{q.hook}</div>
-  </AbsoluteFill>
-);
+/** The headline word as large as fits the safe column. */
+const wordFit = (w: string, max: number) => Math.min(max, Math.floor(270 / (w.length * 0.82)));
+
+const Word: React.FC<{q: WordQuiz; f: number; t: number}> = ({q, f, t}) => {
+  const size = wordFit(q.word, 100);
+  return <AbsoluteFill>
+    <Sun x={45} y={150} size={250} f={t} />
+    <Safe>
+      <TopBar day={q.day} />
+      <div style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
+        <div style={{...outlined(size, Math.round(size * 0.15)), ...slap(f, 4)}}>{q.word.toUpperCase()}</div>
+        <div style={{fontFamily: UI, fontWeight: 700, fontSize: 16, lineHeight: 1.3, maxWidth: 240, marginTop: 18, ...up(f, 20)}}>{q.hook}</div>
+      </div>
+    </Safe>
+  </AbsoluteFill>;
+};
 
 /** **bold** in the carousel's lines, as an ink word on a butter swatch. */
 const Bold: React.FC<{text: string}> = ({text}) => <>{text.split('**').map((t, k) => k % 2
   ? <span key={k} style={{background: BUTTER, borderRadius: '0.18em', padding: '0 0.1em', boxShadow: `0 0 0 1.5px ${INK}`}}>{t}</span> : t)}</>;
 
 const Meaning: React.FC<{q: WordQuiz; f: number; t: number}> = ({q, f, t}) => {
-  const size = Math.min(84, wordSize(q.word));
+  const size = wordFit(q.word, 60);
   return <AbsoluteFill>
-    <TopBar day={q.day} />
-    <Sun x={150} y={70} size={260} f={t} />
-    <div style={{position: 'absolute', left: 0, right: 0, top: 96, display: 'grid', justifyItems: 'center', textAlign: 'center'}}>
-      <Chip bg={SURFACE} style={{fontSize: 13, ...up(f, 0)}}>IT MEANS</Chip>
-      <div style={{...outlined(size, Math.round(size * 0.15)), marginTop: 18, ...slap(f, 2, -3)}}>{q.word.toUpperCase()}</div>
-    </div>
-    <div style={{position: 'absolute', left: 30, right: 30, top: 250, display: 'grid', gap: 12, justifyItems: 'center'}}>
-      {q.meanings.map((m, k) => <div key={k} style={{padding: '10px 18px', fontFamily: DISPLAY, fontWeight: 900, fontSize: 25, lineHeight: 1.1, textAlign: 'center',
-        background: k ? SURFACE : BUTTER, borderRadius: 16, boxShadow: STICK, transform: `rotate(${[-2, 1.5, -1][k]}deg)`, ...popIn(f, 14 + k * 8)}}>{m}</div>)}
-    </div>
-    <div style={{position: 'absolute', left: 28, right: 28, top: 500, fontFamily: UI, fontWeight: 700, fontSize: 18, lineHeight: 1.35, textAlign: 'center', ...up(f, 44)}}>
-      <Bold text={q.explain} />
-    </div>
+    <Sun x={150} y={95} size={200} f={t} />
+    <Safe>
+      <TopBar day={q.day} />
+      <div style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: 10}}>
+        <Chip bg={SURFACE} style={up(f, 0)}>IT MEANS</Chip>
+        <div style={{...outlined(size, Math.round(size * 0.15)), ...slap(f, 2, -3)}}>{q.word.toUpperCase()}</div>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 9, marginTop: 4}}>
+          {q.meanings.map((m, k) => <div key={k} style={{padding: '7px 14px', fontFamily: DISPLAY, fontWeight: 900, fontSize: 19, lineHeight: 1.1,
+            background: k ? SURFACE : BUTTER, borderRadius: 13, boxShadow: STICK, transform: `rotate(${[-2, 1.5, -1][k]}deg)`, ...popIn(f, 14 + k * 8)}}>{m}</div>)}
+        </div>
+        <div style={{fontFamily: UI, fontWeight: 700, fontSize: 14, lineHeight: 1.35, maxWidth: 270, marginTop: 6, ...up(f, 44)}}><Bold text={q.explain} /></div>
+      </div>
+    </Safe>
   </AbsoluteFill>;
 };
 
 const Example: React.FC<{q: WordQuiz; f: number}> = ({q, f}) => {
   const two = q.example.es.length > 1;
   return <AbsoluteFill>
-    <TopBar day={q.day} />
-    <div style={{position: 'absolute', left: 0, right: 0, top: 96, display: 'grid', justifyItems: 'center'}}>
-      <Chip bg={SURFACE} style={{fontSize: 13, ...up(f, 0)}}>EXAMPLE</Chip>
-    </div>
-    <div style={{position: 'absolute', left: 20, right: 20, top: two ? 170 : 210, display: 'grid', gap: 22}}>
-      {q.example.es.map((es, k) => {
-        const right = two && k === 1;
-        return <div key={k} style={{justifySelf: two ? (right ? 'end' : 'start') : 'center', maxWidth: two ? 270 : 320, textAlign: two ? (right ? 'right' : 'left') : 'center', ...popIn(f, 6 + k * 20)}}>
-          <div style={{display: 'inline-block', padding: '16px 18px', fontFamily: DISPLAY, fontWeight: 800, fontSize: two ? 27 : 30, lineHeight: 1.2, textAlign: 'left',
-            background: right ? BUTTER : SURFACE, borderRadius: 20, boxShadow: STICK}}><Marked text={es} marks={q.marks} /></div>
-          <div style={{fontFamily: UI, fontWeight: 700, fontSize: 19, lineHeight: 1.3, color: INK2, marginTop: 12, padding: '0 6px', ...up(f, 24 + k * 20)}}>{q.example.en[k]}</div>
-        </div>;
-      })}
-    </div>
-    <Img src={staticFile('pancho/sideeye.png')} style={{position: 'absolute', right: -6, bottom: 30, width: 110, transform: `translateY(${-5 * Math.sin(f / 9)}px)`}} />
+    <Safe>
+      <TopBar day={q.day} />
+      <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 16}}>
+        <Chip bg={SURFACE} style={{alignSelf: 'center', ...up(f, 0)}}>EXAMPLE</Chip>
+        {q.example.es.map((es, k) => {
+          const right = two && k === 1;
+          return <div key={k} style={{alignSelf: two ? (right ? 'flex-end' : 'flex-start') : 'center', maxWidth: two ? 240 : 290, textAlign: two ? (right ? 'right' : 'left') : 'center', ...popIn(f, 6 + k * 20)}}>
+            <div style={{display: 'inline-block', padding: '11px 13px', fontFamily: DISPLAY, fontWeight: 800, fontSize: two ? 20 : 23, lineHeight: 1.2, textAlign: 'left',
+              background: right ? BUTTER : SURFACE, borderRadius: 16, boxShadow: STICK}}><Marked text={es} marks={q.marks} /></div>
+            <div style={{fontFamily: UI, fontWeight: 700, fontSize: 15, lineHeight: 1.3, color: INK2, marginTop: 8, padding: '0 4px', ...up(f, 24 + k * 20)}}>{q.example.en[k]}</div>
+          </div>;
+        })}
+      </div>
+      <Peek f={f} style={{alignSelf: 'flex-start', flex: 'none'}} />
+    </Safe>
   </AbsoluteFill>;
 };
 
@@ -171,33 +190,38 @@ const Round: React.FC<{q: WordQuiz; i: number; f: number}> = ({q, i, f}) => {
   const rv = f - ASK_AT - ASK;
   const verdict = revealed ? tween(rv, 0, 8) : 0;
   return <AbsoluteFill>
-    <TopBar day={q.day} />
-    <div style={{position: 'absolute', left: 20, top: 84, fontFamily: DISPLAY, fontWeight: 900, fontSize: 30, ...up(f, 0)}}>Round {i + 1}/{q.rounds.length}</div>
-    <div style={{position: 'absolute', left: 20, right: 20, top: 134, padding: '22px 16px', textAlign: 'center', fontFamily: DISPLAY, fontWeight: 800, fontSize: 28, lineHeight: 1.2, background: SURFACE, borderRadius: 18, boxShadow: STICK, ...popIn(f, 3)}}>
-      <Marked text={r.say} marks={q.marks} />
-    </div>
-    <div style={{position: 'absolute', left: 20, right: 20, top: 262, display: 'grid', gap: 14}}>
-      {r.options.map((o, k) => {
-        const yes = k === r.answer;
-        return <div key={k} style={{padding: '13px 16px', fontFamily: UI, fontWeight: 700, fontSize: 19, borderRadius: 16, boxShadow: STICK,
-          background: yes && revealed ? SAGE : SURFACE, ...up(f, 8 + k * 3),
-          ...(revealed ? (yes ? {transform: `scale(${1 + 0.04 * pop(rv)})`} : {opacity: 1 - 0.65 * verdict}) : {})}}>{o}</div>;
-      })}
-    </div>
-    <div style={{position: 'absolute', left: 132, top: 446, opacity: revealed ? 1 - tween(rv, 0, 6) : tween(f, ASK_AT - 6, 6)}}>
-      <Ring f={Math.min(ASK - 1, Math.max(0, f - ASK_AT))} />
-    </div>
-    <Img src={staticFile('pancho/sideeye.png')} style={{position: 'absolute', right: -6, bottom: 30, width: 110, transform: `translateY(${-5 * Math.sin(f / 9)}px)`}} />
+    <Safe style={{gap: 10}}>
+      <TopBar day={q.day} right={<span style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 18, ...up(f, 0)}}>Round {i + 1}/{q.rounds.length}</span>} />
+      <div style={{marginTop: 4, padding: '14px 12px', textAlign: 'center', fontFamily: DISPLAY, fontWeight: 800, fontSize: 21, lineHeight: 1.2, background: SURFACE, borderRadius: 14, boxShadow: STICK, ...popIn(f, 3)}}>
+        <Marked text={r.say} marks={q.marks} />
+      </div>
+      <div style={{display: 'grid', gap: 9, marginTop: 4}}>
+        {r.options.map((o, k) => {
+          const yes = k === r.answer;
+          return <div key={k} style={{padding: '9px 12px', fontFamily: UI, fontWeight: 700, fontSize: 15, lineHeight: 1.2, borderRadius: 12, boxShadow: STICK,
+            background: yes && revealed ? SAGE : SURFACE, ...up(f, 8 + k * 3),
+            ...(revealed ? (yes ? {transform: `scale(${1 + 0.04 * pop(rv)})`} : {opacity: 1 - 0.65 * verdict}) : {})}}>{o}</div>;
+        })}
+      </div>
+      <div style={{position: 'relative', flex: 1, minHeight: 64, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <Peek f={f} style={{position: 'absolute', left: 0, bottom: 0}} />
+        <div style={{opacity: revealed ? 1 - tween(rv, 0, 6) : tween(f, ASK_AT - 6, 6)}}>
+          <Ring f={Math.min(ASK - 1, Math.max(0, f - ASK_AT))} />
+        </div>
+      </div>
+    </Safe>
   </AbsoluteFill>;
 };
 
 const Follow: React.FC<{f: number; t: number}> = ({f, t}) => (
-  <AbsoluteFill style={{display: 'grid', justifyItems: 'center', alignContent: 'center', textAlign: 'center', gap: 8}}>
-    <Sun x={-60} y={380} size={260} f={t} />
-    <div style={{...outlined(74, 10), ...slap(f, 2)}}>Follow</div>
-    <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 34, lineHeight: 1.05, maxWidth: 300, marginTop: 10, ...up(f, 14)}}>for more words each day</div>
-    <Chip bg={SURFACE} style={{marginTop: 16, fontSize: 16, padding: '8px 16px', ...popIn(f, 26)}}>@postaspanish</Chip>
-    <Img src={staticFile('pancho/saludando.png')} style={{width: 150, marginTop: 10, ...up(f, 32)}} />
+  <AbsoluteFill>
+    <Sun x={-40} y={330} size={220} f={t} />
+    <Safe style={{alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
+      <div style={{...outlined(60, 9), ...slap(f, 2)}}>Follow</div>
+      <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 26, lineHeight: 1.05, maxWidth: 250, marginTop: 10, ...up(f, 14)}}>for more words each day</div>
+      <Chip bg={SURFACE} style={{marginTop: 14, fontSize: 13, padding: '6px 12px', ...popIn(f, 26)}}>@postaspanish</Chip>
+      <Img src={staticFile('pancho/saludando.png')} style={{width: 110, marginTop: 10, ...up(f, 32)}} />
+    </Safe>
   </AbsoluteFill>
 );
 

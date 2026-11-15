@@ -28,7 +28,7 @@ for (let attempt = 1; attempt <= 4; attempt++) {
     const text = await res.text();
     // Out of quota or a bad key will not get better by retrying: say so and stop, so the caller can fall back.
     if (res.status !== 429 && res.status < 500) throw new Error(`gemini ${res.status}: ${text.slice(0, 300)}`);
-    console.warn(`gemini ${res.status}, retrying`);
+    console.warn(`gemini ${res.status}, retrying: ${text.slice(0, 160).replace(/\s+/g, " ")}`);
   }
   await new Promise(r => setTimeout(r, 5000 * attempt));
 }

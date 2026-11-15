@@ -1,0 +1,88 @@
+// "How to Learn Argentine Spanish" — the 16:9 YouTube video (docs/youtube/how-to-learn-argentine-spanish.md).
+// Pancho (Tomás's voice) talks to camera; what he names pops up as stickers on the right.
+// `text` is what he says: Spanish goes in “…” (Argentine accent), the rest is read with an American accent.
+// Each cue starts when its `at` phrase is said (found in `text`); a cue with `group` clears the stage first.
+// yt-vo.mjs records each chapter and writes the times to src/yt/timing/<id>.json.
+
+export default {
+  id: 'yt-learn-argentine-spanish', vo: 'yt-learn', guide: 'postaspanish.com/learn-argentine-spanish',
+  thumb: {lines: [['HOW TO', 'ink', 96], ['LEARN', 'rosa', 132], ['ARGENTINE', 'ink', 104], ['SPANISH', 'ink', 104]], pill: 'what actually works', sticker: '¿vos?', image: 'pancho/mate.png'},
+  chapters: [
+  {id: 'c1', title: 'Why Argentine Spanish is different',
+    text: '“Che, ¿vos tenés ganas de ir a tomar algo? Yo invito.” If you’ve studied Spanish, there’s a good chance half of that just went over your head. And that’s not your fault. Argentine Spanish plays by its own rules. People say “vos” instead of “tú”. They pronounce “yo” like “sho”, and “calle” like “cashe”. And there’s a whole layer of slang called “lunfardo”: words like “laburo” for work, “mina” for woman, and “boludo” for… well, it depends on the tone. So if you want to talk to Argentines, and understand them, you can’t just learn Spanish. You have to learn this Spanish. I’m Pancho, and here are the five steps that actually work.',
+    cues: [
+      {at: '“Che', group: true, el: {kind: 'bubble', text: 'Che, ¿vos tenés ganas de ir a tomar algo? Yo invito.'}},
+      {at: 'went over your head', el: {kind: 'sticker', en: '…what?', color: 'butter', tilt: 4}},
+      {at: 'plays by its own rules', group: true, el: {kind: 'sticker', es: 'vos', en: 'instead of tú', color: 'rosa'}, wait: '“vos” instead'},
+      {at: 'They pronounce', el: {kind: 'sticker', es: 'yo → sho', en: 'the “sh” sound', color: 'butter', tilt: -3}},
+      {at: '“calle”', el: {kind: 'sticker', es: 'calle → cashe', color: 'sage', tilt: 2}},
+      {at: 'a whole layer of slang', group: true, el: {kind: 'sticker', es: 'lunfardo', en: 'Argentine slang', color: 'flame'}},
+      {at: '“laburo”', el: {kind: 'sticker', es: 'laburo', en: 'work', color: 'card', tilt: -3}},
+      {at: '“mina”', el: {kind: 'sticker', es: 'mina', en: 'woman', color: 'card', tilt: 2}},
+      {at: '“boludo”', el: {kind: 'sticker', es: 'boludo', en: 'dude? idiot? depends', color: 'card', tilt: -2}},
+      {at: 'five steps', group: true, el: {kind: 'steps', items: ['Vos from day one', 'An app built for Argentina', 'YouTube', 'Netflix', 'Private classes']}},
+    ]},
+  {id: 'c2', step: 'Step 1', title: 'Learn vos from day one',
+    text: 'Step one: learn “vos” from day one. A lot of people learn “tú” first and plan to switch later. Don’t. It’s double the work, and in Argentina you’ll sound like a dubbed TV show. The good news? Vos is easy. In the present tense, take the infinitive, swap the R for an S, and stress the last vowel. “Tener”: “tenés”. “Querer”: “querés”. “Poder”: “podés”. “Vivir”: “vivís”. The one irregular you need is “ser”: “vos sos”. That’s it. Five minutes, and you already sound more Argentine than most textbooks.',
+    cues: [
+      {at: 'A lot of people', group: true, el: {kind: 'strike', from: 'tú tienes', to: 'vos tenés'}, then: 'Don’t.'},
+      {at: 'In the present tense', group: true, el: {kind: 'sticker', es: 'tener → tenés', en: 'R becomes S, stress the end', color: 'butter'}},
+      {at: '“Querer”', el: {kind: 'sticker', es: 'querer → querés', color: 'card', tilt: -2}},
+      {at: '“Poder”', el: {kind: 'sticker', es: 'poder → podés', color: 'card', tilt: 2}},
+      {at: '“Vivir”', el: {kind: 'sticker', es: 'vivir → vivís', color: 'card', tilt: -1}},
+      {at: '“ser”', el: {kind: 'sticker', es: 'ser → vos sos', en: 'the one to memorize', color: 'rosa', tilt: 2}},
+    ]},
+  {id: 'c3', step: 'Step 2', title: 'An app built for Argentina',
+    text: 'Step two: use an app made for Argentine Spanish. Not neutral Spanish with a flag stuck on it. That’s why we made Posta. Every lesson uses “vos”. Every sentence is written the way people actually talk in Buenos Aires, and every word is said with an Argentine accent, so your ear gets used to the “sh” from day one. You learn words like “laburo”, “bondi” and “fiaca” in real sentences, not in a random list. And when you’re ready to speak, there’s the Speaking tab: you talk out loud with me, and I answer like a real porteño. No judgment, no awkward silence. Ten minutes a day is enough. The link is in the description.',
+    cues: [
+      {at: 'That’s why we made Posta', group: true, el: {kind: 'phonevid'}},
+      {at: 'That’s why we made Posta', el: {kind: 'logo'}},
+      {at: 'Every lesson uses', group: true, el: {kind: 'phone', src: 'store/screen-03.png', tilt: -3}},
+      {at: 'You learn words like', el: {kind: 'phone', src: 'store/screen-05.png', tilt: 2}},
+      {at: 'when you’re ready to speak', el: {kind: 'phone', src: 'store/screen-04.png', tilt: -2}},
+      {at: 'Ten minutes a day', group: true, el: {kind: 'sticker', es: '10 min a day', color: 'butter'}},
+      {at: 'The link is in', el: {kind: 'sticker', en: 'Link in the description ↓', color: 'card', tilt: -2}},
+    ]},
+  {id: 'c4', step: 'Step 3', title: 'YouTube',
+    text: 'Step three: YouTube. But not videos about Spanish. Videos in Argentine Spanish. Argentina has a huge streaming scene. Channels like “Olga” and “Luzu TV” are basically live talk shows: friends joking around, which is exactly how people really talk. Here’s the trick: turn on Spanish subtitles, and drop the speed to zero point seven five. When a word keeps coming up, look it up once. You’ll be surprised how fast “¿viste?”, “re” and “posta” stop sounding like noise.',
+    cues: [
+      {at: 'But not videos about', group: true, el: {kind: 'sticker', en: 'Not videos ABOUT Spanish…', color: 'card', tilt: -2}},
+      {at: 'Videos in Argentine', el: {kind: 'sticker', en: '…videos IN Argentine Spanish', color: 'butter', tilt: 2}},
+      {at: 'Channels like', group: true, el: {kind: 'sticker', es: 'Olga', en: 'live talk shows', color: 'sage', tilt: -2}},
+      {at: '“Luzu TV”', el: {kind: 'sticker', es: 'Luzu TV', en: 'live talk shows', color: 'flame', tilt: 2}},
+      {at: 'Here’s the trick', group: true, el: {kind: 'tv', cc: '¿Viste lo que pasó ayer?'}},
+      {at: 'drop the speed', el: {kind: 'sticker', es: '0.75×', en: 'speed', color: 'butter', tilt: 4}},
+      {at: 'You’ll be surprised', group: true, el: {kind: 'sticker', es: '¿viste?', en: 'you know?', color: 'card', tilt: -2}},
+      {at: '“re”', el: {kind: 'sticker', es: 're', en: 'really, very', color: 'card', tilt: 2}},
+      {at: '“posta”', el: {kind: 'sticker', es: 'posta', en: 'for real', color: 'rosa', tilt: -1}},
+    ]},
+  {id: 'c5', step: 'Step 4', title: 'Netflix',
+    text: 'Step four: Netflix, with a system. Pick an Argentine series. A few good ones: “División Palermo”, if you like dry comedy. “Envidiosa”, for drama with jokes. “El Eternauta”, for sci-fi. And “Casi feliz”, for everyday Buenos Aires life. Watch each episode twice. The first time with English subtitles, so you follow the story. The second time with Spanish subtitles, so you catch the words. The second time is where the learning happens: you already know what they mean, so you can focus on how they say it.',
+    cues: [
+      {at: 'A few good ones', group: true, el: {kind: 'sticker', es: 'División Palermo', en: 'dry comedy', color: 'card', tilt: -2}, wait: '“División'},
+      {at: '“Envidiosa”', el: {kind: 'sticker', es: 'Envidiosa', en: 'drama with jokes', color: 'card', tilt: 2}},
+      {at: '“El Eternauta”', el: {kind: 'sticker', es: 'El Eternauta', en: 'sci-fi', color: 'card', tilt: -1}},
+      {at: '“Casi feliz”', el: {kind: 'sticker', es: 'Casi feliz', en: 'everyday Buenos Aires', color: 'card', tilt: 2}},
+      {at: 'Watch each episode twice', group: true, el: {kind: 'tv', cc: 'I’ll pay. Shall we go for a drink?', label: 'Watch #1 · English subtitles'}},
+      {at: 'The second time with', group: true, el: {kind: 'tv', cc: '¿Vamos a tomar algo? Yo invito.', label: 'Watch #2 · Spanish subtitles', es: true}},
+      {at: 'The second time is where', el: {kind: 'sticker', en: 'This is where you learn', color: 'rosa', tilt: -3}},
+    ]},
+  {id: 'c6', step: 'Step 5', title: 'Private classes',
+    text: 'Step five: private classes, with the right teacher. Look for an Argentine teacher online. Not a neutral Spanish teacher. You want someone who says “vos” without thinking about it. And use the class for one thing: talking. Don’t pay someone to explain grammar an app can teach you. Thirty minutes of conversation a week is worth more than two hours of worksheets. Classes for speaking. The app for vocabulary. That’s the combo.',
+    cues: [
+      {at: 'Look for an', group: true, el: {kind: 'strike', from: 'neutral Spanish teacher', to: 'Argentine teacher'}, then: 'Not a neutral'},
+      {at: 'You want someone', el: {kind: 'sticker', en: 'who says vos without thinking', color: 'butter', tilt: 2}},
+      {at: 'use the class for one thing', group: true, el: {kind: 'sticker', es: '¡a hablar!', en: 'just talk', color: 'rosa', tilt: -2}},
+      {at: 'Thirty minutes', el: {kind: 'sticker', en: '30 min talking > 2 h worksheets', color: 'card', tilt: 2}},
+      {at: 'Classes for speaking', group: true, el: {kind: 'sticker', es: 'Classes', en: '→ speaking', color: 'sage', tilt: -2}},
+      {at: 'The app for vocabulary', el: {kind: 'sticker', es: 'The app', en: '→ vocabulary', color: 'butter', tilt: 2}},
+    ]},
+  {id: 'c7', title: 'Your weekly plan',
+    text: 'So here’s your week. Every day: ten minutes in the app. Twice a week: an Argentine episode, watched twice. Once a week: a thirty-minute class where you just talk. Do that for a month, and the next time someone says “Che, ¿vos tenés ganas de ir a tomar algo?”, you won’t just understand it. You’ll say yes. Download Posta. The link is in the description, with our free guide to Argentine Spanish. “¡Nos vemos, che!”',
+    cues: [
+      {at: 'So here’s your week', group: true, el: {kind: 'week'}, marks: ['Every day', 'Twice a week', 'Once a week']},
+      {at: '“Che', group: true, el: {kind: 'bubble', text: 'Che, ¿vos tenés ganas de ir a tomar algo?'}},
+      {at: 'You’ll say yes', el: {kind: 'sticker', es: '¡Dale!', en: 'You’ll say yes.', color: 'rosa', tilt: 3}},
+      {at: 'Download Posta', group: true, el: {kind: 'end'}},
+    ]},
+]};

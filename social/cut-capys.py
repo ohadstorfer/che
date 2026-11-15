@@ -59,7 +59,8 @@ alphas = {f: alpha_of(im) for f, im in frames.items()}
 # One silhouette split and one crop box for all frames, so the mouths swap in place.
 union = Image.fromarray(np.max([np.asarray(a) for a in alphas.values()], axis=0))
 labels = two_bodies(union)
-for side, name in ((1, 'mx'), (2, 'ar')):
+# Only the Mexican: this cut of the Argentinian lost his elbow at the right edge. Use pancho/ar-arm instead (2026-11-06).
+for side, name in ((1, 'mx'),):
     mine = Image.fromarray(((labels == side) * 255).astype('uint8')).filter(ImageFilter.MaxFilter(5)).resize(union.size, Image.BILINEAR)
     ys, xs = np.nonzero(np.asarray(mine) > 128)
     box = (max(0, xs.min() - 12), max(0, ys.min() - 12), min(union.width, xs.max() + 12), min(union.height, ys.max() + 12))

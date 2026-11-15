@@ -1,0 +1,25 @@
+{
+ "_how": "Each pose is a Gemini edit of gen/base-1.jpg (attached every time). PREFIX + text is the prompt. 'part' says which layer cut-parts.py pulls out of it.",
+ "prefix": "Edit this image. Keep EVERYTHING identical: the same capybara, same position and size in the frame, same head, face, eye, smile, body, legs, feet, colours, line art and the same plain background. Same image size and framing. The only change: ",
+ "poses": {
+  "point-ul":   {"part": "arm-a", "text": "his arm on the left side of the image is raised and stretched out, pointing with the index finger toward the upper left corner of the image, arm straight and clearly separated from the body. The other arm stays exactly as it is."},
+  "a-mid":      {"part": "arm-a", "text": "his arm on the left side of the image is lifted halfway: the elbow bent and away from the body, the open hand at chest height in front of him, palm facing the viewer, as if he is starting to explain something. The other arm stays exactly as it is."},
+  "point-l":    {"part": "arm-a", "text": "his arm on the left side of the image is stretched straight out horizontally at shoulder height, pointing with the index finger to the left edge of the image. The other arm stays exactly as it is."},
+  "point-dl":   {"part": "arm-a", "text": "his arm on the left side of the image is stretched out diagonally downward, pointing with the index finger toward the lower left corner of the image, arm straight and clearly separated from the body. The other arm stays exactly as it is."},
+  "a-up":       {"part": "arm-a", "text": "his arm on the left side of the image is raised straight up next to his head, the index finger pointing up at the sky, like saying 'listen!'. The other arm stays exactly as it is."},
+  "b-open":     {"part": "arm-b", "text": "his arm on the right side of the image is bent at the elbow with the forearm raised in front of his belly, the open hand palm up, as if explaining something. The other arm stays exactly as it is."},
+  "b-finger":   {"part": "arm-b", "text": "his arm on the right side of the image is raised with the elbow bent, the hand next to his cheek, the index finger pointing up, like making a point. The other arm stays exactly as it is."},
+  "b-mid":      {"part": "arm-b", "text": "his arm on the right side of the image is lifted halfway: the elbow bent and slightly away from the body, the relaxed hand at belly height. The other arm stays exactly as it is."},
+  "eye-closed": {"part": "eye",   "text": "his eye is fully closed, drawn as a short calm curved line, like in the middle of a blink. Nothing else changes, not even the mouth."},
+  "eye-half":   {"part": "eye",   "text": "his eye is half closed, the upper eyelid covering the top half of the eye, relaxed. Nothing else changes, not even the mouth."},
+  "eye-cam":    {"part": "eye",   "text": "his eye looks straight at the viewer: the pupil moves toward the viewer inside the same eye. Nothing else changes, not even the mouth."},
+  "brow-up":    {"part": "face",  "text": "he looks surprised: the eye is a little wider and the eyebrow above it is raised high. The mouth stays exactly the same."},
+  "happy":      {"part": "face",  "text": "he looks very happy: the eye closed in a happy upward arc, cheeks slightly lifted. The mouth stays exactly the same."},
+  "m-half":     {"part": "mouth", "text": "his mouth is slightly open, as when talking softly, a little tongue visible. Nothing else changes."},
+  "m-a":        {"part": "mouth", "text": "his mouth is wide open saying the vowel A, tongue visible. Nothing else changes."},
+  "m-e":        {"part": "mouth", "text": "his mouth is open wide sideways saying the vowel E, teeth showing a little. Nothing else changes."},
+  "m-i":        {"part": "mouth", "text": "his mouth is in a wide smile with the teeth together, saying the vowel I. Nothing else changes."},
+  "m-o":        {"part": "mouth", "text": "his mouth is a round open O, saying the vowel O. Nothing else changes."},
+  "m-u":        {"part": "mouth", "text": "his lips are pushed forward in a small round pucker, saying the vowel U. Nothing else changes."}
+ }
+}

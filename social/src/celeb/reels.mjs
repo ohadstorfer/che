@@ -1,3 +1,4 @@
+import {VO} from './pancho-vo.mjs';
 // "Can you understand …?" reels: a real clip of a famous Argentinian, played once plain,
 // then slowly line by line with the words explained (each word lit as it is said: `say` is
 // [start, end, the word's number in the line]), then the key line once more at full speed (`again`).
@@ -243,8 +244,13 @@ CELEBS.push({...CELEBS.find(r => r.id === 'celeb-02-milei-pelotudos'), id: 'cele
 
 // Day 1 with the host (Martina's voice, her.jpg): she talks after the plain play and after each slow line.
 CELEBS.push({...CELEBS.find(r => r.id === 'celeb-13-jugo-feo'), id: 'celeb-13-jugo-feo-host',
+  hook: ['Only 1% of Spanish learners', 'can understand this...', 'can you?'],
   host: {video: 'celeb/host-jugo-talk.mp4', intro: [0, 6], lines: [[6, 13.36], [13.36, 22.4]],
     outro: {video: 'celeb/host-jugo-outro.mp4', from: 0, to: 7.19}}});
+
+// Day 1 in the "no design" look (design 8 in the Posta Reels preview): clip across the middle over a blurred copy of itself.
+CELEBS.push({...CELEBS.find(r => r.id === 'celeb-13-jugo-feo-host'), id: 'celeb-13-jugo-feo-host-blur', look: 'blur',
+  hook: ['Only 1% of Spanish learners', 'can understand Argentinians...', 'can you?']});
 
 // Day series, added 2026-10-18 from pasted links (cropped to the video area; clips in posta-videos/sources/memes/).
 CELEBS.push(
@@ -262,3 +268,89 @@ CELEBS.push({...CELEBS.find(r => r.id === 'celeb-10-atiendo-boludos'), id: 'cele
   host: {videos: {intro: 'celeb/host-intro-generic.mp4', lines: ['celeb/host-atiendo-l1.mp4', 'celeb/host-atiendo-l2.mp4']},
     intro: [0, 3.24], lines: [[0, 5], [0, 5.44]],
     outro: {video: 'celeb/host-jugo-outro.mp4', from: 0, to: 7.19}}});
+
+// The blur look with no host yet: hook, plain play, "Did you catch that?" on the stopped clip, slow lines, last play, ending.
+// The AI host (intro "Did you catch that?", no "Day N of") is added later per reel.
+const BLUR_HOOK = ['Only 1% of Spanish learners', 'can understand Argentinians...', 'can you?'];
+CELEBS.push(
+  {...CELEBS.find(r => r.id === 'celeb-01-messi-bobo'), id: 'celeb-01-messi-bobo-blur', look: 'blur', live: true, hook: BLUR_HOOK, pause: 1.6},
+  {...CELEBS.find(r => r.id === 'celeb-02-milei-pelotudos'), id: 'celeb-02-milei-pelotudos-blur', look: 'blur', live: true, full: [0, 12.2], hook: BLUR_HOOK, pause: 1.6},
+);
+
+// The same two with the AI host, all pieces reused (no new paid clips): the generic intro ("Did you catch that? Let's hear it again, slowly."),
+// each hold cut from her old talk clip (it explains that line's words), and her old outro.
+CELEBS.push(
+  {...CELEBS.find(r => r.id === 'celeb-01-messi-bobo-blur'), id: 'celeb-01-messi-bobo-blur-host', pause: undefined,
+    host: {video: 'celeb/host-messi-bobo.mp4', videos: {intro: 'celeb/host-intro-generic.mp4', lines: []}, intro: [0, 3.24], lines: [[3.72, 9.34], [9.34, 13.5]],
+      outro: {video: 'celeb/host-messi-bobo-outro.mp4', from: 0, to: 7.05}}},
+  {...CELEBS.find(r => r.id === 'celeb-02-milei-pelotudos-blur'), id: 'celeb-02-milei-pelotudos-blur-host', pause: undefined,
+    host: {video: 'celeb/host-milei-pelotudos.mp4', intro: [0, 5.48], lines: [[5.48, 13.72], [13.72, 16.6]],
+      outro: {video: 'celeb/host-milei-pelotudos-outro.mp4', from: 0, to: 7.05}}},
+);
+
+// The other Messi reels in the blur look: the generic intro and Messi's outro reused, one new talk clip each, a hold per line.
+for (const [id, clip, lines] of [
+  ['celeb-03-messi-suarez-pichi', 'pichi', [[0, 5.96], [5.96, 11.68], [11.68, 15.52]]],
+  ['celeb-04-messi-las-tres', 'tres', [[0, 6.4], [6.4, 11.68]]],
+  ['celeb-05-messi-oveja', 'oveja', [[0, 4.8], [4.8, 11.84]]],
+  ['celeb-07-messi-vergonzoso', 'verg', [[0, 6.56], [6.56, 12.56]]],
+  ['celeb-08-messi-vino-sprite', 'sprite', [[0, 4.88], [4.88, 11.28]]],
+  ['celeb-14-messi-nada-que-decir', 'nada', [[0, 6.32], [6.32, 11.36]]],
+]) CELEBS.push({...CELEBS.find(r => r.id === id), id: `${id}-blur-host`, look: 'blur', live: true, hook: BLUR_HOOK,
+  host: {video: `celeb/host-${clip}-talk.mp4`, videos: {intro: 'celeb/host-intro-generic.mp4', lines: []}, intro: [0, 3.24], lines,
+    outro: {video: 'celeb/host-messi-bobo-outro.mp4', from: 0, to: 7.05}}});
+
+// A test: Pancho instead of the host, lip-syncing to her voice for now (Tomás's voice comes later if he stays).
+CELEBS.push({...CELEBS.find(r => r.id === 'celeb-01-messi-bobo-blur-host'), id: 'celeb-01-messi-bobo-pancho', pancho: true});
+
+// A test: she only opens and closes; plain play, her line, the slow lines with Spanish and English only, her closing line.
+CELEBS.push({...CELEBS.find(r => r.id === 'celeb-01-messi-bobo-blur-host'), id: 'celeb-01-messi-bobo-short', short: true});
+
+// Pancho instead of the AI host, in Tomás's voice (celeb-pancho-vo.mjs), laid out in the "Pancho en los Reels" artifact
+// (https://claude.ai/artifact/CqiRXuNjrmos9aP5eampsS, 2026-11-05): four-line hook, the clip lower and centred in TikTok's
+// safe zone, subtitles without the word notes, Pancho whole in the clip's lower-right corner with a white outline.
+// v3 (user's settings, 2026-11-05): clip back at 500; Pancho smaller (w330) and higher, over the clip's lower right; cut at the hips in the intro, whole in the holds.
+// v4: his elbow, cut off in the original drawing, redrawn (pancho/ar-arm); 30 px further left (690) so the elbow stays on screen.
+// v5: whole in the intro too (the hip cut read as a mistake), 680 so the white outline clears the edge, white outline on the ending as well.
+const PANCHO_LAYOUT = {
+  band: {top: 500, height: 692},
+  hook: [
+    {text: 'Only 1%', left: 96, top: 290, size: 120},
+    {text: 'of Spanish learners', left: 96, top: 418, size: 64},
+    {text: 'can understand this...', left: 96, top: 1210, size: 56},
+    {text: 'can you?', left: 96, top: 1280, size: 108},
+  ],
+  titleTop: 412,
+  cap: {left: 96, top: 1212, width: 840, size: 76, en: 42, gap: 12, notes: false},
+  pancho: {
+    intro: {box: {left: 680, top: 579, width: 330, show: 650}, look: 'white', exit: 'drop'},
+    hold: {box: {left: 680, top: 579, width: 330, show: 650}, look: 'white', exit: 'drop'},
+    end: {box: {left: 252, top: 996, width: 480, show: 945}, look: 'white', exit: 'stay'},
+  },
+};
+// Each piece is its own mp3 (times start at 0); the clip waits 0.4 s past his last word. Lengths come from pancho-vo.mjs,
+// written by celeb-pancho-vo.mjs. The intro and outro are shared (vo/pancho-shared) unless the reel has its own.
+const panchoVo = (id, n, own = false) => {
+  const intro = own ? `vo/${id}/intro.mp3` : 'vo/pancho-shared/intro.mp3', outro = own ? `vo/${id}/outro.mp3` : 'vo/pancho-shared/outro.mp3';
+  const lines = Array.from({length: n}, (_, i) => `vo/${id}/l${i + 1}.mp3`);
+  return {videos: {intro, lines}, intro: [0, VO[intro] + 0.4], lines: lines.map(l => [0, VO[l] + 0.4]), outro: {video: outro, from: 0, to: VO[outro]}};
+};
+// The hook's third line names who to understand (user, 2026-11-05): Messi's reels say Messi, every other reel "Argentinians"
+// (a little smaller, so it stays inside TikTok's safe zone).
+const panchoLayout = who => ({...PANCHO_LAYOUT, hook: PANCHO_LAYOUT.hook.map((h, i) => i !== 2 ? h
+  : who === 'Messi' ? {...h, text: 'can understand Messi...'} : {...h, text: 'can understand Argentinians...', size: 50})});
+// v6: the clip's 12 kHz whistle (7-12 s) notched out in manga-de-pelotudos-clean.mp4, and the plain play starts 5 s in.
+CELEBS.push({...CELEBS.find(r => r.id === 'celeb-02-milei-pelotudos-blur'), id: 'celeb-02-milei-pelotudos-pancho', pause: undefined, pancho: true,
+  source: 'celeb/manga-de-pelotudos-clean.mp4', full: [5, 12.2],
+  layout: panchoLayout('Milei'), host: panchoVo('celeb-02-milei-pelotudos', 2, true)});
+// Every other celeb and Day reel with Pancho (scripts in celeb-pancho-vo.mjs).
+// Day 8's clip fades to black at 7.0 s, and the "Did you catch that?" freeze is the plain play's last frame: end it before.
+const PANCHO_FIX = {'celeb-17-messi-cenar': {full: [0, 6.85]}};
+for (const id of ['celeb-03-messi-suarez-pichi', 'celeb-04-messi-las-tres', 'celeb-05-messi-oveja', 'celeb-07-messi-vergonzoso',
+  'celeb-08-messi-vino-sprite', 'celeb-14-messi-nada-que-decir', 'celeb-13-jugo-feo', 'celeb-09-susana-vivo', 'celeb-10-atiendo-boludos',
+  'celeb-11-julio-aja', 'celeb-12-bici-arbol', 'celeb-15-pizza-quemando', 'celeb-16-yogurisimo', 'celeb-17-messi-cenar',
+  'celeb-18-hijo-drogarse', 'celeb-19-no-autorizada', 'celeb-20-sordomudo', 'celeb-21-hormiguita']) {
+  const base = CELEBS.find(r => r.id === id);
+  CELEBS.push({...base, id: `${id}-pancho`, look: 'blur', live: true, pancho: true, layout: panchoLayout(base.who), host: panchoVo(id, base.lines.length),
+    ...PANCHO_FIX[id]});
+}

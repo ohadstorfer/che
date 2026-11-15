@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biblioteca Posta</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@700;900&family=Figtree:wght@400;600;700&display=swap">
+<style>
+:root{--oat:#F7EFE6;--canvas:#EFE4D8;--surf:#FFF9F3;--ink:#3A2A20;--ink2:#7A6556;--line:#E2D4C6;--rosa:#B44A60;--salvia:#3F7A57;--coral:#C9553E;--butter:#FFE08A;
+  --ease-out:cubic-bezier(.23,1,.32,1);--display:"Gabarito",system-ui,sans-serif;--body:"Figtree",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--oat);color:var(--ink);font:15px/1.45 var(--body)}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--oat) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:16px 24px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+h1{font:900 26px var(--display);margin:0}
+.disk{flex:1;min-width:220px;max-width:420px}
+.disk .bar{height:10px;border-radius:99px;background:var(--canvas);overflow:hidden}
+.disk .bar i{display:block;height:100%;background:var(--coral);transition:width 300ms var(--ease-out)}
+.disk small{color:var(--ink2);font-weight:600}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:var(--surf);border-radius:99px;padding:7px 14px;font:700 14px var(--body);color:var(--ink);cursor:pointer;transition:transform 160ms var(--ease-out),background-color 160ms ease}
+.tabs button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+button:active{transform:scale(.97)}
+main{padding:20px 24px 120px}
+details{margin-bottom:14px;background:var(--surf);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;gap:12px;font:700 16px var(--display)}
+summary::-webkit-details-marker{display:none}
+summary .count{color:var(--ink2);font:600 13px var(--body)}
+summary .all{margin-left:auto;font:600 13px var(--body);color:var(--rosa);background:none;border:0;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:0 18px 18px}
+.card{position:relative;border-radius:14px;overflow:hidden;background:var(--canvas);border:2px solid transparent;cursor:pointer;transition:border-color 160ms ease,transform 160ms var(--ease-out)}
+.card:active{transform:scale(.98)}
+.card.sel{border-color:var(--rosa)}
+.card .thumb{aspect-ratio:9/16;width:100%;display:block;object-fit:cover;background:#1e1612}
+.card .meta{padding:8px 10px;font-size:12px}
+.card .name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge{position:absolute;top:8px;left:8px;font:700 11px var(--body);padding:3px 8px;border-radius:99px;color:#fff}
+.b-local{background:var(--coral)}.b-both{background:var(--salvia)}.b-s3{background:#2F7FC0}.b-different{background:#8a6d00}
+.tick{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.85);border:2px solid var(--ink);display:grid;place-items:center;font-weight:900;font-size:13px;opacity:0;transform:scale(.9);transition:opacity 150ms ease,transform 150ms var(--ease-out)}
+.card.sel .tick{opacity:1;transform:none;background:var(--rosa);color:#fff;border-color:var(--rosa)}
+@media (hover:hover) and (pointer:fine){.card:hover .tick{opacity:1;transform:none}}
+.play{position:absolute;bottom:52px;right:8px;border:0;border-radius:99px;background:rgba(30,22,18,.75);color:#fff;font:700 12px var(--body);padding:5px 10px;cursor:pointer}
+.bar-actions{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);display:flex;gap:10px;align-items:center;background:var(--ink);color:#fff;padding:10px 12px 10px 18px;border-radius:99px;box-shadow:0 18px 40px -14px rgba(30,20,10,.6);transition:transform 250ms var(--ease-out),opacity 200ms ease}
+.bar-actions.hidden{opacity:0;transform:translate(-50%,20px);pointer-events:none}
+.bar-actions button{border:0;border-radius:99px;padding:9px 16px;font:700 14px var(--body);cursor:pointer;transition:transform 160ms var(--ease-out),opacity 160ms ease}
+.bar-actions button:disabled{opacity:.35;cursor:default}
+.b-push{background:var(--salvia);color:#fff}.b-prune{background:var(--coral);color:#fff}.b-pull{background:#2F7FC0;color:#fff}.b-clear{background:transparent;color:#fff}
+.job{position:fixed;right:20px;top:84px;width:320px;max-height:50vh;overflow:auto;background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:14px;font-size:13px;box-shadow:0 18px 40px -20px rgba(30,20,10,.5)}
+.job[hidden]{display:none}
+.job .p{height:6px;background:var(--canvas);border-radius:99px;overflow:hidden;margin:8px 0}
+.job .p i{display:block;height:100%;background:var(--salvia);transition:width 200ms linear}
+.job ol{margin:6px 0 0;padding-left:18px;color:var(--ink2)}
+dialog{border:0;border-radius:20px;padding:0;background:#000;max-height:92vh}
+dialog video{display:block;max-height:88vh;max-width:90vw}
+dialog::backdrop{background:rgba(20,14,10,.7)}
+.empty{color:var(--ink2);padding:40px;text-align:center}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Biblioteca</h1>
+  <div class="disk"><div class="bar"><i id="diskbar"></i></div><small id="disktxt">…</small></div>
+  <div class="tabs" id="tabs">
+    <button data-f="all" aria-pressed="true">Todo</button>
+    <button data-f="local">Solo acá</button>
+    <button data-f="both">Seguro en S3 (acá también)</button>
+    <button data-f="s3">Solo en S3</button>
+  </div>
+</header>
+<main id="main"><p class="empty">Cargando…</p></main>
+<div class="bar-actions hidden" id="actions">
+  <span id="selcount"></span>
+  <button class="b-push" id="bpush">Aprobar y subir</button>
+  <button class="b-prune" id="bprune">Borrar de acá</button>
+  <button class="b-pull" id="bpull">Bajar</button>
+  <button class="b-clear" id="bclear">✕</button>
+</div>
+<aside class="job" id="job" hidden></aside>
+<dialog id="player"><video id="video" controls playsinline></video></dialog>
+<script>
+const LABEL={local:'Solo acá',both:'En S3 ✓',s3:'Solo S3',different:'Distinto'};
+let rows=[],filter='all',sel=new Set(),polling=null;
+const $=id=>document.getElementById(id);
+const mb=n=>n==null?'—':n>1e9?(n/1e9).toFixed(1)+' GB':(n/1e6).toFixed(n>1e8?0:1)+' MB';
+const isImg=p=>/\.(png|jpe?g|webp|gif)$/i.test(p), isVid=p=>/\.(mp4|mov|webm)$/i.test(p);
+const media=p=>'/media?p='+encodeURIComponent(p);
+
+async function load(){const r=await fetch('/api/list').then(r=>r.json());rows=r.rows;showDisk(r.disk);render();if(r.job.running)watch();}
+function showDisk(d){const used=1-d.free/d.total;$('diskbar').style.width=(used*100).toFixed(1)+'%';
+  const here=rows.filter(r=>r.local!=null).reduce((a,r)=>a+r.local,0),freeable=rows.filter(r=>r.where==='both').reduce((a,r)=>a+r.local,0);
+  $('disktxt').textContent=`Disco: ${mb(d.free)} libres · videos acá ${mb(here)} · se pueden liberar ${mb(freeable)}`;}
+
+function render(){
+  const list=rows.filter(r=>filter==='all'||r.where===filter);
+  if(!list.length){$('main').innerHTML='<p class="empty">Nada acá.</p>';return}
+  const groups={};for(const r of list){const g=r.path.split('/').slice(0,-1).join('/')||'(raíz)';(groups[g]??=[]).push(r)}
+  $('main').innerHTML=Object.entries(groups).map(([g,items])=>`<details open><summary>${g}<span class="count">${items.length} · ${mb(items.reduce((a,r)=>a+(r.local??r.s3),0))}</span><button class="all" data-g="${g}">elegir todo</button></summary>
+    <div class="grid">${items.map(r=>`<div class="card ${sel.has(r.path)?'sel':''}" data-p="${r.path}">
+      ${isImg(r.path)?`<img class="thumb" loading="lazy" src="${r.where==='s3'?'':media(r.path)}" alt="">`:isVid(r.path)?(r.where==='s3'?`<div class="thumb"></div>`:`<video class="thumb" preload="metadata" muted src="${media(r.path)}#t=1.5"></video>`):`<div class="thumb"></div>`}
+      <span class="badge b-${r.where}">${LABEL[r.where]}</span><span class="tick">✓</span>
+      ${isVid(r.path)?`<button class="play" data-play="${r.path}">▶</button>`:''}
+      <div class="meta"><div class="name" title="${r.path}">${r.path.split('/').pop()}</div>${mb(r.local??r.s3)}</div></div>`).join('')}</div></details>`).join('');
+  bar();
+}
+function bar(){
+  const s=rows.filter(r=>sel.has(r.path));
+  $('actions').classList.toggle('hidden',!s.length);
+  $('selcount').textContent=`${s.length} elegidos`;
+  $('bpush').disabled=!s.some(r=>r.where==='local'||r.where==='different');
+  $('bprune').disabled=!s.some(r=>r.where==='both');
+  $('bpull').disabled=!s.some(r=>r.where==='s3');
+}
+$('main').addEventListener('click',e=>{
+  const play=e.target.closest('[data-play]');if(play){e.stopPropagation();$('video').src=media(play.dataset.play);$('player').showModal();$('video').play();return}
+  const all=e.target.closest('.all');if(all){e.preventDefault();const g=all.dataset.g;const items=rows.filter(r=>(filter==='all'||r.where===filter)&&(r.path.split('/').slice(0,-1).join('/')||'(raíz)')===g);
+    const every=items.every(r=>sel.has(r.path));items.forEach(r=>every?sel.delete(r.path):sel.add(r.path));render();return}
+  const c=e.target.closest('.card');if(!c)return;const p=c.dataset.p;sel.has(p)?sel.delete(p):sel.add(p);c.classList.toggle('sel');bar();
+});
+$('player').addEventListener('click',e=>{if(e.target===$('player')){$('video').pause();$('player').close()}});
+$('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;filter=b.dataset.f;[...$('tabs').children].forEach(x=>x.setAttribute('aria-pressed',x===b));render()});
+$('bclear').onclick=()=>{sel.clear();render()};
+async function act(kind,want,ask){
+  const paths=rows.filter(r=>sel.has(r.path)&&want.includes(r.where)).map(r=>r.path);
+  if(!paths.length||(ask&&!confirm(ask(paths))))return;
+  const r=await fetch('/api/'+kind,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({paths})});
+  if(r.status===409){alert('Ya hay algo corriendo; esperá que termine.');return}
+  sel.clear();watch();
+}
+$('bpush').onclick=()=>act('push',['local','different']);
+$('bprune').onclick=()=>act('prune',['both'],p=>`Borrar ${p.length} archivos de este disco?\nAntes de borrar cada uno se chequea que S3 tenga el mismo archivo (tamaño + md5); si no, queda acá.`);
+$('bpull').onclick=()=>act('pull',['s3']);
+function watch(){clearInterval(polling);$('job').hidden=false;polling=setInterval(async()=>{
+  const {job,disk}=await fetch('/api/job').then(r=>r.json());showDisk(disk);
+  const verb={push:'Subiendo a S3',prune:'Borrando de acá',pull:'Bajando de S3'}[job.kind];
+  $('job').innerHTML=`<b>${job.running?verb+'…':'Listo'}</b> ${job.done}/${job.total}<div class="p"><i style="width:${job.total?job.done/job.total*100:0}%"></i></div><ol>${job.log.slice(-12).map(l=>`<li>${l}</li>`).join('')}</ol>`;
+  if(!job.running){clearInterval(polling);setTimeout(()=>{$('job').hidden=true},6000);load()}
+},800)}
+load();
+</script>
+</body>
+</html>
