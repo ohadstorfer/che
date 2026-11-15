@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+import { type Href, router } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { BackHandler, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
@@ -19,7 +19,7 @@ import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { tap } from '@/lib/haptics';
 import { clay, colors, font, pastel, press, radius } from '@/lib/theme';
-import { finishWelcomeTour, useTabBarRect } from '@/lib/welcome-tour';
+import { finishWelcomeTour, useTabBarRect, useTourPreview } from '@/lib/welcome-tour';
 
 // ---------------------------------------------------------------------------
 // WelcomeTour
@@ -91,8 +91,13 @@ export function WelcomeTour() {
   const insets = useSafeAreaInsets();
   const { profile } = useAuth();
   const bar = useTabBarRect();
+  // A preview from the paywall's "Learn more": no "You're in" hello, and the
+  // end goes back to the paywall instead of the Course.
+  // Read once, as the tour opens: finishing clears it before she has left.
+  const preview = useTourPreview();
+  const [back] = useState(preview);
   // 0 is Pancho's hello; 1–4 are the tabs.
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(back ? 1 : 0);
   const [origin, setOrigin] = useState<{
     x: number;
     y: number;
@@ -111,6 +116,7 @@ export function WelcomeTour() {
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
       finishWelcomeTour();
+      if (back) router.dismissTo(back as Href);
       return true;
     });
     return () => sub.remove();
@@ -161,7 +167,9 @@ export function WelcomeTour() {
   const finish = () => {
     tap();
     finishWelcomeTour();
-    router.navigate('/home');
+    // A preview: back to the paywall she came from, as she left it.
+    if (back) router.dismissTo(back as Href);
+    else router.navigate('/home');
   };
 
   const next = () => {

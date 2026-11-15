@@ -24,6 +24,8 @@ export interface TabBarRect {
 }
 
 let active = false;
+/** A preview from the paywall's "Learn more": where to go back to, or null. */
+let previewReturn: string | null = null;
 let bar: TabBarRect | null = null;
 const listeners = new Set<() => void>();
 const emit = () => listeners.forEach((l) => l());
@@ -47,9 +49,28 @@ export function startWelcomeTour(): void {
   emit();
 }
 
-/** Finished or skipped: seen for good. */
+/** From the paywall's "Learn more", before she has bought: the same tour
+ *  over the real tabs (the hard-paywall gate steps aside while it plays), and
+ *  finishing it goes back to `back`. It doesn't count as seen. */
+export function startTourPreview(back: string): void {
+  previewReturn = back;
+  active = true;
+  emit();
+}
+
+/** The paywall to go back to while a preview plays; null for the real tour. */
+export function useTourPreview(): string | null {
+  return useSyncExternalStore(subscribe, () => (active ? previewReturn : null));
+}
+
+/** Finished or skipped: seen for good. A preview just ends. */
 export function finishWelcomeTour(): void {
   active = false;
+  if (previewReturn) {
+    previewReturn = null;
+    emit();
+    return;
+  }
   emit();
   void AsyncStorage.multiSet([
     [SEEN_KEY, '1'],

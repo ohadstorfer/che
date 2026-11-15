@@ -8,7 +8,7 @@ import { WelcomeTour } from '@/components/welcome-tour';
 import { useAuth } from '@/lib/auth';
 import { usePremium } from '@/lib/premium';
 import { colors } from '@/lib/theme';
-import { useWelcomeTourActive } from '@/lib/welcome-tour';
+import { useTourPreview, useWelcomeTourActive } from '@/lib/welcome-tour';
 
 export default function TabsLayout() {
   const { session, loading } = useAuth();
@@ -17,11 +17,13 @@ export default function TabsLayout() {
   // while they are on screen: a lesson opened on top finishes first.
   const tourActive = useWelcomeTourActive();
   const focused = useIsFocused();
+  // The paywall's "Learn more" plays the tour before she has bought.
+  const preview = useTourPreview();
   if (!loading && !session) return <Redirect href="/welcome" />;
   // The server can switch the free tier off (`hard_paywall` in app_config):
   // then a free account sees the paywall, with no way around it — leaving the
   // app and coming back included — except during her free week.
-  if (limited && hardPaywall && pass?.state !== 'active') return <Redirect href="/paywall?from=gate" />;
+  if (limited && hardPaywall && pass?.state !== 'active' && !preview) return <Redirect href="/paywall?from=gate" />;
 
   return (
     // Opaque wrapper: the tab screens are flat oat `bg`, but the zone behind

@@ -39,14 +39,14 @@ import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
 import { resetTo } from '@/lib/nav';
 import { track } from '@/lib/funnel';
 import { type CreatorCode, loadCreatorCode } from '@/lib/creator-code';
-import { formatDate, loadAnswers, nameTail, markWinbackShown, winbackShown } from '@/lib/onboarding';
+import { formatDate, loadAnswers, markWinbackShown, winbackShown } from '@/lib/onboarding';
 import { cancelFreeUnitReminder, scheduleFreeUnitReminder } from '@/lib/free-unit-reminder';
 import { type PaywallSource, usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, pastel, press, radius, type } from '@/lib/theme';
 import { scheduleTrialReminder } from '@/lib/trial-reminder';
 import { winbackOfferUntil } from '@/lib/winback-offer';
-import { queueWelcomeTour } from '@/lib/welcome-tour';
+import { queueWelcomeTour, startTourPreview } from '@/lib/welcome-tour';
 
 // ---------------------------------------------------------------------------
 // Paywall — flow 7: ask right after onboarding, with a free week on the
@@ -71,7 +71,30 @@ const webPress =
     : undefined;
 
 const perPeriod = (p: Plan) => (p.period === 'year' ? 'year' : p.period === 'week' ? 'week' : 'month');
-const trialWord = (days: number) => (days === 7 ? 'week' : `${days} days`);
+const trialWord = (days: number) => (days === 7 ? 'week' : days === 30 || days === 31 ? 'month' : `${days} days`);
+
+/** The headline: three lines, each kept on one line on every phone. */
+const HERO = ['Understand Argentines.', 'Sound like one.', 'In a few minutes a day.'];
+
+/** What the plan opens. The AI chat is never called "Hablar" here. */
+const PERKS = [
+  { t: 'A full Argentine Spanish course', tone: pastel.sage },
+  { t: 'AI speaking practice', tone: pastel.peach },
+  { t: 'Real Argentine slang', tone: pastel.sky },
+  { t: 'Culture lessons', tone: pastel.lav },
+];
+
+/** How much the yearly plan saves against twelve months, when both are on sale. */
+function saving(plans: Plan[]): number | null {
+  const year = plans.find((p) => p.period === 'year');
+  const month = plans.find((p) => p.period === 'month');
+  if (!year || !month || month.price <= 0) return null;
+  const pct = Math.round((1 - year.price / (month.price * 12)) * 100);
+  return pct >= 5 ? pct : null;
+}
+
+/** A failed restore, a moment ago: tapping again says the same, without asking the store. */
+const RESTORE_COOLDOWN = 15000;
 
 // Recorded in session replays like any other screen, so we can see how she
 // reads the plans and where she stops. The store's own payment sheet is drawn
@@ -95,7 +118,7 @@ export default function Paywall() {
   const [error, setError] = useState<string | null>(null);
   const [canClose, setCanClose] = useState(from !== 'onboarding');
   const [headline, setHeadline] = useState<{ title: string; sub: string } | null>(null);
-  const [purchasedTrial, setPurchasedTrial] = useState(false);
+  const [purchasedTrial, setPurchasedTrial] = useState(0);
   // A discount code: Android types it here; iOS types it in Apple's own sheet.
   const [codeOpen, setCodeOpen] = useState(false);
   const [codeError, setCodeError] = useState<string | null>(null);
@@ -111,10 +134,11 @@ export default function Paywall() {
     let alive = true;
     void loadAnswers().then((answers) => {
       if (!alive) return;
-      if (from === 'lesson') return setHeadline({ title: 'Keep going', sub: "You've finished the free units. Unlock the whole course." });
-      if (from === 'hablar') return setHeadline({ title: 'Keep talking with Pancho', sub: `You've used your free ${freeChats === 1 ? 'chat' : 'chats'}. Talk with him every day.` });
-      if (answers) return setHeadline({ title: `Pick your plan${nameTail(answers)}.`, sub: 'For less than a medialuna a day.' });
-      setHeadline({ title: 'Posta Premium', sub: 'Everything in Posta, every day.' });
+      if (from === 'lesson') return setHeadline({ title: 'Keep going.', sub: "You've finished the free units. Unlock the whole course." });
+      if (from === 'hablar') return setHeadline({ title: 'Keep talking with Pancho.', sub: `You've used your free ${freeChats === 1 ? 'chat' : 'chats'}. Talk with him every day.` });
+      const name = answers?.name?.trim();
+      if (name) return setHeadline({ title: `${name}, your plan is ready.`, sub: 'The slang, the vos and the real accent, from lesson one.' });
+      setHeadline({ title: 'Your plan is ready.', sub: 'The slang, the vos and the real accent, from lesson one.' });
     });
     return () => {
       alive = false;
@@ -223,7 +247,7 @@ export default function Paywall() {
     // Her first purchase: the welcome tour waits for the tabs (once, ever).
     void queueWelcomeTour();
     void cancelFreeUnitReminder();
-    setPurchasedTrial(!!p.trialDays);
+    setPurchasedTrial(p.trialDays ?? 0);
     if (p.trialDays) void scheduleTrialReminder(p.trialDays);
     setStage('done');
     void refresh();
@@ -235,7 +259,7 @@ export default function Paywall() {
     grant();
     void queueWelcomeTour();
     void cancelFreeUnitReminder();
-    setPurchasedTrial(false);
+    setPurchasedTrial(0);
     setCodeOpen(false);
     setStage('done');
     void refresh();
@@ -291,18 +315,41 @@ export default function Paywall() {
     else setCodeOpen(true);
   }, [linkCode]);
 
+  // Restore sits low and quiet: on a hard paywall people tapped it again and
+  // again as a way out. A miss says plainly what's next, and a tap right after
+  // a miss repeats that instead of asking the store again.
+  const restoreMissAt = useRef(0);
+  const restoreMiss = `No subscription on this ${Platform.OS === 'ios' ? 'Apple' : 'Google Play'} account. Posta needs a plan to go on: the trial is free and you can cancel anytime.`;
   const restore = async () => {
     if (busy) return;
+    if (Date.now() - restoreMissAt.current < RESTORE_COOLDOWN) {
+      track('restore', { from, found: false, repeat: true });
+      return setError(restoreMiss);
+    }
     setBusy('restore');
     setError(null);
     const ok = await billing.restore().catch(() => false);
     setBusy(null);
     track('restore', { from, found: ok });
-    if (!ok) return setError('No subscription found for this account.');
+    if (!ok) {
+      restoreMissAt.current = Date.now();
+      return setError(restoreMiss);
+    }
     success();
     grant();
     void cancelFreeUnitReminder();
     setStage('done');
+  };
+
+  // "Learn more": the welcome tour, played over the real tabs as a preview.
+  // Skip or Got it! brings her back to this paywall, as she left it.
+  const learnMore = () => {
+    tap();
+    track('paywall_learn_more', { from });
+    startTourPreview(`/paywall?from=${from}`);
+    // navigate, not push: if the tabs are already under the paywall, it goes
+    // back to them; finishing comes back here either way (dismissTo).
+    router.navigate('/home');
   };
 
   const unlockTester = async () => {
@@ -327,56 +374,53 @@ export default function Paywall() {
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
       <View style={styles.topBar}>
-        {locked ? (
+        {locked || !canClose ? (
           <View style={{ width: 36 }} />
-        ) : canClose ? (
+        ) : (
           <Animated.View entering={FadeIn.duration(260)}>
             <IconButton icon="close" label="Close" onPress={close} tint={colors.muted} />
           </Animated.View>
-        ) : (
-          <View style={{ width: 36 }} />
         )}
-        {billing.available ? (
-          <Pressable onPress={restore} hitSlop={10} accessibilityRole="button" disabled={!!busy}>
-            {busy === 'restore' ? <ActivityIndicator color={colors.muted} /> : <Text style={styles.restore}>Restore</Text>}
-          </Pressable>
-        ) : null}
       </View>
 
       <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
-        <Animated.View entering={rise(0, reduced)} style={styles.hero}>
-          <View style={styles.heroPod} />
-          <Image source={POSE.gol} style={styles.heroArt} contentFit="contain" accessible={false} />
+        {/* Three lines, each always on one line: it shrinks before it wraps. */}
+        <Animated.View entering={rise(0, reduced)} accessibilityRole="header" accessible accessibilityLabel={HERO.join(' ')}>
+          {HERO.map((line, i) => (
+            <Text key={line} style={[styles.hero, i === HERO.length - 1 ? styles.heroLast : null]} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>
+              {line}
+            </Text>
+          ))}
         </Animated.View>
-        {headline ? (
-          <>
-            <Animated.Text entering={rise(1, reduced)} style={styles.title} accessibilityRole="header">
-              {headline.title}
-            </Animated.Text>
-            <Animated.Text entering={rise(2, reduced)} style={styles.sub}>
-              {headline.sub}
-            </Animated.Text>
-          </>
-        ) : (
-          <View style={{ height: 70 }} />
-        )}
+        <Animated.View entering={rise(1, reduced)} style={styles.leadRow}>
+          <Text style={styles.sub}>
+            {headline ? (
+              <>
+                <Text style={styles.subLead}>{headline.title}</Text> {headline.sub}
+              </>
+            ) : null}
+          </Text>
+          <View style={styles.pod}>
+            <Image source={POSE.cafe} style={styles.podArt} contentFit="contain" accessible={false} />
+          </View>
+        </Animated.View>
 
         {creator ? (
-          <Animated.View entering={rise(3, reduced)} style={styles.creatorChip}>
+          <Animated.View entering={rise(2, reduced)} style={styles.creatorChip}>
             <Text style={styles.creatorChipText}>
               {creator.name}’s code: your first month free on the yearly plan
             </Text>
           </Animated.View>
         ) : null}
 
-        <Animated.View entering={rise(3, reduced)} style={styles.plans} accessibilityRole="radiogroup">
+        <Animated.View entering={rise(2, reduced)} style={styles.plans} accessibilityRole="radiogroup">
           {main ? (
             main.plans.map((p) => (
               <PlanCard
                 key={p.id}
                 plan={p}
                 selected={selected === p.id}
-                badge={p.period === 'year' && main.plans.length > 1}
+                save={p.period === 'year' ? saving(main.plans) : null}
                 onPress={() => {
                   tap();
                   setSelected(p.id);
@@ -398,23 +442,40 @@ export default function Paywall() {
         </Animated.View>
 
         {billing.available && main ? (
-          <Animated.View entering={rise(4, reduced)}>
-            <Pressable onPress={haveCode} hitSlop={8} style={styles.haveCode} accessibilityRole="button" disabled={!!busy}>
-              {busy === 'code' && Platform.OS === 'ios' ? (
-                <ActivityIndicator color={colors.muted} />
-              ) : (
-                <Text style={styles.haveCodeText}>Have a code?</Text>
-              )}
-            </Pressable>
-          </Animated.View>
+          <Pressable onPress={haveCode} hitSlop={8} style={styles.haveCode} accessibilityRole="button" disabled={!!busy}>
+            {busy === 'code' && Platform.OS === 'ios' ? (
+              <ActivityIndicator color={colors.muted} />
+            ) : (
+              <Text style={styles.haveCodeText}>Have a code?</Text>
+            )}
+          </Pressable>
         ) : null}
+
+        {plan?.trialDays ? <TrialSteps plan={plan} /> : null}
+
+        <Text style={styles.h2}>What you’ll unlock</Text>
+        <View style={styles.unlock}>
+          {PERKS.map((k) => (
+            <View key={k.t} style={styles.perk}>
+              <View style={[styles.check, { backgroundColor: k.tone }]}>
+                <Ionicons name="checkmark" size={16} color={colors.ink} />
+              </View>
+              <Text style={styles.perkText}>{k.t}</Text>
+            </View>
+          ))}
+          <View style={styles.rule} />
+          <Pressable onPress={learnMore} hitSlop={8} style={styles.learnMore} accessibilityRole="button" disabled={!!busy}>
+            <Text style={styles.learnMoreText}>Learn more about Posta</Text>
+            <Ionicons name="arrow-forward" size={17} color={colors.primary} />
+          </Pressable>
+        </View>
       </ScrollView>
 
       <View style={styles.footer}>
         {error ? <Text style={styles.error}>{error}</Text> : null}
         <View style={styles.actions}>
           <Button
-            title={creatorOffer ? 'Start my free month' : plan?.trialDays ? `Start my free ${trialWord(plan.trialDays)}` : 'Continue'}
+            title={creatorOffer ? 'Start my free month' : plan?.trialDays ? 'Start free trial' : 'Continue'}
             onPress={() => void (creatorOffer ? buyWithCreator() : buy('main', plan))}
             loading={busy === 'buy' || (creatorOffer && busy === 'code')}
             disabled={!plan || !!busy}
@@ -443,11 +504,11 @@ export default function Paywall() {
         {plan ? (
           <Text style={styles.terms}>
             {plan.trialDays
-              ? `Free for ${plan.trialDays} days, then ${plan.priceString}/${perPeriod(plan)}. Cancel anytime.`
+              ? `You won’t be charged until ${formatDate(new Date(Date.now() + plan.trialDays * 86400000))}. Then ${plan.priceString}/${perPeriod(plan)}, auto-renews. Cancel anytime before.`
               : `${plan.priceString}/${perPeriod(plan)}. Renews automatically. Cancel anytime.`}
           </Text>
         ) : null}
-        <Legal />
+        <Legal onRestore={billing.available ? restore : undefined} restoring={busy === 'restore'} />
       </View>
 
       {stage === 'offer' && catalog?.winback ? (
@@ -479,38 +540,85 @@ export default function Paywall() {
 
 // --- a plan, as a sticker -------------------------------------------------------
 
-function PlanCard({ plan, selected, badge, onPress }: { plan: Plan; selected: boolean; badge: boolean; onPress: () => void }) {
+function PlanCard({ plan, selected, save, onPress }: { plan: Plan; selected: boolean; save: number | null; onPress: () => void }) {
   const name = plan.period === 'year' ? 'Yearly' : plan.period === 'week' ? 'Weekly' : 'Monthly';
-  const per = `a ${perPeriod(plan)}${plan.trialDays ? ` · ${trialWord(plan.trialDays)} free` : ''}`;
-  // The badge is the card's sibling, drawn after it: as a child, iOS paints the card's outline across it.
+  const tag = [plan.trialDays ? `${plan.trialDays} days free` : null, save ? `Save ${save}%` : null].filter(Boolean).join(' · ');
+  const under = plan.period === 'year' && plan.perMonthString ? `Just ${plan.perMonthString} a month` : `Billed every ${perPeriod(plan)}`;
+  // The tag is the card's sibling, drawn after it: as a child, iOS paints the card's outline across it.
   return (
-    <View style={styles.planSlot}>
+    <View>
       <Pressable
         onPress={onPress}
         accessibilityRole="radio"
         accessibilityState={{ selected }}
+        accessibilityLabel={`${name}, ${plan.priceString} a ${perPeriod(plan)}${tag ? `, ${tag}` : ''}`}
         style={({ pressed }) => [
           styles.plan,
           selected ? styles.planSelected : styles.planFlat,
           { transform: [{ scale: pressed ? press.scale : 1 }] },
           webPress,
         ]}>
-        <Text style={styles.planName}>{name}</Text>
-        <Text style={styles.planPrice}>{plan.priceString}</Text>
-        <Text style={styles.planPer}>{per}</Text>
+        <View style={[styles.radio, selected ? styles.radioOn : null]} />
+        <View style={{ flex: 1, gap: 2 }}>
+          <Text style={styles.planName}>{name}</Text>
+          <Text style={styles.planUnder}>{under}</Text>
+        </View>
+        {/* The amount she's billed is the biggest number on the card (Apple 3.1.2). */}
+        <View style={{ alignItems: 'flex-end' }}>
+          <Text style={styles.planPrice}>{plan.priceString}</Text>
+          <Text style={styles.planUnder}>a {perPeriod(plan)}</Text>
+        </View>
       </Pressable>
-      {badge ? (
-        <View style={styles.badge} pointerEvents="none">
-          <Text style={styles.badgeText}>Best value</Text>
+      {tag ? (
+        <View style={[styles.tag, plan.period === 'year' ? styles.tagHot : null]} pointerEvents="none">
+          <Text style={[styles.tagText, plan.period === 'year' ? { color: colors.onPrimary } : null]}>{tag}</Text>
         </View>
       ) : null}
     </View>
   );
 }
 
+// --- the free trial, as a timeline: when it ends is never a surprise ------------
+
+function TrialSteps({ plan }: { plan: Plan }) {
+  const days = plan.trialDays ?? 0;
+  const steps: { when: string; what: string; icon: 'lock-open' | 'notifications' | 'star'; tone: string }[] = [
+    { when: 'Today', what: 'The whole course, AI speaking practice, slang and culture. All yours.', icon: 'lock-open', tone: pastel.butter },
+    // The reminder really goes out two days before (lib/trial-reminder).
+    { when: `In ${Math.max(1, days - 2)} days`, what: 'We’ll remind you that your free trial is ending.', icon: 'notifications', tone: pastel.sky },
+    {
+      when: `In ${days} days`,
+      what: `Your ${plan.period === 'year' ? 'yearly' : 'monthly'} plan starts. You’ll be charged ${plan.priceString}.`,
+      icon: 'star',
+      tone: colors.primary,
+    },
+  ];
+  return (
+    <View style={styles.trial}>
+      <Text style={styles.h2}>Try it for {days} days free</Text>
+      <View>
+        {steps.map((s, i) => (
+          <View key={s.when} style={styles.step}>
+            <View style={styles.stepRail}>
+              <View style={[styles.stepDot, { backgroundColor: s.tone }]}>
+                <Ionicons name={s.icon} size={20} color={s.icon === 'star' ? colors.onPrimary : colors.ink} />
+              </View>
+              {i < steps.length - 1 ? <View style={styles.stepLine} /> : null}
+            </View>
+            <View style={styles.stepText}>
+              <Text style={styles.stepWhen}>{s.when}</Text>
+              <Text style={styles.stepWhat}>{s.what}</Text>
+            </View>
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+}
+
 // --- the links the stores ask for wherever she can buy --------------------------
 
-function Legal() {
+function Legal({ onRestore, restoring }: { onRestore?: () => void; restoring?: boolean } = {}) {
   return (
     <View style={styles.legal}>
       <Text style={styles.legalLink} onPress={() => void WebBrowser.openBrowserAsync(TERMS_URL)}>
@@ -520,6 +628,18 @@ function Legal() {
       <Text style={styles.legalLink} onPress={() => void WebBrowser.openBrowserAsync(PRIVACY_URL)}>
         Privacy
       </Text>
+      {onRestore ? (
+        <>
+          <Text style={styles.legalDot}>·</Text>
+          {restoring ? (
+            <ActivityIndicator size="small" color={colors.muted} />
+          ) : (
+            <Text style={styles.legalLink} onPress={onRestore} accessibilityRole="button">
+              Already subscribed? Restore
+            </Text>
+          )}
+        </>
+      ) : null}
     </View>
   );
 }
@@ -645,7 +765,7 @@ function CodeSheet({
 
 // --- in ------------------------------------------------------------------------
 
-function Welcome({ trial, reduced, onGo }: { trial: boolean; reduced: boolean; onGo: () => void }) {
+function Welcome({ trial, reduced, onGo }: { trial: number; reduced: boolean; onGo: () => void }) {
   const go = useRef(onGo);
   go.current = onGo;
   useEffect(() => {
@@ -660,8 +780,8 @@ function Welcome({ trial, reduced, onGo }: { trial: boolean; reduced: boolean; o
       <Animated.Text entering={rise(3, reduced)} style={styles.welcomeTitle}>
         ¡Listo! You&apos;re in.
       </Animated.Text>
-      <Animated.Text entering={rise(4, reduced)} style={styles.sub}>
-        {trial ? "Your free week starts now. We'll remind you before it ends." : 'All of Posta is open. ¡Vamos!'}
+      <Animated.Text entering={rise(4, reduced)} style={[styles.sub, styles.welcomeSub]}>
+        {trial ? `Your free ${trialWord(trial)} starts now. We'll remind you before it ends.` : 'All of Posta is open. ¡Vamos!'}
       </Animated.Text>
       <Animated.View entering={rise(6, reduced)} style={{ alignSelf: 'stretch', marginTop: 24 }}>
         <Button title="Start learning" onPress={onGo} />
@@ -673,24 +793,45 @@ function Welcome({ trial, reduced, onGo }: { trial: boolean; reduced: boolean; o
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
   topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 12, paddingTop: 4, minHeight: 44 },
-  restore: { ...font.body[700], fontSize: 15, color: colors.muted, paddingHorizontal: 8 },
-  body: { paddingHorizontal: 24, paddingBottom: 24, maxWidth: 520, width: '100%', alignSelf: 'center' },
-  hero: { height: 176, alignItems: 'center', justifyContent: 'flex-end', marginTop: 4 },
-  heroPod: { position: 'absolute', bottom: 0, width: 150, height: 150, borderRadius: 75, backgroundColor: pastel.peach, boxShadow: clay.surface },
-  heroArt: { width: 138, height: 172, marginBottom: 0 },
-  title: { ...type.display, fontSize: 30, lineHeight: 34, color: colors.ink, textAlign: 'center', marginTop: 18 },
-  sub: { ...type.body, fontSize: 16, lineHeight: 22, color: colors.muted, textAlign: 'center', marginTop: 6 },
+  body: { paddingHorizontal: 20, paddingTop: 8, paddingBottom: 28, maxWidth: 520, width: '100%', alignSelf: 'center' },
+  hero: { ...font.display[900], fontSize: 31, lineHeight: 35, letterSpacing: -0.8, color: colors.ink },
+  heroLast: { color: colors.primary },
+  leadRow: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 14 },
+  sub: { ...type.body, flex: 1, fontSize: 16, lineHeight: 22, color: colors.muted },
+  subLead: { ...font.body[800], color: colors.ink },
+  pod: { width: 88, height: 88, borderRadius: 44, backgroundColor: pastel.peach, boxShadow: clay.surface, alignItems: 'center' },
+  podArt: { position: 'absolute', bottom: -4, width: 96, height: 96 },
+  h2: { ...font.display[900], fontSize: 22, lineHeight: 27, letterSpacing: -0.3, color: colors.ink, marginTop: 30, marginBottom: 14 },
 
-  plans: { flexDirection: 'row', gap: 14, marginTop: 40 },
-  planSlot: { flex: 1 },
-  plan: { flex: 1, alignItems: 'center', gap: 4, paddingTop: 30, paddingBottom: 22, paddingHorizontal: 10, borderRadius: radius.lg },
+  plans: { gap: 20, marginTop: 34 },
+  plan: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingTop: 22, paddingBottom: 16, paddingHorizontal: 18, borderRadius: radius.lg },
   planSelected: { backgroundColor: pastel.butter, boxShadow: clay.surface },
   planFlat: { backgroundColor: colors.card, boxShadow: clay.flat },
-  badge: { position: 'absolute', top: -14, alignSelf: 'center', backgroundColor: colors.primary, borderRadius: radius.pill, paddingHorizontal: 12, paddingVertical: 5, boxShadow: clay.chip },
-  badgeText: { ...font.body[800], fontSize: 12.5, lineHeight: 16, color: colors.onPrimary },
-  planName: { ...font.body[800], fontSize: 14, letterSpacing: 1, textTransform: 'uppercase', color: colors.muted },
-  planPrice: { ...font.display[900], fontSize: 30, lineHeight: 34, letterSpacing: -0.6, color: colors.ink },
-  planPer: { ...font.body[700], fontSize: 14, color: colors.muted, textAlign: 'center' },
+  radio: { width: 22, height: 22, borderRadius: 11, borderWidth: 2, borderColor: colors.ink, backgroundColor: colors.card },
+  radioOn: { backgroundColor: colors.ink, boxShadow: `inset 0 0 0 4px ${pastel.butter}` },
+  planName: { ...font.display[900], fontSize: 21, lineHeight: 25, color: colors.ink },
+  planUnder: { ...font.body[800], fontSize: 13, lineHeight: 17, color: colors.muted },
+  planPrice: { ...font.display[900], fontSize: 23, lineHeight: 27, letterSpacing: -0.4, color: colors.ink },
+  tag: { position: 'absolute', top: -13, left: 16, backgroundColor: colors.card, borderRadius: radius.pill, paddingHorizontal: 12, paddingVertical: 3, boxShadow: clay.chip },
+  tagHot: { backgroundColor: colors.primary },
+  tagText: { ...font.body[800], fontSize: 13, lineHeight: 17, color: colors.ink },
+
+  trial: { marginTop: 0 },
+  step: { flexDirection: 'row', gap: 16 },
+  stepRail: { width: 46, alignItems: 'center' },
+  stepDot: { width: 46, height: 46, borderRadius: 23, alignItems: 'center', justifyContent: 'center', boxShadow: clay.trough },
+  stepLine: { width: 3, flex: 1, minHeight: 14, borderRadius: 2, backgroundColor: colors.ink, marginVertical: 2 },
+  stepText: { flex: 1, gap: 3, paddingTop: 3, paddingBottom: 20 },
+  stepWhen: { ...font.body[800], fontSize: 16, lineHeight: 21, color: colors.ink },
+  stepWhat: { ...font.body[700], fontSize: 15, lineHeight: 21, color: colors.inkOnWash },
+
+  unlock: { gap: 14, paddingVertical: 20, paddingHorizontal: 18, borderRadius: 26, backgroundColor: colors.card, boxShadow: clay.surface, marginHorizontal: 2 },
+  perk: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  check: { width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center', boxShadow: clay.trough },
+  perkText: { ...font.body[800], flex: 1, fontSize: 16, lineHeight: 21, color: colors.ink },
+  rule: { height: 2, borderRadius: 1, backgroundColor: colors.border },
+  learnMore: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start', minHeight: 32 },
+  learnMoreText: { ...font.body[800], fontSize: 15, color: colors.primary },
   skeleton: { flex: 1, height: 120, borderRadius: radius.lg, backgroundColor: colors.trough },
   unavailable: { ...type.body, color: colors.muted, textAlign: 'center', paddingVertical: 12 },
 
@@ -705,7 +846,7 @@ const styles = StyleSheet.create({
   },
   terms: { ...font.body[600], fontSize: 12.5, lineHeight: 17, color: colors.muted, textAlign: 'center' },
   actions: { gap: 18 },
-  legal: { flexDirection: 'row', justifyContent: 'center', gap: 8 },
+  legal: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', columnGap: 8 },
   legalLink: { ...font.body[600], fontSize: 12.5, color: colors.muted, textDecorationLine: 'underline', paddingVertical: 4 },
   legalDot: { ...font.body[600], fontSize: 12.5, color: colors.faint, paddingVertical: 4 },
   error: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.dangerInk, textAlign: 'center' },
@@ -753,7 +894,7 @@ const styles = StyleSheet.create({
     backgroundColor: pastel.butter,
   },
   creatorChipText: { ...font.body[800], fontSize: 14, color: colors.ink, textAlign: 'center' },
-  haveCode: { alignSelf: 'center', marginTop: 22, paddingVertical: 6, paddingHorizontal: 8, minHeight: 32, justifyContent: 'center' },
+  haveCode: { alignSelf: 'center', marginTop: 16, paddingVertical: 6, paddingHorizontal: 8, minHeight: 32, justifyContent: 'center' },
   haveCodeText: { ...font.body[700], fontSize: 15, color: colors.muted, textDecorationLine: 'underline' },
   sheetSlot: { position: 'absolute', left: 0, right: 0, bottom: 0 },
   codeSheet: {
@@ -791,4 +932,5 @@ const styles = StyleSheet.create({
     boxShadow: clay.surface,
   },
   welcomeTitle: { ...type.display, color: colors.ink, textAlign: 'center' },
+  welcomeSub: { flex: 0, textAlign: 'center', marginTop: 6 },
 });
