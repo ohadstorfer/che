@@ -61,6 +61,9 @@ import {
   mainWhy,
   MINUTES,
   type Level,
+  fetchNotifyAt,
+  NOTIFY_AT_DEFAULT,
+  type NotifyAt,
   nameTail,
   reminderLine,
   resetWinbackShown,
@@ -92,7 +95,11 @@ import { clay, colors, font, pastel, radius, type } from '@/lib/theme';
 // ---------------------------------------------------------------------------
 
 type Step = 'name' | 'level' | 'why' | 'try' | 'goal' | 'building' | 'intro' | 'class' | 'streak' | 'notify' | 'account';
-const STEPS: Step[] = ['name', 'level', 'why', 'try', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'account'];
+/** The order, by where notifications are asked (app_config `onboarding_notify_at`). */
+const ORDER: Record<NotifyAt, Step[]> = {
+  after_class: ['name', 'level', 'why', 'try', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'account'],
+  after_build: ['name', 'level', 'why', 'try', 'goal', 'building', 'notify', 'intro', 'class', 'streak', 'account'],
+};
 /** The questions, on the progress bar. The builder, the first class and its
  *  streak are moments with their own screens; the account sits past the bar. */
 const BAR: Step[] = ['name', 'level', 'why', 'try', 'goal', 'notify'];
@@ -100,7 +107,10 @@ const BAR: Step[] = ['name', 'level', 'why', 'try', 'goal', 'notify'];
 const BARE: Step[] = ['intro', 'class', 'streak'];
 /** Where back goes, where it isn't simply the step before: a moment (the
  *  builder, the class, the streak) is never gone back into. */
-const BACK: Partial<Record<Step, Step>> = { intro: 'goal', class: 'intro', streak: 'intro', notify: 'intro' };
+const BACK: Record<NotifyAt, Partial<Record<Step, Step>>> = {
+  after_class: { intro: 'goal', class: 'intro', streak: 'intro', notify: 'intro' },
+  after_build: { notify: 'goal', class: 'intro', streak: 'intro' },
+};
 /** The steps the funnel table knows (its check constraint); the new ones wait for a migration. */
 const TRACKED = new Set<Step>(['name', 'level', 'why', 'try', 'goal', 'building', 'notify', 'account']);
 
@@ -139,6 +149,27 @@ export default function Onboarding() {
     if (TRACKED.has(step)) trackStep(step as OnboardingStep);
   }, [step]);
 
+  // Where notifications come: read once as onboarding opens, and frozen as she
+  // reaches the builder (the first step whose next one depends on it), so the
+  // order never changes under her. Not answered by then, or failed: the default.
+  // ?notify= overrides it, for trying both from a deep link.
+  const { notify: notifyParam } = useLocalSearchParams<{ notify?: string }>();
+  const fetched = useRef<NotifyAt | null>(null);
+  useEffect(() => {
+    void fetchNotifyAt()
+      .then((v) => (fetched.current = v))
+      .catch(() => {});
+  }, []);
+  const notifyAt: NotifyAt = a.notifyAt ?? NOTIFY_AT_DEFAULT;
+  useEffect(() => {
+    if (step !== 'building' || a.notifyAt) return;
+    const v: NotifyAt =
+      notifyParam === 'after_build' || notifyParam === 'after_class' ? notifyParam : (fetched.current ?? NOTIFY_AT_DEFAULT);
+    setA((cur) => ({ ...cur, notifyAt: v }));
+    posthog?.capture('onboarding_notify_at', { onboarding_notify_at: v, $set: { onboarding_notify_at: v } });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+  const STEPS = ORDER[notifyAt];
   const index = STEPS.indexOf(step);
   const go = (to: Step, d: 1 | -1 = 1) => {
     setDir(d);
@@ -147,16 +178,18 @@ export default function Onboarding() {
   const next = () => go(STEPS[Math.min(index + 1, STEPS.length - 1)]);
   const back = () => {
     if (index === 0) return router.canGoBack() ? router.back() : router.replace('/welcome');
-    go(BACK[step] ?? STEPS[index - 1], -1);
+    go(BACK[notifyAt][step] ?? STEPS[index - 1], -1);
   };
 
   // Paywall first, account after: she is a guest by now, or signed in (staff
   // replaying it). If no guest could be made — anonymous sign-ins switched
   // off, no connection — the account step comes first, as it used to.
-  const afterNotify = async () => {
+  const toPaywall = async () => {
     if (session || (await startGuest())) router.replace('/paywall?from=onboarding');
-    else next();
+    else go('account');
   };
+  /** After the class's streak (or its skip): notifications, or the paywall if they came already. */
+  const afterClass = () => (notifyAt === 'after_class' ? go('notify') : void toPaywall());
 
   // The class done: that's her first day of practice, so the streak starts
   // here (bump_streak, the same row every round writes). Her guest account was
@@ -192,12 +225,12 @@ export default function Onboarding() {
       <Animated.View key={step} entering={entering} style={{ flex: 1, backgroundColor: step === 'intro' ? pastel.lav : colors.bg }}>
         {step === 'intro' ? (
           <SafeAreaView style={{ flex: 1 }} edges={['top']}>
-            <FirstClassOpener onStart={() => go('class')} onSkip={() => go('notify')} />
+            <FirstClassOpener onStart={() => go('class')} onSkip={afterClass} />
           </SafeAreaView>
         ) : step === 'class' ? (
           <FirstClassLesson onFinish={classDone} onClose={back} />
         ) : (
-          <StreakCelebration streak={1} design={DAY_ONE} cta="Continue" onDone={() => go('notify')} />
+          <StreakCelebration streak={1} design={DAY_ONE} cta="Continue" onDone={afterClass} />
         )}
       </Animated.View>
     );
@@ -286,7 +319,8 @@ export default function Onboarding() {
                 void saveAnswers(answers);
                 keepAnswers(answers);
                 posthog?.capture('onboarding_reminder', { reminder, $set: { onboarding_reminder: reminder } });
-                void afterNotify();
+                if (notifyAt === 'after_class') void toPaywall();
+                else next();
               }}
             />
           ) : step === 'building' ? (
@@ -310,6 +344,7 @@ export default function Onboarding() {
                       onboarding_why: complete.why,
                       onboarding_whys: (complete.whys ?? []).join(','),
                       onboarding_minutes: complete.minutes,
+                      onboarding_notify_at: complete.notifyAt ?? NOTIFY_AT_DEFAULT,
                     };
                     posthog?.capture('onboarding_answers', { ...props, $set: props });
                   });

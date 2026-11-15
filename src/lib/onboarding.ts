@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { supabase } from './supabase';
 import { pastel } from './theme';
 
 /** The little pictures in the option coins (from the onboarding canvas). */
@@ -46,6 +47,21 @@ export interface Answers {
   struggle?: Struggle[];
   /** Whether she let him send a daily reminder. Subscribed once she has an account. */
   reminder?: boolean;
+  /** Where she was asked for notifications (app_config `onboarding_notify_at`), to compare the two. */
+  notifyAt?: NotifyAt;
+}
+
+/** Where onboarding asks for notifications: right after "Building your course",
+ *  or after the first class and its day-1 streak (the default). */
+export type NotifyAt = 'after_build' | 'after_class';
+export const NOTIFY_AT_DEFAULT: NotifyAt = 'after_class';
+
+/** `onboarding_notify_at` in app_config: flipped from the dashboard, no app
+ *  update. Read with the anon key (there is no account yet); anything but
+ *  "after_build" is the default. */
+export async function fetchNotifyAt(): Promise<NotifyAt> {
+  const { data } = await supabase.from('app_config').select('value').eq('key', 'onboarding_notify_at').maybeSingle();
+  return data?.value === 'after_build' ? 'after_build' : NOTIFY_AT_DEFAULT;
 }
 
 /** ", Sam" or nothing: for the lines that end on her name. */
