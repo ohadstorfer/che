@@ -6,9 +6,10 @@
 //
 // Store setup this expects, the same product ids in App Store Connect and in
 // Play Console (all three subscriptions, in one subscription group on Apple):
-//   · PRODUCTS.annual   yearly, with a 7-day free trial as its introductory
-//                       offer
-//   · PRODUCTS.monthly  monthly
+//   · PRODUCTS.annual   yearly, with a free month as its introductory offer
+//                       (Apple: 1 month; Play: offer free-trial-7d, 30 days)
+//   · PRODUCTS.monthly  monthly, with a free week (Apple: 1 week; Play: offer
+//                       free-trial-7d, 7 days) — since 2026-11-15
 //   · PRODUCTS.winback  yearly, whose first year is cheaper (an introductory
 //                       price paid up front) — the one-time offer shown when
 //                       the first paywall is closed
