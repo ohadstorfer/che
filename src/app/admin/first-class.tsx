@@ -55,7 +55,6 @@ const PARTS: Record<Part, { label: string; color: string }> = {
 
 type ScreenId =
   | 'order'
-  | 'vos'
   | 'medialuna'
   | 'build'
   | 'slang'
@@ -66,7 +65,6 @@ type ScreenId =
 
 const SCREENS: { id: ScreenId; part: Part }[] = [
   { id: 'order', part: 'class' },
-  { id: 'vos', part: 'class' },
   { id: 'medialuna', part: 'class' },
   { id: 'build', part: 'class' },
   { id: 'slang', part: 'slang' },
@@ -89,7 +87,6 @@ const ID = {
   medialunas: '362f3213-c426-54c2-9702-c788da937db5',
   cheTenésMedialunas: '2e1e0e3c-0847-520b-b36f-af53f7070321',
   cafeConMedialuna: '96de3eee-afab-511a-9d87-c0f68c2f35bb',
-  querésUnCafé: '299d346b-881a-5ef3-a8e1-b3ca97fb52cf',
 };
 
 /** The opener of the Hablar café scene (hablar.json, cafe · A1), in Tomás's voice. */
@@ -132,7 +129,6 @@ function useContent() {
       lexicon: byId,
       sentences,
       caféConLeche: form(ID.caféConLeche),
-      querés: sentence(ID.querésUnCafé),
       medialuna: item({
         form: form(ID.medialuna),
         mode: 'sentence_intro',
@@ -239,8 +235,6 @@ function ScreenView({
   switch (id) {
     case 'order':
       return <OrderStep word={content.caféConLeche} onDone={onNext} />;
-    case 'vos':
-      return <VosStep audio={content.querés.audio_path} onDone={onNext} />;
     case 'medialuna':
       return exercise(content.medialuna);
     case 'build':
@@ -365,67 +359,6 @@ function OrderStep({ word, onDone }: { word: Form; onDone: () => void }) {
       <AudioPad path={word.audio_path!} />
       <Choices options={options} correctId="right" chosen={chosen} revealed={verdict !== null} onPick={setChosen} />
     </ExerciseFrame>
-  );
-}
-
-// --- 2. the vos moment ------------------------------------------------------------
-
-const BOOK = ['¿Quieres', 'un', 'café?'];
-const LOCAL = ['¿Querés', 'un', 'café?'];
-
-function VosStep({ audio, onDone }: { audio: string | null; onDone: () => void }) {
-  const reduced = useReducedMotion();
-  const [fixed, setFixed] = useState(false);
-  const bottom = useSafeAreaInsets().bottom;
-  const reveal = () => {
-    setFixed(true);
-    success();
-    if (audio) playAudio(audio);
-  };
-  return (
-    <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
-        <View style={styles.saysRow}>
-          <PanchoAvatar size={64} />
-          <View style={styles.saysBubble}>
-            <Text style={styles.saysText}>
-              {fixed ? '¡Eso! That’s vos. Everyone in Argentina talks like this.' : 'Your textbook says this. Nobody here does.'}
-            </Text>
-          </View>
-        </View>
-        <Animated.View entering={reduced ? undefined : FadeInDown.duration(260).easing(EASE_OUT)} style={styles.tryCard}>
-          <View style={styles.tryWords}>
-            {BOOK.map((word, k) => {
-              const changes = word !== LOCAL[k];
-              return (
-                <View key={k} style={[styles.tryWord, fixed && changes && styles.tryWordFixed]}>
-                  {fixed && changes ? (
-                    <Animated.Text entering={reduced ? undefined : ZoomIn.duration(260).easing(EASE_OUT)} style={styles.tryText}>
-                      {LOCAL[k]}
-                    </Animated.Text>
-                  ) : (
-                    <Text style={[styles.tryText, !fixed && changes && styles.tryStrike]}>{word}</Text>
-                  )}
-                </View>
-              );
-            })}
-            {fixed && audio ? <PlayButton path={audio} small autoPlay={false} /> : null}
-          </View>
-          <Text style={styles.tryEn}>Do you want a coffee?</Text>
-          <Pressable
-            onPress={fixed ? onDone : reveal}
-            accessibilityRole="button"
-            style={({ pressed }) => [styles.tryStrip, { transform: [{ scale: pressed ? 0.98 : 1 }] }]}>
-            <Text style={styles.tryStripText}>{fixed ? 'Continue' : 'Make it Argentine'}</Text>
-          </Pressable>
-        </Animated.View>
-        {fixed ? (
-          <Animated.Text entering={FadeIn.duration(200).delay(200)} style={[styles.hint, { paddingBottom: bottom }]}>
-            quieres → querés. Same word, the Buenos Aires way.
-          </Animated.Text>
-        ) : null}
-      </ScrollView>
-    </View>
   );
 }
 
@@ -704,42 +637,7 @@ const styles = StyleSheet.create({
   },
   chipText: { ...font.body[800], fontSize: 12, letterSpacing: 1.4, color: colors.ink },
 
-  body: { padding: 24, gap: 24, maxWidth: 560, width: '100%', alignSelf: 'center' },
-  saysRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  saysBubble: { flex: 1, backgroundColor: colors.card, borderRadius: radius.md, padding: 14, boxShadow: clay.surface },
-  saysText: { ...font.body[700], fontSize: 17, lineHeight: 23, color: colors.ink },
-  tryCard: { borderRadius: radius.lg, backgroundColor: colors.card, boxShadow: clay.surface },
-  tryWords: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    columnGap: 9,
-    rowGap: 14,
-    paddingHorizontal: 18,
-    paddingTop: 26,
-  },
-  tryWord: { minHeight: 46, justifyContent: 'center', paddingHorizontal: 3 },
-  tryWordFixed: { paddingHorizontal: 11, borderRadius: 13, backgroundColor: pastel.sage, boxShadow: clay.chip },
-  tryText: { ...font.display[900], fontSize: 38, lineHeight: 50, color: colors.ink, letterSpacing: -0.6 },
-  tryStrike: { textDecorationLine: 'underline', textDecorationStyle: 'dashed', textDecorationColor: colors.primary },
-  tryEn: { ...font.body[700], fontSize: 16, lineHeight: 22, color: colors.muted, textAlign: 'center', paddingTop: 14, paddingBottom: 18 },
-  tryStrip: {
-    minHeight: 58,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.primary,
-    borderBottomLeftRadius: radius.lg,
-    borderBottomRightRadius: radius.lg,
-  },
-  tryStripText: { ...font.display[800], fontSize: 18, color: colors.onPrimary },
-  hint: { ...font.body[600], fontSize: 15, color: colors.muted, textAlign: 'center' },
-
   lineRow: { flexDirection: 'row', alignItems: 'center', gap: 10, flexWrap: 'wrap' },
-  lineEs: { ...font.display[800], fontSize: 26, color: colors.ink },
-  lineEn: { ...font.body[600], fontSize: 15, color: colors.muted, marginTop: 4 },
-  mine: { backgroundColor: pastel.sky, borderRadius: radius.md, paddingHorizontal: 16, paddingVertical: 12, boxShadow: clay.chip },
-  mineText: { ...font.body[800], fontSize: 17, color: colors.ink },
   reply: {
     backgroundColor: colors.card,
     borderRadius: radius.md,
