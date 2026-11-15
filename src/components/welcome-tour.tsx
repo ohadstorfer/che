@@ -81,8 +81,8 @@ const STEPS: TabStep[] = [
   {
     tab: 3,
     route: '/hablar',
-    title: 'Call me anytime.',
-    body: 'Talk out loud, I answer in Argentine Spanish and fix what sounds off. One chat a day is included.',
+    title: 'Practice speaking Spanish',
+    body: 'Order a café, take a taxi, chat about your day.\nReal conversations with me, your AI Argentino',
   },
 ];
 
