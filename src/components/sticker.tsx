@@ -130,7 +130,7 @@ const RING = Array.from({ length: 16 }, (_, i) => (i / 16) * Math.PI * 2);
  */
 export function StickerFigure({
   source,
-  outline = 3.5,
+  outline = 2,
   style,
   accessibilityLabel,
 }: {

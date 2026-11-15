@@ -1,6 +1,6 @@
-import { router } from "expo-router";
-import { useEffect, useRef, useState } from "react";
-import { BackHandler, Pressable, StyleSheet, Text, View } from "react-native";
+import { router } from 'expo-router';
+import { useEffect, useRef, useState } from 'react';
+import { BackHandler, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
   FadeIn,
@@ -10,22 +10,17 @@ import Animated, {
   useSharedValue,
   withRepeat,
   withTiming,
-} from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+} from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { POSE, pop } from "@/components/mascot";
-import { StickerFigure } from "@/components/sticker";
-import { Button } from "@/components/ui";
-import { useAuth } from "@/lib/auth";
-import {
-  currentIndex,
-  lessonHref,
-  loadCourse,
-  loadProgress,
-} from "@/lib/course";
-import { tap } from "@/lib/haptics";
-import { clay, colors, font, pastel, press, radius } from "@/lib/theme";
-import { finishWelcomeTour, useTabBarRect } from "@/lib/welcome-tour";
+import { POSE, pop } from '@/components/mascot';
+import { StickerFigure } from '@/components/sticker';
+import { Button } from '@/components/ui';
+import { useAuth } from '@/lib/auth';
+import { currentIndex, lessonHref, loadCourse, loadProgress } from '@/lib/course';
+import { tap } from '@/lib/haptics';
+import { clay, colors, font, pastel, press, radius } from '@/lib/theme';
+import { finishWelcomeTour, useTabBarRect } from '@/lib/welcome-tour';
 
 // ---------------------------------------------------------------------------
 // WelcomeTour
@@ -39,12 +34,12 @@ import { finishWelcomeTour, useTabBarRect } from "@/lib/welcome-tour";
 // purchase" (w01–w05).
 // ---------------------------------------------------------------------------
 
-const GUITAR = require("@/assets/images/capybara/capybara-musica-figure.webp");
+const GUITAR = require('@/assets/images/capybara/capybara-musica-figure.webp');
 
 /** The dim: the warm ink at two-thirds, as the design has it. */
-const DIM = "rgba(42, 30, 22, 0.66)";
+const DIM = 'rgba(42, 30, 22, 0.66)';
 /** A progress dot not yet reached: ink at a fifth, so it reads on cream. */
-const DOT_OFF = "rgba(58, 42, 32, 0.18)";
+const DOT_OFF = 'rgba(58, 42, 32, 0.18)';
 
 /** Moving on screen: ease-in-out, the tab bar's own pill curve. */
 const MOVE = { duration: 240, easing: Easing.bezier(0.77, 0, 0.175, 1) };
@@ -52,7 +47,7 @@ const MOVE = { duration: 240, easing: Easing.bezier(0.77, 0, 0.175, 1) };
 type Chip = { label: string; tone: string };
 type TabStep = {
   tab: number;
-  route: "/home" | "/words" | "/culture" | "/hablar";
+  route: '/home' | '/words' | '/culture' | '/hablar';
   title: string;
   body: string;
   chips?: Chip[];
@@ -62,34 +57,34 @@ type TabStep = {
 const STEPS: TabStep[] = [
   {
     tab: 0,
-    route: "/home",
-    title: "This is your road.",
-    body: "Every unit mixes four kinds of lessons, about 5 minutes each:",
+    route: '/home',
+    title: 'This is your road.',
+    body: 'Every unit mixes four kinds of lessons, about 5 minutes each:',
     chips: [
-      { label: "Classes", tone: pastel.sky },
-      { label: "Culture", tone: pastel.sage },
-      { label: "Slang", tone: pastel.peach },
-      { label: "Speaking with me", tone: pastel.lav },
+      { label: 'Classes', tone: pastel.sky },
+      { label: 'Culture', tone: pastel.sage },
+      { label: 'Slang', tone: pastel.peach },
+      { label: 'Speaking with me', tone: pastel.lav },
     ],
-    after: "Next up: lesson 2, the café, part two.",
+    after: 'Next up: lesson 2, the café, part two.',
   },
   {
     tab: 1,
-    route: "/words",
-    title: "Your words and slang.",
-    body: "Every word you learn, with its photo. Plus slang packs: what Argentines really say.",
+    route: '/words',
+    title: 'Your words and slang.',
+    body: 'Every word you learn, with its photo. Plus slang packs: what Argentines really say.',
   },
   {
     tab: 2,
-    route: "/culture",
-    title: "How life works here.",
-    body: "Mate, asado, tipping, saying hi with a kiss. Guess first, then learn why.",
+    route: '/culture',
+    title: 'How life works here.',
+    body: 'Mate, asado, tipping, saying hi with a kiss. Guess first, then learn why.',
   },
   {
     tab: 3,
-    route: "/hablar",
-    title: "Call me anytime.",
-    body: "Talk out loud, I answer in Argentine Spanish and fix what sounds off. One chat a day is included.",
+    route: '/hablar',
+    title: 'Call me anytime.',
+    body: 'Talk out loud, I answer in Argentine Spanish and fix what sounds off. One chat a day is included.',
   },
 ];
 
@@ -111,12 +106,12 @@ export function WelcomeTour() {
 
   // The tour starts on the Course tab, wherever she was.
   useEffect(() => {
-    router.navigate(tabStep?.route ?? "/home");
+    router.navigate(tabStep?.route ?? '/home');
   }, [tabStep?.route]);
 
   // Android back is Skip: the tour never traps her.
   useEffect(() => {
-    const sub = BackHandler.addEventListener("hardwareBackPress", () => {
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
       finishWelcomeTour();
       return true;
     });
@@ -156,18 +151,11 @@ export function WelcomeTour() {
   const breath = useSharedValue(0);
   useEffect(() => {
     if (reduced) return;
-    breath.value = withRepeat(
-      withTiming(1, { duration: 900, easing: Easing.inOut(Easing.ease) }),
-      -1,
-      true,
-    );
+    breath.value = withRepeat(withTiming(1, { duration: 900, easing: Easing.inOut(Easing.ease) }), -1, true);
   }, [reduced]);
   const glow = useAnimatedStyle(() => ({
     opacity: reduced ? 0.95 : 0.95 * (1 - breath.value),
-    transform: [
-      { translateX: holeX.value },
-      { scale: reduced ? 1 : 1 + 0.12 * breath.value },
-    ],
+    transform: [{ translateX: holeX.value }, { scale: reduced ? 1 : 1 + 0.12 * breath.value }],
   }));
 
   const finish = () => {
@@ -179,16 +167,11 @@ export function WelcomeTour() {
     tap();
     finishWelcomeTour();
     const userId = session?.user.id;
-    router.navigate("/home");
+    router.navigate('/home');
     if (!userId) return;
-    const [course, done] = await Promise.all([
-      loadCourse(),
-      loadProgress(userId),
-    ]).catch(() => [null, null] as const);
-    const next =
-      course && done ? course.path[currentIndex(course.path, done)] : null;
-    if (next)
-      router.push(lessonHref(next) as Parameters<typeof router.push>[0]);
+    const [course, done] = await Promise.all([loadCourse(), loadProgress(userId)]).catch(() => [null, null] as const);
+    const next = course && done ? course.path[currentIndex(course.path, done)] : null;
+    if (next) router.push(lessonHref(next) as Parameters<typeof router.push>[0]);
   };
 
   const next = () => {
@@ -245,10 +228,7 @@ export function WelcomeTour() {
           />
         </>
       ) : (
-        <View
-          pointerEvents="none"
-          style={[StyleSheet.absoluteFill, { backgroundColor: DIM }]}
-        />
+        <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: DIM }]} />
       )}
 
       {step === 0 ? (
@@ -259,31 +239,18 @@ export function WelcomeTour() {
           style={[styles.float, { bottom: insets.bottom + 24 }]}
         >
           <View style={styles.hello}>
-            <Text style={styles.helloTitle}>
-              {name ? `Welcome, ${name}!` : "Welcome!"}
-            </Text>
-            <Text style={styles.helloBody}>
-              You’re in. Want a 20-second look around?
-            </Text>
+            <Text style={styles.helloTitle}>{name ? `Welcome, ${name}!` : 'Welcome!'}</Text>
+            <Text style={styles.helloBody}>You’re in. Want a 20-second look around?</Text>
             <View style={{ marginTop: 18 }}>
               <Button title="Show me around" onPress={next} />
             </View>
-            <Pressable
-              onPress={finish}
-              hitSlop={8}
-              style={styles.ownWay}
-              accessibilityRole="button"
-            >
+            <Pressable onPress={finish} hitSlop={8} style={styles.ownWay} accessibilityRole="button">
               <Text style={styles.link}>I’ll explore on my own</Text>
             </Pressable>
           </View>
           {/* After the card, not inside it: the card's outline is a shadow, and
               it would be drawn across his feet. */}
-          <StickerFigure
-            source={POSE.wave}
-            style={styles.helloArt}
-            accessibilityLabel="Pancho the carpincho, waving"
-          />
+          <StickerFigure source={POSE.wave} style={styles.helloArt} accessibilityLabel="Pancho the carpincho, waving" />
         </Animated.View>
       ) : tabStep && hole && origin ? (
         <Animated.View
@@ -297,10 +264,7 @@ export function WelcomeTour() {
               style={[
                 styles.tail,
                 {
-                  left: Math.min(
-                    Math.max(hole.x + hole.w / 2 - 16 - 9, 18),
-                    (bar?.width ?? 360) - 36,
-                  ),
+                  left: Math.min(Math.max(hole.x + hole.w / 2 - 16 - 9, 18), (bar?.width ?? 360) - 36),
                 },
               ]}
             />
@@ -309,49 +273,27 @@ export function WelcomeTour() {
             {tabStep.chips ? (
               <View style={styles.chips}>
                 {tabStep.chips.map((c) => (
-                  <View
-                    key={c.label}
-                    style={[styles.chip, { backgroundColor: c.tone }]}
-                  >
+                  <View key={c.label} style={[styles.chip, { backgroundColor: c.tone }]}>
                     <Text style={styles.chipText}>{c.label}</Text>
                   </View>
                 ))}
               </View>
             ) : null}
-            {tabStep.after ? (
-              <Text style={styles.after}>{tabStep.after}</Text>
-            ) : null}
+            {tabStep.after ? <Text style={styles.after}>{tabStep.after}</Text> : null}
             <View style={styles.footer}>
-              <View
-                style={styles.dots}
-                accessibilityLabel={`Step ${step} of ${STEPS.length}`}
-              >
+              <View style={styles.dots} accessibilityLabel={`Step ${step} of ${STEPS.length}`}>
                 {STEPS.map((s, i) => (
-                  <View
-                    key={s.route}
-                    style={[styles.dot, i === step - 1 ? styles.dotOn : null]}
-                  />
+                  <View key={s.route} style={[styles.dot, i === step - 1 ? styles.dotOn : null]} />
                 ))}
               </View>
               <View style={styles.actions}>
-                <Pressable
-                  onPress={finish}
-                  hitSlop={10}
-                  accessibilityRole="button"
-                >
+                <Pressable onPress={finish} hitSlop={10} accessibilityRole="button">
                   <Text style={styles.link}>Skip</Text>
                 </Pressable>
                 <Pressable onPress={next} accessibilityRole="button">
                   {({ pressed }) => (
-                    <View
-                      style={[
-                        styles.next,
-                        { transform: [{ scale: pressed ? press.scale : 1 }] },
-                      ]}
-                    >
-                      <Text style={styles.nextText}>
-                        {step === STEPS.length ? "Start lesson 2" : "Next"}
-                      </Text>
+                    <View style={[styles.next, { transform: [{ scale: pressed ? press.scale : 1 }] }]}>
+                      <Text style={styles.nextText}>{step === STEPS.length ? 'Got it!' : 'Next'}</Text>
                     </View>
                   )}
                 </Pressable>
@@ -367,18 +309,18 @@ export function WelcomeTour() {
 
 const styles = StyleSheet.create({
   hole: {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     boxShadow: `0 0 0 3000px ${DIM}`,
   },
   glow: {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     borderWidth: 3,
     borderColor: pastel.butter,
   },
   float: {
-    position: "absolute",
+    position: 'absolute',
     left: 16,
     right: 16,
   },
@@ -391,12 +333,12 @@ const styles = StyleSheet.create({
     boxShadow: clay.surface,
   },
   helloArt: {
-    position: "absolute",
+    position: 'absolute',
     // Standing on the card's top edge, not sunk into it: only the feet overlap.
-    top: -162,
-    alignSelf: "center",
-    width: 170,
-    height: 170,
+    top: -200,
+    alignSelf: 'center',
+    width: 210,
+    height: 210,
   },
   helloTitle: {
     ...font.display[900],
@@ -404,7 +346,7 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     letterSpacing: -0.5,
     color: colors.ink,
-    textAlign: "center",
+    textAlign: 'center',
   },
   helloBody: {
     ...font.body[600],
@@ -412,10 +354,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 21,
     color: colors.inkOnWash,
-    textAlign: "center",
+    textAlign: 'center',
   },
   ownWay: {
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: 10,
     padding: 6,
   },
@@ -433,21 +375,21 @@ const styles = StyleSheet.create({
     boxShadow: clay.surface,
   },
   tail: {
-    position: "absolute",
+    position: 'absolute',
     bottom: -9,
     width: 18,
     height: 18,
     backgroundColor: colors.card,
-    transform: [{ rotate: "45deg" }],
+    transform: [{ rotate: '45deg' }],
     boxShadow: `2.5px 2.5px 0 0 ${colors.ink}`,
   },
   guitar: {
-    position: "absolute",
+    position: 'absolute',
     right: -4,
     // Sitting on the bubble's edge, so the outline never cuts through him.
-    top: -70,
-    width: 74,
-    height: 76,
+    top: -96,
+    width: 102,
+    height: 104,
   },
   title: {
     ...font.display[900],
@@ -455,7 +397,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: -0.3,
     color: colors.ink,
-    paddingRight: 64,
+    paddingRight: 92,
   },
   body: {
     ...font.body[600],
@@ -465,8 +407,8 @@ const styles = StyleSheet.create({
     color: colors.inkOnWash,
   },
   chips: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 8,
     marginTop: 10,
   },
@@ -489,13 +431,13 @@ const styles = StyleSheet.create({
     color: colors.inkOnWash,
   },
   footer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginTop: 14,
   },
   dots: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 6,
   },
   dot: {
@@ -509,15 +451,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   actions: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 14,
   },
   next: {
     minHeight: 44,
     paddingHorizontal: 20,
     borderRadius: radius.sm,
-    justifyContent: "center",
+    justifyContent: 'center',
     backgroundColor: colors.primary,
     boxShadow: clay.chip,
   },
