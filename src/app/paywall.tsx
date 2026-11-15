@@ -358,15 +358,16 @@ export default function Paywall() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
-      <View style={styles.topBar}>
-        {locked || !canClose ? (
-          <View style={{ width: 36 }} />
-        ) : (
+      {/* The bar only takes room when it has the close button: locked, the
+          headline starts right under the safe area, so the whole trial
+          timeline fits above the button on a regular-size phone. */}
+      {locked || !canClose ? null : (
+        <View style={styles.topBar}>
           <Animated.View entering={FadeIn.duration(260)}>
             <IconButton icon="close" label="Close" onPress={close} tint={colors.muted} />
           </Animated.View>
-        )}
-      </View>
+        </View>
+      )}
 
       <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
         {/* Three lines, each always on one line: it shrinks before it wraps. */}
@@ -767,14 +768,14 @@ function Welcome({ trial, reduced, onGo }: { trial: number; reduced: boolean; on
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
   topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 12, paddingTop: 4, minHeight: 44 },
-  body: { paddingHorizontal: 20, paddingTop: 8, paddingBottom: 28, maxWidth: 520, width: '100%', alignSelf: 'center' },
-  hero: { ...font.display[900], fontSize: 31, lineHeight: 35, letterSpacing: -0.8, color: colors.ink },
+  body: { paddingHorizontal: 20, paddingTop: 10, paddingBottom: 28, maxWidth: 520, width: '100%', alignSelf: 'center' },
+  hero: { ...font.display[900], fontSize: 31, lineHeight: 33, letterSpacing: -0.8, color: colors.ink },
   heroLast: { color: colors.primary },
   sub: { ...type.body, flex: 1, fontSize: 16, lineHeight: 22, color: colors.muted },
   h2: { ...font.display[900], fontSize: 22, lineHeight: 27, letterSpacing: -0.3, color: colors.ink, marginTop: 30, marginBottom: 14 },
 
-  plans: { gap: 20, marginTop: 34 },
-  plan: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingTop: 22, paddingBottom: 16, paddingHorizontal: 18, borderRadius: radius.lg },
+  plans: { gap: 16, marginTop: 16 },
+  plan: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingTop: 18, paddingBottom: 14, paddingHorizontal: 18, borderRadius: radius.lg },
   planSelected: { backgroundColor: pastel.butter, boxShadow: clay.surface },
   planFlat: { backgroundColor: colors.card, boxShadow: clay.flat },
   radio: { width: 22, height: 22, borderRadius: 11, borderWidth: 2, borderColor: colors.ink, backgroundColor: colors.card },
@@ -791,7 +792,7 @@ const styles = StyleSheet.create({
   stepRail: { width: 46, alignItems: 'center' },
   stepDot: { width: 46, height: 46, borderRadius: 23, alignItems: 'center', justifyContent: 'center', boxShadow: clay.trough },
   stepLine: { width: 3, flex: 1, minHeight: 14, borderRadius: 2, backgroundColor: colors.ink, marginVertical: 2 },
-  stepText: { flex: 1, gap: 3, paddingTop: 3, paddingBottom: 20 },
+  stepText: { flex: 1, gap: 2, paddingTop: 2, paddingBottom: 14 },
   stepWhen: { ...font.body[800], fontSize: 16, lineHeight: 21, color: colors.ink },
   stepWhat: { ...font.body[700], fontSize: 15, lineHeight: 21, color: colors.inkOnWash },
 
