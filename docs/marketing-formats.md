@@ -6,7 +6,7 @@ The formats we make for Instagram, TikTok and YouTube Shorts. Each one ends on t
 
 | Format | What it is | How it's made |
 |---|---|---|
-| **Can you understand <celeb>?** | A real clip of a famous Argentinian (Messi, Milei, Susana…): plain, then slow with each word lit and explained, then once more at full speed. | Skill `posta-celeb-video`. Files: `posta-videos/celeb-*`. |
+| **Can you understand <celeb>?** | A real clip of a famous Argentinian (Messi, Milei, Susana…): plain, then slow with each word lit and explained, then once more at full speed. | Skill `posta-celeb-video`. Files: `posta-videos/celeb/`. |
 | **Day N of Understanding Argentinians** | Same as above, with ordinary people and memes (a kid, an inspector, Julio, a dad), plus the AI host Martina. | Skill `posta-celeb-video` + `social/host-clip.mjs`. |
 | **Versus (Pancho)** | Two Pancho capybaras side by side, each saying his word for the same thing (TÚ tienes vs VOS tenés). | Skill `posta-versus-video`. |
 | **Pancho explains** | Pancho explains one topic: texting, puteadas, voseo, asado, fútbol, mate, money, che… | `posta-videos/01-texting.mp4` … `10-che.mp4`. |

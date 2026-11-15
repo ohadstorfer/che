@@ -261,6 +261,74 @@ export const guides = [
 <h2>Common questions</h2>
 `,
   },
+  {
+    slug: 'best-app-to-learn-argentine-spanish',
+    title: 'Best App to Learn Argentine Spanish (2026): Vos, Slang & Speaking',
+    h1: 'The best app to learn Argentine Spanish',
+    description: 'What an app for Argentine Spanish has to teach (vos, lunfardo, the "sh" sound, real speaking practice), why most Spanish apps don\'t, and what Posta does.',
+    crumb: 'Best app',
+    app: true,
+    faq: [
+      ['What is the best app to learn Argentine Spanish?', 'Look for an app made only for Argentine Spanish: one that teaches vos from the first lesson, uses Argentine words inside real sentences, plays every sentence in an Argentine accent and makes you speak out loud. Posta is built for exactly that, from complete beginner to fluent. It is on Google Play now and coming to the App Store.'],
+      ['Is there an app for Argentinian Spanish slang?', 'Yes. Posta has {{WORDS}} Argentine slang and everyday words, lunfardo included, each one inside an example sentence a real person would say, grouped by topic: people, money and work, food and drink, getting around, going out.'],
+      ['Is there an app that teaches vos instead of tú?', 'Yes. Posta teaches vos from day one ("vos sos", "vos tenés", "vos querés") and never teaches tú or vosotros as the normal way to talk, because nobody in Argentina uses them.'],
+      ['Do general Spanish apps teach Argentine Spanish?', 'Mostly no. Most Spanish courses teach tú and the vocabulary of Spain or Mexico, and mention vos in a note at most. You can still learn a lot of grammar from them, but you will have to relearn the verbs and the everyday words when you get to Argentina.'],
+      ['Can I learn Argentine Spanish if I am a complete beginner?', 'Yes. Starting with Argentine Spanish is easier than switching later. The vos forms of the present tense are more regular than tú, so beginners have less to memorize.'],
+      ['Is Posta free?', 'Posta is free to download and you can try it before paying. The full course, all the words and the speaking chats are part of Posta Premium, a subscription.'],
+    ],
+    body: `
+<p class="lede">If you want the Spanish people really speak in Buenos Aires, most Spanish apps are the wrong tool: they teach tú, vosotros and the words of Madrid or Mexico City. This page explains what an Argentine Spanish app has to teach, and how Posta does it.</p>
+<p class="note">We make Posta, so we are not neutral. That's why this page gives you the checklist first: use it to judge any app, including ours.</p>
+
+<h2>What is the best app to learn Argentine Spanish?</h2>
+<div class="answer"><p>The best app for Argentine Spanish is one built only for it: <strong>vos from the first lesson</strong>, <strong>Argentine words inside real sentences</strong>, every sentence played in an <strong>Argentine accent</strong>, and <strong>speaking out loud</strong> with corrections. <strong>Posta</strong> is an app made for exactly that, for English speakers, from complete beginner to fluent.</p></div>
+
+<h2>What should an Argentine Spanish app teach?</h2>
+<div class="answer"><p>Six things. If an app misses the first two, it is teaching general Spanish, not Argentine Spanish.</p></div>
+<ol>
+  <li><strong>Vos, with its own verb forms.</strong> "Vos sos", "vos tenés", "vos querés", and commands like "vení" and "decime". Everyone in Argentina uses vos, with friends and with strangers. See <a href="/voseo">how vos works</a>.</li>
+  <li><strong>Argentine everyday words.</strong> <a href="/slang/colectivo">Colectivo</a> for bus, <a href="/slang/remera">remera</a> for T-shirt, <a href="/slang/laburo">laburo</a> for work, <a href="/slang/plata">plata</a> for money. Not as a list at the end, but in the sentences you learn from day one.</li>
+  <li><strong>Ustedes, never vosotros.</strong> Argentina uses ustedes for "you all", like the rest of Latin America.</li>
+  <li><strong>The Argentine accent.</strong> "Yo me llamo" sounds like "sho me shamo". If the audio is in a Spain or Mexico accent, your ear won't be ready for Buenos Aires.</li>
+  <li><strong>Speaking practice.</strong> Reading and tapping is not enough. You need to say things out loud in real situations (ordering, asking for directions, small talk) and get corrected.</li>
+  <li><strong>Culture.</strong> Mate, asado, football, how to greet people with a kiss. It is what makes the words make sense.</li>
+</ol>
+
+<h2>Do general Spanish apps teach Argentine Spanish?</h2>
+<div class="answer"><p>Mostly no. Most Spanish apps teach tú and the vocabulary of Spain or Mexico, and mention vos in a note at most. That Spanish is understood in Argentina, but it sounds foreign, and you will have to relearn the verbs and the everyday words when you arrive.</p></div>
+<div class="table"><table>
+  <thead><tr><th>What you need</th><th>Typical Spanish app</th><th>Posta</th></tr></thead>
+  <tbody>
+    <tr><td>"You"</td><td class="tu">tú (and vosotros)</td><td class="vos">vos (and ustedes)</td></tr>
+    <tr><td>"Do you want…?"</td><td class="tu">¿Tú quieres…?</td><td class="vos">¿Vos querés…?</td></tr>
+    <tr><td>Bus, T-shirt, work</td><td class="tu">autobús, camiseta, trabajo</td><td class="vos">colectivo, remera, laburo</td></tr>
+    <tr><td>Slang and lunfardo</td><td>little or none</td><td>{{WORDS}} words, each in a real sentence</td></tr>
+    <tr><td>Accent</td><td>Spain or Mexico</td><td>Argentine</td></tr>
+    <tr><td>Speaking</td><td>varies</td><td>out-loud chats with corrections</td></tr>
+  </tbody>
+</table></div>
+
+<h2>What does Posta teach?</h2>
+<div class="answer"><p>Posta is a phone app for learning Argentine (Rioplatense) Spanish. It has four parts: a full course, a word list of Argentine slang, culture classes, and spoken chats with Pancho, a carpincho (capybara) who is your guide.</p></div>
+<ul>
+  <li><strong>The course.</strong> A full Argentine Spanish course, from complete beginner to fluent, in short daily lessons built from sentences people really say, with vos from day one.</li>
+  <li><strong>Words.</strong> {{WORDS}} Argentine slang and everyday words, lunfardo included, each inside a sentence a real person would say. Start with <a href="/argentine-slang">the 50 words people say every day</a>.</li>
+  <li><strong>Culture.</strong> One-minute classes on mate, asado, football, food and how Argentines really do things.</li>
+  <li><strong>Speaking.</strong> Out-loud role-play chats: Pancho plays the waiter, the kiosquero, the taxi driver. When you make a mistake he shows you the fix, a one-line why, and how a porteño would say it. Four levels, from Beginner to Local.</li>
+</ul>
+
+<h2>Who is Posta for?</h2>
+<div class="answer"><p>English speakers with a reason to sound Argentine: people visiting Argentina, people moving to Buenos Aires, and people with an Argentine partner or family. It works for complete beginners and for people who already speak another Spanish and want to switch to vos.</p></div>
+
+<h2>Is Posta on iPhone and Android?</h2>
+<div class="answer"><p>Posta is on <a href="https://play.google.com/store/apps/details?id=app.posta.android">Google Play</a> now, and it is coming to the App Store. It is free to download; the full app is a subscription called Posta Premium.</p></div>
+
+<h2>What else helps you learn Argentine Spanish?</h2>
+<p>An app is the daily habit, not the whole plan. Add Argentine series and podcasts, practice with Argentine friends or a tutor from Argentina, and learn the slang you hear around you. Our <a href="/learn-argentine-spanish">step-by-step guide to learning Argentine Spanish</a> has the full plan, and <a href="/argentine-spanish-vs-other-spanish">Argentine Spanish vs Spain and Mexico</a> shows what changes.</p>
+
+<h2>Common questions</h2>
+`,
+  },
 ];
 
 // The 50 words for /argentine-slang, in the order they appear.

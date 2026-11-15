@@ -65,7 +65,7 @@ const POS = { intj: 'Interjection', adv: 'Adverb', phrase: 'Expression', adj: 'A
 
 // ---------------------------------------------------------------- vos verbs
 
-import { VERBS, conj } from './vos.mjs';
+import { VERBS, conj, STEM_CHANGE } from './vos.mjs';
 // Check the rules against the forms the course already teaches.
 const dbForms = new Map();
 for (const v of verbData.verbs) (dbForms.get(v.lemma) ?? dbForms.set(v.lemma, []).get(v.lemma)).push(v);
@@ -179,6 +179,7 @@ function page({ url, title, description, h1Block, body, crumbs, schema = [], nav
         <a href="/argentine-slang">50 everyday words</a>
         <a href="/slang">All slang</a>
         <a href="/voseo">Vos</a>
+        <a href="/best-app-to-learn-argentine-spanish">Best app for Argentine Spanish</a>
         <a href="/support">Support</a>
         <a href="/privacy">Privacy</a>
       </nav>
@@ -251,8 +252,10 @@ ${related.map((o) => `  <li><a href="${wordUrl(o)}"><b lang="es-AR">${esc(o.es)}
 ${cta()}`;
   write(url, page({
     url,
-    title: `What Does “${w.es}” Mean in Argentina? | Posta`,
-    description: `${cap(w.es)}: ${w.en}. ${w.note}`.slice(0, 158).replace(/\s+\S*$/, '…'),
+    // Searches are "sube meaning", "quilombo meaning argentina": lead with that and
+    // put the answer in the title itself, so the result is worth the click.
+    title: `${cap(w.es)} Meaning in Argentina: ${cap(w.en)} | Posta`,
+    description: `In Argentina, “${w.es}” means ${w.en}. ${w.note}`.slice(0, 140).replace(/\s+\S*$/, '…') + ' With examples.',
     h1Block: `<div class="word"><h1>${esc(question)}</h1><div class="chips">${chips}</div></div>`,
     body,
     crumbs: [['Slang', '/slang'], [w.es, url]],
@@ -391,6 +394,16 @@ ${cta()}`;
 }
 
 // Guides
+// The app itself, for the pages that are about it (same facts as index.html).
+const APP_LD = {
+  '@type': 'MobileApplication', '@id': ORIGIN + '/#app', name: 'Posta',
+  alternateName: ['Posta: Argentinian Spanish', 'Posta: Learn Argentine Spanish', 'Posta Spanish'],
+  url: ORIGIN + '/', applicationCategory: 'EducationalApplication', applicationSubCategory: 'Language learning',
+  operatingSystem: STORES.ios ? 'iOS, Android' : 'Android', inLanguage: 'en',
+  description: `An app to learn Argentine Spanish: vos, lunfardo and ${allWords.length} slang words, short daily lessons, culture classes and spoken chats with Pancho the capybara.`,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  ...(STORES.android ? { installUrl: STORES.android } : {}),
+};
 const verbGrid = `<ul class="grid" id="all-verbs">
 ${verbList.map((v) => `  <li><a href="/vos/${v}"><b lang="es-AR">vos ${conj(v).vosPres}</b><span>${esc(v)}: ${esc(VERBS[v])}</span></a></li>`).join('\n')}
 </ul>`;
@@ -402,14 +415,14 @@ for (const g of guides) {
     body: g.body.replace('<!--VERB_GRID-->', verbGrid).replaceAll('{{WORDS}}', allWords.length) + faqHtml(g.faq) + cta(),
     crumbs: [[g.crumb, url]],
     navKey: url,
-    schema: [article(g.title, g.description, url), faqLd(g.faq)],
+    schema: [article(g.title, g.description, url), faqLd(g.faq), ...(g.app ? [APP_LD] : [])],
   }));
 }
 
 // ---------------------------------------------------------------- sitemap
 
 const STATIC = [
-  ['/', '2026-10-25'], ['/support', '2026-10-14'], ['/privacy', '2026-11-04'], ['/terms', '2026-10-20'], ['/delete-account', null],
+  ['/', TODAY], ['/support', '2026-10-14'], ['/privacy', '2026-11-04'], ['/terms', '2026-10-20'], ['/delete-account', null],
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
