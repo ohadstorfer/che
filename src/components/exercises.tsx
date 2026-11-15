@@ -2691,9 +2691,16 @@ function SentenceIntro({
         prompt={prompt}
         // One voice, read: the card, and him by the prompt as on a gap's card. A
         // dialogue's first bubble has him already.
+        // A sentence that brings in a new word shows Pancho, not another word's
+        // picture: under "New word" any picture reads as the new word's
+        // ("medialuna" marked, a café con leche on the card — 2026-11-13).
         art={
           turnCount(sentence.tokens) < 2 ? (
-            <TitleArt sentence={sentence} skip={(id) => id === word?.id} lookup={lookupWith(lexicon, allForms)} />
+            word ? (
+              <TitlePancho />
+            ) : (
+              <TitleArt sentence={sentence} skip={() => false} lookup={lookupWith(lexicon, allForms)} />
+            )
           ) : undefined
         }
         verdict={verdict}
