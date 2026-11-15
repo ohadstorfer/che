@@ -15,7 +15,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { ChoiceStep, type Fact, FactCard } from '@/app/culture-class';
+import { type Fact, FactCard } from '@/app/culture-class';
 import { ExerciseFrame, PageColorContext, type Verdict } from '@/components/exercise-frame';
 import { AudioPad, Choices, Exercise, PlayButton } from '@/components/exercises';
 import { PanchoAvatar } from '@/components/hablar-ui';
@@ -30,6 +30,7 @@ import { success, tap } from '@/lib/haptics';
 import type { Level } from '@/lib/onboarding';
 import type { QueueItem } from '@/lib/round';
 import { type SentenceRow, toSentence } from '@/lib/sentences';
+import { artFor } from '@/lib/culture-art';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, pastel, radius } from '@/lib/theme';
 import type { Form, Sentence } from '@/lib/types';
@@ -43,7 +44,7 @@ import type { Form, Sentence } from '@/lib/types';
 //
 // Content is real: the course rows (forms + sentences, their recordings) are a
 // snapshot of the database in first-class.json, the slang words come from
-// argentine.json, the asado question and card from culture.json. Nothing is graded or saved.
+// argentine.json, three asado cards from culture.json. Nothing is graded or saved.
 // ---------------------------------------------------------------------------
 
 type Part = 'class' | 'slang' | 'culture' | 'pancho';
@@ -61,8 +62,9 @@ type ScreenId =
   | 'build'
   | 'slang'
   | 'culture-intro'
-  | 'asado-guess'
-  | 'asado-card'
+  | 'asado-1'
+  | 'asado-2'
+  | 'asado-3'
   | 'call';
 
 const SCREENS: { id: ScreenId; part: Part }[] = [
@@ -71,8 +73,9 @@ const SCREENS: { id: ScreenId; part: Part }[] = [
   { id: 'build', part: 'class' },
   { id: 'slang', part: 'slang' },
   { id: 'culture-intro', part: 'culture' },
-  { id: 'asado-guess', part: 'culture' },
-  { id: 'asado-card', part: 'culture' },
+  { id: 'asado-1', part: 'culture' },
+  { id: 'asado-2', part: 'culture' },
+  { id: 'asado-3', part: 'culture' },
   { id: 'call', part: 'pancho' },
 ];
 
@@ -270,32 +273,33 @@ function ScreenView({
       return <SlangRound onDone={onNext} onProgress={onProgress} onOpening={onOpening} />;
     case 'culture-intro':
       return <CultureOpener onStart={onNext} />;
-    case 'asado-guess':
-      // culture.json · asado / "More than a barbecue", its first question.
-      return (
-        <ChoiceStep
-          prompt="The invite says **“Vení a la una.”** Come at one. When will you probably eat?"
-          options={['Right at one', 'An hour or two later', 'Around dinner time']}
-          correct={1}
-          explain="The fire is slow, and so is everything else. Have a drink by the grill and eat when the asador, the grill cook, says so."
-          onDone={onNext}
-        />
-      );
-    case 'asado-card':
-      return <FactCard fact={ASADO_FACT} onDone={onNext} />;
+    case 'asado-1':
+      return <FactCard key={id} fact={ASADO[0]} onDone={onNext} />;
+    case 'asado-2':
+      return <FactCard key={id} fact={ASADO[1]} onDone={onNext} />;
+    case 'asado-3':
+      return <FactCard key={id} fact={ASADO[2]} onDone={onNext} />;
     case 'call':
       return <CallStep admin={admin} rate={TALK_RATE[level]} onDone={onNext} />;
   }
 }
 
-const ASADO_FACT: Fact = {
-  art: require('@/assets/images/objects/asado-figure.webp'),
-  // culture.json · asado / "More than a barbecue", its opening card.
-  text: 'An **asado** is grilled meat, sure. But mostly it’s an excuse to spend the whole day together. **¿Hacemos un asado?** really means: want to hang out?',
+// culture.json · asado / "More than a barbecue", pages 1, 4 and 6: what an
+// asado is, then why it matters. Explained, never quizzed: a first day is no
+// time to guess at a country she doesn't know yet. Art and tones as that
+// class deals them (culture-art.ts, CARD_TONES).
+const asadoCard = (n: number, text: string, bg: string): Fact => ({
+  art: artFor('asado', n),
+  text,
   hero: null,
   chip: 'More than a barbecue',
-  bg: pastel.butter,
-};
+  bg,
+});
+const ASADO: Fact[] = [
+  asadoCard(0, 'An **asado** is grilled meat, sure. But mostly it’s an excuse to spend the whole day together. **¿Hacemos un asado?** really means: want to hang out?', pastel.butter),
+  asadoCard(3, 'An [asado] is also how Argentines celebrate almost anything: a birthday, a win, a new job, a Friday.', pastel.peach),
+  asadoCard(5, 'For lots of families it’s a weekly date: **el asado del domingo**. Same backyard, same [asador], same people.', pastel.sage),
+];
 
 // --- the bar: one track, a piece per run of a part, each in its colour --------
 
