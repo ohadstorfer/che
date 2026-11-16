@@ -20,7 +20,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { type Fact, FactCard } from '@/app/culture-class';
+import { CultureGlosses, type Fact, FactCard } from '@/app/culture-class';
 import { ExerciseFrame, PageColorContext, type Verdict } from '@/components/exercise-frame';
 import { AudioPad, Choices, Exercise, PlayButton } from '@/components/exercises';
 import { POSE } from '@/components/mascot';
@@ -282,11 +282,23 @@ function ScreenView({
     case 'culture-intro':
       return <CultureOpener onStart={onNext} />;
     case 'asado-1':
-      return <FactCard key={id} fact={ASADO[0]} onDone={onNext} tapToAdvance={false} bigArt />;
+      return (
+        <CultureGlosses key={id} section="asado" cls="el-ritual">
+          <FactCard fact={ASADO[0]} onDone={onNext} tapToAdvance={false} bigArt />
+        </CultureGlosses>
+      );
     case 'asado-2':
-      return <FactCard key={id} fact={ASADO[1]} onDone={onNext} tapToAdvance={false} bigArt />;
+      return (
+        <CultureGlosses key={id} section="asado" cls="el-ritual">
+          <FactCard fact={ASADO[1]} onDone={onNext} tapToAdvance={false} bigArt />
+        </CultureGlosses>
+      );
     case 'asado-3':
-      return <FactCard key={id} fact={ASADO[2]} onDone={onNext} tapToAdvance={false} bigArt />;
+      return (
+        <CultureGlosses key={id} section="asado" cls="el-ritual">
+          <FactCard fact={ASADO[2]} onDone={onNext} tapToAdvance={false} bigArt />
+        </CultureGlosses>
+      );
     case 'call':
       return <CallStep admin={admin} rate={TALK_RATE[level]} onDone={onNext} onProgress={onProgress} />;
   }

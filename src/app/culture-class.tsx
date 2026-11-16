@@ -516,6 +516,33 @@ const asForm = (word: CultureWord) =>
   ({ form: word.es, gloss_en: '', gloss_note_en: word.note ?? null, audio_path: word.audio ?? null }) as unknown as Form;
 
 /**
+ * The same tap-for-meaning around cards shown outside a class (the onboarding's
+ * first class shows three of the asado cards): the glossary of that class and
+ * its bubble.
+ */
+export function CultureGlosses({ section, cls: slug, children }: { section: string; cls: string; children: React.ReactNode }) {
+  const [peek, setPeek] = useState<{ word: CultureWord; anchor: Anchor } | null>(null);
+  const cls = findClass(section, slug)?.cls;
+  const gloss = useMemo<Gloss>(
+    () => ({ find: (span) => glossFor(span, cls), open: (word, anchor) => setPeek({ word, anchor }) }),
+    [cls],
+  );
+  return (
+    <>
+      <GlossContext.Provider value={gloss}>{children}</GlossContext.Provider>
+      <WordPopover
+        form={peek ? asForm(peek.word) : null}
+        anchor={peek?.anchor ?? null}
+        gloss={peek?.word.en}
+        image={peek ? glossArt(peek.word.es) : undefined}
+        onClose={() => setPeek(null)}
+        audio={(path) => <PlayButton path={path} />}
+      />
+    </>
+  );
+}
+
+/**
  * Where the tapped word sits. A span inside a paragraph is not a view of its
  * own on native, so it can't be measured: the bubble hangs off the line under
  * her finger instead. On web the span is real, and the line of it she tapped
