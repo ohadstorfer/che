@@ -5,11 +5,13 @@ import { router } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, type ImageSourcePropType, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
+  cancelAnimation,
   Easing,
   FadeIn,
   FadeInDown,
   FadeInRight,
   ZoomIn,
+  interpolateColor,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -573,6 +575,23 @@ function CallStep({
   const later = (ms: number, fn: () => void) => void timers.current.push(setTimeout(fn, ms));
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
+  // Which of his notes is sounding, and how: its wave runs while it does.
+  const [playing, setPlaying] = useState<{ turn: number; how: 'play' | 'slow'; key: number } | null>(null);
+  const playNote = (t: number, how: 'play' | 'slow', onEnd?: () => void) => {
+    const path = SCRIPT[t].audio;
+    if (!path) return;
+    const key = Date.now() + Math.random();
+    setPlaying({ turn: t, how, key });
+    playAudio(
+      path,
+      () => {
+        setPlaying((p) => (p?.key === key ? null : p));
+        onEnd?.();
+      },
+      how === 'play' ? rate : rate * 0.8,
+    );
+  };
+
   // His newest note: its sound now, her replies once it ends.
   useEffect(() => {
     let done = false;
@@ -581,7 +600,7 @@ function CallStep({
       done = true;
       later(350, () => setPhase((p) => (p === 'speaking' ? 'ready' : p)));
     };
-    if (line.audio) playAudio(line.audio, ready, rate);
+    if (line.audio) playNote(turn, 'play', ready);
     else later(READ_MS, ready);
     // A replay cut short still counts as heard; never strand her without replies.
     later(12000, ready);
@@ -666,7 +685,15 @@ function CallStep({
         {msgs.map((m, i) =>
           m.kind === 'pancho' ? (
             <Animated.View key={`p${m.turn}`} entering={i === 0 ? undefined : enter(false)} style={styles.noteWrapLeft}>
-              <PanchoNote line={SCRIPT[m.turn]} rate={rate} />
+              <PanchoNote
+                line={SCRIPT[m.turn]}
+                rate={rate}
+                playing={playing?.turn === m.turn ? playing : null}
+                onPlay={(how) => {
+                  tap();
+                  playNote(m.turn, how);
+                }}
+              />
             </Animated.View>
           ) : m.kind === 'me' ? (
             <Animated.View key={`m${i}`} entering={enter(true)} style={styles.noteWrapRight}>
@@ -730,29 +757,94 @@ function CallStep({
 }
 
 /** His voice note in the thread: ▶ and the tortoise, its wave and length, the words. */
-function PanchoNote({ line, rate }: { line: Turn; rate: number }) {
-  const secs = Math.max(1, Math.round((line.es.split(/\s+/).length * 0.42) / rate));
+function PanchoNote({
+  line,
+  rate,
+  playing,
+  onPlay,
+}: {
+  line: Turn;
+  rate: number;
+  /** Set while this note sounds: how, and a key that restarts the wave on a replay. */
+  playing: { how: 'play' | 'slow'; key: number } | null;
+  onPlay: (how: 'play' | 'slow') => void;
+}) {
+  const secs = (line.es.split(/\s+/).length * 0.42) / rate;
+  const shown = Math.max(1, Math.round(secs));
   return (
     <View style={styles.note}>
       <View style={styles.noteRow}>
         {line.audio ? (
-          <CallAudio path={line.audio} rate={rate} />
+          <CallAudio on={playing?.how ?? null} onPlay={onPlay} />
         ) : (
           <View style={[styles.notePlay, { opacity: 0.4 }]}>
             <Ionicons name="play" size={18} color={colors.onPrimary} />
           </View>
         )}
-        <View style={styles.noteWave} accessible={false}>
-          {NOTE_WAVE.slice(0, 13).map((h, i) => (
-            <View key={i} style={[styles.noteBar, { height: h, backgroundColor: i < 5 ? colors.primary : NOTE_BAR_SOFT }]} />
-          ))}
-        </View>
-        <Text style={styles.noteTime}>{`0:0${Math.min(9, secs)}`}</Text>
+        <NoteWave
+          bars={NOTE_WAVE.slice(0, 13)}
+          runKey={playing?.key ?? null}
+          durationMs={secs * 1000 * (playing?.how === 'slow' ? 1.25 : 1)}
+        />
+        <Text style={styles.noteTime}>{`0:0${Math.min(9, shown)}`}</Text>
       </View>
       <Text style={styles.callEs}>{line.es}</Text>
       <Text style={styles.callEn}>{line.en}</Text>
     </View>
   );
+}
+
+/**
+ * A voice note's wave, alive while it plays: the bars fill rosa left to right
+ * over the note's length, and the lit ones breathe. Still and soft otherwise.
+ */
+function NoteWave({ bars, runKey, durationMs }: { bars: number[]; runKey: number | null; durationMs: number }) {
+  const reduced = useReducedMotion();
+  const progress = useSharedValue(0);
+  const pulse = useSharedValue(0);
+  useEffect(() => {
+    if (runKey == null) {
+      cancelAnimation(pulse);
+      pulse.value = withTiming(0, { duration: 160 });
+      progress.value = withTiming(0, { duration: 260, easing: EASE_OUT });
+      return;
+    }
+    progress.value = 0;
+    progress.value = withTiming(1, { duration: Math.max(600, durationMs), easing: Easing.linear });
+    if (!reduced) pulse.value = withRepeat(withTiming(1, { duration: 260, easing: Easing.inOut(Easing.quad) }), -1, true);
+  }, [runKey, durationMs, reduced, progress, pulse]);
+  return (
+    <View style={styles.noteWave} accessible={false}>
+      {bars.map((h, i) => (
+        <WaveBar key={i} i={i} n={bars.length} h={h} progress={progress} pulse={pulse} />
+      ))}
+    </View>
+  );
+}
+
+function WaveBar({
+  i,
+  n,
+  h,
+  progress,
+  pulse,
+}: {
+  i: number;
+  n: number;
+  h: number;
+  progress: { value: number };
+  pulse: { value: number };
+}) {
+  const style = useAnimatedStyle(() => {
+    // How lit this bar is: 0 until the fill reaches it, 1 once it has passed.
+    const lit = Math.min(1, Math.max(0, progress.value * n - i));
+    const wobble = 1 + 0.35 * pulse.value * lit * (i % 2 === 0 ? 1 : -0.6);
+    return {
+      backgroundColor: interpolateColor(lit, [0, 1], [NOTE_BAR_SOFT, colors.primary]),
+      transform: [{ scaleY: wobble }],
+    };
+  });
+  return <Animated.View style={[styles.noteBar, { height: h }, style]} />;
 }
 
 /** What she said, as her own bubble: rosa, on the right, just the words. */
@@ -800,24 +892,18 @@ const CALL_SOFT = '#5E4A3C';
  * Pancho's line, out loud: ▶ at his speed for her level, and the tortoise
  * slower still (four fifths of that), as everywhere else in the app.
  */
-function CallAudio({ path, rate }: { path: string; rate: number }) {
-  const [on, setOn] = useState<'play' | 'slow' | null>(null);
-  const go = (which: 'play' | 'slow') => {
-    tap();
-    setOn(which);
-    playAudio(path, () => setOn(null), which === 'play' ? rate : rate * 0.8);
-  };
+function CallAudio({ on, onPlay }: { on: 'play' | 'slow' | null; onPlay: (how: 'play' | 'slow') => void }) {
   return (
     <>
       <Pressable
-        onPress={() => go('play')}
+        onPress={() => onPlay('play')}
         accessibilityRole="button"
         accessibilityLabel="Play Pancho's message"
         style={({ pressed }) => [styles.notePlay, { transform: [{ scale: pressed ? 0.94 : 1 }] }]}>
         <Ionicons name={on === 'play' ? 'volume-high' : 'play'} size={18} color={colors.onPrimary} />
       </Pressable>
       <Pressable
-        onPress={() => go('slow')}
+        onPress={() => onPlay('slow')}
         accessibilityRole="button"
         accessibilityLabel="Play slowly"
         style={({ pressed }) => [styles.noteSlow, on === 'slow' && { backgroundColor: colors.primarySoft }, { transform: [{ scale: pressed ? 0.94 : 1 }] }]}>
