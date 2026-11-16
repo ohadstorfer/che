@@ -9,6 +9,7 @@ import { tileArt } from '@/lib/culture-art';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, gradients, pastelGrad, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
+import { useTabPreview } from '@/lib/welcome-tour';
 import { OutlinedHeadline, tiltAt, useSlap } from '@/components/sticker';
 
 // ---------------------------------------------------------------------------
@@ -44,8 +45,10 @@ const SHOW_RESUME = false;
 
 export default function Culture() {
   useStatusBarColor(colors.bg);
-  const { status: streak, weekDone } = useStreakWeek();
-  const isDone = useCultureDone();
+  // The tour's preview reads nothing: no streak, no class done.
+  const preview = useTabPreview();
+  const { status: streak, weekDone } = useStreakWeek(preview);
+  const isDone = useCultureDone(preview);
 
   // The first subject she has started but not finished, and its next class.
   const resume = cultureSections.flatMap((section, i) => {

@@ -3,7 +3,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useFocusEffect, useIsFocused, useLocalSearchParams } from 'expo-router';
-import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   AccessibilityInfo,
   Animated,
@@ -12,6 +12,7 @@ import {
   FlatList,
   Platform,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -52,6 +53,8 @@ import {
 import { getPracticeCounts } from '@/lib/session';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { takeFinishedLesson } from '@/lib/just-finished';
+import { previewCourse } from '@/lib/tour-preview-course';
+import { useTabPreview } from '@/lib/welcome-tour';
 import { readSnapshot, writeSnapshot } from '@/lib/snapshot';
 import { streakStatus, type StreakStatus } from '@/lib/streak';
 import { fetchStreakWeek } from '@/lib/streak-week';
@@ -781,7 +784,80 @@ const ADVANCE_SCROLL_MS = 1100;
 const EASE_SCROLL = Easing.bezier(0.4, 0, 0.2, 1);
 
 
-export default function Home() {
+/** The paywall's "Learn more" tour plays over a Course tab that reads nothing. */
+export default function CourseTab() {
+  return useTabPreview() ? <CoursePreview /> : <Home />;
+}
+
+/** Each preview unit's length, for its banner's 0/8. */
+const PREVIEW_UNIT_SIZE = (() => {
+  const n = new Map<string, number>();
+  for (const l of previewCourse.path) n.set(l.unit_id, (n.get(l.unit_id) ?? 0) + 1);
+  return n;
+})();
+const NOOP = () => {};
+
+/**
+ * Course as the tour's preview shows it, before she has bought: the road's
+ * first two units, kept in the bundle (lib/tour-preview-course.ts), standing
+ * on the first lesson with nothing done and no streak. No progress, push
+ * status, placement or chats are read, and nothing on it opens — the tour's
+ * overlay takes every touch anyway.
+ */
+function CoursePreview() {
+  useStatusBarColor(colors.bg);
+  const focused = useIsFocused();
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    AccessibilityInfo.isReduceMotionEnabled().then(setReduced);
+  }, []);
+  const section = previewCourse.sections[0];
+  return (
+    <View style={styles.safe}>
+      <AppHeader
+        title="Course"
+        pill={{
+          label: `Course · Section ${section.ordinal}`,
+          onPress: NOOP,
+          accessibilityLabel: `Section ${section.ordinal}: ${section.title_en}, level ${section.cefr}`,
+        }}
+        status={streakStatus(null)}
+        weekDone={NO_DAYS}
+      />
+      <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+        <View style={styles.header}>
+          <View style={styles.pathTop} />
+        </View>
+        {previewCourse.path.map((lesson) => (
+          <Fragment key={lesson.id}>
+            {lesson.opensUnit ? (
+              <UnitBanner
+                lesson={lesson}
+                state={lesson.index === 0 ? 'current' : 'locked'}
+                done={0}
+                total={PREVIEW_UNIT_SIZE.get(lesson.unit_id) ?? 0}
+                onPress={NOOP}
+              />
+            ) : null}
+            <PathStep
+              index={lesson.index}
+              phase={lesson.index === 0 ? 1 : 0}
+              reduced={reduced}
+              breathe={focused}
+              kind={lesson.kind}
+              sub={KIND_LABEL[lesson.kind] ?? `Lesson ${lesson.ordinal}`}
+              tone={toneOf(lesson.unit)}
+              label={`${lesson.title_en} · ${lesson.unit.title_en}`}
+            />
+          </Fragment>
+        ))}
+      </ScrollView>
+    </View>
+  );
+}
+const NO_DAYS: string[] = [];
+
+function Home() {
   // Her id comes straight off the session, which is read from storage: waiting
   // for the profile row as well put a whole round trip in front of the road.
   const { session } = useAuth();

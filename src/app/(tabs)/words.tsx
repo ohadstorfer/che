@@ -5,6 +5,7 @@ import { AppHeader, useStreakWeek } from '@/components/app-header';
 import { usePackScores } from '@/lib/argentine-scores';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { colors } from '@/lib/theme';
+import { useTabPreview } from '@/lib/welcome-tour';
 
 // ---------------------------------------------------------------------------
 // Words — vocabulary apart from the course: themed packs of words Argentines
@@ -16,8 +17,10 @@ export default function Words() {
   // The tabs' opaque `sceneStyle` (see (tabs)/_layout) covers the root
   // gradient, so this screen's actual background is flat `colors.bg`.
   useStatusBarColor(colors.bg);
-  const { status: streak, weekDone } = useStreakWeek();
-  const scores = usePackScores();
+  // The tour's preview reads nothing: no streak, no scores.
+  const preview = useTabPreview();
+  const { status: streak, weekDone } = useStreakWeek(preview);
+  const scores = usePackScores(preview);
 
   return (
     <View style={styles.safe}>

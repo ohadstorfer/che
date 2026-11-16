@@ -73,17 +73,21 @@ export function prefetchPackScores(): Promise<void> {
 }
 
 /** Every pack's score, re-read whenever the screen comes back into focus. */
-export function usePackScores() {
+const NO_SCORES: Record<string, PackScore> = {};
+
+/** Her pack scores; none at all in the tour's preview (useTabPreview), which reads nothing. */
+export function usePackScores(preview = false) {
   const [scores, setScores] = useState<Record<string, PackScore>>(() => lastScores ?? {});
   useFocusEffect(
     useCallback(() => {
+      if (preview) return;
       void readScores().then((s) => {
         lastScores = s;
         setScores(s);
       });
-    }, []),
+    }, [preview]),
   );
-  return scores;
+  return preview ? NO_SCORES : scores;
 }
 
 // ---------------------------------------------------------------------------
