@@ -1,4 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -18,7 +20,7 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { type Fact, FactCard } from '@/app/culture-class';
 import { ExerciseFrame, PageColorContext, type Verdict } from '@/components/exercise-frame';
 import { AudioPad, Choices, Exercise, PlayButton } from '@/components/exercises';
-import { PanchoAvatar } from '@/components/hablar-ui';
+import { POSE } from '@/components/mascot';
 import { Button } from '@/components/ui';
 import { WordIntro } from '@/components/word-intro';
 import { CultureOpener, SlangOpener } from '@/components/slang-opener';
@@ -191,7 +193,7 @@ export function FirstClassLesson({
   const [butter, setButter] = useState(false);
   const screen = SCREENS[at];
   // The page takes the opener's colour while one is up: butter for slang, sky for culture.
-  const tint = screen.id === 'culture-intro' ? pastel.sky : butter ? pastel.butter : null;
+  const tint = screen.id === 'culture-intro' ? pastel.sky : screen.id === 'call' ? pastel.sage : butter ? pastel.butter : null;
   useStatusBarColor(tint ?? colors.bg);
 
   const next = () => {
@@ -216,8 +218,9 @@ export function FirstClassLesson({
 
   if (done) return <Complete onAgain={admin ? restart : undefined} onClose={close} onFinish={onFinish} />;
 
-  // Slang and culture open with their own screens, so they get no chip.
-  const startsPart = (at === 0 || SCREENS[at - 1].part !== screen.part) && screen.id !== 'slang' && screen.id !== 'culture-intro';
+  // Slang and culture open with their own screens, and the call says who is on it: no chip.
+  const NO_CHIP: ScreenId[] = ['slang', 'culture-intro', 'call'];
+  const startsPart = (at === 0 || SCREENS[at - 1].part !== screen.part) && !NO_CHIP.includes(screen.id);
 
   return (
     <SafeAreaView style={[styles.safe, tint ? { backgroundColor: tint } : null]} edges={['top', 'left', 'right']}>
@@ -534,18 +537,22 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
 
   const clock = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
   const bottom = useSafeAreaInsets().bottom;
+  // The sticker scene (canvas "Pancho Call Screen Options", C): the page is
+  // sage, Pancho's line a tilted speech sticker, Pancho himself big below it,
+  // her replies butter stickers. No dock, no chip: one surface.
   return (
     <View style={styles.call}>
-      <Text style={styles.callTop}>Calling Pancho · {clock}</Text>
-      <View style={styles.callMiddle}>
-        <PanchoAvatar size={168} drop={0.04} />
-        <Animated.View key={turn} entering={FadeInDown.duration(260).easing(EASE_OUT)} style={styles.callLine}>
-          <View style={styles.lineRow}>
-            <Text style={styles.callEs}>{line.es}</Text>
-            {line.audio ? <PlayButton path={line.audio} small autoPlay={false} speed={rate} /> : null}
-          </View>
-          <Text style={styles.callEn}>{line.en}</Text>
-        </Animated.View>
+      <View style={styles.callPill}>
+        <Ionicons name="call" size={13} color="#3F7A57" />
+        <Text style={styles.callPillText}>Pancho · {clock}</Text>
+      </View>
+      <Animated.View key={turn} entering={FadeInDown.duration(260).easing(EASE_OUT)} style={styles.callBubble}>
+        <Text style={styles.callEs}>{line.es}</Text>
+        <Text style={styles.callEn}>{line.en}</Text>
+        {line.audio ? <CallAudio path={line.audio} rate={rate} /> : null}
+      </Animated.View>
+      <View style={styles.callStage}>
+        <Image source={POSE.wave} style={styles.callPancho} contentFit="contain" accessibilityLabel="Pancho waving" />
       </View>
       <View style={[styles.callDock, { paddingBottom: 20 + bottom }]}>
         {over ? (
@@ -556,14 +563,17 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
           </>
         ) : (
           <>
-            <Text style={styles.callHint}>Say one out loud, then tap it</Text>
-            {line.replies.map((r) => (
+            <Text style={styles.callHint}>SAY ONE OUT LOUD, THEN TAP IT</Text>
+            {line.replies.map((r, i) => (
               <Pressable
                 key={r.es}
                 onPress={say}
-                style={({ pressed }) => [styles.reply, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
+                style={({ pressed }) => [
+                  styles.callReply,
+                  { backgroundColor: i === 0 ? pastel.butter : REPLY_BUTTER_2, transform: [{ rotate: i === 0 ? '-1deg' : '1deg' }, { scale: pressed ? 0.97 : 1 }] },
+                ]}>
                 <Text style={styles.replyEs}>{r.es}</Text>
-                <Text style={styles.replyEn}>{r.en}</Text>
+                <Text style={styles.callReplyEn}>{r.en}</Text>
               </Pressable>
             ))}
             {admin ? <Text style={styles.micNote}>Prototype: a scripted call. Nothing is recorded.</Text> : null}
@@ -575,6 +585,38 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
           </Pressable>
         ) : null}
       </View>
+    </View>
+  );
+}
+
+/** The second reply's butter, a shade deeper, as on the canvas. */
+const REPLY_BUTTER_2 = '#EDD07F';
+
+/**
+ * Pancho's line, out loud: ▶ at his speed for her level, and the tortoise
+ * slower still (four fifths of that), as everywhere else in the app.
+ */
+function CallAudio({ path, rate }: { path: string; rate: number }) {
+  const [on, setOn] = useState<'play' | 'slow' | null>(null);
+  const go = (which: 'play' | 'slow') => {
+    tap();
+    setOn(which);
+    playAudio(path, () => setOn(null), which === 'play' ? rate : rate * 0.8);
+  };
+  return (
+    <View style={styles.callAudio}>
+      <Pressable
+        onPress={() => go('play')}
+        accessibilityLabel="Listen"
+        style={({ pressed }) => [styles.callPlay, { transform: [{ scale: pressed ? 0.94 : 1 }] }]}>
+        <Ionicons name={on === 'play' ? 'volume-high' : 'play'} size={20} color={colors.onPrimary} />
+      </Pressable>
+      <Pressable
+        onPress={() => go('slow')}
+        accessibilityLabel="Play slowly"
+        style={({ pressed }) => [styles.callSlow, on === 'slow' && { backgroundColor: colors.primarySoft }, { transform: [{ scale: pressed ? 0.94 : 1 }] }]}>
+        <MaterialCommunityIcons name="tortoise" size={24} color={colors.primary} />
+      </Pressable>
     </View>
   );
 }
@@ -682,34 +724,52 @@ const styles = StyleSheet.create({
   },
   chipText: { ...font.body[800], fontSize: 12, letterSpacing: 1.4, color: colors.ink },
 
-  lineRow: { flexDirection: 'row', alignItems: 'center', gap: 10, flexWrap: 'wrap' },
-  reply: {
-    backgroundColor: colors.card,
-    borderRadius: radius.md,
-    paddingHorizontal: 18,
-    paddingVertical: 14,
-    boxShadow: clay.surface,
-    gap: 2,
-  },
   replyEs: { ...font.display[800], fontSize: 20, color: colors.ink },
   replyEn: { ...font.body[600], fontSize: 14, color: colors.muted },
 
-  call: { flex: 1, backgroundColor: pastel.peach },
-  callTop: { ...font.body[800], fontSize: 13, letterSpacing: 0.4, color: colors.ink, textAlign: 'center', marginTop: 10 },
-  callMiddle: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 22, paddingHorizontal: 24 },
-  callLine: { alignItems: 'center', gap: 6, maxWidth: 480 },
-  callEs: { ...font.display[900], fontSize: 28, lineHeight: 34, color: colors.ink, textAlign: 'center' },
-  callEn: { ...font.body[700], fontSize: 16, color: colors.muted, textAlign: 'center' },
-  callDock: {
-    gap: 10,
-    paddingHorizontal: 20,
-    paddingTop: 16,
-    backgroundColor: colors.bg,
-    borderTopLeftRadius: radius.xl,
-    borderTopRightRadius: radius.xl,
-    boxShadow: clay.float,
+  call: { flex: 1, paddingHorizontal: 20 },
+  callPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    alignSelf: 'flex-start',
+    marginTop: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderRadius: 99,
+    backgroundColor: colors.card,
+    boxShadow: `0 0 0 2px ${colors.ink}, 2px 3px 0 2px ${colors.ink}`,
   },
-  callHint: { ...font.body[800], fontSize: 13, letterSpacing: 0.4, color: colors.muted, textAlign: 'center' },
+  callPillText: { ...font.body[800], fontSize: 13, color: colors.ink },
+  callBubble: {
+    alignSelf: 'flex-end',
+    maxWidth: 300,
+    marginTop: 24,
+    paddingHorizontal: 20,
+    paddingVertical: 18,
+    gap: 6,
+    borderRadius: 26,
+    backgroundColor: colors.card,
+    boxShadow: `0 0 0 3px ${colors.ink}, 4px 5px 0 3px ${colors.ink}`,
+    transform: [{ rotate: '2deg' }],
+  },
+  callEs: { ...font.display[900], fontSize: 30, lineHeight: 33, color: colors.ink },
+  callEn: { ...font.body[700], fontSize: 15, color: colors.muted },
+  callAudio: { flexDirection: 'row', gap: 10, marginTop: 6 },
+  callPlay: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.primary, boxShadow: clay.chip },
+  callSlow: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card, boxShadow: `0 0 0 2px ${colors.primary}` },
+  callStage: { flex: 1, minHeight: 120 },
+  callPancho: { width: 210, height: '100%', maxHeight: 230, marginLeft: -8 },
+  callDock: { gap: 12 },
+  callReply: {
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    gap: 2,
+    boxShadow: `0 0 0 2.5px ${colors.ink}, 3px 4px 0 2.5px ${colors.ink}`,
+  },
+  callReplyEn: { ...font.body[600], fontSize: 13, color: '#6B5646' },
+  callHint: { ...font.body[800], fontSize: 12, letterSpacing: 1, color: colors.ink, textAlign: 'center' },
   callReal: { ...font.body[800], fontSize: 15, lineHeight: 21, color: colors.ink, textAlign: 'center', paddingHorizontal: 8 },
   micNote: { ...font.body[600], fontSize: 12, color: colors.muted, textAlign: 'center' },
   liveLink: { ...font.body[800], fontSize: 13, color: colors.primaryDark, textAlign: 'center', paddingVertical: 6 },
