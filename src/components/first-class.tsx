@@ -276,7 +276,7 @@ function ScreenView({
     case 'build':
       return exercise(content.build);
     case 'slang':
-      return <SlangRound lexicon={content.lexicon} onDone={onNext} onProgress={onProgress} onOpening={onOpening} />;
+      return <SlangRound onDone={onNext} onProgress={onProgress} onOpening={onOpening} />;
     case 'culture-intro':
       return <CultureOpener onStart={onNext} />;
     case 'asado-1':
@@ -408,41 +408,16 @@ function OrderStep({ word, onDone }: { word: Form; onDone: () => void }) {
 const SLANG_WORDS = [DALE, RE];
 const uniqueWords = (words: ArWord[]) => [...new Map(words.map((w) => [w.id, w])).values()];
 
-/**
- * The pack's sentences know only their slang word. Here "medialuna" is also
- * pointed at the class's own word, so the gap's corner shows the medialuna
- * photo (TitleArt) instead of the capybara.
- */
-const withMedialuna = (q: PackItem[]): PackItem[] =>
-  q.map((p) =>
-    p.kind !== 'exercise' || !p.item.sentence
-      ? p
-      : {
-          ...p,
-          item: {
-            ...p.item,
-            sentence: {
-              ...p.item.sentence,
-              tokens: p.item.sentence.tokens.map((t) =>
-                t.form_ids.length === 0 && /^medialuna\b/i.test(t.surface) ? { ...t, form_ids: [ID.medialuna] } : t,
-              ),
-            },
-          },
-        },
-  );
-
 function SlangRound({
-  lexicon,
   onDone,
   onProgress,
   onOpening,
 }: {
-  lexicon: Map<string, Form>;
   onDone: () => void;
   onProgress: (share: number) => void;
   onOpening: (opening: boolean) => void;
 }) {
-  const [queue, setQueue] = useState<PackItem[]>(() => withMedialuna(buildPackRound(SLANG_WORDS, true)));
+  const [queue, setQueue] = useState<PackItem[]>(() => buildPackRound(SLANG_WORDS, true));
   const [index, setIndex] = useState(0);
   const [started, setStarted] = useState(false);
   const retried = useRef(new Set<number>());
@@ -480,7 +455,6 @@ function SlangRound({
       item={current.item}
       allForms={current.item.mode === 'sentence_gap' ? gapForms : forms}
       allSentences={[]}
-      lexicon={lexicon}
       onIntroDone={() => next(queue)}
       onAnswered={onAnswered}
     />
