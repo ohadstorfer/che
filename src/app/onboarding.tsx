@@ -602,7 +602,7 @@ function Underline({ marked }: { marked: boolean }) {
 /**
  * One word of the "Make it Argentine" sentence. A textbook word, once she taps,
  * is crossed out by the welcome screen's hand-drawn line, then lifts above its
- * place, small and faded, while the street word is slapped on where it stood.
+ * place, smaller and faded, while the street word is slapped on where it stood.
  * Left to right, a word at a time. The rest just stay.
  */
 function TryWord({
@@ -642,7 +642,7 @@ function TryWord({
   const lineProps = useAnimatedProps(() => ({ strokeDashoffset: length.value * (1 - strike.value) }));
   const bookStyle = useAnimatedStyle(() => ({
     opacity: 1 - 0.4 * lift.value,
-    transform: [{ translateY: -(size * 1.05) * lift.value }, { scale: 1 - 0.5 * lift.value }],
+    transform: [{ translateY: -(size * 1.32) * lift.value }, { scale: 1 - 0.3 * lift.value }],
   }));
 
   return (
@@ -1253,7 +1253,7 @@ const styles = StyleSheet.create({
   tryStripText: { ...font.display[800], fontSize: 18, color: colors.onPrimary },
   tryWord: { minHeight: 46, justifyContent: 'center', paddingHorizontal: 3 },
   // Room above each row for the crossed-out words to lift into.
-  tryWordsDone: { rowGap: 38, paddingTop: 48 },
+  tryWordsDone: { rowGap: 56, paddingTop: 66 },
   // The crossed-out word, over the street word's spot, before it lifts away.
   tryBookLifted: { position: 'absolute', left: -40, right: -40, top: 0, alignItems: 'center' },
   tryStrike: { position: 'absolute', left: -2 },
