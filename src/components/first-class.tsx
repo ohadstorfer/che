@@ -579,8 +579,7 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
           </Pressable>
         ) : null}
       </View>
-      {/* What room is left goes under the replies, not between them and Pancho. */}
-      <View style={[styles.callRest, { minHeight: 20 + bottom }]} />
+      <View style={{ height: 36 + bottom }} />
     </View>
   );
 }
@@ -750,10 +749,9 @@ const styles = StyleSheet.create({
   callAudio: { flexDirection: 'row', gap: 10, marginTop: 6 },
   callPlay: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.primary, boxShadow: clay.chip },
   callSlow: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card, boxShadow: `0 0 0 2px ${colors.primary}` },
-  callStage: { flex: 1, minHeight: 110, maxHeight: 210 },
-  callRest: { flex: 1, maxHeight: 60 },
+  callStage: { flex: 1, minHeight: 110 },
   // Mirrored, so he faces his speech bubble (top right) instead of the edge.
-  callPancho: { width: 200, height: '100%', marginLeft: -8, transform: [{ scaleX: -1 }] },
+  callPancho: { width: 200, height: '100%', maxHeight: 240, marginLeft: -8, transform: [{ scaleX: -1 }] },
   callDock: { gap: 14 },
   callReply: {
     backgroundColor: pastel.butter,
