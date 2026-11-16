@@ -99,12 +99,14 @@ import { clay, colors, font, pastel, radius, type } from '@/lib/theme';
 type Step = 'name' | 'level' | 'why' | 'try' | 'goal' | 'building' | 'intro' | 'class' | 'streak' | 'notify' | 'account';
 /** The order, by where notifications are asked (app_config `onboarding_notify_at`). */
 const ORDER: Record<NotifyAt, Step[]> = {
-  after_class: ['name', 'level', 'why', 'try', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'account'],
-  after_build: ['name', 'level', 'why', 'try', 'goal', 'building', 'notify', 'intro', 'class', 'streak', 'account'],
+  after_class: ['name', 'level', 'why', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'account'],
+  after_build: ['name', 'level', 'why', 'goal', 'building', 'notify', 'intro', 'class', 'streak', 'account'],
 };
 /** The questions, on the progress bar. The builder, the first class and its
- *  streak are moments with their own screens; the account sits past the bar. */
-const BAR: Step[] = ['name', 'level', 'why', 'try', 'goal', 'notify'];
+ *  streak are moments with their own screens; the account sits past the bar.
+ *  The "Make it Argentine" step ('try') is out of the flow for now: its screen
+ *  and TryWord stay below, ready to go back in by adding 'try' after 'why'. */
+const BAR: Step[] = ['name', 'level', 'why', 'goal', 'notify'];
 /** Full-screen steps: no back button or bar above them. */
 const BARE: Step[] = ['intro', 'class', 'streak'];
 /** Where back goes, where it isn't simply the step before: a moment (the
