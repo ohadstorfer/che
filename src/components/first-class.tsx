@@ -98,17 +98,19 @@ const allWords = arPacks.flatMap((p) => p.words);
 const arWord = (id: string) => allWords.find((w) => w.id === id)!;
 const packOf = (id: string) => arPacks.find((p) => p.words.some((w) => w.id === id))!;
 
-// The cards' own examples are a plan and a film; here both are the café's.
-// Those lines have no recording yet, so they are read, not heard.
+// The cards' own examples are a plan and a film; here both are the café's,
+// recorded in Malena's voice like the words themselves (scripts/first-class/tts.mjs).
 const DALE: ArWord = {
   ...arWord('dale'),
   // Short on purpose: a first day reads three words, not a waiter's whole reply.
-  example: { es: '¿Un café? ¡Dale!', en: 'A coffee? Sure!' },
+  example: { es: '¿Un café? ¡Dale!', en: 'A coffee? Sure!', audio: 'argentine/2a068844663cfe67bfca.mp3' },
   gap: 'Dale',
 };
-// The pack's own example is about the cinema; here it is the café's. It has no
-// recording yet, so the line is read, not heard.
-const RE: ArWord = { ...arWord('re'), example: { es: '¡La medialuna está re rica!', en: 'The medialuna is really tasty!' }, gap: 're' };
+const RE: ArWord = {
+  ...arWord('re'),
+  example: { es: '¡La medialuna está re rica!', en: 'The medialuna is really tasty!', audio: 'argentine/d2aff656364e13ce0f76.mp3' },
+  gap: 're',
+};
 
 function useContent() {
   return useMemo(() => {

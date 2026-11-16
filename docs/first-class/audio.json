@@ -1,0 +1,14 @@
+{
+ "argentine/2a068844663cfe67bfca.mp3": {
+  "text": "¿Un café? ¡Dale!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-11-16T00:12:16.881Z"
+ },
+ "argentine/d2aff656364e13ce0f76.mp3": {
+  "text": "¡La medialuna está re rica!",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-11-16T00:12:16.880Z"
+ }
+}
