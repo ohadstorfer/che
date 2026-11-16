@@ -26,6 +26,7 @@ import { usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, type PastelName, pastel, pastelGrad, press, radius } from '@/lib/theme';
 import { FitText } from '@/components/fit-text';
+import { useTabPreview } from '@/lib/welcome-tour';
 import { OutlinedHeadline, useSlap } from '@/components/sticker';
 
 // ---------------------------------------------------------------------------
@@ -67,7 +68,10 @@ const todayOf = (latest: ConversationRow | null, today: ConversationRow[], staff
 
 export default function Hablar() {
   useStatusBarColor(colors.bg);
-  const { status: streak, weekDone } = useStreakWeek();
+  // The tour's preview reads nothing: Pancho is calling, at A1, with no chats
+  // counted and no streak.
+  const preview = useTabPreview();
+  const { status: streak, weekDone } = useStreakWeek(preview);
   // Staff have no daily limit (hablar-start agrees), so a finished chat never locks the tab.
   const { profile, session } = useAuth();
   const userId = session?.user.id;
@@ -85,14 +89,18 @@ export default function Hablar() {
   /** Her saved level; null until read. It is changed on the brief, not here. */
   const [level, setLevel] = useState<Band | null>(() => kept?.level ?? null);
   const [used, setUsed] = useState<number | null>(() => kept?.used ?? null);
-  const freeLeft = limited && used != null ? Math.max(0, freeChats - used) : null;
-  const today: Today = day ? todayOf(day.latest, day.today, staff, freeLeft) : { state: 'loading' };
+  const freeLeft = !preview && limited && used != null ? Math.max(0, freeChats - used) : null;
+  const today: Today = preview
+    ? { state: 'free' }
+    : day
+      ? todayOf(day.latest, day.today, staff, freeLeft)
+      : { state: 'loading' };
   // The day's count is shown to premium only: a free account's binding limit is its free chats (the pill below).
-  const usedToday = status === 'premium' && !staff && day ? Math.min(CHATS_PER_DAY, day.today.length) : null;
+  const usedToday = !preview && status === 'premium' && !staff && day ? Math.min(CHATS_PER_DAY, day.today.length) : null;
 
   useFocusEffect(
     useCallback(() => {
-      if (!userId) return;
+      if (!userId || preview) return;
       let alive = true;
       (async () => {
         const home = await loadHablarHome(userId, limited);
@@ -113,18 +121,19 @@ export default function Hablar() {
       return () => {
         alive = false;
       };
-    }, [userId, limited]),
+    }, [userId, limited, preview]),
   );
 
   const openDoor = (kind: 'scenario' | 'free', topic?: string) => {
+    if (preview) return;
     if (today.state === 'open') return router.push(`/hablar-chat?session=${today.conversation.id}`);
     if (today.state === 'done') return router.push(`/hablar-summary?session=${today.chats[0].id}`);
     if (freeLeft === 0) return paywall('hablar');
     router.push(`/hablar-brief?kind=${kind}${topic ? `&topic=${topic}` : ''}&level=${band}`);
   };
 
-  const band: Band = level ?? 'A1';
-  const pick = level ? pickScenario(past, band) : null;
+  const band: Band = preview ? 'A1' : (level ?? 'A1');
+  const pick = preview ? pickScenario([], band) : level ? pickScenario(past, band) : null;
   // Every scenario, the ones written at this level first; otherwise course order.
   const byFit = [...scenarios].sort((a, b) => levelDistance(a, band) - levelDistance(b, band));
 

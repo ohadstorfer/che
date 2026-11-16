@@ -430,6 +430,9 @@ function useReduced() {
   return reduced;
 }
 
+const NO_STREAK: StreakStatus = { kind: "none" };
+const NO_DAYS: string[] = [];
+
 /**
  * The header's data for the tabs that don't load it themselves: her streak row
  * and this week's finished days. Read from the one shared copy (streak-week.ts)
@@ -437,15 +440,17 @@ function useReduced() {
  * tab comes into focus. (Course loads its own, alongside the path, so it can
  * celebrate a new day — and publishes it to the same copy.)
  */
-export function useStreakWeek() {
+export function useStreakWeek(preview = false) {
   const { session } = useAuth();
   const userId = session?.user.id;
   const value = useStreakWeekValue(userId);
   useFocusEffect(
     useCallback(() => {
-      if (userId) void fetchStreakWeek(userId).catch(() => {});
-    }, [userId]),
+      if (userId && !preview) void fetchStreakWeek(userId).catch(() => {});
+    }, [userId, preview]),
   );
+  // The tour's preview (useTabPreview): no streak yet, an empty week.
+  if (preview) return { status: NO_STREAK, weekDone: NO_DAYS };
   return {
     status: value ? streakStatus(value.streak, localDateStr()) : null,
     weekDone: value?.weekDone ?? null,
