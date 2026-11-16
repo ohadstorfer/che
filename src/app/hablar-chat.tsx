@@ -1688,7 +1688,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: colors.onPastel,
   },
-  hintEn: { ...font.body[600], fontSize: 14, color: colors.onPastel, opacity: 0.85 },
+  hintEn: { ...font.body[600], fontSize: 16, color: colors.onPastel, opacity: 0.85 },
   hintMore: { ...font.body[700], fontSize: 12, color: colors.onPastel, opacity: 0.8 },
 
   bar: {

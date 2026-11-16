@@ -564,7 +564,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
   },
   es: { ...font.body[800], fontSize: 17, color: colors.ink },
-  en: { ...font.body[600], fontSize: 14, color: colors.muted },
+  en: { ...font.body[600], fontSize: 16, color: colors.muted },
   enNote: { ...font.body[500], fontSize: 12, color: colors.muted, opacity: 0.85, fontStyle: 'italic' },
   playButton: {
     width: 44,

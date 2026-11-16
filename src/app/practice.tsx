@@ -1372,7 +1372,7 @@ const styles = StyleSheet.create({
   missedLabel: { ...font.body[800], fontSize: 13, color: colors.muted, letterSpacing: 0.3 },
   missedRow: { flexDirection: 'row', justifyContent: 'space-between', gap: 12 },
   missedEs: { ...font.body[800], fontSize: 17, color: colors.ink },
-  missedEn: { ...font.body[600], fontSize: 15, color: colors.primaryDark, flexShrink: 1, textAlign: 'right' },
+  missedEn: { ...font.body[600], fontSize: 17, color: colors.primaryDark, flexShrink: 1, textAlign: 'right' },
   resultIcon: {
     width: 76,
     height: 76,

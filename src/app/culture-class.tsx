@@ -1882,9 +1882,9 @@ const styles = StyleSheet.create({
   },
   popExample: { paddingRight: 4, gap: 1 },
   popExampleEs: { ...font.body[700], fontSize: 15, color: colors.ink },
-  popExampleEn: { ...font.body[600], fontSize: 13, color: colors.muted },
+  popExampleEn: { ...font.body[600], fontSize: 15, color: colors.muted },
   popNote: { ...font.body[600], fontSize: 13, lineHeight: 18, color: colors.muted, paddingRight: 4 },
-  popMeaning: { ...font.body[600], fontSize: 14, color: colors.muted, marginTop: 1 },
+  popMeaning: { ...font.body[600], fontSize: 16, color: colors.muted, marginTop: 1 },
 
   // Fact card --------------------------------------------------------------
   factCard: { backgroundColor: pastel.butter },
@@ -1935,7 +1935,7 @@ const styles = StyleSheet.create({
   wordEn: { ...font.body[600], fontSize: 21, lineHeight: 27, color: colors.onPastel, opacity: 0.85 },
   wordExampleBox: { padding: 16, borderRadius: radius.md, backgroundColor: colors.chip, boxShadow: clay.surface, gap: 3 },
   wordExampleEs: { ...font.body[700], fontSize: 18, lineHeight: 24, color: colors.onPastel },
-  wordExampleEn: { ...font.body[600], fontSize: 15, lineHeight: 21, color: colors.muted },
+  wordExampleEn: { ...font.body[600], fontSize: 17, lineHeight: 23, color: colors.muted },
   wordNote: { ...font.body[600], fontSize: 14, lineHeight: 19, color: colors.onPastel, opacity: 0.85 },
   deckFoot: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, paddingTop: 20 },
   dots: { flexDirection: 'row', gap: 6, alignItems: 'center' },

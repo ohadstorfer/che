@@ -3259,7 +3259,7 @@ const styles = StyleSheet.create({
   phraseCardCentered: { marginTop: 10, paddingTop: 18 },
   phraseCardHead: { alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', marginBottom: 6 },
   // Sits on the sentence's last line, centred on the words rather than their baseline.
-  phraseCardEn: { ...font.body[700], fontSize: 15, lineHeight: 20, color: colors.muted, textAlign: 'center', marginTop: 4 },
+  phraseCardEn: { ...font.body[700], fontSize: 17, lineHeight: 23, color: colors.muted, textAlign: 'center', marginTop: 4 },
   phraseCardSpeak: { position: 'absolute', right: 14, top: 14 },
   // Listen: one pill, play at one end, the slow button at the other.
   player: {
@@ -3313,7 +3313,7 @@ const styles = StyleSheet.create({
   tipRowPad: { paddingVertical: 14, paddingHorizontal: 18 },
   tipRowInk: { borderTopWidth: OUTLINE, borderTopColor: colors.ink },
   tipEs: { ...font.display[800], fontSize: 23, lineHeight: 28, letterSpacing: -0.3, color: colors.ink },
-  tipEn: { ...font.body[600], fontSize: 16, lineHeight: 22, color: colors.muted, marginTop: 3 },
+  tipEn: { ...font.body[600], fontSize: 17, lineHeight: 23, color: colors.muted, marginTop: 3 },
   tipRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 10, columnGap: 8 },
   tipRowRule: { borderTopWidth: 2, borderTopColor: colors.border },
   tipHeadRow: { backgroundColor: colors.stone, paddingVertical: 9 },

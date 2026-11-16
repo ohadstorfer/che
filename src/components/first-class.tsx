@@ -1029,7 +1029,7 @@ const styles = StyleSheet.create({
   },
   chipText: { ...font.body[800], fontSize: 12, letterSpacing: 1.4, color: colors.ink },
 
-  replyEn: { ...font.body[600], fontSize: 14, color: colors.muted },
+  replyEn: { ...font.body[600], fontSize: 16, color: colors.muted },
 
   call: { flex: 1 },
   callBody: { paddingHorizontal: 20, paddingBottom: 18, gap: 12 },
@@ -1087,7 +1087,7 @@ const styles = StyleSheet.create({
   noteBar: { width: 4, borderRadius: 2 },
   noteTime: { ...font.body[700], fontSize: 13, color: colors.muted, minWidth: 28, textAlign: 'right' },
   callEs: { ...font.display[800], fontSize: 24, lineHeight: 29, color: colors.ink },
-  callEn: { ...font.body[600], fontSize: 15, color: colors.muted },
+  callEn: { ...font.body[600], fontSize: 17, color: colors.muted },
   callDockInner: { gap: 12 },
   callReply: {
     flexDirection: 'row',
@@ -1109,7 +1109,7 @@ const styles = StyleSheet.create({
     boxShadow: `0 0 0 2px ${colors.ink}`,
   },
   callReplyEs: { ...font.display[800], fontSize: 21, lineHeight: 25, color: colors.ink },
-  callReplyEn: { ...font.body[600], fontSize: 15, color: colors.muted },
+  callReplyEn: { ...font.body[600], fontSize: 17, color: colors.muted },
   callFoot: { ...font.body[600], fontSize: 13, color: colors.muted, textAlign: 'center' },
   dots: { flexDirection: 'row', gap: 8, height: 34, alignItems: 'center', justifyContent: 'center' },
   dotsSmall: { flexDirection: 'row', gap: 4, alignItems: 'center' },
