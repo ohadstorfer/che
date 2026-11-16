@@ -500,6 +500,8 @@ const TALK_RATE: Record<Level, number> = { none: 0.75, basics: 0.75, spanish: 0.
 
 function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDone: () => void }) {
   const [turn, setTurn] = useState(0);
+  // Hidden until asked, as in the app: she reads the Spanish first.
+  const [showEn, setShowEn] = useState(false);
   const [live, setLive] = useState(false);
   const line = SCRIPT[turn];
   const over = line.replies.length === 0;
@@ -531,24 +533,35 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
   };
 
   const bottom = useSafeAreaInsets().bottom;
-  // The sticker scene (canvas "Pancho Call Screen Options", C): the page is
-  // sage, Pancho's line a tilted speech sticker, Pancho himself big below it,
-  // her replies butter stickers. No dock, no chip: one surface.
+  // As the call in the app looks (hablar-chat), canvas "Pancho Call Screen
+  // Options", E: who is on the line, his line in a speech bubble with Replay ·
+  // Slow · English under it, Pancho with his mate, and a cream dock holding
+  // her two replies. No mic: nothing here listens, so nothing promises to.
   return (
     <View style={styles.call}>
-      <View style={styles.callPill}>
-        <Ionicons name="call" size={13} color="#3F7A57" />
-        <Text style={styles.callPillText}>Pancho</Text>
+      <View style={styles.callHead}>
+        <Text style={styles.callName}>Pancho</Text>
+        <Text style={styles.callSub}>Your first call</Text>
       </View>
-      <Animated.View key={turn} entering={FadeInDown.duration(260).easing(EASE_OUT)} style={styles.callBubble}>
-        <Text style={styles.callEs}>{line.es}</Text>
-        <Text style={styles.callEn}>{line.en}</Text>
-        {line.audio ? <CallAudio path={line.audio} rate={rate} /> : null}
+      <Animated.View key={turn} entering={FadeInDown.duration(260).easing(EASE_OUT)} style={styles.callBubbleWrap}>
+        <View style={styles.callBubble}>
+          <Text style={styles.callEs}>{line.es}</Text>
+          {showEn ? <Text style={styles.callEn}>{line.en}</Text> : null}
+          <View style={styles.callRule} />
+          <View style={styles.callTools}>
+            {line.audio ? <CallAudio path={line.audio} rate={rate} /> : null}
+            <Pressable onPress={() => setShowEn((v) => !v)} hitSlop={8} accessibilityRole="button" style={styles.callTool}>
+              <MaterialCommunityIcons name="translate" size={18} color={colors.primary} />
+              <Text style={styles.callToolText}>English</Text>
+            </Pressable>
+          </View>
+        </View>
+        <View style={styles.callTail} />
       </Animated.View>
       <View style={styles.callStage}>
-        <Image source={POSE.wave} style={styles.callPancho} contentFit="contain" accessibilityLabel="Pancho waving" />
+        <Image source={POSE.mate} style={styles.callPancho} contentFit="contain" accessibilityLabel="Pancho with his mate" />
       </View>
-      <View style={styles.callDock}>
+      <View style={[styles.callDock, { paddingBottom: 24 + bottom }]}>
         {over ? (
           <>
             {/* The call above is scripted; the real one isn't, and says so. */}
@@ -558,14 +571,11 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
         ) : (
           <>
             <Text style={styles.callHint}>SAY ONE OUT LOUD, THEN TAP IT</Text>
-            {line.replies.map((r, i) => (
+            {line.replies.map((r) => (
               <Pressable
                 key={r.es}
                 onPress={say}
-                style={({ pressed }) => [
-                  styles.callReply,
-                  { transform: [{ rotate: i === 0 ? '-1deg' : '1deg' }, { scale: pressed ? 0.97 : 1 }] },
-                ]}>
+                style={({ pressed }) => [styles.callReply, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
                 <Text style={styles.callReplyEs}>{r.es}</Text>
                 <Text style={styles.callReplyEn}>{r.en}</Text>
               </Pressable>
@@ -579,10 +589,12 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
           </Pressable>
         ) : null}
       </View>
-      <View style={{ height: 36 + bottom }} />
     </View>
   );
 }
+
+/** Soft ink that still reads on sage and on the cream dock. */
+const CALL_SOFT = '#5E4A3C';
 
 /**
  * Pancho's line, out loud: ▶ at his speed for her level, and the tortoise
@@ -596,20 +608,16 @@ function CallAudio({ path, rate }: { path: string; rate: number }) {
     playAudio(path, () => setOn(null), which === 'play' ? rate : rate * 0.8);
   };
   return (
-    <View style={styles.callAudio}>
-      <Pressable
-        onPress={() => go('play')}
-        accessibilityLabel="Listen"
-        style={({ pressed }) => [styles.callPlay, { transform: [{ scale: pressed ? 0.94 : 1 }] }]}>
-        <Ionicons name={on === 'play' ? 'volume-high' : 'play'} size={20} color={colors.onPrimary} />
+    <>
+      <Pressable onPress={() => go('play')} hitSlop={8} accessibilityRole="button" style={styles.callTool}>
+        <Ionicons name={on === 'play' ? 'volume-high' : 'refresh'} size={18} color={colors.primary} />
+        <Text style={styles.callToolText}>Replay</Text>
       </Pressable>
-      <Pressable
-        onPress={() => go('slow')}
-        accessibilityLabel="Play slowly"
-        style={({ pressed }) => [styles.callSlow, on === 'slow' && { backgroundColor: colors.primarySoft }, { transform: [{ scale: pressed ? 0.94 : 1 }] }]}>
-        <MaterialCommunityIcons name="tortoise" size={24} color={colors.primary} />
+      <Pressable onPress={() => go('slow')} hitSlop={8} accessibilityRole="button" style={styles.callTool}>
+        <MaterialCommunityIcons name="tortoise" size={20} color={colors.primary} />
+        <Text style={[styles.callToolText, on === 'slow' && { color: colors.primaryDark }]}>Slow</Text>
       </Pressable>
-    </View>
+    </>
   );
 }
 
@@ -718,41 +726,51 @@ const styles = StyleSheet.create({
 
   replyEn: { ...font.body[600], fontSize: 14, color: colors.muted },
 
-  call: { flex: 1, paddingHorizontal: 20 },
-  callPill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    alignSelf: 'flex-start',
-    marginTop: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    borderRadius: 99,
-    backgroundColor: colors.card,
-    boxShadow: `0 0 0 2px ${colors.ink}, 2px 3px 0 2px ${colors.ink}`,
-  },
-  callPillText: { ...font.body[800], fontSize: 13, color: colors.ink },
+  call: { flex: 1 },
+  callHead: { alignItems: 'center', marginTop: 10 },
+  callName: { ...font.display[900], fontSize: 20, color: colors.ink },
+  callSub: { ...font.body[600], fontSize: 14, color: CALL_SOFT },
+  callBubbleWrap: { marginTop: 20, marginHorizontal: 18 },
   callBubble: {
-    alignSelf: 'flex-end',
-    maxWidth: 300,
-    marginTop: 24,
+    alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 18,
+    paddingTop: 20,
+    paddingBottom: 12,
     gap: 6,
     borderRadius: 26,
     backgroundColor: colors.card,
     boxShadow: `0 0 0 3px ${colors.ink}, 4px 5px 0 3px ${colors.ink}`,
-    transform: [{ rotate: '2deg' }],
   },
-  callEs: { ...font.display[900], fontSize: 30, lineHeight: 33, color: colors.ink },
-  callEn: { ...font.body[700], fontSize: 15, color: colors.muted },
-  callAudio: { flexDirection: 'row', gap: 10, marginTop: 6 },
-  callPlay: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.primary, boxShadow: clay.chip },
-  callSlow: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card, boxShadow: `0 0 0 2px ${colors.primary}` },
-  callStage: { flex: 1, minHeight: 110 },
-  // Mirrored, so he faces his speech bubble (top right) instead of the edge.
-  callPancho: { width: 200, height: '100%', maxHeight: 240, marginLeft: -8, transform: [{ scaleX: -1 }] },
-  callDock: { gap: 14 },
+  // The bubble's point, toward Pancho: a turned square under its edge.
+  callTail: {
+    position: 'absolute',
+    left: 116,
+    bottom: -9,
+    width: 20,
+    height: 20,
+    backgroundColor: colors.card,
+    borderRightWidth: 3,
+    borderBottomWidth: 3,
+    borderColor: colors.ink,
+    transform: [{ rotate: '45deg' }],
+  },
+  callEs: { ...font.display[800], fontSize: 28, lineHeight: 34, color: colors.ink, textAlign: 'center' },
+  callEn: { ...font.body[700], fontSize: 16, color: colors.muted, textAlign: 'center' },
+  callRule: { alignSelf: 'stretch', height: 2, borderRadius: 1, backgroundColor: colors.border, marginTop: 8 },
+  callTools: { flexDirection: 'row', justifyContent: 'center', gap: 22 },
+  callTool: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 36 },
+  callToolText: { ...font.body[800], fontSize: 15, color: colors.primary },
+  callStage: { flex: 1, minHeight: 110, alignItems: 'center', justifyContent: 'center', paddingTop: 14 },
+  callPancho: { width: 200, height: '100%', maxHeight: 230 },
+  callDock: {
+    gap: 12,
+    paddingHorizontal: 20,
+    paddingTop: 18,
+    backgroundColor: colors.card,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    boxShadow: `0 -2px 0 2px ${colors.ink}`,
+  },
   callReply: {
     backgroundColor: pastel.butter,
     borderRadius: 22,
@@ -761,9 +779,9 @@ const styles = StyleSheet.create({
     gap: 4,
     boxShadow: `0 0 0 2.5px ${colors.ink}, 3px 4px 0 2.5px ${colors.ink}`,
   },
-  callReplyEs: { ...font.display[800], fontSize: 23, lineHeight: 27, color: colors.ink },
-  callReplyEn: { ...font.body[600], fontSize: 15, color: '#6B5646' },
-  callHint: { ...font.body[800], fontSize: 12, letterSpacing: 1, color: colors.ink, textAlign: 'center' },
+  callReplyEs: { ...font.display[800], fontSize: 24, lineHeight: 28, color: colors.ink },
+  callReplyEn: { ...font.body[600], fontSize: 16, color: '#6B5646' },
+  callHint: { ...font.body[800], fontSize: 12, letterSpacing: 1, color: CALL_SOFT, textAlign: 'center' },
   callReal: { ...font.body[800], fontSize: 15, lineHeight: 21, color: colors.ink, textAlign: 'center', paddingHorizontal: 8 },
   micNote: { ...font.body[600], fontSize: 12, color: colors.muted, textAlign: 'center' },
   liveLink: { ...font.body[800], fontSize: 13, color: colors.primaryDark, textAlign: 'center', paddingVertical: 6 },
