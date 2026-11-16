@@ -112,6 +112,16 @@ export function WelcomeTour() {
     router.navigate(tabStep?.route ?? '/home');
   }, [tabStep?.route]);
 
+  // The next tab is drawn ahead, while she reads this one: a tab's first mount
+  // and its stickers slapping on take a second or more, which Next would
+  // otherwise wait through. A beat late, so it never competes with this step.
+  useEffect(() => {
+    const ahead = STEPS[step];
+    if (!ahead) return;
+    const t = setTimeout(() => router.prefetch(ahead.route), 350);
+    return () => clearTimeout(t);
+  }, [step]);
+
   // Android back is Skip: the tour never traps her.
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
