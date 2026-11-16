@@ -308,15 +308,18 @@ function ScreenView({
 // asado is, then why it matters. Explained, never quizzed: a first day is no
 // time to guess at a country she doesn't know yet. Art and tones as that
 // class deals them (culture-art.ts, CARD_TONES).
-const asadoCard = (n: number | ImageSourcePropType, text: string, bg: string): Fact => ({
-  art: typeof n === 'number' ? artFor('asado', n) : n,
+// The art is passed in, never a number: in React Native a required image *is*
+// a number (its asset id), so "a number means the class's nth picture" sent
+// the steak and the chori to artFor and showed the grill and the provoleta.
+const asadoCard = (art: ImageSourcePropType, text: string, bg: string): Fact => ({
+  art,
   text,
   hero: null,
   chip: 'More than a barbecue',
   bg,
 });
 const ASADO: Fact[] = [
-  asadoCard(0, 'An **asado** is grilled meat, sure. But mostly it’s an excuse to spend the whole day together. **¿Hacemos un asado?** really means: want to hang out?', pastel.butter),
+  asadoCard(artFor('asado', 0), 'An **asado** is grilled meat, sure. But mostly it’s an excuse to spend the whole day together. **¿Hacemos un asado?** really means: want to hang out?', pastel.butter),
   // The chori, not the grill again (the first card already shows it).
   asadoCard(require('@/assets/images/objects/choripan-figure.webp'), 'An [asado] is also how Argentines celebrate almost anything: a birthday, a win, a new job, a Friday.', pastel.peach),
   // A steak (vacío) rather than the class's provoleta: the weekly asado is about the meat.
