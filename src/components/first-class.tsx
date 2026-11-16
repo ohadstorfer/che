@@ -416,6 +416,21 @@ function OrderStep({ word, onDone }: { word: Form; onDone: () => void }) {
 const SLANG_WORDS = [DALE, RE];
 const uniqueWords = (words: ArWord[]) => [...new Map(words.map((w) => [w.id, w])).values()];
 
+/** A meaning's words, with "okay" and "ok" as one: "done, okay" → done, ok. */
+const meaningWords = (en: string) =>
+  en
+    .toLowerCase()
+    .split(/[^a-z]+/)
+    .filter(Boolean)
+    .map((w) => (w === 'okay' ? 'ok' : w));
+
+/** A wrong answer may not mean what a right one does: "listo" (done, okay)
+ *  is no decoy for "dale" (OK), and the class has no "Both are right". */
+const clashes = (w: ArWord) => {
+  const theirs = meaningWords(w.en);
+  return SLANG_WORDS.some((s) => s.id !== w.id && meaningWords(s.en).some((m) => theirs.includes(m)));
+};
+
 function SlangRound({
   onDone,
   onProgress,
@@ -429,7 +444,7 @@ function SlangRound({
   const [index, setIndex] = useState(0);
   const [started, setStarted] = useState(false);
   const retried = useRef(new Set<number>());
-  const decoys = useMemo(() => uniqueWords(SLANG_WORDS.flatMap((w) => decoyWords(packOf(w.id)))), []);
+  const decoys = useMemo(() => uniqueWords(SLANG_WORDS.flatMap((w) => decoyWords(packOf(w.id)))).filter((w) => !clashes(w)), []);
   const forms = useMemo(() => decoys.map(arForm), [decoys]);
   const gapForms = useMemo(() => decoys.map(toGapForm), [decoys]);
 
