@@ -17,7 +17,7 @@ export default function Words() {
   // The tabs' opaque `sceneStyle` (see (tabs)/_layout) covers the root
   // gradient, so this screen's actual background is flat `colors.bg`.
   useStatusBarColor(colors.bg);
-  // The tour's preview reads nothing: no streak, no scores.
+  // The tour's preview reads nothing: no scores, and the one-day streak onboarding lit.
   const preview = useTabPreview();
   const { status: streak, weekDone } = useStreakWeek(preview);
   const scores = usePackScores(preview);

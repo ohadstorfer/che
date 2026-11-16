@@ -45,7 +45,7 @@ const SHOW_RESUME = false;
 
 export default function Culture() {
   useStatusBarColor(colors.bg);
-  // The tour's preview reads nothing: no streak, no class done.
+  // The tour's preview reads nothing: no class done, and the one-day streak onboarding lit.
   const preview = useTabPreview();
   const { status: streak, weekDone } = useStreakWeek(preview);
   const isDone = useCultureDone(preview);

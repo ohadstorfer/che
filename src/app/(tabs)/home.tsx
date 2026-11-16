@@ -19,7 +19,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { AppHeader, Pulse } from '@/components/app-header';
+import { AppHeader, PREVIEW_STREAK, previewWeek, Pulse } from '@/components/app-header';
 import { Guidebook } from '@/components/guidebook';
 import { PlacementCard } from '@/components/placement-card';
 import { RedoCard, type StepRect } from '@/components/redo-card';
@@ -800,7 +800,7 @@ const NOOP = () => {};
 /**
  * Course as the tour's preview shows it, before she has bought: the road's
  * first two units, kept in the bundle (lib/tour-preview-course.ts), standing
- * on the first lesson with nothing done and no streak. No progress, push
+ * on the first lesson with nothing done and onboarding's one-day streak. No progress, push
  * status, placement or chats are read, and nothing on it opens — the tour's
  * overlay takes every touch anyway.
  */
@@ -821,8 +821,8 @@ function CoursePreview() {
           onPress: NOOP,
           accessibilityLabel: `Section ${section.ordinal}: ${section.title_en}, level ${section.cefr}`,
         }}
-        status={streakStatus(null)}
-        weekDone={NO_DAYS}
+        status={PREVIEW_STREAK}
+        weekDone={previewWeek()}
       />
       <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
@@ -855,7 +855,6 @@ function CoursePreview() {
     </View>
   );
 }
-const NO_DAYS: string[] = [];
 
 function Home() {
   // Her id comes straight off the session, which is read from storage: waiting

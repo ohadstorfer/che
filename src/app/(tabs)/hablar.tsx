@@ -69,7 +69,7 @@ const todayOf = (latest: ConversationRow | null, today: ConversationRow[], staff
 export default function Hablar() {
   useStatusBarColor(colors.bg);
   // The tour's preview reads nothing: Pancho is calling, at A1, with no chats
-  // counted and no streak.
+  // counted, and onboarding's one-day streak.
   const preview = useTabPreview();
   const { status: streak, weekDone } = useStreakWeek(preview);
   // Staff have no daily limit (hablar-start agrees), so a finished chat never locks the tab.
