@@ -326,7 +326,8 @@ export const WORDS_OF_DAY: Record<Level, [string, string][]> = {
  *  optimized copies in che/social/out/optimized. */
 export const COURSE_CLIP: Record<Why, number> = {
   trip: require('@/assets/videos/onboarding/course-trip.mp4'),
-  moving: require('@/assets/videos/onboarding/course-moving.mp4'),
+  // Moving shows the culture cut: its own ("¿Sos del 4° B?") read as confusing.
+  moving: require('@/assets/videos/onboarding/course-culture.mp4'),
   love: require('@/assets/videos/onboarding/course-love.mp4'),
   people: require('@/assets/videos/onboarding/course-people.mp4'),
   culture: require('@/assets/videos/onboarding/course-culture.mp4'),
