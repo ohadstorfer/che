@@ -286,7 +286,7 @@ function ScreenView({
     case 'asado-3':
       return <FactCard key={id} fact={ASADO[2]} onDone={onNext} tapToAdvance={false} bigArt />;
     case 'call':
-      return <CallStep admin={admin} rate={TALK_RATE[level]} onDone={onNext} />;
+      return <CallStep admin={admin} rate={TALK_RATE[level]} onDone={onNext} onProgress={onProgress} />;
   }
 }
 
@@ -314,6 +314,10 @@ const ASADO: Fact[] = [
  *  reads as "you've begun" from the first screen. */
 const HEAD_START = 0.15;
 
+/** Fast progress: each part's first steps fill most of its piece, the last
+ *  ones a little (ease-out: a third of the way shows as over half). */
+const frontLoaded = (raw: number) => 1 - (1 - raw) ** 2;
+
 function PartBar({ at }: { at: number }) {
   const runs: { part: Part; from: number; size: number }[] = [];
   SCREENS.forEach((s, i) => {
@@ -330,7 +334,10 @@ function PartBar({ at }: { at: number }) {
         accessibilityValue={{ min: 0, max: SCREENS.length, now: Math.floor(at) }}>
         {runs.map((r) => (
           <View key={r.from} style={styles.barPiece}>
-            <BarFill color={PARTS[r.part].color} share={Math.max(Math.min(Math.max((at - r.from) / r.size, 0), 1), r.from === 0 ? HEAD_START : 0)} />
+            <BarFill
+              color={PARTS[r.part].color}
+              share={Math.max(frontLoaded(Math.min(Math.max((at - r.from) / r.size, 0), 1)), r.from === 0 ? HEAD_START : 0)}
+            />
           </View>
         ))}
       </View>
@@ -523,7 +530,18 @@ const SEND_MS = 120;
 const TYPING_AT = 650;
 const TYPING_FOR = 1000;
 
-function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDone: () => void }) {
+function CallStep({
+  admin,
+  rate,
+  onDone,
+  onProgress,
+}: {
+  admin: boolean;
+  rate: number;
+  onDone: () => void;
+  /** How far into the call, a turn at a time, for the bar's speaking piece. */
+  onProgress: (share: number) => void;
+}) {
   const [turn, setTurn] = useState(0);
   const [phase, setPhase] = useState<CallPhase>('speaking');
   const [msgs, setMsgs] = useState<Msg[]>([{ kind: 'pancho', turn: 0 }]);
@@ -532,6 +550,9 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
   const line = SCRIPT[turn];
   const over = line.replies.length === 0;
   const thread = useRef<ScrollView>(null);
+  useEffect(() => {
+    onProgress(turn / SCRIPT.length);
+  }, [turn, onProgress]);
 
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const later = (ms: number, fn: () => void) => void timers.current.push(setTimeout(fn, ms));
