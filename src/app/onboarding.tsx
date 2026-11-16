@@ -30,6 +30,7 @@ import Animated, {
   withSequence,
   withTiming,
   Keyframe,
+  LinearTransition,
   ZoomIn,
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -78,6 +79,7 @@ import {
 import { askNotifyPermission } from '@/lib/notify-permission';
 import { type SocialResult, signInWithApple, signInWithGoogle } from '@/lib/social-auth';
 import { useStatusBarColor } from '@/lib/status-bar-color';
+import { strikeLine } from '@/lib/strike-line';
 import { supabase } from '@/lib/supabase';
 import { clay, colors, font, pastel, radius, type } from '@/lib/theme';
 
@@ -97,12 +99,14 @@ import { clay, colors, font, pastel, radius, type } from '@/lib/theme';
 type Step = 'name' | 'level' | 'why' | 'try' | 'goal' | 'building' | 'intro' | 'class' | 'streak' | 'notify' | 'account';
 /** The order, by where notifications are asked (app_config `onboarding_notify_at`). */
 const ORDER: Record<NotifyAt, Step[]> = {
-  after_class: ['name', 'level', 'why', 'try', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'account'],
-  after_build: ['name', 'level', 'why', 'try', 'goal', 'building', 'notify', 'intro', 'class', 'streak', 'account'],
+  after_class: ['name', 'level', 'why', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'account'],
+  after_build: ['name', 'level', 'why', 'goal', 'building', 'notify', 'intro', 'class', 'streak', 'account'],
 };
 /** The questions, on the progress bar. The builder, the first class and its
- *  streak are moments with their own screens; the account sits past the bar. */
-const BAR: Step[] = ['name', 'level', 'why', 'try', 'goal', 'notify'];
+ *  streak are moments with their own screens; the account sits past the bar.
+ *  The "Make it Argentine" step ('try') is out of the flow for now: its screen
+ *  and TryWord stay below, ready to go back in by adding 'try' after 'why'. */
+const BAR: Step[] = ['name', 'level', 'why', 'goal', 'notify'];
 /** Full-screen steps: no back button or bar above them. */
 const BARE: Step[] = ['intro', 'class', 'streak'];
 /** Where back goes, where it isn't simply the step before: a moment (the
@@ -228,7 +232,7 @@ export default function Onboarding() {
             <FirstClassOpener onStart={() => go('class')} onSkip={afterClass} />
           </SafeAreaView>
         ) : step === 'class' ? (
-          <FirstClassLesson onFinish={classDone} onClose={back} />
+          <FirstClassLesson level={a.level} onFinish={classDone} onClose={back} />
         ) : (
           <StreakCelebration streak={1} design={DAY_ONE} cta="Continue" onDone={afterClass} />
         )}
@@ -597,6 +601,90 @@ function Underline({ marked }: { marked: boolean }) {
   );
 }
 
+/**
+ * One word of the "Make it Argentine" sentence. A textbook word, once she taps,
+ * is crossed out by the welcome screen's hand-drawn line, then lifts above its
+ * place, smaller and faded, while the street word is slapped on where it stood.
+ * Left to right, a word at a time. The rest just stay.
+ */
+function TryWord({
+  book,
+  local,
+  order,
+  done,
+  reduced,
+  size,
+}: {
+  book: string;
+  local: string;
+  order: number;
+  done: boolean;
+  reduced: boolean;
+  size: number;
+}) {
+  const target = order >= 0;
+  const swapped = done && target;
+  const text = { fontSize: size, lineHeight: size + 12 };
+  const [w, setW] = useState(0);
+  const line = strikeLine(w);
+  const length = useSharedValue(0);
+  const strike = useSharedValue(0);
+  const lift = useSharedValue(0);
+  const delay = Math.max(0, order) * 140;
+  useEffect(() => {
+    if (!swapped) return;
+    if (reduced) {
+      strike.value = 1;
+      lift.value = 1;
+      return;
+    }
+    strike.value = withDelay(delay, withTiming(1, { duration: 260, easing: EASE_OUT }));
+    lift.value = withDelay(delay + 220, withTiming(1, { duration: 320, easing: EASE_OUT }));
+  }, [swapped, reduced, delay, strike, lift]);
+  const lineProps = useAnimatedProps(() => ({ strokeDashoffset: length.value * (1 - strike.value) }));
+  const bookStyle = useAnimatedStyle(() => ({
+    opacity: 1 - 0.4 * lift.value,
+    transform: [{ translateY: -(size * 1.32) * lift.value }, { scale: 1 - 0.3 * lift.value }],
+  }));
+
+  return (
+    <Animated.View layout={reduced ? undefined : LinearTransition.duration(260)} style={styles.tryWord}>
+      {swapped ? (
+        <Animated.View
+          entering={reduced ? undefined : ZoomIn.duration(260).delay(delay + 300).easing(EASE_OUT)}
+          style={[styles.tryWordFixed, { transform: [{ rotate: WORD_TILT[order % 4] }] }]}>
+          <Text style={[styles.tryText, text]}>{local}</Text>
+        </Animated.View>
+      ) : null}
+      <Animated.View style={[swapped && styles.tryBookLifted, swapped && bookStyle]}>
+        <View
+          onLayout={(e) => {
+            if (w) return;
+            const width = e.nativeEvent.layout.width;
+            length.value = strikeLine(width).length;
+            setW(width);
+          }}>
+          <Text style={[styles.tryText, text, swapped && { color: colors.muted }]}>{book}</Text>
+          {swapped && w > 0 ? (
+            <Svg width={w + 12} height={18} style={[styles.tryStrike, { top: (size + 12) / 2 - 10 }]} pointerEvents="none">
+              <AnimatedPath
+                d={line.d}
+                stroke={colors.primary}
+                strokeWidth={4}
+                strokeLinecap="round"
+                fill="none"
+                strokeDasharray={[line.length, line.length]}
+                animatedProps={lineProps}
+              />
+            </Svg>
+          ) : null}
+        </View>
+      </Animated.View>
+      {!done && target ? <Underline marked /> : null}
+    </Animated.View>
+  );
+}
+
 function TryItStep({ line, reduced, onNext }: { line: TryIt; reduced: boolean; onNext: () => void }) {
   // Not a test: Pancho says how many words give the textbook away, and one
   // press turns them all into the Buenos Aires ones together.
@@ -604,8 +692,6 @@ function TryItStep({ line, reduced, onNext }: { line: TryIt; reduced: boolean; o
   const says = done ? line.done : line.start;
   const length = Math.max(line.book.join(' ').length, line.local.join(' ').length);
   const size = length <= 22 ? 38 : length <= 30 ? 33 : 28;
-  const text = { fontSize: size, lineHeight: size + 12 };
-
   const reveal = () => {
     setDone(true);
     success();
@@ -617,37 +703,36 @@ function TryItStep({ line, reduced, onNext }: { line: TryIt; reduced: boolean; o
       <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
         <Says line={says} small={says.length > 44} reduced={reduced} />
         <View style={styles.tryMiddle}>
-          <Animated.View entering={rise(1, reduced)} style={styles.tryCard} accessibilityLabel={done ? line.local.join(' ') : line.book.join(' ')}>
-            <View style={styles.tryWords}>
-              {line.book.map((word, k) => {
-                const order = line.targets.indexOf(k);
-                const fixed = done && order >= 0;
-                return (
-                  <View
-                    key={k}
-                    style={[styles.tryWord, fixed && [styles.tryWordFixed, { transform: [{ rotate: WORD_TILT[order % 4] }] }]]}>
-                    {fixed ? (
-                      // One after another, left to right, so the eye follows the sentence changing.
-                      <Animated.Text
-                        entering={reduced ? undefined : ZoomIn.duration(260).delay(order * 90).easing(EASE_OUT)}
-                        style={[styles.tryText, text]}>
-                        {line.local[k]}
-                      </Animated.Text>
-                    ) : (
-                      <Text style={[styles.tryText, text]}>{word}</Text>
-                    )}
-                    {!done && order >= 0 ? <Underline marked /> : null}
-                  </View>
-                );
-              })}
-            </View>
-            <Text style={styles.tryEn}>{line.en}</Text>
-            {/* The action is the card's own bottom edge, so it can't be missed. */}
+          <Animated.View entering={rise(1, reduced)}>
+            {/* The whole card is the button: a tap anywhere turns it Argentine, then moves on. */}
             <Pressable
               onPress={done ? onNext : reveal}
               accessibilityRole="button"
-              style={({ pressed }) => [styles.tryStrip, pressed && { opacity: 0.88 }]}>
-              <Text style={styles.tryStripText}>{done ? 'Continue' : 'Make it Argentine'}</Text>
+              accessibilityLabel={done ? `${line.local.join(' ')}. Continue` : `${line.book.join(' ')}. Make it Argentine`}
+              style={styles.tryCard}>
+              {({ pressed }) => (
+                <>
+                  <View style={[styles.tryWords, done && styles.tryWordsDone]}>
+                    {line.book.map((word, k) => (
+                      <TryWord
+                        key={k}
+                        book={word}
+                        local={line.local[k]}
+                        order={line.targets.indexOf(k)}
+                        done={done}
+                        reduced={reduced}
+                        size={size}
+                      />
+                    ))}
+                  </View>
+                  <Text style={styles.tryEn}>{line.en}</Text>
+                  {/* The action is the card's own bottom edge, so it can't be missed. */}
+                  <View style={[styles.tryStrip, pressed && { opacity: 0.88 }]}>
+                    {done ? null : <MaterialCommunityIcons name="creation" size={20} color={colors.onPrimary} />}
+                    <Text style={styles.tryStripText}>{done ? 'Continue' : 'Make it Argentine'}</Text>
+                  </View>
+                </>
+              )}
             </Pressable>
           </Animated.View>
         </View>
@@ -1165,6 +1250,8 @@ const styles = StyleSheet.create({
   },
   tryStrip: {
     minHeight: 58,
+    flexDirection: 'row',
+    gap: 8,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.primary,
@@ -1173,6 +1260,11 @@ const styles = StyleSheet.create({
   },
   tryStripText: { ...font.display[800], fontSize: 18, color: colors.onPrimary },
   tryWord: { minHeight: 46, justifyContent: 'center', paddingHorizontal: 3 },
+  // Room above each row for the crossed-out words to lift into.
+  tryWordsDone: { rowGap: 56, paddingTop: 66 },
+  // The crossed-out word, over the street word's spot, before it lifts away.
+  tryBookLifted: { position: 'absolute', left: -40, right: -40, top: 0, alignItems: 'center' },
+  tryStrike: { position: 'absolute', left: -2 },
   tryWordFixed: { paddingHorizontal: 11, borderRadius: 13, backgroundColor: pastel.sage, boxShadow: clay.chip },
   tryText: { ...font.display[900], color: colors.ink, letterSpacing: -0.6 },
   underline: { position: 'absolute', left: 3, right: 3, bottom: 0 },

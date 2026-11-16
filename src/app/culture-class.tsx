@@ -1097,7 +1097,21 @@ const CARD_TONES = [pastel.butter, pastel.sky, pastel.peach, pastel.sage, pastel
  * The fun fact, on a card of its own so it lands instead of hanging off the end
  * of a paragraph. A card class tells its whole story on these.
  */
-export function FactCard({ fact, onDone, onBack }: { fact: Fact; onDone: () => void; onBack?: () => void }) {
+export function FactCard({
+  fact,
+  onDone,
+  onBack,
+  tapToAdvance = true,
+  bigArt = false,
+}: {
+  fact: Fact;
+  onDone: () => void;
+  onBack?: () => void;
+  /** The picture larger (the onboarding class's three asado cards). */
+  bigArt?: boolean;
+  /** Off: only Continue moves on, a tap on the card does nothing (the onboarding class). */
+  tapToAdvance?: boolean;
+}) {
   const bottom = useSafeAreaInsets().bottom;
   const tap = useSideTap(onDone, onBack);
   // The biggest size fits about 22 words above the art; a longer card steps down one.
@@ -1106,9 +1120,9 @@ export function FactCard({ fact, onDone, onBack }: { fact: Fact; onDone: () => v
     <Pressable
       ref={tap.ref}
       style={[styles.card, styles.factCard, fact.bg ? { backgroundColor: fact.bg } : null]}
-      onPress={tap.onPress}
+      onPress={tapToAdvance ? tap.onPress : undefined}
       accessible={false}>
-      <Image source={fact.art} style={styles.factArt} contentFit="contain" accessible={false} />
+      <Image source={fact.art} style={[styles.factArt, bigArt && styles.factArtBig]} contentFit="contain" accessible={false} />
       <View style={styles.factBody}>
         <View style={styles.factChip}>
           <Text style={styles.factChipText}>{fact.chip ?? 'Did you know?'}</Text>
@@ -1863,6 +1877,7 @@ const styles = StyleSheet.create({
   factTextBig: { ...font.display[700], fontSize: 30, lineHeight: 36, letterSpacing: -0.4, color: colors.onPastel },
   factBold: { ...font.display[800], color: colors.primaryDark },
   factArt: { position: 'absolute', left: 4, bottom: 70, width: 150, height: 180 },
+  factArtBig: { left: 0, bottom: 60, width: 230, height: 270 },
   factFoot: { paddingHorizontal: 28, paddingTop: 12 },
   factButton: {
     alignSelf: 'flex-end',

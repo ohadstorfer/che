@@ -542,7 +542,10 @@ function tipInline(spans: TipSpan[]): React.ReactNode[] {
 // A clip and whether it is sounding right now. Nothing else on screen moves
 // while audio plays, so without this the speaker button is a dead control —
 // you press it and cannot tell whether anything happened.
-function useClip(path: string | null) {
+function useClip(path: string | null, onEnded?: () => void) {
+  // The latest one, read when the clip ends: the caller may re-render meanwhile.
+  const ended = useRef(onEnded);
+  ended.current = onEnded;
   const [playing, setPlaying] = useState(false);
   // A clip that will not sound has to say so. Silence on its own reads as a
   // broken button, and there is no console to look at on her phone.
@@ -566,6 +569,7 @@ function useClip(path: string | null) {
         path,
         (reason) => {
           set(false);
+          if (!reason) ended.current?.();
           // 'blocked' only means the browser wants a tap first, which the button
           // already asks for — not something to complain about.
           if (reason && reason !== 'blocked') setProblem(reason);
@@ -582,7 +586,7 @@ function useClip(path: string | null) {
   // Leaving the exercise takes its sound with it.
   useEffect(() => () => void (live.current && stopAudio()), []);
 
-  return { playing, problem, play, slow, rate };
+  return { playing, problem, play, slow, rate, run };
 }
 
 /** The slow way to hear a clip: three quarters of the speed, pitch kept. */
@@ -621,14 +625,21 @@ export function PlayButton({
   big,
   small,
   autoPlay = true,
+  speed = 1,
+  onEnded,
 }: {
   path: string;
+  /** When its clip stops without failing: finished, or cut short by another. */
+  onEnded?: () => void;
+  /** Below 1 for a learner's level (the first class's call); 1 is natural. */
+  speed?: number;
   big?: boolean;
   /** Inline at the end of a sentence, where a full-size button would outweigh the words. */
   small?: boolean;
   autoPlay?: boolean;
 }) {
-  const { playing, problem, play } = useClip(path);
+  const { playing, problem, run } = useClip(path, onEnded);
+  const play = useCallback(() => run(speed), [run, speed]);
   const reduced = useReducedMotion();
 
   // It says itself on arrival, the way a teacher would say the word before

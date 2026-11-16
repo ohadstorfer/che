@@ -1,12 +1,13 @@
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import type { ArWord } from '@/lib/argentine';
 import { clay, colors, font, gradients, press } from '@/lib/theme';
 import { PlayButton } from '@/components/exercises';
+import { preloadAudio } from '@/lib/audio';
 import { FitText } from '@/components/fit-text';
 import { WORD_ART_CACHE, packArt } from '@/lib/word-art';
 
@@ -15,11 +16,15 @@ import { WORD_ART_CACHE, packArt } from '@/lib/word-art';
 // one short English translation (with an optional two-word tag when the
 // translation alone could mislead), a thin line, then the word in a sentence.
 // No long note and no mascot: the sentence does the explaining. The word says
-// itself on arrival, as in the course; the sentence waits to be tapped, so the
-// two never talk over each other.
+// itself on arrival, as in the course, and the sentence follows on its own a
+// beat after the word ends, so the two never talk over each other. Touching
+// the sentence first (or leaving) cancels the follow-up.
 // ---------------------------------------------------------------------------
 
 const INK = colors.ink;
+
+/** The pause between the word and its sentence: long enough to hear them as two. */
+const SENTENCE_AFTER_MS = 600;
 
 /** The word's size: a phrase or a long word steps down instead of wrapping badly. */
 function wordSize(es: string, max: number) {
@@ -74,13 +79,13 @@ function GotIt({ onPress, label = 'Got it' }: { onPress: () => void; label?: str
 }
 
 /** The sentence with the word itself underlined. */
-function Example({ word }: { word: ArWord }) {
+function Example({ word, say, onTouch }: { word: ArWord; say: boolean; onTouch: () => void }) {
   const text = word.example.es;
   const at = text.toLocaleLowerCase('es').indexOf(word.gap.toLocaleLowerCase('es'));
   return (
     <View style={{ gap: 8 }}>
       {/* The same row as the word above: text on the left, its sound on the right. */}
-      <View style={styles.exRow}>
+      <View style={styles.exRow} onTouchStart={onTouch}>
         <Text style={styles.exEs}>
           {at < 0 ? (
             text
@@ -92,7 +97,7 @@ function Example({ word }: { word: ArWord }) {
             </>
           )}
         </Text>
-        {word.example.audio ? <PlayButton path={word.example.audio} autoPlay={false} /> : null}
+        {word.example.audio ? <PlayButton path={word.example.audio} autoPlay={say} /> : null}
       </View>
       <Text style={styles.exEn}>{word.example.en}</Text>
     </View>
@@ -101,6 +106,24 @@ function Example({ word }: { word: ArWord }) {
 
 export function WordIntro({ word, onDone, doneLabel }: { word: ArWord; onDone: () => void; doneLabel?: string }) {
   const art = packArt(word.es);
+  // The sentence's turn: once, a beat after the word's own clip ends.
+  const [say, setSay] = useState(false);
+  const chained = useRef(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => {
+    void preloadAudio(word.example.audio);
+    return () => clearTimeout(timer.current);
+  }, [word.example.audio]);
+  const wordEnded = () => {
+    if (chained.current || !word.example.audio) return;
+    chained.current = true;
+    timer.current = setTimeout(() => setSay(true), SENTENCE_AFTER_MS);
+  };
+  // She went for the sentence herself: it is hers to play now.
+  const touched = () => {
+    chained.current = true;
+    clearTimeout(timer.current);
+  };
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -121,7 +144,7 @@ export function WordIntro({ word, onDone, doneLabel }: { word: ArWord; onDone: (
                 {word.es}
               </FitText>
             </View>
-            {word.audio ? <PlayButton path={word.audio} /> : null}
+            {word.audio ? <PlayButton path={word.audio} onEnded={wordEnded} /> : null}
           </View>
           <View style={styles.enRow}>
             <Text style={styles.en}>{word.en}</Text>
@@ -130,7 +153,7 @@ export function WordIntro({ word, onDone, doneLabel }: { word: ArWord; onDone: (
         </Enter>
         <Enter delay={50}>
           <View style={styles.rule} />
-          <Example word={word} />
+          <Example word={word} say={say} onTouch={touched} />
         </Enter>
       </ScrollView>
       <GotIt onPress={onDone} label={doneLabel} />
