@@ -279,11 +279,11 @@ function ScreenView({
     case 'culture-intro':
       return <CultureOpener onStart={onNext} />;
     case 'asado-1':
-      return <FactCard key={id} fact={ASADO[0]} onDone={onNext} />;
+      return <FactCard key={id} fact={ASADO[0]} onDone={onNext} tapToAdvance={false} />;
     case 'asado-2':
-      return <FactCard key={id} fact={ASADO[1]} onDone={onNext} />;
+      return <FactCard key={id} fact={ASADO[1]} onDone={onNext} tapToAdvance={false} />;
     case 'asado-3':
-      return <FactCard key={id} fact={ASADO[2]} onDone={onNext} />;
+      return <FactCard key={id} fact={ASADO[2]} onDone={onNext} tapToAdvance={false} />;
     case 'call':
       return <CallStep admin={admin} rate={TALK_RATE[level]} onDone={onNext} />;
   }
@@ -500,15 +500,10 @@ const TALK_RATE: Record<Level, number> = { none: 0.75, basics: 0.75, spanish: 0.
 
 function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDone: () => void }) {
   const [turn, setTurn] = useState(0);
-  const [seconds, setSeconds] = useState(0);
   const [live, setLive] = useState(false);
   const line = SCRIPT[turn];
   const over = line.replies.length === 0;
 
-  useEffect(() => {
-    const t = setInterval(() => setSeconds((s) => s + 1), 1000);
-    return () => clearInterval(t);
-  }, []);
   useEffect(() => {
     if (line.audio) playAudio(line.audio, undefined, rate);
   }, [line.audio, rate]);
@@ -535,7 +530,6 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
     }
   };
 
-  const clock = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
   const bottom = useSafeAreaInsets().bottom;
   // The sticker scene (canvas "Pancho Call Screen Options", C): the page is
   // sage, Pancho's line a tilted speech sticker, Pancho himself big below it,
@@ -544,7 +538,7 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
     <View style={styles.call}>
       <View style={styles.callPill}>
         <Ionicons name="call" size={13} color="#3F7A57" />
-        <Text style={styles.callPillText}>Pancho · {clock}</Text>
+        <Text style={styles.callPillText}>Pancho</Text>
       </View>
       <Animated.View key={turn} entering={FadeInDown.duration(260).easing(EASE_OUT)} style={styles.callBubble}>
         <Text style={styles.callEs}>{line.es}</Text>
@@ -570,9 +564,9 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
                 onPress={say}
                 style={({ pressed }) => [
                   styles.callReply,
-                  { backgroundColor: i === 0 ? pastel.butter : REPLY_BUTTER_2, transform: [{ rotate: i === 0 ? '-1deg' : '1deg' }, { scale: pressed ? 0.97 : 1 }] },
+                  { transform: [{ rotate: i === 0 ? '-1deg' : '1deg' }, { scale: pressed ? 0.97 : 1 }] },
                 ]}>
-                <Text style={styles.replyEs}>{r.es}</Text>
+                <Text style={styles.callReplyEs}>{r.es}</Text>
                 <Text style={styles.callReplyEn}>{r.en}</Text>
               </Pressable>
             ))}
@@ -588,9 +582,6 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
     </View>
   );
 }
-
-/** The second reply's butter, a shade deeper, as on the canvas. */
-const REPLY_BUTTER_2 = '#EDD07F';
 
 /**
  * Pancho's line, out loud: ▶ at his speed for her level, and the tortoise
@@ -724,7 +715,6 @@ const styles = StyleSheet.create({
   },
   chipText: { ...font.body[800], fontSize: 12, letterSpacing: 1.4, color: colors.ink },
 
-  replyEs: { ...font.display[800], fontSize: 20, color: colors.ink },
   replyEn: { ...font.body[600], fontSize: 14, color: colors.muted },
 
   call: { flex: 1, paddingHorizontal: 20 },
@@ -760,15 +750,17 @@ const styles = StyleSheet.create({
   callSlow: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card, boxShadow: `0 0 0 2px ${colors.primary}` },
   callStage: { flex: 1, minHeight: 120 },
   callPancho: { width: 210, height: '100%', maxHeight: 230, marginLeft: -8 },
-  callDock: { gap: 12 },
+  callDock: { gap: 14 },
   callReply: {
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    gap: 2,
+    backgroundColor: pastel.butter,
+    borderRadius: 22,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    gap: 4,
     boxShadow: `0 0 0 2.5px ${colors.ink}, 3px 4px 0 2.5px ${colors.ink}`,
   },
-  callReplyEn: { ...font.body[600], fontSize: 13, color: '#6B5646' },
+  callReplyEs: { ...font.display[800], fontSize: 23, lineHeight: 27, color: colors.ink },
+  callReplyEn: { ...font.body[600], fontSize: 15, color: '#6B5646' },
   callHint: { ...font.body[800], fontSize: 12, letterSpacing: 1, color: colors.ink, textAlign: 'center' },
   callReal: { ...font.body[800], fontSize: 15, lineHeight: 21, color: colors.ink, textAlign: 'center', paddingHorizontal: 8 },
   micNote: { ...font.body[600], fontSize: 12, color: colors.muted, textAlign: 'center' },
