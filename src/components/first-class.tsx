@@ -13,6 +13,7 @@ import Animated, {
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
+  withRepeat,
   withTiming,
 } from 'react-native-reanimated';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -501,23 +502,74 @@ const SCRIPT: Turn[] = [
  *  natural speed and slowed on the phone, pitch kept. */
 const TALK_RATE: Record<Level, number> = { none: 0.75, basics: 0.75, spanish: 0.9, conversational: 1 };
 
+/**
+ * A turn, in time: Pancho's line arrives with its sound ('speaking'); her
+ * replies rise only once he has finished (+300 ms), so she listens before she
+ * answers ('ready'); her tap sends the reply up as her own bubble ('said',
+ * 250 ms) while the others leave; Pancho "thinks" for 600 ms (three dots in his
+ * bubble) and the next line comes in with its sound at the same instant.
+ */
+type CallPhase = 'speaking' | 'ready' | 'said' | 'thinking';
+
+/** Without a recording, how long his line stays before her replies come up. */
+const READ_MS = 1200;
+
 function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDone: () => void }) {
   const [turn, setTurn] = useState(0);
+  const [phase, setPhase] = useState<CallPhase>('speaking');
+  // What she said last, shown as her bubble until she answers again.
+  const [said, setSaid] = useState<Turn['replies'][number] | null>(null);
   // Hidden until asked, as in the app: she reads the Spanish first.
   const [showEn, setShowEn] = useState(false);
   const [live, setLive] = useState(false);
+  const reduced = useReducedMotion();
   const line = SCRIPT[turn];
   const over = line.replies.length === 0;
 
-  useEffect(() => {
-    if (line.audio) playAudio(line.audio, undefined, rate);
-  }, [line.audio, rate]);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const later = (ms: number, fn: () => void) => void timers.current.push(setTimeout(fn, ms));
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
-  const say = () => {
+  // His line: its sound now, her replies once it ends.
+  useEffect(() => {
+    let done = false;
+    const ready = () => {
+      if (done) return;
+      done = true;
+      later(300, () => setPhase((p) => (p === 'speaking' ? 'ready' : p)));
+    };
+    if (line.audio) playAudio(line.audio, ready, rate);
+    else later(READ_MS, ready);
+    // A replay cut short still counts as heard; never strand her without replies.
+    later(12000, ready);
+    return () => {
+      done = true;
+    };
+  }, [turn, line.audio, rate]);
+
+  const say = (r: Turn['replies'][number]) => {
+    if (phase !== 'ready') return;
     tap();
     stopAudio();
-    setTurn((t) => t + 1);
+    setSaid(r);
+    setPhase('said');
+    later(250, () => setPhase('thinking'));
+    later(850, () => {
+      setTurn((t) => t + 1);
+      setPhase('speaking');
+    });
   };
+
+  // He bobs while he talks: a small, slow rise and fall, off for reduced motion.
+  const bob = useSharedValue(0);
+  useEffect(() => {
+    if (reduced || phase !== 'speaking') {
+      bob.value = withTiming(0, { duration: 200 });
+      return;
+    }
+    bob.value = withRepeat(withTiming(1, { duration: 420, easing: Easing.inOut(Easing.quad) }), -1, true);
+  }, [phase, reduced, bob]);
+  const bobStyle = useAnimatedStyle(() => ({ transform: [{ translateY: -5 * bob.value }] }));
 
   // The real thing: a Hablar chat in the café scene (hablar-start, A1). It is
   // eight lines and ends on its own summary; come back here to finish.
@@ -536,6 +588,9 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
   };
 
   const bottom = useSafeAreaInsets().bottom;
+  const enter = reduced ? FadeIn.duration(150) : FadeInDown.duration(220).easing(EASE_OUT);
+  const thinking = phase === 'thinking';
+  const showReplies = phase === 'ready';
   // As the call in the app looks (hablar-chat), canvas "Pancho Call Screen
   // Options", E: who is on the line, his line in a speech bubble with Replay ·
   // Slow · English under it, Pancho with his mate, and a cream dock holding
@@ -546,12 +601,21 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
         <Text style={styles.callName}>Pancho</Text>
         <Text style={styles.callSub}>Your first call</Text>
       </View>
-      <Animated.View key={turn} entering={FadeInDown.duration(260).easing(EASE_OUT)} style={styles.callBubbleWrap}>
+      <Animated.View
+        key={turn}
+        entering={reduced ? FadeIn.duration(150) : FadeIn.duration(200).easing(EASE_OUT)}
+        style={styles.callBubbleWrap}>
         <View style={styles.callBubble}>
-          <Text style={styles.callEs}>{line.es}</Text>
-          {showEn ? <Text style={styles.callEn}>{line.en}</Text> : null}
+          {thinking ? (
+            <TypingDots />
+          ) : (
+            <>
+              <Text style={styles.callEs}>{line.es}</Text>
+              {showEn ? <Text style={styles.callEn}>{line.en}</Text> : null}
+            </>
+          )}
           <View style={styles.callRule} />
-          <View style={styles.callTools}>
+          <View style={[styles.callTools, thinking && { opacity: 0.4 }]} pointerEvents={thinking ? 'none' : 'auto'}>
             {line.audio ? <CallAudio path={line.audio} rate={rate} /> : null}
             <Pressable onPress={() => setShowEn((v) => !v)} hitSlop={8} accessibilityRole="button" style={styles.callTool}>
               <MaterialCommunityIcons name="translate" size={18} color={colors.primary} />
@@ -562,27 +626,49 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
         <View style={styles.callTail} />
       </Animated.View>
       <View style={styles.callStage}>
-        <Image source={POSE.mate} style={styles.callPancho} contentFit="contain" accessibilityLabel="Pancho with his mate" />
+        <Animated.View style={[styles.callPanchoWrap, bobStyle]}>
+          <Image source={POSE.mate} style={styles.callPancho} contentFit="contain" accessibilityLabel="Pancho with his mate" />
+        </Animated.View>
+        {said ? (
+          <Animated.View key={said.es} entering={enter} style={styles.callSaid}>
+            <Text style={styles.callSaidEs}>{said.es}</Text>
+          </Animated.View>
+        ) : null}
       </View>
       <View style={[styles.callDock, { paddingBottom: 24 + bottom }]}>
         {over ? (
-          <>
-            {/* The call above is scripted; the real one isn't, and says so. */}
-            <Text style={styles.callReal}>In the app, you speak and Pancho answers. No script. Talk about anything.</Text>
-            <Button title="End call" onPress={onDone} />
-          </>
+          showReplies ? (
+            <Animated.View entering={enter} style={styles.callDockInner}>
+              {/* The call above is scripted; the real one isn't, and says so. */}
+              <Text style={styles.callReal}>In the app, you speak and Pancho answers. No script. Talk about anything.</Text>
+              <Button title="End call" onPress={onDone} />
+            </Animated.View>
+          ) : (
+            <Text style={styles.callHint}>PANCHO IS TALKING…</Text>
+          )
         ) : (
           <>
-            <Text style={styles.callHint}>SAY ONE OUT LOUD, THEN TAP IT</Text>
-            {line.replies.map((r) => (
-              <Pressable
-                key={r.es}
-                onPress={say}
-                style={({ pressed }) => [styles.callReply, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
-                <Text style={styles.callReplyEs}>{r.es}</Text>
-                <Text style={styles.callReplyEn}>{r.en}</Text>
-              </Pressable>
-            ))}
+            <Text style={styles.callHint}>{showReplies ? 'SAY ONE OUT LOUD, THEN TAP IT' : 'LISTEN TO PANCHO…'}</Text>
+            {/* Always laid out, so nothing moves when they appear; shown once he is done. */}
+            <View style={styles.callDockInner} pointerEvents={showReplies ? 'auto' : 'none'}>
+              {line.replies.map((r, i) =>
+                showReplies ? (
+                  <Animated.View key={`${turn}-${r.es}`} entering={reduced ? FadeIn.duration(150) : FadeInDown.duration(220).delay(i * 50).easing(EASE_OUT)}>
+                    <Pressable
+                      onPress={() => say(r)}
+                      style={({ pressed }) => [styles.callReply, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
+                      <Text style={styles.callReplyEs}>{r.es}</Text>
+                      <Text style={styles.callReplyEn}>{r.en}</Text>
+                    </Pressable>
+                  </Animated.View>
+                ) : (
+                  <View key={`${turn}-${r.es}`} style={[styles.callReply, { opacity: 0 }]} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+                    <Text style={styles.callReplyEs}>{r.es}</Text>
+                    <Text style={styles.callReplyEn}>{r.en}</Text>
+                  </View>
+                ),
+              )}
+            </View>
             {admin ? <Text style={styles.micNote}>Prototype: a scripted call. Nothing is recorded.</Text> : null}
           </>
         )}
@@ -594,6 +680,30 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
       </View>
     </View>
   );
+}
+
+/** Pancho thinking: three dots taking turns, in his bubble where the words go. */
+function TypingDots() {
+  const reduced = useReducedMotion();
+  const t = useSharedValue(0);
+  useEffect(() => {
+    if (!reduced) t.value = withRepeat(withTiming(3, { duration: 900, easing: Easing.linear }), -1, false);
+  }, [reduced, t]);
+  return (
+    <View style={styles.dots} accessibilityLabel="Pancho is thinking">
+      {[0, 1, 2].map((i) => (
+        <Dot key={i} i={i} t={t} />
+      ))}
+    </View>
+  );
+}
+
+function Dot({ i, t }: { i: number; t: { value: number } }) {
+  const style = useAnimatedStyle(() => {
+    const d = Math.abs(((t.value - i + 3) % 3) - 0.5);
+    return { opacity: 0.35 + 0.65 * Math.max(0, 1 - d), transform: [{ translateY: -3 * Math.max(0, 1 - d) }] };
+  });
+  return <Animated.View style={[styles.dot, style]} />;
 }
 
 /** Soft ink that still reads on sage and on the cream dock. */
@@ -764,7 +874,25 @@ const styles = StyleSheet.create({
   callTool: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 36 },
   callToolText: { ...font.body[800], fontSize: 15, color: colors.primary },
   callStage: { flex: 1, minHeight: 110, alignItems: 'center', justifyContent: 'center', paddingTop: 14 },
-  callPancho: { width: 200, height: '100%', maxHeight: 230 },
+  callPanchoWrap: { width: 200, height: '100%', maxHeight: 230 },
+  callPancho: { width: '100%', height: '100%' },
+  // Her last line, as her own bubble: rosa, to the right, just above the dock.
+  callSaid: {
+    position: 'absolute',
+    right: 18,
+    bottom: 12,
+    maxWidth: 240,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 20,
+    borderBottomRightRadius: 6,
+    backgroundColor: colors.primary,
+    boxShadow: `2px 3px 0 ${colors.ink}`,
+  },
+  callSaidEs: { ...font.display[800], fontSize: 17, lineHeight: 21, color: colors.onPrimary },
+  callDockInner: { gap: 12 },
+  dots: { flexDirection: 'row', gap: 8, height: 34, alignItems: 'center', justifyContent: 'center' },
+  dot: { width: 10, height: 10, borderRadius: 5, backgroundColor: colors.ink },
   callDock: {
     gap: 12,
     paddingHorizontal: 20,
