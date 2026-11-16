@@ -902,6 +902,8 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
  *  the culture scene arriving, and its answer turning green. */
 const BUILD_BEATS = [0, 2.56, 5.15, 7.82, 9.98, 12.22, 15.42, 17.22, 19.9];
 /** The line closes and the check lands: the culture scene is about to leave. */
+/** Where the clip rests at the end, in seconds: the Course tab, its lesson done and the streak landed. */
+const COURSE_REST = 4.3;
 const BUILD_CLOSED = 23.5;
 /** The result: the clip (23.67 s) has played through. */
 const BUILD_READY = 23.6;
@@ -965,7 +967,7 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
 
   const player = useVideoPlayer(COURSE_CLIP[answers.why], (p) => {
     p.muted = true;
-    // Once through, then it rests on its first frame (the Course tab).
+    // Once through, then round into the Course tab and it rests there.
     p.loop = false;
     p.playbackRate = BUILD_RATE;
     p.timeUpdateEventInterval = 0.05;
@@ -1015,14 +1017,26 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
     const status = player.addListener('statusChange', ({ status: st }) => {
       if (st === 'error') setFailed(true);
     });
+    // At the end it goes round once more into the Course tab and stops there,
+    // once the lesson is done and the streak has landed: its first frame is
+    // still the Culture scene fading out.
+    let parking = false;
+    const park = player.addListener('timeUpdate', ({ currentTime }) => {
+      if (parking && currentTime >= COURSE_REST) {
+        parking = false;
+        player.pause();
+      }
+    });
     const end = player.addListener('playToEnd', () => {
-      player.pause();
+      parking = true;
       player.currentTime = 0;
+      player.play();
     });
     return () => {
       sub.remove();
       status.remove();
       end.remove();
+      park.remove();
       clearInterval(wall);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

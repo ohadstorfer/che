@@ -57,7 +57,7 @@ type Part = 'class' | 'slang' | 'culture' | 'pancho';
 const PARTS: Record<Part, { label: string; color: string }> = {
   class: { label: 'EXERCISE', color: colors.primary },
   slang: { label: 'SLANG', color: pastel.butter },
-  culture: { label: 'CULTURE', color: pastel.sky },
+  culture: { label: 'CULTURE', color: pastel.peach },
   pancho: { label: 'SPEAKING', color: pastel.sage },
 };
 
@@ -195,8 +195,8 @@ export function FirstClassLesson({
   /** The slang class's opener is up: the whole page turns butter, as it does in a real slang class. */
   const [butter, setButter] = useState(false);
   const screen = SCREENS[at];
-  // The page takes the opener's colour while one is up: butter for slang, sky for culture.
-  const tint = screen.id === 'culture-intro' ? pastel.sky : butter ? pastel.butter : null;
+  // The page takes the opener's colour while one is up: butter for slang, peach for culture.
+  const tint = screen.id === 'culture-intro' ? pastel.peach : butter ? pastel.butter : null;
   useStatusBarColor(tint ?? colors.bg);
 
   const next = () => {
