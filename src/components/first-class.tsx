@@ -752,7 +752,8 @@ const styles = StyleSheet.create({
   callSlow: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card, boxShadow: `0 0 0 2px ${colors.primary}` },
   callStage: { flex: 1, minHeight: 110, maxHeight: 210 },
   callRest: { flex: 1, maxHeight: 120 },
-  callPancho: { width: 200, height: '100%', marginLeft: -8 },
+  // Mirrored, so he faces his speech bubble (top right) instead of the edge.
+  callPancho: { width: 200, height: '100%', marginLeft: -8, transform: [{ scaleX: -1 }] },
   callDock: { gap: 14 },
   callReply: {
     backgroundColor: pastel.butter,
