@@ -305,7 +305,8 @@ const asadoCard = (n: number | ImageSourcePropType, text: string, bg: string): F
 });
 const ASADO: Fact[] = [
   asadoCard(0, 'An **asado** is grilled meat, sure. But mostly it’s an excuse to spend the whole day together. **¿Hacemos un asado?** really means: want to hang out?', pastel.butter),
-  asadoCard(3, 'An [asado] is also how Argentines celebrate almost anything: a birthday, a win, a new job, a Friday.', pastel.peach),
+  // The chori, not the grill again (the first card already shows it).
+  asadoCard(require('@/assets/images/objects/choripan-figure.webp'), 'An [asado] is also how Argentines celebrate almost anything: a birthday, a win, a new job, a Friday.', pastel.peach),
   // A steak (vacío) rather than the class's provoleta: the weekly asado is about the meat.
   asadoCard(require('@/assets/images/objects/vacio-figure.webp'), 'For lots of families it’s a weekly date: **el asado del domingo**. Same backyard, same [asador], same people.', pastel.sage),
 ];
