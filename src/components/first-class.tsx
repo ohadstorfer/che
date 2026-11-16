@@ -545,12 +545,12 @@ const TALK_RATE: Record<Level, number> = { none: 0.75, basics: 0.75, spanish: 0.
 
 /**
  * The call as a chat of voice notes, in time:
- *  · Pancho's note arrives and plays ('speaking'); her two replies wait dimmed
- *    in the dock, so she listens before she answers;
- *  · 350 ms after his audio ends they light up ('ready');
+ *  · Pancho's note arrives and plays ('speaking'); the dock says only LISTEN
+ *    FIRST, at the bottom, so she listens before she answers;
+ *  · 350 ms after his audio ends her replies come up, one after the other ('ready');
  *  · her tap ('sent'): the dock empties, and 120 ms later her reply lands in the
  *    thread as her own rosa note, under his;
- *  · 650 ms on, his "recording…" bubble appears ('typing'), for 1 s;
+ *  · 650 ms on, his recording mic appears ('typing'), for 1 s;
  *  · it turns into his next note, which plays at once, and round it goes.
  * The thread keeps everything said and scrolls itself to the newest.
  */
@@ -653,14 +653,6 @@ function CallStep({
   }, [phase, reduced, bob]);
   const bobStyle = useAnimatedStyle(() => ({ transform: [{ translateY: -5 * bob.value }] }));
 
-  // Her replies: dimmed while he talks, lit for her turn, gone once sent.
-  const lit = useSharedValue(0.4);
-  useEffect(() => {
-    const to = phase === 'ready' ? 1 : phase === 'speaking' ? 0.4 : 0;
-    lit.value = withTiming(to, { duration: reduced ? 0 : phase === 'ready' ? 240 : 160, easing: EASE_OUT });
-  }, [phase, reduced, lit]);
-  const litStyle = useAnimatedStyle(() => ({ opacity: lit.value }));
-
   // The real thing: a Hablar chat in the café scene (hablar-start, A1). It is
   // eight lines and ends on its own summary; come back here to finish.
   const goLive = async () => {
@@ -681,8 +673,6 @@ function CallStep({
   const showReplies = phase === 'ready';
   const enter = (fromMe: boolean) =>
     reduced ? FadeIn.duration(150) : (fromMe ? FadeInRight : FadeInDown).duration(280).easing(EASE_OUT);
-  const hint =
-    phase === 'ready' ? 'ANSWER WITH A VOICE NOTE' : phase === 'speaking' ? 'LISTEN FIRST' : phase === 'sent' ? 'SENT' : 'PANCHO IS RECORDING';
   return (
     <View style={styles.call}>
       <ScrollView
@@ -690,6 +680,8 @@ function CallStep({
         style={{ flex: 1 }}
         contentContainerStyle={styles.callBody}
         onContentSizeChange={() => thread.current?.scrollToEnd({ animated: !reduced })}
+        // The dock grows and shrinks with her replies: keep the newest note in view.
+        onLayout={() => thread.current?.scrollToEnd({ animated: !reduced })}
         showsVerticalScrollIndicator={false}>
         <View style={styles.callHead}>
           <Animated.View style={[styles.callFace, bobStyle]}>
@@ -717,10 +709,7 @@ function CallStep({
             </Animated.View>
           ) : (
             <Animated.View key={`t${i}`} entering={reduced ? FadeIn.duration(150) : FadeIn.duration(200)} style={{ alignSelf: 'flex-start' }}>
-              <View style={styles.typing}>
-                <TypingDots small />
-                <Text style={styles.typingText}>recording…</Text>
-              </View>
+              <RecordingMic reduced={!!reduced} />
             </Animated.View>
           ),
         )}
@@ -733,41 +722,65 @@ function CallStep({
             <Text style={styles.callReal}>In the app, you speak and Pancho answers. No script. Talk about anything.</Text>
             <Button title="End call" onPress={onDone} />
           </Animated.View>
-        ) : (
+        ) : showReplies && !over ? (
+          // Her replies come up only once his note has played the first time,
+          // one after the other; while she sends and he records, the dock is empty.
           <>
-            <View style={styles.callHintRow}>
-              <Text style={styles.callHint}>{over ? 'LISTEN FIRST' : hint}</Text>
-              {showReplies ? null : <TypingDots small />}
-            </View>
-            {/* The same slots throughout, so the dock never jumps: dimmed while
-                he talks, lit for her turn, emptied the moment she sends. */}
-            <Animated.View key={turn} style={[styles.callDockInner, litStyle]}>
-              {(over ? SCRIPT[turn - 1]?.replies ?? [] : line.replies).map((r) => (
-                <Pressable
-                  key={r.es}
-                  onPress={() => say(r)}
-                  disabled={!showReplies || over}
-                  accessibilityState={{ disabled: !showReplies || over }}
-                  style={({ pressed }) => [styles.callReply, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
-                  <View style={styles.replyMic}>
-                    <Ionicons name="mic-outline" size={20} color={colors.ink} />
-                  </View>
-                  <View style={{ flex: 1, gap: 2 }}>
-                    <Text style={styles.callReplyEs}>{r.es}</Text>
-                    <Text style={styles.callReplyEn}>{r.en}</Text>
-                  </View>
-                </Pressable>
-              ))}
+            <Animated.View entering={reduced ? FadeIn.duration(150) : FadeIn.duration(220)} style={styles.callHintRow}>
+              <Text style={styles.callHint}>ANSWER WITH A VOICE NOTE</Text>
             </Animated.View>
-            <Text style={[styles.callFoot, { opacity: showReplies ? 1 : 0 }]}>Say it out loud, then tap it</Text>
+            <View key={turn} style={styles.callDockInner}>
+              {line.replies.map((r, k) => (
+                <Animated.View key={r.es} entering={reduced ? FadeIn.duration(150) : FadeInDown.delay(60 + k * 80).duration(320).easing(EASE_OUT)}>
+                  <Pressable
+                    onPress={() => say(r)}
+                    style={({ pressed }) => [styles.callReply, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
+                    <View style={styles.replyMic}>
+                      <Ionicons name="mic-outline" size={20} color={colors.ink} />
+                    </View>
+                    <View style={{ flex: 1, gap: 2 }}>
+                      <Text style={styles.callReplyEs}>{r.es}</Text>
+                      <Text style={styles.callReplyEn}>{r.en}</Text>
+                    </View>
+                  </Pressable>
+                </Animated.View>
+              ))}
+            </View>
+            <Animated.Text entering={reduced ? FadeIn.duration(150) : FadeIn.delay(260).duration(240)} style={styles.callFoot}>
+              Say it out loud, then tap it
+            </Animated.Text>
           </>
-        )}
+        ) : phase === 'speaking' ? (
+          // His note's first play: no replies yet, only this, at the bottom.
+          <Animated.View entering={FadeIn.duration(200)} style={styles.callHintRow}>
+            <Text style={styles.callHint}>LISTEN FIRST</Text>
+            <TypingDots small />
+          </Animated.View>
+        ) : null}
         {admin ? (
           <Pressable onPress={() => void goLive()} disabled={live} hitSlop={8}>
             <Text style={styles.liveLink}>{live ? 'Starting…' : 'Admin: try the live AI call instead →'}</Text>
           </Pressable>
         ) : null}
       </View>
+    </View>
+  );
+}
+
+/** While he records his next note: a mic that pulses, as WhatsApp shows it. */
+function RecordingMic({ reduced }: { reduced: boolean }) {
+  const o = useSharedValue(1);
+  useEffect(() => {
+    if (reduced) return;
+    o.value = withRepeat(withTiming(0.3, { duration: 520, easing: Easing.inOut(Easing.quad) }), -1, true);
+    return () => cancelAnimation(o);
+  }, [reduced, o]);
+  const pulse = useAnimatedStyle(() => ({ opacity: o.value }));
+  return (
+    <View style={styles.typing} accessible accessibilityLabel="Pancho is recording a voice note">
+      <Animated.View style={pulse}>
+        <Ionicons name="mic" size={22} color={colors.primary} />
+      </Animated.View>
     </View>
   );
 }
