@@ -21,6 +21,7 @@ import Animated, {
   cancelAnimation,
   Easing,
   FadeIn,
+  FadeOut,
   useAnimatedProps,
   useAnimatedStyle,
   useReducedMotion,
@@ -34,7 +35,7 @@ import Animated, {
   ZoomIn,
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Svg, { Circle, G, Line, Path } from 'react-native-svg';
+import Svg, { Circle, G, Line, Path, Text as SvgText } from 'react-native-svg';
 
 import { FirstClassLesson } from '@/components/first-class';
 import { FirstClassOpener } from '@/components/first-class-opener';
@@ -141,9 +142,15 @@ export default function Onboarding() {
     if (reduced) pancho.pause();
     else pancho.play();
   }, [pancho, reduced]);
-  const [step, setStep] = useState<Step>('name');
+  // Dev only: ?step=streak opens on that step with sample answers, to try a
+  // late screen without playing everything before it.
+  const { step: devStep } = useLocalSearchParams<{ step?: Step }>();
+  const jump = __DEV__ && devStep ? devStep : null;
+  const [step, setStep] = useState<Step>(jump ?? 'name');
   const [dir, setDir] = useState<1 | -1>(1);
-  const [a, setA] = useState<Partial<Answers>>({ minutes: 10, name: '' });
+  const [a, setA] = useState<Partial<Answers>>(
+    jump ? { minutes: 10, name: '', level: 'basics', why: 'trip', whys: ['trip'] } : { minutes: 10, name: '' },
+  );
   // The daily goal starts on 10 so the button works at once, but he only
   // replies once she has actually touched it.
   const [goalTouched, setGoalTouched] = useState(false);
@@ -220,6 +227,17 @@ export default function Onboarding() {
 
   const entering = slide(dir, reduced);
   const complete = a as Answers;
+  // Asked after the class now, so the answers saved while the course was
+  // building get the reminder added here.
+  const notified = (reminder: boolean) => {
+    const answers = { ...complete, reminder };
+    setA(answers);
+    void saveAnswers(answers);
+    keepAnswers(answers);
+    posthog?.capture('onboarding_reminder', { reminder, $set: { onboarding_reminder: reminder } });
+    if (notifyAt === 'after_class') void toPaywall();
+    else next();
+  };
   const showChrome = step !== 'building';
   const bar = BAR.indexOf(step);
 
@@ -233,6 +251,8 @@ export default function Onboarding() {
           </SafeAreaView>
         ) : step === 'class' ? (
           <FirstClassLesson level={a.level} onFinish={classDone} onClose={back} />
+        ) : notifyAt === 'after_class' ? (
+          <DayOneAsk answers={complete} reduced={reduced} onDone={notified} />
         ) : (
           <StreakCelebration streak={1} design={DAY_ONE} cta="Continue" onDone={afterClass} />
         )}
@@ -312,21 +332,7 @@ export default function Onboarding() {
               ))}
             </Question>
           ) : step === 'notify' ? (
-            <NotifyStep
-              answers={complete}
-              reduced={reduced}
-              onDone={(reminder) => {
-                // Asked after the class now, so the answers saved while the
-                // course was building get the reminder added here.
-                const answers = { ...complete, reminder };
-                setA(answers);
-                void saveAnswers(answers);
-                keepAnswers(answers);
-                posthog?.capture('onboarding_reminder', { reminder, $set: { onboarding_reminder: reminder } });
-                if (notifyAt === 'after_class') void toPaywall();
-                else next();
-              }}
-            />
+            <NotifyStep answers={complete} reduced={reduced} onDone={notified} />
           ) : step === 'building' ? (
             <Building
               answers={complete}
@@ -780,31 +786,31 @@ function Ping({ title, when, children }: { title: string; when: string; children
 }
 
 /** The ring around Allow: it breathes in time with the arrow. */
-function PulseRing({ reduced }: { reduced: boolean }) {
+function PulseRing({ reduced, at = NUDGE_AT }: { reduced: boolean; at?: number }) {
   const o = useSharedValue(1);
   useEffect(() => {
     if (reduced) return;
     o.value = withDelay(
-      NUDGE_AT,
+      at,
       withRepeat(withSequence(withTiming(0.3, { duration: 700, easing: Easing.inOut(Easing.ease) }), withTiming(1, { duration: 700, easing: Easing.inOut(Easing.ease) })), -1),
     );
     return () => cancelAnimation(o);
-  }, [reduced, o]);
+  }, [reduced, o, at]);
   const pulse = useAnimatedStyle(() => ({ opacity: o.value }));
   return <Animated.View style={[styles.promptRing, pulse]} pointerEvents="none" />;
 }
 
 /** The arrow under Allow: it starts bobbing once she has had time to read. */
-function BobArrow({ reduced }: { reduced: boolean }) {
+function BobArrow({ reduced, at = NUDGE_AT }: { reduced: boolean; at?: number }) {
   const y = useSharedValue(0);
   useEffect(() => {
     if (reduced) return;
     y.value = withDelay(
-      NUDGE_AT,
+      at,
       withRepeat(withSequence(withTiming(-6, { duration: 550, easing: Easing.inOut(Easing.ease) }), withTiming(0, { duration: 550, easing: Easing.inOut(Easing.ease) })), -1),
     );
     return () => cancelAnimation(y);
-  }, [reduced, y]);
+  }, [reduced, y, at]);
   const bob = useAnimatedStyle(() => ({ transform: [{ translateY: y.value }] }));
   return (
     <Animated.View style={[styles.promptArrow, bob]} pointerEvents="none" accessible={false}>
@@ -887,6 +893,133 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
         <Button title="Continue" onPress={() => void ask()} loading={busy} />
       </View>
     </View>
+  );
+}
+
+// --- day 1, then the reminder: one screen ------------------------------------
+//
+// Asked after the class (onboarding_notify_at = after_class), Continue on the
+// Day 1 polaroid doesn't leave: the lavender stays and its content swaps for
+// the ask (canvas "10 + 11"). See you tomorrow, the phone's question drawn with
+// Allow pointed out, tomorrow's reminder under it; a beat later the real
+// question opens over the drawn one. Either answer gets one line, then
+// Continue goes on to the plans.
+
+type DayPhase = 'day' | 'ask' | 'allowed' | 'denied';
+/** When the phone's own question opens, after the ask has landed. */
+const REAL_ASK_AT = 1400;
+
+function DayOneAsk({ answers, reduced, onDone }: { answers: Answers; reduced: boolean; onDone: (granted: boolean) => void }) {
+  const posthog = usePostHog();
+  const [phase, setPhase] = useState<DayPhase>('day');
+  useEffect(() => {
+    if (phase !== 'ask') return;
+    let live = true;
+    const t = setTimeout(() => {
+      void askNotifyPermission().then((granted) => {
+        posthog?.capture('notify_permission', { granted, $set: { notifications_allowed: granted } });
+        if (live) setPhase(granted ? 'allowed' : 'denied');
+      });
+    }, reduced ? 300 : REAL_ASK_AT);
+    return () => {
+      live = false;
+      clearTimeout(t);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
+  const answered = phase === 'allowed' || phase === 'denied';
+  const enter = (ms: number) => (reduced ? FadeIn.duration(150) : ASK_IN.delay(ms).duration(360));
+
+  return (
+    <View style={{ flex: 1 }}>
+      <StreakCelebration
+        streak={1}
+        design={DAY_ONE}
+        cta="Continue"
+        onDone={() => {
+          trackStep('notify');
+          setPhase('ask');
+        }}
+      />
+      {phase !== 'day' ? (
+        <Animated.View entering={FadeIn.duration(reduced ? 150 : 240)} style={[StyleSheet.absoluteFill, { backgroundColor: pastel.lav, zIndex: 60, elevation: 60 }]}>
+          {/* Above the cheer screen, which draws itself at zIndex 50. */}
+          <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom']}>
+            <View style={styles.dayAsk}>
+              <Animated.View entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(14).delay(60)} style={styles.daySticker} accessible accessibilityRole="header" accessibilityLabel="See you tomorrow?">
+                <StickerLine text="SEE YOU" size={60} />
+                <StickerLine text="TOMORROW?" size={50} />
+              </Animated.View>
+              <Animated.View entering={enter(140)}>
+                <Image source={POSE.gol} style={styles.dayPancho} contentFit="contain" accessibilityLabel="Pancho celebrating" />
+              </Animated.View>
+              {answered ? (
+                <Animated.View entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(13)} style={styles.dayResult}>
+                  <View style={[styles.dayChip, { backgroundColor: phase === 'allowed' ? pastel.sage : colors.card, transform: [{ rotate: phase === 'allowed' ? '-3deg' : '3deg' }] }]}>
+                    <Text style={styles.dayChipText}>{phase === 'allowed' ? 'Reminder on' : 'No problem!'}</Text>
+                  </View>
+                  <Text style={styles.dayLine}>
+                    {phase === 'allowed' ? 'Deal. I’ll knock tomorrow.' : 'Your next class will be waiting for you in the app.'}
+                  </Text>
+                </Animated.View>
+              ) : (
+                <Animated.View entering={enter(300)} exiting={FadeOut.duration(180)} style={[styles.prompt, { marginTop: 18, marginBottom: 40 }]}>
+                  <View style={styles.promptCard}>
+                    <Text style={styles.promptTitle} accessible={false}>
+                      “Posta” Would Like to Send You Notifications
+                    </Text>
+                    <View style={styles.promptRow}>
+                      <Text style={[styles.promptButton, styles.promptLeft]} accessible={false}>
+                        Don’t Allow
+                      </Text>
+                      <View style={styles.promptAllowWrap}>
+                        <Text style={[styles.promptButton, styles.promptAllow]} accessible={false}>
+                          Allow
+                        </Text>
+                        <PulseRing reduced={reduced} at={600} />
+                      </View>
+                    </View>
+                  </View>
+                  <BobArrow reduced={reduced} at={600} />
+                </Animated.View>
+              )}
+              {phase !== 'denied' ? (
+                <Animated.View entering={enter(480)} exiting={FadeOut.duration(200)} style={{ alignSelf: 'stretch' }}>
+                  <Ping title="Time for your Spanish" when="tomorrow">
+                    <Text style={styles.pingBody}>{reminderLine(answers)}</Text>
+                  </Ping>
+                </Animated.View>
+              ) : null}
+            </View>
+            <View style={[styles.footer, !answered && { opacity: 0 }]} pointerEvents={answered ? 'auto' : 'none'}>
+              <Button title="Continue" onPress={() => onDone(phase === 'allowed')} />
+            </View>
+          </SafeAreaView>
+        </Animated.View>
+      ) : null}
+    </View>
+  );
+}
+
+/** One line of a sticker headline: cream letters, an ink outline, a hard ink shadow. */
+function StickerLine({ text, size }: { text: string; size: number }) {
+  const w = 340;
+  const h = Math.round(size * 1.12);
+  const y = Math.round(size * 0.88);
+  const base = { x: w / 2, y, textAnchor: 'middle' as const, fontFamily: 'Gabarito_900Black', fontSize: size, letterSpacing: -2 };
+  const ink = { fill: colors.ink, stroke: colors.ink, strokeWidth: 9, strokeLinejoin: 'round' as const };
+  return (
+    <Svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
+      <SvgText {...base} {...ink} x={w / 2 + 4} y={y + 4}>
+        {text}
+      </SvgText>
+      <SvgText {...base} {...ink}>
+        {text}
+      </SvgText>
+      <SvgText {...base} fill={colors.card}>
+        {text}
+      </SvgText>
+    </Svg>
   );
 }
 
@@ -1342,6 +1475,13 @@ const styles = StyleSheet.create({
   pingWhen: { fontSize: 13, lineHeight: 20, letterSpacing: -0.08, color: 'rgba(60,60,67,0.6)' },
   pingBody: { fontSize: 15, lineHeight: 20, letterSpacing: -0.24, color: '#000' },
   prompt: { alignSelf: 'center', width: 290, marginTop: 30, marginBottom: 44 },
+  dayAsk: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 24, gap: 6 },
+  daySticker: { alignItems: 'center', transform: [{ rotate: '-4deg' }] },
+  dayPancho: { width: 140, height: 150 },
+  dayResult: { alignItems: 'center', gap: 12, marginTop: 18, marginBottom: 36, minHeight: 110 },
+  dayChip: { paddingVertical: 8, paddingHorizontal: 18, borderRadius: 14, borderWidth: 2.5, borderColor: colors.ink, boxShadow: `3px 4px 0 0 ${colors.ink}` },
+  dayChipText: { ...font.display[900], fontSize: 26, color: colors.ink },
+  dayLine: { ...font.body[700], fontSize: 17, lineHeight: 23, color: colors.ink, textAlign: 'center', maxWidth: 300 },
   promptCard: { alignSelf: 'stretch', borderRadius: 14, backgroundColor: 'rgba(255,249,243,0.85)', borderWidth: 2, borderColor: 'rgba(58,42,32,0.2)', overflow: 'hidden' },
   promptTitle: { paddingTop: 17, paddingHorizontal: 16, paddingBottom: 15, fontSize: 16, lineHeight: 20, fontWeight: '600', color: '#9C8878', textAlign: 'center' },
   promptRow: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: 'rgba(58,42,32,0.14)' },
