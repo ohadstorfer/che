@@ -504,41 +504,46 @@ const SCRIPT: Turn[] = [
 const TALK_RATE: Record<Level, number> = { none: 0.75, basics: 0.75, spanish: 0.9, conversational: 1 };
 
 /**
- * A turn, in time: Pancho's line arrives with its sound ('speaking') while her
- * next replies wait dimmed in the dock, so she listens before she answers;
- * they light up once he has finished (+300 ms, 'ready'). Her tap turns the
- * chosen card rosa where it sits and lets the other go ('said', 250 ms);
- * Pancho "thinks" for 600 ms (three dots in his bubble) and the next line
- * comes in with its sound at the same instant.
+ * The call as a chat of voice notes, in time:
+ *  · Pancho's note arrives and plays ('speaking'); her two replies wait dimmed
+ *    in the dock, so she listens before she answers;
+ *  · 350 ms after his audio ends they light up ('ready');
+ *  · her tap ('sent'): the dock empties, and 120 ms later her reply lands in the
+ *    thread as her own rosa note, under his;
+ *  · 650 ms on, his "recording…" bubble appears ('typing'), for 1 s;
+ *  · it turns into his next note, which plays at once, and round it goes.
+ * The thread keeps everything said and scrolls itself to the newest.
  */
-type CallPhase = 'speaking' | 'ready' | 'said' | 'thinking';
+type CallPhase = 'speaking' | 'ready' | 'sent' | 'typing';
+type Msg = { kind: 'pancho'; turn: number } | { kind: 'me'; reply: Turn['replies'][number] } | { kind: 'typing' };
 
 /** Without a recording, how long his line stays before her replies come up. */
 const READ_MS = 1200;
+const SEND_MS = 120;
+const TYPING_AT = 650;
+const TYPING_FOR = 1000;
 
 function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDone: () => void }) {
   const [turn, setTurn] = useState(0);
   const [phase, setPhase] = useState<CallPhase>('speaking');
-  // What she said last, shown as her bubble until she answers again.
-  const [said, setSaid] = useState<Turn['replies'][number] | null>(null);
-  // Hidden until asked, as in the app: she reads the Spanish first.
-  const [showEn, setShowEn] = useState(false);
+  const [msgs, setMsgs] = useState<Msg[]>([{ kind: 'pancho', turn: 0 }]);
   const [live, setLive] = useState(false);
   const reduced = useReducedMotion();
   const line = SCRIPT[turn];
   const over = line.replies.length === 0;
+  const thread = useRef<ScrollView>(null);
 
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const later = (ms: number, fn: () => void) => void timers.current.push(setTimeout(fn, ms));
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
-  // His line: its sound now, her replies once it ends.
+  // His newest note: its sound now, her replies once it ends.
   useEffect(() => {
     let done = false;
     const ready = () => {
       if (done) return;
       done = true;
-      later(300, () => setPhase((p) => (p === 'speaking' ? 'ready' : p)));
+      later(350, () => setPhase((p) => (p === 'speaking' ? 'ready' : p)));
     };
     if (line.audio) playAudio(line.audio, ready, rate);
     else later(READ_MS, ready);
@@ -553,10 +558,14 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
     if (phase !== 'ready') return;
     tap();
     stopAudio();
-    setSaid(r);
-    setPhase('said');
-    later(250, () => setPhase('thinking'));
-    later(850, () => {
+    setPhase('sent');
+    later(SEND_MS, () => setMsgs((m) => [...m, { kind: 'me', reply: r }]));
+    later(SEND_MS + TYPING_AT, () => {
+      setMsgs((m) => [...m, { kind: 'typing' }]);
+      setPhase('typing');
+    });
+    later(SEND_MS + TYPING_AT + TYPING_FOR, () => {
+      setMsgs((m) => [...m.filter((x) => x.kind !== 'typing'), { kind: 'pancho', turn: turn + 1 }]);
       setTurn((t) => t + 1);
       setPhase('speaking');
     });
@@ -573,10 +582,11 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
   }, [phase, reduced, bob]);
   const bobStyle = useAnimatedStyle(() => ({ transform: [{ translateY: -5 * bob.value }] }));
 
-  // Her replies: dimmed while he talks, lit when it's her turn.
+  // Her replies: dimmed while he talks, lit for her turn, gone once sent.
   const lit = useSharedValue(0.4);
   useEffect(() => {
-    lit.value = phase === 'speaking' ? withTiming(0.4, { duration: 150 }) : withTiming(1, { duration: reduced ? 0 : 220, easing: EASE_OUT });
+    const to = phase === 'ready' ? 1 : phase === 'speaking' ? 0.4 : 0;
+    lit.value = withTiming(to, { duration: reduced ? 0 : phase === 'ready' ? 240 : 160, easing: EASE_OUT });
   }, [phase, reduced, lit]);
   const litStyle = useAnimatedStyle(() => ({ opacity: lit.value }));
 
@@ -597,110 +607,125 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
   };
 
   const bottom = useSafeAreaInsets().bottom;
-  const thinking = phase === 'thinking';
   const showReplies = phase === 'ready';
-  // Just after her tap, before his next line: her card is what the dock shows.
-  const answering = phase === 'said' || phase === 'thinking';
-  // Voice notes (canvas "Pancho Call Screen Options", D): Pancho's face in a
-  // circle, his line as a voice note (▶, wave, length, the words), and her
-  // replies as voice notes to send, each with its mic. Nothing records: she
-  // says it, then taps it.
-  const secs = Math.max(1, Math.round((line.es.split(/\s+/).length * 0.42) / rate));
+  const enter = (fromMe: boolean) =>
+    reduced ? FadeIn.duration(150) : (fromMe ? FadeInRight : FadeInDown).duration(280).easing(EASE_OUT);
+  const hint =
+    phase === 'ready' ? 'ANSWER WITH A VOICE NOTE' : phase === 'speaking' ? 'LISTEN FIRST' : phase === 'sent' ? 'SENT' : 'PANCHO IS RECORDING';
   return (
-    <ScrollView style={styles.call} contentContainerStyle={[styles.callBody, { paddingBottom: 20 + bottom }]} bounces={false}>
-      <View style={styles.callHead}>
-        <Animated.View style={[styles.callFace, bobStyle]}>
-          <Image source={POSE.wave} style={styles.callFaceImg} contentFit="contain" accessibilityLabel="Pancho" />
-        </Animated.View>
-        <Text style={styles.callName}>{thinking ? 'Pancho is recording…' : 'Pancho sent you a voice note'}</Text>
-      </View>
-
-      <Animated.View key={turn} entering={reduced ? FadeIn.duration(150) : FadeIn.duration(200).easing(EASE_OUT)} style={styles.note}>
-        <View style={styles.noteRow}>
-          {line.audio && !thinking ? (
-            <CallAudio path={line.audio} rate={rate} />
-          ) : (
-            <View style={[styles.notePlay, { opacity: 0.4 }]}>
-              <Ionicons name="play" size={18} color={colors.onPrimary} />
-            </View>
-          )}
-          {thinking ? (
-            <View style={styles.noteWave}>
-              <TypingDots small />
-            </View>
-          ) : (
-            <View style={styles.noteWave} accessible={false}>
-              {NOTE_WAVE.map((h, i) => (
-                <View key={i} style={[styles.noteBar, { height: h, backgroundColor: i < 5 ? colors.primary : NOTE_BAR_SOFT }]} />
-              ))}
-            </View>
-          )}
-          <Text style={styles.noteTime}>{thinking ? '' : `0:0${Math.min(9, secs)}`}</Text>
+    <View style={styles.call}>
+      <ScrollView
+        ref={thread}
+        style={{ flex: 1 }}
+        contentContainerStyle={styles.callBody}
+        onContentSizeChange={() => thread.current?.scrollToEnd({ animated: !reduced })}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.callHead}>
+          <Animated.View style={[styles.callFace, bobStyle]}>
+            <Image source={POSE.wave} style={styles.callFaceImg} contentFit="contain" accessibilityLabel="Pancho" />
+          </Animated.View>
+          <Text style={styles.callName}>Pancho</Text>
+          <Text style={styles.callSub}>{phase === 'typing' ? 'recording a voice note…' : 'voice notes'}</Text>
         </View>
-        {thinking ? null : (
-          <>
-            <Text style={styles.callEs}>{line.es}</Text>
-            <Text style={styles.callEn}>{line.en}</Text>
-          </>
+        {msgs.map((m, i) =>
+          m.kind === 'pancho' ? (
+            <Animated.View key={`p${m.turn}`} entering={i === 0 ? undefined : enter(false)} style={styles.noteWrapLeft}>
+              <PanchoNote line={SCRIPT[m.turn]} rate={rate} />
+            </Animated.View>
+          ) : m.kind === 'me' ? (
+            <Animated.View key={`m${i}`} entering={enter(true)} style={styles.noteWrapRight}>
+              <MyNote reply={m.reply} />
+            </Animated.View>
+          ) : (
+            <Animated.View key={`t${i}`} entering={reduced ? FadeIn.duration(150) : FadeIn.duration(200)} style={{ alignSelf: 'flex-start' }}>
+              <View style={styles.typing}>
+                <TypingDots small />
+                <Text style={styles.typingText}>recording…</Text>
+              </View>
+            </Animated.View>
+          ),
         )}
-      </Animated.View>
+      </ScrollView>
 
-      <View style={{ flex: 1, minHeight: 20 }} />
-
-      {over ? (
-        // His goodbye: the closing line waits dimmed until he's done.
-        <Animated.View style={[styles.callDockInner, litStyle]} pointerEvents={showReplies ? 'auto' : 'none'}>
-          {/* The call above is scripted; the real one isn't, and says so. */}
-          <Text style={styles.callReal}>In the app, you speak and Pancho answers. No script. Talk about anything.</Text>
-          <Button title="End call" onPress={onDone} disabled={!showReplies} />
-        </Animated.View>
-      ) : (
-        <View style={styles.callDockInner}>
-          <View style={styles.callHintRow}>
-            <Text style={styles.callHint}>
-              {showReplies ? 'ANSWER WITH A VOICE NOTE' : answering ? 'SENT · PANCHO IS ANSWERING' : 'LISTEN FIRST'}
-            </Text>
-            {showReplies ? null : <TypingDots small />}
-          </View>
-          {/* The same two slots throughout, so nothing jumps: dimmed while he
-              talks, lit for her turn, and the one she picks stays put in rosa. */}
-          <Animated.View key={turn} entering={reduced ? undefined : FadeIn.duration(150)} style={[styles.callDockInner, answering ? null : litStyle]}>
-            {line.replies.map((r) => {
-              const mine = answering && said?.es === r.es;
-              const gone = answering && !mine;
-              return (
+      <View style={[styles.callDock, { paddingBottom: 14 + bottom }]}>
+        {over && showReplies ? (
+          <Animated.View entering={reduced ? FadeIn.duration(150) : FadeInDown.duration(260).easing(EASE_OUT)} style={styles.callDockInner}>
+            {/* The call above is scripted; the real one isn't, and says so. */}
+            <Text style={styles.callReal}>In the app, you speak and Pancho answers. No script. Talk about anything.</Text>
+            <Button title="End call" onPress={onDone} />
+          </Animated.View>
+        ) : (
+          <>
+            <View style={styles.callHintRow}>
+              <Text style={styles.callHint}>{over ? 'LISTEN FIRST' : hint}</Text>
+              {showReplies ? null : <TypingDots small />}
+            </View>
+            {/* The same slots throughout, so the dock never jumps: dimmed while
+                he talks, lit for her turn, emptied the moment she sends. */}
+            <Animated.View key={turn} style={[styles.callDockInner, litStyle]}>
+              {(over ? SCRIPT[turn - 1]?.replies ?? [] : line.replies).map((r) => (
                 <Pressable
                   key={r.es}
                   onPress={() => say(r)}
-                  disabled={!showReplies}
-                  accessibilityState={{ disabled: !showReplies }}
-                  style={({ pressed }) => [
-                    styles.callReply,
-                    mine && styles.callReplyMine,
-                    gone && { opacity: 0 },
-                    { transform: [{ scale: pressed ? 0.97 : 1 }] },
-                  ]}>
-                  <View style={[styles.replyMic, mine && { backgroundColor: colors.card }]}>
-                    <Ionicons name={mine ? 'checkmark' : 'mic-outline'} size={20} color={colors.ink} />
+                  disabled={!showReplies || over}
+                  accessibilityState={{ disabled: !showReplies || over }}
+                  style={({ pressed }) => [styles.callReply, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
+                  <View style={styles.replyMic}>
+                    <Ionicons name="mic-outline" size={20} color={colors.ink} />
                   </View>
                   <View style={{ flex: 1, gap: 2 }}>
-                    <Text style={[styles.callReplyEs, mine && { color: colors.onPrimary }]}>{r.es}</Text>
-                    <Text style={[styles.callReplyEn, mine && { color: colors.onPrimary, opacity: 0.85 }]}>{r.en}</Text>
+                    <Text style={styles.callReplyEs}>{r.es}</Text>
+                    <Text style={styles.callReplyEn}>{r.en}</Text>
                   </View>
                 </Pressable>
-              );
-            })}
-          </Animated.View>
-          {showReplies ? <Text style={styles.callFoot}>Say it out loud, then tap it</Text> : <Text style={styles.callFoot}> </Text>}
-          {admin ? <Text style={styles.micNote}>Prototype: a scripted call. Nothing is recorded.</Text> : null}
+              ))}
+            </Animated.View>
+            <Text style={[styles.callFoot, { opacity: showReplies ? 1 : 0 }]}>Say it out loud, then tap it</Text>
+          </>
+        )}
+        {admin ? (
+          <Pressable onPress={() => void goLive()} disabled={live} hitSlop={8}>
+            <Text style={styles.liveLink}>{live ? 'Starting…' : 'Admin: try the live AI call instead →'}</Text>
+          </Pressable>
+        ) : null}
+      </View>
+    </View>
+  );
+}
+
+/** His voice note in the thread: ▶ and the tortoise, its wave and length, the words. */
+function PanchoNote({ line, rate }: { line: Turn; rate: number }) {
+  const secs = Math.max(1, Math.round((line.es.split(/\s+/).length * 0.42) / rate));
+  return (
+    <View style={styles.note}>
+      <View style={styles.noteRow}>
+        {line.audio ? (
+          <CallAudio path={line.audio} rate={rate} />
+        ) : (
+          <View style={[styles.notePlay, { opacity: 0.4 }]}>
+            <Ionicons name="play" size={18} color={colors.onPrimary} />
+          </View>
+        )}
+        <View style={styles.noteWave} accessible={false}>
+          {NOTE_WAVE.slice(0, 13).map((h, i) => (
+            <View key={i} style={[styles.noteBar, { height: h, backgroundColor: i < 5 ? colors.primary : NOTE_BAR_SOFT }]} />
+          ))}
         </View>
-      )}
-      {admin ? (
-        <Pressable onPress={() => void goLive()} disabled={live} hitSlop={8}>
-          <Text style={styles.liveLink}>{live ? 'Starting…' : 'Admin: try the live AI call instead →'}</Text>
-        </Pressable>
-      ) : null}
-    </ScrollView>
+        <Text style={styles.noteTime}>{`0:0${Math.min(9, secs)}`}</Text>
+      </View>
+      <Text style={styles.callEs}>{line.es}</Text>
+      <Text style={styles.callEn}>{line.en}</Text>
+    </View>
+  );
+}
+
+/** What she said, as her own bubble: rosa, on the right, just the words. */
+function MyNote({ reply }: { reply: Turn['replies'][number] }) {
+  return (
+    <View style={styles.myNote}>
+      <Text style={[styles.callEs, { color: colors.onPrimary, fontSize: 21, lineHeight: 26 }]}>{reply.es}</Text>
+      <Text style={[styles.callEn, { color: colors.onPrimary, opacity: 0.85 }]}>{reply.en}</Text>
+    </View>
   );
 }
 
@@ -872,22 +897,48 @@ const styles = StyleSheet.create({
   replyEn: { ...font.body[600], fontSize: 14, color: colors.muted },
 
   call: { flex: 1 },
-  callBody: { flexGrow: 1, paddingHorizontal: 20 },
-  callHead: { alignItems: 'center', gap: 10, marginTop: 14 },
+  callBody: { paddingHorizontal: 20, paddingBottom: 18, gap: 12 },
+  callHead: { alignItems: 'center', gap: 2, marginTop: 10, marginBottom: 6 },
   // His face and waving hand fill the circle: the figure, zoomed in on top.
   callFace: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+    marginBottom: 8,
     overflow: 'hidden',
     backgroundColor: pastel.butter,
     boxShadow: `0 0 0 3px ${colors.ink}, 3px 4px 0 3px ${colors.ink}`,
   },
-  callFaceImg: { position: 'absolute', width: 156, height: 233, left: -3, top: 10 },
+  callFaceImg: { position: 'absolute', width: 116, height: 173, left: -3, top: 7 },
   callName: { ...font.display[900], fontSize: 22, color: colors.ink, textAlign: 'center' },
-  note: {
-    marginTop: 20,
+  callSub: { ...font.body[600], fontSize: 13, color: colors.muted, textAlign: 'center' },
+  noteWrapLeft: { alignSelf: 'flex-start', width: '90%' },
+  noteWrapRight: { alignSelf: 'flex-end', maxWidth: '80%' },
+  myNote: {
     gap: 4,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 22,
+    borderBottomRightRadius: 8,
+    backgroundColor: colors.primary,
+    boxShadow: `0 0 0 2.5px ${colors.ink}, 3px 4px 0 2.5px ${colors.ink}`,
+  },
+  typing: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 20,
+    borderBottomLeftRadius: 8,
+    backgroundColor: colors.card,
+    boxShadow: `0 0 0 2.5px ${colors.ink}, 3px 4px 0 2.5px ${colors.ink}`,
+  },
+  typingText: { ...font.body[700], fontSize: 14, color: colors.muted },
+  callDock: { paddingHorizontal: 20, paddingTop: 12, gap: 10, backgroundColor: colors.bg },
+  note: {
+    gap: 4,
+    borderBottomLeftRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 14,
     borderRadius: 22,
