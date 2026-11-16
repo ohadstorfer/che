@@ -313,7 +313,7 @@ function takes(text) {
  * carrier: "mil" came back as "million", twice. And the ones it does not read
  * as a word at all: "mufa" came back as a sigh, then as a hum (2026-11-06). And "gil" came back English, with a hard g (2026-11-06). And "ir" came back spelled out, "I, R" (2026-11-11).
  */
-const ABBREVIATIONS = new Set(['mil', 'mufa', 'gil', 'ir']);
+const ABBREVIATIONS = new Set(['mil', 'mufa', 'gil', 'ir', 're']);
 
 export const needsSentence = (text) =>
   !/\s/.test(text.trim()) &&
