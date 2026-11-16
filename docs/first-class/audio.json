@@ -5,6 +5,24 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-11-16T00:12:16.881Z"
  },
+ "argentine/51bed0a478ac5d9a83cc.mp3": {
+  "text": "¡Hola! ¿Qué hacés?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-11-16T02:26:00.626Z"
+ },
+ "argentine/901abcd0880b674531c4.mp3": {
+  "text": "¡Genial! ¡Nos vemos el domingo! ¡Chau!",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-11-16T02:26:00.627Z"
+ },
+ "argentine/ae8ab3357addf51b3732.mp3": {
+  "text": "¡Qué rico! Che, el domingo hago un asado. ¿Venís?",
+  "voice": "tomas",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-11-16T02:26:00.627Z"
+ },
  "argentine/d2aff656364e13ce0f76.mp3": {
   "text": "¡La medialuna está re rica!",
   "voice": "malena",

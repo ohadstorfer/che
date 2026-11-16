@@ -467,11 +467,12 @@ type Turn = { es: string; en: string; audio?: string; replies: { es: string; en:
 // Pancho as a friend who calls her, two turns short enough for a first day:
 // the first reply is the class's café and medialuna, the second the slang
 // part's "dale", and the asado he invites her to is the culture part's.
-// None of these lines has a recording yet: they are read, not heard.
+// Recorded in Tomás's voice (scripts/first-class/tts.mjs), played at her level's speed.
 const SCRIPT: Turn[] = [
   {
     es: '¡Hola! ¿Qué hacés?',
     en: 'Hi! What are you up to?',
+    audio: 'argentine/51bed0a478ac5d9a83cc.mp3',
     replies: [
       { es: 'Acá, tomando un café.', en: 'Just here, having a coffee.' },
       { es: 'Comiendo una medialuna.', en: 'Eating a medialuna.' },
@@ -480,6 +481,7 @@ const SCRIPT: Turn[] = [
   {
     es: '¡Qué rico! Che, el domingo hago un asado. ¿Venís?',
     en: 'Yum! Hey, I’m having an asado on Sunday. Are you coming?',
+    audio: 'argentine/ae8ab3357addf51b3732.mp3',
     replies: [
       { es: '¡Sí, dale!', en: 'Yes, sure!' },
       { es: '¡Dale, gracias!', en: 'Sure, thanks!' },
@@ -488,6 +490,7 @@ const SCRIPT: Turn[] = [
   {
     es: '¡Genial! ¡Nos vemos el domingo! ¡Chau!',
     en: 'Great! See you on Sunday! Bye!',
+    audio: 'argentine/901abcd0880b674531c4.mp3',
     replies: [],
   },
 ];
