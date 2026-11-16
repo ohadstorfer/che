@@ -3,7 +3,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, type ImageSourcePropType, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
   FadeIn,
@@ -194,7 +194,7 @@ export function FirstClassLesson({
   const [butter, setButter] = useState(false);
   const screen = SCREENS[at];
   // The page takes the opener's colour while one is up: butter for slang, sky for culture.
-  const tint = screen.id === 'culture-intro' ? pastel.sky : screen.id === 'call' ? pastel.sage : butter ? pastel.butter : null;
+  const tint = screen.id === 'culture-intro' ? pastel.sky : butter ? pastel.butter : null;
   useStatusBarColor(tint ?? colors.bg);
 
   const next = () => {
@@ -280,11 +280,11 @@ function ScreenView({
     case 'culture-intro':
       return <CultureOpener onStart={onNext} />;
     case 'asado-1':
-      return <FactCard key={id} fact={ASADO[0]} onDone={onNext} tapToAdvance={false} />;
+      return <FactCard key={id} fact={ASADO[0]} onDone={onNext} tapToAdvance={false} bigArt />;
     case 'asado-2':
-      return <FactCard key={id} fact={ASADO[1]} onDone={onNext} tapToAdvance={false} />;
+      return <FactCard key={id} fact={ASADO[1]} onDone={onNext} tapToAdvance={false} bigArt />;
     case 'asado-3':
-      return <FactCard key={id} fact={ASADO[2]} onDone={onNext} tapToAdvance={false} />;
+      return <FactCard key={id} fact={ASADO[2]} onDone={onNext} tapToAdvance={false} bigArt />;
     case 'call':
       return <CallStep admin={admin} rate={TALK_RATE[level]} onDone={onNext} />;
   }
@@ -294,8 +294,8 @@ function ScreenView({
 // asado is, then why it matters. Explained, never quizzed: a first day is no
 // time to guess at a country she doesn't know yet. Art and tones as that
 // class deals them (culture-art.ts, CARD_TONES).
-const asadoCard = (n: number, text: string, bg: string): Fact => ({
-  art: artFor('asado', n),
+const asadoCard = (n: number | ImageSourcePropType, text: string, bg: string): Fact => ({
+  art: typeof n === 'number' ? artFor('asado', n) : n,
   text,
   hero: null,
   chip: 'More than a barbecue',
@@ -304,7 +304,8 @@ const asadoCard = (n: number, text: string, bg: string): Fact => ({
 const ASADO: Fact[] = [
   asadoCard(0, 'An **asado** is grilled meat, sure. But mostly it’s an excuse to spend the whole day together. **¿Hacemos un asado?** really means: want to hang out?', pastel.butter),
   asadoCard(3, 'An [asado] is also how Argentines celebrate almost anything: a birthday, a win, a new job, a Friday.', pastel.peach),
-  asadoCard(5, 'For lots of families it’s a weekly date: **el asado del domingo**. Same backyard, same [asador], same people.', pastel.sage),
+  // A steak (vacío) rather than the class's provoleta: the weekly asado is about the meat.
+  asadoCard(require('@/assets/images/objects/vacio-figure.webp'), 'For lots of families it’s a weekly date: **el asado del domingo**. Same backyard, same [asador], same people.', pastel.sage),
 ];
 
 // --- the bar: one track, a piece per run of a part, each in its colour --------
@@ -600,97 +601,112 @@ function CallStep({ admin, rate, onDone }: { admin: boolean; rate: number; onDon
   const showReplies = phase === 'ready';
   // Just after her tap, before his next line: her card is what the dock shows.
   const answering = phase === 'said' || phase === 'thinking';
-  // As the call in the app looks (hablar-chat), canvas "Pancho Call Screen
-  // Options", E: who is on the line, his line in a speech bubble with Replay ·
-  // Slow · English under it, Pancho with his mate, and a cream dock holding
-  // her two replies. No mic: nothing here listens, so nothing promises to.
+  // Voice notes (canvas "Pancho Call Screen Options", D): Pancho's face in a
+  // circle, his line as a voice note (▶, wave, length, the words), and her
+  // replies as voice notes to send, each with its mic. Nothing records: she
+  // says it, then taps it.
+  const secs = Math.max(1, Math.round((line.es.split(/\s+/).length * 0.42) / rate));
   return (
-    <View style={styles.call}>
+    <ScrollView style={styles.call} contentContainerStyle={[styles.callBody, { paddingBottom: 20 + bottom }]} bounces={false}>
       <View style={styles.callHead}>
-        <Text style={styles.callName}>Pancho</Text>
-        <Text style={styles.callSub}>Your first call</Text>
-      </View>
-      <Animated.View
-        key={turn}
-        entering={reduced ? FadeIn.duration(150) : FadeIn.duration(200).easing(EASE_OUT)}
-        style={styles.callBubbleWrap}>
-        <View style={styles.callBubble}>
-          {thinking ? (
-            <TypingDots />
-          ) : (
-            <>
-              <Text style={styles.callEs}>{line.es}</Text>
-              {showEn ? <Text style={styles.callEn}>{line.en}</Text> : null}
-            </>
-          )}
-          <View style={styles.callRule} />
-          <View style={[styles.callTools, thinking && { opacity: 0.4 }]} pointerEvents={thinking ? 'none' : 'auto'}>
-            {line.audio ? <CallAudio path={line.audio} rate={rate} /> : null}
-            <Pressable onPress={() => setShowEn((v) => !v)} hitSlop={8} accessibilityRole="button" style={styles.callTool}>
-              <MaterialCommunityIcons name="translate" size={18} color={colors.primary} />
-              <Text style={styles.callToolText}>English</Text>
-            </Pressable>
-          </View>
-        </View>
-        <View style={styles.callTail} />
-      </Animated.View>
-      <View style={styles.callStage}>
-        <Animated.View style={[styles.callPanchoWrap, bobStyle]}>
-          <Image source={POSE.mate} style={styles.callPancho} contentFit="contain" accessibilityLabel="Pancho with his mate" />
+        <Animated.View style={[styles.callFace, bobStyle]}>
+          <Image source={POSE.wave} style={styles.callFaceImg} contentFit="contain" accessibilityLabel="Pancho" />
         </Animated.View>
+        <Text style={styles.callName}>{thinking ? 'Pancho is recording…' : 'Pancho sent you a voice note'}</Text>
       </View>
-      <View style={[styles.callDock, { paddingBottom: 24 + bottom }]}>
-        {over ? (
-          // His goodbye: the closing line waits dimmed, like her replies, until he's done.
-          <Animated.View style={[styles.callDockInner, litStyle]} pointerEvents={showReplies ? 'auto' : 'none'}>
-            {/* The call above is scripted; the real one isn't, and says so. */}
-            <Text style={styles.callReal}>In the app, you speak and Pancho answers. No script. Talk about anything.</Text>
-            <Button title="End call" onPress={onDone} disabled={!showReplies} />
-          </Animated.View>
-        ) : (
-          <>
-            <View style={styles.callHintRow}>
-              <Text style={styles.callHint}>
-                {showReplies ? 'SAY ONE OUT LOUD, THEN TAP IT' : answering ? 'PANCHO IS ANSWERING' : 'LISTEN FIRST'}
-              </Text>
-              {showReplies ? null : <TypingDots small />}
+
+      <Animated.View key={turn} entering={reduced ? FadeIn.duration(150) : FadeIn.duration(200).easing(EASE_OUT)} style={styles.note}>
+        <View style={styles.noteRow}>
+          {line.audio && !thinking ? (
+            <CallAudio path={line.audio} rate={rate} />
+          ) : (
+            <View style={[styles.notePlay, { opacity: 0.4 }]}>
+              <Ionicons name="play" size={18} color={colors.onPrimary} />
             </View>
-            {/* The same two slots throughout, so nothing jumps: dimmed while he
-                talks, lit for her turn, and the one she picks stays put in rosa. */}
-            <Animated.View key={turn} entering={reduced ? undefined : FadeIn.duration(150)} style={[styles.callDockInner, answering ? null : litStyle]}>
-              {line.replies.map((r) => {
-                const mine = answering && said?.es === r.es;
-                const gone = answering && !mine;
-                return (
-                  <Pressable
-                    key={r.es}
-                    onPress={() => say(r)}
-                    disabled={!showReplies}
-                    accessibilityState={{ disabled: !showReplies }}
-                    style={({ pressed }) => [
-                      styles.callReply,
-                      mine && styles.callReplyMine,
-                      gone && { opacity: 0 },
-                      { transform: [{ scale: pressed ? 0.97 : 1 }] },
-                    ]}>
-                    <Text style={[styles.callReplyEs, mine && { color: colors.onPrimary }]}>{r.es}</Text>
-                    <Text style={[styles.callReplyEn, mine && { color: colors.onPrimary, opacity: 0.85 }]}>{r.en}</Text>
-                  </Pressable>
-                );
-              })}
-            </Animated.View>
-            {admin ? <Text style={styles.micNote}>Prototype: a scripted call. Nothing is recorded.</Text> : null}
+          )}
+          {thinking ? (
+            <View style={styles.noteWave}>
+              <TypingDots small />
+            </View>
+          ) : (
+            <View style={styles.noteWave} accessible={false}>
+              {NOTE_WAVE.map((h, i) => (
+                <View key={i} style={[styles.noteBar, { height: h, backgroundColor: i < 5 ? colors.primary : NOTE_BAR_SOFT }]} />
+              ))}
+            </View>
+          )}
+          <Text style={styles.noteTime}>{thinking ? '' : `0:0${Math.min(9, secs)}`}</Text>
+        </View>
+        {thinking ? null : (
+          <>
+            <Text style={styles.callEs}>{line.es}</Text>
+            <Text style={styles.callEn}>{line.en}</Text>
           </>
         )}
-        {admin ? (
-          <Pressable onPress={() => void goLive()} disabled={live} hitSlop={8}>
-            <Text style={styles.liveLink}>{live ? 'Starting…' : 'Admin: try the live AI call instead →'}</Text>
-          </Pressable>
-        ) : null}
-      </View>
-    </View>
+      </Animated.View>
+
+      <View style={{ flex: 1, minHeight: 20 }} />
+
+      {over ? (
+        // His goodbye: the closing line waits dimmed until he's done.
+        <Animated.View style={[styles.callDockInner, litStyle]} pointerEvents={showReplies ? 'auto' : 'none'}>
+          {/* The call above is scripted; the real one isn't, and says so. */}
+          <Text style={styles.callReal}>In the app, you speak and Pancho answers. No script. Talk about anything.</Text>
+          <Button title="End call" onPress={onDone} disabled={!showReplies} />
+        </Animated.View>
+      ) : (
+        <View style={styles.callDockInner}>
+          <View style={styles.callHintRow}>
+            <Text style={styles.callHint}>
+              {showReplies ? 'ANSWER WITH A VOICE NOTE' : answering ? 'SENT · PANCHO IS ANSWERING' : 'LISTEN FIRST'}
+            </Text>
+            {showReplies ? null : <TypingDots small />}
+          </View>
+          {/* The same two slots throughout, so nothing jumps: dimmed while he
+              talks, lit for her turn, and the one she picks stays put in rosa. */}
+          <Animated.View key={turn} entering={reduced ? undefined : FadeIn.duration(150)} style={[styles.callDockInner, answering ? null : litStyle]}>
+            {line.replies.map((r) => {
+              const mine = answering && said?.es === r.es;
+              const gone = answering && !mine;
+              return (
+                <Pressable
+                  key={r.es}
+                  onPress={() => say(r)}
+                  disabled={!showReplies}
+                  accessibilityState={{ disabled: !showReplies }}
+                  style={({ pressed }) => [
+                    styles.callReply,
+                    mine && styles.callReplyMine,
+                    gone && { opacity: 0 },
+                    { transform: [{ scale: pressed ? 0.97 : 1 }] },
+                  ]}>
+                  <View style={[styles.replyMic, mine && { backgroundColor: colors.card }]}>
+                    <Ionicons name={mine ? 'checkmark' : 'mic-outline'} size={20} color={colors.ink} />
+                  </View>
+                  <View style={{ flex: 1, gap: 2 }}>
+                    <Text style={[styles.callReplyEs, mine && { color: colors.onPrimary }]}>{r.es}</Text>
+                    <Text style={[styles.callReplyEn, mine && { color: colors.onPrimary, opacity: 0.85 }]}>{r.en}</Text>
+                  </View>
+                </Pressable>
+              );
+            })}
+          </Animated.View>
+          {showReplies ? <Text style={styles.callFoot}>Say it out loud, then tap it</Text> : <Text style={styles.callFoot}> </Text>}
+          {admin ? <Text style={styles.micNote}>Prototype: a scripted call. Nothing is recorded.</Text> : null}
+        </View>
+      )}
+      {admin ? (
+        <Pressable onPress={() => void goLive()} disabled={live} hitSlop={8}>
+          <Text style={styles.liveLink}>{live ? 'Starting…' : 'Admin: try the live AI call instead →'}</Text>
+        </Pressable>
+      ) : null}
+    </ScrollView>
   );
 }
+
+/** A voice note's wave: fixed, so it never changes between turns. */
+const NOTE_WAVE = [10, 22, 14, 28, 18, 24, 12, 26, 16, 20, 10, 22, 14, 8, 18, 12];
+const NOTE_BAR_SOFT = '#D9B3BC';
 
 /** Pancho thinking: three dots taking turns, in his bubble where the words go. */
 function TypingDots({ small }: { small?: boolean }) {
@@ -732,13 +748,19 @@ function CallAudio({ path, rate }: { path: string; rate: number }) {
   };
   return (
     <>
-      <Pressable onPress={() => go('play')} hitSlop={8} accessibilityRole="button" style={styles.callTool}>
-        <Ionicons name={on === 'play' ? 'volume-high' : 'refresh'} size={18} color={colors.primary} />
-        <Text style={styles.callToolText}>Replay</Text>
+      <Pressable
+        onPress={() => go('play')}
+        accessibilityRole="button"
+        accessibilityLabel="Play Pancho's message"
+        style={({ pressed }) => [styles.notePlay, { transform: [{ scale: pressed ? 0.94 : 1 }] }]}>
+        <Ionicons name={on === 'play' ? 'volume-high' : 'play'} size={18} color={colors.onPrimary} />
       </Pressable>
-      <Pressable onPress={() => go('slow')} hitSlop={8} accessibilityRole="button" style={styles.callTool}>
+      <Pressable
+        onPress={() => go('slow')}
+        accessibilityRole="button"
+        accessibilityLabel="Play slowly"
+        style={({ pressed }) => [styles.noteSlow, on === 'slow' && { backgroundColor: colors.primarySoft }, { transform: [{ scale: pressed ? 0.94 : 1 }] }]}>
         <MaterialCommunityIcons name="tortoise" size={20} color={colors.primary} />
-        <Text style={[styles.callToolText, on === 'slow' && { color: colors.primaryDark }]}>Slow</Text>
       </Pressable>
     </>
   );
@@ -850,69 +872,66 @@ const styles = StyleSheet.create({
   replyEn: { ...font.body[600], fontSize: 14, color: colors.muted },
 
   call: { flex: 1 },
-  callHead: { alignItems: 'center', marginTop: 10 },
-  callName: { ...font.display[900], fontSize: 20, color: colors.ink },
-  callSub: { ...font.body[600], fontSize: 14, color: CALL_SOFT },
-  callBubbleWrap: { marginTop: 20, marginHorizontal: 18 },
-  callBubble: {
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 12,
-    gap: 6,
-    borderRadius: 26,
-    backgroundColor: colors.card,
-    boxShadow: `0 0 0 3px ${colors.ink}, 4px 5px 0 3px ${colors.ink}`,
+  callBody: { flexGrow: 1, paddingHorizontal: 20 },
+  callHead: { alignItems: 'center', gap: 10, marginTop: 14 },
+  // His face and waving hand fill the circle: the figure, zoomed in on top.
+  callFace: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    overflow: 'hidden',
+    backgroundColor: pastel.butter,
+    boxShadow: `0 0 0 3px ${colors.ink}, 3px 4px 0 3px ${colors.ink}`,
   },
-  // The bubble's point, toward Pancho: a turned square under its edge.
-  callTail: {
-    position: 'absolute',
-    left: 116,
-    bottom: -9,
-    width: 20,
-    height: 20,
+  callFaceImg: { position: 'absolute', width: 156, height: 233, left: -3, top: 10 },
+  callName: { ...font.display[900], fontSize: 22, color: colors.ink, textAlign: 'center' },
+  note: {
+    marginTop: 20,
+    gap: 4,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 22,
     backgroundColor: colors.card,
-    borderRightWidth: 3,
-    borderBottomWidth: 3,
-    borderColor: colors.ink,
-    transform: [{ rotate: '45deg' }],
+    boxShadow: `0 0 0 2.5px ${colors.ink}, 3px 4px 0 2.5px ${colors.ink}`,
   },
-  callEs: { ...font.display[800], fontSize: 28, lineHeight: 34, color: colors.ink, textAlign: 'center' },
-  callEn: { ...font.body[700], fontSize: 16, color: colors.muted, textAlign: 'center' },
-  callRule: { alignSelf: 'stretch', height: 2, borderRadius: 1, backgroundColor: colors.border, marginTop: 8 },
-  callTools: { flexDirection: 'row', justifyContent: 'center', gap: 22 },
-  callTool: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 36 },
-  callToolText: { ...font.body[800], fontSize: 15, color: colors.primary },
-  callStage: { flex: 1, minHeight: 110, alignItems: 'center', justifyContent: 'center', paddingTop: 14 },
-  callPanchoWrap: { width: 200, height: '100%', maxHeight: 230 },
-  callPancho: { width: '100%', height: '100%' },
+  noteRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 6 },
+  notePlay: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.primary },
+  noteSlow: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', boxShadow: `0 0 0 2px ${colors.primary}` },
+  noteWave: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 3, height: 32 },
+  noteBar: { width: 4, borderRadius: 2 },
+  noteTime: { ...font.body[700], fontSize: 13, color: colors.muted, minWidth: 28, textAlign: 'right' },
+  callEs: { ...font.display[800], fontSize: 24, lineHeight: 29, color: colors.ink },
+  callEn: { ...font.body[600], fontSize: 15, color: colors.muted },
   callDockInner: { gap: 12 },
+  callReply: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 14,
+    borderRadius: 20,
+    backgroundColor: colors.card,
+    boxShadow: `0 0 0 2.5px ${colors.ink}, 3px 4px 0 2.5px ${colors.ink}`,
+  },
+  replyMic: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: pastel.sage,
+    boxShadow: `0 0 0 2px ${colors.ink}`,
+  },
+  callReplyEs: { ...font.display[800], fontSize: 21, lineHeight: 25, color: colors.ink },
+  callReplyEn: { ...font.body[600], fontSize: 15, color: colors.muted },
+  callFoot: { ...font.body[600], fontSize: 13, color: colors.muted, textAlign: 'center' },
   dots: { flexDirection: 'row', gap: 8, height: 34, alignItems: 'center', justifyContent: 'center' },
   dotsSmall: { flexDirection: 'row', gap: 4, alignItems: 'center' },
   dotSmall: { width: 5, height: 5, borderRadius: 3, backgroundColor: CALL_SOFT },
+  dot: { width: 10, height: 10, borderRadius: 5, backgroundColor: colors.ink },
   callHintRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, minHeight: 16 },
   // Her pick, once tapped: her own line, in rosa like the rest of her side.
   callReplyMine: { backgroundColor: colors.primary },
-  dot: { width: 10, height: 10, borderRadius: 5, backgroundColor: colors.ink },
-  callDock: {
-    gap: 12,
-    paddingHorizontal: 20,
-    paddingTop: 18,
-    backgroundColor: colors.card,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    boxShadow: `0 -2px 0 2px ${colors.ink}`,
-  },
-  callReply: {
-    backgroundColor: pastel.butter,
-    borderRadius: 22,
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    gap: 4,
-    boxShadow: `0 0 0 2.5px ${colors.ink}, 3px 4px 0 2.5px ${colors.ink}`,
-  },
-  callReplyEs: { ...font.display[800], fontSize: 24, lineHeight: 28, color: colors.ink },
-  callReplyEn: { ...font.body[600], fontSize: 16, color: '#6B5646' },
   callHint: { ...font.body[800], fontSize: 12, letterSpacing: 1, color: CALL_SOFT, textAlign: 'center' },
   callReal: { ...font.body[800], fontSize: 15, lineHeight: 21, color: colors.ink, textAlign: 'center', paddingHorizontal: 8 },
   micNote: { ...font.body[600], fontSize: 12, color: colors.muted, textAlign: 'center' },
