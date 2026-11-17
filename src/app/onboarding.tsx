@@ -176,6 +176,11 @@ export default function Onboarding() {
       .catch(() => {});
   }, []);
   const notifyAt: NotifyAt = a.notifyAt ?? NOTIFY_AT_DEFAULT;
+  // The order the bar counts, before it is frozen at the builder: the same
+  // pick the builder will make, so the bar doesn't fill up and then grow a step.
+  const planned: NotifyAt =
+    a.notifyAt ??
+    (notifyParam === 'after_build' || notifyParam === 'after_class' ? notifyParam : (fetched.current ?? NOTIFY_AT_DEFAULT));
   useEffect(() => {
     if (step !== 'building' || a.notifyAt) return;
     const v: NotifyAt =
@@ -252,7 +257,7 @@ export default function Onboarding() {
     else next();
   };
   const showChrome = step !== 'building';
-  const bar = BAR[notifyAt].indexOf(step);
+  const bar = BAR[planned].indexOf(step);
 
   // The first class and the two screens around it fill the screen themselves.
   if (BARE.includes(step)) {
@@ -281,7 +286,7 @@ export default function Onboarding() {
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={[styles.header, !showChrome && { opacity: 0 }]} pointerEvents={showChrome ? 'auto' : 'none'}>
           <IconButton icon="chevron-back" label="Back" onPress={back} />
-          {bar >= 0 ? <ProgressBar value={(bar + 1) / BAR[notifyAt].length} /> : <View style={{ flex: 1 }} />}
+          {bar >= 0 ? <ProgressBar value={(bar + 1) / BAR[planned].length} /> : <View style={{ flex: 1 }} />}
           <View style={{ width: 36 }} />
         </View>
 
@@ -991,28 +996,23 @@ function BobArrow({ reduced, at = NUDGE_AT }: { reduced: boolean; at?: number })
  * With onDeny, the drawn "Don't allow" moves on without asking.
  */
 function PhonePrompt({ reduced, at, onAllow, onDeny }: { reduced: boolean; at?: number; onAllow?: () => void; onDeny?: () => void }) {
-  // "Don't allow" on the drawing: she goes on and the phone's own question is
-  // never spent, so it can still be asked on a better day.
-  const deny = (body: React.ReactNode, style: object) =>
-    onDeny ? (
-      <Pressable onPress={onDeny} accessibilityRole="button" accessibilityLabel="Don’t allow notifications" style={style}>
-        {body}
-      </Pressable>
-    ) : (
-      <View style={style}>{body}</View>
-    );
-  const allow = (body: React.ReactNode, style: object) =>
-    onAllow ? (
+  // A drawn button is a real one only when it has a handler: Allow asks for
+  // real; "Don't allow" moves on and the phone's own question is never spent,
+  // so it can still be asked on a better day.
+  const tapIf = (onPress: (() => void) | undefined, label: string) => (body: React.ReactNode, style: object) =>
+    onPress ? (
       <Pressable
-        onPress={onAllow}
+        onPress={onPress}
         accessibilityRole="button"
-        accessibilityLabel="Allow notifications"
+        accessibilityLabel={label}
         style={({ pressed }) => [style, { transform: [{ scale: pressed ? 0.96 : 1 }] }]}>
         {body}
       </Pressable>
     ) : (
       <View style={style}>{body}</View>
     );
+  const allow = tapIf(onAllow, 'Allow notifications');
+  const deny = tapIf(onDeny, 'Don’t allow notifications');
 
   if (Platform.OS === 'android') {
     return (
@@ -1075,6 +1075,11 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
   const posthog = usePostHog();
   const [busy, setBusy] = useState(false);
   const [declined, setDeclined] = useState(false);
+  // Cleared if she leaves before it fires (Back), so it can't move her on from elsewhere.
+  const moveOn = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (moveOn.current) clearTimeout(moveOn.current);
+  }, []);
   const words = WORDS_OF_DAY[answers.level];
   // The word card stays and its word changes: the next day's comes in as the
   // last one goes. Reduced motion shows the first day only.
@@ -1090,8 +1095,8 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
     if (busy || declined) return;
     tap();
     setDeclined(true);
-    posthog?.capture('notify_soft_declined');
-    setTimeout(() => onDone(false), 1500);
+    posthog?.capture('notify_soft_declined', { $set: { notifications_allowed: false } });
+    moveOn.current = setTimeout(() => onDone(false), 1500);
   };
   const ask = async () => {
     if (busy || declined) return;

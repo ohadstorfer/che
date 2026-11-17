@@ -21,11 +21,11 @@ import Animated, {
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CultureGlosses, type Fact, FactCard } from '@/app/culture-class';
-import { QuitSheet } from '@/app/practice';
 import { In, Rays, Slap } from '@/components/cheer-bits';
 import { ExerciseFrame, PageColorContext, type Verdict } from '@/components/exercise-frame';
 import { AudioPad, Choices, Exercise, PlayButton } from '@/components/exercises';
 import { POSE } from '@/components/mascot';
+import { QuitSheet } from '@/components/quit-sheet';
 import { Button } from '@/components/ui';
 import { WordIntro } from '@/components/word-intro';
 import { CultureOpener, SlangOpener } from '@/components/slang-opener';
@@ -229,14 +229,20 @@ export function FirstClassLesson({
   const askClose = () => (begun && !admin ? setQuitting(true) : close());
   const askRef = useRef(askClose);
   askRef.current = askClose;
+  const backState = useRef({ done, quitting });
+  backState.current = { done, quitting };
+  // Android's back, for the whole class including its end screen (onboarding
+  // leaves it to this handler): with the sheet up it closes the sheet, as in a
+  // real class; on "First class done!" it does nothing (Continue moves on).
   useEffect(() => {
-    if (done) return;
     const h = BackHandler.addEventListener('hardwareBackPress', () => {
-      askRef.current();
+      if (backState.current.done) return true;
+      if (backState.current.quitting) setQuitting(false);
+      else askRef.current();
       return true;
     });
     return () => h.remove();
-  }, [done]);
+  }, []);
 
   if (done) return <Complete onAgain={admin ? restart : undefined} onClose={close} onFinish={onFinish} />;
 

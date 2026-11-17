@@ -223,6 +223,19 @@ export default function Paywall() {
     leave();
   };
 
+  // The free week, opened today. If it can't be (no connection), she stays on
+  // the plans with the error and a "Try Unit 1 free" that asks again, rather
+  // than landing on a free-unit screen that says "tomorrow".
+  const [freeNow, setFreeNow] = useState(false);
+  const openFreeNow = async () => {
+    setFreeNow(true);
+    setError(null);
+    const { error: failed } = await supabase.rpc('open_free_pass_now');
+    if (failed) return setError('Couldn’t open your free week. Check your connection and try again.');
+    await refreshPass();
+    router.push('/free-unit');
+  };
+
   const decline = () => {
     track('winback_declined', { from });
     // Hard paywall: the free week opens now instead of tomorrow
@@ -230,11 +243,7 @@ export default function Paywall() {
     // underneath, with no close button and "Try Unit 1 free" on them.
     if (hardPaywall && from === 'onboarding') {
       setStage('plans');
-      void (async () => {
-        await Promise.resolve(supabase.rpc('open_free_pass_now')).catch(() => {});
-        await refreshPass();
-        router.push('/free-unit');
-      })();
+      void openFreeNow();
       return;
     }
     leave();
@@ -545,13 +554,14 @@ export default function Paywall() {
             loading={busy === 'buy' || (creatorOffer && busy === 'code')}
             disabled={!plan || !!busy}
           />
-          {freeWeek ? (
+          {freeWeek || freeNow ? (
             <Button
               title="Try Unit 1 free"
               variant="secondary"
               onPress={() => {
                 tap();
-                router.push('/free-unit');
+                if (freeWeek) router.push('/free-unit');
+                else void openFreeNow();
               }}
               disabled={!!busy}
             />
