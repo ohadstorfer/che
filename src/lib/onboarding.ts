@@ -74,7 +74,7 @@ export const WHY: { value: Why; label: string; icon: string; art: Art; tone: str
   { value: 'trip', label: 'I’m going on a trip', icon: 'airplane', art: 'taxi', tone: pastel.sky, react: '¡Qué bueno! You’ll order empanadas like a local.', reactSpeaker: '¡Qué bueno! No more tourist Spanish at the parrilla.' },
   { value: 'moving', label: 'I’m moving to Argentina', icon: 'home-city-outline', art: 'obelisco', tone: pastel.peach, react: '¡Qué lindo! Let’s make it feel like home.', reactSpeaker: '¡Qué lindo! You’ll sound like a neighbour, not a newcomer.' },
   { value: 'love', label: 'Someone I love is Argentine', icon: 'heart-outline', art: 'mate', tone: pastel.sage, react: 'Ay, qué lindo. Let’s win over the family.', reactSpeaker: 'Ay, qué lindo. Time to talk the way the family does.' },
-  { value: 'people', label: 'Friends, family or work', icon: 'account-group-outline', art: 'chat', tone: pastel.lav, react: 'Dale. You’ll keep up in the group chat.', reactSpeaker: 'Dale. You’ll get the jokes in the group chat.' },
+  { value: 'people', label: 'Friends or coworkers', icon: 'account-group-outline', art: 'chat', tone: pastel.lav, react: 'Dale. You’ll keep up in the group chat.', reactSpeaker: 'Dale. You’ll get the jokes in the group chat.' },
   { value: 'culture', label: 'I love the culture', icon: 'music-note-outline', art: 'bandoneon', tone: pastel.butter, react: '¡Grande! Tango, rock, fútbol. We’ll get there.', reactSpeaker: '¡Grande! The lunfardo is where it gets good.' },
 ];
 
@@ -83,10 +83,10 @@ export const mainWhy = (whys: Why[]): Why =>
   (['moving', 'trip', 'love', 'people', 'culture'] as Why[]).find((w) => whys.includes(w)) ?? 'trip';
 
 export const LEVEL: { value: Level; label: string; short: string; sub: string; bars: number; tone: string; react: string }[] = [
-  { value: 'none', label: 'I’m new to Spanish', short: 'New to Spanish', sub: 'Hola is about it', bars: 1, tone: pastel.sky, react: 'Perfecto. Nothing to unlearn.' },
-  { value: 'basics', label: 'I know some basics', short: 'Some basics', sub: 'Simple words and phrases', bars: 2, tone: pastel.sage, react: 'Bien. Keep it. I’ll add the local parts.' },
-  { value: 'spanish', label: 'I speak textbook Spanish', short: 'Textbook Spanish', sub: 'Tú, not vos', bars: 3, tone: pastel.lav, react: 'Then you have 90%. I’ll give you the rest.' },
-  { value: 'conversational', label: 'I can hold a conversation', short: 'Conversational', sub: 'I want to sound local', bars: 4, tone: pastel.peach, react: '¡Genial! We skip the basics.' },
+  { value: 'none', label: 'I’m new to Spanish', short: 'New to Spanish', sub: '“Hola” is about it', bars: 1, tone: pastel.sky, react: 'Perfecto. Nothing to unlearn.' },
+  { value: 'basics', label: 'I know a few words', short: 'A few words', sub: 'I can say hi and order a coffee', bars: 2, tone: pastel.sage, react: 'Bien. Keep it. I’ll add the local parts.' },
+  { value: 'spanish', label: 'I can get by in Spanish', short: 'I get by', sub: 'Simple chats, the textbook way (tú, not vos)', bars: 3, tone: pastel.lav, react: 'Then you have 90%. I’ll give you the rest.' },
+  { value: 'conversational', label: 'I speak Spanish well', short: 'Speak it well', sub: 'Now I want to sound Argentine', bars: 4, tone: pastel.peach, react: '¡Genial! We skip the basics.' },
 ];
 
 /** Whether she already speaks Spanish: the flashcards show her full sentences. */
@@ -207,7 +207,7 @@ export function struggleQuestion(level: Level): { en: string; options: StruggleO
       options: [
         { value: 'speak', label: 'Speaking out loud', art: 'phone', tone: pastel.sky, react: 'With me, nobody is listening.', posta: 'Calls with Pancho, where mistakes are fine' },
         { value: 'follow', label: 'Understanding real people', art: 'gramophone', tone: pastel.lav, react: 'Real voices from lesson 1, slowed down.', posta: 'Real porteño audio, slow first, then full speed' },
-        { value: 'kept', label: 'Finding the time', art: 'mate', tone: pastel.sage, react: 'That’s why it’s 10 minutes.', posta: '10 minutes a day, and Pancho knocks' },
+        { value: 'kept', label: 'Finding the time', art: 'mate', tone: pastel.sage, react: 'That’s why it’s a few minutes a day.', posta: 'A few minutes a day, and Pancho knocks' },
         { value: 'bored', label: 'Getting bored', art: 'book', tone: pastel.peach, react: 'Then we keep it short, and about you.', posta: 'Short classes about your life, with slang and culture' },
         { value: 'none', label: 'Honestly? Nothing. Let’s go', art: 'flag', tone: pastel.butter, react: '¡Esa! Let’s go.', posta: 'We start right where you are' },
       ],
@@ -219,7 +219,7 @@ export function struggleQuestion(level: Level): { en: string; options: StruggleO
         { value: 'speak', label: 'I freeze when I speak', art: 'phone', tone: pastel.sky, react: 'With me you can mess up. I fix one thing.', posta: 'Calls with Pancho, where mistakes are fine' },
         { value: 'follow', label: 'I can’t follow real speech', art: 'gramophone', tone: pastel.lav, react: 'You get real porteño audio from lesson 1.', posta: 'Real porteño audio, slow first, then full speed' },
         { value: 'wrong', label: 'I learned textbook Spanish', art: 'book', tone: pastel.peach, react: 'It wasn’t you. We swap it, word by word.', posta: 'Textbook words swapped for the local ones' },
-        { value: 'kept', label: 'I never kept it up', art: 'mate', tone: pastel.sage, react: 'That’s why it’s 10 minutes, and I knock.', posta: '10 minutes a day, and Pancho knocks' },
+        { value: 'kept', label: 'I never kept it up', art: 'mate', tone: pastel.sage, react: 'That’s why it’s a few minutes a day, and I knock.', posta: 'A few minutes a day, and Pancho knocks' },
         { value: 'none', label: 'Honestly? Nothing. Let’s go', art: 'flag', tone: pastel.butter, react: 'Dale. We build on what you have.', posta: 'We start right where you are' },
       ],
     };

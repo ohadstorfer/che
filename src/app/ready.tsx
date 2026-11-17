@@ -141,7 +141,11 @@ export default function Ready() {
           ¡Listo{answers ? nameTail(answers) : ''}! You&apos;re in.
         </Animated.Text>
         <Animated.Text entering={rise(2, reduced)} style={styles.sub}>
-          {saving ? 'Save your plan first.' : 'Where do you want to start?'}
+          {saving
+            ? pass
+              ? 'Save your account, so your progress is safe on any phone.'
+              : 'Save your account, so you keep your subscription on any phone.'
+            : 'Where do you want to start?'}
         </Animated.Text>
 
         {saving ? (

@@ -3,7 +3,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Alert, type ImageSourcePropType, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Alert, BackHandler, type ImageSourcePropType, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -21,6 +21,7 @@ import Animated, {
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CultureGlosses, type Fact, FactCard } from '@/app/culture-class';
+import { QuitSheet } from '@/app/practice';
 import { In, Rays, Slap } from '@/components/cheer-bits';
 import { ExerciseFrame, PageColorContext, type Verdict } from '@/components/exercise-frame';
 import { AudioPad, Choices, Exercise, PlayButton } from '@/components/exercises';
@@ -218,8 +219,24 @@ export function FirstClassLesson({
   };
   const close = () => {
     stopAudio();
+    setQuitting(false);
     onClose();
   };
+  // As in a real class: once she is past the first screen, the close button
+  // (or Android's back) asks first, because leaving throws the class away.
+  const [quitting, setQuitting] = useState(false);
+  const begun = at > 0 || sub > 0;
+  const askClose = () => (begun && !admin ? setQuitting(true) : close());
+  const askRef = useRef(askClose);
+  askRef.current = askClose;
+  useEffect(() => {
+    if (done) return;
+    const h = BackHandler.addEventListener('hardwareBackPress', () => {
+      askRef.current();
+      return true;
+    });
+    return () => h.remove();
+  }, [done]);
 
   if (done) return <Complete onAgain={admin ? restart : undefined} onClose={close} onFinish={onFinish} />;
 
@@ -230,7 +247,7 @@ export function FirstClassLesson({
   return (
     <SafeAreaView style={[styles.safe, tint ? { backgroundColor: tint } : null]} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
-        <Pressable onPress={close} hitSlop={12} accessibilityLabel="Close" style={{ marginTop: -4 }}>
+        <Pressable onPress={askClose} hitSlop={12} accessibilityLabel="Close" style={{ marginTop: -4 }}>
           <Ionicons name="close" size={26} color={tint ? colors.ink : colors.muted} />
         </Pressable>
         <PartBar at={at + sub} />
@@ -241,6 +258,7 @@ export function FirstClassLesson({
           <ScreenView id={screen.id} content={content} admin={!!admin} level={level} onNext={next} onProgress={setSub} onOpening={setButter} />
         </Animated.View>
       </PageColorContext.Provider>
+      <QuitSheet open={quitting} test={false} onStay={() => setQuitting(false)} onQuit={close} />
     </SafeAreaView>
   );
 }
@@ -729,7 +747,7 @@ function CallStep({
           // one after the other; while she sends and he records, the dock is empty.
           <>
             <Animated.View entering={reduced ? FadeIn.duration(150) : FadeIn.duration(220)} style={styles.callHintRow}>
-              <Text style={styles.callHint}>ANSWER WITH A VOICE NOTE</Text>
+              <Text style={styles.callHint}>YOUR TURN · TAP AN ANSWER</Text>
             </Animated.View>
             <View key={turn} style={styles.callDockInner}>
               {line.replies.map((r, k) => (
@@ -738,7 +756,7 @@ function CallStep({
                     onPress={() => say(r)}
                     style={({ pressed }) => [styles.callReply, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
                     <View style={styles.replyMic}>
-                      <Ionicons name="mic-outline" size={20} color={colors.ink} />
+                      <Ionicons name="arrow-up" size={20} color={colors.ink} />
                     </View>
                     <View style={{ flex: 1, gap: 2 }}>
                       <Text style={styles.callReplyEs}>{r.es}</Text>
@@ -749,7 +767,7 @@ function CallStep({
               ))}
             </View>
             <Animated.Text entering={reduced ? FadeIn.duration(150) : FadeIn.delay(260).duration(240)} style={styles.callFoot}>
-              Say it out loud, then tap it
+              Say it out loud for practice, then tap it
             </Animated.Text>
           </>
         ) : phase === 'speaking' ? (

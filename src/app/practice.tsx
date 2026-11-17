@@ -1072,7 +1072,7 @@ function ProgressBar({ progress }: { progress: number }) {
 // has answered something, because leaving throws the class away. Staying is
 // the big button; leaving is there, plainly, under it.
 // ---------------------------------------------------------------------------
-function QuitSheet({
+export function QuitSheet({
   open,
   test,
   onStay,

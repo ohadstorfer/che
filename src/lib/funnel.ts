@@ -54,7 +54,11 @@ export type OnboardingStep =
   | 'building'
   | 'pledge'
   | 'account'
-  | 'ready';
+  | 'ready'
+  | 'intro'
+  | 'class'
+  | 'streak'
+  | 'offer';
 
 const DEVICE_KEY = 'posta.onboarding-device';
 const sentSteps = new Set<OnboardingStep>();

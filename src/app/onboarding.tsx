@@ -108,7 +108,11 @@ const ORDER: Record<NotifyAt, Step[]> = {
  *  streak are moments with their own screens; the account sits past the bar.
  *  The "Make it Argentine" step ('try') is out of the flow for now: its screen
  *  and TryWord stay below, ready to go back in by adding 'try' after 'why'. */
-const BAR: Step[] = ['name', 'level', 'why', 'struggle', 'goal', 'notify'];
+const BAR: Record<NotifyAt, Step[]> = {
+  // After the class, notifications are part of the Day 1 screen, past the bar.
+  after_class: ['name', 'level', 'why', 'struggle', 'goal'],
+  after_build: ['name', 'level', 'why', 'struggle', 'goal', 'notify'],
+};
 /** Full-screen steps: no back button or bar above them. */
 const BARE: Step[] = ['intro', 'class', 'streak', 'offer'];
 /** Where back goes, where it isn't simply the step before: a moment (the
@@ -118,7 +122,8 @@ const BACK: Record<NotifyAt, Partial<Record<Step, Step>>> = {
   after_build: { notify: 'goal', class: 'intro', streak: 'intro' },
 };
 /** The steps the funnel table knows (its check constraint); the new ones wait for a migration. */
-const TRACKED = new Set<Step>(['name', 'level', 'why', 'try', 'goal', 'building', 'notify', 'account']);
+// intro → class → streak: reaching streak means she finished the trial class.
+const TRACKED = new Set<Step>(['name', 'level', 'why', 'try', 'struggle', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'offer', 'account']);
 
 /** Day 1 of her streak, at the end of the first class: the cheer engine's
  *  polaroid on lavender, Pancho with his guitar, confetti behind. */
@@ -225,6 +230,8 @@ export default function Onboarding() {
 
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      // The class asks before it lets her go (its own handler, next in line).
+      if (step === 'class') return false;
       back();
       return true;
     });
@@ -245,7 +252,7 @@ export default function Onboarding() {
     else next();
   };
   const showChrome = step !== 'building';
-  const bar = BAR.indexOf(step);
+  const bar = BAR[notifyAt].indexOf(step);
 
   // The first class and the two screens around it fill the screen themselves.
   if (BARE.includes(step)) {
@@ -274,7 +281,7 @@ export default function Onboarding() {
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={[styles.header, !showChrome && { opacity: 0 }]} pointerEvents={showChrome ? 'auto' : 'none'}>
           <IconButton icon="chevron-back" label="Back" onPress={back} />
-          {bar >= 0 ? <ProgressBar value={(bar + 1) / BAR.length} /> : <View style={{ flex: 1 }} />}
+          {bar >= 0 ? <ProgressBar value={(bar + 1) / BAR[notifyAt].length} /> : <View style={{ flex: 1 }} />}
           <View style={{ width: 36 }} />
         </View>
 
@@ -289,7 +296,7 @@ export default function Onboarding() {
               onNext={next}>
               {LEVEL.map((o, i) => (
                 <Animated.View key={o.value} entering={rise(i + 1, reduced)}>
-                  <Choice label={o.label} tone={o.tone} bars={o.bars} selected={a.level === o.value} onPress={() => choose('level', o.value)} />
+                  <Choice label={o.label} sub={o.sub} tone={o.tone} bars={o.bars} selected={a.level === o.value} onPress={() => choose('level', o.value)} />
                 </Animated.View>
               ))}
             </Question>
@@ -334,7 +341,7 @@ export default function Onboarding() {
               {MINUTES.map((o, i) => (
                 <Animated.View key={o.value} entering={rise(i + 1, reduced)}>
                   <Choice
-                    label={`${o.value} min a day`}
+                    label={`${o.value} min`}
                     tone={o.tone}
                     glyph={String(o.value)}
                     tag={o.label}
@@ -428,6 +435,7 @@ function Question({
  *  the label, and a square check. Picked, the row turns manteca. */
 function Choice({
   label,
+  sub,
   tone,
   art,
   bars,
@@ -439,6 +447,8 @@ function Choice({
   onPress,
 }: {
   label: string;
+  /** A second, quieter line under the label. */
+  sub?: string;
   tone: string;
   art?: Art;
   bars?: number;
@@ -446,7 +456,7 @@ function Choice({
   tag?: string;
   multi?: boolean;
   selected: boolean;
-  /** Shown under the row once it is picked, behind an "IN POSTA" pill. */
+  /** Shown under the row once it is picked, behind a "THE FIX" pill. */
   detail?: string;
   onPress: () => void;
 }) {
@@ -476,7 +486,14 @@ function Choice({
           <Text style={styles.coinGlyph}>{glyph}</Text>
         ) : null}
       </View>
-      <Text style={styles.choiceLabel}>{label}</Text>
+      {sub ? (
+        <View style={{ flex: 1, gap: 2 }}>
+          <Text style={[styles.choiceLabel, { flex: 0 }]}>{label}</Text>
+          <Text style={styles.choiceSub}>{sub}</Text>
+        </View>
+      ) : (
+        <Text style={styles.choiceLabel}>{label}</Text>
+      )}
       {tag ? (
         <View style={[styles.choiceTag, { backgroundColor: selected ? colors.card : pastel.butter }]}>
           <Text style={styles.choiceTagText}>{tag}</Text>
@@ -489,7 +506,7 @@ function Choice({
       {detail && selected ? (
         <Animated.View entering={FadeIn.duration(200)} style={styles.choiceDetail}>
           <View style={styles.postaPill}>
-            <Text style={styles.postaPillText}>IN POSTA</Text>
+            <Text style={styles.postaPillText}>THE FIX</Text>
           </View>
           <Text style={styles.choiceDetailText}>{detail}</Text>
         </Animated.View>
@@ -670,10 +687,16 @@ function NameStep({
   onNext: () => void;
 }) {
   const has = name.trim().length > 0;
+  // He answers once she stops typing, not letter by letter ("Nice to meet you, J!").
+  const [heard, setHeard] = useState(name.trim());
+  useEffect(() => {
+    const t = setTimeout(() => setHeard(name.trim()), 700);
+    return () => clearTimeout(t);
+  }, [name]);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-        <Says line={has ? `Nice to meet you, ${name.trim()}!` : 'What’s your name?'} reduced={reduced} />
+        <Says line={has && heard ? `Nice to meet you, ${heard}!` : `¡Hola! I’m ${MASCOT_NAME}. What’s your name?`} reduced={reduced} />
         <Animated.View entering={rise(1, reduced)} style={styles.nameCard}>
           <Text style={styles.nameLabel}>Me llamo…</Text>
           <TextInput
@@ -887,6 +910,8 @@ function TryItStep({ line, reduced, onNext }: { line: TryIt; reduced: boolean; o
 // --- notifications: the nudge she'll get, then the phone's own question ----------
 
 const DAYS = ['Mon', 'Tue', 'Wed'];
+/** The ink of Android's permission sheet (its bell). */
+const DROID_INK = '#3A4A7C';
 /** When each word gives way to the next, in ms: a day apart, as it would be. */
 const WORD_CUTS = [2300, 3500];
 
@@ -923,7 +948,7 @@ function Ping({ title, when, children }: { title: string; when: string; children
 }
 
 /** The ring around Allow: it breathes in time with the arrow. */
-function PulseRing({ reduced, at = NUDGE_AT }: { reduced: boolean; at?: number }) {
+function PulseRing({ reduced, at = NUDGE_AT, round }: { reduced: boolean; at?: number; round?: boolean }) {
   const o = useSharedValue(1);
   useEffect(() => {
     if (reduced) return;
@@ -934,7 +959,7 @@ function PulseRing({ reduced, at = NUDGE_AT }: { reduced: boolean; at?: number }
     return () => cancelAnimation(o);
   }, [reduced, o, at]);
   const pulse = useAnimatedStyle(() => ({ opacity: o.value }));
-  return <Animated.View style={[styles.promptRing, pulse]} pointerEvents="none" />;
+  return <Animated.View style={[styles.promptRing, round && styles.droidRing, pulse]} pointerEvents="none" />;
 }
 
 /** The arrow under Allow: it starts bobbing once she has had time to read. */
@@ -958,9 +983,98 @@ function BobArrow({ reduced, at = NUDGE_AT }: { reduced: boolean; at?: number })
   );
 }
 
+/**
+ * The phone's permission question, drawn the way her phone will show it:
+ * iOS's two-button alert, or Android 13's sheet with the bell and the two
+ * stacked buttons. Allow is ringed. With onAllow, the drawn Allow asks for
+ * real; without it, it is only a picture (the real one opens over it).
+ * With onDeny, the drawn "Don't allow" moves on without asking.
+ */
+function PhonePrompt({ reduced, at, onAllow, onDeny }: { reduced: boolean; at?: number; onAllow?: () => void; onDeny?: () => void }) {
+  // "Don't allow" on the drawing: she goes on and the phone's own question is
+  // never spent, so it can still be asked on a better day.
+  const deny = (body: React.ReactNode, style: object) =>
+    onDeny ? (
+      <Pressable onPress={onDeny} accessibilityRole="button" accessibilityLabel="Don’t allow notifications" style={style}>
+        {body}
+      </Pressable>
+    ) : (
+      <View style={style}>{body}</View>
+    );
+  const allow = (body: React.ReactNode, style: object) =>
+    onAllow ? (
+      <Pressable
+        onPress={onAllow}
+        accessibilityRole="button"
+        accessibilityLabel="Allow notifications"
+        style={({ pressed }) => [style, { transform: [{ scale: pressed ? 0.96 : 1 }] }]}>
+        {body}
+      </Pressable>
+    ) : (
+      <View style={style}>{body}</View>
+    );
+
+  if (Platform.OS === 'android') {
+    return (
+      <View style={styles.droidCard}>
+        <MaterialCommunityIcons name="bell-ring" size={28} color={DROID_INK} style={{ alignSelf: 'center' }} accessible={false} />
+        <Text style={styles.droidTitle} accessible={false}>
+          Allow <Text style={{ fontWeight: '700' }}>Posta</Text> to send you notifications?
+        </Text>
+        <View style={{ gap: 4 }}>
+          {allow(
+            <>
+              <Text style={[styles.droidButtonText, onAllow && { fontWeight: '700' }]} accessible={!onAllow ? false : undefined}>
+                Allow
+              </Text>
+              <PulseRing reduced={reduced} at={at} round />
+            </>,
+            [styles.droidButton, styles.droidTop],
+          )}
+          {deny(
+            <Text style={styles.droidButtonText} accessible={false}>
+              Don’t allow
+            </Text>,
+            [styles.droidButton, styles.droidBottom],
+          )}
+        </View>
+      </View>
+    );
+  }
+
+  return (
+    <>
+      <View style={styles.promptCard}>
+        <Text style={styles.promptTitle} accessible={false}>
+          “Posta” Would Like to Send You Notifications
+        </Text>
+        <View style={styles.promptRow}>
+          {deny(
+            <Text style={styles.promptButton} accessible={false}>
+              Don’t Allow
+            </Text>,
+            styles.promptLeft,
+          )}
+          {allow(
+            <>
+              <Text style={[styles.promptButton, styles.promptAllow]} accessible={!onAllow ? false : undefined}>
+                Allow
+              </Text>
+              <PulseRing reduced={reduced} at={at} />
+            </>,
+            styles.promptAllowWrap,
+          )}
+        </View>
+      </View>
+      <BobArrow reduced={reduced} at={at} />
+    </>
+  );
+}
+
 function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: boolean; onDone: (granted: boolean) => void }) {
   const posthog = usePostHog();
   const [busy, setBusy] = useState(false);
+  const [declined, setDeclined] = useState(false);
   const words = WORDS_OF_DAY[answers.level];
   // The word card stays and its word changes: the next day's comes in as the
   // last one goes. Reduced motion shows the first day only.
@@ -972,8 +1086,15 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
   }, [reduced]);
   const [word, gloss] = words[day];
 
+  const deny = () => {
+    if (busy || declined) return;
+    tap();
+    setDeclined(true);
+    posthog?.capture('notify_soft_declined');
+    setTimeout(() => onDone(false), 1500);
+  };
   const ask = async () => {
-    if (busy) return;
+    if (busy || declined) return;
     setBusy(true);
     const granted = await askNotifyPermission();
     // The answer lives only on the phone otherwise: kept on her PostHog person
@@ -985,7 +1106,10 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
-        <Says line="Let me send you notifications, so Spanish becomes a habit." reduced={reduced} />
+        <Says
+          line={declined ? 'No problem! Your next class will be waiting for you in the app.' : 'Let me send you notifications, so Spanish becomes a habit.'}
+          reduced={reduced}
+        />
         <View style={{ flex: 1, minHeight: 16 }} />
         <Animated.View entering={noteIn(300, reduced)}>
           <Ping title="Time for your Spanish" when="now">
@@ -1004,25 +1128,7 @@ function NotifyStep({ answers, reduced, onDone }: { answers: Answers; reduced: b
             is about to see, and which button keeps him knocking. Its Allow
             asks for real, the same as Continue. */}
         <Animated.View entering={reduced ? FadeIn.duration(200) : ASK_IN.delay(ASK_AT).duration(380)} style={styles.prompt}>
-          <View style={styles.promptCard}>
-            <Text style={styles.promptTitle} accessible={false}>
-              “Posta” Would Like to Send You Notifications
-            </Text>
-            <View style={styles.promptRow}>
-              <Text style={[styles.promptButton, styles.promptLeft]} accessible={false}>
-                Don’t Allow
-              </Text>
-              <Pressable
-                onPress={() => void ask()}
-                accessibilityRole="button"
-                accessibilityLabel="Allow notifications"
-                style={({ pressed }) => [styles.promptAllowWrap, { transform: [{ scale: pressed ? 0.96 : 1 }] }]}>
-                <Text style={[styles.promptButton, styles.promptAllow]}>Allow</Text>
-                <PulseRing reduced={reduced} />
-              </Pressable>
-            </View>
-          </View>
-          <BobArrow reduced={reduced} />
+          <PhonePrompt reduced={reduced} onAllow={() => void ask()} onDeny={deny} />
         </Animated.View>
         <View style={{ flex: 1, minHeight: 24 }} />
       </ScrollView>
@@ -1101,23 +1207,7 @@ function DayOneAsk({ answers, reduced, onDone }: { answers: Answers; reduced: bo
                 </Animated.View>
               ) : (
                 <Animated.View entering={enter(300)} exiting={FadeOut.duration(180)} style={[styles.prompt, { marginTop: 18, marginBottom: 40 }]}>
-                  <View style={styles.promptCard}>
-                    <Text style={styles.promptTitle} accessible={false}>
-                      “Posta” Would Like to Send You Notifications
-                    </Text>
-                    <View style={styles.promptRow}>
-                      <Text style={[styles.promptButton, styles.promptLeft]} accessible={false}>
-                        Don’t Allow
-                      </Text>
-                      <View style={styles.promptAllowWrap}>
-                        <Text style={[styles.promptButton, styles.promptAllow]} accessible={false}>
-                          Allow
-                        </Text>
-                        <PulseRing reduced={reduced} at={600} />
-                      </View>
-                    </View>
-                  </View>
-                  <BobArrow reduced={reduced} at={600} />
+                  <PhonePrompt reduced={reduced} at={600} />
                 </Animated.View>
               )}
               {phase !== 'denied' ? (
@@ -1162,7 +1252,7 @@ function StickerLine({ text, size }: { text: string; size: number }) {
 
 // --- building: her course builds while it plays -------------------------------
 //
-// The course clip (che/social/src/onboarding/CourseLoop.tsx) plays at 1.75× while
+// The course clip (che/social/src/onboarding/CourseLoop.tsx) plays at 2.3× while
 // a rosa line draws around it, once through: the line closes as the culture scene
 // leaves and the result lands as the clip ends. It runs on the clip's own clock,
 // so a clip that starts late never lands "ready" in the middle of a scene.
@@ -1177,9 +1267,11 @@ const COURSE_REST = 4.3;
 const BUILD_CLOSED = 23.5;
 /** The result: the clip (23.67 s) has played through. */
 const BUILD_READY = 23.6;
-const BUILD_RATE = 1.75;
-/** Wall time after which the result shows whatever the clip did (the clip takes 13.5 s). */
-const BUILD_HOLD_MAX = 18000;
+const BUILD_RATE = 2.3;
+/** Wall time after which the result shows whatever the clip did (the clip takes ~10.3 s). */
+const BUILD_HOLD_MAX = 14000;
+/** With reduced motion there is no clip to wait for: the still moments, and the result soon after. */
+const BUILD_REDUCED_MS = 1200;
 
 /** Within one part: fast as it starts, slowing all the way to its end without
  *  stopping, so the next part's kick (about 4× the speed it ended on) is what
@@ -1281,8 +1373,8 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
     });
     const wall = setInterval(() => {
       const t = ((Date.now() - begun) / 1000) * BUILD_RATE;
-      if (Date.now() - begun > BUILD_HOLD_MAX) at(99);
-      else if (reduced || failed) at(t);
+      if (Date.now() - begun > (reduced ? BUILD_REDUCED_MS : BUILD_HOLD_MAX)) at(99);
+      else if (failed) at(t);
     }, 50);
     const status = player.addListener('statusChange', ({ status: st }) => {
       if (st === 'error') setFailed(true);
@@ -1330,16 +1422,16 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
           <Text style={[styles.courseSub, !ready && { opacity: 0 }]}>Argentine Spanish, {answers.minutes} minutes a day.</Text>
         </View>
 
-        {failed ? (
-          // No connection, or the clip isn't there: the same moments, still.
+        {failed || reduced ? (
+          // No connection, the clip isn't there, or reduced motion: the same moments, still.
           <Animated.View entering={rise(1, reduced)} style={[styles.moments, { paddingHorizontal: 24 }]}>
-            <Moment tag="DAY 1" tone={pastel.peach} text={m.first} />
+            <Moment tag="DAY 1" tone={pastel.sky} text={m.first} />
             <Moment tag="DAY 3 · FIRST CHAT" tone={pastel.lav}>
               <Text style={styles.momentText}>
                 <Text style={styles.momentStrike}>{m.chat.bad}</Text> {m.chat.fix}
               </Text>
             </Moment>
-            <Moment tag="WEEK 2 · CULTURE" tone={pastel.sky} text={m.custom} />
+            <Moment tag="WEEK 2 · CULTURE" tone={pastel.peach} text={m.custom} />
           </Animated.View>
         ) : (
           <View style={{ width: svgW, height: svgH, alignSelf: 'center' }}>
@@ -1441,7 +1533,7 @@ function Account({ answers, reduced }: { answers: Answers; reduced: boolean }) {
       <View style={styles.accountHero}>
         <Animated.View entering={pop(150, reduced)} style={{ transformOrigin: 'bottom center' }}>
           <SpeechBubble tail="bottom" style={{ paddingHorizontal: 18, paddingVertical: 12, borderRadius: 22 }}>
-            <Text style={styles.accountSays}>Último paso. Where should I save your plan?</Text>
+            <Text style={styles.accountSays}>Último paso. Where should I save your course?</Text>
           </SpeechBubble>
         </Animated.View>
         <Image source={POSE.tango} style={styles.accountArt} contentFit="contain" accessibilityLabel={`${MASCOT_NAME} dancing tango`} />
@@ -1590,6 +1682,7 @@ const styles = StyleSheet.create({
   bars: { flexDirection: 'row', alignItems: 'flex-end', gap: 3, height: 22 },
   bar: { width: 6, borderRadius: 3 },
   choiceLabel: { ...font.body[700], flex: 1, fontSize: 16.5, lineHeight: 21, letterSpacing: -0.1, color: colors.ink },
+  choiceSub: { ...font.body[600], fontSize: 14, lineHeight: 18, color: colors.muted },
   choiceTag: { paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill },
   choiceTagText: { ...font.body[800], fontSize: 12, color: colors.ink },
   check: { width: 26, height: 26, borderRadius: 9, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card, borderWidth: 2, borderColor: colors.ink },
@@ -1649,6 +1742,14 @@ const styles = StyleSheet.create({
   promptAllowWrap: { flex: 1, justifyContent: 'center' },
   promptAllow: { fontWeight: '700', color: colors.primary },
   promptRing: { position: 'absolute', top: 4, right: 4, bottom: 4, left: 4, borderRadius: 10, borderWidth: 2.5, borderColor: colors.primary },
+  // Android 13's notification sheet, as Material You draws it.
+  droidCard: { alignSelf: 'stretch', borderRadius: 28, backgroundColor: '#F1EDF4', paddingTop: 22, paddingHorizontal: 18, paddingBottom: 18, gap: 14 },
+  droidTitle: { fontSize: 20, lineHeight: 26, color: '#1C1B1F', textAlign: 'center', paddingHorizontal: 4 },
+  droidButton: { minHeight: 54, justifyContent: 'center', backgroundColor: '#DCE1FF' },
+  droidTop: { borderTopLeftRadius: 20, borderTopRightRadius: 20, borderBottomLeftRadius: 6, borderBottomRightRadius: 6 },
+  droidBottom: { borderTopLeftRadius: 6, borderTopRightRadius: 6, borderBottomLeftRadius: 20, borderBottomRightRadius: 20 },
+  droidButtonText: { fontSize: 16, lineHeight: 22, color: '#1C1B1F', textAlign: 'center' },
+  droidRing: { top: -3, right: -3, bottom: -3, left: -3, borderRadius: 22, borderWidth: 3 },
   promptArrow: { position: 'absolute', left: '75%', top: '100%', marginTop: 10, marginLeft: -13 },
 
   // building

@@ -15,14 +15,14 @@ import { colors, font, pastel, press } from '@/lib/theme';
 // course". Built like the slang opener (slang-opener.tsx): the whole page in
 // one pastel (lavender here), a sticker headline slapped down, one picture,
 // one ink button. The four chips are the parts of the class, in the colours
-// its progress bar uses (first-class.tsx). "Skip to my plan" jumps over the
+// its progress bar uses (first-class.tsx). "Skip the class" jumps over the
 // class to the notifications step.
 // ---------------------------------------------------------------------------
 
 const CHIPS: { label: string; bg: string; ink: string; tilt: string }[] = [
   { label: 'EXERCISE', bg: colors.primary, ink: colors.onPrimary, tilt: '-3deg' },
   { label: 'SLANG', bg: pastel.butter, ink: colors.ink, tilt: '2deg' },
-  { label: 'CULTURE', bg: pastel.sky, ink: colors.ink, tilt: '-2deg' },
+  { label: 'CULTURE', bg: pastel.peach, ink: colors.ink, tilt: '-2deg' },
   { label: 'SPEAKING', bg: pastel.sage, ink: colors.ink, tilt: '3deg' },
 ];
 
@@ -80,7 +80,7 @@ export function FirstClassOpener({ onStart, onSkip }: { onStart: () => void; onS
           <Text style={styles.buttonText}>Let’s go</Text>
         </Pressable>
         <Pressable onPress={onSkip} accessibilityRole="button" hitSlop={6} style={styles.skip}>
-          <Text style={styles.skipText}>Skip to my plan</Text>
+          <Text style={styles.skipText}>Skip the class</Text>
         </Pressable>
       </View>
     </View>

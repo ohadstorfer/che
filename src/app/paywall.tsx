@@ -1,9 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { router, useLocalSearchParams } from 'expo-router';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   BackHandler,
@@ -46,6 +46,7 @@ import { formatDate, markWinbackShown, winbackShown } from '@/lib/onboarding';
 import { cancelFreeUnitReminder, scheduleFreeUnitReminder } from '@/lib/free-unit-reminder';
 import { type PaywallSource, usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
+import { supabase } from '@/lib/supabase';
 import { clay, colors, font, pastel, press, radius, type } from '@/lib/theme';
 import { scheduleTrialReminder } from '@/lib/trial-reminder';
 import { winbackOfferUntil } from '@/lib/winback-offer';
@@ -67,6 +68,10 @@ import { queueWelcomeTour, startTourPreview } from '@/lib/welcome-tour';
 // ---------------------------------------------------------------------------
 
 type Stage = 'plans' | 'offer' | 'done';
+
+/** She opened "Learn more" from the paywall in this run of the app: the hard
+ *  paywall out of onboarding gives her a way out after that (see `escape`). */
+let learnedMore = false;
 
 const webPress =
   Platform.OS === 'web'
@@ -110,15 +115,26 @@ export default function Paywall() {
   const short = useWindowDimensions().height < 900;
   const params = useLocalSearchParams<{ from?: string; code?: string; offer?: string }>();
   const from = (params.from ?? 'home') as PaywallSource;
-  const { catalog, hardPaywall, configReady, pass, grant, refresh, testerUnlock, unlockAsTester } = usePremium();
+  const { catalog, hardPaywall, configReady, pass, grant, refresh, refreshPass, testerUnlock, unlockAsTester } = usePremium();
   const main = catalog?.main ?? null;
-  // With the hard paywall there is no way out (the gate, and right after
-  // onboarding until the server has said which it is). The free week is offered
-  // here from the next day instead (free-unit.tsx).
-  const locked = hardPaywall || from === 'gate' || (from === 'onboarding' && !configReady);
   const freeWeek = hardPaywall && pass?.state === 'offer';
 
   const [stage, setStage] = useState<Stage>('plans');
+  // With the hard paywall there is no way out (the gate, and right after
+  // onboarding until the server has said which it is). The free week is offered
+  // here from the next day instead (free-unit.tsx). One exception: out of
+  // onboarding, once she has watched "Learn more" and come back still not
+  // buying, a close button shows, and closing opens the one-time offer.
+  // Declining that brings her back to the plans, now with no way out.
+  const [tourSeen, setTourSeen] = useState(learnedMore);
+  useFocusEffect(useCallback(() => setTourSeen(learnedMore), []));
+  const [winbackUsed, setWinbackUsed] = useState(true);
+  useEffect(() => {
+    void winbackShown().then(setWinbackUsed);
+  }, []);
+  const offerReady = from === 'onboarding' && !!catalog?.winback && winbackDiscount(main, catalog.winback) != null;
+  const escape = hardPaywall && from === 'onboarding' && configReady && tourSeen && offerReady && !winbackUsed && stage === 'plans';
+  const locked = (hardPaywall && !escape) || from === 'gate' || (from === 'onboarding' && !configReady);
   const [selected, setSelected] = useState<string | null>(null);
   const [busy, setBusy] = useState<'buy' | 'restore' | 'tester' | 'code' | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -195,9 +211,9 @@ export default function Paywall() {
 
   const close = async () => {
     if (locked || busy) return;
-    const offerReady = from === 'onboarding' && !!catalog?.winback && winbackDiscount(main, catalog.winback) != null;
     if (offerReady && !(await winbackShown())) {
       void markWinbackShown();
+      setWinbackUsed(true);
       track('paywall_closed', { from, next: 'offer' });
       track('winback_shown', { from });
       tap();
@@ -209,6 +225,18 @@ export default function Paywall() {
 
   const decline = () => {
     track('winback_declined', { from });
+    // Hard paywall: the free week opens now instead of tomorrow
+    // (open_free_pass_now), and she goes straight to it. The plans stay
+    // underneath, with no close button and "Try Unit 1 free" on them.
+    if (hardPaywall && from === 'onboarding') {
+      setStage('plans');
+      void (async () => {
+        await Promise.resolve(supabase.rpc('open_free_pass_now')).catch(() => {});
+        await refreshPass();
+        router.push('/free-unit');
+      })();
+      return;
+    }
     leave();
   };
 
@@ -365,6 +393,7 @@ export default function Paywall() {
   const learnMore = () => {
     tap();
     track('paywall_learn_more', { from });
+    learnedMore = true;
     startTourPreview(`/paywall?from=${from}`);
     // navigate, not push: if the tabs are already under the paywall, it goes
     // back to them; finishing comes back here either way (dismissTo).
