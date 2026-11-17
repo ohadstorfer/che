@@ -2,7 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useEffect } from 'react';
 import { Platform, Pressable, StyleSheet, Text, View, type ViewStyle } from 'react-native';
-import Animated, { Easing, Keyframe, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { Easing, Keyframe, ReduceMotion, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { tap } from '@/lib/haptics';
 import { clay, colors, font, pastel, press, radius, type } from '@/lib/theme';
@@ -25,7 +25,7 @@ const RISE = new Keyframe({
   0: { opacity: 0, transform: [{ translateY: 8 }] },
   100: { opacity: 1, transform: [{ translateY: 0 }], easing: EASE_OUT },
 });
-const APPEAR = new Keyframe({ 0: { opacity: 0 }, 100: { opacity: 1 } });
+const APPEAR = new Keyframe({ 0: { opacity: 0 }, 100: { opacity: 1 } }).reduceMotion(ReduceMotion.Never);
 
 /** Rises 8px into place, a beat after the one before it. */
 export const rise = (i: number, reduced?: boolean) =>

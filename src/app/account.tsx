@@ -21,6 +21,7 @@ import { useStatusBarColor } from '@/lib/status-bar-color';
 import { supabase } from '@/lib/supabase';
 import { clay, colors, pastel, pastelGrad, type PastelName, press, radius, type } from '@/lib/theme';
 import { clearWidget } from '@/lib/widget';
+import { WIDGET_PROMO_SUPPORTED, widgetPlaced } from '@/lib/widget-promo';
 import { FitText } from '@/components/fit-text';
 
 // ---------------------------------------------------------------------------
@@ -72,6 +73,14 @@ function Account() {
   useEffect(() => {
     void versionLabel().then(setVersion);
   }, []);
+
+  // "On" once a widget is on the home screen; checked again on every visit.
+  const [widgetOn, setWidgetOn] = useState(false);
+  useFocusEffect(
+    useCallback(() => {
+      void widgetPlaced().then((placed) => setWidgetOn(placed === true));
+    }, []),
+  );
 
   useFocusEffect(
     useCallback(() => {
@@ -141,6 +150,19 @@ function Account() {
                   : undefined
             }
           />
+          {WIDGET_PROMO_SUPPORTED ? (
+            <>
+              <View style={styles.divider} />
+              <Row
+                icon="apps-outline"
+                tone="lav"
+                label="Home screen widget"
+                detail={widgetOn ? 'On' : 'Add'}
+                detailColor={widgetOn ? colors.success : undefined}
+                onPress={widgetOn ? undefined : () => router.push('/widget')}
+              />
+            </>
+          ) : null}
           <View style={styles.divider} />
           <Row icon="shield-checkmark-outline" tone="sage" label="Privacy policy" onPress={() => void WebBrowser.openBrowserAsync(PRIVACY_URL)} />
           <View style={styles.divider} />
@@ -216,12 +238,15 @@ function Row({
   tone = 'butter',
   label,
   detail,
+  detailColor,
   onPress,
 }: {
   icon: keyof typeof Ionicons.glyphMap;
   tone?: PastelName;
   label: string;
   detail?: string;
+  /** A detail that is a state, not an action (the widget's "On"). */
+  detailColor?: string;
   onPress?: () => void;
 }) {
   return (
@@ -234,7 +259,7 @@ function Row({
         <Ionicons name={icon} size={18} color={colors.onPastel} />
       </View>
       <Text style={styles.rowLabel}>{label}</Text>
-      {detail ? <Text style={styles.rowDetail}>{detail}</Text> : null}
+      {detail ? <Text style={[styles.rowDetail, detailColor ? { color: detailColor } : null]}>{detail}</Text> : null}
       {onPress ? <Ionicons name="chevron-forward" size={18} color={colors.faint} /> : null}
     </Pressable>
   );

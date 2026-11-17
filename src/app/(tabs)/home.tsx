@@ -48,6 +48,7 @@ import {
   enablePush,
   getPartnerId,
   getPushStatus,
+  getQuickPushStatus,
   type PushStatus,
 } from '@/lib/push';
 import { getPracticeCounts } from '@/lib/session';
@@ -688,7 +689,9 @@ function PushPrompt({
     );
   }
 
-  if (status === 'enabled' || status === 'unsupported') return null;
+  // Blocked: there is nothing to tap here that would fix it, and a panel she
+  // can't act on or close sat over the road on every visit. Say nothing.
+  if (status === 'enabled' || status === 'unsupported' || status === 'denied') return null;
 
   return (
     <Panel style={{ gap: 10 }}>
@@ -698,12 +701,6 @@ function PushPrompt({
           To get reminders on an iPhone, add the app to your home screen first: in Safari tap{' '}
           <Text style={styles.strong}>Share</Text> →{' '}
           <Text style={styles.strong}>Add to Home Screen</Text>, then open it from there.
-        </Text>
-      ) : status === 'denied' ? (
-        <Text style={styles.mutedText}>
-          {Platform.OS === 'web'
-            ? 'Notifications are blocked. Switch them on in your browser settings.'
-            : 'Notifications are blocked. Switch them on in Settings → Posta → Notifications.'}
         </Text>
       ) : (
         <>
@@ -1050,7 +1047,17 @@ function Home() {
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
     AccessibilityInfo.isReduceMotionEnabled().then(setReduced);
+    // The road waits for a status (the prompt above it sets where it starts),
+    // and the full check fetches a push token over the network. The
+    // permission alone answers in a few ms and is almost always the same
+    // answer, so the road draws on that and the full check corrects it.
+    let full = false;
+    getQuickPushStatus()?.then((s) => {
+      if (full || lastPushStatus != null) return;
+      setPushStatus((cur) => cur ?? s);
+    });
     getPushStatus().then((s) => {
+      full = true;
       lastPushStatus = s;
       setPushStatus(s);
     });

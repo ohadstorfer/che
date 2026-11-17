@@ -78,7 +78,7 @@ import {
 import type { AnswerExtra, QueueItem } from '@/lib/round';
 import { DEFAULT_LADDER, type Ladder, RUNG_BUILD_AT } from '@/lib/sentences';
 import { SETTLED_DAYS, buildTiles, wordPool } from '@/lib/session';
-import { clay, colors, font, OUTLINE, pastel, PICKED, radius } from '@/lib/theme';
+import { clay, colors, font, OUTLINE, pastel, PICKED, press, radius } from '@/lib/theme';
 import Svg, { Path as SvgPath } from 'react-native-svg';
 import { type TipBlock, type TipSpan, tipSpans, tipSteps } from '@/lib/tip-layout';
 import type { Form, Sentence, Tip } from '@/lib/types';
@@ -1101,14 +1101,17 @@ export function Choices({
           <Pressable
             key={opt.id}
             disabled={revealed}
-            onPress={() => onPick(opt.id)}
+            onPress={() => {
+              tap();
+              onPick(opt.id);
+            }}
             style={({ pressed }) => [
               styles.choice,
               side && styles.choiceSide,
               picked && styles.choicePicked,
               right && styles.choiceRight,
               wrong && styles.choiceWrong,
-              { transform: [{ scale: pressed && !revealed ? 0.985 : 1 }] },
+              { transform: [{ scale: pressed && !revealed ? press.scale : 1 }] },
               webPress,
             ]}>
             <Text
@@ -1599,6 +1602,7 @@ export function TileBuilder({
   };
 
   const add = (i: number) => {
+    tap();
     const next = [...used, i];
     const slot = `t${i}`;
     if (reduced || pending) return setUsed(next);
@@ -1630,6 +1634,7 @@ export function TileBuilder({
   }, [pending]);
 
   const remove = (position: number) => {
+    tap();
     const i = used[position];
     const next = used.filter((_, p) => p !== position);
     if (reduced) return setUsed(next);
@@ -2938,7 +2943,10 @@ function GapBank({
           <Pressable
             key={opt.id}
             disabled={revealed}
-            onPress={() => onPick(opt.id)}
+            onPress={() => {
+              tap();
+              onPick(opt.id);
+            }}
             style={({ pressed }) => [
               styles.tile,
               picked && styles.choicePicked,

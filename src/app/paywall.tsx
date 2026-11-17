@@ -50,7 +50,7 @@ import { supabase } from '@/lib/supabase';
 import { clay, colors, font, pastel, press, radius, type } from '@/lib/theme';
 import { scheduleTrialReminder } from '@/lib/trial-reminder';
 import { winbackOfferUntil } from '@/lib/winback-offer';
-import { queueWelcomeTour, startTourPreview } from '@/lib/welcome-tour';
+import { learnedMoreSeen, markLearnedMore, queueWelcomeTour, startTourPreview } from '@/lib/welcome-tour';
 
 // ---------------------------------------------------------------------------
 // Paywall — flow 7: ask right after onboarding, with a free week on the
@@ -68,10 +68,6 @@ import { queueWelcomeTour, startTourPreview } from '@/lib/welcome-tour';
 // ---------------------------------------------------------------------------
 
 type Stage = 'plans' | 'offer' | 'done';
-
-/** She opened "Learn more" from the paywall in this run of the app: the hard
- *  paywall out of onboarding gives her a way out after that (see `escape`). */
-let learnedMore = false;
 
 const webPress =
   Platform.OS === 'web'
@@ -115,8 +111,17 @@ export default function Paywall() {
   const short = useWindowDimensions().height < 900;
   const params = useLocalSearchParams<{ from?: string; code?: string; offer?: string }>();
   const from = (params.from ?? 'home') as PaywallSource;
-  const { catalog, hardPaywall, configReady, pass, grant, refresh, refreshPass, testerUnlock, unlockAsTester } = usePremium();
+  const { catalog, hardPaywall, configReady, pass, grant, refresh, refreshPass, reloadCatalog, testerUnlock, unlockAsTester } = usePremium();
   const main = catalog?.main ?? null;
+  // The store was asked (configReady comes with it) and no plans came: say
+  // so, with a way to ask again, instead of grey cards forever.
+  const [retrying, setRetrying] = useState(false);
+  const plansFailed = Platform.OS !== 'web' && configReady && !main && !retrying;
+  const retryPlans = async () => {
+    setRetrying(true);
+    await reloadCatalog();
+    setRetrying(false);
+  };
   const freeWeek = hardPaywall && pass?.state === 'offer';
 
   const [stage, setStage] = useState<Stage>('plans');
@@ -126,8 +131,8 @@ export default function Paywall() {
   // onboarding, once she has watched "Learn more" and come back still not
   // buying, a close button shows, and closing opens the one-time offer.
   // Declining that brings her back to the plans, now with no way out.
-  const [tourSeen, setTourSeen] = useState(learnedMore);
-  useFocusEffect(useCallback(() => setTourSeen(learnedMore), []));
+  const [tourSeen, setTourSeen] = useState(learnedMoreSeen);
+  useFocusEffect(useCallback(() => setTourSeen(learnedMoreSeen()), []));
   const [winbackUsed, setWinbackUsed] = useState(true);
   useEffect(() => {
     void winbackShown().then(setWinbackUsed);
@@ -227,13 +232,21 @@ export default function Paywall() {
   // the plans with the error and a "Try Unit 1 free" that asks again, rather
   // than landing on a free-unit screen that says "tomorrow".
   const [freeNow, setFreeNow] = useState(false);
+  // One call at a time: a second tap while it runs would push a second free-unit screen.
+  const opening = useRef(false);
   const openFreeNow = async () => {
+    if (opening.current) return;
+    opening.current = true;
     setFreeNow(true);
     setError(null);
-    const { error: failed } = await supabase.rpc('open_free_pass_now');
-    if (failed) return setError('Couldn’t open your free week. Check your connection and try again.');
-    await refreshPass();
-    router.push('/free-unit');
+    try {
+      const { error: failed } = await supabase.rpc('open_free_pass_now');
+      if (failed) return setError('Couldn’t open your free week. Check your connection and try again.');
+      await refreshPass();
+      router.push('/free-unit');
+    } finally {
+      opening.current = false;
+    }
   };
 
   const decline = () => {
@@ -402,7 +415,7 @@ export default function Paywall() {
   const learnMore = () => {
     tap();
     track('paywall_learn_more', { from });
-    learnedMore = true;
+    markLearnedMore();
     startTourPreview(`/paywall?from=${from}`);
     // navigate, not push: if the tabs are already under the paywall, it goes
     // back to them; finishing comes back here either way (dismissTo).
@@ -506,12 +519,15 @@ export default function Paywall() {
                 }}
               />
             ))
-          ) : catalog ? (
+          ) : Platform.OS === 'web' && catalog ? (
             <Text style={styles.unavailable}>
-              {Platform.OS === 'web'
-                ? 'Subscriptions are in the Posta app for iPhone and Android. Subscribe there and Premium opens here too.'
-                : 'Plans could not load. Check your connection and try again.'}
+              Subscriptions are in the Posta app for iPhone and Android. Subscribe there and Premium opens here too.
             </Text>
+          ) : plansFailed ? (
+            <>
+              <Text style={styles.unavailable}>Plans could not load. Check your connection and try again.</Text>
+              <Button title="Try again" variant="secondary" onPress={() => void retryPlans()} />
+            </>
           ) : (
             <>
               <View style={styles.skeleton} />

@@ -69,6 +69,8 @@ interface PremiumValue {
   claimPass: () => Promise<Pass | null>;
   refreshPass: () => Promise<void>;
   refresh: () => Promise<void>;
+  /** Asks the store for the plans again (the paywall's Try again). True if they came. */
+  reloadCatalog: () => Promise<boolean>;
   /** After a purchase: open everything at once, before the store round-trips. */
   grant: () => void;
   /** Before the store launch: testers unlock Premium from the paywall
@@ -92,6 +94,7 @@ const PremiumContext = createContext<PremiumValue>({
   claimPass: async () => null,
   refreshPass: async () => {},
   refresh: async () => {},
+  reloadCatalog: async () => false,
   grant: () => {},
   testerUnlock: false,
   unlockAsTester: async () => false,
@@ -240,6 +243,12 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
     };
   }, [userId, refresh]);
 
+  const reloadCatalog = useCallback(async () => {
+    const c = await billing.catalog().catch(() => null);
+    if (c) setCatalog(c);
+    return !!c?.main;
+  }, []);
+
   const refreshPass = useCallback(async () => {
     if (!userId) return;
     const p = await serverPass();
@@ -307,12 +316,13 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
       claimPass,
       refreshPass,
       refresh,
+      reloadCatalog,
       grant,
       testerUnlock,
       unlockAsTester,
       paywall,
     }),
-    [status, staff, catalog, hardPaywall, configReady, pass, freeUnits, freeChats, claimPass, refreshPass, refresh, grant, testerUnlock, unlockAsTester, paywall],
+    [status, staff, catalog, hardPaywall, configReady, pass, freeUnits, freeChats, claimPass, refreshPass, refresh, reloadCatalog, grant, testerUnlock, unlockAsTester, paywall],
   );
 
   return <PremiumContext.Provider value={value}>{children}</PremiumContext.Provider>;

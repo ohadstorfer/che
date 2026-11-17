@@ -82,6 +82,7 @@ import { askNotifyPermission } from '@/lib/notify-permission';
 import { type SocialResult, signInWithApple, signInWithGoogle } from '@/lib/social-auth';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { strikeLine } from '@/lib/strike-line';
+import { resetLearnedMore } from '@/lib/welcome-tour';
 import { supabase } from '@/lib/supabase';
 import { clay, colors, font, pastel, radius, type } from '@/lib/theme';
 
@@ -138,6 +139,8 @@ export default function Onboarding() {
   useEffect(() => {
     if (replay) void resetWinbackShown();
   }, [replay]);
+  // A new onboarding: "Learn more" from an earlier paywall doesn't count here.
+  useEffect(() => resetLearnedMore(), []);
   const reduced = useReducedMotion();
   const pancho = useVideoPlayer(PANCHO_CLIP, (p) => {
     p.muted = true;
@@ -169,10 +172,11 @@ export default function Onboarding() {
   // order never changes under her. Not answered by then, or failed: the default.
   // ?notify= overrides it, for trying both from a deep link.
   const { notify: notifyParam } = useLocalSearchParams<{ notify?: string }>();
-  const fetched = useRef<NotifyAt | null>(null);
+  // State, not a ref: the bar below is redrawn when the answer lands.
+  const [fetched, setFetched] = useState<NotifyAt | null>(null);
   useEffect(() => {
     void fetchNotifyAt()
-      .then((v) => (fetched.current = v))
+      .then(setFetched)
       .catch(() => {});
   }, []);
   const notifyAt: NotifyAt = a.notifyAt ?? NOTIFY_AT_DEFAULT;
@@ -180,11 +184,11 @@ export default function Onboarding() {
   // pick the builder will make, so the bar doesn't fill up and then grow a step.
   const planned: NotifyAt =
     a.notifyAt ??
-    (notifyParam === 'after_build' || notifyParam === 'after_class' ? notifyParam : (fetched.current ?? NOTIFY_AT_DEFAULT));
+    (notifyParam === 'after_build' || notifyParam === 'after_class' ? notifyParam : (fetched ?? NOTIFY_AT_DEFAULT));
   useEffect(() => {
     if (step !== 'building' || a.notifyAt) return;
     const v: NotifyAt =
-      notifyParam === 'after_build' || notifyParam === 'after_class' ? notifyParam : (fetched.current ?? NOTIFY_AT_DEFAULT);
+      notifyParam === 'after_build' || notifyParam === 'after_class' ? notifyParam : (fetched ?? NOTIFY_AT_DEFAULT);
     setA((cur) => ({ ...cur, notifyAt: v }));
     posthog?.capture('onboarding_notify_at', { onboarding_notify_at: v, $set: { onboarding_notify_at: v } });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -197,6 +201,9 @@ export default function Onboarding() {
   };
   const next = () => go(STEPS[Math.min(index + 1, STEPS.length - 1)]);
   const back = () => {
+    // The beat before the paywall, and the Day 1 screen once the class is done
+    // (its reminder may already be answered), are not gone back from.
+    if (step === 'offer' || (step === 'streak' && notifyAt === 'after_class')) return;
     if (index === 0) return router.canGoBack() ? router.back() : router.replace('/welcome');
     go(BACK[notifyAt][step] ?? STEPS[index - 1], -1);
   };
@@ -301,7 +308,11 @@ export default function Onboarding() {
               onNext={next}>
               {LEVEL.map((o, i) => (
                 <Animated.View key={o.value} entering={rise(i + 1, reduced)}>
-                  <Choice label={o.label} sub={o.sub} tone={o.tone} bars={o.bars} selected={a.level === o.value} onPress={() => choose('level', o.value)} />
+                  <Choice label={o.label} sub={o.sub} tone={o.tone} bars={o.bars} selected={a.level === o.value} onPress={() => {
+                      tap();
+                      // The struggle options depend on the level: a new level clears the old picks.
+                      setA((cur) => ({ ...cur, level: o.value, struggle: cur.level === o.value ? cur.struggle : [] }));
+                    }} />
                 </Animated.View>
               ))}
             </Question>
@@ -1354,18 +1365,19 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
   const progress = useSharedValue(0);
   const rimProps = useAnimatedProps(() => ({ strokeDashoffset: rim.length * (1 - progress.value), opacity: progress.value > 0.002 ? 1 : 0 }));
 
+  // Kept across re-runs (the clip failing restarts the effect): the line never
+  // goes back, and the result lands once.
+  const clock = useRef({ last: 0, done: false, begun: Date.now() });
   useEffect(() => {
-    let last = 0;
-    let done = false;
-    const begun = Date.now();
+    const c = clock.current;
     // Each reading moves the line on to where it should be by the next one.
     const at = (t: number) => {
-      if (done) return;
-      last = Math.max(last, t);
-      progress.value = withTiming(buildProgress(last), { duration: 60, easing: Easing.linear });
-      if (last >= BUILD_CLOSED) setClosed(true);
-      if (last >= BUILD_READY) {
-        done = true;
+      if (c.done) return;
+      c.last = Math.max(c.last, t);
+      progress.value = withTiming(buildProgress(c.last), { duration: 60, easing: Easing.linear });
+      if (c.last >= BUILD_CLOSED) setClosed(true);
+      if (c.last >= BUILD_READY) {
+        c.done = true;
         setReady(true);
         readied.current();
       }
@@ -1374,11 +1386,11 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
     // it can't (reduced motion, no clip). A clip back at its start has played past ready.
     const sub = player.addListener('timeUpdate', ({ currentTime }) => {
       if (reduced || failed) return;
-      at(currentTime < last - 1 ? 99 : currentTime);
+      at(currentTime < c.last - 1 ? 99 : currentTime);
     });
     const wall = setInterval(() => {
-      const t = ((Date.now() - begun) / 1000) * BUILD_RATE;
-      if (Date.now() - begun > (reduced ? BUILD_REDUCED_MS : BUILD_HOLD_MAX)) at(99);
+      const t = ((Date.now() - c.begun) / 1000) * BUILD_RATE;
+      if (Date.now() - c.begun > (reduced ? BUILD_REDUCED_MS : BUILD_HOLD_MAX)) at(99);
       else if (failed) at(t);
     }, 50);
     const status = player.addListener('statusChange', ({ status: st }) => {

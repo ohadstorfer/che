@@ -53,6 +53,14 @@ export function startWelcomeTour(): void {
 /** From the paywall's "Learn more", before she has bought: the same tour
  *  over the real tabs (the hard-paywall gate steps aside while it plays), and
  *  finishing it goes back to `back`. It doesn't count as seen. */
+/** She opened "Learn more" from the paywall during this onboarding: the hard
+ *  paywall out of onboarding gives her a way out after that (paywall.tsx).
+ *  Onboarding clears it as it starts, so a replay starts without it. */
+let learnedMore = false;
+export const markLearnedMore = () => void (learnedMore = true);
+export const learnedMoreSeen = () => learnedMore;
+export const resetLearnedMore = () => void (learnedMore = false);
+
 export function startTourPreview(back: string): void {
   previewReturn = back;
   active = true;

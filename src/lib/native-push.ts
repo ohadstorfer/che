@@ -5,4 +5,5 @@ import type { PushStatus } from './push';
 
 export const nativePushAvailable = () => false;
 export const getNativePushStatus = async (): Promise<PushStatus> => 'unsupported';
+export const quickNativePushStatus = async (): Promise<PushStatus> => 'unsupported';
 export const enableNativePush = async (_userId: string): Promise<PushStatus> => 'unsupported';

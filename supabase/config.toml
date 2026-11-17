@@ -58,3 +58,6 @@ verify_jwt = false
 
 [functions.launch-email]
 verify_jwt = false
+
+[functions.ses-events]
+verify_jwt = false

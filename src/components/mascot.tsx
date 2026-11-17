@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
-import Animated, { Keyframe } from 'react-native-reanimated';
+import Animated, { Keyframe, ReduceMotion } from 'react-native-reanimated';
 
 import { EASE_OUT } from '@/components/onboarding-ui';
 import { clay, colors, font, radius } from '@/lib/theme';
@@ -32,7 +32,7 @@ const POP = new Keyframe({
   0: { opacity: 0, transform: [{ scale: 0.92 }] },
   100: { opacity: 1, transform: [{ scale: 1 }], easing: EASE_OUT },
 });
-const FADE = new Keyframe({ 0: { opacity: 0 }, 100: { opacity: 1 } });
+const FADE = new Keyframe({ 0: { opacity: 0 }, 100: { opacity: 1 } }).reduceMotion(ReduceMotion.Never);
 export const pop = (delay = 0, reduced?: boolean) => (reduced ? FADE.duration(180) : POP.delay(delay).duration(320));
 
 /** A clay bubble. `tail` is the side he's on: left of it, or under it. */

@@ -7,7 +7,7 @@ import { Image } from 'expo-image';
 import { createContext, useEffect, useRef } from 'react';
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Animated, { interpolate, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withTiming, type SharedValue } from 'react-native-reanimated';
+import Animated, { interpolate, ReduceMotion, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withTiming, type SharedValue } from 'react-native-reanimated';
 
 import { Burst, Confetti, DRAWER, In, OUT, Pictures, Rain, Rays, Rings, Slap, Sparkles, Stamp, Stripes, Ticker } from '@/components/cheer-bits';
 import { Flame } from '@/components/flame';
@@ -272,7 +272,7 @@ export function CheerScreen({
 
   useEffect(() => {
     const slow = c.scene === 'sun' || c.scene === 'iris' || c.scene === 'blinds' || c.scene === 'tilt';
-    t.value = reduced ? withTiming(1, { duration: 180 }) : withTiming(1, { duration: slow ? 560 : 440, easing: DRAWER });
+    t.value = reduced ? withTiming(1, { duration: 180, reduceMotion: ReduceMotion.Never }) : withTiming(1, { duration: slow ? 560 : 440, easing: DRAWER });
     if (streak) {
       // The tap lands with the words, not before the colour is in.
       const tap = setTimeout(() => (milestone ? (thud(), setTimeout(success, 140)) : success()), reduced ? 0 : 420);

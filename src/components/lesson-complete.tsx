@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import Animated, { Easing, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withSpring, withTiming } from 'react-native-reanimated';
+import Animated, { Easing, ReduceMotion, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withSpring, withTiming } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
 
 import { Burst, Rays, Slap, Sparkles } from '@/components/cheer-bits';
@@ -69,7 +69,9 @@ function useEntrance(delay: number, travel: number) {
   const t = useSharedValue(0);
 
   useEffect(() => {
-    t.value = withDelay(delay, withTiming(1, { duration: reduced ? 160 : 320, easing: EASE }));
+    t.value = reduced
+      ? withDelay(Math.min(delay, 200), withTiming(1, { duration: 160, reduceMotion: ReduceMotion.Never }), ReduceMotion.Never)
+      : withDelay(delay, withTiming(1, { duration: 320, easing: EASE }));
   }, [delay, reduced, t]);
 
   return useAnimatedStyle(() => ({
@@ -106,7 +108,7 @@ export function LessonComplete({
   const draw = useSharedValue(reduced ? 1 : 0);
 
   useEffect(() => {
-    cardIn.value = withTiming(1, { duration: reduced ? 160 : 300, easing: EASE });
+    cardIn.value = withTiming(1, { duration: reduced ? 160 : 300, easing: EASE, reduceMotion: ReduceMotion.Never });
     if (reduced) {
       success();
       return;

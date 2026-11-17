@@ -67,8 +67,9 @@ export async function fetchNotifyAt(): Promise<NotifyAt> {
 /** ", Sam" or nothing: for the lines that end on her name. */
 export const nameTail = (a: Partial<Answers>) => (a.name?.trim() ? `, ${a.name.trim()}` : '');
 
-// Each option carries the mascot's reaction to it: the question is asked by
-// him, so the answer gets a reply, not just a checkmark.
+// Each option carries the mascot's reaction to it (react, reactSpeaker). Parked
+// since 2026-11-17: the question stays in his bubble and no screen shows these
+// replies, so editing them changes nothing she sees. Kept to bring replies back.
 
 export const WHY: { value: Why; label: string; icon: string; art: Art; tone: string; react: string; reactSpeaker: string }[] = [
   { value: 'trip', label: 'I’m going on a trip', icon: 'airplane', art: 'taxi', tone: pastel.sky, react: '¡Qué bueno! You’ll order empanadas like a local.', reactSpeaker: '¡Qué bueno! No more tourist Spanish at the parrilla.' },

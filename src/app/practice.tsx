@@ -1259,8 +1259,6 @@ const styles = StyleSheet.create({
 
   doneWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 24 },
 
-  // Leave the class? --------------------------------------------------------
-  // Over the header too: the SafeAreaView's own top inset is under it.
   // The staff simulate bar ---------------------------------------------------
   simBar: {
     flexDirection: 'row',
