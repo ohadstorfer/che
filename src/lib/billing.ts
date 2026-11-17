@@ -15,13 +15,13 @@ const KEY = 'che.mock-premium';
 const MOCK_CATALOG: Catalog = {
   main: {
     plans: [
-      { id: PRODUCTS.annual, period: 'year', price: 99, priceString: '$99.00', perMonthString: '$8.25', trialDays: 7, introPrice: null, currency: 'USD' },
-      { id: PRODUCTS.monthly, period: 'month', price: 14.99, priceString: '$14.99', perMonthString: '$14.99', trialDays: null, introPrice: null, currency: 'USD' },
+      { id: PRODUCTS.annual, period: 'year', price: 89.99, priceString: '$89.99', perMonthString: '$7.50', trialDays: 7, introPrice: null, currency: 'USD' },
+      { id: PRODUCTS.monthly, period: 'month', price: 12.99, priceString: '$12.99', perMonthString: '$12.99', trialDays: null, introPrice: null, currency: 'USD' },
     ],
   },
   winback: {
     plans: [
-      { id: PRODUCTS.winback, period: 'year', price: 99, priceString: '$99.00', perMonthString: '$8.25', trialDays: null, introPrice: { price: 59, priceString: '$59.00' }, currency: 'USD' },
+      { id: PRODUCTS.winback, period: 'year', price: 89.99, priceString: '$89.99', perMonthString: '$7.50', trialDays: null, introPrice: { price: 59, priceString: '$59.00' }, currency: 'USD' },
     ],
   },
 };

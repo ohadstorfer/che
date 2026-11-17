@@ -155,17 +155,19 @@ export function prefetchCultureDone(): Promise<void> {
 }
 
 /** Finished classes, re-read whenever the screen comes back into focus. */
-export function useCultureDone() {
+/** Which classes she has finished; none in the tour's preview (useTabPreview), which reads nothing. */
+export function useCultureDone(preview = false) {
   const [done, setDone] = useState<Set<string>>(() => lastDone ?? new Set());
   useFocusEffect(
     useCallback(() => {
+      if (preview) return;
       void readDone().then((d) => {
         lastDone = d;
         setDone(d);
       });
-    }, []),
+    }, [preview]),
   );
-  return (section: string, cls: string) => done.has(keyOf(section, cls));
+  return (section: string, cls: string) => !preview && done.has(keyOf(section, cls));
 }
 
 /** "Historia: el siglo XX y hoy" → eyebrow "Historia", title "el siglo XX y hoy" (capitalised). */

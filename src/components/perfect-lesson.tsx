@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { useEffect } from 'react';
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
+import Animated, { ReduceMotion, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Burst, DRAWER, In, Rays, Slap, Sparkles, Star } from '@/components/cheer-bits';
@@ -34,7 +34,7 @@ export function PerfectLesson({ onNext }: { onNext: () => void }) {
   const big = Math.hypot(width, height) * 2;
 
   useEffect(() => {
-    t.value = reduced ? withTiming(1, { duration: 200 }) : withDelay(60, withTiming(1, { duration: 620, easing: DRAWER }));
+    t.value = reduced ? withTiming(1, { duration: 200, reduceMotion: ReduceMotion.Never }) : withDelay(60, withTiming(1, { duration: 620, easing: DRAWER }));
     if (reduced) {
       success();
       return;

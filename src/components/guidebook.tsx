@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     boxShadow: clay.surface,
   },
   phraseEs: { ...font.body[700], fontSize: 18, color: colors.ink },
-  phraseEn: { ...font.body[600], fontSize: 15, color: colors.muted },
+  phraseEn: { ...font.body[600], fontSize: 17, color: colors.muted },
   tip: { gap: 4 },
   tipTitle: { ...font.body[800], fontSize: 16, color: colors.ink },
   tipBody: { ...font.body[600], fontSize: 15, lineHeight: 22, color: colors.ink },

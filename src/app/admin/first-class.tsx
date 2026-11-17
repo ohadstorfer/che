@@ -5,7 +5,8 @@ import { FirstClassLesson } from '@/components/first-class';
 
 // ---------------------------------------------------------------------------
 // Staff replay of the first class (the one inside onboarding), with the admin
-// extras. ?part=slang (or culture, pancho) opens it at that part. Nothing is
+// extras. ?part=slang (or culture, pancho) opens it at that part; ?part=done on the
+// lesson-complete screen. Nothing is
 // graded or saved.
 // ---------------------------------------------------------------------------
 

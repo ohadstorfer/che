@@ -12,6 +12,7 @@ import { SaveButtons } from '@/components/save-account';
 import { useAuth } from '@/lib/auth';
 import { lessonHref, loadCourse, loadProgress } from '@/lib/course';
 import { trackStep } from '@/lib/funnel';
+import { usePremium } from '@/lib/premium';
 import { isGuest } from '@/lib/guest';
 import { tap } from '@/lib/haptics';
 import { resetTo } from '@/lib/nav';
@@ -59,6 +60,8 @@ export default function Ready() {
   const [busy, setBusy] = useState(false);
   const [later, setLater] = useState(false);
   const saving = isGuest(session) && !later;
+  // A guest gets here having bought, or (soft paywall) having closed the paywall.
+  const { status } = usePremium();
   // Out of the free week (free-unit.tsx): its one unit is the first, so no level test.
   const { pass } = useLocalSearchParams<{ pass?: string }>();
 
@@ -141,7 +144,11 @@ export default function Ready() {
           ¡Listo{answers ? nameTail(answers) : ''}! You&apos;re in.
         </Animated.Text>
         <Animated.Text entering={rise(2, reduced)} style={styles.sub}>
-          {saving ? 'Save your plan first.' : 'Where do you want to start?'}
+          {saving
+            ? status === 'premium'
+              ? 'Save your account, so you keep your subscription on any phone.'
+              : 'Save your account, so your progress is safe on any phone.'
+            : 'Where do you want to start?'}
         </Animated.Text>
 
         {saving ? (

@@ -1,9 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { router, useLocalSearchParams } from 'expo-router';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   BackHandler,
@@ -15,6 +15,7 @@ import {
   Text,
   TextInput,
   View,
+  useWindowDimensions,
   type ViewStyle,
 } from 'react-native';
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
@@ -31,6 +32,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Slap } from '@/components/cheer-bits';
 import { EASE_OUT, IconButton, rise } from '@/components/onboarding-ui';
 import { Button } from '@/components/ui';
 import { billing } from '@/lib/billing';
@@ -44,10 +46,11 @@ import { formatDate, markWinbackShown, winbackShown } from '@/lib/onboarding';
 import { cancelFreeUnitReminder, scheduleFreeUnitReminder } from '@/lib/free-unit-reminder';
 import { type PaywallSource, usePremium } from '@/lib/premium';
 import { useStatusBarColor } from '@/lib/status-bar-color';
+import { supabase } from '@/lib/supabase';
 import { clay, colors, font, pastel, press, radius, type } from '@/lib/theme';
 import { scheduleTrialReminder } from '@/lib/trial-reminder';
 import { winbackOfferUntil } from '@/lib/winback-offer';
-import { queueWelcomeTour, startTourPreview } from '@/lib/welcome-tour';
+import { learnedMoreSeen, markLearnedMore, queueWelcomeTour, startTourPreview } from '@/lib/welcome-tour';
 
 // ---------------------------------------------------------------------------
 // Paywall — flow 7: ask right after onboarding, with a free week on the
@@ -103,17 +106,40 @@ const RESTORE_COOLDOWN = 15000;
 export default function Paywall() {
   useStatusBarColor(colors.bg);
   const reduced = useReducedMotion();
+  // Below a Max (the 17 Pro and smaller), "What you'll unlock" sits a little
+  // closer to the timeline so its title peeks over the button.
+  const short = useWindowDimensions().height < 900;
   const params = useLocalSearchParams<{ from?: string; code?: string; offer?: string }>();
   const from = (params.from ?? 'home') as PaywallSource;
-  const { catalog, hardPaywall, configReady, pass, grant, refresh, testerUnlock, unlockAsTester } = usePremium();
+  const { catalog, hardPaywall, configReady, pass, grant, refresh, refreshPass, reloadCatalog, testerUnlock, unlockAsTester } = usePremium();
   const main = catalog?.main ?? null;
-  // With the hard paywall there is no way out (the gate, and right after
-  // onboarding until the server has said which it is). The free week is offered
-  // here from the next day instead (free-unit.tsx).
-  const locked = hardPaywall || from === 'gate' || (from === 'onboarding' && !configReady);
+  // The store was asked (configReady comes with it) and no plans came: say
+  // so, with a way to ask again, instead of grey cards forever.
+  const [retrying, setRetrying] = useState(false);
+  const plansFailed = Platform.OS !== 'web' && configReady && !main && !retrying;
+  const retryPlans = async () => {
+    setRetrying(true);
+    await reloadCatalog();
+    setRetrying(false);
+  };
   const freeWeek = hardPaywall && pass?.state === 'offer';
 
   const [stage, setStage] = useState<Stage>('plans');
+  // With the hard paywall there is no way out (the gate, and right after
+  // onboarding until the server has said which it is). The free week is offered
+  // here from the next day instead (free-unit.tsx). One exception: out of
+  // onboarding, once she has watched "Learn more" and come back still not
+  // buying, a close button shows, and closing opens the one-time offer.
+  // Declining that brings her back to the plans, now with no way out.
+  const [tourSeen, setTourSeen] = useState(learnedMoreSeen);
+  useFocusEffect(useCallback(() => setTourSeen(learnedMoreSeen()), []));
+  const [winbackUsed, setWinbackUsed] = useState(true);
+  useEffect(() => {
+    void winbackShown().then(setWinbackUsed);
+  }, []);
+  const offerReady = from === 'onboarding' && !!catalog?.winback && winbackDiscount(main, catalog.winback) != null;
+  const escape = hardPaywall && from === 'onboarding' && configReady && tourSeen && offerReady && !winbackUsed && stage === 'plans';
+  const locked = (hardPaywall && !escape) || from === 'gate' || (from === 'onboarding' && !configReady);
   const [selected, setSelected] = useState<string | null>(null);
   const [busy, setBusy] = useState<'buy' | 'restore' | 'tester' | 'code' | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -190,9 +216,9 @@ export default function Paywall() {
 
   const close = async () => {
     if (locked || busy) return;
-    const offerReady = from === 'onboarding' && !!catalog?.winback && winbackDiscount(main, catalog.winback) != null;
     if (offerReady && !(await winbackShown())) {
       void markWinbackShown();
+      setWinbackUsed(true);
       track('paywall_closed', { from, next: 'offer' });
       track('winback_shown', { from });
       tap();
@@ -202,8 +228,37 @@ export default function Paywall() {
     leave();
   };
 
+  // The free week, opened today. If it can't be (no connection), she stays on
+  // the plans with the error and a "Try Unit 1 free" that asks again, rather
+  // than landing on a free-unit screen that says "tomorrow".
+  const [freeNow, setFreeNow] = useState(false);
+  // One call at a time: a second tap while it runs would push a second free-unit screen.
+  const opening = useRef(false);
+  const openFreeNow = async () => {
+    if (opening.current) return;
+    opening.current = true;
+    setFreeNow(true);
+    setError(null);
+    try {
+      const { error: failed } = await supabase.rpc('open_free_pass_now');
+      if (failed) return setError('Couldn’t open your free week. Check your connection and try again.');
+      await refreshPass();
+      router.push('/free-unit');
+    } finally {
+      opening.current = false;
+    }
+  };
+
   const decline = () => {
     track('winback_declined', { from });
+    // Hard paywall: the free week opens now instead of tomorrow
+    // (open_free_pass_now), and she goes straight to it. The plans stay
+    // underneath, with no close button and "Try Unit 1 free" on them.
+    if (hardPaywall && from === 'onboarding') {
+      setStage('plans');
+      void openFreeNow();
+      return;
+    }
     leave();
   };
 
@@ -360,6 +415,7 @@ export default function Paywall() {
   const learnMore = () => {
     tap();
     track('paywall_learn_more', { from });
+    markLearnedMore();
     startTourPreview(`/paywall?from=${from}`);
     // navigate, not push: if the tabs are already under the paywall, it goes
     // back to them; finishing comes back here either way (dismissTo).
@@ -424,13 +480,20 @@ export default function Paywall() {
           onLayout={(e) => measure({ view: e.nativeEvent.layout.height })}
           onContentSizeChange={(_, h) => measure({ content: h })}
           onScroll={(e) => measure({ y: e.nativeEvent.contentOffset.y })}>
-        {/* Three lines, each always on one line: it shrinks before it wraps. */}
+        {/* Three lines, each always on one line: it shrinks before it wraps. The
+            last is the rosa sticker from the welcome screen, so the promise she
+            started with is the one she pays for; it lands once, nothing more. */}
         <Animated.View entering={rise(0, reduced)} accessibilityRole="header" accessible accessibilityLabel={HERO.join(' ')}>
-          {HERO.map((line, i) => (
-            <Text key={line} style={[styles.hero, i === HERO.length - 1 ? styles.heroLast : null]} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>
+          {HERO.slice(0, 2).map((line) => (
+            <Text key={line} style={styles.hero} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>
               {line}
             </Text>
           ))}
+          <Slap delay={250} tilt={-2.5} style={styles.heroSticker}>
+            <Text style={styles.heroStickerText} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>
+              {HERO[2]}
+            </Text>
+          </Slap>
         </Animated.View>
 
         {creator ? (
@@ -456,12 +519,15 @@ export default function Paywall() {
                 }}
               />
             ))
-          ) : catalog ? (
+          ) : Platform.OS === 'web' && catalog ? (
             <Text style={styles.unavailable}>
-              {Platform.OS === 'web'
-                ? 'Subscriptions are in the Posta app for iPhone and Android. Subscribe there and Premium opens here too.'
-                : 'Plans could not load. Check your connection and try again.'}
+              Subscriptions are in the Posta app for iPhone and Android. Subscribe there and Premium opens here too.
             </Text>
+          ) : plansFailed ? (
+            <>
+              <Text style={styles.unavailable}>Plans could not load. Check your connection and try again.</Text>
+              <Button title="Try again" variant="secondary" onPress={() => void retryPlans()} />
+            </>
           ) : (
             <>
               <View style={styles.skeleton} />
@@ -472,7 +538,7 @@ export default function Paywall() {
 
         {plan?.trialDays ? <TrialSteps plan={plan} /> : null}
 
-        <Text style={styles.h2}>What you’ll unlock</Text>
+        <Text style={[styles.h2, short && styles.unlockHeadShort]}>What you’ll unlock</Text>
         <View style={styles.unlock}>
           {PERKS.map((k) => (
             <View key={k.t} style={styles.perk}>
@@ -504,13 +570,14 @@ export default function Paywall() {
             loading={busy === 'buy' || (creatorOffer && busy === 'code')}
             disabled={!plan || !!busy}
           />
-          {freeWeek ? (
+          {freeWeek || freeNow ? (
             <Button
               title="Try Unit 1 free"
               variant="secondary"
               onPress={() => {
                 tap();
-                router.push('/free-unit');
+                if (freeWeek) router.push('/free-unit');
+                else void openFreeNow();
               }}
               disabled={!!busy}
             />
@@ -826,8 +893,19 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
   topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 12, paddingTop: 4, minHeight: 44 },
   body: { paddingHorizontal: 20, paddingTop: 10, paddingBottom: 28, maxWidth: 520, width: '100%', alignSelf: 'center' },
-  hero: { ...font.display[900], fontSize: 31, lineHeight: 35, letterSpacing: -0.8, color: colors.ink },
-  heroLast: { color: colors.primary },
+  hero: { ...font.display[900], fontSize: 31, lineHeight: 35, letterSpacing: -0.8, color: colors.ink, textAlign: 'center' },
+  heroSticker: {
+    alignSelf: 'center',
+    maxWidth: '100%',
+    marginTop: 10,
+    marginBottom: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 16,
+    backgroundColor: colors.primary,
+    boxShadow: clay.surface,
+  },
+  heroStickerText: { ...font.display[900], fontSize: 21, lineHeight: 26, letterSpacing: -0.3, color: colors.onPrimary },
   sub: { ...type.body, flex: 1, fontSize: 16, lineHeight: 22, color: colors.muted },
   h2: { ...font.display[900], fontSize: 22, lineHeight: 27, letterSpacing: -0.3, color: colors.ink, marginTop: 30, marginBottom: 14 },
 
@@ -852,6 +930,7 @@ const styles = StyleSheet.create({
   stepLine: { width: 3, flex: 1, minHeight: 14, borderRadius: 2, backgroundColor: colors.ink, marginVertical: 2 },
   stepText: { flex: 1, gap: 2, paddingTop: 1, paddingBottom: 14 },
   trialHead: { marginTop: 26 },
+  unlockHeadShort: { marginTop: 18 },
   stepWhen: { ...font.body[800], fontSize: 16, lineHeight: 20, color: colors.ink },
   stepWhat: { ...font.body[700], fontSize: 14, lineHeight: 19, color: colors.inkOnWash },
 

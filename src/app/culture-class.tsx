@@ -516,6 +516,33 @@ const asForm = (word: CultureWord) =>
   ({ form: word.es, gloss_en: '', gloss_note_en: word.note ?? null, audio_path: word.audio ?? null }) as unknown as Form;
 
 /**
+ * The same tap-for-meaning around cards shown outside a class (the onboarding's
+ * first class shows three of the asado cards): the glossary of that class and
+ * its bubble.
+ */
+export function CultureGlosses({ section, cls: slug, children }: { section: string; cls: string; children: React.ReactNode }) {
+  const [peek, setPeek] = useState<{ word: CultureWord; anchor: Anchor } | null>(null);
+  const cls = findClass(section, slug)?.cls;
+  const gloss = useMemo<Gloss>(
+    () => ({ find: (span) => glossFor(span, cls), open: (word, anchor) => setPeek({ word, anchor }) }),
+    [cls],
+  );
+  return (
+    <>
+      <GlossContext.Provider value={gloss}>{children}</GlossContext.Provider>
+      <WordPopover
+        form={peek ? asForm(peek.word) : null}
+        anchor={peek?.anchor ?? null}
+        gloss={peek?.word.en}
+        image={peek ? glossArt(peek.word.es) : undefined}
+        onClose={() => setPeek(null)}
+        audio={(path) => <PlayButton path={path} />}
+      />
+    </>
+  );
+}
+
+/**
  * Where the tapped word sits. A span inside a paragraph is not a view of its
  * own on native, so it can't be measured: the bubble hangs off the line under
  * her finger instead. On web the span is real, and the line of it she tapped
@@ -1097,7 +1124,21 @@ const CARD_TONES = [pastel.butter, pastel.sky, pastel.peach, pastel.sage, pastel
  * The fun fact, on a card of its own so it lands instead of hanging off the end
  * of a paragraph. A card class tells its whole story on these.
  */
-export function FactCard({ fact, onDone, onBack }: { fact: Fact; onDone: () => void; onBack?: () => void }) {
+export function FactCard({
+  fact,
+  onDone,
+  onBack,
+  tapToAdvance = true,
+  bigArt = false,
+}: {
+  fact: Fact;
+  onDone: () => void;
+  onBack?: () => void;
+  /** The picture larger (the onboarding class's three asado cards). */
+  bigArt?: boolean;
+  /** Off: only Continue moves on, a tap on the card does nothing (the onboarding class). */
+  tapToAdvance?: boolean;
+}) {
   const bottom = useSafeAreaInsets().bottom;
   const tap = useSideTap(onDone, onBack);
   // The biggest size fits about 22 words above the art; a longer card steps down one.
@@ -1106,9 +1147,9 @@ export function FactCard({ fact, onDone, onBack }: { fact: Fact; onDone: () => v
     <Pressable
       ref={tap.ref}
       style={[styles.card, styles.factCard, fact.bg ? { backgroundColor: fact.bg } : null]}
-      onPress={tap.onPress}
+      onPress={tapToAdvance ? tap.onPress : undefined}
       accessible={false}>
-      <Image source={fact.art} style={styles.factArt} contentFit="contain" accessible={false} />
+      <Image source={fact.art} style={[styles.factArt, bigArt && styles.factArtBig]} contentFit="contain" accessible={false} />
       <View style={styles.factBody}>
         <View style={styles.factChip}>
           <Text style={styles.factChipText}>{fact.chip ?? 'Did you know?'}</Text>
@@ -1841,9 +1882,9 @@ const styles = StyleSheet.create({
   },
   popExample: { paddingRight: 4, gap: 1 },
   popExampleEs: { ...font.body[700], fontSize: 15, color: colors.ink },
-  popExampleEn: { ...font.body[600], fontSize: 13, color: colors.muted },
+  popExampleEn: { ...font.body[600], fontSize: 15, color: colors.muted },
   popNote: { ...font.body[600], fontSize: 13, lineHeight: 18, color: colors.muted, paddingRight: 4 },
-  popMeaning: { ...font.body[600], fontSize: 14, color: colors.muted, marginTop: 1 },
+  popMeaning: { ...font.body[600], fontSize: 16, color: colors.muted, marginTop: 1 },
 
   // Fact card --------------------------------------------------------------
   factCard: { backgroundColor: pastel.butter },
@@ -1863,6 +1904,7 @@ const styles = StyleSheet.create({
   factTextBig: { ...font.display[700], fontSize: 30, lineHeight: 36, letterSpacing: -0.4, color: colors.onPastel },
   factBold: { ...font.display[800], color: colors.primaryDark },
   factArt: { position: 'absolute', left: 4, bottom: 70, width: 150, height: 180 },
+  factArtBig: { left: 0, bottom: 60, width: 230, height: 270 },
   factFoot: { paddingHorizontal: 28, paddingTop: 12 },
   factButton: {
     alignSelf: 'flex-end',
@@ -1893,7 +1935,7 @@ const styles = StyleSheet.create({
   wordEn: { ...font.body[600], fontSize: 21, lineHeight: 27, color: colors.onPastel, opacity: 0.85 },
   wordExampleBox: { padding: 16, borderRadius: radius.md, backgroundColor: colors.chip, boxShadow: clay.surface, gap: 3 },
   wordExampleEs: { ...font.body[700], fontSize: 18, lineHeight: 24, color: colors.onPastel },
-  wordExampleEn: { ...font.body[600], fontSize: 15, lineHeight: 21, color: colors.muted },
+  wordExampleEn: { ...font.body[600], fontSize: 17, lineHeight: 23, color: colors.muted },
   wordNote: { ...font.body[600], fontSize: 14, lineHeight: 19, color: colors.onPastel, opacity: 0.85 },
   deckFoot: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, paddingTop: 20 },
   dots: { flexDirection: 'row', gap: 6, alignItems: 'center' },

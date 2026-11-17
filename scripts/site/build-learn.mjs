@@ -101,7 +101,60 @@ function readStores() {
 }
 const STORES = readStores();
 
-function cta(heading = 'Learn Argentine Spanish with Posta') {
+// Both store badges, the same size, plus the landing page's waitlist card.
+// /script.js (with /config.js) wires them exactly like on the home page: a
+// live store's badge links to it, the one that isn't out yet opens the card.
+let waitlists = 0;
+function storeButtons() {
+  const id = `wl-${++waitlists}-contact`;
+  return `<div class="get">
+  <div class="stores" data-stores>
+    <div class="badges">
+      <a class="badge" data-store="ios" href="${esc(STORES.ios || '/#get')}" aria-label="Download on the App Store"><img src="/assets/badge-app-store.svg" width="132" height="44" alt="Download on the App Store"></a>
+      <a class="badge" data-store="android" href="${esc(STORES.android || '/#get')}" aria-label="Get it on Google Play"><img src="/assets/badge-google-play.png" width="148" height="44" alt="Get it on Google Play"></a>
+    </div>
+  </div>
+  <form class="waitlist" name="waitlist" method="POST" data-waitlist hidden>
+    <input type="hidden" name="form-name" value="waitlist">
+    <p class="sr"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+    <p class="waitlist-intro"><strong>On iPhone? Almost there.</strong> Posta lands on the App Store in the next few days. Leave your email and we'll tell you the moment it's out.</p>
+    <div class="waitlist-row">
+      <label class="sr" for="${id}">Your email</label>
+      <input id="${id}" type="email" name="contact" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="Your email" required>
+      <button class="btn" type="submit">Notify me</button>
+    </div>
+    <p class="waitlist-note" role="status" aria-live="polite"></p>
+  </form>
+</div>`;
+}
+
+// The landing page's row of store screenshots, looping (a finger holds it).
+// Same files as index.html and the structured data below: descriptive names
+// and alt text that say "Posta Spanish", so search engines and AI answers tie
+// these pictures (not another app's) to the name.
+const SHOTS = [
+  ['course', 'The course: short daily lessons'],
+  ['vos-grammar', 'Argentinian grammar: vos sos, not tú eres'],
+  ['culture', 'Mate, asado, fútbol: the culture too'],
+  ['speaking-pancho', 'Out-loud speaking practice with Pancho'],
+  ['lunfardo-words', 'Lunfardo, the local vocabulary'],
+  ['real-sentences', 'Sentences Argentines actually say'],
+  ['home-screen-widget', 'Slang on your Home Screen'],
+  ['daily-minutes', 'A few minutes a day'],
+].map(([name, caption]) => ({ src: `/assets/shots/posta-spanish-app-${name}.webp`, alt: `Posta Spanish app screenshot. ${caption}`, caption }));
+const LOGO = ORIGIN + '/assets/posta-spanish-app-icon.png';
+const shotsList = (hidden) => `<ul class="shots-list"${hidden ? ' aria-hidden="true"' : ''}>
+${SHOTS.map((s, i) => `  <li><img src="${s.src}" width="480" height="853" ${i < 2 && !hidden ? 'fetchpriority="high"' : 'loading="lazy"'} alt="${hidden ? '' : esc(s.alt)}"></li>`).join('\n')}
+</ul>`;
+const shotsBlock = () => `<div class="shots" role="region" aria-label="Screens from the app">
+  <div class="shots-track">
+${shotsList(false)}
+${shotsList(true)}
+  </div>
+</div>
+${storeButtons()}`;
+
+function cta(heading = 'Learn Argentine Spanish with Posta', { waitlist = false } = {}) {
   const play = STORES.android
     ? `<a href="${esc(STORES.android)}" data-store="android"><img src="/assets/badge-google-play.png" alt="Get it on Google Play" width="148" height="44"></a>` : '';
   const ios = STORES.ios
@@ -112,7 +165,7 @@ function cta(heading = 'Learn Argentine Spanish with Posta') {
   <div>
     <h2>${esc(heading)}</h2>
     <p>Posta teaches only the Spanish of Argentina: vos from the first lesson, ${allWords.length} everyday words and slang inside real sentences, and spoken chats with Pancho the capybara.</p>
-    <div class="stores">${play}${ios}</div>
+    ${waitlist ? storeButtons() : `<div class="stores">${play}${ios}</div>`}
   </div>
 </aside>`;
 }
@@ -124,7 +177,7 @@ const NAV = [
   ['/', 'The app'],
 ];
 
-function page({ url, title, description, h1Block, body, crumbs, schema = [], navKey }) {
+function page({ url, title, description, h1Block, body, crumbs, schema = [], navKey, stores = false }) {
   const canonical = ORIGIN + url;
   const breadcrumb = {
     '@type': 'BreadcrumbList',
@@ -149,6 +202,9 @@ function page({ url, title, description, h1Block, body, crumbs, schema = [], nav
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${ORIGIN}/assets/og.png?v=4">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Posta Spanish, the app for learning Argentine Spanish, with Pancho the capybara">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" type="image/png" href="/assets/favicon-192.png" sizes="192x192">
@@ -186,7 +242,7 @@ function page({ url, title, description, h1Block, body, crumbs, schema = [], nav
       <p>&copy; 2026 PICAWAVE, LLC. Updated ${TODAY}. Google Play and the Google Play logo are trademarks of Google LLC. App Store is a service mark of Apple Inc.</p>
     </div>
   </footer>
-  <script src="/analytics.js"></script>
+  <script src="/analytics.js"></script>${stores ? '\n  <script src="/config.js"></script>\n  <script src="/script.js" defer></script>' : ''}
 </body>
 </html>
 `;
@@ -401,6 +457,9 @@ const APP_LD = {
   url: ORIGIN + '/', applicationCategory: 'EducationalApplication', applicationSubCategory: 'Language learning',
   operatingSystem: STORES.ios ? 'iOS, Android' : 'Android', inLanguage: 'en',
   description: `An app to learn Argentine Spanish: vos, lunfardo and ${allWords.length} slang words, short daily lessons, culture classes and spoken chats with Pancho the capybara.`,
+  image: { '@type': 'ImageObject', url: LOGO, width: 512, height: 512, caption: 'Posta Spanish app icon: Pancho the capybara drinking mate' },
+  screenshot: SHOTS.map((s) => ({ '@type': 'ImageObject', url: ORIGIN + s.src, width: 480, height: 853, caption: s.alt })),
+  brand: { '@type': 'Brand', name: 'Posta Spanish', logo: LOGO },
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   ...(STORES.android ? { installUrl: STORES.android } : {}),
 };
@@ -412,7 +471,9 @@ for (const g of guides) {
   write(url, page({
     url, title: `${g.title} | Posta`, description: g.description,
     h1Block: `<h1>${esc(g.h1)}</h1><p class="updated">Updated ${TODAY}</p>`,
-    body: g.body.replace('<!--VERB_GRID-->', verbGrid).replaceAll('{{WORDS}}', allWords.length) + faqHtml(g.faq) + cta(),
+    body: g.body.replace('<!--VERB_GRID-->', verbGrid).replace('<!--SHOTS-->', () => shotsBlock()).replaceAll('{{WORDS}}', allWords.length)
+      + faqHtml(g.faq) + cta(undefined, { waitlist: Boolean(g.shots) }),
+    stores: Boolean(g.shots),
     crumbs: [[g.crumb, url]],
     navKey: url,
     schema: [article(g.title, g.description, url), faqLd(g.faq), ...(g.app ? [APP_LD] : [])],
@@ -424,9 +485,12 @@ for (const g of guides) {
 const STATIC = [
   ['/', TODAY], ['/support', '2026-10-14'], ['/privacy', '2026-11-04'], ['/terms', '2026-10-20'], ['/delete-account', null],
 ];
+// The app's own pictures, listed on the pages that show them (image sitemap).
+const IMAGE_PAGES = new Set(['/', '/best-app-to-learn-argentine-spanish']);
+const sitemapImages = [LOGO, ...SHOTS.map((s) => ORIGIN + s.src)].map((u) => `<image:image><image:loc>${u}</image:loc></image:image>`).join('');
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[...STATIC, ...written.map((u) => [u, TODAY])].map(([u, d]) => `  <url><loc>${ORIGIN}${u}</loc>${d ? `<lastmod>${d}</lastmod>` : ''}</url>`).join('\n')}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${[...STATIC, ...written.map((u) => [u, TODAY])].map(([u, d]) => `  <url><loc>${ORIGIN}${u}</loc>${d ? `<lastmod>${d}</lastmod>` : ''}${IMAGE_PAGES.has(u) ? sitemapImages : ''}</url>`).join('\n')}
 </urlset>
 `;
 fs.writeFileSync(path.join(SITE, 'sitemap.xml'), sitemap);

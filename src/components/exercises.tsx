@@ -78,7 +78,7 @@ import {
 import type { AnswerExtra, QueueItem } from '@/lib/round';
 import { DEFAULT_LADDER, type Ladder, RUNG_BUILD_AT } from '@/lib/sentences';
 import { SETTLED_DAYS, buildTiles, wordPool } from '@/lib/session';
-import { clay, colors, font, OUTLINE, pastel, PICKED, radius } from '@/lib/theme';
+import { clay, colors, font, OUTLINE, pastel, PICKED, press, radius } from '@/lib/theme';
 import Svg, { Path as SvgPath } from 'react-native-svg';
 import { type TipBlock, type TipSpan, tipSpans, tipSteps } from '@/lib/tip-layout';
 import type { Form, Sentence, Tip } from '@/lib/types';
@@ -542,7 +542,10 @@ function tipInline(spans: TipSpan[]): React.ReactNode[] {
 // A clip and whether it is sounding right now. Nothing else on screen moves
 // while audio plays, so without this the speaker button is a dead control —
 // you press it and cannot tell whether anything happened.
-function useClip(path: string | null) {
+function useClip(path: string | null, onEnded?: () => void) {
+  // The latest one, read when the clip ends: the caller may re-render meanwhile.
+  const ended = useRef(onEnded);
+  ended.current = onEnded;
   const [playing, setPlaying] = useState(false);
   // A clip that will not sound has to say so. Silence on its own reads as a
   // broken button, and there is no console to look at on her phone.
@@ -566,6 +569,7 @@ function useClip(path: string | null) {
         path,
         (reason) => {
           set(false);
+          if (!reason) ended.current?.();
           // 'blocked' only means the browser wants a tap first, which the button
           // already asks for — not something to complain about.
           if (reason && reason !== 'blocked') setProblem(reason);
@@ -582,7 +586,7 @@ function useClip(path: string | null) {
   // Leaving the exercise takes its sound with it.
   useEffect(() => () => void (live.current && stopAudio()), []);
 
-  return { playing, problem, play, slow, rate };
+  return { playing, problem, play, slow, rate, run };
 }
 
 /** The slow way to hear a clip: three quarters of the speed, pitch kept. */
@@ -621,14 +625,21 @@ export function PlayButton({
   big,
   small,
   autoPlay = true,
+  speed = 1,
+  onEnded,
 }: {
   path: string;
+  /** When its clip stops without failing: finished, or cut short by another. */
+  onEnded?: () => void;
+  /** Below 1 for a learner's level (the first class's call); 1 is natural. */
+  speed?: number;
   big?: boolean;
   /** Inline at the end of a sentence, where a full-size button would outweigh the words. */
   small?: boolean;
   autoPlay?: boolean;
 }) {
-  const { playing, problem, play } = useClip(path);
+  const { playing, problem, run } = useClip(path, onEnded);
+  const play = useCallback(() => run(speed), [run, speed]);
   const reduced = useReducedMotion();
 
   // It says itself on arrival, the way a teacher would say the word before
@@ -1090,14 +1101,17 @@ export function Choices({
           <Pressable
             key={opt.id}
             disabled={revealed}
-            onPress={() => onPick(opt.id)}
+            onPress={() => {
+              tap();
+              onPick(opt.id);
+            }}
             style={({ pressed }) => [
               styles.choice,
               side && styles.choiceSide,
               picked && styles.choicePicked,
               right && styles.choiceRight,
               wrong && styles.choiceWrong,
-              { transform: [{ scale: pressed && !revealed ? 0.985 : 1 }] },
+              { transform: [{ scale: pressed && !revealed ? press.scale : 1 }] },
               webPress,
             ]}>
             <Text
@@ -1588,6 +1602,7 @@ export function TileBuilder({
   };
 
   const add = (i: number) => {
+    tap();
     const next = [...used, i];
     const slot = `t${i}`;
     if (reduced || pending) return setUsed(next);
@@ -1619,6 +1634,7 @@ export function TileBuilder({
   }, [pending]);
 
   const remove = (position: number) => {
+    tap();
     const i = used[position];
     const next = used.filter((_, p) => p !== position);
     if (reduced) return setUsed(next);
@@ -2927,7 +2943,10 @@ function GapBank({
           <Pressable
             key={opt.id}
             disabled={revealed}
-            onPress={() => onPick(opt.id)}
+            onPress={() => {
+              tap();
+              onPick(opt.id);
+            }}
             style={({ pressed }) => [
               styles.tile,
               picked && styles.choicePicked,
@@ -3248,7 +3267,7 @@ const styles = StyleSheet.create({
   phraseCardCentered: { marginTop: 10, paddingTop: 18 },
   phraseCardHead: { alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', marginBottom: 6 },
   // Sits on the sentence's last line, centred on the words rather than their baseline.
-  phraseCardEn: { ...font.body[700], fontSize: 15, lineHeight: 20, color: colors.muted, textAlign: 'center', marginTop: 4 },
+  phraseCardEn: { ...font.body[700], fontSize: 17, lineHeight: 23, color: colors.muted, textAlign: 'center', marginTop: 4 },
   phraseCardSpeak: { position: 'absolute', right: 14, top: 14 },
   // Listen: one pill, play at one end, the slow button at the other.
   player: {
@@ -3302,7 +3321,7 @@ const styles = StyleSheet.create({
   tipRowPad: { paddingVertical: 14, paddingHorizontal: 18 },
   tipRowInk: { borderTopWidth: OUTLINE, borderTopColor: colors.ink },
   tipEs: { ...font.display[800], fontSize: 23, lineHeight: 28, letterSpacing: -0.3, color: colors.ink },
-  tipEn: { ...font.body[600], fontSize: 16, lineHeight: 22, color: colors.muted, marginTop: 3 },
+  tipEn: { ...font.body[600], fontSize: 17, lineHeight: 23, color: colors.muted, marginTop: 3 },
   tipRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 10, columnGap: 8 },
   tipRowRule: { borderTopWidth: 2, borderTopColor: colors.border },
   tipHeadRow: { backgroundColor: colors.stone, paddingVertical: 9 },

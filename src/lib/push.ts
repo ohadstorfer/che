@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { enableNativePush, getNativePushStatus } from './native-push';
+import { enableNativePush, getNativePushStatus, quickNativePushStatus } from './native-push';
 import { supabase } from './supabase';
 
 // ---------------------------------------------------------------------------
@@ -56,6 +56,12 @@ function iosNeedsInstall(): boolean {
     (navigator as { standalone?: boolean }).standalone === true ||
     window.matchMedia?.('(display-mode: standalone)').matches;
   return isIos && !standalone;
+}
+
+/** Native only: the permission without the network, so Home's road never
+ *  waits on a push token. Web has no slow step worth skipping. */
+export function getQuickPushStatus(): Promise<PushStatus> | null {
+  return Platform.OS === 'web' ? null : quickNativePushStatus();
 }
 
 /**

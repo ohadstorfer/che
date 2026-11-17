@@ -15,13 +15,14 @@ const POSTHOG_KEY = 'phc_pzgRizNBQFYqGpGNfPWmmyNvUk8q4tpmUH36erQszE65';
 const POSTHOG_HOST = 'https://us.i.posthog.com';
 
 // Native only: replay needs the iOS/Android plugin, and the browser build is
-// just for testing. Demo builds are screenshots, not learners.
-const ENABLED = Platform.OS !== 'web' && process.env.EXPO_PUBLIC_DEMO !== '1';
+// just for testing. Demo builds are screenshots, not learners. Dev builds
+// (the simulator on Metro) are the founder testing, so they send nothing.
+const ENABLED = Platform.OS !== 'web' && process.env.EXPO_PUBLIC_DEMO !== '1' && !__DEV__;
 
-// The founder's own sessions aren't recorded. Once he signs in on a phone it
-// stays unrecorded, signed out too. Read synchronously because PostHog only
-// looks at enableSessionReplay at setup, and flags loading later can start a
-// recording that was merely stopped.
+// The founder's own use isn't tracked at all: no replay, no events. Once he
+// signs in on a phone it stays that way, signed out too. Read synchronously
+// because PostHog only looks at enableSessionReplay and defaultOptIn at setup,
+// and flags loading later can start a recording that was merely stopped.
 const NOT_RECORDED_EMAIL = 'ohad.storfer@gmail.com';
 const NOT_RECORDED_KEY = 'posta.not-recorded';
 
@@ -33,7 +34,8 @@ function notRecordedHere() {
   }
 }
 
-const REPLAY = ENABLED && !notRecordedHere();
+const NOT_RECORDED = notRecordedHere();
+const REPLAY = ENABLED && !NOT_RECORDED;
 
 /**
  * Session replay, screen views and JS errors. Lessons aren't masked: what she
@@ -50,6 +52,7 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
       options={{
         host: POSTHOG_HOST,
         disabled: !ENABLED,
+        defaultOptIn: !NOT_RECORDED,
         enableSessionReplay: REPLAY,
         sessionReplayConfig: {
           maskAllTextInputs: false,
@@ -82,24 +85,29 @@ export function AnalyticsTracker() {
   const userId = session?.user.id;
   const email = session?.user.email;
 
-  // The launch that finds out it's him: stop now, and never start here again.
+  const isFounder = NOT_RECORDED || email === NOT_RECORDED_EMAIL;
+
+  // The launch that finds out it's him: stop and opt out now, and never start
+  // here again. Opted out, PostHog sends no events and starts no replay.
   useEffect(() => {
-    if (!ENABLED || email !== NOT_RECORDED_EMAIL) return;
+    if (!ENABLED || !isFounder) return;
     void posthog.stopSessionRecording();
+    void posthog.optOut();
     void SecureStore.setItemAsync(NOT_RECORDED_KEY, '1').catch(() => {});
-  }, [posthog, email]);
+  }, [posthog, isFounder]);
 
   // Not while her session is still being read, or every launch would start
-  // a fresh anonymous person before she's recognised.
+  // a fresh anonymous person before she's recognised. Never for him: reset()
+  // would wipe PostHog's stored opt-out.
   useEffect(() => {
-    if (!ENABLED || loading) return;
+    if (!ENABLED || loading || isFounder) return;
     if (userId) posthog.identify(userId);
     else posthog.reset();
-  }, [posthog, userId, loading]);
+  }, [posthog, userId, loading, isFounder]);
 
   useEffect(() => {
-    if (ENABLED) posthog.screen(pathname);
-  }, [posthog, pathname]);
+    if (ENABLED && !isFounder) posthog.screen(pathname);
+  }, [posthog, pathname, isFounder]);
 
   // Taps on our notifications, once she is known (the funnel row needs her id).
   useEffect(() => {

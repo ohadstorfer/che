@@ -27,6 +27,10 @@ struct PostaProvider: TimelineProvider {
 
   /** Now, then every turn of the next two days: enough that a phone left alone still freezes on time. */
   func getTimeline(in context: Context, completion: @escaping (Timeline<PostaEntry>) -> Void) {
+    // Only a widget on a home screen asks for a timeline (the gallery asks for a
+    // snapshot), so this mark tells the app one is placed: the widget promo
+    // (src/lib/widget-promo.ios.ts) stops offering it.
+    UserDefaults(suiteName: appGroup)?.set(String(Int(Date.now.timeIntervalSince1970)), forKey: "widgetSeen")
     let calendar = Calendar.current
     let row = StreakRow.load()
     let now = Date.now

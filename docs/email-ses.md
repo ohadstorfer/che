@@ -1,7 +1,21 @@
 # Email on Amazon SES (next to Resend)
 
-Status 2026-11-15: SES is set up and tested, **Resend still sends everything**.
-Waiting on AWS to approve production access (asked 2026-11-15, status PENDING).
+Status 2026-11-16: **all mail goes out through SES** (`EMAIL_PROVIDER=ses`).
+Production access granted 2026-11-16 (50,000/day, 14/s). Resend is still
+configured as the fallback — see Rollback below.
+
+Done on 2026-11-16: bounce/complaint pipeline (below), the five sending
+functions redeployed, simulator bounce + complaint landed in
+`email_suppressions`, a real free-guide mail left through SES, switch flipped.
+
+### Bounce/complaint pipeline (live)
+
+SES configuration set `posta` → event destination `bounces-complaints`
+(BOUNCE, COMPLAINT) → SNS topic `posta-ses-events` → HTTPS subscription to
+`functions/v1/ses-events?t=<SES_EVENTS_TOKEN>` → `public.ses_suppress()`:
+row in `email_suppressions`, user (if any) added to `email_optouts` with
+source `bounce` / `complaint`. Transient bounces are ignored. Migration
+`20261116000010_email_suppressions.sql`.
 
 ## What exists
 
@@ -20,7 +34,7 @@ Waiting on AWS to approve production access (asked 2026-11-15, status PENDING).
 Callers of `sendEmail` (all switch together): free-guide, winback-email,
 launch-email, cost-alert, social-queue.
 
-## When AWS approves
+## How it was switched (checklist, done 2026-11-16)
 
 AWS mails the account address. Check anytime:
 

@@ -15,7 +15,13 @@ import {
   type ViewStyle,
 } from 'react-native';
 
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { tap } from '@/lib/haptics';
 import { clay, colors, font, gradients, path, press, radius, type } from '@/lib/theme';
+
+/** Strong ease-out: a press starts moving the instant the finger lands. */
+const PRESS_EASE = Easing.bezier(0.23, 1, 0.32, 1);
 
 // On web, react-native-web maps these to real CSS transitions, so the press
 // scale eases instead of snapping. Native gets the snap, which is what a
@@ -93,6 +99,7 @@ export function Button({
   disabled,
   loading,
   small,
+  haptic,
 }: {
   title: string;
   onPress: () => void;
@@ -100,7 +107,12 @@ export function Button({
   disabled?: boolean;
   loading?: boolean;
   small?: boolean;
+  /** A tick on press-in. On by default; Check skips it, since the verdict buzzes right after. */
+  haptic?: boolean;
 }) {
+  const scale = useSharedValue(1);
+  const pressStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
+  const ticks = haptic ?? variant !== 'check';
   const palette: Record<ButtonVariant, { bg: string; fg: string; border?: string; clay?: string }> = {
     primary: { bg: colors.primary, fg: colors.onPrimary, clay: clay.button },
     secondary: { bg: colors.card, fg: colors.ink, clay: clay.surface },
@@ -116,15 +128,31 @@ export function Button({
   // reads as a washed-out version of "go".
   const grey = variant === 'check' && disabled;
   const p = grey ? { bg: path.lockedFace, fg: path.lockedGlyph } : palette[variant];
+  const off = !!(disabled || loading);
   return (
+    <Animated.View style={pressStyle}>
     <Pressable
       onPress={onPress}
+      onPressIn={() => {
+        if (off) return;
+        if (ticks) tap();
+        // Down fast, back a touch slower: it heard the finger, then lets go.
+        scale.value = withTiming(press.scale, { duration: 100, easing: PRESS_EASE });
+      }}
+      onPressOut={() => {
+        scale.value = withTiming(1, { duration: press.duration, easing: PRESS_EASE });
+      }}
       // Strictly true or false. Android disables the native view when this is
       // true, and only enables it again when it is false — `false || undefined`
       // is undefined, which left Check disabled after an answer was picked, and
       // a disabled view takes no taps of its own: only the label answered.
-      disabled={!!(disabled || loading)}
-      style={({ pressed }) => [
+      disabled={off}
+      accessibilityRole="button"
+      accessibilityLabel={title.trim() || undefined}
+      accessibilityState={{ disabled: off, busy: !!loading }}
+      // The small size is 40 tall; the slop brings its target to 48.
+      hitSlop={small ? 4 : undefined}
+      style={[
         styles.button,
         small && styles.buttonSmall,
         {
@@ -133,9 +161,7 @@ export function Button({
           borderWidth: p.border ? 1.5 : 0,
           boxShadow: disabled ? undefined : p.clay,
           opacity: disabled && !grey ? 0.45 : 1,
-          transform: [{ scale: pressed ? press.scale : 1 }],
         },
-        webTransition('transform', press.duration),
       ]}>
       {variant === 'primary' && !disabled && (
         <LinearGradient
@@ -163,6 +189,7 @@ export function Button({
         </Text>
       )}
     </Pressable>
+    </Animated.View>
   );
 }
 

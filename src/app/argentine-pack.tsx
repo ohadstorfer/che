@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   example: { gap: 2, paddingVertical: 10, paddingHorizontal: 12, borderRadius: radius.sm, backgroundColor: colors.stone },
   exEs: { ...font.body[600], fontSize: 15, lineHeight: 21, color: colors.ink },
   exWord: { ...font.body[800], color: colors.primary },
-  exEn: { ...font.body[500], fontSize: 13, lineHeight: 18, fontStyle: 'italic', color: colors.muted },
+  exEn: { ...font.body[500], fontSize: 15, lineHeight: 20, fontStyle: 'italic', color: colors.muted },
 
   dock: {
     gap: 8,

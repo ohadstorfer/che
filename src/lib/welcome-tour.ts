@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useSyncExternalStore } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
 
 // ---------------------------------------------------------------------------
 // The welcome tour (components/welcome-tour.tsx): shown once, right after her
@@ -52,6 +53,14 @@ export function startWelcomeTour(): void {
 /** From the paywall's "Learn more", before she has bought: the same tour
  *  over the real tabs (the hard-paywall gate steps aside while it plays), and
  *  finishing it goes back to `back`. It doesn't count as seen. */
+/** She opened "Learn more" from the paywall during this onboarding: the hard
+ *  paywall out of onboarding gives her a way out after that (paywall.tsx).
+ *  Onboarding clears it as it starts, so a replay starts without it. */
+let learnedMore = false;
+export const markLearnedMore = () => void (learnedMore = true);
+export const learnedMoreSeen = () => learnedMore;
+export const resetLearnedMore = () => void (learnedMore = false);
+
 export function startTourPreview(back: string): void {
   previewReturn = back;
   active = true;
@@ -61,6 +70,26 @@ export function startTourPreview(back: string): void {
 /** The paywall to go back to while a preview plays; null for the real tour. */
 export function useTourPreview(): string | null {
   return useSyncExternalStore(subscribe, () => (active ? previewReturn : null));
+}
+
+const previewing = () => active && previewReturn != null;
+
+/**
+ * Whether a tab draws its default screen, reading nothing: while the "Learn
+ * more" preview plays, Course stands on the first lesson, Speaking has Pancho
+ * calling, and nothing of hers is fetched. A tab first opened by the preview
+ * keeps it until it is next focused, so it doesn't start loading as the tour
+ * fades out and the tabs are dismissed under it.
+ */
+export function useTabPreview(): boolean {
+  const on = useSyncExternalStore(subscribe, previewing);
+  const [born, setBorn] = useState(on);
+  useFocusEffect(
+    useCallback(() => {
+      if (!previewing()) setBorn(false);
+    }, []),
+  );
+  return on || born;
 }
 
 /** Finished or skipped: seen for good. A preview just ends. */

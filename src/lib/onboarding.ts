@@ -67,14 +67,15 @@ export async function fetchNotifyAt(): Promise<NotifyAt> {
 /** ", Sam" or nothing: for the lines that end on her name. */
 export const nameTail = (a: Partial<Answers>) => (a.name?.trim() ? `, ${a.name.trim()}` : '');
 
-// Each option carries the mascot's reaction to it: the question is asked by
-// him, so the answer gets a reply, not just a checkmark.
+// Each option carries the mascot's reaction to it (react, reactSpeaker). Parked
+// since 2026-11-17: the question stays in his bubble and no screen shows these
+// replies, so editing them changes nothing she sees. Kept to bring replies back.
 
 export const WHY: { value: Why; label: string; icon: string; art: Art; tone: string; react: string; reactSpeaker: string }[] = [
   { value: 'trip', label: 'I’m going on a trip', icon: 'airplane', art: 'taxi', tone: pastel.sky, react: '¡Qué bueno! You’ll order empanadas like a local.', reactSpeaker: '¡Qué bueno! No more tourist Spanish at the parrilla.' },
   { value: 'moving', label: 'I’m moving to Argentina', icon: 'home-city-outline', art: 'obelisco', tone: pastel.peach, react: '¡Qué lindo! Let’s make it feel like home.', reactSpeaker: '¡Qué lindo! You’ll sound like a neighbour, not a newcomer.' },
   { value: 'love', label: 'Someone I love is Argentine', icon: 'heart-outline', art: 'mate', tone: pastel.sage, react: 'Ay, qué lindo. Let’s win over the family.', reactSpeaker: 'Ay, qué lindo. Time to talk the way the family does.' },
-  { value: 'people', label: 'Friends, family or work', icon: 'account-group-outline', art: 'chat', tone: pastel.lav, react: 'Dale. You’ll keep up in the group chat.', reactSpeaker: 'Dale. You’ll get the jokes in the group chat.' },
+  { value: 'people', label: 'Friends or coworkers', icon: 'account-group-outline', art: 'chat', tone: pastel.lav, react: 'Dale. You’ll keep up in the group chat.', reactSpeaker: 'Dale. You’ll get the jokes in the group chat.' },
   { value: 'culture', label: 'I love the culture', icon: 'music-note-outline', art: 'bandoneon', tone: pastel.butter, react: '¡Grande! Tango, rock, fútbol. We’ll get there.', reactSpeaker: '¡Grande! The lunfardo is where it gets good.' },
 ];
 
@@ -83,10 +84,10 @@ export const mainWhy = (whys: Why[]): Why =>
   (['moving', 'trip', 'love', 'people', 'culture'] as Why[]).find((w) => whys.includes(w)) ?? 'trip';
 
 export const LEVEL: { value: Level; label: string; short: string; sub: string; bars: number; tone: string; react: string }[] = [
-  { value: 'none', label: 'I’m new to Spanish', short: 'New to Spanish', sub: 'Hola is about it', bars: 1, tone: pastel.sky, react: 'Perfecto. Nothing to unlearn.' },
-  { value: 'basics', label: 'I know some basics', short: 'Some basics', sub: 'Simple words and phrases', bars: 2, tone: pastel.sage, react: 'Bien. Keep it. I’ll add the local parts.' },
-  { value: 'spanish', label: 'I speak textbook Spanish', short: 'Textbook Spanish', sub: 'Tú, not vos', bars: 3, tone: pastel.lav, react: 'Then you have 90%. I’ll give you the rest.' },
-  { value: 'conversational', label: 'I can hold a conversation', short: 'Conversational', sub: 'I want to sound local', bars: 4, tone: pastel.peach, react: '¡Genial! We skip the basics.' },
+  { value: 'none', label: 'I’m new to Spanish', short: 'New to Spanish', sub: '“Hola” is about it', bars: 1, tone: pastel.sky, react: 'Perfecto. Nothing to unlearn.' },
+  { value: 'basics', label: 'I know a few words', short: 'A few words', sub: 'I can say hi and order a coffee', bars: 2, tone: pastel.sage, react: 'Bien. Keep it. I’ll add the local parts.' },
+  { value: 'spanish', label: 'I can get by in Spanish', short: 'I get by', sub: 'Simple chats, the textbook way (tú, not vos)', bars: 3, tone: pastel.lav, react: 'Then you have 90%. I’ll give you the rest.' },
+  { value: 'conversational', label: 'I speak Spanish well', short: 'Speak it well', sub: 'Now I want to sound Argentine', bars: 4, tone: pastel.peach, react: '¡Genial! We skip the basics.' },
 ];
 
 /** Whether she already speaks Spanish: the flashcards show her full sentences. */
@@ -195,6 +196,8 @@ export interface StruggleOption {
   art: Art;
   tone: string;
   react: string;
+  /** What Posta does about it: shown on the card once she picks it ("IN POSTA"). */
+  posta: string;
 }
 
 /** A beginner has no "before"; a Spanish speaker has a different problem. */
@@ -203,32 +206,32 @@ export function struggleQuestion(level: Level): { en: string; options: StruggleO
     return {
       en: 'What worries you about starting?',
       options: [
-        { value: 'speak', label: 'Speaking out loud', art: 'phone', tone: pastel.sky, react: 'With me, nobody is listening.' },
-        { value: 'follow', label: 'Understanding real people', art: 'gramophone', tone: pastel.lav, react: 'Real voices from lesson 1, slowed down.' },
-        { value: 'kept', label: 'Finding the time', art: 'mate', tone: pastel.sage, react: 'That’s why it’s 10 minutes.' },
-        { value: 'bored', label: 'Getting bored', art: 'book', tone: pastel.peach, react: 'Then we keep it short, and about you.' },
-        { value: 'none', label: 'Nothing. I’m ready', art: 'flag', tone: pastel.butter, react: '¡Esa! Let’s go.' },
+        { value: 'speak', label: 'Speaking out loud', art: 'phone', tone: pastel.sky, react: 'With me, nobody is listening.', posta: 'Calls with Pancho, where mistakes are fine' },
+        { value: 'follow', label: 'Understanding real people', art: 'gramophone', tone: pastel.lav, react: 'Real voices from lesson 1, slowed down.', posta: 'Real porteño audio, slow first, then full speed' },
+        { value: 'kept', label: 'Finding the time', art: 'mate', tone: pastel.sage, react: 'That’s why it’s a few minutes a day.', posta: 'A few minutes a day, and Pancho knocks' },
+        { value: 'bored', label: 'Getting bored', art: 'book', tone: pastel.peach, react: 'Then we keep it short, and about you.', posta: 'Short classes about your life, with slang and culture' },
+        { value: 'none', label: 'Honestly? Nothing. Let’s go', art: 'flag', tone: pastel.butter, react: '¡Esa! Let’s go.', posta: 'We start right where you are' },
       ],
     };
   if (level === 'basics')
     return {
       en: 'What got in the way before?',
       options: [
-        { value: 'speak', label: 'I freeze when I speak', art: 'phone', tone: pastel.sky, react: 'With me you can mess up. I fix one thing.' },
-        { value: 'follow', label: 'I can’t follow real speech', art: 'gramophone', tone: pastel.lav, react: 'You get real porteño audio from lesson 1.' },
-        { value: 'wrong', label: 'I learned textbook Spanish', art: 'book', tone: pastel.peach, react: 'It wasn’t you. We swap it, word by word.' },
-        { value: 'kept', label: 'I never kept it up', art: 'mate', tone: pastel.sage, react: 'That’s why it’s 10 minutes, and I knock.' },
-        { value: 'none', label: 'Nothing. Just teach me', art: 'flag', tone: pastel.butter, react: 'Dale. We build on what you have.' },
+        { value: 'speak', label: 'I freeze when I speak', art: 'phone', tone: pastel.sky, react: 'With me you can mess up. I fix one thing.', posta: 'Calls with Pancho, where mistakes are fine' },
+        { value: 'follow', label: 'I can’t follow real speech', art: 'gramophone', tone: pastel.lav, react: 'You get real porteño audio from lesson 1.', posta: 'Real porteño audio, slow first, then full speed' },
+        { value: 'wrong', label: 'I learned textbook Spanish', art: 'book', tone: pastel.peach, react: 'It wasn’t you. We swap it, word by word.', posta: 'Textbook words swapped for the local ones' },
+        { value: 'kept', label: 'I never kept it up', art: 'mate', tone: pastel.sage, react: 'That’s why it’s a few minutes a day, and I knock.', posta: 'A few minutes a day, and Pancho knocks' },
+        { value: 'none', label: 'Honestly? Nothing. Let’s go', art: 'flag', tone: pastel.butter, react: 'Dale. We build on what you have.', posta: 'We start right where you are' },
       ],
     };
   return {
     en: 'What do you struggle with the most?',
     options: [
-      { value: 'follow', label: 'Following fast speech', art: 'gramophone', tone: pastel.lav, react: 'It’s the sh and the slang. We train your ear.' },
-      { value: 'wrong', label: 'I sound like a textbook', art: 'book', tone: pastel.peach, react: 'It’s vos, the sh and about 30 words.' },
-      { value: 'slang', label: 'The slang loses me', art: 'shout', tone: pastel.butter, react: 'Lunfardo has its own section.' },
-      { value: 'english', label: 'They switch to English', art: 'chat', tone: pastel.sky, react: 'They stop when you answer with vos.' },
-      { value: 'none', label: 'Nothing yet', art: 'flag', tone: pastel.sage, react: 'Dale. Straight to sounding porteño.' },
+      { value: 'follow', label: 'Following fast speech', art: 'gramophone', tone: pastel.lav, react: 'It’s the sh and the slang. We train your ear.', posta: 'Real porteño audio, slow first, then full speed' },
+      { value: 'wrong', label: 'I sound like a textbook', art: 'book', tone: pastel.peach, react: 'It’s vos, the sh and about 30 words.', posta: 'Textbook words swapped for the local ones' },
+      { value: 'slang', label: 'The slang loses me', art: 'shout', tone: pastel.butter, react: 'Lunfardo has its own section.', posta: 'The slang gets its own classes, word by word' },
+      { value: 'english', label: 'They switch to English', art: 'chat', tone: pastel.sky, react: 'They stop when you answer with vos.', posta: 'Vos from day one, so you sound like one of them' },
+      { value: 'none', label: 'Honestly? Nothing. Let’s go', art: 'flag', tone: pastel.sage, react: 'Dale. Straight to sounding porteño.', posta: 'We start right where you are' },
     ],
   };
 }
@@ -326,7 +329,8 @@ export const WORDS_OF_DAY: Record<Level, [string, string][]> = {
  *  optimized copies in che/social/out/optimized. */
 export const COURSE_CLIP: Record<Why, number> = {
   trip: require('@/assets/videos/onboarding/course-trip.mp4'),
-  moving: require('@/assets/videos/onboarding/course-moving.mp4'),
+  // Moving shows the culture cut: its own ("¿Sos del 4° B?") read as confusing.
+  moving: require('@/assets/videos/onboarding/course-culture.mp4'),
   love: require('@/assets/videos/onboarding/course-love.mp4'),
   people: require('@/assets/videos/onboarding/course-people.mp4'),
   culture: require('@/assets/videos/onboarding/course-culture.mp4'),

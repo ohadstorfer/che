@@ -5,8 +5,17 @@ import { Platform } from 'react-native';
 // no motor, so it stays silent there.
 const native = Platform.OS !== 'web';
 
+// A Button ticks on press-in, and many callers also tick in their onPress:
+// one press must still feel like one tick, so taps closer than this merge.
+const TAP_GAP_MS = 150;
+let lastTap = 0;
+
 export const tap = () => {
-  if (native) void Haptics.selectionAsync().catch(() => {});
+  if (!native) return;
+  const now = Date.now();
+  if (now - lastTap < TAP_GAP_MS) return;
+  lastTap = now;
+  void Haptics.selectionAsync().catch(() => {});
 };
 
 export const thud = () => {

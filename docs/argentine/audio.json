@@ -245,6 +245,12 @@
   "model": "eleven_v4_turbo",
   "recorded_at": "2026-10-07T10:52:12.288Z"
  },
+ "argentine/06b2d5f58b4b52441693.mp3": {
+  "text": "re",
+  "voice": "malena",
+  "model": "eleven_v4_turbo",
+  "recorded_at": "2026-11-15T21:20:00.000Z"
+ },
  "argentine/06bbaeed6a606e757c10.mp3": {
   "text": "bizcocho",
   "voice": "tomas",

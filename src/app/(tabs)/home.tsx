@@ -3,7 +3,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useFocusEffect, useIsFocused, useLocalSearchParams } from 'expo-router';
-import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   AccessibilityInfo,
   Animated,
@@ -12,13 +12,14 @@ import {
   FlatList,
   Platform,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View,
   type ViewStyle,
 } from 'react-native';
 
-import { AppHeader, Pulse } from '@/components/app-header';
+import { AppHeader, PREVIEW_STREAK, previewWeek, Pulse } from '@/components/app-header';
 import { Guidebook } from '@/components/guidebook';
 import { PlacementCard } from '@/components/placement-card';
 import { RedoCard, type StepRect } from '@/components/redo-card';
@@ -47,11 +48,14 @@ import {
   enablePush,
   getPartnerId,
   getPushStatus,
+  getQuickPushStatus,
   type PushStatus,
 } from '@/lib/push';
 import { getPracticeCounts } from '@/lib/session';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { takeFinishedLesson } from '@/lib/just-finished';
+import { previewCourse } from '@/lib/tour-preview-course';
+import { useTabPreview } from '@/lib/welcome-tour';
 import { readSnapshot, writeSnapshot } from '@/lib/snapshot';
 import { streakStatus, type StreakStatus } from '@/lib/streak';
 import { fetchStreakWeek } from '@/lib/streak-week';
@@ -685,7 +689,9 @@ function PushPrompt({
     );
   }
 
-  if (status === 'enabled' || status === 'unsupported') return null;
+  // Blocked: there is nothing to tap here that would fix it, and a panel she
+  // can't act on or close sat over the road on every visit. Say nothing.
+  if (status === 'enabled' || status === 'unsupported' || status === 'denied') return null;
 
   return (
     <Panel style={{ gap: 10 }}>
@@ -695,12 +701,6 @@ function PushPrompt({
           To get reminders on an iPhone, add the app to your home screen first: in Safari tap{' '}
           <Text style={styles.strong}>Share</Text> →{' '}
           <Text style={styles.strong}>Add to Home Screen</Text>, then open it from there.
-        </Text>
-      ) : status === 'denied' ? (
-        <Text style={styles.mutedText}>
-          {Platform.OS === 'web'
-            ? 'Notifications are blocked. Switch them on in your browser settings.'
-            : 'Notifications are blocked. Switch them on in Settings → Posta → Notifications.'}
         </Text>
       ) : (
         <>
@@ -781,7 +781,79 @@ const ADVANCE_SCROLL_MS = 1100;
 const EASE_SCROLL = Easing.bezier(0.4, 0, 0.2, 1);
 
 
-export default function Home() {
+/** The paywall's "Learn more" tour plays over a Course tab that reads nothing. */
+export default function CourseTab() {
+  return useTabPreview() ? <CoursePreview /> : <Home />;
+}
+
+/** Each preview unit's length, for its banner's 0/8. */
+const PREVIEW_UNIT_SIZE = (() => {
+  const n = new Map<string, number>();
+  for (const l of previewCourse.path) n.set(l.unit_id, (n.get(l.unit_id) ?? 0) + 1);
+  return n;
+})();
+const NOOP = () => {};
+
+/**
+ * Course as the tour's preview shows it, before she has bought: the road's
+ * first two units, kept in the bundle (lib/tour-preview-course.ts), standing
+ * on the first lesson with nothing done and onboarding's one-day streak. No progress, push
+ * status, placement or chats are read, and nothing on it opens — the tour's
+ * overlay takes every touch anyway.
+ */
+function CoursePreview() {
+  useStatusBarColor(colors.bg);
+  const focused = useIsFocused();
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    AccessibilityInfo.isReduceMotionEnabled().then(setReduced);
+  }, []);
+  const section = previewCourse.sections[0];
+  return (
+    <View style={styles.safe}>
+      <AppHeader
+        title="Course"
+        pill={{
+          label: `Course · Section ${section.ordinal}`,
+          onPress: NOOP,
+          accessibilityLabel: `Section ${section.ordinal}: ${section.title_en}, level ${section.cefr}`,
+        }}
+        status={PREVIEW_STREAK}
+        weekDone={previewWeek()}
+      />
+      <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+        <View style={styles.header}>
+          <View style={styles.pathTop} />
+        </View>
+        {previewCourse.path.map((lesson) => (
+          <Fragment key={lesson.id}>
+            {lesson.opensUnit ? (
+              <UnitBanner
+                lesson={lesson}
+                state={lesson.index === 0 ? 'current' : 'locked'}
+                done={0}
+                total={PREVIEW_UNIT_SIZE.get(lesson.unit_id) ?? 0}
+                onPress={NOOP}
+              />
+            ) : null}
+            <PathStep
+              index={lesson.index}
+              phase={lesson.index === 0 ? 1 : 0}
+              reduced={reduced}
+              breathe={focused}
+              kind={lesson.kind}
+              sub={KIND_LABEL[lesson.kind] ?? `Lesson ${lesson.ordinal}`}
+              tone={toneOf(lesson.unit)}
+              label={`${lesson.title_en} · ${lesson.unit.title_en}`}
+            />
+          </Fragment>
+        ))}
+      </ScrollView>
+    </View>
+  );
+}
+
+function Home() {
   // Her id comes straight off the session, which is read from storage: waiting
   // for the profile row as well put a whole round trip in front of the road.
   const { session } = useAuth();
@@ -975,7 +1047,17 @@ export default function Home() {
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
     AccessibilityInfo.isReduceMotionEnabled().then(setReduced);
+    // The road waits for a status (the prompt above it sets where it starts),
+    // and the full check fetches a push token over the network. The
+    // permission alone answers in a few ms and is almost always the same
+    // answer, so the road draws on that and the full check corrects it.
+    let full = false;
+    getQuickPushStatus()?.then((s) => {
+      if (full || lastPushStatus != null) return;
+      setPushStatus((cur) => cur ?? s);
+    });
     getPushStatus().then((s) => {
+      full = true;
       lastPushStatus = s;
       setPushStatus(s);
     });

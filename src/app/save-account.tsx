@@ -50,7 +50,7 @@ export default function SaveAccount() {
           <MascotSays
             pose="tango"
             es="¡No lo pierdas!"
-            en={fromAccount ? 'Save your progress, so it’s safe on any phone.' : 'Save your plan and I’ll keep it safe for you.'}
+            en={fromAccount ? 'Save your progress, so it’s safe on any phone.' : 'Save your account and I’ll keep your course safe for you.'}
             size="sm"
             reduced={reduced}
           />

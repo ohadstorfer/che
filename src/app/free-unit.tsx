@@ -11,6 +11,7 @@ import { IconButton, rise } from '@/components/onboarding-ui';
 import { SaveButtons } from '@/components/save-account';
 import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
+import { cancelFreeUnitReminder } from '@/lib/free-unit-reminder';
 import { track } from '@/lib/funnel';
 import { isGuest } from '@/lib/guest';
 import { success, tap } from '@/lib/haptics';
@@ -62,6 +63,8 @@ export default function FreeUnit() {
     }
     success();
     track('free_pass_claimed', { guest });
+    // Taken (maybe on day 0): tomorrow's "try it free" nudge would be stale.
+    void cancelFreeUnitReminder();
     // Ready turns her reminder on and starts lesson 1.
     resetTo('/ready?pass=1');
   };

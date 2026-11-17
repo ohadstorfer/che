@@ -51,6 +51,16 @@ async function deviceSecret(): Promise<string> {
   return made;
 }
 
+/** The permission alone, no network: what Home needs to draw its road. A
+ *  granted phone reads as enabled here; the full check below may still find
+ *  the server row missing and say off, a moment later. */
+export async function quickNativePushStatus(): Promise<PushStatus> {
+  if (!Device.isDevice) return 'unsupported';
+  const { status } = await Notifications.getPermissionsAsync();
+  if (status === 'denied') return 'denied';
+  return status === 'granted' ? 'enabled' : 'off';
+}
+
 export async function getNativePushStatus(): Promise<PushStatus> {
   if (!Device.isDevice) return 'unsupported';
   const { status } = await Notifications.getPermissionsAsync();

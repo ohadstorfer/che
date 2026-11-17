@@ -12,6 +12,7 @@ import Animated, {
   useSharedValue,
   withDelay,
   withRepeat,
+  ReduceMotion,
   withSequence,
   withSpring,
   withTiming,
@@ -29,7 +30,9 @@ export function In({ delay, children, style }: { delay: number; children: React.
   const reduced = useReducedMotion();
   const t = useSharedValue(0);
   useEffect(() => {
-    t.value = withDelay(delay, reduced ? withTiming(1, { duration: 150 }) : withSpring(1, { duration: 460, dampingRatio: 0.62 }));
+    t.value = reduced
+      ? withDelay(Math.min(delay, 200), withTiming(1, { duration: 150, reduceMotion: ReduceMotion.Never }), ReduceMotion.Never)
+      : withDelay(delay, withSpring(1, { duration: 460, dampingRatio: 0.62 }));
   }, [delay, reduced, t]);
   const a = useAnimatedStyle(() => ({
     opacity: Math.min(1, t.value * 2),
@@ -43,7 +46,9 @@ export function Slap({ delay, tilt, children, style }: { delay: number; tilt: nu
   const reduced = useReducedMotion();
   const t = useSharedValue(0);
   useEffect(() => {
-    t.value = withDelay(delay, withTiming(1, { duration: reduced ? 150 : 380, easing: OUT }));
+    t.value = reduced
+      ? withDelay(Math.min(delay, 200), withTiming(1, { duration: 150, reduceMotion: ReduceMotion.Never }), ReduceMotion.Never)
+      : withDelay(delay, withTiming(1, { duration: 380, easing: OUT }));
   }, [delay, reduced, t]);
   const a = useAnimatedStyle(() => ({
     opacity: Math.min(1, t.value * 3),

@@ -1,0 +1,139 @@
+{
+  "batch": 1,
+  "units": "course_order 1-12",
+  "format": "Pancho line ('say', max 15 words, plain English) + one block per step: kind D = formula toggle, A = labeled contrast cards, L = example list. [x] marks the part that changes. Max 2 steps, max 3 cards per step.",
+  "tips": [
+    {"ids": ["7d00df14"], "title": "Facturas", "kind": "L",
+     "dropped": "The invoice meaning, kept only as 'not bills' in Pancho's line.",
+     "steps": [{"say": "At the bakery, <em>facturas</em> means pastries, not bills.", "cards": [
+       {"es": "Una docena de [facturas], por favor.", "en": "A dozen pastries, please."},
+       {"es": "Dos [medialunas], por favor.", "en": "Two croissants, please."}]}]},
+
+    {"ids": ["18ab5904"], "title": "Un café, por favor", "kind": "L",
+     "dropped": "",
+     "steps": [{"say": "To order, just name it and add <em>por favor</em>.", "cards": [
+       {"es": "Un café, [por favor].", "en": "A coffee, please."},
+       {"es": "Una medialuna, [por favor].", "en": "A croissant, please."}]}]},
+
+    {"ids": ["e9493171"], "title": "Otro, otra", "kind": "D",
+     "dropped": "",
+     "steps": [{"say": "Same again? Just <em>otro</em>. Never <em>un otro</em>.", "cards": [
+       {"f": {"stem": "otr", "opts": [["un café", "o", "Otro café, por favor · Another coffee, please"], ["una birra", "a", "Otra birra, por favor · Another beer, please"]]}}]}]},
+
+    {"ids": ["25308c48"], "title": "Tostadas, un tostado", "kind": "A",
+     "dropped": "'Una tostada' as one slice at home.",
+     "steps": [{"say": "<em>Tostadas</em> is toast. <em>Un tostado</em> is a sandwich.", "cards": [
+       {"pill": ["Toast", "q"], "es": "Un café y [tostadas], por favor.", "en": "A coffee and toast, please."},
+       {"pill": ["Sandwich", "p"], "es": "Un [tostado], por favor.", "en": "A toasted ham and cheese, please."}]}]},
+
+    {"ids": ["fbdb815c"], "title": "Un or una", "kind": "A",
+     "dropped": "'Agua is still an una word: otra agua'. Too early for that detail.",
+     "steps": [{"say": "<em>Un</em> or <em>una</em> goes with the thing. Learn it with each word.", "cards": [
+       {"pill": ["un", "q"], "es": "[Un] helado.", "en": "An ice cream."},
+       {"pill": ["una", "p"], "es": "[Una] pizza.", "en": "A pizza."}]},
+      {"say": "One odd one: <em>agua</em> takes <em>un</em>.", "cards": [
+       {"es": "[Un] agua, por favor.", "en": "A water, please."}]}]},
+
+    {"ids": ["710a7b73"], "title": "¿Cómo andás?", "kind": "L",
+     "dropped": "",
+     "steps": [{"say": "<em>¿Cómo andás?</em> means how are you. Keep the answer short.", "cards": [
+       {"es": "¿Cómo andás? — [Bien.]", "en": "How are you? — Good."},
+       {"es": "¿Qué onda? — [Todo bien.]", "en": "What's up? — All good."}]}]},
+
+    {"ids": ["8b938cde"], "title": "Che", "kind": "L",
+     "dropped": "",
+     "steps": [{"say": "<em>Che</em> means hey. It goes first, with friends.", "cards": [
+       {"es": "[Che], ¿todo bien?", "en": "Hey, all good?"},
+       {"es": "[Che], Juan, ¿un mate?", "en": "Hey Juan, want a mate?"}]}]},
+
+    {"ids": ["03c07d66"], "title": "Soy", "kind": "L",
+     "dropped": "",
+     "steps": [{"say": "<em>Soy</em> means I am. You don't need <em>yo</em>.", "cards": [
+       {"es": "[Soy] Sofi.", "en": "I'm Sofi."},
+       {"es": "Y [yo] soy Martín.", "en": "And I'm Martín. (yo adds stress)"}]}]},
+
+    {"ids": ["bc1f8253"], "title": "Buen día", "kind": "A",
+     "dropped": "",
+     "steps": [{"say": "The greeting changes with the time of day.", "cards": [
+       {"pill": ["Morning", "s"], "es": "[Buen día].", "en": "Good morning."},
+       {"pill": ["Afternoon", "p"], "es": "[Buenas tardes].", "en": "Good afternoon."},
+       {"pill": ["Night", "l"], "es": "[Buenas noches].", "en": "Good evening. Also goodbye."}]},
+      {"say": "Short for all of them: <em>buenas</em>.", "cards": [
+       {"es": "¡[Buenas]!", "en": "Hi!"}]}]},
+
+    {"ids": ["73cc59dc"], "title": "De nada, joya", "kind": "L",
+     "dropped": "'Claro' (of course). It was a third idea; it can live in its own tip.",
+     "steps": [{"say": "When someone says <em>gracias</em>, answer <em>de nada</em>.", "cards": [
+       {"es": "Gracias. — [De nada].", "en": "Thanks. — You're welcome."}]},
+      {"say": "All good? Porteños say <em>¡joya!</em>", "cards": [
+       {"es": "¿Todo bien? — ¡[Joya]!", "en": "All good? — Great!"}]}]},
+
+    {"ids": ["975cf77f"], "title": "Soy, sos", "kind": "D",
+     "dropped": "'Use vos with everyone' moved to the vos tip right after.",
+     "steps": [{"say": "<em>I am</em> is <em>soy</em>. <em>You are</em> is <em>sos</em>.", "cards": [
+       {"f": {"stem": "so", "opts": [["Yo", "y", "Soy Sofi · I'm Sofi"], ["Vos", "s", "¿Sos Sofi? · Are you Sofi?"]]}}]}]},
+
+    {"ids": ["d6547b7a"], "title": "Vos", "kind": "L",
+     "dropped": "The mention of tú. The course never uses it, so the tip doesn't either.",
+     "steps": [{"say": "In Argentina, <em>you</em> is <em>vos</em>. Use it with everyone, even your boss.", "cards": [
+       {"es": "¿[Vos] sos Sofi?", "en": "Are you Sofi?"},
+       {"es": "Soy Juan, ¿y [vos]?", "en": "I'm Juan, and you?"}]}]},
+
+    {"ids": ["42b7a8c7"], "title": "¿Sos vos?", "kind": "L",
+     "dropped": "",
+     "steps": [{"say": "Surprised to see someone? Say <em>¿sos vos?</em>", "cards": [
+       {"es": "Ah, ¿sos [vos]?", "en": "Oh, it's you?"},
+       {"es": "Sí, soy [yo].", "en": "Yes, it's me."},
+       {"es": "¿[Posta]?", "en": "For real?"}]}]},
+
+    {"ids": ["22d2fbbf"], "title": "Bienvenido, bienvenida", "kind": "D",
+     "dropped": "",
+     "steps": [{"say": "The ending matches the person: <em>-o</em> for him, <em>-a</em> for her.", "cards": [
+       {"f": {"stem": "¡Bienvenid", "opts": [["Him", "o!", "¡Bienvenido! · Welcome! (to a man)"], ["Her", "a!", "¡Bienvenida! · Welcome! (to a woman)"]]}}]}]},
+
+    {"ids": ["7578114a", "2ee7b356"], "title": "Disculpá, permiso", "kind": "A",
+     "dropped": "", "dup": "This tip is in unit 8 twice. Keep one.",
+     "steps": [{"say": "<em>Disculpá</em> gets attention. <em>Permiso</em> gets you past.", "cards": [
+       {"pill": ["Excuse me?", "q"], "es": "[Disculpá], ¿sos Martín?", "en": "Excuse me, are you Martín?"},
+       {"pill": ["Coming through", "p"], "es": "[Permiso].", "en": "Excuse me, coming through."}]}]},
+
+    {"ids": ["ff11688b", "4f51caae"], "title": "Soy estudiante", "kind": "L",
+     "dropped": "'Vos can go before or after the verb'. That's already the ¿Sos vos? tip.", "dup": "Two tips in unit 8 teach this same thing ('Soy estudiante, ¿sos turista?' and 'Soy turista — no un'). Keep one.",
+     "steps": [{"say": "Your role goes right after <em>soy</em>. No <em>un</em>.", "cards": [
+       {"es": "Soy [estudiante].", "en": "I'm a student."},
+       {"es": "¿Sos [turista]?", "en": "Are you a tourist?"}]}]},
+
+    {"ids": ["6620174b"], "title": "Soy, sos (review)", "kind": "D",
+     "dropped": "",
+     "steps": [{"say": "Quick review: <em>soy</em> is me, <em>sos</em> is you.", "cards": [
+       {"f": {"stem": "so", "opts": [["Yo", "y", "Soy Lucía, ¿y vos? · I'm Lucía, and you?"], ["Vos", "s", "¿Sos turista? · Are you a tourist?"]]}}]}]},
+
+    {"ids": ["e2dfe789"], "title": "The right hello (review)", "kind": "A",
+     "dropped": "",
+     "steps": [{"say": "Quick review: hi, bye and thanks.", "cards": [
+       {"pill": ["Hi", "s"], "es": "[Buen día]. / [Buenas].", "en": "Good morning. / Hi."},
+       {"pill": ["Bye", "p"], "es": "[Chau]. / [Hasta luego].", "en": "Bye. / See you."},
+       {"pill": ["Thanks", "q"], "es": "Gracias. — [De nada].", "en": "Thanks. — You're welcome."}]}]},
+
+    {"ids": ["88e0500d", "48324a75"], "title": "Me llamo, te llamás", "kind": "A",
+     "dropped": "", "dup": "This tip is in unit 10 twice, in two versions. Keep one.",
+     "steps": [{"say": "<em>Me llamo</em> is my name is. To ask: <em>¿cómo te llamás?</em>", "cards": [
+       {"pill": ["Me", "q"], "es": "[Me] llam[o] Sofi.", "en": "My name is Sofi."},
+       {"pill": ["You", "p"], "es": "¿Cómo [te] llam[ás]?", "en": "What's your name?"}]}]},
+
+    {"ids": ["3ddb4cb9"], "title": "Hablo, hablás", "kind": "D",
+     "dropped": "The odd ones (sé, sabés). They come later, in their own tip.",
+     "steps": [{"say": "<em>I</em> ends in <em>-o</em>. <em>Vos</em> puts the stress at the end.", "cards": [
+       {"f": {"stem": "habl", "opts": [["Yo", "o", "Hablo un poco · I speak a little"], ["Vos", "ás", "¿Hablás inglés? · Do you speak English?"]]}}]},
+      {"say": "<em>Me</em> and <em>te</em> go before the verb.", "cards": [
+       {"es": "No [te] entiendo.", "en": "I don't understand you."},
+       {"es": "¿[Me] entendés?", "en": "Do you understand me?"}]}]},
+
+    {"ids": ["1f4b9651"], "title": "Ask for help", "kind": "L",
+     "dropped": "'Hablo un poco' (it's in Hablo, hablás) and 'castellano'.",
+     "steps": [{"say": "Stuck? These get you help.", "cards": [
+       {"es": "¿Cómo se dice…?", "en": "How do you say…?"},
+       {"es": "¿Qué significa?", "en": "What does it mean?"},
+       {"es": "Más despacio, por favor.", "en": "Slower, please."}]}]}
+  ]
+}
