@@ -32,6 +32,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Slap } from '@/components/cheer-bits';
 import { EASE_OUT, IconButton, rise } from '@/components/onboarding-ui';
 import { Button } from '@/components/ui';
 import { billing } from '@/lib/billing';
@@ -428,13 +429,20 @@ export default function Paywall() {
           onLayout={(e) => measure({ view: e.nativeEvent.layout.height })}
           onContentSizeChange={(_, h) => measure({ content: h })}
           onScroll={(e) => measure({ y: e.nativeEvent.contentOffset.y })}>
-        {/* Three lines, each always on one line: it shrinks before it wraps. */}
+        {/* Three lines, each always on one line: it shrinks before it wraps. The
+            last is the rosa sticker from the welcome screen, so the promise she
+            started with is the one she pays for; it lands once, nothing more. */}
         <Animated.View entering={rise(0, reduced)} accessibilityRole="header" accessible accessibilityLabel={HERO.join(' ')}>
-          {HERO.map((line, i) => (
-            <Text key={line} style={[styles.hero, i === HERO.length - 1 ? styles.heroLast : null]} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>
+          {HERO.slice(0, 2).map((line) => (
+            <Text key={line} style={styles.hero} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>
               {line}
             </Text>
           ))}
+          <Slap delay={250} tilt={-2.5} style={styles.heroSticker}>
+            <Text style={styles.heroStickerText} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>
+              {HERO[2]}
+            </Text>
+          </Slap>
         </Animated.View>
 
         {creator ? (
@@ -830,8 +838,19 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
   topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 12, paddingTop: 4, minHeight: 44 },
   body: { paddingHorizontal: 20, paddingTop: 10, paddingBottom: 28, maxWidth: 520, width: '100%', alignSelf: 'center' },
-  hero: { ...font.display[900], fontSize: 31, lineHeight: 35, letterSpacing: -0.8, color: colors.ink },
-  heroLast: { color: colors.primary },
+  hero: { ...font.display[900], fontSize: 31, lineHeight: 35, letterSpacing: -0.8, color: colors.ink, textAlign: 'center' },
+  heroSticker: {
+    alignSelf: 'center',
+    maxWidth: '100%',
+    marginTop: 10,
+    marginBottom: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 16,
+    backgroundColor: colors.primary,
+    boxShadow: clay.surface,
+  },
+  heroStickerText: { ...font.display[900], fontSize: 21, lineHeight: 26, letterSpacing: -0.3, color: colors.onPrimary },
   sub: { ...type.body, flex: 1, fontSize: 16, lineHeight: 22, color: colors.muted },
   h2: { ...font.display[900], fontSize: 22, lineHeight: 27, letterSpacing: -0.3, color: colors.ink, marginTop: 30, marginBottom: 14 },
 

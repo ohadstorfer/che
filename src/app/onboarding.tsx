@@ -70,7 +70,8 @@ import {
   reminderLine,
   resetWinbackShown,
   saveAnswers,
-  speaksSpanish,
+  type Struggle,
+  struggleQuestion,
   type TryIt,
   tryIt,
   type Why,
@@ -93,23 +94,23 @@ import { clay, colors, font, pastel, radius, type } from '@/lib/theme';
 // where she starts, a moment that shows what makes Che different (tú → vos),
 // when she needs it and how much time she has — then the plan, visibly made
 // for her, which is the thing the account saves and the paywall unlocks.
-// Every answer gets a reply from him before she moves on, so a choice is a
-// line of conversation, not a form field.
+// He asks each question in his bubble, and the question stays put while she
+// picks: no reply per answer (2026-11-17).
 // ---------------------------------------------------------------------------
 
-type Step = 'name' | 'level' | 'why' | 'try' | 'goal' | 'building' | 'intro' | 'class' | 'streak' | 'notify' | 'account';
+type Step = 'name' | 'level' | 'why' | 'try' | 'struggle' | 'goal' | 'building' | 'intro' | 'class' | 'streak' | 'notify' | 'offer' | 'account';
 /** The order, by where notifications are asked (app_config `onboarding_notify_at`). */
 const ORDER: Record<NotifyAt, Step[]> = {
-  after_class: ['name', 'level', 'why', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'account'],
-  after_build: ['name', 'level', 'why', 'goal', 'building', 'notify', 'intro', 'class', 'streak', 'account'],
+  after_class: ['name', 'level', 'why', 'struggle', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'account'],
+  after_build: ['name', 'level', 'why', 'struggle', 'goal', 'building', 'notify', 'intro', 'class', 'streak', 'account'],
 };
 /** The questions, on the progress bar. The builder, the first class and its
  *  streak are moments with their own screens; the account sits past the bar.
  *  The "Make it Argentine" step ('try') is out of the flow for now: its screen
  *  and TryWord stay below, ready to go back in by adding 'try' after 'why'. */
-const BAR: Step[] = ['name', 'level', 'why', 'goal', 'notify'];
+const BAR: Step[] = ['name', 'level', 'why', 'struggle', 'goal', 'notify'];
 /** Full-screen steps: no back button or bar above them. */
-const BARE: Step[] = ['intro', 'class', 'streak'];
+const BARE: Step[] = ['intro', 'class', 'streak', 'offer'];
 /** Where back goes, where it isn't simply the step before: a moment (the
  *  builder, the class, the streak) is never gone back into. */
 const BACK: Record<NotifyAt, Partial<Record<Step, Step>>> = {
@@ -143,17 +144,15 @@ export default function Onboarding() {
     else pancho.play();
   }, [pancho, reduced]);
   // Dev only: ?step=streak opens on that step with sample answers, to try a
-  // late screen without playing everything before it.
-  const { step: devStep } = useLocalSearchParams<{ step?: Step }>();
+  // late screen without playing everything before it. ?step=class&part=done
+  // opens the first class at a part (slang, culture, pancho) or its end screen.
+  const { step: devStep, part: devPart } = useLocalSearchParams<{ step?: Step; part?: string }>();
   const jump = __DEV__ && devStep ? devStep : null;
   const [step, setStep] = useState<Step>(jump ?? 'name');
   const [dir, setDir] = useState<1 | -1>(1);
   const [a, setA] = useState<Partial<Answers>>(
     jump ? { minutes: 10, name: '', level: 'basics', why: 'trip', whys: ['trip'] } : { minutes: 10, name: '' },
   );
-  // The daily goal starts on 10 so the button works at once, but he only
-  // replies once she has actually touched it.
-  const [goalTouched, setGoalTouched] = useState(false);
   const posthog = usePostHog();
 
   useEffect(() => {
@@ -200,7 +199,14 @@ export default function Onboarding() {
     else go('account');
   };
   /** After the class's streak (or its skip): notifications, or the paywall if they came already. */
-  const afterClass = () => (notifyAt === 'after_class' ? go('notify') : void toPaywall());
+  /** The beat before the paywall. The clip is parked on the pour first, so the
+   *  loader never opens on a frame from somewhere else in the loop. */
+  const toOffer = () => {
+    pancho.pause();
+    pancho.currentTime = POUR_FROM;
+    go('offer');
+  };
+  const afterClass = () => (notifyAt === 'after_class' ? go('notify') : toOffer());
 
   // The class done: that's her first day of practice, so the streak starts
   // here (bump_streak, the same row every round writes). Her guest account was
@@ -235,7 +241,7 @@ export default function Onboarding() {
     void saveAnswers(answers);
     keepAnswers(answers);
     posthog?.capture('onboarding_reminder', { reminder, $set: { onboarding_reminder: reminder } });
-    if (notifyAt === 'after_class') void toPaywall();
+    if (notifyAt === 'after_class') toOffer();
     else next();
   };
   const showChrome = step !== 'building';
@@ -249,8 +255,10 @@ export default function Onboarding() {
           <SafeAreaView style={{ flex: 1 }} edges={['top']}>
             <FirstClassOpener onStart={() => go('class')} onSkip={afterClass} />
           </SafeAreaView>
+        ) : step === 'offer' ? (
+          <OfferLoading player={pancho} reduced={reduced} onDone={() => void toPaywall()} />
         ) : step === 'class' ? (
-          <FirstClassLesson level={a.level} onFinish={classDone} onClose={back} />
+          <FirstClassLesson level={a.level} part={jump ? devPart : undefined} onFinish={classDone} onClose={back} />
         ) : notifyAt === 'after_class' ? (
           <DayOneAsk answers={complete} reduced={reduced} onDone={notified} />
         ) : (
@@ -275,7 +283,7 @@ export default function Onboarding() {
             <NameStep name={a.name ?? ''} reduced={reduced} onChange={(name) => setA((cur) => ({ ...cur, name }))} onNext={next} />
           ) : step === 'level' ? (
             <Question
-              line={a.level ? (LEVEL.find((o) => o.value === a.level)?.react ?? '') : `How much Spanish do you know${nameTail(a)}?`}
+              line={`How much Spanish do you know${nameTail(a)}?`}
               answered={!!a.level}
               reduced={reduced}
               onNext={next}>
@@ -286,7 +294,7 @@ export default function Onboarding() {
               ))}
             </Question>
           ) : step === 'why' ? (
-            <Question line={whyLine(a)} answered={!!a.whys?.length} hint="Pick all that apply" reduced={reduced} onNext={next}>
+            <Question line="What brings you to Argentine Spanish?" answered={!!a.whys?.length} hint="Pick all that apply" reduced={reduced} onNext={next}>
               {WHY.map((o, i) => (
                 <Animated.View key={o.value} entering={rise(i + 1, reduced)}>
                   <Choice
@@ -307,11 +315,19 @@ export default function Onboarding() {
                 </Animated.View>
               ))}
             </Question>
+          ) : step === 'struggle' ? (
+            <StruggleStep
+              level={a.level ?? 'basics'}
+              picked={a.struggle ?? []}
+              reduced={reduced}
+              onChange={(struggle) => setA((cur) => ({ ...cur, struggle }))}
+              onNext={next}
+            />
           ) : step === 'try' ? (
             <TryItStep line={tryIt(complete)} reduced={reduced} onNext={next} />
           ) : step === 'goal' ? (
             <Question
-              line={goalTouched ? (MINUTES.find((o) => o.value === a.minutes)?.react ?? '') : 'How much time a day?'}
+              line="How much time a day?"
               answered
               reduced={reduced}
               onNext={next}>
@@ -324,7 +340,6 @@ export default function Onboarding() {
                     tag={o.label}
                     selected={a.minutes === o.value}
                     onPress={() => {
-                      setGoalTouched(true);
                       choose('minutes', o.value);
                     }}
                   />
@@ -353,6 +368,7 @@ export default function Onboarding() {
                       onboarding_level: complete.level,
                       onboarding_why: complete.why,
                       onboarding_whys: (complete.whys ?? []).join(','),
+                      onboarding_struggle: (complete.struggle ?? []).join(','),
                       onboarding_minutes: complete.minutes,
                       onboarding_notify_at: complete.notifyAt ?? NOTIFY_AT_DEFAULT,
                     };
@@ -374,19 +390,10 @@ export default function Onboarding() {
 
 // --- a question, asked by him ----------------------------------------------
 
-/** His line for the reasons question: the question, then his reply to the
- *  last pick, or one line for a mix. */
-function whyLine(a: Partial<Answers>): string {
-  const whys = a.whys ?? [];
-  if (!whys.length) return 'What brings you to Argentine Spanish?';
-  if (whys.length > 1) return 'Good mix. I’ll start with what matters most.';
-  const o = WHY.find((x) => x.value === whys[0])!;
-  return a.level && speaksSpanish(a.level) ? o.reactSpeaker : o.react;
-}
-
 /**
- * He asks in the bubble; once she answers, the bubble becomes his reply.
- * Continue waits for an answer.
+ * He asks in the bubble and the question stays there while she picks: the
+ * answers don't change what he says (2026-11-17, her call). Continue waits
+ * for an answer.
  */
 function Question({
   line,
@@ -406,7 +413,7 @@ function Question({
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
-        <Says line={line} small={answered && line.length > 36} reduced={reduced} />
+        <Says line={line} reduced={reduced} />
         {hint ? <Text style={styles.hint}>{hint}</Text> : null}
         <View style={{ gap: 18 }}>{children}</View>
       </ScrollView>
@@ -428,6 +435,7 @@ function Choice({
   tag,
   multi,
   selected,
+  detail,
   onPress,
 }: {
   label: string;
@@ -438,6 +446,8 @@ function Choice({
   tag?: string;
   multi?: boolean;
   selected: boolean;
+  /** Shown under the row once it is picked, behind an "IN POSTA" pill. */
+  detail?: string;
   onPress: () => void;
 }) {
   return (
@@ -449,6 +459,7 @@ function Choice({
       accessibilityRole={multi ? 'checkbox' : 'radio'}
       accessibilityState={multi ? { checked: selected } : { selected }}
       style={({ pressed }) => [styles.choice, selected && styles.choiceOn, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
+      <View style={styles.choiceRow}>
       <View style={[styles.coin, { backgroundColor: selected ? colors.card : tone }]}>
         {art ? (
           <Image source={ART[art]} style={styles.coinArt} contentFit="contain" accessible={false} />
@@ -474,6 +485,15 @@ function Choice({
       <View style={[styles.check, selected && styles.checkOn]}>
         {selected ? <MaterialCommunityIcons name="check-bold" size={15} color={colors.onPrimary} /> : null}
       </View>
+      </View>
+      {detail && selected ? (
+        <Animated.View entering={FadeIn.duration(200)} style={styles.choiceDetail}>
+          <View style={styles.postaPill}>
+            <Text style={styles.postaPillText}>IN POSTA</Text>
+          </View>
+          <Text style={styles.choiceDetailText}>{detail}</Text>
+        </Animated.View>
+      ) : null}
     </Pressable>
   );
 }
@@ -516,6 +536,123 @@ function Says({ pose, line, small }: { pose?: Pose; line: string; small?: boolea
         </SpeechBubble>
       </View>
     </View>
+  );
+}
+
+// --- offer: a short beat before the paywall ----------------------------------
+// Straight from the notifications ask to prices felt like asking for money out
+// of nowhere. Pancho pours his mate while the offer "gets ready", then the
+// paywall. Nothing is actually loading: it is a breath, so it stays short.
+//
+// Timed by the clip itself, not a timer: he fades in once the player is at the
+// pour (seeking takes a moment, and until then the view shows whatever frame
+// the loop was on), and at POUR_TO, before he snaps the thermos back up, the
+// clip pauses on that frame and the paywall comes.
+
+const POUR_FROM = 7;
+const POUR_TO = 10.2;
+const POUR_MS = (POUR_TO - POUR_FROM) * 1000;
+
+function OfferLoading({ player, reduced, onDone }: { player: VideoPlayer; reduced: boolean; onDone: () => void }) {
+  const [ready, setReady] = useState(reduced);
+  const shown = useSharedValue(reduced ? 1 : 0);
+  useEffect(() => {
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      player.pause();
+      onDone();
+    };
+    if (reduced) {
+      const t = setTimeout(finish, 2000);
+      return () => clearTimeout(t);
+    }
+    player.timeUpdateEventInterval = 0.05;
+    player.currentTime = POUR_FROM;
+    player.play();
+    let seen = false;
+    const sub = player.addListener('timeUpdate', ({ currentTime }) => {
+      if (!seen && currentTime >= POUR_FROM && currentTime < POUR_FROM + 1) {
+        seen = true;
+        setReady(true);
+        shown.value = withTiming(1, { duration: 180, easing: EASE_OUT });
+      }
+      if (seen && currentTime >= POUR_TO) finish();
+    });
+    // If the clip never reports (no video, a stalled player), don't strand her here.
+    const guard = setTimeout(finish, POUR_MS + 1500);
+    // No touching the player here: the paywall replaces this whole screen,
+    // and by then the player is released (a set on it throws).
+    return () => {
+      sub.remove();
+      clearTimeout(guard);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const fade = useAnimatedStyle(() => ({ opacity: shown.value }));
+  return (
+    <SafeAreaView style={styles.offer} edges={['top', 'bottom']}>
+      <Animated.View style={[styles.offerArt, fade]} accessible accessibilityRole="image" accessibilityLabel={`${MASCOT_NAME} pouring his mate`}>
+        {reduced ? (
+          <Image source={PANCHO} style={StyleSheet.absoluteFill} contentFit="contain" />
+        ) : (
+          <VideoView player={player} style={StyleSheet.absoluteFill} contentFit="contain" nativeControls={false} allowsPictureInPicture={false} surfaceType="textureView" />
+        )}
+      </Animated.View>
+      <Text style={styles.offerTitle} accessibilityRole="header" accessibilityLiveRegion="polite">
+        Getting your offer ready…
+      </Text>
+      <OfferBar ms={(reduced ? 2000 : POUR_MS) - 150} start={ready} />
+    </SafeAreaView>
+  );
+}
+
+/** The bar fills once, ending just before the paywall comes up. */
+const FILL_EASE = Easing.bezier(0.4, 0, 0.2, 1);
+function OfferBar({ ms, start }: { ms: number; start: boolean }) {
+  const t = useSharedValue(0.04);
+  useEffect(() => {
+    if (start) t.value = withTiming(1, { duration: ms, easing: FILL_EASE });
+  }, [ms, start, t]);
+  const a = useAnimatedStyle(() => ({ transform: [{ scaleX: t.value }] }));
+  return (
+    <View style={styles.offerTrack}>
+      <Animated.View style={[styles.offerFill, a]} />
+    </View>
+  );
+}
+
+// --- struggle: what got in the way, and what Posta does about it ------------
+
+function StruggleStep({
+  level,
+  picked,
+  reduced,
+  onChange,
+  onNext,
+}: {
+  level: Level;
+  picked: Struggle[];
+  reduced: boolean;
+  onChange: (picked: Struggle[]) => void;
+  onNext: () => void;
+}) {
+  const q = struggleQuestion(level);
+  const toggle = (v: Struggle) => {
+    tap();
+    // "Nothing" stands alone: picking it clears the rest, and the rest clear it.
+    if (picked.includes(v)) return onChange(picked.filter((x) => x !== v));
+    onChange(v === 'none' ? ['none'] : [...picked.filter((x) => x !== 'none'), v]);
+  };
+  return (
+    <Question line={q.en} answered={picked.length > 0} hint="Pick all that apply" reduced={reduced} onNext={onNext}>
+      {q.options.map((o, i) => (
+        <Animated.View key={o.value} entering={rise(i + 1, reduced)} layout={reduced ? undefined : LinearTransition.duration(220).easing(EASE_OUT)}>
+          <Choice label={o.label} tone={o.tone} art={o.art} multi selected={picked.includes(o.value)} detail={o.posta} onPress={() => toggle(o.value)} />
+        </Animated.View>
+      ))}
+    </Question>
   );
 }
 
@@ -1430,7 +1567,22 @@ const styles = StyleSheet.create({
   },
 
   // a choice
-  choice: { flexDirection: 'row', alignItems: 'center', gap: 14, minHeight: 64, paddingVertical: 13, paddingHorizontal: 16, borderRadius: 28, backgroundColor: colors.card, boxShadow: clay.surface },
+  choice: { minHeight: 64, justifyContent: 'center', paddingVertical: 13, paddingHorizontal: 16, borderRadius: 28, backgroundColor: colors.card, boxShadow: clay.surface },
+  choiceRow: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  // A picked struggle opens to what Posta does about it, under a dashed line.
+  choiceDetail: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 2,
+    borderStyle: 'dashed',
+    borderColor: 'rgba(58,42,32,0.25)',
+  },
+  choiceDetailText: { ...font.body[700], flex: 1, fontSize: 15.5, lineHeight: 21, color: colors.ink },
+  postaPill: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: radius.pill, backgroundColor: pastel.sage, borderWidth: 1.5, borderColor: colors.ink },
+  postaPillText: { ...font.body[800], fontSize: 11, letterSpacing: 1, color: colors.ink },
   choiceOn: { backgroundColor: pastel.butter },
   coin: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', boxShadow: clay.chip },
   coinArt: { width: 34, height: 34 },
@@ -1442,6 +1594,13 @@ const styles = StyleSheet.create({
   choiceTagText: { ...font.body[800], fontSize: 12, color: colors.ink },
   check: { width: 26, height: 26, borderRadius: 9, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card, borderWidth: 2, borderColor: colors.ink },
   checkOn: { backgroundColor: colors.primary, borderWidth: 0, boxShadow: clay.chip },
+
+  // offer
+  offer: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 32, backgroundColor: colors.bg },
+  offerArt: { width: 160, height: 220 },
+  offerTitle: { ...font.display[900], fontSize: 28, lineHeight: 32, letterSpacing: -0.4, color: colors.ink, textAlign: 'center', marginTop: 22 },
+  offerTrack: { width: '100%', height: 16, marginTop: 22, borderRadius: radius.pill, backgroundColor: colors.card, borderWidth: 2.5, borderColor: colors.ink, overflow: 'hidden' },
+  offerFill: { flex: 1, backgroundColor: colors.primary, transformOrigin: 'left' },
 
   // struggle
   hint: { ...font.body[700], fontSize: 14, color: colors.muted, marginLeft: 4, marginBottom: 8 },

@@ -3,7 +3,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Alert, type ImageSourcePropType, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, type ImageSourcePropType, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -21,12 +21,14 @@ import Animated, {
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CultureGlosses, type Fact, FactCard } from '@/app/culture-class';
+import { In, Rays, Slap } from '@/components/cheer-bits';
 import { ExerciseFrame, PageColorContext, type Verdict } from '@/components/exercise-frame';
 import { AudioPad, Choices, Exercise, PlayButton } from '@/components/exercises';
 import { POSE } from '@/components/mascot';
 import { Button } from '@/components/ui';
 import { WordIntro } from '@/components/word-intro';
 import { CultureOpener, SlangOpener } from '@/components/slang-opener';
+import { OutlinedHeadline } from '@/components/sticker';
 import { type ArWord, type PackItem, arPacks, buildPackRound, decoyWords, toForm as arForm, toGapForm } from '@/lib/argentine';
 import { playAudio, stopAudio } from '@/lib/audio';
 import fixture from '@/lib/first-class.json';
@@ -176,7 +178,7 @@ export function FirstClassLesson({
   onFinish,
   onClose,
 }: {
-  /** Opens the class at that part (slang, culture, pancho), for reviewing it. */
+  /** Opens the class at that part (slang, culture, pancho), or on its end screen (done), for reviewing it. */
   part?: string;
   /** Her answer in onboarding: how fast Pancho talks on the call. */
   level?: Level;
@@ -188,7 +190,7 @@ export function FirstClassLesson({
 }) {
   const content = useContent();
   const [at, setAt] = useState(() => Math.max(SCREENS.findIndex((x) => x.part === part), 0));
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(part === 'done');
   const [run, setRun] = useState(0);
   /** How far into the current screen she is, where one screen is a whole round (the slang class). */
   const [sub, setSub] = useState(0);
@@ -196,7 +198,7 @@ export function FirstClassLesson({
   const [butter, setButter] = useState(false);
   const screen = SCREENS[at];
   // The page takes the opener's colour while one is up: butter for slang, peach for culture.
-  const tint = screen.id === 'culture-intro' ? pastel.peach : butter ? pastel.butter : null;
+  const tint = done ? pastel.butter : screen.id === 'culture-intro' ? pastel.peach : butter ? pastel.butter : null;
   useStatusBarColor(tint ?? colors.bg);
 
   const next = () => {
@@ -943,58 +945,84 @@ function CallAudio({ on, onPlay }: { on: 'play' | 'slow' | null; onPlay: (how: '
 }
 
 // --- 9. lesson complete -------------------------------------------------------
+// A festejo, like the cheer screens: the page is butter, the rays turn behind
+// Pancho, "First class done!" slaps down as a sticker and the four parts land
+// around him one by one, a tap each. His bubble says, gently, that this was a
+// taste: in the course each part has its own full classes.
 
-const STAMPS: { part: Part; label: string; icon: React.ComponentProps<typeof Ionicons>['name'] }[] = [
-  { part: 'class', label: 'Exercise', icon: 'school' },
-  { part: 'slang', label: 'Slang', icon: 'chatbubbles' },
-  { part: 'culture', label: 'Culture', icon: 'earth' },
-  { part: 'pancho', label: 'Speaking', icon: 'call' },
+const STICKERS: {
+  part: Part;
+  icon: React.ComponentProps<typeof Ionicons>['name'];
+  tilt: number;
+  spot: { left?: number; right?: number; top: number };
+}[] = [
+  { part: 'class', icon: 'school', tilt: -14, spot: { left: 18, top: 6 } },
+  { part: 'slang', icon: 'chatbubbles', tilt: 12, spot: { right: 18, top: 16 } },
+  { part: 'culture', icon: 'earth', tilt: 10, spot: { left: 6, top: 150 } },
+  { part: 'pancho', icon: 'call', tilt: -10, spot: { right: 8, top: 160 } },
 ];
-const TILT = ['-7deg', '5deg', '6deg', '-5deg'];
+const STICKER_AT = 600;
+const STICKER_GAP = 110;
 
 function Complete({ onAgain, onClose, onFinish }: { onAgain?: () => void; onClose: () => void; onFinish: () => void }) {
   const reduced = useReducedMotion();
   const bottom = useSafeAreaInsets().bottom;
-  const fired = useRef(false);
+  const { width, height } = useWindowDimensions();
+  const raySize = Math.max(width, height) * 1.4;
   useEffect(() => {
-    if (!fired.current) success();
-    fired.current = true;
+    success();
+    if (reduced) return;
+    // One small tap for each sticker as it lands.
+    const taps = STICKERS.map((_, k) => setTimeout(tap, STICKER_AT + 120 + k * STICKER_GAP));
+    return () => taps.forEach(clearTimeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
-      <ScrollView contentContainerStyle={styles.doneBody}>
-        <Text style={styles.doneKicker}>LESSON COMPLETE</Text>
-        <Text style={styles.doneTitle}>Your first class: at the café</Text>
-        <Text style={styles.doneLine}>You ordered, spoke like a porteño, learned the slang and what an asado really is. All in four minutes.</Text>
-        <View style={styles.stamps}>
-          {STAMPS.map((s, i) => (
-            <Animated.View
-              key={s.part}
-              entering={reduced ? FadeIn.duration(150) : ZoomIn.duration(300).delay(150 + i * 140).easing(EASE_OUT)}
-              style={[styles.stamp, { transform: [{ rotate: TILT[i] }] }]}>
-              <View style={[styles.stampDisc, { backgroundColor: PARTS[s.part].color }]}>
-                <Ionicons name={s.icon} size={30} color={s.part === 'class' ? colors.onPrimary : colors.ink} />
-              </View>
-              <Text style={styles.stampLabel}>{s.label}</Text>
-              <Text style={styles.stampSub}>DONE</Text>
-            </Animated.View>
-          ))}
-        </View>
-      </ScrollView>
-      <View style={[styles.doneDock, { paddingBottom: 20 + bottom }]}>
-        <Button title="Continue" onPress={onFinish} />
-        {onAgain ? (
-          <View style={{ flexDirection: 'row', gap: 10 }}>
-            <View style={{ flex: 1 }}>
-              <Button title="Play again" variant="secondary" small onPress={onAgain} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <Button title="Back to admin" variant="ghost" small onPress={onClose} />
-            </View>
-          </View>
-        ) : null}
+    <View style={styles.doneFull}>
+      {/* The rays turn around Pancho, about 40% down the screen. */}
+      <View
+        pointerEvents="none"
+        style={{ position: 'absolute', width: raySize, height: raySize, left: (width - raySize) / 2, top: height * 0.4 - raySize / 2 }}>
+        <Rays size={raySize} color="rgba(255,249,243,0.55)" />
       </View>
-    </SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }} edges={['top', 'left', 'right']}>
+        <ScrollView contentContainerStyle={styles.doneBody} bounces={false}>
+          <Text style={styles.doneKicker}>LESSON COMPLETE</Text>
+          <Slap delay={150} tilt={0} style={styles.doneHeadline}>
+            <OutlinedHeadline small="First class" big="done!" fill={colors.card} center />
+          </Slap>
+          <View style={styles.doneStage}>
+            <In delay={300} style={styles.donePancho}>
+              <Image source={POSE.cafe} style={styles.donePanchoImg} contentFit="contain" accessibilityLabel="Pancho" />
+            </In>
+            {STICKERS.map((s, i) => (
+              <Slap key={s.part} delay={STICKER_AT + i * STICKER_GAP} tilt={s.tilt} style={[styles.doneSticker, s.spot, { backgroundColor: PARTS[s.part].color }]}>
+                <Ionicons name={s.icon} size={28} color={s.part === 'class' ? colors.onPrimary : colors.ink} accessibilityLabel={PARTS[s.part].label} />
+              </Slap>
+            ))}
+          </View>
+          <In delay={1050} style={styles.doneBubble}>
+            <Text style={styles.doneBubbleTitle}>You nailed it!</Text>
+            <Text style={styles.doneBubbleLine}>
+              Your first taste of Argentine Spanish. In your course, exercises, slang, culture and speaking each get their own full classes.
+            </Text>
+          </In>
+        </ScrollView>
+        <View style={[styles.doneDock, { paddingBottom: 20 + bottom }]}>
+          <Button title="Continue" onPress={onFinish} />
+          {onAgain ? (
+            <View style={{ flexDirection: 'row', gap: 10 }}>
+              <View style={{ flex: 1 }}>
+                <Button title="Play again" variant="secondary" small onPress={onAgain} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Button title="Back to admin" variant="ghost" small onPress={onClose} />
+              </View>
+            </View>
+          ) : null}
+        </View>
+      </SafeAreaView>
+    </View>
   );
 }
 
@@ -1139,25 +1167,28 @@ const styles = StyleSheet.create({
   micNote: { ...font.body[600], fontSize: 12, color: colors.muted, textAlign: 'center' },
   liveLink: { ...font.body[800], fontSize: 13, color: colors.primaryDark, textAlign: 'center', paddingVertical: 6 },
 
-  doneBody: { padding: 24, paddingTop: 40, alignItems: 'center', gap: 12 },
+  doneFull: { flex: 1, backgroundColor: pastel.butter, overflow: 'hidden' },
+  doneBody: { flexGrow: 1, paddingHorizontal: 24, paddingTop: 28, paddingBottom: 12, alignItems: 'center' },
   doneKicker: { ...font.body[800], fontSize: 13, letterSpacing: 1.6, color: colors.primaryDark },
-  doneTitle: { ...font.display[900], fontSize: 32, lineHeight: 36, letterSpacing: -0.5, color: colors.ink, textAlign: 'center' },
-  doneLine: { ...font.body[600], fontSize: 17, lineHeight: 24, color: colors.muted, textAlign: 'center', maxWidth: 320 },
-  stamps: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 18, marginTop: 24, maxWidth: 340 },
-  stamp: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    borderWidth: 3,
-    borderStyle: 'dashed',
-    borderColor: colors.accent,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 4,
+  doneHeadline: { width: '100%', maxWidth: 390, marginTop: 10 },
+  doneStage: { width: '100%', maxWidth: 340, height: 250, marginTop: 6 },
+  donePancho: { position: 'absolute', left: 0, right: 0, top: 24, alignItems: 'center' },
+  donePanchoImg: { width: 190, height: 210 },
+  doneSticker: { position: 'absolute', width: 62, height: 62, borderRadius: 31, alignItems: 'center', justifyContent: 'center', boxShadow: clay.button },
+  doneBubble: {
+    width: '100%',
+    maxWidth: 330,
+    marginTop: 8,
+    paddingHorizontal: 18,
+    paddingVertical: 14,
+    borderRadius: radius.md,
     backgroundColor: colors.card,
+    boxShadow: clay.surface,
+    alignItems: 'center',
+    gap: 4,
   },
-  stampDisc: { width: 56, height: 56, borderRadius: 28, alignItems: 'center', justifyContent: 'center', boxShadow: clay.chip },
-  stampLabel: { ...font.display[800], fontSize: 20, color: colors.accent },
-  stampSub: { ...font.body[800], fontSize: 10, letterSpacing: 2, color: colors.accent },
+  doneBubbleTitle: { ...font.display[800], fontSize: 21, color: colors.ink, textAlign: 'center' },
+  // Ink, not muted: on the butter page the muted brown read as faint.
+  doneBubbleLine: { ...font.body[600], fontSize: 17, lineHeight: 24, color: colors.ink, textAlign: 'center' },
   doneDock: { paddingHorizontal: 20, paddingTop: 12, gap: 10 },
 });

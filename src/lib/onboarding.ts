@@ -195,6 +195,8 @@ export interface StruggleOption {
   art: Art;
   tone: string;
   react: string;
+  /** What Posta does about it: shown on the card once she picks it ("IN POSTA"). */
+  posta: string;
 }
 
 /** A beginner has no "before"; a Spanish speaker has a different problem. */
@@ -203,32 +205,32 @@ export function struggleQuestion(level: Level): { en: string; options: StruggleO
     return {
       en: 'What worries you about starting?',
       options: [
-        { value: 'speak', label: 'Speaking out loud', art: 'phone', tone: pastel.sky, react: 'With me, nobody is listening.' },
-        { value: 'follow', label: 'Understanding real people', art: 'gramophone', tone: pastel.lav, react: 'Real voices from lesson 1, slowed down.' },
-        { value: 'kept', label: 'Finding the time', art: 'mate', tone: pastel.sage, react: 'That’s why it’s 10 minutes.' },
-        { value: 'bored', label: 'Getting bored', art: 'book', tone: pastel.peach, react: 'Then we keep it short, and about you.' },
-        { value: 'none', label: 'Nothing. I’m ready', art: 'flag', tone: pastel.butter, react: '¡Esa! Let’s go.' },
+        { value: 'speak', label: 'Speaking out loud', art: 'phone', tone: pastel.sky, react: 'With me, nobody is listening.', posta: 'Calls with Pancho, where mistakes are fine' },
+        { value: 'follow', label: 'Understanding real people', art: 'gramophone', tone: pastel.lav, react: 'Real voices from lesson 1, slowed down.', posta: 'Real porteño audio, slow first, then full speed' },
+        { value: 'kept', label: 'Finding the time', art: 'mate', tone: pastel.sage, react: 'That’s why it’s 10 minutes.', posta: '10 minutes a day, and Pancho knocks' },
+        { value: 'bored', label: 'Getting bored', art: 'book', tone: pastel.peach, react: 'Then we keep it short, and about you.', posta: 'Short classes about your life, with slang and culture' },
+        { value: 'none', label: 'Honestly? Nothing. Let’s go', art: 'flag', tone: pastel.butter, react: '¡Esa! Let’s go.', posta: 'We start right where you are' },
       ],
     };
   if (level === 'basics')
     return {
       en: 'What got in the way before?',
       options: [
-        { value: 'speak', label: 'I freeze when I speak', art: 'phone', tone: pastel.sky, react: 'With me you can mess up. I fix one thing.' },
-        { value: 'follow', label: 'I can’t follow real speech', art: 'gramophone', tone: pastel.lav, react: 'You get real porteño audio from lesson 1.' },
-        { value: 'wrong', label: 'I learned textbook Spanish', art: 'book', tone: pastel.peach, react: 'It wasn’t you. We swap it, word by word.' },
-        { value: 'kept', label: 'I never kept it up', art: 'mate', tone: pastel.sage, react: 'That’s why it’s 10 minutes, and I knock.' },
-        { value: 'none', label: 'Nothing. Just teach me', art: 'flag', tone: pastel.butter, react: 'Dale. We build on what you have.' },
+        { value: 'speak', label: 'I freeze when I speak', art: 'phone', tone: pastel.sky, react: 'With me you can mess up. I fix one thing.', posta: 'Calls with Pancho, where mistakes are fine' },
+        { value: 'follow', label: 'I can’t follow real speech', art: 'gramophone', tone: pastel.lav, react: 'You get real porteño audio from lesson 1.', posta: 'Real porteño audio, slow first, then full speed' },
+        { value: 'wrong', label: 'I learned textbook Spanish', art: 'book', tone: pastel.peach, react: 'It wasn’t you. We swap it, word by word.', posta: 'Textbook words swapped for the local ones' },
+        { value: 'kept', label: 'I never kept it up', art: 'mate', tone: pastel.sage, react: 'That’s why it’s 10 minutes, and I knock.', posta: '10 minutes a day, and Pancho knocks' },
+        { value: 'none', label: 'Honestly? Nothing. Let’s go', art: 'flag', tone: pastel.butter, react: 'Dale. We build on what you have.', posta: 'We start right where you are' },
       ],
     };
   return {
     en: 'What do you struggle with the most?',
     options: [
-      { value: 'follow', label: 'Following fast speech', art: 'gramophone', tone: pastel.lav, react: 'It’s the sh and the slang. We train your ear.' },
-      { value: 'wrong', label: 'I sound like a textbook', art: 'book', tone: pastel.peach, react: 'It’s vos, the sh and about 30 words.' },
-      { value: 'slang', label: 'The slang loses me', art: 'shout', tone: pastel.butter, react: 'Lunfardo has its own section.' },
-      { value: 'english', label: 'They switch to English', art: 'chat', tone: pastel.sky, react: 'They stop when you answer with vos.' },
-      { value: 'none', label: 'Nothing yet', art: 'flag', tone: pastel.sage, react: 'Dale. Straight to sounding porteño.' },
+      { value: 'follow', label: 'Following fast speech', art: 'gramophone', tone: pastel.lav, react: 'It’s the sh and the slang. We train your ear.', posta: 'Real porteño audio, slow first, then full speed' },
+      { value: 'wrong', label: 'I sound like a textbook', art: 'book', tone: pastel.peach, react: 'It’s vos, the sh and about 30 words.', posta: 'Textbook words swapped for the local ones' },
+      { value: 'slang', label: 'The slang loses me', art: 'shout', tone: pastel.butter, react: 'Lunfardo has its own section.', posta: 'The slang gets its own classes, word by word' },
+      { value: 'english', label: 'They switch to English', art: 'chat', tone: pastel.sky, react: 'They stop when you answer with vos.', posta: 'Vos from day one, so you sound like one of them' },
+      { value: 'none', label: 'Honestly? Nothing. Let’s go', art: 'flag', tone: pastel.sage, react: 'Dale. Straight to sounding porteño.', posta: 'We start right where you are' },
     ],
   };
 }

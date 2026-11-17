@@ -19,14 +19,14 @@ const BOARD = 960;
 const fit = (text: string, max: number, perChar: number) => Math.min(max, Math.floor((BOARD - 20) / (text.length * perChar)));
 
 /** One outlined line. The outline is its own text underneath, so its corners stay round on every platform. */
-function Line({ text, size, y, stroke, spacing = 0 }: { text: string; size: number; y: number; stroke: number; spacing?: number }) {
-  const shared = { x: stroke / 2, y, fontFamily: DISPLAY, fontSize: size, letterSpacing: spacing };
+function Line({ text, size, y, stroke, spacing = 0, fill, center }: { text: string; size: number; y: number; stroke: number; spacing?: number; fill: string; center?: boolean }) {
+  const shared = { x: center ? BOARD / 2 : stroke / 2, y, fontFamily: DISPLAY, fontSize: size, letterSpacing: spacing, textAnchor: center ? ('middle' as const) : ('start' as const) };
   return (
     <>
       <SvgText {...shared} fill={colors.ink} stroke={colors.ink} strokeWidth={stroke} strokeLinejoin="round" strokeLinecap="round">
         {text}
       </SvgText>
-      <SvgText {...shared} fill={pastel.butter}>
+      <SvgText {...shared} fill={fill}>
         {text}
       </SvgText>
     </>
@@ -39,7 +39,23 @@ function Line({ text, size, y, stroke, spacing = 0 }: { text: string; size: numb
  * width; `sizeLike` sizes the big line as if it were that longer word, so two
  * tabs' headlines can share one letter size.
  */
-export function OutlinedHeadline({ small, big, sizeLike, style }: { small: string; big: string; sizeLike?: string; style?: StyleProp<ViewStyle> }) {
+export function OutlinedHeadline({
+  small,
+  big,
+  sizeLike,
+  fill = pastel.butter,
+  center,
+  style,
+}: {
+  small: string;
+  big: string;
+  sizeLike?: string;
+  /** The letters' colour inside the outline: butter, or card on a butter page. */
+  fill?: string;
+  /** Both lines centred on the width, for a headline standing alone in the middle of a screen. */
+  center?: boolean;
+  style?: StyleProp<ViewStyle>;
+}) {
   const a = small.toUpperCase();
   const b = big.toUpperCase();
   const sizeA = fit(a, 88, 0.56);
@@ -52,8 +68,8 @@ export function OutlinedHeadline({ small, big, sizeLike, style }: { small: strin
       accessibilityLabel={`${small} ${big}`}
       style={[{ width: '100%', aspectRatio: BOARD / height, transform: [{ rotate: '-3deg' }] }, style]}>
       <Svg width="100%" height="100%" viewBox={`0 0 ${BOARD} ${height}`}>
-        <Line text={a} size={sizeA} y={sizeA * 0.86} stroke={16} />
-        <Line text={b} size={sizeB} y={sizeA * 1.02 + sizeB * 0.84 + 6} stroke={22} spacing={-4} />
+        <Line text={a} size={sizeA} y={sizeA * 0.86} stroke={16} fill={fill} center={center} />
+        <Line text={b} size={sizeB} y={sizeA * 1.02 + sizeB * 0.84 + 6} stroke={22} spacing={-4} fill={fill} center={center} />
       </Svg>
     </View>
   );
