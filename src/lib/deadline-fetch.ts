@@ -12,7 +12,7 @@ const ANSWERED_MS = 3 * 60_000;
  *  waits as long as any request, so a read that is merely slow still lands. */
 const READ_TRIES_MS = [6000, 6000, NO_ANSWER_MS];
 
-const isRead = (target: string, init?: RequestInit) => {
+export const isRead = (target: string, init?: RequestInit) => {
   const method = (init?.method ?? 'GET').toUpperCase();
   return target.includes('/rest/v1/') && (method === 'GET' || method === 'HEAD');
 };

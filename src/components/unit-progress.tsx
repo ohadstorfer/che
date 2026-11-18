@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image } from 'expo-image';
+import { type ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -16,7 +17,8 @@ import { Button } from '@/components/ui';
 import { useAuth } from '@/lib/auth';
 import { loadCourse, loadProgress } from '@/lib/course';
 import { success } from '@/lib/haptics';
-import { clay, colors, font, gradients } from '@/lib/theme';
+import { clay, colors, font, gradients, pastel } from '@/lib/theme';
+import { unitArt } from '@/lib/unit-art';
 
 // ---------------------------------------------------------------------------
 // UnitProgress — how a lesson ends once the day's streak is already in.
@@ -37,6 +39,10 @@ const LAND = 260; // when the new pip fills
 
 export interface UnitStanding {
   title: string;
+  /** "Section 1 · Unit 2": where the unit sits in the course. */
+  place: string;
+  /** The unit's own picture. */
+  art: ImageSourcePropType;
   /** One per class of the unit, in road order. */
   steps: { done: boolean; fresh: boolean }[];
   done: number;
@@ -66,7 +72,15 @@ export function useUnitStanding(lessonId: string | null | undefined, enabled: bo
         const count = steps.filter((s) => s.done).length;
         // Nothing finished is nothing to cheer: a preview, or a check not passed.
         if (!own.length || count === 0) return setStanding(null);
-        setStanding({ title: own[0].unit.title_en, steps, done: count, total: own.length });
+        const { unit, section } = own[0];
+        setStanding({
+          title: unit.title_en,
+          place: `Section ${section.ordinal} · Unit ${unit.ordinal}`,
+          art: unitArt(unit.slug),
+          steps,
+          done: count,
+          total: own.length,
+        });
       })
       .catch(() => live && setStanding(null));
     return () => {
@@ -126,7 +140,7 @@ export function UnitProgress({
   onNext: () => void;
 }) {
   const reduced = useReducedMotion();
-  const { title, steps, done, total } = standing;
+  const { title, place, art, steps, done, total } = standing;
   const left = total - done;
 
   useEffect(() => {
@@ -135,37 +149,44 @@ export function UnitProgress({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const eyebrow = useEntrance(0, 10);
-  const count = useEntrance(STEP, 10);
-  const row = useEntrance(STEP * 2, 10);
+  const card = useEntrance(0, 14);
   const line = useEntrance(STEP * 3, 10);
   const action = useEntrance(STEP * (stats ? 6 : 4), 10);
 
-  const words = left === 0 ? 'Unit complete!' : left === 1 ? 'Just 1 left!' : `Only ${left} left!`;
+  const chip = left === 0 ? 'Unit done!' : `${left} to go`;
+  const tail = left === 0 ? 'On to the next one' : left === 1 ? 'One more and it’s yours' : 'And the unit is yours';
 
   return (
     <View style={styles.wrap}>
-      <Animated.Text style={[styles.eyebrow, eyebrow]} numberOfLines={2}>
-        {title}
-      </Animated.Text>
-
       <Animated.View
-        style={[styles.countRow, count]}
+        style={[styles.card, card]}
         accessible
         accessibilityRole="header"
-        accessibilityLabel={`${done} of ${total} classes done in your unit`}>
-        <Text style={styles.count}>{done}</Text>
-        <Text style={styles.total}>/{total}</Text>
+        accessibilityLabel={`${place}, ${title}. ${done} of ${total} classes done`}>
+        <Image source={art} style={styles.art} contentFit="contain" accessible={false} />
+        <View style={styles.place}>
+          <Text style={styles.placeText}>{place}</Text>
+        </View>
+        <Text style={styles.title} numberOfLines={3}>
+          {title}
+        </Text>
+        <View style={styles.countRow}>
+          <Text style={styles.count}>{done}</Text>
+          <Text style={styles.total}>of {total} classes</Text>
+        </View>
+        <View style={styles.pips}>
+          {steps.map((s, i) => (
+            <Pip key={i} done={s.done} fresh={s.fresh} />
+          ))}
+        </View>
       </Animated.View>
-      <Animated.Text style={[styles.caption, count]}>classes in your unit</Animated.Text>
 
-      <Animated.View style={[styles.pips, row]} accessible={false}>
-        {steps.map((s, i) => (
-          <Pip key={i} done={s.done} fresh={s.fresh} />
-        ))}
+      <Animated.View style={[styles.line, line]}>
+        <View style={styles.chip}>
+          <Text style={styles.chipText}>{chip}</Text>
+        </View>
+        <Text style={styles.tail}>{tail}</Text>
       </Animated.View>
-
-      <Animated.Text style={[styles.words, line]}>{words}</Animated.Text>
 
       {stats ? <RoundStats stats={stats} delay={STEP * 4} /> : null}
 
@@ -205,39 +226,68 @@ export function LessonEnd({
 }
 
 const styles = StyleSheet.create({
-  wrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12, padding: 24 },
-  eyebrow: { ...font.display[800], fontSize: 18, color: colors.accent, letterSpacing: -0.2, textAlign: 'center' },
-  countRow: { flexDirection: 'row', alignItems: 'baseline' },
+  wrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 22, padding: 24, paddingTop: 72 },
+  /** The unit as a sticker: peach, the thick ink outline, the hard shadow. */
+  card: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: pastel.peach,
+    borderRadius: 28,
+    borderWidth: 2.5,
+    borderColor: colors.ink,
+    boxShadow: `5px 5px 0 ${colors.ink}`,
+    padding: 22,
+    paddingBottom: 24,
+    gap: 12,
+  },
+  /** The unit's picture, stuck on the card's corner and spilling over it. */
+  art: { position: 'absolute', right: -14, top: -62, width: 140, height: 140, transform: [{ rotate: '6deg' }] },
+  place: {
+    alignSelf: 'flex-start',
+    backgroundColor: colors.card,
+    borderWidth: 2,
+    borderColor: colors.ink,
+    borderRadius: 999,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+  },
+  placeText: { ...font.body[800], fontSize: 13, color: colors.ink },
+  title: { ...font.display[900], fontSize: 27, lineHeight: 31, letterSpacing: -0.4, color: colors.ink, maxWidth: 215 },
+  countRow: { flexDirection: 'row', alignItems: 'baseline', gap: 6, marginTop: 2 },
   count: {
-    ...font.display[800],
-    fontSize: 96,
-    lineHeight: 100,
-    letterSpacing: -3,
+    ...font.display[900],
+    fontSize: 64,
+    lineHeight: 68,
+    letterSpacing: -2,
     color: colors.primary,
     fontVariant: ['tabular-nums'],
   },
-  total: { ...font.display[800], fontSize: 44, letterSpacing: -1, color: colors.muted, fontVariant: ['tabular-nums'] },
-  caption: { ...font.body[700], fontSize: 16, color: colors.muted, marginTop: -8 },
-  pips: { flexDirection: 'row', gap: 6, width: '100%', maxWidth: 320, marginTop: 16 },
+  total: { ...font.display[800], fontSize: 24, letterSpacing: -0.4, color: colors.inkOnWash },
+  pips: { flexDirection: 'row', gap: 5 },
   pip: {
     flex: 1,
     height: 16,
     borderRadius: 8,
-    backgroundColor: colors.trough,
-    boxShadow: clay.trough,
+    backgroundColor: colors.card,
+    borderWidth: 2,
+    borderColor: colors.ink,
+    overflow: 'hidden',
   },
-  pipFill: { borderRadius: 8 },
-  pipFace: { borderRadius: 8 },
-  words: {
-    ...font.display[800],
-    fontSize: 30,
-    lineHeight: 34,
-    letterSpacing: -0.5,
-    color: colors.ink,
-    textAlign: 'center',
-    marginTop: 12,
+  pipFill: { borderRadius: 6 },
+  pipFace: { borderRadius: 6 },
+  line: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, flexWrap: 'wrap' },
+  chip: {
+    backgroundColor: pastel.butter,
+    borderWidth: 2,
+    borderColor: colors.ink,
+    borderRadius: 999,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    boxShadow: `3px 3px 0 ${colors.ink}`,
   },
+  chipText: { ...font.display[800], fontSize: 18, color: colors.ink },
+  tail: { ...font.body[700], fontSize: 16, color: colors.muted },
   // `stretch` would override the wrap's centring, and maxWidth then leaves the
   // button pinned to the left edge. Centre it explicitly.
-  actions: { alignSelf: 'center', gap: 8, maxWidth: 320, width: '100%', marginTop: 12 },
+  actions: { alignSelf: 'center', gap: 8, maxWidth: 360, width: '100%', marginTop: 8 },
 });

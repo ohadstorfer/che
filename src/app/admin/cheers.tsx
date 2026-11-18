@@ -4,9 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { type Cheer, LessonCheer } from '@/components/lesson-cheer';
 import { LessonComplete } from '@/components/lesson-complete';
+import { UnitProgress, type UnitStanding } from '@/components/unit-progress';
 import { PerfectLesson } from '@/components/perfect-lesson';
 import { Button } from '@/components/ui';
 import { CHEERS } from '@/lib/cheer-deck';
+import { loadCourse } from '@/lib/course';
+import { unitArt } from '@/lib/unit-art';
 import { colors, font } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
@@ -21,12 +24,49 @@ export default function CheerGallery() {
   const [cheer, setCheer] = useState<Cheer | null>(null);
   const [all, setAll] = useState(false);
   const [end, setEnd] = useState<'perfect' | 'complete' | 'complete-perfect' | null>(null);
+  const [unitAt, setUnitAt] = useState<number | null>(null);
+  const [standing, setStanding] = useState<UnitStanding | null>(null);
   const c = CHEERS[at];
+  /** The 3-of-8 screen for the nth unit of the course, n classes done, so every unit's picture can be looked over. */
+  const showUnit = async (n: number) => {
+    const course = await loadCourse();
+    const i = (n + course.units.length) % course.units.length;
+    const unit = course.units[i];
+    const own = course.path.filter((l) => l.unit.id === unit.id);
+    const done = 1 + (i % own.length);
+    setUnitAt(i);
+    setStanding({
+      title: unit.title_en,
+      place: `Section ${own[0].section.ordinal} · Unit ${unit.ordinal}`,
+      art: unitArt(unit.slug),
+      steps: own.map((_, k) => ({ done: k < done, fresh: k === done - 1 })),
+      done,
+      total: own.length,
+    });
+  };
   const play = (i: number) => {
     setAt(i);
     setCheer({ design: CHEERS[i], count: RUNS[CHEERS[i].when], id: Date.now() });
   };
 
+  if (standing && unitAt !== null) {
+    return (
+      <SafeAreaView style={styles.safe}>
+        <View style={styles.row}>
+          <Pressable style={styles.step} onPress={() => showUnit(unitAt - 1)}>
+            <Text style={styles.stepText}>‹ Prev unit</Text>
+          </Pressable>
+          <Pressable style={styles.step} onPress={() => setStanding(null)}>
+            <Text style={styles.stepText}>Close</Text>
+          </Pressable>
+          <Pressable style={styles.step} onPress={() => showUnit(unitAt + 1)}>
+            <Text style={styles.stepText}>Next unit ›</Text>
+          </Pressable>
+        </View>
+        <UnitProgress key={unitAt} standing={standing} onNext={() => showUnit(unitAt + 1)} />
+      </SafeAreaView>
+    );
+  }
   if (end === 'perfect') return <PerfectLesson onNext={() => setEnd(null)} />;
   if (end) {
     return (
@@ -78,6 +118,7 @@ export default function CheerGallery() {
         />
         <Button title="Perfect lesson" variant="secondary" onPress={() => setEnd('perfect')} />
         <Button title="Lesson complete" variant="secondary" onPress={() => setEnd('complete')} />
+        <Button title="Unit progress (3 of 8)" variant="secondary" onPress={() => showUnit(unitAt ?? 0)} />
         <Button title="Lesson complete (perfect)" variant="secondary" onPress={() => setEnd('complete-perfect')} />
       </View>
       <LessonCheer

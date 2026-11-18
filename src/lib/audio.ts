@@ -810,7 +810,7 @@ export function playAudio(path: string, onEnd?: OnEnd, rate = 1): void {
   const warm = clips.get(path);
   // A warmed clip starts inside the press itself, which is the fastest path
   // and the one Safari is happiest with.
-  if (warm) return start(warm, onEnd, rate);
+  if (warm) return start(warm, onEnd, rate, mine);
 
   void clipUrl(path, true).then((url) => {
     if (generation !== mine) return; // something else took over while it loaded
@@ -821,11 +821,11 @@ export function playAudio(path: string, onEnd?: OnEnd, rate = 1): void {
       onEnd?.(reason);
       return;
     }
-    start(url, onEnd, rate);
+    start(url, onEnd, rate, mine);
   });
 }
 
-function start(url: string, onEnd?: OnEnd, rate = 1): void {
+function start(url: string, onEnd?: OnEnd, rate = 1, mine = generation): void {
   if (isWeb) {
     const el = player();
     const entry: Playing = {
@@ -862,6 +862,13 @@ function start(url: string, onEnd?: OnEnd, rate = 1): void {
   }
 
   void import('expo-audio').then(({ createAudioPlayer }) => {
+    // Stopped or replaced before the module answered (two plays in one tick, or
+    // the class moving on): making it now would leave a player nobody stops or
+    // releases, sounding over the next one.
+    if (generation !== mine) {
+      onEnd?.(); // cut short, like any clip another one replaces
+      return;
+    }
     // Kept active: a pause would switch the session off under a recording that
     // starts right after (see the Hablar player in hablar-audio.ts).
     const p = createAudioPlayer(url, { keepAudioSessionActive: true });
@@ -871,6 +878,15 @@ function start(url: string, onEnd?: OnEnd, rate = 1): void {
         sub.remove();
         p.pause();
         p.remove();
+        // remove() only drops it from the module's list. On Android each player
+        // holds its own ExoPlayer, MediaSession, thread and status loop until
+        // release(); left to the JS garbage collector, one leaked per clip
+        // (2026-11-17: Java heap ran out a minute into the first class).
+        try {
+          p.release();
+        } catch {
+          // Already let go.
+        }
       },
     };
     const sub = p.addListener('playbackStatusUpdate', (status) => {

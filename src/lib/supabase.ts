@@ -1,8 +1,9 @@
 import 'react-native-url-polyfill/auto';
 import { createClient } from '@supabase/supabase-js';
+import { fetch as expoFetch } from 'expo/fetch';
 import { Platform } from 'react-native';
 
-import { withDeadline } from './deadline-fetch';
+import { isRead, withDeadline } from './deadline-fetch';
 import { secureSessionStorage } from './secure-session';
 
 /**
@@ -17,8 +18,24 @@ const DEMO = process.env.EXPO_PUBLIC_DEMO === '1';
 const url = process.env.EXPO_PUBLIC_SUPABASE_URL ?? 'https://placeholder.supabase.co';
 const anonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? 'placeholder';
 
+/**
+ * Reads on the phones go through expo/fetch. React Native's own fetch asks for
+ * every body as a blob, held as a Java byte array (BlobModule) until the JS
+ * garbage collector happens to free it — and that runs on JS memory pressure,
+ * not Java's. The course, the lexicon and a class are megabytes each, and on
+ * Android's 256 MB Java heap they piled up (2026-11-17: a Redmi ran out a
+ * minute into the first class). Writes, edge functions and storage keep the
+ * fetch they always had.
+ */
+const readFetch = Platform.OS === 'web' ? null : (expoFetch as unknown as typeof fetch);
+const target = (input: RequestInfo | URL) =>
+  typeof input === 'string' ? input : String((input as { url?: string }).url ?? input);
+
 const realClient = createClient(url, anonKey, {
-  global: { fetch: (input, init) => withDeadline(input, init) },
+  global: {
+    fetch: (input, init) =>
+      withDeadline(input, init, readFetch && isRead(target(input), init) ? readFetch : fetch),
+  },
   auth: {
     // On a phone the session lives in the Keychain / Keystore (lib/secure-session).
     // On web supabase-js falls back to localStorage by itself (and safely

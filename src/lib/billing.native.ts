@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react-native';
 import type { ProductSubscription, Purchase } from 'expo-iap';
 import { Platform } from 'react-native';
 
@@ -5,14 +6,17 @@ import {
   type Billing,
   type Catalog,
   CODE_OFFER_TAG,
-  isoDays,
+  isoLength,
+  lengthDays,
   type Period,
-  periodDays,
   periodOf,
   perMonth,
   type Plan,
   PRODUCTS,
   type PurchaseOutcome,
+  timesLength,
+  type TrialLength,
+  unitLength,
 } from './billing-shared';
 import { supabase } from './supabase';
 
@@ -135,17 +139,28 @@ const IOS_PERIOD: Record<string, Period> = { year: 'year', month: 'month', week:
 
 interface Intro {
   free: boolean;
-  days: number;
+  length: TrialLength | null;
   price: number;
   priceString: string;
+}
+
+/** A trial or price the paywall can't read is said out loud, once per shape:
+ *  2026-11-17 Play's "P4W2D" quietly hid the free month from the paywall. */
+const reported = new Set<string>();
+function unreadable(what: string, detail: Record<string, unknown>) {
+  const key = `${what}:${JSON.stringify(detail)}`;
+  if (reported.has(key)) return;
+  reported.add(key);
+  Sentry.captureMessage(`billing: ${what}`, { level: 'error', extra: detail });
 }
 
 function iosIntro(product: Extract<ProductSubscription, { platform: 'ios' }>): Intro | null {
   const offer = product.subscriptionOffers?.find((o) => o.type === 'introductory');
   if (offer?.period) {
+    const one = unitLength(offer.period.unit, offer.period.value);
     return {
       free: offer.paymentMode === 'free-trial',
-      days: periodDays(offer.period.unit, offer.period.value) * Math.max(offer.periodCount ?? 1, 1),
+      length: one ? timesLength(one, offer.periodCount ?? 1) : null,
       price: offer.price,
       priceString: offer.displayPrice,
     };
@@ -154,7 +169,7 @@ function iosIntro(product: Extract<ProductSubscription, { platform: 'ios' }>): I
   if (!mode || mode === 'empty') return null;
   return {
     free: mode === 'free-trial',
-    days: periodDays(product.introductoryPriceSubscriptionPeriodIOS ?? '', Number(product.introductoryPriceNumberOfPeriodsIOS) || 1),
+    length: unitLength(product.introductoryPriceSubscriptionPeriodIOS ?? '', Number(product.introductoryPriceNumberOfPeriodsIOS) || 1),
     price: Number(product.introductoryPriceAsAmountIOS) || 0,
     priceString: product.introductoryPriceIOS ?? '',
   };
@@ -167,27 +182,48 @@ function plan(product: ProductSubscription, introEligible: boolean): Plan | null
     // A year sold as twelve months is still the yearly plan.
     const period: Period = unit === 'month' && product.subscriptionPeriodNumberIOS === '12' ? 'year' : (IOS_PERIOD[unit] ?? 'month');
     const intro = introEligible ? iosIntro(product) : null;
+    if (intro?.free && !intro.length) unreadable('ios trial length', { product: product.id, period: product.introductoryPriceSubscriptionPeriodIOS });
+    const trial = intro?.free && intro.length && lengthDays(intro.length) > 0 ? intro.length : null;
     return {
       id: product.id,
       period,
       price,
       priceString: product.displayPrice,
       perMonthString: period === 'year' ? perMonth(price, product.currency) : period === 'month' ? product.displayPrice : null,
-      trialDays: intro?.free && intro.days > 0 ? intro.days : null,
+      trialDays: trial ? lengthDays(trial) : null,
+      trialLength: trial,
       introPrice: intro && !intro.free && intro.price > 0 ? { price: intro.price, priceString: intro.priceString } : null,
       currency: product.currency,
     };
   }
 
   // Play lists a base plan and the offers on it she can still take; each is a
-  // run of phases ending in the regular price. The one with the most phases
-  // is the one with a trial or a cheaper start.
+  // run of phases ending in the regular price. The paywall can say exactly
+  // two shapes: the base plan alone, or one opening phase (a free trial or a
+  // cheaper start) and then the regular price. An offer with more phases
+  // would be bought with prices the paywall never showed, so it is skipped
+  // (and reported). Of the two-phase offers, a free trial comes first, then
+  // the longer one, then the id, so the pick never depends on Play's order.
   // Offers kept for discount codes are never what the paywall shows.
-  const offers = product.subscriptionOffers
-    .filter((o) => o.offerTokenAndroid && o.pricingPhasesAndroid?.pricingPhaseList.length)
-    .filter((o) => !isCodeOffer(o.offerTagsAndroid))
-    .sort((a, b) => b.pricingPhasesAndroid!.pricingPhaseList.length - a.pricingPhasesAndroid!.pricingPhaseList.length);
-  const offer = offers[0];
+  const phaseCount = (o: (typeof product.subscriptionOffers)[number]) => o.pricingPhasesAndroid?.pricingPhaseList.length ?? 0;
+  const candidates = product.subscriptionOffers
+    .filter((o) => o.offerTokenAndroid && phaseCount(o) > 0)
+    .filter((o) => !isCodeOffer(o.offerTagsAndroid));
+  const tooLong = candidates.filter((o) => phaseCount(o) > 2);
+  if (tooLong.length) unreadable('play offer with more than 2 phases', { product: product.id, offers: tooLong.map((o) => o.id) });
+  const freeFirst = (o: (typeof candidates)[number]) =>
+    phaseCount(o) === 2 && Number(o.pricingPhasesAndroid!.pricingPhaseList[0].priceAmountMicros) === 0 ? 1 : 0;
+  const firstDays = (o: (typeof candidates)[number]) =>
+    phaseCount(o) === 2 ? lengthDays(isoLength(o.pricingPhasesAndroid!.pricingPhaseList[0].billingPeriod) ?? { months: 0, days: 0 }) : 0;
+  const offer = candidates
+    .filter((o) => phaseCount(o) <= 2)
+    .sort(
+      (a, b) =>
+        phaseCount(b) - phaseCount(a) ||
+        freeFirst(b) - freeFirst(a) ||
+        firstDays(b) - firstDays(a) ||
+        String(a.id).localeCompare(String(b.id)),
+    )[0];
   if (!offer) return null;
   offerTokens.set(product.id, offer.offerTokenAndroid!);
   const phases = offer.pricingPhasesAndroid!.pricingPhaseList;
@@ -196,14 +232,18 @@ function plan(product: ProductSubscription, introEligible: boolean): Plan | null
   const price = Number(regular.priceAmountMicros) / 1_000_000;
   const period = periodOf(regular.billingPeriod);
   const firstPrice = first ? Number(first.priceAmountMicros) / 1_000_000 : 0;
-  const firstDays = first ? isoDays(first.billingPeriod) * Math.max(first.billingCycleCount, 1) : 0;
+  const one = first ? isoLength(first.billingPeriod) : null;
+  if (first && !one) unreadable('play phase period', { product: product.id, offer: offer.id, period: first.billingPeriod });
+  const firstLength = first && one ? timesLength(one, first.billingCycleCount) : null;
+  const trial = first && firstPrice === 0 && firstLength && lengthDays(firstLength) > 0 ? firstLength : null;
   return {
     id: product.id,
     period,
     price,
     priceString: regular.formattedPrice,
     perMonthString: period === 'year' ? perMonth(price, regular.priceCurrencyCode) : period === 'month' ? regular.formattedPrice : null,
-    trialDays: first && firstPrice === 0 && firstDays > 0 ? firstDays : null,
+    trialDays: trial ? lengthDays(trial) : null,
+    trialLength: trial,
     introPrice: first && firstPrice > 0 ? { price: firstPrice, priceString: first.formattedPrice } : null,
     currency: regular.priceCurrencyCode,
   };
@@ -225,7 +265,10 @@ async function introEligibility(products: ProductSubscription[]): Promise<Map<st
   const out = new Map<string, boolean>();
   if (!iap || Platform.OS !== 'ios') return out;
   const groups = new Set(products.map((p) => (p.platform === 'ios' ? p.subscriptionGroupIdIOS : null)).filter((g): g is string => !!g));
-  for (const group of groups) out.set(group, await iap.isEligibleForIntroOfferIOS(group).catch(() => true));
+  // Unknown counts as not eligible: then the paywall shows the price without a
+  // trial and Apple, if she is in fact eligible, gives her the trial anyway.
+  // The other way round promised "30 days free" to someone charged at once.
+  for (const group of groups) out.set(group, await iap.isEligibleForIntroOfferIOS(group).catch(() => false));
   return out;
 }
 
@@ -300,7 +343,8 @@ export const billing: Billing = {
     const plans = new Map<string, Plan>();
     for (const product of fetched) {
       const group = product.platform === 'ios' ? product.subscriptionGroupIdIOS : null;
-      const p = plan(product, (group ? eligible.get(group) : undefined) ?? true);
+      // Play only lists the offers she can still take; Apple is asked per group.
+      const p = plan(product, product.platform === 'ios' ? (group ? eligible.get(group) : undefined) ?? false : true);
       if (!p) continue;
       plans.set(p.id, p);
       known.add(p.id);

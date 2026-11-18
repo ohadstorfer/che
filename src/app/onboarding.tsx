@@ -68,8 +68,12 @@ import {
   type NotifyAt,
   nameTail,
   reminderLine,
+  clearResume,
   resetWinbackShown,
+  resumeLoaded,
   saveAnswers,
+  saveResume,
+  setOnboardingOpen,
   type Struggle,
   struggleQuestion,
   type TryIt,
@@ -125,6 +129,10 @@ const BACK: Record<NotifyAt, Partial<Record<Step, Step>>> = {
 /** The steps the funnel table knows (its check constraint); the new ones wait for a migration. */
 // intro → class → streak: reaching streak means she finished the trial class.
 const TRACKED = new Set<Step>(['name', 'level', 'why', 'try', 'struggle', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'offer', 'account']);
+/** Past the builder, where her guest account exists: kept, so a restart comes back here (lib/onboarding.ts). */
+const RESUMABLE = new Set<Step>(['intro', 'class', 'streak', 'notify', 'offer']);
+/** Where a restart lands: the step she was on (in the class, its screen). */
+const resumeAt = (s: string): Step => (RESUMABLE.has(s as Step) ? (s as Step) : 'intro');
 
 /** Day 1 of her streak, at the end of the first class: the cheer engine's
  *  polaroid on lavender, Pancho with his guitar, confetti behind. */
@@ -141,6 +149,11 @@ export default function Onboarding() {
   }, [replay]);
   // A new onboarding: "Learn more" from an earlier paywall doesn't count here.
   useEffect(() => resetLearnedMore(), []);
+  // Open until it unmounts, including while the class's call sits on top.
+  useEffect(() => {
+    setOnboardingOpen(true);
+    return () => setOnboardingOpen(false);
+  }, []);
   const reduced = useReducedMotion();
   const pancho = useVideoPlayer(PANCHO_CLIP, (p) => {
     p.muted = true;
@@ -156,16 +169,34 @@ export default function Onboarding() {
   // opens the first class at a part (slang, culture, pancho) or its end screen.
   const { step: devStep, part: devPart } = useLocalSearchParams<{ step?: Step; part?: string }>();
   const jump = __DEV__ && devStep ? devStep : null;
-  const [step, setStep] = useState<Step>(jump ?? 'name');
+  // Back after the app closed halfway: the launch read where she was (index.tsx).
+  const { resume: resumeParam } = useLocalSearchParams<{ resume?: string }>();
+  const [resumed] = useState(() => (resumeParam && !jump ? resumeLoaded() : null));
+  const [step, setStep] = useState<Step>(jump ?? (resumed ? resumeAt(resumed.step) : 'name'));
   const [dir, setDir] = useState<1 | -1>(1);
   const [a, setA] = useState<Partial<Answers>>(
-    jump ? { minutes: 10, name: '', level: 'basics', why: 'trip', whys: ['trip'] } : { minutes: 10, name: '' },
+    jump
+      ? { minutes: 10, name: '', level: 'basics', why: 'trip', whys: ['trip'] }
+      : resumed
+        ? { minutes: 10, name: '', ...resumed.answers }
+        : { minutes: 10, name: '' },
   );
+  /** The class screen she is on, kept with the rest so a restart reopens it. */
+  const [classAt, setClassAt] = useState<number | 'done' | undefined>(resumed?.classAt);
   const posthog = usePostHog();
 
   useEffect(() => {
     if (TRACKED.has(step)) trackStep(step as OnboardingStep);
   }, [step]);
+
+  // Past the builder her guest account exists, so a restart would find a
+  // session: keep where she is, for the launch to bring her back here. Not for
+  // staff replaying it, or a dev jump.
+  const userId = session?.user.id;
+  useEffect(() => {
+    if (!userId || replay || jump || !RESUMABLE.has(step)) return;
+    saveResume({ userId, step, answers: a, classAt: step === 'class' ? classAt : undefined });
+  }, [userId, replay, jump, step, a, classAt]);
 
   // Where notifications come: read once as onboarding opens, and frozen as she
   // reaches the builder (the first step whose next one depends on it), so the
@@ -212,8 +243,11 @@ export default function Onboarding() {
   // replaying it). If no guest could be made — anonymous sign-ins switched
   // off, no connection — the account step comes first, as it used to.
   const toPaywall = async () => {
-    if (session || (await startGuest())) router.replace('/paywall?from=onboarding');
-    else go('account');
+    if (session || (await startGuest())) {
+      // Onboarding ends at the paywall: a restart from here on is Home, as before.
+      clearResume();
+      router.replace('/paywall?from=onboarding');
+    } else go('account');
   };
   /** After the class's streak (or its skip): notifications, or the paywall if they came already. */
   /** The beat before the paywall. The clip is parked on the pour first, so the
@@ -272,12 +306,26 @@ export default function Onboarding() {
       <Animated.View key={step} entering={entering} style={{ flex: 1, backgroundColor: step === 'intro' ? pastel.lav : colors.bg }}>
         {step === 'intro' ? (
           <SafeAreaView style={{ flex: 1 }} edges={['top']}>
-            <FirstClassOpener onStart={() => go('class')} onSkip={afterClass} />
+            <FirstClassOpener
+              onStart={() => {
+                // Started from its opener, the class starts from the top.
+                setClassAt(undefined);
+                go('class');
+              }}
+              onSkip={afterClass}
+            />
           </SafeAreaView>
         ) : step === 'offer' ? (
           <OfferLoading player={pancho} reduced={reduced} onDone={() => void toPaywall()} />
         ) : step === 'class' ? (
-          <FirstClassLesson level={a.level} part={jump ? devPart : undefined} onFinish={classDone} onClose={back} />
+          <FirstClassLesson
+            level={a.level}
+            part={jump ? devPart : undefined}
+            startAt={classAt}
+            onProgress={setClassAt}
+            onFinish={classDone}
+            onClose={back}
+          />
         ) : notifyAt === 'after_class' ? (
           <DayOneAsk answers={complete} reduced={reduced} onDone={notified} />
         ) : (
@@ -1522,7 +1570,10 @@ function explain(message: string): string {
   return message;
 }
 
-const toPaywall = () => router.replace('/paywall?from=onboarding');
+const toPaywall = () => {
+  clearResume();
+  router.replace('/paywall?from=onboarding');
+};
 
 function Account({ answers, reduced }: { answers: Answers; reduced: boolean }) {
   const [busy, setBusy] = useState<Provider | null>(null);

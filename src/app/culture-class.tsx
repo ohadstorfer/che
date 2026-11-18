@@ -163,6 +163,16 @@ function heroOf(text: string): string | null {
   return plain.match(/\b(1[5-9]\d\d|20\d\d)\b/)?.[0] ?? null;
 }
 
+/** A card that names something we have a picture of (the ancho de espada, a
+ *  medialuna) shows that picture; otherwise it takes the subject's turn. */
+function namedArt(text: string, fallback: ImageSourcePropType): ImageSourcePropType {
+  for (const m of text.matchAll(/\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]/g)) {
+    const art = glossArt(m[1] ?? m[2] ?? m[3]);
+    if (art) return art;
+  }
+  return fallback;
+}
+
 /** The vocabulary word a highlighted span in the text stands for, if it is one. */
 function wordFor(words: CultureWord[], span: string): CultureWord | undefined {
   const a = span.trim().toLowerCase();
@@ -187,7 +197,7 @@ function buildSteps(section: string, classTitle: string, pages: CulturePage[], v
   pages.forEach((page, n) => {
     if (page.type === 'card') {
       const bg = CARD_TONES[tone++ % CARD_TONES.length];
-      steps.push({ kind: 'fact', fact: { art: artFor(section, n), text: page.text, hero: null, chip: page.chip ?? classTitle, bg } });
+      steps.push({ kind: 'fact', fact: { art: namedArt(page.text, artFor(section, n)), text: page.text, hero: null, chip: page.chip ?? classTitle, bg } });
       return;
     }
     if (page.type !== 'info') {
@@ -210,7 +220,7 @@ function buildSteps(section: string, classTitle: string, pages: CulturePage[], v
       });
     });
     if (page.fun_fact) {
-      steps.push({ kind: 'fact', fact: { art: artFor(section, n + 1), text: page.fun_fact, hero: heroOf(page.fun_fact) } });
+      steps.push({ kind: 'fact', fact: { art: namedArt(page.fun_fact, artFor(section, n + 1)), text: page.fun_fact, hero: heroOf(page.fun_fact) } });
     }
   });
   if (vocab.length) steps.push({ kind: 'words', words: vocab });

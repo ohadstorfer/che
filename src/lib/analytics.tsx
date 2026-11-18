@@ -57,8 +57,20 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
         sessionReplayConfig: {
           maskAllTextInputs: false,
           maskAllImages: false,
-          captureLog: true,
+          // Off on Android: there it is the whole device logcat (captureLogcat),
+          // and on a chatty phone (MIUI) that is a lot of strings kept in the
+          // Java heap. 2026-11-17 a Redmi ran out of its 256 MB a minute into
+          // the first class, and that session's replay never arrived. iOS
+          // keeps its console logs next to the replay.
+          captureLog: Platform.OS !== 'android',
           captureNetworkTelemetry: true,
+          // Android screenshots at half width and height: a quarter of the
+          // pixels to encode, hold and upload per frame, still readable.
+          screenshotScale: 0.5,
+          // Android uploads replay on the same thread that queues it, so on a
+          // slow connection new frames wait in memory: one every 2 s there,
+          // half the backlog. iOS keeps the default 1 s.
+          ...(Platform.OS === 'android' ? { throttleDelayMs: 2000 } : null),
         },
         // Uncaught JS errors as $exception events (PostHog Error tracking), so
         // they sit next to the replay. Only sent while "exception autocapture"

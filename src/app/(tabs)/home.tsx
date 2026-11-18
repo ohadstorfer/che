@@ -61,6 +61,7 @@ import { streakStatus, type StreakStatus } from '@/lib/streak';
 import { fetchStreakWeek } from '@/lib/streak-week';
 import { clay, colors, font, gradients, pastel, pastelGrad, path, press, radius } from '@/lib/theme';
 import type { LessonKind, Section, Streak, Unit } from '@/lib/types';
+import { unitArt } from '@/lib/unit-art';
 import { FitText } from '@/components/fit-text';
 import { FlagSun } from '@/components/sticker';
 
@@ -518,8 +519,6 @@ function SectionEnd({
 // ---------------------------------------------------------------------------
 type UnitState = 'done' | 'current' | 'locked';
 
-/** The carpincho on every banner — the same cut-out he waves with elsewhere. */
-const BANNER_ART = require('@/assets/images/capybara/capybara-saludando-figure.webp');
 
 type BannerTone = {
   grad: readonly [string, string];
@@ -570,7 +569,7 @@ function UnitBanner({
       {/* An inset shadow paints under children; redraw clay's lit edge over the gradient. */}
       <View pointerEvents="none" style={styles.bannerClay} />
       <View pointerEvents="none" style={styles.bannerPod} />
-      <Image source={BANNER_ART} style={styles.bannerArt} contentFit="contain" accessible={false} />
+      <Image source={unitArt(unit.slug)} style={styles.bannerArt} contentFit="contain" accessible={false} />
       <View style={styles.bannerBody}>
         <View style={styles.bannerText}>
           <View style={styles.bannerEyebrowRow}>
@@ -1815,7 +1814,7 @@ const styles = StyleSheet.create({
     borderRadius: radius.xl,
     boxShadow: 'none',
   },
-  /** The text stops short of the carpincho's pod. */
+  /** The text stops short of the picture's pod. */
   bannerBody: { flex: 1, justifyContent: 'space-between', padding: 20, paddingRight: 150 },
   bannerText: { gap: 2 },
   bannerEyebrowRow: { flexDirection: 'row', alignItems: 'center', gap: 5 },
@@ -1837,7 +1836,7 @@ const styles = StyleSheet.create({
     boxShadow: 'none',
   },
   bannerCount: { ...font.body[800], fontSize: 13, fontVariant: ['tabular-nums'] },
-  /** The soft white disc the carpincho stands in, half off the corner. */
+  /** The soft white disc the unit's picture sits in, half off the corner. */
   bannerPod: {
     position: 'absolute',
     right: -18,
@@ -1848,7 +1847,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.pod,
     boxShadow: clay.surface,
   },
-  bannerArt: { position: 'absolute', right: 10, bottom: -8, width: 110, height: 160 },
+  /** The unit's own picture, centred in the pod. */
+  bannerArt: { position: 'absolute', right: 3, bottom: -5, width: 128, height: 128 },
 
   // Practice ---------------------------------------------------------------
   practiceSlot: { position: 'absolute', left: 18, bottom: 18, gap: 10, alignItems: 'flex-start' },

@@ -6,13 +6,20 @@
 
 import * as Notifications from 'expo-notifications';
 
-export async function scheduleTrialReminder(trialDays: number): Promise<void> {
+/** `trialEnd`: when the store turns the trial into a charge (billing-shared trialEnd). */
+export async function scheduleTrialReminder(trialEnd: Date): Promise<void> {
   try {
     let { status } = await Notifications.getPermissionsAsync();
     if (status !== 'granted') ({ status } = await Notifications.requestPermissionsAsync());
     if (status !== 'granted') return;
-    const at = new Date(Date.now() + Math.max(1, trialDays - 2) * 86400000);
+    // Two days before the charge, at 10 in the morning; a trial too short for
+    // that gets it the next morning instead.
+    const at = new Date(trialEnd.getTime() - 2 * 86400000);
     at.setHours(10, 0, 0, 0);
+    if (at.getTime() <= Date.now()) {
+      at.setTime(Date.now() + 86400000);
+      at.setHours(10, 0, 0, 0);
+    }
     await Notifications.scheduleNotificationAsync({
       content: {
         title: 'Your free trial ends in 2 days',

@@ -23,6 +23,7 @@ import { AnalyticsProvider, AnalyticsTracker } from '@/lib/analytics';
 import { AuthProvider, useAuth } from '@/lib/auth';
 import { useBootReady } from '@/lib/boot';
 import { useKeyboardViewportFit } from '@/lib/keyboard-viewport';
+import { useOnboardingOpen } from '@/lib/onboarding';
 import { prefetchTabs } from '@/lib/prefetch';
 import { PremiumProvider, usePremium } from '@/lib/premium';
 import { listenForFreeUnitReminder } from '@/lib/free-unit-reminder';
@@ -158,12 +159,17 @@ function BootGate({ fontsReady }: { fontsReady: boolean }) {
   const hold = !fontsReady || loading || (!!session && toCourse && !ready);
   const userId = session?.user.id;
 
+  // Not during onboarding: her guest account is made as the course builds, and
+  // the tabs' several MB of downloads would land on top of the first class
+  // (which runs off its bundled fixture) — or on its call with Pancho, which
+  // opens the Hablar chat over onboarding. They come once she leaves it.
+  const inOnboarding = useOnboardingOpen();
   useEffect(() => {
-    if (hold || !userId) return;
+    if (hold || !userId || inOnboarding) return;
     // After the splash's fade, so reading the lexicon can't stutter it.
     const t = setTimeout(() => prefetchTabs(userId, limited), PREFETCH_DELAY_MS);
     return () => clearTimeout(t);
-  }, [hold, userId, limited]);
+  }, [hold, userId, limited, inOnboarding]);
 
   // The day-30 win-back offer is hers this week (the server says so): the
   // first time she opens the app on her own, on the Course, it shows itself.

@@ -174,6 +174,8 @@ export type FirstClassPart = Part;
 
 export function FirstClassLesson({
   part,
+  startAt,
+  onProgress,
   admin,
   level = 'none',
   onFinish,
@@ -181,6 +183,10 @@ export function FirstClassLesson({
 }: {
   /** Opens the class at that part (slang, culture, pancho), or on its end screen (done), for reviewing it. */
   part?: string;
+  /** Back after the app closed mid-class: the screen she was on, or its end screen. */
+  startAt?: number | 'done';
+  /** Each screen she reaches, so onboarding can bring her back to it after a restart. */
+  onProgress?: (at: number | 'done') => void;
   /** Her answer in onboarding: how fast Pancho talks on the call. */
   level?: Level;
   /** Staff replaying it: Play again, Back to admin and the live AI call. */
@@ -190,8 +196,13 @@ export function FirstClassLesson({
   onClose: () => void;
 }) {
   const content = useContent();
-  const [at, setAt] = useState(() => Math.max(SCREENS.findIndex((x) => x.part === part), 0));
-  const [done, setDone] = useState(part === 'done');
+  const [at, setAt] = useState(() =>
+    typeof startAt === 'number' && startAt < SCREENS.length ? startAt : Math.max(SCREENS.findIndex((x) => x.part === part), 0),
+  );
+  const [done, setDone] = useState(part === 'done' || startAt === 'done');
+  const progress = useRef(onProgress);
+  progress.current = onProgress;
+  useEffect(() => progress.current?.(done ? 'done' : at), [at, done]);
   const [run, setRun] = useState(0);
   /** How far into the current screen she is, where one screen is a whole round (the slang class). */
   const [sub, setSub] = useState(0);

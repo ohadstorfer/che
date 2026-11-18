@@ -36,7 +36,18 @@ import { Slap } from '@/components/cheer-bits';
 import { EASE_OUT, IconButton, rise } from '@/components/onboarding-ui';
 import { Button } from '@/components/ui';
 import { billing } from '@/lib/billing';
-import { appleRedeemUrl, normalizeCode, type Offer, type Plan, type PurchaseOutcome, winbackDiscount } from '@/lib/billing-shared';
+import {
+  annualSaving,
+  appleRedeemUrl,
+  normalizeCode,
+  type Offer,
+  type Plan,
+  type PurchaseOutcome,
+  trialDaysLeft,
+  trialEnd,
+  trialLabel,
+  winbackDiscount,
+} from '@/lib/billing-shared';
 import { success, tap } from '@/lib/haptics';
 import { PRIVACY_URL, TERMS_URL } from '@/lib/legal';
 import { resetTo } from '@/lib/nav';
@@ -87,15 +98,6 @@ const PERKS = [
   { t: 'Real Argentine slang', tone: pastel.sky },
   { t: 'Culture lessons', tone: pastel.lav },
 ];
-
-/** How much the yearly plan saves against twelve months, when both are on sale. */
-function saving(plans: Plan[]): number | null {
-  const year = plans.find((p) => p.period === 'year');
-  const month = plans.find((p) => p.period === 'month');
-  if (!year || !month || month.price <= 0) return null;
-  const pct = Math.round((1 - year.price / (month.price * 12)) * 100);
-  return pct >= 5 ? pct : null;
-}
 
 /** A failed restore, a moment ago: tapping again says the same, without asking the store. */
 const RESTORE_COOLDOWN = 15000;
@@ -291,7 +293,8 @@ export default function Paywall() {
     void queueWelcomeTour();
     void cancelFreeUnitReminder();
     setPurchasedTrial(p.trialDays ?? 0);
-    if (p.trialDays) void scheduleTrialReminder(p.trialDays);
+    const ends = trialEnd(p);
+    if (ends) void scheduleTrialReminder(ends);
     setStage('done');
     void refresh();
   };
@@ -511,7 +514,7 @@ export default function Paywall() {
                 key={p.id}
                 plan={p}
                 selected={selected === p.id}
-                save={p.period === 'year' ? saving(main.plans) : null}
+                save={p.period === 'year' ? annualSaving(main.plans) : null}
                 onPress={() => {
                   tap();
                   picked.current = true;
@@ -565,7 +568,7 @@ export default function Paywall() {
         {error ? <Text style={styles.error}>{error}</Text> : null}
         <View style={styles.actions}>
           <Button
-            title={creatorOffer ? 'Start my free month' : plan?.trialDays ? `Start ${plan.trialDays}-day free trial` : 'Continue'}
+            title={creatorOffer ? 'Start my free month' : plan && trialLabel(plan) ? `Start ${trialLabel(plan)!.adj} free trial` : 'Continue'}
             onPress={() => void (creatorOffer ? buyWithCreator() : buy('main', plan))}
             loading={busy === 'buy' || (creatorOffer && busy === 'code')}
             disabled={!plan || !!busy}
@@ -594,8 +597,10 @@ export default function Paywall() {
         </View>
         {plan ? (
           <Text style={styles.terms}>
-            {plan.trialDays
-              ? `You won’t be charged until ${formatDate(new Date(Date.now() + plan.trialDays * 86400000))}. Then ${plan.priceString}/${perPeriod(plan)}, auto-renews. Cancel anytime before.`
+            {/* The date the store charges, counted the way it counts (a trial
+                month is a calendar month): the most binding line on the page. */}
+            {trialEnd(plan)
+              ? `You won’t be charged until ${formatDate(trialEnd(plan)!)}. Then ${plan.priceString}/${perPeriod(plan)}, auto-renews. Cancel anytime before.`
               : `${plan.priceString}/${perPeriod(plan)}. Renews automatically. Cancel anytime.`}
           </Text>
         ) : null}
@@ -633,7 +638,8 @@ export default function Paywall() {
 
 function PlanCard({ plan, selected, save, onPress }: { plan: Plan; selected: boolean; save: number | null; onPress: () => void }) {
   const name = plan.period === 'year' ? 'Yearly' : plan.period === 'week' ? 'Weekly' : 'Monthly';
-  const tag = [plan.trialDays ? `${plan.trialDays} days free` : null, save ? `Save ${save}%` : null].filter(Boolean).join(' · ');
+  const trial = trialLabel(plan);
+  const tag = [trial ? `${trial.noun} free` : null, save ? `Save ${save}%` : null].filter(Boolean).join(' · ');
   const under = plan.period === 'year' && plan.perMonthString ? `Just ${plan.perMonthString} a month` : `Billed every ${perPeriod(plan)}`;
   // The tag is the card's sibling, drawn after it: as a child, iOS paints the card's outline across it.
   return (
@@ -672,21 +678,23 @@ function PlanCard({ plan, selected, save, onPress }: { plan: Plan; selected: boo
 // --- the free trial, as a timeline: when it ends is never a surprise ------------
 
 function TrialSteps({ plan }: { plan: Plan }) {
-  const days = plan.trialDays ?? 0;
+  // Days to the real charge date: 28 for a trial month started in February.
+  const days = trialDaysLeft(plan);
+  const label = trialLabel(plan)?.noun ?? `${days} days`;
   const steps: { when: string; what: string; icon: 'lock-open' | 'notifications' | 'star'; tone: string }[] = [
     { when: 'Today', what: 'The whole course, AI speaking practice, slang and culture. All yours.', icon: 'lock-open', tone: pastel.butter },
     // The reminder really goes out two days before (lib/trial-reminder).
     { when: `In ${Math.max(1, days - 2)} days`, what: 'We’ll remind you that your free trial is ending.', icon: 'notifications', tone: pastel.sky },
     {
       when: `In ${days} days`,
-      what: `Your ${plan.period === 'year' ? 'yearly' : 'monthly'} plan starts. You’ll be charged ${plan.priceString}.`,
+      what: `Your ${plan.period === 'year' ? 'yearly' : plan.period === 'week' ? 'weekly' : 'monthly'} plan starts. You’ll be charged ${plan.priceString}.`,
       icon: 'star',
       tone: colors.primary,
     },
   ];
   return (
     <View style={styles.trial}>
-      <Text style={[styles.h2, styles.trialHead]}>Try it for {days} days free</Text>
+      <Text style={[styles.h2, styles.trialHead]}>Try it for {label} free</Text>
       <View>
         {steps.map((s, i) => (
           <View key={s.when} style={styles.step}>
@@ -796,7 +804,9 @@ function WinbackSheet({
           </View>
           {/* Apple wants the renewal price, cancel info and Terms/Privacy where people buy: one quiet line. */}
           <View style={styles.offerFine}>
-            {offer && regular ? <Text style={styles.terms}>Then {regular.priceString}/year. Cancel anytime.</Text> : null}
+            {/* After the cheaper first year she renews at the offer product's own
+                price, which need not be the regular annual's. */}
+            {offer?.introPrice ? <Text style={styles.terms}>Then {offer.priceString}/year. Cancel anytime.</Text> : null}
             <Legal />
           </View>
         </SafeAreaView>

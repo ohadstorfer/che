@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSyncExternalStore } from 'react';
 
 import { supabase } from './supabase';
 import { pastel } from './theme';
@@ -468,6 +469,86 @@ export async function loadAnswers(): Promise<Answers | null> {
   } catch {
     return null;
   }
+}
+
+// --- resume -----------------------------------------------------------------
+// Her guest account is made while the course builds, so from then on a cold
+// start (the app killed, or a crash in the first class) would find a session
+// and drop her on Home — under the hard paywall, with the class never played
+// (2026-11-17: a Redmi ran out of memory one minute into it). So past the
+// builder, where she is is kept on the phone, and the launch brings her back
+// to it. Going on to the paywall clears it: that is where onboarding ends.
+
+const RESUME_KEY = 'che.onboarding-resume';
+/** Older than this, she has moved on: Home, as before. */
+const RESUME_FOR_MS = 3 * 24 * 60 * 60 * 1000;
+
+export interface Resume {
+  userId: string;
+  step: string;
+  answers: Partial<Answers>;
+  /** In the first class: the screen she was on (components/first-class.tsx), or its end screen. */
+  classAt?: number | 'done';
+  at: number;
+}
+
+let cached: Resume | null = null;
+/** Read as the app starts, alongside her session, so the launch doesn't wait
+ *  on it after (index.tsx). Only the first loadResume uses it. */
+let primed: Promise<string | null> | null = AsyncStorage.getItem(RESUME_KEY).catch(() => null);
+
+export function saveResume(r: Omit<Resume, 'at'>): void {
+  primed = null;
+  cached = { ...r, at: Date.now() };
+  AsyncStorage.setItem(RESUME_KEY, JSON.stringify(cached)).catch(() => {});
+}
+
+/** Her unfinished onboarding, if it is this account's and recent. */
+export async function loadResume(userId: string): Promise<Resume | null> {
+  try {
+    const raw = await (primed ?? AsyncStorage.getItem(RESUME_KEY));
+    primed = null;
+    const r = raw ? (JSON.parse(raw) as Resume) : null;
+    cached = r && r.userId === userId && Date.now() - r.at < RESUME_FOR_MS ? r : null;
+    if (r && !cached) clearResume();
+  } catch {
+    cached = null;
+  }
+  return cached;
+}
+
+/** What loadResume found, for onboarding's first render (no flash of step one). */
+export const resumeLoaded = (): Resume | null => cached;
+
+export function clearResume(): void {
+  primed = null;
+  cached = null;
+  AsyncStorage.removeItem(RESUME_KEY).catch(() => {});
+}
+
+// --- open -------------------------------------------------------------------
+// Whether onboarding is on screen or under something it opened (the first
+// class's call pushes the Hablar chat on top). The launch's tab downloads wait
+// for it to close (app/_layout.tsx), so they never land on the first class.
+
+let onboardingOpen = false;
+const openListeners = new Set<() => void>();
+
+export function setOnboardingOpen(value: boolean): void {
+  if (onboardingOpen === value) return;
+  onboardingOpen = value;
+  openListeners.forEach((l) => l());
+}
+
+export function useOnboardingOpen(): boolean {
+  return useSyncExternalStore(
+    (l) => {
+      openListeners.add(l);
+      return () => openListeners.delete(l);
+    },
+    () => onboardingOpen,
+    () => false,
+  );
 }
 
 /** The win-back offer is shown once, ever — it is a real one-time offer. */
