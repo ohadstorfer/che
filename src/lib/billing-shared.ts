@@ -108,10 +108,13 @@ export function periodOf(iso: string | null | undefined): Period {
   return 'month';
 }
 
-/** "P1W" → 7, "P3D" → 3, "P1M" → 30. */
+/** "P1W" → 7, "P3D" → 3, "P1M" → 30, and the mixed ones Play sends for some
+ *  lengths: a 30-day trial comes as "P4W2D" → 30. */
 export function isoDays(iso: string): number {
-  const m = /^P(\d+)([DWMY])$/.exec(iso);
-  return m ? periodDays(m[2], Number(m[1])) : 0;
+  const m = /^P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)W)?(?:(\d+)D)?$/.exec(iso);
+  if (!m) return 0;
+  const [, y, mo, w, d] = m.map((n) => Number(n ?? 0));
+  return y * 365 + mo * 30 + w * 7 + d;
 }
 
 /** "$8.25": a yearly price as what it comes to each month. */
