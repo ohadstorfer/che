@@ -375,10 +375,13 @@ const PathStep = memo(function PathStep({
           webTransition,
         ]}>
         <Animated.View style={[styles.face, styles.faceLocked, { opacity: anim.lockedOn }]} />
-        <Animated.View style={[styles.face, styles.faceLit, { opacity: anim.currentOn }]}>
+        {/* Each face is painted solid under its gradient: the gradient alone is
+            clipped with soft, see-through edge pixels, and along the curve the
+            page showed through between the fill and the ink outline. */}
+        <Animated.View style={[styles.face, styles.faceLit, { backgroundColor: gradients.deep[1], opacity: anim.currentOn }]}>
           <LinearGradient pointerEvents="none" colors={gradients.deep} style={StyleSheet.absoluteFill} />
         </Animated.View>
-        <Animated.View style={[styles.face, styles.faceDone, { opacity: anim.doneOn }]}>
+        <Animated.View style={[styles.face, styles.faceDone, { backgroundColor: tone.grad[1], opacity: anim.doneOn }]}>
           <LinearGradient pointerEvents="none" colors={tone.grad} style={StyleSheet.absoluteFill} />
         </Animated.View>
         {/* The glyphs sit in a clipped layer of their own, so the wide "Start"
@@ -561,7 +564,8 @@ function UnitBanner({
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [styles.banner, { transform: [{ scale: pressed ? press.scale : 1 }] }, webTransition]}
+      // Solid under the gradient, so no page shows between the fill and the outline.
+      style={({ pressed }) => [styles.banner, { backgroundColor: tone.grad[1], transform: [{ scale: pressed ? press.scale : 1 }] }, webTransition]}
       accessibilityRole="button"
       accessibilityHint="Opens the unit guidebook"
       accessibilityLabel={`Unit ${unit.ordinal}: ${unit.title_en}. ${unit.summary_en}. ${done} of ${total} lessons done`}>
