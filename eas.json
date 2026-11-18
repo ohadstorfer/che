@@ -39,6 +39,12 @@
         "track": "internal",
         "releaseStatus": "draft"
       }
+    },
+    "play": {
+      "android": {
+        "track": "production",
+        "releaseStatus": "completed"
+      }
     }
   }
 }
