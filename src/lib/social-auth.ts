@@ -112,6 +112,16 @@ async function finishFromUrl(url: string, { linking = false } = {}): Promise<Soc
   return { status: 'error', message: 'Google sign-in did not finish. Try again.' };
 }
 
+/** A Google callback that arrived after the app restarted (Android killed it
+ *  while the browser was open): nobody is waiting on it, so finish it here. */
+export async function finishLostCallback(url: string): Promise<void> {
+  try {
+    await finishFromUrl(url);
+  } catch {
+    // Signed-out or guest state stays as it was; she can tap Google again.
+  }
+}
+
 /** Linking was refused because that identity already has an account, or
  *  because the project doesn't allow linking: sign in to it instead. */
 function signInInstead(error: Pick<AuthError, 'message'> & { code?: string }): boolean {
