@@ -484,7 +484,9 @@ export function useRound(userId: string | undefined) {
           user_id: userId,
           form_id: form.id,
           rating: wrong.has(form.id) ? 0 : 2,
-          mode: item.mode,
+          // review_logs takes the modes it was built with; a picture pick is
+          // a multiple choice, its note says which.
+          mode: item.mode === 'picture_pick' ? 'multiple_choice' : item.mode,
           round_id: roundId.current || null,
           item_index: index,
           sentence_id: item.sentence?.id ?? null,
@@ -493,7 +495,7 @@ export function useRound(userId: string | undefined) {
           is_retry: !!item.isRetry,
           promoted: !!item.promoted,
           hinted: hinted.has(form.id),
-          note: extra.note ?? null,
+          note: extra.note ?? (item.mode === 'picture_pick' ? 'picture' : null),
           latency_ms: latency,
           answer: wrong.size > 0 || noted ? (extra.answer ?? null) : null,
         }));

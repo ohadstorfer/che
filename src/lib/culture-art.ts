@@ -240,6 +240,7 @@ const F = {
   potrero: require('@/assets/images/objects/potrero-figure.webp'),
   papelitos: require('@/assets/images/objects/papelitos-figure.webp'),
   atadoConAlambre: require('@/assets/images/objects/atado-con-alambre-figure.webp'),
+  bodegon: require('@/assets/images/objects/bodegon-figure.webp'),
 } satisfies Record<string, ImageSourcePropType>;
 
 /** Pictures in a word's bubble, for things a learner has never seen: "friar's
@@ -305,6 +306,10 @@ const wordArt: Record<string, ImageSourcePropType> = {
   'arroz con leche me quiero casar': F.arrozConLeche,
   panqueques: F.panqueques,
   quemados: F.panqueques,
+  bodegón: F.bodegon,
+  'qué hay de postre': F.bodegon,
+  // "Too full for your host's flan?": the card is about the flan.
+  'un poquito nomás': F.flan,
   'mate cocido': F.mateCocido,
   tereré: F.terere,
   'chimarrão': F.chimarrao,
@@ -494,3 +499,6 @@ const speaker = require('@/assets/images/capybara/capybara-saludando-figure.webp
 export function speakerArt(section: string): ImageSourcePropType {
   return speakers[section] ?? speaker;
 }
+
+/** The culture sections that have their own art (custom onboarding screens check names against it). */
+export const ART_SECTIONS = Object.keys(bySection);

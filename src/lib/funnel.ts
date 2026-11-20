@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Crypto from 'expo-crypto';
 import { Platform } from 'react-native';
 
+import { abTag } from './remote-config';
 import { supabase } from './supabase';
 
 // ---------------------------------------------------------------------------
@@ -30,7 +31,7 @@ const ENABLED = process.env.EXPO_PUBLIC_DEMO !== '1';
 export function track(event: FunnelEvent, props: Record<string, string | number | boolean | null> = {}): void {
   if (!ENABLED) return;
   void Promise.resolve(
-    supabase.from('funnel_events').insert({ event, props: { ...props, platform: Platform.OS } }),
+    supabase.from('funnel_events').insert({ event, props: { ...props, platform: Platform.OS, ab: abTag() } }),
   ).catch(() => {});
 }
 
@@ -64,7 +65,7 @@ const DEVICE_KEY = 'posta.onboarding-device';
 const sentSteps = new Set<OnboardingStep>();
 let device: Promise<string> | null = null;
 
-const deviceId = () =>
+export const deviceId = () =>
   (device ??= (async () => {
     const saved = await AsyncStorage.getItem(DEVICE_KEY);
     if (saved) return saved;

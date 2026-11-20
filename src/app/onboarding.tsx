@@ -39,6 +39,10 @@ import Svg, { Circle, G, Line, Path, Text as SvgText } from 'react-native-svg';
 
 import { FirstClassLesson } from '@/components/first-class';
 import { FirstClassOpener } from '@/components/first-class-opener';
+import { prefetchFirstClass } from '@/lib/first-class-script';
+import { RemoteScreen } from '@/components/remote-screen';
+import { type ScreenRow, type Skippable, type Slot, onAssigned, onboardingSkip, peekSkip, prefetchScreens, screensFor } from '@/lib/remote-config';
+import { ContentBoundary } from '@/components/error-boundary';
 import { MASCOT_NAME, MascotSays, pop, type Pose, POSE, SpeechBubble } from '@/components/mascot';
 import { EASE_OUT, IconButton, ProgressBar, rise, slide } from '@/components/onboarding-ui';
 import { type Provider, SocialButtons } from '@/components/social-buttons';
@@ -64,6 +68,7 @@ import {
   MINUTES,
   type Level,
   fetchNotifyAt,
+  fetchFirstClassSkip,
   NOTIFY_AT_DEFAULT,
   type NotifyAt,
   nameTail,
@@ -103,7 +108,7 @@ import { clay, colors, font, pastel, radius, type } from '@/lib/theme';
 // picks: no reply per answer (2026-11-17).
 // ---------------------------------------------------------------------------
 
-type Step = 'name' | 'level' | 'why' | 'try' | 'struggle' | 'goal' | 'building' | 'intro' | 'class' | 'streak' | 'notify' | 'offer' | 'account';
+type Step = 'name' | 'level' | 'why' | 'try' | 'struggle' | 'goal' | 'building' | 'intro' | 'class' | 'streak' | 'notify' | 'offer' | 'account' | 'screen';
 /** The order, by where notifications are asked (app_config `onboarding_notify_at`). */
 const ORDER: Record<NotifyAt, Step[]> = {
   after_class: ['name', 'level', 'why', 'struggle', 'goal', 'building', 'intro', 'class', 'streak', 'notify', 'account'],
@@ -119,7 +124,7 @@ const BAR: Record<NotifyAt, Step[]> = {
   after_build: ['name', 'level', 'why', 'struggle', 'goal', 'notify'],
 };
 /** Full-screen steps: no back button or bar above them. */
-const BARE: Step[] = ['intro', 'class', 'streak', 'offer'];
+const BARE: Step[] = ['intro', 'class', 'streak', 'offer', 'screen'];
 /** Where back goes, where it isn't simply the step before: a moment (the
  *  builder, the class, the streak) is never gone back into. */
 const BACK: Record<NotifyAt, Partial<Record<Step, Step>>> = {
@@ -172,7 +177,9 @@ export default function Onboarding() {
   // Back after the app closed halfway: the launch read where she was (index.tsx).
   const { resume: resumeParam } = useLocalSearchParams<{ resume?: string }>();
   const [resumed] = useState(() => (resumeParam && !jump ? resumeLoaded() : null));
-  const [step, setStep] = useState<Step>(jump ?? (resumed ? resumeAt(resumed.step) : 'name'));
+  const [step, setStep] = useState<Step>(
+    jump ?? (resumed ? resumeAt(resumed.step) : (peekSkip() as Step[]).includes('name') ? 'level' : 'name'),
+  );
   const [dir, setDir] = useState<1 | -1>(1);
   const [a, setA] = useState<Partial<Answers>>(
     jump
@@ -210,6 +217,42 @@ export default function Onboarding() {
       .then(setFetched)
       .catch(() => {});
   }, []);
+  // "Skip the class" on the class's opener: app_config `first_class_skip`,
+  // hidden unless the dashboard says true (off since 2026-11-18).
+  const [canSkipClass, setCanSkipClass] = useState(false);
+  useEffect(() => {
+    void fetchFirstClassSkip()
+      .then(setCanSkipClass)
+      .catch(() => {});
+  }, []);
+  // Which first class plays (app_config `first_class_source`): asked as
+  // onboarding opens, and her level's database class fetched once it is known,
+  // so the class has its answer when it starts. On "local", only the switch is read.
+  useEffect(() => {
+    prefetchFirstClass(a.level);
+  }, [a.level]);
+  // The dashboard's other knobs (lib/remote-config.ts): custom screens, asked
+  // now and shown at their slot if they're in by then; questions left out.
+  // Read on the welcome screen already (prefetchRemoteConfig), so even the
+  // first question, name, can be left out.
+  const [skip, setSkip] = useState<Skippable[]>(peekSkip);
+  useEffect(() => {
+    void prefetchScreens();
+    void onboardingSkip()
+      .then(setSkip)
+      .catch(() => {});
+    // Each A/B test she lands in, on her PostHog person: one event per test.
+    return onAssigned((experiment, variant) =>
+      posthog?.capture('experiment_assigned', { experiment, variant, $set: { [`exp_${experiment}`]: variant } }),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // A question left out still needs an answer for the plan: the usual default.
+  useEffect(() => {
+    if (skip.includes('why') && !a.why) setA((cur) => ({ ...cur, why: 'trip', whys: ['trip'] }));
+    if (skip.includes('goal') && !a.minutes) setA((cur) => ({ ...cur, minutes: 10 }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [skip]);
   const notifyAt: NotifyAt = a.notifyAt ?? NOTIFY_AT_DEFAULT;
   // The order the bar counts, before it is frozen at the builder: the same
   // pick the builder will make, so the bar doesn't fill up and then grow a step.
@@ -224,25 +267,62 @@ export default function Onboarding() {
     posthog?.capture('onboarding_notify_at', { onboarding_notify_at: v, $set: { onboarding_notify_at: v } });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
-  const STEPS = ORDER[notifyAt];
+  // Left-out questions drop out of the order, never the one she is on (the
+  // answer may land while she's there).
+  const skipped = (s: Step) => s !== step && (skip as Step[]).includes(s);
+  const STEPS = ORDER[notifyAt].filter((s) => !skipped(s));
   const index = STEPS.indexOf(step);
-  const go = (to: Step, d: 1 | -1 = 1) => {
+  const goStep = (to: Step, d: 1 | -1 = 1) => {
     setDir(d);
     setStep(to);
+  };
+  // Custom screens (onboarding_screens): each slot plays its screens once, in
+  // order, then goes on. A slot reached before they're loaded plays none.
+  const [screens, setScreens] = useState<{ list: ScreenRow[]; at: number; then: () => void } | null>(null);
+  const played = useRef(new Set<Slot>());
+  const asking = useRef<Slot | null>(null);
+  const withScreens = async (slot: Slot, then: () => void) => {
+    // A second tap while the slot's screens are being picked: ignored.
+    if (asking.current === slot) return;
+    if (played.current.has(slot)) return then();
+    played.current.add(slot);
+    asking.current = slot;
+    const list = await screensFor(slot, { level: a.level, whys: a.whys }).catch(() => []);
+    asking.current = null;
+    if (!list.length) return then();
+    setScreens({ list, at: 0, then });
+    goStep('screen');
+  };
+  const shownId = step === 'screen' && screens ? screens.list[screens.at].id : null;
+  useEffect(() => {
+    if (shownId) posthog?.capture('onboarding_screen_shown', { id: shownId, slot: screens?.list[screens.at].slot ?? null });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shownId]);
+  const go = (to: Step, d: 1 | -1 = 1) => {
+    if (to === 'intro' && d === 1 && !played.current.has('before_class')) {
+      void withScreens('before_class', () => goStep('intro'));
+      return;
+    }
+    goStep(to, d);
   };
   const next = () => go(STEPS[Math.min(index + 1, STEPS.length - 1)]);
   const back = () => {
     // The beat before the paywall, and the Day 1 screen once the class is done
     // (its reminder may already be answered), are not gone back from.
-    if (step === 'offer' || (step === 'streak' && notifyAt === 'after_class')) return;
+    if (step === 'offer' || step === 'screen' || (step === 'streak' && notifyAt === 'after_class')) return;
     if (index === 0) return router.canGoBack() ? router.back() : router.replace('/welcome');
-    go(BACK[notifyAt][step] ?? STEPS[index - 1], -1);
+    // A left-out question is never gone back to: the one before it instead.
+    let to: Step | undefined = BACK[notifyAt][step] ?? STEPS[index - 1];
+    while (to && skipped(to)) to = ORDER[notifyAt][ORDER[notifyAt].indexOf(to) - 1];
+    if (!to) return router.canGoBack() ? router.back() : router.replace('/welcome');
+    go(to, -1);
   };
 
   // Paywall first, account after: she is a guest by now, or signed in (staff
   // replaying it). If no guest could be made — anonymous sign-ins switched
   // off, no connection — the account step comes first, as it used to.
-  const toPaywall = async () => {
+  const toPaywall = () => withScreens('before_paywall', () => void straightToPaywall());
+  const straightToPaywall = async () => {
     if (session || (await startGuest())) {
       // Onboarding ends at the paywall: a restart from here on is Home, as before.
       clearResume();
@@ -252,7 +332,8 @@ export default function Onboarding() {
   /** After the class's streak (or its skip): notifications, or the paywall if they came already. */
   /** The beat before the paywall. The clip is parked on the pour first, so the
    *  loader never opens on a frame from somewhere else in the loop. */
-  const toOffer = () => {
+  const toOffer = () => void withScreens('after_class', startOffer);
+  const startOffer = () => {
     pancho.pause();
     pancho.currentTime = POUR_FROM;
     go('offer');
@@ -298,7 +379,8 @@ export default function Onboarding() {
     else next();
   };
   const showChrome = step !== 'building';
-  const bar = BAR[planned].indexOf(step);
+  const barSteps = BAR[planned].filter((s) => s === step || !(skip as Step[]).includes(s));
+  const bar = barSteps.indexOf(step);
 
   // The first class and the two screens around it fill the screen themselves.
   if (BARE.includes(step)) {
@@ -312,9 +394,36 @@ export default function Onboarding() {
                 setClassAt(undefined);
                 go('class');
               }}
-              onSkip={afterClass}
+              onSkip={canSkipClass ? afterClass : undefined}
             />
           </SafeAreaView>
+        ) : step === 'screen' && screens ? (
+          (() => {
+            const cur = screens.list[screens.at];
+            const onNext = () => {
+              if (screens.at + 1 < screens.list.length) setScreens({ ...screens, at: screens.at + 1 });
+              else screens.then();
+            };
+            // A screen that fails to draw is skipped, never the end of onboarding.
+            return (
+              <ContentBoundary
+                key={cur.id}
+                fallback={<SkipBroken onSkip={onNext} />}
+                onError={(e) => posthog?.capture('onboarding_screen_error', { id: cur.id, error: e.message })}>
+                <RemoteScreen
+                  content={cur.content}
+                  onNext={() => {
+                    posthog?.capture('onboarding_screen_next', { id: cur.id });
+                    onNext();
+                  }}
+                  onPaywall={() => {
+                    posthog?.capture('onboarding_screen_paywall', { id: cur.id });
+                    void straightToPaywall();
+                  }}
+                />
+              </ContentBoundary>
+            );
+          })()
         ) : step === 'offer' ? (
           <OfferLoading player={pancho} reduced={reduced} onDone={() => void toPaywall()} />
         ) : step === 'class' ? (
@@ -341,7 +450,7 @@ export default function Onboarding() {
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={[styles.header, !showChrome && { opacity: 0 }]} pointerEvents={showChrome ? 'auto' : 'none'}>
           <IconButton icon="chevron-back" label="Back" onPress={back} />
-          {bar >= 0 ? <ProgressBar value={(bar + 1) / BAR[planned].length} /> : <View style={{ flex: 1 }} />}
+          {bar >= 0 ? <ProgressBar value={(bar + 1) / barSteps.length} /> : <View style={{ flex: 1 }} />}
           <View style={{ width: 36 }} />
         </View>
 
@@ -356,7 +465,7 @@ export default function Onboarding() {
               onNext={next}>
               {LEVEL.map((o, i) => (
                 <Animated.View key={o.value} entering={rise(i + 1, reduced)}>
-                  <Choice label={o.label} sub={o.sub} tone={o.tone} bars={o.bars} selected={a.level === o.value} onPress={() => {
+                  <Choice label={o.label} tone={o.tone} bars={o.bars} selected={a.level === o.value} onPress={() => {
                       tap();
                       // The struggle options depend on the level: a new level clears the old picks.
                       setA((cur) => ({ ...cur, level: o.value, struggle: cur.level === o.value ? cur.struggle : [] }));
@@ -534,15 +643,16 @@ function Choice({
       accessibilityState={multi ? { checked: selected } : { selected }}
       style={({ pressed }) => [styles.choice, selected && styles.choiceOn, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}>
       <View style={styles.choiceRow}>
-      <View style={[styles.coin, { backgroundColor: selected ? colors.card : tone }]}>
+      {/* The coin keeps its colour when picked: the row turning butter and the check say it (the user, 2026-11-19). */}
+      <View style={[styles.coin, { backgroundColor: tone }]}>
         {art ? (
           <Image source={ART[art]} style={styles.coinArt} contentFit="contain" accessible={false} />
         ) : bars ? (
           <View style={styles.bars}>
-            {[1, 2, 3, 4].map((k) => (
+            {[1, 2, 3, 4, 5].map((k) => (
               <View
                 key={k}
-                style={[styles.bar, { height: 6 + k * 4, backgroundColor: k <= bars ? (selected ? colors.primary : colors.ink) : 'rgba(58,42,32,0.2)' }]}
+                style={[styles.bar, { height: 5 + k * 3.4, backgroundColor: k <= bars ? colors.ink : 'rgba(58,42,32,0.2)' }]}
               />
             ))}
           </View>
@@ -599,7 +709,7 @@ function Says({ pose, line, small }: { pose?: Pose; line: string; small?: boolea
         <View style={styles.saysArt} accessible accessibilityRole="image" accessibilityLabel={`${MASCOT_NAME} the carpincho, drinking mate`}>
           {/* The still sits underneath until the first frame is up. */}
           <Image source={PANCHO} style={StyleSheet.absoluteFill} contentFit="contain" />
-          <VideoView
+          <VideoView allowsVideoFrameAnalysis={false}
             player={player}
             style={StyleSheet.absoluteFill}
             contentFit="contain"
@@ -678,7 +788,7 @@ function OfferLoading({ player, reduced, onDone }: { player: VideoPlayer; reduce
         {reduced ? (
           <Image source={PANCHO} style={StyleSheet.absoluteFill} contentFit="contain" />
         ) : (
-          <VideoView player={player} style={StyleSheet.absoluteFill} contentFit="contain" nativeControls={false} allowsPictureInPicture={false} surfaceType="textureView" />
+          <VideoView allowsVideoFrameAnalysis={false} player={player} style={StyleSheet.absoluteFill} contentFit="contain" nativeControls={false} allowsPictureInPicture={false} surfaceType="textureView" />
         )}
       </Animated.View>
       <Text style={styles.offerTitle} accessibilityRole="header" accessibilityLiveRegion="polite">
@@ -726,11 +836,14 @@ function StruggleStep({
     if (picked.includes(v)) return onChange(picked.filter((x) => x !== v));
     onChange(v === 'none' ? ['none'] : [...picked.filter((x) => x !== 'none'), v]);
   };
+  // No "THE FIX" under a picked row any more: the answer before the question
+  // was asked read as a sales line (2026-11-18). The fixes (o.posta) stay in
+  // onboarding.ts for whatever screen wants them later.
   return (
     <Question line={q.en} answered={picked.length > 0} hint="Pick all that apply" reduced={reduced} onNext={onNext}>
       {q.options.map((o, i) => (
         <Animated.View key={o.value} entering={rise(i + 1, reduced)} layout={reduced ? undefined : LinearTransition.duration(220).easing(EASE_OUT)}>
-          <Choice label={o.label} tone={o.tone} art={o.art} multi selected={picked.includes(o.value)} detail={o.posta} onPress={() => toggle(o.value)} />
+          <Choice label={o.label} tone={o.tone} art={o.art} multi selected={picked.includes(o.value)} onPress={() => toggle(o.value)} />
         </Animated.View>
       ))}
     </Question>
@@ -1323,11 +1436,14 @@ function StickerLine({ text, size }: { text: string; size: number }) {
 
 /** Where each part of the build starts, in seconds of clip: the lesson done,
  *  Pancho asking, her line landing, the fix, the first and the third slang card,
- *  the culture scene arriving, and its answer turning green. */
+ *  the culture scene arriving, and its photos drifting by. */
 const BUILD_BEATS = [0, 2.56, 5.15, 7.82, 9.98, 12.22, 15.42, 17.22, 19.9];
 /** The line closes and the check lands: the culture scene is about to leave. */
-/** Where the clip rests at the end, in seconds: the Course tab, its lesson done and the streak landed. */
-const COURSE_REST = 4.3;
+/** Where the clip rests at the end, in seconds: back on the Course tab, its
+ *  lesson waiting under Start. Not later: from 0.9 s a finger taps Start and the
+ *  road moves on to the next lesson, which read as "now the next class"
+ *  (2026-11-18). The same in all five clips. */
+const COURSE_REST = 0.6;
 const BUILD_CLOSED = 23.5;
 /** The result: the clip (23.67 s) has played through. */
 const BUILD_READY = 23.6;
@@ -1456,6 +1572,8 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
     });
     const end = player.addListener('playToEnd', () => {
       parking = true;
+      // At its own pace, so the stop lands on the rest frame, not past it.
+      player.playbackRate = 1;
       player.currentTime = 0;
       player.play();
     });
@@ -1504,9 +1622,9 @@ function Building({ answers, reduced, onReady, onNext }: { answers: Answers; red
               style={[styles.buildClip, { left: RIM_WIDTH / 2 + RIM_GAP, top: RIM_WIDTH / 2 + RIM_GAP, width: cardW, height: cardH, borderRadius: radiusIn }]}
               accessible
               accessibilityRole="image"
-              accessibilityLabel="Your course: a lesson done, a chat where Pancho fixes one word, three street words, and a question about the culture">
+              accessibilityLabel="Your course: a lesson done, a chat where Pancho fixes one word, three street words, and photos of Argentine things: mate, asado, empanadas, tango">
               {/* A TextureView keeps to the rounded corners (see ClipCard). */}
-              <VideoView
+              <VideoView allowsVideoFrameAnalysis={false}
                 player={player}
                 style={StyleSheet.absoluteFill}
                 contentFit="cover"
@@ -1747,8 +1865,8 @@ const styles = StyleSheet.create({
   coin: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', boxShadow: clay.chip },
   coinArt: { width: 34, height: 34 },
   coinGlyph: { ...font.display[900], fontSize: 19, letterSpacing: -0.3, color: colors.ink },
-  bars: { flexDirection: 'row', alignItems: 'flex-end', gap: 3, height: 22 },
-  bar: { width: 6, borderRadius: 3 },
+  bars: { flexDirection: 'row', alignItems: 'flex-end', gap: 2.5, height: 22 },
+  bar: { width: 4.5, borderRadius: 2.25 },
   choiceLabel: { ...font.body[700], flex: 1, fontSize: 16.5, lineHeight: 21, letterSpacing: -0.1, color: colors.ink },
   choiceSub: { ...font.body[600], fontSize: 14, lineHeight: 18, color: colors.muted },
   choiceTag: { paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill },
@@ -1857,3 +1975,12 @@ const styles = StyleSheet.create({
 
   error: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.dangerInk },
 });
+
+/** Drawn for a custom screen that crashed: moves straight on. */
+function SkipBroken({ onSkip }: { onSkip: () => void }) {
+  useEffect(() => {
+    onSkip();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return <View style={{ flex: 1, backgroundColor: colors.bg }} />;
+}

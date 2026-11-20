@@ -2,9 +2,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
+import { useEffect } from 'react';
 import { Animated, Platform, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 
-import { type ArPack, arPacks, arThemes, packTone, packsOf } from '@/lib/argentine';
+import { type ArPack, arPacks, arThemes, packTone, packsOf, prefetchCourseWords } from '@/lib/argentine';
+import { useAuth } from '@/lib/auth';
 import { themeObject } from '@/lib/argentine-art';
 import { type PackScore, useShowAdult } from '@/lib/argentine-scores';
 import { clay, colors, font, gradients, pastel, pastelGrad, press, radius } from '@/lib/theme';
@@ -46,6 +48,12 @@ const SHOW_KEEP = false;
 
 export function ArgentineHub({ scores }: { scores: Record<string, PackScore> }) {
   const [adult, setAdult] = useShowAdult();
+  // Which words she already knows takes a few seconds to work out; start now,
+  // so a pack opens with its "known" marks and its button ready.
+  const userId = useAuth().profile?.id;
+  useEffect(() => {
+    if (userId) prefetchCourseWords(userId);
+  }, [userId]);
   const themes = arThemes.filter((t) => adult || !t.vulgar);
   const shown = arPacks.filter((p) => adult || !p.vulgar);
   const played = shown.filter((p) => scores[p.slug]);

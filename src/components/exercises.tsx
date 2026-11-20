@@ -24,6 +24,7 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { KeyboardExtender, useKeyboardState } from 'react-native-keyboard-controller';
 import Animated, {
   Easing,
+  FadeIn,
   FadeInDown,
   FadeInRight,
   useAnimatedStyle,
@@ -34,7 +35,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 
-import { ExerciseFrame, TightContext, type Verdict } from '@/components/exercise-frame';
+import { ExerciseFrame, GentleContext, TightContext, type Verdict } from '@/components/exercise-frame';
 import { CheerUpContext } from '@/components/lesson-cheer';
 import { WrongAnswerActions } from '@/components/wrong-answer-actions';
 import { Panel } from '@/components/ui';
@@ -284,6 +285,12 @@ function ExerciseBody({
       return <SentenceBuild item={item} allForms={allForms} onAnswered={onAnswered} lexicon={lexicon} byEar />;
     case 'listen':
       return <Listen item={item} allForms={allForms} onAnswer={single} />;
+    case 'picture_pick':
+      return item.decoys?.length ? (
+        <PicturePick item={item} decoys={item.decoys} onAnswer={single} />
+      ) : (
+        <MultipleChoice item={item} allForms={allForms} onAnswer={single} />
+      );
     case 'true_false':
       return <TrueFalse item={item} allForms={allForms} onAnswer={single} />;
     case 'word_build':
@@ -704,6 +711,14 @@ const SPEAKERS = [
 ];
 let nextSpeaker = 0;
 
+/** A fixed capybara for every bubble and title inside it, instead of the next
+ *  in turn: the first class keeps Pancho with his box of facturas while it
+ *  teaches medialuna. */
+export const SpeakerArtContext = createContext<ImageSourcePropType | null>(null);
+/** Told when she leaves a new word's picture screen for its question, so a
+ *  host that counts steps (the first class's bar) can move on. */
+export const WordMetContext = createContext<(() => void) | null>(null);
+
 /** Every capybara is fitted into the same box, so the bubble beside it never
  *  shifts. No sun behind him: he is the figure, a bigger one in its place. */
 const SPEAKER_WIDTH = 104;
@@ -740,7 +755,8 @@ export function SpeechBubble({
    *  first one's tail pointing off the left edge. */
   bare?: boolean;
 }) {
-  const [speaker] = useState(() => SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
+  const fixedSpeaker = useContext(SpeakerArtContext);
+  const [speaker] = useState(() => fixedSpeaker ?? SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
   // Out of the way, he gives the bubble his width, so a long line wraps less.
   const shown = useMakeRoom();
   const speakerRoom = useAnimatedStyle(() => ({
@@ -890,7 +906,8 @@ function GapBubbles({
 }
 
 function useSpeaker() {
-  const [speaker] = useState(() => SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
+  const fixed = useContext(SpeakerArtContext);
+  const [speaker] = useState(() => fixed ?? SPEAKERS[nextSpeaker++ % SPEAKERS.length]);
   return speaker;
 }
 
@@ -1082,6 +1099,8 @@ export function Choices({
   revealed,
   onPick,
   side,
+  images,
+  captions,
 }: {
   options: Option[];
   correctId: string;
@@ -1090,9 +1109,16 @@ export function Choices({
   onPick: (id: string) => void;
   /** Two short answers (true / false) as big buttons next to each other instead of a list. */
   side?: boolean;
+  /** A picture per option, by id: the options become a 2×2 grid of pictures
+   *  and the label is only read out (the first class's beginners, who pick
+   *  what they see rather than read English). */
+  images?: Record<string, ImageSourcePropType>;
+  /** With `images`: once answered, each picture's name fades in under it, so
+   *  the three wrong ones are taught too (the course's picture pick). */
+  captions?: boolean;
 }) {
   return (
-    <View style={side ? styles.choicesSide : styles.choicesList}>
+    <View style={images ? styles.choicesGrid : side ? styles.choicesSide : styles.choicesList}>
       {options.map((opt) => {
         const picked = chosen === opt.id;
         const right = revealed && opt.id === correctId;
@@ -1101,6 +1127,7 @@ export function Choices({
           <Pressable
             key={opt.id}
             disabled={revealed}
+            accessibilityLabel={images ? opt.label : undefined}
             onPress={() => {
               tap();
               onPick(opt.id);
@@ -1108,12 +1135,29 @@ export function Choices({
             style={({ pressed }) => [
               styles.choice,
               side && styles.choiceSide,
+              images && styles.choicePicture,
+              // Shorter tiles when names come up under them, so the bottom
+              // row's names still clear the answer sheet.
+              images && captions && styles.choicePictureCaptioned,
               picked && styles.choicePicked,
               right && styles.choiceRight,
               wrong && styles.choiceWrong,
               { transform: [{ scale: pressed && !revealed ? press.scale : 1 }] },
               webPress,
             ]}>
+            {images ? (
+              <>
+                <Image source={images[opt.id]} style={styles.choiceImage} contentFit="contain" cachePolicy={WORD_ART_CACHE} accessible={false} />
+                {captions && revealed ? (
+                  <Animated.Text
+                    entering={CAPTION_IN}
+                    numberOfLines={1}
+                    style={[styles.choiceCaption, right && { color: colors.success }, wrong && { color: colors.danger }]}>
+                    {opt.label}
+                  </Animated.Text>
+                ) : null}
+              </>
+            ) : (
             <Text
               style={[
                 styles.choiceText,
@@ -1124,10 +1168,76 @@ export function Choices({
               ]}>
               {turnLines(opt.label)}
             </Text>
+            )}
           </Pressable>
         );
       })}
     </View>
+  );
+}
+
+// The names under the pictures arrive with the verdict, quickly: they are
+// the answer being shown, not a reveal to wait for.
+const CAPTION_IN = FadeIn.duration(180).easing(Easing.bezier(0.23, 1, 0.32, 1));
+
+/**
+ * A beginner's new word, right after meeting it: hear it, read it, tap its
+ * picture out of four (picture-pick.ts says which words and which pictures).
+ * The pictures carry no words until she has answered; then each one's name
+ * shows under it.
+ */
+function PicturePick({ item, decoys, onAnswer }: { item: QueueItem; decoys: Form[]; onAnswer: Single }) {
+  const { form } = item;
+  const article = articleOf(form);
+  const [options] = useState(() =>
+    [form, ...decoys]
+      .map((f) => ({ f, key: Math.random() }))
+      .sort((a, b) => a.key - b.key)
+      .map(({ f }) => ({ id: f.id, label: shownMeaning(f).text })),
+  );
+  const [images] = useState(() =>
+    Object.fromEntries([form, ...decoys].flatMap((f) => {
+      const art = courseArt(f.lemma_id);
+      return art ? [[f.id, art] as const] : [];
+    })),
+  );
+  const [chosen, setChosen] = useState<string | null>(null);
+  const [verdict, setVerdict] = useState<Verdict>(null);
+  const said = article ? `${article} ${form.form}` : form.form;
+  return (
+    <Frame
+      prompt={item.isRetry ? '🔁 Pick the right picture' : 'Pick the right picture'}
+      verdict={verdict}
+      canCheck={!!chosen}
+      onCheck={() =>
+        setVerdict({
+          correct: chosen === form.id,
+          answer: `${said} — ${meaningOf(form)}`,
+          about: form.gloss_note_en ?? undefined,
+        })
+      }
+      onContinue={() => onAnswer(!!verdict?.correct)}>
+      <SpeechBubble>
+        <View style={styles.bubbleRow}>
+          {form.audio_path ? <PlayButton path={form.audio_path} /> : null}
+          <View style={styles.bubbleText}>
+            <Text style={styles.bubbleWord} numberOfLines={1} adjustsFontSizeToFit>
+              {article ? <Text style={{ color: colors.muted }}>{article} </Text> : null}
+              {form.form}
+            </Text>
+          </View>
+        </View>
+      </SpeechBubble>
+      <Choices
+        options={options}
+        images={images}
+        captions
+        correctId={form.id}
+        chosen={chosen}
+        revealed={verdict !== null}
+        onPick={setChosen}
+      />
+    </Frame>
   );
 }
 
@@ -2689,12 +2799,27 @@ function SentenceIntro({
   // than a picture she can't reach), and it is paid for — a peeked word is
   // reported as hinted, which caps its rating (round.ts).
   const tappable = word ? (id: string) => id === word.id : () => true;
+  const gentle = useContext(GentleContext);
+  const onMet = useContext(WordMetContext);
 
-  if (word && art && !met) return <WordPicture form={word} art={art} onDone={() => setMet(true)} />;
+  if (word && art && !met)
+    return (
+      <WordPicture
+        form={word}
+        art={art}
+        onDone={() => {
+          setMet(true);
+          onMet?.();
+        }}
+      />
+    );
 
   // A form of more than one word ("sobre gustos no hay nada escrito") is a phrase, not a word.
   const isPhrase = !!word && /\s/.test(word.form.trim());
-  const prompt = word
+  // A first-day class keeps the title to its question (GentleContext).
+  const prompt = word && gentle
+    ? 'What does it say?'
+    : word
     ? `New ${isSlang(word) ? (isPhrase ? 'slang phrase' : 'slang') : isPhrase ? 'phrase' : 'word'} · what does it say?`
     : item.isRetry
       ? '🔁 What does the sentence say?'
@@ -2747,7 +2872,7 @@ function SentenceIntro({
           />
         )}
         <WordBubble state={words.showing} onClose={words.close} />
-        {word && !words.peeked.length ? (
+        {word && !gentle && !words.peeked.length ? (
           <Text style={styles.peekHint}>Tap the marked word to see what it means</Text>
         ) : null}
 
@@ -3451,6 +3576,12 @@ const styles = StyleSheet.create({
   // The outline eats into a small gap, so the options look glued at 10.
   choicesList: { gap: 14 },
   choicesSide: { flexDirection: 'row', gap: 12 },
+  // Pictures two by two, square, the picture inside the card's padding.
+  choicesGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 14, justifyContent: 'space-between' },
+  choicePicture: { width: '47%', aspectRatio: 1, padding: 12, alignItems: 'center', justifyContent: 'center' },
+  choiceImage: { width: '100%', flex: 1 },
+  choicePictureCaptioned: { aspectRatio: 1.25, paddingVertical: 8 },
+  choiceCaption: { ...font.body[700], fontSize: 14, color: colors.muted, marginTop: 4, textAlign: 'center' },
   choiceSide: { flex: 1, minHeight: 88, borderRadius: radius.lg - 4, alignItems: 'center', justifyContent: 'center' },
   choiceTextSide: { ...font.display[800], fontSize: 22 },
   choicePicked: PICKED,

@@ -179,6 +179,9 @@ export type Rating = 0 | 1 | 2 | 3; // otra vez, difícil, bien, fácil
 export type ExerciseMode =
   | 'flashcard'
   | 'multiple_choice'
+  /** A beginner's new word, heard and read: tap its picture out of four
+   *  (picture-pick.ts). Logged as multiple_choice. */
+  | 'picture_pick'
   | 'listen'
   | 'typing'
   | 'matching'

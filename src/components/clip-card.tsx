@@ -100,7 +100,7 @@ export function ClipCard({
           {/* A TextureView, not Android's default SurfaceView: it keeps to the
               rounded corners, and the feedback screenshot can see it (a
               SurfaceView comes out as a black box). */}
-          <VideoView
+          <VideoView allowsVideoFrameAnalysis={false}
             player={player}
             style={StyleSheet.absoluteFill}
             contentFit="cover"

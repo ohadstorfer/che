@@ -49,7 +49,12 @@ import { preloadPackArt } from '@/lib/word-art';
 const uniqueWords = (words: ArWord[]) => [...new Map(words.map((w) => [w.id, w])).values()];
 
 export default function ArgentineRound() {
-  const { pack: slug, first, lesson: lessonId } = useLocalSearchParams<{ pack?: string; first?: string; lesson?: string }>();
+  const { pack: slug, first, all, lesson: lessonId } = useLocalSearchParams<{
+    pack?: string;
+    first?: string;
+    all?: string;
+    lesson?: string;
+  }>();
   const pack = slug ? findPack(slug) : null;
   /** The unit's slang class, once its unit is known; null if it has none. */
   const [slang, setSlang] = useState<{ words: ArWord[]; packs: ArPack[] } | null | undefined>(undefined);
@@ -118,13 +123,15 @@ export default function ArgentineRound() {
       .catch(() => new Set<string>())
       .then((known) => {
         if (cancelled) return;
-        const words = pack.words.filter((w) => !knownIn(known, w));
-        setQueue(buildPackRound(words, first === '1'));
+        // all=1: she knows every word from the course and chose to review the
+        // pack anyway, so none are left out (and none are taught from zero).
+        const words = all === '1' ? pack.words : pack.words.filter((w) => !knownIn(known, w));
+        setQueue(buildPackRound(words.length ? words : pack.words, first === '1'));
       });
     return () => {
       cancelled = true;
     };
-  }, [pack, userId, first]);
+  }, [pack, userId, first, all]);
 
   if (lessonId) {
     if (ended) return <PathLessonDone lessonId={lessonId} result={ended.result} />;

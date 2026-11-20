@@ -5,7 +5,15 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/ui';
-import { type ArWord, findPack, findTheme, knownIn, loadCourseWords, packsOf } from '@/lib/argentine';
+import {
+  type ArWord,
+  cachedCourseWords,
+  findPack,
+  findTheme,
+  knownIn,
+  loadCourseWords,
+  packsOf,
+} from '@/lib/argentine';
 import { usePackScores } from '@/lib/argentine-scores';
 import { useAuth } from '@/lib/auth';
 import { goBack } from '@/lib/nav';
@@ -17,8 +25,9 @@ import { FitText } from '@/components/fit-text';
 // One Argentine pack (?pack=<slug>), just before she plays it: what it is, how
 // she did last time, and every word in it — a tap opens a word's note and its
 // example. Words the course has already taught her are marked "known" and
-// left out of the play. The button stays pinned at the bottom, however long
-// the list, so starting is always one tap.
+// left out of the play — unless she knows them all, and then the button
+// plays the whole pack as a review. The button stays pinned at the bottom,
+// however long the list, so starting is always one tap.
 // ---------------------------------------------------------------------------
 
 /** How common a pack's words are, said the way a learner would. */
@@ -34,14 +43,22 @@ export default function ArgentinePack() {
   const { profile } = useAuth();
   const scores = usePackScores();
   const bottom = useSafeAreaInsets().bottom;
-  const [known, setKnown] = useState<Set<string> | null>(null);
+  // The set kept from the Words tab paints the first frame; a fresh one
+  // replaces it behind the screen.
+  const [known, setKnown] = useState<Set<string> | null>(() =>
+    profile?.id ? cachedCourseWords(profile.id) : null,
+  );
   const [open, setOpen] = useState<string | null>(null);
 
   useEffect(() => {
     if (!profile?.id) return;
+    let cancelled = false;
     loadCourseWords(profile.id)
-      .then(setKnown)
-      .catch(() => setKnown(new Set()));
+      .then((set) => !cancelled && setKnown(set))
+      .catch(() => !cancelled && setKnown((had) => had ?? new Set()));
+    return () => {
+      cancelled = true;
+    };
   }, [profile?.id]);
 
   if (!pack) {
@@ -61,9 +78,19 @@ export default function ArgentinePack() {
   const isKnown = (w: ArWord) => !!known && knownIn(known, w);
   const knownCount = pack.words.filter(isKnown).length;
   const toLearn = pack.words.length - knownCount;
+  // Every word already known from the course: the pack is still hers to play,
+  // as a quick review of all of it, never a button that does nothing.
+  const allKnown = known !== null && toLearn === 0;
   // A first play teaches every word and asks each one about twice; a replay
-  // is quicker. Roughly twenty and ten seconds a word.
-  const minutes = Math.max(1, Math.round((toLearn * (score ? 10 : 20)) / 60));
+  // (or a review of words she knows) is quicker. Roughly twenty and ten
+  // seconds a word.
+  const minutes = allKnown
+    ? Math.max(1, Math.round((pack.words.length * 10) / 60))
+    : Math.max(1, Math.round((toLearn * (score ? 10 : 20)) / 60));
+  const play = () => {
+    if (allKnown) router.push(`/argentine-round?pack=${pack.slug}&all=1`);
+    else router.push(`/argentine-round?pack=${pack.slug}${score ? '' : '&first=1'}`);
+  };
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
@@ -139,13 +166,18 @@ export default function ArgentinePack() {
       </ScrollView>
 
       <View style={[styles.dock, { paddingBottom: 16 + bottom }]}>
+        {/* Until the known words are in, the count isn't real yet: the button
+            says it's checking (with its spinner) instead of offering a
+            number it can't keep. */}
         <Button
-          title={toLearn === 0 ? 'You know all of these' : score ? 'Practice again' : `Learn ${toLearn} words`}
-          onPress={() => router.push(`/argentine-round?pack=${pack.slug}${score ? '' : '&first=1'}`)}
-          disabled={toLearn === 0 || known === null}
+          title={allKnown || score ? 'Practice again' : `Learn ${toLearn} words`}
+          onPress={play}
+          loading={known === null}
         />
         <Text style={styles.dockNote}>
-          About {minutes} {minutes === 1 ? 'minute' : 'minutes'} · tap a word to see how it's used
+          {allKnown
+            ? `You know these from the course · about ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`
+            : `About ${minutes} ${minutes === 1 ? 'minute' : 'minutes'} · tap a word to see how it's used`}
         </Text>
       </View>
     </SafeAreaView>

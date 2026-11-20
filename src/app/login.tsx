@@ -1,8 +1,9 @@
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import Animated, { useReducedMotion } from 'react-native-reanimated';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { MASCOT_NAME, pop, POSE } from '@/components/mascot';
 import { IconButton, rise } from '@/components/onboarding-ui';
@@ -12,7 +13,7 @@ import { goBack, resetTo } from '@/lib/nav';
 import { signInWithApple, signInWithGoogle } from '@/lib/social-auth';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { supabase } from '@/lib/supabase';
-import { clay, colors, font, pastel, type } from '@/lib/theme';
+import { colors, font, OUTLINE, pastel, type } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
 // Login — for the people who already have Posta. One tap with Apple (on Apple
@@ -38,7 +39,17 @@ async function landAfterSocial() {
 }
 
 export default function Login() {
-  useStatusBarColor(colors.bg);
+  useStatusBarColor(pastel.lav);
+  const insets = useSafeAreaInsets();
+  // Pancho scales with the screen: about 24% of its height (196×203 on an
+  // 844 pt phone, as drawn), so the sheet and its buttons stay the clear focus.
+  // Clamped so a small phone still shows his head and a big one doesn't make
+  // him a poster. The disc behind him keeps the drawn proportions too.
+  const { height } = useWindowDimensions();
+  const artH = Math.round(Math.min(230, Math.max(150, height * 0.24)));
+  const art = { width: Math.round(artH * 0.965), height: artH, marginBottom: -Math.round(artH * 0.128) };
+  const podSize = Math.round(artH * 1.48);
+  const pod = { width: podSize, height: podSize, borderRadius: podSize / 2, bottom: -Math.round(artH * 0.365) };
   const reduced = useReducedMotion();
   const [busy, setBusy] = useState<Provider | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -55,51 +66,58 @@ export default function Login() {
   };
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
-      <View style={styles.header}>
+    <View style={styles.root}>
+      <SafeAreaView edges={['top']} style={styles.header}>
         <IconButton icon="chevron-back" label="Back" onPress={() => goBack('/welcome')} />
-      </View>
+      </SafeAreaView>
+      {/* Pancho stands on the sheet, his feet tucked behind its edge. */}
       <View style={styles.hero}>
-        <Animated.View entering={pop(0, reduced)} style={styles.tile}>
-          <View style={styles.pod} />
-          <Image source={POSE.wave} style={styles.art} contentFit="contain" accessibilityLabel={`${MASCOT_NAME} the carpincho, waving`} />
+        <View style={[styles.pod, pod]} />
+        <Animated.View entering={pop(0, reduced)}>
+          <Image source={POSE.wave} style={art} contentFit="cover" contentPosition="top" accessibilityLabel={`${MASCOT_NAME} the carpincho, waving`} />
         </Animated.View>
+      </View>
+      <View style={[styles.sheet, { paddingBottom: Math.max(insets.bottom, 16) + 20 }]}>
         <Animated.Text entering={rise(2, reduced)} style={styles.title} accessibilityRole="header">
-          ¡Volviste!{'\n'}Welcome back.
+          Welcome back
         </Animated.Text>
         <Animated.Text entering={rise(3, reduced)} style={styles.sub}>
-          Sign in to pick up where you left off.
+          Sign in and your streak, words and lessons are right where you left them.
         </Animated.Text>
+        <Animated.View entering={rise(5, reduced)} style={styles.actions}>
+          {error ? <Text style={[styles.error, { textAlign: 'center' }]}>{error}</Text> : null}
+          <SocialButtons busy={busy} onPress={(which) => void social(which)} />
+          <Text style={styles.newHere}>
+            New here?{' '}
+            <Text style={styles.link} onPress={() => router.push('/onboarding')} accessibilityRole="link" suppressHighlighting>
+              Start learning
+            </Text>
+          </Text>
+        </Animated.View>
       </View>
-      <Animated.View entering={rise(5, reduced)} style={styles.actions}>
-        {error ? <Text style={[styles.error, { textAlign: 'center' }]}>{error}</Text> : null}
-        <SocialButtons busy={busy} onPress={(which) => void social(which)} />
-      </Animated.View>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.bg },
-  header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingTop: 6, paddingBottom: 10 },
-  hero: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 28, maxWidth: 480, width: '100%', alignSelf: 'center' },
-  // A sticker: flat sky, ink outline, set down a touch crooked.
-  tile: {
-    width: 300,
-    maxWidth: '100%',
-    height: 240,
-    borderRadius: 46,
-    backgroundColor: pastel.sky,
-    boxShadow: clay.surface,
-    overflow: 'hidden',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    transform: [{ rotate: '-1.5deg' }],
+  root: { flex: 1, backgroundColor: pastel.lav },
+  header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingTop: 6 },
+  hero: { flex: 1, alignItems: 'center', justifyContent: 'flex-end', overflow: 'hidden', zIndex: 0 },
+  pod: { position: 'absolute', backgroundColor: 'rgba(255,255,255,0.35)' },
+  // The sheet: oat, ink outline, rising from the bottom edge.
+  sheet: {
+    backgroundColor: colors.bg,
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+    boxShadow: `0 0 0 ${OUTLINE}px ${colors.ink}`,
+    paddingHorizontal: 24,
+    paddingTop: 30,
+    zIndex: 1,
   },
-  pod: { position: 'absolute', top: 30, width: 210, height: 210, borderRadius: 105, backgroundColor: 'rgba(255,255,255,0.5)' },
-  art: { width: 150, height: 214, marginBottom: -6 },
-  title: { ...type.display, fontSize: 32, lineHeight: 36, letterSpacing: -0.7, color: colors.ink, textAlign: 'center', marginTop: 26 },
-  sub: { ...type.body, fontSize: 16.5, lineHeight: 22, color: colors.muted, textAlign: 'center', marginTop: 8 },
-  actions: { paddingHorizontal: 24, paddingTop: 8, paddingBottom: 12, gap: 12, maxWidth: 480, width: '100%', alignSelf: 'center' },
+  title: { ...type.display, fontSize: 34, lineHeight: 38, letterSpacing: -0.8, color: colors.ink, maxWidth: 480, width: '100%', alignSelf: 'center' },
+  sub: { ...type.body, fontSize: 16.5, lineHeight: 23, color: colors.muted, marginTop: 8, maxWidth: 480, width: '100%', alignSelf: 'center' },
+  actions: { paddingTop: 22, gap: 12, maxWidth: 480, width: '100%', alignSelf: 'center' },
+  newHere: { ...type.body, fontSize: 14.5, lineHeight: 20, color: colors.muted, textAlign: 'center', marginTop: 6 },
+  link: { ...font.body[700], color: colors.primary },
   error: { ...font.body[600], fontSize: 14, lineHeight: 20, color: colors.dangerInk },
 });

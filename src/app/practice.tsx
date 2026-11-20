@@ -176,7 +176,14 @@ export default function Practice() {
     if (!queue) return;
     resetShownArt();
     preloadCourseArt(
-      queue.flatMap((it) => [it.introduces?.lemma_id, it.isIntro ? it.form.lemma_id : undefined]).filter((id) => id != null),
+      queue
+        .flatMap((it) => [
+          it.introduces?.lemma_id,
+          it.isIntro || it.mode === 'picture_pick' ? it.form.lemma_id : undefined,
+          // A picture pick's wrong answers, so the four arrive together.
+          ...(it.decoys ?? []).map((d) => d.lemma_id),
+        ])
+        .filter((id) => id != null),
     );
   }, [queue]);
   const [allForms, setAllForms] = useState<Form[]>([]);

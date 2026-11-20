@@ -84,8 +84,37 @@ const fold = (s: string) =>
     .replace(/[̀-ͯ]/g, '')
     .trim();
 
-/** Every word she has met in the course, by its spelling and by its lemma. */
-export async function loadCourseWords(userId: string): Promise<Set<string>> {
+// The set costs every form_states row she has plus the whole lexicon — seconds
+// on a slow phone once she has met a couple of thousand words. So it is kept
+// for the app's life and refreshed behind the screen: what she knows only ever
+// grows, so a set from a few minutes ago is never wrong about a word she knew.
+const courseWords = new Map<string, Set<string>>();
+const courseWordsLoading = new Map<string, Promise<Set<string>>>();
+
+/** The last set loaded for her, if any — for a screen's first frame. */
+export const cachedCourseWords = (userId: string) => courseWords.get(userId) ?? null;
+
+/** Every word she has met in the course, by its spelling and by its lemma.
+ *  Fetches fresh (one fetch at a time per user) and keeps the answer. */
+export function loadCourseWords(userId: string): Promise<Set<string>> {
+  const running = courseWordsLoading.get(userId);
+  if (running) return running;
+  const load = fetchCourseWords(userId)
+    .then((set) => {
+      courseWords.set(userId, set);
+      return set;
+    })
+    .finally(() => courseWordsLoading.delete(userId));
+  courseWordsLoading.set(userId, load);
+  return load;
+}
+
+/** Warms the set up before she opens a pack, if it isn't there yet. */
+export function prefetchCourseWords(userId: string) {
+  if (!courseWords.has(userId)) loadCourseWords(userId).catch(() => {});
+}
+
+async function fetchCourseWords(userId: string): Promise<Set<string>> {
   // Her ids matched against the shared lexicon: sending them back in an `in`
   // list broke once she knew a few hundred words (the URL outgrew the gateway).
   const [states, lexicon] = await Promise.all([

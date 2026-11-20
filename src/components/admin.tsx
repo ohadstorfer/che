@@ -5,13 +5,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { playAudio } from '@/lib/audio';
 import { resetTo } from '@/lib/nav';
-import { colors, font, press, radius } from '@/lib/theme';
+import { clay, colors, font, press, radius, type } from '@/lib/theme';
 import type { ContentStatus } from '@/lib/types';
 
 // ---------------------------------------------------------------------------
-// The admin dashboard's building blocks. Dense and desktop-first — this is a
-// reviewer's work surface, not the learner's app — but in the app's own oat
-// and clay, so the two never feel like different products.
+// The admin dashboard's building blocks, in the app's own sticker look: oat
+// page, ink-outlined surfaces with a hard shadow, pastel icon dots — so the
+// admin feels like part of Posta, not a separate tool.
 // ---------------------------------------------------------------------------
 
 const webPress =
@@ -23,12 +23,12 @@ const webPress =
       } as object)
     : null;
 
+// Only what the owner uses. The course tools (units, reports, words, answers,
+// engine) still live at /admin/units, /admin/reports, … — just not in the nav.
 const NAV = [
-  { href: '/admin', label: 'Units', icon: 'layers-outline' },
-  { href: '/admin/reports', label: 'Reports', icon: 'flag-outline' },
-  { href: '/admin/words', label: 'Words', icon: 'book-outline' },
-  { href: '/admin/answers', label: 'Answers', icon: 'checkmark-done-outline' },
-  { href: '/admin/engine', label: 'Engine', icon: 'pulse-outline' },
+  { href: '/admin', label: 'Dashboard', icon: 'grid-outline' },
+  { href: '/admin/revenue', label: 'Revenue', icon: 'cash-outline' },
+  { href: '/admin/feedback', label: 'Feedback', icon: 'chatbubbles-outline' },
 ] as const;
 
 export function AdminScreen({
@@ -80,7 +80,7 @@ export function AdminScreen({
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
       <View style={styles.bar}>
         <Pressable onPress={() => resetTo('/home')} hitSlop={8} accessibilityLabel="Back to the app">
-          <Text style={styles.brand}>che · admin</Text>
+          <Text style={styles.brand}>Admin dashboard</Text>
         </Pressable>
         <View style={styles.nav}>
           {NAV.map((n) => {
@@ -90,7 +90,7 @@ export function AdminScreen({
                 key={n.href}
                 onPress={() => router.push(n.href)}
                 style={({ pressed }) => [styles.navItem, active && styles.navItemActive, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
-                <Ionicons name={n.icon} size={16} color={active ? colors.onPrimary : colors.muted} />
+                <Ionicons name={n.icon} size={14} color={active ? colors.onPrimary : colors.ink} />
                 <Text style={[styles.navText, active && styles.navTextActive]}>{n.label}</Text>
               </Pressable>
             );
@@ -165,7 +165,8 @@ export function RowLink({ onPress, children, style }: { onPress?: () => void; ch
       style={({ pressed, hovered }: { pressed: boolean; hovered?: boolean }) => [
         styles.row,
         hovered && onPress ? styles.rowHover : null,
-        { transform: [{ scale: pressed && onPress ? 0.995 : 1 }] },
+        pressed && onPress ? styles.rowPressed : null,
+        { transform: [{ scale: pressed && onPress ? press.scale : 1 }] },
         webPress,
         style,
       ]}>
@@ -256,64 +257,72 @@ const styles = StyleSheet.create({
   bar: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 20,
-    paddingHorizontal: 24,
-    paddingRight: 64,
-    paddingVertical: 10,
-    backgroundColor: colors.card,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    gap: 14,
+    paddingHorizontal: 20,
+    paddingRight: 68,
+    paddingTop: 8,
+    paddingBottom: 14,
+    backgroundColor: colors.bg,
     flexWrap: 'wrap',
   },
   // Pinned to the top-right corner so it stays put however the nav wraps.
-  close: { position: 'absolute', top: 6, right: 16, backgroundColor: colors.bg },
-  detailBar: { gap: 12, paddingHorizontal: 16, flexWrap: 'nowrap' },
-  detailTitle: { ...font.display[800], fontSize: 18, color: colors.ink, letterSpacing: -0.2 },
+  close: { position: 'absolute', top: 8, right: 18, backgroundColor: colors.card, boxShadow: clay.chip },
+  detailBar: { gap: 12, paddingHorizontal: 16, paddingRight: 16, flexWrap: 'nowrap' },
+  detailTitle: { ...type.section, color: colors.ink },
   detailSubtitle: { fontSize: 13, color: colors.muted },
-  brand: { fontSize: 15, ...font.body[800], color: colors.primaryDark, letterSpacing: 0.2 },
-  nav: { flexDirection: 'row', gap: 4, flexWrap: 'wrap' },
-  navItem: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 12, paddingVertical: 7, borderRadius: radius.pill },
+  brand: { ...type.section, fontSize: 22, color: colors.ink, width: '100%' },
+  nav: { flexDirection: 'row', gap: 10, flexWrap: 'wrap' },
+  navItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    paddingHorizontal: 11,
+    paddingVertical: 6,
+    borderRadius: radius.pill,
+    backgroundColor: colors.card,
+    boxShadow: clay.chip,
+  },
   navItemActive: { backgroundColor: colors.primary },
-  navText: { fontSize: 14, ...font.body[600], color: colors.muted },
+  navText: { ...type.label, fontSize: 13, color: colors.ink },
   navTextActive: { color: colors.onPrimary },
-  page: { padding: 24, gap: 20, maxWidth: 1100, width: '100%', alignSelf: 'center' },
+  page: { padding: 20, paddingBottom: 48, gap: 24, maxWidth: 1100, width: '100%', alignSelf: 'center' },
   head: { flexDirection: 'row', alignItems: 'center', gap: 12, flexWrap: 'wrap' },
-  back: { width: 36, height: 36, borderRadius: radius.pill, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card },
-  title: { ...font.display[800], fontSize: 24, color: colors.ink, letterSpacing: -0.3 },
-  subtitle: { fontSize: 15, color: colors.muted },
-  actions: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
-  section: { gap: 8 },
+  back: { width: 40, height: 40, borderRadius: radius.pill, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.card, boxShadow: clay.chip },
+  title: { ...type.title, color: colors.ink },
+  subtitle: { ...type.body, color: colors.muted },
+  actions: { flexDirection: 'row', gap: 10, flexWrap: 'wrap' },
+  section: { gap: 12 },
   sectionHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
-  sectionTitle: { fontSize: 13, ...font.body[700], letterSpacing: 0.5, color: colors.muted, textTransform: 'uppercase' },
+  sectionTitle: { ...type.label, letterSpacing: 0.6, color: colors.muted, textTransform: 'uppercase' },
   pill: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: radius.pill, alignSelf: 'flex-start' },
   pillText: { fontSize: 12, ...font.body[700] },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    paddingVertical: 10,
-    paddingHorizontal: 14,
+    paddingVertical: 14,
+    paddingHorizontal: 18,
     backgroundColor: colors.card,
-    borderRadius: radius.md,
-    borderWidth: 1,
-    borderColor: colors.border,
+    borderRadius: radius.lg,
+    boxShadow: clay.surface,
+    marginBottom: 4,
     flexWrap: 'wrap',
   },
-  rowHover: { borderColor: colors.primary },
+  rowHover: { backgroundColor: colors.stone },
+  rowPressed: { backgroundColor: colors.stone },
   small: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    paddingHorizontal: 12,
-    minHeight: 34,
-    borderRadius: radius.sm,
-    borderWidth: 1,
-    borderColor: colors.border,
+    paddingHorizontal: 14,
+    minHeight: 36,
+    borderRadius: radius.pill,
     backgroundColor: colors.card,
+    boxShadow: clay.chip,
   },
-  smallPrimary: { backgroundColor: colors.primary, borderColor: colors.primary },
-  smallDanger: { backgroundColor: colors.dangerSoft, borderColor: 'transparent' },
-  smallText: { fontSize: 14, ...font.body[600] },
+  smallPrimary: { backgroundColor: colors.primary },
+  smallDanger: { backgroundColor: colors.dangerSoft },
+  smallText: { ...type.label, fontSize: 14 },
   muted: { fontSize: 14, color: colors.muted, lineHeight: 20 },
   code: { backgroundColor: 'rgba(58, 42, 32, 0.05)', borderRadius: radius.sm, paddingHorizontal: 10, paddingVertical: 8 },
   codeText: { fontFamily: Platform.select({ web: 'ui-monospace, Menlo, monospace', default: 'Courier' }), fontSize: 13, color: colors.ink },

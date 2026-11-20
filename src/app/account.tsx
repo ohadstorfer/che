@@ -170,7 +170,7 @@ function Account() {
           {staff ? (
             <>
               <View style={styles.divider} />
-              <Row icon="construct-outline" tone="peach" label="Course dashboard" onPress={() => router.push('/admin')} />
+              <Row icon="construct-outline" tone="peach" label="Admin dashboard" onPress={() => router.push('/admin')} />
               <View style={styles.divider} />
               <Row icon="cafe-outline" tone="butter" label="First class (onboarding)" onPress={() => router.push('/admin/first-class')} />
               <View style={styles.divider} />

@@ -14,24 +14,17 @@ import { colors, font, pastel, press } from '@/lib/theme';
 // The door to her first class, in onboarding, right after "Building your
 // course". Built like the slang opener (slang-opener.tsx): the whole page in
 // one pastel (lavender here), a sticker headline slapped down, one picture,
-// one ink button. The four chips are the parts of the class, in the colours
-// its progress bar uses (first-class.tsx). "Skip the class" jumps over the
+// one ink button. "Skip the class" jumps over the
 // class to the notifications step.
 // ---------------------------------------------------------------------------
-
-const CHIPS: { label: string; bg: string; ink: string; tilt: string }[] = [
-  { label: 'EXERCISE', bg: colors.primary, ink: colors.onPrimary, tilt: '-3deg' },
-  { label: 'SLANG', bg: pastel.butter, ink: colors.ink, tilt: '2deg' },
-  { label: 'CULTURE', bg: pastel.peach, ink: colors.ink, tilt: '-2deg' },
-  { label: 'SPEAKING', bg: pastel.sage, ink: colors.ink, tilt: '3deg' },
-];
 
 const webPress =
   Platform.OS === 'web'
     ? ({ transitionProperty: 'transform', transitionDuration: `${press.duration}ms`, transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)' } as object)
     : null;
 
-export function FirstClassOpener({ onStart, onSkip }: { onStart: () => void; onSkip: () => void }) {
+/** Without `onSkip` there is no skip link (app_config `first_class_skip` = false). */
+export function FirstClassOpener({ onStart, onSkip }: { onStart: () => void; onSkip?: () => void }) {
   const bottom = useSafeAreaInsets().bottom;
   const { height } = useWindowDimensions();
   const reduced = useReducedMotion();
@@ -53,18 +46,14 @@ export function FirstClassOpener({ onStart, onSkip }: { onStart: () => void; onS
             </View>
           </RNAnimated.View>
         </View>
+        {/* Said up front that it is a taste, not a test (2026-11-18). The
+            part chips were dropped the same day. */}
+        <Animated.View entering={up(120)} style={styles.time}>
+          <Text style={styles.timeText}>QUICK TASTE · 2 MIN</Text>
+        </Animated.View>
         <Animated.Text entering={up(200)} style={styles.line}>
-          A bite of everything in Posta, in a few minutes.
+          A little of everything in Posta.
         </Animated.Text>
-        <View style={styles.chips}>
-          {CHIPS.map((c, i) => (
-            <Animated.View key={c.label} entering={up(260 + i * 50)}>
-              <View style={[styles.chip, { backgroundColor: c.bg, transform: [{ rotate: c.tilt }] }]}>
-                <Text style={[styles.chipText, { color: c.ink }]}>{c.label}</Text>
-              </View>
-            </Animated.View>
-          ))}
-        </View>
         <Animated.View entering={up(160)}>
           <Image source={POSE.gol} style={{ width: art * 0.9, height: art, marginTop: 14 }} contentFit="contain" accessibilityLabel="Pancho celebrating" />
         </Animated.View>
@@ -79,9 +68,14 @@ export function FirstClassOpener({ onStart, onSkip }: { onStart: () => void; onS
           style={({ pressed }) => [styles.button, { transform: [{ scale: pressed ? press.scale : 1 }] }, webPress]}>
           <Text style={styles.buttonText}>Let’s go</Text>
         </Pressable>
-        <Pressable onPress={onSkip} accessibilityRole="button" hitSlop={6} style={styles.skip}>
-          <Text style={styles.skipText}>Skip the class</Text>
-        </Pressable>
+        {onSkip ? (
+          <Pressable onPress={onSkip} accessibilityRole="button" hitSlop={6} style={styles.skip}>
+            <Text style={styles.skipText}>Skip the class</Text>
+          </Pressable>
+        ) : (
+          // The link's room stays, so the button doesn't sit lower when it is gone.
+          <View style={styles.skip} />
+        )}
       </View>
     </View>
   );
@@ -92,15 +86,17 @@ const styles = StyleSheet.create({
   body: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 20, paddingTop: 24 },
   your: { ...font.display[800], fontSize: 26, lineHeight: 30, color: colors.ink, textAlign: 'center', marginBottom: -26 },
   second: { marginTop: -34 },
-  line: { ...font.body[700], fontSize: 17, lineHeight: 23, color: colors.ink, textAlign: 'center', maxWidth: 300, marginTop: -8 },
-  chips: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 10, marginTop: 16 },
-  chip: {
-    paddingHorizontal: 13,
-    paddingVertical: 7,
+  time: {
+    marginTop: -2,
+    marginBottom: 14,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
     borderRadius: 99,
-    boxShadow: `0 0 0 2px ${colors.ink}, 2px 3px 0 2px ${colors.ink}`,
+    backgroundColor: colors.card,
+    boxShadow: `0 0 0 2px ${colors.ink}`,
   },
-  chipText: { ...font.body[800], fontSize: 13, letterSpacing: 0.6 },
+  timeText: { ...font.body[800], fontSize: 12, letterSpacing: 0.8, color: colors.ink },
+  line: { ...font.body[700], fontSize: 17, lineHeight: 23, color: colors.ink, textAlign: 'center', maxWidth: 300, marginTop: -8 },
   footer: { paddingHorizontal: 20, paddingTop: 8, gap: 2, alignItems: 'center', maxWidth: 560, width: '100%', alignSelf: 'center' },
   // Ink, as on the slang opener: the page already has its one colour.
   button: {

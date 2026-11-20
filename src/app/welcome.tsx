@@ -21,6 +21,7 @@ import { Button } from '@/components/ui';
 import { trackStep } from '@/lib/funnel';
 import { useStatusBarColor } from '@/lib/status-bar-color';
 import { clay, colors, font, pastel } from '@/lib/theme';
+import { prefetchRemoteConfig } from '@/lib/remote-config';
 
 // ---------------------------------------------------------------------------
 // Welcome — the first screen of a fresh install. The promise, in the same
@@ -66,6 +67,8 @@ const PASS = ROWS[0].length * (TILE + GAP);
 const SECONDS = [34, 40];
 
 export default function Welcome() {
+  // Onboarding's dashboard knobs, asked now so its first question knows whether it is left out.
+  useEffect(() => prefetchRemoteConfig(), []);
   useStatusBarColor(colors.bg);
   const reduced = useReducedMotion();
   // Staff replaying onboarding from the admin screen start here too, and the

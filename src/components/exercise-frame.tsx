@@ -44,6 +44,10 @@ export type Verdict = {
  *  the page at the cut edge. Left unset, the cut edge only gets its arrow. */
 export const PageColorContext = createContext<string | undefined>(undefined);
 
+/** A first-day class (onboarding's first class): a miss reads "Almost!", not
+ *  "Incorrect", and screens keep their titles to a few words. */
+export const GentleContext = createContext(false);
+
 /** Would hide the capybara while the keyboard is up. No longer set (the
  *  picture vanishing read as a glitch); the body scrolls to the field instead. */
 export const TightContext = createContext(false);
@@ -327,6 +331,7 @@ function FeedbackBar({
   };
   // Varied, so the hundredth right answer still sounds like someone noticed.
   const [praise] = useState(() => PRAISE[Math.floor(Math.random() * PRAISE.length)]);
+  const gentle = useContext(GentleContext);
 
   // The answer lands: the chime and the tap at once, then the Spanish said a
   // beat later, once the chime has had its moment instead of talking over it.
@@ -385,7 +390,7 @@ function FeedbackBar({
           <Ionicons name={good ? 'checkmark' : 'close'} size={18} color={colors.onPrimary} />
         </View>
         <Text style={[styles.feedbackTitle, { color: tint }]}>
-          {good ? praise : 'Incorrect'}
+          {good ? praise : gentle ? 'Almost!' : 'Incorrect'}
         </Text>
       </View>
 

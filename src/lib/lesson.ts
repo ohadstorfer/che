@@ -1,3 +1,4 @@
+import { PICTURE_PICK_PER_LESSON, canPicturePick, pictureDecoys } from './picture-pick';
 import {
   DEFAULT_LADDER,
   type Ladder,
@@ -248,6 +249,17 @@ export function resolveSlots(
     tip,
   });
 
+  // A beginner's new word that a picture can say, right after she meets it
+  // (in a teach slot or a drill's intro sentence): pick it out of four
+  // pictures. At most PICTURE_PICK_PER_LESSON a lesson.
+  let picturePicks = 0;
+  const pushPicturePick = (form: Form) => {
+    if (picturePicks >= PICTURE_PICK_PER_LESSON || !canPicturePick(form)) return;
+    const decoys = pictureDecoys(form, deck, data.formById.values());
+    if (!decoys) return;
+    items.push({ form, state: null, mode: 'picture_pick', direction: 'es_to_en', decoys });
+    picturePicks += 1;
+  };
   for (const slot of slots) {
     switch (slot.kind) {
       case 'teach': {
@@ -279,6 +291,9 @@ export function resolveSlots(
         // right away is what makes it hers (Duolingo's "now you try"). A word
         // with nothing to build — no recording for a loanword — keeps its
         // first question.
+        // A beginner's word that a picture can say is picked out of four
+        // pictures first: heard, read, recognised, and only then built.
+        if (!sibling) pushPicturePick(form);
         const asked = intro && sibling ? [] : itemsForForm(form, null, deck, ladder);
         const first = asked.find((i) => i.mode === 'word_build' || i.mode === 'listen_build') ?? asked[0];
         if (first) items.push(first);
@@ -300,7 +315,10 @@ export function resolveSlots(
         // A gap authored on a slot still hardens with the sentence's passes.
         if (mode === 'sentence_gap') mode = gapMode(sentence, ladder);
         items.push(sentenceItem(data, sentence, mode, target, introduces));
-        if (introduces) introduced.add(target.id);
+        if (introduces) {
+          introduced.add(target.id);
+          pushPicturePick(target);
+        }
         break;
       }
 

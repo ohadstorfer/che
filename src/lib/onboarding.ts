@@ -27,7 +27,7 @@ export type Art = keyof typeof ART;
 // ---------------------------------------------------------------------------
 
 export type Why = 'moving' | 'trip' | 'love' | 'people' | 'culture';
-export type Level = 'none' | 'basics' | 'spanish' | 'conversational';
+export type Level = 'none' | 'basics' | 'learning' | 'spanish' | 'conversational';
 export type When = 'month' | 'quarter' | 'half' | 'someday';
 export type Minutes = 5 | 10 | 15 | 20;
 
@@ -65,6 +65,13 @@ export async function fetchNotifyAt(): Promise<NotifyAt> {
   return data?.value === 'after_build' ? 'after_build' : NOTIFY_AT_DEFAULT;
 }
 
+/** `first_class_skip` in app_config: whether the first class's opener offers
+ *  "Skip the class". Shown only by an explicit true; unread, it stays hidden. */
+export async function fetchFirstClassSkip(): Promise<boolean> {
+  const { data } = await supabase.from('app_config').select('value').eq('key', 'first_class_skip').maybeSingle();
+  return data?.value === true;
+}
+
 /** ", Sam" or nothing: for the lines that end on her name. */
 export const nameTail = (a: Partial<Answers>) => (a.name?.trim() ? `, ${a.name.trim()}` : '');
 
@@ -84,11 +91,14 @@ export const WHY: { value: Why; label: string; icon: string; art: Art; tone: str
 export const mainWhy = (whys: Why[]): Why =>
   (['moving', 'trip', 'love', 'people', 'culture'] as Why[]).find((w) => whys.includes(w)) ?? 'trip';
 
-export const LEVEL: { value: Level; label: string; short: string; sub: string; bars: number; tone: string; react: string }[] = [
-  { value: 'none', label: 'I’m new to Spanish', short: 'New to Spanish', sub: '“Hola” is about it', bars: 1, tone: pastel.sky, react: 'Perfecto. Nothing to unlearn.' },
-  { value: 'basics', label: 'I know a few words', short: 'A few words', sub: 'I can say hi and order a coffee', bars: 2, tone: pastel.sage, react: 'Bien. Keep it. I’ll add the local parts.' },
-  { value: 'spanish', label: 'I can get by in Spanish', short: 'I get by', sub: 'Simple chats, the textbook way (tú, not vos)', bars: 3, tone: pastel.lav, react: 'Then you have 90%. I’ll give you the rest.' },
-  { value: 'conversational', label: 'I speak Spanish well', short: 'Speak it well', sub: 'Now I want to sound Argentine', bars: 4, tone: pastel.peach, react: '¡Genial! We skip the basics.' },
+// Five steps since 2026-11-18: from "a few words" straight to "I get by" was
+// too big a jump, so "I know the basics" sits between them. No subtitles.
+export const LEVEL: { value: Level; label: string; short: string; bars: number; tone: string; react: string }[] = [
+  { value: 'none', label: 'I’m new to Spanish', short: 'New to Spanish', bars: 1, tone: pastel.sky, react: 'Perfecto. Nothing to unlearn.' },
+  { value: 'basics', label: 'I know a few words', short: 'A few words', bars: 2, tone: pastel.sage, react: 'Bien. Keep it. I’ll add the local parts.' },
+  { value: 'learning', label: 'I know the basics', short: 'The basics', bars: 3, tone: pastel.butter, react: 'Good base. Now we make it Argentine.' },
+  { value: 'spanish', label: 'I can get by in Spanish', short: 'I get by', bars: 4, tone: pastel.lav, react: 'Then you have 90%. I’ll give you the rest.' },
+  { value: 'conversational', label: 'I speak Spanish well', short: 'Speak it well', bars: 5, tone: pastel.peach, react: '¡Genial! We skip the basics.' },
 ];
 
 /** Whether she already speaks Spanish: the flashcards show her full sentences. */
@@ -124,7 +134,7 @@ export const MINUTES: { value: Minutes; label: string; words: number; tone: stri
 
 // --- try it: a textbook line she turns into the Buenos Aires one -----------
 
-const VARIANT: Record<Level, 'n' | 't' | 'q' | 'c'> = { none: 'n', basics: 't', spanish: 'q', conversational: 'c' };
+const VARIANT: Record<Level, 'n' | 't' | 'q' | 'c'> = { none: 'n', basics: 't', learning: 'q', spanish: 'q', conversational: 'c' };
 
 // Same number of words in both lines; the ones that differ are hers to tap.
 // Longer lines and less help as the level goes up.
@@ -183,6 +193,7 @@ export function tryIt(a: Pick<Answers, 'why' | 'level'>): TryIt {
   const copy = {
     none: { head: 'Make it Argentine.', start, done: '¡Eso! Your first Argentine sentence.' },
     basics: { head: 'Make it Argentine.', start, done: '¡Eso! That’s how we say it here.' },
+    learning: { head: 'Make it Argentine.', start, done: '¡Eso! Now it sounds like Buenos Aires.' },
     spanish: { head: 'Which words give you away?', start, done: '¡Eso! Nobody will ask where you learned it.' },
     conversational: { head: 'Which words give you away?', start, done: '¡Eso! Now you sound like you live here.' },
   }[a.level];
@@ -214,7 +225,7 @@ export function struggleQuestion(level: Level): { en: string; options: StruggleO
         { value: 'none', label: 'Honestly? Nothing. Let’s go', art: 'flag', tone: pastel.butter, react: '¡Esa! Let’s go.', posta: 'We start right where you are' },
       ],
     };
-  if (level === 'basics')
+  if (level === 'basics' || level === 'learning')
     return {
       en: 'What got in the way before?',
       options: [
@@ -248,16 +259,17 @@ export interface AchieveRow {
 }
 
 const SCENE: Record<Why, Record<Level, string>> = {
-  trip: { none: 'Order a coffee and find your bus', basics: 'Order dinner and chat with the waiter', spanish: 'Order like a porteño, not a tourist', conversational: 'Trade jokes with the waiter at a parrilla' },
-  moving: { none: 'Greet the portero and buy a SUBE', basics: 'Rent a depto and sort the paperwork', spanish: 'Handle landlord, bank and kiosco in vos', conversational: 'Sound like a neighbour, not a newcomer' },
-  love: { none: 'Greet the whole family the Argentine way', basics: 'Follow the talk at the family asado', spanish: 'Joke with the in‑laws in their Spanish', conversational: 'Be one of the family at the table' },
-  people: { none: 'Say hi and make plans in the chat', basics: 'Keep up with small talk at work', spanish: 'Use dale, re and che like they do', conversational: 'Hold your own when everyone talks at once' },
-  culture: { none: 'Catch the words in songs and matches', basics: 'Follow a match with the locals', spanish: 'Get the lunfardo in tango and rock', conversational: 'Get the jokes without subtitles' },
+  trip: { none: 'Order a coffee and find your bus', basics: 'Order dinner and chat with the waiter', learning: 'Order dinner and ask for directions', spanish: 'Order like a porteño, not a tourist', conversational: 'Trade jokes with the waiter at a parrilla' },
+  moving: { none: 'Greet the portero and buy a SUBE', basics: 'Rent a depto and sort the paperwork', learning: 'Sort out the depto and the bank', spanish: 'Handle landlord, bank and kiosco in vos', conversational: 'Sound like a neighbour, not a newcomer' },
+  love: { none: 'Greet the whole family the Argentine way', basics: 'Follow the talk at the family asado', learning: 'Chat with the family at the asado', spanish: 'Joke with the in‑laws in their Spanish', conversational: 'Be one of the family at the table' },
+  people: { none: 'Say hi and make plans in the chat', basics: 'Keep up with small talk at work', learning: 'Make plans and small talk in vos', spanish: 'Use dale, re and che like they do', conversational: 'Hold your own when everyone talks at once' },
+  culture: { none: 'Catch the words in songs and matches', basics: 'Follow a match with the locals', learning: 'Follow the chants at a match', spanish: 'Get the lunfardo in tango and rock', conversational: 'Get the jokes without subtitles' },
 };
 
 const SKILL: Record<Level, { text: string; glyph: string }> = {
   none: { text: 'Say your first words the local way', glyph: 'che' },
   basics: { text: 'Use vos and tenés like everyone here', glyph: 'vos' },
+  learning: { text: 'Switch to vos: tenés, querés, sos', glyph: 'vos' },
   spanish: { text: 'Swap tú for vos without thinking', glyph: 'vos' },
   conversational: { text: 'Nail the vos commands: vení, decime, mirá', glyph: 'vení' },
 };
@@ -319,6 +331,7 @@ export function reminderLine(a: Answers): string {
 export const WORDS_OF_DAY: Record<Level, [string, string][]> = {
   none: [['che', 'hey'], ['dale', 'OK, sure'], ['bondi', 'the bus']],
   basics: [['dale', 'OK, sure'], ['bondi', 'the bus'], ['guita', 'money']],
+  learning: [['dale', 'OK, sure'], ['laburo', 'work'], ['quilombo', 'a total mess']],
   spanish: [['quilombo', 'a total mess'], ['laburo', 'work'], ['posta', 'for real']],
   conversational: [['chamuyo', 'smooth talk'], ['fiaca', 'can’t be bothered'], ['bancar', 'to back someone']],
 };
@@ -397,7 +410,7 @@ function weeksFor(level: Level, minutes: Minutes): number {
   // Weeks to a first real conversation: where she starts, slowed or sped by
   // her daily minutes. Rough on purpose — it is a promise sized to her, not a
   // forecast, and it errs early so it reads as reachable.
-  const base = { none: 16, basics: 11, spanish: 5, conversational: 3 }[level];
+  const base = { none: 16, basics: 11, learning: 8, spanish: 5, conversational: 3 }[level];
   return Math.max(2, Math.round(base * (10 / minutes) ** 0.6));
 }
 

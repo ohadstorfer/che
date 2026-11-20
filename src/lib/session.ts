@@ -72,6 +72,9 @@ export interface SessionItem {
   /** Drilled and logged, but never scheduled: padding, or a word a sentence
    *  dragged along that SM-2 didn't ask for. */
   filler?: boolean;
+  /** Set on `picture_pick`: the three wrong pictures, chosen when the lesson
+   *  is built so a re-render never reshuffles them. */
+  decoys?: Form[];
   /** Set on `tip` items. */
   tip?: Tip;
   /** Came from an earlier unit through a lesson's review slot. */
@@ -578,6 +581,7 @@ const TIER: Partial<Record<ExerciseMode, 0 | 1 | 2>> = {
   sentence_intro: 0,
   matching: 0,
   multiple_choice: 0,
+  picture_pick: 0,
   true_false: 0,
   listen: 0,
   sentence_meaning: 0,

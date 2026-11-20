@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -61,7 +61,8 @@ import { supabase } from '@/lib/supabase';
 import { clay, colors, font, pastel, press, radius, type } from '@/lib/theme';
 import { scheduleTrialReminder } from '@/lib/trial-reminder';
 import { winbackOfferUntil } from '@/lib/winback-offer';
-import { learnedMoreSeen, markLearnedMore, queueWelcomeTour, startTourPreview } from '@/lib/welcome-tour';
+import { type PaywallConfig, SCREEN_COLORS, type ScreenColor, paywallConfig } from '@/lib/remote-config';
+import { queueWelcomeTour } from '@/lib/welcome-tour';
 
 // ---------------------------------------------------------------------------
 // Paywall — flow 7: ask right after onboarding, with a free week on the
@@ -91,13 +92,14 @@ const trialWord = (days: number) => (days === 7 ? 'week' : days === 30 || days =
 /** The headline: three lines, each kept on one line on every phone. */
 const HERO = ['Understand Argentines.', 'Sound like one.', 'In a few minutes a day.'];
 
-/** What the plan opens. The AI chat is never called "Hablar" here. */
-const PERKS = [
-  { t: 'A full Argentine Spanish course', tone: pastel.sage },
-  { t: 'AI speaking practice', tone: pastel.peach },
-  { t: 'Real Argentine slang', tone: pastel.sky },
-  { t: 'Culture lessons', tone: pastel.lav },
-];
+/** The sticker line's size: 21 when it fits, smaller for a longer line, never under 15.
+ *  Room = the screen less the page's and the sticker's padding; a display-font
+ *  character is about 0.56 of its size wide. */
+const stickerSize = (text: string, width: number) => {
+  const room = Math.min(width, 560) - 48 - 28;
+  const size = Math.max(15, Math.min(21, room / (Math.max(text.length, 1) * 0.56)));
+  return { fontSize: size, lineHeight: Math.round(size * 1.25) };
+};
 
 /** A failed restore, a moment ago: tapping again says the same, without asking the store. */
 const RESTORE_COOLDOWN = 15000;
@@ -108,9 +110,6 @@ const RESTORE_COOLDOWN = 15000;
 export default function Paywall() {
   useStatusBarColor(colors.bg);
   const reduced = useReducedMotion();
-  // Below a Max (the 17 Pro and smaller), "What you'll unlock" sits a little
-  // closer to the timeline so its title peeks over the button.
-  const short = useWindowDimensions().height < 900;
   const params = useLocalSearchParams<{ from?: string; code?: string; offer?: string }>();
   const from = (params.from ?? 'home') as PaywallSource;
   const { catalog, hardPaywall, configReady, pass, grant, refresh, refreshPass, reloadCatalog, testerUnlock, unlockAsTester } = usePremium();
@@ -125,27 +124,44 @@ export default function Paywall() {
     setRetrying(false);
   };
   const freeWeek = hardPaywall && pass?.state === 'offer';
+  // The dashboard's knobs (app_config `paywall`, lib/remote-config.ts): the
+  // headline, the plans, the close button and its offer. Unread: the defaults.
+  const [cfg, setCfg] = useState<PaywallConfig | null>(null);
+  useEffect(() => {
+    let alive = true;
+    void paywallConfig()
+      .then((c) => alive && setCfg(c))
+      .catch(() => alive && setCfg((c) => c ?? {}));
+    // No answer in 3 s (no connection): the defaults, so the close button still comes.
+    const t = setTimeout(() => alive && setCfg((c) => c ?? {}), 3000);
+    return () => {
+      alive = false;
+      clearTimeout(t);
+    };
+  }, []);
+  const winWidth = useWindowDimensions().width;
+  const hero = cfg?.hero?.length === 3 && cfg.hero.every((l) => typeof l === 'string' && l.trim()) ? cfg.hero : HERO;
 
   const [stage, setStage] = useState<Stage>('plans');
-  // With the hard paywall there is no way out (the gate, and right after
-  // onboarding until the server has said which it is). The free week is offered
-  // here from the next day instead (free-unit.tsx). One exception: out of
-  // onboarding, once she has watched "Learn more" and come back still not
-  // buying, a close button shows, and closing opens the one-time offer.
-  // Declining that brings her back to the plans, now with no way out.
-  const [tourSeen, setTourSeen] = useState(learnedMoreSeen);
-  useFocusEffect(useCallback(() => setTourSeen(learnedMoreSeen()), []));
-  const [winbackUsed, setWinbackUsed] = useState(true);
-  useEffect(() => {
-    void winbackShown().then(setWinbackUsed);
-  }, []);
+  // With the hard paywall there is no way out: no close button, not even out of
+  // onboarding (the user, 2026-11-19, when "Learn more" went). The free week is
+  // offered here from the next day instead (free-unit.tsx).
   const offerReady = from === 'onboarding' && !!catalog?.winback && winbackDiscount(main, catalog.winback) != null;
-  const escape = hardPaywall && from === 'onboarding' && configReady && tourSeen && offerReady && !winbackUsed && stage === 'plans';
-  const locked = (hardPaywall && !escape) || from === 'gate' || (from === 'onboarding' && !configReady);
+  const locked = hardPaywall || from === 'gate' || (from === 'onboarding' && !configReady);
+  // The hard paywall out of onboarding still gets a close button after a few
+  // seconds (the user, 2026-11-19), but it only opens the one-time 40% offer,
+  // never a way out. Not when the offer was already shown or isn't priced.
+  const [offerSeen, setOfferSeen] = useState<boolean | null>(null);
+  useEffect(() => {
+    void winbackShown().then(setOfferSeen);
+  }, []);
+  const exitOffer =
+    from === 'onboarding' && hardPaywall && configReady && cfg?.close_offer !== false && offerReady && offerSeen === false && stage === 'plans';
   const [selected, setSelected] = useState<string | null>(null);
   const [busy, setBusy] = useState<'buy' | 'restore' | 'tester' | 'code' | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [canClose, setCanClose] = useState(from !== 'onboarding');
+  const showClose = (!locked || exitOffer) && canClose;
   const [purchasedTrial, setPurchasedTrial] = useState(0);
   // A discount code: Android types it here; iOS types it in Apple's own sheet.
   const [codeOpen, setCodeOpen] = useState(false);
@@ -159,10 +175,14 @@ export default function Paywall() {
 
   // The first showing holds the close button back a moment, never longer.
   useEffect(() => {
-    if (canClose) return;
-    const t = setTimeout(() => setCanClose(true), 2200);
+    // Wait for the premium config too: hardPaywall starts false, and a 2.2 s timer
+    // started before it lands would show the hard paywall's X far too early.
+    if (canClose || !cfg || !configReady) return;
+    // The dashboard's delay is for the hard paywall's X; the soft one keeps its 2.2 s.
+    const secs = hardPaywall ? (cfg.close_after_seconds ?? 15) : 2.2;
+    const t = setTimeout(() => setCanClose(true), Math.max(0, secs) * 1000);
     return () => clearTimeout(t);
-  }, [canClose]);
+  }, [canClose, cfg, hardPaywall, configReady]);
 
   useEffect(() => {
     track('paywall_shown', { from });
@@ -198,12 +218,15 @@ export default function Paywall() {
   // The yearly plan comes first and is chosen for her until she picks one
   // herself — even if the store lists the monthly plan a moment before it.
   const picked = useRef(false);
+  const shownPlans = (main?.plans ?? []).filter((p) => cfg?.show_monthly !== false || p.period !== 'month' || main!.plans.length === 1);
   useEffect(() => {
-    const first = main?.plans[0];
+    // Her pick stands unless that plan is no longer shown (the config arrived late and hid it).
+    if (picked.current && !shownPlans.some((p) => p.id === selected)) picked.current = false;
+    const first = shownPlans.find((p) => p.period === (cfg?.preselect ?? 'year')) ?? shownPlans[0];
     if (first && !picked.current && selected !== first.id) setSelected(first.id);
-  }, [main, selected]);
+  }, [main, selected, cfg]);
 
-  const plan = main?.plans.find((p) => p.id === selected) ?? null;
+  const plan = shownPlans.find((p) => p.id === selected) ?? null;
   const creatorOffer = !!creator && billing.available && plan?.period === 'year';
   
   // Out of onboarding the welcome screen is still underneath, so the app
@@ -217,10 +240,11 @@ export default function Paywall() {
   };
 
   const close = async () => {
-    if (locked || busy) return;
-    if (offerReady && !(await winbackShown())) {
+    if (busy) return;
+    if (locked && !exitOffer) return;
+    if ((offerReady && cfg?.close_offer !== false && !(await winbackShown())) || exitOffer) {
       void markWinbackShown();
-      setWinbackUsed(true);
+      setOfferSeen(true);
       track('paywall_closed', { from, next: 'offer' });
       track('winback_shown', { from });
       tap();
@@ -258,7 +282,9 @@ export default function Paywall() {
     // underneath, with no close button and "Try Unit 1 free" on them.
     if (hardPaywall && from === 'onboarding') {
       setStage('plans');
-      void openFreeNow();
+      // Back to the plans (2026-11-19: the X gives 40% off, not a free week);
+      // the free week as before only if the dashboard asks for it.
+      if (cfg?.offer_decline === 'free_week') void openFreeNow();
       return;
     }
     leave();
@@ -268,7 +294,7 @@ export default function Paywall() {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
       if (codeOpen) setCodeOpen(false);
       else if (stage === 'offer') decline();
-      else if (canClose && !locked) void close();
+      else if (showClose) void close();
       return true;
     });
     return () => sub.remove();
@@ -413,18 +439,6 @@ export default function Paywall() {
     setStage('done');
   };
 
-  // "Learn more": the welcome tour, played over the real tabs as a preview.
-  // Skip or Got it! brings her back to this paywall, as she left it.
-  const learnMore = () => {
-    tap();
-    track('paywall_learn_more', { from });
-    markLearnedMore();
-    startTourPreview(`/paywall?from=${from}`);
-    // navigate, not push: if the tabs are already under the paywall, it goes
-    // back to them; finishing comes back here either way (dismissTo).
-    router.navigate('/home');
-  };
-
   const unlockTester = async () => {
     if (busy) return;
     tap();
@@ -467,7 +481,7 @@ export default function Paywall() {
       {/* The bar only takes room when it has the close button: locked, the
           headline starts right under the safe area, so the whole trial
           timeline fits above the button on a regular-size phone. */}
-      {locked || !canClose ? null : (
+      {!showClose ? null : (
         <View style={styles.topBar}>
           <Animated.View entering={FadeIn.duration(260)}>
             <IconButton icon="close" label="Close" onPress={close} tint={colors.muted} />
@@ -486,15 +500,17 @@ export default function Paywall() {
         {/* Three lines, each always on one line: it shrinks before it wraps. The
             last is the rosa sticker from the welcome screen, so the promise she
             started with is the one she pays for; it lands once, nothing more. */}
-        <Animated.View entering={rise(0, reduced)} accessibilityRole="header" accessible accessibilityLabel={HERO.join(' ')}>
-          {HERO.slice(0, 2).map((line) => (
+        <Animated.View entering={rise(0, reduced)} accessibilityRole="header" accessible accessibilityLabel={hero.join(' ')}>
+          {hero.slice(0, 2).map((line) => (
             <Text key={line} style={styles.hero} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>
               {line}
             </Text>
           ))}
           <Slap delay={250} tilt={-2.5} style={styles.heroSticker}>
-            <Text style={styles.heroStickerText} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>
-              {HERO[2]}
+            {/* Sized from its length, not adjustsFontSizeToFit: on iOS that one
+                measured the sticker mid-landing and left the line tiny (2026-11-19). */}
+            <Text style={[styles.heroStickerText, stickerSize(hero[2], winWidth)]} numberOfLines={1}>
+              {hero[2]}
             </Text>
           </Slap>
         </Animated.View>
@@ -509,7 +525,7 @@ export default function Paywall() {
 
         <Animated.View entering={rise(2, reduced)} style={styles.plans} accessibilityRole="radiogroup">
           {main ? (
-            main.plans.map((p) => (
+            shownPlans.map((p) => (
               <PlanCard
                 key={p.id}
                 plan={p}
@@ -539,24 +555,8 @@ export default function Paywall() {
           )}
         </Animated.View>
 
-        {plan?.trialDays ? <TrialSteps plan={plan} /> : null}
+        {plan?.trialDays ? <TrialSteps plan={plan} tones={cfg?.timeline_colors} /> : null}
 
-        <Text style={[styles.h2, short && styles.unlockHeadShort]}>What you’ll unlock</Text>
-        <View style={styles.unlock}>
-          {PERKS.map((k) => (
-            <View key={k.t} style={styles.perk}>
-              <View style={[styles.check, { backgroundColor: k.tone }]}>
-                <Ionicons name="checkmark" size={16} color={colors.ink} />
-              </View>
-              <Text style={styles.perkText}>{k.t}</Text>
-            </View>
-          ))}
-          <View style={styles.rule} />
-          <Pressable onPress={learnMore} hitSlop={8} style={styles.learnMore} accessibilityRole="button" disabled={!!busy}>
-            <Text style={styles.learnMoreText}>Learn more about Posta</Text>
-            <Ionicons name="arrow-forward" size={17} color={colors.primary} />
-          </Pressable>
-        </View>
         </ScrollView>
         {/* More below: the page fades out above the button, and stops fading at the end. */}
         <Animated.View pointerEvents="none" style={[styles.fade, fadeStyle]}>
@@ -677,19 +677,27 @@ function PlanCard({ plan, selected, save, onPress }: { plan: Plan; selected: boo
 
 // --- the free trial, as a timeline: when it ends is never a surprise ------------
 
-function TrialSteps({ plan }: { plan: Plan }) {
+function TrialSteps({ plan, tones }: { plan: Plan; tones?: PaywallConfig['timeline_colors'] }) {
+  // The three dots' colours: the dashboard's (app_config paywall.timeline_colors,
+  // app colour names), else sage / sky / lav (2026-11-19:
+  // green reads as "open, free", sky as "we'll tell you", lavender as premium
+  // rather than the alarm a rosa dot gave the charge day).
+  const tone = (i: number, fallback: string) => {
+    const name = tones?.[i];
+    return (name && SCREEN_COLORS[name as ScreenColor]) || fallback;
+  };
   // Days to the real charge date: 28 for a trial month started in February.
   const days = trialDaysLeft(plan);
   const label = trialLabel(plan)?.noun ?? `${days} days`;
   const steps: { when: string; what: string; icon: 'lock-open' | 'notifications' | 'star'; tone: string }[] = [
-    { when: 'Today', what: 'The whole course, AI speaking practice, slang and culture. All yours.', icon: 'lock-open', tone: pastel.butter },
+    { when: 'Today', what: 'The whole course, AI speaking practice, slang and culture. All yours.', icon: 'lock-open', tone: tone(0, pastel.sage) },
     // The reminder really goes out two days before (lib/trial-reminder).
-    { when: `In ${Math.max(1, days - 2)} days`, what: 'We’ll remind you that your free trial is ending.', icon: 'notifications', tone: pastel.sky },
+    { when: `In ${Math.max(1, days - 2)} days`, what: 'We’ll remind you that your free trial is ending.', icon: 'notifications', tone: tone(1, pastel.sky) },
     {
       when: `In ${days} days`,
       what: `Your ${plan.period === 'year' ? 'yearly' : plan.period === 'week' ? 'weekly' : 'monthly'} plan starts. You’ll be charged ${plan.priceString}.`,
       icon: 'star',
-      tone: colors.primary,
+      tone: tone(2, pastel.lav),
     },
   ];
   return (
@@ -700,7 +708,7 @@ function TrialSteps({ plan }: { plan: Plan }) {
           <View key={s.when} style={styles.step}>
             <View style={styles.stepRail}>
               <View style={[styles.stepDot, { backgroundColor: s.tone }]}>
-                <Ionicons name={s.icon} size={20} color={s.icon === 'star' ? colors.onPrimary : colors.ink} />
+                <Ionicons name={s.icon} size={20} color={s.tone === colors.primary ? colors.onPrimary : colors.ink} />
               </View>
               {i < steps.length - 1 ? <View style={styles.stepLine} /> : null}
             </View>
@@ -902,7 +910,10 @@ function Welcome({ trial, reduced, onGo }: { trial: number; reduced: boolean; on
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
   topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 12, paddingTop: 4, minHeight: 44 },
-  body: { paddingHorizontal: 20, paddingTop: 10, paddingBottom: 28, maxWidth: 520, width: '100%', alignSelf: 'center' },
+  // The page fills the room above the button: the headline, the plans and the
+  // trial share the spare height evenly. On a phone too short for it all, the
+  // minimum gaps below hold and the page scrolls.
+  body: { flexGrow: 1, justifyContent: 'space-evenly', paddingHorizontal: 20, paddingTop: 10, paddingBottom: 28, maxWidth: 520, width: '100%', alignSelf: 'center' },
   hero: { ...font.display[900], fontSize: 31, lineHeight: 35, letterSpacing: -0.8, color: colors.ink, textAlign: 'center' },
   heroSticker: {
     alignSelf: 'center',
@@ -919,7 +930,8 @@ const styles = StyleSheet.create({
   sub: { ...type.body, flex: 1, fontSize: 16, lineHeight: 22, color: colors.muted },
   h2: { ...font.display[900], fontSize: 22, lineHeight: 27, letterSpacing: -0.3, color: colors.ink, marginTop: 30, marginBottom: 14 },
 
-  plans: { gap: 20, marginTop: 32 },
+  // Room for the next plan's badge, which sits over its top edge, to clear the card above.
+  plans: { gap: 30, marginTop: 24 },
   plan: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingTop: 20, paddingBottom: 14, paddingHorizontal: 18, borderRadius: radius.lg },
   planSelected: { backgroundColor: pastel.butter, boxShadow: clay.surface },
   planFlat: { backgroundColor: colors.card, boxShadow: clay.flat },
@@ -939,18 +951,10 @@ const styles = StyleSheet.create({
   stepDot: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', boxShadow: clay.trough },
   stepLine: { width: 3, flex: 1, minHeight: 14, borderRadius: 2, backgroundColor: colors.ink, marginVertical: 2 },
   stepText: { flex: 1, gap: 2, paddingTop: 1, paddingBottom: 14 },
-  trialHead: { marginTop: 26 },
-  unlockHeadShort: { marginTop: 18 },
+  trialHead: { marginTop: 20 },
   stepWhen: { ...font.body[800], fontSize: 16, lineHeight: 20, color: colors.ink },
   stepWhat: { ...font.body[700], fontSize: 14, lineHeight: 19, color: colors.inkOnWash },
 
-  unlock: { gap: 14, paddingVertical: 20, paddingHorizontal: 18, borderRadius: 26, backgroundColor: colors.card, boxShadow: clay.surface, marginHorizontal: 2 },
-  perk: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  check: { width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center', boxShadow: clay.trough },
-  perkText: { ...font.body[800], flex: 1, fontSize: 16, lineHeight: 21, color: colors.ink },
-  rule: { height: 2, borderRadius: 1, backgroundColor: colors.border },
-  learnMore: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start', minHeight: 32 },
-  learnMoreText: { ...font.body[800], fontSize: 15, color: colors.primary },
   skeleton: { flex: 1, height: 120, borderRadius: radius.lg, backgroundColor: colors.trough },
   unavailable: { ...type.body, color: colors.muted, textAlign: 'center', paddingVertical: 12 },
 

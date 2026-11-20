@@ -299,8 +299,8 @@ export type WalkResults = Map<number, boolean>;
  *  carry none. Always inside the course. */
 export function startStage(sections: { cefr?: string | null }[], level: Level | null | undefined): number {
   if (sections.length === 0) return 0;
-  const band = { none: null, basics: 'A1.2', spanish: 'A2', conversational: 'B1' }[level ?? 'none'];
-  const guess = { none: 0, basics: 1, spanish: 3, conversational: 7 }[level ?? 'none'];
+  const band = { none: null, basics: 'A1.2', learning: 'A1.3', spanish: 'A2', conversational: 'B1' }[level ?? 'none'];
+  const guess = { none: 0, basics: 1, learning: 2, spanish: 3, conversational: 7 }[level ?? 'none'];
   if (!band) return 0;
   const at = sections.findIndex((s) => (s.cefr ?? '').toUpperCase().startsWith(band));
   return Math.min(at >= 0 ? at : guess, sections.length - 1);

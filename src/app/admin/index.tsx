@@ -1,116 +1,102 @@
-import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useState } from 'react';
-import { Text, View } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
+import { Fragment } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { AdminScreen, Muted, RowLink, Section, StatusPill, adminStyles } from '@/components/admin';
-import { type Attention, STATUSES, type UnitSummary, loadAttention, loadUnits } from '@/lib/admin';
-import { colors } from '@/lib/theme';
+import { AdminScreen } from '@/components/admin';
+import { startAdminPreview } from '@/lib/admin-preview';
+import { resetWinbackShown } from '@/lib/onboarding';
+import { type PastelName, clay, colors, pastel, radius, type } from '@/lib/theme';
 
 // ---------------------------------------------------------------------------
-// The reviewer's queue: every unit with its sentences counted by status, and
-// above it what needs attention — sentences learners keep failing or report,
-// words that keep lapsing, units whose check most learners fail first time.
+// The admin dashboard's home: the testing tools the owner uses, as one card
+// of rows like Account's. Revenue and Feedback are in the top nav. The course
+// tools (units, reports, words, answers, engine) are hidden from here but
+// still open at their own paths — /admin/units/…, /admin/reports, …
 // ---------------------------------------------------------------------------
+
+// `preview`: a learner's screen with no way back here of its own, so it gets
+// the admin's X (components/admin-exit.tsx).
+const TOOLS: { icon: keyof typeof Ionicons.glyphMap; tone: PastelName; label: string; detail: string; href: string; preview?: boolean }[] = [
+  {
+    icon: 'refresh-outline',
+    tone: 'peach',
+    label: 'Replay onboarding',
+    detail: 'Questions, plan and paywall, as a new learner sees them. Your account is not changed.',
+    href: '/welcome?replay=1',
+    preview: true,
+  },
+  {
+    icon: 'card-outline',
+    tone: 'sage',
+    label: 'View paywall',
+    detail: 'The paywall at the end of onboarding, with its 40% offer when you close it. Nothing is bought unless you buy.',
+    href: '/paywall?from=onboarding',
+    preview: true,
+  },
+  {
+    icon: 'cafe-outline',
+    tone: 'butter',
+    label: 'First class prototype',
+    detail: '“At the café”, local or from the database, per level. Nothing is saved.',
+    href: '/admin/first-class',
+  },
+  {
+    icon: 'albums-outline',
+    tone: 'lav',
+    label: 'Onboarding screens',
+    detail: 'Custom screens from the database, drafts included.',
+    href: '/admin/screens',
+  },
+  {
+    icon: 'map-outline',
+    tone: 'sky',
+    label: 'Replay welcome tour',
+    detail: 'The four-tab tour shown once after the first purchase.',
+    href: '/admin/welcome-tour',
+  },
+];
+
 export default function AdminHome() {
-  const [units, setUnits] = useState<UnitSummary[] | null>(null);
-  const [attention, setAttention] = useState<Attention | null>(null);
-
-  useFocusEffect(
-    useCallback(() => {
-      loadUnits().then(setUnits);
-      loadAttention().then(setAttention);
-    }, []),
-  );
-
-  const toReview = units?.reduce((n, u) => n + u.sentences.ai_reviewed + u.sentences.linted, 0) ?? 0;
-
   return (
-    <AdminScreen title="Units" subtitle={units ? `${units.length} units · ${toReview} sentences waiting for review` : 'Loading…'}>
-      <Section title="Testing">
-        <RowLink onPress={() => router.push('/welcome?replay=1')}>
-          <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>Replay onboarding</Text>
-          <Muted>Questions, plan and paywall, as a new learner sees them. Your account is not changed.</Muted>
-        </RowLink>
-        <RowLink onPress={() => router.push('/admin/first-class')}>
-          <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>First class prototype</Text>
-          <Muted>“At the café”: class, slang, culture and a Pancho call in one short lesson. Nothing is saved.</Muted>
-        </RowLink>
-        <RowLink onPress={() => router.push('/admin/welcome-tour')}>
-          <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>Replay welcome tour</Text>
-          <Muted>The four-tab tour shown once after the first purchase. Also posta://admin/welcome-tour.</Muted>
-        </RowLink>
-      </Section>
-
-      <Section title="Needs attention">
-        {!attention ? (
-          <Muted>Loading…</Muted>
-        ) : attention.sentences.length + attention.leeches.length + attention.checks.length + attention.openReports === 0 ? (
-          <Muted>Nothing flagged. Sentences show up here once 20 learners have tried them and more than a third fail.</Muted>
-        ) : (
-          <View style={{ gap: 6 }}>
-            {attention.openReports > 0 ? (
-              <RowLink onPress={() => router.push('/admin/reports')}>
-                <Text style={adminStyles.cellEs}>{attention.openReports} open answer reports</Text>
-                <Muted>Learners think an answer should have been accepted.</Muted>
-              </RowLink>
-            ) : null}
-            {attention.sentences.map((s) => (
-              <RowLink key={s.sentence_id} onPress={() => router.push(`/admin/sentences/${s.sentence_id}`)}>
-                <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>{s.es}</Text>
-                <Muted>
-                  {Math.round(s.fail_rate * 100)}% fail · {s.tries} tries
-                  {s.open_reports ? ` · ${s.open_reports} reports` : ''}
-                </Muted>
-              </RowLink>
-            ))}
-            {attention.leeches.map((l) => (
-              <RowLink key={l.form_id}>
-                <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>{l.form}</Text>
-                <Muted>
-                  keeps lapsing for {l.learners} learners (avg {l.avg_lapses} lapses) — rewrite the sentences that teach it
-                </Muted>
-              </RowLink>
-            ))}
-            {attention.checks.map((c) => (
-              <RowLink key={c.unit_id} onPress={() => router.push(`/admin/units/${c.unit_id}`)}>
-                <Text style={[adminStyles.cellEs, adminStyles.cellGrow]}>{c.unit_title}</Text>
-                <Muted>
-                  unit check passed first time by {Math.round(c.first_attempt_pass * 100)}% of {c.learners}
-                </Muted>
-              </RowLink>
-            ))}
-          </View>
-        )}
-      </Section>
-
-      <Section title="All units">
-        {!units ? (
-          <Muted>Loading…</Muted>
-        ) : (
-          <View style={{ gap: 6 }}>
-            {units.map((u) => (
-              <RowLink key={u.id} onPress={() => router.push(`/admin/units/${u.id}`)}>
-                <Text style={[adminStyles.num, { minWidth: 36, textAlign: 'left', color: colors.muted }]}>
-                  {u.section?.ordinal ?? '?'}.{u.ordinal}
-                </Text>
-                <View style={[adminStyles.cellGrow, { gap: 2, minWidth: 220 }]}>
-                  <Text style={adminStyles.cellEs}>{u.title_en}</Text>
-                  <Text style={adminStyles.cellEn}>
-                    {u.summary_en} · {u.forms} words · {u.lessons} lessons · {u.slots} slots
-                  </Text>
+    <AdminScreen title="Testing">
+      <View style={styles.card}>
+          {TOOLS.map((t, i) => (
+            <Fragment key={t.href}>
+              {i > 0 ? <View style={styles.divider} /> : null}
+              <Pressable
+                onPress={async () => {
+                  if (t.preview) {
+                    startAdminPreview();
+                    // So the one-time offer shows again, as for a new learner.
+                    await resetWinbackShown();
+                  }
+                  router.push(t.href as never);
+                }}
+                accessibilityRole="button"
+                style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}>
+                <View style={[styles.icon, { backgroundColor: pastel[t.tone] }]}>
+                  <Ionicons name={t.icon} size={18} color={colors.onPastel} />
                 </View>
-                <StatusPill status={u.status} />
-                <View style={adminStyles.wrap}>
-                  {STATUSES.filter((s) => s !== 'retired' && u.sentences[s] > 0).map((s) => (
-                    <StatusPill key={s} status={s} count={u.sentences[s]} />
-                  ))}
-                  {STATUSES.every((s) => u.sentences[s] === 0) ? <Muted>no sentences</Muted> : null}
+                <View style={{ flex: 1, gap: 2 }}>
+                  <Text style={styles.label}>{t.label}</Text>
+                  <Text style={styles.detail}>{t.detail}</Text>
                 </View>
-              </RowLink>
-            ))}
-          </View>
-        )}
-      </Section>
+                <Ionicons name="chevron-forward" size={18} color={colors.faint} />
+              </Pressable>
+            </Fragment>
+          ))}
+      </View>
     </AdminScreen>
   );
 }
+
+const styles = StyleSheet.create({
+  card: { backgroundColor: colors.card, borderRadius: radius.lg, paddingVertical: 6, boxShadow: clay.surface },
+  row: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 18, paddingVertical: 12, minHeight: 60 },
+  rowPressed: { backgroundColor: colors.stone },
+  icon: { width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center', boxShadow: clay.surface },
+  label: { ...type.body, ...type.label, fontSize: 15, color: colors.ink },
+  detail: { fontSize: 13, lineHeight: 18, color: colors.muted },
+  divider: { height: 1.5, backgroundColor: colors.border, marginLeft: 64 },
+});

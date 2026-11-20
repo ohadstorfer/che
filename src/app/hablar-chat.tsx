@@ -1333,7 +1333,7 @@ function CallPancho({ busy, size, onPlayingChange }: { busy: boolean; size: numb
     <View style={{ width: size, height: size }} accessible accessibilityRole="image" accessibilityLabel="Pancho, drinking mate">
       {/* The still sits underneath until the first frame is up. */}
       <Image source={CALL_STILL} style={StyleSheet.absoluteFill} contentFit="contain" />
-      <VideoView
+      <VideoView allowsVideoFrameAnalysis={false}
         player={player}
         style={StyleSheet.absoluteFill}
         contentFit="contain"

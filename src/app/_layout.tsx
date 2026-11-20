@@ -16,7 +16,9 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 import { BootSplash } from '@/components/boot-splash';
-import { applyUpdateOnLaunch } from '@/lib/app-updates';
+import { applyUpdateOnLaunch, useUpdatePhase } from '@/lib/app-updates';
+import { UpdatingScreen } from '@/components/updating-screen';
+import { AdminExit } from '@/components/admin-exit';
 import { FeedbackLayer } from '@/components/feedback';
 import { ScreenBackground } from '@/components/ui';
 import { AnalyticsProvider, AnalyticsTracker } from '@/lib/analytics';
@@ -123,8 +125,13 @@ function RootLayout() {
               </ThemeProvider>
               {/* The testers' feedback bubble, over every screen but under the splash. */}
               <FeedbackLayer />
+              {/* The admin's X out of a paywall / onboarding preview. */}
+              <AdminExit />
             </>
           ) : null}
+          {/* A launch that must wait for an update (lib/app-updates.ts):
+              under the splash, so it shows as the splash lets go. */}
+          {fontsReady ? <UpdatingScreen /> : null}
           {/* One place in the tree from the first render on, so the splash
               never remounts (and restarts) when the fonts land. */}
           <BootGate fontsReady={fontsReady} />
@@ -156,7 +163,10 @@ function BootGate({ fontsReady }: { fontsReady: boolean }) {
   const pathname = usePathname();
   const ready = useBootReady();
   const toCourse = pathname === '/' || pathname === '/home';
-  const hold = !fontsReady || loading || (!!session && toCourse && !ready);
+  // A fresh install (or a critical update) asking whether there is a new
+  // version keeps the splash up; the splash's own cap still applies.
+  const updateChecking = useUpdatePhase() === 'checking';
+  const hold = !fontsReady || loading || updateChecking || (!!session && toCourse && !ready);
   const userId = session?.user.id;
 
   // Not during onboarding: her guest account is made as the course builds, and
