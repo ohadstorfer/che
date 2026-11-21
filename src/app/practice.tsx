@@ -41,8 +41,9 @@ import { backToCourse, goBack } from '@/lib/nav';
 import { maybeAskForReview } from '@/lib/review-prompt';
 import { type Landed, send, wakeOutbox, within } from '@/lib/outbox';
 import { success } from '@/lib/haptics';
+import { warmAfterPlacement } from '@/lib/prefetch';
 import { warmSfx } from '@/lib/sfx';
-import { DEFAULT_LADDER, type Ladder } from '@/lib/sentences';
+import { DEFAULT_LADDER, type Ladder, sentenceBlocksArrived } from '@/lib/sentences';
 import { loadAnswers } from '@/lib/onboarding';
 import {
   PLACEMENT_MAX_ITEMS,
@@ -81,6 +82,12 @@ import { preloadCourseArt, resetShownArt } from '@/lib/word-art';
  *  arrived by then is kept, so trying again picks up where this left off.
  *  Long enough for a stuck read to be asked again (deadline-fetch.ts). */
 const LOAD_TIMEOUT_MS = 25_000;
+/** Past LOAD_TIMEOUT_MS, a load still receiving sentence blocks is given this
+ *  much more each time one arrives, up to LOAD_HARD_CAP_MS: on 2026-11-20 a
+ *  Section 7 class was called off while its blocks were still coming in, and
+ *  "Try again" then opened it in seconds. */
+const LOAD_GRACE_MS = 10_000;
+const LOAD_HARD_CAP_MS = 60_000;
 /** How long the gate's answer is waited for. A streak that can't be read is
  *  not a reason to keep her from the class. */
 const GATE_TIMEOUT_MS = 4000;
@@ -322,14 +329,25 @@ export default function Practice() {
     timingStart('class');
     // A load that never answers is a load that failed: she is told, and can
     // try again, rather than left looking at the doorway.
-    const calledOff = setTimeout(() => {
+    const loadFrom = Date.now();
+    let blocksSeen = sentenceBlocksArrived();
+    let calledOff: ReturnType<typeof setTimeout>;
+    const giveUp = () => {
       if (cancelled) return;
+      // Still arriving: slow, not stuck. Wait a little more, within the cap.
+      const arrived = sentenceBlocksArrived();
+      if (arrived > blocksSeen && Date.now() - loadFrom < LOAD_HARD_CAP_MS) {
+        blocksSeen = arrived;
+        calledOff = setTimeout(giveUp, LOAD_GRACE_MS);
+        return;
+      }
       cancelled = true;
       console.warn('lesson took too long to load');
-      posthog.capture('class_load_failed', { reason: 'timeout', mode: loadMode, attempt });
+      posthog.capture('class_load_failed', { reason: 'timeout', mode: loadMode, attempt, ms: Date.now() - loadFrom });
       setLoadFailed(true);
       setQueue([]);
-    }, LOAD_TIMEOUT_MS);
+    };
+    calledOff = setTimeout(giveUp, LOAD_TIMEOUT_MS);
     timed('build', load()).then(({ data, kind: k, plan: p, walk: w }) => {
       clearTimeout(calledOff);
       if (cancelled) return;
@@ -558,6 +576,9 @@ export default function Practice() {
         if (!placed) return notSaved();
         // Refused outright (and logged): the round still ends, as it always did.
         if (!placed.ok) placeSent.current = null;
+        // Her next class is far ahead now: its sentences start coming while
+        // she reads the result.
+        else if (userId) warmAfterPlacement(userId);
       }
       const ended = await round.finish();
       if (!ended.saved) return notSaved();

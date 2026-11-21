@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AppState } from 'react-native';
@@ -9,6 +10,9 @@ import { clearContentCache } from './content-cache';
 import { claimCreatorCode } from './creator-code';
 import { isGuest } from './guest';
 import { supabase } from './supabase';
+
+/** The last guest id on this phone, until what it bought has moved over. */
+const GUEST_KEY = 'posta.guest-id';
 
 // ---------------------------------------------------------------------------
 // Premium — who has paid, and what the free tier allows.
@@ -162,12 +166,20 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
   // if she then signs in to one she already had, what the guest bought is
   // claimed for it. Linking an account to the guest keeps the same id, so
   // nothing needs claiming then.
+  // Also kept on the phone (GUEST_KEY): Android can bring the app back from
+  // the Google sign-in browser as a fresh start, and a ref alone forgot the
+  // guest, so a trial bought in onboarding stayed behind on her old id and the
+  // new account met the paywall (2026-11-20).
   const guest = useRef<string | null>(null);
   const guestNow = isGuest(session);
+  const guestNowRef = useRef(guestNow);
+  guestNowRef.current = guestNow;
   useEffect(() => {
     if (!userId) return;
-    if (guestNow) guest.current = userId;
-    else if (guest.current === userId) guest.current = null;
+    if (guestNow) {
+      guest.current = userId;
+      void AsyncStorage.setItem(GUEST_KEY, userId).catch(() => {});
+    } else if (guest.current === userId) guest.current = null;
   }, [userId, guestNow]);
 
   // A creator's code typed in onboarding, noted for whichever account she is
@@ -207,13 +219,23 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     let alive = true;
-    const from = guest.current && guest.current !== userId ? guest.current : null;
+    const remembered = guest.current;
     (async () => {
+      const kept = remembered ?? (await AsyncStorage.getItem(GUEST_KEY).catch(() => null));
+      // Her guest became this account (linked, same id): nothing to move, and
+      // forgotten, so a later sign-in to another account never takes this
+      // one's subscription with it.
+      if (!guestNowRef.current && kept === userId) void AsyncStorage.removeItem(GUEST_KEY).catch(() => {});
+      const from = !guestNowRef.current && kept && kept !== userId ? kept : null;
       await billing.identify(userId);
       if (!alive) return;
       if (from) {
         guest.current = null;
-        await billing.adopt(from).catch(() => false);
+        // Only what this phone's store says the guest bought moves over; once
+        // it has, the guest is forgotten. Nothing bought: kept, harmless, for
+        // a purchase whose word arrives late.
+        const moved = await billing.adopt(from).catch(() => false);
+        if (moved) void AsyncStorage.removeItem(GUEST_KEY).catch(() => {});
       }
       await refresh();
       // Fetched now so the paywall opens with its prices already on it.

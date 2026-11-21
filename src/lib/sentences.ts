@@ -105,6 +105,16 @@ export async function loadUnitSentenceRows(unitIds: string[]): Promise<SentenceR
   return rows.flat();
 }
 
+/** Sentence blocks that have arrived since launch. A class that is still
+ *  receiving them is slow, not stuck (practice.tsx's load timeout). */
+let blocksArrived = 0;
+export const sentenceBlocksArrived = () => blocksArrived;
+const counted = <T>(p: Promise<T>) =>
+  p.then((v) => {
+    blocksArrived += 1;
+    return v;
+  });
+
 async function inBatches<T, R>(list: T[], size: number, run: (item: T) => Promise<R>): Promise<R[]> {
   const out: R[] = [];
   for (let at = 0; at < list.length; at += size) out.push(...(await Promise.all(list.slice(at, at + size).map(run))));
@@ -121,7 +131,7 @@ export async function loadSentenceRowsInReach(reach: SentenceReach): Promise<Sen
     ...blocksThrough(reach.units, reach.throughOrder),
     ...[...new Set(reach.unitIds ?? [])].filter((id) => !inCourse.has(id)).map((id) => [id]),
   ];
-  const fetched = await inBatches(blocks, BLOCKS_IN_FLIGHT, unitRows);
+  const fetched = await inBatches(blocks, BLOCKS_IN_FLIGHT, (ids) => counted(unitRows(ids)));
   // The same blocks as last time — every class she opens on a unit — are the
   // same rows in the same order, so the merge and the sort are not done again.
   let merged = lastMerge;

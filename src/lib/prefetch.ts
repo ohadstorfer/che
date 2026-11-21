@@ -86,6 +86,18 @@ async function warmSentences(userId: string) {
 }
 
 /**
+ * After a placement test moved her far ahead: the blocks up to her new place,
+ * fetched while she reads her result, not on her next class's loading screen.
+ * The launch's warm-up ran before the jump and covered only the old place; a
+ * Section 7 placement on a slow phone took more than the class's 25 s to load
+ * (2026-11-20). The cache shares requests in flight, so a class opened before
+ * this finishes waits on the same downloads instead of starting its own.
+ */
+export function warmAfterPlacement(userId: string) {
+  void warmSentences(userId).catch(() => {});
+}
+
+/**
  * The class she is on, got ready behind the road (docs/class-loading.md).
  *
  * The first class of a launch waited twice as long as the ones after it, for
