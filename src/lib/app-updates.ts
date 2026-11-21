@@ -87,6 +87,7 @@ let asked = false;
 export function applyUpdateOnLaunch() {
   if (asked || __DEV__ || Platform.OS === 'web') return;
   asked = true;
+  let decided = false;
   void (async () => {
     const Updates = await import('expo-updates');
     if (!Updates.isEnabled) return;
@@ -98,26 +99,38 @@ export function applyUpdateOnLaunch() {
     // only known once the server answers, so it can't hold the splash's start.
     const first = Updates.isEmbeddedLaunch;
     if (first) setPhase('checking');
+    // Once the launch has gone its way (nothing to wait for, or no answer in
+    // time), a late "critical" answer must not put the splash back on hold:
+    // 'checking' would then never end, and everything waiting on the splash
+    // (the tabs' prefetch, the free-week tap) would never run.
     const critical = criticalPending().then((c) => {
-      if (c) setPhase(phase === 'idle' ? 'checking' : phase);
+      if (c && !decided && Date.now() - startedAt < SPLASH_CAP_MS) setPhase(phase === 'idle' ? 'checking' : phase);
       return c;
     });
+    // Past the splash's cap there is no more waiting, so a check still out
+    // stops holding what waits on the splash (the tabs' prefetch, the
+    // free-week tap); its answer, whenever it comes, only fetches.
+    setTimeout(() => {
+      if (phase === 'checking') setPhase('idle');
+    }, SPLASH_CAP_MS);
 
     // The cap counts from the launch, the check included: a check that hangs
     // on a bad network can't stretch the wait past it.
     const left = () => Math.max(0, WAIT_CAP_MS - (Date.now() - startedAt));
     const check = await withTimeout(Updates.checkForUpdateAsync().catch(() => null), left(), null);
-    const mustWait = first || (await critical);
     if (!check?.isAvailable) {
       // Already on the newest, or no answer in time: nothing to wait for.
+      decided = true;
       setPhase('idle');
       return;
     }
+    const mustWait = first || (await critical);
 
     // Waiting only while she hasn't seen the app yet. Once the splash has gone
     // (its cap), the screen is hers: no "Updating…" over a question she is
     // answering and no restart under her; the update lands on the next launch.
     const onSplash = Date.now() - startedAt < SPLASH_CAP_MS;
+    decided = true;
     if (!mustWait || !onSplash) {
       setPhase('idle');
       const fetched = await Updates.fetchUpdateAsync();
@@ -137,6 +150,7 @@ export function applyUpdateOnLaunch() {
     await Updates.reloadAsync();
   })().catch(() => {
     // No network, or a check already under way: go on; the next launch asks again.
+    decided = true;
     setPhase('idle');
   });
 }
