@@ -1,6 +1,6 @@
 // "Your course": the feature loop (CoreLoop.tsx), with what is in each scene chosen for one learner.
 // Same four scenes, same sticker look, silent, on a loop. One clip per reason and per tier (a beginner
-// or a Spanish speaker): the chat they will have, the words they will pick up. The culture question is the same for everyone: the asado.
+// or a Spanish speaker): the chat they will have, the words they will pick up. The culture scene is the same for everyone: photo stickers of the things themselves.
 // Every scene is timed in frames from its own start; change a scene's `dur` and the
 // rest follows.
 import React from 'react';
@@ -96,36 +96,34 @@ const Slang: Scene = ({f, v}) => {
 };
 
 // --- 3 · the culture -----------------------------------------------------------
-// One question for every learner (the user, 2026-10-11): the asado, and the answer is all of them.
-const QUIZ = {q: 'When do Argentinians have an asado?', options: ['Every Sunday', 'Every birthday', 'Every holiday', 'All of the above']};
-const Culture: Scene = ({f}) => {
-  const MOVE = 48, PICK = 61, RIGHT = 68; // the answers land, the finger sets off at once and picks the last, and it is right while the scene still has time to show it
-  const picked = tween(f, PICK + 2, 5), right = tween(f, RIGHT, 8);
-  const go = tween(f, MOVE, 12, INOUT);
-  const pop = spring({frame: f - RIGHT, fps: FPS, config: {damping: 9, stiffness: 190, mass: 0.7}});
-  const TOP = 772, STEP = 136, H = 116, last = QUIZ.options.length - 1;
-  const option = (label: string, k: number) => { const isRight = k === last, at = 9 + k * 3; return (
-    <div key={label} style={{position: 'absolute', left: 60, top: TOP + k * STEP, width: 960, height: H, boxSizing: 'border-box', padding: '0 24px 0 54px', borderRadius: H / 2, boxShadow: STICKER,
-      display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontFamily: BODY, fontWeight: 800, fontSize: 56, color: C.ink,
-      background: isRight ? interpolateColors(right, [0, 1], [interpolateColors(picked, [0, 1], [C.card, C.butter]), C.sage]) : C.card,
-      opacity: slap(f, at).opacity as number * (isRight ? 1 : 1 - 0.5 * right), transform: `scale(${(0.9 + 0.1 * tween(f, at, 10)) * (isRight ? press(f, PICK, 6) : 1)})`}}>
-      {label}
-      {isRight ? <div style={{width: 76, height: 76, borderRadius: 38, background: C.success, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        opacity: Math.min(1, right * 2), transform: `scale(${0.6 + 0.4 * pop})`}}><Icon code={ICON.check} size={50} color="#fff" /></div> : null}
-    </div>
-  ); };
-  return <>
-    {/* the class's tile: the question, and the steak on its board */}
-    <div style={{position: 'absolute', left: 60, top: 420, width: 960, height: 300, borderRadius: 84, background: C.sage, boxShadow: STICKER, ...slap(f, 2, -1)}}>
-      <div style={{position: 'absolute', left: 56, top: 0, bottom: 0, width: 500, display: 'flex', alignItems: 'center', fontFamily: DISPLAY, fontWeight: 800, fontSize: 66, lineHeight: '74px', letterSpacing: -1, color: C.ink}}>
-        {QUIZ.q}</div>
-      <Img src={staticFile('pancho/asado.png')} style={{position: 'absolute', right: -14, bottom: 8, width: 392, transformOrigin: '50% 100%',
-        transform: `translateY(${(1 - tween(f, 5, 12)) * 40 - 18 * Math.sin(Math.PI * tween(f, RIGHT, 14, Easing.linear))}px) rotate(${Math.sin(f / 10) * 1.2 - 3}deg)`, opacity: tween(f, 5, 6)}} />
-    </div>
-    {QUIZ.options.map(option)}
-    <Tap x={mix(go, 880, 760)} y={mix(go, 1340, TOP + last * STEP + H / 2 + 6)} show={tween(f, MOVE, 5) * (1 - tween(f, RIGHT, 6))} down={interpolate(f, [PICK, PICK + 3, PICK + 6], [0, 1, 0], CLAMP)} />
-  </>;
-};
+// No question (the user, 2026-11-19): the things themselves, as photo stickers drifting by in two rows, like
+// the first screen of the app (welcome.tsx), each with its word. Same art, same colours, same order.
+type Thing = [word: string, art: string, tone: string];
+const CULTURE_ROWS: Thing[][] = [
+  [['mate', 'mate', C.butter], ['asado', 'asado', C.sky], ['alfajor', 'alfajor', C.peach], ['empanadas', 'empanadas', C.sage], ['dulce de leche', 'dulce-de-leche', C.lav], ['medialunas', 'medialuna', C.peach]],
+  [['bondi', 'buenos-aires-colectivo', C.sage], ['tango', 'tango', C.lav], ['choripán', 'choripan', C.butter], ['fútbol', 'futbol', C.sky], ['facturas', 'facturas', C.peach], ['fernet', 'fernet', C.lav]],
+];
+const THING_TILTS = [-4, 3, -2, 4, -3, 2];
+const THING = 330, THING_GAP = 44, THING_STEP = THING + THING_GAP;
+const Culture: Scene = ({f}) => (
+  <>
+    {CULTURE_ROWS.map((row, r) => {
+      // The top row drifts left, the bottom one right, never in step: the stage is never still while she reads.
+      const drift = r === 0 ? -2.6 * f : -THING_STEP * 1.6 + 2.2 * f;
+      return (
+        <div key={r} style={{position: 'absolute', left: 0, top: r === 0 ? 452 : 862, transform: `translateX(${drift + (r === 0 ? 30 : 0)}px)`}}>
+          {row.map(([word, art, tone], k) => (
+            <div key={word} style={{position: 'absolute', left: k * THING_STEP, top: 0, width: THING, height: THING + 24, boxSizing: 'border-box', borderRadius: 80, background: tone, boxShadow: STICKER,
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', padding: '0 0 34px', gap: 10, ...slap(f, 2 + k * 3 + r * 6, THING_TILTS[(k + r * 3) % THING_TILTS.length])}}>
+              <Img src={staticFile(`objects/${art}-figure.webp`)} style={{width: 236, height: 220, objectFit: 'contain'}} />
+              <div style={{fontFamily: DISPLAY, fontWeight: 800, fontSize: word.length > 10 ? 44 : 52, lineHeight: 1, letterSpacing: -0.5, color: C.ink, whiteSpace: 'nowrap'}}>{word}</div>
+            </div>
+          ))}
+        </div>
+      );
+    })}
+  </>
+);
 
 // --- 4 · the course ------------------------------------------------------------
 const COIN_W = 190, COIN_H = 164, CUR_W = 410, CUR_H = 196, PAD = 14, BORDER = 8;

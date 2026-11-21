@@ -87,7 +87,7 @@ export default function AdminRevenue() {
           <Tile
             label="Active trials"
             value={data ? String(data.active_trials) : '…'}
-            hint={data ? `Play ${data.by_store.PLAY_STORE ?? 0} · iOS ${data.by_store.APP_STORE ?? 0} in all` : undefined}
+            hint={data ? `Play ${data.trials_by_store?.PLAY_STORE ?? 0} · iOS ${data.trials_by_store?.APP_STORE ?? 0}` : undefined}
           />
           <Tile
             label="Cancelling"

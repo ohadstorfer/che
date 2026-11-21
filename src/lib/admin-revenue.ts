@@ -37,6 +37,7 @@ export interface Revenue {
   cancelling: number;
   by_plan: Partial<Record<'monthly' | 'yearly', number>>;
   by_store: Partial<Record<'APP_STORE' | 'PLAY_STORE', number>>;
+  trials_by_store?: Partial<Record<'APP_STORE' | 'PLAY_STORE', number>>;
   revenue: number;
   refunds: number;
   revenue_all_time: number;
