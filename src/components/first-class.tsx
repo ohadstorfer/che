@@ -220,12 +220,16 @@ function localScript(level: Level): Script {
   };
 }
 
+/** Which class a script is, for a resume: 'local' or its first_classes row. */
+const scriptKey = (s: Script) => (s.source === 'db' && s.rowId ? s.rowId : 'local');
+
 /** The class to play: what the switch says, or the local one until it answers. */
-function useScript(level: Level, force?: Source, resuming?: boolean): Script | null {
+function useScript(level: Level, force?: Source, resumingLocal?: boolean): Script | null {
   const [ask] = useState(() => firstClassScript(level, () => localScript(level), PANCHO_FACTURAS, force));
-  // Back after a restart: no wait (it was instant before the switch existed);
-  // the local class unless the answer is already in.
-  const [script, setScript] = useState<Script | null>(() => ask.peek ?? (resuming && !force ? localScript(level) : null));
+  // Back after a restart in the local class: no wait (it was instant before
+  // the switch existed). Back in a database class: its answer is waited for
+  // like a first start, so she lands in the class she was in.
+  const [script, setScript] = useState<Script | null>(() => ask.peek ?? (resumingLocal && !force ? localScript(level) : null));
   useEffect(() => {
     if (script) return;
     let live = true;
@@ -244,6 +248,7 @@ export type { Part as FirstClassPart } from '@/lib/first-class-script';
 export function FirstClassLesson({
   part,
   startAt,
+  startScript,
   onProgress,
   admin,
   level = 'none',
@@ -255,8 +260,10 @@ export function FirstClassLesson({
   part?: string;
   /** Back after the app closed mid-class: the screen she was on, or its end screen. */
   startAt?: number | 'done';
-  /** Each screen she reaches, so onboarding can bring her back to it after a restart. */
-  onProgress?: (at: number | 'done') => void;
+  /** Which class `startAt` counts in ('local' or a first_classes row id), as onProgress gave it. */
+  startScript?: string;
+  /** Each screen she reaches, and which class it is in, so onboarding can bring her back to it after a restart. */
+  onProgress?: (at: number | 'done', script: string) => void;
   /** Her answer in onboarding: how fast Pancho talks on the call. */
   level?: Level;
   /** Staff replaying it: Play again and Back to admin. */
@@ -267,10 +274,22 @@ export function FirstClassLesson({
   onFinish: () => void;
   onClose: () => void;
 }) {
-  const script = useScript(level, source, startAt !== undefined);
+  const script = useScript(level, source, startAt !== undefined && (startScript ?? 'local') === 'local');
   // Waiting on the database (seconds at most, then the local class): the page, blank.
   if (!script) return <Waiting />;
-  const props = { part, startAt, onProgress, admin: !!admin, level, onFinish, onClose };
+  // A screen number saved in another class than the one playing now (the
+  // database answer changed, or timed out this time): from the start, not a
+  // screen of a different class.
+  const sameClass = (startScript ?? 'local') === scriptKey(script);
+  const props = {
+    part,
+    startAt: startAt === 'done' || sameClass ? startAt : undefined,
+    onProgress,
+    admin: !!admin,
+    level,
+    onFinish,
+    onClose,
+  };
   if (script.source === 'local') return <Lesson script={script} {...props} />;
   // A database class that crashes while drawing: the local class takes over.
   return (
@@ -309,7 +328,7 @@ function Lesson({
   script: Script;
   part?: string;
   startAt?: number | 'done';
-  onProgress?: (at: number | 'done') => void;
+  onProgress?: (at: number | 'done', script: string) => void;
   admin: boolean;
   level: Level;
   onFinish: () => void;
@@ -324,7 +343,7 @@ function Lesson({
   const [done, setDone] = useState(part === 'done' || startAt === 'done');
   const progress = useRef(onProgress);
   progress.current = onProgress;
-  useEffect(() => progress.current?.(done ? 'done' : at), [at, done]);
+  useEffect(() => progress.current?.(done ? 'done' : at, scriptKey(script)), [at, done, script]);
   const [run, setRun] = useState(0);
   /** How far into the current screen she is, where one screen is a whole round (the slang class). */
   const [sub, setSub] = useState(0);

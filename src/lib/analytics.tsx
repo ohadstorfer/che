@@ -6,6 +6,7 @@ import { PostHogMaskView, PostHogProvider, usePostHog } from 'posthog-react-nati
 import { type ReactNode, useEffect } from 'react';
 import { Platform } from 'react-native';
 
+import { onAssigned } from '@/lib/ab';
 import { useAuth } from '@/lib/auth';
 import { listenForNotificationTaps } from '@/lib/notification-taps';
 
@@ -126,6 +127,15 @@ export function AnalyticsTracker() {
     if (!ENABLED || loading || !userId) return;
     return listenForNotificationTaps((event, props) => posthog.capture(event, props));
   }, [posthog, userId, loading]);
+
+  // Each A/B test she lands in (lib/ab.ts), on her PostHog person: one event
+  // per test, wherever it resolves (onboarding's screens, the paywall).
+  useEffect(() => {
+    if (!ENABLED || isFounder) return;
+    return onAssigned((experiment, variant) =>
+      posthog.capture('experiment_assigned', { experiment, variant, $set: { [`exp_${experiment}`]: variant } }),
+    );
+  }, [posthog, isFounder]);
 
   // Where she installed from, once, after she is known (see installSource).
   useEffect(() => {

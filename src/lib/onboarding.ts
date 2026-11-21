@@ -502,6 +502,9 @@ export interface Resume {
   answers: Partial<Answers>;
   /** In the first class: the screen she was on (components/first-class.tsx), or its end screen. */
   classAt?: number | 'done';
+  /** Which class `classAt` counts in: 'local', or the first_classes row id.
+   *  A screen number means nothing in another class (review, 2026-11-20). */
+  classScript?: string;
   at: number;
 }
 

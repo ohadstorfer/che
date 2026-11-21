@@ -3,7 +3,7 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import * as Crypto from 'expo-crypto';
 import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
-import { Platform } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
 import { supabase } from './supabase';
 
@@ -115,11 +115,21 @@ async function finishFromUrl(url: string, { linking = false } = {}): Promise<Soc
 /** A Google callback that arrived after the app restarted (Android killed it
  *  while the browser was open): nobody is waiting on it, so finish it here. */
 export async function finishLostCallback(url: string): Promise<void> {
+  let failed: string | null = null;
   try {
-    await finishFromUrl(url);
-  } catch {
-    // Signed-out or guest state stays as it was; she can tap Google again.
+    const res = await finishFromUrl(url);
+    if (res.status === 'error') failed = res.message;
+  } catch (e) {
+    failed = (e as Error)?.message ?? 'unknown';
   }
+  if (!failed) return;
+  // Said, not swallowed: otherwise she lands on Home still a guest and thinks
+  // her account is saved (review, 2026-11-20). Whatever she was doing stays as
+  // it was; one more tap on Google finishes it.
+  // One more tap is the fix either way: a Google account that already has
+  // Posta is then signed in to instead (saveWithGoogle's signInInstead).
+  console.warn('[auth] callback after restart failed:', failed);
+  Alert.alert('Google sign-in didn’t finish', 'Nothing was changed. Tap Continue with Google again to finish.');
 }
 
 /** Linking was refused because that identity already has an account, or

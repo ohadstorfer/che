@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Crypto from 'expo-crypto';
 import { Platform } from 'react-native';
 
-import { abTag } from './remote-config';
+import { abTag } from './ab';
 import { supabase } from './supabase';
 
 // ---------------------------------------------------------------------------

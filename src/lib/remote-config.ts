@@ -1,5 +1,6 @@
 import type { ImageSourcePropType } from 'react-native';
 
+import { noteAssigned } from '@/lib/ab';
 import { ART_SECTIONS, artFor } from '@/lib/culture-art';
 import { deviceId } from '@/lib/funnel';
 import type { Level, Why } from '@/lib/onboarding';
@@ -69,18 +70,7 @@ function hash(s: string): number {
   return h >>> 0;
 }
 
-const assigned = new Map<string, string>();
-const listeners = new Set<(experiment: string, variant: string) => void>();
-
-/** Every test this phone is in, as "test:variant,…": for funnel_events. */
-export const abTag = () => [...assigned].map(([e, v]) => `${e}:${v}`).join(',') || null;
-
-/** Called once per test as she lands in it (onboarding sends it to PostHog). */
-export function onAssigned(fn: (experiment: string, variant: string) => void) {
-  listeners.add(fn);
-  for (const [e, v] of assigned) fn(e, v);
-  return () => void listeners.delete(fn);
-}
+export { abTag, onAssigned } from '@/lib/ab';
 
 /** A variant's share as a whole number: "50" and 0.5 both work (×1000, rounded). */
 const share = (w: unknown) => {
@@ -95,10 +85,7 @@ export async function pickVariant<T>(exp: Experiment<T>): Promise<{ name: string
   const id = await deviceId().catch(() => 'no-id');
   let at = hash(`${id}:${exp.experiment}`) % total;
   const chosen = variants.find((v) => (at -= share(v.weight)) < 0) ?? variants[0];
-  if (!assigned.has(exp.experiment)) {
-    assigned.set(exp.experiment, chosen.name);
-    for (const fn of listeners) fn(exp.experiment, chosen.name);
-  }
+  noteAssigned(exp.experiment, chosen.name);
   return { name: chosen.name, value: chosen.value };
 }
 

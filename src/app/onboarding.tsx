@@ -41,7 +41,7 @@ import { FirstClassLesson } from '@/components/first-class';
 import { FirstClassOpener } from '@/components/first-class-opener';
 import { prefetchFirstClass } from '@/lib/first-class-script';
 import { RemoteScreen } from '@/components/remote-screen';
-import { type ScreenRow, type Skippable, type Slot, onAssigned, onboardingSkip, peekSkip, prefetchScreens, screensFor } from '@/lib/remote-config';
+import { type ScreenRow, type Skippable, type Slot, onboardingSkip, peekSkip, prefetchScreens, screensFor } from '@/lib/remote-config';
 import { ContentBoundary } from '@/components/error-boundary';
 import { MASCOT_NAME, MascotSays, pop, type Pose, POSE, SpeechBubble } from '@/components/mascot';
 import { EASE_OUT, IconButton, ProgressBar, rise, slide } from '@/components/onboarding-ui';
@@ -190,6 +190,8 @@ export default function Onboarding() {
   );
   /** The class screen she is on, kept with the rest so a restart reopens it. */
   const [classAt, setClassAt] = useState<number | 'done' | undefined>(resumed?.classAt);
+  /** Which class that screen number is in (the local one or a database row). */
+  const [classScript, setClassScript] = useState<string | undefined>(resumed?.classScript);
   const posthog = usePostHog();
 
   useEffect(() => {
@@ -202,8 +204,14 @@ export default function Onboarding() {
   const userId = session?.user.id;
   useEffect(() => {
     if (!userId || replay || jump || !RESUMABLE.has(step)) return;
-    saveResume({ userId, step, answers: a, classAt: step === 'class' ? classAt : undefined });
-  }, [userId, replay, jump, step, a, classAt]);
+    saveResume({
+      userId,
+      step,
+      answers: a,
+      classAt: step === 'class' ? classAt : undefined,
+      classScript: step === 'class' ? classScript : undefined,
+    });
+  }, [userId, replay, jump, step, a, classAt, classScript]);
 
   // Where notifications come: read once as onboarding opens, and frozen as she
   // reaches the builder (the first step whose next one depends on it), so the
@@ -241,10 +249,8 @@ export default function Onboarding() {
     void onboardingSkip()
       .then(setSkip)
       .catch(() => {});
-    // Each A/B test she lands in, on her PostHog person: one event per test.
-    return onAssigned((experiment, variant) =>
-      posthog?.capture('experiment_assigned', { experiment, variant, $set: { [`exp_${experiment}`]: variant } }),
-    );
+    // Each A/B test she lands in goes to PostHog from the analytics tracker
+    // (lib/analytics.tsx), app-wide: a paywall test resolves after this unmounts.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // A question left out still needs an answer for the plan: the usual default.
@@ -392,6 +398,7 @@ export default function Onboarding() {
               onStart={() => {
                 // Started from its opener, the class starts from the top.
                 setClassAt(undefined);
+                setClassScript(undefined);
                 go('class');
               }}
               onSkip={canSkipClass ? afterClass : undefined}
@@ -431,7 +438,11 @@ export default function Onboarding() {
             level={a.level}
             part={jump ? devPart : undefined}
             startAt={classAt}
-            onProgress={setClassAt}
+            startScript={classScript}
+            onProgress={(at, script) => {
+              setClassAt(at);
+              setClassScript(script);
+            }}
             onFinish={classDone}
             onClose={back}
           />

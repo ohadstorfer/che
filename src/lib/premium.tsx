@@ -13,8 +13,19 @@ import { isGuest } from './guest';
 import { supabase } from './supabase';
 import { scheduleTrialReminder, trialReminderScheduled } from './trial-reminder';
 
-/** The last guest id on this phone, until what it bought has moved over. */
+/** The last guest id on this phone ({ id, at }), until what it bought has moved over. */
 const GUEST_KEY = 'posta.guest-id';
+/** How long a guest who moved nothing over is still asked about. */
+const GUEST_DAYS = 3;
+const readGuest = (raw: string | null): { id: string; at: number } | null => {
+  if (!raw) return null;
+  try {
+    const v = JSON.parse(raw) as { id?: unknown; at?: unknown };
+    return typeof v.id === 'string' && typeof v.at === 'number' ? { id: v.id, at: v.at } : null;
+  } catch {
+    return null;
+  }
+};
 
 // ---------------------------------------------------------------------------
 // Premium — who has paid, and what the free tier allows.
@@ -180,7 +191,7 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
     if (!userId) return;
     if (guestNow) {
       guest.current = userId;
-      void AsyncStorage.setItem(GUEST_KEY, userId).catch(() => {});
+      void AsyncStorage.setItem(GUEST_KEY, JSON.stringify({ id: userId, at: Date.now() })).catch(() => {});
     } else if (guest.current === userId) guest.current = null;
   }, [userId, guestNow]);
 
@@ -223,7 +234,9 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
     let alive = true;
     const remembered = guest.current;
     (async () => {
-      const kept = remembered ?? (await AsyncStorage.getItem(GUEST_KEY).catch(() => null));
+      const stored = remembered ? null : readGuest(await AsyncStorage.getItem(GUEST_KEY).catch(() => null));
+      const kept = remembered ?? stored?.id ?? null;
+      const keptOld = !!stored && Date.now() - stored.at > GUEST_DAYS * 86400000;
       // Her guest became this account (linked, same id): nothing to move, and
       // forgotten, so a later sign-in to another account never takes this
       // one's subscription with it.
@@ -233,11 +246,13 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
       if (!alive) return;
       if (from) {
         guest.current = null;
-        // Only what this phone's store says the guest bought moves over; once
-        // it has, the guest is forgotten. Nothing bought: kept, harmless, for
-        // a purchase whose word arrives late.
+        // Only what this phone's store says the guest bought moves over. Once
+        // it has, the guest is forgotten; nothing moved (she bought nothing,
+        // or no connection this time), it is asked again on later launches,
+        // but only for GUEST_DAYS, not a store query on every launch for good
+        // (review, 2026-11-20). Restore still moves it after that.
         const moved = await billing.adopt(from).catch(() => false);
-        if (moved) void AsyncStorage.removeItem(GUEST_KEY).catch(() => {});
+        if (moved || keptOld) void AsyncStorage.removeItem(GUEST_KEY).catch(() => {});
       }
       await refresh();
       // Fetched now so the paywall opens with its prices already on it.

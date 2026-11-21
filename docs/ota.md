@@ -4,11 +4,11 @@
 
 ## Who waits for an update
 
-- **A fresh install, on its first launch.** If an update is available, the splash stays up with a small "Updating…" at the bottom (Deel's way: no new screen, no bar), and the app restarts into the new version. This way a copy of an old build (APK mirrors, Xiaomi GetApps, a store build months old) never shows an outdated onboarding.
+- **A launch still on the store build's own code** (a fresh install, or a phone that never got an update down; `Updates.isEmbeddedLaunch`). If an update is available and the answer comes while the splash is up (its 3 s), the splash stays up with a small "Updating…" at the bottom (Deel's way: no new screen, no bar), and the app restarts into the new version. This way a copy of an old build (APK mirrors, Xiaomi GetApps, a store build months old) never shows an outdated onboarding.
 - **Everyone, when the OTA is marked critical** (below).
 - **Everyone else** gets the update on the spot only if it finishes downloading while the splash is still up (about 4 s). Otherwise it applies on their next launch.
 
-At 25 s the app goes on by itself, and the update applies on the next launch.
+25 s after launch, the check included, the app goes on by itself, and the update applies on the next launch.
 
 ## Marking an OTA critical
 

@@ -81,7 +81,7 @@ async function warmSentences(userId: string) {
   const [course, done] = await Promise.all([loadCourse(), loadProgress(userId)]);
   const lesson = course.path[Math.min(currentIndex(course.path, done), course.path.length - 1)];
   if (!lesson) return null;
-  const rows = await loadSentenceRowsInReach({ throughOrder: lesson.unit.course_order, units: course.units });
+  const rows = await loadSentenceRowsInReach({ throughOrder: lesson.unit.course_order, units: course.units, background: true });
   return { lessonId: lesson.id, unit: lesson.unit, rows };
 }
 

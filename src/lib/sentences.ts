@@ -72,6 +72,10 @@ export interface SentenceReach {
   /** Sentences a round needs by id, wherever they are — a story's lines, the
    *  ones she has been shown. */
   ids?: string[];
+  /** A warm-up behind the screen (prefetch.ts): its blocks don't count as a
+   *  class's load moving along (sentenceBlocksArrived). A class waiting on the
+   *  same block still counts it, through its own request for it. */
+  background?: boolean;
 }
 
 /** The unit blocks covering everything up to `throughOrder`, as unit ids. */
@@ -131,7 +135,7 @@ export async function loadSentenceRowsInReach(reach: SentenceReach): Promise<Sen
     ...blocksThrough(reach.units, reach.throughOrder),
     ...[...new Set(reach.unitIds ?? [])].filter((id) => !inCourse.has(id)).map((id) => [id]),
   ];
-  const fetched = await inBatches(blocks, BLOCKS_IN_FLIGHT, (ids) => counted(unitRows(ids)));
+  const fetched = await inBatches(blocks, BLOCKS_IN_FLIGHT, (ids) => (reach.background ? unitRows(ids) : counted(unitRows(ids))));
   // The same blocks as last time — every class she opens on a unit — are the
   // same rows in the same order, so the merge and the sort are not done again.
   let merged = lastMerge;

@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Application from 'expo-application';
 import { useSyncExternalStore } from 'react';
 import { Platform } from 'react-native';
@@ -15,13 +14,15 @@ import { supabase } from '@/lib/supabase';
 //
 // Two kinds of launch:
 //
-//  · Must wait — the first launch of a fresh install (she would otherwise meet
-//    whatever onboarding the store build carried, months old from a mirror),
-//    or an OTA marked critical (lib/ota-critical.ts). If an update is
-//    available she waits for it on the splash, which stays up with a small
+//  · Must wait — a launch still on the store build's own code, as a fresh
+//    install is (she would otherwise meet whatever onboarding the store build
+//    carried, months old from a mirror), or an OTA marked critical
+//    (lib/ota-critical.ts). If the answer comes while the splash is still up
+//    and an update is available, she waits for it there, with a small
 //    "Updating…" (components/updating-screen.tsx, Deel's way), and the app
-//    restarts into it. At 25 s it goes on by itself, and the update lands on
-//    the next launch.
+//    restarts into it. 25 s from the launch, check included, it goes on by
+//    itself, and the update lands on the next launch. An answer that comes
+//    after the splash has gone never takes the screen back.
 //
 //  · Everyone else — if the new update is down while the splash is still up,
 //    restart into it right there; one that arrives later waits for the next
@@ -33,11 +34,12 @@ import { supabase } from '@/lib/supabase';
 
 /** How long after the JS starts a fresh update may still restart the app. */
 const RESTART_WITHIN_MS = 4000;
-/** The must-wait cap: past this she goes on with the code she has. */
+/** The must-wait cap, from the launch: past this she goes on with the code she has. */
 const WAIT_CAP_MS = 25000;
 /** How long the server's critical number may take before we stop asking. */
 const CRITICAL_ASK_MS = 3000;
-const LAUNCHED_KEY = 'posta.ota.launched';
+/** components/boot-splash.tsx MAX_HOLD_MS: past it the splash has let go. */
+const SPLASH_CAP_MS = 3000;
 
 const startedAt = Date.now();
 
@@ -67,14 +69,6 @@ export const useUpdatePhase = () => useSyncExternalStore(subscribe, () => phase,
 const withTimeout = <T,>(p: Promise<T>, ms: number, fallback: T) =>
   Promise.race([p, new Promise<T>((r) => setTimeout(() => r(fallback), ms))]);
 
-async function firstLaunch(): Promise<boolean> {
-  try {
-    return (await AsyncStorage.getItem(LAUNCHED_KEY)) === null;
-  } catch {
-    return false;
-  }
-}
-const markLaunched = () => AsyncStorage.setItem(LAUNCHED_KEY, '1').catch(() => {});
 
 /** The server's critical number is above the one this code was built with. */
 async function criticalPending(): Promise<boolean> {
@@ -97,25 +91,35 @@ export function applyUpdateOnLaunch() {
     const Updates = await import('expo-updates');
     if (!Updates.isEnabled) return;
 
-    // A fresh install holds the splash while we ask; a critical update is
+    // A launch on the store build's own code (a fresh install, or one that
+    // never got an update down) holds the splash while we ask. Not a flag of
+    // our own on the phone: that called every existing install "fresh" the
+    // first time it ran this code (review, 2026-11-20). A critical update is
     // only known once the server answers, so it can't hold the splash's start.
-    const first = await firstLaunch();
+    const first = Updates.isEmbeddedLaunch;
     if (first) setPhase('checking');
     const critical = criticalPending().then((c) => {
       if (c) setPhase(phase === 'idle' ? 'checking' : phase);
       return c;
     });
 
-    const check = await Updates.checkForUpdateAsync();
+    // The cap counts from the launch, the check included: a check that hangs
+    // on a bad network can't stretch the wait past it.
+    const left = () => Math.max(0, WAIT_CAP_MS - (Date.now() - startedAt));
+    const check = await withTimeout(Updates.checkForUpdateAsync().catch(() => null), left(), null);
     const mustWait = first || (await critical);
-    if (!check.isAvailable) {
-      // Already on the newest: nothing to wait for, now or on later launches.
-      await markLaunched();
+    if (!check?.isAvailable) {
+      // Already on the newest, or no answer in time: nothing to wait for.
       setPhase('idle');
       return;
     }
 
-    if (!mustWait) {
+    // Waiting only while she hasn't seen the app yet. Once the splash has gone
+    // (its cap), the screen is hers: no "Updating…" over a question she is
+    // answering and no restart under her; the update lands on the next launch.
+    const onSplash = Date.now() - startedAt < SPLASH_CAP_MS;
+    if (!mustWait || !onSplash) {
+      setPhase('idle');
       const fetched = await Updates.fetchUpdateAsync();
       if (!fetched.isNew || Date.now() - startedAt > RESTART_WITHIN_MS) return;
       await Updates.reloadAsync();
@@ -123,18 +127,13 @@ export function applyUpdateOnLaunch() {
     }
 
     setPhase('waiting');
-    const fetched = await withTimeout(
-      Updates.fetchUpdateAsync().catch(() => null),
-      WAIT_CAP_MS,
-      null,
-    );
+    const fetched = await withTimeout(Updates.fetchUpdateAsync().catch(() => null), left(), null);
     // The cap passed: she goes on, and the download (still running) is there
     // for the next launch.
     if (phase !== 'waiting' || !fetched?.isNew) {
       setPhase('idle');
       return;
     }
-    await markLaunched();
     await Updates.reloadAsync();
   })().catch(() => {
     // No network, or a check already under way: go on; the next launch asks again.
