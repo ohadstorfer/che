@@ -6,11 +6,16 @@
 
 import * as Notifications from 'expo-notifications';
 
-/** `trialEnd`: when the store turns the trial into a charge (billing-shared trialEnd). */
-export async function scheduleTrialReminder(trialEnd: Date): Promise<void> {
+/** One reminder per phone: scheduling it again replaces it, never doubles it. */
+const ID = 'posta-trial-end';
+const TITLE = 'Your free trial ends in 2 days';
+
+/** `trialEnd`: when the store turns the trial into a charge (billing-shared trialEnd).
+ *  `ask: false` (the launch's catch-up, premium.tsx) never opens the permission prompt. */
+export async function scheduleTrialReminder(trialEnd: Date, { ask = true } = {}): Promise<void> {
   try {
     let { status } = await Notifications.getPermissionsAsync();
-    if (status !== 'granted') ({ status } = await Notifications.requestPermissionsAsync());
+    if (status !== 'granted' && ask) ({ status } = await Notifications.requestPermissionsAsync());
     if (status !== 'granted') return;
     // Two days before the charge, at 10 in the morning; a trial too short for
     // that gets it the next morning instead.
@@ -21,8 +26,9 @@ export async function scheduleTrialReminder(trialEnd: Date): Promise<void> {
       at.setHours(10, 0, 0, 0);
     }
     await Notifications.scheduleNotificationAsync({
+      identifier: ID,
       content: {
-        title: 'Your free trial ends in 2 days',
+        title: TITLE,
         body: 'Keep your plan going, or cancel in Settings before it renews. No hard feelings.',
       },
       trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: at },
@@ -30,4 +36,11 @@ export async function scheduleTrialReminder(trialEnd: Date): Promise<void> {
   } catch {
     // A missed reminder must never get in the way of the purchase itself.
   }
+}
+
+/** Whether the reminder is already waiting on this phone. */
+export async function trialReminderScheduled(): Promise<boolean> {
+  const pending = await Notifications.getAllScheduledNotificationsAsync().catch(() => []);
+  // Before it had an id (up to 2026-11-20) it is known by its title.
+  return pending.some((n) => n.identifier === ID || n.content.title === TITLE);
 }

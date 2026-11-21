@@ -8,8 +8,10 @@ import { billing } from './billing';
 import type { Catalog } from './billing-shared';
 import { clearContentCache } from './content-cache';
 import { claimCreatorCode } from './creator-code';
+import { cancelFreeUnitReminder } from './free-unit-reminder';
 import { isGuest } from './guest';
 import { supabase } from './supabase';
+import { scheduleTrialReminder, trialReminderScheduled } from './trial-reminder';
 
 /** The last guest id on this phone, until what it bought has moved over. */
 const GUEST_KEY = 'posta.guest-id';
@@ -264,6 +266,26 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
       off();
     };
   }, [userId, refresh]);
+
+  // What a purchase sets up, also when it didn't end on the paywall: the app
+  // killed under the store's sheet, a purchase whose word came from the
+  // store's notification, a restore, or a guest's purchase moved over. Then
+  // the "try it free" nudge would still come tomorrow to someone paying, and
+  // the trial-end reminder the paywall promises would never be set.
+  useEffect(() => {
+    if (status !== 'premium' || !userId) return;
+    void cancelFreeUnitReminder();
+    void (async () => {
+      if (await trialReminderScheduled()) return;
+      const { data } = await supabase
+        .from('entitlements')
+        .select('period_type, expires_at')
+        .eq('user_id', userId)
+        .maybeSingle();
+      const ends = data?.period_type === 'TRIAL' && data.expires_at ? new Date(data.expires_at) : null;
+      if (ends && ends.getTime() > Date.now()) await scheduleTrialReminder(ends, { ask: false });
+    })().catch(() => {});
+  }, [status, userId]);
 
   const reloadCatalog = useCallback(async () => {
     const c = await billing.catalog().catch(() => null);

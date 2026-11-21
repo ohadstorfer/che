@@ -38,7 +38,16 @@ export default function FreeUnit() {
   useStatusBarColor(colors.bg);
   const reduced = useReducedMotion();
   const { session } = useAuth();
-  const { pass, claimPass, refreshPass } = usePremium();
+  const { pass, claimPass, refreshPass, status } = usePremium();
+  // Opened from yesterday's "try it free" nudge by someone who has paid since
+  // (the app was closed under the store's sheet, so it was never cancelled):
+  // nothing to offer, straight to her course.
+  useEffect(() => {
+    if (status === 'premium') {
+      void cancelFreeUnitReminder();
+      resetTo('/home');
+    }
+  }, [status]);
   const guest = isGuest(session);
   const [answers, setAnswers] = useState<Answers | null>(null);
   const [busy, setBusy] = useState(false);
